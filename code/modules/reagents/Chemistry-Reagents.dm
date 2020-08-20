@@ -59,6 +59,34 @@
 	var/scent_descriptor = SCENT_DESC_SMELL
 	var/scent_range = 1
 
+	var/dissolves_text = FALSE
+
+	var/codex_lore
+	var/codex_mechanics
+	var/codex_antag
+
+	var/list/toxin_immune_species // List of species immune to the below toxin effects
+	var/toxin_blood = 0 // Toxin effect level in blood
+	var/toxin_touch = 0 // Toxin effect level on touch
+	var/flammable_touch = 0 // Flammable stack effect level on touch
+	var/flammable_touch_mob = 0 // Flamamble stack effect level on touch (Doesn't apply to skin contact - See touch_mob())
+	var/sugar_factor = 0 // Sugar drug factor for Unathi, borers, etc. 0 is no effect, 1 is equivalent to pure sugar.
+
+	var/toxin_hydroponics = 0 // Toxin effect level in hydroponics trays.
+	var/weedkiller_hydroponics = 0 // Weedkiller effect level in hydroponics trays.
+	var/pestkiller_hydroponics = 0 // Pestkiller effect level in hydroponics trays.
+	var/health_mod_hydroponics = 0 // Health modifier level in hydroponics trays.
+	var/yield_mod_hydroponics = 0 // Yield modifier level in hydroponics trays.
+	var/mutation_mod_hydroponics = 0 // Mutation modifier level in hydroponics trays.
+	var/nutrient_hydroponics = 0 // Nutrient effect level in hydroponics trays.
+	var/water_hydroponcs = 0 // Watering effect level in hydroponics trays.
+	var/mutagenic_hydroponics = 0 // Mutagenics multipler in hydroponics trays
+
+	var/vehicle_fuel_mod = 1 // Fuel modifier for use in vehicle engines
+	var/vehicle_fuel_flammable = FALSE // Whether or not the 'fuel' is combustible in vehicle engines
+	var/vehicle_fuel_explode = FALSE // Whether or not the 'fuel' will cause vehicle engines to explode
+
+
 /datum/reagent/New(var/datum/reagents/holder)
 	if(!istype(holder))
 		CRASH("Invalid reagents holder: [log_info_line(holder)]")
@@ -75,13 +103,39 @@
 
 // This doesn't apply to skin contact - this is for, e.g. extinguishers and sprays. The difference is that reagent is not directly on the mob's skin - it might just be on their clothing.
 /datum/reagent/proc/touch_mob(var/mob/M, var/amount)
+	var/mob/living/L = M
+	if (flammable_touch_mob && istype(L))
+		L.adjust_fire_stacks(amount / flammable_touch_mob)
 	return
 
 /datum/reagent/proc/touch_obj(var/obj/O, var/amount) // Acid melting, cleaner cleaning, etc
+	if (dissolves_text)
+		dissolve_text(O, amount)
 	return
 
 /datum/reagent/proc/touch_turf(var/turf/T, var/amount) // Cleaner cleaning, lube lubbing, etc, all go here
 	return
+
+/datum/reagent/proc/dissolve_text(obj/O, var/amount)
+	if(istype(O, /obj/item/weapon/paper))
+		var/obj/item/weapon/paper/paperaffected = O
+		paperaffected.clearpaper()
+		to_chat(usr, SPAN_NOTICE("The solution dissolves the ink on \the [O.name]."))
+		return TRUE
+
+	else if(istype(O, /obj/item/weapon/book))
+		if(volume < 5)
+			to_chat(usr, SPAN_NOTICE("The solution pours over \the [O.name], but it doesn't seem to have been enough to affect it."))
+			return FALSE
+		if(istype(O, /obj/item/weapon/book/tome))
+			to_chat(usr, SPAN_NOTICE("The solution does nothing to \the [O.name]. Whatever this is, it isn't normal ink."))
+			return FALSE
+		var/obj/item/weapon/book/affectedbook = O
+		affectedbook.dat = null
+		to_chat(usr, SPAN_NOTICE("The solution dissolves the ink on \the [O.name]."))
+		return TRUE
+
+	return FALSE
 
 /datum/reagent/proc/on_mob_life(var/mob/living/carbon/M, var/alien, var/location) // Currently, on_mob_life is called on carbons. Any interaction with non-carbon mobs (lube) will need to be done in touch_mob.
 	if(QDELETED(src))
@@ -122,6 +176,13 @@
 		remove_self(removed)
 
 /datum/reagent/proc/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if (toxin_blood && !LAZYISIN(alien, toxin_immune_species))
+		M.adjustToxLoss(removed * toxin_blood)
+
+	if (sugar_factor != 0 && alien == IS_UNATHI)
+		var/datum/species/unathi/S = M.species
+		S.handle_sugar(M, src, sugar_factor)
+
 	return
 
 /datum/reagent/proc/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
@@ -129,6 +190,10 @@
 	return
 
 /datum/reagent/proc/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+	if (flammable_touch)
+		M.adjust_fire_stacks(removed / flammable_touch)
+	if (toxin_touch)
+		M.adjustToxLoss(removed * toxin_touch)
 	return
 
 /datum/reagent/proc/overdose(var/mob/living/carbon/M, var/alien) // Overdose effect. Doesn't happen instantly.

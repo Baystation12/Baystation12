@@ -94,6 +94,16 @@
 	heating_point = T100C
 	value = 0
 
+	codex_lore = "<p>Water is an inorganic, transparent, tasteless, odorless, and nearly colorless chemical substance. It's also very refreshing.</p>"
+	codex_mechanics = "<p>Water is a base chemical used in the creation of various compounds, medicines, food, and drinks and is commonly found in chemical dispensers. \
+		It is also freely available from sinks.</p>\
+		<p>It can kill slimes if they come into contact with it - Either from being injected, sprayed, or splashed.</p>\
+		<p>It can put out fires and help reduce temperatures if sprayed into a hot room. This tends to create steam as a byproduct.</p>"
+
+	water_hydroponcs = 1
+
+	vehicle_fuel_mod = 0.4
+
 /datum/reagent/water/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(!istype(M, /mob/living/carbon/slime) && alien != IS_SLIME)
 		return
@@ -211,17 +221,23 @@
 	glass_desc = "Unless you are an industrial tool, this is probably not safe for consumption."
 	value = 6.8
 
+	codex_mechanics = "<p>Welding fuel is commonly available from welding tanks.</p>\
+		<p>It can leave behind puddles of flammable fuel if splashed on the floor.</p>\
+		<p>It is highly flammable - Fuel spills or containers filled with fuel can be lit on fire or even explode if heated or adjacent to another explosion. \
+		Gas byproducts from fuel explosions include nitric oxide, nitro dioxide, nitrogen, and hydrogen.</p>"
+	codex_antag = "<p>Welding tanks and igniter assemblies make great makeshift bombs. \
+		Trails of spilled fuel leading to welding tanks can also cause explosions, but tend to be more obvious.</p> \
+		<p>Cigarettes that have welding fuel injected in them like to explode when lit. It's not lethal, but it's a great distraction or prank.</p>"
+
+	toxin_hydroponics = 2
+	flammable_touch_mob = 10
+
+	vehicle_fuel_flammable = TRUE
+
 /datum/reagent/fuel/touch_turf(var/turf/T)
 	new /obj/effect/decal/cleanable/liquid_fuel(T, volume)
 	remove_self(volume)
 	return
-
-/datum/reagent/fuel/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.adjustToxLoss(2 * removed)
-
-/datum/reagent/fuel/touch_mob(var/mob/living/L, var/amount)
-	if(istype(L))
-		L.adjust_fire_stacks(amount / 10) // Splashing people with welding fuel to make them easy to ignite!
 
 /datum/reagent/fuel/ex_act(obj/item/weapon/reagent_containers/holder, severity)
 	if(volume <= 50)

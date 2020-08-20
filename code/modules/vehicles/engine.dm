@@ -108,27 +108,18 @@
 	var/multiplier = 1
 	var/actually_flameable = 0
 	for(var/datum/reagent/R in temp_reagents_holder.reagents.reagent_list)
-		var/new_multiplier = 1
+		if (R.vehicle_fuel_explode && R.volume > 1)
+			stat = DEAD
+			explosion(get_turf(src), -1, 0, 2, 3, 0)
+			return FALSE
+
+		var/new_multiplier = R.vehicle_fuel_mod
+		actually_flameable = R.vehicle_fuel_flammable
+
 		if(istype(R,/datum/reagent/ethanol))
 			var/datum/reagent/ethanol/E = R
-			new_multiplier = (10/E.strength)
-			actually_flameable = 1
-		else if(istype(R,/datum/reagent/hydrazine))
-			new_multiplier = 1.25
-			actually_flameable = 1
-		else if(istype(R,/datum/reagent/fuel))
-			actually_flameable = 1
-		else if(istype(R,/datum/reagent/toxin/phoron))
-			new_multiplier = 2
-			actually_flameable = 1
-		else if(istype(R,/datum/reagent/frostoil))
-			new_multiplier = 0.1
-		else if(istype(R,/datum/reagent/water))
-			new_multiplier = 0.4
-		else if(istype(R,/datum/reagent/sugar)  && R.volume > 1)
-			stat = DEAD
-			explosion(get_turf(src),-1,0,2,3,0)
-			return 0
+			new_multiplier = new_multiplier / E.strength
+
 		multiplier = (multiplier + new_multiplier)/2
 	if(!actually_flameable)
 		return 0

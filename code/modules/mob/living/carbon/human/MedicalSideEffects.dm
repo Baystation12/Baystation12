@@ -7,6 +7,7 @@
 	var/list/triggers
 	var/list/cures
 	var/cure_message
+	var/hidden_from_codex = FALSE
 
 /datum/medical_effect/proc/manifest(mob/living/carbon/human/H)
 	for(var/R in cures)

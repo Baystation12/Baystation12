@@ -16,6 +16,20 @@
 	var/target_organ
 	var/strength = 4 // How much damage it deals per unit
 
+	toxin_hydroponics = 2
+
+	codex_mechanics = "<p>Its effects include:</p>\
+		<ul>\
+			<li>Does not affect Diona.</li>\
+			<li>If injected or ingested, causes toxin damage and internal organ damage.</li>\
+		</ul>\
+		<p>Commonly found in burned messes.</p>\
+		<p>Patients that have incompatible blood provided via injection or IV, or that reject a transplanted organ, produce toxin in their bloodstream or the rejected organ.</p>\
+		<p>Can be found in bottle form in NanoMed Plus vendors.</p>\
+		<p>Can be found in gaseous form as Nitrogen Dioxide.</p>"
+	codex_antag = "<p>Emagged medibots inject 'patients' with pure toxin.</p>\
+		<p>Pills containing 50u of toxin each can be found in hacked NanoMed Plus vendors.</p>"
+
 /datum/reagent/toxin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(strength && alien != IS_DIONA)
 		M.add_chemical_effect(CE_TOXIN, strength)
@@ -48,6 +62,9 @@
 	target_organ = null
 	strength = 0
 
+	codex_mechanics = null
+	codex_antag = null
+
 /datum/reagent/toxin/plasticide
 	name = "Plasticide"
 	description = "Liquid plastic, do not eat."
@@ -58,6 +75,13 @@
 	heating_point = null
 	heating_products = null
 
+	codex_mechanics = "<p>Its effects include:</p>\
+		<ul>\
+			<li>Does not affect Diona.</li>\
+			<li>If injected or ingested, causes toxin damage and internal organ damage.</li>\
+		</ul>"
+	codex_antag = null
+
 /datum/reagent/toxin/amatoxin
 	name = "Amatoxin"
 	description = "A powerful poison derived from certain species of mushroom."
@@ -65,6 +89,14 @@
 	reagent_state = LIQUID
 	color = "#792300"
 	strength = 10
+
+	codex_mechanics = "<p>Its effects include:</p>\
+		<ul>\
+			<li>Does not affect Diona.</li>\
+			<li>If injected or ingested, causes toxin damage and internal organ damage.</li>\
+		</ul>\
+		<p>Commonly found in amanita mushrooms.</p>"
+	codex_antag = null
 
 /datum/reagent/toxin/carpotoxin
 	name = "Carpotoxin"
@@ -75,6 +107,16 @@
 	target_organ = BP_BRAIN
 	strength = 10
 
+	codex_mechanics = "<p>Its effects include:</p>\
+		<ul>\
+			<li>Does not affect Diona.</li>\
+			<li>If injected or ingested, causes toxin damage and internal organ damage.</li>\
+		</ul>\
+		<p>Commonly found in carp meat. Can be injected into people by carp bites.</p>\
+		<p>It is considered a controlled substance and is illegal to use or carry.</p>"
+	codex_antag = "<p>It is one of several random toxins that can be acquired from the uplink.</p>\
+		<p>It is illegal so be careful not to be caught with it.</p>"
+
 /datum/reagent/toxin/venom
 	name = "Spider Venom"
 	description = "A deadly necrotic toxin produced by giant spiders to disable their prey."
@@ -82,6 +124,14 @@
 	color = "#91d895"
 	target_organ = BP_LIVER
 	strength = 5
+
+	codex_mechanics = "<p>Its effects include:</p>\
+		<ul>\
+			<li>Does not affect Diona.</li>\
+			<li>If injected or ingested, causes toxin damage and internal organ damage.</li>\
+		</ul>\
+		<p>Can be injected into people by spider bites.</p>"
+	codex_antag = null
 
 /datum/reagent/toxin/venom/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(prob(volume*2))
@@ -99,6 +149,14 @@
 	heating_point = null
 	heating_products = null
 
+	codex_mechanics = "<p>Its effects include:</p>\
+		<ul>\
+			<li>Does not affect Diona.</li>\
+			<li>If injected or ingested, causes toxin damage and internal organ damage.</li>\
+		</ul>\
+		<p>Can be found in gaseous and liquid form on various exoplanets.</p>"
+	codex_antag = null
+
 /datum/reagent/toxin/phoron
 	name = "Phoron"
 	description = "Phoron in its liquid form."
@@ -110,6 +168,19 @@
 	var/fire_mult = 5
 	heating_point = null
 	heating_products = null
+
+	codex_mechanics = "<p>Its effects include:</p>\
+		<ul>\
+			<li>Does not affect Diona.</li>\
+			<li>If injected or ingested, causes toxin damage and internal organ damage. Does not poison nabbers.</li>\
+			<li>If splashed or sprayed on a mob, it makes them flammable and causes chemical burns.</li>\
+			<li>If splashed or sprayed on the floor, becomes gaseous phoron.</li>\
+		</ul>\
+		<p>Commonly found in liquid and gaseous form.</p>"
+	codex_antag = null
+
+	vehicle_fuel_mod = 2
+	vehicle_fuel_flammable = TRUE
 
 /datum/reagent/toxin/phoron/touch_mob(var/mob/living/L, var/amount)
 	if(istype(L))
@@ -138,6 +209,16 @@
 	strength = 15
 	fire_mult = 15
 
+	codex_mechanics = "<p>Its effects include:</p>\
+		<ul>\
+			<li>Does not affect Diona.</li>\
+			<li>If injected or ingested, causes toxin damage and internal organ damage. Does not poison nabbers.</li>\
+			<li>If splashed or sprayed on a mob, it makes them flammable and causes chemical burns.</li>\
+			<li>If splashed or sprayed on the floor, becomes gaseous oxygen and phoron.</li>\
+		</ul>\
+		<p>Commonly found in liquid and gaseous form.</p>"
+	codex_antag = null
+
 /datum/reagent/toxin/phoron/oxygen/touch_turf(var/turf/simulated/T)
 	if(!istype(T))
 		return
@@ -157,6 +238,14 @@
 	heating_point = null
 	heating_products = null
 
+	codex_mechanics = "<p>Its effects include:</p>\
+		<ul>\
+			<li>Does not affect Diona.</li>\
+			<li>If injected or ingested, causes toxin damage and internal organ damage and causes sleepiness.</li>\
+		</ul>\
+		<p>Commonly found in liquid and gaseous form.</p>"
+	codex_antag = "<p>Mercenaries start with a cyanide pill containing 50u in their pocket.</p>"
+
 /datum/reagent/toxin/cyanide/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 	M.sleeping += 1
@@ -172,6 +261,14 @@
 	target_organ = BP_HEART
 	heating_point = null
 	heating_products = null
+
+	codex_mechanics = "<p>Its effects include:</p>\
+		<ul>\
+			<li>Does not affect Diona.</li>\
+			<li>If injected or ingested, causes toxin damage and internal organ damage and causes confusion.</li>\
+		</ul>\
+		<p>Overdose effects include weakness and a stopped heart.</p>"
+	codex_antag = null
 
 /datum/reagent/toxin/taxine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -196,6 +293,14 @@
 	heating_point = null
 	heating_products = null
 
+	codex_mechanics = "<p>Its effects include:</p>\
+		<ul>\
+			<li>Does not affect Diona.</li>\
+			<li>If injected or ingested, causes toxin damage and internal organ damage.</li>\
+		</ul>\
+		<p>Overdose effects include loss of breath, oxyloss damage, weakness, and a stopped heart.</p>"
+	codex_antag = null
+
 /datum/reagent/toxin/potassium_chloride/overdose(var/mob/living/carbon/M, var/alien)
 	..()
 	if(ishuman(M))
@@ -219,6 +324,14 @@
 	heating_point = null
 	heating_products = null
 
+	codex_mechanics = "<p>Its effects include:</p>\
+		<ul>\
+			<li>Does not affect Diona.</li>\
+			<li>If injected or ingested, causes toxin damage and internal organ damage.</li>\
+		</ul>\
+		<p>Overdose effects include loss of breath, oxyloss damage, weakness, and a stopped heart.</p>"
+	codex_antag = null
+
 /datum/reagent/toxin/potassium_chlorophoride/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 	if(ishuman(M))
@@ -241,6 +354,16 @@
 	target_organ = BP_BRAIN
 	heating_message = "melts into a liquid slurry."
 	heating_products = list(/datum/reagent/toxin/carpotoxin, /datum/reagent/soporific, /datum/reagent/copper)
+
+	codex_mechanics = "<p>Its effects include:</p>\
+		<ul>\
+			<li>Does not affect Diona.</li>\
+			<li>If injected or ingested, causes toxin damage, internal organ damage, oxyloss damage, weakness, a stopped heart, and an inability to speak.</li>\
+			<li>Can be used to fake a death.</li>\
+		</ul>\
+		<p>It is considered a controlled substance and is illegal to use or carry.</p>"
+	codex_antag = "<p>It is one of several random toxins that can be acquired from the uplink.</p>\
+		<p>It is illegal so be careful not to be caught with it.</p>"
 
 /datum/reagent/toxin/zombiepowder/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -271,14 +394,50 @@
 	heating_point = null
 	heating_products = null
 
+	codex_mechanics = "<p>Its effects include:</p>\
+		<ul>\
+			<li>Does not affect Diona.</li>\
+			<li>If injected or ingested, causes toxin damage and internal organ damage.</li>\
+		</ul>"
+	codex_antag = null
+
+	nutrient_hydroponics = 1
+
 /datum/reagent/toxin/fertilizer/eznutrient
 	name = "EZ Nutrient"
+
+	codex_mechanics = "<p>Its effects include:</p>\
+		<ul>\
+			<li>Does not affect Diona.</li>\
+			<li>If injected or ingested, causes toxin damage and internal organ damage.</li>\
+		</ul>\
+		<p>It can be found in bottle form in NutriMax vendors and biogenerators.</p>"
 
 /datum/reagent/toxin/fertilizer/left4zed
 	name = "Left-4-Zed"
 
+	codex_mechanics = "<p>Its effects include:</p>\
+		<ul>\
+			<li>Does not affect Diona.</li>\
+			<li>If injected or ingested, causes toxin damage and internal organ damage.</li>\
+		</ul>\
+		<p>It can be found in bottle form in NutriMax vendors and biogenerators.</p>"
+
+	mutation_mod_hydroponics = 0.2
+	mutagenic_hydroponics = 30
+
 /datum/reagent/toxin/fertilizer/robustharvest
 	name = "Robust Harvest"
+
+	codex_mechanics = "<p>Its effects include:</p>\
+		<ul>\
+			<li>Does not affect Diona.</li>\
+			<li>If injected or ingested, causes toxin damage and internal organ damage.</li>\
+		</ul>\
+		<p>It can be found in bottle form in NutriMax vendors and biogenerators.</p>"
+
+	toxin_hydroponics = 3
+	yield_mod_hydroponics = 0.2
 
 /datum/reagent/toxin/plantbgone
 	name = "Plant-B-Gone"
@@ -288,6 +447,19 @@
 	color = "#49002e"
 	strength = 4
 	heating_products = list(/datum/reagent/toxin, /datum/reagent/water)
+
+	codex_mechanics = "<p>Its effects include:</p>\
+		<ul>\
+			<li>If injected or ingested, causes toxin damage and internal organ damage.</li>\
+			<li>If injected, ingested, splashed, or sprayed on Diona, it causes severe toxin damage instead of the above effect.</li>\
+			<li>If splashed or sprayed on walls with wallrot, the fungi is killed.</li>\
+		</ul>\
+		<p>It can be found in spraybottles and weedkiller grenades in hydroponics lockers, hydroponics crates, and Weed Control and Hydroponics Supplies crates ordered from supply.</p>"
+	codex_antag = null
+
+	weedkiller_hydroponics = -8
+	health_mod_hydroponics = -2
+	mutation_mod_hydroponics = 0.2
 
 /datum/reagent/toxin/plantbgone/touch_turf(var/turf/T)
 	if(istype(T, /turf/simulated/wall))
@@ -321,11 +493,22 @@
 	meltdose = 4
 	max_damage = 60
 
+	codex_lore = null
+	codex_mechanics = "<p>Can be found in metal foam grenades.</p>"
+	codex_antag = "<p>Emagged, hacked, and antag emergency response, crisis, and surgeon borgs have access to a sprayer with polytrinic acid.</p>"
+
+	toxin_hydroponics = 3
+	weedkiller_hydroponics = -4
+	health_mod_hydroponics = -2
+
 /datum/reagent/acid/stomach
 	name = "stomach acid"
 	taste_description = "coppery foulness"
 	power = 2
 	color = "#d8ff00"
+
+	codex_lore = null
+	codex_mechanics = "<p>Commonly found in vomit.</p>"
 
 /datum/reagent/lexorin
 	name = "Lexorin"
@@ -335,6 +518,13 @@
 	color = "#c8a5dc"
 	overdose = REAGENTS_OVERDOSE
 	value = 2.4
+
+	codex_mechanics = "<p>Its effects include:</p>\
+		<ul>\
+			<li>Has no effect on Diona.</li>\
+			<li>If injected or ingested, causes brute damage and loss of breath. Has an increased breathloss effect on Skrell.</li>\
+		</ul>"
+	codex_antag = "<p>The changeling death sting injects 40 units of this chemical.</p>"
 
 /datum/reagent/lexorin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -356,6 +546,15 @@
 	reagent_state = LIQUID
 	color = "#13bc5e"
 	value = 3.1
+
+	codex_mechanics = "<p>Its effects include:</p>\
+		<ul>\
+			<li>Causes random DNA mutations.</li>\
+			<li>Causes radiation damage.</li>\
+			<li>Takes effect if injected, ingested, splashed, or sprayed.</li>\
+		</ul>"
+
+	mutagenic_hydroponics = 15
 
 /datum/reagent/mutagen/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	if(prob(33))
@@ -394,6 +593,14 @@
 	color = "#801e28"
 	value = 1.2
 
+	codex_mechanics = "<p>It has the following effects:</p>\
+		<ul>\
+			<li>Does not effect Diona.</li>\
+			<li>If injected or ingested, can moderately heal brute damage but cause severe toxin damage.</li>\
+		</ul>\
+		<p>It can be found in slime extracts.</p>"
+	codex_antag = "<p>From toxin damage alone, it can be the deadliest toxin in the game, but is not quite as reliable.</p>"
+
 /datum/reagent/slimejelly/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
@@ -413,6 +620,18 @@
 	overdose = REAGENTS_OVERDOSE
 	value = 2.5
 	scannable = TRUE
+
+	codex_mechanics = "<p>Its effects include:</p>\
+		<ul>\
+			<li>Has no effect on Diona.</li>\
+			<li>If injected or ingested, lowers heart rate and causes drowsyness, blurryness, weakness, and sedation effects. At higher doses, causes sleepiness.</li>\
+			<li>Slightly less effective on Skrell.</li>\
+		</ul>\
+		<p>It can be synthesized in sleepers.</p>\
+		<p>It can be found in bottle form in counselor's and psychiatrist's lockers, NanoMed Plus vendors, and Medical Supplies crates ordered from Supply.</p>\
+		<p>It can be injected by some giant spider bites.</p>"
+	codex_antag = "<p>It can be found in alien dart guns that spawn on the heist/raider map.</p>\
+		<p>It can be acquired in a 15u pill in hacked NanoMed Plus vendors.</p>"
 
 /datum/reagent/soporific/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -448,6 +667,16 @@
 	overdose = REAGENTS_OVERDOSE * 0.5
 	value = 2.6
 
+	codex_mechanics = "<p>Its effects include:</p>\
+		<ul>\
+			<li>Has no effect on Diona.</li>\
+			<li>If injected or ingested, causes sedation effects, confusion, drowsyness, weakness, bluriness, and sleepiness.</li>\
+			<li>Doses above 1u cause toxin damage.</li>\
+			<li>Slightly less effective on Skrell.</li>\
+		</ul>\
+		<p>It is more effective as a sedative than soporific, but with a trade off of toxin damage.</p>"
+	codex_antag = "<p>It can be synthesized by emagged sleepers.</p>"
+
 /datum/reagent/chloralhydrate/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
@@ -477,6 +706,8 @@
 	reagent_state = LIQUID
 	color = "#ffd300"
 
+	hidden_from_codex = TRUE
+
 	glass_name = "beer"
 	glass_desc = "A freezing pint of beer"
 
@@ -489,6 +720,15 @@
 	metabolism = REM * 0.5
 	overdose = REAGENTS_OVERDOSE * 0.5
 	value = 2.6
+
+	codex_mechanics = "<p>Its effects include:</p>\
+		<ul>\
+			<li>Has no effect on Diona.</li>\
+			<li>If injected or ingested, causes confusion, voice loss, dizzyness, weakness, paralysis, sedation effects, and blurryness.</li>\
+			<li>In doses above 1u, also causes toxin damage.</li>\
+			<li>Slightly less effective on Skrell.</li>\
+		</ul>"
+	codex_antag = "<p>It can be found in sleepy pens available in the uplink.</p>"
 
 /datum/reagent/vecuronium_bromide/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -525,6 +765,13 @@
 	metabolism = REM * 0.5
 	overdose = REAGENTS_OVERDOSE
 	value = 2.8
+
+	codex_mechanics = "<p>It has the following effects:</p>\
+		<ul>\
+			<p>Causes confusion, drooling, twitching, giggling, a drug like effect, and reduced pulse.</p>\
+			<p>Has a reduced effect on Skrell.</p>\
+		</ul>\
+		<p>It is considered a controlled substance and is illegal to use or hold.</p>"
 
 /datum/reagent/space_drugs/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -705,6 +952,10 @@
 		"THE BLOOD THE BLOOD THE BLOOD THE BLOOD",
 		"THE LIGHT THE DARK A STAR IN CHAINS"
 	)
+
+	toxin_hydroponics = 2
+	health_mod_hydroponics = -1
+	mutation_mod_hydroponics = 0.5
 
 /datum/reagent/three_eye/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.add_client_color(/datum/client_color/thirdeye)
@@ -892,6 +1143,8 @@
 	heating_products = null
 	heating_point = null
 
+	pestkiller_hydroponics = -2
+
 /datum/reagent/toxin/bromide/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_MANTID)
 		. = ..()
@@ -915,6 +1168,8 @@
 	strength = 5
 	heating_products = null
 	heating_point = null
+
+	pestkiller_hydroponics = -4
 
 /datum/reagent/toxin/methyl_bromide/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	. = (alien != IS_MANTID && alien != IS_NABBER && ..())

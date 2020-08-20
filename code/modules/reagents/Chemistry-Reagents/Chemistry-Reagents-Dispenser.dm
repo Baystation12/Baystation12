@@ -9,28 +9,16 @@
 	metabolism = REM * 0.2
 	value = DISPENSER_REAGENT_VALUE
 
-/datum/reagent/acetone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_NABBER)
-		return
+	dissolves_text = TRUE
 
-	M.adjustToxLoss(removed * 3)
+	codex_lore = "<p>Acetone, or propanone, is an organic compound. It is a colourless, toxic liquid with a characteristic pungent odour.</p>"
+	codex_mechanics = "<p>Acetone is a base chemical used in the creation of various compounds and medicines and is commonly found in chemical dispensers.</p>\
+		<p>It is produced by Giant Armored Serpentids as a stress hormone to produce Dexalin naturally.</p>"
 
-/datum/reagent/acetone/touch_obj(var/obj/O)	//I copied this wholesale from ethanol and could likely be converted into a shared proc. ~Techhead
-	if(istype(O, /obj/item/weapon/paper))
-		var/obj/item/weapon/paper/paperaffected = O
-		paperaffected.clearpaper()
-		to_chat(usr, "The solution dissolves the ink on the paper.")
-		return
-	if(istype(O, /obj/item/weapon/book))
-		if(volume < 5)
-			return
-		if(istype(O, /obj/item/weapon/book/tome))
-			to_chat(usr, "<span class='notice'>The solution does nothing. Whatever this is, it isn't normal ink.</span>")
-			return
-		var/obj/item/weapon/book/affectedbook = O
-		affectedbook.dat = null
-		to_chat(usr, "<span class='notice'>The solution dissolves the ink on the book.</span>")
-	return
+	toxin_immune_species = list(IS_NABBER)
+	toxin_blood = 3
+
+	toxin_hydroponics = 1
 
 /datum/reagent/aluminium
 	name = "Aluminium"
@@ -40,6 +28,9 @@
 	reagent_state = SOLID
 	color = "#a8a8a8"
 	value = DISPENSER_REAGENT_VALUE
+
+	codex_lore = "<p>Aluminium is a chemical element with the symbol Al and atomic number 13. It is a silvery-white, soft, non-magnetic and ductile metal in the boron group.</p>"
+	codex_mechanics = "<p>Aluminium is a base chemical used in the creation of various compounds and medicines and is commonly found in chemical dispensers.</p>"
 
 /datum/reagent/ammonia
 	name = "Ammonia"
@@ -52,11 +43,20 @@
 	overdose = 5
 	value = DISPENSER_REAGENT_VALUE
 
+	codex_lore = "<p>Ammonia is a compound of nitrogen and hydrogen. A stable binary hydride, it is a colourless substance with a characteristic pungent smell.</p>"
+	codex_mechanics = "<p>Ammonia is a base chemical used in the creation of various compounds and medicines and is commonly found in chemical dispensers.</p>\
+		<p>It can be used as a replacement for nitrogen by vox, and overdose for vox is 6 times the normal amount.</p>"
+
+	toxin_immune_species = list(IS_VOX, IS_DIONA)
+	toxin_blood = 1.5
+
+	nutrient_hydroponics = 1
+	health_mod_hydroponics = 0.5
+
 /datum/reagent/ammonia/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_VOX)
+	if (alien == IS_VOX)
 		M.add_chemical_effect(CE_OXYGENATED, 2)
-	else if(alien != IS_DIONA)
-		M.adjustToxLoss(removed * 1.5)
+	..()
 
 /datum/reagent/ammonia/overdose(var/mob/living/carbon/M, var/alien)
 	if(alien != IS_VOX || volume > overdose*6)
@@ -71,6 +71,11 @@
 	color = "#1c1300"
 	ingest_met = REM * 5
 	value = DISPENSER_REAGENT_VALUE
+
+	codex_lore = "<p>Carbon is a chemical element with the symbol C and atomic number 6. It is nonmetallic and belongs to group 14 of the periodic table.</p>"
+	codex_mechanics = "<p>Carbon is a base chemical used in the creation of various compounds and medicines and is commonly found in chemical dispensers.</p>\
+		<p>When ingested as a species other than Diona, carbon can neutralize and remove other reagents from the stomach (This includes food and drink).</p>\
+		<p>When splashed on the floor, it becomes dirt.</p>"
 
 /datum/reagent/carbon/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -99,6 +104,9 @@
 	color = "#6e3b08"
 	value = DISPENSER_REAGENT_VALUE
 
+	codex_lore = "<p>Copper is a chemical element with the symbol Cu and atomic number 29. It is a soft, malleable, and ductile metal with very high thermal and electrical conductivity.</p>"
+	codex_mechanics = "<p>Copper is a base chemical used in the creation of various compounds and medicines and is commonly found in chemical dispensers.</p>"
+
 /datum/reagent/ethanol
 	name = "Ethanol" //Parent class for all alcoholic reagents.
 	description = "A well-known alcohol with a variety of applications."
@@ -121,13 +129,16 @@
 	glass_desc = "A well-known alcohol with a variety of applications."
 	value = DISPENSER_REAGENT_VALUE
 
-/datum/reagent/ethanol/touch_mob(var/mob/living/L, var/amount)
-	if(istype(L))
-		L.adjust_fire_stacks(amount / 15)
+	dissolves_text = TRUE
 
-/datum/reagent/ethanol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.adjustToxLoss(removed * 2 * toxicity)
-	return
+	codex_lore = "<p>Ethanol (ethyl alcohol, grain alcohol, drinking alcohol, spirits, or simply alcohol) is a chemical compound that is volatile, flammable, colorless, and a slight characterist odour.</p>"
+	codex_mechanics = "<p>Ethanol is a base chemical used in the creation of various compounds and medicines and is commonly found in chemical dispensers.</p>"
+
+	toxin_blood = 2
+	flammable_touch_mob = 15
+
+	vehicle_fuel_mod = 10
+	vehicle_fuel_flammable = TRUE
 
 /datum/reagent/ethanol/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjust_nutrition(nutriment_factor * removed)
@@ -172,23 +183,6 @@
 	if(halluci)
 		M.adjust_hallucination(halluci, halluci)
 
-/datum/reagent/ethanol/touch_obj(var/obj/O)
-	if(istype(O, /obj/item/weapon/paper))
-		var/obj/item/weapon/paper/paperaffected = O
-		paperaffected.clearpaper()
-		to_chat(usr, "The solution dissolves the ink on the paper.")
-		return
-	if(istype(O, /obj/item/weapon/book))
-		if(volume < 5)
-			return
-		if(istype(O, /obj/item/weapon/book/tome))
-			to_chat(usr, "<span class='notice'>The solution does nothing. Whatever this is, it isn't normal ink.</span>")
-			return
-		var/obj/item/weapon/book/affectedbook = O
-		affectedbook.dat = null
-		to_chat(usr, "<span class='notice'>The solution dissolves the ink on the book.</span>")
-	return
-
 /datum/reagent/hydrazine
 	name = "Hydrazine"
 	description = "A toxic, colorless, flammable liquid with a strong ammonia-like odor, in hydrate form."
@@ -199,12 +193,21 @@
 	touch_met = 5
 	value = DISPENSER_REAGENT_VALUE
 
-/datum/reagent/hydrazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.adjustToxLoss(4 * removed)
+	codex_lore = "<p>Hydrazine is an inrganic compound made of nitrogen and hydrogen atoms. It is a colorless and flammable liquid with an ammonia-like odor.</p>"
+	codex_mechanics = "<p>Hydrazine is a base chemical used in the creation of various compounds and medicines and is commonly found in chemical dispensers.</p>\
+		<p>When splashed on the floor, it becomes liquid fuel.</p>"
 
-/datum/reagent/hydrazine/affect_touch(var/mob/living/carbon/M, var/alien, var/removed) // Hydrazine is both toxic and flammable.
-	M.adjust_fire_stacks(removed / 12)
-	M.adjustToxLoss(0.2 * removed)
+	toxin_blood = 4
+	toxin_touch = 0.2
+	flammable_touch = 12
+
+	toxin_hydroponics = 2.5
+	weedkiller_hydroponics = -4
+	water_hydroponcs = -2
+	health_mod_hydroponics = -2
+
+	vehicle_fuel_mod = 1.5
+	vehicle_fuel_flammable = TRUE
 
 /datum/reagent/hydrazine/touch_turf(var/turf/T)
 	new /obj/effect/decal/cleanable/liquid_fuel(T, volume)
@@ -219,6 +222,10 @@
 	color = "#353535"
 	value = DISPENSER_REAGENT_VALUE
 
+	codex_lore = "<p>Iron is a chemical element with the symbol Fe and atomic number 26. It is a metal that belongs to the first transition series and group 8 of the periodic table.</p>"
+	codex_mechanics = "<p>Iron is a base chemical used in the creation of various compounds and medicines and is commonly found in chemical dispensers.</p>\
+		<p>It helps to restore lost blood when ingested, except for Diona.</p>"
+
 /datum/reagent/iron/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
 		M.add_chemical_effect(CE_BLOODRESTORE, 8 * removed)
@@ -230,6 +237,10 @@
 	reagent_state = SOLID
 	color = "#808080"
 	value = DISPENSER_REAGENT_VALUE
+
+	codex_lore = "<p>Lithium is a chemical element with the symbol Li and atomic number 3. It is a soft, silvery-white alkali metal.</p>"
+	codex_mechanics = "<p>Lithium is a base chemical used in the creation of various compounds and medicines and is commonly found in chemical dispensers.</p>\
+		<p>It causes mild drug-like effects if ingested or injected.</p>"
 
 /datum/reagent/lithium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
@@ -245,6 +256,10 @@
 	reagent_state = LIQUID
 	color = "#484848"
 	value = DISPENSER_REAGENT_VALUE
+
+	codex_lore = "<p>Mercury is a chemical element with the symbol Hg and atomic number 80. It is commonly known as quicksilver and is a heavy, silvery d-block element.</p>"
+	codex_mechanics = "<p>Mercury is a base chemical used in the creation of various compounds and medicines and is commonly found in chemical dispensers.</p>\
+		<p>It causes mild drug-like effects and mild brain damage if ingested or injected.</p>"
 
 /datum/reagent/mercury/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
@@ -262,6 +277,14 @@
 	color = "#832828"
 	value = DISPENSER_REAGENT_VALUE
 
+	nutrient_hydroponics = 0.1
+	weedkiller_hydroponics = -2
+	water_hydroponcs = -0.5
+	health_mod_hydroponics = -0.75
+
+	codex_lore = "<p>Phosphorus is a chemical element with the symbol P and atomic number 15. Phosphorus is highly reactive and can be found in white and red varieties. In minerals, phosphorus is generally found as phosphate.</p>"
+	codex_mechanics = "<p>Phosphorus is a base chemical used in the creation of various compounds and medicines and is commonly found in chemical dispensers.</p>"
+
 /datum/reagent/potassium
 	name = "Potassium"
 	description = "A soft, low-melting solid that can easily be cut with a knife. Reacts violently with water."
@@ -269,6 +292,13 @@
 	reagent_state = SOLID
 	color = "#a0a0a0"
 	value = DISPENSER_REAGENT_VALUE
+
+	codex_lore = "<p>Potassium is a chemical element with the compound K and atomic number 19. It is a silvery-white metal that reacts violently with water.<br/>\
+		Many a novice chemist has found himself with a broken chemistry dispenser after experimenting with this chemical.</p>"
+	codex_mechanics = "<p>Potassium is a base chemical used in the creation of various compounds and medicines and is commonly found in chemical dispensers.</p>\
+		<p>Increases heart rate with ingested or injected. Don't drink water after drinking or injecting this or you'll incur the wrath of the admins.</p>\
+		<p>Potassium is produced and added to the bloodstream by the kidneys if the organ is damaged.</p>"
+	codex_antag = "<p>A water-potassium grenade, while a relatively small explosion, is easy to create due to the availability of water, and low-suspicion of potassium in both research and medical.</p>"
 
 /datum/reagent/potassium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(volume > 3)
@@ -283,6 +313,17 @@
 	reagent_state = SOLID
 	color = "#c7c7c7"
 	value = DISPENSER_REAGENT_VALUE
+
+	codex_lore = "<p>Radium is a chemical element with the symbol Ra and atomic number 88. It is the sixth element in group 2 of the periodic table, also known as the alkaline earth metals. \
+		Pure radium is silvery-white and is highly radioactive.</p>"
+	codex_mechanics = "<p>Radium is a base chemical used in the creation of various compounds and medicines and is commonly found in chemical dispensers.</p>\
+		<p>It causes radiation exposure if ingested or injected.</p>\
+		<p>It can leave behind a glowing mess if splashed on the floor.</p>"
+
+	toxin_hydroponics = 2
+	health_mod_hydroponics = -1.5
+	mutation_mod_hydroponics = 0.2
+	mutagenic_hydroponics = 8
 
 /datum/reagent/radium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.apply_damage(10 * removed, IRRADIATE, armor_pen = 100) // Radium may increase your chances to cure a disease
@@ -307,6 +348,15 @@
 	var/meltdose = 10 // How much is needed to melt
 	var/max_damage = 40
 	value = DISPENSER_REAGENT_VALUE
+
+	codex_lore = "<p>Sulphuric acid is a mineral acid composed of the elements sulfur, oxygen, and hydrogen. \
+		It is a colourless, odourless, and viscous liquid that is soluble in water and is synthesized in reactions that are highly exothermic.</p>"
+	codex_mechanics = "<p>Sulphuric acid is a base chemical used in the creation of various compounds and medicines and is commonly found in chemical dispensers.</p>\
+		<p>It is used in the production of circuit boards with a circuit printer.</p>"
+
+	toxin_hydroponics = 1.5
+	weedkiller_hydroponics = -2
+	health_mod_hydroponics = -1
 
 /datum/reagent/acid/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.take_organ_damage(0, removed * power)
@@ -392,12 +442,20 @@
 	max_damage = 30
 	value = DISPENSER_REAGENT_VALUE * 2
 
+	codex_lore = "<p>Hydrochloric acid or muriatic acid is a colorless inorganic chemical system. It has a distinctive pungent smell. \
+		It is classified as strongly acidic and can attack the skin over a wide composition range, since the hydrogen chloride completely dissociates in an aqueous solution.</p>"
+	codex_mechanics = "<p>Hydrochloric acid is a base chemical used in the creation of various compounds and medicines and is commonly found in chemical dispensers.</p>"
+
 /datum/reagent/silicon
 	name = "Silicon"
 	description = "A tetravalent metalloid, silicon is less reactive than its chemical analog carbon."
 	reagent_state = SOLID
 	color = "#a8a8a8"
 	value = DISPENSER_REAGENT_VALUE
+
+	codex_lore = "<p>Silicon is a chemical element with the symbol Si and atomic number 14. \
+		It is a hard, brittle crystalline solid with a blue-grey metallic lustre, and is a tetravalent metalloid and semiconductor.</p>"
+	codex_mechanics = "<p>Silicon is a base chemical used in the creation of various compounds and medicines and is commonly found in chemical dispensers.</p>"
 
 /datum/reagent/sodium
 	name = "Sodium"
@@ -406,6 +464,10 @@
 	reagent_state = SOLID
 	color = "#808080"
 	value = DISPENSER_REAGENT_VALUE
+
+	codex_lore = "<p>Sodium is a chemical element with the symbol Na and atomic number 11. \
+		It is a soft, silvery-white, highly reactive metal. Sodium is an alkali metal, being in group 1 of the periodic table.</p>"
+	codex_mechanics = "<p>Sodium is a base chemical used in the creation of various compounds and medicines and is commonly found in chemical dispensers.</p>"
 
 /datum/reagent/sugar
 	name = "Sugar"
@@ -421,12 +483,23 @@
 	glass_icon = DRINK_ICON_NOISY
 	value = DISPENSER_REAGENT_VALUE
 
-/datum/reagent/sugar/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
-	M.adjust_nutrition(removed * 3)
+	codex_lore = "<p>Sugar is the generic name for sweet-tasting, soluble carbohydrates, many of which are used in food.</p>"
+	codex_mechanics = "<p>Sugar is a base chemical used in the creation of various compounds, medicines, food, and drink and is commonly found in chemical and drink dispensers.</p>\
+		<p>It has a moderate drug-like effect if ingested or injected by Unathi.</p>"
+	codex_antag = "<p>If you are a cortical borer, sugar acts like a sedative to you if your host ingests or injects it or anything that contains it, preventing you from assuming control of your host.</p>"
 
-	if(alien == IS_UNATHI)
-		var/datum/species/unathi/S = M.species
-		S.handle_sugar(M,src)
+	sugar_factor = 1
+
+	nutrient_hydroponics = 0.1
+	weedkiller_hydroponics = 2
+	pestkiller_hydroponics = 2
+
+	vehicle_fuel_explode = TRUE
+
+/datum/reagent/sugar/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
+	..()
+
+	M.adjust_nutrition(removed * 3)
 
 /datum/reagent/sulfur
 	name = "Sulfur"
@@ -436,6 +509,9 @@
 	color = "#bf8c00"
 	value = DISPENSER_REAGENT_VALUE
 
+	codex_lore = "<p>Sulfur is a chemical element with the symbol S and atomic number 16. It is abundant, multivalent and nonmetallic. Elemental sulfur is a bright yellow color.</p>"
+	codex_mechanics = "<p>Sulfur is a base chemical used in the creation of various compounds and medicines and is commonly found in chemical dispensers.</p>"
+
 /datum/reagent/tungsten
 	name = "Tungsten"
 	description = "A chemical element, and a strong oxidising agent."
@@ -443,5 +519,8 @@
 	reagent_state = SOLID
 	color = "#dcdcdc"
 	value = DISPENSER_REAGENT_VALUE
+
+	codex_lore = "<p>Tungsten, or wolfram, is a chemical element with the symbol W and atomic number 74. It is remarkable for it's robustness and density.</p>"
+	codex_mechanics = "<p>Tungsten is a base chemical used in the creation of various compounds and is commonly found in chemical dispensers.</p>"
 
 #undef DISPENSER_REAGENT_VALUE

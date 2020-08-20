@@ -8,6 +8,8 @@
 	color = "#888888"
 	overdose = 5
 
+	codex_mechanics = "<p>Overdose effects include toxin damage.</p>"
+
 /datum/reagent/crayon_dust/red
 	name = "Red crayon dust"
 	color = "#fe191a"
@@ -48,6 +50,8 @@
 	color = "#808080"
 	overdose = REAGENTS_OVERDOSE * 0.5
 	color_weight = 20
+
+	codex_mechanics = "<p>When splashed on a tile, person, or object, it will recolor what was splashed.</p>"
 
 /datum/reagent/paint/touch_turf(var/turf/T)
 	if(istype(T) && !istype(T, /turf/space))
@@ -107,6 +111,14 @@
 	glass_name = "liquid gold"
 	glass_desc = "It's magic. We don't have to explain it."
 
+	nutrient_hydroponics = 1
+	weedkiller_hydroponics = -5
+	pestkiller_hydroponics = -5
+	water_hydroponcs = 1
+	health_mod_hydroponics = 1
+	yield_mod_hydroponics = 1
+	mutation_mod_hydroponics = 1
+
 /datum/reagent/adminordrazine/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	affect_blood(M, alien, removed)
 
@@ -137,6 +149,12 @@
 	color = "#b8b8c0"
 	value = 9
 
+	codex_mechanics = "<p>Its effects include:</p>\
+		<ul>\
+			<p>Radiation when eaten, injected, or touched.</p>\
+			<p>Leaves behind glowing green sludge if splaced on the floor.</p>\
+		</ul>"
+
 /datum/reagent/uranium/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	affect_ingest(M, alien, removed)
 
@@ -158,6 +176,15 @@
 
 	glass_name = "holy water"
 	glass_desc = "An ashen-obsidian-water mix, this solution will alter certain sections of the brain's rationality."
+
+	codex_mechanics = "<p>Its effects include:</p>\
+		<ul>\
+			<li>If splashed on the floor, it can make that tile holy.</li>\
+		</ul>\
+		<p>It can be found in bottle form in the chaplain's locker.</p>\
+		<p>It can be made by using a bible on normal water as a chaplain.</p>"
+	codex_antag = "<p>It can be used to de-convert cultists.</p>\
+		<p>Holy water can be converted to normal water using a cultist's tome.</p>"
 
 /datum/reagent/water/holywater/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -182,6 +209,12 @@
 	color = "#604030"
 	value = 0.9
 
+	codex_mechanics = "<p>It can be found in a bottle mixed with ammonia from a NutriMax vendor if you have a coin.</p>"
+
+	nutrient_hydroponics = 2
+	pestkiller_hydroponics = -2
+	health_mod_hydroponics = 1
+
 /datum/reagent/surfactant // Foam precursor
 	name = "Azosurfactant"
 	description = "A isocyanate liquid that forms a foam when mixed with water."
@@ -190,12 +223,19 @@
 	color = "#9e6b38"
 	value = 0.05
 
+	codex_mechanics = "<p>If used in a greande where one beaker as Azosurfactant and another beaker has the reagents required for the Foam recipe, it will dispense foam when activated. \
+		Any chemicals included in either beaker will be included in the foam and applied with a diluted effect to anything the foam touches.</p>\
+		<p>Commonly found in cleaning grenades.</p>"
+
 /datum/reagent/foaming_agent // Metal foaming agent. This is lithium hydride. Add other recipes (e.g. LiH + H2O -> LiOH + H2) eventually.
 	name = "Foaming agent"
 	description = "A agent that yields metallic foam when mixed with light metal and a strong acid."
 	taste_description = "metal"
 	reagent_state = SOLID
 	color = "#664b63"
+
+	codex_mechanics = "<p>If used in a greande where one beaker as Foaming agent and another beaker has the reagents required for the Metal Foam recipe, it will dispense meetal foam when activated. \
+		<p>Commonly found in metal foam grenades.</p>"
 
 /datum/reagent/thermite
 	name = "Thermite"
@@ -205,6 +245,13 @@
 	color = "#673910"
 	touch_met = 50
 	value = 6
+
+	codex_mechanics = "<p>Its effects include:</p>\
+		<ul>\
+			<li>If splashed or sprayed on a wall, it will slowly burn away the wall.</li>\
+			<li>If splashed or sprayed on a mob, it will make that mob flammable.</li>\
+			<li>If injected, it will cause injury.</li>\
+		</ul>"
 
 /datum/reagent/thermite/touch_turf(var/turf/T)
 	if(volume >= 5)
@@ -230,6 +277,12 @@
 	color = "#673910"
 	touch_met = 50
 
+	codex_mechanics = "<p>Its effects include:</p>\
+		<ul>\
+			<li>If splashed or sprayed on the floor, it leaves behind liquid flammable fuel.</li>\
+			<li>If splashed or sprayed on a mob, it will make them flammable.</li>\
+		</ul>"
+
 /datum/reagent/napalm/touch_turf(var/turf/T)
 	new /obj/effect/decal/cleanable/liquid_fuel(T, volume)
 	remove_self(volume)
@@ -250,6 +303,16 @@
 	color = "#a5f0ee"
 	touch_met = 50
 	value = 0.7
+
+	codex_mechanics = "<p>Its effects include:</p>\
+		<ul>\
+			<li>If splashed or sprayed on an object, the floor, or a mob, it will clean blood.</li>\
+			<li>If splashed or sprayed on a slime, it will cause toxin damage.</li>\
+			<li>Can be used to clean dirty microwaves.</li>\
+		</ul>\
+		<p>Can be found in spray bottle form in various locations on the map.</p>\
+		<p>Commonly found in cleaner grenades.</p>"
+	codex_antag = "<p>Any blood cleaned with space cleaner is still visible using luminol and UV lights.</p>"
 
 /datum/reagent/space_cleaner/touch_obj(var/obj/O)
 	O.clean_blood()
@@ -301,6 +364,12 @@
 	taste_description = "greasy diesel"
 	color = "#000000"
 
+	codex_mechanics = "<p>Its effects include:</p>\
+		<ul>\
+			<li>If splashed or sprayed on the floor, it will make the floor slippery and leave behind a streak of oil.</li>\
+		</ul>"
+	codex_antag = null
+
 /datum/reagent/oil/touch_turf(var/turf/simulated/T)
 	if(!istype(T, /turf/space))
 		new /obj/effect/decal/cleanable/blood/oil/streak(T)
@@ -321,6 +390,11 @@
 	color = "#808080"
 	value = 9
 
+	codex_mechanics = "<p>Its effects include:</p>\
+		<ul>\
+			<li>Increases heart rate if injected or ingested.</li>\
+		</ul>"
+
 /datum/reagent/nitroglycerin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 	M.add_chemical_effect(CE_PULSE, 2)
@@ -334,6 +408,12 @@
 	reagent_state = LIQUID
 	color = "#c8a5dc"
 	value = 0.8
+
+	codex_mechanics = "<p>Its effects include:</p>\
+		<ul>\
+			<li>If splashed or sprayed on the floor, it can lower ambient temperature.</li>\
+		</ul>\
+		<p>It can be found in coolant tanks, orderable from supply.</p>"
 
 /datum/reagent/coolant/touch_turf(var/turf/simulated/T)
 	if(!istype(T))
@@ -385,6 +465,13 @@
 	color = "#f2f3f4"
 	value = 1.4
 
+	codex_mechanics = "<p>Its effects include:</p>\
+		<ul>\
+			<li>If splashed or sprayed on an object or mob, reveals blood that's hidden or cleaned by some cleaners.</li>\
+		</ul>\
+		<p>It can be found in spray bottle form, generally in the forensics lab or CSI kit.</p>\
+		<p>Forensics borgs have access to a luminol sprayer.</p>"
+
 /datum/reagent/luminol/touch_obj(var/obj/O)
 	O.reveal_blood()
 
@@ -398,6 +485,13 @@
 	reagent_state = LIQUID
 	color = COLOR_GRAY80
 	metabolism = 0.05 // So that low dosages have a chance to build up in the body.
+
+	codex_mechanics = "<p>Its effects include:</p>\
+		<ul>\
+			<li>Does not affect Diona.</li>\
+			<li>Causes voices to become squeaky.</li>\
+		</ul>\
+		<p>It is commonly found in gaseous form on various exoplanets.</p>"
 
 /datum/reagent/helium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -413,6 +507,12 @@
 	reagent_state = LIQUID
 	color = COLOR_GRAY80
 
+	codex_mechanics = "<p>Its effects include:</p>\
+		<ul>\
+			<li>Highly toxic to Vox.</li>\
+		</ul>\
+		<p>It is commonly found in gaseous form everywhere.</p>"
+
 /datum/reagent/oxygen/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_VOX)
 		M.adjustToxLoss(removed * 6)
@@ -424,6 +524,14 @@
 	reagent_state = LIQUID
 	color = COLOR_GRAY80
 	metabolism = 0.05 // As with helium.
+
+	codex_mechanics = "<p>Its effects include:</p>\
+		<ul>\
+			<li>Does not effect Diona.</li>\
+			<li>Causes dizziness, shortness of breath, confusion, and light-headedness.</li>\
+			<li>Higher dosages cause oxyloss damage.</li>\
+		</ul>\
+		<p>It is commonly found in gaseous form on various exoplanets.</p>"
 
 /datum/reagent/carbon_monoxide/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
 	if(!istype(M) || alien == IS_DIONA)

@@ -12,6 +12,10 @@
 	color = "#664330"
 	value = 0.1
 
+	nutrient_hydroponics = 1
+	health_mod_hydroponics = 0.5
+	yield_mod_hydroponics = 0.1
+
 /datum/reagent/nutriment/mix_data(var/list/newdata, var/newamount)
 
 	if(!islist(newdata) || !newdata.len)
@@ -107,12 +111,7 @@
 	nutriment_factor = 10
 	color = "#ffff00"
 
-/datum/reagent/nutriment/honey/affect_ingest(var/mob/living/carbon/human/M, var/alien, var/removed)
-	..()
-
-	if(alien == IS_UNATHI)
-		var/datum/species/unathi/S = M.species
-		S.handle_sugar(M,src)
+	sugar_factor = 1
 
 /datum/reagent/nutriment/flour
 	name = "flour"
@@ -121,6 +120,8 @@
 	reagent_state = SOLID
 	nutriment_factor = 1
 	color = "#ffffff"
+
+	codex_mechanics = "<p>If dumped on the floor, it leaves behind a mess but can reduce the wetness of the floor.</p>"
 
 /datum/reagent/nutriment/flour/touch_turf(var/turf/simulated/T)
 	if(istype(T))
@@ -137,6 +138,8 @@
 	reagent_state = LIQUID
 	nutriment_factor = 3
 	color = "#ffd592"
+
+	codex_mechanics = "<p>If dumped on the floor, it leaves behind a mess but can reduce the wetness of the floor.</p>"
 
 /datum/reagent/nutriment/batter/touch_turf(var/turf/simulated/T)
 	if(!istype(T, /turf/space))
@@ -283,6 +286,9 @@
 	nutriment_factor = 20
 	color = "#302000"
 
+	codex_mechanics = "<p>If dumped on the floor, it can make the floor wet and slippery.</p>\
+		<p>It can be used to fight fires.</p>"
+
 /datum/reagent/nutriment/cornoil/touch_turf(var/turf/simulated/T)
 	if(!istype(T))
 		return
@@ -320,6 +326,9 @@
 	color = "#bbeda4"
 	overdose = REAGENTS_OVERDOSE
 	value = 0.11
+
+	codex_mechanics = "<p>It removed nutriment and increases hunger.</p>\
+		<p>It is especially dangerous for Unathi.</p>"
 
 /datum/reagent/lipozine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjust_nutrition(-10)
@@ -362,6 +371,13 @@
 	color = "#07aab2"
 	value = 0.2
 
+	vehicle_fuel_mod = 0.1
+
+	codex_mechanics = "<p>It has no effect on Diona.</p>\
+		<p>If injected or ingested, it reduces body temperature and causes shivering.</p>\
+		<p>If injected in a slime, it reduces the slime's body temperature.</p>\
+		<p>It counteracts capsaicin.</p>"
+
 /datum/reagent/frostoil/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
@@ -384,6 +400,10 @@
 	var/discomfort_message = "<span class='danger'>Your insides feel uncomfortably hot!</span>"
 	var/slime_temp_adj = 10
 	value = 0.2
+
+	codex_mechanics = "<p>It has no effect on Diona.</p>\
+		<p>If injected or ingested, it can cause toxin damage. For non-Unathi, it can also cause burning pain.</p>\
+		<p>If injected in a slime, it raises the slime's body temperature.</p>"
 
 /datum/reagent/capsaicin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -421,6 +441,12 @@
 	agony_amount = 4
 	discomfort_message = "<span class='danger'>You feel like your insides are burning!</span>"
 	slime_temp_adj = 15
+
+	codex_mechanics = "<p>It has no effect on Diona.</p>\
+		<p>If injected or ingested, it can cause toxin damage. For non-Unathi, it can also cause burning pain.</p>\
+		<p>If injected in a slime, it raises the slime's body temperature.</p>\
+		<p>If sprayed on someone, it causes severe burning pain if the eyes or face are exposed.</p>\
+		<p>If sprayed on a Skrell, the effects are greatly increased.</p>"
 
 /datum/reagent/capsaicin/condensed/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	var/eyes_covered = 0
@@ -532,6 +558,8 @@
 	var/adj_temp = 0
 	value = 0.1
 
+	codex_mechanics = "<p>If injected, it can cause toxin damage.</p>"
+
 /datum/reagent/drink/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjustToxLoss(removed) // Probably not a good idea; not very deadly though
 	return
@@ -550,12 +578,12 @@
 		M.bodytemperature = min(310, M.bodytemperature - (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
 
 // Juices
+/datum/reagent/drink/juice
+	sugar_factor = 0.5
+
 /datum/reagent/drink/juice/affect_ingest(var/mob/living/carbon/human/M, var/alien, var/removed)
 	..()
 	M.immunity = min(M.immunity + 0.25, M.immunity_norm*1.5)
-	if(alien == IS_UNATHI)
-		var/datum/species/unathi/S = M.species
-		S.handle_sugar(M,src,0.5)
 
 /datum/reagent/drink/juice/banana
 	name = "Banana Juice"
@@ -583,6 +611,9 @@
 
 	glass_name = "carrot juice"
 	glass_desc = "It is just like a carrot but without crunching."
+
+	codex_mechanics = "<p>If injected, it can cause toxin damage.</p>\
+		<p>If ingested, it produces a small amount of imidazoline.</p>"
 
 /datum/reagent/drink/juice/carrot/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -617,6 +648,9 @@
 	glass_name = "lime juice"
 	glass_desc = "A glass of sweet-sour lime juice"
 
+	codex_mechanics = "<p>If injected, it can cause toxin damage.</p>\
+		<p>If ingested, it can mildly reduce toxin damage for non-Diona species.</p>"
+
 /datum/reagent/drink/juice/lime/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 	if(alien == IS_DIONA)
@@ -631,6 +665,9 @@
 
 	glass_name = "orange juice"
 	glass_desc = "Vitamins! Yay!"
+
+	codex_mechanics = "<p>If injected, it can cause toxin damage.</p>\
+		<p>If ingested, it can reduce oxygen loss damage for non-Diona species.</p>"
 
 /datum/reagent/drink/juice/orange/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -647,6 +684,9 @@
 
 	glass_name = "poison berry juice"
 	glass_desc = "A glass of deadly juice."
+
+	codex_mechanics = "<p>If injected, it can cause toxin damage.</p>\
+		<p>Unathi are immune to the toxic effects.</p>"
 
 /datum/reagent/toxin/poisonberryjuice/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_UNATHI)
@@ -691,6 +731,9 @@
 
 	glass_name = "tomato juice"
 	glass_desc = "Are you sure this is tomato juice?"
+
+	codex_mechanics = "<p>If injected, it can cause toxin damage.</p>\
+		<p>If ingested, it can mildly heal burns for non-Diona species.</p>"
 
 /datum/reagent/drink/juice/tomato/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -755,6 +798,12 @@
 	glass_name = "milk"
 	glass_desc = "White and nutritious goodness!"
 
+	codex_mechanics = "<p>If injected, it can cause toxin damage.</p>\
+		<p>If ingested, it can mildly heal trauma damage for non-Diona species and counteract capsaicin.</p>"
+
+	nutrient_hydroponics = 0.1
+	water_hydroponcs = 0.9
+
 /datum/reagent/drink/milk/chocolate
 	name =  "Chocolate Milk"
 	description = "A mixture of perfectly healthy milk and delicious chocolate."
@@ -803,6 +852,11 @@
 
 	glass_name = "coffee"
 	glass_desc = "Don't drop it, or you'll send scalding liquid and glass shards everywhere."
+
+	codex_mechanics = "<p>If injected, it can cause toxin damage.</p>\
+		<p>Has no effect on Diona.</p>\
+		<p>It can increase heart rate if ingested or injected.</p>\
+		<p>Overdose effects include jitteriness and further elevated pulse.</p>"
 
 /datum/reagent/drink/coffee/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -980,6 +1034,10 @@
 	glass_desc = "Soda water. Why not make a scotch and soda?"
 	glass_special = list(DRINK_FIZZ)
 
+	nutrient_hydroponics = 0.1
+	water_hydroponcs = 1
+	health_mod_hydroponics = 0.1
+
 /datum/reagent/drink/grapesoda
 	name = "Grape Soda"
 	description = "Grapes made into a fine drank."
@@ -1101,12 +1159,7 @@
 	glass_name = "milkshake"
 	glass_desc = "Glorious brainfreezing mixture."
 
-/datum/reagent/milkshake/affect_ingest(var/mob/living/carbon/human/M, var/alien, var/removed)
-	..()
-
-	if(alien == IS_UNATHI)
-		var/datum/species/unathi/S = M.species
-		S.handle_sugar(M,src,0.5)
+	sugar_factor = 0.5
 
 /datum/reagent/drink/rewriter
 	name = "Rewriter"
@@ -1117,6 +1170,9 @@
 
 	glass_name = "Rewriter"
 	glass_desc = "The secret of the sanctuary of the Libarian..."
+
+	codex_mechanics = "<p>If injected, it can cause toxin damage.</p>\
+		<p>If ingested, it causes jitteriness.</p>"
 
 /datum/reagent/drink/rewriter/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -1133,6 +1189,9 @@
 	glass_name = "Nuka-Cola"
 	glass_desc = "Don't cry, Don't raise your eye, It's only nuclear wasteland"
 	glass_special = list(DRINK_FIZZ)
+
+	codex_mechanics = "<p>If injected, it can cause toxin damage.</p>\
+		<p>If ingested, it causes speed boosts, jitteriness, dizziness, and a drug like effect while removing drowsyness entirely.</p>"
 
 /datum/reagent/drink/nuka_cola/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -1236,6 +1295,11 @@
 	glass_name = "The Doctor's Delight"
 	glass_desc = "A healthy mixture of juices, guaranteed to keep you healthy until the next toolboxing takes place."
 
+	codex_mechanics = "<p>If injected, it can cause toxin damage.</p>\
+		<p>Has no effect on Diona.</p>\
+		<p>If ingested, it can heal oxyloss, trauma, burns, and toxin damage.</p>\
+		<p>It can reduce dizziness and confusion.</p>"
+
 /datum/reagent/drink/doctor_delight/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 	if(alien == IS_DIONA)
@@ -1273,6 +1337,9 @@
 	color = "#302000"
 	nutrition = 5
 
+	codex_mechanics = "<p>If injected, it can cause toxin damage.</p>\
+		<p>If ingested, it increases body temperature for non-Diona species.</p>"
+
 /datum/reagent/drink/hell_ramen/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 	if(alien == IS_DIONA)
@@ -1286,6 +1353,8 @@
 
 	glass_name = "nothing"
 	glass_desc = "Absolutely nothing."
+
+	codex_mechanics = "<p>It does absolutely nothing.</p>"
 
 /* Alcohol */
 
@@ -1312,6 +1381,8 @@
 	glass_name = "ale"
 	glass_desc = "A freezing container of delicious ale"
 
+	nutrient_hydroponics = 0.25
+
 /datum/reagent/ethanol/beer
 	name = "Beer"
 	description = "An alcoholic beverage made from malted grains, hops, yeast, and water."
@@ -1322,6 +1393,9 @@
 
 	glass_name = "beer"
 	glass_desc = "A freezing container of beer"
+
+	water_hydroponcs = 0.7
+	health_mod_hydroponics = -0.05
 
 /datum/reagent/ethanol/beer/good
 
