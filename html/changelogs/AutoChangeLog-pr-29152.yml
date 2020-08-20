@@ -1,0 +1,4 @@
+author: "ToddRafter"
+delete-after: True
+changes: 
+  - tweak: "Helm consoles show their ships heading in degrees instead of eighths."
