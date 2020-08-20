@@ -56,7 +56,7 @@
 /obj/effect/overmap/visitable/ship/get_scan_data(mob/user)
 	. = ..()
 	if(!is_still())
-		. += "<br>Heading: [dir2angle(get_heading())], speed [get_speed() * 1000]"
+		. += "<br>Heading: [get_heading_angle()], speed [get_speed() * 1000]"
 
 //Projected acceleration based on information from engines
 /obj/effect/overmap/visitable/ship/proc/get_acceleration()
@@ -86,6 +86,12 @@
 			res |= NORTH
 		else
 			res |= SOUTH
+	return res
+
+/obj/effect/overmap/visitable/ship/proc/get_heading_angle()
+	var/res = 0
+	if (MOVING(speed[1]) || MOVING(speed[2]))
+		res = (round(Atan2(speed[1], -speed[2])) + 450)%360
 	return res
 
 /obj/effect/overmap/visitable/ship/proc/adjust_speed(n_x, n_y)
