@@ -63,28 +63,29 @@
 	slot = ACCESSORY_SLOT_INSIGNIA
 	on_rolled = list("down" = "none")
 	high_visibility = 1
+	icon_state = "ec_stripe"
 
 /obj/item/clothing/accessory/solgov/skillstripe/botany
 	name = "xenobotanist stripe"
 	desc = "A thin stripe of spaceworthy material with vacuum-rated adhesive, for attaching to the voidsuit. Indicates Field Xenobotany Specialist training."
-	icon_state = "ec_stripe_botany"
+	color = "#387c4f"
 
 /obj/item/clothing/accessory/solgov/skillstripe/netgun
 	name = "netgunner stripe"
 	desc = "A thin stripe of spaceworthy material with vacuum-rated adhesive, for attaching to the voidsuit. Indicates Xenofauna Acquisition Specialist training."
-	icon_state = "ec_stripe_netgun"
+	color = "#6a60a1"
 
 /obj/item/clothing/accessory/solgov/skillstripe/eva
 	name = "void stripe"
 	desc = "A thin stripe of spaceworthy material with vacuum-rated adhesive, for attaching to the voidsuit. Indicates Void Mobility Specialist training."
-	icon_state = "ec_stripe_eva"
+	color = "#3d7172"
 
 /obj/item/clothing/accessory/solgov/skillstripe/medical
 	name = "medic stripe"
 	desc = "A thin stripe of spaceworthy material with vacuum-rated adhesive, for attaching to the voidsuit. Indicates Advanced First Aid Specialist training."
-	icon_state = "ec_stripe_med"
+	color = "#2d6295"
 
 /obj/item/clothing/accessory/solgov/skillstripe/electric
 	name = "electrician stripe"
 	desc = "A thin stripe of spaceworthy material with vacuum-rated adhesive, for attaching to the voidsuit. Indicates Electrical Specialist training."
-	icon_state = "ec_stripe_electro"
+	color = "#8e633f"

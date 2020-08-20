@@ -198,6 +198,7 @@ specialty pins
 	desc = "A color blaze denoting fleet personnel in some special role. This one is silver."
 	icon_state = "marinerank_command"
 	slot = ACCESSORY_SLOT_INSIGNIA
+	icon_state = "fleetspec"
 
 /obj/item/clothing/accessory/solgov/specialty/get_fibers()
 	return null
@@ -205,32 +206,32 @@ specialty pins
 /obj/item/clothing/accessory/solgov/specialty/janitor
 	name = "custodial blazes"
 	desc = "Purple blazes denoting a custodial technician."
-	icon_state = "fleetspec_janitor"
+	color = "#913da7"
 
 /obj/item/clothing/accessory/solgov/specialty/brig
 	name = "brig blazes"
 	desc = "Red blazes denoting a brig chief."
-	icon_state = "fleetspec_brig"
+	color = "#bf0000"
 
 /obj/item/clothing/accessory/solgov/specialty/forensic
 	name = "forensics blazes"
 	desc = "Steel blazes denoting a forensic technician."
-	icon_state = "fleetspec_forensic"
+	color = "#939fb1"
 
 /obj/item/clothing/accessory/solgov/specialty/atmos
 	name = "atmospherics blazes"
 	desc = "Turquoise blazes denoting an atmospheric technician."
-	icon_state = "fleetspec_atmos"
+	color = "#469085"
 
 /obj/item/clothing/accessory/solgov/specialty/counselor
 	name = "counselor blazes"
 	desc = "Blue blazes denoting a counselor."
-	icon_state = "fleetspec_counselor"
+	color = "#4c9ce4"
 
 /obj/item/clothing/accessory/solgov/specialty/chemist
 	name = "pharmacy blazes"
 	desc = "Orange blazes denoting a pharmacist."
-	icon_state = "fleetspec_chemist"
+	color = "#ff6600"
 
 /obj/item/clothing/accessory/solgov/specialty/enlisted
 	name = "enlisted qualification pin"
