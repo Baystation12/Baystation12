@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - tweak: "Admin logs will now know the difference between people putting themselves in cryo and people being put in cryo and display the correct relevant information."
