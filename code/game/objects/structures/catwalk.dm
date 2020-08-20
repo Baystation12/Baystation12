@@ -87,6 +87,8 @@
 		deconstruct(user)
 		return
 	if(isCrowbar(C) && plated_tile)
+		if(user.a_intent != I_HELP)
+			return
 		hatch_open = !hatch_open
 		if(hatch_open)
 			playsound(src, 'sound/items/Crowbar.ogg', 100, 2)
