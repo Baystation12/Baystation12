@@ -53,7 +53,7 @@
 		to_chat(user,"The distribution valve on \the [airtank] is set to '[airtank.distribute_pressure] kPa'.")
 	else
 		to_chat(user, "<span class='warning'>The air tank is missing.</span>")
-		
+
 /obj/structure/closet/body_bag/rescue
 	name = "rescue bag"
 	desc = "A reusable plastic bag designed to prevent additional damage to an occupant, especially useful if short on time or in \
@@ -105,12 +105,15 @@
 
 /obj/structure/closet/body_bag/rescue/fold(var/user)
 	var/obj/item/weapon/tank/my_tank = airtank
-	airtank = null
+	airtank = null // Apparently this is required to avoid breaking my_tank checks further down after the parent proc runs qdel(src)
 	var/obj/item/bodybag/rescue/folded = ..()
-	if(istype(folded) && my_tank)
-		my_tank.air_contents.merge(atmo)
-		folded.airtank = my_tank
-		my_tank.forceMove(folded)
+	if (folded && istype(folded))
+		if (my_tank)
+			my_tank.air_contents.merge(atmo)
+			folded.airtank = my_tank
+			my_tank.forceMove(folded)
+	else
+		airtank = my_tank
 
 /obj/structure/closet/body_bag/rescue/Process()
 	if(!airtank)
