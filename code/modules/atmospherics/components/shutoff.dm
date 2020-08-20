@@ -7,6 +7,8 @@
 
 	name = "automatic shutoff valve"
 	desc = "An automatic valve with control circuitry and pipe integrity sensor, capable of automatically isolating damaged segments of the pipe network."
+	clicksound = 'sound/machines/buttonbeep.ogg'
+	clickvol = 20
 	var/close_on_leaks = TRUE	// If false it will be always open
 	var/shutoff_state = 0
 	level = 1
@@ -41,7 +43,8 @@
 	if(CanInteract(user, DefaultTopicState()))
 		close_on_leaks = !close_on_leaks
 		update_icon()
-		to_chat(user, "You [close_on_leaks ? "enable" : "disable"] the automatic shutoff circuit.")
+		to_chat(user, SPAN_NOTICE("You [close_on_leaks ? "enable" : "disable"] the automatic shutoff circuit."))
+		CouldUseTopic(user)
 		return TRUE
 
 /obj/machinery/atmospherics/valve/shutoff/physical_attack_hand(mob/user)

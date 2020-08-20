@@ -98,6 +98,13 @@
 	associated_paths = list(/obj/machinery/atmospherics/valve)
 	mechanics_text = "Click this to turn the valve.  If red, the pipes on each end are seperated.  Otherwise, they are connected."
 
+//Shutoff valves
+/datum/codex_entry/atmos_shutoff
+	associated_paths = list(/obj/machinery/atmospherics/valve/shutoff, /obj/machinery/atmospherics/valve/shutoff/supply, /obj/machinery/atmospherics/valve/shutoff/scrubbers, /obj/machinery/atmospherics/valve/shutoff/fuel)
+	mechanics_text = "<p>This valve automatically closes itself when a leak is detected in the connected pipe network.</p>\
+	<p>A blinking red light will hint at the direction a leak has been detected.</p>\
+	<p>You can click it to force it to stay opened, indicated by blinking yellow lights.</p>"
+
 //TEG ports
 /datum/codex_entry/atmos_circulator
 	associated_paths = list(/obj/machinery/atmospherics/binary/circulator)
