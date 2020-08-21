@@ -22,6 +22,7 @@
 
 /atom/movable/lighting_overlay/Initialize()
 	// doesn't need special init
+	SHOULD_CALL_PARENT(FALSE)
 	atom_flags |= ATOM_FLAG_INITIALIZED
 	return INITIALIZE_HINT_NORMAL
 

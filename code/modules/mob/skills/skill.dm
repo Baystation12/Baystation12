@@ -28,13 +28,13 @@ GLOBAL_LIST_EMPTY(skills)
 /decl/hierarchy/skill/proc/update_special_effects(mob/mob, level)
 
 /decl/hierarchy/skill/Initialize()
-	..()
+	. = ..()
 	if(is_hidden_category())
 		if(!GLOB.skills.len)
 			for(var/decl/hierarchy/skill/C in children)
 				GLOB.skills += C.get_descendents()
 		else
-			log_error("<span class='warning'>Warning: multiple instances of /decl/hierarchy/skill have been created!</span>")
+			CRASH("Warning: multiple instances of /decl/hierarchy/skill have been created!")
 
 /decl/hierarchy/skill/dd_SortValue()
 	return ID

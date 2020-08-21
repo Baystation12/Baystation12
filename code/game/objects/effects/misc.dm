@@ -117,6 +117,8 @@ obj/effect/paint/ocean
 	var/pressure = 20* ONE_ATMOSPHERE
 
 /obj/effect/gas_setup/Initialize()
+	SHOULD_CALL_PARENT(FALSE)
+	atom_flags |= ATOM_FLAG_INITIALIZED
 	var/obj/machinery/atmospherics/pipe/P = locate() in loc
 	if(P && !P.air_temporary)
 		P.air_temporary = new(P.volume, tempurature)

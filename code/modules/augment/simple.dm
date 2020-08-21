@@ -13,8 +13,9 @@
 	if(holding)
 		GLOB.item_unequipped_event.unregister(holding, src)
 		if(holding.loc == src)
-			QDEL_NULL(holding)
-
+			qdel(holding)
+		holding = null
+	return ..()
 
 /obj/item/organ/internal/augment/active/simple/proc/holding_dropped()
 

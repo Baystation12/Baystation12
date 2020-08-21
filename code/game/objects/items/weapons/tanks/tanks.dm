@@ -429,6 +429,7 @@ var/list/global/tank_gauge_cache = list()
 
 //Handle exploding, leaking, and rupturing of the tank
 /obj/item/weapon/tank/proc/check_status()
+	set waitfor = FALSE
 	if(!air_contents)
 		return 0
 

@@ -65,6 +65,7 @@
 
 // Fades out the smoke smoothly using it's alpha variable.
 /obj/effect/effect/smoke/chem/proc/fadeOut(var/frames = 16)
+	set waitfor = FALSE
 	if(!alpha) return //already transparent
 
 	frames = max(frames, 1) //We will just assume that by 0 frames, the coder meant "during one frame".

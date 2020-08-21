@@ -281,6 +281,7 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/tmp/iconCache.sav")) //Cache o
 		send_output(C, url_encode(url_encode(message)), "browseroutput:output")
 
 /proc/to_chat(target, message, handle_whitespace = TRUE, trailing_newline = TRUE)
+	set waitfor = FALSE
 	if(Master.current_runlevel == RUNLEVEL_INIT || !SSchat?.initialized)
 		to_chat_immediate(target, message, handle_whitespace, trailing_newline)
 		return

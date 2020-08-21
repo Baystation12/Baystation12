@@ -31,6 +31,7 @@
 /datum/action/Destroy()
 	if(owner)
 		Remove(owner)
+	return ..()
 
 /datum/action/proc/SetTarget(var/atom/Target)
 	target = Target
