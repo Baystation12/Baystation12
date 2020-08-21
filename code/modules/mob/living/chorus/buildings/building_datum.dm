@@ -58,7 +58,8 @@
 
 /datum/chorus_building/proc/build(var/atom/target, var/mob/living/chorus/C, var/warnings = FALSE)
 	if(can_build(C, target, warnings) && pay_costs(C))
-		return new /obj/structure/chorus_blueprint(target, src, C)
+		var/obj/structure/chorus_blueprint/cb = new /obj/structure/chorus_blueprint(target, src, C)
+		return cb
 
 /datum/chorus_building/proc/get_print_icon_state()
 	return "<img src=\"[get_rsc_path()]\">"
@@ -118,7 +119,8 @@
 
 /datum/chorus_building/delete/build(var/atom/target, var/mob/living/chorus/C, var/warnings = FALSE)
 	if(can_build(C, target, warnings))
-		to_chat(C, "Removing [target]")
+		to_chat(C, "You deconstruct \the [target]")
+		target.visible_message("\The [target] withers and dies!")
 		qdel(target)
 
 /datum/chorus_building/set_to_turf
@@ -129,6 +131,6 @@
 	. = ..()
 	if(.)
 		for(var/turf/T in range(range, target))
-			if(T.density || istype(T, /turf/space))
+			if(T.density || istype(T, /turf/space) || istype(T, turf_to_change_to))
 				continue
 			T.ChangeTurf(turf_to_change_to)

@@ -15,6 +15,7 @@
 	if(o)
 		owner = o
 		owner.add_building(src)
+		to_chat(owner, SPAN_NOTICE("\A [src] has been built."))
 
 /obj/structure/chorus/Destroy()
 	if (owner)
@@ -53,8 +54,13 @@
 /obj/structure/chorus/take_damage(var/amount)
 	health -= amount
 	if(health < 0)
-		src.visible_message("\The [src] crumbles!")
-		qdel(src)
+		die()
 
 /obj/structure/chorus/bullet_act(var/obj/item/projectile/P)
 	take_damage(P.damage)
+
+/obj/structure/chorus/proc/die()
+	if (owner)
+		to_chat(owner, SPAN_WARNING("\A [src] has been destroyed!"))
+	visible_message("\The [src] withers and dies!")
+	qdel(src)

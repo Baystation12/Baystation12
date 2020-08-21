@@ -37,7 +37,7 @@
 	flick("growth_articulation_exert", src)
 
 /datum/chorus_building/set_to_turf/growth/nerve_cluster
-	desc = "A mass of twitching nerves used to grow your organs faster"
+	desc = "A mass of twitching nerves used to grow your organs faster and allow you to build more organs at once. The speed and build limit boosts diminish for each additional nerve cluster."
 	building_type_to_build = /obj/structure/chorus/construct_bonus/nerve_cluster
 	build_time = 30
 	resource_cost = list(/datum/chorus_resource/growth_nutrients = 20)
