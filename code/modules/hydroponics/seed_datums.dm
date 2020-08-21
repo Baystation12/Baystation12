@@ -801,7 +801,7 @@
 	name = "soybean"
 	seed_name = "soybean"
 	display_name = "soybeans"
-	chems = list(/datum/reagent/nutriment = list(1,20), /datum/reagent/drink/milk/soymilk = list(10,20))
+	chems = list(/datum/reagent/drink/milk/soymilk = list(10,20))
 	kitchen_tag = "soybeans"
 
 /datum/seed/soybean/New()
@@ -819,7 +819,7 @@
 	name = "wheat"
 	seed_name = "wheat"
 	display_name = "wheat stalks"
-	chems = list(/datum/reagent/nutriment = list(1,25), /datum/reagent/nutriment/flour = list(15,15))
+	chems = list(/datum/reagent/nutriment/flour = list(15,15))
 	kitchen_tag = "wheat"
 
 /datum/seed/wheat/New()
@@ -839,7 +839,7 @@
 	name = "rice"
 	seed_name = "rice"
 	display_name = "rice stalks"
-	chems = list(/datum/reagent/nutriment = list(1,25), /datum/reagent/nutriment/rice = list(10,15))
+	chems = list(/datum/reagent/nutriment/rice = list(10,15))
 	kitchen_tag = "rice"
 
 /datum/seed/rice/New()
