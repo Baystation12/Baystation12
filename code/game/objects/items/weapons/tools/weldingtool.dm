@@ -395,6 +395,7 @@
 
 /obj/item/weapon/welder_tank/experimental/Destroy()
 	STOP_PROCESSING(SSobj, src)
+	return ..()
 
 /obj/item/weapon/welder_tank/experimental/Process()
 	var/cur_fuel = reagents.get_reagent_amount(/datum/reagent/fuel)

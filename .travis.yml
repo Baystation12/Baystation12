@@ -13,7 +13,7 @@ env:
 jobs:
     include:
     - name: "DreamChecker"
-      env: SPACEMAN_DMM_VERSION=suite-1.4
+      env: SPACEMAN_DMM_VERSION=suite-1.5
       cache:
         directories: $HOME/spaceman_dmm/$SPACEMAN_DMM_VERSION
       install:

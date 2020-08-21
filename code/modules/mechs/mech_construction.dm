@@ -60,7 +60,7 @@
 			pilot.client.screen -= module_to_forget
 
 /mob/living/exosuit/proc/install_system(var/obj/item/system, var/system_hardpoint, var/mob/user)
-
+	set waitfor = FALSE
 	if(hardpoints_locked || hardpoints[system_hardpoint])
 		return FALSE
 

@@ -130,6 +130,7 @@
 	update_use_power(POWER_USE_ACTIVE)
 
 /obj/machinery/suspension_gen/proc/deactivate()
+	set waitfor = FALSE
 	//drop anything we picked up
 	var/turf/T = get_turf(suspension_field)
 
