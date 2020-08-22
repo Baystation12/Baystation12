@@ -126,8 +126,10 @@ Checks if a list has the same entries and values as an element of big.
 /proc/pickweight(list/L)
 	var/len = length(L)
 	if (len && islist(L))
-		if (isnum(L[1]))
-			return pick(L)
+		for (var/key in L)
+			if (isnull(L[key]))
+				return pick(L)
+			break
 		var/sum = 0
 		for (var/key in L)
 			sum += L[key]
