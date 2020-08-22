@@ -238,7 +238,11 @@
 			CS.color = initial(ID.color)
 			CS.detail_color = initial(ID.detail_color)
 			CS.extra_details = initial(ID.extra_details)
-			CS.name = initial(ID.name) + " - " + initial(ID.icon_state)
+			CS.name = initial(ID.name)
+			if (initial(ID.job_access_type))
+				var/datum/job/J = initial(ID.job_access_type)
+				CS.name += " ([initial(J.title)]) "
+			CS.name += " - [initial(ID.icon_state)]"
 			var/color_pair = ""
 			if(CS.color)
 				color_pair += CS.color
