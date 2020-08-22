@@ -3,6 +3,7 @@
 	desc = "A short throwing spear with a deep barb, specifically designed to embed itself in its target."
 	sharp = 1
 	edge = 1
+	icon = 'icons/obj/weapons/melee_physical.dmi'
 	icon_state = "harpoon"
 	item_state = "harpoon"
 	max_force = 20
@@ -17,6 +18,7 @@
 /obj/item/weapon/material/harpoon/bomb
 	name = "explosive harpoon"
 	desc = "A short throwing spear with a deep barb and an explosive fitted in the head. Traditionally fired from some kind of cannon to harvest big game."
+	icon = 'icons/obj/weapons/other.dmi'
 	icon_state = "harpoon_bomb"
 
 /obj/item/weapon/material/harpoon/bomb/has_embedded()
@@ -47,7 +49,7 @@
 /obj/item/weapon/material/hatchet
 	name = "hatchet"
 	desc = "A very sharp axe blade upon a short fibremetal handle. It has a long history of chopping things, but now it is used for chopping wood."
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/weapons/melee_physical.dmi'
 	icon_state = "hatchet"
 	max_force = 15
 	force_divisor = 0.2 // 12 with hardness 60 (steel)
@@ -66,6 +68,7 @@
 /obj/item/weapon/material/hatchet/machete
 	name = "machete"
 	desc = "A long, sturdy blade with a rugged handle. Leading the way to cursed treasures since before space travel."
+	icon = 'icons/obj/weapons/melee_physical.dmi'
 	item_state = "machete"
 	w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_BELT
@@ -100,7 +103,7 @@
 /obj/item/weapon/material/minihoe // -- Numbers
 	name = "mini hoe"
 	desc = "It's used for removing weeds or scratching your back."
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/weapons/melee_physical.dmi'
 	icon_state = "hoe"
 	item_state = "hoe"
 	max_force = 5
@@ -113,6 +116,7 @@
 	unbreakable = TRUE
 
 /obj/item/weapon/material/scythe
+	icon = 'icons/obj/weapons/melee_physical.dmi'
 	icon_state = "scythe0"
 	name = "scythe"
 	desc = "A sharp and curved blade on a long fibremetal handle, this tool makes it easy to reap what you sow."
@@ -133,6 +137,7 @@
 /obj/item/weapon/material/cross
 	name = "cross"
 	desc = "It's a cross, commonly used as a holy symbol by Christians."
+	icon = 'icons/obj/weapons/other.dmi'
 	icon_state = "cross"
 	max_force = 5
 	force_divisor = 0.1

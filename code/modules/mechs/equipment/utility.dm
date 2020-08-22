@@ -310,6 +310,7 @@
 	var/durability = 0
 	name = "drill head"
 	desc = "A replaceable drill head usually used in exosuit drills."
+	icon = 'icons/obj/weapons/other.dmi'
 	icon_state = "drill_head"
 
 /obj/item/weapon/material/drill_head/proc/get_durability_percentage()

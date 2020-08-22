@@ -58,6 +58,7 @@
 /obj/item/weapon/pickaxe/hammer
 	name = "sledgehammer"
 	desc = "A mining hammer made of reinforced metal. You feel like smashing your boss in the face with this."
+	icon = 'icons/obj/weapons/melee_physical.dmi'
 
 /obj/item/weapon/pickaxe/drill
 	name = "advanced mining drill" // Can dig sand as well!

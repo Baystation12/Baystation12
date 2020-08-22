@@ -1,6 +1,7 @@
 /obj/item/weapon/material/stick
 	name = "stick"
 	desc = "You feel the urge to poke someone with this."
+	icon = 'icons/obj/weapons/melee_physical.dmi'
 	icon_state = "stick"
 	item_state = "stickmat"
 	max_force = 10

@@ -68,6 +68,7 @@
  * Fireaxe
  */
 /obj/item/weapon/material/twohanded/fireaxe  // DEM AXES MAN, marker -Agouri
+	icon = 'icons/obj/weapons/melee_physical.dmi'
 	icon_state = "fireaxe0"
 	base_icon = "fireaxe"
 	name = "fire axe"
@@ -100,6 +101,7 @@
 
 //spears, bay edition
 /obj/item/weapon/material/twohanded/spear
+	icon = 'icons/obj/weapons/melee_physical.dmi'
 	icon_state = "spearglass0"
 	base_icon = "spearglass"
 	name = "spear"
@@ -127,6 +129,7 @@
 /obj/item/weapon/material/twohanded/baseballbat
 	name = "bat"
 	desc = "HOME RUN!"
+	icon = 'icons/obj/weapons/melee_physical.dmi'
 	icon_state = "metalbat0"
 	base_icon = "metalbat"
 	item_state = "metalbat"

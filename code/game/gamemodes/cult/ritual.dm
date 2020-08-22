@@ -1,6 +1,6 @@
 /obj/item/weapon/book/tome
 	name = "arcane tome"
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/weapons/melee_physical.dmi'
 	icon_state = "tome"
 	throw_speed = 1
 	throw_range = 5

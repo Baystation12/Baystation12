@@ -1,5 +1,6 @@
 //replaces our stun baton code with /tg/station's code
 /obj/item/weapon/melee/baton
+	icon = 'icons/obj/weapons/melee_physical.dmi'
 	name = "stunbaton"
 	desc = "A stun baton for incapacitating people with."
 	icon_state = "stunbaton"
@@ -246,6 +247,7 @@
 /obj/item/weapon/melee/baton/cattleprod
 	name = "stunprod"
 	desc = "An improvised stun baton."
+	icon = 'icons/obj/weapons/melee_physical.dmi'
 	icon_state = "stunprod_nocell"
 	item_state = "prod"
 	force = 3
