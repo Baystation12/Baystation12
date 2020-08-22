@@ -9,6 +9,8 @@
 	idle_power_usage = 5
 	active_power_usage = 100
 	obj_flags = OBJ_FLAG_ANCHORABLE
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
 
 	var/inuse = 0
 	var/obj/item/weapon/reagent_containers/beaker = null
@@ -38,6 +40,13 @@
 		icon_state = "[initial(icon_state)]"
 
 /obj/machinery/reagentgrinder/attackby(var/obj/item/O as obj, var/mob/user as mob)
+	// Maybe someone is constructing this machine.
+	// Or someone is going to move it around.
+	// In any circumstance, it's better to call the parent's
+	// implementation without inhibit any "custom" behaviour
+	// related to the grinder.
+	if((. = ..()))
+		return TRUE
 
 	if (istype(O,/obj/item/weapon/reagent_containers/glass) || \
 		istype(O,/obj/item/weapon/reagent_containers/food/drinks/glass2) || \
@@ -250,7 +259,7 @@
 		..()
 
 /obj/machinery/reagentgrinder/CtrlClick(mob/user)
-	if(CanDefaultInteract(user))
+	if(anchored && CanDefaultInteract(user))
 		grind(user)
 	else
 		..()
@@ -302,7 +311,6 @@
 	icon_state = "juicer"
 	density = FALSE
 	anchored = FALSE
-	obj_flags = null
 	grind_sound = 'sound/machines/juicer.ogg'
 	blacklisted_types = list(/obj/item/stack/material)
 	bag_whitelist = list(/obj/item/weapon/storage/plants)

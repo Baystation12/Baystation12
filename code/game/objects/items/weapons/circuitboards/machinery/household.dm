@@ -93,3 +93,14 @@
 		var/obj/machinery/vending/vendor = path
 		var/base_type = initial(vendor.base_type) || path
 		. |= base_type
+
+/obj/item/weapon/stock_parts/circuitboard/juicer
+	name = T_BOARD("blender")
+	build_path = /obj/machinery/reagentgrinder/juicer
+	board_type = "machine"
+	origin_tech = list(TECH_BIO = 1, TECH_MATERIAL = 2, TECH_ENGINEERING = 1)
+	req_components = list(
+		/obj/item/weapon/stock_parts/matter_bin = 1,
+		/obj/item/weapon/stock_parts/manipulator = 1,
+		/obj/item/weapon/stock_parts/micro_laser = 1,
+		/obj/item/weapon/stock_parts/capacitor = 1)

@@ -34,3 +34,15 @@
 /obj/item/weapon/stock_parts/circuitboard/sublimator/sauna
 	name = T_BOARD("sauna sublimator")
 	build_path = /obj/machinery/portable_atmospherics/reagent_sublimator/sauna
+
+/obj/item/weapon/stock_parts/circuitboard/reagentgrinder
+	name = T_BOARD("reagent grinder")
+	build_path = /obj/machinery/reagentgrinder
+	board_type = "machine"
+	origin_tech = list(TECH_BIO = 2, TECH_MATERIAL = 3, TECH_ENGINEERING = 3)
+	req_components = list(
+		/obj/item/weapon/stock_parts/matter_bin = 3,
+		/obj/item/weapon/stock_parts/manipulator = 2,
+		/obj/item/weapon/stock_parts/micro_laser = 2,
+		/obj/item/weapon/stock_parts/capacitor = 1
+	)
