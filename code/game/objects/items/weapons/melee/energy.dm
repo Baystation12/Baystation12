@@ -89,6 +89,7 @@
  * Energy Axe
  */
 /obj/item/weapon/melee/energy/axe
+	icon = 'icons/obj/weapons/melee_energy.dmi'
 	name = "energy axe"
 	desc = "An energised battle axe."
 	icon_state = "axe0"
@@ -118,6 +119,7 @@
  * Energy Sword
  */
 /obj/item/weapon/melee/energy/sword
+	icon = 'icons/obj/weapons/melee_energy.dmi'
 	name = "energy sword"
 	desc = "May the force be within you."
 	icon_state = "sword0"
@@ -175,6 +177,7 @@
 	return active ? ..() : 0
 
 /obj/item/weapon/melee/energy/sword/pirate
+	icon = 'icons/obj/weapons/melee_energy.dmi'
 	name = "energy cutlass"
 	desc = "Arrrr matey."
 	icon_state = "cutlass0"
@@ -186,6 +189,7 @@
  */
 
 /obj/item/weapon/melee/energy/blade
+	icon = 'icons/obj/weapons/melee_energy.dmi'
 	name = "energy blade"
 	desc = "A concentrated beam of energy in the shape of a blade. Very stylish... and lethal."
 	icon_state = "blade"
@@ -247,6 +251,7 @@
 		QDEL_IN(src, 0)
 
 /obj/item/weapon/melee/energy/machete
+	icon = 'icons/obj/weapons/melee_energy.dmi'
 	name = "energy machete"
 	desc = "A machete handle that extends out into a long, purple machete blade. It appears to be Skrellian in origin."
 	icon_state = "machete_skrell_x"

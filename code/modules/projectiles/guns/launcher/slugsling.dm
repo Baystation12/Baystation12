@@ -3,6 +3,7 @@
 	desc = "A pulsing, disgusting door to new life."
 	force = 1
 	throwforce = 6
+	icon = 'icons/obj/weapons/other.dmi'
 	icon_state = "slugegg"
 	var/break_on_impact = 1 //There are two modes to the eggs.
 							//One breaks the egg on hit,

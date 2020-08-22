@@ -1,6 +1,7 @@
 /obj/item/weapon/material/star
 	name = "shuriken"
 	desc = "A sharp, perfectly weighted piece of metal."
+	icon = 'icons/obj/weapons/other.dmi'
 	icon_state = "star"
 	randpixel = 12
 	max_force = 10

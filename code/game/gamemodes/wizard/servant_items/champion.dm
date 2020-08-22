@@ -54,7 +54,7 @@
 /obj/item/weapon/excalibur
 	name = "champion's blade"
 	desc = "<i>For at his belt hung Excalibur, the finest sword that there was, which sliced through iron as through wood.</i>"
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/weapons/melee_physical.dmi'
 	icon_state = "excalibur"
 	item_icons = list(
 					slot_l_hand_str = 'icons/mob/onmob/items/lefthand.dmi',

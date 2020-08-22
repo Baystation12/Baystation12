@@ -1,6 +1,7 @@
 /obj/item/weapon/material/sword
 	name = "claymore"
 	desc = "What are you standing around staring at this for? Get to killing!"
+	icon = 'icons/obj/weapons/melee_physical.dmi'
 	icon_state = "claymore"
 	item_state = "claymore"
 	slot_flags = SLOT_BELT
@@ -27,6 +28,7 @@
 /obj/item/weapon/material/sword/katana
 	name = "katana"
 	desc = "Woefully underpowered in D20. This one looks pretty sharp."
+	icon = 'icons/obj/weapons/melee_physical.dmi'
 	icon_state = "katana"
 	item_state = "katana"
 	furniture_icon = "katana_handle"
