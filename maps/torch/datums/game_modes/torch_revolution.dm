@@ -38,6 +38,10 @@
 	victory_text = "The heads of staff remained at their posts; the mission will continue as ordered."
 	loss_text = "The heads of staff could not contain the mutiny, and the Torch is now heading home."
 
+	blacklisted_jobs = list(/datum/job/ai, /datum/job/cyborg, /datum/job/submap)
+	restricted_jobs = list(/datum/job/captain, /datum/job/hop, /datum/job/hos, /datum/job/chief_engineer, /datum/job/rd, /datum/job/cmo)
+	protected_jobs = list(/datum/job/officer)
+
 /datum/antagonist/loyalists/Initialize()
 	..()
 	welcome_text = "The SEV Torch, the most ambitious and prestigious human research project ever established, is now under threat from her very crew as a result of the Expeditionary Corps' brass decision \
