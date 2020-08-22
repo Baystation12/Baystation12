@@ -120,7 +120,7 @@ var/list/outfits_decls_by_type_
 
 	if(!(OUTFIT_ADJUSTMENT_SKIP_POST_EQUIP & equip_adjustments))
 		post_equip(H)
-	H.regenerate_icons()
+	H.update_icons()
 	if(W) // We set ID info last to ensure the ID photo is as correct as possible.
 		H.set_id_info(W)
 	return 1
