@@ -2,36 +2,6 @@
 // Other harvested materials from plants (that are not food)
 // **********************
 
-/obj/item/weapon/grown // Grown weapons
-	name = "grown_weapon"
-	icon = 'icons/obj/weapons.dmi'
-	var/plantname
-	var/potency = 1
-
-/obj/item/weapon/grown/New(newloc,planttype)
-
-	..()
-
-	var/datum/reagents/R = new/datum/reagents(50)
-	reagents = R
-	R.my_atom = src
-
-	//Handle some post-spawn var stuff.
-	if(planttype)
-		plantname = planttype
-		var/datum/seed/S = SSplants.seeds[plantname]
-		if(!S || !S.chems)
-			return
-
-		potency = S.get_trait(TRAIT_POTENCY)
-
-		for(var/rid in S.chems)
-			var/list/reagent_data = S.chems[rid]
-			var/rtotal = reagent_data[1]
-			if(reagent_data.len > 1 && potency > 0)
-				rtotal += round(potency/reagent_data[2])
-			reagents.add_reagent(rid,max(1,rtotal))
-
 /obj/item/weapon/bananapeel
 	name = "banana peel"
 	desc = "A peel from a banana."
