@@ -9,7 +9,6 @@
 	printout_color = "#eeffe8"
 	var/global/list/valid_targets = list(
 		/obj/item/weapon/reagent_containers/food/snacks/grown,
-		/obj/item/weapon/grown,
 		/obj/machinery/portable_atmospherics/hydroponics,
 		/obj/item/seeds
 	)
@@ -29,11 +28,6 @@
 	var/datum/reagents/grown_reagents
 	if(istype(target,/obj/item/weapon/reagent_containers/food/snacks/grown))
 		var/obj/item/weapon/reagent_containers/food/snacks/grown/G = target
-		grown_seed = SSplants.seeds[G.plantname]
-		grown_reagents = G.reagents
-
-	else if(istype(target,/obj/item/weapon/grown))
-		var/obj/item/weapon/grown/G = target
 		grown_seed = SSplants.seeds[G.plantname]
 		grown_reagents = G.reagents
 

@@ -105,7 +105,6 @@
 	can_hold = list(
 		/obj/item/weapon/reagent_containers/glass,
 		/obj/item/seeds,
-		/obj/item/weapon/grown,
 		/obj/item/slime_extract,
 		/obj/item/weapon/disk/botany
 	)
@@ -118,7 +117,6 @@
 		/obj/item/weapon/reagent_containers/glass,
 		/obj/item/weapon/reagent_containers/food,
 		/obj/item/seeds,
-		/obj/item/weapon/grown,
 		/obj/item/weapon/glass_extra
 	)
 

@@ -373,7 +373,7 @@
 
 /obj/machinery/microwave/proc/has_extra_item()
 	for (var/obj/O in ingredients) // do not use src or contents unless you want to cook your own components
-		if (!istype(O, /obj/item/weapon/reagent_containers/food) && !istype(O, /obj/item/weapon/grown))
+		if (!istype(O, /obj/item/weapon/reagent_containers/food))
 			return TRUE
 	return FALSE
 
