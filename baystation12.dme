@@ -2113,6 +2113,7 @@
 #include "code\modules\mob\living\chorus\buildings\growth\tier_one.dm"
 #include "code\modules\mob\living\chorus\buildings\growth\tier_three.dm"
 #include "code\modules\mob\living\chorus\buildings\growth\tier_two.dm"
+#include "code\modules\mob\living\chorus\buildings\growth\tier_one\biter.dm"
 #include "code\modules\mob\living\chorus\forms\form_datum.dm"
 #include "code\modules\mob\living\chorus\forms\growth.dm"
 #include "code\modules\mob\living\chorus\resources\chorus_resource.dm"

@@ -58,3 +58,6 @@
 
 /obj/structure/chorus/bullet_act(var/obj/item/projectile/P)
 	take_damage(P.damage)
+
+/obj/structure/chorus/proc/user_is_cultist(mob/living/L)
+	return (owner && istype(L) && owner.get_implant(L))

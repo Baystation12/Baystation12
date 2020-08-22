@@ -23,7 +23,7 @@
 			/datum/chorus_building/muscular_coat,
 			/datum/chorus_building/set_to_turf/growth/maw,
 			/datum/chorus_building/set_to_turf/growth/tendril,
-			/datum/chorus_building/set_to_turf/growth/bitter,
+			/datum/chorus_building/set_to_turf/growth/biter,
 			/datum/chorus_building/set_to_turf/growth/converter,
 			/datum/chorus_building/set_to_turf/growth/tendril_thorned,
 			/datum/chorus_building/set_to_turf/growth/bone_shooter,
