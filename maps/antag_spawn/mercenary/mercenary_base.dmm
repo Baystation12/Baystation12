@@ -218,9 +218,9 @@
 	},
 /obj/machinery/turretid/lethal{
 	ailock = 1;
-	enabled = 0;
 	check_arrest = 0;
 	check_records = 0;
+	enabled = 0;
 	pixel_y = 32;
 	req_access = list("ACCESS_SYNDICATE")
 	},
@@ -1597,8 +1597,9 @@
 	dir = 8;
 	icon_state = "handrail"
 	},
-/obj/effect/floor_decal/industrial/shutoff,
-/obj/machinery/atmospherics/valve/shutoff/fuel,
+/obj/machinery/atmospherics/valve/shutoff/fuel{
+	level = 2
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cw" = (
@@ -1663,8 +1664,9 @@
 	dir = 4;
 	icon_state = "handrail"
 	},
-/obj/effect/floor_decal/industrial/shutoff,
-/obj/machinery/atmospherics/valve/shutoff/fuel,
+/obj/machinery/atmospherics/valve/shutoff/fuel{
+	level = 2
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cC" = (
