@@ -111,6 +111,7 @@
 	/obj/item/weapon/pickaxe/plasma_drill = 1,
 	/obj/item/weapon/plastique/covenant = 4,
 	/obj/item/weapon/armor_patch/cov = 6,
+	/obj/item/weapon/armor_patch/mini = 8,
 	/obj/item/weapon/pinpointer/artifact = 3,
 	/obj/item/flight_item/covenant_pack = 1,
 	/obj/item/dumb_ai_chip/cov = 2
@@ -140,6 +141,7 @@
 	/obj/item/weapon/storage/belt/covenant_ammo = 5,
 	/obj/item/weapon/storage/belt/utility/full = 5,
 	/obj/item/weapon/armor_patch/cov = 6,
+	/obj/item/weapon/armor_patch/mini = 8,
 	/obj/item/weapon/pinpointer/artifact = 1,
 	/obj/item/flight_item/covenant_pack = 2,
 	/obj/item/dumb_ai_chip/cov = 2
@@ -169,6 +171,7 @@
 	/obj/item/weapon/pickaxe/plasma_drill = 1,
 	/obj/item/weapon/plastique/covenant = 4,
 	/obj/item/weapon/armor_patch/cov = 6,
+	/obj/item/weapon/armor_patch/mini = 8,
 	/obj/item/clothing/gloves/shield_gauntlet/kigyar = 4,
 	/obj/item/flight_item/covenant_pack = 1,
 	/obj/item/weapon/pinpointer/artifact = 2
@@ -209,6 +212,7 @@
 	/obj/item/weapon/pickaxe/plasma_drill = 1,
 	/obj/item/weapon/plastique/covenant = 4,
 	/obj/item/weapon/armor_patch/cov = 12,
+	/obj/item/weapon/armor_patch/mini = 16,
 	/obj/item/weapon/pinpointer/artifact = 1
 	)
 
@@ -258,6 +262,7 @@
 	/obj/item/clothing/accessory/storage/bandolier/covenant = 4,
 	/obj/item/weapon/plastique/covenant = 4,
 	/obj/item/weapon/armor_patch/cov = 16,
+	/obj/item/weapon/armor_patch/mini = 20,
 	/obj/item/weapon/pinpointer/artifact = 1
 	)
 
