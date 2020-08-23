@@ -140,5 +140,6 @@
 		/obj/item/weapon/magnetic_ammo,
 		/obj/item/ammo_magazine,
 		/obj/item/weapon/grenade/smokebomb
+		/obj/item/weapon/armor_patch/mini,
 	)
 

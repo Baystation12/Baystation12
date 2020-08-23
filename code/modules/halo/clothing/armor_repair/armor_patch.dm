@@ -5,7 +5,7 @@
 	desc ="A small, simple, limited-use kit that allows armor to be patched up, restoring a portion of the protection it usually affords."
 	icon = 'code/modules/halo/clothing/armor_repair/armor_repair_sprites.dmi'
 	icon_state = "armor_patch"
-	w_class = ITEM_SIZE_SMALL
+	w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_BELT | SLOT_POCKET
 	var/repair_supplies = 30 //The amount of armor damage this patch can repair
 
@@ -70,11 +70,8 @@
 /obj/item/weapon/armor_patch/mini
 	name = "Miniature Armor Repair Kit"
 	desc ="A small, simple, limited-use kit that allows armor to be patched up, restoring a portion of the protection it usually affords. Reduced to the bare essentials of repair to fit on bandoliers and smaller such storage items."
-	w_class = ITEM_SIZE_TINY
+	w_class = ITEM_SIZE_SMALL
 	repair_supplies = 10
 
-/obj/item/weapon/armor_patch/cov/mini
-	name = "Miniature Armor Repair Kit"
-	desc ="A small, simple, limited-use kit that allows armor to be patched up, restoring a portion of the protection it usually affords. Reduced to the bare essentials of repair to fit on bandoliers and smaller such storage items."
-	w_class = ITEM_SIZE_TINY
-	repair_supplies = 10
+/obj/item/weapon/armor_patch/mini/cov
+	icon_state = "armor_patch_cov"
