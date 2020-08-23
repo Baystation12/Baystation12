@@ -1,0 +1,7 @@
+author: "NullSnapshot"
+delete-after: True
+changes: 
+  - tweak: "Vitals monitor beeping now works again"
+  - rscadd: "Vitals monitor can now be tied to an operating table by click-dragging the monitor onto the OR table."
+  - rscadd: "Vitals monitor now has an annunciator that you can toggle. It will periodically let you know if things are going bad with your patient."
+  - rscadd: "Adds codex entry for vitals monitor."
