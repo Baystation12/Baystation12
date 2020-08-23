@@ -29,6 +29,7 @@
 
 	var/descriptor = "tiles"
 	var/flags
+	var/remove_timer
 	var/can_paint
 	var/can_engrave = TRUE
 
@@ -380,8 +381,10 @@
 	name = "flesh"
 	icon = 'icons/turf/flooring/flesh.dmi'
 	icon_base = "flesh"
+	descriptor = "flesh"
 	has_base_range = 3
 	damage_temperature = T0C + 100
 	build_type = null
 	flags = TURF_ACID_IMMUNE | TURF_REMOVE_CROWBAR
+	remove_timer = 60
 	can_engrave = FALSE
