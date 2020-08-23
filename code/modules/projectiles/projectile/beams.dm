@@ -21,7 +21,7 @@
 
 /obj/item/projectile/beam/practice
 	fire_sound = 'sound/weapons/Taser.ogg'
-	damage = 2
+	damage = 0
 	eyeblur = 2
 
 /obj/item/projectile/beam/smalllaser
