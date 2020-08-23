@@ -286,6 +286,7 @@
 	icon_state ="covendor" // SPRITES
 	icon_deny = "covendor-deny"
 	products = list(
+	/obj/item/weapon/storage/box/syringes = 2,
 	/obj/item/bodybag/cryobag/covenant = 3,
 	/obj/item/weapon/storage/firstaid/unsc/cov = 10,
 	/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline = 10,

@@ -331,7 +331,9 @@
 	name = "UNSC Medical Vendor"
 	desc = "A vendor that supplies medical equipment"
 	req_access = list(access_unsc)
-	products = list(/obj/item/bodybag/cryobag = 3,
+	products = list(
+					/obj/item/weapon/storage/box/syringes = 2,
+					/obj/item/bodybag/cryobag = 3,
 					/obj/item/weapon/storage/firstaid/unsc = 10,
 					/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline = 10,
 					/obj/item/weapon/storage/firstaid/fire = 2,
