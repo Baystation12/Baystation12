@@ -1,0 +1,22 @@
+<h3>Command Uplink</h3>
+{{if data.uservalid == 0}}
+	<p style'color:red'>USER AUTHORISATION SCAN FAILED</p>
+{{else}}
+	{{if data.locked_seconds != 0}}
+		<p>{{:data.locked_message}} Please wait..<br>ETA: {{data.locked_seconds}}</p>
+	{{else}}
+		{{for data.options}}
+			{{if value.have_rank == 1}}
+				<div>
+				{{:helper.link( value.name,'',{'selected' : value.name} ) }}
+				</div>
+				<br>
+				<div>
+				{{:value.desc}}
+				<br>
+				{{:value.cooldown}}
+				</div>
+			{{/if}}
+		{{/for}}
+	{{/if}}
+{{/if}}

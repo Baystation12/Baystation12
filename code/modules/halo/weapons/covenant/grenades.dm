@@ -1,3 +1,4 @@
+#define ADHERENCE_TIME 1.0
 
 /obj/item/weapon/grenade/plasma
 	name = "Type-1 Antipersonnel Grenade"
@@ -5,8 +6,9 @@
 	icon = 'code/modules/halo/weapons/icons/Covenant Weapons.dmi'
 	icon_state = "plasmagrenade"
 	throw_speed = 0 //sleep each tick
-	det_time = 40 //Grenade has an adherence delay, so this is to assist in non-adhering usage.
+	det_time = 50
 	can_adjust_timer = 0
+	starttimer_on_hit = 0
 	arm_sound = 'code/modules/halo/sounds/Plasmanadethrow.ogg'
 	alt_explosion_range = 1
 	alt_explosion_damage_max = 55
@@ -37,7 +39,7 @@
 	var/mob/living/L = A
 	if(!istype(L))
 		return
-	if(world.time - activated_at <= 1.5 SECONDS)
+	if(world.time - activated_at <= ADHERENCE_TIME)
 		A.visible_message("<span class = 'warning'>[src.name] bounces off of [L.name], having not reached full adherance temperature.</span>")
 	else
 		L.embed(src)
