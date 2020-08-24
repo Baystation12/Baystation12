@@ -87,6 +87,8 @@
 			return global.SSinactivity;
 		if("SSjobs")
 			return global.SSjobs;
+		if("SSkv")
+			return global.SSkv;
 		if("SSlighting")
 			return global.SSlighting;
 		if("SSmachines")
@@ -998,6 +1000,8 @@
 			global.SSinactivity=newval;
 		if("SSjobs")
 			global.SSjobs=newval;
+		if("SSkv")
+			global.SSkv=newval;
 		if("SSlighting")
 			global.SSlighting=newval;
 		if("SSmachines")
@@ -1865,6 +1869,7 @@
 	"SSicon_update",
 	"SSinactivity",
 	"SSjobs",
+	"SSkv",
 	"SSlighting",
 	"SSmachines",
 	"SSmapping",
