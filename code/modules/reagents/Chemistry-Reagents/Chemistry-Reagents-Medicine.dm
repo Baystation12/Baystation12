@@ -554,7 +554,23 @@
 	M.radiation = max(M.radiation - 70 * removed, 0)
 	M.adjustToxLoss(-10 * removed)
 	if(prob(60))
-		M.take_organ_damage(4 * removed, 0)
+		if(ishuman(M))
+			var/mob/living/carbon/human/H = M
+			var/list/obj/item/organ/external/parts = H.get_damageable_organs()
+
+			for(var/obj/item/organ/external/org in parts)
+				if (BP_IS_ROBOTIC(org)) //remove prosthetic limbs from the list so we can't damage them
+					parts.Remove(org)
+
+			if(!parts.len)
+				return
+
+			var/obj/item/organ/external/picked = pick(parts)
+
+			if(picked.take_external_damage(4 * removed, 0, 0))
+				BITSET(H.hud_updateflag, HEALTH_HUD)
+
+			H.updatehealth()
 
 /datum/reagent/spaceacillin
 	name = "Spaceacillin"
