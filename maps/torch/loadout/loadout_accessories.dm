@@ -289,10 +289,3 @@
 	pouches["green large armor pouches"] = /obj/item/clothing/accessory/storage/pouches/large/green
 	pouches["tan large armor pouches"] = /obj/item/clothing/accessory/storage/pouches/large/tan
 	gear_tweaks += new/datum/gear_tweak/path(pouches)
-
-/datum/gear/passport
-	display_name = "passports selection"
-	description = "A selection of passports."
-	path = /obj/item/weapon/passport
-	flags = GEAR_HAS_SUBTYPE_SELECTION
-	custom_setup_proc = /obj/item/weapon/passport/proc/set_info
