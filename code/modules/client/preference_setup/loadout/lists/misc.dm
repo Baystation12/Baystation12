@@ -123,7 +123,14 @@
 	description = "A travel visa issued by the Sol Central Government for the purpose of recreation."
 	path = /obj/item/weapon/paper/travelvisa
 
-/datum/gear/mirror/
+/datum/gear/passport
+	display_name = "passports selection"
+	description = "A selection of passports."
+	path = /obj/item/weapon/passport
+	flags = GEAR_HAS_SUBTYPE_SELECTION
+	custom_setup_proc = /obj/item/weapon/passport/proc/set_info
+
+/datum/gear/mirror
 	display_name = "handheld mirror"
 	sort_category = "Cosmetics"
 	path = /obj/item/weapon/mirror
