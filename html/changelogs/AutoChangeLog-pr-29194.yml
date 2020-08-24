@@ -1,0 +1,4 @@
+author: "Hubblenaut"
+delete-after: True
+changes: 
+  - tweak: "Mobs will no longer accumulate radiation in areas with green geiger readings."
