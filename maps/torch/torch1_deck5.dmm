@@ -1016,14 +1016,14 @@
 /area/guppy_hangar/start)
 "cg" = (
 /obj/effect/floor_decal/techfloor,
-/obj/machinery/atmospherics/valve/open{
-	open = 0
-	},
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4;
 	icon_state = "intact"
 	},
 /obj/effect/floor_decal/industrial/warning,
+/obj/machinery/atmospherics/valve/open{
+	open = 0
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
 "ch" = (
@@ -2269,11 +2269,11 @@
 /turf/simulated/wall/prepainted,
 /area/vacant/infirmary)
 "es" = (
-/obj/machinery/atmospherics/binary/pump,
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
 	dir = 4
 	},
 /obj/random_multi/single_item/runtime,
+/obj/machinery/atmospherics/binary/pump,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/atmos)
 "et" = (
