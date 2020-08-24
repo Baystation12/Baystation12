@@ -610,8 +610,7 @@
 /area/scavver/yachtup)
 "gk" = (
 /obj/effect/floor_decal/corner/lightgrey/mono,
-/obj/machinery/suit_storage_unit/engineering/salvage/bearcat{
-	req_access = list()
+/obj/machinery/suit_storage_unit/engineering/salvage/gantry{
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/scavver/hab)
@@ -654,8 +653,7 @@
 	req_access = list()
 	},
 /obj/effect/floor_decal/corner/lightgrey/mono,
-/obj/machinery/suit_storage_unit/engineering/salvage/bearcat{
-	req_access = list()
+/obj/machinery/suit_storage_unit/engineering/salvage/gantry{
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/scavver/hab)
@@ -1584,8 +1582,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/machinery/suit_storage_unit/engineering/salvage/bearcat{
-	req_access = list()
+/obj/machinery/suit_storage_unit/engineering/salvage/gantry/med{
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/scavver/hab)
@@ -3759,8 +3756,7 @@
 "Pk" = (
 /obj/effect/floor_decal/corner/lightgrey/mono,
 /obj/machinery/light,
-/obj/machinery/suit_storage_unit/engineering/salvage/bearcat{
-	req_access = list()
+/obj/machinery/suit_storage_unit/engineering/salvage/gantry/pilot{
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/scavver/hab)

@@ -144,3 +144,21 @@
 	_input_on = TRUE
 	_output_on = TRUE
 
+/obj/machinery/suit_storage_unit/engineering/salvage/gantry
+	name = "Salvage Engineering Voidsuit Storage Unit"
+	suit= /obj/item/clothing/suit/space/void/engineering/salvage
+	helmet = /obj/item/clothing/head/helmet/space/void/engineering/salvage/engi
+	mask = /obj/item/clothing/mask/breath
+	req_access = list()
+
+/obj/machinery/suit_storage_unit/engineering/salvage/gantry/med
+	name = "Salvage Medical Voidsuit Storage Unit"
+	suit= /obj/item/clothing/suit/space/void/engineering/salvage
+	helmet = /obj/item/clothing/head/helmet/space/void/engineering/salvage/med
+	mask = /obj/item/clothing/mask/breath
+
+/obj/machinery/suit_storage_unit/engineering/salvage/gantry/pilot
+	name = "Salvage Pilot Voidsuit Storage Unit"
+	suit= /obj/item/clothing/suit/space/void/engineering/salvage
+	helmet = /obj/item/clothing/head/helmet/space/void/engineering/salvage/pilot
+	mask = /obj/item/clothing/mask/breath

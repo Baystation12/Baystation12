@@ -379,6 +379,24 @@
 		rad = ARMOR_RAD_RESISTANT
 		)
 
+/obj/item/clothing/head/helmet/space/void/engineering/salvage/engi
+	name = "engineering salvage voidsuit helmet"
+	desc = "A heavily modified salvage voidsuit helmet. It has been fitted with radiation-resistant plating, and an engineer paintjob."
+	icon_state = "rig0-salvage-engi"
+	item_state = "salvage_helm-engi"
+
+/obj/item/clothing/head/helmet/space/void/engineering/salvage/med
+	name = "medical salvage voidsuit helmet"
+	desc = "A heavily modified salvage voidsuit helmet. It has been fitted with radiation-resistant plating, and a medical paintjob."
+	icon_state = "rig0-salvage-med"
+	item_state = "salvage_helm-med"
+
+/obj/item/clothing/head/helmet/space/void/engineering/salvage/pilot
+	name = "pilot salvage voidsuit helmet"
+	desc = "A heavily modified salvage voidsuit helmet. It has been fitted with radiation-resistant plating, and a pilot paintjob."
+	icon_state = "rig0-salvage-pilot"
+	item_state = "salvage_helm-pilot"
+
 /obj/item/clothing/suit/space/void/engineering/salvage
 	name = "salvage voidsuit"
 	desc = "A hand-me-down salvage voidsuit. It has obviously had a lot of repair work done to its radiation shielding."
