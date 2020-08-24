@@ -9767,6 +9767,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/random_multi/single_item/summarydocuments/sec,
 /turf/simulated/floor/tiled/dark,
 /area/security/bo)
 "aFS" = (
@@ -21280,7 +21281,6 @@
 /area/assembly/robotics/office)
 "kiR" = (
 /obj/structure/table/steel,
-/obj/item/weapon/book/manual/sol_sop,
 /obj/machinery/recharger,
 /obj/effect/floor_decal/corner/red/mono,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -21290,6 +21290,8 @@
 	pixel_x = -23;
 	pixel_y = -3
 	},
+/obj/item/weapon/book/manual/sol_sop,
+/obj/random_multi/single_item/summarydocuments/sec,
 /turf/simulated/floor/tiled/monotile,
 /area/security/locker)
 "kku" = (
@@ -24448,9 +24450,8 @@
 /area/rnd/office)
 "ojb" = (
 /obj/structure/table/standard,
-/obj/item/device/taperecorder,
-/obj/item/device/tape,
 /obj/effect/floor_decal/corner/research/mono,
+/obj/random_multi/single_item/summarydocuments/sci,
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/office)
 "okp" = (
@@ -29403,6 +29404,8 @@
 	icon_state = "alarm0";
 	pixel_y = -22
 	},
+/obj/item/device/taperecorder,
+/obj/item/device/tape,
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/office)
 "tRX" = (
@@ -30856,6 +30859,7 @@
 	pixel_y = 5
 	},
 /obj/structure/table/glass,
+/obj/random_multi/single_item/summarydocuments/med,
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/physicianoffice)
 "xBk" = (
