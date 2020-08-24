@@ -417,7 +417,7 @@
 
 		if(istype(projectile,/obj/item/projectile))
 			var/obj/item/projectile/proj_obj = projectile
-			proj_obj.target_elevation = last_elevation
+			proj_obj.change_elevation(last_elevation)
 			proj_obj.permutated += rounds_nosuppress //Stops people in a vehicle from being suppressed by their own vehicle's shots.
 
 		if(user.loc != targloc) //This should stop people being able to just click on someone for free autotracking.
