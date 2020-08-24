@@ -144,23 +144,24 @@
 	shared Booster genotype is extremely unstable and liable for rapid, apparently random change, \
 	but is certainly both unique and remarkable in its ability to cope with the extremes that the \
 	Universe can throw at it."
-	var/list/mods = list()
 
 #define MOD_BASE     0.85
 #define MOD_VARIANCE 0.35
+
 /datum/species/human/booster/proc/get_mod(var/mob/living/carbon/human/booster, var/mod_type)
 	if(istype(booster) && !booster.isSynthetic())
-		var/mob_ref = booster.ckey || "\ref[booster]"
-		if(!islist(mods[mob_ref]))
-			var/list/new_mods = list()
-			new_mods["brute"] =     MOD_BASE + (MOD_VARIANCE * rand())
-			new_mods["burn"] =      MOD_BASE + (MOD_VARIANCE * rand())
-			new_mods["toxins"] =    MOD_BASE + (MOD_VARIANCE * rand())
-			new_mods["radiation"] = MOD_BASE + (MOD_VARIANCE * rand())
-			new_mods["slowdown"] =  pick(-0.5, 0, 0.5)
-			mods[mob_ref] = new_mods
-		var/list/mob_mods = mods[mob_ref]
-		. = mob_mods[mod_type] || 1
+		var/list/mods = SSkv.Get("mods", booster)
+		if (!length(mods))
+			mods = list(
+				"brute" = MOD_BASE + rand() * MOD_VARIANCE,
+				"burn" = MOD_BASE + rand() * MOD_VARIANCE,
+				"toxins" = MOD_BASE + rand() * MOD_VARIANCE,
+				"radiation" = MOD_BASE + rand() * MOD_VARIANCE,
+				"slowdown" = pick(-0.5, 0, 0.5)
+			)
+			SSkv.Put("mods", mods, booster)
+		return mods[mod_type] || 1
+
 #undef MOD_BASE
 #undef MOD_VARIANCE
 
