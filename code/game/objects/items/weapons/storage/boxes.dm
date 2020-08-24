@@ -457,7 +457,7 @@
 	name = "\improper MRE"
 	desc = "Meal Ready-to-Eat. Meant to be consumed in the field."
 	icon_state = "mealpack"
-	w_class = 1
+	w_class = ITEM_SIZE_NORMAL
 	max_storage_space = 8
 	can_hold = list(/obj/item/weapon/reagent_containers/food/snacks/packaged_meal)
 
@@ -465,8 +465,6 @@
 	name = "\improper MRE 'Chicken'"
 	desc = "Meal Ready-to-Eat. Meant to be consumed in the field. This one is chicken flavored."
 	icon_state = "mealpack"
-	w_class = 1
-	max_storage_space = 8
 	can_hold = list(/obj/item/weapon/reagent_containers/food/snacks/packaged_meal)
 	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/Chicken,/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/Chickenside,/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/pretzels,/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/peanuts)
 
@@ -474,8 +472,6 @@
 	name = "\improper MRE 'Pizza'"
 	desc = "Meal Ready-to-Eat. Meant to be consumed in the field. This one is pizza flavored."
 	icon_state = "mealpack"
-	w_class = 1
-	max_storage_space = 8
 	can_hold = list(/obj/item/weapon/reagent_containers/food/snacks/packaged_meal)
 	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/Pizza,/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/Spaghettiside,/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/meatballs,/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/sugarcookie)
 
@@ -483,7 +479,5 @@
 	name = "\improper MRE 'Spaghetti'"
 	desc = "Meal Ready-to-Eat. Meant to be consumed in the field. This one is spaghetti flavored."
 	icon_state = "mealpack"
-	w_class = 1
-	max_storage_space = 8
 	can_hold = list(/obj/item/weapon/reagent_containers/food/snacks/packaged_meal)
 	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/Spaghetti,/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/Spaghettiside,/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/pretzels,/obj/item/weapon/reagent_containers/food/snacks/packaged_meal/cocobar)

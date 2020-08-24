@@ -37,7 +37,8 @@
 					/obj/item/weapon/gun/projectile/m392_dmr = 5,
 					/obj/item/weapon/grenade/frag/m9_hedp = 5,
 					/obj/item/weapon/grenade/smokebomb = 5,
-					/obj/item/weapon/armor_patch = 5,
+					/obj/item/weapon/armor_patch = 8,
+					/obj/item/weapon/armor_patch/mini = 12,
 					/obj/item/drop_pod_beacon = 1)
 
 /obj/machinery/vending/armory/heavy // HEAVY WEAPONS
@@ -52,8 +53,7 @@
 					/obj/item/weapon/storage/box/spnkr = 2,
 					/obj/item/turret_deploy_kit/HMG = 1,
 					/obj/item/turret_deploy_kit/chaingun = 1,
-					/obj/item/weapon/plastique = 6,
-					/obj/item/weapon/armor_patch = 2)
+					/obj/item/weapon/plastique = 6)
 
 /obj/machinery/vending/armory/police
 	name = "Shell Vendor"
@@ -213,6 +213,7 @@
 					/obj/item/weapon/storage/firstaid/unsc = 6,
 					/obj/item/device/binoculars = 4,
 					/obj/item/weapon/armor_patch = 8,
+					/obj/item/weapon/armor_patch/mini = 12,
 					/obj/item/drop_pod_beacon = 3)
 
 /obj/machinery/vending/armory/spartanvend
@@ -331,7 +332,9 @@
 	name = "UNSC Medical Vendor"
 	desc = "A vendor that supplies medical equipment"
 	req_access = list(access_unsc)
-	products = list(/obj/item/bodybag/cryobag = 3,
+	products = list(
+					/obj/item/weapon/storage/box/syringes = 2,
+					/obj/item/bodybag/cryobag = 3,
 					/obj/item/weapon/storage/firstaid/unsc = 10,
 					/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline = 10,
 					/obj/item/weapon/storage/firstaid/fire = 2,
