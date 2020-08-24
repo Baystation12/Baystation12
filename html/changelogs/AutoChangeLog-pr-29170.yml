@@ -1,5 +1,0 @@
-author: "Hubblenaut"
-delete-after: True
-changes: 
-  - maptweak: "Slightly cleans up the positioning of shutoff valves."
-  - maptweak: "The waste pipe line is now separated by shutoff valves."

@@ -1,4 +1,0 @@
-author: "Spookerton"
-delete-after: True
-changes: 
-  - tweak: "Door no-access audio can only play every 5 seconds."
