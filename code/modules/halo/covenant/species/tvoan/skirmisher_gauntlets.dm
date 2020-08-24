@@ -64,5 +64,5 @@
 	name = "T\'Vaoan Champion shield gauntlets"
 	item_state = "championshield"
 	icon_state = "championglove"
-	shieldstrength = 90
-	totalshields = 90
+	shieldstrength = 60
+	totalshields = 60

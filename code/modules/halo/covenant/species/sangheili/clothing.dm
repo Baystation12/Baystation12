@@ -203,7 +203,7 @@
 	name = "Sangheili Combat Harness (Minor)"
 	icon_state = "minor_chest_obj"
 	item_state = "minor_chest"
-	totalshields = 210
+	totalshields = 150
 
 /obj/item/clothing/shoes/sangheili/minor
 	name = "Sanghelli Leg Armour (Minor)"
@@ -228,7 +228,7 @@
 	name = "Sangheili Combat Harness (Major)"
 	icon_state = "major_chest_obj"
 	item_state = "major_chest"
-	totalshields = 240
+	totalshields = 180
 
 /obj/item/clothing/shoes/sangheili/major
 	name = "Sanghelli Leg Armour (Major)"
@@ -253,7 +253,7 @@
 	name = "Sangheili Combat Harness (Honour Guard)"
 	icon_state = "honour_chest_obj"
 	item_state = "honour_chest"
-	totalshields = 270
+	totalshields = 210
 
 /obj/item/clothing/shoes/sangheili/honour_guard
 	name = "Sanghelli Leg Armour (Honour Guard)"
@@ -278,7 +278,7 @@
 	name = "Sangheili Combat Harness (Ultra)"
 	icon_state = "ultra_chest_obj"
 	item_state = "ultra_chest"
-	totalshields = 270
+	totalshields = 240
 
 /obj/item/clothing/shoes/sangheili/ultra
 	name = "Sanghelli Leg Armour (Ultra)"
@@ -303,7 +303,7 @@
 	name = "Sangheili Combat Harness (Zealot)"
 	icon_state = "zealot_chest_obj"
 	item_state = "zealot_chest"
-	totalshields = 300
+	totalshields = 270
 
 /obj/item/clothing/shoes/sangheili/zealot
 	name = "Sanghelli Leg Armour (Zealot)"
@@ -328,7 +328,7 @@
 	name = "Sangheili Combat Harness (Shipmaster)"
 	icon_state = "zealot_chest_obj"
 	item_state = "zealot_chest"
-	totalshields = 330
+	totalshields = 300
 
 /obj/item/clothing/shoes/sangheili/shipmaster
 	name = "Sanghelli Leg Armour (Shipmaster)"
@@ -353,7 +353,7 @@
 	name = "Sangheili Combat Harness (Spec-Ops)"
 	icon_state = "specops_chest_obj"
 	item_state = "specops_chest"
-	totalshields = 120
+	totalshields = 150
 	specials = list(/datum/armourspecials/shields,/datum/armourspecials/shieldmonitor/sangheili,/datum/armourspecials/cloaking)
 	action_button_name = "Toggle Active Camouflage"
 
@@ -390,7 +390,7 @@
 	desc = "A sealed. airtight Sangheili Combat Harness."
 	icon_state = "ranger_chest_obj"
 	item_state = "ranger_chest"
-	totalshields = 180
+	totalshields = 150
 	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL | AIRTIGHT
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
