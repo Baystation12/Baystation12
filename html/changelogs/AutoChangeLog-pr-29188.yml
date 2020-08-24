@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - tweak: "Senior officers and security cannot start as loyalists but can be converted, the same as mutineers."
