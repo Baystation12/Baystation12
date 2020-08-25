@@ -1,5 +1,0 @@
-author: "Albens"
-delete-after: True
-changes: 
-  - rscadd: "Gantry now has coloured salvage helmets to reflect the different jobs."
-  - tweak: "Gantry now respects loadout restrictions."
