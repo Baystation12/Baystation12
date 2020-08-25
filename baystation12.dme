@@ -1440,6 +1440,8 @@
 #include "code\modules\halo\chemicals\medicine.dm"
 #include "code\modules\halo\chemicals\recipes.dm"
 #include "code\modules\halo\chemicals\toxins.dm"
+#include "code\modules\halo\clothing\armorset_base.dm"
+#include "code\modules\halo\clothing\armorsets.dm"
 #include "code\modules\halo\clothing\armour_upgrade.dm"
 #include "code\modules\halo\clothing\civilian.dm"
 #include "code\modules\halo\clothing\closets.dm"
