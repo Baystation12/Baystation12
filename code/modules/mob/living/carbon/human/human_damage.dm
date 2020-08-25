@@ -278,17 +278,40 @@ In most cases it makes more sense to use apply_damage() instead! And make sure t
 //Damages ONE external organ, organ gets randomly selected from damagable ones.
 //It automatically updates damage overlays if necesary
 //It automatically updates health status
-/mob/living/carbon/human/take_organ_damage(var/brute, var/burn, var/sharp = 0, var/edge = 0)
-	var/list/obj/item/organ/external/parts = get_damageable_organs()
-	if(!parts.len)
+
+
+/mob/living/carbon/human/take_organ_damage(brute = 0, burn = 0, flags = 0)
+	if (!brute && !burn)
 		return
 
-	var/obj/item/organ/external/picked = pick(parts)
-	var/damage_flags = (sharp? DAM_SHARP : 0)|(edge? DAM_EDGE : 0)
+	var/list/obj/item/organ/external/organs = get_damageable_organs()
 
-	if(picked.take_external_damage(brute, burn, damage_flags))
+	if (flags & ORGAN_DAMAGE_FLESH_ONLY)
+		var/index = organs.len
+		while (index > 0)
+			if (BP_IS_ROBOTIC(organs[index]))
+				organs.Cut(index, index + 1)
+			--index
+
+	if (flags & ORGAN_DAMAGE_ROBOT_ONLY)
+		var/index = organs.len
+		while (index > 0)
+			if (!BP_IS_ROBOTIC(organs[index]))
+				organs.Cut(index, index + 1)
+			--index
+
+	if (!organs.len)
+		return
+
+	var/damage_flags = 0
+	if (flags & ORGAN_DAMAGE_SHARP)
+		damage_flags |= DAM_SHARP
+	if (flags & ORGAN_DAMAGE_EDGE)
+		damage_flags |= DAM_EDGE
+
+	var/obj/item/organ/external/organ = pick(organs)
+	if (organ.take_external_damage(brute, burn, damage_flags))
 		BITSET(hud_updateflag, HEALTH_HUD)
-
 	updatehealth()
 
 

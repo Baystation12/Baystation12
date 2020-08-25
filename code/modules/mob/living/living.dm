@@ -375,11 +375,12 @@ default behaviour is:
 	src.updatehealth()
 
 // damage ONE external organ, organ gets randomly selected from damaged ones.
-/mob/living/proc/take_organ_damage(var/brute, var/burn, var/emp=0)
-	if(status_flags & GODMODE)	return 0	//godmode
+/mob/living/proc/take_organ_damage(brute = 0, burn = 0, flags = 0)
+	if(status_flags & GODMODE || !brute && !burn)
+		return
 	adjustBruteLoss(brute)
 	adjustFireLoss(burn)
-	src.updatehealth()
+	updatehealth()
 
 // heal MANY external organs, in random order
 /mob/living/proc/heal_overall_damage(var/brute, var/burn)
