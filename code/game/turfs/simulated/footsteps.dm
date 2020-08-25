@@ -56,6 +56,9 @@
 	if((step_count % 3) && !has_gravity(src))
 		return
 
+	if(istype(move_intent, /decl/move_intent/creep)) //We don't make sounds if we're tiptoeing
+		return
+
 	var/turf/simulated/T = get_turf(src)
 	if(istype(T))
 		var/footsound = T.get_footstep_sound(src)
