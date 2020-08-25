@@ -3,6 +3,7 @@
 	w_class = ITEM_SIZE_HUGE
 	gender = PLURAL
 	color = COLOR_GUNMETAL
+	atom_flags = ATOM_FLAG_CAN_BE_PAINTED
 
 	var/on_mech_icon = 'icons/mecha/mech_parts.dmi'
 	var/exosuit_desc_string
@@ -17,7 +18,7 @@
 	matter = list(MATERIAL_STEEL = 15000, MATERIAL_PLASTIC = 1000, MATERIAL_OSMIUM = 500)
 	dir = SOUTH
 
-/obj/item/mech_component/proc/set_colour(new_colour)
+/obj/item/mech_component/set_color(new_colour)
 	var/last_colour = color
 	color = new_colour
 	return color != last_colour
@@ -160,7 +161,7 @@
 	if(user.do_skilled(10, SKILL_DEVICES , src, 0.6) && burn_damage)
 		if(QDELETED(CC) || QDELETED(src) || !CC.use(needed_amount))
 			return
-			
+
 		repair_burn_damage(25)
 		to_chat(user, SPAN_NOTICE("You mend the damage to \the [src]'s wiring."))
 		playsound(user.loc, 'sound/items/Deconstruct.ogg', 25, 1)

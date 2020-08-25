@@ -588,5 +588,8 @@ its easier to just keep the beam vertical.
 /atom/proc/get_color()
 	return color
 
+/atom/proc/set_color(var/color)
+	src.color = color
+
 /atom/proc/get_cell()
 	return

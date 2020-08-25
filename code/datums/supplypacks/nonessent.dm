@@ -4,7 +4,7 @@
 /decl/hierarchy/supply_pack/nonessent/painters
 	name = "Art - Painting Supplies"
 	contains = list(/obj/item/device/pipe_painter = 2,
-					/obj/item/device/floor_painter = 2,
+					/obj/item/device/paint_sprayer = 2,
 					/obj/item/device/cable_painter = 2)
 	cost = 10
 	containername = "painting supplies crate"

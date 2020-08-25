@@ -8,6 +8,7 @@
 	blocks_air = 1
 	thermal_conductivity = WALL_HEAT_TRANSFER_COEFFICIENT
 	heat_capacity = 312500 //a little over 5 cm thick , 312500 for 1 m by 2.5 m by 0.25 m plasteel wall
+	atom_flags = ATOM_FLAG_CAN_BE_PAINTED
 
 	var/damage = 0
 	var/damage_overlay = 0
@@ -285,6 +286,10 @@
 
 /turf/simulated/wall/get_color()
 	return paint_color
+
+/turf/simulated/wall/set_color(var/color)
+	paint_color = color
+	update_icon()
 
 /turf/simulated/wall/proc/CheckPenetration(var/base_chance, var/damage)
 	return round(damage/material.integrity*180)

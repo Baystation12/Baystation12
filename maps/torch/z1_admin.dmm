@@ -7475,7 +7475,7 @@
 "aKK" = (
 /obj/structure/table/rack,
 /obj/item/weapon/storage/box/lights/mixed,
-/obj/item/device/floor_painter,
+/obj/item/device/paint_sprayer,
 /turf/unsimulated/floor{
 	icon_state = "plating";
 	name = "plating"
@@ -10780,7 +10780,7 @@
 /obj/item/stack/material/steel{
 	amount = 10
 	},
-/obj/item/device/floor_painter,
+/obj/item/device/paint_sprayer,
 /turf/simulated/floor/plating,
 /area/merchant_station)
 "aVI" = (

@@ -195,7 +195,7 @@ Sells devices, odds and ends, and medical stuff
 								/obj/item/device/binoculars                = TRADER_THIS_TYPE,
 								/obj/item/device/cable_painter             = TRADER_THIS_TYPE,
 								/obj/item/device/flash                     = TRADER_THIS_TYPE,
-								/obj/item/device/floor_painter             = TRADER_THIS_TYPE,
+								/obj/item/device/paint_sprayer             = TRADER_THIS_TYPE,
 								/obj/item/device/multitool                 = TRADER_THIS_TYPE,
 								/obj/item/device/lightreplacer             = TRADER_THIS_TYPE,
 								/obj/item/device/megaphone                 = TRADER_THIS_TYPE,

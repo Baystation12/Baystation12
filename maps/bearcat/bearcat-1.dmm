@@ -1301,7 +1301,7 @@
 /obj/machinery/firealarm{
 	pixel_y = 24
 	},
-/obj/item/device/floor_painter,
+/obj/item/device/paint_sprayer,
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/storage)
 "dd" = (

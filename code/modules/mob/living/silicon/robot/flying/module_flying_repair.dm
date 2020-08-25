@@ -4,7 +4,7 @@
 	channels = list ("Engineering" = TRUE)
 	networks = list(NETWORK_ENGINEERING)
 	subsystems = list(
-		/datum/nano_module/power_monitor, 
+		/datum/nano_module/power_monitor,
 		/datum/nano_module/supermatter_monitor
 	)
 	sprites = list(
@@ -29,7 +29,7 @@
 		/obj/item/weapon/gripper/no_use/loader,
 		/obj/item/device/lightreplacer,
 		/obj/item/device/pipe_painter,
-		/obj/item/device/floor_painter,
+		/obj/item/device/paint_sprayer,
 		/obj/item/weapon/inflatable_dispenser/robot,
 		/obj/item/weapon/reagent_containers/spray/cleaner/drone,
 		/obj/item/inducer/borg,
