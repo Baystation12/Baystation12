@@ -24,7 +24,7 @@
 			var/mob/living/carbon/human/H = user
 			H.apply_damage(2*force, BRUTE, BP_HEAD)
 		else
-			user.take_organ_damage(2*force)
+			user.take_organ_damage(2*force, 0)
 		return
 	return ..()
 
@@ -84,7 +84,7 @@
 				var/mob/living/carbon/human/H = user
 				H.apply_damage(2*force, BRUTE, BP_HEAD)
 			else
-				user.take_organ_damage(2*force)
+				user.take_organ_damage(2*force, 0)
 			return
 		if(..())
 			//playsound(src.loc, "swing_hit", 50, 1, -1)

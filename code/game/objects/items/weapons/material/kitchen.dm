@@ -108,7 +108,7 @@
 /obj/item/weapon/material/kitchen/rollingpin/attack(mob/living/M as mob, mob/living/user as mob)
 	if ((MUTATION_CLUMSY in user.mutations) && prob(50) && user.unEquip(src))
 		to_chat(user, "<span class='warning'>\The [src] slips out of your hand and hits your head.</span>")
-		user.take_organ_damage(10)
+		user.take_organ_damage(10, 0)
 		user.Paralyse(2)
 		return
 	return ..()
