@@ -12,12 +12,12 @@
 	desc = "A specialized hardsuit rig control module issued to command staff of the Expeditionary Corps and their peers."
 	icon_state = "command_rig"
 	armor = list(
-		melee = ARMOR_MELEE_KNIVES, 
-		bullet = ARMOR_BALLISTIC_SMALL, 
-		laser = ARMOR_LASER_MINOR, 
-		energy = ARMOR_ENERGY_SMALL, 
-		bomb = ARMOR_BOMB_PADDED, 
-		bio = ARMOR_BIO_SHIELDED, 
+		melee = ARMOR_MELEE_KNIVES,
+		bullet = ARMOR_BALLISTIC_SMALL,
+		laser = ARMOR_LASER_MINOR,
+		energy = ARMOR_ENERGY_SMALL,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SMALL
 		)
 	online_slowdown = 0.50
@@ -77,12 +77,12 @@
 	desc = "A specialized hardsuit rig control module issued to high ranking officers of the Expeditionary Corps and their peers."
 	icon_state = "command_XO_rig"
 	armor = list(
-		melee = ARMOR_MELEE_KNIVES, 
-		bullet = ARMOR_BALLISTIC_SMALL, 
-		laser = ARMOR_LASER_MINOR, 
-		energy = ARMOR_ENERGY_SMALL, 
-		bomb = ARMOR_BOMB_PADDED, 
-		bio = ARMOR_BIO_SHIELDED, 
+		melee = ARMOR_MELEE_KNIVES,
+		bullet = ARMOR_BALLISTIC_SMALL,
+		laser = ARMOR_LASER_MINOR,
+		energy = ARMOR_ENERGY_SMALL,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SMALL
 		)
 
@@ -117,12 +117,12 @@
 	desc = "A specialized hardsuit rig control module issued to commanding officers of the Expeditionary Corps."
 	icon_state = "command_CO_rig"
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		bullet = ARMOR_BALLISTIC_PISTOL, 
-		laser = ARMOR_LASER_SMALL, 
-		energy = ARMOR_ENERGY_SMALL, 
-		bomb = ARMOR_BOMB_PADDED, 
-		bio = ARMOR_BIO_SHIELDED, 
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_PISTOL,
+		laser = ARMOR_LASER_SMALL,
+		energy = ARMOR_ENERGY_SMALL,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SMALL
 		)
 
@@ -200,12 +200,12 @@
 	desc = "A specialized hardsuit rig control module issued to ranking security officers of the Expeditionary Corps and their peers."
 	icon_state = "command_sec_rig"
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		bullet = ARMOR_BALLISTIC_PISTOL, 
-		laser = ARMOR_LASER_SMALL, 
-		energy = ARMOR_ENERGY_SMALL, 
-		bomb = ARMOR_BOMB_PADDED, 
-		bio = ARMOR_BIO_SHIELDED, 
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_PISTOL,
+		laser = ARMOR_LASER_SMALL,
+		energy = ARMOR_ENERGY_SMALL,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SMALL
 		)
 
@@ -246,12 +246,12 @@
 	desc = "A specialized hardsuit rig control module issued to ranking research officers of the Expeditionary Corps."
 	icon_state = "command_sci_rig"
 	armor = list(
-		melee = ARMOR_MELEE_KNIVES, 
-		bullet = ARMOR_BALLISTIC_SMALL, 
-		laser = ARMOR_LASER_MINOR, 
-		energy = ARMOR_ENERGY_STRONG, 
-		bomb = ARMOR_BOMB_RESISTANT, 
-		bio = ARMOR_BIO_SHIELDED, 
+		melee = ARMOR_MELEE_KNIVES,
+		bullet = ARMOR_BALLISTIC_SMALL,
+		laser = ARMOR_LASER_MINOR,
+		energy = ARMOR_ENERGY_STRONG,
+		bomb = ARMOR_BOMB_RESISTANT,
+		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SHIELDED
 		)
 
@@ -297,6 +297,9 @@
 		/obj/item/rig_module/grenade_launcher/light,
 		/obj/item/rig_module/cooling_unit)
 
+
+
+
 /*
 * EXPLORATION
 */
@@ -306,12 +309,12 @@
 	desc = "Expeditionary Corps' Exoplanet Exploration Armored Unit, A-Unit for short. Built for more hostile (and hungry) environments, it features additional armor and powered exoskeleton."
 	icon_state = "command_exp_rig"
 	armor = list(
-		melee = ARMOR_MELEE_MAJOR, 
-		bullet = ARMOR_BALLISTIC_SMALL, 
-		laser = ARMOR_LASER_SMALL, 
-		energy = ARMOR_ENERGY_RESISTANT, 
-		bomb = ARMOR_BOMB_MINOR, 
-		bio = ARMOR_BIO_SHIELDED, 
+		melee = ARMOR_MELEE_MAJOR,
+		bullet = ARMOR_BALLISTIC_SMALL,
+		laser = ARMOR_LASER_SMALL,
+		energy = ARMOR_ENERGY_RESISTANT,
+		bomb = ARMOR_BOMB_MINOR,
+		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SHIELDED
 		)
 
@@ -350,3 +353,72 @@
 
 /obj/item/clothing/head/helmet/space/rig/industrial
 	camera = /obj/machinery/camera/network/supply
+
+
+/*
+CHIEF ENGINEER
+*/
+
+/obj/item/weapon/rig/command/engineering
+	name = "engineering command HCM"
+	suit_type = "engineering command hardsuit"
+	desc = "A radiation-resistant hardsuit issued to ranking engineering officers of the Expeditionary Corps."
+	icon_state = "command_eng_rig"
+	armor = list(
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_SMALL,
+		laser = ARMOR_LASER_SMALL,
+		energy = ARMOR_ENERGY_SMALL,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SHIELDED,
+		rad = ARMOR_RAD_SHIELDED
+		)
+	online_slowdown = 0
+	offline_vision_restriction = TINT_HEAVY
+	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE // this is passed to the rig suit components when deployed, including the helmet.
+
+	chest_type = /obj/item/clothing/suit/space/rig/command/engineering
+	helm_type = /obj/item/clothing/head/helmet/space/rig/command/engineering
+	boot_type = /obj/item/clothing/shoes/magboots/rig/command/engineering
+	glove_type = /obj/item/clothing/gloves/rig/command/engineering
+
+	allowed = list(/obj/item/weapon/gun,
+				/obj/item/device/flashlight,
+				/obj/item/weapon/tank,
+				/obj/item/device/suit_cooling_unit,
+				/obj/item/weapon/storage/ore,
+				/obj/item/weapon/storage/toolbox,
+				/obj/item/weapon/storage/briefcase/inflatable,
+				/obj/item/weapon/inflatable_dispenser,
+				/obj/item/device/t_scanner,
+				/obj/item/weapon/pickaxe,
+				/obj/item/weapon/rcd)
+
+	req_access = list(access_ce)
+	max_pressure_protection = FIRESUIT_MAX_PRESSURE
+	min_pressure_protection = 0
+
+
+
+/obj/item/clothing/head/helmet/space/rig/command/engineering
+	icon_state = "command_eng_rig"
+
+/obj/item/clothing/suit/space/rig/command/engineering
+	icon_state = "command_eng_rig"
+
+/obj/item/clothing/shoes/magboots/rig/command/engineering
+
+/obj/item/clothing/gloves/rig/command/engineering
+	siemens_coefficient = 0
+
+/obj/item/weapon/rig/command/engineering/equipped
+	initial_modules = list(
+		/obj/item/rig_module/ai_container,
+		/obj/item/rig_module/maneuvering_jets,
+		/obj/item/rig_module/mounted/plasmacutter,
+		/obj/item/rig_module/device/rcd,
+		/obj/item/rig_module/device/flash,
+		/obj/item/rig_module/vision/meson,
+		/obj/item/rig_module/grenade_launcher/mfoam,
+		/obj/item/rig_module/cooling_unit
+		)
