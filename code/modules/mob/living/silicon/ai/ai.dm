@@ -277,20 +277,17 @@ var/list/ai_verbs_default = list(
 
 	//Languages
 	add_language("Robot Talk", 1)
-	add_language(LANGUAGE_GALCOM, 1)
-	add_language(LANGUAGE_EAL, 1)
-	add_language(LANGUAGE_SOL_COMMON, 1)
-	add_language(LANGUAGE_UNATHI, 1)
-	add_language(LANGUAGE_SIIK_MAAS, 1)
-	add_language(LANGUAGE_SKRELLIAN, 1)
+	add_language(LANGUAGE_ENGLISH, 1)
+	add_language(LANGUAGE_MANDARIN, 1)
+	add_language(LANGUAGE_GERMAN, 1)
+	add_language(LANGUAGE_FRENCH, 1)
 	add_language(LANGUAGE_TRADEBAND, 1)
 	add_language(LANGUAGE_GUTTER, 1)
-	add_language("Balahese",1)
-	add_language("Ruuhti",1)
-	add_language("Doisacci",1)
-	add_language(LANGUAGE_SANGHEILI,1)
+	add_language(LANGUAGE_UNGGOY, 1)
+	add_language(LANGUAGE_KIGYAR, 1)
+	add_language(LANGUAGE_BRUTE, 1)
+	add_language(LANGUAGE_SANGHEILI, 1)
 	add_language(LANGUAGE_SIGN, 0)
-	add_language(LANGUAGE_INDEPENDENT, 1)
 
 	if(!safety)//Only used by AIize() to successfully spawn an AI.
 		if (!B)//If there is no player/brain inside.

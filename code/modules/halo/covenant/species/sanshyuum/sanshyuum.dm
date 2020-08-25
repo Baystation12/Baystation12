@@ -15,9 +15,9 @@ GLOBAL_LIST_INIT(sanshyuum_titles, world.file2list('code/modules/halo/covenant/s
 	icobase = 'code/modules/halo/covenant/species/sanshyuum/r_sanshyuum.dmi' //The DMI needed modification to fit the usual format (see other species' dmis)
 	deform = 'code/modules/halo/covenant/species/sanshyuum/r_sanshyuum.dmi'
 	icon_template = 'code/modules/halo/covenant/species/sanshyuum/sanshyuum_template.dmi'
-	default_language = "Sangheili"
-	language = "Sangheili"
-	additional_langs = list("Janjur Qomi","Galactic Common")
+	default_language = LANGUAGE_SANGHEILI
+	language = LANGUAGE_SANGHEILI
+	additional_langs = list(LANGUAGE_SANSHYUUM, LANGUAGE_ENGLISH)
 	spawn_flags = SPECIES_CAN_JOIN
 	item_icon_offsets = list(list(0,2),list(0,2),null,list(0,2),null,null,null,list(0,2),null)
 	total_health = 200		//weaker than a human

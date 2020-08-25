@@ -214,7 +214,7 @@
 	)
 	icons_pickfrom_list = list('code/modules/halo/icons/overmap/covshuttle2.dmi')
 	faction = "Covenant"
-	radio_language = "Sangheili"
+	radio_language = LANGUAGE_SANGHEILI
 	radio_channel = RADIO_COV
 	ship_datums = list(/datum/npc_ship/cov_patrol)
 	available_ship_requests = newlist(/datum/npc_ship_request/halt/cov,/datum/npc_ship_request/fire_on_target/cov,/datum/npc_ship_request/control_fleet/cov,/datum/npc_ship_request/add_to_fleet/cov,/datum/npc_ship_request/give_control/cov)

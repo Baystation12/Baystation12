@@ -69,14 +69,14 @@
 	desc = "Allows understanding Sangheili, but not speaking."
 
 /obj/item/weapon/implant/language_sangheili/implanted(var/mob/source)
-	source.languages_understand |= "Sangheili"
+	source.languages_understand |= LANGUAGE_SANGHEILI
 
 /obj/item/weapon/implant/language_sangheili/meltdown()
-	imp_in.languages_understand -= "Sangheili"
+	imp_in.languages_understand -= LANGUAGE_SANGHEILI
 	. = ..()
 
 /obj/item/weapon/implant/language_sangheili/removed()
-	imp_in.languages_understand -= "Sangheili"
+	imp_in.languages_understand -= LANGUAGE_SANGHEILI
 	. = ..()
 
 
@@ -102,12 +102,12 @@
 
 /obj/item/weapon/implant/language_english/implanted(var/mob/source)
 	. = ..()
-	imp_in.languages_understand |= LANGUAGE_GALCOM
+	imp_in.languages_understand |= LANGUAGE_ENGLISH
 
 /obj/item/weapon/implant/language_english/meltdown()
-	imp_in.languages_understand -= LANGUAGE_GALCOM
+	imp_in.languages_understand -= LANGUAGE_ENGLISH
 	. = ..()
 
 /obj/item/weapon/implant/language_english/removed()
-	imp_in.languages_understand -= LANGUAGE_GALCOM
+	imp_in.languages_understand -= LANGUAGE_ENGLISH
 	. = ..()

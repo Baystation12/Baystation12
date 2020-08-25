@@ -81,7 +81,7 @@
 	whisper_verb = "whispers"
 	colour = "solcom"
 	key = "1"
-	flags = WHITELISTED
+	flags = RESTRICTED
 
 	//syllables are at the bottom of the file
 
@@ -197,6 +197,7 @@
 	speech_verb = "speaks"
 	colour = "terran"
 	key = "r"
+	flags = RESTRICTED
 	syllables = list("rus","zem","ave","groz","ski","ska","ven","konst","pol","lin","svy",
 	"danya","da","mied","zan","das","krem","myka","cyka","blyat","to","st","no","na","ni",
 	"ko","ne","en","po","ra","li","on","byl","cto","eni","ost","ol","ego","ver","stv","pro")

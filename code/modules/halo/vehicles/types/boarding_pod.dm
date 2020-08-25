@@ -11,6 +11,14 @@
 	internal_air = new
 
 	light_color = "#E1FDFF"
+	comp_prof = /datum/component_profile/drop_pod/reinforced
+
+/datum/component_profile/drop_pod/reinforced
+	vital_components = newlist(/obj/item/vehicle_component/health_manager/drop_pod/reinforced)
+
+/obj/item/vehicle_component/health_manager/drop_pod/reinforced
+	integrity = 300
+	resistances = list("bullet"= 50,"energy"= 50,"emp"= 25,"bomb" = 50)
 
 /obj/vehicles/drop_pod/overmap/boarding_pod/update_object_sprites()
 	//Enclosed, we don't need to care about the person-sprites.
@@ -70,12 +78,18 @@
 	bound_height = 64
 	dir = 8
 
+/datum/mobile_spawn/covenant/boarding_pod
+	max_spawns = 3
+
+/datum/mobile_spawn/covenant/boarding_pod/process_resource_regen()
+	//no req resource regeneration
+
 /obj/vehicles/drop_pod/overmap/boarding_pod/covenant
 	name = "Boarding Pod"
 	desc = "A modified escape pod, with extra armour plating to enable survival on impact with other spacefaring vessels."
 	icon = 'code/modules/halo/vehicles/types/covenant_pods.dmi'
 	icon_state = "cov_boarding"
-	spawn_datum = /datum/mobile_spawn/covenant
+	spawn_datum = /datum/mobile_spawn/covenant/boarding_pod
 
 	bound_width = 64
 	bound_height = 96

@@ -18,8 +18,8 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/covena
 	damage_overlays = 'code/modules/halo/covenant/species/sangheili/dam_elite.dmi'
 	damage_mask = 'code/modules/halo/covenant/species/sangheili/dam_mask_elite.dmi'
 	blood_mask = 'code/modules/halo/covenant/species/sangheili/blood_elite.dmi'
-	default_language = "Sangheili"
-	language = "Sangheili"
+	default_language = LANGUAGE_SANGHEILI
+	language = LANGUAGE_SANGHEILI
 	flags = NO_MINOR_CUT
 	total_health = 250 // Stronger than humans at base health.
 	radiation_mod = 0.6 //Covie weapons emit beta radiation. Resistant to 1/3 types of radiation.

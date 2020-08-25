@@ -44,6 +44,7 @@
 	speech_verb = "enunciates"
 	colour = "say_quote"
 	key = "2"
+	flags = RESTRICTED
 	space_chance = 100
 	syllables = list("lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipiscing", "elit",
 					 "sed", "do", "eiusmod", "tempor", "incididunt", "ut", "labore", "et", "dolore",
@@ -61,6 +62,7 @@
 	speech_verb = "growls"
 	colour = "rough"
 	key = "3"
+	flags = RESTRICTED
 	syllables = list ("gra","ba","ba","breh","bra","rah","dur","ra","ro","gro","go","ber","bar","geh","heh", "gra")
 
 /datum/language/sign

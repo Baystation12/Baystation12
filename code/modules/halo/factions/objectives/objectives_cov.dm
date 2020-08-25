@@ -97,7 +97,7 @@
 /datum/objective/colony_capture/cov
 	short_text = "Capture the human colony"
 	explanation_text = "Holding the human colony will give us time to search it for artifacts."
-	radio_language = "Sangheili"
+	radio_language = LANGUAGE_SANGHEILI
 	radio_name = "Covenant Overwatch"
 
 #undef COLONY_GLASSED_AMOUNT_REQUIRED
