@@ -88,15 +88,6 @@
 /area/map_template/merc_shuttle)
 "ai" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
-/obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
-	},
-/obj/structure/cable{
-	d2 = 2;
-	icon_state = "0-2"
-	},
 /obj/machinery/door/blast/regular/open{
 	density = 0;
 	dir = 4;
@@ -104,11 +95,20 @@
 	id_tag = "merc_external"
 	},
 /obj/effect/paint/red,
+/obj/structure/cable{
+	d2 = 4;
+	icon_state = "0-4"
+	},
 /turf/simulated/floor/plating,
 /area/map_template/merc_shuttle)
 "aj" = (
 /obj/machinery/computer/ship/helm{
 	uncreated_component_parts = list(/obj/item/weapon/stock_parts/power/battery/buildable/responsive = 1, /obj/item/weapon/cell/high = 1)
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
@@ -124,6 +124,11 @@
 	},
 /obj/machinery/light/spot{
 	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
 	},
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
@@ -170,16 +175,14 @@
 /area/map_template/merc_shuttle)
 "ap" = (
 /obj/structure/table/steel_reinforced,
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
-	},
 /obj/machinery/button/blast_door{
 	id_tag = "merc_external";
 	name = "Protective Shutters Control";
 	req_access = list("ACCESS_SYNDICATE")
+	},
+/obj/item/device/radio/intercom/hailing{
+	dir = 4;
+	pixel_x = -24
 	},
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
@@ -187,11 +190,6 @@
 /obj/structure/bed/chair/shuttle/blue{
 	dir = 1;
 	icon_state = "shuttle_chair_preview"
-	},
-/obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
 	},
 /obj/structure/cable{
 	d1 = 2;
@@ -1928,6 +1926,10 @@
 	id_tag = "merc_shuttle_pump"
 	},
 /obj/machinery/light/small,
+/obj/item/device/radio/intercom/hailing{
+	dir = 1;
+	pixel_y = -28
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle)
 "cY" = (
@@ -7416,7 +7418,7 @@ aa
 aa
 ae
 ai
-ao
+ae
 aw
 aC
 aH

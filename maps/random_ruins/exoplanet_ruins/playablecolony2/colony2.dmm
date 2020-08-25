@@ -25,10 +25,42 @@
 /turf/simulated/floor/reinforced/airless,
 /area/map_template/colony2/external)
 "aK" = (
+/obj/machinery/atmospherics/unary/vent_pump/on,
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
 /obj/effect/floor_decal/corner_steel_grid/diagonal,
 /turf/simulated/floor/tiled/techmaint,
 /area/map_template/colony2/ship)
 "aL" = (
+/obj/effect/paint/ocean,
+/obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/blast/regular{
+	id_tag = "colony2";
+	name = "Window Blast Shutter"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/colony2/ship)
+"aN" = (
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 6
+	},
+/obj/item/device/radio/intercom/map_preset/playablecolony2{
+	dir = 8;
+	pixel_x = 21
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/colony2/Hallway)
+"aZ" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/civilian,
+/turf/simulated/floor/tiled/freezer,
+/area/map_template/colony2/ship)
+"bh" = (
 /obj/effect/paint/ocean,
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
@@ -37,22 +69,6 @@
 	name = "Window Blast Shutter"
 	},
 /turf/simulated/floor/plating,
-/area/map_template/colony2/ship)
-"aZ" = (
-/obj/effect/floor_decal/corner_steel_grid/diagonal{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/techmaint,
-/area/map_template/colony2/ship)
-"bh" = (
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 4
-	},
-/obj/machinery/light,
-/obj/effect/floor_decal/corner_steel_grid/diagonal{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/techmaint,
 /area/map_template/colony2/ship)
 "bt" = (
 /obj/machinery/atmospherics/pipe/manifold4w/visible/red,
@@ -83,20 +99,20 @@
 /turf/simulated/floor/plating,
 /area/map_template/colony2/Hallway)
 "ci" = (
-/obj/machinery/light{
-	dir = 4
-	},
 /obj/effect/floor_decal/corner_steel_grid/diagonal{
 	dir = 4
 	},
-/obj/structure/bed/chair/shuttle/white{
-	dir = 8
+/obj/machinery/firealarm{
+	dir = 4;
+	pixel_x = 25
 	},
+/obj/machinery/recharge_station,
 /turf/simulated/floor/tiled/techmaint,
 /area/map_template/colony2/ship)
 "cq" = (
-/obj/structure/table/steel_reinforced,
-/obj/machinery/microwave,
+/obj/structure/closet/secure_closet/freezer/fridge,
+/obj/item/weapon/storage/box/snack/tastybread,
+/obj/item/weapon/storage/box/glasses,
 /obj/effect/floor_decal/corner/paleblue/mono,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/colony2/commons)
@@ -114,6 +130,14 @@
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/map_template/colony2/external)
+"cz" = (
+/obj/machinery/portable_atmospherics/hydroponics,
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/item/device/radio/intercom/map_preset/playablecolony2{
+	pixel_y = 21
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/commons)
 "cD" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/effect/paint/ocean,
@@ -139,27 +163,30 @@
 /turf/simulated/floor/plating,
 /area/map_template/colony2/storage)
 "cX" = (
-/obj/machinery/seed_extractor,
 /obj/effect/floor_decal/corner/paleblue/mono,
+/obj/structure/table/steel_reinforced,
+/obj/item/weapon/storage/box/donkpockets,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/colony2/commons)
 "de" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 5
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+/obj/machinery/computer/ship/helm{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner_steel_grid/diagonal{
-	dir = 4
+/obj/effect/floor_decal/corner_steel_grid/diagonal,
+/obj/machinery/button/blast_door{
+	id_tag = "colony2";
+	name = "Window Lockdown Blast Door Control";
+	pixel_y = 31
+	},
+/obj/machinery/button/blast_door{
+	id_tag = "colony2atmos";
+	name = "Exterior Lockdown Blast Door Control";
+	pixel_y = 22
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/map_template/colony2/ship)
 "dh" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+/obj/structure/bed/chair/shuttle/white{
 	dir = 4
 	},
 /obj/effect/floor_decal/corner_steel_grid/diagonal{
@@ -168,14 +195,15 @@
 /turf/simulated/floor/tiled/techmaint,
 /area/map_template/colony2/ship)
 "dj" = (
-/obj/machinery/door/airlock/civilian,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+/obj/effect/floor_decal/corner_steel_grid/diagonal{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
+/obj/machinery/computer/ship/engines{
+	dir = 8
 	},
-/obj/machinery/door/firedoor,
+/obj/item/device/radio/intercom/map_preset/playablecolony2{
+	pixel_y = 21
+	},
 /turf/simulated/floor/tiled/techmaint,
 /area/map_template/colony2/ship)
 "dn" = (
@@ -193,8 +221,11 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/colony2/atmospherics)
 "dM" = (
-/obj/machinery/sleeper{
-	dir = 2
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/colony2/ship)
@@ -208,13 +239,10 @@
 /turf/simulated/floor/plating,
 /area/map_template/colony2/atmospherics)
 "eg" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/effect/floor_decal/corner_steel_grid/diagonal,
+/obj/structure/bed/padded,
+/obj/item/weapon/bedsheet/green,
+/obj/structure/curtain/open/bed,
+/obj/effect/submap_landmark/spawnpoint/colonist_spawn2,
 /turf/simulated/floor/tiled/techmaint,
 /area/map_template/colony2/ship)
 "er" = (
@@ -242,7 +270,6 @@
 /turf/simulated/floor/plating,
 /area/map_template/colony2/Hallway)
 "eA" = (
-/obj/machinery/portable_atmospherics/hydroponics,
 /obj/structure/cable{
 	d2 = 2;
 	icon_state = "0-2"
@@ -255,13 +282,65 @@
 	pixel_y = 24;
 	req_access = newlist()
 	},
+/obj/structure/closet/crate/med_crate/oxyloss,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/colony2/storage)
+"eJ" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/structure/hygiene/sink{
+	dir = 1;
+	pixel_y = 16
+	},
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/colony2/commons)
 "eR" = (
-/obj/structure/largecrate/animal/goat,
-/obj/effect/floor_decal/corner/paleblue/mono,
-/turf/simulated/floor/tiled/dark/monotile,
-/area/map_template/colony2/storage)
+/obj/effect/floor_decal/corner_steel_grid/diagonal{
+	dir = 4
+	},
+/obj/structure/closet/cabinet,
+/obj/machinery/recharger/wallcharger{
+	pixel_y = 28
+	},
+/obj/random/clothing,
+/obj/random/clothing,
+/obj/random/clothing,
+/obj/random/clothing,
+/obj/random/glasses,
+/obj/random/glasses,
+/obj/random/hat,
+/obj/random/hat,
+/obj/random/masks,
+/obj/random/masks,
+/obj/random/gloves,
+/obj/random/gloves,
+/obj/random/shoes,
+/obj/random/shoes,
+/obj/random/accessory,
+/obj/random/accessory,
+/obj/item/weapon/crowbar/prybar,
+/obj/item/weapon/crowbar/prybar,
+/obj/item/device/radio/map_preset/playablecolony2,
+/obj/item/device/radio/map_preset/playablecolony2,
+/obj/machinery/atmospherics/unary/vent_pump/on,
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/colony2/ship)
+"eY" = (
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 9
+	},
+/obj/machinery/alarm/server{
+	dir = 4;
+	locked = 0;
+	pixel_x = -21;
+	req_access = newlist()
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/colony2/tcomms)
 "fp" = (
 /obj/effect/paint/ocean,
 /obj/effect/wallframe_spawn/reinforced,
@@ -320,60 +399,27 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/colony2/atmospherics)
 "fF" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/effect/floor_decal/corner_steel_grid/diagonal{
-	dir = 4
-	},
-/obj/machinery/alarm{
-	dir = 1;
-	locked = 0;
-	pixel_y = -22;
-	req_access = newlist()
+/obj/structure/bed/padded,
+/obj/item/weapon/bedsheet/green,
+/obj/structure/curtain/open/bed,
+/obj/effect/submap_landmark/spawnpoint/colonist_spawn2,
+/obj/item/device/radio/intercom/map_preset/playablecolony2{
+	pixel_y = 21
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/map_template/colony2/ship)
 "fQ" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
+/obj/machinery/sleeper{
+	dir = 2
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/colony2/ship)
 "fT" = (
-/obj/machinery/gibber,
 /obj/effect/floor_decal/corner/paleblue/mono,
-/obj/machinery/alarm{
-	dir = 8;
-	locked = 0;
-	pixel_x = 25;
-	req_access = newlist()
-	},
+/obj/structure/closet/secure_closet/freezer/meat,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/colony2/commons)
 "fU" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 9
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/white,
-/area/map_template/colony2/ship)
-"ge" = (
-/obj/machinery/light,
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/white,
-/area/map_template/colony2/ship)
-"gm" = (
 /obj/structure/closet/crate/freezer,
 /obj/item/weapon/storage/firstaid/regular,
 /obj/item/weapon/storage/firstaid/stab,
@@ -385,17 +431,52 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled/white,
 /area/map_template/colony2/ship)
+"gb" = (
+/obj/item/weapon/reagent_containers/glass/bucket,
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/structure/closet/crate/hydroponics/prespawned,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/commons)
+"ge" = (
+/obj/structure/hygiene/sink{
+	dir = 1;
+	pixel_y = 16
+	},
+/obj/structure/iv_drip,
+/turf/simulated/floor/tiled/white,
+/area/map_template/colony2/ship)
+"gi" = (
+/obj/effect/catwalk_plated/dark,
+/obj/structure/largecrate/animal/chick,
+/turf/simulated/floor/plating,
+/area/map_template/colony2/storage)
+"gj" = (
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/machinery/seed_extractor,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/commons)
+"gm" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/colony2/ship)
 "gr" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/weapon/storage/firstaid/surgery,
+/obj/item/clothing/accessory/stethoscope,
+/obj/item/device/radio/intercom/map_preset/playablecolony2{
+	pixel_y = 21
+	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/colony2/ship)
 "gw" = (
-/obj/machinery/optable,
-/obj/machinery/alarm{
-	dir = 8;
-	locked = 0;
-	pixel_x = 25;
-	req_access = newlist()
-	},
+/obj/structure/table/steel_reinforced,
+/obj/item/weapon/storage/firstaid/adv,
+/obj/item/weapon/storage/box/gloves,
 /turf/simulated/floor/tiled/white,
 /area/map_template/colony2/ship)
 "gD" = (
@@ -431,6 +512,9 @@
 /area/map_template/colony2/engineering)
 "hN" = (
 /obj/structure/ore_box,
+/obj/item/device/radio/intercom/map_preset/playablecolony2{
+	pixel_y = 21
+	},
 /turf/simulated/floor/reinforced/airless,
 /area/map_template/colony2/external)
 "hT" = (
@@ -443,62 +527,36 @@
 /turf/simulated/floor/plating,
 /area/map_template/colony2/storage)
 "ib" = (
-/obj/structure/cable{
-	d2 = 4;
-	icon_state = "0-4"
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
 	},
-/obj/machinery/power/apc{
-	dir = 8;
-	locked = 0;
-	name = "west bump";
-	pixel_x = -24
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
 	},
 /obj/effect/floor_decal/corner_steel_grid/diagonal,
-/obj/structure/bed/chair/shuttle/white{
-	dir = 4
+/obj/item/device/radio/intercom/map_preset/playablecolony2{
+	default_hailing = 1;
+	dir = 1;
+	pixel_y = -32
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/map_template/colony2/ship)
 "io" = (
-/obj/machinery/door/airlock/civilian,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/machinery/door/firedoor,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/effect/paint/ocean,
-/turf/simulated/floor/tiled/freezer,
-/area/map_template/colony2/Hallway)
+/turf/simulated/floor/plating,
+/area/map_template/colony2/commons)
 "iq" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/manifold/visible/scrubbers,
-/obj/effect/catwalk_plated/dark,
+/obj/effect/wallframe_spawn/reinforced,
+/obj/effect/paint/ocean,
 /turf/simulated/floor/plating,
 /area/map_template/colony2/ship)
 "is" = (
-/obj/item/weapon/storage/box/detergent,
-/obj/structure/closet/walllocker{
-	name = "Washing Machine Supplies";
-	pixel_x = 0;
-	pixel_y = 28;
-	pixel_z = 3
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 9
 	},
-/obj/item/weapon/storage/box/detergent,
-/obj/item/weapon/soap,
-/obj/item/roller/ironingboard,
-/obj/item/weapon/ironingiron,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 10
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/freezer,
-/area/map_template/colony2/Hallway)
+/turf/simulated/floor/tiled/dark,
+/area/map_template/colony2/commons)
 "iv" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -518,22 +576,29 @@
 /turf/simulated/floor/plating,
 /area/map_template/colony2/atmospherics)
 "iT" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
+/obj/machinery/light,
+/obj/effect/floor_decal/corner_steel_grid/diagonal{
+	dir = 4
 	},
-/obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/civilian,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/techmaint,
 /area/map_template/colony2/ship)
 "jo" = (
-/obj/structure/largecrate/animal/cow,
-/obj/effect/floor_decal/corner/paleblue/mono,
-/turf/simulated/floor/tiled/dark/monotile,
-/area/map_template/colony2/storage)
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 1
+	},
+/obj/structure/hygiene/sink{
+	dir = 8;
+	pixel_x = -12
+	},
+/obj/item/weapon/storage/mirror{
+	pixel_x = -24
+	},
+/turf/simulated/floor/tiled/freezer,
+/area/map_template/colony2/ship)
 "jq" = (
 /obj/effect/paint/ocean,
 /obj/effect/wallframe_spawn/reinforced,
@@ -544,19 +609,26 @@
 	},
 /turf/simulated/floor/plating,
 /area/map_template/colony2/atmospherics)
+"jy" = (
+/obj/machinery/atmospherics/pipe/simple/visible/fuel,
+/obj/item/device/radio/intercom/map_preset/playablecolony2{
+	dir = 8;
+	pixel_x = 21
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
 "kb" = (
-/obj/machinery/light{
-	dir = 1
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
 	},
-/obj/structure/hygiene/sink{
-	dir = 1;
-	pixel_y = 16
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
 	},
-/obj/effect/floor_decal/corner/paleblue{
-	dir = 5
+/obj/effect/floor_decal/corner_steel_grid/diagonal{
+	dir = 4
 	},
-/turf/simulated/floor/tiled/dark,
-/area/map_template/colony2/commons)
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/colony2/ship)
 "ke" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
@@ -601,10 +673,13 @@
 /turf/simulated/wall,
 /area/map_template/colony2/atmospherics)
 "lW" = (
+/obj/machinery/light{
+	dir = 4
+	},
 /obj/effect/floor_decal/corner_steel_grid/diagonal{
 	dir = 4
 	},
-/obj/machinery/computer/ship/engines{
+/obj/structure/bed/chair/shuttle/white{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techmaint,
@@ -672,18 +747,25 @@
 /turf/simulated/wall,
 /area/map_template/colony2/engineering)
 "or" = (
-/obj/structure/hygiene/toilet{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/freezer,
-/area/map_template/colony2/Hallway)
-"oC" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
-/obj/machinery/light/small,
-/turf/simulated/floor/tiled/freezer,
-/area/map_template/colony2/Hallway)
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/machinery/telecomms/broadcaster/map_preset/playablecolony2,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/tcomms)
+"oC" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/machinery/telecomms/receiver/map_preset/playablecolony2,
+/obj/item/device/radio/intercom/map_preset/playablecolony2{
+	dir = 8;
+	pixel_x = 21
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/tcomms)
 "oK" = (
 /obj/machinery/light{
 	dir = 1
@@ -694,6 +776,15 @@
 /obj/effect/floor_decal/corner/paleblue/mono,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/colony2/engineering)
+"oQ" = (
+/obj/machinery/seed_storage/garden,
+/obj/machinery/firealarm{
+	dir = 2;
+	pixel_y = 24
+	},
+/obj/effect/floor_decal/corner/paleblue/mono,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/commons)
 "oU" = (
 /obj/effect/floor_decal/corner/paleblue,
 /obj/machinery/atmospherics/pipe/simple/visible{
@@ -705,25 +796,23 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/colony2/atmospherics)
 "pe" = (
-/obj/machinery/hologram/holopad/longrange,
 /obj/effect/floor_decal/corner_steel_grid/diagonal{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled/techmaint,
 /area/map_template/colony2/ship)
 "qb" = (
-/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
-/obj/machinery/atmospherics/pipe/manifold/visible/scrubbers{
-	dir = 1
-	},
-/obj/effect/catwalk_plated/dark,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/turf/simulated/floor/plating,
+/obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/civilian,
+/turf/simulated/floor/tiled/techmaint,
 /area/map_template/colony2/ship)
 "qf" = (
 /obj/effect/paint/ocean,
@@ -732,7 +821,7 @@
 "qj" = (
 /obj/effect/paint/ocean,
 /turf/simulated/wall,
-/area/map_template/colony2/Hallway)
+/area/map_template/colony2/tcomms)
 "qo" = (
 /obj/structure/closet/crate,
 /obj/item/stack/tile/grass{
@@ -752,31 +841,35 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/colony2/engineering)
 "qI" = (
-/obj/structure/hygiene/shower{
-	dir = 8;
-	pixel_x = 8
+/obj/machinery/portable_atmospherics/hydroponics,
+/obj/machinery/alarm{
+	dir = 1;
+	locked = 0;
+	pixel_y = -22;
+	req_access = newlist()
 	},
-/obj/structure/curtain/open/shower,
-/turf/simulated/floor/tiled/freezer,
-/area/map_template/colony2/Hallway)
+/obj/effect/floor_decal/corner/paleblue/mono,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/commons)
 "rm" = (
-/obj/effect/paint/ocean,
-/obj/effect/wallframe_spawn/reinforced,
-/obj/machinery/door/blast/regular{
-	id_tag = "colony2";
-	name = "Window Blast Shutter"
-	},
-/turf/simulated/floor/plating,
-/area/map_template/colony2/ship)
-"ro" = (
-/obj/machinery/atmospherics/unary/vent_pump/on,
-/obj/structure/cable{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
+/obj/structure/bed/chair/shuttle/white{
+	dir = 8
 	},
 /obj/effect/floor_decal/corner_steel_grid/diagonal,
 /turf/simulated/floor/tiled/techmaint,
+/area/map_template/colony2/ship)
+"ro" = (
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
+/obj/machinery/atmospherics/pipe/manifold/visible/scrubbers{
+	dir = 1
+	},
+/obj/effect/catwalk_plated/dark,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/plating,
 /area/map_template/colony2/ship)
 "rp" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -827,11 +920,16 @@
 /turf/simulated/floor/reinforced/airless,
 /area/map_template/colony2/external)
 "so" = (
-/obj/structure/largecrate/animal/chick,
-/obj/structure/railing/mapped,
-/obj/effect/floor_decal/corner/paleblue/mono,
-/turf/simulated/floor/tiled/dark/monotile,
-/area/map_template/colony2/storage)
+/obj/machinery/door/airlock/civilian,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/colony2/ship)
 "sG" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
@@ -893,6 +991,9 @@
 	dir = 2
 	},
 /obj/effect/floor_decal/corner/paleblue/mono,
+/obj/item/device/radio/intercom/map_preset/playablecolony2{
+	pixel_y = 21
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/colony2/commons)
 "tT" = (
@@ -940,13 +1041,17 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/colony2/Hallway)
 "vf" = (
-/obj/structure/largecrate/animal/chick,
-/obj/machinery/light{
+/obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/paleblue/mono,
-/turf/simulated/floor/tiled/dark/monotile,
-/area/map_template/colony2/storage)
+/obj/machinery/alarm{
+	dir = 8;
+	locked = 0;
+	pixel_x = 25;
+	req_access = newlist()
+	},
+/turf/simulated/floor/tiled/freezer,
+/area/map_template/colony2/ship)
 "vh" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
@@ -1030,11 +1135,15 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/colony2/Hallway)
 "wx" = (
-/obj/structure/bed/padded,
-/obj/item/weapon/bedsheet/green,
-/obj/structure/curtain/open/bed,
-/obj/effect/submap_landmark/spawnpoint/colonist_spawn2,
-/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner_steel_grid/diagonal{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/techmaint,
 /area/map_template/colony2/ship)
 "xv" = (
@@ -1042,16 +1151,34 @@
 /turf/simulated/wall,
 /area/map_template/colony2/commons)
 "xx" = (
-/obj/structure/closet/crate/med_crate/oxyloss,
 /obj/effect/floor_decal/corner/paleblue/mono,
+/obj/structure/closet/crate/med_crate/trauma,
+/obj/structure/railing/mapped{
+	dir = 8
+	},
+/obj/item/device/radio/intercom/map_preset/playablecolony2{
+	pixel_y = 21
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/colony2/storage)
 "xB" = (
-/obj/effect/catwalk_plated/dark,
-/obj/structure/largecrate/animal/chick,
-/obj/structure/railing/mapped,
-/turf/simulated/floor/plating,
-/area/map_template/colony2/storage)
+/obj/structure/closet/walllocker{
+	name = "Washing Machine Supplies";
+	pixel_x = 0;
+	pixel_y = 28;
+	pixel_z = 3
+	},
+/obj/item/weapon/ironingiron,
+/obj/item/roller/ironingboard,
+/obj/item/weapon/soap,
+/obj/item/weapon/storage/box/detergent,
+/obj/item/weapon/storage/box/detergent,
+/obj/machinery/washing_machine,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/freezer,
+/area/map_template/colony2/ship)
 "yu" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -1073,16 +1200,22 @@
 /turf/simulated/floor/plating,
 /area/map_template/colony2/Hallway)
 "yJ" = (
-/obj/effect/floor_decal/corner_steel_grid/diagonal{
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/atmospherics/unary/vent_scrubber/on,
-/turf/simulated/floor/tiled/techmaint,
+/obj/machinery/atmospherics/pipe/manifold/visible/scrubbers,
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/plating,
 /area/map_template/colony2/ship)
 "yO" = (
-/obj/effect/wallframe_spawn/reinforced,
-/obj/effect/paint/ocean,
-/turf/simulated/floor/plating,
+/obj/machinery/light/small{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/tiled/freezer,
 /area/map_template/colony2/ship)
 "zd" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
@@ -1116,11 +1249,11 @@
 /turf/simulated/floor/airless,
 /area/map_template/colony2/external)
 "Af" = (
-/obj/structure/closet/crate/med_crate/toxin,
 /obj/machinery/light{
 	dir = 1
 	},
 /obj/effect/floor_decal/corner/paleblue/mono,
+/obj/structure/closet/crate/med_crate/burn,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/colony2/storage)
 "Ak" = (
@@ -1144,8 +1277,9 @@
 /turf/simulated/wall/r_wall,
 /area/map_template/colony2/engineering)
 "AK" = (
-/obj/structure/reagent_dispensers/watertank,
 /obj/effect/floor_decal/corner/paleblue/mono,
+/obj/structure/table/steel_reinforced,
+/obj/machinery/microwave,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/colony2/commons)
 "AS" = (
@@ -1170,14 +1304,23 @@
 /turf/simulated/floor/plating,
 /area/map_template/colony2/Hallway)
 "AU" = (
-/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
-/obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
 /obj/effect/catwalk_plated/dark,
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/machinery/atmospherics/pipe/manifold/visible/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
 /turf/simulated/floor/plating,
 /area/map_template/colony2/Hallway)
 "Bc" = (
@@ -1198,6 +1341,37 @@
 /obj/effect/catwalk_plated/dark,
 /turf/simulated/floor/plating,
 /area/map_template/colony2/engineering)
+"Bk" = (
+/obj/effect/floor_decal/corner_steel_grid/diagonal{
+	dir = 4
+	},
+/obj/structure/closet/cabinet,
+/obj/machinery/recharger/wallcharger{
+	pixel_y = 28
+	},
+/obj/random/clothing,
+/obj/random/clothing,
+/obj/random/clothing,
+/obj/random/clothing,
+/obj/random/glasses,
+/obj/random/glasses,
+/obj/random/hat,
+/obj/random/hat,
+/obj/random/masks,
+/obj/random/masks,
+/obj/random/gloves,
+/obj/random/gloves,
+/obj/random/shoes,
+/obj/random/shoes,
+/obj/random/accessory,
+/obj/random/accessory,
+/obj/item/weapon/crowbar/prybar,
+/obj/item/weapon/crowbar/prybar,
+/obj/item/device/radio/map_preset/playablecolony2,
+/obj/item/device/radio/map_preset/playablecolony2,
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/colony2/ship)
 "BI" = (
 /obj/machinery/atmospherics/binary/pump,
 /obj/effect/floor_decal/corner/paleblue/mono,
@@ -1210,6 +1384,13 @@
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/map_template/colony2/external)
+"BU" = (
+/obj/effect/catwalk_plated/dark,
+/obj/structure/railing/mapped{
+	dir = 8
+	},
+/turf/simulated/floor/plating,
+/area/map_template/colony2/storage)
 "BZ" = (
 /turf/simulated/floor/reinforced,
 /area/map_template/colony2/external)
@@ -1297,42 +1478,29 @@
 /turf/simulated/floor/tiled/techmaint,
 /area/map_template/colony2/commons)
 "CQ" = (
-/obj/structure/table/steel_reinforced,
-/obj/item/weapon/storage/firstaid/surgery,
-/obj/item/clothing/accessory/stethoscope,
 /turf/simulated/floor/tiled/white,
 /area/map_template/colony2/ship)
 "Dd" = (
-/obj/machinery/computer/ship/helm{
-	dir = 4
+/obj/machinery/light{
+	dir = 8
 	},
 /obj/effect/floor_decal/corner_steel_grid/diagonal,
-/obj/machinery/button/blast_door{
-	id_tag = "colony2";
-	name = "Window Lockdown Blast Door Control";
-	pixel_y = 31
-	},
-/obj/machinery/button/blast_door{
-	id_tag = "colony2atmos";
-	name = "Exterior Lockdown Blast Door Control";
-	pixel_y = 22
+/obj/machinery/computer/air_control{
+	dir = 4;
+	name = "Atmospheric Sensors";
+	sensor_tag = "Halifax_out"
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/map_template/colony2/ship)
 "Dv" = (
-/obj/structure/closet/crate,
-/obj/item/weapon/gun/projectile/shotgun/pump{
-	desc = "The mass-produced W-T Remmington 29x shotgun is a favourite of police and security forces on many worlds. Useful for sweeping alleys. Someone has marked it as property of 'Vel-Rana', with one kill mark next to it."
+/obj/machinery/alarm{
+	dir = 4;
+	locked = 0;
+	pixel_x = -21;
+	req_access = newlist()
 	},
-/obj/item/weapon/storage/box/ammo/shotgunammo,
-/obj/item/weapon/storage/box/ammo/shotgunshells,
-/obj/item/weapon/gun/energy/gun/small,
-/obj/item/weapon/gun/energy/gun/small,
-/obj/item/weapon/gun/energy/gun/small,
-/obj/item/weapon/gun/energy/gun/small,
-/obj/item/weapon/storage/box/ammo/flashshells,
 /obj/effect/floor_decal/corner/paleblue/mono,
-/obj/item/weapon/gun/energy/gun,
+/obj/structure/largecrate/animal/cow,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/colony2/storage)
 "Dw" = (
@@ -1343,9 +1511,9 @@
 /turf/simulated/floor/reinforced/airless,
 /area/map_template/colony2/external)
 "DD" = (
-/obj/structure/closet/crate/solar,
 /obj/machinery/light,
 /obj/effect/floor_decal/corner/paleblue/mono,
+/obj/structure/largecrate/animal/cow,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/colony2/storage)
 "DG" = (
@@ -1373,18 +1541,32 @@
 /turf/simulated/floor/airless,
 /area/map_template/colony2/external)
 "DQ" = (
-/obj/structure/closet/crate/med_crate/trauma,
 /obj/effect/floor_decal/corner/paleblue/mono,
+/obj/structure/largecrate/animal/goose,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/colony2/storage)
 "DR" = (
-/obj/structure/closet/crate/solar_assembly,
+/obj/structure/closet/crate,
+/obj/item/weapon/gun/projectile/shotgun/pump{
+	desc = "The mass-produced W-T Remmington 29x shotgun is a favourite of police and security forces on many worlds. Useful for sweeping alleys. Someone has marked it as property of 'Vel-Rana', with one kill mark next to it."
+	},
+/obj/item/weapon/storage/box/ammo/shotgunammo,
+/obj/item/weapon/storage/box/ammo/shotgunshells,
+/obj/item/weapon/gun/energy/gun/small,
+/obj/item/weapon/gun/energy/gun/small,
+/obj/item/weapon/gun/energy/gun/small,
+/obj/item/weapon/gun/energy/gun/small,
+/obj/item/weapon/storage/box/ammo/flashshells,
 /obj/effect/floor_decal/corner/paleblue/mono,
+/obj/item/weapon/gun/energy/gun,
+/obj/structure/railing/mapped{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/colony2/storage)
 "En" = (
-/obj/structure/closet/firecloset,
 /obj/effect/floor_decal/corner/paleblue/mono,
+/obj/structure/closet/crate/solar,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/colony2/storage)
 "Eo" = (
@@ -1414,14 +1596,18 @@
 /turf/simulated/floor/reinforced/airless,
 /area/map_template/colony2/external)
 "ED" = (
-/obj/machinery/portable_atmospherics/hydroponics,
 /obj/effect/floor_decal/corner/paleblue/mono,
+/obj/structure/closet/crate/solar_assembly,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/colony2/storage)
 "EN" = (
-/obj/structure/table/steel_reinforced,
-/obj/item/weapon/storage/firstaid/adv,
-/obj/item/weapon/storage/box/gloves,
+/obj/machinery/optable,
+/obj/machinery/alarm{
+	dir = 8;
+	locked = 0;
+	pixel_x = 25;
+	req_access = newlist()
+	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/colony2/ship)
 "EP" = (
@@ -1435,7 +1621,6 @@
 /turf/simulated/floor/reinforced/airless,
 /area/map_template/colony2/external)
 "Fm" = (
-/obj/machinery/portable_atmospherics/hydroponics,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
@@ -1443,6 +1628,7 @@
 	pixel_x = 22
 	},
 /obj/effect/floor_decal/corner/paleblue/mono,
+/obj/structure/closet/firecloset,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/colony2/storage)
 "Fn" = (
@@ -1471,7 +1657,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/colony2/commons)
 "FI" = (
-/obj/machinery/vending/hydronutrients,
+/obj/structure/reagent_dispensers/watertank,
 /obj/effect/floor_decal/corner/paleblue/mono,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/colony2/commons)
@@ -1630,34 +1816,21 @@
 /turf/simulated/floor/plating,
 /area/map_template/colony2/Hallway)
 "ID" = (
-/obj/item/weapon/storage/mirror{
-	pixel_y = 32
-	},
-/obj/structure/hygiene/sink{
-	dir = 1;
-	pixel_y = 16
-	},
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 4
-	},
-/obj/machinery/alarm{
-	dir = 4;
-	locked = 0;
-	pixel_x = -21;
-	req_access = newlist()
-	},
-/turf/simulated/floor/tiled/freezer,
-/area/map_template/colony2/Hallway)
-"IN" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
+	dir = 6
 	},
 /obj/effect/catwalk_plated/dark,
 /turf/simulated/floor/plating,
-/area/map_template/colony2/Hallway)
+/area/map_template/colony2/tcomms)
+"IN" = (
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/machinery/firealarm{
+	dir = 2;
+	pixel_y = 24
+	},
+/obj/machinery/telecomms/bus/map_preset/playablecolony2,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/tcomms)
 "Jg" = (
 /obj/machinery/atmospherics/unary/tank/oxygen{
 	dir = 8
@@ -1697,10 +1870,12 @@
 /turf/simulated/floor/plating,
 /area/map_template/colony2/atmospherics)
 "JN" = (
-/obj/structure/closet/secure_closet/freezer/fridge,
-/obj/item/weapon/storage/box/snack/tastybread,
-/obj/item/weapon/storage/box/glasses,
 /obj/effect/floor_decal/corner/paleblue/mono,
+/obj/structure/table/steel_reinforced,
+/obj/machinery/fabricator/micro,
+/obj/item/stack/material/aluminium/ten,
+/obj/item/stack/material/glass/ten,
+/obj/item/stack/material/steel/ten,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/colony2/commons)
 "Kg" = (
@@ -1723,8 +1898,8 @@
 "Kz" = (
 /obj/structure/table/steel_reinforced,
 /obj/machinery/light,
-/obj/item/weapon/storage/box/donkpockets,
 /obj/effect/floor_decal/corner/paleblue/mono,
+/obj/machinery/reagent_temperature/cooler,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/colony2/commons)
 "KA" = (
@@ -1769,11 +1944,13 @@
 /turf/simulated/floor/plating,
 /area/map_template/colony2/storage)
 "Mb" = (
-/obj/structure/largecrate/animal/cow,
-/obj/structure/railing/mapped,
 /obj/effect/floor_decal/corner/paleblue/mono,
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/machinery/telecomms/hub/map_preset/playablecolony2,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/map_template/colony2/storage)
+/area/map_template/colony2/tcomms)
 "Mc" = (
 /obj/effect/paint/ocean,
 /obj/effect/wallframe_spawn/reinforced,
@@ -1785,14 +1962,19 @@
 /turf/simulated/floor/plating,
 /area/map_template/colony2/commons)
 "Mh" = (
-/obj/machinery/light{
-	dir = 8
+/obj/structure/cable{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/machinery/power/apc{
+	dir = 8;
+	locked = 0;
+	name = "west bump";
+	pixel_x = -24
 	},
 /obj/effect/floor_decal/corner_steel_grid/diagonal,
-/obj/machinery/computer/air_control{
-	dir = 4;
-	name = "Atmospheric Sensors";
-	sensor_tag = "Halifax_out"
+/obj/structure/bed/chair/shuttle/white{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/map_template/colony2/ship)
@@ -1817,20 +1999,29 @@
 /obj/item/weapon/reagent_containers/food/snacks/liquidfood,
 /obj/item/weapon/reagent_containers/food/snacks/liquidfood,
 /obj/effect/floor_decal/corner/paleblue/mono,
+/obj/item/weapon/reagent_containers/food/condiment/enzyme,
+/obj/item/weapon/reagent_containers/food/condiment/enzyme,
+/obj/item/weapon/reagent_containers/food/condiment/enzyme,
+/obj/item/weapon/reagent_containers/food/condiment/enzyme,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/colony2/commons)
 "Nb" = (
-/obj/structure/hygiene/sink{
-	dir = 1;
-	pixel_y = 16
+/obj/machinery/light,
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8
 	},
-/obj/structure/iv_drip,
 /turf/simulated/floor/tiled/white,
 /area/map_template/colony2/ship)
 "Nf" = (
 /obj/structure/table/steel_reinforced,
-/obj/machinery/fabricator/micro,
 /obj/effect/floor_decal/corner/paleblue/mono,
+/obj/machinery/alarm{
+	dir = 8;
+	locked = 0;
+	pixel_x = 25;
+	req_access = newlist()
+	},
+/obj/machinery/reagent_temperature,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/colony2/commons)
 "Nl" = (
@@ -1858,12 +2049,7 @@
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 9
 	},
-/obj/machinery/alarm{
-	dir = 4;
-	locked = 0;
-	pixel_x = -21;
-	req_access = newlist()
-	},
+/obj/structure/largecrate/animal/chick,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/colony2/storage)
 "Og" = (
@@ -1872,26 +2058,35 @@
 /area/template_noop)
 "Oy" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 6
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/freezer,
-/area/map_template/colony2/Hallway)
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/plating,
+/area/map_template/colony2/tcomms)
 "Oz" = (
 /obj/machinery/vending/tool,
 /obj/effect/floor_decal/corner/paleblue/mono,
+/obj/item/device/radio/intercom/map_preset/playablecolony2{
+	pixel_y = 21
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/colony2/engineering)
 "OB" = (
-/obj/machinery/portable_atmospherics/hydroponics,
 /obj/machinery/firealarm{
 	dir = 2;
 	pixel_y = 24
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/effect/floor_decal/corner/paleblue/mono,
+/obj/structure/closet/crate/med_crate/toxin,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/colony2/storage)
 "OK" = (
@@ -1988,42 +2183,41 @@
 /obj/effect/floor_decal/corner_steel_grid/diagonal{
 	dir = 4
 	},
-/obj/structure/closet/cabinet,
-/obj/machinery/recharger/wallcharger{
-	pixel_y = 28
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
 	},
-/obj/random/clothing,
-/obj/random/clothing,
-/obj/random/clothing,
-/obj/random/clothing,
-/obj/random/glasses,
-/obj/random/glasses,
-/obj/random/hat,
-/obj/random/hat,
-/obj/random/masks,
-/obj/random/masks,
-/obj/random/gloves,
-/obj/random/gloves,
-/obj/random/shoes,
-/obj/random/shoes,
-/obj/random/accessory,
-/obj/random/accessory,
-/obj/item/device/radio,
-/obj/item/device/radio,
-/obj/item/weapon/crowbar/prybar,
-/obj/item/weapon/crowbar/prybar,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
 /turf/simulated/floor/tiled/techmaint,
 /area/map_template/colony2/ship)
 "Qt" = (
-/obj/structure/largecrate/animal/goose,
+/obj/machinery/power/apc{
+	dir = 1;
+	locked = 0;
+	name = "north bump";
+	pixel_y = 24;
+	req_access = newlist()
+	},
+/obj/structure/cable{
+	d2 = 2;
+	icon_state = "0-2"
+	},
 /obj/effect/floor_decal/corner/paleblue/mono,
+/obj/machinery/light_switch{
+	pixel_x = 22
+	},
+/obj/machinery/telecomms/processor/map_preset/playablecolony2,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/map_template/colony2/storage)
+/area/map_template/colony2/tcomms)
 "Qw" = (
-/obj/effect/catwalk_plated/dark,
-/obj/structure/largecrate/animal/chick,
-/turf/simulated/floor/plating,
-/area/map_template/colony2/storage)
+/obj/structure/hygiene/shower{
+	dir = 8;
+	pixel_x = 8
+	},
+/obj/structure/curtain/open/shower,
+/turf/simulated/floor/tiled/freezer,
+/area/map_template/colony2/ship)
 "QH" = (
 /obj/machinery/light,
 /obj/effect/floor_decal/corner/paleblue/mono,
@@ -2189,18 +2383,10 @@
 /turf/simulated/floor/reinforced/airless,
 /area/map_template/colony2/external)
 "SP" = (
-/obj/structure/bed/padded,
-/obj/item/weapon/bedsheet/green,
-/obj/structure/curtain/open/bed,
-/obj/effect/submap_landmark/spawnpoint/colonist_spawn2,
-/obj/machinery/alarm{
-	dir = 4;
-	locked = 0;
-	pixel_x = -21;
-	req_access = newlist()
-	},
-/turf/simulated/floor/tiled/techmaint,
-/area/map_template/colony2/ship)
+/obj/machinery/portable_atmospherics/hydroponics,
+/obj/effect/floor_decal/corner/paleblue/mono,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/commons)
 "SQ" = (
 /obj/item/weapon/storage/backpack/dufflebag/eng,
 /obj/item/weapon/storage/backpack/dufflebag/eng,
@@ -2212,13 +2398,12 @@
 /obj/item/weapon/storage/belt/utility/full,
 /obj/item/weapon/storage/belt/utility/full,
 /obj/item/weapon/storage/belt/medical,
-/obj/item/weapon/card/id,
 /obj/effect/floor_decal/corner/paleblue/mono,
 /obj/item/weapon/storage/belt/holster/security,
 /obj/item/weapon/crowbar/prybar,
 /obj/item/weapon/crowbar/prybar,
-/obj/item/device/radio,
-/obj/item/device/radio,
+/obj/item/device/radio/map_preset/playablecolony2,
+/obj/item/device/radio/map_preset/playablecolony2,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/colony2/atmospherics)
 "SR" = (
@@ -2282,12 +2467,11 @@
 /turf/simulated/wall/r_wall,
 /area/map_template/colony2/external)
 "Ul" = (
-/obj/structure/bed/chair/shuttle/white{
-	dir = 4
-	},
+/obj/machinery/hologram/holopad/longrange,
 /obj/effect/floor_decal/corner_steel_grid/diagonal{
 	dir = 4
 	},
+/obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/techmaint,
 /area/map_template/colony2/ship)
 "UE" = (
@@ -2386,6 +2570,12 @@
 /obj/item/weapon/bedsheet/green,
 /obj/structure/curtain/open/bed,
 /obj/effect/submap_landmark/spawnpoint/colonist_spawn2,
+/obj/machinery/alarm{
+	dir = 4;
+	locked = 0;
+	pixel_x = -21;
+	req_access = newlist()
+	},
 /turf/simulated/floor/tiled/techmaint,
 /area/map_template/colony2/ship)
 "VC" = (
@@ -2447,12 +2637,22 @@
 	dir = 4
 	},
 /obj/machinery/door/firedoor,
-/turf/simulated/floor/tiled/freezer,
-/area/map_template/colony2/Hallway)
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/colony2/tcomms)
+"Wi" = (
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/machinery/telecomms/server/map_preset/playablecolony2,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/tcomms)
 "Wk" = (
-/obj/effect/catwalk_plated/dark,
-/obj/structure/closet/crate/med_crate/burn,
-/turf/simulated/floor/plating,
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/structure/largecrate/animal/goat,
+/turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/colony2/storage)
 "Wm" = (
 /obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
@@ -2470,10 +2670,9 @@
 /turf/simulated/floor/reinforced/airless,
 /area/map_template/colony2/external)
 "Wu" = (
-/obj/machinery/seed_storage/garden,
-/obj/machinery/firealarm{
-	dir = 2;
-	pixel_y = 24
+/obj/machinery/portable_atmospherics/hydroponics,
+/obj/machinery/light{
+	dir = 1
 	},
 /obj/effect/floor_decal/corner/paleblue/mono,
 /turf/simulated/floor/tiled/dark/monotile,
@@ -2485,29 +2684,24 @@
 /turf/simulated/floor/reinforced/airless,
 /area/map_template/colony2/external)
 "Xc" = (
-/obj/structure/largecrate/animal/cow,
-/obj/structure/largecrate/animal/cow,
-/obj/effect/floor_decal/corner/paleblue/mono,
-/turf/simulated/floor/tiled/dark/monotile,
-/area/map_template/colony2/storage)
+/obj/structure/hygiene/toilet{
+	dir = 4
+	},
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/freezer,
+/area/map_template/colony2/ship)
 "Xf" = (
 /obj/effect/landmark/clear,
 /obj/effect/landmark/scorcher,
 /turf/template_noop,
 /area/template_noop)
 "Xi" = (
-/obj/machinery/washing_machine,
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 8
-	},
-/obj/machinery/alarm{
-	dir = 8;
-	locked = 0;
-	pixel_x = 25;
-	req_access = newlist()
-	},
-/turf/simulated/floor/tiled/freezer,
-/area/map_template/colony2/Hallway)
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/machinery/vending/hydronutrients,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/commons)
 "Xl" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/mineral/stacking_machine{
@@ -2594,9 +2788,6 @@
 /turf/simulated/floor/reinforced,
 /area/map_template/colony2/external)
 "Za" = (
-/obj/structure/bed/chair/shuttle/white{
-	dir = 8
-	},
 /obj/effect/floor_decal/corner_steel_grid/diagonal,
 /turf/simulated/floor/tiled/techmaint,
 /area/map_template/colony2/ship)
@@ -2607,20 +2798,27 @@
 /turf/simulated/floor/plating,
 /area/map_template/colony2/engineering)
 "ZJ" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
 /obj/effect/floor_decal/corner_steel_grid/diagonal{
 	dir = 4
 	},
-/obj/machinery/firealarm{
-	dir = 4;
-	pixel_x = 25
+/obj/machinery/alarm{
+	dir = 1;
+	locked = 0;
+	pixel_y = -22;
+	req_access = newlist()
 	},
-/obj/machinery/recharge_station,
 /turf/simulated/floor/tiled/techmaint,
 /area/map_template/colony2/ship)
 "ZY" = (
-/obj/item/weapon/reagent_containers/glass/bucket,
 /obj/effect/floor_decal/corner/paleblue/mono,
-/obj/structure/closet/crate/hydroponics/prespawned,
+/obj/structure/table/steel_reinforced,
+/obj/machinery/reagentgrinder/juicer,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/colony2/commons)
 
@@ -2631,11 +2829,12 @@ PU
 PU
 PU
 PU
-qf
+PU
+PU
+PU
 qf
 bE
 bE
-qf
 qf
 vn
 vn
@@ -2670,12 +2869,13 @@ Ls
 Og
 Og
 PU
+eg
 VA
-SP
 UN
+xB
 jo
 Xc
-Mb
+Pa
 DQ
 Oc
 Dv
@@ -2712,14 +2912,15 @@ Ls
 Og
 Og
 PU
+eR
 Qq
 aZ
-UN
+yO
 vf
 Qw
-xB
+Pa
 Wk
-LP
+gi
 DD
 lU
 YQ
@@ -2754,14 +2955,15 @@ Ls
 Og
 Og
 PU
-Qq
-bh
+Bk
+iT
 UN
-Qt
-eR
-so
+UN
+UN
+UN
+Pa
 xx
-LP
+BU
 DR
 lU
 SQ
@@ -2796,11 +2998,12 @@ Ls
 Og
 Og
 PU
+fF
 wx
-de
 UN
-Pa
-Pa
+IN
+eY
+Wi
 Pa
 Af
 LP
@@ -2838,9 +3041,10 @@ Ls
 Og
 Og
 PU
-VA
-dh
+eg
+kb
 UN
+Mb
 ID
 or
 Pa
@@ -2878,11 +3082,12 @@ Og
 "}
 (7,1,1) = {"
 PU
-aL
+bh
 PU
 UN
-dj
+so
 UN
+Qt
 Oy
 oC
 Pa
@@ -2920,11 +3125,12 @@ Og
 "}
 (8,1,1) = {"
 PU
+de
 Dd
 Mh
 ib
-eg
 UN
+qj
 Wd
 qj
 Pa
@@ -2961,12 +3167,13 @@ Xf
 Og
 "}
 (9,1,1) = {"
+aL
 rm
 Za
 aK
 ro
 qb
-iT
+HS
 AU
 HS
 tT
@@ -3003,14 +3210,15 @@ Xf
 Og
 "}
 (10,1,1) = {"
-rm
+aL
+dh
 Ul
 pe
 yJ
 iq
-yO
-IN
 XX
+XX
+aN
 uT
 XX
 Iz
@@ -3028,7 +3236,7 @@ XB
 aB
 aB
 NX
-Qi
+jy
 Qi
 Qi
 UX
@@ -3046,13 +3254,14 @@ Og
 "}
 (11,1,1) = {"
 PU
+dj
 lW
 ci
 ZJ
-fF
 UN
+xv
 io
-qj
+xv
 xv
 xv
 CJ
@@ -3088,13 +3297,14 @@ Og
 "}
 (12,1,1) = {"
 PU
-aL
+bh
 PU
 UN
-dj
+so
 UN
+cz
 is
-oC
+SP
 xv
 tu
 Eo
@@ -3132,10 +3342,11 @@ Og
 Og
 Og
 PU
-dM
 fQ
+dM
 UN
-Xi
+Wu
+Vv
 qI
 xv
 vO
@@ -3174,11 +3385,12 @@ kf
 Og
 Og
 PU
-gm
 fU
+gm
 UN
-xv
-xv
+Xi
+Vv
+gb
 xv
 Ap
 Vv
@@ -3216,10 +3428,11 @@ Ls
 Og
 Og
 PU
-Nb
 ge
+Nb
 UN
-Wu
+oQ
+Vv
 ZY
 cX
 AK
@@ -3258,10 +3471,11 @@ Ls
 Og
 Og
 PU
-CQ
 gr
+CQ
 UN
-kb
+eJ
+Vv
 Vv
 Vv
 Vv
@@ -3300,9 +3514,10 @@ Ls
 Og
 Og
 PU
-EN
 gw
+EN
 UN
+gj
 FI
 Bc
 MN
@@ -3347,9 +3562,10 @@ PU
 PU
 cr
 cr
-Mc
-Mc
 cr
+cr
+Mc
+Mc
 cr
 AE
 AE

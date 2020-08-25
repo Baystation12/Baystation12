@@ -2,6 +2,7 @@
 
 #include "skrellscoutship_areas.dm"
 #include "skrellscoutship_shuttles.dm"
+#include "skrellscoutship_radio.dm"
 
 /datum/map_template/ruin/away_site/skrellscoutship
 	name = "Skrellian Scout Ship"
@@ -138,32 +139,10 @@
 	gloves = /obj/item/clothing/gloves/thick/swat/skrell
 	pda_type = /obj/item/modular_computer/pda
 	pda_slot = slot_l_store
-	l_ear = /obj/item/device/radio/headset/skrellian
+	l_ear = /obj/item/device/radio/headset/map_preset/skrellscoutship
 	id_types = list(/obj/item/weapon/card/id/skrellscoutship)
 	l_pocket = /obj/item/clothing/accessory/badge/tags/skrell
 
-/obj/item/weapon/stock_parts/circuitboard/telecomms/allinone/skrellscoutship
-	build_path = /obj/machinery/telecomms/allinone/skrellscoutship
-
-/obj/machinery/telecomms/allinone/skrellscoutship
-	listening_freqs = list(SKRELL_FREQ)
-	channel_color = COMMS_COLOR_SKRELL
-	channel_name = "Recon"
-	circuitboard = /obj/item/weapon/stock_parts/circuitboard/telecomms/allinone/skrellscoutship
-
-/obj/item/device/radio/headset/skrellian
-	name = "recon headset"
-	icon_state = "srv_headset"
-	ks1type = /obj/item/device/encryptionkey/skrellian
-
-/obj/item/device/radio/headset/skrellian/Initialize()
-	. = ..()
-	set_frequency(SKRELL_FREQ)	//Not going to be random or just set to the common frequency, but can be set later.
-
-/obj/item/device/encryptionkey/skrellian
-	name = "recon radio encryption key"
-	icon_state = "medsci_cypherkey"
-	channels = list("Recon" = 1)
 
 /obj/item/weapon/reagent_containers/food/condiment/psilocybin
 	label_text = "Psilocybin"
@@ -202,6 +181,13 @@
 	. = ..()
 	TLV["pressure"] =		list(ONE_ATMOSPHERE*0.80,ONE_ATMOSPHERE*0.90,ONE_ATMOSPHERE*1.30,ONE_ATMOSPHERE*1.40) /* kpa */
 	TLV["temperature"] =	list(T0C-26, T0C, T0C+80, T0C+90) // K
+
+/obj/machinery/alarm/skrell/server
+	target_temperature = T0C+10
+
+/obj/machinery/alarm/skrell/server/Initialize()
+	. = ..()
+	TLV["temperature"] =	list(T0C-26, T0C, T0C+30, T0C+40) // K
 
 /obj/machinery/power/smes/buildable/preset/skrell
 	uncreated_component_parts = list(

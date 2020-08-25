@@ -1,3 +1,5 @@
+#include "playablecolony_radio.dm"
+
 /datum/map_template/ruin/exoplanet/playablecolony
 	name = "established colony"
 	id = "playablecolony"
@@ -26,6 +28,7 @@
 	name = OUTFIT_JOB_NAME("Colonist")
 	id_types = null
 	pda_type = null
+	l_ear = /obj/item/device/radio/headset/map_preset/playablecolony
 
 /obj/effect/submap_landmark/spawnpoint/colonist_spawn
 	name = "Colonist"

@@ -1149,7 +1149,7 @@
 "ep" = (
 /obj/structure/table/steel,
 /obj/random/assembly,
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/verne{
 	dir = 8;
 	pixel_x = 20
 	},
@@ -1773,10 +1773,10 @@
 /obj/effect/floor_decal/techfloor{
 	dir = 4
 	},
-/obj/machinery/constructable_frame/machine_frame,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
+/obj/machinery/telecomms/broadcaster/map_preset/verne,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/verne/engineering/comms)
 "iZ" = (
@@ -1897,7 +1897,7 @@
 /obj/effect/floor_decal/techfloor{
 	dir = 4
 	},
-/obj/machinery/constructable_frame/machine_frame,
+/obj/machinery/telecomms/hub/map_preset/verne,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/verne/engineering/comms)
 "kC" = (
@@ -2340,7 +2340,7 @@
 	dir = 5
 	},
 /obj/structure/flora/pottedplant/fern,
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/verne{
 	dir = 8;
 	pixel_x = 20
 	},
@@ -2514,7 +2514,7 @@
 /obj/item/weapon/folder,
 /obj/item/weapon/pen/retractable,
 /obj/random/clipboard,
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/verne{
 	dir = 4;
 	pixel_x = -22
 	},
@@ -2556,12 +2556,7 @@
 /obj/effect/floor_decal/techfloor{
 	dir = 8
 	},
-/obj/structure/table/rack{
-	dir = 8
-	},
-/obj/item/weapon/stock_parts/circuitboard/autolathe/micro,
-/obj/random/tool,
-/obj/random/tech_supply,
+/obj/machinery/telecomms/processor/map_preset/verne,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/verne/engineering/comms)
 "qj" = (
@@ -2784,10 +2779,10 @@
 /obj/effect/floor_decal/techfloor{
 	dir = 8
 	},
-/obj/machinery/constructable_frame/computerframe,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
+/obj/machinery/telecomms/receiver/map_preset/verne,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/verne/engineering/comms)
 "rs" = (
@@ -3654,11 +3649,7 @@
 /obj/effect/floor_decal/techfloor{
 	dir = 8
 	},
-/obj/structure/table/rack{
-	dir = 8
-	},
-/obj/random/material,
-/obj/random/powercell,
+/obj/machinery/telecomms/server/map_preset/verne,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/verne/engineering/comms)
 "ym" = (
@@ -3731,7 +3722,7 @@
 "yB" = (
 /obj/structure/table/steel,
 /obj/item/weapon/storage/toolbox/mechanical,
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/verne{
 	dir = 8;
 	pixel_x = 20
 	},
@@ -3740,7 +3731,7 @@
 "yE" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/suit_storage_unit/science/verne,
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/verne{
 	dir = 4;
 	pixel_x = -22
 	},
@@ -3934,7 +3925,7 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/verne{
 	dir = 8;
 	pixel_x = 20
 	},
@@ -3954,7 +3945,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/verne/hangar)
 "At" = (
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/verne{
 	dir = 8;
 	pixel_x = 20
 	},
@@ -4221,7 +4212,7 @@
 /obj/machinery/recharger{
 	pixel_y = 0
 	},
-/obj/item/device/radio,
+/obj/item/device/radio/map_preset/verne,
 /obj/effect/floor_decal/corner/b_green/mono,
 /turf/simulated/floor/tiled/white/monotile,
 /area/verne/catfish)
@@ -4636,7 +4627,7 @@
 	dir = 1;
 	icon_state = "handrail"
 	},
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/verne{
 	dir = 1;
 	pixel_y = -28
 	},
@@ -4878,6 +4869,11 @@
 	id_tag = "catfish_shuttle_sensor";
 	pixel_x = 16;
 	pixel_y = -20
+	},
+/obj/item/device/radio/intercom/map_preset/verne{
+	default_hailing = 1;
+	dir = 8;
+	pixel_x = 20
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/verne/catfish)
@@ -5315,6 +5311,13 @@
 /obj/effect/catwalk_plated/dark,
 /turf/simulated/floor/plating,
 /area/verne/hangar)
+"Lr" = (
+/obj/item/device/radio/intercom/map_preset/verne{
+	default_hailing = 1;
+	pixel_y = 24
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/verne/hangar)
 "Lu" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
@@ -5461,7 +5464,7 @@
 /obj/effect/floor_decal/techfloor{
 	dir = 4
 	},
-/obj/machinery/constructable_frame/machine_frame,
+/obj/machinery/telecomms/bus/map_preset/verne,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/verne/engineering/comms)
 "Nf" = (
@@ -5713,7 +5716,7 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/techfloor/orange,
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/verne{
 	dir = 1;
 	pixel_y = -28
 	},
@@ -5966,9 +5969,9 @@
 /obj/item/weapon/material/hatchet,
 /obj/item/weapon/material/hatchet,
 /obj/structure/closet/crate/plastic,
-/obj/item/device/radio,
-/obj/item/device/radio,
-/obj/item/device/radio,
+/obj/item/device/radio/map_preset/verne,
+/obj/item/device/radio/map_preset/verne,
+/obj/item/device/radio/map_preset/verne,
 /obj/item/device/spaceflare,
 /obj/item/bodybag/cryobag,
 /obj/random/medical,
@@ -6220,7 +6223,7 @@
 "UB" = (
 /obj/machinery/atmospherics/unary/heater,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/verne{
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/white/monotile,
@@ -6303,7 +6306,7 @@
 	sheets = 100
 	},
 /obj/effect/overmap/visitable/ship/landable/verne,
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/verne{
 	dir = 1;
 	pixel_y = -28
 	},
@@ -6314,7 +6317,7 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/verne/catfish)
 "UV" = (
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/verne{
 	dir = 8;
 	pixel_x = 20
 	},
@@ -6662,9 +6665,9 @@
 /obj/item/device/flashlight/lantern,
 /obj/item/device/scanner/gas,
 /obj/item/weapon/storage/box/greenglowsticks,
-/obj/item/device/radio,
-/obj/item/device/radio,
-/obj/item/device/radio,
+/obj/item/device/radio/map_preset/verne,
+/obj/item/device/radio/map_preset/verne,
+/obj/item/device/radio/map_preset/verne,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/power/apc/verne{
 	dir = 4;
@@ -13006,7 +13009,7 @@ Ql
 Ql
 Ql
 eb
-OQ
+Lr
 NK
 Xc
 eb
@@ -15742,7 +15745,7 @@ Ql
 Ql
 Ql
 eb
-OQ
+Lr
 NK
 Wi
 eb

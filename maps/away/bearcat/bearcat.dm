@@ -1,6 +1,7 @@
 #include "bearcat_areas.dm"
 #include "bearcat_jobs.dm"
 #include "bearcat_access.dm"
+#include "bearcat_radio.dm"
 
 /obj/effect/submap_landmark/joinable_submap/bearcat
 	name = "FTV Bearcat"
@@ -119,7 +120,7 @@
 	uniform = /obj/item/clothing/under/casual_pants/classicjeans
 	suit = /obj/item/clothing/suit/storage/hooded/wintercoat
 	shoes = /obj/item/clothing/shoes/black
-	r_pocket = /obj/item/device/radio
+	r_pocket = /obj/item/device/radio/map_preset/bearcat
 
 /decl/hierarchy/outfit/deadcap/post_equip(mob/living/carbon/human/H)
 	..()

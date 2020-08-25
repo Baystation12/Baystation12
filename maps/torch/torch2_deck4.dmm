@@ -937,9 +937,9 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/hailing{
 	dir = 8;
-	pixel_x = 21
+	pixel_x = 24
 	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/fourthdeck/fore)
@@ -9880,9 +9880,9 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/hailing{
 	dir = 8;
-	pixel_x = 21
+	pixel_x = 24
 	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/fourthdeck/fore)
@@ -13910,9 +13910,9 @@
 	dir = 1;
 	id_tag = "rescue_shuttle_dock_pump"
 	},
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/hailing{
 	dir = 8;
-	pixel_x = 21
+	pixel_x = 24
 	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/fourthdeck/aft)
@@ -14563,9 +14563,9 @@
 	dir = 2;
 	id_tag = "admin_shuttle_dock_pump"
 	},
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/hailing{
 	dir = 8;
-	pixel_x = 21
+	pixel_x = 24
 	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/fourthdeck/aft)

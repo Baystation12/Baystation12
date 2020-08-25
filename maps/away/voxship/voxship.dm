@@ -2,6 +2,7 @@
 
 #include "voxship_areas.dm"
 #include "voxship_jobs.dm"
+#include "voxship_radio.dm"
 
 /datum/map_template/ruin/away_site/voxship
 	name = "Vox Base"

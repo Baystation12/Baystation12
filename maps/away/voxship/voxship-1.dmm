@@ -314,6 +314,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
+/obj/item/device/radio/intercom/map_preset/voxship{
+	dir = 4;
+	pixel_x = -24
+	},
 /turf/simulated/floor/plating/vox,
 /area/voxship/ship)
 "bb" = (
@@ -1101,9 +1105,6 @@
 	icon_state = "dmg2"
 	},
 /area/voxship/base)
-"di" = (
-/turf/simulated/floor/asteroid,
-/area/voxship/base)
 "dj" = (
 /obj/item/stack/material/steel,
 /obj/item/stack/material/rods,
@@ -1148,9 +1149,6 @@
 	icon_state = "dmg4"
 	},
 /area/voxship/base)
-"dr" = (
-/turf/simulated/mineral/random/high_chance,
-/area/voxship/base)
 "ds" = (
 /obj/effect/catwalk_plated/dark,
 /obj/structure/inflatable/door,
@@ -1158,10 +1156,6 @@
 /area/voxship/base)
 "dt" = (
 /obj/effect/floor_decal/asteroid,
-/turf/simulated/floor/asteroid,
-/area/voxship/base)
-"du" = (
-/obj/item/weapon/storage/ore,
 /turf/simulated/floor/asteroid,
 /area/voxship/base)
 "dv" = (
@@ -1499,11 +1493,6 @@
 /obj/effect/floor_decal/steeldecal/steel_decals6,
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/base)
-"en" = (
-/obj/item/weapon/shovel,
-/obj/effect/floor_decal/asteroid,
-/turf/simulated/floor/asteroid,
-/area/voxship/base)
 "eo" = (
 /obj/item/stack/material/steel,
 /obj/item/stack/material/rods,
@@ -1604,11 +1593,6 @@
 	},
 /turf/space,
 /area/space)
-"eD" = (
-/obj/item/weapon/pickaxe/jackhammer,
-/obj/effect/floor_decal/asteroid,
-/turf/simulated/floor/asteroid,
-/area/voxship/base)
 "eE" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
@@ -1997,6 +1981,25 @@
 /obj/item/device/suit_cooling_unit,
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/base)
+"tj" = (
+/obj/item/device/radio/intercom/map_preset/voxship{
+	dir = 1;
+	pixel_y = -32
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/base)
+"wE" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_x = 0
+	},
+/obj/item/device/radio/intercom/map_preset/voxship{
+	pixel_y = 24
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/base)
 "ys" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/catwalk,
@@ -2016,6 +2019,18 @@
 /obj/structure/inflatable/door,
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/space)
+"Hx" = (
+/obj/machinery/telecomms/bus/map_preset/voxship,
+/turf/simulated/floor/plating/vox,
+/area/voxship/base)
+"KC" = (
+/obj/machinery/telecomms/receiver/map_preset/voxship,
+/turf/simulated/floor/plating/vox,
+/area/voxship/base)
+"Lm" = (
+/obj/machinery/telecomms/broadcaster/map_preset/voxship,
+/turf/simulated/floor/plating/vox,
+/area/voxship/base)
 "Lt" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -2030,6 +2045,10 @@
 /obj/structure/inflatable/door,
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/base)
+"RW" = (
+/obj/machinery/telecomms/processor/map_preset/voxship,
+/turf/simulated/floor/plating/vox,
+/area/voxship/base)
 "Tf" = (
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/space)
@@ -2037,6 +2056,14 @@
 /obj/machinery/atmospherics/pipe/manifold/visible/black,
 /turf/simulated/floor/plating/vox,
 /area/voxship/ship)
+"Wv" = (
+/obj/machinery/telecomms/server/map_preset/voxship,
+/turf/simulated/floor/plating/vox,
+/area/voxship/base)
+"YN" = (
+/obj/machinery/telecomms/hub/map_preset/voxship,
+/turf/simulated/floor/plating/vox,
+/area/voxship/base)
 
 (1,1,1) = {"
 aa
@@ -6960,7 +6987,7 @@ bA
 cM
 dL
 aQ
-dT
+wE
 bU
 bT
 bB
@@ -7487,8 +7514,8 @@ aQ
 aQ
 aQ
 aQ
-ac
-ac
+aQ
+aQ
 ac
 ac
 ac
@@ -7585,13 +7612,13 @@ eB
 ai
 er
 es
+ai
+dd
 eW
 cY
 fs
 fO
 fK
-dr
-dr
 ac
 ac
 ac
@@ -7680,7 +7707,7 @@ bU
 bG
 ey
 aV
-aV
+tj
 aQ
 cH
 eB
@@ -7688,11 +7715,11 @@ ai
 ai
 ai
 ai
+ai
+ai
 aq
 eo
 fP
-dt
-dt
 dt
 aT
 aT
@@ -7789,13 +7816,13 @@ eB
 ai
 ai
 ai
+ai
+ai
 aq
 aq
 aq
 aq
 aq
-en
-dt
 aT
 aT
 aT
@@ -7891,13 +7918,13 @@ eB
 ai
 ai
 ai
+ai
+ai
 aI
 ai
 aI
 ai
 do
-di
-eD
 ac
 ac
 aT
@@ -7992,14 +8019,14 @@ ck
 eB
 ai
 ai
+ai
+ai
 aq
 aq
 aq
 cY
 dj
 dp
-di
-du
 ac
 ac
 ac
@@ -8093,13 +8120,13 @@ aQ
 eq
 eB
 eg
-ai
-ai
-ai
-aq
-dd
-ac
-ac
+Wv
+KC
+RW
+YN
+Hx
+Lm
+cY
 ac
 ac
 ac
@@ -8200,8 +8227,8 @@ ad
 ad
 ad
 ad
-ac
-ac
+ad
+ad
 ac
 ac
 ac

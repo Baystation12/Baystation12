@@ -8,6 +8,7 @@
 	var/on = 1 // 0 for off
 	var/last_transmission
 	var/frequency = PUB_FREQ //common chat
+	var/default_frequency
 	var/traitor_frequency = 0 //tune to frequency to unlock traitor supplies
 	var/canhear_range = 3 // the range which mobs can hear this radio from
 	var/datum/wires/radio/wires = null
@@ -53,6 +54,8 @@
 	if(frequency < RADIO_LOW_FREQ || frequency > RADIO_HIGH_FREQ)
 		frequency = sanitize_frequency(frequency, RADIO_LOW_FREQ, RADIO_HIGH_FREQ)
 	set_frequency(frequency)
+	if (!default_frequency)
+		default_frequency = frequency
 
 	for (var/ch_name in channels)
 		secure_radio_connections[ch_name] = radio_controller.add_object(src, radiochannels[ch_name],  RADIO_CHAT)
@@ -70,7 +73,7 @@
 			visible_message(SPAN_WARNING("[icon2html(src, viewers(src))] [src] lets out a quiet click as it powers down."), SPAN_WARNING("You hear \a [src] let out a quiet click."))
 			return FALSE
 
-	
+
 
 /obj/item/device/radio/Destroy()
 	QDEL_NULL(wires)
@@ -103,6 +106,7 @@
 	data["mic_status"] = broadcasting
 	data["speaker"] = listening
 	data["freq"] = format_frequency(frequency)
+	data["default_freq"] = format_frequency(default_frequency)
 	data["rawfreq"] = num2text(frequency)
 	var/obj/item/weapon/cell/has_cell = get_cell()
 	if(has_cell)
@@ -176,6 +180,10 @@
 			Speaker: <A href='byond://?src=\ref[src];ch_name=[chan_name];listen=[!list]'>[list ? "Engaged" : "Disengaged"]</A><BR>
 			"}
 
+/obj/item/device/radio/proc/reset_frequency()
+	if (default_frequency)
+		frequency = default_frequency
+
 /obj/item/device/radio/proc/ToggleBroadcast()
 	broadcasting = !broadcasting && !(wires.IsIndexCut(WIRE_TRANSMIT) || wires.IsIndexCut(WIRE_SIGNAL))
 
@@ -220,6 +228,12 @@
 		if ((new_frequency < PUBLIC_LOW_FREQ || new_frequency > PUBLIC_HIGH_FREQ))
 			new_frequency = sanitize_frequency(new_frequency)
 		set_frequency(new_frequency)
+		if(hidden_uplink)
+			if(hidden_uplink.check_trigger(usr, frequency, traitor_frequency))
+				close_browser(usr, "window=radio")
+		. = TRUE
+	else if (href_list["default_freq"])
+		reset_frequency()
 		if(hidden_uplink)
 			if(hidden_uplink.check_trigger(usr, frequency, traitor_frequency))
 				close_browser(usr, "window=radio")
@@ -789,6 +803,34 @@
 		for (var/ch_name in op)
 			secure_radio_connections[ch_name] = radio_controller.add_object(src, radiochannels[ch_name],  RADIO_CHAT)
 	return
+
+/obj/item/device/radio/map_preset
+	var/preset_name
+	var/use_common = FALSE
+	channels = list()
+
+/obj/item/device/radio/map_preset/Initialize()
+	if (!preset_name)
+		return ..()
+
+	var/name_lower = lowertext(preset_name)
+	name = "[name_lower] intercom"
+	frequency = assign_away_freq(preset_name)
+	channels += list(
+		preset_name = 1,
+		"Hailing" = 1
+	)
+	if (use_common)
+		channels += list("Common" = 1)
+
+	. = ..()
+
+	internal_channels = list(
+		num2text(frequency) = list(),
+		HAIL_FREQ = list(),
+	)
+	if (use_common)
+		internal_channels += list(PUB_FREQ = list())
 
 /obj/item/device/radio/off
 	listening = 0

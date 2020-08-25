@@ -9,7 +9,7 @@
 /turf/simulated/wall/r_wall/hull/vox,
 /area/voxship/engineering)
 "ad" = (
-/obj/machinery/portable_atmospherics/canister/empty,
+/obj/machinery/telecomms/processor/map_preset/voxship,
 /turf/simulated/floor/plating/vox,
 /area/voxship/thrusters)
 "ae" = (
@@ -41,11 +41,11 @@
 	dir = 6;
 	icon_state = "intact"
 	},
-/obj/machinery/portable_atmospherics/canister/empty,
 /obj/machinery/light/small{
 	dir = 4;
 	icon_state = "bulb1"
 	},
+/obj/random/junk,
 /turf/simulated/floor/plating/vox,
 /area/voxship/thrusters)
 "aj" = (
@@ -118,7 +118,7 @@
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/engineering)
 "ao" = (
-/obj/random/junk,
+/obj/machinery/telecomms/bus/map_preset/voxship,
 /turf/simulated/floor/plating/vox,
 /area/voxship/thrusters)
 "ap" = (
@@ -127,6 +127,7 @@
 /area/voxship/thrusters)
 "aq" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel,
+/obj/machinery/telecomms/server/map_preset/voxship,
 /turf/simulated/floor/plating/vox,
 /area/voxship/thrusters)
 "ar" = (
@@ -180,6 +181,7 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
+/obj/machinery/telecomms/hub/map_preset/voxship,
 /turf/simulated/floor/plating/vox,
 /area/voxship/thrusters)
 "aC" = (
@@ -399,6 +401,7 @@
 	icon_state = "4-8";
 	pixel_y = 0
 	},
+/obj/random/junk,
 /turf/simulated/floor/plating/vox,
 /area/voxship/thrusters)
 "bc" = (
@@ -417,6 +420,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
+/obj/machinery/portable_atmospherics/canister/empty,
 /turf/simulated/floor/plating/vox,
 /area/voxship/thrusters)
 "bd" = (
@@ -603,6 +607,8 @@
 	dir = 4;
 	icon_state = "intact"
 	},
+/obj/random/mre,
+/obj/random/snack,
 /turf/simulated/floor/plating/vox,
 /area/voxship/thrusters)
 "bB" = (
@@ -610,20 +616,20 @@
 	dir = 9;
 	icon_state = "intact"
 	},
+/obj/machinery/portable_atmospherics/canister/empty,
 /turf/simulated/floor/plating/vox,
 /area/voxship/thrusters)
 "bC" = (
 /obj/effect/decal/cleanable/filth,
-/obj/random/junk,
+/obj/machinery/portable_atmospherics/canister/empty,
 /turf/simulated/floor/plating/vox,
 /area/voxship/thrusters)
 "bD" = (
-/obj/random/mre,
-/obj/random/snack,
 /obj/machinery/light/small{
 	dir = 4;
 	icon_state = "bulb1"
 	},
+/obj/machinery/portable_atmospherics/canister/empty,
 /turf/simulated/floor/plating/vox,
 /area/voxship/thrusters)
 "bE" = (
@@ -3156,6 +3162,14 @@
 /obj/random/snack,
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/shuttle)
+"Dc" = (
+/obj/machinery/telecomms/broadcaster/map_preset/voxship,
+/turf/simulated/floor/plating/vox,
+/area/voxship/thrusters)
+"PN" = (
+/obj/machinery/telecomms/receiver/map_preset/voxship,
+/turf/simulated/floor/plating/vox,
+/area/voxship/thrusters)
 
 (1,1,1) = {"
 fX
@@ -9621,7 +9635,7 @@ fX
 fX
 ab
 ab
-ah
+Dc
 ap
 aC
 aY
@@ -9723,7 +9737,7 @@ fX
 fX
 ab
 ad
-ad
+ah
 ah
 aD
 aZ
@@ -9824,7 +9838,7 @@ fX
 fX
 fX
 ab
-ad
+PN
 ai
 aq
 aE

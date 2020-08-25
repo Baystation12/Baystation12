@@ -2850,6 +2850,10 @@
 	dir = 8;
 	icon_state = "console"
 	},
+/obj/item/device/radio/intercom/hailing{
+	dir = 8;
+	pixel_x = 24
+	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/rescue_base/start)
 "fq" = (
@@ -3593,6 +3597,17 @@
 	icon_state = "asteroidfloor"
 	},
 /area/map_template/rescue_base/base)
+"DF" = (
+/obj/structure/handrai{
+	dir = 4;
+	icon_state = "handrail"
+	},
+/obj/item/device/radio/intercom/hailing{
+	dir = 4;
+	pixel_x = -24
+	},
+/turf/simulated/floor/plating,
+/area/map_template/rescue_base/start)
 "Es" = (
 /obj/machinery/telecomms/allinone/ert,
 /turf/simulated/floor/plating,
@@ -5364,7 +5379,7 @@ eQ
 eU
 fc
 fj
-fj
+DF
 ft
 eU
 fF

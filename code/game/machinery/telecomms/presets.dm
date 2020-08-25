@@ -2,6 +2,23 @@
 
 //HUB
 
+/obj/machinery/telecomms/hub/map_preset
+	var/preset_name
+
+/obj/machinery/telecomms/hub/map_preset/Initialize()
+	if (preset_name)
+		var/name_lower = replacetext(lowertext(preset_name), " ", "_")
+		id = "[preset_name] Hub"
+		network = "tcomm_[name_lower]"
+		autolinkers = list(
+			"[name_lower]_broadcaster",
+			"[name_lower]_hub",
+			"[name_lower]_receiver",
+			"[name_lower]_relay",
+			"[name_lower]_server"
+		)
+	. = ..()
+
 /obj/machinery/telecomms/hub/preset
 	id = "Hub"
 	network = "tcommsat"
@@ -18,11 +35,28 @@
 
 //Receivers
 
+/obj/machinery/telecomms/receiver/map_preset
+	var/preset_name
+	var/use_common = FALSE
+
+/obj/machinery/telecomms/receiver/map_preset/Initialize()
+	if (preset_name)
+		var/name_lower = replacetext(lowertext(preset_name), " ", "_")
+		id = "[preset_name] Receiver"
+		network = "tcomm_[name_lower]"
+		freq_listening += list(assign_away_freq(preset_name), HAIL_FREQ)
+		if (use_common)
+			freq_listening += PUB_FREQ
+		autolinkers = list(
+			"[name_lower]_receiver"
+		)
+	. = ..()
+
 /obj/machinery/telecomms/receiver/preset_right
 	id = "Receiver A"
 	network = "tcommsat"
 	autolinkers = list("receiverA") // link to relay
-	freq_listening = list(AI_FREQ, SCI_FREQ, MED_FREQ, SUP_FREQ, SRV_FREQ, COMM_FREQ, ENG_FREQ, SEC_FREQ, ENT_FREQ)
+	freq_listening = list(AI_FREQ, SCI_FREQ, MED_FREQ, SUP_FREQ, SRV_FREQ, COMM_FREQ, ENG_FREQ, SEC_FREQ, ENT_FREQ, HAIL_FREQ)
 
 	//Common and other radio frequencies for people to freely use
 	New()
@@ -40,6 +74,24 @@
 
 //Buses
 
+/obj/machinery/telecomms/bus/map_preset
+	var/preset_name
+	var/use_common = FALSE
+
+/obj/machinery/telecomms/bus/map_preset/Initialize()
+	if (preset_name)
+		var/name_lower = replacetext(lowertext(preset_name), " ", "_")
+		id = "[preset_name] Bus"
+		network = "tcomm_[name_lower]"
+		freq_listening += list(assign_away_freq(preset_name), HAIL_FREQ)
+		if (use_common)
+			freq_listening += PUB_FREQ
+		autolinkers = list(
+			"[name_lower]_processor",
+			"[name_lower]_server"
+		)
+	. = ..()
+
 /obj/machinery/telecomms/bus/preset_one
 	id = "Bus 1"
 	network = "tcommsat"
@@ -54,7 +106,7 @@
 
 /obj/machinery/telecomms/bus/preset_two/New()
 	for(var/i = PUBLIC_LOW_FREQ, i < PUBLIC_HIGH_FREQ, i += 2)
-		if(i == AI_FREQ || i == PUB_FREQ || i == MED_I_FREQ || i == SEC_I_FREQ)
+		if(i == AI_FREQ || i == PUB_FREQ || i == MED_I_FREQ || i == SEC_I_FREQ || i == HAIL_FREQ)
 			continue
 		freq_listening |= i
 	..()
@@ -68,7 +120,7 @@
 /obj/machinery/telecomms/bus/preset_four
 	id = "Bus 4"
 	network = "tcommsat"
-	freq_listening = list(ENG_FREQ, AI_FREQ, PUB_FREQ, ENT_FREQ, MED_I_FREQ, SEC_I_FREQ)
+	freq_listening = list(ENG_FREQ, AI_FREQ, PUB_FREQ, ENT_FREQ, MED_I_FREQ, SEC_I_FREQ, HAIL_FREQ)
 	autolinkers = list("processor4", "engineering", "common")
 
 /obj/machinery/telecomms/bus/preset_cent
@@ -79,6 +131,19 @@
 	autolinkers = list("processorCent", "centcomm")
 
 //Processors
+
+/obj/machinery/telecomms/processor/map_preset
+	var/preset_name
+
+/obj/machinery/telecomms/processor/map_preset/Initialize()
+	if (preset_name)
+		var/name_lower = replacetext(lowertext(preset_name), " ", "_")
+		id = "[preset_name] Processor"
+		network = "tcomm_[name_lower]"
+		autolinkers = list(
+			"[name_lower]_processor"
+		)
+	. = ..()
 
 /obj/machinery/telecomms/processor/preset_one
 	id = "Processor 1"
@@ -107,6 +172,32 @@
 	autolinkers = list("processorCent")
 
 //Servers
+
+/obj/machinery/telecomms/server/map_preset
+	var/preset_name
+	var/preset_color = COMMS_COLOR_DEFAULT
+	var/use_common = FALSE
+
+/obj/machinery/telecomms/server/map_preset/Initialize()
+	if (preset_name)
+		var/name_lower = replacetext(lowertext(preset_name), " ", "_")
+		id = "[preset_name] Server"
+		network = "tcomm_[name_lower]"
+		freq_listening += list(
+			assign_away_freq(preset_name),
+			HAIL_FREQ
+		)
+		channel_tags += list(
+			list(assign_away_freq(preset_name), preset_name, preset_color),
+			list(HAIL_FREQ, "Hailing", COMMS_COLOR_HAILING)
+		)
+		if (use_common)
+			freq_listening += PUB_FREQ
+			channel_tags += list(list(PUB_FREQ, "Common", COMMS_COLOR_COMMON))
+		autolinkers = list(
+			"[name_lower]_server"
+		)
+	. = ..()
 
 /obj/machinery/telecomms/server/presets
 
@@ -138,13 +229,14 @@
 
 /obj/machinery/telecomms/server/presets/common
 	id = "Common Server"
-	freq_listening = list(PUB_FREQ, AI_FREQ, ENT_FREQ, MED_I_FREQ, SEC_I_FREQ) // AI Private, Common, and Departmental Intercomms
+	freq_listening = list(PUB_FREQ, AI_FREQ, ENT_FREQ, MED_I_FREQ, SEC_I_FREQ, HAIL_FREQ) // AI Private, Common, and Departmental Intercomms
 	channel_tags = list(
 		list(PUB_FREQ, "Common", COMMS_COLOR_COMMON),
 		list(AI_FREQ, "AI Private", COMMS_COLOR_AI),
 		list(ENT_FREQ, "Entertainment", COMMS_COLOR_ENTERTAIN),
 		list(MED_I_FREQ, "Medical (I)", COMMS_COLOR_MEDICAL_I),
-		list(SEC_I_FREQ, "Security (I)", COMMS_COLOR_SECURITY_I)
+		list(SEC_I_FREQ, "Security (I)", COMMS_COLOR_SECURITY_I),
+		list(HAIL_FREQ, "Hailing", COMMS_COLOR_HAILING)
 	)
 	autolinkers = list("common")
 
@@ -156,7 +248,7 @@
 
 /obj/machinery/telecomms/server/presets/unused/New()
 	for(var/i = PUBLIC_LOW_FREQ, i < PUBLIC_HIGH_FREQ, i += 2)
-		if(i == AI_FREQ || i == PUB_FREQ || i == MED_I_FREQ || i == SEC_I_FREQ)
+		if(i == AI_FREQ || i == PUB_FREQ || i == MED_I_FREQ || i == SEC_I_FREQ || i == HAIL_FREQ)
 			continue
 		freq_listening |= i
 	..()
@@ -190,6 +282,19 @@
 //Broadcasters
 
 //--PRESET LEFT--//
+
+/obj/machinery/telecomms/broadcaster/map_preset
+	var/preset_name
+
+/obj/machinery/telecomms/broadcaster/map_preset/Initialize()
+	if (preset_name)
+		var/name_lower = replacetext(lowertext(preset_name), " ", "_")
+		id = "[preset_name] Broadcaster"
+		network = "tcomm_[name_lower]"
+		autolinkers = list(
+			"[name_lower]_broadcaster"
+		)
+	. = ..()
 
 /obj/machinery/telecomms/broadcaster/preset_right
 	id = "Broadcaster A"

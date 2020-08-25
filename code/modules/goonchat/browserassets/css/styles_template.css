@@ -293,6 +293,13 @@ em						{font-style: normal;	font-weight: bold;}
 .srvradio				{color: #6eaa2c;}
 .expradio				{color: #a3a332;}
 
+.hailradio				{color: #cc00aa;}
+.exampleradio			{color: #ff00ff;}
+.voxradio				{color: #f32b06;}
+.bearcatradio			{color: #590e2d;}
+.colonyradio			{color: #ceaf3e;}
+.verneradio				{color: #738465;}
+
 /* Miscellaneous */
 .name					{font-weight: bold;}
 .alert					{color: #ff0000;}

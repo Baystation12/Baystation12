@@ -1,6 +1,7 @@
 #include "verne_areas.dm"
 #include "verne_jobs.dm"
 #include "verne_shuttles.dm"
+#include "verne_radio.dm"
 
 /obj/effect/submap_landmark/joinable_submap/verne
 	name = "SRV Verne"

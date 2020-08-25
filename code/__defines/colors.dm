@@ -97,6 +97,7 @@
 #define	COMMS_COLOR_ENTERTAIN  "#666666"
 #define	COMMS_COLOR_AI         "#ff00ff"
 #define	COMMS_COLOR_COMMON     "#408010"
+#define COMMS_COLOR_HAILING    "#cc00aa"
 #define	COMMS_COLOR_SERVICE    "#709b00"
 #define	COMMS_COLOR_SUPPLY     "#7f6539"
 #define	COMMS_COLOR_SCIENCE    "#993399"
@@ -110,6 +111,10 @@
 #define	COMMS_COLOR_CENTCOMM   "#5c5c7c"
 #define	COMMS_COLOR_SYNDICATE  "#6d3f40"
 #define	COMMS_COLOR_SKRELL     "#7331c4"
+#define COMMS_COLOR_VOX        "#f32b06"
+#define COMMS_COLOR_BEARCAT    "#590e2d"
+#define COMMS_COLOR_COLONY     "#ceaf3e"
+#define COMMS_COLOR_VERNE      "#738465"
 
 #define WOOD_COLOR_GENERIC     "#d5a66e"
 #define WOOD_COLOR_RICH        "#792f27"

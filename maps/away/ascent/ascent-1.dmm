@@ -4516,6 +4516,10 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/effect/catwalk_plated/ascent,
+/obj/item/device/radio/intercom/hailing{
+	dir = 8;
+	pixel_x = 24
+	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent/shuttle_port)
 "sc" = (
@@ -5053,6 +5057,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_starboard_prow)
+"Kr" = (
+/obj/item/device/radio/intercom/hailing{
+	dir = 4;
+	pixel_x = -24
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/shuttle_starboard)
 "KL" = (
 /obj/machinery/power/terminal,
 /obj/structure/cable/cyan,
@@ -5093,6 +5104,13 @@
 	dir = 1
 	},
 /turf/simulated/floor/ascent,
+/area/ship/ascent/bridge)
+"LJ" = (
+/obj/item/device/radio/intercom/hailing{
+	dir = 4;
+	pixel_x = -24
+	},
+/turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/bridge)
 "LN" = (
 /obj/structure/hygiene/shower/ascent,
@@ -5321,6 +5339,13 @@
 	},
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/shuttle_port)
+"Uv" = (
+/obj/item/device/radio/intercom/hailing{
+	dir = 8;
+	pixel_x = 24
+	},
+/turf/simulated/floor/tiled/ascent,
+/area/ship/ascent/bridge)
 "Uy" = (
 /obj/structure/cable/cyan{
 	d1 = 1;
@@ -12726,7 +12751,7 @@ aa
 aa
 ab
 gA
-ae
+Kr
 fw
 Gs
 ae
@@ -13107,13 +13132,13 @@ js
 aj
 az
 IY
-be
+LJ
 be
 iU
 az
 bR
 be
-be
+LJ
 jD
 az
 bW
@@ -14083,13 +14108,13 @@ bI
 aK
 az
 Ge
+Uv
 be
 be
 be
 be
 be
-be
-be
+Uv
 VH
 az
 hS

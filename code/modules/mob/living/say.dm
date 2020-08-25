@@ -17,8 +17,8 @@ var/list/department_radio_keys = list(
 	  ":p" = "AI Private",	".p" = "AI Private",
 	  ":z" = "Entertainment",".z" = "Entertainment",
 	  ":y" = "Exploration",		".y" = "Exploration",
-	  ":k" = "Recon",		".k" = "Recon",	//Skrell Recon ship
 	  ":o" = "Response Team",".o" = "Response Team", //ERT
+	  ":j" = "Hailing", ".j" = "Hailing",
 
 	  ":R" = "right ear",	".R" = "right ear",
 	  ":L" = "left ear",	".L" = "left ear",
@@ -38,6 +38,7 @@ var/list/department_radio_keys = list(
 	  ":Z" = "Entertainment",".Z" = "Entertainment",
 	  ":Y" = "Exploration",		".Y" = "Exploration",
 	  ":O" = "Response Team", ".O" = "Response Team",
+	  ":J" = "Hailing", ".J" = "Hailing",
 
 	  //kinda localization -- rastaf0
 	  //same keys as above, but on russian keyboard layout. This file uses cp1251 as encoding.
