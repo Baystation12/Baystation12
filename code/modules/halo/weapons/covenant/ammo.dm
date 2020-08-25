@@ -375,7 +375,7 @@
 		if(dir_move in GLOB.cardinal)
 			lastloc = get_edge_target_turf(m, dir_move)
 		else
-			for(var/i = 0 to world.view)
+			for(var/i = 0 to world.view - 1)
 				var/turf/newloc = get_step(lastloc,dir_move)
 				if(newloc.density == 1)
 					break
