@@ -14,7 +14,9 @@
 	if(zoom_amount > 1)
 		gun.scope_zoom_amount = zoom_amount
 		gun.max_zoom_amount = zoom_amount
-		gun.is_scope_variable = is_variable
+		if(is_variable)
+			gun.is_scope_variable = is_variable
+			gun.verbs += /obj/item/weapon/gun/proc/verb_set_scope_zoom
 
 /obj/item/weapon_attachment/sight/remove_attachment_effects(var/obj/item/weapon/gun/gun)
 	. = ..()
@@ -22,6 +24,7 @@
 	gun.scope_zoom_amount = 0
 	gun.max_zoom_amount = 0
 	gun.is_scope_variable = 0
+	gun.verbs -= /obj/item/weapon/gun/proc/verb_set_scope_zoom
 
 
 /obj/item/weapon_attachment/sight/rds
