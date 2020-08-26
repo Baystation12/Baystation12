@@ -529,9 +529,11 @@
 	heating_point = null
 
 /datum/reagent/capilliumate/affect_touch(var/mob/living/carbon/human/M, var/alien, var/removed)
-	if(!alien)
-		M.change_hair("Very Long Hair")
-		M.change_facial_hair("Very Long Beard")
+	if(!alien && istype(M, /mob/living/carbon/human))
+		var/datum/sprite_accessory/hair/newhair = /datum/sprite_accessory/hair/longest
+		var/datum/sprite_accessory/facial_hair/newbeard = /datum/sprite_accessory/facial_hair/vlongbeard
+		M.change_hair(newhair.name)
+		M.change_facial_hair(newbeard.name)
 		to_chat(M, SPAN_NOTICE("Your hair grows to extraordinary lengths!"))
 		metabolism=99
 
@@ -548,7 +550,7 @@
 
 /datum/reagent/colored_hair_dye
 	name = "Hair Dye"
-	description = "Apply to head to your add some color to your life!"
+	description = "Apply to your head to add some color to your life!"
 	reagent_state = LIQUID
 	taste_description = "bad choices"
 	metabolism=99
@@ -582,7 +584,7 @@
 	color = "#696969"
 
 /datum/reagent/colored_hair_dye/affect_touch(var/mob/living/carbon/human/M, var/alien, var/removed)
-	if(!alien)
+	if(!alien && istype(M, /mob/living/carbon/human))
 		var/red = hex2num(copytext(src.color, 2, 4))
 		var/green = hex2num(copytext(src.color, 4, 6))
 		var/blue = hex2num(copytext(src.color, 6, 8))
