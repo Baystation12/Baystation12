@@ -532,8 +532,8 @@
 	if(!alien && istype(M, /mob/living/carbon/human))
 		var/datum/sprite_accessory/hair/newhair = /datum/sprite_accessory/hair/longest
 		var/datum/sprite_accessory/facial_hair/newbeard = /datum/sprite_accessory/facial_hair/vlongbeard
-		M.change_hair(newhair.name)
-		M.change_facial_hair(newbeard.name)
+		M.change_hair(initial(newhair.name))
+		M.change_facial_hair(initial(newbeard.name))
 		to_chat(M, SPAN_NOTICE("Your hair grows to extraordinary lengths!"))
 		metabolism=99
 
