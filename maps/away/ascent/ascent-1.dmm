@@ -345,7 +345,7 @@
 /area/ship/ascent/bridge)
 "bl" = (
 /obj/effect/submap_landmark/spawnpoint/ascent_seedship/alate,
-/obj/structure/ascent_spawn,
+/obj/machinery/cryopod/ascent_spawn,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/habitation)
 "bm" = (
@@ -556,6 +556,9 @@
 	level = 2
 	},
 /obj/structure/bed/chair/padded/purple/ascent,
+/obj/machinery/computer/cryopod/ascent_spawn{
+	pixel_y = -32
+	},
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/habitation)
 "bL" = (
@@ -767,7 +770,7 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/bridge)
 "ch" = (
-/obj/structure/ascent_spawn,
+/obj/machinery/cryopod/ascent_spawn,
 /obj/effect/submap_landmark/spawnpoint/ascent_seedship,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/habitation)
@@ -812,7 +815,7 @@
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/wing_port)
 "cm" = (
-/obj/structure/ascent_spawn,
+/obj/machinery/cryopod/ascent_spawn,
 /obj/effect/submap_landmark/spawnpoint/ascent_seedship/adjunct,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/habitation)
@@ -1339,7 +1342,7 @@
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/wing_port)
 "dB" = (
-/obj/structure/ascent_spawn,
+/obj/machinery/cryopod/ascent_spawn,
 /obj/effect/submap_landmark/spawnpoint/ascent_seedship/queen,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/habitation)

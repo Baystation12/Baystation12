@@ -20,11 +20,3 @@ MANTIDIFY(/obj/item/weapon/tank/jetpack/carbondioxide, "maneuvering pack",      
 	color = COLOR_CYAN
 	b_colour = COLOR_CYAN
 	desc = "Some kind of strange alien lightbulb technology."
-
-/obj/structure/ascent_spawn
-	name = "mantid cryotank"
-	desc = "A liquid-filled, cloudy tank with strange forms twitching inside."
-	icon = 'icons/obj/cryogenics.dmi'
-	icon_state = "cellold2"
-	anchored = TRUE
-	density =  TRUE
