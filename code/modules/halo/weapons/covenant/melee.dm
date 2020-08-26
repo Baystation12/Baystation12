@@ -208,7 +208,7 @@ Luckily, this isn't a downside due to the explosive properties of such a large a
 	slot_flags = SLOT_BACK | SLOT_BELT | SLOT_POCKET
 	edge = 1
 	sharp = 1
-	armor_penetration = 35
+	armor_penetration = 70
 	matter = list("nanolaminate" = 1)
 	var/explode_delay = 10 SECONDS
 	var/explode_at = -1

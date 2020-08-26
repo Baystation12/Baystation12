@@ -274,7 +274,7 @@
 	var/reload_time = 30
 	force = 50
 	edge = 1
-	armor_penetration = 35
+	armor_penetration = 70
 	item_state_slots = list(slot_l_hand_str = "bruteshot", slot_r_hand_str = "bruteshot", slot_back_str = "bruteshot back")
 	sprite_sheets = list(\
 	"Jiralhanae" = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_gear.dmi'
