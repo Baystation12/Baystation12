@@ -2941,3 +2941,60 @@
 	result = /datum/reagent/drink/eggnog
 	required_reagents = list(/datum/reagent/nutriment/protein/egg = 1, /datum/reagent/drink/milk/ = 1, /datum/reagent/sugar = 1)
 	result_amount = 3
+
+/datum/chemical_reaction/capilliumate
+	name = "Capilliumate"
+	result =/datum/reagent/capilliumate
+	required_reagents = list(/datum/reagent/radium = 1, /datum/reagent/nutriment/protein = 1, /datum/reagent/mutagen = 1)
+	result_amount = 1
+	mix_message = "The solution bubbles and thickens into strands."
+
+
+/datum/chemical_reaction/hair_dye
+	name = "Hair Dye"
+	result = /datum/reagent/hair_dye
+	required_reagents = list(/datum/reagent/capilliumate = 1, /datum/reagent/ammonia = 1)
+	result_amount = 1
+
+
+/datum/chemical_reaction/colored_hair_dye/red
+	name = "Red Hair Dye"
+	result = /datum/reagent/colored_hair_dye/red
+	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/crayon_dust/red = 1)
+	result_amount = 1
+
+/datum/chemical_reaction/colored_hair_dye/orange
+	name = "Orange Hair Dye"
+	result = /datum/reagent/colored_hair_dye/orange
+	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/crayon_dust/orange = 1)
+	result_amount = 1
+
+/datum/chemical_reaction/colored_hair_dye/yellow
+	name = "Yellow Hair Dye"
+	result = /datum/reagent/colored_hair_dye/yellow
+	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/crayon_dust/yellow = 1)
+	result_amount = 1
+
+/datum/chemical_reaction/colored_hair_dye/green
+	name = "Green Hair Dye"
+	result = /datum/reagent/colored_hair_dye/green
+	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/crayon_dust/green = 1)
+	result_amount = 1
+
+/datum/chemical_reaction/colored_hair_dye/blue
+	name = "Blue Hair Dye"
+	result = /datum/reagent/colored_hair_dye/blue
+	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/crayon_dust/blue = 1)
+	result_amount = 1
+
+/datum/chemical_reaction/colored_hair_dye/purple
+	name = "Purple Hair Dye"
+	result = /datum/reagent/colored_hair_dye/purple
+	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/crayon_dust/purple = 1)
+	result_amount = 1
+
+/datum/chemical_reaction/colored_hair_dye/grey
+	name = "Grey Hair Dye"
+	result = /datum/reagent/colored_hair_dye/grey
+	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/crayon_dust/grey = 1)
+	result_amount = 1
