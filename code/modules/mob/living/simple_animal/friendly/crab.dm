@@ -21,7 +21,8 @@
 	pass_flags = PASS_FLAG_TABLE
 	natural_armor = list(
 		melee = ARMOR_MELEE_KNIVES
-		)
+	)
+	density = 0
 
 	meat_amount =   3
 	skin_material = MATERIAL_SKIN_CHITIN
