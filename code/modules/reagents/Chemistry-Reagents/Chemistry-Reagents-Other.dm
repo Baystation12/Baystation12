@@ -517,3 +517,77 @@
 	name = "Strong Dye"
 	description = "An extra-strength dye. Used for tinting food, but is especially effective with drinks and other fluids."
 	color_weight = 100
+
+/datum/reagent/capilliumate
+	name = "Capilliumate"
+	description = "Used across the sol system by balding men to retrieve their lost youth."
+	taste_description = "mothballs"
+	reagent_state = LIQUID
+	color = "#33270b"
+	overdose = REAGENTS_OVERDOSE
+	heating_products = null
+	heating_point = null
+	
+/datum/reagent/capilliumate/affect_touch(var/mob/living/carbon/human/M, var/alien, var/removed)
+	if(!alien && istype(M, /mob/living/carbon/human))
+		var/datum/sprite_accessory/hair/newhair = /datum/sprite_accessory/hair/longest
+		var/datum/sprite_accessory/facial_hair/newbeard = /datum/sprite_accessory/facial_hair/vlongbeard
+		M.change_hair(initial(newhair.name))
+		M.change_facial_hair(initial(newbeard.name))
+		to_chat(M, SPAN_NOTICE("Your hair grows to extraordinary lengths!"))
+		metabolism=99
+	
+/datum/reagent/hair_dye
+	name = "Hair Dye"
+	description = "Some hair dye. Be fabulous! Requires an exta color to mix with."
+	taste_description = "bad choices"
+	reagent_state = LIQUID
+	color = "#b6f0ef"
+	overdose = REAGENTS_OVERDOSE
+	heating_products = null
+	heating_point = null
+		
+	
+/datum/reagent/colored_hair_dye
+	name = "Hair Dye"
+	description = "Apply to your head to add some color to your life!"
+	reagent_state = LIQUID
+	taste_description = "bad choices"
+	metabolism=99
+	
+/datum/reagent/colored_hair_dye/red
+	name = "Red Hair Dye"
+	color = "#b33636"
+	
+/datum/reagent/colored_hair_dye/orange
+	name = "Orange Hair Dye"
+	color = "#b5772f"
+	
+/datum/reagent/colored_hair_dye/yellow
+	name = "Yellow Hair Dye"
+	color = "#a6a035"
+		
+/datum/reagent/colored_hair_dye/green
+	name = "Green Hair Dye"
+	color = "#61a834"
+	
+/datum/reagent/colored_hair_dye/blue
+	name = "Blue Hair Dye"
+	color = "#3470a8"
+	
+/datum/reagent/colored_hair_dye/purple
+	name = "Purple Hair Dye"
+	color = "#6d2d91"
+		
+/datum/reagent/colored_hair_dye/grey
+	name = "Grey Hair Dye"
+	color = "#696969"
+	
+/datum/reagent/colored_hair_dye/affect_touch(var/mob/living/carbon/human/M, var/alien, var/removed)
+	if(istype(M) && (M.species.appearance_flags & HAS_HAIR_COLOR))
+		var/red = hex2num(copytext(src.color, 2, 4))
+		var/green = hex2num(copytext(src.color, 4, 6))
+		var/blue = hex2num(copytext(src.color, 6, 8))
+		M.change_hair_color(red, green, blue)
+		M.change_facial_hair_color(red, green, blue)
+		to_chat(M, SPAN_NOTICE("Your hair suddenly changes color!"))
