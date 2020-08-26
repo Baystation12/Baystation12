@@ -568,5 +568,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	announce_ghost_joinleave(client, 0)
 
 	var/mob/new_player/M = new /mob/new_player()
+	if (can_reenter_corpse != CORPSE_CAN_REENTER_AND_RESPAWN)
+		M.respawned_time = world.time
 	M.key = key
 	log_and_message_admins("has respawned.", M)
