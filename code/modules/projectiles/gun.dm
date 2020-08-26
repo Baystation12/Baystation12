@@ -801,19 +801,8 @@
 		attachment.on_attachment(src,user)
 
 /obj/item/weapon/gun/proc/use_scope()
-	set category = "Object"
+	set category = "Weapon"
 	set name = "Use Scope" //Gives slightly less info to the user but also allows for easy macro use.
 	set popup_menu = 1
 
-	var/used_zoom_amount
-	var/message = "<span class = 'notice'>You need to have a scope attached to use this.</span>"
-	for(var/obj/item/weapon_attachment/sight/s in get_attachments())
-		used_zoom_amount = s.zoom_amount
-	if(used_zoom_amount <= 1 || used_zoom_amount == 1)
-		used_zoom_amount = null
-		message = "<span class = 'notice'>Your attached scope has no magnification.</span>"
-	if(isnull(used_zoom_amount))
-		to_chat(usr,"[message]")
-		verbs -= /obj/item/weapon/gun/proc/use_scope
-		return
-	toggle_scope(usr, used_zoom_amount)
+	toggle_scope(usr, scope_zoom_amount)
