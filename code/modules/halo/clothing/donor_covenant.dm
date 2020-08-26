@@ -144,11 +144,10 @@
 	icon_state = "dogler_helm_obj"
 	item_state = "dogler_helm"
 
-/obj/item/clothing/suit/armor/special/combatharness/dogler
+/obj/item/clothing/suit/armor/special/combatharness/ultra/dogler
 	name = "Sya'tenee's Sangheili Combat Harness"
 	icon_state = "dogler_chest_obj"
 	item_state = "dogler_chest"
-	totalshields = 240
 
 /obj/item/clothing/shoes/sangheili/dogler
 	name = "Sya'tenee's Sanghelli Leg Armour"
@@ -164,12 +163,12 @@
 
 /obj/item/weapon/storage/box/large/donator/dogler
 	startswith = list(/obj/item/clothing/head/helmet/sangheili/dogler,
-					/obj/item/clothing/suit/armor/special/combatharness/dogler,
+					/obj/item/clothing/suit/armor/special/combatharness/ultra/dogler,
 					/obj/item/clothing/shoes/sangheili/dogler,
 					/obj/item/clothing/gloves/thick/sangheili/dogler
 					)
 	can_hold = list(/obj/item/clothing/head/helmet/sangheili/dogler,
-					/obj/item/clothing/suit/armor/special/combatharness/dogler,
+					/obj/item/clothing/suit/armor/special/combatharness/ultra/dogler,
 					/obj/item/clothing/shoes/sangheili/dogler,
 					/obj/item/clothing/gloves/thick/sangheili/dogler
 					)
@@ -198,8 +197,6 @@
 	name = "Sya'tenee's Energy Axe"
 	desc = "A huge, scary-looking energy axe, which looks too heavy to be wielded by humans..."
 	icon = 'code/modules/halo/icons/dogler_weapon_sprites.dmi'
-	force = 65
-	armor_penetration = 35
 	icon_state = "dogler_axe"
 	item_icons = list(slot_l_hand_str ='code/modules/halo/icons/dogler_weapon_sprites.dmi',slot_r_hand_str = 'code/modules/halo/icons/dogler_weapon_sprites.dmi')
 	item_state_slots = list(
@@ -326,11 +323,10 @@
 	icon_state = "socks_helm_obj"
 	item_state = "socks_helm"
 
-/obj/item/clothing/suit/armor/special/combatharness/socks
+/obj/item/clothing/suit/armor/special/combatharness/ultra/socks
 	name = "‘Nasan Clan - Bluekro Combat Harness"
 	icon_state = "socks_chest_obj"
 	item_state = "socks_chest"
-	totalshields = 240
 
 /obj/item/clothing/shoes/sangheili/socks
 	name = "‘Nasan Clan - Bluekro Leg Armour"
@@ -346,12 +342,12 @@
 
 /obj/item/weapon/storage/box/large/donator/socks_major
 	startswith = list(/obj/item/clothing/head/helmet/sangheili/socks,
-					/obj/item/clothing/suit/armor/special/combatharness/socks,
+					/obj/item/clothing/suit/armor/special/combatharness/ultra/socks,
 					/obj/item/clothing/shoes/sangheili/socks,
 					/obj/item/clothing/gloves/thick/sangheili/socks
 					)
 	can_hold = list(/obj/item/clothing/head/helmet/sangheili/socks,
-					/obj/item/clothing/suit/armor/special/combatharness/socks,
+					/obj/item/clothing/suit/armor/special/combatharness/ultra/socks,
 					/obj/item/clothing/shoes/sangheili/socks,
 					/obj/item/clothing/gloves/thick/sangheili/socks
 					)
@@ -461,12 +457,11 @@
 	icon_state = "Leevrukah_helmet_obj"
 	item_state = "Leevrukah_helmet"
 
-/obj/item/clothing/suit/armor/special/combatharness/voloxus
+/obj/item/clothing/suit/armor/special/combatharness/ultra/voloxus
 	name = "‘Vurom Clan Armor - Combat Harness"
 	desc = "Worn only by those within the 'Vurom Clan that have distinguished themselves among the most faithful, and zealous within the Covenant."
 	icon_state = "Leevrukah_chest_obj"
 	item_state = "Leevrukah_chest"
-	totalshields = 240
 
 /obj/item/clothing/shoes/sangheili/voloxus
 	name = "‘Vurom Clan Armor - Leg Armour"
@@ -482,12 +477,12 @@
 
 /obj/item/weapon/storage/box/large/donator/voloxus_sangheili
 	startswith = list(/obj/item/clothing/head/helmet/sangheili/voloxus,
-					/obj/item/clothing/suit/armor/special/combatharness/voloxus,
+					/obj/item/clothing/suit/armor/special/combatharness/ultra/voloxus,
 					/obj/item/clothing/shoes/sangheili/voloxus,
 					/obj/item/clothing/gloves/thick/sangheili/voloxus
 					)
 	can_hold = list(/obj/item/clothing/head/helmet/sangheili/voloxus,
-					/obj/item/clothing/suit/armor/special/combatharness/voloxus,
+					/obj/item/clothing/suit/armor/special/combatharness/ultra/voloxus,
 					/obj/item/clothing/shoes/sangheili/voloxus,
 					/obj/item/clothing/gloves/thick/sangheili/voloxus
 					)
@@ -513,11 +508,10 @@
 	icon_state = "bluekro_helm_obj"
 	item_state = "bluekro_helm"
 
-/obj/item/clothing/suit/armor/special/combatharness/zane
+/obj/item/clothing/suit/armor/special/combatharness/ultra/zane
 	name = "‘Nasan Clan - Ultra Combat Harness"
 	icon_state = "bluekro_chest_obj"
 	item_state = "bluekro_chest"
-	totalshields = 240
 
 /obj/item/clothing/shoes/sangheili/zane
 	name = "‘Nasan Clan - Ultra Leg Armour"
@@ -538,13 +532,13 @@
 
 /obj/item/weapon/storage/box/large/donator/zane_ultra
 	startswith = list(/obj/item/clothing/head/helmet/sangheili/zane,
-					/obj/item/clothing/suit/armor/special/combatharness/zane,
+					/obj/item/clothing/suit/armor/special/combatharness/ultra/zane,
 					/obj/item/clothing/shoes/sangheili/zane,
 					/obj/item/clothing/gloves/thick/sangheili/zane,
 					/obj/item/weapon/melee/energy/elite_sword/zane
 					)
 	can_hold = list(/obj/item/clothing/head/helmet/sangheili/zane,
-					/obj/item/clothing/suit/armor/special/combatharness/zane,
+					/obj/item/clothing/suit/armor/special/combatharness/ultra/zane,
 					/obj/item/clothing/shoes/sangheili/zane,
 					/obj/item/clothing/gloves/thick/sangheili/zane,
 					/obj/item/weapon/melee/energy/elite_sword/zane
