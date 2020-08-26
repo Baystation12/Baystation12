@@ -16,7 +16,7 @@
 	)
 
 	force = 35
-	armor_penetration = 35
+	armor_penetration = 70
 
 	sharp = 1
 	edge = 1
@@ -68,7 +68,7 @@
 	sharp = 1
 	force = 40
 	is_heavy = 1
-	armor_penetration = 35
+	armor_penetration = 70
 	accuracy = -1
 	dispersion = list(0.2,0.3,0.5)
 	hud_bullet_reffile = 'code/modules/halo/icons/hud_display/hud_bullet_5x6.dmi'
@@ -147,7 +147,7 @@
 	sharp = 1
 	force = 40
 	is_heavy = 1
-	armor_penetration = 35
+	armor_penetration = 70
 	accuracy = -1
 	dispersion = list(0.45)
 	hud_bullet_reffile = 'code/modules/halo/icons/hud_display/hud_bullet_7x8.dmi'
@@ -212,7 +212,7 @@
 	force = 50 //Less than sword due to afterattack ability
 	edge = 0
 	sharp = 0
-	armor_penetration = 35
+	armor_penetration = 70
 	lunge_dist = 2
 	hitsound = 'code/modules/halo/sounds/gravhammer.ogg'
 	sprite_sheets = list(

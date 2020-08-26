@@ -211,7 +211,7 @@
 
 /decl/hierarchy/outfit/dogler_sangheili
 	name = "dogler/m.green - sangheili"
-	suit = /obj/item/clothing/suit/armor/special/combatharness/dogler
+	suit = /obj/item/clothing/suit/armor/special/combatharness/ultra/dogler
 	suit_store = /obj/item/weapon/gun/energy/plasmarifle
 	back = /obj/item/weapon/gun/energy/plasmarifle
 	belt = /obj/item/weapon/gun/energy/plasmapistol
@@ -354,7 +354,7 @@
 
 /decl/hierarchy/outfit/socks_sangheili
 	name = "socks - sangheili"
-	suit = /obj/item/clothing/suit/armor/special/combatharness/socks
+	suit = /obj/item/clothing/suit/armor/special/combatharness/ultra/socks
 	suit_store = /obj/item/weapon/gun/energy/plasmarifle
 	back = /obj/item/weapon/gun/energy/plasmarifle
 	belt = /obj/item/weapon/gun/energy/plasmapistol
@@ -489,7 +489,7 @@
 
 /decl/hierarchy/outfit/voloxus_sangheili
 	name = "voloxus - Ultra/Major"
-	suit = /obj/item/clothing/suit/armor/special/combatharness/voloxus
+	suit = /obj/item/clothing/suit/armor/special/combatharness/ultra/voloxus
 	suit_store = /obj/item/weapon/gun/energy/plasmarifle
 	back = /obj/item/weapon/gun/energy/plasmarifle
 	belt = /obj/item/weapon/gun/energy/plasmapistol
@@ -546,7 +546,7 @@
 
 /decl/hierarchy/outfit/zane_sangheili
 	name = "zane - Ultra"
-	suit = /obj/item/clothing/suit/armor/special/combatharness/zane
+	suit = /obj/item/clothing/suit/armor/special/combatharness/ultra/zane
 	suit_store = /obj/item/weapon/gun/energy/plasmarifle
 	back = /obj/item/weapon/gun/energy/plasmarifle
 	belt = /obj/item/weapon/gun/energy/plasmapistol

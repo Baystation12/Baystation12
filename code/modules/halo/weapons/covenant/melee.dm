@@ -18,7 +18,7 @@
 	throwforce = 1
 	active_force = 55 //Hits like a sniper
 	active_throwforce = 12
-	armor_penetration = 35
+	armor_penetration = 70
 	var/hits_burn_mobs = 1
 	edge = 0
 	sharp = 0
@@ -128,7 +128,7 @@
 	w_class = ITEM_SIZE_SMALL
 	active_force = 30
 	active_throwforce = 12
-	armor_penetration = 35
+	armor_penetration = 70
 	edge = 0
 	sharp = 0
 
