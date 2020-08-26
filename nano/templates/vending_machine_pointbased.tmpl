@@ -9,17 +9,21 @@
 	{{for data.products}}
 	<div class='item'>
 			<div style='float'>
-				{{if value.price > 0}}
-					{{:helper.link('Buy (' + value.price + ')', 'cart', { "vend" : value.key }, value.amount > 0 ? null : 'disabled')}}
-				{{else}}
-					{{:helper.link('Vend', 'circle-arrow-s', { "vend" : value.key }, value.amount > 0 ? null : 'disabled')}}
+				{{if value.price > -1}}
+					{{if value.price > 0}}
+						{{:helper.link('Buy (' + value.price + ')', 'cart', { "vend" : value.key }, value.amount > 0 ? null : 'disabled')}}
+					{{else}}
+						{{:helper.link('Vend', 'circle-arrow-s', { "vend" : value.key }, value.amount > 0 ? null : 'disabled')}}
+					{{/if}}
 				{{/if}}
 			</div>
 		<div class='itemContent'>
 		{{if value.color}}<span style='color:{{:value.color}}'>{{:value.name}}</span>
 		{{else}}{{:value.name}}
 		{{/if}}
-			 ({{:value.amount ? value.amount : "NONE LEFT"}})
+			{{if value.amount > -1}}
+				({{:value.amount ? value.amount : "NONE LEFT"}})
+			{{/if}}
 		</div>
 	</div>
 	{{empty}}
