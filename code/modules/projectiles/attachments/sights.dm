@@ -23,8 +23,9 @@
 	gun.verbs -= /obj/item/weapon/gun/proc/use_scope
 	gun.scope_zoom_amount = 0
 	gun.max_zoom_amount = 0
-	gun.is_scope_variable = 0
-	gun.verbs -= /obj/item/weapon/gun/proc/verb_set_scope_zoom
+	if(is_variable)
+		gun.is_scope_variable = 0
+		gun.verbs -= /obj/item/weapon/gun/proc/verb_set_scope_zoom
 
 
 /obj/item/weapon_attachment/sight/rds
