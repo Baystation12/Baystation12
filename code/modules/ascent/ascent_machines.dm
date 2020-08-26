@@ -243,3 +243,49 @@ MANTIDIFY(/obj/machinery/door/airlock/external/bolted, "mantid airlock", "door")
 	icon = 'icons/obj/machines/power/mantid_smes.dmi'	
 	overlay_icon = 'icons/obj/machines/power/mantid_smes.dmi'
 	construct_state = /decl/machine_construction/default/no_deconstruct
+
+/obj/machinery/cryopod/ascent_spawn
+	name = "mantid cryotank"
+	desc = "A liquid-filled, cloudy tank with strange forms twitching inside."
+	icon = 'icons/obj/cryogenics.dmi'
+	icon_state = "cellold2"
+
+	base_icon_state = "cellold2"
+	occupied_icon_state = "cellold2" //The cell looks the same whether something is in it or not
+	on_store_visible_message = "lets out a quiet hiss as $occupant$ disappears into the cloudy liquid."
+	on_enter_occupant_message = "You feel a cool touch on your skin as the cryogenic liquid permeates throughout your body. You go numb as your senses turn inward."
+	announce_despawn = FALSE
+
+/obj/machinery/cryopod/ascent_spawn/despawn_occupant()
+	var/oname = occupant.name
+	. = ..()
+	var/obj/machinery/computer/cryopod/ascent_spawn/announce_computer
+	if(istype(control_computer, /obj/machinery/computer/cryopod/ascent_spawn))
+		announce_computer = control_computer
+	else
+		CRASH("Mantid cryotank has a non-mantid oversight console!")
+	announce_computer.announcer.say(",\[ [oname] has returned to the cryotank.")
+
+/obj/machinery/computer/cryopod/ascent_spawn
+	name = "cryotank oversight console"
+	desc = "An interface between the gyne's brood and the cryotank oversight system."
+	color = COLOR_VIOLET
+	construct_state = null
+	
+	storage_type = "lifeforms"
+	storage_name = "Cryotank Oversight Control"
+
+	var/mob/living/carbon/announcer
+
+
+/obj/machinery/computer/cryopod/ascent_spawn/Initialize()
+	. = ..()
+	announcer = new /mob/living/carbon(src)
+	announcer.status_flags |= GODMODE
+	announcer.name = "Cryotank Oversight"
+	announcer.add_language(LANGUAGE_MANTID_BROADCAST)
+
+/obj/machinery/computer/cryopod/ascent_spawn/Destroy()
+	qdel(announcer)
+	. = ..()
+	
