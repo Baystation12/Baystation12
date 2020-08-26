@@ -35,22 +35,22 @@
 
 /obj/item/clothing/accessory/storage/holster/on_attached(obj/item/clothing/under/S, mob/user as mob)
 	..()
-	has_suit.verbs += /atom/proc/holster_verb
+	parent.verbs += /atom/proc/holster_verb
 
 /obj/item/clothing/accessory/storage/holster/on_removed(mob/user as mob)
-	if(has_suit)
+	if(parent)
 		var/remove_verb = TRUE
-		if(has_extension(has_suit, /datum/extension/holster))
+		if(has_extension(parent, /datum/extension/holster))
 			remove_verb = FALSE
 
-		for(var/obj/accessory in has_suit.accessories)
+		for(var/obj/accessory in parent.accessories)
 			if(accessory == src)
 				continue
 			if(has_extension(accessory, /datum/extension/holster))
 				remove_verb = FALSE
 
 		if(remove_verb)
-			has_suit.verbs -= /atom/proc/holster_verb
+			parent.verbs -= /atom/proc/holster_verb
 	..()
 
 /obj/item/clothing/accessory/storage/holster/armpit

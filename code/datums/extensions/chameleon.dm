@@ -66,7 +66,7 @@
 	var/obj/item/clothing/accessory/A = holder
 
 	A.slot = copy.slot
-	A.has_suit = copy.has_suit
+	A.parent = copy.parent
 	A.inv_overlay = copy.inv_overlay
 	A.mob_overlay = copy.mob_overlay
 	A.overlay_state = copy.overlay_state

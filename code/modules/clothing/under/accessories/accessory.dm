@@ -8,7 +8,7 @@
 	w_class = ITEM_SIZE_SMALL
 	var/slot = ACCESSORY_SLOT_DECOR
 	var/body_location = UPPER_TORSO //most accessories are here
-	var/obj/item/clothing/has_suit = null		//the suit the tie may be attached to
+	var/obj/item/clothing/parent //the suit the tie may be attached to
 	var/image/inv_overlay = null	//overlay used when attached to clothing.
 	var/list/mob_overlay = list()
 	var/overlay_state = null
@@ -70,19 +70,19 @@
 /obj/item/clothing/accessory/proc/on_attached(var/obj/item/clothing/S, var/mob/user)
 	if(!istype(S))
 		return
-	has_suit = S
-	forceMove(has_suit)
-	has_suit.overlays += get_inv_overlay()
+	parent = S
+	forceMove(parent)
+	parent.overlays += get_inv_overlay()
 
 	if(user)
-		to_chat(user, "<span class='notice'>You attach \the [src] to \the [has_suit].</span>")
+		to_chat(user, "<span class='notice'>You attach \the [src] to \the [parent].</span>")
 		src.add_fingerprint(user)
 
 /obj/item/clothing/accessory/proc/on_removed(var/mob/user)
-	if(!has_suit)
+	if(!parent)
 		return
-	has_suit.overlays -= get_inv_overlay()
-	has_suit = null
+	parent.overlays -= get_inv_overlay()
+	parent = null
 	if(user)
 		usr.put_in_hands(src)
 		src.add_fingerprint(user)
@@ -95,7 +95,7 @@
 
 //default attack_hand behaviour
 /obj/item/clothing/accessory/attack_hand(mob/user as mob)
-	if(has_suit)
+	if(parent)
 		return	//we aren't an object on the ground so don't call parent
 	..()
 
