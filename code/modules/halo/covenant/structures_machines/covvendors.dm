@@ -104,8 +104,9 @@
 	desc = "Storage for Covenant Sangheili equipment"
 	products = list(
 		"Storage" = -1,
-		/obj/item/weapon/storage/belt/covenant_medic = 5,
-		/obj/item/weapon/storage/belt/utility/full = 5,
+		/obj/item/weapon/storage/belt/covenant_ammo = 0,
+		/obj/item/weapon/storage/belt/covenant_medic = 0,
+		/obj/item/weapon/storage/belt/utility/full = 0,
 		/obj/item/clothing/accessory/storage/bandolier/covenant = 2,
 		/obj/item/weapon/storage/backpack/sangheili = 3,
 		"EVA" = -1,
@@ -216,6 +217,7 @@
 	desc = "Storage for Covenant Kig-Yar equipment"
 	products = list(
 	"Storage" = -1,
+		/obj/item/weapon/storage/belt/covenant_ammo = 0,
 		/obj/item/weapon/storage/belt/covenant_medic = 0,
 		/obj/item/weapon/storage/belt/utility/full = 0,
 		/obj/item/clothing/accessory/storage/bandolier/covenant = 2,
@@ -280,6 +282,7 @@
 	desc = "Storage for Covenant Unggoy equipment"
 	products = list(
 		"Storage" = -1,
+		/obj/item/weapon/storage/belt/covenant_ammo = 0,
 		/obj/item/weapon/storage/belt/covenant_medic = 0,
 		/obj/item/weapon/storage/belt/utility/full = 0,
 		/obj/item/clothing/accessory/storage/bandolier/covenant = 2,
@@ -303,8 +306,8 @@
 	desc = "Storage for Covenant Yanmee equipment"
 	products = list(
 		"Storage" = -1,
-		/obj/item/weapon/storage/belt/covenant_medic = 0,
 		/obj/item/weapon/storage/belt/covenant_ammo = 0,
+		/obj/item/weapon/storage/belt/covenant_medic = 0,
 		/obj/item/weapon/storage/belt/utility/full = 0,
 		/obj/item/clothing/accessory/storage/bandolier/covenant = 2,
 		/obj/item/weapon/storage/backpack/sangheili = 3,
