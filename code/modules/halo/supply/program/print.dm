@@ -10,8 +10,9 @@
 		return
 
 	var/t = ""
-	t += "<h3>Rabbit Hole Base Supply Requisition Receipt</h3><hr>"
+	t += "<h3>[O.order_title] Receipt #[O.ordernum]</h3><hr>"
 	t += "INDEX: #[O.ordernum]<br>"
+	t += "DESTINATION: [O.destination]<br>"
 	t += "REQUESTED BY: [O.orderedby]<br>"
 	t += "RANK: [O.orderedrank]<br>"
 	t += "REASON: [O.reason]<br>"

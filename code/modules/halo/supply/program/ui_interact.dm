@@ -7,6 +7,7 @@
 	data["account_owner"] = "[current_account.owner_name]"
 	data["income"] = "[my_faction.income]"
 	data["payment_time"] = "[my_faction.get_station_income_time()]"
+	data["currency"] = current_account.currency_name
 	switch(screen)
 		if(SCREEN_BROWSE)// Main ordering menu
 			data["categories"] = my_faction.supply_category_names
@@ -48,7 +49,11 @@
 
 	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "faction_supply.tmpl", name, 1050, 800, state = state)
+		ui = new(user, src, ui_key, "faction_supply.tmpl", name, 1000, 600, state = state)
+		apply_styling(ui)
 		ui.set_auto_update(1)
 		ui.set_initial_data(data)
 		ui.open()
+
+//override this in children
+/datum/nano_module/program/faction_supply/proc/apply_styling(datum/nanoui/ui)
