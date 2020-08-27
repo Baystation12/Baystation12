@@ -135,3 +135,7 @@
 /area/covenant_light_cruiser/boardcraft
 	name = "CRS Unyielding Transgression Boarding Craft Bay"
 	icon_state = "engine_port"
+
+/area/covenant_light_cruiser/cargo
+	name = "CRS Unyielding Transgression Cargo Bay"
+	icon_state = "yellow"
