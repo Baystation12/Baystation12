@@ -57,7 +57,10 @@
 		if(world.time < projectiles_nextfire_at[proj_type])
 			continue
 		var/fire_delay = projectiles_to_fire[proj_type]
-		var/obj/item/projectile/proj_fired = new proj_type(loc)
+		var/obj/item/projectile/overmap/proj_fired = new proj_type(loc)
+		proj_fired.permutated += src //Ensuring we don't hit ourselves somehow
+		proj_fired.firer = src
+		proj_fired.overmap_fired_by = src
 		proj_fired.launch(target)
 		if(fire_delay < lowest_delay)
 			lowest_delay = fire_delay
