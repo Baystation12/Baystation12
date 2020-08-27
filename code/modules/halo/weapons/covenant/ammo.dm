@@ -76,6 +76,7 @@
 	tracer_delay_time = 1.5 SECONDS
 	invisibility = 61
 	shield_damage = 210
+	step_delay = 0
 	muzzle_type = /obj/effect/projectile/muzzle/cov_cyan
 
 /obj/item/projectile/bullet/covenant/beamrifle/attack_mob(var/mob/living/carbon/human/L)

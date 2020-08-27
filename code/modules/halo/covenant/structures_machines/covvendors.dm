@@ -70,7 +70,7 @@
 	desc = "Storage for Covenant Sangheili weapons and ammo"
 	products = list(
 		"Melee" = -1,
-		/obj/item/weapon/melee/energy/elite_sword/dagger = 1,
+		/obj/item/weapon/melee/energy/elite_sword/dagger = 0,
 		"Guns" = -1,
 		/obj/item/weapon/gun/energy/plasmapistol = 3,
 		/obj/item/weapon/gun/projectile/needler = 4,
@@ -140,7 +140,7 @@
 	desc = "Storage for Covenant Jiralhanae weapons and ammo"
 	products = list(
 		"Melee" = -1,
-		/obj/item/weapon/melee/energy/elite_sword/dagger = 1,
+		/obj/item/weapon/melee/energy/elite_sword/dagger = 0,
 		/obj/item/weapon/grav_hammer/gravless = 1,
 		"Guns" = -1,
 		/obj/item/weapon/gun/energy/plasmapistol = 3,
@@ -191,8 +191,8 @@
 	desc = "Storage for Covenant Kig-Yar weapons and ammo"
 	products = list(
 		"Melee" = -1,
-		/obj/item/weapon/melee/blamite/cutlass = 1,
-		/obj/item/weapon/melee/energy/elite_sword/dagger = 1,
+		/obj/item/weapon/melee/blamite/cutlass = 0,
+		/obj/item/weapon/melee/energy/elite_sword/dagger = 0,
 		"Guns" = -1,
 		/obj/item/weapon/gun/energy/plasmapistol = 3,
 		/obj/item/weapon/gun/projectile/needler = 4,
@@ -255,7 +255,7 @@
 	desc = "Storage for Covenant Unggoy weapons and ammo"
 	products = list(
 		"Melee" = -1,
-		/obj/item/weapon/melee/energy/elite_sword/dagger = 1,
+		/obj/item/weapon/melee/energy/elite_sword/dagger = 0,
 		"Guns" = -1,
 		/obj/item/weapon/gun/energy/plasmapistol = 3,
 		/obj/item/weapon/gun/projectile/needler = 5,
@@ -329,7 +329,7 @@
 	desc = "Storage for Covenant Yanmee weapons and ammo"
 	products = list(
 		"Melee" = -1,
-		/obj/item/weapon/melee/energy/elite_sword/dagger = 1,
+		/obj/item/weapon/melee/energy/elite_sword/dagger = 0,
 		"Guns" = -1,
 		/obj/item/weapon/gun/energy/plasmapistol = 3,
 		/obj/item/weapon/gun/projectile/needler = 4,
