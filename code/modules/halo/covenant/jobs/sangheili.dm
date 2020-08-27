@@ -9,7 +9,7 @@
 	is_whitelisted = 1
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/sangheili)
-	access = list(access_covenant, access_covenant_command, access_covenant_slipspace)
+	access = list(access_covenant, access_covenant_command, access_covenant_slipspace, access_covenant_cargo)
 	pop_balance_mult = 3
 
 /datum/job/covenant/sangheili_ultra
@@ -20,7 +20,7 @@
 	outfit_type = /decl/hierarchy/outfit/sangheili/ultra
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/sangheili)
-	access = list(access_covenant, access_covenant_command, access_covenant_slipspace)
+	access = list(access_covenant, access_covenant_command, access_covenant_slipspace, access_covenant_cargo)
 	pop_balance_mult = 3
 
 /datum/job/covenant/sangheili_honour_guard
@@ -31,7 +31,7 @@
 	is_whitelisted = TRUE
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/sangheili)
-	access = list(access_covenant, access_covenant_command, access_covenant_slipspace)
+	access = list(access_covenant, access_covenant_command, access_covenant_slipspace, access_covenant_cargo)
 	pop_balance_mult = 2
 
 /datum/job/covenant/sangheili_major
@@ -43,7 +43,7 @@
 	outfit_type = /decl/hierarchy/outfit/sangheili/major
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/sangheili)
-	access = list(access_covenant, access_covenant_command, access_covenant_slipspace)
+	access = list(access_covenant, access_covenant_command, access_covenant_slipspace, access_covenant_cargo)
 	pop_balance_mult = 2
 
 /datum/job/covenant/sangheili_minor
@@ -51,7 +51,7 @@
 	total_positions = 2
 	spawn_positions = 2
 	outfit_type = /decl/hierarchy/outfit/sangheili/minor
-	access = list(access_covenant, access_covenant_command, access_covenant_slipspace)
+	access = list(access_covenant, access_covenant_command, access_covenant_slipspace, access_covenant_cargo)
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/sangheili)
 	open_slot_on_death = TRUE //just like brutes, lowest rank of a leader caste can respawn indefinitely although still capped low
