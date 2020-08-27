@@ -57,11 +57,11 @@
 	containername = "\improper Medical supplies (mixed) crate"
 
 /decl/hierarchy/supply_pack/covenant_equipment/cleanbots
-	name = "Cleaning drones"
+	name = "Cleaning drone"
 	contains = list(
-		/mob/living/bot/cleanbot/covenant = 2)
-	cost = 250
-	containertype = /obj/structure/closet/crate/covenant
+		/mob/living/bot/cleanbot/covenant = 1)
+	cost = 150
+	containertype = null///obj/structure/closet/crate/covenant
 	containername = "\improper Cleaning drones crate"
 
 /decl/hierarchy/supply_pack/covenant_equipment/ghost
