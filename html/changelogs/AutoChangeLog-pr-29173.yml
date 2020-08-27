@@ -1,0 +1,6 @@
+author: "Hubblenaut"
+delete-after: True
+changes: 
+  - rscadd: "Adds codex entries for the shutoff valve."
+  - soundadd: "Adds a sound for the shutoff valve interaction."
+  - imageadd: "The red light indicating a leak will blink now."
