@@ -6,6 +6,8 @@
 	name = "Complex 046"
 	icon = 'maps/faction_bases/complex046/complex046.dmi'
 	icon_state = "oni"
+	faction = "ONI"
+	base = 1
 
 //override this to use the ONI base
 /datum/faction/unsc/find_objective_delivery_target()
