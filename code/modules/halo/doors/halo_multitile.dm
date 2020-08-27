@@ -21,3 +21,10 @@
 	glass = 1
 	opacity = 0
 	glass_file = null
+
+/obj/machinery/door/airlock/multi_tile/halo/blast_normal_triple
+	icon = 'code/modules/halo/doors/3xblastdoors/3xblastdoors_normal.dmi'
+	deny_file = 'code/modules/halo/doors/3xblastdoors/3xblastdoors_normal.dmi'
+	glass_file = null
+	maxhealth = 750
+	width = 3

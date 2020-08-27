@@ -66,3 +66,12 @@
 
 /obj/item/weapon/armor_patch/cov
 	icon_state = "armor_patch_cov"
+
+/obj/item/weapon/armor_patch/mini
+	name = "Miniature Armor Repair Kit"
+	desc ="A small, simple, limited-use kit that allows armor to be patched up, restoring a portion of the protection it usually affords. Reduced to the bare essentials of repair to fit on bandoliers and smaller such storage items."
+	w_class = ITEM_SIZE_SMALL
+	repair_supplies = 10
+
+/obj/item/weapon/armor_patch/mini/cov
+	icon_state = "armor_patch_cov"

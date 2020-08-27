@@ -123,15 +123,6 @@
 	path = /obj/item/weapon/storage/wallet/poly
 	cost = 2
 
-/datum/gear/accessory/holster
-	display_name = "holster selection"
-	path = /obj/item/clothing/accessory/holster
-	cost = 3
-
-/datum/gear/accessory/holster/New()
-	..()
-	gear_tweaks += new/datum/gear_tweak/path(/obj/item/clothing/accessory/holster)
-
 /datum/gear/accessory/ubac
 	display_name = "ubac selection"
 	path = /obj/item/clothing/accessory/ubac
@@ -162,11 +153,6 @@
 	display_name = "stethoscope (medical)"
 	path = /obj/item/clothing/accessory/stethoscope
 	cost = 2
-
-/datum/gear/accessory/bandolier
-	display_name = "bandolier"
-	path = /obj/item/clothing/accessory/storage/bandolier
-	cost = 3
 
 /datum/gear/accessory/hawaii
 	display_name = "hawaii shirt"

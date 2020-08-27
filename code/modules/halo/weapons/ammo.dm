@@ -264,6 +264,7 @@
 	tracer_type = /obj/effect/projectile/srs99
 	tracer_delay_time = 2 SECONDS
 	shield_damage = 210
+	kill_count = 125
 
 /obj/item/projectile/bullet/a145_ap/tracerless //Modified slightly to provide a downside for using the innie-heavy-sniper-rounds over normal rounds.
 	damage = 55
@@ -384,7 +385,7 @@
 
 /obj/item/weapon/storage/box/spnkr
 	name = "102mm HEAT SPNKr crate"
-	desc = "UNSC certified crate containing four tubes of SPNKr rockets for a total of eight rockets to be loaded in the M41 SSR."
+	desc = "UNSC certified crate containing four tubes of SPNKr rockets for a total of six rockets to be loaded in the M41 SSR."
 	icon = 'code/modules/halo/icons/objs/halohumanmisc.dmi'
 	icon_state = "ssrcrate"
 	max_storage_space = base_storage_capacity(12)

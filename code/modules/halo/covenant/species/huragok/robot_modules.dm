@@ -3,6 +3,18 @@
 	sprites = list(
 					"Lifeworker" = "engineer",
 					)
+	languages = list(
+		LANGUAGE_ENGLISH   = 0,
+		LANGUAGE_MANDARIN  = 0,
+		LANGUAGE_GERMAN    = 0,
+		LANGUAGE_FRENCH    = 0,
+		LANGUAGE_TRADEBAND = 0,
+		LANGUAGE_GUTTER    = 0,
+		LANGUAGE_UNGGOY    = 0,
+		LANGUAGE_KIGYAR    = 0,
+		LANGUAGE_SANGHEILI = 0,
+		LANGUAGE_BRUTE     = 0,
+		LANGUAGE_SIGN      = 1)
 
 /obj/item/weapon/robot_module/huragok_lifeworker/New()
 	src.modules += new /obj/item/weapon/crowbar/covenant(src)
@@ -57,7 +69,18 @@
 	sprites = list(
 					"Huragok Engineer" = "engineer"
 					)
-
+	languages = list(
+		LANGUAGE_ENGLISH   = 0,
+		LANGUAGE_MANDARIN  = 0,
+		LANGUAGE_GERMAN    = 0,
+		LANGUAGE_FRENCH    = 0,
+		LANGUAGE_TRADEBAND = 0,
+		LANGUAGE_GUTTER    = 0,
+		LANGUAGE_UNGGOY    = 0,
+		LANGUAGE_KIGYAR    = 0,
+		LANGUAGE_SANGHEILI = 0,
+		LANGUAGE_BRUTE     = 0,
+		LANGUAGE_SIGN      = 1)
 	no_slip = 1
 
 /obj/item/weapon/robot_module/huragok_engineer/New()

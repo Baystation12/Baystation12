@@ -17,6 +17,7 @@
 	dispersion = list(0.26)
 	one_hand_penalty = -1
 	irradiate_non_cov = 12
+	scope_zoom_amount = 2
 	accuracy = 1
 	wielded_item_state = "carbine-wielded"
 	advanced_covenant = 1
@@ -40,7 +41,7 @@
 	set name = "Use Scope"
 	set popup_menu = 1
 
-	toggle_scope(usr, 1.4)
+	toggle_scope(usr, scope_zoom_amount)
 
 /obj/item/weapon/gun/projectile/type51carbine/load_ammo(var/item/I,var/mob/user)
 	unload_ammo(user,1)
@@ -77,6 +78,8 @@
 	fire_delay = 10
 	accuracy = -10
 	dispersion = list(0.1)
+	scope_zoom_amount = 8
+	is_scope_variable = 1
 	scoped_accuracy = 7
 	advanced_covenant = 1
 	overheat_sfx = 'code/modules/halo/sounds/beam_rifle_overheat.ogg'
@@ -129,10 +132,13 @@
 	one_hand_penalty = -1
 	fire_delay = 10
 	dispersion = list(0.26)
+	scope_zoom_amount = 3
+	is_scope_variable = 1
 	hud_bullet_row_num = 7
 	hud_bullet_reffile = 'code/modules/halo/icons/hud_display/hud_bullet_7x8.dmi'
 	hud_bullet_iconstate = "bigneedle"
-	accuracy = 2
+	accuracy = -1
+	scoped_accuracy = 2
 	wielded_item_state = "needlerifle-wielded"
 	matter = list("nanolaminate" = 1)
 
@@ -151,4 +157,4 @@
 	set name = "Use Scope"
 	set popup_menu = 1
 
-	toggle_scope(usr, 1.4)
+	toggle_scope(usr, scope_zoom_amount)

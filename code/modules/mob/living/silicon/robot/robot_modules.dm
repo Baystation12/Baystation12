@@ -25,14 +25,13 @@ var/global/list/robot_modules = list(
 	var/channels = list()
 	var/networks = list()
 	var/languages = list(
-		LANGUAGE_SOL_COMMON = 1,
+		LANGUAGE_ENGLISH = 1,
+		LANGUAGE_MANDARIN = 1,
+		LANGUAGE_GERMAN = 1,
+		LANGUAGE_FRENCH = 1,
 		LANGUAGE_TRADEBAND = 1,
-		LANGUAGE_UNATHI = 0,
-		LANGUAGE_SIIK_MAAS = 0,
-		LANGUAGE_SKRELLIAN = 0,
 		LANGUAGE_GUTTER = 0,
-		LANGUAGE_SIGN = 0,
-		LANGUAGE_INDEPDENDENT = 0)
+		LANGUAGE_SIGN = 0)
 	var/sprites = list()
 	var/can_be_pushed = 1
 	var/no_slip = 0
@@ -477,16 +476,6 @@ var/global/list/robot_modules = list(
 /obj/item/weapon/robot_module/clerical
 	name = "service robot module"
 	channels = list("Service" = 1)
-	languages = list(
-					LANGUAGE_SOL_COMMON	= 1,
-					LANGUAGE_UNATHI		= 1,
-					LANGUAGE_SIIK_MAAS	= 1,
-					LANGUAGE_SIIK_TAJR	= 0,
-					LANGUAGE_SKRELLIAN	= 1,
-					LANGUAGE_TRADEBAND	= 1,
-					LANGUAGE_GUTTER		= 1,
-					LANGUAGE_INDEPENDENT= 1
-					)
 
 /obj/item/weapon/robot_module/clerical/butler
 	sprites = list(	"Waitress" = "Service",
@@ -632,15 +621,6 @@ var/global/list/robot_modules = list(
 /obj/item/weapon/robot_module/syndicate
 	name = "illegal robot module"
 	hide_on_manifest = 1
-	languages = list(
-					LANGUAGE_SOL_COMMON = 1,
-					LANGUAGE_TRADEBAND = 1,
-					LANGUAGE_UNATHI = 0,
-					LANGUAGE_SIIK_TAJR = 0,
-					LANGUAGE_SKRELLIAN = 0,
-					LANGUAGE_GUTTER = 1,
-					LANGUAGE_INDEPENDENT = 1
-					)
 	sprites = list(
 					"Dread" = "securityrobot",
 				)

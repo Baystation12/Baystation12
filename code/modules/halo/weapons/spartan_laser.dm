@@ -24,6 +24,7 @@
 	force = 10
 	screen_shake = 0.5
 	fire_delay = 10
+	scope_zoom_amount = 3
 	overheat_capacity = 3
 	overheat_fullclear_delay = 18
 
@@ -43,7 +44,7 @@
 	set name = "Use Scope"
 	set popup_menu = 1
 
-	toggle_scope(usr, 1.25)
+	toggle_scope(usr,scope_zoom_amount)
 
 /obj/item/projectile/beam/spartan
 	name = "spartan laser"

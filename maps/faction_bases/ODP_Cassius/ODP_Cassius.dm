@@ -1,11 +1,10 @@
 
 #include "../faction_base_unsc.dm"
 
-#include "areas.dm"
+#include "new_areas.dm"
 #include "ai_items.dm"
 #include "presets.dm"
-#include "ODP_Cassius_1.dmm"
-#include "ODP_Cassius_2.dmm"
+#include "new_ODP_Cassius.dmm"
 
 /obj/effect/overmap/ship/unsc_odp_cassius
 	name = "ODP Cassius"
@@ -21,9 +20,13 @@
 
 	parent_area_type = /area/faction_base/unsc
 
-	map_bounds = list(23,106,140,32) //Format: (TOP_LEFT_X,TOP_LEFT_Y,BOTTOM_RIGHT_X,BOTTOM_RIGHT_Y)
+	map_bounds = list(32,150,170,57) //Format: (TOP_LEFT_X,TOP_LEFT_Y,BOTTOM_RIGHT_X,BOTTOM_RIGHT_Y)
 
 	occupy_range = 7
+
+/obj/effect/overmap/ship/unsc_odp_cassius/Initialize()
+	. = ..()
+	loot_distributor.loot_list["bombRandom"] = list(/obj/effect/bombpoint_mark,/obj/effect/bombpoint_mark)
 
 /obj/effect/overmap/ship/unsc_odp_cassius/Destroy()
 	var/datum/game_mode/outer_colonies/gm = ticker.mode

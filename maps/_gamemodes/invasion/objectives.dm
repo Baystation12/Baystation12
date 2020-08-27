@@ -30,7 +30,7 @@
 	if(istype(gm))
 		gm.allow_scan = 1
 
-		GLOB.global_announcer.autosay("Our Orbital Defence Platform has fallen! Regroup at the ONI base, and get ready to strike out at covenant scanning devices.", "HIGHCOMM SIGINT", RADIO_FLEET, LANGUAGE_GALCOM)
+		GLOB.global_announcer.autosay("Our Orbital Defence Platform has fallen! Regroup at the ONI base, and get ready to strike out at covenant scanning devices.", "HIGHCOMM SIGINT", RADIO_FLEET, LANGUAGE_ENGLISH)
 		GLOB.global_announcer.autosay("The human defences are down! Plant the holy scanners, and locate the relic! Do not be distracted by the human's groundside fortifications!", "Covenant Overwatch", RADIO_COV, LANGUAGE_SANGHEILI)
 
 	. = ..()

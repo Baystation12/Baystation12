@@ -92,8 +92,10 @@
 		common_radio = radio
 
 	//As a human made device, we'll understand sol common without the need of the translator
-	add_language(LANGUAGE_SOL_COMMON, 1)
-	
+	add_language(LANGUAGE_MANDARIN, 1)
+	add_language(LANGUAGE_GERMAN, 1)
+	add_language(LANGUAGE_FRENCH, 1)
+
 	verbs += /mob/living/silicon/pai/proc/choose_chassis
 	verbs += /mob/living/silicon/pai/proc/choose_verbs
 	verbs -= /mob/living/verb/ghost

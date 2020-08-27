@@ -29,7 +29,7 @@
 	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0)
 	species_restricted = list("San Shyuum")
 	specials = list(/datum/armourspecials/shields,/datum/armourspecials/gear/prophet_jumpsuit)
-	totalshields = 270 //Ultra tier
+	totalshields = 270 //Zealot Tier
 
 /obj/item/clothing/suit/armor/special/shielded_prophet_robe/santa
 	name = "Cheerful Robe"
@@ -66,15 +66,6 @@
 	item_state_slots = list(
 	slot_l_hand_str = "santa_prophet_bag_left_inhands",
 	slot_r_hand_str = "santa_prophet_bag_right_inhands" )
-
-/datum/language/sanshyuum
-	name = "Janjur Qomi"
-	desc = "The language of the SanShyuum"
-	native = 1
-	colour = "sanshyuum"
-	syllables = list("nnse","nee","kooree","keeoh","cheenoh","rehmah","nnteh","hahdeh","nnrah","kahwah","ee","hoo","roh","usoh","ahnee","ruh","eerayrah","sohruh","eesah")
-	key = "P"
-	flags = RESTRICTED
 
 /decl/hierarchy/outfit/lesser_prophet
 	name = "Lesser Prophet"

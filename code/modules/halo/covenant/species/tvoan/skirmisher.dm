@@ -11,9 +11,9 @@
 		status as the lowest ranked members of the Covenant."
 	flesh_color = "#FF9463"
 	blood_color = "#532476"
-	default_language = "Sangheili"
-	language = "Sangheili"
-	additional_langs = list("T\'voai")
+	default_language = LANGUAGE_SANGHEILI
+	language = LANGUAGE_SANGHEILI
+	additional_langs = list(LANGUAGE_TVOAI)
 	icobase = 'code/modules/halo/covenant/species/tvoan/r_skirmishers.dmi'
 	deform = 'code/modules/halo/covenant/species/tvoan/r_skirmishers.dmi'
 	icon_template = 'code/modules/halo/covenant/species/tvoan/r_skirmisher_template.dmi'
@@ -23,8 +23,8 @@
 
 	pain_mod = 0.9
 	brute_mod = 1.1
-	burn_mod = 1.
-	slowdown = -0.7 //Just like how spartans are .2 greater than elites, skirms are .2 greater than spartans. Tweak all to .1 greater if this proves too high
+	burn_mod = 1.1
+	slowdown = -0.8 //0.3 higher than a spartan.
 
 	equipment_slowdown_multiplier = 0.7
 	gibbed_anim = null
@@ -74,15 +74,6 @@
 /mob/living/carbon/human/covenant/tvoan/New(var/new_loc)
 	. = ..(new_loc,"Tvaoan Kig-Yar")
 	faction = "Covenant"
-
-/datum/language/tvoai
-	name = "T\'voai"
-	desc = "The language of the T\'vaoan KigYar"
-	native = 1
-	colour = "tvaoan"
-	syllables = list("hss","rar","hrar","har","rah","huss","hee","ha","schra","skraw","skree","skrss","hos","hosk")
-	key = "T"
-	flags = RESTRICTED
 
 /obj/item/organ/external/head/tvoan
 	eye_icon = "eyes_s"

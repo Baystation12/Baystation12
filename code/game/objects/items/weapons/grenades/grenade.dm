@@ -11,6 +11,7 @@
 	slot_flags = SLOT_BELT
 	var/active = 0
 	var/det_time = 50
+	var/starttimer_on_hit = 0
 	var/arm_sound = 'sound/weapons/armbomb.ogg'
 	var/can_adjust_timer = 1
 
@@ -70,6 +71,11 @@
 				C.throw_mode_on()
 	return
 
+/obj/item/weapon/grenade/proc/start_timer()
+	spawn()
+		for(var/i=0, i<det_time, i++)
+			sleep(1-clamp(max(0,world.tick_usage-100)*0.01,0,0.5))
+		detonate()
 
 /obj/item/weapon/grenade/proc/activate(mob/user as mob)
 	if(active)
@@ -82,10 +88,8 @@
 	active = 1
 	playsound(loc, arm_sound, 75, 0, -3)
 
-	spawn()
-		for(var/i=0, i<det_time, i++)
-			sleep(1-clamp(max(0,world.tick_usage-100)*0.01,0,0.5))
-		detonate()
+	if(!starttimer_on_hit)
+		start_timer()
 		return
 
 
@@ -132,3 +136,9 @@
 	walk(src, null, null)
 	..()
 	return
+
+/obj/item/weapon/grenade/throw_impact(var/atom/hit)
+	if(active == 1 && starttimer_on_hit)
+		active = 2
+		start_timer()
+	. = ..()

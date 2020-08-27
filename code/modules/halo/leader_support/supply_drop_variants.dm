@@ -67,6 +67,8 @@
 
 /datum/support_option/supply_drop/cov/mass_ammo
 	name = "Supply Drop (Covenant, Ammunition, Mass )"
+	arrival_sfx = 'code/modules/halo/sound/sprit_flyby.ogg'
+	drop_delay = 2 SECONDS
 	item_to_drop = /obj/structure/closet/crate/supply_drop/cov/mass_ammo
 
 /obj/structure/closet/crate/supply_drop/cov/mass_ammo
@@ -114,7 +116,8 @@
 
 /datum/support_option/supply_drop/medical_drop/cov
 	name = "Supply Drop (Covenant Medical)"
-	desc = "Contains a small cache of medical supplies, retrieved from a nearby stealth support vessel."
+	arrival_sfx = 'code/modules/halo/sound/sprit_flyby.ogg'
+	drop_delay = 2 SECONDS
 	item_to_drop = /obj/structure/closet/crate/supply_drop/cov/medical
 
 /obj/structure/closet/crate/supply_drop/cov/medical
@@ -141,7 +144,8 @@
 
 /datum/support_option/supply_drop/vehicle_drop/cov
 	name = "Supply Drop (Covenant Recon Vehicle)"
-	desc = "Contains a recon vehicle, retrieved from a nearby stealth support vessel."
+	arrival_sfx = 'code/modules/halo/sound/sprit_flyby.ogg'
+	drop_delay = 2 SECONDS
 	item_to_drop = /obj/vehicles/ghost/supplydrop_recon
 
 /datum/support_option/supply_drop/vehicle_drop/cov/create_drop_item(var/turf/turf_at,var/mob/activator)
@@ -175,6 +179,8 @@
 
 /datum/support_option/supply_drop/construction_drop/cov
 	name = "Supply Drop (Covenant Construction/Reinforcement)"
+	arrival_sfx = 'code/modules/halo/sound/sprit_flyby.ogg'
+	drop_delay = 2 SECONDS
 	item_to_drop = /obj/structure/closet/crate/supply_drop/cov/construction
 
 /obj/structure/closet/crate/supply_drop/cov/construction

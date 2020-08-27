@@ -1,14 +1,6 @@
 
 GLOBAL_LIST_INIT(yanmee_nicknames, world.file2list('code/modules/halo/covenant/species/yanmee/yanmee_nicknames.txt'))
 
-/datum/language/yanmee_hivemind
-	name = "Yanme e Hivemind"
-	desc = "The hivemind language of the Yanme e"
-	native = 1
-	colour = "vox"
-	key = "Y"
-	flags = RESTRICTED|NO_TALK_MSG|NO_STUTTER|HIVEMIND
-
 /datum/unarmed_attack/bug_punch
     attack_verb = list("scratches", "kicks", "strikes", "slashes")
     attack_noun = list("hand")
@@ -27,9 +19,9 @@ Huragok Engineers. Their flight makes them hard to hit during combat and their n
 	blood_color = "#E6E621"
 	icobase = 'code/modules/halo/covenant/species/yanmee/r_yanmee.dmi'
 	deform = 'code/modules/halo/covenant/species/yanmee/r_yanmee.dmi'
-	default_language = "Sangheili"
-	language = "Sangheili"
-	additional_langs = list("Yanme e Hivemind")
+	default_language = LANGUAGE_SANGHEILI
+	language = LANGUAGE_SANGHEILI
+	additional_langs = list(LANGUAGE_YANMEE_HIVE)
 	radiation_mod = 0.6 //Covie weapons emit beta radiation. Resistant to 1/3 types of radiation.
 	inherent_verbs = list(/mob/living/carbon/human/proc/yanmee_flight_ability)
 	spawn_flags = SPECIES_CAN_JOIN
@@ -37,7 +29,7 @@ Huragok Engineers. Their flight makes them hard to hit during combat and their n
 	darksight = 4
 	brute_mod = 1.2
 	burn_mod = 1.2
-	slowdown = -0.3
+	slowdown = -0.2 //Better than a brute, worse than an elite.
 	gluttonous = GLUT_ANYTHING
 	pixel_offset_x = -1
 	default_faction = "Covenant"

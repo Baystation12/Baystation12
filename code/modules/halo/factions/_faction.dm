@@ -46,7 +46,7 @@
 	var/quest_interval_max = 5 MINUTES
 	var/gear_supply_type
 	var/default_radio_channel = RADIO_HUMAN
-	var/default_language = LANGUAGE_GALCOM
+	var/default_language = LANGUAGE_ENGLISH
 
 	var/income = 0	//credits
 	var/income_delay = 15 MINUTES

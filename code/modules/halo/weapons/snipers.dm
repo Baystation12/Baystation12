@@ -22,6 +22,8 @@
 	dispersion = list(0.1)
 	fire_delay = 12
 	burst = 1
+	scope_zoom_amount = 8
+	is_scope_variable = 1
 	wielded_item_state = "SRS99-wielded"
 	hud_bullet_row_num = 2
 	hud_bullet_reffile = 'code/modules/halo/icons/hud_display/hud_bullet_32x16.dmi'
@@ -42,7 +44,7 @@
 	set name = "Use Scope"
 	set popup_menu = 1
 
-	toggle_scope(usr, 1.75)
+	toggle_scope(usr, scope_zoom_amount)
 
 /obj/item/weapon/gun/projectile/srs99_sniper/update_icon()
 	if(ammo_magazine)
@@ -70,7 +72,8 @@
 	dispersion = list(0.26)
 	hud_bullet_row_num = 10
 	fire_delay = 10
-	accuracy = 2
+	accuracy = -1
+	scoped_accuracy = 2
 	var/on = 0
 	var/activation_sound = 'code/modules/halo/sounds/Assault_Rifle_Flashlight.wav'
 
@@ -105,7 +108,7 @@
 	magazine_type = /obj/item/ammo_magazine/m762_ap/M392/innie
 	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap/M392)
 	accuracy = -1
-	scoped_accuracy = 1
+	scoped_accuracy = 0
 
 /obj/item/weapon/gun/energy/SDSR_10
 	name = "SDSR-10"

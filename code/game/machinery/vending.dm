@@ -112,6 +112,9 @@
 		var/category = current_list[2]
 
 		for(var/entry in current_list[1])
+			if(!ispath(entry))
+				src.product_records.Add(entry)
+				continue
 			var/datum/stored_items/vending_products/product = new/datum/stored_items/vending_products(src, entry)
 
 			product.price = (entry in src.prices) ? src.prices[entry] : 0
@@ -125,7 +128,7 @@
 	wires = null
 	qdel(coin)
 	coin = null
-	for(var/datum/stored_items/vending_products/R in product_records)
+	for(var/R in product_records)
 		qdel(R)
 	product_records = null
 	return ..()
@@ -369,16 +372,23 @@
 
 		for(var/key = 1 to src.product_records.len)
 			var/datum/stored_items/vending_products/I = src.product_records[key]
+			if(istype(I))
+				if(!(I.category & src.categories))
+					continue
 
-			if(!(I.category & src.categories))
-				continue
-
-			listed_products.Add(list(list(
+				listed_products.Add(list(list(
+					"key" = key,
+					"name" = I.item_name,
+					"price" = I.price,
+					"color" = I.display_color,
+					"amount" = I.get_amount())))
+			else
+				listed_products.Add(list(list(
 				"key" = key,
-				"name" = I.item_name,
-				"price" = I.price,
-				"color" = I.display_color,
-				"amount" = I.get_amount())))
+				"name" = I,
+				"price" = -1,
+				"color" = null,
+				"amount" = -1)))
 
 		data["products"] = listed_products
 
