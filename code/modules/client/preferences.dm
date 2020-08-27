@@ -87,7 +87,7 @@ datum/preferences
 		dat += "<a href='?src=\ref[src];reload=1'>Reload slot</a>"
 
 	else
-		dat += "Please create an account to save your preferences."
+		dat += "Please create an account to save your preferences. If you have an account and are seeing this, please adminhelp for assistance."
 
 	dat += "<br>"
 	dat += player_setup.header()
