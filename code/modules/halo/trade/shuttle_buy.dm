@@ -24,6 +24,7 @@
 	var/datum/transaction/T = new("Trade market", "[src.name] import goods", 0, "System Terminal #B[rand(100000,999999)]")
 	money_account.transaction_log.Add(T)
 
+	var/num_packages = shoppinglist.len
 	for(var/S in shoppinglist)
 		if(!clear_turfs.len)	break
 		var/i = rand(1,clear_turfs.len)
@@ -46,13 +47,16 @@
 
 		var/obj/item/weapon/paper/manifest/slip
 		slip = new /obj/item/weapon/paper/manifest(A)
-		slip.name = "Shipping Manifest Order #[SO.ordernum]"
+		slip.name = "[SO.order_title] #[SO.ordernum]"
 		slip.is_copy = 0
-		slip.info = "<h3>Market Shipping Manifest</h3><hr><br>"
+		slip.info = "<h3>[SO.order_title]</h3><hr><br>"
 		slip.info +="Order #[SO.ordernum]<br>"
-		slip.info +="Destination: [GLOB.using_map.station_name]<br>"
-		slip.info +="[shoppinglist.len] PACKAGES IN THIS SHIPMENT<br>"
-		slip.info +="CONTENTS:<br><ul>"
+		slip.info +="Destination: [SO.destination]<br>"
+		slip.info +="[num_packages] PACKAGES IN THIS SHIPMENT<br>"
+		slip.info +="THIS PACKAGE CONTENTS:<br><ul>"
+		slip.icon_state = "paper_words"
+		if(SO.stamp_id)
+			slip.overlays += SO.stamp_id
 
 		//spawn the stuff, finish generating the manifest while you're at it
 		if(SP.access)
