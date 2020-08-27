@@ -30,10 +30,14 @@
 	special_jobs = list(/datum/job/covenant/brute_captain,\
 		/datum/job/covenant/skirmchampion,\
 		/datum/job/covenant/sangheili_zealot)
+	income = 1000
+	contraband_gear = "Covenant"
 
-/datum/faction/covenant/New()
+/datum/faction/covenant/Initialize()
 	. = ..()
 	leader_name = "[pick(GLOB.sanshyuum_titles)] of [pick(GLOB.sanshyuum_virtues)]"
+	money_account = create_account("Fleet of Divine Temperance", 1000)
+	money_account.currency_name = "gekz"
 
 /datum/faction/covenant/unlock_special_job()
 	. = ..()
@@ -71,7 +75,6 @@
 		/mob/living/simple_animal/hostile/unsc/spartan_two = 1)
 	default_radio_channel = RADIO_SQUAD
 	income = 1000
-	income_delay = 15 MINUTES
 	special_jobs = list(/datum/job/unsc/spartan_two)
 
 /datum/faction/unsc/Initialize()

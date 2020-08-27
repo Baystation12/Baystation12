@@ -13,3 +13,8 @@
 /datum/access/covenant_slipspace
 	id = access_covenant_slipspace
 	desc = "Covenant Slipspace Access"
+
+/var/const/access_covenant_cargo = 803
+/datum/access/covenant_cargo
+	id = access_covenant_cargo
+	desc = "Covenant Cargo Access"

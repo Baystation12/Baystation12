@@ -88,3 +88,12 @@
 /datum/shuttle/autodock/ferry/trade/oni/New()
 	. = ..()
 	money_account = GLOB.ONI.money_account
+
+
+
+/* SUPPLY ORDER */
+
+/datum/nano_module/program/faction_supply/oni/supply_order_flavour(var/datum/supply_order/O)
+	O.destination = GLOB.ONI.get_hq_name()
+	O.stamp_id = "paper_stamp-cent"
+	O.order_title = "ONI Resupply Shipment"

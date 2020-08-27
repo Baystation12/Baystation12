@@ -143,7 +143,7 @@
 /datum/faction/proc/get_flagship_name()
 	if(!flagship && has_flagship)
 		return archived_flagship_name
-	archived_flagship_name = "[name] \"[flagship.name]\""
+	archived_flagship_name = flagship.name
 	return archived_flagship_name
 
 /*/datum/faction/proc/find_flagship()
@@ -173,7 +173,7 @@
 /datum/faction/proc/get_base_name()
 	if(!base)
 		return archived_base_name
-	archived_base_name = "[name] [base_desc] \"[base.name]\""
+	archived_base_name = base.name
 	return archived_base_name
 
 /datum/faction/proc/get_commander(var/datum/mind/check_mind)
@@ -221,3 +221,22 @@
 			. = special_job
 	else
 		log_and_message_admins("Warning, attempted to unlock a special job slot for [src.name] but none were listed!")
+
+/datum/faction/proc/get_hq_name()
+	//attempt to find the HQ name
+	var/hq_name
+
+	//is there a base?
+	if(has_base)
+		hq_name = get_base_name()
+	if(hq_name)
+		return hq_name
+
+	//is there a flagship?
+	if(has_flagship)
+		hq_name = get_flagship_name()
+	if(hq_name)
+		return hq_name
+
+	//cant figure it out
+	return "Unknown"
