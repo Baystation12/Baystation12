@@ -113,6 +113,11 @@
 					/obj/item/clothing/accessory/storage/bandolier = 2,
 					/obj/item/weapon/storage/backpack/marine = 3,
 					/obj/item/weapon/storage/backpack/marine/brown = 3,
+					/obj/item/clothing/accessory/holster = 1,
+					/obj/item/clothing/accessory/holster/armpit = 1,
+					/obj/item/clothing/accessory/holster/waist = 1,
+					/obj/item/clothing/accessory/holster/hip = 1,
+					/obj/item/clothing/accessory/holster/thigh = 1,
 					"Miscellaneous" = -1,
 					/obj/item/flight_item/bullfrog_pack = 0,
 					/obj/item/weapon/armor_patch = 0

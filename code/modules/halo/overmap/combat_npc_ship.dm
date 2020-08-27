@@ -129,10 +129,10 @@
 	. = ..()
 
 /obj/item/projectile/overmap/mac/npc
-	damage = 1000
+	damage = 2500
 
 /obj/item/projectile/overmap/beam/npc
-	damage = 1000
+	damage = 2500
 
 //UNSC//
 /obj/effect/overmap/ship/npc_ship/combat/unsc
