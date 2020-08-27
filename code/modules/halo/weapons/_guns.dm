@@ -1,3 +1,4 @@
+#define MIN_MAGNIF 1.1
 
 /obj/item/weapon/gun
 	var/scope_zoom_amount = 0
@@ -22,7 +23,7 @@
 
 /obj/item/weapon/gun/proc/set_scope_zoom(var/setzoom,var/mob/user) //The set zoom amount on the weapon is
 	if(setzoom < 1)
-		to_chat(user,"<span class = 'notice'>Zoom must be greater than or equal to 1.</span>")
+		to_chat(user,"<span class = 'notice'>Zoom must be greater than or equal to [MIN_MAGNIF].</span>")
 		scope_zoom_amount = 1
 	else if(setzoom > max_zoom_amount)
 		to_chat(user,"<span class = 'notice'>Zoom must be less than or equal to [max_zoom_amount]</span>")
