@@ -8,7 +8,7 @@
 	icon_state = "minorboot"
 	item_state = "minor_greaves"
 	force = 5
-	armor = list(melee = 40, bullet = 40, laser = 5, energy = 20, bomb = 40, bio = 0, rad = 0)
+	armor = list(melee = 40, bullet = 40, laser = 40, energy = 40, bomb = 40, bio = 0, rad = 0)
 	siemens_coefficient = 0.6
 	body_parts_covered = FEET|LEGS
 	species_restricted = list("Kig-Yar", "Tvaoan Kig-Yar")

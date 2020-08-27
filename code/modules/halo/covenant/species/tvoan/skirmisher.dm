@@ -23,8 +23,8 @@
 
 	pain_mod = 0.9
 	brute_mod = 1.1
-	burn_mod = 1.
-	slowdown = -0.7 //Just like how spartans are .2 greater than elites, skirms are .2 greater than spartans. Tweak all to .1 greater if this proves too high
+	burn_mod = 1.1
+	slowdown = -0.8 //0.3 higher than a spartan.
 
 	equipment_slowdown_multiplier = 0.7
 	gibbed_anim = null

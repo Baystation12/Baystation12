@@ -17,7 +17,7 @@
 "aq" = (/obj/structure/closet/walllocker/emerglocker/north,/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/tiled,/area/corvette/unscbertels/deck2/starboardhallwaycentral)
 "ar" = (/obj/structure/closet{anchored = 1},/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/obj/item/device/encryptionkey/teamcom,/obj/item/clothing/shoes/jungleboots,/obj/item/clothing/gloves/thick/combat,/obj/effect/random_ODST_set,/obj/item/clothing/under/unsc/odst_jumpsuit,/obj/item/clothing/glasses/hud/tactical,/turf/simulated/floor/tiled,/area/corvette/unscbertels/deck2/marinearmory)
 "as" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled,/area/corvette/unscbertels/deck2/marinearmory)
-"at" = (/obj/machinery/vending/armory/hybrid,/turf/simulated/floor/tiled,/area/corvette/unscbertels/deck2/marinearmory)
+"at" = (/obj/machinery/pointbased_vending/armory/hybrid,/turf/simulated/floor/tiled,/area/corvette/unscbertels/deck2/marinearmory)
 "au" = (/obj/structure/closet{anchored = 1},/obj/machinery/light{dir = 4; icon_state = "tube1"},/obj/item/device/encryptionkey/teamcom,/obj/item/clothing/shoes/jungleboots,/obj/item/clothing/gloves/thick/combat,/obj/effect/random_ODST_set,/obj/item/clothing/under/unsc/odst_jumpsuit,/obj/item/clothing/glasses/hud/tactical,/turf/simulated/floor/tiled,/area/corvette/unscbertels/deck2/marinearmory)
 "av" = (/obj/structure/drop_pod_launchbay,/obj/vehicles/drop_pod/SOEIV,/turf/simulated/floor/plating,/area/corvette/unscbertels/deck2/starboardhangar)
 "aw" = (/turf/simulated/floor/plating,/area/corvette/unscbertels/deck2/starboardhangar)

@@ -18,7 +18,7 @@
 	burst = 5
 	burst_delay = 1.8
 	one_hand_penalty = -1
-	dispersion = list(0.0,0.2,0.3,0.5,0.73) //@ 7 tiles, deviation is 0 - 1 tiles.
+	dispersion = list(0.0,0.2,0.4,0.6,0.73) //@ 7 tiles, deviation is 0 - 1 tiles.
 	hud_bullet_row_num = 20
 
 	var/on = 0
@@ -142,6 +142,8 @@
 	hud_bullet_row_num = 18
 	w_class = ITEM_SIZE_LARGE
 	dispersion=list(0.26, 0.26, 0.26) //About a third of a tile at 7 tile range.
+	scope_zoom_amount = 2
+	is_scope_variable = 1
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
@@ -155,7 +157,7 @@
 	set name = "Use Scope"
 	set popup_menu = 1
 
-	toggle_scope(usr, 1.15)
+	toggle_scope(usr, scope_zoom_amount)
 
 /obj/item/weapon/gun/projectile/br85/update_icon()
 	if(ammo_magazine)

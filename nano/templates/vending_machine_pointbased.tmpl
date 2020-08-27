@@ -1,0 +1,32 @@
+<!-- 
+	Interface for vending machines 
+	See: code/game/machinery/vending.dm
+-->
+<h2>Requistion Points:</h2>
+{{:data.pointsleft}}/{{:data.pointsmax}}
+<h2>Items available</h2>
+<div class='item'>
+	{{for data.products}}
+	<div class='item'>
+			<div style='float'>
+				{{if value.price > -1}}
+					{{if value.price > 0}}
+						{{:helper.link('Buy (' + value.price + ')', 'cart', { "vend" : value.key }, value.amount > 0 ? null : 'disabled')}}
+					{{else}}
+						{{:helper.link('Vend', 'circle-arrow-s', { "vend" : value.key }, value.amount > 0 ? null : 'disabled')}}
+					{{/if}}
+				{{/if}}
+			</div>
+		<div class='itemContent'>
+		{{if value.color}}<span style='color:{{:value.color}}'>{{:value.name}}</span>
+		{{else}}{{:value.name}}
+		{{/if}}
+			{{if value.amount > -1}}
+				({{:value.amount ? value.amount : "NONE LEFT"}})
+			{{/if}}
+		</div>
+	</div>
+	{{empty}}
+	No items available!
+	{{/for}}
+</div>

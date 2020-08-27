@@ -74,7 +74,7 @@
 	icon_state = "carbine_casing"
 	tracer_type = /obj/effect/projectile/beam_rifle
 	tracer_delay_time = 1.5 SECONDS
-	invisibility = 101
+	invisibility = 61
 	shield_damage = 210
 	muzzle_type = /obj/effect/projectile/muzzle/cov_cyan
 
@@ -231,7 +231,7 @@
 	check_armour = "energy"
 	tracer_type = /obj/effect/projectile/type51carbine
 	tracer_delay_time = 1.5 SECONDS
-	invisibility = 101
+	invisibility = 61
 	embed = 1
 	sharp = 1
 	use_covenant_burndam_override = 0
@@ -375,7 +375,7 @@
 		if(dir_move in GLOB.cardinal)
 			lastloc = get_edge_target_turf(m, dir_move)
 		else
-			for(var/i = 0 to world.view)
+			for(var/i = 0 to world.view - 1)
 				var/turf/newloc = get_step(lastloc,dir_move)
 				if(newloc.density == 1)
 					break

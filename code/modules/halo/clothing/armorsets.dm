@@ -224,7 +224,6 @@
   startswith = list(
                 /obj/item/clothing/head/helmet/odst,
                 /obj/item/clothing/suit/armor/special/odst,
-                /obj/item/weapon/storage/backpack/odst/regular,
                 /obj/item/clothing/shoes/magboots/odst,
                 /obj/item/clothing/gloves/thick/combat,
                 /obj/item/weapon/tank/emergency/oxygen/engi,
@@ -232,7 +231,6 @@
   can_hold = list(
                 /obj/item/clothing/head/helmet/odst,
                 /obj/item/clothing/suit/armor/special/odst,
-                /obj/item/weapon/storage/backpack/odst/regular,
                 /obj/item/clothing/shoes/magboots/odst,
                 /obj/item/clothing/gloves/thick/combat,
                 /obj/item/weapon/tank/emergency/oxygen/engi,
@@ -244,7 +242,6 @@
   startswith = list(
         /obj/item/clothing/head/helmet/odst/cqb,
         /obj/item/clothing/suit/armor/special/odst/cqb,
-        /obj/item/weapon/storage/backpack/odst/cqb,
         /obj/item/clothing/shoes/magboots/odst,
         /obj/item/clothing/gloves/thick/combat,
         /obj/item/weapon/tank/emergency/oxygen/engi,
@@ -252,7 +249,6 @@
   can_hold = list(
         /obj/item/clothing/head/helmet/odst/cqb,
         /obj/item/clothing/suit/armor/special/odst/cqb,
-        /obj/item/weapon/storage/backpack/odst/cqb,
         /obj/item/clothing/shoes/magboots/odst,
         /obj/item/clothing/gloves/thick/combat,
         /obj/item/weapon/tank/emergency/oxygen/engi,
@@ -263,7 +259,6 @@
   startswith = list(
         /obj/item/clothing/head/helmet/odst/sharpshooter,
         /obj/item/clothing/suit/armor/special/odst/sharpshooter,
-        /obj/item/weapon/storage/backpack/odst/sharpshooter,
         /obj/item/clothing/shoes/magboots/odst,
         /obj/item/clothing/gloves/thick/combat,
         /obj/item/weapon/tank/emergency/oxygen/engi,
@@ -271,7 +266,6 @@
   can_hold = list(
         /obj/item/clothing/head/helmet/odst/sharpshooter,
         /obj/item/clothing/suit/armor/special/odst/sharpshooter,
-        /obj/item/weapon/storage/backpack/odst/sharpshooter,
         /obj/item/clothing/shoes/magboots/odst,
         /obj/item/clothing/gloves/thick/combat,
         /obj/item/weapon/tank/emergency/oxygen/engi,
@@ -282,7 +276,6 @@
   startswith = list(
         /obj/item/clothing/head/helmet/odst/medic,
         /obj/item/clothing/suit/armor/special/odst/medic,
-        /obj/item/weapon/storage/backpack/odst/medic,
         /obj/item/clothing/shoes/magboots/odst,
         /obj/item/clothing/gloves/thick/combat,
         /obj/item/weapon/tank/emergency/oxygen/engi,
@@ -290,7 +283,6 @@
   can_hold = list(
         /obj/item/clothing/head/helmet/odst/medic,
         /obj/item/clothing/suit/armor/special/odst/medic,
-        /obj/item/weapon/storage/backpack/odst/medic,
         /obj/item/clothing/shoes/magboots/odst,
         /obj/item/clothing/gloves/thick/combat,
         /obj/item/weapon/tank/emergency/oxygen/engi,
@@ -301,7 +293,6 @@
   startswith = list(
         /obj/item/clothing/head/helmet/odst/engineer,
         /obj/item/clothing/suit/armor/special/odst/engineer,
-        /obj/item/weapon/storage/backpack/odst/engineer,
         /obj/item/clothing/shoes/magboots/odst,
         /obj/item/clothing/gloves/thick/combat,
         /obj/item/weapon/tank/emergency/oxygen/engi,
@@ -309,7 +300,6 @@
   can_hold = list(
         /obj/item/clothing/head/helmet/odst/engineer,
         /obj/item/clothing/suit/armor/special/odst/engineer,
-        /obj/item/weapon/storage/backpack/odst/engineer,
         /obj/item/clothing/shoes/magboots/odst,
         /obj/item/clothing/gloves/thick/combat,
         /obj/item/weapon/tank/emergency/oxygen/engi,
@@ -320,7 +310,6 @@
   startswith = list(
         /obj/item/clothing/head/helmet/odst/squadleader,
         /obj/item/clothing/suit/armor/special/odst/squadleader,
-        /obj/item/weapon/storage/backpack/odst/squadlead,
         /obj/item/clothing/shoes/magboots/odst,
         /obj/item/clothing/gloves/thick/combat,
         /obj/item/weapon/tank/emergency/oxygen/engi,
@@ -328,7 +317,6 @@
   can_hold = list(
         /obj/item/clothing/head/helmet/odst/squadleader,
         /obj/item/clothing/suit/armor/special/odst/squadleader,
-        /obj/item/weapon/storage/backpack/odst/squadlead,
         /obj/item/clothing/shoes/magboots/odst,
         /obj/item/clothing/gloves/thick/combat,
         /obj/item/weapon/tank/emergency/oxygen/engi,

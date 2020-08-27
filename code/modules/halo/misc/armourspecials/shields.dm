@@ -71,7 +71,7 @@
 	var/shieldstrength
 	var/totalshields
 	var/nextcharge
-	var/shield_recharge_delay = 10 SECONDS//The delay for the shields to start recharging from damage (Multiplied by 1.5 if shields downed entirely)
+	var/shield_recharge_delay = 7.5 SECONDS//The delay for the shields to start recharging from damage (Multiplied by 1.5 if shields downed entirely)
 	var/shield_recharge_ticktime = 1 SECOND //The delay between recharge ticks
 	var/obj/effect/overlay/shields/shieldoverlay = new /obj/effect/overlay/shields
 	var/image/mob_overlay
