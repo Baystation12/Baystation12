@@ -362,6 +362,7 @@
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "SPNKr"
 	mag_type = MAGAZINE
+	slot_flags = SLOT_BELT | SLOT_MASK //Shhh it's a joke
 	ammo_type = /obj/item/ammo_casing/spnkr
 	caliber = "spnkr"
 	max_ammo = 2

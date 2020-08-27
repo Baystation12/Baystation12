@@ -51,6 +51,9 @@
 	update_icon()
 
 /obj/item/weapon/gun/projectile/proc/load_from_box(var/obj/item/ammo_box/box,var/mob/user)
+	if(box.loading)
+		to_chat(user,"<span class = 'notice'>[box] is already being used to load a gun!</span>")
+		return
 	if(box.contents.len == 0 || isnull(box.contents.len))
 		to_chat(user,"<span class ='notice'>The [box.name] is empty!</span>")
 		return
@@ -58,11 +61,13 @@
 		to_chat(user,"<span class = 'notice'>The [name] is full!</span>")
 		return
 	to_chat(user,"<span class ='notice'>You start loading the [name] from the [box.name]</span>")
+	box.loading = 1
 	for(var/ammo in box.contents)
 		if(do_after(user,box.load_time SECONDS,box, same_direction = 1))
 			load_ammo(ammo,user)
 			continue
 		break
+	box.loading = 0
 
 	box.update_icon()
 
