@@ -135,8 +135,7 @@
 	one_hand_penalty = 1
 	burst = 4
 	burst_delay = 1.5
-	burst_accuracy = list(0,0,0,-1,-1,-1)
-	dispersion = list(0.7, 0.9, 1.1,1.4)
+	dispersion = list(0.2, 0.4, 0.7, 1.0)
 	hud_bullet_reffile = 'code/modules/halo/icons/hud_display/hud_bullet_5x6.dmi'
 	hud_bullet_iconstate = "needle"
 	is_heavy = 1
