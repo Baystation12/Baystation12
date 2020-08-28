@@ -1,4 +1,0 @@
-author: "Shadowtail117"
-delete-after: True
-changes: 
-  - rscadd: "Mantid cryotanks now function as cryogenic storage. Similarly, there is now an oversight console for them."

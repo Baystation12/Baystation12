@@ -1,4 +1,0 @@
-author: "Sweedle"
-delete-after: True
-changes: 
-  - tweak: "The \"Please create an account\" message now directs you to adminhelp."
