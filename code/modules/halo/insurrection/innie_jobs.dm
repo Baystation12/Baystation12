@@ -10,7 +10,6 @@
 	access = list(access_innie)
 	outfit_type = /decl/hierarchy/outfit/job/colonist/geminus_innie
 	selection_color = "#ff0000"
-	spawnpoint_override = "Geminus Innie"
 	alt_titles = list(\
 	"Insurrectionist Ship Crew",
 	"Insurrectionist Technician",
@@ -64,7 +63,6 @@
 	spawn_positions = 2
 	access = list(access_innie, access_innie_boss)
 	selection_color = "#ff0000"
-	spawnpoint_override = "Geminus Innie"
 	alt_titles = null
 
 /datum/job/geminus_innie/officer/equip(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch)
@@ -83,7 +81,6 @@
 	spawn_positions = 1
 	access = list(access_innie, access_innie_boss)
 	selection_color = "#ff0000"
-	spawnpoint_override = "Geminus Innie"
 	faction_whitelist = "Insurrection"
 	alt_titles = null
 
