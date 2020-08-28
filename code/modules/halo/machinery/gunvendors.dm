@@ -52,6 +52,11 @@
 		/obj/item/weapon/grenade/smokebomb = 15
 	)
 
+/obj/machinery/pointbased_vending/armory/hybrid/innie
+	name = "Insurrectionist Equipment Rack"
+	desc = "An equipment rack, obviously stolen from the UNSC or their suppliers."
+	req_access = list(access_innie)
+
 /obj/machinery/pointbased_vending/armory/heavy // HEAVY WEAPONS
 	name = "UNSC Heavy Weapons Rack"
 	desc = "Storage for advanced weapons and ammunition"
@@ -171,6 +176,18 @@
 					/obj/item/ammo_casing/g40mm/smoke = 4,
 					/obj/item/ammo_casing/g40mm/illumination = 4)
 	//products = list(/obj/item/weapon_attachment/sight/acog = 2, /obj/item/weapon_attachment/sight/rds = 6)
+
+/obj/machinery/vending/armory/attachment/innie
+	name = "Insurrectionist Attachment Vendor"
+	req_access = list(access_innie)
+	products = list(/obj/item/weapon_attachment/ma5_stock_butt/extended = 2,
+					/obj/item/weapon_attachment/ma5_upper_railed =2,
+					/obj/item/weapon_attachment/barrel/suppressor = 2,
+					/obj/item/weapon_attachment/sight/acog = 2,
+					/obj/item/weapon_attachment/light/flashlight = 2,
+					/obj/item/weapon_attachment/barrel/suppressor = 1,
+					/obj/item/weapon_attachment/vertical_grip = 2,
+					)
 
 /obj/machinery/vending/armory/attachment/soe
 	name = "SOE Attachments Vendor"
@@ -394,6 +411,37 @@
 					/obj/item/clothing/suit/armor/special/soe = 6,
 					/obj/item/weapon/tank/jetpack/void/urfc = 6 )
 
+/obj/machinery/pointbased_vending/armory/innie_armor
+	name = "Insurrectionist Misc Equipment Vendor"
+	desc = "A machine full of spare stolen and cobbled together innie armor and equipment"
+	req_access = list(access_unsc_marine)
+	products = list(
+					"Armor" = -1,
+					/obj/item/clothing/mask/innie/shemagh = 0,
+					/obj/item/clothing/head/helmet/innie/medium = 0,
+					/obj/item/clothing/suit/storage/innie/medium = 0,
+					/obj/item/clothing/shoes/innie_boots/medium = 0,
+					"Storage" = -1,
+					/obj/item/weapon/storage/belt/marine_ammo = 0,
+					/obj/item/weapon/storage/belt/marine_medic = 0,
+					/obj/item/weapon/storage/belt/utility/full = 0,
+					/obj/item/clothing/accessory/storage/bandolier = 2,
+					/obj/item/weapon/storage/backpack/marine = 3,
+					/obj/item/weapon/storage/backpack/marine/brown = 3,
+					/obj/item/clothing/accessory/holster = 1,
+					/obj/item/clothing/accessory/holster/armpit = 1,
+					/obj/item/clothing/accessory/holster/waist = 1,
+					/obj/item/clothing/accessory/holster/hip = 1,
+					/obj/item/clothing/accessory/holster/thigh = 1,
+					"Miscellaneous" = -1,
+					/obj/item/flight_item/bullfrog_pack = 0,
+					/obj/item/weapon/armor_patch = 0,
+					/obj/item/weapon/armor_patch/mini = 0
+					)
+	amounts = list(\
+		/obj/item/flight_item/bullfrog_pack = 1,
+		)
+
 /obj/machinery/vending/armory/medical
 	name = "UNSC Medical Vendor"
 	desc = "A vendor that supplies medical equipment"
@@ -421,3 +469,7 @@
 					/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline = 10,
 					/obj/item/weapon/storage/box/syringes = 2,
 					)
+
+/obj/machinery/vending/armory/medical/innie
+	name = "Insurrectionist Medical Vendor"
+	req_access = list(access_innie)

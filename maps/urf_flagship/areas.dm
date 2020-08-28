@@ -53,3 +53,7 @@
 /area/urf_flagship/powercore
 	name = "URF Flagship Power Core"
 	icon_state = "engine"
+
+/area/urf_flagship/questareamarker
+	name = "URF Flagship Quest Area"
+	icon_state = "bridge"

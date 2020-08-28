@@ -88,4 +88,4 @@
 //todo: let it choose any account
 /datum/shuttle/autodock/ferry/trade/innie/New()
 	. = ..()
-	money_account = GLOB.INNIE.money_account
+	money_account = GLOB.INSURRECTION.money_account
