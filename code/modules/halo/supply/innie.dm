@@ -95,6 +95,6 @@
 /* SUPPLY ORDER */
 
 /datum/nano_module/program/faction_supply/innie/supply_order_flavour(var/datum/supply_order/O)
-	O.destination = GLOB.INNIE.get_hq_name()
+	O.destination = GLOB.INSURRECTION.get_hq_name()
 	O.stamp_id = "paper_stamp-cent"
 	O.order_title = "Insurrection Grey Market Shipment"
