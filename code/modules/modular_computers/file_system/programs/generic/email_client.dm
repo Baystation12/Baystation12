@@ -491,7 +491,7 @@
 
 	if(href_list["set_notification"])
 		var/new_notification = sanitize(input(user, "Enter your desired notification sound:", "Set Notification", current_account.notification_sound) as text|null)
-		if(new_notification)
+		if(new_notification && current_account)
 			current_account.notification_sound = new_notification
 		return 1
 

@@ -240,13 +240,14 @@
 			dismantle_sound = P.drill_sound
 			cut_delay -= P.digspeed
 
-		if(dismantle_verb)
+		if(dismantle_verb && !dismantling)
 
+			dismantling = TRUE
 			to_chat(user, "<span class='notice'>You begin [dismantle_verb] through the outer plating.</span>")
 			if(dismantle_sound)
 				playsound(src, dismantle_sound, 100, 1)
 
-			if(cut_delay<0)
+			if(cut_delay < 0)
 				cut_delay = 0
 
 			if(!do_after(user,cut_delay,src))
