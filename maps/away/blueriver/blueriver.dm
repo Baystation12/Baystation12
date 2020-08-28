@@ -19,6 +19,7 @@
 /datum/map_template/ruin/away_site/blueriver
 	name = "Bluespace River"
 	id = "awaysite_blue"
+	cost = 2
 	description = "Two z-level map with an arctic planet and an alien underground surface"
 	suffixes = list("blueriver/blueriver-1.dmm", "blueriver/blueriver-2.dmm")
 	generate_mining_by_z = 2
