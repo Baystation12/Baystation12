@@ -287,10 +287,6 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
 	},
-/obj/machinery/portable_atmospherics/canister/hydrogen/engine_setup{
-	name = "\improper Fusion Fuel Canister: \[Hydrogen]";
-	start_pressure = 14999
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/vacant/prototype/engine)
 "az" = (
@@ -9709,6 +9705,13 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/foreport)
+"wu" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/portable_atmospherics/canister/helium{
+	start_pressure = 14999
+	},
+/turf/simulated/floor/plating,
+/area/vacant/prototype/engine)
 "ww" = (
 /obj/structure/table/rack{
 	dir = 8
@@ -10945,6 +10948,13 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/atmos)
+"Aj" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/portable_atmospherics/canister/hydrogen{
+	start_pressure = 14999
+	},
+/turf/simulated/floor/plating,
+/area/vacant/prototype/engine)
 "Al" = (
 /obj/effect/floor_decal/techfloor{
 	dir = 8;
@@ -13347,10 +13357,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 9
-	},
-/obj/machinery/portable_atmospherics/canister/helium{
-	name = "\improper Fusion Fuel Canister \[He]";
-	start_pressure = 14999
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/vacant/prototype/engine)
@@ -16410,9 +16416,6 @@
 	c_tag = "Engine - Prototype Chamber Two";
 	dir = 1
 	},
-/obj/machinery/portable_atmospherics/canister/phoron/engine_setup{
-	name = "\improper Fusion Fuel Canister \[Phoron]"
-	},
 /turf/simulated/floor/plating,
 /area/vacant/prototype/engine)
 "Qj" = (
@@ -17092,10 +17095,6 @@
 /obj/item/device/radio/intercom{
 	dir = 1;
 	pixel_y = -28
-	},
-/obj/machinery/portable_atmospherics/canister/hydrogen/engine_setup{
-	name = "\improper Fusion Fuel Canister: \[Hydrogen]";
-	start_pressure = 14999
 	},
 /turf/simulated/floor/plating,
 /area/vacant/prototype/engine)
@@ -17862,10 +17861,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
-	},
-/obj/machinery/portable_atmospherics/canister/helium{
-	name = "\improper Fusion Fuel Canister \[He]";
-	start_pressure = 14999
 	},
 /turf/simulated/floor/plating,
 /area/vacant/prototype/engine)
@@ -28839,7 +28834,7 @@ PP
 PP
 PP
 qw
-me
+wu
 me
 Se
 Vg
@@ -28849,7 +28844,7 @@ Tk
 Vg
 Se
 me
-me
+Aj
 qw
 MQ
 MQ
@@ -29041,7 +29036,7 @@ Og
 fU
 fU
 qw
-mb
+wu
 Mg
 Rg
 Fh
@@ -29051,7 +29046,7 @@ Th
 Jj
 Tj
 Yj
-mb
+Aj
 qw
 vt
 vt
