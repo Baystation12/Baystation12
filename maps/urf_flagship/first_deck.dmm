@@ -338,6 +338,7 @@
 "gz" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/machinery/biogenerator,/turf/simulated/floor/tiled,/area/urf_flagship/Messhall)
 "gA" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/machinery/seed_extractor,/turf/simulated/floor/tiled,/area/urf_flagship/Messhall)
 "gB" = (/obj/machinery/pointbased_vending/armory/hybrid/innie,/turf/simulated/floor/tiled/dark,/area/urf_flagship/Troopbunks)
+"gC" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/ma5b_ar/MA37,/turf/simulated/floor/tiled/dark,/area/urf_flagship/Troopbunks)
 "gD" = (/turf/simulated/floor,/turf/simulated/shuttle/wall/corner/dark/nw,/area/shuttle/innie_shuttle_transport)
 "gE" = (/turf/simulated/shuttle/wall{icon_state = "wall3"},/area/shuttle/innie_shuttle_transport)
 "gF" = (/turf/simulated/floor/tiled,/area/urf_flagship/storageroom3)
@@ -495,7 +496,6 @@
 "jU" = (/obj/effect/landmark/map_data{name = "SOE Osprey"},/turf/space,/area/space)
 "jV" = (/obj/effect/overmap/ship/urf_flagship,/turf/space,/area/space)
 "jW" = (/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/urf_flagship/Troopbunks)
-"jX" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/ma5b_ar/MA37,/obj/item/weapon/gun/projectile/ma5b_ar/MA37,/obj/item/weapon/gun/projectile/ma5b_ar/MA37,/turf/simulated/floor/tiled/dark,/area/urf_flagship/Troopbunks)
 "jY" = (/obj/vehicles/bull,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/urf_flagship/powercore)
 "jZ" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 1; name = "Armory"; req_access = newlist()},/turf/simulated/floor/tiled/dark,/area/urf_flagship/Troopbunks)
 "ka" = (/obj/effect/decal/cleanable/blood/oil/streak,/turf/simulated/floor/tiled,/area/urf_flagship/medicalbay)
@@ -598,7 +598,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPananananananan
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeIaPaPaPanananananananananananananananananajaoamamamapamamamaoapamamamamamamaoapaqapamamaoamamamamamapaqapaoamamamamamamapaoamamamapamamamamamamaoamamamamapfvhmfvfvfvfvfvfvfvajajajajajaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPanananananananfRgigBhohogBgifRananajamajamajajajajajajajajajajajajajajajajajajajajamajamajajajajajajajajajajajajajajajajajajajamajajajajajajajajajamedfvfvfvfvhZfvfvfvajajajajajajajajajajajaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeIaPaPaPaPaPaPaPaPaPaPaPaPaPaPasasasasasaniqaSaSiraSaSaSaSaSgaanajamajaqajajajajajajarajajajajajajajajajajajajajaqajaqajajajajajajajajajajajajajajajajajajajaqajajajajajajajajajamajfvfvfvfviTfvfvfvajajajajajajajajaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeIaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPasasaspRkuasiXaSaSjWaSaSjWiraSjXanajamajauavawavavaxavavavavavavavawaxavawavavavavavavavaxavavawavavawavaxavavavavavavavaxawavayajajazaAazajajajajaqajjYfvfvfPhmfvfveZajaBaBaBajaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeIaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPasasaspRkuasiXaSaSjWaSaSjWiraSgCanajamajauavawavavaxavavavavavavavawaxavawavavavavavavavaxavavawavavawavaxavavavavavavavaxawavayajajazaAazajajajajaqajjYfvfvfPhmfvfveZajaBaBaBajaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPasbMkrbMksasananananjZaSanananananajamajaEaFaGaHaHaHaHaHaHaHaHaHdKaGaIaJaGaHaHaHaHaHdKaHaHaHaHaGaIaJaGdKaHaHaHaHaHaHaHaHaHaGaIaKajajaLaMaLajajamaoamamajajajajajajajajaNaOamamajaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPasksasktkuasaQaRaQanaSaSanaQaRaQanajamajaEaTaUaUaUaUaUaUaUaUaUaUaUaUaVaTaWaWaWaWaWaWaWaWaWaWaWaWaVaTaXaXaXaXaXaXaXaXaXaXaXaXaVaKajajaLaLaLajajaYCFbabbajbcbdbebfbgbhajaNbiamamajaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaskrasasasasbjbjbjanbkiranbjbjbjanajamajaEaKaUblbmbnbobpbqakakbtbuaUaEaKaWbvbwbwbwbxbwbwbwbwbyaWaEaKaXbzbAbBbCbDbBbAbEbFbAaXaEaKajajajbGajajajamamamamajbHamamamamamajbIbibJambKaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
