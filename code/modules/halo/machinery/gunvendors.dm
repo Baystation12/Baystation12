@@ -260,6 +260,7 @@
 					/obj/item/weapon/storage/belt/marine_ammo = 0,
 					/obj/item/weapon/storage/belt/marine_medic = 0,
 					/obj/item/clothing/accessory/storage/odst = 0,
+					/obj/item/clothing/accessory/storage/IFAK = 0,
 					/obj/item/clothing/accessory/storage/bandolier = 2,
 					/obj/item/weapon/storage/backpack/odst/regular = 3,
 					/obj/item/weapon/storage/backpack/odst/cqb = 3,
@@ -365,6 +366,7 @@
 					"Storage" = -1,
 					/obj/item/weapon/storage/belt/marine_ammo = 0,
 					/obj/item/weapon/storage/belt/marine_medic = 0,
+					/obj/item/clothing/accessory/storage/IFAK = 0,
 					"Explosives" = -1,
 					/obj/item/weapon/plastique = 0,
 					/obj/item/weapon/grenade/frag/m9_hedp = 0,
@@ -377,8 +379,6 @@
 					/obj/item/weapon/armor_patch = 0,
 					/obj/item/drop_pod_beacon = 0)
 	amounts = list(\
-		/obj/item/weapon/storage/belt/marine_ammo = 8,
-		/obj/item/weapon/storage/belt/marine_medic = 8,
 		/obj/item/weapon/plastique = 12,
 		/obj/item/weapon/grenade/frag/m9_hedp = 15,
 		/obj/item/weapon/grenade/smokebomb = 15,
@@ -426,6 +426,7 @@
 					/obj/item/weapon/storage/belt/marine_ammo = 0,
 					/obj/item/weapon/storage/belt/marine_medic = 0,
 					/obj/item/weapon/storage/belt/utility/full = 0,
+					/obj/item/clothing/accessory/storage/IFAK = 0,
 					/obj/item/clothing/accessory/storage/bandolier = 2,
 					/obj/item/weapon/storage/backpack/marine = 3,
 					/obj/item/weapon/storage/backpack/marine/brown = 3,
