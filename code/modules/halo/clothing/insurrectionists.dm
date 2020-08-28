@@ -352,7 +352,7 @@
 	item_state = "l_innie_chest_blue"
 	icon_state = "l_innie_chest_obj_blue"
 	blood_overlay_type = "l_innie_chest_blue"
-	armor = list(melee = 45, bullet = 40, laser = 35, energy = 40, bomb = 30, bio = 0, rad = 0)
+	armor = list(melee = 45, bullet = 50, laser = 35, energy = 40, bomb = 30, bio = 0, rad = 0)
 	slowdown_general = -0.1 //full light set = -0.3, between normal human and elite.
 
 /obj/item/clothing/suit/storage/innie/light/blue
@@ -391,7 +391,7 @@
 	item_state = "m_innie_chest_blue"
 	icon_state = "m_innie_chest_obj_blue"
 	blood_overlay_type = "m_innie_chest_blue"
-	armor = list(melee = 50, bullet = 45, laser = 40, energy = 45, bomb = 35, bio = 0, rad = 0)
+	armor = list(melee = 50, bullet = 55, laser = 40, energy = 45, bomb = 35, bio = 0, rad = 0)
 
 /obj/item/clothing/suit/storage/innie/medium/blue
 	name = "M22D Body Armor - Blue Camo"
@@ -430,7 +430,7 @@
 	item_state = "h_innie_chest_brown"
 	icon_state = "h_innie_chest_obj_brown"
 	blood_overlay_type = "h_innie_chest_brown"
-	armor = list(melee = 55, bullet = 50, laser = 45, energy = 50, bomb = 40, bio = 0, rad = 0)
+	armor = list(melee = 55, bullet = 60, laser = 45, energy = 50, bomb = 40, bio = 0, rad = 0)
 	slowdown_general = 0.2
 
 /obj/item/clothing/suit/storage/innie/heavy/blue

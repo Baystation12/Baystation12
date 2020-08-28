@@ -140,7 +140,7 @@ GLOBAL_LIST_INIT(mobs_to_reqdatum,list())
 
 /obj/machinery/pointbased_vending/proc/do_refund_checks(var/obj/item/weapon/gun/projectile/p,var/user)
 	if(istype(p))
-		if(!p.ammo_magazine)
+		if(p.load_method == 4 && !p.ammo_magazine)
 			to_chat(user,"<span class = 'notice'>[p] needs a magazine loaded before it can be refunded.</span>")
 			return 0
 	return 1

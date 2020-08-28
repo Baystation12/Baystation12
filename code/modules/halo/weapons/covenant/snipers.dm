@@ -76,9 +76,10 @@
 	irradiate_non_cov = 17
 	wielded_item_state = "beamrifle-wielded"
 	fire_delay = 10
-	accuracy = -10
-	dispersion = list(0.1)
+	accuracy = -12 //Honestly stop hipfiring snipers damn it
+	dispersion = list(0.26)
 	scope_zoom_amount = 8
+	min_zoom_amount = 3
 	is_scope_variable = 1
 	scoped_accuracy = 7
 	advanced_covenant = 1
@@ -106,7 +107,7 @@
 	set name = "Use Scope"
 	set popup_menu = 1
 
-	toggle_scope(usr, 1.75)
+	toggle_scope(usr, scope_zoom_amount)
 
 /obj/item/weapon/gun/energy/beam_rifle/proc/cov_plasma_recharge_tick()
 	if(max_shots > 0)

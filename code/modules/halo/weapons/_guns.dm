@@ -1,7 +1,9 @@
+#define BASE_MIN_MAGNIF 1.1
 
 /obj/item/weapon/gun
 	var/scope_zoom_amount = 0
 	var/max_zoom_amount = 0
+	var/min_zoom_amount = BASE_MIN_MAGNIF
 	var/is_scope_variable = 0 //If this is set to 1, the set_scope_zoom verb will be added to the list of usable verbs.
 
 /obj/item/weapon/gun/New()
@@ -17,12 +19,12 @@
 	set popup_menu = 1
 
 	if(istype(usr,/mob/living))
-		var/setzoom = input(usr,"Set Scope Zoom?","Max Zoom: [max_zoom_amount]x") as num
+		var/setzoom = input(usr,"Set Scope Zoom?","Max Zoom: [max_zoom_amount]x, Min Zoom: [min_zoom_amount]x") as num
 		set_scope_zoom(setzoom,usr)
 
 /obj/item/weapon/gun/proc/set_scope_zoom(var/setzoom,var/mob/user) //The set zoom amount on the weapon is
-	if(setzoom < 1)
-		to_chat(user,"<span class = 'notice'>Zoom must be greater than or equal to 1.</span>")
+	if(setzoom < min_zoom_amount)
+		to_chat(user,"<span class = 'notice'>Zoom must be greater than or equal to [min_zoom_amount].</span>")
 		scope_zoom_amount = 1
 	else if(setzoom > max_zoom_amount)
 		to_chat(user,"<span class = 'notice'>Zoom must be less than or equal to [max_zoom_amount]</span>")

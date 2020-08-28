@@ -21,4 +21,4 @@
 	. = ..()
 
 /obj/item/clothing/glasses/hud/tactical/covenant
-	support_pad_type = /obj/item/support_pad
+	support_pad_type = /obj/item/support_pad/covenant

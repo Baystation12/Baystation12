@@ -265,6 +265,7 @@
 	tracer_delay_time = 2 SECONDS
 	shield_damage = 210
 	kill_count = 125
+	step_delay = 0
 
 /obj/item/projectile/bullet/a145_ap/tracerless //Modified slightly to provide a downside for using the innie-heavy-sniper-rounds over normal rounds.
 	damage = 55
@@ -362,6 +363,7 @@
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "SPNKr"
 	mag_type = MAGAZINE
+	slot_flags = SLOT_BELT | SLOT_MASK //Shhh it's a joke
 	ammo_type = /obj/item/ammo_casing/spnkr
 	caliber = "spnkr"
 	max_ammo = 2

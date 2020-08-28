@@ -4,6 +4,9 @@
 	desc = "An ammunition box used for quick loading."
 	icon = 'icons/obj/ammo.dmi'
 	icon_state = "666"
+	w_class = ITEM_SIZE_NORMAL
+	slot_flags = SLOT_POCKET | SLOT_BELT
+	var/loading = 0
 	var/capacity = 1
 	var/desc_ammo_name = "rounds"
 	var/list/ammo_spawnwith = list()

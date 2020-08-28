@@ -18,12 +18,12 @@
 	req_access = list(access_unsc_armoury)
 	products = list(
 					"Melee" = -1,
-					/obj/item/weapon/material/knife/combat_knife = 1,
+					/obj/item/weapon/material/knife/combat_knife = 0,
 					/obj/item/weapon/material/machete = 2,
 					"Guns" = -1,
 					/obj/item/weapon/gun/projectile/m6d_magnum = 3,
 					/obj/item/weapon/gun/projectile/m7_smg = 4,
-					/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts = 5,
+					/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts = 4,
 					/obj/item/weapon/gun/projectile/m392_dmr = 5,
 					/obj/item/weapon/gun/projectile/ma5b_ar = 6,
 					/obj/item/weapon/gun/projectile/br55 = 6,
@@ -51,6 +51,11 @@
 		/obj/item/weapon/grenade/frag/m9_hedp = 15,
 		/obj/item/weapon/grenade/smokebomb = 15
 	)
+
+/obj/machinery/pointbased_vending/armory/hybrid/innie
+	name = "Insurrectionist Equipment Rack"
+	desc = "An equipment rack, obviously stolen from the UNSC or their suppliers."
+	req_access = list(access_innie)
 
 /obj/machinery/pointbased_vending/armory/heavy // HEAVY WEAPONS
 	name = "UNSC Heavy Weapons Rack"
@@ -110,9 +115,15 @@
 					/obj/item/weapon/storage/belt/marine_ammo = 0,
 					/obj/item/weapon/storage/belt/marine_medic = 0,
 					/obj/item/weapon/storage/belt/utility/full = 0,
+					/obj/item/clothing/accessory/storage/IFAK = 0,
 					/obj/item/clothing/accessory/storage/bandolier = 2,
 					/obj/item/weapon/storage/backpack/marine = 3,
 					/obj/item/weapon/storage/backpack/marine/brown = 3,
+					/obj/item/clothing/accessory/holster = 1,
+					/obj/item/clothing/accessory/holster/armpit = 1,
+					/obj/item/clothing/accessory/holster/waist = 1,
+					/obj/item/clothing/accessory/holster/hip = 1,
+					/obj/item/clothing/accessory/holster/thigh = 1,
 					"Miscellaneous" = -1,
 					/obj/item/flight_item/bullfrog_pack = 0,
 					/obj/item/weapon/armor_patch = 0
@@ -167,6 +178,18 @@
 					/obj/item/ammo_casing/g40mm/illumination = 4)
 	//products = list(/obj/item/weapon_attachment/sight/acog = 2, /obj/item/weapon_attachment/sight/rds = 6)
 
+/obj/machinery/vending/armory/attachment/innie
+	name = "Insurrectionist Attachment Vendor"
+	req_access = list(access_innie)
+	products = list(/obj/item/weapon_attachment/ma5_stock_butt/extended = 2,
+					/obj/item/weapon_attachment/ma5_upper_railed =2,
+					/obj/item/weapon_attachment/barrel/suppressor = 2,
+					/obj/item/weapon_attachment/sight/acog = 2,
+					/obj/item/weapon_attachment/light/flashlight = 2,
+					/obj/item/weapon_attachment/barrel/suppressor = 1,
+					/obj/item/weapon_attachment/vertical_grip = 2,
+					)
+
 /obj/machinery/vending/armory/attachment/soe
 	name = "SOE Attachments Vendor"
 	desc = "A vendor full? of attachments *the rest is scratched off*."
@@ -191,12 +214,12 @@
 	req_access = list(access_unsc_odst)
 	products = list(
 					"Melee" = -1,
-					/obj/item/weapon/material/knife/combat_knife = 1,
+					/obj/item/weapon/material/knife/combat_knife = 0,
 					/obj/item/weapon/material/machete = 2,
 					"Guns" = -1,
 					/obj/item/weapon/gun/projectile/m6c_magnum_s = 3,
 					/obj/item/weapon/gun/projectile/m7_smg/silenced = 4,
-					/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts = 5,
+					/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts = 4,
 					/obj/item/weapon/gun/projectile/m392_dmr = 5,
 					/obj/item/weapon/gun/projectile/ma5b_ar = 6,
 					/obj/item/weapon/gun/projectile/br55 = 6,
@@ -237,6 +260,7 @@
 					/obj/item/weapon/storage/belt/marine_ammo = 0,
 					/obj/item/weapon/storage/belt/marine_medic = 0,
 					/obj/item/clothing/accessory/storage/odst = 0,
+					/obj/item/clothing/accessory/storage/IFAK = 0,
 					/obj/item/clothing/accessory/storage/bandolier = 2,
 					/obj/item/weapon/storage/backpack/odst/regular = 3,
 					/obj/item/weapon/storage/backpack/odst/cqb = 3,
@@ -342,6 +366,7 @@
 					"Storage" = -1,
 					/obj/item/weapon/storage/belt/marine_ammo = 0,
 					/obj/item/weapon/storage/belt/marine_medic = 0,
+					/obj/item/clothing/accessory/storage/IFAK = 0,
 					"Explosives" = -1,
 					/obj/item/weapon/plastique = 0,
 					/obj/item/weapon/grenade/frag/m9_hedp = 0,
@@ -354,8 +379,6 @@
 					/obj/item/weapon/armor_patch = 0,
 					/obj/item/drop_pod_beacon = 0)
 	amounts = list(\
-		/obj/item/weapon/storage/belt/marine_ammo = 8,
-		/obj/item/weapon/storage/belt/marine_medic = 8,
 		/obj/item/weapon/plastique = 12,
 		/obj/item/weapon/grenade/frag/m9_hedp = 15,
 		/obj/item/weapon/grenade/smokebomb = 15,
@@ -364,30 +387,64 @@
 		)
 
 /obj/machinery/vending/armory/commandovend/armour
-	products = list(/obj/item/clothing/head/helmet/urfc/engineer = 2,
+	products = list(
+					"Armor" = -1,
+					/obj/item/weapon/storage/box/large/armorset/soe = 4,
+					/obj/item/weapon/storage/box/large/armorset/soe/cqb = 2,
+					/obj/item/weapon/storage/box/large/armorset/soe/sniper = 2,
+					/obj/item/weapon/storage/box/large/armorset/soe/medic = 2,
+					/obj/item/weapon/storage/box/large/armorset/soe/engineer = 2,
+					/obj/item/weapon/storage/box/large/armorset/soe/squadleader = 1,
+					/obj/item/weapon/storage/box/large/armorset/soe/eva = 10,
 					/obj/item/weapon/storage/backpack/cmdo/eng = 2,
-					/obj/item/clothing/head/helmet/urfc/medic = 2,
 					/obj/item/weapon/storage/backpack/cmdo/med = 2,
-					/obj/item/clothing/head/helmet/urfc/sniper = 2,
-					/obj/item/weapon/storage/backpack/cmdo = 2,
-					/obj/item/clothing/head/helmet/urfc/cqb = 2,
+					/obj/item/weapon/storage/backpack/cmdo = 5,
 					/obj/item/weapon/storage/backpack/cmdo/cqc = 2,
-					/obj/item/clothing/head/helmet/urfc/squadleader = 1,
-					/obj/item/clothing/suit/armor/special/urfc/squadleader = 1,
-					/obj/item/clothing/suit/armor/special/urfc = 8,
+					"Jumpsuits" = -1,
 					/obj/item/clothing/under/urfc_jumpsuit = 8,
 					/obj/item/clothing/under/urfc_jumpsuit/tanktop = 8,
 					/obj/item/clothing/under/urfc_jumpsuit/jumpsuit = 8,
+					"Accessories" = -1,
 					/obj/item/clothing/head/helmet/urfccommander/beretmerc = 7,
 					/obj/item/clothing/head/helmet/urfccommander/beretofficer = 7,
 					/obj/item/clothing/mask/gas/soebalaclava = 7,
 					/obj/item/clothing/mask/gas/soebalaclava/open = 7,
-					/obj/item/clothing/gloves/soegloves/urfc = 8,
-					/obj/item/clothing/shoes/magboots/urfc = 8,
+					"Miscellaneous" = -1,
 					/obj/item/weapon/armor_patch = 4,
-					/obj/item/clothing/head/helmet/soe = 6,
-					/obj/item/clothing/suit/armor/special/soe = 6,
-					/obj/item/weapon/tank/jetpack/void/urfc = 6 )
+					 )
+
+/obj/machinery/pointbased_vending/armory/innie_armor
+	name = "Insurrectionist Misc Equipment Vendor"
+	desc = "A machine full of spare stolen and cobbled together innie armor and equipment"
+	req_access = list(access_unsc_marine)
+	products = list(
+					"Armor" = -1,
+					/obj/item/weapon/storage/box/large/armorset/inniearmor = 0,
+					/obj/item/weapon/storage/box/large/armorset/inniearmor/black = 0,
+					/obj/item/weapon/storage/box/large/armorset/inniearmor/blue = 0,
+					/obj/item/weapon/storage/box/large/armorset/inniearmor/white = 0,
+					/obj/item/weapon/storage/box/large/armorset/inniearmor/green = 0,
+					"Storage" = -1,
+					/obj/item/weapon/storage/belt/marine_ammo = 0,
+					/obj/item/weapon/storage/belt/marine_medic = 0,
+					/obj/item/weapon/storage/belt/utility/full = 0,
+					/obj/item/clothing/accessory/storage/IFAK = 0,
+					/obj/item/clothing/accessory/storage/bandolier = 2,
+					/obj/item/weapon/storage/backpack/marine = 3,
+					/obj/item/weapon/storage/backpack/marine/brown = 3,
+					/obj/item/clothing/accessory/holster = 1,
+					/obj/item/clothing/accessory/holster/armpit = 1,
+					/obj/item/clothing/accessory/holster/waist = 1,
+					/obj/item/clothing/accessory/holster/hip = 1,
+					/obj/item/clothing/accessory/holster/thigh = 1,
+					"Miscellaneous" = -1,
+					/obj/item/flight_item/bullfrog_pack = 0,
+					/obj/item/weapon/armor_patch = 0,
+					/obj/item/weapon/armor_patch/mini = 0
+					)
+	amounts = list(\
+		/obj/item/flight_item/bullfrog_pack = 1,
+		)
 
 /obj/machinery/vending/armory/medical
 	name = "UNSC Medical Vendor"
@@ -416,3 +473,7 @@
 					/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline = 10,
 					/obj/item/weapon/storage/box/syringes = 2,
 					)
+
+/obj/machinery/vending/armory/medical/innie
+	name = "Insurrectionist Medical Vendor"
+	req_access = list(access_innie)

@@ -57,7 +57,10 @@
 		if(world.time < projectiles_nextfire_at[proj_type])
 			continue
 		var/fire_delay = projectiles_to_fire[proj_type]
-		var/obj/item/projectile/proj_fired = new proj_type(loc)
+		var/obj/item/projectile/overmap/proj_fired = new proj_type(loc)
+		proj_fired.permutated += src //Ensuring we don't hit ourselves somehow
+		proj_fired.firer = src
+		proj_fired.overmap_fired_by = src
 		proj_fired.launch(target)
 		if(fire_delay < lowest_delay)
 			lowest_delay = fire_delay
@@ -122,17 +125,13 @@
 /obj/effect/overmap/ship/npc_ship/combat/take_projectiles(var/obj/item/projectile/overmap/proj)
 	target = proj.overmap_fired_by
 	target_disengage_at = world.time + TARGET_LOSE_INTEREST_DELAY
-	for(var/obj/effect/overmap/ship/npc_ship/combat/ship in range(7,src))
-		if(ship.get_faction() == get_faction() && !(ship.target))
-			ship.target = target
-			ship.target_disengage_at = target_disengage_at
 	. = ..()
 
 /obj/item/projectile/overmap/mac/npc
-	damage = 1000
+	damage = 2500
 
 /obj/item/projectile/overmap/beam/npc
-	damage = 1000
+	damage = 2500
 
 //UNSC//
 /obj/effect/overmap/ship/npc_ship/combat/unsc
@@ -147,12 +146,12 @@
 	name = "UNSC [name]"
 
 /obj/effect/overmap/ship/npc_ship/combat/unsc/medium_armed
-	hull = 2000
+	hull = 3000
 	icons_pickfrom_list = list('code/modules/halo/icons/overmap/corvette.dmi')
 	projectiles_to_fire = list(/obj/item/projectile/overmap/deck_gun_proj = 0.1 SECONDS,/obj/item/projectile/overmap/missile = 2.5 SECONDS)
 
 /obj/effect/overmap/ship/npc_ship/combat/unsc/heavily_armed
-	hull = 2500
+	hull = 3500
 	icons_pickfrom_list = list('code/modules/halo/icons/overmap/Cruiser.dmi')
 	projectiles_to_fire = list(/obj/item/projectile/overmap/deck_gun_proj = 0.1 SECONDS,/obj/item/projectile/overmap/missile = 2 SECONDS, /obj/item/projectile/overmap/mac/npc = 15 SECONDS)
 
@@ -174,11 +173,11 @@
 		. = ..()
 
 /obj/effect/overmap/ship/npc_ship/combat/innie/medium_armed
-	hull = 2000
+	hull = 3000
 	projectiles_to_fire = list(/obj/item/projectile/overmap/deck_gun_proj = 0.1 SECONDS,/obj/item/projectile/overmap/missile = 1 SECONDS)
 
 /obj/effect/overmap/ship/npc_ship/combat/innie/heavily_armed
-	hull = 2500
+	hull = 3500
 	projectiles_to_fire = list(/obj/item/projectile/overmap/deck_gun_proj = 0.2 SECONDS,/obj/item/projectile/overmap/missile = 0.5 SECONDS, /obj/item/projectile/overmap/mac/npc = 20 SECONDS)
 
 //COVENANT//
@@ -220,12 +219,12 @@
 	available_ship_requests = newlist(/datum/npc_ship_request/halt/cov,/datum/npc_ship_request/fire_on_target/cov,/datum/npc_ship_request/control_fleet/cov,/datum/npc_ship_request/add_to_fleet/cov,/datum/npc_ship_request/give_control/cov)
 
 /obj/effect/overmap/ship/npc_ship/combat/covenant/medium_armed
-	hull = 2000
+	hull = 3000
 	icons_pickfrom_list = list('code/modules/halo/icons/overmap/kig_missionary.dmi')
 	projectiles_to_fire = list(/obj/item/projectile/overmap/pulse_laser = 0.2 SECONDS,/obj/item/projectile/overmap/missile/plas_torp = 0.5 SECONDS)
 
 /obj/effect/overmap/ship/npc_ship/combat/covenant/heavily_armed
-	hull = 2500
+	hull = 3500
 	icons_pickfrom_list = list('code/modules/halo/icons/overmap/SDV.dmi')
 	projectiles_to_fire = list(/obj/item/projectile/overmap/pulse_laser = 0.1 SECONDS,/obj/item/projectile/overmap/missile/plas_torp = 1 SECONDS, /obj/item/projectile/overmap/beam/npc = 20 SECONDS)
 

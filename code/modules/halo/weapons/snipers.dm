@@ -17,12 +17,12 @@
 	reload_sound = 'code/modules/halo/sounds/Sniper_Reload_New.wav'
 	one_hand_penalty = -1
 	scoped_accuracy = 7
-	accuracy = -10
 	screen_shake = 0
-	dispersion = list(0.1)
 	fire_delay = 12
-	burst = 1
+	accuracy = -12 //Honestly stop hipfiring snipers damn it
+	dispersion = list(0.26)
 	scope_zoom_amount = 8
+	min_zoom_amount = 3
 	is_scope_variable = 1
 	wielded_item_state = "SRS99-wielded"
 	hud_bullet_row_num = 2

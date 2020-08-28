@@ -88,13 +88,13 @@
 //todo: let it choose any account
 /datum/shuttle/autodock/ferry/trade/innie/New()
 	. = ..()
-	money_account = GLOB.INNIE.money_account
+	money_account = GLOB.INSURRECTION.money_account
 
 
 
 /* SUPPLY ORDER */
 
 /datum/nano_module/program/faction_supply/innie/supply_order_flavour(var/datum/supply_order/O)
-	O.destination = GLOB.INNIE.get_hq_name()
+	O.destination = GLOB.INSURRECTION.get_hq_name()
 	O.stamp_id = "paper_stamp-cent"
 	O.order_title = "Insurrection Grey Market Shipment"
