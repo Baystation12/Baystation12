@@ -26,8 +26,6 @@
 	var/picture_state = "greenalert" // icon_state of alert picture
 	var/message1 = ""                // message line 1
 	var/message2 = ""                // message line 2
-	var/index1                       // display index for scrolling messages or 0 if non-scrolling
-	var/index2
 	var/picture = null
 
 	var/frequency = 1435		// radio frequency
@@ -100,27 +98,7 @@
 				update_display(message1, message2)
 			return 1
 		if(STATUS_DISPLAY_MESSAGE)	//custom messages
-			var/line1
-			var/line2
-
-			if(!index1)
-				line1 = message1
-			else
-				line1 = copytext(message1+"|"+message1, index1, index1+CHARS_PER_LINE)
-				var/message1_len = length(message1)
-				index1 += SCROLL_SPEED
-				if(index1 > message1_len)
-					index1 -= message1_len
-
-			if(!index2)
-				line2 = message2
-			else
-				line2 = copytext(message2+"|"+message2, index2, index2+CHARS_PER_LINE)
-				var/message2_len = length(message2)
-				index2 += SCROLL_SPEED
-				if(index2 > message2_len)
-					index2 -= message2_len
-			update_display(line1, line2)
+			update_display(message1, message2)
 			return 1
 		if(STATUS_DISPLAY_ALERT)
 			display_alert()
@@ -144,19 +122,18 @@
 		to_chat(user, "The current alert level is [security_state.current_security_level.name].")
 
 /obj/machinery/status_display/proc/set_message(m1, m2)
+	if (length(m1) > CHARS_PER_LINE || length(m2) > CHARS_PER_LINE)
+		return
+
 	if(m1)
-		index1 = (length(m1) > CHARS_PER_LINE)
 		message1 = m1
 	else
 		message1 = ""
-		index1 = 0
 
 	if(m2)
-		index2 = (length(m2) > CHARS_PER_LINE)
 		message2 = m2
 	else
 		message2 = ""
-		index2 = 0
 
 /obj/machinery/status_display/proc/display_alert()
 	remove_display()

@@ -202,11 +202,11 @@
 			if(is_autenthicated(user) && ntn_cont)
 				switch(href_list["target"])
 					if("line1")
-						var/linput = reject_bad_text(sanitize(input("Line 1", "Enter Message Text", msg_line1) as text|null, 40), 40)
+						var/linput = reject_bad_text(sanitize(input("Line 1", "Enter Message Text", msg_line1) as text|null, 5), 5)
 						if(can_still_topic())
 							msg_line1 = linput
 					if("line2")
-						var/linput = reject_bad_text(sanitize(input("Line 2", "Enter Message Text", msg_line2) as text|null, 40), 40)
+						var/linput = reject_bad_text(sanitize(input("Line 2", "Enter Message Text", msg_line2) as text|null, 5), 5)
 						if(can_still_topic())
 							msg_line2 = linput
 					if("message")
