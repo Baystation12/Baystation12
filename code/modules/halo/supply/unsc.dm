@@ -88,3 +88,12 @@
 /datum/shuttle/autodock/ferry/trade/unsc/New()
 	. = ..()
 	money_account = GLOB.UNSC.money_account
+
+
+
+/* SUPPLY ORDER */
+
+/datum/nano_module/program/faction_supply/unsc/supply_order_flavour(var/datum/supply_order/O)
+	O.destination = GLOB.UNSC.get_hq_name()
+	O.stamp_id = "paper_stamp-cent"
+	O.order_title = "UNSC Resupply Shipment"

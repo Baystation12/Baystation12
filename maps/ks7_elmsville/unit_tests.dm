@@ -6,6 +6,8 @@
 		/area/shuttle/unsc_onsite_supply,
 		/area/shuttle/oni_offsite_supply,
 		/area/shuttle/oni_onsite_supply,
+		/area/shuttle/covenant_offsite_supply,
+		/area/shuttle/covenant_onsite_supply,
 		/area/beach,
 		/area/centcom,
 		/area/centcom/holding,

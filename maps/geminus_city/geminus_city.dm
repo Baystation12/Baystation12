@@ -25,6 +25,7 @@
 
 	#include "../../code/modules/halo/supply/unsc.dm"
 	#include "../../code/modules/halo/supply/oni.dm"
+	#include "../../code/modules/halo/supply/covenant.dm"
 
 	//#include "geminus_city_jobdefs.dm"
 	#include "ai_items.dm"

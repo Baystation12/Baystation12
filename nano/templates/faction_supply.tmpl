@@ -13,8 +13,8 @@
 	</div>
 	<hr>
 	<span>
-		Account number: #{{:data.account_num}} | Account name: {{:data.account_owner}} | Account balance: {{:data.account_credits}} Credits |
-		 Income: {{:data.income}} Credits | Next payment: {{:data.payment_time}}
+		Account number: #{{:data.account_num}} | Account name: {{:data.account_owner}} | Account balance: {{:data.account_credits}} {{:data.currency}} |
+		 Income: {{:data.income}} {{:data.currency}} | Next payment: {{:data.payment_time}}
 	</span>
 	<hr>
 	{{if data.screen == 1}}
@@ -27,7 +27,7 @@
 				{{for data.possible_purchases}}
 					<tr>
 					<td>{{:value.name}}
-					<td>{{:value.cost}} Credits
+					<td>{{:value.cost}} {{:data.currency}}
 					<td>{{:helper.link('Order', null, {'order' : value.ref})}}
 				{{/for}}
 			</table>
@@ -35,15 +35,15 @@
 	{{else data.screen == 2}}
 		<div class="item">
 			<div class="itemLabel">
-				Total credits generated today:
+				Total export income today:
 			</div>
 			<div class="itemContent">
-				{{:data.total_credits}} Cr.
+				{{:data.total_credits}} {{:data.currency}}
 			</div>
 		</div>
 		<div class="item">
 			<div class="itemLabel">
-				Withdraw credits from account:
+				Withdraw {{:data.currency}} from account:
 			</div>
 				<div class="itemContent">
 					{{:helper.link('Make withdrawal', 'mail-open', {'withdraw_credits' : 1}, null)}}
@@ -51,7 +51,7 @@
 		</div>
 		<div class="item">
 			<div class="itemLabel">
-				Deposit credits into account:
+				Deposit {{:data.currency}} into account:
 			</div>
 			<div class="itemContent">
 				{{:helper.link('Make deposit', 'mail-closed', {'deposit_credits' : 1}, null)}}
@@ -63,7 +63,7 @@
 				<tr>
 				<td>{{:value.time}}
 				<td>{{:value.name}}
-				<td>{{:value.unit_price}} Credits
+				<td>{{:value.unit_price}} {{:data.currency}}
 				<td>{{:value.quantity}}
 				<td>{{:value.authorised}}
 			{{/for}}
@@ -112,7 +112,7 @@
 					<td>{{:value.object}}
 					<td>{{:value.orderer}}
 					<td>{{:value.reason}}
-					<td>{{:value.cost}} Cr.
+					<td>{{:value.cost}} {{:data.currency}}
 					<td>{{:helper.link('Approve', 'check', {'approve_order' : value.id}, value.cost > data.account_credits ? 'disabled' : null )}}{{:helper.link('Deny', 'cancel', {'deny_order' : value.id})}}
 				{{/for}}
 			</table>
@@ -128,7 +128,7 @@
 					<td>{{:value.object}}
 					<td>{{:value.orderer}}
 					<td>{{:value.reason}}
-					<td>{{:value.cost}} Cr.
+					<td>{{:value.cost}} {{:data.currency}}
 					<td>{{:helper.link('Cancel', 'cancel', {'cancel_order' : value.id})}}
 				{{/for}}
 			</table>

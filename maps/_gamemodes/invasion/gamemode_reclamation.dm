@@ -65,3 +65,5 @@
 		/datum/objective/protect_colony)
 	GLOB.UNSC.setup_faction_objectives(objective_types)
 	GLOB.UNSC.has_base = TRUE
+
+	GLOB.ONI.has_base = TRUE

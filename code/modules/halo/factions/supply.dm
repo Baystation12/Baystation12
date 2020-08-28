@@ -3,12 +3,24 @@
 	var/contraband_gear			//this is gear restricted to this faction
 	var/list/supply_category_names = list()
 	var/list/supply_category_contents = list()
+	var/faction_only = 1
 
 /datum/faction/proc/generate_supply_categories()
 	supply_category_names = list()
 	supply_category_contents = list()
 	for(var/decl/hierarchy/supply_pack/sp in cargo_supply_pack_root.children)
 		if(sp.contraband && sp.contraband != contraband_gear)
+			continue
+		if(sp.is_category() && !sp.is_hidden_category())
+			generate_supply_category_contents(sp)
+
+/datum/faction/covenant/generate_supply_categories()
+	supply_category_names = list()
+	supply_category_contents = list()
+	for(var/decl/hierarchy/supply_pack/sp in cargo_supply_pack_root.children)
+		//covenant only get access to their own "contraband" supply packs
+		//this is an easy way to get a unique supply list for them
+		if(sp.contraband != "Covenant")
 			continue
 		if(sp.is_category() && !sp.is_hidden_category())
 			generate_supply_category_contents(sp)

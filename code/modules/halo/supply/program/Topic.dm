@@ -35,8 +35,9 @@
 		var/idname = "*None Provided*"
 		var/idrank = "*None Provided*"
 		var/mob/living/carbon/human/H = user
-		idname = H.get_authentification_name()
-		idrank = H.get_assignment()
+		if(istype(H))
+			idname = H.get_authentification_name()
+			idrank = H.get_assignment()
 
 		supply_controller.ordernum++
 
@@ -47,6 +48,7 @@
 		O.reason = reason
 		O.orderedrank = idrank
 		O.comment = "#[O.ordernum]"
+		supply_order_flavour(O)
 		my_shuttle.requestlist += O
 
 		if(can_print() && alert(user, "Would you like to print a confirmation receipt?", "Print receipt?", "Yes", "No") == "Yes")
