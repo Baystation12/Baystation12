@@ -24,6 +24,7 @@
 	force_divisor = 0.2
 	thrown_force_divisor = 0.2
 	worth_multiplier = 15
+	base_parry_chance = 0
 
 /obj/item/weapon/material/sword/katana
 	name = "katana"
