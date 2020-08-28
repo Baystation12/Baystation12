@@ -206,12 +206,14 @@ var/list/tape_roll_applications = list()
 				for(var/dir in list(NORTH, SOUTH))
 					if (possible_dirs & dir)
 						TP.tape_dir += dir
+				TP.add_fingerprint(user)
 				TP.update_icon()
 			if(possible_dirs & (EAST|WEST))
 				var/obj/item/tape/TP = new tape_type(start)
 				for(var/dir in list(EAST, WEST))
 					if (possible_dirs & dir)
 						TP.tape_dir += dir
+				TP.add_fingerprint(user)
 				TP.update_icon()
 			start = null
 			update_icon()
@@ -271,6 +273,7 @@ var/list/tape_roll_applications = list()
 					break
 			if(!tapetest)
 				var/obj/item/tape/T = new tape_type(cur)
+				T.add_fingerprint(user)
 				T.tape_dir = tape_dir
 				T.update_icon()
 				if(tape_dir & SOUTH)
