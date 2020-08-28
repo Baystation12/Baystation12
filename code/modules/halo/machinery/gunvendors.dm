@@ -387,30 +387,31 @@
 		)
 
 /obj/machinery/vending/armory/commandovend/armour
-	products = list(/obj/item/clothing/head/helmet/urfc/engineer = 2,
+	products = list(
+					"Armor" = -1,
+					/obj/item/weapon/storage/box/large/armorset/soe = 4,
+					/obj/item/weapon/storage/box/large/armorset/soe/cqb = 2,
+					/obj/item/weapon/storage/box/large/armorset/soe/sniper = 2,
+					/obj/item/weapon/storage/box/large/armorset/soe/medic = 2,
+					/obj/item/weapon/storage/box/large/armorset/soe/engineer = 2,
+					/obj/item/weapon/storage/box/large/armorset/soe/squadleader = 1,
+					/obj/item/weapon/storage/box/large/armorset/soe/eva = 10,
 					/obj/item/weapon/storage/backpack/cmdo/eng = 2,
-					/obj/item/clothing/head/helmet/urfc/medic = 2,
 					/obj/item/weapon/storage/backpack/cmdo/med = 2,
-					/obj/item/clothing/head/helmet/urfc/sniper = 2,
-					/obj/item/weapon/storage/backpack/cmdo = 2,
-					/obj/item/clothing/head/helmet/urfc/cqb = 2,
+					/obj/item/weapon/storage/backpack/cmdo = 5,
 					/obj/item/weapon/storage/backpack/cmdo/cqc = 2,
-					/obj/item/clothing/head/helmet/urfc/squadleader = 1,
-					/obj/item/clothing/suit/armor/special/urfc/squadleader = 1,
-					/obj/item/clothing/suit/armor/special/urfc = 8,
+					"Jumpsuits" = -1,
 					/obj/item/clothing/under/urfc_jumpsuit = 8,
 					/obj/item/clothing/under/urfc_jumpsuit/tanktop = 8,
 					/obj/item/clothing/under/urfc_jumpsuit/jumpsuit = 8,
+					"Accessories" = -1,
 					/obj/item/clothing/head/helmet/urfccommander/beretmerc = 7,
 					/obj/item/clothing/head/helmet/urfccommander/beretofficer = 7,
 					/obj/item/clothing/mask/gas/soebalaclava = 7,
 					/obj/item/clothing/mask/gas/soebalaclava/open = 7,
-					/obj/item/clothing/gloves/soegloves/urfc = 8,
-					/obj/item/clothing/shoes/magboots/urfc = 8,
+					"Miscellaneous" = -1,
 					/obj/item/weapon/armor_patch = 4,
-					/obj/item/clothing/head/helmet/soe = 6,
-					/obj/item/clothing/suit/armor/special/soe = 6,
-					/obj/item/weapon/tank/jetpack/void/urfc = 6 )
+					 )
 
 /obj/machinery/pointbased_vending/armory/innie_armor
 	name = "Insurrectionist Misc Equipment Vendor"
@@ -418,10 +419,11 @@
 	req_access = list(access_unsc_marine)
 	products = list(
 					"Armor" = -1,
-					/obj/item/clothing/mask/innie/shemagh = 0,
-					/obj/item/clothing/head/helmet/innie/medium = 0,
-					/obj/item/clothing/suit/storage/innie/medium = 0,
-					/obj/item/clothing/shoes/innie_boots/medium = 0,
+					/obj/item/weapon/storage/box/large/armorset/inniearmor = 0,
+					/obj/item/weapon/storage/box/large/armorset/inniearmor/black = 0,
+					/obj/item/weapon/storage/box/large/armorset/inniearmor/blue = 0,
+					/obj/item/weapon/storage/box/large/armorset/inniearmor/white = 0,
+					/obj/item/weapon/storage/box/large/armorset/inniearmor/green = 0,
 					"Storage" = -1,
 					/obj/item/weapon/storage/belt/marine_ammo = 0,
 					/obj/item/weapon/storage/belt/marine_medic = 0,
