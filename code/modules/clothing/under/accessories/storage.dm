@@ -6,6 +6,7 @@
 	var/slots = 3
 	var/max_w_class = ITEM_SIZE_SMALL //pocket sized
 	var/obj/item/weapon/storage/internal/pockets/hold
+	var/list/startingitems
 	w_class = ITEM_SIZE_NORMAL
 
 /obj/item/clothing/accessory/storage/New()
@@ -13,7 +14,7 @@
 	create_storage()
 
 /obj/item/clothing/accessory/storage/proc/create_storage()
-	hold = new/obj/item/weapon/storage/internal/pockets(src, slots, max_w_class)
+	hold = new/obj/item/weapon/storage/internal/pockets(src, slots, max_w_class, startingitems)
 
 /obj/item/clothing/accessory/storage/attack_hand(mob/user as mob)
 	if (has_suit)	//if we are part of a suit

@@ -115,6 +115,7 @@
 					/obj/item/weapon/storage/belt/marine_ammo = 0,
 					/obj/item/weapon/storage/belt/marine_medic = 0,
 					/obj/item/weapon/storage/belt/utility/full = 0,
+					/obj/item/clothing/accessory/storage/IFAK = 0,
 					/obj/item/clothing/accessory/storage/bandolier = 2,
 					/obj/item/weapon/storage/backpack/marine = 3,
 					/obj/item/weapon/storage/backpack/marine/brown = 3,
