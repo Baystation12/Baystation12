@@ -112,9 +112,6 @@
 			to_chat(user, "You send an activation signal to \the [src] but it does not respond")
 		else
 			to_chat(user, "You press the power button but \the [src] does not respond")
-	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
-	if(os)
-		os.system_boot()
 
 /obj/item/modular_computer/proc/shutdown_computer(var/loud = 1)
 	QDEL_NULL_LIST(terminals)
