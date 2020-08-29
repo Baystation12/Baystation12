@@ -135,6 +135,7 @@
 		/obj/item/weapon/storage/box/large/armorset/medic/brown/visor = 3,
 		/obj/item/weapon/storage/box/large/armorset/medic/white = 3,
 		/obj/item/weapon/storage/box/large/armorset/eva = 3,
+		/obj/item/clothing/accessory/storage/IFAK = 20,
 		/obj/item/flight_item/bullfrog_pack = 1
 		)
 
@@ -276,6 +277,7 @@
 					/obj/item/weapon/storage/box/large/armorset/odst/medic = 2,
 					/obj/item/weapon/storage/box/large/armorset/odst/engineer = 2,
 					/obj/item/weapon/storage/box/large/armorset/odst/squadleader = 2,
+					/obj/item/clothing/accessory/storage/IFAK = 20,
 					/obj/item/weapon/storage/firstaid/unsc = 6,
 					)
 
@@ -437,6 +439,7 @@
 					/obj/item/weapon/armor_patch/mini = 0
 					)
 	amounts = list(\
+		/obj/item/clothing/accessory/storage/IFAK = 20,
 		/obj/item/flight_item/bullfrog_pack = 1,
 		)
 

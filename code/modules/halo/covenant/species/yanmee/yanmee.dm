@@ -29,7 +29,7 @@ Huragok Engineers. Their flight makes them hard to hit during combat and their n
 	darksight = 4
 	brute_mod = 1.2
 	burn_mod = 1.2
-	slowdown = -0.2 //Better than a brute, worse than an elite.
+	slowdown = -0.1 //Brute tier
 	gluttonous = GLUT_ANYTHING
 	pixel_offset_x = -1
 	default_faction = "Covenant"
@@ -59,7 +59,6 @@ Huragok Engineers. Their flight makes them hard to hit during combat and their n
 
 /datum/species/yanmee/get_random_name(var/gender)
 	return pick(GLOB.yanmee_nicknames)
-
 
 /datum/species/yanmee/handle_post_spawn(var/mob/living/carbon/human/H)
 	..()
