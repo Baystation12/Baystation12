@@ -16,7 +16,7 @@
 	overmap_spawn_near_me = list(/obj/effect/overmap/ship/unsc_odp_cassius)
 	overmap_spawn_in_me = list(/obj/effect/overmap/complex046)
 
-	parent_area_type = /area/exo_ice_facility/interior
+	parent_area_type = /area/exo_ice_facility
 
 	occupy_range = 28
 

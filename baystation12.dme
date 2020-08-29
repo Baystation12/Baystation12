@@ -1871,6 +1871,7 @@
 #include "code\modules\halo\overmap\npc_ship_requests.dm"
 #include "code\modules\halo\overmap\npc_shipmap_handler.dm"
 #include "code\modules\halo\overmap\overmap_effects.dm"
+#include "code\modules\halo\overmap\planetfall.dm"
 #include "code\modules\halo\overmap\player_shuttles.dm"
 #include "code\modules\halo\overmap\req_console_ships.dm"
 #include "code\modules\halo\overmap\shipyards.dm"

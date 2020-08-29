@@ -112,15 +112,13 @@
 	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing magazine containing 15 rounds. Specific to the M392."
 	caliber = "a762dmr"
 	ammo_type = /obj/item/ammo_casing/a762_m392
-	max_ammo = 15
-	matter = list(DEFAULT_WALL_MATERIAL = 750)
+	max_ammo = 20
+	matter = list(DEFAULT_WALL_MATERIAL = 1000)
 
 /obj/item/ammo_magazine/m762_ap/M392/innie
 	name = "Modified M392 magazine (7.62mm) M118 FMJ-AP"
 	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing magazine containing 20 rounds. A modified version of the magazine specific to the M392."
 	ammo_type = /obj/item/ammo_casing/a762_m392
-	max_ammo = 20
-	matter = list(DEFAULT_WALL_MATERIAL = 1000)
 
 /obj/item/ammo_magazine/m762_ap/MA37
 	name = "MA37 magazine (7.62mm) M118 FMJ-AP"
@@ -162,8 +160,9 @@
 	penetrating = 0
 
 /obj/item/projectile/bullet/a762_M392
-	damage = 30
-	armor_penetration = 15
+	damage = 40
+	armor_penetration = 20
+	shield_damage = 20
 
 /obj/item/weapon/storage/box/m762_ap
 	name = "box of 7.62mm M118 magazines"
@@ -263,7 +262,7 @@
 	armor_penetration = 60
 	tracer_type = /obj/effect/projectile/srs99
 	tracer_delay_time = 2 SECONDS
-	shield_damage = 210
+	shield_damage = 150
 	kill_count = 125
 	step_delay = 0
 
