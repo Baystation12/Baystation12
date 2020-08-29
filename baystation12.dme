@@ -1443,6 +1443,7 @@
 #include "code\modules\halo\clothing\armorset_base.dm"
 #include "code\modules\halo\clothing\armorsets.dm"
 #include "code\modules\halo\clothing\armour_upgrade.dm"
+#include "code\modules\halo\clothing\bandolier.dm"
 #include "code\modules\halo\clothing\civilian.dm"
 #include "code\modules\halo\clothing\closets.dm"
 #include "code\modules\halo\clothing\crewman_armour.dm"
