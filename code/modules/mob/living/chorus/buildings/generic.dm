@@ -131,7 +131,7 @@
 	var/range = 1
 
 /obj/structure/chorus/processor/sentry/Process()
-	if(world.time < last_click + click_cooldown)
+	if(!owner || world.time < last_click + click_cooldown)
 		return
 	var/list/heard = hearers(range, src)
 	if(heard.len)

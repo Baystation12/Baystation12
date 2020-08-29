@@ -17,7 +17,8 @@
 		owner.add_building(src)
 
 /obj/structure/chorus/Destroy()
-	owner.remove_building(src)
+	if (owner)
+		owner.remove_building(src)
 	. = ..()
 
 /obj/structure/chorus/proc/chorus_click(var/mob/living/chorus/C)
@@ -26,7 +27,7 @@
 		last_click = world.time
 
 /obj/structure/chorus/proc/can_activate(var/mob/living/chorus/C, var/warning = TRUE)
-	if(last_click + click_cooldown < world.time && C == owner)
+	if(owner && last_click + click_cooldown < world.time && C == owner)
 		if(activation_cost_resource && !owner.use_resource(activation_cost_resource, activation_cost_amount))
 			if(warning)
 				var/datum/chorus_resource/cr = activation_cost_resource

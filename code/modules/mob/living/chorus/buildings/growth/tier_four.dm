@@ -42,9 +42,12 @@
 	activation_cost_amount = 15
 
 /obj/structure/chorus/gastric_emitter/activate()
+	var/turf/cur_turf = get_turf(src)
+	if (!cur_turf)
+		return
+
 	flick("growth_gastric_emit", src)
 	playsound(src, 'sound/machines/pump.ogg', 35, 1)
-	var/turf/cur_turf = get_turf(src)
 	for(var/t in cur_turf.AdjacentTurfs())
 		var/turf/T = t
 		if(T.density)
