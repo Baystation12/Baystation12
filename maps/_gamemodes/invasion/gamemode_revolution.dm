@@ -40,6 +40,7 @@
 		/datum/objective/retrieve/nav_data/cole_protocol,\
 		/datum/objective/overmap/unsc_cov_ship,\
 		/datum/objective/retrieve/artifact/unsc,\
+		/datum/objective/phase2_scan_unsc,\
 	)
 
 	for(var/datum/objective/obj in GLOB.UNSC.all_objectives)
