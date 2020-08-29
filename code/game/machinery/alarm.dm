@@ -881,8 +881,9 @@ FIRE ALARM
 
 /obj/machinery/firealarm/examine(mob/user)
 	. = ..()
-	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
-	to_chat(user, "The current alert level is [security_state.current_security_level.name].")
+	if(loc.z in GLOB.using_map.contact_levels)
+		var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+		to_chat(user, "The current alert level is [security_state.current_security_level.name].")
 
 /obj/machinery/firealarm/Initialize()
 	. = ..()
