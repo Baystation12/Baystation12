@@ -293,6 +293,7 @@ var/list/tape_roll_applications = list()
 	if (istype(A, /obj/machinery/door/airlock))
 		var/turf/T = get_turf(A)
 		var/obj/item/tape/P = new tape_type(T)
+		P.add_fingerprint(user)
 		P.update_icon()
 		P.layer = ABOVE_DOOR_LAYER
 		to_chat(user, "<span class='notice'>You finish placing \the [src].</span>")
