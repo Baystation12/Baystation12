@@ -6,12 +6,6 @@
 	ai_access_level = 3
 	nohack = 1
 
-/obj/machinery/vending/armory/attackby(var/atom/A,var/mob/user)
-	if(A in products)
-		products[A] = products[A] + 1
-	else
-		return ..()
-
 /obj/machinery/pointbased_vending/armory/hybrid // Both ammo, and guns!
 	name = "UNSC Equipment Rack"
 	desc = "Storage for basic weapons and ammunition, alongside some equipment."

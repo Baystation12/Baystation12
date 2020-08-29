@@ -27,7 +27,6 @@
 	/datum/autolathe/recipe/m255_sap_hp,
 	/datum/autolathe/recipe/m118_ma5b,
 	/datum/autolathe/recipe/m118_m392,
-	/datum/autolathe/recipe/m112_ap_fs_ds,
 	/datum/autolathe/recipe/m443_fmj
 	)
 	req_access = list(access_unsc_oni)
