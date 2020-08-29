@@ -86,6 +86,7 @@
 
 /area/scavver/
 	icon = 'maps/away/scavver/scavver_gantry_sprites.dmi'
+	has_gravity = FALSE
 
 /area/scavver/gantry/up1
 	name = "\improper Upper Salvage Gantry Arm"
