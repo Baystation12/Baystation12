@@ -1008,12 +1008,8 @@ I said no!
 	items = list(/obj/item/weapon/reagent_containers/food/snacks/chocolatebar)
 	result = /obj/item/weapon/reagent_containers/food/snacks/sliceable/chocolatecake
 
-//datum/recipe/cake/birthday
-//	items = list(/obj/item/clothing/head/cakehat)
-//	result = /obj/item/weapon/reagent_containers/food/snacks/sliceable/birthdaycake
-
 /datum/recipe/cake/birthday
-	reagents = list(/datum/reagent/nutriment/sprinkles = 10)
+	reagents = list(/datum/reagent/nutriment/batter/cakebatter = 60, /datum/reagent/nutriment/sprinkles = 10)
 	result = /obj/item/weapon/reagent_containers/food/snacks/sliceable/birthdaycake
 
 /datum/recipe/cake/apple
