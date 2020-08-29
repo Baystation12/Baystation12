@@ -37,7 +37,7 @@
 	name = "Covenant supply management program"
 	faction_name = "Covenant"
 	shuttle_name = "Covenant Supply Shuttle"
-	req_access = 0//access_covenant_cargo
+	req_access = access_covenant_cargo
 
 /datum/nano_module/program/faction_supply/covenant/apply_styling(datum/nanoui/ui)
 	ui.set_layout_key("covenant")
