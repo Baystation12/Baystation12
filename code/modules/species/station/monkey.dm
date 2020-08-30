@@ -70,7 +70,10 @@
 	if(H.stat != CONSCIOUS)
 		return
 	if(prob(33) && isturf(H.loc) && !H.pulledby) //won't move if being pulled
-		H.SelfMove(pick(GLOB.cardinal))
+		var/dir = pick(GLOB.cardinal)
+		var/turf/T = get_step(get_turf(H), dir)
+		if(T && (T.pathweight < INFINITY))
+			H.SelfMove(dir)
 
 	var/obj/held = H.get_active_hand()
 	if(held && prob(1))
