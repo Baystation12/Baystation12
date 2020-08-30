@@ -230,7 +230,7 @@
 					/obj/item/ammo_magazine/m762_ap/MA5B/TTR = 0,
 					/obj/item/ammo_magazine/m762_ap/M392 = 0,
 					/obj/item/ammo_magazine/m95_sap/br55 = 0,
-					/obj/item/ammo_magazine/m5 = 0,
+					/obj/item/ammo_magazine/m5_s = 0,
 					/obj/item/ammo_magazine/m5/rubber = 0,
 					/obj/item/ammo_box/shotgun = 0,
 					/obj/item/ammo_box/shotgun/slug = 0,

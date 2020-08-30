@@ -298,6 +298,18 @@
 	max_ammo = 60
 	multiple_sprites = 1
 
+/obj/item/ammo_magazine/m5_s
+    name = "magazine (5mm) SOCOM M443 Caseless FMJ"
+    desc = "5x23mm M443 Caseless Full Metal Jacket magazine. Fun sized with no pesky casing!"
+    icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
+    icon_state = "m7mag"
+    mag_type = MAGAZINE
+    ammo_type = /obj/item/ammo_casing/m5
+    matter = list(DEFAULT_WALL_MATERIAL = 600)
+    caliber = "5mm"
+    max_ammo = 48
+    multiple_sprites = 1
+
 /obj/item/ammo_magazine/m5/rubber
 	name = "magazine (5mm) M443 Caseless Rubber"
 	desc = "Rubber bullets for riot suppression."
