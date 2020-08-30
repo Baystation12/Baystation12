@@ -15,6 +15,8 @@ var/bomb_set
 	var/extended = 0
 	var/lighthack = 0
 	var/timeleft = 120
+	var/minTime = 120
+	var/maxTime = 600
 	var/timing = 0
 	var/r_code = "ADMIN"
 	var/code = ""
@@ -263,7 +265,7 @@ var/bomb_set
 
 				var/time = text2num(href_list["time"])
 				timeleft += time
-				timeleft = Clamp(timeleft, 120, 600)
+				timeleft = Clamp(timeleft, minTime, maxTime)
 			if(href_list["timer"])
 				if(timing == -1)
 					return 1
@@ -325,7 +327,7 @@ var/bomb_set
 	bomb_set--
 	safety = TRUE
 	timing = 0
-	timeleft = Clamp(timeleft, 120, 600)
+	timeleft = Clamp(timeleft, minTime, maxTime)
 	update_icon()
 
 /obj/machinery/nuclearbomb/ex_act(severity)
@@ -457,6 +459,9 @@ var/bomb_set
 	var/announced = 0
 	var/time_to_explosion = 0
 	var/self_destruct_cutoff = 60 //Seconds
+	timeleft = 300 
+	minTime = 300
+	maxTime = 900
 
 /obj/machinery/nuclearbomb/station/Initialize()
 	. = ..()
@@ -478,15 +483,6 @@ var/bomb_set
 
 	if(href_list["anchor"])
 		return
-
-	if(href_list["time"])
-		if(timing)
-			to_chat(usr, "<span class='warning'>Cannot alter the timing during countdown.</span>")
-			return
-		var/time = text2num(href_list["time"])
-		timeleft += time
-		timeleft = Clamp(timeleft, 300, 900)
-		return 1
 
 /obj/machinery/nuclearbomb/station/start_bomb()
 	for(var/inserter in inserters)
