@@ -3,7 +3,6 @@
 	desc = "A machine with carefully assembled surfaces designed for the rapid purification and solidificaton of phoron."
 	icon = 'icons/atmos/phoroncondenser.dmi'
 	icon_state = "off"
-	level = 1
 	density = 1
 	use_power = POWER_USE_OFF
 	idle_power_usage = 200		//internal circuitry, friction losses and stuff
@@ -43,11 +42,11 @@
 	..()
 
 /obj/machinery/atmospherics/unary/phoroncondenser/atmos_init()
-	if(node)
+	..()
+	if (node)
 		return
 
 	var/node_connect = dir
-	..()
   		// Copied from freezer code, should initialise a one direction machine as they work.
 		//check that there are no incompatible pipes/machinery in our own location
 	for(var/obj/machinery/atmospherics/M in src.loc)
@@ -72,7 +71,8 @@
 			power_draw = pump_gas(src, air_contents, inner_tank, transfer_moles, power_rating*power_setting) * intake_power_efficiency
 			if (power_draw >= 0)
 				last_power_draw = power_draw
-				use_power_oneoff(power_draw)
+				if (power_draw > 0)
+					use_power_oneoff(power_draw)
 				if(network)
 					network.update = 1
 		if (air_contents.return_pressure() < 0.1 * ONE_ATMOSPHERE || inner_tank.return_pressure() >= target_pressure * 0.95)//if pipe is good as empty or tank is full
