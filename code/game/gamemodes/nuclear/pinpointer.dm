@@ -57,7 +57,7 @@ var/list/nuke_disks = list()
 
 /obj/item/weapon/pinpointer/Destroy()
 	active = 0
-	..()
+	. = ..()
 
 /obj/item/weapon/pinpointer/advpinpointer
 	name = "Advanced Pinpointer"

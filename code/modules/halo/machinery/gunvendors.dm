@@ -224,7 +224,7 @@
 					/obj/item/ammo_magazine/ma5b/m118 = 0,
 					/obj/item/ammo_magazine/m392/m120 = 0,
 					/obj/item/ammo_magazine/br55/m634 = 0,
-					/obj/item/ammo_magazine/m5 = 0,
+					/obj/item/ammo_magazine/m5_s = 0,
 					/obj/item/ammo_magazine/m5/rubber = 0,
 					/obj/item/ammo_box/shotgun = 0,
 					/obj/item/ammo_box/shotgun/slug = 0,

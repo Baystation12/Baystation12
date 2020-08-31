@@ -233,7 +233,7 @@
 						var/my_ratio = my_faction_players / total_faction_players
 
 						//are we overpopped?
-						if(my_ratio > max_ratio)
+						if(total_faction_players > GLOB.min_players_balance && my_ratio > max_ratio)
 							to_chat(feedback, "<span class='boldannounce'>Joining as [title] is blocked due to [spawn_faction] faction overpop.</span>")
 
 							//tell the admins, but dont spam them too much

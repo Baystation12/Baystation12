@@ -25,12 +25,12 @@
 "ay" = (/turf/simulated/wall/covenant,/area/covenant_light_cruiser/escape_starboard)
 "az" = (/obj/machinery/light/covenant/west,/obj/machinery/bodyscanner/covenant{icon_state = "body_scanner_0"; dir = 8},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/mainmedicalbay)
 "aA" = (/obj/machinery/body_scanconsole/covenant{icon_state = "body_scannerconsole"; dir = 8},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/mainmedicalbay)
-"aB" = (/obj/machinery/washing_machine,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/mainmedicalbay)
+"aB" = (/obj/machinery/washing_machine,/obj/machinery/light/covenant/west,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/mainmedicalbay)
 "aC" = (/obj/structure/window/reinforced/projresist/covenant,/obj/structure/window/reinforced/projresist/covenant{tag = "icon-window (NORTH)"; icon_state = "window"; dir = 1},/obj/structure/window/reinforced/projresist/covenant{tag = "icon-window (EAST)"; icon_state = "window"; dir = 4},/obj/structure/grille,/obj/structure/window/reinforced/projresist/covenant{tag = "icon-window (WEST)"; icon_state = "window"; dir = 8},/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/covenant_light_cruiser/mainmedicalbay)
 "aD" = (/obj/machinery/light/covenant/north,/obj/machinery/washing_machine,/obj/machinery/camera/autoname/invis/crs_transgression,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/mainmedicalbay)
 "aE" = (/turf/simulated/wall/covenant,/area/covenant_light_cruiser/starboardgarage)
 "aF" = (/turf/simulated/wall/covenant,/area/covenant_light_cruiser/sangheiliquarters)
-"aG" = (/obj/structure/shuttle_repulsor{dir = 4},/turf/simulated/shuttle/wall{icon_state = "swall_straight"},/area/shuttle/covenant_shuttle_supply)
+"aG" = (/turf/simulated/shuttle/wall{icon_state = "vwall4"},/area/shuttle/covenant_shuttle_supply)
 "aH" = (/obj/machinery/shower,/obj/structure/window/reinforced/projresist/covenant{dir = 8},/obj/structure/curtain/open/shower,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/mainmedicalbay)
 "aI" = (/obj/machinery/organ_printer/flesh/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/mainmedicalbay)
 "aJ" = (/obj/structure/sink{icon_state = "sink"; dir = 8; pixel_x = -12; pixel_y = 2},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/mainmedicalbay)
@@ -157,7 +157,7 @@
 "da" = (/obj/structure/bed/chair/covenant_stool,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/sangheiliquarters)
 "db" = (/obj/machinery/door/airlock/multi_tile/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/sangheiliquarters)
 "dc" = (/obj/machinery/door/airlock/multi_tile/covenant/three{covenant_secure = 1; name = "Starboard Docking Collar"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/dockingumbilicalstarboard)
-"dd" = (/obj/machinery/door/airlock/covenant{covenant_secure = 1; name = "Aft Northern Escape Pod"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/escape_starboard)
+"dd" = (/obj/machinery/door/airlock/covenant{covenant_secure = 1; name = "Aft Starboard Escape Pod"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/escape_starboard)
 "de" = (/obj/machinery/door/airlock/covenant{covenant_secure = 1; name = "VIP Chambers"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/vipquarters)
 "df" = (/obj/machinery/light/invis,/obj/structure/table/marble,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/vipquarters)
 "dg" = (/obj/machinery/light/invis,/obj/machinery/camera/autoname/invis/crs_transgression{icon_state = "camera"; dir = 1},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/starboardengine)
@@ -181,7 +181,7 @@
 "dy" = (/obj/machinery/camera/autoname/invis/crs_transgression{icon_state = "camera"; dir = 1},/obj/machinery/light/invis,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/sangheiliquarters)
 "dz" = (/obj/machinery/light/covenant/north{dir = 2; icon_state = "covie_light1"; pixel_y = -16; tag = "icon-covie_light1"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/Rearhallway)
 "dA" = (/obj/structure/closet/walllocker/emerglocker/covvie/south,/obj/machinery/camera/autoname/invis/crs_transgression{icon_state = "camera"; dir = 1},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/Rearhallway)
-"dB" = (/turf/simulated/shuttle/wall{dir = 4; icon_state = "swall"},/area/shuttle/covenant_shuttle_supply)
+"dB" = (/turf/simulated/floor/covenant{icon_state = "cov_floor"},/turf/simulated/shuttle/wall{icon_state = "vwall_f10"},/area/shuttle/covenant_shuttle_supply)
 "dC" = (/obj/machinery/camera/autoname/invis/crs_transgression{icon_state = "camera"; dir = 1},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/Rearhallway)
 "dD" = (/obj/machinery/light/invis,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/Rearhallway)
 "dE" = (/obj/structure/closet/walllocker/emerglocker/covvie/west,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/Rearhallway)
@@ -203,21 +203,21 @@
 "dU" = (/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/starboardholdingcell)
 "dV" = (/obj/machinery/camera/autoname/invis/crs_transgression{icon_state = "camera"; dir = 4},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/Rearhallway)
 "dW" = (/obj/machinery/door/airlock/multi_tile/covenant{dir = 4; name = "Starboard Vehicle Garage"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/starboardgarage)
-"dX" = (/turf/simulated/shuttle/wall{dir = 4; icon_state = "swall_straight"},/area/shuttle/covenant_shuttle_supply)
+"dX" = (/obj/structure/shuttle_repulsor{dir = 4},/turf/simulated/shuttle/wall{icon_state = "vfloor"},/area/shuttle/covenant_shuttle_supply)
 "dY" = (/obj/machinery/light/invis,/obj/structure/ai_routing_node/cov,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/vipquarters)
 "dZ" = (/obj/structure/closet/walllocker/emerglocker/covvie/south,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/vipquarters)
 "ea" = (/obj/structure/table/marble,/obj/machinery/light/invis,/obj/item/weapon/paper_bin,/obj/item/weapon/pen/blue,/obj/item/weapon/pen/red,/obj/item/weapon/pen,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/vipquarters)
 "eb" = (/obj/machinery/door/airlock/multi_tile/covenant{covenant_secure = 1; name = "Secondary Engine"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/starboardengine)
 "ec" = (/turf/simulated/wall/covenant,/area/covenant_light_cruiser/centralengine)
 "ed" = (/obj/effect/hull_segment,/turf/simulated/wall/covenant,/area/covenant_light_cruiser/centralengine)
-"ee" = (/obj/machinery/door/airlock/covenant{covenant_secure = 1; name = "Bow Southern Escape Pod"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/boardcraft)
+"ee" = (/obj/machinery/door/airlock/covenant{covenant_secure = 1; name = "Fore Starboard Escape Pod"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/starboardarmory)
 "ef" = (/obj/machinery/light/invis,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/porthangar)
 "eg" = (/obj/machinery/door/airlock/multi_tile/covenant/four{covenant_secure = 1; dir = 4; name = "Dropship Hangar"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/starboardgarage)
 "eh" = (/obj/machinery/light/covenant/north{dir = 2; icon_state = "covie_light1"; pixel_y = -16; tag = "icon-covie_light1"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/starboardgarage)
 "ei" = (/obj/structure/closet/walllocker/emerglocker/covvie/south,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/Rearhallway)
 "ej" = (/turf/simulated/wall/covenant,/area/covenant_light_cruiser/bridge)
 "ek" = (/obj/machinery/camera/autoname/invis/crs_transgression{icon_state = "camera"; dir = 8},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/Rearhallway)
-"el" = (/turf/simulated/shuttle/wall{dir = 8; icon_state = "swall"},/area/shuttle/covenant_shuttle_supply)
+"el" = (/obj/effect/shuttle_landmark/covenant_onsite_supply,/turf/simulated/shuttle/wall{icon_state = "vwallc3"},/area/shuttle/covenant_shuttle_supply)
 "em" = (/obj/machinery/door/airlock/covenant,/turf/simulated/floor/shuttle/purple,/area/shuttle/covenant_shuttle_supply)
 "en" = (/obj/structure/repair_bench/cov,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/centralengine)
 "eo" = (/obj/machinery/light/covenant/north,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/centralengine)
@@ -253,12 +253,12 @@
 "eS" = (/obj/structure/ai_routing_node/cov,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/bridge)
 "eT" = (/obj/machinery/overmap_comms/receiver/battlenet,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/bridge)
 "eU" = (/obj/machinery/door/airlock/multi_tile/covenant/three{covenant_secure = 1},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/Rearhallway)
-"eV" = (/obj/machinery/door/airlock/multi_tile/covenant/three{dir = 4},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/plasmaprojector)
+"eV" = (/obj/machinery/door/airlock/multi_tile/covenant/three{dir = 4; name = "Engineering"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/plasmaprojector)
 "eW" = (/obj/machinery/door/airlock/multi_tile/covenant{covenant_secure = 1; name = "Brig"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/starboardholdingcell)
 "eX" = (/obj/machinery/camera/autoname/invis/crs_transgression{icon_state = "camera"; dir = 4},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/centralengine)
 "eY" = (/obj/machinery/door/airlock/multi_tile/covenant/three{covenant_secure = 1; dir = 4; name = "Secondary Engine"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/centralengine)
 "eZ" = (/obj/structure/closet/crate/covenant{name = "Covenant Plasma Grenade Crate"},/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/plasma,/obj/machinery/light/covenant/north,/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/covenant_light_cruiser/starboardarmory)
-"fa" = (/obj/machinery/door/airlock/multi_tile/covenant{covenant_secure = 1; dir = 4; name = "Secondary Armory"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/starboardarmory)
+"fa" = (/obj/machinery/door/airlock/multi_tile/covenant{covenant_secure = 1; dir = 4; name = "Starboard Secondary Armory"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/starboardarmory)
 "fb" = (/obj/machinery/telecomms_jammers/covenant,/obj/machinery/light/covenant/west,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/starboardgarage)
 "fc" = (/obj/machinery/light/covenant/north{dir = 4; icon_state = "covie_light1"; pixel_x = 16; pixel_y = 0; tag = "icon-covie_light1 (EAST)"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/starboardgarage)
 "fd" = (/obj/structure/closet/covenant,/obj/machinery/camera/autoname/invis/crs_transgression,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/starboardarmory)
@@ -275,7 +275,7 @@
 "fo" = (/obj/structure/closet/walllocker/emerglocker/covvie/east,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/bridge)
 "fp" = (/obj/machinery/cryopod/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/Rearhallway)
 "fq" = (/obj/machinery/door/airlock/covenant{covenant_secure = 1; name = "BattleNet transmitter"; req_access = list(240)},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/bridge)
-"fr" = (/turf/simulated/floor/covenant{icon_state = "cov_floor"},/turf/simulated/shuttle/wall/corner/smoothwhite/ne,/area/shuttle/covenant_shuttle_supply)
+"fr" = (/turf/simulated/floor/covenant{icon_state = "cov_floor"},/turf/simulated/shuttle/wall{dir = 4; icon_state = "vwall_f9"},/area/shuttle/covenant_shuttle_supply)
 "fs" = (/obj/effect/hull_segment,/turf/simulated/wall/covenant,/area/covenant_light_cruiser/plasmaprojector)
 "ft" = (/turf/simulated/wall/covenant,/area/covenant_light_cruiser/plasmaprojector)
 "fu" = (/obj/structure/ai_routing_node/cov,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/starboardarmory)
@@ -335,7 +335,7 @@
 "gw" = (/obj/machinery/door/airlock/multi_tile/covenant{covenant_secure = 1; name = "Lekgolo Tank"},/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/covenant_light_cruiser/lekgolo)
 "gx" = (/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/covenant_light_cruiser/lekgolo)
 "gy" = (/obj/machinery/light/covenant/north{dir = 4; icon_state = "covie_light1"; pixel_x = 16; pixel_y = 0; tag = "icon-covie_light1 (EAST)"},/obj/structure/ai_routing_node/cov,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/supplypods)
-"gz" = (/obj/machinery/door/airlock/multi_tile/covenant/three{dir = 4},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/bridge)
+"gz" = (/obj/machinery/door/airlock/multi_tile/covenant/three{dir = 4; name = "Bridge"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/bridge)
 "gA" = (/obj/machinery/door/airlock/covenant{covenant_secure = 1; name = "Intelicard Storage"; req_access = list(240)},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/bridge)
 "gB" = (/obj/machinery/light/covenant/west,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/bridge)
 "gC" = (/obj/structure/closet/walllocker/emerglocker/covvie/north,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/Rearhallway)
@@ -373,9 +373,9 @@
 "hi" = (/obj/machinery/light/invis,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/centralengine)
 "hj" = (/obj/machinery/computer/cryopod/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/Rearhallway)
 "hk" = (/obj/machinery/light/covenant/east,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/starboardarmory)
-"hl" = (/obj/machinery/door/airlock/multi_tile/covenant{name = "Escape Pods"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/starboardarmory)
+"hl" = (/obj/machinery/door/airlock/multi_tile/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/starboardarmory)
 "hm" = (/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/plasmaprojector)
-"hn" = (/obj/machinery/door/airlock/multi_tile/covenant{covenant_secure = 1; dir = 4; name = "Secondary Armory"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/portarmory)
+"hn" = (/obj/machinery/door/airlock/multi_tile/covenant{covenant_secure = 1; dir = 4; name = "Port Secondary Armory"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/portarmory)
 "ho" = (/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/shieldgen)
 "hp" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/shieldgen)
 "hq" = (/obj/structure/window/reinforced/projresist/covenant,/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/shieldgen)
@@ -399,10 +399,10 @@
 "hI" = (/obj/structure/ai_routing_node/cov,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/starboardholdingcell)
 "hJ" = (/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/cargo)
 "hK" = (/obj/structure/table/marble,/obj/item/weapon/pinpointer/scanpoint_locator,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/plasmaprojector)
-"hL" = (/obj/machinery/door/airlock/covenant{covenant_secure = 1; name = "Bow Northern Escape Pod"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/starboardarmory)
+"hL" = (/obj/machinery/door/airlock/covenant{covenant_secure = 1; name = "Fore Port Escape Pod"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/boardcraft)
 "hM" = (/obj/machinery/light/invis,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/bridge)
 "hN" = (/obj/structure/cable/blue{icon_state = "1-4"},/obj/structure/ai_routing_node/cov,/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/plasmaprojector)
-"hO" = (/obj/machinery/door/airlock/multi_tile/covenant{name = "Escape Pods"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/portarmory)
+"hO" = (/obj/machinery/door/airlock/multi_tile/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/portarmory)
 "hP" = (/obj/structure/drop_pod_launchbay/covenant,/obj/vehicles/drop_pod/overmap/boarding_pod/covenant/north{icon_state = "cov_boarding"; dir = 2},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/starboardhangar)
 "hQ" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "1-8"},/obj/structure/cable/blue{icon_state = "2-8"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/shieldgen)
 "hR" = (/obj/machinery/light/covenant/north{dir = 2; icon_state = "covie_light1"; pixel_y = -16; tag = "icon-covie_light1"},/obj/item/weapon/pen/covenant_crayon,/obj/machinery/portable_atmospherics/canister/oxygen{canister_color = "black"; icon_state = "black"; name = "\improper Covenant Canister: \[O2]"; start_pressure = 7559.63},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/unggoyquarters)
@@ -521,7 +521,7 @@
 "ka" = (/obj/effect/bomblocation,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/bridge)
 "kb" = (/obj/structure/window/reinforced/projresist/covenant,/obj/structure/window/reinforced/projresist/covenant{tag = "icon-window (NORTH)"; icon_state = "window"; dir = 1},/obj/structure/window/reinforced/projresist/covenant{tag = "icon-window (EAST)"; icon_state = "window"; dir = 4},/obj/structure/grille,/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/covenant_light_cruiser/starboardholdingcell)
 "kc" = (/turf/simulated/wall/covenant,/area/covenant_light_cruiser/emergencyo2)
-"kd" = (/obj/machinery/door/airlock/multi_tile/covenant{covenant_secure = 1; name = "Methane Suite Access"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/unggoyquarters)
+"kd" = (/obj/machinery/door/airlock/multi_tile/covenant{covenant_secure = 1; name = "Engineering"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/unggoyquarters)
 "ke" = (/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/unggoyquarters)
 "kf" = (/turf/simulated/wall/covenant,/area/covenant_light_cruiser/unggoyquarters)
 "kg" = (/obj/machinery/deck_gun/cov_pulse_turret,/turf/space,/area/space)
@@ -533,7 +533,6 @@
 "km" = (/obj/machinery/light/colored/red{tag = "icon-red1 (NORTH)"; icon_state = "red1"; dir = 1},/obj/machinery/light/colored/red{tag = "icon-red1 (WEST)"; icon_state = "red1"; dir = 8},/obj/effect/bomblocation,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/bridge)
 "kn" = (/obj/payload/covenant,/obj/effect/bomblocation,/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/covenant_light_cruiser/bridge)
 "ko" = (/obj/structure/shuttle/window{tag = "icon-10"; icon_state = "10"; color = "grey"},/turf/simulated/floor/shuttle/purple,/area/shuttle/covenant_shuttle_supply)
-"kp" = (/obj/effect/shuttle_landmark/covenant_onsite_supply,/turf/simulated/shuttle/wall{dir = 4; icon_state = "swall"},/area/shuttle/covenant_shuttle_supply)
 "kq" = (/obj/machinery/light/covenant/north,/obj/machinery/portable_atmospherics/canister/oxygen{canister_color = "black"; icon_state = "black"; name = "\improper Covenant Canister: \[O2]"; start_pressure = 7559.63},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/emergencyo2)
 "kr" = (/obj/machinery/portable_atmospherics/canister/oxygen{canister_color = "black"; icon_state = "black"; name = "\improper Covenant Canister: \[O2]"; start_pressure = 7559.63},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/emergencyo2)
 "ks" = (/obj/machinery/light/covenant/west,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/unggoyquarters)
@@ -547,7 +546,6 @@
 "kA" = (/obj/structure/bed/covenant{name = "Kig'Yar bed"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/starboardholdingcell)
 "kB" = (/obj/structure/closet/walllocker/emerglocker/covvie/east,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/Rearhallway)
 "kC" = (/obj/machinery/door/airlock/multi_tile/covenant{name = "Cryodorms"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/Rearhallway)
-"kD" = (/turf/simulated/floor/covenant{icon_state = "cov_floor"},/turf/simulated/shuttle/wall/corner/smoothwhite/se,/area/shuttle/covenant_shuttle_supply)
 "kE" = (/obj/structure/ai_routing_node/cov,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/emergencyo2)
 "kF" = (/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/emergencyo2)
 "kG" = (/obj/machinery/light/covenant/west,/obj/structure/ai_routing_node/cov,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/centralengine)
@@ -608,7 +606,7 @@
 "lJ" = (/obj/machinery/door/airlock/multi_tile/covenant/three{covenant_secure = 1; name = "Port Docking Collar"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/dockingumbilicalport)
 "lK" = (/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/dockingumbilicalport)
 "lL" = (/obj/vehicles/drop_pod/overmap/covenant,/obj/structure/drop_pod_launchbay/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/droppods_port)
-"lM" = (/obj/machinery/door/airlock/covenant{covenant_secure = 1; name = "Aft Northern Escape Pod"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/escape_port)
+"lM" = (/obj/machinery/door/airlock/covenant{covenant_secure = 1; name = "Aft Port Escape Pod"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/escape_port)
 "lN" = (/obj/machinery/door/airlock/multi_tile/covenant{covenant_secure = 1; name = "Methane Suite"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/unggoyquarters)
 "lO" = (/obj/machinery/light/covenant/north{dir = 2; icon_state = "covie_light1"; pixel_y = -16; tag = "icon-covie_light1"},/obj/structure/table/marble,/obj/item/weapon/pinpointer/scanpoint_locator,/obj/item/weapon/pinpointer/scanpoint_locator,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/plasmaprojector)
 "lP" = (/mob/living/bot/cleanbot/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/portengine)
@@ -818,12 +816,12 @@ aaaaaaaaaaaaaaaaaaaaaaaajXjXAfjYAfAfAfAfAfAfAfAfAfWHWHqmbJcscUcUcsbJcscUcUcsbJcs
 aaaaaaaaaaaaaaaaaaaaaaaaAfAfAfAfAfAfWHWHWHWHWHAfAfWHWHqmbJdOcUcUeKbJdOcUcUeKbJdjcscscscscscsdlaEdmbYbYbYaEdnbYbYbYaEaEaEaFaFaFaFaFbrbrbrbrdybrbrcLaFdpdrdqdqdrdqdqdrdqdqdqdqdrdqdqdqdqdrdqdqdqdqdqdrdqdqdqdqdqdrdqdqdqclcmcncocmcnclczaVaVaVaVaXaXaXavavavavavavavavavavavavAfAfAfaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaAfAfAfWHWHWHWHWHWHWHWHWHAfAfWHWHqmbJcsdkcUcsbJcsdkcUcsbJcscscscscscscscsbYbYbYbYbYdvbYbYbYdwaEaEaEaFaFaFaFaFdxbraFaFaFaFaFaFaFdqdqcEdqdzdqdAdzdqcSdzdCdqdqdqdqdqdzcSdqdqdqdqdqdqdqdqdqdqdqdqdqdqdFcncndGcMdHcldoaVaVdodhaXdIaXavavavavavavavavavavavavavAfAfaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaAfAfAfWHWHWHWHWHWHWHWHWHWHWHlVlVWHWHqmbJdubJbJdubJdubJbJdubJcscscscsdMcscscsbYbYbYbYbYbYbYbYbYbYbYdPdvbYbYdqdrdqdqdqdqdpdrdqdqdrdqdqdqdtdtdtdtdtdtdtdtdtdtdtdtcThJkKkKdtdQdqdqdsdzdqdqdqdAdqdDdqdAdDcldYdZdGeaclclavebaVavavavavavavavavavavecececececececececedaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaAfAfAfWHWHWHWHWHWHWHWHdididiWHdLdLetWHqmdNcsctcscscucsctcscscscscscscscscscscsbYbYbYbYbYbYbYbYbYbYdWbYfjbYdWdqdqdqdqdDeidqdDdqdqdDcEdqdDejejejejdBdXeleBeBdBeBfrhJhJkXmLkKeUdqdqdSdSdSeWdUdSclclclclclclclclclclcleneoepepeqlSecececececececececeoeperepepeoecececaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaAfAfWHWHWHWHWHprdididididididiWHdLdLfuWHqmmIcscscscsdMcscscscsfmcscscsfxcscscscsegbYbYbYbYewbYbYbYdwexexexexexdqdqejejejejejejejejejejejejejejeyejaGkJkJkJkJkJkJmNmMmOhJhJkKdqdqdqdSfCfEhIdUdSclclclclclclclclcleCepepepepepepepeDeEecececececececeFepepepeFepedeveGaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaAfAfWHWHWHWHWHdididididididididiWHfwdLhkWHqmbJdubJbJdubJdubJbJdubJdOcscscscscscseKaEeLbYbYbYaEeMbYbYbYexeNeOePexdQeQejejejejejejejejeyejejejejejejejaGeAeAeAeAeAeAiUhJmPhJmRkKdQdqdRdSezdUigiNdSclclclclclclclclcleXepepfRepepepepepepepepeoepepeoepepepepepepepepeHeGaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaAfAfWHWHWHWHWHdididieZaucVcWfdfeffWHWHWHhLWHqmbJcscUcUcsbJcsgDgDcsbJfycscscscscscsfiaEfBbYbYbYaEfbbYbYfcexfleOeOexdqdqejejejejejejejtZejejtZejejejejejaGeAeAeAeAeAeAkohJmPhJmSkKdqdqdqdSjqjIjJkbdSftftftftesftftftftepepepepepepepepepepepepepepepepepepepepepepepepeHeGaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaAfWHWHWHWHWHdidididicVfvfvfufvfvfvfvfZfvfvdibJbJdOcUcUeKbJdOgDgDeKbJcscslXcscscscscsaEfBbYbYbYaEfAbYbYiGexeOeOeOexdqdqejejejejejgeejfDejejfDejeRejejejaGeAeAeAeAeAeAemhJhJhJhJdqdqdqdqdSezdUdUiNdSftfthKfzjKkZftfsftfNepepepepepfOepepepepfOepeYfOepeYepepepepepepeYfneGaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaWHWHWHprWHdididididifMfvfvfTfvfvfPfafPfvfvdibJbJcshPcUcsbJcsgDgDcsbJgNcDcscscscsfhhdaEgabYgbehaEgcgdfFgfexeNeOggexghdqejejejejejfDfGfGgigjfGgifDfWeyejkpdXdXeBeBdXdXkDhJhJmUhJmVdqdqdqdSdUkAkAkAdSftgmfLfLgnfLgoftftgpgqgrgrgpgpgpgpgpgpgpgpgpgsgpgpecepepepepepepedfKeGaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaAfAfAfWHWHWHWHWHWHWHWHdididiWHdLdLetWHqmdNcsctcscscucsctcscscscscscscscscscscsbYbYbYbYbYbYbYbYbYbYdWbYfjbYdWdqdqdqdqdDeidqdDdqdqdDcEdqdDejejejejaGaGaGeBeBaGeBdBhJhJkXmLkKeUdqdqdSdSdSeWdUdSclclclclclclclclclclcleneoepepeqlSecececececececececeoeperepepeoecececaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaAfAfWHWHWHWHWHprdididididididiWHdLdLfuWHqmmIcscscscsdMcscscscsfmcscscsfxcscscscsegbYbYbYbYewbYbYbYdwexexexexexdqdqejejejejejejejejejejejejejejeyejdXkJkJkJkJkJkJmNmMmOhJhJkKdqdqdqdSfCfEhIdUdSclclclclclclclclcleCepepepepepepepeDeEecececececececeFepepepeFepedeveGaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaAfAfWHWHWHWHWHdididididididididiWHfwdLhkWHqmbJdubJbJdubJdubJbJdubJdOcscscscscscseKaEeLbYbYbYaEeMbYbYbYexeNeOePexdQeQejejejejejejejejeyejejejejejejejdXeAeAeAeAeAeAiUhJmPhJmRkKdQdqdRdSezdUigiNdSclclclclclclclclcleXepepfRepepepepepepepepeoepepeoepepepepepepepepeHeGaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaAfAfWHWHWHWHWHdididieZaucVcWfdfeffWHWHWHeeWHqmbJcscUcUcsbJcsgDgDcsbJfycscscscscscsfiaEfBbYbYbYaEfbbYbYfcexfleOeOexdqdqejejejejejejejtZejejtZejejejejejdXeAeAeAeAeAeAkohJmPhJmSkKdqdqdqdSjqjIjJkbdSftftftftesftftftftepepepepepepepepepepepepepepepepepepepepepepepepeHeGaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaAfWHWHWHWHWHdidididicVfvfvfufvfvfvfvfZfvfvdibJbJdOcUcUeKbJdOgDgDeKbJcscslXcscscscscsaEfBbYbYbYaEfAbYbYiGexeOeOeOexdqdqejejejejejgeejfDejejfDejeRejejejdXeAeAeAeAeAeAemhJhJhJhJdqdqdqdqdSezdUdUiNdSftfthKfzjKkZftfsftfNepepepepepfOepepepepfOepeYfOepeYepepepepepepeYfneGaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaWHWHWHprWHdididididifMfvfvfTfvfvfPfafPfvfvdibJbJcshPcUcsbJcsgDgDcsbJgNcDcscscscsfhhdaEgabYgbehaEgcgdfFgfexeNeOggexghdqejejejejejfDfGfGgigjfGgifDfWeyejelaGaGeBeBaGaGfrhJhJmUhJmVdqdqdqdSdUkAkAkAdSftgmfLfLgnfLgoftftgpgqgrgrgpgpgpgpgpgpgpgpgpgsgpgpecepepepepepepedfKeGaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaBXBXBXBXgugugugugugugugugugugudidididihlfvdibJbJbJbJbJbJbJbJbJbJbJfQbJbJfScscscsbJbJaEaEaEaEaEaEaEaEaEaEexgwgxexexdQdRejejejgtfDfGfGfGfGfGfGfGfGgjhHejejejejejejejejejejejejejejdQdqdqdSdSdSdSdSdSfLfLfLfLhmgEgFgGftgHgrgrgrgIgrgsgpgJgKgJgJgpgpgpgpechfepfOepeFhiecececaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaBXBXBXgugugugugugOgPgQgRgSgTgugUgVgWgXgVgVgXgYgXgVgVgXgVgVgZgVhagXgVgWgXgVgVgVgVgXgWgVgXgVgVgXhagVgXgVgVgXgVgVgVgVdqdqejejeyejhcfGxEbdhhirhehehgfGfGfGfGfGipfGfGfGfGfGfGgjfGfGfGdqdqdqdqdqdrdqdqfLfLfLfLfLfLfLgnfLfLgrhohphqhphrgpRohthththtgIgLgMgpececececececececececaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaBXBXBXguguguguhwhxhyhyhyhyhyhzgVgVgVgVhAgVgVgVgVgVgVgVgVgVgVgVgVgVgVgVgVgViTgVgVgVgVgVgVgVgVgVgVgVgVgVgVgVgVgVgVgVdqekejejhBfDfGfGeSbshDfGfGhEBahGfGfGfGfGfGfGfGfGfGfGfGfGfGfGfGdqdqdqdqdqdqdqdqfLhsgEgEhCgEgEhNgEgEhphQymhShThUhVhWhXTZhXhugrhZiBgpececececececececaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -831,7 +829,7 @@ aaaaaaaaaaBXBXBXgugugugugugOgPiaibgSicguidgVgVihgVgVihgVihgVfkihgVgVihgVgVihfkgV
 aaaaaaaaaaBXBXBXBXguguguguguguguguguguguiDiDiDiDhOiXiDiHiHiHiHiHiHiHiHiHiHiHiuiHiHiEiJiJiJiHiHiKiKiKiKiKiKiKiKiKiKeueIeJeueudQdRejejejkufDfGfGfGfGfGfGfGfGhMfoejejjpejejejejejejejejejejejdQdqdRdtdtdtdtdtftfLfLfLfLfLfLfLgGftiOgrgrgriAgrgsgpiRiQiRiRgpgpgpgpeceoeperepepeoecececaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaDbDbDbpsDbiDiDiDiDiDiWiXiXiYiZiXiYiXiYiXiXiDiHiHiJiqiqiJiHiJjAjAiJiHimcFiJiJiJiJfHfJiKjhjijjjkiKjljmiIjceufgfIfVeughdqejejejejejfDfGfGiMhMfGiMgkejgAejejgBejejejejdtdtdtdtdtdtdtdqdqdqdtdtdtdtdtftftjrfLfLfLfLgoftftgpgqgrgrgpgpgpgpgpgpgpgpgpgpgpgpedeFepepepeFepedeveGaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaAfDbDbDbDbDbiDiDiDiDgviXiXjtiXiXiXhniSiXiXiDiHiHjUiqiqkhiHjUjAjAkhiHjziJiJiJiJiJiJjBjCjDjijijEiKjFjijijGeufIfIfIeudEdqejfGgjfGejjeejfDejejfDejjfejjwcXcYjpcYcXejejdqdqdrdqdqdqdtdqdqdqdtdtdtdtdtfsftftlOfLfLlOftfsftfNepepepepeperepepeoepereoepepeoepepepepepepepepeHeGaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaAfAfDbDbDbDbDbiDiDiDjHisgvifjPjQjLDbbWbWeebWZMiHiJmGiqiJiHiJjAjAiJiHiJiJiJiJiJiJiJiJiKjDjijijiiKjVjijiiFeufIfIfIeudqdqejfGeTfGeyejejjfejejkvejejejejcYjZkakmcYejejfpfpfpfpfpfpdtdQdqdRdtdtdtkckckckckckckdkekfkfkfkfepepepepepepepepepepepepepepepepepepepepepepepepeHeGaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaAfAfDbDbDbDbDbiDiDiDjHisgvifjPjQjLDbbWbWhLbWZMiHiJmGiqiJiHiJjAjAiJiHiJiJiJiJiJiJiJiJiKjDjijijiiKjVjijiiFeufIfIfIeudqdqejfGeTfGeyejejjfejejkvejejejejcYjZkakmcYejejfpfpfpfpfpfpdtdQdqdRdtdtdtkckckckckckckdkekfkfkfkfepepepepepepepepepepepepepepepepepepepepepepepepeHeGaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaAfAfDbDbDbDbDbDbiDiDiDiDiDiDiDiDDbiPiVhFbWZMiHjaiHiHjaiHjaiHiHjaiHjUiJiJiJiJiJiJkhiKkijijijiiKkjjijijieukRfIgyeudQeQejfGfGfGejejejejeyejejejejejejcYkaknkycYejejgldqdqdqdqdRdtdqdqdqdtdtdtkckqkrkrkqkcksktkfkfkfkfeXepepfRepepepepepepepephijsfOhijsepepepepepepjseHeGaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaAfAfDbDbDbDbDbpsiDiDiDiDiDiDiDDbjbjbilbWZMmJiJcHiJiJjgiJcHiJiJiJiJiJiJiJiJiJiJiJjijijijijikwjijijikxeueueueueudqdqejejfqejejejejejejejejejejejejcYkzkamKcYejejdqhjdTdqdqkBdtdQdqdRdtdtdtkckrkrkEkFkckekekfkfkfkfkGepepepepepepepeDkHececececececedepepepepepepedfKeGaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaAfAfAfDbDbDbDbDbDbDbDbiDiDiDDbjdjbhYbWZMkQiJiJiJiJefiJiJiJiJjniJiJiJiJiJiJiJiJjijijijijijijijijijijijijkjijidqdqdqdrdqgCdqdrdqdqdrdqdqdrejejejcXcYcYcYcXejejdqiLdzdqdqdqdteUdqdqdtdtdtkckLkrkMkNkOkekPvRvRvRvRvRvRenhiepepkSlSececececececececechfepfOepeFhiecececaaaaaaaaaaaaaaaaaaaaaaaaaa
