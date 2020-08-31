@@ -8,6 +8,7 @@
 
 	outfit_type = /decl/hierarchy/outfit/job/unsc/odst/e5
 	whitelisted_species = list(/datum/species/human)
+	access = list(access_unsc_odst)
 
 	latejoin_at_spawnpoints = TRUE
 	access = list(142,144,110,192,308,309)
@@ -19,6 +20,7 @@
 	spawn_positions = 2
 	selection_color = "#000000"
 	outfit_type = /decl/hierarchy/outfit/job/unsc/odst
+	access = list(access_unsc_odst)
 
 	supervisors = "the Commander"
 
@@ -29,6 +31,7 @@
 	spawn_positions = 1
 	department_flag = COM
 	outfit_type = /decl/hierarchy/outfit/job/unsc/odst/e8
+	access = list(access_unsc_odst)
 
 	supervisors = "UNSC HIGHCOM"
 
