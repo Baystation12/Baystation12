@@ -49,6 +49,7 @@
 		"can_launch" = shuttle.can_launch(),
 		"can_cancel" = shuttle.can_cancel(),
 		"can_force" = shuttle.can_force(),
+		"timeleft" = max(round((shuttle.arrive_time - world.time) / 10, 1), 0),
 		"docking_codes" = shuttle.docking_codes
 	)
 
