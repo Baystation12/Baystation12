@@ -383,6 +383,9 @@
 		)
 
 /obj/machinery/vending/armory/commandovend/armour
+	name = "Stolen Armtech 5530 Armor Variant"
+	desc = "An Armtech vendor with damaged fastenings. Many products appear to be missing and have makeshift product names taped over them."
+	req_access = list(access_soe)
 	products = list(
 					"Armor" = -1,
 					/obj/item/weapon/storage/box/large/armorset/soe = 4,

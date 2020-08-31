@@ -1299,7 +1299,7 @@
 "yY" = (/obj/structure/table/woodentable,/obj/machinery/chemical_dispenser/bar_alc/full,/turf/simulated/floor/plating,/area/faction_base/unsc/odp/maint)
 "yZ" = (/obj/structure/table/woodentable,/obj/machinery/chemical_dispenser/bar_soft/full,/turf/simulated/floor/plating,/area/faction_base/unsc/odp/maint)
 "za" = (/obj/machinery/vending/armory/commandovend/armour{nohack = 0},/turf/simulated/floor/plating,/area/faction_base/unsc/odp/maint)
-"zb" = (/obj/machinery/vending/armory/commandovend{nohack = 0},/turf/simulated/floor/plating,/area/faction_base/unsc/odp/maint)
+"zb" = (/obj/machinery/pointbased_vending/armory/commandovend,/turf/simulated/floor/plating,/area/faction_base/unsc/odp/maint)
 "zc" = (/obj/structure/table/woodentable,/obj/item/weapon/reagent_containers/food/snacks/mint,/obj/item/weapon/storage/box/cups,/obj/item/weapon/reagent_containers/food/snacks/cracker,/turf/simulated/floor/plating,/area/faction_base/unsc/odp/maint)
 "zd" = (/obj/item/weapon/stool/bar/padded,/obj/machinery/light/small{tag = "icon-bulb1 (EAST)"; icon_state = "bulb1"; dir = 4},/turf/simulated/floor/plating,/area/faction_base/unsc/odp/maint)
 "ze" = (/obj/structure/grille,/obj/structure/window/reinforced/tinted,/obj/structure/window/reinforced/tinted{icon_state = "twindow"; dir = 8},/obj/structure/window/reinforced/tinted{icon_state = "twindow"; dir = 1},/turf/simulated/floor/plating,/area/faction_base/unsc/odp/maint)
