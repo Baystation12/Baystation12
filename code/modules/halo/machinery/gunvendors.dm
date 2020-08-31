@@ -70,12 +70,10 @@
 					/obj/item/ammo_magazine/m739/m118 = 1,
 					"Turrets" = -1,
 					/obj/item/turret_deploy_kit/HMG = 0,
-					/obj/item/turret_deploy_kit/chaingun = 0,
 					"Explosives" = -1,
 					/obj/item/weapon/plastique = 0)
 	amounts = list(\
 		/obj/item/turret_deploy_kit/HMG = 2,
-		/obj/item/turret_deploy_kit/chaingun = 2,
 		/obj/item/weapon/plastique = 8
 	)
 

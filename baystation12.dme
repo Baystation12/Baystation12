@@ -2101,6 +2101,7 @@
 #include "code\modules\halo\unsc\jobs\spartan_two.dm"
 #include "code\modules\halo\unsc\jobs\spartan_two_outfits.dm"
 #include "code\modules\halo\unsc\supply\ammo.dm"
+#include "code\modules\halo\unsc\supply\gear.dm"
 #include "code\modules\halo\unsc\supply\weapons.dm"
 #include "code\modules\halo\vehicles\__defs.dm"
 #include "code\modules\halo\vehicles\fuel.dm"
