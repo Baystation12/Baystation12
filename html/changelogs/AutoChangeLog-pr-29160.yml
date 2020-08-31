@@ -1,0 +1,4 @@
+author: "zkxs"
+delete-after: True
+changes: 
+  - bugfix: "Deep Space can no longer move to nullspace with people inside of it"
