@@ -93,3 +93,7 @@
 	name = "MA5B magazine (7.62mm) M118-TTR"
 	desc = "7.62x51mm M118 Tactical Training Rounds (TTR) magazine for the MA5B containing 60 shots."
 	ammo_type = /obj/item/ammo_casing/m118_ttr
+
+/obj/item/weapon/storage/box/ma5b_ttr
+	name = "box of MA5B 7.62mm M118-TTR magazines"
+	startswith = list(/obj/item/ammo_magazine/ma5b/m118_ttr = 7)

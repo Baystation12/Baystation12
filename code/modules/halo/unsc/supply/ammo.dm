@@ -51,6 +51,12 @@
 	contains = list(/obj/item/weapon/storage/box/ma5b_m118 = 2)
 	containername = "\improper MA5B ammo crate (M118)"
 
+/decl/hierarchy/supply_pack/unsc_ammo/ma5b_ttr
+	name = "MA5B 7.62mm M118-TTR magazines (2 boxes)"
+	cost = 300
+	contains = list(/obj/item/weapon/storage/box/ma5b_ttr = 2)
+	containername = "\improper MA5B ammo crate (M118-TTR)"
+
 /* M392 */
 
 /decl/hierarchy/supply_pack/unsc_ammo/m392_m120
@@ -89,11 +95,17 @@
 
 /* M5 */
 
-/decl/hierarchy/supply_pack/unsc_ammo/m5
+/decl/hierarchy/supply_pack/unsc_ammo/m5_m443
 	name = "M5 5mm M443 magazines (2 boxes)"
 	cost = 300
-	contains = list(/obj/item/weapon/storage/box/m5 = 2)
+	contains = list(/obj/item/weapon/storage/box/m5_m443 = 2)
 	containername = "\improper M5 ammo crate (M443)"
+
+/decl/hierarchy/supply_pack/unsc_ammo/m5_m443_rubber
+	name = "M5 5mm M443 rubber magazines (2 boxes)"
+	cost = 100
+	contains = list(/obj/item/weapon/storage/box/m5_rubber = 2)
+	containername = "\improper M5 ammo crate (M443 rubber)"
 
 /* SRS99 */
 

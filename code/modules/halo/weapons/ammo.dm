@@ -2,65 +2,6 @@
 #define SPEEDLOADER 	2
 #define MAGAZINE 		4
 
-//used by: M7 submachine gun
-//todo: these are not supposed to eject spent shell casings on firing, so figure out a way to disable that
-/obj/item/ammo_magazine/m5
-	name = "magazine (5mm) M443 Caseless FMJ"
-	desc = "5x23mm M443 Caseless Full Metal Jacket magazine. Fun sized with no pesky casing!"
-	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
-	icon_state = "m7mag"
-	mag_type = MAGAZINE
-	ammo_type = /obj/item/ammo_casing/m5
-	matter = list(DEFAULT_WALL_MATERIAL = 600)
-	caliber = "5mm"
-	max_ammo = 60
-	multiple_sprites = 1
-
-/obj/item/ammo_magazine/m5_s
-    name = "magazine (5mm) SOCOM M443 Caseless FMJ"
-    desc = "5x23mm M443 Caseless Full Metal Jacket magazine. Fun sized with no pesky casing!"
-    icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
-    icon_state = "m7mag"
-    mag_type = MAGAZINE
-    ammo_type = /obj/item/ammo_casing/m5
-    matter = list(DEFAULT_WALL_MATERIAL = 600)
-    caliber = "5mm"
-    max_ammo = 48
-    multiple_sprites = 1
-
-/obj/item/ammo_magazine/m5/rubber
-	name = "magazine (5mm) M443 Caseless Rubber"
-	desc = "Rubber bullets for riot suppression."
-	ammo_type = /obj/item/ammo_casing/m5/rubber
-
-/obj/item/ammo_casing/m5
-	desc = "A 5mm bullet casing."
-	caliber = "5mm"
-	projectile_type = /obj/item/projectile/bullet/m5
-
-/obj/item/ammo_casing/m5/rubber
-	desc = "A 5mm bullet casing."
-	caliber = "5mm"
-	projectile_type = /obj/item/projectile/bullet/m5/rubber
-
-/obj/item/projectile/bullet/m5
-	damage = 20
-	shield_damage = 20
-
-/obj/item/projectile/bullet/m5/rubber //"rubber" bullets
-	name = "rubber bullet"
-	check_armour = "melee"
-	damage = 5
-	shield_damage = 0
-	agony = 20
-	embed = 0
-	sharp = 0
-
-
-/obj/item/weapon/storage/box/m5
-	name = "box of 5mm M443 magazines"
-	startswith = list(/obj/item/ammo_magazine/m5 = 7)
-
 //SDSS PROJECTILE
 /obj/item/projectile/SDSS_proj
 	name = "hard sound wave"
