@@ -46,10 +46,20 @@
 	desc = "The M7S is a special operations variant of the M7 submachine gun with inbuilt suppressor and host of other attachments. Takes 5mm calibre magazines."
 	silenced = 1
 	is_heavy = 1
-	icon_state = "m7smgs"
-	item_state = "m7s"
+	scoped_accuracy = 1
+	magazine_type = /obj/item/ammo_magazine/m5_s
 	fire_sound = 'code/modules/halo/sounds/SMG_SOCOM_Fire.wav'
 	//fire_sound_burst = 'code/modules/halo/sounds/SMG_SOCOM_Fire.wav'
+	dispersion = list(0.1, 0.3, 0.65, 1.0)
+	one_hand_penalty = 2
+	allowed_magazines = list(/obj/item/ammo_magazine/m5_s, /obj/item/ammo_magazine/m5/rubber)
+
+/obj/item/weapon/gun/projectile/m7_smg/silenced/verb/scope()
+	set category = "Weapon"
+	set name = "Use Scope (Sidearm)"
+	set popup_menu = 1
+
+	toggle_scope(usr, 2.0)
 
 /obj/item/weapon/gun/projectile/m7_smg/silenced/update_icon()
 	if(ammo_magazine)

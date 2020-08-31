@@ -121,7 +121,7 @@
 	icon_state = "bandolier"
 	slots = 10
 	max_w_class = ITEM_SIZE_NORMAL
-
+/*
 /obj/item/clothing/accessory/storage/bandolier/New()
 	..()
 	hold.can_hold = list(
@@ -143,4 +143,4 @@
 		/obj/item/weapon/grenade/smokebomb,
 		/obj/item/weapon/armor_patch/mini,
 	)
-
+*/
