@@ -5,7 +5,7 @@
 	quantity = 10
 	value = 800
 	trader_weight = 20
-	bonus_items = list(/obj/item/ammo_magazine/m127_saphe)
+	bonus_items = list(/obj/item/ammo_magazine/m6d/m224)
 	category = "weapon_unsc"
 
 /datum/trade_item/m9_hedp
@@ -31,7 +31,7 @@
 	quantity = 8
 	value = 4500
 	trader_weight = 5
-	bonus_items = list(/obj/item/ammo_magazine/m762_ap/MA5B)
+	bonus_items = list(/obj/item/ammo_magazine/ma5b/m118)
 	category = "weapon_unsc"
 
 /datum/trade_item/m90_ts
@@ -49,7 +49,7 @@
 	quantity = 8
 	value = 12000
 	trader_weight = 5
-	bonus_items = list(/obj/item/ammo_magazine/m95_sap/br55)
+	bonus_items = list(/obj/item/ammo_magazine/br55/m634)
 	category = "weapon_unsc"
 
 /datum/trade_item/m739_lmg
@@ -58,7 +58,7 @@
 	quantity = 1
 	value = 15000
 	category = "weapon_unsc"
-	bonus_items = list(/obj/item/ammo_magazine/a762_box_ap)
+	bonus_items = list(/obj/item/ammo_magazine/m739/m118)
 
 /datum/trade_item/m392_dmr
 	name = "M392 Designated Marksman Rifle"
@@ -66,7 +66,7 @@
 	quantity = 4
 	value = 17000
 	trader_weight = 5
-	bonus_items = list(/obj/item/ammo_magazine/m762_ap/M392)
+	bonus_items = list(/obj/item/ammo_magazine/m392/m120)
 	category = "weapon_unsc"
 
 /datum/trade_item/m41_ssr

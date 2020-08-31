@@ -21,7 +21,7 @@
 	pda_type = /obj/item/device/pda
 
 	belt = /obj/item/weapon/gun/projectile/m6d_magnum
-	r_pocket = /obj/item/ammo_magazine/m127_saphe
+	r_pocket = /obj/item/ammo_magazine/m6d/m224
 
 	flags = 0
 

@@ -1,7 +1,7 @@
 
-/datum/trade_item/a762_box_ap
-	name = "box magazine (7.62mm) M118 FMJ-AP"
-	item_type = /obj/item/ammo_magazine/a762_box_ap
+/datum/trade_item/m739
+	name = "M739 box magazine (7.62mm) M118"
+	item_type = /obj/item/ammo_magazine/m739/m118
 	quantity = 5
 	value = 50
 	trader_weight = 0
@@ -13,9 +13,9 @@
 	value = 50
 	trader_weight = 0
 
-/datum/trade_item/m762_ap
-	name = "MA5B magazine (7.62mm) M118 FMJ-AP"
-	item_type = /obj/item/ammo_magazine/m762_ap/MA5B
+/datum/trade_item/ma5b
+	name = "MA5B magazine (7.62mm) M118"
+	item_type = /obj/item/ammo_magazine/ma5b/m118
 	quantity = 15
 	value = 50
 	trader_weight = 0
@@ -27,9 +27,9 @@
 	value = 50
 	trader_weight = 0
 
-/datum/trade_item/m127_saphe
-	name = "magazine (12.7mm) M225 SAP-HE"
-	item_type = /obj/item/ammo_magazine/m127_saphe
+/datum/trade_item/m6d
+	name = "M6D magazine (12.7mm) M224"
+	item_type = /obj/item/ammo_magazine/m6d/m224
 	quantity = 20
 	value = 50
 	trader_weight = 0

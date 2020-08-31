@@ -50,7 +50,7 @@
 /decl/hierarchy/supply_pack/olympus/ma5b
 	name = "MA5B Assault Rifle (x2)"
 	contains = list(/obj/item/weapon/gun/projectile/ma5b_ar = 2,\
-		/obj/item/ammo_magazine/m762_ap/MA5B = 6)
+		/obj/item/ammo_magazine/ma5b/m118 = 6)
 	cost = 2000
 	containername = "\improper MA5B crate"
 	containertype = /obj/structure/closet/crate/secure/weapon

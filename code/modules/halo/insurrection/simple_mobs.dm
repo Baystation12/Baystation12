@@ -51,7 +51,7 @@
 	armour_tier = "medium"
 	resistance = 5
 	combat_tier = 2
-	possible_weapons = list(/obj/item/weapon/gun/projectile/ma5b_ar/MA37,/obj/item/weapon/gun/projectile/ma5b_ar/MA3,/obj/item/weapon/gun/projectile/m392_dmr/innie)
+	possible_weapons = list(/obj/item/weapon/gun/projectile/ma37_ar,/obj/item/weapon/gun/projectile/ma3_ar)
 
 /mob/living/simple_animal/hostile/innie/medium/black
 	name = "Gao Trooper (Medium Armoured)"
@@ -78,7 +78,7 @@
 	armour_tier = "heavy"
 	resistance = 10
 	combat_tier = 3
-	possible_weapons = list(/obj/item/weapon/gun/projectile/ma5b_ar/MA3,/obj/item/weapon/gun/projectile/m392_dmr/innie,/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts)
+	possible_weapons = list(/obj/item/weapon/gun/projectile/m392_dmr/innie)
 
 /mob/living/simple_animal/hostile/innie/heavy/black
 	name = "Gao Trooper (Heavy Armoured)"

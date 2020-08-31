@@ -13,8 +13,8 @@
 	possible_weapons = list(\
 	/obj/item/weapon/gun/projectile/m6d_magnum,
 	/obj/item/weapon/gun/projectile/ma5b_ar,
-	/obj/item/weapon/gun/projectile/ma5b_ar/MA37,
-	/obj/item/weapon/gun/projectile/ma5b_ar/MA3,
+	/obj/item/weapon/gun/projectile/ma37_ar,
+	/obj/item/weapon/gun/projectile/ma3_ar,
 	/obj/item/weapon/gun/energy/plasmapistol,
 	)
 
@@ -378,8 +378,8 @@
 	/obj/item/clothing/shoes/marine/emsville_marshall,
 	/obj/item/clothing/gloves/thick/unsc/emsville_marshall,
 	/obj/item/weapon/storage/belt/marine_ammo,
-	/obj/item/weapon/gun/projectile/ma5b_ar/MA37,
-	/obj/item/weapon/gun/projectile/m6d_magnum,
+	/obj/item/weapon/gun/projectile/ma3_ar,
+	/obj/item/weapon/gun/projectile/m6d_magnum/police,
 	/obj/item/weapon/storage/backpack/marine,
 	/obj/item/weapon/melee/baton/humbler,
 	/obj/item/weapon/storage/box/handcuffs
@@ -397,14 +397,14 @@
 
 /obj/structure/closet/secure_closet/ks7_police/ammo/WillContain()
 	return list(\
-	/obj/item/ammo_magazine/m762_ap/MA37,/obj/item/ammo_magazine/m762_ap/MA37,/obj/item/ammo_magazine/m762_ap/MA37,
-	/obj/item/ammo_magazine/m762_ap/MA37,/obj/item/ammo_magazine/m762_ap/MA37,/obj/item/ammo_magazine/m762_ap/MA37,
-	/obj/item/ammo_magazine/m762_ap/MA37,/obj/item/ammo_magazine/m762_ap/MA37,/obj/item/ammo_magazine/m762_ap/MA37,
-	/obj/item/ammo_magazine/m762_ap/MA37,/obj/item/ammo_magazine/m762_ap/MA37,/obj/item/ammo_magazine/m762_ap/MA37,
-	/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,
-	/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,
-	/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,
-	/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe
+	/obj/item/ammo_magazine/ma37/m118,/obj/item/ammo_magazine/ma37/m118,/obj/item/ammo_magazine/ma37/m118,
+	/obj/item/ammo_magazine/ma37/m118,/obj/item/ammo_magazine/ma37/m118,/obj/item/ammo_magazine/ma37/m118,
+	/obj/item/ammo_magazine/ma37/m118,/obj/item/ammo_magazine/ma37/m118,/obj/item/ammo_magazine/ma37/m118,
+	/obj/item/ammo_magazine/ma37/m118,/obj/item/ammo_magazine/ma37/m118,/obj/item/ammo_magazine/ma37/m118,
+	/obj/item/ammo_magazine/m6d/m224,/obj/item/ammo_magazine/m6d/m224,/obj/item/ammo_magazine/m6d/m224,
+	/obj/item/ammo_magazine/m6d/m224,/obj/item/ammo_magazine/m6d/m224,/obj/item/ammo_magazine/m6d/m224,
+	/obj/item/ammo_magazine/m6d/m224,/obj/item/ammo_magazine/m6d/m224,/obj/item/ammo_magazine/m6d/m224,
+	/obj/item/ammo_magazine/m6d/m224,/obj/item/ammo_magazine/m6d/m224,/obj/item/ammo_magazine/m6d/m224
 	)
 
 /obj/structure/closet/secure_closet/ks7_civ
@@ -420,14 +420,16 @@
 /obj/structure/closet/secure_closet/ks7_civ/WillContain()
 	return list(\
 	/obj/item/clothing/suit/storage/marine/emsville_marshall/civ,
-	/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,
-	/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe
+	/obj/item/ammo_magazine/m6d/m224,/obj/item/ammo_magazine/m6d/m224,/obj/item/ammo_magazine/m6d/m224,
+	/obj/item/ammo_magazine/m6d/m224,/obj/item/ammo_magazine/m6d/m224
 	)
 
 
 /obj/machinery/autolathe/ammo_fabricator/police_station
+	/*
 	machine_recipes = newlist(\
 	/datum/autolathe/recipe/m255_sap_he,
 	/datum/autolathe/recipe/m255_sap_hp,
 	/datum/autolathe/recipe/m443_fmj
 	)
+	*/

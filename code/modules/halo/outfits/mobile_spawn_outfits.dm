@@ -92,12 +92,12 @@
 
 /obj/item/weapon/storage/belt/marine_ammo/mobilespawn_ma5
 	startswith = list(\
-	/obj/item/ammo_magazine/m762_ap/MA5B,
-	/obj/item/ammo_magazine/m762_ap/MA5B,
-	/obj/item/ammo_magazine/m762_ap/MA5B,
-	/obj/item/ammo_magazine/m762_ap/MA5B,
-	/obj/item/ammo_magazine/m127_saphe,
-	/obj/item/ammo_magazine/m127_saphe
+	/obj/item/ammo_magazine/ma5b/m118,
+	/obj/item/ammo_magazine/ma5b/m118,
+	/obj/item/ammo_magazine/ma5b/m118,
+	/obj/item/ammo_magazine/ma5b/m118,
+	/obj/item/ammo_magazine/m6d/m224,
+	/obj/item/ammo_magazine/m6d/m224
 	)
 
 /obj/item/weapon/storage/belt/marine_medic/mobilespawn_medic
@@ -114,9 +114,9 @@
 	/obj/item/stack/material/steel/fifty,
 	/obj/item/stack/material/steel/fifty,
 	/obj/item/stack/material/glass/reinforced/fifty,
-	/obj/item/ammo_magazine/m762_ap/MA5B,
-	/obj/item/ammo_magazine/m762_ap/MA5B,
-	/obj/item/ammo_magazine/m762_ap/MA5B
+	/obj/item/ammo_magazine/ma5b/m118,
+	/obj/item/ammo_magazine/ma5b/m118,
+	/obj/item/ammo_magazine/ma5b/m118
 	)
 
 /obj/item/weapon/mop/mobilespawn_janitor
@@ -207,12 +207,12 @@
 
 /obj/item/weapon/storage/belt/marine_ammo/mobilespawn_ma3
 	startswith = list(\
-	/obj/item/ammo_magazine/m762_ap/MA3,
-	/obj/item/ammo_magazine/m762_ap/MA3,
-	/obj/item/ammo_magazine/m762_ap/MA3,
-	/obj/item/ammo_magazine/m762_ap/MA3,
-	/obj/item/ammo_magazine/m127_saphe,
-	/obj/item/ammo_magazine/m127_saphe
+	/obj/item/ammo_magazine/ma3/m118,
+	/obj/item/ammo_magazine/ma3/m118,
+	/obj/item/ammo_magazine/ma3/m118,
+	/obj/item/ammo_magazine/ma3/m118,
+	/obj/item/ammo_magazine/m6d/m224,
+	/obj/item/ammo_magazine/m6d/m224
 	)
 
 /obj/item/weapon/storage/backpack/marine/mobilespawn_engineer_innie
@@ -220,9 +220,9 @@
 	/obj/item/stack/material/steel/fifty,
 	/obj/item/stack/material/steel/fifty,
 	/obj/item/stack/material/glass/reinforced/fifty,
-	/obj/item/ammo_magazine/m762_ap/MA3,
-	/obj/item/ammo_magazine/m762_ap/MA3,
-	/obj/item/ammo_magazine/m762_ap/MA3
+	/obj/item/ammo_magazine/ma3/m118,
+	/obj/item/ammo_magazine/ma3/m118,
+	/obj/item/ammo_magazine/ma3/m118
 	)
 
 /obj/item/clothing/head/helmet/gladiator/combat_ready
@@ -244,7 +244,7 @@
 	head = /obj/item/clothing/head/helmet/innie/heavy/brown
 	suit = /obj/item/clothing/suit/storage/innie/light/brown
 	shoes = /obj/item/clothing/shoes/innie_boots/light/brown
-	back = /obj/item/weapon/gun/projectile/ma5b_ar/MA3
+	back = /obj/item/weapon/gun/projectile/ma3_ar
 	suit_store = /obj/item/weapon/gun/projectile/m6d_magnum
 	belt = /obj/item/weapon/storage/belt/marine_ammo/mobilespawn_ma3
 	gloves = /obj/item/clothing/gloves/thick/unsc
@@ -262,7 +262,7 @@
 	head = /obj/item/clothing/head/welding
 
 	belt = /obj/item/weapon/storage/belt/utility/full
-	suit_store = /obj/item/weapon/gun/projectile/ma5b_ar/MA3
+	suit_store = /obj/item/weapon/gun/projectile/ma3_ar
 	back = /obj/item/weapon/storage/backpack/marine/mobilespawn_engineer_innie
 
 	l_pocket = /obj/item/weapon/armor_patch

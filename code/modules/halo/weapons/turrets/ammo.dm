@@ -31,7 +31,7 @@
 	icon = 'code/modules/halo/weapons/turrets/turret_items.dmi'
 	icon_state = "chaingunturretbox"
 
-	ammo_type = /obj/item/ammo_casing/a762_ap
+	ammo_type = /obj/item/ammo_casing/m118
 	caliber = "a762"
 	mag_type = MAGAZINE
 

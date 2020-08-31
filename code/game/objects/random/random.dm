@@ -285,7 +285,7 @@
 				/obj/item/weapon/gun/projectile/shotgun/doublebarrel/sawn = 3,
 				/obj/item/weapon/gun/projectile/shotgun/pump/combat = 2,
 				/obj/item/weapon/gun/projectile/heavysniper = 1,
-				/obj/item/weapon/gun/projectile/ma5b_ar/MA3 = 4)
+				/obj/item/weapon/gun/projectile/ma3_ar = 4)
 
 /obj/random/projectile/rifle/spawn_choices()
 	return list (/obj/item/weapon/gun/projectile/automatic/c20r = 2,
@@ -295,15 +295,15 @@
 				/obj/item/weapon/gun/projectile/shotgun/doublebarrel = 4,
 				/obj/item/weapon/gun/projectile/shotgun/doublebarrel/sawn = 3,
 				/obj/item/weapon/gun/projectile/shotgun/pump/combat = 2,
-				/obj/item/weapon/gun/projectile/ma5b_ar/MA3 = 4,
+				/obj/item/weapon/gun/projectile/ma3_ar = 4,
 				/obj/item/weapon/gun/projectile/m392_dmr/innie= 3,
 				/obj/item/weapon/gun/projectile/m739_lmg= 3,
 				/obj/item/weapon/gun/projectile/m739_lmg= 1,
-				/obj/item/weapon/gun/projectile/ma5b_ar/MA3 = 3)
+				/obj/item/weapon/gun/projectile/ma3_ar = 3)
 
 /obj/random/projectile/unsc/spawn_choices()
-	return list (/obj/item/weapon/gun/projectile/ma5b_ar/MA37 = 8,
-				/obj/item/weapon/gun/projectile/ma5b_ar/MA3 = 6,
+	return list (/obj/item/weapon/gun/projectile/ma37_ar = 8,
+				/obj/item/weapon/gun/projectile/ma3_ar = 6,
 				/obj/item/weapon/gun/projectile/ma5b_ar = 4,
 				/obj/item/weapon/gun/projectile/br55 = 1,
 				/obj/item/weapon/gun/projectile/m7_smg = 4,
@@ -311,8 +311,6 @@
 				/obj/item/weapon/gun/projectile/shotgun/pump/m45_ts = 5,
 				/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts = 1,
 				/obj/item/weapon/gun/projectile/m392_dmr = 1,
-				/obj/item/weapon/gun/projectile/m6d_magnum/m6b = 8,
-				/obj/item/weapon/gun/projectile/m6d_magnum/m6b/police = 6,
 				/obj/item/weapon/gun/projectile/m6d_magnum = 4,
 				/obj/item/weapon/gun/projectile/m6c_magnum_s = 1)
 
@@ -343,11 +341,7 @@
 				/obj/item/ammo_magazine/c45m/rubber = 4,
 				/obj/item/ammo_magazine/c45m/flash = 4,
 				/obj/item/ammo_magazine/mc9mmt = 3,
-				/obj/item/ammo_magazine/mc9mmt/rubber = 4,
-				/obj/item/ammo_magazine/m127_saphe = 1,
-				/obj/item/ammo_magazine/m127_saphp = 3,
-				/obj/item/ammo_magazine/m762_ap = 1,
-				/obj/item/ammo_magazine/m95_sap = 1)
+				/obj/item/ammo_magazine/mc9mmt/rubber = 4)
 
 /obj/random/action_figure
 	name = "random action figure"

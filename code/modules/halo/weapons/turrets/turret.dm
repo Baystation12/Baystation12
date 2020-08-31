@@ -229,8 +229,8 @@
 	handle_casings = EJECT_CASINGS
 	slot_flags = 0
 
-	caliber = "a762"
-	magazine_type = /obj/item/ammo_magazine/a762_box_ap
+	caliber = "7.62mm"
+	magazine_type = /obj/item/ammo_magazine/m739/m118
 
 	fire_delay = 15
 	burst = 10

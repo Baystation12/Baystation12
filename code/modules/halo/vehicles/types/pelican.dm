@@ -161,7 +161,7 @@
 /obj/item/ammo_magazine/pelican_chaingun
 	max_ammo = 150
 	caliber = "a762"
-	ammo_type = /obj/item/ammo_casing/a762_ap
+	ammo_type = /obj/item/ammo_casing/m118
 
 /obj/vehicles/air/pelican/civ
 	desc = "A civilian pelican lacking in both weapons and armor."

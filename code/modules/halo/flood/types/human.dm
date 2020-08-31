@@ -39,7 +39,7 @@
 	icon_state = "guard_infested"
 	icon_living = "guard_infested"
 	icon_dead = "guard_dead"
-	inventory = list(/obj/item/ammo_magazine/m762_ap/MA37)
+	inventory = list(/obj/item/ammo_magazine/ma5b/m118)
 	move_to_delay = 6
 	health = 100 //Combat forms need to be hardier.
 	maxHealth = 100
