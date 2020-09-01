@@ -8,7 +8,7 @@
 "ah" = (/obj/effect/shuttle_landmark/innie_offsite_supply,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor,/area/shuttle/innie_offsite_supply)
 "ai" = (/obj/effect/shuttle_instance,/turf/simulated/floor,/area/urf_flagship/questareamarker)
 "aj" = (/turf/simulated/wall/r_wall,/area/urf_flagship/powercore)
-"ak" = (/obj/machinery/vending/armory/medical,/turf/simulated/floor/tiled,/area/urf_flagship/medicalbay)
+"ak" = (/obj/machinery/vending/armory/medical/innie,/turf/simulated/floor/tiled,/area/urf_flagship/medicalbay)
 "al" = (/obj/structure/table/standard,/obj/item/weapon/hand_labeler,/obj/item/weapon/storage/box/beakers,/turf/simulated/floor/tiled,/area/urf_flagship/medicalbay)
 "am" = (/turf/simulated/floor/plating,/area/urf_flagship/powercore)
 "an" = (/turf/simulated/wall/r_wall,/area/urf_flagship/Troopbunks)
