@@ -415,7 +415,7 @@
 /obj/machinery/pointbased_vending/armory/innie_armor
 	name = "Insurrectionist Misc Equipment Vendor"
 	desc = "A machine full of spare stolen and cobbled together innie armor and equipment"
-	req_access = list(access_unsc_marine)
+	req_access = list(access_innie)
 	products = list(
 					"Armor" = -1,
 					/obj/item/weapon/storage/box/large/armorset/inniearmor = 0,
