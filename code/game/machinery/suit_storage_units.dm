@@ -107,3 +107,13 @@
 	mask = /obj/item/clothing/mask/breath
 	req_access = list(access_syndicate)
 	islocked = 1
+
+/obj/machinery/suit_storage_unit/cti
+	name = "CTI Voidsuit Storage Unit"
+	suit= /obj/item/clothing/suit/space/void/excavation/verne
+	helmet = /obj/item/clothing/head/helmet/space/void/excavation/verne
+	boots = /obj/item/clothing/shoes/magboots
+	tank = /obj/item/weapon/tank/oxygen
+	mask = /obj/item/clothing/mask/breath
+	req_access = newlist()
+	islocked = 1

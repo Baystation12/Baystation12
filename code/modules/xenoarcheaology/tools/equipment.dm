@@ -14,10 +14,10 @@
 	desc = "A specially shielded voidsuit that insulates against some exotic alien energies, as well as the more mundane dangers of excavation."
 	icon_state = "rig-excavation"
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		energy = ARMOR_ENERGY_RESISTANT, 
-		bomb = ARMOR_BOMB_PADDED, 
-		bio = ARMOR_BIO_SHIELDED, 
+		melee = ARMOR_MELEE_RESISTANT,
+		energy = ARMOR_ENERGY_RESISTANT,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SHIELDED
 	)
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/stack/flag,/obj/item/weapon/storage/excavation,/obj/item/weapon/pickaxe,/obj/item/device/scanner/health,/obj/item/device/measuring_tape,/obj/item/device/ano_scanner,/obj/item/device/depth_scanner,/obj/item/device/core_sampler,/obj/item/device/gps,/obj/item/weapon/pinpointer/radio,/obj/item/device/radio/beacon,/obj/item/weapon/pickaxe/xeno,/obj/item/weapon/storage/bag/fossils)
@@ -28,10 +28,10 @@
 	icon_state = "rig0-excavation"
 	item_state = "excavation-helm"
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		energy = ARMOR_ENERGY_RESISTANT, 
-		bomb = ARMOR_BOMB_PADDED, 
-		bio = ARMOR_BIO_SHIELDED, 
+		melee = ARMOR_MELEE_RESISTANT,
+		energy = ARMOR_ENERGY_RESISTANT,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SHIELDED
 	)
 	light_overlay = "hardhat_light"
@@ -69,3 +69,20 @@
 		/obj/item/device/ano_scanner,
 		/obj/item/taperoll,
 		/obj/item/weapon/pickaxe/xeno/hand)
+
+
+/obj/item/clothing/suit/space/void/excavation/verne
+	name = "CTI voidsuit"
+	desc = "A specially shielded voidsuit that insulates against some exotic alien energies, as well as the more mundane dangers of excavation. This one is marked with CTI colors."
+	icon_state = "rig-vernedig"
+
+/obj/item/clothing/head/helmet/space/void/excavation/verne
+	name = "CTI voidsuit helmet"
+	desc = "A sophisticated voidsuit helmet, capable of protecting the wearer from many exotic alien energies. This one is marked with CTI colors."
+	icon_state = "rig0-vernedig"
+	item_state = "vernedig-helm"
+
+	light_overlay = "hardhat_light"
+
+/obj/item/clothing/suit/space/void/excavation/verne/prepared
+	helmet = /obj/item/clothing/head/helmet/space/void/excavation/verne
