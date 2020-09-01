@@ -131,7 +131,6 @@
 	load_method = MAGAZINE
 	reload_sound = 'code/modules/halo/sounds/cov_needlerifle_reload.ogg'
 	one_hand_penalty = -1
-	fire_delay = 10
 	dispersion = list(0.26)
 	scope_zoom_amount = 3
 	is_scope_variable = 1

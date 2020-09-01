@@ -95,7 +95,7 @@
 	)
 	amounts = list(\
 		/obj/item/weapon/grenade/plasma = 15,
-		/obj/item/weapon/grenade/smokebomb/covenant = 12,
+		/obj/item/weapon/grenade/smokebomb/covenant = 15,
 		/obj/item/turret_deploy_kit/plasturret = 4
 	)
 
@@ -138,6 +138,7 @@
 		/obj/item/weapon/plastique/covenant = 8,
 		/obj/item/weapon/armor_patch/cov = 8,
 		/obj/item/weapon/armor_patch/mini/cov = 10,
+		/obj/item/clothing/accessory/storage/IFAK/cov = 20,
 		/obj/item/weapon/pinpointer/artifact = 3
 	)
 
@@ -147,7 +148,7 @@
 	products = list(
 		"Melee" = -1,
 		/obj/item/weapon/melee/energy/elite_sword/dagger = 0,
-		/obj/item/weapon/grav_hammer/gravless = 1,
+		/obj/item/weapon/grav_hammer/gravless = 0,
 		"Guns" = -1,
 		/obj/item/weapon/gun/energy/plasmapistol = 3,
 		/obj/item/weapon/gun/projectile/mauler = 4,
@@ -159,7 +160,14 @@
 		/obj/item/ammo_magazine/mauler = 0,
 		/obj/item/weapon/grenade/brute_shot = 0,
 		"Explosives" = -1,
-		/obj/item/weapon/grenade/smokebomb/covenant = 12
+		/obj/item/weapon/grenade/smokebomb/covenant = 0,
+		/obj/item/weapon/grenade/plasma = 0,
+		/obj/item/weapon/grenade/frag/spike = 0,
+	)
+	amounts = list(
+		/obj/item/weapon/grenade/smokebomb/covenant = 15,
+		/obj/item/weapon/grenade/plasma = 15,
+		/obj/item/weapon/grenade/frag/spike = 15,
 	)
 
 /obj/machinery/pointbased_vending/armory/covenant/jiralhanae/equipment // Equipment for Jiralhanae
@@ -195,6 +203,7 @@
 		/obj/item/dumb_ai_chip/cov = 2,
 		/obj/item/weapon/armor_patch/cov = 8,
 		/obj/item/weapon/armor_patch/mini/cov = 10,
+		/obj/item/clothing/accessory/storage/IFAK/cov = 20,
 		/obj/item/weapon/pinpointer/artifact = 2,
 	)
 
@@ -256,6 +265,7 @@
 		/obj/item/weapon/pickaxe/plasma_drill = 1,
 		/obj/item/weapon/plastique/covenant = 6,
 		/obj/item/weapon/armor_patch/cov = 12,
+		/obj/item/clothing/accessory/storage/IFAK/cov = 20,
 		/obj/item/weapon/pinpointer/artifact = 2
 	)
 
@@ -322,6 +332,7 @@
 		/obj/item/weapon/plastique/covenant = 6,
 		/obj/item/weapon/armor_patch/cov = 12,
 		/obj/item/weapon/armor_patch/mini/cov = 16,
+		/obj/item/clothing/accessory/storage/IFAK/cov = 20,
 		/obj/item/weapon/pinpointer/artifact = 1
 	)
 
@@ -351,6 +362,7 @@
 		/obj/item/weapon/plastique/covenant = 6,
 		/obj/item/weapon/armor_patch/cov = 16,
 		/obj/item/weapon/armor_patch/mini/cov = 20,
+		/obj/item/clothing/accessory/storage/IFAK/cov = 20,
 		/obj/item/weapon/pinpointer/artifact = 1
 	)
 
@@ -364,9 +376,10 @@
 		/obj/item/weapon/gun/energy/plasmapistol = 3,
 		/obj/item/weapon/gun/projectile/needler = 4,
 		/obj/item/weapon/gun/energy/plasmarifle = 7,
-		/obj/item/weapon/gun/projectile/type51carbine = 7,
+		/obj/item/weapon/gun/projectile/type51carbine = 6,
 		"Ammunition" = -1,
-
+		/obj/item/ammo_magazine/needles = 0,
+		/obj/item/ammo_magazine/type51mag = 0,
 		"Explosives" = -1,
 		/obj/item/weapon/grenade/smokebomb/covenant = 0,
 		/obj/item/weapon/grenade/plasma = 0

@@ -6,12 +6,6 @@
 	ai_access_level = 3
 	nohack = 1
 
-/obj/machinery/vending/armory/attackby(var/atom/A,var/mob/user)
-	if(A in products)
-		products[A] = products[A] + 1
-	else
-		return ..()
-
 /obj/machinery/pointbased_vending/armory/hybrid // Both ammo, and guns!
 	name = "UNSC Equipment Rack"
 	desc = "Storage for basic weapons and ammunition, alongside some equipment."
@@ -141,6 +135,7 @@
 		/obj/item/weapon/storage/box/large/armorset/medic/brown/visor = 3,
 		/obj/item/weapon/storage/box/large/armorset/medic/white = 3,
 		/obj/item/weapon/storage/box/large/armorset/eva = 3,
+		/obj/item/clothing/accessory/storage/IFAK = 20,
 		/obj/item/flight_item/bullfrog_pack = 1
 		)
 
@@ -282,6 +277,7 @@
 					/obj/item/weapon/storage/box/large/armorset/odst/medic = 2,
 					/obj/item/weapon/storage/box/large/armorset/odst/engineer = 2,
 					/obj/item/weapon/storage/box/large/armorset/odst/squadleader = 2,
+					/obj/item/clothing/accessory/storage/IFAK = 20,
 					/obj/item/weapon/storage/firstaid/unsc = 6,
 					)
 
@@ -387,6 +383,9 @@
 		)
 
 /obj/machinery/vending/armory/commandovend/armour
+	name = "Stolen Armtech 5530 Armor Variant"
+	desc = "An Armtech vendor with damaged fastenings. Many products appear to be missing and have makeshift product names taped over them."
+	req_access = list(access_soe)
 	products = list(
 					"Armor" = -1,
 					/obj/item/weapon/storage/box/large/armorset/soe = 4,
@@ -443,6 +442,7 @@
 					/obj/item/weapon/armor_patch/mini = 0
 					)
 	amounts = list(\
+		/obj/item/clothing/accessory/storage/IFAK = 20,
 		/obj/item/flight_item/bullfrog_pack = 1,
 		)
 

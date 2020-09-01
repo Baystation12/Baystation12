@@ -25,7 +25,6 @@
 	access = list(access_covenant, access_covenant_command, access_covenant_slipspace, access_covenant_cargo)
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/unggoy)
-	pop_balance_mult = 1
 
 /datum/job/covenant/unggoy_heavy
 	title = "Unggoy Heavy"
@@ -36,7 +35,6 @@
 	access = list(access_covenant, access_covenant_command, access_covenant_slipspace)
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/unggoy)
-	pop_balance_mult = 1
 
 /datum/job/covenant/unggoy_deacon
 	title = "Unggoy Deacon"
@@ -46,7 +44,7 @@
 	access = list(access_covenant, access_covenant_command, access_covenant_slipspace, access_covenant_cargo)
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/unggoy)
-	pop_balance_mult = 1
+	pop_balance_mult = 1.5
 
 
 

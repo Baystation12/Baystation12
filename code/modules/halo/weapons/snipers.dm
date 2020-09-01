@@ -71,7 +71,6 @@
 	w_class = ITEM_SIZE_LARGE
 	dispersion = list(0.26)
 	hud_bullet_row_num = 10
-	fire_delay = 10
 	accuracy = -1
 	scoped_accuracy = 2
 	var/on = 0
