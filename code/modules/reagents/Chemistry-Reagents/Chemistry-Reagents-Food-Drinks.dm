@@ -1151,6 +1151,21 @@
 	glass_name = "grenadine syrup"
 	glass_desc = "Sweet and tangy, a bar syrup used to add color or flavor to drinks."
 
+/datum/reagent/drink/maplesyrup
+	name = "Maple Syrup"
+	description = "Canada is still going at it, no one can stop them."
+	taste_description = "nutty, sugary goodness"
+	color = "#b24403"
+
+	glass_name = "maple syrup"
+	glass_desc = "Thick and very sweet, the perfect Canadian treat to enjoy under a clear sky."
+
+/datum/reagent/drink/maplesyrup/affect_ingest(mob/living/carbon/M, alien, removed)
+	..()
+	if(alien == IS_UNATHI)
+		var/datum/species/unathi/S = M.species
+		S.handle_sugar(M, src, 0.66)	//Maple syrup is about 2/3 sugar in real life
+
 /datum/reagent/drink/space_cola
 	name = "Space Cola"
 	description = "A refreshing beverage."

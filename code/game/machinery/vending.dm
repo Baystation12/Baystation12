@@ -631,6 +631,7 @@
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/limejuice = 2,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/lemonjuice = 2,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/unathijuice = 2,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/maplesyrup = 2,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/tonic = 15,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/cream = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/sodawater = 15,

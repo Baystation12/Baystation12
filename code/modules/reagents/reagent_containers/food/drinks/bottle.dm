@@ -8,7 +8,7 @@
 	item_state = "broken_beer" //Generic held-item sprite until unique ones are made.
 	force = 5
 	var/smash_duration = 5 //Directly relates to the 'weaken' duration. Lowered by armor (i.e. helmets)
-	var/isGlass = 1 //Whether the 'bottle' is made of glass or not so that milk cartons dont shatter when someone gets hit by it
+	var/isGlass = TRUE //Whether the 'bottle' is made of glass or not so that milk cartons dont shatter when someone gets hit by it
 
 	var/obj/item/weapon/reagent_containers/glass/rag/rag = null
 	var/rag_underlay = "rag"
@@ -528,7 +528,7 @@
 	icon_state = "orangejuice"
 	item_state = "carton"
 	center_of_mass = "x=16;y=7"
-	isGlass = 0
+	isGlass = FALSE
 	New()
 		..()
 		reagents.add_reagent(/datum/reagent/drink/juice/orange, 100)
@@ -539,7 +539,7 @@
 	icon_state = "cream"
 	item_state = "carton"
 	center_of_mass = "x=16;y=8"
-	isGlass = 0
+	isGlass = FALSE
 	New()
 		..()
 		reagents.add_reagent(/datum/reagent/drink/milk/cream, 100)
@@ -550,7 +550,7 @@
 	icon_state = "tomatojuice"
 	item_state = "carton"
 	center_of_mass = "x=16;y=8"
-	isGlass = 0
+	isGlass = FALSE
 	New()
 		..()
 		reagents.add_reagent(/datum/reagent/drink/juice/tomato, 100)
@@ -561,7 +561,7 @@
 	icon_state = "limejuice"
 	item_state = "carton"
 	center_of_mass = "x=16;y=8"
-	isGlass = 0
+	isGlass = FALSE
 	New()
 		..()
 		reagents.add_reagent(/datum/reagent/drink/juice/lime, 100)
@@ -572,7 +572,7 @@
 	icon_state = "hrukhzaextract"
 	item_state = "carton"
 	center_of_mass = "x=16;y=8"
-	isGlass = 0
+	isGlass = FALSE
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/unathijuice/Initialize()
 	.=..()
@@ -584,11 +584,21 @@
 	icon_state = "lemonjuice"
 	item_state = "carton"
 	center_of_mass = "x=16;y=8"
-	isGlass = 0
+	isGlass = FALSE
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/lemonjuice/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/drink/juice/lemon, 100)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/maplesyrup
+	name = "maple syrup bottle"
+	desc = "Sweet, syrupy goodness."
+	icon_state = "maplesyrup"
+	center_of_mass = "x=16;y=8"
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/maplesyrup/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/drink/maplesyrup, 100)
 
 //Small bottles
 /obj/item/weapon/reagent_containers/food/drinks/bottle/small
@@ -672,7 +682,7 @@
 	name = "oil jug"
 	desc = "A plastic jug of engine oil. Not for human consumption."
 	icon_state = "oil"
-	isGlass = 0
+	isGlass = FALSE
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/oiljug/New()
 	. = ..()
