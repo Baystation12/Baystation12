@@ -14,8 +14,8 @@ var/list/organ_cache = list()
 	// Status tracking.
 	var/status = 0                    // Various status flags (such as robotic)
 	var/vital                         // Lose a vital limb, die immediately.
-	var/vulnerable					  // Indicates if the organ is vulnerable (was recently hurt)
-
+	var/vulnerable                    // Whether or not we're eligible to take extra damage.
+	
 	// Reference data.
 	var/mob/living/carbon/human/owner // Current mob owning the organ.
 	var/datum/dna/dna                 // Original DNA.
@@ -27,6 +27,7 @@ var/list/organ_cache = list()
 	var/max_damage = 30               // Damage cap
 	var/rejecting                     // Is this organ already being rejected?
 	var/soreness = 0				  // Current soreness to the organ
+	var/max_soreness                  // The maximum value of soreness. Defaults to 10 * max_damage.
 
 	var/death_time
 
@@ -61,6 +62,9 @@ var/list/organ_cache = list()
 		min_broken_damage = Floor(max_damage / 2)
 	else
 		max_damage = min_broken_damage * 2
+
+	if(!max_soreness)
+		max_soreness = max_damage * 10
 
 	if(istype(holder))
 		owner = holder
@@ -140,6 +144,9 @@ var/list/organ_cache = list()
 		handle_antibiotics()
 		handle_rejection()
 		handle_germ_effects()
+
+/obj/item/organ/proc/process_soreness()
+	return
 
 /obj/item/organ/proc/is_preserved()
 	if(istype(loc,/obj/item/organ))

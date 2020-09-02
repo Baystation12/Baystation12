@@ -560,32 +560,31 @@ This function completely restores a damaged organ to perfect condition.
 		return TRUE
 	return FALSE
 
-//This proc handles all the soreness related logic.
-/obj/item/organ/external/proc/process_soreness()
+/obj/item/organ/external/process_soreness()
 	if(!soreness || damage)
 		return
 	vulnerable = TRUE
 	switch(soreness)
-		if(101 to 200)
+		if(max_soreness / 4 to max_soreness / 2)
 			if(pain <= 20)
 				add_pain(15)
-		if(201 to INFINITY)
+		if(max_soreness / 2 to max_soreness)
 			if(pain <=30)
 				add_pain(25)
 
-	if(owner.life_tick % 10 == 0)	//Don't spam the chat
+	if(prob(5))	//Don't spam the chat
 		switch(soreness)
-			if(1 to 100)
-				to_chat(owner, SPAN_WARNING("Your [name] feels sore."))
-			if(101 to 200)
-				to_chat(owner, SPAN_WARNING("Your [name] throbs with pain."))
-			if(201 to INFINITY)
-				to_chat(owner, SPAN_DANGER("Your [name] hurts very badly!"))
+			if(1 to max_soreness / 4)
+				owner.custom_pain(SPAN_WARNING("Your [name] feels sore."), soreness / 5)
+			if(max_soreness / 4 to max_soreness / 2)
+				owner.custom_pain(SPAN_WARNING("Your [name] throbs with pain."), soreness / 5)
+			if(max_soreness / 2 to max_soreness)
+				owner.custom_pain(SPAN_DANGER("Your [name] hurts very badly!"), soreness / 5)
 
 	soreness = Floor(soreness * 0.98) - 1	//Slower decrease as soreness lowers. Faster if in bed
 	if(owner.buckled && owner.buckled.type == /obj/structure/bed)	//TODO Comfiness
 		soreness -= 2
-	if(soreness <=0)
+	if(soreness <= 0)
 		soreness = 0
 		vulnerable = FALSE
 
@@ -602,7 +601,7 @@ This function completely restores a damaged organ to perfect condition.
 		if(owner.life_tick % soreness_update_accuracy == 0)
 			if(!BP_IS_ROBOTIC(src))
 				if(damage * 10 > soreness)
-					soreness = 10 * damage  //A larger soreness number allows for fine tuning the decrease.
+					soreness = min(10 * damage, max_soreness)
 				process_soreness()
 
 

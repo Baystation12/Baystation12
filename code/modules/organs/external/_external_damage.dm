@@ -13,10 +13,10 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 	brute = round(brute * get_brute_mod(damage_flags), 0.1)
 	burn = round(burn * get_burn_mod(damage_flags), 0.1)
 
-	//Vulnerable (currently sore from recent damages) organs takes more damage.
-	if(vulnerable)
-		brute = round(brute * 1.2, 0.1)
-		burn = round(burn * 1.2, 0.1)
+	//Sore organs take extra damage.
+	if(vulnerable && soreness && damage < soreness * 10)
+		brute = round(brute * 1 + soreness / 100)
+		burn  = round(brute * 1 + soreness / 100)
 
 	if((brute <= 0) && (burn <= 0))
 		return 0
