@@ -151,6 +151,7 @@
 		/obj/item/weapon/melee/baton/loaded,
 		/obj/item/weapon/reagent_containers/spray/pepper,
 		/obj/item/taperoll/police,
+		/obj/item/clothing/accessory/storage/black_vest,
 		/obj/item/device/tape/random = 3,
 		/obj/item/clothing/glasses/sunglasses/sechud/toggle,
 		/obj/item/clothing/glasses/sunglasses/sechud/goggles,
