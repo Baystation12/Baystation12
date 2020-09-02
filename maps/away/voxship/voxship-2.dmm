@@ -2308,7 +2308,7 @@
 /obj/machinery/cell_charger,
 /obj/item/weapon/cell/crap,
 /obj/item/weapon/cell/high,
-/obj/item/weapon/cell/apc,
+/obj/item/weapon/cell/standard,
 /obj/item/clothing/gloves/vox,
 /obj/random/advdevice,
 /obj/random/advdevice,

@@ -12,7 +12,7 @@
 		/obj/item/weapon/stock_parts/keyboard = 1,
 		/obj/item/weapon/stock_parts/power/apc/buildable = 1,
 		/obj/item/weapon/stock_parts/power/battery/buildable/stock = 1,
-		/obj/item/weapon/cell = 1
+		/obj/item/weapon/cell/standard = 1
 	)
 
 /obj/item/weapon/stock_parts/circuitboard/portable_scrubber/pump

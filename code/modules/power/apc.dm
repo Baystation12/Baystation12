@@ -94,7 +94,7 @@
 	var/needs_powerdown_sound
 	var/area/area
 	var/areastring = null
-	var/cell_type = /obj/item/weapon/cell/apc
+	var/cell_type = /obj/item/weapon/cell/standard
 	var/opened = 0 //0=closed, 1=opened, 2=cover removed
 	var/shorted = 0
 	var/lighting = POWERCHAN_ON_AUTO

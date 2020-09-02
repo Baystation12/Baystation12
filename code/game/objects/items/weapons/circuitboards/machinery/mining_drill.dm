@@ -9,7 +9,7 @@
 		/obj/item/weapon/stock_parts/micro_laser = 1)
 	additional_spawn_components = list(
 		/obj/item/weapon/stock_parts/power/battery/buildable/stock,
-		/obj/item/weapon/cell = 1
+		/obj/item/weapon/cell/standard = 1
 	)	
 
 /obj/item/weapon/stock_parts/circuitboard/miningdrillbrace

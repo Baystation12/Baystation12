@@ -18,6 +18,8 @@
 
 /obj/item/weapon/cell/Initialize()
 	. = ..()
+	if(type == /obj/item/weapon/cell)
+		return INITIALIZE_HINT_QDEL
 	if(isnull(charge))
 		charge = maxcharge
 	update_icon()
@@ -132,6 +134,11 @@
 	maxcharge = 100
 	matter = list(MATERIAL_STEEL = 70, MATERIAL_GLASS = 5)
 
+/obj/item/weapon/cell/device/Initialize()
+	. = ..()
+	if (type == /obj/item/weapon/cell/device)
+		return INITIALIZE_HINT_QDEL
+
 /obj/item/weapon/cell/device/variable/Initialize(mapload, charge_amount)
 	maxcharge = charge_amount
 	return ..(mapload)
@@ -161,16 +168,8 @@
 	name = "standard power cell"
 	desc = "A standard and relatively cheap power cell, commonly used."
 	origin_tech = list(TECH_POWER = 0)
-	maxcharge = 250
-	matter = list(MATERIAL_STEEL = 700, MATERIAL_GLASS = 40, MATERIAL_PLASTIC = 20)
-
-/obj/item/weapon/cell/apc
-	name = "APC power cell"
-	desc = "A special power cell designed for heavy-duty use in area power controllers."
-	origin_tech = list(TECH_POWER = 1)
 	maxcharge = 500
-	matter = list(MATERIAL_STEEL = 700, MATERIAL_GLASS = 50, MATERIAL_PLASTIC = 20)
-
+	matter = list(MATERIAL_STEEL = 700, MATERIAL_GLASS = 40, MATERIAL_PLASTIC = 20)
 
 /obj/item/weapon/cell/high
 	name = "advanced power cell"
@@ -182,15 +181,6 @@
 
 /obj/item/weapon/cell/high/empty
 	charge = 0
-
-/obj/item/weapon/cell/exosuit
-	name = "exosuit power cell"
-	desc = "A special power cell designed for heavy-duty use in industrial exosuits."
-	origin_tech = list(TECH_POWER = 3)
-	icon_state = "hcell"
-	maxcharge = 1500
-	matter = list(MATERIAL_STEEL = 700, MATERIAL_GLASS = 70, MATERIAL_ALUMINIUM = 20)
-
 
 /obj/item/weapon/cell/super
 	name = "enhanced power cell"

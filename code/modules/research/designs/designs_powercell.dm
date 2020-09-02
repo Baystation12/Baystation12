@@ -23,7 +23,7 @@
 	name = "basic"
 	id = "basic_cell"
 	req_tech = list(TECH_POWER = 1)
-	build_path = /obj/item/weapon/cell
+	build_path = /obj/item/weapon/cell/standard
 	sort_string = "DAAAA"
 
 /datum/design/item/powercell/high

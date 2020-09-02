@@ -35,7 +35,7 @@
 	QDEL_NULL(bcell)
 
 /obj/item/weapon/defibrillator/loaded //starts with regular power cell for R&D to replace later in the round.
-	bcell = /obj/item/weapon/cell/apc
+	bcell = /obj/item/weapon/cell/standard
 
 /obj/item/weapon/defibrillator/on_update_icon()
 	var/list/new_overlays = list()
