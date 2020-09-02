@@ -359,3 +359,24 @@
 #define CAN_INJECT 1
 #define INJECTION_PORT 2
 #define INJECTION_PORT_DELAY 3 SECONDS // used by injectors to apply delay due to searching for a port on the injectee's suit
+
+
+//used by /proc/do_after
+#define DO_USER_CAN_MOVE     0x1
+#define DO_USER_CAN_TURN     0x2
+#define DO_USER_UNIQUE_ACT   0x4
+#define DO_USER_SAME_HAND    0x8
+#define DO_TARGET_CAN_MOVE   0x10
+#define DO_TARGET_CAN_TURN   0x20
+#define DO_TARGET_UNIQUE_ACT 0x40
+#define DO_SHOW_PROGRESS     0x80
+#define DO_PUBLIC_PROGRESS   0x100
+
+#define DO_BOTH_CAN_MOVE     (DO_USER_CAN_MOVE | DO_TARGET_CAN_MOVE)
+#define DO_BOTH_CAN_TURN     (DO_USER_CAN_TURN | DO_TARGET_CAN_TURN)
+#define DO_BOTH_UNIQUE_ACT   (DO_USER_UNIQUE_ACT | DO_TARGET_UNIQUE_ACT)
+#define DO_DEFAULT           (DO_SHOW_PROGRESS | DO_USER_SAME_HAND | DO_BOTH_CAN_TURN)
+
+#define DO_MISSING_USER      (-1)
+#define DO_MISSING_TARGET    (-2)
+#define DO_INCAPACITATED     (-3)
