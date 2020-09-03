@@ -152,6 +152,12 @@
 	var/obj/item/weapon/sample/S = new evidence_path(get_turf(user), supplied)
 	to_chat(user, "<span class='notice'>You transfer [S.evidence.len] [S.evidence.len > 1 ? "[evidence_type]s" : "[evidence_type]"] to \the [S].</span>")
 
+/obj/item/weapon/forensics/sample_kit/resolve_attackby(atom/A, mob/user, click_params)
+	if (user.a_intent != I_HELP) // Prevents putting sample kits in bags, on racks/tables, etc when trying to take samples
+		return FALSE
+
+	. = ..()
+
 /obj/item/weapon/forensics/sample_kit/afterattack(var/atom/A, var/mob/user, var/proximity)
 	if(!proximity)
 		return
