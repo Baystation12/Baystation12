@@ -1,0 +1,4 @@
+author: "Hubblenaut"
+delete-after: True
+changes: 
+  - tweak: "Underwear can now be equipped with the equip hotkey 'E'."
