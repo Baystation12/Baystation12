@@ -1,0 +1,5 @@
+author: "Albens"
+delete-after: True
+changes: 
+  - bugfix: "Ascent Exosuit gauntlets are now insulated."
+  - maptweak: "Modified some of the Ascent seedship's rooms."
