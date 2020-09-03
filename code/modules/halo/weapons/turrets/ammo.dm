@@ -1,7 +1,7 @@
 
 //HMG AMMO DEFINES//
 /obj/item/ammo_magazine/HMG_boxmag
-	name = "box magazine (12.7mm) HE HV AP"
+	name = "HMG box magazine (12.7mm) HEHVAP"
 	desc = "High Explosive, High Velocity, Armour Piercing. This has it all."
 
 	icon = 'code/modules/halo/weapons/turrets/turret_items.dmi'
@@ -25,7 +25,7 @@
 
 //CHAINGUN AMMO DEFINES//
 /obj/item/ammo_magazine/chaingun_boxmag
-	name = "box magazine (7.62mm) AP"
+	name = "Chaingun box magazine (7.62mm) AP"
 	desc = "A large box filled with 7.62mm AP ammo."
 
 	icon = 'code/modules/halo/weapons/turrets/turret_items.dmi'

@@ -31,22 +31,22 @@
 /obj/structure/closet/crate/random/unsc_guns
 	name = "Weapons Capsule"
 	possible_spawns = list(\
-		/obj/item/weapon/gun/projectile/ma5b_ar = /obj/item/ammo_magazine/m762_ap/MA5B,\
-		/obj/item/weapon/gun/projectile/m7_smg = /obj/item/ammo_magazine/m5,\
+		/obj/item/weapon/gun/projectile/ma5b_ar = /obj/item/ammo_magazine/ma5b/m118,\
+		/obj/item/weapon/gun/projectile/m7_smg = /obj/item/ammo_magazine/m7/m443,\
 		/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts = /obj/item/ammo_box/shotgun)
 
 /obj/structure/closet/crate/random/unsc_guns/WillContain()
 	return list(/obj/item/weapon/gun/projectile/m6d_magnum,\
-		/obj/item/ammo_magazine/m127_saphe,\
-		/obj/item/ammo_magazine/m127_saphe)
+		/obj/item/ammo_magazine/m739/m118,\
+		/obj/item/ammo_magazine/m739/m118)
 
 /obj/structure/closet/crate/random/unsc_advguns
 	name = "Advanced Weapons Capsule"
 	num_contents = 2
 	possible_spawns = list(
-		/obj/item/weapon/gun/projectile/br85 = /obj/item/ammo_magazine/m95_sap,\
-		/obj/item/weapon/gun/projectile/m392_dmr = /obj/item/ammo_magazine/m762_ap,\
-		/obj/item/weapon/gun/projectile/m739_lmg = /obj/item/ammo_magazine/a762_box_ap)
+		/obj/item/weapon/gun/projectile/br85 = /obj/item/ammo_magazine/br85/m634,\
+		/obj/item/weapon/gun/projectile/m392_dmr = /obj/item/ammo_magazine/m392/m120,\
+		/obj/item/weapon/gun/projectile/m739_lmg = /obj/item/ammo_magazine/m739/m118)
 
 /obj/structure/closet/crate/random/unsc_missile
 	name = "SPNKr Capsule"
@@ -65,7 +65,7 @@
 /obj/structure/closet/crate/random/unsc_sniper
 	name = "Marksman Capsule"
 	num_contents = 1
-	possible_spawns = list(/obj/item/weapon/gun/projectile/srs99_sniper = /obj/item/ammo_magazine/m145_ap)
+	possible_spawns = list(/obj/item/weapon/gun/projectile/srs99_sniper = /obj/item/ammo_magazine/srs99/m232)
 
 /obj/structure/closet/crate/random/unsc_landmine
 	name = "Landmines Capsule"
@@ -89,8 +89,8 @@
 	if(prob(50))
 		var/obj/item/weapon/storage/belt/B = new /obj/item/weapon/storage/belt/marine_ammo(src)
 		new /obj/item/weapon/gun/projectile/m6d_magnum(B)
-		new /obj/item/ammo_magazine/m127_saphe(B)
-		new /obj/item/ammo_magazine/m127_saphe(B)
+		new /obj/item/ammo_magazine/m6d/m224(B)
+		new /obj/item/ammo_magazine/m6d/m224(B)
 	else
 		var/obj/item/weapon/storage/belt/B = new /obj/item/weapon/storage/belt/marine_medic(src)
 		new /obj/item/weapon/storage/firstaid/unsc(B)

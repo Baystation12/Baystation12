@@ -105,8 +105,8 @@
 	/obj/item/weapon/storage/firstaid/unsc,
 	/obj/item/weapon/storage/firstaid/unsc,
 	/obj/item/weapon/storage/firstaid/combat/unsc,
-	/obj/item/ammo_magazine/m5,
-	/obj/item/ammo_magazine/m5
+	/obj/item/ammo_magazine/m7/m443,
+	/obj/item/ammo_magazine/m7/m443
 	)
 
 /obj/item/weapon/storage/backpack/marine/mobilespawn_engineer

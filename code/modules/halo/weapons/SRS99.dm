@@ -61,7 +61,7 @@
 	max_ammo = 4
 	multiple_sprites = 1
 
-//M232 Ammunition
+//M232 Ammunition APFSDS
 
 /obj/item/ammo_magazine/srs99/m232
 	name = "SRS99 magazine (14.5mm) M232"
@@ -72,13 +72,35 @@
 	name = "box of SRS99 (14.5mm) M232 magazines"
 	startswith = list(/obj/item/ammo_magazine/srs99/m232 = 4)
 
-//M232 tracerles Ammunition
+//M233 tracerless Ammunition
 
-/obj/item/ammo_magazine/srs99/m232_tracerless
-	name = "SRS99 magazine (14.5mm) M232 tracerless"
-	desc = "14.5×114mm M232 armor piercing, fin-stabilized, discarding sabot (AP-FS-DS) magazine for the SRS99 containing 4 rounds. No tracers but reduced penetration."
-	ammo_type = /obj/item/ammo_casing/m232
+/obj/item/ammo_magazine/srs99/m233
+	name = "SRS99 magazine (14.5mm) M233"
+	desc = "14.5×114mm M233 armor piercing, fin-stabilized, discarding sabot (AP-FS-DS) magazine for the SRS99 containing 4 rounds. Reduced velocity and penetration but no tracers."
+	ammo_type = /obj/item/ammo_casing/m233
 
-/obj/item/weapon/storage/box/srs99_m232_tracerless
+/obj/item/weapon/storage/box/srs99_m233
 	name = "box of SRS99 (14.5mm) M232 tracerless magazines"
-	startswith = list(/obj/item/ammo_magazine/srs99/m232_tracerless = 4)
+	startswith = list(/obj/item/ammo_magazine/srs99/m233 = 4)
+
+//M234 HVAP ammounition
+
+/obj/item/ammo_magazine/srs99/m234
+	name = "SRS99 magazine (14.5mm) M234"
+	desc = "14.5×114mm M234 high velocity armor piercing (HVAP) magazine for the SRS99 containing 4 rounds. Take the hat off an Elite at 2000 yards."
+	ammo_type = /obj/item/ammo_casing/m234
+
+/obj/item/weapon/storage/box/srs99_m234
+	name = "box of SRS99 (14.5mm) M234 magazines"
+	startswith = list(/obj/item/ammo_magazine/srs99/m234 = 4)
+
+//M235 HEAP ammunition
+
+/obj/item/ammo_magazine/srs99/m235
+	name = "SRS99 magazine (14.5mm) M235"
+	desc = "14.5×114mm M232 high explosive armor piercing (HEAP) magazine for the SRS99 containing 4 rounds. High damage rounds."
+	ammo_type = /obj/item/ammo_casing/m235
+
+/obj/item/weapon/storage/box/srs99_m235
+	name = "box of SRS99 (14.5mm) M235 magazines"
+	startswith = list(/obj/item/ammo_magazine/srs99/m235 = 4)

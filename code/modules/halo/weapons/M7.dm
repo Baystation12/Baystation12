@@ -13,13 +13,13 @@
 	//fire_sound_burst = 'code/modules/halo/sounds/SMG_Short_Burst_Sound_Effect.ogg'
 	reload_sound = 'code/modules/halo/sounds/SMG_Reload_New.wav'
 	load_method = MAGAZINE
-	magazine_type = /obj/item/ammo_magazine/m5
+	magazine_type = /obj/item/ammo_magazine/m7/m443
 	handle_casings = CASELESS
 	burst = 4
 	burst_delay = 1.5
 	dispersion = list(0.2, 0.4, 0.7, 1.0)
 	one_hand_penalty = 2
-	allowed_magazines = list(/obj/item/ammo_magazine/m5)
+	allowed_magazines = list(/obj/item/ammo_magazine/m7)
 	w_class = ITEM_SIZE_NORMAL
 	hud_bullet_row_num = 20
 	wielded_item_state = "m7-wielded"
@@ -44,12 +44,12 @@
 	silenced = 1
 	is_heavy = 1
 	scoped_accuracy = 1
-	magazine_type = /obj/item/ammo_magazine/m5/m443
+	magazine_type = /obj/item/ammo_magazine/m7/m443
 	fire_sound = 'code/modules/halo/sounds/SMG_SOCOM_Fire.wav'
 	//fire_sound_burst = 'code/modules/halo/sounds/SMG_SOCOM_Fire.wav'
 	dispersion = list(0.1, 0.3, 0.65, 1.0)
 	one_hand_penalty = 2
-	allowed_magazines = list(/obj/item/ammo_magazine/m5, /obj/item/ammo_magazine/m5)
+	allowed_magazines = list(/obj/item/ammo_magazine/m7, /obj/item/ammo_magazine/m7)
 
 /obj/item/weapon/gun/projectile/m7_smg/silenced/verb/scope()
 	set category = "Weapon"
@@ -65,11 +65,11 @@
 		icon_state = "m7smgs_unloaded"
 
 /obj/item/weapon/gun/projectile/m7_smg/rubber
-	magazine_type = /obj/item/ammo_magazine/m5/rubber
+	magazine_type = /obj/item/ammo_magazine/m7/rubber
 
 //Basic Magazine
 
-/obj/item/ammo_magazine/m5
+/obj/item/ammo_magazine/m7
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "m7mag"
 	mag_type = MAGAZINE
@@ -79,22 +79,22 @@
 
 //M443 Ammunition
 
-/obj/item/ammo_magazine/m5/m443
+/obj/item/ammo_magazine/m7/m443
 	name = "M7 magazine (5mm) M443"
 	desc = "5x23mm M443 Caseless Full Metal Jacket magazine for the M7. Fun sized with no pesky casing!"
 	ammo_type = /obj/item/ammo_casing/m443
 
-/obj/item/weapon/storage/box/m5_m443
+/obj/item/weapon/storage/box/m7_m443
 	name = "box of M7 5mm M443 magazines"
-	startswith = list(/obj/item/ammo_magazine/m5/m443 = 7)
+	startswith = list(/obj/item/ammo_magazine/m7/m443 = 7)
 
 //M443 Rubber Ammunition
 
-/obj/item/ammo_magazine/m5/rubber
+/obj/item/ammo_magazine/m7/rubber
 	name = "M7 magazine (5mm) M443 rubber"
 	desc = "5x23mm rubber bullets for the M7 used in for riot suppression."
 	ammo_type = /obj/item/ammo_casing/m443_rubber
 
-/obj/item/weapon/storage/box/m5_rubber
+/obj/item/weapon/storage/box/m7_rubber
 	name = "box of M7 5mm M443 magazines"
-	startswith = list(/obj/item/ammo_magazine/m5/rubber = 7)
+	startswith = list(/obj/item/ammo_magazine/m7/rubber = 7)

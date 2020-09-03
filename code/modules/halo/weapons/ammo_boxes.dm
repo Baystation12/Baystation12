@@ -96,4 +96,4 @@
 	name = "Tracerless Sniper Rounds"
 	desc = "A box of sniper rounds to assist in holding rounds for bolt-action sniper rifles"
 	capacity = 14
-	ammo_spawnwith = list(/obj/item/ammo_casing/m232/tracerless)
+	ammo_spawnwith = list(/obj/item/ammo_casing/m233)

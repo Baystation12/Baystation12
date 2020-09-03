@@ -208,7 +208,7 @@
 	storage_slots = 5
 
 	can_hold = list(\
-	/obj/item/ammo_magazine/m5,
+	/obj/item/ammo_magazine/m7,
 	/obj/item/ammo_magazine/m6d,
 	/obj/item/ammo_magazine/m6s,
 	/obj/item/weapon/storage/firstaid/unsc,

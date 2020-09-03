@@ -25,8 +25,8 @@
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/m443_fmj
-	name = "magazine (5mm) M443 Caseless FMJ"
-	path = /obj/item/ammo_magazine/m5
+	name = "M7 magazine (5mm) M443 Caseless FMJ"
+	path = /obj/item/ammo_magazine/m7/m443
 	category = "Arms and Ammunition"
 
 /datum/autolathe/recipe/mc9mm

@@ -22,7 +22,7 @@
 
 /datum/trade_item/m5
 	name = "magazine (5mm) M443 Caseless FMJ"
-	item_type = /obj/item/ammo_magazine/m5
+	item_type = /obj/item/ammo_magazine/m7/m443
 	quantity = 20
 	value = 50
 	trader_weight = 0

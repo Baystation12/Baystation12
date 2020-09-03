@@ -82,7 +82,7 @@
 /decl/hierarchy/supply_pack/gao/m7s
 	name = "M7S submachine gun (x2)"
 	contains = list(/obj/item/weapon/gun/projectile/m7_smg/silenced = 2,\
-		/obj/item/ammo_magazine/m5 = 6)
+		/obj/item/ammo_magazine/m7/m443 = 6)
 	cost = 4000
 	containername = "\improper M7S crate"
 	containertype = /obj/structure/closet/crate/secure/weapon

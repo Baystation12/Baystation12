@@ -3,7 +3,7 @@
 
 /obj/item/weapon/gun/projectile/m545_lmg
 	name = "\improper M545 Light Machine Gun"
-	desc = "An antiquated light machine gun. Takes 7/62mm box type magazines"
+	desc = "An antiquated light machine gun. Takes 7.62mm box type magazines"
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "Innie 30cal LMG - Full Closed"
 	item_state = "30cal"

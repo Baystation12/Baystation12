@@ -22,7 +22,7 @@
 	quantity = 8
 	value = 2500
 	trader_weight = 10
-	bonus_items = list(/obj/item/ammo_magazine/m5)
+	bonus_items = list(/obj/item/ammo_magazine/m7/m443)
 	category = "weapon_unsc"
 
 /datum/trade_item/ma5b_ar

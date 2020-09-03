@@ -2180,7 +2180,6 @@
 #include "code\modules\halo\weapons\railrifle.dm"
 #include "code\modules\halo\weapons\SDSR10.dm"
 #include "code\modules\halo\weapons\shotguns.dm"
-#include "code\modules\halo\weapons\smg.dm"
 #include "code\modules\halo\weapons\spartan_laser.dm"
 #include "code\modules\halo\weapons\SRS99.dm"
 #include "code\modules\halo\weapons\unsc_plasma.dm"

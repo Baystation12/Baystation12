@@ -98,13 +98,13 @@
 /decl/hierarchy/supply_pack/unsc_ammo/m5_m443
 	name = "M5 5mm M443 magazines (2 boxes)"
 	cost = 300
-	contains = list(/obj/item/weapon/storage/box/m5_m443 = 2)
+	contains = list(/obj/item/weapon/storage/box/m7_m443 = 2)
 	containername = "\improper M5 ammo crate (M443)"
 
 /decl/hierarchy/supply_pack/unsc_ammo/m5_m443_rubber
 	name = "M5 5mm M443 rubber magazines (2 boxes)"
 	cost = 100
-	contains = list(/obj/item/weapon/storage/box/m5_rubber = 2)
+	contains = list(/obj/item/weapon/storage/box/m7_rubber = 2)
 	containername = "\improper M5 ammo crate (M443 rubber)"
 
 /* SRS99 */
@@ -115,11 +115,23 @@
 	contains = list(/obj/item/weapon/storage/box/srs99_m232 = 2)
 	containername = "\improper SRS99 ammo crate (M232)"
 
-/decl/hierarchy/supply_pack/unsc_ammo/srs99_m232_tracerless
-	name = "SRS99 14.5mm M232 tracerless magazines (2 boxes)"
+/decl/hierarchy/supply_pack/unsc_ammo/srs99_m233
+	name = "SRS99 14.5mm M233 tracerless magazines (2 boxes)"
 	cost = 900
-	contains = list(/obj/item/weapon/storage/box/srs99_m232_tracerless = 2)
-	containername = "\improper SRS99 ammo crate (M232 tracerless)"
+	contains = list(/obj/item/weapon/storage/box/srs99_m233 = 2)
+	containername = "\improper SRS99 ammo crate (M233 tracerless)"
+
+/decl/hierarchy/supply_pack/unsc_ammo/srs99_m234
+	name = "SRS99 14.5mm M234 HVAP magazines (2 boxes)"
+	cost = 900
+	contains = list(/obj/item/weapon/storage/box/srs99_m234 = 2)
+	containername = "\improper SRS99 ammo crate (M234 HVAP)"
+
+/decl/hierarchy/supply_pack/unsc_ammo/srs99_m235
+	name = "SRS99 14.5mm M235 HEAP magazines (2 boxes)"
+	cost = 900
+	contains = list(/obj/item/weapon/storage/box/srs99_m235 = 2)
+	containername = "\improper SRS99 ammo crate (M235 HEAP)"
 
 /* BR55 */
 
@@ -136,3 +148,11 @@
 	cost = 1200
 	contains = list(/obj/item/weapon/storage/box/spnkr = 1)
 	containername = "\improper M19 SPNKr crate"
+
+/* TURRET */
+
+/decl/hierarchy/supply_pack/unsc_ammo/hmg
+	name = "HMG box magazines (2)"
+	cost = 600
+	contains = list(/obj/item/ammo_magazine/HMG_boxmag = 2)
+	containername = "\improper HMG box magazines crate"

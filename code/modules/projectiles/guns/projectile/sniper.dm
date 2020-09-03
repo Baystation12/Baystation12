@@ -12,7 +12,7 @@
 	handle_casings = HOLD_CASINGS
 	load_method = SINGLE_CASING
 	max_shells = 1
-	ammo_type = /obj/item/ammo_casing/m232/tracerless
+	ammo_type = /obj/item/ammo_casing/m233
 	one_hand_penalty = -1
 	accuracy = -5
 	scoped_accuracy = 10 //increased accuracy over the LWAP because only one shot

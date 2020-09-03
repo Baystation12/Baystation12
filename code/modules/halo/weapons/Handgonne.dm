@@ -13,7 +13,7 @@
 	max_shells = 3
 	one_hand_penalty = 0
 	dispersion = list(0.1) //Sniper pistol, using sniper dispersions.
-	ammo_type = /obj/item/ammo_casing/m232/tracerless
+	ammo_type = /obj/item/ammo_casing/m233
 	w_class = ITEM_SIZE_NORMAL
 	accuracy = 0
 	wielded_item_state = "handgonne"
