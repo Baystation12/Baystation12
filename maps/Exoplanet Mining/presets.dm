@@ -19,18 +19,13 @@
 
 /obj/machinery/autolathe/ammo_fabricator/mining_asteroid
 	machine_recipes = newlist(\
-	/datum/autolathe/recipe/m255_sap_he,
-	/datum/autolathe/recipe/m255_sap_hp,
-	/datum/autolathe/recipe/m118_ma5b,
-	/datum/autolathe/recipe/m118_m392,
-	/datum/autolathe/recipe/m118_ma37,
-	/datum/autolathe/recipe/m634_sap,
-	/datum/autolathe/recipe/a762_ap,
+	/datum/autolathe/recipe/m6d_m224,
+	/datum/autolathe/recipe/ma5b_m118,
+	/datum/autolathe/recipe/ma37_m118,
+	/datum/autolathe/recipe/ma3_m118,
 	/datum/autolathe/recipe/m443_fmj,
-	/datum/autolathe/recipe/m762ma3,
 	/datum/autolathe/recipe/mc9mm,
-	/datum/autolathe/recipe/a556,
-	/datum/autolathe/recipe/m392innie
+	/datum/autolathe/recipe/a556
 	)
 
 

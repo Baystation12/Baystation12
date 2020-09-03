@@ -1,6 +1,4 @@
 
-#define EJECT_CASINGS	2
-
 /obj/structure/turret
 	name = "Turret"
 	desc = "A turret"
@@ -229,8 +227,8 @@
 	handle_casings = EJECT_CASINGS
 	slot_flags = 0
 
-	caliber = "a762"
-	magazine_type = /obj/item/ammo_magazine/a762_box_ap
+	caliber = "7.62mm"
+	magazine_type = /obj/item/ammo_magazine/m739/m118
 
 	fire_delay = 15
 	burst = 10
@@ -280,5 +278,3 @@
 		slot_l_hand_str = 'code/modules/halo/weapons/turrets/mob_turret.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/turrets/mob_turret.dmi',
 		)
-
-#undef EJECT_CASINGS

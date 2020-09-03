@@ -95,7 +95,4 @@
 	new /obj/item/device/flashlight/glowstick/yellow(src)
 	new /obj/item/weapon/handcuffs(src)
 	new /obj/item/weapon/storage/belt/security(src)
-	new /obj/item/ammo_magazine/m127_saphp(src)
-	new /obj/item/ammo_magazine/m5/rubber(src)
-	new /obj/item/weapon/gun/projectile/m6c_magnum_s(src)
 	return

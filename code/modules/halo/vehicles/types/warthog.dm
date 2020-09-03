@@ -45,7 +45,7 @@
 	name = "Internal Ammunition Storage"
 	caliber = "a762"
 	max_ammo = 400
-	ammo_type = /obj/item/ammo_casing/a762_ap
+	ammo_type = /obj/item/ammo_casing/m118
 
 /obj/item/weapon/gun/vehicle_turret/warthog_turret
 	name = "Warthog Turret"

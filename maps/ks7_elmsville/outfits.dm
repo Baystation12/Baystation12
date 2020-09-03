@@ -8,7 +8,7 @@
 	l_ear = /obj/item/device/radio/headset
 	belt = /obj/item/weapon/gun/projectile/m6d_magnum
 	shoes = /obj/item/clothing/shoes/brown
-	r_pocket = /obj/item/ammo_magazine/m127_saphe
+	r_pocket = /obj/item/ammo_magazine/m6d/m224
 	l_pocket = /obj/item/weapon/storage/wallet/random
 	pda_slot = null
 
@@ -35,7 +35,7 @@
 	l_ear = /obj/item/device/radio/headset/police
 	belt = /obj/item/weapon/gun/projectile/m6d_magnum
 	shoes = /obj/item/clothing/shoes/brown
-	r_pocket = /obj/item/ammo_magazine/m127_saphe
+	r_pocket = /obj/item/ammo_magazine/m6d/m224
 	l_pocket = /obj/item/weapon/storage/wallet/random
 	pda_slot = null
 

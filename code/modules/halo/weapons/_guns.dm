@@ -1,4 +1,3 @@
-#define BASE_MIN_MAGNIF 1.1
 
 /obj/item/weapon/gun
 	var/scope_zoom_amount = 0

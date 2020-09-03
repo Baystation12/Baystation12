@@ -58,14 +58,14 @@
 
 /obj/structure/closet/secure_closet/ks7_unsc/ammo/WillContain()
 	return list(\
-	/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,
-	/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,
-	/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,
-	/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,
-	/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,
-	/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,
-	/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,
-	/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,
+	/obj/item/ammo_magazine/m7/m443,/obj/item/ammo_magazine/m7/m443,/obj/item/ammo_magazine/m7/m443,
+	/obj/item/ammo_magazine/m7/m443,/obj/item/ammo_magazine/m7/m443,/obj/item/ammo_magazine/m7/m443,
+	/obj/item/ammo_magazine/m7/m443,/obj/item/ammo_magazine/m7/m443,/obj/item/ammo_magazine/m7/m443,
+	/obj/item/ammo_magazine/m7/m443,/obj/item/ammo_magazine/m7/m443,/obj/item/ammo_magazine/m7/m443,
+	/obj/item/ammo_magazine/m6d/m224,/obj/item/ammo_magazine/m6d/m224,/obj/item/ammo_magazine/m6d/m224,
+	/obj/item/ammo_magazine/m6d/m224,/obj/item/ammo_magazine/m6d/m224,/obj/item/ammo_magazine/m6d/m224,
+	/obj/item/ammo_magazine/m6d/m224,/obj/item/ammo_magazine/m6d/m224,/obj/item/ammo_magazine/m6d/m224,
+	/obj/item/ammo_magazine/m6d/m224,/obj/item/ammo_magazine/m6d/m224,/obj/item/ammo_magazine/m6d/m224,
 	)
 
 /obj/structure/closet/secure_closet/ks7_innie
@@ -104,14 +104,14 @@
 
 /obj/structure/closet/secure_closet/ks7_innie/ammo/WillContain()
 	return list(\
-	/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,
-	/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,
-	/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,
-	/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,
-	/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,
-	/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,
-	/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,
-	/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,
+	/obj/item/ammo_magazine/m7/m443,/obj/item/ammo_magazine/m7/m443,/obj/item/ammo_magazine/m7/m443,
+	/obj/item/ammo_magazine/m7/m443,/obj/item/ammo_magazine/m7/m443,/obj/item/ammo_magazine/m7/m443,
+	/obj/item/ammo_magazine/m7/m443,/obj/item/ammo_magazine/m7/m443,/obj/item/ammo_magazine/m7/m443,
+	/obj/item/ammo_magazine/m7/m443,/obj/item/ammo_magazine/m7/m443,/obj/item/ammo_magazine/m7/m443,
+	/obj/item/ammo_magazine/m6d/m224,/obj/item/ammo_magazine/m6d/m224,/obj/item/ammo_magazine/m6d/m224,
+	/obj/item/ammo_magazine/m6d/m224,/obj/item/ammo_magazine/m6d/m224,/obj/item/ammo_magazine/m6d/m224,
+	/obj/item/ammo_magazine/m6d/m224,/obj/item/ammo_magazine/m6d/m224,/obj/item/ammo_magazine/m6d/m224,
+	/obj/item/ammo_magazine/m6d/m224,/obj/item/ammo_magazine/m6d/m224,/obj/item/ammo_magazine/m6d/m224,
 	)
 
 //KS7 OM OBJ OVERRIDE//
@@ -134,7 +134,7 @@
 	loot_distributor.loot_list["humanSalvageLoot"] = list(\
 	/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/gun/projectile/m7_smg,
 	/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6d_magnum,
-	/obj/item/weapon/gun/projectile/ma5b_ar,/obj/item/weapon/gun/projectile/ma5b_ar/MA37,/obj/item/weapon/gun/projectile/ma5b_ar/MA3,
+	/obj/item/weapon/gun/projectile/ma5b_ar,/obj/item/weapon/gun/projectile/ma37_ar,/obj/item/weapon/gun/projectile/ma3_ar,
 	/obj/item/weapon/gun/projectile/br55,/obj/item/weapon/gun/projectile/br55,/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts,
 	/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts,/obj/item/weapon/gun/projectile/shotgun/pump/m45_ts,
 	/obj/item/weapon/gun/projectile/m739_lmg,/obj/item/weapon/gun/projectile/m392_dmr,/obj/item/weapon/gun/projectile/m392_dmr,
@@ -142,8 +142,8 @@
 	)
 
 	loot_distributor.loot_list["piratePostLoot"] = list(\
-	/obj/item/weapon/gun/projectile/ma5b_ar/MA3,/obj/item/weapon/gun/projectile/ma5b_ar/MA3,,/obj/item/weapon/gun/projectile/ma5b_ar/MA3,
-	/obj/item/weapon/gun/projectile/ma5b_ar/MA3,,/obj/item/weapon/gun/projectile/ma5b_ar/MA3,/obj/item/weapon/gun/projectile/ma5b_ar,
+	/obj/item/weapon/gun/projectile/ma3_ar,/obj/item/weapon/gun/projectile/ma3_ar,,/obj/item/weapon/gun/projectile/ma3_ar,
+	/obj/item/weapon/gun/projectile/ma3_ar,,/obj/item/weapon/gun/projectile/ma3_ar,/obj/item/weapon/gun/projectile/ma5b_ar,
 	/obj/item/weapon/gun/projectile/ma5b_ar,/obj/item/weapon/gun/projectile/needler,/obj/item/weapon/gun/projectile/needler,
 	/obj/item/weapon/gun/projectile/needler,/obj/item/weapon/gun/projectile/type51carbine,
 	/obj/item/weapon/gun/projectile/type51carbine,/obj/item/weapon/gun/projectile/type51carbine,/obj/item/weapon/gun/projectile/m392_dmr,
@@ -155,8 +155,8 @@
 	)
 
 	loot_distributor.loot_list["easySalvageLoot"] = list(\
-	/obj/item/weapon/gun/projectile/ma5b_ar/MA3,/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/gun/projectile/m7_smg,
-	/obj/item/weapon/gun/projectile/ma5b_ar/MA37,/obj/item/weapon/gun/projectile/m6d_magnum,
+	/obj/item/weapon/gun/projectile/ma3_ar,/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/gun/projectile/m7_smg,
+	/obj/item/weapon/gun/projectile/ma37_ar,/obj/item/weapon/gun/projectile/m6d_magnum,
 	null,null,null,null,null,null,null,null
 	)//10
 	loot_distributor.loot_list["salvageDefenders"] = list(\

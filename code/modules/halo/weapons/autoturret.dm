@@ -14,7 +14,7 @@
 	var/burst_size = 5
 	var/list/friendlies_stored = list()
 	var/list/allowed_materials = list("steel" = 5) //Format: material name = amount of bullets created
-	var/obj/item/projectile/to_fabricate = /obj/item/projectile/bullet/a762_M392
+	var/obj/item/projectile/to_fabricate = /obj/item/projectile/bullet/m118
 	var/max_rounds = 100
 	var/list/loaded_ammo = list()
 	var/burst_delay = 0.7 SECONDS

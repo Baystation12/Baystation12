@@ -67,7 +67,7 @@ Cael May 2020
 
 	//a starting weapon
 	belt = /obj/item/weapon/gun/projectile/m6d_magnum
-	l_pocket = /obj/item/ammo_magazine/m127_saphe
+	l_pocket = /obj/item/ammo_magazine/m6d/m224
 
 /decl/hierarchy/outfit/job/unsc/marine/e5/firefight
 	name = "Marine Sergeant (e5) (firefight)"
@@ -82,7 +82,7 @@ Cael May 2020
 	//a starting weapon
 	gloves = /obj/item/clothing/gloves/thick/unsc
 	belt = /obj/item/weapon/gun/projectile/m7_smg
-	l_pocket = /obj/item/ammo_magazine/m5
+	l_pocket = /obj/item/ammo_magazine/m7/m443
 
 /decl/hierarchy/outfit/job/unsc/odst/firefight
 	name = "ODST (firefight)"
@@ -95,8 +95,9 @@ Cael May 2020
 	back = /obj/item/weapon/storage/backpack/odst/regular
 
 	//a starting weapon
-	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
-	l_pocket = /obj/item/ammo_magazine/m127_saphp
+	belt = /obj/item/weapon/gun/projectile/m7_smg/silenced
+	l_pocket = /obj/item/ammo_magazine/m7/m443
+	r_pocket = /obj/item/weapon/gun/projectile/m6c_magnum_s
 
 /decl/hierarchy/outfit/job/unsc/odst/e5/firefight
 	name = "ODST Sergeant (firefight)"
@@ -110,11 +111,12 @@ Cael May 2020
 
 	//a starting weapon
 	belt = /obj/item/weapon/gun/projectile/m7_smg/silenced
-	l_pocket = /obj/item/ammo_magazine/m5
+	l_pocket = /obj/item/ammo_magazine/m7/m443
+	r_pocket = /obj/item/weapon/gun/projectile/m6c_magnum_s
 
 /decl/hierarchy/outfit/spartan_two/firefight
 	name = "Spartan II (firefight)"
 
 	//a starting weapon
 	belt = /obj/item/weapon/gun/projectile/ma5b_ar
-	l_pocket = /obj/item/ammo_magazine/m762_ap/MA5B
+	l_pocket = /obj/item/ammo_magazine/ma5b/m118

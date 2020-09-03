@@ -46,8 +46,6 @@
 
 /* SPIKER */
 
-#define CASELESS 4
-
 /obj/item/weapon/gun/projectile/spiker
 	name = "Type-25 Spiker Carbine"
 	desc = "A sidearm with two wicked blades curving out from under the barrel."
@@ -122,8 +120,6 @@
 	shard.name = "Spike shrapnel"
 	embed_organ.embed(shard)
 	. = ..()
-
-#undef CASELESS
 
 
 

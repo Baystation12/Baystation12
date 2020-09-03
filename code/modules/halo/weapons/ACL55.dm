@@ -1,40 +1,5 @@
 
-#define CLEAR_CASINGS 1
-#define CASELESS 4
-
-/obj/item/weapon/gun/projectile/m41
-	name = "M41 SSR"
-	desc = "Surface to surface rocket launcher for anti armor and anti infantry purposes. Takes SPNKr tubes."
-	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
-	icon_state = "M41closed"
-	item_state = "m41"
-	fire_sound = 'code/modules/halo/sounds/Rocket_Launcher_Fire_New.wav'
-	load_method = MAGAZINE
-	magazine_type = /obj/item/ammo_magazine/spnkr
-	fire_delay = 8
-	one_hand_penalty = -1
-	dispersion = list(0.73)
-	hud_bullet_row_num = 2
-	hud_bullet_reffile = 'code/modules/halo/icons/hud_display/hud_bullet_32x16.dmi'
-	hud_bullet_iconstate = "rocket"
-	caliber = "spnkr"
-	handle_casings = CASELESS
-	w_class = ITEM_SIZE_HUGE
-	slot_flags = SLOT_BACK
-	item_icons = list(
-		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
-		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
-		)
-	arm_time = 15
-	charge_sound = null
-	slowdown_general = 1
-
-/obj/item/weapon/gun/projectile/m41/update_icon()
-	if(ammo_magazine)
-		icon_state = "M41closed"
-	else
-		icon_state = "M41open-empty"
-	..()
+//ACL-55 rocket launcher
 
 /obj/item/weapon/gun/launcher/rocket/rgl
 	name = "RGL-Mk12"

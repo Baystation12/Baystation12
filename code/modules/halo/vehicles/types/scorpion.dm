@@ -75,7 +75,7 @@
 	name = "Internal Co-axial Ammunition Storage"
 	caliber = "a762"
 	max_ammo = 300
-	ammo_type = /obj/item/ammo_casing/a762_ap
+	ammo_type = /obj/item/ammo_casing/m118
 
 /obj/item/ammo_magazine/scorp_shell
 	name = "Internal Scorpion Shell Rack"

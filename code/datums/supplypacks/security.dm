@@ -27,7 +27,7 @@
 	containername = "\improper Beanbag shells"
 
 /decl/hierarchy/supply_pack/security/weapons
-	name = "Weapons crate"
+	name = "Nonlethal weapons crate"
 	contains = list(/obj/item/weapon/melee/baton = 2,
 					//obj/item/weapon/gun/energy/gun = 2,
 					//obj/item/weapon/gun/energy/taser = 2,
@@ -36,7 +36,7 @@
 					/obj/item/weapon/storage/box/teargas)
 	cost = 100
 	containertype = /obj/structure/closet/crate/secure/weapon
-	containername = "\improper Weapons crate"
+	containername = "\improper Nonlethal weapons crate"
 	access = access_security
 
 /decl/hierarchy/supply_pack/security/flareguns
@@ -77,7 +77,7 @@
 	containername = "\improper Armor crate"
 	access = access_security
 	supply_method = /decl/supply_method/randomized
-
+*/
 /decl/hierarchy/supply_pack/security/riot
 	name = "Riot gear crate"
 	contains = list(/obj/item/weapon/melee/baton = 3,
@@ -93,7 +93,7 @@
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Riot gear crate"
 	access = access_armory
-
+/*
 /decl/hierarchy/supply_pack/security/energyweapons
 	name = "Energy weapons crate"
 	contains = list(/obj/item/weapon/gun/energy/laser = 3)
@@ -101,7 +101,7 @@
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper energy weapons crate"
 	access = access_armory
-
+*/
 /decl/hierarchy/supply_pack/security/shotgun
 	name = "Shotgun crate"
 	contains = list(/obj/item/clothing/suit/armor/bulletproof = 2,
@@ -112,7 +112,7 @@
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Shotgun crate"
 	access = access_armory
-
+/*
 /decl/hierarchy/supply_pack/security/erifle
 	name = "Energy marksman crate"
 	contains = list(/obj/item/clothing/suit/armor/laserproof = 2,
