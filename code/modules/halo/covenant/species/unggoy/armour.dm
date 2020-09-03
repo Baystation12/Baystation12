@@ -39,7 +39,7 @@
 	icon_state = "combatharness_deacon"
 	item_state = "combatharness_deacon"
 	//
-	totalshields = 60
+	totalshields = 40
 	specials = list(/datum/armourspecials/shields/unggoy)
 
 /obj/item/clothing/suit/armor/special/unggoy_combat_harness/ultra
@@ -47,7 +47,7 @@
 	icon_state = "combatharness_ultra"
 	item_state = "combatharness_ultra"
 	//
-	totalshields = 60
+	totalshields = 20
 	specials = list(/datum/armourspecials/shields/unggoy)
 	//same as a marine
 	armor = list(melee = 55, bullet = 50, laser = 55, energy = 45, bomb = 40, bio = 25, rad = 25)

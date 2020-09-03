@@ -269,17 +269,17 @@
 
 /obj/item/projectile/bullet/covenant/needles/rifleneedle
 	name = "Rifle Needle"
-	damage = 20
-	shield_damage = 10
+	damage = 30
+	armor_penetration = 20
+	shield_damage = 20
+	shrapnel_damage = 10
 	shards_to_explode = 3
 	shard_name = "Rifle Needle shrapnel"
 	tracer_type = /obj/effect/projectile/bullet/covenant/needles/rifleneedle
 	tracer_delay_time = 0.5 SECONDS
 	invisibility = 101
 	step_delay = 0.65 //slower than most, faster than normal needles
-	armor_penetration = 20
 	max_track_steps = 2
-	shrapnel_damage = 10
 	muzzle_type = /obj/effect/projectile/muzzle/cov_red
 
 /obj/effect/projectile/bullet/covenant/needles/rifleneedle

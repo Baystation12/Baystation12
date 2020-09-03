@@ -56,7 +56,7 @@ var/global/datum/npc_ship_map_handler/shipmap_handler = new
 
 /datum/npc_ship_map_handler/proc/get_next_usable_z()
 	if(free_ship_map_zs.len > 0)
-		return pick(free_ship_map_zs)
+		return free_ship_map_zs[1]
 	else
 		max_z_cached += 1
 		world.maxz = max_z_cached

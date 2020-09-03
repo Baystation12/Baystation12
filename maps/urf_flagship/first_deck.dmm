@@ -8,7 +8,7 @@
 "ah" = (/obj/effect/shuttle_landmark/innie_offsite_supply,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor,/area/shuttle/innie_offsite_supply)
 "ai" = (/obj/effect/shuttle_instance,/turf/simulated/floor,/area/urf_flagship/questareamarker)
 "aj" = (/turf/simulated/wall/r_wall,/area/urf_flagship/powercore)
-"ak" = (/obj/machinery/vending/armory/medical,/turf/simulated/floor/tiled,/area/urf_flagship/medicalbay)
+"ak" = (/obj/machinery/vending/armory/medical/innie,/turf/simulated/floor/tiled,/area/urf_flagship/medicalbay)
 "al" = (/obj/structure/table/standard,/obj/item/weapon/hand_labeler,/obj/item/weapon/storage/box/beakers,/turf/simulated/floor/tiled,/area/urf_flagship/medicalbay)
 "am" = (/turf/simulated/floor/plating,/area/urf_flagship/powercore)
 "an" = (/turf/simulated/wall/r_wall,/area/urf_flagship/Troopbunks)
@@ -353,7 +353,7 @@
 "gO" = (/obj/structure/table/rack,/obj/item/weapon/storage/box/m26,/obj/item/weapon/storage/box/m26,/obj/item/weapon/storage/box/m26,/obj/item/weapon/storage/box/m26,/obj/item/weapon/storage/box/m26,/obj/item/weapon/storage/box/m26,/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/item/weapon/storage/box/m26,/obj/item/weapon/storage/box/m26,/obj/item/weapon/storage/box/m26,/obj/item/weapon/storage/box/m26,/turf/simulated/floor/tiled/dark,/area/urf_flagship/Troopbunks)
 "gP" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/ACL55,/obj/item/weapon/gun/projectile/ACL55,/obj/item/weapon/gun/projectile/ACL55,/turf/simulated/floor/tiled/dark,/area/urf_flagship/Troopbunks)
 "gQ" = (/turf/unsimulated/wall,/area/shuttle/innie_onsite_supply)
-"gR" = (/obj/machinery/camera/autoname/invis/innie_base{icon_state = "camera"; dir = 8},/turf/simulated/floor,/area/urf_flagship/Armory)
+"gR" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor,/area/urf_flagship/Armory)
 "gS" = (/obj/structure/window/reinforced{dir = 4},/turf/simulated/floor/carpet,/area/urf_flagship/Armory)
 "gT" = (/obj/machinery/camera/autoname/invis/innie_base{icon_state = "camera"; dir = 8},/turf/simulated/floor/tiled/dark,/area/urf_flagship/Armory)
 "gU" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/structure/closet/crate,/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/structure/closet/walllocker/emerglocker/west,/turf/simulated/floor/tiled,/area/urf_flagship/Messhall)
@@ -364,6 +364,7 @@
 "gZ" = (/turf/unsimulated/wall,/area/planets/Geminus/indoor/npc_factory)
 "ha" = (/obj/structure/bed/chair,/obj/machinery/light/colored/red{icon_state = "red1"; dir = 1},/turf/simulated/floor/shuttle/red,/area/shuttle/innie_shuttle_transport)
 "hb" = (/obj/structure/bed/chair,/turf/simulated/floor/shuttle/red,/area/shuttle/innie_shuttle_transport)
+"hc" = (/obj/payload,/obj/effect/bomblocation,/turf/simulated/floor/tech,/area/urf_flagship/Bridge)
 "hd" = (/obj/structure/thruster/dark/thruster{icon_state = "se1"; dir = 4},/turf/simulated/floor,/area/shuttle/innie_shuttle_transport)
 "he" = (/obj/machinery/power/apc{dir = 4; name = "APC"; pixel_x = 24; pixel_y = 0},/obj/structure/cable/blue{icon_state = "0-2"},/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled,/area/urf_flagship/storageroom3)
 "hf" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/structure/closet/crate,/obj/item/stack/material/steel/fifty,/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/structure/closet/walllocker/emerglocker/west,/turf/simulated/floor/tiled,/area/urf_flagship/storageroom4)
@@ -372,6 +373,7 @@
 "hi" = (/obj/effect/decal/cleanable/blood/oil,/turf/simulated/floor/tiled,/area/urf_flagship/storageroom4)
 "hj" = (/turf/simulated/floor/tiled,/area/urf_flagship/storageroom4)
 "hk" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/structure/closet/crate,/obj/item/stack/material/glass/fifty,/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/effect/decal/cleanable/dirt,/obj/machinery/power/apc{dir = 4; name = "APC"; pixel_x = 24; pixel_y = 0},/obj/structure/cable/blue{icon_state = "0-2"},/turf/simulated/floor/tiled,/area/urf_flagship/storageroom4)
+"hl" = (/obj/structure/bed/chair/comfy/captain{dir = 1; icon_state = "capchair_preview"; name = "Bridge chair"; tag = "icon-capchair_preview (NORTH)"},/obj/effect/landmark/start/commando_officer_spawn,/obj/effect/landmark/start/commando_spawn,/obj/effect/bomblocation,/turf/simulated/floor/tech,/area/urf_flagship/Bridge)
 "hm" = (/obj/effect/decal/cleanable/blood/oil/streak,/turf/simulated/floor/tiled/dark,/area/urf_flagship/powercore)
 "hn" = (/obj/effect/floor_decal/industrial/loading,/obj/machinery/camera/autoname/invis/innie_base{icon_state = "camera"; dir = 8},/turf/simulated/floor/tiled/dark,/area/urf_flagship/powercore)
 "ho" = (/obj/structure/table/rack,/obj/item/device/bot_kit,/turf/simulated/floor/tiled/dark,/area/urf_flagship/Troopbunks)
@@ -387,6 +389,7 @@
 "hy" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/urf_flagship/Messhall)
 "hz" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/tiled,/area/urf_flagship/Messhall)
 "hA" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/urf_flagship/storageroom3)
+"hB" = (/obj/effect/bomblocation,/turf/simulated/floor/tech,/area/urf_flagship/Bridge)
 "hC" = (/obj/machinery/door/airlock/external/glass,/turf/simulated/floor/shuttle/red,/area/shuttle/innie_shuttle_transport)
 "hD" = (/turf/simulated/floor/shuttle/red,/area/shuttle/innie_shuttle_transport)
 "hE" = (/obj/machinery/camera/autoname/invis/innie_base{icon_state = "camera"; dir = 8},/turf/simulated/floor/shuttle/red,/area/shuttle/innie_shuttle_transport)
@@ -397,8 +400,13 @@
 "hJ" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/urf_flagship/storageroom4)
 "hK" = (/obj/effect/decal/cleanable/dirt,/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/urf_flagship/storageroom4)
 "hL" = (/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/tiled,/area/urf_flagship/storageroom4)
+"hM" = (/obj/structure/bed/chair/comfy/captain{name = "Bridge chair"},/obj/effect/landmark/start/commando_officer_spawn,/obj/effect/landmark/start/commando_spawn,/obj/effect/bomblocation,/turf/simulated/floor/tech,/area/urf_flagship/Bridge)
 "hN" = (/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/tiled/dark,/area/urf_flagship/powercore)
+"hO" = (/obj/structure/drop_pod_launchbay,/obj/vehicles/drop_pod/overmap/boarding_pod/south,/turf/simulated/floor,/area/urf_flagship/Armory)
 "hP" = (/obj/effect/floor_decal/industrial/hatch/yellow,/turf/simulated/floor/tiled/dark,/area/urf_flagship/powercore)
+"hQ" = (/obj/machinery/camera/autoname/invis/innie_base{icon_state = "camera"; dir = 8},/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor,/area/urf_flagship/Armory)
+"hR" = (/obj/machinery/light,/obj/structure/closet/walllocker/emerglocker/south,/turf/simulated/floor,/area/urf_flagship/Armory)
+"hS" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor,/area/urf_flagship/Armory)
 "hT" = (/obj/machinery/atmospherics/pipe/simple/visible{icon_state = "intact"; dir = 6},/obj/machinery/meter,/turf/simulated/floor/plating,/area/urf_flagship/powercore)
 "hU" = (/obj/machinery/squad_camera_console{dir = 1},/turf/simulated/floor/tech,/area/urf_flagship/Bridge)
 "hV" = (/obj/structure/table/standard,/obj/machinery/alarm{dir = 1; icon_state = "alarm0"; pixel_y = -22},/obj/item/device/radio,/turf/simulated/floor/tech,/area/urf_flagship/Bridge)
@@ -412,11 +420,13 @@
 "id" = (/turf/simulated/floor/tiled,/area/urf_flagship/Messhall)
 "ie" = (/obj/structure/ai_routing_node/innie,/turf/simulated/floor/tiled,/area/urf_flagship/Messhall)
 "if" = (/obj/machinery/camera/autoname/invis/innie_base{icon_state = "camera"; dir = 8},/turf/simulated/floor/tiled,/area/urf_flagship/Messhall)
+"ig" = (/obj/structure/drop_pod_launchbay,/obj/vehicles/drop_pod/escape_pod/bumblebee,/turf/simulated/floor,/area/urf_flagship/Armory)
 "ih" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled,/area/urf_flagship/storageroom3)
 "ii" = (/turf/simulated/floor,/turf/simulated/shuttle/wall/corner/dark/sw,/area/shuttle/innie_shuttle_transport)
 "ik" = (/obj/structure/bed/chair{dir = 1},/turf/simulated/floor/shuttle/red,/area/shuttle/innie_shuttle_transport)
 "il" = (/obj/structure/bed/chair{dir = 1},/obj/machinery/light/colored/red,/obj/machinery/camera/autoname/invis/innie_base{icon_state = "camera"; dir = 1},/turf/simulated/floor/shuttle/red,/area/shuttle/innie_shuttle_transport)
 "im" = (/obj/structure/window/reinforced/treated{icon_state = "rwindow"; dir = 4},/obj/structure/table/rack,/obj/item/clothing/suit/armor/bulletproof,/obj/item/clothing/suit/armor/bulletproof,/obj/item/clothing/suit/armor/bulletproof,/obj/item/clothing/head/helmet/ballistic,/obj/item/clothing/head/helmet/ballistic,/turf/simulated/floor/shuttle/red,/area/shuttle/innie_shuttle_transport)
+"in" = (/obj/vehicles/drop_pod/overmap/boarding_pod/south,/obj/structure/drop_pod_launchbay,/turf/simulated/floor,/area/urf_flagship/Armory)
 "io" = (/obj/structure/ai_routing_node/innie,/turf/simulated/floor/tiled,/area/urf_flagship/storageroom4)
 "ip" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/camera/autoname/invis/innie_base{icon_state = "camera"; dir = 8},/turf/simulated/floor/tiled,/area/urf_flagship/storageroom4)
 "ir" = (/obj/effect/decal/cleanable/blood/oil/streak,/turf/simulated/floor/tiled/dark,/area/urf_flagship/Troopbunks)
@@ -428,8 +438,6 @@
 "ix" = (/obj/machinery/power/apc{dir = 4; name = "APC"; pixel_x = 24; pixel_y = 0},/obj/structure/cable/blue{icon_state = "0-8"},/turf/simulated/floor/plating,/area/urf_flagship/powercore)
 "iy" = (/obj/machinery/atmospherics/pipe/manifold/visible{dir = 8},/obj/machinery/meter,/turf/simulated/floor/plating,/area/urf_flagship/powercore)
 "iz" = (/obj/vehicles/drop_pod/escape_pod/bumblebee,/obj/structure/drop_pod_launchbay,/turf/simulated/floor,/area/urf_flagship/Armory)
-"iA" = (/obj/structure/closet/walllocker/emerglocker/south,/obj/machinery/light,/turf/simulated/floor,/area/urf_flagship/Armory)
-"iB" = (/obj/structure/drop_pod_launchbay,/obj/vehicles/drop_pod/escape_pod/bumblebee,/turf/simulated/floor,/area/urf_flagship/Armory)
 "iC" = (/obj/machinery/alarm{dir = 4; icon_state = "alarm0"; pixel_x = -22},/turf/simulated/floor/tiled/dark,/area/urf_flagship/Armory)
 "iD" = (/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/tiled/dark,/area/urf_flagship/Armory)
 "iE" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/dark,/area/urf_flagship/Armory)
@@ -606,8 +614,8 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPasbMkrbMksasan
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPasksasktkuasaQaRaQanaSaSanaQaRaQanajamajaEaTaUaUaUaUaUaUaUaUaUaUaUaUaVaTaWaWaWaWaWaWaWaWaWaWaWaWaVaTaXaXaXaXaXaXaXaXaXaXaXaXaVaKajajaLaLaLajajaYCFbabbajbcbdbebfbgbhajaNbiamamajaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaskrasasasasbjbjbjanbkiranbjbjbjanajamajaEaKaUblbmbnbobpbqakakbtbuaUaEaKaWbvbwbwbwbxbwbwbwbwbyaWaEaKaXbzbAbBbCbDbBbAbEbFbAaXaEaKajajajbGajajajamamamamajbHamamamamamajbIbibJambKaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPbLbMbNbMbOasanbPananbQaSananbPananajbRajaEaKaUbSbnbnkabnbTbnbTkabVaUaEaKaWbWeDeDeDeDeDeDeDeDbYaWaEbZaXcabCbEbBbAbFbzbFbFcbaXaEaKajccaLaLaLccajajajaqajajamamamamamamcdamceamamajcfaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPaPaPcgchcgcichcgaPaPcjckasclcmascnaSaSaScocpaSaSaScqanajaoajaEcrcscscscscscscscscscsctcscucvbwcweDcxcycyczcAcBcCcDbwcucvcEcEcEcEcEcEcEcEcEcEcFcGaEaKajcHaLaLaLccajcIcJamamcKcLcLcLcMamcNajamcOcPcQajaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPcRcScTcUcTcTcUcTaPaPcVcWasbNasasanbPanancXcYananbPananajamajaEcZdabnkabnbndbkbddalbnbndWaEaKdXdgdhcycycydidjcBcCdkdXaEaKdfcGcGcGcGdmdncGcGcGcGdfaEbZajdoaLdpaLdqajcIdrcLtWdtamamamcJamdxajamdycPdzajaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPaPaPcgchcgcichhcaPaPcjckasclcmascnaSaSaScocpaSaSaScqanajaoajaEcrcscscscscscscscscscsctcscucvbwcweDcxcycyczcAcBcCcDbwcucvcEcEcEcEcEcEcEcEcEcEcFcGaEaKajcHaLaLaLccajcIcJamamcKcLcLcLcMamcNajamcOcPcQajaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPcRcScTcUcTcThlhBaPaPcVcWasbNasasanbPanancXcYananbPananajamajaEcZdabnkabnbndbkbddalbnbndWaEaKdXdgdhcycycydidjcBcCdkdXaEaKdfcGcGcGcGdmdncGcGcGcGdfaEbZajdoaLdpaLdqajcIdrcLtWdtamamamcJamdxajamdycPdzajaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPdAdBcTcTcTcTcTcTfKaPaPdDdEdFbMdGasbjbjbjandHaSanbjbjbjanajamajaEcZaUdIdJdJbrdLbnbTbTkadMaUaEaKaWdNeDcydOcycycycBcCdPaWaEaKaXdQbDbFdRdRbBbFdSdTdUaXaEaKajccaLaLaLdVajamamamamamamWhiteeamefajegamehajajajaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPdldBcTcTejekelcTcTemaPbMbMeneoepasaQeqaQandHaSanaQeqaQanajamajzVcZaUeseteuevewexeyezeAeBaUWnaKaWeCbXeDeDeDeDeDeDeDeEaWWnaKaXbAbFbFbAeFeGdSeHeHbAaXWnaKajccaLaLaLccajamamamamamamamameKeLeMajajeNajajajajajaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPeOcTcTcTePcieQcTcTeRaPasaseSasasasananananeTaSanananananajaqajeUeVaUaUaUaUaUaUaUaUaUaUaUaUaVaKaWaWaWaWaWaWaWaWaWaWaWaWaVaTaXaXaXaXaXaXaXaXaXaXaXaXaVaKajajajbGajajajeWeXeYamamamfaeXfbfcajajajajajajaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -615,15 +623,15 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPfddBcTfMcTfecieQcTcTfffgfhfifjfkfkfkfl
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPfCdBcTfDfEfFaZeQcTcTcTdYfHaGaHaHaHfIaHaHaHaGfJaHaGaHaHaHaHdKfLdKfNaFaGaHaHaHaHaHaHaHaHaHdZaGaIaJaGaHaHaHaHaHaHaHaHaHdZaGaIaJaGdKaHaHaHaHaHaHaHaHaHaGaIaKedfvfPfQfPfveramamfScLcLcLcMamfzfAfTfBajajajaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPfUcTcTcTfVcieQcTcTfWaPfXfYfZfYfXfXfXfXfXfXkcgbfXfXfXfXfXajgcajgdaTgegegegegegegegegegegegeaVaTgfgfgfgfgfgfgfgfgfgfgfgfgtaTggggggggggggggggggggggggaVaKajajajbGajajajghcLdtamamamdrcLgjfcajajajajajajaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPeidBcTcTejekgkcTfEemaPglglglglgmfXkdgngnkegpgbgogqgrgsfXajfzajLwaKgegugvgwgxAOJlgxgygzgAgeWnaKgfdsbsgDgEgEgEgEgEgEgFgfWnaKgggGgGgHgIgJgKgJgLgMgNggWnbZajkffvfvkgfvajamamamamamamamameKeLeMajajeNajajajajajaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPdAdBcTcTcTcTcTcTdCaPaPglglglglgRfXgngnkdgSgpgbgbgbgbgTfXajfzajgdaKgegUgVgygxgygygxgygVgWgeaEaKgfdugDgEgYdvhahbhHhdhegfaEbZgghfgGhghhhihjhhhggMhkggaEaKajfvhmhnfvfvajamamamamamamWhithpamefajhqamehajajajaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPhrcScThscTcThscTaPaPhthtglhthtfXgngngngSgphukhhwhugbfXajfzajhxcvhyhyhyhyhyhyhyhyhyhyhzhycucvhAdwhChDhDhEhFhGimhdhIhAcucvhJhJhKhJhJhKhJhJhJhKhLhjaEaKajkihNhPhPdcajcIfaeXZNeYamamameKamdxajamhTcPdzajaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPaPaPhUhVhUhWchhUaPaPhthtglhthtfXhXkjhYkkgphuhviahugbfXajibajaEaKicididididieifidididideaaEaKebihiigEdeikilikhHhdihebaEaKechjhjhggLioiphjhjhjhjecaEaKajfvfvfvhPfvajcIkmisitiuiviviviwitixajamiycPcQajaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPizhtiAiBhtfXiCiDiEiEiFhukhhwhugbfXajfzajiGaKgeiHidididiIiIiIiJiIiKgeaEaKgfiLbUiigEgEgEgEgEgEiNgfaEaKggiOgGhgiPhjhiiQhggMiRggaEaKajhmfvfvfvfvajajajiUajajamamamamamamcdamceamamajcfaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPfXfXfXfXfXfXiVgpiWgbgbgTgbgbgbiYfXajfzajaEaKgeiZjaBagujcjdjejfjgjhgeaEaKgfjihAhAhAjjhAhAhAhAjkgfaEaKgggGgGjljmjnjojmjlgNgNggaEaKfvfvfvfvfvfGajjpjqjramajamamamamamamajbIbiamambKaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeJaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPfXfXfXfXfXfXjsgpgbgbgngngngngnjtfXajjuajaEaTgegegegegegegegegegegegeaVaTgfgfgfgfgfgfgfgfgfgfgfgfaVaTggggggggggggggggggggggggaVaKedfvfvfvfvfvajfzisjvbbajbcbdjwbfbgbhajaNbibJamajaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPfXfXfXfXfXfXfXjxjyjzgnjAfOjAgngnfXajfzajaEjBfravavavavaxavavavavavfrjCfqfravavavavavavavavavavfrjCfqfravavavavavavavavavavfrjCbZajknfvfvfvdcajjDjEjFjpajajajajajajajajaNjGamamajaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeJaPaPaPaPaPaPaPaPaPaPaPaPaPaPfXfXfXfXfXfXfXfXfXfXgngngngngnjtfXajfzajfHaHfIaHaHaHaHaHaHaHaHjHdKfIaHaHfIjHaHaHaHaHdKaHaHjHaHfIaHaHfIdKaHjHaHaHaHaHaHaHaHfIaHjIajfvkofvfvfvajjJjKjLjMajajajajajajajajajaBaBaBajaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXajfzajajaqajajjNajajjOajajajajajajajajajajajajajaqajaqajajajajajajajajajajajajajajajajajajajaqajfviTfPfvfvajajajiUajajajajajajajajajajajajajajajajajaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPdAdBcTcTcTcTcTcTdCaPaPgRglglglhQfXgngnkdgSgpgbgbgbgbgTfXajfzajgdaKgegUgVgygxgygygxgygVgWgeaEaKgfdugDgEgYdvhahbhHhdhegfaEbZgghfgGhghhhihjhhhggMhkggaEaKajfvhmhnfvfvajamamamamamamWhithpamefajhqamehajajajaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPhrcScThscTcThMhBaPaPhthtglhthtfXgngngngSgphukhhwhugbfXajfzajhxcvhyhyhyhyhyhyhyhyhyhyhzhycucvhAdwhChDhDhEhFhGimhdhIhAcucvhJhJhKhJhJhKhJhJhJhKhLhjaEaKajkihNhPhPdcajcIfaeXZNeYamamameKamdxajamhTcPdzajaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPaPaPhUhVhUhWchhcaPaPhthtglhthtfXhXkjhYkkgphuhviahugbfXajibajaEaKicididididieifidididideaaEaKebihiigEdeikilikhHhdihebaEaKechjhjhggLioiphjhjhjhjecaEaKajfvfvfvhPfvajcIkmisitiuiviviviwitixajamiycPcQajaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPizhtglhOhtfXiCiDiEiEiFhukhhwhugbfXajfzajiGaKgeiHidididiIiIiIiJiIiKgeaEaKgfiLbUiigEgEgEgEgEgEiNgfaEaKggiOgGhgiPhjhiiQhggMiRggaEaKajhmfvfvfvfvajajajiUajajamamamamamamcdamceamamajcfaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPglglglglglfXiVgpiWgbgbgTgbgbgbiYfXajfzajaEaKgeiZjaBagujcjdjejfjgjhgeaEaKgfjihAhAhAjjhAhAhAhAjkgfaEaKgggGgGjljmjnjojmjlgNgNggaEaKfvfvfvfvfvfGajjpjqjramajamamamamamamajbIbiamambKaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeJaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPgRglglglhSfXjsgpgbgbgngngngngnjtfXajjuajaEaTgegegegegegegegegegegegeaVaTgfgfgfgfgfgfgfgfgfgfgfgfaVaTggggggggggggggggggggggggaVaKedfvfvfvfvfvajfzisjvbbajbcbdjwbfbgbhajaNbibJamajaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPhthtglhthtfXfXjxjyjzgnjAfOjAgngnfXajfzajaEjBfravavavavaxavavavavavfrjCfqfravavavavavavavavavavfrjCfqfravavavavavavavavavavfrjCbZajknfvfvfvdcajjDjEjFjpajajajajajajajajaNjGamamajaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeJaPaPaPaPaPaPaPaPaPaPaPaPaPaPhthtglhthtfXfXfXfXfXgngngngngnjtfXajfzajfHaHfIaHaHaHaHaHaHaHaHjHdKfIaHaHfIjHaHaHaHaHdKaHaHjHaHfIaHaHfIdKaHjHaHaHaHaHaHaHaHfIaHjIajfvkofvfvfvajjJjKjLjMajajajajajajajajajaBaBaBajaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPighthRinhtfXfXfXfXfXfXfXfXfXfXfXfXajfzajajaqajajjNajajjOajajajajajajajajajajajajajaqajaqajajajajajajajajajajajajajajajajajajajaqajfviTfPfvfvajajajiUajajajajajajajajajajajajajajajajajaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeJaPaPaPfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXajfzajajamajajajajajajajajajajajajajajajajajajajamajamajajajajajajajajajajajajajajajajajajajamajajajajajajajajajfzajajajajajajajajajajajajajajajajajajajajaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXajjPitititititititjQjRititititititjQjRjSjRitititjQititititjRjSjRjQititititititjRjQitititjRititititititjQititititjTajajajajajajajajajajajajajajaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXfXajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

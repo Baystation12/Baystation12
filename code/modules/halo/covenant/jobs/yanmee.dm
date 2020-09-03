@@ -31,3 +31,4 @@
 	access = list(access_covenant, access_covenant_command, access_covenant_slipspace, access_covenant_cargo)
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/yanmee)
+	pop_balance_mult = 1.5

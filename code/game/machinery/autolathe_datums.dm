@@ -368,12 +368,6 @@
 	path = /obj/item/clothing/glasses/welding
 	category = "General"
 
-/datum/autolathe/recipe/flamethrower
-	name = "flamethrower"
-	path = /obj/item/weapon/flamethrower/full
-	hidden = 1
-	category = "Arms and Ammunition"
-
 /datum/autolathe/recipe/magazine_revolver_1
 	name = "ammunition (.357)"
 	path = /obj/item/ammo_magazine/a357

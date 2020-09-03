@@ -1,6 +1,6 @@
 
 /atom/proc/change_elevation(var/amount = 1)
-	var/new_alpha = alpha - (50 * amount)
+	var/new_alpha = between(alpha - (30 * amount),0,255)
 	animate(src,alpha = new_alpha,time = amount SECONDS)
 	elevation += amount
 

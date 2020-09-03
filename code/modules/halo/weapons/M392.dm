@@ -17,7 +17,6 @@
 	w_class = ITEM_SIZE_LARGE
 	dispersion = list(0.26)
 	hud_bullet_row_num = 10
-	fire_delay = 10
 	accuracy = -1
 	scoped_accuracy = 2
 	var/on = 0
@@ -51,14 +50,14 @@
 	icon_state = "M395mag"
 	mag_type = MAGAZINE
 	caliber = "7.62mm"
-	max_ammo = 30
+	max_ammo = 20
 	multiple_sprites = 1
 
 //M118 Ammunition
 
 /obj/item/ammo_magazine/m392/m120
 	name = "M392 magazine (7.62mm) M120"
-	desc = "7.62x51mm M120 Full Metal Jacket High Penetration (FMJ-HP) magazine for the M392 containing 40 shots."
+	desc = "7.62x51mm M120 Full Metal Jacket High Penetration (FMJ-HP) magazine for the M392 containing 20 shots."
 	ammo_type = /obj/item/ammo_casing/m120
 
 /obj/item/weapon/storage/box/m392_m120
