@@ -1,0 +1,4 @@
+author: "Spookerton"
+delete-after: True
+changes: 
+  - bugfix: "Computers can no longer turn on when they should not."
