@@ -57,6 +57,6 @@
 	desc = "7.62x51mm M118 Full Metal Jacket Armour Piercing (FMJ-AP) box magazine for the M739 squad support weapon containing 150 shots."
 	ammo_type = /obj/item/ammo_casing/m118
 
-/obj/item/weapon/storage/box/m739_m118
+/obj/item/weapon/storage/box/large/m739_m118
 	name = "box of M739 7.62mm M118 box magazines"
 	startswith = list(/obj/item/ammo_magazine/m739/m118 = 3)

@@ -70,7 +70,7 @@
 /decl/hierarchy/supply_pack/unsc_ammo/m739_m118
 	name = "M739 7.62mm M118 box magazines (2 boxes)"
 	cost = 400
-	contains = list(/obj/item/weapon/storage/box/m739_m118 = 2)
+	contains = list(/obj/item/weapon/storage/box/large/m739_m118 = 2)
 	containername = "\improper M739 ammo crate (M118)"
 
 /* Shotgun */
