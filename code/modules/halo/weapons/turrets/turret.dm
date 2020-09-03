@@ -1,6 +1,4 @@
 
-#define EJECT_CASINGS	2
-
 /obj/structure/turret
 	name = "Turret"
 	desc = "A turret"
@@ -280,5 +278,3 @@
 		slot_l_hand_str = 'code/modules/halo/weapons/turrets/mob_turret.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/turrets/mob_turret.dmi',
 		)
-
-#undef EJECT_CASINGS

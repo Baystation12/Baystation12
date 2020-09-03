@@ -27,3 +27,28 @@
 	set popup_menu = 1
 
 	toggle_scope(usr, 1.4)
+
+//SDSS PROJECTILE
+/obj/item/projectile/SDSS_proj
+	name = "hard sound wave"
+	desc = "It's a wave of sound that's also suprisingly dense."
+	step_delay = 0.1
+	icon = null //No icon on purpose, it's a sound wave.
+	icon_state = ""
+	damtype = PAIN
+	damage = 40
+	//NOTE: Life() calls happen every two seconds, and life() reduces dizziness by one
+	var/stun_time = 4 //This is in ticks
+	var/suppress_intensity = 8
+	var/disorient_time = 6
+
+/obj/item/projectile/SDSS_proj/on_hit(var/mob/living/carbon/human/L, var/blocked = 0, var/def_zone = null)
+	. = ..()
+	if(!istype(L) || !isliving(L) || isanimal(L))
+		return 0
+
+	L.Weaken(stun_time)
+	L.confused += disorient_time
+	shake_camera(L,disorient_time,2)
+	L.overlay_fullscreen("supress",/obj/screen/fullscreen/oxy, suppress_intensity)
+	return 1

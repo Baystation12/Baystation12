@@ -76,6 +76,18 @@
 		icon_state = "KV-32_unloaded"
 	. = ..()
 
+/obj/item/ammo_magazine/kv32
+	name = "magazine (12 gauge) Buckshot"
+	desc = "12 gauge magazine containing 4 rounds. Fits the KV-32."
+	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
+	icon_state = "kv_mag"
+	mag_type = MAGAZINE
+	ammo_type = /obj/item/ammo_casing/shotgun/pellet
+	matter = list(DEFAULT_WALL_MATERIAL = 1500)
+	caliber = "shotgun"
+	max_ammo = 4
+	multiple_sprites = 1
+
 //M45 TS shotgun
 
 /obj/item/weapon/gun/projectile/shotgun/pump/m45_ts
