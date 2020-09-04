@@ -38,10 +38,10 @@ var/global/datum/repository/crew/crew_repository = new()
 /datum/repository/crew/proc/health_data(var/argument)
 	var/list/crewmembers = list()
 	if(isnum(argument))
-		var/msg = "ALERT: Something is attempting to poll for crew suit sensor data using the old zlevel method! Please inform Cael_Aislinn"
-		log_debug(msg)
+		var/msg = "WARNING: Something is attempting to poll for crew suit sensor data using the old zlevel method"
 		message_staff(msg)
-		return crewmembers
+		. = crewmembers
+		CRASH(msg)
 
 	/*var/datum/cache_entry/cache_entry = cache_data[z_level]
 	if(cache_data)
