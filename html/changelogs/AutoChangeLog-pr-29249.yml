@@ -1,0 +1,4 @@
+author: "Hubblenaut"
+delete-after: True
+changes: 
+  - bugfix: "Fixes sprites not updating when getting cleaned by space cleaner."
