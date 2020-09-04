@@ -41,7 +41,7 @@
 	else
 		enable_camera = !enable_camera
 		to_chat(usr,"<span class='info'>You [enable_camera ? "en" : "dis"]able [src]'s remote camera.</span>")
-
+/*
 /obj/item/clothing/glasses/hud/tactical/ex_act(var/severity)
 	switch(severity)
 		if(1)
@@ -55,7 +55,7 @@
 			if(prob(25))
 				camera_status |= BROKEN
 				enable_camera = FALSE
-
+*/
 /obj/item/clothing/glasses/hud/tactical/emp_act(var/severity)
 	//visual effect
 	var/image/I = image('icons/effects/effects.dmi', src, "empdisable")
