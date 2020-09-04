@@ -336,7 +336,7 @@
 "gx" = (/obj/effect/floor_decal/industrial/warning{tag = "icon-warning (EAST)"; icon_state = "warning"; dir = 4},/turf/simulated/floor/tech/maint,/area/faction_base/oni/hangar)
 "gy" = (/obj/machinery/conveyor{dir = 1; id = "oni_cargo_conveyor"},/turf/simulated/floor/shuttle/yellow,/area/shuttle/oni_shuttle_supply)
 "gz" = (/obj/machinery/door/airlock/multi_tile/halo{dir = 1; name = "Fabrication"; req_access = list(317)},/turf/simulated/floor/tech/maint,/area/faction_base/oni/hangar)
-"gA" = (/obj/item/modular_computer/console/preset/oni_supply,/turf/simulated/floor/plating,/area/faction_base/oni/hangar)
+"gA" = (/obj/item/modular_computer/console/unsc/oni_supply,/turf/simulated/floor/plating,/area/faction_base/oni/hangar)
 "gB" = (/obj/effect/floor_decal/industrial/warning{tag = "icon-warning (EAST)"; icon_state = "warning"; dir = 4},/obj/structure/closet/crate,/turf/simulated/floor/tech/maint,/area/faction_base/oni/hangar)
 "gC" = (/obj/structure/grille,/obj/structure/window/reinforced/treated,/obj/structure/window/reinforced/treated{dir = 1},/obj/structure/window/reinforced/treated{dir = 4},/turf/simulated/floor/tech/gray,/area/faction_base/oni/research)
 "gD" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 1},/obj/structure/window/reinforced/treated{dir = 1},/obj/machinery/light/colored/orange{tag = "icon-orange1 (WEST)"; icon_state = "orange1"; dir = 8},/turf/simulated/floor/plating,/area/faction_base/oni/blacksite)

@@ -1077,7 +1077,7 @@
 "uK" = (/obj/machinery/alarm{dir = 4; icon_state = "alarm0"; pixel_x = -24},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/tech/ridged,/area/faction_base/unsc/odp/hangar_e)
 "uL" = (/obj/structure/ai_routing_node/unsc,/turf/simulated/floor/tech/ridged,/area/faction_base/unsc/odp/hangar_e)
 "uM" = (/obj/structure/window/reinforced/projresist{icon_state = "rwindow"; dir = 8},/obj/structure/window/reinforced/projresist,/obj/structure/table/standard,/obj/item/weapon/paper_bin,/obj/item/weapon/pen,/turf/simulated/floor/tech/ridged,/area/faction_base/unsc/odp/hangar_e)
-"uN" = (/obj/structure/window/reinforced/projresist,/obj/item/modular_computer/console/preset/unsc_supply,/turf/simulated/floor/tech/ridged,/area/faction_base/unsc/odp/hangar_e)
+"uN" = (/obj/structure/window/reinforced/projresist,/obj/item/modular_computer/console/unsc/supply,/turf/simulated/floor/tech/ridged,/area/faction_base/unsc/odp/hangar_e)
 "uO" = (/obj/machinery/atmospherics/unary/vent_scrubber,/turf/simulated/floor/tiled,/area/faction_base/unsc/odp/atmos_corridor)
 "uP" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{icon_state = "intact-scrubbers"; dir = 4},/obj/structure/sign/halo_floorsign/bridge{icon_state = "bridge"; dir = 1},/turf/simulated/floor/tiled,/area/faction_base/unsc/odp/central_lobby)
 "uQ" = (/obj/machinery/atmospherics/unary/vent_pump/high_volume{icon_state = "map_vent"; dir = 1},/turf/simulated/floor/tiled,/area/faction_base/unsc/odp/atmos_corridor)

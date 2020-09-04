@@ -2087,6 +2087,7 @@
 #include "code\modules\halo\unsc\combatdogs.dm"
 #include "code\modules\halo\unsc\faxmachine.dm"
 #include "code\modules\halo\unsc\hrunting.dm"
+#include "code\modules\halo\unsc\modular_computer.dm"
 #include "code\modules\halo\unsc\ranks.dm"
 #include "code\modules\halo\unsc\simple_mobs.dm"
 #include "code\modules\halo\unsc\spartan.dm"
