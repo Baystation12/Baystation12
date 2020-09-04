@@ -1,4 +1,0 @@
-author: "Hubblenaut"
-delete-after: True
-changes: 
-  - bugfix: "Fixes firealarm overlays for away sites."
