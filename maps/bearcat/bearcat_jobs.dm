@@ -159,7 +159,7 @@
 	shoes = /obj/item/clothing/shoes/black
 	pda_type = /obj/item/modular_computer/pda/captain
 	r_pocket = /obj/item/device/radio
-	id_type = /obj/item/weapon/card/id/gold
+	id_types = list(/obj/item/weapon/card/id/gold)
 
 
 /decl/hierarchy/outfit/job/bearcat/captain/post_equip(var/mob/living/carbon/human/H)
@@ -182,7 +182,7 @@
 	pda_type = /obj/item/modular_computer/pda/heads/ce
 	l_hand = /obj/item/weapon/wrench
 	belt = /obj/item/weapon/storage/belt/utility/full
-	id_type = /obj/item/weapon/card/id/engineering/head
+	id_types = list(/obj/item/weapon/card/id/engineering/head)
 	r_pocket = /obj/item/device/radio
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
 

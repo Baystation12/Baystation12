@@ -10,7 +10,7 @@
 	l_ear = /obj/item/device/radio/headset/heads/torchexec
 	shoes = /obj/item/clothing/shoes/dutyboots
 	head = /obj/item/clothing/head/soft/solgov/expedition/co
-	id_type = /obj/item/weapon/card/id/torch/gold
+	id_types = list(/obj/item/weapon/card/id/torch/gold)
 	pda_type = /obj/item/modular_computer/pda/captain
 
 /decl/hierarchy/outfit/job/torch/crew/command/CO/New()
@@ -24,7 +24,7 @@
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/command
 	l_ear = /obj/item/device/radio/headset/heads/torchexec
 	shoes = /obj/item/clothing/shoes/dutyboots
-	id_type = /obj/item/weapon/card/id/torch/silver
+	id_types = list(/obj/item/weapon/card/id/torch/silver)
 	pda_type = /obj/item/modular_computer/pda/heads/hop
 
 /decl/hierarchy/outfit/job/torch/crew/command/XO/fleet
@@ -37,7 +37,7 @@
 	l_ear  =/obj/item/device/radio/headset/heads/cmo
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/medical
 	shoes = /obj/item/clothing/shoes/dutyboots
-	id_type = /obj/item/weapon/card/id/torch/silver/medical
+	id_types = list(/obj/item/weapon/card/id/torch/silver/medical)
 	pda_type = /obj/item/modular_computer/pda/heads/cmo
 	pda_slot = slot_l_store
 
@@ -55,7 +55,7 @@
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/engineering
 	shoes = /obj/item/clothing/shoes/dutyboots
 	l_ear = /obj/item/device/radio/headset/heads/ce
-	id_type = /obj/item/weapon/card/id/torch/silver/engineering
+	id_types = list(/obj/item/weapon/card/id/torch/silver/engineering)
 	pda_type = /obj/item/modular_computer/pda/heads/ce
 	pda_slot = slot_l_store
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
@@ -74,7 +74,7 @@
 	l_ear = /obj/item/device/radio/headset/heads/cos
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/security
 	shoes = /obj/item/clothing/shoes/dutyboots
-	id_type = /obj/item/weapon/card/id/torch/silver/security
+	id_types = list(/obj/item/weapon/card/id/torch/silver/security)
 	pda_type = /obj/item/modular_computer/pda/heads/hos
 
 /decl/hierarchy/outfit/job/torch/crew/command/cos/New()
@@ -91,7 +91,7 @@
 	l_ear = /obj/item/device/radio/headset/heads/torchntcommand
 	uniform = /obj/item/clothing/under/suit_jacket/corp
 	shoes = /obj/item/clothing/shoes/laceup
-	id_type = /obj/item/weapon/card/id/torch/passenger/corporate/liaison
+	id_types = list(/obj/item/weapon/card/id/torch/passenger/corporate/liaison)
 	pda_type = /obj/item/modular_computer/pda/heads/paperpusher
 	backpack_contents = list(/obj/item/clothing/accessory/badge/nanotrasen = 1)
 
@@ -100,7 +100,7 @@
 	l_ear =    /obj/item/device/radio/headset/heads/torchcorp
 	uniform =  /obj/item/clothing/under/suit_jacket/corp
 	shoes =    /obj/item/clothing/shoes/laceup
-	id_type =  /obj/item/weapon/card/id/torch/passenger/corporate
+	id_types = list( /obj/item/weapon/card/id/torch/passenger/corporate)
 	pda_type = /obj/item/modular_computer/pda/heads/paperpusher
 
 /decl/hierarchy/outfit/job/torch/crew/representative
@@ -109,7 +109,7 @@
 	uniform = /obj/item/clothing/under/rank/internalaffairs/plain/solgov
 	suit = /obj/item/clothing/suit/storage/toggle/suit/black
 	shoes = /obj/item/clothing/shoes/laceup
-	id_type = /obj/item/weapon/card/id/torch/crew/representative
+	id_types = list(/obj/item/weapon/card/id/torch/crew/representative)
 	pda_type = /obj/item/modular_computer/pda/heads/paperpusher
 
 /decl/hierarchy/outfit/job/torch/crew/command/sea/fleet
@@ -117,14 +117,14 @@
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/command
 	shoes = /obj/item/clothing/shoes/dutyboots
 	l_ear = /obj/item/device/radio/headset/sea
-	id_type = /obj/item/weapon/card/id/torch/crew/sea
+	id_types = list(/obj/item/weapon/card/id/torch/crew/sea)
 	pda_type = /obj/item/modular_computer/pda/heads
 
 /decl/hierarchy/outfit/job/torch/crew/command/bridgeofficer
 	name = OUTFIT_JOB_NAME("Bridge Officer")
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/command
 	shoes = /obj/item/clothing/shoes/dutyboots
-	id_type = /obj/item/weapon/card/id/torch/crew/bridgeofficer
+	id_types = list(/obj/item/weapon/card/id/torch/crew/bridgeofficer)
 	pda_type = /obj/item/modular_computer/pda/heads
 	l_ear = /obj/item/device/radio/headset/bridgeofficer
 

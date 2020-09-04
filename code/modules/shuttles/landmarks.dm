@@ -45,7 +45,7 @@
 	var/docking_tag = docking_controller
 	docking_controller = SSshuttle.docking_registry[docking_tag]
 	if(!istype(docking_controller))
-		log_error("Could not find docking controller for shuttle waypoint '[name]', docking tag was '[docking_tag]'.")
+		CRASH("Could not find docking controller for shuttle waypoint '[name]', docking tag was '[docking_tag]'.")
 	if(GLOB.using_map.use_overmap)
 		var/obj/effect/overmap/visitable/location = map_sectors["[z]"]
 		if(location && location.docking_codes)

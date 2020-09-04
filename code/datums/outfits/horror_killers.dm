@@ -12,7 +12,7 @@
 	r_hand = /obj/item/weapon/material/twohanded/fireaxe
 
 	id_slot = slot_wear_id
-	id_type = /obj/item/weapon/card/id/centcom/station
+	id_types = list(/obj/item/weapon/card/id/centcom/station)
 	id_pda_assignment = "Tunnel Clown!"
 
 /decl/hierarchy/outfit/masked_killer
@@ -45,7 +45,7 @@
 	l_pocket = /obj/item/weapon/melee/energy/sword
 
 	id_slot = slot_wear_id
-	id_type = /obj/item/weapon/card/id/syndicate/station_access
+	id_types = list(/obj/item/weapon/card/id/syndicate/station_access)
 	pda_slot = slot_belt
 	pda_type = /obj/item/modular_computer/pda/heads
 
