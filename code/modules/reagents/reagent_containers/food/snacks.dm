@@ -3440,6 +3440,8 @@
 	icon_state = "proteinbar"
 	trash = /obj/item/trash/proteinbar
 	bitesize = 6
+	atom_flags = ATOM_FLAG_NO_REACT
+
 /obj/item/weapon/reagent_containers/food/snacks/proteinbar/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment, 9)
