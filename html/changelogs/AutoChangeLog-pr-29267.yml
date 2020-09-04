@@ -1,0 +1,4 @@
+author: "Hubblenaut"
+delete-after: True
+changes: 
+  - tweak: "The potato reactor will now display the coolant amount in its UI."
