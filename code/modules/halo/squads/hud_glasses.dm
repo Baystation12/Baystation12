@@ -10,10 +10,81 @@
 	var/list/waypoint_pointers = list()
 	var/mob/last_user
 	armor = list(melee = 5, bullet = 5, laser = 0, energy = 0, bomb = 5, bio = 0, rad = 0)
+	var/enable_camera = TRUE
+	var/camera_status = 0
 
 /obj/item/clothing/glasses/hud/tactical/New()
 	. = ..()
 	//setup_nightvision()
+	GLOB.emp_candidates.Add(src)
+
+/obj/item/clothing/glasses/hud/tactical/Destroy()
+	GLOB.emp_candidates.Remove(src)
+	. = ..()
+
+/obj/item/clothing/glasses/hud/tactical/examine(var/mob/user)
+	. = ..()
+	if(camera_status & BROKEN)
+		to_chat(user,"<span class='warning'>[src]'s remote camera has been destroyed!</span>")
+	else if(camera_status & EMPED)
+		to_chat(user,"<span class='notice'>Something has temporarily disrupted [src]'s remote camera!</span>")
+
+/obj/item/clothing/glasses/hud/tactical/verb/toggle_camera()
+	set name = "Toggle Remote Camera"
+	set category = "Object"
+	set src in usr
+	..()
+	if(camera_status & BROKEN)
+		to_chat(usr,"<span class='notice'>[src]'s remote camera has been destroyed!</span>")
+	else if(camera_status & EMPED)
+		to_chat(usr,"<span class='notice'>Something has temporarily disrupted [src]'s remote camera!</span>")
+	else
+		enable_camera = !enable_camera
+		to_chat(usr,"<span class='info'>You [enable_camera ? "en" : "dis"]able [src]'s remote camera.</span>")
+
+/obj/item/clothing/glasses/hud/tactical/ex_act(var/severity)
+	switch(severity)
+		if(1)
+			camera_status |= BROKEN
+			enable_camera = FALSE
+		if(2)
+			if(prob(50))
+				camera_status |= BROKEN
+				enable_camera = FALSE
+		if(3)
+			if(prob(25))
+				camera_status |= BROKEN
+				enable_camera = FALSE
+
+/obj/item/clothing/glasses/hud/tactical/emp_act(var/severity)
+	//visual effect
+	var/image/I = image('icons/effects/effects.dmi', src, "empdisable")
+	overlays += I
+	show_image(src.loc, I)
+	spawn(30)
+		overlays -= I
+		qdel(I)
+
+	//disable camera
+	enable_camera = FALSE
+	camera_status |= EMPED
+
+
+	//disable nightvision
+	if(nv_enabled)
+		nv_enabled = FALSE
+
+	//update the visual effect
+	var/mob/living/carbon/human/user = src.loc
+	if(istype(user) && user.glasses == src)
+		reset_effect(user)
+
+	//reset it
+	spawn(60 + (severity * 20))
+		enable_camera = TRUE
+		camera_status &= ~EMPED
+
+	. = ..()
 
 /obj/item/clothing/glasses/hud/tactical/proc/get_loc_used()
 	if(!isturf(loc))
@@ -108,6 +179,10 @@
 	set category = "Object"
 
 	var/mob/living/carbon/human/user = usr
+
+	if(camera_status & EMPED)
+		to_chat(user,"<span class='notice'>Something has temporarily disrupted [src]'s night vision!</span>")
+		return
 
 	//swap the setting
 	nv_enabled = !nv_enabled

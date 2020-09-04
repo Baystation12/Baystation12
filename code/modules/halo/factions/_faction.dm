@@ -55,6 +55,7 @@
 	var/next_special_job = 0
 
 	var/list/listening_programs = list()
+	var/datum/repository/crew/crew_repo
 
 /datum/faction/New()
 	. = ..()
@@ -90,6 +91,9 @@
 
 	if(income)
 		start_processing()
+
+	crew_repo = new()
+	crew_repo.my_faction = src
 
 /datum/faction/proc/add_faction_reputation(var/faction_name, var/new_rep)
 	if(!faction_reputation.Find(faction_name))

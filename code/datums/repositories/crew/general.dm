@@ -3,9 +3,13 @@
 **********/
 
 /crew_sensor_modifier/general/process_crew_data(var/mob/living/carbon/human/H, var/obj/item/clothing/under/C, var/turf/pos, var/list/crew_data)
-	crew_data["name"] = H.get_authentification_name(if_no_id="Unknown")
+	crew_data["name"] = H.real_name//H.get_authentification_name(if_no_id="Unknown")
 	crew_data["rank"] = H.get_authentification_rank(if_no_id="Unknown", if_no_job="No Job")
-	crew_data["assignment"] = H.get_assignment(if_no_id="Unknown", if_no_job="No Job")
+	crew_data["assignment"] = H.mind ? H.mind.assigned_role : H.get_assignment(if_no_id="Unknown", if_no_job="No Job")
+
+	var/obj/item/clothing/glasses/hud/tactical/T = H.glasses
+	if(istype(T) && T.enable_camera)
+		crew_data["cam"] = 1
 	return ..()
 
 /**********
