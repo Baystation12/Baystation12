@@ -9,7 +9,7 @@
 "ai" = (/obj/machinery/door/airlock/covenant/cov_ship_preset,/obj/machinery/light/covenant/south,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "aj" = (/obj/machinery/door/airlock/covenant/cov_ship_preset,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "ak" = (/turf/simulated/wall/covenant,/area/om_ships/req_console_ship)
-"al" = (/obj/machinery/light/covenant/south,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"al" = (/obj/machinery/overmap_weapon_console/npc_comms_console/cov{icon_state = "covie_nav_off"},/obj/item/modular_computer/console/covenant/crew,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "am" = (/obj/structure/closet/secure_closet/freezer/kitchen{color = "#ff99ff"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "an" = (/obj/machinery/cooker/grill{color = "#ff99ff"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "ao" = (/obj/machinery/cooker/fryer{color = "#ff99ff"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
@@ -25,7 +25,6 @@
 "ay" = (/obj/structure/window/reinforced/projresist/covenant{dir = 1},/obj/structure/window/reinforced/projresist/covenant{dir = 8},/obj/structure/grille,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "az" = (/obj/structure/window/reinforced/projresist/covenant{dir = 1},/obj/structure/window/reinforced/projresist/covenant{dir = 2},/obj/structure/window/reinforced/projresist/covenant{dir = 4},/obj/structure/grille,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "aA" = (/obj/machinery/overmap_comms/receiver/battlenet,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
-"aB" = (/obj/machinery/light/covenant/north,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "aC" = (/obj/structure/window/reinforced/projresist/covenant{dir = 4},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "aD" = (/obj/machinery/repulsor_engine{tag = "icon-nozzle (WEST)"; icon_state = "nozzle"; dir = 8},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "aE" = (/obj/structure/window/reinforced/projresist/covenant{dir = 8},/obj/structure/window/reinforced/projresist/covenant{dir = 4},/obj/structure/grille,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
@@ -56,7 +55,6 @@
 "bd" = (/obj/vehicles/drop_pod/overmap/covenant,/obj/machinery/light/covenant/east,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "be" = (/obj/machinery/light/covenant/east,/turf/simulated/wall/covenant,/area/om_ships/req_console_ship)
 "bf" = (/obj/machinery/repulsor_engine{tag = "icon-nozzle (WEST)"; icon_state = "nozzle"; dir = 8},/obj/structure/window/reinforced/projresist/covenant{dir = 8},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
-"bg" = (/obj/machinery/overmap_weapon_console/npc_comms_console/cov{icon_state = "covie_nav_off"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bh" = (/obj/structure/closet/walllocker/emerglocker/covvie/south,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bi" = (/obj/structure/window/reinforced/projresist/covenant{dir = 1},/obj/structure/stairs_decorative{dir = 4; icon_state = "stairs"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bj" = (/obj/structure/window/reinforced/projresist/covenant{dir = 2},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
@@ -74,7 +72,7 @@
 "bD" = (/obj/structure/closet/secure_closet/freezer/fridge{color = "#ff99ff"},/obj/structure/closet/walllocker/emerglocker/covvie/north,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "cO" = (/obj/machinery/vending/dinnerware{color = "#ff99ff"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "ec" = (/obj/machinery/overmap_weapon_console/boarding_beacon_launcher/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
-"eO" = (/obj/structure/closet/secure_closet/freezer/meat{color = "#ff99ff"},/obj/structure/sink/kitchen{color = "#ff99ff";pixel_y = 22},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"eO" = (/obj/structure/closet/secure_closet/freezer/meat{color = "#ff99ff"},/obj/structure/sink/kitchen{color = "#ff99ff"; pixel_y = 22},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "hI" = (/obj/machinery/light/covenant/north,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "im" = (/obj/effect/hull_segment,/turf/simulated/wall/covenant/reinforced,/area/om_ships/req_console_ship)
 "ox" = (/obj/effect/hull_segment,/turf/simulated/wall/covenant,/area/om_ships/req_console_ship)
@@ -112,11 +110,11 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababagafafabadadadadadabah
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababadadadaiadadadbhadaiadadadajadadababababababababadadadababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababababakakoxakakadadadakakakakoxakakMyadajadababababababzwadadababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaabakakakoxakakakakakakababakamanaoapakakajakakaqarasasatakakakakadauavawaxababadadadababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaayazakaAakakadadadaBadadadakeOadadadadbDakadadaBadadadadadaBajadadadadadadadadPDadalaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaEaFaBadaGakadaHaIaIaIaJadakaKaLaLaLaLadajadadaMadafadafadafakaOaPadaQadaRaSaToxajakakakaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaayazakaAakakadadadhIadadadakeOadadadadbDakadadhIadadadadadhIajadadadadadadadadPDadMyaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaEaFhIadaGakadaHaIaIaIaJadakaKaLaLaLaLadajadadaMadafadafadafakaOaPadaQadaRaSaToxajakakakaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaEaNaVadadajadaUaVaLaXadadajadChaYaYaYaZakbaadbbadbcaZakbdbeakakakajakajakakakakaKbfaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaEbgaladbhakadbibjbjbjaJadakaKaLaLaLaLadajadadbkadafadafadafakblbmadbnadaRaSaToxajakakakaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaabobpakbqakakadadadaladadadakaWadadadadJXakadadaladadadadadalajadadadadadadadadpwadaBaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaEalMyadbhakadbibjbjbjaJadakaKaLaLaLaLadajadadbkadafadafadafakblbmadbnadaRaSaToxajakakakaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaabobpakbqakakadadadMyadadadakaWadadadadJXakadadMyadadadadadMyajadadadadadadadadpwadhIaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaababababimababababababababakcOTVLbHzakakajakakbubvasasatakakakakadauavawaxababadadadababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababababakakoxakakadadadakakakakoxakakhIadajadababababababadadadababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababadadadbwadadadaGadbwadadadajadadababababababababzwadadababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
