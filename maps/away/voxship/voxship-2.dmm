@@ -845,7 +845,7 @@
 /obj/item/stack/cable_coil/random,
 /obj/item/stack/cable_coil/random,
 /obj/item/stack/cable_coil/random,
-/obj/item/weldpack,
+/obj/item/reagent_kit/weldingtool,
 /obj/item/weldingtool/largetank,
 /obj/item/stack/material/steel/ten,
 /obj/item/stack/material/plastic/ten,

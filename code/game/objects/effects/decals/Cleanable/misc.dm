@@ -86,7 +86,7 @@
 	random_icon_states = icon_states(icon)
 	..()
 	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
-	create_reagents(30, src)
+	create_reagents(30)
 	if(prob(75))
 		var/matrix/M = matrix()
 		M.Turn(pick(90, 180, 270))
