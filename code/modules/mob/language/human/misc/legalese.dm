@@ -4,6 +4,7 @@
 	speech_verb = "states"
 	exclaim_verb = "objects"
 	ask_verb = "inquiries"
+	shorthand = "Law"
 	space_chance = 100
 	key = "u"
 	partial_understanding = list(
