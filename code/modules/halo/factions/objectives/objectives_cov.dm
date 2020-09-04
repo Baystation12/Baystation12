@@ -12,7 +12,7 @@
 
 /datum/objective/overmap/covenant_odp
 	short_text = "Destroy the human defence platform"
-	explanation_text = "Destroy the human defence platform by boarding it and detonating the antimatter bomb."
+	explanation_text = "Destroy the human defence platform by boarding it and detonating the antimatter bomb. Structural vulnerabilites may exist at the following locations: Shooting Range, Gym, Aft Offices, Aft Corridor, Starboard Hangar Storage"
 	target_faction_name = "UNSC"
 	objective_type = 0
 	overmap_type = 0
