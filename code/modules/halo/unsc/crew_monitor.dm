@@ -1,4 +1,7 @@
 
+/obj/item/modular_computer/console/unsc/crew
+	name = "Crew monitoring computer"
+
 /obj/item/modular_computer/console/unsc/crew/install_default_programs()
 	..()
 	hard_drive.store_file(new/datum/computer_file/program/suit_sensors/unsc())
