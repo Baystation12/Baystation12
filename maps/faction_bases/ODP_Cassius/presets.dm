@@ -1,5 +1,6 @@
 
 /obj/machinery/door/airlock/halo/maint/odp_maint
+	name = "Maintenance Access"
 	req_access = list(access_unsc)
 
 /obj/machinery/door/airlock/halo/odp_general
