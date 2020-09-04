@@ -2,8 +2,12 @@ var/global/datum/repository/crew/crew_repository = new()
 
 /datum/repository/crew
 	var/list/cache_data
+	var/datum/cache_entry/cache_entry
 	var/list/modifier_queues
 	var/list/modifier_queues_by_type
+
+	var/datum/faction/my_faction
+	var/list/cached_mobs = list()
 
 /datum/repository/crew/New()
 	cache_data = list()
@@ -31,23 +35,31 @@ var/global/datum/repository/crew/crew_repository = new()
 
 	..()
 
-/datum/repository/crew/proc/health_data(var/z_level)
+/datum/repository/crew/proc/health_data(var/argument)
 	var/list/crewmembers = list()
-	if(!z_level)
-		return crewmembers
+	if(isnum(argument))
+		var/msg = "WARNING: Something is attempting to poll for crew suit sensor data using the old zlevel method"
+		message_staff(msg)
+		. = crewmembers
+		CRASH(msg)
 
-	var/datum/cache_entry/cache_entry = cache_data[num2text(z_level)]
-	if(!cache_entry)
+	/*var/datum/cache_entry/cache_entry = cache_data[z_level]
+	if(cache_data)
+		cache_entry = cache_data[1]
+	else
 		cache_entry = new/datum/cache_entry
-		cache_data[num2text(z_level)] = cache_entry
+		cache_data = list()
+		cache_data.Add(cache_entry)*/
 
-	if(world.time < cache_entry.timestamp)
+	if(cache_entry && world.time < cache_entry.timestamp)
 		return cache_entry.data
+	cache_entry = new/datum/cache_entry
 
 	var/tracked = scan()
+	var/list/missing_mobs = cached_mobs.Copy()
 	for(var/obj/item/clothing/under/C in tracked)
 		var/turf/pos = get_turf(C)
-		if(C.has_sensor && pos && pos.z == z_level && C.sensor_mode != SUIT_SENSOR_OFF)
+		if(C.has_sensor && pos && C.sensor_mode != SUIT_SENSOR_OFF)
 			if(istype(C.loc, /mob/living/carbon/human))
 				var/mob/living/carbon/human/H = C.loc
 				if(H.w_uniform != C)
@@ -80,9 +92,16 @@ var/global/datum/repository/crew/crew_repository = new()
 					if(PULSE_THREADY)
 						pulse_span = "bad"
 
-				var/list/crewmemberData = list("sensor_type" = C.sensor_mode, "stat"= H.stat, "span" = pulse_span, "pulse"= H.get_pulse(1), "pressure"= pressure, "bodytemp" = H.bodytemperature - T0C, "area"="", "x"=-1, "y"=-1, "z"=-1, "ref" = "\ref[H]")
+				var/list/crewmemberData = list("sensor_type" = C.sensor_mode, "stat"= H.stat, "span" = pulse_span, "pulse"= H.get_pulse(1), "pressure"= blood_result, "bodytemp" = H.bodytemperature - T0C, "area"="", "x"=-1, "y"=-1, "z"=-1, "ref" = "\ref[H]", "cam" = 0)
 				if(!(run_queues(H, C, pos, crewmemberData) & MOD_SUIT_SENSORS_REJECTED))
 					crewmembers[++crewmembers.len] = crewmemberData
+					cached_mobs[H.real_name] = crewmemberData
+					missing_mobs -= H.real_name
+
+	for(var/missing_name in missing_mobs)
+		var/list/crewmemberData = cached_mobs[missing_name]
+		crewmemberData["sensor_type"] = SUIT_SENSOR_TIMEOUT
+		crewmembers[++crewmembers.len] = crewmemberData
 
 	crewmembers = sortByKey(crewmembers, "name")
 	cache_entry.timestamp = world.time + 5 SECONDS
@@ -92,8 +111,11 @@ var/global/datum/repository/crew/crew_repository = new()
 
 /datum/repository/crew/proc/scan()
 	var/list/tracked = list()
-	for(var/mob/living/carbon/human/H in GLOB.mob_list)
-		if(istype(H.w_uniform, /obj/item/clothing/under))
+	. = tracked
+	//for(var/mob/living/carbon/human/H in GLOB.mob_list)
+	for(var/datum/mind/M in my_faction.assigned_minds)
+		var/mob/living/carbon/human/H = M.current
+		if(istype(H) && istype(H.w_uniform, /obj/item/clothing/under))
 			var/obj/item/clothing/under/C = H.w_uniform
 			if (C.has_sensor)
 				tracked |= C

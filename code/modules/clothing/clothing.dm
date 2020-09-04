@@ -670,7 +670,7 @@ BLIND     // can't see anything
 	w_class = ITEM_SIZE_NORMAL
 	force = 0
 	var/has_sensor = SUIT_HAS_SENSORS //For the crew computer 2 = unable to change mode
-	var/sensor_mode = 0
+	var/sensor_mode = SUIT_SENSOR_TRACKING
 		/*
 		1 = Report living/dead
 		2 = Report detailed damages
@@ -702,6 +702,14 @@ BLIND     // can't see anything
 		verbs -= /obj/item/clothing/under/verb/rollsleeves
 	if(fitfemale_down == -1)
 		verbs -= /obj/item/clothing/under/verb/fitfemale
+
+	if(has_sensor == SUIT_HAS_SENSORS && sensor_mode != SUIT_SENSOR_OFF)
+		GLOB.emp_candidates.Add(src)
+/*
+/obj/item/clothing/glasses/hud/tactical/Destroy()
+	GLOB.emp_candidates.Remove(src)
+	. = ..()
+*/
 
 /obj/item/clothing/under/get_mob_overlay(mob/user_mob, slot)
 	var/image/ret = ..()
@@ -843,6 +851,7 @@ BLIND     // can't see anything
 	if(get_dist(user, src) > 1)
 		to_chat(user, "You have moved too far away.")
 		return
+	var/old_mode = sensor_mode
 	sensor_mode = modes.Find(switchMode) - 1
 
 	if (src.loc == user)
@@ -864,8 +873,15 @@ BLIND     // can't see anything
 	else
 		user.visible_message("[user] adjusts the tracking sensor on [src]", "You adjust the sensor on [src].")
 
+	if(old_mode != sensor_mode)
+		if(sensor_mode == SUIT_SENSOR_OFF)
+			GLOB.emp_candidates.Remove(src)
+		else if(old_mode == SUIT_SENSOR_OFF)
+			GLOB.emp_candidates.Add(src)
+
 /obj/item/clothing/under/emp_act(var/severity)
 	..()
+
 	var/new_mode
 	switch(severity)
 		if(1)
@@ -875,7 +891,18 @@ BLIND     // can't see anything
 		else
 			new_mode = pick(25;SUIT_SENSOR_OFF, 35;SUIT_SENSOR_BINARY, 30;SUIT_SENSOR_VITAL, 10;SUIT_SENSOR_TRACKING)
 
+	//visual effect
+	if(new_mode != sensor_mode)
+		var/image/I = image('icons/effects/effects.dmi', src, "empdisable")
+		overlays += I
+		show_image(src.loc, I)
+		spawn(30)
+			overlays -= I
+			qdel(I)
+
 	sensor_mode = new_mode
+	if(new_mode == SUIT_SENSOR_OFF)
+		GLOB.emp_candidates.Remove(src)
 
 /obj/item/clothing/under/verb/toggle()
 	set name = "Toggle Suit Sensors"

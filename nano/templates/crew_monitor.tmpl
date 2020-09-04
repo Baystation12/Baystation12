@@ -16,7 +16,8 @@ Used In File(s): \code\game\machinery\computer\crew.dm
     }
 </style>
 
-{{:helper.link('Show Tracker Map', 'pin-s', {'showMap' : 1})}}
+<!--{{:helper.link('Show Tracker Map', 'pin-s', {'showMap' : 1})}}-->
+{{:helper.link('Cancel camera view', null, {'stop_cam' : 1}, data.follow_mob ? null : "disabled")}}
 <table class='wideTable'><tbody>
 	{{for data.crewmembers}}
 		<tr>
@@ -25,32 +26,49 @@ Used In File(s): \code\game\machinery\computer\crew.dm
 			{{if value.sensor_type == 1}}
 				
 				{{if value.pulse}}
-					<td><span class="neutral">Pulse detected</td>
+					<td><span class="good">Pulse detected</td>
 				{{else}}
 					<td><span class="bad">No pulse detected</td>
 				{{/if}}
 
-				{{if data.isAI}}
-					<td class='tracking'>{{:helper.link('Track', null, {}, 'disabled')}}</td>
-				{{/if}}
-
 			{{else value.sensor_type == 2}}
 
-				<td><span class="white">Pulse</span> <span class='{{:value.span}}'>{{:value.pulse}}</span> bpm | <span class="white">BP</span> {{:value.pressure}} | <span class="white">Temp</span> {{:value.bodytemp}} C | <span class="white">Location</span> <span class="neutral">Not Available</td>
-	
-				{{if data.isAI}}
-					<td class='tracking'>{{:helper.link('Track', null, {}, 'disabled')}}</td>
-				{{/if}}
-			
+				<td>
+				<span class="white">Blood pressure:</span> <span class='{{:value.span}}'>{{:value.pressure}}</span> | 
+				<span class="white">Vitals:</span> 
+					<span class="burn">{{:value.fire}}</span>/
+					<span class="brute">{{:value.brute}}</span>/
+					<span class="toxin">{{:value.tox}}</span>/
+					<span class="oxyloss">{{:value.oxy}}</span>/ | 
+				<span class="white">Location</span> Not Available
+				</td>
+
 			{{else value.sensor_type == 3}}
 
-				<td><span class="white">Pulse</span> <span class='{{:value.span}}'>{{:value.pulse}}</span> bpm | <span class="white">BP</span> {{:value.pressure}} | <span class="white">Temp</span> {{:value.bodytemp}} C | <span class="white">Location</span> {{:value.area}} ({{:value.x}}, {{:value.y}}, {{:value.z}})</td>
+				<td>
+				<span class="white">Blood pressure:</span> <span class='{{:value.span}}'>{{:value.pressure}}</span> | 
+				<span class="white">Vitals:</span> 
+					<span class="burn">{{:value.fire}}</span>/
+					<span class="brute">{{:value.brute}}</span>/
+					<span class="toxin">{{:value.tox}}</span>/
+					<span class="oxyloss">{{:value.oxy}}</span> | 
+				<span class="white">Location</span> ({{:value.area}} ({{:value.x}}, {{:value.y}}, {{:value.z}})
+				</td>
 
-				{{if data.isAI}}
-					<td class='tracking'>{{:helper.link('Track', null, {'track' : value.ref})}}</td>
-				{{/if}}
-				
+			{{else value.sensor_type == 4}}
+
+				<td>No signal detected | <span class="white">Last known location</span> {{:value.area}} ({{:value.x}}, {{:value.y}}, {{:value.z}})</td>
+
 			{{/if}}
+		
+			<td class='tracking'>{{:helper.link('Camera', null, {'view_cam' : value.ref}, value.cam ? null : 'disabled')}}</td>
+			
+			{{if data.isAI}}
+			
+				<td class='tracking'>{{:helper.link('Track', null, {'track' : value.ref})}}</td>
+		
+			{{/if}}
+			
 		</tr>
 	{{/for}}
 </tbody></table>

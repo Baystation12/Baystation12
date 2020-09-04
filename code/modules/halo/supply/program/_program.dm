@@ -14,7 +14,7 @@
 	requires_ntnet = 1
 	requires_ntnet_feature = NTNET_COMMUNICATION
 	available_on_ntnet = 0
-	available_on_syndinet = 1
+	available_on_syndinet = 0
 
 /datum/nano_module/program/faction_supply
 	name = "Generic supply management program"
