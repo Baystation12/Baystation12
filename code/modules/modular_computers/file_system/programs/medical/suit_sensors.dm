@@ -65,9 +65,13 @@
 		ui.add_template("mapHeader", "crew_monitor_map_header.tmpl")
 
 		ui.ref = src
+		apply_styling(ui)
 
 		ui.set_initial_data(data)
 		ui.open()
 
 		// should make the UI auto-update; doesn't seem to?
 		ui.set_auto_update(1)
+
+//override this in children
+/datum/nano_module/crew_monitor/proc/apply_styling(datum/nanoui/ui)
