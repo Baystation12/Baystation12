@@ -7,7 +7,7 @@
 /datum/computer_file/program/suit_sensors/unsc
 	filename = "sensormonitor_unsc"
 	nanomodule_path = /datum/nano_module/crew_monitor/unsc
-	required_access = 0//access_unsc
+	required_access = access_unsc
 	available_on_ntnet = FALSE
 
 /datum/nano_module/crew_monitor/unsc

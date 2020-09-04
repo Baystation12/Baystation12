@@ -22,9 +22,9 @@
 			user.reset_view(target)
 			to_chat(user,"<span class='info'>Now viewing [target] HUD camera...</span>")
 		else
-			to_chat(user,"<span class='notice'>Error 1 attempting to view HUD camera!</span>")
+			to_chat(user,"<span class='notice'>Error 1 attempting to view HUD camera! (invalid tachud)</span>")
 	else
-		to_chat(user,"<span class='notice'>Error 2 attempting to view HUD camera!</span>")
+		to_chat(user,"<span class='notice'>Error 2 attempting to view HUD camera! (invalid target person)</span>")
 
 /datum/nano_module/crew_monitor/check_eye(var/mob/user)
 	if(follow_mob)
