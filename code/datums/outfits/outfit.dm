@@ -52,10 +52,12 @@ var/list/outfits_decls_by_type_
 	var/id_pda_assignment
 
 	var/list/backpack_overrides
+	var/list/id_picture_updates
 	var/flags = OUTFIT_RESET_EQUIPMENT
 
 /decl/hierarchy/outfit/New()
 	..()
+	id_picture_updates = id_picture_updates || list()
 	backpack_overrides = backpack_overrides || list()
 
 	if(is_hidden_category())
@@ -120,9 +122,11 @@ var/list/outfits_decls_by_type_
 
 	if(!(OUTFIT_ADJUSTMENT_SKIP_POST_EQUIP & equip_adjustments))
 		post_equip(H)
+
+	// Update all ID pictures last to ensure the photo is as correct as possible.
 	H.update_icons()
-	if(W) // We set ID info last to ensure the ID photo is as correct as possible.
-		H.set_id_info(W)
+	for(var/obj/item/weapon/card/id/I in id_picture_updates)
+		I.set_id_photo(H)
 	return 1
 
 /decl/hierarchy/outfit/proc/equip_base(mob/living/carbon/human/H, var/equip_adjustments)
@@ -208,6 +212,7 @@ var/list/outfits_decls_by_type_
 	if(assignment)
 		W.assignment = assignment
 	H.set_id_info(W)
+	id_picture_updates += W
 	if(H.equip_to_slot_or_store_or_drop(W, id_slot))
 		return W
 
