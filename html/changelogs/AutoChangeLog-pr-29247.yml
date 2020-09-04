@@ -1,0 +1,4 @@
+author: "Detritus-Ha"
+delete-after: True
+changes: 
+  - tweak: "Removed gravity from gantry."
