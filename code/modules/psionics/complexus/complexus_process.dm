@@ -31,7 +31,7 @@
 			sound_to(owner, 'sound/effects/psi/power_unlock.ogg')
 			rating = ceil(combined_rank/rank_count)
 			cost_modifier = 1
-			if(rating > 1) 
+			if(rating > 1)
 				cost_modifier -= min(1, max(0.1, (rating-1) / 10))
 			if(!ui)
 				ui = new(owner)
@@ -71,8 +71,17 @@
 		to_chat(owner, "<hr>")
 
 /datum/psi_complexus/Process()
-
 	var/update_hud
+	if(armor_cost)
+		var/value = max(1, ceil(armor_cost * cost_modifier))
+		if(value <= stamina)
+			stamina -= value
+		else
+			backblast(abs(stamina - value))
+			stamina = 0
+		update_hud = TRUE
+		armor_cost = 0
+
 	if(stun)
 		stun--
 		if(stun)
@@ -82,25 +91,22 @@
 		else
 			to_chat(owner, SPAN_NOTICE("You have recovered your mental composure."))
 			update_hud = TRUE
-		return
+	else
+		var/psi_leech = owner.do_psionics_check()
+		if(psi_leech)
+			if(stamina > 10)
+				stamina = max(0, stamina - rand(15,20))
+				to_chat(owner, SPAN_DANGER("You feel your psi-power leeched away by \the [psi_leech]..."))
+			else
+				stamina++
+		else if(stamina < max_stamina)
+			if(owner.stat == CONSCIOUS)
+				stamina = min(max_stamina, stamina + rand(1,3))
+			else if(owner.stat == UNCONSCIOUS)
+				stamina = min(max_stamina, stamina + rand(3,5))
 
-	var/psi_leech = owner.do_psionics_check()
-	if(psi_leech)
-		if(stamina > 10)
-			stamina = max(0, stamina - rand(15,20))
-			to_chat(owner, SPAN_DANGER("You feel your psi-power leeched away by \the [psi_leech]..."))
-		else
-			stamina++
-		return
-
-	else if(stamina < max_stamina)
-		if(owner.stat == CONSCIOUS)
-			stamina = min(max_stamina, stamina + rand(1,3))
-		else if(owner.stat == UNCONSCIOUS)
-			stamina = min(max_stamina, stamina + rand(3,5))
-
-	if(!owner.nervous_system_failure() && owner.stat == CONSCIOUS && stamina && !suppressed && get_rank(PSI_REDACTION) >= PSI_RANK_OPERANT)
-		attempt_regeneration()
+		if(!owner.nervous_system_failure() && owner.stat == CONSCIOUS && stamina && !suppressed && get_rank(PSI_REDACTION) >= PSI_RANK_OPERANT)
+			attempt_regeneration()
 
 	var/next_aura_size = max(0.1,((stamina/max_stamina)*min(3,rating))/5)
 	var/next_aura_alpha = round(((suppressed ? max(0,rating - 2) : rating)/5)*255)
