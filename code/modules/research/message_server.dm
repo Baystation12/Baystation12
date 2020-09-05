@@ -141,7 +141,7 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 
 	for(var/mob/living/carbon/human/H in GLOB.human_mob_list)
 		var/obj/item/modular_computer/pda/pda = locate() in H
-		if(!pda)
+		if(!pda || !(get_z(pda) in GLOB.using_map.station_levels))
 			continue
 
 		var/datum/job/J = SSjobs.get_by_title(H.get_authentification_rank())
