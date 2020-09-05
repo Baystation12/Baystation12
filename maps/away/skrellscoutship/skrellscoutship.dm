@@ -139,7 +139,7 @@
 	pda_type = /obj/item/modular_computer/pda
 	pda_slot = slot_l_store
 	l_ear = /obj/item/device/radio/headset/skrellian
-	id_type = /obj/item/weapon/card/id/skrellscoutship
+	id_types = list(/obj/item/weapon/card/id/skrellscoutship)
 	l_pocket = /obj/item/clothing/accessory/badge/tags/skrell
 
 /obj/item/weapon/stock_parts/circuitboard/telecomms/allinone/skrellscoutship

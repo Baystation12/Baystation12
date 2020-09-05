@@ -2,7 +2,7 @@
 	name = "Ascent - Gyne"
 	mask =     /obj/item/clothing/mask/gas/ascent
 	uniform =  /obj/item/clothing/under/ascent
-	id_type =  /obj/item/weapon/card/id/ascent
+	id_types = list( /obj/item/weapon/card/id/ascent)
 	shoes =    /obj/item/clothing/shoes/magboots/ascent
 	l_ear =    null
 	pda_type = null

@@ -24,7 +24,7 @@
 
 /decl/hierarchy/outfit/job/colonist
 	name = OUTFIT_JOB_NAME("Colonist")
-	id_type = null
+	id_types = null
 	pda_type = null
 
 /obj/effect/submap_landmark/spawnpoint/colonist_spawn

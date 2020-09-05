@@ -147,7 +147,7 @@
 	gloves = /obj/item/clothing/gloves/thick
 	belt = /obj/item/weapon/gun/energy/gun/small
 	hierarchy_type = /decl/hierarchy/outfit/job/scavver
-	id_type = null
+	id_types = null
 	pda_type = null
 
 /decl/hierarchy/outfit/job/scavver/engineer
