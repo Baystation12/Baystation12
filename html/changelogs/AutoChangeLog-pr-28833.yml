@@ -1,0 +1,6 @@
+author: "and Shadow"
+delete-after: True
+changes: 
+  - rscadd: "Adds various types of department memos, notices, and other documents spread around the ship that change every round.
+They are not full written documents, instead they are a summary of what your character reads off of the documents.
+These notices do not reflect the staff administration's stances or points of view on topics."
