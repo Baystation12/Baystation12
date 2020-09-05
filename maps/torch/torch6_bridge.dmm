@@ -2178,9 +2178,6 @@
 	dir = 4;
 	pixel_x = 21
 	},
-/obj/machinery/camera/network/command{
-	c_tag = "Executive Officer - Quarters"
-	},
 /turf/simulated/floor/carpet,
 /area/crew_quarters/heads/office/xo)
 "dJ" = (
