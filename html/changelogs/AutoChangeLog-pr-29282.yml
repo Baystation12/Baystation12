@@ -1,4 +1,0 @@
-author: "Shadowtail117"
-delete-after: True
-changes: 
-  - bugfix: "The reagents in protein bars will no longer react with each other to produce new reagents (looking at you, citrus blast)."

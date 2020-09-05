@@ -1,5 +1,0 @@
-author: "Shadowtail117"
-delete-after: True
-changes: 
-  - bugfix: "PDA paging messages will no longer reach you if you are not on the Torch."
-  - bugfix: "Fire alarms will no longer tell you the current alert level if you examine them if you are not on the Torch."

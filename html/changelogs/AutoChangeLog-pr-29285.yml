@@ -1,4 +1,0 @@
-author: "PsiOmegaDelta"
-delete-after: True
-changes: 
-  - bugfix: "When outfits, typically the clothes and items that come with a job, are equipped any items which are put in already occupied slots should now properly be put in bags or similar storage instead of being dropped (usually in nullspace)"
