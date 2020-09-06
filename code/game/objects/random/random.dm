@@ -904,9 +904,7 @@ obj/random/obstruction/spawn_choices()
 	icon_state = "horribletie"
 
 /obj/random/accessory/spawn_choices()
-	return list(/obj/item/clothing/accessory/storage/webbing = 3,
-				/obj/item/clothing/accessory/storage/webbing_large = 3,
-				/obj/item/clothing/accessory/storage/black_vest = 2,
+	return list(/obj/item/clothing/accessory/storage/black_vest = 2,
 				/obj/item/clothing/accessory/storage/brown_vest = 2,
 				/obj/item/clothing/accessory/storage/white_vest = 2,
 				/obj/item/clothing/accessory/storage/bandolier = 1,

@@ -427,7 +427,9 @@
 	name = "Covenant - Medical Vendor"
 	desc = "A vendor that supplies medical equipment"
 	products = list(
+	"Utility" = -1,
 	/obj/item/bodybag/cryobag/covenant = 3,
+	/obj/item/device/healthanalyzer/covenant = 10,
 	"Medkits" = -1,
 	/obj/item/weapon/storage/firstaid/unsc/cov = 10,
 	/obj/item/weapon/storage/firstaid/fire/covenant = 2,
