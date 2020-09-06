@@ -691,7 +691,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/medical{
+/obj/machinery/door/airlock/glass/medical{
 	name = "Chemistry"
 	},
 /turf/simulated/floor/tiled/white/monotile,
@@ -1636,8 +1636,9 @@
 /obj/machinery/disposal,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/disposalpipe/trunk,
-/obj/machinery/computer/guestpass{
-	pixel_y = 32
+/obj/machinery/firealarm{
+	dir = 2;
+	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/medicalhallway)
@@ -1693,9 +1694,8 @@
 "adn" = (
 /obj/effect/floor_decal/corner/paleblue/mono,
 /obj/structure/reagent_dispensers/water_cooler,
-/obj/machinery/firealarm{
-	dir = 2;
-	pixel_y = 24
+/obj/machinery/computer/guestpass{
+	pixel_y = 32
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/medicalhallway)
@@ -6703,7 +6703,6 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/medicalhallway)
 "ase" = (
-/obj/machinery/photocopier,
 /obj/effect/floor_decal/corner/paleblue/mono,
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /obj/machinery/alarm{
@@ -6713,6 +6712,7 @@
 	dir = 8;
 	pixel_x = 32
 	},
+/obj/machinery/papershredder,
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/physicianoffice)
 "ask" = (
@@ -23880,7 +23880,6 @@
 /turf/simulated/wall/prepainted,
 /area/medical/exam_room)
 "nDd" = (
-/obj/machinery/papershredder,
 /obj/effect/floor_decal/corner/paleblue/mono,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
@@ -23888,6 +23887,7 @@
 /obj/machinery/light_switch{
 	pixel_y = 24
 	},
+/obj/machinery/photocopier,
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/physicianoffice)
 "nDx" = (
