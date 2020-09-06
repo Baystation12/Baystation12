@@ -16535,6 +16535,7 @@
 /obj/machinery/atmospherics/unary/freezer{
 	dir = 1;
 	icon_state = "freezer";
+	set_temperature = 80;
 	use_power = 1
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
