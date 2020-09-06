@@ -2598,8 +2598,8 @@
 /area/janitor/storage)
 "iC" = (
 /obj/structure/table/rack,
-/obj/item/device/floor_painter,
-/obj/item/device/floor_painter,
+/obj/item/device/paint_sprayer,
+/obj/item/device/paint_sprayer,
 /obj/machinery/light/small{
 	dir = 1
 	},
@@ -4060,7 +4060,7 @@
 "oa" = (
 /obj/structure/table/standard,
 /obj/item/weapon/storage/box/lights/mixed,
-/obj/item/device/floor_painter,
+/obj/item/device/paint_sprayer,
 /obj/machinery/requests_console{
 	department = "Janitorial";
 	departmentType = 1;

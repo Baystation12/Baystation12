@@ -41,16 +41,16 @@
 /datum/codex_entry/toolbox/crystal
 	associated_paths = list(/obj/item/weapon/storage/toolbox/crystal)
 	lore_text = "The most basic of Vigil units may sometimes use toolboxes like these, which are surprisingly similar in design to ones of human origin. On occasion, some units have been known to harbor a slight preference for these archaic designs over something more streamlined, for whatever reason."
-	
+
 /datum/codex_entry/cable_painter
 	associated_paths = list(/obj/item/device/cable_painter)
 	mechanics_text = "Use this device to select a preferred cable color. Apply it to a bundle of cables on your person, or use it on installed cabling on the floor to paint it in your chosen color."
 	lore_text = "A device often used by spacefaring engineers to color-code their electrical systems. An experienced technician can identify traditional installations by color alone."
 
-/datum/codex_entry/floor_painter
-	associated_paths = list(/obj/item/device/floor_painter)
-	mechanics_text = "Use this item in your hand to access a menu in which you may change the type of decal, applied direction, and color. Click any accessible tile on the floor to apply your choice."
-	lore_text = "This ubiquitous maintenance-grade paintgun isn't as fancy or convenient as modern consumer models, but with an internal synthesizer it never runs out of pigment!"
+/datum/codex_entry/paint_sprayer
+	associated_paths = list(/obj/item/device/paint_sprayer)
+	mechanics_text = "Use the paint sprayer to set decal, color and direction used for painting or to switch into the color picking mode. Ctrl+Click for quickly switching modes and Alt+Click for quickly selecting a preset color."
+	lore_text = "This ubiquitous maintenance-grade paint sprayer isn't as fancy or convenient as modern consumer models, but with an internal synthesizer it never runs out of pigment!"
 	antag_text = "This thing would be perfect for vandalism. Could you write your name in the halls?"
 
 /datum/codex_entry/geiger_counter

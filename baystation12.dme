@@ -902,7 +902,7 @@
 #include "code\game\objects\items\devices\multitool.dm"
 #include "code\game\objects\items\devices\oxycandle.dm"
 #include "code\game\objects\items\devices\paicard.dm"
-#include "code\game\objects\items\devices\paint_gun.dm"
+#include "code\game\objects\items\devices\paint_sprayer.dm"
 #include "code\game\objects\items\devices\personal_shield.dm"
 #include "code\game\objects\items\devices\pipe_painter.dm"
 #include "code\game\objects\items\devices\powersink.dm"
