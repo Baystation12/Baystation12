@@ -15,7 +15,6 @@
 	var/max_complexity = IC_COMPLEXITY_BASE
 	var/opened = TRUE
 	var/obj/item/weapon/cell/battery // Internal cell which most circuits need to work.
-	var/cell_type = /obj/item/weapon/cell
 	var/can_charge = TRUE //Can it be charged in a recharger?
 	var/circuit_flags = IC_FLAG_ANCHORABLE
 	var/charge_sections = 4

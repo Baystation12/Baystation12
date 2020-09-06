@@ -78,7 +78,7 @@
 
 /obj/random/powercell/spawn_choices()
 	return list(/obj/item/weapon/cell/crap = 1,
-				/obj/item/weapon/cell = 8,
+				/obj/item/weapon/cell/standard = 8,
 				/obj/item/weapon/cell/high = 5,
 				/obj/item/weapon/cell/super = 2,
 				/obj/item/weapon/cell/hyper = 1,

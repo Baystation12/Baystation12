@@ -5,7 +5,7 @@
 	icon_state = "battereroff"
 	slot_flags = SLOT_BELT
 	var/open = FALSE
-	var/obj/item/weapon/cell/power_cell = /obj/item/weapon/cell
+	var/obj/item/weapon/cell/power_cell = /obj/item/weapon/cell/high
 	var/shield_type = /obj/aura/personal_shield/device
 	var/shield_power_cost = 1000
 	var/obj/aura/personal_shield/device/shield

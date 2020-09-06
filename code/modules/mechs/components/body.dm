@@ -137,7 +137,7 @@
 
 /obj/item/mech_component/chassis/prebuild()
 	diagnostics = new(src)
-	cell = new /obj/item/weapon/cell/exosuit(src)
+	cell = new /obj/item/weapon/cell/high(src)
 	cell.charge = cell.maxcharge
 
 /obj/item/mech_component/chassis/attackby(var/obj/item/thing, var/mob/user)
