@@ -44,10 +44,16 @@
 	var/cache_key = "[icon]-[icon_state]-[alpha]-[appearance_flags]-[color]-[dir]-[plane]-[layer]"
 	. = image_cache_for_overlays[cache_key]
 	if(!.)
-		var/image/I = image(icon = icon, icon_state = icon_state, dir = dir)
-		I.alpha = alpha
-		I.appearance_flags = appearance_flags
-		I.plane = plane
-		I.layer = layer
+		var/image/I = image(icon = icon, icon_state = icon_state)
+		if(!isnull(dir))
+			I.dir = dir
+		if(!isnull(alpha))
+			I.alpha = alpha
+		if(!isnull(appearance_flags))
+			I.appearance_flags = appearance_flags
+		if(!isnull(plane))
+			I.plane = plane
+		if(!isnull(layer))
+			I.layer = layer
 		image_cache_for_overlays[cache_key] = I
 		return I
