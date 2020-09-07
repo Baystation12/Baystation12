@@ -8,14 +8,14 @@
 	density = 1
 	anchored = 1
 
-	var/list/loot = list(/obj/item/weapon/cell,/obj/item/stack/material/iron,/obj/item/stack/material/rods)
+	var/list/loot = list(/obj/item/weapon/cell/standard,/obj/item/stack/material/iron,/obj/item/stack/material/rods)
 	var/lootleft = 1
 	var/emptyprob = 95
 	var/health = 40
 	var/is_rummaging = 0
 
 /obj/structure/rubble/New()
-	if(prob(emptyprob)) 
+	if(prob(emptyprob))
 		lootleft = 0
 	..()
 
@@ -63,7 +63,7 @@
 		is_rummaging = 0
 	else
 		to_chat(user, "<span class='warning'>Someone is already rummaging here!</span>")
-		
+
 /obj/structure/rubble/attackby(var/obj/item/I, var/mob/user)
 	if (istype(I, /obj/item/weapon/pickaxe))
 		var/obj/item/weapon/pickaxe/P = I
@@ -74,7 +74,7 @@
 				var/obj/item/booty = pickweight(loot)
 				booty = new booty(loc)
 			qdel(src)
-	else 
+	else
 		..()
 		health -= I.force
 		if(health < 1)

@@ -9,7 +9,7 @@
 	var/coefficient = 0.9
 	var/opened = FALSE
 	var/failsafe = 0
-	var/obj/item/weapon/cell/cell = /obj/item/weapon/cell
+	var/obj/item/weapon/cell/cell = /obj/item/weapon/cell/standard
 	var/recharging = FALSE
 	origin_tech = list(TECH_POWER = 6, TECH_ENGINEERING = 4)
 	matter = list(MATERIAL_STEEL = 1000, MATERIAL_GLASS = 700)

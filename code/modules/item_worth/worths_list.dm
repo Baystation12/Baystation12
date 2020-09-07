@@ -149,7 +149,7 @@ var/list/worths = list(
 					/obj/item/weapon/cell/infinite = 50000,
 					/obj/item/weapon/cell/potato = 1,
 					/obj/item/weapon/cell/slime = 160,
-					/obj/item/weapon/cell = 60,
+					/obj/item/weapon/cell/standard = 60,
 //SMES COILS,
 					/obj/item/weapon/stock_parts/smes_coil/weak = 1000,
 					/obj/item/weapon/stock_parts/smes_coil/super_capacity = 5000,

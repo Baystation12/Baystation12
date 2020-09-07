@@ -63,7 +63,7 @@
 								/obj/item/weapon/gun/energy/xray                         = TRADER_THIS_TYPE,
 								/obj/item/weapon/gun/energy/laser                        = TRADER_THIS_TYPE,
 								/obj/item/weapon/gun/energy/gun                          = TRADER_THIS_TYPE,
-								/obj/item/weapon/cell                                    = TRADER_THIS_TYPE,
+								/obj/item/weapon/cell/standard                           = TRADER_THIS_TYPE,
 								/obj/item/weapon/cell/crap                               = TRADER_THIS_TYPE,
 								/obj/item/weapon/cell/high                               = TRADER_THIS_TYPE,
 								/obj/item/weapon/cell/super                              = TRADER_THIS_TYPE,
