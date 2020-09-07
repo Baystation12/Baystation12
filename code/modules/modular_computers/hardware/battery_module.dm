@@ -67,7 +67,7 @@
 
 /obj/item/weapon/stock_parts/computer/battery_module/Initialize()
 	. = ..()
-	battery = new/obj/item/weapon/cell(src)
+	battery = new/obj/item/weapon/cell/standard(src)
 	battery.maxcharge = battery_rating
 	battery.charge = 0
 
