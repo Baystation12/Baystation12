@@ -15028,16 +15028,18 @@
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology)
 "bCX" = (
-/obj/structure/table/steel,
-/obj/item/weapon/storage/box/cdeathalarm_kit,
-/obj/item/weapon/melee/telebaton,
-/obj/item/weapon/melee/telebaton,
-/obj/item/weapon/melee/telebaton,
-/obj/item/device/flash,
-/obj/item/device/flash,
-/obj/item/device/flash,
-/obj/item/device/flash,
 /obj/effect/floor_decal/industrial/outline/grey,
+/obj/structure/table/rack,
+/obj/item/weapon/gun/projectile/pistol/military,
+/obj/item/weapon/gun/projectile/pistol/military,
+/obj/item/ammo_magazine/pistol/double/rubber,
+/obj/item/ammo_magazine/pistol/double/rubber,
+/obj/item/ammo_magazine/pistol/double,
+/obj/item/ammo_magazine/pistol/double,
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/window/reinforced,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/command/armoury/tactical)
 "bDb" = (
@@ -19866,13 +19868,19 @@
 "iAS" = (
 /obj/structure/table/rack,
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/structure/window/reinforced,
 /obj/structure/window/reinforced{
 	dir = 4
 	},
 /obj/item/weapon/shield/riot/metal,
 /obj/item/weapon/shield/riot/metal,
 /obj/item/weapon/shield/riot/metal,
+/obj/item/device/flash,
+/obj/item/device/flash,
+/obj/item/device/flash,
+/obj/item/device/flash,
+/obj/item/weapon/melee/telebaton,
+/obj/item/weapon/melee/telebaton,
+/obj/item/weapon/melee/telebaton,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/command/armoury/tactical)
 "iAZ" = (
@@ -26540,6 +26548,7 @@
 /obj/item/weapon/storage/box/flashbangs,
 /obj/item/weapon/storage/box/smokes,
 /obj/item/weapon/storage/box/handcuffs,
+/obj/item/weapon/storage/box/cdeathalarm_kit,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/command/armoury/tactical)
 "qKU" = (
@@ -30008,12 +30017,12 @@
 	dir = 8;
 	icon_state = "techfloor_edges"
 	},
+/obj/machinery/light{
+	dir = 1
+	},
 /obj/machinery/recharger/wallcharger{
 	pixel_x = 0;
 	pixel_y = 24
-	},
-/obj/machinery/light{
-	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/command/armoury/tactical)
