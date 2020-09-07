@@ -72,7 +72,7 @@
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "ai" = (
-/obj/item/weapon/cell,
+/obj/item/weapon/cell/standard,
 /turf/simulated/floor/plating,
 /area/derelict/ship)
 "aj" = (
@@ -199,7 +199,7 @@
 /area/derelict/ship)
 "aB" = (
 /obj/structure/table/standard,
-/obj/item/weapon/cell,
+/obj/item/weapon/cell/standard,
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "aC" = (
@@ -207,10 +207,7 @@
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "aD" = (
-/obj/item/weapon/cell{
-	charge = 100;
-	maxcharge = 15000
-	},
+/obj/item/weapon/cell/hyper,
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "aE" = (
@@ -621,7 +618,7 @@
 "bV" = (
 /obj/structure/table/rack,
 /obj/item/clothing/mask/breath,
-/obj/item/weapon/cell,
+/obj/item/weapon/cell/standard,
 /obj/random/hardsuit,
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
@@ -652,10 +649,7 @@
 /turf/simulated/floor/plating,
 /area/derelict/ship)
 "bZ" = (
-/obj/item/weapon/cell{
-	charge = 100;
-	maxcharge = 15000
-	},
+/obj/item/weapon/cell/hyper,
 /turf/simulated/floor/plating,
 /area/derelict/ship)
 "ca" = (
@@ -3542,7 +3536,7 @@
 /turf/simulated/floor/airless,
 /area/AIsattele)
 "lP" = (
-/obj/item/weapon/cell,
+/obj/item/weapon/cell/standard,
 /turf/simulated/floor/airless,
 /area/AIsattele)
 "lQ" = (
