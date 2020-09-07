@@ -46,7 +46,7 @@
 	/obj/item/weapon/caution/cone,
 	/obj/item/weapon/crowbar,
 	/obj/item/weapon/material/clipboard,
-	/obj/item/weapon/cell,
+	/obj/item/weapon/cell/standard,
 	/obj/item/weapon/circular_saw,
 	/obj/item/weapon/material/hatchet,
 	/obj/item/weapon/handcuffs,

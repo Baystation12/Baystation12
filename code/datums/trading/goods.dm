@@ -79,7 +79,7 @@
 								/obj/item/stack/cable_coil/cut                           = TRADER_BLACKLIST,
 								/obj/item/weapon/airalarm_electronics                    = TRADER_THIS_TYPE,
 								/obj/item/weapon/airlock_electronics                     = TRADER_ALL,
-								/obj/item/weapon/cell                                    = TRADER_THIS_TYPE,
+								/obj/item/weapon/cell/standard                           = TRADER_THIS_TYPE,
 								/obj/item/weapon/cell/crap                               = TRADER_THIS_TYPE,
 								/obj/item/weapon/cell/high                               = TRADER_THIS_TYPE,
 								/obj/item/weapon/cell/super                              = TRADER_THIS_TYPE,

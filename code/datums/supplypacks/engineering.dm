@@ -35,7 +35,7 @@
 	name = "Gear - Electrical maintenance"
 	contains = list(/obj/item/weapon/storage/toolbox/electrical = 2,
 					/obj/item/clothing/gloves/insulated = 2,
-					/obj/item/weapon/cell = 2,
+					/obj/item/weapon/cell/standard = 2,
 					/obj/item/weapon/cell/high = 2)
 	cost = 15
 	containername = "electrical maintenance crate"
