@@ -606,7 +606,7 @@
 		M.change_facial_hair_color(red, green, blue)
 		to_chat(M, SPAN_NOTICE("Your hair suddenly changes color!"))
 
-/datum/reagent/colored_hair_dye/affect_touch(var/mob/living/carbon/human/M, var/alien, var/removed)
+/datum/reagent/colored_hair_dye/chaos/affect_touch(var/mob/living/carbon/human/M, var/alien, var/removed)
 	if(istype(M) && (M.species.appearance_flags & HAS_HAIR_COLOR))
 		var/red = RAND_F(1,254)
 		var/green = RAND_F(1,254)
