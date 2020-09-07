@@ -1,0 +1,6 @@
+author: "Albens"
+delete-after: True
+changes: 
+  - bugfix: "Gives the Gantry a Cryostasis pod."
+  - bugfix: "Small changes to Gantry to reflect play."
+  - bugfix: "Gets rid of teleport beacons on Gantry and Bluespace river."
