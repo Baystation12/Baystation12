@@ -215,8 +215,8 @@ var/list/outfits_decls_by_type_
 
 		if((flags & OUTFIT_USES_ACCOUNT) && H.mind?.initial_account)
 			W.associated_account_number = H.mind.initial_account.account_number
-		if(flags & OUTFIT_USES_EMAIL && H.mind?.initial_account.account_number)
-			W.associated_email_login = H.mind.initial_email_login.Copy()				
+		if((flags & OUTFIT_USES_EMAIL) && H.mind?.initial_email_login)
+			W.associated_email_login = H.mind.initial_email_login.Copy()
 
 		var/item_slot = id_types[id_type] || id_slot
 		H.equip_to_slot_or_store_or_drop(W, item_slot)
