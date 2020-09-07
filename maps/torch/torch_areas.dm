@@ -1085,9 +1085,8 @@
 	req_access = list(list(access_medical,access_morgue,access_forensics_lockers))
 
 /area/medical/foyer/storeroom
-	name = "\improper Medical Storage Room"
+	name = "\improper Medical Storeroom"
 	icon_state = "medbay"
-	req_access = list(list(access_medical,access_morgue,access_forensics_lockers))
 
 /area/medical/locker
 	name = "\improper Medical Locker Room"
