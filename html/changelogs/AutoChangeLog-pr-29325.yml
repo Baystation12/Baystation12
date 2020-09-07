@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - bugfix: "Various power cell bugfixes, primarily relating to unvendable power cells, missing cells from supply orders, etc."
