@@ -19,6 +19,7 @@
 /obj/item/weapon/cell/Initialize()
 	. = ..()
 	if(type == /obj/item/weapon/cell)
+		crash_with("Invalid use of cell base type")
 		return INITIALIZE_HINT_QDEL
 	if(isnull(charge))
 		charge = maxcharge
