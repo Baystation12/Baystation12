@@ -186,7 +186,7 @@ GLOBAL_LIST_INIT(om_base_sectors, list())
 			if(!om_base)
 				GLOB.om_base_sectors -= om_base //If it's null, cull it from the list for everyone.
 				continue
-			if(isnull(om_obj.loc) || isnull(my_faction) || om_obj.get_faction() in my_faction.enemy_faction_names)
+			if(isnull(om_obj.loc) || !my_faction || om_obj.get_faction() in my_faction.enemy_faction_names)
 				sectors_onmap -= om_obj
 		var/obj/chosen = pick(sectors_onmap)
 		var/list/turfs_nearobj = trange(7,chosen)

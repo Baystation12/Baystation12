@@ -34,12 +34,13 @@
 	if(do_continue == "No")
 		return
 
-	var/ship_type_selection = input(user,"What type of ship do you want to create?","Ship Type Selection","Cancel") in list(typesof(/datum/npc_ship) - /datum/npc_ship) + list("Cancel")
+	var/ship_type_selection = input(user,"What type of ship do you want to create?","Ship Type Selection","Cancel") in typesof(/datum/npc_ship) - /datum/npc_ship + list("Cancel")
 	if(ship_type_selection == "Cancel")
 		return
-	var/obj/effect/overmap/ship/npc_ship/spawned
+	var/datumcreated = new ship_type_selection
+	var/obj/effect/overmap/ship/npc_ship/spawned = new (user.loc)
 
-	spawned = new ship_type_selection (user.loc)
+	spawned.chosen_ship_datum = datumcreated
 	spawned.make_player_controlled()
 	sleep(30) //Wait a few ticks.
 	user.loc = locate(1,1,world.maxz)
