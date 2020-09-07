@@ -2,9 +2,9 @@
 #include "scavver_gantry_jobs.dm"
 
 /datum/map_template/ruin/away_site/scavver_gantry
-	name = "Salvage Gantry"
+	name =  "\improper Salvage Gantry"
 	id = "awaysite_gantry"
-	description = "Salvage Gantry turned Ship."
+	description = "Salvage Gantry turned Ship"
 	suffixes = list("scavver/scavver_gantry-1.dmm","scavver/scavver_gantry-2.dmm")
 	cost = 1
 	accessibility_weight = 10
@@ -13,16 +13,21 @@
 		/datum/shuttle/autodock/overmap/scavver_gantry/two,
 		/datum/shuttle/autodock/ferry/gantry
 	)
-	ban_ruins = list(
-		/datum/map_template/ruin/away_site/bearcat_wreck,
-		/datum/map_template/ruin/exoplanet/playablecolony,
-		/datum/map_template/ruin/exoplanet/playablecolony2
-	)
 	area_usage_test_exempted_root_areas = list(/area/scavver)
+	apc_test_exempt_areas = list(
+		/area/scavver/yachtdown = NO_SCRUBBER|NO_VENT,
+		/area/scavver/yachtup = NO_SCRUBBER|NO_VENT,
+		/area/scavver/gantry/down1 = NO_SCRUBBER|NO_VENT,
+		/area/scavver/gantry/down2= NO_SCRUBBER|NO_VENT,
+		/area/scavver/gantry/up1 = NO_SCRUBBER|NO_VENT,
+		/area/scavver/gantry/up2 = NO_SCRUBBER|NO_VENT,
+		/area/scavver/escapepod = NO_SCRUBBER|NO_VENT,
+		/area/scavver/gantry/lift = NO_SCRUBBER|NO_VENT|NO_APC,
+	)
 	spawn_weight = 0.67
 
 /obj/effect/submap_landmark/joinable_submap/scavver_gantry
-	name = "Salvage Gantry"
+	name =  "Salvage Gantry"
 	archetype = /decl/submap_archetype/derelict/scavver_gantry
 
 /decl/submap_archetype/derelict/scavver_gantry
@@ -163,3 +168,13 @@
 	suit= /obj/item/clothing/suit/space/void/engineering/salvage
 	helmet = /obj/item/clothing/head/helmet/space/void/engineering/salvage/pilot
 	mask = /obj/item/clothing/mask/breath
+
+/obj/structure/closet/secure_closet/freezer/fridge/scavver
+	req_access = list()
+
+/obj/structure/closet/secure_closet/freezer/fridge/scavver/WillContain()
+	return list(
+		/obj/item/weapon/reagent_containers/food/drinks/milk = 6,
+		/obj/item/weapon/reagent_containers/food/drinks/soymilk = 4,
+		/obj/item/weapon/storage/fancy/egg_box = 4
+	)
