@@ -9,5 +9,5 @@
 		/obj/item/clothing/head/helmet/space/void,
 		/obj/item/clothing/suit/space/void,
 		/obj/item/weapon/crowbar,
-		/obj/item/weapon/cell,
+		/obj/item/weapon/cell/standard,
 		/obj/item/device/multitool)
