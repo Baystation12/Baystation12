@@ -350,7 +350,7 @@
 
 /obj/item/projectile/bullet/covenant/concussion_rifle
 	name = "heavy plasma round"
-	damage = 35 //Same as plasma rifle, but it has AP!
+	damage = 30 //Same as plasma rifle (When factoring in the aoe), but it has AP!
 	armor_penetration = 30
 	shield_damage = 50
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
@@ -372,7 +372,11 @@
 		var/turf/lastloc = loc
 		var/dir_move = get_dir(loc,m)
 		if(A.loc == m.loc || loc == m.loc)
-			dir_move = pick(GLOB.cardinal)
+			var/list/cardinals_pickfrom = GLOB.cardinal
+			if(starting)
+				var/dir_to_start = get_dir(loc,starting)
+				cardinals_pickfrom -= list(dir_to_start,turn(45,dir_to_start),turn(-45,dir_to_start))
+			dir_move = pick(cardinals_pickfrom)
 		if(dir_move in GLOB.cardinal)
 			lastloc = get_edge_target_turf(m, dir_move)
 		else

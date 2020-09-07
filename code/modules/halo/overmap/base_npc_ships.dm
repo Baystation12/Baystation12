@@ -62,6 +62,11 @@ GLOBAL_LIST_INIT(om_base_sectors, list())
 	var/radio_cooldown = 5 SECONDS
 	var/next_message
 
+/obj/effect/overmap/ship/npc_ship/create_dropship_markers()
+	if(unload_at == 0)
+		return
+	. = ..()
+
 /obj/effect/overmap/ship/npc_ship/proc/pick_ship_icon()
 	var/list/icons_pickfrom = icons_pickfrom_list
 	if(icons_pickfrom.len == 0)
@@ -305,8 +310,9 @@ GLOBAL_LIST_INIT(om_base_sectors, list())
 
 	lighting_overlays_initialised = TRUE
 	makepowernets()
-
 	cargo_init()
+	create_dropship_markers()
+
 	damage_spawned_ship()
 	GLOB.processing_objects |= src
 	superstructure_failing = 0 //If we had a process tick inbetween all of this, let's reset our superstructure failure status.
