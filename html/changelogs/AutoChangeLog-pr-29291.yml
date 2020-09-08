@@ -1,5 +1,0 @@
-author: "Shadowtail117"
-delete-after: True
-changes: 
-  - rscadd: "You can now tactically reload most ballistic firearms by clicking on them with a magazine of the correct type while they are loaded. You need to have at least experienced weapons expertise to do this, and you must be on grab intent. Being a master is faster."
-  - rscadd: "You can now speed reload most ballistic firearms by clicking on them with a magazine of the correct type while they are loaded. You need to have at least experienced weapons expertise to do this, and you must be on harm intent. Being a master is faster."
