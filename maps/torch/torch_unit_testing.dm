@@ -18,7 +18,7 @@
 		/area/maintenance/auxsolarbridge = NO_SCRUBBER|NO_VENT,
 		/area/maintenance/auxsolarport = NO_SCRUBBER|NO_VENT,
 		/area/maintenance/auxsolarstarboard = NO_SCRUBBER|NO_VENT,
-		/area/maintenance/exterior = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/torchexterior = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/maintenance/firstdeck/foreport = NO_SCRUBBER|NO_VENT,
 		/area/maintenance/firstdeck/forestarboard = NO_SCRUBBER|NO_VENT,
 		/area/maintenance/incinerator = NO_SCRUBBER,
@@ -63,7 +63,7 @@
 	area_coherency_test_exempt_areas = list(
 		/area/aquila/airlock,
 		/area/centcom/control,
-		/area/maintenance/exterior,
+		/area/torchexterior,
 		/area/space
 	)
 
