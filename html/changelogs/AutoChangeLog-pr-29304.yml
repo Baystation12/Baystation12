@@ -1,0 +1,4 @@
+author: "Albens"
+delete-after: True
+changes: 
+  - tweak: "Medical's Cryogenic Cooler now starts at 80 kelvin by default. It already starts on."
