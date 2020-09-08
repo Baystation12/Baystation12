@@ -245,7 +245,7 @@
 	dir = 1;
 	icon_state = "railing0-1"
 	},
-/obj/item/device/floor_painter,
+/obj/item/device/paint_sprayer,
 /obj/structure/table/rack,
 /obj/item/device/pipe_painter,
 /obj/item/device/cable_painter,
