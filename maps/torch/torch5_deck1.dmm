@@ -7765,9 +7765,6 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/center)
 "axl" = (
-/obj/item/weapon/airlock_brace{
-	req_access = list("ACCESS_MEDICAL")
-	},
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/vault/bolted{
 	autoset_access = 0;
@@ -16139,9 +16136,6 @@
 "cSb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
-	},
-/obj/item/weapon/airlock_brace{
-	req_access = list("ACCESS_MEDICAL")
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/vault/bolted{
