@@ -74,12 +74,14 @@
 
 	var/lname
 	var/mob/observer/ghost/DM
+	var/hide_deadchat_ckey = C.get_preference_value(/datum/client_preference/show_ckey_deadchat) == GLOB.PREF_HIDE
+
 	if(isghost(C.mob))
 		DM = C.mob
 	if(M.client.holder) 							// What admins see
-		lname = "[keyname][(DM && DM.anonsay) ? "*" : (DM ? "" : "^")] ([name])"
+		lname = "[keyname][(DM && hide_deadchat_ckey) ? "*" : (DM ? "" : "^")] ([name])"
 	else
-		if(DM && DM.anonsay)						// If the person is actually observer they have the option to be anonymous
+		if(DM && hide_deadchat_ckey)						// If the person is actually observer they have the option to be anonymous
 			lname = "Ghost of [name]"
 		else if(DM)									// Non-anons
 			lname = "[keyname] ([name])"

@@ -200,6 +200,11 @@ var/list/_client_preferences_by_type
 	key = "SHOW_CKEY_CREDITS"
 	options = list(GLOB.PREF_HIDE, GLOB.PREF_SHOW)
 
+/datum/client_preference/show_ckey_deadchat
+	description = "Show Ckey in Deadchat"
+	key = "SHOW_CKEY_DEADCHAT"
+	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
+
 /datum/client_preference/play_instruments
 	description ="Play instruments"
 	key = "SOUND_INSTRUMENTS"
