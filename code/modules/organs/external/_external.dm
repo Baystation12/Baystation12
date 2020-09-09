@@ -632,7 +632,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		var/heal_amt = 0
 		// if damage >= 50 AFTER treatment then it's probably too severe to heal within the timeframe of a round.
 		if (!owner.chem_effects[CE_TOXIN])
-			if(W.can_accelerated_autoheal())
+			if(W.can_accelerated_autoheal() && W.wound_damage() < W.autoheal_cutoff * 2)
 				heal_amt += 1.0
 			else
 				heal_amt += 0.5
