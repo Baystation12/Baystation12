@@ -195,7 +195,7 @@
 		return FALSE
 	var/list/available_colors = list()
 	for (var/image/I in F.decals)
-		available_colors += I.color
+		available_colors |= I.color
 	var/picked_color = available_colors[1]
 	if (available_colors.len > 1)
 		picked_color = input(user, "Which color do you wish to select?") as null|anything in available_colors
