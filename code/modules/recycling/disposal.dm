@@ -190,6 +190,8 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	if(AM == user)
 		user.visible_message("<span class='danger'>[user] climbs into [src].</span>", \
 							 "<span class='notice'>You climb into [src].</span>")
+		if(is_dangerous)
+			to_chat(user, SPAN_DANGER("Disposals is dangerous and may kill you. Doing this is probably against the rules."))
 		log_and_message_admins("has stuffed themselves into [src].", AM)		 
 	else
 		user.visible_message("<span class='[is_dangerous ? "danger" : "notice"]'>[user] stuffs [AM] into [src][is_dangerous ? "!" : "."]</span>", \
