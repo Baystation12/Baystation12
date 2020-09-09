@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - tweak: "Players no longer see AOOC muting messages unless they have access to AOOC."
