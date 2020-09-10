@@ -637,8 +637,7 @@
 /area/scavver/yachtup)
 "gk" = (
 /obj/effect/floor_decal/corner/lightgrey/mono,
-/obj/machinery/suit_storage_unit/engineering/salvage/gantry{
-	},
+/obj/machinery/suit_storage_unit/engineering/salvage/gantry,
 /turf/simulated/floor/tiled/monotile,
 /area/scavver/hab)
 "gm" = (
@@ -680,8 +679,7 @@
 	req_access = list()
 	},
 /obj/effect/floor_decal/corner/lightgrey/mono,
-/obj/machinery/suit_storage_unit/engineering/salvage/gantry{
-	},
+/obj/machinery/suit_storage_unit/engineering/salvage/gantry,
 /turf/simulated/floor/tiled/monotile,
 /area/scavver/hab)
 "gs" = (
@@ -1074,6 +1072,10 @@
 /obj/structure/cable{
 	d2 = 4;
 	icon_state = "0-4"
+	},
+/obj/structure/cable{
+	d2 = 8;
+	icon_state = "0-8"
 	},
 /turf/simulated/floor/airless,
 /area/scavver/yachtup)
@@ -1634,8 +1636,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/machinery/suit_storage_unit/engineering/salvage/gantry/med{
-	},
+/obj/machinery/suit_storage_unit/engineering/salvage/gantry/med,
 /turf/simulated/floor/tiled/monotile,
 /area/scavver/hab)
 "qR" = (
@@ -1810,7 +1811,7 @@
 /area/scavver/gantry/up1)
 "sE" = (
 /obj/machinery/atmospherics/omni/mixer{
-	tag_east = 2;
+	tag_north = 2;
 	tag_south = 1;
 	tag_south_con = 0.85;
 	tag_west = 1;
@@ -2556,7 +2557,6 @@
 	icon_state = "2-4"
 	},
 /obj/effect/decal/cleanable/liquid_fuel,
-/obj/item/weapon/stock_parts/circuitboard/broken,
 /turf/simulated/floor/airless,
 /area/scavver/yachtup)
 "Ar" = (
@@ -3968,8 +3968,7 @@
 "Pk" = (
 /obj/effect/floor_decal/corner/lightgrey/mono,
 /obj/machinery/light,
-/obj/machinery/suit_storage_unit/engineering/salvage/gantry/pilot{
-	},
+/obj/machinery/suit_storage_unit/engineering/salvage/gantry/pilot,
 /turf/simulated/floor/tiled/monotile,
 /area/scavver/hab)
 "Pq" = (
@@ -4287,6 +4286,12 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/reinforced/airless,
 /area/scavver/lifepod)
+"TC" = (
+/obj/machinery/atmospherics/valve{
+	dir = 4
+	},
+/turf/simulated/floor/airless,
+/area/scavver/yachtup)
 "TK" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 8;
@@ -4561,6 +4566,15 @@
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/turf/simulated/floor/airless,
+/area/scavver/yachtup)
+"Xm" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/item/weapon/stock_parts/circuitboard/broken,
 /turf/simulated/floor/airless,
 /area/scavver/yachtup)
 "Xr" = (
@@ -15835,7 +15849,7 @@ hv
 te
 te
 hv
-RE
+TC
 bE
 Ek
 Oj
@@ -15994,7 +16008,7 @@ dm
 sX
 gM
 mu
-YA
+Xm
 oN
 oN
 oN
