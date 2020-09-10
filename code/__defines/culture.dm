@@ -163,6 +163,7 @@
  
 #define HOME_SYSTEM_MOGHES          "Moghes"
 #define HOME_SYSTEM_OUERE           "Ouere"
+#define HOME_SYSTEM_UNATHI_CERES    "Ceres - Unathi Clans"
 #define HOME_SYSTEM_UNATHI_TERSTEN  "Tersten - Unathi Clans"
 #define HOME_SYSTEM_OFFWORLD        "Off-world"
  
@@ -173,6 +174,7 @@
 #define FACTION_UNATHI_BAASK             "Ba'ask Krukzuz"
 #define FACTION_UNATHI_GRESIS            "Gresis Krukzuz"
 #define FACTION_UNATHI_RAH_ZAKEH         "Rah'Zakeh League"
+#define FACTION_UNATHI_KHARZA            "Kharza Fleet"
  
 #define RELIGION_UNATHI_STRATAGEM    "Grand Stratagem"
 #define RELIGION_UNATHI_PRECURSOR    "Precursor"

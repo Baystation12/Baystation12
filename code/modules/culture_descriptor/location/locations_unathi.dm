@@ -71,3 +71,25 @@ flocked to the planet, with Markesheli communities growing quite rapidly in numb
 		LANGUAGE_HUMAN_RUSSIAN,
 		LANGUAGE_SPACER
 	)
+
+/decl/cultural_info/location/unathi_ceres
+	name = HOME_SYSTEM_UNATHI_CERES
+	description = "It should come to no surprise that Unathi who follow the hand of the vine to be interested in the shipyards of Ceres. \
+	Ceres found itself popular amongst younger generations of Unathi, many of whom are sponsored by their clan to work and gain experience. \
+	Though this is not always the case. Unathi, with their natural strength, fit well into the bustling shipyards, often taking roles in \
+	ship construction."
+	capital = "Government Zone, Ceres Station"
+	ruling_body = "Sol Central Government"
+	distance = "2.7AU"
+	secondary_langs = list(
+		LANGUAGE_UNATHI_SINTA,
+		LANGUAGE_UNATHI_YEOSA,
+		LANGUAGE_SIGN,
+		LANGUAGE_HUMAN_EURO,
+		LANGUAGE_HUMAN_CHINESE,
+		LANGUAGE_HUMAN_ARABIC,
+		LANGUAGE_HUMAN_INDIAN,
+		LANGUAGE_HUMAN_IBERIAN,
+		LANGUAGE_HUMAN_RUSSIAN,
+		LANGUAGE_SPACER
+	)
