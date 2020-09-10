@@ -18,3 +18,6 @@
 
 /datum/artifact_trigger/proc/on_bump(atom/movable/AM)
 	return FALSE
+
+/datum/artifact_trigger/proc/on_water_act(depth)
+	return FALSE

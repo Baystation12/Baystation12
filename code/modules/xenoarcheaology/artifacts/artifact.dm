@@ -8,6 +8,7 @@
 	var/datum/artifact_effect/my_effect
 	var/datum/artifact_effect/secondary_effect
 	var/being_used = 0
+	waterproof = FALSE
 
 /obj/machinery/artifact/New()
 	..()
@@ -108,3 +109,6 @@
 		my_effect.UpdateMove()
 	if(secondary_effect)
 		secondary_effect.UpdateMove()
+
+/obj/machinery/artifact/water_act(depth)
+	check_triggers(/datum/artifact_trigger/proc/on_water_act, depth)
