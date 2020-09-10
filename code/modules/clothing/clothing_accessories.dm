@@ -109,7 +109,7 @@
 	update_clothing_icon()
 
 /obj/item/clothing/proc/remove_accessory(mob/user, obj/item/clothing/accessory/A)
-	if(!(A in accessories))
+	if(!A || !(A in accessories))
 		return
 
 	A.on_removed(user)

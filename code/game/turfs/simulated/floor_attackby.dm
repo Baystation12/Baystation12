@@ -140,7 +140,10 @@
 				if(T)
 					T.visible_message("<span class='warning'>The ceiling above looks as if it's being pried off.</span>")
 				if(do_after(user, 10 SECONDS))
-					if(!broken && !burnt || !(is_plating()))return
+					if(!istype(src, /turf/simulated/floor))
+						return
+					if(!broken && !burnt || !(is_plating()))
+						return
 					visible_message("<span class='warning'>[user] has pried off the damaged plating.</span>")
 					new /obj/item/stack/tile/floor(src)
 					src.ReplaceWithLattice()
