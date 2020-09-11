@@ -1,0 +1,4 @@
+author: "Albens"
+delete-after: True
+changes: 
+  - bugfix: "Forensics Technicians and Chaplains have access to the Medical Foyer, allowing them into the Morgue via the front door."
