@@ -31,6 +31,11 @@
 /datum/gear/eyes/sciencegoggles/prescription
 	display_name = "Science Goggles, prescription"
 	path = /obj/item/clothing/glasses/science/prescription
+
+/datum/gear/eyes/sciencegoggles/ipatch
+	display_name = "HUDpatch, Science"
+	path = /obj/item/clothing/glasses/eyepatch/hud/science
+
 /datum/gear/eyes/security
 	display_name = "Security HUD"
 	path = /obj/item/clothing/glasses/hud/security

@@ -82,3 +82,9 @@
 /obj/item/clothing/glasses/eyepatch/hud/meson/Initialize()
 	. = ..()
 	overlay = GLOB.global_hud.meson
+
+/obj/item/clothing/glasses/eyepatch/hud/science
+	name = "SCIpatch"
+	desc = "A portable analyzer display that connects directly to the ocular nerve of the user, replacing the need for that useless eyeball."
+	hud = /obj/item/clothing/glasses/science
+	eye-color = COLOR_PURPLE
