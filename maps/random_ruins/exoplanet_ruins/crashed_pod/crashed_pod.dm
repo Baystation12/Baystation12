@@ -25,6 +25,7 @@ GLOBAL_LIST_INIT(crashed_pod_areas, new)
 	title = "Stranded Survivor"
 	info = "Your ship has been destroyed by a terrible disaster."
 	outfit_type = /decl/hierarchy/outfit/job/survivor
+	total_positions = 2
 
 /decl/hierarchy/outfit/job/survivor
 	name = OUTFIT_JOB_NAME("Survivor")
