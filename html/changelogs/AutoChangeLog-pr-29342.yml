@@ -1,4 +1,0 @@
-author: "Mucker"
-delete-after: True
-changes: 
-  - tweak: "Replace anonymous ghost toggle in the Ghost tab with a persistent preference option called 'Show Ckey in Deadchat' in the Preferences tab. This is ON by default."
