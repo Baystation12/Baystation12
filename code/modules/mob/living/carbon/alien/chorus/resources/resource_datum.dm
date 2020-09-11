@@ -1,8 +1,7 @@
 /datum/chorus_resource
 	var/name = "resource"
 	var/name_color = COLOR_WHITE
-	var/amount = 0
-	var/index = 0 //Dictates where we are in the list (this never changes)
+	var/amount = 50
 
 /datum/chorus_resource/proc/has_amount(var/amt)
 	return amt <= get_amount()
@@ -21,4 +20,4 @@
 	return TRUE
 
 /datum/chorus_resource/proc/printed_cost(var/minimum = FALSE)
-	return "<font color=\"[name_color]\">[minimum ? copytext(name, 1, 2) : name]</font>"
+	return "<span style=\"color: [name_color];\">[minimum ? copytext(name, 1, 2) : name]</span>"

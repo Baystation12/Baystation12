@@ -1,4 +1,4 @@
-/mob/living/chorus
+/mob/living/carbon/alien/chorus
 	hud_type = /datum/hud/chorus
 
 /datum/hud/chorus
@@ -6,7 +6,6 @@
 	var/obj/screen/chorus_building_cost/cost
 	var/obj/screen/chorus_resource/followers
 	var/obj/screen/chorus_resource/buildings
-	var/obj/screen/chorus_choose_form/choose
 	var/list/resources = list()
 
 /datum/hud/chorus/FinalizeInstantiation(ui_style = 'icons/mob/screen1_Midnight.dmi')
@@ -27,8 +26,10 @@
 
 	adding += new /obj/screen/chorus_cancel_building()
 	adding += new /obj/screen/chorus_open_blueprints()
-	adding += new /obj/screen/chorus_center_on_form()
-	adding += new /obj/screen/chorus_delete_building()
+	var/obj/screen/intent = new /obj/screen/intent()
+	intent.screen_loc = "WEST+6:8, SOUTH+1:8"
+	action_intent = intent
+	adding += intent
 
 	for(var/i in 1 to 4)
 		var/obj/screen/chorus_resource/res = new()
@@ -50,25 +51,27 @@
 	adding += buildings
 
 	adding += resources
+	adding += new /obj/screen/chorus_build()
 
-	var/mob/living/chorus/chorus = mymob
-	if(!chorus.form)
-		choose = new()
-		adding += choose
+	mymob.healths = new /obj/screen()
+	mymob.healths.SetName("health")
+	mymob.healths.icon = 'icons/mob/screen1_Midnight.dmi'
+	mymob.healths.icon_state = "health0"
+	mymob.healths.screen_loc = ui_construct_health
+	adding += mymob.healths
 
 	mymob.client.screen = list()
 	mymob.client.screen += src.adding
 
-	update_followers_buildings(0,0)
-
-/datum/hud/chorus/proc/update_followers_buildings(var/f, var/b)
+/datum/hud/chorus/proc/update_buildings_units(var/b, var/f)
 	followers.update_resource(f)
 	buildings.update_resource(b)
-	return
 
-/datum/hud/chorus/proc/update_resource(var/r_index, var/print)
-	var/obj/screen/chorus_resource/cr = resources[r_index]
-	cr.update_resource(print)
+/datum/hud/chorus/proc/update_resources(var/list/prints)
+	for(var/i in 1 to prints.len)
+		var/obj/screen/chorus_resource/res = resources[i]
+		var/p = prints[i]
+		res.update_resource(p)
 
 /datum/hud/chorus/proc/update_selected(var/datum/chorus_building/n_build)
 	selected.update_to_building(n_build)
@@ -133,8 +136,8 @@
 	icon_state = "cancel"
 
 /obj/screen/chorus_cancel_building/Click()
-	if(usr && istype(usr, /mob/living/chorus))
-		var/mob/living/chorus/C = usr
+	if(usr && istype(usr, /mob/living/carbon/alien/chorus))
+		var/mob/living/carbon/alien/chorus/C = usr
 		C.set_selected_building(null)
 
 /obj/screen/chorus_open_blueprints
@@ -145,8 +148,8 @@
 
 
 /obj/screen/chorus_open_blueprints/Click()
-	if(usr && istype(usr, /mob/living/chorus))
-		var/mob/living/chorus/C = usr
+	if(usr && istype(usr, /mob/living/carbon/alien/chorus))
+		var/mob/living/carbon/alien/chorus/C = usr
 		C.open_building_menu()
 
 /obj/screen/chorus_resource
@@ -159,35 +162,13 @@
 /obj/screen/chorus_resource/proc/update_resource(var/print)
 	maptext = "<p style=\"font-size:5px\">[print]</p>"
 
-/obj/screen/chorus_choose_form
-	name = "Choose Form"
-	screen_loc = "East-7, SOUTH+7"
-	icon = 'icons/mob/screen1_Midnight.dmi'
-	icon_state = "choose_form"
-
-/obj/screen/chorus_choose_form/Click()
-	if(usr && istype(usr, /mob/living/chorus))
-		var/mob/living/chorus/C = usr
-		C.choose_form()
-
-/obj/screen/chorus_delete_building
-	name = "Delete Building"
-	screen_loc = "WEST+6:8, SOUTH+1:8"
-	icon = 'icons/mob/screen1_Midnight.dmi'
-	icon_state = "remove"
-
-/obj/screen/chorus_delete_building/Click()
-	if(usr && istype(usr, /mob/living/chorus))
-		var/mob/living/chorus/C = usr
-		C.start_delete()
-
-/obj/screen/chorus_center_on_form
-	name = "Center On Form"
+/obj/screen/chorus_build
+	name = "Build"
 	screen_loc = "WEST+6:8, SOUTH:8"
 	icon = 'icons/mob/screen1_Midnight.dmi'
-	icon_state = "center_chorus"
+	icon_state = "build"
 
-/obj/screen/chorus_center_on_form/Click()
-	if(usr && istype(usr, /mob/living/chorus))
-		var/mob/living/chorus/C = usr
-		C.eyeobj.setLoc(get_turf(C))
+/obj/screen/chorus_build/Click()
+	if(usr && istype(usr, /mob/living/carbon/alien/chorus))
+		var/mob/living/carbon/alien/chorus/c = usr
+		c.start_building()

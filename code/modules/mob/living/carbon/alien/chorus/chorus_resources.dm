@@ -1,13 +1,13 @@
-/mob/living/chorus
+/datum/chorus
 	var/list/resources = list()
 
-/mob/living/chorus/proc/get_resource(var/path)
+/datum/chorus/proc/get_resource(var/path)
 	for(var/r in resources)
 		if(istype(r, path))
 			return r
 	return null
 
-/mob/living/chorus/proc/has_enough_resource(var/path, var/amt)
+/datum/chorus/proc/has_enough_resource(var/path, var/amt)
 	if(amt == 0)
 		return TRUE
 	var/datum/chorus_resource/resource = get_resource(path)
@@ -15,7 +15,7 @@
 		return resource.has_amount(amt)
 	return FALSE
 
-/mob/living/chorus/proc/use_resource(var/path, var/amt)
+/datum/chorus/proc/use_resource(var/path, var/amt)
 	if(amt == 0)
 		return TRUE
 	var/datum/chorus_resource/resource = get_resource(path)
@@ -26,7 +26,7 @@
 		return r
 	return FALSE
 
-/mob/living/chorus/proc/add_to_resource(var/path, var/amt)
+/datum/chorus/proc/add_to_resource(var/path, var/amt)
 	if(amt == 0)
 		return TRUE
 	var/datum/chorus_resource/resource = get_resource(path)
@@ -37,11 +37,10 @@
 		return r
 	return FALSE
 
-/mob/living/chorus/Destroy()
+/datum/chorus/Destroy()
 	QDEL_NULL_LIST(resources)
 	. = ..()
 
-/mob/living/chorus/proc/update_resource(var/datum/chorus_resource/r)
-	update_nano_resource(r)
-	var/datum/hud/chorus/C = hud_used
-	C.update_resource(r.index, "[r.printed_cost()] [r.get_amount()]")
+/datum/chorus/proc/update_resource(var/datum/chorus_resource/r)
+	update_nano_basic(r)
+	update_huds(FALSE, TRUE)

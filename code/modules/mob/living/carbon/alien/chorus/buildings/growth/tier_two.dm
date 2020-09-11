@@ -12,7 +12,6 @@
 	icon_state = "growth_stomach"
 	health = 30
 	click_cooldown = 5 SECONDS
-	gives_sight = FALSE
 	activation_cost_resource = /datum/chorus_resource/growth_nutrients
 	activation_cost_amount = 2
 
@@ -35,7 +34,6 @@
 	icon_state = "growth_bone"
 	health = 30
 	click_cooldown = 5 SECONDS
-	gives_sight = FALSE
 	activation_cost_resource = /datum/chorus_resource/growth_nutrients
 	activation_cost_amount = 2
 
@@ -50,14 +48,12 @@
 	build_time = 100
 	build_level = 2
 	resource_cost = list(/datum/chorus_resource/growth_meat = 25)
-	building_requirements = list(/obj/structure/chorus/construct_bonus/nerve_cluster = 3)
 
 /obj/structure/chorus/processor/clicker/growth
 	name = "sinoatrial node"
 	desc = "A large fan of what appears to be some sort of organic wire"
 	icon_state = "growth_node"
 	health = 50
-	gives_sight = FALSE
 
 /datum/chorus_building/muscular_coat
 	desc = "Every beast needs an outside"
@@ -91,7 +87,6 @@
 	desc = "A neck high wall made of teeth and meat"
 	click_cooldown = 3 SECONDS
 	health = 200
-	gives_sight = FALSE
 	icon_state = "growth_maw_closed"
 
 /obj/structure/chorus/maw/activate()
@@ -121,7 +116,6 @@
 	icon_state = "growth_spine"
 	activation_cost_resource = /datum/chorus_resource/growth_bones
 	activation_cost_amount = 50
-	gives_sight = TRUE
 	density = TRUE
 	turf_type_to_add = /turf/simulated/floor/scales
 
@@ -142,7 +136,6 @@
 	icon_state = "growth_bone_shooter"
 	health = 20
 	range = 7
-	gives_sight = FALSE
 	activation_cost_resource = /datum/chorus_resource/growth_bones
 	activation_cost_amount = 1
 	click_cooldown = 8 SECONDS
@@ -151,7 +144,7 @@
 	var/mob/living/T = get_atom_closest_to_atom(src, targets)
 	var/obj/item/projectile/bone_shard/bs = new(get_turf(src), owner)
 	set_dir(get_dir(src, T))
-	visible_message("<b>\The [src]</b> fires a small dart at \the [T]")
+	visible_message(SPAN_DANGER("<b>\The [src]</b> fires a small dart at \the [T]"))
 	bs.firer = src
 	bs.launch(T, BP_CHEST)
 
@@ -163,7 +156,7 @@
 	icon_state = "sliver"
 	damage_type = BRUTE
 	damage_flags = 0
-	var/mob/living/chorus/ignore
+	var/datum/chorus/ignore
 
 /obj/item/projectile/bone_shard/Initialize(var/maploading, var/ignoring)
 	..()

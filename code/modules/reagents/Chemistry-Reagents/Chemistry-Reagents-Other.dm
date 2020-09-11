@@ -169,13 +169,6 @@
 				var/obj/effect/spider/spiderling/S = new /obj/effect/spider/spiderling(M.loc)
 				M.visible_message("<span class='warning'>\The [M] coughs up \the [S]!</span>")
 
-/datum/reagent/water/holywater/Topic(href, href_list)
-	. = ..()
-	if(!. && href_list["deconvert"])
-		var/mob/living/carbon/C = locate(href_list["deconvert"])
-		if(C.mind)
-			GLOB.godcult.remove_antagonist(C.mind,1)
-
 /datum/reagent/water/holywater/touch_turf(var/turf/T)
 	if(volume >= 5)
 		T.holy = 1

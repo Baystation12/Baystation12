@@ -6,4 +6,4 @@
 	required_players = 10
 	required_enemies = 3
 	end_on_antag_death = 0
-	antag_tags = list(MODE_DEITY, MODE_GODCULTIST)
+	antag_tags = list(MODE_DEITY)

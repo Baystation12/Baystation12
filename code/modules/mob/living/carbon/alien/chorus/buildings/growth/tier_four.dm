@@ -15,11 +15,15 @@
 
 /obj/structure/chorus/processor/sentry/tendril/thorned
 	name = "thorned tendril"
-	desc = "A large mucus covered tentacle. <span class='notice'>This one has a large spike on the end</span>"
+	desc = "A large mucus covered tentacle."
 	icon_state = "growth_tendril_thorned"
-	damage = 15
-	penetration = 15
+	damage = 30
+	penetration = 30
 	health = 300
+
+/obj/structure/chorus/processor/sentry/tendrdil/thorned/Initialize()
+	. = ..()
+	desc += SPAN_NOTICE("This one has a large spike on the end")
 
 /datum/chorus_building/set_to_turf/growth/gastric_emitter
 	desc = "Activate to spill acid on nearby tiles: watch out for your allies!"
@@ -37,17 +41,14 @@
 	desc = "You can hear chemicals slosh in this fleshy sack."
 	icon_state = "growth_gastric"
 	click_cooldown = 30 SECONDS
-	gives_sight = FALSE
 	activation_cost_resource = /datum/chorus_resource/growth_nutrients
 	activation_cost_amount = 15
 
 /obj/structure/chorus/gastric_emitter/activate()
-	var/turf/cur_turf = get_turf(src)
-	if (!cur_turf)
-		return
-
 	flick("growth_gastric_emit", src)
 	playsound(src, 'sound/machines/pump.ogg', 35, 1)
+	visible_message(SPAN_DANGER("\The [src] exudes a nasty chemical!"))
+	var/turf/cur_turf = get_turf(src)
 	for(var/t in cur_turf.AdjacentTurfs())
 		var/turf/T = t
 		if(T.density)
