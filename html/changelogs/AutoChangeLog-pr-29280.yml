@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - tweak: "Forensics sample kits can now be used on containers, tables, racks, etc on non-help intents without dropping/placing/storing them."
