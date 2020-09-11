@@ -60,6 +60,9 @@
 obj/effect/paint/ocean
 	color =	COLOR_OCEAN
 
+obj/effect/paint/palegreengray
+	color =	COLOR_PALE_GREEN_GRAY
+
 //Stripes the wall it spawns on, then dies
 /obj/effect/paint_stripe
 	name = "stripe of paint"

@@ -27,7 +27,7 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/maintenance/fourthdeck/aft)
 "ai" = (
-/obj/effect/shuttle_landmark/admin/out,
+/obj/effect/shuttle_landmark/scavver_gantry/torch/three,
 /turf/space,
 /area/space)
 "aj" = (
@@ -7023,6 +7023,7 @@
 	locked = 1;
 	name = "EVA External Access"
 	},
+/obj/effect/shuttle_landmark/scavver_gantry/torch/two,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/eva)
 "xi" = (
@@ -9496,6 +9497,10 @@
 	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/lounge)
+"Gt" = (
+/obj/effect/shuttle_landmark/scavver_gantry/torch,
+/turf/space,
+/area/space)
 "Gu" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4;
@@ -14196,6 +14201,7 @@
 	},
 /obj/machinery/shield_diffuser,
 /obj/effect/shuttle_landmark/skrellscoutshuttle/altdock,
+/obj/effect/shuttle_landmark/admin/out,
 /turf/simulated/floor/plating,
 /area/hallway/primary/fourthdeck/aft)
 "TY" = (
@@ -22128,7 +22134,7 @@ aa
 aa
 aa
 aa
-aa
+Gt
 aa
 aa
 aa
@@ -40277,7 +40283,7 @@ aa
 aa
 aa
 aa
-aa
+ai
 aa
 aa
 aa
@@ -40891,7 +40897,7 @@ aa
 aa
 aa
 aa
-ai
+aa
 TX
 UT
 QM

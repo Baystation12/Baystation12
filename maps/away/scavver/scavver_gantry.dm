@@ -11,6 +11,7 @@
 	shuttles_to_initialise = list(
 		/datum/shuttle/autodock/overmap/scavver_gantry,
 		/datum/shuttle/autodock/overmap/scavver_gantry/two,
+		/datum/shuttle/autodock/overmap/scavver_gantry/three,
 		/datum/shuttle/autodock/ferry/gantry
 	)
 	area_usage_test_exempted_root_areas = list(/area/scavver)
@@ -21,8 +22,8 @@
 		/area/scavver/gantry/down2= NO_SCRUBBER|NO_VENT,
 		/area/scavver/gantry/up1 = NO_SCRUBBER|NO_VENT,
 		/area/scavver/gantry/up2 = NO_SCRUBBER|NO_VENT,
-		/area/scavver/escapepod = NO_SCRUBBER|NO_VENT,
 		/area/scavver/gantry/lift = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/scavver/harvestpod = NO_SCRUBBER|NO_VENT
 	)
 	spawn_weight = 0.67
 
@@ -44,8 +45,7 @@
 	desc = "Sensor array detects a medium-sized vessel of irregular shape. Vessel origin is unidentifiable."
 	vessel_mass = 1200
 	fore_dir = NORTH
-	max_speed = 1/(10 SECONDS)
-	burn_delay = 10 SECONDS
+	burn_delay = 2 SECONDS
 	hide_from_reports = TRUE
 	known = 0
 	initial_generic_waypoints = list(
@@ -57,7 +57,12 @@
 	)
 	initial_restricted_waypoints = list(
 		"ITV The Reclaimer" = list("nav_hangar_gantry_one"),
-		"ITV Vulcan" = list("nav_hangar_gantry_two")
+		"ITV Vulcan" = list("nav_hangar_gantry_two"),
+		"ITV Spiritus" = list("nav_hangar_gantry_three", "nav_hangar_gantry_four", "nav_hangar_gantry_five", "nav_hangar_gantry_six"),
+		"Charon" = list("nav_gantry_charon"),
+		"Guppy" = list("nav_gantry_gup"),
+		"Aquila" = list("nav_gantry_aquila"),
+		"Desperado" = list("nav_gantry_desperado")
 	)
 
 /obj/item/mech_component/sensors/light/salvage/prebuild()
@@ -122,6 +127,10 @@
 	name = "\improper Private Yacht Lower Deck"
 	icon_state = "gantry_yacht_down"
 
+/area/scavver/yachtdown/thrusters
+	name = "\improper Private Yacht Lower Deck Thrusters"
+	icon_state = "gantry_yacht_up"
+
 /area/scavver/hab
 	name = "\improper Habitation Module"
 	icon_state = "gantry_hab"
@@ -141,6 +150,12 @@
 	name = "\improper ITV Vulcan"
 	icon_state = "gantry_pod"
 	area_flags = AREA_FLAG_RAD_SHIELDED
+
+/area/scavver/harvestpod
+	name = "\improper ITV Spiritus"
+	icon_state = "gantry_yacht_down"
+	area_flags = AREA_FLAG_RAD_SHIELDED
+
 
 //smes
 /obj/machinery/power/smes/buildable/preset/scavver/smes
