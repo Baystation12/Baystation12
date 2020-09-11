@@ -102,7 +102,7 @@
 /obj/machinery/atmospherics/unary/engine/on_update_icon()
 	overlays.Cut()
 	if(is_on())
-		overlays += "nozzle_idle"
+		overlays += image_repository.overlay_image(icon, "nozzle_idle", plane = EFFECTS_ABOVE_LIGHTING_PLANE, layer = ABOVE_LIGHTING_LAYER)
 
 /obj/machinery/atmospherics/unary/engine/proc/get_status()
 	. = list()
@@ -176,7 +176,7 @@
 	var/turf/T = get_step(src,exhaust_dir)
 	if(T)
 		T.assume_air(removed)
-		new/obj/effect/engine_exhaust(T, dir, air_contents.check_combustability() && air_contents.temperature >= PHORON_MINIMUM_BURN_TEMPERATURE)
+		new/obj/effect/engine_exhaust(T, dir)
 
 /obj/machinery/atmospherics/unary/engine/proc/calculate_thrust(datum/gas_mixture/propellant, used_part = 1)
 	return round(sqrt(propellant.get_mass() * used_part * sqrt(air_contents.return_pressure()/200)),0.1)
@@ -200,12 +200,10 @@
 	light_color = "#00a2ff"
 	anchored = 1
 
-/obj/effect/engine_exhaust/New(var/turf/nloc, var/ndir, var/flame)
+/obj/effect/engine_exhaust/New(turf/nloc, ndir)
 	..(nloc)
-	if(flame)
-		icon_state = "exhaust"
-		nloc.hotspot_expose(1000,125)
-		set_light(0.5, 1, 4)
+	nloc.hotspot_expose(1000,125)
+	set_light(0.5, 1, 4)
 	set_dir(ndir)
 	spawn(20)
 		qdel(src)
