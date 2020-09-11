@@ -517,7 +517,7 @@
 	icon_state = "0-8"
 	},
 /obj/machinery/power/apc/derelict{
-	cell_type = /obj/item/weapon/cell;
+	cell_type = /obj/item/weapon/cell/standard;
 	dir = 4;
 	name = "Captain's Quarters APC"
 	},
@@ -2787,7 +2787,7 @@
 /obj/structure/table/standard,
 /obj/structure/cable,
 /obj/machinery/power/apc/derelict{
-	cell_type = /obj/item/weapon/cell;
+	cell_type = /obj/item/weapon/cell/standard;
 	name = "Medical Bay APC"
 	},
 /obj/machinery/light_switch{
@@ -3552,7 +3552,7 @@
 /area/ship/scrap/unused)
 "gc" = (
 /obj/machinery/power/apc/derelict{
-	cell_type = /obj/item/weapon/cell;
+	cell_type = /obj/item/weapon/cell/standard;
 	name = "Medical Bay APC"
 	},
 /obj/structure/cable,
@@ -5926,7 +5926,7 @@
 /area/ship/scrap/maintenance/atmos)
 "PP" = (
 /obj/machinery/power/apc/derelict{
-	cell_type = /obj/item/weapon/cell;
+	cell_type = /obj/item/weapon/cell/standard;
 	name = "Medical Bay APC"
 	},
 /obj/structure/cable{

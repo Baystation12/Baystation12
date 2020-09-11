@@ -109,7 +109,7 @@
 	pixel_y = -24
 	},
 /obj/item/weapon/storage/pill_bottle/antitox,
-/obj/item/weapon/cell,
+/obj/item/weapon/cell/standard,
 /obj/item/weapon/storage/box/matches,
 /obj/random/maintenance/clean,
 /obj/random/cash,
