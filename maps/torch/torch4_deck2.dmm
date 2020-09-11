@@ -5010,7 +5010,7 @@
 "ky" = (
 /obj/machinery/shield_diffuser,
 /turf/simulated/floor/reinforced/airless,
-/area/maintenance/exterior)
+/area/torchexterior)
 "kz" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -5350,7 +5350,7 @@
 /area/engineering/engine_room)
 "lk" = (
 /turf/simulated/floor/reinforced/airless,
-/area/maintenance/exterior)
+/area/torchexterior)
 "ll" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 6
