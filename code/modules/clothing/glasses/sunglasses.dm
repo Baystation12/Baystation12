@@ -24,6 +24,7 @@
 	hud = /obj/item/clothing/glasses/hud/security
 	electric = TRUE
 	flash_protection = FLASH_PROTECTION_MODERATE
+	req_access = list(access_security)
 
 /obj/item/clothing/glasses/sunglasses/sechud/goggles //now just a more "military" set of HUDglasses for the Torch
 	name = "HUD goggles"
