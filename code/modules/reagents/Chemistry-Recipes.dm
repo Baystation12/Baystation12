@@ -2960,43 +2960,67 @@
 /datum/chemical_reaction/colored_hair_dye/red
 	name = "Red Hair Dye"
 	result = /datum/reagent/colored_hair_dye/red
-	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/crayon_dust/red = 1)
+	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/drink/juice/tomato = 1)
 	result_amount = 1
 
 /datum/chemical_reaction/colored_hair_dye/orange
 	name = "Orange Hair Dye"
 	result = /datum/reagent/colored_hair_dye/orange
-	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/crayon_dust/orange = 1)
+	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/drink/juice/carrot = 1)
 	result_amount = 1
 
 /datum/chemical_reaction/colored_hair_dye/yellow
 	name = "Yellow Hair Dye"
 	result = /datum/reagent/colored_hair_dye/yellow
-	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/crayon_dust/yellow = 1)
+	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/drink/juice/lemon = 1)
 	result_amount = 1
 
 /datum/chemical_reaction/colored_hair_dye/green
 	name = "Green Hair Dye"
 	result = /datum/reagent/colored_hair_dye/green
-	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/crayon_dust/green = 1)
+	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/drink/juice/lime = 1)
 	result_amount = 1
 
 /datum/chemical_reaction/colored_hair_dye/blue
 	name = "Blue Hair Dye"
 	result = /datum/reagent/colored_hair_dye/blue
-	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/crayon_dust/blue = 1)
+	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/dexalinp = 1)
 	result_amount = 1
 
 /datum/chemical_reaction/colored_hair_dye/purple
 	name = "Purple Hair Dye"
 	result = /datum/reagent/colored_hair_dye/purple
-	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/crayon_dust/purple = 1)
+	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/drink/juice/grape = 1)
 	result_amount = 1
 
 /datum/chemical_reaction/colored_hair_dye/grey
 	name = "Grey Hair Dye"
 	result = /datum/reagent/colored_hair_dye/grey
-	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/crayon_dust/grey = 1)
+	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/drink/juice/cream = 1)
+	result_amount = 1
+
+/datum/chemical_reaction/colored_hair_dye/brown
+	name = "Brown Hair Dye"
+	result = /datum/reagent/colored_hair_dye/brown
+	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/drink/space_cola = 1)
+	result_amount = 1
+
+/datum/chemical_reaction/colored_hair_dye/light_brown
+	name = "Light Brown Hair Dye"
+	result = /datum/reagent/colored_hair_dye/light_brown
+	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/drink/juice/potato = 1)
+	result_amount = 1
+
+/datum/chemical_reaction/colored_hair_dye/white
+	name = "White Hair Dye"
+	result = /datum/reagent/colored_hair_dye/white
+	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/drink/milk = 1)
+	result_amount = 1
+
+/datum/chemical_reaction/colored_hair_dye/black
+	name = "Black Hair Dye"
+	result = /datum/reagent/colored_hair_dye/black
+	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/drink/coffee = 1)
 	result_amount = 1
 	
 /datum/chemical_reaction/colored_hair_dye/chaos

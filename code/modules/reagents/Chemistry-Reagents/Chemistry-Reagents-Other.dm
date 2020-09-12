@@ -534,7 +534,7 @@
 		var/datum/sprite_accessory/facial_hair/newbeard = /datum/sprite_accessory/facial_hair/vlongbeard
 		M.change_hair(initial(newhair.name))
 		M.change_facial_hair(initial(newbeard.name))
-		to_chat(M, SPAN_NOTICE("Your hair grows to extraordinary lengths!"))
+		M.visible_message(SPAN_NOTICE("\The [M]'s hair grows to extraordinary lengths!"))
 		metabolism=99
 
 /datum/reagent/capilliumate/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -592,6 +592,22 @@
 	name = "Grey Hair Dye"
 	color = "#696969"
 
+/datum/reagent/colored_hair_dye/brown
+	name = "Brown Hair Dye"
+	color = "#3b2d0f"
+
+/datum/reagent/colored_hair_dye/light_brown
+	name = "Light Brown Hair Dye"
+	color = "#3d3729"
+
+/datum/reagent/colored_hair_dye/black
+	name = "Black Hair Dye"
+	color = "#000000"
+
+/datum/reagent/colored_hair_dye/whitelist
+	name = "White Hair Dye"
+	color = "#ffffff"
+
 /datum/reagent/colored_hair_dye/chaos
 	name = "Chaotic Hair Dye"
 	description = "This hair dye can be any color! Only one way to find out what kind!"
@@ -604,7 +620,7 @@
 		var/blue = hex2num(copytext(src.color, 6, 8))
 		M.change_hair_color(red, green, blue)
 		M.change_facial_hair_color(red, green, blue)
-		to_chat(M, SPAN_NOTICE("Your hair suddenly changes color!"))
+		M.visible_message(SPAN_NOTICE("\The [M]'s hair changes color!"))
 
 /datum/reagent/colored_hair_dye/chaos/affect_touch(var/mob/living/carbon/human/M, var/alien, var/removed)
 	if(istype(M) && (M.species.appearance_flags & HAS_HAIR_COLOR))
