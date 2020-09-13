@@ -46,3 +46,13 @@
 	economic_modifier = 1.5
 	outfit_type = /decl/hierarchy/outfit/job/unsc/marine/e7
 	access = list(access_unsc,access_unsc_cargo,access_unsc_armoury,access_unsc_marine,access_unsc_specialist)
+
+
+/datum/job/unsc/marine/hellbringer
+	title = "Hellbringer"
+	total_positions = 2
+	spawn_positions = 2
+	outfit_type = /decl/hierarchy/outfit/job/unsc/marine/hellbringer
+	alt_titles = list("Flamethrower Operator" = /decl/hierarchy/outfit/job/unsc/marine/hellbringer)
+	access = list(access_unsc,access_unsc_armoury,access_unsc_marine,access_unsc_specialist)
+	faction_whitelist = "unsc"
