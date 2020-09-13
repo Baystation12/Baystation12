@@ -2996,7 +2996,7 @@
 /datum/chemical_reaction/colored_hair_dye/grey
 	name = "Grey Hair Dye"
 	result = /datum/reagent/colored_hair_dye/grey
-	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/drink/juice/cream = 1)
+	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/drink/tea/barongrey = 1)
 	result_amount = 1
 
 /datum/chemical_reaction/colored_hair_dye/brown

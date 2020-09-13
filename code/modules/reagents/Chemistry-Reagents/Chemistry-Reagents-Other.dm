@@ -604,7 +604,7 @@
 	name = "Black Hair Dye"
 	color = "#000000"
 
-/datum/reagent/colored_hair_dye/whitelist
+/datum/reagent/colored_hair_dye/white
 	name = "White Hair Dye"
 	color = "#ffffff"
 
