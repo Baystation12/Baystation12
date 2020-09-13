@@ -118,9 +118,3 @@
 	destroy_surroundings = 1
 	projectiletype = initial(projectiletype)
 	walk(src,0)
-
-/mob/living/simple_animal/hostile/retaliate/malf_drone/hydro/ListTargets()
-	if(hostile_drone)
-		return view(src, 3)
-	else
-		return ..()
