@@ -112,7 +112,7 @@
 /obj/machinery/light/invis/powered()
 	return 1
 
-/obj/structure/grille/smallfence/
+/obj/structure/grille/smallfence
 	icon = 'maps/geminus_city/citymap_icons/structures.dmi'
 	name = "small fence"
 	icon_state = "fence"

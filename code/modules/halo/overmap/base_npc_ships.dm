@@ -62,6 +62,11 @@ GLOBAL_LIST_INIT(om_base_sectors, list())
 	var/radio_cooldown = 5 SECONDS
 	var/next_message
 
+/obj/effect/overmap/ship/npc_ship/create_dropship_markers()
+	if(unload_at == 0)
+		return
+	. = ..()
+
 /obj/effect/overmap/ship/npc_ship/proc/pick_ship_icon()
 	var/list/icons_pickfrom = icons_pickfrom_list
 	if(icons_pickfrom.len == 0)
@@ -181,7 +186,7 @@ GLOBAL_LIST_INIT(om_base_sectors, list())
 			if(!om_base)
 				GLOB.om_base_sectors -= om_base //If it's null, cull it from the list for everyone.
 				continue
-			if(isnull(om_obj.loc) || isnull(my_faction) || om_obj.get_faction() in my_faction.enemy_faction_names)
+			if(isnull(om_obj.loc) || !my_faction || om_obj.get_faction() in my_faction.enemy_faction_names)
 				sectors_onmap -= om_obj
 		var/obj/chosen = pick(sectors_onmap)
 		var/list/turfs_nearobj = trange(7,chosen)
@@ -305,8 +310,9 @@ GLOBAL_LIST_INIT(om_base_sectors, list())
 
 	lighting_overlays_initialised = TRUE
 	makepowernets()
-
 	cargo_init()
+	create_dropship_markers()
+
 	damage_spawned_ship()
 	GLOB.processing_objects |= src
 	superstructure_failing = 0 //If we had a process tick inbetween all of this, let's reset our superstructure failure status.

@@ -443,7 +443,9 @@
 	desc = "A vendor that supplies medical equipment"
 	req_access = list(access_unsc)
 	products = list(
+					"Utility" = -1,
 					/obj/item/bodybag/cryobag = 3,
+					/obj/item/device/healthanalyzer = 10,
 					"Medkits" = -1,
 					/obj/item/weapon/storage/firstaid/unsc = 10,
 					/obj/item/weapon/storage/firstaid/fire = 2,

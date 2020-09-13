@@ -61,22 +61,18 @@
 	name = "black webbing vest"
 	desc = "Robust black synthcotton vest with lots of pockets to hold whatever you need, but cannot hold in hands."
 	icon_state = "vest_black"
-	slots = 5
 
 /obj/item/clothing/accessory/storage/brown_vest
 	name = "brown webbing vest"
 	desc = "Worn brownish synthcotton vest with lots of pockets to unload your hands."
 	icon_state = "vest_brown"
-	slots = 5
 
 /obj/item/clothing/accessory/storage/white_vest
 	name = "white webbing vest"
 	desc = "Durable white synthcotton vest with lots of pockets to carry essentials."
 	icon_state = "vest_white"
-	slots = 5
-
 /obj/item/clothing/accessory/storage/drop_pouches
-	slots = 4 //to accomodate it being slotless
+	slots = 3 //to accomodate it being slotless
 
 /obj/item/clothing/accessory/storage/drop_pouches/create_storage()
 	hold = new/obj/item/weapon/storage/internal/pouch(src, slots*base_storage_cost(max_w_class))

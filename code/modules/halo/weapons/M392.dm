@@ -7,7 +7,7 @@
 	icon_state = "M395-Loaded-Base"
 	item_state = "m392"
 	load_method = MAGAZINE
-	caliber = "7.62mm"
+	caliber = "7.62mmdmr"
 	slot_flags = SLOT_BACK
 	magazine_type = /obj/item/ammo_magazine/m392/m120
 	allowed_magazines = list(/obj/item/ammo_magazine/m392)
@@ -49,7 +49,7 @@
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "M395mag"
 	mag_type = MAGAZINE
-	caliber = "7.62mm"
+	caliber = "7.62mmdmr"
 	max_ammo = 20
 	multiple_sprites = 1
 

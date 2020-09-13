@@ -21,7 +21,7 @@
 	var/list/stages            // stages such as "cut", "deep cut", etc.
 	var/max_bleeding_stage = 0 // maximum stage at which bleeding should still happen. Beyond this stage bleeding is prevented.
 	var/damage_type = CUT      // one of CUT, PIERCE, BRUISE, BURN
-	var/autoheal_cutoff = 9999   // the maximum amount of damage that this wound can have and still autoheal
+	var/autoheal_cutoff = 40   // the maximum amount of damage that this wound can have and still autoheal
 
 	// helper lists
 	var/tmp/list/embedded_objects = list()
@@ -59,7 +59,7 @@
 /datum/wound/proc/wound_damage()
 	return src.damage / src.amount
 
-/datum/wound/proc/can_autoheal()
+/datum/wound/proc/can_accelerated_autoheal()
 	for(var/obj/item/thing in embedded_objects)
 		if(thing.w_class > ITEM_SIZE_SMALL)
 			return 0
@@ -79,7 +79,7 @@
 	if (other.type != src.type) return 0
 	if (other.current_stage != src.current_stage) return 0
 	if (other.damage_type != src.damage_type) return 0
-	if (!(other.can_autoheal()) != !(src.can_autoheal())) return 0
+	if (!(other.can_accelerated_autoheal()) != !(src.can_accelerated_autoheal())) return 0
 	if (other.is_surgical() != src.is_surgical()) return 0
 	if (!(other.bandaged) != !(src.bandaged)) return 0
 	if (!(other.clamped) != !(src.clamped)) return 0

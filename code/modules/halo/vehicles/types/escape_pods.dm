@@ -14,6 +14,21 @@
 /obj/vehicles/drop_pod/escape_pod/is_on_launchbay()
 	return 1
 
+/obj/vehicles/drop_pod/escape_pod/get_drop_point()
+	var/list/valid_points = list()
+	var/obj/effect/overmap/om_obj = map_sectors["[z]"]
+	var/list/z_donot_land = list()
+	if(om_obj)
+		z_donot_land += om_obj.map_z
+	for(var/obj/effect/landmark/drop_pod_landing/l in world)
+		if(l.z in z_donot_land)
+			continue
+		valid_points += l
+	if(isnull(valid_points) || valid_points.len == 0)
+		log_error("ERROR: Drop pods placed on map but no /obj/effect/drop_pod_landing markers present!")
+		return
+	return pick(valid_points)
+
 /obj/vehicles/drop_pod/escape_pod/get_drop_turf(var/turf/drop_point)
 	if(isnull(drop_point))
 		visible_message("<span class = 'warning'>[src] blurts a warning: ERROR: NO AVAILABLE DROP-TARGETS.</span>")
