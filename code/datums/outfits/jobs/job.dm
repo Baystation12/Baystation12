@@ -11,4 +11,4 @@
 	pda_slot = slot_belt
 	pda_type = /obj/item/modular_computer/pda
 
-	flags = OUTFIT_HAS_BACKPACK|OUTFIT_USES_ACCOUNT|OUTFIT_USES_EMAIL
+	flags = OUTFIT_FLAGS_JOB_DEFAULT

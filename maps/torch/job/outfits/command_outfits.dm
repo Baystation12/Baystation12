@@ -58,7 +58,7 @@
 	id_types = list(/obj/item/weapon/card/id/torch/silver/engineering)
 	pda_type = /obj/item/modular_computer/pda/heads/ce
 	pda_slot = slot_l_store
-	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
+	flags = OUTFIT_FLAGS_JOB_DEFAULT | OUTFIT_EXTENDED_SURVIVAL
 
 /decl/hierarchy/outfit/job/torch/crew/command/chief_engineer/New()
 	..()

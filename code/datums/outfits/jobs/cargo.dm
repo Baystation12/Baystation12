@@ -23,7 +23,7 @@
 	id_types = list(/obj/item/weapon/card/id/cargo/mining)
 	pda_type = /obj/item/modular_computer/pda/science
 	backpack_contents = list(/obj/item/weapon/crowbar = 1, /obj/item/weapon/storage/ore = 1)
-	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
+	flags = OUTFIT_FLAGS_JOB_DEFAULT | OUTFIT_EXTENDED_SURVIVAL
 
 /decl/hierarchy/outfit/job/cargo/mining/New()
 	..()

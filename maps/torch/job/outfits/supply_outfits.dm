@@ -44,7 +44,7 @@
 	shoes = /obj/item/clothing/shoes/workboots
 	id_types = list(/obj/item/weapon/card/id/torch/passenger/research/mining)
 	pda_type = /obj/item/modular_computer/pda/mining
-	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
+	flags = OUTFIT_FLAGS_JOB_DEFAULT | OUTFIT_EXTENDED_SURVIVAL
 	l_ear = /obj/item/device/radio/headset/headset_mining
 
 /decl/hierarchy/outfit/job/torch/passenger/research/prospector/New()
