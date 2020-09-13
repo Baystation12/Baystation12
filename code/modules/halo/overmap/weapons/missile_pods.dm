@@ -53,13 +53,13 @@
 		homing_targ = target
 
 /obj/item/projectile/overmap/missile/Move()
-	. = ..()
 	if(num_homing_steps <= 0)
 		homing_targ = null
 	if(homing_targ)
 		redirect(homing_targ, loc)
 		dir = get_dir(loc,homing_targ)
 		num_homing_steps--
+	. = ..()
 
 /obj/item/projectile/overmap/missile/sector_hit_effects(var/z_level,var/obj/effect/overmap/hit,var/list/hit_bounds)
 
