@@ -4,6 +4,7 @@
 	shadeColour = "#810c0c"
 	colourName = "red"
 	color_description = "red crayon"
+	crayon_reagent = /datum/reagent/crayon_dust/red
 
 /obj/item/weapon/pen/crayon/orange
 	icon_state = "crayonorange"
@@ -11,6 +12,7 @@
 	shadeColour = "#a55403"
 	colourName = "orange"
 	color_description = "orange crayon"
+	crayon_reagent = /datum/reagent/crayon_dust/orange
 
 /obj/item/weapon/pen/crayon/yellow
 	icon_state = "crayonyellow"
@@ -18,6 +20,7 @@
 	shadeColour = "#886422"
 	colourName = "yellow"
 	color_description = "yellow crayon"
+	crayon_reagent = /datum/reagent/crayon_dust/yellow
 
 /obj/item/weapon/pen/crayon/green
 	icon_state = "crayongreen"
@@ -25,6 +28,7 @@
 	shadeColour = "#61840f"
 	colourName = "green"
 	color_description = "green crayon"
+	crayon_reagent = /datum/reagent/crayon_dust/green
 
 /obj/item/weapon/pen/crayon/blue
 	icon_state = "crayonblue"
@@ -32,6 +36,7 @@
 	shadeColour = "#0082a8"
 	colourName = "blue"
 	color_description = "blue crayon"
+	crayon_reagent = /datum/reagent/crayon_dust/blue
 
 /obj/item/weapon/pen/crayon/purple
 	icon_state = "crayonpurple"
@@ -39,6 +44,7 @@
 	shadeColour = "#810cff"
 	colourName = "purple"
 	color_description = "purple crayon"
+	crayon_reagent = /datum/reagent/crayon_dust/purple
 
 /obj/item/weapon/pen/crayon/random/Initialize()
 	..()
@@ -54,6 +60,7 @@
 	colourName = "mime"
 	color_description = "white crayon"
 	uses = 0
+	crayon_reagent = /datum/reagent/crayon_dust/grey
 
 /obj/item/weapon/pen/crayon/mime/attack_self(mob/living/user as mob) //inversion
 	if(colour != "#ffffff" && shadeColour != "#000000")
@@ -73,6 +80,7 @@
 	colourName = "rainbow"
 	color_description = "rainbow crayon"
 	uses = 0
+	crayon_reagent = /datum/reagent/crayon_dust/brown
 
 /obj/item/weapon/pen/crayon/rainbow/attack_self(mob/living/user as mob)
 	colour = input(user, "Please select the main colour.", "Crayon colour") as color

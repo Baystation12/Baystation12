@@ -13,7 +13,10 @@
 	var/uses = 30 //0 for unlimited uses
 	var/instant = 0
 	var/colourName = "red" //for updateIcon purposes
+	var/crayon_reagent = /datum/reagent/crayon_dust
 
 /obj/item/weapon/pen/crayon/Initialize()
 	name = "[colourName] crayon"
 	. = ..()
+	create_reagents(10)
+	reagents.add_reagent(crayon_reagent, 10)
