@@ -17,6 +17,7 @@
 	/datum/job/unsc/spartan_two,
 	/datum/job/unsc/marine,
 	/datum/job/unsc/marine/specialist,
+	/datum/job/unsc/marine/hellbringer,\
 	/datum/job/unsc/marine/squad_leader,
 	/datum/job/unsc/odst,
 	/datum/job/unsc/odst/squad_leader,
