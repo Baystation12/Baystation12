@@ -38,9 +38,10 @@
 
 /obj/item/ammo_casing/m120
 	desc = "A 7.62mm HP bullet casing."
-	caliber = "7.62mm"
+	caliber = "7.62mmdmr"
 	projectile_type = /obj/item/projectile/bullet/m120
 
 /obj/item/projectile/bullet/m120
-	damage = 20
-	armor_penetration = 10
+	damage = 40
+	armor_penetration = 20
+	shield_damage = 20
