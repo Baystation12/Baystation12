@@ -21,6 +21,7 @@
 	icon_state = "healthhud"
 	hud_type = HUD_MEDICAL
 	body_parts_covered = 0
+	req_access = list(access_medical)
 
 /obj/item/clothing/glasses/hud/health/process_hud(var/mob/M)
 	process_med_hud(M, 1)
@@ -46,6 +47,7 @@
 	hud_type = HUD_SECURITY
 	body_parts_covered = 0
 	var/global/list/jobs[0]
+	req_access = list(access_security)
 
 /obj/item/clothing/glasses/hud/security/prescription
 	name = "prescription security HUD"
