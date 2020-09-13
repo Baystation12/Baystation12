@@ -1,4 +1,0 @@
-author: "CrimsonShrike"
-delete-after: True
-changes: 
-  - bugfix: "Torch self destruct correctly has a minimum time of 5 minutes."
