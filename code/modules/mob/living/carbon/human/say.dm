@@ -177,6 +177,10 @@
 				var/obj/item/device/radio/R = r_ear
 				R.talk_into(src,message,null,verb,speaking)
 				used_radios += r_ear
+			else
+				for(var/obj/item/device/radio/R in src)
+					if(!R.subspace_transmission)
+						return R.talk_into(src, message, null, verb, speaking)
 		if("right ear")
 			var/obj/item/device/radio/R
 			var/has_radio = 0
