@@ -19,6 +19,7 @@ GLOBAL_LIST_EMPTY(unsc_base_spawns)
 	/datum/job/unsc/medical,\
 	/datum/job/unsc/marine,\
 	/datum/job/unsc/marine/specialist,\
+	/datum/job/unsc/marine/hellbringer,\
 	/datum/job/unsc/marine/squad_leader,\
 	/datum/job/unsc/commanding_officer,\
 	/datum/job/unsc/executive_officer,\
