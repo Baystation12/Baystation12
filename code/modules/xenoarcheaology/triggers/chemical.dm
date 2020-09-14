@@ -20,6 +20,10 @@
 		/datum/reagent/drink/ice
 	)
 
+/datum/artifact_trigger/chemical/water/on_water_act(depth)
+	if(depth > FLUID_EVAPORATION_POINT)
+		return TRUE
+
 /datum/artifact_trigger/chemical/acid
 	name = "presence of acid"
 	required_chemicals = list(
