@@ -25,9 +25,10 @@
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	core_skill = SKILL_CHEMISTRY
 	var/sloppy = 1 //Whether reagents will not be fully purified (sloppy = 1) or there will be reagent loss (sloppy = 0) on reagent add.
+	var/reagent_limit = 120
 
 /obj/machinery/chem_master/New()
-	create_reagents(120)
+	create_reagents(reagent_limit)
 	..()
 
 /obj/machinery/chem_master/ex_act(severity)
@@ -74,6 +75,9 @@
 	reagents.clear_reagents()
 	icon_state = "mixer0"
 
+/obj/machinery/chem_master/proc/get_remaining_volume()
+	return Clamp(reagent_limit - reagents.total_volume, 0, reagent_limit)
+
 /obj/machinery/chem_master/AltClick(mob/user)
 	if(CanDefaultInteract(user))
 		eject_beaker(user)
@@ -108,7 +112,7 @@
 				var/datum/reagent/their_reagent = locate(href_list["add"]) in R.reagent_list
 				if(their_reagent)
 					var/mult = 1
-					var/amount = Clamp((text2num(href_list["amount"])), 0, 200)
+					var/amount = Clamp((text2num(href_list["amount"])), 0, get_remaining_volume())
 					if(sloppy)
 						var/contaminants = fetch_contaminants(user, R, their_reagent)
 						for(var/datum/reagent/reagent in contaminants)
