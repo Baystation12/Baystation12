@@ -1,7 +1,0 @@
-author: "Hubblenaut"
-delete-after: True
-changes: 
-  - bugfix: "Fixes several issues around personal shields."
-  - tweak: "The personal shield can now be toggled using Alt+Click."
-  - tweak: "You can now remove the power cell from the personal shield using a free hand."
-  - rscdel: "The personal shield will no longer leave an intact power cell behind after exploding."
