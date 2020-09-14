@@ -1,0 +1,4 @@
+author: "Hubblenaut"
+delete-after: True
+changes: 
+  - tweak: "Personal lockers will now spawn unlocked and will only be in use while locked."
