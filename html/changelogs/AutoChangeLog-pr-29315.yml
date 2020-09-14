@@ -1,0 +1,6 @@
+author: "Shadowtail117"
+delete-after: True
+changes: 
+  - tweak: "Lockers, backpacks, and other containers will no longer protect mobs from being damaged if they are flushed down disposals."
+  - tweak: "Being flushed down a disposal pipe will now harm you even if you're dead."
+  - admin: "Admins will now be notified if an object containing a mob is flushed down disposals."
