@@ -28,6 +28,7 @@
 	. = ..()
 	hold.can_hold = list(\
 		/obj/item/weapon/reagent_containers/syringe,
+		/obj/item/weapon/reagent_containers/hypospray,
 		/obj/item/weapon/reagent_containers/pill,
 		/obj/item/weapon/reagent_containers/food/snacks/chocolatebar,
 		/obj/item/weapon/pen/crayon,
