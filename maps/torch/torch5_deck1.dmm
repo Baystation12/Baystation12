@@ -9451,21 +9451,6 @@
 /obj/effect/catwalk_plated,
 /turf/simulated/floor/plating,
 /area/security/wing)
-"aEI" = (
-/obj/effect/wallframe_spawn/reinforced/polarized{
-	id = "bo_windows"
-	},
-/obj/structure/cable/green{
-	d2 = 4;
-	icon_state = "0-4"
-	},
-/obj/structure/cable/green{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
-	},
-/turf/simulated/floor/plating,
-/area/security/bo)
 "aEK" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 2;
@@ -10246,10 +10231,6 @@
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
-	},
-/obj/machinery/newscaster/security_unit{
-	pixel_x = 32;
-	pixel_y = 32
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/bo)
@@ -23945,6 +23926,9 @@
 /obj/machinery/camera/network/security{
 	c_tag = "Security Wing - Brig Chief";
 	dir = 4
+	},
+/obj/machinery/newscaster/security_unit{
+	pixel_x = -32
 	},
 /turf/simulated/floor/tiled/dark,
 /area/security/bo)
@@ -40731,8 +40715,8 @@ nmb
 xRh
 aCy
 aDE
-aEI
-aFQ
+aKE
+cHj
 cHj
 tgs
 cHj
