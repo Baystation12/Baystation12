@@ -607,7 +607,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/light_switch{
-	pixel_x = 22
+	pixel_x = 24
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/janitor/storage)
@@ -5495,12 +5495,6 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fourthdeck/aft)
-"sW" = (
-/obj/machinery/light_switch{
-	pixel_y = 9
-	},
-/turf/simulated/wall/prepainted,
-/area/janitor)
 "sX" = (
 /obj/machinery/computer/modular/preset/dock{
 	dir = 4;
@@ -14751,6 +14745,9 @@
 /obj/item/weapon/mop,
 /obj/machinery/light/small,
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/light_switch{
+	pixel_y = -24
+	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/janitor)
 "VA" = (
@@ -38077,7 +38074,7 @@ Ub
 cR
 dy
 Vy
-sW
+Ub
 cI
 gD
 eV
