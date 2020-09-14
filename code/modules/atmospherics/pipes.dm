@@ -14,6 +14,7 @@
 	var/alert_pressure = 170 * ONE_ATMOSPHERE
 	var/in_stasis = 0
 		//minimum pressure before check_pressure(...) should be called
+	var/obj/machinery/clamp/clamp // Linked stasis clamp
 
 	can_buckle = 1
 	buckle_require_restraints = 1
@@ -97,6 +98,8 @@
 /obj/machinery/atmospherics/pipe/Destroy()
 	QDEL_NULL(parent)
 	QDEL_NULL(sound_token)
+	if (clamp)
+		clamp.detach()
 	if(air_temporary)
 		loc.assume_air(air_temporary)
 
@@ -117,6 +120,10 @@
 			to_chat(user, "<span class='warning'>You must remove the plating first.</span>")
 			return 1
 
+		if (clamp)
+			to_chat(user, SPAN_WARNING("You must remove \the [clamp] first."))
+			return TRUE
+
 		var/datum/gas_mixture/int_air = return_air()
 		var/datum/gas_mixture/env_air = loc.return_air()
 
@@ -129,6 +136,10 @@
 		to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
 
 		if (do_after(user, 40, src))
+			if (clamp)
+				to_chat(user, SPAN_WARNING("You must remove \the [clamp] first."))
+				return TRUE
+
 			user.visible_message("<span class='notice'>\The [user] unfastens \the [src].</span>", "<span class='notice'>You have unfastened \the [src].</span>", "You hear a ratchet.")
 
 			new /obj/item/pipe(loc, src)
