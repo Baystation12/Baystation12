@@ -1,0 +1,5 @@
+author: "Ithalan"
+delete-after: True
+changes: 
+  - bugfix: "Psionic armor now actually works"
+  - tweak: "Resistance from protective gear is now checked and applied to incoming damage before any inherent resistance a mob has"
