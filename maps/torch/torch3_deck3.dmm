@@ -2118,6 +2118,9 @@
 /obj/item/weapon/towel/random,
 /obj/item/weapon/towel/random,
 /obj/item/weapon/towel/random,
+/obj/machinery/firealarm{
+	pixel_y = 21
+	},
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head)
 "eC" = (
@@ -2519,8 +2522,12 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/engineering/hardstorage)
 "fo" = (
-/obj/machinery/firealarm{
-	pixel_y = 21
+/obj/item/weapon/storage/mirror{
+	pixel_y = 32
+	},
+/obj/structure/hygiene/sink{
+	dir = 1;
+	pixel_y = 16
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head)
@@ -2639,16 +2646,11 @@
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/thirddeck/fore)
 "fD" = (
-/obj/structure/hygiene/sink{
-	dir = 4;
-	icon_state = "sink";
-	pixel_x = 11;
+/obj/item/weapon/storage/secure/safe{
+	pixel_x = 32;
 	pixel_y = 0
 	},
-/obj/item/weapon/storage/mirror{
-	pixel_w = 0;
-	pixel_x = 28
-	},
+/obj/structure/closet/secure_closet/personal/empty,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head)
 "fE" = (
@@ -3651,18 +3653,12 @@
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/galley)
 "hp" = (
-/obj/structure/hygiene/sink{
-	dir = 4;
-	icon_state = "sink";
-	pixel_x = 11;
+/obj/machinery/light/small,
+/obj/item/weapon/storage/secure/safe{
+	pixel_x = 32;
 	pixel_y = 0
 	},
-/obj/item/weapon/storage/mirror{
-	pixel_w = 0;
-	pixel_x = 28
-	},
-/obj/item/weapon/lipstick/random,
-/obj/machinery/light/small,
+/obj/structure/closet/secure_closet/personal/empty,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head)
 "hq" = (
@@ -4185,6 +4181,10 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/galley)
+"in" = (
+/obj/item/weapon/stool/padded,
+/turf/simulated/floor/tiled/freezer,
+/area/crew_quarters/head)
 "io" = (
 /obj/machinery/button/blast_door{
 	id_tag = "kitchen";
@@ -14248,6 +14248,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
+/obj/item/weapon/stool/padded,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head)
 "Iy" = (
@@ -15787,6 +15788,7 @@
 /obj/structure/table/standard{
 	name = "plastic table frame"
 	},
+/obj/item/weapon/lipstick/random,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head)
 "LM" = (
@@ -39528,8 +39530,8 @@ sj
 UQ
 uU
 uU
-uU
-fo
+fz
+YK
 gr
 uU
 hL
@@ -39729,8 +39731,8 @@ qP
 RQ
 cV
 uU
-vY
-eE
+fo
+YK
 YK
 gK
 TZ
@@ -39931,8 +39933,8 @@ Xn
 sj
 dB
 uU
-uU
-fz
+fo
+YK
 YK
 gK
 LL
@@ -40337,9 +40339,9 @@ xf
 uU
 eB
 YK
-YK
+in
 Ix
-YK
+in
 hP
 jl
 kg
