@@ -17,8 +17,9 @@
 	var/message_type = VISIBLE_MESSAGE // Audible/visual flag
 	var/targetted_emote                // Whether or not this emote needs a target.
 	var/check_restraints               // Can this emote be used while restrained?
-	var/conscious = 1				   // Do we need to be awake to emote this?
-	var/emote_range = 0                // If >0, restricts emote visibility to viewers within range.
+	var/check_range                    // falsy, or a range outside which the emote will not work
+	var/conscious = TRUE               // Do we need to be awake to emote this?
+	var/emote_range                    // falsy, or a range outside which the emote is not shown
 
 /decl/emote/proc/get_emote_message_1p(var/atom/user, var/atom/target, var/extra_params)
 	if(target)
@@ -45,6 +46,15 @@
 			if(extra_params == lowertext(thing.name))
 				target = thing
 				break
+
+	if (targetted_emote && !target)
+		to_chat(user, SPAN_WARNING("You can't do that to thin air."))
+		return
+
+	if (target && target != user && check_range)
+		if (get_dist(user, target) > check_range)
+			to_chat(user, SPAN_WARNING("\The [target] is too far away."))
+			return
 
 	var/datum/gender/user_gender = gender_datums[user.get_visible_gender()]
 	var/datum/gender/target_gender
