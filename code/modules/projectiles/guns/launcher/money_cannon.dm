@@ -11,6 +11,7 @@
 	fire_delay = 1
 	fire_sound = 'sound/weapons/gunshot/money_launcher.ogg'
 	var/emagged = 0
+	var/max_capacity = 2000
 
 	var/receptacle_value = 0
 	var/dispensing = 20
@@ -20,6 +21,9 @@
 
 /obj/item/weapon/gun/launcher/money/proc/vomit_cash(var/mob/vomit_onto, var/projectile_vomit)
 	var/bundle_worth = Floor(receptacle_value / 10)
+	if(bundle_worth > max_capacity / 10)
+		bundle_worth = max_capacity / 10
+		log_warning("[src] has more than [max_capacity] currency loaded!")
 	var/turf/T = get_turf(vomit_onto)
 	for(var/i = 1 to 10)
 		var/nv = bundle_worth
@@ -72,8 +76,19 @@
 	if(!istype(bling) || !bling.worth || bling.worth < 1)
 		to_chat(user, "<span class='warning'>[src] refuses to pick up [bling].</span>")
 		return
-
-	src.receptacle_value += bling.worth
+	if(receptacle_value >= max_capacity)
+		to_chat(user, SPAN_WARNING("There's no space in the receptacle for [bling]."))
+		return
+	else if (receptacle_value && receptacle_value + bling.worth >= max_capacity) //If we have enough money to fill it to capacity
+		bling.worth -= max_capacity - receptacle_value
+		receptacle_value = max_capacity
+		to_chat(user, SPAN_NOTICE("You load [src] to capacity with [bling]."))
+		if(!bling.worth)
+			qdel(bling)
+		else
+			bling.update_icon()
+		return
+	receptacle_value += bling.worth
 	to_chat(user, "<span class='notice'>You load [bling] into [src].</span>")
 	qdel(bling)
 
@@ -120,7 +135,18 @@
 		if(bling.worth < 1)
 			to_chat(user, "<span class='warning'>You can't seem to get the bills to slide into the receptacle.</span>")
 			return
-
+		if(receptacle_value >= max_capacity)
+			to_chat(user, SPAN_WARNING("There's no space in the receptacle for [bling]."))
+			return
+		else if (receptacle_value && receptacle_value + bling.worth > max_capacity) //If we have enough money to fill it to capacity
+			bling.worth -= max_capacity - receptacle_value
+			receptacle_value = max_capacity
+			to_chat(user, SPAN_NOTICE("You load [src] to capacity with [bling]."))
+			if(!bling.worth)
+				qdel(bling)
+			else
+				bling.update_icon()
+			return
 		receptacle_value += bling.worth
 		to_chat(user, "<span class='notice'>You slide [bling.worth] [GLOB.using_map.local_currency_name_singular] into [src]'s receptacle.</span>")
 		qdel(bling)
