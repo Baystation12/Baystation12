@@ -247,7 +247,6 @@
 	},
 /obj/item/device/paint_sprayer,
 /obj/structure/table/rack,
-/obj/item/device/pipe_painter,
 /obj/item/device/cable_painter,
 /obj/item/weapon/hand_labeler,
 /turf/simulated/floor/airless,

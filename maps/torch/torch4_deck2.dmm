@@ -5825,7 +5825,6 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/item/device/paint_sprayer,
 /obj/item/device/paint_sprayer,
-/obj/item/device/pipe_painter,
 /obj/item/weapon/reagent_containers/spray/cleaner,
 /turf/simulated/floor/tiled,
 /area/engineering/engineering_bay)

@@ -21,7 +21,6 @@
 		/obj/item/weapon/soap,
 		/obj/item/weapon/gripper/no_use/loader,
 		/obj/item/weapon/extinguisher/mini,
-		/obj/item/device/pipe_painter,
 		/obj/item/device/paint_sprayer,
 		/obj/item/inducer/borg,
 		/obj/item/device/plunger/robot,

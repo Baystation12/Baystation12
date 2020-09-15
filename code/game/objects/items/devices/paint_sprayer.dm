@@ -33,7 +33,8 @@
 		"CMO" =               list("path" = /obj/effect/floor_decal/sign/cmo),
 		"Ex" =                list("path" = /obj/effect/floor_decal/sign/ex),
 		"Psy" =               list("path" = /obj/effect/floor_decal/sign/p),
-		"Remove all decals" = list("path" = /obj/effect/floor_decal/reset)
+		"Remove all decals" = list("path" = /obj/effect/floor_decal/reset),
+		"Remove top decal" =  list("path" = /obj/effect/floor_decal/undo)
 		)
 
 	var/list/paint_dirs = list(
