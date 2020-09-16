@@ -1,0 +1,5 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - tweak: "Atmosphere Control software now only displays alarms from connected z-levels."
+  - tweak: "Atmosphere Control software now displays alarms in alphabetical order."
