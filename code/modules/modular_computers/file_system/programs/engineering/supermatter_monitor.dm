@@ -68,8 +68,6 @@
 			return (0.6 + 0.8 * rand()) * value
 		if(SKILL_BASIC)
 			return (0.8 + 0.4 * rand()) * value
-		if(SKILL_ADEPT)
-			return (0.95 + 0.1 * rand()) * value
 		else
 			return value
 
