@@ -166,7 +166,7 @@
 "dj" = (/obj/structure/window/reinforced/full,/turf/simulated/floor/plating,/area/exo_ice_facility/interior/hospital)
 "dk" = (/obj/machinery/door/airlock/multi_tile/hospital/external,/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/hospital)
 "dl" = (/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/hospital)
-"dm" = (/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (NORTHEAST)"; icon_state = "corner_white"; dir = 5},/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (WEST)"; icon_state = "corner_white"; dir = 8},/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/pharmacy)
+"dm" = (/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (NORTHEAST)"; icon_state = "corner_white"; dir = 5},/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (WEST)"; icon_state = "corner_white"; dir = 8},/obj/machinery/smartfridge/chemistry,/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/pharmacy)
 "dn" = (/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (NORTHEAST)"; icon_state = "corner_white"; dir = 5},/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/pharmacy)
 "do" = (/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (NORTHEAST)"; icon_state = "corner_white"; dir = 5},/obj/machinery/chem_master,/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/pharmacy)
 "dp" = (/obj/machinery/chemical_dispenser/full,/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (NORTHEAST)"; icon_state = "corner_white"; dir = 5},/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/pharmacy)
@@ -176,7 +176,7 @@
 "dt" = (/obj/structure/bed/chair/wood{tag = "icon-wooden_chair_preview (EAST)"; icon_state = "wooden_chair_preview"; dir = 4},/turf/simulated/floor/carpet,/area/exo_ice_facility/interior/casino)
 "du" = (/obj/structure/table/gamblingtable,/turf/simulated/floor/carpet,/area/exo_ice_facility/interior/casino)
 "dv" = (/obj/structure/table/gamblingtable,/obj/item/weapon/deck/cards,/turf/simulated/floor/carpet,/area/exo_ice_facility/interior/casino)
-"dw" = (/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (NORTHEAST)"; icon_state = "corner_white"; dir = 5},/obj/effect/floor_decal/corner/lime,/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/pharmacy)
+"dw" = (/obj/structure/closet/wardrobe/chemistry_white,/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (NORTHWEST)"; icon_state = "corner_white"; dir = 9},/obj/machinery/light/spot{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/pharmacy)
 "dx" = (/turf/simulated/mineral,/area/exo_ice_facility/exterior/caves)
 "dy" = (/obj/structure/window/reinforced/full,/obj/structure/window/reinforced/projresist{icon_state = "rwindow"; dir = 8},/obj/structure/window/reinforced/projresist{icon_state = "rwindow"; dir = 4},/obj/structure/window/reinforced/projresist{icon_state = "rwindow"; dir = 1},/turf/simulated/floor/reinforced,/area/exo_ice_facility/interior/biodome/left)
 "dz" = (/obj/structure/window/reinforced/full,/obj/structure/window/reinforced/projresist{icon_state = "rwindow"; dir = 8},/obj/structure/window/reinforced/projresist{icon_state = "rwindow"; dir = 4},/obj/structure/window/reinforced/projresist{icon_state = "rwindow"; dir = 1},/turf/simulated/floor/reinforced,/area/exo_ice_facility/interior/biodome/right)
@@ -199,7 +199,7 @@
 "dQ" = (/obj/machinery/organ_printer/robot/mapped,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/hospital)
 "dR" = (/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (NORTHWEST)"; icon_state = "corner_white"; dir = 9},/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/pharmacy)
 "dS" = (/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/pharmacy)
-"dT" = (/obj/machinery/smartfridge/chemistry,/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (SOUTHEAST)"; icon_state = "corner_white"; dir = 6},/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/pharmacy)
+"dT" = (/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (SOUTHEAST)"; icon_state = "corner_white"; dir = 6},/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (NORTHEAST)"; icon_state = "corner_white"; dir = 5},/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/pharmacy)
 "dU" = (/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/hospital)
 "dV" = (/obj/structure/window/reinforced{dir = 4},/obj/machinery/computer/med_data,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/hospital)
 "dW" = (/obj/item/weapon/stool,/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/hospital)
@@ -216,21 +216,21 @@
 "eh" = (/obj/item/weapon/storage/box/beakers,/obj/structure/table/standard,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/pharmacy)
 "ei" = (/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (SOUTHEAST)"; icon_state = "corner_white"; dir = 6},/obj/machinery/reagentgrinder,/obj/structure/table/standard,/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/pharmacy)
 "ej" = (/turf/simulated/floor/wood,/area/exo_ice_facility/exterior/autolight)
-"ek" = (/obj/structure/bed/chair/office/light{tag = "icon-officechair_white_preview (EAST)"; icon_state = "officechair_white_preview"; dir = 4},/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/hospital)
+"ek" = (/obj/structure/bed/chair/office/light{tag = "icon-officechair_white_preview (EAST)"; icon_state = "officechair_white_preview"; dir = 4},/obj/machinery/light/spot{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/hospital)
 "el" = (/obj/machinery/door/window/eastright,/obj/structure/table/standard,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/housing)
 "em" = (/obj/structure/table/standard,/obj/item/modular_computer/tablet,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/hospital)
-"en" = (/obj/structure/table/marble,/obj/item/weapon/storage/box/cups,/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/hospital)
-"eo" = (/obj/structure/table/steel,/obj/item/weapon/circular_saw{pixel_y = 8},/obj/item/weapon/scalpel,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/hospital)
+"en" = (/obj/structure/table/marble,/obj/item/weapon/storage/box/cups,/obj/machinery/light/spot{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/hospital)
+"eo" = (/obj/structure/table/steel,/obj/item/weapon/circular_saw{pixel_y = 8},/obj/item/weapon/scalpel,/obj/machinery/light/spot{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/hospital)
 "ep" = (/obj/machinery/optable,/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/hospital)
-"eq" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/structure/table/steel,/obj/item/clothing/mask/surgical,/obj/item/clothing/head/surgery/blue,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/hospital)
+"eq" = (/obj/structure/table/steel,/obj/item/clothing/mask/surgical,/obj/item/clothing/head/surgery/blue,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/hospital)
 "er" = (/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 8},/obj/machinery/door/window/northleft,/obj/structure/closet/secure_closet/freezer/kitchen,/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/housing)
 "es" = (/obj/structure/window/reinforced,/obj/machinery/door/window/northleft,/obj/structure/closet/secure_closet/freezer/kitchen,/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/housing)
 "et" = (/obj/machinery/hologram/holopad,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/hospital)
-"eu" = (/obj/machinery/light{dir = 4},/obj/structure/closet/secure_closet/medical3{locked = 0},/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/hospital)
-"ev" = (/obj/structure/closet/wardrobe/chemistry_white,/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (NORTHWEST)"; icon_state = "corner_white"; dir = 9},/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/pharmacy)
+"eu" = (/obj/machinery/vending/armory/medical{req_access = list(7280)},/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/hospital)
+"ev" = (/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (SOUTHEAST)"; icon_state = "corner_white"; dir = 6},/obj/machinery/light/spot{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/pharmacy)
 "ew" = (/obj/item/weapon/storage/box/autoinjectors,/obj/item/weapon/storage/box/autoinjectors,/obj/structure/table/standard,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/pharmacy)
 "ex" = (/obj/item/weapon/storage/box/pillbottles,/obj/item/weapon/storage/box/pillbottles,/obj/item/weapon/storage/box/pillbottles,/obj/structure/table/standard,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/pharmacy)
-"ey" = (/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (SOUTHEAST)"; icon_state = "corner_white"; dir = 6},/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/pharmacy)
+"ey" = (/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (SOUTHEAST)"; icon_state = "corner_white"; dir = 6},/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/pharmacy)
 "ez" = (/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 4},/obj/machinery/door/window/northright,/obj/structure/closet/secure_closet/freezer/fridge,/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/housing)
 "eA" = (/obj/structure/sink{icon_state = "sink"; dir = 8; pixel_x = -12; pixel_y = 2},/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/housing)
 "eB" = (/obj/machinery/cooker/oven,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/housing)
@@ -351,12 +351,12 @@
 "gM" = (/obj/structure/table/woodentable,/obj/machinery/chemical_dispenser/bar_alc/full,/turf/simulated/floor/wood,/area/exo_ice_facility/interior/bar)
 "gN" = (/obj/machinery/smartfridge/drinks,/turf/simulated/floor/wood,/area/exo_ice_facility/interior/bar)
 "gO" = (/obj/machinery/light/small{dir = 1},/obj/machinery/vending/dinnerware,/turf/simulated/floor/wood,/area/exo_ice_facility/interior/bar)
-"gP" = (/obj/machinery/light{dir = 4},/obj/machinery/vending/armory/medical{req_access = list(7280)},/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/hospital)
+"gP" = (/obj/machinery/vending/armory/medical{req_access = list(7280)},/obj/machinery/light/spot{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/hospital)
 "gQ" = (/obj/machinery/door/airlock/bar,/turf/simulated/floor/wood,/area/exo_ice_facility/interior/bar)
 "gR" = (/obj/structure/sink{dir = 1; pixel_y = 16},/turf/simulated/floor/wood,/area/exo_ice_facility/interior/bar)
 "gS" = (/obj/structure/table/woodentable,/obj/item/ammo_casing/shotgun/pellet,/obj/item/ammo_casing/shotgun/pellet,/obj/item/ammo_casing/shotgun/pellet,/obj/item/ammo_casing/shotgun/pellet,/obj/item/ammo_casing/shotgun/pellet,/obj/item/weapon/gun/projectile/shotgun/doublebarrel/sawn,/obj/effect/decal/cleanable/cobweb2,/obj/machinery/light/small{dir = 1},/obj/item/ammo_casing/shotgun/pellet,/obj/item/ammo_casing/shotgun/pellet,/obj/item/ammo_casing/shotgun/pellet,/obj/item/ammo_casing/shotgun/pellet,/obj/item/ammo_casing/shotgun/pellet,/obj/item/ammo_casing/shotgun/pellet,/obj/item/ammo_casing/shotgun/pellet,/obj/item/ammo_casing/shotgun/pellet,/obj/item/ammo_casing/shotgun/pellet,/obj/item/clothing/accessory/storage/bandolier,/turf/simulated/floor/wood,/area/exo_ice_facility/interior/bar)
 "gT" = (/obj/structure/window/framed,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/bar)
-"gU" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/machinery/vending/armory/medical{req_access = list(7280)},/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/hospital)
+"gU" = (/obj/machinery/light/spot,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/hospital)
 "gV" = (/obj/structure/reagent_dispensers/beerkeg,/turf/simulated/floor/wood,/area/exo_ice_facility/interior/bar)
 "gW" = (/mob/living/simple_animal/npc/colonist/surgeon,/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/hospital)
 "gX" = (/obj/structure/table/standard,/obj/item/weapon/reagent_containers/glass/rag,/obj/machinery/button/remote/blast_door/bar_shutter,/obj/item/weapon/reagent_containers/food/drinks/shaker,/turf/simulated/floor/wood,/area/exo_ice_facility/interior/bar)
@@ -365,7 +365,7 @@
 "ha" = (/mob/living/simple_animal/npc/colonist/doctor,/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/hospital)
 "hb" = (/turf/simulated/floor/exoplanet/rockfloor,/area/exo_ice_facility/exterior/caves)
 "hc" = (/obj/structure/sign/poster,/turf/simulated/wall/r_wall,/area/exo_ice_facility/interior/casino)
-"hd" = (/obj/machinery/light,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/hospital)
+"hd" = (/obj/machinery/computer/capture_node,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/hospital)
 "he" = (/obj/item/weapon/stool,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/bar)
 "hf" = (/turf/simulated/wall/r_wall,/area/exo_ice_facility/interior/organlegger_den)
 "hg" = (/obj/structure/table/standard,/obj/item/weapon/storage/box/beakers,/obj/item/weapon/storage/pill_bottle/happy,/obj/item/weapon/storage/pill_bottle/zoom,/obj/item/weapon/paper{info = "Zoom<br><br>impedrezene, hyperzine, synaptizine<br><br>Happiness<br>space drugs, sugar"; name = "recipes"},/obj/item/weapon/hand_labeler,/obj/item/weapon/storage/box/pillbottles,/obj/item/weapon/pen,/obj/item/weapon/reagent_containers/syringe{desc = "Probably has at least five incurable STDs."; name = "dirty syringe"},/obj/item/weapon/reagent_containers/syringe{desc = "Probably has at least five incurable STDs."; name = "dirty syringe"},/turf/simulated/floor/plating,/area/exo_ice_facility/interior/organlegger_den)
@@ -395,7 +395,7 @@
 "hE" = (/turf/simulated/floor/exoplanet/scorched_rock,/area/exo_ice_facility/exterior/autolight)
 "hF" = (/obj/structure/sign/greencross,/turf/simulated/wall/silver,/area/exo_ice_facility/interior/hospital)
 "hG" = (/obj/machinery/door/airlock/hospital,/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/hospital)
-"hH" = (/obj/machinery/light/small{dir = 4; pixel_y = 8},/turf/simulated/floor/wood,/area/exo_ice_facility/interior/hospital)
+"hH" = (/obj/machinery/light/spot{icon_state = "tube1"; dir = 4},/turf/simulated/floor/wood,/area/exo_ice_facility/interior/hospital)
 "hI" = (/obj/effect/flora/snow/snowbush,/turf/simulated/floor/exoplanet/scorched_rock,/area/exo_ice_facility/exterior/autolight)
 "hJ" = (/turf/simulated/floor/decor{icon_state = "square_black"; tag = "icon-tiled1"},/area/exo_ice_facility/interior/police)
 "hK" = (/obj/machinery/light/colored/red{dir = 4},/turf/simulated/floor/decor{tag = "icon-bar"; icon_state = "bar"},/area/exo_ice_facility/interior/police)
@@ -430,7 +430,7 @@
 "in" = (/obj/structure/grille,/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 8},/obj/machinery/door/blast/regular{density = 0; dir = 1; icon_state = "pdoor0"; id = "Secure Gate"; name = "Security Blast Door"; opacity = 0},/turf/simulated/floor/decor{icon_state = "square_black"; tag = "icon-tiled1"},/area/exo_ice_facility/interior/police)
 "io" = (/obj/machinery/door/blast/regular{density = 0; icon_state = "pdoor0"; id = "Secure Gate"; name = "Security Blast Door"; opacity = 0},/obj/machinery/door/airlock/police,/turf/simulated/floor/decor{icon_state = "square_black"; tag = "icon-tiled1"},/area/exo_ice_facility/interior/police)
 "ip" = (/turf/simulated/floor/decor{tag = "icon-plate2"; icon_state = "plate2"},/area/exo_ice_facility/interior/police)
-"iq" = (/obj/machinery/light,/obj/machinery/computer/capture_node,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/hospital)
+"iq" = (/obj/machinery/vending/armory/medical{req_access = list(7280)},/obj/machinery/light/spot,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/hospital)
 "ir" = (/obj/structure/barricade,/turf/simulated/floor/exoplanet/rockfloor,/area/exo_ice_facility/exterior/caves)
 "is" = (/turf/simulated/floor/pavement/empty,/area/exo_ice_facility/interior/housing)
 "it" = (/obj/structure/sink{icon_state = "sink"; dir = 8; pixel_x = -12; pixel_y = 2},/turf/simulated/floor/tiled/freezer,/area/exo_ice_facility/interior/hospital)
@@ -452,7 +452,7 @@
 "iJ" = (/obj/structure/bed,/obj/item/weapon/bedsheet/yellow,/turf/simulated/floor/wood,/area/exo_ice_facility/interior/hospital)
 "iK" = (/turf/simulated/floor/wood,/area/exo_ice_facility/interior/hospital)
 "iL" = (/obj/item/weapon/bedsheet/medical,/obj/machinery/vending/wallmed1{name = "NanoMed Wall"; pixel_x = 25; pixel_y = 0},/obj/structure/bed/padded,/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/hospital)
-"iM" = (/obj/structure/closet/firecloset,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/hospital)
+"iM" = (/obj/structure/closet/firecloset,/obj/machinery/light/spot{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/hospital)
 "iN" = (/obj/structure/window/basic{dir = 8},/turf/simulated/floor/decor{tag = "icon-plate2"; icon_state = "plate2"},/area/exo_ice_facility/interior/police)
 "iO" = (/obj/structure/bed/chair/office/light,/turf/simulated/floor/decor{tag = "icon-plate2"; icon_state = "plate2"},/area/exo_ice_facility/interior/police)
 "iP" = (/obj/structure/table/steel,/obj/structure/window/basic,/obj/structure/window/basic{dir = 8},/obj/item/device/radio/phone,/turf/simulated/floor/decor{tag = "icon-plate2"; icon_state = "plate2"},/area/exo_ice_facility/interior/police)
@@ -482,7 +482,7 @@
 "jn" = (/obj/effect/floor_decal/asteroid{tag = "icon-asteroid4"; icon_state = "asteroid4"},/turf/simulated/floor/planet/dirt,/area/exo_ice_facility/exterior/autolight)
 "jo" = (/obj/item/weapon/stool/bar,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/bar)
 "jp" = (/obj/machinery/atmospherics/pipe/simple/visible,/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/hospital)
-"jq" = (/obj/machinery/light{dir = 4},/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/hospital)
+"jq" = (/obj/machinery/light/spot{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/hospital)
 "jr" = (/obj/structure/table/standard,/obj/machinery/microwave,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/bar)
 "js" = (/mob/living/simple_animal/dog,/turf/simulated/floor/wood,/area/exo_ice_facility/interior/bar)
 "jt" = (/obj/structure/bed/chair/wood,/turf/simulated/floor/wood,/area/exo_ice_facility/interior/bar)
@@ -500,7 +500,7 @@
 "jF" = (/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/exo_ice_facility/interior/bar)
 "jG" = (/obj/machinery/vending/dinnerware,/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/exo_ice_facility/interior/bar)
 "jH" = (/obj/structure/sink{dir = 1; pixel_y = 16},/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/exo_ice_facility/interior/bar)
-"jI" = (/obj/machinery/light,/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/hospital)
+"jI" = (/obj/machinery/light/spot,/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/hospital)
 "jJ" = (/obj/machinery/iv_drip,/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/hospital)
 "jK" = (/obj/machinery/light/colored/red{dir = 4},/obj/machinery/vending/cola,/turf/simulated/floor/decor{tag = "icon-bar"; icon_state = "bar"},/area/exo_ice_facility/interior/police)
 "jL" = (/obj/machinery/vending/coffee,/turf/simulated/floor/decor{tag = "icon-bar"; icon_state = "bar"},/area/exo_ice_facility/interior/police)
@@ -588,7 +588,7 @@
 "lp" = (/obj/structure/window/reinforced/treated{icon_state = "fwindow"; dir = 8},/turf/simulated/floor/tiled/dark,/area/exo_ice_facility/interior/aerodrome)
 "lq" = (/obj/effect/loot_marker/scanpoints_random,/turf/simulated/floor/lino,/area/exo_ice_facility/interior/museum_library)
 "lr" = (/obj/machinery/atmospherics/portables_connector{dir = 1},/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/hospital)
-"ls" = (/obj/machinery/atmospherics/unary/freezer{dir = 1; icon_state = "freezer"},/obj/machinery/light/small,/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/hospital)
+"ls" = (/obj/machinery/atmospherics/unary/freezer{dir = 1; icon_state = "freezer"},/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/hospital)
 "lt" = (/obj/structure/table/steel_reinforced,/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/police)
 "lu" = (/obj/structure/table/woodentable,/obj/machinery/light/small{dir = 1},/turf/simulated/floor/wood,/area/exo_ice_facility/interior/hospital)
 "lv" = (/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/police)
@@ -909,7 +909,7 @@
 "ry" = (/obj/machinery/cryopod/unsc{icon_state = "off"; dir = 4},/turf/simulated/floor/pavement/empty,/area/exo_ice_facility/interior/cryopods)
 "rz" = (/obj/machinery/door/unpowered/simple/wood,/turf/simulated/floor/pavement/empty,/area/exo_ice_facility/interior/cryopods)
 "rA" = (/obj/machinery/cryopod/unsc,/turf/simulated/floor/pavement/empty,/area/exo_ice_facility/interior/cryopods)
-"rB" = (/obj/machinery/light,/obj/machinery/vending/armory/medical{req_access = list(7280)},/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/hospital)
+"rB" = (/obj/structure/closet/secure_closet/medical3{locked = 0},/obj/machinery/light/spot{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/hospital)
 "rC" = (/obj/machinery/cell_charger,/obj/structure/table/standard,/turf/simulated/floor/decor{tag = "icon-techfloor_white"; icon_state = "techfloor_white"},/area/exo_ice_facility/interior/pirate_camp/right)
 "rD" = (/obj/effect/landmark/drop_pod_landing,/turf/simulated/floor/exoplanet/snow{tag = "icon-snow0"; icon_state = "snow0"},/area/exo_ice_facility/exterior/autolight)
 "rE" = (/obj/effect/landmark/drop_pod_landing,/turf/simulated/floor/exoplanet/rockfloor,/area/exo_ice_facility/exterior/autolight)
@@ -936,6 +936,7 @@
 "rZ" = (/obj/structure/capture_marker,/turf/simulated/wall/r_wall,/area/exo_ice_facility/interior/hospital)
 "sa" = (/obj/structure/capture_marker,/turf/simulated/wall/r_wall,/area/exo_ice_facility/interior/police)
 "sb" = (/obj/structure/capture_marker,/turf/simulated/wall/tech,/area/exo_ice_facility/interior/bar)
+"sc" = (/obj/machinery/light/spot{icon_state = "tube1"; dir = 8},/turf/simulated/floor/wood,/area/exo_ice_facility/interior/hospital)
 
 (1,1,1) = {"
 aZaZaZdxaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZ
@@ -1060,22 +1061,22 @@ aZdxdxhbhjqjqjqjqjqjgaqjqjqjgagagagagagaqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqj
 aZdxoKhbdxdxqjqjqjqjgagagaqjgagagagagaqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjadadqjbcadoJoJoJoJadadadadbcadqjadqjqjqjqjqjqjqjadbcqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjhbdxdxdxdxdxhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjbcadbcacaceCeDacacacktktktktktktktktktktktkvkvkLkvkLkvkvktktktktktktktktkSkSkSktktktkvkvqjqjdxaZ
 aZdxoKhbhbhbhbhbqjqjadadgagagagagagagaqjqjqjqjqjqjqjqjqjqjqjqjqjqjbcbcadadoJbcbcbcbcadbcadadqjqjadbcbcqjqjqjqjqjqjqjqjqjqjbcbcqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjhbdxdxdxdxhbhbqjqjqjqjqjqjqjlRqjqjqjqjqjqjqjqjadbcbcaceIacacqMacktktktktktktktktktktkNkvkvmNmNmNmNmNkvkvktktktktktktktkSkSktktkDktktkvqjqjdxaZ
 aZoKoKoKhbhbhbhbqjadoJgagagagagagagaadadadadbcbcadadadadadadadbcbcbcbcbcoJoJbcadbcbcbcqjqjoJqjqjdededfdededededeqjdidididjdkdldjdididididididididididiqjqjqjqjhbdxdxdxdxhbhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjadadadbcaceIacacacackHktktktktktktktktktkvkvkQmNmNmNmNmNkRkvkvktktktkSktkSkSktktktktktktkvqjqjdxaZ
-aZoKoKoKoKoKoKoKqjqjbcgagagagagagaadbcbcadbcadadbcadoJoJbcbcbcbcadadadadoJadqjqjqjadqjqjbcbcqjqjdedmdndodpdpdwdeqjdidBdCdDdldldDdEdGdHdJdKdNdEdPdQdQdiqjqjqjhbhbdxdxdxhbhbhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjadadadacaceIacacktkXktktktktktktktktktkvkvlamNmNmNlbmNmNmNlckvkvktktkSkSawkSldktktktktktkvqjqjdxaZ
-aZoKoKoKhbhbhbhboKqjoJbcgagaqjadadbcbcadadadadadadoJoJadadadadadadqjqjoJoJqjqjqjbcadoJqjbcadqjqjdedRdSnKdSdSdTdeqjdidUdVdWdUdUdXdEdYdlfKdldZeaebdUeediqjqjqjhbhbdxdxdxdxhbhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjadbcacaceDacacktktktktktktktktktktkvkvnUmNmNmNmNqzmNmNmNmNllkvkvbSktktkSkSkSkSktktktktkvkvqjdxaZ
-aZoKoKoKoKhboKhbhjadadgagaoJqjbcbcbcbcadadadbcadadoJoJadadoJadqjqjqjbcadoJqjadbcbcqjqjqjbcoJqjqjdeefdSegehdSeideqjdiekemdldUdUendEeodllIdleqeaebeteudiqjqjqjqjhbdxdxdxdxhbhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjadadaceIacacacktbSktktktktktktktkvkvkQmNmNmNmNmNoimNmNmNmNmNlokvkvktktktktkSkSkSkSktktkCkvqjdxaZ
-aZoKoKlVhbhbhboKqjqjqjgaqjqjadbcbcoJgaqjqjqjqjqjoJoJadbcadgpbsopopbsopopbtgqopbNbsopopbsopopgpqjdeevdSewexnKeydeqjdidUeGfgnmdUfldEfzdlepdloceanudUeediqjqjqjqjhbhbdxdxdxhbhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjadbcaceIacacktktktktkHktktktktktkvmNmNmNmNmNlhmNljmNlkmNmNmNmNmNkvktktktktktktktkSkSktktkvqjdxaZ
+aZoKoKoKoKoKoKoKqjqjbcgagagagagagaadbcbcadbcadadbcadoJoJbcbcbcbcadadadadoJadqjqjqjadqjqjbcbcqjqjdedmdndodpdpdTdeqjdidBdCdDdldldDdEdGdHdJdKdNdEdPdQdQdiqjqjqjhbhbdxdxdxhbhbhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjadadadacaceIacacktkXktktktktktktktktktkvkvlamNmNmNlbmNmNmNlckvkvktktkSkSawkSldktktktktktkvqjqjdxaZ
+aZoKoKoKhbhbhbhboKqjoJbcgagaqjadadbcbcadadadadadadoJoJadadadadadadqjqjoJoJqjqjqjbcadoJqjbcadqjqjdedRdSnKdSdSeydeqjdidUdVdWdUdUdXdEdYdlfKdldZeaebdUeediqjqjqjhbhbdxdxdxdxhbhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjadbcacaceDacacktktktktktktktktktktkvkvnUmNmNmNmNqzmNmNmNmNllkvkvbSktktkSkSkSkSktktktktkvkvqjdxaZ
+aZoKoKoKoKhboKhbhjadadgagaoJqjbcbcbcbcadadadbcadadoJoJadadoJadqjqjqjbcadoJqjadbcbcqjqjqjbcoJqjqjdeefdSegehdSeideqjdiekemdldUdUendEeodllIdleqeaebetrBdiqjqjqjqjhbdxdxdxdxhbhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjadadaceIacacacktbSktktktktktktktkvkvkQmNmNmNmNmNoimNmNmNmNmNlokvkvktktktktkSkSkSkSktktkCkvqjdxaZ
+aZoKoKlVhbhbhboKqjqjqjgaqjqjadbcbcoJgaqjqjqjqjqjoJoJadbcadgpbsopopbsopopbtgqopbNbsopopbsopopgpqjdedwdSewexnKevdeqjdidUeGfgnmdUfldEfzdlepdloceanudUeediqjqjqjqjhbhbdxdxdxhbhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjadbcaceIacacktktktktkHktktktktktkvmNmNmNmNmNlhmNljmNlkmNmNmNmNmNkvktktktktktktktkSkSktktkvqjdxaZ
 aZhbhbhbhbhjhjhjqjqjqjqjqjoJadadoJoJgaqjqjqjqjqjadadadbcoJgpcpiCcpopcpopcpopopcpiCcpopcpiCcpgpqjdefAdSfBfBdSfCdeqjdidUfDdUdldlfFdEfGfIdldlfLdEfMdUeediqjqjqjqjhbhbdxdxdxhbhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjadadaceIacacktktktktktktktktktktkLmNmNmNmNmNmNmNmEmNmNmNmNmNmNmNkLktktktktktktktktktktlmkvqjdxaZ
 aZhbdxdxhbhbhjdxqjqjqjqjqjoJbcbcbcqjgaqjqjqjqjqjqjadbcbcoJgpopopopopopopopopopopopopopopopopgpqjdefOoafTfTfTfUdeqjdifVdEdEgbdldEdEdEdEghdEdEdEdEgidEdiqjqjqjqjhbhbdxdxdxhbhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjbcadadkvkvlnlnlnlnlnlnlnlnlnlnkvkvmNmNmFmNojlpmpodohmqokmNmrmNmNkvkvlnlnlnlnlnlnlnlnlnkvkvqjdxaZ
-aZdxdxdxhbhbqUdxdxqjqjqjqjadbcbcqjqjqjqjqjqjqjqjqjbcbcoJqjgpopopopopopopopopopopopopopopopopgpqjdedededededededeqjdidldldldlnydldldldldldlgngwdldlgPdiqjqjqjqjqjhbhbdxdxdxhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjbcadadkvktktktktktktktktktktktktkLmNmNmNmNmNmNmNmsmcmNmNmNmNmNmNkLktktktktktktktktktktktkvqjdxaZ
-aZdxhbhbhbhbhbdxqjqjqjqjqjbcadbcqjqjqjqjqjqjqjqjqjoJbcbcqjgpcpopopcpopopcpopopcpopopcpopopcpgpqjqjqjqjqjqjqjqjqjqjdigUdldldldldlgWdldldldldldldldldlrZqjqjqjqjqjhbhbdxdxdxhbhbqjqjqjqjqjfWqjqjqjqjqjqjqjqjqjqjqjqjkvktktktktktktktktktktktktkvmNmNmNmNmNmtmumvmNmwmNmNmNmNmNkvktktktktktktktktktktktkvqjdxaZ
-aZdxhbhbhbhbhbdxdxqjqjqjqjbcoJbcqjqjqjqjqjqjqjqjqjoJbcoJqjgpcpiGopcpopopcpopopcpiGopcpopopcpgpqjqjqjqjqjqjqjqjqjqjdigZdlhadldldldUhddUdUdUhddUdUdUiqdireqjqjqjqjhbhbdxdxdxdxhbhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjkvktktktktktktktktktktktktkvkvmxmNmNmymNmNolmNmNmNmNmNmzkvkvktktktktktktktktktktktkvqjdxaZ
-aZdxqjqjqjhbhbhbdxdxqjqjqjbcbcadqjqjqjqjqjqjqdqjqjbcbcoJqjgpgpgpgpgpgpgpgpgqopgpgpgpgpgpgpgpgpgpgpqjqjqjqjqjqjqjqjdihkdUrBhxhyhznmdEdEhDhDdEhFhGhFdEdididididiqjqjhbhbdxdxdxhbhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjkvkvktktktktbSktktktktktktktkvkvommNmNmNmNmNmNmNmNmNonkvkvmCmCmCmCmCmCmDmCmCmCmCkvkvqjdxaZ
-aZqjqjqjqjqjqjhbhbdxdxqjqjbcbcadqjqjqjqjqjqjgpgpgpgDgFgpgpgpgpgpgpgpgpgpgphJopgpgpgpgpgpgpgpgpgpgpqjqjqjqjqjqjqjqjdidEdEdEdEdEdEhHdEhOdldldEhYdlifgZdligigijdiqjqjhbhbhbdxdxdxdxhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjkvktktktktktktktktktktktktktkvkvovmNmNmNowmNmNmNmBkvkvmGmHqYmImCcPmJmImImImImIkvqjqjdxaZ
-aZqjqjqjqjqjqjqjqjqjqjqjqjbcbcoJqjqjqjqjqjqjgphKhLgFgFgFgFhMgphNhPhPhPhPgphJhJgphQhRhSgphQhRhSgpgpqjqjqjqjqjqjqjqjdiitiudEiIiJdEiKdEdWqViLdEiMdldldldljpjpjqdiqjqjqjhbhbdxdxdxdxhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjkvktktktktktktktktktktktktktktkvkvmKmNmNmNmNmNmLkvkvmMmImImIpJmCmJmImOmPmQmImRkvqjqjdxaZ
+aZdxdxdxhbhbqUdxdxqjqjqjqjadbcbcqjqjqjqjqjqjqjqjqjbcbcoJqjgpopopopopopopopopopopopopopopopopgpqjdedededededededeqjdidldldldlnydldldldldldlgngwdldleudiqjqjqjqjqjhbhbdxdxdxhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjbcadadkvktktktktktktktktktktktktkLmNmNmNmNmNmNmNmsmcmNmNmNmNmNmNkLktktktktktktktktktktktkvqjdxaZ
+aZdxhbhbhbhbhbdxqjqjqjqjqjbcadbcqjqjqjqjqjqjqjqjqjoJbcbcqjgpcpopopcpopopcpopopcpopopcpopopcpgpqjqjqjqjqjqjqjqjqjqjdigPdldldldldlgWdldldldldldldldljqrZqjqjqjqjqjhbhbdxdxdxhbhbqjqjqjqjqjfWqjqjqjqjqjqjqjqjqjqjqjqjkvktktktktktktktktktktktktkvmNmNmNmNmNmtmumvmNmwmNmNmNmNmNkvktktktktktktktktktktktkvqjdxaZ
+aZdxhbhbhbhbhbdxdxqjqjqjqjbcoJbcqjqjqjqjqjqjqjqjqjoJbcoJqjgpcpiGopcpopopcpopopcpiGopcpopopcpgpqjqjqjqjqjqjqjqjqjqjdigZdlhadldldldUdUgUdUdUdUdUdUdUhddireqjqjqjqjhbhbdxdxdxdxhbhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjkvktktktktktktktktktktktktkvkvmxmNmNmymNmNolmNmNmNmNmNmzkvkvktktktktktktktktktktktkvqjdxaZ
+aZdxqjqjqjhbhbhbdxdxqjqjqjbcbcadqjqjqjqjqjqjqdqjqjbcbcoJqjgpgpgpgpgpgpgpgpgqopgpgpgpgpgpgpgpgpgpgpqjqjqjqjqjqjqjqjdihkdUiqhxhyhznmdEdEhDhDdEhFhGhFdEdididididiqjqjhbhbdxdxdxhbhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjkvkvktktktktbSktktktktktktktkvkvommNmNmNmNmNmNmNmNmNonkvkvmCmCmCmCmCmCmDmCmCmCmCkvkvqjdxaZ
+aZqjqjqjqjqjqjhbhbdxdxqjqjbcbcadqjqjqjqjqjqjgpgpgpgDgFgpgpgpgpgpgpgpgpgpgphJopgpgpgpgpgpgpgpgpgpgpqjqjqjqjqjqjqjqjdidEdEdEdEdEdEiKdEhOdldldEhYdlifgZdligigijdiqjqjhbhbhbdxdxdxdxhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjkvktktktktktktktktktktktktktkvkvovmNmNmNowmNmNmNmBkvkvmGmHqYmImCcPmJmImImImImIkvqjqjdxaZ
+aZqjqjqjqjqjqjqjqjqjqjqjqjbcbcoJqjqjqjqjqjqjgphKhLgFgFgFgFhMgphNhPhPhPhPgphJhJgphQhRhSgphQhRhSgpgpqjqjqjqjqjqjqjqjdiitiudEiIiJdEhHdEdWqViLdEiMdldldldljpjpjqdiqjqjqjhbhbdxdxdxdxhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjkvktktktktktktktktktktktktktktkvkvmKmNmNmNmNmNmLkvkvmMmImImIpJmCmJmImOmPmQmImRkvqjqjdxaZ
 aZdxdxqjqjqjqjqjqjqjqjqjqjadbcoJqjqjqjqjqjqjgpgFgFgFgFhUhVhWgphXhZnehZiagphJhJgphJhJhJgphJhJhJgpgpqjqjqjqjqjqjqjqjdijujvdEjyiKdEiKdEjCjIjJdEjVdldldldlklkAkEdiqjqjqjqjhbdxdxdxdxhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjkvktktktktktktktktktktktktktktktkvkvmNmNmNmNmNkvkvmCmSmImImImImCmImImTmUmQmImIkvqjdxdxaZ
 aZdxdxqjqjqjqjqjqjqjqjqjqjoJbcadqjqjqjqjqjqjgpgFgFgFgFibidiegphZikikikhPgpilhJgpinioingpinioingpgpqjqjqjqjqjqjqjqjdikOjvkPiKiKkTiKdEdEdEdEdEkUdlkVkWkYlflrlsdiqjqjqjqjhbdxdxdxdxhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjkvkvkvktktktktktktktktktktktktktktkvkvkLkvkLrYkvrVmCmCmJmImImImCmImVmWmXmImRkvkvqjdxdxaZ
-aZdxdxqjqjqjqjqjqjqjqjqjqjoJbcbcqjqjqjqjqjqjgphKgFgFgFipiprUsaiygpgpgpgpgphJhJizhJhJhJhJhJhJiFgpgpqjqjqjqjqjqjqjqjdidEdEdEdEdEdEhHdEluiJdEdEdEdidididididididiqjqjqjhbhbdxdxdxdxhbqjqjqjqjqjqjqjqjfWqjqjqjqjqjqjqjqjqjqjkvktktktktktktktktktktktktktktktktktkvmImImImIcPmCmImImImImCmJmImImImImIkvqjqjdxdxaZ
-aZdxdxqjqjqjqjqjqjqjqjqjqjadadbcbcqjqjqjqjqjgpgFgFgFgFiNiOiegphJhJhJhJhJhJhJhJhJhJhJnIhJhJhJhJgpgpqjqjqjqjqjqjqjqjdiitiudEiIiJdEiKdEjyiKdEitiudiqjqjqjqjqjqjqjqjqjqjhbhbdxdxdxdxhbhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjkvkvktktktktktktktktktktktktktktktktkymImImImImImCmCmCmDmCmCmImImImImIkvkvqjqjdxdxaZ
+aZdxdxqjqjqjqjqjqjqjqjqjqjoJbcbcqjqjqjqjqjqjgphKgFgFgFipiprUsaiygpgpgpgpgphJhJizhJhJhJhJhJhJiFgpgpqjqjqjqjqjqjqjqjdidEdEdEdEdEdEiKdEluiJdEdEdEdidididididididiqjqjqjhbhbdxdxdxdxhbqjqjqjqjqjqjqjqjfWqjqjqjqjqjqjqjqjqjqjkvktktktktktktktktktktktktktktktktktkvmImImImIcPmCmImImImImCmJmImImImImIkvqjqjdxdxaZ
+aZdxdxqjqjqjqjqjqjqjqjqjqjadadbcbcqjqjqjqjqjgpgFgFgFgFiNiOiegphJhJhJhJhJhJhJhJhJhJhJnIhJhJhJhJgpgpqjqjqjqjqjqjqjqjdiitiudEiIiJdEscdEjyiKdEitiudiqjqjqjqjqjqjqjqjqjqjhbhbdxdxdxdxhbhbqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjkvkvktktktktktktktktktktktktktktktktkymImImImImImCmCmCmDmCmCmImImImImIkvkvqjqjdxdxaZ
 aZdxqjqjqjqjqjqjqjqjqjqjqjbcoJbcbcqjqjqjqjqjgpgFnggFgFiPiSiZgpnhhJjchJhJhJhJhJgpgpjdgpgpgpgpgpgpgpqjqjqjqjqjqjqjqjdijujvdEjyiKdEiKlAiKiKlAjvjvdiqjqjqjqjqjqjqjqjqjqjhbdxdxdxdxhbhbhbqjqjqjqjqjqjqjqjdxqjqjqjqjqjqjqjqjqjqjkvkvktktktktktktktktktktktktktktktkymImImImImImCnamImImImCmCmImImIkvkvqjqjqjdxdxaZ
 aZdxqjqjqjqjqjqjqjqjqjqjbcbcoJoJbcqjqjqjqjqjgpgFgFgFgFgFgFgFgFhJiFgpgpgpgpgpgpgpjghJnIjmgpgpgpgpgpqjqjqjqjqjqjqjqjdikOjvlBiKiKlCiKdidididilDjvdiqjqjqjqjqjqjqjqjqjhbhbdxdxdxdxdxhbhblUhbqjqjqjqjqjdxdxqjqjqjqjqjqjqjqjqjqjqjkvktktktktktktktktktktktktktktktkymImJmImImIncmImdmImImImCmImImIkvqjqjqjdxdxdxaZ
 aZdxqjqjqjqjqjqjqjqjqjqjbcbcoJadadqjqjqjqjqjgpjKjLjMjNgFgFgFjQhJhJgphJhJhJhJhJgpjRjmjSjmgpgpqjqjqjqjqjqjqjqjqjqjqjdididididididididireqjdidididiqjqjqjqjqjqjqjqjqjhbhbdxdxdxdxdxhbhbhbhbqjqjqjqjdxdxqjqjqjqjqjqjqjqjliqjqjqjkvkvktktktktktktktktktktktktktktkymImImImImImCmImImImImImDmImIkvkvqjqjdxdxdxdxaZ

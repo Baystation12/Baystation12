@@ -55,7 +55,8 @@
 	sector_hit_effects(z_level,object_hit,hit_bounds)
 
 /obj/item/projectile/overmap/proc/sector_hit_effects(var/z_level,var/obj/effect/overmap/hit,var/list/hit_bounds)
-	var/turf/turf_to_explode = locate(rand(hit_bounds[1],hit_bounds[3]),rand(hit_bounds[2],hit_bounds[4]),z_level)
+	return
+	/*var/turf/turf_to_explode = locate(rand(hit_bounds[1],hit_bounds[3]),rand(hit_bounds[2],hit_bounds[4]),z_level)
 	if(istype(turf_to_explode,/turf/simulated/open)) // if the located place is an open space it goes to the next z-level
 		var/prev_index = hit.map_z.Find(z_level)
 		if(hit.map_z.len > 1 && prev_index != 1)
@@ -63,7 +64,7 @@
 	turf_to_explode = locate(rand(hit_bounds[1],hit_bounds[3]),rand(hit_bounds[2],hit_bounds[4]),z_level)
 	explosion(turf_to_explode,9,15,21,30, adminlog = 0) //explosion(turf_to_explode,3,5,7,10) original tiny explosion
 	var/obj/effect/overmap/sector/S = map_sectors["[src.z]"]
-	S.adminwarn_attack()
+	S.adminwarn_attack()*/
 
 /obj/item/projectile/overmap/proc/do_z_level_proj_spawn(var/z_level,var/obj/effect/overmap/ship/overmap_object_hit)
 	var/start_co_ords
@@ -184,5 +185,10 @@
 
 /obj/item/projectile/overmap_test_round/on_impact(var/atom/impacted)
 	explosion(impacted,1,3,5,10)
+
+//CanUntargetedBombard proc for all sectors,//
+//Defaults to allowing. Determines if untargeted bombardment is possible.//
+/obj/effect/overmap/proc/CanUntargetedBombard(var/obj/console_from)
+	return 1
 
 #undef TRACK_PROJECTILE_IMPACT_RESET_DELAY

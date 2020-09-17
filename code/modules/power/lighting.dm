@@ -60,6 +60,7 @@ var/global/list/light_type_cache = list()
 		if(1) to_chat(user, "It's an empty frame.")
 		if(2) to_chat(user, "It's wired.")
 		if(3) to_chat(user, "The casing is closed.")
+
 /obj/machinery/light_construct/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	src.add_fingerprint(user)
 	if (istype(W, /obj/item/weapon/wrench))
@@ -622,7 +623,7 @@ obj/machinery/light/proc/burn_out()
 
 	brightness_range = 6	// luminosity when on, also used in power calculation
 	brightness_power = 3
-	brightness_color = "#FFFFFF"
+	brightness_color = "#a0a080"
 	lighting_modes = list(
 		"emergency_lighting" = list(l_range = 4, l_power = 1, l_color = "#da0205"),
 		)
@@ -630,6 +631,7 @@ obj/machinery/light/proc/burn_out()
 /obj/item/weapon/light/tube/large
 	w_class = ITEM_SIZE_SMALL
 	name = "large light tube"
+	brightness_color = "#FFFFFF"
 	brightness_range = 8
 	brightness_power = 3
 

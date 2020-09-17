@@ -99,6 +99,8 @@
 	if(initial(kill_count) - kill_count > 1)
 		console_fired_by.visible_message("<span class = 'notice'>[console_fired_by] emits a warning: \"Beam impact dissipated due to atmospheric interference. Orbit the object to perform glassing.\"</span>")
 		return
+	if(!hit.CanUntargetedBombard(console_fired_by))
+		return
 	hit.glassed += 1
 	hit.update_icon()
 	for(var/mob/m in GLOB.mobs_in_sectors[hit])
