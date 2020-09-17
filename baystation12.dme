@@ -1289,7 +1289,6 @@
 #include "code\modules\admin\secrets\fun_secrets\power_all_smes.dm"
 #include "code\modules\admin\secrets\fun_secrets\triple_ai_mode.dm"
 #include "code\modules\admin\secrets\fun_secrets\waddle.dm"
-#include "code\modules\admin\secrets\investigation\admin_pms.dm"
 #include "code\modules\admin\secrets\investigation\attack_logs.dm"
 #include "code\modules\admin\verbs\adminhelp.dm"
 #include "code\modules\admin\verbs\adminjump.dm"
