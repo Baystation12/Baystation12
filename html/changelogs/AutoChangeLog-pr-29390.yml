@@ -1,0 +1,4 @@
+author: "MrKicker"
+delete-after: True
+changes: 
+  - admin: "Removed the old adminPM tool"
