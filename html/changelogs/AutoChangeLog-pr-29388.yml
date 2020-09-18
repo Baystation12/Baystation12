@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - tweak: "Trainee roles are no longer eligible for round start on-ship antags. Trainees can still be converted by loyalists, cultists, etc and are otherwise note exempt from antagonist actions."
