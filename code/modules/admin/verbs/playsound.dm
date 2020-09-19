@@ -9,9 +9,27 @@ var/list/sounds_cache = list()
 	uploaded_sound.priority = 250
 
 	sounds_cache += S
+	var/volume = 100
 
-	if(alert("Song: [S]\n.", "Confirmation request" ,"Play", "Cancel") == "Cancel")
-		return
+	while (TRUE)
+		volume = input(src, "Sound volume (0 - 100)", "Volume", volume) as null|num
+		if (isnull(volume))
+			return
+
+		volume =  round(Clamp(volume, 0, 100))
+		to_chat(src, "Sound volume set to [volume]%")
+		uploaded_sound.volume =volume
+		var/choice = alert("Song: [S]", "Play Sound" , "Play", "Preview", "Cancel")
+
+		if (choice == "Cancel")
+			return
+
+		if (choice == "Preview")
+			sound_to(src, uploaded_sound)
+
+		if (choice == "Play")
+			break
+
 
 	log_admin("[key_name(src)] played sound [S]")
 	message_admins("[key_name_admin(src)] played sound [S]", 1)
@@ -38,12 +56,12 @@ var/list/sounds_cache = list()
 	if(!check_rights(R_SOUNDS))	return
 
 	var/list/sounds = list("sound/items/bikehorn.ogg","sound/effects/siren.ogg")
-	sounds += sounds_cache	
+	sounds += sounds_cache
 
 	var/melody = input("Select a sound from the server to play", "Server sound list") as null|anything in sounds
 
-	if(!melody)	
+	if(!melody)
 		return
-		
+
 	play_sound(melody)
 	SSstatistics.add_field_details("admin_verb","PSS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
