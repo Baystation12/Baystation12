@@ -1132,7 +1132,7 @@
 /area/medical/staging
 	name = "\improper Infirmary Staging"
 	icon_state = "patients"
-	req_access = list(list(access_medical,access_solgov_crew))
+	req_access = list(access_medical)
 
 /area/medical/chemistry
 	name = "\improper Chemistry"
@@ -1154,6 +1154,7 @@
 	icon_state = "autopsy"
 
 // Shield Rooms
+
 /area/shield
 	name = "\improper Shield Generator"
 	icon_state = "engineering"
