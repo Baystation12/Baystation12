@@ -97,32 +97,29 @@
 // User has to wear their ID or have it inhand for ID Scan to work.
 // Can also be called manually, with optional parameter being access_to_check to scan the user's ID
 /datum/computer_file/program/proc/can_run(var/mob/living/user, var/loud = 0, var/access_to_check)
-	if(requires_ntnet && !get_signal())
-		to_chat(user, SPAN_WARNING("Unable to establish a working network connection. Please try again later. If problem persists, please contact your system administrator."))
-		return FALSE
 	if(!requires_access_to_run)
-		return TRUE
+		return 1
 	// Defaults to required_access
 	if(!access_to_check)
 		access_to_check = required_access
 	if(!access_to_check) // No required_access, allow it.
-		return TRUE
+		return 1
 
 	// Admin override - allows operation of any computer as aghosted admin, as if you had any required access.
 	if(isghost(user) && check_rights(R_ADMIN, 0, user))
-		return TRUE
+		return 1
 
 	if(!istype(user))
-		return FALSE
+		return 0
 
 	var/obj/item/weapon/card/id/I = user.GetIdCard()
 	if(!I)
 		if(loud)
 			to_chat(user, "<span class='notice'>\The [computer] flashes an \"RFID Error - Unable to scan ID\" warning.</span>")
-		return FALSE
+		return 0
 
 	if(access_to_check in I.access)
-		return TRUE
+		return 1
 	else if(loud)
 		to_chat(user, "<span class='notice'>\The [computer] flashes an \"Access Denied\" warning.</span>")
 
