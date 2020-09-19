@@ -200,7 +200,6 @@ Sells devices, odds and ends, and medical stuff
 								/obj/item/device/lightreplacer             = TRADER_THIS_TYPE,
 								/obj/item/device/megaphone                 = TRADER_THIS_TYPE,
 								/obj/item/device/paicard                   = TRADER_THIS_TYPE,
-								/obj/item/device/pipe_painter              = TRADER_THIS_TYPE,
 								/obj/item/device/scanner/health            = TRADER_THIS_TYPE,
 								/obj/item/device/scanner/gas                  = TRADER_ALL,
 								/obj/item/device/scanner/spectrometer         = TRADER_ALL,

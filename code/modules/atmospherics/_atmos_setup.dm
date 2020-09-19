@@ -49,7 +49,7 @@ var/global/list/pipe_colors = list(
 	check_icons()
 
 /datum/pipe_icon_manager/proc/get_atmos_icon(var/device, var/dir, var/color, var/state)
-	check_icons()
+	check_icons(device, dir, color, state)
 
 	device = "[device]"
 	state = "[state]"
@@ -78,7 +78,7 @@ var/global/list/pipe_colors = list(
 	//	if("pipe_underlay_intact")
 	//		return pipe_underlays_intact[state + dir + color]
 
-/datum/pipe_icon_manager/proc/check_icons()
+/datum/pipe_icon_manager/proc/check_icons(var/device, var/dir, var/color, var/state)
 	if(!pipe_icons)
 		gen_pipe_icons()
 	if(!manifold_icons)
@@ -90,6 +90,20 @@ var/global/list/pipe_colors = list(
 	//if(!underlays_intact || !underlays_down || !underlays_exposed || !pipe_underlays_exposed || !pipe_underlays_intact)
 	if(!underlays)
 		gen_underlay_icons()
+	
+	// In case of a non-default color, generate the missing icon and add it to the cache.
+	if(pipe_color_check(color))
+		return
+	switch("[device]")
+		if("pipe")
+			if(!pipe_icons[color + state])
+				gen_single_pipe_icon(color, state)
+		if("manifold")
+			if(!manifold_icons[color + state])
+				gen_single_manifold_icon(color, state)
+		if("underlay")
+			if(!underlays[state + "[dir]" + color])
+				gen_single_underlay_icon(dir, color, state)
 
 /datum/pipe_icon_manager/proc/gen_pipe_icons()
 	if(!pipe_icons)
@@ -122,6 +136,10 @@ var/global/list/pipe_colors = list(
 			continue
 		pipe_icons["hejunction" + state] = image('icons/atmos/junction.dmi', icon_state = state)
 
+/datum/pipe_icon_manager/proc/gen_single_pipe_icon(var/color, var/state)
+	var/image/I = image('icons/atmos/pipes.dmi', icon_state = state)
+	I.color = color
+	pipe_icons[state + color] = I
 
 /datum/pipe_icon_manager/proc/gen_manifold_icons()
 	if(!manifold_icons)
@@ -142,6 +160,15 @@ var/global/list/pipe_colors = list(
 				I = image('icons/atmos/manifold.dmi', icon_state = state)
 				I.color = pipe_colors[pipe_color]
 				manifold_icons[state + pipe_colors[pipe_color]] = I
+
+/datum/pipe_icon_manager/proc/gen_single_manifold_icon(var/color, var/state)
+	var/image/I = image('icons/atmos/manifold.dmi', icon_state = state)
+	manifold_icons[state] = I
+	if(findtext(state, "clamps"))
+		manifold_icons[state] = I
+	else
+		I.color = color
+		manifold_icons[state + color] = I
 
 /datum/pipe_icon_manager/proc/gen_device_icons()
 	if(!device_icons)
@@ -193,6 +220,11 @@ var/global/list/pipe_colors = list(
 				I = image('icons/atmos/pipe_underlays.dmi', icon_state = state, dir = D)
 				I.color = pipe_colors[pipe_color]
 				underlays[state + "[D]" + "[pipe_colors[pipe_color]]"] = I
+
+/datum/pipe_icon_manager/proc/gen_single_underlay_icon(var/dir, var/color, var/state)
+	var/image/I = image('icons/atmos/pipe_underlays.dmi', icon_state = state, dir = dir)
+	I.color = color
+	underlays[state + "[dir]" + color] = I
 
 /*
 	Leaving the old icon manager code commented out for now, as we may want to rewrite the new code to cleanly

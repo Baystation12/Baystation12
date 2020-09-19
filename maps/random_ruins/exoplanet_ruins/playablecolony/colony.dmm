@@ -2388,7 +2388,7 @@
 	icon_state = "techfloor_edges"
 	},
 /obj/structure/table/steel_reinforced,
-/obj/item/device/pipe_painter,
+/obj/item/device/paint_sprayer,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/atmospherics)
 "eJ" = (

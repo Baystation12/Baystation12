@@ -28,7 +28,6 @@
 		/obj/item/weapon/gripper,
 		/obj/item/weapon/gripper/no_use/loader,
 		/obj/item/device/lightreplacer,
-		/obj/item/device/pipe_painter,
 		/obj/item/device/paint_sprayer,
 		/obj/item/weapon/inflatable_dispenser/robot,
 		/obj/item/weapon/reagent_containers/spray/cleaner/drone,

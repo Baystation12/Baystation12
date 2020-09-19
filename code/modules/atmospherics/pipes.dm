@@ -22,6 +22,7 @@
 	build_icon_state = "simple"
 	build_icon = 'icons/obj/pipe-item.dmi'
 	pipe_class = PIPE_CLASS_BINARY
+	atom_flags = ATOM_FLAG_CAN_BE_PAINTED
 
 /obj/machinery/atmospherics/pipe/drain_power()
 	return -1
@@ -108,9 +109,6 @@
 	if (istype(src, /obj/machinery/atmospherics/pipe/vent))
 		return ..()
 
-	if(istype(W,/obj/item/device/pipe_painter))
-		return 0
-
 	if(isWrench(W))
 		var/turf/T = src.loc
 		if (level==1 && isturf(T) && !T.is_plating())
@@ -138,11 +136,10 @@
 					meter.dismantle()
 			qdel(src)
 
-/obj/machinery/atmospherics/proc/change_color(var/new_color)
-	//only pass valid pipe colors please ~otherwise your pipe will turn invisible
-	if(!pipe_color_check(new_color))
-		return
+/obj/machinery/atmospherics/get_color()
+	return pipe_color
 
+/obj/machinery/atmospherics/set_color(var/new_color)
 	pipe_color = new_color
 	update_icon()
 
@@ -246,7 +243,7 @@
 /obj/machinery/atmospherics/pipe/simple/pipeline_expansion()
 	return list(node1, node2)
 
-/obj/machinery/atmospherics/pipe/simple/change_color(var/new_color)
+/obj/machinery/atmospherics/pipe/simple/set_color(var/new_color)
 	..()
 	//for updating connected atmos device pipes (i.e. vents, manifolds, etc)
 	if(node1)
@@ -489,7 +486,7 @@
 
 	..()
 
-/obj/machinery/atmospherics/pipe/manifold/change_color(var/new_color)
+/obj/machinery/atmospherics/pipe/manifold/set_color(var/new_color)
 	..()
 	//for updating connected atmos device pipes (i.e. vents, manifolds, etc)
 	if(node1)
@@ -749,7 +746,7 @@
 
 	..()
 
-/obj/machinery/atmospherics/pipe/manifold4w/change_color(var/new_color)
+/obj/machinery/atmospherics/pipe/manifold4w/set_color(var/new_color)
 	..()
 	//for updating connected atmos device pipes (i.e. vents, manifolds, etc)
 	if(node1)
@@ -988,7 +985,7 @@
 
 	..()
 
-/obj/machinery/atmospherics/pipe/cap/change_color(var/new_color)
+/obj/machinery/atmospherics/pipe/cap/set_color(var/new_color)
 	..()
 	//for updating connected atmos device pipes (i.e. vents, manifolds, etc)
 	if(node)

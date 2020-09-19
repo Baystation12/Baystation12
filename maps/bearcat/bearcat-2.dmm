@@ -5475,7 +5475,7 @@
 /obj/item/device/multitool{
 	pixel_x = 5
 	},
-/obj/item/device/pipe_painter,
+/obj/item/device/paint_sprayer,
 /obj/item/clamp,
 /turf/simulated/floor/tiled/techfloor,
 /area/ship/scrap/maintenance/atmos)

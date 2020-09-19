@@ -70,11 +70,6 @@
 	lore_text = "The common, every day multitool is descended from certain electrical tools from Earth's early space age. Though none too cheap, they are incredibly handy, and can be found in any self-respecting technician's toolbox."
 	antag_text = "This handy little tool can get you through doors, turn off power, and anything else you might need."
 
-/datum/codex_entry/pipe_painter
-	associated_paths = list(/obj/item/device/pipe_painter)
-	mechanics_text = "Use the pipe painter to specify which color you'd like to apply to pipes. Click on exposed piping to alter its hue."
-	lore_text = "Though by no means a modern miracle, synthesized pigments have revolutionized the electrical engineering industry, making time-consuming painting and color coding jobs an effortless non-issue."
-
 /datum/codex_entry/t_scanner
 	associated_paths = list(/obj/item/device/t_scanner)
 	mechanics_text = "Use this to toggle its scanning capabilities on and off. While on, it will expose the layout of cabling and pipework in a 7x7 area around you."
