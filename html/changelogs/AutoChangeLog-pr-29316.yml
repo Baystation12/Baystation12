@@ -1,0 +1,4 @@
+author: "Mucker"
+delete-after: True
+changes: 
+  - admin: "Adds a volume input to Play Global Sound, and the ability to play locally before playing globally."
