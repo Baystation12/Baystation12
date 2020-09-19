@@ -35,7 +35,7 @@
 	if (LAZYLEN(original_settings))
 		for (var/propname in original_settings)
 			gun.vars[propname] = original_settings[propname]
-	
+
 		LAZYCLEARLIST(original_settings)
 
 //Parent gun type. Guns are weapons that can be aimed at mobs and act over a distance
@@ -289,19 +289,24 @@
 		flick(fire_anim, src)
 
 	if (user)
-		if(!silenced)
+		if (pointblank)
+			var/audible_message = silenced ? "You hear a [fire_sound_text]!" : null
 			if(reflex)
 				user.visible_message(
-					"<span class='reflex_shoot'><b>\The [user] fires \the [src][pointblank ? " point blank at \the [target]":""] by reflex!</b></span>",
-					"<span class='reflex_shoot'>You fire \the [src] by reflex!</span>",
-					"You hear a [fire_sound_text]!"
+					SPAN_DANGER("\The [user] fires \the [src][pointblank ? " point blank at \the [target]":""] by reflex!"),
+					SPAN_WARNING("You fire \the [src] point blank at \the [target] by reflex!"),
+					audible_message
 				)
 			else
 				user.visible_message(
-					"<span class='danger'>\The [user] fires \the [src][pointblank ? " point blank at \the [target]":""]!</span>",
-					"<span class='warning'>You fire \the [src]!</span>",
-					"You hear a [fire_sound_text]!"
-					)
+					SPAN_DANGER("\The [user] fires \the [src][pointblank ? " point blank at \the [target]":""]!"),
+					SPAN_WARNING("You fire \the [src] point blank at \the [target]!"),
+					audible_message
+				)
+			var/attacker_message = "shot point blank with \a [src.type]"
+			var/victim_message = "shot point blank with \a [src.type]"
+			var/admin_message = "shot point blank (\a [src.type])"
+			admin_attack_log(user, target, attacker_message, victim_message, admin_message)
 
 		if(one_hand_penalty)
 			if(!src.is_held_twohanded(user))
