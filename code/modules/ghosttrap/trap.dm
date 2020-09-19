@@ -170,6 +170,7 @@ var/list/ghost_traps
 	ghost_trap_message = "They are occupying a living plant now."
 	ghost_trap_role = "Plant"
 	list_as_special_role = TRUE
+	species_whitelist = /datum/species/diona
 
 /datum/ghosttrap/plant/welcome_candidate(var/mob/target)
 	to_chat(target, "<span class='alium'><B>You awaken slowly, stirring into sluggish motion as the air caresses you.</B></span>")
