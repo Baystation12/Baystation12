@@ -31,6 +31,8 @@
 					/obj/item/ammo_box/shotgun = 0,
 					/obj/item/ammo_box/shotgun/slug = 0,
 					/obj/item/ammo_box/shotgun/beanbag = 0,
+					"Specialised Ammunition" = -1,
+					/obj/item/ammo_magazine/na4_tank = 0,
 					"Explosives" = -1,
 					/obj/item/weapon/grenade/frag/m9_hedp = 0,
 					/obj/item/weapon/grenade/smokebomb = 0,
