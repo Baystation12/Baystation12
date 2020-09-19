@@ -42,7 +42,7 @@
 	shield_damage = 10
 	icon = 'icons/effects/fire.dmi'
 	icon_state = "fire"
-	kill_count = 10
+	kill_count = 10 //No sniping!
 
 /obj/item/projectile/bullet/fire/attack_mob(var/mob/living/carbon/C)
 	damage_type = BURN
