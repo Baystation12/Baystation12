@@ -1142,3 +1142,5 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 
 /proc/pass()
 	return
+
+#define UNTIL(X) while(!(X)) sleep(world.tick_lag)

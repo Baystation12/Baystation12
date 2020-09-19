@@ -405,8 +405,12 @@ STARLIGHT 0
 ## Uncomment to enable auto-stealthing staff who are AFK for more than specified minutes
 # AUTOSTEALTH 30
 
-##Clients will be unable to connect unless their version is equal to or higher than this (a number, e.g. 511)	
-#MINIMUM_BYOND_VERSION	
+##Clients will be unable to connect unless their version is equal to or higher than this (a number, e.g. 511)
+#MINIMUM_BYOND_VERSION
 
-## Clients will be unable to connect unless their build is equal to or higher than this (a number, e.g. 1000)	
+## Clients will be unable to connect unless their build is equal to or higher than this (a number, e.g. 1000)
 #MINIMUM_BYOND_BUILD
+
+## Uncomment to enable global ban DB using the provided URL. The API should expect to receive a ckey at the end of the URL.
+## More API details can be found here: https://centcom.melonmesa.com
+CENTCOM_BAN_DB https://centcom.melonmesa.com/ban/search

@@ -37,3 +37,17 @@
 	starting_accessories = list(\
 		/obj/item/clothing/accessory/rank/marine/enlisted/e7,\
 		/obj/item/clothing/accessory/badge/tags)
+
+/decl/hierarchy/outfit/job/unsc/marine/hellbringer
+	name = "Hellbringer"
+	l_ear = /obj/item/device/radio/headset/unsc/marine
+	uniform = /obj/item/clothing/under/unsc/hellbringer_undersuit
+	shoes = /obj/item/clothing/shoes/hellbringer
+	gloves = /obj/item/clothing/gloves/thick/unsc/hellbringer
+	head = /obj/item/clothing/head/helmet/hellbringer
+	suit = /obj/item/clothing/suit/storage/hellbringer
+	suit_store = /obj/item/ammo_magazine/na4_tank
+	r_hand = /obj/item/weapon/gun/projectile/na4_dp
+	starting_accessories = list(\
+		/obj/item/clothing/accessory/rank/marine/enlisted/e3,\
+		/obj/item/clothing/accessory/badge/tags)
