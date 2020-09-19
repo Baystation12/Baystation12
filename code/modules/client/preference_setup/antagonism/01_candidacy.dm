@@ -60,6 +60,9 @@
 		. += "<tr><td>[(ghost_trap.ghost_trap_role)]: </td><td>"
 		if(banned_from_ghost_role(preference_mob(), ghost_trap))
 			. += "<span class='danger'>\[BANNED\]</span><br>"
+		else if (!ghost_trap.assess_whitelist(user))
+			var/datum/species/S = new ghost_trap.species_whitelist()
+			. += "[SPAN_DANGER("\[WHITELIST RESTRICTED - [S]\]")]<br />"
 		else if(ghost_trap.pref_check in pref.be_special_role)
 			. += "<span class='linkOn'>High</span> <a href='?src=\ref[src];add_maybe=[ghost_trap.pref_check]'>Low</a> <a href='?src=\ref[src];del_special=[ghost_trap.pref_check]'>Never</a></br>"
 		else if(ghost_trap.pref_check in pref.may_be_special_role)
@@ -98,7 +101,7 @@
 		pref.may_be_special_role |= href_list["add_maybe"]
 		return TOPIC_REFRESH
 
-	if(href_list["select_all"])		
+	if(href_list["select_all"])
 		var/selection = text2num(href_list["select_all"])
 		var/list/roles = valid_special_roles(FALSE)
 
@@ -106,11 +109,11 @@
 			switch(selection)
 				if(0)
 					pref.be_special_role -= id
-					pref.may_be_special_role -= id					
+					pref.may_be_special_role -= id
 				if(1)
 					pref.be_special_role -= id
-					pref.may_be_special_role |= id					
-				if(2)					
+					pref.may_be_special_role |= id
+				if(2)
 					pref.be_special_role |= id
 					pref.may_be_special_role -= id
 		return TOPIC_REFRESH
@@ -134,7 +137,7 @@
 		if(!ghost_trap.list_as_special_role)
 			continue
 		if(!include_bans)
-			if(banned_from_ghost_role(preference_mob(), ghost_trap))		
+			if(banned_from_ghost_role(preference_mob(), ghost_trap))
 				continue
 		private_valid_special_roles += ghost_trap.pref_check
 

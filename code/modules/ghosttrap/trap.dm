@@ -1,4 +1,4 @@
-// This system is used to grab a ghost from observers with the required preferences 
+// This system is used to grab a ghost from observers with the required preferences
 // and lack of bans set. See posibrain.dm for an example of how they are called/used.
 
 var/list/ghost_traps
@@ -30,6 +30,7 @@ var/list/ghost_traps
 	var/list_as_special_role = FALSE	// If true, this entry will be listed as a special role in the character setup
 
 	var/list/request_timeouts
+	var/datum/species/species_whitelist // If defined, this is the species whitelist required to join
 
 /datum/ghosttrap/New()
 	request_timeouts = list()
@@ -38,14 +39,28 @@ var/list/ghost_traps
 // Check for bans, proper atom types, etc.
 /datum/ghosttrap/proc/assess_candidate(var/mob/observer/ghost/candidate, var/mob/target, var/feedback = TRUE)
 	if(!candidate.MayRespawn(feedback, minutes_since_death))
-		return 0
+		return FALSE
+
 	if(islist(ban_checks))
 		for(var/bantype in ban_checks)
 			if(jobban_isbanned(candidate, "[bantype]"))
 				if(feedback)
 					to_chat(candidate, "You are banned from one or more required roles and hence cannot enter play as \a [object].")
-				return 0
-	return 1
+				return FALSE
+
+	if (!assess_whitelist(candidate))
+		if (feedback)
+			var/datum/species/S = new species_whitelist()
+			to_chat(candidate, "You require \a [S] whitelist to play as \a [object].")
+		return FALSE
+	return TRUE
+
+/datum/ghosttrap/proc/assess_whitelist(mob/candidate)
+	. = TRUE
+	if (!species_whitelist)
+		return
+	if (!is_alien_whitelisted(candidate, species_whitelist))
+		. = FALSE
 
 // Print a message to all ghosts with the right prefs/lack of bans.
 /datum/ghosttrap/proc/request_player(var/mob/target, var/request_string, var/request_timeout)
