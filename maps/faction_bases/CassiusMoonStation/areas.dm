@@ -42,22 +42,6 @@
 	name = "Orbital Facility Cassius - Hangar Storage Port"
 	icon_state = "auxstorage"
 
-/area/faction_base/unsc/moonbase/atmos_corridor
-	name = "Orbital Facility Cassius - Atmospherics Corridor"
-	icon_state = "atmos_monitoring"
-
-/area/faction_base/unsc/moonbase/atmospherics
-	name = "Orbital Facility Cassius - Atmospherics"
-	icon_state = "atmos"
-
-/area/faction_base/unsc/moonbase/garden
-	name = "Orbital Facility Cassius - Garden"
-	icon_state = "garden"
-
-/area/faction_base/unsc/moonbase/observation_e
-	name = "Orbital Facility Cassius - Observation Starboard"
-	icon_state = "observatory"
-
 /area/faction_base/unsc/moonbase/bathroom_f
 	name = "Orbital Facility Cassius - Female Bathroom"
 	icon_state = "toilet"
@@ -110,10 +94,6 @@
 	name = "Orbital Facility Cassius - Chemistry"
 	icon_state = "chem"
 
-/area/faction_base/unsc/moonbase/atmos_can_storage
-	name = "Orbital Facility Cassius - Atmospherics Canister Storage"
-	icon_state = "atmos_storage"
-
 /area/faction_base/unsc/moonbase/kitchen
 	name = "Orbital Facility Cassius - Kitchen"
 	icon_state = "kitchen"
@@ -121,14 +101,6 @@
 /area/faction_base/unsc/moonbase/cryopods
 	name = "Orbital Facility Cassius - Cryogenics"
 	icon_state = "cryo"
-
-/area/faction_base/unsc/moonbase/mac_pods_e
-	name = "Orbital Facility Cassius - MAC Escape Pods Starboard"
-	icon_state = "away1"
-
-/area/faction_base/unsc/moonbase/mac_pods_w
-	name = "Orbital Facility Cassius - MAC Escape Pods Port"
-	icon_state = "away2"
 
 /area/faction_base/unsc/moonbase/command_deck
 	name = "Orbital Facility Cassius - Command Deck"
@@ -141,10 +113,6 @@
 /area/faction_base/unsc/moonbase/briefing_a
 	name = "Orbital Facility Cassius - Briefing Room A"
 	icon_state = "library"
-
-/area/faction_base/unsc/moonbase/briefing_b
-	name = "Orbital Facility Cassius - Briefing Room B"
-	icon_state = "head_quarters"
 
 /area/faction_base/unsc/moonbase/moonbase_helpline
 	name = "Orbital Facility Cassius - Orbital Facility Administration"
@@ -161,11 +129,3 @@
 /area/faction_base/unsc/moonbase/aicore
 	name = "Orbital Facility Cassius - AI Core"
 	icon_state = "ai_server"
-
-/area/faction_base/unsc/moonbase/maint_command
-	name = "Orbital Facility Cassius - Command Maint"
-	icon_state = "maintcentral"
-
-/area/faction_base/unsc/moonbase/maint
-	name = "Orbital Facility Cassius - Maintenance"
-	icon_state = "fmaint"

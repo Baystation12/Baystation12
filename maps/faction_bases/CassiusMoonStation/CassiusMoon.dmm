@@ -49,7 +49,7 @@
 "aW" = (/obj/machinery/camera/autoname/invis/moonbase_cassius,/turf/simulated/floor/tech/gray,/area/faction_base/unsc/moonbase/odst_pods)
 "aX" = (/obj/structure/table/rack,/obj/item/weapon/storage/toolbox/emergency,/obj/item/weapon/storage/toolbox/mechanical,/obj/item/weapon/storage/toolbox/electrical,/turf/simulated/floor/plating,/area/faction_base/unsc/moonbase/store_room)
 "aY" = (/obj/structure/window/reinforced/projresist{icon_state = "rwindow"; dir = 1},/obj/structure/window/reinforced/projresist{icon_state = "rwindow"; dir = 8},/turf/simulated/floor/greengrid,/area/faction_base/unsc/moonbase/aicore)
-"aZ" = (/turf/simulated/floor/plating,/turf/simulated/shuttle/wall/corner/smoothwhite/nw,/area/faction_base/unsc/moonbase/hangar_e)
+"aZ" = (/turf/simulated/floor/plating,/turf/simulated/shuttle/wall/corner/smoothwhite/nw,/area/shuttle/unsc_shuttle_supply)
 "ba" = (/obj/structure/closet{icon_closed = "toolcloset"; icon_opened = "toolclosetopen"; icon_state = "toolcloset"},/obj/item/weapon/wrench,/obj/item/weapon/crowbar,/obj/item/weapon/screwdriver,/obj/item/weapon/weldingtool/hugetank,/obj/item/weapon/wirecutters,/obj/item/device/multitool,/obj/item/device/analyzer,/obj/item/stack/cable_coil,/obj/item/clothing/gloves/insulated,/obj/item/clothing/glasses/welding,/turf/simulated/floor/plating,/area/faction_base/unsc/moonbase/store_room)
 "bb" = (/obj/machinery/door/airlock/halo/moonbase_cassius_general/aicore,/turf/simulated/floor/tiled,/area/faction_base/unsc/moonbase/aicore)
 "bc" = (/obj/structure/window/reinforced/projresist{icon_state = "rwindow"; dir = 1},/turf/simulated/floor/greengrid,/area/faction_base/unsc/moonbase/aicore)
@@ -82,7 +82,7 @@
 "bD" = (/obj/structure/table/steel_reinforced,/obj/item/modular_computer/tablet/preset/custom_loadout/advanced,/obj/machinery/light{dir = 4},/turf/simulated/floor/tiled,/area/faction_base/unsc/moonbase/moonbase_helpline)
 "bE" = (/obj/structure/sofa/right{icon_state = "sofaend_right"; dir = 8},/turf/simulated/floor/tech/gray,/area/faction_base/unsc/moonbase/odst_pods)
 "bF" = (/obj/structure/sofa/left{icon_state = "sofaend_left"; dir = 8},/turf/simulated/floor/tech/gray,/area/faction_base/unsc/moonbase/odst_pods)
-"bG" = (/turf/simulated/shuttle/wall{dir = 4; icon_state = "swall_straight"},/area/faction_base/unsc/moonbase/hangar_e)
+"bG" = (/turf/simulated/shuttle/wall{dir = 4; icon_state = "swall_straight"},/area/shuttle/unsc_shuttle_supply)
 "bH" = (/turf/simulated/wall/r_wall,/area/faction_base/unsc/moonbase/hangar_e)
 "bI" = (/turf/simulated/floor/plating,/area/faction_base/unsc/moonbase/hangar_w)
 "bJ" = (/turf/simulated/floor/tech/ridged,/area/faction_base/unsc/moonbase/hangar_w)
@@ -176,7 +176,7 @@
 "dt" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/tiled,/area/faction_base/unsc/moonbase/corridor_central)
 "du" = (/obj/structure/table/woodentable,/turf/simulated/floor/tiled,/area/faction_base/unsc/moonbase/briefing_a)
 "dv" = (/obj/machinery/camera/autoname/invis/moonbase_cassius,/turf/simulated/floor/tiled,/area/faction_base/unsc/moonbase/briefing_lobby)
-"dw" = (/turf/simulated/shuttle/wall{dir = 8; icon_state = "swall"},/area/faction_base/unsc/moonbase/hangar_e)
+"dw" = (/turf/simulated/shuttle/wall{dir = 8; icon_state = "swall"},/area/shuttle/unsc_shuttle_supply)
 "dx" = (/obj/machinery/door/airlock/halo/maint/moonbase_cassius_maint,/turf/simulated/floor/plating,/area/faction_base/unsc/moonbase/command_deck)
 "dy" = (/obj/structure/closet/secure_closet/freezer/kitchen,/turf/simulated/floor/tiled/white,/area/faction_base/unsc/moonbase/kitchen)
 "dz" = (/obj/structure/bed/chair/wood{tag = "icon-wooden_chair_preview (NORTH)"; icon_state = "wooden_chair_preview"; dir = 1},/turf/simulated/floor/tiled,/area/faction_base/unsc/moonbase/briefing_a)
@@ -186,7 +186,7 @@
 "dD" = (/obj/structure/table/reinforced,/obj/machinery/microwave,/obj/machinery/light/small{icon_state = "bulb1"; dir = 1},/turf/simulated/floor/tiled/white,/area/faction_base/unsc/moonbase/kitchen)
 "dE" = (/obj/machinery/light{dir = 4},/turf/simulated/floor/tiled,/area/faction_base/unsc/moonbase/briefing_lobby)
 "dF" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/faction_base/unsc/moonbase/briefing_lobby)
-"dG" = (/obj/machinery/door/airlock/glass/cargo_shuttle{name = "Shuttle Access"; req_access = list(317)},/turf/simulated/floor/shuttle/yellow,/area/faction_base/unsc/moonbase/hangar_e)
+"dG" = (/obj/machinery/door/airlock/glass/cargo_shuttle{name = "Shuttle Access"; req_access = list(317)},/turf/simulated/floor/shuttle/yellow,/area/shuttle/unsc_shuttle_supply)
 "dH" = (/obj/structure/closet/secure_closet/freezer/meat,/obj/machinery/light/small{icon_state = "bulb1"; dir = 1},/turf/simulated/floor/tiled/white,/area/faction_base/unsc/moonbase/kitchen)
 "dI" = (/obj/machinery/vending/dinnerware,/turf/simulated/floor/tiled/white,/area/faction_base/unsc/moonbase/kitchen)
 "dJ" = (/obj/machinery/light{dir = 4},/turf/simulated/floor/tiled,/area/faction_base/unsc/moonbase/corridor_central)
@@ -253,7 +253,7 @@
 "eS" = (/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor/tiled,/area/faction_base/unsc/moonbase/central_lobby)
 "eT" = (/obj/machinery/camera/autoname/invis/moonbase_cassius,/turf/simulated/floor/tiled/white,/area/faction_base/unsc/moonbase/cryopods)
 "eU" = (/obj/structure/closet/crate/bin,/turf/simulated/floor/tiled,/area/faction_base/unsc/moonbase/central_lobby)
-"eV" = (/obj/machinery/conveyor{dir = 1; id = "unsc_cargo_conveyor"},/obj/structure/plasticflaps/mining,/turf/simulated/floor/shuttle/yellow,/area/faction_base/unsc/moonbase/hangar_e)
+"eV" = (/obj/machinery/conveyor{dir = 1; id = "unsc_cargo_conveyor"},/obj/structure/plasticflaps/mining,/turf/simulated/floor/shuttle/yellow,/area/shuttle/unsc_shuttle_supply)
 "eW" = (/obj/structure/window/reinforced/projresist,/obj/structure/window/reinforced/projresist{icon_state = "rwindow"; dir = 8},/obj/structure/window/reinforced/projresist{icon_state = "rwindow"; dir = 4},/obj/structure/grille,/turf/simulated/floor/plating,/area/faction_base/unsc/moonbase/gym)
 "eX" = (/obj/machinery/door/airlock/halo/moonbase_cassius_general/kitchen,/turf/simulated/floor/tiled/white,/area/faction_base/unsc/moonbase/kitchen)
 "eY" = (/obj/structure/table/steel,/obj/item/weapon/reagent_containers/food/condiment/small/peppermill,/obj/item/weapon/reagent_containers/food/condiment/small/peppermill,/turf/simulated/floor/tiled,/area/faction_base/unsc/moonbase/kitchen)
@@ -272,7 +272,7 @@
 "fl" = (/obj/machinery/door/airlock/halo/maint/moonbase_cassius_maint,/turf/simulated/floor/plating,/area/faction_base/unsc/moonbase/hangar_storage_e)
 "fm" = (/obj/machinery/door/airlock/multi_tile/halo/moonbase_cassius_general/hangar{icon_state = "closed"; dir = 4},/turf/simulated/floor/tech/ridged,/area/faction_base/unsc/moonbase/hangar_e)
 "fn" = (/obj/machinery/door/airlock/multi_tile/halo/moonbase_cassius_general/hangar{icon_state = "closed"; dir = 4},/turf/simulated/floor/tech/ridged,/area/faction_base/unsc/moonbase/hangar_w)
-"fo" = (/obj/machinery/light,/turf/simulated/floor/tiled,/area/faction_base/unsc/moonbase/briefing_b)
+"fo" = (/turf/simulated/floor/plating,/obj/effect/shuttle_landmark/unsc_onsite_supply,/turf/simulated/shuttle/wall/corner/smoothwhite/sw,/area/shuttle/unsc_shuttle_supply)
 "fp" = (/obj/machinery/light{dir = 1; icon_state = "tube1"},/obj/structure/ai_routing_node/unsc,/turf/simulated/floor/tiled/freezer,/area/faction_base/unsc/moonbase/locker_room)
 "fq" = (/obj/structure/ai_routing_node/unsc,/turf/simulated/floor/tech/ridged,/area/faction_base/unsc/moonbase/hangar_storage_e)
 "fr" = (/obj/structure/table/glass,/obj/item/weapon/storage/box/cups,/turf/simulated/floor/tech/white,/area/faction_base/unsc/moonbase/gym)
@@ -295,13 +295,13 @@
 "fI" = (/obj/machinery/organ_printer/robot/mapped,/turf/simulated/floor/tiled/white,/area/faction_base/unsc/moonbase/medical)
 "fJ" = (/obj/structure/closet{name = "Sandbags Closet"},/obj/item/empty_sandbags,/obj/item/empty_sandbags,/obj/item/empty_sandbags,/obj/item/weapon/shovel,/obj/item/weapon/shovel,/obj/item/empty_sandbags,/obj/item/empty_sandbags,/obj/item/empty_sandbags,/obj/item/empty_sandbags,/obj/item/empty_sandbags,/obj/item/empty_sandbags,/obj/item/empty_sandbags,/turf/simulated/floor/plating,/area/faction_base/unsc/moonbase/store_room)
 "fK" = (/obj/structure/closet{name = "Barbed Wire Closet"},/obj/item/stack/barbedwire,/obj/item/stack/barbedwire,/obj/item/stack/barbedwire,/obj/item/stack/barbedwire,/obj/item/stack/barbedwire,/obj/item/stack/barbedwire,/obj/item/stack/barbedwire,/obj/item/stack/barbedwire,/obj/item/stack/barbedwire,/obj/item/stack/barbedwire,/turf/simulated/floor/plating,/area/faction_base/unsc/moonbase/store_room)
-"fL" = (/turf/simulated/shuttle/wall{dir = 4; icon_state = "swall"},/area/faction_base/unsc/moonbase/hangar_e)
-"fM" = (/obj/structure/shuttle/window{tag = "icon-9"; icon_state = "9"; color = "grey"},/turf/simulated/floor/shuttle/yellow,/area/faction_base/unsc/moonbase/hangar_e)
-"fN" = (/turf/simulated/shuttle/wall{icon_state = "swall_straight"},/area/faction_base/unsc/moonbase/hangar_e)
-"fO" = (/turf/simulated/floor/shuttle/yellow,/area/faction_base/unsc/moonbase/hangar_e)
-"fP" = (/obj/machinery/conveyor{dir = 1; id = "unsc_cargo_conveyor"},/turf/simulated/floor/shuttle/yellow,/area/faction_base/unsc/moonbase/hangar_e)
-"fQ" = (/obj/structure/shuttle_engine{dir = 4},/turf/simulated/shuttle/wall{icon_state = "swall_straight"},/area/faction_base/unsc/moonbase/hangar_e)
-"fR" = (/obj/structure/shuttle/window{tag = "icon-11"; icon_state = "11"; color = "grey"},/turf/simulated/floor/shuttle/yellow,/area/faction_base/unsc/moonbase/hangar_e)
+"fL" = (/turf/simulated/shuttle/wall{dir = 4; icon_state = "swall"},/area/shuttle/unsc_shuttle_supply)
+"fM" = (/obj/structure/shuttle/window{tag = "icon-9"; icon_state = "9"; color = "grey"},/turf/simulated/floor/shuttle/yellow,/area/shuttle/unsc_shuttle_supply)
+"fN" = (/turf/simulated/shuttle/wall{icon_state = "swall_straight"},/area/shuttle/unsc_shuttle_supply)
+"fO" = (/turf/simulated/floor/shuttle/yellow,/area/shuttle/unsc_shuttle_supply)
+"fP" = (/obj/machinery/conveyor{dir = 1; id = "unsc_cargo_conveyor"},/turf/simulated/floor/shuttle/yellow,/area/shuttle/unsc_shuttle_supply)
+"fQ" = (/obj/structure/shuttle_engine{dir = 4},/turf/simulated/shuttle/wall{icon_state = "swall_straight"},/area/shuttle/unsc_shuttle_supply)
+"fR" = (/obj/structure/shuttle/window{tag = "icon-11"; icon_state = "11"; color = "grey"},/turf/simulated/floor/shuttle/yellow,/area/shuttle/unsc_shuttle_supply)
 "fS" = (/obj/structure/closet{name = "Tools Closet"},/obj/item/weapon/storage/toolbox,/obj/item/weapon/storage/toolbox,/obj/item/weapon/storage/toolbox/mechanical,/obj/item/weapon/storage/toolbox/electrical,/obj/item/clothing/gloves/insulated,/obj/item/clothing/gloves/insulated,/obj/item/weapon/cell/standard,/obj/item/weapon/cell/standard,/obj/item/weapon/cell/standard,/obj/item/weapon/cell/standard,/turf/simulated/floor/plating,/area/faction_base/unsc/moonbase/store_room)
 "fT" = (/obj/structure/bed/chair/wood{tag = "icon-wooden_chair_preview (NORTH)"; icon_state = "wooden_chair_preview"; dir = 1},/obj/machinery/camera/autoname/invis/moonbase_cassius,/turf/simulated/floor/tiled,/area/faction_base/unsc/moonbase/briefing_a)
 "fU" = (/obj/item/weapon/stool{anchored = 1},/turf/simulated/floor/tiled,/area/faction_base/unsc/moonbase/central_lobby)
@@ -309,7 +309,7 @@
 "fW" = (/obj/machinery/mac_cannon/capacitor{name = "Wireless Transmitter Capacitor"},/obj/structure/window/reinforced/projresist,/obj/structure/window/reinforced/projresist{icon_state = "rwindow"; dir = 8},/turf/simulated/floor/plating,/area/faction_base/unsc/moonbase/MAC)
 "fX" = (/obj/machinery/light/spot_cavewall{icon_state = "tube1"; dir = 4},/turf/simulated/floor/asteroid/planet,/area/faction_base/unsc/moonbase/outside)
 "fY" = (/obj/machinery/mac_cannon/capacitor{name = "Wireless Transmitter Capacitor"},/obj/structure/window/reinforced/projresist,/turf/simulated/floor/plating,/area/faction_base/unsc/moonbase/MAC)
-"fZ" = (/obj/structure/shuttle/window{tag = "icon-10"; icon_state = "10"; color = "grey"},/turf/simulated/floor/shuttle/yellow,/area/faction_base/unsc/moonbase/hangar_e)
+"fZ" = (/obj/structure/shuttle/window{tag = "icon-10"; icon_state = "10"; color = "grey"},/turf/simulated/floor/shuttle/yellow,/area/shuttle/unsc_shuttle_supply)
 "ga" = (/obj/machinery/mac_cannon/capacitor{name = "Wireless Transmitter Capacitor"},/obj/structure/window/reinforced/projresist{icon_state = "rwindow"; dir = 1},/turf/simulated/floor/plating,/area/faction_base/unsc/moonbase/MAC)
 "gb" = (/obj/machinery/mac_cannon/capacitor{name = "Wireless Transmitter Capacitor"},/obj/structure/window/reinforced/projresist{icon_state = "rwindow"; dir = 1},/obj/structure/window/reinforced/projresist{icon_state = "rwindow"; dir = 4},/turf/simulated/floor/plating,/area/faction_base/unsc/moonbase/MAC)
 "gc" = (/obj/machinery/mac_cannon/capacitor{name = "Wireless Transmitter Capacitor"},/obj/structure/window/reinforced/projresist{icon_state = "rwindow"; dir = 1},/obj/structure/window/reinforced/projresist{icon_state = "rwindow"; dir = 8},/turf/simulated/floor/plating,/area/faction_base/unsc/moonbase/MAC)
@@ -422,11 +422,8 @@
 "if" = (/obj/machinery/floodlight/active/hi_cap,/turf/simulated/floor/asteroid/planet,/area/faction_base/unsc/moonbase/outside)
 "ig" = (/obj/machinery/light/small{dir = 8},/turf/simulated/floor/pavement/empty,/area/faction_base/unsc/moonbase/defense_mid)
 "ih" = (/obj/machinery/vending/snack,/turf/simulated/floor/tiled,/area/faction_base/unsc/moonbase/central_lobby)
-"ii" = (/turf/simulated/wall/r_wall,/area/faction_base/unsc/moonbase/briefing_b)
-"ij" = (/obj/machinery/door/airlock/halo/maint/moonbase_cassius_maint,/turf/simulated/floor/tiled,/area/faction_base/unsc/moonbase/briefing_b)
 "ik" = (/turf/simulated/floor/tiled,/area/faction_base/unsc/moonbase/briefing_lobby)
 "il" = (/obj/machinery/door/airlock/halo/maint/moonbase_cassius_maint,/turf/simulated/floor/tiled,/area/faction_base/unsc/moonbase/corridor_central)
-"im" = (/turf/simulated/floor/tiled,/area/faction_base/unsc/moonbase/briefing_b)
 "in" = (/obj/machinery/light/spot_cavewall,/turf/simulated/floor/tiled,/area/faction_base/unsc/moonbase/central_lobby)
 "io" = (/obj/structure/destructible/tanktrap,/obj/machinery/light/spot_cavewall{icon_state = "tube1"; dir = 8},/turf/simulated/floor/asteroid/planet,/area/faction_base/unsc/moonbase/outside)
 "ip" = (/obj/structure/destructible/tanktrap,/turf/simulated/floor/asteroid/planet,/area/faction_base/unsc/moonbase/outside)
@@ -517,7 +514,6 @@
 "jW" = (/obj/machinery/mac_cannon/capacitor{name = "Wireless Transmitter Capacitor"},/obj/machinery/light/spot_powerroom{icon_state = "tube1"; dir = 4},/turf/simulated/floor/plating,/area/faction_base/unsc/moonbase/MAC)
 "jX" = (/obj/structure/window/reinforced{dir = 8},/obj/machinery/light/spot_cavewall{icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled,/area/faction_base/unsc/moonbase/central_lobby)
 "jY" = (/obj/machinery/door/airlock/halo/moonbase_cassius_general/cryopod,/turf/simulated/floor/tiled/white,/area/faction_base/unsc/moonbase/central_lobby)
-"jZ" = (/turf/simulated/floor/plating,/obj/effect/shuttle_landmark/unsc_onsite_supply,/turf/simulated/shuttle/wall/corner/smoothwhite/sw,/area/faction_base/unsc/moonbase/hangar_e)
 "ka" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/asteroid/planet,/area/faction_base/unsc/moonbase/outside)
 "kb" = (/obj/structure/window/reinforced{icon_state = "rwindow"; dir = 1},/obj/machinery/camera/autoname/invis/moonbase_cassius,/turf/simulated/floor/wood,/area/faction_base/unsc/moonbase/gym)
 "kc" = (/obj/machinery/light/spot_cavewall{icon_state = "tube1"; dir = 1},/turf/simulated/floor/pavement/empty,/area/faction_base/unsc/moonbase/outside)
@@ -716,14 +712,14 @@ aaacacacacacacacacacacaccrcrcrcrazbIczcBcJcJcJcJcJcLbJfnbMbMbMbMbMbVbObOaAcrjIjI
 aaacacacacacacacacacacacaccrcrcrazbIbwcZbIbIbIbIbIbwbJazbMbMbMpAbMbMdadafkjIjIjIjIbvaKaKaKaKaKaKaKaKaKbTbNbNbNbNhampmphahahahahampmpmrhacucucucucudrlUfEcucucucucuaFrjdjdjdjdjdjdjdjaFbubububuavavfSavavseavavavrSagfGjIjIjIfldNdNbXbXbXbXbXfhcacacafRfOfOfOfPfOfOfQbHcracacacacacacacacacacacacacacacacacaa
 aaacacacacacacacacacacacaccrcrcrazbIbwcZbIbIcObIbIbwbJazbMbMbMbMbMbVbObOaAcrjIjIcraffxaKaKaKhegLaKaKiCafbNbNbNcphampmphamtoCmthampmpmrhahacucucucudrlUfEcucucucuaFaFnWdzdzfTdzdzdznXaFbBbubububYgIavavavavavavavokagcrjIjIcrbpbUbUbWbXbXbXbXficafwcafZfOfOfOfPfOfOfQbHfGacacacacacacacacacacacacacacacacacaa
 aaacacacacacaccracacacacaccrcrfXazpGbwcZbIjJbIbIbIbwdXazdYbMbMeFbMbVbObOaAcrjIjIcrafenenenenafafenenafafcsbNbNdkhampmpmpmpmpmpmpmpmpmrmrhahacucucudrlUfEcucucuelaFdjdjdjdjdjdjdjdjdjaFcvbububuagavgNavbSgNavavavfBagcrjIjIcrbpbUbUbWbXbXbXfjbHeicacafNfOfOfOfPfOfOfQbHcrcracacacacacacacacacacacacacacacacaa
-aaacacacacaccrcrcracacacacaccrcrazbIbwcZdObIbIbIbIbwbJazbMbMbMbMbMbMdadKaAfGjIjIcrafaKaKaKaKafgPaKaKgPafbNbNbNhahaoAmpmpmprwmpmpmpmpshmroDhahahaiGdrlUfEjWelelelaFdjdzdzdzdzdjdzdzdCaFbobububuagagagpCagagagavavavagcrjIjIcrbpdLdNbXbXbXbXbXfhcacacajZbGbGfMfMfMbGdwbHcrcracacacacacacacacacacacacacacacacaa
-aaacacacacaccrcrcracacacacaccrcrazbIbwjsmLmLmLmLmLnbbJazbMbMbMbMbMbVbObOaAcrjIjIcrafaKryfzdcafjUaKrydcafhagJmphampmpmphamvoEzDhamphahahahahahahazohacSelzqelelelaFdmaFaFaFaFdmaFiiiiiibogKbuboaggTongTongUagojrRcIagcrjIjIcrbpbUbUbWbXbXbXbXficacacacacacacacacacacabHcrcracacacacacacacacacacacacacacacacaa
-aaacacacaccrcrcrcracacacacaccrcrazbIbIbwbJbJpUbJbJbJbLazbMbMbMbMbMbVbObOaAcrjIjIcrafaKaKaKaKafjVaKaKjVafmpmpmphampmpmphahahahahamphadpmrdqdphampmphafFelikikikikikikikdsikikikikiiimimbobububuaggWgTrUgTgTpCavavavpCjIjIjIcrbpbUbUbWbXbXbXbXbHcacacaxAfwcacacaxAcacabHcrcracacacacacacacacacacacacacacacacaa
-aaacacacaccrcrifcrcracacacaccrcrazazazazazazazazazazazazaAaAfdfefeaAaAaAaAcrjIjIcrafafafafafafafafafafafmpmpmphampmpmpmpmpmpmpmpmpozmpmpmpmpozmpmphacnelikdvlBlBlBlBlClClClBikdEiiiiiibobububuaggWgTgTgTgUageuhfhgagcrjIjIcrbpbpbpbpfffgfgbpbHbHbHbHbHbHbHbHbHbHbHbHbHcracacacacacacacacacacacacacacacacacaa
-aaacacacacaccrcrcrcrcracacaccrcrcrcrcrcrcrcrhWcrcrcrcrhWcrcrjIjIjIcrhWcrcrcrjIjIcrcrcrcrcrcrcrcrhWcrcrhahZmpmpcXrwmpmxmympmpmpmpmpmpmpmprwzCmpmpmpdxcndAiklHlIlIlIlIlIlIlIlIlJikijfoimilbubudJagagagagagagagagagagagcrjIjIcrcrhWcrcrjIjIjIcrcrcrcrcrhWcrcrcrcrhWcrcrcrcracacacacacacacacacacacacacacacacacaa
-aaacacacacaccrcrcrcrcracacacaccrcrcrcrcrcrcrcrcrcrcrcrcrcrcrjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIfXhampmpmphampmpmAmBmpmpmpmpoBhampmCmwmphampmphacneldFlHlLlIlLlIlLlIlLlIlCikiiiiiibobububuagcrcrcrcrcrhWcrcrcrcrcrjIjIcrcrcrcrcrjIjIjIcrcrcrcrcrcrcrcrcrcrcrcrcrcrcracacacacacacacacacacacacacacacacacaa
-aaacacacacaccrcrcrcrcracacacacaccrcrcrcrcrcrcrcrcrcrcrcrcrcrjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIcrhampmpmphampmpmpzCmpmpmprwmphahahahahahampmpdxcndAikiklHlMlMlMlMlJlJlJdvikiiimimbobububuagcrcrcrcrcrjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIcrcrcrcrcrcrcrcracacacacaccracacacacacacacacacacacacacacacacacacaa
-aaacacacacaccrcrcrcrcracacacacaccrcrcrcrcrcrcrcrcrcrjLcrcrcrcrcrcrcrcrcrcrcrcrcrjIaCjIcrcrcrcrcrjIjIcrhahagJmphadxhahahadPmpmpmpmpmpmpmpmpmpmprwoBhanIelikikdZikikikikdZikikikikiiiiiibogKbuboagcrcrcrcrcrjIjIjIjIjIjIjIjIhXjIjIhXjIjIjIcrcrcrcrcrcrcrcracacacacacacacacacacacacacacacacacacacacacacacacacaa
+aaacacacacaccrcrcracacacacaccrcrazbIbwcZdObIbIbIbIbwbJazbMbMbMbMbMbMdadKaAfGjIjIcrafaKaKaKaKafgPaKaKgPafbNbNbNhahaoAmpmpmprwmpmpmpmpshmroDhahahaiGdrlUfEjWelelelaFdjdzdzdzdzdjdzdzdCaFbobububuagagagpCagagagavavavagcrjIjIcrbpdLdNbXbXbXbXbXfhcacacafobGbGfMfMfMbGdwbHcrcracacacacacacacacacacacacacacacacaa
+aaacacacacaccrcrcracacacacaccrcrazbIbwjsmLmLmLmLmLnbbJazbMbMbMbMbMbVbObOaAcrjIjIcrafaKryfzdcafjUaKrydcafhagJmphampmpmphamvoEzDhamphahahahahahahazohacSelzqelelelaFdmaFaFaFaFdmaFbobobobogKbuboaggTongTongUagojrRcIagcrjIjIcrbpbUbUbWbXbXbXbXficacacacacacacacacacacabHcrcracacacacacacacacacacacacacacacacaa
+aaacacacaccrcrcrcracacacacaccrcrazbIbIbwbJbJpUbJbJbJbLazbMbMbMbMbMbVbObOaAcrjIjIcrafaKaKaKaKafjVaKaKjVafmpmpmphampmpmphahahahahamphadpmrdqdphampmphafFelikikikikikikikdsikikikikbobububobububuaggWgTrUgTgTpCavavavpCjIjIjIcrbpbUbUbWbXbXbXbXbHcacacaxAfwcacacaxAcacabHcrcracacacacacacacacacacacacacacacacaa
+aaacacacaccrcrifcrcracacacaccrcrazazazazazazazazazazazazaAaAfdfefeaAaAaAaAcrjIjIcrafafafafafafafafafafafmpmpmphampmpmpmpmpmpmpmpmpozmpmpmpmpozmpmphacnelikdvlBlBlBlBlClClClBikdEbobobobobububuaggWgTgTgTgUageuhfhgagcrjIjIcrbpbpbpbpfffgfgbpbHbHbHbHbHbHbHbHbHbHbHbHbHcracacacacacacacacacacacacacacacacacaa
+aaacacacacaccrcrcrcrcracacaccrcrcrcrcrcrcrcrhWcrcrcrcrhWcrcrjIjIjIcrhWcrcrcrjIjIcrcrcrcrcrcrcrcrhWcrcrhahZmpmpcXrwmpmxmympmpmpmpmpmpmpmprwzCmpmpmpdxcndAiklHlIlIlIlIlIlIlIlIlJikilcvbuilbubudJagagagagagagagagagagagcrjIjIcrcrhWcrcrjIjIjIcrcrcrcrcrhWcrcrcrcrhWcrcrcrcracacacacacacacacacacacacacacacacacaa
+aaacacacacaccrcrcrcrcracacacaccrcrcrcrcrcrcrcrcrcrcrcrcrcrcrjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIfXhampmpmphampmpmAmBmpmpmpmpoBhampmCmwmphampmphacneldFlHlLlIlLlIlLlIlLlIlCikbobobobobububuagcrcrcrcrcrhWcrcrcrcrcrjIjIcrcrcrcrcrjIjIjIcrcrcrcrcrcrcrcrcrcrcrcrcrcrcracacacacacacacacacacacacacacacacacaa
+aaacacacacaccrcrcrcrcracacacacaccrcrcrcrcrcrcrcrcrcrcrcrcrcrjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIcrhampmpmphampmpmpzCmpmpmprwmphahahahahahampmpdxcndAikiklHlMlMlMlMlJlJlJdvikbobububobububuagcrcrcrcrcrjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIcrcrcrcrcrcrcrcracacacacaccracacacacacacacacacacacacacacacacacacaa
+aaacacacacaccrcrcrcrcracacacacaccrcrcrcrcrcrcrcrcrcrjLcrcrcrcrcrcrcrcrcrcrcrcrcrjIaCjIcrcrcrcrcrjIjIcrhahagJmphadxhahahadPmpmpmpmpmpmpmpmpmpmprwoBhanIelikikdZikikikikdZikikikikbobobobogKbuboagcrcrcrcrcrjIjIjIjIjIjIjIjIhXjIjIhXjIjIjIcrcrcrcrcrcrcrcracacacacacacacacacacacacacacacacacacacacacacacacacaa
 aaacacacacaccrcrcrcrcracacacacacacaccrcrcrcrcrcrcrcrcrcrcrcrcrcrcrcrcrcrfXhThThTeahTeahThThTcrcrjIjIcrcrhWcrcrhWcrcrcrhahahahahahahaebmpebmphahahazoclzqeleleledikedikelelelelelelcrcrhWjIjIhWcrjIjIjIjIjIjIjIcrcreGeGeGeGeGgogoeGeGcrcrcrcrcrcrcrcrcracacacacacacacacacacacacacacacacacacacacacacacacacacaa
 aaacacacacaccrcrcrcrcracacacacacacacacaccrcrcrcrcrcrcrcrcrcrcraccrcrcrcrcrhTsxsCsCfpsCsCsxhTcrcrjIjIjIcrjIjIjIjIcrcrcrcrcrcrhWcrcrcrjIjIjIjIcrhWcrcrcrcrcrhWcrjIjIjIjIcrcrhWcrcrcrcrcrcrjIjIcrjIjIjwjwjwjxjxjIcrcreGkPkPkPkPlclckPeGcrcrcrcrcrcrcrcracacacacacacacacacacacacacacacacacacacacacacacacacacacaa
 aaacacacacacaccrcrcrcrcracacacacacacacacacaccrcrcrcrcrcrcrcracaccrcrcrcrcrhTvksCsCsCsCsCvlhTcrcrjIjwjIjIjIjyjyjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjIjxjxjxjwjwjzjxjIcrcreGkPlclckPlcgrkPeGcrcrcrcrcrcrcrcracacacacacacacacacacacacacacacacacacacacacacacacacacacaa
