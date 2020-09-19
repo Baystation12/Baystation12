@@ -17,7 +17,7 @@
 
 /obj/item/clothing/head/helmet/hellbringer
 	name = "Heat resistant helmet"
-	desc = "A helmet for high-temperature operatons"
+	desc = "A helmet for high-temperature operations"
 	icon = HELLBRINGER_OVERRIDE
 	icon_override = HELLBRINGER_OVERRIDE
 	item_state = "hellbringer_helmet"

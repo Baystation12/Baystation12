@@ -4,7 +4,7 @@
 //NA4 Defoliant Projector
 /obj/item/weapon/gun/projectile/na4_dp
 	name = "\improper NA4/Defoliant Projector"
-	desc = "A standard-issue defoliant projector, capable of using many flamable defoliants to rout entrenched enemies"
+	desc = "A standard-issue defoliant projector, capable of using many flamable defoliants to rout entrenched enemies. Leaks often, requiring the use of a protective suit."
 	icon = 'code/modules/halo/icons/hell.dmi'
 	icon_state = "na4_unloaded"
 	item_state = "na4"
@@ -12,6 +12,8 @@
 	is_heavy = 1
 	handle_casings = CLEAR_CASINGS
 	burst = 3
+	move_delay_malus = 1.0
+	hud_bullet_usebar = 1
 	caliber="flamethrower"
 	load_method = MAGAZINE
 	wielded_item_state="na4_loaded"
@@ -21,6 +23,13 @@
 		slot_l_hand_str = 'code/modules/halo/icons/hell.dmi',
 		slot_r_hand_str = 'code/modules/halo/icons/hell.dmi',
 		)
+
+
+/obj/item/weapon/gun/projectile/na4_dp/handle_post_fire(mob/living/user, atom/target, var/pointblank=0, var/reflex=0)
+	. = ..()
+	if(istype(user))
+		user.fire_stacks += 15
+		user.IgniteMob()
 
 
 /obj/item/projectile/bullet/fire
