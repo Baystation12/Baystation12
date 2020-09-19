@@ -29,7 +29,8 @@
 	check_armour = "energy"
 	embed = 0
 	sharp = 0
-	damage = 30
+	damage = 15 //Low, but has extra flame effects and such.
+	shield_damage = 10
 	icon = 'icons/effects/fire.dmi'
 	icon_state = "fire"
 	kill_count = 10
