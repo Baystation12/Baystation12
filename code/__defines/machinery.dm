@@ -109,11 +109,12 @@ var/list/restricted_camera_networks = list(NETWORK_ERT, NETWORK_MERCENARY, NETWO
 #define SUPERMATTER_ERROR -1		// Unknown status, shouldn't happen but just in case.
 #define SUPERMATTER_INACTIVE 0		// No or minimal energy
 #define SUPERMATTER_NORMAL 1		// Normal operation
-#define SUPERMATTER_NOTIFY 2		// Ambient temp > 80% of CRITICAL_TEMPERATURE
-#define SUPERMATTER_WARNING 3		// Ambient temp > CRITICAL_TEMPERATURE OR integrity damaged
-#define SUPERMATTER_DANGER 4		// Integrity < 50%
-#define SUPERMATTER_EMERGENCY 5		// Integrity < 25%
-#define SUPERMATTER_DELAMINATING 6	// Pretty obvious.
+#define SUPERMATTER_NOTIFY_TEMP 2	// Ambient temp > 80% of CRITICAL_TEMPERATURE
+#define SUPERMATTER_NOTIFY_POWER 3	// EER > 80% of critical_power
+#define SUPERMATTER_WARNING 4		// Ambient temp > CRITICAL_TEMPERATURE OR EER > critical_power OR integrity damaged
+#define SUPERMATTER_DANGER 5		// Integrity < 50%
+#define SUPERMATTER_EMERGENCY 6		// Integrity < 25%
+#define SUPERMATTER_DELAMINATING 7	// Pretty obvious.
 
 #define SUPERMATTER_DATA_EER         "Relative EER"
 #define SUPERMATTER_DATA_TEMPERATURE "Temperature"

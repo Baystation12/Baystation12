@@ -76,6 +76,7 @@
 	phoron_release_modifier = 100000000000
 	oxygen_release_modifier = 100000000000
 	radiation_release_modifier = 1
+	critical_power = 0
 
 /obj/machinery/power/emitter/anchored/on
 	active = 1

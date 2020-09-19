@@ -46,6 +46,8 @@
 	var/power_factor = 1.0
 	var/decay_factor = 700			//Affects how fast the supermatter power decays
 	var/critical_temperature = 5000	//K
+	var/critical_power = 1200 // It shouldn't really be possible to hit this in any standard setup. Curbs powergaming. If 0 or less, disables this feature
+	var/critical_power_degrade_rate = 0.1 // Rate at which integrity degrades relative to current power when exceeding critical power
 	var/charging_factor = 0.05
 	var/damage_rate_limit = 4.5		//damage rate cap at power = 300, scales linearly with power
 
@@ -97,7 +99,8 @@
 	var/disable_adminwarn = FALSE
 
 	var/aw_normal = FALSE
-	var/aw_notify = FALSE
+	var/aw_notify_temp = FALSE
+	var/aw_notify_power = FALSE
 	var/aw_warning = FALSE
 	var/aw_danger = FALSE
 	var/aw_emerg = FALSE
@@ -121,7 +124,8 @@
 
 	// Generic checks, similar to checks done by supermatter monitor program.
 	aw_normal = status_adminwarn_check(SUPERMATTER_NORMAL, aw_normal, "INFO: Supermatter crystal has been energised", FALSE)
-	aw_notify = status_adminwarn_check(SUPERMATTER_NOTIFY, aw_notify, "INFO: Supermatter crystal is approaching unsafe operating temperature", FALSE)
+	aw_notify_temp = status_adminwarn_check(SUPERMATTER_NOTIFY_TEMP, aw_notify_temp, "INFO: Supermatter crystal is approaching unsafe operating temperature", FALSE)
+	aw_notify_power = status_adminwarn_check(SUPERMATTER_NOTIFY_POWER, aw_notify_power, "INFO: Supermatter crystal is approaching unsafe EER", FALSE)
 	aw_warning = status_adminwarn_check(SUPERMATTER_WARNING, aw_warning, "WARN: Supermatter crystal is taking integrity damage", FALSE)
 	aw_danger = status_adminwarn_check(SUPERMATTER_DANGER, aw_danger, "WARN: Supermatter integrity is below 50%", TRUE)
 	aw_emerg = status_adminwarn_check(SUPERMATTER_EMERGENCY, aw_emerg, "CRIT: Supermatter integrity is below 25%", FALSE)
@@ -175,15 +179,28 @@
 	if(get_integrity() < 50)
 		return SUPERMATTER_DANGER
 
-	if((get_integrity() < 100) || (air.temperature > critical_temperature))
+	if((get_integrity() < 100) || (air.temperature > critical_temperature) || is_critical_power())
 		return SUPERMATTER_WARNING
 
 	if(air.temperature > (critical_temperature * 0.8))
-		return SUPERMATTER_NOTIFY
+		return SUPERMATTER_NOTIFY_TEMP
+
+	if (is_critical_power(TRUE))
+		return SUPERMATTER_NOTIFY_POWER
 
 	if(power > 5)
 		return SUPERMATTER_NORMAL
 	return SUPERMATTER_INACTIVE
+
+
+/obj/machinery/power/supermatter/proc/is_critical_power(warning_threshhold = FALSE)
+	if (critical_power <= 0)
+		return FALSE
+
+	if (warning_threshhold)
+		return (power > (critical_power * 0.8))
+
+	return (power > critical_power)
 
 
 /obj/machinery/power/supermatter/proc/explode()
@@ -399,6 +416,10 @@
 		removed.temperature = between(0, removed.temperature, 10000)
 
 		env.merge(removed)
+
+		// EER damage
+		if (is_critical_power())
+			damage = max(0, damage + between(-damage_rate_limit, (power - critical_power) * critical_power_degrade_rate, damage_inc_limit))
 
 	for(var/mob/living/carbon/human/subject in view(src, min(7, round(sqrt(power/6)))))
 		var/obj/item/organ/internal/eyes/eyes = subject.internal_organs_by_name[BP_EYES]

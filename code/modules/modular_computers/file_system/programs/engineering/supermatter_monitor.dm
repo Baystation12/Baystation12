@@ -116,8 +116,10 @@
 		data["SM_integrity"] = min(process_data_output(engine_skill, active.get_integrity()), 100)
 		data["SM_power"] = process_data_output(engine_skill, active.power)
 		data["SM_power_label"] = get_threshhold_color(SUPERMATTER_DATA_EER, active.power)
+		data["SM_power_warn"] = active.power > active.critical_power ? "<span style=\"color: red;\">DANGER</span>" : ""
 		data["SM_ambienttemp"] = process_data_output(engine_skill, air.temperature)
 		data["SM_ambienttemp_label"] = get_threshhold_color(SUPERMATTER_DATA_TEMPERATURE, air.temperature)
+		data["SM_ambienttemp_warn"] = air.temperature > active.critical_temperature ? "<span style=\"color: red;\">DANGER</span>" : ""
 		data["SM_ambientpressure"] = process_data_output(engine_skill, ambient_pressure)
 		data["SM_ambientpressure_label"] = get_threshhold_color(SUPERMATTER_DATA_PRESSURE, ambient_pressure)
 		data["SM_EPR"] = process_data_output(engine_skill, epr)
