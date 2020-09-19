@@ -1,0 +1,4 @@
+author: "Albens"
+delete-after: True
+changes: 
+  - tweak: "Removes SolGov Crew access from Infirmary Staging"
