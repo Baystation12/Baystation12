@@ -74,10 +74,6 @@
 	name = "Orbital Facility Cassius - Firing Range"
 	icon_state = "security"
 
-/area/faction_base/unsc/moonbase/central_lobby
-	name = "Orbital Facility Cassius - Central Lobby"
-	icon_state = "hallC1"
-
 /area/faction_base/unsc/moonbase/corridor_central
 	name = "Orbital Facility Cassius - Central Corridor"
 	icon_state = "hallC2"

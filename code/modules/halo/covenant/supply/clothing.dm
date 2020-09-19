@@ -42,8 +42,7 @@
 	name = "Mixed storage belt (3)"
 	contains = list(
 		/obj/item/weapon/storage/belt/covenant_ammo = 1,
-		/obj/item/weapon/storage/belt/covenant_medic = 1,
-		/obj/item/clothing/accessory/storage/bandolier/covenant = 1)
+		/obj/item/weapon/storage/belt/covenant_medic = 1)
 	cost = 1200
 	containername = "\improper Storage belts (mixed) crate"
 
