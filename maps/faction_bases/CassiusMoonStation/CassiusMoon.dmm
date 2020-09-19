@@ -183,7 +183,7 @@
 "dA" = (/obj/machinery/door/airlock/halo/maint/moonbase_cassius_maint,/turf/simulated/floor/plating,/area/faction_base/unsc/moonbase/briefing_lobby)
 "dB" = (/obj/machinery/cooker/fryer,/turf/simulated/floor/tiled/white,/area/faction_base/unsc/moonbase/kitchen)
 "dC" = (/obj/structure/flora/pottedplant/dead,/turf/simulated/floor/tiled,/area/faction_base/unsc/moonbase/briefing_a)
-"dD" = (/obj/structure/table/reinforced,/obj/machinery/microwave,/obj/machinery/light/small{icon_state = "bulb1"; dir = 1},/turf/simulated/floor/tiled/white,/area/faction_base/unsc/moonbase/kitchen)
+"dD" = (/obj/structure/table/reinforced,/obj/machinery/microwave,/obj/machinery/light/small{icon_state = "bulb1"; dir = 1},/obj/item/clothing/head/chefhat,/turf/simulated/floor/tiled/white,/area/faction_base/unsc/moonbase/kitchen)
 "dE" = (/obj/machinery/light{dir = 4},/turf/simulated/floor/tiled,/area/faction_base/unsc/moonbase/briefing_lobby)
 "dF" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/faction_base/unsc/moonbase/briefing_lobby)
 "dG" = (/obj/machinery/door/airlock/glass/cargo_shuttle{name = "Shuttle Access"; req_access = list(317)},/turf/simulated/floor/shuttle/yellow,/area/shuttle/unsc_shuttle_supply)
