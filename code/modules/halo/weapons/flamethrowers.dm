@@ -24,13 +24,12 @@
 		slot_r_hand_str = 'code/modules/halo/icons/hell.dmi',
 		)
 
-
+//This is mostly just so you can't use the flamethrower without proper protection.//
 /obj/item/weapon/gun/projectile/na4_dp/handle_post_fire(mob/living/user, atom/target, var/pointblank=0, var/reflex=0)
 	. = ..()
 	if(istype(user))
-		user.fire_stacks += 15
+		user.fire_stacks += 10
 		user.IgniteMob()
-
 
 /obj/item/projectile/bullet/fire
 	name = "Napalm burst"
