@@ -1,7 +1,0 @@
-author: "Hubblenaut"
-delete-after: True
-changes: 
-  - rscadd: "Paint sprayers will now be able to paint pipes."
-  - tweak: "Pipes can now be painted in any color."
-  - tweak: "Adds an 'remove top decal' option to paint sprayers."
-  - rscdel: "Removed pipe painters from the game."

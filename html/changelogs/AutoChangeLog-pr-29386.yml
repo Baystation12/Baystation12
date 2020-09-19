@@ -1,4 +1,0 @@
-author: "Hubblenaut"
-delete-after: True
-changes: 
-  - tweak: "NTOS progams will no longer start when there's no network connection."
