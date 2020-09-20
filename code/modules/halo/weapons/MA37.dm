@@ -2,6 +2,7 @@
 /obj/item/weapon/gun/projectile/ma37_ar
 	name = "\improper MA37 Assault Rifle"
 	desc = "Also formally known as the MA5. Takes 7.62mm ammo."
+	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "MA37"
 	item_state = "ma37"
 	caliber = "7.62mm"

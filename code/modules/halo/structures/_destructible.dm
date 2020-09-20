@@ -340,6 +340,8 @@
 
 /obj/structure/destructible/MouseDrop_T(atom/movable/target, mob/user)
 	if(climbable && istype(target))
+		if(target.anchored)
+			to_chat(user,"<span class = 'notice'>You can't move [target]!</span>")
 		if(target == user)
 			structure_climb(user)
 		else

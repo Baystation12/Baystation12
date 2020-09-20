@@ -2,6 +2,8 @@
 
 /obj/effect/overmap/complex046
 
+/obj/effect/overmap/unsc_cassius_moon
+
 /obj/effect/overmap/sector/exo_depot
 	name = "KS7-535"
 	icon = 'ks7_sector_icon.dmi'
@@ -13,7 +15,7 @@
 
 	map_bounds = list(1,150,150,1) //Format: (TOP_LEFT_X,TOP_LEFT_Y,BOTTOM_RIGHT_X,BOTTOM_RIGHT_Y)
 
-	overmap_spawn_near_me = list(/obj/effect/overmap/ship/unsc_odp_cassius)
+	overmap_spawn_near_me = list(/obj/effect/overmap/ship/unsc_odp_cassius,/obj/effect/overmap/unsc_cassius_moon)
 	overmap_spawn_in_me = list(/obj/effect/overmap/complex046)
 
 	parent_area_type = /area/exo_ice_facility

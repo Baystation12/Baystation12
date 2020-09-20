@@ -201,14 +201,15 @@
 					if(!past_damage_threshold(4))
 						take_damage(2)
 					if(prob(15))
-						owner.confused += rand(1,3)
+						var/newdizzy = rand(115,120) //Life tick removes 3 dizziness, we want this to last only 4-5 seconds
+						owner.make_dizzy(max(0,newdizzy - owner.dizziness))// we don't want to increase dizziness, only set it to a max
 						to_chat(owner, "<span class='warning'>You feel very [pick("dizzy","woozy","faint")]...</span>")
 				if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
 					owner.eye_blurry = max(owner.eye_blurry,6)
 					if(!past_damage_threshold(6))
 						take_damage(2)
 					if(prob(15))
-						owner.Paralyse(3,5)
+						owner.Stun(2)
 						to_chat(owner, "<span class='warning'>You feel extremely [pick("dizzy","woozy","faint")]...</span>")
 				if(-(INFINITY) to BLOOD_VOLUME_SURVIVE) // Also see heart.dm, being below this point puts you into cardiac arrest.
 					owner.eye_blurry = max(owner.eye_blurry,6)

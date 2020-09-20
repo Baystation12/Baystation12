@@ -4,7 +4,7 @@
 //NA4 Defoliant Projector
 /obj/item/weapon/gun/projectile/na4_dp
 	name = "\improper NA4/Defoliant Projector"
-	desc = "A standard-issue defoliant projector, capable of using many flamable defoliants to rout entrenched enemies"
+	desc = "A standard-issue defoliant projector, capable of using many flamable defoliants to rout entrenched enemies. Leaks often, requiring the use of a protective suit."
 	icon = 'code/modules/halo/icons/hell.dmi'
 	icon_state = "na4_unloaded"
 	item_state = "na4"
@@ -12,16 +12,30 @@
 	is_heavy = 1
 	handle_casings = CLEAR_CASINGS
 	burst = 3
+	move_delay_malus = 1.0
+	hud_bullet_usebar = 1
 	caliber="flamethrower"
+	one_hand_penalty = 2
 	load_method = MAGAZINE
+	magazine_type = /obj/item/ammo_magazine/na4_tank
+	allowed_magazines = list(/obj/item/ammo_magazine/na4_tank)
 	wielded_item_state="na4_loaded"
 	fire_sound = 'sound/effects/extinguish.ogg'
 
 	item_icons = list(
-		slot_l_hand_str = 'code/modules/halo/icons/hell.dmi',
-		slot_r_hand_str = 'code/modules/halo/icons/hell.dmi',
+		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
+		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
+		slot_back_str = 'code/modules/halo/weapons/icons/Back_Weapons.dmi',
+		slot_s_store_str = 'code/modules/halo/weapons/icons/Armor_Weapons.dmi',
 		)
 
+//This is mostly just so you can't use the flamethrower without proper protection.//
+//Amusingly, super prolonged firing also literally overheats you, as you surpass your armour's protection.//
+/obj/item/weapon/gun/projectile/na4_dp/handle_post_fire(mob/living/user, atom/target, var/pointblank=0, var/reflex=0)
+	. = ..()
+	if(istype(user))
+		user.adjust_fire_stacks(0.2)
+		user.IgniteMob()
 
 /obj/item/projectile/bullet/fire
 	name = "Napalm burst"
@@ -29,16 +43,17 @@
 	check_armour = "energy"
 	embed = 0
 	sharp = 0
-	damage = 30
+	damage = 20 //Low, but has extra flame effects and such.
+	shield_damage = 10
 	icon = 'icons/effects/fire.dmi'
 	icon_state = "fire"
-	kill_count = 10
+	kill_count = 10 //No sniping!
 
 /obj/item/projectile/bullet/fire/attack_mob(var/mob/living/carbon/C)
 	damage_type = BURN
 	damtype = BURN
 	if(istype(C))
-		C.fire_stacks += 10
+		C.adjust_fire_stacks(1)
 		C.IgniteMob()
 		if(isturf(C.loc))
 			var/turf/T = get_turf(C.loc)

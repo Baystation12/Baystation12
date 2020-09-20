@@ -2,6 +2,7 @@
 /obj/item/weapon/gun/projectile/ma3_ar
 	name = "\improper MA3 Assault Rifle"
 	desc = "An obsolete military assault rifle commonly available on the black market. Takes 7.62mm ammo."
+	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "MA3"
 	item_state = "ma3"
 	magazine_type = /obj/item/ammo_magazine/ma3/m118

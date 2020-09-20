@@ -271,7 +271,9 @@
 		return 1
 
 	if(HUSK in mutations)
-		fire_stacks = max(0, fire_stacks - 0.1) //I guess the fire runs out of fuel eventually
+		fire_stacks = max(0, fire_stacks - 0.3) //I guess the fire runs out of fuel eventually
+	else
+		fire_stacks = max(0,fire_stacks - 0.1)
 
 	var/datum/gas_mixture/G = loc.return_air() // Check if we're standing in an oxygenless environment
 	if(G.get_by_flag(XGM_GAS_OXIDIZER) < 1)

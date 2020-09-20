@@ -17,7 +17,7 @@
 
 /obj/item/clothing/head/helmet/hellbringer
 	name = "Heat resistant helmet"
-	desc = "A helmet for high-temperature operatons"
+	desc = "A helmet for high-temperature operations"
 	icon = HELLBRINGER_OVERRIDE
 	icon_override = HELLBRINGER_OVERRIDE
 	item_state = "hellbringer_helmet"
@@ -32,6 +32,7 @@
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.7
 	w_class = 3
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical/odst_hud
 
 /obj/item/clothing/shoes/hellbringer
 	name = "Heat-proof boots"
@@ -56,6 +57,9 @@
 	desc = "Heat-proof gloves, designed to perfectly support a flamethrower"
 	icon_override = HELLBRINGER_OVERRIDE
 	icon = HELLBRINGER_OVERRIDE
+	body_parts_covered = HANDS
+	heat_protection = HANDS
+	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	icon_state = "hellbringer_gloves"
 	item_state = "hellbringer_gloves"
 
@@ -68,7 +72,7 @@
 	icon_state = "hellbringer_oversuit"
 	blood_overlay_type = "armor"
 	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
-	heat_protection = ARMS|UPPER_TORSO|LOWER_TORSO
+	heat_protection = ARMS|UPPER_TORSO|LOWER_TORSO|LEGS
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	armor = list(melee = 45, bullet = 40, laser = 45, energy = 45, bomb = 30, bio = 25, rad = 25) //Increased energy resistance for less in others
 	armor_thickness = 20

@@ -98,10 +98,11 @@
 					bulletsprites += bulletsprite
 					to_chat(user,bulletsprite)
 		else
-			var/new_pct = min(1,max(0,ammo_loaded/max_ammo))
-			var/matrix/m = new(base_transform)
-			m.Scale(new_pct,1)
-			ammobar.transform = m
+			if(max_ammo)
+				var/new_pct = min(1,max(0,ammo_loaded/max_ammo))
+				var/matrix/m = new(base_transform)
+				m.Scale(new_pct,1)
+				ammobar.transform = m
 
 /obj/screen/weapondisplay/Destroy()
 	for(var/bullet in bulletsprites)

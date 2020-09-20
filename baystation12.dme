@@ -2027,6 +2027,7 @@
 #include "code\modules\halo\squads\squad_camera_console.dm"
 #include "code\modules\halo\squads\waypoint_object.dm"
 #include "code\modules\halo\storage\IFAK.dm"
+#include "code\modules\halo\storage\pocketstorage.dm"
 #include "code\modules\halo\structures\_destructible.dm"
 #include "code\modules\halo\structures\atmos_machinery.dm"
 #include "code\modules\halo\structures\barbedwire.dm"

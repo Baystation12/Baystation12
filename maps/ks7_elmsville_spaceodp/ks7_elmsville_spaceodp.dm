@@ -1,9 +1,8 @@
-//THIS IS ONLY FOR THE PVP GAMEMODE. PVE/RP FOCUS IS OBTAINABLE THROUGH FIRST CONTACT INCLUDES.//
 #if !defined(using_map_DATUM)
 
 	#define using_map_DATUM /datum/map/ks7_elmsville
 
-	#include "unit_tests.dm"
+	#include "../ks7_elmsville/unit_tests.dm"
 
 	#include "../../code/modules/halo/covenant/invasion_scanner.dm"
 
@@ -12,7 +11,7 @@
 
 	#include "../Admin Planet/includes.dm"
 
-	#include "../faction_bases/CassiusMoonStation/cassiusmoon.dm"
+	#include "../faction_bases/ODP_Cassius/ODP_Cassius.dm"
 
 	#include "../CRS_Unyielding_Transgression/includes.dm"
 
@@ -29,12 +28,11 @@
 	#include "../../code/modules/halo/supply/oni.dm"
 	#include "../../code/modules/halo/supply/covenant.dm"
 
-	#include "includes_pvp.dm"
+	#include "../ks7_elmsville/includes_pvp.dm"
 
 	#include "../faction_bases/complex046/complex046.dm"
 
 #elif !defined(MAP_OVERRIDE)
 
-	#warn A map has already been included, ignoring KS7 Elmsville
+	#warn A map has already been included, ignoring KS7 Elmsville, space ODP
 #endif
-
