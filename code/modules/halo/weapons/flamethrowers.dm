@@ -15,7 +15,10 @@
 	move_delay_malus = 1.0
 	hud_bullet_usebar = 1
 	caliber="flamethrower"
+	one_hand_penalty = 2
 	load_method = MAGAZINE
+	magazine_type = /obj/item/ammo_magazine/na4_tank
+	allowed_magazines = list(/obj/item/ammo_magazine/na4_tank)
 	wielded_item_state="na4_loaded"
 	fire_sound = 'sound/effects/extinguish.ogg'
 
