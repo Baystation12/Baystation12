@@ -19,6 +19,8 @@
 	obj_flags = OBJ_FLAG_ANCHORABLE
 	var/list/can_hold = list(
 		/obj/item/weapon/paper,
+		/obj/item/document/generic,
+		/obj/item/documents/generic,
 		/obj/item/weapon/folder,
 		/obj/item/weapon/photo,
 		/obj/item/weapon/paper_bundle,
