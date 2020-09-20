@@ -31,7 +31,6 @@
 	title = "Marine Sergeant"
 	total_positions = 1
 	spawn_positions = 1
-	spawn_positions = 1.5
 	department_flag = COM
 	outfit_type = /decl/hierarchy/outfit/job/unsc/marine/e5
 	alt_titles = list(\
@@ -55,4 +54,4 @@
 	outfit_type = /decl/hierarchy/outfit/job/unsc/marine/hellbringer
 	alt_titles = list("Flamethrower Operator" = /decl/hierarchy/outfit/job/unsc/marine/hellbringer)
 	access = list(access_unsc,access_unsc_armoury,access_unsc_marine,access_unsc_specialist)
-	faction_whitelist = "unsc"
+	faction_whitelist = "UNSC"

@@ -17,9 +17,6 @@
 	fire_sound = 'code/modules/halo/sounds/MA3firefix.ogg'
 	reload_sound = 'code/modules/halo/sounds/MA3reload.ogg'
 
-	attachment_slots = list("underbarrel rail","sight","barrel")
-	attachments_on_spawn = list(/obj/item/weapon_attachment/light/flashlight)
-
 
 /obj/item/weapon/gun/projectile/ma3/update_icon()
 	. = ..()

@@ -246,6 +246,7 @@
 	desc = "A long haft and a heavy head with a tungsten-alloy blade on the reverse end. The short-range gravity field in the head of the weapon has been disabled."
 	icon_state = "gravlesshammer"
 	force = 45
+	lunge_dist = 3
 	hitsound = "swing_hit"
 	item_state_slots = list(slot_l_hand_str = "gravlesshammer", slot_r_hand_str = "gravlesshammer", slot_back_str = "back_hammer")
 

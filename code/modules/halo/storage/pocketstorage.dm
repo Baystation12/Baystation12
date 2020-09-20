@@ -50,6 +50,7 @@
 	name = "Tactical Hardcase (Grenades)"
 	icon_state = "hardcase_grenades"
 	can_hold = list(/obj/item/weapon/grenade)
+	cant_hold = list()
 
 /obj/item/weapon/storage/pocketstore/hardcase/grenade/cov
 	icon_state = "hardcase_cov_grenades"
