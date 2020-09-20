@@ -103,15 +103,14 @@
 
 	minimize_program(user)
 
-	P.computer = src
 	if(P in running_programs)
 		P.program_state = PROGRAM_STATE_ACTIVE
 		active_program = P
 	else if(P.can_run(user, 1))
 		P.on_startup(user, src)
 		active_program = P
-		running_programs |= P
 
+	running_programs |= P
 	update_host_icon()
 	return 1
 
