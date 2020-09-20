@@ -219,14 +219,11 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/fifthdeck/aftstarboard)
 "ax" = (
-/obj/machinery/atmospherics/binary/pump{
+/obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4;
-	name = "Chamber Input"
+	icon_state = "intact"
 	},
-/obj/machinery/button/blast_door{
-	id_tag = "toxin_exhaust";
-	pixel_y = -24
-	},
+/obj/machinery/portable_atmospherics/powered/pump,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/toxins)
 "ay" = (
@@ -475,6 +472,25 @@
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/analysis)
+"aV" = (
+/obj/effect/wallframe_spawn/reinforced_phoron/titanium,
+/obj/machinery/door/firedoor,
+/obj/machinery/atmospherics/pipe/simple/visible{
+	dir = 4;
+	icon_state = "intact"
+	},
+/obj/machinery/meter,
+/obj/effect/paint/silver,
+/obj/machinery/door/blast/regular{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "toxins_shutters";
+	name = "Mixing Chamber Blast Shutters";
+	opacity = 0
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/shuttle/petrov/toxins)
 "aW" = (
 /turf/simulated/wall/prepainted,
 /area/maintenance/fifthdeck/aftstarboard)
@@ -508,6 +524,20 @@
 /obj/machinery/space_heater,
 /turf/simulated/floor/tiled/dark,
 /area/quartermaster/expedition/atmos)
+"be" = (
+/obj/effect/wallframe_spawn/reinforced_phoron/titanium,
+/obj/machinery/door/firedoor,
+/obj/effect/paint/silver,
+/obj/machinery/door/blast/regular{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "toxins_shutters";
+	name = "Mixing Chamber Blast Shutters";
+	opacity = 0
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/shuttle/petrov/toxins)
 "bf" = (
 /obj/machinery/light/spot{
 	pixel_y = 32
@@ -553,6 +583,23 @@
 /obj/effect/paint/hull,
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/crew)
+"bl" = (
+/obj/machinery/atmospherics/omni/mixer{
+	tag_east = 2;
+	tag_north = 1;
+	tag_north_con = 0.33;
+	tag_south = 1;
+	tag_south_con = 0.33;
+	tag_west = 1;
+	tag_west_con = 0.34
+	},
+/obj/machinery/button/ignition{
+	id_tag = "toxlab";
+	pixel_w = 6;
+	pixel_z = -23
+	},
+/turf/simulated/floor/tiled/white/monotile,
+/area/shuttle/petrov/toxins)
 "bm" = (
 /obj/effect/floor_decal/industrial/loading{
 	dir = 8;
@@ -565,6 +612,25 @@
 /obj/structure/handrai,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/cargo)
+"bn" = (
+/obj/machinery/atmospherics/binary/pump{
+	dir = 4;
+	name = "Chamber Input"
+	},
+/obj/machinery/button/blast_door{
+	id_tag = "toxin_exhaust";
+	name = "Chamber Vent";
+	pixel_w = 8;
+	pixel_y = -24
+	},
+/obj/machinery/button/blast_door{
+	id_tag = "toxins_shutters";
+	name = "Chamber Protective Shutters";
+	pixel_w = -5;
+	pixel_z = -24
+	},
+/turf/simulated/floor/tiled/white/monotile,
+/area/shuttle/petrov/toxins)
 "bo" = (
 /obj/machinery/light/spot{
 	pixel_y = 32
@@ -608,6 +674,23 @@
 	},
 /turf/simulated/floor/plating,
 /area/guppy_hangar/start)
+"bs" = (
+/obj/machinery/atmospherics/unary/outlet_injector{
+	dir = 8;
+	frequency = 1441;
+	id = "toxins_in"
+	},
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging{
+	dir = 5;
+	icon_state = "intact"
+	},
+/obj/machinery/sparker{
+	id_tag = "toxlab";
+	pixel_w = 1;
+	pixel_z = -23
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/shuttle/petrov/toxins)
 "bt" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/cyan{
@@ -10252,18 +10335,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/shuttle/petrov/security)
-"xe" = (
-/obj/machinery/atmospherics/omni/mixer{
-	tag_east = 2;
-	tag_north = 1;
-	tag_north_con = 0.33;
-	tag_south = 1;
-	tag_south_con = 0.33;
-	tag_west = 1;
-	tag_west_con = 0.34
-	},
-/turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/toxins)
 "xg" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
@@ -11226,18 +11297,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/shuttle/petrov/maint)
-"AC" = (
-/obj/machinery/atmospherics/unary/outlet_injector{
-	dir = 8;
-	frequency = 1441;
-	id = "toxins_in"
-	},
-/obj/machinery/atmospherics/pipe/simple/heat_exchanging{
-	dir = 5;
-	icon_state = "intact"
-	},
-/turf/simulated/floor/reinforced/airless,
-/area/shuttle/petrov/toxins)
 "AE" = (
 /obj/machinery/light{
 	dir = 1;
@@ -11626,12 +11685,6 @@
 /obj/item/stack/material/phoron,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/shuttle/petrov/analysis)
-"Cj" = (
-/obj/effect/wallframe_spawn/reinforced_phoron/titanium,
-/obj/machinery/door/firedoor,
-/obj/effect/paint/silver,
-/turf/simulated/floor/reinforced/airless,
-/area/shuttle/petrov/toxins)
 "Cm" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/guppy{
 	dir = 4;
@@ -15563,17 +15616,6 @@
 /obj/effect/paint/silver,
 /turf/simulated/floor/plating,
 /area/shuttle/petrov/equipment)
-"Qw" = (
-/obj/effect/wallframe_spawn/reinforced_phoron/titanium,
-/obj/machinery/door/firedoor,
-/obj/machinery/atmospherics/pipe/simple/visible{
-	dir = 4;
-	icon_state = "intact"
-	},
-/obj/machinery/meter,
-/obj/effect/paint/silver,
-/turf/simulated/floor/reinforced/airless,
-/area/shuttle/petrov/toxins)
 "Qz" = (
 /obj/structure/cable/cyan{
 	d1 = 4;
@@ -17466,14 +17508,6 @@
 /obj/machinery/atmospherics/portables_connector,
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/phoron)
-"XS" = (
-/obj/machinery/atmospherics/pipe/simple/visible{
-	dir = 4;
-	icon_state = "intact"
-	},
-/obj/structure/table/standard,
-/turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/toxins)
 "XT" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -48110,7 +48144,7 @@ yO
 UX
 vC
 CG
-xe
+bl
 Wl
 ZB
 Qk
@@ -48312,7 +48346,7 @@ Yp
 yO
 XB
 Xq
-ax
+bn
 Wl
 NX
 NG
@@ -48712,11 +48746,11 @@ QR
 CS
 NW
 ay
-XS
+ax
 aj
-Qw
-Cj
-Qw
+aV
+be
+aV
 Rt
 Wl
 Wl
@@ -48918,7 +48952,7 @@ af
 LG
 Uq
 az
-AC
+bs
 Rt
 Wl
 Wl
