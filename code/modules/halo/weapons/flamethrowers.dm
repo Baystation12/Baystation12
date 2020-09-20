@@ -30,10 +30,11 @@
 		)
 
 //This is mostly just so you can't use the flamethrower without proper protection.//
+//Amusingly, super prolonged firing also literally overheats you, as you surpass your armour's protection.//
 /obj/item/weapon/gun/projectile/na4_dp/handle_post_fire(mob/living/user, atom/target, var/pointblank=0, var/reflex=0)
 	. = ..()
 	if(istype(user))
-		user.fire_stacks += 10
+		user.adjust_fire_stacks(0.2)
 		user.IgniteMob()
 
 /obj/item/projectile/bullet/fire
@@ -52,7 +53,7 @@
 	damage_type = BURN
 	damtype = BURN
 	if(istype(C))
-		C.fire_stacks += 10
+		C.adjust_fire_stacks(1)
 		C.IgniteMob()
 		if(isturf(C.loc))
 			var/turf/T = get_turf(C.loc)
