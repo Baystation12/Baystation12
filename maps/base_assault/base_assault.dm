@@ -19,7 +19,7 @@
 	GLOB.UNSC.has_base = 1
 
 /datum/game_mode/base_assault/check_finished()
-	if(world.time > STALEMATE_TIMER)
+	if(world.time >= stalemate_at)
 		winning_side = "Nobody. Stalemate!"
 		return 1
 	var/obj/effect/overmap/base = GLOB.UNSC.get_base()
