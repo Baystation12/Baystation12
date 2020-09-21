@@ -92,6 +92,8 @@
 #endif
 
 //Spawn In Overrides//
+/obj/effect/overmap/complex046
+
 /obj/effect/overmap/unsc_cassius_moon
 	overmap_spawn_in_me = list(/obj/effect/overmap/complex046)
 
