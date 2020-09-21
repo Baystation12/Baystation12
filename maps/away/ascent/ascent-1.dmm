@@ -4856,6 +4856,15 @@
 /obj/machinery/portable_atmospherics/canister/methyl_bromide,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/shuttle_starboard)
+"Er" = (
+/obj/effect/wallframe_spawn/reinforced_phoron/ascent,
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/ascent,
+/area/ship/ascent/shuttle_port)
 "Es" = (
 /obj/structure/ore_box{
 	color = "PURPLE";
@@ -13471,7 +13480,7 @@ cN
 cN
 cN
 Ld
-dV
+Er
 cN
 cN
 cN
