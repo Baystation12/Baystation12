@@ -1,7 +1,7 @@
 
 #define SCANNER_TICK_DELAY 10 SECONDS
 #define BASE_SCANNER_DESTROYABLE_AMOUNT 4
-#define SCAN_JAM_LOC_NAME "Orbital Defense Platform"
+#define SCAN_JAM_LOC_NAME "Orbital Facility"
 
 #include "objectives.dm"
 
