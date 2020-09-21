@@ -232,7 +232,7 @@ macro "macro"
 	elem 
 		name = "Tab"
 		command = ".winset \"mainwindow.macro=hotkeymode hotkey_toggle.is-checked=true mapwindow.map.focus=true input.background-color=#f0f0f0\""
-	elem
+	elem 
 		name = "Center+REP"
 		command = ".center"
 	elem 
@@ -411,7 +411,7 @@ macro "hotkeymode"
 	elem 
 		name = "Tab"
 		command = ".winset \"mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true input.background-color=#d3b5b5\""
-	elem
+	elem 
 		name = "Center+REP"
 		command = ".center"
 	elem 
@@ -632,7 +632,7 @@ macro "hotkeymode"
 		command = "msay"
 	elem 
 		name = "F6"
-		command = "Player-Panel-New"
+		command = "Player-Panel"
 	elem 
 		name = "F7"
 		command = "Admin-PM"
@@ -1013,7 +1013,6 @@ window "mainwindow"
 		command = ".winset \"saybutton.is-checked=true?input.command=\"!say \\\"\" macrobutton.is-checked=false:input.command=\""
 		button-type = pushbox
 
-
 window "mapwindow"
 	elem "mapwindow"
 		type = MAIN
@@ -1049,7 +1048,6 @@ window "mapwindow"
 		is-visible = false
 		is-disabled = true
 		saved-params = ""
-		auto-format = false
 
 window "outputwindow"
 	elem "outputwindow"
@@ -1058,7 +1056,6 @@ window "outputwindow"
 		size = 640x480
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
 		statusbar = false
@@ -1075,7 +1072,6 @@ window "outputwindow"
 		background-color = #ffffff
 		is-visible = false
 		saved-params = ""
-		auto-format = false
 	elem "output"
 		type = OUTPUT
 		pos = 0,0
@@ -1084,7 +1080,6 @@ window "outputwindow"
 		anchor2 = 100,100
 		is-default = true
 		saved-params = ""
-	
 
 window "rpane"
 	elem "rpane"
@@ -1219,3 +1214,4 @@ window "infowindow"
 		highlight-color = #00aa00
 		on-show = ".winset\"rpane.infob.is-visible=true;rpane.infob.pos=65,0 rpane.textb.is-visible=true rpane.infob.is-checked=true rpane.rpanewindow.pos=0,30 rpane.rpanewindow.size=0x0 rpane.rpanewindow.left=infowindow\""
 		on-hide = ".winset\"rpane.infob.is-visible=false;rpane.textb.is-visible=true rpane.rpanewindow.pos=0,30 rpane.rpanewindow.size=0x0 rpane.rpanewindow.left=\""
+
