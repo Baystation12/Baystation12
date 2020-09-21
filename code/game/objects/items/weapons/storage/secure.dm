@@ -120,8 +120,8 @@
 					src.attack_self(M)
 				return
 		return
-		
-	
+
+
 /obj/item/weapon/storage/secure/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1)
@@ -198,3 +198,8 @@
 /obj/item/weapon/storage/secure/safe/HoS/New()
 	..()
 	//new /obj/item/weapon/storage/lockbox/clusterbang(src) This item is currently broken... and probably shouldn't exist to begin with (even though it's cool)
+
+/obj/item/weapon/storage/secure/AltClick(/mob/user)
+	if (locked)
+		return
+	..()
