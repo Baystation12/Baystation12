@@ -25,7 +25,7 @@ SUBSYSTEM_DEF(kv)
 				return
 		checking = 0
 
-/datum/controller/subsystem/kv/proc/Put(key, value, datum/instance = src)
+/datum/controller/subsystem/kv/proc/Put(datum/instance, key, value)
 	var/W = weakref(instance)
 	if (!W)
 		return FALSE
@@ -35,7 +35,7 @@ SUBSYSTEM_DEF(kv)
 	pool[key] = value
 	return TRUE
 
-/datum/controller/subsystem/kv/proc/Get(key, datum/instance = src)
+/datum/controller/subsystem/kv/proc/Get(datum/instance, key)
 	var/W = weakref(instance)
 	if (!W)
 		return
