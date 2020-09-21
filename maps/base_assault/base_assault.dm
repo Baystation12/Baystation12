@@ -22,12 +22,12 @@
 	if(world.time > STALEMATE_TIMER)
 		winning_side = "Nobody. Stalemate!"
 		return 1
-	var/obj/base = GLOB.UNSC.get_base()
-	if(!base | !base.loc)
+	var/obj/effect/overmap/base = GLOB.UNSC.get_base()
+	if(!base || !base.loc || base.superstructure_failing )
 		winning_side = "The Covenant"
 		return 1
 	base = GLOB.COVENANT.get_flagship()
-	if(!base | !base.loc)
+	if(!base || !base.loc || base.superstructure_failing)
 		winning_side = "The UNSC"
 		return 1
 	return 0

@@ -2,6 +2,7 @@
 /obj/item/weapon/storage/pocketstore
 	w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_POCKET | SLOT_BELT
+	allow_pocket_use = 1
 
 /obj/item/weapon/storage/pocketstore/magnetic_holster
 	name = "Magnetic Holster Set (Guns)"
