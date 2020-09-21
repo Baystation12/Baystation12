@@ -12,6 +12,18 @@
 		/decl/item_modifier/space_suit/hazard
 	)
 
+/obj/machinery/suit_cycler/engineering/salvage
+	name = "Salvage suit cycler"
+	model_text = "Salvage"
+	available_modifications = list(
+		/decl/item_modifier/space_suit/salvage
+	)
+	species = list(
+		SPECIES_HUMAN,
+		SPECIES_SKRELL,
+		SPECIES_UNATHI
+	)
+
 /obj/machinery/suit_cycler/mining
 	name = "Mining suit cycler"
 	model_text = "Mining"
