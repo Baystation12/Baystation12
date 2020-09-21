@@ -12,7 +12,10 @@
 		"Aquila" = list("nav_hangar_aquila"),
 		"Trichoptera" = list("nav_trichoptera_altdock"), //restricts Trichoptera specific docking waypoint on deck 4 portside
 		"Skrellian Scout" = list("nav_skrellscout_dock"), //restricts Skrell Scoutship specific docking waypoint on deck 4 portside
-		"Rescue" = list("nav_ert_dock") //restricts ERT Shuttle specific docking waypoint on deck 4 portside
+		"Rescue" = list("nav_ert_dock"), //restricts ERT Shuttle specific docking waypoint on deck 4 portside
+		"ITV The Reclaimer" = list("nav_hangar_gantry_torch"), //gantry shuttles
+		"ITV Vulcan" = list("nav_hangar_gantry_torch_two"),
+		"ITV Spiritus" = list("nav_hangar_gantry_torch_three")
 	)
 
 	initial_generic_waypoints = list(
