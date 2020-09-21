@@ -882,6 +882,7 @@
 /area/rnd/canister
 	name = "\improper Canister Storage"
 	icon_state = "toxstorage"
+	req_access = list(access_tox_storage)
 
 /area/rnd/development
 	name = "\improper Fabricator Lab"
