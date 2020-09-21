@@ -1,7 +1,0 @@
-author: "RustingWithYou"
-delete-after: True
-changes: 
-  - maptweak: "adds an igniter and window shutters to the Petrov toxins mixing chamber"
-  - maptweak: "adds an air pump to the Petrov toxins lab for filling tanks"
-  - maptweak: "Canister Storage now requires access_toxstorage to enter"
-  - tweak: "Scientists now have access to Petrov Maintenance"

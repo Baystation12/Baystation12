@@ -1,8 +1,0 @@
-author: "Albens"
-delete-after: True
-changes: 
-  - tweak: "The ITV Vuclan, and the ITV The Reclaimer have been remade based on their playstyle and use ingame."
-  - rscadd: "The Salvage Gantry now has ITV Spiritus, a local-transit only atmospheric harvester."
-  - tweak: "All Salvage Gantry shuttles and the Gantry ship have had their overmap behavior and handling adjusted."
-  - rscadd: "Various shuttle landing locations around the Gantry have been added."
-  - rscadd: "Gantry shuttles can now 'dock' at the Torch."
