@@ -150,7 +150,7 @@
 
 /datum/species/human/booster/proc/get_mod(var/mob/living/carbon/human/booster, var/mod_type)
 	if(istype(booster) && !booster.isSynthetic())
-		var/list/mods = SSkv.Get("mods", booster)
+		var/list/mods = SSkv.Get(booster, "mods")
 		if (!length(mods))
 			mods = list(
 				"brute" = MOD_BASE + rand() * MOD_VARIANCE,
@@ -159,7 +159,7 @@
 				"radiation" = MOD_BASE + rand() * MOD_VARIANCE,
 				"slowdown" = pick(-0.5, 0, 0.5)
 			)
-			SSkv.Put("mods", mods, booster)
+			SSkv.Put(booster, "mods", mods)
 		return mods[mod_type] || 1
 
 #undef MOD_BASE
