@@ -69,9 +69,13 @@
 	icon_state = "hardcase_cov_medical"
 
 /obj/item/weapon/storage/pocketstore/hardcase/hypos
-	name = "Tactical Hardcase (Hyposprays)"
+	name = "Tactical Hardcase (Hyposprays + Syringes)"
 	icon_state = "hardcase_medical"
-	can_hold = list(/obj/item/weapon/reagent_containers/hypospray)
+	storage_slots = 5
+	can_hold = list(
+	/obj/item/weapon/reagent_containers/hypospray,
+	/obj/item/weapon/reagent_containers/syringe
+	)
 
 /obj/item/weapon/storage/pocketstore/hardcase/hypos/cov
 	icon_state = "hardcase_cov_medical"
