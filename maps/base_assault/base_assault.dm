@@ -1,3 +1,4 @@
+#define STALEMATE_TIMER 100 MINUTES
 
 /datum/game_mode/base_assault
 	name = "Base Assault"
@@ -5,33 +6,35 @@
 	round_description = "Assault a well-defended UNSC base."
 	extended_round_description = "Assault a well defended UNSC base and plant a bomb."
 	probability = 1
-	ship_lockdown_duration = 10 MINUTES
+	ship_lockdown_duration = 10
 	faction_balance = list(/datum/faction/covenant,/datum/faction/unsc)
+	var/stalemate_at = 0
+	var/winning_side = "error"
 
 /datum/game_mode/base_assault/pre_setup()
 	. = ..()
-	var/list/objective_types = list(\
-		/datum/objective/overmap/covenant_ship,
-		/datum/objective/overmap/covenant_odp,
-		)
-	GLOB.COVENANT.setup_faction_objectives(objective_types)
+	stalemate_at = world.time + STALEMATE_TIMER
 	GLOB.COVENANT.has_flagship = 1
 
-	//setup unsc objectives
-	objective_types = list(\
-		/datum/objective/overmap/unsc_cov_ship,
-		)
-	GLOB.UNSC.setup_faction_objectives(objective_types)
 	GLOB.UNSC.has_base = 1
 
 /datum/game_mode/base_assault/check_finished()
+	if(world.time > STALEMATE_TIMER)
+		winning_side = "Nobody. Stalemate!"
+		return 1
 	var/obj/base = GLOB.UNSC.get_base()
 	if(!base | !base.loc)
+		winning_side = "The Covenant"
 		return 1
 	base = GLOB.COVENANT.get_flagship()
 	if(!base | !base.loc)
+		winning_side = "The UNSC"
 		return 1
 	return 0
+
+/datum/game_mode/base_assault/declare_completion()
+	. = ..()
+	to_world("<span class = 'danger'>The winning faction was: [winning_side]</span>")
 
 /datum/map/base_assault
 	name = "UNSC Outpost"
@@ -58,7 +61,6 @@
 
 	allowed_gamemodes = list("base_assault")
 	map_admin_faxes = list("Ministry of Tranquility (General)","Ministry of Resolution (War Matters)","Ministry of Fervent Intercession (Internal Affairs)")
-
 
 #if !defined(using_map_DATUM)
 
@@ -92,3 +94,45 @@
 //Spawn In Overrides//
 /obj/effect/overmap/unsc_cassius_moon
 	overmap_spawn_in_me = list(/obj/effect/overmap/complex046)
+
+/datum/map/base_assault
+	allowed_jobs = list(\
+	/datum/job/unsc/spartan_two,
+	/datum/job/unsc/marine,
+	/datum/job/unsc/marine/specialist,
+	/datum/job/unsc/marine/hellbringer,\
+	/datum/job/unsc/marine/squad_leader,
+	/datum/job/unsc/odst,
+	/datum/job/unsc/odst/squad_leader,
+	/datum/job/unsc/commanding_officer,
+	/datum/job/unsc/executive_officer,
+	/datum/job/covenant/huragok,
+	/datum/job/covenant/sangheili_minor,
+	/datum/job/covenant/sangheili_major,
+	/datum/job/covenant/sangheili_ultra,
+	/datum/job/covenant/sangheili_shipmaster,
+	/datum/job/covenant/kigyarminor,
+	/datum/job/covenant/unggoy_minor,
+	/datum/job/covenant/unggoy_major,
+	/datum/job/covenant/unggoy_ultra,
+	/datum/job/covenant/unggoy_deacon,
+	/datum/job/covenant/unggoy_heavy,
+	/datum/job/covenant/skirmmurmillo,
+	/datum/job/covenant/skirmcommando,
+	/datum/job/covenant/skirmchampion,
+	/datum/job/covenant/brute_minor,
+	/datum/job/covenant/brute_major,
+	/datum/job/covenant/brute_captain,
+	/datum/job/covenant/yanmee_minor,
+	/datum/job/covenant/yanmee_major,
+	/datum/job/covenant/yanmee_ultra,
+	/datum/job/covenant/yanmee_leader,
+	)
+
+	allowed_spawns = list(\
+		DEFAULT_SPAWNPOINT_ID,\
+		"UNSC Base Spawns",\
+		"UNSC Base Fallback Spawns"\
+		)
+
+	default_spawn = DEFAULT_SPAWNPOINT_ID
