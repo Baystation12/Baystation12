@@ -1112,6 +1112,7 @@
 	/obj/item/weapon/storage/lunchbox/nymph = 3,
 	/obj/item/weapon/storage/lunchbox/syndicate = 3,
 	/obj/item/weapon/storage/lunchbox/dais = 3,
+	/obj/item/weapon/storage/lunchbox/picnic = 3,
 	/obj/item/weapon/material/knife/kitchen/cleaver = 1)
 
 
