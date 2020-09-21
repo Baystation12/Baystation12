@@ -9,13 +9,11 @@
 	icon_state = "na4_unloaded"
 	item_state = "na4"
 	slot_flags = SLOT_BACK
-	is_heavy = 1
 	handle_casings = CLEAR_CASINGS
 	burst = 3
-	move_delay_malus = 1.0
 	hud_bullet_usebar = 1
 	caliber="flamethrower"
-	one_hand_penalty = 2
+	one_hand_penalty = 3
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/na4_tank
 	allowed_magazines = list(/obj/item/ammo_magazine/na4_tank)
