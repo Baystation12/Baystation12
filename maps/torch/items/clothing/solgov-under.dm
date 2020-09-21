@@ -233,22 +233,31 @@
 	desc = "An alternative utility uniform of the SCG Fleet, this one is a warm sweater with padding on the elbows and shoulders"
 	icon_state = "navysweater"
 	worn_state = "navysweater"
+
 /obj/item/clothing/under/solgov/utility/fleet/command
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/command/fleet)
+
 /obj/item/clothing/under/solgov/utility/fleet/command/pilot
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/specialty/pilot)
+
 /obj/item/clothing/under/solgov/utility/fleet/engineering
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/engineering/fleet)
+
 /obj/item/clothing/under/solgov/utility/fleet/security
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/security/fleet)
+
 /obj/item/clothing/under/solgov/utility/fleet/medical
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/medical/fleet)
+
 /obj/item/clothing/under/solgov/utility/fleet/supply
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/supply/fleet)
+
 /obj/item/clothing/under/solgov/utility/fleet/service
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/service/fleet)
+
 /obj/item/clothing/under/solgov/utility/fleet/exploration
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/exploration/fleet)
+	
 /obj/item/clothing/under/solgov/utility/army
 	name = "army fatigues"
 	desc = "The utility uniform of the SCG Army, made from durable material."
