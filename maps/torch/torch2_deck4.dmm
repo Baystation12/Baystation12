@@ -5904,15 +5904,6 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/access_button{
-	command = "cycle_interior";
-	frequency = 1331;
-	master_tag = "nuke_shuttle_dock_airlock";
-	name = "interior access button";
-	pixel_x = -23;
-	pixel_y = -22;
-	req_access = list(list("ACCESS_EXTERNAL","ACCESS_TORCH_CREW"))
-	},
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 9;
 	icon_state = "corner_white"
