@@ -71,7 +71,7 @@
 	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
 	heat_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
-	armor = list(melee = 45, bullet = 40, laser = 45, energy = 45, bomb = 30, bio = 25, rad = 25) //Increased energy resistance for less in others
+	armor = list(melee = 45, bullet = 45, laser = 45, energy = 50, bomb = 30, bio = 25, rad = 25) //Increased energy resistance for less in others
 	armor_thickness = 20
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing)
 

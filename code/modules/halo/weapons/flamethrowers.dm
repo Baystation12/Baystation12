@@ -53,7 +53,7 @@
 	damage_type = BURN
 	damtype = BURN
 	if(istype(C))
-		C.adjust_fire_stacks(0.8)
+		C.adjust_fire_stacks(0.6)
 		C.IgniteMob()
 		if(isturf(C.loc))
 			var/turf/T = get_turf(C.loc)
