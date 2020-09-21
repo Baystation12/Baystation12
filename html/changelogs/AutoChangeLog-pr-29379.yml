@@ -1,0 +1,6 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - bugfix: "Locked containers can no longer be bypassed with alt click."
+  - bugfix: "Chem masters will no longer delete excess reagents when trying to transfer more than the storage can support."
+  - maptweak: "The brig chief newscaster has been moved to a wall next to the desk, which makes the security department buzzer visible and clickable again."
