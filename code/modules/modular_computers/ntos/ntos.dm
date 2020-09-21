@@ -101,6 +101,10 @@
 	if(!P.is_supported_by_hardware(get_hardware_flag(), user, TRUE))
 		return
 
+	if(P.requires_ntnet && !get_ntnet_status())
+		to_chat(user, SPAN_WARNING("Unable to establish a working network connection. Please try again later. If problem persists, please contact your system administrator."))
+		return
+
 	minimize_program(user)
 
 	if(P in running_programs)
