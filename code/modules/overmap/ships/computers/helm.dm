@@ -31,6 +31,9 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 	R.fields["y"] = S.y
 	known_sectors[S.name] = R
 
+	if (notify)
+		audible_message(SPAN_NOTICE("\The [src] pings with a new known sector: [S] at coordinates [S.x] by [S.y]."))
+
 /obj/machinery/computer/ship/helm/Process()
 	..()
 	if (autopilot && dx && dy)
