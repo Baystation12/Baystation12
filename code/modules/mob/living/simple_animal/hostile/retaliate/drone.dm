@@ -39,6 +39,7 @@
 	var/hostile_drone = 0
 	//0 - retaliate, only attack enemies that attack it
 	//1 - hostile, attack everything that comes near
+	var/hostile_range = 10
 
 	var/turf/patrol_target
 	var/explode_chance = 1
@@ -76,7 +77,13 @@
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/ListTargets()
 	if(hostile_drone)
-		return view(src, 10)
+		var/list/targets = list()
+		for (var/mob/M in view(src, hostile_range))
+			if (M == src || istype(M, /mob/living/simple_animal/hostile/retaliate/malf_drone))
+				continue
+			targets |= M
+
+		return targets
 	else
 		return ..()
 
@@ -154,7 +161,7 @@
 		spawn(rand(50,150))
 			if(!disabled && exploding)
 				explosion(get_turf(src), 0, 1, 4, 7)
-				//proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog = 1)
+				death()
 	..()
 
 //ion rifle!
