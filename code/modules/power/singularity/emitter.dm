@@ -40,6 +40,10 @@
 	anchored = 1
 	state = 2
 
+/obj/machinery/power/emitter/anchored/on
+	active = 1
+	powered = 1
+
 /obj/machinery/power/emitter/Initialize()
 	. = ..()
 	if(state == 2 && anchored)
