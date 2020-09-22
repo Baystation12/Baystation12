@@ -22,11 +22,14 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 	var/area/overmap/map = locate() in world
 	for(var/obj/effect/overmap/visitable/sector/S in map)
 		if (S.known)
-			var/datum/computer_file/data/waypoint/R = new()
-			R.fields["name"] = S.name
-			R.fields["x"] = S.x
-			R.fields["y"] = S.y
-			known_sectors[S.name] = R
+			add_known_sector(S)
+
+/obj/machinery/computer/ship/helm/proc/add_known_sector(obj/effect/overmap/visitable/sector/S, notify = FALSE)
+	var/datum/computer_file/data/waypoint/R = new()
+	R.fields["name"] = S.name
+	R.fields["x"] = S.x
+	R.fields["y"] = S.y
+	known_sectors[S.name] = R
 
 /obj/machinery/computer/ship/helm/Process()
 	..()
