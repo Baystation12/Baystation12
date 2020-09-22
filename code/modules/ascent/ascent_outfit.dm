@@ -8,7 +8,7 @@
 	pda_type = null
 	pda_slot = 0
 	flags =    0
-	
+
 /decl/hierarchy/outfit/job/ascent/attendant
 	name = "Ascent - Attendant"
 	back = /obj/item/weapon/rig/mantid
@@ -37,6 +37,15 @@
 	desc = "An alien facemask with chunky gas filters and a breathing valve."
 	filtered_gases = list(GAS_PHORON,GAS_N2O,GAS_CHLORINE,GAS_AMMONIA,GAS_CO,GAS_METHYL_BROMIDE,GAS_METHANE)
 	species_restricted = list(SPECIES_NABBER, SPECIES_MONARCH_QUEEN)
+
+/obj/item/clothing/mask/gas/ascent_captive
+	name = "humanoid filter mask"
+	desc = "A small gas filter designed to enable long-term survival in a methyl bromide atmosphere. It has an input port for food and water."
+	icon_state = "halfgas"
+	item_state = "halfgas"
+	flags_inv = 0
+	body_parts_covered = 0
+	filtered_gases = list(GAS_METHYL_BROMIDE)
 
 /obj/item/clothing/shoes/magboots/ascent
 	name = "mantid mag-claws"
@@ -76,9 +85,9 @@
 	. = ..()
 	for(var/tool in list(
 		/obj/item/weapon/gun/energy/particle/small,
-		/obj/item/device/multitool/mantid, 
-		/obj/item/clustertool, 
-		/obj/item/clustertool, 
+		/obj/item/device/multitool/mantid,
+		/obj/item/clustertool,
+		/obj/item/clustertool,
 		/obj/item/weapon/weldingtool/electric/mantid,
 		/obj/item/stack/medical/resin
 	))
