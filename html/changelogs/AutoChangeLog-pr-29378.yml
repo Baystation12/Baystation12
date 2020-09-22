@@ -1,6 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - bugfix: "It is no longer possible to remove pipes that have stasis clamps attached to them."
-  - bugfix: "It is no longer possible to attach multiple stasis clamps to the same pipe."
-  - bugfix: "Deletes pipes will now probably de-activate and detach any attached stasis clamps."
