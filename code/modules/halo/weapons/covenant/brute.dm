@@ -329,7 +329,8 @@
 	icon = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_obj.dmi'
 	icon_state = "bruteshot_belt"
 	var/fire_sound = null
-	det_time = 50
+	det_time = 10
+	starttimer_on_hit = 1
 	arm_sound = null
 	var/amount = 12
 	var/max_amount = 12

@@ -1,5 +1,26 @@
 #define ADHERENCE_TIME 1.0
 
+//plasma grenade visual effect
+/obj/effect/plasma_explosion
+	name = "plasma blast"
+	icon = 'code/modules/halo/weapons/covenant/plasma_explosion.dmi'
+	icon_state = "plasma_explosion"
+	var/lifetime = 7
+
+/obj/effect/plasma_explosion/New()
+	. = ..()
+	pixel_x -= 32
+	pixel_y -= 32
+	spawn(lifetime)
+		qdel(src)
+
+//fuel rod visual effect
+/obj/effect/plasma_explosion/green
+	lifetime = 4
+	icon_state = "green"
+
+//Actual grenades//
+
 /obj/item/weapon/grenade/plasma
 	name = "Type-1 Antipersonnel Grenade"
 	desc = "When activated, the coating of this grenade becomes a powerful adhesive, sticking to anyone it is thrown at. Takes 1.5 seconds to heat to full adherence temperature once activated."
@@ -70,21 +91,9 @@
 	loc = null
 	qdel(src)
 
-//plasma grenade visual effect
-/obj/effect/plasma_explosion
-	name = "plasma blast"
-	icon = 'code/modules/halo/weapons/covenant/plasma_explosion.dmi'
-	icon_state = "plasma_explosion"
-	var/lifetime = 7
-
-/obj/effect/plasma_explosion/New()
-	. = ..()
-	pixel_x -= 32
-	pixel_y -= 32
-	spawn(lifetime)
-		qdel(src)
-
-//fuel rod visual effect
-/obj/effect/plasma_explosion/green
-	lifetime = 4
-	icon_state = "green"
+/obj/item/weapon/grenade/plasma/suicide
+	name = "Heavy Type-1 Antipersonnel Martydom Grenade"
+	desc = "For only the most devoted of troops, this grenade is unthrowable, but can be dropped for a near instant explosion."
+	det_time = 5
+	throw_range = 0
+	alt_explosion_range = 2

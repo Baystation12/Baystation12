@@ -62,10 +62,10 @@
 	back = /obj/item/weapon/tank/methane/unggoy_internal
 	uniform = /obj/item/clothing/under/unggoy_internal
 	mask = /obj/item/clothing/mask/rebreather
-	l_hand = /obj/item/weapon/grenade/plasma
-	r_hand = /obj/item/weapon/grenade/plasma
-	r_pocket = /obj/item/weapon/grenade/plasma
-	l_pocket = /obj/item/weapon/grenade/plasma
+	l_hand = /obj/item/weapon/grenade/plasma/suicide
+	r_hand = /obj/item/weapon/grenade/plasma/suicide
+	r_pocket = /obj/item/weapon/grenade/plasma/suicide
+	l_pocket = /obj/item/weapon/grenade/plasma/suicide
 
 	flags = 0
 

@@ -137,6 +137,12 @@
 	..()
 	return
 
+/obj/item/weapon/grenade/dropped(var/onto)
+	. = ..()
+	if(active == 1 && starttimer_on_hit)
+		active = 2
+		start_timer()
+
 /obj/item/weapon/grenade/throw_impact(var/atom/hit)
 	if(active == 1 && starttimer_on_hit)
 		active = 2
