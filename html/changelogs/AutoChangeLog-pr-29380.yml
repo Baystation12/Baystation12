@@ -1,0 +1,6 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - maptweak: "The open atmosphere pipes on the playable colony for processing the planet's air have been replaced with proper in/out vents"
+  - maptweak: "Air alarms have been added to parts of the playable colony that were missing them"
+  - maptweak: "Playable colony no longer has three wall chargers stacked on top of each other with no pixel adjustment."
