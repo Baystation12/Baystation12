@@ -408,3 +408,10 @@
 	icon = 'icons/turf/flooring/flesh.dmi'
 	icon_state = "scales0"
 	initial_flooring = /decl/flooring/flesh
+
+//Water go splish
+/turf/simulated/floor/pool
+	name = "pool floor"
+	icon = 'icons/turf/flooring/pool.dmi'
+	icon_state = "pool"
+	initial_flooring = /decl/flooring/pool

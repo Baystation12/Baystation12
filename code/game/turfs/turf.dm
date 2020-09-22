@@ -31,6 +31,7 @@
 	var/obj/effect/flood/flood_object
 	var/fluid_blocked_dirs = 0
 	var/flooded // Whether or not this turf is absolutely flooded ie. a water source.
+	var/height = 0 // Determines if fluids can overflow onto next turf
 	var/footstep_type
 
 	var/tmp/changing_turf

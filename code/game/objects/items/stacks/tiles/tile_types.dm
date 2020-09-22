@@ -301,3 +301,10 @@
 
 /obj/item/stack/tile/carpetred/fifty
 	amount = 50
+
+/obj/item/stack/tile/pool
+	name = "pool tiling"
+	desc = "A set of tiles designed to build fluid pools."
+	singular_name = "pool tile"
+	icon_state = "tile_pool"
+	matter = list(MATERIAL_STEEL = 450)

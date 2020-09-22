@@ -10796,6 +10796,10 @@
 	},
 /turf/simulated/floor/lino,
 /area/crew_quarters/office)
+"yu" = (
+/obj/structure/hygiene/drain/bath,
+/turf/simulated/floor/pool,
+/area/crew_quarters/observation)
 "yv" = (
 /obj/effect/floor_decal/chapel{
 	dir = 8;
@@ -17172,6 +17176,10 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled,
 /area/hydroponics/storage)
+"Qf" = (
+/obj/structure/hygiene/faucet,
+/turf/simulated/floor/pool,
+/area/crew_quarters/observation)
 "Qi" = (
 /obj/machinery/atmospherics/binary/pump/high_power/on{
 	dir = 1
@@ -20566,6 +20574,9 @@
 /obj/machinery/computer/modular/preset/civilian,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
+"ZL" = (
+/turf/simulated/floor/pool,
+/area/crew_quarters/observation)
 "ZN" = (
 /turf/simulated/wall/r_wall/hull,
 /area/tcommsat/chamber)
@@ -29631,8 +29642,8 @@ fJ
 Th
 fJ
 Yr
-Yr
-Yr
+ZL
+ZL
 mN
 yG
 yH
@@ -29833,8 +29844,8 @@ fJ
 Uh
 fJ
 Yr
-ZU
-Yr
+Qf
+yu
 Yr
 PH
 yH
@@ -30035,8 +30046,8 @@ fJ
 Th
 fJ
 Yr
-Yr
-Yr
+ZL
+ZL
 Yr
 zz
 yH
