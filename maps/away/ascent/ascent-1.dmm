@@ -5,6 +5,16 @@
 "ab" = (
 /turf/simulated/wall/r_wall/ascent,
 /area/ship/ascent/shuttle_starboard)
+"ac" = (
+/obj/effect/catwalk_plated/ascent,
+/obj/structure/table/rack/dark,
+/obj/item/clothing/mask/gas/ascent_captive,
+/obj/item/clothing/mask/gas/ascent_captive,
+/obj/item/clothing/mask/gas/ascent_captive,
+/obj/item/clothing/mask/gas/ascent_captive,
+/obj/item/clothing/mask/gas/ascent_captive,
+/turf/simulated/floor/ascent,
+/area/ship/ascent/fore_starboard_jut)
 "ad" = (
 /obj/effect/wallframe_spawn/reinforced_phoron/ascent,
 /turf/simulated/floor/ascent,
@@ -11621,7 +11631,7 @@ aa
 aa
 aa
 pr
-qG
+ac
 qG
 Zh
 Zh
