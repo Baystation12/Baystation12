@@ -2629,6 +2629,60 @@
 	required_reagents = list(/datum/reagent/drink/milk/cream = 1, /datum/reagent/ethanol/cognac = 1, /datum/reagent/drink/hot_coco = 1)
 	result_amount = 3
 
+/datum/chemical_reaction/grasshopper
+	name = "Grasshopper"
+	result = /datum/reagent/ethanol/grasshopper
+	required_reagents = list(/datum/reagent/drink/milk/cream = 1, /datum/reagent/ethanol/creme_de_menthe = 1, /datum/reagent/ethanol/creme_de_cacao = 1)
+	result_amount = 3
+
+/datum/chemical_reaction/stinger
+	name = "Stinger"
+	result = /datum/reagent/ethanol/stinger
+	required_reagents = list(/datum/reagent/ethanol/creme_de_menthe = 1, /datum/reagent/ethanol/cognac = 2)
+	result_amount = 3
+
+/datum/chemical_reaction/alexander
+	name = "Alexander"
+	result = /datum/reagent/ethanol/alexander
+	required_reagents = list(/datum/reagent/ethanol/creme_de_menthe = 1, /datum/reagent/ethanol/cognac = 1, /datum/reagent/drink/milk/cream = 1)
+	result_amount = 3
+
+/datum/chemical_reaction/between_the_sheets
+	name = "Between the Sheets"
+	result = /datum/reagent/ethanol/between_the_sheets
+	required_reagents = list(/datum/reagent/ethanol/rum = 1, /datum/reagent/ethanol/cognac = 2, /datum/reagent/ethanol/triple_sec = 1, /datum/reagent/drink/juice/lemon = 1)
+	result_amount = 5
+
+/datum/chemical_reaction/forget_me_shot
+	name = "Forget-me-shot"
+	result = /datum/reagent/ethanol/forget_me_shot
+	required_reagents = list(/datum/reagent/ethanol/jagermeister = 1, /datum/reagent/ethanol/gin = 1, /datum/reagent/ethanol/triple_sec = 1, /datum/reagent/nutriment/vinegar =1, /datum/reagent/ethanol/hooch = 1)
+	result_amount = 3
+	mix_message = "The liquid is brought to a roiling boil, and then suddenly stops."
+
+/datum/chemical_reaction/bad_touch
+	name = "Bad Touch"
+	result = /datum/reagent/ethanol/bad_touch
+	required_reagents = list(/datum/reagent/ethanol/vodka = 2, /datum/reagent/ethanol/rum = 2, /datum/reagent/ethanol/absinthe = 1, /datum/reagent/drink/lemon_lime = 1)
+	result_amount = 6
+
+/datum/chemical_reaction/sugar_rush
+	name = "Sugar Rush"
+	result = /datum/reagent/ethanol/sugar_rush
+	required_reagents = list(/datum/reagent/drink/spacemountainwind = 4, /datum/reagent/drink/grenadine = 1, /datum/reagent/ethanol/vodka = 1)
+	result_amount = 6
+
+/datum/chemical_reaction/cobalt_velvet
+	name = "Cobalt Velvet"
+	result = /datum/reagent/ethanol/cobalt_velvet
+	required_reagents = list(/datum/reagent/ethanol/champagne = 3, /datum/reagent/drink/space_cola = 1, /datum/reagent/ethanol/bluecuracao = 2)
+	result_amount = 6
+
+/datum/chemical_reaction/fringe_weaver
+	name = "Fringe Weaver"
+	result = /datum/reagent/ethanol/fringe_weaver
+	required_reagents = list(/datum/reagent/sugar = 1, /datum/reagent/ethanol = 2)
+	result_amount = 3
 
 // Non-Alcoholic Drinks
 

@@ -117,7 +117,10 @@
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/vermouth,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/cognac,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/ale,
-			/obj/item/weapon/reagent_containers/chem_disp_cartridge/mead
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/mead,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/triple_sec,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/creme_de_cacao,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/creme_de_menthe
 		)
 
 /obj/machinery/chemical_dispenser/bar_coffee
