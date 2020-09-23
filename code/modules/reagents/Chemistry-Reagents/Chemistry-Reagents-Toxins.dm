@@ -16,8 +16,6 @@
 	var/target_organ
 	var/strength = 4 // How much damage it deals per unit
 
-	toxin_hydroponics = 2
-
 	codex_mechanics = "<p>Its effects include:</p>\
 		<ul>\
 			<li>Does not affect Diona.</li>\
@@ -401,8 +399,6 @@
 		</ul>"
 	codex_antag = null
 
-	nutrient_hydroponics = 1
-
 /datum/reagent/toxin/fertilizer/eznutrient
 	name = "EZ Nutrient"
 
@@ -423,9 +419,6 @@
 		</ul>\
 		<p>It can be found in bottle form in NutriMax vendors and biogenerators.</p>"
 
-	mutation_mod_hydroponics = 0.2
-	mutagenic_hydroponics = 30
-
 /datum/reagent/toxin/fertilizer/robustharvest
 	name = "Robust Harvest"
 
@@ -435,9 +428,6 @@
 			<li>If injected or ingested, causes toxin damage and internal organ damage.</li>\
 		</ul>\
 		<p>It can be found in bottle form in NutriMax vendors and biogenerators.</p>"
-
-	toxin_hydroponics = 3
-	yield_mod_hydroponics = 0.2
 
 /datum/reagent/toxin/plantbgone
 	name = "Plant-B-Gone"
@@ -456,10 +446,6 @@
 		</ul>\
 		<p>It can be found in spraybottles and weedkiller grenades in hydroponics lockers, hydroponics crates, and Weed Control and Hydroponics Supplies crates ordered from supply.</p>"
 	codex_antag = null
-
-	weedkiller_hydroponics = -8
-	health_mod_hydroponics = -2
-	mutation_mod_hydroponics = 0.2
 
 /datum/reagent/toxin/plantbgone/touch_turf(var/turf/T)
 	if(istype(T, /turf/simulated/wall))
@@ -496,10 +482,6 @@
 	codex_lore = null
 	codex_mechanics = "<p>Can be found in metal foam grenades.</p>"
 	codex_antag = "<p>Emagged, hacked, and antag emergency response, crisis, and surgeon borgs have access to a sprayer with polytrinic acid.</p>"
-
-	toxin_hydroponics = 3
-	weedkiller_hydroponics = -4
-	health_mod_hydroponics = -2
 
 /datum/reagent/acid/stomach
 	name = "stomach acid"
@@ -553,8 +535,6 @@
 			<li>Causes radiation damage.</li>\
 			<li>Takes effect if injected, ingested, splashed, or sprayed.</li>\
 		</ul>"
-
-	mutagenic_hydroponics = 15
 
 /datum/reagent/mutagen/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	if(prob(33))
@@ -953,10 +933,6 @@
 		"THE LIGHT THE DARK A STAR IN CHAINS"
 	)
 
-	toxin_hydroponics = 2
-	health_mod_hydroponics = -1
-	mutation_mod_hydroponics = 0.5
-
 /datum/reagent/three_eye/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.add_client_color(/datum/client_color/thirdeye)
 	M.add_chemical_effect(CE_THIRDEYE, 1)
@@ -1143,8 +1119,6 @@
 	heating_products = null
 	heating_point = null
 
-	pestkiller_hydroponics = -2
-
 /datum/reagent/toxin/bromide/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_MANTID)
 		. = ..()
@@ -1168,8 +1142,6 @@
 	strength = 5
 	heating_products = null
 	heating_point = null
-
-	pestkiller_hydroponics = -4
 
 /datum/reagent/toxin/methyl_bromide/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	. = (alien != IS_MANTID && alien != IS_NABBER && ..())

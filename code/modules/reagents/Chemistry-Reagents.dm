@@ -72,16 +72,6 @@
 	var/flammable_touch_mob = 0 // Flamamble stack effect level on touch (Doesn't apply to skin contact - See touch_mob())
 	var/sugar_factor = 0 // Sugar drug factor for Unathi, borers, etc. 0 is no effect, 1 is equivalent to pure sugar.
 
-	var/toxin_hydroponics = 0 // Toxin effect level in hydroponics trays.
-	var/weedkiller_hydroponics = 0 // Weedkiller effect level in hydroponics trays.
-	var/pestkiller_hydroponics = 0 // Pestkiller effect level in hydroponics trays.
-	var/health_mod_hydroponics = 0 // Health modifier level in hydroponics trays.
-	var/yield_mod_hydroponics = 0 // Yield modifier level in hydroponics trays.
-	var/mutation_mod_hydroponics = 0 // Mutation modifier level in hydroponics trays.
-	var/nutrient_hydroponics = 0 // Nutrient effect level in hydroponics trays.
-	var/water_hydroponcs = 0 // Watering effect level in hydroponics trays.
-	var/mutagenic_hydroponics = 0 // Mutagenics multipler in hydroponics trays
-
 	var/vehicle_fuel_mod = 1 // Fuel modifier for use in vehicle engines
 	var/vehicle_fuel_flammable = FALSE // Whether or not the 'fuel' is combustible in vehicle engines
 	var/vehicle_fuel_explode = FALSE // Whether or not the 'fuel' will cause vehicle engines to explode

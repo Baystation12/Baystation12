@@ -100,8 +100,6 @@
 		<p>It can kill slimes if they come into contact with it - Either from being injected, sprayed, or splashed.</p>\
 		<p>It can put out fires and help reduce temperatures if sprayed into a hot room. This tends to create steam as a byproduct.</p>"
 
-	water_hydroponcs = 1
-
 	vehicle_fuel_mod = 0.4
 
 /datum/reagent/water/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -229,7 +227,6 @@
 		Trails of spilled fuel leading to welding tanks can also cause explosions, but tend to be more obvious.</p> \
 		<p>Cigarettes that have welding fuel injected in them like to explode when lit. It's not lethal, but it's a great distraction or prank.</p>"
 
-	toxin_hydroponics = 2
 	flammable_touch_mob = 10
 
 	vehicle_fuel_flammable = TRUE

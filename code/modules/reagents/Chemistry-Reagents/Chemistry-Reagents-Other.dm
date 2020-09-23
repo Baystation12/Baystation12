@@ -111,14 +111,6 @@
 	glass_name = "liquid gold"
 	glass_desc = "It's magic. We don't have to explain it."
 
-	nutrient_hydroponics = 1
-	weedkiller_hydroponics = -5
-	pestkiller_hydroponics = -5
-	water_hydroponcs = 1
-	health_mod_hydroponics = 1
-	yield_mod_hydroponics = 1
-	mutation_mod_hydroponics = 1
-
 /datum/reagent/adminordrazine/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	affect_blood(M, alien, removed)
 
@@ -210,10 +202,6 @@
 	value = 0.9
 
 	codex_mechanics = "<p>It can be found in a bottle mixed with ammonia from a NutriMax vendor if you have a coin.</p>"
-
-	nutrient_hydroponics = 2
-	pestkiller_hydroponics = -2
-	health_mod_hydroponics = 1
 
 /datum/reagent/surfactant // Foam precursor
 	name = "Azosurfactant"

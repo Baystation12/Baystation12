@@ -76,8 +76,19 @@
 		if (initial(reagent.sugar_factor))
 			entry.mechanics_text += "<p>It has a sugar-induced drug-like effect on Unathi.</p>"
 
-		if (initial(reagent.toxin_hydroponics))
-			effect_level = initial(reagent.toxin_hydroponics)
+		if (initial(reagent.dissolves_text))
+			entry.mechanics_text += "<p>It can be used to dissolve text on papers and books.</p>"
+
+		if (initial(reagent.vehicle_fuel_mod) != 1 || initial(reagent.vehicle_fuel_flammable))
+			effect_level = initial(reagent.vehicle_fuel_mod) * 100
+			if (initial(reagent.vehicle_fuel_flammable))
+				entry.mechanics_text += "<p>It has a [effect_level]% efficiency modifier when used as fuel for vehicles such as bikes, and is combustible.<p>"
+			else
+				entry.mechanics_text += "<p>It has a [effect_level]% efficiency modifier when used as fuel for vehicles such as bikes.</p>"
+
+		// Hydroponics Tray effects
+		effect_level = toxin_reagents[reagent]
+		if (effect_level)
 			if (effect_level < 0)
 				entry.mechanics_text += "<p>It counteracts chemicals toxic to plants when injected into a hydroponics tray.</p>"
 			else
@@ -89,8 +100,8 @@
 					effect_descriptor = "highly"
 				entry.mechanics_text += "<p>It is [effect_descriptor] toxic to plants when injected into a hydroponics tray.</p>"
 
-		if (initial(reagent.nutrient_hydroponics))
-			effect_level = initial(reagent.nutrient_hydroponics)
+		effect_level = nutrient_reagents[reagent]
+		if (effect_level)
 			if (effect_level <= 0.66)
 				effect_descriptor = "mildly"
 			else if (effect_level <= 1.33)
@@ -99,8 +110,8 @@
 				effect_descriptor = "highly"
 			entry.mechanics_text += "<p>It is [effect_descriptor] nutritious to plants when injected into a hydroponics tray.</p>"
 
-		if (initial(reagent.weedkiller_hydroponics))
-			effect_level = initial(reagent.weedkiller_hydroponics)
+		effect_level = weedkiller_reagents[reagent]
+		if (effect_level)
 			if (effect_level > 0)
 				entry.mechanics_text += "<p>It encourages weed growth when injected into a hydroponics tray.</p>"
 			else
@@ -112,8 +123,8 @@
 					effect_descriptor = "highly"
 				entry.mechanics_text += "<p>It is [effect_descriptor] effective at killing weeds when injected into a hydroponics tray.</p>"
 
-		if (initial(reagent.pestkiller_hydroponics))
-			effect_level = initial(reagent.pestkiller_hydroponics)
+		effect_level = pestkiller_reagents[reagent]
+		if (effect_level)
 			if (effect_level > 0)
 				entry.mechanics_text += "<p>It encourages pest growth when injected into a hydroponics tray.</p>"
 			else
@@ -125,55 +136,47 @@
 					effect_descriptor = "highly"
 				entry.mechanics_text += "<p>It is [effect_descriptor] effective at killing pests when injected into a hydroponics tray.</p>"
 
-		if (initial(reagent.water_hydroponcs))
-			effect_level = initial(reagent.water_hydroponcs)
+		effect_level = water_reagents[reagent]
+		if (effect_level)
 			if (effect_level < 0)
 				entry.mechanics_text += "<p>It has a negative impact on water levels when injected into a hydroponics tray.</p>"
 			else
 				entry.mechanics_text += "<p>It is [effect_level] times as effective as water when injected into a hydroponics tray.</p>"
 
-		if (initial(reagent.health_mod_hydroponics))
-			effect_level = initial(reagent.health_mod_hydroponics)
-			if (effect_level < 0)
-				effect_descriptor = "degrades"
-			else
-				effect_descriptor = "improves"
-			effect_descriptor += " the plants health by a "
-			effect_level = abs(effect_level)
-			if (effect_level <= 1)
-				effect_descriptor += "small"
-			else if (effect_level <= 2)
-				effect_descriptor += "moderate"
-			else
-				effect_descriptor += "large"
-			entry.mechanics_text += "<p>It [effect_descriptor] amount when injected into a hydroponics tray.</p>"
+		var/beneficial_effects = beneficial_reagents[reagent]
+		if (LAZYLEN(beneficial_effects))
+			effect_level = beneficial_effects[1]
+			if (effect_level)
+				if (effect_level < 0)
+					effect_descriptor = "degrades"
+				else
+					effect_descriptor = "improves"
+				effect_descriptor += " the plants health by a "
+				effect_level = abs(effect_level)
+				if (effect_level <= 1)
+					effect_descriptor += "small"
+				else if (effect_level <= 2)
+					effect_descriptor += "moderate"
+				else
+					effect_descriptor += "large"
+				entry.mechanics_text += "<p>It [effect_descriptor] amount when injected into a hydroponics tray.</p>"
 
-		if (initial(reagent.yield_mod_hydroponics))
-			effect_level = initial(reagent.yield_mod_hydroponics)
-			if (effect_level <= 0.1)
-				effect_descriptor = "small"
-			else if (effect_level <= 0.2)
-				effect_descriptor = "moderate"
-			else
-				effect_descriptor = "large"
-			entry.mechanics_text += "<p>It improves crop yield by a [effect_descriptor] amount when injected into a hydroponics tray.</p>"
+			effect_level = beneficial_effects[2]
+			if (effect_level)
+				if (effect_level <= 0.1)
+					effect_descriptor = "small"
+				else if (effect_level <= 0.2)
+					effect_descriptor = "moderate"
+				else
+					effect_descriptor = "large"
+				entry.mechanics_text += "<p>It improves crop yield by a [effect_descriptor] amount when injected into a hydroponics tray.</p>"
 
-		if (initial(reagent.mutation_mod_hydroponics) || initial(reagent.mutagenic_hydroponics))
-			effect_level = initial(reagent.mutation_mod_hydroponics) + initial(reagent.mutagenic_hydroponics)
-			if (initial(reagent.mutagenic_hydroponics))
-				entry.mechanics_text += "<p>It adds a [effect_level]% chance per unit of causing mutations when injected into a hydroponics tray and acts as a catalyst for mutations.</p>"
-			else
-				entry.mechanics_text += "<p>It adds a [effect_level]% chance per unit of causing mutations when injected into a hydroponics tray if a catalyst for mutations is also present.</p>"
-
-		if (initial(reagent.dissolves_text))
-			entry.mechanics_text += "<p>It can be used to dissolve text on papers and books.</p>"
-
-		if (initial(reagent.vehicle_fuel_mod) != 1 || initial(reagent.vehicle_fuel_flammable))
-			effect_level = initial(reagent.vehicle_fuel_mod) * 100
-			if (initial(reagent.vehicle_fuel_flammable))
-				entry.mechanics_text += "<p>It has a [effect_level]% efficiency modifier when used as fuel for vehicles such as bikes, and is combustible.<p>"
-			else
-				entry.mechanics_text += "<p>It has a [effect_level]% efficiency modifier when used as fuel for vehicles such as bikes.</p>"
+			effect_level = beneficial_effects[3] + mutagenic_reagents[reagent]
+			if (effect_level)
+				if (mutagenic_reagents[reagent])
+					entry.mechanics_text += "<p>It adds a [effect_level]% chance per unit of causing mutations when injected into a hydroponics tray and acts as a catalyst for mutations.</p>"
+				else
+					entry.mechanics_text += "<p>It adds a [effect_level]% chance per unit of causing mutations when injected into a hydroponics tray if a catalyst for mutations is also present.</p>"
 
 		// Nutriments
 		if (istype(reagent, /datum/reagent/nutriment))

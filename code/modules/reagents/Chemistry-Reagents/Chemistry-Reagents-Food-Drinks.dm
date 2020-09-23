@@ -12,10 +12,6 @@
 	color = "#664330"
 	value = 0.1
 
-	nutrient_hydroponics = 1
-	health_mod_hydroponics = 0.5
-	yield_mod_hydroponics = 0.1
-
 /datum/reagent/nutriment/mix_data(var/list/newdata, var/newamount)
 
 	if(!islist(newdata) || !newdata.len)
@@ -801,9 +797,6 @@
 	codex_mechanics = "<p>If injected, it can cause toxin damage.</p>\
 		<p>If ingested, it can mildly heal trauma damage for non-Diona species and counteract capsaicin.</p>"
 
-	nutrient_hydroponics = 0.1
-	water_hydroponcs = 0.9
-
 /datum/reagent/drink/milk/chocolate
 	name =  "Chocolate Milk"
 	description = "A mixture of perfectly healthy milk and delicious chocolate."
@@ -1033,10 +1026,6 @@
 	glass_name = "soda water"
 	glass_desc = "Soda water. Why not make a scotch and soda?"
 	glass_special = list(DRINK_FIZZ)
-
-	nutrient_hydroponics = 0.1
-	water_hydroponcs = 1
-	health_mod_hydroponics = 0.1
 
 /datum/reagent/drink/grapesoda
 	name = "Grape Soda"
@@ -1381,8 +1370,6 @@
 	glass_name = "ale"
 	glass_desc = "A freezing container of delicious ale"
 
-	nutrient_hydroponics = 0.25
-
 /datum/reagent/ethanol/beer
 	name = "Beer"
 	description = "An alcoholic beverage made from malted grains, hops, yeast, and water."
@@ -1393,9 +1380,6 @@
 
 	glass_name = "beer"
 	glass_desc = "A freezing container of beer"
-
-	water_hydroponcs = 0.7
-	health_mod_hydroponics = -0.05
 
 /datum/reagent/ethanol/beer/good
 

@@ -144,8 +144,6 @@
 		<p>It can be synthesized in sleepers and can be found in autoinjector, bottle, lollipop, and pill forms in advanced first-aid kits, toxin pouches, NanoMeds, and medical closets.</p>\
 		<p>It has no overdose effect and can help mitigate the toxin damage from overdosing other medications.</p>"
 
-	toxin_hydroponics = -2
-
 /datum/reagent/dylovene/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
@@ -265,9 +263,6 @@
 			<li>Heals non-robotic internal organs</li>\
 		</ul>\
 		<p>It is intended for use only in cryo cells. Directly injecting patients is not recommended.</p>"
-
-	toxin_hydroponics = -3
-	health_mod_hydroponics = 3
 
 /datum/reagent/cryoxadone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.add_chemical_effect(CE_CRYO, 1)

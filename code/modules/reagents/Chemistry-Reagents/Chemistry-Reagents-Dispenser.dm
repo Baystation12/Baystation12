@@ -18,8 +18,6 @@
 	toxin_immune_species = list(IS_NABBER)
 	toxin_blood = 3
 
-	toxin_hydroponics = 1
-
 /datum/reagent/aluminium
 	name = "Aluminium"
 	taste_description = "metal"
@@ -49,9 +47,6 @@
 
 	toxin_immune_species = list(IS_VOX, IS_DIONA)
 	toxin_blood = 1.5
-
-	nutrient_hydroponics = 1
-	health_mod_hydroponics = 0.5
 
 /datum/reagent/ammonia/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if (alien == IS_VOX)
@@ -201,11 +196,6 @@
 	toxin_touch = 0.2
 	flammable_touch = 12
 
-	toxin_hydroponics = 2.5
-	weedkiller_hydroponics = -4
-	water_hydroponcs = -2
-	health_mod_hydroponics = -2
-
 	vehicle_fuel_mod = 1.5
 	vehicle_fuel_flammable = TRUE
 
@@ -277,11 +267,6 @@
 	color = "#832828"
 	value = DISPENSER_REAGENT_VALUE
 
-	nutrient_hydroponics = 0.1
-	weedkiller_hydroponics = -2
-	water_hydroponcs = -0.5
-	health_mod_hydroponics = -0.75
-
 	codex_lore = "<p>Phosphorus is a chemical element with the symbol P and atomic number 15. Phosphorus is highly reactive and can be found in white and red varieties. In minerals, phosphorus is generally found as phosphate.</p>"
 	codex_mechanics = "<p>Phosphorus is a base chemical used in the creation of various compounds and medicines and is commonly found in chemical dispensers.</p>"
 
@@ -320,11 +305,6 @@
 		<p>It causes radiation exposure if ingested or injected.</p>\
 		<p>It can leave behind a glowing mess if splashed on the floor.</p>"
 
-	toxin_hydroponics = 2
-	health_mod_hydroponics = -1.5
-	mutation_mod_hydroponics = 0.2
-	mutagenic_hydroponics = 8
-
 /datum/reagent/radium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.apply_damage(10 * removed, IRRADIATE, armor_pen = 100) // Radium may increase your chances to cure a disease
 
@@ -353,10 +333,6 @@
 		It is a colourless, odourless, and viscous liquid that is soluble in water and is synthesized in reactions that are highly exothermic.</p>"
 	codex_mechanics = "<p>Sulphuric acid is a base chemical used in the creation of various compounds and medicines and is commonly found in chemical dispensers.</p>\
 		<p>It is used in the production of circuit boards with a circuit printer.</p>"
-
-	toxin_hydroponics = 1.5
-	weedkiller_hydroponics = -2
-	health_mod_hydroponics = -1
 
 /datum/reagent/acid/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.take_organ_damage(0, removed * power)
@@ -489,10 +465,6 @@
 	codex_antag = "<p>If you are a cortical borer, sugar acts like a sedative to you if your host ingests or injects it or anything that contains it, preventing you from assuming control of your host.</p>"
 
 	sugar_factor = 1
-
-	nutrient_hydroponics = 0.1
-	weedkiller_hydroponics = 2
-	pestkiller_hydroponics = 2
 
 	vehicle_fuel_explode = TRUE
 
