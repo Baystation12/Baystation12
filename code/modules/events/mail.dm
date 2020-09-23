@@ -10,7 +10,7 @@
 	var/list/possible_gifts = list(
 		/obj/item/device/flashlight/lamp/lava,
 		/obj/item/weapon/storage/fancy/crayons,
-		/obj/item/instrument/guitar,
+		/obj/item/device/synthesized_instrument/guitar,
 		/obj/item/toy/torchmodel,
 		/obj/item/clothing/accessory/locket,
 		/obj/item/device/binoculars,
