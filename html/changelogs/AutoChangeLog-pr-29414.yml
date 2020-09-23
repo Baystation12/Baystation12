@@ -1,5 +1,0 @@
-author: "RustingWithYou"
-delete-after: True
-changes: 
-  - rscadd: "adds ascent humanoid filter masks"
-  - maptweak: "places the filter masks on the seedship"

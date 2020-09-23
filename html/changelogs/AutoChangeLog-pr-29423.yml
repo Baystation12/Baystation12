@@ -1,4 +1,0 @@
-author: "MrKicker"
-delete-after: True
-changes: 
-  - admin: "Fixes the keybindings for player panel, they now work in all hotkey/normal modes"
