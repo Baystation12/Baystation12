@@ -10,6 +10,7 @@
 	//fire_sound_burst = 'code/modules/halo/sounds/MA37_Fire_New.wav'
 	reload_sound = 'code/modules/halo/sounds/MA37_Reload_New.wav'
 	magazine_type = /obj/item/ammo_magazine/ma37/m118
+	allowed_magazines = list(/obj/item/ammo_magazine/ma37/m118)
 	load_method = MAGAZINE
 	slot_flags = SLOT_BACK
 
@@ -19,7 +20,6 @@
 	hud_bullet_row_num = 18
 
 	ammo_icon_state = null
-	allowed_magazines = list(/obj/item/ammo_magazine/ma37)
 	attachment_slots = null
 	attachments_on_spawn = null
 

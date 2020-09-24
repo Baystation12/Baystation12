@@ -293,20 +293,15 @@ var/list/points_of_interest = list()
 
 /obj/effect/overmap/proc/pre_superstructure_failing()
 	for(var/mob/player in GLOB.mobs_in_sectors[src])
-		to_chat(player,"<span class = 'danger'>SHIP SUPERSTRUCTURE FAILING. ETA: [SUPERSTRUCTURE_FAIL_TIME/600] minutes.</span>")
+		if(istype(src,/obj/effect/overmap/sector))
+			to_chat(player,"<span class = 'danger'>Core AO Planetary Structure Failing. ETA: [SUPERSTRUCTURE_FAIL_TIME/600] minutes.</span>")
+		else
+			to_chat(player,"<span class = 'danger'>SHIP SUPERSTRUCTURE FAILING. ETA: [SUPERSTRUCTURE_FAIL_TIME/600] minutes.</span>")
 	superstructure_failing = 1
 	spawn(SUPERSTRUCTURE_FAIL_TIME)
 		do_superstructure_fail()
 
-/obj/effect/overmap/process()
-	for(var/e in active_effects)
-		var/datum/overmap_effect/effect = e
-		if(!effect.process_effect())
-			active_effects -= src
-			qdel(effect)
-	if(!isnull(targeting_datum.current_target) && !(targeting_datum.current_target in range(src,7)))
-		targeting_datum.current_target = null
-		targeting_datum.targeted_location = "target lost"
+/obj/effect/overmap/proc/superstructure_process()
 	if(superstructure_failing == -1)
 		return
 	if(superstructure_failing == 1 && (world.time % 4) == 0)
@@ -321,6 +316,17 @@ var/list/points_of_interest = list()
 		return
 	if(superstructure_strength <= SUPERSTRUCTURE_FAIL_PERCENT)
 		pre_superstructure_failing()
+
+/obj/effect/overmap/process()
+	for(var/e in active_effects)
+		var/datum/overmap_effect/effect = e
+		if(!effect.process_effect())
+			active_effects -= src
+			qdel(effect)
+	if(!isnull(targeting_datum.current_target) && !(targeting_datum.current_target in range(src,7)))
+		targeting_datum.current_target = null
+		targeting_datum.targeted_location = "target lost"
+	superstructure_process()
 
 /obj/effect/overmap/update_icon()
 	. = ..()

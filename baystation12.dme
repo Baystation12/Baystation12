@@ -3277,7 +3277,7 @@
 #include "interface\skin.dmf"
 #include "maps\_map_include.dm"
 #include "maps\_gamemodes\_popbalance.dm"
-#include "maps\ks7_elmsville\ks7_elmsville.dm"
+#include "maps\base_assault\base_assault.dm"
 #include "maps\~mapsystem\map_preferences.dm"
 #include "maps\~mapsystem\map_ranks.dm"
 #include "maps\~mapsystem\maps.dm"

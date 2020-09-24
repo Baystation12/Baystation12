@@ -9,13 +9,11 @@
 	icon_state = "na4_unloaded"
 	item_state = "na4"
 	slot_flags = SLOT_BACK
-	is_heavy = 1
 	handle_casings = CLEAR_CASINGS
 	burst = 3
-	move_delay_malus = 1.0
 	hud_bullet_usebar = 1
 	caliber="flamethrower"
-	one_hand_penalty = 2
+	one_hand_penalty = 3
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/na4_tank
 	allowed_magazines = list(/obj/item/ammo_magazine/na4_tank)
@@ -34,7 +32,7 @@
 /obj/item/weapon/gun/projectile/na4_dp/handle_post_fire(mob/living/user, atom/target, var/pointblank=0, var/reflex=0)
 	. = ..()
 	if(istype(user))
-		user.adjust_fire_stacks(0.2)
+		user.adjust_fire_stacks(0.1)
 		user.IgniteMob()
 
 /obj/item/projectile/bullet/fire
@@ -43,8 +41,8 @@
 	check_armour = "energy"
 	embed = 0
 	sharp = 0
-	damage = 20 //Low, but has extra flame effects and such.
-	shield_damage = 10
+	damage = 25 //Low, but has extra flame effects and such.
+	shield_damage = 5
 	icon = 'icons/effects/fire.dmi'
 	icon_state = "fire"
 	kill_count = 10 //No sniping!
@@ -53,7 +51,7 @@
 	damage_type = BURN
 	damtype = BURN
 	if(istype(C))
-		C.adjust_fire_stacks(1)
+		C.adjust_fire_stacks(0.6)
 		C.IgniteMob()
 		if(isturf(C.loc))
 			var/turf/T = get_turf(C.loc)

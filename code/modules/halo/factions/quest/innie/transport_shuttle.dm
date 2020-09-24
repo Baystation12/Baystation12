@@ -2,7 +2,7 @@
 /datum/shuttle/autodock/ferry/geminus_innie_transport
 	name = "Rabbit Hole Base Transport Shuttle"
 	shuttle_area = /area/shuttle/innie_shuttle_transport
-	warmup_time = 0.5 SECOND
+	warmup_time = 0.5 SECONDS
 	move_time = 0
 	location = 0
 	flags = SHUTTLE_FLAGS_PROCESS

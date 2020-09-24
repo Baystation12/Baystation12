@@ -2,6 +2,7 @@
 /obj/item/weapon/storage/pocketstore
 	w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_POCKET | SLOT_BELT
+	allow_pocket_use = 1
 
 /obj/item/weapon/storage/pocketstore/magnetic_holster
 	name = "Magnetic Holster Set (Guns)"
@@ -50,6 +51,7 @@
 	name = "Tactical Hardcase (Grenades)"
 	icon_state = "hardcase_grenades"
 	can_hold = list(/obj/item/weapon/grenade)
+	cant_hold = list()
 
 /obj/item/weapon/storage/pocketstore/hardcase/grenade/cov
 	icon_state = "hardcase_cov_grenades"
@@ -67,9 +69,13 @@
 	icon_state = "hardcase_cov_medical"
 
 /obj/item/weapon/storage/pocketstore/hardcase/hypos
-	name = "Tactical Hardcase (Hyposprays)"
+	name = "Tactical Hardcase (Syringes)"
 	icon_state = "hardcase_medical"
-	can_hold = list(/obj/item/weapon/reagent_containers/hypospray)
+	storage_slots = 4
+	can_hold = list(
+	/obj/item/weapon/reagent_containers/hypospray,
+	/obj/item/weapon/reagent_containers/syringe
+	)
 
 /obj/item/weapon/storage/pocketstore/hardcase/hypos/cov
 	icon_state = "hardcase_cov_medical"

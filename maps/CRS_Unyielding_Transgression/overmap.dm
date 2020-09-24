@@ -25,3 +25,4 @@
 	alarm_sound = 'code/modules/halo/sounds/r_alert_alarm_loop_j2.ogg'
 	area_base =/area/covenant_light_cruiser
 
+/obj/structure/invasion_scanner //Placeholder for the mapfile.

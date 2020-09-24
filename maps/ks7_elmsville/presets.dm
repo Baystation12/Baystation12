@@ -397,10 +397,10 @@
 
 /obj/structure/closet/secure_closet/ks7_police/ammo/WillContain()
 	return list(\
-	/obj/item/ammo_magazine/ma37/m118,/obj/item/ammo_magazine/ma37/m118,/obj/item/ammo_magazine/ma37/m118,
-	/obj/item/ammo_magazine/ma37/m118,/obj/item/ammo_magazine/ma37/m118,/obj/item/ammo_magazine/ma37/m118,
-	/obj/item/ammo_magazine/ma37/m118,/obj/item/ammo_magazine/ma37/m118,/obj/item/ammo_magazine/ma37/m118,
-	/obj/item/ammo_magazine/ma37/m118,/obj/item/ammo_magazine/ma37/m118,/obj/item/ammo_magazine/ma37/m118,
+	/obj/item/ammo_magazine/ma3/m118,/obj/item/ammo_magazine/ma3/m118,/obj/item/ammo_magazine/ma3/m118,
+	/obj/item/ammo_magazine/ma3/m118,/obj/item/ammo_magazine/ma3/m118,/obj/item/ammo_magazine/ma3/m118,
+	/obj/item/ammo_magazine/ma3/m118,/obj/item/ammo_magazine/ma3/m118,/obj/item/ammo_magazine/ma3/m118,
+	/obj/item/ammo_magazine/ma3/m118,/obj/item/ammo_magazine/ma3/m118,/obj/item/ammo_magazine/ma3/m118,
 	/obj/item/ammo_magazine/m6d/m224,/obj/item/ammo_magazine/m6d/m224,/obj/item/ammo_magazine/m6d/m224,
 	/obj/item/ammo_magazine/m6d/m224,/obj/item/ammo_magazine/m6d/m224,/obj/item/ammo_magazine/m6d/m224,
 	/obj/item/ammo_magazine/m6d/m224,/obj/item/ammo_magazine/m6d/m224,/obj/item/ammo_magazine/m6d/m224,

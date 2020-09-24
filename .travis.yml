@@ -24,6 +24,7 @@ env:
     - TEST=MAP MAP_PATH=first_contact
     - TEST=MAP MAP_PATH=ks7_elmsville
     - TEST=MAP MAP_PATH=ks7_elmsville_spaceodp
+    - TEST=MAP MAP_PATH=base_assault
     #- TEST=MAP MAP_PATH=ccs_battlecruiser
     #- TEST=MAP MAP_PATH=doisac
     #- TEST=MAP MAP_PATH=unsc_achlys

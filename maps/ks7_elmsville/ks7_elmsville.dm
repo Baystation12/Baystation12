@@ -13,6 +13,7 @@
 	#include "../Admin Planet/includes.dm"
 
 	#include "../faction_bases/CassiusMoonStation/cassiusmoon.dm"
+	#include "../faction_bases/CassiusMoonStation/destroy_effects.dm"
 
 	#include "../CRS_Unyielding_Transgression/includes.dm"
 

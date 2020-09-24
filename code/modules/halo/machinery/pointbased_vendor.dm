@@ -23,6 +23,8 @@ GLOBAL_LIST_INIT(mobs_to_reqdatum,list())
 	anchored = 1
 	ai_access_level = 3
 	idle_power_usage = 150
+	clicksound = "button"
+	clickvol = 40
 	var/icon_deny = "ironhammer-deny"
 	var/icon_vend = "ironhammer"
 	var/vend_ready = 1

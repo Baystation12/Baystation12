@@ -9,11 +9,8 @@
 	icon_state = "hellbringer_undersuit"
 	worn_state = "hellbringer_undersuit"
 	starting_accessories = /obj/item/clothing/accessory/badge/tags
-	heat_protection = LOWER_TORSO|UPPER_TORSO|LEGS|ARMS
-	cold_protection = LOWER_TORSO|UPPER_TORSO|LEGS|ARMS
 	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO|LEGS
 	siemens_coefficient = 0.6
-	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 
 /obj/item/clothing/head/helmet/hellbringer
 	name = "Heat resistant helmet"
@@ -28,8 +25,8 @@
 	flags_inv = HIDEEARS|HIDEEYES
 	cold_protection = HEAD
 	min_cold_protection_temperature = HELMET_MIN_COLD_PROTECTION_TEMPERATURE
-	heat_protection = HEAD
-	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
+	heat_protection = HEAD|FACE
+	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.7
 	w_class = 3
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical/odst_hud
@@ -72,9 +69,9 @@
 	icon_state = "hellbringer_oversuit"
 	blood_overlay_type = "armor"
 	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
-	heat_protection = ARMS|UPPER_TORSO|LOWER_TORSO|LEGS
+	heat_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
-	armor = list(melee = 45, bullet = 40, laser = 45, energy = 45, bomb = 30, bio = 25, rad = 25) //Increased energy resistance for less in others
+	armor = list(melee = 45, bullet = 45, laser = 45, energy = 50, bomb = 30, bio = 25, rad = 25) //Increased energy resistance for less in others
 	armor_thickness = 20
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing)
 
