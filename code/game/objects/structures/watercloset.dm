@@ -534,3 +534,54 @@
 	desc = "A single sheet of toilet paper. Two ply."
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "bogroll_sheet"
+
+/obj/structure/hygiene/faucet
+	name = "faucet"
+	icon = 'icons/obj/watercloset.dmi'
+	icon_state = "faucet"
+	desc = "An outlet for liquids. Water you waiting for?"
+	anchored = 1
+	drainage = 0
+	clogged = -1
+	var/fill_level = FLUID_OVER_MOB_HEAD
+	var/open = FALSE
+
+/obj/structure/hygiene/faucet/attack_hand(mob/user)
+	. = ..()
+	open = !open
+	if(open)
+		playsound(src.loc, 'sound/effects/closet_open.ogg', 20, 1)
+	else
+		playsound(src.loc, 'sound/effects/closet_close.ogg', 20, 1)
+	
+	user.visible_message(SPAN_NOTICE("\The [user] has [open ? "opened" : "closed"] the faucet."))
+	update_icon()
+
+/obj/structure/hygiene/faucet/on_update_icon()
+	. = ..()
+	icon_state = icon_state = "[initial(icon_state)][open ? "-on" : ""]"
+
+/obj/structure/hygiene/faucet/proc/water_flow()
+	if(!isturf(src.loc))
+		return
+
+	// Check for depth first, and pass if the water's too high. I know players will find a way to just submerge entire ship if I do not.
+	var/turf/T = get_turf(src)
+
+	if(!T || T.get_fluid_depth() > fill_level)
+		return
+
+	if(world.time > next_gurgle)
+		next_gurgle = world.time + 80
+		playsound(T, pick(SSfluids.gurgles), 50, 1)
+
+	T.add_fluid(min(75, fill_level - T.get_fluid_depth()), /datum/reagent/water)
+
+/obj/structure/hygiene/faucet/Process()
+	..()
+	if(open) 
+		water_flow()
+
+/obj/structure/hygiene/faucet/examine(mob/user)
+	. = ..()
+	to_chat(user, "It is turned [open ? "on" : "off"]")
