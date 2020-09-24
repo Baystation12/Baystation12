@@ -181,10 +181,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/scavver/hab)
-"bR" = (
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/wood/yew,
-/area/scavver/hab)
 "bU" = (
 /obj/machinery/atmospherics/unary/tank{
 	dir = 8
@@ -199,7 +195,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
-/obj/machinery/meter,
 /turf/simulated/floor/airless,
 /area/scavver/yachtup)
 "bX" = (
@@ -369,9 +364,6 @@
 /turf/simulated/floor/airless,
 /area/space)
 "dj" = (
-/obj/structure/table/reinforced,
-/obj/machinery/microwave,
-/obj/effect/floor_decal/corner/lightgrey/mono,
 /turf/simulated/floor/tiled/monotile,
 /area/scavver/hab)
 "dm" = (
@@ -560,6 +552,9 @@
 /obj/effect/floor_decal/corner/lightgrey{
 	dir = 5
 	},
+/obj/structure/bed/chair{
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/scavver/hab)
 "ex" = (
@@ -677,6 +672,14 @@
 	initial_gas = newlist()
 	},
 /area/scavver/gantry/lift)
+"fN" = (
+/obj/machinery/portable_atmospherics/hydroponics,
+/obj/machinery/atmospherics/portables_connector{
+	dir = 1
+	},
+/obj/machinery/light/spot,
+/turf/simulated/floor/airless,
+/area/scavver/yachtup)
 "fQ" = (
 /obj/structure/railing/mapped{
 	dir = 8;
@@ -790,6 +793,15 @@
 /obj/machinery/atmospherics/valve,
 /turf/simulated/floor/airless,
 /area/scavver/yachtup)
+"gL" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/turf/simulated/floor/airless,
+/area/scavver/yachtup)
 "gM" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -816,11 +828,11 @@
 /turf/simulated/floor/tiled,
 /area/scavver/hab)
 "hb" = (
-/obj/machinery/atmospherics/pipe/cap/visible/supply{
-	dir = 8
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/cap/visible/scrubbers{
-	dir = 8
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
 	},
 /turf/simulated/floor/airless,
 /area/scavver/yachtup)
@@ -853,6 +865,16 @@
 /obj/structure/lattice,
 /turf/space,
 /area/space)
+"hB" = (
+/obj/machinery/alarm{
+	dir = 1;
+	pixel_y = -28;
+	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
+	},
+/obj/structure/table/reinforced,
+/obj/machinery/recharger,
+/turf/simulated/floor/tiled,
+/area/scavver/hab)
 "hD" = (
 /obj/structure/lattice,
 /obj/effect/catwalk_plated/dark,
@@ -901,6 +923,14 @@
 /obj/effect/decal/cleanable/liquid_fuel,
 /turf/simulated/floor/reinforced/airless,
 /area/scavver/yachtup)
+"ih" = (
+/obj/effect/floor_decal/corner/lightgrey{
+	dir = 5
+	},
+/obj/structure/table/standard,
+/obj/random/snack,
+/turf/simulated/floor/tiled,
+/area/scavver/hab)
 "ij" = (
 /obj/effect/floor_decal/techfloor/orange{
 	dir = 4
@@ -1206,7 +1236,6 @@
 	},
 /obj/machinery/portable_atmospherics/canister/empty,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/airless,
 /area/scavver/yachtup)
 "jS" = (
@@ -1216,12 +1245,6 @@
 /obj/machinery/portable_atmospherics/canister/hydrogen,
 /turf/simulated/floor/airless,
 /area/scavver/yachtup)
-"jW" = (
-/obj/structure/table/reinforced,
-/obj/effect/floor_decal/corner/lightgrey/mono,
-/obj/machinery/recharger,
-/turf/simulated/floor/tiled/monotile,
-/area/scavver/hab)
 "ka" = (
 /obj/structure/cable{
 	d1 = 2;
@@ -1246,6 +1269,12 @@
 	req_access = list()
 	},
 /turf/simulated/floor/tiled/dark/monotile,
+/area/scavver/hab)
+"ki" = (
+/obj/machinery/vending/dinnerware{
+	dir = 1
+	},
+/turf/simulated/floor/wood/yew,
 /area/scavver/hab)
 "ko" = (
 /obj/machinery/firealarm{
@@ -1673,8 +1702,8 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
-	dir = 4
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
 	},
 /turf/simulated/floor/airless,
 /area/scavver/yachtup)
@@ -1759,12 +1788,12 @@
 /turf/simulated/floor/airless,
 /area/scavver/gantry/up1)
 "ov" = (
-/obj/effect/catwalk_plated,
 /obj/item/device/radio/intercom{
 	dir = 1;
 	pixel_y = -28
 	},
-/turf/simulated/floor/plating,
+/obj/machinery/media/jukebox/old,
+/turf/simulated/floor/tiled,
 /area/scavver/hab)
 "ow" = (
 /obj/structure/cable{
@@ -1772,11 +1801,11 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 1
 	},
 /turf/simulated/floor/airless,
 /area/scavver/yachtup)
@@ -2038,6 +2067,15 @@
 	},
 /turf/space,
 /area/space)
+"qC" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/portable_atmospherics/canister/nitrogen/engine_setup,
+/turf/simulated/floor/airless,
+/area/scavver/yachtup)
 "qD" = (
 /obj/structure/lattice,
 /obj/effect/catwalk_plated/dark,
@@ -2121,6 +2159,12 @@
 /area/scavver/yachtup)
 "qV" = (
 /obj/machinery/light,
+/obj/machinery/vending/cigarette{
+	dir = 1;
+	name = "hacked cigarette machine";
+	prices = list();
+	products = list(/obj/item/weapon/storage/fancy/cigarettes = 10, /obj/item/weapon/storage/box/matches = 10, /obj/item/weapon/flame/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
+	},
 /turf/simulated/floor/wood/yew,
 /area/scavver/hab)
 "rb" = (
@@ -2154,6 +2198,15 @@
 	initial_gas = newlist()
 	},
 /area/scavver/lifepod)
+"ro" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/airless,
+/area/scavver/yachtup)
 "rp" = (
 /obj/structure/closet/emcloset,
 /obj/item/weapon/crowbar,
@@ -2235,7 +2288,6 @@
 /area/scavver/yachtup)
 "rU" = (
 /obj/structure/railing/mapped,
-/obj/machinery/pipedispenser,
 /turf/simulated/floor/airless,
 /area/scavver/gantry/up1)
 "rW" = (
@@ -2868,14 +2920,6 @@
 /obj/random/contraband,
 /turf/simulated/floor/airless,
 /area/scavver/gantry/up2)
-"vW" = (
-/obj/structure/lattice,
-/obj/machinery/atmospherics/pipe/cap/visible{
-	dir = 4;
-	icon_state = "cap"
-	},
-/turf/space,
-/area/scavver/yachtup)
 "vY" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/vulcan{
 	dir = 1;
@@ -2971,19 +3015,16 @@
 /turf/simulated/floor/airless,
 /area/scavver/yachtup)
 "wI" = (
-/obj/random/maintenance,
-/obj/item/weapon/material/kitchen/utensil/spork/plastic,
-/obj/item/weapon/material/kitchen/utensil/spork/plastic,
 /obj/structure/closet/secure_closet/freezer/fridge/scavver,
+/obj/item/weapon/material/kitchen/utensil/spork,
+/obj/item/weapon/material/kitchen/utensil/spork,
+/obj/item/weapon/reagent_containers/food/condiment/enzyme,
+/obj/item/weapon/storage/box/donkpockets,
+/obj/item/weapon/material/kitchen/utensil/spork,
+/obj/random/loot,
+/mob/living/simple_animal/mouse/brown/Tom,
 /turf/simulated/floor/wood/yew,
 /area/scavver/hab)
-"wN" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/meter,
-/turf/simulated/floor/airless,
-/area/scavver/yachtup)
 "wQ" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
 	dir = 9
@@ -3011,8 +3052,7 @@
 /area/scavver/yachtup)
 "xg" = (
 /obj/structure/table/reinforced,
-/obj/random/snack,
-/obj/effect/decal/cleanable/dirt,
+/obj/structure/reagent_dispensers/beerkeg,
 /turf/simulated/floor/wood/yew,
 /area/scavver/hab)
 "xh" = (
@@ -3152,13 +3192,6 @@
 	initial_gas = newlist()
 	},
 /area/scavver/escapepod)
-"yD" = (
-/obj/machinery/portable_atmospherics/hydroponics,
-/obj/machinery/light/spot{
-	dir = 4
-	},
-/turf/simulated/floor/airless,
-/area/scavver/yachtup)
 "yE" = (
 /obj/structure/cable{
 	d1 = 2;
@@ -3269,7 +3302,8 @@
 /turf/simulated/floor/tiled/dark,
 /area/scavver/lifepod)
 "zR" = (
-/obj/item/weapon/stool/padded,
+/obj/structure/table/reinforced,
+/obj/item/weapon/storage/box/glasses/pint,
 /turf/simulated/floor/wood/yew,
 /area/scavver/hab)
 "zU" = (
@@ -3295,7 +3329,6 @@
 /obj/structure/lattice,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/structure/girder/displaced,
 /turf/space,
 /area/scavver/yachtup)
 "Af" = (
@@ -3360,7 +3393,11 @@
 /turf/simulated/floor/plating,
 /area/scavver/hab)
 "AI" = (
-/mob/living/simple_animal/mouse/brown/Tom,
+/obj/machinery/vending/cola{
+	dir = 1;
+	name = "hacked Robust Softdrinks";
+	prices = list()
+	},
 /turf/simulated/floor/wood/yew,
 /area/scavver/hab)
 "AN" = (
@@ -3462,6 +3499,9 @@
 /area/scavver/harvestpod)
 "BA" = (
 /obj/machinery/portable_atmospherics/hydroponics,
+/obj/machinery/atmospherics/portables_connector{
+	dir = 1
+	},
 /turf/simulated/floor/airless,
 /area/scavver/yachtup)
 "BB" = (
@@ -3579,6 +3619,14 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/scavver/lifepod)
+"CK" = (
+/obj/effect/floor_decal/corner/lightgrey{
+	dir = 5
+	},
+/obj/structure/table/standard,
+/obj/item/weapon/material/ashtray/plastic,
+/turf/simulated/floor/tiled,
+/area/scavver/hab)
 "CN" = (
 /obj/machinery/computer/air_control{
 	input_tag = "scavver_teg_in_fuel";
@@ -3666,11 +3714,9 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/portables_connector{
 	dir = 8
 	},
-/obj/machinery/portable_atmospherics/canister/nitrogen/engine_setup,
 /turf/simulated/floor/airless,
 /area/scavver/yachtup)
 "Ds" = (
@@ -3730,6 +3776,11 @@
 /obj/effect/wallframe_spawn/reinforced/no_grille,
 /turf/simulated/floor/plating,
 /area/scavver/hab)
+"Ef" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/universal,
+/obj/machinery/meter,
+/turf/simulated/floor/airless,
+/area/scavver/yachtup)
 "Eg" = (
 /obj/structure/handrai{
 	dir = 1
@@ -3740,6 +3791,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
 	dir = 4
 	},
+/obj/machinery/meter,
 /turf/simulated/floor/airless,
 /area/scavver/yachtup)
 "Eo" = (
@@ -3778,9 +3830,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
-	dir = 8
-	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/airless,
 /area/scavver/yachtup)
 "EM" = (
@@ -3832,6 +3882,13 @@
 /obj/machinery/portable_atmospherics/canister/oxygen,
 /turf/simulated/floor/airless,
 /area/scavver/gantry/up2)
+"Fk" = (
+/obj/machinery/atmospherics/pipe/manifold/visible{
+	dir = 1
+	},
+/obj/machinery/meter,
+/turf/simulated/floor/airless,
+/area/scavver/yachtup)
 "Fl" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 5
@@ -3867,8 +3924,9 @@
 /turf/space,
 /area/space)
 "FE" = (
-/obj/machinery/atmospherics/valve{
-	dir = 4
+/obj/machinery/atmospherics/pipe/simple/visible{
+	dir = 4;
+	icon_state = "intact"
 	},
 /turf/simulated/floor/airless,
 /area/scavver/yachtup)
@@ -3994,7 +4052,10 @@
 /turf/simulated/wall/r_wall,
 /area/scavver/lifepod)
 "GC" = (
-/obj/machinery/vending/hydroseeds,
+/obj/machinery/portable_atmospherics/powered/pump/filled,
+/obj/machinery/light/spot{
+	dir = 1
+	},
 /turf/simulated/floor/airless,
 /area/scavver/yachtup)
 "GH" = (
@@ -4050,7 +4111,7 @@
 /turf/simulated/floor/airless,
 /area/scavver/yachtup)
 "Ha" = (
-/obj/machinery/atmospherics/pipe/cap/visible/supply{
+/obj/machinery/atmospherics/pipe/manifold/visible{
 	dir = 8
 	},
 /turf/simulated/floor/airless,
@@ -4076,9 +4137,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
 	},
-/obj/machinery/atmospherics/pipe/cap/visible/scrubbers{
-	dir = 1
-	},
 /turf/simulated/floor/airless,
 /area/scavver/yachtup)
 "HM" = (
@@ -4092,10 +4150,7 @@
 /turf/simulated/floor/plating,
 /area/scavver/hab)
 "HN" = (
-/obj/structure/table/reinforced,
-/obj/item/weapon/storage/box/glasses/pint,
-/obj/item/weapon/storage/box/donkpockets,
-/obj/effect/floor_decal/corner/lightgrey/mono,
+/obj/structure/bed/chair,
 /turf/simulated/floor/tiled/monotile,
 /area/scavver/hab)
 "HR" = (
@@ -4121,6 +4176,13 @@
 	},
 /turf/simulated/floor/airless,
 /area/scavver/gantry/up1)
+"HY" = (
+/obj/machinery/atmospherics/pipe/simple/visible{
+	dir = 10;
+	icon_state = "intact"
+	},
+/turf/simulated/floor/airless,
+/area/scavver/yachtup)
 "Ib" = (
 /obj/machinery/power/port_gen/pacman{
 	anchored = 1;
@@ -4154,6 +4216,12 @@
 	},
 /turf/simulated/floor/airless,
 /area/space)
+"Ii" = (
+/obj/machinery/atmospherics/portables_connector{
+	dir = 4
+	},
+/turf/simulated/floor/airless,
+/area/scavver/yachtup)
 "Im" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 4
@@ -4255,12 +4323,6 @@
 	initial_gas = newlist()
 	},
 /area/scavver/lifepod)
-"Jq" = (
-/obj/machinery/atmospherics/pipe/cap/visible{
-	dir = 8
-	},
-/turf/simulated/floor/airless,
-/area/scavver/yachtup)
 "Js" = (
 /obj/structure/railing/mapped{
 	dir = 1;
@@ -4340,9 +4402,10 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/scavver/lifepod)
 "Ko" = (
-/obj/structure/table/reinforced,
-/obj/item/weapon/material/ashtray/plastic,
-/obj/effect/decal/cleanable/dirt,
+/obj/structure/reagent_dispensers/water_cooler{
+	dir = 4;
+	icon_state = "water_cooler"
+	},
 /turf/simulated/floor/wood/yew,
 /area/scavver/hab)
 "Ks" = (
@@ -4801,12 +4864,6 @@
 	},
 /turf/simulated/floor/airless,
 /area/scavver/yachtup)
-"Ow" = (
-/obj/structure/table/reinforced,
-/obj/random/single/cola,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/wood/yew,
-/area/scavver/hab)
 "Oy" = (
 /obj/machinery/airlock_sensor{
 	frequency = 1380;
@@ -4833,7 +4890,7 @@
 /area/scavver/yachtup)
 "Pc" = (
 /obj/machinery/atmospherics/binary/pump{
-	dir = 4
+	dir = 8
 	},
 /turf/simulated/floor/airless,
 /area/scavver/yachtup)
@@ -4932,12 +4989,6 @@
 	},
 /turf/simulated/floor/airless,
 /area/scavver/lifepod)
-"Qe" = (
-/obj/structure/table/reinforced,
-/obj/structure/reagent_dispensers/beerkeg,
-/obj/effect/floor_decal/corner/lightgrey/mono,
-/turf/simulated/floor/tiled/monotile,
-/area/scavver/hab)
 "Qh" = (
 /obj/effect/floor_decal/techfloor/orange{
 	dir = 9
@@ -5117,6 +5168,10 @@
 /obj/effect/catwalk_plated/dark,
 /turf/simulated/floor/airless,
 /area/scavver/gantry/up2)
+"Sj" = (
+/obj/machinery/pipedispenser,
+/turf/simulated/floor/airless,
+/area/scavver/yachtup)
 "Sm" = (
 /obj/structure/railing/mapped,
 /obj/structure/table/rack,
@@ -5130,7 +5185,8 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/structure/reagent_dispensers/water_cooler,
+/obj/structure/table/reinforced,
+/obj/machinery/reagentgrinder/juicer,
 /turf/simulated/floor/wood/yew,
 /area/scavver/hab)
 "Sx" = (
@@ -5213,14 +5269,8 @@
 /turf/simulated/floor/tiled,
 /area/scavver/hab)
 "TY" = (
-/obj/machinery/media/jukebox/old,
-/obj/machinery/alarm{
-	dir = 4;
-	locked = 0;
-	pixel_x = -25;
-	pixel_y = 0;
-	req_access = list()
-	},
+/obj/structure/table/reinforced,
+/obj/machinery/microwave,
 /turf/simulated/floor/wood/yew,
 /area/scavver/hab)
 "Ub" = (
@@ -5271,6 +5321,16 @@
 	},
 /turf/simulated/floor/airless,
 /area/scavver/yachtup)
+"UM" = (
+/obj/effect/floor_decal/corner/lightgrey{
+	dir = 5
+	},
+/obj/structure/bed/chair{
+	dir = 8;
+	icon_state = "chair_preview"
+	},
+/turf/simulated/floor/tiled,
+/area/scavver/hab)
 "UP" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -5328,13 +5388,6 @@
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/plating,
 /area/scavver/hab)
-"Vj" = (
-/obj/machinery/portable_atmospherics/canister/empty,
-/obj/machinery/atmospherics/portables_connector{
-	dir = 4
-	},
-/turf/simulated/floor/airless,
-/area/scavver/yachtup)
 "Vv" = (
 /obj/effect/paint/silver,
 /obj/effect/paint_stripe/white,
@@ -5383,11 +5436,14 @@
 /turf/simulated/floor/airless,
 /area/scavver/lifepod)
 "VP" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/universal{
-	dir = 4
-	},
 /obj/machinery/light/small{
 	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
 	},
 /turf/simulated/floor/airless,
 /area/scavver/yachtup)
@@ -5494,6 +5550,7 @@
 	},
 /obj/machinery/power/apc{
 	dir = 4;
+	locked = 0;
 	name = "west bump";
 	pixel_x = 24;
 	req_access = list()
@@ -5548,6 +5605,12 @@
 /area/scavver/lifepod)
 "WX" = (
 /obj/machinery/door/airlock/external/bolted_open,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
 /turf/simulated/floor/airless,
 /area/scavver/yachtup)
 "Xb" = (
@@ -5559,13 +5622,8 @@
 /turf/simulated/wall/r_wall,
 /area/scavver/harvestpod)
 "Xj" = (
-/obj/machinery/atmospherics/pipe/cap/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/cap/hidden/supply{
-	dir = 1
-	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /turf/simulated/floor/airless,
 /area/scavver/yachtup)
 "Xm" = (
@@ -5602,6 +5660,10 @@
 	initial_gas = newlist()
 	},
 /area/scavver/lifepod)
+"Xs" = (
+/obj/machinery/vending/hydronutrients,
+/turf/simulated/floor/airless,
+/area/scavver/yachtup)
 "Xz" = (
 /obj/effect/floor_decal/corner/grey/diagonal,
 /obj/machinery/atmospherics/unary/vent_scrubber/vulcan{
@@ -5697,13 +5759,6 @@
 	},
 /turf/simulated/floor/airless,
 /area/scavver/yachtup)
-"Yc" = (
-/obj/machinery/atmospherics/binary/pump/on{
-	dir = 8;
-	target_pressure = 15000
-	},
-/turf/simulated/floor/airless,
-/area/scavver/yachtup)
 "Yd" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/catwalk_plated,
@@ -5765,6 +5820,11 @@
 /obj/machinery/atmospherics/pipe/zpipe/down/scrubbers,
 /turf/space,
 /area/scavver/yachtup)
+"YN" = (
+/obj/structure/table/reinforced,
+/obj/machinery/reagent_temperature,
+/turf/simulated/floor/wood/yew,
+/area/scavver/hab)
 "YY" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red,
 /obj/structure/railing/mapped{
@@ -5802,6 +5862,10 @@
 	dir = 4
 	},
 /turf/simulated/floor/reinforced/airless,
+/area/scavver/yachtup)
+"ZI" = (
+/obj/machinery/portable_atmospherics/powered/scrubber,
+/turf/simulated/floor/airless,
 /area/scavver/yachtup)
 "ZK" = (
 /obj/machinery/atmospherics/binary/pump{
@@ -16577,7 +16641,7 @@ NY
 NY
 NY
 VX
-Qy
+Ii
 Ce
 ju
 Ob
@@ -16875,7 +16939,7 @@ eN
 tX
 hX
 VX
-Xb
+ZI
 oN
 hv
 te
@@ -17033,9 +17097,9 @@ hv
 te
 te
 hv
-Jq
 RE
-wN
+RE
+XF
 dm
 sX
 gM
@@ -17179,16 +17243,16 @@ eN
 tX
 eN
 wU
-pO
+Sj
 oN
 Ca
 hv
 hv
 NY
-vW
+RE
 RE
 XF
-YA
+gL
 hv
 om
 Zx
@@ -17336,11 +17400,11 @@ oN
 oN
 oN
 bV
-lU
+Ef
 dS
 Ob
 XF
-YA
+qC
 hv
 mu
 ZK
@@ -17488,7 +17552,7 @@ We
 We
 EL
 nJ
-We
+ro
 jO
 Dl
 HF
@@ -17636,8 +17700,8 @@ Py
 SA
 sX
 ow
-BA
-BA
+lU
+gx
 Ha
 BA
 VX
@@ -17788,9 +17852,9 @@ tX
 eN
 VX
 hb
-yD
-BA
 oN
+oN
+Ce
 BA
 VX
 NY
@@ -17941,9 +18005,9 @@ eN
 VX
 WX
 VX
-BA
-oN
-BA
+pO
+Fk
+fN
 VX
 NY
 te
@@ -18091,11 +18155,11 @@ eN
 tX
 eN
 NY
-Vj
+hb
 VX
-VX
-VX
-VX
+Xs
+Ce
+BA
 VX
 NY
 te
@@ -18243,13 +18307,13 @@ XR
 hD
 hX
 NY
-Yc
+hb
 VX
-eN
-eN
+Xb
+HY
+BA
 VX
-te
-te
+NY
 te
 te
 VX
@@ -18396,11 +18460,11 @@ hX
 eN
 VX
 VP
-VX
-eN
-hX
+Ca
+Ca
 NY
 NY
+oN
 NY
 NY
 NY
@@ -18550,7 +18614,7 @@ Ad
 Xj
 NY
 eN
-hX
+eN
 eN
 eN
 eN
@@ -18836,12 +18900,12 @@ eN
 eN
 Qn
 TY
-mS
+YN
 zR
 xg
 Ko
-zR
 mS
+ki
 Qn
 dV
 QB
@@ -18989,10 +19053,10 @@ eN
 Qn
 Sn
 mS
-zR
-Ow
-xg
-zR
+mS
+mS
+mS
+mS
 qV
 Qn
 Vi
@@ -19143,7 +19207,7 @@ wI
 mS
 mS
 mS
-bR
+mS
 mS
 AI
 Qn
@@ -19294,7 +19358,7 @@ Qn
 Qn
 dj
 er
-EU
+so
 so
 ov
 Qn
@@ -19445,10 +19509,10 @@ eN
 eN
 VY
 HN
-er
-EU
+CK
+so
 mN
-EU
+hB
 Qn
 qN
 xu
@@ -19596,8 +19660,8 @@ eN
 eN
 eN
 VY
-jW
-er
+HN
+ih
 EU
 Yd
 zp
@@ -19748,8 +19812,8 @@ eN
 eN
 eN
 Qn
-Qe
-er
+dj
+UM
 so
 Rv
 so
