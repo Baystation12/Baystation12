@@ -123,7 +123,7 @@
 	var/obj/item/projectile/dam_proj = damage_source
 	if(istype(dam_proj))
 		if(dam_proj.shield_damage < 0) //Handling for -'ve shield damage numbers
-			damage = max(0,damage - shield_damage)
+			damage = max(0,damage - dam_proj.shield_damage)
 		else if(dam_proj.shield_damage >0 && !take_damage(dam_proj.shield_damage,0))
 			return 0
 	if(take_damage(damage))
