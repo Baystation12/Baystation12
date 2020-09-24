@@ -349,9 +349,13 @@ This saves us from having to call add_fingerprint() any time something is put in
 	if((W == src.l_hand) && (slot != slot_l_hand))
 		src.l_hand = null
 		update_inv_l_hand() //So items actually disappear from hands.
+		if(r_hand)
+			r_hand.update_twohanding()
 	else if((W == src.r_hand) && (slot != slot_r_hand))
 		src.r_hand = null
 		update_inv_r_hand()
+		if(l_hand)
+			l_hand.update_twohanding()
 
 	W.hud_layerise()
 	for(var/s in species.hud.gear)
