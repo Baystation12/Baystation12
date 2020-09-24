@@ -44,10 +44,11 @@
 	silenced = 1
 	is_heavy = 1
 	scoped_accuracy = 1
-	magazine_type = /obj/item/ammo_magazine/m7/m443
+	magazine_type = /obj/item/ammo_magazine/m7/m443/rnd48
+	allowed_magazines = list(/obj/item/ammo_magazine/m7/m443/rnd48)
 	fire_sound = 'code/modules/halo/sounds/SMG_SOCOM_Fire.wav'
 	//fire_sound_burst = 'code/modules/halo/sounds/SMG_SOCOM_Fire.wav'
-	dispersion = list(0.1, 0.3, 0.65, 1.0)
+	dispersion = list(0.2, 0.4, 0.7, 1.0)
 	one_hand_penalty = 2
 	allowed_magazines = list(/obj/item/ammo_magazine/m7, /obj/item/ammo_magazine/m7)
 
@@ -83,6 +84,10 @@
 	name = "M7 magazine (5mm) M443"
 	desc = "5x23mm M443 Caseless Full Metal Jacket magazine for the M7. Fun sized with no pesky casing!"
 	ammo_type = /obj/item/ammo_casing/m443
+
+/obj/item/ammo_magazine/m7/m443/rnd48
+	name = "M7s magazine (5mm) M443"
+	max_ammo = 48
 
 /obj/item/weapon/storage/box/m7_m443
 	name = "box of M7 5mm M443 magazines"
