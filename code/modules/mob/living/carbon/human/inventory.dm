@@ -13,14 +13,14 @@ This saves us from having to call add_fingerprint() any time something is put in
 		if(!I)
 			to_chat(H, "<span class='notice'>You are not holding anything to equip.</span>")
 			return
-		if(H.equip_to_appropriate_slot(I))
+		if(istype (I, /obj/item/underwear))
+			var/obj/item/underwear/U = I
+			U.EquipUnderwear(H, H)
+		else if(H.equip_to_appropriate_slot(I))
 			if(hand)
 				update_inv_l_hand(0)
 			else
 				update_inv_r_hand(0)
-		else if (istype (I, /obj/item/underwear))
-			var/obj/item/underwear/U = I
-			U.EquipUnderwear(H, H)
 		else
 			to_chat(H, "<span class='warning'>You are unable to equip that.</span>")
 
