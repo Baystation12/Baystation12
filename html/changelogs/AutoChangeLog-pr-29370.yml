@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - bugfix: "AOOC enable/disable messages should now be properly hidden from non-antags"
