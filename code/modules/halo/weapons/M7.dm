@@ -48,7 +48,7 @@
 	allowed_magazines = list(/obj/item/ammo_magazine/m7/m443/rnd48)
 	fire_sound = 'code/modules/halo/sounds/SMG_SOCOM_Fire.wav'
 	//fire_sound_burst = 'code/modules/halo/sounds/SMG_SOCOM_Fire.wav'
-	dispersion = list(0.2, 0.4, 0.7, 1.0)
+	dispersion = list(0.1, 0.3, 0.6, 1.0)
 	one_hand_penalty = 2
 	allowed_magazines = list(/obj/item/ammo_magazine/m7, /obj/item/ammo_magazine/m7)
 
