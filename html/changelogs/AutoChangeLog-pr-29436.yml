@@ -1,0 +1,4 @@
+author: "Hubblenaut"
+delete-after: True
+changes: 
+  - bugfix: "Underwear will no longer be quick-equipped into pockets."
