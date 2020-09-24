@@ -121,8 +121,11 @@
 	if(istype(attacker) && damage < 5 && (attacker.a_intent == "help" || attacker.a_intent == "grab")) //We don't need to block helpful actions. (Or grabs)
 		return 0
 	var/obj/item/projectile/dam_proj = damage_source
-	if(istype(dam_proj) && dam_proj.shield_damage >0 && !take_damage(dam_proj.shield_damage,0))
-		return 0
+	if(istype(dam_proj))
+		if(dam_proj.shield_damage < 0) //Handling for -'ve shield damage numbers
+			damage = max(0,damage - shield_damage)
+		else if(dam_proj.shield_damage >0 && !take_damage(dam_proj.shield_damage,0))
+			return 0
 	if(take_damage(damage))
 		//Melee damage through shields is reduced
 		var/obj/item/dam_source = damage_source

@@ -9,6 +9,7 @@
 
 /obj/item/projectile/bullet/m118
 	damage = 30
+	shield_damage = -5 //Unspecialised kinetics are less powerful vs shields
 
 /* M118 TTR Rounds */
 
@@ -33,6 +34,7 @@
 
 /obj/item/projectile/bullet/m119
 	damage = 35
+	shield_damage = -10
 
 /* M120 Rounds */
 
