@@ -1,5 +1,0 @@
-author: "juxtaposed9930"
-delete-after: True
-changes: 
-  - rscadd: "Guitars, Electric Guitars and Handheld Synthesizers can now be stored on the back, with appropriate sprites."
-  - tweak: "The mail event will now send a functional guitar instead of the one-note wonder it previously used."

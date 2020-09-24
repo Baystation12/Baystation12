@@ -1,6 +1,0 @@
-author: "CrimsonShrike"
-delete-after: True
-changes: 
-  - rscadd: "Adds faucets."
-  - rscadd: "Adds sealable drains."
-  - rscadd: "Adds pool turfs."

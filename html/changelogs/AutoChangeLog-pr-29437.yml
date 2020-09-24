@@ -1,4 +1,0 @@
-author: "Hubblenaut"
-delete-after: True
-changes: 
-  - bugfix: "Fixes dual-wielded items not getting updated when an item in the other hand is being equipped to an inventory slot."
