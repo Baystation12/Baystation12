@@ -23,6 +23,11 @@
 	build_path = /obj/machinery/power/port_gen/pacman/super/potato
 	origin_tech = list(TECH_DATA = 3, TECH_POWER = 5, TECH_ENGINEERING = 4)
 
+/obj/item/weapon/stock_parts/circuitboard/pacman/super/potato/reactor
+	name = T_BOARD("ICRER-2 nuclear generator")
+	build_path = /obj/machinery/power/port_gen/pacman/super/potato/reactor
+	origin_tech = list(TECH_DATA = 3, TECH_POWER = 5, TECH_ENGINEERING = 4)
+
 /obj/item/weapon/stock_parts/circuitboard/pacman/mrs
 	name = T_BOARD("MRSPACMAN-type generator")
 	build_path = /obj/machinery/power/port_gen/pacman/mrs

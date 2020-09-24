@@ -388,6 +388,13 @@
 	build_path = /obj/item/weapon/stock_parts/circuitboard/pacman/super/potato
 	sort_string = "JBAAD"
 
+/datum/design/circuit/pacmanreactor
+	name = "ICRER-2 nuclear generator"
+	id = "pacmanreactor"
+	req_tech = list(TECH_DATA = 4, TECH_POWER = 5, TECH_ENGINEERING = 5)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/pacman/super/potato/reactor
+	sort_string = "JBAAE"
+
 /datum/design/circuit/batteryrack
 	name = "cell rack PSU"
 	id = "batteryrack"

@@ -198,3 +198,6 @@
 
 /obj/structure/wall_frame/hull/ascent
 	paint_color = COLOR_PURPLE
+
+/obj/structure/wall_frame/hull/verne
+	paint_color = COLOR_GUNMETAL
