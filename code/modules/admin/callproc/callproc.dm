@@ -222,13 +222,13 @@
 		if(!target)
 			to_chat(usr, "Your callproc target no longer exists.")
 			return
-		log_admin("[key_name(src)] called [target]'s [procname]() with [arguments.len ? "the arguments [list2params(arguments)]" : "no arguments"].")
+		log_and_message_admins("[key_name(C)] called \the [target]'s [procname]() with [arguments.len ? "the arguments [list2params(arguments)]" : "no arguments"].", location = get_turf(target))
 		if(arguments.len)
 			returnval = call(target, procname)(arglist(arguments))
 		else
 			returnval = call(target, procname)()
 	else
-		log_admin("[key_name(src)] called [procname]() with [arguments.len ? "the arguments [list2params(arguments)]" : "no arguments"].")
+		log_and_message_admins("[key_name(C)] called [procname]() with [arguments.len ? "the arguments [list2params(arguments)]" : "no arguments"].", location = get_turf(target))
 		returnval = call(procname)(arglist(arguments))
 
 	to_chat(usr, "<span class='info'>[procname]() returned: [json_encode(returnval)]</span>")
