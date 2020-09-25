@@ -941,8 +941,8 @@
 	name = "\improper Recreation"
 	icon_state = "crew_quarters"
 
-/area/crew_quarters/observation
-	name = "\improper Observation"
+/area/crew_quarters/pool
+	name = "\improper Training Tank"
 	icon_state = "fitness"
 
 /area/crew_quarters/galley
