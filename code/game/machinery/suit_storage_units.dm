@@ -26,7 +26,7 @@
 	boots = /obj/item/clothing/shoes/magboots
 	tank = /obj/item/weapon/tank/oxygen
 	mask = /obj/item/clothing/mask/breath
-	req_access = list(access_engine)
+	req_access = list(access_construction)
 	islocked = 1
 
 /obj/machinery/suit_storage_unit/engineering/unishi
