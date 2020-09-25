@@ -60,8 +60,10 @@
 
 /obj/item/projectile/bullet/fire/on_impact(var/atom/impacted)
 	..()
-	if(isturf(impacted.loc))
-		(get_turf(impacted.loc)).hotspot_expose(700, 2) //from BS12 flamethrower. Starts fire at turf if possible
+	var/impacted_loc = impacted.loc
+	if(isturf(impacted_loc))
+		new /obj/effect/decal/cleanable/liquid_fuel/flamethrower_fuel(1,impacted_loc)
+		new /obj/effect/fire(impacted_loc)
 
 /obj/item/ammo_magazine/na4_tank
 	name = "\improper Napalm Tank"
