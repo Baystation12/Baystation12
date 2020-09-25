@@ -84,6 +84,7 @@
 	name = "Tactical Hardcase (Construction Materials)"
 	desc = "A reinforced storage box, clipped near your pockets. Holds a variety of construction materials."
 	storage_slots = 2
+	max_w_class = ITEM_SIZE_LARGE
 	can_hold = list(/obj/item/stack/material)
 
 /obj/item/weapon/storage/pocketstore/hardcase/materials/cov
