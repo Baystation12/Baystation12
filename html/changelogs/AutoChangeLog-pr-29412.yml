@@ -1,0 +1,4 @@
+author: "Hubblenaut"
+delete-after: True
+changes: 
+  - tweak: "Holding the paint sprayer in an active hand now lets you pick and remove color using ctrl-click and shift-click, respectively."
