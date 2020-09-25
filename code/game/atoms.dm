@@ -586,7 +586,7 @@ its easier to just keep the beam vertical.
 		return ..()
 
 /atom/proc/get_color()
-	return color
+	return isnull(color) ? COLOR_WHITE : color
 
 /atom/proc/set_color(var/color)
 	src.color = color

@@ -151,6 +151,7 @@
 	return
 
 /mob/living/carbon/swap_hand()
+	. = ..()
 	hand = !hand
 	if(hud_used.l_hand_hud_object && hud_used.r_hand_hud_object)
 		if(hand)	//This being 1 means the left hand is in use
@@ -161,7 +162,7 @@
 			hud_used.r_hand_hud_object.icon_state = "r_hand_active"
 	var/obj/item/I = get_active_hand()
 	if(istype(I))
-		I.on_active_hand()
+		I.on_active_hand(src)
 
 /mob/living/carbon/proc/activate_hand(var/selhand) //0 or "r" or "right" for right hand; 1 or "l" or "left" for left hand.
 
