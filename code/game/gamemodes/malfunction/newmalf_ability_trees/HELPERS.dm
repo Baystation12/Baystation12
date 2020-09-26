@@ -57,22 +57,6 @@
 		C.owner = user
 		C.install()
 
-// Verb: ai_help()
-// Parameters: None
-// Descriptions: Opens help file and displays it to the AI.
-/datum/game_mode/malfunction/verb/ai_help()
-	set category = "Hardware"
-	set name = "Display Help"
-	set desc = "Opens help window with overview of available hardware, software and other important information."
-	var/mob/living/silicon/ai/user = usr
-
-	var/help = file2text('ingame_manuals/malf_ai.html')
-	if(!help)
-		help = "Error loading help (file /ingame_manuals/malf_ai.html is probably missing). Please report this to server administration staff."
-
-	show_browser(user, help, "window=malf_ai_help;size=600x500")
-
-
 // Verb: ai_select_research()
 // Parameters: None
 // Description: Allows AI to select it's next research priority.

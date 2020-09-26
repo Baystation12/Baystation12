@@ -12,7 +12,6 @@
 
 	verbs += /datum/game_mode/malfunction/verb/ai_select_hardware
 	verbs += /datum/game_mode/malfunction/verb/ai_select_research
-	verbs += /datum/game_mode/malfunction/verb/ai_help
 
 	log_ability_use(src, "became malfunctioning AI")
 	// And greet user with some OOC info.
