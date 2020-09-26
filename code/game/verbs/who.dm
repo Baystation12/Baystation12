@@ -93,7 +93,7 @@
 			if(C.get_preference_value(/datum/client_preference/show_ooc) == GLOB.PREF_HIDE)
 				line += " <font color='#002eb8'><b><s>(OOC)</s></b></font>"
 			if(C.get_preference_value(/datum/client_preference/show_looc) == GLOB.PREF_HIDE)
-				line += " <font color='#3a9696'><b><s>(LOOC)</s></b></font>"
+				line += " <font color='#3a7496'><b><s>(LOOC)</s></b></font>"
 			if(C.get_preference_value(/datum/client_preference/show_aooc) == GLOB.PREF_HIDE)
 				line += " <font color='#960018'><b><s>(AOOC)</s></b></font>"
 			if(C.get_preference_value(/datum/client_preference/show_dsay) == GLOB.PREF_HIDE)
