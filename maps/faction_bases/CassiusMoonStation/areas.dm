@@ -17,6 +17,9 @@
 /area/faction_base/unsc/moonbase/defense_midwest
 	name = "Orbital Facility Cassius Midwest Defenses"
 
+/area/faction_base/unsc/moonbase/defense_center
+	name = "Orbital Facility Cassius Center Bunker"
+
 /area/faction_base/unsc/moonbase/defense_mid
 	name = "Orbital Facility Cassius Mid Defenses"
 
@@ -109,14 +112,6 @@
 /area/faction_base/unsc/moonbase/briefing_a
 	name = "Orbital Facility Cassius - Briefing Room A"
 	icon_state = "library"
-
-/area/faction_base/unsc/moonbase/moonbase_helpline
-	name = "Orbital Facility Cassius - Orbital Facility Administration"
-	icon_state = "showroom"
-
-/area/faction_base/unsc/moonbase/odst_pods
-	name = "Orbital Facility Cassius - ODST Pods"
-	icon_state = "odst"
 
 /area/faction_base/unsc/moonbase/MAC
 	name = "Orbital Facility Cassius - Magnetic Accelerator Cannon"
