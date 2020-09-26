@@ -95,7 +95,7 @@
 	return 1
 
 /mob/living/carbon/human/proc/change_hair_color(var/red, var/green, var/blue)
-	if(red == r_eyes && green == g_eyes && blue == b_eyes)
+	if(red == r_hair && green == g_hair && blue == b_hair)
 		return
 
 	r_hair = red
