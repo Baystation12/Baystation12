@@ -1896,10 +1896,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/map_template/merc_shuttle/rear)
-"cU" = (
-/obj/vehicle/bike/electric,
-/turf/simulated/floor/airless,
-/area/space)
 "cW" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
@@ -9658,7 +9654,7 @@ aa
 aa
 aa
 cY
-cU
+Pb
 Pb
 cY
 aa
@@ -9760,7 +9756,7 @@ aa
 aa
 aa
 cY
-cU
+Pb
 Pb
 cY
 aa
@@ -9862,7 +9858,7 @@ aa
 aa
 aa
 cY
-cU
+Pb
 Pb
 NZ
 dh
@@ -9964,7 +9960,7 @@ aa
 aa
 aa
 cY
-cU
+Pb
 Pb
 aa
 aa
@@ -10066,7 +10062,7 @@ aa
 aa
 aa
 cY
-cU
+Pb
 aa
 aa
 aa
@@ -10168,7 +10164,7 @@ aa
 aa
 aa
 cY
-cU
+Pb
 aa
 aa
 aa

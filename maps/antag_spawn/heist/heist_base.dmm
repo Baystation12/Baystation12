@@ -114,21 +114,6 @@
 	icon_state = "white"
 	},
 /area/map_template/syndicate_mothership/raider_base)
-"au" = (
-/obj/vehicle/bike/thermal,
-/obj/random/trash,
-/turf/unsimulated/floor{
-	icon_state = "plating";
-	name = "plating"
-	},
-/area/map_template/syndicate_mothership/raider_base)
-"av" = (
-/obj/vehicle/bike/thermal,
-/turf/unsimulated/floor{
-	icon_state = "plating";
-	name = "plating"
-	},
-/area/map_template/syndicate_mothership/raider_base)
 "aw" = (
 /obj/random/trash,
 /turf/unsimulated/floor{
@@ -1612,7 +1597,6 @@
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
 "dJ" = (
-/obj/vehicle/bike/thermal,
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
 "dK" = (
@@ -4027,7 +4011,7 @@ da
 dm
 du
 dm
-dJ
+dr
 dT
 eg
 el
@@ -5083,7 +5067,7 @@ ab
 ab
 ab
 ae
-au
+aw
 aj
 aj
 aw
@@ -5158,7 +5142,7 @@ ae
 aj
 aj
 aG
-av
+aj
 ae
 be
 bs
@@ -5227,7 +5211,7 @@ ab
 ab
 ab
 ae
-av
+aj
 az
 aj
 aj
@@ -5301,8 +5285,8 @@ ab
 ae
 eI
 aj
-av
-av
+aj
+aj
 ae
 bg
 bu
