@@ -28743,7 +28743,6 @@
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 5
 	},
-/obj/structure/bed/chair/wheelchair,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/closet/shipping_wall/filled{
 	pixel_y = 32

@@ -111,7 +111,6 @@
 		SSticker.mode.handle_offsite_latejoin(character)
 		GLOB.universe.OnPlayerLatejoin(character)
 		log_and_message_admins("has joined the round as offsite role [character.mind.assigned_role].", character)
-		if(character.cannot_stand()) equip_wheelchair(character)
 		job.post_equip_rank(character, job.title)
 		qdel(joining)
 

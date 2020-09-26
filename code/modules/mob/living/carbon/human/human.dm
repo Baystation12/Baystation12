@@ -1783,14 +1783,6 @@
 /mob/living/carbon/human/proc/get_cultural_value(var/token)
 	return cultural_info[token]
 
-/mob/living/carbon/human/needs_wheelchair()
-	var/stance_damage = 0
-	for(var/limb_tag in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
-		var/obj/item/organ/external/E = organs_by_name[limb_tag]
-		if(!E || !E.is_usable())
-			stance_damage += 2
-	return stance_damage >= 4
-
 /mob/living/carbon/human/get_digestion_product()
 	return species.get_digestion_product(src)
 

@@ -28,32 +28,27 @@
 	if(can_feel_pain())
 		if(get_shock() >= 10) tally += (get_shock() / 10) //pain shouldn't slow you down if you can't even feel it
 
-	if(istype(buckled, /obj/structure/bed/chair/wheelchair))
-		for(var/organ_name in list(BP_L_HAND, BP_R_HAND, BP_L_ARM, BP_R_ARM))
-			var/obj/item/organ/external/E = get_organ(organ_name)
-			tally += E ? E.movement_delay(4) : 4
-	else
-		var/total_item_slowdown = -1
-		for(var/slot = slot_first to slot_last)
-			var/obj/item/I = get_equipped_item(slot)
-			if(istype(I))
-				var/item_slowdown = 0
-				item_slowdown += I.slowdown_general
-				item_slowdown += I.slowdown_per_slot[slot]
-				item_slowdown += I.slowdown_accessory
+	var/total_item_slowdown = -1
+	for(var/slot = slot_first to slot_last)
+		var/obj/item/I = get_equipped_item(slot)
+		if(istype(I))
+			var/item_slowdown = 0
+			item_slowdown += I.slowdown_general
+			item_slowdown += I.slowdown_per_slot[slot]
+			item_slowdown += I.slowdown_accessory
 
-				if(item_slowdown >= 0)
-					var/size_mod = size_strength_mod()
-					if(size_mod + 1 > 0)
-						item_slowdown = item_slowdown / (size_mod + 1)
-					else
-						item_slowdown = item_slowdown - size_mod
-				total_item_slowdown += max(item_slowdown, 0)
-		tally += total_item_slowdown
+			if(item_slowdown >= 0)
+				var/size_mod = size_strength_mod()
+				if(size_mod + 1 > 0)
+					item_slowdown = item_slowdown / (size_mod + 1)
+				else
+					item_slowdown = item_slowdown - size_mod
+			total_item_slowdown += max(item_slowdown, 0)
+	tally += total_item_slowdown
 
-		for(var/organ_name in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
-			var/obj/item/organ/external/E = get_organ(organ_name)
-			tally += E ? E.movement_delay(4) : 4
+	for(var/organ_name in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
+		var/obj/item/organ/external/E = get_organ(organ_name)
+		tally += E ? E.movement_delay(4) : 4
 
 	if(shock_stage >= 10 || get_stamina() <= 0)
 		tally += 3

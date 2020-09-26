@@ -85,13 +85,6 @@
 	cost = 10
 	containername = "\improper Roller bed crate"
 
-/decl/hierarchy/supply_pack/medical/wheelchair
-	name = "Equipment - Wheelchair crate"
-	contains = list(/obj/structure/bed/chair/wheelchair)
-	cost = 15
-	containertype = /obj/structure/closet/crate/large
-	containername = "\improper Wheelchair crate"
-
 /decl/hierarchy/supply_pack/medical/rescuebag
 	name = "Equipment - Rescue bags"
 	contains = list(/obj/item/bodybag/rescue = 3)

@@ -39,10 +39,6 @@
 /obj/effect/decal/cleanable/cobweb2,
 /turf/simulated/floor/tiled/dark,
 /area/template_noop)
-"k" = (
-/obj/structure/bed/chair/wheelchair,
-/turf/simulated/floor/tiled/dark,
-/area/template_noop)
 "l" = (
 /obj/structure/table/marble,
 /obj/item/device/flashlight/lamp,
@@ -137,7 +133,7 @@ b
 j
 c
 r
-k
+c
 m
 b
 "}

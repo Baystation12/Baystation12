@@ -860,9 +860,6 @@ default behaviour is:
 /mob/living/proc/nervous_system_failure()
 	return FALSE
 
-/mob/living/proc/needs_wheelchair()
-	return FALSE
-
 /mob/living/proc/seizure()
 	set waitfor = 0
 	sleep(rand(5,10))

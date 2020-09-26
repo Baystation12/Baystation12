@@ -2263,10 +2263,6 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/map_template/oldlab/station/living)
-"LB" = (
-/obj/structure/bed/chair/wheelchair,
-/turf/simulated/floor/tiled/steel_grid,
-/area/map_template/oldlab/station/living)
 "LJ" = (
 /obj/machinery/light_switch{
 	pixel_x = 24;
@@ -4109,7 +4105,7 @@ Yd
 bQ
 LA
 Ft
-LB
+fJ
 Yd
 ak
 Hd
