@@ -43,6 +43,9 @@
 	cognac		spawn_reagent = /datum/reagent/ethanol/cognac
 	ale			spawn_reagent = /datum/reagent/ethanol/ale
 	mead		spawn_reagent = /datum/reagent/ethanol/mead
+	creme_de_menthe spawn_reagent = /datum/reagent/ethanol/creme_de_menthe
+	creme_de_cacao spawn_reagent = /datum/reagent/ethanol/creme_de_cacao
+	triple_sec  spawn_reagent = /datum/reagent/ethanol/triple_sec
 
 	// Bar, soft
 	ice			spawn_reagent = /datum/reagent/drink/ice

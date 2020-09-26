@@ -1340,6 +1340,26 @@
 	glass_name = "cognac"
 	glass_desc = "Damn, you feel like some kind of French aristocrat just by holding this."
 
+/datum/reagent/ethanol/creme_de_cacao
+	name = "Creme de Cacao"
+	description = "A chocolatey liqueur for those who like their drinks undeniably sweet."
+	taste_description = "rustic chocolate"
+	color = "#2e2312"
+	strength = 50
+
+	glass_name = "creme de cacao"
+	glass_desc = "Perfect for a night in the lodge."
+
+/datum/reagent/ethanol/creme_de_menthe
+	name = "Creme de Menthe"
+	description = "A sweet, mint-flavored alcoholic beverage"
+	taste_description = "melted breathmints"
+	color = "#98ecb4"
+	strength = 50
+
+	glass_name = "creme de menthe"
+	glass_desc = "It's hard not to imagine it as mouthwash."
+
 /datum/reagent/ethanol/deadrum
 	name = "Deadrum"
 	description = "Popular with the sailors. Not very popular with everyone else."
@@ -1460,6 +1480,16 @@
 	M.make_jittery(5)
 	M.add_chemical_effect(CE_PULSE, 2)
 
+/datum/reagent/ethanol/triple_sec
+	name = "Triple Sec"
+	description = "It smells like oranges."
+	taste_description = "sweet citrus"
+	color = "#fac840"
+	strength = 15
+
+	glass_name = "triple sec"
+	glass_desc = "For when you want to get drunk, but don't want to taste the alcohol."
+
 /datum/reagent/ethanol/vermouth
 	name = "Vermouth"
 	description = "You suddenly feel a craving for a martini..."
@@ -1558,6 +1588,16 @@
 	glass_name = "Aloe"
 	glass_desc = "Very, very, very good."
 
+/datum/reagent/ethanol/alexander
+	name = "Alexander"
+	description = "Better be careful - it's stronger than it looks..."
+	taste_description = "chocolate covered brandy"
+	color = "#745e3d"
+	strength = 15
+
+	glass_name = "Alexander"
+	glass_desc = "A drink for those who wish to conquer the world, while looking classy at the same time."
+
 /datum/reagent/ethanol/amasec
 	name = "Amasec"
 	description = "Official drink of the Gun Club!"
@@ -1614,6 +1654,16 @@
 	glass_name = "B-52"
 	glass_desc = "Kahlua, Irish cream, and congac. You will get bombed."
 
+/datum/reagent/ethanol/bad_touch
+	name = "Bad Touch"
+	description = "We're nothing but mammals, after all."
+	taste_description = "sour sadness"
+	color = "#0f8a42"
+	strength = 20
+
+	glass_name = "Bad Touch"
+	glass_desc = "We're nothing but mammals, after all."
+
 /datum/reagent/ethanol/bahama_mama
 	name = "Bahama mama"
 	description = "Tropical cocktail."
@@ -1660,6 +1710,26 @@
 /datum/reagent/ethanol/beepsky_smash/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 	M.Stun(2)
+
+/datum/reagent/ethanol/between_the_sheets
+	name = "Between the Sheets"
+	description = "The classic drink of Hypnos."
+	taste_description = "sleeping citruses"
+	color = "#e7d534"
+	strength = 12
+
+	glass_name = "Between the Sheets"
+	glass_desc = "Make sure to set it down after drinking."
+
+/datum/reagent/ethanol/between_the_sheets/affect_ingest(mob/living/carbon/M, alien, removed)
+	. = ..()
+	var/strength_mod = 1
+	if(alien == IS_DIONA)
+		return
+	if(alien == IS_SKRELL)
+		strength_mod *= 2
+	if(prob(1*strength_mod))
+		M.sleeping = max(M.sleeping, 1)
 
 /datum/reagent/ethanol/bilk
 	name = "Bilk"
@@ -1743,6 +1813,16 @@
 	glass_name = "Cuba Libre"
 	glass_desc = "A classic mix of rum and cola."
 
+/datum/reagent/ethanol/cobalt_velvet
+	name = "Cobalt Velvet"
+	description = "It's like champagne served in a cup that had a bit of cola left."
+	taste_description = "burning sweetness"
+	color = "#238b99"
+	strength = 40
+
+	glass_name = "Cobalt Velvet"
+	glass_desc = "It's like champagne served in a cup that had a bit of cola left."
+
 /datum/reagent/ethanol/demonsblood
 	name = "Demons Blood"
 	description = "AHHHH!!!!"
@@ -1775,6 +1855,16 @@
 	glass_name = "Driest Martini"
 	glass_desc = "Only for the experienced. You think you see sand floating in the glass."
 
+/datum/reagent/ethanol/forget_me_shot
+	name = "Forget Me Shot"
+	description = "If you haven't heard of it, that means it worked."
+	taste_description = "mind-numbing venom"
+	color = "#a8934b"
+	strength = 5
+
+	glass_name = "Forget Me Shot"
+	glass_desc = "Mixed with a pregnancy test until it turned positive."
+
 /datum/reagent/ethanol/ginfizz
 	name = "Gin Fizz"
 	description = "Refreshingly lemony, deliciously dry."
@@ -1784,6 +1874,16 @@
 
 	glass_name = "gin fizz"
 	glass_desc = "Refreshingly lemony, deliciously dry."
+
+/datum/reagent/ethanol/grasshopper
+	name = "Grasshopper"
+	description = "Like a chocolate mint, but alcoholic!"
+	taste_description = "minty chocolate"
+	color = "#59c08d"
+	strength = 30
+
+	glass_name = "Grasshopper"
+	glass_desc = "For a nice after-dinner drink."
 
 /datum/reagent/ethanol/grog
 	name = "Grog"
@@ -1817,6 +1917,17 @@
 
 	glass_name = "Pan-Galactic Gargle Blaster"
 	glass_desc = "Does... does this mean that Arthur and Ford are here? Oh joy."
+
+/datum/reagent/ethanol/fringe_weaver
+	name = "Fringe Weaver"
+	description = "It's like drinking ethylic alcohol with a spoonful of sugar."
+	taste_description = "burning with a hint of sweetness"
+	color = "#ffafe0"
+	strength = 30
+
+	glass_name = "Fringe Weaver"
+	glass_desc = "It's like drinking ethylic alcohol with a spoonful of sugar."
+
 
 /datum/reagent/ethanol/gintonic
 	name = "Gin and Tonic"
@@ -1905,6 +2016,15 @@
 	glass_name = "Irish cream"
 	glass_desc = "It's cream, mixed with whiskey. What else would you expect from the Irish?"
 
+/datum/reagent/ethanol/kamikaze
+	name = "Kamikaze"
+	description = "One must truly prepare themselves for this drink."
+	taste_description = "sour explosions"
+	color = "#e6e945"
+
+	glass_name = "Kamikaze"
+	glass_desc = "This must have started as a joke, right? No one is supposed to drink this..."
+
 /datum/reagent/ethanol/longislandicedtea
 	name = "Long Island Iced Tea"
 	description = "The liquor cabinet, brought together in a delicious mix. Intended for middle-aged alcoholic women only."
@@ -1975,6 +2095,16 @@
 
 	glass_name = "Magellan cocktail"
 	glass_desc = "A tasty sweetened blend of wine and fine whiskey. Named for Ferdinand Magellan, who led the first expedition to circumnavigate Earth in the 15th century."
+
+/datum/reagent/ethanol/stinger
+	name = "Stinger"
+	description = "A popular drink, known for its ability to mask the taste of inferior brandies with the strong flavor of creme de menthe."
+	taste_description = "the prohibition"
+	color = "#8f8465"
+	strength = 13
+
+	glass_name = "Stinger"
+	glass_desc = "Holding this glass will make you seem like high-soceity... if you were from the 1800s."
 
 /datum/reagent/ethanol/zhenghe
 	name = "Zheng He"
@@ -2145,6 +2275,16 @@
 
 	glass_name = "Snow White"
 	glass_desc = "A cold refreshment."
+
+/datum/reagent/ethanol/sugar_rush
+	name = "Sugar Rush"
+	description = "Sweet, light, and fruity - as girly as it gets."
+	taste_description = "unbearable sweetness"
+	color = "#f37ee9"
+	strength = 100
+
+	glass_name = "Sugar Rush"
+	glass_desc = "Sweet, light, and fruity - as girly as it gets."
 
 /datum/reagent/ethanol/suidream
 	name = "Sui Dream"
@@ -3289,4 +3429,3 @@
 
 	glass_name = "old fashioned"
 	glass_desc = "This iconic cocktail demands respect."
-
