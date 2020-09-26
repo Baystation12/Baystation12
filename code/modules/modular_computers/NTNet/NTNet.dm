@@ -38,7 +38,6 @@ var/global/datum/ntnet/ntnet_global = new()
 		relays.Add(R)
 		R.NTNet = src
 	build_software_lists()
-	build_news_list()
 	build_emails_list()
 	build_reports_list()
 	add_log("NTNet logging system activated.")
@@ -139,14 +138,6 @@ var/global/datum/ntnet/ntnet_global = new()
 			ADD_SORTED(category_list, prog, /proc/cmp_program)
 		if(prog.available_on_syndinet)
 			ADD_SORTED(available_antag_software, prog, /proc/cmp_program)
-
-// Builds lists that contain downloadable software.
-/datum/ntnet/proc/build_news_list()
-	available_news = list()
-	for(var/F in typesof(/datum/computer_file/data/news_article/))
-		var/datum/computer_file/data/news_article/news = new F(1)
-		if(news.stored_data)
-			available_news.Add(news)
 
 // Generates service email list. Currently only used by broadcaster service
 /datum/ntnet/proc/build_emails_list()
