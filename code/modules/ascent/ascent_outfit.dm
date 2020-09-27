@@ -8,14 +8,23 @@
 	pda_type = null
 	pda_slot = 0
 	flags =    0
-	
+
 /decl/hierarchy/outfit/job/ascent/attendant
 	name = "Ascent - Attendant"
 	back = /obj/item/weapon/rig/mantid
 
 /decl/hierarchy/outfit/job/ascent/tech
 	name = "Ascent - Technician"
-	suit = /obj/item/clothing/suit/storage/ascent
+	belt = /obj/item/clothing/suit/storage/ascent
+
+/decl/hierarchy/outfit/job/ascent/worker
+	name = "Ascent - Serpentid Adjunct"
+	uniform =  /obj/item/clothing/under/harness
+	belt = /obj/item/clothing/suit/storage/ascent
+
+/decl/hierarchy/outfit/job/ascent/queen
+	name = "Ascent - Serpentid Queen"
+	belt = /obj/item/clothing/suit/storage/ascent
 
 /obj/item/clothing/mask/gas/ascent
 	name = "mantid facemask"
@@ -64,6 +73,13 @@
 	icon_state = "ascent_harness"
 	body_parts_covered = 0
 	slot_flags = SLOT_OCLOTHING | SLOT_BELT
+	sprite_sheets = list(
+		SPECIES_MANTID_GYNE =    'icons/mob/species/mantid/onmob_belt_gyne.dmi',
+		SPECIES_MANTID_ALATE =   'icons/mob/species/mantid/onmob_belt_alate.dmi',
+		SPECIES_NABBER =         'icons/mob/species/nabber/onmob_belt_gas.dmi',
+		SPECIES_MONARCH_QUEEN = 'icons/mob/species/nabber/msq/onmob_belt_msq.dmi'
+	)
+
 	allowed = list(
 		/obj/item/device/flashlight,
 		/obj/item/weapon/tank,
@@ -76,9 +92,9 @@
 	. = ..()
 	for(var/tool in list(
 		/obj/item/weapon/gun/energy/particle/small,
-		/obj/item/device/multitool/mantid, 
-		/obj/item/clustertool, 
-		/obj/item/clustertool, 
+		/obj/item/device/multitool/mantid,
+		/obj/item/clustertool,
+		/obj/item/clustertool,
 		/obj/item/weapon/weldingtool/electric/mantid,
 		/obj/item/stack/medical/resin
 	))

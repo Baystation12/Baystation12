@@ -14,6 +14,10 @@
 	eye_icon = 'icons/mob/human_races/species/nabber/eyes.dmi'
 	var/eyes_shielded
 
+/obj/item/organ/internal/eyes/insectoid/msq
+	name = "compound eyes"
+	eye_icon = 'icons/mob/human_races/species/nabber/msq/eyes.dmi'
+
 /obj/item/organ/internal/eyes/insectoid/nabber/get_special_overlay()
 	var/icon/I = get_onhead_icon()
 	if(I)

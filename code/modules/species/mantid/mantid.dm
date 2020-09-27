@@ -215,31 +215,3 @@
 		"storage2" =     list("loc" = ui_storage2,  "name" = "Right Pocket", "slot" = slot_r_store,   "state" = "pocket"),
 		"belt" =         list("loc" = ui_belt,      "name" = "Belt",         "slot" = slot_belt,      "state" = "belt")
 		)
-
-/datum/species/nabber/monarch
-	name = SPECIES_MONARCH_WORKER
-	name_plural = "Monarch Serpentid Workers"
-	spawn_flags = SPECIES_IS_RESTRICTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN
-	has_organ = list(
-		BP_BRAIN =             /obj/item/organ/internal/brain/insectoid/nabber,
-		BP_EYES =              /obj/item/organ/internal/eyes/insectoid/nabber,
-		BP_TRACH =             /obj/item/organ/internal/lungs/insectoid/nabber,
-		BP_HEART =             /obj/item/organ/internal/heart/open,
-		BP_LIVER =             /obj/item/organ/internal/liver/insectoid/nabber,
-		BP_STOMACH =           /obj/item/organ/internal/stomach/insectoid,
-		BP_SYSTEM_CONTROLLER = /obj/item/organ/internal/controller
-	)
-
-	force_cultural_info = list(
-		TAG_CULTURE =   CULTURE_ASCENT,
-		TAG_HOMEWORLD = HOME_SYSTEM_KHARMAANI,
-		TAG_FACTION =   FACTION_ASCENT_SERPENTID,
-		TAG_RELIGION =  RELIGION_KHARMAANI
-	)
-
-/datum/species/nabber/monarch/get_bodytype(var/mob/living/carbon/human/H)
-	return SPECIES_NABBER
-
-/datum/species/nabber/monarch/queen
-	name = SPECIES_MONARCH_QUEEN
-	name_plural = "Monarch Serpentid Queens"

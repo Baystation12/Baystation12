@@ -14,8 +14,8 @@
 		/datum/job/submap/ascent/alate,
 		/datum/job/submap/ascent/drone,
 		//datum/job/submap/ascent/control_mind,
-		//datum/job/submap/ascent/msq,
-		//datum/job/submap/ascent/msw,
+		/datum/job/submap/ascent/msq,
+		/datum/job/submap/ascent/msw,
 	)
 	call_webhook = WEBHOOK_SUBMAP_LOADED_ASCENT
 
@@ -75,6 +75,27 @@
 				to_chat(H, SPAN_NOTICE("<font size = 3>Your gyne, [real_name], has awakened, and you recall your place in the nest-lineage: <b>[H.real_name]</b>.</font>"))
 
 	verbs -= /mob/living/carbon/human/proc/gyne_rename_lineage
+
+/mob/living/carbon/human/proc/serpentid_namepick()
+	set name = "Choose a name"
+	set category = "IC"
+	set desc = "Rename yourself."
+
+	if(mind && istype(mind.assigned_job, /datum/job/submap/ascent))
+		var/datum/job/submap/ascent/ascent_job = mind.assigned_job
+		var/datum/submap/ascent/cutter = ascent_job.owner
+		if(istype(cutter))
+			var/new_name = sanitize(input("What is your name", "Choose name") as text|null, MAX_NAME_LEN)
+			if(!new_name)
+				return
+
+			if(!mind || mind.assigned_job != ascent_job)
+				return
+
+			// Rename ourselves.
+			fully_replace_character_name("[new_name]")
+
+	verbs -= /mob/living/carbon/human/proc/serpentid_namepick
 
 // Jobs.
 /datum/job/submap/ascent
@@ -141,6 +162,12 @@
 		if(SPECIES_MANTID_ALATE)
 			var/new_alate_number = is_species_whitelisted(H, SPECIES_MANTID_GYNE) ? random_id(/datum/species/mantid, 1000, 9999) : random_id(/datum/species/mantid, 10000, 99999)
 			H.real_name = "[new_alate_number] [cutter.gyne_name]"
+		if(SPECIES_MONARCH_WORKER)
+			H.real_name = "["monarch worker of "][cutter.gyne_name]"
+			H.verbs |= /mob/living/carbon/human/proc/serpentid_namepick
+		if(SPECIES_MONARCH_QUEEN)
+			H.real_name = "["monarch queen of "][cutter.gyne_name]"
+			H.verbs |= /mob/living/carbon/human/proc/serpentid_namepick
 	H.name = H.real_name
 	if(H.mind)
 		H.mind.name = H.real_name
@@ -158,7 +185,7 @@
 					SKILL_HAULING = SKILL_ADEPT,
 					SKILL_COMBAT = SKILL_ADEPT,
 					SKILL_WEAPONS = SKILL_ADEPT,
-					SKILL_MEDICAL = SKILL_BASIC)	
+					SKILL_MEDICAL = SKILL_BASIC,)
 
 /datum/job/submap/ascent/drone
 	title = "Ascent Drone"
@@ -168,14 +195,14 @@
 	set_species_on_join = /mob/living/silicon/robot/flying/ascent
 	requires_supervisor = "Ascent Gyne"
 
-/*
 /datum/job/submap/ascent/msw
 	title = "Serpentid Adjunct"
 	supervisors = "your Queen"
-	total_positions = 3
+	total_positions = 2
 	info = "You are a Monarch Serpentid Worker serving as an attendant to your Queen on this vessel. Serve her however she requires."
 	set_species_on_join = SPECIES_MONARCH_WORKER
-	outfit_type = /decl/hierarchy/outfit/job/ascent/soldier
+	outfit_type = /decl/hierarchy/outfit/job/ascent/worker
+	requires_supervisor = "Serpentid Queen"
 	min_skill = list(SKILL_EVA = SKILL_ADEPT,
 					SKILL_HAULING = SKILL_ADEPT,
 					SKILL_COMBAT = SKILL_ADEPT,
@@ -185,16 +212,16 @@
 
 /datum/job/submap/ascent/msq
 	title = "Serpentid Queen"
-	supervisors = "your fellow Queens and the Gyne"
-	total_positions = 2
+	supervisors = "the Gyne"
+	total_positions = 0
 	info = "You are a Monarch Serpentid Queen living on an independant Ascent vessel. Assist the Gyne in her duties and tend to your Workers."
+	outfit_type = /decl/hierarchy/outfit/job/ascent/queen
 	set_species_on_join = SPECIES_MONARCH_QUEEN
 	min_skill = list(SKILL_EVA = SKILL_ADEPT,
 					SKILL_HAULING = SKILL_ADEPT,
 					SKILL_COMBAT = SKILL_ADEPT,
 					SKILL_WEAPONS = SKILL_ADEPT,
 					SKILL_MEDICAL = SKILL_BASIC)
-*/
 
 // Spawn points.
 /obj/effect/submap_landmark/spawnpoint/ascent_seedship
