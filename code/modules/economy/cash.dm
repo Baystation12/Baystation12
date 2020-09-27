@@ -48,7 +48,7 @@
 
 /obj/item/weapon/spacecash/bundle
 	name = "pile of thalers"
-	icon_state = ""
+	icon_state = "spacecash1"
 	desc = "They are worth 0 Thalers."
 	worth = 0
 
