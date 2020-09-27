@@ -29,6 +29,8 @@
 
 /mob/living/silicon/proc/add_ion_law(var/law)
 	laws_sanity_check()
+	to_chat(src, SPAN_DANGER("You have detected a change in your laws information:"))
+	to_chat(src, law)
 	laws.add_ion_law(law)
 	log_law("has given [src] the ion law: [law]")
 
