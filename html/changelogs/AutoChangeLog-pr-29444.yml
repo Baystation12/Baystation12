@@ -1,0 +1,4 @@
+author: "zkxs"
+delete-after: True
+changes: 
+  - tweak: "Chief Engineers now have access to view the Robot camera network"
