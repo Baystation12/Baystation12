@@ -29,6 +29,7 @@
 	var/emagged = 0
 	var/powered = 0		//set if vehicle is powered and should use fuel when moving
 	var/move_delay = 1	//set this to limit the speed of the vehicle
+	var/can_space_move = FALSE
 
 	var/obj/item/weapon/cell/cell
 	var/charge_use = 200 //W
@@ -232,6 +233,12 @@
 	if(cell && powered)
 		turn_on()
 		return
+
+/obj/vehicle/proc/has_power()
+	if (!powered || !cell || cell.charge < (charge_use * CELLRATE) || (stat & EMPED))
+		return FALSE
+
+	return TRUE
 
 /obj/vehicle/proc/insert_cell(var/obj/item/weapon/cell/C, var/mob/living/carbon/human/H)
 	if(cell)
