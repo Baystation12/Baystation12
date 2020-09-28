@@ -61,6 +61,6 @@
 		var/obj/item/weapon/gun/G = locate(href_list["gun"]) in GLOB.secure_weapons
 		var/do_authorize = text2num(href_list["authorize"])
 		var/mode = text2num(href_list["mode"])
-		return isnum(do_authorize) && isnum(mode) && G && G.authorize(mode, do_authorize, usr.name)
+		return isnum(do_authorize) && isnum(mode) && G && G.authorize(mode, do_authorize)
 
 	return FALSE

@@ -72,7 +72,7 @@ GLOBAL_LIST_INIT(secure_weapons, list())
 	verbs -= /obj/item/weapon/gun/proc/reset_registration
 
 
-/obj/item/weapon/gun/proc/authorize(var/mode, var/authorized, var/by)
+/obj/item/weapon/gun/proc/authorize(mode, authorized)
 	if(mode < 1 || mode > authorized_modes.len || authorized_modes[mode] == authorized)
 		return FALSE
 
@@ -83,7 +83,7 @@ GLOBAL_LIST_INIT(secure_weapons, list())
 
 	var/mob/user = get_holder_of_type(src, /mob)
 	if(user)
-		to_chat(user, SPAN_NOTICE("Your [src.name] has been [authorized ? "granted" : "denied"] [firemodes[mode]] fire authorization by [by]."))
+		to_chat(user, SPAN_NOTICE("Your [src.name] has been [authorized ? "granted" : "denied"] [firemodes[mode]] fire authorization."))
 
 	return TRUE
 
