@@ -16,5 +16,10 @@
 		/music_track/torn,
 		/music_track/nebula,
 		/music_track/epicintro2015,
-		/music_track/epicintro2017
+		/music_track/epicintro2017,
+		/music_track/hull_rupture,
+		/music_track/on_the_rocks,
+		/music_track/rimward_cruise,
+		/music_track/misanthropic_corridors,
+		/music_track/voidsent
 	)
