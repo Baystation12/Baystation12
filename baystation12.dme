@@ -1295,6 +1295,7 @@
 #include "code\modules\admin\secrets\fun_secrets\triple_ai_mode.dm"
 #include "code\modules\admin\secrets\fun_secrets\waddle.dm"
 #include "code\modules\admin\secrets\investigation\attack_logs.dm"
+#include "code\modules\admin\secrets\investigation\view_persistant.dm"
 #include "code\modules\admin\verbs\adminhelp.dm"
 #include "code\modules\admin\verbs\adminjump.dm"
 #include "code\modules\admin\verbs\adminpm.dm"

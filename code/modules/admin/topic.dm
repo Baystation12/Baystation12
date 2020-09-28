@@ -1948,6 +1948,11 @@
 
 			show_player_panel(M)
 
+	else if(href_list["paralyze"])
+		var/mob/M = locate(href_list["paralyze"])
+		paralyze_mob(M)
+
+
 	// player info stuff
 
 	if(href_list["add_player_info"])
