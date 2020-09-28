@@ -8,7 +8,6 @@
 		SPECIES_NABBER,
 		SPECIES_MANTID_ALATE,
 		SPECIES_MANTID_GYNE,
-		SPECIES_MONARCH_WORKER,
 		SPECIES_MONARCH_QUEEN
 	) //everyone except for these species can wear this kit.
 
@@ -283,11 +282,12 @@ BLIND     // can't see anything
 	body_parts_covered = HANDS
 	slot_flags = SLOT_GLOVES
 	attack_verb = list("challenged")
-	species_restricted = list("exclude",SPECIES_NABBER, SPECIES_UNATHI,SPECIES_VOX, SPECIES_VOX_ARMALIS)
+	species_restricted = list("exclude",SPECIES_NABBER, SPECIES_MONARCH_QUEEN, SPECIES_UNATHI, SPECIES_VOX, SPECIES_VOX_ARMALIS)
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/onmob_hands_vox.dmi',
 		SPECIES_VOX_ARMALIS = 'icons/mob/species/vox/onmob_hands_vox_armalis.dmi',
 		SPECIES_NABBER = 'icons/mob/species/nabber/onmob_hands_gas.dmi',
+		SPECIES_MONARCH_QUEEN = 'icons/mob/species/nabber/msq/onmob_hands_msq.dmi',
 		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_hands_unathi.dmi',
 		)
 	blood_overlay_type = "bloodyhands"
@@ -814,6 +814,7 @@ BLIND     // can't see anything
 		SPECIES_VOX = 'icons/mob/species/vox/onmob_under_vox.dmi',
 		SPECIES_VOX_ARMALIS = 'icons/mob/species/vox/onmob_under_vox_armalis.dmi',
 		SPECIES_NABBER = 'icons/mob/species/nabber/onmob_under_gas.dmi',
+		SPECIES_MONARCH_QUEEN = 'icons/mob/species/nabber/msq/onmob_under_msq.dmi',
 		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_under_unathi.dmi',
 		SPECIES_MANTID_ALATE = 'icons/mob/species/mantid/onmob_under_alate.dmi',
 		SPECIES_MANTID_GYNE = 'icons/mob/species/mantid/onmob_under_gyne.dmi'
@@ -1072,7 +1073,7 @@ BLIND     // can't see anything
 	icon = 'icons/obj/clothing/obj_hands_ring.dmi'
 	slot_flags = SLOT_GLOVES
 	gender = NEUTER
-	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_DIONA)
+	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_DIONA, SPECIES_MONARCH_QUEEN)
 	var/undergloves = 1
 
 

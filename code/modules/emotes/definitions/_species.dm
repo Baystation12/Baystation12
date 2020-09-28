@@ -51,6 +51,15 @@
 		/decl/emote/audible/bug_chitter
 		)
 
+
+/datum/species/nabber/monarch_queen
+	default_emotes = list(
+		/decl/emote/audible/bug_hiss,
+		/decl/emote/audible/bug_buzz,
+		/decl/emote/audible/bug_chitter,
+		/decl/emote/audible/ascent_purr,
+	)
+
 /datum/species/adherent
 	default_emotes = list(
 		/decl/emote/audible/adherent_chime,
