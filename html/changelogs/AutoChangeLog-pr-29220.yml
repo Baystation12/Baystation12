@@ -1,0 +1,7 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - rscadd: "Added a radio channel, Hailing, meant for use between groups from different maps and sites. Command and exploration headsets gain it on :j."
+  - maptweak: "Added telecomms servers to the Skrell ship, Vox ships, Verne, Bearcat, and Colonies, with Hailing on :j and their own unique Common channels on ; or :h."
+  - maptweak: "Ascent shuttles and ship now have intercoms listening to Hailing."
+  - bugfix: "Skrellship telecomms no longer ignores z-level limitations."
