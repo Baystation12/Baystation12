@@ -577,6 +577,7 @@
 	pixel_y = 32
 	},
 /obj/machinery/reagentgrinder,
+/obj/item/weapon/reagent_containers/glass/beaker/large,
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/chemistry)
 "abo" = (
@@ -14018,6 +14019,7 @@
 /area/rnd/xenobiology)
 "aUI" = (
 /obj/machinery/reagentgrinder,
+/obj/item/weapon/reagent_containers/glass/beaker/large,
 /obj/structure/cable/green{
 	d1 = 2;
 	d2 = 4;
@@ -21363,6 +21365,7 @@
 /area/hallway/primary/firstdeck/center)
 "kpb" = (
 /obj/machinery/reagentgrinder,
+/obj/item/weapon/reagent_containers/glass/beaker/large,
 /turf/simulated/floor/tiled/dark,
 /area/rnd/misc_lab)
 "kqb" = (
@@ -26388,6 +26391,7 @@
 "qGb" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red,
 /obj/machinery/reagentgrinder,
+/obj/item/weapon/reagent_containers/glass/beaker/large,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/light{

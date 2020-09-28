@@ -171,6 +171,7 @@
 /area/map_template/oldlab/station/northairlockatmos)
 "cY" = (
 /obj/machinery/reagentgrinder,
+/obj/item/weapon/reagent_containers/glass/beaker/large,
 /turf/simulated/floor/tiled/white,
 /area/map_template/oldlab/station/chem)
 "dc" = (

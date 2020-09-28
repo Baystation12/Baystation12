@@ -3923,6 +3923,7 @@
 "ju" = (
 /obj/structure/table/marble,
 /obj/machinery/reagentgrinder/juicer,
+/obj/item/weapon/reagent_containers/glass/beaker/large,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
 "jv" = (
@@ -4767,6 +4768,7 @@
 	dir = 1
 	},
 /obj/machinery/reagentgrinder,
+/obj/item/weapon/reagent_containers/glass/beaker/large,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "lR" = (

@@ -4241,6 +4241,7 @@
 /area/map_template/oldlab2/recandlockers)
 "wl" = (
 /obj/machinery/reagentgrinder,
+/obj/item/weapon/reagent_containers/glass/beaker/large,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},

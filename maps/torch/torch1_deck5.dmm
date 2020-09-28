@@ -8792,6 +8792,7 @@
 /area/vacant/infirmary)
 "sR" = (
 /obj/machinery/reagentgrinder,
+/obj/item/weapon/reagent_containers/glass/beaker/large,
 /turf/simulated/floor/plating,
 /area/vacant/infirmary)
 "sS" = (
@@ -10304,6 +10305,7 @@
 /area/maintenance/fifthdeck/aftstarboard)
 "wY" = (
 /obj/machinery/reagentgrinder,
+/obj/item/weapon/reagent_containers/glass/beaker/large,
 /obj/item/device/radio/intercom{
 	dir = 4;
 	pixel_x = -21
@@ -11682,6 +11684,7 @@
 	dir = 1
 	},
 /obj/machinery/reagentgrinder,
+/obj/item/weapon/reagent_containers/glass/beaker/large,
 /obj/item/stack/material/phoron,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/shuttle/petrov/analysis)

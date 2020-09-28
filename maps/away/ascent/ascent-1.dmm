@@ -5313,6 +5313,7 @@
 	color = "PURPLE";
 	name = "reactant obliterator"
 	},
+/obj/item/weapon/reagent_containers/glass/beaker/large,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_starboard_prow)
 "Uf" = (

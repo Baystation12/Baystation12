@@ -1519,6 +1519,7 @@
 	icon_state = "tube1"
 	},
 /obj/machinery/reagentgrinder/juicer,
+/obj/item/weapon/reagent_containers/glass/beaker/large,
 /obj/structure/table/glass/pglass,
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/processing)
