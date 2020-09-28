@@ -37,6 +37,10 @@
 
 	var/last_radio_sound = -INFINITY
 
+/obj/item/device/radio/hailing
+	name = "shortwave radio (Hailing)"
+	frequency = HAIL_FREQ
+
 /obj/item/device/radio/proc/set_frequency(new_frequency)
 	radio_controller.remove_object(src, frequency)
 	frequency = new_frequency
@@ -813,8 +817,7 @@
 	if (!preset_name)
 		return ..()
 
-	var/name_lower = lowertext(preset_name)
-	name = "[name_lower] intercom"
+	name = "[name] ([preset_name])"
 	frequency = assign_away_freq(preset_name)
 	channels += list(
 		preset_name = 1,
@@ -827,10 +830,10 @@
 
 	internal_channels = list(
 		num2text(frequency) = list(),
-		HAIL_FREQ = list(),
+		num2text(HAIL_FREQ) = list(),
 	)
 	if (use_common)
-		internal_channels += list(PUB_FREQ = list())
+		internal_channels += list(num2text(PUB_FREQ) = list())
 
 /obj/item/device/radio/off
 	listening = 0
