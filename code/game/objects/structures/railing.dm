@@ -8,7 +8,7 @@
 	layer = OBJ_LAYER
 	climb_speed_mult = 0.25
 	anchored = FALSE
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CHECKS_BORDER | ATOM_FLAG_CLIMBABLE
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CHECKS_BORDER | ATOM_FLAG_CLIMBABLE | ATOM_FLAG_CAN_BE_PAINTED
 	obj_flags = OBJ_FLAG_ROTATABLE
 
 	var/broken =    FALSE
@@ -294,3 +294,6 @@
 	if(.)
 		if(!anchored || material.is_brittle())
 			take_damage(maxhealth) // Fatboy
+
+/obj/structure/railing/set_color(color)
+	src.color = color ? color : material.icon_colour

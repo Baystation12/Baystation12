@@ -116,7 +116,7 @@
 		new_color = pick_color_from_floor(A, user)
 	else if (istype(A, /obj/machinery/door/airlock))
 		new_color = pick_color_from_airlock(A, user)
-	else
+	else if (A.atom_flags & ATOM_FLAG_CAN_BE_PAINTED)
 		new_color = A.get_color()
 	if (!change_color(new_color, user))
 		to_chat(user, SPAN_WARNING("\The [A] does not have a color that you could pick from."))
@@ -346,6 +346,8 @@
 /datum/click_handler/default/paint_sprayer/OnClick(atom/A, params)
 	var/list/modifiers = params2list(params)
 	if (A != paint_sprayer)
+		if(!istype(user.buckled) || user.buckled.buckle_movable)
+			user.face_atom(A)
 		if(modifiers["ctrl"] && paint_sprayer.pick_color(A, user))
 			return
 		if(modifiers["shift"] && paint_sprayer.remove_paint(A, user))
