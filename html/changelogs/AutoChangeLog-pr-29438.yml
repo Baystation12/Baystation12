@@ -1,0 +1,4 @@
+author: "Boznar"
+delete-after: True
+changes: 
+  - maptweak: "Gantry improvements. Connected atmospherics, better hab module, gravity restored, other minor tweaks."
