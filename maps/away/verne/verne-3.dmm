@@ -1173,7 +1173,7 @@
 	icon_state = "0-4"
 	},
 /obj/effect/floor_decal/corner/paleblue/mono,
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/verne{
 	dir = 1;
 	pixel_y = -28
 	},
@@ -1700,7 +1700,7 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/verne{
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled,
@@ -3364,7 +3364,7 @@
 	dir = 9;
 	icon_state = "corner_white"
 	},
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/verne{
 	dir = 8;
 	pixel_x = 20
 	},
@@ -4140,7 +4140,7 @@
 "FE" = (
 /obj/machinery/cryopod,
 /obj/effect/floor_decal/corner/b_green/mono,
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/verne{
 	dir = 8;
 	pixel_x = 20
 	},
@@ -4194,7 +4194,7 @@
 /obj/effect/floor_decal/corner/b_green{
 	dir = 6
 	},
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/verne{
 	dir = 8;
 	pixel_x = 20
 	},
@@ -4203,7 +4203,7 @@
 "FX" = (
 /obj/structure/closet/firecloset,
 /obj/effect/floor_decal/corner/b_green/mono,
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/verne{
 	dir = 8;
 	pixel_x = 20
 	},
@@ -5406,7 +5406,7 @@
 	dir = 2;
 	pixel_y = 24
 	},
-/obj/item/device/radio,
+/obj/item/device/radio/map_preset/verne,
 /turf/simulated/floor/tiled/white/monotile,
 /area/verne/common/cryo)
 "Ra" = (
@@ -5835,7 +5835,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/verne{
 	dir = 1;
 	pixel_y = -28
 	},
@@ -6141,7 +6141,8 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/verne{
+	default_hailing = 1;
 	dir = 1;
 	pixel_y = -28
 	},

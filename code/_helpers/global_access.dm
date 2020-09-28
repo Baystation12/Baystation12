@@ -3,6 +3,10 @@
 	switch(which)
 		if("ANTAG_FREQS")
 			return global.ANTAG_FREQS;
+		if("AWAY_FREQS_ASSIGNED")
+			return global.AWAY_FREQS_ASSIGNED;
+		if("AWAY_FREQS_UNASSIGNED")
+			return global.AWAY_FREQS_UNASSIGNED;
 		if("BSACooldown")
 			return global.BSACooldown;
 		if("BUMP_TELEPORTERS")
@@ -916,6 +920,10 @@
 	switch(which)
 		if("ANTAG_FREQS")
 			global.ANTAG_FREQS=newval;
+		if("AWAY_FREQS_ASSIGNED")
+			global.AWAY_FREQS_ASSIGNED=newval;
+		if("AWAY_FREQS_UNASSIGNED")
+			global.AWAY_FREQS_UNASSIGNED=newval;
 		if("BSACooldown")
 			global.BSACooldown=newval;
 		if("BUMP_TELEPORTERS")
@@ -1827,6 +1835,8 @@
 		
 /var/list/_all_globals=list(
 	"ANTAG_FREQS",
+	"AWAY_FREQS_ASSIGNED",
+	"AWAY_FREQS_UNASSIGNED",
 	"BSACooldown",
 	"BUMP_TELEPORTERS",
 	"Banlist",

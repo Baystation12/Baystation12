@@ -60,6 +60,11 @@
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
 	id_tag = "cargo_pump"
 	},
+/obj/item/device/radio/intercom/map_preset/bearcat{
+	default_hailing = 1;
+	dir = 4;
+	pixel_x = -22
+	},
 /turf/simulated/floor,
 /area/ship/scrap/cargo/lower)
 "ak" = (
@@ -163,8 +168,8 @@
 /obj/item/weapon/stamp/cargo,
 /obj/item/weapon/stamp/denied,
 /obj/random/clipboard,
-/obj/item/device/radio,
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/map_preset/bearcat,
+/obj/item/device/radio/intercom/map_preset/bearcat{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -960,7 +965,7 @@
 	icon_state = "1-2";
 	pixel_y = 0
 	},
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/bearcat{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -1035,8 +1040,9 @@
 	dir = 9;
 	icon_state = "corner_white"
 	},
-/obj/item/device/radio/intercom{
-	pixel_x = -32
+/obj/item/device/radio/intercom/map_preset/bearcat{
+	dir = 4;
+	pixel_x = -22
 	},
 /turf/simulated/floor/tiled,
 /area/ship/scrap/cargo/lower)
@@ -1511,7 +1517,7 @@
 	dir = 1
 	},
 /obj/machinery/organ_printer/robot/mapped,
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/bearcat{
 	pixel_y = 22
 	},
 /turf/simulated/floor,
@@ -2180,7 +2186,7 @@
 /obj/item/weapon/FixOVein,
 /obj/structure/closet/crate,
 /obj/item/weapon/mop,
-/obj/item/device/radio,
+/obj/item/device/radio/map_preset/bearcat,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 2;
 	level = 2
@@ -2209,7 +2215,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/bearcat{
 	dir = 8;
 	pixel_x = 22
 	},
@@ -2604,7 +2610,7 @@
 /turf/simulated/floor,
 /area/ship/scrap/maintenance/storage)
 "eM" = (
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/bearcat{
 	dir = 4;
 	pixel_x = -22
 	},
@@ -2655,8 +2661,8 @@
 "eR" = (
 /obj/structure/table/standard,
 /obj/item/weapon/inflatable_dispenser,
-/obj/item/device/radio,
-/obj/item/device/radio,
+/obj/item/device/radio/map_preset/bearcat,
+/obj/item/device/radio/map_preset/bearcat,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
@@ -2678,10 +2684,10 @@
 /area/ship/scrap/maintenance/storage)
 "eT" = (
 /obj/item/clothing/head/welding,
-/obj/item/device/radio,
+/obj/item/device/radio/map_preset/bearcat,
 /obj/item/weapon/tape_roll,
 /obj/structure/table/standard,
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/bearcat{
 	pixel_y = -32
 	},
 /turf/simulated/floor,
@@ -9578,8 +9584,8 @@ aa
 aa
 ac
 ac
-ac
-am
+UZ
+al
 aC
 aN
 aZ

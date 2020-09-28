@@ -1945,6 +1945,10 @@
 	pixel_y = -6;
 	req_access = list("ACCESS_BRIDGE")
 	},
+/obj/item/device/radio/intercom/hailing{
+	dir = 8;
+	pixel_x = 24
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "di" = (
@@ -3288,15 +3292,15 @@
 /turf/simulated/floor/tiled/dark,
 /area/aquila/cockpit)
 "fL" = (
-/obj/item/device/radio/intercom{
-	dir = 8;
-	pixel_x = 21
-	},
 /obj/machinery/camera/network/aquila{
 	c_tag = "Aquila - Cockpit";
 	dir = 8
 	},
 /obj/machinery/computer/modular/preset/cardslot/command,
+/obj/item/device/radio/intercom/hailing{
+	dir = 8;
+	pixel_x = 24
+	},
 /turf/simulated/floor/tiled/dark,
 /area/aquila/cockpit)
 "fM" = (
@@ -5338,10 +5342,6 @@
 	pixel_x = 0;
 	pixel_y = 24
 	},
-/obj/item/device/radio/intercom{
-	dir = 1;
-	pixel_y = -28
-	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 8;
 	id_tag = "aquila_shuttle_dock_pump"
@@ -5356,6 +5356,10 @@
 	icon_state = "techfloor_edges"
 	},
 /obj/effect/floor_decal/techfloor,
+/obj/item/device/radio/intercom/hailing{
+	dir = 1;
+	pixel_y = -28
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/hallway/primary/bridge/aft)
 "lS" = (
@@ -13280,10 +13284,6 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/disciplinary_board_room)
 "Nc" = (
-/obj/item/device/radio/intercom{
-	dir = 1;
-	pixel_y = -28
-	},
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 4;
@@ -13294,6 +13294,10 @@
 	icon_state = "handrail"
 	},
 /obj/effect/floor_decal/techfloor,
+/obj/item/device/radio/intercom/hailing{
+	dir = 1;
+	pixel_y = -28
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/aquila/airlock)
 "Nd" = (

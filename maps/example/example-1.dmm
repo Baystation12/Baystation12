@@ -215,6 +215,31 @@
 /obj/effect/landmark/test/space_turf,
 /turf/space,
 /area/space)
+"L" = (
+/obj/machinery/telecomms/server/map_preset/example,
+/turf/simulated/floor/tiled,
+/area/constructionsite)
+"M" = (
+/obj/machinery/telecomms/bus/map_preset/example,
+/turf/simulated/floor/tiled,
+/area/constructionsite)
+"P" = (
+/obj/machinery/light,
+/obj/machinery/telecomms/processor/map_preset/example,
+/turf/simulated/floor/tiled,
+/area/constructionsite)
+"U" = (
+/obj/machinery/telecomms/broadcaster/map_preset/example,
+/turf/simulated/floor/tiled,
+/area/constructionsite)
+"V" = (
+/obj/machinery/telecomms/hub/map_preset/example,
+/turf/simulated/floor/tiled,
+/area/constructionsite)
+"W" = (
+/obj/machinery/telecomms/receiver/map_preset/example,
+/turf/simulated/floor/tiled,
+/area/constructionsite)
 
 (1,1,1) = {"
 a
@@ -1089,7 +1114,7 @@ c
 c
 c
 c
-c
+W
 b
 a
 a
@@ -1123,7 +1148,7 @@ c
 c
 c
 c
-c
+L
 b
 a
 a
@@ -1157,7 +1182,7 @@ c
 c
 c
 c
-k
+P
 b
 a
 a
@@ -1191,7 +1216,7 @@ r
 c
 c
 c
-c
+M
 b
 a
 a
@@ -1225,7 +1250,7 @@ c
 c
 c
 c
-c
+V
 b
 a
 a
@@ -1259,7 +1284,7 @@ c
 f
 c
 c
-c
+U
 b
 a
 a

@@ -1185,6 +1185,10 @@
 	dir = 8
 	},
 /obj/machinery/meter,
+/obj/item/device/radio/intercom/hailing{
+	dir = 4;
+	pixel_x = -24
+	},
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
 "cJ" = (
@@ -1275,6 +1279,10 @@
 	dir = 4
 	},
 /obj/machinery/meter,
+/obj/item/device/radio/intercom/hailing{
+	dir = 8;
+	pixel_x = 24
+	},
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
 "cR" = (
@@ -1953,6 +1961,14 @@
 	name = "plating"
 	},
 /area/map_template/syndicate_mothership/raider_base)
+"ho" = (
+/obj/machinery/constructable_frame/computerframe,
+/obj/item/device/radio/intercom/hailing{
+	dir = 4;
+	pixel_x = -24
+	},
+/turf/simulated/floor/shuttle/red,
+/area/map_template/skipjack_station/start)
 
 (1,1,1) = {"
 aa
@@ -4439,7 +4455,7 @@ aa
 aa
 aa
 cw
-cD
+ho
 cK
 cU
 cU

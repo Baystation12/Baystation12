@@ -77,7 +77,7 @@
 	pda_type = null
 	pda_slot = null
 	id_types = list(/obj/item/weapon/card/id/verne)
-	l_ear = /obj/item/device/radio/headset
+	l_ear = /obj/item/device/radio/headset/map_preset/verne
 
 /decl/hierarchy/outfit/job/verne/pilot
 	name = VERNE_OUTFIT_JOB_NAME("Pilot")
@@ -92,7 +92,7 @@
 	uniform = /obj/item/clothing/under/rank/engineer
 	shoes = /obj/item/clothing/shoes/workboots
 	belt = /obj/item/weapon/storage/belt/utility/full
-	r_pocket = /obj/item/device/radio
+	r_pocket = /obj/item/device/radio/map_preset/verne
 	l_pocket = /obj/item/weapon/crowbar/prybar
 
 /decl/hierarchy/outfit/job/verne/engineer/New()

@@ -18,6 +18,13 @@ Used In File(s): /code/game/objects/item/devices/radio/radio.dm
 		.srvradio				{color: #6eaa2c;}
 		.seciradio				{color: #935050;}
 		.mediradio				{color: #509190;}
+
+		.hailradio				{color: #cc00aa;}
+		.exampleradio			{color: #FF00FF;}
+		.voxradio				{color: #f32b06;}
+		.bearcatradio			{color: #590e2d;}
+		.colonyradio			{color: #ceaf3e;}
+		.verneradio				{color: #738465;}
 	</style>
 </head>
 
@@ -114,6 +121,9 @@ Used In File(s): /code/game/objects/item/devices/radio/radio.dm
 		{{:helper.link('-', null, {'freq' : -2})}}
 		{{:helper.link('+', null, {'freq' : 2})}}
 		{{:helper.link('++', null, {'freq' : 10})}}
+		{{if data.default_freq}}
+			{{:helper.link(data.default_freq, null, {'default_freq' : 1})}}
+		{{/if}}
 	</div>
 </div>
 

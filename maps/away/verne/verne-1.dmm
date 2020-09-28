@@ -101,7 +101,7 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/verne{
 	dir = 1;
 	pixel_y = -28
 	},
@@ -963,6 +963,11 @@
 /obj/machinery/atmospherics/pipe/manifold/visible,
 /obj/machinery/meter,
 /obj/machinery/light/spot,
+/obj/item/device/radio/intercom/map_preset/verne{
+	default_hailing = 1;
+	dir = 1;
+	pixel_y = -28
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/verne/engineering/external)
 "eX" = (
@@ -1621,7 +1626,7 @@
 /area/verne/engineering/atmospherics)
 "nz" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/red,
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/verne{
 	dir = 1;
 	pixel_y = -28
 	},
@@ -2019,6 +2024,11 @@
 	},
 /obj/machinery/light{
 	dir = 8
+	},
+/obj/item/device/radio/intercom/map_preset/verne{
+	default_hailing = 1;
+	dir = 4;
+	pixel_x = -22
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/verne/engineering/thrusters)
@@ -2561,7 +2571,7 @@
 /obj/effect/floor_decal/techfloor/orange{
 	dir = 6
 	},
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/verne{
 	dir = 8;
 	pixel_x = 20
 	},
@@ -3026,8 +3036,8 @@
 /area/verne/engineering/smresearch)
 "AW" = (
 /obj/structure/table/rack,
-/obj/item/device/radio,
-/obj/item/device/radio,
+/obj/item/device/radio/map_preset/verne,
+/obj/item/device/radio/map_preset/verne,
 /obj/item/weapon/storage/belt/utility/full,
 /obj/item/weapon/storage/belt/utility/full,
 /obj/item/device/multitool,
@@ -3284,7 +3294,7 @@
 /obj/machinery/atmospherics/portables_connector,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/portable_atmospherics/canister/hydrogen/engine_setup,
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/verne{
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/techfloor,

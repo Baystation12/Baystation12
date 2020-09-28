@@ -1142,12 +1142,12 @@
 /area/guppy_hangar/start)
 "cl" = (
 /obj/item/device/radio,
-/obj/item/device/radio/intercom{
-	dir = 1;
-	pixel_y = -28
-	},
 /obj/machinery/computer/ship/engines{
 	dir = 4
+	},
+/obj/item/device/radio/intercom/hailing{
+	dir = 1;
+	pixel_y = -28
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/cockpit)
@@ -1882,15 +1882,15 @@
 	dir = 1;
 	id_tag = "calypso_shuttle_pump"
 	},
-/obj/item/device/radio/intercom{
-	dir = 1;
-	pixel_y = -28
-	},
 /obj/structure/handrai{
 	dir = 1;
 	icon_state = "handrail"
 	},
 /obj/effect/floor_decal/techfloor,
+/obj/item/device/radio/intercom/hailing{
+	dir = 1;
+	pixel_y = -28
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/airlock)
 "dz" = (
@@ -2039,6 +2039,10 @@
 "dO" = (
 /obj/machinery/computer/ship/engines{
 	dir = 1
+	},
+/obj/item/device/radio/intercom/hailing{
+	dir = 8;
+	pixel_x = 24
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
@@ -14015,15 +14019,15 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/power)
 "Kz" = (
-/obj/item/device/radio/intercom{
-	dir = 1;
-	pixel_y = -28
-	},
 /obj/machinery/light,
 /obj/effect/floor_decal/industrial/warning/corner,
 /obj/effect/floor_decal/techfloor,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
 	dir = 4
+	},
+/obj/item/device/radio/intercom/hailing{
+	dir = 1;
+	pixel_y = -28
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/cargo)
