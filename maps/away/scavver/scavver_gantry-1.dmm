@@ -320,12 +320,10 @@
 /turf/simulated/floor/airless,
 /area/scavver/calypso)
 "fE" = (
-/obj/machinery/sleeper{
-	dir = 8
-	},
 /obj/effect/floor_decal/corner/blue/mono,
 /obj/machinery/power/apc{
 	dir = 4;
+	locked = 0;
 	name = "west bump";
 	pixel_x = 24;
 	req_access = list()
@@ -839,6 +837,7 @@
 /obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
 /obj/item/weapon/reagent_containers/ivbag,
 /obj/item/weapon/reagent_containers/ivbag,
+/obj/item/weapon/storage/box/gloves,
 /turf/simulated/floor/tiled/white/monotile,
 /area/scavver/calypso)
 "ny" = (
@@ -1122,22 +1121,6 @@
 	},
 /turf/space,
 /area/space)
-"sC" = (
-/obj/structure/lattice,
-/obj/machinery/atmospherics/pipe/cap/hidden/supply{
-	dir = 8
-	},
-/obj/machinery/atmospherics/pipe/cap/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/cap/visible/scrubbers{
-	dir = 8
-	},
-/obj/machinery/atmospherics/pipe/cap/visible/scrubbers{
-	dir = 4
-	},
-/turf/space,
-/area/scavver/calypso)
 "sG" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -1543,6 +1526,7 @@
 /obj/machinery/vending/wallmed1{
 	pixel_y = 32
 	},
+/obj/item/clothing/suit/chef/classic,
 /turf/simulated/floor/tiled/white/monotile,
 /area/scavver/calypso)
 "AK" = (
@@ -1775,7 +1759,7 @@
 /obj/effect/floor_decal/corner/blue{
 	dir = 10
 	},
-/obj/structure/bed/chair/shuttle/white,
+/obj/machinery/sleeper,
 /turf/simulated/floor/tiled/white,
 /area/scavver/calypso)
 "DF" = (
@@ -15826,7 +15810,7 @@ UM
 UM
 NK
 fI
-sC
+wS
 oX
 ry
 Ba
