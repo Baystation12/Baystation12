@@ -1,4 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - tweak: "Helms will now display a notification if a new sector is detected and added automatically."

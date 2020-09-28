@@ -1,6 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - tweak: "The message displayed when shooting a gun now also tells you what/who you targeted (SImilar to the message other people see)."
-  - tweak: "You now see messages when firing a silenced weapon."
-  - admin: "Point blank shots now generate attack logs."

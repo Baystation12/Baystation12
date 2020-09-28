@@ -1,6 +1,0 @@
-author: "Funguss & Onlinemph"
-delete-after: True
-changes: 
-  - rscadd: "Monarch serpentids are now playable. Queens require GAS whitelisting and an admin to open the slot."
-  - tweak: "The Gyne's seedship hardsuit can now fit a particle lance in the suit storage slot."
-  - tweak: "Ascent jobs with the mantid gear harness now have it spawn in the belt slot."

@@ -1,4 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - tweak: "Smartgun authorization messages sent to the holder no longer show the name of who authorized or denied."

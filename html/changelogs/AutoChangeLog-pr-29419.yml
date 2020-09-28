@@ -1,5 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - rscadd: "The jukebox and lobby screen now have five new tracks available, by Mikazu on SoundCloud: Hull Rupture, On the Rocks, Rimward Cruise, Misanthropic Corridors, and Voidsent."
-  - tweak: "The list of tracks on the jukebox is now in alphabetical order by title."
