@@ -2498,7 +2498,8 @@
 /obj/machinery/button/alternate/door/bolts{
 	id_tag = "selfddoor";
 	name = "Self Destruct Airlock Bolt Control";
-	pixel_y = -32
+	pixel_y = -32;
+	req_access = list("ACCESS_BRIG")
 	},
 /obj/item/weapon/airlock_brace{
 	req_access = list("ACCESS_VAULT")
