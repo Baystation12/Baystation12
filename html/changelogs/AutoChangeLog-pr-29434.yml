@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - admin: "Place-map now displays user feedback and admin log messages when starting to place a map. No more wondering if the map is actually spawning or not. Also makes the existing feedback and log messages a bit more informative."
