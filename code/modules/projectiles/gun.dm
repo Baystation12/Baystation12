@@ -35,7 +35,7 @@
 	if (LAZYLEN(original_settings))
 		for (var/propname in original_settings)
 			gun.vars[propname] = original_settings[propname]
-	
+
 		LAZYCLEARLIST(original_settings)
 
 //Parent gun type. Guns are weapons that can be aimed at mobs and act over a distance
@@ -289,19 +289,22 @@
 		flick(fire_anim, src)
 
 	if (user)
-		if(!silenced)
-			if(reflex)
-				user.visible_message(
-					"<span class='reflex_shoot'><b>\The [user] fires \the [src][pointblank ? " point blank at \the [target]":""] by reflex!</b></span>",
-					"<span class='reflex_shoot'>You fire \the [src] by reflex!</span>",
-					"You hear a [fire_sound_text]!"
-				)
-			else
-				user.visible_message(
-					"<span class='danger'>\The [user] fires \the [src][pointblank ? " point blank at \the [target]":""]!</span>",
-					"<span class='warning'>You fire \the [src]!</span>",
-					"You hear a [fire_sound_text]!"
-					)
+		var/user_message = SPAN_WARNING("You fire \the [src][pointblank ? " point blank":""] at \the [target][reflex ? " by reflex" : ""]!")
+		if (silenced)
+			to_chat(user, user_message)
+		else
+			user.visible_message(
+				SPAN_DANGER("\The [user] fires \the [src][pointblank ? " point blank":""] at \the [target][reflex ? " by reflex" : ""]!"),
+				user_message,
+				SPAN_DANGER("You hear a [fire_sound_text]!")
+			)
+
+		if (pointblank)
+			admin_attack_log(user, target,
+				"shot point blank with \a [type]",
+				"shot point blank with \a [type]",
+				"shot point blank (\a [type])"
+			)
 
 		if(one_hand_penalty)
 			if(!src.is_held_twohanded(user))
