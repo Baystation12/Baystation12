@@ -1,0 +1,5 @@
+author: "Spookerton"
+delete-after: True
+changes: 
+  - tweak: "Floor mopping progress bars are now publicly visible."
+  - bugfix: "Mopping up water uses the mop's speed instead of a fixed value."
