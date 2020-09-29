@@ -45,7 +45,9 @@
 /turf/simulated/floor/bluegrid/airless,
 /area/ship/scrap/command/bridge)
 "ah" = (
-/obj/machinery/computer/ship/helm,
+/obj/machinery/computer/ship/helm{
+	req_access = list(list("ACCESS_BEARCAT"))
+	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/bluegrid/airless,
 /area/ship/scrap/command/bridge)
