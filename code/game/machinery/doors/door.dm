@@ -278,7 +278,8 @@
 		repairing = null
 		return
 
-	check_force(I, user)
+	if (check_force(I, user))
+		return
 
 	if(src.operating > 0 || isrobot(user))	return //borgs can't attack doors open because it conflicts with their AI-like interaction with them.
 
@@ -304,19 +305,20 @@
 		operating = -1
 		return 1
 
-//psa to whoever coded this, there are plenty of objects that need to call attack() on doors without bludgeoning them.
-/obj/machinery/door/proc/check_force(obj/item/I as obj, mob/user as mob)
-	if(src.density && istype(I, /obj/item/weapon) && user.a_intent == I_HURT && !istype(I, /obj/item/weapon/card))
-		var/obj/item/weapon/W = I
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		if(W.damtype == BRUTE || W.damtype == BURN)
-			user.do_attack_animation(src)
-			if(W.force < min_force)
-				user.visible_message("<span class='danger'>\The [user] hits \the [src] with \the [W] with no visible effect.</span>")
-			else
-				user.visible_message("<span class='danger'>\The [user] forcefully strikes \the [src] with \the [W]!</span>")
-				playsound(src.loc, hitsound, 100, 1)
-				take_damage(W.force)
+/obj/machinery/door/proc/check_force(obj/item/I, mob/user)
+	if (!density || user.a_intent != I_HURT)
+		return FALSE
+	if (I.damtype != BRUTE && I.damtype != BURN)
+		return FALSE
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	user.do_attack_animation(src)
+	if (I.force < min_force)
+		visible_message(SPAN_WARNING("\The [user] hits \the [src] with \an [I] to no effect."))
+	else
+		visible_message(SPAN_DANGER("\The [user] hits \the [src] with \an [I], causing damage!"))
+		playsound(src, hitsound, 100, 1)
+		take_damage(I.force)
+	return TRUE
 
 /obj/machinery/door/proc/take_damage(var/damage)
 	var/initialhealth = src.health

@@ -723,33 +723,25 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 
 
 
-/obj/machinery/newscaster/attackby(obj/item/I as obj, mob/user as mob)
-	if (stat & BROKEN)
-		playsound(src.loc, 'sound/effects/hit_on_shattered_glass.ogg', 100, 1)
-		for (var/mob/O in hearers(5, src.loc))
-			O.show_message("<EM>[user.name]</EM> further abuses the shattered [src.name].")
-	else
-		if(istype(I, /obj/item/weapon) )
-			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-			var/obj/item/weapon/W = I
-			if(W.force <15)
-				for (var/mob/O in hearers(5, src.loc))
-					O.show_message("[user.name] hits the [src.name] with the [W.name] with no visible effect." )
-					playsound(src.loc, 'sound/effects/Glasshit.ogg', 100, 1)
-			else
-				src.hitstaken++
-				if(hitstaken==3)
-					for (var/mob/O in hearers(5, src.loc))
-						O.show_message("[user.name] smashes the [src.name]!" )
-					set_broken(TRUE)
-					playsound(src.loc, 'sound/effects/Glassbr3.ogg', 100, 1)
-				else
-					for (var/mob/O in hearers(5, src.loc))
-						O.show_message("[user.name] forcefully slams the [src.name] with the [I.name]!" )
-					playsound(src.loc, 'sound/effects/Glasshit.ogg', 100, 1)
+/obj/machinery/newscaster/attackby(obj/item/I, mob/user)
+	if (user.a_intent == I_HURT)
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		if (I.force < 15)
+			visible_message(SPAN_WARNING("\The [user] uselessly bops \the [src] with \an [I]."))
+		else if (stat & BROKEN)
+			visible_message(SPAN_WARNING("\The [user] further abuses the shattered [name]."))
+			playsound(src, 'sound/effects/hit_on_shattered_glass.ogg', 100, 1)
+		else if (++hitstaken < 3)
+			visible_message(SPAN_DANGER("\The [user] slams \the [src] with \an [I], cracking it!"))
+			playsound(src, 'sound/effects/Glassbr3.ogg', 100, 1)
 		else
-			to_chat(user, "<span class='notice'>This does nothing.</span>")
-	queue_icon_update()
+			visible_message(SPAN_DANGER("\The [user] smashes \the [src] with \an [I]!"))
+			playsound(src, 'sound/effects/Glasshit.ogg', 100, 1)
+			set_broken(TRUE)
+			update_icon()
+		return TRUE
+	else
+		. = ..()
 
 /datum/news_photo
 	var/is_synth = 0
