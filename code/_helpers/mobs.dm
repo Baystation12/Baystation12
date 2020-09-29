@@ -156,24 +156,6 @@ proc/age2agedescription(age)
 /mob/var/do_unique_user_handle = 0
 /atom/var/do_unique_target_user
 
-#define DO_USER_CAN_MOVE     0x1
-#define DO_USER_CAN_TURN     0x2
-#define DO_USER_UNIQUE_ACT   0x4
-#define DO_USER_SAME_HAND    0x8
-#define DO_TARGET_CAN_MOVE   0x10
-#define DO_TARGET_CAN_TURN   0x20
-#define DO_TARGET_UNIQUE_ACT 0x40
-#define DO_SHOW_PROGRESS     0x80
-
-#define DO_BOTH_CAN_MOVE     (DO_USER_CAN_MOVE | DO_TARGET_CAN_MOVE)
-#define DO_BOTH_CAN_TURN     (DO_USER_CAN_TURN | DO_TARGET_CAN_TURN)
-#define DO_BOTH_UNIQUE_ACT   (DO_USER_UNIQUE_ACT | DO_TARGET_UNIQUE_ACT)
-#define DO_DEFAULT           (DO_SHOW_PROGRESS | DO_USER_SAME_HAND | DO_BOTH_CAN_TURN)
-
-#define DO_MISSING_USER      (-1)
-#define DO_MISSING_TARGET    (-2)
-#define DO_INCAPACITATED     (-3)
-
 /proc/do_after(mob/user, delay, atom/target, do_flags = DO_DEFAULT, incapacitation_flags = INCAPACITATION_DEFAULT)
 	return !do_after_detailed(user, delay, target, do_flags, incapacitation_flags)
 
@@ -203,7 +185,12 @@ proc/age2agedescription(age)
 	var/target_dir = do_flags & DO_TARGET_CAN_TURN ? null : target?.dir
 	var/target_type = target?.type
 
-	var/datum/progressbar/bar = do_flags & DO_SHOW_PROGRESS ? new(user, delay, target) : null
+	var/datum/progressbar/bar
+	if (do_flags & DO_SHOW_PROGRESS)
+		if (do_flags & DO_PUBLIC_PROGRESS)
+			bar = new /datum/progressbar/public(user, delay, target)
+		else
+			bar = new /datum/progressbar/private(user, delay, target)
 
 	var/start_time = world.time
 	var/end_time = start_time + delay
