@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - bugfix: "Ascent drones will no longer receive law change notifications for ion laws they didn't actually receive."
