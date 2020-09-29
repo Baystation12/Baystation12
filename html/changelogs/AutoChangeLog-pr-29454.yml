@@ -1,0 +1,5 @@
+author: "Spookerton"
+delete-after: True
+changes: 
+  - tweak: "The overmap helms of the Charon, Guppy, Aquila, and away mission Bearcat now require the same access as their docking/landing consoles."
+  - tweak: "The Torch helm now requires its own access, assignable by ID modification and given to the CO, XO, BOs, and CE by default."
