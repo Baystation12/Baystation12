@@ -41,6 +41,15 @@
 		os.ui_interact(user)
 	return TRUE
 
+/obj/machinery/computer/modular/on_update_icon()
+	. = ..()
+	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
+	if(os)
+		if(os.on)
+			set_light(light_max_bright_on, light_inner_range_on, light_outer_range_on, 2, light_color)
+		else
+			set_light(0)
+
 /obj/machinery/computer/modular/get_screen_overlay()
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
 	if(os)
