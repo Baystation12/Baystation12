@@ -112,8 +112,8 @@ Unique items
 Weapons
 ******/
 
-/obj/item/weapon/gun/energy/gun/secure/corporate
-	desc = "An access-locked EXO-branded LAEP90-S. It's designed to please paranoid corporate liaisons. Body cam not included."
+/obj/item/weapon/gun/energy/gun/small/secure/corporate
+	desc = "An access-locked EXO-branded LAEP90-CS. It's designed to please paranoid corporate liaisons. Body cam not included."
 	req_access = list(access_liaison)
 
 /obj/item/weapon/gun/projectile/revolver/medium/captain
