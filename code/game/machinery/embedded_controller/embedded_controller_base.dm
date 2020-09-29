@@ -72,7 +72,7 @@ obj/machinery/embedded_controller/radio/Destroy()
 	else
 		overlays += image(icon, "indicator_active")
 	var/datum/computer/file/embedded_program/docking/airlock/docking_program = program
-	var/datum/computer/file/embedded_program/airlock/docking/airlock_program = program
+	var/datum/computer/file/embedded_program/airlock/airlock_program = program
 	if(istype(docking_program))
 		if(docking_program.override_enabled)
 			overlays += image(icon, "indicator_forced")
