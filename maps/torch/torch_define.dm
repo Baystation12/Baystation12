@@ -5,7 +5,7 @@
 	flags = MAP_HAS_BRANCH | MAP_HAS_RANK
 	config_path = "config/torch_config.txt"
 
-	admin_levels = list(7,8)
+	admin_levels = list(7)
 	empty_levels = list(9)
 	accessible_z_levels = list("1"=1,"2"=3,"3"=1,"4"=1,"5"=1,"6"=1,"9"=30)
 	overmap_size = 35
