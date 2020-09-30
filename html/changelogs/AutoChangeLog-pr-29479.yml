@@ -1,0 +1,4 @@
+author: "Spookerton"
+delete-after: True
+changes: 
+  - bugfix: "Some progress bars that weren't now are. Surgery progress bars are now fixed."
