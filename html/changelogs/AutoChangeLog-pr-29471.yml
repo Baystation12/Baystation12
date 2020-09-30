@@ -1,4 +1,0 @@
-author: "Albens"
-delete-after: True
-changes: 
-  - tweak: "SRV Verne spawn weight has been modified. It will now appear 1/3rd as often."
