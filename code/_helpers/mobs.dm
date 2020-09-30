@@ -116,7 +116,7 @@ proc/age2agedescription(age)
 	var/target_loc = target.loc
 
 	var/holding = user.get_active_hand()
-	var/datum/progressbar/progbar
+	var/datum/progressbar/private/progbar
 	if (progress)
 		progbar = new(user, time, target)
 
