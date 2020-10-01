@@ -107,6 +107,10 @@
 	id_tag = "crashedpodEast_pump";
 	power_rating = 25000
 	},
+/obj/item/device/radio/intercom/hailing{
+	dir = 8;
+	pixel_x = 24
+	},
 /turf/simulated/floor/reinforced/airless,
 /area/map_template/crashed_pod)
 "bq" = (
@@ -235,6 +239,10 @@
 	dir = 2;
 	id_tag = "crashedpodWest_pump";
 	power_rating = 25000
+	},
+/obj/item/device/radio/intercom/hailing{
+	dir = 4;
+	pixel_x = -24
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/map_template/crashed_pod)
@@ -875,6 +883,10 @@
 	icon_state = "shuttle_chair_preview"
 	},
 /obj/effect/submap_landmark/spawnpoint/crashed_pod_survivor,
+/obj/item/device/radio/intercom/hailing{
+	dir = 4;
+	pixel_x = -24
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/crashed_pod)
 "gC" = (
@@ -1063,13 +1075,24 @@
 /obj/machinery/portable_atmospherics/powered/scrubber,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/crashed_pod)
+"Hp" = (
+/obj/machinery/sleeper{
+	dir = 8
+	},
+/obj/effect/floor_decal/industrial/outline/blue,
+/obj/item/device/radio/intercom/hailing{
+	dir = 8;
+	pixel_x = 24
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/crashed_pod)
 "RN" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/device/radio,
-/obj/item/device/radio,
-/obj/item/device/radio,
-/obj/item/device/radio,
-/obj/item/device/radio,
+/obj/item/device/radio/hailing,
+/obj/item/device/radio/hailing,
+/obj/item/device/radio/hailing,
+/obj/item/device/radio/hailing,
+/obj/item/device/radio/hailing,
 /obj/random/plushie,
 /obj/item/weapon/paper_bin,
 /turf/simulated/floor/tiled/dark,
@@ -1159,7 +1182,7 @@ fh
 fy
 gd
 ay
-gE
+Hp
 gE
 gV
 RN

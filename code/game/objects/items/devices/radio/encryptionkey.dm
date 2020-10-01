@@ -82,6 +82,10 @@
 	icon_state = "com_cypherkey"
 	channels = list("Command" = 1, "Hailing" = 1)
 
+/obj/item/device/encryptionkey/merchant
+	name = "merchant encryption key"
+	channels = list("Hailing" = 1)
+
 /obj/item/device/encryptionkey/heads/captain
 	name = "captain's encryption key"
 	icon_state = "cap_cypherkey"

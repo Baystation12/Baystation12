@@ -31,7 +31,7 @@
 /decl/hierarchy/outfit/merchant
 	name = "Merchant"
 	shoes = /obj/item/clothing/shoes/black
-	l_ear = /obj/item/device/radio/headset
+	l_ear = /obj/item/device/radio/headset/merchant
 	uniform = /obj/item/clothing/under/color/grey
 	id_slot = slot_wear_id
 	id_types = list(/obj/item/weapon/card/id/merchant)
