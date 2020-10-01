@@ -4,7 +4,7 @@
 	name = "forest planetoid"
 	desc = "Sensors detect anomalous radiation area with the presence of artificial structures."
 	icon_state = "globe"
-	known = 0
+	known = 1
 	in_space = 0
 	initial_generic_waypoints = list(
 		"nav_icarus_1",
