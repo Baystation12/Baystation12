@@ -369,9 +369,9 @@ proc/TextPreview(var/string,var/len=40)
 				return 1
 	return 0
 
-/proc/generateRandomString(var/length)
+/proc/generateRandomString(var/chars)
 	. = list()
-	for(var/a in 1 to length)
+	for(var/a in 1 to chars)
 		var/letter = rand(33,126)
 		. += ascii2text(letter)
 	. = jointext(.,null)

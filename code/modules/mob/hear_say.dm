@@ -266,8 +266,8 @@
 		message = "<B>[speaker]</B> [nverb], \"[message]\""
 	else
 		var/adverb
-		var/length = length(message) * pick(0.8, 0.9, 1.0, 1.1, 1.2)	//Inserts a little fuzziness.
-		switch(length)
+		var/size = length(message) * pick(0.8, 0.9, 1.0, 1.1, 1.2)	//Inserts a little fuzziness.
+		switch(size)
 			if(0 to 12) 	adverb = " briefly"
 			if(12 to 30)	adverb = " a short message"
 			if(30 to 48)	adverb = " a message"

@@ -3,8 +3,23 @@
 #if DM_VERSION < 513
 
 #define islist(A) istype(A, /list)
-
 #define ismovable(A) istype(A, /atom/movable)
+
+
+#elif DM_VERSION >= 513
+
+#define copytext(ARGS...) copytext_char(##ARGS)
+#define findlasttext(ARGS...) findlasttext_char(##ARGS)
+#define findlasttextEx(ARGS...) findlasttextEx_char(##ARGS)
+#define findtext(ARGS...) findtext_char(##ARGS)
+#define findtextEx(ARGS...) findtextEx_char(##ARGS)
+#define length(X) length_char(X)
+#define nonspantext(ARGS...) nonspantext_char(##ARGS)
+#define replacetext(ARGS...) replacetext_char(##ARGS)
+#define replacetextEx(ARGS...) replacetextEx_char(##ARGS)
+#define spantext(ARGS...) spantext_char(##ARGS)
+#define splittext(ARGS...) splittext_char(##ARGS)
+#define text2ascii(ARGS...) text2ascii_char(##ARGS)
 
 #endif
 

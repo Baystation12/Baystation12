@@ -125,7 +125,7 @@
 
 /datum/language/alium/get_random_name()
 	var/new_name = ""
-	var/length = rand(1,3)
-	for(var/i=0 to length)
+	var/size = rand(1,3)
+	for(var/i=0 to size)
 		new_name += pick(syllables)
 	return capitalize(new_name)

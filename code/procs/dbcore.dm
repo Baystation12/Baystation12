@@ -145,6 +145,10 @@ DBQuery/proc/SetConversion(column,conversion)
 	else if(conversions.len < column) conversions.len = column
 	conversions[column] = conversion
 
+//total chaos
+#if DM_VERSION >= 513
+#undef length
+#endif
 
 DBColumn
 	var/name
@@ -165,6 +169,9 @@ DBColumn/New(name_handler,table_handler,position_handler,type_handler,flag_handl
 	src.max_length = max_length_handler
 	return ..()
 
+#if DM_VERSION >= 513
+#define length(X) length_char(X)
+#endif
 
 DBColumn/proc/SqlTypeName(type_handler=src.sql_type)
 	switch(type_handler)

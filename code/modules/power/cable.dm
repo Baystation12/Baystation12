@@ -490,8 +490,8 @@ obj/structure/cable/proc/cableColor(var/colorC)
 /obj/item/stack/cable_coil/single
 	amount = 1
 
-/obj/item/stack/cable_coil/single/New(var/loc, var/length = 1, var/param_color = null)
-	..(loc, length, param_color)
+/obj/item/stack/cable_coil/single/New(var/loc, var/count = 1, var/param_color = null)
+	..(loc, count, param_color)
 
 /obj/item/stack/cable_coil/cyborg
 	name = "cable coil synthesizer"
@@ -501,9 +501,9 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	uses_charge = 1
 	charge_costs = list(1)
 
-/obj/item/stack/cable_coil/New(loc, length = MAXCOIL, var/param_color = null)
+/obj/item/stack/cable_coil/New(loc, count = MAXCOIL, var/param_color = null)
 	..()
-	src.amount = length
+	src.amount = count
 	if (param_color) // It should be red by default, so only recolor it if parameter was specified.
 		color = param_color
 	update_icon()

@@ -210,13 +210,13 @@ its easier to just keep the beam vertical.
 		var/DX=(32*BeamTarget.x+BeamTarget.pixel_x)-(32*x+pixel_x)
 		var/DY=(32*BeamTarget.y+BeamTarget.pixel_y)-(32*y+pixel_y)
 		var/N=0
-		var/length=round(sqrt((DX)**2+(DY)**2))
-		for(N,N<length,N+=32)
+		var/range=round(sqrt((DX)**2+(DY)**2))
+		for(N,N<range,N+=32)
 			var/obj/effect/overlay/beam/X=new(loc)
 			X.BeamSource=src
-			if(N+32>length)
+			if(N+32>range)
 				var/icon/II=new(icon,icon_state)
-				II.DrawBox(null,1,(length-N),32,32)
+				II.DrawBox(null,1,(range-N),32,32)
 				II.Turn(Angle)
 				X.icon=II
 			else X.icon=I

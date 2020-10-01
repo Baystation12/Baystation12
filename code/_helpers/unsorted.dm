@@ -546,7 +546,7 @@ proc/GaussRandRound(var/sigma,var/roundto)
 	return toReturn
 
 //Step-towards method of determining whether one atom can see another. Similar to viewers()
-/proc/can_see(var/atom/source, var/atom/target, var/length=5) // I couldn't be arsed to do actual raycasting :I This is horribly inaccurate.
+/proc/can_see(var/atom/source, var/atom/target, var/max_steps=5) // I couldn't be arsed to do actual raycasting :I This is horribly inaccurate.
 	var/turf/current = get_turf(source)
 	var/turf/target_turf = get_turf(target)
 	var/steps = 0
@@ -555,7 +555,7 @@ proc/GaussRandRound(var/sigma,var/roundto)
 		return 0
 
 	while(current != target_turf)
-		if(steps > length) return 0
+		if(steps > max_steps) return 0
 		if(current.opacity) return 0
 		for(var/atom/A in current)
 			if(A.opacity) return 0

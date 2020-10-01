@@ -18,8 +18,8 @@
 	if(prob(-disposition))
 		return ..()
 
-	var/length = round(amt/100)
-	duration_of_stay += length
+	var/duration = round(amt/100)
+	duration_of_stay += duration
 	var/datum/trade_response/tr = make_response(TRADER_BRIBE_SUCCESS, "Sure, I'll stay for TIME more minutes.", -amt, TRUE)
-	tr.text = replacetext(tr.text, "TIME", length)
+	tr.text = replacetext(tr.text, "TIME", duration)
 	return tr
