@@ -19,6 +19,7 @@
 	set_trait(TRAIT_PLANT_ICON,"bush2")
 	set_trait(TRAIT_IDEAL_HEAT, 298)
 	set_trait(TRAIT_IDEAL_LIGHT, 7)
+	fruit_size = ITEM_SIZE_TINY
 
 /datum/seed/chili/ice
 	name = "icechili"
@@ -486,6 +487,7 @@
 	display_name = "tower caps"
 	chems = list(/datum/reagent/woodpulp = list(10,1))
 	mutants = null
+	fruit_size = ITEM_SIZE_NORMAL
 
 /datum/seed/mushroom/towercap/New()
 	..()
@@ -591,6 +593,7 @@
 	seed_name = "lavender"
 	display_name = "lavender"
 	chems = list(/datum/reagent/nutriment = list(1,20), /datum/reagent/bicaridine = list(1,10))
+	fruit_size = ITEM_SIZE_TINY
 
 /datum/seed/flower/lavender/New()
 	..()
@@ -662,6 +665,7 @@
 	seed_name = "peppercorn"
 	display_name = "black pepper"
 	chems = list(/datum/reagent/blackpepper = list(10,10))
+	fruit_size = ITEM_SIZE_TINY
 
 /datum/seed/peppercorn/New()
 	..()
@@ -681,6 +685,7 @@
 	display_name = "cabbages"
 	chems = list(/datum/reagent/nutriment = list(1,7), /datum/reagent/drink/juice/cabbage = list (3, 3))
 	kitchen_tag = "cabbage"
+	fruit_size = ITEM_SIZE_NORMAL
 
 /datum/seed/cabbage/New()
 	..()
@@ -914,6 +919,7 @@
 	seed_name = "sugarcane"
 	display_name = "sugarcanes"
 	chems = list(/datum/reagent/sugar = list(4,5))
+	fruit_size = ITEM_SIZE_NORMAL
 
 /datum/seed/sugarcane/New()
 	..()
@@ -933,6 +939,7 @@
 	seed_name = "watermelon"
 	display_name = "watermelon vine"
 	chems = list(/datum/reagent/nutriment = list(1,6), /datum/reagent/drink/juice/watermelon = list(10,6))
+	fruit_size = ITEM_SIZE_NORMAL
 
 /datum/seed/watermelon/New()
 	..()
@@ -957,6 +964,7 @@
 	display_name = "pumpkin vine"
 	chems = list(/datum/reagent/nutriment = list(1,6))
 	kitchen_tag = "pumpkin"
+	fruit_size = ITEM_SIZE_NORMAL
 
 /datum/seed/pumpkin/New()
 	..()
@@ -1026,6 +1034,7 @@
 	display_name = "grass"
 	chems = list(/datum/reagent/nutriment = list(1,20))
 	kitchen_tag = "grass"
+	fruit_size = ITEM_SIZE_NORMAL
 
 /datum/seed/grass/New()
 	..()
@@ -1169,6 +1178,7 @@
 	display_name = "tobacco leaves"
 	mutants = list("finetobacco", "puretobacco", "badtobacco")
 	chems = list(/datum/reagent/tobacco = list(1,10))
+	fruit_size = ITEM_SIZE_TINY
 
 /datum/seed/tobacco/New()
 	..()
@@ -1250,6 +1260,7 @@
 	display_name = "bamboo"
 	chems = list(/datum/reagent/bamboo = list(6,1))
 	mutants = null
+	fruit_size = ITEM_SIZE_NORMAL
 
 /datum/seed/bamboo/New()
 	..()
@@ -1272,6 +1283,7 @@
 	seed_name = "melon"
 	display_name = "melon vine"
 	chems = list(/datum/reagent/nutriment = list(1,6), /datum/reagent/drink/juice/melon = list(10,6))
+	fruit_size = ITEM_SIZE_NORMAL
 
 /datum/seed/melon/New()
 	..()
@@ -1325,6 +1337,7 @@
 	seed_name = "vanilla flower"
 	display_name = "vanilla flower"
 	chems = list(/datum/reagent/nutriment = list(1,10), /datum/reagent/drink/syrup_vanilla = list(4,5))
+	fruit_size = ITEM_SIZE_TINY
 
 /datum/seed/vanilla/New()
 	..()
@@ -1406,6 +1419,7 @@
 	seed_name = "cinnamon"
 	display_name = "cinnamon"
 	chems = list(/datum/reagent/cinnamon = list(10,20))
+	fruit_size = ITEM_SIZE_TINY
 
 /datum/seed/cinnamon/New()
 	..()
@@ -1512,6 +1526,7 @@
 	seed_name = "ximi'koa stalks"
 	display_name = "ximi'koa"
 	chems = list(/datum/reagent/nutriment = list(1,2), /datum/reagent/sugar = list(4,5))
+	fruit_size = ITEM_SIZE_TINY
 
 /datum/seed/ximikoa/New()
 	..()
@@ -1586,6 +1601,7 @@
 	seed_name = "affelerin"
 	display_name = "affelerin flower"
 	chems = list(/datum/reagent/nutriment = list(1,10), /datum/reagent/drink/affelerin = list(10,10))
+	fruit_size = ITEM_SIZE_TINY
 
 /datum/seed/flower/affelerin/New()
 	..()
