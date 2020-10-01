@@ -18,7 +18,7 @@
 	icon_state = on_icon
 	cooking = 1
 
-	if(!do_mob(user, victim, 20))
+	if(!do_after(user, 2 SECONDS, victim))
 		cooking = 0
 		icon_state = off_icon
 		return

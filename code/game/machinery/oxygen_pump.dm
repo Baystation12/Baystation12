@@ -46,7 +46,7 @@
 		if(!can_apply_to_target(target, usr)) // There is no point in attempting to apply a mask if it's impossible.
 			return
 		usr.visible_message("\The [usr] begins placing the mask onto [target]..")
-		if(do_mob(usr, target, 25))
+		if(do_after(usr, 2.5 SECONDS, target))
 			if(!can_apply_to_target(target, usr))
 				return
 			// place mask and add fingerprints

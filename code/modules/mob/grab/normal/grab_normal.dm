@@ -41,7 +41,7 @@
 		affecting.visible_message("<span class='notice'>[assailant] is trying to pin [affecting] to the ground!</span>")
 		G.attacking = 1
 
-		if(do_mob(assailant, affecting, action_cooldown - 1))
+		if(do_after(assailant, action_cooldown - 1, affecting))
 			G.attacking = 0
 			G.action_used()
 			affecting.Weaken(2)
@@ -71,7 +71,7 @@
 	assailant.visible_message("<span class='danger'>[assailant] begins to [pick("bend", "twist")] [affecting]'s [O.name] into a jointlock!</span>")
 	G.attacking = 1
 
-	if(do_mob(assailant, affecting, action_cooldown - 1))
+	if(do_after(assailant, action_cooldown - 1, affecting))
 
 		G.attacking = 0
 		G.action_used()
@@ -104,7 +104,7 @@
 		assailant.visible_message("<span class='warning'>[assailant] begins to dislocate [affecting]'s [O.joint]!</span>")
 		G.attacking = 1
 
-		if(do_mob(assailant, affecting, action_cooldown - 1))
+		if(do_after(assailant, action_cooldown - 1, affecting))
 
 			G.attacking = 0
 			G.action_used()

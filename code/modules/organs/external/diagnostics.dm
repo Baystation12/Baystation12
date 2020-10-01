@@ -127,7 +127,7 @@
 		to_chat(user, "<span class='notice'>You find no visible wounds.</span>")
 
 	to_chat(user, "<span class='notice'>Checking skin now...</span>")
-	if(!do_mob(user, owner, 10))
+	if(!do_after(user, 1 SECOND, owner))
 		to_chat(user, "<span class='notice'>You must stand still to check [owner]'s skin for abnormalities.</span>")
 		return
 
@@ -143,7 +143,7 @@
 		to_chat(user, "<span class='warning'>[owner]'s skin is [english_list(badness)].</span>")
 
 	to_chat(user, "<span class='notice'>Checking bones now...</span>")
-	if(!do_mob(user, owner, 10))
+	if(!do_after(user, 1 SECOND, owner))
 		to_chat(user, "<span class='notice'>You must stand still to feel [src] for fractures.</span>")
 		return
 

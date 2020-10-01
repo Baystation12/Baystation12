@@ -47,7 +47,7 @@
 			M.visible_message("<span class='notice'>\The [user] eats some [loaded] from \the [src].</span>")
 		else
 			user.visible_message("<span class='warning'>\The [user] begins to feed \the [M]!</span>")
-			if(!(M.can_force_feed(user, loaded) && do_mob(user, M, 5 SECONDS)))
+			if(!M.can_force_feed(user, loaded) || !do_after(user, 5 SECONDS, M))
 				return
 			M.visible_message("<span class='notice'>\The [user] feeds some [loaded] to \the [M] with \the [src].</span>")
 		playsound(M.loc,'sound/items/eatfood.ogg', rand(10,40), 1)

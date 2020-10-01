@@ -37,7 +37,7 @@
 
 		user.visible_message(SPAN_WARNING("[user] attempts to force [M] to swallow \the [src]."))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		if(!do_mob(user, M))
+		if(!do_after(user, 3 SECONDS, M))
 			return
 		user.visible_message(SPAN_WARNING("[user] forces [M] to swallow \the [src]."))
 		var/contained = reagentlist()

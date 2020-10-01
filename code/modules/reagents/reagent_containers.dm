@@ -158,7 +158,7 @@
 			other_feed_message_start(user, target)
 
 			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-			if(!do_mob(user, target))
+			if(!do_after(user, 3 SECONDS, target))
 				return
 
 			other_feed_message_finish(user, target)

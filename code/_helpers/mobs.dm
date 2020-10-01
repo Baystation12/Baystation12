@@ -109,49 +109,6 @@ proc/age2agedescription(age)
 /proc/get_exposed_defense_zone(var/atom/movable/target)
 	return pick(BP_HEAD, BP_L_HAND, BP_R_HAND, BP_L_FOOT, BP_R_FOOT, BP_L_ARM, BP_R_ARM, BP_L_LEG, BP_R_LEG, BP_CHEST, BP_GROIN)
 
-/proc/do_mob(mob/user , mob/target, time = 30, target_zone = 0, uninterruptible = 0, progress = 1, var/incapacitation_flags = INCAPACITATION_DEFAULT)
-	if(!user || !target)
-		return 0
-	var/user_loc = user.loc
-	var/target_loc = target.loc
-
-	var/holding = user.get_active_hand()
-	var/datum/progressbar/private/progbar
-	if (progress)
-		progbar = new(user, time, target)
-
-	var/endtime = world.time+time
-	var/starttime = world.time
-	. = 1
-	while (world.time < endtime)
-		sleep(1)
-		if (progress)
-			progbar.update(world.time - starttime)
-		if(!user || !target)
-			. = 0
-			break
-		if(uninterruptible)
-			continue
-
-		if(QDELETED(user) || user.incapacitated(incapacitation_flags) || user.loc != user_loc)
-			. = 0
-			break
-
-		if(QDELETED(target) || target.loc != target_loc)
-			. = 0
-			break
-
-		if(user.get_active_hand() != holding)
-			. = 0
-			break
-
-		if(target_zone && user.zone_sel.selecting != target_zone)
-			. = 0
-			break
-
-	if (progbar)
-		qdel(progbar)
-
 
 /mob/var/do_unique_user_handle = 0
 /atom/var/do_unique_target_user
@@ -184,6 +141,8 @@ proc/age2agedescription(age)
 	var/atom/target_loc = do_flags & DO_TARGET_CAN_MOVE ? null : target?.loc
 	var/target_dir = do_flags & DO_TARGET_CAN_TURN ? null : target?.dir
 	var/target_type = target?.type
+
+	var/target_zone = do_flags & DO_USER_SAME_ZONE ? user.zone_sel.selecting : null
 
 	var/datum/progressbar/bar
 	if (do_flags & DO_SHOW_PROGRESS)
@@ -227,6 +186,9 @@ proc/age2agedescription(age)
 			break
 		if (initial_handle && initial_handle != user.do_unique_user_handle)
 			. = DO_USER_UNIQUE_ACT
+			break
+		if (target_zone && user.zone_sel.selecting != target_zone)
+			. = DO_USER_SAME_ZONE
 			break
 
 	if (bar)

@@ -195,7 +195,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 				affecting.take_external_damage(39, 0, DAM_SHARP, "large organic needle")
 
 		SSstatistics.add_field_details("changeling_powers","A[stage]")
-		if(!do_mob(src, T, 150))
+		if(!do_after(src, 15 SECONDS, T))
 			to_chat(src, "<span class='warning'>Our absorption of [T] has been interrupted!</span>")
 			changeling.isabsorbing = 0
 			return

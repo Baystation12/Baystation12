@@ -385,7 +385,7 @@
 			return 0
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	if(!do_mob(user, owner, 10))
+	if(!do_after(user, 1 SECOND, owner))
 		to_chat(user, "<span class='warning'>You must stand still to do that.</span>")
 		return 0
 
