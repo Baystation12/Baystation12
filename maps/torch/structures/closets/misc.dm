@@ -70,6 +70,7 @@
 		/obj/item/clothing/under/rank/internalaffairs/plain/nt,
 		/obj/item/clothing/suit/storage/toggle/suit/black,
 		/obj/item/clothing/gloves/color/black,
+		/obj/item/clothing/suit/armor/pcarrier/light/nt,
 		/obj/item/clothing/glasses/sunglasses/big,
 		/obj/item/clothing/accessory/badge/nanotrasen,
 		/obj/item/device/radio/headset/heads/torchcorp,
