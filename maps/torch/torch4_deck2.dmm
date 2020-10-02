@@ -6459,7 +6459,7 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/portable_atmospherics/powered/pump/filled,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/engineering/atmos)
 "nT" = (
 /obj/structure/sign/directions/infirmary{
 	dir = 1;
