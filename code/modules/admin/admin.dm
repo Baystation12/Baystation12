@@ -31,7 +31,7 @@ var/global/floorIsLava = 0
 ///////////////////////////////////////////////////////////////////////////////////////////////Panels
 
 /datum/admins/proc/show_player_panel(var/mob/M in SSmobs.mob_list)
-	set category = "Admin"
+	set category = null
 	set name = "Show Player Panel"
 	set desc="Edit player (respawn, ban, heal, etc)"
 
@@ -74,6 +74,7 @@ var/global/floorIsLava = 0
 		[admin_jump_link(M, src)]\] <br>
 		<b>Mob type:</b> [M.type]<br>
 		<b>Inactivity time:</b> [M.client ? "[M.client.inactivity/600] minutes" : "Logged out"]<br/><br/>
+		<A href='?src=\ref[src];paralyze=\ref[M]'>PARALYZE</A> |
 		<A href='?src=\ref[src];boot2=\ref[M]'>Kick</A> |
 		<A href='?_src_=holder;warn=[last_ckey]'>Warn</A> |
 		<A href='?src=\ref[src];newban=\ref[M];last_key=[last_ckey]'>Ban</A> |
@@ -1238,7 +1239,7 @@ var/global/floorIsLava = 0
 		to_chat(usr, "<b>No AIs located</b>")//Just so you know the thing is actually working and not just ignoring you.
 
 /datum/admins/proc/show_skills(mob/M)
-	set category = "Admin"
+	set category = null
 	set name = "Skill Panel"
 
 	if (!istype(src,/datum/admins))
@@ -1383,7 +1384,7 @@ var/global/floorIsLava = 0
 	SSticker.mode.process_autoantag()
 
 /datum/admins/proc/paralyze_mob(mob/H as mob in GLOB.player_list)
-	set category = "Admin"
+	set category = null
 	set name = "Toggle Paralyze"
 	set desc = "Toggles paralyze state, which stuns, blinds and mutes the victim."
 
