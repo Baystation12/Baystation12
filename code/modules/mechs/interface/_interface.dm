@@ -104,14 +104,14 @@
 
 /mob/living/exosuit/proc/reset_hardpoint_color()
 	for(var/hardpoint in hardpoint_hud_elements)
-		var/obj/screen/movable/exosuit/hardpoint/H = hardpoint_hud_elements[hardpoint]
+		var/obj/screen/exosuit/hardpoint/H = hardpoint_hud_elements[hardpoint]
 		if(H)
 			H.color = COLOR_WHITE
 
 /mob/living/exosuit/setClickCooldown(var/timeout)
 	. = ..()
 	for(var/hardpoint in hardpoint_hud_elements)
-		var/obj/screen/movable/exosuit/hardpoint/H = hardpoint_hud_elements[hardpoint]
+		var/obj/screen/exosuit/hardpoint/H = hardpoint_hud_elements[hardpoint]
 		if(H)
 			H.color = "#a03b3b"
 			animate(H, color = COLOR_WHITE, time = timeout, easing = CUBIC_EASING | EASE_IN)	
