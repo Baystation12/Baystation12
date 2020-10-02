@@ -60,7 +60,7 @@
 		overlays.Cut()
 		return
 
-	maptext = holding.get_hardpoint_maptext()
+	maptext =  SPAN_STYLE("font-family: 'Small Fonts'; -dm-text-outline: 1 black; font-size: 7px;", "[holding.get_hardpoint_maptext()]")
 
 	var/ui_damage = (!owner.body.diagnostics || !owner.body.diagnostics.is_functional() || ((owner.emp_damage>EMP_GUI_DISRUPT) && prob(owner.emp_damage)))
 
@@ -71,7 +71,7 @@
 
 	if(ui_damage)
 		value = -1
-		maptext = "ERROR"
+		maptext = SPAN_STYLE("font-family: 'Small Fonts'; -dm-text-outline: 1 black; font-size: 7px;", "ERROR")
 	else
 		if((owner.emp_damage>EMP_GUI_DISRUPT) && prob(owner.emp_damage*2))
 			if(prob(10))
