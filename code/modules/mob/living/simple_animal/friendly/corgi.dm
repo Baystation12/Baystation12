@@ -20,6 +20,7 @@
 	possession_candidate = 1
 	holder_type = /obj/item/weapon/holder/corgi
 	pass_flags = PASS_FLAG_TABLE
+	density = 0
 
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/corgi
 	meat_amount = 3

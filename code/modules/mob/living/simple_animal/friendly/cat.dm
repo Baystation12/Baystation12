@@ -22,6 +22,7 @@
 	mob_size = MOB_SMALL
 	possession_candidate = 1
 	pass_flags = PASS_FLAG_TABLE
+	density = 0
 
 	skin_material = MATERIAL_SKIN_FUR_ORANGE
 

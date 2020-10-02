@@ -40,6 +40,7 @@
 	attacktext = "pinches"
 	resistance = 9
 	can_escape = TRUE //snip snip
+	density = 0
 
 /*familiar version of the Pike w/o all the other hostile/carp stuff getting in the way (namely life)
 */
@@ -106,7 +107,7 @@
 
 	speak_emote = list("entones")
 	mob_size = MOB_SMALL
-
+	density = 0
 	health = 25
 	maxHealth = 25
 
@@ -149,6 +150,7 @@
 	melee_damage_upper = 1
 	can_escape = TRUE
 	attacktext = "nibbles"
+	density = 0
 
 	wizardy_spells = list(/spell/aoe_turf/smoke)
 
@@ -176,5 +178,6 @@
 	melee_damage_lower = 3
 	melee_damage_upper = 4
 	attacktext = "scratched"
+	density = 0
 
 	wizardy_spells = list(/spell/targeted/subjugation)

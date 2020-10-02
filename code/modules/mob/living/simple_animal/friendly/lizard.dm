@@ -18,6 +18,7 @@
 	possession_candidate = 1
 	can_escape = TRUE
 	pass_flags = PASS_FLAG_TABLE
+	density = 0
 
 	meat_amount = 1
 	bone_amount = 1
