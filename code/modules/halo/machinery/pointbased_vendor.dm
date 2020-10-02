@@ -1,4 +1,4 @@
-#define REQPOINT_MAX 11
+#define REQPOINT_MAX 4
 
 GLOBAL_LIST_INIT(mobs_to_reqdatum,list())
 
