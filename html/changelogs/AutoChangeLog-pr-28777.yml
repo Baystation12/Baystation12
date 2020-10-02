@@ -1,0 +1,4 @@
+author: "CrimsonShrike"
+delete-after: True
+changes: 
+  - rscadd: "Tweaked exosuit UI. Hardpoint buttons will change colour during cooldown. Text is now more legible specially against white backgrounds."
