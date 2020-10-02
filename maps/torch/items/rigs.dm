@@ -12,14 +12,14 @@
 	desc = "A specialized hardsuit rig control module issued to command staff of the Expeditionary Corps and their peers."
 	icon_state = "command_rig"
 	armor = list(
-		melee = ARMOR_MELEE_KNIVES, 
-		bullet = ARMOR_BALLISTIC_SMALL, 
-		laser = ARMOR_LASER_MINOR, 
-		energy = ARMOR_ENERGY_SMALL, 
-		bomb = ARMOR_BOMB_PADDED, 
-		bio = ARMOR_BIO_SHIELDED, 
+		melee = ARMOR_MELEE_KNIVES,
+		bullet = ARMOR_BALLISTIC_SMALL,
+		laser = ARMOR_LASER_MINOR,
+		energy = ARMOR_ENERGY_SMALL,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SMALL
-		)
+	)
 	online_slowdown = 0.50
 	offline_slowdown = 2
 	offline_vision_restriction = TINT_HEAVY
@@ -74,17 +74,17 @@
 /obj/item/weapon/rig/command/xo
 	name = "officer's command HCM"
 	suit_type = "advanced command hardsuit"
-	desc = "A specialized hardsuit rig control module issued to high ranking officers of the Expeditionary Corps and their peers."
+	desc = "A functional hardsuit rig control module issued to high ranking officers of the Expeditionary Corps and their peers."
 	icon_state = "command_XO_rig"
 	armor = list(
-		melee = ARMOR_MELEE_KNIVES, 
-		bullet = ARMOR_BALLISTIC_SMALL, 
-		laser = ARMOR_LASER_MINOR, 
-		energy = ARMOR_ENERGY_SMALL, 
-		bomb = ARMOR_BOMB_PADDED, 
-		bio = ARMOR_BIO_SHIELDED, 
+		melee = ARMOR_MELEE_KNIVES,
+		bullet = ARMOR_BALLISTIC_SMALL,
+		laser = ARMOR_LASER_MINOR,
+		energy = ARMOR_ENERGY_SMALL,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SMALL
-		)
+	)
 
 	chest_type = /obj/item/clothing/suit/space/rig/command/xo
 	helm_type = /obj/item/clothing/head/helmet/space/rig/command/xo
@@ -114,17 +114,17 @@
 /obj/item/weapon/rig/command/co
 	name = "commanding officer's command HCM"
 	suit_type = "advanced command hardsuit"
-	desc = "A specialized hardsuit rig control module issued to commanding officers of the Expeditionary Corps."
+	desc = "An advanced hardsuit rig control module issued to commanding officers of the Expeditionary Corps."
 	icon_state = "command_CO_rig"
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		bullet = ARMOR_BALLISTIC_PISTOL, 
-		laser = ARMOR_LASER_SMALL, 
-		energy = ARMOR_ENERGY_SMALL, 
-		bomb = ARMOR_BOMB_PADDED, 
-		bio = ARMOR_BIO_SHIELDED, 
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_PISTOL,
+		laser = ARMOR_LASER_SMALL,
+		energy = ARMOR_ENERGY_SMALL,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SMALL
-		)
+	)
 
 	chest_type = /obj/item/clothing/suit/space/rig/command/co
 	helm_type = /obj/item/clothing/head/helmet/space/rig/command/co
@@ -155,11 +155,14 @@
 /obj/item/weapon/rig/command/medical
 	name = "medical command HCM"
 	suit_type = "medical command hardsuit"
-	desc = "A specialized hardsuit rig control module issued to ranking medical officers of the Expeditionary Corps and their peers."
+	desc = "A flexible hardsuit rig control module issued to ranking medical officers of the Expeditionary Corps and their peers."
 	icon_state = "command_med_rig"
 
 	chest_type = /obj/item/clothing/suit/space/rig/command/medical
 	helm_type = /obj/item/clothing/head/helmet/space/rig/command/medical
+	boot_type = /obj/item/clothing/shoes/magboots/rig/command/medical
+	glove_type = /obj/item/clothing/gloves/rig/command/medical
+
 
 	allowed = list(/obj/item/weapon/gun,
 				   /obj/item/ammo_magazine,
@@ -175,10 +178,13 @@
 
 /obj/item/clothing/head/helmet/space/rig/command/medical
 	icon_state = "command_med_rig"
+	light_overlay = "helmet_light"
 /obj/item/clothing/suit/space/rig/command/medical
 	icon_state = "command_med_rig"
 /obj/item/clothing/shoes/magboots/rig/command/medical
+	icon_state = "command_med_rig"
 /obj/item/clothing/gloves/rig/command/medical
+	icon_state = "command_med_rig"
 
 
 /obj/item/weapon/rig/command/medical/equipped
@@ -197,20 +203,22 @@
 /obj/item/weapon/rig/command/security
 	name = "security command HCM"
 	suit_type = "security command hardsuit"
-	desc = "A specialized hardsuit rig control module issued to ranking security officers of the Expeditionary Corps and their peers."
+	desc = "A sleek hardsuit rig control module issued to ranking security officers of the Expeditionary Corps and their peers."
 	icon_state = "command_sec_rig"
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		bullet = ARMOR_BALLISTIC_PISTOL, 
-		laser = ARMOR_LASER_SMALL, 
-		energy = ARMOR_ENERGY_SMALL, 
-		bomb = ARMOR_BOMB_PADDED, 
-		bio = ARMOR_BIO_SHIELDED, 
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_PISTOL,
+		laser = ARMOR_LASER_SMALL,
+		energy = ARMOR_ENERGY_SMALL,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SMALL
-		)
+	)
 
 	chest_type = /obj/item/clothing/suit/space/rig/command/security
 	helm_type = /obj/item/clothing/head/helmet/space/rig/command/security
+	glove_type = /obj/item/clothing/gloves/rig/command/security
+	boot_type = /obj/item/clothing/shoes/magboots/rig/command/security
 
 	allowed = list(/obj/item/weapon/gun,
 	 			  /obj/item/ammo_magazine,
@@ -224,10 +232,16 @@
 
 /obj/item/clothing/head/helmet/space/rig/command/security
 	icon_state = "command_sec_rig"
+	light_overlay = "helmet_light"
+
 /obj/item/clothing/suit/space/rig/command/security
 	icon_state = "command_sec_rig"
+
 /obj/item/clothing/shoes/magboots/rig/command/security
+ 	icon_state = "command_sec_rig"
+
 /obj/item/clothing/gloves/rig/command/security
+	icon_state = "command_sec_rig"
 
 
 /obj/item/weapon/rig/command/security/equipped
@@ -243,20 +257,22 @@
 /obj/item/weapon/rig/command/science
 	name = "research command HCM"
 	suit_type = "research command hardsuit"
-	desc = "A specialized hardsuit rig control module issued to ranking research officers of the Expeditionary Corps."
+	desc = "A durable hardsuit rig control module issued to ranking research officers of the Expeditionary Corps."
 	icon_state = "command_sci_rig"
 	armor = list(
-		melee = ARMOR_MELEE_KNIVES, 
-		bullet = ARMOR_BALLISTIC_SMALL, 
-		laser = ARMOR_LASER_MINOR, 
-		energy = ARMOR_ENERGY_STRONG, 
-		bomb = ARMOR_BOMB_RESISTANT, 
-		bio = ARMOR_BIO_SHIELDED, 
+		melee = ARMOR_MELEE_KNIVES,
+		bullet = ARMOR_BALLISTIC_SMALL,
+		laser = ARMOR_LASER_MINOR,
+		energy = ARMOR_ENERGY_STRONG,
+		bomb = ARMOR_BOMB_RESISTANT,
+		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SHIELDED
-		)
+	)
 
 	chest_type = /obj/item/clothing/suit/space/rig/command/science
 	helm_type = /obj/item/clothing/head/helmet/space/rig/command/science
+	glove_type = /obj/item/clothing/gloves/rig/command/science
+	boot_type = /obj/item/clothing/shoes/magboots/rig/command/science
 
 	allowed = list(/obj/item/weapon/gun,
 				   /obj/item/ammo_magazine,
@@ -286,8 +302,10 @@
 	icon_state = "command_sci_rig"
 
 /obj/item/clothing/shoes/magboots/rig/command/science
-/obj/item/clothing/gloves/rig/command/science
+	icon_state = "command_sci_rig"
 
+/obj/item/clothing/gloves/rig/command/science
+	icon_state = "command_sci_rig"
 
 /obj/item/weapon/rig/command/science/equipped
 	initial_modules = list(
@@ -298,6 +316,74 @@
 		/obj/item/rig_module/cooling_unit)
 
 /*
+* CHIEF ENGINEER
+*/
+/obj/item/weapon/rig/command/engineering
+	name = "engineering command HCM"
+	suit_type = "engineering command hardsuit"
+	desc = "A high-tech hardsuit rig control module issued to ranking officers of the Expeditionary Corps and their peers."
+	icon_state = "command_eng_rig"
+	armor = list(
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_SMALL,
+		laser = ARMOR_LASER_SMALL,
+		energy = ARMOR_ENERGY_SMALL,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SHIELDED,
+		rad = ARMOR_RAD_SHIELDED
+	)
+
+	chest_type = /obj/item/clothing/suit/space/rig/command/engineering
+	helm_type = /obj/item/clothing/head/helmet/space/rig/command/engineering
+	glove_type = /obj/item/clothing/gloves/rig/command/engineering
+	boot_type = /obj/item/clothing/shoes/magboots/rig/command/engineering
+
+	allowed = list(
+		/obj/item/weapon/gun,
+		/obj/item/device/flashlight,
+		/obj/item/weapon/tank,
+		/obj/item/device/suit_cooling_unit,
+		/obj/item/weapon/storage/toolbox,
+		/obj/item/weapon/storage/briefcase/inflatable,
+		/obj/item/weapon/inflatable_dispenser,
+		/obj/item/device/t_scanner,
+		/obj/item/weapon/rcd
+	)
+
+	req_access = list(access_ce)
+	max_pressure_protection = FIRESUIT_MAX_PRESSURE
+	min_pressure_protection = 0
+
+/obj/item/clothing/head/helmet/space/rig/command/engineering
+	icon_state = "command_eng_rig"
+	light_overlay = "helmet_light_dual"
+
+
+/obj/item/clothing/suit/space/rig/command/engineering
+	icon_state = "command_eng_rig"
+
+/obj/item/clothing/shoes/magboots/rig/command/engineering
+	icon_state = "command_eng_rig"
+
+/obj/item/clothing/gloves/rig/command/engineering
+	icon_state = "command_eng_rig"
+	siemens_coefficient = 0
+
+
+/obj/item/weapon/rig/command/engineering/equipped
+	initial_modules = list(
+		/obj/item/rig_module/ai_container,
+		/obj/item/rig_module/maneuvering_jets,
+		/obj/item/rig_module/mounted/plasmacutter,
+		/obj/item/rig_module/device/rcd,
+		/obj/item/rig_module/device/flash,
+		/obj/item/rig_module/vision/meson,
+		/obj/item/rig_module/grenade_launcher/mfoam,
+		/obj/item/rig_module/cooling_unit
+	)
+
+
+/*
 * EXPLORATION
 */
 /obj/item/weapon/rig/exploration
@@ -306,14 +392,14 @@
 	desc = "Expeditionary Corps' Exoplanet Exploration Armored Unit, A-Unit for short. Built for more hostile (and hungry) environments, it features additional armor and powered exoskeleton."
 	icon_state = "command_exp_rig"
 	armor = list(
-		melee = ARMOR_MELEE_MAJOR, 
-		bullet = ARMOR_BALLISTIC_SMALL, 
-		laser = ARMOR_LASER_SMALL, 
-		energy = ARMOR_ENERGY_RESISTANT, 
-		bomb = ARMOR_BOMB_MINOR, 
-		bio = ARMOR_BIO_SHIELDED, 
+		melee = ARMOR_MELEE_MAJOR,
+		bullet = ARMOR_BALLISTIC_SMALL,
+		laser = ARMOR_LASER_SMALL,
+		energy = ARMOR_ENERGY_RESISTANT,
+		bomb = ARMOR_BOMB_MINOR,
+		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SHIELDED
-		)
+	)
 
 	chest_type = /obj/item/clothing/suit/space/rig/command
 	helm_type = /obj/item/clothing/head/helmet/space/rig/command/exploration

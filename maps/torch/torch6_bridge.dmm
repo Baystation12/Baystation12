@@ -3275,7 +3275,7 @@
 	},
 /obj/item/weapon/tank/emergency/oxygen/double,
 /obj/effect/floor_decal/corner/yellow/full,
-/obj/item/weapon/rig/ce/equipped,
+/obj/item/weapon/rig/command/engineering/equipped,
 /turf/simulated/floor/tiled/monotile,
 /area/aux_eva)
 "fI" = (
