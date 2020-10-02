@@ -1,0 +1,8 @@
+author: "MrKicker"
+delete-after: True
+changes: 
+  - admin: "Added Paralyze option to player panel."
+  - admin: "Removed Paralyze from admin tab (still in right-click and player panel)."
+  - admin: "Moved 'View Persistant Data' to Secrets->Investigations."
+  - admin: "Removed 'Show Player Panel' from admin tab (right-click still works, 'player panel' unchanged)."
+  - admin: "Removed skills from admin tab (still in player panel / right-click menu)."
