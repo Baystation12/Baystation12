@@ -1,0 +1,10 @@
+author: "afirpo & spookerton"
+delete-after: True
+changes: 
+  - rscadd: "Reagent grinders and juicers can be constructed with printed circuit boards."
+  - tweak: "Reagent grinder UI is updated to be more informative."
+  - tweak: "Reagent grinder and juicer skill multiplier is now 50%, 67%, 83%, 100%, 100%."
+  - tweak: "Reagent grinders and juicers no longer steal fingers."
+  - tweak: "Reagent grinders can use any beaker except vials and bowls as product containers. Juicers can use the same, plus shakers."
+  - tweak: "Reagent grinders can accept material stacks from sheet snatchers. Juicers can accept pills from pill bottles."
+  - tweak: "Reagent grinders and juicers can grind material objects like coins. Not all material objects have chemical products set up, so this is spotty."
