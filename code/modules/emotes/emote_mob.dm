@@ -131,7 +131,7 @@
 		message = format_emote(src, message)
 	else
 		return
-
+	message = process_chat_markup(message)
 	if (message)
 		log_emote("[name]/[key] : [message]")
 	//do not show NPC animal emotes to ghosts, it turns into hellscape

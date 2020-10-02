@@ -152,8 +152,9 @@
 	var/key_name = plain_key_name(src)
 	return usr != src ? "[key_name] - usr: [plain_key_name(usr)]" : key_name
 
-/proc/sanitize_and_communicate(var/channel_type, var/communicator, var/message)
+/proc/sanitize_and_communicate(channel_type, communicator, message, list/ignore_tags)
 	message = sanitize(message)
+	message = process_chat_markup(message, ignore_tags)
 	return communicate(arglist(args))
 
 /proc/communicate(var/channel_type, var/communicator, var/message)

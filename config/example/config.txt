@@ -111,6 +111,9 @@ ALLOW_ADMIN_OOCCOLOR
 ## allow players to initiate a restart vote
 ALLOW_VOTE_RESTART
 
+## Allow chat markup ingame.
+ALLOW_CHAT_MARKUP
+
 ## allow players to initate a mode-change start
 ALLOW_VOTE_MODE
 
