@@ -1,8 +1,7 @@
 /obj/structure/chorus
 	var/health = 10
-	var/mob/living/chorus/owner
+	var/datum/chorus/owner
 	icon = 'icons/obj/cult.dmi'
-	var/gives_sight = TRUE
 	var/last_click = 0
 	var/click_cooldown = 10
 	var/activation_cost_resource
@@ -17,21 +16,21 @@
 		owner.add_building(src)
 
 /obj/structure/chorus/Destroy()
-	if (owner)
+	if(owner)
 		owner.remove_building(src)
 	. = ..()
 
-/obj/structure/chorus/proc/chorus_click(var/mob/living/chorus/C)
+/obj/structure/chorus/proc/chorus_click(var/mob/living/carbon/alien/chorus/C)
 	if(can_activate(C))
 		activate()
 		last_click = world.time
 
-/obj/structure/chorus/proc/can_activate(var/mob/living/chorus/C, var/warning = TRUE)
-	if(owner && last_click + click_cooldown < world.time && C == owner)
+/obj/structure/chorus/proc/can_activate(var/mob/living/carbon/alien/chorus/C, var/warning = TRUE)
+	if(last_click + click_cooldown < world.time && (!C || C.chorus_type == owner && get_dist(C, src) <= 1))
 		if(activation_cost_resource && !owner.use_resource(activation_cost_resource, activation_cost_amount))
-			if(warning)
+			if(warning && C)
 				var/datum/chorus_resource/cr = activation_cost_resource
-				to_chat(owner, "<span class='warning'>You need more [initial(cr.name)] to activate \the [src]</span>")
+				to_chat(C, SPAN_WARNING("You need more [initial(cr.name)] to activate \the [src]"))
 			return FALSE
 		return TRUE
 	return FALSE
@@ -44,17 +43,20 @@
 	user.do_attack_animation(src)
 	playsound(get_turf(src), 'sound/effects/Glasshit.ogg', 50, 1)
 	user.visible_message(
-		"<span class='danger'>[user] hits \the [src] with \the [W]!</span>",
-		"<span class='danger'>You hit \the [src] with \the [W]!</span>",
-		"<span class='danger'>You hear something breaking!</span>"
+		SPAN_DANGER("[user] hits \the [src] with \the [W]!"),
+		SPAN_DANGER("You hit \the [src] with \the [W]!"),
+		SPAN_DANGER("You hear something breaking!")
 		)
 	take_damage(W.force)
 
 /obj/structure/chorus/take_damage(var/amount)
 	health -= amount
 	if(health < 0)
-		src.visible_message("\The [src] crumbles!")
-		qdel(src)
+		crumble()
+
+/obj/structure/chorus/proc/crumble()
+	src.visible_message("\The [src] crumbles!")
+	qdel(src)
 
 /obj/structure/chorus/bullet_act(var/obj/item/projectile/P)
 	take_damage(P.damage)

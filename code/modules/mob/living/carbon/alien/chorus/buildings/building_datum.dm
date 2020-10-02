@@ -8,57 +8,55 @@
 	var/list/resource_cost = list() //Name = cost
 	var/list/building_requirements //type = num
 
-/datum/chorus_building/proc/can_build(var/mob/living/chorus/c, var/atom/A, var/warnings = FALSE)
+/datum/chorus_building/proc/can_build(var/mob/living/carbon/alien/chorus/c, var/atom/A, var/warnings = FALSE)
 	A = get_turf(A)
+	var/atom/bt = building_type_to_build
 	if(A.density)
 		if(warnings)
-			to_chat(c, "<span class='warning'>You cannot build on a wall</span>")
+			to_chat(c, SPAN_WARNING("You cannot build on a wall"))
 		return FALSE
 	if(istype(A, /turf/space) || istype(A, /turf/simulated/open))
 		if(warnings)
-			to_chat(c, "<span class='warning'>You must build on solid ground</span>")
+			to_chat(c, SPAN_WARNING("You must build on solid ground"))
 		return FALSE
-	if(unique && c.get_building_type_amount(type) > 0)
+	if(unique && c.chorus_type.get_building_type_amount(building_type_to_build) > 0)
 		if(warnings)
-			to_chat(c, "<span class='warning'>You can only have one of these at a time!</span>")
+			to_chat(c, SPAN_WARNING("You can only have one of these at a time!"))
 		return FALSE
 	for(var/a in A)
 		var/atom/atom = a
-		if(atom.density || istype(atom, /obj/structure/chorus_blueprint) || istype(atom, /mob/living/chorus) || istype(atom, /obj/structure/chorus))
+		if((atom.density && !istype(atom, /mob/living/carbon/alien/chorus)) || istype(atom, /obj/structure/chorus))
 			if(warnings)
-				to_chat(c, "<span class='warning'>You cannot build there!</span>")
+				to_chat(c, SPAN_WARNING("You cannot build there!"))
 			return FALSE
 
 	for(var/type in resource_cost)
-		if(!c.has_enough_resource(type, resource_cost[type]))
+		if(!c.chorus_type.has_enough_resource(type, resource_cost[type]))
 			if(warnings)
-				var/datum/chorus_resource/cr = c.get_resource(type)
-				to_chat(c, "<span class='warning'>You do not have enough [cr.name] to build that</span>")
+				var/datum/chorus_resource/cr = c.chorus_type.get_resource(type)
+
+				to_chat(c, SPAN_WARNING("You do not have enough [cr.name] to build \the [initial(bt.name)]"))
 			return FALSE
 	if(building_requirements)
 		for(var/type in building_requirements)
-			if(c.get_building_type_amount(type) < building_requirements[type])
+			if(c.chorus_type.get_building_type_amount(type) < building_requirements[type])
 				if(warnings)
 					var/obj/structure/O = type
-					to_chat(c, "<span class='warning'>You need more [initial(O.name)] to build that</span>")
+					to_chat(c, SPAN_WARNING("You need more [initial(O.name)] to build \the [initial(bt.name)]"))
 				return FALSE
 
 	if(build_distance)
-		var/r = c.get_dist_to_nearest_building(A) <= build_distance
+		var/r = c.chorus_type.get_dist_to_nearest_building(A) <= build_distance
 		if(!r && warnings)
-			to_chat(c, "<span class='warning'>You must build that closer to another chorus building</span>")
+			to_chat(c, SPAN_WARNING("You must build that closer to another chorus building"))
 		return r
 	return TRUE
 
-/datum/chorus_building/proc/pay_costs(var/mob/living/chorus/c)
+/datum/chorus_building/proc/pay_costs(var/mob/living/carbon/alien/chorus/c)
 	for(var/name in resource_cost)
-		if(!c.use_resource(name, resource_cost[name]))
+		if(!c.chorus_type.use_resource(name, resource_cost[name]))
 			return FALSE
 	return TRUE
-
-/datum/chorus_building/proc/build(var/atom/target, var/mob/living/chorus/C, var/warnings = FALSE)
-	if(can_build(C, target, warnings) && pay_costs(C))
-		return new /obj/structure/chorus_blueprint(target, src, C)
 
 /datum/chorus_building/proc/get_print_icon_state()
 	return "<img src=\"[get_rsc_path()]\">"
@@ -80,7 +78,7 @@
 	var/obj/structure/O = building_type_to_build
 	return initial(O.name)
 
-/datum/chorus_building/proc/get_nano_data(var/mob/living/chorus/C)
+/datum/chorus_building/proc/get_nano_data(var/mob/living/carbon/alien/chorus/C)
 	. = list()
 	var/obj/structure/chorus/O = building_type_to_build
 	.["name"] = get_name()
@@ -88,15 +86,17 @@
 	.["desc"] = desc
 	.["cost"] = get_printed_cost(C)
 	.["requirements"] = get_printed_requirements()
-	var/datum/chorus_resource/cr = C.get_resource(initial(O.activation_cost_resource))
+	.["type"] = type
+	.["distance"] = build_distance
+	var/datum/chorus_resource/cr = C.chorus_type.get_resource(initial(O.activation_cost_resource))
 	if(cr)
 		.["activation_res"] = cr.printed_cost()
 		.["activation_amt"] = initial(O.activation_cost_amount)
 
-/datum/chorus_building/proc/get_printed_cost(var/mob/living/chorus/C)
+/datum/chorus_building/proc/get_printed_cost(var/mob/living/carbon/alien/chorus/C)
 	. = list()
 	for(var/res in resource_cost)
-		var/datum/chorus_resource/cr = C.get_resource(res)
+		var/datum/chorus_resource/cr = C.chorus_type.get_resource(res)
 		if(cr)
 			. += list(list("print" = cr.printed_cost(TRUE), "amount" = resource_cost[res]))
 
@@ -107,25 +107,15 @@
 			var/obj/structure/s = r
 			. += list(list("name" = initial(s.name), "amount" = building_requirements[r]))
 
-/datum/chorus_building/delete/get_icon_state()
-	return "remove"
-
-/datum/chorus_building/delete/can_build(var/mob/living/chorus/c, var/atom/A, var/warnings = FALSE)
-	if(istype(A, /obj/structure/chorus))
-		var/obj/structure/chorus/s = A
-		return s.owner == c
-	return FALSE
-
-/datum/chorus_building/delete/build(var/atom/target, var/mob/living/chorus/C, var/warnings = FALSE)
-	if(can_build(C, target, warnings))
-		to_chat(C, "Removing [target]")
-		qdel(target)
+/datum/chorus_building/proc/build(var/atom/target, var/mob/living/carbon/alien/chorus/C, var/warnings = FALSE)
+	if(can_build(C, target, warnings) && pay_costs(C))
+		return new building_type_to_build(target, C.chorus_type)
 
 /datum/chorus_building/set_to_turf
 	var/range = 0
 	var/turf_to_change_to
 
-/datum/chorus_building/set_to_turf/build(var/atom/target, var/mob/living/chorus/C, var/warnings = FALSE)
+/datum/chorus_building/set_to_turf/build(var/atom/target, var/mob/living/carbon/alien/chorus/C, var/warnings = FALSE)
 	. = ..()
 	if(.)
 		for(var/turf/T in range(range, target))
