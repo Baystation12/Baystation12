@@ -10,6 +10,7 @@
 /obj/item/projectile/bullet/m224
 	damage = 45
 	accuracy = 1
+	shield_damage = -10 //Unspecialised kinetics are less powerful vs shields
 
 /* M224 TTR Rounds */
 
@@ -35,6 +36,7 @@
 
 /obj/item/projectile/bullet/m225
 	damage = 55
+	shield_damage = -20 //Unspecialised kinetics are less powerful vs shields
 
 /* M228 Rounds */
 //used by: M6D, M6S
@@ -42,6 +44,7 @@
 /obj/item/projectile/bullet/m228
 	damage = 40
 	armor_penetration = 10
+	shield_damage = -10 //Unspecialised kinetics are less powerful vs shields
 
 /obj/item/ammo_casing/m228
 	desc = "A 12.7mm HP bullet casing."
