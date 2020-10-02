@@ -73,6 +73,7 @@
 	bar.icon_state = "prog_bar_0"
 	bar.pixel_x = (actee.x - actor.x) * WORLD_ICON_SIZE
 	bar.pixel_y = (actee.y - actor.y) * WORLD_ICON_SIZE + WORLD_ICON_SIZE
+	bar.layer = ABOVE_HUMAN_LAYER
 	actor.vis_contents += bar
 
 /datum/progressbar/public/update(progress)
