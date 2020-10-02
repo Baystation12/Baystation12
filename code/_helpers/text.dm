@@ -568,7 +568,7 @@ proc/TextPreview(var/string,var/len=40)
 // If char isn't part of the text the entire text is returned
 /proc/copytext_after_last(var/text, var/char)
 	var/regex/R = regex("(\[^[char]\]*)$")
-	R.Find(text)
+	REGEX_FIND(R, text)
 	return R.group[1]
 
 /proc/sql_sanitize_text(var/text)

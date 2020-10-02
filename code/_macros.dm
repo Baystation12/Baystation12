@@ -5,6 +5,8 @@
 #define islist(A) istype(A, /list)
 #define ismovable(A) istype(A, /atom/movable)
 
+#define REGEX_REPLACE(regexp, ARGS...) regexp.Replace(##ARGS)
+#define REGEX_FIND(regexp, ARGS...) regexp.Find(##ARGS)
 
 #elif DM_VERSION >= 513
 
@@ -20,6 +22,9 @@
 #define spantext(ARGS...) spantext_char(##ARGS)
 #define splittext(ARGS...) splittext_char(##ARGS)
 #define text2ascii(ARGS...) text2ascii_char(##ARGS)
+
+#define REGEX_REPLACE(regexp, ARGS...) regexp.Replace_char(##ARGS)
+#define REGEX_FIND(regexp, ARGS...) regexp.Find_char(##ARGS)
 
 #endif
 
