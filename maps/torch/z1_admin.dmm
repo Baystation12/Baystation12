@@ -7714,6 +7714,7 @@
 /area/acting/backstage)
 "aLb" = (
 /obj/machinery/reagentgrinder,
+/obj/item/weapon/reagent_containers/glass/beaker/large,
 /turf/unsimulated/floor{
 	icon_state = "plating";
 	name = "plating"

@@ -2487,6 +2487,7 @@
 /area/map_template/colony/engineering)
 "eS" = (
 /obj/machinery/reagentgrinder,
+/obj/item/weapon/reagent_containers/glass/beaker/large,
 /obj/item/stack/material/phoron/ten,
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 5

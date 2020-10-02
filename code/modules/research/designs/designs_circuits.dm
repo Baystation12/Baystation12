@@ -767,6 +767,20 @@
 	build_path = /obj/item/weapon/stock_parts/circuitboard/vending
 	sort_string = "WAABA"
 
+/datum/design/circuit/reagentgrinder
+	name = "reagent grinder"
+	id = "reagent_grinder"
+	req_tech = list(TECH_BIO = 2, TECH_MATERIAL = 2, TECH_ENGINEERING = 2)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/reagentgrinder
+	sort_string = "WAABB"
+
+/datum/design/circuit/juicer
+	name = "blender"
+	id = "blender"
+	req_tech = list(TECH_BIO = 1, TECH_MATERIAL = 2, TECH_ENGINEERING = 1)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/juicer
+	sort_string = "WAABC"
+
 /datum/design/circuit/aicore
 	name = "AI core"
 	id = "aicore"
