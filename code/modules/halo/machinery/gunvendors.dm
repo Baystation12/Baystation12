@@ -61,14 +61,17 @@
 					/obj/item/weapon/gun/projectile/srs99_sniper = 0,
 					/obj/item/weapon/gun/projectile/m41 = 0,
 					"Ammunition" = -1,
-					/obj/item/weapon/storage/box/spnkr = 1,
-					/obj/item/ammo_magazine/srs99/m232 = 1,
-					/obj/item/ammo_magazine/m739/m118 = 1,
+					/obj/item/weapon/storage/box/spnkr = 0,
+					/obj/item/ammo_magazine/srs99/m232 = 0,
+					/obj/item/ammo_magazine/m739/m118 = 0,
 					"Turrets" = -1,
 					/obj/item/turret_deploy_kit/HMG = 0,
 					"Explosives" = -1,
 					/obj/item/weapon/plastique = 0)
 	amounts = list(\
+		/obj/item/weapon/gun/projectile/m739_lmg = 3,
+		/obj/item/weapon/gun/projectile/srs99_sniper = 3,
+		/obj/item/weapon/gun/projectile/m41 = 3,
 		/obj/item/turret_deploy_kit/HMG = 2,
 		/obj/item/weapon/plastique = 8
 	)
@@ -348,8 +351,8 @@
 	req_access = list(access_soe)
 	products = list(
 					"Melee" = -1,
-					/obj/item/weapon/material/knife/combat_knife = 1,
-					/obj/item/weapon/material/machete = 2,
+					/obj/item/weapon/material/knife/combat_knife = 0,
+					/obj/item/weapon/material/machete = 0,
 					"Guns" = -1,
 					/obj/item/weapon/gun/projectile/heavysniper = 0,
 					/obj/item/weapon/gun/projectile/br55 = 0,
@@ -403,6 +406,8 @@
 					/obj/item/weapon/armor_patch = 0,
 					/obj/item/drop_pod_beacon = 0)
 	amounts = list(\
+		/obj/item/weapon/gun/projectile/heavysniper = 3,
+		/obj/item/weapon/gun/projectile/m545_lmg = 3,
 		/obj/item/weapon/plastique = 12,
 		/obj/item/weapon/grenade/frag/m9_hedp = 15,
 		/obj/item/weapon/grenade/smokebomb = 15,

@@ -2161,6 +2161,7 @@
 #include "code\modules\halo\weapons\ammo_9-5mm.dm"
 #include "code\modules\halo\weapons\ammo_boxes.dm"
 #include "code\modules\halo\weapons\ammo_g40mm.dm"
+#include "code\modules\halo\weapons\ammo_shotshell.dm"
 #include "code\modules\halo\weapons\automated_AA.dm"
 #include "code\modules\halo\weapons\autoturret.dm"
 #include "code\modules\halo\weapons\BR55.dm"
