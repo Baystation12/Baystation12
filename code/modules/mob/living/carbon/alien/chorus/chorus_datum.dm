@@ -28,8 +28,6 @@
 	if(!(c in units))
 		return
 	units -= c
-	if(units.len == 0)
-		qdel(src)
 
 /datum/chorus/proc/add_building(var/b)
 	buildings |= b

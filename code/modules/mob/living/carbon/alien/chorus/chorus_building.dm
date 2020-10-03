@@ -1,6 +1,7 @@
 /mob/living/carbon/alien/chorus
 	var/construct_speed = 1
 	var/datum/chorus_building/selected_building
+	var/is_building = FALSE
 
 /mob/living/carbon/alien/chorus/proc/set_selected_building(var/n_build)
 	selected_building = n_build
@@ -8,6 +9,9 @@
 	C.update_selected(n_build)
 
 /mob/living/carbon/alien/chorus/proc/start_building(var/atom/a)
+	if(is_building)
+		to_chat(src, SPAN_WARNING("You're already building something!"))
+		return
 	var/turf/T
 	if(a)
 		T = get_turf(a)
@@ -21,8 +25,10 @@
 		return
 	if(selected_building.can_build(src, T, TRUE))
 		var/real_construct_speed = 25 * construct_speed / (24 + construct_speed)
+		is_building = TRUE
 		if(do_after(src, round(selected_building.build_time / real_construct_speed), T))
 			selected_building.build(T, src, TRUE)
+		is_building = FALSE
 
 /mob/living/carbon/alien/chorus/Life()
 	. = ..()

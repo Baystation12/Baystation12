@@ -13,9 +13,7 @@
 /obj/structure/chorus/spawner/growth_womb
 	name = "womb"
 	desc = "A disgusting accumulation of flesh and bone pulsing with life"
-	icon_state = "growth_womb0"
+	icon_state = "growth_womb"
 	activation_cost_resource = /datum/chorus_resource/growth_meat
-	activation_cost_amount = 60
+	activation_cost_amount = 100
 	health = 200
-	click_cooldown = 120 SECONDS
-	base_state = "growth_womb"

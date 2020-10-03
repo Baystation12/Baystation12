@@ -490,6 +490,11 @@
 /obj/item/device/electronic_assembly/bullet_act(var/obj/item/projectile/P)
 	take_damage(P.damage)
 
+/obj/item/device/electronic_assembly/attack_generic(mob/user, damage)
+	take_damage(damage)
+	user.visible_message(SPAN_WARNING("\The [user] smashes \the [src]!"), SPAN_WARNING("You smash \the [src]!"))
+	attack_animation(user)
+
 /obj/item/device/electronic_assembly/emp_act(severity)
 	. = ..()
 	for(var/I in src)

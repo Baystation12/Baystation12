@@ -5,13 +5,18 @@
 	icon_state = "blob"
 	health = 100
 	maxHealth = 100
-	var/melee_damage = 10
+	var/melee_damage = 30
 	var/global/choruses
 	var/global/num_choruses = 1
 	var/datum/chorus/chorus_type
 	var/attack_text = "smashes"
 	var/icon_living = "blob"
 	var/icon_dead = "blob"
+	var/attack_sound = 'sound/effects/stamp.ogg'
+	see_invisible = SEE_INVISIBLE_NOLIGHTING
+	see_in_dark = 8
+	language = LANGUAGE_CULT_GLOBAL
+	species_language = LANGUAGE_CULT_GLOBAL
 
 /mob/living/carbon/alien/chorus/Initialize(var/maploading, var/datum/chorus/chorus)
 	..()
@@ -28,10 +33,14 @@
 				chorus = ct
 	set_chorus(chorus)
 	add_language(LANGUAGE_CULT)
-	add_language(LANGUAGE_CULT_GLOBAL)
 	var/datum/language/l = all_languages[LANGUAGE_CULT]
 	name = l.get_random_name()
 	verbs += /mob/living/proc/ventcrawl
+
+/mob/living/carbon/alien/chorus/Destroy()
+	if(chorus_type)
+		chorus_type.remove_unit(src)
+	. = ..()
 
 /mob/living/carbon/alien/chorus/Login()
 	. = ..()

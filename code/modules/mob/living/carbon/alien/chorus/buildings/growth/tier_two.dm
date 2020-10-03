@@ -147,12 +147,13 @@
 	visible_message(SPAN_DANGER("<b>\The [src]</b> fires a small dart at \the [T]"))
 	bs.firer = src
 	bs.launch(T, BP_CHEST)
+	playsound(src, 'sound/effects/hypospray.ogg', 25, 1)
 
 /obj/item/projectile/bone_shard
 	name = "bone shard"
 	damage = 10
 	embed = TRUE
-	weaken = 3
+	weaken = 1
 	icon_state = "sliver"
 	damage_type = BRUTE
 	damage_flags = 0
