@@ -1,0 +1,5 @@
+author: "juxtaposed9930"
+delete-after: True
+changes: 
+  - tweak: "CMO, CSO and CE can spawn with holster accessories."
+  - tweak: "BOs & APA can no longer spawn with carrier vests."
