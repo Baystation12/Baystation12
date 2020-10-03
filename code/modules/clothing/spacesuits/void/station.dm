@@ -452,3 +452,34 @@
 	helmet = /obj/item/clothing/head/helmet/space/void/pilot
 	boots = /obj/item/clothing/shoes/magboots
 
+//Ceti
+/obj/item/clothing/suit/space/void/ceti
+	name = "CTI Voidsuit"
+	desc = "A xenoarcheology voidsuit designed for CTI researchers, by CTI researchers. Tools not included."
+	icon_state = "rig-ceti"
+	armor = list(
+		melee = ARMOR_MELEE_RESISTANT,
+		energy = ARMOR_ENERGY_RESISTANT,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SHIELDED,
+		rad = ARMOR_RAD_SHIELDED
+	)
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/stack/flag,/obj/item/weapon/storage/excavation,/obj/item/weapon/pickaxe,/obj/item/device/scanner/health,/obj/item/device/measuring_tape,/obj/item/device/ano_scanner,/obj/item/device/depth_scanner,/obj/item/device/core_sampler,/obj/item/device/gps,/obj/item/weapon/pinpointer/radio,/obj/item/device/radio/beacon,/obj/item/weapon/pickaxe/xeno,/obj/item/weapon/storage/bag/fossils)
+
+/obj/item/clothing/head/helmet/space/void/ceti
+	name = "CTI voidsuit helmet"
+	desc = "A specially made voidsuit helmet designed for use by CTI affiliated researchers."
+	icon_state = "rig0-ceti"
+	item_state = "helm-ceti"
+	armor = list(
+		melee = ARMOR_MELEE_RESISTANT,
+		energy = ARMOR_ENERGY_RESISTANT,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SHIELDED,
+		rad = ARMOR_RAD_SHIELDED
+	)
+	light_overlay = "helmet_light"
+
+/obj/item/clothing/suit/space/void/ceti/prepared
+	helmet = /obj/item/clothing/head/helmet/space/void/ceti
+	boots = /obj/item/clothing/shoes/magboots

@@ -496,7 +496,7 @@
 /area/verne/engineering/storage)
 "bY" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/suit_storage_unit/science/verne,
+/obj/machinery/suit_storage_unit/ceti/verne,
 /obj/machinery/firealarm{
 	dir = 2;
 	pixel_y = 24
@@ -3730,7 +3730,7 @@
 /area/verne/engineering/workshop)
 "yE" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/suit_storage_unit/science/verne,
+/obj/machinery/suit_storage_unit/ceti/verne,
 /obj/item/device/radio/intercom/map_preset/verne{
 	dir = 4;
 	pixel_x = -22
@@ -4659,7 +4659,7 @@
 /area/verne/xenosci/workshop)
 "Gv" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/suit_storage_unit/science/verne,
+/obj/machinery/suit_storage_unit/ceti/verne,
 /turf/simulated/floor/tiled/white/monotile,
 /area/verne/xenosci/equipment)
 "Gw" = (

@@ -166,7 +166,7 @@
 /obj/machinery/suit_storage_unit/engineering/verne
 	req_access = list(access_verne)
 
-/obj/machinery/suit_storage_unit/science/verne
+/obj/machinery/suit_storage_unit/ceti/verne
 	req_access = list(access_verne)
 
 /obj/machinery/turretid/verne
