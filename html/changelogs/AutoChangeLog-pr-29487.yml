@@ -1,0 +1,4 @@
+author: "zaredman"
+delete-after: True
+changes: 
+  - maptweak: "SD exterior bolt button is no-longer usable by everyone. Only the CO and XO can toggle it."
