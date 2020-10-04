@@ -4808,7 +4808,6 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/medical/counselor/therapy)
 "ait" = (
-/obj/machinery/ai_status_display,
 /turf/simulated/wall/r_wall/prepainted,
 /area/medical/counselor/therapy)
 "aiu" = (
@@ -8550,7 +8549,6 @@
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/firstdeck/fore)
 "aAm" = (
-/obj/machinery/ai_status_display,
 /turf/simulated/wall/prepainted,
 /area/crew_quarters/head/aux)
 "aAn" = (
@@ -8629,7 +8627,6 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/teleporter/firstdeck)
 "aAT" = (
-/obj/machinery/ai_status_display,
 /turf/simulated/wall/r_wall/prepainted,
 /area/teleporter/firstdeck)
 "aAU" = (
@@ -9314,7 +9311,6 @@
 /turf/simulated/floor/plating,
 /area/hallway/primary/firstdeck/fore)
 "aDL" = (
-/obj/machinery/ai_status_display,
 /turf/simulated/wall/r_wall/prepainted,
 /area/security/nuke_storage)
 "aDN" = (
@@ -10787,7 +10783,6 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/aft)
 "aKH" = (
-/obj/machinery/ai_status_display,
 /turf/simulated/wall/prepainted,
 /area/security/brig)
 "aKJ" = (
@@ -19438,7 +19433,6 @@
 /turf/simulated/floor/tiled,
 /area/rnd/entry)
 "hVG" = (
-/obj/machinery/ai_status_display,
 /turf/simulated/wall/r_wall/prepainted,
 /area/hallway/primary/firstdeck/center)
 "hWb" = (

@@ -3646,7 +3646,6 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/engine_room)
 "gX" = (
-/obj/machinery/ai_status_display,
 /turf/simulated/wall/r_wall/prepainted,
 /area/engineering/bluespace)
 "gY" = (
@@ -18895,7 +18894,6 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/storage/tech)
 "Yy" = (
-/obj/machinery/ai_status_display,
 /turf/simulated/wall/r_wall/prepainted,
 /area/teleporter/seconddeck)
 "Yz" = (

@@ -3926,7 +3926,6 @@
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/ce)
 "hC" = (
-/obj/machinery/ai_status_display,
 /turf/simulated/wall/r_wall/prepainted,
 /area/hallway/primary/bridge/fore)
 "hE" = (

@@ -3177,7 +3177,6 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/storage/auxillary/starboard)
 "lc" = (
-/obj/machinery/ai_status_display,
 /turf/simulated/wall/prepainted,
 /area/hallway/primary/fourthdeck/fore)
 "ld" = (
@@ -4717,7 +4716,6 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/janitor)
 "qB" = (
-/obj/machinery/ai_status_display,
 /turf/simulated/wall/prepainted,
 /area/hallway/primary/fourthdeck/aft)
 "qC" = (
@@ -7987,7 +7985,6 @@
 /turf/simulated/wall/prepainted,
 /area/storage/auxillary/port)
 "AH" = (
-/obj/machinery/ai_status_display,
 /turf/simulated/wall/prepainted,
 /area/storage/auxillary/port)
 "AI" = (
@@ -15996,7 +15993,6 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/hallway/primary/fourthdeck/aft)
 "YJ" = (
-/obj/machinery/ai_status_display,
 /turf/simulated/wall/r_wall/prepainted,
 /area/hallway/primary/fourthdeck/aft)
 "YK" = (
