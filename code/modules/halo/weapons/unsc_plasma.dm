@@ -133,7 +133,8 @@
 /obj/item/projectile/energy/unsc_plasma_light
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "plasma_proj_light"
-	damage = 25
+	damage = 30
+	shield_damage = -5
 
 /obj/item/weapon/gun/energy/unsc_plasma/full
 	icon_state = "ma5p"
@@ -197,8 +198,9 @@
 /obj/item/projectile/energy/unsc_plasma_heavy
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "plasma_proj_heavy"
-	damage = 25
-	armor_penetration = 15
+	damage = 40
+	armor_penetration = 20
+	shield_damage = 20
 
 /obj/item/weapon/gun/energy/unsc_plasma/marksman/full
 	icon_state = "m414"

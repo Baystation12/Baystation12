@@ -16,6 +16,32 @@
 	cost = 650
 	containername = "\improper Smoke grenades crate"
 
+/* LANDMINES */
+
+/decl/hierarchy/supply_pack/unsc_weapons/fragmine
+	name = "Fragmentation Land Mines (6 mines)"
+	contains = list(/obj/item/device/landmine/frag = 6)
+	cost = 1200
+	containername = "\improper Frag Mine Crate"
+
+/decl/hierarchy/supply_pack/unsc_weapons/hemine
+	name = "High Explosive Land Mines (6 mines)"
+	contains = list(/obj/item/device/landmine/explosive = 6)
+	cost = 1200
+	containername = "\improper HE Mine Crate"
+
+/decl/hierarchy/supply_pack/unsc_weapons/empmine
+	name = "Electromagnetic Pulse Land Mines (3 mines)"
+	contains = list(/obj/item/device/landmine/emp = 3)
+	cost = 1350
+	containername = "\improper EMP Mine Crate"
+
+/decl/hierarchy/supply_pack/unsc_weapons/incmine
+	name = "Incendiary Land Mines (3 mines)"
+	contains = list(/obj/item/device/landmine/flame = 3)
+	cost = 1350
+	containername = "\improper Incendiary Mine Crate"
+
 /* MELEE */
 
 /decl/hierarchy/supply_pack/unsc_weapons/melee
