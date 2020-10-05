@@ -63,7 +63,8 @@
 	layer = ABOVE_WINDOW_LAYER
 
 	var/alarm_id = null
-	var/breach_detection = 1 // Whether to use automatic breach detection or not
+	var/breach_pressure = ONE_ATMOSPHERE * 0.5 //Pressure below wich vents are shut off, set negative to dissable
+	var/breach_cooldown = FALSE
 	var/frequency = 1439
 	//var/skipprocess = 0 //Experimenting
 	var/alarm_frequency = 1437
@@ -113,11 +114,11 @@
 	environment_type = /decl/environment_data/finnish
 
 /obj/machinery/alarm/nobreach
-	breach_detection = 0
+	breach_pressure = -1
 
 /obj/machinery/alarm/monitor
 	report_danger_level = 0
-	breach_detection = 0
+	breach_pressure = -1
 
 /obj/machinery/alarm/server/New()
 	..()
@@ -185,18 +186,20 @@
 		handle_heating_cooling(environment)
 
 	var/old_level = danger_level
-	var/old_pressurelevel = pressure_dangerlevel
 	danger_level = overall_danger_level(environment)
 
 	if (old_level != danger_level)
+		if(danger_level == 2)
+			playsound(src.loc, 'sound/machines/airalarm.ogg', 25, 0, 4)
 		apply_danger_level(danger_level)
 
-	if (old_pressurelevel != pressure_dangerlevel)
+	if (pressure_dangerlevel != 0)
 		if (breach_detected())
 			mode = AALARM_MODE_OFF
 			apply_mode()
 
 	if (mode==AALARM_MODE_CYCLE && environment.return_pressure()<ONE_ATMOSPHERE*0.05)
+		breach_start_cooldown()
 		mode=AALARM_MODE_FILL
 		apply_mode()
 
@@ -286,21 +289,32 @@
 	var/turf/simulated/location = loc
 
 	if(!istype(location))
-		return 0
+		return FALSE
+	
+	if(breach_cooldown)
+		return FALSE
 
-	if(breach_detection	== 0)
-		return 0
+	if(breach_pressure < 0)
+		return FALSE
 
 	var/datum/gas_mixture/environment = location.return_air()
 	var/environment_pressure = environment.return_pressure()
-	var/pressure_levels = TLV["pressure"]
 
-	if (environment_pressure <= pressure_levels[1])		//low pressures
+	if (environment_pressure <= breach_pressure)
 		if (!(mode == AALARM_MODE_PANIC || mode == AALARM_MODE_CYCLE))
-			playsound(src.loc, 'sound/machines/airalarm.ogg', 25, 0, 4)
-			return 1
+			return TRUE
 
-	return 0
+	return FALSE
+
+/obj/machinery/alarm/proc/breach_end_cooldown()
+	breach_cooldown = FALSE
+	return
+
+//disables breach detection temporarily
+/obj/machinery/alarm/proc/breach_start_cooldown()
+	breach_cooldown = TRUE
+	addtimer(CALLBACK(src,/obj/machinery/alarm/proc/breach_end_cooldown), 10 MINUTES, TIMER_UNIQUE | TIMER_OVERRIDE)
+	return
 
 /obj/machinery/alarm/proc/get_danger_level(var/current_value, var/list/danger_levels)
 	if((current_value >= danger_levels[4] && danger_levels[4] > 0) || current_value <= danger_levels[1])
@@ -411,6 +425,8 @@
 	//TODO: make it so that players can choose between applying the new mode to the room they are in (related area) vs the entire alarm area
 	for (var/obj/machinery/alarm/AA in alarm_area)
 		AA.mode = mode
+
+	breach_start_cooldown()
 
 	switch(mode)
 		if(AALARM_MODE_SCRUBBING)
@@ -589,6 +605,9 @@
 		if(AALARM_SCREEN_SENSORS)
 			var/list/selected
 			var/thresholds[0]
+			
+			var/breach_data = list("selected" = breach_pressure)
+			data["breach_data"] = breach_data
 
 			var/list/gas_names = list(
 				GAS_OXYGEN         = "O<sub>2</sub>",
@@ -689,6 +708,17 @@
 					if(env_info && (href_list["gas_id"] in env_info.filter_gasses))
 						send_signal(device_id, list(href_list["command"] = list(href_list["gas_id"] = text2num(href_list["val"]))) )
 					return TOPIC_REFRESH
+
+				if("set_breach")
+					var/newval = input(user, "Enter minimum pressure for breach detection, preasures lower then this will cause vents to stop.", breach_pressure) as null|num
+					if (isnull(newval) || !CanUseTopic(user, state))
+						return TOPIC_HANDLED
+					if (newval<0)
+						breach_pressure = -1.0
+					else if (newval > 50*ONE_ATMOSPHERE)
+						breach_pressure = 50*ONE_ATMOSPHERE
+					else
+						breach_pressure = round(newval,0.01)
 
 				if("set_threshold")
 					var/env = href_list["env"]
