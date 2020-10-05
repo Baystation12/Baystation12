@@ -7,6 +7,7 @@
 	amount_per_transfer_from_this = 5
 	volume = 30
 	possible_transfer_amounts = null
+	canremove = FALSE
 
 	var/mode = 1
 	var/charge_cost = 50

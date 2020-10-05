@@ -75,7 +75,7 @@
 // Returns TRUE if the tray can hold an item, and FALSE otherwise.
 /obj/item/weapon/tray/proc/can_add_item(obj/item/I)
 	var/cost = storage_cost_for_item(I)
-	return !I.anchored && \
+	return !I.anchored && I.canremove && \
 		!istype(I, /obj/item/projectile) && !istype(I, /obj/item/clothing/under) && !istype(I, /obj/item/clothing/suit) && !istype(I, /obj/item/weapon/storage) && \
 		calc_carry() + cost <= max_carry
 
