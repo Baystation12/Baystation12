@@ -1,0 +1,4 @@
+author: "Karlious"
+delete-after: True
+changes: 
+  - tweak: "Remove AI core from Bridge Deck elevator announcement"
