@@ -41,6 +41,9 @@ exactly 3 "update_icon() override" '/update_icon\((.*)\)'  -P
 exactly 1 "goto use" 'goto '
 exactly 487 "spawn uses" 'spawn\s*\(\s*(-\s*)?\d*\s*\)' -P
 exactly 0 "tag uses" '\stag = ' -P '**/*.dmm'
+exactly 363 "/const/ vars defined" '/const/'
+exactly 177 "/global/ vars defined" '/global/'
+exactly 680 "global vars defined" '^(/|())var/' -P
 # With the potential exception of << if you increase any of these numbers you're probably doing it wrong
 
 broken_files=0
