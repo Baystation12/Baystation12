@@ -654,6 +654,10 @@
 
 /obj/item/device/radio/borg/Initialize()
 	. = ..()
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/item/device/radio/born/LateInitialize()
+	. = ..()
 	recalculateChannels()
 
 /obj/item/device/radio/borg/Destroy()

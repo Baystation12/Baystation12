@@ -123,7 +123,7 @@
 	color = "#ffffff"
 
 /datum/reagent/nutriment/flour/touch_turf(var/turf/simulated/T)
-	if(!istype(T, /turf/space))
+	if(istype(T))
 		new /obj/effect/decal/cleanable/flour(T)
 		if(T.wet > 1)
 			T.wet = min(T.wet, 1)
