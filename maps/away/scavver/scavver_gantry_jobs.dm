@@ -138,10 +138,10 @@
 
 /decl/hierarchy/outfit/job/scavver
 	name = "Salvager"
-	l_ear = null
+	l_ear = /obj/item/device/radio/headset/map_preset/scavver
 	r_ear = null
 	uniform = /obj/item/clothing/under/frontier
-	r_pocket = /obj/item/device/radio
+	r_pocket = /obj/item/device/radio/map_preset/scavver
 	l_pocket = /obj/item/weapon/crowbar/prybar
 	shoes = /obj/item/clothing/shoes/workboots
 	gloves = /obj/item/clothing/gloves/thick
@@ -153,7 +153,7 @@
 /decl/hierarchy/outfit/job/scavver/engineer
 	name = "Salvage Engineer"
 	uniform = /obj/item/clothing/under/hazard
-	r_pocket = /obj/item/device/radio
+	r_pocket = /obj/item/device/radio/map_preset/scavver
 	l_pocket = /obj/item/weapon/crowbar/prybar
 	shoes = /obj/item/clothing/shoes/workboots
 	gloves = /obj/item/clothing/gloves/thick/duty
@@ -164,7 +164,7 @@
 	name = "Salvage Pilot"
 	uniform = /obj/item/clothing/under/rank/dispatch
 	suit = /obj/item/clothing/suit/armor/pcarrier/light
-	r_pocket = /obj/item/device/radio
+	r_pocket = /obj/item/device/radio/map_preset/scavver
 	l_pocket = /obj/item/weapon/crowbar/prybar
 	shoes = /obj/item/clothing/shoes/jackboots
 	belt = null
@@ -172,7 +172,7 @@
 /decl/hierarchy/outfit/job/scavver/doctor
 	name = "Salvage Doctor"
 	uniform = /obj/item/clothing/under/caretaker
-	r_pocket = /obj/item/device/radio
+	r_pocket = /obj/item/device/radio/map_preset/scavver
 	l_pocket = /obj/item/weapon/crowbar/prybar
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat
 	shoes = /obj/item/clothing/shoes/white

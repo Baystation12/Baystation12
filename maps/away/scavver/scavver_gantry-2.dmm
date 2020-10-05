@@ -10,7 +10,7 @@
 /turf/simulated/floor/airless,
 /area/space)
 "ab" = (
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/scavver{
 	pixel_y = 23
 	},
 /obj/structure/handrai,
@@ -348,7 +348,7 @@
 	dir = 1
 	},
 /obj/structure/handrai,
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/scavver{
 	pixel_y = 23
 	},
 /turf/simulated/floor/tiled/techfloor/grid{
@@ -727,8 +727,10 @@
 /obj/structure/bed/chair/shuttle{
 	dir = 1
 	},
-/obj/machinery/light{
-	dir = 4
+/obj/item/device/radio/intercom/map_preset/scavver{
+	default_hailing = 1;
+	dir = 8;
+	pixel_x = 20
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/scavver/harvestpod)
@@ -1310,7 +1312,8 @@
 /area/scavver/lifepod)
 "ks" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/scavver{
+	default_hailing = 1;
 	dir = 4;
 	pixel_x = -21
 	},
@@ -1611,7 +1614,7 @@
 /turf/simulated/floor/tiled/white/airless,
 /area/scavver/escapepod)
 "nc" = (
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/scavver{
 	dir = 1;
 	pixel_y = -28
 	},
@@ -1788,7 +1791,7 @@
 /turf/simulated/floor/airless,
 /area/scavver/gantry/up1)
 "ov" = (
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/scavver{
 	dir = 1;
 	pixel_y = -28
 	},
@@ -2095,7 +2098,8 @@
 /obj/machinery/computer/ship/sensors{
 	dir = 4
 	},
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/scavver{
+	default_hailing = 1;
 	dir = 4;
 	pixel_x = -21
 	},
@@ -2720,7 +2724,7 @@
 "uN" = (
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide/engine_setup,
 /obj/machinery/atmospherics/portables_connector,
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/scavver{
 	dir = 4;
 	pixel_x = -21
 	},
@@ -3904,7 +3908,7 @@
 "FA" = (
 /obj/machinery/vending/tool,
 /obj/effect/floor_decal/corner/lightgrey/mono,
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/scavver{
 	pixel_y = 23
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -4379,7 +4383,7 @@
 /area/scavver/hab)
 "JO" = (
 /obj/structure/largecrate/animal/goose,
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/scavver{
 	dir = 4;
 	pixel_x = -22
 	},
@@ -4686,7 +4690,7 @@
 	dir = 1
 	},
 /obj/machinery/cell_charger,
-/obj/item/device/radio,
+/obj/item/device/radio/map_preset/scavver,
 /obj/effect/floor_decal/corner/grey/border{
 	dir = 1
 	},
@@ -5560,6 +5564,9 @@
 	icon_state = "0-8"
 	},
 /obj/machinery/computer/shuttle_control/explore/scavver_gantry/three,
+/obj/machinery/light{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/scavver/harvestpod)
 "WF" = (
