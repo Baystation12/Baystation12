@@ -82,6 +82,7 @@
 	dir = 10
 	},
 /obj/effect/floor_decal/corner/b_green/full,
+/obj/item/device/radio/headset/map_preset/verne,
 /turf/simulated/floor/tiled,
 /area/verne/common/room/six)
 "ai" = (
@@ -356,6 +357,7 @@
 	dir = 10
 	},
 /obj/effect/floor_decal/corner/b_green/full,
+/obj/item/device/radio/headset/map_preset/verne,
 /turf/simulated/floor/tiled,
 /area/verne/common/room/seven)
 "bt" = (
@@ -438,6 +440,11 @@
 	id = "professor_space";
 	pixel_y = 22
 	},
+/obj/item/device/radio/headset/map_preset/verne,
+/obj/item/device/encryptionkey/map_preset/verne,
+/obj/item/device/encryptionkey/map_preset/verne,
+/obj/item/device/encryptionkey/map_preset/verne,
+/obj/item/device/encryptionkey/map_preset/verne,
 /turf/simulated/floor/carpet/blue2,
 /area/verne/common/professor)
 "bE" = (
@@ -568,6 +575,7 @@
 	dir = 10
 	},
 /obj/effect/floor_decal/corner/b_green/full,
+/obj/item/device/radio/headset/map_preset/verne,
 /turf/simulated/floor/tiled,
 /area/verne/common/room/three)
 "cu" = (
@@ -1396,6 +1404,7 @@
 	dir = 6
 	},
 /obj/effect/floor_decal/corner/b_green/full,
+/obj/item/device/radio/headset/map_preset/verne,
 /turf/simulated/floor/tiled,
 /area/verne/common/room/five)
 "il" = (
@@ -1444,6 +1453,7 @@
 	dir = 6
 	},
 /obj/effect/floor_decal/corner/b_green/full,
+/obj/item/device/radio/headset/map_preset/verne,
 /turf/simulated/floor/tiled,
 /area/verne/common/room/three)
 "iu" = (
@@ -2384,6 +2394,7 @@
 	dir = 9
 	},
 /obj/effect/floor_decal/corner/b_green/full,
+/obj/item/device/radio/headset/map_preset/verne,
 /turf/simulated/floor/tiled,
 /area/verne/common/room/four)
 "rb" = (
@@ -2861,6 +2872,7 @@
 	dir = 10
 	},
 /obj/effect/floor_decal/corner/b_green/full,
+/obj/item/device/radio/headset/map_preset/verne,
 /turf/simulated/floor/tiled,
 /area/verne/common/room)
 "uP" = (
@@ -4244,6 +4256,7 @@
 	dir = 6
 	},
 /obj/effect/floor_decal/corner/b_green/full,
+/obj/item/device/radio/headset/map_preset/verne,
 /turf/simulated/floor/tiled,
 /area/verne/common/room)
 "GK" = (
@@ -4743,6 +4756,7 @@
 	dir = 9
 	},
 /obj/effect/floor_decal/corner/b_green/full,
+/obj/item/device/radio/headset/map_preset/verne,
 /turf/simulated/floor/tiled,
 /area/verne/common/room/eight)
 "KT" = (
@@ -5063,6 +5077,7 @@
 	dir = 5
 	},
 /obj/effect/floor_decal/corner/b_green/full,
+/obj/item/device/radio/headset/map_preset/verne,
 /turf/simulated/floor/tiled,
 /area/verne/common/room/eight)
 "NH" = (
@@ -5078,6 +5093,7 @@
 	dir = 6
 	},
 /obj/effect/floor_decal/corner/b_green/full,
+/obj/item/device/radio/headset/map_preset/verne,
 /turf/simulated/floor/tiled,
 /area/verne/common/room/seven)
 "NM" = (
@@ -5225,6 +5241,7 @@
 	dir = 10
 	},
 /obj/effect/floor_decal/corner/b_green/full,
+/obj/item/device/radio/headset/map_preset/verne,
 /turf/simulated/floor/tiled,
 /area/verne/common/room/five)
 "Pf" = (
@@ -5297,6 +5314,7 @@
 	dir = 6
 	},
 /obj/effect/floor_decal/corner/b_green/full,
+/obj/item/device/radio/headset/map_preset/verne,
 /turf/simulated/floor/tiled,
 /area/verne/common/room/two)
 "Qa" = (
@@ -5372,6 +5390,7 @@
 	dir = 5
 	},
 /obj/effect/floor_decal/corner/b_green/full,
+/obj/item/device/radio/headset/map_preset/verne,
 /turf/simulated/floor/tiled,
 /area/verne/common/room/four)
 "QO" = (
@@ -5813,6 +5832,7 @@
 	dir = 6
 	},
 /obj/effect/floor_decal/corner/b_green/full,
+/obj/item/device/radio/headset/map_preset/verne,
 /turf/simulated/floor/tiled,
 /area/verne/common/room/six)
 "Uy" = (
@@ -6206,6 +6226,7 @@
 	dir = 10
 	},
 /obj/effect/floor_decal/corner/b_green/full,
+/obj/item/device/radio/headset/map_preset/verne,
 /turf/simulated/floor/tiled,
 /area/verne/common/room/two)
 "XS" = (
