@@ -131,13 +131,12 @@
 /obj/item/projectile/bullet/covenant/needles
 	name = "Needle"
 	desc = "A sharp, pink crystalline shard"
-	damage = 15 // Low damage, special effect would do the most damage.
-	shield_damage = 15
+	damage = 20 // Low damage, special effect would do the most damage.
+	shield_damage = 20
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "Needler Shot"
 	embed = 1
 	sharp = 1
-	armor_penetration = 20
 	step_delay = 0.75 //slower than most
 	var/max_track_steps = 3 // 4 tiles worth of tracking
 	var/shards_to_explode = 6
