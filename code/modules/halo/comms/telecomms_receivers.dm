@@ -20,10 +20,11 @@
 
 	var/turf/my_turf = get_turf(src)
 	var/obj/effect/overmap/my_sector = map_sectors["[my_turf.z]"]
-	if(active)
-		my_sector.telecomms_receivers.Add(src)
-	else if(!failure_timer)
-		my_sector.telecomms_receivers.Remove(src)
+	if(my_sector)
+		if(active)
+			my_sector.telecomms_receivers.Add(src)
+		else if(!failure_timer)
+			my_sector.telecomms_receivers.Remove(src)
 
 
 

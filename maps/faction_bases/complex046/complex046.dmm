@@ -57,6 +57,7 @@
 "be" = (/turf/simulated/wall/iron/blue,/area/faction_base/oni)
 "bf" = (/turf/simulated/wall/iron/blue,/area/faction_base/oni/barracks)
 "bg" = (/obj/structure/faction_banner/unsc{name = "ONI Complex 046"; pixel_x = -32; pixel_y = 32},/turf/simulated/floor/tech/steel,/area/faction_base/oni/garage)
+"bh" = (/turf/simulated/wall/covenant/reinforced,/area/faction_base/oni)
 "bi" = (/obj/structure/closet/crate/bin,/turf/simulated/floor/tech/gray,/area/faction_base/oni/barracks)
 "bj" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tech/gray,/area/faction_base/oni/barracks)
 "bk" = (/obj/structure/closet/medical_wall/filled{pixel_y = 32},/turf/simulated/floor/tech/gray,/area/faction_base/oni/barracks)
@@ -77,6 +78,7 @@
 "bz" = (/obj/structure/table/glass,/obj/machinery/door/window/northleft,/obj/machinery/door/window/southleft,/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
 "bA" = (/obj/structure/sign/chemistry{name = "\improper Chemlab"},/turf/simulated/wall/silver{tag = "icon-solidfwall_opening"; icon_state = "solidfwall_opening"},/area/faction_base/oni/medbay)
 "bB" = (/obj/structure/grille,/obj/structure/window/reinforced/projresist{icon_state = "rwindow"; dir = 1},/obj/structure/window/reinforced/projresist{icon_state = "rwindow"; dir = 8},/obj/machinery/door/firedoor,/obj/structure/window/reinforced/projresist{icon_state = "rwindow"; dir = 4},/turf/simulated/floor/tech/maint,/area/faction_base/oni/hangar)
+"bC" = (/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/shuttle/covenant_offsite_supply)
 "bD" = (/obj/structure/grille,/obj/structure/window/reinforced/treated,/obj/structure/window/reinforced/treated{dir = 1},/obj/structure/window/reinforced/treated{tag = "icon-rwindow (WEST)"; icon_state = "rwindow"; dir = 8},/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
 "bE" = (/obj/structure/grille,/obj/structure/window/reinforced/treated,/obj/structure/window/reinforced/treated{dir = 1},/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
 "bF" = (/turf/simulated/wall/r_wall,/area/faction_base/oni/research)
@@ -90,6 +92,8 @@
 "bN" = (/turf/simulated/wall/r_wall,/area/faction_base/oni/blacksite)
 "bO" = (/obj/machinery/door/airlock/multi_tile/halo/blast{name = "ONI Sector"; req_access = list(315)},/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
 "bP" = (/obj/machinery/button/remote/blast_door{id = "oni_geminus_garage_outer"; pixel_y = 24; req_access = list(142)},/turf/simulated/floor/road{tag = "icon-road_empty (NORTH)"; icon_state = "road_empty"; dir = 1},/area/faction_base/oni/garage)
+"bQ" = (/turf/simulated/floor/plating,/area/shuttle/unsc_offsite_supply)
+"bR" = (/turf/simulated/floor/plating,/area/shuttle/oni_offsite_supply)
 "bS" = (/obj/machinery/vending/coffee,/turf/simulated/floor/tech/gray,/area/faction_base/oni/barracks)
 "bT" = (/obj/machinery/vending/cigarette,/turf/simulated/floor/tech/gray,/area/faction_base/oni/barracks)
 "bU" = (/obj/machinery/vending/cola,/turf/simulated/floor/tech/gray,/area/faction_base/oni/barracks)
@@ -136,6 +140,7 @@
 "cJ" = (/obj/item/weapon/reagent_containers/spray/cleaner{desc = "Someone has crossed out the Space from Space Cleaner and written in Surgery. 'Do not remove under punishment of death!!!' is scrawled on the back."; name = "Surgery Cleaner"},/obj/item/weapon/reagent_containers/spray/cleaner{desc = "Someone has crossed out the Space from Space Cleaner and written in Surgery. 'Do not remove under punishment of death!!!' is scrawled on the back."; name = "Surgery Cleaner"},/obj/item/weapon/reagent_containers/spray/cleaner{desc = "Someone has crossed out the Space from Space Cleaner and written in Surgery. 'Do not remove under punishment of death!!!' is scrawled on the back."; name = "Surgery Cleaner"},/obj/item/weapon/reagent_containers/spray/cleaner{desc = "Someone has crossed out the Space from Space Cleaner and written in Surgery. 'Do not remove under punishment of death!!!' is scrawled on the back."; name = "Surgery Cleaner"},/obj/structure/table/steel_reinforced,/obj/item/weapon/storage/box/bodybags,/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
 "cK" = (/obj/structure/bed/chair/comfy/captain{dir = 4; icon_state = "capchair_preview"; name = "Comfy chair"; tag = "icon-capchair_preview (EAST)"},/turf/simulated/floor/tech/gray,/area/faction_base/oni/research)
 "cL" = (/obj/structure/table/woodentable,/obj/item/weapon/folder/red,/obj/item/weapon/pen,/obj/item/weapon/pen,/turf/simulated/floor/tech/gray,/area/faction_base/oni/research)
+"cM" = (/obj/effect/shuttle_landmark/covenant_offsite_supply,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/shuttle/covenant_offsite_supply)
 "cN" = (/obj/item/modular_computer/console/unsc/crew{dir = 8},/turf/simulated/wall/r_wall,/area/faction_base/oni/research)
 "cO" = (/obj/structure/table/woodentable,/obj/item/weapon/folder/yellow,/turf/simulated/floor/tech/gray,/area/faction_base/oni/research)
 "cP" = (/obj/structure/table/woodentable,/obj/item/modular_computer/tablet/preset/custom_loadout/advanced,/turf/simulated/floor/tech/gray,/area/faction_base/oni/research)
@@ -150,6 +155,7 @@
 "cY" = (/obj/structure/closet/crate/medical{name = "Medical Kits Crate"},/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
 "cZ" = (/obj/structure/bed/chair/comfy/captain{dir = 1; icon_state = "capchair_preview"; name = "Comfy chair"; tag = "icon-capchair_preview (NORTH)"},/turf/simulated/floor/tech/gray,/area/faction_base/oni/research)
 "da" = (/obj/structure/window/reinforced/projresist{icon_state = "rwindow"; dir = 8},/obj/structure/sofa/right,/turf/simulated/floor/tech/gray,/area/faction_base/oni/barracks)
+"db" = (/obj/effect/shuttle_landmark/unsc_offsite_supply,/turf/simulated/floor/plating,/area/shuttle/unsc_offsite_supply)
 "dc" = (/obj/structure/rearm_repair_station/human{dir = 1},/turf/simulated/floor/tiled/dark,/area/faction_base/oni/hangar)
 "dd" = (/turf/simulated/floor/tiled/dark,/area/faction_base/oni/cryodorms)
 "de" = (/obj/structure/closet{icon_closed = "toolcloset"; icon_opened = "toolclosetopen"; icon_state = "toolcloset"},/obj/item/weapon/wrench,/obj/item/weapon/crowbar,/obj/item/weapon/screwdriver,/obj/item/weapon/weldingtool/hugetank,/obj/item/weapon/wirecutters,/obj/item/device/multitool,/obj/item/device/analyzer,/obj/item/stack/cable_coil,/obj/item/clothing/gloves/insulated,/obj/item/clothing/glasses/welding,/turf/simulated/floor/tech/maint,/area/faction_base/oni/hangar)
@@ -218,6 +224,7 @@
 "ep" = (/turf/simulated/wall/r_wall,/area/faction_base/oni/digsite)
 "eq" = (/obj/structure/shuttle_engine{dir = 4},/turf/simulated/shuttle/wall{icon_state = "swall_straight"},/area/shuttle/oni_shuttle_supply)
 "er" = (/obj/machinery/organ_printer/robot/mapped,/turf/simulated/floor/tech/white,/area/faction_base/oni/medbay)
+"es" = (/obj/effect/shuttle_landmark/oni_offsite_supply,/turf/simulated/floor/plating,/area/shuttle/oni_offsite_supply)
 "et" = (/obj/structure/grille,/obj/structure/window/reinforced/projresist{icon_state = "rwindow"; dir = 8},/obj/machinery/door/firedoor,/obj/structure/window/reinforced/projresist,/obj/structure/window/reinforced/projresist{icon_state = "rwindow"; dir = 4},/turf/simulated/floor/tech/maint,/area/faction_base/oni/hangar)
 "eu" = (/obj/structure/table/rack,/obj/item/stack/material/steel/fifty,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
 "ev" = (/obj/structure/curtain/medical,/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
@@ -238,7 +245,7 @@
 "eK" = (/obj/machinery/autolathe,/turf/simulated/floor/tech/maint,/area/faction_base/oni/hangar)
 "eL" = (/obj/structure/table/glass/white,/obj/item/weapon/storage/firstaid/surgery,/obj/item/weapon/reagent_containers/spray/cleaner{desc = "Someone has crossed out the Space from Space Cleaner and written in Surgery. 'Do not remove under punishment of death!!!' is scrawled on the back."; name = "Surgery Cleaner"},/obj/item/stack/nanopaste,/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
 "eM" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 1; name = "Forerunner Digsite"},/turf/simulated/floor/tech/ridged,/area/faction_base/oni/digsite)
-"eN" = (/turf/simulated/floor/tech/ridged,/area/faction_base/oni/digsite)
+"eN" = (/turf/simulated/floor/tech/ridged,/area/faction_base/oni/research)
 "eO" = (/turf/unsimulated/mineral,/area/faction_base/oni/digsite)
 "eP" = (/turf/unsimulated/floor/dirt{icon = 'code/modules/halo/misc/TWS- Assests/floors/floors.dmi'},/area/faction_base/oni/digsite)
 "eQ" = (/obj/structure/closet/secure_closet/miner,/turf/unsimulated/floor/dirt{icon = 'code/modules/halo/misc/TWS- Assests/floors/floors.dmi'},/area/faction_base/oni/digsite)
@@ -276,8 +283,7 @@
 "fw" = (/obj/machinery/photocopier/faxmachine/unsc{dir = 8},/turf/simulated/wall/r_wall,/area/faction_base/oni/research)
 "fx" = (/obj/machinery/button/crematorium{_wifi_id = "crem1"; id = "crem1"; pixel_y = -24},/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
 "fy" = (/obj/machinery/smartfridge/chemistry,/turf/simulated/wall/silver{tag = "icon-solidfwall_opening"; icon_state = "solidfwall_opening"},/area/faction_base/oni/medbay)
-"fz" = (/obj/effect/landmark/map_data{name = "Complex 046"},/turf/unsimulated/wall,/area/faction_base/oni)
-"fA" = (/obj/effect/overmap/complex046,/turf/unsimulated/wall,/area/faction_base/oni)
+"fz" = (/turf/unsimulated/mineral,/area/faction_base/oni/research)
 "fB" = (/obj/machinery/light,/obj/machinery/vending/armory/attachment,/turf/simulated/floor/tech/gray,/area/faction_base/oni/barracks)
 "fC" = (/obj/structure/window/reinforced/projresist{icon_state = "rwindow"; dir = 8},/obj/machinery/pointbased_vending/armory/odstvend,/turf/simulated/floor/tech/gray,/area/faction_base/oni/barracks)
 "fD" = (/obj/structure/sofa{icon_state = "sofamiddle"; dir = 8},/turf/simulated/floor/tech/gray,/area/faction_base/oni/barracks)
@@ -290,8 +296,6 @@
 "fK" = (/obj/structure/ai_routing_node/unsc,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/blacksite)
 "fM" = (/obj/machinery/overmap_weapon_console/ship_scanning_console{name = "Holotable - Scanning"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "holotable"; dir = 4},/obj/machinery/light,/turf/simulated/floor/tech,/area/faction_base/oni/research)
 "fN" = (/obj/machinery/overmap_weapon_console/ship_scanning_console{dir = 8; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "holotable"; name = "Holotable - Scanning"},/turf/simulated/floor/tech,/area/faction_base/oni/research)
-"fO" = (/turf/simulated/floor/tiled/dark,/area/faction_base/oni)
-"fP" = (/turf/simulated/wall/r_wall,/area/faction_base/oni)
 "fQ" = (/obj/structure/table/glass/white,/obj/item/weapon/storage/box/masks,/obj/item/weapon/storage/box/gloves,/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
 "fR" = (/obj/structure/sink{icon_state = "sink"; dir = 8; pixel_x = -12; pixel_y = 2},/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
 "fS" = (/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/tech/white,/area/faction_base/oni/medbay)
@@ -374,23 +378,23 @@ aabfbVbVgigdgibSbTbUgdbVbVbVbVbfbxbWeVeVfyeVeVeVeVbXbxbYbZegbxbFcbcdcccccccccccd
 aabfbfbffJbffJbfbfbfbfbfgebfbfbfbxcocpeVcqeVeVcreVeVeleVeVbXbxcNcQcccccucccvcccccwbFbJcybNczcgcgcAbNaa
 aabfbfcBbVbVbVcCcDcSbfcEbVbVcEbfbxcFcGcHbxeVeVbxevevbxeVeVcJbxcNcQcccKcLcOcPcQccccbFbJbrbNcRcgcgclbNaa
 aabfbfcTbVbVbVcUdaftbfcVbVbVcVbfbxdgcWcWeVeVeVevdhfSbxeVeVcYbxbFctcccccZcccZccfFfGbFbJfKbNbNbNbNbNbNaa
-aabfbfdfbVbVbVbVdqfDbfcVbVbVcVbfbxdmeVeVeVeVeVevgFdhbxeVeVdibxfwcQdjccccccccccfMfNbFbJfOfPeEeEeEeEeEeE
-aabfbfcTbVbVbVdrfEghbfcVbVbVcVbfbxdneVeVdtducXbxevevbxeVeVdobxbFbFbFbFdpccbFbFbFbFbFdkfOfPeEeFeFeFeFeE
-aabfbfdsbVbVbVfBfCcSbfcVgdbVcVbfbxdveVeVdBdCeVevdhfSbxeVeVdwbxbFdxdydzbJbJbJbJbJbJdzbJfOfPeEeFeFeFeFeE
-aabfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbxdEeVeVeeefeVevgFdhbxdGeVdYbxbFeibJbJebeHbJbJedbJbJbJfOfPeEeFeFeFeFeE
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabxekeVeVereTeVbxevevbxbxelbxbxbFexbJbJewebbJfZbFgagabFfPfPeEeFeFeFeFeE
-aaajajajajajajajajajajajajajajaabxgfeVeVeVeVeVeVeVeVeVeVeVeVeVeJbJbJbJebecbJdAepeMeNepeOeOeOeEeFeFeFeE
-aaajajajajajajajajajajajajajajaabxggeVeVeVeVeVdGeVeVeVeVdGeVeVgjbJbJbJbJbJbJenepePePePePePeQeOeOeOeFeE
-aaajajajajajajajajajajajajajajaabxbxgcbxbxbxgcbxbxbxgcbxbxbxbxbFbJbJbJbJbJbJeoepePePePePePePePeReOeOeE
-aaajajajajajajajajajajajajajajaabxeLeVfQbxeLeVfQbxeUeVeVbxbxbxbFejehgkgleYbJeuepePePePePePePePePePeOeE
-aaajajajajajajajajajajajajajajaabxfReVeVbxfReVeVbxeWeVeXbxbxbxfPfPfPfPbFbFfubFepeRePePePePePePePePeOeE
-aaajajajajajajajajajajajajajajaabxdhgGeZbxdhgGeZbxfafxfcbxbxbxeEeEeEeEbFaxaxbFeEeOePePePePePePePePeOeE
-aaajajajajajajajajajajajajajajaabxbxbxbxbxbxbxbxbxbxbxbxbxbxbxeEeEeEeEbFfefvbFeEeOeSfdfdfdfdfdfdfdeSaa
-aaajajajajajajajajajajajajajajaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeEeEeEeEbFgJaxbFeEeOeSfdfdfdfdfdfdfdeSaa
-aaajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajeEeEeEeEfPfPfPfPeEeOeSffffffffffffffeSaa
-aaajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajeEeEeEeEeEeEeEeEeEeOeSffffffffffffffeSaa
-aaajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajeEeEeEeEeEeEeEeEeEeOeSffffffffffffffeSaa
-aaajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajeEeEeEeEeEeEeEeEeEeOeSffffffffffffffeSaa
-aaajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajeEeEeEeEeEeEeEeEeEeOeSeSeSeSeSeSeSeSeSaa
-fzfAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aabfbfdfbVbVbVbVdqfDbfcVbVbVcVbfbxdmeVeVeVeVeVevgFdhbxeVeVdibxfwcQdjccccccccccfMfNbFbJbJbFeEeEeEeEeEeE
+aabfbfcTbVbVbVdrfEghbfcVbVbVcVbfbxdneVeVdtducXbxevevbxeVeVdobxbFbFbFbFdpccbFbFbFbFbFdkbJbFeEeFeFeFeFeE
+aabfbfdsbVbVbVfBfCcSbfcVgdbVcVbfbxdveVeVdBdCeVevdhfSbxeVeVdwbxbFdxdydzbJbJbJbJbJbJdzbJbJbFeEeFeFeFeFeE
+aabfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbxdEeVeVeeefeVevgFdhbxdGeVdYbxbFeibJbJebeHbJbJedbJbJbJbJbFeEeFeFeFeFeE
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabxekeVeVereTeVbxevevbxbxelbxbxbFexbJbJewebbJfZbFgagabFbFbFeEeFeFeFeFeE
+aaeEeEeEeEeEeEeEeEeEeEeEeEeEeEaabxgfeVeVeVeVeVeVeVeVeVeVeVeVeVeJbJbJbJebecbJdAepeMeNbFfzfzeOeEeFeFeFeE
+aaeEeEeEeEeEeEeEeEeEeEeEeEeEeEaabxggeVeVeVeVeVdGeVeVeVeVdGeVeVgjbJbJbJbJbJbJenepePePePePePeQeOeOeOeFeE
+aaeEeEeEeEeEeEeEeEeEeEeEeEeEeEaabxbxgcbxbxbxgcbxbxbxgcbxbxbxbxbFbJbJbJbJbJbJeoepePePePePePePePeReOeOeE
+aaeEeEeEeEeEeEeEeEeEeEeEeEeEeEaabxeLeVfQbxeLeVfQbxeUeVeVbxbxbxbFejehgkgleYbJeuepePePePePePePePePePeOeE
+aaaaaaaaaaaaaaaaaaaaaaaaeEeEeEaabxfReVeVbxfReVeVbxeWeVeXbxbxbxbFbFbFbFbFbFfubFepeRePePePePePePePePeOeE
+aabhbhbhbhbhbhbhbhbhbhaaeEeEeEaabxdhgGeZbxdhgGeZbxfafxfcbxbxbxeEeEeEeEbFaxaxbFeEeOePePePePePePePePeOeE
+aabhbCbCbCbCbCbCbCbCbhaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabxeEeEeEeEbFfefvbFeEeOeSfdfdfdfdfdfdfdeSaa
+aabhbCbCbCbCbCbCbCbCbhaabQbQbQbQbQbQbQbQaabRbRbRbRbRbRbRbRaaaaeEeEeEeEbFgJaxbFeEeOeSfdfdfdfdfdfdfdeSaa
+aabhbCbCbCbCbCbCbCbCbhaabQbQbQbQbQbQbQbQaabRbRbRbRbRbRbRbRaaeEeEeEeEeEbFbFbFbFeEeOeSffffffffffffffeSaa
+aabhbCbCbCbCbCbCbCbCbhaabQbQbQbQbQbQbQbQaabRbRbRbRbRbRbRbRaaeEeEeEeEeEeEeEeEeEeEeOeSffffffffffffffeSaa
+aabhbCbCbCbCbCbCbCbCbhaabQbQbQbQbQbQbQbQaabRbRbRbRbRbRbRbRaaeEeEeEeEeEeEeEeEeEeEeOeSffffffffffffffeSaa
+aabhcMbCbCbCbCbCbCbCbhaabQbQbQbQbQbQbQbQaabRbRbRbRbRbRbRbRaaeEeEeEeEeEeEeEeEeEeEeOeSffffffffffffffeSaa
+aabhbhbhbhbhbhbhbhbhbhaadbbQbQbQbQbQbQbQaaesbRbRbRbRbRbRbRaaeEeEeEeEeEeEeEeEeEeEeOeSeSeSeSeSeSeSeSeSaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}

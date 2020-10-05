@@ -4,19 +4,15 @@
 	desc = "A tailor made pouch with partitions for specific medical supplies."
 	icon = 'code/modules/halo/icons/objs/ifak.dmi'
 	icon_state = "ifak"
-	slots = 11
+	slots = 7
 	max_w_class = ITEM_SIZE_NORMAL
 	w_class = ITEM_SIZE_NORMAL
 	startingitems = list(\
 	/obj/item/weapon/reagent_containers/syringe/biofoam,
 	/obj/item/weapon/reagent_containers/syringe/biofoam,
 	/obj/item/weapon/reagent_containers/pill/bicaridine,
-	/obj/item/weapon/reagent_containers/pill/bicaridine,
-	/obj/item/weapon/reagent_containers/pill/dermaline,
 	/obj/item/weapon/reagent_containers/pill/dermaline,
 	/obj/item/weapon/reagent_containers/pill/tramadol,
-	/obj/item/weapon/reagent_containers/pill/tramadol,
-	/obj/item/weapon/reagent_containers/pill/iron,
 	/obj/item/weapon/reagent_containers/pill/iron,
 	)
 

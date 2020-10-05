@@ -182,4 +182,4 @@
 	. = ..()
 	var/obj/effect/overmap/OM = map_sectors["[b.z]"]
 	if(OM)
-		OM.nuked = 1
+		OM.nuked_effects(b.loc)
