@@ -5,6 +5,13 @@
 	var/_output_maxed = FALSE
 	var/_output_on = FALSE
 
+/obj/machinery/power/smes/buildable/preset/on_full
+	_fully_charged = TRUE
+	_input_maxed = TRUE
+	_input_on = TRUE
+	_output_maxed = TRUE
+	_output_on = TRUE
+
 /obj/machinery/power/smes/buildable/preset/Initialize()
 	. = ..()
 	if(_input_maxed)
