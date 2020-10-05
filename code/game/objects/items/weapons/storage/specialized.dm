@@ -58,7 +58,7 @@
 	icon_state = "plantbag"
 	slot_flags = SLOT_BELT
 	max_storage_space = 100
-	max_w_class = ITEM_SIZE_SMALL
+	max_w_class = ITEM_SIZE_NORMAL
 	w_class = ITEM_SIZE_NORMAL
 	can_hold = list(/obj/item/weapon/reagent_containers/food/snacks/grown,/obj/item/seeds)
 	allow_quick_gather = 1
