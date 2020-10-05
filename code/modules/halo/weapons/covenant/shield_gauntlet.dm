@@ -13,8 +13,8 @@
 
 	action_button_name = "Toggle Shield Gauntlet"
 
-	var/shield_max_charge = 600
-	var/shield_current_charge = 600
+	var/shield_max_charge = 400
+	var/shield_current_charge = 400
 	var/list/shield_colour_values = list("#0000FF","#00FFFF","#FFFF00","#FFA500","#FF2600")		//highest charge to lowest charge
 	var/shield_recharge_delay = 6 SECONDS //The delay between taking damage and starting to recharge, in ticks.
 	var/shield_next_charge
