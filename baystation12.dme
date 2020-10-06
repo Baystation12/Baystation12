@@ -1852,6 +1852,7 @@
 #include "code\modules\halo\mobs\human_movement_delay.dm"
 #include "code\modules\halo\mobs\movement_sfx.dm"
 #include "code\modules\halo\mobs\simple_mob_ai.dm"
+#include "code\modules\halo\mobs\ambient_fauna\frog.dm"
 #include "code\modules\halo\NPC\npc.dm"
 #include "code\modules\halo\NPC\npc_buysell.dm"
 #include "code\modules\halo\NPC\npc_damage.dm"
