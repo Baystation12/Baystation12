@@ -18,10 +18,11 @@
 	caliber = "12.7mm"
 	magazine_type = /obj/item/ammo_magazine/HMG_boxmag
 
+	fire_delay = 5 //1 lower than normal
 	//burst = 10
 	//burst_delay = 3
 	burst_accuracy = list(0,0,0,0,0,0,0,0,0,0,-1)
-	dispersion = list(0,0,0,0,0,0.5,0.6,0.73)
+	dispersion = list(0,0,0,0,0,0.3,0.6,0.73)
 
 	load_time = 7
 
@@ -36,5 +37,5 @@
 		)
 
 	move_delay_malus = 2
-	fire_delay = 15
+	fire_delay = 8
 	sustain_time = 3 SECONDS
