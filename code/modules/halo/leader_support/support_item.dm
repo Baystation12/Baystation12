@@ -10,6 +10,7 @@ GLOBAL_LIST_INIT(support_pads_global,list())
 
 	var/list/options_init = list(\
 	/datum/support_option/supply_drop/evac,
+	/datum/support_option/supply_drop/mass_ammo,
 	/datum/support_option/supply_drop/medical_drop,
 	/datum/support_option/supply_drop/vehicle_drop,
 	/datum/support_option/supply_drop/construction_drop,
@@ -95,6 +96,7 @@ GLOBAL_LIST_INIT(support_pads_global,list())
 /obj/item/support_pad/covenant
 	options_init = list(\
 	/datum/support_option/supply_drop/evac/cov,
+	/datum/support_option/supply_drop/mass_ammo/cov,
 	/datum/support_option/supply_drop/medical_drop/cov,
 	/datum/support_option/supply_drop/vehicle_drop/cov,
 	/datum/support_option/supply_drop/construction_drop/cov,
