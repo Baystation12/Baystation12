@@ -284,6 +284,7 @@
 "fx" = (/obj/machinery/button/crematorium{_wifi_id = "crem1"; id = "crem1"; pixel_y = -24},/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
 "fy" = (/obj/machinery/smartfridge/chemistry,/turf/simulated/wall/silver{tag = "icon-solidfwall_opening"; icon_state = "solidfwall_opening"},/area/faction_base/oni/medbay)
 "fz" = (/turf/unsimulated/mineral,/area/faction_base/oni/research)
+"fA" = (/obj/effect/overmap/complex046,/turf/simulated/wall/covenant/reinforced,/area/faction_base/oni)
 "fB" = (/obj/machinery/light,/obj/machinery/vending/armory/attachment,/turf/simulated/floor/tech/gray,/area/faction_base/oni/barracks)
 "fC" = (/obj/structure/window/reinforced/projresist{icon_state = "rwindow"; dir = 8},/obj/machinery/pointbased_vending/armory/odstvend,/turf/simulated/floor/tech/gray,/area/faction_base/oni/barracks)
 "fD" = (/obj/structure/sofa{icon_state = "sofamiddle"; dir = 8},/turf/simulated/floor/tech/gray,/area/faction_base/oni/barracks)
@@ -395,6 +396,6 @@ aabhbCbCbCbCbCbCbCbCbhaabQbQbQbQbQbQbQbQaabRbRbRbRbRbRbRbRaaeEeEeEeEeEbFbFbFbFeE
 aabhbCbCbCbCbCbCbCbCbhaabQbQbQbQbQbQbQbQaabRbRbRbRbRbRbRbRaaeEeEeEeEeEeEeEeEeEeEeOeSffffffffffffffeSaa
 aabhbCbCbCbCbCbCbCbCbhaabQbQbQbQbQbQbQbQaabRbRbRbRbRbRbRbRaaeEeEeEeEeEeEeEeEeEeEeOeSffffffffffffffeSaa
 aabhcMbCbCbCbCbCbCbCbhaabQbQbQbQbQbQbQbQaabRbRbRbRbRbRbRbRaaeEeEeEeEeEeEeEeEeEeEeOeSffffffffffffffeSaa
-aabhbhbhbhbhbhbhbhbhbhaadbbQbQbQbQbQbQbQaaesbRbRbRbRbRbRbRaaeEeEeEeEeEeEeEeEeEeEeOeSeSeSeSeSeSeSeSeSaa
+aafAbhbhbhbhbhbhbhbhbhaadbbQbQbQbQbQbQbQaaesbRbRbRbRbRbRbRaaeEeEeEeEeEeEeEeEeEeEeOeSeSeSeSeSeSeSeSeSaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
