@@ -144,3 +144,12 @@
 	brightness_range = 10
 	brightness_power = 2
 	brightness_color = "#362F29"
+
+/obj/effect/landmark/flank_marker
+	name = "Marks spots for wall-spawn when poplocking map flanks"
+
+/obj/effect/landmark/flank_marker/left
+	name = "leftflank"
+
+/obj/effect/landmark/flank_marker/rightflank
+	name = "rightflank"
