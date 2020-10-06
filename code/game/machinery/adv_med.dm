@@ -188,7 +188,7 @@
 /obj/machinery/body_scanconsole/New()
 	..()
 	spawn( 5 )
-		src.connected = locate(/obj/machinery/bodyscanner, get_step(src, WEST))
+		src.connected = locate(/obj/machinery/bodyscanner, get_step(src, dir))
 		return
 	return
 
