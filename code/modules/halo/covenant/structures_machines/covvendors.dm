@@ -148,8 +148,6 @@
 		/obj/item/flight_item/covenant_pack = 1,
 		/obj/item/dumb_ai_chip/cov = 2,
 		/obj/item/weapon/plastique/covenant = 8,
-		/obj/item/weapon/armor_patch/cov = 8,
-		/obj/item/weapon/armor_patch/mini/cov = 10,
 		/obj/item/clothing/accessory/storage/IFAK/cov = 20,
 		/obj/item/weapon/pinpointer/artifact = 3
 	)
@@ -223,8 +221,6 @@
 		/obj/item/weapon/tank/air/covenant = 7,
 		/obj/item/flight_item/covenant_pack = 2,
 		/obj/item/dumb_ai_chip/cov = 2,
-		/obj/item/weapon/armor_patch/cov = 8,
-		/obj/item/weapon/armor_patch/mini/cov = 10,
 		/obj/item/clothing/accessory/storage/IFAK/cov = 20,
 		/obj/item/weapon/pinpointer/artifact = 2,
 	)
@@ -289,6 +285,7 @@
 		/obj/item/weapon/pickaxe/plasma_drill = 0,
 		/obj/item/weapon/plastique/covenant = 0,
 		/obj/item/weapon/armor_patch/cov = 0,
+		/obj/item/weapon/armor_patch/mini/cov = 0,
 		/obj/item/weapon/pinpointer/artifact = 0
 	)
 	amounts = list(\
@@ -297,7 +294,6 @@
 		/obj/item/clothing/under/kigyar/armless = 8,
 		/obj/item/weapon/pickaxe/plasma_drill = 1,
 		/obj/item/weapon/plastique/covenant = 6,
-		/obj/item/weapon/armor_patch/cov = 12,
 		/obj/item/clothing/accessory/storage/IFAK/cov = 20,
 		/obj/item/weapon/pinpointer/artifact = 2
 	)
@@ -375,8 +371,6 @@
 	amounts = list(\
 		/obj/item/weapon/pickaxe/plasma_drill = 1,
 		/obj/item/weapon/plastique/covenant = 6,
-		/obj/item/weapon/armor_patch/cov = 12,
-		/obj/item/weapon/armor_patch/mini/cov = 16,
 		/obj/item/clothing/accessory/storage/IFAK/cov = 20,
 		/obj/item/weapon/pinpointer/artifact = 1
 	)
@@ -414,8 +408,6 @@
 	)
 	amounts = list(\
 		/obj/item/weapon/plastique/covenant = 6,
-		/obj/item/weapon/armor_patch/cov = 16,
-		/obj/item/weapon/armor_patch/mini/cov = 20,
 		/obj/item/clothing/accessory/storage/IFAK/cov = 20,
 		/obj/item/weapon/pinpointer/artifact = 1
 	)

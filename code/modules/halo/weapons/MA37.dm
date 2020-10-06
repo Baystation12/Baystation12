@@ -17,7 +17,7 @@
 	burst = 3
 	burst_delay = 2.0
 	dispersion = list(0.0,0.3,0.5)
-	hud_bullet_row_num = 18
+	hud_bullet_row_num = 12
 
 	ammo_icon_state = null
 	attachment_slots = null
@@ -38,10 +38,10 @@
 /obj/item/ammo_magazine/ma37
 	name = "MA37 magazine"
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
-	icon_state = "MA3_mag"
+	icon_state = "MA37_mag"
 	mag_type = MAGAZINE
 	caliber = "7.62mm"
-	max_ammo = 40
+	max_ammo = 32
 	multiple_sprites = 1
 
 //M118 Ammunition
