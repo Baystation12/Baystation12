@@ -35,5 +35,6 @@
 
 /obj/effect/overmap/unsc_cassius_moon/nuked_effects(var/nuke_at_loc)
 	. = ..()
+	superstructure_failing = 0
 	pre_superstructure_failing()
 
