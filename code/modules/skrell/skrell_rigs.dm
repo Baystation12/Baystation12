@@ -29,6 +29,7 @@
 /obj/item/clothing/gloves/rig/ert/skrell
 	name = "skrellian recon hardsuit gloves"
 	desc = "A powerful recon hardsuit with integrated power supply and atmosphere. It's impressive design perfectly tailors to the user's body."
+	siemens_coefficient = 0
 	species_restricted = list(SPECIES_SKRELL)
 	sprite_sheets = list(
 		SPECIES_SKRELL = 'icons/mob/species/skrell/onmob_hands_rig_skrell.dmi'
