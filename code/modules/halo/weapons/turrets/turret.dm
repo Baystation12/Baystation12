@@ -230,6 +230,9 @@
 	caliber = "7.62mm"
 	magazine_type = /obj/item/ammo_magazine/m739/m118
 
+	scope_zoom_amount = 6
+	is_scope_variable = 1
+
 	fire_delay = 15
 	burst = 10
 	burst_delay = 1
@@ -269,7 +272,7 @@
 		verbs -= /obj/item/weapon/gun/projectile/turret/verb/scope
 		return
 
-	toggle_scope(usr, 1.75) //Equal to a sniper's scope, we'll be unlikely to hit anything at this range though.
+	toggle_scope(usr, scope_zoom_amount) //Equal to a sniper's scope, we'll be unlikely to hit anything at this range though.
 
 //Detached Turret Gun Define// Every detachable turret gun needs this.
 /obj/item/weapon/gun/projectile/turret/detached
