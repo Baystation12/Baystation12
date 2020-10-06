@@ -43,7 +43,7 @@
 	sprite_sheets = list("Sangheili" = SANGHEILI_ARMOUR_ICON)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	specials = list(/datum/armourspecials/shields,/datum/armourspecials/shieldmonitor/sangheili)
-	armor = list(melee = 55, bullet = 45, laser = 55, energy = 50, bomb = 40, bio = 25, rad = 25)//ODST tier
+	armor = list(melee = 55, bullet = 40, laser = 55, energy = 50, bomb = 40, bio = 25, rad = 25)//ODST tier, but 5 lower bullet due to having shields.
 	armor_thickness_modifiers = list()
 	unacidable = 1
 	max_suitstore_w_class = ITEM_SIZE_HUGE
