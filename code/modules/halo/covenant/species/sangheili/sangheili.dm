@@ -27,7 +27,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/covena
 	appearance_flags = HAS_SKIN_TONE
 	brute_mod = 0.9
 	burn_mod = 0.9
-	pain_mod = 0.75 //Pain has quarter an effect on them
+	pain_mod = 0.85 //Pain has quarter an effect on them
 	slowdown = -0.3
 	explosion_effect_mod = 0.5
 	can_force_door = 1
@@ -52,7 +52,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/covena
 	BP_EYES =     /obj/item/organ/internal/eyes
 	)
 
-	equipment_slowdown_multiplier = 0.7
+	equipment_slowdown_multiplier = 0.9
 
 	pain_scream_sounds = list(\
 	'code/modules/halo/sounds/species_pain_screams/elitescream_1.ogg',

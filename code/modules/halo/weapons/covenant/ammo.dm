@@ -50,7 +50,7 @@
 	damage = 30
 
 /obj/item/projectile/bullet/covenant/plasmarifle
-	damage = 35 // more damage than MA5B.
+	damage = 30
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "Plasmarifle Shot"
 
