@@ -374,7 +374,7 @@
 				if(CanPhysicallyInteract(user) && !QDELETED(to_fix) && (to_fix in src) && to_fix.burn_damage)
 					to_fix.repair_burn_generic(thing, user)
 				return
-			else if(isCrowbar(thing))
+			else if(isScrewdriver(thing))
 				if(!maintenance_protocols)
 					to_chat(user, SPAN_WARNING("The cell compartment remains locked while maintenance protocols are disabled."))
 					return
@@ -388,8 +388,27 @@
 				user.put_in_hands(body.cell)
 				to_chat(user, SPAN_NOTICE("You remove \the [body.cell] from \the [src]."))
 				playsound(user.loc, 'sound/items/Crowbar.ogg', 50, 1)
-				visible_message(SPAN_NOTICE("\The [user] pries out \the [body.cell] using the \the [thing]."))
+				visible_message(SPAN_NOTICE("\The [user] pries out \the [body.cell] using \the [thing]."))
 				body.cell = null
+				return
+			else if(isCrowbar(thing))
+				if(!hatch_locked)
+					to_chat(user, SPAN_NOTICE("The cockpit isn't locked. There is no need for this."))
+					return
+				if(!body) //Error
+					return
+				var/delay = min(50 * user.skill_delay_mult(SKILL_DEVICES), 50 * user.skill_delay_mult(SKILL_EVA))
+				visible_message(SPAN_NOTICE("\The [user] starts forcing the \the [src]'s emergency [body.hatch_descriptor] release using \the [thing]."))
+				if(!do_after(user, delay, src, DO_DEFAULT | DO_PUBLIC_PROGRESS))
+					return
+				visible_message(SPAN_NOTICE("\The [user] forces \the [src]'s [body.hatch_descriptor] open using the \the [thing]."))
+				playsound(user.loc, 'sound/machines/bolts_up.ogg', 25, 1)
+				hatch_locked = FALSE
+				hatch_closed = FALSE
+				for(var/mob/pilot in pilots)
+					eject(pilot, silent = 1)
+				hud_open.queue_icon_update()
+				queue_icon_update()
 				return
 			else if(istype(thing, /obj/item/weapon/cell))
 				if(!maintenance_protocols)
