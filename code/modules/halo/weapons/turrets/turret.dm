@@ -46,7 +46,7 @@
 	qdel(src)
 
 /obj/structure/turret/bullet_act(var/obj/item/projectile/P, var/def_zone)
-	var/prob_use = bullet_deflect_chance
+	var/prob_use = bullet_deflect_chance - P.armor_penetration
 	if(get_dir(src, P.starting) in list(dir,turn(dir,-45),turn(dir,45)))
 		prob_use = bullet_facing_deflect_chance
 	if(dir == turn(dir,180) || !prob(prob_use))
