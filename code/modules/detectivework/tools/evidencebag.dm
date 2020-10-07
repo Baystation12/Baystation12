@@ -9,8 +9,8 @@
 	w_class = ITEM_SIZE_SMALL
 	var/obj/item/stored_item = null
 
-/obj/item/weapon/evidencebag/MouseDrop(var/obj/item/I as obj)
-	if (!ishuman(usr))
+/obj/item/weapon/evidencebag/MouseDrop(obj/item/I)
+	if (!ishuman(usr) || !istype(I))
 		return
 
 	var/mob/living/carbon/human/user = usr
@@ -63,25 +63,24 @@
 	update_icon()
 
 /obj/item/weapon/evidencebag/on_update_icon()
-	overlays.Cut()
+	underlays.Cut()
 	if(stored_item)
 		icon_state = "evidence"
-		var/xx = stored_item.pixel_x	//save the offset of the item
-		var/yy = stored_item.pixel_y
-		stored_item.pixel_x = 0		//then remove it so it'll stay within the evidence bag
-		stored_item.pixel_y = 0
-		var/image/img = image("icon"=stored_item, "layer"=FLOAT_LAYER)	//take a snapshot. (necessary to stop the underlays appearing under our inventory-HUD slots ~Carn
-		stored_item.pixel_x = xx		//and then return it
-		stored_item.pixel_y = yy
-		overlays += img
-		overlays += "evidence"	//should look nicer for transparent stuff. not really that important, but hey.
-
-		desc = "An evidence bag containing [stored_item]."
+		desc = "An evidence bag containing \a [stored_item]."
+		var/mutable_appearance/MA = new(stored_item)
+		MA.pixel_x = 0
+		MA.pixel_y = 0
+		MA.pixel_z = 0
+		var/image/I = new
+		I.appearance = MA
+		I.plane = FLOAT_PLANE
+		I.layer = FLOAT_LAYER
+		underlays += I
 	else
 		icon_state = "evidenceobj"
 		desc = "An empty evidence bag."
 
-/obj/item/weapon/evidencebag/attack_self(mob/user as mob)
+/obj/item/weapon/evidencebag/attack_self(mob/user)
 	if(stored_item)
 		user.visible_message("[user] takes [stored_item] out of [src]", "You take [stored_item] out of [src].",\
 		"You hear someone rustle around in a plastic bag, and remove something.")
@@ -99,4 +98,5 @@
 
 /obj/item/weapon/evidencebag/examine(mob/user)
 	. = ..()
-	if (stored_item) user.examinate(stored_item)
+	if (stored_item)
+		user.examinate(stored_item)
