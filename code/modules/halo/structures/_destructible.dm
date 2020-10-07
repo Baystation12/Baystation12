@@ -12,6 +12,7 @@
 	var/list/maneuvring_mobs = list()
 	var/repair_material_name
 	var/cover_rating = 10
+	var/explosion_damage_mult = 1
 	var/deconstruct_tools = list(/obj/item/weapon/weldingtool)
 	var/list/loot_types = list(/obj/item/stack/material/steel)
 	var/list/scrap_types = list(/obj/item/salvage/metal)
@@ -267,7 +268,7 @@
 */
 /obj/structure/destructible/ex_act(severity)
 	//explosions do extra damage
-	take_damage(severity * 50)
+	take_damage(((3-severity) + 1)* 50)
 
 /obj/structure/destructible/proc/take_damage(var/amount)
 	health -= amount
