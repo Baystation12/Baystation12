@@ -1,5 +1,6 @@
 
 #define REPAIR_AMOUNT 100
+#define DESTRUCTIBLE_REPAIR_DELAY 20
 
 /obj/structure/destructible
 	name = "destructible"
@@ -48,7 +49,7 @@
 				if (D.get_amount() > 0)
 					if (health < maxHealth - REPAIR_AMOUNT)
 						visible_message("<span class='notice'>[user] begins to repair \the [src].</span>")
-						if(do_after(user,20,src) && D.use(1))
+						if(do_after(user,DESTRUCTIBLE_REPAIR_DELAY,src) && D.use(1))
 							repair_damage(REPAIR_AMOUNT)
 							to_chat(user, "\icon[src] <span class='info'>You repair \the [src]. It is now \
 								[round(100*health/maxHealth)]% repaired (+[round(100*REPAIR_AMOUNT/maxHealth)]%).</span>")
@@ -64,7 +65,7 @@
 			to_chat(user, "<span class='warning'>[src] cannot be repaired.</span>")
 
 	else if(attempt_deconstruct(W, user))
-		if(do_after(user,20,src))
+		if(do_after(user,DESTRUCTIBLE_REPAIR_DELAY,src))
 			dismantle()
 
 	else
@@ -73,10 +74,16 @@
 			take_damage(W.force)
 		..()
 
+/obj/structure/destructible/proc/is_deconstruct_tool(obj/item/W as obj)
+	for(var/path in deconstruct_tools)
+		if(istype(W,path))
+			return 1
+	return 0
+
 /obj/structure/destructible/proc/attempt_deconstruct(obj/item/W as obj, mob/user as mob)
 	. = 0
 
-	if (!(W in deconstruct_tools))
+	if (is_deconstruct_tool(W))
 		return 0
 
 	if(istype(W, /obj/item/weapon/weldingtool))
@@ -394,3 +401,6 @@
 	if(prob(50))
 		new /obj/item/stack/material/wood(src.loc)
 	qdel(src)
+
+#undef REPAIR_AMOUNT
+#undef DESTRUCTIBLE_REPAIR_DELAY
