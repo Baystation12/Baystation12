@@ -1,6 +1,0 @@
-author: "Spookerton"
-delete-after: True
-changes: 
-  - bugfix: "Normal sized produce can fit in plant bags."
-  - bugfix: "Reagent grinders no longer produce infinite chems from sheets."
-  - bugfix: "Trays can't pick up non-removable items, including borg chem dispensers."

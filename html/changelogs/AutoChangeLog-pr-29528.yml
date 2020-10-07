@@ -1,6 +1,0 @@
-author: "Pawn"
-delete-after: True
-changes: 
-  - tweak: "White monotiles can be crafted from plastic sheets"
-  - tweak: "Monotile item sprites corresponds with their color"
-  - tweak: "Dark floor tiles are now made of steel rather than plasteel"
