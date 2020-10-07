@@ -84,6 +84,10 @@
 /obj/effect/floor_decal/corner/red{
 	dir = 5
 	},
+/obj/item/device/encryptionkey/map_preset/playablecolony,
+/obj/item/device/encryptionkey/map_preset/playablecolony,
+/obj/item/device/encryptionkey/map_preset/playablecolony,
+/obj/item/device/encryptionkey/map_preset/playablecolony,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/tcomms)
 "ao" = (
@@ -1541,6 +1545,7 @@
 /obj/item/clothing/suit/storage/toggle/hoodie/smw,
 /obj/item/device/radio/map_preset/playablecolony,
 /obj/structure/closet/cabinet,
+/obj/item/device/radio/headset/map_preset/playablecolony,
 /turf/simulated/floor/carpet,
 /area/map_template/colony/dorms)
 "dk" = (
@@ -2579,6 +2584,7 @@
 /obj/structure/closet/shipping_wall{
 	pixel_y = 34
 	},
+/obj/item/device/radio/headset/map_preset/playablecolony,
 /turf/simulated/floor/carpet,
 /area/map_template/colony/dorms)
 "eY" = (
@@ -3064,6 +3070,7 @@
 /obj/item/clothing/suit/storage/toggle/track/gcc,
 /obj/item/device/radio/map_preset/playablecolony,
 /obj/structure/closet/cabinet,
+/obj/item/device/radio/headset/map_preset/playablecolony,
 /turf/simulated/floor/carpet,
 /area/map_template/colony/dorms)
 "fN" = (

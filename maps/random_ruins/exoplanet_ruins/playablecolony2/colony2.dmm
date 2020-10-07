@@ -327,6 +327,8 @@
 /obj/item/device/radio/map_preset/playablecolony2,
 /obj/item/device/radio/map_preset/playablecolony2,
 /obj/machinery/atmospherics/unary/vent_pump/on,
+/obj/item/device/radio/headset/map_preset/playablecolony2,
+/obj/item/device/radio/headset/map_preset/playablecolony2,
 /turf/simulated/floor/tiled/techmaint,
 /area/map_template/colony2/ship)
 "eY" = (
@@ -339,6 +341,11 @@
 	pixel_x = -21;
 	req_access = newlist()
 	},
+/obj/item/device/encryptionkey/map_preset/playablecolony2,
+/obj/item/device/encryptionkey/map_preset/playablecolony2,
+/obj/item/device/encryptionkey/map_preset/playablecolony2,
+/obj/item/device/encryptionkey/map_preset/playablecolony2,
+/obj/structure/table/rack,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/colony2/tcomms)
 "fp" = (
@@ -1370,6 +1377,8 @@
 /obj/item/device/radio/map_preset/playablecolony2,
 /obj/item/device/radio/map_preset/playablecolony2,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/item/device/radio/headset/map_preset/playablecolony2,
+/obj/item/device/radio/headset/map_preset/playablecolony2,
 /turf/simulated/floor/tiled/techmaint,
 /area/map_template/colony2/ship)
 "BI" = (
