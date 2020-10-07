@@ -227,7 +227,7 @@
 	var/list/base_auras
 
 	var/sexybits_location	//organ tag where they are located if they can be kicked for increased pain
-	
+
 	var/job_skill_buffs = list()				// A list containing jobs (/datum/job), with values the extra points that job receives.
 
 	var/list/descriptors = list(
@@ -256,7 +256,7 @@
 		list(/decl/emote/audible/grunt, /decl/emote/audible/groan) = 10,
 	)
 
-	
+
 	var/exertion_effect_chance = 0
 	var/exertion_hydration_scale = 0
 	var/exertion_nutrition_scale = 0
@@ -795,9 +795,9 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 
 /datum/species/proc/skills_from_age(age)	//Converts an age into a skill point allocation modifier. Can be used to give skill point bonuses/penalities not depending on job.
 	switch(age)
-		if(0 to 22) 	. = -4
-		if(23 to 30) 	. = 0
-		if(31 to 45)	. = 4
+		if(0 to 22) 	. = 0
+		if(23 to 30) 	. = 3
+		if(31 to 45)	. = 6
 		else			. = 8
 
 /datum/species/proc/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)
