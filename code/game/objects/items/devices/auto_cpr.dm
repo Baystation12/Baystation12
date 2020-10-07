@@ -25,7 +25,7 @@
 			return 1
 		user.visible_message(SPAN_NOTICE("[user] starts fitting [src] onto the [M]'s chest."))
 
-		if(!do_mob(user, M, 2 SECONDS))
+		if(!do_after(user, 2 SECONDS, M))
 			return
 			
 		if(user.unEquip(src))

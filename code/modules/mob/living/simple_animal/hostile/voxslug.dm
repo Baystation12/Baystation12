@@ -82,7 +82,7 @@ Small, little HP, poisonous.
 	var/mob/living/simple_animal/hostile/voxslug/V = contents[1]
 	if(!V.stat && istype(target, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = target
-		if(!do_mob(user, H, 30))
+		if(!do_after(user, 3 SECONDS, H))
 			return
 		V.attach(H)
 		qdel(src)
