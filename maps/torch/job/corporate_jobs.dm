@@ -6,7 +6,7 @@
 	spawn_positions = 1
 	supervisors = "Corporate Regulations, the Union Charter, and the Expeditionary Corps Organisation"
 	selection_color = "#2f2f7f"
-	economic_power = 15
+	economic_power = 18
 	minimal_player_age = 0
 	minimum_character_age = list(SPECIES_HUMAN = 25)
 	alt_titles = list(

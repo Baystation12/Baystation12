@@ -6,7 +6,7 @@
 	spawn_positions = 1
 	minimum_character_age = list(SPECIES_HUMAN = 24)
 	ideal_character_age = 40
-	economic_power = 5
+	economic_power = 6
 	minimal_player_age = 0
 	supervisors = "the Executive Officer"
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/chaplain
@@ -51,7 +51,7 @@
 
 	access = list(access_maint_tunnels, access_emergency_storage, access_janitor, access_solgov_crew)
 	minimal_access = list()
-	
+
 /datum/job/chef
 	title = "Cook"
 	department = "Service"
