@@ -1,9 +1,0 @@
-author: "Spookerton"
-delete-after: True
-changes: 
-  - tweak: "Cookers can fit multiple items to cook at once: Candying Machine 2, Deep Fryer 4, Grill 4, Oven 4, Cereal Maker 2."
-  - tweak: "Cookers have a cook time and a burn time instead of randomly deciding to burn things on/after completion. All cookers finish cooking after 20 seconds. All cookers except the Cereal Maker and Candying machine, which eject, burn their contents after 40 seconds. While a cooker contains burned stuff, it has a continuing chance to produce smoke."
-  - tweak: "Added Frying, Steaming, and Boiling to the griddle."
-  - tweak: "Heat-based cooking methods strip the \"raw\" prefix from any food that has it."
-  - tweak: "The color of a variable food's filling is blended with the main icon's color instead of multiplied by it, making fillings look a bit more vibrant."
-  - tweak: "You can't put mice in the oven anymore."
