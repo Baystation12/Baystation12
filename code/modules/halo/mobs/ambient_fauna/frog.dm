@@ -15,12 +15,12 @@
 
 
 /mob/living/simple_animal/fancy_frog
-	name = "fancy frog"
+	name = "sir frog"
 	desc = "A frog with a tophat,looks really fancy and well mannered!."
 	icon = 'icons/mob/animal.dmi'
-	icon_state = "fancy_frog"
-	icon_living = "fancy_frog"
-	icon_dead = "fancy_frog_dead"
+	icon_state = "sir_frog"
+	icon_living = "sir_frog"
+	icon_dead = "sir_frog_dead"
 	speak_emote = list("croaks and tips its tophat")
 	health = 10
 	maxHealth = 10
@@ -63,7 +63,7 @@
 
 
 /mob/living/simple_animal/rare_frog
-	name = "funny frog"
+	name = "rare frog"
 	desc = "One of the rarest frogs in the universe! Better not make them go extinct!."
 	icon = 'icons/mob/animal.dmi'
 	icon_state = "rare_frog"
