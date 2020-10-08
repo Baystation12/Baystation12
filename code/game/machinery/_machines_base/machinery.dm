@@ -415,6 +415,8 @@ Class Procs:
 
 /obj/machinery/examine(mob/user)
 	. = ..()
+	if (panel_open)
+		to_chat(user, "The service panel is open.")
 	if(component_parts && hasHUD(user, HUD_SCIENCE))
 		display_parts(user)
 	if(stat & NOSCREEN)
