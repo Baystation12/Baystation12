@@ -35,10 +35,6 @@
 /obj/structure/grille,
 /turf/template_noop,
 /area/template_noop)
-"ah" = (
-/obj/structure/lattice,
-/turf/template_noop,
-/area/template_noop)
 "ak" = (
 /obj/structure/table/standard,
 /obj/item/device/radio,
@@ -110,7 +106,6 @@
 /turf/simulated/wall/r_wall/hull,
 /area/map_template/ecship/cryo)
 "at" = (
-/obj/structure/lattice,
 /obj/effect/landmark/scorcher,
 /turf/template_noop,
 /area/map_template/ecship/cryo)
@@ -173,7 +168,6 @@
 /turf/simulated/wall/r_wall/hull,
 /area/map_template/ecship/science)
 "aB" = (
-/obj/structure/lattice,
 /turf/template_noop,
 /area/map_template/ecship/science)
 "aC" = (
@@ -2001,7 +1995,6 @@
 /turf/simulated/floor/airless,
 /area/map_template/ecship/engine)
 "dY" = (
-/obj/structure/lattice,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
 	dir = 4;
 	icon_state = "intact"
@@ -2011,7 +2004,6 @@
 /turf/template_noop,
 /area/template_noop)
 "dZ" = (
-/obj/structure/lattice,
 /obj/machinery/atmospherics/binary/passive_gate/on{
 	dir = 8;
 	icon_state = "map_on";
@@ -2078,7 +2070,6 @@
 /turf/simulated/floor,
 /area/map_template/ecship/engine)
 "eg" = (
-/obj/structure/lattice,
 /obj/machinery/atmospherics/binary/passive_gate/on{
 	dir = 4;
 	max_pressure_setting = 15000;
@@ -2090,7 +2081,6 @@
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "eh" = (
-/obj/structure/lattice,
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 10
 	},
@@ -2103,7 +2093,6 @@
 /turf/simulated/floor/airless,
 /area/map_template/ecship/engine)
 "ej" = (
-/obj/structure/lattice,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
 	dir = 6;
 	icon_state = "intact"
@@ -2113,7 +2102,6 @@
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "ek" = (
-/obj/structure/lattice,
 /obj/machinery/atmospherics/binary/passive_gate/on{
 	dir = 8;
 	icon_state = "map_on";
@@ -2151,29 +2139,16 @@
 /turf/simulated/wall/r_wall/hull,
 /area/map_template/ecship/engine)
 "eo" = (
-/obj/structure/lattice,
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
 /obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "ep" = (
-/obj/structure/lattice,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan,
 /obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
-"mD" = (
-/obj/structure/lattice,
-/obj/effect/landmark/scorcher,
-/turf/template_noop,
-/area/template_noop)
 "qB" = (
-/obj/effect/landmark/clear,
-/turf/template_noop,
-/area/template_noop)
-"yb" = (
-/obj/structure/lattice,
-/obj/effect/landmark/scorcher,
 /obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
@@ -2203,11 +2178,6 @@
 /obj/item/weapon/circular_saw,
 /turf/simulated/floor/tiled/white/lowpressure,
 /area/map_template/ecship/science)
-"Wb" = (
-/obj/structure/lattice,
-/obj/effect/landmark/clear,
-/turf/template_noop,
-/area/template_noop)
 "YW" = (
 /obj/structure/catwalk,
 /obj/effect/landmark/scorcher,
@@ -2573,7 +2543,7 @@ dA
 dA
 aa
 aa
-ah
+aa
 aa
 dA
 dA
@@ -2608,7 +2578,7 @@ aa
 aa
 dB
 aa
-ah
+aa
 aa
 aa
 dB
@@ -2680,7 +2650,7 @@ aa
 aa
 aa
 aa
-ah
+aa
 aa
 aa
 aa
@@ -2895,9 +2865,9 @@ dl
 dx
 ZF
 qB
-Wb
+qB
 ef
-Wb
+qB
 qB
 qB
 aa
@@ -2931,9 +2901,9 @@ cH
 dz
 ZF
 ZF
-yb
+ZF
 eg
-Wb
+qB
 qB
 qB
 qB
@@ -2965,9 +2935,9 @@ dq
 dD
 dd
 dG
-yb
-yb
-yb
+ZF
+ZF
+ZF
 eh
 eo
 UQ
@@ -3006,8 +2976,8 @@ dS
 dX
 YW
 ei
-Wb
-Wb
+qB
+qB
 qB
 qB
 "}
@@ -3037,8 +3007,8 @@ dq
 dF
 dd
 dI
-yb
-yb
+ZF
+ZF
 dY
 ej
 ep
@@ -3077,11 +3047,11 @@ ZF
 ZF
 dY
 ek
-Wb
 qB
 qB
 qB
-Wb
+qB
+qB
 "}
 (25,1,1) = {"
 ac
@@ -3113,7 +3083,7 @@ ZF
 qB
 dZ
 el
-Wb
+qB
 qB
 qB
 qB
@@ -3328,7 +3298,7 @@ aa
 aa
 aa
 aa
-ah
+aa
 aa
 aa
 aa
@@ -3364,7 +3334,7 @@ aa
 aa
 aa
 aa
-ah
+aa
 aa
 aa
 aa
@@ -3411,7 +3381,7 @@ aa
 aa
 aa
 aa
-mD
+NM
 NM
 ab
 az
@@ -3438,7 +3408,7 @@ dy
 dy
 dy
 dy
-ah
+aa
 aa
 dy
 aa
@@ -3543,7 +3513,7 @@ dB
 dB
 dB
 aa
-ah
+aa
 aa
 dB
 dB
