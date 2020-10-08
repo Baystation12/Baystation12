@@ -156,3 +156,13 @@
 	cost = 25
 	containertype = /obj/structure/largecrate
 	containername = "soda dispenser crate"
+
+/decl/hierarchy/supply_pack/galley/mre_dispenser
+	name = "Equipment - MRE dispenser"
+	contains = list(
+			/obj/machinery/vending/mredispenser{anchored = 0}
+		)
+	cost = 50
+	containertype = /obj/structure/largecrate
+	containername = "MRE dispenser crate"
+
