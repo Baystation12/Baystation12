@@ -17,7 +17,7 @@
 		above.update_mimic()
 
 //Creates a new turf
-/turf/proc/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE)
+/turf/proc/ChangeTurf(turf/N, tell_universe = TRUE, force_lighting_update = FALSE, keep_air = FALSE, ignore_lattice = FALSE)
 	if (!N)
 		return
 
@@ -69,7 +69,7 @@
 	if(ispath(N, /turf/simulated))
 		if(old_fire)
 			fire = old_fire
-		if (istype(W,/turf/simulated/floor))
+		if (!ignore_lattice && istype(W,/turf/simulated/floor))
 			W.RemoveLattice()
 	else if(old_fire)
 		qdel(old_fire)

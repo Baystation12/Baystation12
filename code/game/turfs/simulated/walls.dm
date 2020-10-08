@@ -112,11 +112,11 @@
 			plant.pixel_x = 0
 			plant.pixel_y = 0
 
-/turf/simulated/wall/ChangeTurf(var/newtype)
+/turf/simulated/wall/ChangeTurf(turf/N, tell_universe = TRUE, force_lighting_update = FALSE, keep_air = FALSE, ignore_lattice = FALSE)
 	clear_plants()
-	. = ..(newtype)
+	. = ..()
 	var/turf/new_turf = .
-	for (var/turf/simulated/wall/W in RANGE_TURFS(new_turf, 1))
+	for (var/turf/simulated/wall/W in RANGE_TURFS(N, 1))
 		if (W == src)
 			continue
 		W.update_connections()
@@ -189,7 +189,7 @@
 
 	return ..()
 
-/turf/simulated/wall/proc/dismantle_wall(var/devastated, var/explode, var/no_product)
+/turf/simulated/wall/proc/dismantle_wall(devastated, explode, no_product, ignore_lattice)
 
 	playsound(src, 'sound/items/Welder.ogg', 100, 1)
 	if(!no_product)
@@ -211,7 +211,7 @@
 	reinf_material = null
 	update_connections(1)
 
-	ChangeTurf(floor_type)
+	ChangeTurf(floor_type, ignore_lattice = ignore_lattice)
 
 /turf/simulated/wall/ex_act(severity)
 	switch(severity)
