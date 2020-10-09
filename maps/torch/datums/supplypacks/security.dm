@@ -166,7 +166,6 @@
 					/obj/item/clothing/accessory/storage/black_vest,
 					/obj/item/device/megaphone,
 					/obj/item/clothing/gloves/thick,
-					/obj/item/clothing/gloves/thick/duty/solgov/sec,
 					/obj/item/device/holowarrant,
 					/obj/item/device/flashlight/maglight,
 					/obj/item/weapon/storage/belt/security)
