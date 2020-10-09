@@ -6,7 +6,7 @@
 /decl/hierarchy/outfit/job/torch/crew/command/CO
 	name = OUTFIT_JOB_NAME("Commanding Officer")
 	glasses = /obj/item/clothing/glasses/sunglasses
-	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/command
+	uniform = /obj/item/clothing/under/solgov/utility/fleet/command
 	l_ear = /obj/item/device/radio/headset/heads/torchexec
 	shoes = /obj/item/clothing/shoes/dutyboots
 	head = /obj/item/clothing/head/soft/solgov/expedition/co
@@ -19,23 +19,18 @@
 	backpack_overrides[/decl/backpack_outfit/satchel] = /obj/item/weapon/storage/backpack/satchel/cap
 	backpack_overrides[/decl/backpack_outfit/messenger_bag] = /obj/item/weapon/storage/backpack/messenger/com
 
-/decl/hierarchy/outfit/job/torch/crew/command/XO
+/decl/hierarchy/outfit/job/torch/crew/command/XO/fleet
 	name = OUTFIT_JOB_NAME("Executive Officer")
-	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/command
+	uniform = /obj/item/clothing/under/solgov/utility/fleet/command
 	l_ear = /obj/item/device/radio/headset/heads/torchexec
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_types = list(/obj/item/weapon/card/id/torch/silver)
 	pda_type = /obj/item/modular_computer/pda/heads/hop
 
-/decl/hierarchy/outfit/job/torch/crew/command/XO/fleet
-	name = OUTFIT_JOB_NAME("Executive Officer - Fleet")
-	uniform = /obj/item/clothing/under/solgov/utility/fleet/command
-	shoes = /obj/item/clothing/shoes/dutyboots
-
-/decl/hierarchy/outfit/job/torch/crew/command/cmo
+/decl/hierarchy/outfit/job/torch/crew/command/cmo/fleet
 	name = OUTFIT_JOB_NAME("Chief Medical Officer - Torch")
 	l_ear  =/obj/item/device/radio/headset/heads/cmo
-	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/medical
+	uniform = /obj/item/clothing/under/solgov/utility/fleet/medical
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_types = list(/obj/item/weapon/card/id/torch/silver/medical)
 	pda_type = /obj/item/modular_computer/pda/heads/cmo
@@ -45,14 +40,9 @@
 	..()
 	BACKPACK_OVERRIDE_MEDICAL
 
-/decl/hierarchy/outfit/job/torch/crew/command/cmo/fleet
-	name = OUTFIT_JOB_NAME("Chief Medical Officer - Fleet")
-	uniform = /obj/item/clothing/under/solgov/utility/fleet/medical
-	shoes = /obj/item/clothing/shoes/dutyboots
-
-/decl/hierarchy/outfit/job/torch/crew/command/chief_engineer
+/decl/hierarchy/outfit/job/torch/crew/command/chief_engineer/fleet
 	name = OUTFIT_JOB_NAME("Chief Engineer - Torch")
-	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/engineering
+	uniform = /obj/item/clothing/under/solgov/utility/fleet/engineering
 	shoes = /obj/item/clothing/shoes/dutyboots
 	l_ear = /obj/item/device/radio/headset/heads/ce
 	id_types = list(/obj/item/weapon/card/id/torch/silver/engineering)
@@ -64,15 +54,10 @@
 	..()
 	BACKPACK_OVERRIDE_ENGINEERING
 
-/decl/hierarchy/outfit/job/torch/crew/command/chief_engineer/fleet
-	name = OUTFIT_JOB_NAME("Chief Engineer - Fleet")
-	uniform = /obj/item/clothing/under/solgov/utility/fleet/engineering
-	shoes = /obj/item/clothing/shoes/dutyboots
-
-/decl/hierarchy/outfit/job/torch/crew/command/cos
+/decl/hierarchy/outfit/job/torch/crew/command/cos/fleet
 	name = OUTFIT_JOB_NAME("Chief of Security")
 	l_ear = /obj/item/device/radio/headset/heads/cos
-	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/security
+	uniform = /obj/item/clothing/under/solgov/utility/fleet/security
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_types = list(/obj/item/weapon/card/id/torch/silver/security)
 	pda_type = /obj/item/modular_computer/pda/heads/hos
@@ -80,11 +65,6 @@
 /decl/hierarchy/outfit/job/torch/crew/command/cos/New()
 	..()
 	BACKPACK_OVERRIDE_SECURITY
-
-/decl/hierarchy/outfit/job/torch/crew/command/cos/fleet
-	name = OUTFIT_JOB_NAME("Chief of Security - Fleet")
-	uniform = /obj/item/clothing/under/solgov/utility/fleet/combat/security
-	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/passenger/workplace_liaison
 	name = OUTFIT_JOB_NAME("Workplace Liaison")
@@ -120,15 +100,10 @@
 	id_types = list(/obj/item/weapon/card/id/torch/crew/sea)
 	pda_type = /obj/item/modular_computer/pda/heads
 
-/decl/hierarchy/outfit/job/torch/crew/command/bridgeofficer
+/decl/hierarchy/outfit/job/torch/crew/command/bridgeofficer/fleet
 	name = OUTFIT_JOB_NAME("Bridge Officer")
-	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/command
+	uniform = /obj/item/clothing/under/solgov/utility/fleet/command
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_types = list(/obj/item/weapon/card/id/torch/crew/bridgeofficer)
 	pda_type = /obj/item/modular_computer/pda/heads
 	l_ear = /obj/item/device/radio/headset/bridgeofficer
-
-/decl/hierarchy/outfit/job/torch/crew/command/bridgeofficer/fleet
-	name = OUTFIT_JOB_NAME("Bridge Officer - Fleet")
-	uniform = /obj/item/clothing/under/solgov/utility/fleet/command
-	shoes = /obj/item/clothing/shoes/dutyboots
