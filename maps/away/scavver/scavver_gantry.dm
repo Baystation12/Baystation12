@@ -1,5 +1,6 @@
 #include "scavver_gantry_shuttles.dm"
 #include "scavver_gantry_jobs.dm"
+#include "scavver_gantry_radio.dm"
 
 /datum/map_template/ruin/away_site/scavver_gantry
 	name =  "\improper Salvage Gantry"

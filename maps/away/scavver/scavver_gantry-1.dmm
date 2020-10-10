@@ -681,7 +681,8 @@
 /obj/effect/floor_decal/corner/blue/mono,
 /obj/random/loot,
 /obj/structure/table/steel_reinforced,
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/scavver{
+	default_hailing = 1;
 	dir = 8;
 	pixel_x = 20
 	},
@@ -812,7 +813,7 @@
 /obj/random/firstaid,
 /obj/random/firstaid,
 /obj/random/firstaid,
-/obj/item/device/radio/intercom{
+/obj/item/device/radio/intercom/map_preset/scavver{
 	dir = 8;
 	pixel_x = 20
 	},
@@ -2458,8 +2459,8 @@
 /obj/structure/table/rack,
 /obj/item/weapon/storage/belt/utility/full,
 /obj/item/weapon/storage/belt/utility/full,
-/obj/item/device/radio,
-/obj/item/device/radio,
+/obj/item/device/radio/map_preset/scavver,
+/obj/item/device/radio/map_preset/scavver,
 /obj/item/clothing/gloves/insulated,
 /obj/item/clothing/gloves/insulated,
 /obj/item/device/multitool,
