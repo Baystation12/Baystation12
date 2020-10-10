@@ -22,6 +22,7 @@
 	var/mob/living/L = pick(targets)
 	flick("[initial(icon_state)]_attack", src)
 	visible_message(SPAN_DANGER("\The [src] whips out at \the [L]!"))
+	playsound(src, 'sound/weapons/pierce.ogg', 50, 1)
 	if(istype(L, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = L
 		H.apply_damage(damage, BRUTE, BP_CHEST, armor_pen = penetration)

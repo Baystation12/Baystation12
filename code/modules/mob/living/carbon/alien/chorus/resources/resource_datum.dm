@@ -1,7 +1,7 @@
 /datum/chorus_resource
 	var/name = "resource"
 	var/name_color = COLOR_WHITE
-	var/amount = 50
+	var/amount = 25
 
 /datum/chorus_resource/proc/has_amount(var/amt)
 	return amt <= get_amount()

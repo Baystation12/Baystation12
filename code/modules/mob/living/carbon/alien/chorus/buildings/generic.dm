@@ -37,7 +37,7 @@
 	var/range = 1
 
 /obj/structure/chorus/processor/sentry/Process()
-	if(world.time < last_click + click_cooldown || !can_activate(null, FALSE))
+	if(world.time < last_click + click_cooldown && has_resources(null, FALSE))
 		return
 	var/list/heard = hearers(range, src)
 	if(heard.len)
@@ -50,7 +50,7 @@
 				if(sc.chorus_type == owner)
 					continue
 			filtered += m
-		if(filtered.len)
+		if(filtered.len && can_activate(null, FALSE))
 			trigger_effect(filtered)
 			last_click = world.time
 
@@ -109,26 +109,14 @@
 	to_chat(C, SPAN_WARNING("You extend \the [src] [extend_text]."))
 	a.visible_message(SPAN_DANGER("\The [a] [growth_verb] [through_text]!"))
 
-/obj/structure/chorus/spawner
-	var/can_spawn = FALSE
-	var/base_state
-
-/obj/structure/chorus/spawner/Initialize()
-	. = ..()
-	activate()
 
 /obj/structure/chorus/spawner/can_activate()
-	if(can_spawn)
-		return FALSE
-	. = ..()
+	return TRUE
 
 /obj/structure/chorus/spawner/activate()
-	if(!can_spawn)
-		can_spawn = TRUE
-		update_icon()
-		for(var/mob/observer/ghost/ghost in GLOB.player_list)
-			if(MODE_DEITY in ghost.client.prefs.be_special_role)
-				to_chat(ghost, SPAN_NOTICE("A chorus spawn is available! <a href='?src=\ref[src];jump=1'>(Jump)</a>"))
+	for(var/mob/observer/ghost/ghost in GLOB.player_list)
+		if(MODE_DEITY in ghost.client.prefs.be_special_role)
+			to_chat(ghost, SPAN_NOTICE("A chorus spawn is available! <a href='?src=\ref[src];jump=1'>(Jump)</a>"))
 
 /obj/structure/chorus/spawner/OnTopic(user, href_list)
 	if(href_list["jump"] && istype(user,/mob/observer/ghost))
@@ -137,13 +125,12 @@
 		return TOPIC_HANDLED
 	. = ..()
 
-/obj/structure/chorus/spawner/on_update_icon()
-	icon_state = "[base_state][can_spawn]"
-
 /obj/structure/chorus/spawner/attack_ghost(var/mob/observer/ghost/user)
-	if(GLOB.chorus.can_become_antag(user.mind) && can_spawn)
-		can_spawn = FALSE
-		update_icon()
+	if(GLOB.chorus.can_become_antag(user.mind))
+		if(!owner.use_resource(activation_cost_resource, activation_cost_amount))
+			var/datum/chorus_resource/resource = owner.get_resource(activation_cost_resource)
+			to_chat(user, SPAN_WARNING("\The [src] needs [activation_cost_amount - resource.amount] more [resource.name] in order to spawn."))
+			return
 		announce_ghost_joinleave(user, 0, "They have joined a chorus")
 		var/mob/living/carbon/alien/chorus/sac = new(get_turf(src), owner)
 		sac.ckey = user.ckey

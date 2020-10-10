@@ -12,7 +12,7 @@
 	click_cooldown = 5 SECONDS
 
 /obj/structure/chorus/nutrient_syphon/activate()
-	owner.add_to_resource(/datum/chorus_resource/growth_nutrients, 2)
+	owner.add_to_resource(/datum/chorus_resource/growth_nutrients, 1)
 	playsound(src, 'sound/machines/pump.ogg', 50, 1)
 	flick("growth_syphon_exert", src)
 

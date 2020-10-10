@@ -25,7 +25,19 @@
 		activate()
 		last_click = world.time
 
+/obj/structure/chorus/proc/has_resources(mob/living/carbon/alien/chorus/C, warning = TRUE)
+	if(!owner)
+		return FALSE
+	if(activation_cost_resource && !owner.has_enough_resource(activation_cost_resource, activation_cost_amount))
+		if(warning && C)
+			var/datum/chorus_resource/cr = activation_cost_resource
+			to_chat(C, SPAN_WARNING("You need more [initial(cr.name)] to activate \the [src]."))
+		return FALSE
+	return TRUE
+
 /obj/structure/chorus/proc/can_activate(var/mob/living/carbon/alien/chorus/C, var/warning = TRUE)
+	if(!owner)
+		return FALSE
 	if(last_click + click_cooldown < world.time && (!C || C.chorus_type == owner && get_dist(C, src) <= 1))
 		if(activation_cost_resource && !owner.use_resource(activation_cost_resource, activation_cost_amount))
 			if(warning && C)
