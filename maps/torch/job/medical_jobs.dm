@@ -9,7 +9,7 @@
 	spawn_positions = 2
 	supervisors = "the Chief Medical Officer"
 	selection_color = "#013d3b"
-	economic_power = 8
+	economic_power = 10
 	alt_titles = list(
 		"Surgeon")
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/senior
@@ -197,7 +197,7 @@
 	minimal_access = list()
 
 /datum/job/chemist/get_description_blurb()
-	return "You are a Laboratory Technician. You make medicine. You are not a doctor or medic, but have surface level knowledge in those fields. You should not be treating patients, but rather providing the the medicine to do so. You are subordinate to Physicians and Medical Techncians."	
+	return "You are a Laboratory Technician. You make medicine. You are not a doctor or medic, but have surface level knowledge in those fields. You should not be treating patients, but rather providing the the medicine to do so. You are subordinate to Physicians and Medical Techncians."
 
 /datum/job/psychiatrist
 	title = "Counselor"
@@ -213,7 +213,7 @@
 		"Psychiatrist",
 		"Psionic Counselor" = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/mentalist,
 		"Mentalist" = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/mentalist
-		
+
 	)
 
 	allowed_branches = list(

@@ -6,7 +6,7 @@
 	spawn_positions = 1
 	supervisors = "the Chief Engineer"
 	selection_color = "#5b4d20"
-	economic_power = 6
+	economic_power = 7
 	minimal_player_age = 3
 	minimum_character_age = list(SPECIES_HUMAN = 27)
 	ideal_character_age = 40
