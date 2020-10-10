@@ -1,4 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - tweak: "Salvage Gantry now has a unique 'encrypted' radio frequency that's not common. Headsets were added but no telecoms server to aid in using shortwaves with the `;` prefix. Intercoms next to salvage gantry helm controls now default to the hailing frequency."
