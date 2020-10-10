@@ -56,7 +56,7 @@
 /obj/item/clothing/suit/greatcoat
 	name = "great coat"
 	desc = "A heavy great coat."
-	icon_state = "nazi"
+	icon_state = "leathercoat"
 
 
 /obj/item/clothing/suit/johnny_coat
