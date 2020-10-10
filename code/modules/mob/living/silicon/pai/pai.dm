@@ -221,7 +221,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 
 	// Move us into the card and move the card to the ground.
 	stop_pulling()
-	resting = 0
+	resting = FALSE
 
 	// If we are being held, handle removing our holder from their inv.
 	var/obj/item/weapon/holder/H = loc
@@ -246,7 +246,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 /mob/living/silicon/pai/lay_down()
 	// Pass lying down or getting up to our pet human, if we're in a rig.
 	if(istype(loc,/obj/item/device/paicard))
-		resting = 0
+		resting = FALSE
 		var/obj/item/weapon/rig/rig = get_rig()
 		if(istype(rig))
 			rig.force_rest(src)

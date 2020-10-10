@@ -138,7 +138,7 @@
 	if (C.client)
 		C.client.perspective = EYE_PERSPECTIVE
 		C.client.eye = src
-	C.resting = 1
+	C.Weaken(5)
 	C.dropInto(loc)
 	src.add_fingerprint(user)
 	if(ishuman(C))

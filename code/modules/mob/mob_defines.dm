@@ -88,7 +88,7 @@
 	var/druggy = 0			//Carbon
 	var/confused = 0		//Carbon
 	var/sleeping = 0		//Carbon
-	var/resting = 0			//Carbon
+	var/resting = FALSE			//Carbon
 	var/lying = 0
 	var/lying_prev = 0
 
