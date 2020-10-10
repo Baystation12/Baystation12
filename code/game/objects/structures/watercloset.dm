@@ -543,7 +543,7 @@
 	anchored = 1
 	drainage = 0
 	clogged = -1
-	var/fill_level = FLUID_OVER_MOB_HEAD
+	var/fill_level = 500
 	var/open = FALSE
 
 /obj/structure/hygiene/faucet/attack_hand(mob/user)
