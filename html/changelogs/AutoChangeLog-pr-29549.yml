@@ -1,0 +1,5 @@
+author: "Shadowtail117"
+delete-after: True
+changes: 
+  - tweak: "It is now slightly harder to disarm or push someone over."
+  - rscadd: "Adrenaline, hyperzine, and synaptizine have a new effect: it is now more difficult to disarm someone amped up on them."
