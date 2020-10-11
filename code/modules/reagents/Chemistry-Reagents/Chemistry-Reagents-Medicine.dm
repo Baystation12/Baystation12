@@ -381,6 +381,7 @@
 	M.add_chemical_effect(CE_MIND, 2)
 	M.adjustToxLoss(5 * removed) // It used to be incredibly deadly due to an oversight. Not anymore!
 	M.add_chemical_effect(CE_PAINKILLER, 20)
+	M.add_chemical_effect(CE_STIMULANT, 10)
 
 /datum/reagent/dylovene/venaxilin
 	name = "Venaxilin"
@@ -501,6 +502,7 @@
 		M.emote(pick("twitch", "blink_r", "shiver"))
 	M.add_chemical_effect(CE_SPEEDBOOST, 1)
 	M.add_chemical_effect(CE_PULSE, 3)
+	M.add_chemical_effect(CE_STIMULANT, 4)
 
 /datum/reagent/ethylredoxrazine
 	name = "Ethylredoxrazine"
@@ -911,6 +913,7 @@
 	else if(M.chem_doses[type] < 1)
 		M.add_chemical_effect(CE_PAINKILLER, min(10*volume, 20))
 	M.add_chemical_effect(CE_PULSE, 2)
+	M.add_chemical_effect(CE_STIMULANT, 2)
 	if(M.chem_doses[type] > 10)
 		M.make_jittery(5)
 	if(volume >= 5 && M.is_asystole())

@@ -624,6 +624,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 
 	var/skill_mod = 10 * attacker.get_skill_difference(SKILL_COMBAT, target)
 	var/state_mod = attacker.melee_accuracy_mods() - target.melee_accuracy_mods()
+	var/stim_mod = target.chem_effects[CE_STIMULANT]
 	var/push_mod = min(max(1 + attacker.get_skill_difference(SKILL_COMBAT, target), 1), 3)
 	if(target.a_intent == I_HELP)
 		state_mod -= 30
@@ -633,8 +634,8 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		if(prob(hurt_prob) && I.on_disarm_attempt(target, attacker))
 			return
 
-	var/randn = rand(1, 100) - skill_mod + state_mod
-	if(!(check_no_slip(target)) && randn <= 25)
+	var/randn = rand(1, 100) - skill_mod + state_mod - stim_mod
+	if(!(check_no_slip(target)) && randn <= 20)
 		var/armor_check = 100 * target.get_blocked_ratio(affecting, BRUTE, damage = 20)
 		target.apply_effect(push_mod, WEAKEN, armor_check)
 		playsound(target.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
@@ -644,7 +645,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 			target.visible_message("<span class='warning'>[attacker] attempted to push [target]!</span>")
 		return
 
-	if(randn <= 60)
+	if(randn <= 50)
 		//See about breaking grips or pulls
 		if(target.break_all_grabs(attacker))
 			playsound(target.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
