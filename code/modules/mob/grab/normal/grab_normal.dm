@@ -47,7 +47,7 @@
 			affecting.Weaken(2)
 			affecting.visible_message("<span class='notice'>[assailant] pins [affecting] to the ground!</span>")
 
-			return 1
+			return TRUE
 		else
 			affecting.visible_message("<span class='notice'>[assailant] fails to pin [affecting] to the ground.</span>")
 			G.attacking = 0
@@ -78,7 +78,7 @@
 		O.jointlock(assailant)
 		assailant.visible_message("<span class='danger'>[affecting]'s [O.name] is twisted!</span>")
 		playsound(assailant.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-		return 1
+		return TRUE
 
 	else
 
@@ -111,7 +111,7 @@
 			O.dislocate(1)
 			assailant.visible_message("<span class='danger'>[affecting]'s [O.joint] [pick("gives way","caves in","crumbles","collapses")]!</span>")
 			playsound(assailant.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-			return 1
+			return TRUE
 
 		else
 
@@ -128,15 +128,14 @@
 
 /datum/grab/normal/resolve_openhand_attack(var/obj/item/grab/G)
 	if(G.assailant.a_intent != I_HELP)
-		if(G.target_zone == BP_HEAD)
-			if(G.assailant.zone_sel.selecting == BP_EYES)
-				if(attack_eye(G))
-					return 1
-			else
-				if(headbutt(G))
-					if(drop_headbutt)
-						let_go()
-					return 1
+		if(G.assailant.zone_sel.selecting == BP_HEAD)
+			if(headbutt(G))
+				if(drop_headbutt)
+					let_go()
+				return TRUE
+		else if(G.assailant.zone_sel.selecting == BP_EYES)
+			if(attack_eye(G))
+				return TRUE
 	return 0
 
 /datum/grab/normal/proc/attack_eye(var/obj/item/grab/G)
@@ -158,7 +157,7 @@
 	admin_attack_log(attacker, target, "Grab attacked the victim's eyes.", "Had their eyes grab attacked.", "attacked the eyes, using a grab action, of")
 
 	attack.handle_eye_attack(attacker, target)
-	return 1
+	return TRUE
 
 /datum/grab/normal/proc/headbutt(var/obj/item/grab/G)
 	var/mob/living/carbon/human/attacker = G.assailant
@@ -193,7 +192,7 @@
 	playsound(attacker.loc, "swing_hit", 25, 1, -1)
 
 	admin_attack_log(attacker, target, "Headbutted their victim.", "Was headbutted.", "headbutted")
-	return 1
+	return TRUE
 
 // Handles special targeting like eyes and mouth being covered.
 /datum/grab/normal/special_target_effect(var/obj/item/grab/G)
@@ -227,16 +226,14 @@
 			if(!G.affecting.has_eyes())
 				to_chat(G.assailant, "<span class='danger'>You cannot locate any eyes on [G.affecting]!</span>")
 				return 0
-	return 1
+	return TRUE
 
 /datum/grab/normal/resolve_item_attack(var/obj/item/grab/G, var/mob/living/carbon/human/user, var/obj/item/I)
-	switch(G.target_zone)
-		if(BP_HEAD)
+	switch(G.assailant.zone_sel.selecting)
+		if(BP_HEAD, BP_MOUTH)
 			return attack_throat(G, I, user)
 		else
-			return attack_tendons(G, I, user, G.target_zone)
-
-
+			return attack_tendons(G, I, user, G.assailant.zone_sel.selecting)
 
 /datum/grab/normal/proc/attack_throat(var/obj/item/grab/G, var/obj/item/W, var/mob/living/carbon/human/user)
 	var/mob/living/carbon/human/affecting = G.affecting
@@ -265,7 +262,7 @@
 
 	var/total_damage = 0
 	for(var/i in 1 to 3)
-		var/damage = min(W.force*1.5, 20)*damage_mod
+		var/damage = min(W.force*2.5, 30)*damage_mod
 		affecting.apply_damage(damage, W.damtype, BP_HEAD, damage_flags, armor_pen = 100, used_weapon=W)
 		total_damage += damage
 
@@ -279,7 +276,7 @@
 	G.last_action = world.time
 
 	admin_attack_log(user, affecting, "Knifed their victim", "Was knifed", "knifed")
-	return 1
+	return TRUE
 
 /datum/grab/normal/proc/attack_tendons(var/obj/item/grab/G, var/obj/item/W, var/mob/living/carbon/human/user, var/target_zone)
 	var/mob/living/carbon/human/affecting = G.affecting
@@ -293,7 +290,7 @@
 	if(!W.edge || !W.force || W.damtype != BRUTE)
 		return 0 //unsuitable weapon
 
-	var/obj/item/organ/external/O = G.get_targeted_organ()
+	var/obj/item/organ/external/O = affecting.get_organ(target_zone)
 	if(!O || O.is_stump() || !(O.limb_flags & ORGAN_FLAG_HAS_TENDON) || (O.status & ORGAN_TENDON_CUT))
 		return FALSE
 
@@ -311,4 +308,4 @@
 	if(W.hitsound) playsound(affecting.loc, W.hitsound, 50, 1, -1)
 	G.last_action = world.time
 	admin_attack_log(user, affecting, "hamstrung their victim", "was hamstrung", "hamstrung")
-	return 1
+	return TRUE
