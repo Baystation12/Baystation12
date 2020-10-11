@@ -1848,6 +1848,7 @@
 #include "code\modules\halo\mobs\converter.dm"
 #include "code\modules\halo\mobs\elevation_handling.dm"
 #include "code\modules\halo\mobs\faction_builders.dm"
+#include "code\modules\halo\mobs\grenade_throwing.dm"
 #include "code\modules\halo\mobs\hostile.dm"
 #include "code\modules\halo\mobs\human_movement_delay.dm"
 #include "code\modules\halo\mobs\movement_sfx.dm"

@@ -5,7 +5,6 @@
 	var/grenade_delay = 20 SECONDS //Delays between nade priming
 	var/list/possible_grenades = list()
 
-
 /mob/living/simple_animal/hostile/proc/throw_nade(var/atom/attacked)
 	var/turf/atk_trf = get_turf(attacked)
 	var/turf/spawn_turf = get_step(loc,get_dir(loc,atk_trf))
