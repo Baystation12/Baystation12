@@ -11,7 +11,7 @@
 	possible_weapons = list(/obj/item/weapon/gun/projectile/m6d_magnum/npc)
 	var/obj/item/device/flashlight/held_light
 	species_name = "Human"
-	possible_grenades = list(/obj/item/weapon/grenade/frag/m9_hedp)
+	possible_grenades = list(/obj/item/weapon/grenade/frag/m9_hedp,/obj/item/weapon/grenade/smokebomb)
 
 /mob/living/simple_animal/hostile/unsc/New()
 	. = ..()
@@ -36,6 +36,7 @@
 	icon_dead = "dead_marine"
 	resistance = 5
 	combat_tier = 2
+	see_in_dark = 7
 	possible_weapons = list(/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/gun/projectile/ma5b_ar)
 
 /mob/living/simple_animal/hostile/unsc/odst
