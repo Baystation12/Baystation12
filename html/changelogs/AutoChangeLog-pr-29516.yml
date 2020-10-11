@@ -1,5 +1,0 @@
-author: "MrKicker"
-delete-after: True
-changes: 
-  - tweak: "Breach detection pressures on air alarms can now be adjusted."
-  - tweak: "Breach detection is now more forgiving, allowing rooms to recover."

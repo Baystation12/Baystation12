@@ -1,5 +1,0 @@
-author: "Shadowtail117"
-delete-after: True
-changes: 
-  - rscadd: "Added chat markup. Surrounding something in /forward slashes/ when sending an (L)OOC message or a \"say\" or \"me\" message will italicize it. Credit to Aurora for some of the code used."
-  - admin: "Added a config setting, ALLOW_CHAT_MARKUP. This must be present in config.txt to enable chat markup."
