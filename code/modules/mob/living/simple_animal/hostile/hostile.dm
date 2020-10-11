@@ -13,11 +13,6 @@
 	var/projectiletype
 	var/projectilesound
 
-	var/primed_grenade = 0 //If set to 1, we will throw a grenade next time we attack.
-	var/next_grenade_at = 0 //WE cannot prime a nade again until this time.
-	var/grenade_delay = 10 SECONDS //Delays between nade priming
-	var/list/possible_grenades = list()
-
 	var/list/attack_sfx = list()
 	var/obj/item/ammo_casing/casingtype
 	var/attack_delay = DEFAULT_ATTACK_COOLDOWN
