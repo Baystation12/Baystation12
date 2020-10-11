@@ -247,6 +247,21 @@
 		characters += character
 	return JOINTEXT(characters)
 
+GLOBAL_LIST_INIT(markup_tags, list("/" = list("<i>", "</i>")))
+GLOBAL_LIST_INIT(markup_regex, list("/" = new /regex("((\\W|^)\\/)(\[^\\/\]*)(\\/(\\W|$))", "g")))
+
+//Take the regex expressions and tags in the above two lists and apply them to message. Any tags in ignore will not be regexed (they will remain in the string).
+/proc/process_chat_markup(message, list/ignore)
+	if(!config.allow_chat_markup || !message)
+		return message
+
+	for(var/tag in GLOB.markup_tags)
+		if (ignore?.Find(tag))
+			continue
+		var/regex/markup = GLOB.markup_regex[tag]
+		message = markup.Replace(message, "$2[GLOB.markup_tags[tag][1]]$3[GLOB.markup_tags[tag][2]]$5")
+		
+	return message
 
 //Returns a string with reserved characters and spaces before the first letter removed
 /proc/trim_left(text)

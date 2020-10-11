@@ -21,6 +21,7 @@ var/list/gamemode_cache = list()
 	var/log_world_output = 0			// log world.log to game log
 	var/allow_admin_ooccolor = 0		// Allows admins with relevant permissions to have their own ooc colour
 	var/allow_vote_restart = 0 			// allow votes to restart
+	var/allow_chat_markup = 0			// allow markup tags to be applied in chat
 	var/ert_admin_call_only = 0
 	var/allow_vote_mode = 0				// allow votes to change mode
 	var/allow_admin_jump = 1			// allows admin jumping
@@ -332,6 +333,9 @@ var/list/gamemode_cache = list()
 
 				if ("allow_vote_mode")
 					config.allow_vote_mode = 1
+
+				if ("allow_chat_markup")
+					config.allow_chat_markup = 1
 
 				if ("allow_admin_jump")
 					config.allow_admin_jump = 1
