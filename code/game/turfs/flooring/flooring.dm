@@ -402,4 +402,4 @@
 	floor_smooth = SMOOTH_NONE
 	wall_smooth = SMOOTH_NONE
 	space_smooth = SMOOTH_NONE
-	height = -FLUID_OVER_MOB_HEAD
+	height = -FLUID_OVER_MOB_HEAD * 2
