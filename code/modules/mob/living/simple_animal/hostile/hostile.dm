@@ -223,17 +223,6 @@
 				stance = HOSTILE_STANCE_IDLE
 		return o
 
-/mob/living/simple_animal/hostile/proc/throw_nade(var/atom/attacked)
-	var/turf/atk_trf = get_turf(attacked)
-	var/turf/spawn_turf = get_step(loc,get_dir(loc,atk_trf))
-	primed_grenade = 0
-	var/nadetype = pick(possible_grenades)
-	var/obj/item/weapon/grenade/nade = new nadetype (spawn_turf)
-	visible_message("<span class = 'danger'>[src] throws [nade]!</span>")
-	nade.activate(src)
-	nade.det_time = max(10,nade.det_time-10)
-	nade.throw_at(atk_trf, nade.throw_range, nade.throw_speed, src)
-
 /mob/living/simple_animal/hostile/RangedAttack(var/atom/attacked)
 	var/obj/vehicles/v = loc
 	if(istype(v))
@@ -270,12 +259,6 @@
 	if(using_vehicle_gun && !v.guns_disabled)
 		fire_delay_use = using_vehicle_gun.fire_delay
 	setClickCooldown(fire_delay_use)
-	if(primed_grenade)
-		throw_nade(target)
-	if(possible_grenades.len > 0 && world.time >= next_grenade_at)
-		primed_grenade = 1
-		next_grenade_at = world.time + grenade_delay
-		visible_message("<span class = 'warning'>[src] gets ready to throw a grenade!</span>")
 
 /mob/living/simple_animal/hostile/proc/LoseTarget()
 	stance = HOSTILE_STANCE_IDLE

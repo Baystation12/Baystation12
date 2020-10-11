@@ -67,6 +67,9 @@
 		slot_r_hand_str = null,
 		)
 
+/obj/item/clothing/suit/armor/special/odst/New()
+	. = ..()
+	slowdown_per_slot[slot_wear_suit] = -0.1 //A slight speed boost for those wearing odst armour.
 
 /obj/item/clothing/shoes/magboots/odst
 	name = "ODST Magboots"

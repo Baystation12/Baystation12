@@ -20,7 +20,7 @@
 /mob/living/simple_animal/hostile/RangedAttack(var/atom/attacked)
 	. = ..()
 	if(primed_grenade)
-		throw_nade(target)
+		throw_nade(attacked)
 	if(possible_grenades.len > 0 && world.time >= next_grenade_at)
 		primed_grenade = 1
 		next_grenade_at = world.time + grenade_delay
