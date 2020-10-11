@@ -1,0 +1,4 @@
+author: "Hubblenaut"
+delete-after: True
+changes: 
+  - tweak: "Increases the chance of vermin appearing in random maintenance closets."
