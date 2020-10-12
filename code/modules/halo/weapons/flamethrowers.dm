@@ -61,17 +61,9 @@
 
 /obj/item/projectile/bullet/fire/on_impact(var/atom/impacted)
 	..()
-	var/do_fire = 0
-	var/impacted_loc = impacted
-	if(!ismob(impacted_loc))
-		if(isturf(impacted_loc))
-			do_fire = 1
-		else
-			impacted_loc = impacted.loc
-			if(isturf(impacted_loc))
-				do_fire = 1
-	if(do_fire)
-		new /obj/effect/decal/cleanable/liquid_fuel/flamethrower_fuel(impacted_loc)
+	var/impacted_loc = loc
+	if(!ismob(loc))
+		new /obj/effect/decal/cleanable/liquid_fuel/flamethrower_fuel(loc)
 		new /obj/effect/fire(impacted_loc)
 
 /obj/item/ammo_magazine/na4_tank

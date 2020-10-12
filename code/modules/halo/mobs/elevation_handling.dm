@@ -1,9 +1,9 @@
-#define FLIGHT_DODGE_DIVISOR 3
+#define FLIGHT_DODGE_DIVISOR 8
 #define FLIGHT_DODGE_MESSAGE_CHANCE 33
 
 /mob/living/CanPass(atom/movable/mover, turf/start, height=0, air_group=0)
 	. = ..()
-	if(!.)
+	if(.)
 		if(flight_ticks_remain > 0)
 			var/obj/item/mover_obj = mover
 			if(istype(mover_obj))
