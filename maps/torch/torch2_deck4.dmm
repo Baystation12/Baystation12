@@ -3,15 +3,21 @@
 /turf/space,
 /area/space)
 "ac" = (
-/obj/effect/shuttle_landmark/skipjack/deck4,
+/obj/effect/shuttle_landmark/skipjack/deck5{
+	name = "4th Deck, Aft Starboard"
+	},
 /turf/space,
 /area/space)
 "ad" = (
-/obj/effect/shuttle_landmark/torch/deck1/guppy,
+/obj/effect/shuttle_landmark/torch/deck5/guppy{
+	name = "4th Deck, Starboard"
+	},
 /turf/space,
 /area/space)
 "ae" = (
-/obj/effect/shuttle_landmark/merc/deck4,
+/obj/effect/shuttle_landmark/merc/deck5{
+	name = "4th Deck, Fore Starboard"
+	},
 /turf/space,
 /area/space)
 "af" = (
@@ -342,7 +348,9 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/hallway/primary/fourthdeck/aft)
 "bn" = (
-/obj/effect/shuttle_landmark/torch/deck1/exploration_shuttle,
+/obj/effect/shuttle_landmark/torch/deck5/aquila{
+	name = "4th Deck, Aft"
+	},
 /turf/space,
 /area/space)
 "bo" = (
@@ -1337,6 +1345,13 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/forestarboard)
+"ew" = (
+/obj/structure/sign/warning/airlock{
+	dir = 4;
+	icon_state = "doors"
+	},
+/turf/simulated/wall/r_wall/hull,
+/area/eva)
 "ex" = (
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/manifold/hidden,
@@ -2880,6 +2895,12 @@
 	id_tag = "eva_pump"
 	},
 /obj/effect/floor_decal/techfloor,
+/obj/machinery/airlock_sensor{
+	frequency = 1380;
+	id_tag = "eva_sensor";
+	pixel_x = 0;
+	pixel_y = -25
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/eva)
 "kc" = (
@@ -3064,9 +3085,19 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/hallway/primary/fourthdeck/aft)
 "kP" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden{
-	dir = 8;
-	icon_state = "map"
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	dir = 2;
+	id_tag = "eva_pump"
+	},
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/machinery/oxygen_pump{
+	pixel_y = 32
+	},
+/obj/effect/floor_decal/techfloor{
+	dir = 1;
+	icon_state = "techfloor_edges"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/eva)
@@ -3173,6 +3204,36 @@
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/storage/auxillary/starboard)
+"lc" = (
+/obj/structure/table/rack{
+	dir = 8
+	},
+/obj/item/stack/material/glass/reinforced{
+	amount = 50
+	},
+/obj/item/stack/material/glass/reinforced{
+	amount = 50
+	},
+/obj/item/stack/material/glass{
+	amount = 50
+	},
+/obj/item/stack/material/glass{
+	amount = 50
+	},
+/obj/item/stack/material/glass{
+	amount = 50
+	},
+/obj/machinery/camera/network/command{
+	c_tag = "EVA - Center";
+	dir = 4
+	},
+/obj/machinery/firealarm{
+	dir = 8;
+	pixel_x = -24;
+	pixel_y = 6
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/eva)
 "ld" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -3349,6 +3410,12 @@
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fourthdeck/aft)
 "lU" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/machinery/oxygen_pump{
+	pixel_y = 32
+	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 2;
 	id_tag = "eva_pump"
@@ -3356,17 +3423,6 @@
 /obj/effect/floor_decal/techfloor{
 	dir = 1;
 	icon_state = "techfloor_edges"
-	},
-/obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1380;
-	id_tag = "eva_airlock";
-	name = "EVA Airlock Console";
-	pixel_y = 24;
-	req_access = list("ACCESS_EVA");
-	tag_airpump = "eva_pump";
-	tag_chamber_sensor = "eva_sensor";
-	tag_exterior_door = "eva_outer";
-	tag_interior_door = "eva_inner"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/eva)
@@ -4704,41 +4760,23 @@
 /turf/simulated/floor/crystal,
 /area/crew_quarters/adherent)
 "qJ" = (
-/obj/structure/sign/warning/airlock{
-	dir = 4;
-	icon_state = "doors"
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	dir = 1;
+	id_tag = "eva_pump"
 	},
-/turf/simulated/wall/r_wall/hull,
+/obj/effect/floor_decal/techfloor,
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/eva)
 "qQ" = (
-/obj/structure/table/rack{
-	dir = 8
+/obj/machinery/door/airlock/external{
+	frequency = 1380;
+	icon_state = "closed";
+	id_tag = "eva_outer";
+	locked = 1;
+	name = "EVA External Access"
 	},
-/obj/item/stack/material/glass/reinforced{
-	amount = 50
-	},
-/obj/item/stack/material/glass/reinforced{
-	amount = 50
-	},
-/obj/item/stack/material/glass{
-	amount = 50
-	},
-/obj/item/stack/material/glass{
-	amount = 50
-	},
-/obj/item/stack/material/glass{
-	amount = 50
-	},
-/obj/machinery/camera/network/command{
-	c_tag = "EVA - Center";
-	dir = 4
-	},
-/obj/machinery/firealarm{
-	dir = 8;
-	pixel_x = -24;
-	pixel_y = 6
-	},
-/turf/simulated/floor/tiled/monotile,
+/obj/effect/shuttle_landmark/scavver_gantry/torch/two,
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/eva)
 "qR" = (
 /turf/simulated/floor/tiled,
@@ -5068,20 +5106,6 @@
 /turf/simulated/floor/tiled,
 /area/quartermaster/storage/upper)
 "sk" = (
-/obj/machinery/door/airlock/external{
-	frequency = 1380;
-	icon_state = "closed";
-	id_tag = "eva_inner";
-	locked = 1;
-	name = "EVA Internal Access"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 4;
-	icon_state = "intact"
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/eva)
-"sl" = (
 /obj/machinery/access_button{
 	command = "cycle_interior";
 	frequency = 1380;
@@ -5091,13 +5115,19 @@
 	pixel_y = 24;
 	req_access = list("ACCESS_EVA")
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/eva)
+"sl" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden{
 	dir = 1;
 	icon_state = "map"
 	},
 /obj/machinery/hologram/holopad,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled/monotile,
+/turf/simulated/floor/tiled,
 /area/eva)
 "sm" = (
 /obj/machinery/atmospherics/binary/pump/on{
@@ -5799,35 +5829,14 @@
 /obj/effect/catwalk_plated,
 /turf/simulated/floor/plating,
 /area/hallway/primary/fourthdeck/aft)
-"tL" = (
-/obj/effect/shuttle_landmark/torch/deck1/aquila,
-/turf/space,
-/area/space)
 "tO" = (
-/obj/structure/table/rack{
-	dir = 8
-	},
-/obj/item/weapon/storage/briefcase/inflatable{
-	pixel_x = 3;
-	pixel_y = 6
-	},
-/obj/item/weapon/storage/briefcase/inflatable{
-	pixel_y = 3
-	},
-/obj/item/weapon/storage/briefcase/inflatable{
-	pixel_x = -3
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
-/obj/machinery/power/apc{
-	dir = 8;
-	name = "west bump";
-	pixel_x = -24
-	},
 /obj/structure/cable/green{
-	d2 = 4;
-	icon_state = "0-4"
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled/monotile,
+/turf/simulated/floor/tiled,
 /area/eva)
 "tP" = (
 /obj/structure/cable/green{
@@ -6642,6 +6651,31 @@
 "vK" = (
 /turf/simulated/wall/prepainted,
 /area/quartermaster/deckchief)
+"vO" = (
+/obj/structure/table/rack{
+	dir = 8
+	},
+/obj/item/weapon/storage/briefcase/inflatable{
+	pixel_x = 3;
+	pixel_y = 6
+	},
+/obj/item/weapon/storage/briefcase/inflatable{
+	pixel_y = 3
+	},
+/obj/item/weapon/storage/briefcase/inflatable{
+	pixel_x = -3
+	},
+/obj/machinery/power/apc{
+	dir = 8;
+	name = "west bump";
+	pixel_x = -24
+	},
+/obj/structure/cable/green{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/eva)
 "vQ" = (
 /turf/simulated/wall/prepainted,
 /area/quartermaster/office)
@@ -6791,10 +6825,6 @@
 	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled/monotile,
-/area/eva)
-"wB" = (
-/obj/effect/wallframe_spawn/no_grille,
-/turf/simulated/wall/prepainted,
 /area/eva)
 "wC" = (
 /obj/structure/cable/green{
@@ -6984,14 +7014,10 @@
 /turf/simulated/floor/reinforced/airless,
 /area/maintenance/fourthdeck/aft)
 "xb" = (
-/obj/machinery/door/airlock/external{
-	frequency = 1380;
-	icon_state = "closed";
-	id_tag = "eva_outer";
-	locked = 1;
-	name = "EVA External Access"
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 8;
+	icon_state = "map"
 	},
-/obj/effect/shuttle_landmark/scavver_gantry/torch/two,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/eva)
 "xi" = (
@@ -7894,15 +7920,20 @@
 	dir = 2;
 	id_tag = "eva_pump"
 	},
-/obj/machinery/light{
-	dir = 1
-	},
-/obj/machinery/oxygen_pump{
-	pixel_y = 32
-	},
 /obj/effect/floor_decal/techfloor{
 	dir = 1;
 	icon_state = "techfloor_edges"
+	},
+/obj/machinery/embedded_controller/radio/airlock/airlock_controller{
+	frequency = 1380;
+	id_tag = "eva_airlock";
+	name = "EVA Airlock Console";
+	pixel_y = 24;
+	req_access = list("ACCESS_EVA");
+	tag_airpump = "eva_pump";
+	tag_chamber_sensor = "eva_sensor";
+	tag_exterior_door = "eva_outer";
+	tag_interior_door = "eva_inner"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/eva)
@@ -9505,10 +9536,6 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod8/station)
-"GA" = (
-/obj/effect/shuttle_landmark/ninja/deck1,
-/turf/space,
-/area/space)
 "GB" = (
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
@@ -10251,17 +10278,15 @@
 /turf/simulated/floor/reinforced,
 /area/maintenance/fourthdeck/aft)
 "Jn" = (
+/obj/item/device/radio/intercom{
+	dir = 1;
+	pixel_y = -28
+	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 1;
 	id_tag = "eva_pump"
 	},
 /obj/effect/floor_decal/techfloor,
-/obj/machinery/airlock_sensor{
-	frequency = 1380;
-	id_tag = "eva_sensor";
-	pixel_x = 0;
-	pixel_y = -25
-	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/eva)
 "Jo" = (
@@ -10599,7 +10624,9 @@
 /turf/space,
 /area/space)
 "Kp" = (
-/obj/effect/shuttle_landmark/ert/deck1,
+/obj/effect/shuttle_landmark/ert/deck5{
+	name = "4th Deck, Fore Port"
+	},
 /turf/space,
 /area/space)
 "Kq" = (
@@ -11017,15 +11044,17 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/fourthdeck/port)
 "LD" = (
-/obj/item/device/radio/intercom{
-	dir = 1;
-	pixel_y = -28
+/obj/machinery/door/airlock/external{
+	frequency = 1380;
+	icon_state = "closed";
+	id_tag = "eva_inner";
+	locked = 1;
+	name = "EVA Internal Access"
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
-	dir = 1;
-	id_tag = "eva_pump"
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4;
+	icon_state = "intact"
 	},
-/obj/effect/floor_decal/techfloor,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/eva)
 "LG" = (
@@ -12763,22 +12792,11 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/command/captainmess)
 "QB" = (
-/obj/machinery/light{
-	dir = 1
+/obj/effect/shuttle_landmark/ninja/deck5{
+	name = "4th Deck, Fore Dock"
 	},
-/obj/machinery/oxygen_pump{
-	pixel_y = 32
-	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
-	dir = 2;
-	id_tag = "eva_pump"
-	},
-/obj/effect/floor_decal/techfloor{
-	dir = 1;
-	icon_state = "techfloor_edges"
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/eva)
+/turf/space,
+/area/space)
 "QC" = (
 /obj/effect/floor_decal/corner/brown{
 	dir = 10
@@ -21096,7 +21114,7 @@ aa
 aa
 aa
 aa
-GA
+aa
 aa
 aa
 aa
@@ -23510,7 +23528,7 @@ aa
 aa
 aa
 aa
-aa
+QB
 aa
 aa
 aa
@@ -24719,11 +24737,11 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-aa
+zj
+zj
+qQ
+ew
+zj
 aa
 aa
 aa
@@ -24915,14 +24933,14 @@ aa
 aa
 aa
 aa
-zj
+aa
 zj
 Mc
 zj
 zj
 zj
 zj
-zj
+kP
 xb
 qJ
 zj
@@ -24931,7 +24949,7 @@ zj
 zj
 Mc
 zj
-zj
+aa
 aa
 aa
 aa
@@ -25123,11 +25141,11 @@ zj
 tJ
 gf
 Od
-Dd
+zj
 Am
-kP
+oK
 ka
-Dd
+zj
 pl
 LT
 JD
@@ -25325,11 +25343,11 @@ Yb
 HS
 HS
 os
-Dd
+zj
 lU
 oK
 Jn
-Dd
+zj
 wx
 Iw
 Ci
@@ -25527,11 +25545,11 @@ Kk
 tH
 kc
 gx
-Dd
-QB
-oK
+zj
+zj
 LD
-Dd
+zj
+zj
 Ea
 VI
 ut
@@ -25730,9 +25748,9 @@ Dd
 Dd
 Rp
 Dd
-Dd
+lc
 sk
-Dd
+vO
 Dd
 SZ
 Dd
@@ -25932,7 +25950,7 @@ Pq
 ng
 fX
 SH
-qQ
+qR
 sl
 tO
 Fj
@@ -26744,7 +26762,7 @@ ng
 so
 ng
 ng
-wB
+ng
 Dd
 Dd
 Dd
@@ -44270,7 +44288,7 @@ aa
 aa
 aa
 aa
-ac
+aa
 aa
 aa
 aa
@@ -45689,7 +45707,7 @@ aa
 aa
 aa
 aa
-aa
+ac
 aa
 aa
 aa
@@ -47326,7 +47344,7 @@ aa
 aa
 aa
 aa
-bn
+aa
 aa
 aa
 aa
@@ -48745,7 +48763,7 @@ aa
 aa
 aa
 aa
-aa
+bn
 aa
 aa
 aa
@@ -52191,7 +52209,7 @@ aa
 aa
 aa
 aa
-tL
+aa
 aa
 aa
 aa

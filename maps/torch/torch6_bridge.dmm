@@ -3574,6 +3574,12 @@
 /obj/effect/floor_decal/corner/research,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
+"gl" = (
+/obj/effect/shuttle_landmark/torch/deck1/exploration_shuttle{
+	name = "B-Deck, Fore Port"
+	},
+/turf/space,
+/area/space)
 "gm" = (
 /turf/unsimulated/mask,
 /area/hallway/primary/bridge/aft)
@@ -10023,16 +10029,16 @@
 	},
 /turf/simulated/open,
 /area/maintenance/bridge/aftport)
-"yz" = (
-/obj/effect/shuttle_landmark/torch/deck5/exploration_shuttle,
-/turf/space,
-/area/space)
 "yA" = (
-/obj/effect/shuttle_landmark/skipjack/deck5,
+/obj/effect/shuttle_landmark/skipjack/deck1{
+	name = "B-Deck, Port"
+	},
 /turf/space,
 /area/space)
 "yB" = (
-/obj/effect/shuttle_landmark/ninja/deck5,
+/obj/effect/shuttle_landmark/torch/deck1/guppy{
+	name = "B-Deck, Aft Starboard"
+	},
 /turf/space,
 /area/space)
 "yD" = (
@@ -10095,7 +10101,9 @@
 /turf/simulated/floor/carpet,
 /area/crew_quarters/heads/office/xo)
 "zb" = (
-/obj/effect/shuttle_landmark/torch/deck5/guppy,
+/obj/effect/shuttle_landmark/merc/deck1{
+	name = "B-Deck, Aft"
+	},
 /turf/space,
 /area/space)
 "zc" = (
@@ -10346,7 +10354,9 @@
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/bridge/fore)
 "Ab" = (
-/obj/effect/shuttle_landmark/merc/deck5,
+/obj/effect/shuttle_landmark/ninja/deck1{
+	name = "B-Deck, Aft Port"
+	},
 /turf/space,
 /area/space)
 "Ac" = (
@@ -10826,7 +10836,9 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
 "Cb" = (
-/obj/effect/shuttle_landmark/torch/deck5/aquila,
+/obj/effect/shuttle_landmark/torch/deck1/aquila{
+	name = "B-Deck, Fore Starboard"
+	},
 /turf/space,
 /area/space)
 "Cc" = (
@@ -15181,7 +15193,9 @@
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/bridge/fore)
 "UU" = (
-/obj/effect/shuttle_landmark/ert/deck5,
+/obj/effect/shuttle_landmark/ert/deck1{
+	name = "B-Deck, Fore"
+	},
 /turf/space,
 /area/space)
 "UW" = (
@@ -21327,7 +21341,7 @@ aa
 aa
 aa
 aa
-aa
+gl
 aa
 aa
 aa
@@ -22339,7 +22353,7 @@ aa
 aa
 aa
 aa
-yz
+aa
 aa
 aa
 aa
@@ -42347,7 +42361,7 @@ aa
 aa
 aa
 aa
-yB
+aa
 aa
 aa
 aa
@@ -42460,7 +42474,7 @@ aa
 aa
 aa
 aa
-aa
+yB
 aa
 aa
 aa
@@ -43873,7 +43887,6 @@ aa
 aa
 aa
 aa
-zb
 aa
 aa
 aa
@@ -43886,44 +43899,6 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-aa
-aa
-aa
-aa
-aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
 aa
 aa
 aa
@@ -43944,10 +43919,49 @@ aa
 aa
 aa
 aa
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
 aa
 aa
 aa
 aa
+aa
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+Ab
 aa
 aa
 aa
@@ -47346,7 +47360,7 @@ aa
 aa
 aa
 aa
-aa
+zb
 aa
 aa
 aa
@@ -50174,7 +50188,7 @@ aa
 aa
 aa
 aa
-Ab
+aa
 aa
 aa
 aa

@@ -12544,7 +12544,9 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
 "EN" = (
-/obj/effect/shuttle_landmark/merc/hanger,
+/obj/effect/shuttle_landmark/merc/hanger{
+	name = "5th Deck, Aft Starboard"
+	},
 /turf/space,
 /area/space)
 "ER" = (
@@ -12681,7 +12683,9 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/fifthdeck/aftstarboard)
 "FS" = (
-/obj/effect/shuttle_landmark/skipjack/hanger,
+/obj/effect/shuttle_landmark/skipjack/hanger{
+	name = "5th Deck, Starboard"
+	},
 /turf/space,
 /area/space)
 "FU" = (
@@ -13585,7 +13589,9 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/cargo)
 "IW" = (
-/obj/effect/shuttle_landmark/ert/hanger,
+/obj/effect/shuttle_landmark/ert/hanger{
+	name = "5th Deck, Aft Port"
+	},
 /turf/space,
 /area/space)
 "IY" = (
@@ -17133,7 +17139,9 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftport)
 "Wb" = (
-/obj/effect/shuttle_landmark/ninja/hanger,
+/obj/effect/shuttle_landmark/ninja/hanger{
+	name = "5th Deck, Fore"
+	},
 /turf/space,
 /area/space)
 "Wg" = (

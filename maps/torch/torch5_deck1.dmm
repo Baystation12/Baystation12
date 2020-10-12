@@ -3,15 +3,21 @@
 /turf/space,
 /area/space)
 "aab" = (
-/obj/effect/shuttle_landmark/torch/deck4/aquila,
+/obj/effect/shuttle_landmark/merc/deck2{
+	name = "1st Deck, Aft Starboard"
+	},
 /turf/space,
 /area/space)
 "aac" = (
-/obj/effect/shuttle_landmark/merc/deck1,
+/obj/effect/shuttle_landmark/torch/deck2/exploration_shuttle{
+	name = "1st Deck, Fore Starboard"
+	},
 /turf/space,
 /area/space)
 "aad" = (
-/obj/effect/shuttle_landmark/torch/deck4/exploration_shuttle,
+/obj/effect/shuttle_landmark/torch/deck2/guppy{
+	name = "1st Deck, Aft"
+	},
 /turf/space,
 /area/space)
 "aae" = (
@@ -109,7 +115,9 @@
 /turf/simulated/floor/reinforced/airless,
 /area/engineering/fuelbay/aux)
 "aar" = (
-/obj/effect/shuttle_landmark/skipjack/deck1,
+/obj/effect/shuttle_landmark/skipjack/deck2{
+	name = "1st Deck, Fore"
+	},
 /turf/space,
 /area/space)
 "aas" = (
@@ -8491,7 +8499,9 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/command/armoury/access)
 "azV" = (
-/obj/effect/shuttle_landmark/torch/deck4/guppy,
+/obj/effect/shuttle_landmark/ert/deck2{
+	name = "1st Deck, Fore Port"
+	},
 /turf/space,
 /area/space)
 "aAb" = (
@@ -14547,11 +14557,15 @@
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology)
 "aWn" = (
-/obj/effect/shuttle_landmark/ert/deck4,
+/obj/effect/shuttle_landmark/ninja/deck2{
+	name = "1st Deck, Aft Port"
+	},
 /turf/space,
 /area/space)
 "aWo" = (
-/obj/effect/shuttle_landmark/ninja/deck4,
+/obj/effect/shuttle_landmark/torch/deck2/aquila{
+	name = "1st Deck, Port"
+	},
 /turf/space,
 /area/space)
 "aXb" = (
@@ -35040,7 +35054,7 @@ aaa
 aaa
 aaa
 aaa
-aaa
+aar
 aaa
 aaa
 aaa
@@ -35816,7 +35830,7 @@ aaa
 aaa
 aaa
 aaa
-aar
+aaa
 aaa
 aaa
 aaa
@@ -36691,7 +36705,7 @@ aaa
 aaa
 aaa
 aaa
-aWn
+aaa
 aaa
 aaa
 aaa
@@ -38717,7 +38731,7 @@ aaa
 aaa
 aaa
 aaa
-aaa
+azV
 aaa
 aaa
 aaa
@@ -39843,7 +39857,7 @@ aaa
 aaa
 aaa
 aaa
-aaa
+aac
 aaa
 aaa
 aaa
@@ -44288,7 +44302,7 @@ aaa
 aaa
 aaa
 aaa
-aad
+aaa
 aaa
 aaa
 aaa
@@ -45990,7 +46004,7 @@ aaa
 aaa
 aaa
 aaa
-aWo
+aaa
 aaa
 aaa
 aaa
@@ -47610,7 +47624,7 @@ aaa
 aaa
 aaa
 aaa
-aaa
+aWo
 aaa
 aaa
 aaa
@@ -50338,7 +50352,7 @@ aaa
 aaa
 aaa
 aaa
-aab
+aaa
 aaa
 aaa
 aaa
@@ -59321,7 +59335,7 @@ aaa
 aaa
 aaa
 aaa
-aaa
+aWn
 aaa
 aaa
 aaa
@@ -59638,7 +59652,7 @@ aaa
 aaa
 aaa
 aaa
-aaa
+aab
 aaa
 aaa
 aaa
@@ -61859,7 +61873,7 @@ aaa
 aaa
 aaa
 aaa
-aac
+aaa
 aaa
 aaa
 aaa
@@ -63116,7 +63130,7 @@ aaa
 aaa
 aaa
 aaa
-aaa
+aad
 aaa
 aaa
 aaa
@@ -64330,7 +64344,7 @@ aaa
 aaa
 aaa
 aaa
-azV
+aaa
 aaa
 aaa
 aaa
