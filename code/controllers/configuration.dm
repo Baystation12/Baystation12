@@ -21,7 +21,6 @@ var/list/gamemode_cache = list()
 	var/log_world_output = 0			// log world.log to game log
 	var/allow_admin_ooccolor = 0		// Allows admins with relevant permissions to have their own ooc colour
 	var/allow_vote_restart = 0 			// allow votes to restart
-	var/allow_chat_markup = 0			// allow markup tags to be applied in chat
 	var/ert_admin_call_only = 0
 	var/allow_vote_mode = 0				// allow votes to change mode
 	var/allow_admin_jump = 1			// allows admin jumping
@@ -85,6 +84,8 @@ var/list/gamemode_cache = list()
 	var/forumurl
 	var/githuburl
 	var/issuereporturl
+
+	var/list/chat_markup
 
 	var/forbidden_message_regex
 	var/forbidden_message_warning = "<B>Your message matched a filter and has not been sent.</B>"
@@ -334,9 +335,6 @@ var/list/gamemode_cache = list()
 
 				if ("allow_vote_mode")
 					config.allow_vote_mode = 1
-
-				if ("allow_chat_markup")
-					config.allow_chat_markup = 1
 
 				if ("allow_admin_jump")
 					config.allow_admin_jump = 1
@@ -681,16 +679,21 @@ var/list/gamemode_cache = list()
 				if ("act_interval")
 					config.act_interval = text2num(value) SECONDS
 
+				if ("chat_markup")
+					var/list/line = splittext(value, ";")
+					if (length(line) != 3)
+						log_error("Invalid chat_markup entry length: [value]")
+					else
+						var/matcher = text2regex(line[1])
+						if (!matcher)
+							log_error("Invalid chat_markup regex: [value]")
+						else
+							LAZYADD(config.chat_markup, list(list(matcher, line[2], line[3])))
+
 				if ("forbidden_message_regex")
-					var/end = findlasttext(value, "/")
-					if (length(value) < 3 || value[1] != "/" || end < 3)
-						log_error("Invalid regex '[value]' supplied to '[name]'")
-					var/matcher = copytext(value, 2, end)
-					var/flags = end == length(value) ? FALSE : copytext(value, end + 1)
-					try
-						config.forbidden_message_regex = flags ? regex(matcher, flags) : regex(matcher)
-					catch(var/exception/ex)
-						log_error("Invalid regex '[value]' supplied to '[name]': [ex]")
+					config.forbidden_message_regex = text2regex(value)
+					if (!config.forbidden_message_regex)
+						log_error("Invalid forbidden_message_regex - failed to parse.")
 
 				if ("forbidden_message_warning")
 					config.forbidden_message_warning = length(value) ? value : FALSE
