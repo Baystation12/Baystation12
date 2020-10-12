@@ -74,11 +74,12 @@
 /mob/living/carbon/human/proc/ChangeToHusk()
 	if(MUTATION_HUSK in mutations)	return
 
-	if(f_style)
-		f_style = "Shaved"		//we only change the icon_state of the hair datum, so it doesn't mess up their UI/UE
-	if(h_style)
-		h_style = "Bald"
-	update_hair(0)
+	if(species.name in HUMAN_SPECIES) //Only change hair, and not say, tentacles
+		if(f_style)
+			f_style = "Shaved"		//we only change the icon_state of the hair datum, so it doesn't mess up their UI/UE
+		if(h_style)
+			h_style = "Bald"
+		update_hair(0)
 
 	mutations.Add(MUTATION_HUSK)
 	for(var/obj/item/organ/external/E in organs)
