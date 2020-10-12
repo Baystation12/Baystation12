@@ -1,0 +1,5 @@
+author: "Slywater"
+delete-after: True
+changes: 
+  - bugfix: "Husking no longer removes tentacles or other non-hair items."
+  - tweak: "The husk mask has been greyscaled for use with all species."
