@@ -240,6 +240,7 @@
 				A.forceMove(src)
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		qdel(src.connected)
+		src.connected = null
 	else if(src.locked == 0)
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		src.connected = new /obj/structure/c_tray(src.loc)
@@ -253,6 +254,7 @@
 			src.connected.icon_state = "cremat"
 		else
 			qdel(src.connected)
+			src.connected = null
 	src.add_fingerprint(user)
 	update()
 
@@ -310,8 +312,11 @@
 			if(iscarbon(M))
 				var/mob/living/carbon/C = M
 				for(var/I, I < 60, I++)
+					C.bodytemperature += 50
+					C.adjustFireLoss(20)
+					C.adjustBrainLoss(5)
 
-					if(C.stat >= UNCONSCIOUS || !(C in contents)) //In case we die or are removed at any point.
+					if(C.stat == DEAD || !(C in contents)) //In case we die or are removed at any point.
 						cremating = 0
 						update()
 						break
@@ -347,7 +352,7 @@
 									shake_animation()
 
 
-			if(M.stat >= DEAD)
+			if(M.stat == DEAD)
 				if(round_is_spooky())
 					if(prob(50))
 						playsound(src, 'sound/effects/ghost.ogg', 10, 5)
