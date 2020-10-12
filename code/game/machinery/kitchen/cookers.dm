@@ -215,7 +215,7 @@
 		tint = get_random_colour(1)
 	result.color = tint
 	result.filling_color = BlendRGB(source.color || "#ffffff", result.color || "#ffffff", 0.5)
-	if (istype(result, /obj/item/weapon/reagent_containers/food/snacks/variable))
+	if (result.type != /obj/item/weapon/reagent_containers/food/snacks/variable && istype(result, /obj/item/weapon/reagent_containers/food/snacks/variable))
 		var/image/I = image(result.icon, result, "[result.icon_state]_filling")
 		I.appearance_flags = RESET_COLOR
 		I.color = result.filling_color
