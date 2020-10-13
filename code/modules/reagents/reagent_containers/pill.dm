@@ -389,3 +389,49 @@ obj/item/weapon/reagent_containers/pill/noexcutite/New()
 	..()
 	reagents.add_reagent(/datum/reagent/nutriment/mint, 1) //mint is used as a catalyst in all reactions as of writing
 	color = reagents.get_color()
+
+//Pills with random content
+/obj/item/weapon/reagent_containers/pill/floorpill
+	name = "floor pill"
+	desc = "Dare you?"
+
+/obj/item/weapon/reagent_containers/pill/floorpill/Initialize()
+	. = ..()
+
+	var/random_reagent = pickweight(list(
+					list("spaceacillin" = 15) = 2,\
+					list("inaprovaline" = 30) = 2,\
+					list("anti_toxin" = 15) = 2,\
+					list("methylphenidate" = 15) = 2,\
+					list("paracetamol" = 15) = 2,\
+					list("dexalin" = 15) = 2,\
+					list("dexalinp" = 15) = 2,\
+					list("impedrezene" = 10, "synaptizine" = 5, "hyperzine" = 5, "citalopram" = 15) = 1,\
+					list("space_drugs" = 15, "sugar" = 15) = 1,\
+					list("dermaline" = 15, "citalopram" = 15) = 1,\
+					list("tramadol" = 15, "spaceacillin" = 15) = 1,\
+					list("blattedin" = 15) = 1,\
+					list("imidazoline" = 15, "space_drugs" = 15) = 1,\
+					list("ethylredoxrazine" = 15, "hyperzine" = 35) = 1,\
+					list("potassium_chlorophoride" = 15) = 1,\
+					list("mindbreaker" = 15, "synaptizine" = 5) = 1,\
+					list("plantbgone" = 15, "cleaner" = 15) = 1,\
+					list("coolant" = 50) = 1,\
+					list("fuel" = 50) = 1,\
+					list("water" = 15) = 1,\
+					list("sterilizine" = 50) = 1,\
+					list("tramadol" = 15, "sugar" = 15) = 1,\
+					list("thermite" = 15) = 1,\
+					list("lube" = 50) = 1,\
+					list("pacid" = 15) = 1,\
+					list("sacid" = 15) = 1,\
+					list("hclacid" = 15) = 1,\
+					list("impedrezene" = 15, "dexalinp" = 35) = 1,\
+					list("virusfood" = 15) = 1,\
+					list("leporazine" = 15) = 1,\
+					list("anti_toxin" = 15, "zombiepowder" = 10) = 0.5,\
+					list("dexalinp" = 35, "cyanide" = 15) = 0.5,\
+					list("toxin" = 40, "cyanide" = 10) = 0.5))
+
+	for(var/reagent in random_reagent)
+		reagents.add_reagent(reagent, random_reagent[reagent])
