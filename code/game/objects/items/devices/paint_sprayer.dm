@@ -200,7 +200,7 @@
 		to_chat(user, SPAN_WARNING("\The [src] flashes an error light. You might need to reconfigure it."))
 		return FALSE
 
-	if(F.decals && F.decals.len > 5)
+	if((F.decals && F.decals.len > 5) && !ispath(painting_decal, /obj/effect/floor_decal/reset))
 		to_chat(user, SPAN_WARNING("\The [F] has been painted too much; you need to clear it off."))
 		return FALSE
 
