@@ -96,7 +96,7 @@
 
 /mob/living/simple_animal/cat/proc/handle_flee_target()
 	//see if we should stop fleeing
-	if (flee_target && !(flee_target.loc in view(src)))
+	if (stat != CONSCIOUS || (flee_target && !(flee_target.loc in view(src))))
 		flee_target = null
 		stop_automated_movement = 0
 
@@ -172,7 +172,7 @@
 /mob/living/simple_animal/cat/fluff/Life()
 	. = ..()
 	if(!.)
-		return FALSE 
+		return FALSE
 	if (stat || !friend)
 		return
 	if (get_dist(src, friend) <= 1)
