@@ -47,7 +47,7 @@
 	resistance = 10
 	combat_tier = 3
 	possible_weapons = list(/obj/item/weapon/gun/projectile/m7_smg, /obj/item/weapon/gun/projectile/br55, /obj/item/weapon/gun/projectile/m392_dmr)
-	see_in_dark = 5s
+	see_in_dark = 5
 
 /mob/living/simple_animal/hostile/builder_mob/unsc
 	name = "UNSC Marine Combat Engineer"
