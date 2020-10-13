@@ -6,7 +6,7 @@
 	icon_dead = "dead_kigyar"
 	combat_tier = 2
 	possible_weapons = list(/obj/item/weapon/gun/projectile/type51carbine, /obj/item/weapon/gun/projectile/type31needlerifle)
-	see_in_dark = 7
+	see_in_dark = 5
 	species_name = "Kig-Yar"
 
 /mob/living/simple_animal/hostile/covenant/jackal/shield
@@ -23,3 +23,4 @@
 /mob/living/simple_animal/hostile/covenant/jackal/sniper
 	possible_weapons = list(/obj/item/weapon/gun/energy/beam_rifle)
 	combat_tier = 3
+	see_in_dark = 14

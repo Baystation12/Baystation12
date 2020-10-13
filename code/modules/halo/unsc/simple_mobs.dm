@@ -36,7 +36,7 @@
 	icon_dead = "dead_marine"
 	resistance = 5
 	combat_tier = 2
-	see_in_dark = 7
+	see_in_dark = 5
 	possible_weapons = list(/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/gun/projectile/ma5b_ar)
 
 /mob/living/simple_animal/hostile/unsc/odst
@@ -47,7 +47,7 @@
 	resistance = 10
 	combat_tier = 3
 	possible_weapons = list(/obj/item/weapon/gun/projectile/m7_smg, /obj/item/weapon/gun/projectile/br55, /obj/item/weapon/gun/projectile/m392_dmr)
-	see_in_dark = 7
+	see_in_dark = 5s
 
 /mob/living/simple_animal/hostile/builder_mob/unsc
 	name = "UNSC Marine Combat Engineer"

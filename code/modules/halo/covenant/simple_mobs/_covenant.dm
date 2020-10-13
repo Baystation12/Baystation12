@@ -6,7 +6,6 @@
 	melee_damage_lower = 10
 	melee_damage_upper = 15
 	break_stuff_probability = 50
-	see_in_dark = 7
 	assault_target_type = /obj/effect/landmark/assault_target/covenant
 	icon = 'code/modules/halo/covenant/simple_mobs/simple_mobs.dmi'
 	var/obj/item/device/flashlight/held_light
