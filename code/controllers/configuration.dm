@@ -57,6 +57,7 @@ var/list/gamemode_cache = list()
 	var/usewhitelist = 0
 	var/kick_inactive = 0				//force disconnect for inactive players after this many minutes, if non-0
 	var/jobs_have_minimal_access = 0	//determines whether jobs use minimal access or expanded access.
+	var/minimum_player_age = 0
 
 	var/cult_ghostwriter = 1               //Allows ghosts to write in blood in cult rounds...
 	var/cult_ghostwriter_req_cultists = 10 //...so long as this many cultists are active.
@@ -702,6 +703,9 @@ var/list/gamemode_cache = list()
 
 				if ("disallow_votable_mode")
 					config.votable_modes -= value
+
+				if ("minimum_player_age")
+					config.minimum_player_age = text2num(value)
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")

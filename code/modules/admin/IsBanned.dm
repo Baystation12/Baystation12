@@ -32,6 +32,10 @@ world/IsBanned(key,address,computer_id)
 		var/failedcid = 1
 		var/failedip = 1
 
+		if (config.minimum_player_age && get_player_age(key) < config.minimum_player_age)
+			message_admins("[key] tried to join but did not meet the configured minimum player age.")
+			return list("reason"="player age", "desc"="This server is not currently allowing accounts with a low number of days since first connection to join.")
+
 		var/ipquery = ""
 		var/cidquery = ""
 		if(address)
