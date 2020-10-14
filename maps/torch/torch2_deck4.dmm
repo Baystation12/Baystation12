@@ -1583,7 +1583,6 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/structure/closet/crate/freezer/rations,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/escape_pod6/station)
 "fs" = (
@@ -1660,7 +1659,6 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
-/obj/structure/closet/crate/freezer/rations,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/escape_pod7/station)
 "fA" = (
@@ -2663,7 +2661,6 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/aft)
 "iZ" = (
-/obj/structure/closet/crate/freezer/rations,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/storage/auxillary/starboard)
 "ja" = (
@@ -3176,9 +3173,6 @@
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/storage/auxillary/starboard)
-"lc" = (
-/turf/simulated/wall/prepainted,
-/area/hallway/primary/fourthdeck/fore)
 "ld" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -4158,18 +4152,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/fourthdeck/aft)
-"ox" = (
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/effect/floor_decal/corner/paleblue{
-	dir = 9;
-	icon_state = "corner_white"
-	},
-/turf/simulated/floor/tiled,
-/area/hallway/primary/fourthdeck/fore)
 "oy" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -4715,9 +4697,6 @@
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/janitor)
-"qB" = (
-/turf/simulated/wall/prepainted,
-/area/hallway/primary/fourthdeck/aft)
 "qC" = (
 /obj/machinery/vending/tool/adherent,
 /obj/machinery/light{
@@ -6686,9 +6665,6 @@
 	},
 /turf/simulated/wall/r_wall/prepainted,
 /area/hallway/primary/fourthdeck/aft)
-"wa" = (
-/turf/simulated/wall/r_wall/prepainted,
-/area/hallway/primary/fourthdeck/aft)
 "wb" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -7981,9 +7957,6 @@
 /obj/machinery/suit_storage_unit/security/alt,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/eva)
-"AG" = (
-/turf/simulated/wall/prepainted,
-/area/storage/auxillary/port)
 "AH" = (
 /turf/simulated/wall/prepainted,
 /area/storage/auxillary/port)
@@ -9392,7 +9365,6 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/structure/closet/crate/freezer/rations,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/escape_pod8/station)
 "Gi" = (
@@ -9443,7 +9415,6 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
-/obj/structure/closet/crate/freezer/rations,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/escape_pod9/station)
 "Gp" = (
@@ -16093,7 +16064,6 @@
 	frequency = 1439;
 	pixel_y = 23
 	},
-/obj/structure/closet/crate/freezer/rations,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/fourthdeck/starboard)
 "YZ" = (
@@ -26971,16 +26941,16 @@ ej
 me
 nk
 Se
-ox
+tT
 pJ
-ox
+tT
 sp
 tT
 vm
 wC
 xR
 zm
-AG
+AH
 BL
 CN
 BK
@@ -27384,7 +27354,7 @@ vo
 oA
 wq
 Pz
-AG
+AH
 BN
 CO
 DL
@@ -27586,7 +27556,7 @@ vp
 oA
 xT
 mh
-AG
+AH
 BO
 CP
 DM
@@ -27990,7 +27960,7 @@ vr
 oA
 xV
 zr
-AG
+AH
 BQ
 CR
 CR
@@ -28192,13 +28162,13 @@ vs
 oA
 xW
 zs
-AG
-AG
+AH
+AH
 CS
 CS
-AG
-AG
-AG
+AH
+AH
+AH
 BK
 BK
 BK
@@ -28381,7 +28351,7 @@ ga
 hb
 hT
 RN
-lc
+le
 ml
 Rn
 nr
@@ -37481,10 +37451,10 @@ NY
 Mn
 Rx
 we
-wa
-wa
-wa
-wa
+YJ
+YJ
+YJ
+YJ
 oP
 PX
 ax
@@ -37687,7 +37657,7 @@ Ym
 kM
 VA
 RD
-wa
+YJ
 Re
 Vf
 SS
@@ -38495,7 +38465,7 @@ kX
 yF
 zZ
 Kj
-wa
+YJ
 Qk
 Qk
 Yf
@@ -38692,12 +38662,12 @@ bB
 xN
 ow
 uH
-wa
-wa
-wa
-wa
-wa
-wa
+YJ
+YJ
+YJ
+YJ
+YJ
+YJ
 ul
 PB
 Qe
@@ -39289,7 +39259,7 @@ XT
 XT
 XT
 XT
-wa
+YJ
 SY
 Xn
 Xn
@@ -39491,7 +39461,7 @@ ar
 ar
 ar
 ar
-wa
+YJ
 MB
 RU
 SL
@@ -39693,7 +39663,7 @@ fr
 gi
 hj
 ib
-wa
+YJ
 AT
 da
 Il
@@ -39895,7 +39865,7 @@ fs
 gj
 hj
 ib
-wa
+YJ
 Xn
 Xn
 Xn
@@ -40097,7 +40067,7 @@ ft
 gk
 hj
 ib
-wa
+YJ
 Um
 MB
 YH
@@ -40111,7 +40081,7 @@ xo
 YH
 Cc
 ku
-wa
+YJ
 DV
 EO
 Fx
@@ -40299,7 +40269,7 @@ ar
 ar
 ar
 ar
-wa
+YJ
 iD
 QS
 SL
@@ -40313,7 +40283,7 @@ xo
 SL
 MB
 co
-wa
+YJ
 DU
 DU
 DU
@@ -40490,23 +40460,23 @@ LA
 LA
 LA
 UH
-wa
-wa
-wa
+YJ
+YJ
+YJ
 Yj
 Yj
-wa
+YJ
 Yw
-wa
+YJ
 Yj
 Yj
-wa
-wa
+YJ
+YJ
 Xn
 Xn
 oc
 Xn
-qB
+Xn
 ZC
 ti
 SF
@@ -40516,17 +40486,17 @@ oc
 Xn
 Xn
 YJ
-wa
+YJ
 Yj
 Yj
-wa
+YJ
 ZA
-wa
+YJ
 Yj
 Yj
-wa
-wa
-wa
+YJ
+YJ
+YJ
 JO
 LA
 LA
@@ -41096,18 +41066,18 @@ LA
 LA
 LA
 bm
-wa
-wa
-wa
+YJ
+YJ
+YJ
 Yj
 Yj
-wa
+YJ
 dd
-wa
+YJ
 Yj
 Yj
-wa
-wa
+YJ
+YJ
 Xn
 Xn
 Xn
@@ -41122,17 +41092,17 @@ Xn
 Hd
 Bo
 OT
-wa
+YJ
 Yj
 Yj
-wa
+YJ
 Gv
-wa
+YJ
 Yj
 Yj
-wa
-wa
-wa
+YJ
+YJ
+YJ
 JR
 LA
 LA

@@ -2364,7 +2364,7 @@
 	icon_state = "0-2"
 	},
 /obj/machinery/power/smes/buildable/preset/on_full{
-	RCon_tag = "Substation - Telecommunications";
+	RCon_tag = "Substation - Telecommunications"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/tcommsat/computer)
@@ -2574,16 +2574,6 @@
 /obj/structure/closet/secure_closet/bar_torch,
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/bar)
-"fu" = (
-/obj/effect/floor_decal/corner/blue/diagonal{
-	dir = 4
-	},
-/obj/machinery/vending/mredispenser{
-	dir = 1;
-	icon_state = "mrevend"
-	},
-/turf/simulated/floor/tiled/white,
-/area/crew_quarters/mess)
 "fv" = (
 /obj/structure/table/marble,
 /obj/machinery/microwave{
@@ -3260,7 +3250,6 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/crew_quarters/mess)
 "gB" = (
-/obj/structure/closet/crate/freezer/rations,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/forestarboard)
@@ -3285,9 +3274,6 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/starboard)
-"gE" = (
-/turf/simulated/wall/prepainted,
-/area/holocontrol)
 "gF" = (
 /obj/structure/disposalpipe/segment{
 	dir = 8;
@@ -6331,11 +6317,6 @@
 "mG" = (
 /obj/structure/railing/mapped,
 /turf/simulated/open,
-/area/maintenance/thirddeck/aftstarboard)
-"mJ" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/closet/crate/freezer/rations,
-/turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/aftstarboard)
 "mK" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -9548,9 +9529,6 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/security/habcheck)
-"uO" = (
-/turf/simulated/wall/r_wall/prepainted,
-/area/crew_quarters/sleep/cryo)
 "uP" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/crew_quarters/sleep/cryo)
@@ -15517,11 +15495,6 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/reinforced/airless,
 /area/thruster/d3port)
-"Lg" = (
-/obj/random/drinkbottle,
-/obj/structure/closet/crate/freezer/rations,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/crew_quarters/safe_room/thirddeck)
 "Lh" = (
 /obj/structure/closet/emcloset,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -33679,7 +33652,7 @@ ob
 qL
 xT
 Bm
-Lg
+NY
 xV
 NY
 tG
@@ -36310,9 +36283,9 @@ uM
 Cq
 uM
 uM
-uO
-uO
-uO
+uP
+uP
+uP
 FB
 FB
 FB
@@ -36502,7 +36475,7 @@ pV
 Xn
 pr
 dP
-uO
+uP
 vR
 wY
 xZ
@@ -36515,7 +36488,7 @@ CZ
 DN
 Et
 EV
-uO
+uP
 Sj
 sM
 Gy
@@ -36704,7 +36677,7 @@ pV
 qQ
 sk
 tD
-uO
+uP
 Gt
 vS
 ya
@@ -36906,7 +36879,7 @@ pW
 qP
 IY
 tE
-uO
+uP
 vT
 vT
 yb
@@ -36919,7 +36892,7 @@ Db
 DP
 vT
 vT
-uO
+uP
 FV
 GA
 GZ
@@ -37121,7 +37094,7 @@ Db
 DP
 vU
 EW
-uO
+uP
 FS
 GB
 FS
@@ -37323,7 +37296,7 @@ Dc
 DQ
 vV
 EX
-uO
+uP
 DL
 GD
 Ge
@@ -37725,10 +37698,10 @@ vS
 vS
 De
 za
-uO
+uP
 LX
-uO
-uO
+uP
+uP
 Lk
 EL
 Hf
@@ -37930,7 +37903,7 @@ za
 NF
 Hc
 Hc
-uO
+uP
 Lk
 EL
 Hf
@@ -38118,7 +38091,7 @@ fB
 le
 VM
 tH
-uO
+uP
 vU
 vU
 yf
@@ -38129,10 +38102,10 @@ vU
 vU
 Df
 Ub
-uO
-uO
-uO
-uO
+uP
+uP
+uP
+uP
 Lk
 EL
 Hf
@@ -38320,7 +38293,7 @@ Nw
 qQ
 sk
 tI
-uO
+uP
 vV
 vV
 yg
@@ -38517,12 +38490,12 @@ jd
 jd
 nj
 Lx
-fu
+jc
 Nw
 Xn
 sj
 tJ
-uO
+uP
 Cj
 yk
 fm
@@ -38724,18 +38697,18 @@ fB
 qV
 sj
 tC
-uO
-uO
-uO
-uO
+uP
+uP
+uP
+uP
 fS
-uO
-uO
-uO
-uO
-uO
+uP
+uP
+uP
+uP
+uP
 DS
-uO
+uP
 Fd
 Ez
 Ez
@@ -43759,18 +43732,18 @@ nC
 nC
 nC
 nC
-gE
-gE
-gE
+qd
+qd
+qd
 rv
 kd
 kW
-gE
-gE
+qd
+qd
 nn
 om
 Fr
-gE
+qd
 rr
 sG
 je
@@ -43961,7 +43934,7 @@ OA
 dn
 Zg
 SY
-gE
+qd
 hA
 hA
 hA
@@ -43972,7 +43945,7 @@ hA
 hA
 hA
 hA
-gE
+qd
 Bg
 AR
 ua
@@ -44163,7 +44136,7 @@ co
 dZ
 dn
 YV
-gE
+qd
 hA
 hA
 hA
@@ -44376,7 +44349,7 @@ hA
 hA
 hA
 hA
-gE
+qd
 wB
 sJ
 sW
@@ -44578,7 +44551,7 @@ hA
 hA
 hA
 hA
-gE
+qd
 Wx
 sF
 Mi
@@ -44780,7 +44753,7 @@ hA
 hA
 hA
 hA
-gE
+qd
 rt
 kR
 ue
@@ -44982,7 +44955,7 @@ hA
 hA
 hA
 hA
-gE
+qd
 lc
 Xv
 UV
@@ -45184,7 +45157,7 @@ hA
 hA
 hA
 hA
-gE
+qd
 ru
 Xv
 sW
@@ -45375,7 +45348,7 @@ Jq
 OA
 eN
 cq
-gE
+qd
 hA
 hA
 hA
@@ -45386,7 +45359,7 @@ hA
 hA
 hA
 hA
-gE
+qd
 WE
 Xv
 sW
@@ -45577,7 +45550,7 @@ Jr
 Js
 Ju
 cq
-gE
+qd
 hA
 hA
 hA
@@ -45779,7 +45752,7 @@ vc
 Xu
 Jt
 fX
-gE
+qd
 hA
 hA
 hA
@@ -45790,7 +45763,7 @@ hA
 hA
 hA
 hA
-gE
+qd
 rw
 Xv
 je
@@ -45981,18 +45954,18 @@ QU
 Dj
 Jz
 nz
-gE
-gE
-gE
-gE
-gE
-gE
-gE
-gE
-gE
-gE
-gE
-gE
+qd
+qd
+qd
+qd
+qd
+qd
+qd
+qd
+qd
+qd
+qd
+qd
 rx
 sR
 uk
@@ -46190,7 +46163,7 @@ UG
 Rs
 ve
 lT
-mJ
+mK
 nG
 oA
 wl
