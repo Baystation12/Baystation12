@@ -12,7 +12,6 @@ datum/preferences
 	//doohickeys for savefiles
 	var/path
 	var/is_guest = FALSE
-	var/load_attempts = 0
 	var/default_slot = 1				//Holder so it doesn't default to slot 1, rather the last one used
 	var/savefile_version = 0
 
@@ -59,9 +58,11 @@ datum/preferences
 		if(IsGuestKey(client.key))
 			is_guest = TRUE
 		else
-			load_path(client.ckey)
-			load_preferences()
-			load_and_update_character()
+			for (var/attempts = 1 to MAX_LOAD_TRIES)
+				load_path(client.ckey)
+				load_preferences()
+				load_and_update_character()
+				if(path) break
 	sanitize_preferences()
 	if(client && istype(client.mob, /mob/new_player))
 		var/mob/new_player/np = client.mob
@@ -85,12 +86,7 @@ datum/preferences
 		return
 	
 	if(!path && !is_guest)
-		while(load_attempts < MAX_LOAD_TRIES)
-			load_attempts++
-			setup()
-			if(path) break
-		if(!path)
-			alert(user, "ERROR\nYour account failed to load.\nContact an admin for assistance!")
+		alert(user, "ERROR\nYour account failed to load.\nContact an admin for assistance!")
 
 	var/dat = "<html><body><center>"
 
