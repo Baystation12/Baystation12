@@ -4390,12 +4390,11 @@
 "pG" = (
 /obj/effect/wallframe_spawn/reinforced/hull,
 /obj/machinery/door/firedoor,
-/obj/machinery/door/blast/shutters{
+/obj/machinery/door/blast/regular{
 	density = 0;
-	dir = 2;
-	icon_state = "shutter0";
+	icon_state = "pdoor0";
 	id_tag = "lounge_shutters";
-	name = "Window Shutters";
+	name = "Blast Shields";
 	opacity = 0
 	},
 /turf/simulated/floor/plating,
