@@ -1,5 +1,0 @@
-author: "Slywater"
-delete-after: True
-changes: 
-  - bugfix: "Crematoriums no longer delete their slabs when opening onto a mob"
-  - bugfix: "Crematoriums now actually burn and kill living mobs"
