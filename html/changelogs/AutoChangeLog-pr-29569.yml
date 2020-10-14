@@ -1,0 +1,4 @@
+author: "MrKicker"
+delete-after: True
+changes: 
+  - tweak: "The account load fix is now automatic, not needing you to click 'setup character'"
