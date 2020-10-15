@@ -150,10 +150,39 @@
 
 	return list(result, style, size, message)
 
+//Condenced version of the mob targeting narrates
+/client/proc/cmd_admin_narrate(atom/A)
+	set category = "Special Verbs"
+	set name = "Narrate"
+	set desc = "Selection of narrates targeting a mob."
+
+	if(!check_rights(R_INVESTIGATE))
+		return
+	
+	var/options = list()
+
+	if(ismob(A))
+		options += list("Direct Narrate")
+
+	if(check_rights(R_ADMIN, FALSE))
+		options += list("Visual Narrate", "Audible Narrate")
+	
+	var/result = input("What type of narrate?") as null | anything in options
+	switch(result)
+		if (null)
+			return
+		if ("Direct Narrate")
+			cmd_admin_direct_narrate(A)
+		if ("Visual Narrate")
+			cmd_admin_visible_narrate(A)
+		if ("Audible Narrate")
+			cmd_admin_audible_narrate(A)
+
 
 // Targetted narrate: will narrate to one specific mob
 /client/proc/cmd_admin_direct_narrate(var/mob/M)
-	set category = "Special Verbs"
+	set popup_menu = FALSE
+	set category = null
 	set name = "Direct Narrate"
 	set desc = "Narrate to a specific mob."
 
@@ -201,7 +230,8 @@
 
 // Visible narrate, it's as if it's a visible message
 /client/proc/cmd_admin_visible_narrate(var/atom/A)
-	set category = "Special Verbs"
+	set popup_menu = FALSE
+	set category = null
 	set name = "Visible Narrate"
 	set desc = "Narrate to those who can see the given atom."
 
@@ -223,7 +253,8 @@
 
 // Visible narrate, it's as if it's a audible message
 /client/proc/cmd_admin_audible_narrate(var/atom/A)
-	set category = "Special Verbs"
+	set popup_menu = FALSE
+	set category = null
 	set name = "Audible Narrate"
 	set desc = "Narrate to those who can hear the given atom."
 

@@ -44,6 +44,7 @@ var/list/admin_verbs_admin = list(
 	/client/proc/jumptoturf,			//allows us to jump to a specific turf,
 	/client/proc/admin_call_shuttle,	//allows us to call the emergency shuttle,
 	/client/proc/admin_cancel_shuttle,	//allows us to cancel the emergency shuttle, sending it back to centcomm,
+	/client/proc/cmd_admin_narrate,
 	/client/proc/cmd_admin_direct_narrate,	//send text directly to a player with no padding. Useful for narratives and fluff-text,
 	/client/proc/cmd_admin_visible_narrate,
 	/client/proc/cmd_admin_audible_narrate,
@@ -235,6 +236,7 @@ var/list/admin_verbs_hideable = list(
 	/datum/admins/proc/access_news_network,
 	/client/proc/admin_call_shuttle,
 	/client/proc/admin_cancel_shuttle,
+	/client/proc/cmd_admin_narrate,
 	/client/proc/cmd_admin_direct_narrate,
 	/client/proc/cmd_admin_visible_narrate,
 	/client/proc/cmd_admin_audible_narrate,
@@ -294,6 +296,7 @@ var/list/admin_verbs_mod = list(
 	/datum/admins/proc/show_skills,	// Right-click skill menu,
 	/datum/admins/proc/show_player_panel,// right-click player panel,
 	/client/proc/check_antagonists,
+	/client/proc/cmd_admin_narrate,
 	/client/proc/cmd_admin_direct_narrate,
 	/client/proc/aooc,
 	/datum/admins/proc/sendFax,
@@ -534,10 +537,10 @@ var/list/admin_verbs_mod = list(
 
 	var/turf/epicenter = mob.loc
 	var/list/choices = list("Small Bomb", "Medium Bomb", "Big Bomb", "Custom Bomb")
-	var/choice = input("What size explosion would you like to produce?") in choices
+	var/choice = input("What size explosion would you like to produce?") as null | anything in choices
 	switch(choice)
-		if(null)
-			return 0
+		if (null)
+			return
 		if("Small Bomb")
 			explosion(epicenter, 1, 2, 3, 3)
 		if("Medium Bomb")
@@ -545,10 +548,18 @@ var/list/admin_verbs_mod = list(
 		if("Big Bomb")
 			explosion(epicenter, 3, 5, 7, 5)
 		if("Custom Bomb")
-			var/devastation_range = input("Devastation range (in tiles):") as num
-			var/heavy_impact_range = input("Heavy impact range (in tiles):") as num
-			var/light_impact_range = input("Light impact range (in tiles):") as num
-			var/flash_range = input("Flash range (in tiles):") as num
+			var/devastation_range = input("Devastation range (in tiles):") as num|null
+			if (isnull(devastation_range))
+				return
+			var/heavy_impact_range = input("Heavy impact range (in tiles):") as num|null
+			if (isnull(heavy_impact_range))
+				return
+			var/light_impact_range = input("Light impact range (in tiles):") as num|null
+			if (isnull(light_impact_range))
+				return
+			var/flash_range = input("Flash range (in tiles):") as num|null
+			if (isnull(flash_range))
+				return
 			explosion(epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range)
 	log_and_message_admins("created an admin explosion at [epicenter.loc].")
 	SSstatistics.add_field_details("admin_verb","DB") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -856,6 +867,7 @@ var/list/admin_verbs_mod = list(
 			message_admins("Admin [key_name_admin(usr)] has enabled maint drones.", 1)
 
 /client/proc/man_up(mob/T as mob in SSmobs.mob_list)
+	set popup_menu = FALSE
 	set category = "Fun"
 	set name = "Man Up"
 	set desc = "Tells mob to man up and deal with it."
