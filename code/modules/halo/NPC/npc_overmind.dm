@@ -273,17 +273,28 @@ GLOBAL_DATUM(flood_overmind, /datum/npc_overmind/flood)
 	name = "overmind controller"
 	var/controlling_overmind = null
 
+/obj/structure/overmind_controller/proc/create_overmind()
+
+/obj/structure/overmind_controller/proc/delete_overmind()
+
 /obj/structure/overmind_controller/Initialize()
-	GLOB.flood_overmind = new()
-	controlling_overmind =  GLOB.flood_overmind
-	GLOB.processing_objects |= GLOB.flood_overmind
-	GLOB.flood_overmind.overmind_active = 1
-	GLOB.flood_overmind.reports.Cut() //We're likely activating the overmind here. Cut all previous reports out, they're likely outdated.
+	create_overmind()
 	. = ..()
 
 /obj/structure/overmind_controller/Destroy()
-	GLOB.flood_overmind.overmind_active = 0
+	delete_overmind()
 	. = ..()
+
+/obj/structure/overmind_controller/flood/create_overmind()
+	if(!GLOB.flood_overmind)
+		GLOB.flood_overmind = new()
+		controlling_overmind =  GLOB.flood_overmind
+		GLOB.processing_objects |= GLOB.flood_overmind
+		GLOB.flood_overmind.overmind_active = 1
+		GLOB.flood_overmind.reports.Cut() //We're likely activating the overmind here. Cut all previous reports out, they're likely outdated.
+
+/obj/structure/overmind_controller/flood/delete_overmind()
+	GLOB.flood_overmind.overmind_active = 0
 
 #undef REPORT_CONTACT
 #undef REPORT_CONSTRUCT

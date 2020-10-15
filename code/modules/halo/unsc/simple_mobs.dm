@@ -15,6 +15,7 @@
 
 /mob/living/simple_animal/hostile/unsc/New()
 	. = ..()
+	our_overmind = GLOB.unsc_overmind
 	if(see_in_dark < 5)
 		held_light = new /obj/item/device/flashlight(src)
 		held_light.on = 1

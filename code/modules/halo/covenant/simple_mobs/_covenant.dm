@@ -13,6 +13,7 @@
 
 /mob/living/simple_animal/hostile/covenant/New()
 	. = ..()
+	our_overmind = GLOB.covenant_overmind
 	if(see_in_dark < 5)
 		/*
 		var/light_type = pick(\

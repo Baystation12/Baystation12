@@ -23,4 +23,4 @@
 /mob/living/simple_animal/hostile/covenant/jackal/sniper
 	possible_weapons = list(/obj/item/weapon/gun/energy/beam_rifle)
 	combat_tier = 3
-	see_in_dark = 14
+	see_in_dark = 7
