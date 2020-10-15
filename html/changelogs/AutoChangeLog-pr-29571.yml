@@ -1,0 +1,4 @@
+author: "Slywater"
+delete-after: True
+changes: 
+  - bugfix: "Cats no longer flee from attackers when dead"
