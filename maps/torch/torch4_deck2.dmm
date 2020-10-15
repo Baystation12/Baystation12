@@ -8775,7 +8775,7 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/suit_storage_unit/atmos,
+/obj/machinery/suit_storage_unit/atmos/alt/sol,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
