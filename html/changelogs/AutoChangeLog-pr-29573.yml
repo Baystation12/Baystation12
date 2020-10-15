@@ -1,4 +1,0 @@
-author: "ChaosAlpha"
-delete-after: True
-changes: 
-  - bugfix: "The paint-sprayer can now correctly clear decals off of floor tiles that have hit the decals limit (currently 5)."
