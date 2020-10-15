@@ -295,27 +295,13 @@
 	M.update_icons()
 	M.clean_blood()
 
-/datum/reagent/lube
-	name = "Space Lube"
-	description = "Lubricant is a substance introduced between two moving surfaces to reduce the friction and wear between them. giggity."
-	taste_description = "slime"
-	reagent_state = LIQUID
-	color = "#009ca8"
-	value = 0.6
-
-/datum/reagent/lube/touch_turf(var/turf/simulated/T)
-	if(!istype(T))
-		return
-	if(volume >= 1)
-		T.wet_floor(80)
-
-/datum/reagent/lube/oil // TODO: Robot Overhaul in general
+/datum/reagent/oil
 	name = "Oil"
 	description = "A thick greasy industrial lubricant. Commonly found in robotics."
 	taste_description = "greasy diesel"
 	color = "#000000"
 
-/datum/reagent/lube/oil/touch_turf(var/turf/simulated/T)
+/datum/reagent/oil/touch_turf(var/turf/simulated/T)
 	if(!istype(T, /turf/space))
 		new /obj/effect/decal/cleanable/blood/oil/streak(T)
 

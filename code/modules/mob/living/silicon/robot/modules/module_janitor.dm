@@ -25,8 +25,8 @@
 
 /obj/item/weapon/robot_module/janitor/finalize_emag()
 	. = ..()
-	emag.reagents.add_reagent(/datum/reagent/lube, 250)
-	emag.SetName("Lube spray")
+	emag.reagents.add_reagent(/datum/reagent/oil, 250)
+	emag.SetName("Oil spray")
 
 /obj/item/weapon/robot_module/janitor/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	..()
@@ -34,4 +34,4 @@
 	LR.Charge(R, amount)
 	if(emag)
 		var/obj/item/weapon/reagent_containers/spray/S = emag
-		S.reagents.add_reagent(/datum/reagent/lube, 20 * amount)
+		S.reagents.add_reagent(/datum/reagent/oil, 20 * amount)
