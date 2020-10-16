@@ -6,7 +6,7 @@
 /obj/item/device/encryptionkey/headset_torchnt
 	name = "corporate radio encryption key"
 	icon_state = "nt_cypherkey"
-	channels = list("Science" = 1)
+	channels = list("Science" = 1, "Exploration" = 1)
 
 /obj/item/device/encryptionkey/headset_torchrd
 	name = "chief science officer radio encryption key"
