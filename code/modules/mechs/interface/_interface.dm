@@ -36,12 +36,9 @@
 		var/pos = 7
 		for(var/additional_hud in additional_hud_elements)
 			var/obj/screen/exosuit/M = new additional_hud(src)
-			M.screen_loc = "1:6,[pos]:[i * -12]"
+			M.screen_loc = "1:6,[pos]:[i]"
 			hud_elements |= M
-			i++
-			if(i == 3)
-				pos--
-				i = 0
+			i -= M.height
 
 		hud_health = new /obj/screen/exosuit/health(src)
 		hud_health.screen_loc = "EAST-1:28,CENTER-3:11"
