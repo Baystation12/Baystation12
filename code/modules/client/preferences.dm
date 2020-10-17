@@ -7,6 +7,7 @@
 #define JOB_PRIORITY_PICKED 0x7
 
 #define MAX_LOAD_TRIES 5
+#define LOAD_RETRY_DELAY 0.5 SECONDS
 
 datum/preferences
 	//doohickeys for savefiles
@@ -14,6 +15,7 @@ datum/preferences
 	var/is_guest = FALSE
 	var/default_slot = 1				//Holder so it doesn't default to slot 1, rather the last one used
 	var/savefile_version = 0
+	var/load_attempts = 0
 
 	//non-preference stuff
 	var/warns = 0
@@ -47,26 +49,33 @@ datum/preferences
 	..()
 
 /datum/preferences/proc/setup()
-	if(!length(GLOB.skills))
-		decls_repository.get_decl(/decl/hierarchy/skill)
-	player_setup = new(src)
-	gender = pick(MALE, FEMALE)
-	real_name = random_name(gender,species)
-	b_type = RANDOM_BLOOD_TYPE
+	do
+		load_attempts++
+		if(!length(GLOB.skills))
+			decls_repository.get_decl(/decl/hierarchy/skill)
+		player_setup = new(src)
+		gender = pick(MALE, FEMALE)
+		real_name = random_name(gender,species)
+		b_type = RANDOM_BLOOD_TYPE
 
-	if(client)
-		if(IsGuestKey(client.key))
-			is_guest = TRUE
-		else
-			for (var/attempts = 1 to MAX_LOAD_TRIES)
+		if(client)
+			if(IsGuestKey(client.key))
+				is_guest = TRUE
+			else
 				load_path(client.ckey)
 				load_preferences()
 				load_and_update_character()
-				if(path) break
-	sanitize_preferences()
-	if(client && istype(client.mob, /mob/new_player))
-		var/mob/new_player/np = client.mob
-		np.new_player_panel(TRUE)
+		sanitize_preferences()
+		if(client && istype(client.mob, /mob/new_player))
+			var/mob/new_player/np = client.mob
+			np.new_player_panel(TRUE)
+		
+		if(path)
+			break
+		else
+			sleep(LOAD_RETRY_DELAY)
+		
+	while(load_attempts < MAX_LOAD_TRIES)
 
 /datum/preferences/proc/load_and_update_character(var/slot)
 	load_character(slot)
@@ -86,7 +95,9 @@ datum/preferences
 		return
 	
 	if(!path && !is_guest)
-		alert(user, "ERROR\nYour account failed to load.\nContact an admin for assistance!")
+		setup()
+		if(!path)
+			alert(user, "ERROR\nYour account failed to load.\nContact an admin for assistance!")
 
 	var/dat = "<html><body><center>"
 

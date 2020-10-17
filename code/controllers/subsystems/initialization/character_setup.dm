@@ -16,7 +16,7 @@ SUBSYSTEM_DEF(character_setup)
 	while(prefs_awaiting_setup.len)
 		var/datum/preferences/prefs = prefs_awaiting_setup[prefs_awaiting_setup.len]
 		prefs_awaiting_setup.len--
-		prefs.setup()
+		spawn(-1) prefs.setup()																		//Spawn nessesary to avoid delayed setups clogging the others
 	while(newplayers_requiring_init.len)
 		var/mob/new_player/new_player = newplayers_requiring_init[newplayers_requiring_init.len]
 		newplayers_requiring_init.len--
