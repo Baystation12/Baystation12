@@ -54,6 +54,7 @@
 
 // Apply changes when entering state
 /datum/universal_state/proc/OnEnter()
+	set waitfor = FALSE
  	// Does nothing by default
 
 // Apply changes to a new turf.

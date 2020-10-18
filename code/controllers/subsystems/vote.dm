@@ -62,6 +62,7 @@ SUBSYSTEM_DEF(vote)
 
 //A false return means that a vote couldn't be started.
 /datum/controller/subsystem/vote/proc/initiate_vote(vote_type, mob/creator, automatic = 0)
+	set waitfor = FALSE
 	if(active_vote)
 		return FALSE
 	if(!automatic && (!istype(creator) || !creator.client))

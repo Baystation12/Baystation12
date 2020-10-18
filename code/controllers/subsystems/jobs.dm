@@ -124,6 +124,12 @@ SUBSYSTEM_DEF(jobs)
 	RETURN_TYPE(/datum/job)
 	return types_to_datums[path]
 
+/datum/controller/subsystem/jobs/proc/get_by_paths(var/list/paths)
+	RETURN_TYPE(/list)
+	. = list()
+	for(var/path in paths)
+		. += types_to_datums[path]
+
 /datum/controller/subsystem/jobs/proc/check_general_join_blockers(var/mob/new_player/joining, var/datum/job/job)
 	if(!istype(joining) || !joining.client || !joining.client.prefs)
 		return FALSE

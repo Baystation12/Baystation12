@@ -347,7 +347,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 			if(uniform)
 				uniform.attackby(W,src)
 		else
-			to_chat(src, "<span class='danger'>You are trying to eqip this item to an unsupported inventory slot. If possible, please write a ticket with steps to reproduce. Slot was: [slot]</span>")
+			to_chat(src, "<span class='danger'>You are trying to equip this item to an unsupported inventory slot. If possible, please write a ticket with steps to reproduce. Slot was: [slot]</span>")
 			return
 
 	if((W == src.l_hand) && (slot != slot_l_hand))
@@ -441,4 +441,3 @@ This saves us from having to call add_fingerprint() any time something is put in
 	var/obj/item/organ/external/O = get_organ(zone)
 	if(O)
 		return get_covering_equipped_item(O.body_part)
-
