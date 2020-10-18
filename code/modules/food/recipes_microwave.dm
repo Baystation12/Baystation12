@@ -242,6 +242,16 @@ I said no!
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/sliceable/bananabread
 
+/datum/recipe/bananabread2
+	fruit = list("banana" = 2)
+	reagents = list(/datum/reagent/drink/milk/soymilk = 5, /datum/reagent/sugar = 5)
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/dough,
+		/obj/item/weapon/reagent_containers/food/snacks/dough,
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/sliceable/bananabread
+
+
 /datum/recipe/omelette
 	items = list(
 		/obj/item/weapon/reagent_containers/food/snacks/egg,
@@ -589,6 +599,14 @@ I said no!
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/sliceable/bread
 
+/datum/recipe/bread2
+	reagents = list(/datum/reagent/nutriment/softtofu = 3)
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/dough,
+		/obj/item/weapon/reagent_containers/food/snacks/dough,
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/sliceable/bread
+
 /datum/recipe/sandwich
 	items = list(
 		/obj/item/weapon/reagent_containers/food/snacks/meatsteak,
@@ -684,6 +702,10 @@ I said no!
 
 /datum/recipe/ricepudding
 	reagents = list(/datum/reagent/drink/milk = 5, /datum/reagent/nutriment/rice = 10)
+	result = /obj/item/weapon/reagent_containers/food/snacks/ricepudding
+
+/datum/recipe/ricepudding2
+	reagents = list(/datum/reagent/drink/milk/soymilk = 5, /datum/reagent/nutriment/rice = 10)
 	result = /obj/item/weapon/reagent_containers/food/snacks/ricepudding
 
 /datum/recipe/pastatomato
@@ -865,6 +887,11 @@ I said no!
 /datum/recipe/mushroomsoup
 	fruit = list("mushroom" = 1)
 	reagents = list(/datum/reagent/drink/milk = 10)
+	result = /obj/item/weapon/reagent_containers/food/snacks/mushroomsoup
+
+/datum/recipe/mushroomsoup2
+	fruit = list("mushroom" = 1)
+	reagents = list(/datum/reagent/drink/milk/soymilk = 10)
 	result = /obj/item/weapon/reagent_containers/food/snacks/mushroomsoup
 
 /datum/recipe/chawanmushi

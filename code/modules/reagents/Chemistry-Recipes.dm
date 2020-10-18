@@ -1550,6 +1550,13 @@
 	result_amount = 10
 	mix_message = "The solution thickens into a glossy batter."
 
+/datum/chemical_reaction/batter2
+	name = "Batter"
+	result = /datum/reagent/nutriment/batter
+	required_reagents = list(/datum/reagent/nutriment/protein/egg = 3, /datum/reagent/nutriment/flour = 5, /datum/reagent/drink/milk/soymilk = 5)
+	result_amount = 10
+	mix_message = "The solution thickens into a glossy batter."
+
 /datum/chemical_reaction/cakebatter
 	name = "Cake Batter"
 	result = /datum/reagent/nutriment/batter/cakebatter
@@ -1558,9 +1565,16 @@
 	mix_message = "The sugar lightens the batter and gives it a sweet smell."
 
 /datum/chemical_reaction/soybatter
-	name = "Vegan Batter"
+	name = "Eggless Batter"
 	result = /datum/reagent/nutriment/batter
 	required_reagents = list(/datum/reagent/nutriment/softtofu = 3, /datum/reagent/nutriment/flour = 5, /datum/reagent/drink/milk = 5)
+	result_amount = 10
+	mix_message = "The solution thickens into a glossy batter."
+
+/datum/chemical_reaction/soybatter2
+	name = "Vegan Batter"
+	result = /datum/reagent/nutriment/batter
+	required_reagents = list(/datum/reagent/nutriment/softtofu = 3, /datum/reagent/nutriment/flour = 5, /datum/reagent/drink/milk/soymilk = 5)
 	result_amount = 10
 	mix_message = "The solution thickens into a glossy batter."
 
