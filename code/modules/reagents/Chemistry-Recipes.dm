@@ -2960,67 +2960,111 @@
 /datum/chemical_reaction/colored_hair_dye/red
 	name = "Red Hair Dye"
 	result = /datum/reagent/colored_hair_dye/red
+<<<<<<< HEAD
 	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/crayon_dust/red = 1)
+=======
+	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/drink/juice/tomato = 1)
+>>>>>>> hairchems_rererereredux
 	result_amount = 1
 
 /datum/chemical_reaction/colored_hair_dye/orange
 	name = "Orange Hair Dye"
 	result = /datum/reagent/colored_hair_dye/orange
+<<<<<<< HEAD
 	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/crayon_dust/orange = 1)
+=======
+	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/drink/juice/carrot = 1)
+>>>>>>> hairchems_rererereredux
 	result_amount = 1
 
 /datum/chemical_reaction/colored_hair_dye/yellow
 	name = "Yellow Hair Dye"
 	result = /datum/reagent/colored_hair_dye/yellow
+<<<<<<< HEAD
 	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/crayon_dust/yellow = 1)
+=======
+	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/drink/juice/lemon = 1)
+>>>>>>> hairchems_rererereredux
 	result_amount = 1
 
 /datum/chemical_reaction/colored_hair_dye/green
 	name = "Green Hair Dye"
 	result = /datum/reagent/colored_hair_dye/green
+<<<<<<< HEAD
 	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/crayon_dust/green = 1)
+=======
+	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/drink/juice/lime = 1)
+>>>>>>> hairchems_rererereredux
 	result_amount = 1
 
 /datum/chemical_reaction/colored_hair_dye/blue
 	name = "Blue Hair Dye"
 	result = /datum/reagent/colored_hair_dye/blue
+<<<<<<< HEAD
 	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/crayon_dust/blue = 1)
+=======
+	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/dexalinp = 1)
+>>>>>>> hairchems_rererereredux
 	result_amount = 1
 
 /datum/chemical_reaction/colored_hair_dye/purple
 	name = "Purple Hair Dye"
 	result = /datum/reagent/colored_hair_dye/purple
+<<<<<<< HEAD
 	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/crayon_dust/purple = 1)
+=======
+	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/drink/juice/grape = 1)
+>>>>>>> hairchems_rererereredux
 	result_amount = 1
 
 /datum/chemical_reaction/colored_hair_dye/grey
 	name = "Grey Hair Dye"
 	result = /datum/reagent/colored_hair_dye/grey
+<<<<<<< HEAD
 	required_reagents = list(/datum/reagent/colored_hair_dye/black = 1, /datum/reagent/crayon_dust/grey = 1)
+=======
+	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/drink/tea/barongrey = 1)
+>>>>>>> hairchems_rererereredux
 	result_amount = 1
 
 /datum/chemical_reaction/colored_hair_dye/brown
 	name = "Brown Hair Dye"
 	result = /datum/reagent/colored_hair_dye/brown
+<<<<<<< HEAD
 	required_reagents = list(/datum/reagent/colored_hair_dye/red=1, /datum/reagent/colored_hair_dye/black=1)
+=======
+	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/drink/space_cola = 1)
+>>>>>>> hairchems_rererereredux
 	result_amount = 1
 
 /datum/chemical_reaction/colored_hair_dye/light_brown
 	name = "Light Brown Hair Dye"
 	result = /datum/reagent/colored_hair_dye/light_brown
+<<<<<<< HEAD
 	required_reagents = list(/datum/reagent/colored_hair_dye/brown = 1, /datum/reagent/colored_hair_dye/white = 1)
+=======
+	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/drink/juice/potato = 1)
+>>>>>>> hairchems_rererereredux
 	result_amount = 1
 
 /datum/chemical_reaction/colored_hair_dye/white
 	name = "White Hair Dye"
 	result = /datum/reagent/colored_hair_dye/white
+<<<<<<< HEAD
 	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/crayon_dust/grey)
+=======
+	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/drink/milk = 1)
+>>>>>>> hairchems_rererereredux
 	result_amount = 1
 
 /datum/chemical_reaction/colored_hair_dye/black
 	name = "Black Hair Dye"
 	result = /datum/reagent/colored_hair_dye/black
+<<<<<<< HEAD
 	required_reagents = list(/datum/reagent/colored_hair_dye/red = 1, /datum/reagent/colored_hair_dye/blue = 1, /datum/reagent/colored_hair_dye/yellow=1)
+=======
+	required_reagents = list(/datum/reagent/hair_dye = 1, /datum/reagent/drink/coffee = 1)
+>>>>>>> hairchems_rererereredux
 	result_amount = 1
 	
 /datum/chemical_reaction/colored_hair_dye/chaos
