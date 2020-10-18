@@ -1,0 +1,4 @@
+author: "Albens"
+delete-after: True
+changes: 
+  - rscadd: "Exploratory Corps and Fleet now get Basic Athletics for free."
