@@ -54,7 +54,7 @@
 	name = "army utility cover"
 	desc = "A green utility cover bearing the crest of the SCG Army."
 	icon_state = "greenutility"
-
+	
 /obj/item/clothing/head/solgov/utility/army/tan
 	name = "tan utility cover"
 	desc = "A tan utility cover bearing the crest of the SCG Army."

@@ -35,7 +35,6 @@
 	icon_state = "armypt"
 	worn_state = "armypt"
 
-
 //Utility
 
 /obj/item/clothing/under/solgov/utility
@@ -161,37 +160,6 @@
 /obj/item/clothing/under/solgov/utility/fleet/exploration
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/exploration/fleet)
 
-/obj/item/clothing/under/solgov/utility/fleet/polopants
-	name = "fleet polo and pants"
-	desc = "An alternative utility uniform of the SCG Fleet, specially designed for engineering staff. The pants sports some yellow reflective stripes, and have knee pads."
-	icon_state = "navypolopants"
-	worn_state = "navypolopants"
-
-/obj/item/clothing/under/solgov/utility/fleet/polopants/command
-	desc = "An alternative utility uniform of the SCG Fleet. The pants have knee pads."
-	icon_state = "navypolopantsnostripe"
-	worn_state = "navypolopantscom"
-
-/obj/item/clothing/under/solgov/utility/fleet/polopants/security
-	desc = "An alternative utility uniform of the SCG Fleet. The pants have knee pads."
-	icon_state = "navypolopantsnostripe"
-	worn_state = "navypolopantssec"
-
-/obj/item/clothing/under/solgov/utility/fleet/polopants/medical
-	desc = "An alternative utility uniform of the SCG Fleet, specially designed for medics and doctors. The pants have knee pads."
-	icon_state = "navypolopantsnostripe"
-	worn_state = "navypolopantsmed"
-
-/obj/item/clothing/under/solgov/utility/fleet/polopants/supply
-	desc = "An alternative utility uniform of the SCG Fleet. The pants have knee pads."
-	icon_state = "navypolopantsnostripe"
-	worn_state = "navypolopantssup"
-
-/obj/item/clothing/under/solgov/utility/fleet/polopants/service
-	desc = "An alternative utility uniform of the SCG Fleet. The pants have knee pads."
-	icon_state = "navypolopantsnostripe"
-	worn_state = "navypolopantssrv"
-
 /obj/item/clothing/under/solgov/utility/fleet/combat
 	name = "fleet fatigues"
 	desc = "Alternative utility uniform of the SCG Fleet, for when coveralls are impractical."
@@ -210,23 +178,6 @@
 /obj/item/clothing/under/solgov/utility/fleet/combat/exploration
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/exploration/fleet)
 
-/obj/item/clothing/under/solgov/utility/fleet/officer
-	name = "fleet officer's coveralls"
-	desc = "Alternative utility uniform of the SCG Fleet, for officers."
-	icon_state = "navyutilityoff"
-	worn_state = "navyutilityoff"
-
-/obj/item/clothing/under/solgov/utility/fleet/officer/command
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/command/fleet)
-
-/obj/item/clothing/under/solgov/utility/fleet/officer/engineering
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/engineering/fleet)
-
-/obj/item/clothing/under/solgov/utility/fleet/officer/security
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/security/fleet)
-
-/obj/item/clothing/under/solgov/utility/fleet/officer/medical
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/medical/fleet)
 
 /obj/item/clothing/under/solgov/utility/army
 	name = "army fatigues"
@@ -234,6 +185,20 @@
 	icon_state = "greenutility"
 	item_state = "jensensuit"
 	worn_state = "greenutility"
+	
+/obj/item/clothing/under/solgov/utility/army/urban
+	name = "urban fatigues"
+	desc = "An urban version of the SCG Army utility uniform, made from durable material."
+	icon_state = "greyutility"
+	item_state = "gy_suit"
+	worn_state = "greyutility"
+
+/obj/item/clothing/under/solgov/utility/army/tan
+	name = "tan fatigues"
+	desc = "A tan version of the SCG Army utility uniform, made from durable material."
+	icon_state = "tanutility"
+	item_state = "johnny"
+	worn_state = "tanutility"
 
 /obj/item/clothing/under/solgov/utility/army/command
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/command/army)
@@ -258,20 +223,6 @@
 
 /obj/item/clothing/under/solgov/utility/army/exploration
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/exploration/army)
-
-/obj/item/clothing/under/solgov/utility/army/urban
-	name = "urban fatigues"
-	desc = "An urban version of the SCG Army utility uniform, made from durable material."
-	icon_state = "greyutility"
-	item_state = "gy_suit"
-	worn_state = "greyutility"
-
-/obj/item/clothing/under/solgov/utility/army/tan
-	name = "tan fatigues"
-	desc = "A tan version of the SCG Army utility uniform, made from durable material."
-	icon_state = "tanutility"
-	item_state = "johnny"
-	worn_state = "tanutility"
 
 //Service
 
@@ -409,7 +360,6 @@
 	name = "fleet service uniform"
 	desc = "The service uniform of the SCG Fleet, made from immaculate white fabric."
 	icon_state = "whiteservice"
-	item_state = "nursesuit"
 	worn_state = "whiteservice"
 	starting_accessories = list(/obj/item/clothing/accessory/navy)
 
@@ -423,7 +373,6 @@
 	name = "army service uniform"
 	desc = "The service uniform of the SCG Army. Slimming."
 	icon_state = "greenservice"
-	item_state = "johnny"
 	worn_state = "greenservice"
 	starting_accessories = list(/obj/item/clothing/accessory/brown)
 
@@ -437,7 +386,6 @@
 	name = "marine officer's service uniform"
 	desc = "The service uniform of the SCG Army. Slimming and stylish."
 	icon_state = "greenservice_com"
-	item_state = "johnny"
 	worn_state = "greenservice_com"
 	starting_accessories = list(/obj/item/clothing/accessory/brown)
 
@@ -478,6 +426,7 @@
 	desc = "A feminine version of the SCG Army dress uniform, even classier in gold."
 	icon_state = "blackdressfem"
 	worn_state = "blackdressfem_com"
+
 
 //misc garbage
 /obj/item/clothing/under/rank/internalaffairs/plain/solgov
