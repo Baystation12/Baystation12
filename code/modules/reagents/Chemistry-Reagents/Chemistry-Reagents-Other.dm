@@ -517,3 +517,116 @@
 	name = "Strong Dye"
 	description = "An extra-strength dye. Used for tinting food, but is especially effective with drinks and other fluids."
 	color_weight = 100
+
+/datum/reagent/capilliumate
+	name = "Capilliumate"
+	description = "Used across the sol system by balding men to retrieve their lost youth."
+	taste_description = "mothballs"
+	reagent_state = LIQUID
+	color = "#33270b"
+	overdose = REAGENTS_OVERDOSE
+	heating_products = null
+	heating_point = null
+	
+/datum/reagent/capilliumate/affect_touch(var/mob/living/carbon/human/M, var/alien, var/removed)
+	if(!alien && istype(M))
+		var/datum/sprite_accessory/hair/newhair = /datum/sprite_accessory/hair/longest
+		var/datum/sprite_accessory/facial_hair/newbeard = /datum/sprite_accessory/facial_hair/vlongbeard
+		M.change_hair(initial(newhair.name))
+		M.change_facial_hair(initial(newbeard.name))
+		M.visible_message(SPAN_NOTICE("\The [M]'s hair grows to extraordinary lengths!"))
+		metabolism=99
+
+/datum/reagent/capilliumate/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien == IS_DIONA)
+		return
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		if(prob(10))
+			to_chat(M, SPAN_NOTICE("Your tongue feels... fuzzy."))
+		if(H.stat != UNCONSCIOUS)
+			H.slurring = max(H.slurring, 10)
+	
+/datum/reagent/hair_dye
+	name = "Hair Dye"
+	description = "Some hair dye. Be fabulous! Requires an exta color to mix with."
+	taste_description = "bad choices"
+	reagent_state = LIQUID
+	color = "#b6f0ef"
+	overdose = REAGENTS_OVERDOSE
+	heating_products = null
+	heating_point = null
+		
+/datum/reagent/colored_hair_dye
+	name = "Hair Dye"
+	description = "Apply to your head to add some color to your life!"
+	reagent_state = LIQUID
+	taste_description = "bad choices"
+	metabolism=99
+	
+/datum/reagent/colored_hair_dye/red
+	name = "Red Hair Dye"
+	color = "#b33636"
+	
+/datum/reagent/colored_hair_dye/orange
+	name = "Orange Hair Dye"
+	color = "#b5772f"
+	
+/datum/reagent/colored_hair_dye/yellow
+	name = "Yellow Hair Dye"
+	color = "#a6a035"
+		
+/datum/reagent/colored_hair_dye/green
+	name = "Green Hair Dye"
+	color = "#61a834"
+	
+/datum/reagent/colored_hair_dye/blue
+	name = "Blue Hair Dye"
+	color = "#3470a8"
+	
+/datum/reagent/colored_hair_dye/purple
+	name = "Purple Hair Dye"
+	color = "#6d2d91"
+		
+/datum/reagent/colored_hair_dye/grey
+	name = "Grey Hair Dye"
+	color = "#696969"
+
+/datum/reagent/colored_hair_dye/brown
+	name = "Brown Hair Dye"
+	color = "#3b2d0f"
+
+/datum/reagent/colored_hair_dye/light_brown
+	name = "Light Brown Hair Dye"
+	color = "#3d3729"
+
+/datum/reagent/colored_hair_dye/black
+	name = "Black Hair Dye"
+	color = "#000000"
+
+/datum/reagent/colored_hair_dye/white
+	name = "White Hair Dye"
+	color = "#ffffff"
+
+/datum/reagent/colored_hair_dye/chaos
+	name = "Chaotic Hair Dye"
+	description = "This hair dye can be any color! Only one way to find out what kind!"
+	
+/datum/reagent/colored_hair_dye/affect_touch(var/mob/living/carbon/human/M, var/alien, var/removed)
+	metabolism=99
+	if(istype(M) && (M.species.appearance_flags & HAS_HAIR_COLOR))
+		var/red = hex2num(copytext(src.color, 2, 4))
+		var/green = hex2num(copytext(src.color, 4, 6))
+		var/blue = hex2num(copytext(src.color, 6, 8))
+		M.change_hair_color(red, green, blue)
+		M.change_facial_hair_color(red, green, blue)
+		M.visible_message(SPAN_NOTICE("\The [M]'s hair changes color!"))
+
+/datum/reagent/colored_hair_dye/chaos/affect_touch(var/mob/living/carbon/human/M, var/alien, var/removed)
+	if(istype(M) && (M.species.appearance_flags & HAS_HAIR_COLOR))
+		var/red = RAND_F(1,254)
+		var/green = RAND_F(1,254)
+		var/blue = RAND_F(1,254)
+		M.change_hair_color(red, green, blue)
+		M.change_facial_hair_color(red, green, blue)
+		to_chat(M, SPAN_NOTICE("Your hair suddenly changes color!"))
