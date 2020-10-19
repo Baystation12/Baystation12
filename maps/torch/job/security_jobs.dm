@@ -73,8 +73,8 @@
 	                    SKILL_WEAPONS     = SKILL_BASIC,
 	                    SKILL_FORENSICS   = SKILL_ADEPT)
 
-	max_skill = list(   SKILL_COMBAT      = SKILL_MAX,
-	                    SKILL_WEAPONS     = SKILL_MAX,
+	max_skill = list(   SKILL_COMBAT      = SKILL_EXPERT,
+	                    SKILL_WEAPONS     = SKILL_EXPERT,
 	                    SKILL_FORENSICS   = SKILL_MAX)
 	skill_points = 20
 
@@ -115,7 +115,7 @@
 
 	max_skill = list(   SKILL_COMBAT      = SKILL_MAX,
 	                    SKILL_WEAPONS     = SKILL_MAX,
-	                    SKILL_FORENSICS   = SKILL_MAX)
+	                    SKILL_FORENSICS   = SKILL_EXPERT)
 
 	access = list(access_security, access_brig, access_maint_tunnels,
 						access_external_airlocks, access_emergency_storage,

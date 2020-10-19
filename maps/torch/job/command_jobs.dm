@@ -91,7 +91,7 @@
 							 /datum/computer_file/program/reports)
 
 /datum/job/hop/get_description_blurb()
-	return "You are the Executive Officer. You are an experienced senior officer, second in command of the ship, and are responsible for the smooth operation of the ship under your Commanding Officer. In his absence, you are expected to take his place. Your primary duty is directly managing department heads and all those outside a department heading. You are also responsible for the contractors and passengers aboard the ship. Consider the Senior Enlisted Advisor and Bridge Officers tools at your disposal."
+	return "You are the Executive Officer. You are an experienced senior officer, second in command of the ship, and are responsible for the smooth operation of the ship under your Commanding Officer. In their absence, you are expected to take their place. Your primary duty is directly managing department heads and all those outside a department heading. You are also responsible for the contractors and passengers aboard the ship. Consider the Senior Enlisted Advisor and Bridge Officers tools at your disposal."
 
 /datum/job/rd
 	title = "Chief Science Officer"
@@ -333,9 +333,9 @@
 	                    SKILL_COMBAT     = SKILL_BASIC,
 	                    SKILL_WEAPONS    = SKILL_ADEPT)
 
-	max_skill = list(   SKILL_COMBAT       = SKILL_EXPERT,
+	max_skill = list(	SKILL_PILOT        = SKILL_ADEPT, 
+	                    SKILL_COMBAT       = SKILL_EXPERT,
 	                    SKILL_WEAPONS      = SKILL_EXPERT,
-	                    SKILL_PILOT        = SKILL_MAX,
 	                    SKILL_CONSTRUCTION = SKILL_MAX,
 	                    SKILL_ELECTRICAL   = SKILL_MAX,
 	                    SKILL_ENGINES      = SKILL_MAX,
