@@ -247,22 +247,6 @@
 		characters += character
 	return JOINTEXT(characters)
 
-GLOBAL_LIST_INIT(markup_tags, list("/" = list("<i>", "</i>")))
-GLOBAL_LIST_INIT(markup_regex, list("/" = new /regex("((\\W|^)\\/)(\[^\\/\]*)(\\/(\\W|$))", "g")))
-
-//Take the regex expressions and tags in the above two lists and apply them to message. Any tags in ignore will not be regexed (they will remain in the string).
-/proc/process_chat_markup(message, list/ignore)
-	if(!config.allow_chat_markup || !message)
-		return message
-
-	for(var/tag in GLOB.markup_tags)
-		if (ignore?.Find(tag))
-			continue
-		var/regex/markup = GLOB.markup_regex[tag]
-		message = markup.Replace(message, "$2[GLOB.markup_tags[tag][1]]$3[GLOB.markup_tags[tag][2]]$5")
-		
-	return message
-
 //Returns a string with reserved characters and spaces before the first letter removed
 /proc/trim_left(text)
 	for (var/i = 1 to length(text))
@@ -596,3 +580,20 @@ proc/TextPreview(var/string,var/len=40)
 /proc/text2num_or_default(text, default)
 	var/result = text2num(text)
 	return "[result]" == text ? result : default
+
+/proc/text2regex(text)
+	var/end = findlasttext(text, "/")
+	if (end > 2 && length(text) > 2 && text[1] == "/")
+		var/flags = end == length(text) ? FALSE : copytext(text, end + 1)
+		var/matcher = copytext(text, 2, end)
+		try
+			return flags ? regex(matcher, flags) : regex(matcher)
+		catch()
+	log_error("failed to parse text to regex: [text]")
+
+/proc/process_chat_markup(message)
+	if (message && length(config.chat_markup))
+		for (var/list/entry in config.chat_markup)
+			var/regex/matcher = entry[1]
+			message = matcher.Replace(message, "[entry[2]]$1[entry[3]]")
+	return message

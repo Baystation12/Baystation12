@@ -375,6 +375,15 @@ RADIATION_LOWER_LIMIT 0.15
 ## Clients will be unable to connect unless their build is equal to or higher than this (a number, e.g. 1000)
 #MINIMUM_BYOND_BUILD
 
+## Uncomment or create lines to add user-accessible chat markup
+## A chat markup line is in the form regex;start;end. The regular expression should have a SINGLE capture group
+## and be in the common /matcher/flags format. Start and end are inserted around the capture group, and the rest of
+## any match is discarded. The provided examples provide /italics/, *bold*, and _underline_ respectively. Using
+## multiple or complex markup options can get strange - do it at your own risk.
+#CHAT_MARKUP /\/([^\/]*)\//g;<i>;</i>
+#CHAT_MARKUP /\*([^\*]*)\*/g;<b>;</b>
+#CHAT_MARKUP /_([^_]*)_/g;<u>;</u>
+
 ## Prevents matching messages from being sent on any communication channel
 ## The provided example forbids byond:// and http/https:// unless followed by a permitted domain.
 #FORBIDDEN_MESSAGE_REGEX /((https?)|(byond)):\/\/(?!(.*\.)?baystation12\.net)/i

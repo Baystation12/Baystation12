@@ -152,15 +152,15 @@
 	var/key_name = plain_key_name(src)
 	return usr != src ? "[key_name] - usr: [plain_key_name(usr)]" : key_name
 
-/proc/sanitize_and_communicate(channel_type, communicator, message, list/ignore_tags)
+/proc/sanitize_and_communicate(channel_type, communicator, message)
 	message = sanitize(message)
-	message = process_chat_markup(message, ignore_tags)
 	return communicate(arglist(args))
 
 /proc/communicate(var/channel_type, var/communicator, var/message)
 	var/list/channels = decls_repository.get_decls_of_subtype(/decl/communication_channel)
 	var/decl/communication_channel/channel = channels[channel_type]
 
+	message = process_chat_markup(message)
 	var/list/new_args = list(communicator, message)
 	new_args += args.Copy(4)
 
