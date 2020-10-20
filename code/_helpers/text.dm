@@ -595,5 +595,5 @@ proc/TextPreview(var/string,var/len=40)
 	if (message && length(config.chat_markup))
 		for (var/list/entry in config.chat_markup)
 			var/regex/matcher = entry[1]
-			message = matcher.Replace(message, "[entry[2]]$1[entry[3]]")
+			message = matcher.Replace(message, entry[2])
 	return message
