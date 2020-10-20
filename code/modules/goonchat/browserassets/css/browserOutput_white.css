@@ -345,11 +345,17 @@ h1.alert, h2.alert		{color: #000080;}
 .nabber_lang			{color: #525252;}
 .solcom					{color: #22228b;}
 .vox					{color: #aa00aa;}
+.yeosa 					{color:	#059223}
 .rough					{font-family: "Trebuchet MS", cursive, sans-serif;}
 .say_quote				{font-family: Georgia, Verdana, sans-serif;}
-.terran					{color: #9c250b;}
+.russian				{color: #9c250b;}
 .moon					{color: #422863;}
 .spacer					{color: #ff6600;}
+.selenian				{color: #5a83c5;}
+.arabic					{color: #95d16c;}
+.chinese				{color: #7d60cc;}
+.indian					{color: #5dbba4;}
+.iberian				{color: #be4ac9;}
 
 .interface				{color: #750e75;}
 
