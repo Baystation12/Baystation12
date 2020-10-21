@@ -1,0 +1,5 @@
+author: "Spookerton"
+delete-after: True
+changes: 
+  - tweak: "You can't force someone intentionally lying down to stand up."
+  - tweak: "Operating tables apply a short forced weakened state instead of setting manual resting."
