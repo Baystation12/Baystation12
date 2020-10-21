@@ -1,13 +1,18 @@
 // Screen objects hereon out.
+#define MECH_UI_STYLE(X) "<span style=\"font-family: 'Small Fonts'; -dm-text-outline: 1 black; font-size: 5px;\">" + X + "</span>"
+
 /obj/screen/exosuit
 	name = "hardpoint"
 	icon = 'icons/mecha/mech_hud.dmi'
-	icon_state = "hardpoint"
+	icon_state = "base"
 	var/mob/living/exosuit/owner
+	var/height = 14
 
 /obj/screen/exosuit/radio
 	name = "radio"
-	icon_state = "radio"
+	maptext = MECH_UI_STYLE("RADIO")
+	maptext_x = 5
+	maptext_y = 12
 
 /obj/screen/exosuit/radio/Click()
 	if(..())
@@ -30,6 +35,7 @@
 	name = "hardpoint"
 	var/hardpoint_tag
 	var/obj/item/holding
+	icon_state = "hardpoint"
 
 	maptext_x = 34
 	maptext_y = 3
@@ -150,7 +156,9 @@
 
 /obj/screen/exosuit/eject
 	name = "eject"
-	icon_state = "eject"
+	maptext = MECH_UI_STYLE("EJECT")
+	maptext_x = 5
+	maptext_y = 12
 
 /obj/screen/exosuit/eject/Click()
 	if(..())
@@ -158,7 +166,9 @@
 
 /obj/screen/exosuit/rename
 	name = "rename"
-	icon_state = "rename"
+	maptext = MECH_UI_STYLE("RENAME")
+	maptext_x = 1
+	maptext_y = 12
 
 /obj/screen/exosuit/power
 	name = "power"
@@ -172,19 +182,32 @@
 
 /obj/screen/exosuit/toggle
 	name = "toggle"
-	var/toggled
+	var/toggled = FALSE
+
+/obj/screen/exosuit/toggle/Initialize()
+	. = ..()
+	queue_icon_update()
+
+/obj/screen/exosuit/toggle/on_update_icon()
+	. = ..()
+	icon_state = "[initial(icon_state)][toggled ? "_enabled" : ""]"
+	maptext = FONT_COLORED(toggled ? COLOR_WHITE : COLOR_GRAY,initial(maptext))
 
 /obj/screen/exosuit/toggle/Click()
 	if(..()) toggled()
 
 /obj/screen/exosuit/toggle/proc/toggled()
 	toggled = !toggled
-	icon_state = "[initial(icon_state)][toggled ? "_enabled" : ""]"
+	queue_icon_update()
 	return toggled
 
 /obj/screen/exosuit/toggle/air
 	name = "air"
-	icon_state = "air"
+	icon_state = "small_important"
+	maptext = MECH_UI_STYLE("AIR")
+	maptext_x = 9
+	maptext_y = 13
+	height = 12
 
 /obj/screen/exosuit/toggle/air/toggled()
 	owner.use_air = ..()
@@ -192,7 +215,11 @@
 
 /obj/screen/exosuit/toggle/maint
 	name = "toggle maintenance protocol"
-	icon_state = "maint"
+	icon_state = "small"
+	maptext = MECH_UI_STYLE("MAINT")
+	maptext_x = 5
+	maptext_y = 13
+	height = 12
 
 /obj/screen/exosuit/toggle/maint/toggled()
 	owner.maintenance_protocols = ..()
@@ -200,7 +227,9 @@
 
 /obj/screen/exosuit/toggle/hardpoint
 	name = "toggle hardpoint lock"
-	icon_state = "hardpoint_lock"
+	maptext = MECH_UI_STYLE("GEAR")
+	maptext_x = 5
+	maptext_y = 12
 
 /obj/screen/exosuit/toggle/hardpoint/toggled()
 	owner.hardpoints_locked = ..()
@@ -208,7 +237,9 @@
 
 /obj/screen/exosuit/toggle/hatch
 	name = "toggle hatch lock"
-	icon_state = "hatch_lock"
+	maptext = MECH_UI_STYLE("LOCK")
+	maptext_x = 5
+	maptext_y = 12
 
 /obj/screen/exosuit/toggle/hatch/toggled()
 	if(!owner.hatch_locked && !owner.hatch_closed)
@@ -219,7 +250,9 @@
 
 /obj/screen/exosuit/toggle/hatch_open
 	name = "open or close hatch"
-	icon_state = "hatch_status"
+	maptext = MECH_UI_STYLE("CLOSE")
+	maptext_x = 4
+	maptext_y = 12
 
 /obj/screen/exosuit/toggle/hatch_open/toggled()
 	if (!owner)
@@ -230,6 +263,15 @@
 	owner.hatch_closed = ..()
 	to_chat(usr, SPAN_NOTICE("The [owner.body.hatch_descriptor] is now [owner.hatch_closed ? "closed" : "open" ]."))
 	owner.update_icon()
+
+/obj/screen/exosuit/toggle/hatch_open/on_update_icon()
+	. = ..()
+	if(owner.hatch_closed)
+		maptext = MECH_UI_STYLE("OPEN")
+		maptext_x = 5
+	else
+		maptext = MECH_UI_STYLE("CLOSE")
+		maptext_x = 4
 
 // This is basically just a holder for the updates the exosuit does.
 /obj/screen/exosuit/health
@@ -247,7 +289,11 @@
 //Controls if cameras set the vision flags
 /obj/screen/exosuit/toggle/camera
 	name = "toggle camera matrix"
-	icon_state = "camera"
+	icon_state = "small_important"
+	maptext = MECH_UI_STYLE("SENSOR")
+	maptext_x = 1
+	maptext_y = 13
+	height = 12
 
 /obj/screen/exosuit/toggle/camera/toggled()
 	if(!owner.head)
@@ -261,3 +307,4 @@
 
 
 #undef BAR_CAP
+#undef MECH_UI_STYLE
