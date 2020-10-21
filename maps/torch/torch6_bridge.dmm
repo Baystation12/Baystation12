@@ -3574,6 +3574,9 @@
 /obj/effect/floor_decal/corner/research,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
+"gl" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/hallway/primary/bridge/fore)
 "gm" = (
 /turf/unsimulated/mask,
 /area/hallway/primary/bridge/aft)
@@ -4476,6 +4479,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
+/obj/structure/closet/crate/freezer/rations,
 /obj/machinery/light{
 	dir = 8;
 	icon_state = "tube1";
@@ -29769,11 +29773,11 @@ Oj
 sT
 uJ
 zo
-hC
+gl
 La
 iX
 Lk
-hC
+gl
 ck
 mO
 oK
@@ -30373,10 +30377,10 @@ fl
 Jj
 Rj
 sT
+gl
+gl
 hC
-hC
-hC
-hC
+gl
 uV
 in
 kL

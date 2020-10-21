@@ -3531,6 +3531,7 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
+/obj/structure/closet/crate/freezer/rations,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/escape_pod11/station)
 "gJ" = (
@@ -3644,6 +3645,9 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/engine_room)
+"gX" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/engineering/bluespace)
 "gY" = (
 /obj/effect/floor_decal/industrial/warning/corner,
 /obj/structure/extinguisher_cabinet{
@@ -7361,6 +7365,9 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/assembly/robotics)
+"qu" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/teleporter/seconddeck)
 "qv" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/engineering/drone_fabrication)
@@ -10220,6 +10227,7 @@
 	dir = 8
 	},
 /obj/machinery/light/small,
+/obj/structure/closet/crate/freezer/rations,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/escape_pod10/station)
 "xZ" = (
@@ -18035,8 +18043,8 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/central)
 "Wa" = (
-/obj/effect/floor_decal/industrial/outline/grey,
 /obj/structure/closet/crate/freezer/rations,
+/obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/central)
 "Wb" = (
@@ -35736,7 +35744,7 @@ XP
 XP
 pL
 gr
-jV
+gX
 jV
 OL
 OF
@@ -36544,7 +36552,7 @@ fK
 XP
 gh
 gU
-jV
+gX
 jV
 vy
 Ka
@@ -38974,10 +38982,10 @@ Ab
 QI
 jy
 fp
-Yy
+qu
 kj
-Yy
-Yy
+qu
+qu
 Is
 Fn
 AN
@@ -39381,8 +39389,8 @@ fp
 jZ
 km
 nB
-Yy
-Yy
+qu
+qu
 Fn
 AN
 TV
@@ -39584,7 +39592,7 @@ vS
 WA
 xC
 kG
-Yy
+qu
 Fn
 AN
 Cf
@@ -39786,7 +39794,7 @@ Qv
 kx
 xC
 kM
-Yy
+qu
 Fn
 AN
 AN
@@ -39988,7 +39996,7 @@ kf
 zZ
 xC
 FV
-Yy
+qu
 wL
 NF
 Cg
@@ -40188,9 +40196,9 @@ jy
 fp
 vS
 FI
-Yy
-Yy
-Yy
+qu
+qu
+qu
 KE
 Bw
 Cg
