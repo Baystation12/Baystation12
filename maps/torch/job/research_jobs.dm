@@ -118,6 +118,6 @@
 	                    SKILL_SCIENCE     = SKILL_MAX)
 
 	access = list(access_tox, access_tox_storage, access_research, access_petrov,
-						access_mining_office, access_mining_station, access_xenobiology,
+						access_mining_office, access_mining_station, access_xenobiology, access_guppy_helm,
 						access_xenoarch, access_nanotrasen, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar,
 						access_petrov_analysis, access_petrov_phoron, access_petrov_toxins, access_petrov_chemistry)
