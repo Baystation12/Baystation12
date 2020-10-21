@@ -447,7 +447,6 @@ TORCH_ESCAPE_POD(17)
 	name = "Aquila Hangar"
 	landmark_tag = "nav_hangar_aquila"
 	docking_controller = "aquila_shuttle_dock_airlock"
-	base_turf = /turf/simulated/floor/reinforced/airless
 
 /obj/effect/shuttle_landmark/torch/deck1/aquila
 	name = "Space near Forth Deck"

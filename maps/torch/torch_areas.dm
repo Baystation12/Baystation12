@@ -621,8 +621,6 @@
 
 /area/command/armoury/tactical
 	name = "\improper Emergency Armory - Tactical"
-	icon_state = "Tactical"
-	req_access = list(access_emergency_armory)
 
 /area/command/disperser
 	name = "\improper Obstruction Field Disperser"
@@ -1187,7 +1185,7 @@
 	req_access = list(access_eva)
 
 /area/aux_eva
-	name = "\improper Command EVA Storage"
+	name = "\improper Auxilary EVA Storage"
 	icon_state = "eva"
 	req_access = list(access_eva)
 
