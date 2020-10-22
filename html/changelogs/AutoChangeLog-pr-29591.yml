@@ -1,0 +1,4 @@
+author: "juxtaposed9930"
+delete-after: True
+changes: 
+  - maptweak: "The Cryostorage areas are now radiation and ion shielded so poorly timed spawns don't suffer."
