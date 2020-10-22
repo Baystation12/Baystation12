@@ -1,0 +1,4 @@
+author: "juxtaposed9930"
+delete-after: True
+changes: 
+  - bugfix: "Bridge EVA Chief Engineer suit storage now requires Chief Engineer access."
