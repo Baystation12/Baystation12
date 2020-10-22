@@ -1491,7 +1491,7 @@
 /area/engineering/storage
 	name = "\improper Engineering Storage"
 	icon_state = "engineering_storage"
-	req_access = list(list(access_engine_equip, access_atmospherics))
+	req_access = list()
 
 /area/engineering/atmos
 	name = "\improper Atmospherics"
