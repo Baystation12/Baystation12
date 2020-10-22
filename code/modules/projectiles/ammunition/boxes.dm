@@ -102,7 +102,7 @@
 	mag_type = MAGAZINE
 	ammo_type = /obj/item/ammo_casing/pistol
 	matter = list(MATERIAL_STEEL = 1200)
-	caliber = CALIBER_PISTOL
+	caliber = CALIBER_PISTOL_SMALL
 	max_ammo = 16
 	multiple_sprites = 1
 
@@ -114,9 +114,9 @@
 	icon_state = "smg_top"
 	mag_type = MAGAZINE
 	ammo_type = /obj/item/ammo_casing/pistol/small
-	matter = list(MATERIAL_STEEL = 1200)
-	caliber = CALIBER_PISTOL_SMALL
-	max_ammo = 20
+	matter = list(MATERIAL_STEEL = 1350)
+	caliber = CALIBER_PISTOL
+	max_ammo = 18
 	multiple_sprites = 1
 
 /obj/item/ammo_magazine/smg_top/empty
@@ -124,11 +124,11 @@
 
 /obj/item/ammo_magazine/smg_top/rubber
 	labels = list("rubber")
-	ammo_type = /obj/item/ammo_casing/pistol/small/rubber
+	ammo_type = /obj/item/ammo_casing/pistol/rubber
 
 /obj/item/ammo_magazine/smg_top/practice
 	labels = list("practice")
-	ammo_type = /obj/item/ammo_casing/pistol/small/practice
+	ammo_type = /obj/item/ammo_casing/pistol/practice
 
 /obj/item/ammo_magazine/smg
 	name = "box magazine"
@@ -136,9 +136,9 @@
 	origin_tech = list(TECH_COMBAT = 2)
 	mag_type = MAGAZINE
 	caliber = CALIBER_PISTOL
-	matter = list(MATERIAL_STEEL = 1500)
+	matter = list(MATERIAL_STEEL = 1600)
 	ammo_type = /obj/item/ammo_casing/pistol
-	max_ammo = 20
+	max_ammo = 25
 	multiple_sprites = 1
 
 /obj/item/ammo_magazine/smg/empty
