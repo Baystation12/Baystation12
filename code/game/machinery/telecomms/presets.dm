@@ -23,8 +23,7 @@
 	id = "Hub"
 	network = "tcommsat"
 	autolinkers = list("hub", "relay", "c_relay", "s_relay", "m_relay", "r_relay", "b_relay", "1_relay", "2_relay", "3_relay", "4_relay", "5_relay", "s_relay", "science", "medical",
-	"supply", "service", "common", "command", "engineering", "security", "unused",
-	"receiverA", "broadcasterA")
+	"supply", "service", "common", "command", "engineering", "security", "receiverA", "broadcasterA")
 
 /obj/machinery/telecomms/hub/preset_cent
 	id = "CentComm Hub"
@@ -102,14 +101,7 @@
 	id = "Bus 2"
 	network = "tcommsat"
 	freq_listening = list(SUP_FREQ, SRV_FREQ)
-	autolinkers = list("processor2", "supply", "service", "unused")
-
-/obj/machinery/telecomms/bus/preset_two/New()
-	for(var/i = PUBLIC_LOW_FREQ, i < PUBLIC_HIGH_FREQ, i += 2)
-		if(i == AI_FREQ || i == PUB_FREQ || i == MED_I_FREQ || i == SEC_I_FREQ || i == HAIL_FREQ)
-			continue
-		freq_listening |= i
-	..()
+	autolinkers = list("processor2", "supply", "service")
 
 /obj/machinery/telecomms/bus/preset_three
 	id = "Bus 3"
@@ -122,6 +114,13 @@
 	network = "tcommsat"
 	freq_listening = list(ENG_FREQ, AI_FREQ, PUB_FREQ, ENT_FREQ, MED_I_FREQ, SEC_I_FREQ, HAIL_FREQ)
 	autolinkers = list("processor4", "engineering", "common")
+
+/obj/machinery/telecomms/bus/preset_four/New()
+	for(var/i = PUBLIC_LOW_FREQ, i < PUBLIC_HIGH_FREQ, i += 2)
+		if(i == AI_FREQ || i == PUB_FREQ || i == MED_I_FREQ || i == SEC_I_FREQ || i == HAIL_FREQ)
+			continue
+		freq_listening |= i
+	..()
 
 /obj/machinery/telecomms/bus/preset_cent
 	id = "CentComm Bus"
@@ -241,12 +240,7 @@
 	autolinkers = list("common")
 
 // "Unused" channels, AKA all others.
-/obj/machinery/telecomms/server/presets/unused
-	id = "Unused Server"
-	freq_listening = list()
-	autolinkers = list("unused")
-
-/obj/machinery/telecomms/server/presets/unused/New()
+/obj/machinery/telecomms/server/presets/common/New()
 	for(var/i = PUBLIC_LOW_FREQ, i < PUBLIC_HIGH_FREQ, i += 2)
 		if(i == AI_FREQ || i == PUB_FREQ || i == MED_I_FREQ || i == SEC_I_FREQ || i == HAIL_FREQ)
 			continue

@@ -3495,8 +3495,8 @@
 /turf/simulated/floor/bluegrid,
 /area/tcommsat/chamber)
 "hc" = (
-/obj/machinery/telecomms/server/presets/unused,
 /obj/effect/floor_decal/industrial/outline/grey,
+/obj/machinery/telecomms/server/presets/exploration,
 /turf/simulated/floor/bluegrid,
 /area/tcommsat/chamber)
 "hd" = (
