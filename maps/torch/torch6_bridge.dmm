@@ -3263,8 +3263,9 @@
 /obj/structure/table/rack,
 /obj/structure/window/reinforced,
 /obj/machinery/door/window/brigdoor/westright{
-	dir = 8;
-	name = "CE's Equipment Storage"
+	autoset_access = 0;
+	name = "CE's suit storage";
+	req_access = list("ACCESS_CHIEF_ENGINEER")
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/structure/window/reinforced{
