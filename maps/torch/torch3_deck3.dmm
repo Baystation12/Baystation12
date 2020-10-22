@@ -313,12 +313,11 @@
 "be" = (
 /obj/effect/wallframe_spawn/reinforced/hull,
 /obj/machinery/door/firedoor,
-/obj/machinery/door/blast/shutters{
+/obj/machinery/door/blast/regular{
 	density = 0;
-	dir = 2;
-	icon_state = "shutter0";
+	icon_state = "pdoor0";
 	id_tag = "hydroponics_shutters";
-	name = "Window Shutters";
+	name = "Blast Shields";
 	opacity = 0
 	},
 /turf/simulated/floor/plating,
@@ -3274,6 +3273,19 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/starboard)
+"gE" = (
+/obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/firedoor,
+/obj/machinery/door/blast/regular{
+	density = 0;
+	dir = 2;
+	icon_state = "pdoor0";
+	id_tag = "d3fore_shutters";
+	name = "Blast Shields";
+	opacity = 0
+	},
+/turf/simulated/floor/plating,
+/area/crew_quarters/observation)
 "gF" = (
 /obj/structure/disposalpipe/segment{
 	dir = 8;
@@ -6618,6 +6630,12 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
+/obj/machinery/button/blast_door{
+	id_tag = "d3fore_shutters";
+	name = "Garden shutter controll";
+	pixel_x = -23;
+	pixel_y = -9
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/observation)
 "ny" = (
@@ -7871,6 +7889,14 @@
 "qx" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
+/obj/machinery/door/blast/regular{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "d3fore_shutters";
+	name = "Blast Shields";
+	opacity = 0
+	},
 /turf/simulated/floor/plating,
 /area/crew_quarters/observation)
 "qC" = (
@@ -9529,6 +9555,19 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/security/habcheck)
+"uO" = (
+/obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/firedoor,
+/obj/machinery/door/blast/regular{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "d3aft_shutters";
+	name = "Blast Shields";
+	opacity = 0
+	},
+/turf/simulated/floor/plating,
+/area/hallway/primary/thirddeck/aft)
 "uP" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/crew_quarters/sleep/cryo)
@@ -10271,12 +10310,12 @@
 "xi" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
-/obj/machinery/door/blast/shutters{
+/obj/machinery/door/blast/regular{
 	density = 0;
-	dir = 2;
-	icon_state = "shutter0";
+	dir = 4;
+	icon_state = "pdoor0";
 	id_tag = "d3aft_shutters";
-	name = "Window Shutters";
+	name = "Blast Shields";
 	opacity = 0
 	},
 /obj/structure/cable/green{
@@ -14435,6 +14474,17 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/aftstarboard)
+"IX" = (
+/obj/item/weapon/stool/padded,
+/obj/effect/floor_decal/corner/green/half,
+/obj/machinery/button/blast_door{
+	id_tag = "d3fore_shutters";
+	name = "Garden shutter controll";
+	pixel_x = -7;
+	pixel_y = -23
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/crew_quarters/observation)
 "IY" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -17874,12 +17924,12 @@
 "Su" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
-/obj/machinery/door/blast/shutters{
+/obj/machinery/door/blast/regular{
 	density = 0;
 	dir = 2;
-	icon_state = "shutter0";
+	icon_state = "pdoor0";
 	id_tag = "d3aft_shutters";
-	name = "Window Shutters";
+	name = "Blast Shields";
 	opacity = 0
 	},
 /turf/simulated/floor/plating,
@@ -18233,12 +18283,12 @@
 "Tu" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
-/obj/machinery/door/blast/shutters{
+/obj/machinery/door/blast/regular{
 	density = 0;
-	dir = 2;
-	icon_state = "shutter0";
+	dir = 4;
+	icon_state = "pdoor0";
 	id_tag = "d3aft_shutters";
-	name = "Window Shutters";
+	name = "Blast Shields";
 	opacity = 0
 	},
 /obj/structure/cable/green{
@@ -18775,6 +18825,12 @@
 /obj/effect/floor_decal/corner/green/half{
 	dir = 1;
 	icon_state = "bordercolorhalf"
+	},
+/obj/machinery/button/blast_door{
+	id_tag = "d3fore_shutters";
+	name = "Garden shutter controll";
+	pixel_x = -7;
+	pixel_y = 23
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/observation)
@@ -28791,7 +28847,7 @@ ZN
 aa
 aa
 qx
-qx
+gE
 BQ
 Fn
 YB
@@ -28803,7 +28859,7 @@ Vt
 BQ
 Fn
 YB
-qx
+gE
 qx
 aa
 aa
@@ -28992,7 +29048,7 @@ ZN
 ZN
 aa
 aa
-qx
+gE
 lV
 Yr
 ZU
@@ -29006,7 +29062,7 @@ Yr
 Yr
 Yr
 np
-qx
+gE
 aa
 aa
 BV
@@ -29207,7 +29263,7 @@ mL
 Yr
 mN
 Yr
-KZ
+IX
 vt
 BV
 BV
@@ -47176,13 +47232,13 @@ aT
 aI
 aI
 aI
-Su
+uO
 Su
 rB
 sX
 uo
 Su
-Su
+uO
 aI
 aI
 aI
