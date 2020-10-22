@@ -681,14 +681,14 @@ var/list/gamemode_cache = list()
 
 				if ("chat_markup")
 					var/list/line = splittext(value, ";")
-					if (length(line) != 3)
+					if (length(line) != 2)
 						log_error("Invalid chat_markup entry length: [value]")
 					else
 						var/matcher = text2regex(line[1])
 						if (!matcher)
 							log_error("Invalid chat_markup regex: [value]")
 						else
-							LAZYADD(config.chat_markup, list(list(matcher, line[2], line[3])))
+							LAZYADD(config.chat_markup, list(list(matcher, line[2])))
 
 				if ("forbidden_message_regex")
 					config.forbidden_message_regex = text2regex(value)

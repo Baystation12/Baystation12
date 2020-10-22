@@ -376,13 +376,13 @@ RADIATION_LOWER_LIMIT 0.15
 #MINIMUM_BYOND_BUILD
 
 ## Uncomment or create lines to add user-accessible chat markup
-## A chat markup line is in the form regex;start;end. The regular expression should have a SINGLE capture group
-## and be in the common /matcher/flags format. Start and end are inserted around the capture group, and the rest of
-## any match is discarded. The provided examples provide /italics/, *bold*, and _underline_ respectively. Using
-## multiple or complex markup options can get strange - do it at your own risk.
-#CHAT_MARKUP /\/([^\/]*)\//g;<i>;</i>
-#CHAT_MARKUP /\*([^\*]*)\*/g;<b>;</b>
-#CHAT_MARKUP /_([^_]*)_/g;<u>;</u>
+## A chat markup line is in the form regex;replacer. The regular expression should be in the common
+# /matcher/flags format. The replacer is a common regex replacer string, using $n ($1, $2, etc) to
+# reference capture groups. The provided examples allow for /italics/, *bold*, and _underline_
+# respectively. Using multiple or complex markup options can get strange - do it at your own risk.
+#CHAT_MARKUP /(^|\s)\/([^\/]+)\//g;$1<i>$2</i>
+#CHAT_MARKUP /(^|\s)\*([^\*]+)\*/g;$1<b>$2</b>
+#CHAT_MARKUP /(^|\s)_([^_]+)_/g;$1<u>$2</u>
 
 ## Prevents matching messages from being sent on any communication channel
 ## The provided example forbids byond:// and http/https:// unless followed by a permitted domain.
