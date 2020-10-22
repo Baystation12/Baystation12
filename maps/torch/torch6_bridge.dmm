@@ -3060,10 +3060,9 @@
 	pixel_x = -32
 	},
 /obj/machinery/turretid/stun{
-	check_synth = 0;
+	enabled = 0;
 	name = "Aquila point defense control";
 	pixel_x = 32;
-	pixel_y = 0;
 	req_access = list("ACCESS_TORCH_AQUILA_HELM")
 	},
 /obj/structure/bed/chair/shuttle/blue{
