@@ -1,0 +1,4 @@
+author: "Mucker"
+delete-after: True
+changes: 
+  - tweak: "Add the missing 'subtle' style class to goonchat, tweaks colour for darkmode."
