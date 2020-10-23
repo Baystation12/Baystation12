@@ -2217,7 +2217,9 @@
 /area/guppy_hangar/start)
 "eg" = (
 /obj/effect/floor_decal/industrial/outline/orange,
-/obj/machinery/portable_atmospherics/canister/carbon_dioxide/engine_setup,
+/obj/machinery/portable_atmospherics/canister/carbon_dioxide/engine_setup{
+	start_pressure = 7498.00
+	},
 /obj/machinery/atmospherics/portables_connector{
 	dir = 4
 	},
@@ -5223,7 +5225,9 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/quartermaster/expedition/storage)
 "lz" = (
-/obj/machinery/portable_atmospherics/canister/carbon_dioxide,
+/obj/machinery/portable_atmospherics/canister/carbon_dioxide/engine_setup{
+	start_pressure = 4769
+	},
 /obj/machinery/light/small{
 	dir = 4;
 	icon_state = "bulb1"
@@ -13077,7 +13081,9 @@
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/analysis)
 "Hm" = (
-/obj/machinery/portable_atmospherics/canister/carbon_dioxide,
+/obj/machinery/portable_atmospherics/canister/carbon_dioxide/engine_setup{
+	start_pressure = 4769
+	},
 /obj/effect/floor_decal/industrial/outline/orange,
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 8;
@@ -15828,7 +15834,9 @@
 	dir = 4;
 	icon_state = "map_connector"
 	},
-/obj/machinery/portable_atmospherics/canister/carbon_dioxide/engine_setup,
+/obj/machinery/portable_atmospherics/canister/carbon_dioxide/engine_setup{
+	start_pressure = 7498.00
+	},
 /turf/simulated/floor/plating,
 /area/guppy_hangar/start)
 "Re" = (
