@@ -8234,6 +8234,7 @@
 /obj/effect/floor_decal/corner/lime/three_quarters{
 	dir = 1
 	},
+/obj/item/weapon/reagent_containers/pill/floorpill,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
 "rC" = (
@@ -11031,6 +11032,10 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/sleep/cryo)
+"zc" = (
+/obj/item/weapon/reagent_containers/pill/floorpill,
+/turf/simulated/floor/tiled/dark,
+/area/crew_quarters/sleep/bunk)
 "ze" = (
 /obj/structure/railing/mapped{
 	dir = 8;
@@ -16258,6 +16263,17 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
+"Ni" = (
+/obj/structure/disposalpipe/segment{
+	dir = 2;
+	icon_state = "pipe-c"
+	},
+/obj/effect/floor_decal/corner/blue/diagonal{
+	dir = 4
+	},
+/obj/item/weapon/reagent_containers/pill/floorpill,
+/turf/simulated/floor/tiled/white,
+/area/crew_quarters/mess)
 "Nj" = (
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/portable_atmospherics/canister/empty/carbon_dioxide,
@@ -17403,6 +17419,11 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/center)
+"QP" = (
+/obj/structure/catwalk,
+/obj/item/weapon/reagent_containers/pill/floorpill,
+/turf/simulated/floor/plating,
+/area/maintenance/thirddeck/foreport)
 "QQ" = (
 /obj/effect/wallframe_spawn/no_grille,
 /obj/machinery/door/firedoor,
@@ -31054,7 +31075,7 @@ Ur
 Ur
 Ur
 Ur
-Ur
+QP
 hG
 zS
 Gs
@@ -35704,7 +35725,7 @@ vP
 wX
 vP
 yR
-vP
+zc
 Cm
 Bq
 BV
@@ -38300,7 +38321,7 @@ TX
 wn
 nZ
 Sw
-Tb
+Ni
 VT
 rM
 qb

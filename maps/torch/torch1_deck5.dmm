@@ -2608,6 +2608,7 @@
 	icon_state = "techfloor_edges"
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/item/weapon/reagent_containers/pill/floorpill,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/cargo)
 "fn" = (
@@ -6580,6 +6581,7 @@
 	dir = 5
 	},
 /obj/structure/catwalk,
+/obj/item/weapon/reagent_containers/pill/floorpill,
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/fore)
 "os" = (
@@ -7630,6 +7632,7 @@
 /area/hallway/primary/fifthdeck/aft)
 "qH" = (
 /obj/effect/floor_decal/corner/brown/half,
+/obj/item/weapon/reagent_containers/pill/floorpill,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fifthdeck/aft)
 "qI" = (
@@ -8883,6 +8886,7 @@
 	icon_state = "intact"
 	},
 /obj/structure/catwalk,
+/obj/item/weapon/reagent_containers/pill/floorpill,
 /turf/simulated/floor/plating,
 /area/rnd/canister)
 "tm" = (
@@ -9842,6 +9846,11 @@
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/shuttle/petrov/isolation)
+"vy" = (
+/obj/structure/catwalk,
+/obj/item/weapon/reagent_containers/pill/floorpill,
+/turf/simulated/floor/plating,
+/area/maintenance/fifthdeck/fore)
 "vA" = (
 /obj/structure/cable/cyan{
 	d1 = 2;
@@ -10117,6 +10126,22 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/fore)
+"wC" = (
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/disposalpipe/segment,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4;
+	icon_state = "warning"
+	},
+/obj/item/weapon/reagent_containers/pill/floorpill,
+/turf/simulated/floor/tiled/monotile,
+/area/quartermaster/storage)
 "wD" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/structure/cable{
@@ -10496,6 +10521,7 @@
 	icon_state = "1-4"
 	},
 /obj/structure/catwalk,
+/obj/item/weapon/reagent_containers/pill/floorpill,
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/fore)
 "ye" = (
@@ -12737,6 +12763,10 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/hallwaya)
+"Gp" = (
+/obj/item/weapon/reagent_containers/pill/floorpill,
+/turf/simulated/floor/tiled/white,
+/area/shuttle/petrov/hallwaya)
 "Gr" = (
 /obj/structure/table/standard,
 /obj/random/tool,
@@ -13451,6 +13481,10 @@
 /obj/machinery/door/airlock/maintenance,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/fifthdeck/aftstarboard)
+"IK" = (
+/obj/item/weapon/reagent_containers/pill/floorpill,
+/turf/simulated/floor/tiled/monotile,
+/area/quartermaster/hangar)
 "IN" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -17248,6 +17282,7 @@
 	icon_state = "4-8"
 	},
 /obj/structure/catwalk,
+/obj/item/weapon/reagent_containers/pill/floorpill,
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
 "Xc" = (
@@ -30746,7 +30781,7 @@ wF
 rB
 mh
 mh
-mh
+vy
 mh
 rq
 rr
@@ -36582,7 +36617,7 @@ aW
 aW
 sr
 aJ
-UH
+IK
 nN
 ee
 bi
@@ -39438,7 +39473,7 @@ oz
 jc
 je
 jg
-jg
+wC
 lo
 ts
 pC
@@ -45685,7 +45720,7 @@ Ag
 ZV
 Mm
 As
-Wn
+Gp
 Li
 Wz
 zs

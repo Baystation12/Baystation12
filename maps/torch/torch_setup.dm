@@ -5,9 +5,9 @@
 
 /datum/map/torch/get_map_info()
 	. = list()
-	. +=  "You're aboard the " + replacetext("<b>[station_name]</b>", "\improper", "") + ", an Expeditionary Corps starship. Its primary mission is looking for undiscovered sapient alien species, and general exploration along the way."
-	. +=  "The vessel is staffed with a mix of SCG government personnel and hired contractors."
-	. +=  "This area of space is uncharted, away from SCG territory. You might encounter remote outposts or drifting hulks, but no recognized government holds claim on this sector."
+	. +=  "You're aboard the " + replacetext("<b>[station_name]</b>", "\improper", "") + ",a privately owned deep space exploration vessel. Its general mission is profit and exploration of new and exploitable resources in deep space."
+	. +=  "The vessel is home to both private individuals and corporate entities"
+	. +=  "This area of space is uncharted and far  away from SCG territory. You might encounter remote outposts or drifting wrecks, no recognized government holds claim on this sector as far as you can tell. That means every thing is free for the taking!"
 	return jointext(., "<br>")
 
 /datum/map/torch/send_welcome()

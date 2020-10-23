@@ -1953,6 +1953,10 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/storage/medical)
+"dI" = (
+/obj/item/weapon/reagent_containers/pill/floorpill,
+/turf/simulated/floor/tiled/techfloor,
+/area/engineering/engine_room)
 "dJ" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -9388,6 +9392,10 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/atmos)
+"vo" = (
+/obj/item/weapon/reagent_containers/pill/floorpill,
+/turf/simulated/floor/tiled,
+/area/hallway/primary/seconddeck/fore)
 "vp" = (
 /obj/machinery/atmospherics/pipe/simple/visible/green,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -17512,6 +17520,10 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/assembly/robotics)
+"TF" = (
+/obj/item/weapon/reagent_containers/pill/floorpill,
+/turf/simulated/floor/plating,
+/area/maintenance/seconddeck/foreport)
 "TG" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1;
@@ -18182,6 +18194,7 @@
 	dir = 1;
 	icon_state = "warning"
 	},
+/obj/item/weapon/reagent_containers/pill/floorpill,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/seconddeck/fore)
 "Ws" = (
@@ -31476,7 +31489,7 @@ sv
 uN
 uf
 xi
-pi
+TF
 pi
 pi
 Wp
@@ -32073,7 +32086,7 @@ mj
 mX
 nP
 qm
-XA
+vo
 Lp
 tD
 iW
@@ -45597,7 +45610,7 @@ yZ
 PY
 mN
 yR
-if
+dI
 jf
 jN
 kw
