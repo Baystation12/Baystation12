@@ -948,12 +948,12 @@
 /area/crew_quarters/galley
 	name = "\improper Galley"
 	icon_state = "kitchen"
-	req_access = list(access_kitchen)
+	req_access = list(access_solgov_crew)
 
 /area/crew_quarters/galleybackroom
 	name = "\improper Galley Cold Storage"
 	icon_state = "kitchen"
-	req_access = list(access_kitchen)
+	req_access = list(access_solgov_crew)
 
 /area/crew_quarters/commissary
 	name = "\improper Commissary"
