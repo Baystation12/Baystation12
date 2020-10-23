@@ -46,8 +46,6 @@
 		log_and_message_admins("fired sulphuric acid from \a [src].", user)
 	if(reagents.has_reagent(/datum/reagent/acid/polyacid))
 		log_and_message_admins("fired Polyacid from \a [src].", user)
-	if(reagents.has_reagent(/datum/reagent/lube))
-		log_and_message_admins("fired Space lube from \a [src].", user)
 	return
 
 /obj/item/weapon/reagent_containers/spray/proc/Spray_at(atom/A as mob|obj, mob/user as mob, proximity)

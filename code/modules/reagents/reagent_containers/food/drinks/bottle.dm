@@ -686,4 +686,4 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/oiljug/New()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/lube/oil, 100)
+	reagents.add_reagent(/datum/reagent/oil, 100)
