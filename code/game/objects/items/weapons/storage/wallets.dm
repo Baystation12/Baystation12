@@ -40,7 +40,8 @@
 		/obj/item/clothing/accessory/badge,
 		/obj/item/clothing/accessory/medal,
 		/obj/item/clothing/accessory/armor/tag,
-		)
+		/obj/item/clothing/ring
+	)
 	slot_flags = SLOT_ID
 
 	var/obj/item/weapon/card/id/front_id = null
