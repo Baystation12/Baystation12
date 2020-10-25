@@ -117,10 +117,10 @@ Please contact me on #coderbus IRC. ~Carn x
 #define HO_MUTATIONS_LAYER  1
 #define HO_SKIN_LAYER       2
 #define HO_DAMAGE_LAYER     3
-#define HO_UNDERWEAR_LAYER  4
-#define HO_UNIFORM_LAYER    5
-#define HO_ID_LAYER         6
-#define HO_SURGERY_LAYER    7 //bs12 specific.
+#define HO_SURGERY_LAYER    4 //bs12 specific.
+#define HO_UNDERWEAR_LAYER  5
+#define HO_UNIFORM_LAYER    6
+#define HO_ID_LAYER         7
 #define HO_SHOES_LAYER      8
 #define HO_GLOVES_LAYER     9
 #define HO_BELT_LAYER       10
