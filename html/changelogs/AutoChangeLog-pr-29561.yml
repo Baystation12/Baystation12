@@ -1,5 +1,0 @@
-author: "juxtaposed9930"
-delete-after: True
-changes: 
-  - maptweak: "Navpoints around the Torch are renamed to better indicate location, and moved to avoid some of the accidental spacing incidents prone to some ships."
-  - maptweak: "Desperado & D4 EVA slightly adjusted to allow the Desperado to \"dock\"."

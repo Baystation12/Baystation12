@@ -1,4 +1,0 @@
-author: "Spookerton"
-delete-after: True
-changes: 
-  - bugfix: "People are no longer naked on setup, IDs, holocomms, etc."
