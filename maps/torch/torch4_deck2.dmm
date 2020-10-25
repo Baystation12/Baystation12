@@ -3644,6 +3644,12 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/engine_room)
+"gX" = (
+/obj/effect/shuttle_landmark/merc/deck3{
+	name = "2nd Deck, Aft"
+	},
+/turf/space,
+/area/space)
 "gY" = (
 /obj/effect/floor_decal/industrial/warning/corner,
 /obj/structure/extinguisher_cabinet{
@@ -7361,6 +7367,12 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/assembly/robotics)
+"qu" = (
+/obj/effect/shuttle_landmark/torch/deck3/aquila{
+	name = "2nd Deck, Aft Port"
+	},
+/turf/space,
+/area/space)
 "qv" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/engineering/drone_fabrication)
@@ -13249,20 +13261,16 @@
 	},
 /turf/simulated/floor/tiled,
 /area/engineering/engineering_bay)
-"FP" = (
-/obj/effect/shuttle_landmark/merc/deck2,
-/turf/space,
-/area/space)
 "FS" = (
-/obj/effect/shuttle_landmark/skipjack/deck2,
+/obj/effect/shuttle_landmark/skipjack/deck3{
+	name = "2nd Deck, Fore Port"
+	},
 /turf/space,
 /area/space)
 "FT" = (
-/obj/effect/shuttle_landmark/torch/deck3/exploration_shuttle,
-/turf/space,
-/area/space)
-"FU" = (
-/obj/effect/shuttle_landmark/torch/deck3/aquila,
+/obj/effect/shuttle_landmark/torch/deck3/exploration_shuttle{
+	name = "2nd Deck, Port"
+	},
 /turf/space,
 /area/space)
 "FV" = (
@@ -13279,7 +13287,9 @@
 /turf/simulated/wall/r_wall/hull,
 /area/space)
 "Gb" = (
-/obj/effect/shuttle_landmark/torch/deck3/guppy,
+/obj/effect/shuttle_landmark/torch/deck3/guppy{
+	name = "2nd Deck, Fore"
+	},
 /turf/space,
 /area/space)
 "Gd" = (
@@ -14577,7 +14587,9 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/bluespace)
 "Kb" = (
-/obj/effect/shuttle_landmark/ert/deck2,
+/obj/effect/shuttle_landmark/ert/deck3{
+	name = "2nd Deck, Fore Starboard"
+	},
 /turf/space,
 /area/space)
 "Kc" = (
@@ -14812,7 +14824,9 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/seconddeck/fore)
 "Lb" = (
-/obj/effect/shuttle_landmark/ninja/deck2,
+/obj/effect/shuttle_landmark/ninja/deck3{
+	name = "2nd Deck, Aft Starboard"
+	},
 /turf/space,
 /area/space)
 "Lc" = (
@@ -43459,7 +43473,7 @@ aa
 aa
 aa
 aa
-FU
+aa
 aa
 aa
 aa
@@ -48297,7 +48311,7 @@ aa
 aa
 aa
 aa
-aa
+qu
 aa
 aa
 aa
@@ -50710,7 +50724,7 @@ aa
 aa
 aa
 aa
-FP
+aa
 aa
 aa
 aa
@@ -52314,7 +52328,7 @@ aa
 aa
 aa
 aa
-aa
+gX
 aa
 aa
 aa

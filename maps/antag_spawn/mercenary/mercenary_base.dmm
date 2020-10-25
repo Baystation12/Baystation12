@@ -988,18 +988,18 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle)
 "bC" = (
-/obj/machinery/shield_diffuser,
-/obj/machinery/door/airlock/external{
-	density = 1;
-	dir = 4;
-	frequency = 1380;
-	id_tag = "merc_shuttle_outer";
-	name = "Ship External Access"
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 9
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/machinery/door/blast/regular/open{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "merc_external"
+	},
+/obj/effect/paint/red,
+/turf/simulated/floor/plating,
 /area/map_template/merc_shuttle)
 "bD" = (
 /obj/machinery/door/airlock,

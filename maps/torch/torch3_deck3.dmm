@@ -3274,18 +3274,11 @@
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/starboard)
 "gE" = (
-/obj/effect/wallframe_spawn/reinforced,
-/obj/machinery/door/firedoor,
-/obj/machinery/door/blast/regular{
-	density = 0;
-	dir = 2;
-	icon_state = "pdoor0";
-	id_tag = "d3fore_shutters";
-	name = "Blast Shields";
-	opacity = 0
+/obj/effect/shuttle_landmark/ninja/deck4{
+	name = "3rd Deck, Aft"
 	},
-/turf/simulated/floor/plating,
-/area/crew_quarters/observation)
+/turf/space,
+/area/space)
 "gF" = (
 /obj/structure/disposalpipe/segment{
 	dir = 8;
@@ -9556,18 +9549,11 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/security/habcheck)
 "uO" = (
-/obj/effect/wallframe_spawn/reinforced,
-/obj/machinery/door/firedoor,
-/obj/machinery/door/blast/regular{
-	density = 0;
-	dir = 4;
-	icon_state = "pdoor0";
-	id_tag = "d3aft_shutters";
-	name = "Blast Shields";
-	opacity = 0
+/obj/effect/shuttle_landmark/torch/deck4/exploration_shuttle{
+	name = "3rd Deck, Fore Port"
 	},
-/turf/simulated/floor/plating,
-/area/hallway/primary/thirddeck/aft)
+/turf/space,
+/area/space)
 "uP" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/crew_quarters/sleep/cryo)
@@ -12328,6 +12314,19 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/white/monotile,
 /area/crew_quarters/sleep/cryo)
+"Di" = (
+/obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/firedoor,
+/obj/machinery/door/blast/regular{
+	density = 0;
+	dir = 2;
+	icon_state = "pdoor0";
+	id_tag = "d3fore_shutters";
+	name = "Blast Shields";
+	opacity = 0
+	},
+/turf/simulated/floor/plating,
+/area/crew_quarters/observation)
 "Dj" = (
 /obj/structure/railing/mapped,
 /obj/structure/railing/mapped{
@@ -15818,7 +15817,9 @@
 /turf/simulated/floor/wood/maple,
 /area/chapel/main)
 "LN" = (
-/obj/effect/shuttle_landmark/skipjack/deck3,
+/obj/effect/shuttle_landmark/skipjack/deck4{
+	name = "3rd Deck, Aft Port"
+	},
 /turf/space,
 /area/space)
 "LO" = (
@@ -15936,7 +15937,9 @@
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/foreport)
 "Mb" = (
-/obj/effect/shuttle_landmark/ert/deck3,
+/obj/effect/shuttle_landmark/ert/deck4{
+	name = "3rd Deck, Starboard"
+	},
 /turf/space,
 /area/space)
 "Mf" = (
@@ -16230,7 +16233,9 @@
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/aftstarboard)
 "Nb" = (
-/obj/effect/shuttle_landmark/merc/deck3,
+/obj/effect/shuttle_landmark/merc/deck4{
+	name = "3rd Deck, Port"
+	},
 /turf/space,
 /area/space)
 "Nc" = (
@@ -16520,7 +16525,9 @@
 /turf/simulated/floor/reinforced/airless,
 /area/thruster/d3port)
 "Ob" = (
-/obj/effect/shuttle_landmark/torch/deck2/aquila,
+/obj/effect/shuttle_landmark/torch/deck4/aquila{
+	name = "3rd Deck, Fore"
+	},
 /turf/space,
 /area/space)
 "Oc" = (
@@ -16870,10 +16877,6 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/crew_quarters/gym)
-"Pb" = (
-/obj/effect/shuttle_landmark/torch/deck2/exploration_shuttle,
-/turf/space,
-/area/space)
 "Pc" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 9
@@ -17175,10 +17178,6 @@
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/thruster/d3starboard)
-"Qb" = (
-/obj/effect/shuttle_landmark/ninja/deck3,
-/turf/space,
-/area/space)
 "Qd" = (
 /obj/structure/reagent_dispensers/water_cooler{
 	dir = 4;
@@ -17505,10 +17504,6 @@
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/aftport)
-"Rb" = (
-/obj/effect/shuttle_landmark/torch/deck2/guppy,
-/turf/space,
-/area/space)
 "Re" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -25424,7 +25419,7 @@ aa
 aa
 aa
 aa
-Pb
+aa
 aa
 aa
 aa
@@ -26061,7 +26056,7 @@ aa
 aa
 aa
 aa
-aa
+uO
 aa
 aa
 aa
@@ -28846,8 +28841,8 @@ ZN
 ZN
 aa
 aa
-qx
-gE
+Di
+Di
 BQ
 Fn
 YB
@@ -28859,8 +28854,8 @@ Vt
 BQ
 Fn
 YB
-gE
-qx
+Di
+Di
 aa
 aa
 BV
@@ -29048,7 +29043,7 @@ ZN
 ZN
 aa
 aa
-gE
+Di
 lV
 Yr
 ZU
@@ -29062,7 +29057,7 @@ Yr
 Yr
 Yr
 np
-gE
+Di
 aa
 aa
 BV
@@ -34753,7 +34748,7 @@ aa
 aa
 aa
 aa
-Nb
+aa
 aa
 aa
 aa
@@ -37788,7 +37783,7 @@ aa
 aa
 aa
 aa
-aa
+Nb
 aa
 aa
 aa
@@ -45857,7 +45852,7 @@ aa
 aa
 aa
 aa
-Rb
+aa
 aa
 aa
 aa
@@ -47232,13 +47227,13 @@ aT
 aI
 aI
 aI
-uO
+Su
 Su
 rB
 sX
 uo
 Su
-uO
+Su
 aI
 aI
 aI
@@ -53700,7 +53695,7 @@ aa
 aa
 aa
 aa
-aa
+gE
 aa
 aa
 aa
@@ -55719,7 +55714,7 @@ aa
 aa
 aa
 aa
-Qb
+aa
 aa
 aa
 aa
