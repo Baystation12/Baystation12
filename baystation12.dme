@@ -1083,6 +1083,7 @@
 #include "code\game\objects\items\weapons\storage\med_pouch.dm"
 #include "code\game\objects\items\weapons\storage\misc.dm"
 #include "code\game\objects\items\weapons\storage\mre.dm"
+#include "code\game\objects\items\weapons\storage\pouches.dm"
 #include "code\game\objects\items\weapons\storage\secure.dm"
 #include "code\game\objects\items\weapons\storage\specialized.dm"
 #include "code\game\objects\items\weapons\storage\storage.dm"
