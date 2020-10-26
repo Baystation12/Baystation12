@@ -23,25 +23,25 @@
 			var/decl/backpack_outfit/backpack_outfit = bos[bo]
 			backpacks_by_name[backpack_outfit.name] = backpack_outfit
 
-/datum/category_item/player_setup_item/physical/equipment/load_character(var/savefile/S)
+/datum/category_item/player_setup_item/physical/equipment/load_character(datum/pref_record_reader/R)
 	var/load_backbag
 
-	from_save(S["all_underwear"], pref.all_underwear)
-	from_save(S["all_underwear_metadata"], pref.all_underwear_metadata)
-	from_save(S["backpack"], load_backbag)
-	from_save(S["backpack_metadata"], pref.backpack_metadata)
-	from_save(S["sensor_setting"], pref.sensor_setting)
-	from_save(S["sensors_locked"], pref.sensors_locked)
+	pref.all_underwear = R.read("all_underwear")
+	pref.all_underwear_metadata = R.read("all_underwear_metadata")
+	load_backbag = R.read("backpack")
+	pref.backpack_metadata = R.read("backpack_metadata")
+	pref.sensor_setting = R.read("sensor_setting")
+	pref.sensors_locked = R.read("sensors_locked")
 
 	pref.backpack = backpacks_by_name[load_backbag] || get_default_outfit_backpack()
 
-/datum/category_item/player_setup_item/physical/equipment/save_character(var/savefile/S)
-	to_save(S["all_underwear"], pref.all_underwear)
-	to_save(S["all_underwear_metadata"], pref.all_underwear_metadata)
-	to_save(S["backpack"], pref.backpack.name)
-	to_save(S["backpack_metadata"], pref.backpack_metadata)
-	to_save(S["sensor_setting"], pref.sensor_setting)
-	to_save(S["sensors_locked"], pref.sensors_locked)
+/datum/category_item/player_setup_item/physical/equipment/save_character(datum/pref_record_writer/W)
+	W.write("all_underwear", pref.all_underwear)
+	W.write("all_underwear_metadata", pref.all_underwear_metadata)
+	W.write("backpack", pref.backpack.name)
+	W.write("backpack_metadata", pref.backpack_metadata)
+	W.write("sensor_setting", pref.sensor_setting)
+	W.write("sensors_locked", pref.sensors_locked)
 
 /datum/category_item/player_setup_item/physical/equipment/sanitize_character()
 	if(!istype(pref.all_underwear))
@@ -196,26 +196,3 @@
 		return TOPIC_REFRESH
 
 	return ..()
-
-/datum/category_item/player_setup_item/physical/equipment/update_setup(var/savefile/preferences, var/savefile/character)
-	if(preferences["version"]  <= 16)
-		var/list/old_index_to_backpack_type = list(
-			/decl/backpack_outfit/nothing,
-			/decl/backpack_outfit/backpack,
-			/decl/backpack_outfit/satchel,
-			/decl/backpack_outfit/messenger_bag,
-			/decl/backpack_outfit/satchel,
-			/decl/backpack_outfit/satchel,
-			/decl/backpack_outfit/pocketbook
-		)
-
-		var/old_index
-		from_save(character["backbag"], old_index)
-
-		if(old_index > 0 && old_index <= old_index_to_backpack_type.len)
-			pref.backpack = decls_repository.get_decl(old_index_to_backpack_type[old_index])
-		else
-			pref.backpack = get_default_outfit_backpack()
-
-		to_save(character["backpack"], pref.backpack.name)
-		return 1

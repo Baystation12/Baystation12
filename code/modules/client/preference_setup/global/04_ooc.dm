@@ -6,12 +6,12 @@
 	name = "OOC"
 	sort_order = 4
 
-/datum/category_item/player_setup_item/player_global/ooc/load_preferences(var/savefile/S)
-	from_save(S["ignored_players"], pref.ignored_players)
+/datum/category_item/player_setup_item/player_global/ooc/load_preferences(datum/pref_record_reader/R)
+	pref.ignored_players = R.read("ignored_players")
 
 
-/datum/category_item/player_setup_item/player_global/ooc/save_preferences(var/savefile/S)
-	to_save(S["ignored_players"], pref.ignored_players)
+/datum/category_item/player_setup_item/player_global/ooc/save_preferences(datum/pref_record_writer/W)
+	W.write("ignored_players", pref.ignored_players)
 
 
 /datum/category_item/player_setup_item/player_global/ooc/sanitize_preferences()

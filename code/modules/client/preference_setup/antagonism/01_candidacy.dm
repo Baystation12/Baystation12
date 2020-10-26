@@ -6,13 +6,13 @@
 	name = "Candidacy"
 	sort_order = 1
 
-/datum/category_item/player_setup_item/antagonism/candidacy/load_character(var/savefile/S)
-	from_save(S["be_special"],           pref.be_special_role)
-	from_save(S["may_be_special"],     	 pref.may_be_special_role)
+/datum/category_item/player_setup_item/antagonism/candidacy/load_character(datum/pref_record_reader/R)
+	pref.be_special_role = R.read("be_special")
+	pref.may_be_special_role = R.read("may_be_special")
 
-/datum/category_item/player_setup_item/antagonism/candidacy/save_character(var/savefile/S)
-	to_save(S["be_special"],             pref.be_special_role)
-	to_save(S["may_be_special"],       	 pref.may_be_special_role)
+/datum/category_item/player_setup_item/antagonism/candidacy/save_character(datum/pref_record_writer/W)
+	W.write("be_special", pref.be_special_role)
+	W.write("may_be_special", pref.may_be_special_role)
 
 /datum/category_item/player_setup_item/antagonism/candidacy/sanitize_character()
 	if(!istype(pref.be_special_role))

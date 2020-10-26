@@ -7,7 +7,7 @@
 	var/icon/bgstate = MATERIAL_STEEL
 	var/list/bgstate_options = list("FFF", MATERIAL_STEEL, "white")
 
-/datum/category_item/player_setup_item/player_global/pai/load_preferences(var/savefile/S)
+/datum/category_item/player_setup_item/player_global/pai/load_preferences(datum/pref_record_reader/R)
 	if(!candidate)
 		candidate = new()
 
@@ -16,7 +16,7 @@
 
 	candidate.savefile_load(preference_mob())
 
-/datum/category_item/player_setup_item/player_global/pai/save_preferences(var/savefile/S)
+/datum/category_item/player_setup_item/player_global/pai/save_preferences(datum/pref_record_writer/W)
 	if(!candidate)
 		return
 
