@@ -43,7 +43,6 @@
 		/obj/item/weapon/storage/belt/general,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack, /obj/item/weapon/storage/backpack/satchel)),
 		new /datum/atom_creator/simple(/obj/item/weapon/storage/backpack/messenger, 50),
-		/obj/item/weapon/storage/fakebook,
 		/obj/item/device/radio/headset/heads/torchntcommand,
 		/obj/item/device/radio/headset/heads/torchntcommand/alt
 	)

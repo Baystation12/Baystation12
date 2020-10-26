@@ -67,13 +67,6 @@
 
 /obj/item/weapon/folder/nt/rd
 
-/obj/item/weapon/paper/liason_note
-	name = "note"
-	info = {"
-	<i>Here's your back-out plan.<br>
-	H.B.</i>
-	"}
-
 /obj/item/weapon/folder/envelope/captain
 	desc = "A thick envelope. The SCG crest is stamped in the corner, along with 'TOP SECRET - TORCH UMBRA'."
 
@@ -119,7 +112,7 @@
 	new/obj/item/weapon/paper/umbra(src)
 
 /obj/item/weapon/folder/envelope/rep
-	desc = "A thick envelope. The SCG crest is stamped in the corner, along with 'TOP SECRET - UMBRA'."
+	desc = "A thick envelope. The SCG crest is stamped in the corner, along with 'TOP SECRET - TORCH UMBRA'."
 
 /obj/item/weapon/folder/envelope/rep/Initialize()
 	. = ..()
