@@ -6,9 +6,11 @@
 	var/material/material
 	var/icon_base
 	hitsound = 'sound/weapons/genhit.ogg'
+	var/dooropen_noise
 	var/datum/lock/lock
 	var/initial_lock_value //for mapping purposes. Basically if this value is set, it sets the lock to this value.
 	autoset_access = FALSE // Doesn't even use access
+	var/health_multiplier = 10
 	pry_mod = 0.1
 
 /obj/machinery/door/unpowered/simple/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
@@ -25,10 +27,12 @@
 	if(!material)
 		qdel(src)
 		return
-	maxhealth = max(100, material.integrity*10)
+	maxhealth = max(100, material.integrity * health_multiplier)
 	health = maxhealth
 	if(!icon_base)
 		icon_base = material.door_icon_base
+	if(!dooropen_noise)
+		dooropen_noise = material.dooropen_noise
 	hitsound = material.hitsound
 	name = "[material.display_name] door"
 	color = material.icon_colour
@@ -39,6 +43,7 @@
 
 	if(material.opacity < 0.5)
 		glass = 1
+		alpha = 180
 		set_opacity(0)
 	else
 		set_opacity(1)
@@ -88,13 +93,13 @@
 		if (obstruction)
 			return
 	
-	playsound(src.loc, material.dooropen_noise, 100, 1)
+	playsound(src.loc, dooropen_noise, 100, 1)
 	..()
 
 /obj/machinery/door/unpowered/simple/open(var/forced = 0)
 	if(!can_open(forced))
 		return
-	playsound(src.loc, material.dooropen_noise, 100, 1)
+	playsound(src.loc, dooropen_noise, 100, 1)
 	..()
 
 /obj/machinery/door/unpowered/simple/set_broken(var/new_state, var/cause = MACHINE_BROKEN_GENERIC)

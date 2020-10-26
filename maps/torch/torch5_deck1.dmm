@@ -20492,6 +20492,10 @@
 	},
 /turf/simulated/floor/tiled,
 /area/security/wing)
+"jpE" = (
+/obj/machinery/door/unpowered/simple/stall/plastic,
+/turf/simulated/floor/tiled/freezer,
+/area/crew_quarters/head/aux)
 "jqb" = (
 /obj/effect/floor_decal/corner/red{
 	dir = 8
@@ -26148,7 +26152,7 @@
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology/xenoflora)
 "qtQ" = (
-/obj/structure/curtain/open/shower,
+/obj/machinery/door/unpowered/simple/stall/plastic,
 /turf/simulated/floor/tiled/freezer,
 /area/medical/washroom)
 "qvX" = (
@@ -45546,10 +45550,10 @@ rKo
 ayb
 ure
 aAm
-sYU
+jpE
 aAm
 aAm
-sYU
+jpE
 aAm
 aAm
 akZ
@@ -45753,7 +45757,7 @@ abR
 riD
 riD
 ado
-sYU
+jpE
 ala
 riD
 aAm

@@ -119,7 +119,12 @@ ARMCHAIR(yellow)
 	result_type = /obj/machinery/door/unpowered/simple
 	req_amount = 10
 	time = 50
-	send_material_data = 0
+
+/datum/stack_recipe/furniture/stall_door
+	title = "stall door"
+	result_type = /obj/machinery/door/unpowered/simple/stall
+	req_amount = 10
+	time = 50
 
 /datum/stack_recipe/furniture/barricade
 	title = "barricade"

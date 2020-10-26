@@ -774,6 +774,7 @@
 #include "code\game\machinery\doors\firedoor_assembly.dm"
 #include "code\game\machinery\doors\multi_tile.dm"
 #include "code\game\machinery\doors\simple.dm"
+#include "code\game\machinery\doors\stall.dm"
 #include "code\game\machinery\doors\unpowered.dm"
 #include "code\game\machinery\doors\windowdoor.dm"
 #include "code\game\machinery\embedded_controller\airlock_controllers.dm"

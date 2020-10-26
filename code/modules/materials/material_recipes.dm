@@ -33,8 +33,9 @@
 		. += new/datum/stack_recipe/spoon(src)
 		. += new/datum/stack_recipe/coin(src)
 
-	if(integrity >= 50 && hardness >= MATERIAL_FLEXIBLE + 10)
+	if(integrity >= 50 && hardness >= MATERIAL_FLEXIBLE)
 		. += new/datum/stack_recipe/furniture/door(src)
+		. += new/datum/stack_recipe/furniture/stall_door(src)
 		. += new/datum/stack_recipe/furniture/barricade(src)
 		. += new/datum/stack_recipe/furniture/stool(src)
 		. += new/datum/stack_recipe/furniture/bar_stool(src)

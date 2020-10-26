@@ -2143,7 +2143,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head)
 "eE" = (
-/obj/structure/curtain/open/privacy,
+/obj/machinery/door/unpowered/simple/stall/plastic,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head)
 "eF" = (

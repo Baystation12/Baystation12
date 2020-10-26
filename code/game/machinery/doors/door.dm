@@ -365,13 +365,7 @@
 
 
 /obj/machinery/door/on_update_icon()
-	if(connections in list(NORTH, SOUTH, NORTH|SOUTH))
-		if(connections in list(WEST, EAST, EAST|WEST))
-			set_dir(SOUTH)
-		else
-			set_dir(EAST)
-	else
-		set_dir(SOUTH)
+	update_dir()
 
 	if(density)
 		icon_state = "door1"
@@ -380,6 +374,14 @@
 	SSradiation.resistance_cache.Remove(get_turf(src))
 	return
 
+/obj/machinery/door/proc/update_dir()
+	if(connections in list(NORTH, SOUTH, NORTH|SOUTH))
+		if(connections in list(WEST, EAST, EAST|WEST))
+			set_dir(SOUTH)
+		else
+			set_dir(EAST)
+	else
+		set_dir(SOUTH)
 
 /obj/machinery/door/proc/do_animate(animation)
 	switch(animation)

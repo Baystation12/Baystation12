@@ -6,7 +6,7 @@
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
 	icon_colour = COLOR_WHITE
-	hardness = MATERIAL_SOFT
+	hardness = MATERIAL_FLEXIBLE
 	weight = 5
 	melting_point = T0C+371 //assuming heat resistant plastic
 	stack_origin_tech = list(TECH_MATERIAL = 3)
