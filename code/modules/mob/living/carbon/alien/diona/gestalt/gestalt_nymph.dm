@@ -9,7 +9,7 @@
 	blob.roll_up_atom(src, silent = TRUE)
 	return TRUE
 
-/obj/structure/diona_gestalt/proc/roll_up_atom(var/mob/living/carbon/alien/diona/chirp, var/silent)
+/obj/structure/diona_gestalt/proc/roll_up_atom(atom/movable/chirp, var/silent)
 	if(!istype(chirp))
 		return
 	if(!silent)
@@ -36,7 +36,7 @@
 		shedding.dropInto(loc)
 		if(!silent)
 			visible_message(SPAN_DANGER("\The [shedding] splits away from \the [src]!"))
-		if(forcefully) 
+		if(forcefully)
 			shedding.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),rand(3,5))
 		if(update_nymphs)
 			check_nymphs()
