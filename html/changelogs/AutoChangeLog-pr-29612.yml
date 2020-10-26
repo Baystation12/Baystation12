@@ -1,4 +1,0 @@
-author: "Mucker"
-delete-after: True
-changes: 
-  - bugfix: "Fix gestalts not being able to absorb nymphs."

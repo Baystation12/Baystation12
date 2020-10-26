@@ -1,5 +1,0 @@
-author: "Imienny"
-delete-after: True
-changes: 
-  - tweak: "Vox spacesuits no longer hide boots and gloves."
-  - bugfix: "Gear harness worn by vox now use gear harness texture."

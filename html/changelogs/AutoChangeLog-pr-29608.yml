@@ -1,4 +1,0 @@
-author: "Hubblenaut"
-delete-after: True
-changes: 
-  - bugfix: "Fixes paint sprayer click behavior for borgs."
