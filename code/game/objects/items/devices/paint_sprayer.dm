@@ -74,13 +74,15 @@
 	var/random_preset = pick(preset_colors)
 	change_color(preset_colors[random_preset])
 
+/obj/item/device/paint_sprayer/Destroy()
+	if (ismob(loc))
+		remove_click_handler(loc)
+	. = ..()
+
 /obj/item/device/paint_sprayer/on_update_icon()
 	overlays.Cut()
 	overlays += overlay_image(icon, "paint_sprayer_color", paint_color)
-	if (ismob(loc))
-		var/mob/M = loc
-		M.update_inv_l_hand(FALSE)
-		M.update_inv_r_hand(TRUE)
+	update_held_icon()
 
 /obj/item/device/paint_sprayer/get_mob_overlay(mob/user_mob, slot, bodypart)
 	var/image/ret = ..()
@@ -93,15 +95,21 @@
 	if (user.PushClickHandler(/datum/click_handler/default/paint_sprayer))
 		var/datum/click_handler/default/paint_sprayer/CH = user.click_handlers[1]
 		CH.paint_sprayer = src
-		GLOB.hands_swapped_event.register(user, src, /obj/item/device/paint_sprayer/proc/check_remove_click_handler)
-		GLOB.mob_equipped_event.register(user, src, /obj/item/device/paint_sprayer/proc/check_remove_click_handler)
-		GLOB.mob_unequipped_event.register(user, src, /obj/item/device/paint_sprayer/proc/check_remove_click_handler)
+		if (isrobot(user))
+			GLOB.module_deselected_event.register(user, src, /obj/item/device/paint_sprayer/proc/remove_click_handler)
+			GLOB.module_deactivated_event.register(user, src, /obj/item/device/paint_sprayer/proc/remove_click_handler)
+		else
+			GLOB.hands_swapped_event.register(user, src, /obj/item/device/paint_sprayer/proc/remove_click_handler)
+			GLOB.mob_equipped_event.register(user, src, /obj/item/device/paint_sprayer/proc/remove_click_handler)
+			GLOB.mob_unequipped_event.register(user, src, /obj/item/device/paint_sprayer/proc/remove_click_handler)
 
-/obj/item/device/paint_sprayer/proc/check_remove_click_handler(mob/user)
-	user.RemoveClickHandler(/datum/click_handler/default/paint_sprayer)
-	GLOB.hands_swapped_event.unregister(user, src, /obj/item/device/paint_sprayer/proc/check_remove_click_handler)
-	GLOB.mob_equipped_event.unregister(user, src, /obj/item/device/paint_sprayer/proc/check_remove_click_handler)
-	GLOB.mob_unequipped_event.unregister(user, src, /obj/item/device/paint_sprayer/proc/check_remove_click_handler)
+/obj/item/device/paint_sprayer/proc/remove_click_handler(mob/user)
+	if (user.RemoveClickHandler(/datum/click_handler/default/paint_sprayer))
+		GLOB.hands_swapped_event.unregister(user, src, /obj/item/device/paint_sprayer/proc/remove_click_handler)
+		GLOB.mob_equipped_event.unregister(user, src, /obj/item/device/paint_sprayer/proc/remove_click_handler)
+		GLOB.mob_unequipped_event.unregister(user, src, /obj/item/device/paint_sprayer/proc/remove_click_handler)
+		GLOB.module_deselected_event.unregister(user, src, /obj/item/device/paint_sprayer/proc/remove_click_handler)
+		GLOB.module_deactivated_event.unregister(user, src, /obj/item/device/paint_sprayer/proc/remove_click_handler)
 
 /obj/item/device/paint_sprayer/afterattack(atom/A, mob/user, proximity, params)
 	if (!proximity)
