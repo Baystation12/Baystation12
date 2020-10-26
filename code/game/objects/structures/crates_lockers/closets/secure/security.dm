@@ -253,3 +253,23 @@
 		/obj/item/device/taperecorder = 2,
 		/obj/item/weapon/storage/secure/briefcase = 2,
 	)
+
+/obj/structure/closet/secure_closet/ert
+	name = "ERT member's locker."
+	closet_appearance = /decl/closet_appearance/secure_closet/ert
+
+/obj/structure/closet/secure_closet/ert/WillContain()
+	return list(
+		/obj/item/clothing/glasses/tacgoggles,
+		/obj/item/weapon/storage/belt/holster/security/tactical,
+		/obj/item/clothing/accessory/storage/black_vest,
+		/obj/item/device/flash,
+		/obj/item/device/megaphone,
+		/obj/item/device/holowarrant,
+		/obj/item/clothing/gloves/thick,
+		/obj/item/device/flashlight/maglight,
+		/obj/item/clothing/mask/gas/half,
+		/obj/item/clothing/accessory/storage/holster/thigh,
+		/obj/item/device/radio,
+		/obj/item/weapon/crowbar/prybar
+		)

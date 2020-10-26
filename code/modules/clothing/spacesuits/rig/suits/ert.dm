@@ -12,12 +12,12 @@
 	req_access = list(access_cent_specops)
 
 	armor = list(
-		melee = ARMOR_MELEE_MAJOR, 
-		bullet = ARMOR_BALLISTIC_RESISTANT, 
+		melee = ARMOR_MELEE_MAJOR,
+		bullet = ARMOR_BALLISTIC_RESISTANT,
 		laser = ARMOR_LASER_MAJOR,
-		energy = ARMOR_ENERGY_MINOR, 
-		bomb = ARMOR_BOMB_PADDED, 
-		bio = ARMOR_BIO_SHIELDED, 
+		energy = ARMOR_ENERGY_MINOR,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SHIELDED
 		)
 	allowed = list(/obj/item/device/flashlight, /obj/item/weapon/tank,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/handcuffs, /obj/item/device/t_scanner, /obj/item/weapon/rcd, /obj/item/weapon/crowbar, \
@@ -46,7 +46,6 @@
 /obj/item/clothing/gloves/rig/ert
 	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_NOCUFFS
 	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_IPC)
-
 
 /obj/item/weapon/rig/ert/engineer
 	name = "emergency response engineering hardsuit control module"
@@ -116,12 +115,12 @@
 	suit_type = "heavy emergency response"
 	icon_state = "asset_protection_rig"
 	armor = list(
-		melee = ARMOR_MELEE_VERY_HIGH, 
-		bullet = ARMOR_BALLISTIC_RESISTANT, 
+		melee = ARMOR_MELEE_VERY_HIGH,
+		bullet = ARMOR_BALLISTIC_RESISTANT,
 		laser = ARMOR_LASER_MAJOR,
-		energy = ARMOR_ENERGY_MINOR, 
-		bomb = ARMOR_BOMB_PADDED, 
-		bio = ARMOR_BIO_SHIELDED, 
+		energy = ARMOR_ENERGY_MINOR,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_SHIELDED
 		)
 
@@ -142,3 +141,68 @@
 
 /obj/item/clothing/gloves/rig/ert/assetprotection
 	siemens_coefficient = 0
+
+/obj/item/weapon/rig/ert/fleet
+	name = "fleet hardsuit control module"
+	desc = "An armored hardsuit used by fleet response teams and armsmen."
+	icon_state = "fleet_rig"
+	suit_type = "fleet hardsuit"
+	armor = list(
+		melee = ARMOR_MELEE_VERY_HIGH,
+		bullet = ARMOR_BALLISTIC_RIFLE,
+		laser = ARMOR_LASER_MAJOR,
+		energy = ARMOR_ENERGY_MINOR,
+		bomb = ARMOR_BOMB_RESISTANT,
+		bio = ARMOR_BIO_SHIELDED,
+		rad = ARMOR_RAD_SMALL
+		)
+	online_slowdown = 1
+	offline_slowdown = 3
+	offline_vision_restriction = TINT_HEAVY
+
+
+	chest_type = /obj/item/clothing/suit/space/rig/ert/fleet
+	helm_type = /obj/item/clothing/head/helmet/space/rig/ert/fleet
+	glove_type = /obj/item/clothing/gloves/rig/ert/fleet
+	boot_type = /obj/item/clothing/shoes/magboots/rig/ert/fleet
+
+	allowed = list(/obj/item/device/flashlight, /obj/item/weapon/tank,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/handcuffs,
+		/obj/item/device/t_scanner, /obj/item/weapon/rcd, /obj/item/weapon/crowbar, \
+		/obj/item/weapon/screwdriver, /obj/item/weapon/weldingtool, /obj/item/weapon/wirecutters, /obj/item/weapon/wrench, /obj/item/device/multitool, \
+		/obj/item/device/radio, /obj/item/device/scanner/gas,/obj/item/weapon/storage/briefcase/inflatable, /obj/item/weapon/melee/baton, /obj/item/weapon/gun, \
+		/obj/item/weapon/storage/firstaid, /obj/item/weapon/reagent_containers/hypospray, /obj/item/roller)
+
+	initial_modules = list(
+		/obj/item/rig_module/ai_container,
+		/obj/item/rig_module/maneuvering_jets,
+		/obj/item/rig_module/grenade_launcher,
+		/obj/item/rig_module/vision/multi,
+		/obj/item/rig_module/mounted/egun,
+		/obj/item/rig_module/chem_dispenser/combat,
+		/obj/item/rig_module/mounted/plasmacutter,
+		/obj/item/rig_module/device/rcd,
+		/obj/item/rig_module/datajack,
+		/obj/item/rig_module/cooling_unit
+		)
+
+/obj/item/clothing/gloves/rig/ert/fleet
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_NOCUFFS
+	siemens_coefficient = 0
+	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC)
+
+/obj/item/clothing/shoes/magboots/rig/ert/fleet
+	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC)
+
+/obj/item/clothing/head/helmet/space/rig/ert/fleet
+	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC)
+	light_overlay = "fleet_light"
+	
+/obj/item/clothing/suit/space/rig/ert/fleet
+	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC)
+
+//Has most of the modules removed
+/obj/item/weapon/rig/ert/fleet/empty
+	initial_modules = list(
+		/obj/item/rig_module/ai_container,
+		/obj/item/rig_module/cooling_unit
+		)

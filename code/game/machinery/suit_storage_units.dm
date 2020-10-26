@@ -117,3 +117,19 @@
 	mask = /obj/item/clothing/mask/breath
 	req_access = list(access_xenoarch)
 	islocked = 1
+
+/obj/machinery/suit_storage_unit/fleet
+	name = "Fleet Voidsuit Storage Unit"
+	suit= /obj/item/clothing/suit/space/void/fleet
+	helmet = /obj/item/clothing/head/helmet/space/void/fleet
+	boots = /obj/item/clothing/shoes/magboots
+	tank = /obj/item/weapon/tank/oxygen
+	mask = /obj/item/clothing/mask/breath
+
+/obj/machinery/suit_storage_unit/fleet/command
+	name = "Fleet Officer Voidsuit Storage Unit"
+	suit= /obj/item/clothing/suit/space/void/fleet
+	helmet = /obj/item/clothing/head/helmet/space/void/fleet/comm
+	boots = /obj/item/clothing/shoes/magboots
+	tank = /obj/item/weapon/tank/oxygen
+	mask = /obj/item/clothing/mask/breath

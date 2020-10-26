@@ -514,6 +514,17 @@
 /decl/closet_appearance/secure_closet/sol/two/dark
 	color = COLOR_DARK_BLUE_GRAY
 
+/decl/closet_appearance/secure_closet/ert
+	color = COLOR_GRAY20
+	decals = list(
+		"lower_holes",
+		"upper_holes"
+	)
+	extra_decals = list(
+		"stripe_vertical_left_partial" = COLOR_DARK_ORANGE,
+		"stripe_vertical_right_partial" = COLOR_DARK_ORANGE,
+	)
+
 // Crates.
 /decl/closet_appearance/crate
 	decals = null

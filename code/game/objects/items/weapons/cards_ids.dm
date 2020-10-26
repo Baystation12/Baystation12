@@ -406,11 +406,21 @@ var/const/NO_EMAG_ACT = -50
 	..()
 	access |= get_all_station_access()
 
+
 /obj/item/weapon/card/id/centcom/ERT
-	name = "\improper Emergency Response Team ID"
+	name = "\improper ERT ID"
 	assignment = "Emergency Response Team"
 
 /obj/item/weapon/card/id/centcom/ERT/New()
+	..()
+	access |= get_all_station_access()
+
+
+/obj/item/weapon/card/id/centcom/ERT/leader
+	name = "\improper ERT Leader ID"
+	assignment = "Emergency Response Leader"
+
+/obj/item/weapon/card/id/centcom/ERT/leader/New()
 	..()
 	access |= get_all_station_access()
 

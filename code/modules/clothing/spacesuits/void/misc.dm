@@ -65,3 +65,45 @@
 
 /obj/item/clothing/suit/space/void/skrell/black
 	icon_state = "skrell_suit_black"
+
+/obj/item/clothing/head/helmet/space/void/fleet
+	name = "fleet voidsuit helmet"
+	desc = "An armored helmet with built-in communications relays. Fleet pride."
+	icon_state = "fleet_grunt_helm"
+	armor = list(
+		melee = ARMOR_MELEE_KNIVES,
+		bullet = ARMOR_BALLISTIC_RESISTANT,
+		laser = ARMOR_LASER_MAJOR,
+		energy = ARMOR_ENERGY_SMALL,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SHIELDED,
+		)
+	siemens_coefficient = 0.3
+	species_restricted = list(SPECIES_HUMAN, SPECIES_IPC)
+	light_overlay = "fleet_light"
+
+/obj/item/clothing/head/helmet/space/void/fleet/comm
+	name = "fleet officer voidsuit helmet"
+	desc = "An armored helmet with built-in communications relays. This one is for officers."
+	icon_state = "fleet_comm_helm"
+
+/obj/item/clothing/suit/space/void/fleet
+	icon_state = "fleet_voidsuit"
+	name = "fleet armored voidsuit"
+	desc = "An armored suit designed to protect fleet crew in EVA."
+	armor = list(
+		melee = ARMOR_MELEE_KNIVES,
+		bullet = ARMOR_BALLISTIC_RESISTANT,
+		laser = ARMOR_LASER_MAJOR,
+		energy = ARMOR_ENERGY_SMALL,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SHIELDED,
+		)
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs)
+	siemens_coefficient = 0.3
+	species_restricted = list(SPECIES_HUMAN, SPECIES_IPC)
+
+/obj/item/clothing/suit/space/void/fleet/prepared
+	helmet = /obj/item/clothing/head/helmet/space/void/fleet
+	boots = /obj/item/clothing/shoes/magboots
+	tank = /obj/item/weapon/tank/oxygen

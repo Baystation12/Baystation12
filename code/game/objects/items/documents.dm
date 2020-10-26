@@ -48,3 +48,13 @@
 	name = "private memos and faxes"
 	desc = "\"Top Secret\" memos and faxes between the SCGR and other officials of the SCG. It's like a chat client ran on pure paperwork."
 	description_antag = "The SCGR's conversations contain a massive amount of dirt on politicians: drugs, sex, money..."
+
+/obj/item/documents/ert
+	name = "ERT operations refresher"
+	desc = "A formal and curt document reminding Bravo leader that the moment Bravo Team is chosen for a mission, their deployment bay is under lockdown until operation completion."
+	icon_state = "docs_part"
+
+/obj/item/documents/ert/rook
+	name = "SFV Rook operations report"
+	desc = "A series of papers reminding Bravo Team that the Rook is ready to deploy immediately after it's moved out of the Armala's hangars."
+	icon_state = "docs_part"

@@ -30,26 +30,26 @@ var/can_call_ert
 				return
 
 	var/reason = input("What is the reason for dispatching this Emergency Response Team?", "Dispatching Emergency Response Team")
-		
+
 	if(!reason && alert("You did not input a reason. Continue anyway?",,"Yes", "No") != "Yes")
 		return
-	
+
 	if(send_emergency_team)
 		to_chat(usr, SPAN_DANGER("Looks like someone beat you to it!"))
 		return
-	
+
 	if(reason)
 		message_admins("[key_name_admin(usr)] is dispatching an Emergency Response Team for the reason: [reason]", 1)
 	else
 		message_admins("[key_name_admin(usr)] is dispatching an Emergency Response Team.", 1)
-		
+
 	log_admin("[key_name(usr)] used Dispatch Response Team.")
 	trigger_armed_response_team(1, reason)
 
 client/verb/JoinResponseTeam()
 
 	set name = "Join Response Team"
-	set category = "IC"
+	set category = "Ghost"
 
 	if(!MayRespawn(1))
 		to_chat(usr, "<span class='warning'>You cannot join the response team at this time.</span>")
