@@ -26,7 +26,7 @@
 
 /datum/reagent/bicaridine
 	name = "Bicaridine"
-	description = "Bicaridine is an analgesic medication and can be used to treat blunt trauma."
+	description = "Bicaridine is a fast-acting medication to treat physical trauma."
 	taste_description = "bitterness"
 	taste_mult = 3
 	reagent_state = LIQUID
@@ -61,7 +61,7 @@
 	flags = IGNORE_MOB_SIZE
 	value = 2.9
 
-/datum/reagent/kelotane/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/kelotane/affect_blood(mob/living/carbon/M, alien, removed)
 	if(alien != IS_DIONA)
 		M.heal_organ_damage(0, 6 * removed)
 
@@ -77,7 +77,7 @@
 	flags = IGNORE_MOB_SIZE
 	value = 3.9
 
-/datum/reagent/dermaline/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/dermaline/affect_blood(mob/living/carbon/M, alien, removed)
 	if(alien != IS_DIONA)
 		M.heal_organ_damage(0, 12 * removed)
 

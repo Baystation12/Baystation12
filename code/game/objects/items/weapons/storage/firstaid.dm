@@ -282,7 +282,7 @@
 	desc = "Contains pills used to treat burn wounds."
 
 	startswith = list(/obj/item/weapon/reagent_containers/pill/dermaline = 14)
-	wrapper_color = "#e8d131"
+	wrapper_color = COLOR_ORANGE
 
 /obj/item/weapon/storage/pill_bottle/dylovene
 	name = "pill bottle (Dylovene)"
@@ -303,7 +303,7 @@
 	desc = "Contains pills used to treat burns."
 
 	startswith = list(/obj/item/weapon/reagent_containers/pill/kelotane = 21)
-	wrapper_color = COLOR_SUN
+	wrapper_color = COLOR_YELLOW
 
 /obj/item/weapon/storage/pill_bottle/spaceacillin
 	name = "pill bottle (Spaceacillin)"
