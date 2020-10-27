@@ -11,9 +11,9 @@
 	..()
 	SETUP_SUBTYPE_DECLS_BY_NAME(/decl/prefix, prefix_by_name)
 
-/datum/category_item/player_setup_item/player_global/prefixes/load_preferences(var/savefile/S)
+/datum/category_item/player_setup_item/player_global/prefixes/load_preferences(datum/pref_record_reader/R)
 	var/list/prefix_keys_by_name
-	from_save(S["prefix_keys"], prefix_keys_by_name)
+	prefix_keys_by_name = R.read("prefix_keys")
 
 	if(istype(prefix_keys_by_name))
 		pref.prefix_keys_by_type = list()
@@ -22,13 +22,13 @@
 			if(prefix_instance)
 				pref.prefix_keys_by_type[prefix_instance.type] = prefix_keys_by_name[prefix_name]
 
-/datum/category_item/player_setup_item/player_global/prefixes/save_preferences(var/savefile/S)
+/datum/category_item/player_setup_item/player_global/prefixes/save_preferences(datum/pref_record_writer/W)
 	var/list/prefix_keys_by_name = list()
 	for(var/prefix_type in pref.prefix_keys_by_type)
 		var/decl/prefix/prefix_instance = decls_repository.get_decl(prefix_type)
 		prefix_keys_by_name[prefix_instance.name] = pref.prefix_keys_by_type[prefix_type]
 
-	to_save(S["prefix_keys"], prefix_keys_by_name)
+	W.write("prefix_keys", prefix_keys_by_name)
 
 /datum/category_item/player_setup_item/player_global/prefixes/sanitize_preferences()
 	if(!istype(pref.prefix_keys_by_type))

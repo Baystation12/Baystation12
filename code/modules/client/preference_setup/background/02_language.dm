@@ -9,11 +9,11 @@
 	var/list/allowed_languages
 	var/list/free_languages
 
-/datum/category_item/player_setup_item/background/languages/load_character(var/savefile/S)
-	from_save(S["language"], pref.alternate_languages)
+/datum/category_item/player_setup_item/background/languages/load_character(datum/pref_record_reader/R)
+	pref.alternate_languages = R.read("language")
 
-/datum/category_item/player_setup_item/background/languages/save_character(var/savefile/S)
-	to_save(S["language"],   pref.alternate_languages)
+/datum/category_item/player_setup_item/background/languages/save_character(datum/pref_record_writer/W)
+	W.write("language", pref.alternate_languages)
 
 /datum/category_item/player_setup_item/background/languages/sanitize_character()
 	if(!islist(pref.alternate_languages))

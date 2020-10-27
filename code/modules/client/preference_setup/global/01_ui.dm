@@ -10,19 +10,19 @@
 	name = "UI"
 	sort_order = 1
 
-/datum/category_item/player_setup_item/player_global/ui/load_preferences(var/savefile/S)
-	from_save(S["UI_style"], pref.UI_style)
-	from_save(S["UI_style_color"], pref.UI_style_color)
-	from_save(S["UI_style_alpha"], pref.UI_style_alpha)
-	from_save(S["ooccolor"], pref.ooccolor)
-	from_save(S["clientfps"], pref.clientfps)
+/datum/category_item/player_setup_item/player_global/ui/load_preferences(datum/pref_record_reader/R)
+	pref.UI_style = R.read("UI_style")
+	pref.UI_style_color = R.read("UI_style_color")
+	pref.UI_style_alpha = R.read("UI_style_alpha")
+	pref.ooccolor = R.read("ooccolor")
+	pref.clientfps = R.read("clientfps")
 
-/datum/category_item/player_setup_item/player_global/ui/save_preferences(var/savefile/S)
-	to_save(S["UI_style"], pref.UI_style)
-	to_save(S["UI_style_color"], pref.UI_style_color)
-	to_save(S["UI_style_alpha"], pref.UI_style_alpha)
-	to_save(S["ooccolor"], pref.ooccolor)
-	to_save(S["clientfps"], pref.clientfps)
+/datum/category_item/player_setup_item/player_global/ui/save_preferences(datum/pref_record_writer/W)
+	W.write("UI_style", pref.UI_style)
+	W.write("UI_style_color", pref.UI_style_color)
+	W.write("UI_style_alpha", pref.UI_style_alpha)
+	W.write("ooccolor", pref.ooccolor)
+	W.write("clientfps", pref.clientfps)
 
 /datum/category_item/player_setup_item/player_global/ui/sanitize_preferences()
 	pref.UI_style		= sanitize_inlist(pref.UI_style, all_ui_styles, initial(pref.UI_style))
