@@ -3,7 +3,7 @@
 
 #define SPECIES_ZOMBIE "Zombie"
 #define LANGUAGE_ZOMBIE "Zombie"
-
+#define ANTAG_ZOMBIE "Zombie"
 
 //// Zombie Globals
 
@@ -153,11 +153,11 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 	return TRUE
 
 /datum/species/zombie/proc/handle_death_infection(var/mob/living/carbon/human/H)
-	var/list/victims = hearers(H, rand(1,2))
+	var/list/victims = hearers(rand(1, 2), H)
 	for(var/mob/living/carbon/human/M in victims)
 		if(H == M || isspecies(M, SPECIES_ZOMBIE))
 			continue
-		if(!(M.species.name in GLOB.zombie_species) || isspecies(M,SPECIES_DIONA) || M.isFBP())
+		if(!(M.species.name in GLOB.zombie_species) || isspecies(M,SPECIES_DIONA) || M.isSynthetic())
 			continue
 		if(M.wear_mask && (M.wear_mask.item_flags & ITEM_FLAG_AIRTIGHT)) // If they're protected by a mask
 			continue
@@ -284,7 +284,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 /datum/unarmed_attack/bite/sharp/zombie/apply_effects(var/mob/living/carbon/human/user,var/mob/living/carbon/human/target,var/attack_damage,var/zone)
 	..()
 	admin_attack_log(user, target, "Bit their victim.", "Was bitten.", "bit")
-	if(!(target.species.name in GLOB.zombie_species) || isspecies(target,SPECIES_DIONA) || target.isFBP()) //No need to check infection for FBPs
+	if(!(target.species.name in GLOB.zombie_species) || isspecies(target,SPECIES_DIONA) || target.isSynthetic()) //No need to check infection for FBPs
 		return
 	target.adjustHalLoss(9) //To help bring down targets in voidsuits
 	var/vuln = 1 - target.get_blocked_ratio(zone, TOX, damage_flags = DAM_BIO) //Are they protected from bites?
@@ -307,11 +307,11 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 	heating_point = null
 
 /datum/reagent/zombie/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(!istype(M, /mob/living/carbon/human))
+	if(!ishuman(M))
 		return
 	var/mob/living/carbon/human/H = M
 
-	if(!(H.species.name in GLOB.zombie_species) || isspecies(H,SPECIES_DIONA) || H.isFBP())
+	if(!(H.species.name in GLOB.zombie_species) || isspecies(H,SPECIES_DIONA) || H.isSynthetic())
 		remove_self(volume)
 		return
 	var/true_dose = H.chem_doses[type] + volume
@@ -351,7 +351,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 		if(prob(3))
 			H.zombify()
 
-	M.reagents.add_reagent(/datum/reagent/zombie, rand(0.5,1.5))
+	M.reagents.add_reagent(/datum/reagent/zombie, RAND_F(0.5, 1.5))
 
 /datum/reagent/zombie/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	affect_blood(M, alien, removed * 0.5)
@@ -361,13 +361,13 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 
 
 /mob/living/carbon/human/proc/zombify()
-	if(!(species.name in GLOB.zombie_species) || isspecies(src,SPECIES_DIONA) || isspecies(src,SPECIES_ZOMBIE) || isFBP())
+	if(!(species.name in GLOB.zombie_species) || isspecies(src,SPECIES_DIONA) || isspecies(src,SPECIES_ZOMBIE) || isSynthetic())
 		return
 
 	if (mind)
-		if (mind.special_role == "Zombie")
+		if (mind.special_role == ANTAG_ZOMBIE)
 			return
-		mind.special_role = "Zombie"
+		mind.special_role = ANTAG_ZOMBIE
 
 	var/turf/T = get_turf(src)
 	new /obj/effect/decal/cleanable/vomit(T)
@@ -395,8 +395,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 	hallucination_duration = 0
 	if (should_have_organ(BP_HEART))
 		vessel.add_reagent(/datum/reagent/blood, species.blood_volume - vessel.total_volume)
-	for (var/o in organs)
-		var/obj/item/organ/organ = o
+	for (var/obj/item/organ/organ in organs)
 		organ.vital = 0
 		if (!BP_IS_ROBOTIC(organ))
 			organ.rejuvenate(1)
@@ -437,7 +436,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 			if(isspecies(L, SPECIES_ZOMBIE))
 				to_chat(src, SPAN_WARNING("\The [L] isn't fresh anymore!"))
 				continue
-			if(!(L.species.name in GLOB.zombie_species) || isspecies(L,SPECIES_DIONA) || L.isFBP())
+			if(!(L.species.name in GLOB.zombie_species) || isspecies(L,SPECIES_DIONA) || L.isSynthetic())
 				to_chat(src, SPAN_WARNING("You'd break your teeth on \the [L]!"))
 				continue
 			victims += L
