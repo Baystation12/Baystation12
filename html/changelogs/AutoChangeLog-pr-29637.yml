@@ -1,6 +1,0 @@
-author: "Spookerton"
-delete-after: True
-changes: 
-  - admin: "Cryopod entry logging happens once and references the right clients."
-  - bugfix: "Cryopods can't be entered at the same time by multiple mobs."
-  - tweak: "Cryopods use public progress bars, give more feedback, add fingerprints for both user and target mobs, and cannot be operated by Poppy."
