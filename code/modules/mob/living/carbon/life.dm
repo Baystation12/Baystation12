@@ -28,5 +28,5 @@
 
 		. = 1
 
-		if(!client && !mind && species)
+		if(!client && (!mind || ghosted) && species)
 			species.handle_npc(src)

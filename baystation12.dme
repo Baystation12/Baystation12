@@ -2843,6 +2843,7 @@
 #include "code\modules\species\outsider\shadow.dm"
 #include "code\modules\species\outsider\starlight.dm"
 #include "code\modules\species\outsider\vox.dm"
+#include "code\modules\species\outsider\zombie.dm"
 #include "code\modules\species\station\adherent.dm"
 #include "code\modules\species\station\golem.dm"
 #include "code\modules\species\station\human_subspecies.dm"

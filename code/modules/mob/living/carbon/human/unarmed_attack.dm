@@ -33,18 +33,18 @@ var/global/list/sparring_attack_cache = list()
 
 /datum/unarmed_attack/proc/is_usable(var/mob/living/carbon/human/user, var/mob/target, var/zone)
 	if(user.restrained())
-		return 0
+		return FALSE
 
 	// Check if they have a functioning hand.
 	var/obj/item/organ/external/E = user.organs_by_name[BP_L_HAND]
 	if(E && !E.is_stump())
-		return 1
+		return TRUE
 
 	E = user.organs_by_name[BP_R_HAND]
 	if(E && !E.is_stump())
-		return 1
+		return TRUE
 
-	return 0
+	return FALSE
 
 /datum/unarmed_attack/proc/get_unarmed_damage()
 	return damage
@@ -133,16 +133,47 @@ var/global/list/sparring_attack_cache = list()
 	sharp = 1
 	edge = 1
 
+/datum/unarmed_attack/bite/sharp/zombie
+	attack_verb = list("slashed", "sunk their teeth into", "bit", "mauled")
+	damage = 3
+
+/datum/unarmed_attack/bite/sharp/zombie/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
+	. = ..()
+	if(!.)
+		return FALSE
+	if(isspecies(target, SPECIES_ZOMBIE))
+		to_chat(usr, SPAN_WARNING("They don't look very appetizing!"))
+		return FALSE
+
+	return TRUE
+
+
+/datum/unarmed_attack/bite/sharp/zombie/apply_effects(var/mob/living/carbon/human/user,var/mob/living/carbon/human/target,var/attack_damage,var/zone)
+	..()
+	admin_attack_log(user, target, "Bit their victim.", "Was bitten.", "bit")
+
+	if(!(target.species.name in ORGANIC_SPECIES) || isspecies(target,SPECIES_DIONA) || target.isFBP()) //No need to check infection for FBPs
+		return
+
+	target.adjustHalLoss(9) //To help bring down targets in voidsuits
+
+	var/vuln = 1 - target.get_blocked_ratio(zone, TOX, damage_flags = DAM_BIO) //Are they protected from bites?
+	if(vuln > 0.05)
+		if(prob(vuln*100)) //Protective infection chance
+			if(prob(min(100-target.get_blocked_ratio(zone, BRUTE)*100, 70))) //General infection chance
+				target.reagents.add_reagent(/datum/reagent/zombie, 1) //Infect 'em
+
+
 /datum/unarmed_attack/bite/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
 
-	if(istype(user.wear_mask, /obj/item/clothing/mask/muzzle))
-		return 0
+	if(istype(user.wear_mask, /obj/item/clothing/mask))
+		return FALSE
 	for(var/obj/item/clothing/C in list(user.wear_mask, user.head, user.wear_suit))
 		if(C && (C.body_parts_covered & FACE) && (C.item_flags & ITEM_FLAG_THICKMATERIAL))
-			return 0 //prevent biting through a space helmet or similar
+			return FALSE //prevent biting through a space helmet or similar
 	if (user == target && (zone == BP_HEAD || zone == BP_EYES || zone == BP_MOUTH))
-		return 0 //how do you bite yourself in the head?
-	return 1
+		return FALSE //how do you bite yourself in the head?
+	return TRUE
 
 /datum/unarmed_attack/punch
 	attack_verb = list("punched")
@@ -160,7 +191,7 @@ var/global/list/sparring_attack_cache = list()
 
 	if(target == user)
 		user.visible_message("<span class='danger'>[user] [pick(attack_verb)] \himself in the [organ]!</span>")
-		return 0
+		return FALSE
 
 	target.update_personal_goal(/datum/goal/achievement/fistfight, TRUE)
 	user.update_personal_goal(/datum/goal/achievement/fistfight, TRUE)
@@ -201,17 +232,17 @@ var/global/list/sparring_attack_cache = list()
 
 /datum/unarmed_attack/kick/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
 	if(!(zone in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT, BP_GROIN)))
-		return 0
+		return FALSE
 
 	var/obj/item/organ/external/E = user.organs_by_name[BP_L_FOOT]
 	if(E && !E.is_stump())
-		return 1
+		return TRUE
 
 	E = user.organs_by_name[BP_R_FOOT]
 	if(E && !E.is_stump())
-		return 1
+		return TRUE
 
-	return 0
+	return TRUE
 
 /datum/unarmed_attack/kick/get_unarmed_damage(var/mob/living/carbon/human/user)
 	var/obj/item/clothing/shoes = user.shoes
@@ -239,20 +270,20 @@ var/global/list/sparring_attack_cache = list()
 
 /datum/unarmed_attack/stomp/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
 	if(!istype(target))
-		return 0
+		return FALSE
 
 	if (!user.lying && (target.lying || (zone in list(BP_L_FOOT, BP_R_FOOT))))
 		if(target.grabbed_by == user && target.lying)
-			return 0
+			return FALSE
 		var/obj/item/organ/external/E = user.organs_by_name[BP_L_FOOT]
 		if(E && !E.is_stump())
-			return 1
+			return TRUE
 
 		E = user.organs_by_name[BP_R_FOOT]
 		if(E && !E.is_stump())
-			return 1
+			return TRUE
 
-		return 0
+		return FALSE
 
 /datum/unarmed_attack/stomp/get_unarmed_damage(var/mob/living/carbon/human/user)
 	var/obj/item/clothing/shoes = user.shoes

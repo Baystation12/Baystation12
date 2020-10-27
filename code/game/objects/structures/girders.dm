@@ -21,11 +21,14 @@
 	cover = 25
 
 /obj/structure/girder/attack_generic(var/mob/user, var/damage, var/attack_message = "smashes apart", var/wallbreaker)
-	if(!damage || !wallbreaker)
+	if(!damage)
 		return 0
 	attack_animation(user)
-	visible_message("<span class='danger'>[user] [attack_message] the [src]!</span>")
-	spawn(1) dismantle()
+	playsound(loc, 'sound/weapons/tablehit1.ogg', 40, 1)
+	visible_message(SPAN_DANGER("[user] [attack_message] [src]!"))
+	take_damage(damage)
+	if(wallbreaker)
+		spawn(1) dismantle()
 	return 1
 
 /obj/structure/girder/bullet_act(var/obj/item/projectile/Proj)

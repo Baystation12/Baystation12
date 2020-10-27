@@ -375,6 +375,16 @@
 	mode = SYRINGE_INJECT
 	update_icon()
 
+/obj/item/weapon/reagent_containers/syringe/zombie
+	name = "Syringe (unknown serum)"
+	desc = "Contains a strange, crimson substance."
+
+/obj/item/weapon/reagent_containers/syringe/zombie/Initialize()
+	..()
+	reagents.add_reagent(/datum/reagent/zombie/, 15)
+	mode = SYRINGE_INJECT
+	update_icon()
+
 /obj/item/weapon/reagent_containers/syringe/drugs
 	name = "Syringe (drugs)"
 	desc = "Contains aggressive drugs meant for torture."

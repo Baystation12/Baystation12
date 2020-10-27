@@ -468,8 +468,8 @@ About the new airlock wires panel:
 			var/mob/living/carbon/C = user
 			if(istype(C) && C.hallucination_power > 25)
 				to_chat(user, "<span class='danger'>You feel a powerful shock course through your body!</span>")
-				user.adjustHalLoss(10)
-				user.Stun(10)
+				user.adjustHalLoss(20)
+				user.Stun(5)
 				return
 	..(user)
 

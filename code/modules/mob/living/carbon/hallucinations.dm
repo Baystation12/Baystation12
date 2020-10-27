@@ -240,47 +240,6 @@
 		I.pixel_y = rand(-10,10)
 		return I
 
-//Fake telepathy
-/datum/hallucination/telepahy
-	allow_duplicates = 0
-	duration = 20 MINUTES
-
-/datum/hallucination/telepahy/start()
-	to_chat(holder,"<span class = 'notice'>You expand your mind outwards.</span>")
-	holder.verbs += /mob/living/carbon/human/proc/fakeremotesay
-
-/datum/hallucination/telepahy/end()
-	if(holder)
-		holder.verbs -= /mob/living/carbon/human/proc/fakeremotesay
-
-/mob/living/carbon/human/proc/fakeremotesay()
-	set name = "Telepathic Message"
-	set category = "Superpower"
-
-	if(!hallucination_power)
-		src.verbs -= /mob/living/carbon/human/proc/fakeremotesay
-		return
-
-	if(stat)
-		to_chat(usr, "<span class = 'warning'>You're not in any state to use your powers right now!'</span>")
-		return
-
-	if(chem_effects[CE_MIND] > 0)
-		to_chat(usr, "<span class = 'warning'>Chemicals in your blood prevent you from using your power!'</span>")
-
-	var/list/creatures = list()
-	for(var/mob/living/carbon/C in SSmobs.mob_list)
-		creatures += C
-	creatures -= usr
-	var/mob/target = input("Who do you want to project your mind to ?") as null|anything in creatures
-	if (isnull(target))
-		return
-
-	var/msg = sanitize(input(usr, "What do you wish to transmit"))
-	show_message("<span class = 'notice'>You project your mind into [target.name]: \"[msg]\"</span>")
-	if(!stat && prob(20))
-		say(msg)
-
 //Fake attack
 /datum/hallucination/fakeattack
 	min_power = 30

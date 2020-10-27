@@ -63,7 +63,7 @@
 
 /mob/living/carbon/human/monkey/New(var/new_loc)
 	gender = pick(MALE, FEMALE)
-	..(new_loc, "Monkey")
+	..(new_loc, SPECIES_MONKEY)
 
 /mob/living/carbon/human/farwa/New(var/new_loc)
 	..(new_loc, "Farwa")
@@ -76,3 +76,17 @@
 
 /mob/living/carbon/human/adherent/New(var/new_loc)
 	..(new_loc, SPECIES_ADHERENT)
+
+/mob/living/carbon/human/zombie/New(var/new_loc)
+	..(new_loc, SPECIES_ZOMBIE)
+
+	var/decl/cultural_info/culture = get_cultural_value(TAG_CULTURE)
+	SetName(culture.get_random_name(gender))
+	real_name = name
+
+	var/outfits = list(/decl/hierarchy/outfit/job/science/scientist,/decl/hierarchy/outfit/job/engineering/engineer,/decl/hierarchy/outfit/job/cargo/mining,/decl/hierarchy/outfit/job/medical/chemist)
+	var/decl/hierarchy/outfit/corpse_outfit = outfit_by_type(pickweight(outfits))
+	corpse_outfit.equip(src, OUTFIT_ADJUSTMENT_SKIP_SURVIVAL_GEAR)
+
+	ChangeToHusk()
+	zombify()
