@@ -15713,7 +15713,7 @@
 	pixel_y = 32
 	},
 /obj/machinery/button/alternate/door/bolts{
-	id_tag = "medsafe_aft";
+	id_tag = "medsafe_fore";
 	name = "safe room door-control";
 	pixel_x = -25
 	},
