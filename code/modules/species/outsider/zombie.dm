@@ -1,3 +1,14 @@
+
+//// Zombie Defines
+
+#define SPECIES_ZOMBIE "Zombie"
+#define LANGUAGE_ZOMBIE "Zombie"
+#define ORGANIC_SPECIES list(SPECIES_HUMAN, SPECIES_DIONA, SPECIES_UNATHI, SPECIES_VOX, SPECIES_VOX_ARMALIS, SPECIES_SKRELL, SPECIES_PROMETHEAN, SPECIES_ALIEN, SPECIES_YEOSA, SPECIES_VATGROWN, SPECIES_SPACER, SPECIES_TRITONIAN, SPECIES_GRAVWORLDER, SPECIES_MULE, SPECIES_BOOSTER, SPECIES_MONKEY)
+
+
+//// Zombie Types
+
+
 /datum/species/zombie
 	name = "Zombie"
 	name_plural = "Zombies"
@@ -27,18 +38,20 @@
 	var/heal_rate = 1 // Regen.
 	var/mob/living/carbon/human/target = null
 
-	var/list/obstacles = list(/obj/structure/window,
-						/obj/structure/closet,
-						/obj/machinery/door/airlock,
-						/obj/structure/table,
-						/obj/structure/grille,
-						/obj/structure/barricade,
-						/obj/structure/wall_frame,
-						/obj/structure/railing,
-						/obj/structure/girder,
-						/turf/simulated/wall/,
-						/obj/machinery/door/blast/shutters,
-						/obj/machinery/door/)
+	var/list/obstacles = list(
+		/obj/structure/window,
+		/obj/structure/closet,
+		/obj/machinery/door/airlock,
+		/obj/structure/table,
+		/obj/structure/grille,
+		/obj/structure/barricade,
+		/obj/structure/wall_frame,
+		/obj/structure/railing,
+		/obj/structure/girder,
+		/turf/simulated/wall,
+		/obj/machinery/door/blast/shutters,
+		/obj/machinery/door
+	)
 
 /datum/species/zombie/handle_post_spawn(var/mob/living/carbon/human/H)
 	H.mutations |= MUTATION_CLUMSY
@@ -199,3 +212,319 @@
 			walk(H, 0) //Clear walking
 			if(prob(33) && isturf(H.loc) && !H.pulledby)
 				H.SelfMove(pick(GLOB.cardinal))
+
+
+/datum/language/zombie
+	name = LANGUAGE_ZOMBIE
+	desc = "A crude form of feral communication utilized by the shuffling horrors. The living only hear guttoral wails of agony."
+	colour = "cult"
+	key = "a"
+	speech_verb = "growls"
+	exclaim_verb = "wails"
+	partial_understanding = list(
+		LANGUAGE_HUMAN_EURO = 30,
+		LANGUAGE_SPACER = 35
+	)
+	syllables = list("mhh..", "grr..", "nnh..")
+	shorthand = "ZM"
+	hidden_from_codex = TRUE
+
+
+/datum/unarmed_attack/bite/sharp/zombie
+	attack_verb = list("slashed", "sunk their teeth into", "bit", "mauled")
+	damage = 3
+
+/datum/unarmed_attack/bite/sharp/zombie/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
+	. = ..()
+	if(!.)
+		return FALSE
+	if(isspecies(target, SPECIES_ZOMBIE))
+		to_chat(usr, SPAN_WARNING("They don't look very appetizing!"))
+		return FALSE
+	return TRUE
+
+/datum/unarmed_attack/bite/sharp/zombie/apply_effects(var/mob/living/carbon/human/user,var/mob/living/carbon/human/target,var/attack_damage,var/zone)
+	..()
+	admin_attack_log(user, target, "Bit their victim.", "Was bitten.", "bit")
+	if(!(target.species.name in ORGANIC_SPECIES) || isspecies(target,SPECIES_DIONA) || target.isFBP()) //No need to check infection for FBPs
+		return
+	target.adjustHalLoss(9) //To help bring down targets in voidsuits
+	var/vuln = 1 - target.get_blocked_ratio(zone, TOX, damage_flags = DAM_BIO) //Are they protected from bites?
+	if(vuln > 0.05)
+		if(prob(vuln*100)) //Protective infection chance
+			if(prob(min(100-target.get_blocked_ratio(zone, BRUTE)*100, 70))) //General infection chance
+				target.reagents.add_reagent(/datum/reagent/zombie, 1) //Infect 'em
+
+
+/datum/reagent/zombie
+	var/list/stage1_messages = list(
+		"You feel uncomfortably warm.",
+		"You feel rather feverish.",
+		"Your throat is extremely dry...",
+		"Your muscles cramp...",
+		"You feel dizzy.",
+		"You feel slightly fatigued.",
+		"You feel light-headed."
+	)
+
+	var/list/stage2_messages = list(
+		"You feel something under your skin!",
+		"Mucus runs down the back of your throat",
+		"Your muscles burn.",
+		"Your skin itches.",
+		"Your bones ache.",
+		"Sweat runs down the side of your neck.",
+		"Your heart races."
+	)
+
+	var/list/stage3_messages = list(
+		"Your head feels like it's splitting open!",
+		"Your skin is peeling away!",
+		"Your body stings all over!",
+		"It feels like your insides are squirming!",
+		"You're in agony!"
+	)
+
+	name = "Liquid Corruption"
+	description = "A filthy, oily substance which slowly churns of its own accord."
+	taste_description = "decaying blood"
+	color = "#540000"
+	taste_mult = 5
+	metabolism = REM
+	overdose = 200
+	hidden_from_codex = TRUE
+	heating_products = null
+	heating_point = null
+
+/datum/reagent/zombie/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(!istype(M, /mob/living/carbon/human))
+		return
+	var/mob/living/carbon/human/H = M
+
+	if(!(H.species.name in ORGANIC_SPECIES) || isspecies(H,SPECIES_DIONA) || H.isFBP())
+		remove_self(volume)
+		return
+	var/true_dose = H.chem_doses[type] + volume
+
+	if(true_dose >= 30)
+		if(M.getBrainLoss() > 140)
+			H.zombify()
+		if(prob(1))
+			to_chat(M, SPAN_WARNING("<font style='font-size:[rand(1,2)]'>[pick(stage1_messages)]</font>"))
+
+	if(true_dose >= 60)
+		M.bodytemperature += 7.5
+		if(prob(3))
+			to_chat(M, SPAN_WARNING("<font style='font-size:2'>[pick(stage1_messages)]</font>"))
+		if(M.getBrainLoss() < 20)
+			M.adjustBrainLoss(rand(1,2))
+
+	if(true_dose >= 90)
+		M.add_chemical_effect(CE_MIND, -2)
+		M.hallucination(50, min(true_dose/2, 50))
+		if(M.getBrainLoss() < 75)
+			M.adjustBrainLoss(rand(1,2))
+		if(prob(0.5))
+			H.seizure()
+			H.adjustBrainLoss(rand(12, 24))
+		if(prob(5))
+			to_chat(M, SPAN_DANGER("<font style='font-size:[rand(2,3)]'>[pick(stage2_messages)]</font>"))
+		M.bodytemperature += 9
+
+	if(true_dose >= 110)
+		M.adjustHalLoss(5)
+		M.make_dizzy(10)
+		if(prob(8))
+			to_chat(M, SPAN_DANGER("<font style='font-size:[rand(3,4)]'>[pick(stage3_messages)]</font>"))
+
+	if(true_dose >= 135)
+		if(prob(3))
+			H.zombify()
+
+	M.reagents.add_reagent(/datum/reagent/zombie, rand(0.5,1.5))
+
+/datum/reagent/zombie/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+	affect_blood(M, alien, removed * 0.5)
+
+
+//// Zombie Procs
+
+
+/mob/living/carbon/human/proc/zombify()
+	if(!(species.name in ORGANIC_SPECIES) || isspecies(src,SPECIES_DIONA) || isspecies(src,SPECIES_ZOMBIE) || isFBP())
+		return
+
+	if (mind)
+		if (mind.special_role == "Zombie")
+			return
+		mind.special_role = "Zombie"
+
+	var/turf/T = get_turf(src)
+	new /obj/effect/decal/cleanable/vomit(T)
+	playsound(T, 'sound/effects/splat.ogg', 20, 1)
+
+	addtimer(CALLBACK(src, .proc/transform_zombie), 20)
+
+/mob/living/carbon/human/proc/transform_zombie()
+	make_jittery(300)
+	adjustBruteLoss(100)
+	sleep(150)
+
+	if(isspecies(src,SPECIES_ZOMBIE)) //Check again otherwise Consume can run this twice at once
+		return
+
+	rejuvenate()
+	ChangeToHusk()
+	visible_message(SPAN_DANGER("\The [src]'s skin decays before your very eyes!"), SPAN_DANGER("Your entire body is ripe with pain as it is consumed down to flesh and bones. You ... hunger. Not only for flesh, but to spread this gift. Use Abilities -> Consume to infect and feed upon your prey."))
+	log_admin("[key_name(src)] has transformed into a zombie!")
+
+	Weaken(4)
+	jitteriness = 0
+	dizziness = 0
+	hallucination_power = 0
+	hallucination_duration = 0
+	if (should_have_organ(BP_HEART))
+		vessel.add_reagent(/datum/reagent/blood, species.blood_volume - vessel.total_volume)
+	for (var/o in organs)
+		var/obj/item/organ/organ = o
+		organ.vital = 0
+		if (!BP_IS_ROBOTIC(organ))
+			organ.rejuvenate(1)
+			organ.max_damage *= 2
+			organ.min_broken_damage = Floor(organ.max_damage * 0.75)
+
+	resuscitate()
+	set_stat(CONSCIOUS)
+
+	if(skillset && skillset.skill_list)
+		skillset.skill_list = list()
+		for(var/decl/hierarchy/skill/S in GLOB.skills) //Only want trained CQC and athletics
+			skillset.skill_list[S.type] = SKILL_NONE
+		skillset.skill_list[SKILL_HAULING] = SKILL_ADEPT
+		skillset.skill_list[SKILL_COMBAT] = SKILL_ADEPT
+		skillset.on_levels_change()
+
+	species = all_species[SPECIES_ZOMBIE]
+	species.handle_post_spawn(src)
+
+	var/turf/T = get_turf(src)
+	playsound(T, 'sound/hallucinations/wail.ogg', 25, 1)
+
+
+/mob/living/carbon/proc/consume()
+	set name = "Consume"
+	set desc = "Regain life and infect others by feeding upon them."
+	set category = "Abilities"
+
+	if (last_special > world.time)
+		to_chat(src, SPAN_WARNING("You aren't ready to do that! Wait [round(last_special - world.time) / 10] seconds."))
+		return
+
+	var/mob/living/carbon/human/target
+	var/list/victims = list()
+	for (var/mob/living/carbon/human/L in get_turf(src))
+		if (L != src && (L.lying || L.stat == DEAD))
+			if(isspecies(L, SPECIES_ZOMBIE))
+				to_chat(src, SPAN_WARNING("\The [L] isn't fresh anymore!"))
+				continue
+			if(!(L.species.name in ORGANIC_SPECIES) || isspecies(L,SPECIES_DIONA) || L.isFBP())
+				to_chat(src, SPAN_WARNING("You'd break your teeth on \the [L]!"))
+				continue
+			victims += L
+
+	if(!victims.len)
+		to_chat(src, SPAN_WARNING("No valid targets nearby!"))
+		return
+	if(client)
+		if(victims.len == 1) //No need to choose
+			target = victims[1]
+		else
+			target = input("Who would you like to consume?") as null|anything in victims
+	else //NPCs
+		if(victims.len > 0)
+			target = victims[1]
+
+	if (!target)
+		to_chat(src, SPAN_WARNING("You aren't on top of a victim!"))
+		return
+	if (get_turf(src) != get_turf(target) || !(target.lying || target.stat == DEAD))
+		to_chat(src, SPAN_WARNING("You're no longer on top of \the [target]!"))
+		return
+
+	last_special = world.time + 5 SECONDS
+
+	src.visible_message(SPAN_DANGER("\The [src] hunkers down over \the [target], tearing into their flesh."))
+	playsound(loc, 'sound/effects/bonebreak3.ogg', 20, 1)
+
+	target.adjustHalLoss(50)
+
+	if(do_after(src, 5 SECONDS, target, DO_DEFAULT, INCAPACITATION_KNOCKOUT))
+		admin_attack_log(src, target, "Consumed their victim.", "Was consumed.", "consumed")
+
+		if (!target.lying && target.stat != DEAD) //Check victims are still prone
+			return
+
+		target.reagents.add_reagent(/datum/reagent/zombie, 35) //Just in case they haven't been infected already
+		if(target.getBruteLoss() > target.maxHealth*1.5)
+			if(target.stat != DEAD)
+				to_chat(src,SPAN_WARNING("You've scraped \the [target] down to the bones already!."))
+				target.zombify()
+			else
+				to_chat(src,SPAN_DANGER("You shred and rip apart \the [target]'s remains!."))
+				target.gib()
+				playsound(loc, 'sound/effects/splat.ogg', 40, 1)
+			return
+
+		to_chat(target,SPAN_DANGER("\The [src] scrapes your flesh from your bones!"))
+		to_chat(src,SPAN_DANGER("You feed hungrily off \the [target]'s flesh."))
+
+		if(isspecies(target, SPECIES_ZOMBIE)) //Just in case they turn whilst being eaten
+			return
+
+		target.apply_damage(rand(50,60), BRUTE, BP_CHEST)
+		target.adjustBruteLoss(20)
+		target.update_surgery() //Update broken ribcage sprites etc.
+
+		src.adjustBruteLoss(-5)
+		src.adjustFireLoss(-15)
+		src.adjustToxLoss(-5)
+		src.adjustBrainLoss(-5)
+		src.adjust_nutrition(40)
+
+		playsound(loc, 'sound/effects/splat.ogg', 20, 1)
+		new /obj/effect/decal/cleanable/blood/splatter(get_turf(src), target.species.blood_color)
+		if(target.getBruteLoss() > target.maxHealth*0.75)
+			if(prob(50))
+				gibs(get_turf(src), target.dna)
+				src.visible_message(SPAN_DANGER("\The [src] tears out \the [target]'s insides!"))
+	else
+		src.visible_message(SPAN_WARNING("\The [src] leaves their meal for later."))
+
+
+//// Zombie Atoms
+
+
+/obj/item/weapon/reagent_containers/syringe/zombie
+	name = "Syringe (unknown serum)"
+	desc = "Contains a strange, crimson substance."
+
+/obj/item/weapon/reagent_containers/syringe/zombie/Initialize()
+	..()
+	reagents.add_reagent(/datum/reagent/zombie, 15)
+	mode = SYRINGE_INJECT
+	update_icon()
+
+
+/mob/living/carbon/human/zombie/New(var/new_loc)
+	..(new_loc, SPECIES_ZOMBIE)
+
+	var/decl/cultural_info/culture = get_cultural_value(TAG_CULTURE)
+	SetName(culture.get_random_name(gender))
+	real_name = name
+
+	var/outfits = list(/decl/hierarchy/outfit/job/science/scientist,/decl/hierarchy/outfit/job/engineering/engineer,/decl/hierarchy/outfit/job/cargo/mining,/decl/hierarchy/outfit/job/medical/chemist)
+	var/decl/hierarchy/outfit/corpse_outfit = outfit_by_type(pickweight(outfits))
+	corpse_outfit.equip(src, OUTFIT_ADJUSTMENT_SKIP_SURVIVAL_GEAR)
+
+	ChangeToHusk()
+	zombify()

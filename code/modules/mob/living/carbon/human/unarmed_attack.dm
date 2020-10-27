@@ -133,37 +133,6 @@ var/global/list/sparring_attack_cache = list()
 	sharp = 1
 	edge = 1
 
-/datum/unarmed_attack/bite/sharp/zombie
-	attack_verb = list("slashed", "sunk their teeth into", "bit", "mauled")
-	damage = 3
-
-/datum/unarmed_attack/bite/sharp/zombie/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
-	. = ..()
-	if(!.)
-		return FALSE
-	if(isspecies(target, SPECIES_ZOMBIE))
-		to_chat(usr, SPAN_WARNING("They don't look very appetizing!"))
-		return FALSE
-
-	return TRUE
-
-
-/datum/unarmed_attack/bite/sharp/zombie/apply_effects(var/mob/living/carbon/human/user,var/mob/living/carbon/human/target,var/attack_damage,var/zone)
-	..()
-	admin_attack_log(user, target, "Bit their victim.", "Was bitten.", "bit")
-
-	if(!(target.species.name in ORGANIC_SPECIES) || isspecies(target,SPECIES_DIONA) || target.isFBP()) //No need to check infection for FBPs
-		return
-
-	target.adjustHalLoss(9) //To help bring down targets in voidsuits
-
-	var/vuln = 1 - target.get_blocked_ratio(zone, TOX, damage_flags = DAM_BIO) //Are they protected from bites?
-	if(vuln > 0.05)
-		if(prob(vuln*100)) //Protective infection chance
-			if(prob(min(100-target.get_blocked_ratio(zone, BRUTE)*100, 70))) //General infection chance
-				target.reagents.add_reagent(/datum/reagent/zombie, 1) //Infect 'em
-
-
 /datum/unarmed_attack/bite/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
 
 	if(istype(user.wear_mask, /obj/item/clothing/mask))
