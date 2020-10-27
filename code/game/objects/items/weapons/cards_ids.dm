@@ -93,15 +93,24 @@
  */
 
 /obj/item/weapon/card/emag_broken
-	desc = "It's a card with a magnetic strip attached to some circuitry. It looks too busted to be used for anything but salvage."
-	name = "broken cryptographic sequencer"
+	desc = "It's a blank ID card with a magnetic strip and some odd circuitry attached."
+	name = "identification card"
 	icon_state = "emag"
 	item_state = "card-id"
 	origin_tech = list(TECH_MAGNET = 2, TECH_ESOTERIC = 2)
 
+/obj/item/weapon/card/emag_broken/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 0 && (user.skill_check(SKILL_DEVICES, SKILL_ADEPT) || player_is_antag(user.mind)))
+		to_chat(user, SPAN_WARNING("You can tell the components are completely fried; whatever use it may have had before is gone."))
+
+/obj/item/weapon/card/emag_broken/get_antag_info()
+	. = ..()
+	. += "You can use this cryptographic sequencer in order to subvert electronics or forcefully open doors you don't have access to. These actions are irreversible and the card only has a limited number of charges!"
+
 /obj/item/weapon/card/emag
-	desc = "It's a card with a magnetic strip attached to some circuitry."
-	name = "cryptographic sequencer"
+	desc = "It's a blank ID card with a magnetic strip and some odd circuitry attached."
+	name = "identification card"
 	icon_state = "emag"
 	item_state = "card-id"
 	origin_tech = list(TECH_MAGNET = 2, TECH_ESOTERIC = 2)
@@ -117,6 +126,7 @@
 						) //Should be enough of a selection for most purposes
 
 var/const/NO_EMAG_ACT = -50
+
 /obj/item/weapon/card/emag/resolve_attackby(atom/A, mob/user)
 	var/used_uses = A.emag_act(uses, user, src)
 	if(used_uses == NO_EMAG_ACT)
@@ -150,11 +160,10 @@ var/const/NO_EMAG_ACT = -50
 			return
 
 		disguise(card_choices[picked], usr)
-
-/obj/item/weapon/card/emag/examine(mob/user)
+	
+/obj/item/weapon/card/emag/get_antag_info()
 	. = ..()
-	if(user.skill_check(SKILL_DEVICES,SKILL_ADEPT))
-		to_chat(user, SPAN_WARNING("This ID card has some form of non-standard modifications."))
+	. += "You can use this cryptographic sequencer in order to subvert electronics or forcefully open doors you don't have access to. These actions are irreversible and the card only has a limited number of charges!"
 
 /obj/item/weapon/card/id
 	name = "identification card"
