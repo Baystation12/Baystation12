@@ -3,7 +3,45 @@
 
 #define SPECIES_ZOMBIE "Zombie"
 #define LANGUAGE_ZOMBIE "Zombie"
-#define ORGANIC_SPECIES list(SPECIES_HUMAN, SPECIES_DIONA, SPECIES_UNATHI, SPECIES_VOX, SPECIES_VOX_ARMALIS, SPECIES_SKRELL, SPECIES_PROMETHEAN, SPECIES_ALIEN, SPECIES_YEOSA, SPECIES_VATGROWN, SPECIES_SPACER, SPECIES_TRITONIAN, SPECIES_GRAVWORLDER, SPECIES_MULE, SPECIES_BOOSTER, SPECIES_MONKEY)
+
+
+//// Zombie Globals
+
+GLOBAL_LIST_INIT(zombie_messages, list(
+	"stage1" = list(
+		"You feel uncomfortably warm.",
+		"You feel rather feverish.",
+		"Your throat is extremely dry...",
+		"Your muscles cramp...",
+		"You feel dizzy.",
+		"You feel slightly fatigued.",
+		"You feel light-headed."
+	),
+	"stage2" = list(
+		"You feel something under your skin!",
+		"Mucus runs down the back of your throat",
+		"Your muscles burn.",
+		"Your skin itches.",
+		"Your bones ache.",
+		"Sweat runs down the side of your neck.",
+		"Your heart races."
+	),
+	"stage3" = list(
+		"Your head feels like it's splitting open!",
+		"Your skin is peeling away!",
+		"Your body stings all over!",
+		"It feels like your insides are squirming!",
+		"You're in agony!"
+	)
+))
+
+
+GLOBAL_LIST_INIT(zombie_species, list(\
+	SPECIES_HUMAN, SPECIES_DIONA, SPECIES_UNATHI, SPECIES_VOX, SPECIES_VOX_ARMALIS,\
+	SPECIES_SKRELL, SPECIES_PROMETHEAN, SPECIES_ALIEN, SPECIES_YEOSA, SPECIES_VATGROWN,\
+	SPECIES_SPACER, SPECIES_TRITONIAN, SPECIES_GRAVWORLDER, SPECIES_MULE, SPECIES_BOOSTER,\
+	SPECIES_MONKEY
+))
 
 
 //// Zombie Types
@@ -119,7 +157,7 @@
 	for(var/mob/living/carbon/human/M in victims)
 		if(H == M || isspecies(M, SPECIES_ZOMBIE))
 			continue
-		if(!(M.species.name in ORGANIC_SPECIES) || isspecies(M,SPECIES_DIONA) || M.isFBP())
+		if(!(M.species.name in GLOB.zombie_species) || isspecies(M,SPECIES_DIONA) || M.isFBP())
 			continue
 		if(M.wear_mask && (M.wear_mask.item_flags & ITEM_FLAG_AIRTIGHT)) // If they're protected by a mask
 			continue
@@ -246,7 +284,7 @@
 /datum/unarmed_attack/bite/sharp/zombie/apply_effects(var/mob/living/carbon/human/user,var/mob/living/carbon/human/target,var/attack_damage,var/zone)
 	..()
 	admin_attack_log(user, target, "Bit their victim.", "Was bitten.", "bit")
-	if(!(target.species.name in ORGANIC_SPECIES) || isspecies(target,SPECIES_DIONA) || target.isFBP()) //No need to check infection for FBPs
+	if(!(target.species.name in GLOB.zombie_species) || isspecies(target,SPECIES_DIONA) || target.isFBP()) //No need to check infection for FBPs
 		return
 	target.adjustHalLoss(9) //To help bring down targets in voidsuits
 	var/vuln = 1 - target.get_blocked_ratio(zone, TOX, damage_flags = DAM_BIO) //Are they protected from bites?
@@ -257,34 +295,6 @@
 
 
 /datum/reagent/zombie
-	var/list/stage1_messages = list(
-		"You feel uncomfortably warm.",
-		"You feel rather feverish.",
-		"Your throat is extremely dry...",
-		"Your muscles cramp...",
-		"You feel dizzy.",
-		"You feel slightly fatigued.",
-		"You feel light-headed."
-	)
-
-	var/list/stage2_messages = list(
-		"You feel something under your skin!",
-		"Mucus runs down the back of your throat",
-		"Your muscles burn.",
-		"Your skin itches.",
-		"Your bones ache.",
-		"Sweat runs down the side of your neck.",
-		"Your heart races."
-	)
-
-	var/list/stage3_messages = list(
-		"Your head feels like it's splitting open!",
-		"Your skin is peeling away!",
-		"Your body stings all over!",
-		"It feels like your insides are squirming!",
-		"You're in agony!"
-	)
-
 	name = "Liquid Corruption"
 	description = "A filthy, oily substance which slowly churns of its own accord."
 	taste_description = "decaying blood"
@@ -301,7 +311,7 @@
 		return
 	var/mob/living/carbon/human/H = M
 
-	if(!(H.species.name in ORGANIC_SPECIES) || isspecies(H,SPECIES_DIONA) || H.isFBP())
+	if(!(H.species.name in GLOB.zombie_species) || isspecies(H,SPECIES_DIONA) || H.isFBP())
 		remove_self(volume)
 		return
 	var/true_dose = H.chem_doses[type] + volume
@@ -310,12 +320,12 @@
 		if(M.getBrainLoss() > 140)
 			H.zombify()
 		if(prob(1))
-			to_chat(M, SPAN_WARNING("<font style='font-size:[rand(1,2)]'>[pick(stage1_messages)]</font>"))
+			to_chat(M, SPAN_WARNING("<font style='font-size:[rand(1,2)]'>[pick(GLOB.zombie_messages["stage1"])]</font>"))
 
 	if(true_dose >= 60)
 		M.bodytemperature += 7.5
 		if(prob(3))
-			to_chat(M, SPAN_WARNING("<font style='font-size:2'>[pick(stage1_messages)]</font>"))
+			to_chat(M, SPAN_WARNING("<font style='font-size:2'>[pick(GLOB.zombie_messages["stage1"])]</font>"))
 		if(M.getBrainLoss() < 20)
 			M.adjustBrainLoss(rand(1,2))
 
@@ -328,14 +338,14 @@
 			H.seizure()
 			H.adjustBrainLoss(rand(12, 24))
 		if(prob(5))
-			to_chat(M, SPAN_DANGER("<font style='font-size:[rand(2,3)]'>[pick(stage2_messages)]</font>"))
+			to_chat(M, SPAN_DANGER("<font style='font-size:[rand(2,3)]'>[pick(GLOB.zombie_messages["stage2"])]</font>"))
 		M.bodytemperature += 9
 
 	if(true_dose >= 110)
 		M.adjustHalLoss(5)
 		M.make_dizzy(10)
 		if(prob(8))
-			to_chat(M, SPAN_DANGER("<font style='font-size:[rand(3,4)]'>[pick(stage3_messages)]</font>"))
+			to_chat(M, SPAN_DANGER("<font style='font-size:[rand(3,4)]'>[pick(GLOB.zombie_messages["stage3"])]</font>"))
 
 	if(true_dose >= 135)
 		if(prob(3))
@@ -351,7 +361,7 @@
 
 
 /mob/living/carbon/human/proc/zombify()
-	if(!(species.name in ORGANIC_SPECIES) || isspecies(src,SPECIES_DIONA) || isspecies(src,SPECIES_ZOMBIE) || isFBP())
+	if(!(species.name in GLOB.zombie_species) || isspecies(src,SPECIES_DIONA) || isspecies(src,SPECIES_ZOMBIE) || isFBP())
 		return
 
 	if (mind)
@@ -427,7 +437,7 @@
 			if(isspecies(L, SPECIES_ZOMBIE))
 				to_chat(src, SPAN_WARNING("\The [L] isn't fresh anymore!"))
 				continue
-			if(!(L.species.name in ORGANIC_SPECIES) || isspecies(L,SPECIES_DIONA) || L.isFBP())
+			if(!(L.species.name in GLOB.zombie_species) || isspecies(L,SPECIES_DIONA) || L.isFBP())
 				to_chat(src, SPAN_WARNING("You'd break your teeth on \the [L]!"))
 				continue
 			victims += L
