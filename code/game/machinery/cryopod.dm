@@ -424,25 +424,42 @@
 	qdel(occupant)
 	set_occupant(null)
 
-/obj/machinery/cryopod/proc/attempt_enter(var/mob/target, var/mob/user)
-	if(target.client)
-		if(target != user)
-			if(alert(target,"Would you like to enter long-term storage?",,"Yes","No") != "Yes")
-				return
-	if(!user.incapacitated() && !user.anchored && user.Adjacent(src) && user.Adjacent(target))
-		visible_message("[user] starts putting [target] into \the [src].", range = 3)
-		if(!do_after(user, 20, src)|| QDELETED(target))
+/obj/machinery/cryopod/proc/attempt_enter(mob/target, mob/user)
+	if (!user.IsAdvancedToolUser())
+		to_chat(user, SPAN_WARNING("You're too simple to understand how to do that."))
+		return
+	if (user.incapacitated() || !user.Adjacent(src))
+		to_chat(user, SPAN_WARNING("You're in no position to do that."))
+		return
+	if (!user.Adjacent(target))
+		to_chat(user, SPAN_WARNING("\The [target] isn't close enough."))
+		return
+	if (user != target  && target.client)
+		var/response = alert(target, "Enter the [src]?", null, "Yes", "No")
+		if (response != "Yes")
+			to_chat(user, SPAN_WARNING("\The [target] refuses."))
 			return
-		set_occupant(target)
-
-		// Book keeping!
-		if (target == user)
-			log_and_message_admins("has entered a stasis pod")
-		else
-			log_and_message_admins("has placed [key_name_admin(target)] into a stasis pod")
-
-		//Despawning occurs when process() is called with an occupant without a client.
-		src.add_fingerprint(target)
+	if (user.incapacitated() || !user.Adjacent(src))
+		to_chat(user, SPAN_WARNING("You're in no position to do that."))
+		return
+	if (!user.Adjacent(target))
+		to_chat(user, SPAN_WARNING("\The [target] isn't close enough."))
+		return
+	add_fingerprint(user)
+	var/reason = do_after_detailed(user, 2 SECONDS, src, do_flags = DO_DEFAULT | DO_TARGET_UNIQUE_ACT | DO_PUBLIC_PROGRESS)
+	if (reason)
+		if (reason == DO_TARGET_UNIQUE_ACT)
+			to_chat(user, SPAN_WARNING("\The [do_unique_target_user] is already using \the [src]."))
+		return
+	if (QDELETED(target))
+		return
+	if (!user.Adjacent(target))
+		to_chat(user, SPAN_WARNING("\The [target] isn't close enough."))
+		return
+	set_occupant(target)
+	if (user != target)
+		add_fingerprint(target)
+	log_and_message_admins("placed [target == user ? "themself" : key_name_admin(target)] into \a [src]")
 
 //Like grap-put, but for mouse-drop.
 /obj/machinery/cryopod/MouseDrop_T(var/mob/target, var/mob/user)
