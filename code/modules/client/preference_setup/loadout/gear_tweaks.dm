@@ -59,13 +59,17 @@
 	var/list/duplicate_values = duplicates(list_values(valid_paths))
 	if(duplicate_values.len)
 		CRASH("Duplicate types found: [english_list(duplicate_values)]")
+	// valid_paths, but with names sanitized to remove \improper
+	var/list/valid_paths_san = list()
 	for(var/path_name in valid_paths)
 		if(!istext(path_name))
 			CRASH("Expected a text key, was [log_info_line(path_name)]")
 		var/selection_type = valid_paths[path_name]
 		if(!ispath(selection_type, /obj/item))
 			CRASH("Expected an /obj/item path, was [log_info_line(selection_type)]")
-	src.valid_paths = sortAssoc(valid_paths)
+		var/path_name_san = replacetext(path_name, "\improper", "")
+		valid_paths_san[path_name_san] = selection_type
+	src.valid_paths = sortAssoc(valid_paths_san)
 
 /datum/gear_tweak/path/type/New(var/type_path)
 	..(atomtype2nameassoclist(type_path))
