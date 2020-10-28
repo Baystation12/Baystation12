@@ -21,7 +21,7 @@
 
 /obj/item/blueprints/Initialize()
 	. = ..()
-	desc = "Blueprints of the [station_name()]. There is a \"Classified\" stamp and several coffee stains on it."
+	desc = "Blueprints of \the [station_name()]. There is a \"Classified\" stamp and several coffee stains on it."
 
 /obj/item/blueprints/attack_self(mob/M as mob)
 	if (!istype(M,/mob/living/carbon/human))

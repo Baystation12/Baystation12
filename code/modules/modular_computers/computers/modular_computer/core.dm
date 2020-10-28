@@ -102,16 +102,16 @@
 		return
 	if(processor_unit && (apc_power(0) || battery_power(0))) // Battery-run and charged or non-battery but powered by APC.
 		if(issynth)
-			to_chat(user, "You send an activation signal to \the [src], turning it on")
+			to_chat(user, "You send an activation signal to \the [src], turning it on.")
 		else
-			to_chat(user, "You press the power button and start up \the [src]")
+			to_chat(user, "You press the power button and start up \the [src].")
 		enable_computer(user)
 
 	else // Unpowered
 		if(issynth)
-			to_chat(user, "You send an activation signal to \the [src] but it does not respond")
+			to_chat(user, "You send an activation signal to \the [src] but it does not respond.")
 		else
-			to_chat(user, "You press the power button but \the [src] does not respond")
+			to_chat(user, "You press the power button but \the [src] does not respond.")
 
 /obj/item/modular_computer/proc/shutdown_computer(var/loud = 1)
 	QDEL_NULL_LIST(terminals)

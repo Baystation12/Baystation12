@@ -16,7 +16,7 @@
 
 /obj/item/robot_parts/robot_component/armour/exosuit/radproof
 	name = "radiation-proof armour plating"
-	desc = "A fully enclosed radiation hardened shell designed to protect the pilot from radiation"
+	desc = "A fully enclosed radiation hardened shell designed to protect the pilot from radiation."
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT, 
 		bullet = ARMOR_BALLISTIC_PISTOL, 
@@ -30,7 +30,7 @@
 
 /obj/item/robot_parts/robot_component/armour/exosuit/em
 	name = "EM-shielded armour plating"
-	desc = "A shielded plating that sorrounds the eletronics and protects them from electromagnetic radiation"
+	desc = "A shielded plating that sorrounds the eletronics and protects them from electromagnetic radiation."
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT , 
 		bullet = ARMOR_BALLISTIC_SMALL, 
@@ -44,7 +44,7 @@
 
 /obj/item/robot_parts/robot_component/armour/exosuit/combat
 	name = "heavy combat plating"
-	desc = "Plating designed to deflect incoming attacks and explosions"
+	desc = "Plating designed to deflect incoming attacks and explosions."
 	armor = list(
 		melee = ARMOR_MELEE_MAJOR, 
 		bullet = ARMOR_BALLISTIC_RESISTANT, 

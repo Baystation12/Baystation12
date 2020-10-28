@@ -58,7 +58,7 @@
 	sort_string = "MADAA"
 
 /datum/design/item/medical/hypospray
-	desc = "A sterile, air-needle autoinjector for rapid administration of drugs"
+	desc = "A sterile, air-needle autoinjector for rapid administration of drugs."
 	id = "hypospray"
 	req_tech = list(TECH_MATERIAL = 4, TECH_BIO = 5)
 	materials = list(MATERIAL_STEEL = 8000, MATERIAL_GLASS = 8000, MATERIAL_SILVER = 2000)

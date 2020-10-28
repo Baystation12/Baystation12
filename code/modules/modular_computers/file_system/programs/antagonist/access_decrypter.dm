@@ -54,7 +54,7 @@
 		if(ntnet_global.intrusion_detection_enabled && !prob(get_sneak_chance()))
 			ntnet_global.add_log("IDS WARNING - Unauthorised access to primary keycode database from device: [computer.get_network_tag()]  - downloaded access codes for: [target_access.desc].")
 			ntnet_global.intrusion_detection_alarm = 1
-		message = "Successfully decrypted and saved operational key codes. Downloaded access codes for: [target_access.desc]"
+		message = "Successfully decrypted and saved operational key codes. Downloaded access codes for: [target_access.desc]."
 		target_access = null
 		reset()
 

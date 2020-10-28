@@ -1,5 +1,5 @@
 /datum/chorus_building
-	var/desc = "Stuff"
+	var/desc = "Stuff."
 	var/building_type_to_build
 	var/build_level = 1 //What row to show them on
 	var/unique = FALSE //Can only be built once?

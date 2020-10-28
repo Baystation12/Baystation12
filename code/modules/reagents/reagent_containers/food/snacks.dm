@@ -3795,7 +3795,7 @@ obj/item/weapon/reagent_containers/food/snacks/dango
 
 /obj/item/weapon/reagent_containers/food/snacks/old
 	name = "master old-food"
-	desc = "they're all inedible and potentially dangerous items"
+	desc = "They're all inedible and potentially dangerous items."
 	center_of_mass = "x=15;y=12"
 	nutriment_desc = list("rot" = 5, "mold" = 5)
 	nutriment_amt = 10

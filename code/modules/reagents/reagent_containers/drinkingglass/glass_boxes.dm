@@ -1,6 +1,6 @@
 /obj/item/weapon/storage/box/mixedglasses
 	name = "glassware box"
-	desc = "A box of assorted glassware"
+	desc = "A box of assorted glassware."
 	can_hold = list(/obj/item/weapon/reagent_containers/food/drinks/glass2)
 
 	startswith = list(

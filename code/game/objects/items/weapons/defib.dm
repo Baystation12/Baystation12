@@ -581,7 +581,7 @@
 */
 
 /obj/item/weapon/shockpaddles/standalone
-	desc = "A pair of shockpaddles powered by an experimental miniaturized reactor" //Inspired by the advanced e-gun
+	desc = "A pair of shockpaddles powered by an experimental miniaturized reactor." //Inspired by the advanced e-gun
 	var/fail_counter = 0
 
 /obj/item/weapon/shockpaddles/standalone/Destroy()

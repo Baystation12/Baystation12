@@ -1,6 +1,6 @@
 /obj/structure/chorus/processor
 	name = "Processor"
-	desc = "Activates through process, not clicking"
+	desc = "Activates through process, not clicking."
 	var/warning = TRUE
 
 /obj/structure/chorus/processor/Initialize()
@@ -18,7 +18,7 @@
 
 /obj/structure/chorus/processor/clicker
 	name = "Clicker"
-	desc = "A strange structure that invokes the power of structures around it"
+	desc = "A strange structure that invokes the power of structures around it."
 	click_cooldown = 6 SECONDS
 
 /obj/structure/chorus/processor/clicker/Process()
@@ -33,7 +33,7 @@
 
 /obj/structure/chorus/processor/sentry
 	name = "Sentry"
-	desc = "Stands guard and attacks/does things every few seconds"
+	desc = "Stands guard and attacks/does things every few seconds."
 	var/range = 1
 
 /obj/structure/chorus/processor/sentry/Process()

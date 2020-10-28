@@ -169,7 +169,7 @@ Single Use Emergency Pouches
 
 /obj/item/weapon/reagent_containers/pill/pouch_pill
 	name = "emergency pill"
-	desc = "An emergency pill from an emergency medical pouch"
+	desc = "An emergency pill from an emergency medical pouch."
 	icon_state = "pill2"
 	var/datum/reagent/chem_type
 	var/chem_amount = 15
@@ -194,7 +194,7 @@ Single Use Emergency Pouches
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/pouch_auto
 	name = "emergency autoinjector"
-	desc = "An emergency autoinjector from an emergency medical pouch"
+	desc = "An emergency autoinjector from an emergency medical pouch."
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/pouch_auto/inaprovaline
 	name = "emergency inaprovaline autoinjector"

@@ -1,5 +1,5 @@
 /datum/chorus_building/set_to_turf/growth/tendril_thorned
-	desc = "An upgraded tendril with a large boney spike at the end"
+	desc = "An upgraded tendril with a large boney spike at the end."
 	building_type_to_build = /obj/structure/chorus/processor/sentry/tendril/thorned
 	build_time = 45
 	build_level = 4
@@ -23,7 +23,7 @@
 
 /obj/structure/chorus/processor/sentry/tendrdil/thorned/Initialize()
 	. = ..()
-	desc += SPAN_NOTICE("This one has a large spike on the end")
+	desc += SPAN_NOTICE("This one has a large spike on the end.")
 
 /datum/chorus_building/set_to_turf/growth/gastric_emitter
 	desc = "Activate to spill acid on nearby tiles: watch out for your allies!"

@@ -1572,7 +1572,7 @@
 "eo" = (
 /obj/effect/shuttle_landmark/nav_casino/cutter_hangar,
 /obj/machinery/door/unpowered/shuttle{
-	desc = "Cutter door. It opens and closes. It has no safety devices so be careful";
+	desc = "Cutter door. It opens and closes. It has no safety devices so be careful.";
 	name = "cutter door"
 	},
 /obj/structure/cable/green{

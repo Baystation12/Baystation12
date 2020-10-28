@@ -75,7 +75,7 @@
 
 /datum/uplink_item/item/visible_weapons/grenade_launcher
 	name = "Grenade Launcher"
-	desc = "A pump action grenade launcher loaded with a random assortment of grenades"
+	desc = "A pump action grenade launcher loaded with a random assortment of grenades."
 	item_cost = 60
 	antag_roles = list(MODE_MERCENARY)
 	path = /obj/item/weapon/gun/launcher/grenade/loaded

@@ -1,7 +1,7 @@
 // Noise "language", for audible emotes.
 /datum/language/noise
 	name = "Noise"
-	desc = "Noises"
+	desc = "Noises."
 	key = ""
 	flags = RESTRICTED|NONGLOBAL|INNATE|NO_TALK_MSG|NO_STUTTER
 	hidden_from_codex = 1

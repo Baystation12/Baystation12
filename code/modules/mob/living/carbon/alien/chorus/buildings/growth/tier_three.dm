@@ -1,5 +1,5 @@
 /datum/chorus_building/set_to_turf/growth/tendril
-	desc = "A fleshy appendage adapt at wacking nearby foreign agents"
+	desc = "A fleshy appendage adapt at wacking nearby foreign agents."
 	building_type_to_build = /obj/structure/chorus/processor/sentry/tendril
 	build_time = 30
 	build_level = 3
@@ -9,7 +9,7 @@
 
 /obj/structure/chorus/processor/sentry/tendril
 	name = "tendril"
-	desc = "A large mucus covered tentacle"
+	desc = "A large mucus covered tentacle."
 	icon_state = "growth_tendril"
 	health = 100
 	activation_cost_resource = /datum/chorus_resource/growth_nutrients

@@ -93,7 +93,7 @@
 //UNATHI
 /spell/moghes_blessing
 	name = "Moghes Blessing"
-	desc = "Imbue your weapon with memories of Moghes"
+	desc = "Imbue your weapon with memories of Moghes."
 
 	school = "racial"
 	spell_flags = 0

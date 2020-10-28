@@ -25,7 +25,7 @@
 
 /datum/uplink_item/item/badassery/crayonmre
 	name = "Crayon MRE"
-	desc = "Exceptionally robust MRE"
+	desc = "An exceptionally robust MRE."
 	item_cost = DEFAULT_TELECRYSTAL_AMOUNT
 	path = /obj/item/weapon/storage/mre/menu11/special
 

@@ -106,7 +106,7 @@
 Using robohead because of restricting to roboticist */
 /obj/item/weapon/TVAssembly
 	name = "TV Camera assembly"
-	desc = "A robotic head with an infrared sensor inside"
+	desc = "A robotic head with an infrared sensor inside."
 	icon = 'icons/obj/robot_parts.dmi'
 	icon_state = "head"
 	item_state = "head"
@@ -137,7 +137,7 @@ Using robohead because of restricting to roboticist */
 					return
 				buildstep++
 				to_chat(user, "<span class='notice'>You wire the assembly</span>")
-				desc = "This TV camera assembly has wires sticking out"
+				desc = "This TV camera assembly has wires sticking out."
 				return
 		if(3)
 			if(isWirecutter(W))

@@ -191,7 +191,7 @@
 
 /obj/item/clothing/mask/gas/vox
 	name = "vox breathing mask"
-	desc = "A small oxygen filter for use by Vox"
+	desc = "A small oxygen filter for use by Vox."
 	icon_state = "respirator"
 	item_state = "respirator"
 	flags_inv = 0

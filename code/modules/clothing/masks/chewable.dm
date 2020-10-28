@@ -87,7 +87,7 @@ obj/item/clothing/mask/chewable/Destroy()
 
 /obj/item/clothing/mask/chewable/tobacco/redlady
 	name = "chewing tobacco"
-	desc = "A chewy wad of fine tobacco. Cut in long strands and treated with syrups so it doesn't taste like a ash-tray when you stuff it into your face"
+	desc = "A chewy wad of fine tobacco. Cut in long strands and treated with syrups so it doesn't taste like a ash-tray when you stuff it into your face."
 	filling = list(/datum/reagent/tobacco/fine = 2)
 
 /obj/item/clothing/mask/chewable/tobacco/nico

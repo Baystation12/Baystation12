@@ -30,7 +30,7 @@
 
 /obj/item/weapon/csi_marker/Initialize(mapload)
 	. = ..()
-	desc += " This one is marked with [number]"
+	desc += " This one is marked with [number]."
 	update_icon()
 
 /obj/item/weapon/csi_marker/on_update_icon()

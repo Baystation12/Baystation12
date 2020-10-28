@@ -15143,21 +15143,21 @@
 /area/vacant/prototype/engine)
 "Mi" = (
 /obj/machinery/button/blast_door{
-	desc = "A remote control-switch for the prototype exhaust";
+	desc = "A remote control-switch for the prototype exhaust.";
 	id_tag = "prototype_exhaust";
 	name = "Chamber Exhaust";
 	pixel_x = -11;
 	pixel_y = 29
 	},
 /obj/machinery/button/blast_door{
-	desc = "A remote control-switch for the engine containment doors";
+	desc = "A remote control-switch for the engine containment doors.";
 	id_tag = "prototype_chamber_blast";
 	name = "Chamber Containment";
 	pixel_x = 0;
 	pixel_y = 29
 	},
 /obj/machinery/button/blast_door{
-	desc = "A remote control-switch for the observation shutters";
+	desc = "A remote control-switch for the observation shutters.";
 	id_tag = "fusion_observation";
 	name = "Chamber Observation";
 	pixel_x = 11;

@@ -1,6 +1,6 @@
 /datum/chorus_form/growth
 	name = "Growth"
-	desc = "A parasite adapted to life on ships and stations"
+	desc = "A parasite adapted to life on ships and stations."
 	form_state = "growth"
 	resources = list(
 			/datum/chorus_resource/growth_nutrients,
@@ -28,4 +28,4 @@
 	c.icon_living = "livingflesh"
 	c.icon_dead = "livingflesh_dead"
 	c.icon_state = "livingflesh"
-	c.desc = "A fleshy, disgusting creature full of blood and teeth"
+	c.desc = "A fleshy, disgusting creature full of blood and teeth."

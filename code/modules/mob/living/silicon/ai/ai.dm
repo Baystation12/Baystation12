@@ -650,7 +650,7 @@ var/list/ai_verbs_default = list(
 /mob/living/silicon/ai/proc/sensor_mode()
 	set name = "Set Sensor Augmentation"
 	set category = "Silicon Commands"
-	set desc = "Augment visual feed with internal sensor overlays"
+	set desc = "Augment visual feed with internal sensor overlays."
 	toggle_sensor_mode()
 
 /mob/living/silicon/ai/proc/toggle_hologram_movement()
