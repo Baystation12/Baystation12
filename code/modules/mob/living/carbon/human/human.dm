@@ -1360,34 +1360,36 @@
 
 /mob/living/carbon/human/print_flavor_text(var/shrink = 1)
 	var/list/equipment = list(src.head,src.wear_mask,src.glasses,src.w_uniform,src.wear_suit,src.gloves,src.shoes)
-	var/head_exposed = 1
-	var/face_exposed = 1
-	var/eyes_exposed = 1
-	var/torso_exposed = 1
-	var/arms_exposed = 1
-	var/legs_exposed = 1
-	var/hands_exposed = 1
-	var/feet_exposed = 1
+	var/head_exposed = TRUE
+	var/face_exposed = TRUE
+	var/eyes_exposed = TRUE
+	var/torso_exposed = TRUE
+	var/arms_exposed = TRUE
+	var/legs_exposed = TRUE
+	var/hands_exposed = TRUE
+	var/feet_exposed = TRUE
 
 	for(var/obj/item/clothing/C in equipment)
 		if(C.body_parts_covered & HEAD)
-			head_exposed = 0
+			head_exposed = FALSE
 		if(C.body_parts_covered & FACE)
-			face_exposed = 0
+			face_exposed = FALSE
 		if(C.body_parts_covered & EYES)
-			eyes_exposed = 0
+			eyes_exposed = FALSE
 		if(C.body_parts_covered & UPPER_TORSO)
-			torso_exposed = 0
+			torso_exposed = FALSE
 		if(C.body_parts_covered & ARMS)
-			arms_exposed = 0
+			arms_exposed = FALSE
 		if(C.body_parts_covered & HANDS)
-			hands_exposed = 0
+			hands_exposed = FALSE
 		if(C.body_parts_covered & LEGS)
-			legs_exposed = 0
+			legs_exposed = FALSE
 		if(C.body_parts_covered & FEET)
-			feet_exposed = 0
-
+			feet_exposed = FALSE
+	var/anything_exposed = head_exposed || face_exposed || eyes_exposed || torso_exposed || arms_exposed || hands_exposed || legs_exposed || feet_exposed
 	flavor_text = ""
+	if(!anything_exposed) //Who's this person in a thick hardsuit?
+		return flavor_text
 	for (var/T in flavor_texts)
 		if(flavor_texts[T] && flavor_texts[T] != "")
 			if((T == "general") || (T == "head" && head_exposed) || (T == "face" && face_exposed) || (T == "eyes" && eyes_exposed) || (T == "torso" && torso_exposed) || (T == "arms" && arms_exposed) || (T == "hands" && hands_exposed) || (T == "legs" && legs_exposed) || (T == "feet" && feet_exposed))
