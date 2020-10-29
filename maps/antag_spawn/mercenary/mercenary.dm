@@ -7,7 +7,7 @@
 	name = "Barren Rubble"
 	desc = "Sensor array detects a small asteroid devoid of any useful materials."
 	in_space = 1
-	icon_state = "object"
+	icon_state = "meteor4"
 	hide_from_reports = TRUE
 	initial_generic_waypoints = list(
 		"nav_merc_1",

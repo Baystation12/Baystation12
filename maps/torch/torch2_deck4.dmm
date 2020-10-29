@@ -7932,7 +7932,7 @@
 	req_access = list("ACCESS_EVA");
 	tag_airpump = "eva_pump";
 	tag_chamber_sensor = "eva_sensor";
-	tag_exterior_door = "eva_outer;
+	tag_exterior_door = "eva_outer";
 	tag_interior_door = "eva_inner"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
