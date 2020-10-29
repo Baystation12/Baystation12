@@ -1,7 +1,0 @@
-author: "Shadowtail117"
-delete-after: True
-changes: 
-  - tweak: "Cryptographic sequencers (and their broken variants) have had their names and descriptions altered to be less incriminating."
-  - tweak: "If you are an antagonist, you can now see how many charges are left on a cryptographic sequencer by examining it in your hand."
-  - spellcheck: "Cryptographic sequencers now have a codex entry for antagonists."
-  - tweak: "You can now only distinguish between a functioning/broken cryptographic sequencer if you are either an antagonist or have Trained+ Complex Devices."
