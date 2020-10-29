@@ -1168,14 +1168,21 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle)
+"es" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/effect/paint_stripe/gunmetal,
+/obj/structure/cable/blue{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/plating,
+/area/space)
 "eu" = (
 /obj/structure/bed/chair/office{
 	dir = 4
 	},
-/obj/effect/landmark{
-	name = "Syndicate-Spawn"
-	},
-/turf/simulated/floor/asteroid,
+/turf/simulated/floor/plating,
 /area/space)
 "ev" = (
 /obj/structure/table/standard,
@@ -1185,10 +1192,7 @@
 /obj/structure/bed/chair/office{
 	dir = 8
 	},
-/obj/effect/landmark{
-	name = "Syndicate-Spawn"
-	},
-/turf/simulated/floor/asteroid,
+/turf/simulated/floor/plating,
 /area/space)
 "ey" = (
 /obj/structure/bed/chair/shuttle/blue{
@@ -1216,6 +1220,10 @@
 /obj/structure/ship_munition/disperser_charge/emp,
 /turf/simulated/floor/reinforced,
 /area/map_template/merc_shuttle)
+"eR" = (
+/obj/structure/table/standard,
+/turf/simulated/floor/plating,
+/area/space)
 "fa" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/blast/regular/open{
@@ -1281,6 +1289,12 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/merc_shuttle)
+"fW" = (
+/obj/structure/bed/chair/office{
+	dir = 4
+	},
+/turf/simulated/floor/asteroid,
+/area/space)
 "gc" = (
 /obj/structure/handrai{
 	dir = 4;
@@ -1309,6 +1323,10 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/merc_shuttle)
+"gF" = (
+/obj/machinery/portable_atmospherics/canister/carbon_dioxide,
+/turf/simulated/floor/plating,
+/area/space)
 "gX" = (
 /turf/simulated/floor/tiled/dark,
 /area/map_template/merc_shuttle)
@@ -1431,14 +1449,6 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/space)
-"jw" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	dir = 6
-	},
-/obj/machinery/teleport/hub,
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/turf/simulated/floor/tiled/techfloor,
-/area/map_template/merc_shuttle/rear)
 "jE" = (
 /obj/machinery/power/port_gen/pacman,
 /obj/structure/cable/yellow{
@@ -1539,6 +1549,12 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/structure/table/steel_reinforced,
+/obj/item/weapon/paper_bin{
+	pixel_x = -3;
+	pixel_y = 7
+	},
+/obj/item/weapon/pen/multi,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/merc_shuttle)
 "lq" = (
@@ -1551,8 +1567,18 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/structure/table/steel_reinforced,
+/obj/machinery/chemical_dispenser/bar_coffee/full,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/merc_shuttle)
+"lz" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	dir = 4
+	},
+/obj/machinery/teleport/station,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/merc_shuttle/rear)
 "lB" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
@@ -1615,16 +1641,15 @@
 /area/map_template/merc_shuttle)
 "mm" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/effect/paint_stripe/gunmetal,
 /turf/simulated/floor/plating,
 /area/space)
 "mn" = (
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/space)
 "mo" = (
-/obj/machinery/suit_cycler/syndicate{
-	locked = 0
-	},
-/turf/simulated/floor/asteroid,
+/obj/effect/paint/silver,
+/turf/simulated/wall/r_wall,
 /area/space)
 "mt" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/cyan{
@@ -1658,6 +1683,8 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/structure/table/steel_reinforced,
+/obj/item/weapon/stamp/chameleon,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/merc_shuttle)
 "nm" = (
@@ -1668,14 +1695,17 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/merc_shuttle)
 "nn" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/cyan{
-	dir = 9;
-	icon_state = "intact"
+/obj/structure/table/steel_reinforced,
+/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/metal{
+	pixel_x = 9;
+	pixel_y = 5
 	},
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
-	icon_state = "1-4"
+/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/metal{
+	pixel_x = -6;
+	pixel_y = 8
+	},
+/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/metal{
+	pixel_x = 2
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/merc_shuttle)
@@ -1684,6 +1714,12 @@
 /obj/structure/mech_wreckage,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_spawn)
+"nu" = (
+/obj/structure/bed/chair/office{
+	dir = 8
+	},
+/turf/simulated/floor/asteroid,
+/area/space)
 "nI" = (
 /obj/effect/floor_decal/techfloor{
 	dir = 4;
@@ -1731,6 +1767,16 @@
 /obj/effect/shuttle_landmark/merc/start,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_shuttle)
+"oo" = (
+/obj/machinery/atmospherics/portables_connector{
+	dir = 8
+	},
+/obj/machinery/portable_atmospherics/canister/carbon_dioxide{
+	start_pressure = 15000
+	},
+/obj/effect/floor_decal/industrial/outline/orange,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/merc_shuttle/rear)
 "oz" = (
 /obj/machinery/door/airlock/external,
 /turf/space,
@@ -1779,28 +1825,17 @@
 "oW" = (
 /obj/structure/cable{
 	d1 = 1;
-	d2 = 2;
-	dir = 4;
-	icon_state = "1-2"
-	},
-/obj/structure/cable{
-	d1 = 1;
 	d2 = 8;
 	icon_state = "1-8"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/merc_shuttle)
 "oX" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	dir = 4;
-	icon_state = "1-2"
+/obj/machinery/light/spot{
+	dir = 1
 	},
-/turf/simulated/floor/tiled/dark,
-/area/map_template/merc_shuttle)
+/turf/simulated/floor/plating,
+/area/space)
 "oY" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -1871,6 +1906,13 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_shuttle)
+"pk" = (
+/obj/structure/table/rack,
+/obj/item/device/suit_cooling_unit,
+/obj/item/device/suit_cooling_unit,
+/obj/item/device/suit_cooling_unit,
+/turf/simulated/floor/plating,
+/area/space)
 "pt" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 4;
@@ -1906,15 +1948,23 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_shuttle)
 "pV" = (
-/obj/machinery/door/airlock,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/simulated/floor/tiled/techfloor,
-/area/map_template/merc_shuttle/rear)
-"pW" = (
-/obj/effect/paint/red,
-/obj/effect/paint/red,
-/turf/simulated/wall/titanium,
-/area/map_template/merc_shuttle/rear)
+/obj/machinery/atmospherics/pipe/simple/hidden/cyan{
+	dir = 9;
+	icon_state = "intact"
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/merc_shuttle)
+"pZ" = (
+/obj/structure/bed,
+/obj/structure/curtain/open/bed,
+/obj/item/weapon/bedsheet/hos,
+/turf/simulated/floor/plating,
+/area/space)
 "qj" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
@@ -1972,6 +2022,13 @@
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/merc_shuttle)
+"qZ" = (
+/obj/machinery/light/spot{
+	dir = 4;
+	icon_state = "tube_map"
+	},
+/turf/simulated/floor/plating,
+/area/space)
 "rs" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -2088,6 +2145,16 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/merc_shuttle/rear)
+"sX" = (
+/obj/structure/table/rack,
+/obj/item/weapon/shield/energy,
+/obj/item/weapon/shield/energy,
+/obj/item/weapon/shield/energy,
+/obj/item/weapon/shield/energy,
+/obj/item/weapon/shield/energy,
+/obj/item/weapon/shield/energy,
+/turf/simulated/floor/plating,
+/area/space)
 "ta" = (
 /obj/machinery/atmospherics/unary/cryo_cell,
 /turf/simulated/floor/tiled/white,
@@ -2095,14 +2162,6 @@
 "tq" = (
 /obj/effect/paint/red,
 /turf/simulated/wall/titanium,
-/area/map_template/merc_shuttle/rear)
-"ts" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
-	dir = 4
-	},
-/obj/machinery/teleport/station,
-/obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_shuttle/rear)
 "ut" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
@@ -2159,10 +2218,17 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_shuttle/rear)
 "vm" = (
-/obj/machinery/portable_atmospherics/canister/oxygen,
-/obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/tiled/dark,
-/area/map_template/merc_shuttle)
+/obj/machinery/door/airlock,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/merc_shuttle/rear)
+"vA" = (
+/obj/machinery/vitals_monitor,
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/merc_shuttle/rear)
 "vC" = (
 /obj/machinery/atmospherics/portables_connector{
 	dir = 4
@@ -2198,7 +2264,8 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_shuttle/rear)
 "vZ" = (
-/obj/machinery/atmospherics/pipe/simple/hidden,
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/merc_shuttle)
 "wd" = (
@@ -2215,13 +2282,18 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_shuttle/rear)
-"wW" = (
-/obj/machinery/light/small{
-	dir = 1
+"wM" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	dir = 6
 	},
-/obj/effect/decal/cleanable/blood/splatter,
+/obj/machinery/teleport/hub,
+/obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_shuttle/rear)
+"wW" = (
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/merc_shuttle)
 "xc" = (
 /obj/machinery/atmospherics/portables_connector{
 	dir = 4
@@ -2249,10 +2321,11 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_shuttle/rear)
 "xt" = (
-/obj/machinery/bodyscanner{
-	dir = 4
+/obj/machinery/light/small{
+	dir = 1
 	},
-/turf/simulated/floor/tiled/white,
+/obj/effect/decal/cleanable/blood/splatter,
+/turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_shuttle/rear)
 "xA" = (
 /obj/structure/closet/medical_wall/filled{
@@ -2273,6 +2346,13 @@
 "xD" = (
 /turf/simulated/floor/tiled/white,
 /area/map_template/merc_shuttle/rear)
+"xT" = (
+/obj/machinery/light/spot{
+	dir = 4;
+	icon_state = "tube_map"
+	},
+/turf/simulated/floor/asteroid,
+/area/space)
 "ym" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/fuel{
 	dir = 1
@@ -2345,12 +2425,33 @@
 /obj/item/stack/nanopaste,
 /turf/simulated/floor/tiled/white,
 /area/map_template/merc_shuttle/rear)
+"zj" = (
+/obj/machinery/light/spot,
+/turf/simulated/floor/plating,
+/area/space)
 "zu" = (
+/obj/machinery/bodyscanner{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/merc_shuttle/rear)
+"zw" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/fuel,
+/obj/structure/catwalk,
+/obj/machinery/light,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/merc_shuttle/rear)
+"zC" = (
 /obj/structure/ship_munition/disperser_charge/explosive,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_shuttle/rear)
-"zC" = (
+"zT" = (
+/obj/structure/closet,
+/obj/item/weapon/storage/backpack/chameleon/sydie_kit,
+/turf/simulated/floor/plating,
+/area/space)
+"zW" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
@@ -2361,7 +2462,7 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_shuttle/rear)
-"zW" = (
+"Ab" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/blast/regular/open{
 	density = 0;
@@ -2371,13 +2472,13 @@
 	},
 /turf/simulated/floor/plating,
 /area/map_template/merc_shuttle/rear)
-"Ab" = (
-/turf/simulated/floor/tiled/techfloor,
-/area/map_template/merc_shuttle/rear)
-"Ak" = (
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 1
+"Ag" = (
+/obj/effect/landmark{
+	name = "Syndicate-Spawn"
 	},
+/turf/simulated/floor/asteroid,
+/area/space)
+"Ak" = (
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_shuttle/rear)
 "AF" = (
@@ -2390,6 +2491,12 @@
 /turf/simulated/wall/titanium,
 /area/map_template/merc_shuttle/rear)
 "AO" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/merc_shuttle/rear)
+"AR" = (
 /obj/structure/cable,
 /obj/machinery/power/apc/hyper{
 	dir = 4;
@@ -2398,7 +2505,7 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_shuttle/rear)
-"AR" = (
+"AS" = (
 /obj/machinery/portable_atmospherics/canister/air/airlock,
 /obj/machinery/atmospherics/portables_connector{
 	dir = 1
@@ -2406,19 +2513,19 @@
 /obj/effect/floor_decal/industrial/outline,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_shuttle/rear)
-"AS" = (
+"AZ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/effect/gas_setup,
 /turf/simulated/floor/tiled/white,
 /area/map_template/merc_shuttle/rear)
-"AZ" = (
+"Bh" = (
 /obj/structure/handrai{
 	dir = 4;
 	icon_state = "handrail"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_shuttle/rear)
-"Bh" = (
+"Bj" = (
 /obj/machinery/portable_atmospherics/canister/hydrogen,
 /obj/effect/floor_decal/industrial/outline/red,
 /obj/machinery/light{
@@ -2426,14 +2533,14 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_shuttle/rear)
-"Bj" = (
+"Bo" = (
 /obj/machinery/atmospherics/unary/freezer{
 	dir = 1;
 	icon_state = "freezer"
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/merc_shuttle/rear)
-"Bo" = (
+"Bw" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/blast/regular/open{
 	density = 0;
@@ -2444,7 +2551,7 @@
 /obj/effect/paint/red,
 /turf/simulated/floor/plating,
 /area/map_template/merc_shuttle/rear)
-"Bw" = (
+"By" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 2;
 	icon_state = "warning"
@@ -2454,27 +2561,17 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_shuttle/rear)
-"By" = (
+"BK" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 2;
 	icon_state = "warning"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_shuttle/rear)
-"BK" = (
+"BU" = (
 /obj/machinery/atmospherics/binary/pump/high_power/on,
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
-/area/map_template/merc_shuttle/rear)
-"BU" = (
-/obj/machinery/atmospherics/portables_connector{
-	dir = 8
-	},
-/obj/machinery/portable_atmospherics/canister/carbon_dioxide{
-	start_pressure = 15000
-	},
-/obj/effect/floor_decal/industrial/outline/orange,
-/turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_shuttle/rear)
 "Ca" = (
 /obj/effect/shuttle_landmark/merc/nav2,
@@ -2484,9 +2581,93 @@
 /obj/effect/shuttle_landmark/merc/nav1,
 /turf/space,
 /area/space)
+"Cn" = (
+/obj/effect/spawner/newbomb/timer/syndicate,
+/obj/structure/table/rack,
+/obj/effect/spawner/newbomb/timer/syndicate,
+/obj/item/device/assembly/signaler{
+	pixel_y = 2
+	},
+/obj/item/device/assembly/signaler{
+	pixel_y = 2
+	},
+/obj/item/device/assembly/signaler{
+	pixel_y = 2
+	},
+/obj/effect/landmark/delete_on_shuttle{
+	shuttle_name = "Desperado"
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"Co" = (
+/obj/structure/table/rack,
+/obj/item/clothing/suit/armor/pcarrier/merc,
+/obj/item/clothing/suit/armor/pcarrier/merc,
+/obj/item/clothing/suit/armor/pcarrier/merc,
+/obj/item/clothing/head/helmet/merc,
+/obj/item/clothing/head/helmet/merc,
+/obj/item/clothing/head/helmet/merc,
+/turf/simulated/floor/plating,
+/area/space)
+"CB" = (
+/obj/structure/closet,
+/obj/item/weapon/storage/backpack/chameleon/sydie_kit,
+/turf/simulated/floor/asteroid,
+/area/space)
+"DK" = (
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/turf/simulated/floor/plating,
+/area/space)
 "Es" = (
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_spawn)
+"Fy" = (
+/obj/machinery/light/spot,
+/obj/structure/bed,
+/obj/structure/curtain/open/bed,
+/obj/item/weapon/bedsheet/hos,
+/turf/simulated/floor/plating,
+/area/space)
+"FC" = (
+/obj/machinery/suit_cycler/syndicate{
+	locked = 0
+	},
+/turf/space,
+/area/space)
+"GB" = (
+/obj/machinery/light/spot{
+	dir = 8
+	},
+/turf/simulated/floor/asteroid,
+/area/space)
+"GN" = (
+/obj/item/weapon/storage/backpack/chameleon/sydie_kit,
+/obj/structure/closet,
+/turf/simulated/floor/asteroid,
+/area/space)
+"Hw" = (
+/obj/machinery/light/spot{
+	dir = 8
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"Id" = (
+/obj/structure/table/rack,
+/obj/item/clothing/glasses/night,
+/obj/item/clothing/glasses/night,
+/obj/item/clothing/glasses/night,
+/obj/item/weapon/storage/box/handcuffs{
+	pixel_x = 4;
+	pixel_y = 2
+	},
+/obj/item/weapon/storage/box/handcuffs{
+	pixel_x = 4;
+	pixel_y = 2
+	},
+/obj/item/clothing/glasses/night,
+/obj/item/clothing/glasses/night,
+/turf/simulated/floor/plating,
+/area/space)
 "Jc" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/blast/regular/open{
@@ -2497,6 +2678,26 @@
 	},
 /turf/simulated/floor/plating,
 /area/map_template/merc_shuttle)
+"JP" = (
+/obj/structure/table/rack,
+/obj/item/weapon/tank/jetpack/oxygen,
+/obj/item/weapon/tank/jetpack/oxygen,
+/obj/item/weapon/tank/jetpack/oxygen,
+/obj/item/weapon/tank/jetpack/carbondioxide,
+/obj/item/weapon/tank/jetpack/carbondioxide,
+/obj/item/weapon/tank/jetpack/carbondioxide,
+/obj/machinery/light/spot{
+	dir = 4;
+	icon_state = "tube_map"
+	},
+/turf/simulated/floor/plating,
+/area/space)
+"JY" = (
+/obj/structure/table/rack,
+/obj/item/weapon/rig/merc/heavy/empty,
+/obj/item/weapon/rig/merc/heavy/empty,
+/turf/simulated/floor/plating,
+/area/space)
 "KD" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/weapon/wrench,
@@ -2504,6 +2705,12 @@
 /obj/machinery/light/small,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_spawn)
+"KJ" = (
+/obj/structure/table/rack,
+/obj/item/weapon/rig/merc/empty,
+/obj/item/weapon/rig/merc/empty,
+/turf/simulated/floor/plating,
+/area/space)
 "OU" = (
 /obj/machinery/light/spot{
 	dir = 1;
@@ -2511,23 +2718,19 @@
 	},
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
-"Rg" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden/fuel,
-/obj/structure/catwalk,
-/obj/machinery/light,
-/turf/simulated/floor/tiled/techfloor,
-/area/map_template/merc_shuttle/rear)
+"Qr" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/hologram/holopad/longrange,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/merc_shuttle)
 "RT" = (
 /turf/simulated/floor/asteroid,
 /area/space)
-"SO" = (
-/obj/machinery/vitals_monitor,
-/obj/machinery/light{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/white,
-/area/map_template/merc_shuttle/rear)
-"UN" = (
+"WC" = (
+/turf/simulated/wall/titanium,
+/area/map_template/merc_spawn)
+"WX" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/fuel{
 	dir = 1
 	},
@@ -2536,10 +2739,24 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_shuttle/rear)
-"WC" = (
-/turf/simulated/wall/titanium,
-/area/map_template/merc_spawn)
+"Xa" = (
+/obj/effect/landmark{
+	name = "Syndicate-Spawn"
+	},
+/turf/simulated/floor/plating,
+/area/space)
 "Ya" = (
+/turf/simulated/floor/plating,
+/area/space)
+"Yv" = (
+/obj/item/weapon/storage/box/smokes,
+/obj/item/weapon/storage/box/teargas,
+/obj/item/weapon/storage/box/flashbangs,
+/obj/structure/table/rack,
+/obj/item/weapon/grenade/anti_photon,
+/obj/item/weapon/grenade/anti_photon,
+/obj/item/weapon/grenade/anti_photon,
+/obj/item/weapon/storage/box/frags,
 /turf/simulated/floor/plating,
 /area/space)
 "Zl" = (
@@ -4442,11 +4659,11 @@ cC
 cC
 tq
 AF
-zu
-zu
-AZ
-Bw
-jw
+zC
+zC
+Bh
+By
+wM
 AN
 aa
 aa
@@ -4543,12 +4760,12 @@ cC
 kW
 kW
 tq
-wW
-zC
-Ab
-Ab
-By
-ts
+xt
+zW
+Ak
+Ak
+BK
+lz
 AF
 aa
 aa
@@ -4643,13 +4860,13 @@ Jc
 cC
 kS
 mt
-nn
+pV
 tq
 qj
 rL
+AO
 Ak
-Ab
-By
+BK
 ym
 AN
 aa
@@ -4746,10 +4963,10 @@ jE
 jQ
 mG
 oR
-pV
+vm
 qw
 rN
-AO
+AR
 uZ
 wG
 yR
@@ -4950,7 +5167,7 @@ gX
 kZ
 nd
 oY
-vm
+vZ
 qA
 sd
 xc
@@ -5058,7 +5275,7 @@ AF
 ut
 vH
 xp
-UN
+WX
 AN
 aa
 aa
@@ -5150,17 +5367,17 @@ dn
 eG
 gr
 hR
-jK
+Qr
 lq
 nm
-oX
+jK
 jK
 qY
 sz
 uv
 vO
-BK
-Rg
+BU
+zw
 AF
 aa
 aa
@@ -5254,8 +5471,8 @@ cC
 hU
 gX
 lx
+nn
 gX
-oY
 gX
 rs
 AF
@@ -5358,12 +5575,12 @@ gX
 lB
 gX
 pb
-vZ
+wW
 rt
 sE
-AR
-Bh
-BU
+AS
+Bj
+oo
 yR
 tq
 aa
@@ -5562,7 +5779,7 @@ cC
 md
 nL
 ph
-pW
+tq
 rB
 sH
 uJ
@@ -5767,7 +5984,7 @@ mj
 ob
 pt
 tq
-xt
+zu
 sS
 xD
 xD
@@ -5871,9 +6088,9 @@ pH
 tq
 AF
 ta
-AS
-Bj
-SO
+AZ
+Bo
+vA
 yY
 AN
 aa
@@ -5966,15 +6183,15 @@ aa
 aa
 aa
 aa
-kQ
+mo
 mm
 oz
 mm
-kQ
+mo
 AF
-zW
-zW
-Bo
+Ab
+Ab
+Bw
 tq
 tq
 tq
@@ -6065,14 +6282,14 @@ aa
 aa
 aa
 aa
+FC
 aa
 aa
-aa
-kQ
+mo
 mn
 mn
 mn
-kQ
+mo
 aa
 aa
 aa
@@ -6170,11 +6387,11 @@ aa
 aa
 aa
 aa
-kQ
+mo
 mn
 mn
 mn
-kQ
+mo
 aa
 aa
 aa
@@ -6272,11 +6489,11 @@ aa
 Zl
 Zl
 Zl
-kQ
+mo
 mm
 oC
-mm
-kQ
+es
+mo
 Zl
 Zl
 Zl
@@ -6287,10 +6504,10 @@ Zl
 Zl
 Zl
 Zl
-Zl
-Zl
-Zl
-Zl
+RT
+RT
+mo
+mo
 Zl
 Zl
 Zl
@@ -6368,31 +6585,31 @@ aa
 aa
 aa
 aa
-kQ
+mo
 Zl
 Zl
 Zl
-kQ
-kQ
-kQ
+mo
+mo
+mo
 Ya
 Ya
 Ya
-kQ
-kQ
-kQ
+mo
+mo
+mo
 Zl
 Zl
 Zl
 Zl
-kQ
-kQ
+mo
+mo
 Ya
 RT
-Zl
-Zl
-Zl
-Zl
+RT
+RT
+Ya
+mo
 Zl
 Zl
 Zl
@@ -6469,32 +6686,32 @@ Zl
 aa
 aa
 aa
-kQ
-kQ
+mo
+mo
 Zl
 Zl
+Ya
+Ya
 RT
-RT
-RT
-kQ
+mo
 RT
 Ya
 RT
-kQ
+mo
 RT
 RT
 Zl
 Zl
 Zl
 Zl
-kQ
+mo
 Ya
 RT
 RT
 RT
-Zl
-Zl
-Zl
+RT
+zj
+mo
 Zl
 Zl
 Zl
@@ -6571,32 +6788,32 @@ Zl
 Zl
 aa
 aa
-kQ
-kQ
+mo
+mo
 Zl
 eu
 eu
-eu
+fW
 RT
 RT
 RT
 RT
 Ya
-RT
+GB
 RT
 RT
 RT
 Zl
 Zl
 Zl
-kQ
+mo
 Ya
 RT
 RT
 Ya
 RT
-Zl
-Zl
+RT
+Ya
 Zl
 Zl
 Zl
@@ -6673,12 +6890,12 @@ Zl
 Zl
 Zl
 Zl
-kQ
+mo
 Zl
 Zl
+eR
 ev
-ev
-ev
+eR
 RT
 Ya
 Ya
@@ -6691,14 +6908,14 @@ RT
 Zl
 RT
 Ya
-Ya
+Hw
 RT
 RT
 RT
 RT
 Ya
-kQ
-Zl
+Ya
+Ya
 Zl
 Zl
 Zl
@@ -6777,10 +6994,10 @@ Zl
 Zl
 Zl
 Zl
-RT
+Ya
 ex
-ex
-ex
+nu
+nu
 Ya
 RT
 RT
@@ -6789,8 +7006,8 @@ Ya
 RT
 RT
 RT
-RT
-RT
+Ya
+Ya
 RT
 Zl
 Zl
@@ -6799,8 +7016,8 @@ RT
 Ya
 RT
 Ya
-kQ
-Zl
+Ya
+Ya
 Zl
 Zl
 Zl
@@ -6878,7 +7095,10 @@ Zl
 Zl
 Zl
 Zl
-kQ
+mo
+oX
+RT
+Ya
 RT
 RT
 RT
@@ -6888,20 +7108,17 @@ RT
 RT
 RT
 RT
-RT
-RT
-RT
-kQ
+mo
 Zl
 RT
-kQ
+mo
 Zl
 Zl
 Ya
 RT
 RT
 Ya
-kQ
+Ya
 Zl
 Zl
 Zl
@@ -6983,27 +7200,27 @@ Zl
 Zl
 RT
 RT
+Ya
+RT
+RT
+Ya
 RT
 RT
 RT
 RT
 RT
-RT
-RT
-RT
-RT
-RT
-kQ
+Ya
+mo
 Zl
-RT
-kQ
-kQ
+Ya
+mo
+mo
 Zl
 Zl
 Ya
 Ya
-kQ
-kQ
+mo
+mo
 Zl
 Zl
 Zl
@@ -7085,21 +7302,21 @@ Zl
 Zl
 Zl
 RT
+Ya
 RT
 RT
 RT
+Ya
 RT
+Ya
+RT
+Ya
+Ya
 mo
-RT
-RT
-RT
-RT
-RT
-kQ
 Zl
 RT
-RT
-kQ
+Ya
+mo
 Zl
 Zl
 Zl
@@ -7188,20 +7405,20 @@ Zl
 Zl
 Zl
 Zl
+Ya
+Ya
+RT
+Ya
 RT
 RT
-RT
-RT
-RT
-RT
-RT
-RT
-RT
-kQ
+Ya
+Ya
+qZ
+mo
 Zl
 Zl
 RT
-kQ
+mo
 Zl
 Zl
 Zl
@@ -7290,23 +7507,23 @@ Zl
 Zl
 Zl
 Zl
-kQ
-kQ
+mo
+mo
 Zl
 RT
-RT
-RT
-kQ
-kQ
-kQ
-kQ
 Ya
 RT
+mo
+mo
+mo
+mo
+zT
 RT
 RT
-RT
+Ag
+pZ
 Zl
-kQ
+mo
 Zl
 Zl
 Zl
@@ -7395,21 +7612,21 @@ Zl
 Zl
 Zl
 Zl
-Zl
-kQ
-Zl
-Zl
+RT
+mo
 Zl
 Zl
 Zl
-Ya
+Zl
+Zl
+zT
 RT
 RT
-Ya
-RT
-kQ
-kQ
-kQ
+Xa
+Fy
+mo
+mo
+mo
 Zl
 Zl
 Zl
@@ -7493,24 +7710,24 @@ Zl
 Zl
 Zl
 Zl
+mo
+mo
+mo
+Zl
+Ya
+mo
 Zl
 Zl
 Zl
 Zl
-Zl
-kQ
-Zl
-Zl
-Zl
-Zl
-RT
+GN
 RT
 RT
 RT
 RT
 Ya
-Ya
-kQ
+Xa
+mo
 Zl
 Zl
 Zl
@@ -7595,24 +7812,24 @@ Zl
 Zl
 Zl
 Zl
+mo
+KJ
+JY
+Zl
+RT
 Zl
 Zl
 Zl
 Zl
-Zl
-Zl
-Zl
-Zl
-Zl
-kQ
-Ya
+mo
+zT
 RT
 Ya
 RT
 RT
 RT
-RT
-Ya
+Ag
+pZ
 Zl
 Zl
 Zl
@@ -7697,24 +7914,24 @@ Zl
 Zl
 Zl
 Zl
-Zl
-Zl
-Zl
-Zl
-Zl
-Zl
-Zl
-Zl
-Zl
-Zl
+DK
 Ya
 RT
 RT
 RT
 Ya
 RT
+mo
+mo
+mo
+zT
+RT
+RT
+xT
+Xa
+Ag
 Ya
-Ya
+pZ
 Zl
 Zl
 Zl
@@ -7799,22 +8016,22 @@ Zl
 Zl
 Zl
 Zl
-Zl
-Zl
-Zl
-Zl
-Zl
-Zl
-Zl
-Zl
-Zl
-Zl
-Zl
-Zl
-RT
-kQ
+gF
+Ya
+Ya
 RT
 Ya
+RT
+Ya
+Co
+Zl
+Zl
+Zl
+Zl
+CB
+mo
+pZ
+pZ
 Ya
 Zl
 Zl
@@ -7902,19 +8119,19 @@ Zl
 Zl
 Zl
 Zl
+pk
+Ya
+Ya
+RT
+RT
+Ya
+sX
 Zl
 Zl
 Zl
 Zl
 Zl
-Zl
-Zl
-Zl
-Zl
-Zl
-Zl
-Zl
-kQ
+mo
 Zl
 Zl
 Zl
@@ -8004,19 +8221,19 @@ Zl
 Zl
 Zl
 Zl
+JP
+RT
+RT
+RT
+Ya
+RT
+Id
 Zl
 Zl
 Zl
 Zl
 Zl
-Zl
-Zl
-Zl
-Zl
-Zl
-Zl
-Zl
-kQ
+mo
 Zl
 Zl
 Zl
@@ -8104,14 +8321,14 @@ Zl
 Zl
 Zl
 Zl
-Zl
-Zl
-Zl
-Zl
-Zl
-Zl
-Zl
-Zl
+mo
+mo
+mo
+mo
+Yv
+Cn
+Cn
+Ya
 Zl
 Zl
 Zl
@@ -8209,7 +8426,7 @@ Zl
 Zl
 Zl
 Zl
-Zl
+mo
 Zl
 Zl
 Zl
@@ -8311,7 +8528,7 @@ Zl
 Zl
 Zl
 Zl
-Zl
+mo
 Zl
 Zl
 Zl

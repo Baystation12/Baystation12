@@ -4,7 +4,7 @@
 	shuttles_to_initialise = list(/datum/shuttle/autodock/overmap/merc_shuttle)
 
 /obj/effect/overmap/visitable/merc_base
-	name = "Barren Rubble"
+	name = "Barren Asteroid"
 	desc = "Sensor array detects a small asteroid devoid of any useful materials."
 	in_space = 1
 	icon_state = "meteor4"
@@ -18,15 +18,15 @@
 
 
 /obj/effect/overmap/visitable/ship/landable/merc
-	name = "Cyclopes"
+	name = "Hammerhead"
 	desc = "An older model shuttle with a number of visible modifications. The hull plating is deflecting attempts at more thorough scans."
-	shuttle = "Cyclopes"
+	shuttle = "Hammerhead"
 	fore_dir = NORTH
 	vessel_size = SHIP_SIZE_SMALL
 	vessel_mass = 14000
 
 /datum/shuttle/autodock/overmap/merc_shuttle
-	name = "Cyclopes"
+	name = "Hammerhead"
 	shuttle_area = list(/area/map_template/merc_shuttle,/area/map_template/merc_shuttle/rear)
 	dock_target = "merc_shuttle"
 	current_location = "nav_merc_start"
@@ -42,7 +42,7 @@
 
 /obj/machinery/computer/shuttle_control/explore/merc_shuttle
 	name = "shuttle control console"
-	shuttle_tag = "Cyclopes"
+	shuttle_tag = "Hammerhead"
 
 /obj/effect/shuttle_landmark/merc/start
 	landmark_tag = "nav_merc_start"
@@ -72,11 +72,11 @@
 	req_access = list(access_syndicate)
 
 /area/map_template/merc_shuttle
-	name = "\improper Cyclopes Fore Compartment"
+	name = "\improper Hammerhead Fore Compartment"
 	icon_state = "yellow"
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
 	req_access = list(access_syndicate)
 
 /area/map_template/merc_shuttle/rear
-	name = "\improper Cyclopes Rear Compartment"
+	name = "\improper Hammerhead Rear Compartment"
 	icon_state = "green"
