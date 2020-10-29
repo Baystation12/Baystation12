@@ -7924,15 +7924,15 @@
 	dir = 1;
 	icon_state = "techfloor_edges"
 	},
-/obj/machinery/embedded_controller/radio/airlock/airlock_controller{
+/obj/machinery/embedded_controller/radio/airlock/docking_port{
 	frequency = 1380;
 	id_tag = "eva_airlock";
-	name = "EVA Airlock Console";
-	pixel_y = 24;
+	name = "Fore Dock";
+	pixel_y = 21;
 	req_access = list("ACCESS_EVA");
 	tag_airpump = "eva_pump";
 	tag_chamber_sensor = "eva_sensor";
-	tag_exterior_door = "eva_outer";
+	tag_exterior_door = "eva_outer;
 	tag_interior_door = "eva_inner"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -12158,6 +12158,18 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/foreport)
+"ON" = (
+/obj/machinery/access_button{
+	command = "cycle_exterior";
+	frequency = 1380;
+	master_tag = "eva_airlock";
+	name = "exterior access button";
+	pixel_x = 22;
+	pixel_y = 24;
+	req_access = list("ACCESS_EVA")
+	},
+/turf/space,
+/area/space)
 "OO" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -12792,9 +12804,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/command/captainmess)
 "QB" = (
-/obj/effect/shuttle_landmark/ninja/deck5{
-	name = "4th Deck, Fore Dock"
-	},
+/obj/effect/shuttle_landmark/merc/dock,
 /turf/space,
 /area/space)
 "QC" = (
@@ -24537,7 +24547,7 @@ aa
 aa
 aa
 aa
-aa
+ON
 aa
 aa
 aa
