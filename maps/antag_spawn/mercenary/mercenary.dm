@@ -35,7 +35,7 @@
 	warmup_time = 5
 	range = 1
 	fuel_consumption = 4
-	skill_needed = SKILL_BASIC
+	skill_needed = SKILL_NONE
 
 /turf/simulated/floor/shuttle_ceiling/merc
 	color = COLOR_RED
