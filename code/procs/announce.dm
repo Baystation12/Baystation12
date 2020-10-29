@@ -46,7 +46,7 @@
 			if(message_sound)
 				sound_to(M, message_sound)
 
-	if(do_newscast)
+	if(do_newscast && zlevels == GLOB.using_map.contact_levels)
 		NewsCast(message, message_title)
 
 	if(log)
