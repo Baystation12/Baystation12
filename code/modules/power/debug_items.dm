@@ -26,7 +26,7 @@
 // An infinite power generator. Adds energy to connected cable.
 /obj/machinery/power/debug_items/infinite_generator
 	name = "Fractal Energy Reactor"
-	desc = "An experimental power generator"
+	desc = "An experimental power generator."
 	var/power_generation_rate = 1000000
 
 /obj/machinery/power/debug_items/infinite_generator/Process()

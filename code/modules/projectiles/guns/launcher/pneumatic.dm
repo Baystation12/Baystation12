@@ -137,6 +137,6 @@
 
 /obj/item/weapon/gun/launcher/pneumatic/small
 	name = "small pneumatic cannon"
-	desc = "It looks smaller than your garden variety cannon"
+	desc = "It looks smaller than your garden variety cannon."
 	max_w_class = ITEM_SIZE_TINY
 	w_class = ITEM_SIZE_NORMAL

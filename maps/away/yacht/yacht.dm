@@ -2,7 +2,7 @@
 
 /obj/effect/overmap/visitable/ship/yacht
 	name = "private yacht"
-	desc = "Sensor array is detecting a small vessel with unknown lifeforms on board"
+	desc = "Sensor array is detecting a small vessel with unknown lifeforms on board."
 	color = "#ffc966"
 	vessel_mass = 3000
 	max_speed = 1/(2 SECONDS)

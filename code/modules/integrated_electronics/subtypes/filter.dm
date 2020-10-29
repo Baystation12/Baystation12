@@ -39,13 +39,13 @@
 
 /obj/item/integrated_circuit/filter/ref/mob
 	name = "life filter"
-	desc = "Only allow refs belonging to more complex, currently or formerly, living but not necessarily biological entities through"
+	desc = "Only allow refs belonging to more complex, currently or formerly, living but not necessarily biological entities through."
 	icon_state = "filter_mob"
 	filter_type = /mob/living
 
 /obj/item/integrated_circuit/filter/ref/mob/humanoid
 	name = "humanoid filter"
-	desc = "Only allow refs belonging to humanoids (dead or alive) through"
+	desc = "Only allow refs belonging to humanoids (dead or alive) through."
 	icon_state = "filter_humanoid"
 	filter_type = /mob/living/carbon/human
 

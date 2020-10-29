@@ -188,7 +188,7 @@
 
 /obj/item/weapon/reagent_containers/food/condiment/small/sugar
 	name = "sugar"
-	desc = "Sweetness in a bottle"
+	desc = "Sweetness in a bottle."
 	icon_state = "sugarsmall"
 	center_of_mass = "x=17;y=9"
 	starting_reagents = list(/datum/reagent/sugar = 20)

@@ -248,7 +248,7 @@
 /obj/machinery/light/skrell
 	name = "skrellian light"
 	light_type = /obj/item/weapon/light/tube/skrell
-	desc = "Some kind of strange alien lighting technology"
+	desc = "Some kind of strange alien lighting technology."
 
 
 /obj/item/weapon/light/tube/skrell

@@ -4,7 +4,7 @@
 /datum/game_mode/malfunction/verb/ai_select_hardware()
 	set category = "Hardware"
 	set name = "Select Hardware"
-	set desc = "Allows you to select hardware piece to install"
+	set desc = "Allows you to select a hardware piece to install."
 	var/mob/living/silicon/ai/user = usr
 
 	if(!ability_prechecks(user, 0, 1))

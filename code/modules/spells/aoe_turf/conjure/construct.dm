@@ -23,7 +23,7 @@
 
 /spell/aoe_turf/conjure/floor
 	name = "Floor Construction"
-	desc = "This spell constructs a cult floor"
+	desc = "This spell constructs a cult floor."
 
 	charge_max = 20
 	spell_flags = Z2NOCAST | CONSTRUCT_CHECK
@@ -36,7 +36,7 @@
 
 /spell/aoe_turf/conjure/wall
 	name = "Lesser Construction"
-	desc = "This spell constructs a cult wall"
+	desc = "This spell constructs a cult wall."
 
 	charge_max = 100
 	spell_flags = Z2NOCAST | CONSTRUCT_CHECK
@@ -49,7 +49,7 @@
 
 /spell/aoe_turf/conjure/wall/reinforced
 	name = "Greater Construction"
-	desc = "This spell constructs a reinforced metal wall"
+	desc = "This spell constructs a reinforced metal wall."
 
 	charge_max = 300
 	spell_flags = Z2NOCAST
@@ -62,7 +62,7 @@
 
 /spell/aoe_turf/conjure/soulstone
 	name = "Summon Soulstone"
-	desc = "This spell reaches into Nar-Sie's realm, summoning one of the legendary fragments across time and space"
+	desc = "This spell reaches into Nar-Sie's realm, summoning one of the legendary fragments across time and space."
 
 	charge_max = 3000
 	spell_flags = 0

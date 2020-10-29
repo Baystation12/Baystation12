@@ -1,6 +1,6 @@
 /spell/contract/return_master
 	name = "Return to Master"
-	desc = "Teleport back to your master"
+	desc = "Teleport back to your master."
 
 	school = "conjuration"
 	charge_max = 600

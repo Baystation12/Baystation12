@@ -1,5 +1,5 @@
 /datum/chorus_building/set_to_turf/growth/gastrointestional_tract
-	desc = "Processes nutrition into flesh"
+	desc = "Processes nutrition into flesh."
 	building_type_to_build = /obj/structure/chorus/gastrointestional_tract
 	build_time = 60
 	build_level = 2
@@ -8,7 +8,7 @@
 
 /obj/structure/chorus/gastrointestional_tract
 	name = "gastrointestional tract"
-	desc = "A gross lump of organ meat"
+	desc = "A gross lump of organ meat."
 	icon_state = "growth_stomach"
 	health = 30
 	click_cooldown = 5 SECONDS
@@ -21,7 +21,7 @@
 	flick("growth_stomach_exert", src)
 
 /datum/chorus_building/set_to_turf/growth/ossifier
-	desc = "Makes bones from nutritional substances"
+	desc = "Makes bones from nutritional substances."
 	building_type_to_build = /obj/structure/chorus/ossifier
 	build_time = 60
 	build_level = 2
@@ -30,7 +30,7 @@
 
 /obj/structure/chorus/ossifier
 	name = "ossifier"
-	desc = "A brittle mix of bones and flesh"
+	desc = "A brittle mix of bones and flesh."
 	icon_state = "growth_bone"
 	health = 30
 	click_cooldown = 5 SECONDS
@@ -43,7 +43,7 @@
 	flick("growth_bone_exert", src)
 
 /datum/chorus_building/set_to_turf/growth/sinoatrial_node
-	desc = "An automatic nerve-firer, activates nearby organs every few seconds automatically"
+	desc = "An automatic nerve-firer, activates nearby organs every few seconds automatically."
 	building_type_to_build = /obj/structure/chorus/processor/clicker/growth
 	build_time = 100
 	build_level = 2
@@ -51,12 +51,12 @@
 
 /obj/structure/chorus/processor/clicker/growth
 	name = "sinoatrial node"
-	desc = "A large fan of what appears to be some sort of organic wire"
+	desc = "A large fan of what appears to be some sort of organic wire."
 	icon_state = "growth_node"
 	health = 50
 
 /datum/chorus_building/muscular_coat
-	desc = "Every beast needs an outside"
+	desc = "Every beast needs an outside."
 	building_type_to_build = /turf/simulated/wall/growth
 	build_time = 100
 	build_level = 2
@@ -72,7 +72,7 @@
 	return "growth_wall"
 
 /datum/chorus_building/set_to_turf/growth/maw
-	desc = "A maw to let things in or keep them out"
+	desc = "A maw to let things in or keep them out."
 	building_type_to_build = /obj/structure/chorus/maw
 	build_time = 60
 	build_level = 2
@@ -84,7 +84,7 @@
 
 /obj/structure/chorus/maw
 	name = "maw"
-	desc = "A neck high wall made of teeth and meat"
+	desc = "A neck high wall made of teeth and meat."
 	click_cooldown = 3 SECONDS
 	health = 200
 	icon_state = "growth_maw_closed"
@@ -100,7 +100,7 @@
 		flick("growth_maw_close", src)
 
 /datum/chorus_building/set_to_turf/growth/spinal_column
-	desc = "For growths that must grow up and out"
+	desc = "For growths that must grow up and out."
 	building_type_to_build = /obj/structure/chorus/zleveler/spinal_column
 	build_time = 120
 	build_level = 2
@@ -111,7 +111,7 @@
 
 /obj/structure/chorus/zleveler/spinal_column
 	name = "spinal column"
-	desc = "A thick pillar of bone and marrow extending from floor to ceiling"
+	desc = "A thick pillar of bone and marrow extending from floor to ceiling."
 	health = 125
 	icon_state = "growth_spine"
 	activation_cost_resource = /datum/chorus_resource/growth_bones
@@ -120,7 +120,7 @@
 	turf_type_to_add = /turf/simulated/floor/scales
 
 /datum/chorus_building/set_to_turf/growth/bone_shooter
-	desc = "Automatically shoots bone fragments at enemies"
+	desc = "Automatically shoots bone fragments at enemies."
 	building_type_to_build = /obj/structure/chorus/processor/sentry/bone_shooter
 	build_time = 60
 	build_level = 2
@@ -132,7 +132,7 @@
 
 /obj/structure/chorus/processor/sentry/bone_shooter
 	name = "bone spitter"
-	desc = "A group of meat fashioned together into a form not unsimilar to a turret"
+	desc = "A group of meat fashioned together into a form not unsimilar to a turret."
 	icon_state = "growth_bone_shooter"
 	health = 20
 	range = 7

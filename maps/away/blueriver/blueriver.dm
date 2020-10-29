@@ -125,7 +125,7 @@
 
 /turf/simulated/floor/away/blueriver/alienfloor
 	name = "glowing floor"
-	desc = "The floor glows without any apparent reason"
+	desc = "The floor glows without any apparent reason."
 	icon = 'riverturfs.dmi'
 	icon_state = "floor"
 	temperature = 233

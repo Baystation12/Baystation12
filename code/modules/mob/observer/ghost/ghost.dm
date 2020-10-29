@@ -216,7 +216,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 /mob/observer/ghost/verb/toggle_medHUD()
 	set category = "Ghost"
 	set name = "Toggle MedicHUD"
-	set desc = "Toggles Medical HUD allowing you to see how everyone is doing"
+	set desc = "Toggles Medical HUD, allowing you to see how everyone is doing."
 	if(!client)
 		return
 	if(medHUD)
@@ -229,7 +229,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 /mob/observer/ghost/verb/toggle_antagHUD()
 	set category = "Ghost"
 	set name = "Toggle AntagHUD"
-	set desc = "Toggles AntagHUD allowing you to see who is the antagonist"
+	set desc = "Toggles AntagHUD, allowing you to see who is the antagonist."
 
 	if(!client)
 		return

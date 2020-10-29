@@ -7,7 +7,7 @@
 
 /obj/structure/chorus/nutrient_syphon
 	name = "nutrient syphon"
-	desc = "Extracts vitamins and minerals straight from the air"
+	desc = "Extracts vitamins and minerals straight from the air."
 	icon_state = "growth_syphon"
 	click_cooldown = 5 SECONDS
 
@@ -17,7 +17,7 @@
 	flick("growth_syphon_exert", src)
 
 /datum/chorus_building/set_to_turf/growth/bitter
-	desc = "A small teeth-filled hole, used to injure prey"
+	desc = "A small teeth-filled hole, used to injure prey."
 	building_type_to_build = /obj/structure/chorus/biter
 	build_time = 20
 	build_level = 1

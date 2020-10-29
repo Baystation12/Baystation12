@@ -66,7 +66,7 @@
 
 /obj/item/clothing/accessory/shouldercape/command
 	name = "command cape"
-	desc = "A heavily decorated cape with rank emblems on the shoulders signifying prestige. An ornate runed design has been woven into the fabric of it"
+	desc = "A heavily decorated cape with rank emblems on the shoulders signifying prestige. An ornate runed design has been woven into the fabric of it."
 	icon_state = "commandcape"
 
 /obj/item/clothing/accessory/shouldercape/general

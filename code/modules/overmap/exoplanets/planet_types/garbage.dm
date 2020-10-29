@@ -105,7 +105,7 @@
 
 /turf/simulated/floor/exoplanet/concrete/reinforced
 	name = "reinforced concrete"
-	desc = "Stone-like artificial material. It has been reinforced with an unknown compound"
+	desc = "Stone-like artificial material. It has been reinforced with an unknown compound."
 	icon_state = "hexacrete"
 
 /turf/simulated/floor/exoplanet/concrete/reinforced/road

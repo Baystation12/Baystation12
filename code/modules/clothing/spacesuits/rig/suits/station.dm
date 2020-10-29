@@ -391,7 +391,7 @@
 	camera = null
 	species_restricted = list(SPECIES_HUMAN, SPECIES_UNATHI, SPECIES_SKRELL, SPECIES_IPC)
 	light_overlay = "null_light"
-	desc = "A bubble helmet that maximizes the field of view. A state of the art holographic display provides a stream of information"
+	desc = "A bubble helmet that maximizes the field of view. A state of the art holographic display provides a stream of information."
 
 //All in one suit
 /obj/item/clothing/suit/space/rig/zero

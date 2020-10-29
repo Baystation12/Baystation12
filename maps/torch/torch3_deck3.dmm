@@ -6625,7 +6625,7 @@
 	},
 /obj/machinery/button/blast_door{
 	id_tag = "d3fore_shutters";
-	name = "Garden shutter controll";
+	name = "Garden Shutter Control";
 	pixel_x = -23;
 	pixel_y = -9
 	},
@@ -14478,7 +14478,7 @@
 /obj/effect/floor_decal/corner/green/half,
 /obj/machinery/button/blast_door{
 	id_tag = "d3fore_shutters";
-	name = "Garden shutter controll";
+	name = "Garden Shutter Control";
 	pixel_x = -7;
 	pixel_y = -23
 	},
@@ -18823,7 +18823,7 @@
 	},
 /obj/machinery/button/blast_door{
 	id_tag = "d3fore_shutters";
-	name = "Garden shutter controll";
+	name = "Garden Shutter Control";
 	pixel_x = -7;
 	pixel_y = 23
 	},

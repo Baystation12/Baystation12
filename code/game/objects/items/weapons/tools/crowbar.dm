@@ -44,7 +44,7 @@
 
 /obj/item/weapon/crowbar/emergency_forcing_tool
 	name = "emergency forcing tool"
-	desc = "This is an emergency forcing tool, made of steel bar with a wedge on one end, and a hatchet on the other end. It has a blue plastic grip"
+	desc = "This is an emergency forcing tool, made of steel bar with a wedge on one end, and a hatchet on the other end. It has a blue plastic grip."
 	icon_state = "emergency_forcing_tool"
 	item_state = "emergency_forcing_tool"
 	force = 12

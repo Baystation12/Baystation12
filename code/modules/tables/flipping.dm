@@ -57,7 +57,7 @@
 
 /obj/structure/table/proc/do_put()
 	set name = "Put table back"
-	set desc = "Puts flipped table back"
+	set desc = "Puts a flipped table back"
 	set category = "Object"
 	set src in oview(1)
 
