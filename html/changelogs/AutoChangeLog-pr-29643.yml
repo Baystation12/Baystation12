@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - admin: "Disposal bin stuffing and flushing are now attack logs instead of admin logs."
