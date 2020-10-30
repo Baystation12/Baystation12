@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - admin: "Banned player's mobs now have their ckey stripped so they display the permanent SSD message and instantly cryo."
