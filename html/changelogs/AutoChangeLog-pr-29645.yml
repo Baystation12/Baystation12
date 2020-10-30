@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - maptweak: "The medical safe room fore bolt button now toggles the fore door instead of the aft door."
