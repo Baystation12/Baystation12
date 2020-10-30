@@ -1,0 +1,4 @@
+author: "Qlonever"
+delete-after: True
+changes: 
+  - tweak: "The \"baggy suit pants, colour select,\" \"clothes selection,\" \"formal pants selection,\" \"short skirt, colour select,\" \"skirt selection,\" and \"suit pants, colour select\" items in the loadout menu have all had their allowed_roles changed from FORMAL_ROLES to SEMIANDFORMAL_ROLES."
