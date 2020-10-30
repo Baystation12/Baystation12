@@ -91,10 +91,16 @@ datum/admins/proc/DB_ban_record(var/bantype, var/mob/banned_mob, var/duration = 
 		if(banned_mob.client)
 			computerid = banned_mob.client.computer_id
 			ip = banned_mob.client.address
+		if (bantype == BANTYPE_PERMA || bantype == BANTYPE_TEMP)
+			banned_mob.ckey = null
 	else if(banckey)
 		ckey = ckey(banckey)
 		computerid = bancid
 		ip = banip
+		for (var/mob/M in SSmobs.mob_list)
+			if (M.ckey == ckey)
+				M.ckey = null
+				break
 
 	var/who
 	for(var/client/C in GLOB.clients)
