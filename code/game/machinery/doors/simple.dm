@@ -23,9 +23,8 @@
 		material_name = MATERIAL_STEEL
 	material = SSmaterials.get_material_by_name(material_name)
 	if(!material)
-		qdel(src)
-		return
-	maxhealth = max(100, material.integrity*10)
+		return INITIALIZE_HINT_QDEL
+	maxhealth = max(100, material.integrity*2)
 	health = maxhealth
 	if(!icon_base)
 		icon_base = material.door_icon_base
@@ -36,13 +35,17 @@
 		locked = initial_lock_value
 	if(locked)
 		lock = new(src,locked)
+	if(material.luminescence)
+		set_light(0.5, 1, material.luminescence, l_color = material.icon_colour)
 
 	if(material.opacity < 0.5)
 		glass = 1
+		alpha = 180
 		set_opacity(0)
-	else
-		set_opacity(1)
 	update_icon()
+
+/obj/machinery/door/unpowered/simple/c_airblock(turf/other)
+	return FALSE
 
 /obj/machinery/door/unpowered/simple/requiresID()
 	return 0
@@ -226,10 +229,6 @@
 /obj/machinery/door/unpowered/simple/diamond/New(var/newloc,var/material_name,var/complexity)
 	..(newloc, MATERIAL_DIAMOND, complexity)
 
-/obj/machinery/door/unpowered/simple/wood
-	icon_state = "wood"
-	color = "#824b28"
-
 /obj/machinery/door/unpowered/simple/wood/New(var/newloc,var/material_name,var/complexity)
 	..(newloc, MATERIAL_WOOD, complexity)
 
@@ -245,15 +244,14 @@
 /obj/machinery/door/unpowered/simple/walnut/New(var/newloc,var/material_name,var/complexity)
 	..(newloc, MATERIAL_WALNUT, complexity)
 
-/obj/machinery/door/unpowered/simple/wood/saloon
-	icon_base = "saloon"
-	autoclose = 1
-	normalspeed = 0
+/obj/machinery/door/unpowered/simple/plastic/New(var/newloc,var/material_name,var/complexity)
+	..(newloc, MATERIAL_PLASTIC, complexity)
 
-/obj/machinery/door/unpowered/simple/wood/saloon/New(var/newloc,var/material_name,var/complexity)
-	..(newloc, MATERIAL_WOOD, complexity)
-	glass = 1
-	set_opacity(0)
+/obj/machinery/door/unpowered/simple/glass/New(var/newloc,var/material_name,var/complexity)
+	..(newloc, MATERIAL_GLASS, complexity)
 
 /obj/machinery/door/unpowered/simple/cult/New(var/newloc,var/material_name,var/complexity)
 	..(newloc, MATERIAL_CULT, complexity)
+
+/obj/machinery/door/unpowered/simple/supermatter/New(var/newloc,var/material_name,var/complexity)
+	..(newloc, MATERIAL_SUPERMATTER, complexity)
