@@ -1933,6 +1933,7 @@
 #include "code\modules\mining\machinery\mineral_unloader.dm"
 #include "code\modules\mob\animations.dm"
 #include "code\modules\mob\death.dm"
+#include "code\modules\mob\floating_say.dm"
 #include "code\modules\mob\gender.dm"
 #include "code\modules\mob\hear_say.dm"
 #include "code\modules\mob\holder.dm"

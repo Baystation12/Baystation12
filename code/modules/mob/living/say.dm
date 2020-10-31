@@ -323,6 +323,9 @@ proc/get_radio_key_from_channel(var/channel)
 
 	flick_overlay(speech_bubble, speech_bubble_recipients, 30)
 
+	//INVOKE_ASYNC(GLOBAL_PROC, .proc/animate_speechbubble, speech_bubble, speech_bubble_recipients, 30)
+	INVOKE_ASYNC(src, /atom/movable/proc/animate_chat, message, speaking, italics, speech_bubble_recipients, 40)
+
 	if(whispering)
 		log_whisper("[name]/[key] : [message]")
 	else
