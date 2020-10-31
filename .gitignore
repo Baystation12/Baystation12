@@ -48,3 +48,4 @@ lib/*.so
 # python
 *.pyc
 __pycache__
+config/example/admins.txt
