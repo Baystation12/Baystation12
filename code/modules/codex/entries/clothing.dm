@@ -81,4 +81,4 @@
 
 /datum/codex_entry/pickpocket_gloves
 	associated_paths = list(/obj/item/clothing/gloves/thick/duty/pickpocket)
-	antag_text = "Through the use of synthetic fiber muscles, these gloves allow their wearer to easily and silently take small items from others."
+	antag_text = "Through the use of synthetic fiber muscles, these gloves allow their wearer to easily and silently take small items from others or adjust their suit sensors."
