@@ -180,4 +180,4 @@
 	name = "Pickpocket's Gloves"
 	item_cost = 15
 	path = /obj/item/clothing/gloves/thick/duty/pickpocket
-	desc = "Through the use of synthetic fiber muscles, these gloves allow their wearer to easily and silently take small items from others."
+	desc = "Through the use of synthetic fiber muscles, these gloves allow their wearer to easily and silently take small items from others or adjust their suit sensors."
