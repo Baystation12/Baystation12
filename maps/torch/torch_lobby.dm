@@ -1,5 +1,5 @@
 /datum/map/torch
-	lobby_screens = list('maps/torch/lobby/FireDoor.gif','maps/torch/lobby/ss13decay.png','maps/torch/lobby/clown.png','maps/torch/lobby/hal.png','maps/torch/lobby/T_Davis.png','maps/torch/lobby/Anarcho_Beverly.png', 'maps/torch/lobby/boof.png')
+	lobby_screens = list('maps/torch/lobby/FireDoor.gif','maps/torch/lobby/ss13decay.png','maps/torch/lobby/clown.png','maps/torch/lobby/hal.png','maps/torch/lobby/T_Davis.png','maps/torch/lobby/Anarcho_Beverly.png', 'maps/torch/lobby/boof.png', 'maps/torch/lobby/No_Escape.gif')
 	lobby_tracks = list(
 		/music_track/chasing_time,
 		/music_track/torch,
