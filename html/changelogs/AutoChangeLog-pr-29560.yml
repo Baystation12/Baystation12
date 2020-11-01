@@ -1,0 +1,6 @@
+author: "Imienny"
+delete-after: True
+changes: 
+  - tweak: "Grabs now update their name to reflect currently hold body part."
+  - tweak: "Tendom cutting, throat slitting, eye squishing and headbutting now can be done with any blue(or higher) grab."
+  - tweak: "Throat slit now do roughly 2x more damage."
