@@ -78,6 +78,22 @@
 		"nav_verne_5",
 	)
 
+/datum/map/torch/get_map_info()
+	. = list()
+
+/obj/machinery/computer/ship/helm/proc/add_torch_spawn(obj/effect/overmap/visitable/sector/S, notify = FALSE)
+	var/datum/computer_file/data/waypoint/R = new()
+	R.fields["name"] = "Bluespace Residue"
+	R.fields["x"] = torch.x
+	R.fields["y"] = torch.y
+	known_sectors[S.name] = R
+
+/obj/machinery/computer/ship/helm/Initialize()
+	. = ..()
+
+	for(var/obj/machinery/computer/ship/helm/H in SSmachines.machinery)
+		H.add_torch_spawn(src, FALSE)
+
 /obj/effect/overmap/visitable/ship/landable/exploration_shuttle
 	name = "Charon"
 	desc = "An SSE-U11 long range shuttle, broadcasting SCGEC codes and the callsign \"Torch-2 Charon\"."
