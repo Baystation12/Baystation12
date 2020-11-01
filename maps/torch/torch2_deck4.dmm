@@ -2007,13 +2007,6 @@
 /obj/random/trash,
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/starboard)
-"gG" = (
-/obj/structure/sign/warning/high_voltage{
-	dir = 1;
-	icon_state = "shock"
-	},
-/turf/simulated/wall/prepainted,
-/area/quartermaster/storage/upper)
 "gL" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
@@ -7063,6 +7056,11 @@
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
+	},
+/obj/machinery/alarm{
+	dir = 8;
+	icon_state = "alarm0";
+	pixel_x = 21
 	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/fourthdeck/aft)
@@ -12511,6 +12509,15 @@
 /obj/structure/closet/emcloset,
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/foreport)
+"PI" = (
+/obj/effect/floor_decal/corner/brown{
+	dir = 5
+	},
+/obj/machinery/alarm{
+	pixel_y = 24
+	},
+/turf/simulated/floor/tiled,
+/area/hallway/primary/fourthdeck/aft)
 "PJ" = (
 /turf/simulated/wall/prepainted,
 /area/crew_quarters/laundry)
@@ -37879,7 +37886,7 @@ MT
 Ou
 Qb
 YB
-gG
+Yf
 Yf
 QI
 Yf
@@ -39282,7 +39289,7 @@ Xn
 Xn
 Xn
 Xn
-TH
+PI
 tK
 ql
 Pa
