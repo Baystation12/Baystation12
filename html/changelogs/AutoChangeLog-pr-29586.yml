@@ -1,0 +1,7 @@
+author: "MrKicker"
+delete-after: True
+changes: 
+  - admin: "removed man-up from context menu"
+  - admin: "drop_bomb is now cancelable."
+  - admin: "ai_set_hologram, jump, and get verbs removed from context menu."
+  - admin: "Condensed targeted narrates into one verb called 'narrate'. (local and global are still seperate)"
