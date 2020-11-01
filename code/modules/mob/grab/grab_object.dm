@@ -43,7 +43,7 @@
 		return INITIALIZE_HINT_QDEL
 
 	var/obj/item/organ/O = get_targeted_organ()
-	SetName("[name] ([O.name])")
+	SetName("[initial(name)] ([O.name])")
 	GLOB.dismembered_event.register(affecting, src, .proc/on_organ_loss)
 	GLOB.zone_selected_event.register(assailant.zone_sel, src, .proc/on_target_change)
 
@@ -109,6 +109,9 @@
 	This section is for newly defined useful procs.
 */
 
+/obj/item/grab/on_active_hand()
+	on_target_change(new_sel = assailant.zone_sel.selecting)
+
 /obj/item/grab/proc/on_target_change(obj/screen/zone_sel/zone, old_sel, new_sel)
 	if(src != assailant.get_active_hand())
 		return // Note that because of this condition, there's no guarantee that target_zone = old_sel
@@ -116,6 +119,9 @@
 		return
 	var/old_zone = target_zone
 	target_zone = new_sel
+	var/obj/item/organ/O = get_targeted_organ()
+	SetName("[initial(name)] ([O.name])")
+	to_chat(assailant, SPAN_NOTICE("You are now holding \the [affecting] by \the [O]."))
 	if(!istype(get_targeted_organ(), /obj/item/organ))
 		current_grab.let_go(src)
 		return
