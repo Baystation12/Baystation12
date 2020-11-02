@@ -85,3 +85,10 @@
 
 /obj/item/clothing/glasses/hud/janitor/process_hud(var/mob/M)
 	process_jani_hud(M)
+
+/obj/item/clothing/glasses/hud/science
+	name = "science HUD"
+	desc = "A heads-up display that analyzes objects for research potential."
+	icon_state = "scihud"
+	hud_type = HUD_SCIENCE
+	body_parts_covered = 0
