@@ -1,4 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - admin: "Ban messages in logs and displayed to users will now display ban time in terms of years, months, weeks, day, hours, and minutes, as applicable, instead of a long number of minutes."
