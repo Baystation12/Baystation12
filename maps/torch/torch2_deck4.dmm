@@ -6933,19 +6933,16 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/floor_decal/corner/red{
-	dir = 5
-	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/dark,
+/obj/effect/floor_decal/corner/red/half{
+	dir = 1;
+	icon_state = "bordercolorhalf"
+	},
+/turf/simulated/floor/tiled/dark/monotile,
 /area/security/hangcheck)
 "wK" = (
-/obj/machinery/disposal,
-/obj/structure/disposalpipe/trunk{
-	dir = 8
-	},
 /obj/machinery/camera/network/security{
 	c_tag = "Fourth Deck - Security Checkpoint"
 	},
@@ -6953,13 +6950,13 @@
 	dir = 1;
 	icon_state = "bordercolorhalf"
 	},
-/obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/requests_console{
 	announcementConsole = 1;
 	department = "Security";
 	departmentType = 5;
 	pixel_y = 30
 	},
+/obj/structure/disposalpipe/segment/bent,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/hangcheck)
 "wL" = (
@@ -7371,6 +7368,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
+/obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/dark,
 /area/security/hangcheck)
 "yh" = (
@@ -8044,18 +8042,16 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/aft)
 "AN" = (
-/obj/random/maintenance/solgov/clean,
-/obj/structure/closet/secure_closet{
-	name = "Security Equipment Locker";
-	req_access = list("ACCESS_SECURITY")
-	},
-/obj/random_multi/single_item/boombox,
 /obj/effect/floor_decal/corner/red/mono,
-/obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/camera/network/security{
 	c_tag = "Checkpoint - Deck Four";
 	dir = 1
 	},
+/obj/structure/disposalpipe/trunk{
+	dir = 1
+	},
+/obj/machinery/disposal,
+/obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/hangcheck)
 "AO" = (
@@ -11572,6 +11568,15 @@
 /obj/item/weapon/book/manual/stasis,
 /turf/simulated/floor/wood,
 /area/crew_quarters/lounge)
+"Nc" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/disposalpipe/segment,
+/turf/simulated/floor/tiled/dark,
+/area/security/hangcheck)
 "Nd" = (
 /obj/structure/disposalpipe/segment,
 /obj/machinery/power/apc{
@@ -14068,6 +14073,7 @@
 	},
 /obj/effect/floor_decal/corner/red/mono,
 /obj/effect/floor_decal/industrial/outline/grey,
+/obj/random_multi/single_item/boombox,
 /obj/item/device/binoculars,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/hangcheck)
@@ -31208,7 +31214,7 @@ ui
 OX
 wK
 yg
-MD
+Nc
 AN
 OX
 Db
