@@ -478,16 +478,15 @@ datum/admins/proc/DB_ban_unban_by_id(var/id)
 					dcolor = adcolor
 
 				var/typedesc =""
-				var/mins_readable = minutes_to_readable(duration)
 				switch(bantype)
 					if("PERMABAN")
 						typedesc = "<font color='red'><b>PERMABAN</b></font>"
 					if("TEMPBAN")
-						typedesc = "<b>TEMPBAN</b><br><font size='2'>([mins_readable]) [(unbanned || auto) ? "" : "(<a href=\"byond://?src=\ref[src];dbbanedit=duration;dbbanid=[banid]\">Edit</a>)"]<br>Expires [expiration]</font>"
+						typedesc = "<b>TEMPBAN</b><br><font size='2'>([minutes_to_readable(duration)]) [(unbanned || auto) ? "" : "(<a href=\"byond://?src=\ref[src];dbbanedit=duration;dbbanid=[banid]\">Edit</a>)"]<br>Expires [expiration]</font>"
 					if("JOB_PERMABAN")
 						typedesc = "<b>JOBBAN</b><br><font size='2'>([job])</font>"
 					if("JOB_TEMPBAN")
-						typedesc = "<b>TEMP JOBBAN</b><br><font size='2'>([job])<br>([mins_readable]<br>Expires [expiration]</font>"
+						typedesc = "<b>TEMP JOBBAN</b><br><font size='2'>([job])<br>([minutes_to_readable(duration)]<br>Expires [expiration]</font>"
 
 				output += "<tr bgcolor='[dcolor]'>"
 				output += "<td align='center'>[typedesc]</td>"

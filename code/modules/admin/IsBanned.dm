@@ -62,9 +62,8 @@ world/IsBanned(key,address,computer_id)
 			var/bantype = query.item[9]
 
 			var/expires = ""
-			var/mins_readable = minutes_to_readable(duration)
 			if(text2num(duration) > 0)
-				expires = " The ban is for [mins_readable] and expires on [expiration] (server time)."
+				expires = " The ban is for [minutes_to_readable(duration)] and expires on [expiration] (server time)."
 
 			var/desc = "\nReason: You, or another user of this computer or connection ([pckey]) is banned from playing here. The ban reason is:\n[reason]\nThis ban was applied by [ackey] on [bantime], [expires]"
 
