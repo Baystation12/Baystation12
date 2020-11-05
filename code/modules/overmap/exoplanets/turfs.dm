@@ -40,6 +40,8 @@
 		if(T.use(1))
 			playsound(src, 'sound/items/Deconstruct.ogg', 80, 1)
 			ChangeTurf(/turf/simulated/floor, FALSE, FALSE, TRUE)
+	else if (isCrowbar(C) || isWelder(C) || istype(C, /obj/item/weapon/gun/energy/plasmacutter))
+		return
 	else
 		..()
 
