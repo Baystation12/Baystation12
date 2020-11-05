@@ -54,7 +54,7 @@ Scent intensity
 
 /datum/extension/scent/Destroy()
 	STOP_PROCESSING(SSprocessing, src)
-	..()
+	. = ..()
 
 /datum/extension/scent/Process()
 	if(!holder)
