@@ -150,6 +150,11 @@
 
 /turf/simulated/wall/attackby(var/obj/item/weapon/W, var/mob/user)
 
+	var/area/A = get_area(src)
+	if (!A.can_modify_area())
+		to_chat(user, SPAN_NOTICE("\The [src] deflects all attempts to interact with it!"))
+		return
+
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 
 	if(!construction_stage && try_graffiti(user, W))
@@ -283,6 +288,7 @@
 					playsound(src, 'sound/items/Welder.ogg', 100, 1)
 
 				else if(isWirecutter(W))
+
 					playsound(src, 'sound/items/Wirecutter.ogg', 100, 1)
 					construction_stage = 5
 					new /obj/item/stack/material/rods( src )

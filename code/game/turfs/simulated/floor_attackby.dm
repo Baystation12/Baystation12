@@ -1,5 +1,10 @@
 /turf/simulated/floor/attackby(var/obj/item/C, var/mob/user)
 
+	var/area/A = get_area(src)
+	if (!A.can_modify_area())
+		visible_message("\The [src] cannot be dismantled or modified in any way!")
+		return
+
 	if(!C || !user)
 		return 0
 

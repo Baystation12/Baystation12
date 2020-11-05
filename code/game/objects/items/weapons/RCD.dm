@@ -217,7 +217,8 @@
 	return FALSE
 
 /decl/hierarchy/rcd_mode/proc/can_handle_work(var/obj/item/weapon/rcd/rcd, var/atom/target)
-	return istype(target, handles_type)
+	var/area/A = get_area(get_turf(target))
+	return istype(target, handles_type) && A.can_modify_area()
 
 /decl/hierarchy/rcd_mode/proc/do_handle_work(var/atom/target)
 	var/result = get_work_result(target)
@@ -268,7 +269,8 @@
 	work_type = /turf/simulated/floor/airless
 
 /decl/hierarchy/rcd_mode/floor_and_walls/base_turf/can_handle_work(var/rcd, var/turf/target)
-	return istype(target) && (isspaceturf(target) || isopenspace(target) || istype(target, get_base_turf_by_area(target)))
+	var/area/A = get_area(target)
+	return istype(target) && (isspaceturf(target) || isopenspace(target) || istype(target, get_base_turf_by_area(target))) && A.can_modify_area()
 
 /decl/hierarchy/rcd_mode/floor_and_walls/floor_turf
 	cost = 3
@@ -316,7 +318,8 @@
 	. = ..()
 	if (.)
 		var/turf/T = get_turf(target)
-		if ((locate(/obj/structure/window) in T) || (locate(/obj/structure/grille) in T))
+		var/area/A = get_area(T)
+		if ((locate(/obj/structure/window) in T) || (locate(/obj/structure/grille) in T) || !A.can_modify_area())
 			return FALSE
 
 /decl/hierarchy/rcd_mode/deconstruction/window

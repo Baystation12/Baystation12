@@ -159,7 +159,8 @@
 	return
 
 /turf/simulated/wall/proc/take_damage(dam)
-	if(dam)
+	var/area/A = get_area(src)
+	if(dam && A.can_modify_area())
 		damage = max(0, damage + dam)
 		update_damage()
 	return
