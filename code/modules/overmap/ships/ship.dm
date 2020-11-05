@@ -33,6 +33,8 @@
 	var/halted = 0        //admin halt or other stop.
 	var/skill_needed = SKILL_ADEPT  //piloting skill needed to steer it without going in random dir
 	var/operator_skill
+	var/initial_position_known = FALSE //whether or not other ships should start with this ships location.
+	var/initial_sensor_name = "Unidentified Ship" //the name to be put on sensor consoles if spawn_position is set.
 
 /obj/effect/overmap/visitable/ship/Initialize()
 	. = ..()

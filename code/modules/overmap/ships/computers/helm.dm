@@ -24,11 +24,15 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		if (S.known)
 			add_known_sector(S)
 
-/obj/machinery/computer/ship/helm/proc/add_known_sector(obj/effect/overmap/visitable/sector/S, notify = FALSE)
+		for(var/obj/effect/overmap/visitable/ship/J in map)
+		if (J.initial_position_known)
+			add_known_sector(J, FALSE, initial_sensor_name, start_x, start_y)
+
+/obj/machinery/computer/ship/helm/proc/add_known_sector(obj/effect/overmap/visitable/sector/S, notify = FALSE, name, start_x, start_y)
 	var/datum/computer_file/data/waypoint/R = new()
-	R.fields["name"] = S.name
-	R.fields["x"] = S.x
-	R.fields["y"] = S.y
+	R.fields["name"] = name || S.name
+	R.fields["x"] = start_x || S.x
+	R.fields["y"] = start_y || S.y
 	known_sectors[S.name] = R
 
 	if (notify)
