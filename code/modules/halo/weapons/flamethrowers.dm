@@ -14,6 +14,8 @@
 	hud_bullet_usebar = 1
 	caliber="flamethrower"
 	one_hand_penalty = 3
+	slowdown_general = 0.35
+	dispersion = list(0.4)
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/na4_tank
 	allowed_magazines = list(/obj/item/ammo_magazine/na4_tank)
@@ -33,7 +35,8 @@
 	. = ..()
 	if(istype(user))
 		user.adjust_fire_stacks(0.1)
-		user.IgniteMob()
+		if(!user.on_fire)
+			user.IgniteMob()
 
 /obj/item/projectile/bullet/fire
 	name = "Napalm burst"
@@ -41,8 +44,8 @@
 	check_armour = "energy"
 	embed = 0
 	sharp = 0
-	damage = 25 //Low, but has extra flame effects and such.
-	shield_damage = 5
+	damage = 20 //Low, but has extra flame effects and such.
+	shield_damage = 10
 	icon = 'icons/effects/fire.dmi'
 	icon_state = "fire"
 	kill_count = 6 //No sniping!
@@ -52,17 +55,15 @@
 	damtype = BURN
 	if(istype(C))
 		C.adjust_fire_stacks(0.6)
-		C.IgniteMob()
-		if(isturf(C.loc))
-			var/turf/T = get_turf(C.loc)
-			T.hotspot_expose(700, 2)
+		if(!C.on_fire)
+			C.IgniteMob()
 	return ..()
 
 /obj/item/projectile/bullet/fire/on_impact(var/atom/impacted)
 	..()
-	var/impacted_loc = impacted.loc
-	if(isturf(impacted_loc))
-		new /obj/effect/decal/cleanable/liquid_fuel/flamethrower_fuel(1,impacted_loc)
+	var/impacted_loc = loc
+	if(!ismob(loc))
+		new /obj/effect/decal/cleanable/liquid_fuel/flamethrower_fuel(loc)
 		new /obj/effect/fire(impacted_loc)
 
 /obj/item/ammo_magazine/na4_tank

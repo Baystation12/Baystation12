@@ -11,10 +11,11 @@
 	possible_weapons = list(/obj/item/weapon/gun/projectile/m6d_magnum/npc)
 	var/obj/item/device/flashlight/held_light
 	species_name = "Human"
-	possible_grenades = list(/obj/item/weapon/grenade/frag/m9_hedp)
+	possible_grenades = list(/obj/item/weapon/grenade/frag/m9_hedp,/obj/item/weapon/grenade/smokebomb)
 
 /mob/living/simple_animal/hostile/unsc/New()
 	. = ..()
+	our_overmind = GLOB.unsc_overmind
 	if(see_in_dark < 5)
 		held_light = new /obj/item/device/flashlight(src)
 		held_light.on = 1
@@ -36,6 +37,7 @@
 	icon_dead = "dead_marine"
 	resistance = 5
 	combat_tier = 2
+	see_in_dark = 5
 	possible_weapons = list(/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/gun/projectile/ma5b_ar)
 
 /mob/living/simple_animal/hostile/unsc/odst
@@ -46,7 +48,7 @@
 	resistance = 10
 	combat_tier = 3
 	possible_weapons = list(/obj/item/weapon/gun/projectile/m7_smg, /obj/item/weapon/gun/projectile/br55, /obj/item/weapon/gun/projectile/m392_dmr)
-	see_in_dark = 7
+	see_in_dark = 5
 
 /mob/living/simple_animal/hostile/builder_mob/unsc
 	name = "UNSC Marine Combat Engineer"

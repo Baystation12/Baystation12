@@ -16,7 +16,7 @@
 	spawn_flags = SPECIES_CAN_JOIN
 	brute_mod = 0.8 //Lower amount of brute damage taken than sangheili
 	burn_mod = 0.8 //ditto for burn
-	pain_mod = 0.6 //Lower pain damage taken than sangheili
+	pain_mod = 0.8 //Lower pain damage taken than sangheili
 	item_icon_offsets = list(list(1,0),list(1,0),null,list(1,0),null,null,null,list(1,0),null)
 	inhand_icon_offsets = list(list(-2,0),list(2,0),null,list(0,0),null,null,null,list(0,0),null)
 	slowdown = -0.5
@@ -70,7 +70,7 @@
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/augmented)
 		)
 
-	equipment_slowdown_multiplier = 0.6
+	equipment_slowdown_multiplier = 0.75
 
 	roll_distance = 3
 	per_roll_delay = 1.5 //Slightly faster than a human's dodge roll

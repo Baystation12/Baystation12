@@ -138,7 +138,7 @@
 /datum/faction/proc/get_flagship()
 	if(!flagship)
 		for(var/obj/effect/overmap/check_ship in world)
-			if(check_ship.flagship && check_ship.faction == src.name)
+			if(check_ship.flagship && check_ship.get_faction() == src.name)
 				flagship = check_ship
 				break
 

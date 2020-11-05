@@ -20,8 +20,9 @@
 	//Burst Settings irrelevant in the face of sustain fire settings//
 	//burst = 15
 	//burst_delay = 1
+	fire_delay = 5 //1 lower than normal
 	burst_accuracy = list(0,0,0,0,0,0,-1)
-	dispersion = list(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,1.2,1.4,1.4)
+	dispersion = list(0.0,0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0)
 
 	load_time = 5
 
@@ -36,5 +37,5 @@
 		)
 
 	move_delay_malus = 2
-	fire_delay = 15
+	fire_delay = 8
 	sustain_time = 3 SECONDS

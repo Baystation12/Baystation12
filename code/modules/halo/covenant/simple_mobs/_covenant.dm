@@ -9,10 +9,11 @@
 	assault_target_type = /obj/effect/landmark/assault_target/covenant
 	icon = 'code/modules/halo/covenant/simple_mobs/simple_mobs.dmi'
 	var/obj/item/device/flashlight/held_light
-	possible_grenades = list(/obj/item/weapon/grenade/plasma)
+	possible_grenades = list(/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/smokebomb/covenant)
 
 /mob/living/simple_animal/hostile/covenant/New()
 	. = ..()
+	our_overmind = GLOB.covenant_overmind
 	if(see_in_dark < 5)
 		/*
 		var/light_type = pick(\

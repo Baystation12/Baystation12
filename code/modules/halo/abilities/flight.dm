@@ -11,8 +11,8 @@
 		if(flight_ticks_remain > 0)
 			stat("Flight Ticks Remaining: [flight_ticks_remain]")
 
-/mob/living/proc/decrement_flight_ticks()
-	flight_ticks_remain = max(flight_ticks_remain - 1,0)
+/mob/living/proc/decrement_flight_ticks(var/amount = 1)
+	flight_ticks_remain = max(flight_ticks_remain - amount,0)
 	if(flight_item && flight_item.flight_bar)
 		flight_item.flight_bar.update(flight_ticks_remain)
 
@@ -21,16 +21,16 @@
 	if(flight_ticks_remain > 0)
 		decrement_flight_ticks()
 
-/mob/living/proc/take_flight(var/ticks_flight_apply,var/message_flight,var/message_land)
+/mob/living/proc/take_flight(var/ticks_flight_apply,var/message_flight,var/message_land,var/flight_elevation = 2)
 	Stun(2)
 	if(elevation <= 0)
 		flight_ticks_remain = ticks_flight_apply
-		change_elevation(2)
+		change_elevation(flight_elevation)
 		if(message_flight)
 			visible_message("[message_flight]")
 	else
 		flight_ticks_remain = 0
-		change_elevation(-2)
+		change_elevation(-flight_elevation)
 		if(message_land)
 			visible_message("[message_land]")
 		if(istype(loc,/turf/simulated/open))

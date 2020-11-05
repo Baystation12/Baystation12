@@ -29,8 +29,9 @@
 
 	//burst = 10
 	//burst_delay = 2
+	fire_delay = 5
 	burst_accuracy = list(0,0,0,0,0,0,0,0,0,0,-1)
-	dispersion = list(0,0,0,0,0,0.5,1.0,1.4,1.4,1.4)
+	dispersion = list(0,0,0,0,0,0.3,0.6,0.9,1.0)
 
 	load_time = 5
 
@@ -46,5 +47,5 @@
 	burst_accuracy = list(0,0,0,0,0,0,0,0,0,0,-1)
 
 	move_delay_malus = 2
-	fire_delay = 15
+	fire_delay = 8
 	sustain_time = 2 SECONDS

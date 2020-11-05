@@ -243,11 +243,12 @@
 		/obj/item/ammo_magazine/rifleneedlepack = 0,
 		/obj/item/ammo_magazine/type51mag = 0,
 		"Explosives" = -1,
-		/obj/item/weapon/gun/energy/beam_rifle = 3,
+		/obj/item/weapon/gun/energy/beam_rifle = 0,
 		/obj/item/weapon/grenade/plasma = 0,
 		/obj/item/weapon/grenade/smokebomb/covenant = 0
 	)
 	amounts = list(\
+		/obj/item/weapon/gun/energy/beam_rifle = 3,
 		/obj/item/weapon/grenade/plasma = 15,
 		/obj/item/weapon/grenade/smokebomb/covenant = 15
 	)

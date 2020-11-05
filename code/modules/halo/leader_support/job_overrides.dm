@@ -39,3 +39,12 @@
 
 /datum/job/unsc/spartan_two
 	command_rank = 2
+
+/datum/job/geminus_innie/officer
+	command_rank = 2
+
+/datum/job/geminus_innie/commander
+	command_rank = 2
+
+/datum/job/geminus_innie/orion_defector
+	command_rank = 2

@@ -65,7 +65,7 @@
 	/obj/item/ammo_magazine/br55/m634,
 	)
 
-/datum/support_option/supply_drop/cov/mass_ammo
+/datum/support_option/supply_drop/mass_ammo/cov
 	name = "Supply Drop (Covenant, Ammunition, Mass )"
 	arrival_sfx = 'code/modules/halo/sound/sprit_flyby.ogg'
 	drop_delay = 2 SECONDS

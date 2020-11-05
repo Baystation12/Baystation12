@@ -46,7 +46,7 @@
 	qdel(src)
 
 /obj/structure/turret/bullet_act(var/obj/item/projectile/P, var/def_zone)
-	var/prob_use = bullet_deflect_chance
+	var/prob_use = bullet_deflect_chance - P.armor_penetration
 	if(get_dir(src, P.starting) in list(dir,turn(dir,-45),turn(dir,45)))
 		prob_use = bullet_facing_deflect_chance
 	if(dir == turn(dir,180) || !prob(prob_use))
@@ -230,6 +230,9 @@
 	caliber = "7.62mm"
 	magazine_type = /obj/item/ammo_magazine/m739/m118
 
+	scope_zoom_amount = 6
+	is_scope_variable = 1
+
 	fire_delay = 15
 	burst = 10
 	burst_delay = 1
@@ -269,7 +272,7 @@
 		verbs -= /obj/item/weapon/gun/projectile/turret/verb/scope
 		return
 
-	toggle_scope(usr, 1.75) //Equal to a sniper's scope, we'll be unlikely to hit anything at this range though.
+	toggle_scope(usr, scope_zoom_amount) //Equal to a sniper's scope, we'll be unlikely to hit anything at this range though.
 
 //Detached Turret Gun Define// Every detachable turret gun needs this.
 /obj/item/weapon/gun/projectile/turret/detached

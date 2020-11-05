@@ -328,10 +328,10 @@
 
 /obj/screen/fullscreen/night_vision/cone
 	icon = 'icons/mob/screen_full.dmi'
-	icon_state = "impairedoverlay2"//"visioncone90-7"
+	icon_state = "nvobscure"//"visioncone90-7"
 	screen_loc = "CENTER-7,CENTER-7"
 	plane = LIGHTING_PLANE
 	layer = 11
 
 /obj/screen/fullscreen/night_vision/cone/better
-	icon_state = "impairedoverlay1"
+	icon_state = "nvobscurebetter"

@@ -1,6 +1,4 @@
 
-
-
 /obj/item/weapon/gun/projectile/m545_lmg
 	name = "\improper M545 Light Machine Gun"
 	desc = "An antiquated light machine gun. Takes 7.62mm box type magazines"
@@ -8,13 +6,12 @@
 	icon_state = "Innie 30cal LMG - Full Closed"
 	item_state = "30cal"
 	caliber = "7.62mm"
-	slot_flags = 0	//too unwieldy to carry on your back
+	slot_flags = SLOT_BACK
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/m545/m118
 	allowed_magazines = list(/obj/item/ammo_magazine/m545)
 	//fire_sound = 'code/modules/halo/sounds/MagnumShotSoundEffect.ogg'
 	reload_sound = 'code/modules/halo/sounds/UNSC_Saw_Reload_Sound_Effect.ogg'
-	handle_casings = CASELESS
 	one_hand_penalty = -1
 	hud_bullet_reffile = 'code/modules/halo/icons/hud_display/hud_bullet_2x5.dmi'
 	w_class = ITEM_SIZE_HUGE
@@ -22,6 +19,11 @@
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
+	move_delay_malus = 1.5
+	slowdown_general = 1
+
+	sustain_time = 4.5 SECONDS
+	sustain_delay = 1.5
 
 /obj/item/weapon/gun/projectile/m545_lmg/update_icon()
 	. = ..()

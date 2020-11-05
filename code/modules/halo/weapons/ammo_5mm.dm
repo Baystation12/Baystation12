@@ -5,8 +5,8 @@
 	projectile_type = /obj/item/projectile/bullet/m443
 
 /obj/item/projectile/bullet/m443
-	damage = 20
-	shield_damage = 20
+	damage = 25
+	shield_damage = 15
 
 /obj/item/ammo_casing/m443_rubber
 	desc = "A 5mm rubber bullet casing."
