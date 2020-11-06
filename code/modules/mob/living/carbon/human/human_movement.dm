@@ -36,6 +36,8 @@
 		var/total_item_slowdown = -1
 		for(var/slot = slot_first to slot_last)
 			var/obj/item/I = get_equipped_item(slot)
+			if(istype(I, /obj/item/clothing/shoes/magboots) && src.is_floating) // magboots shouldn't slow you down if you can't touch the floor
+				continue	
 			if(istype(I))
 				var/item_slowdown = 0
 				item_slowdown += I.slowdown_general
