@@ -9,20 +9,21 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - name: Login Docker Registry
-      run: docker login -u $REG_USER -p $REG_PASS $REG_URL
-      env:
-        REG_USER: ${{ secrets.REG_USER }}
-        REG_PASS: ${{ secrets.REG_PASS }}
-        REG_URL: ${{ secrets.REG_URL }}
+    - uses: actions/checkout@v2
     - name: Clone custom items
-      run: git clone --depth 1 https://github.com/Baystation12/custom-items
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag $IMAGE_NAME --build-arg BUILD_ARGS=-Icustom-items/inc.dm
+      uses: actions/checkout@v2
+      with:
+        repository: Baystation12/custom-items
+        path: custom-items
+    - name: Build and Publish Image to Registry
       env:
-        IMAGE_NAME: ${{ secrets.IMAGE_NAME }}
-    - name: Push the Docker image
-      run: docker push $IMAGE_NAME
-      env:
-        IMAGE_NAME: ${{ secrets.IMAGE_NAME }}
+        BUILD_ARGS: -Icustom-items/inc.dm
+      uses: elgohr/Publish-Docker-Github-Action@master
+      with:
+        name: ${{ secrets.IMAGE_NAME }}
+        username: ${{ secrets.REG_USER }}
+        password: ${{ secrets.REG_PASS }}
+        tags: "latest"
+        buildargs: BUILD_ARGS
+        registry: ${{ secrets.REG_URL }}
+        cache: true
