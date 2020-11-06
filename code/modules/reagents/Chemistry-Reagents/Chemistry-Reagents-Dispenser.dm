@@ -269,6 +269,7 @@
 	reagent_state = SOLID
 	color = "#a0a0a0"
 	value = DISPENSER_REAGENT_VALUE
+	should_admin_log = TRUE
 
 /datum/reagent/potassium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(volume > 3)
@@ -283,6 +284,7 @@
 	reagent_state = SOLID
 	color = "#c7c7c7"
 	value = DISPENSER_REAGENT_VALUE
+	should_admin_log = TRUE
 
 /datum/reagent/radium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.apply_damage(10 * removed, IRRADIATE, armor_pen = 100) // Radium may increase your chances to cure a disease
@@ -307,6 +309,7 @@
 	var/meltdose = 10 // How much is needed to melt
 	var/max_damage = 40
 	value = DISPENSER_REAGENT_VALUE
+	should_admin_log = TRUE
 
 /datum/reagent/acid/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.take_organ_damage(0, removed * power)

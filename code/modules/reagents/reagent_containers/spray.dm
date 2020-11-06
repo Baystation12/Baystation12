@@ -41,15 +41,16 @@
 	Spray_at(A, user, proximity)
 
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
-
-	if(reagents.has_reagent(/datum/reagent/acid))
-		log_and_message_admins("fired sulphuric acid from \a [src].", user)
-	if(reagents.has_reagent(/datum/reagent/acid/polyacid))
-		log_and_message_admins("fired Polyacid from \a [src].", user)
 	return
 
 /obj/item/weapon/reagent_containers/spray/proc/Spray_at(atom/A as mob|obj, mob/user as mob, proximity)
 	playsound(src.loc, 'sound/effects/spray2.ogg', 50, 1, -6)
+	if (reagents.should_admin_log())
+		var/contained = reagents.get_reagents()
+		if (istype(A, /mob))
+			admin_attack_log(user, A, "Used \the [src] containing [contained] to spray the victim", "Was sprayed by \the [src] containing [contained]", "used \the [src] containing [contained] to spray")
+		else
+			admin_attacker_log(user, "Used \the [name] containing [contained] to spray \the [A]")
 	if (A.density && proximity)
 		reagents.splash(A, amount_per_transfer_from_this)
 		if(A == user)

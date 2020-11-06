@@ -66,9 +66,11 @@
 
 		if(reagents.total_volume)
 			if(H.reagents)
+				var/should_admin_log = reagents.should_admin_log()
 				var/contained_reagents = reagents.get_reagents()
 				var/trans = reagents.trans_to_mob(H, 15, CHEM_BLOOD)
-				admin_inject_log(usr, H, src, contained_reagents, trans)
+				if (should_admin_log)
+					admin_inject_log(usr, H, src, contained_reagents, trans)
 	return
 
 //Sleepy Ring

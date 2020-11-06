@@ -49,9 +49,11 @@
 			var/mob/living/L = hit_atom
 			//unfortuately we don't know where the dart will actually hit, since that's done by the parent.
 			if(L.can_inject(null, ran_zone(TT.target_zone, 30)) == CAN_INJECT && syringe.reagents)
+				var/should_admin_log = syringe.reagents.should_admin_log()
 				var/reagent_log = syringe.reagents.get_reagents()
-				syringe.reagents.trans_to_mob(L, 15, CHEM_BLOOD)
-				admin_inject_log(TT.thrower? TT.thrower : null, L, src, reagent_log, 15, violent=1)
+				var/trans = syringe.reagents.trans_to_mob(L, 15, CHEM_BLOOD)
+				if (should_admin_log)
+					admin_inject_log(TT.thrower? TT.thrower : null, L, src, reagent_log, trans, violent=1)
 
 		syringe.break_syringe(iscarbon(hit_atom)? hit_atom : null)
 		syringe.update_icon()

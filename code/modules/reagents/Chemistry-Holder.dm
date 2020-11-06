@@ -473,6 +473,12 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 
 	return trans_to_holder(target.reagents, amount, multiplier, copy)
 
+/datum/reagents/proc/should_admin_log()
+	for (var/datum/reagent/R in reagent_list)
+		if (R.should_admin_log)
+			return TRUE
+	return FALSE
+
 /* Atom reagent creation - use it all the time */
 
 /atom/proc/create_reagents(var/max_vol)

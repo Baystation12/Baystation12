@@ -24,9 +24,11 @@
 				return
 		if(reagents.total_volume)
 			if(M.reagents)
+				var/should_admin_log = reagents.should_admin_log()
 				var/contained_reagents = reagents.get_reagents()
 				var/trans = reagents.trans_to_mob(M, 30, CHEM_BLOOD)
-				admin_inject_log(user, M, src, contained_reagents, trans)
+				if (should_admin_log)
+					admin_inject_log(user, M, src, contained_reagents, trans)
 
 /*
  * Sleepy Pens
