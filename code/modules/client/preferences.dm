@@ -23,6 +23,9 @@ datum/preferences
 	var/last_ip
 	var/last_id
 
+	// Populated with an error message if loading fails.
+	var/load_failed = null
+
 	//game-preferences
 	var/lastchangelog = ""				//Saved changlog filesize to detect if there was a change
 
@@ -59,21 +62,30 @@ datum/preferences
 			is_guest = TRUE
 		else
 			load_data()
+
 	sanitize_preferences()
 	if(client && istype(client.mob, /mob/new_player))
 		var/mob/new_player/np = client.mob
 		np.new_player_panel(TRUE)
 
 /datum/preferences/proc/load_data()
-	var/pref_path = get_path(client.ckey, "preferences")
-	if(!fexists(pref_path))
-		// Try to migrate legacy savefile-based preferences
-		if(!migrate_legacy_preferences())
-			// If there's no old file or migration fails, there'll be nothing to load.
-			return
+	load_failed = null
+	var/stage = "pre"
+	try
+		var/pref_path = get_path(client_ckey, "preferences")
+		if(!fexists(pref_path))
+			stage = "migrate"
+			// Try to migrate legacy savefile-based preferences
+			if(!migrate_legacy_preferences())
+				// If there's no old save, there'll be nothing to load.
+				return
 
-	load_preferences()
-	load_character()
+		stage = "load"
+		load_preferences()
+		load_character()
+	catch(var/exception/E)
+		load_failed = "{[stage]} [E]"
+		throw E
 
 /datum/preferences/proc/migrate_legacy_preferences()
 	// We make some assumptions here:
@@ -124,15 +136,16 @@ datum/preferences
 
 	var/dat = "<html><body><center>"
 
-	if(!is_guest)
+	if(is_guest)
+		dat += "Please create an account to save your preferences. If you have an account and are seeing this, please adminhelp for assistance."
+	else if(load_failed)
+		dat += "Loading your savefile failed. Please adminhelp for assistance."
+	else
 		dat += "Slot - "
 		dat += "<a href='?src=\ref[src];load=1'>Load slot</a> - "
 		dat += "<a href='?src=\ref[src];save=1'>Save slot</a> - "
 		dat += "<a href='?src=\ref[src];resetslot=1'>Reset slot</a> - "
 		dat += "<a href='?src=\ref[src];reload=1'>Reload slot</a>"
-
-	else
-		dat += "Please create an account to save your preferences. If you have an account and are seeing this, please adminhelp for assistance."
 
 	dat += "<br>"
 	dat += player_setup.header()
