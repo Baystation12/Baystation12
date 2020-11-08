@@ -22,8 +22,6 @@
 	var/list/calibration //what it is
 	var/list/calexpected //what is should be
 
-	var/range = 1 //range of the explosion
-	var/strength = 1 //strength of the explosion
 	var/next_shot = 0 //round time where the next shot can start from
 	var/const/coolinterval = 2 MINUTES //time to wait between safe shots in deciseconds
 
@@ -130,8 +128,6 @@ obj/machinery/computer/ship/disperser/proc/is_valid_setup()
 		data["calibration"] = calibration
 		data["overmapdir"] = overmapdir
 		data["cal_accuracy"] = cal_accuracy()
-		data["strength"] = strength
-		data["range"] = range
 		data["next_shot"] = round(get_next_shot_seconds())
 		data["nopower"] = !data["faillink"] && (!front.powered() || !middle.powered() || !back.powered())
 		data["skill"] = user.get_skill_value(core_skill) > skill_offset
@@ -173,18 +169,6 @@ obj/machinery/computer/ship/disperser/proc/is_valid_setup()
 	if(href_list["skill_calibration"])
 		for(var/i = 1 to min(caldigit, user.get_skill_value(core_skill) - skill_offset))
 			calibration[i] = calexpected[i]
-
-	if(href_list["strength"])
-		var/input = input("1-5", "disperser strength", 1) as num|null
-		if(input && CanInteract(user, state))
-			strength = sanitize_integer(input, 1, 5, 1)
-			middle.idle_power_usage = strength * range * 100
-
-	if(href_list["range"])
-		var/input = input("1-5", "disperser radius", 1) as num|null
-		if(input && CanInteract(user, state))
-			range = sanitize_integer(input, 1, 5, 1)
-			middle.idle_power_usage = strength * range * 100
 
 	if(href_list["fire"])
 		fire(user)
