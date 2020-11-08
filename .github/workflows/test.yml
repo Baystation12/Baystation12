@@ -37,7 +37,7 @@ jobs:
         run: |
           wget https://raw.githubusercontent.com/DiscordHooks/github-actions-discord-webhook/master/send.sh
           chmod +x send.sh
-          ./sendsh failure $WEBHOOK_URL
+          ./send.sh failure $WEBHOOK_URL
   Code:
     runs-on: ubuntu-latest
     steps:
@@ -63,7 +63,7 @@ jobs:
         run: |
           wget https://raw.githubusercontent.com/DiscordHooks/github-actions-discord-webhook/master/send.sh
           chmod +x send.sh
-          ./sendsh failure $WEBHOOK_URL
+          ./send.sh failure $WEBHOOK_URL
   Maps:
     runs-on: ubuntu-latest
     strategy:
@@ -91,4 +91,4 @@ jobs:
         run: |
           wget https://raw.githubusercontent.com/DiscordHooks/github-actions-discord-webhook/master/send.sh
           chmod +x send.sh
-          ./sendsh failure $WEBHOOK_URL
+          ./send.sh failure $WEBHOOK_URL
