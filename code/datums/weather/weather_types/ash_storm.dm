@@ -80,13 +80,14 @@
 	sound_wi.stop()
 
 /datum/weather/ash_storm/proc/is_ash_immune(atom/L)
+	var/min_thermal_protection = 0.9
 	while (L && !isturf(L))
 		if(istype(L, /mob/living/exosuit)) //Mechs are immune
 			return TRUE
 		if(ishuman(L)) //Are you immune?
 			var/mob/living/carbon/human/H = L
 			var/thermal_protection = H.get_thermal_protection()
-			if(thermal_protection >= 0.9) //TODO: properly define a value for this
+			if(thermal_protection >= min_thermal_protection)
 				return TRUE
 		if(isliving(L))// if we're a non immune mob inside an immune mob we have to reconsider if that mob is immune to protect ourselves
 			var/mob/living/the_mob = L
