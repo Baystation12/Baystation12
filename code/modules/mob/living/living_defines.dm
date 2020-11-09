@@ -52,3 +52,5 @@
 	var/last_resist = 0
 
 	var/ghosted = 0 //For checks as to why a player has disconnected (can AI take over? etc.)
+
+	var/list/weather_immunities

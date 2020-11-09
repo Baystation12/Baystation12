@@ -36,6 +36,16 @@
 	..()
 	return QDEL_HINT_HARDDEL
 
+/area/proc/update_icon_state()
+	var/weather_icon
+	for(var/V in SSweather.processing)
+		var/datum/weather/W = V
+		if(W.stage != END_STAGE && (src in W.impacted_areas))
+			W.update_areas()
+			weather_icon = TRUE
+	if(!weather_icon)
+		icon_state = null
+
 // Changes the area of T to A. Do not do this manually.
 // Area is expected to be a non-null instance.
 /proc/ChangeArea(var/turf/T, var/area/A)

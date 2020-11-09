@@ -49,3 +49,25 @@ INITIALIZE_IMMEDIATE(/obj/effect/statclick)
 			new /datum/controller/failsafe()
 
 	message_admins("Admin [key_name_admin(usr)] has restarted the [controller] controller.")
+
+/client/proc/run_weather()
+	set category = "Admin"
+	set name = "Run Weather"
+	set desc = "Triggers a weather event on the z-level you choose."
+
+	if(!holder)
+		return
+
+	var/weather_type = input("Choose a weather", "Weather")  as null|anything in sortList(subtypesof(/datum/weather))
+	if(!weather_type)
+		return
+
+	var/turf/T = get_turf(mob)
+	var/z_level = input("Z-Level to target?", "Z-Level", T?.z) as num|null
+	if(!isnum(z_level))
+		return
+
+	SSweather.run_weather(weather_type, z_level)
+
+	message_admins("[key_name_admin(usr)] started weather of type [weather_type] on the z-level [z_level].")
+	log_admin("[key_name(usr)] started weather of type [weather_type] on the z-level [z_level].")

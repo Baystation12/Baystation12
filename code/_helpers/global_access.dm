@@ -155,6 +155,8 @@
 			return global.SSxenoarch;
 		if("SSzcopy")
 			return global.SSzcopy;
+		if("SSweather")
+			return global.SSweather;
 		if("Tier1Runes")
 			return global.Tier1Runes;
 		if("Tier2Runes")
@@ -915,7 +917,7 @@
 			return global.z_levels;
 		if("zone_blocked")
 			return global.zone_blocked;
-		
+
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ANTAG_FREQS")
@@ -1072,6 +1074,8 @@
 			global.SSxenoarch=newval;
 		if("SSzcopy")
 			global.SSzcopy=newval;
+		if("SSweather")
+			global.SSweather=newval;
 		if("Tier1Runes")
 			global.Tier1Runes=newval;
 		if("Tier2Runes")
@@ -1832,7 +1836,7 @@
 			global.z_levels=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-		
+
 /var/list/_all_globals=list(
 	"ANTAG_FREQS",
 	"AWAY_FREQS_ASSIGNED",
@@ -1911,6 +1915,7 @@
 	"SSwebhooks",
 	"SSxenoarch",
 	"SSzcopy",
+	"SSweather",
 	"Tier1Runes",
 	"Tier2Runes",
 	"Tier3Runes",
