@@ -3400,7 +3400,7 @@
 	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/skrellsnacks
-	name = "\improper SkrellSnax"
+	name = "SkrellSnax"
 	desc = "Cured fungus shipped all the way from Jargon 4, almost like jerky! Almost."
 	icon_state = "skrellsnacks"
 	filling_color = "#a66829"
