@@ -64,7 +64,7 @@
 	var/impacted_loc = loc
 	if(!ismob(loc))
 		new /obj/effect/decal/cleanable/liquid_fuel/flamethrower_fuel(loc)
-		new /obj/effect/fire(impacted_loc)
+		new /obj/effect/fire/noheat(impacted_loc)
 
 /obj/item/ammo_magazine/na4_tank
 	name = "\improper Napalm Tank"
