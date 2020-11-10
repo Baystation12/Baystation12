@@ -2446,8 +2446,7 @@
 /obj/item/stack/material/gold/ten,
 /obj/machinery/alarm{
 	dir = 8;
-	pixel_x = 25;
-	)
+	pixel_x = 25
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/vault)
@@ -8491,6 +8490,11 @@
 /obj/effect/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/operationshall)
+"Qb" = (
+/obj/structure/lattice,
+/obj/effect/overmap/visitable/sector/miningstation,
+/turf/space,
+/area/space)
 "Qf" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 9
@@ -19149,7 +19153,7 @@ eE
 eR
 fn
 dY
-ao
+Qb
 gi
 dX
 mk
