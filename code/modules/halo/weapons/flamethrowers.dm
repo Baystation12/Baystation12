@@ -70,7 +70,7 @@
 	. = ..()
 	var/targturf = target
 	if(!isturf(target))
-		targturf = target.get_turf()
+		targturf = get_turf(target)
 	kill_count = get_dist(loc,targturf)
 
 
