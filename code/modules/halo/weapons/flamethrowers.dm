@@ -66,6 +66,14 @@
 		new /obj/effect/decal/cleanable/liquid_fuel/flamethrower_fuel(loc)
 		new /obj/effect/fire/noheat(impacted_loc)
 
+/obj/item/projectile/bullet/fire/launch_from_gun(var/atom/target)
+	. = ..()
+	var/targturf = target
+	if(!isturf(target))
+		targturf = target.get_turf()
+	kill_count = get_dist(loc,targturf)
+
+
 /obj/item/ammo_magazine/na4_tank
 	name = "\improper Napalm Tank"
 	desc = "A tank of Napalm for the NA4/Defoliant Projector"
