@@ -97,3 +97,10 @@
  * Parameters: var/obj/structure/closet/crate/sold, var/area/shuttle
  */
 /hook/sell_crate
+
+/**
+ * Area entered hook.
+ * Called in area.dm when a mob enters an area.
+ * Parameters: var/mob/living
+*/
+/hook/area_entered

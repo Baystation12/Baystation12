@@ -174,7 +174,7 @@ datum/sound_token/proc/Mute()
 		for (var/mob/M in GLOB.player_list)
 			if (M.client && get_area(M.loc) == source)
 				testing("Adding [M] as a listener")
-				current_listeners += M.client
+				current_listeners += M
 	else
 		current_listeners = all_hearers(source, range)
 

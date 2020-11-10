@@ -93,6 +93,8 @@
 			//PlayLoopingSound(var/atom/source, var/sound_id, var/sound, var/volume, var/range, var/falloff = 1, var/echo, var/frequency, var/prefer_mute)
 			testing("Playing sound")
 			sound_token = GLOB.sound_player.PlayLoopingSound(thing, sound_id, S, volume)
+			sound_token.PrivLocateListeners(current_turfs = get_area_turfs(thing))
+
 
 /datum/looping_sound/proc/get_sound(starttime, _mid_sounds)
 	. = _mid_sounds || mid_sounds
