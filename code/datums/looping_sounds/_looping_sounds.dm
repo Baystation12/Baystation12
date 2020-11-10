@@ -34,6 +34,8 @@
 	var/falloff_exponent
 	var/timerid
 	var/falloff_distance
+	var/sound_id
+	var/datum/sound_token/sound_token
 
 /datum/looping_sound/New(list/_output_atoms=list(), start_immediately=FALSE, _direct=FALSE)
 	if(!mid_sounds)
@@ -52,10 +54,9 @@
 	return ..()
 
 /datum/looping_sound/proc/start(atom/add_thing)
+	testing("Starting a sound! [add_thing], [timerid]")
 	if(add_thing)
 		output_atoms |= add_thing
-	if(timerid)
-		return
 	on_start()
 
 /datum/looping_sound/proc/stop(atom/remove_thing)
@@ -63,44 +64,48 @@
 		output_atoms -= remove_thing
 	if(!timerid)
 		return
+
+	QDEL_NULL(sound_token)
+	sound_id = null
 	on_stop()
-	deltimer(timerid)
-	timerid = null
+	if (timerid)
+		deltimer(timerid)
+		timerid = null
 
-/datum/looping_sound/proc/sound_loop(starttime)
-	if(max_loops && world.time >= starttime + mid_length * max_loops)
-		stop()
-		return
-	if(!chance || prob(chance))
-		play(get_sound(starttime))
-	if(!timerid)
-		timerid = addtimer(CALLBACK(src, .proc/sound_loop, world.time), mid_length, TIMER_CLIENT_TIME | TIMER_STOPPABLE | TIMER_LOOP)
+/datum/looping_sound/proc/start_mid_sound(starttime)
+	if (!chance || prob(chance))
+		play(get_sound())
 
-/datum/looping_sound/proc/play(soundfile, volume_override)
+/datum/looping_sound/proc/play(soundfile, volume_override, no_loop=FALSE)
+	testing("Trying to play sound: [soundfile]")
+
 	var/list/atoms_cache = output_atoms
 	var/sound/S = sound(soundfile)
-	if(direct)
-		S.volume = volume_override || volume //Use volume as fallback if theres no override
+	sound_id = "[type]_[sequential_id(type)]"
+	S.volume = volume_override || volume //Use volume as fallback if theres no override
 	for(var/i in 1 to atoms_cache.len)
 		var/atom/thing = atoms_cache[i]
-		if(direct)
+		if(no_loop)
 			sound_to(thing, S)
 		else
 			//playsound(var/atom/source, soundin, vol as num, vary, extrarange as num, falloff, var/is_global, var/frequency, var/is_ambiance = 0)
-			playsound(thing, S, volume, vary, extra_range, 0, FALSE, null, TRUE)
+			//playsound(thing, S, volume, vary, extra_range, 0, FALSE, null, TRUE)
+			//PlayLoopingSound(var/atom/source, var/sound_id, var/sound, var/volume, var/range, var/falloff = 1, var/echo, var/frequency, var/prefer_mute)
+			testing("Playing sound")
+			sound_token = GLOB.sound_player.PlayLoopingSound(thing, sound_id, S, volume)
 
 /datum/looping_sound/proc/get_sound(starttime, _mid_sounds)
 	. = _mid_sounds || mid_sounds
-	while(!isfile(.) && !isnull(.))
+	while (!isfile(.) && !isnull(.))
 		. = pickweight(.)
 
 /datum/looping_sound/proc/on_start()
 	var/start_wait = 0
-	if(start_sound)
+	if (start_sound)
 		play(start_sound, start_volume)
 		start_wait = start_length
-	addtimer(CALLBACK(src, .proc/sound_loop), start_wait, TIMER_CLIENT_TIME)
+	timerid = addtimer(CALLBACK(src, .proc/start_mid_sound), start_wait, TIMER_CLIENT_TIME | TIMER_STOPPABLE)
 
 /datum/looping_sound/proc/on_stop()
-	if(end_sound)
-		play(end_sound, end_volume)
+	if (end_sound)
+		play(end_sound, end_volume, TRUE)

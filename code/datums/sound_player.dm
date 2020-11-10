@@ -89,6 +89,7 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 
 /datum/sound_token/New(var/atom/source, var/sound_id, var/sound/sound, var/range = 4, var/prefer_mute = FALSE)
 	..()
+	testing("CREATING SOUND TOKEN")
 	if(!istype(source))
 		CRASH("Invalid sound source: [log_info_line(source)]")
 	if(!istype(sound))
@@ -116,7 +117,7 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 	listener_status = list()
 
 	GLOB.destroyed_event.register(source, src, /datum/proc/qdel_self)
-
+	testing("ISMOVABLE? [source], [ismovable(source)]")
 	if(ismovable(source))
 		proxy_listener = new(source, /datum/sound_token/proc/PrivAddListener, /datum/sound_token/proc/PrivLocateListeners, range, proc_owner = src)
 		proxy_listener.register_turfs()
@@ -163,13 +164,24 @@ datum/sound_token/proc/Mute()
 	GLOB.sound_player.PrivStopSound(src)
 
 /datum/sound_token/proc/PrivLocateListeners(var/list/prior_turfs, var/list/current_turfs)
+	testing("Locating listeners...")
 	if(status & SOUND_STOPPED)
 		return
 
+	var/current_listeners = list()
+	if (istype(source, /area))
+		testing("We got here BABYYYY")
+		for (var/mob/M in GLOB.player_list)
+			if (M.client && get_area(M.loc) == source)
+				testing("Adding [M] as a listener")
+				current_listeners += M.client
+	else
+		current_listeners = all_hearers(source, range)
+
 	can_be_heard_from = current_turfs
-	var/current_listeners = all_hearers(source, range)
 	var/former_listeners = listeners - current_listeners
 	var/new_listeners = current_listeners - listeners
+	testing("Listeners: [english_list(current_listeners)]")
 
 	for(var/listener in former_listeners)
 		PrivRemoveListener(listener)

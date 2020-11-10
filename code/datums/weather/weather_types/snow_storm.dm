@@ -4,13 +4,14 @@
 	probability = 90
 
 	telegraph_message = "<span class='warning'>Drifting particles of snow begin to dust the surrounding area..</span>"
-	telegraph_duration = 300
+	telegraph_duration = 650
 	telegraph_overlay = "light_snow"
+	//telegraph_sound = 'sound/weather/snowstorm/outside/wind_incoming.ogg'
 
 	weather_message = "<span class='userdanger'><i>Harsh winds pick up as dense snow begins to fall from the sky! Seek shelter!</i></span>"
 	weather_overlay = "snow_storm"
-	weather_duration_lower = 600
-	weather_duration_upper = 1500
+	weather_duration_lower = 2100
+	weather_duration_upper = 2500
 
 	end_duration = 100
 	end_message = "<span class='boldannounce'>The snowfall dies down, it should be safe to go outside again.</span>"
@@ -23,9 +24,9 @@
 
 	barometer_predictable = TRUE
 
-	var/datum/looping_sound/active_outside_snow_storm/sound_ao = new(list(), FALSE, TRUE)
-	var/datum/looping_sound/active_inside_snow_storm/sound_ai = new(list(), FALSE, TRUE)
-	// var/datum/looping_sound/weak_outside_snow_storm/sound_wo = new(list(), FALSE, TRUE)
+	var/datum/looping_sound/active_outside_snow_storm/sound_ao = new(list(), FALSE)
+	var/datum/looping_sound/active_inside_snow_storm/sound_ai = new(list(), FALSE)
+	var/datum/looping_sound/weak_outside_snow_storm/sound_wo = new(list(), FALSE)
 	// var/datum/looping_sound/weak_inside_snow_storm/sound_wi = new(list(), FALSE, TRUE)
 
 //TODO: make snowstorms just lower the overall temp of an area
@@ -54,15 +55,16 @@
 
 	sound_ao.output_atoms = outside_areas
 	sound_ai.output_atoms = inside_areas
-	// sound_wo.output_atoms = outside_areas
+	sound_wo.output_atoms = outside_areas
 	// sound_wi.output_atoms = inside_areas
 
-	// sound_wo.start()
+	sound_wo.start()
 	// sound_wi.start()
 
 /datum/weather/snow_storm/start()
 	. = ..()
-	// sound_wo.stop()
+	testing("Start")
+	sound_wo.stop()
 	// sound_wi.stop()
 
 	sound_ao.start()
@@ -70,6 +72,7 @@
 
 /datum/weather/snow_storm/wind_down()
 	. = ..()
+	testing("Wind down")
 	sound_ao.stop()
 	sound_ai.stop()
 
@@ -78,5 +81,6 @@
 
 /datum/weather/snow_storm/end()
 	. = ..()
+	testing("End")
 	// sound_wo.stop()
 	// sound_wi.stop()

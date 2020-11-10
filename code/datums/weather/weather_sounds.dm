@@ -30,7 +30,7 @@
 		)
 	mid_length = 80
 	start_sound = 'sound/weather/ashstorm/outside/weak_start.ogg'
-	start_length = 130
+	start_length = 600
 	end_sound = 'sound/weather/ashstorm/outside/weak_end.ogg'
 	volume = 50
 
@@ -52,9 +52,9 @@
 		'sound/weather/snowstorm/inside/wind_indoors2.ogg'=1
 		)
 	mid_length = 2400
-	// start_sound = 'sound/weather/snowstorm/inside/wind_indoors1.ogg'
-	// start_length = 0
-	// end_sound = 'sound/weather/snowstorm/inside/wind_indoors1.ogg'
+	start_sound = 'sound/weather/snowstorm/inside/wind_indoors1.ogg'
+	start_length = 600
+	end_sound = 'sound/weather/snowstorm/inside/wind_indoors1.ogg'
 	volume = 65
 
 /datum/looping_sound/active_outside_snow_storm
@@ -62,8 +62,13 @@
 		'sound/weather/snowstorm/outside/wind_outdoors1.ogg'=1,
 		'sound/weather/snowstorm/outside/wind_outdoors2.ogg'=1
 		)
-	mid_length = 2400
-	start_sound = 'sound/weather/snowstorm/outside/wind_incoming.ogg'
-	start_length = 300
+	mid_length = 3600
 	end_sound = 'sound/weather/snowstorm/outside/wind_end.ogg'
+	volume = 65
+
+/datum/looping_sound/weak_outside_snow_storm
+	mid_sounds = list(
+		'sound/weather/snowstorm/outside/wind_incoming.ogg'=1
+		)
+	mid_length = 650
 	volume = 65
