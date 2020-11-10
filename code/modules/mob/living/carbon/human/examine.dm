@@ -323,6 +323,38 @@
 		msg += "<span class='notice'>[jointext(show_descs, "<br>")]</span>"
 	to_chat(user, jointext(msg, null))
 
+	if(istype(user, /mob/living/carbon/human))
+		var/mob/living/carbon/human/U = user
+		if(U.species.can_make_eye_contact && distance < 4)
+			var/eyescovered = FALSE
+			for(var/obj/item/clothing/C in list(U.wear_mask, U.head, U.glasses))
+				if(C.body_parts_covered & EYES)
+					eyescovered = TRUE
+			if(!eyescovered)
+				U.handle_examine(src)
+				U.recent_examines += src //Done after so that it doesn't work with itself
+				addtimer(CALLBACK(U, .proc/removeexamine, src), 5 SECONDS)
+
+//Helper proc for the timer above.
+/mob/living/carbon/human/proc/removeexamine(item)
+	recent_examines -= item
+
+//Should be called on the mob that is doing the examining by examine() above. Checks the examined mob's recent examine list; if we are in that list, then
+//it is safe to say that they examined us recently, so we should make eye contact.
+//Returns TRUE if we successfully made eye contact, false otherwise.
+/mob/living/carbon/human/proc/handle_examine(mob/living/carbon/human/examinee)
+	if(examinee == src || !examinee.recent_examines || !examinee.recent_examines.len)
+		return FALSE
+
+	for(var/M in examinee.recent_examines)
+		if(M == src)
+			to_chat(src, SPAN_SUBTLE("You make eye contact with \the [examinee]."))
+			to_chat(examinee, SPAN_SUBTLE("You make eye contact with \the [src]."))
+			recent_examines -= examinee   //Remove them from our list
+			examinee.recent_examines -= M //Remove us from their list
+			return TRUE
+	return FALSE
+	
 //Helper procedure. Called by /mob/living/carbon/human/examine() and /mob/living/carbon/human/Topic() to determine HUD access to security and medical records.
 /proc/hasHUD(mob/M as mob, hudtype)
 	if(istype(M, /mob/living/carbon/human))

@@ -61,6 +61,7 @@
 	var/thirst_factor = DEFAULT_THIRST_FACTOR // Multiplier for thirst.
 	var/taste_sensitivity = TASTE_NORMAL      // How sensitive the species is to minute tastes.
 	var/silent_steps
+	var/can_make_eye_contact = TRUE			  // Whether or not we are able to make direct eye contact with other things.
 
 	var/min_age = 17
 	var/max_age = 70

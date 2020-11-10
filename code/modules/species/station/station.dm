@@ -262,7 +262,8 @@
 	health_hud_intensity = 2
 	hunger_factor = 3
 	thirst_factor = 0.01
-
+	can_make_eye_contact = FALSE
+	
 	min_age = 1
 	max_age = 300
 

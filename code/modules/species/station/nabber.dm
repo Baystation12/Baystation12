@@ -9,7 +9,8 @@
 	new environment."
 	hidden_from_codex = FALSE
 	silent_steps = TRUE
-
+	can_make_eye_contact = FALSE
+	
 	antaghud_offset_y = 8
 
 	assisted_langs = list(LANGUAGE_GUTTER, LANGUAGE_UNATHI_SINTA, LANGUAGE_SKRELLIAN, LANGUAGE_HUMAN_EURO, LANGUAGE_EAL, LANGUAGE_HUMAN_RUSSIAN)
