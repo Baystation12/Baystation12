@@ -47,8 +47,8 @@
 
 /obj/item/weapon/material/knife/folding/update_force()
 	if(open)
-		edge = 1
-		sharp = 1
+		edge = TRUE
+		sharp = TRUE
 		hitsound = 'sound/weapons/bladeslice.ogg'
 		w_class = ITEM_SIZE_NORMAL
 		attack_verb = list("slashed", "stabbed")

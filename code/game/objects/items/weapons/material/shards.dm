@@ -6,8 +6,8 @@
 	desc = "Made of nothing. How does this even exist?" // set based on material, if this desc is visible it's a bug (shards default to being made of glass)
 	icon_state = "large"
 	randpixel = 8
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 	w_class = ITEM_SIZE_SMALL
 	max_force = 8
 	force_divisor = 0.12 // 6 with hardness 30 (glass)

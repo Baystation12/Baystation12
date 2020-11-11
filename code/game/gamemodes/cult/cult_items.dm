@@ -4,8 +4,8 @@
 	icon = 'icons/obj/weapons/melee_physical.dmi'
 	icon_state = "cultblade"
 	item_state = "cultblade"
-	edge = 1
-	sharp = 1
+	edge = TRUE
+	sharp = TRUE
 	w_class = ITEM_SIZE_LARGE
 	force = 30
 	throwforce = 10

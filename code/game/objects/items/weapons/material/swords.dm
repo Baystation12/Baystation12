@@ -9,8 +9,8 @@
 	force_divisor = 0.5 // 30 when wielded with hardnes 60 (steel)
 	armor_penetration = 10
 	thrown_force_divisor = 0.5 // 10 when thrown with weight 20 (steel)
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	base_parry_chance = 50
@@ -19,8 +19,8 @@
 
 /obj/item/weapon/material/sword/replica
 	max_force = 10
-	edge = 0
-	sharp = 0
+	edge = FALSE
+	sharp = FALSE
 	force_divisor = 0.2
 	thrown_force_divisor = 0.2
 	worth_multiplier = 15
@@ -36,8 +36,8 @@
 
 /obj/item/weapon/material/sword/katana/replica
 	max_force = 10
-	edge = 0
-	sharp = 0
+	edge = FALSE
+	sharp = FALSE
 	force_divisor = 0.2
 	thrown_force_divisor = 0.2
 

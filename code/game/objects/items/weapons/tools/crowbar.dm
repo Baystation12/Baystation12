@@ -48,8 +48,8 @@
 	icon_state = "emergency_forcing_tool"
 	item_state = "emergency_forcing_tool"
 	force = 12
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 	throwforce = 6
 	throw_range = 5
 	w_class = ITEM_SIZE_NORMAL

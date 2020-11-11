@@ -77,8 +77,8 @@
 	max_force = 60	//for wielded
 	force_divisor = 0.6
 	unwielded_force_divisor = 0.3
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
 	applies_material_colour = 0
 	worth_multiplier = 31
@@ -112,8 +112,7 @@
 	unwielded_force_divisor = 0.20
 	thrown_force_divisor = 1.5 // 20 when thrown with weight 15 (glass)
 	throw_speed = 3
-	edge = 0
-	sharp = 1
+	sharp = TRUE
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("attacked", "poked", "jabbed", "torn", "gored")
 	default_material = MATERIAL_GLASS

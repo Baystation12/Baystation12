@@ -42,7 +42,6 @@
 	attack_verb = list("hit", "pierced", "sliced", "attacked")
 	var/drill_sound = 'sound/weapons/Genhit.ogg'
 	var/drill_verb = "drilling"
-	sharp = 0
 
 	var/excavation_amount = 200
 	var/build_from_parts = FALSE
@@ -104,7 +103,7 @@
 	digspeed = 30
 	origin_tech = list(TECH_MATERIAL = 3)
 	drill_verb = "picking"
-	sharp = 1
+	sharp = TRUE
 	build_from_parts = TRUE
 	hardware_color = COLOR_SILVER
 
@@ -116,7 +115,7 @@
 	digspeed = 20
 	origin_tech = list(TECH_MATERIAL = 4)
 	drill_verb = "picking"
-	sharp = 1
+	sharp = TRUE
 	build_from_parts = TRUE
 	hardware_color = COLOR_GOLD
 
@@ -128,7 +127,7 @@
 	digspeed = 10
 	origin_tech = list(TECH_MATERIAL = 6, TECH_ENGINEERING = 4)
 	drill_verb = "picking"
-	sharp = 1
+	sharp = TRUE
 	build_from_parts = TRUE
 	hardware_color = COLOR_DIAMOND
 
@@ -148,8 +147,7 @@
 	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 1)
 	matter = list(MATERIAL_STEEL = 50)
 	attack_verb = list("bashed", "bludgeoned", "thrashed", "whacked")
-	sharp = 0
-	edge = 1
+	edge = TRUE
 
 /obj/item/weapon/shovel/spade
 	name = "spade"
