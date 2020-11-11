@@ -120,7 +120,7 @@
 
 /decl/hierarchy/supply_pack/security/pistolammo
 	name = "Ammunition - pistol magazines"
-	contains = list(/obj/item/ammo_magazine/pistol = 4)
+	contains = list(/obj/item/ammo_magazine/pistol/double = 4)
 	cost = 30
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "pistol ammunition crate"
