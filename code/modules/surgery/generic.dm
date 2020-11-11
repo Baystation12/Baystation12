@@ -344,6 +344,8 @@
 	name = "Cut clothes"
 	allowed_tools = list(
 		/obj/item/weapon/traumashears = 100,
+		/obj/item/weapon/wirecutters = 75,
+		/obj/item/weapon/material/knife = 60
 	)
 	min_duration = 20
 	max_duration = 40
@@ -368,7 +370,8 @@
 	for(var/obj/item/clothing/C in clothes)
 		if(C.item_flags & ITEM_FLAG_THICKMATERIAL)
 			continue
-		user.visible_message(SPAN_WARNING("[user] starts cutting through \the [C]!"), SPAN_NOTICE("You start cutting through \the [C]."), "You hear fabric being snipped apart.")
+		user.visible_message(SPAN_WARNING("\the [user] starts cutting through \the [C]!"),
+			SPAN_NOTICE("You start cutting through \the [C]."), "You hear fabric being snipped apart.")
 		return	
 
 /decl/surgery_step/generic/cutclothes/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -378,11 +381,12 @@
 			continue
 		if(target.unEquip(C))
 			C.visible_message(SPAN_WARNING("\The [C] falls away!"))
+			playsound(target.loc, 'sound/weapons/shears.ogg', 15, TRUE)
 		else
 			to_chat(user, SPAN_WARNING("You can't seem to cut away \the [C]..."))
 		return
 
 /decl/surgery_step/generic/cutclothes/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message(SPAN_DANGER("[user]'s hand slips, cutting into the flesh!"), SPAN_DANGER("Your hand slips, cutting into the flesh!"))
+	user.visible_message(SPAN_DANGER("\The [user]'s hand slips, cutting into the flesh!"), SPAN_DANGER("Your hand slips, cutting into the flesh!"))
 	affected.take_external_damage(10, 0, (DAM_SHARP|DAM_EDGE), tool)

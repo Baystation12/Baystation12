@@ -145,6 +145,7 @@
 	desc = "For quickly cutting through clothing."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "traumashears"
+	hitsound = 'sound/weapons/bladeslice.ogg'
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = 10
 	w_class = ITEM_SIZE_NORMAL
@@ -154,8 +155,8 @@
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 2)
 	matter = list(MATERIAL_STEEL = 25000)
 	attack_verb = list("snipped", "slashed", "cut")
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 
 //misc, formerly from code/defines/weapons.dm
 /obj/item/weapon/bonegel
