@@ -103,6 +103,10 @@
 	name = "ammunition (stun cartridge, shotgun)"
 	path = /obj/item/ammo_casing/shotgun/stunshell
 
+/datum/fabricator_recipe/arms_ammo/hidden/flechette
+	name = "ammunition (flechette rifle)"
+	path = /obj/item/weapon/magnetic_ammo
+
 /datum/fabricator_recipe/arms_ammo/hidden/skrellian_rifle_flechette
 	name = "ammunition (skrellian rifle, flechette)"
 	path = /obj/item/weapon/magnetic_ammo/skrell
