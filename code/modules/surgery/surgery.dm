@@ -13,17 +13,18 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 /* SURGERY STEPS */
 /decl/surgery_step
 	var/name
-	var/list/allowed_tools               // type path referencing tools that can be used for this step, and how well are they suited for it
-	var/list/allowed_species             // type paths referencing races that this step applies to.
-	var/list/disallowed_species          // type paths referencing races that this step applies to.
-	var/min_duration = 0                 // duration of the step
-	var/max_duration = 0                 // duration of the step
-	var/can_infect = 0                   // evil infection stuff that will make everyone hate me
-	var/blood_level = 0                  // How much blood this step can get on surgeon. 1 - hands, 2 - full body.
-	var/shock_level = 0	                 // what shock level will this step put patient on
-	var/delicate = 0                     // if this step NEEDS stable optable or can be done on any valid surface with no penalty
-	var/surgery_candidate_flags = 0      // Various bitflags for requirements of the surgery.
-	var/strict_access_requirement = TRUE // Whether or not this surgery will be fuzzy on size requirements.
+	var/list/allowed_tools               	 // type path referencing tools that can be used for this step, and how well are they suited for it
+	var/list/allowed_species             	 // type paths referencing races that this step applies to.
+	var/list/disallowed_species          	 // type paths referencing races that this step applies to.
+	var/min_duration = FALSE                 // duration of the step
+	var/max_duration = FALSE                 // duration of the step
+	var/can_infect = FALSE                   // evil infection stuff that will make everyone hate me
+	var/blood_level = FALSE                  // How much blood this step can get on surgeon. 1 - hands, 2 - full body.
+	var/shock_level = FALSE	                 // what shock level will this step put patient on
+	var/delicate = FALSE                     // if this step NEEDS stable optable or can be done on any valid surface with no penalty
+	var/surgery_candidate_flags = FALSE      // Various bitflags for requirements of the surgery.
+	var/strict_access_requirement = TRUE 	 // Whether or not this surgery will be fuzzy on size requirements.
+	var/allow_clothing = FALSE				 // Whether or not clothing stops this surgery from working.
 
 //returns how well tool is suited for this step
 /decl/surgery_step/proc/tool_quality(obj/item/tool)
@@ -92,8 +93,8 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 					return FALSE
 			// Check if clothing is blocking access
 			var/obj/item/I = target.get_covering_equipped_item_by_zone(target_zone)
-			if(I && (I.item_flags & ITEM_FLAG_THICKMATERIAL))
-				to_chat(user,SPAN_NOTICE("The material covering this area is too thick for you to do surgery through!"))
+			if(I && (I.item_flags & ITEM_FLAG_THICKMATERIAL || !allow_clothing))
+				to_chat(user, SPAN_WARNING("The material covering this area is too thick for you to do surgery through!"))
 				return FALSE
 			return affected
 	return FALSE

@@ -6,6 +6,7 @@
  *		Surgical Drill
  *		Scalpel
  *		Circular Saw
+ *		Trauma Shears
  */
 
 /*
@@ -133,6 +134,26 @@
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 1)
 	matter = list(MATERIAL_STEEL = 20000,MATERIAL_GLASS = 10000)
 	attack_verb = list("attacked", "slashed", "sawed", "cut")
+	sharp = 1
+	edge = 1
+
+/*
+ * Trauma Shears
+ */
+/obj/item/weapon/traumashears
+	name = "trauma shears"
+	desc = "For quickly cutting through clothing."
+	icon = 'icons/obj/surgery.dmi'
+	icon_state = "traumashears"
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	force = 10
+	w_class = ITEM_SIZE_NORMAL
+	throwforce = 8
+	throw_speed = 3
+	throw_range = 6
+	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 2)
+	matter = list(MATERIAL_STEEL = 25000)
+	attack_verb = list("snipped", "slashed", "cut")
 	sharp = 1
 	edge = 1
 

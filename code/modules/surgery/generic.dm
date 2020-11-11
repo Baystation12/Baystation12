@@ -335,3 +335,54 @@
 	"<span class='warning'>Your hand slips, sawwing through the bone in [target]'s [affected.name] with \the [tool]!</span>")
 	affected.take_external_damage(30, 0, (DAM_SHARP|DAM_EDGE), used_weapon = tool)
 	affected.fracture()
+
+//////////////////////////////////////////////////////////////////
+//	clothes cutting surgery step
+//////////////////////////////////////////////////////////////////
+
+/decl/surgery_step/generic/cutclothes
+	name = "Cut clothes"
+	allowed_tools = list(
+		/obj/item/weapon/traumashears = 100,
+	)
+	min_duration = 20
+	max_duration = 40
+	surgery_candidate_flags = 0
+	allow_clothing = TRUE
+
+/decl/surgery_step/generic/cutclothes/assess_bodypart(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/list/obj/item/clothing/clothes = target.get_covering_equipped_items_by_zone(target_zone)
+	if(!clothes.len)
+		return FALSE
+	for(var/obj/item/clothing/C in clothes)
+		if(C.item_flags & ITEM_FLAG_THICKMATERIAL)
+			continue
+		return C
+	to_chat(user, SPAN_WARNING("The clothes are too thick to cut through!"))
+
+/decl/surgery_step/generic/cutclothes/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
+	return SURGERY_SKILLS_GENERIC
+
+/decl/surgery_step/generic/cutclothes/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/list/obj/item/clothing/clothes = target.get_covering_equipped_items_by_zone(target_zone)
+	for(var/obj/item/clothing/C in clothes)
+		if(C.item_flags & ITEM_FLAG_THICKMATERIAL)
+			continue
+		user.visible_message(SPAN_WARNING("[user] starts cutting through \the [C]!"), SPAN_NOTICE("You start cutting through \the [C]."), "You hear fabric being snipped apart.")
+		return	
+
+/decl/surgery_step/generic/cutclothes/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/list/obj/item/clothing/clothes = target.get_covering_equipped_items_by_zone(target_zone)
+	for(var/obj/item/clothing/C in clothes)
+		if(C.item_flags & ITEM_FLAG_THICKMATERIAL)
+			continue
+		if(target.unEquip(C))
+			C.visible_message(SPAN_WARNING("\The [C] falls away!"))
+		else
+			to_chat(user, SPAN_WARNING("You can't seem to cut away \the [C]..."))
+		return
+
+/decl/surgery_step/generic/cutclothes/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+	user.visible_message(SPAN_DANGER("[user]'s hand slips, cutting into the flesh!"), SPAN_DANGER("Your hand slips, cutting into the flesh!"))
+	affected.take_external_damage(10, 0, (DAM_SHARP|DAM_EDGE), tool)

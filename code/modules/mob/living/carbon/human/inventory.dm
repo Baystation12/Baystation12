@@ -442,3 +442,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 	if(O)
 		return get_covering_equipped_item(O.body_part)
 
+/mob/living/carbon/human/proc/get_covering_equipped_items_by_zone(var/zone)
+	var/obj/item/organ/external/O = get_organ(zone)
+	if(O)
+		return get_covering_equipped_items(O.body_part)
