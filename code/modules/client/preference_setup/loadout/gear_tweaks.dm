@@ -115,7 +115,7 @@
 	..()
 
 /datum/gear_tweak/contents/get_contents(var/metadata)
-	return "Contents: [english_list(metadata, and_text = ", ")]"
+	return "Contents: [english_list(metadata, and_text = ", ", final_comma_text = "")]"
 
 /datum/gear_tweak/contents/get_default()
 	. = list()
