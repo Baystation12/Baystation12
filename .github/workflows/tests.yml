@@ -1,0 +1,43 @@
+name: Run tests
+
+on:
+  push:
+    branches:
+      - alpha
+  pull_request:
+    branches:
+      - alpha
+    
+env:
+  BYOND_MAJOR: 513
+  BYOND_MINOR: 1536
+    
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        TEST: [CODE, WEB, MAP]
+        include:
+          - TEST: MAP
+            MAPPATH: [operation_trebuchet, slayer, firefight, crusade, stranded, first_contact, ks7_elmsville, ks7_elmsville_spaceodp, base_assault]
+    timeout-minutes: 20
+    env:
+      TEST: ${{ matrix.TEST }}
+      MAP_PATH: ${{ matrix.MAPPATH }}
+      
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache
+        uses: actions/cache@v2
+        with:
+        path: |
+          tgui/node_modules
+          $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}
+        key: ${{ runner.os }}-byond-${BYOND_MAJOR}.${BYOND_MINOR}
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install gcc-multilib g++-multilib oracle-java9-set-default
+      - name: Run tests
+        run: bash test/run-test.sh
