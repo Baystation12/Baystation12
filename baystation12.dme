@@ -3151,6 +3151,7 @@
 #include "maps\antag_spawn\ninja\ninja.dm"
 #include "maps\antag_spawn\wizard\wizard.dm"
 #include "maps\away\away_sites.dm"
+#include "maps\away\residue\residue.dm"
 #include "maps\away_sites_testing\away_sites_testing_define.dm"
 #include "maps\bearcat\bearcat_define.dm"
 #include "maps\example\example_define.dm"
