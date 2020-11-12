@@ -1,0 +1,5 @@
+author: "Shadowtail117"
+delete-after: True
+changes: 
+  - tweak: "You can now see if someone else toggles the safety of their gun within 3 tiles of you."
+  - tweak: "The sound for toggling the safety of a gun is now quieter."
