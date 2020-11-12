@@ -1,0 +1,4 @@
+author: "Mucker"
+delete-after: True
+changes: 
+  - bugfix: "Fix lunchboxes having a double comma in the listing of its contents in the loadout menu."
