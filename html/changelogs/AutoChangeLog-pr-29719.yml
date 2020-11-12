@@ -1,4 +1,0 @@
-author: "Mucker"
-delete-after: True
-changes: 
-  - bugfix: "Fix HUD items not being able to find records for characters with special symbols in their name."

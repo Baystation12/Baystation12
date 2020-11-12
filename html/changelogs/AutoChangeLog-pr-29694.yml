@@ -1,4 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - admin: "Reagent related attack logs now only appear for actually dangerous reagents."

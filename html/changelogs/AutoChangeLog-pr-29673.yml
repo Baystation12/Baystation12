@@ -1,5 +1,0 @@
-author: "juxtaposed9930"
-delete-after: True
-changes: 
-  - bugfix: "Gives science goggles their toggle button so you can turn them off while wearing them."
-  - rscadd: "Adds the new science HUD to the game and loadouts, so science too can be look cool as heck."

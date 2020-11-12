@@ -1,6 +1,0 @@
-author: "Hubblenaut"
-delete-after: True
-changes: 
-  - imageadd: "Adds new sprites for simple doors made my pawn."
-  - tweak: "Simple doors and other furniture can now be made with gold, silver, copper, bronze and plastic."
-  - tweak: "Simple doors do no longer block atmosphere."

@@ -1,5 +1,0 @@
-author: "juxtaposed9930"
-delete-after: True
-changes: 
-  - tweak: "Torch loyalist and mutineer text no longer reference an extension, and instead try to provoke more extreme behavior on both sides."
-  - tweak: "The loyalist convert verb is now just \"convert\" instead of \"convince recidivist\"."
