@@ -84,3 +84,15 @@
 
 /proc/cmp_planelayer(atom/A, atom/B)
 	return (B.plane - A.plane) || (B.layer - A.layer)
+
+/proc/cmp_mob_key(mob/A, mob/B)
+	if (!A && !B)
+		return 0
+
+	if (!A && B)
+		return -1
+
+	if (A && !B)
+		return 1
+
+	return sorttext(B.key, A.key)
