@@ -120,6 +120,11 @@
 	var/old_zone = target_zone
 	target_zone = new_sel
 	var/obj/item/organ/O = get_targeted_organ()
+
+	if (!O)
+		to_chat(assailant, SPAN_WARNING("You fail to grab \the [affecting] there as they do not have that bodypart!"))
+		return
+
 	SetName("[initial(name)] ([O.name])")
 	to_chat(assailant, SPAN_NOTICE("You are now holding \the [affecting] by \the [O]."))
 	if(!istype(get_targeted_organ(), /obj/item/organ))

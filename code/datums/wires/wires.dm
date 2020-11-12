@@ -74,6 +74,9 @@ var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown"
 
 /datum/wires/proc/Interact(var/mob/living/user)
 
+	if (!user)
+		return
+
 	var/html = null
 	if(holder && CanUse(user))
 		html = GetInteractWindow(user)
