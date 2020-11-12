@@ -35,7 +35,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt update
-          sudo apt install gcc-multilib g++-multilib openjdk-9-jdk
+          sudo apt install gcc-multilib g++-multilib openjdk-11-jdk
       - name: Run tests
         run: bash test/run-test.sh
   map-tests:
@@ -61,6 +61,6 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt update
-          sudo apt install gcc-multilib g++-multilib openjdk-9-jdk
+          sudo apt install gcc-multilib g++-multilib openjdk-11-jdk
       - name: Run tests
         run: bash test/run-test.sh
