@@ -42,7 +42,20 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        MAPPATH: [operation_trebuchet, slayer, firefight, crusade, stranded, first_contact, ks7_elmsville, ks7_elmsville_spaceodp, base_assault]
+        MAPPATH:
+          - operation_trebuchet
+          - slayer
+          - firefight
+          - crusade
+          - stranded
+          - first_contact
+          - ks7_elmsville
+          - ks7_elmsville_spaceodp
+          - base_assault
+          #- example
+          #- first_contact
+          #- geminus_city
+          #- overmap_example
     
     timeout-minutes: 20
     env:
@@ -57,7 +70,7 @@ jobs:
           path: |
             tgui/node_modules
             $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}
-          key: ${{ runner.os }}-byond-${BYOND_MAJOR}.${BYOND_MINOR}
+          key: ${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}.${{ env.BYOND_MINOR }}
       - name: Install dependencies
         run: |
           sudo apt update
