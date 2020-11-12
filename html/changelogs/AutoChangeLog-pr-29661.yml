@@ -1,0 +1,4 @@
+author: "Mucker"
+delete-after: True
+changes: 
+  - bugfix: "Fix players being able to walk through railings, onto tables, after attempting to leap to a different z-level."
