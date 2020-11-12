@@ -552,6 +552,9 @@
 		to_chat(user, "<span class='notice'>\The [src] is now set to [new_mode.name].</span>")
 
 /obj/item/weapon/gun/proc/toggle_safety(var/mob/user)
+	if (user?.is_physically_disabled())
+		return
+
 	safety_state = !safety_state
 	update_icon()
 	if(user)
