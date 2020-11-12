@@ -140,7 +140,7 @@ var/round_start_time = 0
 	return last_round_duration
 
 /hook/startup/proc/set_roundstart_hour()
-	roundstart_hour = pick(2,7,12,17)
+	roundstart_hour = rand(0, 23)
 	return 1
 
 GLOBAL_VAR_INIT(midnight_rollovers, 0)
