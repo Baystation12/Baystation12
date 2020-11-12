@@ -4,7 +4,7 @@
 	damage = 0
 	damage_type = BURN
 	damage_flags = 0
-	nodamage = 1
+	nodamage = TRUE
 
 /obj/item/projectile/change/on_hit(var/atom/change)
 	wabbajack(change)

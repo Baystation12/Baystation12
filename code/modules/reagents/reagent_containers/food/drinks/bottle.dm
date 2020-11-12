@@ -15,7 +15,8 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/New()
 	..()
-	if(isGlass) unacidable = 1
+	if (isGlass)
+		unacidable = TRUE
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/Destroy()
 	if(rag)

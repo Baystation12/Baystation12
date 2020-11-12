@@ -216,7 +216,7 @@
 	icon_state = "totem"
 	density = 1
 	anchored = 1
-	unacidable = 1
+	unacidable = TRUE
 	var/number
 
 /obj/structure/totem/Initialize()

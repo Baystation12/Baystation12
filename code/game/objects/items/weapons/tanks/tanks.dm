@@ -642,9 +642,9 @@ var/list/global/tank_gauge_cache = list()
 	base_spread = 0 //causes it to be treated as a shrapnel explosion instead of cone
 	spread_step = 20
 
-	silenced = 1
+	silenced = TRUE
 	fire_sound = null
-	no_attack_log = 1
+	no_attack_log = TRUE
 	muzzle_type = null
 	pellets = 1
 

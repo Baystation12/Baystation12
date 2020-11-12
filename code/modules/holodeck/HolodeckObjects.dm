@@ -230,7 +230,7 @@
 
 /obj/item/weapon/holo
 	damtype = PAIN
-	no_attack_log = 1
+	no_attack_log = TRUE
 
 /obj/item/weapon/holo/esword
 	icon = 'icons/obj/weapons/melee_energy.dmi'

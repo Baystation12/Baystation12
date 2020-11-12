@@ -5,7 +5,7 @@
 	damage = 0
 	damage_type = BURN
 	damage_flags = 0
-	nodamage = 1
+	nodamage = TRUE
 	var/heavy_effect_range = 1
 	var/light_effect_range = 2
 
@@ -39,7 +39,7 @@
 	damage = 0
 	damage_type = BURN
 	damage_flags = 0
-	nodamage = 1
+	nodamage = TRUE
 	var/firing_temperature = 300
 
 	on_hit(var/atom/target, var/blocked = 0)//These two could likely check temp protection on the mob
@@ -54,7 +54,7 @@
 	icon_state = "smallf"
 	damage = 0
 	damage_type = BRUTE
-	nodamage = 1
+	nodamage = TRUE
 
 	Bump(atom/A as mob|obj|turf|area, forced=0)
 		if(A == firer)
@@ -83,7 +83,7 @@
 	fire_sound = 'sound/effects/stealthoff.ogg'
 	damage = 0
 	damage_type = TOX
-	nodamage = 1
+	nodamage = TRUE
 
 	on_hit(var/atom/target, var/blocked = 0)
 		var/mob/living/M = target
@@ -116,7 +116,7 @@
 	fire_sound = 'sound/effects/stealthoff.ogg'
 	damage = 0
 	damage_type = TOX
-	nodamage = 1
+	nodamage = TRUE
 	var/decl/plantgene/gene = null
 
 /obj/item/projectile/energy/florayield
@@ -125,7 +125,7 @@
 	fire_sound = 'sound/effects/stealthoff.ogg'
 	damage = 0
 	damage_type = TOX
-	nodamage = 1
+	nodamage = TRUE
 
 	on_hit(var/atom/target, var/blocked = 0)
 		var/mob/M = target
@@ -151,8 +151,8 @@
 	name = "bullet"
 	icon_state = "bullet"
 	damage = 1 // stop trying to murderbone with a fake gun dumbass!!!
-	embed = 0 // nope
-	nodamage = 1
+	embed = FALSE // nope
+	nodamage = TRUE
 	damage_type = PAIN
 	damage_flags = 0
 	muzzle_type = /obj/effect/projectile/bullet/muzzle

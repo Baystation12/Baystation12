@@ -5,7 +5,7 @@
 	desc = "A display case for prized possessions. It taunts you to kick it."
 	density = 1
 	anchored = 1
-	unacidable = 1//Dissolving the case would also delete the gun.
+	unacidable = TRUE
 	alpha = 150
 	var/health = 14
 	var/destroyed = 0

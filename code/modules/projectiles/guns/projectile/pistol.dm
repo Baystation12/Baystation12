@@ -137,35 +137,41 @@
 	item_state = null
 	w_class = ITEM_SIZE_SMALL
 	caliber = CALIBER_PISTOL_SMALL
-	silenced = 0
 	fire_delay = 4
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2, TECH_ESOTERIC = 2)
 	magazine_type = /obj/item/ammo_magazine/pistol/small
 	allowed_magazines = /obj/item/ammo_magazine/pistol/small
+	var/obj/item/weapon/silencer/silencer
 
-/obj/item/weapon/gun/projectile/pistol/holdout/attack_hand(mob/user as mob)
+/obj/item/weapon/gun/projectile/pistol/holdout/attack_hand(mob/user)
 	if(user.get_inactive_hand() == src)
 		if(silenced)
 			if(user.l_hand != src && user.r_hand != src)
 				..()
 				return
-			to_chat(user, "<span class='notice'>You unscrew [silenced] from [src].</span>")
-			user.put_in_hands(silenced)
-			silenced = initial(silenced)
+			if (silencer)
+				to_chat(user, SPAN_NOTICE("You unscrew \the [silencer] from \the [src]."))
+				user.put_in_hands(silencer)
+				silencer = null
+			silenced = FALSE
 			w_class = initial(w_class)
 			update_icon()
 			return
 	..()
 
-/obj/item/weapon/gun/projectile/pistol/holdout/attackby(obj/item/I as obj, mob/user as mob)
+/obj/item/weapon/gun/projectile/pistol/holdout/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/weapon/silencer))
 		if(user.l_hand != src && user.r_hand != src)	//if we're not in his hands
-			to_chat(user, "<span class='notice'>You'll need [src] in your hands to do that.</span>")
+			to_chat(user, SPAN_WARNING("You'll need \the [src] in your hands to do that."))
+			return
+		if (silenced)
+			to_chat(user, SPAN_WARNING("\The [src] is already silenced."))
 			return
 		if(!user.unEquip(I, src))
 			return//put the silencer into the gun
-		to_chat(user, "<span class='notice'>You screw [I] onto [src].</span>")
-		silenced = I	//dodgy?
+		to_chat(user, SPAN_NOTICE("You screw \the [I] onto \the [src]."))
+		silenced = TRUE
+		silencer = I
 		w_class = ITEM_SIZE_NORMAL
 		update_icon()
 		return

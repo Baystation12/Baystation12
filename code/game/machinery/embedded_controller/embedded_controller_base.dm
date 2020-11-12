@@ -48,7 +48,7 @@
 	icon_state = "airlock_control_off"
 	power_channel = ENVIRON
 	density = 0
-	unacidable = 1
+	unacidable = TRUE
 	var/frequency = 1379
 	var/radio_filter = null
 	var/datum/radio_frequency/radio_connection
