@@ -13151,9 +13151,8 @@
 	cycle_to_external_air = 1;
 	frequency = 1331;
 	id_tag = "aquila_shuttle";
-	pixel_x = 0;
 	pixel_y = 24;
-	req_access = list("ACCESS_TORCH_AQUILA");
+	req_access = list("ACCESS_TORCH_CREW");
 	tag_exterior_sensor = "aquila_shuttle_sensor_external"
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
