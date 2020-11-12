@@ -1,0 +1,4 @@
+author: "Mucker"
+delete-after: True
+changes: 
+  - bugfix: "Fix MC being crashed by clicking \"Reconnect\" on unlinked consoles."
