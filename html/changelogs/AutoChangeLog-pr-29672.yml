@@ -1,0 +1,4 @@
+author: "juxtaposed9930"
+delete-after: True
+changes: 
+  - tweak: "Shuttle-elevators like the Skipjack and ERT shuttle now have a base move time of 120 instead of 240."
