@@ -331,6 +331,7 @@
 #include "code\datums\music_tracks\absconditus.dm"
 #include "code\datums\music_tracks\ambispace.dm"
 #include "code\datums\music_tracks\clouds_of_fire.dm"
+#include "code\datums\music_tracks\CloudsofNeptune.dm"
 #include "code\datums\music_tracks\comet_haley.dm"
 #include "code\datums\music_tracks\df_theme.dm"
 #include "code\datums\music_tracks\dilbert.dm"
