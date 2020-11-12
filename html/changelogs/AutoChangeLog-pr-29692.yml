@@ -1,0 +1,7 @@
+author: "Hubblenaut"
+delete-after: True
+changes: 
+  - rscdel: "Removes the wall emergency lockers from the Bearcat."
+  - bugfix: "Fixes some atmospheric inconsistencies on the Bearcat."
+  - maptweak: "Fixes wall objects on the Bearcat blocking each other."
+  - rscadd: "Adds an oxygen canister to the Bearcat's EVA storage."
