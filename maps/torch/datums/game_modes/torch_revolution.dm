@@ -26,9 +26,6 @@
 
 	faction = "mutiny"
 
-	blacklisted_jobs = list(/datum/job/ai, /datum/job/cyborg, /datum/job/submap)
-	restricted_jobs = list(/datum/job/captain, /datum/job/hop, /datum/job/hos, /datum/job/chief_engineer, /datum/job/rd, /datum/job/cmo)
-	protected_jobs = list(/datum/job/officer)
 
 /datum/antagonist/loyalists
 
@@ -36,9 +33,6 @@
 	victory_text = "The Torch is free of the mutineers, although the cost has yet to be discovered in full."
 	loss_text = "The mutineers have won; the Torch will never be the same."
 
-	blacklisted_jobs = list(/datum/job/ai, /datum/job/cyborg, /datum/job/submap)
-	restricted_jobs = list(/datum/job/captain, /datum/job/hop, /datum/job/hos, /datum/job/chief_engineer, /datum/job/rd, /datum/job/cmo)
-	protected_jobs = list(/datum/job/officer)
 
 /datum/antagonist/loyalists/Initialize()
 	..()
