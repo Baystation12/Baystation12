@@ -15,7 +15,7 @@
 	var/obj/screen/overlay = null
 	var/obj/item/clothing/glasses/hud/hud = null	// Hud glasses, if any
 	var/electric = FALSE //if the glasses should be disrupted by EMP
-	
+
 	var/toggle_on_message //set these in initialize if you want messages other than about the optical matrix
 	var/toggle_off_message
 
@@ -117,6 +117,7 @@
 	item_state = "glasses"
 	hud_type = HUD_SCIENCE
 	toggleable = TRUE
+	action_button_name = "Toggle Goggles"
 	electric = TRUE
 
 /obj/item/clothing/glasses/science/prescription
