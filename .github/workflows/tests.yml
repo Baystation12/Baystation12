@@ -30,7 +30,7 @@ jobs:
         with:
           path: |
             tgui/node_modules
-            $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}
+            ~/BYOND-${{ env.BYOND_MAJOR }}.${{ env.BYOND_MINOR }}
           key: ${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}.${{ env.BYOND_MINOR }}
       - name: Install dependencies
         run: |
@@ -69,7 +69,7 @@ jobs:
         with:
           path: |
             tgui/node_modules
-            $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}
+            ~/BYOND-${{ env.BYOND_MAJOR }}.${{ env.BYOND_MINOR }}
           key: ${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}.${{ env.BYOND_MINOR }}
       - name: Install dependencies
         run: |
