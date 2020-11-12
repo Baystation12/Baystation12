@@ -59,6 +59,8 @@
 	var/scent_descriptor = SCENT_DESC_SMELL
 	var/scent_range = 1
 
+	var/should_admin_log = FALSE
+
 /datum/reagent/New(var/datum/reagents/holder)
 	if(!istype(holder))
 		CRASH("Invalid reagents holder: [log_info_line(holder)]")

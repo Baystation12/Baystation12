@@ -41,7 +41,8 @@
 			return
 		user.visible_message(SPAN_WARNING("[user] forces [M] to swallow \the [src]."))
 		var/contained = reagentlist()
-		admin_attack_log(user, M, "Fed the victim with [name] (Reagents: [contained])", "Was fed [src] (Reagents: [contained])", "used [src] (Reagents: [contained]) to feed")
+		if (reagents.should_admin_log())
+			admin_attack_log(user, M, "Fed the victim with [name] (Reagents: [contained])", "Was fed [src] (Reagents: [contained])", "used [src] (Reagents: [contained]) to feed")
 		if(reagents.total_volume)
 			reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
 		qdel(src)
@@ -58,7 +59,8 @@
 			return
 		to_chat(user, "<span class='notice'>You dissolve \the [src] in [target].</span>")
 
-		admin_attacker_log(user, "spiked \a [target] with a pill. Reagents: [reagentlist()]")
+		if (reagents.should_admin_log())
+			admin_attacker_log(user, "spiked \a [target] with a pill. Reagents: [reagentlist()]")
 		reagents.trans_to(target, reagents.total_volume)
 		for(var/mob/O in viewers(2, user))
 			O.show_message("<span class='warning'>[user] puts something in \the [target].</span>", 1)

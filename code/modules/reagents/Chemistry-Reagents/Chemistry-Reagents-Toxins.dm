@@ -12,6 +12,7 @@
 	heating_point = 100 CELSIUS
 	heating_message = "goes clear."
 	value = 2
+	should_admin_log = TRUE
 
 	var/target_organ
 	var/strength = 4 // How much damage it deals per unit
@@ -393,6 +394,7 @@
 	reagent_state = LIQUID
 	color = "#801e28"
 	value = 1.2
+	should_admin_log = TRUE
 
 /datum/reagent/slimejelly/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -413,6 +415,7 @@
 	overdose = REAGENTS_OVERDOSE
 	value = 2.5
 	scannable = TRUE
+	should_admin_log = TRUE
 
 /datum/reagent/soporific/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -447,6 +450,7 @@
 	metabolism = REM * 0.5
 	overdose = REAGENTS_OVERDOSE * 0.5
 	value = 2.6
+	should_admin_log = TRUE
 
 /datum/reagent/chloralhydrate/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -525,6 +529,7 @@
 	metabolism = REM * 0.5
 	overdose = REAGENTS_OVERDOSE
 	value = 2.8
+	should_admin_log = TRUE
 
 /datum/reagent/space_drugs/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -608,6 +613,7 @@
 	metabolism = REM * 0.25
 	overdose = REAGENTS_OVERDOSE
 	value = 0.6
+	should_admin_log = TRUE
 
 /datum/reagent/mindbreaker/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -673,6 +679,7 @@
 	color = "#ccccff"
 	metabolism = REM
 	overdose = 25
+	should_admin_log = TRUE
 
 	// M A X I M U M C H E E S E
 	var/global/list/dose_messages = list(
@@ -743,6 +750,7 @@
 	color = "#13bc5e"
 	metabolism = REM * 0.2
 	value = 2
+	should_admin_log = TRUE
 
 /datum/reagent/slimetoxin/affect_blood(var/mob/living/carbon/human/H, var/alien, var/removed)
 	if(!istype(H))

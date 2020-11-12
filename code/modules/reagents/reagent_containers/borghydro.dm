@@ -74,10 +74,13 @@
 			H.custom_pain(SPAN_WARNING("You feel a tiny prick!"), 1, TRUE, H.get_organ(user.zone_sel.selecting))
 
 		if(M.reagents)
+			var/datum/reagent/R = reagent_ids[mode]
+			var/should_admin_log = R.should_admin_log
 			var/t = min(amount_per_transfer_from_this, reagent_volumes[reagent_ids[mode]])
 			M.reagents.add_reagent(reagent_ids[mode], t)
 			reagent_volumes[reagent_ids[mode]] -= t
-			admin_inject_log(user, M, src, reagent_ids[mode], t)
+			if (should_admin_log)
+				admin_inject_log(user, M, src, reagent_ids[mode], t)
 			to_chat(user, "<span class='notice'>[t] units injected. [reagent_volumes[reagent_ids[mode]]] units remaining.</span>")
 	return
 

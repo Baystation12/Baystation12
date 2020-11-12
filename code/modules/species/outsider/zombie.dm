@@ -308,6 +308,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 	hidden_from_codex = TRUE
 	heating_products = null
 	heating_point = null
+	should_admin_log = TRUE
 
 /datum/reagent/zombie/affect_blood(mob/living/carbon/M, alien, removed)
 	if (!ishuman(M))

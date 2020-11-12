@@ -258,7 +258,8 @@
 
 	if(target != user && target != trackTarget && target.loc != trackTarget)
 		return
-	admin_inject_log(user, target, src, reagents.get_reagents(), amount_per_transfer_from_this)
+	if (reagents.should_admin_log())
+		admin_inject_log(user, target, src, reagents.get_reagents(), amount_per_transfer_from_this)
 	var/trans = reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_BLOOD)
 
 	if(target != user)
@@ -275,7 +276,7 @@
 		update_icon()
 
 /obj/item/weapon/reagent_containers/syringe/proc/syringestab(var/mob/living/carbon/target, var/mob/living/carbon/user)
-
+	var/should_admin_log = reagents.should_admin_log()
 	if(istype(target, /mob/living/carbon/human))
 
 		var/mob/living/carbon/human/H = target
@@ -308,10 +309,11 @@
 		target.apply_damage(3, BRUTE)
 
 	var/syringestab_amount_transferred = rand(0, (reagents.total_volume - 5)) //nerfed by popular demand
-	var/contained_reagents = reagents.get_reagents()
 	var/trans = reagents.trans_to_mob(target, syringestab_amount_transferred, CHEM_BLOOD)
 	if(isnull(trans)) trans = 0
-	admin_inject_log(user, target, src, contained_reagents, trans, violent=1)
+	if (should_admin_log)
+		var/contained_reagents = reagents.get_reagents()
+		admin_inject_log(user, target, src, contained_reagents, trans, violent=1)
 	break_syringe(target, user)
 
 /obj/item/weapon/reagent_containers/syringe/proc/break_syringe(mob/living/carbon/target, mob/living/carbon/user)
@@ -420,4 +422,3 @@
 	volume = 20
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT
 	icon_state = "cs"
-

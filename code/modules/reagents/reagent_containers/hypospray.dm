@@ -66,9 +66,11 @@
 	user.visible_message("<span class='warning'>[user] injects [M] with [src].</span>")
 
 	if(M.reagents)
+		var/should_admin_log = reagents.should_admin_log()
 		var/contained = reagentlist()
 		var/trans = reagents.trans_to_mob(M, amount_per_transfer_from_this, CHEM_BLOOD)
-		admin_inject_log(user, M, src, contained, trans)
+		if (should_admin_log)
+			admin_inject_log(user, M, src, contained, trans)
 		to_chat(user, "<span class='notice'>[trans] units injected. [reagents.total_volume] units remaining in \the [src].</span>")
 
 	return
