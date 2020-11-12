@@ -35,6 +35,10 @@
 /obj/effect/shuttle_landmark/transit/scavver_gantry,
 /turf/space,
 /area/space)
+"gm" = (
+/obj/effect/shuttle_landmark/transit/merc,
+/turf/space,
+/area/space)
 "gT" = (
 /obj/effect/shuttle_landmark/escape_pod/transit/pod11,
 /turf/space/transit/east,
@@ -260,6 +264,29 @@
 	teleport_z_offset = 6
 	},
 /turf/space/transit/north,
+/area/space)
+"GT" = (
+/obj/effect/step_trigger/teleporter/random{
+	affect_ghosts = 1;
+	name = "escapeshuttle_leave";
+	teleport_x = 25;
+	teleport_x_offset = 245;
+	teleport_y = 25;
+	teleport_y_offset = 245;
+	teleport_z = 6;
+	teleport_z_offset = 6
+	},
+/obj/effect/step_trigger/teleporter/random{
+	affect_ghosts = 1;
+	name = "escapeshuttle_leave";
+	teleport_x = 25;
+	teleport_x_offset = 245;
+	teleport_y = 25;
+	teleport_y_offset = 245;
+	teleport_z = 6;
+	teleport_z_offset = 6
+	},
+/turf/space,
 /area/space)
 "KK" = (
 /turf/space/transit/east,
@@ -6855,32 +6882,32 @@ zU
 zU
 zU
 zU
+EK
 zU
 zU
 zU
 zU
 zU
-zU
-zU
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
+EK
+DN
+DN
+DN
+DN
+DN
+DN
+DN
+DN
+DN
+DN
+DN
+DN
+DN
+DN
+DN
+DN
+DN
+DN
+GT
 Vj
 Vj
 Vj
@@ -7057,6 +7084,7 @@ Vj
 Vj
 Vj
 Vj
+DN
 Vj
 Vj
 Vj
@@ -7081,8 +7109,7 @@ Vj
 Vj
 Vj
 Vj
-Vj
-Vj
+DN
 Vj
 Vj
 Vj
@@ -7259,6 +7286,7 @@ Vj
 Vj
 Vj
 Vj
+DN
 Vj
 Vj
 Vj
@@ -7283,8 +7311,7 @@ Vj
 Vj
 Vj
 Vj
-Vj
-Vj
+DN
 Vj
 Vj
 Vj
@@ -7461,6 +7488,7 @@ Vj
 Vj
 Vj
 Vj
+DN
 Vj
 Vj
 Vj
@@ -7485,8 +7513,7 @@ Vj
 Vj
 Vj
 Vj
-Vj
-Vj
+DN
 Vj
 Vj
 Vj
@@ -7663,6 +7690,7 @@ Vj
 Vj
 Vj
 Vj
+DN
 Vj
 Vj
 Vj
@@ -7677,18 +7705,17 @@ Vj
 Vj
 Vj
 Vj
+DN
+DN
+DN
+DN
+DN
+DN
+DN
+DN
+DN
 Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
+DN
 Vj
 Vj
 Vj
@@ -7865,6 +7892,7 @@ Vj
 Vj
 Vj
 Vj
+DN
 Vj
 Vj
 Vj
@@ -7875,6 +7903,11 @@ Vj
 Vj
 Vj
 Vj
+DN
+DN
+DN
+DN
+DN
 Vj
 Vj
 Vj
@@ -7882,15 +7915,9 @@ Vj
 Vj
 Vj
 Vj
+DN
 Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
+DN
 Vj
 Vj
 Vj
@@ -8067,6 +8094,18 @@ Vj
 Vj
 Vj
 Vj
+DN
+Vj
+Vj
+Vj
+Vj
+Vj
+Vj
+Vj
+Vj
+DN
+DN
+DN
 Vj
 Vj
 Vj
@@ -8078,21 +8117,9 @@ Vj
 Vj
 Vj
 Vj
+DN
 Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
+DN
 Vj
 Vj
 Vj
@@ -8273,6 +8300,12 @@ zU
 Vj
 Vj
 Vj
+DN
+DN
+DN
+DN
+DN
+DN
 Vj
 Vj
 Vj
@@ -8286,15 +8319,9 @@ Vj
 Vj
 Vj
 Vj
+DN
 Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
+DN
 Vj
 Vj
 Vj
@@ -8475,6 +8502,7 @@ zU
 Vj
 Vj
 Vj
+DN
 Vj
 Vj
 Vj
@@ -8493,10 +8521,9 @@ Vj
 Vj
 Vj
 Vj
+DN
 Vj
-Vj
-Vj
-Vj
+DN
 Vj
 Vj
 Vj
@@ -8677,6 +8704,7 @@ zU
 Vj
 Vj
 Vj
+DN
 Vj
 Vj
 Vj
@@ -8694,11 +8722,10 @@ Vj
 Vj
 Vj
 Vj
+DN
+DN
 Vj
-Vj
-Vj
-Vj
-Vj
+DN
 Vj
 Vj
 Vj
@@ -8879,6 +8906,7 @@ zU
 Vj
 Vj
 Vj
+DN
 Vj
 Vj
 Vj
@@ -8896,11 +8924,10 @@ Vj
 Vj
 Vj
 Vj
+DN
 Vj
 Vj
-Vj
-Vj
-Vj
+DN
 Vj
 Vj
 Vj
@@ -9080,6 +9107,8 @@ Uc
 zU
 Vj
 Vj
+DN
+DN
 Vj
 Vj
 Vj
@@ -9097,12 +9126,10 @@ Vj
 Vj
 Vj
 Vj
+DN
+DN
 Vj
-Vj
-Vj
-Vj
-Vj
-Vj
+DN
 Vj
 Vj
 Vj
@@ -9282,6 +9309,8 @@ Uc
 zU
 Vj
 Vj
+DN
+DN
 Vj
 Vj
 Vj
@@ -9300,11 +9329,9 @@ Vj
 Vj
 Vj
 Vj
+DN
 Vj
-Vj
-Vj
-Vj
-Vj
+DN
 Vj
 Vj
 Vj
@@ -9485,6 +9512,7 @@ zU
 Vj
 Vj
 Vj
+DN
 Vj
 Vj
 Vj
@@ -9503,10 +9531,9 @@ Vj
 Vj
 Vj
 Vj
+DN
 Vj
-Vj
-Vj
-Vj
+DN
 Vj
 Vj
 Vj
@@ -9686,6 +9713,8 @@ Uc
 zU
 Vj
 Vj
+DN
+DN
 Vj
 Vj
 Vj
@@ -9704,11 +9733,9 @@ Vj
 Vj
 Vj
 Vj
+DN
 Vj
-Vj
-Vj
-Vj
-Vj
+DN
 Vj
 Vj
 Vj
@@ -9888,6 +9915,8 @@ Uc
 zU
 Vj
 Vj
+DN
+DN
 Vj
 Vj
 Vj
@@ -9905,12 +9934,10 @@ Vj
 Vj
 Vj
 Vj
+DN
+DN
 Vj
-Vj
-Vj
-Vj
-Vj
-Vj
+DN
 Vj
 Vj
 Vj
@@ -10091,6 +10118,7 @@ zU
 Vj
 Vj
 Vj
+DN
 Vj
 Vj
 Vj
@@ -10108,11 +10136,10 @@ Vj
 Vj
 Vj
 Vj
+DN
 Vj
 Vj
-Vj
-Vj
-Vj
+DN
 Vj
 Vj
 Vj
@@ -10293,6 +10320,7 @@ zU
 Vj
 Vj
 Vj
+DN
 Vj
 Vj
 Vj
@@ -10310,11 +10338,10 @@ Vj
 Vj
 Vj
 Vj
+DN
+DN
 Vj
-Vj
-Vj
-Vj
-Vj
+DN
 Vj
 Vj
 Vj
@@ -10495,6 +10522,7 @@ zU
 Vj
 Vj
 Vj
+DN
 Vj
 Vj
 Vj
@@ -10513,10 +10541,9 @@ Vj
 Vj
 Vj
 Vj
+DN
 Vj
-Vj
-Vj
-Vj
+DN
 Vj
 Vj
 Vj
@@ -10697,6 +10724,12 @@ zU
 Vj
 Vj
 Vj
+DN
+DN
+DN
+DN
+DN
+DN
 Vj
 Vj
 Vj
@@ -10710,15 +10743,9 @@ Vj
 Vj
 Vj
 Vj
+DN
 Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
+DN
 Vj
 Vj
 Vj
@@ -10904,6 +10931,11 @@ Vj
 Vj
 Vj
 Vj
+DN
+DN
+DN
+Vj
+gm
 Vj
 Vj
 Vj
@@ -10913,14 +10945,9 @@ Vj
 Vj
 Vj
 Vj
+DN
 Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
+DN
 Vj
 Vj
 Vj
@@ -11108,21 +11135,21 @@ Vj
 Vj
 Vj
 Vj
+DN
+DN
+DN
+DN
+DN
+DN
 Vj
 Vj
 Vj
 Vj
 Vj
 Vj
+DN
 Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
+DN
 Vj
 Vj
 Vj
@@ -11315,16 +11342,16 @@ Vj
 Vj
 Vj
 Vj
+DN
+DN
+DN
+DN
+DN
+DN
+DN
+DN
 Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
+DN
 Vj
 Vj
 Vj
@@ -11526,7 +11553,7 @@ Vj
 Vj
 Vj
 Vj
-Vj
+DN
 Vj
 Vj
 Vj
@@ -11728,7 +11755,7 @@ Vj
 Vj
 Vj
 Vj
-Vj
+DN
 Vj
 Vj
 Vj
@@ -11930,7 +11957,7 @@ Vj
 Vj
 Vj
 Vj
-Vj
+DN
 Vj
 Vj
 Vj
@@ -12107,6 +12134,7 @@ Vj
 Vj
 Vj
 Vj
+DN
 Vj
 Vj
 Vj
@@ -12131,8 +12159,7 @@ Vj
 Vj
 Vj
 Vj
-Vj
-Vj
+DN
 Vj
 Vj
 Vj
@@ -12326,15 +12353,15 @@ zU
 zU
 zU
 zU
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
-Vj
+DN
+DN
+DN
+DN
+DN
+DN
+DN
+DN
+DN
 Vj
 Vj
 Vj

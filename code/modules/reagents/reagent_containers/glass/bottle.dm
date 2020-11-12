@@ -71,6 +71,27 @@
 	reagents.add_reagent(/datum/reagent/inaprovaline, 60)
 	update_icon()
 
+/obj/item/weapon/reagent_containers/glass/bottle/kelotane
+	name = "kelotane bottle"
+	desc = "A small bottle. Contains kelotane - used to treat burns."
+	icon = 'icons/obj/chemical.dmi'
+	icon_state = "bottle-4"
+
+/obj/item/weapon/reagent_containers/glass/bottle/kelotane/New()
+	..()
+	reagents.add_reagent(/datum/reagent/kelotane, 60)
+	update_icon()
+
+/obj/item/weapon/reagent_containers/glass/bottle/dexalin
+	name = "dexalin bottle"
+	desc = "A small bottle. Contains dexalin - used to treat oxygen deprivation."
+	icon = 'icons/obj/chemical.dmi'
+	icon_state = "bottle-4"
+
+/obj/item/weapon/reagent_containers/glass/bottle/dexalin/New()
+	..()
+	reagents.add_reagent(/datum/reagent/dexalin, 60)
+	update_icon()
 
 /obj/item/weapon/reagent_containers/glass/bottle/toxin
 	name = "toxin bottle"
