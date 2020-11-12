@@ -330,3 +330,8 @@ var/list/mob/living/forced_ambiance_list = new
 
 /area/proc/has_turfs()
 	return !!(locate(/turf) in src)
+
+/area/proc/can_modify_area()
+	if (src && src.area_flags & AREA_FLAG_NO_MODIFY)
+		return FALSE
+	return TRUE

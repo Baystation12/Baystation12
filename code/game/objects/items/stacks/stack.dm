@@ -116,6 +116,11 @@
 	var/required = quantity*recipe.req_amount
 	var/produced = min(quantity*recipe.res_amount, recipe.max_res_amount)
 
+	var/area/A = get_area(user)
+	if (!A.can_modify_area())
+		visible_message("You can't seem to make anything with \the [src] here.")
+		return
+
 	if (!can_use(required))
 		if (produced>1)
 			to_chat(user, "<span class='warning'>You haven't got enough [src] to build \the [produced] [recipe.display_name()]\s!</span>")
