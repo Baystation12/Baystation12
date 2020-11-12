@@ -64,7 +64,15 @@
 	var/impacted_loc = loc
 	if(!ismob(loc))
 		new /obj/effect/decal/cleanable/liquid_fuel/flamethrower_fuel(loc)
-		new /obj/effect/fire(impacted_loc)
+		new /obj/effect/fire/noheat(impacted_loc)
+
+/obj/item/projectile/bullet/fire/launch_from_gun(var/atom/target)
+	. = ..()
+	var/targturf = target
+	if(!isturf(target))
+		targturf = get_turf(target)
+	kill_count = get_dist(loc,targturf)
+
 
 /obj/item/ammo_magazine/na4_tank
 	name = "\improper Napalm Tank"

@@ -7,7 +7,7 @@
 	icon = 'icons/effects/fire.dmi'
 	icon_state = "fire"
 	light_color = "#ED9200"
-
+	var/heat_surroundings = 1
 	var/firelevel = 1 //Calculated by gas_mixture.calculate_firelevel()
 
 /obj/effect/fire/New(newLoc,fl = 1)
@@ -31,10 +31,10 @@
 	//burn anything here
 	for(var/mob/living/L in loc)
 		L.FireBurn(firelevel, air_contents.temperature, air_contents.return_pressure())  //Burn the mobs!
-
-	loc.fire_act(air_contents, air_contents.temperature, air_contents.volume)
-	for(var/atom/A in loc)
-		A.fire_act(air_contents, air_contents.temperature, air_contents.volume)
+	if(heat_surroundings)
+		loc.fire_act(air_contents, air_contents.temperature, air_contents.volume)
+		for(var/atom/A in loc)
+			A.fire_act(air_contents, air_contents.temperature, air_contents.volume)
 
 /obj/effect/fire/proc/fire_color(var/env_temperature)
 	var/temperature = max(4000*sqrt(firelevel/vsc.fire_firelevel_multiplier), env_temperature)
@@ -65,10 +65,10 @@
 
 	for(var/mob/living/L in loc)
 		L.FireBurn(firelevel, air_contents.temperature, air_contents.return_pressure())  //Burn the mobs!
-
-	loc.fire_act(air_contents, air_contents.temperature, air_contents.volume)
-	for(var/atom/A in loc)
-		A.fire_act(air_contents, air_contents.temperature, air_contents.volume)
+	if(heat_surroundings)
+		loc.fire_act(air_contents, air_contents.temperature, air_contents.volume)
+		for(var/atom/A in loc)
+			A.fire_act(air_contents, air_contents.temperature, air_contents.volume)
 
 	//spread
 	for(var/direction in GLOB.cardinal)
@@ -138,3 +138,6 @@
 			var/mob/living/L = O
 			L.FireBurn(firelevel, air_contents.temperature, air_contents.return_pressure())  //Burn the mobs!
 		O.fire_act(air_contents, air_contents.temperature, air_contents.volume)
+
+/obj/effect/fire/noheat
+	heat_surroundings = 0
