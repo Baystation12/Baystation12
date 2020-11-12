@@ -1,0 +1,4 @@
+author: "SealCure"
+delete-after: True
+changes: 
+  - tweak: "Emergency lockers no longer have random contents, instead always containing the same items."
