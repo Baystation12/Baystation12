@@ -4,9 +4,10 @@
 	stack_type = /obj/item/stack/material/plastic
 	flags = MATERIAL_BRITTLE
 	icon_base = "solid"
+	door_icon_base = "plastic"
 	icon_reinf = "reinf_over"
 	icon_colour = COLOR_WHITE
-	hardness = MATERIAL_SOFT
+	hardness = MATERIAL_FLEXIBLE
 	weight = 5
 	melting_point = T0C+371 //assuming heat resistant plastic
 	stack_origin_tech = list(TECH_MATERIAL = 3)
@@ -16,6 +17,7 @@
 				/datum/reagent/toxin/plasticide = 20
 				)
 	sale_price = 1
+	dooropen_noise = 'sound/effects/doorcreaky.ogg'
 
 /material/plastic/holographic
 	name = "holo" + MATERIAL_PLASTIC
