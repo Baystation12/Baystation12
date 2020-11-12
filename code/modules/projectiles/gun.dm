@@ -555,9 +555,9 @@
 	safety_state = !safety_state
 	update_icon()
 	if(user)
-		to_chat(user, "<span class='notice'>You switch the safety [safety_state ? "on" : "off"] on [src].</span>")
+		user.visible_message(SPAN_WARNING("[user] switches the safety of \the [src] [safety_state ? "on" : "off"]."), SPAN_NOTICE("You switch the safety of \the [src] [safety_state ? "on" : "off"]."), range = 3)
 		last_safety_check = world.time
-		playsound(src, 'sound/weapons/flipblade.ogg', 30, 1)
+		playsound(src, 'sound/weapons/flipblade.ogg', 15, 1)
 
 /obj/item/weapon/gun/verb/toggle_safety_verb()
 	set src in usr
