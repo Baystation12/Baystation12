@@ -28,6 +28,10 @@
 		if(!silent)
 			to_chat(user, SPAN_WARNING("You are too exhausted to maneuver right now."))
 		return FALSE
+	if ((get_turf(user)).z != (get_turf(target)).z)
+		if (!silent)
+			to_chat(user, SPAN_WARNING("You cannot manuever to a different z-level!"))
+		return FALSE
 	return TRUE
 
 /decl/maneuver/proc/show_initial_message(var/mob/user, var/atom/target)
