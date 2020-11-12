@@ -13,6 +13,10 @@
 		else
 			for(var/entry in descriptors)
 				var/datum/mob_descriptor/descriptor = species.descriptors[entry]
+
+				if (!descriptor)
+					continue
+
 				LAZYADD(., descriptor.get_comparative_value_descriptor(descriptors[entry], user, src))
 
 /datum/mob_descriptor

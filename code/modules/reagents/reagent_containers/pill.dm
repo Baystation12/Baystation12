@@ -39,6 +39,10 @@
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		if(!do_after(user, 3 SECONDS, M))
 			return
+
+		if (user.get_active_hand() != src)
+			return
+
 		user.visible_message(SPAN_WARNING("[user] forces [M] to swallow \the [src]."))
 		var/contained = reagentlist()
 		if (reagents.should_admin_log())

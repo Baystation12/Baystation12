@@ -49,6 +49,9 @@
 			user.visible_message("<span class='warning'>\The [user] begins to feed \the [M]!</span>")
 			if(!M.can_force_feed(user, loaded) || !do_after(user, 5 SECONDS, M))
 				return
+
+			if (user.get_active_hand() != src)
+				return
 			M.visible_message("<span class='notice'>\The [user] feeds some [loaded] to \the [M] with \the [src].</span>")
 		playsound(M.loc,'sound/items/eatfood.ogg', rand(10,40), 1)
 		overlays.Cut()
