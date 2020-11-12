@@ -1,0 +1,4 @@
+author: "Ninetailed"
+delete-after: True
+changes: 
+  - bugfix: "Removed redundant Power and Radius settings from OFD console."
