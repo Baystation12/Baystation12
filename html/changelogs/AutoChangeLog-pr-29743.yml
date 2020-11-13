@@ -1,0 +1,6 @@
+author: "juxtaposed9930"
+delete-after: True
+changes: 
+  - tweak: "The industrial hardsuit is no longer esword and egun proof and has slightly more slowdown, but is no longer as weak to EMPs."
+  - tweak: "Mercenary hardsuit gloves are now insulated."
+  - tweak: "The medical hardsuit no longer has slowdown when powered."
