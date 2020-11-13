@@ -1,0 +1,4 @@
+author: "juxtaposed9930"
+delete-after: True
+changes: 
+  - rscadd: "The Torch now spawns \"Bluespace Residue\" on it's overmap location round start. The Residue is known and acts as a \"Torch was here\" beacon to offships."
