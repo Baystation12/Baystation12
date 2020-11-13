@@ -21,6 +21,7 @@
 	initial_restricted_waypoints = list(
 		"Skrellian Shuttle" = list("nav_skrellscoutsh_dock")
 	)
+	known = FALSE
 
 
 /obj/effect/overmap/visitable/ship/landable/skrellscoutship/New()
@@ -34,6 +35,7 @@
 	color = "#880088"
 	vessel_mass = 750
 	vessel_size = SHIP_SIZE_TINY
+	known = FALSE
 
 /datum/shuttle/autodock/overmap/skrellscoutship
 	name = "Skrellian Scout"

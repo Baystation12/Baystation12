@@ -4,7 +4,6 @@
 	name = "Unpowered Research Station"
 	desc = "An unpowered research station. A large quantity of nearby debris blocks more detail."
 	icon_state = "object"
-	known = 0
 	initial_generic_waypoints = list(
 		"nav_meatstation_1",
 		"nav_meatstation_2",

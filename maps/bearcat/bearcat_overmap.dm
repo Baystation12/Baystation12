@@ -7,6 +7,7 @@
 	vessel_mass = 5000
 	max_speed = 1/(2 SECONDS)
 	burn_delay = 2 SECONDS
+	known = FALSE
 
 	initial_generic_waypoints = list("nav_bearcat_below_bow", "nav_bearcat_below_starboardastern", "nav_bearcat_port_dock_shuttle")
 	initial_restricted_waypoints = list(

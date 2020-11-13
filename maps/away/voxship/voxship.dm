@@ -63,6 +63,7 @@
 	shuttle = "Vox Shuttle"
 	fore_dir = NORTH
 	vessel_size = SHIP_SIZE_SMALL
+	known = FALSE
 
 /obj/effect/submap_landmark/joinable_submap/voxship
 	archetype = /decl/submap_archetype/derelict/voxship
@@ -149,6 +150,7 @@
 	moving_state = "ship_moving"
 	fore_dir = WEST
 	vessel_size = SHIP_SIZE_SMALL
+	known = FALSE
 
 //Ship's little lander defined here
 /datum/shuttle/autodock/overmap/vox_lander
@@ -181,6 +183,7 @@
 	desc = "Sensor array detects a small, unmarked vessel."
 	fore_dir = WEST
 	vessel_size = SHIP_SIZE_TINY
+	known = FALSE
 
 /obj/effect/submap_landmark/joinable_submap/voxship/scavship
 	archetype = /decl/submap_archetype/derelict/voxship/scavship

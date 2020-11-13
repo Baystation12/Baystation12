@@ -48,7 +48,6 @@
 	fore_dir = NORTH
 	burn_delay = 2 SECONDS
 	hide_from_reports = TRUE
-	known = 0
 	initial_generic_waypoints = list(
 		"nav_gantry_one",
 		"nav_gantry_two",
@@ -65,6 +64,7 @@
 		"Aquila" = list("nav_gantry_aquila"),
 		"Desperado" = list("nav_gantry_desperado")
 	)
+	known = FALSE
 
 /obj/item/mech_component/sensors/light/salvage/prebuild()
   ..()

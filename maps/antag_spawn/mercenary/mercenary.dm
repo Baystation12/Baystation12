@@ -8,6 +8,7 @@
 	desc = "Sensor array detects a medium cargo vessel with high structural damage."
 	in_space = 1
 	icon_state = "ship"
+	known = FALSE
 	hide_from_reports = TRUE
 	initial_generic_waypoints = list(
 		"nav_merc_1",
@@ -24,6 +25,7 @@
 	fore_dir = NORTH
 	vessel_size = SHIP_SIZE_SMALL
 	vessel_mass = 14000
+	known = FALSE
 
 /datum/shuttle/autodock/overmap/merc_shuttle
 	name = "Desperado"

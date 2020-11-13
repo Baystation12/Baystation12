@@ -11,6 +11,7 @@
 	fore_dir = SOUTH
 	skill_needed = SKILL_BASIC
 	vessel_size = SHIP_SIZE_SMALL
+	known = FALSE
 
 /obj/effect/overmap/visitable/ship/landable/ascent/two
 	name = "Lepidoptera"
