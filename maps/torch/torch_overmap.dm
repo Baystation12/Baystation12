@@ -124,3 +124,19 @@
 	name = "guppy control console"
 	shuttle_tag = "Guppy"
 	req_access = list(access_guppy_helm)
+
+/obj/effect/overmap/visitable/ship/torch/Initialize()
+	. = ..()
+
+	var/obj/effect/overmap/visitable/sector/residue/R = new()
+	R.forceMove(locate(src.x, src.y, GLOB.using_map.overmap_z))
+
+	for(var/obj/machinery/computer/ship/helm/H in SSmachines.machinery)
+		H.add_known_sector(R)
+
+/obj/effect/overmap/visitable/sector/residue
+	name = "Bluespace Residue"
+	desc = "Trace radiation emanating from this sector is consistent with the aftermath of a bluespace jump."
+	icon_state = "event"
+	known = TRUE
+	
