@@ -127,7 +127,8 @@
 		/obj/item/weapon/extinguisher/mini,
 		/obj/item/weapon/marshalling_wand,
 		/obj/item/weapon/hand_labeler,
-		/obj/item/clothing/gloves
+		/obj/item/clothing/gloves,
+		/obj/item/weapon/tape_roll
 		)
 
 
@@ -436,7 +437,9 @@
 		/obj/item/weapon/pinpointer/radio,
 		/obj/item/device/taperecorder,
 		/obj/item/device/tape,
-		/obj/item/device/scanner/gas
+		/obj/item/device/scanner/gas,
+		/obj/item/clothing/gloves,
+		/obj/item/weapon/tape_roll
 		)
 	can_holster = list(/obj/item/weapon/material/hatchet/machete)
 	sound_in = 'sound/effects/holster/sheathin.ogg'
