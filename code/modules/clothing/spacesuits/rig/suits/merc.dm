@@ -37,6 +37,7 @@
 
 /obj/item/clothing/gloves/rig/merc
 	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_NOCUFFS
+	siemens_coefficient = 0
 
 //Has most of the modules removed
 /obj/item/weapon/rig/merc/empty
