@@ -1,0 +1,4 @@
+author: "juxtaposed9930"
+delete-after: True
+changes: 
+  - tweak: "The sprite for the security belt no longer overlaps on mobs right hands in the side view."
