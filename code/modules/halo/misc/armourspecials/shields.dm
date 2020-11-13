@@ -142,7 +142,7 @@
 
 /datum/armourspecials/shields/handle_shield(var/mob/living/m,damage,atom/damage_source)
 	. = ..()
-	if(istype(m))
+	if(istype(m) && m.client)
 		var/obj/screen/shieldbar/bar = locate(/obj/screen/shieldbar) in m.client.screen
 		if(bar)
 			bar.update(shieldstrength,totalshields,m)
