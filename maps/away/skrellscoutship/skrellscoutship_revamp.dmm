@@ -874,11 +874,11 @@
 "dk" = (
 /obj/structure/closet/cabinet,
 /obj/item/clothing/accessory/storage/black_vest,
-/obj/item/clothing/accessory/storage/black_vest,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
 /obj/item/device/radio/headset/map_preset/skrellscoutship,
+/obj/item/clothing/accessory/storage/holster/thigh,
 /turf/simulated/floor/tiled/skrell/blue,
 /area/ship/skrellscoutship/crew/quarters)
 "dl" = (
@@ -3580,11 +3580,11 @@
 "mt" = (
 /obj/structure/closet/cabinet,
 /obj/item/clothing/accessory/storage/black_vest,
-/obj/item/clothing/accessory/storage/black_vest,
 /obj/machinery/light/skrell{
 	dir = 4
 	},
 /obj/item/device/radio/headset/map_preset/skrellscoutship,
+/obj/item/clothing/accessory/storage/holster/thigh,
 /turf/simulated/floor/tiled/skrell/blue,
 /area/ship/skrellscoutship/crew/quarters)
 "mx" = (
@@ -3808,6 +3808,7 @@
 /area/ship/skrellscoutship/crew/quarters)
 "pO" = (
 /obj/effect/wallframe_spawn/reinforced_phoron/hull,
+/obj/effect/paint/black,
 /turf/simulated/floor/carpet/purple,
 /area/ship/skrellscoutship/crew/rec)
 "pY" = (
@@ -4183,7 +4184,6 @@
 "wo" = (
 /obj/effect/paint/black,
 /obj/effect/wallframe_spawn/reinforced_phoron/hull,
-/obj/effect/paint/black,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -4376,6 +4376,7 @@
 /obj/item/weapon/gun/energy/gun/skrell,
 /obj/item/weapon/rig/skrell/cmd,
 /obj/item/device/radio/headset/map_preset/skrellscoutship,
+/obj/item/clothing/accessory/storage/holster/thigh,
 /turf/simulated/floor/tiled/skrell/blue,
 /area/ship/skrellscoutship/crew/quarters)
 "zT" = (
@@ -4436,12 +4437,12 @@
 "An" = (
 /obj/structure/closet/cabinet,
 /obj/item/clothing/accessory/storage/black_vest,
-/obj/item/clothing/accessory/storage/black_vest,
 /obj/machinery/light/skrell{
 	dir = 8;
 	icon_state = "tube1"
 	},
 /obj/item/device/radio/headset/map_preset/skrellscoutship,
+/obj/item/clothing/accessory/storage/holster/thigh,
 /turf/simulated/floor/tiled/skrell/blue,
 /area/ship/skrellscoutship/crew/quarters)
 "Ap" = (
