@@ -112,7 +112,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 	for (var/area/A in exoplanet_areas)
 		players_on_site = list() //make sure the list is empty before checking the next planet.
 		for (var/mob/M in GLOB.player_list)
-			if (M.stat != DEAD && get_area(M.loc) == A)
+			if (M.stat != DEAD && M.z == A.z)
 				LAZYADD(players_on_site, M.client)
 
 				if(get_crewmember_record(M.real_name || M.name)) //event is geared at torch/exploration, only valid if they're around.
