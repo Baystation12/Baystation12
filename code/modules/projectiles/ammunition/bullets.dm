@@ -192,3 +192,29 @@
 	spent_icon = "empshell-spent"
 	projectile_type  = /obj/item/projectile/ion
 	matter = list(MATERIAL_STEEL = 260, MATERIAL_URANIUM = 200)
+
+
+// ################### Port Vesta custom content
+/obj/item/ammo_casing/sabot
+	name = "sabot shell"
+	desc = "APFSDS in a neat little package. It's prone to over penetrating, and as such does little damage to targets without armor." //even though it does little damage overall, being a niche round.
+	icon = 'icons/boh/ammo.dmi'
+	icon_state = "sabshell"
+	spent_icon = "sabshell-spent"
+	caliber = CALIBER_SABOT
+	projectile_type = /obj/item/projectile/bullet/sabot
+	matter = list(MATERIAL_STEEL = 420)
+
+/obj/item/ammo_casing/rifle/military/low
+	desc = "A frangible bullet casing."
+	caliber = CALIBER_RIFLE_MILITARY
+	projectile_type = /obj/item/projectile/bullet/rifle/military/sec
+
+/obj/item/ammo_casing/rocket/rcr
+	name = "incendiary shell"
+	desc = "A high explosive designed to be fired from a launcher. This one is marked with various warnings. As if anyone reads them, pfft. \
+	It does mention something about being an incredibly localized explosive, however, and only to be used against non-organic targets. Whatever that means."
+	icon = 'icons/boh/ammo.dmi'
+	icon_state = "rcrshell"
+	matter = list(MATERIAL_STEEL = 50000) //Same as the RCD, retardedly high, for good reason.
+	projectile_type = /obj/item/projectile/bullet/rcr

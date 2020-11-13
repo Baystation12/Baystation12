@@ -5,6 +5,7 @@
 		list("names" = list(), "header" = "Command Support", "flag" = SPT),
 		list("names" = list(), "header" = "Research", "flag" = SCI),
 		list("names" = list(), "header" = "Security", "flag" = SEC),
+		list("names" = list(), "header" = "Infantry", "flag" = INF),
 		list("names" = list(), "header" = "Medical", "flag" = MED),
 		list("names" = list(), "header" = "Engineering", "flag" = ENG),
 		list("names" = list(), "header" = "Supply", "flag" = SUP),
@@ -137,7 +138,8 @@
 		"exp" =   filtered_nano_crew_manifest(SSjobs.titles_by_department(EXP)),
 		"srv" =   filtered_nano_crew_manifest(SSjobs.titles_by_department(SRV)),
 		"bot" =   silicon_nano_crew_manifest(SSjobs.titles_by_department(MSC)),
-		"civ" =   filtered_nano_crew_manifest(SSjobs.titles_by_department(CIV))
+		"civ" =   filtered_nano_crew_manifest(SSjobs.titles_by_department(CIV)),
+		"inf" =   filtered_nano_crew_manifest(SSjobs.titles_by_department(INF)),
 		)
 
 /proc/flat_nano_crew_manifest()

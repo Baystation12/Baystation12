@@ -217,3 +217,7 @@
 	magazine_icondata_keys["[M.type]"] = icon_keys
 	magazine_icondata_states["[M.type]"] = ammo_states
 
+// Ports Vesta content
+
+var/allowed_round = list(/obj/item/ammo_casing) //To limit what rounds certain magazines can take
+

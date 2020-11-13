@@ -23,7 +23,7 @@
 	id = "Hub"
 	network = "tcommsat"
 	autolinkers = list("hub", "relay", "c_relay", "s_relay", "m_relay", "r_relay", "b_relay", "1_relay", "2_relay", "3_relay", "4_relay", "5_relay", "s_relay", "science", "medical",
-	"supply", "service", "common", "command", "engineering", "security", "receiverA", "broadcasterA")
+	"supply", "service", "common", "command", "engineering", "security", "receiverA", "broadcasterA", "infantry")
 
 /obj/machinery/telecomms/hub/preset_cent
 	id = "CentComm Hub"
@@ -107,7 +107,7 @@
 	id = "Bus 3"
 	network = "tcommsat"
 	freq_listening = list(SEC_FREQ, COMM_FREQ)
-	autolinkers = list("processor3", "security", "command")
+	autolinkers = list("processor3", "security", "command", "infantry")
 
 /obj/machinery/telecomms/bus/preset_four
 	id = "Bus 4"
@@ -225,6 +225,12 @@
 	freq_listening = list(SRV_FREQ)
 	channel_tags = list(list(SRV_FREQ, "Service", COMMS_COLOR_SERVICE))
 	autolinkers = list("service")
+
+/obj/machinery/telecomms/server/presets/infantry
+	id = "Infantry Server"
+	freq_listening = list(INF_FREQ)					//Ports infantry T-Comms presets
+	channel_tags = list(list(INF_FREQ, "Infantry", COMMS_COLOR_SKRELL))
+	autolinkers = list("infantry")
 
 /obj/machinery/telecomms/server/presets/common
 	id = "Common Server"

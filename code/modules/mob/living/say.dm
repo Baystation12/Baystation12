@@ -19,6 +19,7 @@ var/list/department_radio_keys = list(
 	  ":y" = "Exploration",		".y" = "Exploration",
 	  ":o" = "Response Team",".o" = "Response Team", //ERT
 	  ":j" = "Hailing", ".j" = "Hailing",
+	  ":a" = "Infantry",	".a" = "Infantry",
 
 	  ":R" = "right ear",	".R" = "right ear",
 	  ":L" = "left ear",	".L" = "left ear",
@@ -39,6 +40,7 @@ var/list/department_radio_keys = list(
 	  ":Y" = "Exploration",		".Y" = "Exploration",
 	  ":O" = "Response Team", ".O" = "Response Team",
 	  ":J" = "Hailing", ".J" = "Hailing",
+	  ":A" = "Infantry",	".A" = "Infantry",
 
 	  //kinda localization -- rastaf0
 	  //same keys as above, but on russian keyboard layout. This file uses cp1251 as encoding.
@@ -211,7 +213,7 @@ proc/get_radio_key_from_channel(var/channel)
 	message = handle_autohiss(message, speaking)
 	message = format_say_message(message)
 	message = process_chat_markup(message)
-	
+
 	if(speaking && !speaking.can_be_spoken_properly_by(src))
 		message = speaking.muddle(message)
 

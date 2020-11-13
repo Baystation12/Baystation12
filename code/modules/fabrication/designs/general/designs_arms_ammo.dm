@@ -118,3 +118,16 @@
 /datum/fabricator_recipe/arms_ammo/hidden/stripperclip
 	name = "ammunition (stripper clip)"
 	path = /obj/item/ammo_magazine/speedloader/clip
+
+//Port from Vesta custom content
+/datum/fabricator_recipe/arms_ammo/hidden/bullpupbad
+	name = "rifle magazine (5mmR), (frangible)"
+	path = /obj/item/ammo_magazine/mil_rifle/sec
+
+/datum/fabricator_recipe/arms_ammo/hidden/bullpupbad_extended
+	name = "rifle magazine (5mmR), (extended), (frangible)"
+	path = /obj/item/ammo_magazine/mil_rifle/sec/large
+
+/datum/fabricator_recipe/arms_ammo/hidden/bullpupbad_practice
+	name = "rifle magazine (5mmR), (practice)"
+	path = /obj/item/ammo_magazine/mil_rifle/practice

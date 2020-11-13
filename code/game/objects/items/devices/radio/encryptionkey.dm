@@ -89,13 +89,13 @@
 /obj/item/device/encryptionkey/heads/captain
 	name = "captain's encryption key"
 	icon_state = "cap_cypherkey"
-	channels = list("Command" = 1, "Security" = 1, "Engineering" = 0, "Science" = 0, "Medical" = 0, "Supply" = 0, "Service" = 0, "Hailing" = 0)
+	channels = list("Command" = 1, ,"Infantry" = 1 ,"Security" = 1, "Engineering" = 0, "Science" = 0, "Medical" = 0, "Supply" = 0, "Service" = 0, "Hailing" = 0)
 
 /obj/item/device/encryptionkey/heads/ai_integrated
 	name = "ai integrated encryption key"
 	desc = "Integrated encryption key."
 	icon_state = "cap_cypherkey"
-	channels = list("Command" = 1, "Security" = 1, "Engineering" = 1, "Science" = 1, "Medical" = 1, "Supply" = 1, "Service" = 1, "AI Private" = 1, "Hailing" = 1)
+	channels = list("Command" = 1, ,"Infantry" = 1 ,"Security" = 1, "Engineering" = 1, "Science" = 1, "Medical" = 1, "Supply" = 1, "Service" = 1, "AI Private" = 1, "Hailing" = 1)
 
 /obj/item/device/encryptionkey/heads/rd
 	name = "chief science officer's encryption key"
@@ -134,7 +134,7 @@
 
 /obj/item/device/encryptionkey/ert
 	name = "\improper ERT radio encryption key"
-	channels = list("Response Team" = 1, "Science" = 1, "Command" = 1, "Medical" = 1, "Engineering" = 1, "Security" = 1, "Supply" = 1, "Service" = 1, "Hailing" = 1)
+	channels = list("Response Team" = 1, ,"Infantry" = 1,"Science" = 1, "Command" = 1, "Medical" = 1, "Engineering" = 1, "Security" = 1, "Supply" = 1, "Service" = 1, "Hailing" = 1)
 
 /obj/item/device/encryptionkey/specops //for events
 	name = "special operations radio encryption key"
@@ -150,3 +150,25 @@
 	name = "prospector radio encryption key"
 	icon_state = "srv_cypherkey"
 	channels = list("Supply" = 1)
+
+
+/////////
+// radio keys
+/////////
+/obj/item/device/encryptionkey/infantry/sl
+	name = "infantry leader encryption key"
+	desc = "An Encryption key."
+	icon_state = "cap_cypherkey"
+	channels = list("Command" = 1, "Infantry" = 1, "Supply" = 1, "Exploration" = 1)
+
+/obj/item/device/encryptionkey/infantry/tech
+	name = "infantry technician encryption key"
+	desc = "An Encryption key."
+	icon_state = "cap_cypherkey"
+	channels = list("Infantry" = 1, "Supply" = 1, "Exploration" = 1)
+
+/obj/item/device/encryptionkey/infantry
+	name = "infantry technician encryption key"
+	desc = "An Encryption key."
+	icon_state = "cap_cypherkey"
+	channels = list("Infantry" = 1, "Exploration" = 1)

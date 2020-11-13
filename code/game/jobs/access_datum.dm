@@ -10,6 +10,13 @@
 /*****************
 * Station access *
 *****************/
+
+/var/const/access_infantry = "ACCESS_INFANTRY"
+/datum/access/infantry
+	id = access_infantry				//Torch access now comes here, not at maps/torch anymore.
+	desc = "Infantry"					//Adds infantry area declaration
+	region = ACCESS_REGION_SECURITY
+
 /var/const/access_security = "ACCESS_SECURITY" //1
 /datum/access/security
 	id = access_security

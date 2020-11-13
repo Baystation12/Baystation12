@@ -30,7 +30,7 @@
 	var/mag_insert_sound = 'sound/weapons/guns/interaction/pistol_magin.ogg'
 	var/mag_remove_sound = 'sound/weapons/guns/interaction/pistol_magout.ogg'
 	var/can_special_reload = TRUE //Whether or not we can tactical/speed reload
-	
+
 	var/is_jammed = 0           //Whether this gun is jammed
 	var/jam_chance = 0          //Chance it jams on fire
 	//TODO generalize ammo icon states for guns
@@ -162,7 +162,7 @@
 								return
 							//Experienced gets a 0.5 second delay, master gets a 0.25 second delay
 							if(do_after(user, user.get_skill_value(SKILL_WEAPONS) == SKILL_PROF ? PROF_SPD_RELOAD : EXP_SPD_RELOAD, src))
-								ammo_magazine.update_icon()	
+								ammo_magazine.update_icon()
 								ammo_magazine.dropInto(user.loc)
 								user.visible_message(SPAN_WARNING("\The [user] reloads \the [src] with \the [AM]!"),
 													 SPAN_WARNING("You speed reload \the [src] with \the [AM]!"))
@@ -310,4 +310,32 @@
 	if(usr.stat || usr.restrained()) return
 
 	unload_ammo(usr)
-*/ 
+*/
+
+/// ################# Port from Vesta  -> We want to create a file boh_projectiles.dm at guns/projectiles with this
+
+
+/obj/item/projectile/bullet/sabot
+	name = "sabot"
+	icon_state= "rod"
+	fire_sound = 'sound/weapons/gunshot/shotgun.ogg'
+	damage = 35
+	armor_penetration = 80
+	//shrapnel_chance_multiplier = 0.1	//Is there really need for this? We should probably upgrade these to new bay model
+	//arterial_bleed_chance_multiplier = 0.1
+	penetrating = 1
+	damage_flags = DAM_EDGE
+
+/obj/item/projectile/bullet/rifle/military/sec
+	damage = 40 //higher damage
+	armor_penetration = 5 //much worse pen - frangible bullets
+	//shrapnel_chance_multiplier = 1.5
+	//arterial_bleed_chance_multiplier = 1.5 //higher post pen
+
+/obj/item/projectile/bullet/rcr
+	name ="incendiary shell"
+	icon_state= "rod"
+	damage_type = BURN
+	damage = 95
+	armor_penetration = 65 //not 100, because recoilless rifles don't have that high of a velocity
+	damage_flags = DAM_EDGE | DAM_DISPERSED | DAM_EXPLODE

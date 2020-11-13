@@ -316,3 +316,48 @@
 	matter = list(MATERIAL_STEEL = 600)
 	max_ammo = 7
 	multiple_sprites = 1
+
+//############Vesta custom content port######
+
+/obj/item/ammo_magazine/mil_rifle
+	name = "assault rifle magazine"
+	icon_state = "bullup"
+	origin_tech = list(TECH_COMBAT = 2)
+	mag_type = MAGAZINE
+	caliber = CALIBER_RIFLE_MILITARY
+	matter = list(MATERIAL_STEEL = 1800)
+	ammo_type = /obj/item/ammo_casing/rifle/military
+	max_ammo = 15 //if we lived in a world where normal mags had 30 rounds, this would be a 20 round mag
+	multiple_sprites = 1
+
+/obj/item/ammo_magazine/mil_rifle/sec
+	name = "frangible munitions rifle magazine"
+	ammo_type = /obj/item/ammo_casing/rifle/military/low
+	//allowed_round = list(/obj/item/ammo_casing/rifle/military/low)
+		///\allowed_round: re-initialization of global var ERROR
+
+//bigger mag
+/obj/item/ammo_magazine/mil_rifle/sec/large
+	name = "high-cap frangible munitions rifle magazine"
+	icon_state = "assault_rifle"
+	ammo_type = /obj/item/ammo_casing/rifle/military/low
+	max_ammo = 30
+
+/obj/item/ammo_magazine/mil_rifle/empty
+	initial_ammo = 0
+
+/obj/item/ammo_magazine/mil_rifle/practice
+	labels = list("practice")
+	ammo_type = /obj/item/ammo_casing/rifle/military/practice
+
+/obj/item/ammo_magazine/shotholder/sabot
+	name = "sabot shell holder"
+	caliber = CALIBER_SABOT
+	ammo_type = /obj/item/ammo_casing/sabot
+	matter = list(MATERIAL_STEEL = 1240)
+	marking_color = COLOR_GUNMETAL
+
+/obj/item/ammo_magazine/shotholder/empty
+	name = "shotgun ammunition holder"
+	matter = list(MATERIAL_STEEL = 250)
+	initial_ammo = 0
