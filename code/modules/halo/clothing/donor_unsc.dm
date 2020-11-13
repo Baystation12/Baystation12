@@ -1477,7 +1477,7 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	name = "UNSC Combat Gloves"
 	icon = MARINE_INHAND
 	icon_override = MARINE_OVERRIDE
-	item_state = "UNSCMarineGloves"
+	item_state = "unsc_gloves OLD"
 	icon_state = "unsc gloves_obj"
 
 /obj/item/clothing/shoes/marine/riley
@@ -1491,7 +1491,7 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	worn_state = "UNSC Marine Fatiguesold"
 
 /obj/item/clothing/suit/storage/marine/riley
-	desc = "this is an  M52BMC a modified M52B marine armor with Blue instead of red crosses and and front chest an tac pad monitor witch displays a blinking red cross and a text with says (you fuck up i patch up) the armor also seems to be fitted with a holographic cat tail"
+	desc = "this is an  M52BMC a modified M52B marine armor with Blue instead of red crosses and and front chest an tac pad monitor witch displays a blinking red cross and a text with says (You fuck up, I patch up) the armor also seems to be fitted with a holographic cat tail"
 	name = "M52BMC"
 	item_state = "riley-armor_worn"
 	icon_state = "riley-armor_obj"
