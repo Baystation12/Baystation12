@@ -1,0 +1,4 @@
+author: "Mucker"
+delete-after: True
+changes: 
+  - bugfix: "Fix players on a planet that aren't technically in the 'planetary area' not being able to trigger the event."

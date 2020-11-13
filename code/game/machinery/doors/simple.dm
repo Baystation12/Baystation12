@@ -42,6 +42,9 @@
 		glass = 1
 		alpha = 180
 		set_opacity(0)
+	
+	if(!density)
+		set_opacity(0)
 	update_icon()
 
 /obj/machinery/door/unpowered/simple/c_airblock(turf/other)
@@ -246,6 +249,9 @@
 
 /obj/machinery/door/unpowered/simple/plastic/New(var/newloc,var/material_name,var/complexity)
 	..(newloc, MATERIAL_PLASTIC, complexity)
+
+/obj/machinery/door/unpowered/simple/plastic/open
+	density = FALSE
 
 /obj/machinery/door/unpowered/simple/glass/New(var/newloc,var/material_name,var/complexity)
 	..(newloc, MATERIAL_GLASS, complexity)

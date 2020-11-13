@@ -1,0 +1,4 @@
+author: "Flying-loulou"
+delete-after: True
+changes: 
+  - bugfix: "The knife sheath no longer clips with the drop pouches."

@@ -1,0 +1,4 @@
+author: "Shadowtail117"
+delete-after: True
+changes: 
+  - bugfix: "Fixed the access requirements on the upper level of expedition storage."

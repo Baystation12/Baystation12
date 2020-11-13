@@ -1,0 +1,5 @@
+author: "juxtaposed9930"
+delete-after: True
+changes: 
+  - maptweak: "Fixes some unpainted and double painted walls on the skrell scout ship."
+  - maptweak: "The duplicate black webbing vest in Qrri-Zuumqix lockers has been replaced with a thigh holster."
