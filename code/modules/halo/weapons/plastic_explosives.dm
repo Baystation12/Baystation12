@@ -108,7 +108,7 @@
 		else
 			target.ex_act(1)
 	if(location)
-		explosion(location,3,4,5,5,1,0,1,0,0,null,dir,-1,2)
+		explosion(location,3,4,6,6,1,0,1,0,0,null,dir,-1,2)
 
 	if(target)
 		target.overlays -= image_overlay

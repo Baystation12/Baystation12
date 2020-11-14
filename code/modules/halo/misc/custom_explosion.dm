@@ -81,7 +81,7 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 						dir_move = turn(directional,180)
 					var/offset_moves_left = abs(directional_blast_offset)
 					if(offset_moves_left > 0)
-						for(var/i = 0 to offset_moves_left)
+						for(var/i = 1 to offset_moves_left)
 							epi = get_step(epi,dir_move)
 				//Now we create the cone, facing the original cone direction
 				var/turf/last_turf = epi
@@ -106,7 +106,6 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 
 					last_turf = get_step(last_turf,directional)
 					area_search += last_turf
-
 			else
 				area_search = trange(max_range, epicenter)
 
