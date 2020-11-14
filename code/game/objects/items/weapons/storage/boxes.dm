@@ -628,3 +628,17 @@
 
 /obj/item/weapon/storage/box/canned/tomato
 	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/canned/tomato = 6)
+
+//######## Port from Vesta
+/obj/item/weapon/storage/box/phoron
+	name = "Phoron Restructurant survival kit"
+	desc = "A box decorated in warning colors that contains a limited supply of survival tools for those suffering from Phoron Restructurant syndrome."
+	icon_state = "survivaleng"
+	startswith = list(
+		/obj/item/weapon/tank/emergency/phoron = 2,
+		/obj/item/weapon/tape_roll = 1,
+		/obj/item/weapon/extinguisher/mini = 1,
+		/obj/item/weapon/reagent_containers/hypospray/autoinjector = 1,
+		/obj/item/stack/medical/bruise_pack = 1,
+		/obj/item/device/flashlight/flare/glowstick = 1
+	)

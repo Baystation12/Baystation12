@@ -53,3 +53,31 @@
 	r_pocket = /obj/item/weapon/handcuffs
 	id_types = list(/obj/item/weapon/card/id/security)
 	pda_type = /obj/item/modular_computer/pda/security
+
+
+//########## Port from Vesta
+/decl/hierarchy/outfit/job/security/cadet
+	name = OUTFIT_JOB_NAME("Security Cadet")
+
+/datum/job/seccadet
+	title = "Security Cadet"
+	department = "Security"
+	department_flag = SEC
+	total_positions = 2
+	spawn_positions = 2
+	supervisors = "the entirety of Security"
+	economic_power = 1
+	minimal_player_age = 0
+	minimum_character_age = list(SPECIES_HUMAN = 18)
+	selection_color = "#601c1c"
+	alt_titles = list(
+		"Forensics Trainee"
+		)
+	min_skill = list(   SKILL_EVA         = SKILL_ADEPT,
+	                    SKILL_COMBAT      = SKILL_BASIC)
+	max_skill = list(   SKILL_COMBAT      = SKILL_EXPERT,
+	                    SKILL_WEAPONS     = SKILL_EXPERT,
+	                    SKILL_FORENSICS   = SKILL_EXPERT)
+	skill_points = 16
+
+	outfit_type = /decl/hierarchy/outfit/job/security/cadet

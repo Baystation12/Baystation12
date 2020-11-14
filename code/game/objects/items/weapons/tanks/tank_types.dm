@@ -66,6 +66,14 @@
 	slot_flags = null	//they have no straps!
 	starting_pressure = list(GAS_PHORON = 3*ONE_ATMOSPHERE)
 
+//####Port from Vesta
+obj/item/weapon/tank/phoron_big
+	name = "large phoron tank"
+	icon_state = "phoron_big"
+	distribute_pressure = 12
+	starting_pressure = list(GAS_PHORON = 10*ONE_ATMOSPHERE)
+	volume = 180
+
 /*
  * Hydrogen
  */
@@ -143,3 +151,18 @@
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
 	starting_pressure = list(GAS_NITROGEN = 10*ONE_ATMOSPHERE)
 	volume = 180
+
+//############# Port from Vesta
+/obj/item/weapon/tank/emergency/phoron
+	name = "emergency phoron tank"
+	desc = "An emergency air tank hastily painted orange and issued to plasma-afflicted crewmembers."
+	icon_state = "emergency_phoron"
+	gauge_icon = "indicator_emergency"
+	starting_pressure = list(GAS_PHORON = 10*ONE_ATMOSPHERE)
+	distribute_pressure = 12
+
+/obj/item/weapon/tank/oxygen/exploration_oxygen
+	name = "extended oxygen tank"
+	desc = "A tank of oxygen meant for long hauls in space."
+	starting_pressure = list(GAS_OXYGEN = 6*ONE_ATMOSPHERE)
+	volume = 380 //extended for exploration use

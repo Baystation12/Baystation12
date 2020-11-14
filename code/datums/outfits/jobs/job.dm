@@ -12,3 +12,15 @@
 	pda_type = /obj/item/modular_computer/pda
 
 	flags = OUTFIT_FLAGS_JOB_DEFAULT
+
+//### Port from Vesta
+/decl/hierarchy/outfit/job/equip_ids(mob/living/carbon/human/H)
+	var/obj/item/weapon/card/id/C = ..()
+	if(!C)
+		return
+	if(H.mind)
+		if(H.mind.initial_account)
+			C.associated_account_number = H.mind.initial_account.account_number
+		if(H.mind.initial_email_login)
+			C.associated_email_login = H.mind.initial_email_login.Copy()
+	return C

@@ -87,3 +87,19 @@
 
 /datum/map/torch
 	default_assistant_title = "Passenger"
+
+/datum/job/sea/marine		//We may want to move this out @r4iser
+	title = "SMC Attache"
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/sea/marineattache
+	minimum_character_age = list(SPECIES_HUMAN = 21,SPECIES_UNATHI = 21,SPECIES_SERGAL = 21, SPECIES_SKRELL = 21, SPECIES_PROMETHEAN = 21, SPECIES_YEOSA = 21, SPECIES_VASS = 21, SPECIES_TAJ = 21, SPECIES_CUSTOM = 21, SPECIES_AKULA = 21)
+	allowed_branches = list(
+		/datum/mil_branch/marine_corps
+	)
+	allowed_ranks = list(
+		/datum/mil_rank/marine_corps/e8_alt,
+		/datum/mil_rank/marine_corps/e9,
+		/datum/mil_rank/marine_corps/e9_alt,
+		/datum/mil_rank/marine_corps/o1,
+		/datum/mil_rank/marine_corps/o2,
+		/datum/mil_rank/marine_corps/o3
+	)

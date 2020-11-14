@@ -46,3 +46,7 @@
 #define DARKTINT_NONE      "#ffffff"
 #define DARKTINT_MODERATE  "#f9f9f5"
 #define DARKTINT_GOOD      "#ebebe6"
+
+
+// ### ORIGINAL BAY REQUIRED VAR PORTED
+#define SPECIES_FLAG_LOW_GRAV_ADAPTED           0x0400  // This species is used to lower than standard gravity, affecting stamina in high-grav
