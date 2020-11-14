@@ -884,6 +884,10 @@
 	icon_state = "toxstorage"
 	req_access = list(access_tox_storage)
 
+/area/rnd/canister/entry
+	name = "\improper Canister Storage Access"
+	icon_state = "toxmisc"
+
 /area/rnd/development
 	name = "\improper Fabricator Lab"
 	icon_state = "devlab"
