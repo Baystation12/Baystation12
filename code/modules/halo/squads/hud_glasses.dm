@@ -141,7 +141,7 @@
 
 /obj/item/clothing/glasses/hud/tactical/proc/process_visible_marker(var/obj/effect/waypoint_holder/waypoint,var/mob/user) //This is for waypoints the player can currently see on-screen
 	if(waypoint_pointers[waypoint])
-		remove_pointer(waypoint)
+		remove_pointer(user,waypoint)
 	var/image/pointer = image(waypoint.icon,waypoint.loc,"[waypoint.waypoint_icon]_onscreen")
 	pointer.name = waypoint.waypoint_name
 	pointer.plane = HUD_PLANE
