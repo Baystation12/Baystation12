@@ -107,6 +107,7 @@
 		if (1.0)
 			b_loss = 90
 			f_loss = 90
+			eyeflash_duration = 20
 			if (!prob(getarmor(null, "bomb")))
 				b_loss = 150
 				f_loss = 150
@@ -142,7 +143,7 @@
 			throw_range = world.view - 2
 
 	if(!blinded)
-		flash_eyes(duration = eyeflash_duration)
+		flash_eyes(FLASH_PROTECTION_MODERATE,FALSE,FALSE,FALSE, /obj/screen/fullscreen/flash, eyeflash_duration)
 
 	// factor in armour / degrade armor
 	var/protection = blocked_mult(getarmor(null, "bomb"))
