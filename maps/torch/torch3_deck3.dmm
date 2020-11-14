@@ -241,7 +241,7 @@
 	pixel_y = 32
 	},
 /obj/machinery/camera/network/third_deck{
-	c_tag = "Third Deck Hallway - Firing Range"
+	c_tag = "Third Deck Hallway - Head"
 	},
 /obj/effect/floor_decal/corner/green{
 	dir = 5
@@ -6667,7 +6667,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/item/drain,
+/obj/structure/hygiene/drain,
 /turf/simulated/floor/tiled,
 /area/hydroponics)
 "nP" = (
@@ -13752,7 +13752,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/foreport)
 "GY" = (
-/obj/item/drain,
+/obj/structure/hygiene/drain,
 /turf/simulated/floor/tiled,
 /area/hydroponics)
 "GZ" = (
