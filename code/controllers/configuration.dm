@@ -208,6 +208,8 @@ var/list/gamemode_cache = list()
 	var/max_acts_per_interval = 140 //Number of actions per interval permitted for spam protection.
 	var/act_interval = 0.1 SECONDS //Interval for spam prevention.
 
+	var/job_whitelist = FALSE //Do we use the job whitelist? Set to false so devs don't have to set config options.
+
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
 	for (var/T in L)
@@ -710,6 +712,10 @@ var/list/gamemode_cache = list()
 				if ("minimum_player_age")
 					config.minimum_player_age = text2num(value)
 
+				//############# Ported from Vesta
+				if ("job_whitelist")
+					config.job_whitelist = TRUE
+					//############# Ported from Vesta
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
 

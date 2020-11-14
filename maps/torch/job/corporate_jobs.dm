@@ -86,3 +86,50 @@
 			if(M.mind.assigned_role == "Workplace Liaison")
 				to_chat(M, SPAN_NOTICE("<b>Your bodyguard, [my_title] named [person.real_name], is present on [GLOB.using_map.full_name].</b>"))
 	..()
+
+
+// ################ Port from Vesta
+
+/datum/job/psiadvisor
+	title = "Psionic Advisor"
+	department = "Support"
+	department_flag = SPT
+	selection_color = "#2f2f7f"
+	total_positions = 1
+	spawn_positions = 1
+	economic_power = 30
+	minimum_character_age = list(SPECIES_HUMAN = 25,SPECIES_UNATHI = 25,SPECIES_SERGAL = 25, SPECIES_SKRELL = 25, SPECIES_PROMETHEAN = 25, SPECIES_YEOSA = 25, SPECIES_VASS = 25, SPECIES_TAJ = 25, SPECIES_CUSTOM = 25, SPECIES_AKULA = 25)
+	minimal_player_age = 7
+	supervisors = "NTPC or the Foundation, neither secondary to the Commanding Officer"
+	outfit_type = /decl/hierarchy/outfit/job/command/psiadvisor
+	allowed_branches = list(/datum/mil_branch/civilian)
+	allowed_ranks = list(/datum/mil_rank/civ/foundationadvisor)
+	min_skill = list(
+		SKILL_BUREAUCRACY = SKILL_EXPERT,
+		SKILL_FINANCE = SKILL_ADEPT,
+		SKILL_MEDICAL = SKILL_BASIC
+	)
+	max_skill = list(
+		SKILL_COMBAT     = SKILL_EXPERT,
+		SKILL_WEAPONS     = SKILL_EXPERT
+	)
+	skill_points = 30
+	access = list(access_psiadvisor, access_security, access_medical, access_engine, access_maint_tunnels, access_external_airlocks,
+				access_eva, access_bridge, access_cargo, access_RC_announce, access_solgov_crew, access_hangar)
+	minimal_access = list()
+	software_on_spawn = list(
+		/datum/computer_file/program/comm,
+		/datum/computer_file/program/records
+	)
+
+	alt_titles = list(
+		"Nanotrasen Psionic Operative" = /decl/hierarchy/outfit/job/command/psiadvisor/nt,
+		"Foundation Agent")
+
+/datum/job/psiadvisor/equip(var/mob/living/carbon/human/H)
+	psi_faculties = list("[PSI_REDACTION]" = PSI_RANK_OPERANT, "[PSI_COERCION]" = PSI_RANK_OPERANT, "[PSI_PSYCHOKINESIS]" = PSI_RANK_OPERANT, "[PSI_ENERGISTICS]" = PSI_RANK_OPERANT)
+	return ..()
+
+/datum/job/psiadvisor/get_description_blurb()
+	return "You are the Psionic Advisor, an agent of either the Foundation or Nanotrasen Psionic Corps. Alongside the Counselor, you're the only other individual with known and authorized Psionic abilities aboard the NTSS Dagon. Your main responsibility is advising the Commanding Officer on psionic matters. \
+	Secondly, you're to assist the crew or Research on psionic matters, or guide any newly emergent crew that awaken with psionic abilities."

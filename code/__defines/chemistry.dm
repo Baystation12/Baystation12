@@ -58,3 +58,7 @@
 
 #define HANDLE_REACTIONS(_reagents)  SSchemistry.active_holders[_reagents] = TRUE
 #define UNQUEUE_REACTIONS(_reagents) SSchemistry.active_holders -= _reagents
+
+
+// ########## Ported from Vesta
+#define IS_CARNIVORE 1

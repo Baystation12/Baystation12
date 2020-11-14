@@ -46,6 +46,7 @@
 	id_types = list(/obj/item/weapon/card/id/civilian/librarian)
 	pda_type = /obj/item/modular_computer/pda
 
+/*
 /decl/hierarchy/outfit/job/internal_affairs_agent
 	name = OUTFIT_JOB_NAME("Internal affairs agent")
 	l_ear = /obj/item/device/radio/headset/ia
@@ -55,7 +56,7 @@
 	glasses = /obj/item/clothing/glasses/sunglasses/big
 	l_hand = /obj/item/weapon/storage/briefcase
 	id_types = list(/obj/item/weapon/card/id/civilian/internal_affairs_agent)
-	pda_type = /obj/item/modular_computer/pda/heads/paperpusher
+	pda_type = /obj/item/modular_computer/pda/heads/paperpusher*/ // thats bay's only
 
 /decl/hierarchy/outfit/job/chaplain
 	name = OUTFIT_JOB_NAME("Chaplain")

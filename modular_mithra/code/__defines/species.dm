@@ -1,0 +1,1 @@
+#define SPECIES_IS_ICONBASE		0x40 //Can be used a custom species iconbase, despite other spawn flags. Continued from code/__defines/species.dm

@@ -30,6 +30,13 @@
 */
 
 /datum/mind
+
+	// ###### Ported from Vesta
+	var/list/known_connections //list of known (RNG) relations between people
+	var/gen_relations_info
+
+	// ###### Ported from Vesta
+
 	var/key
 	var/name				//replaces mob/var/original_name
 	var/mob/living/current
@@ -552,6 +559,12 @@
 /mob/living/carbon/slime/mind_initialize()
 	..()
 	mind.assigned_role = "slime"
+
+//##### Ported from Vesta
+/mob/living/carbon/alien/larva/mind_initialize()
+	..()
+	mind.special_role = "Larva"
+//##### Ported from Vesta
 
 //AI
 /mob/living/silicon/ai/mind_initialize()

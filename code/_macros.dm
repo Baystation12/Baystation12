@@ -193,3 +193,8 @@
 #define FONT_GIANT(X) "<font size='5'>[X]</font>"
 
 #define crash_with(X) crash_at(X, __FILE__, __LINE__)
+
+
+// ############ Port from Vesta
+
+#define from_file(file_entry, target_var)                   file_entry >> (target_var)

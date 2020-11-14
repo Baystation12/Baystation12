@@ -22,29 +22,29 @@
 	sort_order = 1
 	var/datum/browser/panel
 
-/datum/category_item/player_setup_item/occupation/load_character(datum/pref_record_reader/R)
-	pref.alternate_option = R.read("alternate_option")
-	pref.job_high = R.read("job_high")
-	pref.job_medium = R.read("job_medium")
-	pref.job_low = R.read("job_low")
-	pref.player_alt_titles = R.read("player_alt_titles")
-	pref.skills_saved = R.read("skills_saved")
-	pref.branches = R.read("branches")
-	pref.ranks = R.read("ranks")
-	pref.hiding_maps = R.read("hiding_maps")
+/datum/category_item/player_setup_item/occupation/load_character(var/savefile/S)
+	from_file(S["alternate_option"], 	pref.alternate_option)
+	from_file(S["job_high"],			pref.job_high)
+	from_file(S["job_medium"],			pref.job_medium)
+	from_file(S["job_low"],				pref.job_low)
+	from_file(S["player_alt_titles"],	pref.player_alt_titles)
+	from_file(S["skills_saved"],		pref.skills_saved)
+	from_file(S["branches"],			pref.branches)
+	from_file(S["ranks"],				pref.ranks)
+	from_file(S["hiding_maps"],			pref.hiding_maps)
 	load_skills()
 
-/datum/category_item/player_setup_item/occupation/save_character(datum/pref_record_writer/W)
+/datum/category_item/player_setup_item/occupation/save_character(var/savefile/S)
 	save_skills()
-	W.write("alternate_option", pref.alternate_option)
-	W.write("job_high", pref.job_high)
-	W.write("job_medium", pref.job_medium)
-	W.write("job_low", pref.job_low)
-	W.write("player_alt_titles", pref.player_alt_titles)
-	W.write("skills_saved", pref.skills_saved)
-	W.write("branches", pref.branches)
-	W.write("ranks", pref.ranks)
-	W.write("hiding_maps", pref.hiding_maps)
+	to_file(S["alternate_option"],		pref.alternate_option)
+	to_file(S["job_high"],				pref.job_high)
+	to_file(S["job_medium"],			pref.job_medium)
+	to_file(S["job_low"],				pref.job_low)
+	to_file(S["player_alt_titles"],		pref.player_alt_titles)
+	to_file(S["skills_saved"],			pref.skills_saved)
+	to_file(S["branches"],				pref.branches)
+	to_file(S["ranks"],					pref.ranks)
+	to_file(S["hiding_maps"],			pref.hiding_maps)
 
 /datum/category_item/player_setup_item/occupation/sanitize_character()
 	if(!istype(pref.job_medium))		pref.job_medium = list()
@@ -165,6 +165,8 @@
 					bad_message = "<b>\[SPECIES RESTRICTED]</b>"
 				else if(!S.check_background(job, user.client.prefs))
 					bad_message = "<b>\[BACKGROUND RESTRICTED]</b>"
+				else if(!has_job_whitelist(user.client, job))
+					bad_message = "<b>\[JOB WHITELISTED]</b>"
 
 				var/current_level = JOB_LEVEL_NEVER
 				if(pref.job_high == job.title)
@@ -426,7 +428,7 @@
 
 	else if(href_list["job_wiki"])
 		var/rank = href_list["job_wiki"]
-		send_link(user,"[config.wikiurl][rank]")
+		send_link(user,"[config.wikiurl][rank]")	//send_link is the new method to redirect users @r4iser
 
 	return ..()
 
@@ -514,15 +516,15 @@
 		allowed_titles += job.title
 
 		if(job.title == pref.job_high)
-			if(job.is_restricted(pref))
+			if(job.is_restricted(null,pref))
 				pref.job_high = null
 
 		else if(job.title in pref.job_medium)
-			if(job.is_restricted(pref))
+			if(job.is_restricted(null,pref))
 				pref.job_medium.Remove(job.title)
 
 		else if(job.title in pref.job_low)
-			if(job.is_restricted(pref))
+			if(job.is_restricted(null,pref))
 				pref.job_low.Remove(job.title)
 
 	if(pref.job_high && !(pref.job_high in allowed_titles))

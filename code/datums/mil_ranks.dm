@@ -1,3 +1,6 @@
+// #### Ported from Vesta
+// Almost fully, sounds clean.
+
 /**
  *  Datums for military branches and ranks
  *
@@ -16,8 +19,8 @@ var/datum/mil_branches/mil_branches = new()
  *  Global object for handling branches
  */
 /datum/mil_branches
-	var/list/branches                   // All branches that exist
-	var/list/spawn_branches_            // Branches that a player can choose for spawning, not including species restrictions.
+	var/list/branches				   // All branches that exist
+	var/list/spawn_branches_			// Branches that a player can choose for spawning, not including species restrictions.
 	var/list/spawn_branches_by_species_ // Branches that a player can choose for spawning, with species restrictions. Populated on a needed basis
 
 /**
@@ -92,28 +95,28 @@ var/datum/mil_branches/mil_branches = new()
  *  A single military branch, such as Fleet or Marines
  */
 /datum/mil_branch
-	var/name = "Unknown"         // Longer name for branch, eg "Sol Central Marine Corps"
-	var/name_short       		// Abbreviation of the name, eg "SCMC"
+	var/name = "Unknown"		 // Longer name for branch, eg "Sol Central Marine Corps"
+	var/name_short	   		// Abbreviation of the name, eg "SCMC"
 
 
 
 	var/list/ranks // Associative list of full rank names to the corresponding
-	               // /datum/mil_rank objects. These are all ranks available to the branch.
+				   // /datum/mil_rank objects. These are all ranks available to the branch.
 
-	var/list/spawn_ranks_            // Ranks which the player can choose for spawning, not including species restrictions
+	var/list/spawn_ranks_			// Ranks which the player can choose for spawning, not including species restrictions
 	var/list/spawn_ranks_by_species_ // Ranks which the player can choose for spawning, with species restrictions. Populated on a needed basis
 
-	var/list/rank_types       // list of paths used to init the ranks list
+	var/list/rank_types	   // list of paths used to init the ranks list
 	var/list/spawn_rank_types // list of paths used to init the spawn_ranks list. Subset of rank_types
 
-	var/assistant_job = DEFAULT_JOB_TYPE
+	var/assistant_job = /datum/job/assistant
 
 	// Email addresses will be created under this domain name. Mostly for the looks.
 	var/email_domain = "freemail.net"
 
-	var/allow_custom_email = FALSE
-
 	var/list/min_skill
+
+	var/allow_custom_email = FALSE
 
 /datum/mil_branch/New()
 	ranks = list()
@@ -176,10 +179,11 @@ var/datum/mil_branches/mil_branches = new()
  */
 /datum/mil_rank
 	var/name = "Unknown"
-	var/name_short // Abbreviation of the name. Should be null if the
-	                       // rank doesn't usually serve as a prefix to the individual's name.
+	var/name_short	// Abbreviation of the name. Should be null if the
+					// rank doesn't usually serve as a prefix to the individual's name.
 	var/list/accessory		//type of accesory that will be equipped by job code with this rank
 	var/sort_order = 0 // A numerical equivalent of the rank used to indicate its order when compared to other datums: eg e-1 = 1, o-1 = 11
+	var/pow_cat = 0 //A numerical equivelent of the Geneva/Galilei Convention Category of the rank, 0 for non-sol forces unless they have signed for some reason.
 
 //Returns short designation (yes shorter than name_short), like E1, O3 etc.
 /datum/mil_rank/proc/grade()

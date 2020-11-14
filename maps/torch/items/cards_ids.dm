@@ -212,3 +212,20 @@
 	job_access_type = /datum/job/merchant
 	color = COLOR_OFF_WHITE
 	detail_color = COLOR_BEIGE
+
+// ############# Port from Vesta
+
+/obj/item/weapon/card/id/torch/crew/infantry
+	job_access_type = /datum/job/grunt
+	detail_color = "#429661"
+
+/obj/item/weapon/card/id/torch/crew/infantry/infcom
+	job_access_type = /datum/job/squad_lead
+
+/obj/item/weapon/card/id/torch/crew/infantry/inftech
+	job_access_type = /datum/job/combat_tech
+	detail_color = COLOR_SUN
+
+/obj/item/weapon/card/id/torch/crew/psiadvisor
+	job_access_type = /datum/job/psiadvisor
+	detail_color = COLOR_COMMAND_BLUE

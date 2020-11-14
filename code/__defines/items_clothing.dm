@@ -171,8 +171,8 @@
 #define  FIRESUIT_MAX_PRESSURE 		100 * ONE_ATMOSPHERE   // Firesuis and atmos voidsuits
 #define  RIG_MAX_PRESSURE 			50 * ONE_ATMOSPHERE   // Rigs
 #define  LIGHT_RIG_MAX_PRESSURE 	25 * ONE_ATMOSPHERE   // Rigs
-#define  ENG_VOIDSUIT_MAX_PRESSURE 	50 * ONE_ATMOSPHERE 
-#define  VOIDSUIT_MAX_PRESSURE 		25 * ONE_ATMOSPHERE 
+#define  ENG_VOIDSUIT_MAX_PRESSURE 	50 * ONE_ATMOSPHERE
+#define  VOIDSUIT_MAX_PRESSURE 		25 * ONE_ATMOSPHERE
 #define  SPACE_SUIT_MAX_PRESSURE 	5 * ONE_ATMOSPHERE
 
 // Fire.
@@ -206,6 +206,13 @@
 #define HUD_SECURITY 0x2
 #define HUD_MEDICAL 0x4
 #define HUD_JANITOR 0x8
+
+
+//###Port from Vesta
+
+#define ACCESSORY_SLOT_OVER		"Overwear cover" // For cloaks. Check "~code/clothing.dm" for clothing with valid accessory.
+
+/// ####end
 
 // Storage
 

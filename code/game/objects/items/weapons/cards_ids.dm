@@ -93,28 +93,19 @@
  */
 
 /obj/item/weapon/card/emag_broken
-	desc = "It's a blank ID card with a magnetic strip and some odd circuitry attached."
-	name = "identification card"
+	desc = "It's a card with a magnetic strip and shorted RFID circuitry. It looks too busted to be used for anything but salvage."
+	name = "broken ID card"
 	icon_state = "emag"
 	item_state = "card-id"
 	origin_tech = list(TECH_MAGNET = 2, TECH_ESOTERIC = 2)
-
-/obj/item/weapon/card/emag_broken/examine(mob/user, distance)
-	. = ..()
-	if(distance <= 0 && (user.skill_check(SKILL_DEVICES, SKILL_ADEPT) || player_is_antag(user.mind)))
-		to_chat(user, SPAN_WARNING("You can tell the components are completely fried; whatever use it may have had before is gone."))
-
-/obj/item/weapon/card/emag_broken/get_antag_info()
-	. = ..()
-	. += "You can use this cryptographic sequencer in order to subvert electronics or forcefully open doors you don't have access to. These actions are irreversible and the card only has a limited number of charges!"
 
 /obj/item/weapon/card/emag
-	desc = "It's a blank ID card with a magnetic strip and some odd circuitry attached."
-	name = "identification card"
-	icon_state = "emag"
+	desc = "It's a boring old ID card. It looks blank and broken."
+	name = "blank ID"
+	icon_state = "data_1"
 	item_state = "card-id"
 	origin_tech = list(TECH_MAGNET = 2, TECH_ESOTERIC = 2)
-	var/uses = 10
+	var/uses = 15
 
 	var/static/list/card_choices = list(
 							/obj/item/weapon/card/emag,
@@ -126,7 +117,6 @@
 						) //Should be enough of a selection for most purposes
 
 var/const/NO_EMAG_ACT = -50
-
 /obj/item/weapon/card/emag/resolve_attackby(atom/A, mob/user)
 	var/used_uses = A.emag_act(uses, user, src)
 	if(used_uses == NO_EMAG_ACT)
@@ -160,10 +150,11 @@ var/const/NO_EMAG_ACT = -50
 			return
 
 		disguise(card_choices[picked], usr)
-	
-/obj/item/weapon/card/emag/get_antag_info()
+
+/obj/item/weapon/card/emag/examine(mob/user)
 	. = ..()
-	. += "You can use this cryptographic sequencer in order to subvert electronics or forcefully open doors you don't have access to. These actions are irreversible and the card only has a limited number of charges!"
+	if(user.skill_check(SKILL_DEVICES,SKILL_ADEPT))
+		to_chat(user, SPAN_WARNING("This ID card has some form of non-standard modifications."))
 
 /obj/item/weapon/card/id
 	name = "identification card"
@@ -194,6 +185,8 @@ var/const/NO_EMAG_ACT = -50
 
 	var/datum/mil_branch/military_branch = null //Vars for tracking branches and ranks on multi-crewtype maps
 	var/datum/mil_rank/military_rank = null
+	var/pow_cat = 0
+	var/max_pow_cat = 0
 
 	var/formal_name_prefix
 	var/formal_name_suffix
@@ -207,6 +200,7 @@ var/const/NO_EMAG_ACT = -50
 		var/datum/job/j = SSjobs.get_by_path(job_access_type)
 		if(j)
 			rank = j.title
+			max_pow_cat = j.max_pow_cat
 			assignment = rank
 			access |= j.get_access()
 			if(!detail_color)
@@ -245,8 +239,8 @@ var/const/NO_EMAG_ACT = -50
 
 /obj/item/weapon/card/id/proc/show(mob/user as mob)
 	if(front && side)
-		send_rsc(user, front, "front.png")
-		send_rsc(user, side, "side.png")
+		user << browse_rsc(front, "front.png")
+		user << browse_rsc(side, "side.png")
 	var/datum/browser/popup = new(user, "idcard", name, 600, 250)
 	popup.set_content(dat())
 	popup.set_title_image(usr.browse_rsc_icon(src.icon, src.icon_state))
@@ -298,7 +292,11 @@ var/const/NO_EMAG_ACT = -50
 	if(GLOB.using_map.flags & MAP_HAS_BRANCH)
 		id_card.military_branch = char_branch
 	if(GLOB.using_map.flags & MAP_HAS_RANK)
-		id_card.military_rank = char_rank
+		if(char_rank)
+			id_card.military_rank = char_rank
+			id_card.pow_cat = char_rank.pow_cat
+		if(id_card.pow_cat > id_card.max_pow_cat)
+			id_card.pow_cat = id_card.max_pow_cat
 
 /obj/item/weapon/card/id/proc/dat()
 	var/list/dat = list("<table><tr><td>")
@@ -314,15 +312,30 @@ var/const/NO_EMAG_ACT = -50
 	dat += text("Assignment: []</A><BR>\n", assignment)
 	dat += text("Fingerprint: []</A><BR>\n", fingerprint_hash)
 	dat += text("Blood Type: []<BR>\n", blood_type)
-	dat += text("DNA Hash: []<BR><BR>\n", dna_hash)
+	dat += text("DNA Hash: []<BR>\n", dna_hash)
+	if(pow_cat && GLOB.using_map.flags & MAP_HAS_RANK)
+		var/pow_roman = ""
+		switch(pow_cat)
+			if(1)
+				pow_roman = "I"
+			if(2)
+				pow_roman = "II"
+			if(3)
+				pow_roman = "III"
+			if(4)
+				pow_roman = "IV"
+			if(5)
+				pow_roman = "V"
+		dat += text("Galilei Convention: Cat []<BR>\n", pow_roman)
+	dat += text("<BR>\n")
 	if(front && side)
 		dat +="<td align = center valign = top>Photo:<br><img src=front.png height=80 width=80 border=4><img src=side.png height=80 width=80 border=4></td>"
 	dat += "</tr></table>"
 	return jointext(dat,null)
 
 /obj/item/weapon/card/id/attack_self(mob/user as mob)
-	user.visible_message("\The [user] shows you: [icon2html(src, viewers(get_turf(src)))] [src.name]. The assignment on the card: [src.assignment]",\
-		"You flash your ID card: [icon2html(src, viewers(get_turf(src)))] [src.name]. The assignment on the card: [src.assignment]")
+	user.visible_message("\The [user] shows you: \icon[src] [src.name]. The assignment on the card: [src.assignment]",\
+		"You flash your ID card: \icon[src] [src.name]. The assignment on the card: [src.assignment]")
 
 	src.add_fingerprint(user)
 	return
@@ -338,7 +351,7 @@ var/const/NO_EMAG_ACT = -50
 	set category = "Object"
 	set src in usr
 
-	to_chat(usr, text("[icon2html(src, usr)] []: The current assignment on the card is [].", src.name, src.assignment))
+	to_chat(usr, text("\icon[] []: The current assignment on the card is [].", src, src.name, src.assignment))
 	to_chat(usr, "The blood type on the card is [blood_type].")
 	to_chat(usr, "The DNA hash on the card is [dna_hash].")
 	to_chat(usr, "The fingerprint hash on the card is [fingerprint_hash].")
@@ -411,6 +424,18 @@ var/const/NO_EMAG_ACT = -50
 	assignment = "Emergency Response Team"
 
 /obj/item/weapon/card/id/centcom/ERT/New()
+	..()
+	access |= get_all_station_access()
+
+/////////
+// Deathsquad
+/////////
+
+/obj/item/weapon/card/id/centcom/deathsquad
+	name = "Asset Protection ID"
+	assignment = "Corporate Commando"
+
+/obj/item/weapon/card/id/centcom/deathsquad/New()
 	..()
 	access |= get_all_station_access()
 
@@ -559,7 +584,7 @@ var/const/NO_EMAG_ACT = -50
 /obj/item/weapon/card/id/civilian
 	name = "identification card"
 	desc = "A card issued to civilian staff."
-	job_access_type = DEFAULT_JOB_TYPE
+	job_access_type = /datum/job/assistant
 	detail_color = COLOR_CIVIE_GREEN
 
 /obj/item/weapon/card/id/civilian/bartender
@@ -576,10 +601,6 @@ var/const/NO_EMAG_ACT = -50
 
 /obj/item/weapon/card/id/civilian/librarian
 	job_access_type = /datum/job/librarian
-
-/obj/item/weapon/card/id/civilian/internal_affairs_agent
-	job_access_type = /datum/job/lawyer
-	detail_color = COLOR_NAVY_BLUE
 
 /obj/item/weapon/card/id/civilian/chaplain
 	job_access_type = /datum/job/chaplain

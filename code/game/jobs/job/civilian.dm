@@ -99,6 +99,7 @@
 	alt_titles = list("Journalist")
 	outfit_type = /decl/hierarchy/outfit/job/librarian
 
+/*
 /datum/job/lawyer
 	title = "Internal Affairs Agent"
 	department = "Support"
@@ -111,6 +112,7 @@
 	minimal_access = list(access_lawyer, access_sec_doors, access_bridge)
 	minimal_player_age = 10
 	outfit_type = /decl/hierarchy/outfit/job/internal_affairs_agent
+	*/ //Bay's stuff
 
 /datum/job/lawyer/equip(var/mob/living/carbon/human/H)
 	. = ..()
