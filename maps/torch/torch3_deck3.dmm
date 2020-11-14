@@ -3482,7 +3482,7 @@
 /area/tcommsat/chamber)
 "hc" = (
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/machinery/telecomms/server/presets/exploration,
+/obj/machinery/telecomms/server/presets/infantry, //Vesta Port, BoH fuckup. Infantry is now handling infantry and exploration
 /turf/simulated/floor/bluegrid,
 /area/tcommsat/chamber)
 "hd" = (
