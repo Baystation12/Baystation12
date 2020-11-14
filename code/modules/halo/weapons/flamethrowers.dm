@@ -13,6 +13,7 @@
 	burst = 3
 	hud_bullet_usebar = 1
 	caliber="flamethrower"
+	fire_delay = 7
 	one_hand_penalty = 3
 	slowdown_general = 0.35
 	dispersion = list(0.4)

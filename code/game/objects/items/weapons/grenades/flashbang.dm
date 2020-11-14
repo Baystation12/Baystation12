@@ -47,13 +47,13 @@
 //Flashing everyone
 		if(eye_safety < FLASH_PROTECTION_MODERATE)
 			if(get_dist(M,T) <= 2)
-				M.flash_eyes(duration = 50)//5 seconds flash max
+				M.flash_eyes(FLASH_PROTECTION_MODERATE,FALSE,FALSE,FALSE, /obj/screen/fullscreen/flash, 50)//5 seconds flash max
 			else if(get_dist(M,T) <= 5)
-				M.flash_eyes(duration = 40)
+				M.flash_eyes(FLASH_PROTECTION_MODERATE,FALSE,FALSE,FALSE, /obj/screen/fullscreen/flash, 40)//5 seconds flash max
 			else if(get_dist(M,T) <= 7)
-				M.flash_eyes(duration = 35)
+				M.flash_eyes(FLASH_PROTECTION_MODERATE,FALSE,FALSE,FALSE, /obj/screen/fullscreen/flash, 35)//5 seconds flash max
 			else
-				M.flash_eyes(duration = 30)
+				M.flash_eyes(FLASH_PROTECTION_MODERATE,FALSE,FALSE,FALSE, /obj/screen/fullscreen/flash, 30)//5 seconds flash max
 
 //Now applying sound
 			if((get_dist(M, T) <= 2 || src.loc == M.loc || src.loc == M))
