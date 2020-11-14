@@ -218,3 +218,8 @@
 	icon_state = "rcrshell"
 	matter = list(MATERIAL_STEEL = 50000) //Same as the RCD, retardedly high, for good reason.
 	projectile_type = /obj/item/projectile/bullet/rcr
+
+/obj/item/ammo_casing/pistol/magnum/large
+	desc = "A high-power bullet casing."
+	caliber = CALIBER_PISTOL_MAGNUM_LARGE
+	projectile_type = /obj/item/projectile/bullet/pistol/large

@@ -272,3 +272,15 @@
 	pixel_x = rand(-10,10)
 	pixel_y = rand(-10,10)
 	..()
+
+
+// ########## Ports from Vesta
+
+//Ultimate Argument
+/obj/item/projectile/bullet/pistol/large
+	//fire_sound = 'sound/weapons/gunshot/revolver_1.ogg' -> We may want it to be upgraded with bay as /pistol/?
+	damage = 50
+	//shrapnel_chance_multiplier = 0.8		// -> Getting it as /pistol/
+	//arterial_bleed_chance_multiplier = 0.8
+	distance_falloff = 2.5
+	armor_penetration = 15

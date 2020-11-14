@@ -251,6 +251,8 @@ obj/effect/energy_net/user_unbuckle_mob(mob/user)
 	return ..()
 
 
+// Vesta Port
+
 /////////
 // Infantry Kits
 /////////

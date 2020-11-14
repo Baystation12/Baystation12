@@ -216,3 +216,17 @@ Single Use Emergency Pouches
 	name = "emergency adrenaline autoinjector"
 	amount_per_transfer_from_this = 8
 	starts_with = list(/datum/reagent/adrenaline = 8)
+
+// ################ Vesta Port
+
+/obj/item/weapon/storage/med_pouch/ascent
+	name = "chemical pouch"
+	injury_type = "ascent"
+	color = COLOR_PURPLE
+									//Last item calls here were not up to date anymore
+	startswith = list(/obj/item/weapon/reagent_containers/hypospray/autoinjector/combatpain)
+	instructions = {"
+	1) Tear open the emergency medical pack using the easy open tab at the top.\n\
+	\t2) Carefully try not to die.\n\
+	\t3) Don't overdose yourself, use one injector at a time.\n\
+		"}

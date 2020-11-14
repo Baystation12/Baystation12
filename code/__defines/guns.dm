@@ -37,3 +37,4 @@
 
 // ############### Ports Vesta custom content
 #define CALIBER_SABOT			"sabot"
+#define CALIBER_PISTOL_MAGNUM_LARGE ".454mm"

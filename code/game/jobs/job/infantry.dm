@@ -19,12 +19,12 @@
 						SKILL_COMBAT      = SKILL_ADEPT,
 						SKILL_WEAPONS     = SKILL_ADEPT)
 
-	max_skill = list(	SKILL_COMBAT      = SKILL_SPEC,
-						SKILL_WEAPONS     = SKILL_SPEC,
+	max_skill = list(	SKILL_COMBAT      = SKILL_PROF,		//SKILL_SPEC Being given as undefined var. Changing to SKILL_PROF
+						SKILL_WEAPONS     = SKILL_PROF,		//Thanks Vhbraz
 						SKILL_EVA		  = SKILL_EXPERT,
-						SKILL_HAULING     = SKILL_SPEC)
+						SKILL_HAULING     = SKILL_PROF)
 
-	outfit_type = /decl/hierarchy/outfit/job/security/infantry/squadlead
+	outfit_type = /decl/hierarchy/outfit/job/infantry/squadlead
 
 /datum/job/squad_lead/get_description_blurb()
 	return "<span class='warning'>You are NOT Security. Ignoring this will get you job banned, or worse.</span> - You are a Squad Leader. Your duty is to organize and lead the small infantry squad to support the Pathfinder. You command Marines in your Squad. You make sure that expedition has the firepower it needs. Once on the away mission, your duty is to ensure that the worst doesn't become reality."
@@ -48,7 +48,7 @@
 						SKILL_WEAPONS      = SKILL_ADEPT)
 
 	max_skill = list(	SKILL_COMBAT       = SKILL_EXPERT,
-						SKILL_WEAPONS      = SKILL_SPEC,
+						SKILL_WEAPONS      = SKILL_PROF,	//Being given as undefined var. Changing to SKILL_PROF
 						SKILL_EVA		   = SKILL_EXPERT,
 						SKILL_CONSTRUCTION = SKILL_EXPERT,
 						SKILL_ELECTRICAL   = SKILL_EXPERT)
@@ -57,7 +57,7 @@
 		"Combat Engineer",
 		"Combat Medic")
 
-	outfit_type = /decl/hierarchy/outfit/job/security/infantry/tech
+	outfit_type = /decl/hierarchy/outfit/job/infantry/tech
 
 /datum/job/combat_tech/is_position_available()
 	if(..())
@@ -92,7 +92,7 @@
 		"Grunt",
 		"Trooper")
 
-	outfit_type = /decl/hierarchy/outfit/job/security/infantry/grunt
+	outfit_type = /decl/hierarchy/outfit/job/infantry/grunt
 
 /datum/job/grunt/is_position_available()
 	if(..())

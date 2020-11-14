@@ -359,3 +359,10 @@
 			SPAN_NOTICE("You patch fractures on \the [M]'s [affecting.name] with resin."))
 		affecting.heal_damage(heal_brute, heal_burn, robo_repair = TRUE)
 		use(1)
+
+//############## Vesta Port
+
+/obj/item/stack/medical/resin/large
+	name = "large resin stack"
+	amount = 30
+	max_amount = 30

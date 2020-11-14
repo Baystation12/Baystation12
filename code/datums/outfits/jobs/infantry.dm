@@ -9,3 +9,11 @@
 
 /decl/hierarchy/outfit/job/infantry/grunt
 	name = OUTFIT_JOB_NAME("Rifleman")
+
+/decl/hierarchy/outfit/job/infantry/New()
+	..()
+	BACKPACK_OVERRIDE_SECURITY
+
+/decl/hierarchy/outfit/job/infantry/detective/New()
+	..()
+	backpack_overrides.Cut()
