@@ -6,10 +6,11 @@
 #define LANGUAGE_HUMAN_IBERIAN   "Iberian"
 #define LANGUAGE_HUMAN_RUSSIAN   "Pan-Slavic"
 #define LANGUAGE_HUMAN_SELENIAN  "Selenian"
+#define LANGUAGE_HUMAN_GAIAN     "Neo-Cossack"
 
 //Human misc
 #define LANGUAGE_GUTTER         "Gutter"
-#define LANGUAGE_LEGALESE       "Legalese"
+#define LANGUAGE_LEGALESE		"Legalese"
 #define LANGUAGE_SPACER         "Spacer"
 
 //Alien
@@ -22,11 +23,13 @@
 #define LANGUAGE_ADHERENT          "Protocol"
 #define LANGUAGE_VOX               "Vox-pidgin"
 #define LANGUAGE_NABBER            "Serpentid"
+#define LANGUAGE_SERGAL            "Sagaru"
 
 //Antag
 #define LANGUAGE_CULT              "Cult"
 #define LANGUAGE_CULT_GLOBAL       "Occult"
 #define LANGUAGE_ALIUM             "Alium"
+#define LANGUAGE_ZOMBIE            "Zombie"
 
 //Other
 #define LANGUAGE_PRIMITIVE         "Primitive"
