@@ -2869,6 +2869,7 @@
 #include "code\modules\species\station\monkey.dm"
 #include "code\modules\species\station\nabber.dm"
 #include "code\modules\species\station\prometheans.dm"
+#include "code\modules\species\station\shell.dm"
 #include "code\modules\species\station\station.dm"
 #include "code\modules\spells\artifacts.dm"
 #include "code\modules\spells\construct_spells.dm"

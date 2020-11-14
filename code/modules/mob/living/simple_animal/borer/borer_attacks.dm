@@ -40,6 +40,10 @@
 	if(M.stat == CONSCIOUS)
 		to_chat(M, SPAN_DANGER("Something wet, cold and slimy wiggles into your ear!"))
 
+	set_host(M, E)
+//#########Ported the next and upper line from Vesta
+/mob/living/simple_animal/borer/proc/set_host(var/mob/M, var/obj/item/organ/external/E)
+
 	host = M
 	host.status_flags |= PASSEMOTES
 	forceMove(host)
@@ -53,6 +57,7 @@
 		GLOB.borers.add_antagonist_mind(host.mind, 1, GLOB.borers.faction_role_text, GLOB.borers.faction_welcome)
 
 	if(istype(host, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = host
 		var/obj/item/organ/I = H.internal_organs_by_name[BP_BRAIN]
 		if(!I) // No brain organ, so the borer moves in and replaces it permanently.
 			replace_brain()

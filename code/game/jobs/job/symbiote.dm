@@ -82,7 +82,7 @@ GLOBAL_LIST_INIT(symbiote_starting_points, new)
 		head.implants += symbiote
 		symbiote.forceMove(head)
 		if(!symbiote.host_brain)
-			symbiote.host_brain = new Type(symbiote)
+			symbiote.host_brain = new(symbiote)
 		symbiote.host_brain.SetName(host.real_name)
 		symbiote.host_brain.real_name = host.real_name
 	else

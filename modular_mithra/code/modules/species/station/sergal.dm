@@ -2,10 +2,10 @@
 	name = SPECIES_SERGAL
 	name_plural = SPECIES_SERGAL
 	icon_template = 'icons/mob/human_races/species/template.dmi'
-	icobase = 'icons/mob/human_races/species/sergal/body.dmi'
-	deform = 'icons/mob/human_races/species/sergal/deformed_body.dmi'
-	husk_icon = 'icons/mob/human_races/species/sergal/husk.dmi'
-	preview_icon = 'icons/mob/human_races/species/sergal/preview.dmi'
+	icobase = 'icons/boh/mob/species/sergal/body.dmi'
+	deform = 'icons/boh/mob/species/sergal/deformed_body.dmi'
+	husk_icon = 'icons/boh/mob/species/sergal/husk.dmi'
+	preview_icon = 'icons/boh/mob/species/sergal/preview.dmi'
 	bandages_icon = 'icons/mob/bandage.dmi'
 	tail = "sergtail"
 	limb_blend = ICON_MULTIPLY

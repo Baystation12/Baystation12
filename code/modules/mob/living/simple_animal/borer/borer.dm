@@ -53,7 +53,9 @@
 /mob/living/simple_animal/borer/roundstart
 	roundstart = TRUE
 
-/mob/living/simple_animal/borer/neutered
+/mob/living/simple_animal/borer/symbiote
+	name = "symbiote"						//	<-
+	real_name = "symbiote"					// ######### Port Vesta
 	neutered = TRUE
 
 /mob/living/simple_animal/borer/Login()
@@ -92,7 +94,7 @@
 	generation = gen
 	set_borer_name()
 
-	if(!roundstart) 
+	if(!roundstart)
 		request_player()
 
 	aura_image = create_aura_image(src)

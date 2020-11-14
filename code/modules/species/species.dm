@@ -230,6 +230,10 @@
 
 	var/job_skill_buffs = list()				// A list containing jobs (/datum/job), with values the extra points that job receives.
 
+//##### Port from Vesta
+	var/list/prone_overlay_offset = list(0, 0) // amount to shift overlays when lying
+
+
 	var/list/descriptors = list(
 		/datum/mob_descriptor/height = 0,
 		/datum/mob_descriptor/build = 0

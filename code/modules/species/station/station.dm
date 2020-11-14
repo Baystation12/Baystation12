@@ -385,7 +385,7 @@
 		if(101 to 200)	. = 12 // age bracket before this is 46 to 100 . = 8 making this +4
 		if(201 to 300)	. = 16 // + 8
 		else			. = ..()
-		
+
 // Dionaea spawned by hand or by joining will not have any
 // nymphs passed to them. This should take care of that.
 /datum/species/diona/handle_post_spawn(var/mob/living/carbon/human/H)
@@ -439,3 +439,22 @@
 					break
 		if(is_in_water)
 			H.adjust_hydration(100)
+
+//######## Port from Vesta
+/datum/species/monkey/oldunathi			//Relating oldunathi to monkey? BoH fuckup alert
+	name = "Stokquor"
+	name_plural = "Stokquor"
+	health_hud_intensity = 1.5
+	icobase = 'icons/boh/mob/protostok_body.dmi'
+	deform = 'icons/boh/mob/protostok_body.dmi'		//Ported from Vesta
+
+	tail = "stoktail"
+	greater_form = SPECIES_OLDUNATHI
+	flesh_color = "#34af10"
+	base_color = "#066000"
+	reagent_tag = IS_OLDUNATHI
+	force_cultural_info = list(
+		TAG_CULTURE =   CULTURE_STOK,
+		TAG_HOMEWORLD = HOME_SYSTEM_STATELESS,
+		TAG_FACTION =   FACTION_TEST_SUBJECTS
+	)
