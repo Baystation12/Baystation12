@@ -20,7 +20,7 @@
 	//Will also leave this type of turf behind if set.
 	var/turf/base_turf
 	//Name of the shuttle, null for generic waypoint
-	var/shuttle_restricted 
+	var/shuttle_restricted
 	var/flags = 0
 
 /obj/effect/shuttle_landmark/Initialize()
@@ -71,7 +71,7 @@
 	for(var/area/A in shuttle.shuttle_area)
 		var/list/translation = get_turf_translation(get_turf(shuttle.current_location), get_turf(src), A.contents)
 		if(check_collision(base_area, list_values(translation)))
-			return FALSE		
+			return FALSE
 	var/conn = GetConnectedZlevels(z)
 	for(var/w in (z - shuttle.multiz) to z)
 		if(!(w in conn))
