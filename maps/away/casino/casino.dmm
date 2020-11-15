@@ -97,10 +97,6 @@
 /obj/effect/shuttle_landmark/nav_casino/nav5,
 /turf/space,
 /area/space)
-"al" = (
-/turf/space,
-/turf/simulated/shuttle/wall/corner/dark/nw,
-/area/casino/casino_bridge)
 "am" = (
 /turf/simulated/wall/r_wall,
 /area/casino/casino_bridge)
@@ -119,8 +115,8 @@
 /area/casino/casino_bridge)
 "ao" = (
 /turf/space,
-/turf/simulated/shuttle/wall/corner/dark/ne,
-/area/casino/casino_bridge)
+/turf/space,
+/area/space)
 "ap" = (
 /turf/simulated/floor/tiled,
 /area/casino/casino_bridge)
@@ -476,7 +472,7 @@
 /area/casino/casino_hangar)
 "bs" = (
 /turf/space,
-/turf/simulated/shuttle/wall/corner/dark/ne,
+/turf/simulated/wall/r_wall,
 /area/casino/casino_hangar)
 "bt" = (
 /obj/effect/shuttle_landmark/nav_casino/nav3,
@@ -1003,7 +999,7 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
 "cE" = (
-/obj/machinery/atmospherics/pipe/simple/visible/green,
+/obj/machinery/atmospherics/pipe/simple/visible/cyan,
 /turf/simulated/wall/r_wall,
 /area/casino/casino_security)
 "cF" = (
@@ -1720,7 +1716,6 @@
 /obj/random/coin,
 /obj/random/coin,
 /obj/item/weapon/storage/bag/cash,
-/mob/living/simple_animal/hostile/carp,
 /turf/simulated/floor/plating,
 /area/casino/casino_security)
 "eF" = (
@@ -2307,9 +2302,8 @@
 /area/casino/casino_mainfloor)
 "gb" = (
 /obj/machinery/light{
-	dir = 8;
-	icon_state = "tube1";
-	pixel_y = 0
+	dir = 1;
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled,
 /area/casino/casino_bridge)
@@ -3122,7 +3116,7 @@
 /obj/structure/bed/chair/comfy/red{
 	dir = 4
 	},
-/obj/item/weapon/material/knife,
+/obj/item/weapon/material/knife/table,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "iq" = (
@@ -4890,10 +4884,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/casino/casino_mainfloor)
-"mM" = (
-/turf/space,
-/turf/simulated/shuttle/wall/corner/dark/sw,
-/area/casino/casino_bow)
 "mN" = (
 /obj/machinery/portable_atmospherics/canister/nitrogen,
 /turf/simulated/floor/plating,
@@ -4940,7 +4930,7 @@
 /area/casino/casino_bow)
 "mT" = (
 /turf/space,
-/turf/simulated/shuttle/wall/corner/dark/se,
+/turf/simulated/wall/r_wall,
 /area/casino/casino_bow)
 "mU" = (
 /obj/machinery/atmospherics/portables_connector{
@@ -5013,11 +5003,6 @@
 	dir = 8
 	},
 /turf/simulated/floor/plating,
-/area/casino/casino_bow)
-"nf" = (
-/turf/simulated/shuttle/wall{
-	icon_state = "wall3"
-	},
 /area/casino/casino_bow)
 "ng" = (
 /obj/machinery/atmospherics/pipe/simple/visible/black{
@@ -5105,28 +5090,12 @@
 	},
 /turf/simulated/floor/plating,
 /area/casino/casino_bow)
-"np" = (
-/turf/simulated/shuttle/wall/corner/dark,
-/area/casino/casino_bow)
 "nq" = (
-/obj/structure/grille,
-/obj/structure/window/reinforced/full,
-/obj/structure/window/reinforced,
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/structure/window/reinforced{
-	dir = 4
-	},
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/casino/casino_bow)
 "nr" = (
-/turf/simulated/shuttle/wall/corner/dark{
-	dir = 6
-	},
+/turf/simulated/wall/r_titanium,
 /area/casino/casino_bow)
 "ns" = (
 /turf/simulated/floor/reinforced/airless,
@@ -5569,12 +5538,9 @@
 /turf/simulated/floor/plating,
 /area/casino/casino_crew_atmos)
 "Ib" = (
-/obj/machinery/light{
-	dir = 4;
-	icon_state = "tube1"
-	},
-/turf/simulated/floor/tiled,
-/area/casino/casino_bridge)
+/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall,
+/area/casino/casino_bow)
 "Ic" = (
 /obj/structure/flora/pottedplant,
 /obj/machinery/light{
@@ -9725,7 +9691,7 @@ aa
 aa
 aa
 aa
-al
+ao
 am
 at
 at
@@ -9773,7 +9739,7 @@ lz
 kC
 kC
 kC
-mM
+mT
 aa
 aa
 aa
@@ -9828,8 +9794,8 @@ aa
 aa
 aa
 am
+am
 gb
-ap
 ax
 ax
 ax
@@ -9876,7 +9842,7 @@ kC
 mk
 mG
 kC
-mM
+mT
 aa
 aa
 aa
@@ -9979,7 +9945,7 @@ ml
 mH
 mN
 kC
-mM
+Ib
 aa
 aa
 aa
@@ -10338,8 +10304,8 @@ aa
 aa
 aa
 am
-Ib
-ap
+am
+gb
 aA
 Kb
 aM
@@ -11000,10 +10966,10 @@ kC
 mR
 mX
 kC
-nf
-nf
-nf
-np
+nr
+nr
+nr
+nr
 ns
 aa
 aa
@@ -11204,9 +11170,9 @@ kC
 mR
 mH
 kC
-nf
-nf
-nf
+nr
+nr
+nr
 nr
 ns
 aa
@@ -11408,10 +11374,10 @@ kC
 mR
 mX
 kC
-nf
-nf
-nf
-np
+nr
+nr
+nr
+nr
 ns
 aa
 aa
@@ -11612,9 +11578,9 @@ kC
 mR
 mH
 kC
-nf
-nf
-nf
+nr
+nr
+nr
 nr
 ns
 aa
@@ -11816,10 +11782,10 @@ kC
 mR
 mX
 kC
-nf
-nf
-nf
-np
+nr
+nr
+nr
+nr
 ns
 aa
 aa
@@ -12020,9 +11986,9 @@ kC
 mR
 mH
 kC
-nf
-nf
-nf
+nr
+nr
+nr
 nr
 ns
 aa
