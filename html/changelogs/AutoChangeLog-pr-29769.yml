@@ -1,0 +1,4 @@
+author: "SealCure"
+delete-after: True
+changes: 
+  - imageadd: "Resprites a large number of existing items with sprites made by Pebbles"
