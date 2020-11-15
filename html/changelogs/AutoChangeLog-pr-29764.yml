@@ -1,4 +1,0 @@
-author: "Mucker"
-delete-after: True
-changes: 
-  - rscadd: "Adds a message that is sent to players in the vicinity of a shuttle taking off or landing."

@@ -1,6 +1,0 @@
-author: "juxtaposed9930"
-delete-after: True
-changes: 
-  - maptweak: "The D4 security checkpoint no longer has two cameras."
-  - maptweak: "The D3 \"firing range\" camera no longer calls the bathroom a firing range."
-  - maptweak: "The drains in hydroponics are now the proper type."
