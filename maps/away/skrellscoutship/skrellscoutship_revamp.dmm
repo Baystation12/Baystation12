@@ -163,6 +163,12 @@
 /obj/effect/paint/black,
 /turf/simulated/wall/r_wall,
 /area/ship/skrellscoutship/wings/starboard)
+"aJ" = (
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/skrell,
+/area/ship/skrellscoutship/wings/starboard)
 "aM" = (
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /obj/machinery/alarm/skrell{
@@ -307,7 +313,10 @@
 /turf/simulated/floor/plating,
 /area/ship/skrellscoutship/maintenance/power)
 "bm" = (
-/obj/structure/table/standard,
+/obj/machinery/atmospherics/portables_connector{
+	dir = 4
+	},
+/obj/machinery/portable_atmospherics/canister/air/airlock,
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutship/dock)
 "bn" = (
@@ -878,6 +887,7 @@
 	dir = 8
 	},
 /obj/item/device/radio/headset/map_preset/skrellscoutship,
+/obj/item/device/radio/hailing,
 /obj/item/clothing/accessory/storage/holster/thigh,
 /turf/simulated/floor/tiled/skrell/blue,
 /area/ship/skrellscoutship/crew/quarters)
@@ -1524,7 +1534,9 @@
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutship/dock)
 "fp" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/universal,
+/obj/machinery/atmospherics/pipe/simple/hidden/cyan{
+	dir = 9
+	},
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutship/dock)
 "fq" = (
@@ -1575,7 +1587,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
-/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutship/dock)
 "fv" = (
@@ -1715,10 +1729,14 @@
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutship/dock)
 "fP" = (
-/obj/effect/paint/black,
-/obj/effect/paint/black,
-/turf/simulated/wall/r_wall,
-/area/ship/skrellscoutship/maintenance/atmos)
+/obj/machinery/light/skrell{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/cyan{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/skrell,
+/area/ship/skrellscoutship/dock)
 "fQ" = (
 /obj/structure/cable/yellow{
 	d1 = 4;
@@ -1917,9 +1935,6 @@
 	},
 /obj/structure/table/standard,
 /obj/item/weapon/hand_labeler,
-/obj/structure/window/reinforced{
-	health = 1e+007
-	},
 /turf/simulated/floor/carpet/magenta,
 /area/ship/skrellscoutship/wings/starboard)
 "gq" = (
@@ -1982,12 +1997,6 @@
 	icon_state = "4-8"
 	},
 /obj/structure/table/standard,
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/obj/structure/window/reinforced{
-	health = 1e+007
-	},
 /obj/item/weapon/tape_roll/skrell,
 /turf/simulated/floor/carpet/magenta,
 /area/ship/skrellscoutship/wings/starboard)
@@ -2010,6 +2019,9 @@
 	d1 = 2;
 	d2 = 4;
 	icon_state = "2-4"
+	},
+/obj/structure/window/reinforced{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutship/wings/starboard)
@@ -2067,9 +2079,6 @@
 /obj/item/weapon/pen{
 	pixel_x = 1;
 	pixel_y = 7
-	},
-/obj/structure/window/reinforced{
-	dir = 4
 	},
 /obj/item/device/radio/intercom/map_preset/skrellscoutship{
 	pixel_y = 24
@@ -3584,6 +3593,7 @@
 	dir = 4
 	},
 /obj/item/device/radio/headset/map_preset/skrellscoutship,
+/obj/item/device/radio/hailing,
 /obj/item/clothing/accessory/storage/holster/thigh,
 /turf/simulated/floor/tiled/skrell/blue,
 /area/ship/skrellscoutship/crew/quarters)
@@ -3702,6 +3712,19 @@
 /obj/effect/wallframe_spawn/reinforced_phoron/hull,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/ship/skrellscoutship/crew/medbay)
+"nT" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/skrell,
+/area/ship/skrellscoutship/wings/starboard)
 "oa" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	id_tag = "xil_shuttle_pump_out_internal"
@@ -3756,8 +3779,8 @@
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutshuttle)
 "pb" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 5
+/obj/machinery/atmospherics/pipe/manifold/hidden/cyan{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutship/dock)
@@ -4082,6 +4105,7 @@
 "uJ" = (
 /obj/machinery/door/firedoor/autoset,
 /obj/machinery/door/airlock/engineering,
+/obj/machinery/atmospherics/pipe/simple/hidden/cyan,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/ship/skrellscoutship/dock)
 "uN" = (
@@ -4184,6 +4208,7 @@
 "wo" = (
 /obj/effect/paint/black,
 /obj/effect/wallframe_spawn/reinforced_phoron/hull,
+/obj/effect/paint/black,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -4283,6 +4308,12 @@
 /obj/machinery/suit_storage_unit/skrell/black,
 /turf/simulated/floor/tiled/skrell/green,
 /area/ship/skrellscoutship/robotics)
+"ye" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/cyan{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/skrell,
+/area/ship/skrellscoutship/dock)
 "yf" = (
 /obj/structure/hygiene/sink{
 	dir = 1;
@@ -4376,6 +4407,7 @@
 /obj/item/weapon/gun/energy/gun/skrell,
 /obj/item/weapon/rig/skrell/cmd,
 /obj/item/device/radio/headset/map_preset/skrellscoutship,
+/obj/item/device/radio/hailing,
 /obj/item/clothing/accessory/storage/holster/thigh,
 /turf/simulated/floor/tiled/skrell/blue,
 /area/ship/skrellscoutship/crew/quarters)
@@ -4442,6 +4474,7 @@
 	icon_state = "tube1"
 	},
 /obj/item/device/radio/headset/map_preset/skrellscoutship,
+/obj/item/device/radio/hailing,
 /obj/item/clothing/accessory/storage/holster/thigh,
 /turf/simulated/floor/tiled/skrell/blue,
 /area/ship/skrellscoutship/crew/quarters)
@@ -6018,6 +6051,12 @@
 	},
 /turf/simulated/floor/tiled/skrell/white,
 /area/ship/skrellscoutship/crew/rec)
+"Zt" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/cyan{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/skrell,
+/area/ship/skrellscoutship/dock)
 "ZC" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
@@ -9246,7 +9285,7 @@ uk
 uk
 uk
 uk
-UM
+uk
 UM
 UM
 UM
@@ -9552,7 +9591,7 @@ do
 dG
 dS
 uk
-UM
+uk
 UM
 UM
 kE
@@ -12075,10 +12114,10 @@ Gw
 Gw
 Gw
 QP
-ng
-jg
+fP
+pb
 uJ
-jg
+Zt
 QP
 Gw
 Gw
@@ -12180,7 +12219,7 @@ QP
 QP
 QP
 QP
-jg
+ye
 QP
 QP
 Gw
@@ -12282,7 +12321,7 @@ QP
 JZ
 xo
 QP
-jg
+ye
 qs
 QP
 QP
@@ -12385,14 +12424,14 @@ er
 fe
 fg
 fp
-pb
+jg
 jg
 sD
 fC
 QP
 gE
 gw
-dl
+aJ
 gy
 dl
 JN
@@ -12492,7 +12531,7 @@ fD
 fD
 fL
 lc
-dE
+nT
 gx
 dE
 gM
@@ -13611,7 +13650,7 @@ Gw
 QP
 QP
 QP
-fP
+vI
 ah
 EY
 ao
@@ -13713,7 +13752,7 @@ Gw
 Gw
 QP
 QP
-fP
+vI
 ah
 ar
 ac
