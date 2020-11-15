@@ -37,15 +37,6 @@
 	uniform = /obj/item/clothing/under/rank/medical/scrubs/blue
 	head = /obj/item/clothing/head/surgery/blue
 
-/decl/hierarchy/outfit/job/medical/doctor/virologist
-	name = OUTFIT_JOB_NAME("Virologist")
-	uniform = /obj/item/clothing/under/rank/virologist
-	suit = /obj/item/clothing/suit/storage/toggle/labcoat/virologist
-	mask = /obj/item/clothing/mask/surgical
-/decl/hierarchy/outfit/job/medical/doctor/virologist/New()
-	..()
-	BACKPACK_OVERRIDE_VIROLOGY
-
 /decl/hierarchy/outfit/job/medical/doctor/nurse
 	name = OUTFIT_JOB_NAME("Nurse")
 	suit = null

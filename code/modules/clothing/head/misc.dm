@@ -1,16 +1,5 @@
 
 
-/obj/item/clothing/head/centhat
-	name = "\improper CentComm. hat"
-	icon_state = "centcom"
-	item_state_slots = list(
-		slot_l_hand_str = "centhat",
-		slot_r_hand_str = "centhat",
-		)
-	desc = "It's good to be emperor."
-	siemens_coefficient = 0.9
-	body_parts_covered = 0
-
 /obj/item/clothing/head/hairflower
 	name = "hair flower pin"
 	icon_state = "hairflower"
@@ -80,17 +69,6 @@
 	siemens_coefficient = 0.9
 	body_parts_covered = 0
 
-/obj/item/clothing/head/syndicatefake
-	name = "red space-helmet replica"
-	item_state_slots = list(
-		slot_l_hand_str = "syndicate-helm-black-red",
-		slot_r_hand_str = "syndicate-helm-black-red",
-		)
-	icon_state = "syndicate"
-	desc = "A plastic replica of a bloodthirsty mercenary's space helmet, you'll look just like a real murderous criminal operative in this! This is a toy, it is not made for use in space!"
-	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
-	siemens_coefficient = 2.0
-	body_parts_covered = HEAD|FACE|EYES
 
 /obj/item/clothing/head/cueball
 	name = "cueball helmet"
@@ -112,25 +90,6 @@
 	. = ..()
 	set_extension(src, /datum/extension/appearance/cardborg)
 
-/obj/item/clothing/head/justice
-	name = "justice hat"
-	desc = "fight for what's righteous!"
-	icon_state = "justicered"
-	flags_inv = BLOCKHAIR
-	body_parts_covered = HEAD|EYES
-
-/obj/item/clothing/head/justice/blue
-	icon_state = "justiceblue"
-
-/obj/item/clothing/head/justice/yellow
-	icon_state = "justiceyellow"
-
-/obj/item/clothing/head/justice/green
-	icon_state = "justicegreen"
-
-/obj/item/clothing/head/justice/pink
-	icon_state = "justicepink"
-
 /obj/item/clothing/head/rabbitears
 	name = "rabbit ears"
 	desc = "Wearing these makes you looks useless, and only good for your sex appeal."
@@ -147,7 +106,6 @@
 		)
 	siemens_coefficient = 0.9
 
-
 /obj/item/clothing/head/mariner
 	name = "mariner's cap"
 	desc = "A cap loved by farmers, sailors and rabblerousers in the whole galaxy."
@@ -158,12 +116,6 @@
 	name = "pirate hat"
 	desc = "Yarr."
 	icon_state = "pirate"
-	body_parts_covered = 0
-
-/obj/item/clothing/head/hgpiratecap
-	name = "pirate hat"
-	desc = "Yarr."
-	icon_state = "hgpiratecap"
 	body_parts_covered = 0
 
 /obj/item/clothing/head/bandana

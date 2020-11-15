@@ -10,28 +10,6 @@
 	max_heat_protection_temperature = ARMOR_MAX_HEAT_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.6
 
-
-/obj/item/clothing/suit/armor/vest/old //just realized these had never been removed
-	name = "armor"
-	desc = "An armored vest that protects against some damage."
-	icon_state = "armor"
-	blood_overlay_type = "armor"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO
-	cold_protection = UPPER_TORSO|LOWER_TORSO
-	heat_protection = UPPER_TORSO|LOWER_TORSO
-	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_SMALL,
-		laser = ARMOR_LASER_HANDGUNS,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_MINOR
-		)
-
-/obj/item/clothing/suit/armor/vest/old/security
-	name = "security armor"
-	desc = "An armored vest that protects against some damage. This one has a corporate badge."
-	icon_state = "armorsec"
-
 /obj/item/clothing/suit/armor/vest/warden
 	name = "warden's jacket"
 	desc = "An armoured jacket with silver rank pips and livery."
@@ -57,21 +35,6 @@
 	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
 	heat_protection = UPPER_TORSO|LOWER_TORSO|ARMS
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
-
-
-/obj/item/clothing/suit/armor/det_suit
-	name = "armor"
-	desc = "An armored vest with a detective's badge on it."
-	icon_state = "detective-armor"
-	blood_overlay_type = "armor"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO
-	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_SMALL,
-		laser = ARMOR_LASER_HANDGUNS,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_MINOR
-		)
 
 
 //Reactive armor
@@ -398,35 +361,6 @@
 			P.redirect(new_x, new_y, curloc, user)
 
 			return PROJECTILE_CONTINUE // complete projectile permutation
-
-//All of the armor below is mostly unused
-
-
-/obj/item/clothing/suit/armor/centcomm
-	name = "\improper Cent. Com. armor"
-	desc = "A suit that protects against some damage."
-	icon_state = "centcom"
-	w_class = ITEM_SIZE_HUGE//bulky item
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
-	allowed = list(/obj/item/weapon/gun/energy,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/tank/emergency)
-	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
-	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
-	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
-	siemens_coefficient = 0
-
-/obj/item/clothing/suit/armor/heavy
-	name = "heavy armor"
-	desc = "A heavily armored suit that protects against moderate damage."
-	icon_state = "heavy"
-	w_class = ITEM_SIZE_HUGE//bulky item
-	gas_transfer_coefficient = 0.90
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
-	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
-	siemens_coefficient = 0
-
-/obj/item/clothing/suit/armor/heavy/New()
-	..()
-	slowdown_per_slot[slot_wear_suit] = 3
 
 /obj/item/clothing/suit/armor/tdome
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS

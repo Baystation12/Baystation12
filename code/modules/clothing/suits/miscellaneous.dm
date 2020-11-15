@@ -36,14 +36,6 @@
 	body_parts_covered = UPPER_TORSO|ARMS
 
 
-/obj/item/clothing/suit/hgpirate
-	name = "pirate captain coat"
-	desc = "Yarr."
-	icon_state = "hgpirate"
-	flags_inv = HIDEJUMPSUIT
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
-
-
 /obj/item/clothing/suit/cyborg_suit
 	name = "cyborg suit"
 	desc = "Suit for a cyborg costume."
@@ -57,20 +49,6 @@
 	name = "great coat"
 	desc = "A heavy great coat."
 	icon_state = "leathercoat"
-
-
-/obj/item/clothing/suit/johnny_coat
-	name = "johnny~~ coat"
-	desc = "Johnny~~"
-	icon_state = "johnny"
-
-
-/obj/item/clothing/suit/justice
-	name = "justice suit"
-	desc = "This pretty much looks ridiculous."
-	icon_state = "justice"
-	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|HANDS|LEGS|FEET
 
 
 /obj/item/clothing/suit/judgerobe
@@ -88,16 +66,6 @@
 	icon_state = "overalls"
 	item_state = "overalls"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
-
-
-/obj/item/clothing/suit/syndicatefake
-	name = "red space suit replica"
-	icon_state = "syndicate"
-	desc = "A plastic replica of the syndicate space suit, you'll look just like a real murderous syndicate agent in this! This is a toy, it is not made for use in space!"
-	w_class = ITEM_SIZE_NORMAL
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank/emergency,/obj/item/toy)
-	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|HANDS|LEGS|FEET
 
 /obj/item/clothing/suit/hastur
 	name = "Hastur's Robes"

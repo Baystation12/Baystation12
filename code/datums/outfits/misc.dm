@@ -17,17 +17,6 @@
 	back = /obj/item/weapon/storage/backpack/satchel
 	belt = /obj/item/weapon/gun/projectile/revolver
 
-/decl/hierarchy/outfit/soviet_soldier/admiral
-	name = "Soviet admiral"
-	head = /obj/item/clothing/head/hgpiratecap
-	l_ear = /obj/item/device/radio/headset/heads/captain
-	glasses = /obj/item/clothing/glasses/thermal/plain/eyepatch
-	suit = /obj/item/clothing/suit/hgpirate
-
-	id_slot = slot_wear_id
-	id_types = list(/obj/item/weapon/card/id/centcom/station)
-	id_pda_assignment = "Admiral"
-
 /decl/hierarchy/outfit/merchant
 	name = "Merchant"
 	shoes = /obj/item/clothing/shoes/black

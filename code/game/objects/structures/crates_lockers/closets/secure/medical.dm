@@ -165,31 +165,6 @@
 		/obj/item/weapon/storage/belt/general
 	)
 
-/obj/structure/closet/secure_closet/virology
-	name = "virologist's locker"
-	closet_appearance = /decl/closet_appearance/secure_closet/medical/virology
-
-	req_access = list(access_virology)
-
-/obj/structure/closet/secure_closet/virology/WillContain()
-	return list(
-		/obj/item/weapon/storage/box/autoinjectors,
-		/obj/item/weapon/storage/box/syringes,
-		/obj/item/weapon/reagent_containers/dropper = 2,
-		/obj/item/weapon/reagent_containers/glass/beaker = 2,
-		/obj/item/weapon/reagent_containers/glass/bottle/inaprovaline,
-		/obj/item/weapon/storage/pill_bottle/spaceacillin,
-		/obj/item/weapon/reagent_containers/syringe/antiviral,
-		/obj/item/weapon/reagent_containers/glass/bottle/antitoxin,
-		/obj/item/weapon/storage/box/masks,
-		/obj/item/weapon/storage/box/gloves,
-		/obj/item/clothing/under/rank/virologist,
-		/obj/item/clothing/shoes/white,
-		/obj/item/clothing/suit/storage/toggle/labcoat/virologist,
-		/obj/item/clothing/mask/surgical,
-		/obj/item/device/scanner/health,
-		/obj/item/clothing/glasses/hud/health
-	)
 
 /obj/structure/closet/secure_closet/psychiatry
 	name = "Psychiatrist's locker"

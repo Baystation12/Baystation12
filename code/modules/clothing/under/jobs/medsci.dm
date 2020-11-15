@@ -68,18 +68,6 @@
 		bio = ARMOR_BIO_MINOR
 		)
 
-/obj/item/clothing/under/rank/virologist
-	desc = "It's made of a special fiber that gives special protection against biohazards. It has a virologist rank stripe on it."
-	name = "virologist's jumpsuit"
-	icon_state = "virology"
-	item_state = "w_suit"
-	worn_state = "virologywhite"
-	gender_icons = 1
-	permeability_coefficient = 0.50
-	armor = list(
-		bio = ARMOR_BIO_MINOR
-		)
-
 /obj/item/clothing/under/rank/nursesuit
 	desc = "It's a jumpsuit commonly worn by nursing staff in the medical department."
 	name = "nurse's suit"
@@ -227,13 +215,3 @@
 		bio = ARMOR_BIO_MINOR
 		)
 
-/obj/item/clothing/under/rank/virologist_new
-	desc = "Made of a special fiber that gives increased protection against biohazards."
-	name = "virologist's jumpsuit"
-	icon_state = "virologist_new"
-	item_state = "w_suit"
-	worn_state = "virologist_new"
-	permeability_coefficient = 0.50
-	armor = list(
-		bio = ARMOR_BIO_MINOR
-		)

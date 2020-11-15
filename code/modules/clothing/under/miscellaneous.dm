@@ -144,13 +144,6 @@
 	worn_state = "owl"
 	item_state = "owl"
 
-/obj/item/clothing/under/johnny
-	name = "johnny~~ jumpsuit"
-	desc = "Johnny~~"
-	icon_state = "johnny"
-	worn_state = "johnny"
-	item_state = "johnny"
-
 /obj/item/clothing/under/color/rainbow
 	name = "rainbow"
 	icon_state = "rainbow"
@@ -544,13 +537,6 @@
 	worn_state = "tan_suit"
 	gender_icons = 1
 	starting_accessories = list(/obj/item/clothing/accessory/yellow, /obj/item/clothing/accessory/toggleable/tan_jacket)
-
-/obj/item/clothing/under/serviceoveralls
-	name = "workman outfit"
-	desc = "The very image of a working man. Not that you're probably doing work."
-	icon_state = "mechanic"
-	item_state = "lb_suit"
-	worn_state = "mechanic"
 
 /obj/item/clothing/under/cheongsam
 	name = "cheongsam"

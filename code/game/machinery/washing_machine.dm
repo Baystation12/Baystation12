@@ -107,7 +107,7 @@
 		return
 	if(state & WASHER_STATE_CLOSED)
 		to_chat(usr, SPAN_WARNING("\The [src] is closed."))
-		return	
+		return
 	if(!do_after(usr, 2 SECONDS, src))
 		return
 	if(!(state & WASHER_STATE_CLOSED))
@@ -119,7 +119,7 @@
 /obj/machinery/washing_machine/clean_blood()
 	. = ..()
 	state &= ~WASHER_STATE_BLOODY
-	update_icon()	
+	update_icon()
 
 /obj/machinery/washing_machine/components_are_accessible(path)
 	return !(state & WASHER_STATE_RUNNING) && ..()
@@ -158,9 +158,6 @@
 		if ( istype(W,/obj/item/clothing/suit/space ) )
 			to_chat(user, "This item does not fit.")
 			return
-		if ( istype(W,/obj/item/clothing/suit/syndicatefake ) )
-			to_chat(user, "This item does not fit.")
-			return
 		if ( istype(W,/obj/item/clothing/suit/cyborg_suit ) )
 			to_chat(user, "This item does not fit.")
 			return
@@ -177,9 +174,6 @@
 			to_chat(user, "This item does not fit.")
 			return
 		if ( istype(W,/obj/item/clothing/mask/smokable/cigarette ) )
-			to_chat(user, "This item does not fit.")
-			return
-		if ( istype(W,/obj/item/clothing/head/syndicatefake ) )
 			to_chat(user, "This item does not fit.")
 			return
 		if ( istype(W,/obj/item/clothing/head/helmet ) )

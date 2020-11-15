@@ -259,21 +259,6 @@
 	new /obj/item/clothing/suit/storage/toggle/labcoat/genetics(src)
 	new /obj/item/clothing/suit/storage/toggle/labcoat/genetics(src)
 
-/obj/structure/closet/wardrobe/virology_white
-	name = "virology wardrobe"
-	closet_appearance = /decl/closet_appearance/wardrobe/white
-
-/obj/structure/closet/wardrobe/virology_white/New()
-	..()
-	new /obj/item/clothing/under/rank/virologist(src)
-	new /obj/item/clothing/under/rank/virologist(src)
-	new /obj/item/clothing/shoes/white(src)
-	new /obj/item/clothing/shoes/white(src)
-	new /obj/item/clothing/suit/storage/toggle/labcoat/virologist(src)
-	new /obj/item/clothing/suit/storage/toggle/labcoat/virologist(src)
-	new /obj/item/clothing/mask/surgical(src)
-	new /obj/item/clothing/mask/surgical(src)
-
 /obj/structure/closet/wardrobe/medic_white
 	name = "medical wardrobe"
 	closet_appearance = /decl/closet_appearance/wardrobe/white

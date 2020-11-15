@@ -247,7 +247,6 @@
 	contains = list(/obj/item/clothing/shoes/white = 3,
 					/obj/item/clothing/under/rank/chief_medical_officer,
 					/obj/item/clothing/under/rank/geneticist,
-					/obj/item/clothing/under/rank/virologist,
 					/obj/item/clothing/under/rank/nursesuit,
 					/obj/item/clothing/under/rank/nurse,
 					/obj/item/clothing/under/rank/orderly,
@@ -257,7 +256,6 @@
 					/obj/item/clothing/suit/storage/toggle/labcoat/cmo,
 					/obj/item/clothing/suit/storage/toggle/labcoat/cmoalt,
 					/obj/item/clothing/suit/storage/toggle/labcoat/genetics,
-					/obj/item/clothing/suit/storage/toggle/labcoat/virologist,
 					/obj/item/clothing/suit/storage/toggle/labcoat/chemist,
 					/obj/item/weapon/storage/box/masks,
 					/obj/item/weapon/storage/box/gloves)
@@ -270,7 +268,6 @@
 	name = "Gear - Medical biohazard gear"
 	contains = list(/obj/item/clothing/head/bio_hood = 3,
 					/obj/item/clothing/suit/bio_suit = 3,
-					/obj/item/clothing/head/bio_hood/virology = 2,
 					/obj/item/clothing/suit/bio_suit/cmo = 2,
 					/obj/item/clothing/mask/gas = 5,
 					/obj/item/weapon/tank/oxygen = 5,

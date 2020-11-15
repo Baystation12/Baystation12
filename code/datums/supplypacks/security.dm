@@ -286,18 +286,6 @@
 	containername = "wall shield generators crate"
 	access = access_brig
 
-/decl/hierarchy/supply_pack/security/securitybiosuit
-	name = "Gear - Security biohazard gear"
-	contains = list(/obj/item/clothing/head/bio_hood/security,
-					/obj/item/clothing/suit/bio_suit/security,
-					/obj/item/clothing/mask/gas,
-					/obj/item/weapon/tank/oxygen,
-					/obj/item/clothing/gloves/latex)
-	cost = 30
-	containertype = /obj/structure/closet/crate/secure
-	containername = "security biohazard gear crate"
-	access = access_security
-
 /decl/hierarchy/supply_pack/security/voidsuit_security
 	name = "EVA - Security (armored) voidsuit"
 	contains = list(/obj/item/clothing/suit/space/void/security/alt,

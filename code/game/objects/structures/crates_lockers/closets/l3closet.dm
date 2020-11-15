@@ -19,25 +19,13 @@
 		/obj/item/weapon/tank/emergency/oxygen/engi = 5
 	))
 
-
-/obj/structure/closet/l3closet/virology
-	closet_appearance = /decl/closet_appearance/bio/virology
-
-/obj/structure/closet/l3closet/virology/WillContain()
-	return list(
-		/obj/item/clothing/suit/bio_suit/virology,
-		/obj/item/clothing/head/bio_hood/virology,
-		/obj/item/clothing/mask/gas,
-		/obj/item/weapon/tank/oxygen
-	)
-
 /obj/structure/closet/l3closet/security
 	closet_appearance = /decl/closet_appearance/bio/security
 
 /obj/structure/closet/l3closet/security/WillContain()
 	return list(
-		/obj/item/clothing/suit/bio_suit/security,
-		/obj/item/clothing/head/bio_hood/security,
+		/obj/item/clothing/suit/bio_suit,
+		/obj/item/clothing/head/bio_hood,
 		/obj/item/clothing/mask/gas/half,
 		/obj/item/weapon/tank/emergency/oxygen/engi
 	)

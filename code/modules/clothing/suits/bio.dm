@@ -9,7 +9,7 @@
 	desc = "A hood that protects the head and face from biological comtaminants."
 	permeability_coefficient = 0
 	armor = list(
-		bio = ARMOR_BIO_SHIELDED, 
+		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_MINOR
 		)
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR
@@ -31,7 +31,7 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	allowed = list(/obj/item/weapon/tank/emergency,/obj/item/weapon/pen,/obj/item/device/flashlight/pen,/obj/item/device/scanner/health,/obj/item/device/ano_scanner,/obj/item/clothing/head/bio_hood,/obj/item/clothing/mask/gas)
 	armor = list(
-		bio = ARMOR_BIO_SHIELDED, 
+		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_MINOR
 		)
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
@@ -58,15 +58,6 @@
 
 /obj/item/clothing/suit/bio_suit/virology
 	icon_state = "bio_virology"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS|HANDS|FEET
-	flags_inv = HIDEJUMPSUIT|HIDETAIL|HIDEGLOVES|HIDESHOES
-
-//Security biosuit, grey with red stripe across the chest
-/obj/item/clothing/head/bio_hood/security
-	icon_state = "bio_security"
-
-/obj/item/clothing/suit/bio_suit/security
-	icon_state = "bio_security"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS|HANDS|FEET
 	flags_inv = HIDEJUMPSUIT|HIDETAIL|HIDEGLOVES|HIDESHOES
 

@@ -25,7 +25,6 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 		/obj/item/clothing/under/soviet,
 		/obj/item/clothing/under/pirate,
 		/obj/item/clothing/under/redcoat,
-		/obj/item/clothing/under/serviceoveralls,
 		/obj/item/clothing/under/captain_fly,
 		/obj/item/clothing/under/det,
 		/obj/item/clothing/under/color/brown,
@@ -49,12 +48,10 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 		/obj/item/clothing/head/ushanka,
 		/obj/item/clothing/head/pirate,
 		/obj/item/clothing/mask/bandana/red,
-		/obj/item/clothing/head/hgpiratecap,
 		)
 
 	var/list/raider_suits = list(
 		/obj/item/clothing/suit/pirate,
-		/obj/item/clothing/suit/hgpirate,
 		/obj/item/clothing/suit/storage/toggle/bomber,
 		/obj/item/clothing/suit/storage/leather_jacket,
 		/obj/item/clothing/suit/storage/toggle/brown_jacket,
