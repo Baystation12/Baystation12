@@ -15,6 +15,7 @@
 	var/color = "#000000"
 	var/color_weight = 1
 	var/color_foods = FALSE // If TRUE, this reagent affects the color of food items it's added to
+	var/protein_amount = 0 //What *percentage* of this is made of *animal* protein (1 is 100%). Used to calculate how it affects skrell
 
 	// If TRUE, this reagent transfers changes to its 'color' var when moving to other containers
 	// Of note: Mixing two reagents of the same type with this var that have different colors
@@ -127,6 +128,9 @@
 	return
 
 /datum/reagent/proc/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	if (alien == IS_SKRELL && protein_amount > 0)
+		var/datum/species/skrell/S = M.species
+		S.handle_protein(M, src)
 	affect_blood(M, alien, removed * 0.5)
 	return
 
