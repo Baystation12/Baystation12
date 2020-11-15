@@ -1,0 +1,5 @@
+author: "juxtaposed9930"
+delete-after: True
+changes: 
+  - rscadd: "Creates the \"advanced\" SMES coil for admin and away site use."
+  - tweak: "Skrell and Ascent SMES units now use advanced SMES coils."
