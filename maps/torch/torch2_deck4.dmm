@@ -189,7 +189,6 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/light/small{
 	dir = 4;
-	pixel_y = 0
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/fourthdeck/starboard)
@@ -6936,9 +6935,6 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/hangcheck)
 "wK" = (
-/obj/machinery/camera/network/security{
-	c_tag = "Fourth Deck - Security Checkpoint"
-	},
 /obj/effect/floor_decal/corner/red/half{
 	dir = 1;
 	icon_state = "bordercolorhalf"
