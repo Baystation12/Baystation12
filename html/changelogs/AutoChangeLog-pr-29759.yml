@@ -1,0 +1,4 @@
+author: "juxtaposed9930"
+delete-after: True
+changes: 
+  - maptweak: "Removed diagonal wall turfs, carp, and the invalid knife from the casino ship."
