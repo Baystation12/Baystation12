@@ -9,5 +9,6 @@
 		/obj/item/weapon/hemostat,
 		/obj/item/weapon/retractor,
 		/obj/item/weapon/scalpel,
+		/obj/item/weapon/traumashears,
 		/obj/item/weapon/surgicaldrill
 	)

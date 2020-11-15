@@ -37,6 +37,7 @@
 		/obj/item/weapon/FixOVein,
 		/obj/item/weapon/bonesetter,
 		/obj/item/weapon/circular_saw,
+		/obj/item/weapon/traumashears,
 		/obj/item/weapon/surgicaldrill,
 		/obj/item/weapon/gripper/organ,
 		/obj/item/weapon/shockpaddles/robot,

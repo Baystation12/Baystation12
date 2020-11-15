@@ -1007,6 +1007,7 @@ something, make sure it's not in one of the other lists.*/
 				/obj/item/weapon/bonesetter = 7,
 				/obj/item/weapon/bonegel = 7,
 				/obj/item/weapon/circular_saw = 7,
+				/obj/item/weapon/traumashears = 7,
 				/obj/item/weapon/scalpel = 7,
 				/obj/item/weapon/melee/baton/loaded = 9,
 				/obj/item/device/radio/headset/syndicate = 6)

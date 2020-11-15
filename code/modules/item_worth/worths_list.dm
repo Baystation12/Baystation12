@@ -231,6 +231,7 @@ var/list/worths = list(
 					/obj/item/weapon/scalpel/manager = 1200,
 					/obj/item/weapon/scalpel = 60,
 					/obj/item/weapon/circular_saw = 140,
+					/obj/item/weapon/traumashears = 100,
 					/obj/item/weapon/bonegel = 300,
 					/obj/item/weapon/FixOVein = 500,
 					/obj/item/weapon/bonesetter = 150,

@@ -357,6 +357,7 @@ Sells devices, odds and ends, and medical stuff
 								  /obj/item/weapon/scalpel = TRADER_THIS_TYPE,
 								  /obj/item/weapon/scalpel/manager = TRADER_THIS_TYPE,
 								  /obj/item/weapon/circular_saw = TRADER_THIS_TYPE,
+								  /obj/item/weapon/traumashears = TRADER_THIS_TYPE,
 								  /obj/item/weapon/bonegel = TRADER_THIS_TYPE,
 								  /obj/item/weapon/bonesetter = TRADER_THIS_TYPE,
 								  /obj/item/weapon/reagent_containers/glass/bottle/inaprovaline = TRADER_THIS_TYPE,

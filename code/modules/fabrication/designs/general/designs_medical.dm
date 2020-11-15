@@ -5,6 +5,9 @@
 /datum/fabricator_recipe/medical/circularsaw
 	path = /obj/item/weapon/circular_saw
 
+/datum/fabricator_recipe/medical/traumashears
+	path = /obj/item/weapon/traumashears
+	
 /datum/fabricator_recipe/medical/surgicaldrill
 	path = /obj/item/weapon/surgicaldrill
 

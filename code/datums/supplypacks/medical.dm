@@ -301,6 +301,7 @@
 					/obj/item/weapon/bonegel,
 					/obj/item/weapon/retractor,
 					/obj/item/weapon/bonesetter,
+					/obj/item/weapon/traumashears,
 					/obj/item/weapon/circular_saw)
 	cost = 25
 	containertype = /obj/structure/closet/crate/secure
