@@ -1840,9 +1840,7 @@
 /obj/structure/cable/cyan{
 	icon_state = "0-2"
 	},
-/obj/machinery/power/smes/buildable/power_shuttle/ascent{
-	charge = 5e+006
-	},
+/obj/machinery/power/smes/buildable/preset/ascent,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/engineering)
 "ew" = (
@@ -2061,9 +2059,7 @@
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/shuttle_port)
 "eV" = (
-/obj/machinery/power/smes/buildable/power_shuttle/ascent{
-	charge = 5e+006
-	},
+/obj/machinery/power/smes/buildable/preset/ascent,
 /obj/structure/cable/cyan,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/shuttle_starboard)
@@ -2967,9 +2963,7 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/obj/machinery/power/smes/buildable/power_shuttle/ascent{
-	charge = 5e+006
-	},
+/obj/machinery/power/smes/buildable/preset/ascent,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/engineering)
 "gN" = (
@@ -2983,9 +2977,7 @@
 "gO" = (
 /obj/effect/catwalk_plated/ascent,
 /obj/structure/cable/cyan,
-/obj/machinery/power/smes/buildable/power_shuttle/ascent{
-	charge = 5e+006
-	},
+/obj/machinery/power/smes/buildable/preset/ascent,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/engineering)
 "gP" = (
@@ -3577,9 +3569,7 @@
 /obj/machinery/light/ascent{
 	dir = 4
 	},
-/obj/machinery/power/smes/buildable/power_shuttle/ascent{
-	charge = 5e+006
-	},
+/obj/machinery/power/smes/buildable/preset/ascent,
 /obj/structure/cable/cyan{
 	d2 = 8;
 	icon_state = "0-8"

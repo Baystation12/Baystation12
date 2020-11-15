@@ -39,6 +39,13 @@
 	ChargeCapacity = 20 KILOWATTS
 	IOCapacity = 1.25 MEGAWATTS
 
+// A superpowered coil to be used on event SMES units, away sites that run lots of power, and maybe as a rare merchant item.
+/obj/item/weapon/stock_parts/smes_coil/advanced
+	name = "advanced magnetic coil"
+	desc = " An advanced magnetic coil made from rare materials. Can store and transfer more power than any previous designs."
+	ChargeCapacity = 500 KILOWATTS
+	IOCapacity = 2.5 MEGAWATTS
+
 
 // DEPRECATED
 // These are used on individual outposts as backup should power line be cut, or engineering outpost lost power.
