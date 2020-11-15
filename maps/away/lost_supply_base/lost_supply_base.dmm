@@ -746,7 +746,7 @@
 /area/lost_supply_base/office)
 "bI" = (
 /obj/effect/wallframe_spawn/reinforced,
-/turf/simulated/wall/r_wall,
+/turf/simulated/floor/airless,
 /area/lost_supply_base/office)
 "bJ" = (
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
@@ -809,7 +809,7 @@
 /area/lost_supply_base/office)
 "bR" = (
 /obj/effect/wallframe_spawn/reinforced,
-/turf/simulated/wall/r_wall,
+/turf/simulated/floor/airless,
 /area/lost_supply_base)
 "bS" = (
 /obj/random/trash,
@@ -1095,10 +1095,6 @@
 	icon_state = "steel_burned1"
 	},
 /area/lost_supply_base/common)
-"cM" = (
-/obj/effect/wallframe_spawn/reinforced,
-/turf/space,
-/area/lost_supply_base/common)
 "cN" = (
 /obj/machinery/light_construct{
 	dir = 8
@@ -1159,7 +1155,7 @@
 /area/lost_supply_base/common)
 "cW" = (
 /obj/effect/wallframe_spawn/reinforced,
-/turf/simulated/wall/r_wall,
+/turf/simulated/floor/airless,
 /area/lost_supply_base/common)
 "cX" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -9897,14 +9893,14 @@ bQ
 aC
 ck
 ck
-cM
+cW
 cW
 ck
 ck
-cM
-cM
-cM
-cM
+cW
+cW
+cW
+cW
 ck
 ck
 ck
