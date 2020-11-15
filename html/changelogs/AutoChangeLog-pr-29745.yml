@@ -1,0 +1,6 @@
+author: "Mucker"
+delete-after: True
+changes: 
+  - bugfix: "Fixes some situations where non-existent bodyparts could be targeted and attacked."
+  - bugfix: "Fix being able to jointlock/dislocate even when the assailant's grip is lost."
+  - admin: "Removed unused 'Respawn Character' verb in 'Special Verbs'."
