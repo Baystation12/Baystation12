@@ -722,7 +722,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/atmos)
 "bW" = (
-/obj/machinery/atmospherics/binary/pump,
+/obj/machinery/atmospherics/binary/pump/on,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
 	},
@@ -2478,6 +2478,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/solar_port)
 "fC" = (
@@ -2941,7 +2944,9 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8
+	},
 /turf/simulated/floor/tiled,
 /area/errant_pisces/hallway)
 "gA" = (
@@ -3143,6 +3148,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
 /turf/simulated/floor/wood,
 /area/errant_pisces/rooms)
 "hg" = (
@@ -3156,19 +3164,11 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
-/area/errant_pisces/rooms)
-"hh" = (
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
-/area/errant_pisces/hallway)
+/area/errant_pisces/rooms)
 "hi" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -3200,6 +3200,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
 "hk" = (
@@ -3210,6 +3213,9 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
 	},
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
@@ -3273,6 +3279,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/wood,
 /area/errant_pisces/rooms)
 "hu" = (
@@ -5260,6 +5267,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/plating,
 /area/errant_pisces/general_storage)
 "nb" = (
@@ -5272,6 +5280,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/door/airlock/freezer,
 /obj/effect/decal/cleanable/blood,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/freezer,
 /area/errant_pisces/prod_storage)
 "nc" = (
@@ -26909,7 +26918,7 @@ gd
 gk
 gy
 fZ
-hh
+gd
 fZ
 fZ
 fZ
@@ -27313,7 +27322,7 @@ gd
 gm
 gA
 fZ
-hh
+gd
 fZ
 fZ
 hM
