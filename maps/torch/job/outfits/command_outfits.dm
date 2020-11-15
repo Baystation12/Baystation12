@@ -126,7 +126,7 @@
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_types = list(/obj/item/weapon/card/id/torch/crew/bridgeofficer)
 	pda_type = /obj/item/modular_computer/pda/heads
-	l_ear = /obj/item/device/radio/headset/bridgeofficer
+	l_ear = /obj/item/device/radio/headset/heads/torchexec
 
 /decl/hierarchy/outfit/job/torch/crew/command/bridgeofficer/fleet
 	name = OUTFIT_JOB_NAME("Bridge Officer - Fleet")
