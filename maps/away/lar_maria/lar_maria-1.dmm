@@ -2402,6 +2402,11 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
 "fT" = (
@@ -2798,6 +2803,7 @@
 /area/lar_maria/vir_access)
 "gH" = (
 /obj/machinery/power/smes/buildable,
+/obj/structure/cable,
 /turf/simulated/floor/plating,
 /area/lar_maria/sec_wing)
 "gI" = (
@@ -3781,6 +3787,23 @@
 	pixel_x = 25
 	},
 /turf/simulated/floor/tiled/white,
+/area/lar_maria/sec_wing)
+"ts" = (
+/obj/machinery/door/airlock/security,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/plating,
+/area/lar_maria/sec_wing)
+"FB" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/plating,
 /area/lar_maria/sec_wing)
 
 (1,1,1) = {"
@@ -24890,8 +24913,8 @@ eO
 fj
 fy
 fS
-gi
-dC
+ts
+FB
 gH
 cO
 he
