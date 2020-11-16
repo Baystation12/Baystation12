@@ -1,5 +1,6 @@
-#define NEEDLER_EMBED_PROB 66
+#define NEEDLER_EMBED_PROB 45
 #define NEEDLER_SHARD_DET_TIME 10 SECONDS
+#define NEEDLER_SHRAPNEL_AP 40
 #define FUEL_ROD_IRRADIATE_RANGE 2
 #define FUEL_ROD_IRRADIATE_AMOUNT 10
 #define FUEL_ROD_MAX_OVERSHOOT 3
@@ -118,7 +119,7 @@
 	if(world.time >= die_at)
 		var/mob/living/m = loc
 		if(istype(m))
-			m.apply_damage(our_dam,BURN) //The low damage done by this shard exploding is meant to bypass defences, it's embedded into you.
+			apply_damage(our_dam, BURN, null, run_armor_check(def_zone, "energy", NEEDLER_SHRAPNEL_AP))
 			m.embedded -= src
 			m.pinned -= src
 			if(m.pinned.len == 0)
@@ -408,4 +409,5 @@
 #undef FUEL_ROD_IRRADIATE_AMOUNT
 #undef FUEL_ROD_MAX_OVERSHOOT
 #undef NEEDLER_EMBED_PROB
+#undef NEEDLER_SHRAPNEL_AP
 #undef NEEDLER_SHARD_DET_TIME
