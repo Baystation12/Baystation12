@@ -83,7 +83,7 @@
 /obj/structure/destructible/proc/attempt_deconstruct(obj/item/W as obj, mob/user as mob)
 	. = 0
 
-	if (is_deconstruct_tool(W))
+	if (!is_deconstruct_tool(W))
 		return 0
 
 	if(istype(W, /obj/item/weapon/weldingtool))
@@ -92,6 +92,7 @@
 			return 1
 		else
 			to_chat(user, "<span class='warning'>You need more fuel.</span>")
+			return 0
 
 /obj/structure/destructible/attack_generic(var/mob/user, var/damage, var/attacktext)
 	//user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
