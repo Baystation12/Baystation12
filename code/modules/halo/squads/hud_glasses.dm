@@ -88,7 +88,7 @@
 
 /obj/item/clothing/glasses/hud/tactical/proc/get_loc_used()
 	if(!isturf(loc))
-		return loc.loc
+		return get_turf(loc)
 	else
 		return loc
 
@@ -144,6 +144,8 @@
 		remove_pointer(user,waypoint)
 	var/image/pointer = image(waypoint.icon,waypoint.loc,"[waypoint.waypoint_icon]_onscreen")
 	pointer.name = waypoint.waypoint_name
+	pointer.mouse_opacity = 0
+	pointer.alpha = 150
 	pointer.plane = HUD_PLANE
 	pointer.layer = HUD_ABOVE_ITEM_LAYER
 	waypoint_pointers[waypoint] = pointer
@@ -151,8 +153,6 @@
 
 /obj/item/clothing/glasses/hud/tactical/process_hud()
 	process_hud_pointers()
-
-
 
 /* NIGHT VISION */
 
