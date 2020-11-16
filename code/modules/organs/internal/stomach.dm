@@ -134,9 +134,5 @@
 		if(prob(vomit_probability))
 			owner.vomit()
 
-/obj/item/organ/internal/stomach/robotize()
-	. = ..()
-	icon_state = "stomach-prosthetic"
-
 #undef STOMACH_VOLUME
 #undef PUKE_ACTION_NAME
