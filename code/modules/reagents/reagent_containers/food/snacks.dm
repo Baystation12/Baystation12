@@ -141,10 +141,7 @@
 				to_chat(user, "<span class='warning'>You already have something on your [U].</span>")
 				return
 
-			user.visible_message( \
-				"\The [user] scoops up some [src] with \the [U]!", \
-				"<span class='notice'>You scoop up some [src] with \the [U]!</span>" \
-			)
+			to_chat(user, SPAN_NOTICE("You scoop up some [src] with \the [U]!"))
 
 			src.bitecount++
 			U.overlays.Cut()
