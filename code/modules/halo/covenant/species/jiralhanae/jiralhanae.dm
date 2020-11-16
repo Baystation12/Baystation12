@@ -50,7 +50,7 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/cove
 	gibbed_anim = null
 	dusted_anim = null
 
-	equipment_slowdown_multiplier = 0.75
+	equipment_slowdown_multiplier = 0.9
 
 	pain_scream_sounds = list(\
 	'code/modules/halo/sounds/species_pain_screams/brutescream1.ogg',

@@ -43,6 +43,7 @@ Huragok Engineers. Their flight makes them hard to hit during combat and their n
 	roll_distance = 3
 	gibbed_anim = null
 	dusted_anim = null
+	equipment_slowdown_multiplier = 1.1 //Disincentives multiple weapon carry
 
 	pain_scream_sounds = list(\
 		'code/modules/halo/sounds/species_pain_screams/kiggyscream_1.ogg',

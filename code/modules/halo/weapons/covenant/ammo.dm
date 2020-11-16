@@ -353,6 +353,7 @@
 	damage = 25 //Same as plasma rifle (When factoring in the aoe), but it has AP!
 	armor_penetration = 25
 	shield_damage = 50
+	step_delay = 0.75 //slower than most
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "pulse0"
 	muzzle_type = /obj/effect/projectile/muzzle/cov_red
