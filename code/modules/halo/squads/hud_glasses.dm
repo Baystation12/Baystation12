@@ -120,7 +120,10 @@
 		return
 	last_user = user
 	for(var/obj/effect/waypoint_holder/waypoint in known_waypoints)
-		if(get_dist(waypoint,get_loc_used()) <= user.client.view)
+		var/dist_to = get_dist(waypoint,get_loc_used())
+		if(dist_to == 0) //Don't render it if we're right on top of it. It'd just get in the way.
+			continue
+		if(dist_to <= user.client.view)
 			process_visible_marker(waypoint,user)
 			continue
 		var/dir_to_point = get_dir(get_loc_used(),waypoint)

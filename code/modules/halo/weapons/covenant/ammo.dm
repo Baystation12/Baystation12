@@ -56,7 +56,7 @@
 	icon_state = "Plasmarifle Shot"
 
 /obj/item/projectile/bullet/covenant/plasmarepeater
-	damage = 30 //The repeater does enough, thank you.
+	damage = 30
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "plasma_repeater"
 	muzzle_type = /obj/effect/projectile/muzzle/cov_cyan
