@@ -83,6 +83,7 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 					if(offset_moves_left > 0)
 						for(var/i = 1 to offset_moves_left)
 							epi = get_step(epi,dir_move)
+					epicenter = epi
 				//Now we create the cone, facing the original cone direction
 				var/turf/last_turf = epi
 				var/spread_left = turn(directional,-90)

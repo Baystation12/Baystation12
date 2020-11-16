@@ -2,7 +2,7 @@
 	name = "C-12 breaching charge"
 	desc = "C-12 Shaped-charges or C-12 SCs are used mainly for heavy demolitions and can also be used as weapons. This charge is small and used for pinpoint breaching."
 	gender = PLURAL
-	icon = 'icons/obj/assemblies.dmi'
+	icon = 'code/modules/halo/weapons/icons/plastic_explosives.dmi'
 	icon_state = "plastic-explosive0"
 	item_state = "plasticx"
 	flags = NOBLUDGEON
@@ -12,11 +12,12 @@
 	var/timer = 10
 	var/atom/target = null
 	var/open_panel = 0
+	var/overlay_state = "plastic-explosive2"
 	var/image_overlay = null
 
 /obj/item/weapon/plastique/New()
 	wires = new(src)
-	image_overlay = image('icons/obj/assemblies.dmi', "plastic-explosive2")
+	image_overlay = image(icon,overlay_state)
 	..()
 
 /obj/item/weapon/plastique/Destroy()
@@ -92,6 +93,10 @@
 
 /obj/item/weapon/plastique/breaching
 	name = "Breaching Charge"
+	desc = "A charge used to create a wide breach in a and project a deadly concussive and explosive effect directly behind it."
+
+/obj/item/weapon/plastique/breaching/proc/do_explosion_effect(var/location)
+	explosion(location,3,4,6,6,1,0,1,0,0,null,dir,-1,2)
 
 /obj/item/weapon/plastique/breaching/explode(var/location)
 	if(!target)
@@ -108,8 +113,15 @@
 		else
 			target.ex_act(1)
 	if(location)
-		explosion(location,3,4,6,6,1,0,1,0,0,null,dir,-1,2)
+		do_explosion_effect(location)
 
 	if(target)
 		target.overlays -= image_overlay
 	qdel(src)
+
+/obj/item/weapon/plastique/breaching/longrange
+	name = "Breaching Charge, Piercing"
+	desc = "A charge designed to pierce through a long line of walls and cause large damage to a specific point."
+
+/obj/item/weapon/plastique/breaching/longrange/do_explosion_effect(var/location)
+	explosion(location,6,7,8,10,1,0,1,0,0,null,dir,0,5)
