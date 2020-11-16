@@ -18,8 +18,8 @@
 
 /datum/job/unsc/marine/specialist
 	title = "Marine Specialist"
-	total_positions = 2
-	spawn_positions = 2
+	total_positions = 4
+	spawn_positions = 4
 	outfit_type = /decl/hierarchy/outfit/job/unsc/marine/e3
 	alt_titles = list(
 	"Light Machine Gunner Marine",\
