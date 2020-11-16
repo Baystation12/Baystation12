@@ -119,7 +119,7 @@
 	if(world.time >= die_at)
 		var/mob/living/m = loc
 		if(istype(m))
-			apply_damage(our_dam, BURN, null, run_armor_check(def_zone, "energy", NEEDLER_SHRAPNEL_AP))
+			m.apply_damage(our_dam, BURN, null, m.run_armor_check(null, "energy", NEEDLER_SHRAPNEL_AP))
 			m.embedded -= src
 			m.pinned -= src
 			if(m.pinned.len == 0)
@@ -350,8 +350,8 @@
 
 /obj/item/projectile/bullet/covenant/concussion_rifle
 	name = "heavy plasma round"
-	damage = 30 //Same as plasma rifle (When factoring in the aoe), but it has AP!
-	armor_penetration = 30
+	damage = 25 //Same as plasma rifle (When factoring in the aoe), but it has AP!
+	armor_penetration = 25
 	shield_damage = 50
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "pulse0"
@@ -389,7 +389,7 @@
 		if(istype(mob))
 			mob.adjustFireLoss(aoe_damage)
 		spawn()
-			m.throw_at(lastloc, world.view,1,firer)
+			m.throw_at(lastloc,3,1,firer)
 	. = ..()
 	qdel(src)
 
