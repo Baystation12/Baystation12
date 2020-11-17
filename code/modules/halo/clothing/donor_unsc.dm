@@ -1542,18 +1542,18 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	item_state = "riley_donor_armor"
 
 /obj/item/weapon/storage/box/large/donator/riley_hellbringer
-	startswith = list(/obj/item/clothing/head/helmet/hellbringer/riley
-					/obj/item/clothing/under/unsc/hellbringer_undersuit
-					/obj/item/clothing/gloves/thick/unsc/hellbringer
-					/obj/item/clothing/suit/storage/hellbringer/riley
-					/obj/item/clothing/shoes/hellbringer
+	startswith = list(/obj/item/clothing/head/helmet/hellbringer/riley,
+					/obj/item/clothing/under/unsc/hellbringer_undersuit,
+					/obj/item/clothing/gloves/thick/unsc/hellbringer,
+					/obj/item/clothing/suit/storage/hellbringer/riley,
+					/obj/item/clothing/shoes/hellbringer,
 					/obj/item/weapon/gun/projectile/m7_smg/riley
 					)
-	can_hold = list(/obj/item/clothing/head/helmet/hellbringer/riley
-					/obj/item/clothing/under/unsc/hellbringer_undersuit
-					/obj/item/clothing/gloves/thick/unsc/hellbringer
-					/obj/item/clothing/suit/storage/hellbringer/riley
-					/obj/item/clothing/shoes/hellbringer
+	can_hold = list(/obj/item/clothing/head/helmet/hellbringer/riley,
+					/obj/item/clothing/under/unsc/hellbringer_undersuit,
+					/obj/item/clothing/gloves/thick/unsc/hellbringer,
+					/obj/item/clothing/suit/storage/hellbringer/riley,
+					/obj/item/clothing/shoes/hellbringer,
 					/obj/item/weapon/gun/projectile/m7_smg/riley
 					)
 ///////////CommanderXor/////////
