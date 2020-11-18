@@ -1,0 +1,5 @@
+author: "juxtaposed9930"
+delete-after: True
+changes: 
+  - rscadd: "Adds the missing sprite for the CSO hardsuit module."
+  - rscdel: "Removes duplicate pathfinder hardsuit sprites."
