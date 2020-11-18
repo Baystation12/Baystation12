@@ -175,11 +175,17 @@
 	pixel_y = 22
 	},
 /obj/structure/table/rack,
+/obj/machinery/recharger/wallcharger{
+	pixel_x = -26
+	},
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutshuttle)
 "aO" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/structure/table/rack,
+/obj/machinery/recharger/wallcharger{
+	pixel_x = 26
+	},
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutshuttle)
 "aQ" = (
@@ -2410,6 +2416,7 @@
 	dir = 1;
 	pixel_y = -32
 	},
+/obj/machinery/recharger,
 /turf/simulated/floor/tiled/skrell/blue,
 /area/ship/skrellscoutship/crew/rec)
 "hL" = (
@@ -5418,7 +5425,13 @@
 /obj/structure/table/standard,
 /obj/machinery/button/blast_door{
 	id_tag = "main_airlock_window";
-	name = "Airlock Window Doors"
+	name = "Airlock Window Doors";
+	pixel_y = -2
+	},
+/obj/machinery/button/blast_door{
+	id_tag = "main_airlock_door";
+	name = "Airlock Blast Doors";
+	pixel_y = 7
 	},
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutship/dock)
@@ -5438,10 +5451,7 @@
 /area/ship/skrellscoutshuttle)
 "PJ" = (
 /obj/structure/table/standard,
-/obj/machinery/button/blast_door{
-	id_tag = "main_airlock_door";
-	name = "Airlock Blast Doors"
-	},
+/obj/machinery/recharger,
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutship/dock)
 "PK" = (
@@ -5912,11 +5922,11 @@
 /turf/simulated/floor/plating,
 /area/ship/skrellscoutshuttle)
 "Wh" = (
-/obj/effect/wallframe_spawn/reinforced_phoron/hull,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/effect/paint/black,
-/turf/simulated/floor/plating,
+/obj/machinery/door/firedoor/autoset,
+/obj/machinery/door/airlock/atmos,
+/turf/simulated/floor/tiled/dark/monotile,
 /area/ship/skrellscoutship/maintenance/atmos)
 "Wn" = (
 /obj/structure/cable/yellow{
