@@ -6,7 +6,7 @@
 	info = "You are an employee on the SRV Verne, as it carries the students of the prestigious Ceti Technical Institute conducting research \
 	in the depths of space. Your job on the Survey team is simple; pilot the SRV Verne and the SRV Venerable Catfish; protect the students; and assist in their studies. Your Survey team has awoken \
  	to find the Verne running at low capacity, under-staffed, with much of the automated life support systems doing the heavy lifting."
-	whitelisted_species = list(SPECIES_HUMAN,SPECIES_IPC,SPECIES_SPACER,SPECIES_GRAVWORLDER,SPECIES_VATGROWN,SPECIES_BOOSTER,SPECIES_TRITONIAN)
+	whitelisted_species = list(SPECIES_HUMAN,SPECIES_IPC,SPECIES_SPACER,SPECIES_GRAVWORLDER,SPECIES_VATGROWN,SPECIES_TRITONIAN)
 	required_language = LANGUAGE_HUMAN_EURO
 	min_skill = list(
 		SKILL_EVA     = SKILL_BASIC,
@@ -28,7 +28,7 @@
 	info = "You are an employee on the SRV Verne, as it carries the students of the prestigious Ceti Technical Institute conducting research \
  	in the depths of space. Your job on the Survey team is simple: Handle engineering work on the SRV Verne and the SRV Venerable Catfish, protect the students, and assist in their studies. Your Survey team has awoken \
 	to find the Verne running at low capacity, under-staffed, with much of the automated life support systems doing the heavy lifting."
-	whitelisted_species = list(SPECIES_HUMAN,SPECIES_IPC,SPECIES_SPACER,SPECIES_GRAVWORLDER,SPECIES_VATGROWN,SPECIES_BOOSTER,SPECIES_TRITONIAN)
+	whitelisted_species = list(SPECIES_HUMAN,SPECIES_IPC,SPECIES_SPACER,SPECIES_GRAVWORLDER,SPECIES_VATGROWN,SPECIES_TRITONIAN)
 	required_language = LANGUAGE_HUMAN_EURO
 	min_skill = list(
 		SKILL_COMPUTER     = SKILL_BASIC,
@@ -55,7 +55,7 @@
 	info = "You are an undergraduate xenoscience researcher on the SRV Verne, alongside the rest of your class of the prestigious Ceti Technical Institute conducting research \
 	in the depths of space. A survey team will be accompanying you, on hand to assist your studies on the exoplanets in this system. Your team has awoken \
 	to find the Verne running at low capacity, under-staffed, with much of the automated life support systems doing the heavy lifting."
-	whitelisted_species = list(SPECIES_HUMAN,SPECIES_SPACER,SPECIES_GRAVWORLDER,SPECIES_VATGROWN,SPECIES_BOOSTER,SPECIES_TRITONIAN)
+	whitelisted_species = list(SPECIES_HUMAN,SPECIES_SPACER,SPECIES_GRAVWORLDER,SPECIES_VATGROWN,SPECIES_TRITONIAN)
 	required_language = LANGUAGE_HUMAN_EURO
 	min_skill = list(
 		SKILL_BUREAUCRACY = SKILL_BASIC,

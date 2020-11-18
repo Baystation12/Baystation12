@@ -40,6 +40,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 /datum/category_item/player_setup_item/physical/body/load_character(datum/pref_record_reader/R)
 	pref.species = R.read("species")
+	if(R.get_version() < 2 && pref.species == "booster")
+		pref.species = "human"
 	pref.r_hair = R.read("hair_red")
 	pref.g_hair = R.read("hair_green")
 	pref.b_hair = R.read("hair_blue")

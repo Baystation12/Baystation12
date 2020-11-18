@@ -1,4 +1,4 @@
-#define PREF_SER_VERSION 1
+#define PREF_SER_VERSION 2
 
 /datum/preferences/proc/get_path(ckey, record_key, extension="json")
 	return "data/player_saves/[copytext(ckey,1,2)]/[ckey]/[record_key].[extension]"
