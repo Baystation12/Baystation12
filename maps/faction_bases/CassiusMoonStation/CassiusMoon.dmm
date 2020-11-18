@@ -553,7 +553,6 @@
 "kG" = (/obj/machinery/camera/autoname/invis/moonbase_cassius,/turf/simulated/wall/r_wall,/area/faction_base/unsc/moonbase/bunks)
 "kH" = (/obj/machinery/camera/autoname/invis/moonbase_cassius,/turf/simulated/floor/decor{tag = "icon-dark"; icon_state = "dark"},/area/faction_base/unsc/moonbase/armory)
 "kI" = (/obj/structure/destructible/sandbag{tag = "icon-sandbag (NORTHWEST)"; icon_state = "sandbag"; dir = 9},/obj/machinery/light/small{icon_state = "bulb1"; dir = 1},/turf/simulated/floor/pavement/empty,/area/faction_base/unsc/moonbase/defense_center)
-"kJ" = (/obj/machinery/door/airlock/halo/moonbase_cassius_general/toilets,/turf/simulated/wall,/area/faction_base/unsc/moonbase/bathroom_m)
 "kK" = (/obj/machinery/door/airlock/halo/moonbase_cassius_general,/turf/simulated/floor/pavement/empty,/area/faction_base/unsc/moonbase/defense_center)
 "kL" = (/obj/structure/destructible/sandbag{icon_state = "sandbag"; dir = 5},/obj/machinery/light/small{icon_state = "bulb1"; dir = 1},/turf/simulated/floor/pavement/empty,/area/faction_base/unsc/moonbase/defense_center)
 "kM" = (/obj/structure/destructible/sandbag{tag = "icon-sandbag (WEST)"; icon_state = "sandbag"; dir = 8},/obj/structure/turret/HMG{icon_state = "hmgturret"; dir = 8},/turf/simulated/floor/pavement/empty,/area/faction_base/unsc/moonbase/defense_center)
@@ -566,7 +565,6 @@
 "kT" = (/obj/machinery/light/small/red{icon_state = "firelight1"; dir = 8},/turf/simulated/floor/pavement/empty,/area/faction_base/unsc/moonbase/defense_center)
 "kU" = (/obj/structure/destructible/sandbag{icon_state = "sandbag"; dir = 6},/turf/simulated/floor/pavement/empty,/area/faction_base/unsc/moonbase/defense_center)
 "kV" = (/obj/machinery/light/small,/turf/simulated/floor/pavement/empty,/area/faction_base/unsc/moonbase/defense_center)
-"kW" = (/obj/machinery/door/airlock/halo/moonbase_cassius_general/toilets,/turf/simulated/wall,/area/faction_base/unsc/moonbase/bathroom_f)
 "kX" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/wall,/area/faction_base/unsc/moonbase/gym)
 "kY" = (/turf/simulated/wall,/area/faction_base/unsc/moonbase/cryopods)
 "kZ" = (/obj/structure/ai_terminal/unsc/moonbase_cassius,/turf/simulated/wall,/area/faction_base/unsc/moonbase/gym)
@@ -866,7 +864,7 @@ aaacacacacacaccrcrcrcrcrcracacacacacacacacacacacijijijacacacaccrcrcrcrcrcriJsEjS
 aaacacacacacaccrcrcrcrcracacacacaciiiiiiacacaccrcrcrijacacacacaccrcrcrcrfXiJsJkhjEjEkAsEsEsPiJjejejejejeejememjejejejecrjIibjqkFkFkVkFkFkFkFkVkFkFkKkFkFkKkFkFkVkFkFkFkFkFkVkFkFjqjIjIcriHiHiHiHiHiHiHiHiHiHiHiHiHkPlclclckPlclckPiHcrcrcrcrcrcrcracacacacacacacacacacacacacacacacacacacacacacacacacacacacaa
 aaacacacacaccrcrcrcrcracacacacaciiiicriiacaccrcrcracijacacacacaccrcrcrcrcriJsEkhjEjEkAsEsEsEsEepsmsusmfsersmsmsmsusvjecrjIjIjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjIjIcriHkPkPkPkPkPkPkPkPkPkPkPkPkPkPkPkPkPlclckPiHkacrcrcrcrcracacacacacacacacacacacacacacacacacacacacacacacacacacacacacaa
 aaacacacacacaccrcrcracacacacaccrcrcrcracaccrcrcrcrcracacacacacaccrcrcrcrcriJsEkBrLrLrLsEsEsEsEesvbvbvbvbvbvbvbvbvbvjjecrjIjIcrcrjriTiUiUqBjrjGjriVjriVjriWksiWksiWksqCiXiXiYkscrcrjIjIcriHkPgnghlckPlclcgqlclclclclclclcgqlclclckPiHcrcrcrcrcrcracacacacacacacacacacacacacacacacacacacacacacacacacacacacacaa
-aaacacacacacaccrcrcracacacaccrcrcrcrcrcrcrcrcrcrcrcracacacacacaccrcrcrcrcriJsEsEsEsEsEsEsEsEewesvmvmvmvmvmvmvmvbvmvnjecrjIjIjIjIiUiUiUjriUjrkJjrjjjrjjjrjkkskWksjkksiXksiXiXiXjIjIjIjIfXiHkPgigjlcgolclclclclclclclclclclclclclckPiHcrcrcrcrcrcracacacacacacacacacacacacacacacacacacacacacacacacacacacacacaa
+aaacacacacacaccrcrcracacacaccrcrcrcrcrcrcrcrcrcrcrcracacacacacaccrcrcrcrcriJsEsEsEsEsEsEsEsEewesvmvmvmvmvmvmvmvbvmvnjecrjIjIjIjIiUiUiUjriUjrjjjrjjjrjjjrjkksjkksjkksiXksiXiXiXjIjIjIjIfXiHkPgigjlcgolclclclclclclclclclclclclclckPiHcrcrcrcrcrcracacacacacacacacacacacacacacacacacacacacacacacacacacacacacaa
 aaacacacacacaccrcrcracacacaccrcrcrcrcrcrcrcrcrcrcrcracacacacacaccrcrcrcrcriJsEsNsEsEsEsEsNiJiJexiEiEiEiEiEiEiEwdiEpzjecrcrjIjIjIeziUjujriUiUiUiUiUiUkjjrkkiXiXiXiXiXiXksjviXeAjIjIjIjIcriHkPlclclckPlclclclclclclclclclcjtlclcgrkPiHcrcrcrcrcracacacacacacacacacacacacacacacacacacacacacacacacacacacacacacaa
 aaacacacacacacaccracacacaccrcrcrcrcrcrcrcrcrcrcrcracacacacacacaccrcrcrcrcriJsJsEsEsEsEsEsEkXiJeyiEiEiEiEiEiEiEwdiEiEjecrcrjIjIfXjrftjujroZiUiUiUqBiUySjrzgiXqCiXiXiXpaksjvfukscrjIjIcrcriHkPkPkPkPkPgplclckPkPkPkPkPgplclclclclckPiHcrcrcrcrcracacacacacacacacacacacacacacacacacacacacacacacacacacacacacacaa
 aaacacacacacacaccracacacaccrcrcrcrcrcrcrcrcrcrcrcracacacacacacaccrcrcrcrcriJsEsNsEsQsEsEsNiJiJeyiEiEiEiEiEiEiEwdiEiEjefGcrjIjIjIiUiUjujriUiUiUiUiUiUkjjrkkiXiXiXiXiXiXksjviXiXjIjIjIcrcriHkPgnghlckPlclclckPlclclckPlclclcgslclckPiHcrcrcrcrcracacacacacacacacacacacacacacacacacacacacacacacacacacacacacacaa
