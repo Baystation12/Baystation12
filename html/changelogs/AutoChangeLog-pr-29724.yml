@@ -1,0 +1,4 @@
+author: "Ninetailed"
+delete-after: True
+changes: 
+  - rscadd: "Lobby player list in alphabetical order"
