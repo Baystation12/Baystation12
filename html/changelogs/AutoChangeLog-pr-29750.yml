@@ -1,0 +1,5 @@
+author: "Shadowtail117"
+delete-after: True
+changes: 
+  - tweak: "Skrell no longer take immediate toxin damage from protein and instead only feel sick in lower amounts."
+  - tweak: "Various reagents that would contain animal protein now affect skrell."
