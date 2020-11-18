@@ -1,0 +1,5 @@
+author: "juxtaposed9930"
+delete-after: True
+changes: 
+  - maptweak: "Gives skrellship some chargers for their new shortwaves."
+  - maptweak: "The skrellship hangar now has a door into the atmospherics room so you can get scrubbers without crossing half the ship."
