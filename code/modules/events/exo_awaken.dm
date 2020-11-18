@@ -7,6 +7,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 	var/spawned_mobs //total count of all spawned mobs by the event
 	var/list/exoplanet_areas //all possible exoplanet areas the event can take place on
 	var/area/chosen_area //the single chosen exoplanet to have the event occur on
+	var/obj/effect/overmap/visitable/sector/exoplanet/chosen_planet
 	var/list/players_on_site = list() //a list of the players on the planet
 	var/players_on_site_count = 0 //how many players are currently on the planet
 	var/required_players_count = 2 //how many players we need present on the planet for the event to start
@@ -28,7 +29,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 	*/
 	var/list/major_event_mobs = list(
 		list(
-			"A blood curdling howl echoes through the air as the planet starts to shake violently, and you feel hungry eyes set their sight on you...",
+			"A blood curdling howl echoes through the air as the planet starts to shake violently. Something has woken up...",
 			'sound/ambience/meat_monster_arrival.ogg',
 			list(
 				list(/mob/living/simple_animal/hostile/meat/abomination, 95),
@@ -66,7 +67,10 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 			"You feel uneasy as you hear something skittering about...",
 			'sound/effects/wind/wind_3_1.ogg',
 			list(
-				list(/obj/effect/spider/spiderling, 100)
+				list(/mob/living/simple_animal/hostile/giant_spider/guard, 60),
+				list(/mob/living/simple_animal/hostile/giant_spider/hunter, 15),
+				list(/mob/living/simple_animal/hostile/giant_spider/nurse, 30),
+				list(/mob/living/simple_animal/hostile/giant_spider/spitter, 10)
 			)
 		),
 		list(
@@ -81,19 +85,22 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 
 /datum/event/exo_awakening/setup()
 	announceWhen = rand(15, 45)
-	endWhen += severity*25
 	affecting_z = list()
 
-	for (var/area/A in world)
-		if (A.planetary_surface)
-			LAZYADD(exoplanet_areas, A)
-	if (severity > EVENT_LEVEL_MODERATE) //choose a mob list and a target number of mobs to spawn (based on severity)
+	if (severity == EVENT_LEVEL_MAJOR || prob(25))
+		severity = EVENT_LEVEL_MAJOR //if original event was moderate, this will need updating
+
 		chosen_mob_list = pick(major_event_mobs)
 		target_mob_count = target_mob_count_major
 	else
 		chosen_mob_list = pick(moderate_event_mobs)
 		target_mob_count = target_mob_count_moderate
 
+	for (var/area/A in world)
+		if (A.planetary_surface)
+			LAZYADD(exoplanet_areas, A)
+
+	endWhen += severity*25
 
 /datum/event/exo_awakening/proc/count_mobs()
 	var/total_mobs
@@ -118,6 +125,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 				if(get_crewmember_record(M.real_name || M.name)) //event is geared at torch/exploration, only valid if they're around.
 					torch_players_present = TRUE
 					chosen_area = A
+					chosen_planet = map_sectors["[A.z]"]
 					LAZYADD(affecting_z, A.z)
 
 		players_on_site_count = players_on_site.len
@@ -147,11 +155,9 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 	else
 		announcement = "Anomalous biological activity detected on [location_name()]."
 
-	var/obj/effect/overmap/visitable/O = map_sectors["[chosen_area.z]"]
-
-	for(var/obj/effect/overmap/visitable/OO in range(O,2)) //announce the event to ships in range of the planet
+	for(var/obj/effect/overmap/visitable/OO in range(chosen_planet,2)) //announce the event to ships in range of the planet
 		if (istype(OO, /obj/effect/overmap/visitable/ship))
-			command_announcement.Announce(announcement, "[OO.name] Sensor Array", zlevels = OO.find_z_levels())
+			command_announcement.Announce(announcement, "[OO.name] Biological Sensor Array", zlevels = OO.find_z_levels())
 
 /datum/event/exo_awakening/tick()
 	count_mobs()
@@ -195,6 +201,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 				GLOB.death_event.register(M,src,/datum/event/exo_awakening/proc/reduce_mob_count)
 				GLOB.destroyed_event.register(M,src,/datum/event/exo_awakening/proc/reduce_mob_count)
 				LAZYADD(GLOB.exo_event_mob_count, M)
+				chosen_planet.adapt_animal(M)
 
 		spawned_mobs ++
 		I++
