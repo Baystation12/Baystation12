@@ -1378,8 +1378,8 @@
 "de" = (
 /obj/structure/table/rack,
 /obj/item/weapon/melee/energy/sword/pirate,
-/obj/item/clothing/suit/space/pirate,
-/obj/item/clothing/suit/space/pirate,
+/obj/item/clothing/suit/pirate,
+/obj/item/clothing/suit/pirate,
 /obj/item/weapon/tank/oxygen,
 /obj/item/clothing/shoes/magboots,
 /obj/random/voidsuit,
@@ -1393,8 +1393,8 @@
 "df" = (
 /obj/structure/table/rack,
 /obj/item/weapon/melee/energy/sword/pirate,
-/obj/item/clothing/suit/space/pirate,
-/obj/item/clothing/suit/space/pirate,
+/obj/item/clothing/suit/pirate,
+/obj/item/clothing/suit/pirate,
 /obj/item/weapon/tank/oxygen,
 /obj/item/clothing/shoes/magboots,
 /obj/random/voidsuit,
@@ -1898,7 +1898,7 @@
 /area/map_template/skipjack_station/start)
 "eA" = (
 /obj/structure/closet/crate,
-/obj/item/clothing/suit/space/pirate,
+/obj/item/clothing/suit/pirate,
 /obj/item/clothing/under/rank/medical/scrubs/black,
 /turf/simulated/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
