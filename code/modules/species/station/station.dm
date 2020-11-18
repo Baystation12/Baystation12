@@ -235,6 +235,17 @@
 		/decl/emote/exertion/synthetic/creak
 	)
 
+
+/datum/species/skrell/proc/handle_protein(mob/living/carbon/human/M, datum/reagent/protein)
+	var/effective_dose = M.chem_doses[protein.type] * protein.protein_amount
+	if (effective_dose > 20)
+		M.adjustToxLoss(Clamp((effective_dose - 20) / 4, 2, 10))
+		M.vomit(8, 3, rand(1 SECONDS, 5 SECONDS))
+	else if (effective_dose > 10)
+		M.vomit(4, 2, rand(3 SECONDS, 10 SECONDS))
+	else
+		M.vomit(1, 1, rand(5 SECONDS, 15 SECONDS))	
+
 /datum/species/skrell/get_sex(var/mob/living/carbon/human/H)
 	return istype(H) && (H.descriptors["headtail length"] == 1 ? MALE : FEMALE)
 

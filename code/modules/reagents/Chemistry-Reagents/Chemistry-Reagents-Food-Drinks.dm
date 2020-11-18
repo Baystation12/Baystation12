@@ -42,6 +42,9 @@
 	affect_ingest(M, alien, removed)
 
 /datum/reagent/nutriment/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	if (alien == IS_SKRELL && protein_amount > 0)
+		var/datum/species/skrell/S = M.species
+		S.handle_protein(M, src)
 	M.heal_organ_damage(0.5 * removed, 0) //what
 
 	adjust_nutrition(M, alien, removed)
@@ -68,24 +71,12 @@
 	name = "Animal Protein"
 	taste_description = "some sort of protein"
 	color = "#440000"
-
-/datum/reagent/nutriment/protein/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	switch(alien)
-		if(IS_SKRELL)
-			M.adjustToxLoss(0.5 * removed)
-			return
-	..()
+	protein_amount = 1
 
 /datum/reagent/nutriment/protein/adjust_nutrition(var/mob/living/carbon/M, var/alien, var/removed)
 	switch(alien)
 		if(IS_UNATHI) removed *= 2.25
 	M.adjust_nutrition(nutriment_factor * removed)
-
-/datum/reagent/nutriment/protein/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien && alien == IS_SKRELL)
-		M.adjustToxLoss(2 * removed)
-		return
-	..()
 
 /datum/reagent/nutriment/protein/egg // Also bad for skrell.
 	name = "egg yolk"
@@ -137,6 +128,7 @@
 	reagent_state = LIQUID
 	nutriment_factor = 3
 	color = "#ffd592"
+	protein_amount = 0.4
 
 /datum/reagent/nutriment/batter/touch_turf(var/turf/simulated/T)
 	if(!istype(T, /turf/space))
@@ -151,6 +143,7 @@
 	description = "A gooey mixture of eggs, flour and sugar, a important precursor to cake!"
 	taste_description = "sweetness"
 	color = "#ffe992"
+	protein_amount = 0.3
 
 /datum/reagent/nutriment/coffee
 	name = "Coffee Powder"
@@ -516,6 +509,7 @@
 	reagent_state = LIQUID
 	color = "#efede8"
 	taste_mult = 2
+	protein_amount = 0.7
 
 /* Drinks */
 
@@ -754,6 +748,14 @@
 
 	glass_name = "milk"
 	glass_desc = "White and nutritious goodness!"
+	protein_amount = 0.75
+
+/datum/reagent/drink/milk/affect_ingest(mob/living/carbon/M, alien, removed)
+	..()
+	if (alien == IS_DIONA)
+		return
+	M.heal_organ_damage(0.5 * removed, 0)
+	holder.remove_reagent(/datum/reagent/capsaicin, 10 * removed)
 
 /datum/reagent/drink/milk/chocolate
 	name =  "Chocolate Milk"
@@ -763,13 +765,7 @@
 
 	glass_name = "chocolate milk"
 	glass_desc = "Deliciously fattening!"
-
-/datum/reagent/drink/milk/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	..()
-	if(alien == IS_DIONA)
-		return
-	M.heal_organ_damage(0.5 * removed, 0)
-	holder.remove_reagent(/datum/reagent/capsaicin, 10 * removed)
+	protein_amount = 0.6
 
 /datum/reagent/drink/milk/cream
 	name = "Cream"
@@ -779,6 +775,7 @@
 
 	glass_name = "cream"
 	glass_desc = "Ewwww..."
+	protein_amount = 1
 
 /datum/reagent/drink/milk/soymilk
 	name = "Soy Milk"
@@ -788,6 +785,7 @@
 
 	glass_name = "soy milk"
 	glass_desc = "White and nutritious soy goodness!"
+	protein_amount = 0
 
 /datum/reagent/drink/coffee
 	name = "Coffee"
@@ -870,6 +868,7 @@
 	taste_description = "bitter creamy coffee"
 	color = "#c65905"
 	adj_temp = 5
+	protein_amount = 0.5
 
 	glass_name = "cafe latte"
 	glass_desc = "A nice, strong and refreshing beverage while you are reading."
@@ -883,6 +882,7 @@
 	description = "A nice, strong and refreshing beverage while you are reading. This one's cold."
 	taste_description = "cold bitter creamy coffee"
 	color = "#c65905"
+	protein_amount = 0.5
 
 	glass_name = "iced cafe latte"
 	glass_desc = "A nice, strong and refreshing beverage while you are reading. This one's cold."
@@ -895,7 +895,7 @@
 	name = "Mocha Latte"
 	description = "Coffee and chocolate, smooth and creamy."
 	taste_description = "bitter creamy chocolate"
-
+	protein_amount = 0.3
 	glass_name = "mocha latte"
 	glass_desc = "Coffee and chocolate, smooth and creamy."
 
@@ -911,6 +911,7 @@
 	name = "Iced Mocha Latte"
 	description = "Coffee and chocolate, smooth and creamy. This one's cold."
 	taste_description = "cold bitter creamy chocolate"
+	protein_amount = 0.3
 
 	glass_name = "iced mocha latte"
 	glass_desc = "Coffee and chocolate, smooth and creamy. This one's cold."
@@ -943,6 +944,7 @@
 	name = "Iced Pumpkin Spice Latte"
 	description = "Smells and tastes like Autumn. This one's cold"
 	taste_description = "cold bitter creamy pumpkin spice"
+	protein_amount = 0.3
 
 	glass_name = "iced pumpkin spice latte"
 	glass_desc = "Smells and tastes like Autumn. This one's cold."
@@ -963,6 +965,7 @@
 	color = "#403010"
 	nutrition = 2
 	adj_temp = 5
+	protein_amount = 0.5
 
 	glass_name = "hot chocolate"
 	glass_desc = "Made with love! And cocoa beans."
@@ -1086,6 +1089,7 @@
 	taste_description = "pork"
 	color = "#ff6a9b"
 	adj_temp = -5
+	protein_amount = 0.8
 
 	glass_name = "Pork Soda"
 	glass_desc = "I asked for a glass of PORT!"
@@ -1097,13 +1101,13 @@
 	taste_description = "creamy vanilla"
 	color = "#aee5e4"
 	adj_temp = -9
+	protein_amount = 0.5
 
 	glass_name = "milkshake"
 	glass_desc = "Glorious brainfreezing mixture."
 
 /datum/reagent/milkshake/affect_ingest(var/mob/living/carbon/human/M, var/alien, var/removed)
 	..()
-
 	if(alien == IS_UNATHI)
 		var/datum/species/unathi/S = M.species
 		S.handle_sugar(M,src,0.5)
@@ -1665,6 +1669,7 @@
 	taste_mult = 1.3
 	color = "#997650"
 	strength = 12
+	protein_amount = 0.3
 
 	glass_name = "B-52"
 	glass_desc = "Kahlua, Irish cream, and congac. You will get bombed."
@@ -1753,6 +1758,7 @@
 	color = "#895c4c"
 	strength = 50
 	nutriment_factor = 2
+	protein_amount = 0.5
 
 	glass_name = "bilk"
 	glass_desc = "A brew of milk and beer. For those alcoholics who fear osteoporosis."
@@ -2027,6 +2033,7 @@
 	taste_description = "creamy alcohol"
 	color = "#dddd9a"
 	strength = 25
+	protein_amount = 0.5
 
 	glass_name = "Irish cream"
 	glass_desc = "It's cream, mixed with whiskey. What else would you expect from the Irish?"
@@ -2468,6 +2475,7 @@
 	name = "London Fog"
 	description = "A blend of Earl Grey (Or more likely Baron Grey) and steamed milk, making a pleasant tangy tea latte."
 	taste_description = "creamy, tangy black tea"
+	protein_amount = 0.5
 
 	glass_name = "London Fog"
 	glass_desc = "A blend of Earl Grey (Or more likely Baron Grey) and steamed milk, making a pleasant tangy tea latte."
@@ -2484,6 +2492,7 @@
 	name = "Iced London Fog"
 	description = "A blend of Earl Grey (Or more likely Baron Grey) and steamed milk, making a pleasant tangy tea latte. This one's cold."
 	taste_description = "cold, creamy, tangy black tea"
+	protein_amount = 0.5
 
 	glass_name = "iced london fog"
 	glass_desc = "A blend of Earl Grey (Or more likely Baron Grey) and steamed milk, making a pleasant tangy tea latte. This one's cold."
@@ -2563,6 +2572,7 @@
 	description = "A warm, inviting cup of spiced, dark tea mixed with steamed milk."
 	taste_description = "creamy spiced tea"
 	color = "#c8a988"
+	protein_amount = 0.5
 
 	glass_name = "chai latte"
 	glass_desc = "A warm, inviting cup of spiced, dark tea mixed with steamed milk."
@@ -2581,6 +2591,7 @@
 	description = "A warm, inviting cup of spiced, dark tea mixed with steamed milk. This one's cold."
 	taste_description = "cold creamy spiced tea"
 	color = "#c8a988"
+	protein_amount = 0.5
 
 	glass_name = "iced chai latte"
 	glass_desc = "A warm, inviting cup of spiced, dark tea mixed with steamed milk. This one's cold."
@@ -3140,6 +3151,7 @@
 	color = "#cfe5ae"
 	adj_drowsy = -3
 	adj_temp = -5
+	protein_amount = 0.5
 
 	glass_name = "Cola Float"
 	glass_desc = "A delicious combination ofice cream and cola"
@@ -3261,6 +3273,7 @@
 	description = "A chilled dairy-rich beverage. Too cool to keep to the holidays."
 	taste_description = "eggy noggyness"
 	color = "#619494"
+	protein_amount = 0.8
 
 	glass_name = "eggnog"
 	glass_desc = "A delicious glass of eggnog."
@@ -3411,6 +3424,7 @@
 	taste_description = "warm cream and lemon"
 	color = "#e3e5bf"
 	strength = 50
+	protein_amount = 0.5
 
 	glass_name = "posset"
 	glass_desc = "A sweet hot milk mixed with lemon and ale. A Terran delicacy"
