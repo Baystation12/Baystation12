@@ -21,7 +21,6 @@
 	fire_sound = 'sound/weapons/gunshot/shotgun.ogg'
 	damage = 25
 	armor_penetration = 10
-	shield_damage = 5
 	pellets = 8
 	range_step = 1
 	spread_step = 5
