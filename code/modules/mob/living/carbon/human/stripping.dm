@@ -23,34 +23,41 @@
 	if(stealth)
 		strip_delay = strip_delay-10
 
-	switch(slot_to_strip_text)
-		// Handle things that are part of this interface but not removing/replacing a given item.
-		if("pockets")
-			if(stripping)
-				if(!stealth)
-					visible_message("<span class='danger'>\The [user] is trying to empty [src]'s pockets!</span>")
-				if(do_after(user, strip_delay, src, do_flags = DO_DEFAULT & ~DO_SHOW_PROGRESS))
+	var/strip_flags = stealth ? DO_DEFAULT : (DO_DEFAULT | DO_PUBLIC_PROGRESS)
+
+	switch (slot_to_strip_text)
+		if ("pockets")
+			if (stripping)
+				if (!stealth)
+					visible_message(SPAN_DANGER("\The [user] is trying to empty [src]'s pockets!"))
+				else
+					to_chat(user, SPAN_NOTICE("You start picking \the [src]'s pockets."))
+				if (do_after(user, strip_delay, src, do_flags = strip_flags))
 					empty_pockets(user)
 			else
-				//should it be possible to discreetly slip something into someone's pockets?
-				if(!stealth)
-					visible_message("<span class='danger'>\The [user] is trying to stuff \a [held] into [src]'s pocket!</span>")
-				if(do_after(user, strip_delay, src, do_flags = DO_DEFAULT & ~DO_SHOW_PROGRESS))
+				if (!stealth)
+					visible_message(SPAN_DANGER("\The [user] is trying to stuff \a [held] into \the [src]'s pocket!"))
+				else
+					to_chat(user, SPAN_NOTICE("You start planting \a [held] into \the [src]'s pocket."))
+				if (do_after(user, strip_delay, src, do_flags = strip_flags))
 					place_in_pockets(held, user)
 			return
-		if("sensors")
-			if(!stealth)
-				visible_message("<span class='danger'>\The [user] is trying to set \the [src]'s sensors!</span>")
-			if(do_after(user, strip_delay, src, do_flags = DO_DEFAULT & ~DO_SHOW_PROGRESS))
+
+		if ("sensors")
+			if (!stealth)
+				visible_message(SPAN_DANGER("\The [user] is trying to set \the [src]'s sensors!"))
+			else
+				to_chat(user, SPAN_NOTICE("You start stealthily adjusting \the [src]'s sensors."))
+			if (do_after(user, strip_delay, src, do_flags = strip_flags))
 				toggle_sensors(user)
 			return
+
 		if ("lock_sensors")
 			if (!istype(w_uniform, /obj/item/clothing/under))
 				return
 			var/obj/item/clothing/under/subject_uniform = w_uniform
-			if(!stealth)
-				visible_message(SPAN_DANGER("\The [user] is trying to [subject_uniform.has_sensor == SUIT_LOCKED_SENSORS ? "un" : ""]lock \the [src]'s sensors!"))
-			if (do_after(user, strip_delay, src, do_flags = DO_DEFAULT & ~DO_SHOW_PROGRESS))
+			visible_message(SPAN_DANGER("\The [user] is trying to [subject_uniform.has_sensor == SUIT_LOCKED_SENSORS ? "un" : ""]lock \the [src]'s sensors!"), range = 3)
+			if (do_after(user, strip_delay, src, do_flags = DO_DEFAULT | DO_PUBLIC_PROGRESS))
 				if (subject_uniform != w_uniform)
 					to_chat(user, SPAN_WARNING("\The [src] is not wearing \the [subject_uniform] anymore."))
 					return
@@ -62,95 +69,100 @@
 					to_chat(user, SPAN_WARNING("You need a multitool to lock \the [subject_uniform]'s sensors."))
 					return
 				subject_uniform.has_sensor = subject_uniform.has_sensor == SUIT_LOCKED_SENSORS ? SUIT_HAS_SENSORS : SUIT_LOCKED_SENSORS
-				if(!stealth)
-					visible_message(SPAN_NOTICE("\The [user] [subject_uniform.has_sensor == SUIT_LOCKED_SENSORS ? "" : "un"]locks \the [subject_uniform]'s suit sensor controls."), range = 2)
+				visible_message(SPAN_NOTICE("\The [user] [subject_uniform.has_sensor == SUIT_LOCKED_SENSORS ? "" : "un"]locks \the [subject_uniform]'s suit sensor controls."), range = 3)
 			return
-		if("internals")
-			visible_message("<span class='danger'>\The [usr] is trying to set \the [src]'s internals!</span>")
-			if(do_after(user, strip_delay, src, do_flags = DO_DEFAULT & ~DO_SHOW_PROGRESS))
+
+		if ("internals")
+			visible_message(SPAN_DANGER("\The [usr] is trying to set \the [src]'s internals!"))
+			if (do_after(user, strip_delay, src, do_flags = strip_flags))
 				toggle_internals(user)
 			return
-		if("tie")
-			if(!istype(holder) || !holder.accessories.len)
+
+		if ("tie")
+			if (!istype(holder))
+				return
+			var/len = length(holder.accessories)
+			if (!len)
 				return
 			var/obj/item/clothing/accessory/A = holder.accessories[1]
-			if(holder.accessories.len > 1)
-				A = input("Select an accessory to remove from [holder]") as null|anything in holder.accessories
-			if(!istype(A))
+			if (len > 1)
+				A = input("Select an accessory to remove from [holder]") as null | anything in holder.accessories
+			if (isnull(A))
 				return
-			if(!stealth)
-				visible_message("<span class='danger'>\The [user] is trying to remove \the [src]'s [A.name]!</span>")
-
-			if(!do_after(user, strip_delay, src, do_flags = DO_DEFAULT & ~DO_SHOW_PROGRESS))
+			if (!stealth)
+				visible_message(SPAN_DANGER("\The [user] starts trying to remove \the [src]'s [A.name]!"))
+			else
+				to_chat(user, SPAN_NOTICE("You start stealthily removing \the [src]'s [A.name]."))
+			if (!do_after(user, strip_delay, src, do_flags = strip_flags))
 				return
-
-			if(!A || holder.loc != src || !(A in holder.accessories))
+			if (!A || holder.loc != src || !(A in holder.accessories))
 				return
-
 			admin_attack_log(user, src, "Stripped \an [A] from \the [holder].", "Was stripped of \an [A] from \the [holder].", "stripped \an [A] from \the [holder] of")
-			holder.remove_accessory(user,A)
+			holder.remove_accessory(user, A)
 			return
+
 		else
 			var/obj/item/located_item = locate(slot_to_strip_text) in src
-			if(isunderwear(located_item))
+			if (isunderwear(located_item))
 				var/obj/item/underwear/UW = located_item
-				if(UW.DelayedRemoveUnderwear(user, src))
+				if (UW.DelayedRemoveUnderwear(user, src))
 					user.put_in_active_hand(UW)
 				return
 
 	var/obj/item/target_slot = get_equipped_item(text2num(slot_to_strip_text))
 	var/pickpocketable_list = list(slot_l_ear, slot_r_ear, slot_l_hand, slot_r_hand, slot_wear_id, slot_s_store)
 	var/pickpocketable_object = (text2num(slot_to_strip_text) in pickpocketable_list)
-	if(stripping)
-		if(!istype(target_slot))  // They aren't holding anything valid and there's nothing to remove, why are we even here?
+	if (stripping)
+		if (!istype(target_slot))  // They aren't holding anything valid and there's nothing to remove, why are we even here?
 			return
-		if(!target_slot.mob_can_unequip(src, text2num(slot_to_strip_text), disable_warning=1))
-			to_chat(user, "<span class='warning'>You cannot remove \the [src]'s [target_slot.name].</span>")
+		if (!target_slot.mob_can_unequip(src, text2num(slot_to_strip_text), disable_warning = TRUE))
+			to_chat(user, SPAN_WARNING("You cannot remove \the [src]'s [target_slot.name]."))
 			return
-		if(!(stealth && pickpocketable_object))
-			visible_message("<span class='danger'>\The [user] is trying to remove \the [src]'s [target_slot.name]!</span>")
+		if (!(stealth && pickpocketable_object))
+			visible_message(SPAN_DANGER("\The [user] is trying to remove \the [src]'s [target_slot.name]!"))
+		else
+			to_chat(user, SPAN_NOTICE("You start stealthily removing \the [src]'s [target_slot.name]."))
 	else
-		if(!(stealth && pickpocketable_object))
-			visible_message("<span class='danger'>\The [user] is trying to put \a [held] on \the [src]!</span>")
+		if (!(stealth && pickpocketable_object))
+			visible_message(SPAN_DANGER("\The [user] is trying to put \a [held] on \the [src]!"))
+		else
+			to_chat(user, SPAN_NOTICE("You start stealthily planting \a [held] on \the [src]."))
 
-	if(!do_after(user, strip_delay, src))
+	if (!do_after(user, strip_delay, src))
 		return
 
-	if(stripping)
-		if(unEquip(target_slot))
+	if (stripping)
+		if (unEquip(target_slot))
 			admin_attack_log(user, src, "Stripped \a [target_slot]", "Was stripped of \a [target_slot].", "stripped \a [target_slot] from")
 			user.put_in_active_hand(target_slot)
 		else
 			admin_attack_log(user, src, "Attempted to strip \a [target_slot]", "Target of a failed strip of \a [target_slot].", "attempted to strip \a [target_slot] from")
-	else if(user.unEquip(held))
+	else if (user.unEquip(held))
 		var/obj/item/clothing/C = get_equipped_item(text2num(slot_to_strip_text))
-		if(istype(C) && C.can_attach_accessory(held, user))
+		if (istype(C) && C.can_attach_accessory(held, user))
 			C.attach_accessory(user, held)
-		else if(!equip_to_slot_if_possible(held, text2num(slot_to_strip_text), del_on_fail=0, disable_warning=1, redraw_mob=1))
+		else if (!equip_to_slot_if_possible(held, text2num(slot_to_strip_text), del_on_fail = FALSE, disable_warning = FALSE, redraw_mob = TRUE))
 			user.put_in_active_hand(held)
 
-// Empty out everything in the target's pockets.
-/mob/living/carbon/human/proc/empty_pockets(var/mob/living/user)
-	// Is the user wearing pickpocketing gloves?
-	var/stealth = FALSE
+/mob/living/carbon/human/proc/empty_pockets(mob/living/user)
 	var/obj/item/clothing/gloves/glove = user.get_equipped_item(slot_gloves)
-	if(istype(glove))
-		stealth = glove.pickpocket
-	if(!r_store && !l_store)
-		to_chat(user, "<span class='warning'>\The [src] has nothing in their pockets.</span>")
+	var/stealth = istype(glove, /obj/item/clothing/gloves) ? glove.pickpocket : FALSE
+	if (!r_store && !l_store)
+		to_chat(user, SPAN_WARNING("\The [src] has nothing in their pockets."))
 		return
 	var/target_slot = null
-	if(r_store)
+	if (r_store)
 		target_slot = r_store
-		if(unEquip(r_store) && stealth)
+		if (unEquip(r_store) && stealth)
 			user.put_in_active_hand(target_slot)
-	if(l_store)
+	if (l_store)
 		target_slot = l_store
-		if(unEquip(l_store) && stealth)
+		if (unEquip(l_store) && stealth)
 			user.put_in_inactive_hand(target_slot)
-		
-	if(!stealth)
-		visible_message("<span class='danger'>\The [user] empties [src]'s pockets!</span>")
+	if (!stealth)
+		visible_message(SPAN_DANGER("\The [user] empties [src]'s pockets!"))
+	else
+		to_chat(user, SPAN_NOTICE("You stealthily pick [src]'s pockets."))
 
 /mob/living/carbon/human/proc/place_in_pockets(obj/item/I, var/mob/living/user)
 	if(!user.unEquip(I))
