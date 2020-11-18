@@ -9,7 +9,6 @@
 
 //Human misc
 #define LANGUAGE_GUTTER         "Gutter"
-#define LANGUAGE_LEGALESE       "Legalese"
 #define LANGUAGE_SPACER         "Spacer"
 
 //Alien
