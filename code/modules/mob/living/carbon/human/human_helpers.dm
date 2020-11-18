@@ -15,7 +15,8 @@
 		if(status[1] == HUMAN_EATING_NBP_MOUTH)
 			to_chat(src, "Where do you intend to put \the [food]? You don't have a mouth!")
 		else if(status[1] == HUMAN_EATING_BLOCKED_MOUTH)
-			to_chat(src, "<span class='warning'>\The [status[2]] is in the way!</span>")
+			to_chat(src, "<span class='notice'>You shift your [status[2]] out of the way</span>")
+			return 1
 	return 0
 
 /mob/living/carbon/human/can_force_feed(var/feeder, var/food, var/feedback = 1)
