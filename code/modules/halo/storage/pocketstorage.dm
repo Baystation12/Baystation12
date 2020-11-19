@@ -107,3 +107,13 @@
 
 /obj/item/weapon/storage/pocketstore/hardcase/tools/cov
 	icon_state = "hardcase_cov_generic"
+
+/obj/item/weapon/storage/pocketstore/hardcase/rockets
+	name = "102mm HEAT SPNKr Hardcase"
+	desc = "A belt-clippable hardcase capable of holding up to 2 M41 rocket tubes."
+	icon = 'code/modules/halo/icons/objs/halohumanmisc.dmi'
+	icon_state = "ssrcrate"
+	storage_slots = 2
+	can_hold = list(/obj/item/ammo_magazine/spnkr)
+	slot_flags = SLOT_POCKET | SLOT_BELT
+	max_w_class = ITEM_SIZE_LARGE

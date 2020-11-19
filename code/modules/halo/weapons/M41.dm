@@ -10,7 +10,7 @@
 	magazine_type = /obj/item/ammo_magazine/spnkr
 	fire_delay = 8
 	one_hand_penalty = -1
-	dispersion = list(0.73)
+	dispersion = list(0.26)
 	hud_bullet_row_num = 2
 	hud_bullet_reffile = 'code/modules/halo/icons/hud_display/hud_bullet_32x16.dmi'
 	hud_bullet_iconstate = "rocket"
@@ -22,7 +22,6 @@
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
-	arm_time = 15
 	charge_sound = null
 	slowdown_general = 1
 
@@ -44,7 +43,7 @@
 	ammo_type = /obj/item/ammo_casing/spnkr
 	caliber = "spnkr"
 	max_ammo = 2
-	w_class = ITEM_SIZE_HUGE
+	w_class = ITEM_SIZE_LARGE
 
 /obj/item/ammo_casing/spnkr
 	caliber = "spnkr"
@@ -61,14 +60,3 @@
 /obj/item/projectile/bullet/ssr/on_impact(var/atom/target)
 	explosion(get_turf(target), 1, 1, 2, 4,guaranteed_damage = 50,guaranteed_damage_range = 2)
 	..()
-
-/obj/item/weapon/storage/box/spnkr
-	name = "102mm HEAT SPNKr crate"
-	desc = "UNSC certified crate containing three tubes of SPNKr rockets for a total of six rockets to be loaded in the M41 SSR."
-	icon = 'code/modules/halo/icons/objs/halohumanmisc.dmi'
-	icon_state = "ssrcrate"
-	max_storage_space = base_storage_capacity(12)
-	startswith = list(/obj/item/ammo_magazine/spnkr = 3)
-	can_hold = list(/obj/item/ammo_magazine/spnkr)
-	slot_flags = SLOT_BACK | SLOT_BELT
-	max_w_class = ITEM_SIZE_HUGE

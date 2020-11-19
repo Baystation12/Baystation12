@@ -5,6 +5,7 @@
 	icon = 'tools.dmi'
 	item_state = "securitybelt"
 	color = "#ff99ff"
+	max_w_class = ITEM_SIZE_LARGE
 	sprite_sheets = list(
 		"Tvaoan Kig-Yar" = null,\
 		"Sangheili" = null\

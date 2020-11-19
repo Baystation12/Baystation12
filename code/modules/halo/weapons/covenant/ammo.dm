@@ -291,12 +291,13 @@
 	desc = "Contains a maximum of 5 fuel rods."
 	icon = 'code/modules/halo/weapons/icons/fuel_rod_cannon.dmi'
 	icon_state = "fuel_rod_mag"
+	w_class = ITEM_SIZE_LARGE
+	slot_flags = SLOT_BELT | SLOT_POCKET
 	mag_type = MAGAZINE
 	ammo_type = /obj/item/ammo_casing/fuel_rod
 	caliber = "fuel rod"
 	max_ammo = 5
 	multiple_sprites = 1
-	w_class = ITEM_SIZE_NORMAL
 
 /obj/item/ammo_casing/fuel_rod
 	icon = 'code/modules/halo/weapons/icons/fuel_rod_cannon.dmi'
