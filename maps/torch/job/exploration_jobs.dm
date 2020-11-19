@@ -93,7 +93,8 @@
 		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/ec/e5
 	)
-	min_skill = list(   SKILL_EVA = SKILL_BASIC)
+	min_skill = list(   SKILL_EVA   = SKILL_BASIC,
+						SKILL_PILOT = SKILL_BASIC)
 
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX,
 	                    SKILL_SCIENCE     = SKILL_MAX,
