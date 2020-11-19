@@ -47,7 +47,7 @@ def main():
 
 	tree = ""
 	if namespace.projectfile[-4:] == ".txt":
-		with open(namespace.projectfile, "r") as f:
+		with open(namespace.projectfile, "r", encoding='cp1252') as f:
 			tree = f.read()
 
 	else:
