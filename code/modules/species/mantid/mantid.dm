@@ -121,6 +121,8 @@
 		/decl/emote/exertion/biological/pant
 	)
 
+	assisted_langs = LANGUAGE_LEGALESE
+
 /datum/species/mantid/handle_sleeping(var/mob/living/carbon/human/H)
 	return
 

@@ -8,8 +8,8 @@
 	space_chance = 100
 	key = "u"
 	partial_understanding = list(
-		LANGUAGE_HUMAN_EURO = 10,
-		LANGUAGE_HUMAN_SELENIAN = 25,
+		LANGUAGE_HUMAN_EURO = 25,
+		LANGUAGE_HUMAN_SELENIAN = 20,
 		LANGUAGE_SKRELLIAN = 5
 	)
 	syllables = list(
@@ -17,4 +17,3 @@
 		"exonerated", "effecuate", "accord", "caveat", "stipulation", "pledgee", "covenant", "rights",
 		"lawful", "suit of law", "sequestrator", "et al", "et", "ex", "quid", "bono",	"quo", "pro", "ad"
 	)
-	
