@@ -46,8 +46,8 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_MINOR
 		)
-	online_slowdown = 4
-	offline_slowdown = 10
+	online_slowdown = 3
+	offline_slowdown = 9
 	vision_restriction = TINT_MODERATE
 	offline_vision_restriction = TINT_BLIND
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
