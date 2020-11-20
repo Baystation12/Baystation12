@@ -1,0 +1,6 @@
+author: "Mucker"
+delete-after: True
+changes: 
+  - tweak: "Removes broken spiderling spawn type from exo awakening event, replace with big spiders."
+  - tweak: "Exo awakening is now more likely to happen (though still rare), and can be more dangerous."
+  - tweak: "Mobs spawned by the exo event are now adapted to the planet they spawn on."
