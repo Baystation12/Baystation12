@@ -221,7 +221,7 @@ meteor_act
 		return //if the weapon itself didn't get bloodied than it makes little sense for the target to be bloodied either
 
 	//getting the weapon bloodied is easier than getting the target covered in blood, so run prob() again
-	if(prob(33 + W.sharp*10))
+	if(prob(33 + W.sharp ? 10 : 0))
 		var/turf/location = loc
 		if(istype(location, /turf/simulated))
 			location.add_blood(src)

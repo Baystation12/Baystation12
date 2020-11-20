@@ -1,8 +1,8 @@
 /obj/item/weapon/material/harpoon
 	name = "harpoon"
 	desc = "A short throwing spear with a deep barb, specifically designed to embed itself in its target."
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 	icon = 'icons/obj/weapons/melee_physical.dmi'
 	icon_state = "harpoon"
 	item_state = "harpoon"
@@ -55,8 +55,8 @@
 	force_divisor = 0.2 // 12 with hardness 60 (steel)
 	thrown_force_divisor = 0.75 // 15 with weight 20 (steel)
 	w_class = ITEM_SIZE_SMALL
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 	origin_tech = list(TECH_MATERIAL = 2, TECH_COMBAT = 1)
 	attack_verb = list("chopped", "torn", "cut")
 	applies_material_colour = 0
@@ -123,8 +123,8 @@
 	max_force = 15
 	force_divisor = 0.275 // 16 with hardness 60 (steel)
 	thrown_force_divisor = 0.25 // 5 with weight 20 (steel)
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 	throw_speed = 1
 	throw_range = 3
 	w_class = ITEM_SIZE_HUGE

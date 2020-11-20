@@ -11,8 +11,6 @@
 	origin_tech = list(TECH_MATERIAL = 1)
 	attack_verb = list("attacked", "stabbed", "poked")
 	max_force = 5
-	sharp = 0
-	edge = 0
 	force_divisor = 0.1 // 6 when wielded with hardness 60 (steel)
 	thrown_force_divisor = 0.25 // 5 when thrown with weight 20 (steel)
 	default_material = MATERIAL_ALUMINIUM

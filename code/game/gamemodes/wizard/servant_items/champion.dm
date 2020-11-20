@@ -62,8 +62,8 @@
 					slot_belt_str = 'icons/mob/onmob/onmob_belt.dmi'
 					)
 	item_state = "excalibur"
-	edge = 1
-	sharp = 1
+	edge = TRUE
+	sharp = TRUE
 	w_class = ITEM_SIZE_HUGE
 	force = 35
 	throw_range = 2

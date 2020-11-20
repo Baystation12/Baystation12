@@ -6,8 +6,6 @@
 	var/lighting_color
 	var/active_attack_verb
 	var/inactive_attack_verb = list()
-	sharp = 0
-	edge = 0
 	armor_penetration = 50
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_BLOOD
 
@@ -36,8 +34,8 @@
 	active = TRUE
 	force = active_force
 	throwforce = active_throwforce
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 	slot_flags |= SLOT_DENYPOCKET
 	attack_verb = active_attack_verb
 	update_icon()
@@ -107,8 +105,8 @@
 	origin_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 4)
 	active_attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
 	inactive_attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 	melee_accuracy_bonus = 15
 
 /obj/item/weapon/melee/energy/axe/deactivate(mob/living/user)
@@ -132,8 +130,8 @@
 	w_class = ITEM_SIZE_SMALL
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_BLOOD
 	origin_tech = list(TECH_MAGNET = 3, TECH_ESOTERIC = 4)
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 	base_parry_chance = 50
 	active_attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	hitsound = 'sound/weapons/blade1.ogg'
@@ -198,8 +196,8 @@
 	active_force = 40 //Normal attacks deal very high damage - about the same as wielded fire axe
 	active = 1
 	armor_penetration = 100
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 	anchored = 1    // Never spawned outside of inventory, should be fine.
 	active_throwforce = 1  //Throwing or dropping the item deletes it.
 	throw_speed = 1

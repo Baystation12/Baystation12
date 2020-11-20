@@ -2,8 +2,8 @@
 	attack_verb = list("bit", "chomped on")
 	attack_sound = 'sound/weapons/bite.ogg'
 	shredding = 0
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 	attack_name = "sharp bite"
 
 /datum/unarmed_attack/diona
@@ -20,8 +20,8 @@
 	eye_attack_text_victim = "sharp claws"
 	attack_sound = 'sound/weapons/slice.ogg'
 	miss_sound = 'sound/weapons/slashmiss.ogg'
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 	attack_name = "claws"
 	var/blocked_by_gloves = TRUE
 
@@ -157,8 +157,8 @@
 	attack_noun = list("forelimb")
 	damage = 8
 	shredding = 1
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 	delay = 20
 	eye_attack_text = "a forelimb"
 	eye_attack_text_victim = "a forelimb"

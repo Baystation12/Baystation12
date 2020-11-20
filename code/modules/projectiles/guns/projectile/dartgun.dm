@@ -2,7 +2,7 @@
 	name = "dart"
 	icon_state = "dart"
 	damage = 5
-	sharp = 1
+	sharp = TRUE
 	embed = 1 //the dart is shot fast enough to pierce space suits, so I guess splintering inside the target can be a thing. Should be rare due to low damage.
 	var/reagent_amount = 15
 	life_span = 15 //shorter range

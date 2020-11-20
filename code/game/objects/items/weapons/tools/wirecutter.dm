@@ -14,8 +14,8 @@
 	matter = list(MATERIAL_STEEL = 80)
 	center_of_mass = "x=18;y=10"
 	attack_verb = list("pinched", "nipped")
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 
 	var/build_from_parts = TRUE
 	var/handle_icon = "cutters_handle"

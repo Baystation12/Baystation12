@@ -8,8 +8,6 @@
 	throw_speed = 3
 	throw_range = 7
 	w_class = ITEM_SIZE_NORMAL
-	sharp = 0
-	edge = 0
 
 	var/default_material = MATERIAL_STEEL
 	var/material/material

@@ -7,7 +7,7 @@
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GLASS | PASS_FLAG_GRILLE
 	damage = 40
 	damage_type = BURN
-	sharp = 1 //concentrated burns
+	sharp = TRUE
 	damage_flags = DAM_LASER
 	eyeblur = 4
 	hitscan = 1
@@ -181,7 +181,7 @@
 	icon_state = "stun"
 	fire_sound = 'sound/weapons/Taser.ogg'
 	damage_flags = 0
-	sharp = 0 //not a laser
+	sharp = FALSE
 	damage = 1//flavor burn! still not a laser, dmg will be reduce by energy resistance not laser resistances
 	damage_type = BURN
 	eyeblur = 1//Some feedback that you've been hit
@@ -212,8 +212,7 @@
 	icon_state = "omnilaser"
 	fire_sound = 'sound/weapons/plasma_cutter.ogg'
 	damage = 15
-	sharp = 1
-	edge = 1
+	edge = TRUE
 	damage_type = BURN
 	life_span = 5
 	pass_flags = PASS_FLAG_TABLE
@@ -291,7 +290,7 @@
 	name = "dark matter wave"
 	icon_state = "darkt"
 	damage_flags = 0
-	sharp = 0 //not a laser
+	sharp = FALSE
 	agony = 40
 	damage_type = STUN
 	muzzle_type = /obj/effect/projectile/stun/darkmatter/muzzle

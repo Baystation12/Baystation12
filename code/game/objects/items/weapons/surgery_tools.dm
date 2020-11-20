@@ -75,8 +75,8 @@
 	icon_state = "scalpel"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = 10.0
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
 	throwforce = 5.0
@@ -133,8 +133,8 @@
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 1)
 	matter = list(MATERIAL_STEEL = 20000,MATERIAL_GLASS = 10000)
 	attack_verb = list("attacked", "slashed", "sawed", "cut")
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 
 //misc, formerly from code/defines/weapons.dm
 /obj/item/weapon/bonegel
