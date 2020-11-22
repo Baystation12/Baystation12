@@ -76,6 +76,7 @@
 /datum/reagent/nutriment/protein/adjust_nutrition(var/mob/living/carbon/M, var/alien, var/removed)
 	switch(alien)
 		if(IS_UNATHI) removed *= 2.25
+		if(IS_SKRELL) return
 	M.adjust_nutrition(nutriment_factor * removed)
 
 /datum/reagent/nutriment/protein/egg // Also bad for skrell.
@@ -531,6 +532,9 @@
 	return
 
 /datum/reagent/drink/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	if (alien == IS_SKRELL && protein_amount > 0)
+		var/datum/species/skrell/S = M.species
+		S.handle_protein(M, src)
 	if(nutrition)
 		M.adjust_nutrition(nutrition * removed)
 	if(hydration)
