@@ -1,5 +1,5 @@
 //GLOBAL_VAR_INIT(max_overpop, 0.5)		//now a config var
-GLOBAL_VAR_INIT(round_no_balance_time, 15 MINUTES)
+GLOBAL_VAR_INIT(round_no_balance_time, 3.1 MINUTES) //Literally just long enough for pregame
 GLOBAL_VAR_INIT(last_admin_notice_overpop, 0)
 GLOBAL_VAR_INIT(min_players_balance, 4)
 
