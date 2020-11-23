@@ -4,12 +4,17 @@
 	icon_state = "object"
 	color = "#fffffe"
 
-	var/known = 1		//shows up on nav computers automatically
+	var/known = FALSE //shows up on nav computers automatically
 	var/scannable       //if set to TRUE will show up on ship sensors for detailed scans
 
 //Overlay of how this object should look on other skyboxes
 /obj/effect/overmap/proc/get_skybox_representation()
 	return
+
+/obj/effect/overmap/Initialize()
+	. = ..()
+	if (known)
+		update_known_connections(TRUE)
 
 /obj/effect/overmap/proc/get_scan_data(mob/user)
 	return desc

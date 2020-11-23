@@ -5,7 +5,6 @@
 	name = "Orbital Mining Station"
 	desc = "An orbital Mining Station bearing authentication codes from Grayson Mining Industries, sensors show inconsistant lifesigns aboard the station. It is emitting a active distress beacon."
 	icon_state = "object"
-	known = 0
 	initial_generic_waypoints = list(
 		"nav_miningstation_hangar",
 		"nav_miningstation_exterior",

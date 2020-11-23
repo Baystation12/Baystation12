@@ -14,6 +14,7 @@
 	desc = "Space faring vessel."
 	icon_state = "ship"
 	var/moving_state = "ship_moving"
+	known = TRUE
 
 	var/vessel_mass = 10000             //tonnes, arbitrary number, affects acceleration provided by engines
 	var/vessel_size = SHIP_SIZE_LARGE	//arbitrary number, affects how likely are we to evade meteors

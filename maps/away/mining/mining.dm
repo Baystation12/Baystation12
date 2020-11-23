@@ -14,7 +14,6 @@
 		"nav_cluster_6",
 		"nav_cluster_7"
 	)
-	known = 0
 
 /obj/effect/overmap/visitable/sector/cluster/generate_skybox()
 	return overlay_image('icons/skybox/rockbox.dmi', "rockbox", COLOR_ASTEROID_ROCK, RESET_COLOR)
@@ -85,7 +84,6 @@
 		"nav_away_6",
 		"nav_away_7"
 	)
-	known = 0
 
 /obj/effect/overmap/visitable/sector/away/generate_skybox()
 	return overlay_image('icons/skybox/rockbox.dmi', "rockbox", COLOR_ASTEROID_ROCK, RESET_COLOR)
@@ -155,7 +153,6 @@
 		"nav_orb_6",
 		"nav_orb_7"
 	)
-	known = 0
 
 /obj/effect/overmap/visitable/sector/orb/get_skybox_representation()
 	var/image/res = overlay_image('icons/skybox/skybox_rock_128.dmi', "bigrock", COLOR_ASTEROID_ROCK, RESET_COLOR)
