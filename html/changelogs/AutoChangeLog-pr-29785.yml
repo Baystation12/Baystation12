@@ -1,0 +1,4 @@
+author: "Hubblenaut"
+delete-after: True
+changes: 
+  - bugfix: "Fixes material doors spawning with the wrong direction."
