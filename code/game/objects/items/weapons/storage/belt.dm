@@ -134,8 +134,8 @@
 		)
 
 
-/obj/item/weapon/storage/belt/utility/full/New()
-	..()
+/obj/item/weapon/storage/belt/utility/full/Initialize()
+	. = ..()
 	new /obj/item/weapon/screwdriver(src)
 	new /obj/item/weapon/wrench(src)
 	new /obj/item/weapon/weldingtool(src)
@@ -145,8 +145,8 @@
 	update_icon()
 
 
-/obj/item/weapon/storage/belt/utility/atmostech/New()
-	..()
+/obj/item/weapon/storage/belt/utility/atmostech/Initialize()
+	. = ..()
 	new /obj/item/weapon/screwdriver(src)
 	new /obj/item/weapon/wrench(src)
 	new /obj/item/weapon/weldingtool(src)
@@ -231,6 +231,15 @@
 		/obj/item/weapon/material/knife/folding/
 		)
 
+/obj/item/weapon/storage/belt/holster/security/full/Initialize()
+	. = ..()
+	new /obj/item/weapon/melee/baton/loaded(src)
+	new /obj/item/device/flash(src)
+	new /obj/item/weapon/reagent_containers/spray/pepper(src)
+	new /obj/item/taperoll/police(src)
+	new /obj/item/weapon/handcuffs(src)
+	new /obj/item/device/holowarrant(src)
+	update_icon()
 /obj/item/weapon/storage/belt/security
 	name = "security belt"
 	desc = "Can hold security gear like handcuffs and flashes."
