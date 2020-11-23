@@ -125,6 +125,13 @@
 	else if (is_type_in_list(I, allowed_containers) && !is_type_in_list(I, banned_containers))
 		if (container)
 			to_chat(user, SPAN_WARNING("\The [src] already has \a [container]."))
+			return
+
+		var/obj/item/weapon/reagent_containers/RC = I
+		
+		if(istype(RC) && !RC.is_open_container())
+			to_chat(user, SPAN_WARNING("You can't put a sealed beaker into \the [src]."))
+			return
 		else if (user.unEquip(I, src))
 			container = I
 			update_icon()
