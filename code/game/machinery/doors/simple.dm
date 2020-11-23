@@ -66,6 +66,7 @@
 		take_damage(min(damage, 100))
 
 /obj/machinery/door/unpowered/simple/on_update_icon()
+	update_dir()
 	if(density)
 		icon_state = "[icon_base]"
 	else
