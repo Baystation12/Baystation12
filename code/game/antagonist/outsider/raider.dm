@@ -294,7 +294,8 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 				/obj/item/weapon/gun/projectile/revolver/medium,
 				/obj/item/weapon/gun/energy/retro,
 				/obj/item/weapon/gun/projectile/pistol/throwback,
-				/obj/item/weapon/gun/energy/ionrifle/small
+				/obj/item/weapon/gun/energy/ionrifle/small,
+				/obj/item/weapon/gun/magnetic/railgun/pistol
 	)
 
 /obj/random/raider/biggun

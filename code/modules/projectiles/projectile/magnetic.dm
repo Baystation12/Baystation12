@@ -23,3 +23,12 @@
 	armor_penetration = 100
 	fire_sound = 'sound/weapons/rapidslice.ogg'
 	distance_falloff = 0.5
+
+/obj/item/projectile/bullet/magnetic/pistol
+	name = "slug"
+	icon_state = "gauss_silenced"
+	damage = 45
+	penetrating = 2
+	armor_penetration = 60
+	penetration_modifier = 1
+	distance_falloff = 3

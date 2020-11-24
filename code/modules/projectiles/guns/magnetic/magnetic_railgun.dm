@@ -170,7 +170,6 @@
 /obj/item/weapon/gun/magnetic/railgun/flechette/out_of_ammo()
 	visible_message("<span class='warning'>\The [src] beeps to indicate the magazine is empty.</span>")
 	
-
 /obj/item/weapon/gun/magnetic/railgun/flechette/skrell
 	name = "skrellian rifle"
 	desc = "The Zquiv*Tzuuli-8, or ZT-8, is a railgun rarely seen by anyone other than those within Skrellian SDTF ranks. The rotary magazine houses a cylinder with individual chambers, that press against the barrel when loaded."
@@ -191,3 +190,28 @@
 	power_cost = 100
 	wielded_item_state = "skrell_rifle-wielded"
 	firemodes = list()
+
+/obj/item/weapon/gun/magnetic/railgun/pistol
+	name = "gauss pistol"
+	desc = "The Blackwell Technologies GP-38 personal coilgun, colloquially known as the Gauss Pistol. Doesn't pack as much punch as its larger relatives, but conveniently small."
+	icon = 'icons/obj/guns/gauss_pistol.dmi'
+	icon_state = "gauss_pistol"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/onmob/items/lefthand_guns.dmi',
+		slot_r_hand_str = 'icons/mob/onmob/items/righthand_guns.dmi',
+		)
+	item_state = "gauss_pistol"
+	one_hand_penalty = 0
+	fire_delay = 15
+	slowdown_held = 0
+	slowdown_worn = 0
+	w_class = ITEM_SIZE_NORMAL
+	slot_flags = SLOT_BELT|SLOT_HOLSTER
+	initial_cell_type = /obj/item/weapon/cell/super
+	initial_capacitor_type = /obj/item/weapon/stock_parts/capacitor/adv
+	load_type = /obj/item/weapon/magnetic_ammo/pistol
+	loaded = /obj/item/weapon/magnetic_ammo/pistol
+	projectile_type = /obj/item/projectile/bullet/magnetic/pistol
+	bulk = 0
+	power_cost = 400
+	

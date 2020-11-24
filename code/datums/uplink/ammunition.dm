@@ -46,6 +46,12 @@
 	item_cost = 8
 	path = /obj/item/ammo_magazine/mil_rifle
 
+/datum/uplink_item/item/ammo/gausspistol
+	name = "Gauss Pistol Cylinder"
+	desc = "An ammo cylinder for the gauss pistol. Contains five slugs."
+	item_cost = 12
+	path = /obj/item/weapon/magnetic_ammo/pistol
+
 /datum/uplink_item/item/ammo/sniperammo
 	name = "Ammobox of Sniper Rounds"
 	desc = "A container of rounds for the anti-materiel rifle. Contains 7 rounds."

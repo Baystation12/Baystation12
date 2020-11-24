@@ -160,6 +160,12 @@
 	path = /obj/item/weapon/gun/energy/pulse_rifle
 	antag_roles = list(MODE_MERCENARY)
 
+/datum/uplink_item/item/visible_weapons/gausspistol
+	name = "Gauss Pistol"
+	desc = "A high-power handheld railgun that uses magnets to fire armor-piercing slugs."
+	item_cost = 52
+	path = /obj/item/weapon/gun/magnetic/railgun/pistol
+
 /datum/uplink_item/item/visible_weapons/flechetterifle
 	name = "Flechette Rifle"
 	desc = "A railgun with two togglable fire modes, able to launch flechette ammunition at incredible speeds."

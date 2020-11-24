@@ -14,7 +14,17 @@
 /obj/item/weapon/magnetic_ammo/examine(mob/user)
 	. = ..()
 	to_chat(user, "There [(remaining == 1)? "is" : "are"] [remaining] [projectile_name]\s left!")
-	
+
+/obj/item/weapon/magnetic_ammo/pistol
+	name = "gauss cylinder"
+	desc = "An ammo cylinder full of heavy railgun slugs."
+	icon = 'icons/obj/guns/gauss_pistol.dmi'
+	icon_state = "gauss_ammo"
+	projectile_type = /obj/item/projectile/bullet/magnetic/pistol
+	projectile_name = "slug"
+	basetype = /obj/item/weapon/magnetic_ammo/pistol
+	remaining = 5
+
 /obj/item/weapon/magnetic_ammo/skrell
 	name = "flechette cylinder"
 	desc = "A magazine containing flechettes, the design harkening back to cylinders on revolvers."
@@ -23,7 +33,7 @@
 	projectile_type = /obj/item/projectile/bullet/magnetic/flechette
 	projectile_name = "slug"
 	basetype = /obj/item/weapon/magnetic_ammo/skrell
-	
+
 /obj/item/weapon/magnetic_ammo/skrell/slug
 	name = "slug cylinder"
 	desc = "A magazine containing slugs, the design harkening back to cylinders on revolvers."
