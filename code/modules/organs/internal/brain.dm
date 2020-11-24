@@ -4,7 +4,7 @@
 	organ_tag = BP_BRAIN
 	parent_organ = BP_HEAD
 	vital = 1
-	icon_state = "brain1"
+	icon_state = "brain2"
 	force = 1.0
 	w_class = ITEM_SIZE_SMALL
 	throwforce = 1.0
