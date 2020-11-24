@@ -1,0 +1,5 @@
+author: "RustingWithYou"
+delete-after: True
+changes: 
+  - tweak: "adds new namelists for Monarch Serpentid Queens and Workers"
+  - tweak: "the Serpentid Queen and Serpentid Adjunct jobs will now pick a name from their respective lists instead of just 'monarch of [cutter]'"
