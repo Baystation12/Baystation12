@@ -1,0 +1,5 @@
+author: "Shadowtail117"
+delete-after: True
+changes: 
+  - bugfix: "Skrell will now actually be affected by drinks that contain protein."
+  - tweak: "Skrell will no longer gain any nutrition from protein."
