@@ -12,7 +12,7 @@
 	status_flags = PASSEMOTES
 	a_intent =     I_HURT
 	mob_size =     MOB_LARGE
-	
+
 	meat_type = null
 	meat_amount = 0
 	skin_material = null
@@ -130,7 +130,7 @@
 
 	for(var/thing in pilots)
 		var/mob/pilot = thing
-		if(pilot.client)
+		if(pilot && pilot.client)
 			pilot.client.screen -= hud_elements
 			pilot.client.images -= hud_elements
 		pilot.forceMove(get_turf(src))
@@ -194,6 +194,6 @@
 	if(.)
 		update_pilots()
 
-		
+
 
 
