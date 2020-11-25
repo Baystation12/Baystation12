@@ -31,7 +31,6 @@
 		"nav_verne_2",
 		"nav_verne_3",
 	)
-	known = FALSE
 
 /datum/map_template/ruin/away_site/verne
 	name = "Active University Ship"

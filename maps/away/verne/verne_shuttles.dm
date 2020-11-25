@@ -15,7 +15,6 @@
 	burn_delay = 1 SECONDS
 	vessel_mass = 5000
 	skill_needed = SKILL_BASIC
-	known = FALSE
 
 /datum/shuttle/autodock/overmap/verne
 	name = "SRV Venerable Catfish"
