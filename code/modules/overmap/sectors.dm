@@ -108,6 +108,13 @@
 	anchored = 1
 
 
+/obj/effect/overmap/visitable/sector/Initialize()
+	. = ..()
+
+	if(known)
+		update_known_connections(TRUE)
+
+
 /obj/effect/overmap/visitable/sector/update_known_connections(notify = FALSE)
 	. = ..()
 
