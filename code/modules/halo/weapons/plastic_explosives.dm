@@ -96,7 +96,7 @@
 	desc = "A charge used to create a wide breach in a and project a deadly concussive and explosive effect directly behind it."
 
 /obj/item/weapon/plastique/breaching/proc/do_explosion_effect(var/location)
-	explosion(location,3,4,6,6,1,0,1,0,0,null,dir,-1,2)
+	explosion(location,2,4,6,6,1,0,1,0,0,null,dir,-2,2)
 
 /obj/item/weapon/plastique/breaching/explode(var/location)
 	if(!target)
@@ -124,4 +124,4 @@
 	desc = "A charge designed to pierce through a long line of walls and cause large damage to a specific point."
 
 /obj/item/weapon/plastique/breaching/longrange/do_explosion_effect(var/location)
-	explosion(location,6,7,8,10,1,0,1,0,0,null,dir,0,5)
+	explosion(location,3,7,8,10,1,0,1,0,0,null,dir,0,4)
