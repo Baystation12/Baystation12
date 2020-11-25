@@ -4,6 +4,7 @@
 #define SHIELD_PROCESS 1
 #define SHIELD_RECHARGE 2
 #define SHIELD_DAMAGE 3
+#define SHIELD_RECHARGE_DELAY_EMP_MULT 1.5
 
 /obj/screen/shieldbar
 	icon = 'code/modules/halo/icons/hud_display/hud_shieldbar.dmi'
@@ -71,7 +72,7 @@
 	var/shieldstrength
 	var/totalshields
 	var/nextcharge
-	var/shield_recharge_delay = 7.5 SECONDS//The delay for the shields to start recharging from damage (Multiplied by 1.5 if shields downed entirely)
+	var/shield_recharge_delay = 10 SECONDS//The delay for the shields to start recharging from damage (Multiplied by 1.5 if shields downed entirely)
 	var/shield_recharge_ticktime = 1 SECOND //The delay between recharge ticks
 	var/obj/effect/overlay/shields/shieldoverlay = new /obj/effect/overlay/shields
 	var/image/mob_overlay
@@ -244,14 +245,14 @@
 		if(2)
 			take_damage(totalshields)
 			user.visible_message("<span class = 'warning'>[user.name]'s shields violently spark, the internal capacitors shorting out.</span>")
-	reset_recharge(shield_recharge_delay * 2)
+	reset_recharge(shield_recharge_delay * SHIELD_RECHARGE_DELAY_EMP_MULT)
 
 /datum/armourspecials/shields/spartan
 	shieldoverlay = new /obj/effect/overlay/shields/spartan
-	shield_recharge_delay = 5 SECONDS //much faster.
+	shield_recharge_delay = 8 SECONDS
 
 /datum/armourspecials/shields/unggoy
-	shield_recharge_delay = 5 SECONDS //Equal to spartans because unggoy shields should be low capacity.
+	shield_recharge_delay = 7.5 SECONDS //Their shields are usually very low capacity.
 	shieldoverlay = new /obj/effect/overlay/shields/unggoy
 
 #undef SHIELD_IDLE
