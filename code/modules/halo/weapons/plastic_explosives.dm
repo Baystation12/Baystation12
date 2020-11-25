@@ -1,5 +1,5 @@
 /obj/item/weapon/plastique
-	name = "C-12 breaching charge"
+	name = "C-12 Shaped Demolition Charge"
 	desc = "C-12 Shaped-charges or C-12 SCs are used mainly for heavy demolitions and can also be used as weapons. This charge is small and used for pinpoint breaching."
 	gender = PLURAL
 	icon = 'code/modules/halo/weapons/icons/plastic_explosives.dmi'
@@ -96,7 +96,7 @@
 	desc = "A charge used to create a wide breach in a and project a deadly concussive and explosive effect directly behind it."
 
 /obj/item/weapon/plastique/breaching/proc/do_explosion_effect(var/location)
-	explosion(location,2,4,6,6,1,0,1,0,0,null,dir,-2,2)
+	explosion(location,4,6,8,9,1,0,1,0,0,null,dir,-2,2)
 
 /obj/item/weapon/plastique/breaching/explode(var/location)
 	if(!target)
@@ -124,4 +124,4 @@
 	desc = "A charge designed to pierce through a long line of walls and cause large damage to a specific point."
 
 /obj/item/weapon/plastique/breaching/longrange/do_explosion_effect(var/location)
-	explosion(location,3,7,8,10,1,0,1,0,0,null,dir,0,4)
+	explosion(location,6,10,12,12,1,0,1,0,0,null,dir,-4,6)
