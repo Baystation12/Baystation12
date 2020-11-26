@@ -56,6 +56,9 @@
 	current_grab.process(src)
 
 /obj/item/grab/attack_self(mob/user)
+	if (!assailant)
+		return
+
 	switch(assailant.a_intent)
 		if(I_HELP)
 			downgrade()

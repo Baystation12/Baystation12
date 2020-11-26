@@ -83,6 +83,9 @@
 	return !!T.return_air()
 
 /proc/IsTurfAtmosUnsafe(var/turf/T)
+	if (!T)
+		return "The spawn location doesn't seem to exist. Please contact an admin via adminhelp if this error persists."
+
 	if(istype(T, /turf/space)) // Space tiles
 		return "Spawn location is open to space."
 	var/datum/gas_mixture/air = T.return_air()
