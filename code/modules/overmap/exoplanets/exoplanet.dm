@@ -240,14 +240,15 @@
 			S.chems[/datum/reagent/nutriment] = nutriment
 			S.chems[chem_type] = list(rand(1,10),rand(10,20))
 
-/obj/effect/overmap/visitable/sector/exoplanet/proc/adapt_animal(var/mob/living/simple_animal/A)
-	if(species[A.type])
-		A.SetName(species[A.type])
-		A.real_name = species[A.type]
-	else
-		A.SetName("alien creature")
-		A.real_name = "alien creature"
-		A.verbs |= /mob/living/simple_animal/proc/name_species
+/obj/effect/overmap/visitable/sector/exoplanet/proc/adapt_animal(var/mob/living/simple_animal/A, setname = TRUE)
+	if (setname)
+		if(species[A.type])
+			A.SetName(species[A.type])
+			A.real_name = species[A.type]
+		else
+			A.SetName("alien creature")
+			A.real_name = "alien creature"
+			A.verbs |= /mob/living/simple_animal/proc/name_species
 	if(atmosphere)
 		//Set up gases for living things
 		if(!LAZYLEN(breathgas))
