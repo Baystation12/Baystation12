@@ -14,6 +14,7 @@ env:
     
 jobs:
   code-tests:
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -21,7 +22,6 @@ jobs:
     timeout-minutes: 20
     env:
       TEST: ${{ matrix.TEST }}
-      MAP_PATH: ${{ matrix.MAPPATH }}
       
     steps:
       - uses: actions/checkout@v2
@@ -31,13 +31,19 @@ jobs:
           path: |
             tgui/node_modules
           key: ${{ runner.os }}-tgui-${{ env.BYOND_MAJOR }}.${{ env.BYOND_MINOR }}
+      - name: Setup Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: '11'
+          java-package: jdk
       - name: Install dependencies
         run: |
           sudo apt update
-          sudo apt install gcc-multilib g++-multilib openjdk-11-jdk
+          sudo apt install gcc-multilib g++-multilib
       - name: Run tests
         run: bash test/run-test.sh
   map-tests:
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -70,9 +76,14 @@ jobs:
             tgui/node_modules
             ~/BYOND-${{ env.BYOND_MAJOR }}.${{ env.BYOND_MINOR }}
           key: ${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}.${{ env.BYOND_MINOR }}
+      - name: Setup Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: '11'
+          java-package: jdk
       - name: Install dependencies
         run: |
           sudo apt update
-          sudo apt install gcc-multilib g++-multilib openjdk-11-jdk
+          sudo apt install gcc-multilib g++-multilib
       - name: Run tests
         run: bash test/run-test.sh

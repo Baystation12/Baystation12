@@ -16,7 +16,7 @@ def _safe_parse(dict, key, deferred_value):
     try:
         dict[key] = deferred_value()
     except Exception as e: 
-        print "Could not parse property '%s': %s" % (key, e)
+        print("Could not parse property '%s': %s" % (key, e))
         return e
     return False
 
@@ -41,7 +41,7 @@ def info(filepath):
     stdout, stderr = subproc.communicate()
 
     result = {}
-    data = stdout.split(os.linesep)[1:]
+    data = stdout.decode().split(os.linesep)[1:]
     # for s in data: print s
 
     # parse header line

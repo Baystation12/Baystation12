@@ -47,7 +47,7 @@ def main():
 
 	tree = ""
 	if namespace.projectfile[-4:] == ".txt":
-		with open(namespace.projectfile, "r") as f:
+		with open(namespace.projectfile, "r", encoding='cp1252') as f:
 			tree = f.read()
 
 	else:
@@ -83,7 +83,7 @@ def GenerateMD5(fname):
 def CompileFile(filename):
 	compiler_path = FindCompiler()
 
-	return subprocess.check_output([compiler_path, "-code_tree", filename], universal_newlines=True)
+	return subprocess.check_output([compiler_path, "-code_tree", filename], universal_newlines=True, encoding='cp1252')
 
 def FindCompiler():
 	compiler_path = None;
