@@ -123,6 +123,7 @@
 		/obj/item/weapon/storage/pocketstore/hardcase/magazine/cov = 0,
 		/obj/item/weapon/storage/pocketstore/hardcase/bullets/cov = 0,
 		/obj/item/weapon/storage/pocketstore/hardcase/grenade/cov = 1,
+		/obj/item/weapon/storage/pocketstore/hardcase/armorkits/cov = 0,
 		/obj/item/weapon/storage/pocketstore/hardcase/medbottles/cov = 0,
 		/obj/item/weapon/storage/pocketstore/hardcase/hypos/cov = 0,
 		/obj/item/weapon/storage/pocketstore/hardcase/materials/cov = 0,
@@ -136,6 +137,8 @@
 		/obj/item/flight_item/covenant_pack = 0,
 		/obj/item/dumb_ai_chip/cov = 0,
 		/obj/item/weapon/plastique/covenant = 0,
+		/obj/item/weapon/plastique/breaching/covenant = 0,
+		/obj/item/weapon/plastique/breaching/longrange/covenant = 0,
 		/obj/item/weapon/armor_patch/cov = 0,
 		/obj/item/weapon/armor_patch/mini/cov = 0,
 		/obj/item/weapon/pinpointer/artifact = 0
@@ -148,6 +151,8 @@
 		/obj/item/flight_item/covenant_pack = 1,
 		/obj/item/dumb_ai_chip/cov = 2,
 		/obj/item/weapon/plastique/covenant = 8,
+		/obj/item/weapon/plastique/breaching/covenant = 3,
+		/obj/item/weapon/plastique/breaching/longrange/covenant = 3,
 		/obj/item/clothing/accessory/storage/IFAK/cov = 20,
 		/obj/item/weapon/pinpointer/artifact = 3
 	)
@@ -202,6 +207,7 @@
 		/obj/item/weapon/storage/pocketstore/hardcase/magazine/cov = 0,
 		/obj/item/weapon/storage/pocketstore/hardcase/bullets/cov = 0,
 		/obj/item/weapon/storage/pocketstore/hardcase/grenade/cov = 1,
+		/obj/item/weapon/storage/pocketstore/hardcase/armorkits/cov = 0,
 		/obj/item/weapon/storage/pocketstore/hardcase/medbottles/cov = 0,
 		/obj/item/weapon/storage/pocketstore/hardcase/hypos/cov = 0,
 		/obj/item/weapon/storage/pocketstore/hardcase/materials/cov = 0,
@@ -274,6 +280,7 @@
 		/obj/item/weapon/storage/pocketstore/hardcase/magazine/cov = 0,
 		/obj/item/weapon/storage/pocketstore/hardcase/bullets/cov = 0,
 		/obj/item/weapon/storage/pocketstore/hardcase/grenade/cov = 1,
+		/obj/item/weapon/storage/pocketstore/hardcase/armorkits/cov = 0,
 		/obj/item/weapon/storage/pocketstore/hardcase/medbottles/cov = 0,
 		/obj/item/weapon/storage/pocketstore/hardcase/hypos/cov = 0,
 		/obj/item/weapon/storage/pocketstore/hardcase/materials/cov = 0,
@@ -284,6 +291,8 @@
 		/obj/item/clothing/under/kigyar/armless = 0,
 		/obj/item/weapon/pickaxe/plasma_drill = 0,
 		/obj/item/weapon/plastique/covenant = 0,
+		/obj/item/weapon/plastique/breaching/covenant = 0,
+		/obj/item/weapon/plastique/breaching/longrange/covenant = 0,
 		/obj/item/weapon/armor_patch/cov = 0,
 		/obj/item/weapon/armor_patch/mini/cov = 0,
 		/obj/item/weapon/pinpointer/artifact = 0
@@ -294,6 +303,8 @@
 		/obj/item/clothing/under/kigyar/armless = 8,
 		/obj/item/weapon/pickaxe/plasma_drill = 1,
 		/obj/item/weapon/plastique/covenant = 6,
+		/obj/item/weapon/plastique/breaching/covenant = 2,
+		/obj/item/weapon/plastique/breaching/longrange/covenant = 2,
 		/obj/item/clothing/accessory/storage/IFAK/cov = 20,
 		/obj/item/weapon/pinpointer/artifact = 2
 	)
@@ -357,13 +368,15 @@
 		/obj/item/weapon/storage/pocketstore/hardcase/magazine/cov = 0,
 		/obj/item/weapon/storage/pocketstore/hardcase/bullets/cov = 0,
 		/obj/item/weapon/storage/pocketstore/hardcase/grenade/cov = 1,
+		/obj/item/weapon/storage/pocketstore/hardcase/armorkits/cov = 0,
 		/obj/item/weapon/storage/pocketstore/hardcase/medbottles/cov = 0,
 		/obj/item/weapon/storage/pocketstore/hardcase/hypos/cov = 0,
-		/obj/item/weapon/storage/pocketstore/hardcase/materials/cov = 0,
 		/obj/item/weapon/storage/pocketstore/hardcase/tools/cov = 0,
 		"Equipment" = -1,
 		/obj/item/weapon/pickaxe/plasma_drill = 0,
 		/obj/item/weapon/plastique/covenant = 0,
+		/obj/item/weapon/plastique/breaching/covenant = 0,
+		/obj/item/weapon/plastique/breaching/longrange/covenant = 0,
 		/obj/item/weapon/armor_patch/cov = 0,
 		/obj/item/weapon/armor_patch/mini/cov = 0,
 		/obj/item/weapon/pinpointer/artifact = 0
@@ -371,6 +384,8 @@
 	amounts = list(\
 		/obj/item/weapon/pickaxe/plasma_drill = 1,
 		/obj/item/weapon/plastique/covenant = 6,
+		/obj/item/weapon/plastique/breaching/covenant = 2,
+		/obj/item/weapon/plastique/breaching/longrange/covenant = 2,
 		/obj/item/clothing/accessory/storage/IFAK/cov = 20,
 		/obj/item/weapon/pinpointer/artifact = 1
 	)
@@ -396,18 +411,22 @@
 		/obj/item/weapon/storage/pocketstore/hardcase/magazine/cov = 0,
 		/obj/item/weapon/storage/pocketstore/hardcase/bullets/cov = 0,
 		/obj/item/weapon/storage/pocketstore/hardcase/grenade/cov = 1,
+		/obj/item/weapon/storage/pocketstore/hardcase/armorkits/cov = 0,
 		/obj/item/weapon/storage/pocketstore/hardcase/medbottles/cov = 0,
 		/obj/item/weapon/storage/pocketstore/hardcase/hypos/cov = 0,
 		/obj/item/weapon/storage/pocketstore/hardcase/materials/cov = 0,
-		/obj/item/weapon/storage/pocketstore/hardcase/tools/cov = 0,
 		"Equipment" = -1,
 		/obj/item/weapon/plastique/covenant = 0,
+		/obj/item/weapon/plastique/breaching/covenant = 0,
+		/obj/item/weapon/plastique/breaching/longrange/covenant = 0,
 		/obj/item/weapon/armor_patch/cov = 0,
 		/obj/item/weapon/armor_patch/mini/cov = 0,
 		/obj/item/weapon/pinpointer/artifact = 0
 	)
 	amounts = list(\
 		/obj/item/weapon/plastique/covenant = 6,
+		/obj/item/weapon/plastique/breaching/covenant = 2,
+		/obj/item/weapon/plastique/breaching/longrange/covenant = 2,
 		/obj/item/clothing/accessory/storage/IFAK/cov = 20,
 		/obj/item/weapon/pinpointer/artifact = 1
 	)

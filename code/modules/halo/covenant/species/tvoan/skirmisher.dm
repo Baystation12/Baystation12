@@ -26,7 +26,7 @@
 	burn_mod = 1.1
 	slowdown = -0.8 //0.3 higher than a spartan.
 
-	equipment_slowdown_multiplier = 0.7
+	equipment_slowdown_multiplier = 1.1 //Disincentives multiple weapon carry
 	gibbed_anim = null
 	dusted_anim = null
 

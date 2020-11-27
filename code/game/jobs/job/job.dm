@@ -223,14 +223,16 @@
 						//how many players do we have?
 						//var/my_faction_players = my_faction.living_minds.len
 						var/my_faction_players = 0
-						for(var/datum/mind/player in my_faction.living_minds)
-							if(!istype(player.current,/mob/living) || !player.active || player.current.stat == DEAD)
-								continue
-							var/add_as_players = 1
-							if(player.assigned_job)
-								add_as_players = player.assigned_job.pop_balance_mult
-							my_faction_players += add_as_players
-						var/my_ratio = my_faction_players / total_faction_players
+						var/my_ratio = 0
+						if(my_faction.living_minds.len != 0)
+							for(var/datum/mind/player in my_faction.living_minds)
+								if(!istype(player.current,/mob/living) || !player.active || player.current.stat == DEAD)
+									continue
+								var/add_as_players = 1
+								if(player.assigned_job)
+									add_as_players = player.assigned_job.pop_balance_mult
+								my_faction_players += add_as_players
+							my_ratio = my_faction_players / total_faction_players
 
 						//are we overpopped?
 						if(total_faction_players > GLOB.min_players_balance && my_ratio > max_ratio)

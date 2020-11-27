@@ -49,7 +49,7 @@
 	heat_protection = FEET
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 
-/obj/item/clothing/gloves/thick/unsc/hellbringer //Combined effect of SWAT gloves and insulated gloves
+/obj/item/clothing/gloves/thick/unsc/hellbringer
 	name = "UNSC Hellbringer gloves"
 	desc = "Heat-proof gloves, designed to perfectly support a flamethrower"
 	icon_override = HELLBRINGER_OVERRIDE

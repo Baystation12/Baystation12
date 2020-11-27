@@ -88,7 +88,7 @@
 
 /obj/item/clothing/glasses/hud/tactical/proc/get_loc_used()
 	if(!isturf(loc))
-		return loc.loc
+		return get_turf(loc)
 	else
 		return loc
 
@@ -120,7 +120,10 @@
 		return
 	last_user = user
 	for(var/obj/effect/waypoint_holder/waypoint in known_waypoints)
-		if(get_dist(waypoint,get_loc_used()) <= user.client.view)
+		var/dist_to = get_dist(waypoint,get_loc_used())
+		if(dist_to == 0) //Don't render it if we're right on top of it. It'd just get in the way.
+			continue
+		if(dist_to <= user.client.view)
 			process_visible_marker(waypoint,user)
 			continue
 		var/dir_to_point = get_dir(get_loc_used(),waypoint)
@@ -144,6 +147,8 @@
 		remove_pointer(user,waypoint)
 	var/image/pointer = image(waypoint.icon,waypoint.loc,"[waypoint.waypoint_icon]_onscreen")
 	pointer.name = waypoint.waypoint_name
+	pointer.mouse_opacity = 0
+	pointer.alpha = 150
 	pointer.plane = HUD_PLANE
 	pointer.layer = HUD_ABOVE_ITEM_LAYER
 	waypoint_pointers[waypoint] = pointer
@@ -151,8 +156,6 @@
 
 /obj/item/clothing/glasses/hud/tactical/process_hud()
 	process_hud_pointers()
-
-
 
 /* NIGHT VISION */
 

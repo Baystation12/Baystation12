@@ -1,5 +1,6 @@
-#define NEEDLER_EMBED_PROB 66
+#define NEEDLER_EMBED_PROB 45
 #define NEEDLER_SHARD_DET_TIME 10 SECONDS
+#define NEEDLER_SHRAPNEL_AP 40
 #define FUEL_ROD_IRRADIATE_RANGE 2
 #define FUEL_ROD_IRRADIATE_AMOUNT 10
 #define FUEL_ROD_MAX_OVERSHOOT 3
@@ -30,7 +31,7 @@
 	muzzle_type = /obj/effect/projectile/muzzle/cov_green
 
 /obj/item/projectile/bullet/covenant/plasmapistol
-	damage = 50
+	damage = 45
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "Plasmapistol Shot"
 	muzzle_type = /obj/effect/projectile/muzzle/cov_green
@@ -55,7 +56,7 @@
 	icon_state = "Plasmarifle Shot"
 
 /obj/item/projectile/bullet/covenant/plasmarepeater
-	damage = 30 //The repeater does enough, thank you.
+	damage = 30
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "plasma_repeater"
 	muzzle_type = /obj/effect/projectile/muzzle/cov_cyan
@@ -118,7 +119,7 @@
 	if(world.time >= die_at)
 		var/mob/living/m = loc
 		if(istype(m))
-			m.apply_damage(our_dam,BURN) //The low damage done by this shard exploding is meant to bypass defences, it's embedded into you.
+			m.apply_damage(our_dam, BURN, null, m.run_armor_check(null, "energy", NEEDLER_SHRAPNEL_AP))
 			m.embedded -= src
 			m.pinned -= src
 			if(m.pinned.len == 0)
@@ -290,12 +291,13 @@
 	desc = "Contains a maximum of 5 fuel rods."
 	icon = 'code/modules/halo/weapons/icons/fuel_rod_cannon.dmi'
 	icon_state = "fuel_rod_mag"
+	w_class = ITEM_SIZE_LARGE
+	slot_flags = SLOT_BELT | SLOT_POCKET
 	mag_type = MAGAZINE
 	ammo_type = /obj/item/ammo_casing/fuel_rod
 	caliber = "fuel rod"
 	max_ammo = 5
 	multiple_sprites = 1
-	w_class = ITEM_SIZE_NORMAL
 
 /obj/item/ammo_casing/fuel_rod
 	icon = 'code/modules/halo/weapons/icons/fuel_rod_cannon.dmi'
@@ -349,9 +351,10 @@
 
 /obj/item/projectile/bullet/covenant/concussion_rifle
 	name = "heavy plasma round"
-	damage = 30 //Same as plasma rifle (When factoring in the aoe), but it has AP!
-	armor_penetration = 30
+	damage = 25 //Same as plasma rifle (When factoring in the aoe), but it has AP!
+	armor_penetration = 25
 	shield_damage = 50
+	step_delay = 0.75 //slower than most
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "pulse0"
 	muzzle_type = /obj/effect/projectile/muzzle/cov_red
@@ -388,7 +391,7 @@
 		if(istype(mob))
 			mob.adjustFireLoss(aoe_damage)
 		spawn()
-			m.throw_at(lastloc, world.view,1,firer)
+			m.throw_at(lastloc,3,1,firer)
 	. = ..()
 	qdel(src)
 
@@ -408,4 +411,5 @@
 #undef FUEL_ROD_IRRADIATE_AMOUNT
 #undef FUEL_ROD_MAX_OVERSHOOT
 #undef NEEDLER_EMBED_PROB
+#undef NEEDLER_SHRAPNEL_AP
 #undef NEEDLER_SHARD_DET_TIME

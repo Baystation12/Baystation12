@@ -103,6 +103,9 @@
 /obj/machinery/door/airlock/multi_tile/halo/blast_normal_triple/moonbase_cassius_general/hangar
 	name = "Hangar Bay"
 
+/obj/machinery/door/airlock/multi_tile/halo/blast_normal_triple/moonbase_cassius_general/garage_external
+	name = "External Garage"
+
 /obj/machinery/door/airlock/multi_tile/halo/blast_normal_triple/moonbase_cassius_general/shooting_range
 	name = "Shooting Range"
 

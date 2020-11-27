@@ -74,7 +74,7 @@
 	item_type = /obj/item/weapon/gun/projectile/m41
 	quantity = 1
 	value = 75000
-	bonus_items = list(/obj/item/weapon/storage/box/spnkr)
+	bonus_items = list(/obj/item/ammo_magazine/spnkr)
 	trader_weight = 1
 	category = "weapon_unsc"
 

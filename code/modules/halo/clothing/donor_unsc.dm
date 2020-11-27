@@ -1533,12 +1533,29 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 					/obj/item/weapon/gun/projectile/m7_smg/riley
 					)
 
-/decl/hierarchy/outfit/riley_marine
-	name = "riley - marine"
-	suit = /obj/item/clothing/suit/storage/marine/riley
-	head = /obj/item/clothing/head/helmet/marine/riley
 
+/obj/item/clothing/head/helmet/hellbringer/riley
+	item_state = "riley_donor"
 
+/obj/item/clothing/suit/storage/hellbringer/riley
+	desc = "Hellbringer armour, with Holy, but twisted imagery. A set of wings adorn the armour."
+	item_state = "riley_donor_armor"
+
+/obj/item/weapon/storage/box/large/donator/riley_hellbringer
+	startswith = list(/obj/item/clothing/head/helmet/hellbringer/riley,
+					/obj/item/clothing/under/unsc/hellbringer_undersuit,
+					/obj/item/clothing/gloves/thick/unsc/hellbringer,
+					/obj/item/clothing/suit/storage/hellbringer/riley,
+					/obj/item/clothing/shoes/hellbringer,
+					/obj/item/weapon/gun/projectile/m7_smg/riley
+					)
+	can_hold = list(/obj/item/clothing/head/helmet/hellbringer/riley,
+					/obj/item/clothing/under/unsc/hellbringer_undersuit,
+					/obj/item/clothing/gloves/thick/unsc/hellbringer,
+					/obj/item/clothing/suit/storage/hellbringer/riley,
+					/obj/item/clothing/shoes/hellbringer,
+					/obj/item/weapon/gun/projectile/m7_smg/riley
+					)
 ///////////CommanderXor/////////
 
 //ONI Researcher, using guard armour.

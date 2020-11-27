@@ -19,7 +19,7 @@
 	max_shots = 4
 	is_charged_weapon = TRUE
 
-	arm_time = 10 //Deciseconds
+	arm_time = 5 //Deciseconds
 	charge_meter = 0
 	force = 10
 	screen_shake = 0.5

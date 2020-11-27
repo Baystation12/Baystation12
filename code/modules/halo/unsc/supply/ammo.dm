@@ -146,7 +146,7 @@
 /decl/hierarchy/supply_pack/unsc_ammo/m19_spanker
 	name = "M19 SPNKr rockets (1 box of 3 dual tubes)"
 	cost = 1200
-	contains = list(/obj/item/weapon/storage/box/spnkr = 1)
+	contains = list(/obj/item/ammo_magazine/spnkr = 3)
 	containername = "\improper M19 SPNKr crate"
 
 /* M301 */

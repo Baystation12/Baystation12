@@ -61,19 +61,24 @@
 					/obj/item/weapon/gun/projectile/srs99_sniper = 0,
 					/obj/item/weapon/gun/projectile/m41 = 0,
 					"Ammunition" = -1,
-					/obj/item/weapon/storage/box/spnkr = 0,
+					/obj/item/ammo_magazine/spnkr = 0,
 					/obj/item/ammo_magazine/srs99/m232 = 0,
 					/obj/item/ammo_magazine/m739/m118 = 0,
 					"Turrets" = -1,
 					/obj/item/turret_deploy_kit/HMG = 0,
 					"Explosives" = -1,
-					/obj/item/weapon/plastique = 0)
+					/obj/item/weapon/plastique = 0,
+					/obj/item/weapon/plastique/breaching = 0,
+					/obj/item/weapon/plastique/breaching/longrange = 0
+					)
 	amounts = list(\
 		/obj/item/weapon/gun/projectile/m739_lmg = 3,
 		/obj/item/weapon/gun/projectile/srs99_sniper = 3,
 		/obj/item/weapon/gun/projectile/m41 = 3,
 		/obj/item/turret_deploy_kit/HMG = 2,
-		/obj/item/weapon/plastique = 8
+		/obj/item/weapon/plastique = 8,
+		/obj/item/weapon/plastique/breaching = 4,
+		/obj/item/weapon/plastique/breaching/longrange = 4,
 	)
 
 
@@ -124,6 +129,8 @@
 					/obj/item/weapon/storage/pocketstore/hardcase/magazine = 0,
 					/obj/item/weapon/storage/pocketstore/hardcase/bullets = 0,
 					/obj/item/weapon/storage/pocketstore/hardcase/grenade = 1,
+					/obj/item/weapon/storage/pocketstore/hardcase/armorkits = 0,
+					/obj/item/weapon/storage/pocketstore/hardcase/rockets = 1,
 					/obj/item/weapon/storage/pocketstore/hardcase/medbottles = 0,
 					/obj/item/weapon/storage/pocketstore/hardcase/hypos = 0,
 					/obj/item/weapon/storage/pocketstore/hardcase/materials = 0,
@@ -236,11 +243,15 @@
 					/obj/item/weapon/grenade/frag/m9_hedp = 0,
 					/obj/item/weapon/grenade/smokebomb = 0,
 					/obj/item/weapon/plastique = 0,
+					/obj/item/weapon/plastique/breaching = 0,
+					/obj/item/weapon/plastique/breaching/longrange = 0,
 					)
 	amounts = list(\
 	/obj/item/weapon/grenade/frag/m9_hedp = 15,
 	/obj/item/weapon/grenade/smokebomb = 15,
-	/obj/item/weapon/plastique = 8
+	/obj/item/weapon/plastique = 8,
+	/obj/item/weapon/plastique/breaching = 5,
+	/obj/item/weapon/plastique/breaching/longrange= 5,
 	)
 
 /obj/machinery/pointbased_vending/armory/odstvend/armour
@@ -275,6 +286,7 @@
 					/obj/item/weapon/storage/pocketstore/hardcase/magazine = 0,
 					/obj/item/weapon/storage/pocketstore/hardcase/bullets = 0,
 					/obj/item/weapon/storage/pocketstore/hardcase/grenade = 1,
+					/obj/item/weapon/storage/pocketstore/hardcase/armorkits = 0,
 					/obj/item/weapon/storage/pocketstore/hardcase/medbottles = 0,
 					/obj/item/weapon/storage/pocketstore/hardcase/hypos = 0,
 					/obj/item/weapon/storage/pocketstore/hardcase/materials = 0,
@@ -334,7 +346,7 @@
 					/obj/item/ammo_box/shotgun = 10,
 					/obj/item/ammo_box/shotgun/slug = 10,
 					/obj/item/ammo_magazine/m739/m118 = 16,
-					/obj/item/weapon/storage/box/spnkr = 5,
+					/obj/item/ammo_magazine/spnkr = 10,
 					/obj/item/ammo_magazine/m6d/m224 = 16,
 					/obj/item/ammo_magazine/m7/m443 = 16,
 					/obj/item/ammo_magazine/m392/m120 = 16,
@@ -390,6 +402,7 @@
 					/obj/item/weapon/storage/pocketstore/hardcase/magazine = 0,
 					/obj/item/weapon/storage/pocketstore/hardcase/bullets = 0,
 					/obj/item/weapon/storage/pocketstore/hardcase/grenade = 1,
+					/obj/item/weapon/storage/pocketstore/hardcase/armorkits = 0,
 					/obj/item/weapon/storage/pocketstore/hardcase/medbottles = 0,
 					/obj/item/weapon/storage/pocketstore/hardcase/hypos = 0,
 					/obj/item/weapon/storage/pocketstore/hardcase/materials = 0,
@@ -474,6 +487,7 @@
 					/obj/item/weapon/storage/pocketstore/hardcase/magazine = 0,
 					/obj/item/weapon/storage/pocketstore/hardcase/bullets = 0,
 					/obj/item/weapon/storage/pocketstore/hardcase/grenade = 1,
+					/obj/item/weapon/storage/pocketstore/hardcase/armorkits = 0,
 					/obj/item/weapon/storage/pocketstore/hardcase/medbottles = 0,
 					/obj/item/weapon/storage/pocketstore/hardcase/hypos = 0,
 					/obj/item/weapon/storage/pocketstore/hardcase/materials = 0,
