@@ -198,6 +198,7 @@
 		if(world.time > GLOB.round_no_balance_time)
 			if(debug_pop_balance)	to_debug_listeners("Timer: Balance checks active...")
 
+			if(GLOB.clients.len <= GLOB.min_players_balance) return //Do we have enough connected clients to bother balancing?
 			//only try to balance if this job is part of a faction, and there is at least 1 person assigned
 			var/datum/faction/my_faction = GLOB.factions_by_name[spawn_faction]
 			if(my_faction && my_faction.living_minds.len > 0)
@@ -235,7 +236,7 @@
 							my_ratio = my_faction_players / total_faction_players
 
 						//are we overpopped?
-						if(total_faction_players > GLOB.min_players_balance && my_ratio > max_ratio)
+						if(my_ratio > max_ratio)
 							to_chat(feedback, "<span class='boldannounce'>Joining as [title] is blocked due to [spawn_faction] faction overpop.</span>")
 
 							//tell the admins, but dont spam them too much
