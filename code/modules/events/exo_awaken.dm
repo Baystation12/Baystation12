@@ -143,9 +143,8 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 	else
 		announcement = "Anomalous biological activity detected on [location_name()]."
 
-	for(var/obj/effect/overmap/visitable/OO in range(chosen_planet,2)) //announce the event to ships in range of the planet
-		if (istype(OO, /obj/effect/overmap/visitable/ship))
-			command_announcement.Announce(announcement, "[OO.name] Biological Sensor Array", zlevels = OO.find_z_levels())
+	for(var/obj/effect/overmap/visitable/ship/S in range(chosen_planet,2)) //announce the event to ships in range of the planet
+		command_announcement.Announce(announcement, "[S.name] Biological Sensor Array", zlevels = S.map_z)
 
 /datum/event/exo_awakening/tick()
 	count_mobs()
