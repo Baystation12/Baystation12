@@ -3,6 +3,7 @@
 # Case is not important for ckey.                                    #
 # Case IS important for the rank. However punctuation/spaces are not #
 # Ranks can be anything defined in admin_ranks.txt           ~Carn   #
+# ** Lines starting with a # are comments and will be ignored. **    #
+# Example:                                                           #
+# not_a_user - Admin                                                 #
 ######################################################################
-
-# not_a_user - Admin
