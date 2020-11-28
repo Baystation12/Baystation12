@@ -1,0 +1,4 @@
+author: "Mucker"
+delete-after: True
+changes: 
+  - bugfix: "Mobs spawned by the exo event can no longer be named."
