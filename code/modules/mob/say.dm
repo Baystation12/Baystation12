@@ -6,7 +6,7 @@
 	set category = "IC"
 	return
 
-/mob/verb/say_verb(message as text)
+/mob/verb/say_verb(message as text|null)
 	set name = "Say"
 	set category = "IC"
 
@@ -14,7 +14,7 @@
 		qdel(typing_indicator)
 	usr.say(message)
 
-/mob/verb/me_verb(message as text)
+/mob/verb/me_verb(message as text|null)
 	set name = "Me"
 	set category = "IC"
 
