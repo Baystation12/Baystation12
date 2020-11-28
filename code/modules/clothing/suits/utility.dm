@@ -12,17 +12,16 @@
 /obj/item/clothing/suit/fire
 	name = "firesuit"
 	desc = "A suit that protects against fire and heat."
-	icon_state = "fire"
+	icon_state = "firesuit"
 	item_state_slots = list(
-		slot_l_hand_str = "fire_suit",
-		slot_r_hand_str = "fire_suit",
+		slot_l_hand_str = "firefighter",
+		slot_r_hand_str = "firefighter",
 	)
-	w_class = ITEM_SIZE_LARGE//large item
-	flags_inv = HIDETAIL
+	w_class = ITEM_SIZE_LARGE
 
 	body_parts_covered = UPPER_TORSO | LOWER_TORSO| ARMS
 	armor = list(laser = ARMOR_LASER_MINOR, energy = ARMOR_ENERGY_MINOR, bomb = ARMOR_BOMB_MINOR)
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank/emergency,/obj/item/weapon/extinguisher,/obj/item/weapon/crowbar/emergency_forcing_tool,/obj/item/clothing/head)	
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank/emergency,/obj/item/weapon/extinguisher,/obj/item/weapon/crowbar/emergency_forcing_tool,/obj/item/clothing/head)
 
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.50
@@ -66,10 +65,10 @@
 	desc = "Use in case of bomb."
 	icon_state = "bombsuit"
 	armor = list(
-		melee = ARMOR_MELEE_VERY_HIGH, 
-		bullet = ARMOR_BALLISTIC_MINOR, 
-		laser = ARMOR_LASER_SMALL, 
-		energy = ARMOR_ENERGY_RESISTANT, 
+		melee = ARMOR_MELEE_VERY_HIGH,
+		bullet = ARMOR_BALLISTIC_MINOR,
+		laser = ARMOR_LASER_SMALL,
+		energy = ARMOR_ENERGY_RESISTANT,
 		bomb = ARMOR_BOMB_SHIELDED
 		)
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR
@@ -85,10 +84,10 @@
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.01
 	armor = list(
-		melee = ARMOR_MELEE_VERY_HIGH, 
-		bullet = ARMOR_BALLISTIC_MINOR, 
-		laser = ARMOR_LASER_SMALL, 
-		energy = ARMOR_ENERGY_RESISTANT, 
+		melee = ARMOR_MELEE_VERY_HIGH,
+		bullet = ARMOR_BALLISTIC_MINOR,
+		laser = ARMOR_LASER_SMALL,
+		energy = ARMOR_ENERGY_RESISTANT,
 		bomb = ARMOR_BOMB_SHIELDED
 		)
 	flags_inv = HIDEJUMPSUIT|HIDETAIL
@@ -119,7 +118,7 @@
 	flags_inv = BLOCKHAIR
 	body_parts_covered = HEAD|FACE|EYES
 	armor = list(
-		bio = ARMOR_BIO_RESISTANT, 
+		bio = ARMOR_BIO_RESISTANT,
 		rad = ARMOR_RAD_SHIELDED
 		)
 
@@ -138,7 +137,7 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS|HANDS|FEET
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank/emergency,/obj/item/clothing/head/radiation,/obj/item/clothing/mask/gas,/obj/item/device/geiger)
 	armor = list(
-		bio = ARMOR_BIO_RESISTANT, 
+		bio = ARMOR_BIO_RESISTANT,
 		rad = ARMOR_RAD_SHIELDED
 		)
 	flags_inv = HIDEJUMPSUIT|HIDETAIL|HIDEGLOVES|HIDESHOES
