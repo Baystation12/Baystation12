@@ -222,7 +222,7 @@
 
 						//how many players do we have?
 						//var/my_faction_players = my_faction.living_minds.len
-						var/my_faction_players = 0
+						var/my_faction_players = pop_balance_mult //We need to take into account our own job pop balance cost.
 						var/my_ratio = 0
 						if(my_faction.living_minds.len != 0)
 							for(var/datum/mind/player in my_faction.living_minds)
