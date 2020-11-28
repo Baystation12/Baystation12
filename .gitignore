@@ -20,3 +20,6 @@ __pycache__
 # ignore config, but not subdirs
 config/*
 !config/*/
+
+#VS Code files
+.vscode/launch.json
