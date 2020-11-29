@@ -189,7 +189,6 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/light/small{
 	dir = 4;
-	pixel_y = 0
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/fourthdeck/starboard)
@@ -6136,7 +6135,7 @@
 	icon_state = "railing0-1"
 	},
 /turf/simulated/open,
-/area/maintenance/fourthdeck/forestarboard)
+/area/quartermaster/expedition/storage)
 "uw" = (
 /obj/machinery/door/airlock/maintenance{
 	name = "Lounge Maintenance"
@@ -6936,9 +6935,6 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/hangcheck)
 "wK" = (
-/obj/machinery/camera/network/security{
-	c_tag = "Fourth Deck - Security Checkpoint"
-	},
 /obj/effect/floor_decal/corner/red/half{
 	dir = 1;
 	icon_state = "bordercolorhalf"
@@ -7290,7 +7286,7 @@
 	},
 /obj/structure/railing/mapped,
 /turf/simulated/open,
-/area/maintenance/fourthdeck/forestarboard)
+/area/quartermaster/expedition/storage)
 "yb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -10633,7 +10629,7 @@
 "Kt" = (
 /obj/structure/railing/mapped,
 /turf/simulated/open,
-/area/maintenance/fourthdeck/forestarboard)
+/area/quartermaster/expedition/storage)
 "Ku" = (
 /obj/effect/floor_decal/corner/brown{
 	dir = 10
@@ -10739,7 +10735,7 @@
 "KF" = (
 /obj/effect/wallframe_spawn/no_grille,
 /turf/simulated/floor/plating,
-/area/maintenance/fourthdeck/forestarboard)
+/area/quartermaster/expedition/storage)
 "KG" = (
 /obj/effect/floor_decal/corner/brown{
 	dir = 10
@@ -10770,7 +10766,7 @@
 /area/security/hangcheck)
 "KI" = (
 /turf/simulated/floor/tiled/techfloor,
-/area/maintenance/fourthdeck/forestarboard)
+/area/quartermaster/expedition/storage)
 "KK" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -11237,7 +11233,7 @@
 "Mh" = (
 /obj/structure/catwalk,
 /turf/simulated/open,
-/area/maintenance/fourthdeck/forestarboard)
+/area/quartermaster/expedition/storage)
 "Mi" = (
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 6
@@ -12098,7 +12094,7 @@
 	name = "Expedition Storage"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/maintenance/fourthdeck/forestarboard)
+/area/quartermaster/expedition/storage)
 "OB" = (
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/fourthdeck/aft)
@@ -12762,7 +12758,7 @@
 	dir = 8
 	},
 /turf/simulated/open,
-/area/maintenance/fourthdeck/forestarboard)
+/area/quartermaster/expedition/storage)
 "Qs" = (
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -13151,6 +13147,9 @@
 /obj/effect/wallframe_spawn/no_grille,
 /turf/simulated/floor/plating,
 /area/storage/primary)
+"RA" = (
+/turf/simulated/wall/prepainted,
+/area/quartermaster/expedition/storage)
 "RC" = (
 /obj/machinery/firealarm{
 	dir = 1;
@@ -14163,7 +14162,7 @@
 /area/maintenance/fourthdeck/aft)
 "TS" = (
 /turf/simulated/open,
-/area/maintenance/fourthdeck/forestarboard)
+/area/quartermaster/expedition/storage)
 "TT" = (
 /obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced/polarized/no_grille{
@@ -14511,7 +14510,7 @@
 /obj/structure/catwalk,
 /obj/structure/ladder,
 /turf/simulated/floor/tiled/techfloor,
-/area/maintenance/fourthdeck/forestarboard)
+/area/quartermaster/expedition/storage)
 "UR" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -15521,7 +15520,7 @@
 	pixel_y = 8
 	},
 /turf/simulated/open,
-/area/maintenance/fourthdeck/forestarboard)
+/area/quartermaster/expedition/storage)
 "XD" = (
 /obj/machinery/door/airlock/civilian{
 	name = "Commissary Counter"
@@ -31406,7 +31405,7 @@ aa
 ak
 ak
 kQ
-er
+RA
 uu
 ya
 KI

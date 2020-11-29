@@ -328,6 +328,10 @@
 // This function can not be undone; do not call this unless you are sure
 // Also make sure there is a valid control computer
 /obj/machinery/cryopod/proc/despawn_occupant()
+	if (!occupant)
+		log_and_message_admins("A mob was deleted while in a cryopod. This may cause errors!")
+		return
+
 	//Drop all items into the pod.
 	for(var/obj/item/W in occupant)
 		occupant.drop_from_inventory(W)
@@ -414,7 +418,7 @@
 	if(announce_despawn)
 		announce.autosay("[occupant.real_name], [role_alt_title], [on_store_message]", "[on_store_name]")
 
-	var/despawnmessage = replacetext(on_store_visible_message, "$occupant$", occupant.real_name) 
+	var/despawnmessage = replacetext(on_store_visible_message, "$occupant$", occupant.real_name)
 	visible_message(SPAN_NOTICE("\The [initial(name)] " + despawnmessage), range = 3)
 
 	//This should guarantee that ghosts don't spawn.

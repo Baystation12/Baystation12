@@ -11,8 +11,6 @@
 	origin_tech = list(TECH_MATERIAL = 1)
 	attack_verb = list("attacked", "stabbed", "poked")
 	max_force = 5
-	sharp = 0
-	edge = 0
 	force_divisor = 0.1 // 6 when wielded with hardness 60 (steel)
 	thrown_force_divisor = 0.25 // 5 when thrown with weight 20 (steel)
 	default_material = MATERIAL_ALUMINIUM
@@ -40,11 +38,22 @@
 			return ..()
 
 	if (reagents.total_volume > 0)
-		reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
 		if(M == user)
 			if(!M.can_eat(loaded))
 				return
-			M.visible_message("<span class='notice'>\The [user] eats some [loaded] from \the [src].</span>")
+			switch(M.get_fullness())
+				if (0 to 50)
+					to_chat(M, SPAN_DANGER("You ravenously stick \the [src] into your mouth and gobble the food!"))
+				if (50 to 150)
+					to_chat(M, SPAN_NOTICE("You hungrily chew the food on \the [src]."))
+				if (150 to 350)
+					to_chat(M, SPAN_NOTICE("You chew the food on \the [src]."))
+				if (350 to 550)
+					to_chat(M, SPAN_NOTICE("You unwillingly chew the food on \the [src]."))
+				if (550 to INFINITY)
+					to_chat(M, SPAN_WARNING("You cannot take one more bite from \the [src]!"))
+					return
+
 		else
 			user.visible_message("<span class='warning'>\The [user] begins to feed \the [M]!</span>")
 			if(!M.can_force_feed(user, loaded) || !do_after(user, 5 SECONDS, M))
@@ -53,6 +62,7 @@
 			if (user.get_active_hand() != src)
 				return
 			M.visible_message("<span class='notice'>\The [user] feeds some [loaded] to \the [M] with \the [src].</span>")
+		reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
 		playsound(M.loc,'sound/items/eatfood.ogg', rand(10,40), 1)
 		overlays.Cut()
 		return

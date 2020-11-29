@@ -2,8 +2,8 @@
 	attack_verb = list("bit", "chomped on")
 	attack_sound = 'sound/weapons/bite.ogg'
 	shredding = 0
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 	attack_name = "sharp bite"
 
 /datum/unarmed_attack/diona
@@ -20,8 +20,8 @@
 	eye_attack_text_victim = "sharp claws"
 	attack_sound = 'sound/weapons/slice.ogg'
 	miss_sound = 'sound/weapons/slashmiss.ogg'
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 	attack_name = "claws"
 	var/blocked_by_gloves = TRUE
 
@@ -37,6 +37,10 @@
 
 /datum/unarmed_attack/claws/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
 	var/obj/item/organ/external/affecting = target.get_organ(zone)
+
+	if (!affecting)
+		to_chat(user, SPAN_WARNING("\The [target] does not have that bodypart!"))
+		return
 
 	attack_damage = Clamp(attack_damage, 1, 5)
 
@@ -153,8 +157,8 @@
 	attack_noun = list("forelimb")
 	damage = 8
 	shredding = 1
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 	delay = 20
 	eye_attack_text = "a forelimb"
 	eye_attack_text_victim = "a forelimb"

@@ -73,7 +73,7 @@
 
 /decl/hierarchy/outfit/corpse/slavers_base/slaver1
 	name = "Dead Slaver 1"
-	uniform = /obj/item/clothing/under/johnny
+	uniform = /obj/item/clothing/under/color/brown
 	shoes = /obj/item/clothing/shoes/black
 	glasses = /obj/item/clothing/glasses/sunglasses
 
@@ -186,8 +186,8 @@
 	item_icons = list(slot_w_uniform_str = 'maps/away/slavers/slavers_base_sprites.dmi')
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	armor = list(
-		melee = ARMOR_MELEE_KNIVES, 
-		bullet = ARMOR_BALLISTIC_PISTOL, 
-		laser = ARMOR_LASER_MINOR, 
+		melee = ARMOR_MELEE_KNIVES,
+		bullet = ARMOR_BALLISTIC_PISTOL,
+		laser = ARMOR_LASER_MINOR,
 		energy = ARMOR_ENERGY_MINOR
 		)

@@ -820,7 +820,7 @@ obj/random/obstruction/spawn_choices()
 	name = "random suit"
 	desc = "This is a random piece of outerwear."
 	icon = 'icons/obj/clothing/obj_suit.dmi'
-	icon_state = "fire"
+	icon_state = "syndicate"
 
 /obj/random/suit/spawn_choices()
 	return list(/obj/item/clothing/suit/storage/hazardvest = 4,

@@ -22199,6 +22199,10 @@
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head/aux)
+"ltt" = (
+/obj/machinery/door/unpowered/simple/plastic/open,
+/turf/simulated/floor/tiled/freezer,
+/area/crew_quarters/head/aux)
 "lvb" = (
 /obj/structure/table/rack{
 	dir = 8
@@ -26162,7 +26166,7 @@
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology/xenoflora)
 "qtQ" = (
-/obj/structure/curtain/open/shower,
+/obj/machinery/door/unpowered/simple/plastic/open,
 /turf/simulated/floor/tiled/freezer,
 /area/medical/washroom)
 "qvX" = (
@@ -45560,10 +45564,10 @@ rKo
 ayb
 ure
 aAm
-sYU
+ltt
 aAm
 aAm
-sYU
+ltt
 aAm
 aAm
 akZ
@@ -45767,7 +45771,7 @@ abR
 riD
 riD
 ado
-sYU
+ltt
 ala
 riD
 aAm

@@ -78,16 +78,16 @@
 	Predicate Helpers
 */
 /proc/area_belongs_to_zlevels(var/area/A, var/list/z_levels)
-	. = (A.z in z_levels)
+	return A && (A.z in z_levels)
 
 /proc/is_station_area(var/area/A)
-	. = isStationLevel(A.z)
+	return A && (isStationLevel(A.z))
 
 /proc/is_contact_area(var/area/A)
-	. = isContactLevel(A.z)
+	return A && (isContactLevel(A.z))
 
 /proc/is_player_area(var/area/A)
-	. = isPlayerLevel(A.z)
+	return A && (isPlayerLevel(A.z))
 
 /proc/is_not_space_area(var/area/A)
 	. = !istype(A,/area/space)
@@ -96,7 +96,7 @@
 	. = !istype(A,/area/shuttle)
 
 /proc/is_area_with_turf(var/area/A)
-	. = isnum(A.x)
+	return A && (isnum(A.x))
 
 /proc/is_area_without_turf(var/area/A)
 	. = !is_area_with_turf(A)

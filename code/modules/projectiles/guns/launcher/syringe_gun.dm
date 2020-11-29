@@ -22,7 +22,7 @@
 	if(istype(I, /obj/item/weapon/reagent_containers/syringe) && user.unEquip(I, src))
 		syringe = I
 		to_chat(user, "<span class='notice'>You carefully insert [syringe] into [src].</span>")
-		sharp = 1
+		sharp = TRUE
 		name = "syringe dart"
 		update_icon()
 

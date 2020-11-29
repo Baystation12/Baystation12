@@ -237,12 +237,19 @@ MANTIDIFY(/obj/machinery/door/airlock/external/bolted, "mantid airlock", "door")
 	if(on)
 		add_avail(output_power)
 
-/obj/machinery/power/smes/buildable/power_shuttle/ascent
+/obj/machinery/power/smes/buildable/preset/ascent
 	name = "mantid battery"
 	desc = "Some kind of strange alien SMES technology."
-	icon = 'icons/obj/machines/power/mantid_smes.dmi'	
+	icon = 'icons/obj/machines/power/mantid_smes.dmi'
 	overlay_icon = 'icons/obj/machines/power/mantid_smes.dmi'
-	construct_state = /decl/machine_construction/default/no_deconstruct
+	uncreated_component_parts = list(
+		/obj/item/weapon/stock_parts/smes_coil/advanced = 2
+	)
+	_input_maxed = TRUE
+	_output_maxed = TRUE
+	_input_on = TRUE
+	_output_on = TRUE
+	_fully_charged = TRUE
 
 /obj/machinery/cryopod/ascent_spawn
 	name = "mantid cryotank"
@@ -271,7 +278,6 @@ MANTIDIFY(/obj/machinery/door/airlock/external/bolted, "mantid airlock", "door")
 	desc = "An interface between the gyne's brood and the cryotank oversight system."
 	color = COLOR_VIOLET
 	construct_state = null
-	
 	storage_type = "lifeforms"
 	storage_name = "Cryotank Oversight Control"
 
@@ -288,4 +294,3 @@ MANTIDIFY(/obj/machinery/door/airlock/external/bolted, "mantid airlock", "door")
 /obj/machinery/computer/cryopod/ascent_spawn/Destroy()
 	qdel(announcer)
 	. = ..()
-	

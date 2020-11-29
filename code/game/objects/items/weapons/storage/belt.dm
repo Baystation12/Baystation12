@@ -127,7 +127,10 @@
 		/obj/item/weapon/extinguisher/mini,
 		/obj/item/weapon/marshalling_wand,
 		/obj/item/weapon/hand_labeler,
-		/obj/item/clothing/gloves
+		/obj/item/clothing/gloves,
+		/obj/item/weapon/tape_roll,
+		/obj/item/clothing/head/beret,
+		/obj/item/weapon/material/knife/folding/
 		)
 
 
@@ -182,7 +185,9 @@
 		/obj/item/weapon/extinguisher/mini,
 		/obj/item/weapon/storage/med_pouch,
 		/obj/item/bodybag,
-		/obj/item/clothing/gloves
+		/obj/item/clothing/gloves,
+		/obj/item/clothing/head/beret,
+		/obj/item/weapon/material/knife/folding/
 		)
 
 /obj/item/weapon/storage/belt/medical/emt
@@ -221,7 +226,9 @@
 		/obj/item/device/holowarrant,
 		/obj/item/weapon/magnetic_ammo,
 		/obj/item/device/binoculars,
-		/obj/item/clothing/gloves
+		/obj/item/clothing/gloves,
+		/obj/item/clothing/head/beret,
+		/obj/item/weapon/material/knife/folding/
 		)
 
 /obj/item/weapon/storage/belt/security
@@ -253,7 +260,9 @@
 		/obj/item/device/holowarrant,
 		/obj/item/weapon/magnetic_ammo,
 		/obj/item/device/binoculars,
-		/obj/item/clothing/gloves
+		/obj/item/clothing/gloves,
+		/obj/item/clothing/head/beret,
+		/obj/item/weapon/material/knife/folding/
 		)
 
 /obj/item/weapon/storage/belt/general
@@ -293,7 +302,10 @@
 		/obj/item/weapon/crowbar/prybar,
 		/obj/item/weapon/tank/emergency,
 		/obj/item/clothing/mask/breath,
-		/obj/item/toy/bosunwhistle
+		/obj/item/toy/bosunwhistle,
+		/obj/item/clothing/head/beret,
+		/obj/item/weapon/material/knife/folding/,
+		/obj/item/device/tape
 		)
 
 /obj/item/weapon/storage/belt/janitor
@@ -311,7 +323,9 @@
 		/obj/item/clothing/gloves,
 		/obj/item/device/assembly/mousetrap,
 		/obj/item/weapon/crowbar/prybar,
-		/obj/item/clothing/mask/plunger
+		/obj/item/clothing/mask/plunger,
+		/obj/item/clothing/head/beret,
+		/obj/item/weapon/material/knife/folding/
 		)
 
 /obj/item/weapon/storage/belt/holster/general
@@ -352,7 +366,10 @@
 		/obj/item/weapon/crowbar/prybar,
 		/obj/item/weapon/tank/emergency,
 		/obj/item/clothing/mask/breath,
-		/obj/item/toy/bosunwhistle
+		/obj/item/toy/bosunwhistle,
+		/obj/item/clothing/head/beret,
+		/obj/item/weapon/material/knife/folding/,
+		/obj/item/device/tape
 		)
 
 /obj/item/weapon/storage/belt/holster/forensic
@@ -380,7 +397,9 @@
 		/obj/item/device/taperecorder,
 		/obj/item/device/tape,
 		/obj/item/weapon/storage/csi_markers,
-		/obj/item/device/scanner
+		/obj/item/device/scanner,
+		/obj/item/clothing/head/beret,
+		/obj/item/weapon/material/knife/folding/
 		)
 
 /obj/item/weapon/storage/belt/forensic
@@ -407,7 +426,9 @@
 		/obj/item/device/taperecorder,
 		/obj/item/device/tape,
 		/obj/item/weapon/storage/csi_markers,
-		/obj/item/device/scanner
+		/obj/item/device/scanner,
+		/obj/item/clothing/head/beret,
+		/obj/item/weapon/material/knife/folding/
 		)
 
 /obj/item/weapon/storage/belt/holster/machete
@@ -436,7 +457,13 @@
 		/obj/item/weapon/pinpointer/radio,
 		/obj/item/device/taperecorder,
 		/obj/item/device/tape,
-		/obj/item/device/scanner/gas
+		/obj/item/device/scanner/gas,
+		/obj/item/clothing/gloves,
+		/obj/item/weapon/tape_roll,
+		/obj/item/clothing/head/beret,
+		/obj/item/weapon/material/knife/folding/,
+		/obj/item/weapon/storage/firstaid/light,
+		/obj/item/device/flash
 		)
 	can_holster = list(/obj/item/weapon/material/hatchet/machete)
 	sound_in = 'sound/effects/holster/sheathin.ogg'

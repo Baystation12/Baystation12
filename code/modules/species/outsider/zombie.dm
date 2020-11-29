@@ -384,6 +384,9 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 	adjustBruteLoss(100)
 	sleep(150)
 
+	if (QDELETED(src))
+		return
+
 	if (isspecies(src, SPECIES_ZOMBIE)) //Check again otherwise Consume can run this twice at once
 		return
 

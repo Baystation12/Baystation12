@@ -314,7 +314,7 @@
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "aR" = (
-/obj/random/loot,
+/obj/random/ammo,
 /turf/unsimulated/floor{
 	icon_state = "asteroid"
 	},
@@ -430,26 +430,12 @@
 /area/map_template/syndicate_mothership/raider_base)
 "bd" = (
 /obj/effect/decal/cleanable/cobweb,
-/obj/machinery/fabricator/hacked,
 /turf/unsimulated/floor{
 	icon_state = "plating";
 	name = "plating"
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "be" = (
-/obj/structure/closet/crate,
-/obj/item/stack/material/steel{
-	amount = 50
-	},
-/obj/item/stack/material/steel{
-	amount = 50
-	},
-/obj/item/stack/material/glass{
-	amount = 50
-	},
-/obj/item/stack/material/glass{
-	amount = 50
-	},
 /obj/machinery/light/small{
 	dir = 1
 	},
@@ -929,7 +915,7 @@
 "cc" = (
 /obj/structure/table/woodentable,
 /obj/item/weapon/reagent_containers/glass/rag,
-/obj/random/loot,
+/obj/random/ammo,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -1301,7 +1287,7 @@
 /area/map_template/skipjack_station/start)
 "cT" = (
 /obj/structure/table/rack,
-/obj/random/hardsuit,
+/obj/random/raider/hardsuit,
 /obj/item/clothing/glasses/thermal/plain/monocle,
 /turf/simulated/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
@@ -1318,7 +1304,7 @@
 /area/map_template/skipjack_station/start)
 "cX" = (
 /obj/structure/table/rack,
-/obj/random/hardsuit,
+/obj/random/raider/hardsuit,
 /obj/item/clothing/head/pirate,
 /obj/item/weapon/gun/launcher/money,
 /turf/simulated/floor/shuttle/red,
@@ -1351,7 +1337,7 @@
 /obj/random/voidsuit,
 /obj/random/voidhelmet,
 /obj/item/weapon/material/harpoon,
-/obj/random/energy,
+/obj/random/raider/lilgun,
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
 "db" = (
@@ -1378,8 +1364,8 @@
 "de" = (
 /obj/structure/table/rack,
 /obj/item/weapon/melee/energy/sword/pirate,
-/obj/item/clothing/suit/space/pirate,
-/obj/item/clothing/suit/space/pirate,
+/obj/item/clothing/suit/pirate,
+/obj/item/clothing/suit/pirate,
 /obj/item/weapon/tank/oxygen,
 /obj/item/clothing/shoes/magboots,
 /obj/random/voidsuit,
@@ -1393,8 +1379,8 @@
 "df" = (
 /obj/structure/table/rack,
 /obj/item/weapon/melee/energy/sword/pirate,
-/obj/item/clothing/suit/space/pirate,
-/obj/item/clothing/suit/space/pirate,
+/obj/item/clothing/suit/pirate,
+/obj/item/clothing/suit/pirate,
 /obj/item/weapon/tank/oxygen,
 /obj/item/clothing/shoes/magboots,
 /obj/random/voidsuit,
@@ -1445,7 +1431,7 @@
 /obj/item/weapon/tank/oxygen,
 /obj/random/voidsuit,
 /obj/random/voidhelmet,
-/obj/random/energy,
+/obj/random/raider/biggun,
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
 "dk" = (
@@ -1494,13 +1480,16 @@
 /obj/item/weapon/tank/oxygen,
 /obj/random/voidsuit,
 /obj/random/voidhelmet,
-/obj/random/projectile,
+/obj/random/raider/lilgun,
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
 "dr" = (
-/obj/random/loot,
-/turf/simulated/floor/plating,
-/area/map_template/skipjack_station/start)
+/obj/random/ammo,
+/turf/unsimulated/floor{
+	icon_state = "carpet";
+	name = "carpet"
+	},
+/area/map_template/syndicate_mothership/raider_base)
 "ds" = (
 /obj/item/robot_parts/head,
 /turf/simulated/floor/plating,
@@ -1578,7 +1567,7 @@
 /obj/item/weapon/grenade/empgrenade,
 /obj/item/weapon/grenade/flashbang,
 /obj/item/weapon/grenade/spawnergrenade/manhacks,
-/obj/random/energy,
+/obj/random/raider/biggun,
 /turf/simulated/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
 "dD" = (
@@ -1623,7 +1612,6 @@
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
 "dJ" = (
-/obj/random/loot,
 /obj/vehicle/bike/thermal,
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
@@ -1684,7 +1672,19 @@
 /area/map_template/skipjack_station/start)
 "dR" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
-/obj/item/weapon/crowbar,
+/obj/machinery/fabricator/hacked,
+/obj/item/stack/material/glass{
+	amount = 50
+	},
+/obj/item/stack/material/glass{
+	amount = 50
+	},
+/obj/item/stack/material/steel{
+	amount = 50
+	},
+/obj/item/stack/material/steel{
+	amount = 50
+	},
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
 "dS" = (
@@ -1724,7 +1724,7 @@
 "dY" = (
 /obj/item/weapon/deck/cards,
 /obj/structure/table/steel,
-/obj/random/projectile,
+/obj/random/raider/lilgun,
 /turf/simulated/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
 "dZ" = (
@@ -1786,7 +1786,7 @@
 /area/map_template/skipjack_station/start)
 "ei" = (
 /obj/structure/table/steel,
-/obj/random/loot,
+/obj/random/raider/lilgun,
 /turf/simulated/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
 "ej" = (
@@ -1898,7 +1898,7 @@
 /area/map_template/skipjack_station/start)
 "eA" = (
 /obj/structure/closet/crate,
-/obj/item/clothing/suit/space/pirate,
+/obj/item/clothing/suit/pirate,
 /obj/item/clothing/under/rank/medical/scrubs/black,
 /turf/simulated/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
@@ -1935,9 +1935,6 @@
 	},
 /obj/item/weapon/melee/baton/cattleprod,
 /turf/simulated/floor/shuttle/white,
-/area/map_template/skipjack_station/start)
-"eE" = (
-/turf/space,
 /area/map_template/skipjack_station/start)
 "eF" = (
 /obj/structure/bed,
@@ -2859,7 +2856,7 @@ ab
 ab
 ab
 ab
-aq
+aR
 aq
 bA
 bU
@@ -3074,10 +3071,10 @@ aq
 aq
 aB
 aC
+aq
+aq
+aq
 aR
-aq
-aq
-aq
 aq
 aq
 cf
@@ -4156,7 +4153,7 @@ aD
 aN
 aY
 aY
-aY
+dr
 bG
 bq
 af
@@ -4181,7 +4178,7 @@ cR
 cR
 cR
 cR
-eE
+aa
 aa
 aa
 aa
@@ -5107,7 +5104,7 @@ cw
 cw
 cR
 di
-dr
+dm
 dx
 dm
 dP

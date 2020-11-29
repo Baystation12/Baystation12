@@ -2953,3 +2953,136 @@
 	result = /datum/reagent/drink/eggnog
 	required_reagents = list(/datum/reagent/nutriment/protein/egg = 1, /datum/reagent/drink/milk/ = 1, /datum/reagent/sugar = 1)
 	result_amount = 3
+
+/datum/chemical_reaction/capilliumate
+	name = "Capilliumate"
+	result =/datum/reagent/capilliumate
+	result_amount = 3
+	required_reagents = list(
+		/datum/reagent/radium = 1,
+		/datum/reagent/nutriment/protein = 1,
+		/datum/reagent/mutagen = 1
+	)
+	mix_message = "The solution bubbles and thickens into strands."
+
+/datum/chemical_reaction/hair_dye
+	name = "Hair Dye"
+	result = /datum/reagent/hair_dye
+	result_amount = 2
+	required_reagents = list(
+		/datum/reagent/enzyme = 1,
+		/datum/reagent/ammonia = 1
+	)
+
+/datum/chemical_reaction/colored_hair_dye/red
+	name = "Red Hair Dye"
+	result = /datum/reagent/colored_hair_dye/red
+	result_amount = 1
+	required_reagents = list(
+		/datum/reagent/hair_dye = 1,
+		/datum/reagent/crayon_dust/red = 1
+	)
+
+/datum/chemical_reaction/colored_hair_dye/orange
+	name = "Orange Hair Dye"
+	result = /datum/reagent/colored_hair_dye/orange
+	result_amount = 1
+	required_reagents = list(
+		/datum/reagent/hair_dye = 1,
+		/datum/reagent/crayon_dust/orange = 1
+	)
+
+/datum/chemical_reaction/colored_hair_dye/yellow
+	name = "Yellow Hair Dye"
+	result = /datum/reagent/colored_hair_dye/yellow
+	result_amount = 1
+	required_reagents = list(
+		/datum/reagent/hair_dye = 1,
+		/datum/reagent/crayon_dust/yellow = 1
+	)
+
+/datum/chemical_reaction/colored_hair_dye/green
+	name = "Green Hair Dye"
+	result = /datum/reagent/colored_hair_dye/green
+	result_amount = 1
+	required_reagents = list(
+		/datum/reagent/hair_dye = 1,
+		/datum/reagent/crayon_dust/green = 1
+	)
+
+/datum/chemical_reaction/colored_hair_dye/blue
+	name = "Blue Hair Dye"
+	result = /datum/reagent/colored_hair_dye/blue
+	result_amount = 1
+	required_reagents = list(
+		/datum/reagent/hair_dye = 1,
+		/datum/reagent/crayon_dust/blue = 1
+	)
+
+/datum/chemical_reaction/colored_hair_dye/purple
+	name = "Purple Hair Dye"
+	result = /datum/reagent/colored_hair_dye/purple
+	result_amount = 1
+	required_reagents = list(
+		/datum/reagent/hair_dye = 1,
+		/datum/reagent/crayon_dust/purple = 1
+	)
+
+/datum/chemical_reaction/colored_hair_dye/grey
+	name = "Grey Hair Dye"
+	result = /datum/reagent/colored_hair_dye/grey
+	result_amount = 1
+	required_reagents = list(
+		/datum/reagent/hair_dye = 1,
+		/datum/reagent/crayon_dust/grey = 1
+	)
+
+/datum/chemical_reaction/colored_hair_dye/brown
+	name = "Brown Hair Dye"
+	result = /datum/reagent/colored_hair_dye/brown
+	result_amount = 1
+	required_reagents = list(
+		/datum/reagent/hair_dye = 1,
+		/datum/reagent/crayon_dust/brown = 1
+	)
+
+/datum/chemical_reaction/colored_hair_dye/black
+	name = "Black Hair Dye"
+	result = /datum/reagent/colored_hair_dye/black
+	result_amount = 3
+	required_reagents = list(
+		/datum/reagent/colored_hair_dye/red = 1,
+		/datum/reagent/colored_hair_dye/blue = 1,
+		/datum/reagent/colored_hair_dye/yellow = 1
+	)
+
+/datum/chemical_reaction/colored_hair_dye/chaos
+	name = "Chaos Hair Dye"
+	result = /datum/reagent/colored_hair_dye/chaos
+	result_amount = 2
+	required_reagents = list(
+		/datum/reagent/hair_dye = 1,
+		/datum/reagent/mutagen = 1
+	)
+
+/datum/chemical_reaction/colored_hair_dye/light_brown
+	name = "Light Brown Hair Dye"
+	result = /datum/reagent/colored_hair_dye/light_brown
+	result_amount = 1
+	required_reagents = list(
+		/datum/reagent/colored_hair_dye/brown = 1
+	)
+	catalysts = list(
+		/datum/reagent/enzyme = 1
+	)
+
+/datum/chemical_reaction/colored_hair_dye/white
+	name = "White Hair Dye"
+	result = /datum/reagent/colored_hair_dye/white
+	result_amount = 1
+	required_reagents = list(
+		/datum/reagent/colored_hair_dye/grey = 1
+	)
+	catalysts = list(
+		/datum/reagent/enzyme = 1
+	)

@@ -789,7 +789,7 @@
 /datum/sprite_accessory/hair/regmohawk2
 	name = "Regulation Mohawk 2"
 	icon_state = "hair_mohawk_shavedback"
-	
+
 /datum/sprite_accessory/hair/mohawkshaved4
 	name = "Low Mohawk"
 	icon_state = "hair_mohawk_shavedbacklong"
@@ -829,7 +829,7 @@
 
 /datum/sprite_accessory/hair/baldingboddicker
 	name = "Balding Boddicker"
-	icon_state = "hair_balding_boddicker"	
+	icon_state = "hair_balding_boddicker"
 
 /datum/sprite_accessory/hair/librarianbun
 	name = "Librarian Bun"
@@ -900,3 +900,8 @@
 /datum/sprite_accessory/hair/wheeler
 	name = "Wheeler"
 	icon_state = "hair_wheeler"
+
+/datum/sprite_accessory/hair/mullethawk
+	name = "Mullet-Hawk"
+	icon_state = "hair_mullethawk"
+	gender = MALE

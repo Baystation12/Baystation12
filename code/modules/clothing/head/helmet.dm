@@ -219,3 +219,22 @@
 	desc = "A helmet built for use by a Skrell. This one appears to be fairly standard and reliable."
 	icon_state = "helmet_skrell"
 	valid_accessory_slots = null
+
+
+/obj/item/clothing/head/helmet/pirate
+	name = "pirate hat"
+	desc = "Yarr."
+	icon_state = "pirate"
+	item_state = "pirate"
+	armor = list(
+		melee = ARMOR_MELEE_MAJOR,
+		bullet = ARMOR_BALLISTIC_PISTOL,
+		laser = ARMOR_LASER_SMALL,
+		energy = ARMOR_ENERGY_MINOR,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SMALL,
+		rad = ARMOR_RAD_MINOR
+	)
+	flags_inv = BLOCKHAIR
+	body_parts_covered = 0
+	siemens_coefficient = 0.9

@@ -56,6 +56,9 @@
 	current_grab.process(src)
 
 /obj/item/grab/attack_self(mob/user)
+	if (!assailant)
+		return
+
 	switch(assailant.a_intent)
 		if(I_HELP)
 			downgrade()
@@ -194,7 +197,7 @@
 
 // Returns the organ of the grabbed person that the grabber is targeting
 /obj/item/grab/proc/get_targeted_organ()
-	return (affecting.get_organ(target_zone))
+	return (affecting?.get_organ(target_zone))
 
 /obj/item/grab/proc/resolve_item_attack(var/mob/living/M, var/obj/item/I, var/target_zone)
 	if((M && ishuman(M)) && I)
@@ -273,6 +276,15 @@
 
 /obj/item/grab/proc/reset_position()
 	current_grab.reset_position(src)
+
+/obj/item/grab/proc/has_hold_on_organ(obj/item/organ/external/O)
+	if (!O)
+		return FALSE
+
+	if (get_targeted_organ() == O)
+		return TRUE
+
+	return FALSE
 
 /*
 	This section is for the simple procs used to return things from current_grab.

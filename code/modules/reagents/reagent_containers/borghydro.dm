@@ -75,7 +75,7 @@
 
 		if(M.reagents)
 			var/datum/reagent/R = reagent_ids[mode]
-			var/should_admin_log = R.should_admin_log
+			var/should_admin_log = initial(R.should_admin_log)
 			var/t = min(amount_per_transfer_from_this, reagent_volumes[reagent_ids[mode]])
 			M.reagents.add_reagent(reagent_ids[mode], t)
 			reagent_volumes[reagent_ids[mode]] -= t

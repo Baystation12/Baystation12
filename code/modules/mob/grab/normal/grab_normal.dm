@@ -72,6 +72,10 @@
 	G.attacking = 1
 
 	if(do_after(assailant, action_cooldown - 1, affecting))
+		if (!G.has_hold_on_organ(O))
+			to_chat(assailant, SPAN_WARNING("You must keep a hold on your target to jointlock!"))
+			return
+
 
 		G.attacking = 0
 		G.action_used()
@@ -105,6 +109,10 @@
 		G.attacking = 1
 
 		if(do_after(assailant, action_cooldown - 1, affecting))
+
+			if (!G.has_hold_on_organ(O))
+				to_chat(assailant, SPAN_WARNING("You must keep a hold on your target to dislocate!"))
+				return
 
 			G.attacking = 0
 			G.action_used()

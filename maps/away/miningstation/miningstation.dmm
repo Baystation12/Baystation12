@@ -7986,6 +7986,10 @@
 /obj/structure/reagent_dispensers/water_cooler,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/bridge)
+"zS" = (
+/obj/effect/shuttle_landmark/nav_miningstation/exterior,
+/turf/space,
+/area/space)
 "AD" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -8291,6 +8295,10 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
+"JX" = (
+/obj/effect/shuttle_landmark/nav_miningstation/hangar,
+/turf/simulated/floor/plating,
+/area/miningstation/hangar)
 "Kd" = (
 /obj/machinery/light{
 	dir = 8;
@@ -18519,7 +18527,7 @@ aw
 aw
 aw
 aw
-aw
+JX
 aw
 aw
 aw
@@ -26105,7 +26113,7 @@ aa
 aa
 aa
 aa
-aa
+zS
 aa
 aa
 aa
