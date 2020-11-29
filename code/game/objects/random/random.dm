@@ -1070,8 +1070,8 @@ something, make sure it's not in one of the other lists.*/
 /obj/random/hostile
 	name = "Random Hostile Mob"
 	desc = "This is a random hostile mob."
-	icon = 'icons/mob/amorph.dmi'
-	icon_state = "standing"
+	icon = 'icons/mob/crow.dmi'
+	icon_state = "crow"
 	spawn_nothing_percentage = 80
 
 obj/random/hostile/spawn_choices()
