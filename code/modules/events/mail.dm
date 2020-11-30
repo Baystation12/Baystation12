@@ -39,7 +39,7 @@
 	// Nobody got any mail :(
 	if(!to_receive.len)
 		log_debug("Nobody got any mail. Aborting event.")
-		kill()
+		kill(TRUE)
 
 /datum/event/mail/announce()
 	command_announcement.Announce("A batch of mail adressed to the crew of \the [location_name()] has arrived at the sorting office and will arrive on the next available supply shuttle.", pick("Major Bill's Shipping", "Flefingbridge Transport", "SolX Freight", "QuiCo. Mailing Services"), zlevels = affecting_z)

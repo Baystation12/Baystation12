@@ -9,7 +9,7 @@
 		for(var/j = 0 to drons)
 			if(!LAZYLEN(spots))
 				continue
-			
+
 			var/turf/T = pick_n_take(spots)
 			new/mob/living/simple_animal/hostile/rogue_drone(T)
 
@@ -31,12 +31,12 @@
 	var/area/location = pick_area(list(/proc/is_not_space_area, /proc/is_station_area, /proc/is_maint_area))
 	if(!location)
 		log_debug("Drone infestation failed to find a viable area. Aborting.")
-		kill()
+		kill(TRUE)
 		return
 
 	var/list/dron_turfs = get_area_turfs(location, list(/proc/not_turf_contains_dense_objects, /proc/IsTurfAtmosSafe))
 	if(!dron_turfs.len)
 		log_debug("Drone infestation failed to find viable turfs in \the [location].")
-		kill()
+		kill(TRUE)
 		return
 	return dron_turfs
