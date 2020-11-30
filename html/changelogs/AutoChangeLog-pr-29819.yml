@@ -1,0 +1,4 @@
+author: "Mucker"
+delete-after: True
+changes: 
+  - tweak: "Events that fail to run will have a new event run in its place."
