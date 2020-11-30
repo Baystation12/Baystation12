@@ -14,6 +14,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 	var/target_mob_count_major = 55 //the target mob counts to choose from, based on severity (Major or Moderate)
 	var/target_mob_count_moderate = 35
 	var/datum/mob_list/chosen_mob_list //the chosen list of mobs we will pick from when spawning, also based on severity
+	var/original_severity
 
 /datum/mob_list
 	var/list/mobs = list()
@@ -79,7 +80,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 /datum/event/exo_awakening/setup()
 	announceWhen = rand(15, 45)
 	affecting_z = list()
-
+	original_severity = severity //incase we need to re-roll a different event.
 	if (severity == EVENT_LEVEL_MAJOR || prob(25))
 		severity = EVENT_LEVEL_MAJOR //if original event was moderate, this will need updating
 
@@ -125,8 +126,8 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 		torch_players_present = FALSE
 
 	if (!torch_players_present)
-		log_and_message_admins("Failed to start the Exoplanet Awakening event, not enough players present on planetary surface.")
-		kill()
+		severity = original_severity
+		kill(TRUE)
 		return
 
 	for (var/mob/M in players_on_site)
