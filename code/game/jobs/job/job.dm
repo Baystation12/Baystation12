@@ -209,7 +209,7 @@
 					if(debug_pop_balance)	to_debug_listeners("Faction: Balance checks active...")
 
 					//work out how many players there are in total
-					var/total_faction_players = 0
+					var/total_faction_players = 1 //1, for ourselves.
 					for(var/faction_type in ticker.mode.faction_balance)
 						var/datum/faction/F = GLOB.factions_by_type[faction_type]
 						total_faction_players += F.players_alive()
