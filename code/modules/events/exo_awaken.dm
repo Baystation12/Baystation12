@@ -2,14 +2,13 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 
 /datum/event/exo_awakening
 	announceWhen	= 45
-	endWhen			= 75
+	endWhen			= 45
 	var/no_show = FALSE //set to true once we hit the target mob count of spawned mobs so we stop spawning
 	var/spawned_mobs //total count of all spawned mobs by the event
 	var/list/exoplanet_areas //all possible exoplanet areas the event can take place on
 	var/area/chosen_area //the single chosen exoplanet to have the event occur on
 	var/obj/effect/overmap/visitable/sector/exoplanet/chosen_planet
 	var/list/players_on_site = list() //a list of the players on the planet
-	var/players_on_site_count = 0 //how many players are currently on the planet
 	var/required_players_count = 2 //how many players we need present on the planet for the event to start
 	var/target_mob_count = 0 //overall target mob count, set to nonzero during setup
 	var/target_mob_count_major = 55 //the target mob counts to choose from, based on severity (Major or Moderate)
@@ -20,6 +19,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 	var/list/mobs = list()
 	var/sound/arrival_sound
 	var/arrival_message
+	var/limit
 
 /datum/mob_list/major/meat
 	mobs = list(
@@ -32,16 +32,18 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 			)
 	arrival_message = "A blood curdling howl echoes through the air as the planet starts to shake violently. Something has woken up..."
 	arrival_sound   = 'sound/ambience/meat_monster_arrival.ogg'
+	limit = 55
 
 /datum/mob_list/major/spiders
 	mobs = list(
-				list(/mob/living/simple_animal/hostile/giant_spider/guard, 100),
-				list(/mob/living/simple_animal/hostile/giant_spider/hunter, 100),
-				list(/mob/living/simple_animal/hostile/giant_spider/nurse, 100),
-				list(/mob/living/simple_animal/hostile/giant_spider/spitter, 100)
+				list(/mob/living/simple_animal/hostile/giant_spider/guard, 85),
+				list(/mob/living/simple_animal/hostile/giant_spider/hunter, 75),
+				list(/mob/living/simple_animal/hostile/giant_spider/nurse, 60),
+				list(/mob/living/simple_animal/hostile/giant_spider/spitter, 55)
 			)
 	arrival_message = "The planet rumbles as you begin to feel an uncountable number of eyes suddenly staring at you from all around."
 	arrival_sound   = 'sound/effects/wind/wind_3_1.ogg'
+	limit = 25
 
 /datum/mob_list/major/machines
 	mobs = list(
@@ -52,6 +54,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 			)
 	arrival_message = "The ground beneath you rumbles as you hear the sounds of machinery from all around you..."
 	arrival_sound   = 'sound/effects/wind/wind_3_1.ogg'
+	limit = 45
 
 /datum/mob_list/moderate/spiders
 	mobs = list(
@@ -62,6 +65,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 			)
 	arrival_message = "You feel uneasy as you hear something skittering about..."
 	arrival_sound = 'sound/effects/wind/wind_3_1.ogg'
+	limit = 15
 
 /datum/mob_list/moderate/machines
 	mobs = list(
@@ -70,6 +74,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 			)
 	arrival_message = "You hear the distant sound of creaking metal joints, what is that?"
 	arrival_sound = 'sound/effects/wind/wind_3_1.ogg'
+	limit = 25
 
 /datum/event/exo_awakening/setup()
 	announceWhen = rand(15, 45)
@@ -79,16 +84,15 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 		severity = EVENT_LEVEL_MAJOR //if original event was moderate, this will need updating
 
 		chosen_mob_list = pick(typesof(/datum/mob_list/major) - /datum/mob_list/major)
-		target_mob_count = target_mob_count_major
 	else
 		chosen_mob_list = pick(typesof(/datum/mob_list/moderate) - /datum/mob_list/moderate)
-		target_mob_count = target_mob_count_moderate
 
 	for (var/area/A in world)
 		if (A.planetary_surface)
 			LAZYADD(exoplanet_areas, A)
 
 	chosen_mob_list = new chosen_mob_list
+	target_mob_count = chosen_mob_list.limit
 	endWhen += severity*25
 
 /datum/event/exo_awakening/proc/count_mobs()
@@ -101,14 +105,13 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 		no_show = FALSE
 
 /datum/event/exo_awakening/start()
-	var/list/players_on_site = list()
 	var/torch_players_present = FALSE
 
 	for (var/area/A in exoplanet_areas)
 		players_on_site = list() //make sure the list is empty before checking the next planet.
 		for (var/mob/M in GLOB.player_list)
 			if (M.stat != DEAD && M.z == A.z)
-				LAZYADD(players_on_site, M.client)
+				LAZYADD(players_on_site, M)
 
 				if(get_crewmember_record(M.real_name || M.name)) //event is geared at torch/exploration, only valid if they're around.
 					torch_players_present = TRUE
@@ -116,8 +119,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 					chosen_planet = map_sectors["[A.z]"]
 					LAZYADD(affecting_z, A.z)
 
-		players_on_site_count = players_on_site.len
-		if (torch_players_present && players_on_site_count >= required_players_count)
+		if (torch_players_present && players_on_site.len >= required_players_count)
 			break
 
 		torch_players_present = FALSE
@@ -127,13 +129,13 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 		kill()
 		return
 
-	for (var/client/C in players_on_site)
+	for (var/mob/M in players_on_site)
 		if (severity > EVENT_LEVEL_MODERATE)
-			to_chat(C, SPAN_DANGER(chosen_mob_list.arrival_message))
+			to_chat(M, SPAN_DANGER(chosen_mob_list.arrival_message))
 		else
-			to_chat(C, SPAN_WARNING(chosen_mob_list.arrival_message))
+			to_chat(M, SPAN_WARNING(chosen_mob_list.arrival_message))
 
-		sound_to(C, chosen_mob_list.arrival_sound)
+		sound_to(M, chosen_mob_list.arrival_sound)
 
 
 /datum/event/exo_awakening/announce()
@@ -148,7 +150,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 
 /datum/event/exo_awakening/tick()
 	count_mobs()
-	if(no_show && prob(95))
+	if(no_show && prob(98))
 		return
 
 	spawn_mob(chosen_area)
@@ -191,7 +193,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 				LAZYADD(GLOB.exo_event_mob_count, M)
 				chosen_planet.adapt_animal(M, FALSE)
 
-			spawned_mobs ++
+			spawned_mobs++
 		I++
 		if(no_show)
 			break
@@ -206,4 +208,8 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 
 /datum/event/exo_awakening/end()
 	QDEL_NULL(chosen_mob_list)
-	log_debug("Exoplanet Awakening event spawned [spawned_mobs] mobs.")
+	log_debug("Exoplanet Awakening event spawned [spawned_mobs] mobs. It was a level [severity] out of 3 severity.")
+
+	for (var/mob/M in players_on_site)
+		if (M && M.z == chosen_area.z)
+			to_chat(M, SPAN_NOTICE("The planet grows calm, the ground no longer heaving its horrors to the surface."))
