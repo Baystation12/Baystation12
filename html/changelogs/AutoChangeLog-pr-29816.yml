@@ -1,0 +1,6 @@
+author: "Mucker"
+delete-after: True
+changes: 
+  - tweak: "Exo event: now runs for a shorter amount of time."
+  - tweak: "Exo event: spiders, if rolled, will now spawn less frequently and to a lesser amount."
+  - tweak: "Exo event: added a message thats displayed to all players on the planet when the event ends."
