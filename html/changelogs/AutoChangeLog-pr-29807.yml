@@ -1,4 +1,0 @@
-author: "Mucker"
-delete-after: True
-changes: 
-  - bugfix: "Fixes the backup server exploit where an infinite number of data drives could be retrieved from them."
