@@ -31,6 +31,14 @@
 
 	var/obj/item/wrapped = null // Item currently being held.
 
+// Ensures any removed items are actually removed from the gripper
+/obj/item/forceMove(atom/dest)
+	if (istype(loc, /obj/item/weapon/gripper))
+		var/obj/item/weapon/gripper/gripper = loc
+		gripper.wrapped = null
+
+	. = ..(dest)
+
 // VEEEEERY limited version for mining borgs. Basically only for swapping cells and upgrading the drills.
 /obj/item/weapon/gripper/miner
 	name = "drill maintenance gripper"
@@ -404,7 +412,7 @@
 				to_chat(user, SPAN_NOTICE("The amount of rods is too high to fit into your decompiler."))
 				continue
 			if(metal)
-				metal.add_charge(500*amt)				
+				metal.add_charge(500*amt)
 		else if(istype(W,/obj/item/weapon/material/shard))
 			if(glass)
 				glass.add_charge(1000)

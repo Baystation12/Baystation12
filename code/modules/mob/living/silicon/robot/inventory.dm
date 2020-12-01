@@ -3,7 +3,11 @@
 
 //Returns the thing in our active hand (whatever is in our active module-slot, in this case)
 /mob/living/silicon/robot/get_active_hand()
-	return module_active
+	. = module_active
+	if (istype(., /obj/item/weapon/gripper))
+		var/obj/item/weapon/gripper/gripper = .
+		if (gripper.wrapped)
+			. = gripper.wrapped
 
 /*-------TODOOOOOOOOOO--------*/
 

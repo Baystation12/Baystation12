@@ -79,10 +79,7 @@
 	if (!W) return
 
 	// Handle dismantling or placing things on the table from here on.
-	if(isrobot(user))
-		return
-
-	if(W.loc != user) // This should stop mounted modules ending up outside the module.
+	if(isrobot(user) && W.loc == user)
 		return
 
 	if(istype(W, /obj/item/weapon/melee/energy/blade) || istype(W,/obj/item/psychic_power/psiblade/master/grand/paramount))
