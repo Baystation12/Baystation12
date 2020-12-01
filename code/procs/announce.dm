@@ -47,7 +47,7 @@
 				sound_to(M, message_sound)
 
 	if(do_newscast)
-		NewsCast(message, message_title)
+		NewsCast(message, message_title, zlevels)
 
 	if(log)
 		log_say("[key_name(usr)] has made \a [announcement_type]: [message_title] - [message] - [announcer]")
@@ -81,7 +81,7 @@ datum/announcement/priority/security/FormMessage(message as text, message_title 
 	. = "<font size=4 color='red'>[message_title]</font>"
 	. += "<br><font color='red'>[message]</font>"
 
-datum/announcement/proc/NewsCast(message as text, message_title as text)
+datum/announcement/proc/NewsCast(message as text, message_title as text, zlevels)
 	if(!newscast)
 		return
 
@@ -91,7 +91,7 @@ datum/announcement/proc/NewsCast(message as text, message_title as text)
 	news.message = message
 	news.message_type = announcement_type
 	news.can_be_redacted = 0
-	announce_newscaster_news(news)
+	announce_newscaster_news(news, zlevels)
 
 /proc/GetNameAndAssignmentFromId(var/obj/item/weapon/card/id/I)
 	// Format currently matches that of newscaster feeds: Registered Name (Assigned Rank)

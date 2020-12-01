@@ -23,4 +23,5 @@
 	if(!deposit_success)
 		body += "<br>Unfortunately, we were unable to verify the account details provided, so we were unable to transfer the money. In order to have your winnings re-sent, send a cheque containing a processing fee of 5000 [GLOB.using_map.local_currency_name] to the ND 'Stellar Slam' office on the Nyx gateway with your updated details."
 
-	news_network.SubmitArticle(body, author, channel, null, 1)
+	var/datum/feed_network/torch_network = news_network[1]
+	torch_network.SubmitArticle(body, author, channel, null, 1)
