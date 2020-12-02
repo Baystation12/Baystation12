@@ -1,0 +1,4 @@
+author: "hermaplusplus"
+delete-after: True
+changes: 
+  - bugfix: "Fixed nabbers (GAS) joining with hostile stance by default"
