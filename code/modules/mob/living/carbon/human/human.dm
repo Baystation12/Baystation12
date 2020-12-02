@@ -1557,6 +1557,8 @@
 // output for machines ^	 ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ output for people
 
 /mob/living/carbon/human/proc/pulse()
+	if (stat == DEAD)
+		return PULSE_NONE
 	var/obj/item/organ/internal/heart/H = internal_organs_by_name[BP_HEART]
 	return H ? H.pulse : PULSE_NONE
 
