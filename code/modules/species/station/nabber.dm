@@ -326,8 +326,7 @@
 
 /datum/species/nabber/handle_post_spawn(var/mob/living/carbon/human/H)
 	..()
-	if(H.species.get_bodytype() == !SPECIES_MONARCH_QUEEN)
-		return H.pulling_punches = TRUE
+	return H.pulling_punches = TRUE
 
 /datum/species/nabber/has_fine_manipulation(var/mob/living/carbon/human/H)
 	if(H.species.get_bodytype() == SPECIES_MONARCH_QUEEN)
