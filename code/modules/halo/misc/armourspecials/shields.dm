@@ -80,7 +80,10 @@
 	var/armour_state = SHIELD_IDLE
 	var/tick_recharge = 40
 	var/intercept_chance = 100
-	var/eva_mode_active = 0
+	var/eva_mode_active = FALSE
+	var/shields_recharge_sound = 'code/modules/halo/sounds/shields/SpartanRecharge.ogg'
+	var/shields_low_sound = 'code/modules/halo/sounds/shields/SpartanLow.ogg'
+	var/shields_down_sound = 'code/modules/halo/sounds/shields/SpartanDown.ogg'
 
 /datum/armourspecials/shields/New(var/obj/item/clothing/suit/armor/special/c) //Needed the type path for typecasting to use the totalshields var.
 	. = ..()
@@ -136,10 +139,10 @@
 			user.visible_message("<span class = 'warning'>[user]'s shields fail to fully absorb the melee attack!</span>")
 			spawn(2)
 				dam_source.force = original_dam
-			return 0
-		return 1
+			return FALSE
+		return TRUE
 	else
-		return 0
+		return FALSE
 
 /datum/armourspecials/shields/handle_shield(var/mob/living/m,damage,atom/damage_source)
 	. = ..()
@@ -171,18 +174,25 @@
 			update_overlay("shield_overlay_damage")
 			armour_state = SHIELD_DAMAGE
 
+			var/oldstrength = shieldstrength 
+
 			//apply the damage
 			shieldstrength -= damage
 
 			//chat log output
 			if(shieldstrength <= 0)
 				shieldstrength = 0
-				playsound(user, 'code/modules/halo/sounds/Shields_Gone.ogg',100,0)
+				playsound(user, shields_down_sound, 100, 0)
 				user.visible_message("<span class ='warning'>[user]'s [connectedarmour] shield collapses!</span>","<span class ='userdanger'>Your [connectedarmour] shields fizzle and spark, losing their protective ability!</span>")
 				if(!shield_gate)
 					. = 0
+				return
 			else
-				user.visible_message("<span class='warning'>[user]'s [connectedarmour] shields absorbs the force of the impact</span>","<span class = 'notice'>Your [connectedarmour] shields absorbs the force of the impact</span>")
+				user.visible_message("<span class='warning'>[user]'s [connectedarmour] shields absorbs the force of the impact.</span>","<span class = 'notice'>Your [connectedarmour] shields absorbs the force of the impact.</span>")
+			
+			//If we jumped from at least 20% shields to below 20% shields and they haven't collapsed yet
+			if((oldstrength / totalshields) >= 0.2 && (shieldstrength / totalshields) < 0.2 && shieldstrength > 0)
+				playsound(user, shields_low_sound, 100, 0)
 
 /datum/armourspecials/shields/proc/reset_recharge(var/extra_delay = 0)
 	//begin counting down the recharge
@@ -220,7 +230,7 @@
 
 		//begin this recharge cycle
 		if(armour_state == SHIELD_PROCESS)
-			playsound(user, 'code/modules/halo/sounds/Shields_Recharge.ogg',100,0)
+			playsound(user, shields_recharge_sound,100,0)
 			if(user)
 				user.visible_message("<span class = 'notice'>A faint hum emanates from [user]'s [connectedarmour].</span>")
 			else
@@ -251,7 +261,16 @@
 	shieldoverlay = new /obj/effect/overlay/shields/spartan
 	shield_recharge_delay = 8 SECONDS
 
+/datum/armourspecials/shields/elite
+	shields_recharge_sound = 'code/modules/halo/sounds/shields/EliteRecharge.ogg'
+	shields_low_sound = 'code/modules/halo/sounds/shields/EliteLow.ogg'
+	shields_down_sound = 'code/modules/halo/sounds/shields/EliteDown.ogg'
+
 /datum/armourspecials/shields/unggoy
+	shields_recharge_sound = 'code/modules/halo/sounds/shields/EliteRecharge.ogg'
+	shields_low_sound = 'code/modules/halo/sounds/shields/EliteLow.ogg'
+	shields_down_sound = 'code/modules/halo/sounds/shields/EliteDown.ogg'
+
 	shield_recharge_delay = 7.5 SECONDS //Their shields are usually very low capacity.
 	shieldoverlay = new /obj/effect/overlay/shields/unggoy
 

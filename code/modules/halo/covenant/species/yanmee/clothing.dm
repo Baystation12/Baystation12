@@ -58,13 +58,13 @@
 /obj/item/clothing/suit/armor/special/yanmee/ultra
 	icon_state = "ultra_harness"
 	item_state = "ultra_harness"
-	specials = list(/datum/armourspecials/shields)
+	specials = list(/datum/armourspecials/shields/elite)
 	totalshields = 20
 
 /obj/item/clothing/suit/armor/special/yanmee/leader
 	icon_state = "leader_harness"
 	item_state = "leader_harness"
-	specials = list(/datum/armourspecials/shields)
+	specials = list(/datum/armourspecials/shields/elite)
 	totalshields = 40
 
 #undef YANMEE_ICON

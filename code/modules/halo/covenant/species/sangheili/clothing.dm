@@ -42,7 +42,7 @@
 	icon_state = null
 	sprite_sheets = list("Sangheili" = SANGHEILI_ARMOUR_ICON)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
-	specials = list(/datum/armourspecials/shields,/datum/armourspecials/shieldmonitor/sangheili)
+	specials = list(/datum/armourspecials/shields/elite,/datum/armourspecials/shieldmonitor/sangheili)
 	armor = list(melee = 55, bullet = 40, laser = 55, energy = 50, bomb = 40, bio = 25, rad = 25)//ODST tier, but 5 lower bullet due to having shields.
 	armor_thickness_modifiers = list()
 	unacidable = 1
@@ -354,7 +354,7 @@
 	icon_state = "specops_chest_obj"
 	item_state = "specops_chest"
 	totalshields = 150
-	specials = list(/datum/armourspecials/shields,/datum/armourspecials/shieldmonitor/sangheili,/datum/armourspecials/cloaking)
+	specials = list(/datum/armourspecials/shields/elite,/datum/armourspecials/shieldmonitor/sangheili,/datum/armourspecials/cloaking)
 	action_button_name = "Toggle Active Camouflage"
 
 /obj/item/clothing/shoes/sangheili/specops
