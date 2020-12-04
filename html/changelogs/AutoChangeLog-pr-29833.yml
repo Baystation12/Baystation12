@@ -1,0 +1,4 @@
+author: "Mucker"
+delete-after: True
+changes: 
+  - rscadd: "Adds the 'Show Job in Lobby' option to Preferences, allowing players to choose if their high-priority job is shown to everyone or not while readied."
