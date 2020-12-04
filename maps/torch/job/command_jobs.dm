@@ -333,7 +333,7 @@
 	                    SKILL_COMBAT     = SKILL_BASIC,
 	                    SKILL_WEAPONS    = SKILL_ADEPT)
 
-	max_skill = list(	SKILL_PILOT        = SKILL_ADEPT, 
+	max_skill = list(	SKILL_PILOT        = SKILL_ADEPT,
 	                    SKILL_COMBAT       = SKILL_EXPERT,
 	                    SKILL_WEAPONS      = SKILL_EXPERT,
 	                    SKILL_CONSTRUCTION = SKILL_MAX,
@@ -346,8 +346,7 @@
 	access = list(access_security, access_medical, access_engine, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_teleporter, access_eva, access_bridge, access_all_personal_lockers, access_janitor,
 			            access_kitchen, access_cargo, access_RC_announce, access_keycard_auth, access_aquila, access_guppy_helm,
-			            access_solgov_crew, access_gun, access_expedition_shuttle, access_guppy, access_senadv, access_hangar, access_emergency_armory,
-			            access_torch_fax)
+			            access_solgov_crew, access_gun, access_expedition_shuttle, access_guppy, access_senadv, access_hangar, access_torch_fax)
 
 	software_on_spawn = list(/datum/computer_file/program/camera_monitor,
 							 /datum/computer_file/program/reports)
