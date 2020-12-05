@@ -12,7 +12,7 @@
 	apc_test_exempt_areas = list(
 		/area/map_template/colony2/external = NO_SCRUBBER|NO_VENT
 	)
-	spawn_weight = 0.33
+	spawn_weight = 0.4
 
 /decl/submap_archetype/playablecolony2
 	descriptor = "landed colony ship"
@@ -22,7 +22,7 @@
 	title = "Ship Colonist"
 	supervisors = "the trust of your fellow Colonists"
 	info = "You are a Colonist, living on the rim of explored, let alone inhabited, space in a recently landed colony ship."
-	total_positions = 4
+	total_positions = 3
 	outfit_type = /decl/hierarchy/outfit/job/colonist2
 
 /decl/hierarchy/outfit/job/colonist2
