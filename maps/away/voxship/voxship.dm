@@ -4,92 +4,6 @@
 #include "voxship_jobs.dm"
 #include "voxship_radio.dm"
 
-/datum/map_template/ruin/away_site/voxship
-	name = "Vox Base"
-	id = "awaysite_voxship"
-	description = "Vox ship and base."
-	suffixes = list("voxship/voxship-1.dmm")
-	cost = 0.5
-	shuttles_to_initialise = list(/datum/shuttle/autodock/overmap/vox_shuttle)
-	area_usage_test_exempted_root_areas = list(/area/voxship)
-	ban_ruins = list(/datum/map_template/ruin/away_site/scavship)
-	spawn_weight = 0.33
-
-/obj/effect/overmap/visitable/sector/vox_base
-	name = "large asteroid"
-	desc = "Sensor array detects a large asteroid."
-	in_space = 1
-	icon_state = "meteor4"
-	hide_from_reports = TRUE
-	initial_generic_waypoints = list(
-		"nav_voxbase_1"
-	)
-
-	initial_restricted_waypoints = list(
-		"Vox Shuttle" = list("nav_hangar_vox")
-	)
-
-/obj/effect/shuttle_landmark/nav_voxbase/nav1
-	name = "Northest of Large Asteroid"
-	landmark_tag = "nav_voxbase_1"
-
-/datum/shuttle/autodock/overmap/vox_shuttle
-	name = "Vox Shuttle"
-	move_time = 10
-	shuttle_area = list(/area/voxship/ship)
-	dock_target = "vox_shuttle"
-	current_location = "nav_hangar_vox"
-	landmark_transition = "nav_transit_vox"
-	range = 1
-	fuel_consumption = 4
-	ceiling_type = /turf/simulated/floor/shuttle_ceiling
-	skill_needed = SKILL_NONE
-	defer_initialisation = TRUE
-
-/obj/effect/shuttle_landmark/vox_base/hangar/vox_shuttle
-	name = "Vox Ship Docked"
-	landmark_tag = "nav_hangar_vox"
-
-/obj/effect/shuttle_landmark/transit/vox_base/vox_shuttle
-	name = "In transit"
-	landmark_tag = "nav_transit_vox"
-
-/obj/machinery/computer/shuttle_control/explore/vox_shuttle
-	name = "shuttle control console"
-	shuttle_tag = "Vox Shuttle"
-
-/obj/effect/overmap/visitable/ship/landable/vox
-	name = "Unknown Signature"
-	shuttle = "Vox Shuttle"
-	fore_dir = NORTH
-	vessel_size = SHIP_SIZE_SMALL
-
-/obj/effect/submap_landmark/joinable_submap/voxship
-	archetype = /decl/submap_archetype/derelict/voxship
-
-/obj/effect/submap_landmark/joinable_submap/voxship/New()
-	var/datum/language/vox/pidgin = all_languages[LANGUAGE_VOX]
-	name = "[pidgin.get_random_name()]-[pidgin.get_random_name()]"
-	..()
-
-/decl/webhook/submap_loaded/vox
-	id = WEBHOOK_SUBMAP_LOADED_VOX
-
-/decl/submap_archetype/derelict/voxship
-	descriptor = "Shoal forward base"
-	map = "Vox Base"
-	crew_jobs = list(
-		/datum/job/submap/voxship_vox,
-		/datum/job/submap/voxship_vox/doc,
-		/datum/job/submap/voxship_vox/engineer,
-		/datum/job/submap/voxship_vox/quill
-	)
-	whitelisted_species = list(SPECIES_VOX)
-	blacklisted_species = null
-	call_webhook = WEBHOOK_SUBMAP_LOADED_VOX
-
-//~~~~~~~~~~~~~~~~~~~~~~~~~~This is where the second site's code starts ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 /datum/map_template/ruin/away_site/scavship
 	name = "Vox Scavenger Ship"
 	id = "awaysite_voxship2"
@@ -97,7 +11,7 @@
 	suffixes = list("voxship/voxship-2.dmm")
 	cost = 0.5
 	shuttles_to_initialise = list(/datum/shuttle/autodock/overmap/vox_ship, /datum/shuttle/autodock/overmap/vox_lander)
-	ban_ruins = list(/datum/map_template/ruin/away_site/voxship)
+	area_usage_test_exempted_root_areas = list(/area/voxship)
 	spawn_weight = 0.33
 
 /obj/effect/overmap/visitable/sector/vox_scav_ship
@@ -183,7 +97,7 @@
 	vessel_size = SHIP_SIZE_TINY
 
 /obj/effect/submap_landmark/joinable_submap/voxship/scavship
-	archetype = /decl/submap_archetype/derelict/voxship/scavship
+	archetype = /decl/submap_archetype/derelict/voxship
 	movable_flags = MOVABLE_FLAG_EFFECTMOVE
 
 //shuttle APC terminal kept being deleted by z level changes
@@ -199,7 +113,7 @@
 /decl/webhook/submap_loaded/vox
 	id = WEBHOOK_SUBMAP_LOADED_VOX
 
-/decl/submap_archetype/derelict/voxship/scavship
+/decl/submap_archetype/derelict/voxship
 	descriptor = "Shoal Scavenger Vessel"
 	map = "Vox Scavenger Ship"
 	crew_jobs = list(
