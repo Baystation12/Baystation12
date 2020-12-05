@@ -47,8 +47,9 @@
 		/obj/item/device/holowarrant,
 		/obj/item/weapon/folder/blue,
 		/obj/item/weapon/material/knife/folding/swiss/officer,
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/captain, /obj/item/weapon/storage/backpack/satchel/cap)),
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/captain, /obj/item/weapon/storage/backpack/messenger/com))
+		/obj/item/weapon/storage/backpack/satchel/cap,
+		/obj/item/clothing/suit/armor/pcarrier/medium/command,
+		/obj/item/clothing/head/helmet/solgov/command,
 	)
 
 /obj/structure/closet/secure_closet/XO
@@ -74,9 +75,10 @@
 		/obj/item/device/holowarrant,
 		/obj/item/weapon/folder/blue,
 		/obj/item/weapon/material/knife/folding/swiss/officer,
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/captain, /obj/item/weapon/storage/backpack/satchel/cap)),
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/captain, /obj/item/weapon/storage/backpack/messenger/com)),
-		/obj/item/weapon/storage/box/imprinting
+		/obj/item/weapon/storage/backpack/satchel/cap,
+		/obj/item/weapon/storage/box/imprinting,
+		/obj/item/clothing/suit/armor/pcarrier/medium/command,
+		/obj/item/clothing/head/helmet/solgov/command
 	)
 
 /obj/structure/closet/secure_closet/sea
