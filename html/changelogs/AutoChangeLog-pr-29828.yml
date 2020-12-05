@@ -1,7 +1,0 @@
-author: "juxtaposed9930"
-delete-after: True
-changes: 
-  - tweak: "Exoplanets have more ruins spawning on them."
-  - tweak: "BigColony is slightly less common, takes more budget, and has two less jobslots, to four from six."
-  - tweak: "SmallColony has one less jobslot, from four to three, and is slightly more common."
-  - tweak: "The crashed pod is slightly less common, and takes up less of the exoplanet ruin budget."
