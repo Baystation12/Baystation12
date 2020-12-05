@@ -17178,6 +17178,8 @@
 /obj/item/device/flashlight/flare,
 /obj/item/device/flashlight/flare,
 /obj/effect/floor_decal/industrial/outline/grey,
+/obj/item/weapon/airlock_brace,
+/obj/item/weapon/airlock_brace,
 /obj/item/weapon/storage/box/handcuffs,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
@@ -18131,6 +18133,13 @@
 /obj/machinery/reagent_temperature/cooler,
 /turf/simulated/floor/tiled/dark,
 /area/rnd/misc_lab)
+"gdV" = (
+/obj/item/device/radio/intercom/department/security{
+	dir = 8;
+	pixel_x = 21
+	},
+/turf/simulated/floor/tiled/dark,
+/area/security/armoury)
 "geb" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
@@ -20949,6 +20958,12 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
+"jPS" = (
+/obj/structure/bed/chair/comfy/red{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/security/armoury)
 "jPY" = (
 /obj/effect/floor_decal/corner/blue,
 /obj/machinery/power/apc{
@@ -27810,13 +27825,6 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/equipstorage)
-"scz" = (
-/obj/item/device/radio/intercom/department/security{
-	dir = 8;
-	pixel_x = 21
-	},
-/turf/simulated/floor/tiled/dark,
-/area/security/armoury)
 "scD" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/weapon/tableflag{
@@ -29631,12 +29639,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/aftstarboard)
-"uuO" = (
-/obj/structure/bed/chair/comfy/red{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/dark,
-/area/security/armoury)
 "uuS" = (
 /obj/effect/floor_decal/corner/paleblue/mono,
 /obj/structure/curtain/open/bed,
@@ -39133,9 +39135,9 @@ vMH
 vMH
 sHN
 wvZ
-uuO
+jPS
 oLz
-scz
+gdV
 aPu
 csy
 oLz
