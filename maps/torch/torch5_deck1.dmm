@@ -14704,6 +14704,12 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralstarboard)
+"biU" = (
+/obj/structure/bed/chair/comfy/red{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/security/armoury)
 "bjI" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -17181,6 +17187,7 @@
 /obj/item/weapon/airlock_brace,
 /obj/item/weapon/airlock_brace,
 /obj/item/weapon/storage/box/handcuffs,
+/obj/item/weapon/storage/box/handcuffs,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
 "emb" = (
@@ -18133,13 +18140,6 @@
 /obj/machinery/reagent_temperature/cooler,
 /turf/simulated/floor/tiled/dark,
 /area/rnd/misc_lab)
-"gdV" = (
-/obj/item/device/radio/intercom/department/security{
-	dir = 8;
-	pixel_x = 21
-	},
-/turf/simulated/floor/tiled/dark,
-/area/security/armoury)
 "geb" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
@@ -20958,12 +20958,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
-"jPS" = (
-/obj/structure/bed/chair/comfy/red{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/dark,
-/area/security/armoury)
 "jPY" = (
 /obj/effect/floor_decal/corner/blue,
 /obj/machinery/power/apc{
@@ -30333,6 +30327,13 @@
 "vVe" = (
 /turf/simulated/floor/reinforced/hydrogen,
 /area/thruster/d1starboard)
+"vYR" = (
+/obj/item/device/radio/intercom/department/security{
+	dir = 8;
+	pixel_x = 21
+	},
+/turf/simulated/floor/tiled/dark,
+/area/security/armoury)
 "vZI" = (
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 5
@@ -39135,9 +39136,9 @@ vMH
 vMH
 sHN
 wvZ
-jPS
+biU
 oLz
-gdV
+vYR
 aPu
 csy
 oLz
