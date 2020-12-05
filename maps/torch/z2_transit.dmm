@@ -90,10 +90,6 @@
 /obj/effect/shuttle_landmark/escape_pod/transit/pod8,
 /turf/space/transit/north,
 /area/space)
-"qc" = (
-/obj/effect/shuttle_landmark/transit/vox_base/vox_shuttle,
-/turf/space,
-/area/space)
 "qg" = (
 /obj/effect/step_trigger/thrower{
 	affect_ghosts = 1;
@@ -1821,7 +1817,7 @@ Vj
 Vj
 Vj
 Vj
-qc
+Vj
 Vj
 Vj
 Vj
