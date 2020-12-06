@@ -8,3 +8,4 @@
 /area/icarus/open
 	name = "SEV Icarus surroundings"
 	icon_state = "open_area"
+	planetary_surface = TRUE

@@ -2,17 +2,14 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 
 /datum/event/exo_awakening
 	announceWhen	= 45
-	endWhen			= 45
+	endWhen			= 75
 	var/no_show = FALSE //set to true once we hit the target mob count of spawned mobs so we stop spawning
 	var/spawned_mobs //total count of all spawned mobs by the event
 	var/list/exoplanet_areas //all possible exoplanet areas the event can take place on
-	var/area/chosen_area //the single chosen exoplanet to have the event occur on
-	var/obj/effect/overmap/visitable/sector/exoplanet/chosen_planet
-	var/list/players_on_site = list() //a list of the players on the planet
+	var/area/chosen_area
+	var/obj/effect/overmap/visitable/sector/chosen_planet
 	var/required_players_count = 2 //how many players we need present on the planet for the event to start
 	var/target_mob_count = 0 //overall target mob count, set to nonzero during setup
-	var/target_mob_count_major = 55 //the target mob counts to choose from, based on severity (Major or Moderate)
-	var/target_mob_count_moderate = 35
 	var/datum/mob_list/chosen_mob_list //the chosen list of mobs we will pick from when spawning, also based on severity
 	var/original_severity
 
@@ -20,7 +17,8 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 	var/list/mobs = list()
 	var/sound/arrival_sound
 	var/arrival_message
-	var/limit
+	var/limit //target number of mobs to spawn
+	var/length = 75 //length of time the event should run for
 
 /datum/mob_list/major/meat
 	mobs = list(
@@ -45,17 +43,19 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 	arrival_message = "The planet rumbles as you begin to feel an uncountable number of eyes suddenly staring at you from all around."
 	arrival_sound   = 'sound/effects/wind/wind_3_1.ogg'
 	limit = 25
+	length = 45
 
 /datum/mob_list/major/machines
 	mobs = list(
 				list(/mob/living/simple_animal/hostile/hivebot, 80),
 				list(/mob/living/simple_animal/hostile/hivebot/range, 45),
 				list(/mob/living/simple_animal/hostile/hivebot/strong, 25),
-				list(/mob/living/simple_animal/hostile/hivebot/mega, 10),
+				list(/mob/living/simple_animal/hostile/hivebot/mega, 2),
 			)
 	arrival_message = "The ground beneath you rumbles as you hear the sounds of machinery from all around you..."
 	arrival_sound   = 'sound/effects/wind/wind_3_1.ogg'
 	limit = 45
+	length = 50
 
 /datum/mob_list/moderate/spiders
 	mobs = list(
@@ -67,6 +67,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 	arrival_message = "You feel uneasy as you hear something skittering about..."
 	arrival_sound = 'sound/effects/wind/wind_3_1.ogg'
 	limit = 15
+	length = 40
 
 /datum/mob_list/moderate/machines
 	mobs = list(
@@ -76,6 +77,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 	arrival_message = "You hear the distant sound of creaking metal joints, what is that?"
 	arrival_sound = 'sound/effects/wind/wind_3_1.ogg'
 	limit = 25
+	length = 50
 
 /datum/event/exo_awakening/setup()
 	announceWhen = rand(15, 45)
@@ -94,6 +96,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 
 	chosen_mob_list = new chosen_mob_list
 	target_mob_count = chosen_mob_list.limit
+	endWhen = chosen_mob_list.length
 	endWhen += severity*25
 
 /datum/event/exo_awakening/proc/count_mobs()
@@ -107,18 +110,19 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 
 /datum/event/exo_awakening/start()
 	var/torch_players_present = FALSE
+	var/list/players_on_site = list()
 
 	for (var/area/A in exoplanet_areas)
 		players_on_site = list() //make sure the list is empty before checking the next planet.
 		for (var/mob/M in GLOB.player_list)
-			if (M.stat != DEAD && M.z == A.z)
+			if (M.stat != DEAD && (M.z in GetConnectedZlevels(A.z)))
 				LAZYADD(players_on_site, M)
 
 				if(get_crewmember_record(M.real_name || M.name)) //event is geared at torch/exploration, only valid if they're around.
 					torch_players_present = TRUE
 					chosen_area = A
 					chosen_planet = map_sectors["[A.z]"]
-					LAZYADD(affecting_z, A.z)
+					affecting_z = GetConnectedZlevels(A.z)
 
 		if (torch_players_present && players_on_site.len >= required_players_count)
 			break
@@ -126,6 +130,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 		torch_players_present = FALSE
 
 	if (!torch_players_present)
+		log_debug("Exoplanet Awakening failed to run, not enough players on any planet. Aborting.")
 		severity = original_severity
 		kill(TRUE)
 		return
@@ -137,6 +142,10 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 			to_chat(M, SPAN_WARNING(chosen_mob_list.arrival_message))
 
 		sound_to(M, chosen_mob_list.arrival_sound)
+
+	var/list/dimensions = chosen_area.get_dimensions()
+	if (dimensions["x"] <= 100)
+		target_mob_count = round(target_mob_count / 3.5) //keep mob count lower in smaller areas.
 
 
 /datum/event/exo_awakening/announce()
@@ -171,10 +180,12 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 				continue
 			if (T.is_wall())
 				continue
+			if (T.density)
+				continue
 
 			break
 
-		if (is_edge_turf(T) || T.is_wall())
+		if (is_edge_turf(T) || T.is_wall() || T.density)
 			log_debug("Exoplanet Awakening: Failed to spawn mob on a viable turf.")
 			return
 
@@ -192,7 +203,10 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 				GLOB.death_event.register(M,src,/datum/event/exo_awakening/proc/reduce_mob_count)
 				GLOB.destroyed_event.register(M,src,/datum/event/exo_awakening/proc/reduce_mob_count)
 				LAZYADD(GLOB.exo_event_mob_count, M)
-				chosen_planet.adapt_animal(M, FALSE)
+
+				if (istype(chosen_planet, /obj/effect/overmap/visitable/sector/exoplanet))
+					var/obj/effect/overmap/visitable/sector/exoplanet/E = chosen_planet
+					E.adapt_animal(M, FALSE)
 
 			spawned_mobs++
 		I++
@@ -208,9 +222,12 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 	GLOB.destroyed_event.unregister(M,src,/datum/event/exo_awakening/proc/reduce_mob_count)
 
 /datum/event/exo_awakening/end()
+	if(!chosen_area)
+		return
+
 	QDEL_NULL(chosen_mob_list)
 	log_debug("Exoplanet Awakening event spawned [spawned_mobs] mobs. It was a level [severity] out of 3 severity.")
 
-	for (var/mob/M in players_on_site)
+	for (var/mob/M in GLOB.player_list)
 		if (M && M.z == chosen_area.z)
 			to_chat(M, SPAN_NOTICE("The planet grows calm, the ground no longer heaving its horrors to the surface."))
