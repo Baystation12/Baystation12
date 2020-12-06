@@ -28,7 +28,7 @@
 	item_state = "robe"
 	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0)
 	species_restricted = list("San Shyuum")
-	specials = list(/datum/armourspecials/shields,/datum/armourspecials/gear/prophet_jumpsuit)
+	specials = list(/datum/armourspecials/shields/elite,/datum/armourspecials/gear/prophet_jumpsuit)
 	totalshields = 270 //Zealot Tier
 
 /obj/item/clothing/suit/armor/special/shielded_prophet_robe/santa
