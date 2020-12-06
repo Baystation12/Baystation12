@@ -1,9 +1,8 @@
 /datum/vote/gamemode
 	name = "game mode"
-	additional_header = "<th>Minimum Players</th>"
+	additional_header = "<td align = 'center'><b>Minimum Players</b></td></tr>"
 	win_x = 500
 	win_y = 1100
-	result_length = 3
 
 /datum/vote/gamemode/can_run(mob/creator, automatic)
 	if(!automatic && (!config.allow_vote_mode || !is_admin(creator)))

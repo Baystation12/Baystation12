@@ -2,7 +2,7 @@
 	name = "frame"
 	desc = "Used for building machines."
 	icon = 'icons/obj/monitors.dmi'
-	icon_state = "alarm_bitem"
+	icon_state = "fire_bitem"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	var/build_machine_type
 	var/refund_amt = 2
@@ -54,12 +54,11 @@
 /obj/item/frame/fire_alarm
 	name = "fire alarm frame"
 	desc = "Used for building fire alarms."
-	icon = 'icons/obj/firealarm.dmi'
-	icon_state = "casing"
 	build_machine_type = /obj/machinery/firealarm
 
 /obj/item/frame/air_alarm
 	name = "air alarm frame"
+	icon_state = "alarm_bitem"
 	desc = "Used for building air alarms."
 	build_machine_type = /obj/machinery/alarm
 
@@ -79,8 +78,3 @@
 	icon_state = "bulb-construct-item"
 	refund_amt = 1
 	build_machine_type = /obj/machinery/light_construct/small
-
-/obj/item/frame/light/spot
-	name = "large light fixture frame"
-	build_machine_type = /obj/machinery/light_construct/spot
-	refund_amt = 3

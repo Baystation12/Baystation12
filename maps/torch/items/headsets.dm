@@ -24,11 +24,6 @@
 	item_state = "headset"
 	ks1type = /obj/item/device/encryptionkey/headset_torchcorp
 
-/obj/item/device/radio/headset/heads/torchcorp/alt
-	name = "corporate bowman headset"
-	icon_state = "nt_headset_alt"
-	item_state = "nt_headset_alt"
-
 /obj/item/device/radio/headset/heads/torchntcommand
 	name = "corporate command headset"
 	desc = "Headset of the corporate overlords."
@@ -36,22 +31,12 @@
 	item_state = "headset"
 	ks1type = /obj/item/device/encryptionkey/headset_torchcl
 
-/obj/item/device/radio/headset/heads/torchntcommand/alt
-	name = "corporate command bowman headset"
-	icon_state = "nt_headset_alt"
-	item_state = "nt_headset_alt"
-
 /obj/item/device/radio/headset/heads/torchntdirector
 	name = "chief science officer headset"
 	desc = "Headset of the masters of the universe."
-	icon_state = "com_headset"
+	icon_state = "sci_headset"
 	item_state = "headset"
 	ks1type = /obj/item/device/encryptionkey/headset_torchrd
-
-/obj/item/device/radio/headset/heads/torchntdirector/alt
-	name = "chief science officer's bowman headset"
-	icon_state = "com_headset_alt"
-	item_state = "com_headset_alt"
 
 /obj/item/device/radio/headset/heads/torchntcommand/alt
 	name = "corporate command bowman headset"
@@ -88,7 +73,7 @@
 	desc = "A headset for the guy or gal who advises the enlisted whilst from a position of seniority."
 	icon_state = "com_headset"
 	item_state = "headset"
-	ks1type = /obj/item/device/encryptionkey/heads/sea
+	ks1type = /obj/item/device/encryptionkey/heads/sea	
 
 /obj/item/device/radio/headset/sea/alt
 	name = "senior enlisted advisor's bowman headset"
@@ -124,13 +109,20 @@
 	name = "pathfinder's headset"
 	desc = "A headset with access to the command and exploration channels. It has an inbuilt subspace antenna for better reception."
 	icon_state = "exp_headset"
-	item_state = "headset"
+	item_state = "exp_headset"
 	ks1type = /obj/item/device/encryptionkey/pathfinder
 
 /obj/item/device/radio/headset/pathfinder/alt
 	name = "pathfinder's bowman headset"
 	icon_state = "exp_headset_alt"
 	item_state = "exp_headset_alt"
+
+/obj/item/device/radio/headset/torchroboticist
+	name = "roboticist's headset"
+	desc = "A headset with access to the engineering and medical channels."
+	icon_state = "eng_headset"
+	item_state = "headset"
+	ks1type = /obj/item/device/encryptionkey/headset_torchroboticist
 
 /obj/item/device/radio/headset/headset_cargo
 	desc = "A headset used by the Deck Chief and his slaves."
@@ -139,14 +131,14 @@
 	desc = "A bowman headset used by the Deck Chief and his slaves."
 
 /obj/item/device/radio/headset/headset_corpsman
-	name = "medical headset"
+	name = "corpsman headset"
 	desc = "A headset to yell into while patching open wounds. It has an inbuilt subspace antenna for better reception."
 	icon_state = "par_headset"
-	item_state = "headset"
+	item_state = "par_headset"
 	ks1type = /obj/item/device/encryptionkey/headset_med
 
 /obj/item/device/radio/headset/headset_corpsman/alt
-	name = "medical bowman headset"
+	name = "corpsman bowman headset"
 	icon_state = "par_headset_alt"
 	item_state = "par_headset_alt"
 
@@ -154,7 +146,7 @@
 	name = "pilot's headset"
 	desc = "A headset for cool-tempered smugglers, cocky flyboys, and bus-drivers like you. It has an inbuilt subspace antenna for better reception."
 	icon_state = "pilot_headset"
-	item_state = "headset"
+	item_state = "pilot_headset"
 	ks1type = /obj/item/device/encryptionkey/headset_pilot
 
 /obj/item/device/radio/headset/headset_pilot/alt

@@ -53,8 +53,8 @@
 		narsimage.loc = src.loc
 		narglow.loc = src.loc
 		//Display the new narsimage to the player
-		image_to(src, narsimage)
-		image_to(src, narglow)
+		src << narsimage
+		src << narglow
 
 	else
 		if(narsimage)

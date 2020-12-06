@@ -14,7 +14,6 @@
 	var/error
 	var/is_edited
 	usage_flags = PROGRAM_ALL
-	category = PROG_OFFICE
 
 /datum/computer_file/program/wordprocessor/proc/open_file(var/filename)
 	var/datum/computer_file/data/F = get_file(filename)
@@ -24,22 +23,65 @@
 		return 1
 
 /datum/computer_file/program/wordprocessor/proc/save_file(var/filename)
-	. = computer.save_file(filename, loaded_data, /datum/computer_file/data/text)
-	if(.)
-		is_edited = 0
+	var/datum/computer_file/data/F = get_file(filename)
+	if(!F) //try to make one if it doesn't exist
+		F = create_file(filename, loaded_data, /datum/computer_file/data/text)
+		return !isnull(F)
+	var/datum/computer_file/data/backup = F.clone()
+	var/obj/item/weapon/computer_hardware/hard_drive/HDD = computer.hard_drive
+	if(!HDD)
+		return
+	HDD.remove_file(F)
+	F.stored_data = loaded_data
+	F.calculate_size()
+	if(!HDD.store_file(F))
+		HDD.store_file(backup)
+		return 0
+	is_edited = 0
+	return 1
 
 /datum/computer_file/program/wordprocessor/Topic(href, href_list)
 	if(..())
 		return 1
 
 	if(href_list["PRG_txtrpeview"])
-		show_browser(usr,"<HTML><HEAD><TITLE>[open_file]</TITLE></HEAD>[digitalPencode2html(loaded_data)]</BODY></HTML>", "window=[open_file]")
+		show_browser(usr,"<HTML><HEAD><TITLE>[open_file]</TITLE></HEAD>[pencode2html(loaded_data)]</BODY></HTML>", "window=[open_file]")
 		return 1
 
-	if(href_list["PRG_taghelp"])		
-		var/datum/codex_entry/entry = SScodex.get_codex_entry("pen")
-		if(entry)
-			SScodex.present_codex_entry(usr, entry)
+	if(href_list["PRG_taghelp"])
+		to_chat(usr, "<span class='notice'>The hologram of a googly-eyed paper clip helpfully tells you:</span>")
+		var/help = {"
+		\[br\] : Creates a linebreak.
+		\[center\] - \[/center\] : Centers the text.
+		\[h1\] - \[/h1\] : First level heading.
+		\[h2\] - \[/h2\] : Second level heading.
+		\[h3\] - \[/h3\] : Third level heading.
+		\[b\] - \[/b\] : Bold.
+		\[i\] - \[/i\] : Italic.
+		\[u\] - \[/u\] : Underlined.
+		\[small\] - \[/small\] : Decreases the size of the text.
+		\[large\] - \[/large\] : Increases the size of the text.
+		\[field\] : Inserts a blank text field, which can be filled later. Useful for forms.
+		\[date\] : Current station date.
+		\[time\] : Current station time.
+		\[list\] - \[/list\] : Begins and ends a list.
+		\[*\] : A list item.
+		\[hr\] : Horizontal rule.
+		\[table\] - \[/table\] : Creates table using \[row\] and \[cell\] tags.
+		\[grid\] - \[/grid\] : Table without visible borders, for layouts.
+		\[row\] - New table row.
+		\[cell\] - New table cell.
+		\[logo\] - Inserts EXO logo image.
+		\[ntlogo\] - Inserts the NT logo image.
+		\[bluelogo\] - Inserts blue NT logo image.
+		\[solcrest\] - Inserts SCG crest image.
+		\[eclogo\] - Inserts the Expeditionary Corps logo.
+		\[daislogo\] - Inserts the Deimos Advanced Information Systems logo.
+		\[xynlogo\] - Inserts the Xyngergy logo.
+		\[iccgseal\] - Inserts ICCG seal
+		\[fleetlogo\] - Inserts the logo of the SCG Fleet"}
+
+		to_chat(usr, help)
 		return 1
 
 	if(href_list["PRG_closebrowser"])
@@ -115,8 +157,11 @@
 
 	if(href_list["PRG_printfile"])
 		. = 1
-		if(!computer.print_paper(digitalPencode2html(loaded_data)))
-			error = "Hardware error: Printer missing or out of paper."
+		if(!computer.nano_printer)
+			error = "Missing Hardware: Your computer does not have the required hardware to complete this operation."
+			return 1
+		if(!computer.nano_printer.print_text(pencode2html(loaded_data)))
+			error = "Hardware error: Printer was unable to print the file. It may be out of paper."
 			return 1
 
 /datum/nano_module/program/computer_wordprocessor
@@ -127,15 +172,18 @@
 	var/datum/computer_file/program/wordprocessor/PRG
 	PRG = program
 
+	var/obj/item/weapon/computer_hardware/hard_drive/HDD
+	var/obj/item/weapon/computer_hardware/hard_drive/portable/RHDD
 	if(PRG.error)
 		data["error"] = PRG.error
 	if(PRG.browsing)
 		data["browsing"] = PRG.browsing
-		if(!PRG.computer || !PRG.computer.has_component(PART_HDD))
+		if(!PRG.computer || !PRG.computer.hard_drive)
 			data["error"] = "I/O ERROR: Unable to access hard drive."
 		else
+			HDD = PRG.computer.hard_drive
 			var/list/files[0]
-			for(var/datum/computer_file/F in PRG.computer.get_all_files())
+			for(var/datum/computer_file/F in HDD.stored_files)
 				if(F.filetype == "TXT")
 					files.Add(list(list(
 						"name" = F.filename,
@@ -143,11 +191,11 @@
 					)))
 			data["files"] = files
 
-			var/obj/item/weapon/stock_parts/computer/hard_drive/portable/RHDD = PRG.computer.get_component(PART_DRIVE)
+			RHDD = PRG.computer.portable_drive
 			if(RHDD)
 				data["usbconnected"] = 1
 				var/list/usbfiles[0]
-				for(var/datum/computer_file/F in PRG.computer.get_all_files(RHDD))
+				for(var/datum/computer_file/F in RHDD.stored_files)
 					if(F.filetype == "TXT")
 						usbfiles.Add(list(list(
 							"name" = F.filename,
@@ -155,10 +203,10 @@
 						)))
 				data["usbfiles"] = usbfiles
 	else if(PRG.open_file)
-		data["filedata"] = digitalPencode2html(PRG.loaded_data)
+		data["filedata"] = pencode2html(PRG.loaded_data)
 		data["filename"] = PRG.is_edited ? "[PRG.open_file]*" : PRG.open_file
 	else
-		data["filedata"] = digitalPencode2html(PRG.loaded_data)
+		data["filedata"] = pencode2html(PRG.loaded_data)
 		data["filename"] = "UNNAMED"
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)

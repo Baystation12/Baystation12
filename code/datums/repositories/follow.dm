@@ -216,6 +216,15 @@
 	followed_type = /mob/living // List all other (living) mobs we haven't given a special suffix
 	suffix = "Mob"
 
+/datum/follow_holder/mech
+	sort_order = 8
+	followed_type = /obj/mecha
+	suffix = "Mech"
+
+/datum/follow_holder/mech/get_suffix(var/obj/mecha/M)
+	suffix = M.occupant ? "\[[M.occupant]\] \[[initial(suffix)]\]" : "\[[initial(suffix)]\]"
+	return ..()
+
 /datum/follow_holder/blob
 	sort_order = 9
 	followed_type = /obj/effect/blob/core
@@ -241,10 +250,10 @@
 	sort_order = 13
 	followed_type = /obj/item/weapon/card/id/captains_spare
 
-/datum/follow_holder/voxstack
+/datum/follow_holder/stack
 	sort_order = 14
-	followed_type = /obj/item/organ/internal/voxstack
+	followed_type = /obj/item/organ/internal/stack
 
-/datum/follow_holder/voxstack/show_entry()
-	var/obj/item/organ/internal/voxstack/S = followed_instance
+/datum/follow_holder/stack/show_entry()
+	var/obj/item/organ/internal/stack/S = followed_instance
 	return ..() && !S.owner

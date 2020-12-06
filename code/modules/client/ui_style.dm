@@ -54,5 +54,5 @@
 		prefs.UI_style = UI_style_new
 		prefs.UI_style_alpha = UI_style_alpha_new
 		prefs.UI_style_color = UI_style_color_new
-		SScharacter_setup.queue_preferences_save(prefs)
+		prefs.save_preferences()
 		to_chat(usr, "UI was saved")

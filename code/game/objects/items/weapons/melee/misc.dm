@@ -1,7 +1,6 @@
 /obj/item/weapon/melee/whip
 	name = "whip"
 	desc = "A generic whip."
-	icon = 'icons/obj/weapons/melee_physical.dmi'
 	icon_state = "chain"
 	item_state = "chain"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
@@ -11,6 +10,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = list(TECH_COMBAT = 4)
 	attack_verb = list("flicked", "whipped", "lashed")
+
 
 /obj/item/weapon/melee/whip/abyssal
 	name = "abyssal whip"
@@ -25,16 +25,6 @@
 	origin_tech = list(TECH_COMBAT = 4)
 	attack_verb = list("flicked", "whipped", "lashed")
 
-/obj/item/weapon/melee/whip/tail
-	name = "drake's tail"
-	desc = "The tail of a large scaled creature, obviously evolved as some kind of whipping weapon. It's razor sharp and incredibly tough, though relatively lightweight."
-	icon_state = "tailwhip"
-	item_state = "whip"
-	obj_flags = null
-	force = 19
-	edge = TRUE
-	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 5)
-
 /obj/item/weapon/melee/whip/chainofcommand
 	name = "chain of command"
 	desc = "A tool used by great men to placate the frothing masses."
@@ -45,7 +35,6 @@
 /obj/item/weapon/material/sword/replica/officersword
 	name = "fleet officer's sword"
 	desc = "A polished sword issued to officers of the fleet."
-	icon = 'icons/obj/weapons/melee_physical.dmi'
 	icon_state = "officersword"
 	item_state = "officersword"
 	slot_flags = SLOT_BELT

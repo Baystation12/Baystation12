@@ -25,8 +25,7 @@
 		var/turf/heat_turf = get_turf(src)
 		loc_temp = heat_turf.temperature
 	else if(istype(loc, /obj/machinery/atmospherics/unary/cryo_cell))
-		var/obj/machinery/atmospherics/unary/cryo_cell/cryo
-		loc_temp = cryo.air_contents.temperature
+		loc_temp = loc:air_contents.temperature
 	else
 		loc_temp = environment.temperature
 
@@ -125,9 +124,9 @@
 
 	src.set_density(!src.lying)
 
-	if (src.sdisabilities & BLINDED)
+	if (src.sdisabilities & BLIND)
 		src.blinded = 1
-	if (src.sdisabilities & DEAFENED)
+	if (src.sdisabilities & DEAF)
 		src.ear_deaf = 1
 
 	if (src.eye_blurry > 0)
@@ -140,15 +139,16 @@
 
 /mob/living/carbon/slime/proc/handle_nutrition()
 
-	adjust_nutrition(-(0.1 + 0.05 * is_adult))
+	nutrition -= 0.1 + 0.05 * is_adult
 
 	if(nutrition <= 0)
+		nutrition = 0
 		adjustToxLoss(2)
 		if (client && prob(5))
 			to_chat(src, "<span class='danger'>You are starving!</span>")
 
 	else if (nutrition >= get_grow_nutrition() && amount_grown < SLIME_EVOLUTION_THRESHOLD)
-		adjust_nutrition(-20)
+		nutrition -= 20
 		amount_grown++
 
 /mob/living/carbon/slime/proc/get_max_nutrition() // Can't go above it

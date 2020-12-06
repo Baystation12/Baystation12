@@ -20,11 +20,10 @@ Small, little HP, poisonous.
 	density = 1
 	min_gas = null
 	mob_size = MOB_MINISCULE
-	can_escape = TRUE
+	can_escape = 1
 	pass_flags = PASS_FLAG_TABLE
 	melee_damage_lower = 5
 	melee_damage_upper = 10
-	melee_damage_flags = DAM_SHARP
 	holder_type = /obj/item/weapon/holder/voxslug
 	faction = SPECIES_VOX
 
@@ -40,6 +39,10 @@ Small, little HP, poisonous.
 			if(M.faction == faction)
 				continue
 		L += a
+
+	for (var/obj/mecha/M in mechas_list)
+		if (M.z == src.z && get_dist(src, M) <= dist)
+			L += M
 
 	return L
 
@@ -82,7 +85,7 @@ Small, little HP, poisonous.
 	var/mob/living/simple_animal/hostile/voxslug/V = contents[1]
 	if(!V.stat && istype(target, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = target
-		if(!do_after(user, 3 SECONDS, H))
+		if(!do_mob(user, H, 30))
 			return
 		V.attach(H)
 		qdel(src)

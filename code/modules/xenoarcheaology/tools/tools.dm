@@ -9,10 +9,10 @@
 	w_class = ITEM_SIZE_SMALL
 
 /obj/item/device/gps/attack_self(var/mob/user as mob)
-	to_chat(user, "<span class='notice'>[icon2html(src, user)] \The [src] flashes <i>[get_coordinates()]</i>.</span>")
+	to_chat(user, "<span class='notice'>\icon[src] \The [src] flashes <i>[get_coordinates()]</i>.</span>")
 
-/obj/item/device/gps/examine(mob/user)
-	. = ..()
+/obj/item/device/gps/examine(var/mob/user)
+	..()
 	to_chat(user, "<span class='notice'>\The [src]'s screen shows: <i>[get_coordinates()]</i>.</span>")
 
 /obj/item/device/gps/proc/get_coordinates()
@@ -160,7 +160,7 @@
 
 			positive_locations.Add(D)
 
-			to_chat(user, "<span class='notice'>[icon2html(src, user)] [src] pings.</span>")
+			to_chat(user, "<span class='notice'>\icon[src] [src] pings.</span>")
 
 	else if(istype(A, /obj/structure/boulder))
 		var/obj/structure/boulder/B = A
@@ -178,7 +178,7 @@
 
 			positive_locations.Add(D)
 
-			to_chat(user, "<span class='notice'>[icon2html(src, user)] [src] pings [pick("madly","wildly","excitedly","crazily")]!</span>")
+			to_chat(user, "<span class='notice'>\icon[src] [src] pings [pick("madly","wildly","excitedly","crazily")]!</span>")
 
 /obj/item/device/depth_scanner/attack_self(var/mob/living/user)
 	interact(user)
@@ -214,7 +214,7 @@
 	dat += "<hr>"
 	dat += "<A href='?src=\ref[src];refresh=1'>Refresh</a><br>"
 	dat += "<A href='?src=\ref[src];close=1'>Close</a><br>"
-	show_browser(user, dat,"window=depth_scanner;size=300x500")
+	user << browse(dat,"window=depth_scanner;size=300x500")
 	onclose(user, "depth_scanner")
 
 /obj/item/device/depth_scanner/OnTopic(user, href_list)
@@ -251,8 +251,6 @@
 	var/zlevels = GetConnectedZlevels(T.z)
 	var/cur_dist = world.maxx+world.maxy
 	for(var/obj/item/device/radio/beacon/R in world)
-		if(!R.functioning)
-			continue
 		if((R.z in zlevels) && R.frequency == tracking_freq)
 			var/check_dist = get_dist(src,R)
 			if(check_dist < cur_dist)
@@ -274,7 +272,7 @@
 				<A href='byond://?src=\ref[src];freq=2'>+</A>
 				<A href='byond://?src=\ref[src];freq=10'>+</A><BR>
 				"}
-	show_browser(user, dat,"window=locater;size=300x150")
+	user << browse(dat,"window=locater;size=300x150")
 	onclose(user, "locater")
 
 /obj/item/weapon/pinpointer/radio/OnTopic(user, href_list)

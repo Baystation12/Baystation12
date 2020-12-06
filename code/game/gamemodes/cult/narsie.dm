@@ -143,7 +143,7 @@ var/global/list/narsie_list = list()
 /obj/singularity/narsie/proc/narsiefloor(var/turf/T)//leaving "footprints"
 	if(!(istype(T, /turf/simulated/wall/cult)||istype(T, /turf/space)))
 		if(T.icon_state != "cult-narsie")
-			T.desc = "Something that goes beyond your understanding went this way."
+			T.desc = "something that goes beyond your understanding went this way"
 			T.icon = 'icons/turf/flooring/cult.dmi'
 			T.icon_state = "cult-narsie"
 			T.set_light(1)
@@ -274,7 +274,8 @@ var/global/list/narsie_list = list()
 			continue
 		if(cult_nh_mind.current.stat)
 			continue
-		if(get_z(cult_nh_mind.current) != z)
+		var/turf/pos = get_turf(cult_nh_mind.current)
+		if(pos.z != src.z)
 			continue
 		cultists += cult_nh_mind.current
 	if(cultists.len)

@@ -21,12 +21,6 @@ var/global/list/cached_icons = list()
 /obj/item/weapon/reagent_containers/glass/paint/afterattack(turf/simulated/target, mob/user, proximity)
 	if(!proximity) return
 	if(istype(target) && reagents.total_volume > 5)
-		if (reagents.should_admin_log())
-			var/contained = reagentlist()
-			if (istype(target, /mob))
-				admin_attack_log(user, target, "Used \the [name] containing [contained] to splash the victim.", "Was splashed by \the [name] containing [contained].", "used \the [name] containing [contained] to splash")
-			else
-				admin_attacker_log(user, "Used \the [name] containing [contained] to splash \the [target]")
 		user.visible_message("<span class='warning'>\The [target] has been splashed with something by [user]!</span>")
 		reagents.trans_to_turf(target, 5)
 	else
@@ -34,7 +28,7 @@ var/global/list/cached_icons = list()
 
 /obj/item/weapon/reagent_containers/glass/paint/Initialize()
 	. = ..()
-	if(paint_hex && length(paint_hex) > 0)
+	if(paint_hex && lentext(paint_hex) > 0)
 		reagents.add_reagent(/datum/reagent/paint, volume, paint_hex)
 		update_icon()
 

@@ -1,5 +1,8 @@
 /decl/cultural_info/location
 	desc_type = "Home System"
+	secondary_langs = list(
+		LANGUAGE_SIGN
+	)
 	category = TAG_HOMEWORLD
 	var/distance = 0
 	var/ruling_body = FACTION_SOL_CENTRAL

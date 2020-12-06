@@ -34,8 +34,5 @@
 				/obj/item/weapon/contract/wizard/telepathy = 		1,
 				/obj/item/weapon/contract/apprentice = 				1
 				)
-	sacrifice_objects = list(/obj/item/seeds,
-							/obj/item/weapon/wirecutters/clippers,
-							/obj/item/device/scanner/plant,
-							/obj/item/weapon/material/hatchet,
-							/obj/item/weapon/material/minihoe)
+	sacrifice_objects = list(/obj/item/seeds/ambrosiavulgarisseed,
+							/obj/item/seeds/ambrosiadeusseed)

@@ -21,9 +21,8 @@
 		var/key_count = count_by_type(contents, key_type)
 		src.icon_state = "[initial(icon_state)][key_count]"
 
-/obj/item/weapon/storage/fancy/examine(mob/user, distance)
-	. = ..()
-	if(distance > 1)
+/obj/item/weapon/storage/fancy/examine(mob/user)
+	if(!..(user, 1))
 		return
 
 	var/key_name = initial(key_type.name)
@@ -99,38 +98,6 @@
 	overlays += image('icons/obj/crayons.dmi',"crayonbox")
 	for(var/obj/item/weapon/pen/crayon/crayon in contents)
 		overlays += image('icons/obj/crayons.dmi',crayon.colourName)
-
-/*
- * Pencil Case
- */
-
-/obj/item/weapon/storage/fancy/pencilcase
-	name = "pencil case"
-	desc = "A pencil case for all those schoolboys to carry."
-	icon = 'icons/obj/storage.dmi'
-	icon_state = "pencil_case"
-	w_class = ITEM_SIZE_SMALL
-	max_w_class = ITEM_SIZE_TINY
-	max_storage_space = 6 * ITEM_SIZE_TINY
-	key_type = /obj/item/weapon/pen
-	startswith = list(
-		/obj/item/weapon/pen,
-		/obj/item/weapon/pen/blue,
-		/obj/item/weapon/pen/red,
-		/obj/item/weapon/pen/green,
-		/obj/item/weapon/pen/crayon/yellow,
-		/obj/item/weapon/pen/crayon/purple,
-		)
-
-/obj/item/weapon/storage/fancy/pencilcase/on_update_icon()
-	if(!opened)
-		src.icon_state = initial(icon_state)
-	else
-		var/key_count = count_by_type(contents, key_type)
-		if(key_count >= 1)
-			src.icon_state = "[initial(icon_state)]1"
-		else
-			src.icon_state = "[initial(icon_state)]0"
 
 ////////////
 //CIG PACK//
@@ -273,16 +240,6 @@
 	desc = "The Trident brand's wood tipped little cigar, favored by the Sol corps diplomatique for their pleasant aroma. Machine made on Mars for over 100 years. These are the menthol variety."
 	icon_state = "CRMpacket"
 	startswith = list(/obj/item/clothing/mask/smokable/cigarette/trident/mint = 5)
-
-/obj/item/weapon/storage/fancy/cigarettes/case
-	name = "cigarette case"
-	desc = "A fancy little case for holding cigarettes in it."
-	icon_state = "cigscase"
-	max_storage_space = null
-	storage_slots = 6
-
-/obj/item/weapon/storage/fancy/cigarettes/case/attack()
-	return
 
 /obj/item/weapon/storage/fancy/cigar
 	name = "cigar case"

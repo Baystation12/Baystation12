@@ -3,6 +3,7 @@
 	anchored = 1
 	idle_power_usage = 10
 	var/datum/computer/file/embedded_program/program	//the currently executing program
+	var/id_tag
 	var/on = 1
 
 /obj/machinery/embedded_controller/Initialize()
@@ -39,13 +40,17 @@
 
 	update_icon()
 
-/obj/machinery/embedded_controller/interface_interact(mob/user)
+/obj/machinery/embedded_controller/attack_ai(mob/user as mob)
 	ui_interact(user)
-	return TRUE
+
+/obj/machinery/embedded_controller/attack_hand(mob/user as mob)
+	if(!user.IsAdvancedToolUser())
+		return 0
+	ui_interact(user)
 
 /obj/machinery/embedded_controller/radio
 	icon = 'icons/obj/airlock_machines.dmi'
-	icon_state = "airlock_control_off"
+	icon_state = "airlock_control_standby"
 	power_channel = ENVIRON
 	density = 0
 	unacidable = 1
@@ -63,31 +68,17 @@ obj/machinery/embedded_controller/radio/Destroy()
 	..()
 
 /obj/machinery/embedded_controller/radio/on_update_icon()
-	overlays.Cut()
-	if(!on || !istype(program))
-		return
-	if(!program.memory["processing"])
-		overlays += image(icon, "screen_standby")
-		overlays += image(icon, "indicator_done")
+	if(!on || !program)
+		icon_state = "airlock_control_off"
+	else if(program.memory["processing"])
+		icon_state = "airlock_control_process"
 	else
-		overlays += image(icon, "indicator_active")
-	var/datum/computer/file/embedded_program/docking/airlock/docking_program = program
-	var/datum/computer/file/embedded_program/airlock/airlock_program = program
-	if(istype(docking_program))
-		if(docking_program.override_enabled)
-			overlays += image(icon, "indicator_forced")
-		airlock_program = docking_program.airlock_program
-	
-	if(istype(airlock_program) && airlock_program.memory["processing"])
-		if(airlock_program.memory["pump_status"] == "siphon")
-			overlays += image(icon, "screen_drain")
-		else
-			overlays += image(icon, "screen_fill")
+		icon_state = "airlock_control_standby"
 
 /obj/machinery/embedded_controller/radio/post_signal(datum/signal/signal, var/radio_filter = null)
 	signal.transmission_method = TRANSMISSION_RADIO
 	if(radio_connection)
-		return radio_connection.post_signal(src, signal, radio_filter, AIRLOCK_CONTROL_RANGE)
+		return radio_connection.post_signal(src, signal, radio_filter)
 	else
 		qdel(signal)
 

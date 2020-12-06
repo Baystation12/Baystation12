@@ -139,17 +139,14 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Mundane News", 					/datum/event/mundane_news, 			300),
 		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Shipping Error",				/datum/event/shipping_error	, 		30, 	list(ASSIGNMENT_ANY = 2), 0),
 		new /datum/event_meta/no_overmap(EVENT_LEVEL_MUNDANE, "Space Dust",			/datum/event/dust	, 				30, 	list(ASSIGNMENT_ENGINEER = 10)),
-		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Sensor Suit Jamming",			/datum/event/sensor_suit_jamming,	50,		list(ASSIGNMENT_MEDICAL = 20, ASSIGNMENT_AI = 20), 1),
+		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Sensor Suit Jamming",			/datum/event/sensor_suit_jamming,	50,	list(ASSIGNMENT_MEDICAL = 20, ASSIGNMENT_AI = 20), 1),
 		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Trivial News",					/datum/event/trivial_news, 			400),
 		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Vermin Infestation",			/datum/event/infestation, 			100,	list(ASSIGNMENT_JANITOR = 100)),
 		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Wallrot",						/datum/event/wallrot, 				0,		list(ASSIGNMENT_ENGINEER = 30, ASSIGNMENT_GARDENER = 50)),
 		new /datum/event_meta/no_overmap(EVENT_LEVEL_MUNDANE, "Electrical Storm",	/datum/event/electrical_storm, 		20,		list(ASSIGNMENT_ENGINEER = 20, ASSIGNMENT_JANITOR = 100)),
+		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Space Cold Outbreak",			/datum/event/space_cold,			100,	list(ASSIGNMENT_MEDICAL = 20)),
 		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Toilet Clog",					/datum/event/toilet_clog,			50, 	list(ASSIGNMENT_JANITOR = 20)),
-		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Drone Malfunction",				/datum/event/rogue_maint_drones/,	10,		list(ASSIGNMENT_ENGINEER = 30)),
-		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Disposals Explosion",			/datum/event/disposals_explosion/,	50,		list(ASSIGNMENT_ENGINEER = 40)),
-		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Brain Expansion",				/datum/event/brain_expansion/,		20,		list(ASSIGNMENT_SCIENTIST = 20)),
-		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Mail Delivery",					/datum/event/mail/,					5,		list(ASSIGNMENT_ANY = 1), 1),
-		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Whale Migration",				/datum/event/whale_migration,		10)
+		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Drone Malfunction",				/datum/event/rogue_maint_drones/,	10,		list(ASSIGNMENT_ENGINEER = 30))
 	)
 
 /datum/event_container/moderate
@@ -172,9 +169,10 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Solar Storm",							/datum/event/solar_storm, 				10,		list(ASSIGNMENT_ENGINEER = 20, ASSIGNMENT_SECURITY = 10), 1),
 		new /datum/event_meta/no_overmap(EVENT_LEVEL_MODERATE, "Space Dust",				/datum/event/dust	, 					30, 	list(ASSIGNMENT_ENGINEER = 10)),
 		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Spider Infestation",					/datum/event/spider_infestation, 		25,		list(ASSIGNMENT_SECURITY = 15), 1),
+		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Virology Breach",						/datum/event/prison_break/virology,		0,		list(ASSIGNMENT_MEDICAL = 100)),
+		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Xenobiology Breach",					/datum/event/prison_break/xenobiology,	0,		list(ASSIGNMENT_SCIENCE = 100)),
 		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Toilet Flooding",						/datum/event/toilet_clog/flood,			50, 	list(ASSIGNMENT_JANITOR = 20)),
-		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Drone Uprising",						/datum/event/rogue_maint_drones/,		25,		list(ASSIGNMENT_ENGINEER = 30)),
-		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Exoplanet Awakening",					/datum/event/exo_awakening,             75)
+		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Drone Uprising",						/datum/event/rogue_maint_drones/,		25,		list(ASSIGNMENT_ENGINEER = 30))
 	)
 
 /datum/event_container/major
@@ -183,11 +181,11 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Nothing",							/datum/event/nothing,				1320),
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Blob",							/datum/event/blob, 					0,	list(ASSIGNMENT_ENGINEER = 40), 1),
 		new /datum/event_meta/no_overmap(EVENT_LEVEL_MAJOR, "Carp Migration",		/datum/event/carp_migration,		0,	list(ASSIGNMENT_SECURITY =  5), 1),
+		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Containment Breach",				/datum/event/prison_break/station,	0,	list(ASSIGNMENT_ANY = 5)),
 		new /datum/event_meta/no_overmap(EVENT_LEVEL_MAJOR, "Meteor Wave",			/datum/event/meteor_wave,			0,	list(ASSIGNMENT_ENGINEER = 10),	1),
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Space Vines",						/datum/event/spacevine, 			0,	list(ASSIGNMENT_ENGINEER = 15), 1),
 		new /datum/event_meta/no_overmap(EVENT_LEVEL_MAJOR, "Electrical Storm",		/datum/event/electrical_storm, 		0,	list(ASSIGNMENT_ENGINEER = 10, ASSIGNMENT_JANITOR = 5)),
-		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Drone Revolution",				/datum/event/rogue_maint_drones/,	0,	list(ASSIGNMENT_ENGINEER = 10,ASSIGNMENT_MEDICAL = 10,ASSIGNMENT_SECURITY = 10)),
-		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Exoplanet Awakening",				/datum/event/exo_awakening,         0,  list(ASSIGNMENT_ANY = 45))
+		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Drone Revolution",				/datum/event/rogue_maint_drones/,	0,	list(ASSIGNMENT_ENGINEER = 10,ASSIGNMENT_MEDICAL = 10,ASSIGNMENT_SECURITY = 10))
 	)
 
 

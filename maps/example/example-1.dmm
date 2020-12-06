@@ -16,15 +16,15 @@
 /area/constructionsite)
 "e" = (
 /obj/machinery/light{
-	dir = 8;
-	icon_state = "tube1"
+	icon_state = "tube1";
+	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/constructionsite)
 "f" = (
 /obj/machinery/light{
-	dir = 4;
-	icon_state = "tube1"
+	icon_state = "tube1";
+	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/constructionsite)
@@ -71,45 +71,45 @@
 /area/constructionsite)
 "m" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
-	dir = 5;
-	icon_state = "intact"
+	 icon_state = "intact";
+	dir = 5
 	},
 /turf/simulated/floor/tiled,
 /area/constructionsite)
 "n" = (
 /obj/machinery/atmospherics/portables_connector{
-	dir = 8;
-	icon_state = "map_connector"
+	 icon_state = "map_connector";
+	dir = 8
 	},
 /obj/machinery/portable_atmospherics/canister/air,
 /turf/simulated/floor/tiled,
 /area/constructionsite)
 "o" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
-	dir = 4;
-	icon_state = "intact"
+	 icon_state = "intact";
+	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/constructionsite)
 "p" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
-	dir = 6;
-	icon_state = "intact"
+	 icon_state = "intact";
+	dir = 6
 	},
 /turf/simulated/floor/tiled,
 /area/constructionsite)
 "q" = (
 /obj/machinery/atmospherics/portables_connector{
-	dir = 8;
-	icon_state = "map_connector"
+	 icon_state = "map_connector";
+	dir = 8
 	},
 /obj/machinery/portable_atmospherics/canister/empty,
 /turf/simulated/floor/tiled,
 /area/constructionsite)
 "r" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 1;
-	icon_state = "map_scrubber_on"
+	 icon_state = "map_scrubber_on";
+	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/constructionsite)
@@ -215,31 +215,6 @@
 /obj/effect/landmark/test/space_turf,
 /turf/space,
 /area/space)
-"L" = (
-/obj/machinery/telecomms/server/map_preset/example,
-/turf/simulated/floor/tiled,
-/area/constructionsite)
-"M" = (
-/obj/machinery/telecomms/bus/map_preset/example,
-/turf/simulated/floor/tiled,
-/area/constructionsite)
-"P" = (
-/obj/machinery/light,
-/obj/machinery/telecomms/processor/map_preset/example,
-/turf/simulated/floor/tiled,
-/area/constructionsite)
-"U" = (
-/obj/machinery/telecomms/broadcaster/map_preset/example,
-/turf/simulated/floor/tiled,
-/area/constructionsite)
-"V" = (
-/obj/machinery/telecomms/hub/map_preset/example,
-/turf/simulated/floor/tiled,
-/area/constructionsite)
-"W" = (
-/obj/machinery/telecomms/receiver/map_preset/example,
-/turf/simulated/floor/tiled,
-/area/constructionsite)
 
 (1,1,1) = {"
 a
@@ -1114,7 +1089,7 @@ c
 c
 c
 c
-W
+c
 b
 a
 a
@@ -1148,7 +1123,7 @@ c
 c
 c
 c
-L
+c
 b
 a
 a
@@ -1182,7 +1157,7 @@ c
 c
 c
 c
-P
+k
 b
 a
 a
@@ -1216,7 +1191,7 @@ r
 c
 c
 c
-M
+c
 b
 a
 a
@@ -1250,7 +1225,7 @@ c
 c
 c
 c
-V
+c
 b
 a
 a
@@ -1284,7 +1259,7 @@ c
 f
 c
 c
-U
+c
 b
 a
 a

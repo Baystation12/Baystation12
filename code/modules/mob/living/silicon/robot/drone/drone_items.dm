@@ -20,9 +20,9 @@
 		/obj/item/frame,
 		/obj/item/weapon/camera_assembly,
 		/obj/item/weapon/tank,
-		/obj/item/weapon/stock_parts/circuitboard,
-		/obj/item/weapon/stock_parts/smes_coil,
-		/obj/item/weapon/stock_parts/computer,
+		/obj/item/weapon/circuitboard,
+		/obj/item/weapon/smes_coil,
+		/obj/item/weapon/computer_hardware,
 		/obj/item/weapon/fuel_assembly,
 		/obj/item/stack/material/deuterium,
 		/obj/item/stack/material/tritium,
@@ -41,7 +41,7 @@
 	can_hold = list(
 	/obj/item/weapon/cell,
 	/obj/item/weapon/stock_parts,
-	/obj/item/weapon/stock_parts/circuitboard/miningdrill
+	/obj/item/weapon/circuitboard/miningdrill
 	)
 
 /obj/item/weapon/gripper/clerical
@@ -66,7 +66,6 @@
 		/obj/item/weapon/reagent_containers/glass,
 		/obj/item/weapon/reagent_containers/pill,
 		/obj/item/weapon/reagent_containers/ivbag,
-		/obj/item/stack/material/phoron,
 		/obj/item/weapon/storage/pill_bottle,
 		)
 
@@ -85,11 +84,12 @@
 		/obj/item/organ/internal/brain,
 		/obj/item/organ/internal/posibrain,
 		/obj/item/stack/cable_coil,
-		/obj/item/weapon/stock_parts/circuitboard,
+		/obj/item/weapon/circuitboard,
 		/obj/item/slime_extract,
 		/obj/item/weapon/reagent_containers/glass,
 		/obj/item/weapon/reagent_containers/food/snacks/monkeycube,
-		/obj/item/weapon/stock_parts/computer,
+		/obj/item/mecha_parts,
+		/obj/item/weapon/computer_hardware,
 		/obj/item/device/transfer_valve,
 		/obj/item/device/assembly/signaler,
 		/obj/item/device/assembly/timer,
@@ -98,27 +98,18 @@
 		/obj/item/weapon/tank
 		)
 
-/obj/item/weapon/gripper/cultivator
-	name = "cultivator gripper"
-	icon_state = "gripper"
-	desc = "A simple grasping tool used to perform tasks in the xenobiology division, such as handling plant samples and disks."
-	can_hold = list(
-		/obj/item/weapon/reagent_containers/glass,
-		/obj/item/seeds,
-		/obj/item/slime_extract,
-		/obj/item/weapon/disk/botany
-	)
-
 /obj/item/weapon/gripper/service //Used to handle food, drinks, and seeds.
 	name = "service gripper"
 	icon_state = "gripper"
 	desc = "A simple grasping tool used to perform tasks in the service sector, such as handling food, drinks, and seeds."
+
 	can_hold = list(
 		/obj/item/weapon/reagent_containers/glass,
 		/obj/item/weapon/reagent_containers/food,
 		/obj/item/seeds,
+		/obj/item/weapon/grown,
 		/obj/item/weapon/glass_extra
-	)
+		)
 
 /obj/item/weapon/gripper/organ //Used to handle organs.
 	name = "organ gripper"
@@ -126,23 +117,9 @@
 	desc = "A simple grasping tool for holding and manipulating organic and mechanical organs, both internal and external."
 
 	can_hold = list(
-		/obj/item/organ,
-		/obj/item/robot_parts,
-		/obj/item/weapon/reagent_containers/ivbag
-	)
-
-/obj/item/weapon/gripper/forensics// Used to handle forensics equipment.
-	name = "forensics gripper"
-	icon_state = "gripper"
-	desc = "A simple grasping tool for holding forensics evidence and paper."
-
-	can_hold = list(
-		/obj/item/weapon/sample,
-		/obj/item/weapon/evidencebag,
-		/obj/item/weapon/forensics,
-		/obj/item/weapon/photo,
-		/obj/item/weapon/paper,
-		/obj/item/weapon/paper_bundle
+	/obj/item/organ,
+	/obj/item/robot_parts,
+	/obj/item/weapon/reagent_containers/ivbag
 	)
 
 /obj/item/weapon/gripper/no_use //Used when you want to hold and put items in other things, but not able to 'use' the item
@@ -175,7 +152,7 @@
 	set desc = "Release an item from your magnetic gripper."
 	set category = "Silicon Commands"
 	if(!wrapped)
-		// Ensure fumbled items are accessible.
+		//There's some weirdness with items being lost inside the arm. Trying to fix all cases. ~Z
 		for(var/obj/item/thing in src.contents)
 			thing.dropInto(loc)
 		return
@@ -195,7 +172,7 @@
 
 /obj/item/weapon/gripper/resolve_attackby(var/atom/target, var/mob/living/user, params)
 
-	// Ensure fumbled items are accessible.
+	//There's some weirdness with items being lost inside the arm. Trying to fix all cases. ~Z
 	if(!wrapped)
 		for(var/obj/item/thing in src.contents)
 			wrapped = thing
@@ -244,12 +221,20 @@
 
 	else if(istype(target,/obj/machinery/power/apc))
 		var/obj/machinery/power/apc/A = target
-		if(A.components_are_accessible(/obj/item/weapon/stock_parts/power/battery))
-			var/obj/item/weapon/stock_parts/power/battery/bat = A.get_component_of_type(/obj/item/weapon/stock_parts/power/battery)
-			var/obj/item/weapon/cell/cell = bat.extract_cell(user)
-			if(cell)
-				wrapped = cell
-				cell.forceMove(src)
+		if(A.opened)
+			if(A.cell)
+
+				wrapped = A.cell
+
+				A.cell.add_fingerprint(user)
+				A.cell.update_icon()
+				A.cell.forceMove(src)
+				A.cell = null
+
+				A.charging = 0
+				A.update_icon()
+
+				user.visible_message("<span class='danger'>[user] removes the power cell from [A]!</span>", "You remove the power cell.")
 
 	else if(istype(target,/mob/living/silicon/robot))
 		var/mob/living/silicon/robot/A = target
@@ -267,8 +252,7 @@
 /obj/item/weapon/gripper/proc/finish_using(var/atom/target, var/mob/living/user, params, force_holder, resolved)
 
 	if(QDELETED(wrapped))
-		if (wrapped)
-			wrapped.forceMove(null)
+		wrapped.forceMove(null)
 		wrapped = null
 		return
 
@@ -367,7 +351,7 @@
 				plastic.add_charge(2000)
 		else if(istype(W,/obj/item/weapon/light))
 			var/obj/item/weapon/light/L = W
-			if(L.status >= 2)
+			if(L.status >= 2) //In before someone changes the inexplicably local defines. ~ Z
 				if(metal)
 					metal.add_charge(250)
 				if(glass)
@@ -397,14 +381,6 @@
 		else if(istype(W,/obj/item/weapon/material/shard/shrapnel))
 			if(metal)
 				metal.add_charge(1000)
-		else if(istype(W,/obj/item/stack/material/rods))
-			var/obj/item/stack/material/rods/R = W
-			var/amt = R.get_amount()
-			if(amt > 3)
-				to_chat(user, SPAN_NOTICE("The amount of rods is too high to fit into your decompiler."))
-				continue
-			if(metal)
-				metal.add_charge(500*amt)				
 		else if(istype(W,/obj/item/weapon/material/shard))
 			if(glass)
 				glass.add_charge(1000)
@@ -449,7 +425,7 @@
 	var/tools = "<B>Tools and devices</B><BR>"
 	var/resources = "<BR><B>Resources</B><BR>"
 
-	for (var/O in module.equipment)
+	for (var/O in module.modules)
 
 		var/module_string = ""
 
@@ -477,4 +453,4 @@
 
 	dat += resources
 
-	show_browser(src, dat, "window=robotmod")
+	src << browse(dat, "window=robotmod")

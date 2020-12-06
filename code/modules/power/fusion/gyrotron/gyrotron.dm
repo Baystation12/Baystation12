@@ -13,21 +13,15 @@
 	var/rate = 3
 	var/mega_energy = 1
 
-	construct_state = /decl/machine_construction/default/panel_closed
-	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/radio/receiver,
-	)
-	stat_immune = 0
-	base_type = /obj/machinery/power/emitter/gyrotron
 
 /obj/machinery/power/emitter/gyrotron/anchored
 	anchored = 1
 	state = 2
 
 /obj/machinery/power/emitter/gyrotron/Initialize()
-	set_extension(src, /datum/extension/local_network_member)
+	set_extension(src, /datum/extension/fusion_plant_member, /datum/extension/fusion_plant_member)
 	if(initial_id_tag)
-		var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)
+		var/datum/extension/fusion_plant_member/fusion = get_extension(src, /datum/extension/fusion_plant_member)
 		fusion.set_tag(null, initial_id_tag)
 	change_power_consumption(mega_energy * GYRO_POWER, POWER_USE_ACTIVE)
 	. = ..()
@@ -55,7 +49,7 @@
 
 /obj/machinery/power/emitter/gyrotron/attackby(var/obj/item/W, var/mob/user)
 	if(isMultitool(W))
-		var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)
+		var/datum/extension/fusion_plant_member/fusion = get_extension(src, /datum/extension/fusion_plant_member)
 		fusion.get_new_tag(user)
 		return
 	return ..()

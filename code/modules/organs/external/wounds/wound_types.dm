@@ -60,9 +60,6 @@
 
 	return null //no wound
 
-/datum/wound/proc/close()
-	return
-
 /** CUTS **/
 /datum/wound/cut
 	bleed_threshold = 5
@@ -76,7 +73,7 @@
 /datum/wound/cut/is_surgical()
 	return autoheal_cutoff == 0
 
-/datum/wound/cut/close()
+/datum/wound/cut/proc/close()
 	current_stage = max_bleeding_stage + 1
 	desc = desc_list[current_stage]
 	min_damage = damage_list[current_stage]
@@ -311,10 +308,6 @@ datum/wound/puncture/massive
 	bleed_threshold = INFINITY
 	damage_type = SHATTER
 	max_bleeding_stage = -1
-
-/datum/wound/shatter/close()
-	damage = 0
-	qdel(src)
 
 /datum/wound/shatter/bleeding()
 	return FALSE

@@ -10,7 +10,6 @@ var/list/fusion_reactions
 	var/instability = 0
 	var/list/products = list()
 	var/minimum_reaction_temperature = 100
-	var/priority = 100
 
 /decl/fusion_reaction/proc/handle_reaction_special(var/obj/effect/fusion_em_field/holder)
 	return 0
@@ -47,50 +46,48 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 // Basic power production reactions.
 // This is not necessarily realistic, but it makes a basic failure more spectacular.
 /decl/fusion_reaction/hydrogen_hydrogen
-	p_react = GAS_HYDROGEN
-	s_react = GAS_HYDROGEN
+	p_react = "hydrogen"
+	s_react = "hydrogen"
 	energy_consumption = 1
 	energy_production = 2
-	products = list(GAS_HELIUM = 1)
-	priority = 10
+	products = list("helium" = 1)
 
 /decl/fusion_reaction/deuterium_deuterium
-	p_react = GAS_DEUTERIUM
-	s_react = GAS_DEUTERIUM
+	p_react = "deuterium"
+	s_react = "deuterium"
 	energy_consumption = 1
 	energy_production = 2
-	priority = 0
 
 // Advanced production reactions (todo)
 /decl/fusion_reaction/deuterium_helium
-	p_react = GAS_DEUTERIUM
-	s_react = GAS_HELIUM
+	p_react = "deuterium"
+	s_react = "helium"
 	energy_consumption = 1
 	energy_production = 5
 	radiation = 2
 
 /decl/fusion_reaction/deuterium_tritium
-	p_react = GAS_DEUTERIUM
-	s_react = GAS_TRITIUM
+	p_react = "deuterium"
+	s_react = "tritium"
 	energy_consumption = 1
 	energy_production = 1
-	products = list(GAS_HELIUM = 1)
+	products = list("helium" = 1)
 	instability = 0.5
 	radiation = 3
 
 /decl/fusion_reaction/deuterium_lithium
-	p_react = GAS_DEUTERIUM
+	p_react = "deuterium"
 	s_react = "lithium"
 	energy_consumption = 2
 	energy_production = 0
 	radiation = 3
-	products = list(GAS_TRITIUM= 1)
+	products = list("tritium"= 1)
 	instability = 1
 
 // Unideal/material production reactions
 /decl/fusion_reaction/oxygen_oxygen
-	p_react = GAS_OXYGEN
-	s_react = GAS_OXYGEN
+	p_react = "oxygen"
+	s_react = "oxygen"
 	energy_consumption = 10
 	energy_production = 0
 	instability = 5
@@ -100,15 +97,15 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 /decl/fusion_reaction/iron_iron
 	p_react = "iron"
 	s_react = "iron"
-	products = list("silver" = 10, "gold" = 10, "platinum" = 10) // Not realistic but w/e
+	products = list("silver" = 1, "gold" = 1, "platinum" = 1) // Not realistic but w/e
 	energy_consumption = 10
 	energy_production = 0
 	instability = 2
 	minimum_reaction_temperature = 10000
 
 /decl/fusion_reaction/phoron_hydrogen
-	p_react = GAS_HYDROGEN
-	s_react = GAS_PHORON
+	p_react = "hydrogen"
+	s_react = "phoron"
 	energy_consumption = 10
 	energy_production = 0
 	instability = 5
@@ -118,15 +115,15 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 // VERY UNIDEAL REACTIONS.
 /decl/fusion_reaction/phoron_supermatter
 	p_react = "supermatter"
-	s_react = GAS_PHORON
+	s_react = "phoron"
 	energy_consumption = 0
 	energy_production = 5
-	radiation = 40
+	radiation = 20
 	instability = 20
 
 /decl/fusion_reaction/phoron_supermatter/handle_reaction_special(var/obj/effect/fusion_em_field/holder)
 
-	wormhole_event(GetConnectedZlevels(holder))
+	wormhole_event()
 
 	var/turf/origin = get_turf(holder)
 	holder.Rupture()
@@ -159,7 +156,7 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 // High end reactions.
 /decl/fusion_reaction/boron_hydrogen
 	p_react = "boron"
-	s_react = GAS_HYDROGEN
+	s_react = "hydrogen"
 	minimum_energy_level = FUSION_HEAT_CAP * 0.5
 	energy_consumption = 3
 	energy_production = 15

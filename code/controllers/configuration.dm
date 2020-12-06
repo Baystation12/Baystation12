@@ -16,9 +16,11 @@ var/list/gamemode_cache = list()
 	var/log_attack = 0					// log attack messages
 	var/log_adminchat = 0				// log admin chat messages
 	var/log_adminwarn = 0				// log warnings admins get about bomb construction and such
+	var/log_pda = 0						// log pda messages
 	var/log_hrefs = 0					// logs all links clicked in-game. Could be used for debugging and tracking down exploits
 	var/log_runtime = 0					// logs world.log to a file
-	var/log_world_output = 0			// log world.log to game log
+	var/log_world_output = 0			// log world.log << messages
+	var/sql_enabled = 1					// for sql switching
 	var/allow_admin_ooccolor = 0		// Allows admins with relevant permissions to have their own ooc colour
 	var/allow_vote_restart = 0 			// allow votes to restart
 	var/ert_admin_call_only = 0
@@ -34,10 +36,15 @@ var/list/gamemode_cache = list()
 	var/vote_no_default = 0				// vote does not default to nochange/norestart (tbi)
 	var/vote_no_dead = 0				// dead people can't vote (tbi)
 	var/vote_no_dead_crew_transfer = 0	// dead people can't vote on crew transfer votes
+//	var/enable_authentication = 0		// goon authentication
+	var/del_new_on_log = 1				// del's new players if they log before they spawn in
+	var/feature_object_spell_system = 0 //spawns a spellbook which gives object-type spells instead of verb-type spells for the wizard
 	var/traitor_scaling = 0 			//if amount of traitors scales based on amount of players
 	var/objectives_disabled = 0 			//if objectives are disabled or not
 	var/protect_roles_from_antagonist = 0// If security and such can be traitor/cult/other
 	var/continous_rounds = 0			// Gamemodes which end instantly will instead keep on going until the round ends by escape shuttle or nuke.
+	var/allow_Metadata = 0				// Metadata is supported.
+	var/popup_admin_pm = 0				//adminPMs to non-admins show in a pop-up 'reply' window when set to 1.
 	var/fps = 20
 	var/tick_limit_mc_init = TICK_LIMIT_MC_INIT_DEFAULT	//SSinitialization throttling
 	var/list/resource_urls = null
@@ -47,16 +54,21 @@ var/list/gamemode_cache = list()
 	var/list/modes = list()				// allowed modes
 	var/list/votable_modes = list()		// votable modes
 	var/list/probabilities = list()		// relative probability of each mode
-	var/secret_hide_possibilities = FALSE // Whether or not secret modes show list of possible round types
+	var/humans_need_surnames = 0
 	var/allow_random_events = 0			// enables random events mid-round when set to 1
+	var/allow_ai = 1					// allow ai job
 	var/hostedby = null
-	var/respawn_delay = 30 //An observer must wait this many minutes before being able to return to the main menu
-	var/respawn_menu_delay = 0 //An observer that has returned to the main menu must wait this many minutes before rejoining
+	var/respawn_delay = 30
 	var/guest_jobban = 1
 	var/usewhitelist = 0
 	var/kick_inactive = 0				//force disconnect for inactive players after this many minutes, if non-0
+	var/mods_can_tempban = 0
+	var/mods_can_job_tempban = 0
+	var/mod_tempban_max = 1440
+	var/mod_job_tempban_max = 1440
+	var/load_jobs_from_txt = 0
 	var/jobs_have_minimal_access = 0	//determines whether jobs use minimal access or expanded access.
-	var/minimum_player_age = 0
+	var/use_cortical_stacks = 0
 
 	var/cult_ghostwriter = 1               //Allows ghosts to write in blood in cult rounds...
 	var/cult_ghostwriter_req_cultists = 10 //...so long as this many cultists are active.
@@ -73,6 +85,8 @@ var/list/gamemode_cache = list()
 
 	var/usealienwhitelist = 0
 	var/usealienwhitelistSQL = 0;
+	var/limitalienplayers = 0
+	var/alien_to_human_ratio = 0.5
 	var/allow_extra_antags = 0
 	var/guests_allowed = 1
 	var/debugparanoid = 0
@@ -85,12 +99,7 @@ var/list/gamemode_cache = list()
 	var/githuburl
 	var/issuereporturl
 
-	var/list/chat_markup
-
-	var/forbidden_message_regex
-	var/forbidden_message_warning = "<B>Your message matched a filter and has not been sent.</B>"
-	var/forbidden_message_no_notifications = FALSE
-	var/forbidden_message_hide_details = FALSE
+	var/forbid_singulo_possession = 0
 
 	//game_options.txt configs
 
@@ -107,6 +116,8 @@ var/list/gamemode_cache = list()
 	var/bones_can_break = 1
 	var/limbs_can_break = 1
 
+	var/revival_pod_plants = 1
+	var/revival_cloning = 1
 	var/revival_brain_life = -1
 
 	var/use_loyalty_implants = 0
@@ -117,25 +128,33 @@ var/list/gamemode_cache = list()
 
 	//Used for modifying movement speed for mobs.
 	//Unversal modifiers
-	var/run_delay = 2
-	var/walk_delay = 4
-	var/creep_delay = 6
-	var/minimum_sprint_cost = 0.8
-	var/skill_sprint_cost_range = 0.8
-	var/minimum_stamina_recovery = 1
-	var/maximum_stamina_recovery = 3
+	var/run_speed = 2
+	var/walk_speed = 1
 
 	//Mob specific modifiers. NOTE: These will affect different mob types in different ways
+	var/human_delay = 0
+	var/robot_delay = 0
+	var/monkey_delay = 0
+	var/alien_delay = 0
+	var/slime_delay = 0
+	var/animal_delay = 0
 	var/maximum_mushrooms = 15 //After this amount alive, mushrooms will not boom boom
+
 
 	var/admin_legacy_system = 0	//Defines whether the server uses the legacy admin system with admins.txt or the SQL system. Config option in config.txt
 	var/ban_legacy_system = 0	//Defines whether the server uses the legacy banning system with the files in /data or the SQL system. Config option in config.txt
 	var/use_age_restriction_for_jobs = 0   //Do jobs use account age restrictions?   --requires database
 	var/use_age_restriction_for_antags = 0 //Do antags use account age restrictions? --requires database
 
+	var/simultaneous_pm_warning_timeout = 100
+
 	var/use_recursive_explosions //Defines whether the server uses recursive or circular explosions.
 
-	var/comms_password = null
+	var/assistant_maint = 0 //Do assistants get maint access?
+	var/gateway_delay = 18000 //How long the gateway takes before it activates. Default is half an hour.
+	var/ghost_interaction = 0
+
+	var/comms_password = ""
 	var/ban_comms_password = null
 	var/list/forbidden_versions = list() // Clients with these byond versions will be autobanned. Format: string "byond_version.byond_build"; separate with ; in config, e.g. 512.1234;512.1235
 	var/minimum_byond_version = 0
@@ -150,7 +169,7 @@ var/list/gamemode_cache = list()
 	var/irc_bot_host = ""
 	var/main_irc = ""
 	var/admin_irc = ""
-	var/announce_evac_to_irc = FALSE
+	var/announce_shuttle_dock_to_irc = FALSE
 
 	// Event settings
 	var/expected_round_length = 3 * 60 * 60 * 10 // 3 hours
@@ -164,6 +183,9 @@ var/list/gamemode_cache = list()
 	// 15, 45, 70 minutes respectively
 	var/list/event_delay_upper = list(EVENT_LEVEL_MUNDANE = 9000,	EVENT_LEVEL_MODERATE = 27000,	EVENT_LEVEL_MAJOR = 42000)
 
+	var/aliens_allowed = 0
+	var/alien_eggs_allowed = 0
+	var/ninjas_allowed = 0
 	var/abandon_allowed = 1
 	var/ooc_allowed = 1
 	var/looc_allowed = 1
@@ -201,12 +223,6 @@ var/list/gamemode_cache = list()
 	var/max_gear_cost = 10 // Used in chargen for accessory loadout limit. 0 disables loadout, negative allows infinite points.
 
 	var/allow_ic_printing = TRUE //Whether players should be allowed to print IC circuits from scripts.
-
-	var/allow_unsafe_narrates = FALSE //Whether admins can use unsanitized narration; when true, allows HTML etc.
-
-	var/do_not_prevent_spam = FALSE //If this is true, skips spam prevention for user actions; inputs, verbs, macros, etc.
-	var/max_acts_per_interval = 140 //Number of actions per interval permitted for spam protection.
-	var/act_interval = 0.1 SECONDS //Interval for spam prevention.
 
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
@@ -279,6 +295,9 @@ var/list/gamemode_cache = list()
 				if ("log_access")
 					config.log_access = 1
 
+				if ("sql_enabled")
+					config.sql_enabled = text2num(value)
+
 				if ("log_say")
 					config.log_say = 1
 
@@ -312,14 +331,14 @@ var/list/gamemode_cache = list()
 				if ("log_adminwarn")
 					config.log_adminwarn = 1
 
+				if ("log_pda")
+					config.log_pda = 1
+
 				if ("log_world_output")
 					config.log_world_output = 1
 
 				if ("log_hrefs")
 					config.log_hrefs = 1
-
-				if ("log_runtime")
-					config.log_runtime = 1
 
 				if ("generate_asteroid")
 					config.generate_map = 1
@@ -372,13 +391,15 @@ var/list/gamemode_cache = list()
 				if("ert_admin_only")
 					config.ert_admin_call_only = 1
 
+				if ("allow_ai")
+					config.allow_ai = 1
+
+//				if ("authentication")
+//					config.enable_authentication = 1
+
 				if ("respawn_delay")
 					config.respawn_delay = text2num(value)
 					config.respawn_delay = config.respawn_delay > 0 ? config.respawn_delay : 0
-
-				if ("respawn_menu_delay")
-					config.respawn_menu_delay = text2num(value)
-					config.respawn_menu_delay = config.respawn_menu_delay > 0 ? config.respawn_menu_delay : 0
 
 				if ("servername")
 					config.server_name = value
@@ -443,8 +464,23 @@ var/list/gamemode_cache = list()
 				if ("usewhitelist")
 					config.usewhitelist = 1
 
+				if ("feature_object_spell_system")
+					config.feature_object_spell_system = 1
+
+				if ("allow_metadata")
+					config.allow_Metadata = 1
+
 				if ("traitor_scaling")
 					config.traitor_scaling = 1
+
+				if ("aliens_allowed")
+					config.aliens_allowed = 1
+
+				if("alien_eggs_allowed")
+					config.alien_eggs_allowed = 1
+
+				if ("ninjas_allowed")
+					config.ninjas_allowed = 1
 
 				if ("objectives_disabled")
 					if(!value)
@@ -463,6 +499,9 @@ var/list/gamemode_cache = list()
 								config.objectives_disabled = CONFIG_OBJECTIVE_NONE
 				if("protect_roles_from_antagonist")
 					config.protect_roles_from_antagonist = 1
+
+				if("use_cortical_stacks")
+					config.use_cortical_stacks = 1
 
 				if ("probability")
 					var/prob_pos = findtext(value, " ")
@@ -485,6 +524,30 @@ var/list/gamemode_cache = list()
 				if("kick_inactive")
 					config.kick_inactive = text2num(value)
 
+				if("mods_can_tempban")
+					config.mods_can_tempban = 1
+
+				if("mods_can_job_tempban")
+					config.mods_can_job_tempban = 1
+
+				if("mod_tempban_max")
+					config.mod_tempban_max = text2num(value)
+
+				if("mod_job_tempban_max")
+					config.mod_job_tempban_max = text2num(value)
+
+				if("load_jobs_from_txt")
+					load_jobs_from_txt = 1
+
+				if("forbid_singulo_possession")
+					forbid_singulo_possession = 1
+
+				if("popup_admin_pm")
+					config.popup_admin_pm = 1
+
+				if("allow_holidays")
+					Holiday = 1
+
 				if("use_irc_bot")
 					use_irc_bot = 1
 
@@ -504,17 +567,28 @@ var/list/gamemode_cache = list()
 				if("antag_hud_restricted")
 					config.antag_hud_restricted = 1
 
-				if("secret_hide_possibilities")
-					secret_hide_possibilities = TRUE
+				if("humans_need_surnames")
+					humans_need_surnames = 1
 
 				if("usealienwhitelist")
 					usealienwhitelist = 1
-
 				if("usealienwhitelist_sql") // above need to be enabled as well
 					usealienwhitelistSQL = 1;
+				if("alien_player_ratio")
+					limitalienplayers = 1
+					alien_to_human_ratio = text2num(value)
+
+				if("assistant_maint")
+					config.assistant_maint = 1
+
+				if("gateway_delay")
+					config.gateway_delay = text2num(value)
 
 				if("continuous_rounds")
 					config.continous_rounds = 1
+
+				if("ghost_interaction")
+					config.ghost_interaction = 1
 
 				if("disable_player_mice")
 					config.disable_player_mice = 1
@@ -530,7 +604,7 @@ var/list/gamemode_cache = list()
 
 				if("forbidden_versions")
 					config.forbidden_versions = splittext(value, ";")
-
+				
 				if("minimum_byond_version")
 					config.minimum_byond_version = text2num(value)
 
@@ -549,8 +623,8 @@ var/list/gamemode_cache = list()
 				if("admin_irc")
 					config.admin_irc = value
 
-				if("announce_evac_to_irc")
-					config.announce_evac_to_irc = TRUE
+				if("announce_shuttle_dock_to_irc")
+					config.announce_shuttle_dock_to_irc = TRUE
 
 				if("allow_cult_ghostwriter")
 					config.cult_ghostwriter = 1
@@ -669,47 +743,6 @@ var/list/gamemode_cache = list()
 				if("hub")
 					world.update_hub_visibility()
 
-				if ("allow_unsafe_narrates")
-					config.allow_unsafe_narrates = TRUE
-
-				if ("do_not_prevent_spam")
-					config.do_not_prevent_spam = TRUE
-				if ("max_acts_per_interval")
-					config.max_acts_per_interval = text2num(value)
-				if ("act_interval")
-					config.act_interval = text2num(value) SECONDS
-
-				if ("chat_markup")
-					var/list/line = splittext(value, ";")
-					if (length(line) != 2)
-						log_error("Invalid chat_markup entry length: [value]")
-					else
-						var/matcher = text2regex(line[1])
-						if (!matcher)
-							log_error("Invalid chat_markup regex: [value]")
-						else
-							LAZYADD(config.chat_markup, list(list(matcher, line[2])))
-
-				if ("forbidden_message_regex")
-					config.forbidden_message_regex = text2regex(value)
-					if (!config.forbidden_message_regex)
-						log_error("Invalid forbidden_message_regex - failed to parse.")
-
-				if ("forbidden_message_warning")
-					config.forbidden_message_warning = length(value) ? value : FALSE
-
-				if ("forbidden_message_no_notifications")
-					config.forbidden_message_no_notifications = TRUE
-
-				if ("forbidden_message_hide_details")
-					config.forbidden_message_hide_details = TRUE
-
-				if ("disallow_votable_mode")
-					config.votable_modes -= value
-
-				if ("minimum_player_age")
-					config.minimum_player_age = text2num(value)
-
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
 
@@ -721,6 +754,10 @@ var/list/gamemode_cache = list()
 			switch(name)
 				if("health_threshold_dead")
 					config.health_threshold_dead = value
+				if("revival_pod_plants")
+					config.revival_pod_plants = value
+				if("revival_cloning")
+					config.revival_cloning = value
 				if("revival_brain_life")
 					config.revival_brain_life = value
 				if("organ_health_multiplier")
@@ -736,21 +773,23 @@ var/list/gamemode_cache = list()
 				if("limbs_can_break")
 					config.limbs_can_break = value
 
-				if("run_delay")
-					config.run_delay = value
-				if("walk_delay")
-					config.walk_delay = value
-				if("creep_delay")
-					config.creep_delay = value
-				if("minimum_sprint_cost")
-					config.minimum_sprint_cost = value
-				if("skill_sprint_cost_range")
-					config.skill_sprint_cost_range = value
-				if("minimum_stamina_recovery")
-					config.minimum_stamina_recovery = value
-				if("maximum_stamina_recovery")
-					config.maximum_stamina_recovery = value
+				if("run_speed")
+					config.run_speed = value
+				if("walk_speed")
+					config.walk_speed = value
 
+				if("human_delay")
+					config.human_delay = value
+				if("robot_delay")
+					config.robot_delay = value
+				if("monkey_delay")
+					config.monkey_delay = value
+				if("alien_delay")
+					config.alien_delay = value
+				if("slime_delay")
+					config.slime_delay = value
+				if("animal_delay")
+					config.animal_delay = value
 				if("maximum_mushrooms")
 					config.maximum_mushrooms = value
 
@@ -760,12 +799,6 @@ var/list/gamemode_cache = list()
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
-
-		else if(type == "using_map")
-			if(!value)
-				log_misc("Unknown value for setting [name] in [filename].")
-			else
-				GLOB.using_map.setup_config(name, value, filename)
 
 	fps = round(fps)
 	if(fps <= 0)
@@ -796,8 +829,6 @@ var/list/gamemode_cache = list()
 			continue
 
 		switch (name)
-			if ("enabled")
-				sqlenabled = TRUE
 			if ("address")
 				sqladdress = value
 			if ("port")
@@ -814,6 +845,8 @@ var/list/gamemode_cache = list()
 				sqlfdbklogin = value
 			if ("feedback_password")
 				sqlfdbkpass = value
+			if ("enable_stat_tracking")
+				sqllogging = 1
 			else
 				log_misc("Unknown setting in configuration: '[name]'")
 

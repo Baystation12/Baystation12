@@ -13,9 +13,8 @@
 		if(!istype(G))
 			return TOPIC_NOACTION
 
-		var/datum/local_network/lan = get_local_network()
-		var/list/gyrotrons = lan.get_devices(/obj/machinery/power/emitter/gyrotron)
-		if(!lan || !gyrotrons || !gyrotrons[G])
+		var/datum/fusion_plant/plant = get_fusion_plant()
+		if(!plant || !plant.gyrotrons[G])
 			return TOPIC_NOACTION
 
 		if(href_list["modifypower"])
@@ -30,13 +29,13 @@
 			return TOPIC_REFRESH
 
 		if(href_list["modifyrate"])
-			var/new_val = input("Enter new emission delay between 2 and 10 seconds.", "Modifying emission rate", G.rate) as num
+			var/new_val = input("Enter new emission delay between 1 and 10 seconds.", "Modifying emission rate", G.rate) as num
 			if(!istype(G))
 				return TOPIC_NOACTION
 			if(!new_val)
 				to_chat(user, SPAN_WARNING("That's not a valid number."))
 				return TOPIC_NOACTION
-			G.rate = Clamp(new_val, 2, 10)
+			G.rate = Clamp(new_val, 1, 10)
 			return TOPIC_REFRESH
 
 		if(href_list["toggle"])
@@ -45,14 +44,13 @@
 
 /obj/machinery/computer/fusion/gyrotron/build_ui_data()
 	. = ..()
-	var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)
-	var/datum/local_network/lan = fusion.get_local_network()
+	var/datum/extension/fusion_plant_member/fusion = get_extension(src, /datum/extension/fusion_plant_member)
+	var/datum/fusion_plant/plant = fusion.get_fusion_plant()
 	var/list/gyrotrons = list()
-	if(lan && gyrotrons)
-		var/list/lan_gyrotrons = lan.get_devices(/obj/machinery/power/emitter/gyrotron)
-		for(var/i = 1 to LAZYLEN(lan_gyrotrons))
+	if(plant)
+		for(var/i = 1 to LAZYLEN(plant.gyrotrons))
 			var/list/gyrotron = list()
-			var/obj/machinery/power/emitter/gyrotron/G = lan_gyrotrons[i]
+			var/obj/machinery/power/emitter/gyrotron/G = plant.gyrotrons[i]
 			gyrotron["id"] =        "#[i]"
 			gyrotron["ref"] =       "\ref[G]" 
 			gyrotron["active"] =    G.active

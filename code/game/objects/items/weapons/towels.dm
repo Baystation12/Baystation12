@@ -1,6 +1,6 @@
 /obj/item/weapon/towel
 	name = "towel"
-	icon = 'icons/obj/weapons/other.dmi'
+	icon = 'icons/obj/weapons.dmi'
 	icon_state = "towel"
 	item_flags = ITEM_FLAG_IS_BELT
 	slot_flags = SLOT_HEAD | SLOT_BELT | SLOT_OCLOTHING
@@ -11,7 +11,7 @@
 	desc = "A soft cotton towel."
 
 /obj/item/weapon/towel/attack_self(mob/living/user as mob)
-	user.visible_message("<span class='notice'>[user] uses [src] to towel themselves off.</span>")
+	user.visible_message(text("<span class='notice'>[] uses [] to towel themselves off.</span>", user, src))
 	playsound(user, 'sound/weapons/towelwipe.ogg', 25, 1)
 
 /obj/item/weapon/towel/random/New()

@@ -4,18 +4,10 @@
 
 /obj/item/weapon/rig/merc
 	name = "crimson hardsuit control module"
-	desc = "A blood-red hardsuit module with heavy armour plates."
+	desc = "A blood-red hardsuit featuring some fairly illegal technology."
 	icon_state = "merc_rig"
 	suit_type = "crimson hardsuit"
-	armor = list(
-		melee = ARMOR_MELEE_VERY_HIGH,
-		bullet = ARMOR_BALLISTIC_RIFLE,
-		laser = ARMOR_LASER_MAJOR,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_RESISTANT,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_SMALL
-		)
+	armor = list(melee = 80, bullet = 65, laser = 65, energy = 15, bomb = 80, bio = 100, rad = 60)
 	online_slowdown = 1
 	offline_slowdown = 3
 	offline_vision_restriction = TINT_HEAVY
@@ -25,7 +17,7 @@
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/melee/energy/sword,/obj/item/weapon/handcuffs)
 
 	initial_modules = list(
-		/obj/item/rig_module/mounted/lcannon,
+		/obj/item/rig_module/mounted,
 		/obj/item/rig_module/vision/thermal,
 		/obj/item/rig_module/grenade_launcher,
 		/obj/item/rig_module/ai_container,
@@ -37,35 +29,24 @@
 
 /obj/item/clothing/gloves/rig/merc
 	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_NOCUFFS
-	siemens_coefficient = 0
 
 //Has most of the modules removed
 /obj/item/weapon/rig/merc/empty
 	initial_modules = list(
 		/obj/item/rig_module/ai_container,
-		/obj/item/rig_module/electrowarfare_suite,
+		/obj/item/rig_module/electrowarfare_suite, //might as well
 		)
 
 /obj/item/weapon/rig/merc/heavy
-	name = "crimson EOD hardsuit control module"
-	desc = "A blood-red hardsuit with heavy armoured plates. Judging by the abnormally thick plates, this one is for working with explosives."
+	name = "heavy crimson hardsuit control module"
+	desc = "A blood-red hardsuit featuring some fairly illegal technology and real curves."
 	icon_state = "merc_rig_heavy"
-	armor = list(
-		melee = ARMOR_MELEE_VERY_HIGH,
-		bullet = ARMOR_BALLISTIC_AP,
-		laser = ARMOR_LASER_MAJOR,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_SHIELDED,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_SMALL
-		)
-	online_slowdown = 3
+	armor = list(melee = 90, bullet = 80, laser = 80, energy = 25, bomb = 90, bio = 100, rad = 70)
 	offline_slowdown = 4
-	max_pressure_protection = FIRESUIT_MAX_PRESSURE
-	min_pressure_protection = 0
+	online_slowdown = 2
 
 /obj/item/weapon/rig/merc/heavy/empty
 	initial_modules = list(
 		/obj/item/rig_module/ai_container,
-		/obj/item/rig_module/electrowarfare_suite,
+		/obj/item/rig_module/electrowarfare_suite, //might as well
 		)

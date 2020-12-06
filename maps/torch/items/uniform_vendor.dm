@@ -2,10 +2,13 @@
 	name = "uniform vendor"
 	desc= "A uniform vendor for utility, service, and dress uniforms."
 	icon = 'icons/obj/vending.dmi'
-	icon_state = "uniform"
+	icon_state = "robotics"
 	layer = BELOW_OBJ_LAYER
 	anchored = 1
 	density = 1
+
+	var/icon_deny = "robotics-deny"
+	var/icon_off = "robotics-off"
 
 	// Power
 	use_power = 1
@@ -17,19 +20,10 @@
 	var/list/selected_outfit = list()
 	var/global/list/issued_items = list()
 
-/obj/machinery/uniform_vendor/on_update_icon()
-	if(stat & BROKEN)
-		icon_state = "[initial(icon_state)]-broken"
-	else if(!(stat & NOPOWER))
-		icon_state = initial(icon_state)
-	else
-		icon_state = "[initial(icon_state)]-off"
+/obj/machinery/uniform_vendor/attack_hand(mob/user)
+	if(..())
+		return
 
-/obj/machinery/uniform_vendor/interface_interact(mob/user)
-	interact(user)
-	return TRUE
-
-/obj/machinery/uniform_vendor/interact(mob/user)
 	var/dat = list()
 	dat += "User ID: <a href='byond://?src=\ref[src];ID=1'>[ID ? "[ID.registered_name], [ID.military_rank], [ID.military_branch]" : "--------"]</a>"
 	dat += "<hr>"
@@ -91,7 +85,6 @@
 		selected_outfit -= locate(href_list["rem"])
 		. = TOPIC_REFRESH
 	if(href_list["vend"])
-		flick("uniform-vend", src)
 		spawn_uniform(selected_outfit)
 		selected_outfit.Cut()
 		. = TOPIC_REFRESH
@@ -125,8 +118,9 @@
 	var/decl/hierarchy/mil_uniform/user_outfit = decls_repository.get_decl(/decl/hierarchy/mil_uniform)
 	var/mil_uniforms = user_outfit
 	for(var/decl/hierarchy/mil_uniform/child in user_outfit.children)
-		if(is_type_in_list(user_branch, child.branches))
+		if(istype(user_branch,child.branch))
 			user_outfit = child
+
 	if(user_outfit == mil_uniforms) //We haven't found a branch
 		return null //Return no uniforms, which will cause the machine to spit out an error.
 

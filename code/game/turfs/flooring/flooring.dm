@@ -1,3 +1,12 @@
+var/list/flooring_types
+
+/proc/get_flooring_data(var/flooring_path)
+	if(!flooring_types)
+		flooring_types = list()
+	if(!flooring_types["[flooring_path]"])
+		flooring_types["[flooring_path]"] = new flooring_path
+	return flooring_types["[flooring_path]"]
+
 // State values:
 // [icon_base]: initial base icon_state without edges or corners.
 // if has_base_range is set, append 0-has_base_range ie.
@@ -14,7 +23,6 @@
 	var/icon
 	var/icon_base
 	var/color
-	var/footstep_type = /decl/footsteps/blank
 
 	var/has_base_range
 	var/has_damage_range
@@ -29,25 +37,8 @@
 
 	var/descriptor = "tiles"
 	var/flags
-	var/remove_timer
 	var/can_paint
 	var/can_engrave = TRUE
-
-	//How we smooth with other flooring
-	var/decal_layer = DECAL_LAYER
-	var/floor_smooth = SMOOTH_ALL
-	var/list/flooring_whitelist = list() //Smooth with nothing except the contents of this list
-	var/list/flooring_blacklist = list() //Smooth with everything except the contents of this list
-
-	//How we smooth with walls
-	var/wall_smooth = SMOOTH_ALL
-	//There are no lists for walls at this time
-
-	//How we smooth with space and openspace tiles
-	var/space_smooth = SMOOTH_ALL
-	//There are no lists for spaces
-
-	var/height = 0
 
 /decl/flooring/proc/on_remove()
 	return
@@ -59,21 +50,8 @@
 	icon_base = "grass"
 	has_base_range = 3
 	damage_temperature = T0C+80
-	flags = TURF_HAS_EDGES | TURF_HAS_CORNERS | TURF_REMOVE_SHOVEL
+	flags = TURF_HAS_EDGES | TURF_REMOVE_SHOVEL
 	build_type = /obj/item/stack/tile/grass
-	can_engrave = FALSE
-	floor_smooth = SMOOTH_NONE
-	wall_smooth = SMOOTH_ALL
-	space_smooth = SMOOTH_NONE
-	decal_layer = ABOVE_WIRE_LAYER
-
-/decl/flooring/dirt
-	name = "dirt"
-	desc = "Extra dirty."
-	icon = 'icons/turf/flooring/grass.dmi'
-	icon_base = "dirt"
-	has_base_range = 3
-	damage_temperature = T0C+80
 	can_engrave = FALSE
 
 /decl/flooring/asteroid
@@ -92,12 +70,8 @@
 	icon_base = "brown"
 	build_type = /obj/item/stack/tile/carpet
 	damage_temperature = T0C+200
-	flags = TURF_HAS_CORNERS | TURF_HAS_INNER_CORNERS | TURF_REMOVE_CROWBAR | TURF_CAN_BURN
+	flags = TURF_HAS_EDGES | TURF_HAS_CORNERS | TURF_REMOVE_CROWBAR | TURF_CAN_BURN
 	can_engrave = FALSE
-	footstep_type = /decl/footsteps/carpet
-	floor_smooth = SMOOTH_NONE
-	wall_smooth = SMOOTH_NONE
-	space_smooth = SMOOTH_NONE
 
 /decl/flooring/carpet/blue
 	name = "blue carpet"
@@ -108,16 +82,6 @@
 	name = "pale blue carpet"
 	icon_base = "blue2"
 	build_type = /obj/item/stack/tile/carpetblue2
-
-/decl/flooring/carpet/blue3
-	name = "sea blue carpet"
-	icon_base = "blue3"
-	build_type = /obj/item/stack/tile/carpetblue3
-
-/decl/flooring/carpet/magenta
-	name = "magenta carpet"
-	icon_base = "purple"
-	build_type = /obj/item/stack/tile/carpetmagenta
 
 /decl/flooring/carpet/purple
 	name = "purple carpet"
@@ -141,17 +105,16 @@
 
 /decl/flooring/linoleum
 	name = "linoleum"
-	desc = "It's like the 2090's all over again."
+	desc = "It's like the 2390's all over again."
 	icon = 'icons/turf/flooring/linoleum.dmi'
 	icon_base = "lino"
 	can_paint = 1
 	build_type = /obj/item/stack/tile/linoleum
 	flags = TURF_REMOVE_SCREWDRIVER
-	footstep_type = /decl/footsteps/tiles
 
 /decl/flooring/tiling
 	name = "floor"
-	desc = "A solid, heavy set of flooring plates."
+	desc = "Scuffed from the passage of countless greyshirts."
 	icon = 'icons/turf/flooring/tiles.dmi'
 	icon_base = "tiled"
 	color = COLOR_DARK_GUNMETAL
@@ -160,7 +123,6 @@
 	flags = TURF_REMOVE_CROWBAR | TURF_CAN_BREAK | TURF_CAN_BURN
 	build_type = /obj/item/stack/tile/floor
 	can_paint = 1
-	footstep_type = /decl/footsteps/tiles
 
 /decl/flooring/tiling/mono
 	icon_base = "monotile"
@@ -188,7 +150,6 @@
 
 /decl/flooring/tiling/dark/mono
 	icon_base = "monotile"
-	build_type = null
 
 /decl/flooring/tiling/freezer
 	desc = "Don't slip."
@@ -211,15 +172,12 @@
 /decl/flooring/tiling/new_tile
 	icon_base = "tile_full"
 	color = null
-	build_type = null
 
 /decl/flooring/tiling/new_tile/cargo_one
 	icon_base = "cargo_one_full"
-	build_type = null
 
 /decl/flooring/tiling/new_tile/kafel
 	icon_base = "kafel_full"
-	build_type = null
 
 /decl/flooring/tiling/stone
 	icon_base = "stone"
@@ -253,32 +211,22 @@
 	descriptor = "planks"
 	build_type = /obj/item/stack/tile/wood
 	flags = TURF_CAN_BREAK | TURF_IS_FRAGILE | TURF_REMOVE_SCREWDRIVER
-	footstep_type = /decl/footsteps/wood
-	color = WOOD_COLOR_GENERIC
 
 /decl/flooring/wood/mahogany
-	color = WOOD_COLOR_RICH
+	icon_base = "mahogany"
 	build_type = /obj/item/stack/tile/mahogany
 
 /decl/flooring/wood/maple
-	color = WOOD_COLOR_PALE
+	icon_base = "maple"
 	build_type = /obj/item/stack/tile/maple
 
 /decl/flooring/wood/ebony
-	color = WOOD_COLOR_BLACK
+	icon_base = "ebony"
 	build_type = /obj/item/stack/tile/ebony
 
 /decl/flooring/wood/walnut
-	color = WOOD_COLOR_CHOCOLATE
+	icon_base = "walnut"
 	build_type = /obj/item/stack/tile/walnut
-
-/decl/flooring/wood/bamboo
-	color = WOOD_COLOR_PALE2
-	build_type = /obj/item/stack/tile/bamboo
-
-/decl/flooring/wood/yew
-	color = WOOD_COLOR_YELLOW
-	build_type = /obj/item/stack/tile/yew
 
 /decl/flooring/reinforced
 	name = "reinforced floor"
@@ -292,7 +240,6 @@
 	apply_thermal_conductivity = 0.025
 	apply_heat_capacity = 325000
 	can_paint = 1
-	footstep_type = /decl/footsteps/plating
 
 /decl/flooring/reinforced/circuit
 	name = "processing strata"
@@ -328,7 +275,7 @@
 	name = "floor"
 	icon = 'icons/turf/shuttle.dmi'
 	build_type = null
-	flags = TURF_ACID_IMMUNE | TURF_CAN_BREAK | TURF_REMOVE_CROWBAR
+	flags = TURF_ACID_IMMUNE | TURF_CAN_BREAK | TURF_REMOVE_WRENCH
 	can_paint = 1
 	can_engrave = FALSE
 
@@ -353,53 +300,9 @@
 /decl/flooring/reinforced/shuttle/black
 	icon_base = "floor7"
 
-/decl/flooring/reinforced/shuttle/skrell
-	icon = 'icons/turf/skrellturf.dmi'
-	icon_base = "skrellblack"
-
-/decl/flooring/reinforced/shuttle/skrell/white
-	icon_base = "skrellwhite"
-
-/decl/flooring/reinforced/shuttle/skrell/red
-	icon_base = "skrellred"
-
-/decl/flooring/reinforced/shuttle/skrell/blue
-	icon_base = "skrellblue"
-
-/decl/flooring/reinforced/shuttle/skrell/orange
-	icon_base = "skrellorange"
-
-/decl/flooring/reinforced/shuttle/skrell/green
-	icon_base = "skrellgreen"
-
 /decl/flooring/crystal
 	name = "crystal floor"
 	icon = 'icons/turf/flooring/crystal.dmi'
 	build_type = null
 	flags = TURF_ACID_IMMUNE | TURF_CAN_BREAK | TURF_REMOVE_CROWBAR
 	color = "#00ffe1"
-
-/decl/flooring/flesh
-	name = "flesh"
-	icon = 'icons/turf/flooring/flesh.dmi'
-	icon_base = "flesh"
-	descriptor = "flesh"
-	has_base_range = 3
-	damage_temperature = T0C + 100
-	build_type = null
-	flags = TURF_ACID_IMMUNE | TURF_REMOVE_CROWBAR
-	remove_timer = 60
-	can_engrave = FALSE
-
-/decl/flooring/pool
-	name = "pool floor"
-	desc = "Sunken flooring designed to hold liquids."
-	icon = 'icons/turf/flooring/pool.dmi'
-	icon_base = "pool"
-	build_type = /obj/item/stack/tile/pool
-	flags = TURF_HAS_CORNERS | TURF_HAS_INNER_CORNERS | TURF_REMOVE_CROWBAR
-	footstep_type = /decl/footsteps/tiles
-	floor_smooth = SMOOTH_NONE
-	wall_smooth = SMOOTH_NONE
-	space_smooth = SMOOTH_NONE
-	height = -FLUID_OVER_MOB_HEAD * 2

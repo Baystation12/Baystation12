@@ -6,9 +6,7 @@
 
 #undef SEMIANDFORMAL_ROLES
 
-#undef CASUAL_ROLES
-
-#undef DOCTOR_ROLES
+#undef RESTRICTED_ROLES
 
 #undef MEDICAL_ROLES
 
@@ -23,8 +21,6 @@
 #undef SUPPLY_ROLES
 
 #undef SERVICE_ROLES
-
-#undef EXPLORATION_ROLES
 
 #undef RESEARCH_ROLES
 

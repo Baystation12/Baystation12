@@ -6,6 +6,12 @@
 		mloc = mloc.loc
 	return mloc
 
+/proc/iswall(turf/T)
+	return (istype(T, /turf/simulated/wall) || istype(T, /turf/unsimulated/wall) || istype(T, /turf/simulated/shuttle/wall))
+
+/proc/isfloor(turf/T)
+	return (istype(T, /turf/simulated/floor) || istype(T, /turf/unsimulated/floor))
+
 /proc/turf_clear(turf/T)
 	for(var/atom/A in T)
 		if(A.simulated)
@@ -83,9 +89,6 @@
 	return !!T.return_air()
 
 /proc/IsTurfAtmosUnsafe(var/turf/T)
-	if (!T)
-		return "The spawn location doesn't seem to exist. Please contact an admin via adminhelp if this error persists."
-
 	if(istype(T, /turf/space)) // Space tiles
 		return "Spawn location is open to space."
 	var/datum/gas_mixture/air = T.return_air()
@@ -130,9 +133,10 @@
 		var/turf/target = translation[source]
 
 		if(target)
+			//update area first so that area/Entered() will be called with the correct area when atoms are moved
 			if(base_area)
-				ChangeArea(target, get_area(source))
-				ChangeArea(source, base_area)
+				source.loc.contents.Add(target)
+				base_area.contents.Add(source)
 			transport_turf_contents(source, target)
 
 	//change the old turfs
@@ -148,10 +152,10 @@
 	for(var/obj/O in source)
 		if(O.simulated)
 			O.forceMove(new_turf)
-		else if(istype(O,/obj/effect))
-			var/obj/effect/E = O
-			if(E.movable_flags & MOVABLE_FLAG_EFFECTMOVE)
-				E.forceMove(new_turf)
+		else if(istype(O,/obj/effect/shuttle_landmark))
+			var/obj/effect/shuttle_landmark/L = O
+			if(L.flags & SLANDMARK_FLAG_MOBILE)
+				L.forceMove(new_turf)
 
 	for(var/mob/M in source)
 		if(isEye(M)) continue // If we need to check for more mobs, I'll add a variable

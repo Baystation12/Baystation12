@@ -3,14 +3,13 @@
 	desc = "A thing to keep your butts in."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "ashtray"
-	max_force = 10
 	force_divisor = 0.1
 	thrown_force_divisor = 0.1
 	randpixel = 5
 	var/max_butts = 10
 
 /obj/item/weapon/material/ashtray/examine(mob/user)
-	. = ..()
+	..()
 	if(material)
 		to_chat(user, "It's made of [material.display_name].")
 	if(contents.len >= max_butts)
@@ -19,7 +18,6 @@
 		to_chat(user, "It has [contents.len] cig butts in it.")
 
 /obj/item/weapon/material/ashtray/on_update_icon()
-	..()
 	overlays.Cut()
 	if (contents.len == max_butts)
 		overlays |= image('icons/obj/objects.dmi',"ashtray_full")
@@ -44,7 +42,6 @@
 
 		if(user.unEquip(W, src))
 			visible_message("[user] places [W] in [src].")
-			set_extension(src, /datum/extension/scent/ashtray)
 			update_icon()
 	else
 		..()
@@ -59,7 +56,6 @@
 			visible_message("<span class='danger'>\The [src] slams into [hit_atom], spilling its contents!</span>")
 			for (var/obj/O in contents)
 				O.dropInto(loc)
-			remove_extension(src, /datum/extension/scent)
 		if (health < 1)
 			shatter()
 			return

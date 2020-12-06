@@ -108,7 +108,7 @@ obj/item/weapon/gun/energy/retro
 	icon_state = "xray"
 	item_state = "xray"
 	slot_flags = SLOT_BELT|SLOT_BACK
-	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 3, TECH_MAGNET = 2, TECH_ESOTERIC = 2)
+	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 3, TECH_MAGNET = 2, TECH_ILLEGAL = 2)
 	projectile_type = /obj/item/projectile/beam/xray/midlaser
 	one_hand_penalty = 2
 	w_class = ITEM_SIZE_LARGE
@@ -123,7 +123,7 @@ obj/item/weapon/gun/energy/retro
 	icon_state = "oldxray"
 	item_state = "oldxray"
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
-	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3, TECH_MAGNET = 2, TECH_ESOTERIC = 2)
+	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3, TECH_MAGNET = 2, TECH_ILLEGAL = 2)
 	projectile_type = /obj/item/projectile/beam/xray
 	one_hand_penalty = 1
 	w_class = ITEM_SIZE_NORMAL

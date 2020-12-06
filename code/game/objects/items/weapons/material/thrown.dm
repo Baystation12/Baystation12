@@ -1,16 +1,14 @@
 /obj/item/weapon/material/star
 	name = "shuriken"
 	desc = "A sharp, perfectly weighted piece of metal."
-	icon = 'icons/obj/weapons/other.dmi'
 	icon_state = "star"
 	randpixel = 12
-	max_force = 10
 	force_divisor = 0.1 // 6 with hardness 60 (steel)
 	thrown_force_divisor = 0.75 // 15 with weight 20 (steel)
 	throw_speed = 10
 	throw_range = 15
-	sharp = TRUE
-	edge =  TRUE
+	sharp = 1
+	edge =  1
 
 /obj/item/weapon/material/star/New()
 	..()

@@ -27,6 +27,10 @@
 	max_w_class = ITEM_SIZE_SMALL
 	max_storage_space = DEFAULT_BOX_STORAGE
 
+	examine(mob/user)
+		if(..(user, 1))
+			to_chat(user, text("The service panel is [src.open ? "open" : "closed"]."))
+
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
 		if(locked)
 			if (istype(W, /obj/item/weapon/melee/energy/blade) && emag_act(INFINITY, user, "You slice through the lock of \the [src]"))
@@ -87,7 +91,7 @@
 		if (!src.locked)
 			message = "*****"
 		dat += text("<HR>\n>[]<BR>\n<A href='?src=\ref[];type=1'>1</A>-<A href='?src=\ref[];type=2'>2</A>-<A href='?src=\ref[];type=3'>3</A><BR>\n<A href='?src=\ref[];type=4'>4</A>-<A href='?src=\ref[];type=5'>5</A>-<A href='?src=\ref[];type=6'>6</A><BR>\n<A href='?src=\ref[];type=7'>7</A>-<A href='?src=\ref[];type=8'>8</A>-<A href='?src=\ref[];type=9'>9</A><BR>\n<A href='?src=\ref[];type=R'>R</A>-<A href='?src=\ref[];type=0'>0</A>-<A href='?src=\ref[];type=E'>E</A><BR>\n</TT>", message, src, src, src, src, src, src, src, src, src, src, src, src)
-		show_browser(user, dat, "window=caselock;size=300x280")
+		user << browse(dat, "window=caselock;size=300x280")
 
 	Topic(href, href_list)
 		..()
@@ -120,12 +124,6 @@
 					src.attack_self(M)
 				return
 		return
-
-
-/obj/item/weapon/storage/secure/examine(mob/user, distance)
-	. = ..()
-	if(distance <= 1)
-		to_chat(user, text("The service panel is [src.open ? "open" : "closed"]."))
 
 /obj/item/weapon/storage/secure/emag_act(var/remaining_charges, var/mob/user, var/feedback)
 	if(!emagged)
@@ -197,9 +195,4 @@
 
 /obj/item/weapon/storage/secure/safe/HoS/New()
 	..()
-	//new /obj/item/weapon/storage/lockbox/clusterbang(src) This item is currently broken... and probably shouldn't exist to begin with (even though it's cool)
-
-/obj/item/weapon/storage/secure/AltClick(/mob/user)
-	if (locked)
-		return
-	..()
+	//new /obj/item/weapon/storage/lockbox/clusterbang(src) This item is currently broken... and probably shouldnt exist to begin with (even though it's cool)

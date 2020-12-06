@@ -7,7 +7,7 @@
 	icon = 'icons/obj/wall_frame.dmi'
 	icon_state = "frame"
 
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE | ATOM_FLAG_CAN_BE_PAINTED
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 	anchored = 1
 	density = 1
 	throwpass = 1
@@ -16,7 +16,6 @@
 	var/health = 100
 	var/paint_color
 	var/stripe_color
-	rad_resistance_modifier = 0.5
 
 	blend_objects = list(/obj/machinery/door, /turf/simulated/wall) // Objects which to blend with
 	noblend_objects = list(/obj/machinery/door/window)
@@ -33,16 +32,11 @@
 	update_connections(1)
 	update_icon()
 
-/obj/structure/wall_frame/Destroy()
-	var/turf/location = loc
-	. = ..()
-	for(var/obj/structure/wall_frame/W in orange(1, location))
-		W.update_connections()
-		W.queue_icon_update()
-
-
 /obj/structure/wall_frame/examine(mob/user)
-	. = ..()
+	. = ..(user)
+
+	if(!.)
+		return
 
 	if(health == material.integrity)
 		to_chat(user, "<span class='notice'>It seems to be in fine condition.</span>")
@@ -87,19 +81,11 @@
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 		to_chat(user, "<span class='notice'>Now disassembling the low wall...</span>")
 		if(do_after(user, 40,src))
+			if(!src) return
 			to_chat(user, "<span class='notice'>You dissasembled the low wall!</span>")
 			dismantle()
 
-	else if(istype(W, /obj/item/weapon/gun/energy/plasmacutter))
-		var/obj/item/weapon/gun/energy/plasmacutter/cutter = W
-		if(!cutter.slice(user))
-			return
-		playsound(src.loc, 'sound/items/Welder.ogg', 100, 1)
-		to_chat(user, "<span class='notice'>Now slicing through the low wall...</span>")
-		if(do_after(user, 20,src))
-			to_chat(user, "<span class='warning'>You have sliced through the low wall!</span>")
-			dismantle()
-	return ..()
+	return  ..()
 
 /obj/structure/wall_frame/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1
@@ -154,15 +140,12 @@
 	take_damage(damage)
 	return
 
-/obj/structure/wall_frame/hitby(AM as mob|obj, var/datum/thrownthing/TT)
+/obj/structure/wall_frame/hitby(AM as mob|obj, var/speed=THROWFORCE_SPEED_DIVISOR)
 	..()
-	var/tforce = 0
-	if(ismob(AM)) // All mobs have a multiplier and a size according to mob_defines.dm
-		var/mob/I = AM
-		tforce = I.mob_size * (TT.speed/THROWFORCE_SPEED_DIVISOR)
-	else
-		var/obj/O = AM
-		tforce = O.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
+	if(ismob(AM))
+		return
+	var/obj/O = AM
+	var/tforce = O.throwforce * (speed/THROWFORCE_SPEED_DIVISOR)
 	if (tforce < 15)
 		return
 	take_damage(tforce)
@@ -173,31 +156,15 @@
 		dismantle()
 
 /obj/structure/wall_frame/proc/dismantle()
-	new /obj/item/stack/material/steel(get_turf(src), 3)
+	new /obj/item/stack/material/steel(get_turf(src))
 	qdel(src)
-
-/obj/structure/wall_frame/get_color()
-	return paint_color
-
-/obj/structure/wall_frame/set_color(var/color)
-	paint_color = color
-	update_icon()
 
 //Subtypes
 /obj/structure/wall_frame/standard
-	paint_color = COLOR_WALL_GUNMETAL
+	paint_color = COLOR_GUNMETAL
 
 /obj/structure/wall_frame/titanium
 	material = MATERIAL_TITANIUM
 
 /obj/structure/wall_frame/hull
 	paint_color = COLOR_HULL
-
-/obj/structure/wall_frame/hull/vox
-	paint_color = COLOR_GREEN_GRAY
-
-/obj/structure/wall_frame/hull/ascent
-	paint_color = COLOR_PURPLE
-
-/obj/structure/wall_frame/hull/verne
-	paint_color = COLOR_GUNMETAL

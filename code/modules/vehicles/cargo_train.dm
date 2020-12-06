@@ -9,7 +9,7 @@
 
 	load_item_visible = 1
 	load_offset_x = 0
-	buckle_pixel_shift = "x=0;y=0;z=7"
+	buckle_pixel_shift = "x=0;y=7"
 
 	var/car_limit = 3		//how many cars an engine can pull before performance degrades
 	charge_use = 1 KILOWATTS
@@ -34,7 +34,7 @@
 	load_item_visible = 1
 	load_offset_x = 0
 	load_offset_y = 4
-	buckle_pixel_shift = "x=0;y=0;z=8"
+	buckle_pixel_shift = "x=0;y=8"
 
 //-------------------------------------------
 // Standard procs
@@ -154,7 +154,7 @@
 	H.apply_effects(5, 5)
 	for(var/i = 0, i < rand(1,5), i++)
 		var/def_zone = pick(parts)
-		H.apply_damage(rand(5,10), BRUTE, def_zone)
+		H.apply_damage(rand(5,10), BRUTE, def_zone, H.run_armor_check(def_zone, "melee"))
 
 /obj/vehicle/train/cargo/trolley/RunOver(var/mob/living/carbon/human/H)
 	..()
@@ -165,10 +165,8 @@
 
 	if(is_train_head() && istype(load, /mob/living/carbon/human))
 		var/mob/living/carbon/human/D = load
-		D.visible_message(
-			SPAN_DANGER("\The [src] ran over [H]!"),
-			SPAN_DANGER("You ran over [H]!")
-		)
+		to_chat(D, "<span class='danger'>You ran over [H]!</span>")
+		visible_message("<span class='danger'>>\The [src] ran over [H]!</span>")
 		attack_log += text("\[[time_stamp()]\] <font color='red'>ran over [H.name] ([H.ckey]), driven by [D.name] ([D.ckey])</font>")
 		msg_admin_attack("[D.name] ([D.ckey]) ran over [H.name] ([H.ckey]). (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
 	else
@@ -191,10 +189,8 @@
 	else
 		return ..()
 
-/obj/vehicle/train/cargo/engine/examine(mob/user, distance)
-	. = ..()
-
-	if(distance > 1)
+/obj/vehicle/train/cargo/engine/examine(mob/user)
+	if(!..(user, 1))
 		return
 
 	if(!istype(usr, /mob/living/carbon/human))
@@ -363,9 +359,9 @@
 	if(!is_train_head() || !on)
 		move_delay = initial(move_delay)		//so that engines that have been turned off don't lag behind
 	else
-		move_delay = max(0, (-car_limit * active_engines) + train_length - active_engines)	//limits base overweight so you can't overspeed trains
+		move_delay = max(0, (-car_limit * active_engines) + train_length - active_engines)	//limits base overweight so you cant overspeed trains
 		move_delay *= (1 / max(1, active_engines)) * 2 										//overweight penalty (scaled by the number of engines)
-		move_delay += config.run_delay 														//base reference speed
+		move_delay += config.run_speed 														//base reference speed
 		move_delay *= 1.1																	//makes cargo trains 10% slower than running when not overweight
 
 /obj/vehicle/train/cargo/trolley/update_car(var/train_length, var/active_engines)

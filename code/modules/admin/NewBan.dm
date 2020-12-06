@@ -114,14 +114,14 @@ var/savefile/Banlist
 	else
 		Banlist.dir.Add("[ckey][computerid]")
 		Banlist.cd = "/base/[ckey][computerid]"
-		to_save(Banlist["key"], ckey)
-		to_save(Banlist["id"], computerid)
-		to_save(Banlist["ip"], address)
-		to_save(Banlist["reason"], reason)
-		to_save(Banlist["bannedby"], bannedby)
-		to_save(Banlist["temp"], temp)
+		Banlist["key"] << ckey
+		Banlist["id"] << computerid
+		Banlist["ip"] << address
+		Banlist["reason"] << reason
+		Banlist["bannedby"] << bannedby
+		Banlist["temp"] << temp
 		if (temp)
-			to_save(Banlist["minutes"], bantimestamp)
+			Banlist["minutes"] << bantimestamp
 	return 1
 
 /proc/RemoveBan(foldername)
@@ -129,8 +129,8 @@ var/savefile/Banlist
 	var/id
 
 	Banlist.cd = "/base/[foldername]"
-	from_save(Banlist["key"], key)
-	from_save(Banlist["id"], id)
+	Banlist["key"] >> key
+	Banlist["id"] >> id
 	Banlist.cd = "/base"
 
 	if (!Banlist.dir.Remove(foldername)) return 0
@@ -192,7 +192,7 @@ var/savefile/Banlist
 
 	dat += "</table>"
 	dat = "<HR><B>Bans:</B> <FONT COLOR=blue>(U) = Unban , (E) = Edit Ban</FONT> - <FONT COLOR=green>([count] Bans)</FONT><HR><table border=1 rules=all frame=void cellspacing=0 cellpadding=3 >[dat]"
-	show_browser(usr, dat, "window=unbanp;size=875x400")
+	usr << browse(dat, "window=unbanp;size=875x400")
 
 //////////////////////////////////// DEBUG ////////////////////////////////////
 
@@ -210,17 +210,17 @@ var/savefile/Banlist
 			Banlist.cd = "/base"
 			Banlist.dir.Add("trash[i]trashid[i]")
 			Banlist.cd = "/base/trash[i]trashid[i]"
-			to_save(Banlist["key"], "trash[i]")
+			Banlist["key"] << "trash[i]"
 		else
 			Banlist.cd = "/base"
 			Banlist.dir.Add("[last]trashid[i]")
 			Banlist.cd = "/base/[last]trashid[i]"
-			to_save(Banlist["key"], last)
-		to_save(Banlist["id"], "trashid[i]")
-		to_save(Banlist["reason"], "Trashban[i].")
-		to_save(Banlist["temp"], a)
-		to_save(Banlist["minutes"], CMinutes + rand(1,2000))
-		to_save(Banlist["bannedby"], "trashmin")
+			Banlist["key"] << last
+		Banlist["id"] << "trashid[i]"
+		Banlist["reason"] << "Trashban[i]."
+		Banlist["temp"] << a
+		Banlist["minutes"] << CMinutes + rand(1,2000)
+		Banlist["bannedby"] << "trashmin"
 		last = "trash[i]"
 
 	Banlist.cd = "/base"

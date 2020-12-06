@@ -12,9 +12,6 @@
 	next_click = world.time + 1
 
 	var/list/modifiers = params2list(params)
-	if (modifiers["ctrl"] && modifiers["alt"])
-		CtrlAltClickOn(A)
-		return
 	if(modifiers["shift"] && modifiers["ctrl"])
 		CtrlShiftClickOn(A)
 		return
@@ -110,13 +107,10 @@
 	A.BorgShiftClick(src)
 
 /mob/living/silicon/robot/CtrlClickOn(var/atom/A)
-	return A.BorgCtrlClick(src)
+	A.BorgCtrlClick(src)
 
 /mob/living/silicon/robot/AltClickOn(var/atom/A)
 	A.BorgAltClick(src)
-
-/mob/living/silicon/robot/CtrlAltClickOn(atom/A)
-	A.BorgCtrlAltClick(src)
 
 /atom/proc/BorgCtrlShiftClick(var/mob/living/silicon/robot/user) //forward to human click if not overriden
 	CtrlShiftClick(user)
@@ -131,35 +125,29 @@
 	AIShiftClick()
 
 /atom/proc/BorgCtrlClick(var/mob/living/silicon/robot/user) //forward to human click if not overriden
-	return CtrlClick(user)
+	CtrlClick(user)
 
 /obj/machinery/door/airlock/BorgCtrlClick() // Bolts doors. Forwards to AI code.
-	return AICtrlClick()
+	AICtrlClick()
 
 /obj/machinery/power/apc/BorgCtrlClick() // turns off/on APCs. Forwards to AI code.
-	return AICtrlClick()
+	AICtrlClick()
 
 /obj/machinery/turretid/BorgCtrlClick() //turret control on/off. Forwards to AI code.
-	return AICtrlClick()
+	AICtrlClick()
 
 /atom/proc/BorgAltClick(var/mob/living/silicon/robot/user)
 	AltClick(user)
 	return
 
 /obj/machinery/door/airlock/BorgAltClick() // Eletrifies doors. Forwards to AI code.
-	if (usr.a_intent != I_HELP)
-		AICtrlAltClick()
-	else
-		..()
+	AICtrlAltClick()
 
 /obj/machinery/turretid/BorgAltClick() //turret lethal on/off. Forwards to AI code.
 	AIAltClick()
 
 /obj/machinery/atmospherics/binary/pump/BorgAltClick()
 	return AltClick()
-
-/atom/proc/BorgCtrlAltClick(var/mob/living/silicon/robot/user)
-	CtrlAltClick(user)
 
 /*
 	As with AI, these are not used in click code,
@@ -171,10 +159,8 @@
 */
 /mob/living/silicon/robot/UnarmedAttack(atom/A)
 	A.attack_robot(src)
-
-/mob/living/silicon/robot/RangedAttack(atom/A, var/params)
+/mob/living/silicon/robot/RangedAttack(atom/A)
 	A.attack_robot(src)
-	return TRUE
 
 /atom/proc/attack_robot(mob/user as mob)
 	attack_ai(user)

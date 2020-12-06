@@ -32,13 +32,9 @@ a creative player the means to solve many problems.  Circuits are held inside an
 
 /obj/item/integrated_circuit/examine(mob/user)
 	. = ..()
-	external_examine(user)
-
-/obj/item/integrated_circuit/ShiftClick(mob/living/user)
-	if(istype(user))
+	if(.)
 		interact(user)
-	else
-		..()
+		external_examine(user)
 
 // This should be used when someone is examining while the case is opened.
 /obj/item/integrated_circuit/proc/internal_examine(mob/user)
@@ -77,8 +73,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 	setup_io(outputs, /datum/integrated_io, outputs_default, IC_OUTPUT)
 	outputs_default = null
 	setup_io(activators, /datum/integrated_io/activate, null, IC_ACTIVATOR)
-	if(!matter[MATERIAL_STEEL])
-		matter[MATERIAL_STEEL] = w_class * SScircuit.cost_multiplier // Default cost.
+	matter[MATERIAL_STEEL] = w_class * SScircuit.cost_multiplier
 	. = ..()
 
 /obj/item/integrated_circuit/proc/on_data_written() //Override this for special behaviour when new data gets pushed to the circuit.

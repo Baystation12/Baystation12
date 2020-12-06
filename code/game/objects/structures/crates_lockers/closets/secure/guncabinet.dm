@@ -8,10 +8,6 @@
 	. = ..()
 	update_icon()
 
-/obj/structure/closet/secure_closet/guncabinet/LateInitialize(mapload, ...)
-	. = ..()
-	update_icon()
-
 /obj/structure/closet/secure_closet/guncabinet/toggle()
 	..()
 	update_icon()

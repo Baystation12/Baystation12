@@ -8,9 +8,6 @@
 	temperature = T20C
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
 	var/static/list/dust_cache
-	permit_ao = FALSE
-
-	z_eventually_space = TRUE
 
 /turf/space/proc/build_dust_cache()
 	LAZYINITLIST(dust_cache)
@@ -43,18 +40,11 @@
 
 	return INITIALIZE_HINT_LATELOAD // oh no! we need to switch to being a different kind of turf!
 
-/turf/space/Destroy()
-	// Cleanup cached z_eventually_space values above us.
-	if (above)
-		var/turf/T = src
-		while ((T = GetAbove(T)))
-			T.z_eventually_space = FALSE
-	return ..()
-
 /turf/space/LateInitialize()
+	// We alter area type before the turf to ensure the turf-change-event-propagation is handled as expected.
 	if(GLOB.using_map.base_floor_area)
 		var/area/new_area = locate(GLOB.using_map.base_floor_area) || new GLOB.using_map.base_floor_area
-		ChangeArea(src, new_area)
+		new_area.contents.Add(src)
 	ChangeTurf(GLOB.using_map.base_floor_type)
 
 // override for space turfs, since they should never hide anything
@@ -69,7 +59,7 @@
 	if(!config.starlight)
 		return
 	if(locate(/turf/simulated) in orange(src,1)) //Let's make sure not to break everything if people use a crazy setting.
-		set_light(min(0.1*config.starlight, 1), 1, 3, l_color = SSskybox.background_color)
+		set_light(min(0.1*config.starlight, 1), 1, 3, l_color = SSskybox.BGcolor)
 	else
 		set_light(0)
 
@@ -90,11 +80,12 @@
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
 		if(L)
 			var/obj/item/stack/tile/floor/S = C
-			if (!S.use(1))
+			if (S.get_amount() < 1)
 				return
 			qdel(L)
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-			ChangeTurf(/turf/simulated/floor/airless, keep_air = TRUE)
+			S.use(1)
+			ChangeTurf(/turf/simulated/floor/airless)
 			return
 		else
 			to_chat(user, "<span class='warning'>The plating is going to need some support.</span>")
@@ -222,11 +213,8 @@
 					A.loc.Entered(A)
 	return
 
-/turf/space/ChangeTurf(turf/N, tell_universe = TRUE, force_lighting_update = FALSE, keep_air = FALSE)
-	return ..(N, tell_universe, TRUE, keep_air)
-
-/turf/space/is_open()
-	return TRUE
+/turf/space/ChangeTurf(var/turf/N, var/tell_universe=1, var/force_lighting_update = 0)
+	return ..(N, tell_universe, 1)
 
 //Bluespace turfs for shuttles and possible future transit use
 /turf/space/bluespace

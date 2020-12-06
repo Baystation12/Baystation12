@@ -1,56 +1,60 @@
-/obj/machinery/computer/arcade
+/obj/machinery/computer/arcade/
 	name = "random arcade"
 	desc = "A random arcade machine."
 	icon_state = "arcade"
 	icon_keyboard = null
 	icon_screen = "invaders"
-	var/random = TRUE
-	var/list/prizes = list(	/obj/item/weapon/storage/box/snappops										= 200,
-							/obj/item/toy/blink															= 200,
-							/obj/item/clothing/under/syndicate/tacticool								= 200,
-							/obj/item/toy/sword															= 200,
-							/obj/item/weapon/gun/projectile/revolver/capgun								= 200,
-							/obj/item/toy/crossbow														= 200,
-							/obj/item/weapon/storage/fancy/crayons										= 200,
-							/obj/item/toy/spinningtoy													= 200,
-							/obj/item/toy/prize/powerloader												= 100,
-							/obj/item/toy/prize/fireripley												= 100,
-							/obj/item/toy/prize/deathripley												= 100,
-							/obj/item/toy/prize/gygax													= 100,
-							/obj/item/toy/prize/durand													= 100,
-							/obj/item/toy/prize/honk													= 100,
-							/obj/item/toy/prize/marauder												= 100,
-							/obj/item/toy/prize/seraph													= 100,
-							/obj/item/toy/prize/mauler													= 100,
-							/obj/item/toy/prize/odysseus												= 100,
-							/obj/item/toy/prize/phazon													= 100,
-							/obj/item/weapon/reagent_containers/spray/waterflower						= 100,
-							/obj/random/action_figure													= 100,
-							/obj/random/plushie															= 100,
-							/obj/item/toy/cultsword														= 100,
-							/obj/item/weapon/storage/box/large/foam_gun									= 100,
-							/obj/item/weapon/storage/box/large/foam_gun/burst							= 50,
-							/obj/item/weapon/storage/box/large/foam_gun/revolver						= 25,
-							/obj/item/weapon/storage/box/large/foam_gun/revolver/tampered				= 1
+	var/list/prizes = list(	/obj/item/weapon/storage/box/snappops										= 2,
+							/obj/item/toy/blink															= 2,
+							/obj/item/clothing/under/syndicate/tacticool								= 2,
+							/obj/item/toy/sword															= 2,
+							/obj/item/weapon/gun/projectile/revolver/capgun								= 2,
+							/obj/item/toy/crossbow														= 2,
+							/obj/item/clothing/suit/syndicatefake										= 2,
+							/obj/item/weapon/storage/fancy/crayons										= 2,
+							/obj/item/toy/spinningtoy													= 2,
+							/obj/item/toy/prize/ripley													= 1,
+							/obj/item/toy/prize/fireripley												= 1,
+							/obj/item/toy/prize/deathripley												= 1,
+							/obj/item/toy/prize/gygax													= 1,
+							/obj/item/toy/prize/durand													= 1,
+							/obj/item/toy/prize/honk													= 1,
+							/obj/item/toy/prize/marauder												= 1,
+							/obj/item/toy/prize/seraph													= 1,
+							/obj/item/toy/prize/mauler													= 1,
+							/obj/item/toy/prize/odysseus												= 1,
+							/obj/item/toy/prize/phazon													= 1,
+							/obj/item/weapon/reagent_containers/spray/waterflower						= 1,
+							/obj/random/action_figure													= 1,
+							/obj/random/plushie															= 1,
+							/obj/item/toy/cultsword														= 1
 							)
 
 /obj/machinery/computer/arcade/Initialize()
 	. = ..()
 	// If it's a generic arcade machine, pick a random arcade
 	// circuit board for it and make the new machine
-	if(random)
-		var/obj/item/weapon/stock_parts/circuitboard/arcade/A = pick(subtypesof(/obj/item/weapon/stock_parts/circuitboard/arcade))
-		var/path = initial(A.build_path)
-		new path(loc)
+	if(!circuit)
+		var/choice = pick(typesof(/obj/item/weapon/circuitboard/arcade) - /obj/item/weapon/circuitboard/arcade)
+		var/obj/item/weapon/circuitboard/CB = new choice()
+		new CB.build_path(loc, CB)
 		return INITIALIZE_HINT_QDEL
 
-/obj/machinery/computer/arcade/interface_interact(user)
-	interact(user)
-	return TRUE
-
 /obj/machinery/computer/arcade/proc/prizevend()
-	var/prizeselect = pickweight(prizes)
-	new prizeselect(get_turf(src))
+	if(!contents.len)
+		var/prizeselect = pickweight(prizes)
+		new prizeselect(src.loc)
+
+		if(istype(prizeselect, /obj/item/clothing/suit/syndicatefake)) //Helmet is part of the suit
+			new	/obj/item/clothing/head/syndicatefake(src.loc)
+
+	else
+		var/atom/movable/prize = pick(contents)
+		prize.forceMove(src.loc)
+
+/obj/machinery/computer/arcade/attack_ai(mob/user as mob)
+	return src.attack_hand(user)
+
 
 /obj/machinery/computer/arcade/emp_act(severity)
 	if(stat & (NOPOWER|BROKEN))
@@ -77,7 +81,7 @@
 	name = "arcade machine"
 	desc = "Does not support Pinball."
 	icon_state = "arcade"
-	random = FALSE
+	circuit = /obj/item/weapon/circuitboard/arcade/battle
 	var/enemy_name = "Space Villian"
 	var/temp = "Winners don't use space drugs" //Temporary message, for attack messages, etc
 	var/player_hp = 30 //Player health/attack points
@@ -106,7 +110,9 @@
 	src.SetName((name_action + name_part1 + name_part2))
 
 
-/obj/machinery/computer/arcade/battle/interact(mob/user)
+/obj/machinery/computer/arcade/battle/attack_hand(mob/user as mob)
+	if(..())
+		return
 	user.set_machine(src)
 	var/dat = "<a href='byond://?src=\ref[src];close=1'>Close</a>"
 	dat += "<center><h4>[src.enemy_name]</h4></center>"
@@ -124,12 +130,12 @@
 
 	dat += "</b></center>"
 
-	show_browser(user, dat, "window=arcade")
+	user << browse(dat, "window=arcade")
 	onclose(user, "arcade")
 	return
 
 /obj/machinery/computer/arcade/battle/CanUseTopic(var/mob/user, var/datum/topic_state/state, var/href_list)
-	if((blocked || gameover) && href_list && (href_list["attack"] || href_list["heal"] || href_list["charge"]))
+	if((blocked || gameover) && (href_list["attack"] || href_list["heal"] || href_list["charge"]))
 		return min(..(), STATUS_UPDATE)
 	return ..()
 
@@ -192,6 +198,9 @@
 			SetupGame()
 		. = TOPIC_REFRESH
 
+	if(. == TOPIC_REFRESH)
+		attack_hand(user)
+
 /obj/machinery/computer/arcade/battle/proc/arcade_action(var/user)
 	if ((src.enemy_mp <= 0) || (src.enemy_hp <= 0))
 		if(!gameover)
@@ -218,7 +227,7 @@
 		var/stealamt = rand(2,3)
 		src.temp = "[src.enemy_name] steals [stealamt] of your power!"
 		src.player_mp -= stealamt
-		interface_interact(user)
+		attack_hand(user)
 
 		if (src.player_mp <= 0)
 			src.gameover = 1

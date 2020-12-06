@@ -28,7 +28,7 @@ SUBSYSTEM_DEF(ticker)
 	var/looking_for_antags = 0
 
 /datum/controller/subsystem/ticker/Initialize()
-	to_world("<span class='info'><B>Welcome to the pre-game lobby!</B></span>")
+	to_world("<B><FONT color='blue'>Welcome to the pre-game lobby!</FONT></B>")
 	to_world("Please, setup your character and select ready. Game will start in [round(pregame_timeleft/10)] seconds")
 	return ..()
 
@@ -94,8 +94,11 @@ SUBSYSTEM_DEF(ticker)
 
 	spawn(0)//Forking here so we dont have to wait for this to finish
 		mode.post_setup() // Drafts antags who don't override jobs.
-		to_world("<span class='info'><B>Enjoy the game!</B></span>")
+		to_world("<FONT color='blue'><B>Enjoy the game!</B></FONT>")
 		sound_to(world, sound(GLOB.using_map.welcome_sound))
+
+		//Holiday Round-start stuff	~Carn
+		Holiday_Game_Start()
 
 	if(!length(GLOB.admins))
 		send2adminirc("Round has started with no admins online.")
@@ -254,16 +257,13 @@ Helpers
 	mode = mode_datum
 	master_mode = mode_to_try
 	if(mode_to_try == "secret")
-		to_world("<B>The current game mode is Secret!</B>")
+		to_world("<B>The current game mode is - Secret!</B>")
 		var/list/mode_names = list()
 		for (var/mode_tag in base_runnable_modes)
 			var/datum/game_mode/M = gamemode_cache[mode_tag]
 			if(M)
 				mode_names += M.name
-		if (config.secret_hide_possibilities)
-			message_admins("<B>Possibilities:</B> [english_list(mode_names)]")
-		else
-			to_world("<B>Possibilities:</B> [english_list(mode_names)]")
+		to_world("<B>Possibilities:</B> [english_list(mode_names)]")
 	else
 		mode.announce()
 
@@ -292,7 +292,7 @@ Helpers
 				captainless=0
 			if(!player_is_antag(player.mind, only_offstation_roles = 1))
 				SSjobs.equip_rank(player, player.mind.assigned_role, 0)
-				SScustomitems.equip_custom_items(player)
+				equip_custom_items(player)
 	if(captainless)
 		for(var/mob/M in GLOB.player_list)
 			if(!istype(M,/mob/new_player))
@@ -382,7 +382,7 @@ Helpers
 				var/turf/playerTurf = get_turf(Player)
 				if(evacuation_controller.round_over() && evacuation_controller.emergency_evacuation)
 					if(isNotAdminLevel(playerTurf.z))
-						to_chat(Player, "<span class='info'><b>You managed to survive, but were marooned on [station_name()] as [Player.real_name]...</b></span>")
+						to_chat(Player, "<font color='blue'><b>You managed to survive, but were marooned on [station_name()] as [Player.real_name]...</b></font>")
 					else
 						to_chat(Player, "<font color='green'><b>You managed to survive the events on [station_name()] as [Player.real_name].</b></font>")
 				else if(isAdminLevel(playerTurf.z))
@@ -390,7 +390,7 @@ Helpers
 				else if(issilicon(Player))
 					to_chat(Player, "<font color='green'><b>You remain operational after the events on [station_name()] as [Player.real_name].</b></font>")
 				else
-					to_chat(Player, "<span class='info'><b>You got through just another workday on [station_name()] as [Player.real_name].</b></span>")
+					to_chat(Player, "<font color='blue'><b>You got through just another workday on [station_name()] as [Player.real_name].</b></font>")
 			else
 				if(isghost(Player))
 					var/mob/observer/ghost/O = Player
@@ -400,17 +400,20 @@ Helpers
 					to_chat(Player, "<font color='red'><b>You did not survive the events on [station_name()]...</b></font>")
 	to_world("<br>")
 
-	for(var/mob/living/silicon/ai/aiPlayer in SSmobs.mob_list)
-		var/show_ai_key = aiPlayer.get_preference_value(/datum/client_preference/show_ckey_credits) == GLOB.PREF_SHOW
-		to_world("<b>[aiPlayer.name][show_ai_key ? " (played by [aiPlayer.key])" : ""]'s laws at the [aiPlayer.stat == 2 ? "time of their deactivation" : "end of round"] were:</b>")
+	for (var/mob/living/silicon/ai/aiPlayer in SSmobs.mob_list)
+		if (aiPlayer.stat != 2)
+			to_world("<b>[aiPlayer.name] (Played by: [aiPlayer.key])'s laws at the end of the round were:</b>")
+
+		else
+			to_world("<b>[aiPlayer.name] (Played by: [aiPlayer.key])'s laws when it was deactivated were:</b>")
+
 		aiPlayer.show_laws(1)
 
 		if (aiPlayer.connected_robots.len)
-			var/minions = "<b>[aiPlayer.name]'s loyal minions were:</b>"
+			var/robolist = "<b>The AI's loyal minions were:</b> "
 			for(var/mob/living/silicon/robot/robo in aiPlayer.connected_robots)
-				var/show_robot_key = robo.get_preference_value(/datum/client_preference/show_ckey_credits) == GLOB.PREF_SHOW
-				minions += " [robo.name][show_robot_key ? "(played by: [robo.key])" : ""][robo.stat ? " (deactivated)" : ""],"
-			to_world(minions)
+				robolist += "[robo.name][robo.stat?" (Deactivated) (Played by: [robo.key]), ":" (Played by: [robo.key]), "]"
+			to_world("[robolist]")
 
 	var/dronecount = 0
 
@@ -421,8 +424,12 @@ Helpers
 			continue
 
 		if (!robo.connected_ai)
-			var/show_robot_key = robo.get_preference_value(/datum/client_preference/show_ckey_credits) == GLOB.PREF_SHOW
-			to_world("<b>[robo.name][show_robot_key ? " (played by [robo.key])" : ""]'s individual laws at the [robo.stat == 2 ? "time of their deactivation" : "end of round"] were:</b>")
+			if (robo.stat != 2)
+				to_world("<b>[robo.name] (Played by: [robo.key]) survived as an AI-less synthetic! Its laws were:</b>")
+
+			else
+				to_world("<b>[robo.name] (Played by: [robo.key]) was unable to survive the rigors of being a synthetic without an AI. Its laws were:</b>")
+
 
 			if(robo) //How the hell do we lose robo between here and the world messages directly above this?
 				robo.laws.show_laws(world)
@@ -441,8 +448,8 @@ Helpers
 				max_profit = D
 			if(saldo <= max_loss.get_balance())
 				max_loss = D
-		to_world("<b>[max_profit.owner_name]</b> received most <font color='green'><B>PROFIT</B></font> today, with net profit of <b>[GLOB.using_map.local_currency_name_short][max_profit.get_balance()]</b>.")
-		to_world("On the other hand, <b>[max_loss.owner_name]</b> had most <font color='red'><B>LOSS</B></font>, with total loss of <b>[GLOB.using_map.local_currency_name_short][max_loss.get_balance()]</b>.")
+		to_world("<b>[max_profit.owner_name]</b> received most <font color='green'><B>PROFIT</B></font> today, with net profit of <b>T[max_profit.get_balance()]</b>.")
+		to_world("On the other hand, <b>[max_loss.owner_name]</b> had most <font color='red'><B>LOSS</B></font>, with total loss of <b>T[max_loss.get_balance()]</b>.")
 
 	mode.declare_completion()//To declare normal completion.
 

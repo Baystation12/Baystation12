@@ -1,0 +1,1 @@
+#undef SURGERY_FAILURE

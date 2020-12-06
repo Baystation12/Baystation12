@@ -56,79 +56,30 @@
 	icon = 'icons/obj/clothing/obj_suit_modular_armor.dmi'
 	icon_state = "armor_light"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
-	armor = list(
-		melee = ARMOR_MELEE_KNIVES,
-		bullet = ARMOR_BALLISTIC_SMALL,
-		laser = ARMOR_LASER_MINOR,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_MINOR
-		)
+	armor = list(melee = 25, bullet = 30, laser = 30, energy = 10, bomb = 25, bio = 0, rad = 0)
 	slot = ACCESSORY_SLOT_ARMOR_C
-	flags_inv = CLOTHING_BULKY
 
 /obj/item/clothing/accessory/armorplate/get_fibers()
 	return null	//plates do not shed
-
-/obj/item/clothing/accessory/armorplate/sneaky
-	name = "low-profile armor vest"
-	desc = "An armor vest made of layered polymer fibers. Can attach to your slacks and office shirt."
-	item_icons = list(slot_wear_suit_str = 'icons/mob/onmob/onmob_accessories.dmi')
-	item_flags = ITEM_FLAG_THICKMATERIAL
-	slot_flags = SLOT_OCLOTHING //can wear in suit slot as well
-	slot = ACCESSORY_SLOT_UTILITY
-	w_class = ITEM_SIZE_NORMAL
-	blood_overlay_type = "armor"
-	icon_state = "undervest"
-
-/obj/item/clothing/accessory/armorplate/sneaky/tactical
-	name = "low-profile tactical armor vest"
-	desc = "An armor vest made of layered smart polymers. Can attach to your slacks and office shirt."
-	slowdown = 0.5
-	armor = list(
-		melee = ARMOR_MELEE_KNIVES,
-		bullet = ARMOR_BALLISTIC_PISTOL,
-		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_SMALL,
-		bomb = ARMOR_BOMB_PADDED
-	)
 
 /obj/item/clothing/accessory/armorplate/medium
 	name = "medium armor plate"
 	desc = "A plasteel-reinforced synthetic armor plate, providing good protection. Attaches to a plate carrier."
 	icon_state = "armor_medium"
-	armor = list(
-		melee = ARMOR_MELEE_KNIVES,
-		bullet = ARMOR_BALLISTIC_PISTOL,
-		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_SMALL,
-		bomb = ARMOR_BOMB_PADDED
-		)
+	armor = list(melee = 40, bullet = 40, laser = 40, energy = 25, bomb = 30, bio = 0, rad = 0)
 
 /obj/item/clothing/accessory/armorplate/tactical
 	name = "tactical armor plate"
-	desc = "A heavier armor plate with additional ablative coating. Attaches to a plate carrier."
+	desc = "A medium armor plate with additional ablative coating. Attaches to a plate carrier."
 	icon_state = "armor_tactical"
-	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_RESISTANT,
-		laser = ARMOR_LASER_MAJOR,
-		energy = ARMOR_ENERGY_RESISTANT,
-		bomb = ARMOR_BOMB_PADDED
-		)
-	slowdown = 0.5
+	armor = list(melee = 40, bullet = 40, laser = 60, energy = 35, bomb = 30, bio = 0, rad = 0)
 
 /obj/item/clothing/accessory/armorplate/merc
 	name = "heavy armor plate"
 	desc = "A ceramics-reinforced synthetic armor plate, providing state of of the art protection. Attaches to a plate carrier."
 	icon_state = "armor_merc"
-	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_RIFLE,
-		laser = ARMOR_LASER_MAJOR,
-		energy = ARMOR_ENERGY_RESISTANT,
-		bomb = ARMOR_BOMB_PADDED
-		)
-	slowdown = 0.5
+	armor = list(melee = 60, bullet = 60, laser = 60, energy = 40, bomb = 40, bio = 0, rad = 0)
+	slowdown = 1
 
 //Arm guards
 /obj/item/clothing/accessory/armguards
@@ -140,16 +91,8 @@
 	icon_state = "armguards"
 	gender = PLURAL
 	body_parts_covered = ARMS
-	armor = list(
-		melee = ARMOR_MELEE_KNIVES,
-		bullet = ARMOR_BALLISTIC_PISTOL,
-		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_SMALL,
-		bomb = ARMOR_BOMB_PADDED
-		)
+	armor = list(melee = 40, bullet = 40, laser = 40, energy = 25, bomb = 30, bio = 0, rad = 0)
 	slot = ACCESSORY_SLOT_ARMOR_A
-	body_location = ARMS
-	flags_inv = CLOTHING_BULKY
 
 /obj/item/clothing/accessory/armguards/blue
 	desc = "A pair of blue arm pads reinforced with armor plating. Attaches to a plate carrier."
@@ -171,51 +114,27 @@
 	name = "heavy arm guards"
 	desc = "A pair of red-trimmed black arm pads reinforced with heavy armor plating. Attaches to a plate carrier."
 	icon_state = "armguards_merc"
-	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_PISTOL,
-		laser = ARMOR_LASER_HANDGUNS,
-		energy = ARMOR_ENERGY_RESISTANT,
-		bomb = ARMOR_BOMB_PADDED
-		)
+	armor = list(melee = 60, bullet = 60, laser = 60, energy = 40, bomb = 40, bio = 0, rad = 0)
 
 /obj/item/clothing/accessory/armguards/riot
 	name = "riot arm guards"
 	desc = "A pair of armored arm pads with heavy padding to protect against melee attacks."
 	icon_state = "armguards_riot"
-	armor = list(
-		melee = ARMOR_MELEE_VERY_HIGH,
-		bullet = ARMOR_BALLISTIC_SMALL,
-		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_PADDED
-		)
+	armor = list(melee = 75, bullet = 33, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
 	siemens_coefficient = 0.5
 
 /obj/item/clothing/accessory/armguards/ballistic
 	name = "ballistic arm guards"
 	desc = "A pair of armored arm pads with heavy plates to protect against ballistic projectiles."
 	icon_state = "armguards_ballistic"
-	armor = list(
-		melee = ARMOR_MELEE_KNIVES,
-		bullet = ARMOR_BALLISTIC_RIFLE,
-		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_PADDED
-		)
+	armor = list(melee = 42, bullet = 75, laser = 42, energy = 10, bomb = 25, bio = 0, rad = 0)
 	siemens_coefficient = 0.7
 
 /obj/item/clothing/accessory/armguards/ablative
 	name = "ablative arm guards"
 	desc = "A pair of armored arm pads with advanced shielding to protect against energy weapons."
 	icon_state = "armguards_ablative"
-	armor = list(
-		melee = ARMOR_MELEE_KNIVES,
-		bullet = ARMOR_BALLISTIC_SMALL,
-		laser = ARMOR_LASER_RIFLES,
-		energy = ARMOR_ENERGY_RESISTANT,
-		bomb = ARMOR_BOMB_PADDED
-		)
+	armor = list(melee = 35, bullet = 35, laser = 75, energy = 50, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0
 
 //Leg guards
@@ -228,16 +147,8 @@
 	icon_state = "legguards"
 	gender = PLURAL
 	body_parts_covered = LEGS
-	armor = list(
-		melee = ARMOR_MELEE_KNIVES,
-		bullet = ARMOR_BALLISTIC_PISTOL,
-		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_SMALL,
-		bomb = ARMOR_BOMB_PADDED
-		)
+	armor = list(melee = 40, bullet = 40, laser = 40, energy = 25, bomb = 30, bio = 0, rad = 0)
 	slot = ACCESSORY_SLOT_ARMOR_L
-	body_location = LEGS
-	flags_inv = CLOTHING_BULKY
 
 /obj/item/clothing/accessory/legguards/blue
 	desc = "A pair of armored leg pads in blue. Attaches to a plate carrier."
@@ -259,25 +170,13 @@
 	name = "heavy leg guards"
 	desc = "A pair of heavily armored leg pads in red-trimmed black. Attaches to a plate carrier."
 	icon_state = "legguards_merc"
-	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_PISTOL,
-		laser = ARMOR_LASER_HANDGUNS,
-		energy = ARMOR_ENERGY_RESISTANT,
-		bomb = ARMOR_BOMB_PADDED
-		)
+	armor = list(melee = 60, bullet = 60, laser = 60, energy = 40, bomb = 40, bio = 0, rad = 0)
 
 /obj/item/clothing/accessory/legguards/riot
 	name = "riot leg guards"
 	desc = "A pair of armored leg pads with heavy padding to protect against melee attacks. Looks like they might impair movement."
 	icon_state = "legguards_riot"
-	armor = list(
-		melee = ARMOR_MELEE_VERY_HIGH,
-		bullet = ARMOR_BALLISTIC_SMALL,
-		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_PADDED
-		)
+	armor = list(melee = 75, bullet = 33, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
 	siemens_coefficient = 0.5
 	slowdown = 1
 
@@ -285,13 +184,7 @@
 	name = "ballistic leg guards"
 	desc = "A pair of armored leg pads with heavy plates to protect against ballistic projectiles. Looks like they might impair movement."
 	icon_state = "legguards_ballistic"
-	armor = list(
-		melee = ARMOR_MELEE_KNIVES,
-		bullet = ARMOR_BALLISTIC_RIFLE,
-		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_PADDED
-		)
+	armor = list(melee = 42, bullet = 75, laser = 42, energy = 10, bomb = 25, bio = 0, rad = 0)
 	siemens_coefficient = 0.7
 	slowdown = 1
 
@@ -299,13 +192,7 @@
 	name = "ablative leg guards"
 	desc = "A pair of armored leg pads with advanced shielding to protect against energy weapons. Looks like they might impair movement."
 	icon_state = "legguards_ablative"
-	armor = list(
-		melee = ARMOR_MELEE_KNIVES,
-		bullet = ARMOR_BALLISTIC_SMALL,
-		laser = ARMOR_LASER_RIFLES,
-		energy = ARMOR_ENERGY_RESISTANT,
-		bomb = ARMOR_BOMB_PADDED
-		)
+	armor = list(melee = 35, bullet = 35, laser = 75, energy = 50, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0
 	slowdown = 1
 
@@ -319,7 +206,6 @@
 	accessory_icons = list(slot_tie_str = 'icons/mob/onmob/onmob_modular_armor.dmi', slot_wear_suit_str = 'icons/mob/onmob/onmob_modular_armor.dmi')
 	icon_state = "null"
 	slot = ACCESSORY_SLOT_ARMOR_M
-	w_class = ITEM_SIZE_TINY
 
 /obj/item/clothing/accessory/armor/tag/nt
 	name = "\improper CORPORATE SECURITY tag"
@@ -390,7 +276,6 @@
 	accessory_icons = list(slot_tie_str = 'icons/mob/onmob/onmob_modular_armor.dmi', slot_head_str = 'icons/mob/onmob/onmob_modular_armor.dmi')
 	icon_state = "null"
 	slot = ACCESSORY_SLOT_HELM_C
-	body_location = HEAD
 
 /obj/item/clothing/accessory/armor/helmcover/blue
 	name = "blue helmet cover"
@@ -413,8 +298,8 @@
 	icon_state = "helmcover_tan"
 
 /obj/item/clothing/accessory/armor/helmcover/nt
-	name = "white helmet cover"
-	desc = "A fabric cover for armored helmets. This one is white."
+	name = "corporate helmet cover"
+	desc = "A fabric cover for armored helmets. This one has corporate colors."
 	icon_state = "helmcover_nt"
 
 /obj/item/clothing/accessory/armor/helmcover/pcrc

@@ -44,7 +44,7 @@
 /obj/item/weapon/rcd/proc/can_use(var/mob/user,var/turf/T)
 	return (user.Adjacent(T) && user.get_active_hand() == src && !user.incapacitated())
 
-/obj/item/weapon/rcd/examine(mob/user)
+/obj/item/weapon/rcd/examine(var/user)
 	. = ..()
 	if(src.type == /obj/item/weapon/rcd && loc == user)
 		to_chat(user, "The current mode is '[work_mode]'")
@@ -76,6 +76,8 @@
 		update_icon()
 		return
 
+	//Rapid Crossbow Device crafting memes
+
 	if(isScrewdriver(W))
 		crafting = !crafting
 		if(!crafting)
@@ -85,6 +87,20 @@
 		src.add_fingerprint(user)
 		return
 
+	if((crafting) && (istype(W,/obj/item/weapon/crossbowframe)))
+		var/obj/item/weapon/crossbowframe/F = W
+		if(F.buildstate == 5)
+			if(!user.unEquip(src))
+				return
+			qdel(F)
+			var/obj/item/weapon/gun/launcher/crossbow/rapidcrossbowdevice/CB = new(get_turf(user))
+			forceMove(CB)
+			CB.stored_matter = src.stored_matter
+			add_fingerprint(user)
+			return
+		else
+			to_chat(user, "<span class='notice'>You need to fully assemble the crossbow frame first!</span>")
+			return
 	..()
 
 /obj/item/weapon/rcd/attack_self(mob/user)
@@ -133,9 +149,9 @@
 	matter = list(MATERIAL_STEEL = 15000,MATERIAL_GLASS = 7500)
 	var/remaining = 30
 
-/obj/item/weapon/rcd_ammo/examine(mob/user, distance)
-	. = ..()
-	if(distance <= 1)
+/obj/item/weapon/rcd_ammo/examine(var/mob/user)
+	. = ..(user,1)
+	if(.)
 		to_chat(user, "<span class='notice'>It has [remaining] unit\s of matter left.</span>")
 
 /obj/item/weapon/rcd_ammo/large
@@ -167,16 +183,13 @@
 
 
 /obj/item/weapon/rcd/mounted/useResource(var/amount, var/mob/user)
-	var/cost = amount*35 // About 9 deconstructions of walls on a good cell, less if it involves airlocks.
-	var/obj/item/weapon/cell/cell
+	var/cost = amount*70 //Arbitary number that hopefully gives it as many uses as a plain RCD.
 	if(istype(loc,/obj/item/rig_module))
 		var/obj/item/rig_module/module = loc
 		if(module.holder && module.holder.cell)
-			cell = module.holder.cell
-	else if(loc) cell = loc.get_cell()
-	if(cell && cell.charge >= cost)
-		cell.use(cost)
-		return 1
+			if(module.holder.cell.charge >= cost)
+				module.holder.cell.use(cost)
+				return 1
 	return 0
 
 /obj/item/weapon/rcd/mounted/attackby()
@@ -217,8 +230,7 @@
 	return FALSE
 
 /decl/hierarchy/rcd_mode/proc/can_handle_work(var/obj/item/weapon/rcd/rcd, var/atom/target)
-	var/area/A = get_area(get_turf(target))
-	return istype(target, handles_type) && A.can_modify_area()
+	return istype(target, handles_type)
 
 /decl/hierarchy/rcd_mode/proc/do_handle_work(var/atom/target)
 	var/result = get_work_result(target)
@@ -269,8 +281,7 @@
 	work_type = /turf/simulated/floor/airless
 
 /decl/hierarchy/rcd_mode/floor_and_walls/base_turf/can_handle_work(var/rcd, var/turf/target)
-	var/area/A = get_area(target)
-	return istype(target) && (isspaceturf(target) || isopenspace(target) || istype(target, get_base_turf_by_area(target))) && A.can_modify_area()
+	return istype(target) && (isspace(target) || istype(target, get_base_turf_by_area(target)))
 
 /decl/hierarchy/rcd_mode/floor_and_walls/floor_turf
 	cost = 3
@@ -308,29 +319,3 @@
 
 /decl/hierarchy/rcd_mode/deconstruction/wall/can_handle_work(var/obj/item/weapon/rcd/rcd, var/turf/simulated/wall/target)
 	return ..() && (rcd.canRwall || !target.reinf_material)
-
-/decl/hierarchy/rcd_mode/deconstruction/wall_frame
-	cost = 4
-	delay = 2 SECONDS
-	handles_type = /obj/structure/wall_frame
-
-/decl/hierarchy/rcd_mode/deconstruction/wall_frame/can_handle_work(obj/item/weapon/rcd/rcd, obj/structure/wall_frame/target)
-	. = ..()
-	if (.)
-		var/turf/T = get_turf(target)
-		var/area/A = get_area(T)
-		if ((locate(/obj/structure/window) in T) || (locate(/obj/structure/grille) in T) || !A.can_modify_area())
-			return FALSE
-
-/decl/hierarchy/rcd_mode/deconstruction/window
-	cost = 4
-	delay = 2 SECONDS
-	handles_type = /obj/structure/window
-
-/decl/hierarchy/rcd_mode/deconstruction/window/can_handle_work(obj/item/weapon/rcd/rcd, obj/structure/window/target)
-	return ..() && (rcd.canRwall || !target.reinf_material)
-
-/decl/hierarchy/rcd_mode/deconstruction/grille
-	cost = 2
-	delay = 1 SECOND
-	handles_type = /obj/structure/grille

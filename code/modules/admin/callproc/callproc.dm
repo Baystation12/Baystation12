@@ -203,8 +203,6 @@
 		holder.callproc.do_args()
 
 /client/Click(atom/A)
-	if(!user_acted(src))
-		return
 	if(holder && holder.callproc && holder.callproc.waiting_for_click)
 		if(alert("Do you want to select \the [A] as the [holder.callproc.arguments.len+1]\th argument?",, "Yes", "No") == "Yes")
 			holder.callproc.arguments += A
@@ -222,13 +220,13 @@
 		if(!target)
 			to_chat(usr, "Your callproc target no longer exists.")
 			return
-		log_and_message_admins("[key_name(C)] called \the [target]'s [procname]() with [arguments.len ? "the arguments [list2params(arguments)]" : "no arguments"].", location = get_turf(target))
+		log_admin("[key_name(src)] called [target]'s [procname]() with [arguments.len ? "the arguments [list2params(arguments)]" : "no arguments"].")
 		if(arguments.len)
 			returnval = call(target, procname)(arglist(arguments))
 		else
 			returnval = call(target, procname)()
 	else
-		log_and_message_admins("[key_name(C)] called [procname]() with [arguments.len ? "the arguments [list2params(arguments)]" : "no arguments"].", location = get_turf(target))
+		log_admin("[key_name(src)] called [procname]() with [arguments.len ? "the arguments [list2params(arguments)]" : "no arguments"].")
 		returnval = call(procname)(arglist(arguments))
 
 	to_chat(usr, "<span class='info'>[procname]() returned: [json_encode(returnval)]</span>")

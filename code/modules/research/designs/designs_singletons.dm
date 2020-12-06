@@ -6,7 +6,7 @@
 	name = "binary"
 	desc = "Allows for deciphering the binary channel on-the-fly."
 	id = "binaryencrypt"
-	req_tech = list(TECH_ESOTERIC = 2)
+	req_tech = list(TECH_ILLEGAL = 2)
 	materials = list(MATERIAL_STEEL = 300, MATERIAL_GLASS = 300)
 	build_path = /obj/item/device/encryptionkey/binary
 	sort_string = "VASAA"
@@ -19,18 +19,10 @@
 	name = "holographic equipment kit"
 	desc = "A kit of dangerous, high-tech equipment with changeable looks."
 	id = "chameleon"
-	req_tech = list(TECH_ESOTERIC = 2)
+	req_tech = list(TECH_ILLEGAL = 2)
 	materials = list(MATERIAL_STEEL = 500, MATERIAL_ALUMINIUM = 500, MATERIAL_PLASTIC = 500)
 	build_path = /obj/item/weapon/storage/backpack/chameleon/sydie_kit
 	sort_string = "VASBA"
-	
-/datum/design/item/weapon/storage/box/freezer
-	name = "Portable Freezer"
-	desc = "This nifty shock-resistant device will keep your 'groceries' nice and non-spoiled."
-	id = "freezer"
-	req_tech = list(TECH_MATERIAL = 3, TECH_POWER = 2)
-	materials = list(MATERIAL_PLASTIC = 350)
-	build_path = /obj/item/weapon/storage/box/freezer
 
 /datum/design/item/advmop
 	name = "Advanced Mop"
@@ -60,7 +52,7 @@
 	name = "Uncertified module: PRTY"
 	desc = "Schematics for a robotic module, scraped from seedy parts of the net. Who knows what it does."
 	id = "borg_party_module"
-	req_tech = list(TECH_DATA = 2, TECH_ESOTERIC = 2)
+	req_tech = list(TECH_DATA = 2, TECH_ILLEGAL = 2)
 	build_type = MECHFAB
 	materials = list(MATERIAL_STEEL = 7500, MATERIAL_ALUMINIUM = 5000, MATERIAL_DIAMOND = 2000)
 	build_path = /obj/item/borg/upgrade/uncertified/party

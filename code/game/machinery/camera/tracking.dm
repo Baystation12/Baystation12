@@ -6,7 +6,7 @@
 /mob/living/silicon/ai/var/stored_locations[0]
 
 /proc/InvalidPlayerTurf(turf/T as turf)
-	return !(T && (T.z in GLOB.using_map.player_levels))
+	return !(T && T.z in GLOB.using_map.player_levels)
 
 /mob/living/silicon/ai/proc/get_camera_list()
 	if(src.stat == 2)
@@ -41,7 +41,7 @@
 /mob/living/silicon/ai/proc/ai_store_location(loc as text)
 	set category = "Silicon Commands"
 	set name = "Store Camera Location"
-	set desc = "Stores your current camera location by the given name."
+	set desc = "Stores your current camera location by the given name"
 
 	loc = sanitize(loc)
 	if(!loc)
@@ -70,7 +70,7 @@
 /mob/living/silicon/ai/proc/ai_goto_location(loc in sorted_stored_locations())
 	set category = "Silicon Commands"
 	set name = "Goto Camera Location"
-	set desc = "Returns to the selected camera location."
+	set desc = "Returns to the selected camera location"
 
 	if (!(loc in stored_locations))
 		to_chat(src, "<span class='warning'>Location [loc] not found</span>")
@@ -82,7 +82,7 @@
 /mob/living/silicon/ai/proc/ai_remove_location(loc in sorted_stored_locations())
 	set category = "Silicon Commands"
 	set name = "Delete Camera Location"
-	set desc = "Deletes the selected camera location."
+	set desc = "Deletes the selected camera location"
 
 	if (!(loc in stored_locations))
 		to_chat(src, "<span class='warning'>Location [loc] not found</span>")

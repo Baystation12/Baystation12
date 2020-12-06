@@ -16,14 +16,13 @@
 
 	var/spray_particles = 3
 	var/spray_amount = 120	//units of liquid per spray - 120 -> same as splashing them with a bucket per spray
-	var/starting_water = 2000
 	var/max_water = 2000
 	var/last_use = 1.0
 	var/safety = 1
 	var/sprite_name = "fire_extinguisher"
 
 /obj/item/weapon/extinguisher/mini
-	name = "mini fire extinguisher"
+	name = "fire extinguisher"
 	desc = "A light and compact fibreglass-framed model fire extinguisher."
 	icon_state = "miniFE0"
 	item_state = "miniFE"
@@ -32,27 +31,18 @@
 	w_class = ITEM_SIZE_SMALL
 	force = 3.0
 	spray_amount = 80
-	starting_water = 1000
 	max_water = 1000
 	sprite_name = "miniFE"
-	matter = list(MATERIAL_STEEL = 30, MATERIAL_GLASS = 30)
 
-/obj/item/weapon/extinguisher/Initialize()
-	. = ..()
+/obj/item/weapon/extinguisher/New()
 	create_reagents(max_water)
-	if(starting_water > 0)
-		reagents.add_reagent(/datum/reagent/water, starting_water)
+	reagents.add_reagent(/datum/reagent/water, max_water)
+	..()
 
-/obj/item/weapon/extinguisher/empty
-	starting_water = 0
-
-/obj/item/weapon/extinguisher/mini/empty
-	starting_water = 0
-
-/obj/item/weapon/extinguisher/examine(mob/user, distance)
-	. = ..()
-	if(distance <= 0)
-		to_chat(user, text("[icon2html(src, viewers(get_turf(src)))] [] contains [] units of water left!", src, src.reagents.total_volume))
+/obj/item/weapon/extinguisher/examine(mob/user)
+	if(..(user, 0))
+		to_chat(user, text("\icon[] [] contains [] units of water left!", src, src.name, src.reagents.total_volume))
+	return
 
 /obj/item/weapon/extinguisher/attack_self(mob/user as mob)
 	safety = !safety
@@ -66,13 +56,13 @@
 		if(src.safety || (world.time < src.last_use + 20)) // We still catch help intent to not randomly attack people
 			return
 		if(src.reagents.total_volume < 1)
-			to_chat(user, SPAN_NOTICE("\The [src] is empty."))
+			to_chat(user, "<span class='notice'>\The [src] is empty.</span>")
 			return
 
 		src.last_use = world.time
 		reagents.splash(M, min(reagents.total_volume, spray_amount))
 
-		user.visible_message(SPAN_NOTICE("\The [user] sprays \the [M] with \the [src]."))
+		user.visible_message("<span class='notice'>\The [user] sprays \the [M] with \the [src].</span>")
 		playsound(src.loc, 'sound/effects/extinguish.ogg', 75, 1, -3)
 
 		return 1 // No afterattack
@@ -96,40 +86,25 @@
 		O.Move(get_step(user,movementdirection), movementdirection)
 		sleep(3)
 
-/obj/item/weapon/extinguisher/resolve_attackby(var/atom/target, var/mob/user, var/flag)
-	if (istype(target, /obj/structure/hygiene/sink) && reagents.get_free_space() > 0) // fill first, wash if full
-		return FALSE
-	return ..()
-
-
 /obj/item/weapon/extinguisher/afterattack(var/atom/target, var/mob/user, var/flag)
-	var/issink = istype(target, /obj/structure/hygiene/sink)
+	//TODO; Add support for reagents in water.
 
-	if (flag && (issink || istype(target, /obj/structure/reagent_dispensers)))
-		var/obj/dispenser = target
-		var/amount = reagents.get_free_space()
-		if (amount <= 0)
-			to_chat(user, SPAN_NOTICE("\The [src] is full."))
-			return
-		if (!issink) // sinks create reagents, they don't "contain" them
-			if (dispenser.reagents.total_volume <= 0)
-				to_chat(user, SPAN_NOTICE("\The [dispenser] is empty."))
-				return
-			amount = dispenser.reagents.trans_to_obj(src, max_water)
-		else
-			reagents.add_reagent(/datum/reagent/water, amount)
-		to_chat(user, SPAN_NOTICE("You fill \the [src] with [amount] units from \the [dispenser]."))
+	if( istype(target, /obj/structure/reagent_dispensers) && flag)
+		var/obj/o = target
+		var/amount = o.reagents.trans_to_obj(src, 500)
+		to_chat(user, "<span class='notice'>You fill [src] with [amount] units of the contents of [target].</span>")
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
-		if (istype(target, /obj/structure/reagent_dispensers/acid))
-			to_chat(user, SPAN_WARNING("The acid violently eats away at \the [src]!"))
-			if (prob(50))
+		if(istype(target, /obj/structure/reagent_dispensers/acid))
+			to_chat(user, "<span class='warning'>You can only watch as the acid begins violently eating away at the bottom of \the [src]!</span>")
+			if(prob(50))
 				reagents.splash(user, 5)
 			qdel(src)
+			return
 		return
 
 	if (!safety)
 		if (src.reagents.total_volume < 1)
-			to_chat(usr, SPAN_NOTICE("\The [src] is empty."))
+			to_chat(usr, "<span class='notice'>\The [src] is empty.</span>")
 			return
 
 		if (world.time < src.last_use + 20)

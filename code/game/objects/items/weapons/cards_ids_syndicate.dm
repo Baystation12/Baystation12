@@ -1,6 +1,6 @@
 /obj/item/weapon/card/id/syndicate
 	assignment = "Agent"
-	origin_tech = list(TECH_ESOTERIC = 3)
+	origin_tech = list(TECH_ILLEGAL = 3)
 	var/electronic_warfare = 1
 	var/mob/registered_user = null
 	color = COLOR_GRAY40
@@ -85,8 +85,8 @@
 	GLOB.destroyed_event.unregister(registered_user, src)
 	registered_user = null
 
-/obj/item/weapon/card/id/syndicate/CanUseTopic(var/mob/user, var/datum/topic_state/state, var/href_list)
-	if(!(href_list && href_list["look_at_id"]) && (user != registered_user))
+/obj/item/weapon/card/id/syndicate/CanUseTopic(mob/user)
+	if(user != registered_user)
 		return STATUS_CLOSE
 	return ..()
 
@@ -238,11 +238,7 @@
 			CS.color = initial(ID.color)
 			CS.detail_color = initial(ID.detail_color)
 			CS.extra_details = initial(ID.extra_details)
-			CS.name = initial(ID.name)
-			if (initial(ID.job_access_type))
-				var/datum/job/J = initial(ID.job_access_type)
-				CS.name += " ([initial(J.title)]) "
-			CS.name += " - [initial(ID.icon_state)]"
+			CS.name = initial(ID.name) + " - " + initial(ID.icon_state)
 			var/color_pair = ""
 			if(CS.color)
 				color_pair += CS.color

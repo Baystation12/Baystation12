@@ -7,6 +7,8 @@
 		"blood_colour" = COLOR_BLOOD_HUMAN,
 		"trace_chem" = null,
 		"dose_chem" = null,
+		"virus2" = list(),
+		"antibodies" = list(),
 		"has_oxy" = 1
 	)
 	name = "Blood"
@@ -14,12 +16,10 @@
 	reagent_state = LIQUID
 	metabolism = REM * 5
 	color = "#c80000"
-	scannable = 1
 	taste_description = "iron"
 	taste_mult = 1.3
 	glass_name = "tomato juice"
 	glass_desc = "Are you sure this is tomato juice?"
-	value = 2
 
 	chilling_products = list(/datum/reagent/coagulated_blood)
 	chilling_point = 249
@@ -36,11 +36,38 @@
 	return
 
 /datum/reagent/blood/proc/sync_to(var/mob/living/carbon/C)
-	data = C.get_blood_data()
+	data["donor"] = weakref(C)
+	if (!data["virus2"])
+		data["virus2"] = list()
+	data["virus2"] |= virus_copylist(C.virus2)
+	data["antibodies"] = C.antibodies
+	data["blood_DNA"] = C.dna.unique_enzymes
+	data["blood_type"] = C.dna.b_type
+	data["species"] = C.species.name
+	data["has_oxy"] = C.species.blood_oxy
+	var/list/temp_chem = list()
+	for(var/datum/reagent/R in C.reagents.reagent_list)
+		temp_chem[R.type] = R.volume
+	data["trace_chem"] = temp_chem
+	data["dose_chem"] = C.chem_doses.Copy()
+	data["blood_colour"] = C.species.get_blood_colour(C)
 	color = data["blood_colour"]
+
+/datum/reagent/blood/mix_data(var/newdata, var/newamount)
+	if(!islist(newdata))
+		return
+	if(!data["virus2"])
+		data["virus2"] = list()
+	data["virus2"] |= newdata["virus2"]
+	if(!data["antibodies"])
+		data["antibodies"] = list()
+	data["antibodies"] |= newdata["antibodies"]
 
 /datum/reagent/blood/get_data() // Just in case you have a reagent that handles data differently.
 	var/t = data.Copy()
+	if(t["virus2"])
+		var/list/v = t["virus2"]
+		t["virus2"] = v.Copy()
 	return t
 
 /datum/reagent/blood/touch_turf(var/turf/simulated/T)
@@ -64,26 +91,53 @@
 		M.adjustToxLoss(removed)
 	if(M.chem_doses[type] > 15)
 		M.adjustToxLoss(removed)
+	if(data && data["virus2"])
+		var/list/vlist = data["virus2"]
+		if(vlist.len)
+			for(var/ID in vlist)
+				var/datum/disease2/disease/V = vlist[ID]
+				if(V && V.spreadtype == "Contact")
+					infect_virus2(M, V.getcopy())
 
 /datum/reagent/blood/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(H.isSynthetic())
 			return
+	if(data && data["virus2"])
+		var/list/vlist = data["virus2"]
+		if(vlist.len)
+			for(var/ID in vlist)
+				var/datum/disease2/disease/V = vlist[ID]
+				if(V.spreadtype == "Contact")
+					infect_virus2(M, V.getcopy())
+	if(data && data["antibodies"])
+		M.antibodies |= data["antibodies"]
 
 /datum/reagent/blood/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.inject_blood(src, volume)
 	remove_self(volume)
 
+// pure concentrated antibodies
+/datum/reagent/antibodies
+	data = list("antibodies"=list())
+	name = "Antibodies"
+	taste_description = "slime"
+	reagent_state = LIQUID
+	color = "#0050f0"
+
+/datum/reagent/antibodies/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(src.data)
+		M.antibodies |= src.data["antibodies"]
+	..()
+
 // Water!
 #define WATER_LATENT_HEAT 9500 // How much heat is removed when applied to a hot turf, in J/unit (9500 makes 120 u of water roughly equivalent to 2L
 /datum/reagent/water
 	name = "Water"
-	description = "A ubiquitous chemical substance composed of hydrogen and oxygen."
+	description = "A ubiquitous chemical substance that is composed of hydrogen and oxygen."
 	reagent_state = LIQUID
-	color = "#3073b6"
-	alpha = 120
-	scannable = 1
+	color = "#0064c877"
 	metabolism = REM * 10
 	taste_description = "water"
 	glass_name = "water"
@@ -92,7 +146,6 @@
 	chilling_point = T0C
 	heating_products = list(/datum/reagent/water/boiling)
 	heating_point = T100C
-	value = 0
 
 /datum/reagent/water/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(!istype(M, /mob/living/carbon/slime) && alien != IS_SLIME)
@@ -103,9 +156,6 @@
 	if(!istype(M, /mob/living/carbon/slime) && alien != IS_SLIME)
 		return
 	M.adjustToxLoss(2 * removed)
-
-/datum/reagent/water/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	M.adjust_hydration(removed * 10)
 
 /datum/reagent/water/touch_turf(var/turf/simulated/T)
 	if(!istype(T))
@@ -139,14 +189,6 @@
 			cube.Expand()
 
 /datum/reagent/water/touch_mob(var/mob/living/L, var/amount)
-	var/mob/living/carbon/human/H = L
-	if(istype(H))
-		var/obj/item/clothing/mask/smokable/S = H.wear_mask
-		if (istype(S) && S.lit)
-			var/obj/item/clothing/C = H.head
-			if (!istype(C) || !(C.body_parts_covered & FACE))
-				S.extinguish()
-
 	if(istype(L))
 		var/needed = L.fire_stacks * 10
 		if(amount > needed)
@@ -174,7 +216,7 @@
 /datum/reagent/water/boiling
 	name = "Boiling water"
 	chilling_products = list(/datum/reagent/water)
-	chilling_point =   99 CELSIUS
+	chilling_point =   99 CELCIUS
 	chilling_message = "stops boiling."
 	heating_products =  list(null)
 	heating_point =    null
@@ -188,7 +230,6 @@
 	reagent_state = SOLID
 	color = "#619494"
 	adj_temp = -5
-	hydration = 10
 
 	glass_name = "ice"
 	glass_desc = "Generally, you're supposed to put something else in there too..."
@@ -209,7 +250,6 @@
 
 	glass_name = "welder fuel"
 	glass_desc = "Unless you are an industrial tool, this is probably not safe for consumption."
-	value = 6.8
 
 /datum/reagent/fuel/touch_turf(var/turf/T)
 	new /obj/effect/decal/cleanable/liquid_fuel(T, volume)
@@ -227,10 +267,6 @@
 	if(volume <= 50)
 		return
 	var/turf/T = get_turf(holder)
-	var/datum/gas_mixture/products = new(_temperature = 5 * PHORON_FLASHPOINT)
-	var/gas_moles = 3 * volume
-	products.adjust_multi(GAS_NO, 0.1 * gas_moles, GAS_NO2, 0.1 * gas_moles, GAS_NITROGEN, 0.6 * gas_moles, GAS_HYDROGEN, 0.02 * gas_moles)
-	T.assume_air(products)
 	if(volume > 500)
 		explosion(T,1,2,4)
 	else if(volume > 100)

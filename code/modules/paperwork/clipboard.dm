@@ -41,7 +41,7 @@
 			return
 
 /obj/item/weapon/material/clipboard/on_update_icon()
-	..()
+	overlays.Cut()
 	if(toppaper)
 		overlays += overlay_image(toppaper.icon, toppaper.icon_state, flags=RESET_COLOR)
 		overlays += toppaper.overlays
@@ -85,7 +85,7 @@
 	for(var/obj/item/weapon/photo/Ph in src)
 		dat += "<A href='?src=\ref[src];remove=\ref[Ph]'>Remove</A> <A href='?src=\ref[src];rename=\ref[Ph]'>Rename</A> - <A href='?src=\ref[src];look=\ref[Ph]'>[Ph.name]</A><BR>"
 
-	show_browser(user, dat, "window=clipboard")
+	user << browse(dat, "window=clipboard")
 	onclose(user, "clipboard")
 	add_fingerprint(usr)
 	return
@@ -153,10 +153,10 @@
 			if(P && (P.loc == src) && istype(P, /obj/item/weapon/paper) )
 
 				if(!(istype(usr, /mob/living/carbon/human) || isghost(usr) || istype(usr, /mob/living/silicon)))
-					show_browser(usr, "<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[stars(P.info)][P.stamps]</BODY></HTML>", "window=[P.name]")
+					usr << browse("<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[stars(P.info)][P.stamps]</BODY></HTML>", "window=[P.name]")
 					onclose(usr, "[P.name]")
 				else
-					show_browser(usr, "<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[P.info][P.stamps]</BODY></HTML>", "window=[P.name]")
+					usr << browse("<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[P.info][P.stamps]</BODY></HTML>", "window=[P.name]")
 					onclose(usr, "[P.name]")
 
 		else if(href_list["look"])
@@ -189,6 +189,7 @@
 /obj/item/weapon/material/clipboard/glass
 	default_material = MATERIAL_GLASS
 	matter = list(MATERIAL_GLASS = 70)
+	alpha = 230
 
 /obj/item/weapon/material/clipboard/plastic
 	default_material = MATERIAL_PLASTIC

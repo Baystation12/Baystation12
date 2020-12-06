@@ -245,13 +245,13 @@
 "aF" = (
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide,
 /obj/effect/floor_decal/industrial/warning{
-	dir = 4;
-	icon_state = "warning"
+	icon_state = "warning";
+	dir = 4
 	},
 /turf/simulated/floor/airless,
 /area/magshield/engine)
 "aG" = (
-/obj/machinery/atmospherics/unary/tank/carbon_dioxide,
+/obj/machinery/atmospherics/pipe/tank/carbon_dioxide,
 /turf/simulated/floor/airless,
 /area/magshield/engine)
 "aH" = (
@@ -259,7 +259,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id_tag = "prototype_chamber_blast"
+	id = "prototype_chamber_blast"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/engine)
@@ -272,8 +272,8 @@
 /area/space)
 "aJ" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
-	dir = 10;
-	icon_state = "intact"
+	icon_state = "intact";
+	dir = 10
 	},
 /turf/space,
 /area/space)
@@ -302,10 +302,11 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/obj/machinery/atmospherics/unary/vent_pump/tank{
+/obj/machinery/atmospherics/unary/vent_pump{
 	dir = 8;
 	external_pressure_bound = 0;
 	external_pressure_bound_default = 0;
+	frequency = 1441;
 	icon_state = "map_vent_in";
 	id_tag = "tox_out";
 	initialize_directions = 1;
@@ -405,14 +406,14 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id_tag = "prototype_chamber_blast"
+	id = "prototype_chamber_blast"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/engine)
 "ba" = (
 /obj/machinery/mass_driver{
 	dir = 4;
-	id_tag = "enginecore"
+	id = "enginecore"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/engine)
@@ -420,7 +421,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 1;
 	icon_state = "pdoor0";
-	id_tag = "prototype_chamber_blast"
+	id = "prototype_chamber_blast"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/engine)
@@ -476,8 +477,8 @@
 /area/magshield/smes_storage)
 "bj" = (
 /obj/machinery/light/small{
-	dir = 4;
-	icon_state = "bulb1"
+	icon_state = "bulb1";
+	dir = 4
 	},
 /turf/simulated/floor/airless,
 /area/magshield/smes_storage)
@@ -524,15 +525,15 @@
 /area/magshield/engine)
 "bs" = (
 /obj/effect/floor_decal/industrial/warning{
-	dir = 6;
-	icon_state = "warning"
+	icon_state = "warning";
+	dir = 6
 	},
 /turf/simulated/floor/airless,
 /area/magshield/engine)
 "bt" = (
 /obj/machinery/light/small{
-	dir = 4;
-	icon_state = "bulb1"
+	icon_state = "bulb1";
+	dir = 4
 	},
 /turf/simulated/floor/airless,
 /area/magshield/engine)
@@ -541,7 +542,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 1;
 	icon_state = "pdoor0";
-	id_tag = "prototype_chamber_blast"
+	id = "prototype_chamber_blast"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/cyan,
 /turf/simulated/floor/airless,
@@ -551,7 +552,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 1;
 	icon_state = "pdoor0";
-	id_tag = "prototype_chamber_blast"
+	id = "prototype_chamber_blast"
 	},
 /turf/simulated/floor/airless,
 /area/magshield/engine)
@@ -602,15 +603,15 @@
 /area/magshield/engine)
 "bC" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	dir = 6;
-	icon_state = "intact"
+	icon_state = "intact";
+	dir = 6
 	},
 /turf/simulated/floor/airless,
 /area/magshield/engine)
 "bD" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	dir = 9;
-	icon_state = "intact"
+	icon_state = "intact";
+	dir = 9
 	},
 /turf/simulated/floor/airless,
 /area/magshield/engine)
@@ -647,29 +648,29 @@
 /area/magshield/engine)
 "bK" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	dir = 6;
-	icon_state = "intact"
+	icon_state = "intact";
+	dir = 6
 	},
 /turf/simulated/floor/airless,
 /area/magshield/engine)
 "bL" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	dir = 4;
-	icon_state = "intact"
+	icon_state = "intact";
+	dir = 4
 	},
 /turf/simulated/wall/r_wall,
 /area/magshield/engine)
 "bM" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction{
-	dir = 4;
-	icon_state = "intact"
+	icon_state = "intact";
+	dir = 4
 	},
 /turf/space,
 /area/space)
 "bN" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
-	dir = 4;
-	icon_state = "intact"
+	icon_state = "intact";
+	dir = 4
 	},
 /turf/space,
 /area/space)
@@ -717,15 +718,15 @@
 "bV" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red,
 /obj/machinery/light/small{
-	dir = 4;
-	icon_state = "bulb1"
+	icon_state = "bulb1";
+	dir = 4
 	},
 /turf/simulated/floor/airless,
 /area/magshield/engine)
 "bW" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
-	dir = 9;
-	icon_state = "intact"
+	icon_state = "intact";
+	dir = 9
 	},
 /turf/space,
 /area/space)
@@ -735,7 +736,7 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/obj/machinery/computer/modular{
+/obj/item/modular_computer/console{
 	dir = 4
 	},
 /turf/simulated/floor/airless,
@@ -745,8 +746,8 @@
 	dir = 8
 	},
 /obj/machinery/light/small{
-	dir = 4;
-	icon_state = "bulb1"
+	icon_state = "bulb1";
+	dir = 4
 	},
 /turf/simulated/floor/airless,
 /area/magshield/smes_storage)
@@ -767,7 +768,7 @@
 /turf/simulated/floor/airless,
 /area/magshield/engine)
 "cb" = (
-/obj/machinery/computer/modular{
+/obj/item/modular_computer/console{
 	dir = 8
 	},
 /turf/simulated/floor/airless,
@@ -777,7 +778,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id_tag = "EngineBlast";
+	id = "EngineBlast";
 	name = "Engine Monitoring Room Blast Doors";
 	opacity = 0
 	},
@@ -793,16 +794,16 @@
 /area/magshield/engine)
 "ce" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	dir = 4;
-	icon_state = "intact"
+	icon_state = "intact";
+	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/cyan,
 /turf/simulated/floor/airless,
 /area/magshield/engine)
 "cf" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	dir = 9;
-	icon_state = "intact"
+	icon_state = "intact";
+	dir = 9
 	},
 /turf/simulated/floor/airless,
 /area/magshield/engine)
@@ -836,7 +837,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/machinery/computer/modular{
+/obj/item/modular_computer/console{
 	dir = 8
 	},
 /turf/simulated/floor/airless,
@@ -846,7 +847,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id_tag = "EngineBlast";
+	id = "EngineBlast";
 	name = "Engine Monitoring Room Blast Doors";
 	opacity = 0
 	},
@@ -959,17 +960,18 @@
 "cu" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8;
+	layer = 2.4;
 	level = 2
 	},
-/obj/machinery/computer/modular{
+/obj/item/modular_computer/console{
 	dir = 8
 	},
 /turf/simulated/floor/airless,
 /area/magshield/engine)
 "cv" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	dir = 5;
-	icon_state = "intact"
+	icon_state = "intact";
+	dir = 5
 	},
 /turf/simulated/floor/airless,
 /area/magshield/engine)
@@ -1029,8 +1031,8 @@
 /area/magshield/engine)
 "cE" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
-	dir = 4;
-	icon_state = "intact"
+	icon_state = "intact";
+	dir = 4
 	},
 /obj/item/weapon/ore,
 /turf/space,
@@ -1082,8 +1084,8 @@
 /area/magshield/smes_storage)
 "cJ" = (
 /obj/machinery/light/small{
-	dir = 4;
-	icon_state = "bulb1"
+	icon_state = "bulb1";
+	dir = 4
 	},
 /obj/random/junk,
 /turf/simulated/floor/airless,
@@ -1290,6 +1292,7 @@
 "da" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8;
+	layer = 2.4;
 	level = 2
 	},
 /obj/machinery/power/apc{
@@ -1306,19 +1309,23 @@
 /area/magshield/engine)
 "db" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	dir = 5;
-	icon_state = "intact"
+	icon_state = "intact";
+	dir = 5
 	},
 /turf/simulated/floor/airless,
 /area/magshield/engine)
 "dc" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	dir = 4;
-	icon_state = "intact"
+	icon_state = "intact";
+	dir = 4
 	},
 /turf/simulated/floor/airless,
 /area/magshield/engine)
 "dd" = (
+/obj/machinery/atmospherics/pipe/simple/visible/red{
+	icon_state = "intact";
+	dir = 4
+	},
 /obj/machinery/atmospherics/pipe/manifold/visible/red,
 /turf/simulated/floor/airless,
 /area/magshield/engine)
@@ -1359,8 +1366,8 @@
 /area/magshield/north)
 "dk" = (
 /obj/effect/floor_decal/industrial/warning{
-	dir = 8;
-	icon_state = "warning"
+	icon_state = "warning";
+	dir = 8
 	},
 /turf/simulated/floor/airless,
 /area/magshield/north)
@@ -1504,22 +1511,22 @@
 	pixel_x = 24
 	},
 /obj/structure/cable{
-	d2 = 2;
 	icon_state = "0-2";
-	pixel_y = 1
+	pixel_y = 1;
+	d2 = 2
 	},
 /turf/simulated/floor/airless,
 /area/magshield/north)
 "dO" = (
-/obj/machinery/computer/modular{
+/obj/item/modular_computer/console{
 	dir = 4
 	},
 /turf/simulated/floor/airless,
 /area/magshield/north)
 "dP" = (
 /obj/structure/bed/chair{
-	dir = 8;
-	icon_state = "chair_preview"
+	icon_state = "chair_preview";
+	dir = 8
 	},
 /turf/simulated/floor/airless,
 /area/magshield/north)
@@ -1558,8 +1565,8 @@
 /area/magshield/north)
 "dX" = (
 /obj/effect/floor_decal/industrial/warning{
-	dir = 6;
-	icon_state = "warning"
+	icon_state = "warning";
+	dir = 6
 	},
 /obj/random/toolbox,
 /turf/simulated/floor/airless,
@@ -1870,11 +1877,11 @@
 	dir = 10
 	},
 /obj/structure/cable{
-	d1 = 16;
-	d2 = 0;
-	dir = 4;
 	icon_state = "1-8";
-	pixel_y = 0
+	dir = 4;
+	pixel_y = 0;
+	d1 = 16;
+	d2 = 0
 	},
 /obj/structure/cable{
 	d1 = 4;
@@ -1899,7 +1906,9 @@
 /area/magshield/north)
 "eE" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	dir = 8
+	dir = 8;
+	frequency = 1501;
+	id_tag = "asteroid_base_east_pump"
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	pixel_x = 0;
@@ -1958,8 +1967,9 @@
 /turf/simulated/floor/airless,
 /area/space)
 "eJ" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 4;
+	frequency = 1380;
 	id_tag = "merchant_station_vent"
 	},
 /obj/structure/cable{
@@ -2088,8 +2098,9 @@
 /turf/space,
 /area/space)
 "fd" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 1;
+	frequency = 1380;
 	id_tag = "centcom_shuttle_dock_pump"
 	},
 /obj/effect/floor_decal/industrial/hatch/blue,
@@ -2106,7 +2117,7 @@
 /turf/simulated/wall,
 /area/magshield/east)
 "ff" = (
-/obj/machinery/atmospherics/unary/tank,
+/obj/machinery/atmospherics/pipe/tank,
 /obj/machinery/atmospherics/portables_connector{
 	dir = 4
 	},
@@ -2165,8 +2176,8 @@
 /area/magshield/east)
 "fq" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
-	dir = 4;
-	icon_state = "map_universal"
+	icon_state = "map_universal";
+	dir = 4
 	},
 /turf/simulated/floor/airless,
 /area/magshield/east)
@@ -2184,6 +2195,7 @@
 "fs" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8;
+	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/airless,
@@ -2214,7 +2226,7 @@
 /turf/simulated/floor/airless,
 /area/magshield/north)
 "fx" = (
-/obj/machinery/atmospherics/unary/tank,
+/obj/machinery/atmospherics/pipe/tank,
 /obj/machinery/atmospherics/portables_connector{
 	dir = 4
 	},
@@ -2274,7 +2286,7 @@
 /turf/simulated/floor/tiled,
 /area/magshield/west)
 "fH" = (
-/obj/effect/overmap/visitable/sector/magshield,
+/obj/effect/overmap/sector/magshield,
 /turf/simulated/floor/airless,
 /area/magshield/north)
 "fI" = (
@@ -2310,7 +2322,7 @@
 	icon_state = "4-8";
 	pixel_y = 0
 	},
-/obj/machinery/computer/modular{
+/obj/item/modular_computer/console{
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
@@ -2346,15 +2358,15 @@
 	tag_east_con = 0.21;
 	tag_north = 2;
 	tag_south = 1;
-	tag_south_con = 0.79
+	tag_south_con = 0.79;
 	},
 /turf/simulated/floor/airless,
 /area/magshield/east)
 "fS" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	dir = 4;
-	icon_state = "intact"
+	icon_state = "intact";
+	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable{
@@ -2375,22 +2387,22 @@
 /area/magshield/east)
 "fU" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	dir = 4;
-	icon_state = "intact"
+	icon_state = "intact";
+	dir = 4
 	},
 /turf/simulated/floor/airless,
 /area/magshield/east)
 "fV" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/red{
-	dir = 1;
-	icon_state = "map"
+	icon_state = "map";
+	dir = 1
 	},
 /turf/simulated/floor/airless,
 /area/magshield/east)
 "fW" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	dir = 4;
-	icon_state = "intact"
+	icon_state = "intact";
+	dir = 4
 	},
 /turf/simulated/wall/r_wall,
 /area/magshield/east)
@@ -2417,7 +2429,7 @@
 /turf/simulated/floor/tiled,
 /area/magshield/west)
 "ga" = (
-/obj/machinery/computer/modular{
+/obj/item/modular_computer/console{
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
@@ -2466,8 +2478,8 @@
 /area/magshield/east)
 "gi" = (
 /obj/effect/floor_decal/industrial/warning{
-	dir = 5;
-	icon_state = "warning"
+	icon_state = "warning";
+	dir = 5
 	},
 /turf/simulated/floor/airless,
 /area/magshield/east)
@@ -2477,15 +2489,15 @@
 /area/magshield/east)
 "gk" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	dir = 5;
-	icon_state = "intact"
+	icon_state = "intact";
+	dir = 5
 	},
 /turf/simulated/floor/airless,
 /area/magshield/east)
 "gl" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	dir = 9;
-	icon_state = "intact"
+	icon_state = "intact";
+	dir = 9
 	},
 /turf/simulated/floor/airless,
 /area/magshield/east)
@@ -2584,8 +2596,8 @@
 /area/magshield/east)
 "gC" = (
 /obj/effect/floor_decal/industrial/warning{
-	dir = 6;
-	icon_state = "warning"
+	icon_state = "warning";
+	dir = 6
 	},
 /obj/machinery/portable_atmospherics/canister,
 /turf/simulated/floor/airless,
@@ -2760,7 +2772,7 @@
 /turf/simulated/floor/tiled/white,
 /area/magshield/west)
 "ha" = (
-/obj/machinery/computer/modular{
+/obj/item/modular_computer/console{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
@@ -2870,7 +2882,7 @@
 /area/magshield/west)
 "hq" = (
 /obj/item/weapon/paper/magshield/log,
-/obj/machinery/computer/modular{
+/obj/item/modular_computer/console{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
@@ -2961,11 +2973,11 @@
 	pixel_x = -24
 	},
 /obj/structure/cable{
-	d1 = 16;
-	d2 = 0;
-	dir = 4;
 	icon_state = "0-2";
-	pixel_y = 0
+	dir = 4;
+	pixel_y = 0;
+	d1 = 16;
+	d2 = 0
 	},
 /turf/simulated/floor/airless,
 /area/magshield/east)
@@ -3262,8 +3274,8 @@
 /area/magshield/south)
 "iw" = (
 /obj/structure/hygiene/shower{
-	dir = 8;
-	icon_state = "shower"
+	icon_state = "shower";
+	dir = 8
 	},
 /obj/machinery/light/small{
 	dir = 1
@@ -3341,8 +3353,8 @@
 /area/magshield/south)
 "iI" = (
 /obj/structure/hygiene/shower{
-	dir = 8;
-	icon_state = "shower"
+	icon_state = "shower";
+	dir = 8
 	},
 /obj/random/trash,
 /obj/machinery/light/small{
@@ -3369,14 +3381,20 @@
 /area/magshield/west)
 "iL" = (
 /obj/structure/hygiene/toilet,
-/turf/simulated/floor/tiled/white,
+/turf/simulated/floor/tiled/white/usedup,
 /area/magshield/south)
 "iM" = (
 /obj/structure/hygiene/urinal{
 	pixel_y = 25
 	},
 /obj/random/trash,
-/turf/simulated/floor/tiled/white,
+/turf/simulated/floor/tiled/white/usedup,
+/area/magshield/south)
+"iN" = (
+/obj/structure/hygiene/sink{
+	pixel_y = 25
+	},
+/turf/simulated/floor/tiled/white/usedup,
 /area/magshield/south)
 "iO" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -3448,15 +3466,19 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/turf/simulated/floor/tiled/white,
+/turf/simulated/floor/tiled/white/usedup,
 /area/magshield/south)
 "iZ" = (
 /obj/machinery/light,
-/turf/simulated/floor/tiled/white,
+/turf/simulated/floor/tiled/white/usedup,
 /area/magshield/south)
 "ja" = (
 /mob/living/simple_animal/hostile/carp,
-/turf/simulated/floor/tiled/white,
+/turf/simulated/floor/tiled/white/usedup,
+/area/magshield/south)
+"jb" = (
+/obj/machinery/door/airlock,
+/turf/simulated/floor/tiled/white/usedup,
 /area/magshield/south)
 "jc" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -3522,6 +3544,7 @@
 "jk" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8;
+	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled/white,
@@ -3609,7 +3632,7 @@
 /area/magshield/south)
 "jy" = (
 /obj/structure/table/marble,
-/obj/item/weapon/material/knife/kitchen/cleaver,
+/obj/item/weapon/material/knife/butch,
 /turf/simulated/floor/tiled/white,
 /area/magshield/south)
 "jz" = (
@@ -3645,8 +3668,9 @@
 /turf/simulated/floor/airless,
 /area/magshield/south)
 "jG" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 4;
+	frequency = 1380;
 	id_tag = "merchant_station_vent"
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
@@ -3683,11 +3707,11 @@
 	pixel_y = 24
 	},
 /obj/structure/cable{
-	d1 = 16;
-	d2 = 0;
-	dir = 4;
 	icon_state = "0-2";
-	pixel_y = 0
+	dir = 4;
+	pixel_y = 0;
+	d1 = 16;
+	d2 = 0
 	},
 /turf/simulated/floor/tiled,
 /area/magshield/south)
@@ -3761,7 +3785,7 @@
 /obj/structure/table/standard{
 	name = "plastic table frame"
 	},
-/obj/item/weapon/material/knife/table,
+/obj/item/weapon/material/kitchen/utensil/knife,
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "jU" = (
@@ -3795,7 +3819,7 @@
 	pixel_x = 11;
 	pixel_y = 0
 	},
-/obj/item/weapon/soap,
+/obj/item/weapon/soap/deluxe,
 /turf/simulated/floor/tiled/white,
 /area/magshield/south)
 "jZ" = (
@@ -4064,7 +4088,7 @@
 /area/magshield/south)
 "kJ" = (
 /obj/structure/table/marble,
-/obj/item/weapon/material/knife/table,
+/obj/item/weapon/material/kitchen/utensil/knife,
 /turf/simulated/floor/tiled/white,
 /area/magshield/south)
 "kK" = (
@@ -4131,7 +4155,7 @@
 /area/magshield/south)
 "kT" = (
 /obj/structure/curtain/open/bed,
-/obj/item/weapon/material/knife/table,
+/obj/item/weapon/material/kitchen/utensil/knife/plastic,
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "kU" = (
@@ -19434,7 +19458,7 @@ ga
 ga
 fB
 fu
-jz
+iN
 ja
 iq
 jI
@@ -19637,7 +19661,7 @@ fA
 fB
 fu
 iq
-iT
+jb
 iq
 jJ
 jd

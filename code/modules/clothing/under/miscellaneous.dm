@@ -4,7 +4,6 @@
 	icon_state = "red_pyjamas"
 	worn_state = "red_pyjamas"
 	item_state = "w_suit"
-	gender_icons = 1
 
 /obj/item/clothing/under/pj/blue
 	name = "blue pj's"
@@ -12,7 +11,6 @@
 	icon_state = "blue_pyjamas"
 	worn_state = "blue_pyjamas"
 	item_state = "w_suit"
-	gender_icons = 1
 
 /obj/item/clothing/under/captain_fly
 	name = "rogue's uniform"
@@ -34,7 +32,6 @@
 	icon_state = "sl_suit"
 	worn_state = "sl_suit"
 	item_state = "sl_suit"
-	gender_icons = 1
 
 /obj/item/clothing/under/waiter
 	name = "waiter's outfit"
@@ -42,7 +39,6 @@
 	icon_state = "waiter"
 	item_state = "waiter"
 	worn_state = "waiter"
-	gender_icons = 1
 
 /obj/item/clothing/under/rank/mailman
 	name = "mailman's jumpsuit"
@@ -97,9 +93,7 @@
 	icon_state = "ert_uniform"
 	item_state = "bl_suit"
 	worn_state = "ert_uniform"
-	armor = list(
-		melee = ARMOR_MELEE_SMALL
-		)
+	armor = list(melee = 10, bullet = 5, laser = 5,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
 
 /obj/item/clothing/under/space
@@ -124,15 +118,7 @@
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.01
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
-	armor = list(
-		melee = ARMOR_MELEE_SHIELDED,
-		bullet = ARMOR_BALLISTIC_HEAVY,
-		laser = ARMOR_LASER_HEAVY,
-		energy = ARMOR_ENERGY_SHIELDED,
-		bomb = ARMOR_BOMB_SHIELDED,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_SHIELDED
-		)
+	armor = list(melee = 100, bullet = 100, laser = 100,energy = 100, bomb = 100, bio = 100, rad = 100)
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0
@@ -144,18 +130,23 @@
 	worn_state = "owl"
 	item_state = "owl"
 
+/obj/item/clothing/under/johnny
+	name = "johnny~~ jumpsuit"
+	desc = "Johnny~~"
+	icon_state = "johnny"
+	worn_state = "johnny"
+	item_state = "johnny"
+
 /obj/item/clothing/under/color/rainbow
 	name = "rainbow"
 	icon_state = "rainbow"
 	item_state = "rainbow"
 	worn_state = "rainbow"
-	gender_icons = 1
 
 /obj/item/clothing/under/cloud
 	name = "cloud"
 	icon_state = "cloud"
 	worn_state = "cloud"
-	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/psysuit
 	name = "dark undersuit"
@@ -171,9 +162,6 @@
 	icon_state = "gentlesuit"
 	item_state = "gy_suit"
 	worn_state = "gentlesuit"
-
-/obj/item/clothing/under/gimmick
-	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/clothing/under/gimmick/rank/captain/suit
 	name = "captain's suit"
@@ -201,7 +189,7 @@
 	desc = "A formal black suit and red tie, intended for the galaxy's finest."
 	icon_state = "really_black_suit"
 	item_state = "jensensuit"
-	worn_state = "really_black_suit"
+	worn_state = "black_suit"
 
 /obj/item/clothing/under/suit_jacket/female
 	name = "executive suit"
@@ -209,7 +197,6 @@
 	icon_state = "black_suit_fem"
 	item_state = "lawyer_black"
 	worn_state = "black_suit_fem"
-	gender_icons = 1
 
 /obj/item/clothing/under/suit_jacket/red
 	name = "red suit"
@@ -247,7 +234,6 @@
 	icon_state = "pirate"
 	item_state = "sl_suit"
 	worn_state = "pirate"
-	gender_icons = 1
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS
 
 /obj/item/clothing/under/soviet
@@ -499,7 +485,6 @@
 	icon_state = "charcoal_suit"
 	item_state = "bl_suit"
 	worn_state = "charcoal_suit"
-	gender_icons = 1
 	starting_accessories = list(/obj/item/clothing/accessory/navy, /obj/item/clothing/accessory/toggleable/charcoal_jacket)
 
 /obj/item/clothing/under/suit_jacket/navy
@@ -508,7 +493,6 @@
 	icon_state = "navy_suit"
 	item_state = "bl_suit"
 	worn_state = "navy_suit"
-	gender_icons = 1
 	starting_accessories = list(/obj/item/clothing/accessory/red, /obj/item/clothing/accessory/toggleable/navy_jacket)
 
 /obj/item/clothing/under/suit_jacket/burgundy
@@ -517,7 +501,6 @@
 	icon_state = "burgundy_suit"
 	item_state = "r_suit"
 	worn_state = "burgundy_suit"
-	gender_icons = 1
 	starting_accessories = list(/obj/item/clothing/accessory/black, /obj/item/clothing/accessory/toggleable/burgundy_jacket)
 
 /obj/item/clothing/under/suit_jacket/checkered
@@ -526,7 +509,6 @@
 	icon_state = "checkered_suit"
 	item_state = "gy_suit"
 	worn_state = "checkered_suit"
-	gender_icons = 1
 	starting_accessories = list(/obj/item/clothing/accessory/black, /obj/item/clothing/accessory/toggleable/checkered_jacket)
 
 /obj/item/clothing/under/suit_jacket/tan
@@ -535,7 +517,6 @@
 	icon_state = "tan_suit"
 	item_state = "lb_suit"
 	worn_state = "tan_suit"
-	gender_icons = 1
 	starting_accessories = list(/obj/item/clothing/accessory/yellow, /obj/item/clothing/accessory/toggleable/tan_jacket)
 
 /obj/item/clothing/under/serviceoveralls
@@ -582,7 +563,6 @@
 	icon_state = "pcrc"
 	item_state = "jensensuit"
 	worn_state = "pcrc"
-	gender_icons = 1
 
 /obj/item/clothing/under/pcrcsuit
 	name = "\improper PCRC suit"
@@ -590,7 +570,6 @@
 	icon_state = "pcrcsuit"
 	item_state = "jensensuit"
 	worn_state = "pcrcsuit"
-	gender_icons = 1
 
 /obj/item/clothing/under/grayson
 	name = "\improper Grayson overalls"
@@ -603,7 +582,6 @@
 	desc = "A jumpsuit belonging to Ward-Takahashi, a megacorp in the consumer goods and research market."
 	icon_state = "wardt"
 	worn_state = "wardt"
-	gender_icons = 1
 
 /obj/item/clothing/under/dais
 	name = "\improper Deimos Advanced Information Systems uniform"
@@ -616,7 +594,6 @@
 	desc = "A uniform belonging to Major Bill's Transportation, a major shipping company."
 	icon_state = "mbill"
 	worn_state = "mbill"
-	gender_icons = 1
 
 /obj/item/clothing/under/morpheus
 	name = "\improper Morpheus Cyberkinetics uniform"
@@ -642,7 +619,6 @@
 	desc = "A uniform belonging to Strategic Assault and Asset Retention Enterprises, a minor private military corporation."
 	icon_state = "saare"
 	worn_state = "saare"
-	gender_icons = 1
 
 /obj/item/clothing/under/frontier
 	name = "frontier clothes"
@@ -655,7 +631,6 @@
 	desc = "A jumpsuit belonging to Aether Atmospherics and Recycling, a company that supplies recycling and atmospheric systems to colonies."
 	icon_state = "aether"
 	worn_state = "aether"
-	gender_icons = 1
 
 /obj/item/clothing/under/focal
 	name = "\improper Focal Point jumpsuit"
@@ -668,14 +643,13 @@
 	desc = "A jumpsuit belonging to Hephaestus Industries, a megacorp best known for its arms production."
 	icon_state = "heph"
 	worn_state = "heph"
-	gender_icons = 1
 
 /obj/item/clothing/under/punpun
 	name = "fancy uniform"
 	desc = "It looks like it was tailored for a monkey."
 	icon_state = "punpun"
 	worn_state = "punpun"
-	species_restricted = list(SPECIES_MONKEY)
+	species_restricted = list("Monkey")
 	sprite_sheets = list("Monkey" = 'icons/mob/species/monkey/onmob_under_monkey.dmi')
 
 /obj/item/clothing/under/punpants
@@ -683,7 +657,7 @@
 	desc = "It looks like it was tailored for a monkey."
 	icon_state = "jeansmustang"
 	worn_state = "jeansmustang"
-	species_restricted = list(SPECIES_MONKEY)
+	species_restricted = list("Monkey")
 	sprite_sheets = list("Monkey" = 'icons/mob/species/monkey/onmob_under_monkey.dmi')
 
 /obj/item/clothing/under/rank/psych/turtleneck/sweater
@@ -720,12 +694,8 @@
 	icon_state = "hazard"
 	item_state = "engi_suit"
 	worn_state = "hazard"
-	gender_icons = 1
 	siemens_coefficient = 0.8
-	armor = list(
-		energy = ARMOR_ENERGY_SMALL,
-		rad = ARMOR_RAD_MINOR
-		)
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 20, bio = 0, rad = 20)
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 
 /obj/item/clothing/under/sterile
@@ -734,18 +704,8 @@
 	icon_state = "sterile"
 	item_state = "w_suit"
 	worn_state = "sterile"
-	gender_icons = 1
 	permeability_coefficient = 0.50
-	armor = list(
-		bio = ARMOR_BIO_SMALL
-		)
-
-/obj/item/clothing/under/sterile/emrs
-	name = "medical uniform"
-	desc = "An uniform worn in emergency medical and reanimation services across human space."
-	icon_state = "medical_Uniform"
-	item_state = "medical_Uniform"
-	worn_state = "medical_Uniform"
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 30, rad = 0)
 
 /obj/item/clothing/under/kimono
 	desc = "A traditional robe with remarkably long sleeves, mostly worn by women. <i>Sugoi.</i>"

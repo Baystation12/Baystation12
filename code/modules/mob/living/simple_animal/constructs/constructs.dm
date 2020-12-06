@@ -13,8 +13,8 @@
 	a_intent = I_HURT
 	stop_automated_movement = 1
 	status_flags = CANPUSH
-	universal_speak = FALSE
-	universal_understand = TRUE
+	universal_speak = 0
+	universal_understand = 1
 	attack_sound = 'sound/weapons/spiderlunge.ogg'
 	min_gas = null
 	max_gas = null
@@ -24,18 +24,13 @@
 	supernatural = 1
 	see_in_dark = 8
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
+	var/nullblock = 0
+
 	mob_swap_flags = HUMAN|SIMPLE_ANIMAL|SLIME|MONKEY
 	mob_push_flags = ALLMOBS
+
 	bleed_colour = "#331111"
 
-	meat_type =     null
-	meat_amount =   0
-	bone_material = null
-	bone_amount =   0
-	skin_material = null
-	skin_amount =   0
-
-	var/nullblock = 0
 	var/list/construct_spells = list()
 
 /mob/living/simple_animal/construct/cultify()
@@ -45,8 +40,8 @@
 	..()
 	name = text("[initial(name)] ([random_id(/mob/living/simple_animal/construct, 1000, 9999)])")
 	real_name = name
-	add_language(LANGUAGE_CULT)
-	add_language(LANGUAGE_CULT_GLOBAL)
+	add_language("Cult")
+	add_language(LANGUAGE_OCCULT)
 	for(var/spell in construct_spells)
 		src.add_spell(new spell, "const_spell_ready")
 	update_icon()
@@ -74,7 +69,7 @@
 
 /mob/living/simple_animal/construct/examine(mob/user)
 	. = ..(user)
-	var/msg = "<span cass='info'>*---------*\nThis is [icon2html(src, user)] \a <EM>[src]</EM>!\n"
+	var/msg = "<span cass='info'>*---------*\nThis is \icon[src] \a <EM>[src]</EM>!\n"
 	if (src.health < src.maxHealth)
 		msg += "<span class='warning'>"
 		if (src.health >= src.maxHealth/2)
@@ -100,7 +95,7 @@
 /mob/living/simple_animal/construct/armoured
 	name = "Juggernaut"
 	real_name = "Juggernaut"
-	desc = "A possessed suit of armour driven by the will of the restless dead."
+	desc = "A possessed suit of armour driven by the will of the restless dead"
 	icon = 'icons/mob/mob.dmi'
 	icon_state = "behemoth"
 	icon_living = "behemoth"
@@ -119,7 +114,7 @@
 	status_flags = 0
 	resistance = 10
 	construct_spells = list(/spell/aoe_turf/conjure/forcewall/lesser)
-	can_escape = TRUE
+	can_escape = 1
 
 /mob/living/simple_animal/construct/armoured/Life()
 	weakened = 0
@@ -156,7 +151,7 @@
 /mob/living/simple_animal/construct/wraith
 	name = "Wraith"
 	real_name = "Wraith"
-	desc = "A wicked bladed shell contraption piloted by a bound spirit."
+	desc = "A wicked bladed shell contraption piloted by a bound spirit"
 	icon = 'icons/mob/mob.dmi'
 	icon_state = "floating"
 	icon_living = "floating"
@@ -180,7 +175,7 @@
 /mob/living/simple_animal/construct/builder
 	name = "Artificer"
 	real_name = "Artificer"
-	desc = "A bulbous construct dedicated to building and maintaining The Cult of Nar-Sie's armies."
+	desc = "A bulbous construct dedicated to building and maintaining The Cult of Nar-Sie's armies"
 	icon = 'icons/mob/mob.dmi'
 	icon_state = "artificer"
 	icon_living = "artificer"
@@ -227,7 +222,7 @@
 	var/energy = 0
 	var/max_energy = 1000
 	construct_spells = list(/spell/aoe_turf/conjure/forcewall/lesser)
-	can_escape = TRUE
+	can_escape = 1
 
 ////////////////////////Harvester////////////////////////////////
 
@@ -236,7 +231,7 @@
 /mob/living/simple_animal/construct/harvester
 	name = "Harvester"
 	real_name = "Harvester"
-	desc = "The promised reward of the livings who follow Nar-Sie. Obtained by offering their bodies to the geometer of blood."
+	desc = "The promised reward of the livings who follow Nar-Sie. Obtained by offering their bodies to the geometer of blood"
 	icon = 'icons/mob/mob.dmi'
 	icon_state = "harvester"
 	icon_living = "harvester"
@@ -261,7 +256,7 @@
 	eye_glow.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 	eye_glow.layer = EYE_GLOW_LAYER
 	overlays += eye_glow
-	set_light(-2, 0.1, 1.5, l_color = "#ffffff")
+	set_light(-10, 0.1, 3, l_color = "#ffffff")
 
 ////////////////HUD//////////////////////
 

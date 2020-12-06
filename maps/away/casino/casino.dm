@@ -1,7 +1,7 @@
 #include "casino_areas.dm"
 #include "../mining/mining_areas.dm"
 
-/obj/effect/overmap/visitable/ship/casino
+/obj/effect/overmap/ship/casino
 	name = "passenger liner"
 	desc = "Sensors detect an undamaged vessel without any signs of activity."
 	color = "#bd6100"
@@ -20,7 +20,7 @@
 		"Casino Cutter" = list("nav_casino_hangar"),
 	)
 
-/obj/effect/overmap/visitable/ship/casino/New(nloc, max_x, max_y)
+/obj/effect/overmap/ship/casino/New(nloc, max_x, max_y)
 	name = "IPV [pick("Fortuna","Gold Rush","Ebisu","Lucky Paw","Four Leaves")], \a [name]"
 	..()
 
@@ -31,13 +31,6 @@
 	suffixes = list("casino/casino.dmm")
 	cost = 1
 	shuttles_to_initialise = list(/datum/shuttle/autodock/overmap/casino_cutter)
-	area_usage_test_exempted_root_areas = list(/area/casino)
-	apc_test_exempt_areas = list(
-		/area/casino/casino_hangar = NO_SCRUBBER,
-		/area/casino/casino_cutter = NO_SCRUBBER|NO_VENT,
-		/area/casino/casino_solar_control = NO_SCRUBBER,
-		/area/casino/casino_maintenance = NO_SCRUBBER|NO_VENT
-	)
 
 /obj/effect/shuttle_landmark/nav_casino/nav1
 	name = "Casino Ship Navpoint #1"

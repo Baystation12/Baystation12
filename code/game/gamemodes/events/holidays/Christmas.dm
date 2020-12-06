@@ -1,3 +1,21 @@
+/proc/Christmas_Game_Start()
+	for(var/obj/structure/flora/tree/pine/xmas in world)
+		if(isNotStationLevel(xmas.z))	continue
+		for(var/turf/simulated/floor/T in orange(1,xmas))
+			for(var/i=1,i<=rand(1,5),i++)
+				new /obj/item/weapon/a_gift(T)
+	//for(var/mob/living/simple_animal/corgi/Ian/Ian in mob_list)
+	//	Ian.place_on_head(new /obj/item/clothing/head/helmet/space/santahat(Ian))
+
+/proc/ChristmasEvent()
+	for(var/obj/structure/flora/tree/pine/xmas in world)
+		var/mob/living/simple_animal/hostile/tree/evil_tree = new /mob/living/simple_animal/hostile/tree(xmas.loc)
+		evil_tree.icon_state = xmas.icon_state
+		evil_tree.icon_living = evil_tree.icon_state
+		evil_tree.icon_dead = evil_tree.icon_state
+		evil_tree.icon_gib = evil_tree.icon_state
+		qdel(xmas)
+
 /obj/item/weapon/toy/xmas_cracker
 	name = "xmas cracker"
 	icon = 'icons/obj/christmas.dmi'
@@ -41,6 +59,7 @@
 	desc = "A crappy paper crown that you are REQUIRED to wear."
 	flags_inv = 0
 	body_parts_covered = 0
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	var/list/permitted_colors = list(COLOR_RED, COLOR_ORANGE, COLOR_YELLOW, COLOR_GREEN, COLOR_BLUE, COLOR_INDIGO, COLOR_VIOLET)
 
 /obj/item/clothing/head/festive/Initialize()

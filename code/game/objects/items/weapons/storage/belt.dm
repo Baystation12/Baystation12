@@ -62,7 +62,7 @@
 
 /obj/item/weapon/storage/belt/holster/Initialize()
 	. = ..()
-	set_extension(src, /datum/extension/holster, src, sound_in, sound_out, can_holster)
+	set_extension(src, /datum/extension/holster, /datum/extension/holster, src, sound_in, sound_out, can_holster)
 
 /obj/item/weapon/storage/belt/holster/attackby(obj/item/W as obj, mob/user as mob)
 	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)
@@ -79,10 +79,9 @@
 		. = ..(user)
 
 /obj/item/weapon/storage/belt/holster/examine(mob/user)
-	. = ..()
+	. = ..(user)
 	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)
-	if (!QDELETED(H))
-		H.examine_holster(user)
+	H.examine_holster(user)
 
 /obj/item/weapon/storage/belt/holster/on_update_icon()
 	if (ismob(src.loc))
@@ -116,21 +115,18 @@
 		/obj/item/device/flashlight,
 		/obj/item/stack/cable_coil,
 		/obj/item/device/t_scanner,
-		/obj/item/device/scanner/gas,
+		/obj/item/device/analyzer,
 		/obj/item/taperoll/engineering,
 		/obj/item/inducer/,
 		/obj/item/device/robotanalyzer,
 		/obj/item/weapon/material/minihoe,
 		/obj/item/weapon/material/hatchet,
-		/obj/item/device/scanner/plant,
+		/obj/item/device/analyzer/plant_analyzer,
 		/obj/item/taperoll,
 		/obj/item/weapon/extinguisher/mini,
 		/obj/item/weapon/marshalling_wand,
 		/obj/item/weapon/hand_labeler,
-		/obj/item/clothing/gloves,
-		/obj/item/weapon/tape_roll,
-		/obj/item/clothing/head/beret,
-		/obj/item/weapon/material/knife/folding/
+		/obj/item/clothing/gloves
 		)
 
 
@@ -163,7 +159,7 @@
 	icon_state = "medicalbelt"
 	item_state = "medical"
 	can_hold = list(
-		/obj/item/device/scanner/health,
+		/obj/item/device/healthanalyzer,
 		/obj/item/weapon/reagent_containers/dropper,
 		/obj/item/weapon/reagent_containers/glass/beaker,
 		/obj/item/weapon/reagent_containers/glass/bottle,
@@ -185,9 +181,7 @@
 		/obj/item/weapon/extinguisher/mini,
 		/obj/item/weapon/storage/med_pouch,
 		/obj/item/bodybag,
-		/obj/item/clothing/gloves,
-		/obj/item/clothing/head/beret,
-		/obj/item/weapon/material/knife/folding/
+		/obj/item/clothing/gloves
 		)
 
 /obj/item/weapon/storage/belt/medical/emt
@@ -226,9 +220,7 @@
 		/obj/item/device/holowarrant,
 		/obj/item/weapon/magnetic_ammo,
 		/obj/item/device/binoculars,
-		/obj/item/clothing/gloves,
-		/obj/item/clothing/head/beret,
-		/obj/item/weapon/material/knife/folding/
+		/obj/item/clothing/gloves
 		)
 
 /obj/item/weapon/storage/belt/security
@@ -260,9 +252,7 @@
 		/obj/item/device/holowarrant,
 		/obj/item/weapon/magnetic_ammo,
 		/obj/item/device/binoculars,
-		/obj/item/clothing/gloves,
-		/obj/item/clothing/head/beret,
-		/obj/item/weapon/material/knife/folding/
+		/obj/item/clothing/gloves
 		)
 
 /obj/item/weapon/storage/belt/general
@@ -299,13 +289,7 @@
 		/obj/item/clothing/head/soft,
 		/obj/item/weapon/hand_labeler,
 		/obj/item/clothing/gloves,
-		/obj/item/weapon/crowbar/prybar,
-		/obj/item/weapon/tank/emergency,
-		/obj/item/clothing/mask/breath,
-		/obj/item/toy/bosunwhistle,
-		/obj/item/clothing/head/beret,
-		/obj/item/weapon/material/knife/folding/,
-		/obj/item/device/tape
+		/obj/item/weapon/crowbar/prybar
 		)
 
 /obj/item/weapon/storage/belt/janitor
@@ -323,9 +307,7 @@
 		/obj/item/clothing/gloves,
 		/obj/item/device/assembly/mousetrap,
 		/obj/item/weapon/crowbar/prybar,
-		/obj/item/clothing/mask/plunger,
-		/obj/item/clothing/head/beret,
-		/obj/item/weapon/material/knife/folding/
+		/obj/item/clothing/mask/plunger
 		)
 
 /obj/item/weapon/storage/belt/holster/general
@@ -363,17 +345,11 @@
 		/obj/item/clothing/head/soft,
 		/obj/item/weapon/hand_labeler,
 		/obj/item/clothing/gloves,
-		/obj/item/weapon/crowbar/prybar,
-		/obj/item/weapon/tank/emergency,
-		/obj/item/clothing/mask/breath,
-		/obj/item/toy/bosunwhistle,
-		/obj/item/clothing/head/beret,
-		/obj/item/weapon/material/knife/folding/,
-		/obj/item/device/tape
+		/obj/item/weapon/crowbar/prybar
 		)
 
 /obj/item/weapon/storage/belt/holster/forensic
-	name = "forensic holster belt"
+	name = "forensic belt"
 	desc = "Can hold forensic gear like fingerprint powder and luminol."
 	icon_state = "forensicbelt"
 	item_state = "forensic"
@@ -395,40 +371,7 @@
 		/obj/item/weapon/forensics/sample_kit,
 		/obj/item/device/camera,
 		/obj/item/device/taperecorder,
-		/obj/item/device/tape,
-		/obj/item/weapon/storage/csi_markers,
-		/obj/item/device/scanner,
-		/obj/item/clothing/head/beret,
-		/obj/item/weapon/material/knife/folding/
-		)
-
-/obj/item/weapon/storage/belt/forensic
-	name = "forensic belt"
-	desc = "Can hold forensic gear like fingerprint powder and luminol."
-	icon_state = "basicforensicbelt"
-	item_state = "basicforensic"
-	storage_slots = 8
-	can_hold = list(
-		/obj/item/weapon/reagent_containers/spray/luminol,
-		/obj/item/device/uv_light,
-		/obj/item/weapon/reagent_containers/syringe,
-		/obj/item/weapon/forensics/swab,
-		/obj/item/weapon/sample/print,
-		/obj/item/weapon/sample/fibers,
-		/obj/item/device/taperecorder,
-		/obj/item/device/tape,
-		/obj/item/clothing/gloves/latex,
-		/obj/item/clothing/gloves/forensic,
-		/obj/item/weapon/folder,
-		/obj/item/weapon/paper,
-		/obj/item/weapon/forensics/sample_kit,
-		/obj/item/device/camera,
-		/obj/item/device/taperecorder,
-		/obj/item/device/tape,
-		/obj/item/weapon/storage/csi_markers,
-		/obj/item/device/scanner,
-		/obj/item/clothing/head/beret,
-		/obj/item/weapon/material/knife/folding/
+		/obj/item/device/tape
 		)
 
 /obj/item/weapon/storage/belt/holster/machete
@@ -446,9 +389,9 @@
 		/obj/item/device/flashlight,
 		/obj/item/device/radio,
 		/obj/item/device/gps,
-		/obj/item/device/scanner/mining,
-		/obj/item/device/scanner/xenobio,
-		/obj/item/device/scanner/plant,
+		/obj/item/weapon/mining_scanner,
+		/obj/item/device/slime_scanner,
+		/obj/item/device/analyzer/plant_analyzer,
 		/obj/item/weapon/folder,
 		/obj/item/weapon/paper,
 		/obj/item/weapon/pen,
@@ -457,13 +400,7 @@
 		/obj/item/weapon/pinpointer/radio,
 		/obj/item/device/taperecorder,
 		/obj/item/device/tape,
-		/obj/item/device/scanner/gas,
-		/obj/item/clothing/gloves,
-		/obj/item/weapon/tape_roll,
-		/obj/item/clothing/head/beret,
-		/obj/item/weapon/material/knife/folding/,
-		/obj/item/weapon/storage/firstaid/light,
-		/obj/item/device/flash
+		/obj/item/device/analyzer
 		)
 	can_holster = list(/obj/item/weapon/material/hatchet/machete)
 	sound_in = 'sound/effects/holster/sheathin.ogg'
@@ -533,26 +470,3 @@
 /obj/item/weapon/storage/belt/waistpack/big/Initialize()
 	.=..()
 	slowdown_per_slot[slot_belt] = 1
-
-/obj/item/weapon/storage/belt/fire_belt
-	name = "firefighting equipment belt"
-	desc = "A belt specially designed for firefighting."
-	icon_state = "firebelt"
-	item_state = "gear"
-	storage_slots = 5
-	overlay_flags = BELT_OVERLAY_ITEMS
-	can_hold = list(
-		/obj/item/weapon/grenade/chem_grenade/water,
-		/obj/item/weapon/crowbar/emergency_forcing_tool,
-		/obj/item/weapon/extinguisher/mini,
-		/obj/item/inflatable/door
-		)
-
-
-/obj/item/weapon/storage/belt/fire_belt/full
-	startswith = list(
-		/obj/item/inflatable/door,
-		/obj/item/weapon/crowbar/emergency_forcing_tool,
-		/obj/item/weapon/extinguisher/mini,
-		/obj/item/weapon/grenade/chem_grenade/water = 2
-	)

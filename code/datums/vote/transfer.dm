@@ -1,7 +1,3 @@
-#define CHOICE_TRANSFER "Initiate crew transfer"
-#define CHOICE_EXTEND "Extend the round ([config.vote_autotransfer_interval / 600] minutes)"
-#define CHOICE_ADD_ANTAG "Add antagonist"
-
 /datum/vote/transfer
 	name = "transfer"
 	question = "End the shift?"
@@ -11,7 +7,7 @@
 		return
 	if(!evacuation_controller || !evacuation_controller.should_call_autotransfer_vote())
 		return FALSE
-	if(!automatic && !config.allow_vote_restart && !is_admin(creator))
+	if(!automatic && (!config.allow_vote_restart || !is_admin(creator)))
 		return FALSE // Admins and autovotes bypass the config setting.
 	if(check_rights(R_INVESTIGATE, 0, creator))
 		return //Mods bypass further checks.
@@ -20,13 +16,13 @@
 		to_chat(creator, "The current alert status is too high to call for a crew transfer!")
 		return FALSE
 	if(GAME_STATE <= RUNLEVEL_SETUP)
-		to_chat(creator, "The crew transfer button has been disabled!")
+		to_chat(creator, "The crew transfer button has been disabled!")	
 		return FALSE
 
 /datum/vote/transfer/setup_vote(mob/creator, automatic)
-	choices = list(CHOICE_TRANSFER, CHOICE_EXTEND)
+	choices = list("Initiate Crew Transfer", "Extend the Round ([config.vote_autotransfer_interval / 600] minutes)")
 	if (config.allow_extra_antags && SSvote.is_addantag_allowed(creator, automatic))
-		choices += CHOICE_ADD_ANTAG
+		choices += "Add Antagonist"
 	..()
 
 /datum/vote/transfer/handle_default_votes()
@@ -44,15 +40,15 @@
 			factor = 1.2
 		else
 			factor = 1.4
-	choices[CHOICE_TRANSFER] = round(choices[CHOICE_TRANSFER] * factor)
+	choices["Initiate Crew Transfer"] = round(choices["Initiate Crew Transfer"] * factor)
 	to_world("<font color='purple'>Crew Transfer Factor: [factor]</font>")
 
 /datum/vote/transfer/report_result()
 	if(..())
 		return 1
-	if(result[1] == CHOICE_TRANSFER)
+	if(result[1] == "Initiate Crew Transfer")
 		init_autotransfer()
-	else if(result[1] == CHOICE_ADD_ANTAG)
+	else if(result[1] == "Add Antagonist")
 		SSvote.queued_auto_vote = /datum/vote/add_antagonist
 
 /datum/vote/transfer/mob_not_participating(mob/user)
@@ -67,7 +63,3 @@
 /datum/vote/transfer/toggle(mob/user)
 	if(is_admin(user))
 		config.allow_vote_restart = !config.allow_vote_restart
-
-#undef CHOICE_TRANSFER
-#undef CHOICE_EXTEND
-#undef CHOICE_ADD_ANTAG

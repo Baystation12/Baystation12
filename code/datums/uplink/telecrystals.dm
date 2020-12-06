@@ -9,33 +9,27 @@
 	return new /obj/item/stack/telecrystal(loc, cost(U.uses, U))
 
 /datum/uplink_item/item/telecrystal/one
-	name = "1x Telecrystal"
-	desc = "Remove 1 telecrystal from this uplink."
+	name = "Telecrystal - 01"
 	item_cost = 1
 
 /datum/uplink_item/item/telecrystal/five
-	name = "5x Telecrystals"
-	desc = "Remove 5 telecrystals from this uplink."
+	name = "Telecrystals - 05"
 	item_cost = 5
 
 /datum/uplink_item/item/telecrystal/ten
-	name = "10x Telecrystals"
-	desc = "Remove 10 telecrystals from this uplink."
+	name = "Telecrystals - 10"
 	item_cost = 10
 
 /datum/uplink_item/item/telecrystal/twentyfive
-	name = "25x Telecrystals"
-	desc = "Remove 25 telecrystals from this uplink."
+	name = "Telecrystals - 25"
 	item_cost = 25
 
 /datum/uplink_item/item/telecrystal/fifty
-	name = "50x Telecrystals"
-	desc = "Remove 50 telecrystals from this uplink."
+	name = "Telecrystals - 50"
 	item_cost = 50
 
 /datum/uplink_item/item/telecrystal/all
-	name = "Empty Uplink"
-	desc = "Completely empties this uplink of all remaining telecrystals."
+	name = "Telecrystals - Empty Uplink"
 
 /datum/uplink_item/item/telecrystal/all/cost(var/telecrystals, obj/item/device/uplink/U)
 	return max(1, telecrystals)

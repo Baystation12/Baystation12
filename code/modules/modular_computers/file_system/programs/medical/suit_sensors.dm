@@ -11,7 +11,6 @@
 	requires_ntnet = 1
 	network_destination = "crew lifesigns monitoring system"
 	size = 11
-	category = PROG_MONITOR
 	var/has_alert = FALSE
 
 /datum/computer_file/program/suit_sensors/process_tick()
@@ -54,8 +53,9 @@
 	var/list/data = host.initial_data()
 
 	data["isAI"] = isAI(user)
-	var/Z = get_host_z()
-	data["crewmembers"] = crew_repository.health_data(Z)
+	data["crewmembers"] = list()
+	for(var/z_level in GLOB.using_map.map_levels)
+		data["crewmembers"] += crew_repository.health_data(z_level)
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)

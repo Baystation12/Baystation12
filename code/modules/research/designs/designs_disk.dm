@@ -18,11 +18,3 @@
 	req_tech = list(TECH_DATA = 1)
 	build_path = /obj/item/weapon/disk/tech_disk
 	sort_string = "AAAAB"
-
-datum/design/item/disk/flora
-	name = "flora data"
-	desc = "Produce additional disks for storing flora genetic data."
-	id = "flora_disk"
-	req_tech = list(TECH_DATA = 1)
-	build_path = /obj/item/weapon/disk/botany
-	sort_string = "AAAAC"

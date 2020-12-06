@@ -2,6 +2,7 @@
 	var/name = "unknown"
 	var/effect = EFFECT_TOUCH
 	var/effectrange = 4
+	var/trigger = TRIGGER_TOUCH
 	var/atom/holder
 	var/activated = 0
 	var/chargelevel = 0
@@ -9,14 +10,11 @@
 	var/artifact_id = ""
 	var/effect_type = 0
 
-	var/datum/artifact_trigger/trigger
-
 /datum/artifact_effect/New(var/atom/location)
 	..()
 	holder = location
 	effect = rand(0, MAX_EFFECT)
-	var/triggertype = pick(subtypesof(/datum/artifact_trigger))
-	trigger = new triggertype
+	trigger = rand(0, MAX_TRIGGER)
 
 	//this will be replaced by the excavation code later, but it's here just in case
 	artifact_id = "[pick("kappa","sigma","antaeres","beta","omicron","iota","epsilon","omega","gamma","delta","tau","alpha")]-[rand(100,999)]"
@@ -36,10 +34,6 @@
 			chargelevelmax = rand(20, 120)
 			effectrange = rand(20, 200)
 
-/datum/artifact_effect/Destroy()
-	QDEL_NULL(trigger)
-	. = ..()
-	
 /datum/artifact_effect/proc/ToggleActivate(var/reveal_toggle = 1)
 	//so that other stuff happens first
 	spawn(0)
@@ -51,17 +45,15 @@
 			if(istype(holder, /obj/machinery/artifact))
 				var/obj/machinery/artifact/A = holder
 				A.icon_state = "ano[A.icon_num][activated]"
-			
 			var/display_msg
 			if(activated)
 				display_msg = pick("momentarily glows brightly!","distorts slightly for a moment!","flickers slightly!","vibrates!","shimmers slightly for a moment!")
 			else
 				display_msg = pick("grows dull!","fades in intensity!","suddenly becomes very still!","suddenly becomes very quiet!")
-			
 			var/atom/toplevelholder = holder
-			while(!isnull(toplevelholder.loc) && !istype(toplevelholder.loc, /turf))
+			while(!istype(toplevelholder.loc, /turf))
 				toplevelholder = toplevelholder.loc
-			toplevelholder.visible_message("<span class='warning'>[icon2html(toplevelholder, viewers(get_turf(toplevelholder)))] [toplevelholder] [display_msg]</span>")
+			toplevelholder.visible_message("<span class='warning'>\icon[toplevelholder] [toplevelholder] [display_msg]</span>")
 
 /datum/artifact_effect/proc/DoEffectTouch(var/mob/user)
 /datum/artifact_effect/proc/DoEffectAura(var/atom/holder)
@@ -113,7 +105,15 @@
 
 	. += "</b>"
 
-	. += " Activation index involves [trigger]."
+	switch(trigger)
+		if(TRIGGER_TOUCH, TRIGGER_WATER, TRIGGER_ACID, TRIGGER_VOLATILE, TRIGGER_TOXIN)
+			. += " Activation index involves <b>physical interaction</b> with artifact surface."
+		if(TRIGGER_FORCE, TRIGGER_ENERGY, TRIGGER_HEAT, TRIGGER_COLD)
+			. += " Activation index involves <b>energetic interaction</b> with artifact surface."
+		if(TRIGGER_PHORON, TRIGGER_OXY, TRIGGER_CO2, TRIGGER_NITRO)
+			. += " Activation index involves <b>precise local atmospheric conditions</b>."
+		else
+			. += " Unable to determine any data about activation trigger."
 
 //returns 0..1, with 1 being no protection and 0 being fully protected
 /proc/GetAnomalySusceptibility(var/mob/living/carbon/human/H)

@@ -1,5 +1,4 @@
 /datum/extension/fake_data
-	base_type = /datum/extension/fake_data
 	var/list/fake_data = list()
 
 /datum/extension/fake_data/New(datum/holder, data_length)

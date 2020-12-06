@@ -32,14 +32,12 @@
 	desc = "A sterile mask designed to help prevent the spread of diseases."
 	icon_state = "sterile"
 	item_state = "sterile"
-	w_class = ITEM_SIZE_TINY
+	w_class = ITEM_SIZE_SMALL
 	body_parts_covered = FACE
 	item_flags = ITEM_FLAG_FLEXIBLEMATERIAL
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.01
-	armor = list(
-		bio = ARMOR_BIO_RESISTANT
-		)
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 60, rad = 0)
 	down_gas_transfer_coefficient = 1
 	down_body_parts_covered = null
 	down_icon_state = "steriledown"

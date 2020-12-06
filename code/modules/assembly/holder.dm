@@ -88,6 +88,16 @@
 					src.overlays += O
 */
 
+	examine(mob/user)
+		. = ..(user)
+		if ((in_range(src, user) || src.loc == user))
+			if (src.secured)
+				to_chat(user, "\The [src] is ready!")
+			else
+				to_chat(user, "\The [src] can be attached!")
+		return
+
+
 	HasProximity(atom/movable/AM as mob|obj)
 		if(a_left)
 			a_left.HasProximity(AM)
@@ -191,7 +201,7 @@
 	process_activation(var/obj/D, var/normal = 1, var/special = 1)
 		if(!D)	return 0
 		if(!secured)
-			visible_message("[icon2html(src, viewers(get_turf(src)))] *beep* *beep*", "*beep* *beep*")
+			visible_message("\icon[src] *beep* *beep*", "*beep* *beep*")
 		if((normal) && (a_right) && (a_left))
 			if(a_right != D)
 				a_right.pulsed(0)
@@ -220,13 +230,7 @@
 	if(a_left)
 		a_left.hear_talk(M,msg,verb,speaking)
 
-/obj/item/device/assembly_holder/examine(mob/user, distance)
-	. = ..()
-	if (distance <= 1 || src.loc == user)
-		if (src.secured)
-			to_chat(user, "\The [src] is ready!")
-		else
-			to_chat(user, "\The [src] can be attached!")
+
 
 
 /obj/item/device/assembly_holder/timer_igniter

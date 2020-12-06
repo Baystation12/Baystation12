@@ -92,12 +92,6 @@
 	containertype = /obj/structure/closet/crate/large
 	containername = "\improper Wheelchair crate"
 
-/decl/hierarchy/supply_pack/medical/rescuebag
-	name = "Equipment - Rescue bags"
-	contains = list(/obj/item/bodybag/rescue = 3)
-	cost = 30
-	containername = "\improper Rescue bag crate"
-
 /decl/hierarchy/supply_pack/medical/medicalextragear
 	name = "Gear - Medical surplus equipment"
 	contains = list(/obj/item/weapon/storage/belt/medical = 3,
@@ -120,7 +114,7 @@
 					/obj/item/clothing/mask/surgical,
 					/obj/item/clothing/shoes/white,
 					/obj/item/clothing/gloves/latex,
-					/obj/item/device/scanner/health,
+					/obj/item/device/healthanalyzer,
 					/obj/item/device/flashlight/pen,
 					/obj/item/weapon/reagent_containers/syringe)
 	cost = 60
@@ -140,7 +134,7 @@
 					/obj/item/weapon/storage/firstaid/adv,
 					/obj/item/clothing/shoes/white,
 					/obj/item/clothing/gloves/latex,
-					/obj/item/device/scanner/health,
+					/obj/item/device/healthanalyzer,
 					/obj/item/device/flashlight/pen,
 					/obj/item/weapon/reagent_containers/syringe)
 	cost = 20
@@ -149,7 +143,7 @@
 	access = access_medical_equip
 
 /decl/hierarchy/supply_pack/medical/chemistgear
-	name = "Gear - Pharmacist equipment"
+	name = "Gear - Chemist equipment"
 	contains = list(/obj/item/weapon/storage/box/beakers,
 					/obj/item/device/radio/headset/headset_med,
 					/obj/item/weapon/storage/box/autoinjectors,
@@ -160,12 +154,12 @@
 					/obj/item/clothing/shoes/white,
 					/obj/item/clothing/gloves/latex,
 					/obj/item/weapon/reagent_containers/dropper,
-					/obj/item/device/scanner/health,
+					/obj/item/device/healthanalyzer,
 					/obj/item/weapon/storage/box/pillbottles,
 					/obj/item/weapon/reagent_containers/syringe)
 	cost = 15
 	containertype = /obj/structure/closet/crate/secure
-	containername = "pharmacist equipment crate"
+	containername = "chemist equipment crate"
 	access = access_chemistry
 
 /decl/hierarchy/supply_pack/medical/paramedicgear
@@ -184,7 +178,7 @@
 					/obj/item/weapon/storage/firstaid/adv,
 					/obj/item/clothing/shoes/jackboots,
 					/obj/item/clothing/gloves/latex,
-					/obj/item/device/scanner/health,
+					/obj/item/device/healthanalyzer,
 					/obj/item/device/flashlight/pen,
 					/obj/item/weapon/reagent_containers/syringe,
 					/obj/item/clothing/accessory/storage/white_vest)
@@ -320,7 +314,7 @@
 
 /decl/hierarchy/supply_pack/medical/scanner_module
 	name = "Electronics - Medical scanner modules"
-	contains = list(/obj/item/weapon/stock_parts/computer/scanner/medical = 4)
+	contains = list(/obj/item/weapon/computer_hardware/scanner/medical = 4)
 	cost = 20
 	containername = "medical scanner module crate"
 	containertype = /obj/structure/closet/crate/secure
@@ -339,13 +333,5 @@
 	contains = list(/obj/item/weapon/defibrillator/compact)
 	cost = 75
 	containername = "\improper Compact Defibrilator crate"
-	containertype = /obj/structure/closet/crate/secure
-	access = access_medical_equip
-
-/decl/hierarchy/supply_pack/medical/autocomp
-	name = "Electronics - Auto-Compressor crate"
-	contains = list(/obj/item/auto_cpr)
-	cost = 50
-	containername = "\improper Auto-Compressor crate"
 	containertype = /obj/structure/closet/crate/secure
 	access = access_medical_equip

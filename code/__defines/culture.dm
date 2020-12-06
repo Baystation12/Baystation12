@@ -20,12 +20,10 @@
 #define FACTION_FLEET          "SCG Fleet"
 #define FACTION_EXPEDITIONARY  "Expeditionary Corps"
 #define FACTION_PCRC           "Proxima Centauri Risk Control"
-#define FACTION_SAARE          "Strategic Assault and Asset Retention Enterprises"
 #define FACTION_CORPORATE       "Expeditionary Corps Organisation"
 #define FACTION_DAIS           "Deimos Advanced Information Systems"
 #define FACTION_OTHER          "Other Faction"
 #define FACTION_TEST_SUBJECTS  "Test Subjects"
-#define FACTION_SPACECOPS  "Sol Federal Police"
 
 #define HOME_SYSTEM_EARTH      "Earth"
 #define HOME_SYSTEM_LUNA       "Luna"
@@ -76,18 +74,13 @@
 #define RELIGION_JUDAISM       "Judaism"
 #define RELIGION_HINDUISM      "Hinduism"
 #define RELIGION_BUDDHISM      "Buddhism"
-#define RELIGION_SIKHISM       "Sikhism"
-#define RELIGION_JAINISM       "Jainism"
 #define RELIGION_ISLAM         "Islam"
 #define RELIGION_CHRISTIANITY  "Christianity"
-#define RELIGION_BAHAI_FAITH   "Baha'i Faith"
 #define RELIGION_AGNOSTICISM   "Agnosticism"
 #define RELIGION_DEISM         "Deism"
 #define RELIGION_ATHEISM       "Atheism"
 #define RELIGION_THELEMA       "Thelema"
 #define RELIGION_SPIRITUALISM  "Spiritualism"
-#define RELIGION_SHINTO        "Shinto"
-#define RELIGION_TAOISM        "Taoism"
 
 // Skrellian cultures.
 #define CULTURE_SKRELL_QERR     "Qerr-Katish"
@@ -97,16 +90,6 @@
 #define CULTURE_SKRELL_RASKINTA "Raskinta-Katish"
 
 #define HOME_SYSTEM_QERRBALAK  "Qerrbalak"
-#define HOME_SYSTEM_TALAMIRA "Talamira"
-#define HOME_SYSTEM_ROASORA "Roa'sora"
-#define HOME_SYSTEM_MITORQI "Mi'tor'qi"
-#define HOME_SYSTEM_SKRELLSPACE "Skrell Space"
-
-#define FACTION_SKRELL_QERRVOAL "Qerr'voal"
-#define FACTION_SKRELL_QALAOA "Qala'oa"
-#define FACTION_SKRELL_YIITALANA "Yii'talana"
-#define FACTION_SKRELL_KRRIGLI "Krri'gli"
-#define FACTION_SKRELL_QONPRRI "Qon'prri"
 
 // Adherent cultures.
 #define CULTURE_ADHERENT             "The Vigil"
@@ -151,37 +134,28 @@
 #define HOME_SYSTEM_SERPENTIDS "Tau-Wilo"
 
 // Unathi cultures.
-#define CULTURE_UNATHI_YEOSA_ABYSS    "Abyssal Yeosa Clans"
-#define CULTURE_UNATHI_YEOSA_LITTORAL "Littoral Yeosa Clans"
-#define CULTURE_UNATHI_DIAMOND_PEAKS  "Diamond Peak Clans"
-#define CULTURE_UNATHI_POLAR          "Polar Clans"
-#define CULTURE_UNATHI_DESERT         "Desert Clans"
-#define CULTURE_UNATHI_SAVANNAH       "Savannah Clans"
-#define CULTURE_UNATHI_SALT_SWAMP     "Salt Swamp Clans"
-#define CULTURE_UNATHI_SPACE          "Space-Faring Clans"
-#define CULTURE_UNATHI_TERSTEN        "Tersten Clans"
- 
+#define CULTURE_UNATHI              "Moghes Hegemony"
+
 #define HOME_SYSTEM_MOGHES          "Moghes"
-#define HOME_SYSTEM_OUERE           "Ouere"
-#define HOME_SYSTEM_UNATHI_TERSTEN  "Tersten - Unathi Clans"
-#define HOME_SYSTEM_OFFWORLD        "Off-world"
- 
-#define FACTION_UNATHI_HEGEMONY          "Moghes Hegemony"
-#define FACTION_UNATHI_TERSTEN_HEGEMONY  "Tersten Hegemony"
-#define FACTION_UNATHI_SSEN_UUMA         "Ssen-Uuma Convent"
-#define FACTION_UNATHI_INDEPENDENT       "Independent Faction"
-#define FACTION_UNATHI_BAASK             "Ba'ask Krukzuz"
-#define FACTION_UNATHI_GRESIS            "Gresis Krukzuz"
-#define FACTION_UNATHI_RAH_ZAKEH         "Rah'Zakeh League"
-#define FACTION_UNATHI_KHARZA            "Kharza Fleet"
- 
+
+#define FACTION_UNATHI_POLAR        "Polar Clans"
+#define FACTION_UNATHI_DESERT       "Desert Clans"
+#define FACTION_UNATHI_SAVANNAH     "Savannah Clans"
+#define FACTION_UNATHI_DIAMOND_PEAK "Diamond Peak Clans"
+#define FACTION_UNATHI_SALT_SWAMP   "Salt Swamp Clans"
+#define FACTION_UNATHI_YEOSA		"Yeosa Clans"
+
 #define RELIGION_UNATHI_STRATAGEM    "Grand Stratagem"
 #define RELIGION_UNATHI_PRECURSOR    "Precursor"
 #define RELIGION_UNATHI_VINE         "Hand of the Vine"
 #define RELIGION_UNATHI_LIGHTS       "The Fruitful Lights"
-#define RELIGION_UNATHI_MARKESHELI   "Cult of Markesh"
-#define RELIGION_UNATHI_ANCESTOR     "Ancestor Worship"
-#define RELIGION_UNATHI_AGA_EAKHE    "Aga-Eakhe"
+
+// Xenophage cultures.
+#define CULTURE_XENOPHAGE_D    "Xenophage Drone"
+#define CULTURE_XENOPHAGE_H    "Xenophage Hunter"
+#define CULTURE_XENOPHAGE_S    "Xenophage Sentinel"
+#define CULTURE_XENOPHAGE_Q    "Xenophage Queen"
+#define FACTION_XENOPHAGE      "Xenophage Hive"
 
 // Nabber grades.
 #define CULTURE_NABBER_CMINUS "Grade C-"
@@ -193,11 +167,3 @@
 #define CULTURE_NABBER_AMINUS "Grade A-"
 #define CULTURE_NABBER_A      "Grade A"
 #define CULTURE_NABBER_APLUS  "Grade A+"
-
-// Ascent culture.
-#define CULTURE_ASCENT           "The Ascent"
-#define HOME_SYSTEM_KHARMAANI    "Core"
-#define FACTION_ASCENT_GYNE      "Ascent Gyne"
-#define FACTION_ASCENT_ALATE     "Ascent Alate"
-#define FACTION_ASCENT_SERPENTID "Ascent Serpentid"
-#define RELIGION_KHARMAANI       "Nest-Lineage Veneration"

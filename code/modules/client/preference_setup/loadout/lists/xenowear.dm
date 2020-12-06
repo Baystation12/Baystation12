@@ -71,14 +71,14 @@
 	display_name = "female headtail cloth (Skrell)"
 	path = /obj/item/clothing/ears/skrell/cloth_female
 	flags = GEAR_HAS_COLOR_SELECTION
-
+	
 /datum/gear/head/skrell_helmet
 	display_name = "Skrellian helmet"
 	path = /obj/item/clothing/head/helmet/skrell
 	whitelisted = list(SPECIES_SKRELL)
 	sort_category = "Xenowear"
 	allowed_roles = list(/datum/job/hos, /datum/job/warden, /datum/job/officer, /datum/job/detective)
-
+	
 /datum/gear/accessory/skrell_badge
 	display_name = "skrellian SDTF badge"
 	path = /obj/item/clothing/accessory/badge/tags/skrell
@@ -166,25 +166,4 @@
 	display_name = "vox breathing mask"
 	path = /obj/item/clothing/mask/gas/vox
 	sort_category = "Xenowear"
-	whitelisted = list(SPECIES_VOX, SPECIES_VOX_ARMALIS)
-
-// Space-Adapted Human clothing
-/datum/gear/accessory/space_adapted
-	sort_category = "Xenowear"
-	category = /datum/gear/accessory/space_adapted
-	whitelisted = list(SPECIES_SPACER)
-
-/datum/gear/accessory/space_adapted/venter
-	display_name = "venter assembly"
-	path = /obj/item/clothing/accessory/space_adapted/venter
-	flags = GEAR_HAS_COLOR_SELECTION
-
-/datum/gear/accessory/space_adapted/legbrace
-	display_name = "legbrace"
-	path = /obj/item/clothing/accessory/space_adapted/bracer
-	flags = GEAR_HAS_COLOR_SELECTION
-
-/datum/gear/accessory/space_adapted/neckbrace
-	display_name = "neckbrace"
-	path = /obj/item/clothing/accessory/space_adapted/bracer/neckbrace
-	flags = GEAR_HAS_COLOR_SELECTION
+	whitelisted = list(SPECIES_VOX)

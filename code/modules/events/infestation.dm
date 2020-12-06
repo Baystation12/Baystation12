@@ -31,7 +31,7 @@
 
 	if(!vermin_turfs)
 		log_debug("Vermin infestation failed to find a viable spawn after 3 attempts. Aborting.")
-		kill(TRUE)
+		kill()
 
 	var/list/spawn_types = list()
 	var/max_number
@@ -66,13 +66,13 @@
 				S.amount_grown = -1
 
 /datum/event/infestation/announce()
-	command_announcement.Announce("Bioscans indicate that [vermstring] have been breeding in \the [location]. Further infestation is likely if left unchecked.", "[location_name()] Biologic Sensor Network", zlevels = affecting_z)
+	command_announcement.Announce("Bioscans indicate that [vermstring] have been breeding in \the [location]. Clear them out, before this starts to affect productivity.", "Major Bill's Shipping Critter Sensor", zlevels = affecting_z)
 
 /datum/event/infestation/proc/set_location_get_infestation_turfs()
 	location = pick_area(list(/proc/is_not_space_area, /proc/is_station_area))
 	if(!location)
 		log_debug("Vermin infestation failed to find a viable area. Aborting.")
-		kill(TRUE)
+		kill()
 		return
 
 	var/list/vermin_turfs = get_area_turfs(location, list(/proc/not_turf_contains_dense_objects, /proc/IsTurfAtmosSafe))

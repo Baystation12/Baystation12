@@ -29,16 +29,6 @@
 	max_ammo = 6
 	multiple_sprites = 1
 
-/obj/item/ammo_magazine/speedloader/clip
-	name = "stripper clip"
-	desc = "A stripper clip for bolt action rifles."
-	icon_state = "clip"
-	caliber = CALIBER_RIFLE
-	ammo_type = /obj/item/ammo_casing/rifle
-	matter = list(MATERIAL_STEEL = 1800)
-	max_ammo = 5
-	multiple_sprites = 1
-
 /obj/item/ammo_magazine/shotholder
 	name = "shotgun slug holder"
 	desc = "A convenient pouch that holds 12 gauge shells."
@@ -57,17 +47,7 @@
 		var/image/I = image(icon, "shotholder-marking")
 		I.color = marking_color
 		overlays += I
-
-/obj/item/ammo_magazine/shotholder/attack_hand(mob/user)
-	if((user.a_intent == I_HURT) && (stored_ammo.len))
-		var/obj/item/ammo_casing/C = stored_ammo[stored_ammo.len]
-		stored_ammo-=C
-		user.put_in_hands(C)
-		user.visible_message("\The [user] removes \a [C] from [src].", "<span class='notice'>You remove \a [C] from [src].</span>")
-		update_icon()
-	else
-		..()
-
+	
 /obj/item/ammo_magazine/shotholder/shell
 	name = "shotgun shell holder"
 	ammo_type = /obj/item/ammo_casing/shotgun/pellet
@@ -131,7 +111,7 @@
 	ammo_type = /obj/item/ammo_casing/pistol/small/practice
 
 /obj/item/ammo_magazine/smg
-	name = "box magazine"
+	name = "submachine gun magazine"
 	icon_state = "smg"
 	origin_tech = list(TECH_COMBAT = 2)
 	mag_type = MAGAZINE
@@ -227,20 +207,14 @@
 	ammo_type = /obj/item/ammo_casing/pistol/throwback
 
 /obj/item/ammo_magazine/box/emp/pistol
-	name = "ammunition box"
-	desc = "A box containing loose rounds of standard EMP ammo."
 	labels = list("haywire")
 	ammo_type = /obj/item/ammo_casing/pistol/emp
 	caliber = CALIBER_PISTOL
-	max_ammo = 15
 
 /obj/item/ammo_magazine/box/emp/smallpistol
-	name = "ammunition box"
-	desc = "A box containing loose rounds of small EMP ammo."
 	labels = list("haywire")
-	ammo_type = /obj/item/ammo_casing/pistol/small/emp
+	ammo_type = /obj/item/ammo_casing/pistol/emp
 	caliber = CALIBER_PISTOL_SMALL
-	max_ammo = 8
 
 /obj/item/ammo_magazine/proto_smg
 	name = "submachine gun magazine"

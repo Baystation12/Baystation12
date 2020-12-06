@@ -1,7 +1,7 @@
 /decl/hierarchy/outfit/standard_space_gear
 	name = "Standard space gear"
 	shoes = /obj/item/clothing/shoes/black
-	head = /obj/item/clothing/head/helmet/space/fishbowl
+	head = /obj/item/clothing/head/helmet/space
 	suit = /obj/item/clothing/suit/space
 	uniform = /obj/item/clothing/under/color/grey
 	back = /obj/item/weapon/tank/jetpack/oxygen
@@ -25,16 +25,16 @@
 	suit = /obj/item/clothing/suit/hgpirate
 
 	id_slot = slot_wear_id
-	id_types = list(/obj/item/weapon/card/id/centcom/station)
+	id_type = /obj/item/weapon/card/id/centcom/station
 	id_pda_assignment = "Admiral"
 
 /decl/hierarchy/outfit/merchant
 	name = "Merchant"
 	shoes = /obj/item/clothing/shoes/black
-	l_ear = /obj/item/device/radio/headset/merchant
+	l_ear = /obj/item/device/radio/headset
 	uniform = /obj/item/clothing/under/color/grey
 	id_slot = slot_wear_id
-	id_types = list(/obj/item/weapon/card/id/merchant)
+	id_type = /obj/item/weapon/card/id/merchant
 	pda_slot = slot_r_store
 	pda_type = /obj/item/modular_computer/pda //cause I like the look
 	id_pda_assignment = "Merchant"

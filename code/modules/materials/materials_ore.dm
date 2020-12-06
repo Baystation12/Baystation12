@@ -45,7 +45,7 @@
 	if(icon_state == "dust")
 		var/mob/living/carbon/human/H = hit_atom
 		if(istype(H) && H.has_eyes() && prob(85))
-			to_chat(H, SPAN_WARNING("Some of \the [src] gets in your eyes!"))
+			H << "<span class='danger'>Some of \the [src] gets in your eyes!</span>"
 			H.eye_blind += 5
 			H.eye_blurry += 10
 			QDEL_IN(src, 1)
@@ -56,7 +56,7 @@
 /obj/item/weapon/ore/iron/New(var/newloc)
 	..(newloc, MATERIAL_HEMATITE)
 /obj/item/weapon/ore/coal/New(var/newloc)
-	..(newloc, MATERIAL_GRAPHITE)
+	..(newloc, MATERIAL_GRAPHENE)
 /obj/item/weapon/ore/glass/New(var/newloc)
 	..(newloc, MATERIAL_SAND)
 /obj/item/weapon/ore/silver/New(var/newloc)
@@ -73,7 +73,3 @@
 	..(newloc, MATERIAL_WASTE)
 /obj/item/weapon/ore/phoron/New(var/newloc)
 	..(newloc, MATERIAL_PHORON)
-/obj/item/weapon/ore/aluminium/New(var/newloc)
-	..(newloc, MATERIAL_BAUXITE)
-/obj/item/weapon/ore/rutile/New(var/newloc)
-	..(newloc, MATERIAL_RUTILE)

@@ -4,16 +4,12 @@
 	var/_input_on = FALSE
 	var/_output_maxed = FALSE
 	var/_output_on = FALSE
+	cur_coils = 0
 
-/obj/machinery/power/smes/buildable/preset/on_full
-	_fully_charged = TRUE
-	_input_maxed = TRUE
-	_input_on = TRUE
-	_output_maxed = TRUE
-	_output_on = TRUE
-
-/obj/machinery/power/smes/buildable/preset/Initialize()
-	. = ..()
+/obj/machinery/power/smes/buildable/preset/New()
+	..()
+	configure_and_install_coils()
+	recalc_coils()
 	if(_input_maxed)
 		input_level = input_level_max
 	if(_output_maxed)
@@ -23,13 +19,7 @@
 	if(_fully_charged)
 		charge = capacity
 
-/obj/machinery/power/smes/buildable/preset/admin
-	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/smes_coil/advanced = 4
-	)
-	_input_maxed = TRUE
-	_output_maxed = TRUE
-	_input_on = TRUE
-	_output_on = TRUE
-	_fully_charged = TRUE
-	
+// Override and implement to customize the SMES's loadout
+/obj/machinery/power/smes/buildable/preset/proc/configure_and_install_coils()
+	CRASH("configure_and_install_coils() not implemented for type [type]!")
+	return

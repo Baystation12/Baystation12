@@ -5,12 +5,7 @@
 	item_state = "bl_suit"
 	worn_state = "syndicate"
 	has_sensor = 0
-	gender_icons = 1
-	armor = list(
-		melee = ARMOR_MELEE_SMALL, 
-		bullet = ARMOR_BALLISTIC_MINOR, 
-		laser = ARMOR_LASER_MINOR
-		)
+	armor = list(melee = 10, bullet = 10, laser = 10,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.9
 
 /obj/item/clothing/under/syndicate/combat
@@ -19,7 +14,6 @@
 	icon_state = "combat"
 	item_state = "bl_suit"
 	worn_state = "combat"
-	gender_icons = 1
 	has_sensor = SUIT_HAS_SENSORS
 
 /obj/item/clothing/under/syndicate/tacticool
@@ -28,7 +22,7 @@
 	icon_state = "tactifool"
 	item_state = "bl_suit"
 	worn_state = "tactifool"
-	armor = null
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 1
 	has_sensor = SUIT_HAS_SENSORS
 

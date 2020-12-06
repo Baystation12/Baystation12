@@ -1,5 +1,5 @@
 /turf/CanFluidPass(var/coming_from)
-	if(flooded || density)
+	if(density)
 		return FALSE
 	if(isnull(fluid_can_pass))
 		fluid_can_pass = TRUE
@@ -10,10 +10,9 @@
 	return fluid_can_pass
 
 /turf/proc/add_fluid(var/amount, var/fluid)
-	if(!flooded)
-		var/obj/effect/fluid/F = locate() in src
-		if(!F) F = new(src)
-		SET_FLUID_DEPTH(F, F.fluid_amount + amount)
+	var/obj/effect/fluid/F = locate() in src
+	if(!F) F = new(src)
+	SET_FLUID_DEPTH(F, F.fluid_amount + amount)
 
 /turf/proc/remove_fluid(var/amount = 0)
 	var/obj/effect/fluid/F = locate() in src
@@ -24,11 +23,10 @@
 
 /turf/proc/make_flooded()
 	if(!flooded)
-		flooded = TRUE
+		flooded = 1
 		for(var/obj/effect/fluid/F in src)
 			qdel(F)
 		update_icon()
-		fluid_update()
 
 /turf/is_flooded(var/lying_mob, var/absolute)
 	return (flooded || (!absolute && check_fluid_depth(lying_mob ? FLUID_OVER_MOB_HEAD : FLUID_DEEP)))

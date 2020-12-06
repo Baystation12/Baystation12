@@ -1,6 +1,6 @@
 /obj/item/psychic_power/telekinesis
 	name = "telekinetic grip"
-	maintain_cost = 6
+	maintain_cost = 3
 	icon_state = "telekinesis"
 	var/atom/movable/focus
 
@@ -16,24 +16,21 @@
 
 /obj/item/psychic_power/telekinesis/proc/set_focus(var/atom/movable/_focus)
 
-	if(!_focus.simulated || !istype(_focus.loc, /turf))
+	if(_focus.anchored || !_focus.simulated || !istype(_focus.loc, /turf))
 		return FALSE
 
 	var/check_paramount
 	if(ismob(_focus))
 		var/mob/victim = _focus
 		check_paramount = (victim.mob_size >= MOB_MEDIUM)
-	else if(isobj(_focus))
-		var/obj/thing = _focus
-		check_paramount = (thing.w_class >= 5)
+	else if(istype(_focus, /obj/item))
+		var/obj/item/item = _focus
+		check_paramount = (item.w_class >= 5)
 	else
 		return FALSE
 
-	if(_focus.anchored || (check_paramount && owner.psi.get_rank(PSI_PSYCHOKINESIS) < PSI_RANK_PARAMOUNT))
-		focus = _focus
-		. = attack_self(owner)
-		if(!.)
-			to_chat(owner, SPAN_WARNING("\The [_focus] is too hefty for you to get a mind-grip on."))
+	if(check_paramount && owner.psi.get_rank(PSI_PSYCHOKINESIS) < PSI_RANK_PARAMOUNT)
+		to_chat(owner, SPAN_WARNING("\The [_focus] is too hefty for you to get a mind-grip on."))
 		qdel(src)
 		return FALSE
 
@@ -46,17 +43,24 @@
 	return TRUE
 
 /obj/item/psychic_power/telekinesis/attack_self(var/mob/user)
+
 	user.visible_message(SPAN_NOTICE("\The [user] makes a strange gesture."))
 	sparkle()
-	return focus.do_simple_ranged_interaction(user)
+
+	if(istype(focus, /obj/item))
+		var/obj/item/I = focus
+		return I.attack_self(user)
+	//if(istype(focus, /mob) && owner.psi.get_rank(PSI_PSYCHOKINESIS) >= PSI_RANK_PARAMOUNT)
+	//	return // TODO: force choke
+	. = ..()
 
 /obj/item/psychic_power/telekinesis/afterattack(var/atom/target, var/mob/living/user, var/proximity)
 
-	if(!target || !user || (isobj(target) && !isturf(target.loc)) || !user.psi || !user.psi.can_use() || !user.psi.spend_power(8))
+	if(!target || !user || (isobj(target) && !isturf(target.loc)) || !user.psi || !user.psi.can_use() || !user.psi.spend_power(5))
 		return
 
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN * 2)
-	user.psi.set_cooldown(8)
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	user.psi.set_cooldown(5)
 
 	var/user_psi_leech = user.do_psionics_check(5, user)
 	if(user_psi_leech)
@@ -83,12 +87,10 @@
 			if(!resolved && target && I)
 				I.afterattack(target,user,1) // for splashing with beakers
 		else
-			if(!focus.anchored)
-				var/user_rank = owner.psi.get_rank(PSI_PSYCHOKINESIS)
-				focus.throw_at(target, user_rank*2, user_rank*3, owner)
+			var/user_rank = owner.psi.get_rank(PSI_PSYCHOKINESIS)
+			focus.throw_at(target, user_rank*2, user_rank*10, owner)
 			sleep(1)
 			sparkle()
-		owner.drop_from_inventory(src)
 
 /obj/item/psychic_power/telekinesis/proc/sparkle()
 	set waitfor = 0

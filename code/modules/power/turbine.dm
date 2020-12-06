@@ -31,10 +31,12 @@
 	icon = 'icons/obj/computer.dmi'
 	icon_keyboard = "tech_key"
 	icon_screen = "turbinecomp"
+	circuit = /obj/item/weapon/circuitboard/turbine_control
 	anchored = 1
 	density = 1
 	var/obj/machinery/compressor/compressor
 	var/list/obj/machinery/door/blast/doors
+	var/id = 0
 	var/door_status = 0
 
 // the inlet stage of the gas turbine electricity generator
@@ -150,7 +152,7 @@
 
 	if ( (get_dist(src, user) > 1 ) || (stat & (NOPOWER|BROKEN)) && (!istype(user, /mob/living/silicon/ai)) )
 		user.machine = null
-		close_browser(user, "window=turbine")
+		user << browse(null, "window=turbine")
 		return
 
 	user.machine = src
@@ -166,7 +168,7 @@
 	t += "</PRE><HR><A href='?src=\ref[src];close=1'>Close</A>"
 
 	t += "</TT>"
-	show_browser(user, t, "window=turbine")
+	user << browse(t, "window=turbine")
 	onclose(user, "turbine")
 
 	return
@@ -179,7 +181,7 @@
 
 /obj/machinery/power/turbine/OnTopic(user, href_list)
 	if(href_list["close"])
-		close_browser(usr, "window=turbine")
+		usr << browse(null, "window=turbine")
 		return TOPIC_HANDLED
 
 	if(href_list["str"])
@@ -198,11 +200,11 @@
 /obj/machinery/computer/turbine_computer/Initialize()
 	. = ..()
 	for(var/obj/machinery/compressor/C in SSmachines.machinery)
-		if(id_tag == C.comp_id)
+		if(id == C.comp_id)
 			compressor = C
 	doors = new /list()
 	for(var/obj/machinery/door/blast/P in SSmachines.machinery)
-		if(P.id_tag == id_tag)
+		if(P.id == id)
 			doors += P
 
 /obj/machinery/computer/turbine_computer/Destroy()
@@ -210,11 +212,7 @@
 	compressor = null
 	return ..()
 
-/obj/machinery/computer/turbine_computer/interface_interact(mob/user)
-	interact(user)
-	return TRUE
-
-/obj/machinery/computer/turbine_computer/interact(var/mob/user)
+/obj/machinery/computer/turbine_computer/attack_hand(var/mob/user as mob)
 	user.machine = src
 	var/dat
 	if(src.compressor)
@@ -232,7 +230,7 @@
 	else
 		dat += "<span class='danger'>No compatible attached compressor found.</span>"
 
-	show_browser(user, dat, "window=computer;size=400x500")
+	user << browse(dat, "window=computer;size=400x500")
 	onclose(user, "computer")
 	return
 
@@ -257,8 +255,12 @@
 					door_status = 0
 		. = TOPIC_REFRESH
 	else if( href_list["close"] )
-		close_browser(user, "window=computer")
+		user << browse(null, "window=computer")
 		return TOPIC_HANDLED
 
 	if(. == TOPIC_REFRESH)
 		interact(user)
+
+/obj/machinery/computer/turbine_computer/Process()
+	src.updateDialog()
+	return

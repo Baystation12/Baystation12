@@ -41,7 +41,6 @@
 	singular_name = "wood floor tile"
 	desc = "An easy to fit wooden floor tile."
 	icon_state = "tile-wood"
-	color = WOOD_COLOR_GENERIC
 	matter = list(MATERIAL_WOOD = 450)
 
 /obj/item/stack/tile/wood/cyborg
@@ -56,48 +55,28 @@
 	name = "mahogany floor tile"
 	singular_name = "mahogany floor tile"
 	desc = "An easy to fit mahogany wood floor tile."
-	icon_state = "tile-wood"
-	color = WOOD_COLOR_RICH
+	icon_state = "tile-mahogany"
 	matter = list(MATERIAL_WOOD = 450)
 
 /obj/item/stack/tile/maple
 	name = "maple floor tile"
 	singular_name = "maple floor tile"
 	desc = "An easy to fit maple wood floor tile."
-	icon_state = "tile-wood"
-	color = WOOD_COLOR_PALE
+	icon_state = "tile-maple"
 	matter = list(MATERIAL_WOOD = 450)
 
 /obj/item/stack/tile/ebony
 	name = "ebony floor tile"
 	singular_name = "ebony floor tile"
 	desc = "An easy to fit ebony floor tile."
-	icon_state = "tile-wood"
-	color = WOOD_COLOR_BLACK
+	icon_state = "tile-ebony"
 	matter = list(MATERIAL_WOOD = 450)
 
 /obj/item/stack/tile/walnut
 	name = "walnut floor tile"
 	singular_name = "walnut floor tile"
 	desc = "An easy to fit walnut wood floor tile."
-	icon_state = "tile-wood"
-	color = WOOD_COLOR_CHOCOLATE
-	matter = list(MATERIAL_WOOD = 450)
-
-/obj/item/stack/tile/bamboo
-	name = "bamboo floor tile"
-	singular_name = "bamboo floor tile"
-	desc = "An easy to fit bamboo wood floor tile."
-	icon_state = "tile-wood"
-	color = WOOD_COLOR_PALE2
-	matter = list(MATERIAL_WOOD = 450)
-
-/obj/item/stack/tile/yew
-	name = "yew floor tile"
-	singular_name = "yew floor tile"
-	desc = "An easy to fit yew wood floor tile."
-	icon_state = "tile-wood"
-	color = WOOD_COLOR_YELLOW
+	icon_state = "tile-walnut"
 	matter = list(MATERIAL_WOOD = 450)
 
 /obj/item/stack/tile/floor
@@ -120,15 +99,16 @@
 /obj/item/stack/tile/mono/dark
 	name = "dark mono tile"
 	singular_name = "dark mono tile"
-	icon_state = "fr_tile"
+	icon_state = "tile"
 	matter = list(MATERIAL_STEEL = 450)
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
 /obj/item/stack/tile/mono/white
 	name = "white mono tile"
 	singular_name = "white mono tile"
-	icon_state = "tile_white"
-	matter = list(MATERIAL_PLASTIC = 450)
+	icon_state = "tile"
+	matter = list(MATERIAL_STEEL = 450)
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
 /obj/item/stack/tile/grid
 	name = "grey grid tile"
@@ -178,8 +158,7 @@
 	name = "dark floor tile"
 	singular_name = "dark floor tile"
 	icon_state = "fr_tile"
-	matter = list(MATERIAL_STEEL = 450)
-	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	matter = list(MATERIAL_PLASTEEL = 450)
 
 /obj/item/stack/tile/floor_dark/fifty
 	amount = 50
@@ -241,29 +220,11 @@
 
 /obj/item/stack/tile/carpetblue2
 	name = "pale blue carpet"
-	desc = "A piece of blue and pale blue carpet."
+	desc = "A piece of blue and silver carpet."
 	singular_name = "pale blue carpet"
 	icon_state = "tile_carpetblue2"
 
 /obj/item/stack/tile/carpetblue2/fifty
-	amount = 50
-
-/obj/item/stack/tile/carpetblue3
-	name = "sea blue carpet"
-	desc = "A piece of blue and green carpet."
-	singular_name = "sea blue carpet"
-	icon_state = "tile_carpetblue3"
-
-/obj/item/stack/tile/carpetblue3/fifty
-	amount = 50
-
-/obj/item/stack/tile/carpetmagenta
-	name = "magenta carpet"
-	desc = "A piece of magenta carpet."
-	singular_name = "magenta carpet"
-	icon_state = "tile_carpetmagenta"
-
-/obj/item/stack/tile/carpetmagenta/fifty
 	amount = 50
 
 /obj/item/stack/tile/carpetpurple
@@ -301,10 +262,3 @@
 
 /obj/item/stack/tile/carpetred/fifty
 	amount = 50
-
-/obj/item/stack/tile/pool
-	name = "pool tiling"
-	desc = "A set of tiles designed to build fluid pools."
-	singular_name = "pool tile"
-	icon_state = "tile_pool"
-	matter = list(MATERIAL_STEEL = 450)

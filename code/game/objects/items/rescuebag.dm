@@ -48,12 +48,13 @@
 
 /obj/item/bodybag/rescue/examine(mob/user)
 	. = ..()
-	if(airtank)
-		to_chat(user,"The pressure meter on \the [airtank] shows '[airtank.air_contents.return_pressure()] kPa'.")
-		to_chat(user,"The distribution valve on \the [airtank] is set to '[airtank.distribute_pressure] kPa'.")
-	else
-		to_chat(user, "<span class='warning'>The air tank is missing.</span>")
-
+	if(.)
+		if(airtank)
+			to_chat(user,"The pressure meter on \the [airtank] shows '[airtank.air_contents.return_pressure()] kPa'.")
+			to_chat(user,"The distribution valve on \the [airtank] is set to '[airtank.distribute_pressure] kPa'.")
+		else
+			to_chat(user, "<span class='warning'>The air tank is missing.</span>")
+		
 /obj/structure/closet/body_bag/rescue
 	name = "rescue bag"
 	desc = "A reusable plastic bag designed to prevent additional damage to an occupant, especially useful if short on time or in \
@@ -105,21 +106,18 @@
 
 /obj/structure/closet/body_bag/rescue/fold(var/user)
 	var/obj/item/weapon/tank/my_tank = airtank
-	airtank = null // Apparently this is required to avoid breaking my_tank checks further down after the parent proc runs qdel(src)
+	airtank = null
 	var/obj/item/bodybag/rescue/folded = ..()
-	if (folded && istype(folded))
-		if (my_tank)
-			my_tank.air_contents.merge(atmo)
-			folded.airtank = my_tank
-			my_tank.forceMove(folded)
-	else
-		airtank = my_tank
+	if(istype(folded) && my_tank)
+		my_tank.air_contents.merge(atmo)
+		folded.airtank = my_tank
+		airtank.forceMove(folded)
 
 /obj/structure/closet/body_bag/rescue/Process()
 	if(!airtank)
 		return
 	var/env_pressure = atmo.return_pressure()
-	var/pressure_delta = max(airtank.distribute_pressure, 51) - env_pressure
+	var/pressure_delta = airtank.distribute_pressure - env_pressure
 	if(airtank.air_contents.temperature > 0 && pressure_delta > 0)
 		var/transfer_moles = calculate_transfer_moles(airtank.air_contents, atmo, pressure_delta)
 		pump_gas_passive(airtank, airtank.air_contents, atmo, transfer_moles)
@@ -129,13 +127,15 @@
 
 /obj/structure/closet/body_bag/rescue/examine(mob/user)
 	. = ..()
-	if(airtank)
-		to_chat(user,"The pressure meter on \the [airtank] shows '[airtank.air_contents.return_pressure()] kPa'.")
-		to_chat(user,"The distribution valve on \the [airtank] is set to '[airtank.distribute_pressure] kPa'.")
-	else
-		to_chat(user, "<span class='warning'>The air tank is missing.</span>")
-	to_chat(user,"The pressure meter on [src] shows '[atmo.return_pressure()] kPa'.")
-	if(Adjacent(user)) //The bag's rather thick and opaque from a distance.
-		to_chat(user, "<span class='info'>You peer into \the [src].</span>")
-		for(var/mob/living/L in contents)
-			L.examine(arglist(args))
+	if(.)
+		if(airtank)
+			to_chat(user,"The pressure meter on \the [airtank] shows '[airtank.air_contents.return_pressure()] kPa'.")
+			to_chat(user,"The distribution valve on \the [airtank] is set to '[airtank.distribute_pressure] kPa'.")
+		else
+			to_chat(user, "<span class='warning'>The air tank is missing.</span>")
+		to_chat(user,"The pressure meter on [src] shows '[atmo.return_pressure()] kPa'.")
+		if(Adjacent(user)) //The bag's rather thick and opaque from a distance.
+			to_chat(user, "<span class='info'>You peer into \the [src].</span>")
+			for(var/mob/living/L in contents)
+				L.examine(user)
+ 

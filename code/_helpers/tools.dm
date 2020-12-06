@@ -5,7 +5,6 @@
 #define isScrewdriver(A) (A && A.isscrewdriver())
 #define isMultitool(A)   (A && A.ismultitool())
 #define isCrowbar(A)     (A && A.iscrowbar())
-#define isHatchet(A)     (A && A.ishatchet())
 
 /atom/proc/iswrench()
 	return FALSE
@@ -28,9 +27,6 @@
 /atom/proc/iscrowbar()
 	return FALSE
 
-/atom/proc/ishatchet()
-	return FALSE
-
 /obj/item/weapon/wrench/iswrench()
 	return TRUE
 
@@ -50,7 +46,4 @@
 	return TRUE
 
 /obj/item/weapon/crowbar/iscrowbar()
-	return TRUE
-
-/obj/item/weapon/material/hatchet/ishatchet()
 	return TRUE

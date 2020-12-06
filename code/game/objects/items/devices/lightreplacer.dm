@@ -54,9 +54,8 @@
 	var/emagged = 0
 	var/charge = 0
 
-/obj/item/device/lightreplacer/examine(mob/user, distance)
-	. = ..()
-	if(distance <= 2)
+/obj/item/device/lightreplacer/examine(mob/user)
+	if(..(user, 2))
 		to_chat(user, "It has [uses] light\s remaining.")
 
 /obj/item/device/lightreplacer/resolve_attackby(var/atom/A, mob/user)
@@ -156,16 +155,10 @@
 		to_chat(U, "<span class='notice'>You replace the [target.get_fitting_name()] with the [src].</span>")
 
 		if(target.lightbulb)
-			var/obj/item/bulb = target.lightbulb
 			target.remove_bulb()
-			if (isrobot(U))
-				qdel(bulb)
 
 		var/obj/item/weapon/light/L = new target.light_type()
-		if (emagged)
-			log_and_message_admins("used an emagged light replacer.", U)
-			L.create_reagents(5)
-			L.reagents.add_reagent(/datum/reagent/toxin/phoron, 5)
+		L.rigged = emagged
 		target.insert_bulb(L)
 
 

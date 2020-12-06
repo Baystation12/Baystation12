@@ -28,7 +28,7 @@
 	var/mob/living/carbon/human/affecting = G.affecting
 	var/mob/living/carbon/human/assailant = G.assailant
 
-	if(affecting.incapacitated(INCAPACITATION_UNRESISTING) || affecting.a_intent == I_HELP)
+	if(affecting.incapacitated() || affecting.a_intent == I_HELP)
 		affecting.visible_message("<span class='warning'>[affecting] isn't prepared to fight back as [assailant] tightens \his grip!</span>")
 		G.done_struggle = TRUE
 		G.upgrade(TRUE)
@@ -37,12 +37,7 @@
 	var/mob/living/carbon/human/affecting = G.affecting
 	var/mob/living/carbon/human/assailant = G.assailant
 
-	if(affecting == assailant)
-		G.done_struggle = TRUE
-		G.upgrade(TRUE)
-		return
-
-	if(affecting.incapacitated(INCAPACITATION_UNRESISTING) || affecting.a_intent == I_HELP)
+	if(affecting.incapacitated() || affecting.a_intent == I_HELP)
 		affecting.visible_message("<span class='warning'>[affecting] isn't prepared to fight back as [assailant] tightens \his grip!</span>")
 		G.done_struggle = TRUE
 		G.upgrade(TRUE)
@@ -54,7 +49,7 @@
 
 /datum/grab/normal/struggle/proc/resolve_struggle(var/obj/item/grab/G)
 	set waitfor = FALSE
-	if(do_after(G.assailant, upgrade_cooldown, G, do_flags = DO_DEFAULT | DO_USER_CAN_MOVE))
+	if(do_after(G.assailant, upgrade_cooldown, G, can_move = 1))
 		G.done_struggle = TRUE
 		G.upgrade(TRUE)
 	else

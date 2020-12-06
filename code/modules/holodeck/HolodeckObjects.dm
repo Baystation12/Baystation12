@@ -60,8 +60,7 @@
 /turf/simulated/floor/holofloor/wood
 	name = "wooden floor"
 	icon = 'icons/turf/flooring/wood.dmi'
-	icon_state = "wood"
-	color = WOOD_COLOR_CHOCOLATE
+	icon_state = "walnut"
 	initial_flooring = /decl/flooring/wood
 
 /turf/simulated/floor/holofloor/grass
@@ -233,7 +232,6 @@
 	no_attack_log = 1
 
 /obj/item/weapon/holo/esword
-	icon = 'icons/obj/weapons/melee_energy.dmi'
 	name = "holosword"
 	desc = "May the force be within you. Sorta."
 	icon_state = "sword0"
@@ -315,9 +313,9 @@
 			return
 		if(prob(50))
 			I.dropInto(loc)
-			visible_message("<span class='notice'>Swish! \the [I] lands in \the [src].</span>", range = 3)
+			visible_message("<span class='notice'>Swish! \the [I] lands in \the [src].</span>", 3)
 		else
-			visible_message("<span class='warning'>\The [I] bounces off of \the [src]'s rim!</span>", range = 3)
+			visible_message("<span class='warning'>\The [I] bounces off of \the [src]'s rim!</span>", 3)
 		return 0
 	else
 		return ..(mover, target, height, air_group)
@@ -353,7 +351,7 @@
 			return
 		if(prob(10))
 			I.dropInto(loc)
-			visible_message("<span class='notice'>Swish! \the [I] gets caught in \the [src].</span>", range = 3)
+			visible_message("<span class='notice'>Swish! \the [I] gets caught in \the [src].</span>", 3)
 			return 0
 		else
 			return 1
@@ -385,15 +383,22 @@
 /obj/machinery/readybutton/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	to_chat(user, "The device is a solid button, there's nothing you can do with it!")
 
-/obj/machinery/readybutton/physical_attack_hand(mob/user)
-	currentarea = get_area(src)
+/obj/machinery/readybutton/attack_hand(mob/user as mob)
+
+	if(user.stat || stat & (NOPOWER|BROKEN))
+		to_chat(user, "This device is not powered.")
+		return
+
+	if(!user.IsAdvancedToolUser())
+		return 0
+
+	currentarea = get_area(src.loc)
 	if(!currentarea)
 		qdel(src)
-		return TRUE
 
 	if(eventstarted)
-		to_chat(user, "The event has already begun!")
-		return TRUE
+		to_chat(usr, "The event has already begun!")
+		return
 
 	ready = !ready
 
@@ -408,7 +413,6 @@
 
 	if(numbuttons == numready)
 		begin_event()
-	return TRUE
 
 /obj/machinery/readybutton/on_update_icon()
 	if(ready)

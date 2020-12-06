@@ -21,14 +21,14 @@
 /mob/living/silicon/robot/proc/uneq_active()
 	if(isnull(module_active))
 		return
-	GLOB.module_deactivated_event.raise_event(src, module_active)
 	if(module_state_1 == module_active)
 		if(istype(module_state_1,/obj/item/borg/sight))
 			sight_mode &= ~module_state_1:sight_mode
 		if (client)
 			client.screen -= module_state_1
-		module_state_1.forceMove(module)
+		contents -= module_state_1
 		module_active = null
+		module_state_1:loc = module //So it can be used again later
 		module_state_1 = null
 		inv1.icon_state = "inv1"
 	else if(module_state_2 == module_active)
@@ -36,8 +36,9 @@
 			sight_mode &= ~module_state_2:sight_mode
 		if (client)
 			client.screen -= module_state_2
-		module_state_2.forceMove(module)
+		contents -= module_state_2
 		module_active = null
+		module_state_2:loc = module
 		module_state_2 = null
 		inv2.icon_state = "inv2"
 	else if(module_state_3 == module_active)
@@ -45,45 +46,44 @@
 			sight_mode &= ~module_state_3:sight_mode
 		if (client)
 			client.screen -= module_state_3
-		module_state_3.forceMove(module)
+		contents -= module_state_3
 		module_active = null
+		module_state_3:loc = module
 		module_state_3 = null
 		inv3.icon_state = "inv3"
 	update_icon()
-	hud_used.update_robot_modules_display()
 
 /mob/living/silicon/robot/proc/uneq_all()
 	module_active = null
 
 	if(module_state_1)
-		GLOB.module_deactivated_event.raise_event(src, module_state_1)
 		if(istype(module_state_1,/obj/item/borg/sight))
 			sight_mode &= ~module_state_1:sight_mode
 		if (client)
 			client.screen -= module_state_1
-		module_state_1.forceMove(module)
+		contents -= module_state_1
+		module_state_1:loc = module
 		module_state_1 = null
 		inv1.icon_state = "inv1"
 	if(module_state_2)
-		GLOB.module_deactivated_event.raise_event(src, module_state_2)
 		if(istype(module_state_2,/obj/item/borg/sight))
 			sight_mode &= ~module_state_2:sight_mode
 		if (client)
 			client.screen -= module_state_2
-		module_state_2.forceMove(module)
+		contents -= module_state_2
+		module_state_2:loc = module
 		module_state_2 = null
 		inv2.icon_state = "inv2"
 	if(module_state_3)
-		GLOB.module_deactivated_event.raise_event(src, module_state_3)
 		if(istype(module_state_3,/obj/item/borg/sight))
 			sight_mode &= ~module_state_3:sight_mode
 		if (client)
 			client.screen -= module_state_3
-		module_state_3.forceMove(module)
+		contents -= module_state_3
+		module_state_3:loc = module
 		module_state_3 = null
 		inv3.icon_state = "inv3"
 	update_icon()
-	hud_used.update_robot_modules_display()
 
 /mob/living/silicon/robot/proc/activated(obj/item/O)
 	if(module_state_1 == O)
@@ -94,6 +94,7 @@
 		return 1
 	else
 		return 0
+	update_icon()
 
 //Helper procs for cyborg modules on the UI.
 //These are hackish but they help clean up code elsewhere.
@@ -130,7 +131,7 @@
 	return 0
 
 //select_module(module) - Selects the module slot specified by "module"
-/mob/living/silicon/robot/proc/select_module(module) //Module is 1-3
+/mob/living/silicon/robot/proc/select_module(var/module) //Module is 1-3
 	if(module < 1 || module > 3) return
 
 	if(!module_active(module)) return
@@ -142,42 +143,47 @@
 				inv2.icon_state = "inv2"
 				inv3.icon_state = "inv3"
 				module_active = module_state_1
+				return
 		if(2)
 			if(module_active != module_state_2)
 				inv1.icon_state = "inv1"
 				inv2.icon_state = "inv2 +a"
 				inv3.icon_state = "inv3"
 				module_active = module_state_2
+				return
 		if(3)
 			if(module_active != module_state_3)
 				inv1.icon_state = "inv1"
 				inv2.icon_state = "inv2"
 				inv3.icon_state = "inv3 +a"
 				module_active = module_state_3
-	module_active.on_active_hand(src)
-	GLOB.module_selected_event.raise_event(src, module_active)
+				return
+	return
 
 //deselect_module(module) - Deselects the module slot specified by "module"
-/mob/living/silicon/robot/proc/deselect_module(module) //Module is 1-3
+/mob/living/silicon/robot/proc/deselect_module(var/module) //Module is 1-3
 	if(module < 1 || module > 3) return
 
-	GLOB.module_deselected_event.raise_event(src, module_active)
 	switch(module)
 		if(1)
 			if(module_active == module_state_1)
 				inv1.icon_state = "inv1"
 				module_active = null
+				return
 		if(2)
 			if(module_active == module_state_2)
 				inv2.icon_state = "inv2"
 				module_active = null
+				return
 		if(3)
 			if(module_active == module_state_3)
 				inv3.icon_state = "inv3"
 				module_active = null
+				return
+	return
 
 //toggle_module(module) - Toggles the selection of the module slot specified by "module".
-/mob/living/silicon/robot/proc/toggle_module(module) //Module is 1-3
+/mob/living/silicon/robot/proc/toggle_module(var/module) //Module is 1-3
 	if(module < 1 || module > 3) return
 
 	if(module_selected(module))
@@ -210,8 +216,8 @@
 
 	return
 
-/mob/living/silicon/robot/proc/activate_module(obj/item/O)
-	if(!(locate(O) in module.equipment) && O != src.module.emag)
+/mob/living/silicon/robot/proc/activate_module(var/obj/item/O)
+	if(!(locate(O) in src.module.modules) && O != src.module.emag)
 		return
 	if(activated(O))
 		to_chat(src, "<span class='notice'>Already activated</span>")
@@ -220,34 +226,29 @@
 		module_state_1 = O
 		O.hud_layerise()
 		O.screen_loc = inv1.screen_loc
-		O.forceMove(src)
+		contents += O
 		if(istype(module_state_1,/obj/item/borg/sight))
 			sight_mode |= module_state_1:sight_mode
 	else if(!module_state_2)
 		module_state_2 = O
 		O.hud_layerise()
 		O.screen_loc = inv2.screen_loc
-		O.forceMove(src)
+		contents += O
 		if(istype(module_state_2,/obj/item/borg/sight))
 			sight_mode |= module_state_2:sight_mode
 	else if(!module_state_3)
 		module_state_3 = O
 		O.hud_layerise()
 		O.screen_loc = inv3.screen_loc
-		O.forceMove(src)
+		contents += O
 		if(istype(module_state_3,/obj/item/borg/sight))
 			sight_mode |= module_state_3:sight_mode
 	else
 		to_chat(src, "<span class='notice'>You need to disable a module first!</span>")
-		return
-	GLOB.module_activated_event.raise_event(src, O)
 
-/mob/living/silicon/put_in_hands(var/obj/item/W) // No hands.
-	if(W.loc)
-		W.dropInto(W.loc)
-	else if(loc)
-		W.dropInto(loc)
-	return FALSE
+/mob/living/silicon/robot/put_in_hands(var/obj/item/W) // No hands.
+	W.forceMove(get_turf(src))
+	return 1
 
 //Robots don't use inventory slots, so we need to override this.
 /mob/living/silicon/robot/canUnEquip(obj/item/I)

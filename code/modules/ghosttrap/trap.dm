@@ -1,5 +1,5 @@
-// This system is used to grab a ghost from observers with the required preferences
-// and lack of bans set. See posibrain.dm for an example of how they are called/used.
+// This system is used to grab a ghost from observers with the required preferences and
+// lack of bans set. See posibrain.dm for an example of how they are called/used. ~Z
 
 var/list/ghost_traps
 
@@ -20,17 +20,16 @@ var/list/ghost_traps
 		ghost_traps[G.object] = G
 
 /datum/ghosttrap
-	var/object = "default ghost trap"
+	var/object = "positronic brain"
 	var/minutes_since_death = 0     // If non-zero the ghost must have been dead for this many minutes to be allowed to spawn
-	var/list/ban_checks = list()
-	var/pref_check = ""
-	var/ghost_trap_message = "They are no longer a ghost."
-	var/ghost_trap_role = "default ghost trap"
+	var/list/ban_checks = list("AI","Robot")
+	var/pref_check = BE_SYNTH
+	var/ghost_trap_message = "They are occupying a positronic brain now."
+	var/ghost_trap_role = "Positronic Brain"
 	var/can_set_own_name = TRUE
-	var/list_as_special_role = FALSE	// If true, this entry will be listed as a special role in the character setup
+	var/list_as_special_role = TRUE	// If true, this entry will be listed as a special role in the character setup
 
 	var/list/request_timeouts
-	var/datum/species/species_whitelist // If defined, this is the species whitelist required to join
 
 /datum/ghosttrap/New()
 	request_timeouts = list()
@@ -39,29 +38,14 @@ var/list/ghost_traps
 // Check for bans, proper atom types, etc.
 /datum/ghosttrap/proc/assess_candidate(var/mob/observer/ghost/candidate, var/mob/target, var/feedback = TRUE)
 	if(!candidate.MayRespawn(feedback, minutes_since_death))
-		return FALSE
-
+		return 0
 	if(islist(ban_checks))
 		for(var/bantype in ban_checks)
 			if(jobban_isbanned(candidate, "[bantype]"))
 				if(feedback)
 					to_chat(candidate, "You are banned from one or more required roles and hence cannot enter play as \a [object].")
-				return FALSE
-
-	if (!assess_whitelist(candidate))
-		if (feedback)
-			var/datum/species/S = new species_whitelist()
-			to_chat(candidate, "You require \a [S] whitelist to play as \a [object].")
-		return FALSE
-	return TRUE
-
-/datum/ghosttrap/proc/assess_whitelist(mob/candidate)
-	. = TRUE
-	if (!species_whitelist)
-		return
-	var/datum/species/S = new species_whitelist()
-	if (!is_alien_whitelisted(candidate, S))
-		. = FALSE
+				return 0
+	return 1
 
 // Print a message to all ghosts with the right prefs/lack of bans.
 /datum/ghosttrap/proc/request_player(var/mob/target, var/request_string, var/request_timeout)
@@ -117,49 +101,30 @@ var/list/ghost_traps
 	set_new_name(target)
 	return 1
 
+// Fluff!
 /datum/ghosttrap/proc/welcome_candidate(var/mob/target)
-	return
-
-// Allows people to set their own name.
-/datum/ghosttrap/proc/set_new_name(var/mob/target)
-	if (can_set_own_name)
-		var/newname = sanitizeSafe(input(target, "Enter a name, or leave blank for the default name.", "Name change", target.real_name) as text, MAX_NAME_LEN)
-		if (newname)
-			target.real_name = newname
-			target.SetName(target.real_name)
-			return TRUE
-	return FALSE
-
-/********************
-* Positronic Brains *
-*********************/
-/datum/ghosttrap/positronic
-	object = "positronic brain"
-	ban_checks = list("AI","Robot")
-	pref_check = BE_SYNTH
-	ghost_trap_message = "They are occupying a positronic brain now."
-	ghost_trap_role = "Positronic Brain"
-	list_as_special_role = TRUE
-
-/datum/ghosttrap/positronic/welcome_candidate(mob/target)
-	to_chat(target, SPAN_BOLD("You are a positronic brain, activated on [station_name()]."))
-	to_chat(target, "As a newborn synthetic intelligence, you answer to everyone, including the AI.")
-	to_chat(target, "Remember, the purpose of your existence is to learn and serve the one who activated you.")
-	to_chat(target, "Use say [target.get_language_prefix()]b to speak to other artificial intelligences.\n")
+	to_chat(target, "<b>You are a positronic brain, brought into existence on [station_name()].</b>")
+	to_chat(target, "<b>As a synthetic intelligence, you answer to all crewmembers, as well as the AI.</b>")
+	to_chat(target, "<b>Remember, the purpose of your existence is to serve the crew and the [station_name()]. Above all else, do no harm.</b>")
+	to_chat(target, "<b>Use say [target.get_language_prefix()]b to speak to other artificial intelligences.</b>")
+	var/turf/T = get_turf(target)
 	var/obj/item/organ/internal/posibrain/P = target.loc
-	if (!istype(P))
+	T.visible_message("<span class='notice'>\The [P] chimes quietly.</span>")
+	if(!istype(P)) //wat
 		return
-	P.visible_message(SPAN_ITALIC("The [P] chimes quietly."), range = 3)
-	deltimer(P.searching)
-	P.searching = TIMER_ID_NULL
+	P.searching = 0
+	P.SetName("positronic brain ([P.brainmob.name])")
 	P.update_icon()
 
-/datum/ghosttrap/positronic/set_new_name(mob/target)
-	. = ..()
-	var/obj/item/organ/internal/posibrain/P = target.loc
-	if (!istype(P))
+// Allows people to set their own name. May or may not need to be removed for posibrains if people are dumbasses.
+/datum/ghosttrap/proc/set_new_name(var/mob/target)
+	if(!can_set_own_name)
 		return
-	P.UpdateNames()
+
+	var/newname = sanitizeSafe(input(target,"Enter a name, or leave blank for the default name.", "Name change",target.real_name) as text, MAX_NAME_LEN)
+	if (newname && newname != "")
+		target.real_name = newname
+		target.SetName(target.real_name)
 
 /***********************************
 * Diona pods and walking mushrooms *
@@ -170,8 +135,6 @@ var/list/ghost_traps
 	pref_check = BE_PLANT
 	ghost_trap_message = "They are occupying a living plant now."
 	ghost_trap_role = "Plant"
-	list_as_special_role = TRUE
-	species_whitelist = /datum/species/diona
 
 /datum/ghosttrap/plant/welcome_candidate(var/mob/target)
 	to_chat(target, "<span class='alium'><B>You awaken slowly, stirring into sluggish motion as the air caresses you.</B></span>")
@@ -229,7 +192,6 @@ datum/ghosttrap/drone/transfer_personality(var/mob/candidate, var/mob/living/sil
 	pref_check = BE_PAI
 	ghost_trap_message = "They are occupying a pAI now."
 	ghost_trap_role = "pAI"
-	list_as_special_role = TRUE
 
 datum/ghosttrap/pai/assess_candidate(var/mob/observer/ghost/candidate, var/mob/target)
 	return 0
@@ -246,7 +208,6 @@ datum/ghosttrap/pai/transfer_personality(var/mob/candidate, var/mob/living/silic
 	ghost_trap_message = "They are occupying a familiar now."
 	ghost_trap_role = "Wizard Familiar"
 	ban_checks = list(MODE_WIZARD)
-	list_as_special_role = TRUE
 
 /datum/ghosttrap/familiar/welcome_candidate(var/mob/target)
 	return 0
@@ -258,7 +219,6 @@ datum/ghosttrap/pai/transfer_personality(var/mob/candidate, var/mob/living/silic
 	can_set_own_name = FALSE
 	ghost_trap_message = "They are occupying a cultist's body now."
 	ghost_trap_role = "Cultist"
-	list_as_special_role = TRUE
 
 /datum/ghosttrap/cult/welcome_candidate(var/mob/target)
 	var/obj/item/device/soulstone/S = target.loc
@@ -274,4 +234,3 @@ datum/ghosttrap/pai/transfer_personality(var/mob/candidate, var/mob/living/silic
 	object = "soul stone"
 	ghost_trap_message = "They are occupying a soul stone now."
 	ghost_trap_role = "Shade"
-	list_as_special_role = TRUE

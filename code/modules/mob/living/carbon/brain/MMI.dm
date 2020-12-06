@@ -43,6 +43,7 @@
 	var/locked = 0
 	var/mob/living/carbon/brain/brainmob = null//The current occupant.
 	var/obj/item/organ/internal/brain/brainobj = null	//The current brain organ.
+	var/obj/mecha = null//This does not appear to be used outside of reference in mecha.dm.
 
 /obj/item/device/mmi/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(istype(O,/obj/item/organ/internal/brain) && !brainmob) //Time to stick a brain in it --NEO
@@ -68,7 +69,7 @@
 		brainobj = O
 
 		SetName("[initial(name)]: ([brainmob.real_name])")
-		update_icon()
+		icon_state = "mmi_full"
 
 		locked = 1
 
@@ -109,7 +110,7 @@
 		brain.brainmob = brainmob//Set the brain to use the brainmob
 		brainmob = null//Set mmi brainmob var to null
 
-		update_icon()
+		icon_state = "mmi_empty"
 		SetName(initial(name))
 
 /obj/item/device/mmi/proc/transfer_identity(var/mob/living/carbon/human/H)//Same deal as the regular brain proc. Used for human-->robot people.
@@ -120,7 +121,7 @@
 	brainmob.container = src
 
 	SetName("[initial(name)]: [brainmob.real_name]")
-	update_icon()
+	icon_state = "mmi_full"
 	locked = 1
 	return
 
@@ -189,6 +190,3 @@
 			if(3)
 				brainmob.emp_damage += rand(0,10)
 	..()
-
-/obj/item/device/mmi/on_update_icon()
-	icon_state = brainmob ? "mmi_full" : "mmi_empty"

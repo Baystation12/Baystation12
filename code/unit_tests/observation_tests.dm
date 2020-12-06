@@ -3,7 +3,6 @@
 
 /datum/unit_test/observation
 	name = "OBSERVATION template"
-	template = /datum/unit_test/observation
 	async = 0
 	var/list/received_moves
 
@@ -104,7 +103,7 @@
 	var/mob/living/carbon/human/H = get_named_instance(/mob/living/carbon/human, T, SPECIES_HUMAN)
 	var/mob/observer/ghost/O = get_named_instance(/mob/observer/ghost, T, "Ghost")
 
-	O.start_following(H)
+	O.ManualFollow(H)
 	if(is_listening_to_movement(H, O))
 		pass("The observer is now following the mob.")
 	else
@@ -122,7 +121,7 @@
 	var/mob/living/carbon/human/H = get_named_instance(/mob/living/carbon/human, T, SPECIES_HUMAN)
 	var/mob/observer/ghost/O = get_named_instance(/mob/observer/ghost, T, "Ghost")
 
-	O.start_following(H)
+	O.ManualFollow(H)
 	O.stop_following()
 	if(!is_listening_to_movement(H, O))
 		pass("The observer is no longer following the mob.")
@@ -164,7 +163,7 @@
 	var/mob/observer/ghost/O = get_named_instance(/mob/observer/ghost, T, "Ghost")
 
 	H.forceMove(C)
-	O.start_following(H)
+	O.ManualFollow(H)
 	var/listening_to_closet = is_listening_to_movement(C, H)
 	var/listening_to_human = is_listening_to_movement(H, O)
 	if(listening_to_closet && listening_to_human)
@@ -186,7 +185,7 @@
 	var/obj/structure/closet/C = get_named_instance(/obj/structure/closet, T, "Closet")
 	var/mob/observer/ghost/O = get_named_instance(/mob/observer/ghost, T, "Ghost")
 
-	O.start_following(H)
+	O.ManualFollow(H)
 	H.forceMove(C)
 	var/listening_to_closet = is_listening_to_movement(C, H)
 	var/listening_to_human = is_listening_to_movement(H, O)
@@ -201,13 +200,12 @@
 
 	return 1
 
-/*
 /datum/unit_test/observation/moved_shall_only_trigger_for_recursive_drop
 	name = "OBSERVATION: Moved - Shall Only Trigger Once For Recursive Drop"
 
 /datum/unit_test/observation/moved_shall_only_trigger_for_recursive_drop/conduct_test()
 	var/turf/T = get_safe_turf()
-	var/obj/exosuit/exosuit = get_named_instance(/obj/exosuit, T, "exosuit")
+	var/obj/mecha/mech = get_named_instance(/obj/mecha, T, "Mech")
 	var/obj/item/weapon/wrench/held_item = get_named_instance(/obj/item/weapon/wrench, T, "Wrench")
 	var/mob/living/carbon/human/dummy/held_mob = get_named_instance(/mob/living/carbon/human/dummy, T, "Held Mob")
 	var/mob/living/carbon/human/dummy/holding_mob = get_named_instance(/mob/living/carbon/human/dummy, T, "Holding Mob")
@@ -216,9 +214,9 @@
 	held_mob.put_in_active_hand(held_item)
 	held_mob.get_scooped(holding_mob)
 
-	holding_mob.forceMove(exosuit)
+	holding_mob.forceMove(mech)
 
-	exosuit.occupant = holding_mob
+	mech.occupant = holding_mob
 
 	GLOB.moved_event.register(held_item, src, /datum/unit_test/observation/proc/receive_move)
 	holding_mob.drop_from_inventory(held_item)
@@ -229,21 +227,20 @@
 		return 1
 
 	var/list/event = received_moves[1]
-	if(event[1] != held_item || event[2] != held_mob || event[3] != exosuit)
-		fail("Unexpected move event received. Expected [held_item], was [event[1]]. Expected [held_mob], was [event[2]]. Expected [exosuit], was [event[3]]")
-	else if(!(held_item in exosuit.dropped_items))
+	if(event[1] != held_item || event[2] != held_mob || event[3] != mech)
+		fail("Unexpected move event received. Expected [held_item], was [event[1]]. Expected [held_mob], was [event[2]]. Expected [mech], was [event[3]]")
+	else if(!(held_item in mech.dropped_items))
 		fail("Expected \the [held_item] to be in the mechs' dropped item list")
 	else
 		pass("One one moved event with expected arguments raised.")
 
 	GLOB.moved_event.unregister(held_item, src)
-	qdel(exosuit)
+	qdel(mech)
 	qdel(held_item)
 	qdel(held_mob)
 	qdel(holding_mob)
 
 	return 1
-*/
 
 /datum/unit_test/observation/moved_shall_not_unregister_recursively_one
 	name = "OBSERVATION: Moved - Shall Not Unregister Recursively - One"
@@ -254,8 +251,8 @@
 	var/mob/observer/ghost/two = get_named_instance(/mob/observer/ghost, T, "Ghost Two")
 	var/mob/observer/ghost/three = get_named_instance(/mob/observer/ghost, T, "Ghost Three")
 
-	two.start_following(one)
-	three.start_following(two)
+	two.ManualFollow(one)
+	three.ManualFollow(two)
 
 	two.stop_following()
 	if(is_listening_to_movement(two, three))
@@ -278,8 +275,8 @@
 	var/mob/observer/ghost/two = get_named_instance(/mob/observer/ghost, T, "Ghost Two")
 	var/mob/observer/ghost/three = get_named_instance(/mob/observer/ghost, T, "Ghost Three")
 
-	two.start_following(one)
-	three.start_following(two)
+	two.ManualFollow(one)
+	three.ManualFollow(two)
 
 	three.stop_following()
 	if(is_listening_to_movement(one, two))

@@ -8,16 +8,16 @@
 	return {"
 		<a href='?_src_=vars;datumedit=\ref[src];varnameedit=name'><b>[src]</b></a>
 		<br><font size='1'>
-		<a href='?_src_=vars;rotatedatum=\ref[src];rotatedir=left'><=</a>
+		<a href='?_src_=vars;rotatedatum=\ref[src];rotatedir=left'><<</a>
 		<a href='?_src_=vars;datumedit=\ref[src];varnameedit=dir'>[dir2text(dir)]</a>
-		<a href='?_src_=vars;rotatedatum=\ref[src];rotatedir=right'>=></a>
+		<a href='?_src_=vars;rotatedatum=\ref[src];rotatedir=right'>>></a>
 		</font>
 		"}
 
 /mob/living/get_view_variables_header()
 	return {"
 		<a href='?_src_=vars;rename=\ref[src]'><b>[src]</b></a><font size='1'>
-		<br><a href='?_src_=vars;rotatedatum=\ref[src];rotatedir=left'><=</a> <a href='?_src_=vars;datumedit=\ref[src];varnameedit=dir'>[dir2text(dir)]</a> <a href='?_src_=vars;rotatedatum=\ref[src];rotatedir=right'>=></a>
+		<br><a href='?_src_=vars;rotatedatum=\ref[src];rotatedir=left'><<</a> <a href='?_src_=vars;datumedit=\ref[src];varnameedit=dir'>[dir2text(dir)]</a> <a href='?_src_=vars;rotatedatum=\ref[src];rotatedir=right'>>></a>
 		<br><a href='?_src_=vars;datumedit=\ref[src];varnameedit=ckey'>[ckey ? ckey : "No ckey"]</a> / <a href='?_src_=vars;datumedit=\ref[src];varnameedit=real_name'>[real_name ? real_name : "No real name"]</a>
 		<br>
 		BRUTE:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=brute'>[getBruteLoss()]</a>
@@ -38,6 +38,8 @@
 		<option value='?_src_=vars;mob_player_panel=\ref[src]'>Show player panel</option>
 		<option>---</option>
 		<option value='?_src_=vars;give_spell=\ref[src]'>Give Spell</option>
+		<option value='?_src_=vars;give_disease2=\ref[src]'>Give Disease</option>
+		<option value='?_src_=vars;give_disease=\ref[src]'>Give TG-style Disease</option>
 		<option value='?_src_=vars;godmode=\ref[src]'>Toggle Godmode</option>
 		<option value='?_src_=vars;build_mode=\ref[src]'>Toggle Build Mode</option>
 
@@ -152,7 +154,7 @@
 
 // The following vars require R_DEBUG to edit
 /datum/proc/VV_locked()
-	return list("vars", "cuffed")
+	return list("vars", "virus", "viruses", "cuffed")
 
 /client/VV_locked()
 	return list("vars", "mob")

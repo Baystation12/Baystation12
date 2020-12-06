@@ -51,15 +51,14 @@
 	equipment_darkness_modifier = 0
 	equipment_overlays.Cut()
 
-	if (!client || client.eye == src || client.eye == src.loc) // !client is so the unit tests function
-		if(istype(src.head, /obj/item/clothing/head))
-			add_clothing_protection(head)
-		if(istype(src.glasses, /obj/item/clothing/glasses))
-			process_glasses(glasses)
-		if(istype(src.wear_mask, /obj/item/clothing/mask))
-			add_clothing_protection(wear_mask)
-		if(istype(back,/obj/item/weapon/rig))
-			process_rig(back)
+	if(istype(src.head, /obj/item/clothing/head))
+		add_clothing_protection(head)
+	if(istype(src.glasses, /obj/item/clothing/glasses))
+		process_glasses(glasses)
+	if(istype(src.wear_mask, /obj/item/clothing/mask))
+		add_clothing_protection(wear_mask)
+	if(istype(back,/obj/item/weapon/rig))
+		process_rig(back)
 
 /mob/living/carbon/human/proc/process_glasses(var/obj/item/clothing/glasses/G)
 	if(G)
@@ -113,9 +112,6 @@
 			if(findtext(PDA.name, old_name))
 				PDA.SetName(replacetext(PDA.name, old_name, new_name))
 				search_pda = 0
-
-	if(wearing_rig && wearing_rig.update_visible_name)
-		wearing_rig.visible_name = real_name
 
 
 //Get species or synthetic temp if the mob is a FBP. Used when a synthetic type human mob is exposed to a temp check.
@@ -184,7 +180,7 @@
 		ping_image.layer = BEAM_PROJECTILE_LAYER
 		ping_image.pixel_x = (T.x - src.x) * WORLD_ICON_SIZE
 		ping_image.pixel_y = (T.y - src.y) * WORLD_ICON_SIZE
-		image_to(src, ping_image)
+		show_image(src, ping_image)
 		spawn(8)
 			qdel(ping_image)
 		var/feedback = list("<span class='notice'>There are noises of movement ")
@@ -211,51 +207,16 @@
 
 /mob/living/carbon/human/reset_layer()
 	if(hiding)
+		plane = HIDING_MOB_PLANE
 		layer = HIDING_MOB_LAYER
 	else if(lying)
+		plane = LYING_HUMAN_PLANE
 		layer = LYING_HUMAN_LAYER
 	else
 		..()
 
 /mob/living/carbon/human/proc/has_headset_in_ears()
 	return istype(get_equipped_item(slot_l_ear), /obj/item/device/radio/headset) || istype(get_equipped_item(slot_r_ear), /obj/item/device/radio/headset)
-
-/mob/living/carbon/human/welding_eyecheck()
-	var/obj/item/organ/internal/eyes/E = src.internal_organs_by_name[species.vision_organ]
-	if(!E)
-		return
-	var/safety = eyecheck()
-	switch(safety)
-		if(FLASH_PROTECTION_MODERATE)
-			to_chat(src, "<span class='warning'>Your eyes sting a little.</span>")
-			E.damage += rand(1, 2)
-			if(E.damage > 12)
-				eye_blurry += rand(3,6)
-		if(FLASH_PROTECTION_MINOR)
-			to_chat(src, "<span class='warning'>Your eyes stings!</span>")
-			E.damage += rand(1, 4)
-			if(E.damage > 10)
-				eye_blurry += rand(3,6)
-				E.damage += rand(1, 4)
-		if(FLASH_PROTECTION_NONE)
-			to_chat(src, "<span class='warning'>Your eyes burn!</span>")
-			E.damage += rand(2, 4)
-			if(E.damage > 10)
-				E.damage += rand(4,10)
-		if(FLASH_PROTECTION_REDUCED)
-			to_chat(src, "<span class='danger'>Your equipment intensifies the welder's glow. Your eyes itch and burn severely.</span>")
-			eye_blurry += rand(12,20)
-			E.damage += rand(12, 16)
-	if(safety<FLASH_PROTECTION_MAJOR)
-		if(E.damage > 10)
-			to_chat(src, "<span class='warning'>Your eyes are really starting to hurt. This can't be good for you!</span>")
-		if (E.damage >= E.min_bruised_damage)
-			to_chat(src, "<span class='danger'>You go blind!</span>")
-			eye_blind = 5
-			eye_blurry = 5
-			disabilities |= NEARSIGHTED
-			spawn(100)
-				disabilities &= ~NEARSIGHTED
 
 /mob/living/carbon/human/proc/make_grab(var/mob/living/carbon/human/attacker, var/mob/living/carbon/human/victim, var/grab_tag)
 	var/obj/item/grab/G
@@ -299,10 +260,7 @@
 	return FALSE
 
 // Returns true if the human is cloaked, otherwise false (technically returns the number of cloaking sources)
-/mob/proc/is_cloaked()
-	return FALSE
-
-/mob/living/carbon/human/is_cloaked()
+/mob/living/carbon/human/proc/is_cloaked()
 	if(clean_cloaking_sources())
 		update_icons()
 		visible_message(CLOAK_APPEAR_OTHER, CLOAK_APPEAR_SELF)
@@ -338,12 +296,3 @@
 	if(isSynthetic())
 		return // Can't cure disabilites, so don't give them.
 	..()
-
-/mob/living/carbon/human/proc/has_meson_effect()
-	. = FALSE
-	for(var/obj/screen/equipment_screen in equipment_overlays) // check through our overlays to see if we have any source of the meson overlay
-		if (equipment_screen.icon_state == "meson_hud")
-			return TRUE
-
-/mob/living/carbon/human/proc/is_in_pocket(var/obj/item/I)
-	return I in list(l_store, r_store)

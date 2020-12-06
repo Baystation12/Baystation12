@@ -1,5 +1,4 @@
 /datum/extension/interactive/multitool
-	base_type = /datum/extension/interactive/multitool
 	var/window_x = 370
 	var/window_y = 470
 
@@ -20,7 +19,7 @@
 	return
 
 /datum/extension/interactive/multitool/proc/close_window(var/mob/user)
-	close_browser(user, "window=multitool")
+	user << browse(null, "window=multitool")
 
 /datum/extension/interactive/multitool/proc/buffer(var/obj/item/device/multitool/multitool)
 	. += "<b>Buffer Memory:</b><br>"

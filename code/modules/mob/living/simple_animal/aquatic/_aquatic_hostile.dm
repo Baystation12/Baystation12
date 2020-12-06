@@ -1,5 +1,5 @@
 /mob/living/simple_animal/hostile/aquatic
-	icon = 'icons/mob/simple_animal/aquatic.dmi'
+	icon = 'icons/mob/aquatic.dmi'
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/fish
 	turns_per_move = 5
 	attacktext = "bitten"
@@ -17,12 +17,8 @@
 	if(!submerged())
 		if(icon_state == icon_living)
 			icon_state = "[icon_living]_dying"
-		walk(src, 0)
-		Paralyse(3)
+		SetStunned(3)
 	. = ..()
 
 /mob/living/simple_animal/hostile/aquatic/handle_atmos(var/atmos_suitable = 1)
 	. = ..(atmos_suitable = submerged())
-
-/mob/living/simple_animal/hostile/aquatic/can_act()
-	. = ..() && submerged()

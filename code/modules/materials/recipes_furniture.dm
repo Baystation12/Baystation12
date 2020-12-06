@@ -119,6 +119,7 @@ ARMCHAIR(yellow)
 	result_type = /obj/machinery/door/unpowered/simple
 	req_amount = 10
 	time = 50
+	send_material_data = 0
 
 /datum/stack_recipe/furniture/barricade
 	title = "barricade"
@@ -138,16 +139,6 @@ ARMCHAIR(yellow)
 	title = "bed"
 	result_type = /obj/structure/bed
 	req_amount = 2
-
-/datum/stack_recipe/furniture/pew
-	title = "pew, right"
-	result_type = /obj/structure/bed/chair/pew
-	req_amount = 4
-
-/datum/stack_recipe/furniture/pew_left
-	title = "pew, left"
-	result_type = /obj/structure/bed/chair/pew/left
-	req_amount = 4
 
 /datum/stack_recipe/furniture/table_frame
 	title = "table frame"
@@ -171,16 +162,9 @@ ARMCHAIR(yellow)
 	time = 10
 	send_material_data = 0
 
-/datum/stack_recipe/furniture/tank
-	title = "Pressure Tank"
-	result_type = /obj/item/pipe/tank
-	req_amount = 30
-	time = 20
-	send_material_data = 0
-
 /datum/stack_recipe/furniture/computerframe
 	title = "computer frame"
-	result_type = /obj/machinery/constructable_frame/computerframe
+	result_type = /obj/structure/computerframe
 	req_amount = 5
 	time = 25
 
@@ -256,12 +240,6 @@ ARMCHAIR(yellow)
 /datum/stack_recipe/furniture/coffin
 	title = "coffin"
 	result_type = /obj/structure/closet/coffin
-	req_amount = 5
-	time = 15
-
-/datum/stack_recipe/furniture/coffin/wooden
-	title = "coffin"
-	result_type = /obj/structure/closet/coffin/wooden
 	req_amount = 5
 	time = 15
 

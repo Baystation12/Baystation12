@@ -105,11 +105,3 @@
 /obj/item/weapon/storage/lunchbox/syndicate/filled
 	filled = TRUE
 
-/obj/item/weapon/storage/lunchbox/picnic
-	name = "picnic basket"
-	icon_state = "picnic_basket"
-	item_state = "picnic_basket"
-	desc = "A small, old-fashioned picnic basket. Great for lunches in the garden."
-
-/obj/item/weapon/storage/lunchbox/picnic/filled
-	filled = TRUE

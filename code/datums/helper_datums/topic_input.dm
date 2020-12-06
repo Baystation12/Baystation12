@@ -8,7 +8,7 @@
 		return
 
 	proc/get(i)
-		return LAZYACCESS(href_list, i)
+		return listgetindex(href_list,i)
 
 	proc/getAndLocate(i)
 		var/t = get(i)

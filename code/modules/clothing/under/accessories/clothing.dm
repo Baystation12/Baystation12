@@ -1,21 +1,13 @@
 /obj/item/clothing/accessory/wcoat
 	name = "waistcoat"
-	desc = "A classy waistcoat."
+	desc = "For some classy, murderous fun."
 	icon_state = "vest"
 	item_state = "wcoat"
-
-/obj/item/clothing/accessory/wcoat/black
-	color = COLOR_GRAY15
 
 /obj/item/clothing/accessory/suspenders
 	name = "suspenders"
 	desc = "They suspend the illusion of the mime's play."
 	icon_state = "suspenders"
-
-/obj/item/clothing/accessory/suspenders/colorable
-	name = "suspenders"
-	desc = "They suspend the illusion of the mime's play."
-	icon_state = "suspenders_color"
 
 /obj/item/clothing/accessory/tunic
 	name = "researcher's tunic"
@@ -80,7 +72,6 @@
 	name = "sherwani"
 	desc = "A long, coat-like frock with fancy embroidery on the cuffs and collar."
 	icon_state = "sherwani"
-	body_location = UPPER_TORSO|LOWER_TORSO
 
 /obj/item/clothing/accessory/qipao
 	name = "qipao"
@@ -157,13 +148,9 @@
 	update_clothing_icon()	//so our overlays update
 
 /obj/item/clothing/accessory/toggleable/vest
-	name = "vest"
-	desc = "A slick suit vest."
-	icon_state = "det_vest"
-
-/obj/item/clothing/accessory/toggleable/vest/black
 	name = "black vest"
-	color = COLOR_GRAY15
+	desc = "Slick black suit vest."
+	icon_state = "det_vest"
 
 /obj/item/clothing/accessory/toggleable/tan_jacket
 	name = "tan suit jacket"
@@ -325,43 +312,3 @@
 	name = "tangzhuang jacket"
 	desc = "A traditional Chinese coat tied together with straight, symmetrical knots."
 	icon_state = "tangzhuang"  //This was originally intended to have the ability to roll sleeves. I can't into code. Will be done later (hopefully.)
-	body_location = UPPER_TORSO | LOWER_TORSO
-
-/obj/item/clothing/accessory/fire_overpants
-	name = "fire overpants"
-	desc = "some overpants made of fire-resistant synthetic fibers. To be worn over the uniform."
-	icon_state = "fire_overpants"
-	gas_transfer_coefficient = 0.90
-	permeability_coefficient = 0.50
-
-	armor = list(laser = ARMOR_LASER_MINOR, energy = ARMOR_ENERGY_MINOR, bomb = ARMOR_BOMB_MINOR)
-	body_parts_covered = LOWER_TORSO | LEGS
-	body_location = LOWER_TORSO | LEGS
-	slowdown = 0.5
-
-	heat_protection = LOWER_TORSO | LEGS
-	cold_protection = LOWER_TORSO | LEGS
-
-	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
-	max_pressure_protection = FIRESUIT_MAX_PRESSURE
-
-/obj/item/clothing/accessory/space_adapted/venter
-	name = "venter assembly"
-	desc = "A series of complex tubes, meant to dissipate heat from the skin passively."
-	icon_state = "venter"
-	item_state = "venter"
-	slot = "over"
-	body_location = UPPER_TORSO | LOWER_TORSO | ARMS | LEGS
-
-/obj/item/clothing/accessory/space_adapted/bracer
-	name = "legbrace"
-	desc = "A lightweight polymer frame meant to brace and hold someone's legs upright comfortably, protecting their bones from high levels of gravity."
-	icon_state = "legbrace"
-	item_state = "legbrace"
-	body_location = LOWER_TORSO | LEGS
-
-/obj/item/clothing/accessory/space_adapted/bracer/neckbrace
-	name = "neckbrace"
-	desc = "A lightweight polymer frame meant to brace and hold someone's neck upright comfortably, protecting their bones from high levels of gravity."
-	icon_state = "neckbrace"
-	item_state = "neckbrace"

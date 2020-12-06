@@ -20,7 +20,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/djstation)
 "am" = (
-/obj/machinery/constructable_frame/computerframe,
+/obj/structure/computerframe,
 /turf/simulated/floor/airless,
 /area/djstation)
 "an" = (
@@ -66,7 +66,7 @@
 /turf/simulated/floor/airless,
 /area/djstation)
 "ay" = (
-/obj/machinery/constructable_frame/computerframe,
+/obj/structure/computerframe,
 /turf/simulated/floor/tiled/airless,
 /area/djstation)
 "az" = (
@@ -207,7 +207,7 @@
 /turf/simulated/floor/asteroid,
 /area/mine/explored)
 "bf" = (
-/obj/effect/overmap/visitable/sector/cluster,
+/obj/effect/overmap/sector/cluster,
 /turf/simulated/floor/asteroid,
 /area/mine/explored)
 "cb" = (
@@ -267,7 +267,8 @@
 /turf/simulated/floor/airless,
 /area/djstation)
 "mb" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	frequency = 1379;
 	id_tag = "lp_north_pump"
 	},
 /turf/simulated/floor/airless,
@@ -324,8 +325,8 @@
 /area/djstation)
 "tb" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
-	dir = 9;
-	icon_state = "intact"
+	icon_state = "intact";
+	dir = 9
 	},
 /turf/simulated/floor/airless,
 /area/djstation)
@@ -409,14 +410,15 @@
 	locked = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/visible{
-	dir = 4;
-	icon_state = "intact"
+	icon_state = "intact";
+	dir = 4
 	},
 /turf/simulated/floor/airless,
 /area/djstation)
 "Cb" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 8;
+	frequency = 1379;
 	id_tag = "lp_east_pump"
 	},
 /turf/simulated/floor/airless,
@@ -431,6 +433,13 @@
 	},
 /turf/simulated/floor/airless,
 /area/djstation)
+"Fb" = (
+/obj/effect/landmark/random_gen/asteroid{
+	generation_height = 200;
+	generation_width = 200
+	},
+/turf/space,
+/area/space)
 
 (1,1,1) = {"
 aa
@@ -632,7 +641,7 @@ aa
 aa
 aa
 aa
-aa
+Fb
 "}
 (2,1,1) = {"
 aa

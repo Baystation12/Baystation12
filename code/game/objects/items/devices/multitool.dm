@@ -67,9 +67,3 @@
 	user.AddTopicPrint(src)
 	MT.interact(src, user)
 	return 1
-
-/obj/item/device/multitool/mantid
-	name = "mantid multitool"
-	desc = "An alien microcomputer of some kind."
-	icon = 'icons/obj/ascent.dmi'
-	icon_state = "multitool"

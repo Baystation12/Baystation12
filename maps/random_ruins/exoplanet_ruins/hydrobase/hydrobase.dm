@@ -5,13 +5,6 @@
 	suffixes = list("hydrobase/hydrobase.dmm")
 	cost = 2
 	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS
-	ruin_tags = RUIN_ALIEN
-	apc_test_exempt_areas = list(
-		/area/map_template/hydrobase = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/map_template/hydrobase/station = NO_SCRUBBER,
-		/area/map_template/hydrobase/station/solarlock = NO_SCRUBBER|NO_VENT,
-		/area/map_template/hydrobase/station/dockport = NO_SCRUBBER|NO_VENT
-	)
 
 // Areas //
 /area/map_template/hydrobase
@@ -118,3 +111,9 @@
 	destroy_surroundings = 1
 	projectiletype = initial(projectiletype)
 	walk(src,0)
+
+/mob/living/simple_animal/hostile/retaliate/malf_drone/hydro/ListTargets()
+	if(hostile_drone)
+		return view(src, 3)
+	else
+		return ..()

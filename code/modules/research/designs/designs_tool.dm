@@ -52,7 +52,7 @@
 	id = "price_scanner"
 	req_tech = list(TECH_MATERIAL = 6, TECH_MAGNET = 4)
 	materials = list(MATERIAL_STEEL = 3000, MATERIAL_GLASS = 3000, MATERIAL_SILVER = 250)
-	build_path = /obj/item/device/scanner/price
+	build_path = /obj/item/device/price_scanner
 	sort_string = "VAGAF"
 
 /datum/design/item/tool/experimental_welder
@@ -68,19 +68,10 @@
 	name = "portable shield diffuser"
 	desc = "A small handheld device designed to disrupt energy barriers."
 	id = "portable_shield_diffuser"
-	req_tech = list(TECH_MAGNET = 5, TECH_POWER = 5, TECH_ESOTERIC = 2)
+	req_tech = list(TECH_MAGNET = 5, TECH_POWER = 5, TECH_ILLEGAL = 2)
 	materials = list(MATERIAL_STEEL = 5000, MATERIAL_GLASS = 5000, MATERIAL_GOLD = 2000, MATERIAL_SILVER = 2000)
 	build_path = /obj/item/weapon/shield_diffuser
 	sort_string = "VAGAH"
-
-/datum/design/item/tool/rpd
-	name = "rapid piping device"
-	desc = "A compacted and complicated device, that relies on compressed matter to dispense piping on the move."
-	id = "rpd"
-	req_tech = list(TECH_ENGINEERING = 6, TECH_MATERIAL = 6)
-	materials = list(MATERIAL_STEEL = 15000, MATERIAL_GLASS = 10000, MATERIAL_SILVER = 2000)
-	build_path = /obj/item/weapon/rpd
-	sort_string = "VAGAI"
 
 /datum/design/item/tool/oxycandle
 	name = "oxycandle"
@@ -90,4 +81,4 @@
 	materials = list(MATERIAL_STEEL = 3000)
 	chemicals = list(/datum/reagent/sodiumchloride = 20, /datum/reagent/acetone = 20)
 	build_path = /obj/item/device/oxycandle
-	sort_string = "VAGAJ"
+	sort_string = "VAGAI"

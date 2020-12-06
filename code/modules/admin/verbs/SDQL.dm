@@ -288,12 +288,7 @@
 	switch(lowertext(query_list[1]))
 		if("delete")
 			for(var/datum/t in objs)
-				// turfs are special snowflakes that explode if qdeleted
-				if (isturf(t))
-					var/turf/T = t
-					T.ChangeTurf(world.turf)
-				else
-					qdel(t)
+				qdel(t)
 
 		if("update")
 			for(var/datum/t in objs)
@@ -325,7 +320,15 @@
 					text += "<a href='?src=\ref[t];SDQL_select=\ref[t]'>\ref[t]</a>: [t]<br>"
 
 				//text += "[t]<br>"
-			show_browser(usr, text, "window=sdql_result")
+			usr << browse(text, "window=sdql_result")
+
+
+/client/Topic(href,href_list[],hsrc)
+	if(href_list["SDQL_select"])
+		debug_variables(locate(href_list["SDQL_select"]))
+
+	..()
+
 
 /proc/SDQL_evaluate(datum/object, list/equation)
 	if(equation.len == 0)

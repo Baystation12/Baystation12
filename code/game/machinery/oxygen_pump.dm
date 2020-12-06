@@ -29,7 +29,9 @@
 
 /obj/machinery/oxygen_pump/Destroy()
 	if(breather)
-		breather.set_internals(null)
+		breather.internal = null
+		if(breather.internals)
+			breather.internals.icon_state = "internal0"
 	if(tank)
 		qdel(tank)
 	if(breather)
@@ -46,7 +48,7 @@
 		if(!can_apply_to_target(target, usr)) // There is no point in attempting to apply a mask if it's impossible.
 			return
 		usr.visible_message("\The [usr] begins placing the mask onto [target]..")
-		if(do_after(usr, 2.5 SECONDS, target))
+		if(do_mob(usr, target, 25))
 			if(!can_apply_to_target(target, usr))
 				return
 			// place mask and add fingerprints
@@ -55,21 +57,25 @@
 			src.add_fingerprint(usr)
 
 
-/obj/machinery/oxygen_pump/physical_attack_hand(mob/user)
+/obj/machinery/oxygen_pump/attack_hand(mob/user as mob)
 	if((stat & MAINT) && tank)
 		user.visible_message("<span class='notice'>\The [user] removes \the [tank] from \the [src].</span>", "<span class='notice'>You remove \the [tank] from \the [src].</span>")
 		user.put_in_hands(tank)
 		src.add_fingerprint(user)
 		tank.add_fingerprint(user)
 		tank = null
-		return TRUE
+		return
+	if (!tank)
+		to_chat(user, "<span class='warning'>There is no tank in \the [src]!</span>")
+		return
 	if(breather)
 		detach_mask(user)
-		return TRUE
+	else
+		ui_interact(usr)
 
-/obj/machinery/oxygen_pump/interface_interact(mob/user)
+
+/obj/machinery/oxygen_pump/attack_ai(mob/user as mob)
 	ui_interact(user)
-	return TRUE
 
 /obj/machinery/oxygen_pump/proc/attach_mask(var/mob/living/carbon/C)
 	if(C && istype(C))
@@ -82,7 +88,9 @@
 /obj/machinery/oxygen_pump/proc/set_internals(var/mob/living/carbon/C)
 	if(C && istype(C))
 		if(!C.internal && tank)
-			breather.set_internals(tank)
+			C.internal = tank
+			if(C.internals)
+				C.internals.icon_state = "internal1"
 		update_use_power(POWER_USE_ACTIVE)
 
 /obj/machinery/oxygen_pump/proc/detach_mask(mob/user)
@@ -154,7 +162,7 @@
 	if(istype(W, /obj/item/weapon/tank) && !stat)
 		to_chat(user, "<span class='warning'>Please open the maintenance hatch first.</span>")
 
-/obj/machinery/oxygen_pump/examine(mob/user)
+/obj/machinery/oxygen_pump/examine(var/mob/user)
 	. = ..()
 	if(tank)
 		to_chat(user, "The meter shows [round(tank.air_contents.return_pressure())]")

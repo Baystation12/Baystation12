@@ -5,7 +5,7 @@
 			dropInto(loc.loc)
 			qdel(card)
 		else
-			fold()
+			close_up()
 	if(mind)
 		qdel(mind)
 	..(gibbed, deathmessage, "You have suffered a critical system failure, and are dead.")

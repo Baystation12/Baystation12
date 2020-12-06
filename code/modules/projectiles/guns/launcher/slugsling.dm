@@ -3,12 +3,11 @@
 	desc = "A pulsing, disgusting door to new life."
 	force = 1
 	throwforce = 6
-	icon = 'icons/obj/weapons/other.dmi'
 	icon_state = "slugegg"
 	var/break_on_impact = 1 //There are two modes to the eggs.
 							//One breaks the egg on hit,
 
-/obj/item/weapon/slugegg/throw_impact(atom/hit_atom)
+/obj/item/weapon/slugegg/throw_impact(atom/hit_atom, var/speed)
 	if(break_on_impact)
 		squish()
 	else
@@ -51,7 +50,7 @@
 	ammo_type = /obj/item/weapon/slugegg
 	max_ammo = 2
 	ammo = 2
-	ammo_gen_time = 600
+	ammo_gen_time = 200
 	var/mode = "Impact"
 
 /obj/item/weapon/gun/launcher/alien/slugsling/consume_next_projectile()

@@ -2,7 +2,8 @@
 /obj/machinery/computer/account_database
 	name = "accounts uplink terminal"
 	desc = "Access transaction logs, account data and all kinds of other financial records."
-	var/needed_access = list(list(access_hop, access_captain))
+
+	req_access = list(list(access_hop, access_captain, access_cent_captain))
 	var/receipt_num
 	var/machine_id = ""
 	var/obj/item/weapon/card/id/held_card
@@ -10,13 +11,25 @@
 	var/creating_new_account = 0
 	var/const/fund_cap = 1000000
 
+	circuit = /obj/item/weapon/circuitboard/account_database
+
 	proc/get_access_level()
 		if (!held_card)
 			return 0
 		if(access_cent_captain in held_card.access)
 			return 2
-		else if(access_hop in held_card.access || (access_captain in held_card.access))
+		else if(access_hop in held_card.access || access_captain in held_card.access)
 			return 1
+
+	proc/create_transation(target, reason, amount)
+		var/datum/transaction/T = new()
+		T.target_name = target
+		T.purpose = reason
+		T.amount = amount
+		T.date = stationdate2text()
+		T.time = stationtime2text()
+		T.source_terminal = machine_id
+		return T
 
 	proc/accounting_letterhead(report_name)
 		return {"
@@ -43,9 +56,9 @@
 
 	attack_hand(user)
 
-/obj/machinery/computer/account_database/interface_interact(mob/user)
+/obj/machinery/computer/account_database/attack_hand(mob/user as mob)
+	if(stat & (NOPOWER|BROKEN)) return
 	ui_interact(user)
-	return TRUE
 
 /obj/machinery/computer/account_database/ui_interact(mob/user, ui_key="main", var/datum/nanoui/ui = null, var/force_open = 1)
 	user.set_machine(src)
@@ -54,7 +67,7 @@
 	data["src"] = "\ref[src]"
 	data["id_inserted"] = !!held_card
 	data["id_card"] = held_card ? text("[held_card.registered_name], [held_card.assignment]") : "-----"
-	data["access_level"] = has_access(needed_access, held_card && held_card.GetAccess())
+	data["access_level"] = get_access_level()
 	data["machine_id"] = machine_id
 	data["creating_new_account"] = creating_new_account
 	data["detailed_account_view"] = !!detailed_account_view
@@ -73,10 +86,10 @@
 			trx.Add(list(list(\
 				"date" = T.date, \
 				"time" = T.time, \
-				"target_name" = T.get_target_name(), \
+				"target_name" = T.target_name, \
 				"purpose" = T.purpose, \
 				"amount" = T.amount, \
-				"source_terminal" = T.get_source_name())))
+				"source_terminal" = T.source_terminal)))
 
 		if (trx.len > 0)
 			data["transactions"] = trx
@@ -110,6 +123,16 @@
 			if("create_account")
 				creating_new_account = 1
 
+			if("add_funds")
+				var/amount = input("Enter the amount you wish to add", "Silently add funds") as num
+				if(detailed_account_view)
+					detailed_account_view.money = min(detailed_account_view.money + amount, fund_cap)
+
+			if("remove_funds")
+				var/amount = input("Enter the amount you wish to remove", "Silently remove funds") as num
+				if(detailed_account_view)
+					detailed_account_view.money = max(detailed_account_view.money - amount, -fund_cap)
+
 			if("toggle_suspension")
 				if(detailed_account_view)
 					detailed_account_view.suspended = !detailed_account_view.suspended
@@ -122,13 +145,14 @@
 				starting_funds = Clamp(starting_funds, 0, station_account.money)	// Not authorized to put the station in debt.
 				starting_funds = min(starting_funds, fund_cap)						// Not authorized to give more than the fund cap.
 
-				var/datum/money_account/new_account = create_account("[account_name]'s Personal Account", account_name, starting_funds, ACCOUNT_TYPE_PERSONAL, src)
+				create_account(account_name, starting_funds, src)
 				if(starting_funds > 0)
 					//subtract the money
 					station_account.money -= starting_funds
 
 					//create a transaction log entry
-					new_account.deposit(starting_funds, "New account activation", machine_id)
+					var/trx = create_transation(account_name, "New account activation", "([starting_funds])")
+					station_account.transaction_log.Add(trx)
 
 					creating_new_account = 0
 					ui.close()
@@ -160,7 +184,14 @@
 
 			if("revoke_payroll")
 				var/funds = detailed_account_view.money
-				detailed_account_view.transfer(station_account, funds, "Revocation of payroll")
+				var/account_trx = create_transation(station_account.owner_name, "Revoke payroll", "([funds])")
+				var/station_trx = create_transation(detailed_account_view.owner_name, "Revoke payroll", funds)
+
+				station_account.money += funds
+				detailed_account_view.money = 0
+
+				detailed_account_view.transaction_log.Add(account_trx)
+				station_account.transaction_log.Add(station_trx)
 
 				callHook("revoke_payroll", list(detailed_account_view))
 
@@ -173,7 +204,7 @@
 					text = {"
 						[accounting_letterhead(title)]
 						<u>Holder:</u> [detailed_account_view.owner_name]<br>
-						<u>Balance:</u> [GLOB.using_map.local_currency_name_short][detailed_account_view.money]<br>
+						<u>Balance:</u> T[detailed_account_view.money]<br>
 						<u>Status:</u> [detailed_account_view.suspended ? "Suspended" : "Active"]<br>
 						<u>Transactions:</u> ([detailed_account_view.transaction_log.len])<br>
 						<table>
@@ -193,10 +224,10 @@
 						text += {"
 									<tr>
 										<td>[T.date] [T.time]</td>
-										<td>[T.get_target_name()]</td>
+										<td>[T.target_name]</td>
 										<td>[T.purpose]</td>
 										<td>[T.amount]</td>
-										<td>[T.get_source_name()]</td>
+										<td>[T.source_terminal]</td>
 									</tr>
 							"}
 
@@ -228,7 +259,7 @@
 								<tr>
 									<td>#[D.account_number]</td>
 									<td>[D.owner_name]</td>
-									<td>[GLOB.using_map.local_currency_name_short][D.money]</td>
+									<td>T[D.money]</td>
 									<td>[D.suspended ? "Suspended" : "Active"]</td>
 								</tr>
 						"}

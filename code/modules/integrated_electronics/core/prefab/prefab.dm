@@ -1,6 +1,7 @@
 /decl/prefab/proc/create(var/atom/location)
 	if(!location)
 		CRASH("Invalid location supplied: [log_info_line(location)]")
+		return FALSE
 	return TRUE
 
 /decl/prefab/ic_assembly

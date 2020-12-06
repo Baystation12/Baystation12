@@ -49,7 +49,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	icon_keyboard = "rd_key"
 	icon_screen = "rdcomp"
 	light_color = "#a97faa"
-	base_type = /obj/machinery/computer/rdconsole/core
+	circuit = /obj/item/weapon/circuitboard/rdconsole
 	var/datum/research/files							//Stores all the collected research data.
 	var/obj/item/weapon/disk/tech_disk/t_disk = null	//Stores the technology disk.
 	var/obj/item/weapon/disk/design_disk/d_disk = null	//Stores the design disk.
@@ -61,7 +61,6 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	var/screen = 1.0	//Which screen is currently showing.
 	var/id = 0			//ID of the computer (for server restrictions).
 	var/sync = 1		//If sync = 0, it doesn't show up on Server Control Console
-	var/can_analyze = TRUE //If the console is allowed to use destructive analyzers
 
 	req_access = list(access_research)	//Data and setting manipulation requires scientist access.
 
@@ -96,7 +95,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	for(var/obj/machinery/r_n_d/D in range(4, src))
 		if(D.linked_console != null || D.panel_open)
 			continue
-		if(istype(D, /obj/machinery/r_n_d/destructive_analyzer) && can_analyze == TRUE) // Only science R&D consoles can do research
+		if(istype(D, /obj/machinery/r_n_d/destructive_analyzer))
 			if(linked_destroy == null)
 				linked_destroy = D
 				D.linked_console = src
@@ -109,6 +108,14 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 				linked_imprinter = D
 				D.linked_console = src
 	return
+
+/obj/machinery/computer/rdconsole/proc/griefProtection() //Have it automatically push research to the centcomm server so wild griffins can't fuck up R&D's work
+	for(var/obj/machinery/r_n_d/server/centcom/C in SSmachines.machinery)
+		for(var/datum/tech/T in files.known_tech)
+			C.files.AddTech2Known(T)
+		for(var/datum/design/D in files.known_designs)
+			C.files.AddDesign2Known(D)
+		C.files.RefreshResearch()
 
 /obj/machinery/computer/rdconsole/New()
 	..()
@@ -146,19 +153,18 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	src.updateUsrDialog()
 	return
 
-/obj/machinery/computer/rdconsole/emag_act(var/remaining_charges, var/mob/user)
+/obj/machinery/computer/rdconsole/emp_act(var/remaining_charges, var/mob/user)
 	if(!emagged)
 		playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
 		emagged = 1
-		req_access.Cut()
 		to_chat(user, "<span class='notice'>You you disable the security protocols.</span>")
 		return 1
 
 /obj/machinery/computer/rdconsole/CanUseTopic(var/mob/user, var/datum/topic_state/state, var/href_list)
-	if(href_list && href_list["menu"])
+	if(href_list["menu"])
 		var/temp_screen = text2num(href_list["menu"])
-		if(!((temp_screen <= 1.1) || (3 <= temp_screen && 4.9 >= temp_screen) || allowed(user)))
-			to_chat(user, "Unauthorized Access.")
+		if(!(temp_screen <= 1.1 || (3 <= temp_screen && 4.9 >= temp_screen) || allowed(usr) || emagged))
+			to_chat(usr, "Unauthorized Access.")
 			return STATUS_CLOSE
 	return ..()
 
@@ -180,6 +186,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			screen = 1.2
 			files.AddTech2Known(t_disk.stored)
 			updateUsrDialog()
+			griefProtection() //Update centcomm too
 
 	else if(href_list["clear_tech"]) //Erase data on the technology disk.
 		. = TOPIC_REFRESH
@@ -218,6 +225,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			screen = 1.4
 			files.AddDesign2Known(d_disk.blueprint)
 			updateUsrDialog()
+			griefProtection() //Update centcomm too
 
 	else if(href_list["clear_design"]) //Erases data on the design disk.
 		. = TOPIC_REFRESH
@@ -283,6 +291,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			to_chat(usr, "<span class='notice'>You must connect to the network first.</span>")
 		else
 			. = TOPIC_HANDLED
+			griefProtection() //Putting this here because I dont trust the sync process
 			spawn(30)
 				if(src)
 					for(var/obj/machinery/r_n_d/server/S in SSmachines.machinery)
@@ -304,7 +313,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 						if(!istype(S, /obj/machinery/r_n_d/server/centcom) && server_processed)
 							S.produce_heat()
 					screen = 1.6
-					interact(user)
+					attack_hand(user)
 
 	else if(href_list["togglesync"]) //Prevents the console from being synced by other consoles. Can still send data.
 		sync = !sync
@@ -386,7 +395,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		spawn(10)
 			SyncRDevices()
 			screen = 1.7
-			interact(user)
+			attack_hand(user)
 
 	else if(href_list["disconnect"]) //The R&D console disconnects with a specific device.
 		. = TOPIC_REFRESH
@@ -405,6 +414,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 				linked_imprinter = null
 
 	else if(href_list["reset"]) //Reset the R&D console's database.
+		griefProtection()
 		var/choice = alert("R&D Console Database Reset", "Are you sure you want to reset the R&D console's database? Data lost cannot be recovered.", "Continue", "Cancel")
 		. = TOPIC_HANDLED
 		if(choice == "Continue")
@@ -413,7 +423,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			files = new /datum/research(src)
 			spawn(20)
 				screen = 1.6
-				interact(user)
+				attack_hand(user)
 
 	else if (href_list["print"]) //Print research information
 		screen = 0.5
@@ -422,7 +432,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			var/obj/item/weapon/paper/PR = new/obj/item/weapon/paper
 			PR.name = "fabricator report"
 			PR.info = "<center><b>[station_name()] Fabricator Laboratory</b>"
-			PR.info += "<h2>[ (text2num(href_list["print"]) == 2) ? "Detailed" : null ] Fabricator Status Report</h2>"
+			PR.info += "<h2>[ (text2num(href_list["print"]) == 2) ? "Detailed" : ] Fabricator Status Report</h2>"
 			PR.info += "<i>report prepared at [stationtime2text()] local time</i></center><br>"
 			if(text2num(href_list["print"]) == 2)
 				PR.info += GetResearchListInfo()
@@ -433,7 +443,10 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			PR.dropInto(loc)
 			spawn(10)
 				screen = ((text2num(href_list["print"]) == 2) ? 5.0 : 1.1)
-				interact(user)
+				attack_hand(user)
+
+	if(. == TOPIC_REFRESH)
+		attack_hand(user)
 
 /obj/machinery/computer/rdconsole/proc/finish_deconstruct(weakref/W)
 	CHECK_DESTROY
@@ -457,7 +470,8 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			qdel(M)
 		if(istype(I,/obj/item/stack/material))//Only deconsturcts one sheet at a time instead of the entire stack
 			var/obj/item/stack/material/S = I
-			if(S.use(1) && S.amount)
+			if(S.get_amount() > 1)
+				S.use(1)
 				linked_destroy.loaded_item = S
 			else
 				qdel(S)
@@ -469,8 +483,8 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 
 	use_power_oneoff(linked_destroy.active_power_usage)
 	screen = 1.0
-	if(CanInteract(user, DefaultTopicState()))
-		interact(user)
+	if(user)
+		attack_hand(user)
 
 /obj/machinery/computer/rdconsole/proc/GetResearchLevelsInfo()
 	var/dat
@@ -495,11 +509,10 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	dat += "</UL>"
 	return dat
 
-/obj/machinery/computer/rdconsole/interface_interact(mob/user)
-	interact(user)
-	return TRUE
+/obj/machinery/computer/rdconsole/attack_hand(mob/user as mob)
+	if(stat & (BROKEN|NOPOWER))
+		return
 
-/obj/machinery/computer/rdconsole/interact(mob/user)
 	user.set_machine(src)
 	var/dat = list()
 	files.RefreshResearch()
@@ -662,8 +675,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			if(linked_destroy)
 				dat += "<LI>Destructive Analyzer <A href='?src=\ref[src];disconnect=destroy'>(Disconnect)</A>"
 			else
-				if (can_analyze == TRUE) 
-					dat += "<LI>(No Destructive Analyzer Linked)"
+				dat += "<LI>(No Destructive Analyzer Linked)"
 			if(linked_lathe)
 				dat += "<LI>Protolathe <A href='?src=\ref[src];disconnect=lathe'>(Disconnect)</A>"
 			else
@@ -864,7 +876,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "List of Available Designs:"
 			dat += GetResearchListInfo()
 
-	var/datum/browser/popup = new(user, "rdconsolenew", "Core Fabricator Console", 850, 600)
+	var/datum/browser/popup = new(user, "rdconsolenew", "Research Console", 850, 600)
 	popup.set_content(JOINTEXT(dat))
 	popup.open()
 
@@ -872,12 +884,10 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	name = "robotics fabrication console"
 	id = 2
 	req_access = list(access_robotics)
-	can_analyze = FALSE
 
 /obj/machinery/computer/rdconsole/core
 	name = "core fabricator console"
 	id = 1
-	
 
 #undef CHECK_LATHE
 #undef CHECK_IMPRINTER

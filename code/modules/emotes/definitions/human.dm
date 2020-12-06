@@ -5,7 +5,7 @@
 	return (istype(user) && user.check_has_mouth() && !user.isSynthetic())
 
 /decl/emote/human/do_emote(var/mob/living/carbon/human/user)
-	user.vomit(deliberate = TRUE)
+	user.vomit()
 
 /decl/emote/human/deathgasp
 	key = "deathgasp"

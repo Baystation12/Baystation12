@@ -30,7 +30,7 @@
 	if(text)
 		var/F = file("broken_icons.txt")
 		fdel(F)
-		to_file(F, text)
+		F << text
 		log_debug("Completeled successfully and written to [F]")
 
 

@@ -23,8 +23,6 @@
 /client/Topic(href, href_list, hsrc)
 	if(!usr || usr != mob)	//stops us calling Topic for somebody else's client. Also helps prevent usr=null
 		return
-	if(!user_acted(src))
-		return
 
 	#if defined(TOPIC_DEBUGGING)
 	log_debug("[src]'s Topic: [href] destined for [hsrc].")
@@ -44,7 +42,7 @@
 
 	//search the href for script injection
 	if( findtext(href,"<script",1,0) )
-		to_world_log("Attempted use of scripts within a topic call, by [src]")
+		world.log << "Attempted use of scripts within a topic call, by [src]"
 		message_admins("Attempted use of scripts within a topic call, by [src]")
 		//qdel(usr)
 		return
@@ -78,6 +76,8 @@
 
 		ticket.close(client_repository.get_lite_client(usr.client))
 
+
+
 	//Logs all hrefs
 	if(config && config.log_hrefs && href_logfile)
 		to_chat(href_logfile, "<small>[time2text(world.timeofday,"hh:mm")] [src] (usr:[usr])</small> || [hsrc ? "[hsrc] " : ""][href]<br>")
@@ -87,25 +87,11 @@
 		if("usr")		hsrc = mob
 		if("prefs")		return prefs.process_link(usr,href_list)
 		if("vars")		return view_var_Topic(href,href_list,hsrc)
-		if("chat")		return chatOutput.Topic(href, href_list)
-
-	switch(href_list["action"])
-		if("openLink")
-			send_link(src, href_list["link"])
-
-	if(codex_topic(href, href_list))
-		return
-
-	if(href_list["SDQL_select"])
-		debug_variables(locate(href_list["SDQL_select"]))
-		return
 
 	..()	//redirect to hsrc.Topic()
 
 //This stops files larger than UPLOAD_LIMIT being sent from client to server via input(), client.Import() etc.
 /client/AllowUpload(filename, filelength)
-	if(!user_acted(src))
-		return 0
 	if(filelength > UPLOAD_LIMIT)
 		to_chat(src, "<font color='red'>Error: AllowUpload(): File Upload too large. Upload Limit: [UPLOAD_LIMIT/1024]KiB.</font>")
 		return 0
@@ -125,12 +111,8 @@
 /client/New(TopicData)
 	TopicData = null							//Prevent calls to client.Topic from connect
 
-	// Load goonchat
-	chatOutput = new(src)
-
-	switch (connection)
-		if ("seeker", "web") // check for invalid connection type. do nothing if valid
-		else return null
+	if(!(connection in list("seeker", "web")))					//Invalid connection type.
+		return null
 	#if DM_VERSION >= 512
 	var/bad_version = config.minimum_byond_version && byond_version < config.minimum_byond_version
 	var/bad_build = config.minimum_byond_build && byond_build < config.minimum_byond_build
@@ -195,6 +177,7 @@
 		to_chat(src, "<span class='alert'>[custom_event_msg]</span>")
 		to_chat(src, "<br>")
 
+
 	if(holder)
 		add_admin_verbs()
 		admin_memo_show()
@@ -226,7 +209,6 @@
 
 	if(holder)
 		src.control_freak = 0 //Devs need 0 for profiler access
-
 	//////////////
 	//DISCONNECT//
 	//////////////
@@ -361,6 +343,7 @@
 	statpanel("Status")
 
 	. = ..()
+	sleep(1)
 
 //send resources to the client. It's here in its own proc so we can move it around easiliy if need be
 /client/proc/send_resources()
@@ -375,12 +358,11 @@
 		'html/images/sollogo.png',
 		'html/images/terralogo.png',
 		'html/images/talisman.png',
-		'html/images/exologo.png',
+		'html/images/torchltd.png',
 		'html/images/xynlogo.png',
 		'html/images/daislogo.png',
 		'html/images/eclogo.png',
-		'html/images/fleetlogo.png',
-		'html/images/sfplogo.png'
+		'html/images/fleetlogo.png'
 		)
 
 	var/decl/asset_cache/asset_cache = decls_repository.get_decl(/decl/asset_cache)
@@ -407,78 +389,3 @@ client/verb/character_setup()
 /client/proc/apply_fps(var/client_fps)
 	if(world.byond_version >= 511 && byond_version >= 511 && client_fps >= CLIENT_MIN_FPS && client_fps <= CLIENT_MAX_FPS)
 		vars["fps"] = prefs.clientfps
-
-/client/MouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params)
-	. = ..()
-	var/mob/living/M = mob
-	if(istype(M))
-		M.OnMouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params)
-
-/client/verb/toggle_fullscreen()
-	set name = "Toggle Fullscreen"
-	set category = "OOC"
-
-	fullscreen = !fullscreen
-
-	if (fullscreen)
-		winset(usr, "mainwindow", "titlebar=false")
-		winset(usr, "mainwindow", "can-resize=false")
-		winset(usr, "mainwindow", "is-maximized=false")
-		winset(usr, "mainwindow", "is-maximized=true")
-		winset(usr, "mainwindow", "statusbar=false")
-		winset(usr, "mainwindow", "menu=")
-//		winset(usr, "mainwindow.mainvsplit", "size=0x0")
-	else
-		winset(usr, "mainwindow", "is-maximized=false")
-		winset(usr, "mainwindow", "titlebar=true")
-		winset(usr, "mainwindow", "can-resize=true")
-		winset(usr, "mainwindow", "statusbar=true")
-		winset(usr, "mainwindow", "menu=menu")
-
-	fit_viewport()
-
-/client/verb/fit_viewport()
-	set name = "Fit Viewport"
-	set category = "OOC"
-	set desc = "Fit the width of the map window to match the viewport"
-
-	// Fetch aspect ratio
-	var/view_size = getviewsize(view)
-	var/aspect_ratio = view_size[1] / view_size[2]
-
-	// Calculate desired pixel width using window size and aspect ratio
-	var/sizes = params2list(winget(src, "mainwindow.mainvsplit;mapwindow", "size"))
-	var/map_size = splittext(sizes["mapwindow.size"], "x")
-	var/height = text2num(map_size[2])
-	var/desired_width = round(height * aspect_ratio)
-	if (text2num(map_size[1]) == desired_width)
-		// Nothing to do
-		return
-
-	var/split_size = splittext(sizes["mainwindow.mainvsplit.size"], "x")
-	var/split_width = text2num(split_size[1])
-
-	// Calculate and apply a best estimate
-	// +4 pixels are for the width of the splitter's handle
-	var/pct = 100 * (desired_width + 4) / split_width
-	winset(src, "mainwindow.mainvsplit", "splitter=[pct]")
-
-	// Apply an ever-lowering offset until we finish or fail
-	var/delta
-	for(var/safety in 1 to 10)
-		var/after_size = winget(src, "mapwindow", "size")
-		map_size = splittext(after_size, "x")
-		var/got_width = text2num(map_size[1])
-
-		if (got_width == desired_width)
-			// success
-			return
-		else if (isnull(delta))
-			// calculate a probable delta value based on the difference
-			delta = 100 * (desired_width - got_width) / split_width
-		else if ((delta > 0 && got_width > desired_width) || (delta < 0 && got_width < desired_width))
-			// if we overshot, halve the delta and reverse direction
-			delta = -delta/2
-
-		pct += delta
-		winset(src, "mainwindow.mainvsplit", "splitter=[pct]")

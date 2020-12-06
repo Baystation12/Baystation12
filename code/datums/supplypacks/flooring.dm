@@ -14,22 +14,10 @@
 	containername = "blue and gold carpet crate"
 
 /decl/hierarchy/supply_pack/flooring/carpetblue2
-	name = "Pale blue carpet"
+	name = "Blue and silver carpet"
 	contains = list(/obj/item/stack/tile/carpetblue2/fifty)
 	cost = 15
-	containername = "pale blue carpet crate"
-
-/decl/hierarchy/supply_pack/flooring/carpetblue3
-	name = "Sea blue carpet"
-	contains = list(/obj/item/stack/tile/carpetblue3/fifty)
-	cost = 15
-	containername = "sea blue carpet crate"
-
-/decl/hierarchy/supply_pack/flooring/carpetpurple
-	name = "Magenta carpet"
-	contains = list(/obj/item/stack/tile/carpetmagenta/fifty)
-	cost = 15
-	containername = "magenta carpet crate"
+	containername = "blue and silver carpet crate"
 
 /decl/hierarchy/supply_pack/flooring/carpetpurple
 	name = "Purple carpet"

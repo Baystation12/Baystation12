@@ -1,13 +1,11 @@
-GLOBAL_LIST_INIT(secure_weapons, list())
-
 /obj/item/weapon/gun
 	var/list/authorized_modes = list(ALWAYS_AUTHORIZED) // index of this list should line up with firemodes, unincluded firemodes at the end will use default
 	var/default_mode_authorization = UNAUTHORIZED
 	var/registered_owner
+	var/standby
 
 /obj/item/weapon/gun/Initialize()
 	if(is_secure_gun())
-		GLOB.secure_weapons |= src
 		if(!authorized_modes)
 			authorized_modes = list()
 
@@ -17,41 +15,39 @@ GLOBAL_LIST_INIT(secure_weapons, list())
 	. = ..()
 
 /obj/item/weapon/gun/Destroy()
-	GLOB.secure_weapons -= src
+	GLOB.registered_weapons -= src
 	. = ..()
 
-/obj/item/weapon/gun/examine(mob/user, distance)
-	. = ..()
-	if(distance <= 0 && is_secure_gun())
-		to_chat(user, "The registration screen shows, \"" + (registered_owner ? "[registered_owner]" : "unregistered") + "\"")
+/obj/item/weapon/gun/examine(var/mob/user)
+	..()
+	if(registered_owner)
+		to_chat(user, "A small screen on the side of the weapon indicates that it is registered to [registered_owner].")
 
 /obj/item/weapon/gun/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/card/id) && is_secure_gun())
-		user.visible_message("[user] swipes an ID through \the [src].", range = 3)
 		if(!registered_owner)
 			var/obj/item/weapon/card/id/id = W
+			GLOB.registered_weapons += src
 			verbs += /obj/item/weapon/gun/proc/reset_registration
 			registered_owner = id.registered_name
-			to_chat(user, SPAN_NOTICE("\The [src] chimes quietly as it registers to \"[registered_owner]\"."))
+			user.visible_message("[user] swipes an ID through \the [src], registering it.", "You swipe an ID through \the [src], registering it.")
 		else
-			to_chat(user, SPAN_NOTICE("\The [src] buzzes quietly, refusing to register without first being reset."))
+			to_chat(user, "This weapon is already registered, you must reset it first.")
 	else
 		..()
 
 /obj/item/weapon/gun/emag_act(var/charges, var/mob/user)
 	if(!charges)
 		return NO_EMAG_ACT
-
-	if(is_secure_gun())
+	else if (is_secure_gun())
 		registered_owner = null
+		GLOB.registered_weapons -= src
 		verbs -= /obj/item/weapon/gun/proc/reset_registration
 		req_access.Cut()
-		GLOB.secure_weapons -= src
-		to_chat(user, SPAN_NOTICE("\The [src]'s authorization chip fries, giving you full access."))
+		to_chat(user, "The authorization chip fries, giving you full use of \the [src].")
 		return 1
-
-	return ..()
-
+	else
+		return ..()
 
 /obj/item/weapon/gun/proc/reset_registration()
 	set name = "Reset Registration"
@@ -59,33 +55,28 @@ GLOBAL_LIST_INIT(secure_weapons, list())
 	set src in usr
 
 	if(issilicon(usr))
-		to_chat(usr, SPAN_WARNING("You are not permitted to modify weapon registrations."))
 		return
 
-	usr.visible_message("[usr] presses the reset button on \the [src].", range = 3)
-	if(!allowed(usr))
-		to_chat(usr, SPAN_WARNING("\The [src] buzzes quietly, refusing your access."))
-		return
+	if(allowed(usr))
+		usr.visible_message("[usr] presses the reset button on \the [src], resetting its registration.", "You press the reset button on \the [src], resetting its registration.")
+		registered_owner = null
+		GLOB.registered_weapons -= src
+		verbs -= /obj/item/weapon/gun/proc/reset_registration
 
-	to_chat(usr, SPAN_NOTICE("\The [src] chimes quietly as its registration resets."))
-	registered_owner = null
-	verbs -= /obj/item/weapon/gun/proc/reset_registration
-
-
-/obj/item/weapon/gun/proc/authorize(mode, authorized)
+/obj/item/weapon/gun/proc/authorize(var/mode, var/authorized, var/by)
 	if(mode < 1 || mode > authorized_modes.len || authorized_modes[mode] == authorized)
-		return FALSE
+		return 0
 
 	authorized_modes[mode] = authorized
 
 	if(mode == sel_mode && !authorized)
 		switch_firemodes()
 
-	var/mob/user = get_holder_of_type(src, /mob)
-	if(user)
-		to_chat(user, SPAN_NOTICE("Your [src.name] has been [authorized ? "granted" : "denied"] [firemodes[mode]] fire authorization."))
+	var/mob/M = get_holder_of_type(src, /mob)
+	if(M)
+		to_chat(M, "<span class='notice'>Your [src.name] has been [authorized ? "granted" : "denied"] [firemodes[mode]] fire authorization by [by].</span>")
 
-	return TRUE
+	return 1
 
 /obj/item/weapon/gun/proc/is_secure_gun()
 	return length(req_access)
@@ -96,8 +87,8 @@ GLOBAL_LIST_INIT(secure_weapons, list())
 
 /obj/item/weapon/gun/special_check()
 	if(is_secure_gun() && !free_fire() && (!authorized_modes[sel_mode] || !registered_owner))
-		audible_message(SPAN_WARNING("\The [src] buzzes, refusing to fire."), hearing_distance = 3)
-		playsound(loc, 'sound/machines/buzz-sigh.ogg', 10, 0)
+		audible_message("<span class='warning'>\The [src] buzzes, refusing to fire.</span>")
+		playsound(loc, 'sound/machines/buzz-sigh.ogg', 30, 0)
 		return 0
 
 	. = ..()
@@ -112,4 +103,4 @@ GLOBAL_LIST_INIT(secure_weapons, list())
 			. = 1
 		if(. == sel_mode) // just in case all modes are unauthorized
 			return null
-	while (!authorized_modes[.] && !free_fire())
+	while(!authorized_modes[.] && !free_fire())

@@ -21,7 +21,7 @@
 	if (!can_touch(usr) || ismouse(usr))
 		return
 
-	if(reinforced || flipped < 0 || !flip(get_cardinal_dir(usr,src)))
+	if(flipped < 0 || !flip(get_cardinal_dir(usr,src)))
 		to_chat(usr, "<span class='notice'>It won't budge.</span>")
 		return
 
@@ -57,7 +57,7 @@
 
 /obj/structure/table/proc/do_put()
 	set name = "Put table back"
-	set desc = "Puts a flipped table back"
+	set desc = "Puts flipped table back"
 	set category = "Object"
 	set src in oview(1)
 
@@ -86,6 +86,7 @@
 
 	set_dir(direction)
 	if(dir != NORTH)
+		plane = ABOVE_HUMAN_PLANE
 		layer = ABOVE_HUMAN_LAYER
 	atom_flags &= ~ATOM_FLAG_CLIMBABLE //flipping tables allows them to be used as makeshift barriers
 	flipped = 1
@@ -121,10 +122,7 @@
 	return TRUE
 
 /obj/structure/table/CtrlClick()
-	if(usr && usr.Adjacent(src))
-		if(!flipped)
-			do_flip()
-		else
-			do_put()
-		return TRUE
-	return FALSE
+	if(!flipped)
+		do_flip()
+	else
+		do_put()

@@ -3,16 +3,8 @@
 	health = 20
 	maxHealth = 20
 	icon = 'icons/mob/bot/placeholder.dmi'
-	universal_speak = TRUE
+	universal_speak = 1
 	density = 0
-
-	meat_type = null
-	meat_amount = 0
-	skin_material = null
-	skin_amount = 0
-	bone_material = null
-	bone_amount = 0
-
 	var/obj/item/weapon/card/id/botcard = null
 	var/list/botcard_access = list()
 	var/on = 1
@@ -44,6 +36,7 @@
 	var/frustration = 0
 	var/max_frustration = 0
 
+	plane = HIDING_MOB_PLANE
 	layer = HIDING_MOB_LAYER
 
 /mob/living/bot/New()
@@ -153,13 +146,20 @@
 	popup.set_content(dat)
 	popup.open()
 
-/mob/living/bot/DefaultTopicState()
-	return GLOB.default_state
+/mob/living/bot/Topic(var/href, var/href_list)
+	if(..())
+		return 1
 
-/mob/living/bot/OnTopic(mob/user, href_list)
+	if(!issilicon(usr) && !Adjacent(usr))
+		return
+
+	if(usr.incapacitated())
+		return
+
 	if(href_list["command"])
-		ProcessCommand(user, href_list["command"], href_list)
-	Interact(user)
+		ProcessCommand(usr, href_list["command"], href_list)
+
+	Interact(usr)
 
 /mob/living/bot/proc/GetInteractTitle()
 	return

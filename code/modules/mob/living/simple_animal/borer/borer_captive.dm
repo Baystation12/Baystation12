@@ -1,20 +1,13 @@
 /mob/living/captive_brain
 	name = "host brain"
 	real_name = "host brain"
-	universal_understand = TRUE
-
-	meat_type = null
-	meat_amount = 0
-	skin_material = null
-	skin_amount = 0
-	bone_material = null
-	bone_amount = 0
+	universal_understand = 1
 
 /mob/living/captive_brain/say(var/message)
 
 	if (src.client)
 		if(client.prefs.muted & MUTE_IC)
-			to_chat(src, SPAN_WARNING("You cannot speak in IC (muted)."))
+			to_chat(src, "<span class='warning'>You cannot speak in IC (muted).</span>")
 			return
 
 	if(istype(src.loc,/mob/living/simple_animal/borer))

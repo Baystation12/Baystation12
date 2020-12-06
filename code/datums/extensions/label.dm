@@ -1,5 +1,4 @@
 /datum/extension/labels
-	base_type = /datum/extension/labels
 	expected_type = /atom
 	var/atom/atom_holder
 	var/list/labels

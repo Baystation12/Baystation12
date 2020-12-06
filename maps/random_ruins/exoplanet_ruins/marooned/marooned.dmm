@@ -2,6 +2,10 @@
 "aa" = (
 /turf/template_noop,
 /area/template_noop)
+"ab" = (
+/obj/effect/decal/cleanable/blood/drip,
+/turf/template_noop,
+/area/template_noop)
 "ac" = (
 /obj/item/stack/material/rods,
 /turf/template_noop,
@@ -18,7 +22,7 @@
 "af" = (
 /obj/structure/lattice,
 /obj/item/stack/material/ocp,
-/obj/effect/landmark/scorcher,
+/obj/effect/scorcher,
 /turf/template_noop,
 /area/template_noop)
 "ag" = (
@@ -29,23 +33,23 @@
 /turf/simulated/wall/ocp_wall,
 /area/map_template/marooned)
 "ai" = (
-/obj/effect/landmark/scorcher,
+/obj/effect/scorcher,
 /turf/template_noop,
 /area/template_noop)
 "aj" = (
 /obj/item/stack/material/ocp,
-/obj/effect/landmark/scorcher,
+/obj/effect/scorcher,
 /turf/template_noop,
 /area/template_noop)
 "ak" = (
-/obj/machinery/computer/dummy,
+/obj/machinery/computer,
 /obj/effect/floor_decal/corner/red/full,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
 "al" = (
 /obj/effect/floor_decal/corner/red{
-	dir = 9;
-	icon_state = "corner_white"
+	icon_state = "corner_white";
+	dir = 9
 	},
 /obj/machinery/atmospherics/binary/oxyregenerator,
 /turf/simulated/floor/tiled/techfloor,
@@ -66,15 +70,15 @@
 	},
 /obj/structure/table/steel_reinforced,
 /obj/effect/floor_decal/corner/red{
-	dir = 6;
-	icon_state = "corner_white"
+	icon_state = "corner_white";
+	dir = 6
 	},
 /obj/item/weapon/paper/marooned/note09,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/marooned)
 "ao" = (
 /obj/structure/lattice,
-/obj/effect/landmark/scorcher,
+/obj/effect/scorcher,
 /turf/template_noop,
 /area/template_noop)
 "ap" = (
@@ -88,8 +92,8 @@
 	},
 /obj/structure/table/steel_reinforced,
 /obj/effect/floor_decal/corner/red{
-	dir = 9;
-	icon_state = "corner_white"
+	icon_state = "corner_white";
+	dir = 9
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/marooned)
@@ -106,8 +110,8 @@
 	},
 /obj/structure/table/steel_reinforced,
 /obj/effect/floor_decal/corner/red{
-	dir = 6;
-	icon_state = "corner_white"
+	icon_state = "corner_white";
+	dir = 6
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/marooned)
@@ -118,8 +122,8 @@
 "at" = (
 /obj/structure/closet/crate/freezer,
 /obj/structure/handrai{
-	dir = 4;
-	icon_state = "handrail"
+	icon_state = "handrail";
+	dir = 4
 	},
 /obj/effect/floor_decal/industrial/outline,
 /turf/simulated/floor/tiled/techfloor,
@@ -153,8 +157,8 @@
 	pixel_y = 1
 	},
 /obj/structure/handrai{
-	dir = 4;
-	icon_state = "handrail"
+	icon_state = "handrail";
+	dir = 4
 	},
 /obj/effect/floor_decal/industrial/outline,
 /turf/simulated/floor/tiled/techfloor,
@@ -181,18 +185,17 @@
 /area/map_template/marooned)
 "aC" = (
 /obj/structure/shuttle/engine/propulsion,
-/obj/effect/landmark/scorcher,
-/obj/effect/landmark/clear,
+/obj/effect/scorcher,
 /turf/template_noop,
 /area/template_noop)
 "aD" = (
 /obj/structure/handrai{
-	dir = 4;
-	icon_state = "handrail"
+	icon_state = "handrail";
+	dir = 4
 	},
 /obj/structure/bed/chair{
-	dir = 4;
-	icon_state = "chair_preview"
+	icon_state = "chair_preview";
+	dir = 4
 	},
 /obj/item/trash/liquidfood,
 /obj/item/trash/liquidfood,
@@ -213,12 +216,12 @@
 /area/map_template/marooned)
 "aH" = (
 /obj/structure/handrai{
-	dir = 4;
-	icon_state = "handrail"
+	icon_state = "handrail";
+	dir = 4
 	},
 /obj/structure/bed/chair{
-	dir = 4;
-	icon_state = "chair_preview"
+	icon_state = "chair_preview";
+	dir = 4
 	},
 /obj/effect/floor_decal/industrial/outline,
 /turf/simulated/floor/tiled/techfloor,
@@ -228,8 +231,8 @@
 /obj/item/stack/cable_coil,
 /obj/machinery/power/port_gen/pacman/super,
 /obj/structure/cable{
-	dir = 8;
-	icon_state = "0-5"
+	icon_state = "0-5";
+	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/marooned)
@@ -240,8 +243,8 @@
 "aL" = (
 /obj/structure/inflatable/wall,
 /obj/structure/handrai{
-	dir = 4;
-	icon_state = "handrail"
+	icon_state = "handrail";
+	dir = 4
 	},
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/tiled/dark,
@@ -249,8 +252,8 @@
 "aM" = (
 /obj/structure/inflatable/door,
 /obj/structure/cable{
-	dir = 1;
-	icon_state = "1-6"
+	icon_state = "1-6";
+	dir = 1
 	},
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -258,8 +261,8 @@
 "aN" = (
 /obj/structure/inflatable/wall,
 /obj/structure/handrai{
-	dir = 8;
-	icon_state = "handrail"
+	icon_state = "handrail";
+	dir = 8
 	},
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -267,8 +270,8 @@
 "aO" = (
 /obj/structure/inflatable/door,
 /obj/structure/cable{
-	dir = 1;
-	icon_state = "2-5"
+	icon_state = "2-5";
+	dir = 1
 	},
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/door/airlock/centcom,
@@ -282,32 +285,28 @@
 "aQ" = (
 /obj/structure/inflatable/wall,
 /obj/structure/cable{
-	dir = 2;
-	icon_state = "2-5"
+	icon_state = "2-5";
+	dir = 2
 	},
-/obj/effect/landmark/scorcher,
-/obj/effect/landmark/clear,
+/obj/effect/scorcher,
 /turf/template_noop,
 /area/template_noop)
 "aR" = (
 /obj/structure/inflatable/door,
-/obj/effect/landmark/scorcher,
-/obj/effect/landmark/clear,
+/obj/effect/scorcher,
 /turf/template_noop,
 /area/template_noop)
 "aS" = (
 /obj/structure/inflatable/wall,
-/obj/effect/landmark/scorcher,
-/obj/effect/landmark/clear,
+/obj/effect/scorcher,
 /turf/template_noop,
 /area/template_noop)
 "aT" = (
 /obj/structure/cable{
-	dir = 1;
-	icon_state = "2-5"
+	icon_state = "2-5";
+	dir = 1
 	},
-/obj/effect/landmark/scorcher,
-/obj/effect/landmark/clear,
+/obj/effect/scorcher,
 /turf/template_noop,
 /area/template_noop)
 "aU" = (
@@ -318,28 +317,27 @@
 /turf/simulated/wall/ocp_wall,
 /area/template_noop)
 "aW" = (
-/obj/item/weapon/stock_parts/computer/battery_module{
+/obj/item/weapon/computer_hardware/battery_module{
 	pixel_x = -7;
 	pixel_y = 0
 	},
-/obj/item/weapon/melee/baton/cattleprod{
+/obj/item/weapon/material/wirerod{
 	desc = "Metal rod with wire attached to it.";
-	name = "jury-rigged antenna";
+	name = "Jurry-rigged antenna";
 	pixel_x = 5;
 	pixel_y = 3
 	},
 /obj/item/device/radio,
 /obj/item/stack/cable_coil,
 /obj/structure/cable{
-	dir = 4;
-	icon_state = "0-6"
+	icon_state = "0-6";
+	dir = 4
 	},
 /obj/structure/cable{
-	d2 = 4;
-	icon_state = "0-4"
+	icon_state = "0-4";
+	d2 = 4
 	},
-/obj/effect/landmark/scorcher,
-/obj/effect/landmark/clear,
+/obj/effect/scorcher,
 /turf/template_noop,
 /area/template_noop)
 "aX" = (
@@ -349,14 +347,13 @@
 	icon_state = "4-8";
 	pixel_x = 0
 	},
-/obj/effect/landmark/scorcher,
-/obj/effect/landmark/clear,
+/obj/effect/scorcher,
 /turf/template_noop,
 /area/template_noop)
 "aY" = (
-/obj/item/weapon/melee/baton/cattleprod{
+/obj/item/weapon/material/wirerod{
 	desc = "Metal rod with wire attached to it.";
-	name = "jury-rigged antenna";
+	name = "Jurry-rigged antenna";
 	pixel_x = 5;
 	pixel_y = 3
 	},
@@ -364,25 +361,12 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/effect/landmark/scorcher,
-/obj/effect/landmark/clear,
+/obj/effect/scorcher,
 /turf/template_noop,
 /area/template_noop)
-"hi" = (
-/obj/effect/landmark/scorcher,
-/obj/effect/landmark/clear,
-/turf/template_noop,
-/area/template_noop)
-"tb" = (
-/obj/effect/landmark/clear,
-/obj/effect/landmark/scorcher,
-/turf/template_noop,
-/area/template_noop)
-"Wb" = (
-/obj/structure/shuttle/engine/propulsion,
-/obj/effect/landmark/scorcher,
-/obj/effect/landmark/clear,
-/obj/effect/landmark/scorcher,
+"aZ" = (
+/obj/effect/decal/cleanable/blood/drip,
+/obj/effect/scorcher,
 /turf/template_noop,
 /area/template_noop)
 
@@ -463,14 +447,14 @@ ai
 ah
 ah
 aC
-hi
-hi
-hi
-hi
-hi
-hi
-hi
-hi
+ai
+ai
+ai
+ai
+ai
+ai
+ai
+ai
 aa
 aa
 aa
@@ -495,15 +479,15 @@ ai
 ah
 ah
 aC
-hi
-hi
-hi
-hi
-hi
-hi
-hi
-hi
-hi
+ai
+ai
+ai
+ai
+ai
+ai
+ai
+ai
+ai
 aa
 aa
 aa
@@ -529,13 +513,13 @@ ah
 ah
 ah
 ah
-hi
-hi
-hi
-hi
-hi
-hi
-hi
+ai
+ai
+ai
+ai
+ai
+ai
+ai
 ai
 aa
 aa
@@ -562,12 +546,12 @@ aD
 aH
 ah
 ah
-hi
-hi
+ai
+ai
 aW
-hi
-hi
-hi
+ai
+ai
+ai
 aa
 aa
 aa
@@ -597,9 +581,9 @@ ah
 aQ
 aT
 aX
-hi
-hi
-hi
+ai
+ai
+ai
 aa
 aa
 aa
@@ -627,11 +611,11 @@ aJ
 aM
 aO
 aR
-hi
+ai
 aX
-hi
-hi
-hi
+ai
+ai
+ai
 aa
 aa
 aa
@@ -659,11 +643,11 @@ aG
 aN
 ah
 aS
-hi
+ai
 aX
-hi
-hi
-hi
+ai
+ai
+ai
 ai
 aa
 aa
@@ -690,12 +674,12 @@ ax
 ax
 ah
 aP
-hi
-hi
+ai
+ai
 aX
-hi
-hi
-hi
+ai
+ai
+ai
 ai
 aa
 aa
@@ -721,12 +705,12 @@ ah
 ah
 ah
 ah
-hi
-hi
-hi
+ai
+ai
+ai
 aX
-hi
-hi
+aZ
+ai
 aa
 aa
 aa
@@ -753,9 +737,9 @@ ao
 ai
 ai
 aj
-hi
-hi
-hi
+ai
+ai
+ai
 aY
 ai
 ai
@@ -785,7 +769,7 @@ ai
 ai
 ai
 ai
-aa
+ab
 aa
 aa
 aa
@@ -971,7 +955,7 @@ aa
 aa
 aa
 aa
-aa
+ab
 aa
 aa
 aa
@@ -1124,7 +1108,7 @@ aa
 "}
 (24,1,1) = {"
 aa
-aa
+ab
 aa
 aa
 aa
@@ -1237,11 +1221,11 @@ ai
 ai
 aU
 aV
-Wb
-tb
-tb
-tb
-tb
+aC
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -1269,11 +1253,11 @@ ai
 ai
 aV
 aV
-Wb
-tb
-tb
-tb
-tb
+aC
+aa
+aa
+aa
+aa
 aa
 aa
 aa

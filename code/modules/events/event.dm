@@ -60,7 +60,6 @@
 	var/endedAt			= 0 //When this event ended.
 	var/datum/event_meta/event_meta = null
 	var/list/affecting_z
-	var/has_skybox_image
 
 /datum/event/nothing
 
@@ -75,8 +74,6 @@
 //Allows you to start before announcing or vice versa.
 //Only called once.
 /datum/event/proc/start()
-	if(has_skybox_image)
-		SSskybox.rebuild_skyboxes(affecting_z)
 	return
 
 //Called when the tick is equal to the announceWhen variable.
@@ -99,8 +96,6 @@
 //For example: if(activeFor == myOwnVariable + 30) doStuff()
 //Only called once.
 /datum/event/proc/end()
-	if(has_skybox_image)
-		SSskybox.rebuild_skyboxes(affecting_z)
 	return
 
 //Returns the latest point of event processing.
@@ -131,7 +126,7 @@
 	activeFor++
 
 //Called when start(), announce() and end() has all been called.
-/datum/event/proc/kill(reroll = FALSE)
+/datum/event/proc/kill()
 	// If this event was forcefully killed run end() for individual cleanup
 	if(isRunning)
 		isRunning = 0
@@ -139,12 +134,6 @@
 
 	endedAt = world.time
 	SSevent.event_complete(src)
-	if (reroll)
-		SSevent.event_containers[severity].start_event()
-
-
-//Called during building of skybox to get overlays
-/datum/event/proc/get_skybox_image()
 
 /datum/event/New(var/datum/event_meta/EM)
 	// event needs to be responsible for this, as stuff like APLUs currently make their own events for curious reasons
@@ -167,5 +156,5 @@
 	if(!GLOB.using_map.use_overmap)
 		return station_name()
 
-	var/obj/effect/overmap/visitable/O = map_sectors["[pick(affecting_z)]"]
+	var/obj/effect/overmap/O = map_sectors["[pick(affecting_z)]"]
 	return O ? O.name : "Unknown Location"

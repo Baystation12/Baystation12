@@ -1,6 +1,5 @@
 /spell/targeted/projectile/dumbfire
 	name = "dumbfire spell"
-	selection_type = "range"
 
 /spell/targeted/projectile/dumbfire/choose_targets(mob/user = usr)
 	var/list/targets = list()

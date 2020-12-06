@@ -1,13 +1,13 @@
 /obj/item/weapon/gun/projectile/heavysniper
 	name = "anti-materiel rifle"
-	desc = "A portable anti-armour rifle fitted with a scope, the HI PTR-7 Rifle was originally designed to be used against armoured exosuits. It is capable of punching through windows and non-reinforced walls with ease."
+	desc = "A portable anti-armour rifle fitted with a scope, the HI PTR-7 Rifle was originally designed to used against armoured exosuits. It is capable of punching through windows and non-reinforced walls with ease. Fires armor piercing 14.5mm shells."
 	icon = 'icons/obj/guns/heavysniper.dmi'
 	icon_state = "heavysniper"
 	item_state = "heavysniper" //sort of placeholder
 	w_class = ITEM_SIZE_HUGE
 	force = 10
 	slot_flags = SLOT_BACK
-	origin_tech = list(TECH_COMBAT = 8, TECH_MATERIAL = 2, TECH_ESOTERIC = 8)
+	origin_tech = list(TECH_COMBAT = 8, TECH_MATERIAL = 2, TECH_ILLEGAL = 8)
 	caliber = CALIBER_ANTIMATERIAL
 	screen_shake = 2 //extra kickback
 	handle_casings = HOLD_CASINGS
@@ -22,14 +22,13 @@
 	var/bolt_open = 0
 	wielded_item_state = "heavysniper-wielded" //sort of placeholder
 	load_sound = 'sound/weapons/guns/interaction/rifle_load.ogg'
-	fire_delay = 12
 
 /obj/item/weapon/gun/projectile/heavysniper/on_update_icon()
 	..()
 	if(bolt_open)
-		icon_state = "[initial(icon_state)]-open"
+		icon_state = "heavysniper-open"
 	else
-		icon_state = "[initial(icon_state)]"
+		icon_state = "heavysniper"
 
 /obj/item/weapon/gun/projectile/heavysniper/handle_post_fire(mob/user, atom/target, var/pointblank=0, var/reflex=0)
 	..()
@@ -77,20 +76,3 @@
 		return
 	..()
 
-
-/obj/item/weapon/gun/projectile/heavysniper/boltaction
-	name = "bolt action rifle"
-	desc = "An old bolt action rifle from some forgotten war, still commonplace among farmers and colonists as an anti-varmint rifle."
-	icon = 'icons/obj/guns/boltaction.dmi'
-	icon_state = "boltaction"
-	item_state = "boltaction"
-	w_class = ITEM_SIZE_LARGE
-	origin_tech = list(TECH_COMBAT = 2)
-	caliber = CALIBER_RIFLE
-	ammo_type = /obj/item/ammo_casing/rifle
-	load_method = SINGLE_CASING|SPEEDLOADER
-	max_shells = 5
-	accuracy = 4
-	scope_zoom = 0
-	scoped_accuracy = 0
-	wielded_item_state = "boltaction-wielded"

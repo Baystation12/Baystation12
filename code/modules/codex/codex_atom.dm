@@ -15,17 +15,12 @@
 	return entry
 
 /atom/proc/get_mechanics_info()
-	return
 
 /atom/proc/get_antag_info()
-	return
 
 /atom/proc/get_lore_info()
-	return
 
-/atom/examine(mob/user, distance, infix = "", suffix = "")
+/atom/examine(var/mob/user, var/distance = -1, var/infix = "", var/suffix = "")
 	. = ..()
-	var/datum/codex_entry/entry = SScodex.get_codex_entry(get_codex_value())
-	//This odd check v is done in case an item only has antag text but someone isn't an antag, in which case they shouldn't get the notice
-	if(entry && (entry.lore_text || entry.mechanics_text || (entry.antag_text && player_is_antag(user.mind))) && user.can_use_codex())
+	if(user.can_use_codex() && SScodex.get_codex_entry(get_codex_value()))
 		to_chat(user, "<span class='notice'>The codex has <b><a href='?src=\ref[SScodex];show_examined_info=\ref[src];show_to=\ref[user]'>relevant information</a></b> available.</span>")

@@ -2,9 +2,9 @@
 	//Liquid fuel is used for things that used to rely on volatile fuels or phoron being contained to a couple tiles.
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "fuel"
+	plane = ABOVE_TURF_PLANE
 	layer = BLOOD_LAYER
 	var/amount = 1
-	cleanable_scent = "fuel"
 
 /obj/effect/decal/cleanable/liquid_fuel/proc/Spread(exclude=list())
 	//Allows liquid fuels to sometimes flow into other tiles.
@@ -52,7 +52,7 @@
 
 /obj/effect/decal/cleanable/liquid_fuel/Initialize(mapload, amt=1, nologs=FALSE)
 	if(!nologs && !mapload)
-		log_and_message_admins(" - Liquid fuel has been spilled in [get_area(loc)]", location = loc)
+		log_and_message_admins(" - Liquid fuel has been spilled")
 	src.amount = amt
 	var/has_spread = 0
 	//Be absorbed by any other liquid fuel in the tile.

@@ -11,7 +11,7 @@
 	possible_transfer_amounts = null
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
-	volume = 30
+	volume = 60
 
 /obj/item/weapon/reagent_containers/pill/New()
 	..()
@@ -25,7 +25,7 @@
 		if(!M.can_eat(src))
 			return
 
-		M.visible_message(SPAN_NOTICE("[M] swallows a pill."), SPAN_NOTICE("You swallow \the [src]."), null, 2)
+		to_chat(M, "<span class='notice'>You swallow \the [src].</span>")
 		if(reagents.total_volume)
 			reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
 		qdel(src)
@@ -35,18 +35,13 @@
 		if(!M.can_force_feed(user, src))
 			return
 
-		user.visible_message(SPAN_WARNING("[user] attempts to force [M] to swallow \the [src]."))
+		user.visible_message("<span class='warning'>[user] attempts to force [M] to swallow \the [src].</span>")
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		if(!do_after(user, 3 SECONDS, M))
+		if(!do_mob(user, M))
 			return
-
-		if (user.get_active_hand() != src)
-			return
-
-		user.visible_message(SPAN_WARNING("[user] forces [M] to swallow \the [src]."))
+		user.visible_message("<span class='warning'>[user] forces [M] to swallow \the [src].</span>")
 		var/contained = reagentlist()
-		if (reagents.should_admin_log())
-			admin_attack_log(user, M, "Fed the victim with [name] (Reagents: [contained])", "Was fed [src] (Reagents: [contained])", "used [src] (Reagents: [contained]) to feed")
+		admin_attack_log(user, M, "Fed the victim with [name] (Reagents: [contained])", "Was fed [src] (Reagents: [contained])", "used [src] (Reagents: [contained]) to feed")
 		if(reagents.total_volume)
 			reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
 		qdel(src)
@@ -63,8 +58,7 @@
 			return
 		to_chat(user, "<span class='notice'>You dissolve \the [src] in [target].</span>")
 
-		if (reagents.should_admin_log())
-			admin_attacker_log(user, "spiked \a [target] with a pill. Reagents: [reagentlist()]")
+		admin_attacker_log(user, "spiked \a [target] with a pill. Reagents: [reagentlist()]")
 		reagents.trans_to(target, reagents.total_volume)
 		for(var/mob/O in viewers(2, user))
 			O.show_message("<span class='warning'>[user] puts something in \the [target].</span>", 1)
@@ -90,7 +84,6 @@
 	name = "toxins pill"
 	desc = "Highly toxic."
 	icon_state = "pill4"
-	volume = 50
 /obj/item/weapon/reagent_containers/pill/tox/New()
 	..()
 	reagents.add_reagent(/datum/reagent/toxin, 50)
@@ -98,10 +91,9 @@
 
 
 /obj/item/weapon/reagent_containers/pill/cyanide
-	name = "cyanide pill"
+	name = "strange pill"
 	desc = "It's marked 'KCN'. Smells vaguely of almonds."
 	icon_state = "pillC"
-	volume = 50
 /obj/item/weapon/reagent_containers/pill/cyanide/New()
 	..()
 	reagents.add_reagent(/datum/reagent/toxin/cyanide, 50)
@@ -366,7 +358,7 @@ obj/item/weapon/reagent_containers/pill/noexcutite/New()
 
 /obj/item/weapon/reagent_containers/pill/pod/cream
 	name = "creamer pod"
-
+	
 /obj/item/weapon/reagent_containers/pill/pod/cream/New()
 	..()
 	reagents.add_reagent(/datum/reagent/drink/milk, 5)
@@ -374,7 +366,7 @@ obj/item/weapon/reagent_containers/pill/noexcutite/New()
 
 /obj/item/weapon/reagent_containers/pill/pod/cream_soy
 	name = "non-dairy creamer pod"
-
+	
 /obj/item/weapon/reagent_containers/pill/pod/cream_soy/New()
 	..()
 	reagents.add_reagent(/datum/reagent/drink/milk/soymilk, 5)
@@ -382,7 +374,7 @@ obj/item/weapon/reagent_containers/pill/noexcutite/New()
 
 /obj/item/weapon/reagent_containers/pill/pod/orange
 	name = "orange flavorpod"
-
+	
 /obj/item/weapon/reagent_containers/pill/pod/orange/New()
 	..()
 	reagents.add_reagent(/datum/reagent/drink/juice/orange, 5)
@@ -390,7 +382,7 @@ obj/item/weapon/reagent_containers/pill/noexcutite/New()
 
 /obj/item/weapon/reagent_containers/pill/pod/mint
 	name = "mint flavorpod"
-
+	
 /obj/item/weapon/reagent_containers/pill/pod/mint/New()
 	..()
 	reagents.add_reagent(/datum/reagent/nutriment/mint, 1) //mint is used as a catalyst in all reactions as of writing

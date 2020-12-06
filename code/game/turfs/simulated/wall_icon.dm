@@ -15,10 +15,10 @@
 		explosion_resistance = reinf_material.explosion_resistance
 
 	if(reinf_material)
-		SetName("reinforced [material.display_name] [material.wall_name]")
+		SetName("reinforced [material.display_name] [initial(name)]")
 		desc = "It seems to be a section of hull reinforced with [reinf_material.display_name] and plated with [material.display_name]."
 	else
-		SetName("[material.display_name] [material.wall_name]")
+		SetName("[material.display_name] [initial(name)]")
 		desc = "It seems to be a section of hull plated with [material.display_name]."
 
 	set_opacity(material.opacity >= 0.5)
@@ -43,7 +43,15 @@
 	if(!damage_overlays[1]) //list hasn't been populated; note that it is always of fixed length, so we must check for membership.
 		generate_overlays()
 
-	overlays.Cut()
+	// This line apparently causes runtimes during initialization.
+	// As we don't know why, or how to resolve this, I'm blocking runtime recording until after init.
+	try
+		overlays.Cut()
+	catch(var/exception/e)
+		if(e && GAME_STATE < RUNLEVEL_GAME)
+			queue_icon_update()
+			return
+		throw e
 
 	var/image/I
 	var/base_color = paint_color ? paint_color : material.icon_colour
@@ -79,9 +87,7 @@
 				I = image('icons/turf/wall_masks.dmi', reinf_material.icon_reinf)
 				I.color = reinf_color
 				overlays += I
-	var/image/texture = material.get_wall_texture()
-	if(texture)
-		overlays += texture
+
 	if(stripe_color)
 		for(var/i = 1 to 4)
 			if(other_connections[i] != "0")

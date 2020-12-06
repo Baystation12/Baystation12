@@ -9,14 +9,23 @@
 	anchored = 1
 	idle_power_usage = 60
 	active_power_usage = 10000	//10 kW. It's a big all-body scanner.
-	construct_state = /decl/machine_construction/default/panel_closed
-	uncreated_component_parts = null
-	stat_immune = 0
+
+/obj/machinery/bodyscanner/Initialize()
+	. = ..()
+	component_parts = list(
+		new /obj/item/weapon/circuitboard/bodyscanner(src),
+		new /obj/item/weapon/stock_parts/scanning_module(src),
+		new /obj/item/weapon/stock_parts/scanning_module(src),
+		new /obj/item/weapon/stock_parts/manipulator(src),
+		new /obj/item/weapon/stock_parts/manipulator(src),
+		new /obj/item/weapon/stock_parts/console_screen(src))
+	RefreshParts()
+
 
 /obj/machinery/bodyscanner/examine(mob/user)
 	. = ..()
-	if (occupant && user.Adjacent(src))
-		occupant.examine(arglist(args))
+	if (. && occupant && user.Adjacent(src))
+		occupant.examine(user)
 
 /obj/machinery/bodyscanner/relaymove(mob/user as mob)
 	..()
@@ -29,14 +38,8 @@
 
 	if (usr.incapacitated())
 		return
-	go_out()
+	src.go_out()
 	add_fingerprint(usr)
-
-/obj/machinery/bodyscanner/AltClick(mob/user)
-	if(CanPhysicallyInteract(user))
-		eject()
-	else
-		..()
 
 /obj/machinery/bodyscanner/verb/move_inside()
 	set src in oview(1)
@@ -45,7 +48,6 @@
 
 	if(!user_can_move_target_inside(usr,usr))
 		return
-	move_target_inside(usr,usr)
 	usr.pulling = null
 	usr.client.perspective = EYE_PERSPECTIVE
 	usr.client.eye = src
@@ -67,27 +69,22 @@
 	update_icon()
 	SetName(initial(name))
 
-/obj/machinery/bodyscanner/state_transition(var/decl/machine_construction/default/new_state)
-	. = ..()
-	if(istype(new_state))
-		updateUsrDialog()
-
 /obj/machinery/bodyscanner/attackby(obj/item/grab/normal/G, user as mob)
-	if(istype(G))
-		var/mob/M = G.affecting
-		if(!user_can_move_target_inside(M, user))
+	if(!istype(G))
+		if(default_deconstruction_screwdriver(user, G))
+			updateUsrDialog()
 			return
-		move_target_inside(M,user)
-		qdel(G)
-		return TRUE
-	return ..()
+		if(default_deconstruction_crowbar(user, G))
+			return
+		if(default_part_replacement(user, G))
+			return
+	var/mob/M = G.affecting
+	if(!user_can_move_target_inside(M, user))
+		return
+	qdel(G)
 
 /obj/machinery/bodyscanner/proc/user_can_move_target_inside(var/mob/target, var/mob/user)
 	if(!istype(user) || !istype(target))
-		return FALSE
-	if(user.incapacitated())
-		return FALSE
-	if(!target.simulated)
 		return FALSE
 	if(occupant)
 		to_chat(user, "<span class='warning'>The scanner is already occupied!</span>")
@@ -98,9 +95,7 @@
 	if(target.buckled)
 		to_chat(user, "<span class='warning'>Unbuckle the subject before attempting to move them.</span>")
 		return FALSE
-	return TRUE
 
-/obj/machinery/bodyscanner/proc/move_target_inside(var/mob/target, var/mob/user)
 	target.forceMove(src)
 	src.occupant = target
 
@@ -110,25 +105,23 @@
 	SetName("[name] ([occupant])")
 
 	src.add_fingerprint(user)
+	return TRUE
 
 /obj/machinery/bodyscanner/on_update_icon()
 	if(!occupant)
-		icon_state = "body_scanner_0"
-	else if(stat & (BROKEN|NOPOWER))
-		icon_state = "body_scanner_1"
+		src.icon_state = "body_scanner_0"
 	else
-		icon_state = "body_scanner_2"
+		src.icon_state = "body_scanner_1"
 
 //Like grap-put, but for mouse-drop.
 /obj/machinery/bodyscanner/MouseDrop_T(var/mob/target, var/mob/user)
 	if(!CanMouseDrop(target, user) || !istype(target))
 		return FALSE
+	user.visible_message("<span class='notice'>\The [user] begins placing \the [target] into \the [src].</span>", "<span class='notice'>You start placing \the [target] into \the [src].</span>")
+	if(!do_after(user, 30, src))
+		return
 	if(!user_can_move_target_inside(target, user))
 		return
-	user.visible_message("<span class='notice'>\The [user] begins placing \the [target] into \the [src].</span>", "<span class='notice'>You start placing \the [target] into \the [src].</span>")
-	if(!do_after(user, 30, src) || !user_can_move_target_inside(target, user))
-		return
-	move_target_inside(target,user)
 
 /obj/machinery/bodyscanner/ex_act(severity)
 	switch(severity)

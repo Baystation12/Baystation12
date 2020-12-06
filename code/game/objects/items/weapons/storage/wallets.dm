@@ -38,10 +38,7 @@
 		/obj/item/weapon/stamp,
 		/obj/item/weapon/key,
 		/obj/item/clothing/accessory/badge,
-		/obj/item/clothing/accessory/medal,
-		/obj/item/clothing/accessory/armor/tag,
-		/obj/item/clothing/ring
-	)
+		/obj/item/clothing/accessory/medal)
 	slot_flags = SLOT_ID
 
 	var/obj/item/weapon/card/id/front_id = null
@@ -74,7 +71,7 @@
 	overlays.Cut()
 	if(front_id)
 		var/tiny_state = "id-generic"
-		if(("id-"+front_id.icon_state) in icon_states(icon))
+		if("id-"+front_id.icon_state in icon_states(icon))
 			tiny_state = "id-"+front_id.icon_state
 		var/image/tiny_image = new/image(icon, icon_state = tiny_state)
 		tiny_image.appearance_flags = RESET_COLOR

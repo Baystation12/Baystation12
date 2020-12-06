@@ -14,6 +14,7 @@
 	//computer stuff
 	density = 1
 	anchored = 1.0
+	circuit = /obj/item/weapon/circuitboard/powermonitor
 	var/alerting = 0
 	idle_power_usage = 300
 	active_power_usage = 300
@@ -45,9 +46,12 @@
 	power_monitor = new(src)
 
 // On user click opens the UI of this computer.
-/obj/machinery/computer/power_monitor/interface_interact(mob/user)
+/obj/machinery/computer/power_monitor/attack_hand(mob/user)
+	add_fingerprint(user)
+
+	if(stat & (BROKEN|NOPOWER))
+		return
 	ui_interact(user)
-	return TRUE
 
 // Uses dark magic to operate the NanoUI of this computer.
 /obj/machinery/computer/power_monitor/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)

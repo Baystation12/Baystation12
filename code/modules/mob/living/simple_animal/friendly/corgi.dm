@@ -12,6 +12,8 @@
 	emote_see = list("shakes its head", "shivers")
 	speak_chance = 1
 	turns_per_move = 10
+	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/corgi
+	meat_amount = 3
 	response_help  = "pets"
 	response_disarm = "bops"
 	response_harm   = "kicks"
@@ -19,15 +21,9 @@
 	mob_size = 8
 	possession_candidate = 1
 	holder_type = /obj/item/weapon/holder/corgi
-	pass_flags = PASS_FLAG_TABLE
-	density = 0
-
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/corgi
-	meat_amount = 3
-	skin_material = MATERIAL_SKIN_FUR_ORANGE
-
 	var/obj/item/inventory_head
 	var/obj/item/inventory_back
+	pass_flags = PASS_FLAG_TABLE
 
 //IAN! SQUEEEEEEEEE~
 /mob/living/simple_animal/corgi/Ian
@@ -118,7 +114,7 @@
 		if(health <= 0)
 			head_icon_state += "2"
 
-		var/icon/head_icon = image('icons/mob/simple_animal/corgi_head.dmi',head_icon_state)
+		var/icon/head_icon = image('icons/mob/corgi_head.dmi',head_icon_state)
 		if(head_icon)
 			overlays += head_icon
 
@@ -127,9 +123,11 @@
 		if(health <= 0)
 			back_icon_state += "2"
 
-		var/icon/back_icon = image('icons/mob/simple_animal/corgi_back.dmi',back_icon_state)
+		var/icon/back_icon = image('icons/mob/corgi_back.dmi',back_icon_state)
 		if(back_icon)
 			overlays += back_icon
+	return
+
 
 /mob/living/simple_animal/corgi/puppy
 	name = "\improper corgi puppy"
@@ -138,16 +136,13 @@
 	icon_state = "puppy"
 	icon_living = "puppy"
 	icon_dead = "puppy_dead"
-	meat_amount = 1
-	skin_amount = 3
-	bone_amount = 3
 
 //pupplies cannot wear anything.
-/mob/living/simple_animal/corgi/puppy/OnTopic(mob/user, href_list)
+/mob/living/simple_animal/corgi/puppy/Topic(href, href_list)
 	if(href_list["remove_inv"] || href_list["add_inv"])
-		to_chat(user, "<span class='warning'>You can't fit this on [src]</span>")
-		return TOPIC_HANDLED
-	return ..()
+		to_chat(usr, "<span class='warning'>You can't fit this on [src]</span>")
+		return
+	..()
 
 //LISA! SQUEEEEEEEEE~
 /mob/living/simple_animal/corgi/Lisa
@@ -165,11 +160,11 @@
 	var/puppies = 0
 
 //Lisa already has a cute bow!
-/mob/living/simple_animal/corgi/Lisa/OnTopic(mob/user, href_list)
+/mob/living/simple_animal/corgi/Lisa/Topic(href, href_list)
 	if(href_list["remove_inv"] || href_list["add_inv"])
-		to_chat(user, "<span class='warning'>[src] already has a cute bow!</span>")
-		return TOPIC_HANDLED
-	return ..()
+		to_chat(usr, "<span class='warning'>[src] already has a cute bow!</span>")
+		return
+	..()
 
 /mob/living/simple_animal/corgi/Lisa/Life()
 	. = ..()

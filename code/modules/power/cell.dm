@@ -18,9 +18,6 @@
 
 /obj/item/weapon/cell/Initialize()
 	. = ..()
-	if(type == /obj/item/weapon/cell)
-		crash_with("Invalid use of cell base type")
-		return INITIALIZE_HINT_QDEL
 	if(isnull(charge))
 		charge = maxcharge
 	update_icon()
@@ -40,13 +37,10 @@
 /obj/item/weapon/cell/on_update_icon()
 
 	var/new_overlay_state = null
-	switch(percent())
-		if(95 to 100)
-			new_overlay_state = "cell-o2"
-		if(25 to 95)
-			new_overlay_state = "cell-o1"
-		if(0.05 to 25)
-			new_overlay_state = "cell-o0"
+	if(percent() >= 95)
+		new_overlay_state = "cell-o2"
+	else if(charge >= 0.05)
+		new_overlay_state = "cell-o1"
 
 	if(new_overlay_state != overlay_state)
 		overlay_state = new_overlay_state
@@ -135,11 +129,6 @@
 	maxcharge = 100
 	matter = list(MATERIAL_STEEL = 70, MATERIAL_GLASS = 5)
 
-/obj/item/weapon/cell/device/Initialize()
-	. = ..()
-	if (type == /obj/item/weapon/cell/device)
-		return INITIALIZE_HINT_QDEL
-
 /obj/item/weapon/cell/device/variable/Initialize(mapload, charge_amount)
 	maxcharge = charge_amount
 	return ..(mapload)
@@ -169,8 +158,16 @@
 	name = "standard power cell"
 	desc = "A standard and relatively cheap power cell, commonly used."
 	origin_tech = list(TECH_POWER = 0)
-	maxcharge = 500
+	maxcharge = 250
 	matter = list(MATERIAL_STEEL = 700, MATERIAL_GLASS = 40, MATERIAL_PLASTIC = 20)
+
+/obj/item/weapon/cell/apc
+	name = "APC power cell"
+	desc = "A special power cell designed for heavy-duty use in area power controllers."
+	origin_tech = list(TECH_POWER = 1)
+	maxcharge = 500
+	matter = list(MATERIAL_STEEL = 700, MATERIAL_GLASS = 50, MATERIAL_PLASTIC = 20)
+
 
 /obj/item/weapon/cell/high
 	name = "advanced power cell"
@@ -182,6 +179,15 @@
 
 /obj/item/weapon/cell/high/empty
 	charge = 0
+
+/obj/item/weapon/cell/mecha
+	name = "exosuit power cell"
+	desc = "A special power cell designed for heavy-duty use in industrial exosuits."
+	origin_tech = list(TECH_POWER = 3)
+	icon_state = "hcell"
+	maxcharge = 1500
+	matter = list(MATERIAL_STEEL = 700, MATERIAL_GLASS = 70, MATERIAL_ALUMINIUM = 20)
+
 
 /obj/item/weapon/cell/super
 	name = "enhanced power cell"
@@ -216,8 +222,8 @@
 /obj/item/weapon/cell/infinite/check_charge()
 	return 1
 
-/obj/item/weapon/cell/infinite/use(amount)
-	return amount
+/obj/item/weapon/cell/infinite/use()
+	return 1
 
 
 /obj/item/weapon/cell/potato
@@ -233,29 +239,7 @@
 	name = "charged slime core"
 	desc = "A yellow slime core infused with phoron, it crackles with power."
 	origin_tech = list(TECH_POWER = 2, TECH_BIO = 4)
-	icon = 'icons/mob/simple_animal/slimes.dmi' //'icons/obj/harvest.dmi'
+	icon = 'icons/mob/slimes.dmi' //'icons/obj/harvest.dmi'
 	icon_state = "yellow slime extract" //"potato_battery"
 	maxcharge = 200
 	matter = null
-
-// Self-charging power cell.
-/obj/item/weapon/cell/mantid
-	name = "mantid microfusion plant"
-	desc = "An impossibly tiny fusion reactor of mantid design."
-	icon = 'icons/obj/ascent.dmi'
-	icon_state = "plant"
-	maxcharge = 1500
-	w_class = ITEM_SIZE_NORMAL
-	var/recharge_amount = 12
-
-/obj/item/weapon/cell/mantid/Initialize()
-	START_PROCESSING(SSobj, src)
-	. = ..()
-
-/obj/item/weapon/cell/mantid/Destroy()
-	STOP_PROCESSING(SSobj, src)
-	. = ..()
-
-/obj/item/weapon/cell/mantid/Process()
-	if(charge < maxcharge)
-		give(recharge_amount)

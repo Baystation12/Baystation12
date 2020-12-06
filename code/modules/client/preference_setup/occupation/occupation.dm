@@ -22,29 +22,29 @@
 	sort_order = 1
 	var/datum/browser/panel
 
-/datum/category_item/player_setup_item/occupation/load_character(datum/pref_record_reader/R)
-	pref.alternate_option = R.read("alternate_option")
-	pref.job_high = R.read("job_high")
-	pref.job_medium = R.read("job_medium")
-	pref.job_low = R.read("job_low")
-	pref.player_alt_titles = R.read("player_alt_titles")
-	pref.skills_saved = R.read("skills_saved")
-	pref.branches = R.read("branches")
-	pref.ranks = R.read("ranks")
-	pref.hiding_maps = R.read("hiding_maps")
+/datum/category_item/player_setup_item/occupation/load_character(var/savefile/S)
+	from_file(S["alternate_option"], 	pref.alternate_option)
+	from_file(S["job_high"],			pref.job_high)
+	from_file(S["job_medium"],			pref.job_medium)
+	from_file(S["job_low"],				pref.job_low)
+	from_file(S["player_alt_titles"],	pref.player_alt_titles)
+	from_file(S["skills_saved"],		pref.skills_saved)
+	from_file(S["branches"],			pref.branches)
+	from_file(S["ranks"],				pref.ranks)
+	from_file(S["hiding_maps"],			pref.hiding_maps)
 	load_skills()
 
-/datum/category_item/player_setup_item/occupation/save_character(datum/pref_record_writer/W)
+/datum/category_item/player_setup_item/occupation/save_character(var/savefile/S)
 	save_skills()
-	W.write("alternate_option", pref.alternate_option)
-	W.write("job_high", pref.job_high)
-	W.write("job_medium", pref.job_medium)
-	W.write("job_low", pref.job_low)
-	W.write("player_alt_titles", pref.player_alt_titles)
-	W.write("skills_saved", pref.skills_saved)
-	W.write("branches", pref.branches)
-	W.write("ranks", pref.ranks)
-	W.write("hiding_maps", pref.hiding_maps)
+	to_file(S["alternate_option"],		pref.alternate_option)
+	to_file(S["job_high"],				pref.job_high)
+	to_file(S["job_medium"],			pref.job_medium)
+	to_file(S["job_low"],				pref.job_low)
+	to_file(S["player_alt_titles"],		pref.player_alt_titles)
+	to_file(S["skills_saved"],			pref.skills_saved)
+	to_file(S["branches"],				pref.branches)
+	to_file(S["ranks"],					pref.ranks)
+	to_file(S["hiding_maps"],			pref.hiding_maps)
 
 /datum/category_item/player_setup_item/occupation/sanitize_character()
 	if(!istype(pref.job_medium))		pref.job_medium = list()
@@ -70,8 +70,9 @@
 
 	pref.skills_allocated = pref.sanitize_skills(pref.skills_allocated)		//this proc also automatically computes and updates points_by_job
 
-	for(var/job_type in SSjobs.types_to_datums)
-		var/datum/job/job = SSjobs.types_to_datums[job_type]
+	var/jobs_by_type = decls_repository.get_decls(GLOB.using_map.allowed_jobs)
+	for(var/job_type in jobs_by_type)
+		var/datum/job/job = jobs_by_type[job_type]
 		var/alt_title = pref.player_alt_titles[job.title]
 		if(alt_title && !(alt_title in job.alt_titles))
 			pref.player_alt_titles -= job.title
@@ -143,14 +144,13 @@
 				rank_branch_string = "[branch_string][rank_branch_string]"
 
 				var/title = job.title
-				var/title_link = length(job.alt_titles) ? "<a href='?src=\ref[src];select_alt_title=\ref[job]'>[pref.GetPlayerAltTitle(job)]</a>" : job.title
+				var/title_link = job.alt_titles ? "<a href='?src=\ref[src];select_alt_title=\ref[job]'>[pref.GetPlayerAltTitle(job)]</a>" : job.title
 				if((title in SSjobs.titles_by_department(COM)) || (title == "AI"))//Bold head jobs
 					title_link = "<b>[title_link]</b>"
 
 				var/help_link = "</td><td width = '10%' align = 'center'><a href='?src=\ref[src];job_info=[title]'>?</a></td>"
 				lastJob = job
 
-				var/bodytype = S.get_bodytype()
 				var/bad_message = ""
 				if(job.total_positions == 0 && job.spawn_positions == 0)
 					bad_message = "<b>\[UNAVAILABLE]</b>"
@@ -159,8 +159,8 @@
 				else if(!job.player_old_enough(user.client))
 					var/available_in_days = job.available_in_days(user.client)
 					bad_message = "\[IN [(available_in_days)] DAYS]"
-				else if(LAZYACCESS(job.minimum_character_age, bodytype) && user.client && (user.client.prefs.age < job.minimum_character_age[bodytype]))
-					bad_message = "\[MIN CHAR AGE: [job.minimum_character_age[bodytype]]]"
+				else if(job.minimum_character_age && user.client && (user.client.prefs.age < job.minimum_character_age))
+					bad_message = "\[MINIMUM CHARACTER AGE: [job.minimum_character_age]]"
 				else if(!job.is_species_allowed(S))
 					bad_message = "<b>\[SPECIES RESTRICTED]</b>"
 				else if(!S.check_background(job, user.client.prefs))
@@ -325,7 +325,7 @@
 				set_to = JOB_LEVEL_NEVER
 			else if(set_to > JOB_LEVEL_NEVER)
 				set_to = JOB_LEVEL_HIGH
-		if(SetJob(user, set_job, set_to))
+		if(SetJob(user, set_job, set_to)) 
 			return (pref.equip_preview_mob ? TOPIC_REFRESH_UPDATE_PREVIEW : TOPIC_REFRESH)
 
 	else if(href_list["char_branch"])
@@ -390,7 +390,7 @@
 		show_browser(user, jointext(HTML, null), "window=\ref[user]skillinfo")
 
 	else if(href_list["job_info"])
-
+		
 		var/rank = href_list["job_info"]
 		var/datum/job/job = SSjobs.get_by_title(rank)
 
@@ -426,7 +426,7 @@
 
 	else if(href_list["job_wiki"])
 		var/rank = href_list["job_wiki"]
-		send_link(user,"[config.wikiurl][rank]")
+		open_link(user,"[config.wikiurl][rank]")
 
 	return ..()
 
@@ -438,7 +438,7 @@
 		pref.player_alt_titles[job.title] = new_title
 
 /datum/category_item/player_setup_item/occupation/proc/SetJob(mob/user, role, level)
-
+	
 	level = Clamp(level, JOB_LEVEL_HIGH, JOB_LEVEL_NEVER)
 	var/datum/job/job = SSjobs.get_by_title(role, TRUE)
 	if(!job)
@@ -508,9 +508,9 @@
  */
 /datum/category_item/player_setup_item/proc/prune_job_prefs()
 	var/allowed_titles = list()
-
-	for(var/job_type in SSjobs.types_to_datums)
-		var/datum/job/job = SSjobs.types_to_datums[job_type]
+	var/jobs_by_type = decls_repository.get_decls(GLOB.using_map.allowed_jobs)
+	for(var/job_type in jobs_by_type)
+		var/datum/job/job = jobs_by_type[job_type]
 		allowed_titles += job.title
 
 		if(job.title == pref.job_high)

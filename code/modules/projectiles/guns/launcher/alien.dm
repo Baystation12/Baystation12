@@ -22,7 +22,7 @@
 		update_icon()
 
 /obj/item/weapon/gun/launcher/alien/examine(mob/user)
-	. = ..()
+	..(user)
 	to_chat(user, "It has [ammo] [ammo_name]\s remaining.")
 
 /obj/item/weapon/gun/launcher/alien/consume_next_projectile()
@@ -32,9 +32,13 @@
 	ammo--
 	return new ammo_type
 
-/obj/item/weapon/gun/launcher/alien/Initialize()
-	. = ..()
-	set_extension(src, /datum/extension/voxform)
+/obj/item/weapon/gun/launcher/alien/special_check(user)
+	if(istype(user,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = user
+		if(H.species && H.species.get_bodytype(H) != SPECIES_VOX)
+			to_chat(user, "<span class='warning'>\The [src] does not respond to you!</span>")
+			return 0
+	return ..()
 
 //Vox pinning weapon.
 /obj/item/weapon/gun/launcher/alien/spikethrower
@@ -49,7 +53,7 @@
 	icon_state = "spikethrower3"
 	item_state = "spikethrower"
 	fire_sound_text = "a strange noise"
-	fire_sound = 'sound/weapons/spike.ogg'
+	fire_sound = 'sound/weapons/bladeslice.ogg'
 
 /obj/item/weapon/gun/launcher/alien/spikethrower/on_update_icon()
 	icon_state = "spikethrower[ammo]"

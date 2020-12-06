@@ -72,6 +72,7 @@
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		src.connected = new /obj/structure/m_tray( src.loc )
 		step(src.connected, src.dir)
+		src.connected.layer = OBJ_LAYER
 		var/turf/T = get_step(src, src.dir)
 		if (T.contents.Find(src.connected))
 			src.connected.connected = src
@@ -112,6 +113,7 @@
 		return
 	src.connected = new /obj/structure/m_tray( src.loc )
 	step(src.connected, EAST)
+	src.connected.layer = OBJ_LAYER
 	var/turf/T = get_step(src, EAST)
 	if (T.contents.Find(src.connected))
 		src.connected.connected = src
@@ -188,11 +190,22 @@
 	var/cremating = FALSE
 	var/id = 1
 	var/locked = FALSE
+	var/_wifi_id
+	var/datum/wifi/receiver/button/crematorium/wifi_receiver
+
+
+/obj/structure/crematorium/Initialize()
+	. = ..()
+	if(_wifi_id)
+		wifi_receiver = new(_wifi_id, src)
 
 /obj/structure/crematorium/Destroy()
 	if(connected)
 		qdel(connected)
 		connected = null
+	if(wifi_receiver)
+		qdel(wifi_receiver)
+		wifi_receiver = null
 	return ..()
 
 /obj/structure/crematorium/proc/update()
@@ -240,11 +253,11 @@
 				A.forceMove(src)
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		qdel(src.connected)
-		src.connected = null
 	else if(src.locked == 0)
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		src.connected = new /obj/structure/c_tray(src.loc)
 		step(src.connected, dir)
+		src.connected.layer = OBJ_LAYER
 		var/turf/T = get_step(src, dir)
 		if (T.contents.Find(src.connected))
 			src.connected.connected = src
@@ -254,7 +267,6 @@
 			src.connected.icon_state = "cremat"
 		else
 			qdel(src.connected)
-			src.connected = null
 	src.add_fingerprint(user)
 	update()
 
@@ -278,6 +290,7 @@
 		return
 	src.connected = new /obj/structure/c_tray( src.loc )
 	step(src.connected, SOUTH)
+	src.connected.layer = OBJ_LAYER
 	var/turf/T = get_step(src, SOUTH)
 	if (T.contents.Find(src.connected))
 		src.connected.connected = src
@@ -298,7 +311,7 @@
 		return
 
 	else
-		if(length(search_contents_for(/obj/item/weapon/disk/nuclear)))
+		if(!isemptylist(src.search_contents_for(/obj/item/weapon/disk/nuclear)))
 			to_chat(loc, "The button's status indicator flashes yellow, indicating that something important is inside the crematorium, and must be removed.")
 			return
 		src.audible_message("<span class='warning'>You hear a roar as the [src] activates.</span>", 1)
@@ -312,11 +325,8 @@
 			if(iscarbon(M))
 				var/mob/living/carbon/C = M
 				for(var/I, I < 60, I++)
-					C.bodytemperature += 50
-					C.adjustFireLoss(20)
-					C.adjustBrainLoss(5)
 
-					if(C.stat == DEAD || !(C in contents)) //In case we die or are removed at any point.
+					if(C.stat >= UNCONSCIOUS || !(C in contents)) //In case we die or are removed at any point.
 						cremating = 0
 						update()
 						break
@@ -352,7 +362,7 @@
 									shake_animation()
 
 
-			if(M.stat == DEAD)
+			if(M.stat >= DEAD)
 				if(round_is_spooky())
 					if(prob(50))
 						playsound(src, 'sound/effects/ghost.ogg', 10, 5)
@@ -426,16 +436,18 @@
 	icon = 'icons/obj/power.dmi'
 	icon_state = "crema_switch"
 	req_access = list(access_crematorium)
-	id_tag = 1
+	id = 1
 
 /obj/machinery/button/crematorium/on_update_icon()
 	return
 
-/obj/machinery/button/crematorium/activate(mob/user)
-	if(operating)
+/obj/machinery/button/crematorium/attack_hand(mob/user as mob)
+	if(..())
 		return
-	for(var/obj/structure/crematorium/C in range())
-		if (C.id == id_tag)
-			if (!C.cremating)
-				C.cremate(user)
-	..() // sets operating for click cooldown.
+	if(src.allowed(user))
+		for (var/obj/structure/crematorium/C in world)
+			if (C.id == id)
+				if (!C.cremating)
+					C.cremate(user)
+	else
+		to_chat(usr, "<span class='warning'>Access denied.</span>")

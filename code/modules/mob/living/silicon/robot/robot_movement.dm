@@ -10,7 +10,7 @@
 
 /mob/living/silicon/robot/Allow_Spacemove()
 	if(module)
-		for(var/obj/item/weapon/tank/jetpack/J in module.equipment)
+		for(var/obj/item/weapon/tank/jetpack/J in module.modules)
 			if(J && J.allow_thrust(0.01))
 				return 1
 	. = ..()
@@ -25,4 +25,4 @@
 	if(module_active && istype(module_active,/obj/item/borg/combat/mobility))
 		tally-=3
 
-	return tally
+	return tally+config.robot_delay

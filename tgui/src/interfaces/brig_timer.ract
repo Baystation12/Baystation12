@@ -1,0 +1,38 @@
+<script>
+  component.exports = {
+    computed: {
+      setsecond() {
+        return Math.round(((this.get('data.timetoset') / 10) % 60))
+      },
+      setminute() {
+        return Math.round(((this.get('data.timetoset') / 10) - this.get('setsecond')) / 60)
+      },
+      getsecond() {
+        return Math.round(this.get('data.timeleft') % 60)
+      },
+      getminute() {
+        return Math.round((this.get('data.timeleft') - this.get('getsecond')) / 60)
+      }
+    }
+  }
+</script>
+
+<ui-display title='Cell Timer' button>
+  {{#partial button}}
+      <ui-button icon='clock-o' style='{{data.timing ? "selected" : null}}' action='{{data.timing ? "stop" : "start"}}'>{{data.timing ? "Stop" : "Start"}}</ui-button>
+      {{#each data.flashes}}
+        <ui-button icon='lightbulb-o' action='flash' style='{{status ? null : "disabled"}}'>{{status ? "Flash" : "Recharging"}}</ui-button>
+      {{/each}}
+  {{/partial}}
+  <ui-section>
+    <ui-button icon='fast-backward' action='time' params='{"adjust": -600}' style='{{data.timing ? "disabled" : null}}'></ui-button>
+    <ui-button icon='backward' action='time' params='{"adjust": -100}' style='{{data.timing ? "disabled" : null}}'></ui-button>
+    {{#if data.timing}}
+      <span>{{text.zeroPad(getminute, 2)}}:{{text.zeroPad(getsecond, 2)}}</span>
+    {{else}}
+      <span>{{text.zeroPad(setminute, 2)}}:{{text.zeroPad(setsecond, 2)}}</span>
+    {{/if}}
+    <ui-button icon='forward' action='time' params='{"adjust": 100}' style='{{data.timing ? "disabled" : null}}'></ui-button>
+    <ui-button icon='fast-forward' action='time' params='{"adjust": 600}' style='{{data.timing ? "disabled" : null}}'></ui-button>
+  </ui-section>
+</ui-display>

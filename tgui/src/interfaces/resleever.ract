@@ -1,0 +1,18 @@
+<ui-display title='Neural Lace Resleever'>
+    <ui-section label='Occupant'>
+        {{data.name}}
+    </ui-section>
+    <ui-section label='Neural Lace backup'>
+        {{data.lace}}
+    </ui-section>
+    <ui-section label='Procedure Progress'>
+    <ui-bar min='0' max='{{data.timetosleeve}}'
+      value='{{data.remaining}}'></ui-bar>
+    </ui-section>
+    <ui-section>
+        <ui-button style='{{data.ready ? null : "disabled"}}' action='begin'>Start Procedure</ui-button>
+    </ui-section>
+    <ui-section>
+        <ui-button icon='eject' state='{{data.isOccupiedEjectable ? null : "disabled"}}' action='eject'>Eject Occupant</ui-button>
+        <ui-button icon='eject' state='{{data.isLaceEjectable ? null : "disabled"}}' action='ejectlace'>Eject Neural Lace</ui-button>
+    </ui-section>

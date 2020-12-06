@@ -1,11 +1,9 @@
 /mob/living/silicon/sil_brainmob
-
-	meat_type = null
-	meat_amount = 0
-	skin_material = null
-	skin_amount = 0
-	bone_material = null
-	bone_amount = 0
+	var/obj/item/organ/internal/posibrain/container = null
+	var/emp_damage = 0//Handles a type of MMI damage
+	var/alert = null
+	var/list/owner_channels = list()
+	var/list/law_channels = list()
 
 	use_me = 0 //Can't use the me verb, it's a freaking immobile brain
 	icon = 'icons/obj/surgery.dmi'
@@ -14,17 +12,11 @@
 		/datum/nano_module/law_manager
 	)
 
-	var/obj/item/organ/internal/posibrain/container = null
-	var/emp_damage = 0//Handles a type of MMI damage
-	var/alert = null
-	var/list/owner_channels = list()
-	var/list/law_channels = list()
-
 /mob/living/silicon/sil_brainmob/New()
 	reagents = new/datum/reagents(1000, src)
 	if(istype(loc, /obj/item/organ/internal/posibrain))
 		container = loc
-	add_language(LANGUAGE_ROBOT_GLOBAL)
+	add_language("Robot Talk")
 	..()
 
 /mob/living/silicon/sil_brainmob/Destroy()
@@ -35,7 +27,9 @@
 	return ..()
 
 /mob/living/silicon/sil_brainmob/UpdateLyingBuckledAndVerbStatus()
-	if(container && istype(container, /obj/item/organ/internal/posibrain) && istype(container.loc, /turf))
+	if(in_contents_of(/obj/mecha))
+		use_me = 1
+	else if(container && istype(container, /obj/item/organ/internal/posibrain) && istype(container.loc, /turf))
 		use_me = 1
 
 /mob/living/silicon/sil_brainmob/isSynthetic()

@@ -1,7 +1,6 @@
 #include "bearcat_areas.dm"
 #include "bearcat_jobs.dm"
 #include "bearcat_access.dm"
-#include "bearcat_radio.dm"
 
 /obj/effect/submap_landmark/joinable_submap/bearcat
 	name = "FTV Bearcat"
@@ -15,14 +14,14 @@
 		/datum/job/submap/bearcat_crewman
 	)
 
-/obj/effect/overmap/visitable/ship/bearcat
+/obj/effect/overmap/ship/bearcat
 	name = "light freighter"
 	color = "#00ffff"
 	vessel_mass = 60
 	max_speed = 1/(10 SECONDS)
 	burn_delay = 10 SECONDS
 
-/obj/effect/overmap/visitable/ship/bearcat/New()
+/obj/effect/overmap/ship/bearcat/New()
 	name = "[pick("FTV","ITV","IEV")] [pick("Bearcat", "Firebug", "Defiant", "Unsinkable","Horizon","Vagrant")]"
 	for(var/area/ship/scrap/A)
 		A.name = "\improper [name] - [A.name]"
@@ -37,21 +36,6 @@
 	suffixes = list("bearcat/bearcat-1.dmm", "bearcat/bearcat-2.dmm")
 	cost = 1
 	shuttles_to_initialise = list(/datum/shuttle/autodock/ferry/lift)
-	area_usage_test_exempted_root_areas = list(/area/ship)
-	apc_test_exempt_areas = list(
-		/area/ship/scrap/maintenance/engine/port = NO_SCRUBBER|NO_VENT,
-		/area/ship/scrap/maintenance/engine/starboard = NO_SCRUBBER|NO_VENT,
-		/area/ship/scrap/crew/hallway/port= NO_SCRUBBER|NO_VENT,
-		/area/ship/scrap/crew/hallway/starboard= NO_SCRUBBER|NO_VENT,
-		/area/ship/scrap/maintenance/hallway = NO_SCRUBBER|NO_VENT,
-		/area/ship/scrap/maintenance/lower = NO_SCRUBBER|NO_VENT,
-		/area/ship/scrap/maintenance/atmos = NO_SCRUBBER,
-		/area/ship/scrap/escape_port = NO_SCRUBBER|NO_VENT,
-		/area/ship/scrap/escape_star = NO_SCRUBBER|NO_VENT,
-		/area/ship/scrap/shuttle/lift = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/ship/scrap/command/hallway = NO_SCRUBBER|NO_VENT
-	)
-	spawn_weight = 0.67
 
 /datum/shuttle/autodock/ferry/lift
 	name = "Cargo Lift"
@@ -87,6 +71,9 @@
 
 /obj/machinery/power/apc/derelict
 	cell_type = /obj/item/weapon/cell/crap/empty
+	lighting = 0
+	equipment = 0
+	environ = 0
 	locked = 0
 	coverlocked = 0
 
@@ -95,6 +82,18 @@
 
 /obj/machinery/door/airlock/autoname/engineering
 	door_color = COLOR_AMBER
+
+/turf/simulated/floor/usedup
+	initial_gas = list("carbon_dioxide" = MOLES_O2STANDARD, "nitrogen" = MOLES_N2STANDARD)
+
+/turf/simulated/floor/tiled/usedup
+	initial_gas = list("carbon_dioxide" = MOLES_O2STANDARD, "nitrogen" = MOLES_N2STANDARD)
+
+/turf/simulated/floor/tiled/dark/usedup
+	initial_gas = list("carbon_dioxide" = MOLES_O2STANDARD, "nitrogen" = MOLES_N2STANDARD)
+
+/turf/simulated/floor/tiled/white/usedup
+	initial_gas = list("carbon_dioxide" = MOLES_O2STANDARD, "nitrogen" = MOLES_N2STANDARD)
 
 /obj/effect/landmark/deadcap
 	name = "Dead Captain"
@@ -120,7 +119,7 @@
 	uniform = /obj/item/clothing/under/casual_pants/classicjeans
 	suit = /obj/item/clothing/suit/storage/hooded/wintercoat
 	shoes = /obj/item/clothing/shoes/black
-	r_pocket = /obj/item/device/radio/map_preset/bearcat
+	r_pocket = /obj/item/device/radio
 
 /decl/hierarchy/outfit/deadcap/post_equip(mob/living/carbon/human/H)
 	..()

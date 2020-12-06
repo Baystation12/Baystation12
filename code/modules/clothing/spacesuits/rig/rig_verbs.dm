@@ -164,7 +164,7 @@
 
 	visor.engage()
 
-/obj/item/weapon/rig/proc/alter_voice()
+/obj/item/weapon/rig/verb/alter_voice()
 
 	set name = "Configure Voice Synthesiser"
 	set desc = "Toggles or configures your voice synthesizer."
@@ -197,7 +197,7 @@
 
 	if(malfunction_check(usr))
 		return
-
+	
 	if(!check_power_cost(usr, 0, 0, 0, 0))
 		return
 
@@ -217,12 +217,12 @@
 	var/obj/item/rig_module/module = input("Which module do you wish to select?") as null|anything in selectable
 
 	if(!istype(module))
-		deselect_module()
-		to_chat(usr, "<span class='info'><b>Primary system is now: deselected.</b></span>")
+		selected_module = null
+		to_chat(usr, "<font color='blue'><b>Primary system is now: deselected.</b></font>")
 		return
 
-	module.select()
-	to_chat(usr, "<span class='info'><b>Primary system is now: [selected_module.interface_name].</b></span>")
+	selected_module = module
+	to_chat(usr, "<font color='blue'><b>Primary system is now: [selected_module.interface_name].</b></font>")
 
 /obj/item/weapon/rig/verb/toggle_module()
 
@@ -256,10 +256,10 @@
 		return
 
 	if(module.active)
-		to_chat(usr, "<span class='info'><b>You attempt to deactivate \the [module.interface_name].</b></span>")
+		to_chat(usr, "<font color='blue'><b>You attempt to deactivate \the [module.interface_name].</b></font>")
 		module.deactivate()
 	else
-		to_chat(usr, "<span class='info'><b>You attempt to activate \the [module.interface_name].</b></span>")
+		to_chat(usr, "<font color='blue'><b>You attempt to activate \the [module.interface_name].</b></font>")
 		module.activate()
 
 /obj/item/weapon/rig/verb/engage_module()
@@ -293,5 +293,5 @@
 	if(!istype(module))
 		return
 
-	to_chat(usr, "<span class='info'><b>You attempt to engage the [module.interface_name].</b></span>")
+	to_chat(usr, "<font color='blue'><b>You attempt to engage the [module.interface_name].</b></font>")
 	module.engage()

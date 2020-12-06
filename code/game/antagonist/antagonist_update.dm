@@ -32,7 +32,7 @@
 	if(!antag_indicator || !other.current || !recipient.current)
 		return
 	var/indicator = (faction_indicator && (other in faction_members)) ? faction_indicator : antag_indicator
-	var/image/I = image('icons/mob/hud.dmi', loc = other.current, icon_state = indicator, layer = ABOVE_HUMAN_LAYER)
+	var/image/I = image('icons/mob/hud.dmi', loc = other.current, icon_state = indicator, layer = LIGHTING_LAYER+0.1)
 	if(ishuman(other.current))
 		var/mob/living/carbon/human/H = other.current
 		I.pixel_x = H.species.antaghud_offset_x

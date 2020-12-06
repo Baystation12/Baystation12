@@ -85,7 +85,7 @@
 	    /obj/item/device/flashlight,
 	    /obj/item/weapon/tank/emergency/oxygen/engi,
 	    /obj/item/clothing/glasses/hud/health,
-	    /obj/item/device/scanner/health,
+	    /obj/item/device/healthanalyzer,
 	    /obj/item/device/radio/off,
 	    /obj/random/medical,
 	    /obj/item/weapon/crowbar,
@@ -142,16 +142,22 @@
 
 /obj/structure/closet/secure_closet/counselor
 	name = "counselor's locker"
-	closet_appearance = /decl/closet_appearance/secure_closet/medical
-	req_access = list(access_psychiatrist)
+	req_access = list(access_psychiatrist,access_chapel_office)
+	closet_appearance = /decl/closet_appearance/secure_closet/chaplain
 
 /obj/structure/closet/secure_closet/counselor/WillContain()
 	return list(
 		/obj/item/clothing/under/rank/psych,
 		/obj/item/clothing/under/rank/psych/turtleneck,
-		/obj/item/clothing/suit/storage/toggle/labcoat,
-		/obj/item/clothing/suit/storage/toggle/labcoat/foundation,
-		/obj/item/clothing/shoes/white,
+		/obj/item/clothing/under/rank/chaplain,
+		/obj/item/clothing/shoes/black,
+		/obj/item/clothing/suit/chaplain_hoodie,
+		/obj/item/weapon/storage/candle_box = 2,
+		/obj/item/weapon/deck/tarot,
+		/obj/item/weapon/reagent_containers/food/drinks/bottle/holywater,
+		/obj/item/weapon/nullrod,
+		/obj/item/weapon/storage/bible,
+		/obj/item/clothing/suit/straight_jacket,
 		/obj/item/weapon/reagent_containers/glass/bottle/stoxin,
 		/obj/item/weapon/reagent_containers/syringe,
 		/obj/item/weapon/storage/pill_bottle/citalopram,
@@ -187,7 +193,7 @@
 		/obj/item/clothing/shoes/white,
 		/obj/item/clothing/suit/storage/toggle/labcoat/virologist,
 		/obj/item/clothing/mask/surgical,
-		/obj/item/device/scanner/health,
+		/obj/item/device/healthanalyzer,
 		/obj/item/clothing/glasses/hud/health
 	)
 

@@ -1,47 +1,35 @@
-/obj/item/clothing/proc/can_attach_accessory(obj/item/clothing/accessory/A, mob/user)
-	if (!length(valid_accessory_slots))
-		if (user)
-			to_chat(user, SPAN_WARNING("\The [src] can't take any attachments."))
-		return FALSE
-
-	if (!istype(A) || !(A.slot in valid_accessory_slots))
-		if (user)
-			to_chat(user, SPAN_WARNING("\The [A] can't attach to \the [src]."))
-		return FALSE
-
-	if (accessories.len && restricted_accessory_slots && (A.slot in restricted_accessory_slots))
-		for (var/obj/item/clothing/accessory/AC in accessories)
+/obj/item/clothing/proc/can_attach_accessory(obj/item/clothing/accessory/A)
+	if(valid_accessory_slots && istype(A) && (A.slot in valid_accessory_slots))
+		.=1
+	else
+		return 0
+	if(accessories.len && restricted_accessory_slots && (A.slot in restricted_accessory_slots))
+		for(var/obj/item/clothing/accessory/AC in accessories)
 			if (AC.slot == A.slot)
-				if (user)
-					to_chat(user, SPAN_WARNING("\The [src] can't attach more accessories of that type."))
-				return FALSE
+				return 0
 
-	var/bulky = A.get_bulky_coverage()
-	if (bulky)
-		if (bulky & get_bulky_coverage())
-			if (user)
-				to_chat(user, SPAN_WARNING("\The [src] is already too bulky to attach \the [A]."))
-			return FALSE
+/obj/item/clothing/attackby(var/obj/item/I, var/mob/user)
+	if(istype(I, /obj/item/clothing/accessory))
 
-		if (ishuman(loc))
-			var/mob/living/carbon/human/H = loc
-			if (src != H.l_hand && src != H.r_hand)
-				for (var/obj/item/clothing/C in H.get_equipped_items())
-					if ((C != src) && (C.get_bulky_coverage() & bulky))
-						if (user)
-							to_chat(user, SPAN_WARNING("\The [A] is too bulky to wear with \the [C]."))
-						return FALSE
-	return TRUE
+		if(!valid_accessory_slots || !valid_accessory_slots.len)
+			to_chat(usr, "<span class='warning'>You cannot attach accessories of any kind to \the [src].</span>")
+			return
 
-/obj/item/clothing/attackby(obj/item/I, mob/user)
-	if (istype(I, /obj/item/clothing/accessory))
-		if (can_attach_accessory(I, user) && user.unEquip(I))
-			attach_accessory(user, I)
+		var/obj/item/clothing/accessory/A = I
+		if(can_attach_accessory(A))
+			if(!user.unEquip(A))
+				return
+			attach_accessory(user, A)
+			return
+		else
+			to_chat(user, "<span class='warning'>You cannot attach more accessories of this type to [src].</span>")
 		return
-	if (length(accessories))
-		for (var/obj/item/clothing/accessory/A in accessories)
+
+	if(accessories.len)
+		for(var/obj/item/clothing/accessory/A in accessories)
 			A.attackby(I, user)
 		return
+
 	..()
 
 /obj/item/clothing/attack_hand(var/mob/user)
@@ -73,10 +61,10 @@
 			usr.put_in_l_hand(src)
 	src.add_fingerprint(usr)
 
-/obj/item/clothing/examine(mob/user)
-	. = ..()
+/obj/item/clothing/examine(var/mob/user)
+	. = ..(user)
 	for(var/obj/item/clothing/accessory/A in accessories)
-		to_chat(user, "[icon2html(A, user)] \A [A] is attached to it.")
+		to_chat(user, "\icon[A] \A [A] is attached to it.")
 	switch(ironed_state)
 		if(WRINKLES_WRINKLY)
 			to_chat(user, "<span class='bad'>It's wrinkly.</span>")
@@ -109,7 +97,7 @@
 	update_clothing_icon()
 
 /obj/item/clothing/proc/remove_accessory(mob/user, obj/item/clothing/accessory/A)
-	if(!A || !(A in accessories))
+	if(!(A in accessories))
 		return
 
 	A.on_removed(user)

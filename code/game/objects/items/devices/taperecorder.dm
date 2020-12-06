@@ -24,7 +24,7 @@
 /obj/item/device/taperecorder/New()
 	..()
 	wires = new(src)
-	set_extension(src, /datum/extension/base_icon_state, icon_state)
+	set_extension(src, /datum/extension/base_icon_state, /datum/extension/base_icon_state, icon_state)
 	if(ispath(mytape))
 		mytape = new mytape(src)
 	GLOB.listening_objects += src
@@ -95,9 +95,9 @@
 	mytape = null
 	update_icon()
 
-/obj/item/device/taperecorder/examine(mob/user, distance)
-	. = ..()
-	if(distance <= 1 && maintenance)
+/obj/item/device/taperecorder/examine(var/mob/user)
+	. = ..(user, 1)
+	if(. && maintenance)
 		to_chat(user, "<span class='notice'>The wires are exposed.</span>")
 
 /obj/item/device/taperecorder/hear_talk(mob/living/M as mob, msg, var/verb="says", datum/language/speaking=null)
@@ -269,7 +269,7 @@
 	update_icon()
 	to_chat(user, "<span class='notice'>Audio playback started.</span>")
 	playsound(src, 'sound/machines/click.ogg', 10, 1)
-	for(var/i=1 , i < mytape?.max_capacity , i++)
+	for(var/i=1 , i < mytape.max_capacity , i++)
 		if(!mytape || !playing)
 			break
 		if(mytape.storedinfo.len < i)
@@ -440,7 +440,7 @@
 			to_chat(user, "<span class='notice'>There is no tape left inside.</span>")
 			return
 		to_chat(user, "<span class='notice'>You start winding the tape back in...</span>")
-		if(do_after(user, 120, src))
+		if(do_after(user, 120, target = src))
 			to_chat(user, "<span class='notice'>You wound the tape back in.</span>")
 			fix()
 		return
@@ -537,9 +537,9 @@
 /obj/item/device/tape/loose/get_loose_tape()
 	return
 
-/obj/item/device/tape/loose/examine(mob/user, distance)
-	. = ..()
-	if(distance <= 1)
+/obj/item/device/tape/loose/examine(var/mob/user)
+	. = ..(user, 1)
+	if(.)
 		to_chat(user, "<span class='notice'>It looks long enough to hold [max_capacity] seconds worth of recording.</span>")
 		if(doctored && user.skill_check(SKILL_FORENSICS, SKILL_PROF))
 			to_chat(user, "<span class='notice'>It has been tampered with...</span>")

@@ -2,7 +2,7 @@
 	category_text = "Input"
 	power_draw_per_use = 5
 
-/obj/item/integrated_circuit/input/external_examine(mob/user)
+/obj/item/integrated_circuit/input/external_examine(var/mob/user)
 	var/initial_name = initial(name)
 	var/message
 	if(initial_name == name)
@@ -809,7 +809,7 @@
 	. += "Please select a teleporter to lock in on:"
 	for(var/obj/machinery/teleport/hub/R in SSmachines.machinery)
 		var/obj/machinery/computer/teleporter/com = R.com
-		if (istype(com, /obj/machinery/computer/teleporter) && com.locked && !com.one_time_use && com.operable() && AreConnectedZLevels(get_z(src), get_z(com)))
+		if (istype(com, /obj/machinery/computer/teleporter) && com.locked && !com.one_time_use && com.operable())
 			.["[com.id] ([R.icon_state == "tele1" ? "Active" : "Inactive"])"] = "tport=[any2ref(com)]"
 	.["None (Dangerous)"] = "tport=random"
 
@@ -853,9 +853,9 @@
 /obj/item/integrated_circuit/input/microphone
 	name = "microphone"
 	desc = "Useful for spying on people, or for voice-activated machines."
-	extended_desc = "This will automatically translate most languages it hears to Zurich Accord Common. \
+	extended_desc = "This will automatically translate most languages it hears to Galactic Common. \
 	The first activation pin is always pulsed when the circuit hears someone talk, while the second one \
-	is only triggered if it hears someone speaking a language other than Zurich Accord Common."
+	is only triggered if it hears someone speaking a language other than Galactic Common."
 	icon_state = "recorder"
 	complexity = 8
 	inputs = list()
@@ -887,7 +887,7 @@
 
 	push_data()
 	activate_pin(1)
-	if(speaking && translated && !(speaking.name == LANGUAGE_HUMAN_EURO))
+	if(translated && !(speaking.name == LANGUAGE_GALCOM))
 		activate_pin(2)
 
 /obj/item/integrated_circuit/input/sensor

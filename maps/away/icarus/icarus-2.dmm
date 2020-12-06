@@ -31,7 +31,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "aj" = (
-/obj/machinery/computer/modular,
+/obj/item/modular_computer/console,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "ak" = (
@@ -75,8 +75,8 @@
 "as" = (
 /obj/structure/table/steel_reinforced,
 /obj/machinery/light{
-	dir = 4;
-	icon_state = "tube1"
+	icon_state = "tube1";
+	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
@@ -110,22 +110,22 @@
 /turf/simulated/floor/tiled,
 /area/icarus/open)
 "az" = (
-/obj/machinery/computer/modular{
+/obj/item/modular_computer/console{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/icarus/open)
 "aA" = (
 /obj/structure/bed/chair{
-	dir = 8;
-	icon_state = "chair_preview"
+	icon_state = "chair_preview";
+	dir = 8
 	},
 /obj/effect/landmark/corpse/bridgeofficer,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "aB" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/effect/overmap/visitable/sector/icarus,
+/obj/effect/overmap/sector/icarus,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "aD" = (
@@ -163,7 +163,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "aK" = (
-/obj/machinery/computer/modular,
+/obj/item/modular_computer/console,
 /obj/item/weapon/disk/icarus,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
@@ -177,7 +177,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "aN" = (
-/obj/machinery/computer/modular,
+/obj/item/modular_computer/console,
 /obj/item/weapon/paper/icarus/log,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
@@ -203,8 +203,8 @@
 /area/icarus/vessel)
 "aR" = (
 /obj/structure/bed/chair{
-	dir = 8;
-	icon_state = "chair_preview"
+	icon_state = "chair_preview";
+	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
@@ -247,8 +247,8 @@
 /area/icarus/vessel)
 "aX" = (
 /obj/machinery/light{
-	dir = 4;
-	icon_state = "tube1"
+	icon_state = "tube1";
+	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
@@ -358,8 +358,8 @@
 /area/icarus/vessel)
 "bm" = (
 /obj/machinery/light{
-	dir = 4;
-	icon_state = "tube1"
+	icon_state = "tube1";
+	dir = 4
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/tiled,
@@ -480,6 +480,7 @@
 /obj/item/weapon/reagent_containers/food/drinks/bottle/wine,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
+	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled,
@@ -535,7 +536,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/open)
 "bS" = (
-/obj/machinery/computer/modular,
+/obj/item/modular_computer/console,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
@@ -612,8 +613,8 @@
 /area/icarus/vessel)
 "cf" = (
 /obj/structure/bed/chair{
-	dir = 8;
-	icon_state = "chair_preview"
+	icon_state = "chair_preview";
+	dir = 8
 	},
 /obj/effect/landmark/corpse/engineer,
 /obj/effect/decal/cleanable/blood,
@@ -830,7 +831,7 @@
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -25;
-	req_access = newlist()
+	req_access = list(list(24,11))
 	},
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
@@ -854,8 +855,8 @@
 /area/icarus/vessel)
 "cO" = (
 /obj/machinery/light{
-	dir = 4;
-	icon_state = "tube1"
+	icon_state = "tube1";
+	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -907,7 +908,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "cV" = (
-/obj/machinery/computer/modular,
+/obj/item/modular_computer/console,
 /obj/machinery/light{
 	dir = 1
 	},
@@ -944,8 +945,7 @@
 /area/icarus/vessel)
 "cZ" = (
 /obj/structure/table/standard,
-/obj/machinery/reagentgrinder/juicer,
-/obj/item/weapon/reagent_containers/glass/beaker/large,
+/obj/machinery/reagentgrinder,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "da" = (
@@ -1093,7 +1093,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
-/obj/machinery/computer/modular{
+/obj/item/modular_computer/console{
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
@@ -1135,8 +1135,8 @@
 /area/icarus/vessel)
 "dB" = (
 /obj/machinery/light{
-	dir = 4;
-	icon_state = "tube1"
+	icon_state = "tube1";
+	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled,
@@ -1190,9 +1190,9 @@
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -25;
-	req_access = newlist()
+	req_access = list(list(24,11))
 	},
-/obj/machinery/computer/modular{
+/obj/item/modular_computer/console{
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
@@ -1216,15 +1216,15 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
-/obj/machinery/computer/modular{
+/obj/item/modular_computer/console{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "dN" = (
 /obj/machinery/light{
-	dir = 4;
-	icon_state = "tube1"
+	icon_state = "tube1";
+	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -1415,14 +1415,14 @@
 /area/icarus/open)
 "er" = (
 /turf/simulated/shuttle/wall{
-	dir = 4;
-	icon_state = "swall_straight"
+	icon_state = "swall_straight";
+	dir = 4
 	},
 /area/icarus/vessel)
 "es" = (
 /turf/simulated/shuttle/wall{
-	dir = 1;
-	icon_state = "swall_t"
+	icon_state = "swall_t";
+	dir = 1
 	},
 /area/icarus/vessel)
 "et" = (
@@ -1446,8 +1446,8 @@
 /area/icarus/vessel)
 "ew" = (
 /obj/structure/shuttle/engine/propulsion{
-	dir = 8;
-	icon_state = "propulsion_l"
+	icon_state = "propulsion_l";
+	dir = 8
 	},
 /turf/simulated/shuttle/wall,
 /area/icarus/vessel)
@@ -1468,8 +1468,8 @@
 /area/icarus/vessel)
 "eA" = (
 /turf/simulated/shuttle/wall{
-	dir = 1;
-	icon_state = "swall"
+	icon_state = "swall";
+	dir = 1
 	},
 /area/icarus/vessel)
 "eB" = (
@@ -1515,15 +1515,15 @@
 /turf/simulated/floor/shuttle/white,
 /area/icarus/vessel)
 "eJ" = (
-/obj/machinery/computer/modular{
+/obj/item/modular_computer/console{
 	dir = 4
 	},
 /turf/simulated/floor/shuttle/white,
 /area/icarus/open)
 "eK" = (
 /obj/structure/bed/chair{
-	dir = 8;
-	icon_state = "chair_preview"
+	icon_state = "chair_preview";
+	dir = 8
 	},
 /turf/simulated/floor/shuttle/white,
 /area/icarus/vessel)
@@ -1540,8 +1540,9 @@
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "eO" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 4;
+	frequency = 1379;
 	id_tag = "bridgeport_pump"
 	},
 /turf/simulated/floor/plating,
@@ -1563,8 +1564,9 @@
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "eR" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 8;
+	frequency = 1331;
 	id_tag = "ninja_shuttle_pump"
 	},
 /turf/simulated/floor/plating,
@@ -1602,14 +1604,14 @@
 /area/icarus/vessel)
 "eY" = (
 /turf/simulated/shuttle/wall{
-	dir = 4;
-	icon_state = "swall_straight"
+	icon_state = "swall_straight";
+	dir = 4
 	},
 /area/icarus/open)
 "eZ" = (
 /turf/simulated/shuttle/wall{
-	dir = 2;
-	icon_state = "swall_t"
+	icon_state = "swall_t";
+	dir = 2
 	},
 /area/icarus/open)
 "fa" = (
@@ -1631,8 +1633,8 @@
 /area/icarus/vessel)
 "fc" = (
 /obj/structure/shuttle/engine/propulsion{
-	dir = 8;
-	icon_state = "propulsion_l"
+	icon_state = "propulsion_l";
+	dir = 8
 	},
 /turf/simulated/shuttle/wall,
 /area/icarus/open)
@@ -1791,8 +1793,9 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 1;
+	frequency = 1331;
 	id_tag = "calypso_shuttle_pump"
 	},
 /turf/simulated/floor/plating,
@@ -1898,20 +1901,24 @@
 	},
 /turf/unsimulated/mineral,
 /area/space)
+"hb" = (
+/obj/effect/landmark/random_gen/asteroid,
+/turf/unsimulated/mineral,
+/area/space)
 "kT" = (
-/obj/machinery/computer/modular{
+/obj/item/modular_computer/console{
 	dir = 8
 	},
 /turf/simulated/floor/shuttle/white,
 /area/icarus/open)
 "le" = (
-/obj/machinery/computer/modular{
+/obj/item/modular_computer/console{
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "mg" = (
-/obj/machinery/computer/modular{
+/obj/item/modular_computer/console{
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
@@ -1926,13 +1933,13 @@
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "RQ" = (
-/obj/machinery/computer/modular{
+/obj/item/modular_computer/console{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "Vb" = (
-/obj/machinery/computer/modular{
+/obj/item/modular_computer/console{
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
@@ -2138,7 +2145,7 @@ aa
 aa
 aa
 aa
-aa
+hb
 "}
 (2,1,1) = {"
 aa

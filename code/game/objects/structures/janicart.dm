@@ -19,10 +19,10 @@
 	create_reagents(180)
 
 
-/obj/structure/janitorialcart/examine(mob/user, distance)
-	. = ..()
-	if(distance <= 1)
-		to_chat(user, "[src] [icon2html(src, viewers(get_turf(src)))] contains [reagents.total_volume] unit\s of liquid!")
+/obj/structure/janitorialcart/examine(mob/user)
+	if(..(user, 1))
+		to_chat(user, "[src] \icon[src] contains [reagents.total_volume] unit\s of liquid!")
+	//everything else is visible, so doesn't need to be mentioned
 
 
 /obj/structure/janitorialcart/attackby(obj/item/I, mob/user)
@@ -174,19 +174,17 @@
 	var/amount_per_transfer_from_this = 5 //shit I dunno, adding this so syringes stop runtime erroring. --NeoFite
 	var/obj/item/weapon/storage/bag/trash/mybag	= null
 	var/callme = "pimpin' ride"	//how do people refer to it?
-	buckle_movable = FALSE
 
 
 /obj/structure/bed/chair/janicart/Initialize()
 	. = ..()
 	create_reagents(100)
 
-/obj/structure/bed/chair/janicart/examine(mob/user, distance)
-	. = ..()
-	if(distance > 1)
+/obj/structure/bed/chair/janicart/examine(mob/user)
+	if(!..(user, 1))
 		return
 
-	to_chat(user, "[icon2html(src, user)] This [callme] contains [reagents.total_volume] unit\s of water!")
+	to_chat(user, "\icon[src] This [callme] contains [reagents.total_volume] unit\s of water!")
 	if(mybag)
 		to_chat(user, "\A [mybag] is hanging on the [callme].")
 

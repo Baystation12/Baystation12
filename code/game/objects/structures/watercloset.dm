@@ -2,28 +2,26 @@
 /obj/structure/hygiene
 	var/next_gurgle = 0
 	var/clogged = 0 // -1 = never clog
-	var/can_drain = 0
-	var/drainage = 0.5
-	var/last_gurgle = 0
 
 /obj/structure/hygiene/New()
 	..()
 	SSfluids.hygiene_props += src
-	START_PROCESSING(SSobj, src)
 
 /obj/structure/hygiene/Destroy()
+	STOP_PROCESSING(SSprocessing, src)
 	SSfluids.hygiene_props -= src
-	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
 /obj/structure/hygiene/proc/clog(var/severity)
 	if(clogged) //We can only clog if our state is zero, aka completely unclogged and cloggable
 		return FALSE
 	clogged = severity
+	START_PROCESSING(SSprocessing, src)
 	return TRUE
 
 /obj/structure/hygiene/proc/unclog()
 	clogged = 0
+	STOP_PROCESSING(SSprocessing, src)
 
 /obj/structure/hygiene/attackby(var/obj/item/thing, var/mob/user)
 	if(clogged > 0 && isPlunger(thing))
@@ -47,14 +45,14 @@
 		return
 	. = ..()
 
-/obj/structure/hygiene/examine(mob/user)
+/obj/structure/hygiene/examine()
 	. = ..()
 	if(clogged > 0)
-		to_chat(user, "<span class='warning'>It seems to be badly clogged.</span>")
+		to_chat(usr, "<span class='warning'>It seems to be badly clogged.</span>")
 
 /obj/structure/hygiene/Process()
 	if(clogged <= 0)
-		drain()
+		return
 	var/flood_amt
 	switch(clogged)
 		if(1)
@@ -74,20 +72,6 @@
 				next_gurgle = world.time + 80
 				playsound(T, pick(SSfluids.gurgles), 50, 1)
 			SET_FLUID_DEPTH(F, min(F.fluid_amount + (rand(30,50)*clogged), flood_amt))
-
-/obj/structure/hygiene/proc/drain()
-	if(!can_drain) return
-	var/turf/T = get_turf(src)
-	if(!istype(T)) return
-	var/fluid_here = T.get_fluid_depth()
-	if(fluid_here <= 0)
-		return
-
-	T.remove_fluid(ceil(fluid_here*drainage))
-	T.show_bubbles()
-	if(world.time > last_gurgle + 80)
-		last_gurgle = world.time
-		playsound(T, pick(SSfluids.gurgles), 50, 1)
 
 /obj/structure/hygiene/toilet
 	name = "toilet"
@@ -204,8 +188,6 @@
 	density = 0
 	anchored = 1
 	clogged = -1
-	can_drain = 1
-	drainage = 0.2 			//showers are tiny, drain a little slower
 
 	var/on = 0
 	var/obj/effect/mist/mymist = null
@@ -217,6 +199,7 @@
 /obj/structure/hygiene/shower/New()
 	..()
 	create_reagents(50)
+	START_PROCESSING(SSprocessing, src)
 
 //add heat controls? when emagged, you can freeze to death in it?
 
@@ -239,7 +222,7 @@
 			G.clean_blood()
 
 /obj/structure/hygiene/shower/attackby(obj/item/I as obj, var/mob/user)
-	if(istype(I, /obj/item/device/scanner/gas))
+	if(istype(I, /obj/item/device/analyzer))
 		to_chat(user, "<span class='notice'>The water temperature seems to be [watertemp].</span>")
 		return
 
@@ -293,7 +276,6 @@
 		reagents.splash(washing, 10)
 
 /obj/structure/hygiene/shower/Process()
-	..()
 	if(!on) return
 
 	for(var/thing in loc)
@@ -380,18 +362,18 @@
 		return
 
 	to_chat(usr, "<span class='notice'>You start washing your hands.</span>")
-	playsound(loc, 'sound/effects/sink_long.ogg', 75, 1)
 
 	busy = 1
-	if(!do_after(user, 40, src))
-		busy = 0
-		return TRUE
+	sleep(40)
 	busy = 0
 
+	if(!Adjacent(user)) return		//Person has moved away from the sink
+
 	user.clean_blood()
-	user.visible_message( \
-		"<span class='notice'>[user] washes their hands using \the [src].</span>", \
-		"<span class='notice'>You wash your hands using \the [src].</span>")
+	if(ishuman(user))
+		user:update_inv_gloves()
+	for(var/mob/V in viewers(src, null))
+		V.show_message("<span class='notice'>[user] washes their hands using \the [src].</span>")
 
 
 /obj/structure/hygiene/sink/attackby(obj/item/O as obj, var/mob/living/user)
@@ -407,7 +389,6 @@
 	if (istype(RG) && RG.is_open_container() && RG.reagents)
 		RG.reagents.add_reagent(/datum/reagent/water, min(RG.volume - RG.reagents.total_volume, RG.amount_per_transfer_from_this))
 		user.visible_message("<span class='notice'>[user] fills \the [RG] using \the [src].</span>","<span class='notice'>You fill \the [RG] using \the [src].</span>")
-		playsound(loc, 'sound/effects/sink.ogg', 75, 1)
 		return 1
 
 	else if (istype(O, /obj/item/weapon/melee/baton))
@@ -440,15 +421,14 @@
 	if(!I || !istype(I,/obj/item)) return
 
 	to_chat(usr, "<span class='notice'>You start washing \the [I].</span>")
-	playsound(loc, 'sound/effects/sink_long.ogg', 75, 1)
 
 	busy = 1
-	if(!do_after(user, 40, src))
-		busy = 0
-		return TRUE
+	sleep(40)
 	busy = 0
 
-	if(istype(O, /obj/item/weapon/extinguisher/)) return TRUE // We're washing, not filling.
+	if(user.loc != location) return				//User has moved
+	if(!I) return 								//Item's been destroyed while washing
+	if(user.get_active_hand() != I) return		//Person has switched hands or the item in their hands
 
 	O.clean_blood()
 	user.visible_message( \
@@ -474,114 +454,3 @@
 	icon_state = "puddle-splash"
 	..()
 	icon_state = "puddle"
-
-//toilet paper interaction for clogging toilets and other facilities
-
-/obj/structure/hygiene/attackby(obj/item/I, mob/user)
-	if (!istype(I, /obj/item/taperoll/bog))
-		..()
-		return
-	if (clogged == -1)
-		to_chat(user, SPAN_WARNING("Try as you might, you can not clog \the [src] with \the [I]."))
-		return
-	if (clogged)
-		to_chat(user, SPAN_WARNING("\The [src] is already clogged."))
-		return
-	if (!do_after(user, 3 SECONDS, src))
-		to_chat(user, SPAN_WARNING("You must stay still to clog \the [src]."))
-		return
-	if (clogged || QDELETED(I) || !user.unEquip(I))
-		return
-	to_chat(user, SPAN_NOTICE("You unceremoniously jam \the [src] with \the [I]. What a rebel."))
-	clog(1)
-	qdel(I)
-
-/obj/item/taperoll/bog
-	name = "toilet paper roll"
-	icon = 'icons/obj/watercloset.dmi'
-	desc = "A unbranded roll of standard issue two ply toilet paper. Refined from carefully rendered down sea shells due to SolGov's 'Abuse Of The Trees Act'."
-	tape_type = /obj/item/tape/bog
-	icon_state = "bogroll"
-	item_state = "mummy_poor"
-	slot_flags = SLOT_HEAD | SLOT_OCLOTHING
-	var/sheets = 30
-
-/obj/item/tape/bog
-	name = "toilet paper"
-	desc = "A length of toilet paper. Seems like custodia is marking their territory again."
-	icon_base = "stripetape"
-	color = COLOR_WHITE
-	detail_overlay = "stripes"
-	detail_color = COLOR_WHITE
-
-/obj/item/taperoll/bog/verb/tear_sheet()
-	set category = "Object"
-	set name = "Tear Sheet"
-	set desc = "Tear a sheet of toilet paper."
-	if (usr.incapacitated())
-		return
-	if(sheets > 0)
-		visible_message("\The [usr] tears a sheet from \the [src].", "You tear a sheet from \the [src].")
-		var/obj/item/weapon/paper/crumpled/bog/C =  new(loc)
-		usr.put_in_hands(C)
-		sheets--
-	if (sheets < 1)
-		to_chat(usr, "\The [src] is depleted.")
-		qdel(src)
-
-/obj/item/weapon/paper/crumpled/bog
-	name = "sheet of toilet paper"
-	desc = "A single sheet of toilet paper. Two ply."
-	icon = 'icons/obj/watercloset.dmi'
-	icon_state = "bogroll_sheet"
-
-/obj/structure/hygiene/faucet
-	name = "faucet"
-	icon = 'icons/obj/watercloset.dmi'
-	icon_state = "faucet"
-	desc = "An outlet for liquids. Water you waiting for?"
-	anchored = 1
-	drainage = 0
-	clogged = -1
-	var/fill_level = 500
-	var/open = FALSE
-
-/obj/structure/hygiene/faucet/attack_hand(mob/user)
-	. = ..()
-	open = !open
-	if(open)
-		playsound(src.loc, 'sound/effects/closet_open.ogg', 20, 1)
-	else
-		playsound(src.loc, 'sound/effects/closet_close.ogg', 20, 1)
-	
-	user.visible_message(SPAN_NOTICE("\The [user] has [open ? "opened" : "closed"] the faucet."))
-	update_icon()
-
-/obj/structure/hygiene/faucet/on_update_icon()
-	. = ..()
-	icon_state = icon_state = "[initial(icon_state)][open ? "-on" : ""]"
-
-/obj/structure/hygiene/faucet/proc/water_flow()
-	if(!isturf(src.loc))
-		return
-
-	// Check for depth first, and pass if the water's too high. I know players will find a way to just submerge entire ship if I do not.
-	var/turf/T = get_turf(src)
-
-	if(!T || T.get_fluid_depth() > fill_level)
-		return
-
-	if(world.time > next_gurgle)
-		next_gurgle = world.time + 80
-		playsound(T, pick(SSfluids.gurgles), 50, 1)
-
-	T.add_fluid(min(75, fill_level - T.get_fluid_depth()), /datum/reagent/water)
-
-/obj/structure/hygiene/faucet/Process()
-	..()
-	if(open) 
-		water_flow()
-
-/obj/structure/hygiene/faucet/examine(mob/user)
-	. = ..()
-	to_chat(user, "It is turned [open ? "on" : "off"]")

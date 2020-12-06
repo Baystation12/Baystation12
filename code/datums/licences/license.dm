@@ -19,10 +19,6 @@
 	name = "CC BY-BC 3.0"
 	url = "https://creativecommons.org/licenses/by-nc/3.0/"
 
-/decl/license/cc_by_sa_3_0
-	name = "CC BY-SA 3.0"
-	url = "https://creativecommons.org/licenses/by-sa/3.0/"
-
 /decl/license/cc_by_nc_sa_3_0
 	name = "CC BY-NC-SA 3.0"
 	url = "https://creativecommons.org/licenses/by-nc-sa/3.0/"

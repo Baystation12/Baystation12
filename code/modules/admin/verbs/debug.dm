@@ -141,6 +141,15 @@
 	message_admins("[key_name_admin(src)] has remade the powernets. makepowernets() called.", 0)
 	SSstatistics.add_field_details("admin_verb","MPWN") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+/client/proc/cmd_debug_tog_aliens()
+	set category = "Server"
+	set name = "Toggle Aliens"
+
+	config.aliens_allowed = !config.aliens_allowed
+	log_admin("[key_name(src)] has turned aliens [config.aliens_allowed ? "on" : "off"].")
+	message_admins("[key_name_admin(src)] has turned aliens [config.aliens_allowed ? "on" : "off"].", 0)
+	SSstatistics.add_field_details("admin_verb","TAL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
 /client/proc/cmd_admin_grantfullaccess(var/mob/M in SSmobs.mob_list)
 	set category = "Admin"
 	set name = "Grant Full Access"
@@ -348,7 +357,7 @@
 		if(Rad.anchored)
 			if(!Rad.P)
 				var/obj/item/weapon/tank/phoron/Phoron = new/obj/item/weapon/tank/phoron(Rad)
-				Phoron.air_contents.gas[GAS_PHORON] = 70
+				Phoron.air_contents.gas["phoron"] = 70
 				Rad.drainratio = 0
 				Rad.P = Phoron
 				Phoron.forceMove(Rad)
@@ -442,6 +451,7 @@
 /obj/effect/debugmarker
 	icon = 'icons/effects/lighting_overlay.dmi'
 	icon_state = "transparent"
+	plane = ABOVE_TURF_PLANE
 	layer = HOLOMAP_LAYER
 	alpha = 127
 
@@ -458,8 +468,7 @@
 		var/netcolor = rgb(rand(100,255),rand(100,255),rand(100,255))
 		for(var/obj/structure/cable/C in PN.cables)
 			var/image/I = image('icons/effects/lighting_overlay.dmi', get_turf(C), "transparent")
-			I.plane = DEFAULT_PLANE
-			I.layer = EXPOSED_WIRE_LAYER
+			I.plane = ABOVE_TURF_PLANE
 			I.alpha = 127
 			I.color = netcolor
 			I.maptext = "\ref[PN]"

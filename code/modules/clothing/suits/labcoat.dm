@@ -2,14 +2,13 @@
 	name = "labcoat"
 	desc = "A suit that protects against minor chemical spills."
 	icon_state = "labcoat_open"
+	//item_state = "labcoat" //Is this even used for anything?
 	icon_open = "labcoat_open"
 	icon_closed = "labcoat"
 	blood_overlay_type = "coat"
 	body_parts_covered = UPPER_TORSO|ARMS
-	allowed = list(/obj/item/device/scanner/gas,/obj/item/stack/medical,/obj/item/weapon/reagent_containers/dropper,/obj/item/weapon/reagent_containers/syringe,/obj/item/weapon/reagent_containers/hypospray,/obj/item/device/scanner/health,/obj/item/device/flashlight/pen,/obj/item/weapon/reagent_containers/glass/bottle,/obj/item/weapon/reagent_containers/glass/beaker,/obj/item/weapon/reagent_containers/pill,/obj/item/weapon/storage/pill_bottle,/obj/item/weapon/paper)
-	armor = list(
-		bio = ARMOR_BIO_RESISTANT
-		)
+	allowed = list(/obj/item/device/analyzer,/obj/item/stack/medical,/obj/item/weapon/reagent_containers/dropper,/obj/item/weapon/reagent_containers/syringe,/obj/item/weapon/reagent_containers/hypospray,/obj/item/device/healthanalyzer,/obj/item/device/flashlight/pen,/obj/item/weapon/reagent_containers/glass/bottle,/obj/item/weapon/reagent_containers/glass/beaker,/obj/item/weapon/reagent_containers/pill,/obj/item/weapon/storage/pill_bottle,/obj/item/weapon/paper)
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 50, rad = 0)
 	valid_accessory_slots = list(ACCESSORY_SLOT_ARMBAND)
 	restricted_accessory_slots = list(ACCESSORY_SLOT_ARMBAND)
 
@@ -17,6 +16,7 @@
 	name = "chief medical officer's labcoat"
 	desc = "Bluer than the standard model."
 	icon_state = "labcoat_cmo_open"
+	//item_state = "labcoat_cmo"
 	icon_open = "labcoat_cmo_open"
 	icon_closed = "labcoat_cmo"
 
@@ -31,6 +31,7 @@
 	name = "The Mad's labcoat"
 	desc = "It makes you look capable of konking someone on the noggin and shooting them into space."
 	icon_state = "labgreen_open"
+	//item_state = "labgreen"
 	icon_open = "labgreen_open"
 	icon_closed = "labgreen"
 
@@ -42,7 +43,7 @@
 	icon_closed = "labcoat_gen"
 
 /obj/item/clothing/suit/storage/toggle/labcoat/chemist
-	name = "Pharmacist labcoat"
+	name = "Chemist labcoat"
 	desc = "A suit that protects against minor chemical spills. Has an orange stripe on the shoulder."
 	icon_state = "labcoat_chem_open"
 	icon_open = "labcoat_chem_open"
@@ -54,6 +55,7 @@
 	icon_state = "labcoat_vir_open"
 	icon_open = "labcoat_vir_open"
 	icon_closed = "labcoat_vir"
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 60, rad = 0)
 
 /obj/item/clothing/suit/storage/toggle/labcoat/blue
 	name = "blue-edged labcoat"
@@ -73,18 +75,8 @@
 	icon_state = "labcoat_xy"
 	icon_open = "labcoat_xy_open"
 	icon_closed = "labcoat_xy"
-	armor = list(
-		melee = ARMOR_MELEE_MINOR, 
-		bio = ARMOR_BIO_MINOR
-		)
+	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 20, rad = 0)
 	species_restricted = list(SPECIES_IPC)
-
-/obj/item/clothing/suit/storage/toggle/labcoat/foundation
-	name = "\improper Foundation labcoat"
-	desc = "A medical labcoat with a Cuchulain Foundation crest stencilled on the back."
-	icon_state = "labcoat_foundation"
-	icon_open = "labcoat_foundation_open"
-	icon_closed = "labcoat_foundation"
 
 /obj/item/clothing/suit/storage/toggle/labcoat/science
 	name = "\improper EXO labcoat"
@@ -99,6 +91,13 @@
 	icon_state = "labcoat_tox_open"
 	icon_open = "labcoat_tox_open"
 	icon_closed = "labcoat_tox"
+
+/obj/item/clothing/suit/storage/toggle/labcoat/science/cso
+	name = "chief science officer's labcoat"
+	desc = "A coat that protects against minor chemical spills. It has purple stripes on the shoulders denoting it as an Expeditionary Corps labcoat, and purple trim to indicate a Chief Science Officer."
+	icon_state = "labcoat_cso_open"
+	icon_open = "labcoat_cso_open"
+	icon_closed = "labcoat_cso"
 
 /obj/item/clothing/suit/storage/toggle/labcoat/science/nanotrasen
 	name = "\improper NanoTrasen labcoat"
@@ -121,13 +120,6 @@
 	icon_open = "labcoat_zeng_open"
 	icon_closed = "labcoat_zeng"
 
-/obj/item/clothing/suit/storage/toggle/labcoat/science/morpheus
-	name = "\improper Morpheus Cyberkinetics labcoat"
-	desc = "A suit that protects against minor chemical spills. It has a gray stripe on the shoulder and gray trim on the sleeves, denoting it as a Morpheus Cyberkinetics labcoat."
-	icon_state = "labcoat_morpheus_open"
-	icon_open = "labcoat_morpheus_open"
-	icon_closed = "labcoat_morpheus"
-
 /obj/item/clothing/suit/storage/toggle/labcoat/science/dais
 	name = "\improper DAIS labcoat"
 	desc = "A labcoat with a the logo of Deimos Advanced Information Systems emblazoned on the back. It has a stylish blue \
@@ -135,9 +127,7 @@
 	icon_state = "labcoat_dais"
 	icon_open = "labcoat_dais_open"
 	icon_closed = "labcoat_dais"
-	armor = list(
-		melee = ARMOR_MELEE_MINOR
-	)//They don't need to protect against the environment very much.
+	armor = list(melee = 5, bullet = 0, laser = 0,energy = 5, bomb = 0, bio = 0, rad = 0)//They don't need to protect against the environment very much.
 	siemens_coefficient = 0.5 //These guys work with electronics. DAIS's labcoats shouldn't conduct very well.
 
 /obj/item/clothing/suit/storage/toggle/labcoat/rd
@@ -162,17 +152,9 @@
 	icon_open = "labcoat_rd_heph_open"
 	icon_closed = "labcoat_rd_heph"
 
-/obj/item/clothing/suit/storage/toggle/labcoat/rd/zeng
+/obj/item/clothing/suit/storage/toggle/labcoat/rd/heph
 	name = "\improper Z-H research director's labcoat"
 	desc = "A full-body labcoat covered in cyan and black designs, denoting it as a Zeng-Hu Pharmaceuticals management coat. Judging by the amount of designs on it, it is only to be worn by the most enthusiastic of employees."
 	icon_state = "labcoat_rd_zeng_open"
 	icon_open = "labcoat_rd_zeng_open"
 	icon_closed = "labcoat_rd_zeng"
-
-/obj/item/clothing/suit/storage/toggle/labcoat/rd/ec
-	name = "chief science officer's labcoat"
-	desc = "A coat that protects against minor chemical spills. It has purple stripes on the shoulders denoting it as an Expeditionary Corps labcoat, and purple trim to indicate a Chief Science Officer."
-	icon_state = "labcoat_cso_open"
-	icon_open = "labcoat_cso_open"
-	icon_closed = "labcoat_cso"
-	body_parts_covered = UPPER_TORSO|ARMS

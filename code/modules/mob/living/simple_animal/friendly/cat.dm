@@ -13,22 +13,19 @@
 	speak_chance = 1
 	turns_per_move = 5
 	see_in_dark = 6
+	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "kicks"
-	minbodytemp = 223		//Below -50 Degrees Celsius
-	maxbodytemp = 323	//Above 50 Degrees Celsius
+	var/turns_since_scan = 0
+	var/mob/living/simple_animal/mouse/movement_target
+	var/mob/flee_target
+	minbodytemp = 223		//Below -50 Degrees Celcius
+	maxbodytemp = 323	//Above 50 Degrees Celcius
 	holder_type = /obj/item/weapon/holder/cat
 	mob_size = MOB_SMALL
 	possession_candidate = 1
 	pass_flags = PASS_FLAG_TABLE
-	density = 0
-
-	skin_material = MATERIAL_SKIN_FUR_ORANGE
-
-	var/turns_since_scan = 0
-	var/mob/living/simple_animal/mouse/movement_target
-	var/mob/flee_target
 
 /mob/living/simple_animal/cat/Life()
 	. = ..()
@@ -96,7 +93,7 @@
 
 /mob/living/simple_animal/cat/proc/handle_flee_target()
 	//see if we should stop fleeing
-	if (stat != CONSCIOUS || (flee_target && !(flee_target.loc in view(src))))
+	if (flee_target && !(flee_target.loc in view(src)))
 		flee_target = null
 		stop_automated_movement = 0
 
@@ -128,9 +125,9 @@
 	. = ..()
 	set_flee_target(proj.firer? proj.firer : src.loc)
 
-/mob/living/simple_animal/cat/hitby(atom/movable/AM, var/datum/thrownthing/TT)
+/mob/living/simple_animal/cat/hitby(atom/movable/AM)
 	. = ..()
-	set_flee_target(TT.thrower? TT.thrower : src.loc)
+	set_flee_target(AM.thrower? AM.thrower : src.loc)
 
 //Basic friend AI
 /mob/living/simple_animal/cat/fluff
@@ -172,7 +169,7 @@
 /mob/living/simple_animal/cat/fluff/Life()
 	. = ..()
 	if(!.)
-		return FALSE
+		return FALSE 
 	if (stat || !friend)
 		return
 	if (get_dist(src, friend) <= 1)
@@ -223,19 +220,15 @@
 	item_state = "cat"
 	icon_living = "cat"
 	icon_dead = "cat_dead"
-	skin_material = MATERIAL_SKIN_FUR_BLACK
 
 /mob/living/simple_animal/cat/kitten
 	name = "kitten"
-	desc = "D'aaawwww."
+	desc = "D'aaawwww"
 	icon_state = "kitten"
 	item_state = "kitten"
 	icon_living = "kitten"
 	icon_dead = "kitten_dead"
 	gender = NEUTER
-	meat_amount = 1
-	bone_amount = 3
-	skin_amount = 3
 
 // Leaving this here for now.
 /obj/item/weapon/holder/cat/fluff/bones

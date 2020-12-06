@@ -19,8 +19,13 @@
 		slot_l_hand_str = 'icons/mob/onmob/items/lefthand_guns_secure.dmi',
 		slot_r_hand_str = 'icons/mob/onmob/items/righthand_guns_secure.dmi',
 		)
+	firemodes = list(
+					list(mode_name="stun", projectile_type=/obj/item/projectile/energy/electrode/green, modifystate="revolverstun"),
+					list(mode_name="shock", projectile_type=/obj/item/projectile/energy/electrode/stunshot, modifystate="revolvershock")
+					)
 	item_state = null
 	req_access = list(list(access_brig, access_bridge))
+	projectile_type = /obj/item/projectile/energy/electrode/green
 
 /obj/item/weapon/gun/energy/gun/secure
 	name = "smartgun"
@@ -33,9 +38,6 @@
 	item_state = null	//so the human update icon uses the icon_state instead.
 	req_access = list(list(access_brig, access_bridge))
 	authorized_modes = list(ALWAYS_AUTHORIZED, AUTHORIZED)
-
-/obj/item/weapon/gun/energy/gun/secure/preauthorized
-	authorized_modes = list(ALWAYS_AUTHORIZED, AUTHORIZED, AUTHORIZED)
 
 /obj/item/weapon/gun/energy/revolver/secure
 	name = "smart service revolver"
@@ -63,14 +65,13 @@
 	use_external_power = 1
 	one_hand_penalty = 0
 	has_safety = FALSE
-	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON
 
 /obj/item/weapon/gun/energy/gun/secure/mounted/Initialize()
 	var/mob/borg = get_holder_of_type(src, /mob/living/silicon/robot)
 	if(!borg)
 		CRASH("Invalid spawn location.")
 	registered_owner = borg.name
-	GLOB.secure_weapons |= src
+	GLOB.registered_cyborg_weapons += src
 	. = ..()
 
 /obj/item/weapon/gun/energy/laser/secure

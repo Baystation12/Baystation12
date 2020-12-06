@@ -4,8 +4,6 @@
 		description
 		role
 		comments
-		chassis
-		say_verb
 		ready = 0
 */
 
@@ -18,13 +16,13 @@
 
 	var/savefile/F = new /savefile(src.savefile_path(user))
 
-	to_save(F["name"], src.name)
-	to_save(F["description"], src.description)
-	to_save(F["role"], src.role)
-	to_save(F["comments"], src.comments)
-	to_save(F["chassis"], src.chassis)
-	to_save(F["say_verb"], src.say_verb)
-	to_save(F["version"], 1)
+
+	F["name"] << src.name
+	F["description"] << src.description
+	F["role"] << src.role
+	F["comments"] << src.comments
+
+	F["version"] << 1
 
 	return 1
 
@@ -47,7 +45,7 @@
 	if(!F) return //Not everyone has a pai savefile.
 
 	var/version = null
-	from_save(F["version"], version)
+	F["version"] >> version
 
 	if (isnull(version) || version != 1)
 		fdel(path)
@@ -55,10 +53,8 @@
 			alert(user, "Your savefile was incompatible with this version and was deleted.")
 		return 0
 
-	from_save(F["name"], src.name)
-	from_save(F["description"], src.description)
-	from_save(F["role"], src.role)
-	from_save(F["comments"], src.comments)
-	from_save(F["chassis"], src.chassis)
-	from_save(F["say_verb"], src.say_verb)
+	F["name"] >> src.name
+	F["description"] >> src.description
+	F["role"] >> src.role
+	F["comments"] >> src.comments
 	return 1

@@ -6,10 +6,9 @@
 	desc = "Made of nothing. How does this even exist?" // set based on material, if this desc is visible it's a bug (shards default to being made of glass)
 	icon_state = "large"
 	randpixel = 8
-	sharp = TRUE
-	edge = TRUE
+	sharp = 1
+	edge = 1
 	w_class = ITEM_SIZE_SMALL
-	max_force = 8
 	force_divisor = 0.12 // 6 with hardness 30 (glass)
 	thrown_force_divisor = 0.4 // 4 with weight 15 (glass)
 	item_state = "shard-glass"
@@ -17,7 +16,6 @@
 	default_material = MATERIAL_GLASS
 	unbreakable = 1 //It's already broken.
 	drops_debris = 0
-	item_flags = ITEM_FLAG_CAN_HIDE_IN_SHOES
 
 /obj/item/weapon/material/shard/set_material(var/new_material)
 	..(new_material)

@@ -98,8 +98,7 @@
 		return 1
 
 	var/contained = reagentlist()
-	if (reagents.should_admin_log())
-		admin_attack_log(user, target, "Used \the [name] containing [contained] to splash the victim.", "Was splashed by \the [name] containing [contained].", "used \the [name] containing [contained] to splash")
+	admin_attack_log(user, target, "Used \the [name] containing [contained] to splash the victim.", "Was splashed by \the [name] containing [contained].", "used \the [name] containing [contained] to splash")
 
 	user.visible_message("<span class='danger'>[target] has been splashed with something by [user]!</span>", "<span class = 'notice'>You splash the solution onto [target].</span>")
 	reagents.splash(target, reagents.total_volume)
@@ -159,7 +158,7 @@
 			other_feed_message_start(user, target)
 
 			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-			if(!do_after(user, 3 SECONDS, target))
+			if(!do_mob(user, target))
 				return
 
 			other_feed_message_finish(user, target)
@@ -217,7 +216,7 @@
 		var/prec = user.skill_fail_chance(SKILL_CHEMISTRY, 10)
 		to_chat(user, "<span class='notice'>The [src] contains: [reagents.get_reagents(precision = prec)].</span>")
 	else if((loc == user) && user.skill_check(SKILL_CHEMISTRY, SKILL_EXPERT))
-		to_chat(user, "<span class='notice'>Using your chemistry knowledge, you identify the following reagents in \the [src]: [reagents.get_reagents(!user.skill_check(SKILL_CHEMISTRY, SKILL_PROF), 5)].</span>")
+		to_chat(user, "<span class='notice'>Using your chemistry knowledge, you indentify the following reagents in \the [src]: [reagents.get_reagents(!user.skill_check(SKILL_CHEMISTRY, SKILL_PROF), 5)].</span>")
 
 /obj/item/weapon/reagent_containers/ex_act(severity)
 	if(reagents)

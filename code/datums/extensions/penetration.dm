@@ -1,5 +1,4 @@
 /datum/extension/penetration
-	base_type = /datum/extension/penetration
 	expected_type = /atom
 
 // Returns a value between 0 and 100

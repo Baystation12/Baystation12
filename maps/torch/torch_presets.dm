@@ -132,20 +132,40 @@ var/const/NETWORK_NANOTRASEN  = "Petrov"
 /obj/machinery/camera/all/command
 	network = list(NETWORK_COMMAND)
 
+//
+// T-Coms
+//
+
+/obj/machinery/telecomms/relay/preset/shuttle
+	id = "Charon Relay"
+	toggled = 0
+	autolinkers = list("s_relay")
+
+/obj/machinery/telecomms/relay/preset/exploration_shuttle
+	id = "Charon Relay"
+	toggled = 0
+	autolinkers = list("s_relay")
+
+/obj/machinery/telecomms/relay/preset/aquila
+	id = "Aquila Relay"
+	toggled = 0
+	autolinkers = list("s_relay")
 
 //
 // SMES units
 //
 
 // Substation SMES
-/obj/machinery/power/smes/buildable/preset/torch/substation
-	uncreated_component_parts = list(/obj/item/weapon/stock_parts/smes_coil = 1) // Note that it gets one more from construction
+/obj/machinery/power/smes/buildable/preset/torch/substation/configure_and_install_coils()
+	component_parts += new /obj/item/weapon/smes_coil(src)
+	component_parts += new /obj/item/weapon/smes_coil(src)
 	_input_maxed = TRUE
 	_output_maxed = TRUE
 
 // Substation SMES (charged and with full I/O setting)
-/obj/machinery/power/smes/buildable/preset/torch/substation_full
-	uncreated_component_parts = list(/obj/item/weapon/stock_parts/smes_coil = 1)
+/obj/machinery/power/smes/buildable/preset/torch/substation_full/configure_and_install_coils()
+	component_parts += new /obj/item/weapon/smes_coil(src)
+	component_parts += new /obj/item/weapon/smes_coil(src)
 	_input_maxed = TRUE
 	_output_maxed = TRUE
 	_input_on = TRUE
@@ -153,10 +173,11 @@ var/const/NETWORK_NANOTRASEN  = "Petrov"
 	_fully_charged = TRUE
 
 // Main Engine output SMES
-/obj/machinery/power/smes/buildable/preset/torch/engine_main
-	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/smes_coil/super_io = 2,
-		/obj/item/weapon/stock_parts/smes_coil/super_capacity = 2)
+/obj/machinery/power/smes/buildable/preset/torch/engine_main/configure_and_install_coils()
+	component_parts += new /obj/item/weapon/smes_coil/super_io(src)
+	component_parts += new /obj/item/weapon/smes_coil/super_io(src)
+	component_parts += new /obj/item/weapon/smes_coil/super_capacity(src)
+	component_parts += new /obj/item/weapon/smes_coil/super_capacity(src)
 	_input_maxed = TRUE
 	_output_maxed = TRUE
 	_input_on = TRUE
@@ -164,10 +185,9 @@ var/const/NETWORK_NANOTRASEN  = "Petrov"
 	_fully_charged = TRUE
 
 // Shuttle SMES
-/obj/machinery/power/smes/buildable/preset/torch/shuttle
-	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/smes_coil/super_io = 1,
-		/obj/item/weapon/stock_parts/smes_coil/super_capacity = 1)
+/obj/machinery/power/smes/buildable/preset/torch/shuttle/configure_and_install_coils()
+	component_parts += new /obj/item/weapon/smes_coil/super_io(src)
+	component_parts += new /obj/item/weapon/smes_coil/super_capacity(src)
 	_input_maxed = TRUE
 	_output_maxed = TRUE
 	_input_on = TRUE
@@ -175,9 +195,9 @@ var/const/NETWORK_NANOTRASEN  = "Petrov"
 	_fully_charged = TRUE
 
 // Hangar SMES. Charges the shuttles so needs a pretty big throughput.
-/obj/machinery/power/smes/buildable/preset/torch/hangar
-	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/smes_coil/super_io = 2)
+/obj/machinery/power/smes/buildable/preset/torch/hangar/configure_and_install_coils()
+	component_parts += new /obj/item/weapon/smes_coil/super_io(src)
+	component_parts += new /obj/item/weapon/smes_coil/super_io(src)
 	_input_maxed = TRUE
 	_output_maxed = TRUE
 	_input_on = TRUE
@@ -210,30 +230,5 @@ var/const/NETWORK_ENGINEERING_OUTPOST = "Engineering Outpost"
 		num2text(SCI_FREQ)   = list(access_tox, access_robotics, access_xenobiology, access_pathfinder),
 		num2text(SUP_FREQ)   = list(access_cargo),
 		num2text(SRV_FREQ)   = list(access_janitor, access_hydroponics),
-		num2text(EXP_FREQ)   = list(access_explorer, access_rd),
-		num2text(HAIL_FREQ)  = list(),
-	)
-
-/decl/stock_part_preset/radio/receiver/vent_pump/guppy
-	frequency = 1431
-
-/decl/stock_part_preset/radio/event_transmitter/vent_pump/guppy
-	frequency = 1431
-
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/guppy
-	stock_part_presets = list(
-		/decl/stock_part_preset/radio/receiver/vent_pump/guppy = 1,
-		/decl/stock_part_preset/radio/event_transmitter/vent_pump/guppy = 1
-	)
-
-/decl/stock_part_preset/radio/receiver/vent_scrubber/guppy
-	frequency = 1431
-
-/decl/stock_part_preset/radio/event_transmitter/vent_scrubber/guppy
-	frequency = 1431
-
-/obj/machinery/atmospherics/unary/vent_scrubber/guppy
-	stock_part_presets = list(
-		/decl/stock_part_preset/radio/receiver/vent_scrubber/guppy = 1,
-		/decl/stock_part_preset/radio/event_transmitter/vent_scrubber/guppy = 1
+		num2text(EXP_FREQ)   = list(access_explorer, access_rd)
 	)

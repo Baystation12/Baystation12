@@ -13,8 +13,6 @@ Synthetic
 
 /datum/job/ai
 	minimal_player_age = 7
-	total_positions = 0
-	spawn_positions = 0
 	allowed_ranks = list(
 		/datum/mil_rank/civ/synthetic
 	)
@@ -35,7 +33,6 @@ Civilian
 		"Historian",
 		"Botanist",
 		"Investor" = /decl/hierarchy/outfit/job/torch/passenger/passenger/investor,
-		"Psychologist" = /decl/hierarchy/outfit/job/torch/passenger/passenger/psychologist,
 		"Naturalist",
 		"Ecologist",
 		"Entertainer",
@@ -77,5 +74,27 @@ Civilian
 
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX)
 	skill_points = 24
-	required_language = null
-	give_psionic_implant_on_join = FALSE
+
+/datum/job/stowaway
+	title = "Stowaway"
+	department = "Civilian"
+	department_flag = CIV
+	total_positions = 1
+	spawn_positions = 1
+	availablity_chance = 20
+	supervisors = "yourself"
+	ideal_character_age = 30
+	minimal_player_age = 0
+	create_record = 0
+	account_allowed = 0
+	outfit_type = /decl/hierarchy/outfit/job/torch/stowaway
+	allowed_branches = list(
+		/datum/mil_branch/civilian,
+		/datum/mil_branch/alien
+	)
+	allowed_ranks = list(
+		/datum/mil_rank/civ/civ,
+		/datum/mil_rank/alien
+	)
+	latejoin_at_spawnpoints = 1
+	announced = FALSE

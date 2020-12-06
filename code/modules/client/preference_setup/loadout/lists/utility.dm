@@ -55,11 +55,6 @@
 	path = /obj/item/weapon/pen/multi
 	cost = 2
 
-/datum/gear/utility/fancy
-	display_name = "Fancy Pen"
-	path = /obj/item/weapon/pen/fancy
-	cost = 2
-
 /datum/gear/utility/hand_labeler
 	display_name = "hand labeler"
 	path = /obj/item/weapon/hand_labeler
@@ -97,12 +92,3 @@ modular computers
 	display_name = "laptop computer, advanced"
 	path = /obj/item/modular_computer/laptop/preset/custom_loadout/advanced
 	cost = 6
-
-/****************
-Pouches and kits
-****************/
-
-/datum/gear/utility/pencilcase
-	display_name = "Pencil case"
-	path = /obj/item/weapon/storage/fancy/pencilcase
-	cost = 2

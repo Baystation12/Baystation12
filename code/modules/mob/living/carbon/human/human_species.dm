@@ -9,11 +9,6 @@
 	GLOB.human_mob_list -= src
 	delete_inventory()
 
-/mob/living/carbon/human/dummy/selfdress/Initialize()
-	. = ..()
-	for(var/obj/item/I in loc)
-		equip_to_appropriate_slot(I)
-
 /mob/living/carbon/human/corpse/Initialize(mapload, new_species, obj/effect/landmark/corpse/corpse)
 	. = ..(mapload, new_species)
 
@@ -62,8 +57,7 @@
 	..(new_loc, SPECIES_NABBER)
 
 /mob/living/carbon/human/monkey/New(var/new_loc)
-	gender = pick(MALE, FEMALE)
-	..(new_loc, SPECIES_MONKEY)
+	..(new_loc, "Monkey")
 
 /mob/living/carbon/human/farwa/New(var/new_loc)
 	..(new_loc, "Farwa")

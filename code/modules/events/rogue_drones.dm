@@ -10,9 +10,11 @@
 			possible_spawns.Add(C)
 
 	//25% chance for this to be a false alarm
-	var/num = 0
-	if (length(possible_spawns) && prob(75))
-		num = rand(2, 6)
+	var/num
+	if(prob(25))
+		num = 0
+	else
+		num = rand(2,6)
 	for(var/i=0, i<num, i++)
 		var/mob/living/simple_animal/hostile/retaliate/malf_drone/D = new(get_turf(pick(possible_spawns)))
 		drones_list.Add(D)

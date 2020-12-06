@@ -8,9 +8,7 @@
 					/obj/item/weapon/reagent_containers/food/drinks/soymilk = 2,
 					/obj/item/weapon/storage/fancy/egg_box = 2,
 					/obj/item/weapon/reagent_containers/food/snacks/tofu = 4,
-					/obj/item/weapon/reagent_containers/food/snacks/meat = 4,
-					/obj/item/weapon/reagent_containers/food/condiment/enzyme = 1,
-					/obj/item/weapon/reagent_containers/glass/bottle/dye/polychromic = 1
+					/obj/item/weapon/reagent_containers/food/snacks/meat = 4
 					)
 	cost = 10
 	containertype = /obj/structure/closet/crate/freezer
@@ -156,13 +154,3 @@
 	cost = 25
 	containertype = /obj/structure/largecrate
 	containername = "soda dispenser crate"
-
-/decl/hierarchy/supply_pack/galley/mre_dispenser
-	name = "Equipment - MRE dispenser"
-	contains = list(
-			/obj/machinery/vending/mredispenser{anchored = 0}
-		)
-	cost = 50
-	containertype = /obj/structure/largecrate
-	containername = "MRE dispenser crate"
-

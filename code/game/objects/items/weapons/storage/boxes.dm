@@ -81,12 +81,12 @@
 	name = "crew survival kit"
 	desc = "A box decorated in warning colors that contains a limited supply of survival tools. The panel and white stripe indicate this one contains oxygen."
 	icon_state = "survival"
-	startswith = list(/obj/item/clothing/mask/breath/scba = 1,
+	startswith = list(/obj/item/clothing/mask/breath = 1,
 					/obj/item/weapon/tank/emergency/oxygen = 1,
-					/obj/item/weapon/reagent_containers/hypospray/autoinjector/pouch_auto/inaprovaline = 1,
+					/obj/item/weapon/reagent_containers/hypospray/autoinjector = 1,
 					/obj/item/stack/medical/bruise_pack = 1,
 					/obj/item/device/flashlight/flare/glowstick = 1,
-					/obj/item/weapon/reagent_containers/food/snacks/proteinbar = 1,
+					/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar = 1,
 					/obj/item/device/oxycandle = 1)
 
 /obj/item/weapon/storage/box/vox/
@@ -95,22 +95,21 @@
 	icon_state = "survivalvox"
 	startswith = list(/obj/item/clothing/mask/breath = 1,
 					/obj/item/weapon/tank/emergency/nitrogen = 1,
-					/obj/item/weapon/reagent_containers/hypospray/autoinjector/pouch_auto/inaprovaline = 1,
 					/obj/item/stack/medical/bruise_pack = 1,
 					/obj/item/device/flashlight/flare/glowstick = 1,
-					/obj/item/weapon/reagent_containers/food/snacks/proteinbar = 1)
+					/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar = 1)
 
 /obj/item/weapon/storage/box/engineer/
 	name = "engineer survival kit"
 	desc = "A box decorated in warning colors that contains a limited supply of survival tools. The panel and orange stripe indicate this one as the engineering variant."
 	icon_state = "survivaleng"
-	startswith = list(/obj/item/clothing/mask/breath/scba = 1,
+	startswith = list(/obj/item/clothing/mask/breath = 1,
 					/obj/item/weapon/tank/emergency/oxygen/engi = 1,
-					/obj/item/weapon/reagent_containers/hypospray/autoinjector/pouch_auto/inaprovaline = 1,
+					/obj/item/weapon/reagent_containers/hypospray/autoinjector = 1,
 					/obj/item/weapon/reagent_containers/hypospray/autoinjector/antirad = 1,
 					/obj/item/stack/medical/bruise_pack = 1,
 					/obj/item/device/flashlight/flare/glowstick = 1,
-					/obj/item/weapon/reagent_containers/food/snacks/proteinbar = 1,
+					/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar = 1,
 					/obj/item/device/oxycandle = 1)
 
 /obj/item/weapon/storage/box/gloves
@@ -261,7 +260,7 @@
 	name = "box of prescription glasses"
 	desc = "This box contains nerd glasses."
 	icon_state = "glasses"
-	startswith = list(/obj/item/clothing/glasses/prescription = 7)
+	startswith = list(/obj/item/clothing/glasses/regular = 7)
 
 /obj/item/weapon/storage/box/cdeathalarm_kit
 	name = "death alarm kit"
@@ -305,7 +304,7 @@
 
 /obj/item/weapon/storage/box/monkeycubes/farwacubes
 	name = "farwa cube box"
-	desc = "Drymate brand farwa cubes, shipped from Nyx. Just add water!"
+	desc = "Drymate brand farwa cubes, shipped from Ahdomai. Just add water!"
 	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/farwacube = 5)
 
 /obj/item/weapon/storage/box/monkeycubes/stokcubes
@@ -455,11 +454,11 @@
 	item_state = "medicalpack"
 	foldable = null
 	max_w_class = ITEM_SIZE_NORMAL
-	w_class = ITEM_SIZE_LARGE
+	w_class = ITEM_SIZE_HUGE
 	can_hold = list(/obj/item/organ, /obj/item/weapon/reagent_containers/food, /obj/item/weapon/reagent_containers/glass)
-	max_storage_space = DEFAULT_LARGEBOX_STORAGE
+	max_storage_space = DEFAULT_BACKPACK_STORAGE
 	use_to_pickup = 1 // for picking up broken bulbs, not that most people will try
-	temperature = -16 CELSIUS
+	temperature = -16 CELCIUS
 
 /obj/item/weapon/storage/box/freezer/ProcessAtomTemperature()
 	return PROCESS_KILL
@@ -536,31 +535,10 @@
 	desc = "A box full of blank tapes."
 	startswith = list(/obj/item/device/tape/random = 14)
 
-/obj/item/weapon/storage/box/taperolls
-	name = "box of spare taperolls"
-	desc = "A box full of mixed barricade tapes."
-	startswith = list(/obj/item/taperoll/police,
-						/obj/item/taperoll/engineering,
-						/obj/item/taperoll/atmos,
-						/obj/item/taperoll/research,
-						/obj/item/taperoll/medical,
-						/obj/item/taperoll/bureaucracy
-					)
-
-/obj/item/weapon/storage/box/bogrolls
-	name = "box of spare bogrolls"
-	desc = "A box full of toilet paper."
-	startswith = list(/obj/item/taperoll/bog = 6)
-
 /obj/item/weapon/storage/box/cola
 	name = "box of sodas"
 	desc = "A box full of soda cans."
 	startswith = list(/obj/item/weapon/reagent_containers/food/drinks/cans/cola = 7)
-
-/obj/item/weapon/storage/box/cola/beastenergy
-	name = "box of beast energy"
-	desc = "A box full of beast energy cans."
-	startswith = list(/obj/item/weapon/reagent_containers/food/drinks/cans/beastenergy = 7)
 
 /obj/item/weapon/storage/box/water
 	name = "box of water bottles"
@@ -573,8 +551,8 @@
 /obj/item/weapon/storage/box/cola/drgibb
 	startswith = list(/obj/item/weapon/reagent_containers/food/drinks/cans/dr_gibb = 7)
 
-/obj/item/weapon/storage/box/cola/ionbru
-	startswith = list(/obj/item/weapon/reagent_containers/food/drinks/cans/ionbru = 7)
+/obj/item/weapon/storage/box/cola/starkist
+	startswith = list(/obj/item/weapon/reagent_containers/food/drinks/cans/starkist = 7)
 
 /obj/item/weapon/storage/box/cola/spaceup
 	startswith = list(/obj/item/weapon/reagent_containers/food/drinks/cans/space_up = 7)
@@ -613,18 +591,3 @@
 
 /obj/item/weapon/storage/box/snack/chips
 	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/chips = 7)
-
-//canned goods in cardboard
-/obj/item/weapon/storage/box/canned
-	name = "box of canned food"
-	desc = "A box full of canned foods."
-	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/canned/spinach = 1)
-
-/obj/item/weapon/storage/box/canned/beef
-	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/canned/beef = 6)
-
-/obj/item/weapon/storage/box/canned/beans
-	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/canned/beans = 6)
-
-/obj/item/weapon/storage/box/canned/tomato
-	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/canned/tomato = 6)

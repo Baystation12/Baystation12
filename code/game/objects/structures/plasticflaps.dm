@@ -5,6 +5,7 @@
 	icon_state = "plasticflaps"
 	density = 0
 	anchored = 1
+	plane = ABOVE_HUMAN_PLANE
 	layer = ABOVE_HUMAN_LAYER
 	explosion_resistance = 5
 
@@ -16,7 +17,6 @@
 		/mob/living/simple_animal/mouse,
 		/mob/living/silicon/robot/drone
 		)
-	var/airtight = 0
 
 /obj/structure/plasticflaps/CanPass(atom/A, turf/T)
 	if(istype(A) && A.checkpass(PASS_FLAG_GLASS))
@@ -41,15 +41,11 @@
 	return ..()
 
 /obj/structure/plasticflaps/attackby(obj/item/W, mob/user)
-	if(isCrowbar(W) && !anchored)
+	if(isScrewdriver(W) && !anchored)
 		user.visible_message("<span class='notice'>\The [user] begins deconstructing \the [src].</span>", "<span class='notice'>You start deconstructing \the [src].</span>")
 		if(user.do_skilled(3 SECONDS, SKILL_CONSTRUCTION, src))
 			user.visible_message("<span class='warning'>\The [user] deconstructs \the [src].</span>", "<span class='warning'>You deconstruct \the [src].</span>")
 			qdel(src)
-	if(isScrewdriver(W) && anchored)
-		airtight = !airtight
-		airtight ? become_airtight() : clear_airtight()
-		user.visible_message("<span class='warning'>\The [user] adjusts \the [src], [airtight ? "preventing" : "allowing"] air flow.</span>")
 	else ..()
 
 /obj/structure/plasticflaps/ex_act(severity)
@@ -63,21 +59,32 @@
 			if (prob(5))
 				qdel(src)
 
-/obj/structure/plasticflaps/Destroy() //lazy hack to set the turf to allow air to pass if it's a simulated floor
+/obj/structure/plasticflaps/mining //A specific type for mining that doesn't allow airflow because of them damn crates
+	name = "airtight plastic flaps"
+	desc = "Heavy duty, airtight, plastic flaps."
+
+/obj/structure/plasticflaps/mining/Initialize() //set the turf below the flaps to block air
+	become_airtight()
+	. = ..()
+
+/obj/structure/plasticflaps/mining/wrench_floor_bolts(user)
+	..()
+	if(!anchored)
+		clear_airtight()
+	else
+		become_airtight()
+
+/obj/structure/plasticflaps/mining/Destroy() //lazy hack to set the turf to allow air to pass if it's a simulated floor
 	clear_airtight()
 	. = ..()
 
-/obj/structure/plasticflaps/proc/become_airtight()
+/obj/structure/plasticflaps/mining/proc/become_airtight()
 	var/turf/T = get_turf(loc)
 	if(T)
 		T.blocks_air = 1
 
-/obj/structure/plasticflaps/proc/clear_airtight()
+/obj/structure/plasticflaps/mining/proc/clear_airtight()
 	var/turf/T = get_turf(loc)
 	if(T)
 		if(istype(T, /turf/simulated/floor))
 			T.blocks_air = 0
-
-
-/obj/structure/plasticflaps/airtight // airtight defaults to on 
-	airtight = 1

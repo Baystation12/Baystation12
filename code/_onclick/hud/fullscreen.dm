@@ -102,7 +102,6 @@
 	icon = 'icons/mob/screen1.dmi'
 	screen_loc = "WEST,SOUTH to EAST,NORTH"
 	icon_state = "blurry"
-	alpha = 100
 
 /obj/screen/fullscreen/flash
 	icon = 'icons/mob/screen1.dmi'

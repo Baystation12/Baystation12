@@ -12,7 +12,7 @@
 	r_hand = /obj/item/weapon/material/twohanded/fireaxe
 
 	id_slot = slot_wear_id
-	id_types = list(/obj/item/weapon/card/id/centcom/station)
+	id_type = /obj/item/weapon/card/id/centcom/station
 	id_pda_assignment = "Tunnel Clown!"
 
 /decl/hierarchy/outfit/masked_killer
@@ -25,7 +25,7 @@
 	l_ear = /obj/item/device/radio/headset
 	glasses = /obj/item/clothing/glasses/thermal/plain/monocle
 	suit = /obj/item/clothing/suit/apron
-	l_pocket = /obj/item/weapon/material/knife/combat
+	l_pocket = /obj/item/weapon/material/hatchet/tacknife
 	r_pocket = /obj/item/weapon/scalpel
 	r_hand = /obj/item/weapon/material/twohanded/fireaxe
 
@@ -37,7 +37,7 @@
 
 /decl/hierarchy/outfit/reaper
 	name = "Reaper"
-	uniform = /obj/item/clothing/under/suit_jacket{ starting_accessories=list(/obj/item/clothing/accessory/wcoat/black) }
+	uniform = /obj/item/clothing/under/suit_jacket{ starting_accessories=list(/obj/item/clothing/accessory/wcoat) }
 	shoes = /obj/item/clothing/shoes/black
 	gloves = /obj/item/clothing/gloves/thick
 	l_ear = /obj/item/device/radio/headset
@@ -45,7 +45,7 @@
 	l_pocket = /obj/item/weapon/melee/energy/sword
 
 	id_slot = slot_wear_id
-	id_types = list(/obj/item/weapon/card/id/syndicate/station_access)
+	id_type = /obj/item/weapon/card/id/syndicate/station_access
 	pda_slot = slot_belt
 	pda_type = /obj/item/modular_computer/pda/heads
 
@@ -55,9 +55,9 @@
 	for(var/obj/item/briefcase_item in sec_briefcase)
 		qdel(briefcase_item)
 	for(var/i=3, i>0, i--)
-		new /obj/item/weapon/spacecash/bundle/c1000(sec_briefcase)
-	new /obj/item/weapon/gun/energy/crossbow(sec_briefcase)
-	new /obj/item/weapon/gun/projectile/revolver(sec_briefcase)
-	new /obj/item/ammo_magazine/speedloader/magnum(sec_briefcase)
-	new /obj/item/weapon/plastique(sec_briefcase)
+		sec_briefcase.contents += new /obj/item/weapon/spacecash/bundle/c1000
+	sec_briefcase.contents += new /obj/item/weapon/gun/energy/crossbow
+	sec_briefcase.contents += new /obj/item/weapon/gun/projectile/revolver
+	sec_briefcase.contents += new /obj/item/ammo_magazine/speedloader/magnum
+	sec_briefcase.contents += new /obj/item/weapon/plastique
 	H.equip_to_slot_or_del(sec_briefcase, slot_l_hand)

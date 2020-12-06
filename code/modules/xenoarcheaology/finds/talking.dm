@@ -34,7 +34,7 @@
 	else if(findtext(msg," ")==0)
 		return
 	else
-		/*var/l = length(msg)
+		/*var/l = lentext(msg)
 		if(findtext(msg," ",l,l+1)==0)
 			msg+=" "*/
 		seperate = splittext(msg, " ")
@@ -54,7 +54,7 @@
 		var/list/options = list("[holder_atom] seems to be listening intently to [source]...",\
 			"[holder_atom] seems to be focusing on [source]...",\
 			"[holder_atom] seems to turn it's attention to [source]...")
-		holder_atom.loc.visible_message("<span class='notice'>[icon2html(holder_atom, viewers(get_turf(holder_atom)))] [pick(options)]</span>")
+		holder_atom.loc.visible_message("<span class='notice'>\icon[holder_atom] [pick(options)]</span>")
 
 	if(prob(20))
 		spawn(2)
@@ -79,12 +79,12 @@
 		text = "[pick(heard_words)]"
 	else
 		text = pick(splittext(word, " "))
-	if(length(text)==1)
+	if(lentext(text)==1)
 		text=uppertext(text)
 	else
 		var/cap = copytext(text,1,2)
 		cap = uppertext(cap)
-		cap += copytext(text,2,length(text)+1)
+		cap += copytext(text,2,lentext(text)+1)
 		text=cap
 	var/q = 0
 	msg+=text
@@ -118,5 +118,5 @@
 			listening|=M
 
 	for(var/mob/M in listening)
-		to_chat(M, "[icon2html(holder_atom, M)] <b>[holder_atom]</b> reverberates, <span class='notice'>\"[msg]\"</span>")
+		to_chat(M, "\icon[holder_atom] <b>[holder_atom]</b> reverberates, <span class='notice'>\"[msg]\"</span>")
 	last_talk_time = world.time

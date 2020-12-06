@@ -23,8 +23,6 @@
 	open_layer = BELOW_DOOR_LAYER
 	closed_layer = ABOVE_WINDOW_LAYER
 	movable_flags = MOVABLE_FLAG_Z_INTERACT
-	pry_mod = 0.75
-	var/locked = FALSE //If the door is forced open, it will not close again until the next atmosphere alert in the area
 
 	//These are frequenly used with windows, so make sure zones can pass.
 	//Generally if a firedoor is at a place where there should be a zone boundery then there will be a regular door underneath it.
@@ -39,7 +37,7 @@
 	var/list/areas_added
 	var/list/users_to_open = new
 	var/next_process_time = 0
-	var/closing = 0
+
 	var/hatch_open = 0
 
 	power_channel = ENVIRON
@@ -48,8 +46,6 @@
 	var/list/tile_info[4]
 	var/list/dir_alerts[4] // 4 dirs, bitflags
 
-	turf_hand_priority = 2 //Lower priority than normal doors to prevent interference
-
 	// MUST be in same order as FIREDOOR_ALERT_*
 	var/list/ALERT_STATES=list(
 		"hot",
@@ -57,10 +53,6 @@
 	)
 
 	blend_objects = list(/obj/machinery/door/firedoor, /obj/structure/wall_frame, /turf/unsimulated/wall, /obj/structure/window) // Objects which to blend with
-
-/obj/machinery/door/firedoor/autoset
-	autoset_access = TRUE	//subtype just to make mapping away sites with custom access usage
-	req_access = list()
 
 /obj/machinery/door/firedoor/Initialize()
 	. = ..()
@@ -87,13 +79,9 @@
 /obj/machinery/door/firedoor/get_material()
 	return SSmaterials.get_material_by_name(MATERIAL_STEEL)
 
-/obj/machinery/door/firedoor/examine(mob/user, distance)
-	. = ..()
-	if(distance > 1)
-		return
-	if(locked)
-		to_chat(user, SPAN_WARNING("A light on the control mechanism is flashing red, indicating it is locked open."))
-	if(!density)
+/obj/machinery/door/firedoor/examine(mob/user)
+	. = ..(user, 1)
+	if(!. || !density)
 		return
 
 	if(pdiff >= FIREDOOR_MAX_PRESSURE_DIFF)
@@ -127,25 +115,19 @@
 			for(var/i = 2 to users_to_open.len)
 				users_to_open_string += ", [users_to_open[i]]"
 		to_chat(user, "These people have opened \the [src] during an alert: [users_to_open_string].")
-
 /obj/machinery/door/firedoor/Bumped(atom/AM)
 	if(p_open || operating)
 		return
 	if(!density)
 		return ..()
+	if(istype(AM, /obj/mecha))
+		var/obj/mecha/mecha = AM
+		if(mecha.occupant)
+			var/mob/M = mecha.occupant
+			if(world.time - M.last_bumped <= 10) return //Can bump-open one airlock per second. This is to prevent popup message spam.
+			M.last_bumped = world.time
+			attack_hand(M)
 	return 0
-
-/obj/machinery/door/firedoor/proc/get_alarm()
-	for(var/area/A in areas_added) //Checks if there are fire alarms in any areas associated with that firedoor
-		if(A.fire || A.air_doors_activated)
-			return TRUE
-	return FALSE
-
-/obj/machinery/door/firedoor/attack_generic(var/mob/user, var/damage)
-	playsound(loc, 'sound/weapons/tablehit1.ogg', 50, 1)
-	if(stat & BROKEN)
-		qdel(src)
-	..()
 
 /obj/machinery/door/firedoor/attack_hand(mob/user as mob)
 	add_fingerprint(user)
@@ -157,7 +139,9 @@
 		return
 
 	var/alarmed = lockdown
-	alarmed = get_alarm()
+	for(var/area/A in areas_added)		//Checks if there are fire alarms in any areas associated with that firedoor
+		if(A.fire || A.air_doors_activated)
+			alarmed = 1
 
 	var/answer = alert(user, "Would you like to [density ? "open" : "close"] this [src.name]?[ alarmed && density ? "\nNote that by doing so, you acknowledge any damages from opening this\n[src.name] as being your own fault, and you will be held accountable under the law." : ""]",\
 	"\The [src]", "Yes, [density ? "open" : "close"]", "No")
@@ -169,6 +153,7 @@
 	if(density && (stat & (BROKEN|NOPOWER))) //can still close without power
 		to_chat(user, "\The [src] is not functioning, you'll have to force it open manually.")
 		return
+
 	if(alarmed && density && lockdown && !allowed(user))
 		to_chat(user, "<span class='warning'>Access denied. Please wait for authorities to arrive, or for the alert to clear.</span>")
 		return
@@ -187,45 +172,37 @@
 			open()
 	else
 		spawn()
-			locked = FALSE
 			close()
 
 	if(needs_to_close)
-		sleep(100)
-		alarmed = 0
-		alarmed = get_alarm()	//Just in case a fire alarm is turned off while the firedoor is going through an autoclose cycle
-
-		if(alarmed)
-			nextstate = FIREDOOR_CLOSED
-			close()
+		spawn(50)
+			alarmed = 0
+			for(var/area/A in areas_added)		//Just in case a fire alarm is turned off while the firedoor is going through an autoclose cycle
+				if(A.fire || A.air_doors_activated)
+					alarmed = 1
+			if(alarmed)
+				nextstate = FIREDOOR_CLOSED
+				close()
 
 /obj/machinery/door/firedoor/attackby(obj/item/weapon/C as obj, mob/user as mob)
 	add_fingerprint(user, 0, C)
 	if(operating)
-		return //Already doing something.
-			
+		return//Already doing something.
 	if(isWelder(C) && !repairing)
 		var/obj/item/weapon/weldingtool/W = C
 		if(W.remove_fuel(0, user))
+			blocked = !blocked
+			user.visible_message("<span class='danger'>\The [user] [blocked ? "welds" : "unwelds"] \the [src] with \a [W].</span>",\
+			"You [blocked ? "weld" : "unweld"] \the [src] with \the [W].",\
+			"You hear something being welded.")
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
-			if(do_after(user, 2 SECONDS, src))
-				if(!W.isOn()) return
-				blocked = !blocked
-				user.visible_message("<span class='danger'>\The [user] [blocked ? "welds" : "unwelds"] \the [src] with \a [W].</span>",\
-				"You [blocked ? "weld" : "unweld"] \the [src] with \the [W].",\
-				"You hear something being welded.")
-				playsound(src, 'sound/items/Welder.ogg', 100, 1)
-				update_icon()
-				return
-			else
-				to_chat(user, SPAN_WARNING("You must remain still to complete this task."))
-				return
+			update_icon()
+			return
 
 	if(density && isScrewdriver(C))
 		hatch_open = !hatch_open
 		user.visible_message("<span class='danger'>[user] has [hatch_open ? "opened" : "closed"] \the [src] maintenance hatch.</span>",
 									"You have [hatch_open ? "opened" : "closed"] the [src] maintenance hatch.")
-		playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
 		update_icon()
 		return
 
@@ -280,11 +257,8 @@
 			if(density)
 				spawn(0)
 					open(1)
-					if(lockdown || get_alarm())
-						locked = TRUE
 			else
 				spawn(0)
-					locked = FALSE
 					close()
 			return
 		else
@@ -293,7 +267,7 @@
 
 /obj/machinery/door/firedoor/deconstruct(mob/user, var/moved = FALSE)
 	if (stat & BROKEN)
-		new /obj/item/weapon/stock_parts/circuitboard/broken(src.loc)
+		new /obj/item/weapon/circuitboard/broken(src.loc)
 	else
 		new/obj/item/weapon/airalarm_electronics(src.loc)
 
@@ -308,6 +282,8 @@
 
 // CHECK PRESSURE
 /obj/machinery/door/firedoor/Process()
+	..()
+
 	if(density && next_process_time <= world.time)
 		next_process_time = world.time + 100		// 10 second delays between process updates
 		var/changed = 0
@@ -363,49 +339,7 @@
 	return
 
 /obj/machinery/door/firedoor/close()
-	if(closing || locked)
-		return
-
-	closing = 1
 	latetoggle()
-	var/list/people = list()
-	for(var/turf/turf in locs)
-		for(var/mob/living/M in turf)
-			people += M
-	if(length(people))
-		visible_message(SPAN_DANGER("\The [src] beeps ominously, get out of the way!"), SPAN_DANGER("You hear some beeping coming from the ceiling."), 3)
-		playsound(src, "sound/machines/firedoor.ogg", 50)
-		sleep(2 SECONDS)
-		for(var/turf/turf in locs)
-			for(var/mob/living/M in turf)
-				var/direction
-				for(var/d in GLOB.cardinal)
-					var/turf/T = get_step(src, d)
-					var/area/A = get_area(T)
-					if(istype(A) && !A.atmosalm && !turf_contains_dense_objects(T))
-						direction = d
-					if(!direction)
-						T = get_step_away(src, d)
-						A = get_area(T)
-						if(istype(A) && !A.atmosalm && !turf_contains_dense_objects(T))
-							direction = d
-				if(!direction) //Let's try again but this time ignore atmos alarms
-					for(var/d in GLOB.cardinal)
-						var/turf/T = get_step(src, d)
-						var/area/A = get_area(T)
-						if(istype(A) && !turf_contains_dense_objects(T))
-							direction = d
-						if(!direction)
-							T = get_step_away(src, d)
-							A = get_area(T)
-							if(istype(A) && !turf_contains_dense_objects(T))
-								direction = d
-
-				M.visible_message(SPAN_DANGER("\The [src] knocks [M.name] out of the way!"), SPAN_DANGER("\The [src] knocks you out of the way!"))
-				M.apply_damage(10, BRUTE, used_weapon = src)
-				if(direction) 
-					M.Move(get_step(src, direction))
-	closing = 0
 	return ..()
 
 /obj/machinery/door/firedoor/open(var/forced = 0)
@@ -438,10 +372,9 @@
 		if(. & AIR_BLOCKED)
 			continue
 		var/area/A = get_area(neighbour)
-		if(A.atmosalm)
+		if(!A.master_air_alarm)
 			return
-		var/obj/machinery/alarm/alarm = locate() in A
-		if(!alarm || (alarm.stat & (NOPOWER|BROKEN)))
+		if(A.atmosalm)
 			return
 	return TRUE
 
@@ -497,3 +430,48 @@
 	overlays += panel_overlay
 	overlays += weld_overlay
 	overlays += lights_overlay
+
+//These are playing merry hell on ZAS.  Sorry fellas :(
+
+/obj/machinery/door/firedoor/border_only
+/*
+	icon = 'icons/obj/doors/edge_Doorfire.dmi'
+	glass = 1 //There is a glass window so you can see through the door
+			  //This is needed due to BYOND limitations in controlling visibility
+	heat_proof = 1
+	air_properties_vary_with_direction = 1
+
+	CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
+		if(istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
+			return 1
+		if(get_dir(loc, target) == dir) //Make sure looking at appropriate border
+			if(air_group) return 0
+			return !density
+		else
+			return 1
+
+	CheckExit(atom/movable/mover as mob|obj, turf/target as turf)
+		if(istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
+			return 1
+		if(get_dir(loc, target) == dir)
+			return !density
+		else
+			return 1
+
+
+	update_nearby_tiles(need_rebuild)
+		if(!air_master) return 0
+
+		var/turf/simulated/source = loc
+		var/turf/simulated/destination = get_step(source,dir)
+
+		update_heat_protection(loc)
+
+		if(istype(source)) air_master.tiles_to_update += source
+		if(istype(destination)) air_master.tiles_to_update += destination
+		return 1
+*/
+
+/obj/machinery/door/firedoor/multi_tile
+	icon = 'icons/obj/doors/DoorHazard2x1.dmi'
+	width = 2

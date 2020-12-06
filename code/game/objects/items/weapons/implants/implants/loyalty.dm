@@ -1,7 +1,7 @@
 /obj/item/weapon/implant/loyalty
 	name = "loyalty implant"
 	desc = "Makes you loyal or such."
-	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 2, TECH_ESOTERIC = 3)
+	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 2, TECH_ILLEGAL = 3)
 	known = 1
 
 /obj/item/weapon/implant/loyalty/get_data()
@@ -17,8 +17,7 @@
 	<b>Integrity:</b> Implant will last so long as the nanobots are inside the bloodstream."}
 
 /obj/item/weapon/implant/loyalty/implanted(mob/M)
-	if(!M.mind || !istype(M, /mob/living/carbon/human))
-		return FALSE
+	if(!istype(M, /mob/living/carbon/human))	return FALSE
 	var/mob/living/carbon/human/H = M
 	var/datum/antagonist/antag_data = get_antag_data(H.mind.special_role)
 	if(antag_data && (antag_data.flags & ANTAG_IMPLANT_IMMUNE))

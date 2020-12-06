@@ -1,7 +1,6 @@
 /* Contains:
  * /obj/item/rig_module/device
  * /obj/item/rig_module/device/healthscanner
- * /obj/item/rig_module/device/defib
  * /obj/item/rig_module/device/drill
  * /obj/item/rig_module/device/orescanner
  * /obj/item/rig_module/device/rcd
@@ -23,6 +22,7 @@
 	toggleable = 0
 	disruptive = 0
 
+	var/device_type
 	var/obj/item/device
 
 /obj/item/rig_module/device/healthscanner
@@ -31,38 +31,24 @@
 	icon_state = "scanner"
 	interface_name = "health scanner"
 	interface_desc = "Shows an informative health readout when used on a subject."
-	engage_string = "Display Readout"
-	usable = 1
 	use_power_cost = 200
 	origin_tech = list(TECH_MAGNET = 3, TECH_BIO = 3, TECH_ENGINEERING = 5)
-	device = /obj/item/device/scanner/health
-
-/obj/item/rig_module/device/defib
-	name = "mounted defibrillator"
-	desc = "A complex Vey-Med circuit with two metal electrodes hanging from it."
-	icon_state = "defib"
-
-	interface_name = "mounted defibrillator"
-	interface_desc = "A prototype defibrillator, palm-mounted for ease of use."
-
-	use_power_cost = 0//Already handled by defib, but it's 150 Wh, normal defib takes 100
-	device = /obj/item/weapon/shockpaddles/rig
+	device_type = /obj/item/device/healthanalyzer
 
 /obj/item/rig_module/device/drill
-	name = "hardsuit mounted drill"
+	name = "hardsuit drill mount"
 	desc = "A very heavy diamond-tipped drill."
 	icon_state = "drill"
 	interface_name = "mounted drill"
 	interface_desc = "A diamond-tipped industrial drill."
 	suit_overlay_active = "mounted-drill"
-	suit_overlay_inactive = null
-	use_power_cost = 3600 //2 Wh per use
-	module_cooldown = 0
+	suit_overlay_inactive = "mounted-drill"
+	use_power_cost = 75
 	origin_tech = list(TECH_MATERIAL = 6, TECH_POWER = 4, TECH_ENGINEERING = 6)
-	device = /obj/item/weapon/pickaxe/diamonddrill
+	device_type = /obj/item/weapon/pickaxe/diamonddrill
 
 /obj/item/rig_module/device/anomaly_scanner
-	name = "anomaly scanner module"
+	name = "hardsuit anomaly scanner"
 	desc = "You think it's called an Elder Sarsparilla or something."
 	icon_state = "eldersasparilla"
 	interface_name = "Alden-Saraspova counter"
@@ -71,7 +57,7 @@
 	use_power_cost = 200
 	usable = 1
 	selectable = 0
-	device = /obj/item/device/ano_scanner
+	device_type = /obj/item/device/ano_scanner
 	origin_tech = list(TECH_BLUESPACE = 4, TECH_MAGNET = 4, TECH_ENGINEERING = 6)
 
 /obj/item/rig_module/device/orescanner
@@ -80,20 +66,12 @@
 	icon_state = "scanner"
 	interface_name = "ore detector"
 	interface_desc = "A sonar system for detecting large masses of ore."
-	activate_string = "Get Survey Data Disk"
-	engage_string = "Display Readout"
+	engage_string = "Begin Scan"
 	usable = 1
-	toggleable = 1
+	selectable = 0
 	use_power_cost = 200
-	device = /obj/item/device/scanner/mining
+	device_type = /obj/item/weapon/mining_scanner
 	origin_tech = list(TECH_MATERIAL = 4, TECH_MAGNET = 4, TECH_ENGINEERING = 6)
-
-/obj/item/rig_module/device/orescanner/activate()
-	if(!check() || !device)
-		return 0
-
-	var/obj/item/device/scanner/mining/scanner = device
-	scanner.put_disk_in_hand(holder.wearer)
 
 /obj/item/rig_module/device/rcd
 	name = "RCD mount"
@@ -105,13 +83,11 @@
 	engage_string = "Configure RCD"
 	use_power_cost = 300
 	origin_tech = list(TECH_MATERIAL = 6, TECH_MAGNET = 5, TECH_ENGINEERING = 7)
-	device = /obj/item/weapon/rcd/mounted
+	device_type = /obj/item/weapon/rcd/mounted
 
 /obj/item/rig_module/device/Initialize()
 	. = ..()
-	if(ispath(device))
-		device = new device(src)
-		device.canremove = 0
+	if(device_type) device = new device_type(src)
 
 /obj/item/rig_module/device/engage(atom/target)
 	if(!..() || !device)
@@ -121,7 +97,8 @@
 		device.attack_self(holder.wearer)
 		return 1
 
-	if(!target.Adjacent(holder.wearer))
+	var/turf/T = get_turf(target)
+	if(istype(T) && !T.Adjacent(get_turf(src)))
 		return 0
 
 	var/resolved = target.attackby(device,holder.wearer)
@@ -147,11 +124,11 @@
 
 	charges = list(
 		list("dexalin plus",  "dexalin plus",  /datum/reagent/dexalinp,          80),
-		list("inaprovaline",  "inaprovaline",  /datum/reagent/inaprovaline,      80),
-		list("dylovene",      "dylovene",      /datum/reagent/dylovene,          80),
+		list("dylovene",    "dylovene",    /datum/reagent/dylovene,          80),
 		list("hyronalin",     "hyronalin",     /datum/reagent/hyronalin,         80),
-		list("spaceacillin",  "spaceacillin",  /datum/reagent/spaceacillin,      80),
-		list("tramadol",      "tramadol",      /datum/reagent/tramadol,          80)
+		list("spaceacillin",   "spaceacillin",   /datum/reagent/spaceacillin,      80),
+		list("tramadol",      "tramadol",      /datum/reagent/tramadol,          80),
+		list("tricordrazine", "tricordrazine", /datum/reagent/tricordrazine,     80)
 		)
 
 	var/max_reagent_volume = 80 //Used when refilling.
@@ -162,13 +139,13 @@
 	//just over a syringe worth of each. Want more? Go refill. Gives the ninja another reason to have to show their face.
 	charges = list(
 		list("dexalin plus",  "dexalin plus",  /datum/reagent/dexalinp,          20),
-		list("inaprovaline",  "inaprovaline",  /datum/reagent/inaprovaline,      20),
-		list("dylovene",      "dylovene",      /datum/reagent/dylovene,          20),
+		list("dylovene",    "dylovene",    /datum/reagent/dylovene,          20),
 		list("glucose",       "glucose",       /datum/reagent/nutriment/glucose, 80),
 		list("hyronalin",     "hyronalin",     /datum/reagent/hyronalin,         20),
-		list("dermaline",     "dermaline",     /datum/reagent/dermaline,         20),
-		list("spaceacillin",  "spaceacillin",  /datum/reagent/spaceacillin,      20),
-		list("tramadol",      "tramadol",      /datum/reagent/tramadol,          20)
+		list("radium",        "radium",        /datum/reagent/radium,            20),
+		list("spaceacillin",   "spaceacillin",   /datum/reagent/spaceacillin,      20),
+		list("tramadol",      "tramadol",      /datum/reagent/tramadol,          20),
+		list("tricordrazine", "tricordrazine", /datum/reagent/tricordrazine,     20)
 		)
 
 /obj/item/rig_module/chem_dispenser/accepts_item(var/obj/item/input_item, var/mob/living/user)
@@ -199,7 +176,7 @@
 				break
 
 	if(total_transferred)
-		to_chat(user, "<span class='info'>You transfer [total_transferred] units into the suit reservoir.</span>")
+		to_chat(user, "<font color='blue'>You transfer [total_transferred] units into the suit reservoir.</font>")
 	else
 		to_chat(user, "<span class='danger'>None of the reagents seem suitable.</span>")
 	return 1
@@ -270,8 +247,6 @@
 	selectable = 1
 	disruptive = 1
 
-	suit_overlay_active = "mounted-injector"
-
 	interface_name = "mounted chem injector"
 	interface_desc = "Dispenses loaded chemicals via an arm-mounted injector."
 
@@ -301,12 +276,6 @@
 /obj/item/rig_module/voice/installed()
 	..()
 	holder.speech = src
-	holder.verbs |= /obj/item/weapon/rig/proc/alter_voice
-
-/obj/item/rig_module/voice/removed()
-	..()
-	holder.speech = null
-	holder.verbs -= /obj/item/weapon/rig/proc/alter_voice
 
 /obj/item/rig_module/voice/engage()
 
@@ -322,17 +291,17 @@
 		if("Enable")
 			active = 1
 			voice_holder.active = 1
-			to_chat(usr, "<span class='info'>You enable the speech synthesiser.</span>")
+			to_chat(usr, "<font color='blue'>You enable the speech synthesiser.</font>")
 		if("Disable")
 			active = 0
 			voice_holder.active = 0
-			to_chat(usr, "<span class='info'>You disable the speech synthesiser.</span>")
+			to_chat(usr, "<font color='blue'>You disable the speech synthesiser.</font>")
 		if("Set Name")
 			var/raw_choice = sanitize(input(usr, "Please enter a new name.")  as text|null, MAX_NAME_LEN)
 			if(!raw_choice)
 				return 0
 			voice_holder.voice = raw_choice
-			to_chat(usr, "<span class='info'>You are now mimicking <B>[voice_holder.voice]</B>.</span>")
+			to_chat(usr, "<font color='blue'>You are now mimicking <B>[voice_holder.voice]</B>.</font>")
 	return 1
 
 /obj/item/rig_module/maneuvering_jets
@@ -344,7 +313,7 @@
 	toggleable = 1
 	selectable = 0
 	disruptive = 0
-	active_power_cost = 200
+	active_power_cost = 50
 
 	suit_overlay_active = "maneuvering_active"
 	suit_overlay_inactive = null //"maneuvering_inactive"
@@ -413,7 +382,7 @@
 	use_power_cost = 200
 	usable = 1
 	selectable = 0
-	device = /obj/item/weapon/paper_bin
+	device_type = /obj/item/weapon/paper_bin
 
 /obj/item/rig_module/device/paperdispenser/engage(atom/target)
 
@@ -426,42 +395,42 @@
 
 /obj/item/rig_module/device/pen
 	name = "mounted pen"
-	desc = "For exosuit John Hancocks."
+	desc = "For mecha John Hancocks."
 	icon_state = "pen"
 	interface_name = "mounted pen"
 	interface_desc = "Signatures with style(tm)."
 	engage_string = "Change color"
 	usable = 1
-	device = /obj/item/weapon/pen/multi
+	device_type = /obj/item/weapon/pen/multi
 
 /obj/item/rig_module/device/stamp
-	name = "mounted stamp"
+	name = "mounted internal affairs stamp"
 	desc = "DENIED."
 	icon_state = "stamp"
 	interface_name = "mounted stamp"
 	interface_desc = "Leave your mark."
 	engage_string = "Toggle stamp type"
 	usable = 1
-	var/stamp
+	var/iastamp
 	var/deniedstamp
 
 /obj/item/rig_module/device/stamp/Initialize()
 	. = ..()
-	stamp = new /obj/item/weapon/stamp(src)
+	iastamp = new /obj/item/weapon/stamp/internalaffairs(src)
 	deniedstamp = new /obj/item/weapon/stamp/denied(src)
-	device = stamp
+	device = iastamp
 
 /obj/item/rig_module/device/stamp/engage(atom/target)
 	if(!..() || !device)
 		return 0
 
 	if(!target)
-		if(device == stamp)
+		if(device == iastamp)
 			device = deniedstamp
 			to_chat(holder.wearer, "<span class='notice'>Switched to denied stamp.</span>")
 		else if(device == deniedstamp)
-			device = stamp
-			to_chat(holder.wearer, "<span class='notice'>Switched to rubber stamp.</span>")
+			device = iastamp
+			to_chat(holder.wearer, "<span class='notice'>Switched to internal affairs stamp.</span>")
 		return 1
 
 /obj/item/rig_module/device/decompiler
@@ -471,7 +440,7 @@
 	interface_name = "mounted matter decompiler"
 	interface_desc = "Eats trash like no one's business."
 	origin_tech = list(TECH_MATERIAL = 5, TECH_ENGINEERING = 5)
-	device = /obj/item/weapon/matter_decompiler
+	device_type = /obj/item/weapon/matter_decompiler
 
 /obj/item/rig_module/cooling_unit
 	name = "mounted cooling unit"

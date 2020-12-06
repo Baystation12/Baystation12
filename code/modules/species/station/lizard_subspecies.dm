@@ -8,7 +8,7 @@
 	darksight_range = 5
 	darksight_tint = DARKTINT_GOOD
 	slowdown = 0.4
-	brute_mod = 0.85
+	brute_mod = 0.6
 	flash_mod = 1.4
 	blood_volume = 700
 	water_soothe_amount = 5
@@ -22,20 +22,12 @@
 		)
 
 	additional_available_cultural_info = list(
-		TAG_CULTURE = list(
-			CULTURE_UNATHI_YEOSA_ABYSS,
-			CULTURE_UNATHI_YEOSA_LITTORAL
-		),
 		TAG_FACTION = list(
-			FACTION_UNATHI_RAH_ZAKEH,
-			FACTION_UNATHI_KHARZA
-		),
-		TAG_RELIGION = list(
-			RELIGION_UNATHI_AGA_EAKHE
+			FACTION_UNATHI_YEOSA
 		)
 	)
 
-	default_cultural_info = list(TAG_FACTION = FACTION_UNATHI_INDEPENDENT)
+	default_cultural_info = list(TAG_FACTION = FACTION_UNATHI_YEOSA)
 
 	has_organ = list(
 		BP_HEAD =     /obj/item/organ/external/head/yeosa,

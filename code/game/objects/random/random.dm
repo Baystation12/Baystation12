@@ -28,8 +28,6 @@
 		A.pixel_x = pixel_x
 		A.pixel_y = pixel_y
 
-	return A
-
 // Returns an associative list in format path:weight
 /obj/random/proc/spawn_choices()
 	return list()
@@ -38,7 +36,6 @@
 	name = "randomly spawned object"
 	desc = "This item type is used to randomly spawn a given object at round-start."
 	icon_state = "x3"
-	spawn_nothing_percentage = 50
 	var/spawn_object = null
 
 /obj/random/single/spawn_choices()
@@ -47,7 +44,7 @@
 /obj/random/tool
 	name = "random tool"
 	desc = "This is a random tool."
-	icon = 'icons/obj/tools.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "welder"
 
 /obj/random/tool/spawn_choices()
@@ -68,7 +65,7 @@
 /obj/random/technology_scanner/spawn_choices()
 	return list(/obj/item/device/t_scanner = 5,
 				/obj/item/device/radio = 2,
-				/obj/item/device/scanner/gas = 5)
+				/obj/item/device/analyzer = 5)
 
 /obj/random/powercell
 	name = "random powercell"
@@ -78,7 +75,7 @@
 
 /obj/random/powercell/spawn_choices()
 	return list(/obj/item/weapon/cell/crap = 1,
-				/obj/item/weapon/cell/standard = 8,
+				/obj/item/weapon/cell = 8,
 				/obj/item/weapon/cell/high = 5,
 				/obj/item/weapon/cell/super = 2,
 				/obj/item/weapon/cell/hyper = 1,
@@ -211,14 +208,14 @@
 				/obj/item/weapon/reagent_containers/glass/beaker/vial/random/toxin = 1,
 				/obj/item/weapon/reagent_containers/glass/beaker/sulphuric = 1,
 				/obj/item/weapon/contraband/poster = 5,
+				/obj/item/weapon/material/butterfly = 2,
 				/obj/item/weapon/material/butterflyblade = 3,
 				/obj/item/weapon/material/butterflyhandle = 3,
+				/obj/item/weapon/material/wirerod = 3,
 				/obj/item/weapon/melee/baton/cattleprod = 1,
-				/obj/item/weapon/material/knife/combat = 1,
-				/obj/item/weapon/material/knife/folding = 1,
-				/obj/item/weapon/material/knife/folding/wood = 1,
-				/obj/item/weapon/material/knife/folding/combat/balisong = 2,
-				/obj/item/weapon/material/knife/folding/combat/switchblade = 1,
+				/obj/item/weapon/material/butterfly/switchblade = 1,
+				/obj/item/weapon/material/hatchet/tacknife = 1,
+				/obj/item/weapon/material/kitchen/utensil/knife/boot = 2,
 				/obj/item/weapon/storage/secure/briefcase/money = 1,
 				/obj/item/weapon/storage/box/syndie_kit/cigarette = 1,
 				/obj/item/stack/telecrystal = 1,
@@ -274,8 +271,7 @@
 	icon_state = "revolver"
 
 /obj/random/projectile/spawn_choices()
-	return list(/obj/item/weapon/gun/projectile/heavysniper/boltaction = 4,
-				/obj/item/weapon/gun/projectile/shotgun/pump = 3,
+	return list(/obj/item/weapon/gun/projectile/shotgun/pump = 3,
 				/obj/item/weapon/gun/projectile/automatic/merc_smg = 2,
 				/obj/item/weapon/gun/projectile/automatic/assault_rifle = 2,
 				/obj/item/weapon/gun/projectile/automatic/bullpup_rifle = 2,
@@ -297,7 +293,7 @@
 	name = "Random Handgun"
 	desc = "This is a random sidearm."
 	icon = 'icons/obj/guns/pistol.dmi'
-	icon_state = "secguncomp"
+	icon_state = "secgundark"
 
 /obj/random/handgun/spawn_choices()
 	return list(/obj/item/weapon/gun/projectile/pistol/sec = 3,
@@ -311,7 +307,7 @@
 	name = "Random Ammunition"
 	desc = "This is random ammunition."
 	icon = 'icons/obj/ammo.dmi'
-	icon_state = "magnum"
+	icon_state = "45-10"
 
 /obj/random/ammo/spawn_choices()
 	return list(/obj/item/weapon/storage/box/ammo/beanbags = 6,
@@ -430,14 +426,8 @@ obj/random/closet //A couple of random closets to spice up maint
 	desc = "This is a random closet."
 	icon = 'icons/obj/closets/bases/closet.dmi'
 	icon_state = "base"
-	var/vermin_chance = 5
-	var/list/locker_vermin = list(
-		/mob/living/simple_animal/mouse,
-		/mob/living/simple_animal/opossum,
-		/mob/living/carbon/alien/diona
-	)
 
-/obj/random/closet/spawn_choices()
+obj/random/closet/spawn_choices()
 	return list(/obj/structure/closet,
 				/obj/structure/closet/firecloset,
 				/obj/structure/closet/emcloset,
@@ -457,19 +447,13 @@ obj/random/closet //A couple of random closets to spice up maint
 				/obj/structure/closet/wardrobe/xenos,
 				/obj/structure/closet/wardrobe/mixed,
 				/obj/structure/closet/wardrobe/suit,
-				/obj/structure/closet/wardrobe/orange
-				)
-/obj/random/closet/spawn_item()
-	. = ..()
-	if(. && length(locker_vermin) && prob(vermin_chance))
-		var/vermin_type = pickweight(locker_vermin)
-		new vermin_type(.)
+				/obj/structure/closet/wardrobe/orange)
 
 /obj/random/coin
 	name = "random coin"
 	desc = "This is a random coin."
-	icon = 'icons/obj/coin.dmi'
-	icon_state = "coin1"
+	icon = 'icons/obj/items.dmi'
+	icon_state = "coin"
 
 /obj/random/coin/spawn_choices()
 	return list(/obj/item/weapon/material/coin/gold = 3,
@@ -502,7 +486,7 @@ obj/random/closet //A couple of random closets to spice up maint
 				/obj/item/toy/crossbow,
 				/obj/item/toy/blink,
 				/obj/item/weapon/reagent_containers/spray/waterflower,
-				/obj/item/toy/prize/powerloader,
+				/obj/item/toy/prize/ripley,
 				/obj/item/toy/prize/fireripley,
 				/obj/item/toy/prize/deathripley,
 				/obj/item/toy/prize/gygax,
@@ -524,7 +508,7 @@ obj/random/closet //A couple of random closets to spice up maint
 /obj/random/tank/spawn_choices()
 	return list(/obj/item/weapon/tank/oxygen = 5,
 				/obj/item/weapon/tank/oxygen/yellow = 4,
-				/obj/item/weapon/tank/emergency/oxygen/double/red = 4,
+				/obj/item/weapon/tank/oxygen/red = 4,
 				/obj/item/weapon/tank/air = 3,
 				/obj/item/weapon/tank/emergency/oxygen = 4,
 				/obj/item/weapon/tank/emergency/oxygen/engi = 3,
@@ -565,7 +549,11 @@ obj/random/closet //A couple of random closets to spice up maint
 	icon_state = "soaprandom"
 
 /obj/random/soap/spawn_choices()
-	return list(/obj/item/weapon/soap = 12,
+	return list(/obj/item/weapon/soap = 4,
+				/obj/item/weapon/soap/nanotrasen = 3,
+				/obj/item/weapon/soap/deluxe = 3,
+				/obj/item/weapon/soap/syndie = 1,
+				/obj/item/weapon/soap/gold = 1,
 				/obj/item/weapon/reagent_containers/glass/rag = 2,
 				/obj/item/weapon/reagent_containers/spray/cleaner = 2,
 				/obj/item/weapon/grenade/chem_grenade/cleaner = 1)
@@ -680,7 +668,7 @@ obj/random/obstruction/spawn_choices()
 				/obj/item/weapon/reagent_containers/food/snacks/spacetwinkie,
 				/obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers,
 				/obj/item/weapon/reagent_containers/food/snacks/tastybread,
-				/obj/item/weapon/reagent_containers/food/snacks/proteinbar,
+				/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar,
 				/obj/item/weapon/reagent_containers/food/snacks/syndicake,
 				/obj/item/weapon/reagent_containers/food/snacks/donut,
 				/obj/item/weapon/reagent_containers/food/snacks/donut/cherryjelly,
@@ -783,7 +771,7 @@ obj/random/obstruction/spawn_choices()
 
 /obj/random/glasses/spawn_choices()
 	return list(/obj/item/clothing/glasses/sunglasses = 3,
-				/obj/item/clothing/glasses/prescription = 7,
+				/obj/item/clothing/glasses/regular = 7,
 				/obj/item/clothing/glasses/meson = 5,
 				/obj/item/clothing/glasses/meson/prescription = 4,
 				/obj/item/clothing/glasses/science = 6,
@@ -820,7 +808,7 @@ obj/random/obstruction/spawn_choices()
 	name = "random suit"
 	desc = "This is a random piece of outerwear."
 	icon = 'icons/obj/clothing/obj_suit.dmi'
-	icon_state = "syndicate"
+	icon_state = "fire"
 
 /obj/random/suit/spawn_choices()
 	return list(/obj/item/clothing/suit/storage/hazardvest = 4,
@@ -843,7 +831,7 @@ obj/random/obstruction/spawn_choices()
 	name = "random clothes"
 	desc = "This is a random piece of clothing."
 	icon = 'icons/obj/clothing/obj_under.dmi'
-	icon_state = "jumpsuit"
+	icon_state = "grey"
 
 /obj/random/clothing/spawn_choices()
 	return list(/obj/item/clothing/under/syndicate/tacticool = 2,
@@ -1065,7 +1053,8 @@ something, make sure it's not in one of the other lists.*/
 				/obj/item/weapon/rig/light/hacker,
 				/obj/item/weapon/rig/light/stealth,
 				/obj/item/weapon/rig/light,
-				/obj/item/weapon/rig/unathi)
+				/obj/item/weapon/rig/unathi,
+				/obj/item/weapon/rig/unathi/fancy)
 
 /obj/random/hostile
 	name = "Random Hostile Mob"
@@ -1135,16 +1124,6 @@ var/list/multi_point_spawns
 	name = "Multi Point - Captain's Spare"
 	id = "Captain's spare id"
 	item_path = /obj/item/weapon/card/id/captains_spare
-
-/obj/random_multi/single_item/skelestand
-	name = "Multi Point - Medical Skeleton"
-	id = "Medical Skeleton"
-	item_path = /obj/structure/skele_stand
-
-/obj/random_multi/single_item/skelestand/maint
-	name = "Multi Point - Maintenance Skeleton"
-	id = "Maint Skeleton"
-	item_path = /obj/structure/skele_stand/maint
 
 var/list/random_junk_
 var/list/random_useful_
@@ -1233,7 +1212,7 @@ var/list/random_useful_
 /obj/random/mre/main
 	name = "random MRE main course"
 	desc = "This is a random main course for MREs."
-	icon_state = "pouch_medium"
+	icon_state = "pouch"
 
 /obj/random/mre/main/spawn_choices()
 	return list(/obj/item/weapon/storage/mrebag,
@@ -1248,11 +1227,11 @@ var/list/random_useful_
 /obj/random/mre/dessert
 	name = "random MRE dessert"
 	desc = "This is a random dessert for MREs."
-	icon_state = "pouch_medium"
+	icon_state = "pouch"
 
 /obj/random/mre/dessert/spawn_choices()
 	return list(/obj/item/weapon/reagent_containers/food/snacks/candy,
-				/obj/item/weapon/reagent_containers/food/snacks/proteinbar,
+				/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar,
 				/obj/item/weapon/reagent_containers/food/snacks/donut/normal,
 				/obj/item/weapon/reagent_containers/food/snacks/donut/cherryjelly,
 				/obj/item/weapon/reagent_containers/food/snacks/chocolatebar,
@@ -1273,7 +1252,7 @@ var/list/random_useful_
 /obj/random/mre/drink
 	name = "random MRE drink"
 	desc = "This is a random drink for MREs."
-	icon_state = "packet_small"
+	icon_state = "packet"
 
 /obj/random/mre/drink/spawn_choices()
 	return list(/obj/item/weapon/reagent_containers/food/condiment/small/packet/coffee,
@@ -1287,7 +1266,7 @@ var/list/random_useful_
 /obj/random/mre/spread
 	name = "random MRE spread"
 	desc = "This is a random spread packet for MREs."
-	icon_state = "packet_small"
+	icon_state = "packet"
 
 /obj/random/mre/spread/spawn_choices()
 	return list(/obj/item/weapon/reagent_containers/food/condiment/small/packet/jelly,
@@ -1295,7 +1274,7 @@ var/list/random_useful_
 
 /obj/random/mre/spread/vegan
 	name = "random vegan MRE spread"
-	desc = "This is a random vegan spread packet for MREs."
+	desc = "This is a random vegan spread packet for MREs"
 
 /obj/random/mre/spread/vegan/spawn_choices()
 	return list(/obj/item/weapon/reagent_containers/food/condiment/small/packet/jelly)
@@ -1303,7 +1282,7 @@ var/list/random_useful_
 /obj/random/mre/sauce
 	name = "random MRE sauce"
 	desc = "This is a random sauce packet for MREs."
-	icon_state = "packet_small"
+	icon_state = "packet"
 
 /obj/random/mre/sauce/spawn_choices()
 	return list(/obj/item/weapon/reagent_containers/food/condiment/small/packet/salt,
@@ -1338,34 +1317,3 @@ var/list/random_useful_
 				/obj/item/weapon/reagent_containers/food/condiment/small/packet/crayon/purple,
 				/obj/item/weapon/reagent_containers/food/condiment/small/packet/crayon/grey,
 				/obj/item/weapon/reagent_containers/food/condiment/small/packet/crayon/brown)
-
-/obj/random/vendor
-	name = "random vending machine"
-	desc = "This is a randomly selected vending machine."
-	icon = 'icons/obj/vending.dmi'
-	icon_state = ""
-
-/obj/random/vendor/spawn_choices()
-	return list(/obj/machinery/vending/weeb,
-				/obj/machinery/vending/sol,
-				/obj/machinery/vending/snix,
-				/obj/machinery/vending/soda
-				)
-
-/obj/random/single/playing_cards
-	name = "randomly spawned deck of cards"
-	icon = 'icons/obj/playing_cards.dmi'
-	icon_state = "deck"
-	spawn_object = /obj/item/weapon/deck
-
-/obj/random/single/lighter
-	name = "randomly spawned lighter"
-	icon = 'icons/obj/lighters.dmi'
-	icon_state = "lighter"
-	spawn_object = /obj/item/weapon/flame/lighter
-
-/obj/random/single/cola
-	name = "randomly spawned cola"
-	icon = 'icons/obj/drinks.dmi'
-	icon_state = "cola"
-	spawn_object = /obj/item/weapon/reagent_containers/food/drinks/cans/cola

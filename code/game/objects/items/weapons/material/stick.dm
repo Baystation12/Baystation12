@@ -1,10 +1,8 @@
 /obj/item/weapon/material/stick
 	name = "stick"
 	desc = "You feel the urge to poke someone with this."
-	icon = 'icons/obj/weapons/melee_physical.dmi'
 	icon_state = "stick"
 	item_state = "stickmat"
-	max_force = 10
 	force_divisor = 0.1
 	thrown_force_divisor = 0.1
 	w_class = ITEM_SIZE_NORMAL
@@ -20,7 +18,7 @@
 /obj/item/weapon/material/stick/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(W.sharp && W.edge && !sharp)
 		user.visible_message("<span class='warning'>[user] sharpens [src] with [W].</span>", "<span class='warning'>You sharpen [src] using [W].</span>")
-		sharp = TRUE
+		sharp = 1 //Sharpen stick
 		SetName("sharpened " + name)
 		update_force()
 	return ..()

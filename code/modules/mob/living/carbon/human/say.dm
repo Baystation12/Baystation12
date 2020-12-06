@@ -9,27 +9,20 @@
 		if (speaking)
 			message = copytext(message,2+length(speaking.key))
 		else
-			speaking = get_any_good_language(set_default=TRUE)
-			if (!speaking)
-				to_chat(src, SPAN_WARNING("You don't know a language and cannot speak."))
-				emote("custom", AUDIBLE_MESSAGE, "[pick("grunts", "babbles", "gibbers", "jabbers", "burbles")] aimlessly.")
-				return
-
-	if(has_chem_effect(CE_VOICELOSS, 1))
-		whispering = TRUE
+			speaking = get_default_language()
 
 	message = sanitize(message)
 	var/obj/item/organ/internal/voicebox/vox = locate() in internal_organs
 	var/snowflake_speak = (speaking && (speaking.flags & (NONVERBAL|SIGNLANG))) || (vox && vox.is_usable() && vox.assists_languages[speaking])
 	if(!isSynthetic() && need_breathe() && failed_last_breath && !snowflake_speak)
 		var/obj/item/organ/internal/lungs/L = internal_organs_by_name[species.breathing_organ]
-		if(!L || L.breath_fail_ratio > 0.9)
-			if(L && world.time < L.last_successful_breath + 2 MINUTES) //if we're in grace suffocation period, give it up for last words
+		if(L.breath_fail_ratio > 0.9)
+			if(world.time < L.last_successful_breath + 2 MINUTES) //if we're in grace suffocation period, give it up for last words
 				to_chat(src, "<span class='warning'>You use your remaining air to say something!</span>")
 				L.last_successful_breath = world.time - 2 MINUTES
 				return ..(message, speaking = speaking)
 
-			to_chat(src, "<span class='warning'>You don't have enough air[L ? " in [L]" : ""] to make a sound!</span>")
+			to_chat(src, "<span class='warning'>You don't have enough air in [L] to make a sound!</span>")
 			return
 		else if(L.breath_fail_ratio > 0.7)
 			whisper_say(length(message) > 5 ? stars(message) : message, speaking)
@@ -109,22 +102,13 @@
 		// todo: fix this shit
 		if(rig.speech && rig.speech.voice_holder && rig.speech.voice_holder.active && rig.speech.voice_holder.voice)
 			voice_sub = rig.speech.voice_holder.voice
-
-	if(!voice_sub)
-
-		var/list/check_gear = list(wear_mask, head)
-		if(wearing_rig)
-			var/datum/extension/armor/rig/armor_datum = get_extension(wearing_rig, /datum/extension/armor)
-			if(istype(armor_datum) && armor_datum.sealed && wearing_rig.helmet == head)
-				check_gear |= wearing_rig
-
-		for(var/obj/item/gear in check_gear)
+	else
+		for(var/obj/item/gear in list(wear_mask,wear_suit,head))
 			if(!gear)
 				continue
 			var/obj/item/voice_changer/changer = locate() in gear
 			if(changer && changer.active && changer.voice)
 				voice_sub = changer.voice
-
 	if(voice_sub)
 		return voice_sub
 	if(mind && mind.changeling && mind.changeling.mimicing)
@@ -146,7 +130,7 @@
 	return verb
 
 /mob/living/carbon/human/handle_speech_problems(var/list/message_data)
-	if(silent || (sdisabilities & MUTED))
+	if(silent || (sdisabilities & MUTE))
 		message_data[1] = ""
 		. = 1
 
@@ -222,7 +206,7 @@
 	return ..()
 
 /mob/living/carbon/human/can_speak(datum/language/speaking)
-	if(species && speaking && (speaking.name in species.assisted_langs))
+	if(species && (speaking.name in species.assisted_langs))
 		for(var/obj/item/organ/internal/voicebox/I in src.internal_organs)
 			if(I.is_usable() && I.assists_languages[speaking])
 				return TRUE

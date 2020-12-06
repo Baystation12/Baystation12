@@ -27,6 +27,7 @@
 
 	how_much			When a merchant tells the player how much something is.
 	trade_complete		When a trade is made
+	trade_refuse		When a trade is refused
 
 	what_want			What the person says when they are asked if they want something
 
@@ -52,29 +53,9 @@
 	if(possible_origins && possible_origins.len)
 		origin = pick(possible_origins)
 
-	//Generate the
-	if(possible_wanted_items)
-		possible_wanted_items = generate_pool(possible_wanted_items)
-	if(possible_trading_items)
-		possible_trading_items = generate_pool(possible_trading_items)
-
 	for(var/i in 3 to 6)
 		add_to_pool(trading_items, possible_trading_items, force = 1)
 		add_to_pool(wanted_items, possible_wanted_items, force = 1)
-
-/datum/trader/proc/generate_pool(var/list/trading_pool)
-	. = list()
-	for(var/type in trading_pool)
-		var/status = trading_pool[type]
-		if(status & TRADER_THIS_TYPE)
-			. += type
-		if(status & TRADER_SUBTYPES_ONLY)
-			. += subtypesof(type)
-		if(status & TRADER_BLACKLIST)
-			. -= type
-		if(status & TRADER_BLACKLIST_SUB)
-			. -= subtypesof(type)
-
 
 //If this hits 0 then they decide to up and leave.
 /datum/trader/proc/tick()
@@ -101,21 +82,33 @@
 /datum/trader/proc/get_possible_item(var/list/trading_pool)
 	if(!trading_pool || !trading_pool.len)
 		return
-	var/picked = pick(trading_pool)
-	var/atom/A = picked
-	if(initial(A.name) in list("object", "item","weapon", "structure", "machinery", "exosuit", "organ", "snack")) //weed out a few of the common bad types. Reason we don't check types specifically is that (hopefully) further bad subtypes don't set their name up and are similar.
-		return null
-	return picked
+	var/list/possible = list()
+	for(var/type in trading_pool)
+		var/status = trading_pool[type]
+		if(status & TRADER_THIS_TYPE)
+			possible += type
+		if(status & TRADER_SUBTYPES_ONLY)
+			possible += subtypesof(type)
+		if(status & TRADER_BLACKLIST)
+			possible -= type
+		if(status & TRADER_BLACKLIST_SUB)
+			possible -= subtypesof(type)
+
+	if(possible.len)
+		var/picked = pick(possible)
+		var/atom/A = picked
+		if(initial(A.name) in list("object", "item","weapon", "structure", "machinery", "Mecha", "organ", "snack")) //weed out a few of the common bad types. Reason we don't check types specifically is that (hopefully) further bad subtypes don't set their name up and are similar.
+			return
+		return picked
 
 /datum/trader/proc/get_response(var/key, var/default)
+	var/text
 	if(speech && speech[key])
-		. = speech[key]
+		text = speech[key]
 	else
-		. = default
-	. = replacetext(., "MERCHANT", name)
-	. = replacetext(., "ORIGIN", origin)
-	. = replacetext(.,"CURRENCY_SINGULAR", GLOB.using_map.local_currency_name_singular)
-	. = replacetext(.,"CURRENCY", GLOB.using_map.local_currency_name)
+		text = default
+	text = replacetext(text, "MERCHANT", name)
+	return replacetext(text, "ORIGIN", origin)
 
 /datum/trader/proc/print_trading_items(var/num)
 	num = Clamp(num,1,trading_items.len)
@@ -149,21 +142,18 @@
 		. *= want_multiplier
 	. *= max(1 - (margin - 1) * skill_curve(skill), 0.1) //Trader will underpay at lower skill.
 
-/datum/trader/proc/make_response(var/response_type, var/response_default, var/delta = 0, var/success = TRUE)
-	. = new /datum/trade_response(get_response(response_type, response_default), delta, success)
-
-/datum/trader/proc/offer_money_for_trade(var/trade_num, var/money_amount, var/turf/location, skill = SKILL_MAX)
+/datum/trader/proc/offer_money_for_trade(var/trade_num, var/money_amount, skill = SKILL_MAX)
 	if(!(trade_flags & TRADER_MONEY))
-		return make_response(TRADER_NO_MONEY, "I don't like money", 0, FALSE)
+		return TRADER_NO_MONEY
 	var/value = get_item_value(trade_num, skill)
 	if(money_amount < value)
-		return make_response(TRADER_NOT_ENOUGH, "I need more money!", 0, FALSE)
-	trade(list(), trade_num, location)
-	return make_response(TRADER_TRADE_COMPLETE, "Thank you for your patronage!", -value, TRUE)
+		return TRADER_NOT_ENOUGH
+
+	return value
 
 /datum/trader/proc/offer_items_for_trade(var/list/offers, var/num, var/turf/location, skill = SKILL_MAX)
 	if(!offers || !offers.len)
-		return make_response(TRADER_NOT_ENOUGH, "That's not enough.", 0, FALSE)
+		return TRADER_NOT_ENOUGH
 	num = Clamp(num, 1, trading_items.len)
 	var/offer_worth = 0
 	for(var/item in offers)
@@ -174,32 +164,29 @@
 		if((trade_flags & TRADER_WANTED_ALL) && is_type_in_list(offer,possible_wanted_items))
 			is_wanted = 1
 		if(blacklisted_trade_items && blacklisted_trade_items.len && is_type_in_list(offer,blacklisted_trade_items))
-			return make_response(TRADER_NO_BLACKLISTED, "I refuse to take one of those items.", 0, FALSE)
+			return 0
 
 		if(istype(offer,/obj/item/weapon/spacecash))
 			if(!(trade_flags & TRADER_MONEY))
-				return make_response(TRADER_NO_MONEY, "I don't take money.", 0, FALSE)
+				return TRADER_NO_MONEY
 		else
 			if(!(trade_flags & TRADER_GOODS))
-				return make_response(TRADER_NO_GOODS, "I don't take goods.", 0, FALSE)
+				return TRADER_NO_GOODS
 			else if((trade_flags & TRADER_WANTED_ONLY|TRADER_WANTED_ALL) && !is_wanted)
-				return make_response(TRADER_FOUND_UNWANTED, "I don't want one of those items", 0, FALSE)
+				return TRADER_FOUND_UNWANTED
 
 		offer_worth += get_buy_price(offer, is_wanted - 1, skill)
 	if(!offer_worth)
-		return make_response(TRADER_NOT_ENOUGH, "Everything you've gave me is worthless!", 0, FALSE)
+		return TRADER_NOT_ENOUGH
 	var/trading_worth = get_item_value(num, skill)
 	if(!trading_worth)
-		return make_response(TRADER_NOT_ENOUGH, "That's not enough.", 0, FALSE)
+		return TRADER_NOT_ENOUGH
 	var/percent = offer_worth/trading_worth
 	if(percent > max(0.9,0.9-disposition/100))
-		trade(offers, num, location)
-		return make_response(TRADER_TRADE_COMPLETE, "Thank you for your patronage!", 0, TRUE)
-	return make_response(TRADER_NOT_ENOUGH, "That's not enough.", 0, FALSE)
+		return trade(offers, num, location)
+	return TRADER_NOT_ENOUGH
 
 /datum/trader/proc/hail(var/mob/user)
-	if(!can_hail())
-		return make_response(TRADER_HAIL_DENY, "No, go away.", 0, FALSE)
 	var/specific
 	if(istype(user, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
@@ -207,11 +194,10 @@
 			specific = H.species.name
 	else if(istype(user, /mob/living/silicon))
 		specific = "silicon"
-	if(!speech[TRADER_HAIL_START + specific])
+	if(!speech["hail_[specific]"])
 		specific = "generic"
-	var/datum/trade_response/tr = make_response(TRADER_HAIL_START + specific, "Greetings, MOB!", 0, TRUE)
-	tr.text = replacetext(tr.text, "MOB", user.name)
-	return tr
+	. = get_response("hail_[specific]", "Greetings, MOB!")
+	. = replacetext(., "MOB", user.name)
 
 /datum/trader/proc/can_hail()
 	if(!refuse_comms && prob(-disposition))
@@ -223,25 +209,28 @@
 	if(prob(-disposition/10))
 		refuse_comms = 1
 	if(disposition > 50)
-		return make_response(TRADER_INSULT_GOOD,"What? I thought we were cool!", 0, TRUE)
+		return get_response("insult_good","What? I thought we were cool!")
 	else
-		return make_response(TRADER_INSULT_BAD, "Right back at you asshole!", 0, FALSE)
+		return get_response("insult_bad", "Right back at you asshole!")
 
 /datum/trader/proc/compliment()
 	if(prob(-disposition))
-		return make_response(TRADER_COMPLEMENT_FAILURE, "Fuck you!", 0, FALSE)
+		return get_response("compliment_deny", "Fuck you!")
 	if(prob(100-disposition))
 		disposition += rand(compliment_increase, compliment_increase * 2)
-	return make_response(TRADER_COMPLEMENT_SUCCESS, "Thank you!", 0, TRUE)
+	return get_response("compliment_accept", "Thank you!")
 
 /datum/trader/proc/trade(var/list/offers, var/num, var/turf/location)
-	for(var/offer in offers)
-		if(istype(offer,/mob))
-			var/text = mob_transfer_message
-			to_chat(offer, replacetext(text, "ORIGIN", origin))
-		qdel(offer)
+	if(offers && offers.len)
+		for(var/offer in offers)
+			if(istype(offer,/mob))
+				var/text = mob_transfer_message
+				to_chat(offer, replacetext(text, "ORIGIN", origin))
+			if(istype(offer, /obj/mecha))
+				var/obj/mecha/M = offer
+				M.wreckage = null //So they don't ruin the illusion
+			qdel(offer)
 
-	num = Clamp(num, 1, trading_items.len)
 	var/type = trading_items[num]
 
 	var/atom/movable/M = new type(location)
@@ -252,45 +241,42 @@
 	return M
 
 /datum/trader/proc/how_much_do_you_want(var/num, skill = SKILL_MAX)
-	num = Clamp(num, 1, trading_items.len)
 	var/atom/movable/M = trading_items[num]
-	var/datum/trade_response/tr = make_response(TRADER_HOW_MUCH, "Hmm.... how about VALUE CURRENCY?", 0, FALSE)
-	tr.text = replacetext(replacetext(tr.text, "ITEM", initial(M.name)), "VALUE", get_item_value(num, skill))
-	return tr
+	. = get_response("how_much", "Hmm.... how about VALUE thalers?")
+	. = replacetext(.,"VALUE",get_item_value(num, skill))
+	. = replacetext(.,"ITEM", initial(M.name))
 
 /datum/trader/proc/what_do_you_want()
 	if(!(trade_flags & TRADER_GOODS))
-		return make_response(TRADER_NO_GOODS, "I don't deal in goods.", 0, FALSE)
+		return get_response(TRADER_NO_GOODS, "I don't deal in goods.")
 
-	var/datum/trade_response/tr = make_response(TRADER_WHAT_WANT, "Hm, I want", 0, TRUE)
+	. = get_response("what_want", "Hm, I want")
 	var/list/want_english = list()
 	for(var/type in wanted_items)
 		var/atom/a = type
 		want_english += initial(a.name)
-	tr.text += " [english_list(want_english)]"
-	return tr
+	. += " [english_list(want_english)]"
 
 /datum/trader/proc/sell_items(var/list/offers, skill = SKILL_MAX)
 	if(!(trade_flags & TRADER_GOODS))
-		return make_response(TRADER_GOODS, "I'm not buying.", 0, FALSE)
+		return TRADER_NO_GOODS
 	if(!offers || !offers.len)
-		return make_response(TRADER_NOT_ENOUGH, "I'm not buying that.", 0, FALSE)
+		return TRADER_NOT_ENOUGH
 
 	var/wanted
-	var/total = 0
+	. = 0
 	for(var/offer in offers)
 		if((trade_flags & TRADER_WANTED_ONLY) && is_type_in_list(offer,wanted_items))
 			wanted = 1
 		else if((trade_flags & TRADER_WANTED_ALL) && is_type_in_list(offer,possible_wanted_items))
 			wanted = 0
 		else
-			return make_response(TRADER_FOUND_UNWANTED, "I don't want one of those items", 0, FALSE)
-		total += get_buy_price(offer, wanted, skill)
+			return TRADER_FOUND_UNWANTED
+		. += get_buy_price(offer, wanted, skill)
 
 	playsound(get_turf(offers[1]), 'sound/effects/teleport.ogg', 50, 1)
 	for(var/offer in offers)
 		qdel(offer)
-	return make_response(TRADER_TRADE_COMPLETE, "Thanks for the goods!", total, TRUE)
 
 /datum/trader/proc/bribe_to_stay_longer(var/amt)
-	return make_response(TRADER_BRIBE_FAILURE, "How about no?", 0, FALSE)
+	return get_response("bribe_refusal", "How about... no?")

@@ -7,7 +7,6 @@
 	slot_flags = SLOT_TIE
 	w_class = ITEM_SIZE_SMALL
 	var/slot = ACCESSORY_SLOT_DECOR
-	var/body_location = UPPER_TORSO //most accessories are here
 	var/obj/item/clothing/has_suit = null		//the suit the tie may be attached to
 	var/image/inv_overlay = null	//overlay used when attached to clothing.
 	var/list/mob_overlay = list()
@@ -98,11 +97,6 @@
 		return	//we aren't an object on the ground so don't call parent
 	..()
 
-/obj/item/clothing/accessory/get_pressure_weakness(pressure,zone)
-	if(body_parts_covered & zone)
-		return ..()
-	return 1
-
 //Necklaces
 /obj/item/clothing/accessory/necklace
 	name = "necklace"
@@ -115,17 +109,9 @@
 	name = "kneepads"
 	desc = "A pair of synthetic kneepads. Doesn't provide protection from more than arthritis."
 	icon_state = "kneepads"
-	body_location = LEGS
 
 //Scarves
 /obj/item/clothing/accessory/scarf
 	name = "scarf"
 	desc = "A stylish scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks."
 	icon_state = "whitescarf"
-
-//Bracelets
-/obj/item/clothing/accessory/bracelet
-	name = "bracelet"
-	desc = "A simple bracelet with a clasp."
-	icon_state = "bracelet"
-	body_location = HANDS

@@ -85,22 +85,14 @@ datum/admins/proc/DB_ban_record(var/bantype, var/mob/banned_mob, var/duration = 
 	var/ip
 
 	if(ismob(banned_mob))
-		ckey = LAST_CKEY(banned_mob)
-		computerid = banned_mob.computer_id
-		ip = banned_mob.lastKnownIP
+		ckey = banned_mob.ckey
 		if(banned_mob.client)
 			computerid = banned_mob.client.computer_id
 			ip = banned_mob.client.address
-		if (bantype == BANTYPE_PERMA || bantype == BANTYPE_TEMP)
-			banned_mob.ckey = null
 	else if(banckey)
 		ckey = ckey(banckey)
 		computerid = bancid
 		ip = banip
-		for (var/mob/M in SSmobs.mob_list)
-			if (M.ckey == ckey)
-				M.ckey = null
-				break
 
 	var/who
 	for(var/client/C in GLOB.clients)
@@ -125,7 +117,7 @@ datum/admins/proc/DB_ban_record(var/bantype, var/mob/banned_mob, var/duration = 
 	if(usr)
 		to_chat(usr, "<span class='notice'>Ban saved to database.</span>")
 		setter = key_name_admin(usr)
-	message_admins("[setter] has added a [bantype_str] for [ckey] [(job)?"([job])":""] [(duration > 0)?"([minutes_to_readable(duration)])":""] with the reason: \"[reason]\" to the ban database.",1)
+	message_admins("[setter] has added a [bantype_str] for [ckey] [(job)?"([job])":""] [(duration > 0)?"([duration] minutes)":""] with the reason: \"[reason]\" to the ban database.",1)
 	return 1
 
 
@@ -341,7 +333,7 @@ datum/admins/proc/DB_ban_unban_by_id(var/id)
 	output += "<tr><td width='50%' align='right'><b>Duration:</b> <input type='text' name='dbbaddduration'></td>"
 	output += "<td width='50%' align='right'><b>Job:</b><select name='dbbanaddjob'>"
 	output += "<option value=''>--</option>"
-	for(var/j in SSjobs.titles_to_datums)
+	for(var/j in get_all_jobs())
 		output += "<option value='[j]'>[j]</option>"
 	for(var/j in SSjobs.titles_by_department(MSC))
 		output += "<option value='[j]'>[j]</option>"
@@ -421,13 +413,13 @@ datum/admins/proc/DB_ban_unban_by_id(var/id)
 				if(playercid)
 					cidsearch  = "AND computerid = '[playercid]' "
 			else
-				if(adminckey && length(adminckey) >= 3)
+				if(adminckey && lentext(adminckey) >= 3)
 					adminsearch = "AND a_ckey LIKE '[adminckey]%' "
-				if(playerckey && length(playerckey) >= 3)
+				if(playerckey && lentext(playerckey) >= 3)
 					playersearch = "AND ckey LIKE '[playerckey]%' "
-				if(playerip && length(playerip) >= 3)
+				if(playerip && lentext(playerip) >= 3)
 					ipsearch  = "AND ip LIKE '[playerip]%' "
-				if(playercid && length(playercid) >= 7)
+				if(playercid && lentext(playercid) >= 7)
 					cidsearch  = "AND computerid LIKE '[playercid]%' "
 
 			if(dbbantype)
@@ -482,11 +474,11 @@ datum/admins/proc/DB_ban_unban_by_id(var/id)
 					if("PERMABAN")
 						typedesc = "<font color='red'><b>PERMABAN</b></font>"
 					if("TEMPBAN")
-						typedesc = "<b>TEMPBAN</b><br><font size='2'>([minutes_to_readable(duration)]) [(unbanned || auto) ? "" : "(<a href=\"byond://?src=\ref[src];dbbanedit=duration;dbbanid=[banid]\">Edit</a>)"]<br>Expires [expiration]</font>"
+						typedesc = "<b>TEMPBAN</b><br><font size='2'>([duration] minutes) [(unbanned || auto) ? "" : "(<a href=\"byond://?src=\ref[src];dbbanedit=duration;dbbanid=[banid]\">Edit</a>)"]<br>Expires [expiration]</font>"
 					if("JOB_PERMABAN")
 						typedesc = "<b>JOBBAN</b><br><font size='2'>([job])</font>"
 					if("JOB_TEMPBAN")
-						typedesc = "<b>TEMP JOBBAN</b><br><font size='2'>([job])<br>([minutes_to_readable(duration)]<br>Expires [expiration]</font>"
+						typedesc = "<b>TEMP JOBBAN</b><br><font size='2'>([job])<br>([duration] minutes<br>Expires [expiration]</font>"
 
 				output += "<tr bgcolor='[dcolor]'>"
 				output += "<td align='center'>[typedesc]</td>"
@@ -523,4 +515,4 @@ datum/admins/proc/DB_ban_unban_by_id(var/id)
 
 			output += "</table></div>"
 
-	show_browser(usr, output,"window=lookupbans;size=900x700")
+	usr << browse(output,"window=lookupbans;size=900x700")

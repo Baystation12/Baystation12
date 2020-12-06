@@ -102,7 +102,7 @@
 				var/datum/instrument/instrument = instruments[key]
 				categories |= instrument.category
 
-			var/category = input(usr, "Choose a category") as null|anything in categories
+			var/category = input(usr, "Choose a category") in categories as text|null
 			if(!CanInteractWith(usr, owner, GLOB.physical_state))
 				return
 			var/list/instruments_available = list()
@@ -111,7 +111,7 @@
 				if (instrument.category == category)
 					instruments_available += key
 
-			var/new_instrument = input(usr, "Choose an instrument") as null|anything in instruments_available
+			var/new_instrument = input(usr, "Choose an instrument") in instruments_available as text|null
 			if(!CanInteractWith(usr, owner, GLOB.physical_state))
 				return
 			if (new_instrument)
@@ -195,7 +195,6 @@
 /datum/real_instrument/Destroy()
 	QDEL_NULL(player)
 	owner = null
-	return ..()
 
 /obj/structure/synthesized_instrument
 	var/datum/real_instrument/real_instrument
@@ -283,8 +282,7 @@
 
 
 /obj/item/device/synthesized_instrument/ui_interact(mob/user, ui_key = "instrument", var/datum/nanoui/ui = null, var/force_open = 0)
-	if (real_instrument)
-		real_instrument.ui_call(user,ui_key,ui,force_open)
+	real_instrument.ui_call(user,ui_key,ui,force_open)
 
 
 /obj/item/device/synthesized_instrument/proc/shouldStopPlaying(mob/user)

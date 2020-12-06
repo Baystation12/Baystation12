@@ -10,3 +10,4 @@
 	Of course, not all free synthetics are part of the Positronic Union. To this day, The Positronic Union represents approximately 68% of all free synthetics. \
 	The rest either remain citizens of their original government or declare no citizenship."
 	subversive_potential = 15
+	language = LANGUAGE_EAL

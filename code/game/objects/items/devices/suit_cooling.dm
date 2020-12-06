@@ -163,9 +163,8 @@
 			overlays.Add("battery-5")
 
 
-/obj/item/device/suit_cooling_unit/examine(mob/user, distance)
-	. = ..()
-	if(distance >= 1)
+/obj/item/device/suit_cooling_unit/examine(mob/user)
+	if(!..(user, 1))
 		return
 
 	if (on)

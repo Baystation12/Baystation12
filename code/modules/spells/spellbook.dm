@@ -12,6 +12,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 								/obj/item/weapon/magic_rock = 				"RA",
 								/obj/item/weapon/contract/apprentice = 		"CP",
 								/obj/structure/closet/wizard/souls = 		"SS",
+								/obj/item/weapon/contract/wizard/tk = 		"TK",
 								/obj/structure/closet/wizard/scrying = 		"SO",
 								/obj/item/weapon/teleportation_scroll = 	"TS",
 								/obj/item/weapon/gun/energy/staff = 		"ST",
@@ -61,7 +62,6 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 
 /obj/item/weapon/spellbook/proc/make_sacrifice(obj/item/I as obj, mob/user as mob, var/reagent)
 	if(has_sacrificed)
-		to_chat(user, SPAN_WARNING("\The [src] is already sated! Wait for a return on your investment before you sacrifice more to it."))
 		return
 	if(reagent)
 		var/datum/reagents/R = I.reagents
@@ -79,7 +79,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 
 
 /obj/item/weapon/spellbook/attackby(obj/item/I as obj, mob/user as mob)
-	if(investing_time)
+	if(investing_time && !has_sacrificed)
 		var/list/objects = spellbook.sacrifice_objects
 		if(objects && objects.len)
 			for(var/type in objects)
@@ -115,7 +115,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 				info = "<font color='#ff33cc'>[initial(S.max_uses)] Spell Slots</font>"
 			else if(ispath(spellbook.spells[i],/obj))
 				var/obj/O = spellbook.spells[i]
-				name = "Artefact: [capitalize(initial(O.name))]" //because 99.99% of objects don't have capitals in them and it makes it look weird.
+				name = "Artefact: [capitalize(initial(O.name))]" //because 99.99% of objects dont have capitals in them and it makes it look weird.
 				desc = initial(O.desc)
 			else if(ispath(spellbook.spells[i],/spell))
 				var/spell/S = spellbook.spells[i]
@@ -139,8 +139,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 			dat += " ([spellbook.spells[spellbook.spells[i]]] spell slot[spellbook.spells[spellbook.spells[i]] > 1 ? "s" : "" ])"
 			if(spellbook.book_flags & CAN_MAKE_CONTRACTS)
 				dat += " <A href='byond://?src=\ref[src];path=\ref[spellbook.spells[i]];contract=1;'>Make Contract</a>"
-			dat += "<br><i>[desc]</i><br><br>"
-		dat += "<br>"
+			dat += "<br><i>[desc]</i><br>"
 		dat += "<center><A href='byond://?src=\ref[src];reset=1'>Re-memorize your spellbook.</a></center>"
 		if(spellbook.book_flags & INVESTABLE)
 			if(investing_time)
@@ -151,7 +150,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 			dat += "<center><A href='byond://?src=\ref[src];book=1'>Choose different spellbook.</a></center>"
 		if(!(spellbook.book_flags & NO_LOCKING))
 			dat += "<center><A href='byond://?src=\ref[src];lock=1'>[spellbook.book_flags & LOCKED ? "Unlock" : "Lock"] the spellbook.</a></center>"
-	show_browser(user, dat,"window=spellbook")
+	user << browse(dat,"window=spellbook")
 
 /obj/item/weapon/spellbook/CanUseTopic(var/mob/living/carbon/human/H)
 	if(!istype(H))
@@ -220,7 +219,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 		. = TOPIC_REFRESH
 
 	else if(href_list["reset"] && !(spellbook.book_flags & NOREVERT))
-		var/area/map_template/wizard_station/A = get_area(user)
+		var/area/wizard_station/A = get_area(user)
 		if(istype(A))
 			uses = spellbook.max_uses
 			investing_time = 0
@@ -242,7 +241,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 	uses--
 	START_PROCESSING(SSobj, src)
 	investing_time = world.time + (15 MINUTES)
-	return "You invest a spellslot and will receive two in return in 15 minutes."
+	return "You invest a spellslot and will recieve two in return in 15 minutes."
 
 /obj/item/weapon/spellbook/Process()
 	if(investing_time && investing_time <= world.time)
@@ -251,7 +250,6 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 		if(uses > spellbook.max_uses)
 			spellbook.max_uses = uses
 		investing_time = 0
-		has_sacrificed = 0
 		STOP_PROCESSING(SSobj, src)
 	return 1
 

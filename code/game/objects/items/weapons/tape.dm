@@ -23,7 +23,7 @@
 				return
 			user.visible_message("<span class='danger'>\The [user] begins taping over \the [H]'s eyes!</span>")
 
-			if(!do_after(user, 3 SECONDS, H))
+			if(!do_mob(user, H, 30))
 				return
 
 			// Repeat failure checks.
@@ -32,7 +32,7 @@
 
 			playsound(src, 'sound/effects/tape.ogg',25)
 			user.visible_message("<span class='danger'>\The [user] has taped up \the [H]'s eyes!</span>")
-			H.equip_to_slot_or_del(new /obj/item/clothing/glasses/blindfold/tape(H), slot_glasses)
+			H.equip_to_slot_or_del(new /obj/item/clothing/glasses/sunglasses/blindfold/tape(H), slot_glasses)
 
 		else if(user.zone_sel.selecting == BP_MOUTH || user.zone_sel.selecting == BP_HEAD)
 			if(!H.organs_by_name[BP_HEAD])
@@ -50,7 +50,7 @@
 			playsound(src, 'sound/effects/tape.ogg',25)
 			user.visible_message("<span class='danger'>\The [user] begins taping up \the [H]'s mouth!</span>")
 
-			if(!do_after(user, 3 SECONDS, H))
+			if(!do_mob(user, H, 30))
 				return
 
 			// Repeat failure checks.
@@ -68,7 +68,9 @@
 
 		else if(user.zone_sel.selecting == BP_CHEST)
 			if(H.wear_suit && istype(H.wear_suit, /obj/item/clothing/suit/space))
-				H.wear_suit.attackby(src, user)//everything is handled by attackby
+				if(H == user || do_mob(user, H, 10))	//Skip the time-check if patching your own suit, that's handled in attackby()
+					playsound(src, 'sound/effects/tape.ogg',25)
+					H.wear_suit.attackby(src, user)
 			else
 				to_chat(user, "<span class='warning'>\The [H] isn't wearing a spacesuit for you to reseal.</span>")
 
@@ -101,8 +103,8 @@
 	. = ..()
 	item_flags |= ITEM_FLAG_NO_BLUDGEON
 
-/obj/item/weapon/ducttape/examine()
-	return stuck ? stuck.examine(arglist(args)) : ..()
+/obj/item/weapon/ducttape/examine(mob/user)
+	return stuck ? stuck.examine(user) : ..()
 
 /obj/item/weapon/ducttape/proc/attach(var/obj/item/weapon/W)
 	stuck = W
@@ -140,8 +142,6 @@
 		return
 	playsound(src, 'sound/effects/tape.ogg',25)
 
-	layer = ABOVE_WINDOW_LAYER
-	
 	if(params)
 		var/list/mouse_control = params2list(params)
 		if(mouse_control["icon-x"])

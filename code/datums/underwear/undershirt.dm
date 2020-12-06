@@ -33,61 +33,52 @@
 /datum/category_item/underwear/undershirt/tank_top_fleet
 	name = "Tank top, Fleet"
 	underwear_name = "tank top"
-	icon_state = "tank_fleet"
-
-/datum/category_item/underwear/undershirt/tank_top_expedition
-	name = "Tank top, Expeditionary Corps"
-	underwear_name = "tank top"
-	icon_state = "tank_expedition"
+	icon_state = "tank_fleet_s"
 
 /datum/category_item/underwear/undershirt/tank_top_fire
 	name = "Tank top, fire"
 	underwear_name = "tank top"
-	icon_state = "tank_fire"
+	icon_state = "tank_fire_s"
 
 /datum/category_item/underwear/undershirt/tank_top_rainbow
 	name = "Tank top, rainbow"
 	underwear_name = "tank top"
-	icon_state = "tank_rainbow"
+	icon_state = "tank_rainbow_s"
 
 /datum/category_item/underwear/undershirt/tank_top_stripes
 	name = "Tank top, striped"
 	underwear_name = "tank top"
-	icon_state = "tank_stripes"
+	icon_state = "tank_stripes_s"
 
 /datum/category_item/underwear/undershirt/tank_top_sun
 	name = "Tank top, sun"
 	underwear_name = "tank top"
-	icon_state = "tank_sun"
+	icon_state = "tank_sun_s"
 
 /datum/category_item/underwear/undershirt/shirt_button
 	name = "Shirt, button down"
-	icon_state = "shirt_long"
+	icon_state = "shirt_long_s"
 	has_color = TRUE
 
 /datum/category_item/underwear/undershirt/shirt_expedition
 	name = "Shirt, Expeditionary Corps"
-	icon_state = "expedition"
+	icon_state = "expedition_s"
 
 /datum/category_item/underwear/undershirt/shirt_heart
 	name = "Shirt, heart"
-	icon_state = "lover"
+	icon_state = "lover_s"
 
 /datum/category_item/underwear/undershirt/shirt_love_nt
 	name = "Shirt, I<3NT"
-	icon_state = "ilovent"
-
-/datum/category_item/underwear/undershirt/shirt_fleet
-	name = "Shirt, Fleet"
-	icon_state = "fleet"
+	icon_state = "lover_s"
 
 /datum/category_item/underwear/undershirt/shirt_army
 	name = "Shirt, Army"
-	icon_state = "army"
+	icon_state = "army_s"
 
 /datum/category_item/underwear/undershirt/shirt_nt
 	name = "Shirt, NT"
-	icon_state = "shirt_nano"
+	icon_state = "shirt_nano_s"
 
 /datum/category_item/underwear/undershirt/shortsleeve_shirt
 	name = "Shortsleeve shirt"
@@ -101,23 +92,23 @@
 
 /datum/category_item/underwear/undershirt/sport_shirt_green
 	name = "Sport shirt, green"
-	icon_state = "greenshirtsport"
+	icon_state = "greenshirtsport_s"
 
 /datum/category_item/underwear/undershirt/sport_shirt_red
 	name = "Sport shirt, red"
-	icon_state = "redshirtsport"
+	icon_state = "redshirtsport_s"
 
 /datum/category_item/underwear/undershirt/sport_shirt_blue
 	name = "Sport shirt, blue"
-	icon_state = "blueshirtsport"
+	icon_state = "blueshirtsport_s"
 
 /datum/category_item/underwear/undershirt/shirt_tiedye
 	name = "Shirt, tiedye"
-	icon_state = "shirt_tiedye"
+	icon_state = "shirt_tiedye_s"
 
 /datum/category_item/underwear/undershirt/shirt_blue_striped
 	name = "Shirt, blue stripes"
-	icon_state = "shirt_stripes"
+	icon_state = "shirt_stripes_s"
 
 /datum/category_item/underwear/undershirt/longjon
 	name = "Long John Shirt"
@@ -127,6 +118,7 @@
 
 /datum/category_item/underwear/undershirt/longstripe_black
 	name = "Longsleeve Striped Shirt, Black"
+	underwear_name = "long johns"
 	icon_state = "longstripe"
 
 /datum/category_item/underwear/undershirt/longstripe_blue
@@ -135,7 +127,7 @@
 
 /datum/category_item/underwear/undershirt/blouse_female
 	name = "Women's Dress Shirt"
-	icon_state = "blouse_female"
+	icon_state = "blouse_female_s"
 
 /datum/category_item/underwear/undershirt/undershirt_female
 	name = "Undershirt, Female"
@@ -154,7 +146,7 @@
 
 /datum/category_item/underwear/undershirt/shirt_long_female
 	name = "Button Down Shirt, Female"
-	icon_state = "shirt_long_female"
+	icon_state = "shirt_long_female_s"
 	has_color = TRUE
 
 /datum/category_item/underwear/undershirt/undershirt_long_female
@@ -164,7 +156,7 @@
 
 /datum/category_item/underwear/undershirt/turtleneck
 	name = "Turtleneck Sweater"
-	icon_state = "turtleneck"
+	icon_state = "turtleneck_s"
 	has_color = TRUE
 
 /datum/category_item/underwear/undershirt/tanktop_alt_female
@@ -181,24 +173,15 @@
 /datum/category_item/underwear/undershirt/tank_fleet_female
 	name = "Tank top, Fleet, Female"
 	underwear_name = "tanktop"
-	icon_state = "tank_fleet_female"
-
-/datum/category_item/underwear/undershirt/fleet_female
-	name = "Shirt, Fleet, Female"
-	icon_state = "fleet_female"
+	icon_state = "tank_fleet_female_s"
 
 /datum/category_item/underwear/undershirt/army_female
 	name = "Shirt, Army, Female"
-	icon_state = "army_female"
+	icon_state = "army_female_s"
 
 /datum/category_item/underwear/undershirt/expedition_female
 	name = "Shirt, Expeditionary Corps, Female"
-	icon_state = "expedition_female"
-
-/datum/category_item/underwear/undershirt/tank_top_expedition_female
-	name = "Tank top, Expeditionary Corps, Female"
-	underwear_name = "tank top"
-	icon_state = "tank_expedition_female"
+	icon_state = "expedition_female_s"
 
 /datum/category_item/underwear/undershirt/polo_corp
 	name = "Polo, corporate"

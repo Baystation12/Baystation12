@@ -25,7 +25,7 @@
 		material_descriptor = pick("rusted","dusty","archaic","fragile")
 	if(istype(I, /obj/item/weapon/material))
 		var/obj/item/weapon/material/M = I
-		M.set_material(MATERIAL_ALIENALLOY)
+		M.set_material(MATERIAL_ALIUMIUM)
 		source_material = "alien alloy"
 	else
 		source_material = pick("cordite","quadrinium","steel","titanium","aluminium","ferritic-alloy","plasteel","duranium")
@@ -59,7 +59,7 @@
 
 	var/engravings = ""
 	if(apply_image_decorations)
-		var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
+		var/obj/effect/overmap/sector/exoplanet/E = map_sectors["[z]"]
 		engravings = "[pick("Engraved","Carved","Etched")] on the item is [pick("an image of","a frieze of","a depiction of")] "
 		if(istype(E))
 			engravings += E.get_engravings()
@@ -142,7 +142,7 @@
 	if(prob(25))
 		new_item = new /obj/item/weapon/material/kitchen/utensil/fork(loc)
 	else if(prob(50))
-		new_item = new /obj/item/weapon/material/knife/table(loc)
+		new_item = new /obj/item/weapon/material/kitchen/utensil/knife(loc)
 	else
 		new_item = new /obj/item/weapon/material/kitchen/utensil/spoon(loc)
 	additional_desc = "[pick("It's like no [item_type] you've ever seen before",\
@@ -194,7 +194,7 @@
 
 /obj/item/weapon/archaeological_find/knife/spawn_item()
 	item_type = "[pick("bladed knife","serrated blade","sharp cutting implement")]"
-	var/obj/item/new_item = new /obj/item/weapon/material/knife/combat(loc)
+	var/obj/item/new_item = new /obj/item/weapon/material/knife(loc)
 	additional_desc = "[pick("It doesn't look safe.",\
 	"It looks wickedly jagged",\
 	"There appear to be [pick("dark red","dark purple","dark green","dark blue")] stains along the edges")]."
@@ -236,7 +236,7 @@
 	var/obj/item/weapon/storage/box/new_box = new(loc)
 	new_box.icon = 'icons/obj/xenoarchaeology.dmi'
 	new_box.max_w_class = pick(ITEM_SIZE_TINY,2;ITEM_SIZE_SMALL,3;ITEM_SIZE_NORMAL,4;ITEM_SIZE_LARGE)
-	var/storage_amount = BASE_STORAGE_COST(new_box.max_w_class)
+	var/storage_amount = base_storage_cost(new_box.max_w_class)
 	new_box.max_storage_space = rand(storage_amount, storage_amount * 10)
 	new_box.icon_state = "box"
 	if(prob(30))
@@ -276,21 +276,18 @@
 
 /obj/item/weapon/archaeological_find/material
 	item_type = "material lump"
-	desc = "Salvaged lump of usable material."
 	find_type = ARCHAEO_METAL
 	apply_material_decorations = 0
-	var/list/possible_materials = list(MATERIAL_STEEL, MATERIAL_PLASTEEL, MATERIAL_TITANIUM, MATERIAL_GLASS)
 
 /obj/item/weapon/archaeological_find/material/spawn_item()
-	var/mat_to_spawn = pickweight(possible_materials)
-	var/material/M = SSmaterials.materials_by_name[mat_to_spawn]
-	var/obj/item/stack/material/new_item = new M.stack_type(loc)
+	var/list/possible_spawns = list()
+	possible_spawns += /obj/item/stack/material/aliumium
+	possible_spawns += /obj/item/stack/material/phoron
+	possible_spawns += /obj/item/stack/material/uranium
+	var/new_type = pick(possible_spawns)
+	var/obj/item/stack/material/new_item = new new_type(loc)
 	new_item.amount = rand(5,45)
 	return new_item
-
-/obj/item/weapon/archaeological_find/material/exotic
-	item_type = "rare material lump"
-	possible_materials = list(MATERIAL_ALIENALLOY, MATERIAL_PHORON, MATERIAL_HYDROGEN, MATERIAL_PHORON_GLASS)
 
 /obj/item/weapon/archaeological_find/crystal
 	item_type = "crystal"
@@ -502,7 +499,6 @@
 	return I
 
 /obj/item/weapon/archaeological_find/remains/robot
-	icon = 'icons/mob/robots_gibs.dmi'
 	icon_state = "remainsrobot"
 	find_type = ARCHAEO_REMAINS_ROBOT
 	descs = list("Almost mistakeable for the remains of a modern cyborg.",\

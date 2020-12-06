@@ -13,9 +13,9 @@
 		name = "[initial(name)] (\the [supplied])"
 		object = "[supplied], [get_area(supplied)]"
 
-/obj/item/weapon/sample/examine(mob/user, distance)
-	. = ..()
-	if(distance <= 1 && object)
+/obj/item/weapon/sample/examine(var/user)
+	. = ..(user, 1)
+	if(. && object)
 		to_chat(user, "The label says: '[object]'")
 
 /obj/item/weapon/sample/print/New(var/newloc, var/atom/supplied)
@@ -152,12 +152,6 @@
 	var/obj/item/weapon/sample/S = new evidence_path(get_turf(user), supplied)
 	to_chat(user, "<span class='notice'>You transfer [S.evidence.len] [S.evidence.len > 1 ? "[evidence_type]s" : "[evidence_type]"] to \the [S].</span>")
 
-/obj/item/weapon/forensics/sample_kit/resolve_attackby(atom/A, mob/user, click_params)
-	if (user.a_intent != I_HELP) // Prevents putting sample kits in bags, on racks/tables, etc when trying to take samples
-		return FALSE
-
-	. = ..()
-
 /obj/item/weapon/forensics/sample_kit/afterattack(var/atom/A, var/mob/user, var/proximity)
 	if(!proximity)
 		return
@@ -174,7 +168,7 @@
 
 /obj/item/weapon/forensics/sample_kit/powder
 	name = "fingerprint powder"
-	desc = "A jar containing alumiinum powder and a specialized brush."
+	desc = "A jar containing aluminum powder and a specialized brush."
 	icon_state = "dust"
 	evidence_type = "fingerprint"
 	evidence_path = /obj/item/weapon/sample/print

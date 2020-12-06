@@ -16,39 +16,38 @@ I IS TYPIN'!'
 	if(!istype(master, /mob))
 		crash_with("Master of typing_indicator has invalid type: [master.type].")
 
+	GLOB.stat_set_event.register(master, src, /datum/proc/qdel_self) // Making the assumption master is conscious at creation
+	GLOB.logged_out_event.register(master, src, /datum/proc/qdel_self)
+
 /atom/movable/overlay/typing_indicator/Destroy()
+
+	GLOB.stat_set_event.unregister(master, src)
+	GLOB.logged_out_event.unregister(master, src)
+
 	var/mob/M = master
 	M.typing_indicator = null
+
 	. = ..()
 
 /atom/movable/overlay/typing_indicator/SetInitLoc()
 	forceMove(get_turf(master))
 
 /mob/proc/create_typing_indicator()
-	if(client && !stat && get_preference_value(/datum/client_preference/show_typing_indicator) == GLOB.PREF_SHOW && !src.is_cloaked() && isturf(src.loc))
-		if(!typing_indicator)
-			typing_indicator = new(src)
-		typing_indicator.set_invisibility(0)
+	if(client && !stat && get_preference_value(/datum/client_preference/show_typing_indicator) == GLOB.PREF_SHOW)
+		if(typing_indicator)
+			qdel(typing_indicator)
+
+		typing_indicator = new(src)
 
 /mob/proc/remove_typing_indicator() // A bit excessive, but goes with the creation of the indicator I suppose
-	if(typing_indicator)
-		typing_indicator.set_invisibility(INVISIBILITY_MAXIMUM)
-
-/mob/set_stat(new_stat)
-	. = ..()
-	if(.)
-		remove_typing_indicator()
-
-/mob/Logout()
-	remove_typing_indicator()
-	. = ..()	
+	QDEL_NULL(typing_indicator)
 
 /mob/verb/say_wrapper()
 	set name = ".Say"
 	set hidden = 1
 
 	create_typing_indicator()
-	var/message = input("","say (text)") as text|null
+	var/message = input("","say (text)") as text
 	remove_typing_indicator()
 	if(message)
 		say_verb(message)
@@ -58,7 +57,7 @@ I IS TYPIN'!'
 	set hidden = 1
 
 	create_typing_indicator()
-	var/message = input("","me (text)") as text|null
+	var/message = input("","me (text)") as text
 	remove_typing_indicator()
 	if(message)
 		me_verb(message)

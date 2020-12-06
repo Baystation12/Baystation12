@@ -21,7 +21,6 @@
 	icon_state = "healthhud"
 	hud_type = HUD_MEDICAL
 	body_parts_covered = 0
-	req_access = list(access_medical)
 
 /obj/item/clothing/glasses/hud/health/process_hud(var/mob/M)
 	process_med_hud(M, 1)
@@ -38,7 +37,6 @@
 	desc = "A medical HUD integrated with a wide visor."
 	icon_state = "medhud_visor"
 	item_state = "medhud_visor"
-	body_parts_covered = EYES
 
 /obj/item/clothing/glasses/hud/security
 	name = "security HUD"
@@ -47,7 +45,6 @@
 	hud_type = HUD_SECURITY
 	body_parts_covered = 0
 	var/global/list/jobs[0]
-	req_access = list(access_security)
 
 /obj/item/clothing/glasses/hud/security/prescription
 	name = "prescription security HUD"
@@ -85,10 +82,3 @@
 
 /obj/item/clothing/glasses/hud/janitor/process_hud(var/mob/M)
 	process_jani_hud(M)
-
-/obj/item/clothing/glasses/hud/science
-	name = "science HUD"
-	desc = "A heads-up display that analyzes objects for research potential."
-	icon_state = "scihud"
-	hud_type = HUD_SCIENCE
-	body_parts_covered = 0

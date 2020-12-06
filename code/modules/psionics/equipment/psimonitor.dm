@@ -2,7 +2,7 @@
 	name = "psionic implant monitor"
 	icon = 'icons/obj/machines/psimeter.dmi'
 	icon_state = "meter_on"
-	use_power = POWER_USE_ACTIVE
+	use_power = 2
 	anchored = TRUE
 	density = TRUE
 	opacity = FALSE
@@ -65,9 +65,11 @@
 		if(. && usr)
 			interact(usr)
 
-/obj/machinery/psi_monitor/interface_interact(var/mob/user)
+/obj/machinery/psi_monitor/attack_hand(var/mob/user)
 	interact(user)
-	return TRUE
+
+/obj/machinery/psi_monitor/attack_ai(var/mob/user)
+	interact(user)
 
 /obj/machinery/psi_monitor/interact(var/mob/user)
 

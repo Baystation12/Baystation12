@@ -23,7 +23,7 @@
 	var/image/obfuscation = obfuscation_images[T]
 	if(!obfuscation)
 		obfuscation = image(icon, T, icon_state)
-		obfuscation.layer = OBFUSCATION_LAYER
+		obfuscation.plane = OBSCURITY_PLANE
 		if(!obfuscation_underlay)
 			// Creating a new icon of a fairly common icon state, adding some random color to prevent address searching, and hoping being static kills memory locality
 			var/turf/floor = /turf/simulated/floor/tiled
@@ -104,8 +104,6 @@
 /datum/chunk/proc/add_eye(mob/observer/eye/eye)
 	seenby += eye
 	eye.visibleChunks += src
-	if(dirty)
-		update()
 	if(eye.owner && eye.owner.client)
 		eye.owner.client.images += obscured
 

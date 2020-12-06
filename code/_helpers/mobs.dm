@@ -1,6 +1,9 @@
 /atom/movable/proc/get_mob()
 	return
 
+/obj/mecha/get_mob()
+	return occupant
+
 /obj/vehicle/train/get_mob()
 	return buckled_mob
 
@@ -97,106 +100,100 @@ proc/age2agedescription(age)
 
 //checks whether this item is a module of the robot it is located in.
 /proc/is_robot_module(var/obj/item/thing)
-	if(!thing)
-		return FALSE
-	if(istype(thing.loc, /mob/living/exosuit))
-		return FALSE
-	if(!istype(thing.loc, /mob/living/silicon/robot))
-		return FALSE
+	if (!thing || !istype(thing.loc, /mob/living/silicon/robot))
+		return 0
 	var/mob/living/silicon/robot/R = thing.loc
-	return (thing in R.module.equipment)
+	return (thing in R.module.modules)
 
 /proc/get_exposed_defense_zone(var/atom/movable/target)
 	return pick(BP_HEAD, BP_L_HAND, BP_R_HAND, BP_L_FOOT, BP_R_FOOT, BP_L_ARM, BP_R_ARM, BP_L_LEG, BP_R_LEG, BP_CHEST, BP_GROIN)
 
+/proc/do_mob(mob/user , mob/target, time = 30, target_zone = 0, uninterruptible = 0, progress = 1, var/incapacitation_flags = INCAPACITATION_DEFAULT)
+	if(!user || !target)
+		return 0
+	var/user_loc = user.loc
+	var/target_loc = target.loc
 
-/mob/var/do_unique_user_handle = 0
-/atom/var/do_unique_target_user
+	var/holding = user.get_active_hand()
+	var/datum/progressbar/progbar
+	if (progress)
+		progbar = new(user, time, target)
 
-/proc/do_after(mob/user, delay, atom/target, do_flags = DO_DEFAULT, incapacitation_flags = INCAPACITATION_DEFAULT)
-	return !do_after_detailed(user, delay, target, do_flags, incapacitation_flags)
-
-/proc/do_after_detailed(mob/user, delay, atom/target, do_flags = DO_DEFAULT, incapacitation_flags = INCAPACITATION_DEFAULT)
-	if (!delay)
-		return FALSE
-
-	if (!user)
-		return DO_MISSING_USER
-
-	var/initial_handle
-	if (do_flags & DO_USER_UNIQUE_ACT)
-		initial_handle = sequential_id("/proc/do_after")
-		user.do_unique_user_handle = initial_handle
-
-	if (target?.do_unique_target_user)
-		return DO_TARGET_UNIQUE_ACT
-
-	if ((do_flags & DO_TARGET_UNIQUE_ACT) && target)
-		target.do_unique_target_user = user
-
-	var/atom/user_loc = do_flags & DO_USER_CAN_MOVE ? null : user.loc
-	var/user_dir = do_flags & DO_USER_CAN_TURN ? null : user.dir
-	var/user_hand = do_flags & DO_USER_SAME_HAND ? user.hand : null
-
-	var/atom/target_loc = do_flags & DO_TARGET_CAN_MOVE ? null : target?.loc
-	var/target_dir = do_flags & DO_TARGET_CAN_TURN ? null : target?.dir
-	var/target_type = target?.type
-
-	var/target_zone = do_flags & DO_USER_SAME_ZONE ? user.zone_sel.selecting : null
-
-	var/datum/progressbar/bar
-	if (do_flags & DO_SHOW_PROGRESS)
-		if (do_flags & DO_PUBLIC_PROGRESS)
-			bar = new /datum/progressbar/public(user, delay, target)
-		else
-			bar = new /datum/progressbar/private(user, delay, target)
-
-	var/start_time = world.time
-	var/end_time = start_time + delay
-
-	. = FALSE
-
-	for (var/time = world.time, time < end_time, time = world.time)
+	var/endtime = world.time+time
+	var/starttime = world.time
+	. = 1
+	while (world.time < endtime)
 		sleep(1)
-		if (bar)
-			bar.update(time - start_time)
-		if (QDELETED(user))
-			. = DO_MISSING_USER
+		if (progress)
+			progbar.update(world.time - starttime)
+		if(!user || !target)
+			. = 0
 			break
-		if (target_type && QDELETED(target))
-			. = DO_MISSING_TARGET
-			break
-		if (user.incapacitated(incapacitation_flags))
-			. = DO_INCAPACITATED
-			break
-		if (user_loc && user_loc != user.loc)
-			. = DO_USER_CAN_MOVE
-			break
-		if (target_loc && target_loc != target.loc)
-			. = DO_TARGET_CAN_MOVE
-			break
-		if (user_dir && user_dir != user.dir)
-			. = DO_USER_CAN_TURN
-			break
-		if (target_dir && target_dir != target.dir)
-			. = DO_TARGET_CAN_TURN
-			break
-		if (!isnull(user_hand) && user_hand != user.hand)
-			. = DO_USER_SAME_HAND
-			break
-		if (initial_handle && initial_handle != user.do_unique_user_handle)
-			. = DO_USER_UNIQUE_ACT
-			break
-		if (target_zone && user.zone_sel.selecting != target_zone)
-			. = DO_USER_SAME_ZONE
+		if(uninterruptible)
+			continue
+
+		if(!user || user.incapacitated(incapacitation_flags) || user.loc != user_loc)
+			. = 0
 			break
 
-	if (bar)
-		qdel(bar)
-	if ((do_flags & DO_USER_UNIQUE_ACT) && user.do_unique_user_handle == initial_handle)
-		user.do_unique_user_handle = 0
-	if ((do_flags & DO_TARGET_UNIQUE_ACT) && target)
-		target.do_unique_target_user = null
+		if(target.loc != target_loc)
+			. = 0
+			break
+
+		if(user.get_active_hand() != holding)
+			. = 0
+			break
+
+		if(target_zone && user.zone_sel.selecting != target_zone)
+			. = 0
+			break
+
+	if (progbar)
+		qdel(progbar)
+
+/proc/do_after(mob/user, delay, atom/target = null, needhand = 1, progress = 1, var/incapacitation_flags = INCAPACITATION_DEFAULT, var/same_direction = 0, var/can_move = 0)
+	if(!user)
+		return 0
+	var/atom/target_loc = null
+	var/target_type = null
+
+	var/original_dir = user.dir
+
+	if(target)
+		target_loc = target.loc
+		target_type = target.type
+
+	var/atom/original_loc = user.loc
+
+	var/holding = user.get_active_hand()
+
+	var/datum/progressbar/progbar
+	if (progress)
+		progbar = new(user, delay, target)
+
+	var/endtime = world.time + delay
+	var/starttime = world.time
+	. = 1
+	while (world.time < endtime)
+		sleep(1)
+		if (progress)
+			progbar.update(world.time - starttime)
+
+		if(!user || user.incapacitated(incapacitation_flags) || (user.loc != original_loc && !can_move) || (same_direction && user.dir != original_dir))
+			. = 0
+			break
+
+		if(target_loc && (!target || QDELETED(target) || target_loc != target.loc || target_type != target.type))
+			. = 0
+			break
+
+		if(needhand)
+			if(user.get_active_hand() != holding)
+				. = 0
+				break
+
+	if (progbar)
+		qdel(progbar)
 
 /proc/able_mobs_in_oview(var/origin)
 	var/list/mobs = list()
@@ -269,21 +266,3 @@ proc/age2agedescription(age)
 				selected = M
 				break
 	return selected
-
-/proc/damflags_to_strings(damflags)
-	var/list/res = list()
-	if(damflags & DAM_SHARP)
-		res += "sharp"
-	if(damflags & DAM_EDGE)
-		res += "edge"
-	if(damflags & DAM_LASER)
-		res += "laser"
-	if(damflags & DAM_BULLET)
-		res += "bullet"
-	if(damflags & DAM_EXPLODE)
-		res += "explode"
-	if(damflags & DAM_DISPERSED)
-		res += "dispersed"
-	if(damflags & DAM_BIO)
-		res += "bio"
-	return english_list(res)

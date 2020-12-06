@@ -31,12 +31,12 @@
 	var/distance_falloff = 2  //multiplier, higher value means accuracy drops faster with distance
 
 	var/damage = 10
-	var/damage_type = BRUTE //BRUTE, BURN, TOX, OXY, CLONE, ELECTROCUTE are the only things that should be in here, Try not to use PAIN as it doesn't go through stun_effect_act
+	var/damage_type = BRUTE //BRUTE, BURN, TOX, OXY, CLONE, PAIN are the only things that should be in here
 	var/nodamage = 0 //Determines if the projectile will skip any damage inflictions
-	var/damage_flags = DAM_BULLET
+	var/check_armour = "bullet" //Defines what armor to use when it hits things.  Must be set to bullet, laser, energy,or bomb	//Cael - bio and rad are also valid
 	var/projectile_type = /obj/item/projectile
 	var/penetrating = 0 //If greater than zero, the projectile will pass through dense objects as specified by on_penetrate()
-	var/life_span = 50 //This will de-increment every process(). When 0, it will delete the projectile.
+	var/kill_count = 50 //This will de-increment every process(). When 0, it will delete the projectile.
 		//Effects
 	var/stun = 0
 	var/weaken = 0
@@ -59,8 +59,6 @@
 
 	var/fire_sound
 	var/miss_sounds
-	var/ricochet_sounds
-	var/list/impact_sounds	//for different categories, IMPACT_MEAT etc
 	var/shrapnel_type = /obj/item/weapon/material/shard/shrapnel
 
 	var/vacuum_traversal = 1 //Determines if the projectile can exist in vacuum, if false, the projectile will be deleted if it enters vacuum.
@@ -77,8 +75,13 @@
 	else animate_movement = NO_STEPS
 	. = ..()
 
-/obj/item/projectile/damage_flags()
-	return damage_flags
+/obj/item/projectile/Destroy()
+	return ..()
+
+/obj/item/projectile/forceMove()
+	..()
+	if(istype(loc, /turf/space/) && istype(loc.loc, /area/space))
+		qdel(src)
 
 //TODO: make it so this is called more reliably, instead of sometimes by bullet_act() and sometimes not
 /obj/item/projectile/proc/on_hit(var/atom/target, var/blocked = 0, var/def_zone = null)
@@ -88,10 +91,11 @@
 
 	var/mob/living/L = target
 
-	L.apply_effects(0, weaken, paralyze, stutter, eyeblur, drowsy, 0, blocked)
+	L.apply_effects(0, weaken, paralyze, 0, stutter, eyeblur, drowsy, 0, blocked)
 	L.stun_effect_act(stun, agony, def_zone, src)
 	//radiation protection is handled separately from other armour types.
-	L.apply_damage(irradiate, IRRADIATE, damage_flags = DAM_DISPERSED)
+	L.apply_effect(irradiate, IRRADIATE, L.getarmor(null, "rad"))
+
 
 	return 1
 
@@ -287,9 +291,7 @@
 	//the bullet passes through a dense object!
 	if(passthrough)
 		//move ourselves onto A so we can continue on our way.
-		var/turf/T = get_turf(A)
-		if(T)
-			forceMove(T)
+		forceMove(get_turf(A))
 		permutated.Add(A)
 		bumped = 0 //reset bumped variable!
 		return 0
@@ -313,7 +315,7 @@
 	var/first_step = 1
 
 	spawn while(src && src.loc)
-		if(life_span-- < 1)
+		if(kill_count-- < 1)
 			on_impact(src.loc) //for any final impact behaviours
 			qdel(src)
 			return
@@ -346,7 +348,7 @@
 		if(first_step)
 			muzzle_effect(effect_transform)
 			first_step = 0
-		else if(!bumped && life_span > 0)
+		else if(!bumped && kill_count > 0)
 			tracer_effect(effect_transform)
 		if(!hitscan)
 			sleep(step_delay)	//add delay between movement iterations if it's not a hitscan weapon
@@ -409,9 +411,9 @@
 
 /obj/item/projectile/proc/impact_effect(var/matrix/M)
 	if(ispath(impact_type))
-		var/obj/effect/projectile/P = new impact_type(location ? location.loc : get_turf(src))
+		var/obj/effect/projectile/P = new impact_type(location.loc)
 
-		if(istype(P) && location)
+		if(istype(P))
 			P.set_transform(M)
 			P.pixel_x = round(location.pixel_x, 1)
 			P.pixel_y = round(location.pixel_y, 1)
@@ -424,13 +426,13 @@
 	xo = null
 	var/result = 0 //To pass the message back to the gun.
 
-/obj/item/projectile/test/Bump(atom/A as mob|obj|turf|area, forced=0)
+/obj/item/projectile/test/Bump(atom/A as mob|obj|turf|area)
 	if(A == firer)
 		forceMove(A.loc)
 		return //cannot shoot yourself
 	if(istype(A, /obj/item/projectile))
 		return
-	if(istype(A, /mob/living) || istype(A, /obj/vehicle))
+	if(istype(A, /mob/living) || istype(A, /obj/mecha) || istype(A, /obj/vehicle))
 		result = 2 //We hit someone, return 1!
 		return
 	result = 1
@@ -486,28 +488,4 @@
 	qdel(trace) //No need for it anymore
 	return output //Send it back to the gun!
 
-/obj/item/projectile/after_wounding(obj/item/organ/external/organ, datum/wound/wound)
-	//Check if we even broke skin in first place
-	if(!wound || !(wound.damage_type == CUT || wound.damage_type == PIERCE))
-		return
-	//Check if we can do nasty stuff inside
-	if(!can_embed() || (organ.species.species_flags & SPECIES_FLAG_NO_EMBED))
-		return
-	//Embed or sever artery
-	var/damage_prob = 0.5 * wound.damage * penetration_modifier
-	if(prob(damage_prob))
-		var/obj/item/shrapnel = get_shrapnel()
-		if(shrapnel)
-			shrapnel.forceMove(organ)
-			organ.embed(shrapnel)
-	else if(prob(2 * damage_prob))
-		organ.sever_artery()
 
-	organ.owner.projectile_hit_bloody(src, wound.damage*5, null, organ)
-
-/obj/item/projectile/proc/get_shrapnel()
-	if(shrapnel_type)
-		var/obj/item/SP = new shrapnel_type()
-		SP.SetName((name != "shrapnel")? "[name] shrapnel" : "shrapnel")
-		SP.desc += " It looks like it was fired from [shot_from]."
-		return SP

@@ -15,11 +15,6 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	var/purchasedpowers = list()
 	var/mimicing = ""
 
-/datum/changeling/Destroy()
-	purchasedpowers = null
-	absorbed_languages.Cut()
-	absorbed_dna.Cut()
-	. = ..()
 
 /datum/changeling/New()
 	..()
@@ -61,7 +56,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	if(!mind.changeling)	mind.changeling = new /datum/changeling(gender)
 
 	verbs += /datum/changeling/proc/EvolutionMenu
-	add_language(LANGUAGE_CHANGELING_GLOBAL)
+	add_language("Changeling")
 
 	var/lesser_form = !ishuman(src)
 
@@ -107,7 +102,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 
 	var/datum/changeling/changeling = src.mind.changeling
 	if(!changeling)
-		to_world_log("[src] has the changeling_transform() verb but is not a changeling.")
+		world.log << "[src] has the changeling_transform() verb but is not a changeling."
 		return
 
 	if(src.stat > max_stat)
@@ -137,7 +132,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 		languages += language
 
 	//This isn't strictly necessary but just to be safe...
-	add_language(LANGUAGE_CHANGELING_GLOBAL)
+	add_language("Changeling")
 
 	return
 
@@ -195,7 +190,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 				affecting.take_external_damage(39, 0, DAM_SHARP, "large organic needle")
 
 		SSstatistics.add_field_details("changeling_powers","A[stage]")
-		if(!do_after(src, 15 SECONDS, T))
+		if(!do_mob(src, T, 150))
 			to_chat(src, "<span class='warning'>Our absorption of [T] has been interrupted!</span>")
 			changeling.isabsorbing = 0
 			return
@@ -215,9 +210,10 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 
 	var/datum/absorbed_dna/newDNA = new(T.real_name, T.dna, T.species.name, T.languages)
 	absorbDNA(newDNA)
-
 	if(mind && T.mind)
-		T.mind.CopyMemories(mind)
+		mind.store_memory("[T.real_name]'s memories:")
+		mind.store_memory(T.mind.memory)
+		mind.store_memory("<hr>")
 
 	if(T.mind && T.mind.changeling)
 		if(T.mind.changeling.absorbed_dna)

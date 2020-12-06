@@ -3,7 +3,7 @@
 	var/buckle_movable = 0
 	var/buckle_dir = 0
 	var/buckle_lying = -1 //bed-like behavior, forces mob.lying = buckle_lying if != -1
-	var/buckle_pixel_shift = "x=0;y=0;z=0" //where the buckled mob should be pixel shifted to, or null for no pixel shift control
+	var/buckle_pixel_shift = "x=0;y=0" //where the buckled mob should be pixel shifted to, or null for no pixel shift control
 	var/buckle_require_restraints = 0 //require people to be handcuffed before being able to buckle. eg: pipes
 	var/mob/living/buckled_mob = null
 
@@ -57,18 +57,15 @@
 	if(buckle_pixel_shift)
 		if(M == buckled_mob)
 			var/list/pixel_shift = cached_key_number_decode(buckle_pixel_shift)
-			animate(M, pixel_x = M.default_pixel_x + pixel_shift["x"], pixel_y = M.default_pixel_y + pixel_shift["y"], pixel_z = M.default_pixel_z + pixel_shift["z"], 4, 1, LINEAR_EASING)
+			animate(M, pixel_x = M.default_pixel_x + pixel_shift["x"], pixel_y = M.default_pixel_y + pixel_shift["y"], 4, 1, LINEAR_EASING)
 		else
-			animate(M, pixel_x = M.default_pixel_x, pixel_y = M.default_pixel_y, pixel_z = M.default_pixel_z, 4, 1, LINEAR_EASING)
+			animate(M, pixel_x = M.default_pixel_x, pixel_y = M.default_pixel_y, 4, 1, LINEAR_EASING)
 
 /obj/proc/user_buckle_mob(mob/living/M, mob/user)
-	if(!user.Adjacent(M) || istype(user, /mob/living/silicon/pai) || (M != user && user.incapacitated()))
+	if(!user.Adjacent(M) || user.restrained() || user.stat || istype(user, /mob/living/silicon/pai))
 		return 0
 	if(M == buckled_mob)
 		return 0
-	if (M.grabbed_by.len)
-		to_chat(user, SPAN_WARNING("\The [M] is being grabbed and cannot be buckled."))
-		return FALSE
 	if(istype(M, /mob/living/carbon/slime))
 		to_chat(user, "<span class='warning'>\The [M] is too squishy to buckle in.</span>")
 		return 0
@@ -108,3 +105,4 @@
 				"<span class='notice'>You hear metal clanking.</span>")
 		add_fingerprint(user)
 	return M
+

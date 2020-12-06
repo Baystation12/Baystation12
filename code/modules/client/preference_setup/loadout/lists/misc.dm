@@ -58,23 +58,13 @@
 
 /datum/gear/coffeecup
 	display_name = "coffee cup"
-	path = /obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup
+	path = /obj/item/weapon/reagent_containers/food/drinks/coffeecup
 	flags = GEAR_HAS_TYPE_SELECTION
 
-/datum/gear/knives
-	display_name = "knives selection"
-	description = "A selection of knives."
-	path = /obj/item/weapon/material/knife
-
-/datum/gear/knives/New()
-	..()
-	var/knives = list()
-	knives["Folding knife"] = /obj/item/weapon/material/knife/folding
-	knives["peasant folding knife"] = /obj/item/weapon/material/knife/folding/wood
-	knives["tactical folding knife"] = /obj/item/weapon/material/knife/folding/tacticool
-	knives["utility knife"] = /obj/item/weapon/material/knife/utility
-	knives["lightweight utility knife"] = /obj/item/weapon/material/knife/utility/lightweight
-	gear_tweaks += new/datum/gear_tweak/path(knives)
+/datum/gear/boot_knife
+	display_name = "boot knife"
+	path = /obj/item/weapon/material/kitchen/utensil/knife/boot
+	cost = 3
 
 /datum/gear/lunchbox
 	display_name = "lunchbox"
@@ -118,19 +108,7 @@
 	description = "A work visa issued by the Sol Central Government for the purpose of work."
 	path = /obj/item/weapon/paper/workvisa
 
-/datum/gear/travelvisa
-	display_name = "travel visa"
-	description = "A travel visa issued by the Sol Central Government for the purpose of recreation."
-	path = /obj/item/weapon/paper/travelvisa
-
-/datum/gear/passport
-	display_name = "passports selection"
-	description = "A selection of passports."
-	path = /obj/item/weapon/passport
-	flags = GEAR_HAS_SUBTYPE_SELECTION
-	custom_setup_proc = /obj/item/weapon/passport/proc/set_info
-
-/datum/gear/mirror
+/datum/gear/mirror/
 	display_name = "handheld mirror"
 	sort_category = "Cosmetics"
 	path = /obj/item/weapon/mirror
@@ -196,11 +174,6 @@
 	display_name = "ashtray, plastic"
 	path = /obj/item/weapon/material/ashtray/plastic
 
-/datum/gear/cigscase
-	display_name = "fancy cigarette case"
-	path = /obj/item/weapon/storage/fancy/cigarettes/case
-	cost = 2
-
 /datum/gear/cigars
 	display_name = "fancy cigar case"
 	path = /obj/item/weapon/storage/fancy/cigar
@@ -227,55 +200,6 @@
 	cost = 2
 
 /datum/gear/bible
-	display_name = "holy book"
+	display_name = "bible"
 	path = /obj/item/weapon/storage/bible
 	cost = 2
-
-/datum/gear/bible/New()
-	..()
-	var/books = list()
-	books["bible (adjustable)"] = /obj/item/weapon/storage/bible
-	books["Bible"] = /obj/item/weapon/storage/bible/bible
-	books["Tanakh"] = /obj/item/weapon/storage/bible/tanakh
-	books["Quran"] = /obj/item/weapon/storage/bible/quran
-	books["Kitab-i-Aqdas"] = /obj/item/weapon/storage/bible/aqdas
-	books["Kojiki"] = /obj/item/weapon/storage/bible/kojiki
-	books["Guru Granth Sahib"] = /obj/item/weapon/storage/bible/guru
-	gear_tweaks += new/datum/gear_tweak/path(books)
-
-/datum/gear/swiss
-	display_name = "multi-tool"
-	path = /obj/item/weapon/material/knife/folding/swiss
-	cost = 4
-	flags = GEAR_HAS_COLOR_SELECTION
-
-
-/datum/gear/cross
-	display_name = "cross"
-	path = /obj/item/weapon/material/cross
-	cost = 2
-
-/datum/gear/cross/New()
-	..()
-	var/crosstype = list()
-	crosstype["cross, wood"] = /obj/item/weapon/material/cross/wood
-	crosstype["cross, silver"] = /obj/item/weapon/material/cross/silver
-	crosstype["cross, gold"] = /obj/item/weapon/material/cross/gold
-	gear_tweaks += new/datum/gear_tweak/path(crosstype)
-
-/datum/gear/coin
-	display_name = "coin"
-	path = /obj/item/weapon/material/coin
-	cost = 2
-
-/datum/gear/coin/New()
-	..()
-	var/cointype = list()
-	cointype["coin, gold"] = /obj/item/weapon/material/coin/gold
-	cointype["coin, silver"] = /obj/item/weapon/material/coin/silver
-	cointype["coin, iron"] = /obj/item/weapon/material/coin/iron
-	cointype["coin, diamond"] = /obj/item/weapon/material/coin/diamond
-	cointype["coin, uranium"] = /obj/item/weapon/material/coin/uranium
-	cointype["coin, phoron"] = /obj/item/weapon/material/coin/phoron
-	cointype["coin, platinum"] = /obj/item/weapon/material/coin/platinum
-	gear_tweaks += new/datum/gear_tweak/path(cointype)

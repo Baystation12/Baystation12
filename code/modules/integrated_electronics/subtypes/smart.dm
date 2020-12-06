@@ -18,8 +18,8 @@
 	var/datum/integrated_io/I = inputs[1]
 	set_pin_data(IC_OUTPUT, 1, null)
 	if(!isweakref(I.data))
-		activate_pin(3)
 		return
+		activate_pin(3)
 	var/atom/A = I.data.resolve()
 	if(!A)
 		activate_pin(3)
@@ -104,10 +104,6 @@
 		return
 
 	var/list/signature_and_data = splittext(Ps, ":")
-
-	if(signature_and_data.len < 2)
-		return
-
 	var/signature = signature_and_data[1]
 	var/result = signature_and_data[2]
 

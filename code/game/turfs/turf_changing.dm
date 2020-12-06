@@ -1,9 +1,6 @@
 /turf/proc/ReplaceWithLattice(var/material)
-	var base_turf = get_base_turf_by_area(src);
-	if(type != base_turf)
-		src.ChangeTurf(get_base_turf_by_area(src))
-	if(!locate(/obj/structure/lattice) in src)
-		new /obj/structure/lattice(src, material)
+	src.ChangeTurf(get_base_turf_by_area(src))
+	new /obj/structure/lattice( locate(src.x, src.y, src.z), material )
 
 // Removes all signs of lattice on the pos of the turf -Donkieyo
 /turf/proc/RemoveLattice()
@@ -13,8 +10,9 @@
 // Called after turf replaces old one
 /turf/proc/post_change()
 	levelupdate()
-	if (above)
-		above.update_mimic()
+	var/turf/simulated/open/T = GetAbove(src)
+	if(istype(T))
+		T.update_icon()
 
 //Creates a new turf
 /turf/proc/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE)
@@ -34,11 +32,9 @@
 	var/old_affecting_lights = affecting_lights
 	var/old_lighting_overlay = lighting_overlay
 	var/old_corners = corners
-	var/old_ao_neighbors = ao_neighbors
 
 //	log_debug("Replacing [src.type] with [N]")
 
-	changing_turf = TRUE
 
 	if(connections) connections.erase_all()
 
@@ -51,17 +47,17 @@
 		var/turf/simulated/S = src
 		if(S.zone) S.zone.rebuild()
 
-	// Run the Destroy() chain.
-	qdel(src)
+	// Closest we can do as far as giving sane alerts to listeners. In particular, this calls Exited and moved events in a self-consistent way.
+	var/list/old_contents = list()
+	for(var/atom/movable/A in src)
+		old_contents += A
+		A.forceMove(null)
 
-	var/old_opaque_counter = opaque_counter 
-	var/turf/simulated/W = new N(src)
+	var/turf/simulated/W = new N( locate(src.x, src.y, src.z) )
+	for(var/atom/movable/A in old_contents)
+		A.forceMove(W)
 
-	if (permit_ao)
-		regenerate_ao()
-
-	W.opaque_counter = old_opaque_counter
-	W.RecalculateOpacity()
+	W.opaque_counter = opaque_counter
 
 	if (keep_air)
 		W.air = old_air
@@ -85,7 +81,6 @@
 	W.post_change()
 	. = W
 
-	W.ao_neighbors = old_ao_neighbors
 	if(lighting_overlays_initialised)
 		lighting_overlay = old_lighting_overlay
 		affecting_lights = old_affecting_lights
@@ -97,9 +92,6 @@
 				lighting_build_overlay()
 			else
 				lighting_clear_overlay()
-
-	for(var/turf/T in RANGE_TURFS(src, 1))
-		T.update_icon()
 
 /turf/proc/transport_properties_from(turf/other)
 	if(!istype(other, src.type))

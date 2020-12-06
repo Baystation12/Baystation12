@@ -46,14 +46,16 @@
 	if(stat &NOPOWER)
 		icon_state = "auth_off"
 
-/obj/machinery/keycard_auth/interface_interact(mob/user)
+/obj/machinery/keycard_auth/attack_hand(mob/user as mob)
+	if(stat & (NOPOWER|BROKEN))
+		to_chat(user, "This device is not powered.")
+		return
+	if(!user.IsAdvancedToolUser())
+		return 0
 	if(busy)
 		to_chat(user, "This device is busy.")
-		return TRUE
-	interact(user)
-	return TRUE
+		return
 
-/obj/machinery/keycard_auth/interact(mob/user)
 	user.set_machine(src)
 
 	var/dat = "<h1>Keycard Authentication Device</h1>"
@@ -80,11 +82,11 @@
 		dat += "<li><A href='?src=\ref[src];triggerevent=Revoke Emergency Maintenance Access'>Revoke Emergency Maintenance Access</A></li>"
 		dat += "<li><A href='?src=\ref[src];triggerevent=Grant Nuclear Authorization Code'>Grant Nuclear Authorization Code</A></li>"
 		dat += "</ul>"
-		show_browser(user, dat, "window=keycard_auth;size=500x250")
+		user << browse(dat, "window=keycard_auth;size=500x250")
 	if(screen == 2)
 		dat += "Please swipe your card to authorize the following event: <b>[event]</b>"
 		dat += "<p><A href='?src=\ref[src];reset=1'>Back</A>"
-		show_browser(user, dat, "window=keycard_auth;size=500x250")
+		user << browse(dat, "window=keycard_auth;size=500x250")
 	return
 
 /obj/machinery/keycard_auth/CanUseTopic(var/mob/user, href_list)
@@ -130,7 +132,8 @@
 	if(confirmed)
 		confirmed = 0
 		trigger_event(event)
-		log_and_message_admins("triggered and [key_name(event_confirmed_by)] confirmed event [event]", event_triggered_by || usr)
+		log_game("[key_name(event_triggered_by)] triggered and [key_name(event_confirmed_by)] confirmed event [event]")
+		message_admins("[key_name(event_triggered_by)] triggered and [key_name(event_confirmed_by)] confirmed event [event]", 1)
 	reset()
 
 /obj/machinery/keycard_auth/proc/receive_request(var/obj/machinery/keycard_auth/source)
@@ -185,3 +188,8 @@
 	return SSticker.mode && SSticker.mode.ert_disabled
 
 var/global/maint_all_access = 0
+
+/obj/machinery/door/airlock/allowed(mob/M)
+	if(maint_all_access && src.check_access_list(list(access_maint_tunnels)))
+		return 1
+	return ..(M)

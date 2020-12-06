@@ -1,4 +1,4 @@
-/obj/item/weapon/stock_parts/circuitboard/atmoscontrol
+/obj/item/weapon/circuitboard/atmoscontrol
 	name = "\improper Central Atmospherics Computer Circuitboard"
 	build_path = /obj/machinery/computer/atmoscontrol
 
@@ -10,10 +10,13 @@
 	light_color = "#00b000"
 	density = 1
 	anchored = 1.0
+	circuit = /obj/item/weapon/circuitboard/atmoscontrol
 	req_access = list(access_ce)
 	var/list/monitored_alarm_ids = null
 	var/datum/nano_module/atmos_control/atmos_control
-	base_type = /obj/machinery/computer/atmoscontrol
+
+/obj/machinery/computer/atmoscontrol/New()
+	..()
 
 /obj/machinery/computer/atmoscontrol/laptop
 	name = "Atmospherics Laptop"
@@ -23,9 +26,13 @@
 	icon_screen = "atmoslaptop"
 	density = 0
 
-/obj/machinery/computer/atmoscontrol/interface_interact(user)
+/obj/machinery/computer/atmoscontrol/attack_ai(var/mob/user as mob)
 	ui_interact(user)
-	return TRUE
+
+/obj/machinery/computer/atmoscontrol/attack_hand(mob/user)
+	if(..())
+		return 1
+	ui_interact(user)
 
 /obj/machinery/computer/atmoscontrol/emag_act(var/remaining_carges, var/mob/user)
 	if(!emagged)

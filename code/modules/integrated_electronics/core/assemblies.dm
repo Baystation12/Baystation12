@@ -15,6 +15,7 @@
 	var/max_complexity = IC_COMPLEXITY_BASE
 	var/opened = TRUE
 	var/obj/item/weapon/cell/battery // Internal cell which most circuits need to work.
+	var/cell_type = /obj/item/weapon/cell
 	var/can_charge = TRUE //Can it be charged in a recharger?
 	var/circuit_flags = IC_FLAG_ANCHORABLE
 	var/charge_sections = 4
@@ -28,6 +29,7 @@
 	var/components_per_page = 5
 	health = 30
 	pass_flags = 0
+	armor = list("melee" = 50, "bullet" = 70, "laser" = 70, "energy" = 100, "bomb" = 10, "bio" = 100, "rad" = 100, "fire" = 0, "acid" = 0)
 	anchored = FALSE
 	var/detail_color = COLOR_ASSEMBLY_BLACK
 	var/list/color_whitelist = list( //This is just for checking that hacked colors aren't in the save data.
@@ -51,6 +53,8 @@
 
 /obj/item/device/electronic_assembly/examine(mob/user)
 	. = ..()
+	if(!.)
+		return
 	if(IC_FLAG_ANCHORABLE & circuit_flags)
 		to_chat(user, "<span class='notice'>The anchoring bolts [anchored ? "are" : "can be"] <b>wrenched</b> in place and the maintenance panel [opened ? "can be" : "is"] <b>screwed</b> in place.</span>")
 	else
@@ -100,7 +104,6 @@
 	STOP_PROCESSING(SScircuit, src)
 	for(var/circ in assembly_components)
 		remove_component(circ)
-		qdel(circ)
 	return ..()
 
 /obj/item/device/electronic_assembly/Process()
@@ -162,6 +165,8 @@
 
 
 /obj/item/device/electronic_assembly/proc/open_interact(mob/user)
+	. = ..()
+
 	var/total_part_size = return_total_size()
 	var/total_complexity = return_total_complexity()
 	var/list/HTML = list()
@@ -194,11 +199,11 @@
 
 		if(length(assembly_components) > components_per_page)
 			HTML += "<br>\["
-			for(var/i = 1 to ceil(length(assembly_components)/components_per_page))
-				if((i-1) == interact_page)
-					HTML += " [i]"
+			for(var/i = 0 to round(length(assembly_components)/components_per_page))
+				if(i == interact_page)
+					HTML += " [i+1]"
 				else
-					HTML += " <a href='?src=\ref[src];select_page=[i-1]'>[i]</a>"
+					HTML += " <a href='?src=\ref[src];select_page=[i]'>[i+1]</a>"
 			HTML += " \]"
 
 	HTML += "</body></html>"
@@ -295,7 +300,7 @@
 	overlays += detail_overlay
 
 /obj/item/device/electronic_assembly/examine(mob/user)
-	. = ..()
+	..()
 	for(var/I in assembly_components)
 		var/obj/item/integrated_circuit/IC = I
 		IC.external_examine(user)
@@ -383,9 +388,6 @@
 		user.put_in_hands(IC)
 	add_allowed_scanner(user.ckey)
 
-	// Make sure we're not on an invalid page
-	interact_page = Clamp(interact_page, 0, ceil(length(assembly_components)/components_per_page)-1)
-
 	return TRUE
 
 // Actually removes the component, doesn't perform any checks.
@@ -456,17 +458,6 @@
 		detail_color = D.detail_color
 		update_icon()
 	else if(istype(I, /obj/item/weapon/screwdriver))
-		var/hatch_locked = FALSE
-		for(var/obj/item/integrated_circuit/manipulation/hatchlock/H in assembly_components)
-			// If there's more than one hatch lock, only one needs to be enabled for the assembly to be locked
-			if(H.lock_enabled)
-				hatch_locked = TRUE
-				break
-
-		if(hatch_locked)
-			to_chat(user, "<span class='notice'>The screws are covered by a locking mechanism!</span>")
-			return FALSE
-
 		playsound(src, 'sound/items/Screwdriver.ogg', 25)
 		opened = !opened
 		to_chat(user, "<span class='notice'>You [opened ? "open" : "close"] the maintenance hatch of [src].</span>")
@@ -489,11 +480,6 @@
 
 /obj/item/device/electronic_assembly/bullet_act(var/obj/item/projectile/P)
 	take_damage(P.damage)
-
-/obj/item/device/electronic_assembly/attack_generic(mob/user, damage)
-	take_damage(damage)
-	user.visible_message(SPAN_WARNING("\The [user] smashes \the [src]!"), SPAN_WARNING("You smash \the [src]!"))
-	attack_animation(user)
 
 /obj/item/device/electronic_assembly/emp_act(severity)
 	. = ..()
@@ -518,6 +504,11 @@
 // Override in children for special behavior.
 /obj/item/device/electronic_assembly/proc/get_object()
 	return src
+
+/obj/item/device/electronic_assembly/attack_tk(mob/user)
+	if(anchored)
+		return
+	..()
 
 /obj/item/device/electronic_assembly/attack_hand(mob/user)
 	if(anchored)

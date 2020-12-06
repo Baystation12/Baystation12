@@ -52,8 +52,8 @@
 	send_material_data = 1
 
 /datum/stack_recipe/knife
-	title = "table knife"
-	result_type = /obj/item/weapon/material/knife/table
+	title = "knife"
+	result_type = /obj/item/weapon/material/kitchen/utensil/knife/plastic
 	on_floor = 1
 	difficulty = 2
 	send_material_data = 1
@@ -111,12 +111,6 @@
 	result_type = /obj/item/frame/light/small
 	difficulty = 2
 
-/datum/stack_recipe/light_large
-	title = "large light fixture frame"
-	result_type = /obj/item/frame/light/spot
-	req_amount = 3
-	difficulty = 3
-
 /datum/stack_recipe/light_switch
 	title = "light switch"
 	result_type = /obj/item/frame/light_switch
@@ -147,6 +141,12 @@
 	req_amount = 2
 	difficulty = 2
 
+/datum/stack_recipe/computer/console
+	title = "modular console frame"
+	result_type = /obj/item/modular_computer/console
+	req_amount = 20
+	difficulty = 2
+
 /datum/stack_recipe/computer/telescreen
 	title = "modular telescreen frame"
 	result_type = /obj/item/modular_computer/telescreen
@@ -171,7 +171,7 @@
 	on_floor = 1
 
 /datum/stack_recipe/ivbag
-	title = "IV bag"
+	title = "bag"
 	result_type = /obj/item/weapon/reagent_containers/ivbag
 	req_amount = 4
 	difficulty = 2
@@ -256,24 +256,4 @@
 	title = "clipboard"
 	result_type = /obj/item/weapon/material/clipboard
 	req_amount = 5
-	send_material_data = 1
-
-/datum/stack_recipe/urn
-	title = "urn"
-	result_type = /obj/item/weapon/material/urn
-	req_amount = 5
-	send_material_data = 1
-
-/datum/stack_recipe/drill_head
-	title = "drill head"
-	result_type = /obj/item/weapon/material/drill_head
-	req_amount = 3
-	send_material_data = 1
-	difficulty = 0
-
-/datum/stack_recipe/cross
-	title = "cross"
-	result_type = /obj/item/weapon/material/cross
-	req_amount = 2
-	on_floor = 1
 	send_material_data = 1

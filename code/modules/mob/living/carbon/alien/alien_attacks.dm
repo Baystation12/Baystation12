@@ -1,3 +1,4 @@
+//There has to be a better way to define this shit. ~ Z
 //can't equip anything
 /mob/living/carbon/alien/attack_ui(slot_id)
 	return

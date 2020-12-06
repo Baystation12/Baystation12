@@ -24,7 +24,6 @@
 	same_tile = 1
 	ladder_carry = 1
 	force_danger = 1
-	can_grab_self = 0
 
 /datum/grab/nab/on_hit_grab(var/obj/item/grab/G)
 	var/mob/living/carbon/human/affecting = G.affecting
@@ -34,7 +33,7 @@
 
 	affecting.visible_message("<span class='danger'>[assailant] begins crushing [affecting]!</span>")
 	G.attacking = 1
-	if(do_after(assailant, action_cooldown - 1, affecting))
+	if(do_mob(assailant, affecting, action_cooldown - 1))
 		G.attacking = 0
 		G.action_used()
 		crush(G, crush_damage)
@@ -53,7 +52,7 @@
 	affecting.visible_message("<span class='danger'>[assailant] begins chewing on [affecting]!</span>")
 	G.attacking = 1
 
-	if(do_after(assailant, action_cooldown - 1, affecting))
+	if(do_mob(assailant, affecting, action_cooldown - 1))
 		G.attacking = 0
 		G.action_used()
 		masticate(G, masticate_damage)
@@ -68,16 +67,17 @@
 /datum/grab/nab/proc/crush(var/obj/item/grab/G, var/attack_damage)
 	var/obj/item/organ/external/damaging = G.get_targeted_organ()
 	var/hit_zone = G.target_zone
+
+	var/armor = G.affecting.run_armor_check(hit_zone, "melee")
+
 	G.affecting.visible_message("<span class='danger'>[G.assailant] crushes [G.affecting]'s [damaging.name]!</span>")
 
 	if(prob(30))
-		var/hit_damage = max(attack_damage + 10, 15)
-		G.affecting.apply_damage(hit_damage, BRUTE, hit_zone, DAM_SHARP, used_weapon = "organic punctures")
-		var/armor = 100 * G.affecting.get_blocked_ratio(hit_zone, BRUTE, damage = hit_damage)
+		G.affecting.apply_damage(max(attack_damage + 10, 15), BRUTE, hit_zone, armor, DAM_SHARP, "organic punctures")
 		G.affecting.apply_effect(attack_damage, PAIN, armor)
 		G.affecting.visible_message("<span class='danger'>[G.assailant]'s spikes dig in painfully!</span>")
 	else
-		G.affecting.apply_damage(attack_damage, BRUTE, hit_zone, used_weapon = "crushing")
+		G.affecting.apply_damage(attack_damage, BRUTE, hit_zone, armor,, "crushing")
 	playsound(get_turf(G.assailant), 'sound/weapons/bite.ogg', 25, 1, -1)
 
 	admin_attack_log(G.assailant, G.affecting, "Crushed their victim.", "Was crushed.", "crushed")
@@ -87,7 +87,9 @@
 	var/hit_zone = G.assailant.zone_sel.selecting
 	var/obj/item/organ/external/damaging = G.affecting.get_organ(hit_zone)
 
-	G.affecting.apply_damage(attack_damage, BRUTE, hit_zone, DAM_SHARP|DAM_EDGE, used_weapon = "mandibles")
+	var/armor = G.affecting.run_armor_check(hit_zone, "melee")
+
+	G.affecting.apply_damage(attack_damage, BRUTE, hit_zone, armor, DAM_SHARP|DAM_EDGE, "mandibles")
 	G.affecting.visible_message("<span class='danger'>[G.assailant] chews on [G.affecting]'s [damaging.name]!</span>")
 	playsound(get_turf(G.assailant), 'sound/weapons/bite.ogg', 25, 1, -1)
 

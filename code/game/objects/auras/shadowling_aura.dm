@@ -15,7 +15,7 @@
 	..()
 
 /obj/aura/shadowling_aura/bullet_act(var/obj/item/projectile/P)
-	if(P.damage_flags() & DAM_LASER)
+	if(P.check_armour == "laser")
 		P.damage *= 2
 	if(P.agony)
 		P.agony *= 2

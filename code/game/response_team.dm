@@ -28,23 +28,13 @@ var/can_call_ert
 		switch(alert("Current security level lower than [security_state.high_security_level.name]. Do you still want to dispatch a response team?",,"Yes","No"))
 			if("No")
 				return
-
-	var/reason = input("What is the reason for dispatching this Emergency Response Team?", "Dispatching Emergency Response Team")
-		
-	if(!reason && alert("You did not input a reason. Continue anyway?",,"Yes", "No") != "Yes")
-		return
-	
 	if(send_emergency_team)
-		to_chat(usr, SPAN_DANGER("Looks like someone beat you to it!"))
+		to_chat(usr, "<span class='danger'>Looks like somebody beat you to it!</span>")
 		return
-	
-	if(reason)
-		message_admins("[key_name_admin(usr)] is dispatching an Emergency Response Team for the reason: [reason]", 1)
-	else
-		message_admins("[key_name_admin(usr)] is dispatching an Emergency Response Team.", 1)
-		
+
+	message_admins("[key_name_admin(usr)] is dispatching an Emergency Response Team.", 1)
 	log_admin("[key_name(usr)] used Dispatch Response Team.")
-	trigger_armed_response_team(1, reason)
+	trigger_armed_response_team(1)
 
 client/verb/JoinResponseTeam()
 
@@ -103,7 +93,7 @@ proc/increment_ert_chance()
 		sleep(600 * 3) // Minute * Number of Minutes
 
 
-proc/trigger_armed_response_team(var/force = 0, var/reason = "")
+proc/trigger_armed_response_team(var/force = 0)
 	if(!can_call_ert && !force)
 		return
 	if(send_emergency_team)
@@ -124,8 +114,6 @@ proc/trigger_armed_response_team(var/force = 0, var/reason = "")
 
 	command_announcement.Announce("It would appear that an emergency response team was requested for [station_name()]. We will prepare and send one as soon as possible.", "[GLOB.using_map.boss_name]")
 	evacuation_controller.add_can_call_predicate(new/datum/evacuation_predicate/ert())
-
-	GLOB.ert.reason = reason //Set it even if it's blank to clear a reason from a previous ERT
 
 	can_call_ert = 0 // Only one call per round, gentleman.
 	send_emergency_team = 1

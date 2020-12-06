@@ -13,4 +13,3 @@
 
 /spell/aoe_turf/conjure/force_portal/tower
 	charge_max = 2
-	spell_flags = 0

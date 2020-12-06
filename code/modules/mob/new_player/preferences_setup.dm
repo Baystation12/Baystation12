@@ -64,10 +64,6 @@
 		previewJob.equip_preview(mannequin, player_alt_titles[previewJob.title], branch, rank)
 		update_icon = TRUE
 
-	if(!(mannequin.species.appearance_flags && mannequin.species.appearance_flags & HAS_UNDERWEAR))
-		if(all_underwear)
-			all_underwear.Cut()
-
 	if((equip_preview_mob & EQUIP_PREVIEW_LOADOUT) && !(previewJob && (equip_preview_mob & EQUIP_PREVIEW_JOB) && (previewJob.type == /datum/job/ai || previewJob.type == /datum/job/cyborg)))
 		// Equip custom gear loadout, replacing any job items
 		var/list/loadout_taken_slots = list()
@@ -83,7 +79,7 @@
 				else
 					permitted = 1
 
-				if(G.whitelisted && !(mannequin.species.name in G.whitelisted))
+				if(G.whitelisted && (G.whitelisted != mannequin.species.name))
 					permitted = 0
 
 				if(!permitted)

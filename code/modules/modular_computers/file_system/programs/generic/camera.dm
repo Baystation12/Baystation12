@@ -1,5 +1,4 @@
 // Returns which access is relevant to passed network. Used by the program.
-// A return value of 0 indicates no access reqirement
 /proc/get_camera_access(var/network)
 	if(!network)
 		return 0
@@ -10,8 +9,6 @@
 	switch(network)
 		if(NETWORK_ENGINEERING, NETWORK_ALARM_ATMOS, NETWORK_ALARM_CAMERA, NETWORK_ALARM_FIRE, NETWORK_ALARM_POWER)
 			return access_engine
-		if(NETWORK_ROBOTS)
-			return access_ai_upload
 		if(NETWORK_CRESCENT, NETWORK_ERT)
 			return access_cent_specops
 		if(NETWORK_MEDICAL)
@@ -36,7 +33,6 @@
 	size = 12
 	available_on_ntnet = 1
 	requires_ntnet = 1
-	category = PROG_MONITOR
 
 /datum/nano_module/camera_monitor
 	name = "Camera Monitoring program"

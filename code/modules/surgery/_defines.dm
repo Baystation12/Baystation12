@@ -1,0 +1,1 @@
+#define SURGERY_FAILURE -1

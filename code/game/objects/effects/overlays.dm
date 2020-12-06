@@ -17,6 +17,7 @@
 	icon = 'icons/misc/beach2.dmi'
 	icon_state = "palm1"
 	density = 1
+	plane = ABOVE_HUMAN_PLANE
 	layer = ABOVE_HUMAN_LAYER
 	anchored = 1
 
@@ -25,6 +26,7 @@
 	icon = 'icons/misc/beach2.dmi'
 	icon_state = "palm2"
 	density = 1
+	plane = ABOVE_HUMAN_PLANE
 	layer = ABOVE_HUMAN_LAYER
 	anchored = 1
 
@@ -37,6 +39,7 @@
 	name = "Bluespace"
 	icon = 'icons/turf/space.dmi'
 	icon_state = "bluespacify"
+	plane = EFFECTS_ABOVE_LIGHTING_PLANE
 	layer = SUPERMATTER_WALL_LAYER
 
 /obj/effect/overlay/wallrot
@@ -45,6 +48,7 @@
 	icon = 'icons/effects/wallrot.dmi'
 	anchored = 1
 	density = 1
+	plane = ABOVE_TURF_PLANE
 	layer = ABOVE_TILE_LAYER
 	mouse_opacity = 0
 

@@ -16,3 +16,6 @@ var/global/datum/global_init/init = new ()
 	load_configuration()
 	callHook("global_init")
 	qdel(src) //we're done
+
+/datum/global_init/Destroy()
+	return 1

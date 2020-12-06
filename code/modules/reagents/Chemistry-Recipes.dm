@@ -70,7 +70,7 @@
 /datum/chemical_reaction/proc/post_reaction(var/datum/reagents/holder)
 	var/atom/container = holder.my_atom
 	if(mix_message && container && !ismob(container))
-		container.visible_message("<span class='notice'>[icon2html(container, viewers(get_turf(container)))] [mix_message]</span>")
+		container.visible_message("<span class='notice'>\icon[container] [mix_message]</span>")
 		playsound(container, reaction_sound, 80, 1)
 
 //obtains any special data that will be provided to the reaction products
@@ -125,7 +125,7 @@
 /datum/chemical_reaction/thermite
 	name = "Thermite"
 	result = /datum/reagent/thermite
-	required_reagents = list(/datum/reagent/aluminium = 1, /datum/reagent/iron = 1, /datum/reagent/acetone = 1)
+	required_reagents = list(/datum/reagent/aluminum = 1, /datum/reagent/iron = 1, /datum/reagent/acetone = 1)
 	result_amount = 3
 	mix_message = "The solution thickens into a coarse metallic paste."
 
@@ -134,8 +134,15 @@
 	result = /datum/reagent/space_drugs
 	required_reagents = list(/datum/reagent/mercury = 1, /datum/reagent/sugar = 1, /datum/reagent/lithium = 1)
 	result_amount = 3
-	minimum_temperature = 50 CELSIUS
-	maximum_temperature = (50 CELSIUS) + 100
+	minimum_temperature = 50 CELCIUS
+	maximum_temperature = (50 CELCIUS) + 100
+
+/datum/chemical_reaction/lube
+	name = "Space Lube"
+	result = /datum/reagent/lube
+	required_reagents = list(/datum/reagent/water = 1, /datum/reagent/silicon = 1, /datum/reagent/acetone = 1)
+	result_amount = 4
+	mix_message = "The solution becomes thick and slimy."
 
 /datum/chemical_reaction/pacid
 	name = "Polytrinic acid"
@@ -148,8 +155,8 @@
 	result = /datum/reagent/synaptizine
 	required_reagents = list(/datum/reagent/sugar = 1, /datum/reagent/lithium = 1, /datum/reagent/water = 1)
 	result_amount = 3
-	minimum_temperature = 30 CELSIUS
-	maximum_temperature = (30 CELSIUS) + 100
+	minimum_temperature = 30 CELCIUS
+	maximum_temperature = (30 CELCIUS) + 100
 
 /datum/chemical_reaction/hyronalin
 	name = "Hyronalin"
@@ -183,6 +190,13 @@
 	catalysts = list(/datum/reagent/toxin/phoron = 5)
 	result_amount = 2
 
+/datum/chemical_reaction/virus_food
+	name = "Virus Food"
+	result = /datum/reagent/nutriment/virus_food
+	required_reagents = list(/datum/reagent/water = 1, /datum/reagent/drink/milk = 1)
+	result_amount = 5
+	mix_message = "The water dilutes the milk into a thin white solution."
+
 /datum/chemical_reaction/leporazine
 	name = "Leporazine"
 	result = /datum/reagent/leporazine
@@ -194,8 +208,8 @@
 	name = "Cryptobiolin"
 	result = /datum/reagent/cryptobiolin
 	required_reagents = list(/datum/reagent/potassium = 1, /datum/reagent/acetone = 1, /datum/reagent/sugar = 1)
-	minimum_temperature = 30 CELSIUS
-	maximum_temperature = 60 CELSIUS
+	minimum_temperature = 30 CELCIUS
+	maximum_temperature = 60 CELCIUS
 	result_amount = 3
 
 /datum/chemical_reaction/tricordrazine
@@ -222,8 +236,8 @@
 	result = /datum/reagent/dermaline
 	required_reagents = list(/datum/reagent/acetone = 1, /datum/reagent/phosphorus = 1, /datum/reagent/kelotane = 1)
 	result_amount = 3
-	minimum_temperature = (-50 CELSIUS) - 100
-	maximum_temperature = -50 CELSIUS
+	minimum_temperature = (-50 CELCIUS) - 100
+	maximum_temperature = -50 CELCIUS
 
 /datum/chemical_reaction/dexalinp
 	name = "Dexalin Plus"
@@ -255,27 +269,17 @@
 	result = /datum/reagent/cryoxadone
 	required_reagents = list(/datum/reagent/dexalin = 1, /datum/reagent/drink/ice = 1, /datum/reagent/acetone = 1)
 	result_amount = 3
-	minimum_temperature = (-25 CELSIUS) - 100
-	maximum_temperature = -25 CELSIUS
+	minimum_temperature = (-25 CELCIUS) - 100
+	maximum_temperature = -25 CELCIUS
 	mix_message = "The solution becomes sludge-like."
-
-/datum/chemical_reaction/nanitefluid
-	name = "Nanite Fluid"
-	result = /datum/reagent/nanitefluid
-	required_reagents = list(/datum/reagent/cryoxadone = 1, /datum/reagent/aluminium = 1, /datum/reagent/iron = 1)
-	catalysts = list(/datum/reagent/toxin/phoron = 5)
-	result_amount = 3
-	minimum_temperature = (-25 CELSIUS) - 100
-	maximum_temperature = -25 CELSIUS
-	mix_message = "The solution becomes a metallic slime."
 
 /datum/chemical_reaction/venaxilin
 	name = "Venaxilin"
 	result = /datum/reagent/dylovene/venaxilin
 	required_reagents = list(/datum/reagent/dylovene = 1, /datum/reagent/spaceacillin = 1, /datum/reagent/toxin/venom = 1)
 	result_amount = 1
-	minimum_temperature = 50 CELSIUS
-	maximum_temperature = 100 CELSIUS
+	minimum_temperature = 50 CELCIUS
+	maximum_temperature = 100 CELCIUS
 	mix_message = "The solution steams and becomes cloudy."
 
 
@@ -284,8 +288,8 @@
 	result = /datum/reagent/clonexadone
 	required_reagents = list(/datum/reagent/cryoxadone = 1, /datum/reagent/sodium = 1)
 	result_amount = 2
-	minimum_temperature = -100 CELSIUS
-	maximum_temperature = -75 CELSIUS
+	minimum_temperature = -100 CELCIUS
+	maximum_temperature = -75 CELCIUS
 	mix_message = "The solution thickens into translucent slime."
 
 /datum/chemical_reaction/spaceacillin
@@ -319,18 +323,12 @@
 	required_reagents = list(/datum/reagent/ethanol = 1, /datum/reagent/acid/hydrochloric = 3, /datum/reagent/water = 1)
 	result_amount = 1
 
-/datum/chemical_reaction/vecuronium_bromide
-	name = "Vecuronium Bromide"
-	result = /datum/reagent/vecuronium_bromide
-	required_reagents = list(/datum/reagent/ethanol = 1, /datum/reagent/mercury = 2, /datum/reagent/hydrazine = 2)
-	result_amount = 1
-
 /datum/chemical_reaction/potassium_chloride
 	name = "Potassium Chloride"
 	result = /datum/reagent/toxin/potassium_chloride
 	required_reagents = list(/datum/reagent/sodiumchloride = 1, /datum/reagent/potassium = 1)
-	minimum_temperature = 60 CELSIUS
-	maximum_temperature = (60 CELSIUS) + 100
+	minimum_temperature = 60 CELCIUS
+	maximum_temperature = (60 CELCIUS) + 100
 	result_amount = 2
 
 /datum/chemical_reaction/potassium_chlorophoride
@@ -344,8 +342,8 @@
 	result = /datum/reagent/toxin/zombiepowder
 	required_reagents = list(/datum/reagent/toxin/carpotoxin = 5, /datum/reagent/soporific = 5, /datum/reagent/copper = 5)
 	result_amount = 2
-	minimum_temperature = 90 CELSIUS
-	maximum_temperature = 99 CELSIUS
+	minimum_temperature = 90 CELCIUS
+	maximum_temperature = 99 CELCIUS
 	mix_message = "The solution boils off to form a fine powder."
 
 /datum/chemical_reaction/mindbreaker
@@ -354,8 +352,8 @@
 	required_reagents = list(/datum/reagent/silicon = 1, /datum/reagent/hydrazine = 1, /datum/reagent/dylovene = 1)
 	result_amount = 3
 	mix_message = "The solution takes on an iridescent sheen."
-	minimum_temperature = 75 CELSIUS
-	maximum_temperature = (75 CELSIUS) + 25
+	minimum_temperature = 75 CELCIUS
+	maximum_temperature = (75 CELCIUS) + 25
 
 /datum/chemical_reaction/lipozine
 	name = "Lipozine"
@@ -484,8 +482,8 @@
 	result = null
 	required_reagents = list(/datum/reagent/iron = 5, /datum/reagent/toxin/phoron = 20)
 	result_amount = 1
-	minimum_temperature = (-80 CELSIUS) - 100
-	maximum_temperature = -80 CELSIUS
+	minimum_temperature = (-80 CELCIUS) - 100
+	maximum_temperature = -80 CELCIUS
 	mix_message = "The solution hardens and begins to crystallize."
 
 /datum/chemical_reaction/phoronsolidification/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
@@ -528,7 +526,7 @@
 /datum/chemical_reaction/flash_powder
 	name = "Flash powder"
 	result = null
-	required_reagents = list(/datum/reagent/aluminium = 1, /datum/reagent/potassium = 1, /datum/reagent/sulfur = 1 )
+	required_reagents = list(/datum/reagent/aluminum = 1, /datum/reagent/potassium = 1, /datum/reagent/sulfur = 1 )
 	result_amount = null
 	mix_message = "The solution bubbles vigorously!"
 
@@ -593,7 +591,7 @@
 /datum/chemical_reaction/phlogiston
 	name = "Phlogiston"
 	result = null
-	required_reagents = list(/datum/reagent/aluminium = 1, /datum/reagent/toxin/phoron = 1, /datum/reagent/acid = 1 )
+	required_reagents = list(/datum/reagent/aluminum = 1, /datum/reagent/toxin/phoron = 1, /datum/reagent/acid = 1 )
 	result_amount = 1
 	mix_message = "The solution thickens and begins to bubble."
 
@@ -607,7 +605,7 @@
 /datum/chemical_reaction/napalm
 	name = "Napalm"
 	result = /datum/reagent/napalm
-	required_reagents = list(/datum/reagent/aluminium = 1, /datum/reagent/acid = 1, /datum/reagent/glycerol = 1 ) //because bananas grow on palms and palm oil is used to make napalm. =/= logic
+	required_reagents = list(/datum/reagent/aluminum = 1, /datum/reagent/acid = 1, /datum/reagent/glycerol = 1 ) //because bananas grow on palms and palm oil is used to make napalm. =/= logic
 	result_amount = 2
 	mix_message = "The solution thickens and takes on a slimy sheen."
 
@@ -658,7 +656,7 @@
 /datum/chemical_reaction/metalfoam
 	name = "Metal Foam"
 	result = null
-	required_reagents = list(/datum/reagent/aluminium = 3, /datum/reagent/foaming_agent = 1, /datum/reagent/acid/polyacid = 1)
+	required_reagents = list(/datum/reagent/aluminum = 3, /datum/reagent/foaming_agent = 1, /datum/reagent/acid/polyacid = 1)
 	result_amount = 5
 	mix_message = "The solution bubbles vigorously!"
 
@@ -916,14 +914,14 @@
 /datum/chemical_reaction/carbon_paint/send_data()
 	return "#333333"
 
-/datum/chemical_reaction/aluminium_paint
-	name = "Aluminium paint"
+/datum/chemical_reaction/aluminum_paint
+	name = "Aluminum paint"
 	result = /datum/reagent/paint
-	required_reagents = list(/datum/reagent/toxin/plasticide = 1, /datum/reagent/water = 3, /datum/reagent/aluminium = 1)
+	required_reagents = list(/datum/reagent/toxin/plasticide = 1, /datum/reagent/water = 3, /datum/reagent/aluminum = 1)
 	result_amount = 5
 	mix_message = "The solution thickens and takes on a glossy white sheen."
 
-/datum/chemical_reaction/aluminium_paint/send_data()
+/datum/chemical_reaction/aluminum_paint/send_data()
 	return "#f0f8ff"
 
 /* Slime cores */
@@ -945,7 +943,7 @@
 	var/obj/item/slime_extract/T = holder.my_atom
 	T.Uses--
 	if(T.Uses <= 0)
-		T.visible_message("[icon2html(T, viewers(get_turf(T)))]<span class='notice'>\The [T]'s power is consumed in the reaction.</span>")
+		T.visible_message("\icon[T]<span class='notice'>\The [T]'s power is consumed in the reaction.</span>")
 		T.SetName("used slime extract")
 		T.desc = "This extract has been used up."
 
@@ -1093,7 +1091,7 @@
 		return
 
 	var/turf/location = get_turf(holder.my_atom)
-	location.assume_gas(GAS_PHORON, 250, 1400)
+	location.assume_gas("phoron", 250, 1400)
 	location.hotspot_expose(700, 400)
 
 //Yellow
@@ -1380,40 +1378,26 @@
 	result = /datum/reagent/drink/coffee
 	required_reagents = list(/datum/reagent/water = 5, /datum/reagent/nutriment/coffee = 1)
 	result_amount = 5
-	minimum_temperature = 70 CELSIUS
-	maximum_temperature = (70 CELSIUS) + 100
+	minimum_temperature = 70 CELCIUS
+	maximum_temperature = (70 CELCIUS) + 100
 	mix_message = "The solution thickens into a steaming dark brown beverage."
-
-/datum/chemical_reaction/coffee/instant
-	name = "Instant Coffee"
-	required_reagents = list(/datum/reagent/water = 5, /datum/reagent/nutriment/coffee/instant = 1)
-	maximum_temperature = INFINITY
-	minimum_temperature = 0
-	mix_message = "The solution thickens into dark brown beverage."
 
 /datum/chemical_reaction/tea
 	name = "Black tea"
 	result = /datum/reagent/drink/tea
 	required_reagents = list(/datum/reagent/water = 5, /datum/reagent/nutriment/tea = 1)
 	result_amount = 5
-	minimum_temperature = 70 CELSIUS
-	maximum_temperature = (70 CELSIUS) + 100
+	minimum_temperature = 70 CELCIUS
+	maximum_temperature = (70 CELCIUS) + 100
 	mix_message = "The solution thickens into a steaming black beverage."
-
-/datum/chemical_reaction/tea/instant
-	name = "Instant Black tea"
-	required_reagents = list(/datum/reagent/water = 5, /datum/reagent/nutriment/tea/instant = 1)
-	maximum_temperature = INFINITY
-	minimum_temperature = 0
-	mix_message = "The solution thickens into black beverage."
 
 /datum/chemical_reaction/hot_coco
 	name = "Hot Coco"
 	result = /datum/reagent/drink/hot_coco
 	required_reagents = list(/datum/reagent/water = 5, /datum/reagent/nutriment/coco = 1)
 	result_amount = 5
-	minimum_temperature = 70 CELSIUS
-	maximum_temperature = (70 CELSIUS) + 100
+	minimum_temperature = 70 CELCIUS
+	maximum_temperature = (70 CELCIUS) + 100
 	mix_message = "The solution thickens into a steaming brown beverage."
 
 /datum/chemical_reaction/grapejuice
@@ -1486,8 +1470,8 @@
 	catalysts = list(/datum/reagent/enzyme = 5)
 	result_amount = 1
 	mix_message = "The solution thickens and curdles into a rich yellow substance."
-	minimum_temperature = 40 CELSIUS
-	maximum_temperature = (40 CELSIUS) + 100
+	minimum_temperature = 40 CELCIUS
+	maximum_temperature = (40 CELCIUS) + 100
 
 /datum/chemical_reaction/cheesewheel/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
 	..()
@@ -1613,20 +1597,6 @@
 	required_reagents = list(/datum/reagent/drink/ice = 1, /datum/reagent/drink/coffee = 2)
 	result_amount = 3
 	mix_message = "The ice clinks together in the chilled coffee."
-
-/datum/chemical_reaction/icesoylatte
-	name = "Iced Soy Latte"
-	result = /datum/reagent/drink/coffee/icecoffee/soy_latte
-	required_reagents = list(/datum/reagent/drink/ice = 1, /datum/reagent/drink/coffee/soy_latte = 2)
-	result_amount = 3
-	mix_message = "The ice clinks together in the chilled soy latte."
-
-/datum/chemical_reaction/icecafelatte
-	name = "Iced Cafe Latte"
-	result = /datum/reagent/drink/coffee/icecoffee/cafe_latte
-	required_reagents = list(/datum/reagent/drink/ice = 1, /datum/reagent/drink/coffee/cafe_latte = 2)
-	result_amount = 3
-	mix_message = "The ice clinks together in the chilled cafe latte."
 
 /datum/chemical_reaction/nuka_cola
 	name = "Nuka Cola"
@@ -1799,7 +1769,7 @@
 /datum/chemical_reaction/gargle_blaster
 	name = "Pan-Galactic Gargle Blaster"
 	result = /datum/reagent/ethanol/gargle_blaster
-	required_reagents = list(/datum/reagent/ethanol/vodka = 2, /datum/reagent/ethanol/gin = 1, /datum/reagent/ethanol/specialwhiskey = 1, /datum/reagent/ethanol/cognac = 1, /datum/reagent/drink/juice/lime = 1)
+	required_reagents = list(/datum/reagent/ethanol/vodka = 2, /datum/reagent/ethanol/gin = 1, /datum/reagent/ethanol/whiskey = 1, /datum/reagent/ethanol/cognac = 1, /datum/reagent/drink/juice/lime = 1)
 	result_amount = 6
 
 /datum/chemical_reaction/brave_bull
@@ -1848,8 +1818,8 @@
 	name = "Hooch"
 	result = /datum/reagent/ethanol/hooch
 	required_reagents = list (/datum/reagent/sugar = 1, /datum/reagent/ethanol = 2, /datum/reagent/fuel = 1)
-	minimum_temperature = 30 CELSIUS
-	maximum_temperature = (30 CELSIUS) + 100
+	minimum_temperature = 30 CELCIUS
+	maximum_temperature = (30 CELCIUS) + 100
 	result_amount = 3
 
 /datum/chemical_reaction/irish_coffee
@@ -1959,8 +1929,8 @@
 	name = "Anti-freeze"
 	result = /datum/reagent/ethanol/antifreeze
 	required_reagents = list(/datum/reagent/ethanol/vodka = 1, /datum/reagent/drink/milk/cream = 1, /datum/reagent/drink/ice = 1)
-	minimum_temperature = (0 CELSIUS) - 100
-	maximum_temperature = 0 CELSIUS
+	minimum_temperature = (0 CELCIUS) - 100
+	maximum_temperature = 0 CELCIUS
 	result_amount = 3
 	mix_message = "The solution thickens sluggishly."
 
@@ -2029,62 +1999,6 @@
 	result_amount = 2
 	mix_message = "The milk suffuses the coffee with pale shades."
 
-/datum/chemical_reaction/mocha_latte
-	name = "Mocha Latte"
-	result = /datum/reagent/drink/coffee/cafe_latte/mocha
-	required_reagents = list(/datum/reagent/drink/coffee/cafe_latte = 2, /datum/reagent/drink/syrup_chocolate = 1)
-	result_amount = 3
-	mix_message = "The chocolate swirls into the latte."
-
-/datum/chemical_reaction/soy_mocha_latte
-	name = "Mocha Soy Latte"
-	result = /datum/reagent/drink/coffee/soy_latte/mocha
-	required_reagents = list(/datum/reagent/drink/coffee/soy_latte = 3, /datum/reagent/drink/syrup_chocolate = 1)
-	result_amount = 4
-	mix_message = "The chocolate swirls into the latte."
-
-/datum/chemical_reaction/ice_mocha_latte
-	name = "Iced Mocha Latte"
-	result = /datum/reagent/drink/coffee/icecoffee/cafe_latte/mocha
-	required_reagents = list(/datum/reagent/drink/ice = 1, /datum/reagent/drink/coffee/cafe_latte/mocha = 2)
-	result_amount = 3
-	mix_message = "The ice clinks together in the chilled mocha latte."
-
-/datum/chemical_reaction/ice_soy_mocha_latte
-	name = "Iced Soy Mocha Latte"
-	result = /datum/reagent/drink/coffee/icecoffee/soy_latte/mocha
-	required_reagents = list(/datum/reagent/drink/ice = 1, /datum/reagent/drink/coffee/soy_latte/mocha = 2)
-	result_amount = 3
-	mix_message = "The ice clinks together in the chilled soy mocha latte."
-
-/datum/chemical_reaction/pumpkin_latte
-	name = "Pumpkin Spice Latte"
-	result = /datum/reagent/drink/coffee/cafe_latte/pumpkin
-	required_reagents = list(/datum/reagent/drink/coffee/cafe_latte = 2, /datum/reagent/drink/syrup_pumpkin = 1)
-	result_amount = 3
-	mix_message = "The pumpkin spice swirls into the latte."
-
-/datum/chemical_reaction/soy_pumpkin_latte
-	name = "Pumpkin Spice Soy Latte"
-	result = /datum/reagent/drink/coffee/soy_latte/pumpkin
-	required_reagents = list(/datum/reagent/drink/coffee/soy_latte = 3, /datum/reagent/drink/syrup_pumpkin = 1)
-	result_amount = 4
-	mix_message = "The pumpkin spice swirls into the latte."
-
-/datum/chemical_reaction/ice_pumpkin_latte
-	name = "Iced Pumpkin Spice Latte"
-	result = /datum/reagent/drink/coffee/icecoffee/cafe_latte/pumpkin
-	required_reagents = list(/datum/reagent/drink/ice = 1, /datum/reagent/drink/coffee/cafe_latte/pumpkin = 2)
-	result_amount = 3
-	mix_message = "The ice clinks together in the chilled pumpkin spice latte."
-
-/datum/chemical_reaction/ice_soy_pumpkin_latte
-	name = "Iced Pumpkin Spice Soy Latte"
-	result = /datum/reagent/drink/coffee/icecoffee/soy_latte/pumpkin
-	required_reagents = list(/datum/reagent/drink/ice = 1, /datum/reagent/drink/coffee/soy_latte/pumpkin = 2)
-	result_amount = 3
-	mix_message = "The ice clinks together in the chilled pumpkin spice soy latte."
-
 /datum/chemical_reaction/acidspit
 	name = "Acid Spit"
 	result = /datum/reagent/ethanol/acid_spit
@@ -2108,7 +2022,7 @@
 /datum/chemical_reaction/aloe
 	name = "Aloe"
 	result = /datum/reagent/ethanol/aloe
-	required_reagents = list(/datum/reagent/drink/milk/cream = 1, /datum/reagent/ethanol/specialwhiskey = 1, /datum/reagent/drink/juice/watermelon = 1)
+	required_reagents = list(/datum/reagent/drink/milk/cream = 1, /datum/reagent/ethanol/whiskey = 1, /datum/reagent/drink/juice/watermelon = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/andalusia
@@ -2129,9 +2043,9 @@
 	required_reagents = list(/datum/reagent/ethanol/beer = 1, /datum/reagent/drink/lemon_lime = 1)
 	result_amount = 2
 
-/datum/chemical_reaction/irishslammer
-	name = "Irish Slammer"
-	result = /datum/reagent/ethanol/irishslammer
+/datum/chemical_reaction/irishcarbomb
+	name = "Irish Car Bomb"
+	result = /datum/reagent/ethanol/irishcarbomb
 	required_reagents = list(/datum/reagent/ethanol/ale = 1, /datum/reagent/ethanol/irish_cream = 1)
 	result_amount = 2
 
@@ -2189,10 +2103,10 @@
 	required_reagents = list(/datum/reagent/drink/juice/orange = 1, /datum/reagent/drink/juice/lime = 1, /datum/reagent/drink/sodawater = 1)
 	result_amount = 3
 
-/datum/chemical_reaction/triplecitrus
-	name = "Triple Citrus"
-	result = /datum/reagent/drink/triplecitrus
-	required_reagents = list(/datum/reagent/drink/juice/orange = 1, /datum/reagent/drink/juice/lime = 1, /datum/reagent/drink/juice/lemon = 1)
+/datum/chemical_reaction/brownstar
+	name = "Brown Star"
+	result = /datum/reagent/drink/brownstar
+	required_reagents = list(/datum/reagent/drink/juice/orange = 2, /datum/reagent/drink/space_cola = 1)
 	result_amount = 3
 
 /datum/chemical_reaction/milkshake
@@ -2298,13 +2212,48 @@
 	result_amount = 10
 	mix_message = "The solution thickens into a glossy, creamy substance."
 
+/datum/chemical_reaction/anfo
+	name = "EZ-ANFO"
+	result = /datum/reagent/anfo
+	required_reagents = list(/datum/reagent/toxin/fertilizer/eznutrient=20, /datum/reagent/fuel=10)
+	result_amount = 15
+	mix_message = "The solution gives off the eye-watering reek of spilled fertilizer and petroleum."
+
+/datum/chemical_reaction/anfo2
+	name = "Left 4 ANFO"
+	result = /datum/reagent/anfo
+	required_reagents = list(/datum/reagent/toxin/fertilizer/left4zed=10, /datum/reagent/fuel=5)
+	result_amount = 10
+	mix_message = "The solution gives off the eye-watering reek of spilled fertilizer and petroleum."
+
+/datum/chemical_reaction/anfo3
+	name = "Robust ANFO"
+	result = /datum/reagent/anfo
+	required_reagents = list(/datum/reagent/toxin/fertilizer/robustharvest=15, /datum/reagent/fuel=5)
+	result_amount = 10
+	mix_message = "The solution gives off the eye-watering reek of spilled fertilizer and petroleum."
+
+/datum/chemical_reaction/anfo4
+	name = "Chemlab ANFO"
+	result = /datum/reagent/anfo
+	required_reagents = list(/datum/reagent/ammonia=10, /datum/reagent/fuel=5)
+	result_amount = 15
+	mix_message = "The solution gives off the eye-watering reek of spilled fertilizer and petroleum."
+
+/datum/chemical_reaction/anfo_plus
+	name = "ANFO+"
+	result = /datum/reagent/anfo/plus
+	required_reagents = list(/datum/reagent/anfo=15, /datum/reagent/aluminum=5)
+	result_amount = 20
+	mix_message = "The solution gives off the eye-watering reek of spilled fertilizer and petroleum."
+
 // psi-altering drug
 /datum/chemical_reaction/three_eye
 	name = "Three Eye"
 	result = /datum/reagent/three_eye
 	result_amount = 2
 	mix_message = "The surface of the oily, iridescent liquid twitches like a living thing."
-	minimum_temperature = 40 CELSIUS
+	minimum_temperature = 100 CELCIUS
 	reaction_sound = 'sound/effects/psi/power_used.ogg'
 	hidden_from_codex = TRUE
 
@@ -2317,7 +2266,7 @@
 		/datum/reagent/mindbreaker = 2,
 		/datum/reagent/toxin/phoron = 1,
 		/datum/reagent/blood = 1
-	)
+		)
 
 // tea expansion pack content - black tea drinks
 /datum/chemical_reaction/icetea
@@ -2330,44 +2279,16 @@
 /datum/chemical_reaction/sweettea
 	name = "Sweet Tea"
 	result = /datum/reagent/drink/tea/icetea/sweet
-	required_reagents = list(/datum/reagent/drink/tea/icetea = 2, /datum/reagent/sugar = 1)
-	result_amount = 3
+	required_reagents = list(/datum/reagent/drink/tea/icetea = 3, /datum/reagent/sugar = 1)
+	result_amount = 4
 	mix_message = "The ice clinks together in the sweet tea."
 
 /datum/chemical_reaction/barongrey
 	name = "Baron Grey Tea"
 	result = /datum/reagent/drink/tea/barongrey
-	required_reagents = list(/datum/reagent/drink/tea = 2, /datum/reagent/drink/juice/orange = 1)
-	result_amount = 3
+	required_reagents = list(/datum/reagent/drink/tea = 3, /datum/reagent/drink/juice/orange = 1)
+	result_amount = 4
 	mix_message = "The juice swirls into the tea."
-
-/datum/chemical_reaction/latte_barongrey
-	name = "London Fog"
-	result = /datum/reagent/drink/tea/barongrey/latte
-	required_reagents = list(/datum/reagent/drink/tea/barongrey = 2, /datum/reagent/drink/milk = 1)
-	result_amount = 3
-	mix_message = "The milk swirls into the tea."
-
-/datum/chemical_reaction/soy_latte_barongrey
-	name = "Soy London Fog"
-	result = /datum/reagent/drink/tea/barongrey/soy_latte
-	required_reagents = list(/datum/reagent/drink/tea/barongrey = 2, /datum/reagent/drink/milk/soymilk = 1)
-	result_amount = 3
-	mix_message = "The soy swirls into the tea."
-
-/datum/chemical_reaction/ice_latte_barongrey
-	name = "Iced London Fog"
-	result = /datum/reagent/drink/tea/icetea/barongrey/latte
-	required_reagents = list(/datum/reagent/drink/ice = 1, /datum/reagent/drink/tea/barongrey/latte = 2)
-	result_amount = 3
-	mix_message = "The ice clinks together in the chilled london fog."
-
-/datum/chemical_reaction/ice_soy_latte_barongrey
-	name = "Iced Soy London Fog"
-	result = /datum/reagent/drink/tea/icetea/barongrey/soy_latte
-	required_reagents = list(/datum/reagent/drink/ice = 1, /datum/reagent/drink/tea/barongrey/soy_latte = 2)
-	result_amount = 3
-	mix_message = "The ice clinks together in the chilled soy london fog."
 
 //green tea drinks
 /datum/chemical_reaction/icetea_green
@@ -2380,8 +2301,8 @@
 /datum/chemical_reaction/sweettea_green
 	name = "Sweet Green Tea"
 	result = /datum/reagent/drink/tea/icetea/green/sweet
-	required_reagents = list(/datum/reagent/drink/tea/icetea/green = 2, /datum/reagent/sugar = 1)
-	result_amount = 3
+	required_reagents = list(/datum/reagent/drink/tea/icetea/green = 3, /datum/reagent/sugar = 1)
+	result_amount = 4
 	mix_message = "The ice clinks together in the sweet tea."
 
 /datum/chemical_reaction/maghreb_tea
@@ -2392,697 +2313,9 @@
 	result_amount = 3
 	mix_message = "The mint swirls into the drink."
 
-/datum/chemical_reaction/icetea_chai
-	name = "Iced Chai Tea"
-	result = /datum/reagent/drink/tea/icetea/chai
-	required_reagents = list(/datum/reagent/drink/ice = 1, /datum/reagent/drink/tea/chai = 2)
-	result_amount = 3
-	mix_message = "The ice clinks together in the tea."
-
-/datum/chemical_reaction/sweettea_chai
-	name = "Iced Chai Tea"
-	result = /datum/reagent/drink/tea/icetea/chai/sweet
-	required_reagents = list(/datum/reagent/drink/tea/icetea/chai = 2, /datum/reagent/sugar = 1)
-	result_amount = 3
-	mix_message = "The ice clinks together in the sweet tea."
-
-/datum/chemical_reaction/latte_chai
-	name = "Chai Latte"
-	result = /datum/reagent/drink/tea/chai/latte
-	required_reagents = list(/datum/reagent/drink/tea/chai = 2, /datum/reagent/drink/milk = 1)
-	result_amount = 3
-	mix_message = "The milk swirls into the drink."
-
-/datum/chemical_reaction/soy_latte_chai
-	name = "Chai Soy Latte"
-	result = /datum/reagent/drink/tea/chai/soy_latte
-	required_reagents = list(/datum/reagent/drink/tea/chai = 2, /datum/reagent/drink/milk/soymilk = 1)
-	result_amount = 3
-	mix_message = "The milk swirls into the drink."
-
-/datum/chemical_reaction/ice_latte_chai
-	name = "Iced Chai Latte"
-	result = /datum/reagent/drink/tea/icetea/chai/latte
-	required_reagents = list(/datum/reagent/drink/ice = 1, /datum/reagent/drink/tea/chai/latte = 2)
-	result_amount = 3
-	mix_message = "The ice clinks together in the chilled chai latte."
-
-/datum/chemical_reaction/ice_soy_latte_chai
-	name = "Iced Chai Soy Latte"
-	result = /datum/reagent/drink/tea/icetea/chai/soy_latte
-	required_reagents = list(/datum/reagent/drink/ice = 1, /datum/reagent/drink/tea/chai/soy_latte = 2)
-	result_amount = 3
-	mix_message = "The ice clinks together in the chilled chai soy latte."
-
-/datum/chemical_reaction/icetea_red
-	name = "Iced Rooibos tea"
-	result = /datum/reagent/drink/tea/icetea/red
-	required_reagents = list(/datum/reagent/drink/ice = 1, /datum/reagent/drink/tea/red = 2)
-	result_amount = 3
-	mix_message = "The ice clinks together in the tea."
-
-/datum/chemical_reaction/sweettea_red
-	name = "Iced Rooibos tea"
-	result = /datum/reagent/drink/tea/icetea/red/sweet
-	required_reagents = list(/datum/reagent/drink/tea/icetea/red = 2, /datum/reagent/sugar = 1)
-	result_amount = 3
-	mix_message = "The ice clinks together in the sweet tea."
-
 /datum/chemical_reaction/chazuke
 	name = "Chazuke"
 	result = /datum/reagent/nutriment/rice/chazuke
 	required_reagents = list(/datum/reagent/nutriment/rice = 10, /datum/reagent/drink/tea/green = 1)
 	result_amount = 10
 	mix_message = "The tea mingles with the rice."
-
-/datum/chemical_reaction/resin_pack
-	name = "Resin Globule"
-	result = null
-	required_reagents = list(
-		/datum/reagent/crystal = 1,
-		/datum/reagent/silicon = 2
-	)
-	catalysts = list(
-		/datum/reagent/toxin/phoron = 1
-	)
-	result_amount = 3
-	mix_message = "The solution hardens and begins to crystallize."
-
-/datum/chemical_reaction/resin_pack/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
-	..()
-	var/turf/T = get_turf(holder.my_atom)
-	if(istype(T))
-		var/create_stacks = Floor(created_volume)
-		if(create_stacks > 0)
-			new /obj/item/stack/medical/resin/handmade(T, create_stacks)
-
-/datum/chemical_reaction/crystal_agent
-	result = /datum/reagent/crystal
-	required_reagents = list(/datum/reagent/silicon = 1, /datum/reagent/tungsten = 1, /datum/reagent/acid/polyacid = 1)
-	minimum_temperature = 150 CELSIUS
-	maximum_temperature = 200 CELSIUS
-	result_amount = 3
-
-/datum/chemical_reaction/immunobooster
-	result = /datum/reagent/immunobooster
-	required_reagents = list(/datum/reagent/cryptobiolin = 1, /datum/reagent/dylovene = 1)
-	minimum_temperature = 40 CELSIUS
-	result_amount = 2
-
-// Alcohol Expansion
-
-//Alcohol
-/datum/chemical_reaction/applecider
-	name = "Apple Cider"
-	result = /datum/reagent/ethanol/applecider
-	required_reagents = list(/datum/reagent/drink/juice/apple = 2, /datum/reagent/sugar = 1)
-	catalysts = list(/datum/reagent/nutriment = 5)
-	result_amount = 3
-
-/datum/chemical_reaction/lunabrandy
-	name = "Lunar Brandy"
-	result = /datum/reagent/ethanol/lunabrandy
-	required_reagents = list(/datum/reagent/drink/juice/grape = 1, /datum/reagent/ethanol/wine = 2)
-	catalysts = list(/datum/reagent/nutriment = 5)
-	result_amount = 3
-
-/datum/chemical_reaction/hellshenpa
-	name = "Hellshen Pale Ale"
-	result = /datum/reagent/ethanol/hellshenpa
-	required_reagents = list(/datum/reagent/ethanol/beer = 1, /datum/reagent/sugar = 1, /datum/reagent/water = 1)
-	result_amount = 3
-
-/datum/chemical_reaction/vodkacola
-	name = "Vodka Cola"
-	result = /datum/reagent/ethanol/vodkacola
-	required_reagents = list(/datum/reagent/drink/space_cola = 1, /datum/reagent/ethanol/vodka = 2)
-	result_amount = 3
-
-/datum/chemical_reaction/red_whiskey
-	name = "Red Whiskey"
-	result = /datum/reagent/ethanol/red_whiskey
-	required_reagents = list(/datum/reagent/drink/juice/berry = 1, /datum/reagent/drink/juice/tomato = 1, /datum/reagent/ethanol/whiskey = 1, /datum/reagent/ethanol/specialwhiskey = 1)
-	result_amount = 4
-
-/datum/chemical_reaction/nevadan_gold
-	name = "Nevadan Gold Whiskey"
-	result = /datum/reagent/ethanol/nevadan_gold
-	required_reagents = list(/datum/reagent/ethanol/specialwhiskey = 1, /datum/reagent/ethanol/goldschlager = 1, /datum/reagent/ethanol/irish_cream = 1,)
-	result_amount = 3
-
-/datum/chemical_reaction/arak
-	name = "Arak"
-	result = /datum/reagent/ethanol/arak
-	required_reagents = list(/datum/reagent/ethanol/absinthe = 2, /datum/reagent/drink/juice/grape = 1)
-	catalysts = list(/datum/reagent/nutriment)
-	result_amount = 3
-	minimum_temperature = (0 CELSIUS) - 100
-	maximum_temperature = 0 CELSIUS
-	mix_message = "The aniseed ferments into a translucent white mixture"
-
-/datum/chemical_reaction/blackstrap
-	name = "Blackstrap"
-	result = /datum/reagent/ethanol/blackstrap
-	required_reagents = list(/datum/reagent/ethanol/whiskey = 1, /datum/reagent/ethanol/rum = 2)
-	result_amount = 3
-
-/datum/chemical_reaction/stag
-	name = "Stag"
-	result = /datum/reagent/ethanol/stag
-	required_reagents = list(/datum/reagent/drink/tea = 2, /datum/reagent/ethanol/rum = 1)
-	result_amount = 3
-
-/datum/chemical_reaction/lordaniawine
-	name = "Lordanian Wine"
-	result = /datum/reagent/ethanol/lordaniawine
-	required_reagents = list(/datum/reagent/ethanol/wine = 2, /datum/reagent/drink/grenadine = 1)
-	catalysts = list(/datum/reagent/nutriment/mint)
-	result_amount = 3
-
-/datum/chemical_reaction/jagerbomb
-	name = "Jagerbomb"
-	result = /datum/reagent/ethanol/jagerbomb
-	required_reagents = list(/datum/reagent/drink/beastenergy = 1, /datum/reagent/ethanol/jagermeister = 2)
-	result_amount = 3
-
-/datum/chemical_reaction/jagermeister
-	name = "Jagermeister"
-	result = /datum/reagent/ethanol/jagermeister
-	required_reagents = list(/datum/reagent/ethanol/herbal = 2, /datum/reagent/water = 1)
-	catalysts = list(/datum/reagent/nutriment/mint)
-	result_amount = 3
-
-/datum/chemical_reaction/lonestarmule
-	name = "Lonestar Mule"
-	result = /datum/reagent/ethanol/lonestarmule
-	required_reagents = list(/datum/reagent/ethanol/whiskey = 2, /datum/reagent/drink/gingerbeer = 1, /datum/reagent/drink/juice/lime = 1)
-	result_amount = 4
-
-/datum/chemical_reaction/llanbrydewhiskey
-	name = "Llanbryde Whiskey"
-	result = /datum/reagent/ethanol/llanbrydewhiskey
-	required_reagents = list(/datum/reagent/ethanol/specialwhiskey= 2, /datum/reagent/ethanol/gin = 1)
-	catalysts = list(/datum/reagent/sugar)
-	result_amount = 3
-
-/datum/chemical_reaction/kvass
-	name = "Kvass"
-	result = /datum/reagent/ethanol/kvass
-	required_reagents = list(/datum/reagent/sugar = 1, /datum/reagent/ethanol/beer = 1)
-	catalysts = list(/datum/reagent/enzyme = 5)
-	result_amount = 3
-
-/datum/chemical_reaction/gargled
-	name = "Gargled"
-	result = /datum/reagent/ethanol/coffee/gargled
-	required_reagents = list(/datum/reagent/ethanol/blackstrap = 1, /datum/reagent/drink/coffee = 2)
-	result_amount = 3
-
-/datum/chemical_reaction/bogus
-	name = "Bogus"
-	result = /datum/reagent/ethanol/bogus
-	required_reagents = list(/datum/reagent/ethanol/gin = 1, /datum/reagent/ethanol/blackstrap = 2)
-	result_amount = 3
-
-/datum/chemical_reaction/moscowmule
-	name = "Moscow Mule"
-	result = /datum/reagent/ethanol/moscowmule
-	required_reagents = list(/datum/reagent/ethanol/vodka = 2, /datum/reagent/drink/gingerbeer = 1, /datum/reagent/drink/juice/lime = 1)
-	result_amount = 4
-
-/datum/chemical_reaction/springpunch
-	name = "Gilgamesh Spring Punch"
-	result = /datum/reagent/ethanol/springpunch
-	required_reagents = list(/datum/reagent/ethanol/vodka = 2, /datum/reagent/drink/juice/lemon = 1,  /datum/reagent/sugar = 1)
-	result_amount = 4
-
-/datum/chemical_reaction/jimmygideon
-	name = "Jimmy Gideon"
-	result = /datum/reagent/ethanol/jimmygideon
-	required_reagents = list(/datum/reagent/drink/milk/cream = 1, /datum/reagent/ethanol/cognac = 1, /datum/reagent/drink/hot_coco = 1)
-	result_amount = 3
-
-/datum/chemical_reaction/grasshopper
-	name = "Grasshopper"
-	result = /datum/reagent/ethanol/grasshopper
-	required_reagents = list(/datum/reagent/drink/milk/cream = 1, /datum/reagent/ethanol/creme_de_menthe = 1, /datum/reagent/ethanol/creme_de_cacao = 1)
-	result_amount = 3
-
-/datum/chemical_reaction/stinger
-	name = "Stinger"
-	result = /datum/reagent/ethanol/stinger
-	required_reagents = list(/datum/reagent/ethanol/creme_de_menthe = 1, /datum/reagent/ethanol/cognac = 2)
-	result_amount = 3
-
-/datum/chemical_reaction/alexander
-	name = "Alexander"
-	result = /datum/reagent/ethanol/alexander
-	required_reagents = list(/datum/reagent/ethanol/creme_de_menthe = 1, /datum/reagent/ethanol/cognac = 1, /datum/reagent/drink/milk/cream = 1)
-	result_amount = 3
-
-/datum/chemical_reaction/between_the_sheets
-	name = "Between the Sheets"
-	result = /datum/reagent/ethanol/between_the_sheets
-	required_reagents = list(/datum/reagent/ethanol/rum = 1, /datum/reagent/ethanol/cognac = 2, /datum/reagent/ethanol/triple_sec = 1, /datum/reagent/drink/juice/lemon = 1)
-	result_amount = 5
-
-/datum/chemical_reaction/forget_me_shot
-	name = "Forget-me-shot"
-	result = /datum/reagent/ethanol/forget_me_shot
-	required_reagents = list(/datum/reagent/ethanol/jagermeister = 1, /datum/reagent/ethanol/gin = 1, /datum/reagent/ethanol/triple_sec = 1, /datum/reagent/nutriment/vinegar =1, /datum/reagent/ethanol/hooch = 1)
-	result_amount = 3
-	mix_message = "The liquid is brought to a roiling boil, and then suddenly stops."
-
-/datum/chemical_reaction/bad_touch
-	name = "Bad Touch"
-	result = /datum/reagent/ethanol/bad_touch
-	required_reagents = list(/datum/reagent/ethanol/vodka = 2, /datum/reagent/ethanol/rum = 2, /datum/reagent/ethanol/absinthe = 1, /datum/reagent/drink/lemon_lime = 1)
-	result_amount = 6
-
-/datum/chemical_reaction/sugar_rush
-	name = "Sugar Rush"
-	result = /datum/reagent/ethanol/sugar_rush
-	required_reagents = list(/datum/reagent/drink/spacemountainwind = 4, /datum/reagent/drink/grenadine = 1, /datum/reagent/ethanol/vodka = 1)
-	result_amount = 6
-
-/datum/chemical_reaction/cobalt_velvet
-	name = "Cobalt Velvet"
-	result = /datum/reagent/ethanol/cobalt_velvet
-	required_reagents = list(/datum/reagent/ethanol/champagne = 3, /datum/reagent/drink/space_cola = 1, /datum/reagent/ethanol/bluecuracao = 2)
-	result_amount = 6
-
-/datum/chemical_reaction/fringe_weaver
-	name = "Fringe Weaver"
-	result = /datum/reagent/ethanol/fringe_weaver
-	required_reagents = list(/datum/reagent/sugar = 1, /datum/reagent/ethanol = 2)
-	result_amount = 3
-
-// Non-Alcoholic Drinks
-
-/datum/chemical_reaction/nothing
-	name = "Nothing"
-	result = /datum/reagent/drink/nothing
-	required_reagents = list(/datum/reagent/drink/milk/cream = 1, /datum/reagent/sugar = 1, /datum/reagent/water= 1)
-	result_amount = 3
-
-/datum/chemical_reaction/fools_gold
-	name = "Fools Gold"
-	result = /datum/reagent/drink/fools_gold
-	required_reagents = list(/datum/reagent/water = 2, /datum/reagent/ethanol/whiskey = 1)
-	result_amount = 3
-
-/datum/chemical_reaction/snowball
-	name = "Snowball"
-	result = /datum/reagent/drink/snowball
-	required_reagents = list(/datum/reagent/drink/ice = 2, /datum/reagent/drink/coffee/icecoffee = 1, /datum/reagent/drink/juice/watermelon = 1)
-	result_amount = 4
-	minimum_temperature = (0 CELSIUS) - 100
-	maximum_temperature = 0 CELSIUS
-	mix_message = "The solution turns pure white."
-
-/datum/chemical_reaction/browndwarf
-	name = "Brown Dwarf"
-	result = /datum/reagent/drink/browndwarf
-	required_reagents = list(/datum/reagent/drink/hot_coco = 2, /datum/reagent/drink/spacemountainwind = 1)
-	result_amount = 3
-	minimum_temperature = 70 CELSIUS
-	maximum_temperature = (70 CELSIUS) + 100
-	mix_message = "The chocolate puffs up into a semi-solid state"
-
-/datum/chemical_reaction/kefir
-	name = "Kefir"
-	result = /datum/reagent/drink/kefir
-	required_reagents = list(/datum/reagent/drink/milk = 2, /datum/reagent/drink/milk/cream = 1)
-	result_amount = 3
-	catalysts = list(/datum/reagent/nutriment)
-	mix_message = "The milk ferments into kefir"
-
-// Alien Drinks
-
-/datum/chemical_reaction/skrianhi
-	name = "Skrianhi Tea"
-	result = /datum/reagent/drink/alien/skrianhi
-	required_reagents = list(/datum/reagent/drink/alien/unathijuice = 2, /datum/reagent/water = 1)
-	result_amount = 3
-	minimum_temperature = 50 CELSIUS
-	maximum_temperature = (70 CELSIUS) + 100
-	mix_message = "The tea turns a bitter black."
-
-/datum/chemical_reaction/mumbaksting
-	name = "Mumbak Sting"
-	result = /datum/reagent/drink/alien/mumbaksting
-	required_reagents = list(/datum/reagent/drink/alien/unathijuice = 2, /datum/reagent/toxin = 1)
-	result_amount = 3
-	mix_message = "The toxins mix with the juice to create a dark red substance."
-
-/datum/chemical_reaction/wasgaelhi
-	name = "Wasgaelhi"
-	result = /datum/reagent/ethanol/alien/wasgaelhi
-	required_reagents = list(/datum/reagent/drink/alien/unathijuice = 2, /datum/reagent/ethanol/wine = 1)
-	result_amount = 3
-	mix_message = "The mixture turns a dull purple."
-
-/datum/chemical_reaction/kzkzaa
-	name = "Kzkzaa"
-	result = /datum/reagent/drink/alien/kzkzaa
-	required_reagents = list(/datum/reagent/drink/alien/unathijuice = 2, /datum/reagent/nutriment/protein = 1)
-	result_amount = 3
-	mix_message = "The mixture turns a deep orange."
-
-//Fruit Expansion
-
-/datum/chemical_reaction/qokkhrona
-	name = "Qokk'Hrona"
-	result = /datum/reagent/ethanol/alien/qokkhrona
-	required_reagents = list(/datum/reagent/ethanol/alien/qokkloa = 2, /datum/reagent/ethanol/wine = 1)
-	catalysts = list(/datum/reagent/enzyme = 5)
-	result_amount = 3
-	mix_message = "The mixture turns a soft red, bubbling faintly"
-
-/datum/chemical_reaction/coconutmilk
-	name = "Coconut Milk"
-	result = /datum/reagent/drink/coconut/milk
-	required_reagents = list(/datum/reagent/drink/coconut = 2)
-	result_amount = 3
-	minimum_temperature = 50 CELSIUS
-	maximum_temperature = (50 CELSIUS) + 100
-	catalysts = list(/datum/reagent/nutriment = 5)
-	mix_message = "The water dilutes into delicious looking milk"
-
-/datum/chemical_reaction/pinacolada
-	name = "Pino Colada"
-	result = /datum/reagent/ethanol/pinacolada
-	required_reagents = list(/datum/reagent/drink/coconut/milk = 1, /datum/reagent/ethanol/rum = 2, /datum/reagent/drink/juice/pineapple = 1)
-	result_amount = 4
-	mix_message = "The cocktail turns a vibrant orange"
-
-/datum/chemical_reaction/horchata
-	name = "Horchata"
-	result = /datum/reagent/ethanol/horchata
-	required_reagents = list(/datum/reagent/ethanol/rum = 2, /datum/reagent/drink/milk/cream = 1, /datum/reagent/cinnamon = 1, /datum/reagent/drink/syrup_vanilla = 1)
-	result_amount = 5
-	mix_message = "The liquid froths up into a rich, cool mixture"
-
-/datum/chemical_reaction/apple_soda
-	name = "Apple Soda"
-	result = /datum/reagent/drink/apple_soda
-	required_reagents = list(/datum/reagent/drink/sodawater = 2, /datum/reagent/drink/juice/apple = 1)
-	result_amount = 3
-	mix_message = "The liquid blends together smoothly"
-
-/datum/chemical_reaction/orange_soda
-	name = "Fizzy Orange"
-	result = /datum/reagent/drink/orange_soda
-	required_reagents = list(/datum/reagent/drink/sodawater = 2, /datum/reagent/drink/juice/orange = 1)
-	result_amount = 3
-	mix_message = "The liquid blends together smoothly"
-
-/datum/chemical_reaction/pork_soda
-	name = "Pork Soda"
-	result = /datum/reagent/drink/porksoda
-	required_reagents = list(/datum/reagent/drink/sodawater = 2, /datum/reagent/nutriment/protein = 1)
-	result_amount = 3
-	mix_message = "The liquid blends together smoothly"
-
-/datum/chemical_reaction/strawberry_soda
-	name = "Strawberry Soda"
-	result = /datum/reagent/drink/strawberry_soda
-	required_reagents = list(/datum/reagent/drink/sodawater = 2, /datum/reagent/nutriment/cherryjelly = 1)
-	result_amount = 3
-	mix_message = "The liquid blends together smoothly"
-
-/datum/chemical_reaction/vanilla_cola
-	name = "Vanilla Cola"
-	result = /datum/reagent/drink/vanilla_cola
-	required_reagents = list(/datum/reagent/drink/space_cola = 2, /datum/reagent/drink/syrup_vanilla = 1)
-	result_amount = 3
-	mix_message = "The liquid blends together smoothly"
-
-/datum/chemical_reaction/orange_cola
-	name = "Orange Cola"
-	result = /datum/reagent/drink/orange_cola
-	required_reagents = list(/datum/reagent/drink/space_cola = 2, /datum/reagent/drink/juice/orange = 1)
-	result_amount = 3
-	mix_message = "The liquid blends together smoothly"
-
-/datum/chemical_reaction/cherry_cola
-	name = "Cherry Cola"
-	result = /datum/reagent/drink/cherry_cola
-	required_reagents = list(/datum/reagent/drink/space_cola = 2, /datum/reagent/drink/juice/berry = 1)
-	result_amount = 3
-	mix_message = "The liquid blends together smoothly"
-
-/datum/chemical_reaction/coffee_cola
-	name = "Coffee Cola"
-	result = /datum/reagent/drink/coffee/coffee_cola
-	required_reagents = list(/datum/reagent/drink/space_cola = 2, /datum/reagent/drink/coffee = 1)
-	result_amount = 3
-	mix_message = "The liquid blends together smoothly"
-
-/datum/chemical_reaction/diet_cola
-	name = "Diet Cola"
-	result = /datum/reagent/drink/diet_cola
-	required_reagents = list(/datum/reagent/drink/space_cola = 2, /datum/reagent/lipozine = 1)
-	result_amount = 3
-	mix_message = "The cola ceases fizzing"
-
-/datum/chemical_reaction/cola_float
-	name = "Cola Float"
-	result = /datum/reagent/drink/milkshake/float
-	required_reagents = list(/datum/reagent/drink/milkshake = 2, /datum/reagent/drink/space_cola = 1)
-	result_amount = 3
-	mix_message = "The cola turns the milkshake a dark black colour"
-
-/datum/chemical_reaction/posset
-	name = "Posset"
-	result = /datum/reagent/ethanol/posset
-	required_reagents = list(/datum/reagent/drink/milk = 2, /datum/reagent/drink/juice/lemon = 1, /datum/reagent/ethanol/ale = 1)
-	result_amount = 4
-	mix_message = "The milk curdles sweetly"
-
-/datum/chemical_reaction/posca
-	name = "Posca"
-	result = /datum/reagent/drink/posca
-	required_reagents = list(/datum/reagent/nutriment/vinegar = 1, /datum/reagent/water = 1, /datum/reagent/drink/beastenergy = 1)
-	result_amount = 3
-	mix_message = "The mixture turns a dilute brown"
-
-/datum/chemical_reaction/alcoholfreebeer
-	name = "Alcohol-Free Beer"
-	result = /datum/reagent/drink/alcoholfreebeer
-	required_reagents = list(/datum/reagent/ethanol/beer = 2, /datum/reagent/ethylredoxrazine = 1)
-	result_amount = 3
-	mix_message = "The liquid ceases bubbling"
-
-/datum/chemical_reaction/oldfashioned
-	name = "Old Fashioned"
-	result = /datum/reagent/ethanol/oldfashioned
-	required_reagents = list(/datum/reagent/ethanol/whiskey = 2, /datum/reagent/sugar = 1, /datum/reagent/ethanol/herbal = 1)
-	result_amount = 4
-
-/datum/chemical_reaction/daiquiri
-	name = "Daiquiri"
-	result = /datum/reagent/ethanol/daiquiri
-	required_reagents = list(/datum/reagent/ethanol/rum = 2, /datum/reagent/drink/juice/lime = 1, /datum/reagent/drink/affelerin = 1)
-	result_amount = 4
-
-/datum/chemical_reaction/sidecar
-	name = "Sidecar"
-	result = /datum/reagent/ethanol/sidecar
-	required_reagents = list(/datum/reagent/ethanol/cognac = 2, /datum/reagent/drink/juice/lemon = 1, /datum/reagent/ethanol/bluecuracao = 1)
-	result_amount = 4
-
-/datum/chemical_reaction/caesar
-	name = "Caesar"
-	result = /datum/reagent/ethanol/caesar
-	required_reagents = list(/datum/reagent/ethanol/vodka = 2, /datum/reagent/drink/juice/tomato = 1, /datum/reagent/capsaicin = 1)
-	result_amount = 4
-
-/datum/chemical_reaction/caipirinha
-	name = "Caipirinha"
-	result = /datum/reagent/ethanol/caipirinha
-	required_reagents = list(/datum/reagent/ethanol/cachaca = 2, /datum/reagent/drink/juice/lime = 1, /datum/reagent/sugar = 1)
-	result_amount = 4
-
-/datum/chemical_reaction/sangria
-	name = "Sangria"
-	result = /datum/reagent/ethanol/sangria
-	required_reagents = list(/datum/reagent/ethanol/wine = 2, /datum/reagent/drink/juice/orange = 1)
-	result_amount = 3
-
-/datum/chemical_reaction/baijiu
-	name = "Baijiu"
-	result = /datum/reagent/ethanol/baijiu
-	required_reagents = list(/datum/reagent/ethanol/moonshine = 2, /datum/reagent/nutriment/rice = 1)
-	result_amount = 3
-
-/datum/chemical_reaction/doogh
-	name = "Doogh"
-	result = /datum/reagent/drink/doogh
-	required_reagents = list(/datum/reagent/drink/milk/cream = 1, /datum/reagent/water = 1, /datum/reagent/nutriment/mint = 1)
-	result_amount = 3
-	mix_message = "The mixture becomes soft and easy to stir"
-
-/datum/chemical_reaction/honeywine
-	name = "Honey Wine"
-	result = /datum/reagent/ethanol/honeywine
-	required_reagents = list(/datum/reagent/nutriment/honey = 2, /datum/reagent/ethanol/hellshenpa = 1)
-	result_amount = 3
-
-/datum/chemical_reaction/dawa
-	name = "Dawa"
-	result = /datum/reagent/ethanol/dawa
-	required_reagents = list(/datum/reagent/ethanol/vodka = 2, /datum/reagent/nutriment/honey = 1, /datum/reagent/drink/juice/lime = 1 )
-	result_amount = 4
-
-/datum/chemical_reaction/rakia
-	name = "Rakia"
-	result = /datum/reagent/ethanol/rakia
-	required_reagents = list(/datum/reagent/ethanol/lunabrandy = 2, /datum/reagent/drink/juice/grape/green = 1)
-	result_amount = 4
-	catalysts = list(/datum/reagent/enzyme = 5)
-
-/datum/chemical_reaction/ironbru
-	name = "Iron-Bru"
-	result = /datum/reagent/drink/ironbru
-	required_reagents = list(/datum/reagent/drink/ionbru = 2, /datum/reagent/iron = 1)
-	result_amount = 3
-
-/datum/chemical_reaction/eggnog
-	name = "Eggnog"
-	result = /datum/reagent/drink/eggnog
-	required_reagents = list(/datum/reagent/nutriment/protein/egg = 1, /datum/reagent/drink/milk/ = 1, /datum/reagent/sugar = 1)
-	result_amount = 3
-
-/datum/chemical_reaction/capilliumate
-	name = "Capilliumate"
-	result =/datum/reagent/capilliumate
-	result_amount = 3
-	required_reagents = list(
-		/datum/reagent/radium = 1,
-		/datum/reagent/nutriment/protein = 1,
-		/datum/reagent/mutagen = 1
-	)
-	mix_message = "The solution bubbles and thickens into strands."
-
-/datum/chemical_reaction/hair_dye
-	name = "Hair Dye"
-	result = /datum/reagent/hair_dye
-	result_amount = 2
-	required_reagents = list(
-		/datum/reagent/enzyme = 1,
-		/datum/reagent/ammonia = 1
-	)
-
-/datum/chemical_reaction/colored_hair_dye/red
-	name = "Red Hair Dye"
-	result = /datum/reagent/colored_hair_dye/red
-	result_amount = 1
-	required_reagents = list(
-		/datum/reagent/hair_dye = 1,
-		/datum/reagent/crayon_dust/red = 1
-	)
-
-/datum/chemical_reaction/colored_hair_dye/orange
-	name = "Orange Hair Dye"
-	result = /datum/reagent/colored_hair_dye/orange
-	result_amount = 1
-	required_reagents = list(
-		/datum/reagent/hair_dye = 1,
-		/datum/reagent/crayon_dust/orange = 1
-	)
-
-/datum/chemical_reaction/colored_hair_dye/yellow
-	name = "Yellow Hair Dye"
-	result = /datum/reagent/colored_hair_dye/yellow
-	result_amount = 1
-	required_reagents = list(
-		/datum/reagent/hair_dye = 1,
-		/datum/reagent/crayon_dust/yellow = 1
-	)
-
-/datum/chemical_reaction/colored_hair_dye/green
-	name = "Green Hair Dye"
-	result = /datum/reagent/colored_hair_dye/green
-	result_amount = 1
-	required_reagents = list(
-		/datum/reagent/hair_dye = 1,
-		/datum/reagent/crayon_dust/green = 1
-	)
-
-/datum/chemical_reaction/colored_hair_dye/blue
-	name = "Blue Hair Dye"
-	result = /datum/reagent/colored_hair_dye/blue
-	result_amount = 1
-	required_reagents = list(
-		/datum/reagent/hair_dye = 1,
-		/datum/reagent/crayon_dust/blue = 1
-	)
-
-/datum/chemical_reaction/colored_hair_dye/purple
-	name = "Purple Hair Dye"
-	result = /datum/reagent/colored_hair_dye/purple
-	result_amount = 1
-	required_reagents = list(
-		/datum/reagent/hair_dye = 1,
-		/datum/reagent/crayon_dust/purple = 1
-	)
-
-/datum/chemical_reaction/colored_hair_dye/grey
-	name = "Grey Hair Dye"
-	result = /datum/reagent/colored_hair_dye/grey
-	result_amount = 1
-	required_reagents = list(
-		/datum/reagent/hair_dye = 1,
-		/datum/reagent/crayon_dust/grey = 1
-	)
-
-/datum/chemical_reaction/colored_hair_dye/brown
-	name = "Brown Hair Dye"
-	result = /datum/reagent/colored_hair_dye/brown
-	result_amount = 1
-	required_reagents = list(
-		/datum/reagent/hair_dye = 1,
-		/datum/reagent/crayon_dust/brown = 1
-	)
-
-/datum/chemical_reaction/colored_hair_dye/black
-	name = "Black Hair Dye"
-	result = /datum/reagent/colored_hair_dye/black
-	result_amount = 3
-	required_reagents = list(
-		/datum/reagent/colored_hair_dye/red = 1,
-		/datum/reagent/colored_hair_dye/blue = 1,
-		/datum/reagent/colored_hair_dye/yellow = 1
-	)
-
-/datum/chemical_reaction/colored_hair_dye/chaos
-	name = "Chaos Hair Dye"
-	result = /datum/reagent/colored_hair_dye/chaos
-	result_amount = 2
-	required_reagents = list(
-		/datum/reagent/hair_dye = 1,
-		/datum/reagent/mutagen = 1
-	)
-
-/datum/chemical_reaction/colored_hair_dye/light_brown
-	name = "Light Brown Hair Dye"
-	result = /datum/reagent/colored_hair_dye/light_brown
-	result_amount = 1
-	required_reagents = list(
-		/datum/reagent/colored_hair_dye/brown = 1
-	)
-	catalysts = list(
-		/datum/reagent/enzyme = 1
-	)
-
-/datum/chemical_reaction/colored_hair_dye/white
-	name = "White Hair Dye"
-	result = /datum/reagent/colored_hair_dye/white
-	result_amount = 1
-	required_reagents = list(
-		/datum/reagent/colored_hair_dye/grey = 1
-	)
-	catalysts = list(
-		/datum/reagent/enzyme = 1
-	)

@@ -15,8 +15,6 @@
 	capacity = 0
 	charge = 0
 	should_be_mapped = 1
-	base_type = /obj/machinery/power/smes/batteryrack
-	maximum_component_parts = list(/obj/item/weapon/stock_parts = 15)
 
 	var/max_transfer_rate = 0							// Maximal input/output rate. Determined by used capacitors when building the device.
 	var/mode = PSU_OFFLINE								// Current inputting/outputting mode
@@ -27,15 +25,34 @@
 	var/icon_update = 0									// Timer in ticks for icon update.
 	var/ui_tick = 0
 
+
+/obj/machinery/power/smes/batteryrack/New()
+	..()
+	add_parts()
+	RefreshParts()
+
+/obj/machinery/power/smes/batteryrack/proc/add_parts()
+	component_parts = list()
+	component_parts += new /obj/item/weapon/circuitboard/batteryrack
+	component_parts += new /obj/item/weapon/stock_parts/capacitor/				// Capacitors: Maximal I/O
+	component_parts += new /obj/item/weapon/stock_parts/capacitor/
+	component_parts += new /obj/item/weapon/stock_parts/capacitor/
+	component_parts += new /obj/item/weapon/stock_parts/matter_bin/				// Matter Bin: Max. amount of cells.
+
+
 /obj/machinery/power/smes/batteryrack/RefreshParts()
-	var/capacitor_efficiency = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor), 0, 10)
-	var/maxcells = 3 * total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin)
+	var/capacitor_efficiency = 0
+	var/maxcells = 0
+	for(var/obj/item/weapon/stock_parts/capacitor/CP in component_parts)
+		capacitor_efficiency += CP.rating
+
+	for(var/obj/item/weapon/stock_parts/matter_bin/MB in component_parts)
+		maxcells += MB.rating * 3
 
 	max_transfer_rate = 10000 * capacitor_efficiency // 30kw - 90kw depending on used capacitors.
 	max_cells = min(PSU_MAXCELLS, maxcells)
 	input_level = max_transfer_rate
 	output_level = max_transfer_rate
-	..()
 
 /obj/machinery/power/smes/batteryrack/Destroy()
 	for(var/obj/item/weapon/cell/C in internal_cells)
@@ -230,17 +247,20 @@
 	return ..()
 
 /obj/machinery/power/smes/batteryrack/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if(..())
-		return TRUE
+	if(!..())
+		return 0
+	if(default_deconstruction_crowbar(user, W))
+		return
+	if(default_part_replacement(user, W))
+		return
 	if(istype(W, /obj/item/weapon/cell)) // ID Card, try to insert it.
 		if(insert_cell(W, user))
 			to_chat(user, "You insert \the [W] into \the [src].")
 		else
 			to_chat(user, "\The [src] has no empty slot for \the [W]")
 
-/obj/machinery/power/smes/batteryrack/interface_interact(var/mob/user)
+/obj/machinery/power/smes/batteryrack/attack_hand(var/mob/user)
 	ui_interact(user)
-	return TRUE
 
 /obj/machinery/power/smes/batteryrack/inputting()
 	return

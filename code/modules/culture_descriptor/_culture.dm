@@ -3,7 +3,7 @@
 	var/desc_type
 	var/description
 	var/economic_power = 1
-	var/language
+	var/language = LANGUAGE_GALCOM
 	var/name_language
 	var/default_language
 	var/list/additional_langs
@@ -93,6 +93,7 @@
 	. = list()
 	if(language)                  . |= language
 	if(default_language)          . |= default_language
+	if(name_language)             . |= name_language
 	if(LAZYLEN(additional_langs)) . |= additional_langs
 
 /decl/cultural_info/proc/get_formal_name_suffix()

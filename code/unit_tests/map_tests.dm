@@ -35,17 +35,17 @@
 			log_bad("[bad_msg] is not supposed to have an APC.")
 			area_good = 0
 
-		if(!A.air_scrub_names.len && !(exemptions & GLOB.using_map.NO_SCRUBBER))
+		if(!A.air_scrub_info.len && !(exemptions & GLOB.using_map.NO_SCRUBBER))
 			log_bad("[bad_msg] lacks an air scrubber.")
 			area_good = 0
-		else if(A.air_scrub_names.len && (exemptions & GLOB.using_map.NO_SCRUBBER))
+		else if(A.air_scrub_info.len && (exemptions & GLOB.using_map.NO_SCRUBBER))
 			log_bad("[bad_msg] is not supposed to have an air scrubber.")
 			area_good = 0
 
-		if(!A.air_vent_names.len && !(exemptions & GLOB.using_map.NO_VENT))
+		if(!A.air_vent_info.len && !(exemptions & GLOB.using_map.NO_VENT))
 			log_bad("[bad_msg] lacks an air vent.[ascii_reset]")
 			area_good = 0
-		else if(A.air_vent_names.len && (exemptions & GLOB.using_map.NO_VENT))
+		else if(A.air_vent_info.len && (exemptions & GLOB.using_map.NO_VENT))
 			log_bad("[bad_msg] is not supposed to have an air vent.")
 			area_good = 0
 
@@ -66,44 +66,6 @@
 		if(istype(area, exempt_type))
 			return GLOB.using_map.apc_test_exempt_areas[exempt_type]
 
-/datum/unit_test/air_alarm_connectivity
-	name = "MAP: Air alarms shall receive updates."
-	async = TRUE // Waits for SStimers to finish one full run before testing
-
-/datum/unit_test/air_alarm_connectivity/start_test()
-	return 1
-
-/datum/unit_test/air_alarm_connectivity/subsystems_to_await()
-	return list(SStimer)
-
-/datum/unit_test/air_alarm_connectivity/check_result()
-	var/failed = FALSE
-	for(var/area/A in world)
-		if(!A.z)
-			continue
-		if(!isPlayerLevel(A.z))
-			continue
-		var/obj/machinery/alarm/alarm = locate() in A // Only test areas with functional alarms
-		if(!alarm)
-			continue
-		if(alarm.stat & (NOPOWER | BROKEN))
-			continue
-
-		for(var/tag in A.air_vent_names) // The point of this test is that while the names list is registered at init, the info is transmitted by radio.
-			if(!A.air_vent_info[tag])
-				log_bad("Vent [A.air_vent_names[tag]] with id_tag [tag] did not update the air alarm in area [A].")
-				failed = TRUE
-		for(var/tag in A.air_scrub_names)
-			if(!A.air_scrub_info[tag])
-				log_bad("Scrubber [A.air_scrub_names[tag]] with id_tag [tag] did not update the air alarm in area [A].")
-				failed = TRUE
-
-	if(failed)
-		fail("Some areas did not receive updates from all of their atmos devices.")
-	else
-		pass("All atmos devices updated their area's air alarms successfully.")
-
-	return 1
 //=======================================================================================
 
 /datum/unit_test/wire_test
@@ -695,13 +657,13 @@ datum/unit_test/ladder_check/start_test()
 			continue
 		var/obj/machinery/disposal/bin = get_bin_from_junction(sort)
 		if(!bin)
-			log_bad("Junction with tag [sort.sort_type] at ([sort.x], [sort.y], [sort.z]) could not find disposal.")
+			log_bad("Junction with tag [sort.sortType] at ([sort.x], [sort.y], [sort.z]) could not find disposal.")
 			fail = TRUE
 			continue
-		all_tagged_destinations[sort.sort_type] = bin
+		all_tagged_destinations[sort.sortType] = bin
 		if(!istype(bin)) // Can also be an outlet.
 			continue
-		all_tagged_bins[sort.sort_type] = bin
+		all_tagged_bins[sort.sortType] = bin
 	if(fail)
 		fail("Improperly connected junction detected.")
 		return
@@ -721,7 +683,7 @@ datum/unit_test/ladder_check/start_test()
 
 /obj/structure/disposalholder/unit_test
 	var/datum/unit_test/networked_disposals_shall_deliver_tagged_packages/test
-	speed = 100
+	var/speed = 100
 
 /obj/structure/disposalholder/unit_test/Destroy()
 	test.package_delivered(src)
@@ -785,46 +747,8 @@ datum/unit_test/ladder_check/start_test()
 		if(next_pipe in traversed)
 			return
 		traversed += next_pipe
-		current_dir = next_pipe.nextdir(current_dir, sort.sort_type)
+		current_dir = next_pipe.nextdir(current_dir, sort.sortType)
 		our_pipe = next_pipe
-
-/datum/unit_test/req_access_shall_have_valid_strings
-	name = "MAP: every obj shall have valid access strings in req_access"
-	var/list/accesses
-
-/datum/unit_test/req_access_shall_have_valid_strings/start_test()
-	if(!accesses)
-		accesses = get_all_access_datums()
-
-	var/list/obj_access_pairs = list()
-	for(var/obj/O in world)
-		if(O.req_access)
-			for(var/req in O.req_access)
-				if(islist(req))
-					for(var/req_one in req)
-						if(is_invalid(req_one))
-							obj_access_pairs += list(list(O, req_one))
-				else if(is_invalid(req))
-					obj_access_pairs += list(list(O, req))
-
-	if(obj_access_pairs.len)
-		for(var/entry in obj_access_pairs)
-			log_bad("[log_info_line(entry[1])] has an invalid value ([entry[2]]) in req_access.")
-		fail("Mapped objs with req_access must be set up to use existing access strings.")
-	else
-		pass("All mapped objs have correctly set req_access.")
-
-	return 1
-
-/datum/unit_test/req_access_shall_have_valid_strings/proc/is_invalid(var/value)
-	if(!istext(value))
-		return TRUE //Someone tried to use a non-string as an access. There is no case where this is allowed.
-
-	for(var/datum/access/A in accesses)
-		if(value == A.id)
-			return FALSE
-
-	return TRUE
 
 #undef SUCCESS
 #undef FAILURE
