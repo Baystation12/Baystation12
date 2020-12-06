@@ -148,6 +148,7 @@
 
 	var/overlay_alarm
 	var/overlay_status_display
+	var/alert_border
 
 	var/up_description
 	var/down_description
@@ -209,6 +210,7 @@
 
 	overlay_alarm = "alarm_green"
 	overlay_status_display = "status_display_green"
+	alert_border = "alert_border_green"
 
 	down_description = "All threats to the station have passed. Security may not have weapons visible, privacy laws are once again fully enforced."
 
@@ -225,6 +227,7 @@
 
 	overlay_alarm = "alarm_blue"
 	overlay_status_display = "status_display_blue"
+	alert_border = "alert_border_blue"
 
 	up_description = "The station has received reliable information about possible hostile activity on the station. Security staff may have weapons visible, random searches are permitted."
 	down_description = "The immediate threat has passed. Security may no longer have weapons drawn at all times, but may continue to have them visible. Random searches are still allowed."
@@ -240,6 +243,7 @@
 
 	overlay_alarm = "alarm_red"
 	overlay_status_display = "status_display_red"
+	alert_border = "alert_border_red"
 
 	psionic_control_level = PSI_IMPLANT_DISABLED
 
@@ -257,6 +261,7 @@
 
 	overlay_alarm = "alarm_delta"
 	overlay_status_display = "status_display_delta"
+	alert_border = "alert_border_delta"
 
 	psionic_control_level = PSI_IMPLANT_DISABLED
 
