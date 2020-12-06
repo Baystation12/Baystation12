@@ -7,7 +7,7 @@
 
 /obj/item/weapon/reagent_containers/glass/replenishing/Initialize()
 	. = ..()
-	spawning_id = pick(/datum/reagent/blood,/datum/reagent/water/holywater,/datum/reagent/lube,/datum/reagent/soporific,/datum/reagent/ethanol,/datum/reagent/drink/ice,/datum/reagent/glycerol,/datum/reagent/fuel,/datum/reagent/space_cleaner)
+	spawning_id = pick(/datum/reagent/blood,/datum/reagent/water/holywater,/datum/reagent/soporific,/datum/reagent/ethanol,/datum/reagent/drink/ice,/datum/reagent/glycerol,/datum/reagent/fuel,/datum/reagent/space_cleaner)
 	START_PROCESSING(SSobj, src)
 
 /obj/item/weapon/reagent_containers/glass/replenishing/Process()
@@ -112,7 +112,7 @@
 
 	if(charges >= 0.1)
 		if(prob(5))
-			src.visible_message("<span class='warning'>\icon[src] [src]'s eyes glow ruby red for a moment!</span>")
+			src.visible_message("<span class='warning'>[icon2html(src, viewers(get_turf(src)))] [src]'s eyes glow ruby red for a moment!</span>")
 			charges -= 0.1
 
 	//check on our shadow wights
@@ -131,7 +131,7 @@
 
 /obj/item/weapon/vampiric/hear_talk(mob/M as mob, text)
 	..()
-	if(world.time - last_bloodcall >= bloodcall_interval && M in view(7, src))
+	if(world.time - last_bloodcall >= bloodcall_interval && (M in view(7, src)))
 		bloodcall(M)
 
 /obj/item/weapon/vampiric/proc/bloodcall(var/mob/living/carbon/human/M)

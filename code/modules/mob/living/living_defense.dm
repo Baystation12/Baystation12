@@ -1,71 +1,25 @@
+/mob/living/proc/modify_damage_by_armor(def_zone, damage, damage_type, damage_flags, mob/living/victim, armor_pen, silent = FALSE)
+	var/list/armors = get_armors_by_zone(def_zone, damage_type, damage_flags)
+	. = args.Copy(2)
+	for(var/armor in armors)
+		var/datum/extension/armor/armor_datum = armor
+		. = armor_datum.apply_damage_modifications(arglist(.))
 
-/*
-	run_armor_check() args
-	def_zone - What part is getting hit, if null will check entire body
-	attack_flag - The type of armour to be checked
-	armour_pen - reduces the effectiveness of armour
-	absorb_text - shown if the armor check is 100% successful
-	soften_text - shown if the armor check is more than 0% successful and less than 100%
+/mob/living/proc/get_blocked_ratio(def_zone, damage_type, damage_flags, armor_pen, damage)
+	var/list/armors = get_armors_by_zone(def_zone, damage_type, damage_flags)
+	. = 0
+	for(var/armor in armors)
+		var/datum/extension/armor/armor_datum = armor
+		. = 1 - (1 - .) * (1 - armor_datum.get_blocked(damage_type, damage_flags, armor_pen, damage)) // multiply the amount we let through
+	. = min(1, .)
 
-	Returns
-	a blocked amount between 0 - 100, representing the success of the armor check.
-*/
-/mob/living/proc/run_armor_check(var/def_zone = null, var/attack_flag = "melee", var/armour_pen = 0, var/absorb_text = null, var/soften_text = null)
-	if(armour_pen >= 100)
-		return 0 //might as well just skip the processing
-
-	var/armor = getarmor(def_zone, attack_flag)
-
-	if(armour_pen >= armor)
-		return 0 //effective_armor is going to be 0, fullblock is going to be 0, blocked is going to 0, let's save ourselves the trouble
-
-	var/effective_armor = (armor - armour_pen)/100
-	var/fullblock = (effective_armor*effective_armor) * ARMOR_BLOCK_CHANCE_MULT
-
-	if(fullblock >= 1 || prob(fullblock*100))
-		if(psi && psi.use_psi_armour && psi.last_armor_check == world.time)
-			show_message(SPAN_WARNING("You block the blow with your mind!"))
-			psi.spend_power(10)
-		else if(absorb_text)
-			show_message(SPAN_WARNING("[absorb_text]"))
-		else
-			show_message(SPAN_WARNING("Your armor absorbs the blow!"))
-		return 100
-
-	//this makes it so that X armour blocks X% damage, when including the chance of hard block.
-	//I double checked and this formula will also ensure that a higher effective_armor
-	//will always result in higher (non-fullblock) damage absorption too, which is also a nice property
-	//In particular, blocked will increase from 0 to 50 as effective_armor increases from 0 to 0.999 (if it is 1 then we never get here because ofc)
-	//and the average damage absorption = (blocked/100)*(1-fullblock) + 1.0*(fullblock) = effective_armor
-	var/blocked = (effective_armor - fullblock)/(1 - fullblock)*100
-
-	if(blocked > 20)
-		//Should we show this every single time?
-		if(psi && psi.use_psi_armour && psi.last_armor_check == world.time)
-			show_message(SPAN_WARNING("You soften the blow with your mind!"))
-		else if(soften_text)
-			show_message(SPAN_WARNING("[soften_text]"))
-		else
-			show_message(SPAN_WARNING("Your armor softens the blow!"))
-
-	if(psi && psi.use_psi_armour && psi.last_armor_check == world.time)
-		psi.spend_power(round(blocked/10))
-	return round(blocked, 1)
-
-//Adds two armor values together.
-//If armor_a and armor_b are between 0-100 the result will always also be between 0-100.
-/proc/add_armor(var/armor_a, var/armor_b)
-	if(armor_a >= 100 || armor_b >= 100)
-		return 100 //adding to infinite protection doesn't make it any bigger
-
-	var/protection_a = 1/(blocked_mult(armor_a)) - 1
-	var/protection_b = 1/(blocked_mult(armor_b)) - 1
-	return 100 - 1/(protection_a + protection_b + 1)*100
-
-//if null is passed for def_zone, then this should return something appropriate for all zones (e.g. area effect damage)
-/mob/living/proc/getarmor(var/def_zone, var/type)
-	return (psi ? psi.get_armour(type) : 0)
-
+/mob/living/proc/get_armors_by_zone(def_zone, damage_type, damage_flags)
+	. = list()
+	var/natural_armor = get_extension(src, /datum/extension/armor)
+	if(natural_armor)
+		. += natural_armor
+	if(psi)
+		. += get_extension(psi, /datum/extension/armor)
 
 /mob/living/bullet_act(var/obj/item/projectile/P, var/def_zone)
 
@@ -79,19 +33,22 @@
 	//Armor
 	var/damage = P.damage
 	var/flags = P.damage_flags()
-	var/absorb = run_armor_check(def_zone, P.check_armour, P.armor_penetration)
-	if (prob(absorb))
-		if(flags & DAM_LASER)
-			//the armour causes the heat energy to spread out, which reduces the damage (and the blood loss)
-			//this is mostly so that armour doesn't cause people to lose MORE fluid from lasers than they would otherwise
-			damage *= FLUIDLOSS_CONC_BURN/FLUIDLOSS_WIDE_BURN
-		flags &= ~(DAM_SHARP|DAM_EDGE|DAM_LASER)
-
+	var/damaged
 	if(!P.nodamage)
-		apply_damage(damage, P.damage_type, def_zone, absorb, flags, P)
-	P.on_hit(src, absorb, def_zone)
+		damaged = apply_damage(damage, P.damage_type, def_zone, flags, P, P.armor_penetration)
+		bullet_impact_visuals(P, def_zone, damaged)
+	if(damaged || P.nodamage) // Run the block computation if we did damage or if we only use armor for effects (nodamage)
+		. = get_blocked_ratio(def_zone, P.damage_type, flags, P.armor_penetration, P.damage)
+	P.on_hit(src, ., def_zone)
 
-	return absorb
+// For visuals and blood splatters etc
+/mob/living/proc/bullet_impact_visuals(var/obj/item/projectile/P, var/def_zone, var/damage)
+	var/list/impact_sounds = LAZYACCESS(P.impact_sounds, get_bullet_impact_effect_type(def_zone))
+	if(length(impact_sounds))
+		playsound(src, pick(impact_sounds), 75)
+
+/mob/living/get_bullet_impact_effect_type(var/def_zone)
+	return BULLET_IMPACT_MEAT
 
 /mob/living/proc/aura_check(var/type)
 	if(!auras)
@@ -127,11 +84,11 @@
 		apply_effect(stun_amount, EYE_BLUR)
 
 	if (agony_amount)
-		apply_damage(agony_amount, PAIN, def_zone, 0, used_weapon)
+		apply_damage(agony_amount, PAIN, def_zone, used_weapon)
 		apply_effect(agony_amount/10, STUTTER)
 		apply_effect(agony_amount/10, EYE_BLUR)
 
-/mob/living/proc/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0)
+/mob/living/proc/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, def_zone = null)
 	  return 0 //only carbon liveforms have this proc
 
 /mob/living/emp_act(severity)
@@ -147,18 +104,15 @@
 /mob/living/proc/hit_with_weapon(obj/item/I, mob/living/user, var/effective_force, var/hit_zone)
 	visible_message("<span class='danger'>[src] has been [I.attack_verb.len? pick(I.attack_verb) : "attacked"] with [I.name] by [user]!</span>")
 
-	var/blocked = run_armor_check(hit_zone, "melee")
-	standard_weapon_hit_effects(I, user, effective_force, blocked, hit_zone)
+	. = standard_weapon_hit_effects(I, user, effective_force, hit_zone)
 
 	if(I.damtype == BRUTE && prob(33)) // Added blood for whacking non-humans too
 		var/turf/simulated/location = get_turf(src)
 		if(istype(location)) location.add_blood_floor(src)
 
-	return blocked
-
 //returns 0 if the effects failed to apply for some reason, 1 otherwise.
-/mob/living/proc/standard_weapon_hit_effects(obj/item/I, mob/living/user, var/effective_force, var/blocked, var/hit_zone)
-	if(!effective_force || blocked >= 100)
+/mob/living/proc/standard_weapon_hit_effects(obj/item/I, mob/living/user, var/effective_force, var/hit_zone)
+	if(!effective_force)
 		return 0
 
 	//Hulk modifier
@@ -167,56 +121,52 @@
 
 	//Apply weapon damage
 	var/damage_flags = I.damage_flags()
-	if(prob(blocked)) //armour provides a chance to turn sharp/edge weapon attacks into blunt ones
-		damage_flags &= ~(DAM_SHARP|DAM_EDGE)
 
-	apply_damage(effective_force, I.damtype, hit_zone, blocked, damage_flags, used_weapon=I)
-
-	return 1
+	return apply_damage(effective_force, I.damtype, hit_zone, damage_flags, used_weapon=I)
 
 //this proc handles being hit by a thrown atom
-/mob/living/hitby(atom/movable/AM as mob|obj,var/speed = THROWFORCE_SPEED_DIVISOR)//Standardization and logging -Sieve
-	if(!aura_check(AURA_TYPE_THROWN, AM, speed))
+/mob/living/hitby(var/atom/movable/AM, var/datum/thrownthing/TT)
+
+	if(isliving(AM))
+		var/mob/living/M = AM
+		playsound(loc, 'sound/weapons/pierce.ogg', 25, 1, -1)
+		if(skill_fail_prob(SKILL_COMBAT, 75))
+			Weaken(rand(3,5))
+		if(M.skill_fail_prob(SKILL_HAULING, 100))
+			M.Weaken(rand(4,8))
+		M.visible_message(SPAN_DANGER("\The [M] collides with \the [src]!"))
+
+	if(!aura_check(AURA_TYPE_THROWN, AM, TT.speed))
 		return
+
 	if(istype(AM,/obj/))
 		var/obj/O = AM
 		var/dtype = O.damtype
-		var/throw_damage = O.throwforce*(speed/THROWFORCE_SPEED_DIVISOR)
+		var/throw_damage = O.throwforce*(TT.speed/THROWFORCE_SPEED_DIVISOR)
 
-		var/miss_chance = 15
-		if (O.throw_source)
-			var/distance = get_dist(O.throw_source, loc)
-			miss_chance = max(15*(distance-2), 0)
+		var/miss_chance = max(15*(TT.dist_travelled-2),0)
 
 		if (prob(miss_chance))
 			visible_message("<span class='notice'>\The [O] misses [src] narrowly!</span>")
 			return
 
 		src.visible_message("<span class='warning'>\The [src] has been hit by \the [O]</span>.")
-		var/armor = run_armor_check(null, "melee")
-		if(armor < 100)
-			var/damage_flags = O.damage_flags()
-			if(prob(armor))
-				damage_flags &= ~(DAM_SHARP|DAM_EDGE)
-			apply_damage(throw_damage, dtype, null, armor, damage_flags, O)
+		apply_damage(throw_damage, dtype, null, O.damage_flags(), O)
 
-		O.throwing = 0		//it hit, so stop moving
-
-		if(ismob(O.thrower))
-			var/mob/M = O.thrower
-			var/client/assailant = M.client
+		if(TT.thrower)
+			var/client/assailant = TT.thrower.client
 			if(assailant)
-				admin_attack_log(M, src, "Threw \an [O] at the victim.", "Had \an [O] thrown at them.", "threw \an [O] at")
+				admin_attack_log(TT.thrower, src, "Threw \an [O] at the victim.", "Had \an [O] thrown at them.", "threw \an [O] at")
 
 		// Begin BS12 momentum-transfer code.
 		var/mass = 1.5
 		if(istype(O, /obj/item))
 			var/obj/item/I = O
 			mass = I.w_class/THROWNOBJ_KNOCKBACK_DIVISOR
-		var/momentum = speed*mass
+		var/momentum = TT.speed*mass
 
-		if(O.throw_source && momentum >= THROWNOBJ_KNOCKBACK_SPEED)
-			var/dir = get_dir(O.throw_source, src)
+		if(momentum >= THROWNOBJ_KNOCKBACK_SPEED)
+			var/dir = TT.init_dir
 
 			visible_message("<span class='warning'>\The [src] staggers under the impact!</span>","<span class='warning'>You stagger under the impact!</span>")
 			src.throw_at(get_edge_target_turf(src,dir),1,momentum)
@@ -243,8 +193,8 @@
 //This is called when the mob is thrown into a dense turf
 /mob/living/proc/turf_collision(var/turf/T, var/speed)
 	visible_message("<span class='danger'>[src] slams into \the [T]!</span>")
-	playsound(loc, 'sound/effects/bangtaper.ogg', 50, 1, -1)
-	src.take_organ_damage(speed*5)
+	playsound(T, 'sound/effects/bangtaper.ogg', 50, 1, 1)//so it plays sounds on the turf instead, makes for awesome carps to hull collision and such
+	apply_damage(speed*2, BRUTE)
 
 /mob/living/proc/near_wall(var/direction,var/distance=1)
 	var/turf/T = get_step(get_turf(src),direction)
@@ -252,7 +202,7 @@
 	var/i = 1
 
 	while(i>0 && i<=distance)
-		if(T.density) //Turf is a wall!
+		if(!T || T.density) //Turf is a wall or map edge.
 			return last_turf
 		i++
 		last_turf = T

@@ -26,3 +26,9 @@
 
 /datum/gear/shoes/sandal
 	allowed_branches = CIVILIAN_BRANCHES
+
+/datum/gear/shoes/heels
+	allowed_roles = SEMIANDFORMAL_ROLES
+
+/datum/gear/shoes/boots
+	allowed_branches = CIVILIAN_BRANCHES

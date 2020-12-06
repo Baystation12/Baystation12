@@ -46,8 +46,6 @@
 	scan["genetic"] = H.getCloneLoss()
 	scan["paralysis"] = H.paralysis
 	scan["immune_system"] = H.virus_immunity()
-	if (H.virus2.len)
-		scan["virus"] = TRUE
 	scan["worms"] = H.has_brain_worms()
 
 	scan["reagents"] = list()
@@ -84,6 +82,9 @@
 		O["is_bruised"] = I.is_bruised()
 		O["is_damaged"] = I.is_damaged()
 		O["scan_results"] = I.get_scan_results(tag)
+		if (istype(I, /obj/item/organ/internal/appendix))
+			var/obj/item/organ/internal/appendix/A = I
+			O["inflamed"] = A.inflamed
 
 		scan["internal_organs"] += list(O)
 
@@ -92,7 +93,7 @@
 	for(var/organ_name in H.species.has_organ)
 		if(!locate(H.species.has_organ[organ_name]) in H.internal_organs)
 			scan["missing_organs"] += organ_name
-	if(H.sdisabilities & BLIND)
+	if(H.sdisabilities & BLINDED)
 		scan["blind"] = TRUE
 	if(H.sdisabilities & NEARSIGHTED)
 		scan["nearsight"] = TRUE
@@ -236,11 +237,6 @@
 			<tr><td colspan='2'><span class='bad'><center>Large growth detected in frontal lobe, possibly cancerous.</center></span></td></tr>
 		*/
 		dat += "<tr><td colspan = '2'>Antibody levels and immune system perfomance are at [scan["immune_system"]*100]% of baseline.</td></tr>"
-		if (scan["virus"])
-			if(skill_level >= SKILL_ADEPT)
-				dat += "<tr><td colspan='2'><span class='bad'><center>Viral pathogen detected in blood stream.</center></span></td></tr>"
-			else
-				dat += "<tr><td colspan='2'><center>Viral pathogen detected in blood stream.</center></td></tr>"
 
 		if(scan["worms"])
 			dat += "<tr><td colspan='2'><span class='bad'><center>Large growth detected in frontal lobe, possibly cancerous.</center></span></td></tr>"
@@ -349,13 +345,14 @@
 		dat += "<tr><th colspan='3'><center>Internal Organs</center></th></tr>"
 		for(var/list/I in scan["internal_organs"])
 			var/row = list()
-			row += "<tr><td>[I["name"]]</td>"
+			var/inflamed = I["inflamed"] || FALSE
+			row += "<tr><td><span[inflamed ? " class='bad'" : ""]>[I["name"]]</span></td>"
 			if(I["is_broken"])
 				row += "<td><span class='bad'>Severe</span></td>"
 			else if(I["is_bruised"])
 				row += "<td><span class='average'>Moderate</span></td>"
 			else if(I["is_damaged"])
-				row += "<td>Minor</td>"
+				row += "<td><span class='mild'>Minor</span></td>"
 			else
 				row += "<td>None</td>"
 			row += "<td>"
@@ -410,7 +407,7 @@
 /proc/get_severity(amount, var/tag = FALSE)
 	if(!amount)
 		return "none"
-	. = "minor"
+
 	if(amount > 50)
 		if(tag)
 			. = "<span class='bad'>severe</span>"
@@ -426,3 +423,8 @@
 			. = "<span class='average'>moderate</span>"
 		else
 			. = "moderate"
+	else
+		if (tag)
+			. = "<span class='mild'>minor</span>"
+		else
+			. = "minor"

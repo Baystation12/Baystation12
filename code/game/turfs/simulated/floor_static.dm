@@ -6,6 +6,7 @@
 	icon = 'icons/turf/flooring/tiles.dmi'
 	icon_state = "steel"
 	initial_flooring = null
+	footstep_type = /decl/footsteps/plating
 
 /turf/simulated/floor/fixed/attackby(var/obj/item/C, var/mob/user)
 	if(istype(C, /obj/item/stack) && !isCoil(C))
@@ -35,7 +36,7 @@
 
 /turf/simulated/floor/fixed/alium/New()
 	..()
-	var/material/A = SSmaterials.get_material_by_name(MATERIAL_ALIUMIUM)
+	var/material/A = SSmaterials.get_material_by_name(MATERIAL_ALIENALLOY)
 	if(!A)
 		return
 	color = A.icon_colour
@@ -47,7 +48,7 @@
 	temperature = TCMB
 
 /turf/simulated/floor/fixed/alium/ex_act(severity)
-	var/material/A = SSmaterials.get_material_by_name(MATERIAL_ALIUMIUM)
+	var/material/A = SSmaterials.get_material_by_name(MATERIAL_ALIENALLOY)
 	if(prob(A.explosion_resistance))
 		return
 	if(severity == 1)

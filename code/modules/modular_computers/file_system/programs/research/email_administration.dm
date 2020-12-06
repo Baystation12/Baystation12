@@ -10,6 +10,7 @@
 	available_on_ntnet = 1
 	nanomodule_path = /datum/nano_module/program/email_administration
 	required_access = access_network
+	category = PROG_ADMIN
 
 /datum/nano_module/program/email_administration
 	name = "Email Administration"
@@ -23,7 +24,7 @@
 
 	data += "skill_fail"
 	if(!user.skill_check(SKILL_COMPUTER, SKILL_BASIC))
-		var/datum/extension/fake_data/fake_data = get_or_create_extension(src, /datum/extension/fake_data, /datum/extension/fake_data, 15)
+		var/datum/extension/fake_data/fake_data = get_or_create_extension(src, /datum/extension/fake_data, 15)
 		data["skill_fail"] = fake_data.update_and_return_data()
 	data["terminal"] = !!program
 
@@ -31,7 +32,7 @@
 		data["error"] = error
 	else if(istype(current_message))
 		data["msg_title"] = current_message.title
-		data["msg_body"] = pencode2html(current_message.stored_data)
+		data["msg_body"] = digitalPencode2html(current_message.stored_data)
 		data["msg_timestamp"] = current_message.timestamp
 		data["msg_source"] = current_message.source
 	else if(istype(current_account))

@@ -45,6 +45,7 @@
 	item_state = "crystal_tool"
 	icon = 'icons/obj/crystal_tools.dmi'
 	matter = list(MATERIAL_CRYSTAL = 1250)
+	build_from_parts = FALSE
 
 /obj/item/weapon/wirecutters/crystal/Initialize()
 	. = ..()
@@ -58,6 +59,7 @@
 	item_state = "crystal_tool"
 	icon = 'icons/obj/crystal_tools.dmi'
 	matter = list(MATERIAL_CRYSTAL = 1250)
+	build_from_parts = FALSE
 
 /obj/item/weapon/screwdriver/crystal/Initialize()
 	. = ..()
@@ -98,13 +100,31 @@
 	icon = 'icons/obj/crystal_tools.dmi'
 	matter = list(MATERIAL_CRYSTAL = 1250)
 
-/obj/item/weapon/storage/belt/utility/vigil
-	name = "tool harness"
+/obj/item/weapon/storage/belt/utility/crystal
+	name = "crystalline tool harness"
 	desc = "A segmented belt of strange crystalline material."
-	icon_state = "vigil"
-	item_state = "vigil"
+	icon_state = "utilitybelt_crystal"
+	item_state = "utilitybelt_crystal"
 
-/obj/item/weapon/storage/belt/utility/vigil/Initialize()
+/obj/item/weapon/storage/belt/utility/crystal/Initialize()
+	new /obj/item/device/multitool/crystal(src)
+	new /obj/item/weapon/wrench/crystal(src)
+	new /obj/item/weapon/crowbar/crystal(src)
+	new /obj/item/weapon/screwdriver/crystal(src)
+	new /obj/item/weapon/wirecutters/crystal(src)
+	new /obj/item/weapon/weldingtool/electric/crystal(src)
+	update_icon()
+	. = ..()
+
+/obj/item/weapon/storage/toolbox/crystal
+	name = "crystalline toolbox"
+	desc = "A translucent toolbox made out of an odd crystalline material that is surprisingly light."
+	icon_state = "crystal"
+	item_state = "toolbox_crystal"
+	origin_tech = list(TECH_COMBAT = 1, TECH_MATERIAL = 3)
+	attack_cooldown = 15
+
+/obj/item/weapon/storage/toolbox/crystal/Initialize()
 	new /obj/item/device/multitool/crystal(src)
 	new /obj/item/weapon/wrench/crystal(src)
 	new /obj/item/weapon/crowbar/crystal(src)

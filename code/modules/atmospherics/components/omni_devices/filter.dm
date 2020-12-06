@@ -11,15 +11,15 @@
 	var/max_output_pressure = MAX_OMNI_PRESSURE
 
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
-	power_rating = 7500			//7500 W ~ 10 HP
+	power_rating = 15000			// 15000 W ~ 20 HP
 
 	var/max_flow_rate = ATMOS_DEFAULT_VOLUME_FILTER
 	var/set_flow_rate = ATMOS_DEFAULT_VOLUME_FILTER
 
 	var/list/filtering_outputs = list()	//maps gasids to gas_mixtures
-
-/obj/machinery/atmospherics/omni/filter/New()
-	..()
+	build_icon_state = "omni_filter"
+/obj/machinery/atmospherics/omni/filter/Initialize()
+	. = ..()
 	rebuild_filtering_list()
 	for(var/datum/omni_port/P in ports)
 		P.air.volume = ATMOS_DEFAULT_VOLUME_FILTER

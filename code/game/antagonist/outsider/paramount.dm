@@ -6,7 +6,7 @@ GLOBAL_DATUM_INIT(paramounts, /datum/antagonist/paramount, new)
 	role_text_plural = "Paramounts"
 	landmark_id = "ninjastart"
 	welcome_text = "<span class='info'>You were once one of the finest minds of your culture, now driven to madness by the whispers of the howling dark and blessed with psychic faculties that defy understanding. Using your C-E rig and your twisted knowledge of psionics, advance your agenda in human space.</span>"
-	flags = ANTAG_OVERRIDE_JOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_RANDSPAWN | ANTAG_SET_APPEARANCE
+	flags = ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_RANDSPAWN | ANTAG_SET_APPEARANCE
 	antaghud_indicator = "hudwizard"
 	initial_spawn_req = 1
 	initial_spawn_target = 1

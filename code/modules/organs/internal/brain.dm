@@ -12,7 +12,9 @@
 	throw_range = 5
 	origin_tech = list(TECH_BIO = 3)
 	attack_verb = list("attacked", "slapped", "whacked")
-	relative_size = 60
+	relative_size = 85
+	damage_reduction = 0
+	can_be_printed = FALSE
 
 	var/can_use_mmi = TRUE
 	var/mob/living/carbon/brain/brainmob = null
@@ -75,8 +77,8 @@
 	to_chat(brainmob, "<span class='notice'>You feel slightly disoriented. That's normal when you're just \a [initial(src.name)].</span>")
 	callHook("debrain", list(brainmob))
 
-/obj/item/organ/internal/brain/examine(mob/user) // -- TLE
-	. = ..(user)
+/obj/item/organ/internal/brain/examine(mob/user)
+	. = ..()
 	if(brainmob && brainmob.client)//if thar be a brain inside... the brain.
 		to_chat(user, "You can feel the small spark of life still left in this one.")
 	else
@@ -260,3 +262,6 @@
 
 /obj/item/organ/internal/brain/get_scarring_level()
 	. = (species.total_health - max_damage)/species.total_health
+
+/obj/item/organ/internal/brain/get_mechanical_assisted_descriptor()
+	return "machine-interface [name]"

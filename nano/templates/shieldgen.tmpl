@@ -13,10 +13,14 @@
 				{{if data.overloaded}}
 					Recovering
 				{{else}}
-					Online
+					Active
 				{{/if}}
 			{{else data.running == 1}}
 				Shutting Down
+			{{else data.running == 3}}
+				Inactive
+			{{else data.running == 4}}
+				Spinning Up
 			{{else}}
 				Offline
 			{{/if}}
@@ -24,10 +28,18 @@
 	</div>
 	<div class="item">
 		<div class="itemLabel">
-			Shield Capacity:
+			Energy Storage:
 		</div>
 		<div class="itemContent">
-			{{:data.current_energy}}/{{:data.max_energy}} MJ
+			{{:data.current_energy}}/{{:data.max_energy}} MJ ({{:data.percentage_energy}}%)
+		</div>
+	</div>
+	<div class="item">
+		<div class="itemLabel">
+			Shield Integrity:
+		</div>
+		<div class="itemContent">
+			{{:data.field_integrity}}%
 		</div>
 	</div>
 	<div class="item">
@@ -63,14 +75,19 @@
 			Field Size:
 		</div>
 		<div class="itemContent">
-			{{:data.functional_segments}} / {{:data.total_segments}} m2 (Radius {{:data.field_radius}})
+			{{:data.functional_segments}} / {{:data.total_segments}} m2 (radius {{:data.field_radius}}, target {{:data.target_radius}})
 		</div>
 	</div>
 	<h2>CONTROLS</h2>
 		<table>
 			<tr>
-			{{if (data.running == 2)}}
+			{{if (data.running >= 2)}}
 				<td>{{:helper.link('Turn off', null, {'begin_shutdown' : '1'})}}
+				{{if (data.running == 3)}}
+					<td>{{:helper.link('Activate', null, {'toggle_idle' : '0'})}} </td>
+				{{else}}
+					<td>{{:helper.link('Deactivate', null, {'toggle_idle' : '1'})}} </td>
+				{{/if}}
 			{{else}}
 				<td>{{:helper.link('Turn on', null, {'start_generator' : '1'})}}
 			{{/if}}
@@ -83,6 +100,13 @@
 			<tr>
 			<td>{{:helper.link('Set Field Range', null, {'set_range' : '1'})}}
 			<td>{{:helper.link('Set Input Cap', null, {'set_input_cap' : '1'})}}
+			<tr>
+			<td>Set inactive power use intensity:</td>
+			<td>
+			{{for data.idle_valid_values}}
+				{{:helper.link(value, null, {'switch_idle' : value}, (value == data.idle_multiplier) ? 'selected' : (data.running == 4 ? 'disabled' : null))}}
+			{{/for}}
+			</td>
 		</table>
 	<h2>FIELD CALIBRATION</h2>
 	<hr>

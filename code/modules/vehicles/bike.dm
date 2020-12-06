@@ -6,7 +6,7 @@
 	dir = SOUTH
 
 	load_item_visible = 1
-	buckle_pixel_shift = "x=0;y=5"
+	buckle_pixel_shift = "x=0;y=0;z=5"
 	health = 100
 	maxhealth = 100
 
@@ -92,7 +92,7 @@
 
 /obj/vehicle/bike/load(var/atom/movable/C)
 	var/mob/living/M = C
-	if(!istype(C)) return 0
+	if(!istype(M)) return 0
 	if(M.buckled || M.restrained() || !Adjacent(M) || !M.Adjacent(src))
 		return 0
 	return ..(M)

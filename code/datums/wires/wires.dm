@@ -33,7 +33,6 @@ var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown"
 	src.holder = holder
 	if(!istype(holder, holder_type))
 		CRASH("Our holder is null/the wrong type!")
-		return
 
 	// Generate new wires
 	if(random)
@@ -75,6 +74,9 @@ var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown"
 
 /datum/wires/proc/Interact(var/mob/living/user)
 
+	if (!user)
+		return
+
 	var/html = null
 	if(holder && CanUse(user))
 		html = GetInteractWindow(user)
@@ -83,13 +85,14 @@ var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown"
 	else
 		user.unset_machine()
 		// No content means no window.
-		user << browse(null, "window=wires")
+		close_browser(user, "window=wires")
 		return
 
 	var/datum/browser/popup = new(user, "wires", holder.name, window_x, window_y)
 	popup.set_content(html)
 	popup.set_title_image(user.browse_rsc_icon(holder.icon, holder.icon_state))
 	popup.open()
+	return TRUE
 
 /datum/wires/proc/GetInteractWindow(mob/user)
 	var/html = list()
@@ -125,30 +128,46 @@ var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown"
 
 		var/mob/living/L = usr
 		if(CanUse(L) && href_list["action"])
+
 			var/obj/item/I = L.get_active_hand()
+
+			var/obj/item/offhand_item
+			if(ishuman(usr))
+				var/mob/living/carbon/human/H = usr
+				offhand_item = H.wearing_rig && H.wearing_rig.selected_module
+
 			holder.add_hiddenprint(L)
 			if(href_list["cut"]) // Toggles the cut/mend status
-				if(isWirecutter(I))
+				if(isWirecutter(I) || isWirecutter(offhand_item))
 					var/colour = href_list["cut"]
-					CutWireColour(colour)
+					var/message = ""
+					if (CutWireColour(colour))
+						message = SPAN_NOTICE("You mend the [colour] wire.")
+					else
+						message = SPAN_NOTICE("You cut the [colour] wire.")
+
 					if(prob(L.skill_fail_chance(SKILL_ELECTRICAL, 20, SKILL_ADEPT)))
 						RandomCut()
-						to_chat(L, "<span class='danger'>You accidentally nick another wire!</span>")
+						message = SPAN_DANGER("You accidentally nick another wire in addition to the [colour] wire!")
 					else if(!L.skill_check(SKILL_ELECTRICAL, SKILL_BASIC))
 						RandomCutAll(10)
-						to_chat(L, "<span class='danger'>You think you might have nicked some of the other wires!</span>")
+						message = SPAN_DANGER("You think you might have nicked some of the other wires in addition to the [colour] wire!")
+					to_chat(usr, message)
+					playsound(usr.loc, "sound/items/Wirecutter.ogg", 20)
 				else
 					to_chat(L, "<span class='error'>You need wirecutters!</span>")
 			else if(href_list["pulse"])
-				if(isMultitool(I))
+				if(isMultitool(I) || isMultitool(offhand_item))
 					var/colour = href_list["pulse"]
 					if(prob(L.skill_fail_chance(SKILL_ELECTRICAL, 30, SKILL_ADEPT)))
 						RandomPulse()
-						to_chat(L, "<span class='danger'>You accidentally pulse another wire!</span>")
+						to_chat(L, "<span class='danger'>You accidentally pulse another wire instead of the [colour] wire!</span>")
 						if(prob(L.skill_fail_chance(SKILL_ELECTRICAL, 60, SKILL_BASIC)))
 							RandomPulse() //or two
 					else
 						PulseColour(colour)
+						to_chat(usr, SPAN_NOTICE("You pulse the [colour] wire."))
+					playsound(usr.loc, "sound/effects/pop.ogg", 20)
 					if(prob(L.skill_fail_chance(SKILL_ELECTRICAL, 50, SKILL_BASIC)))
 						wires = shuffle(wires) //Leaves them in a different order for anyone else.
 						to_chat(L, "<span class='danger'>You get the wires all tangled up!</span>")
@@ -156,20 +175,25 @@ var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown"
 					to_chat(L, "<span class='error'>You need a multitool!</span>")
 			else if(href_list["attach"])
 				var/colour = href_list["attach"]
+				var/failed = 0
 				if(prob(L.skill_fail_chance(SKILL_ELECTRICAL, 80, SKILL_EXPERT)))
 					colour = pick(wires)
 					to_chat(L, "<span class='danger'>Are you sure you got the right wire?</span>")
+					failed = 1
 				// Detach
 				if(IsAttached(colour))
 					var/obj/item/O = Detach(colour)
 					if(O)
 						L.put_in_hands(O)
+						to_chat(usr, SPAN_NOTICE("You detach the signaller from the [colour] wire."))
 
 				// Attach
 				else
 					if(istype(I, /obj/item/device/assembly/signaler))
 						if(L.unEquip(I))
 							Attach(colour, I)
+							if(!failed)
+								to_chat(usr, SPAN_NOTICE("You attach the signaller to the [colour] wire."))
 					else
 						to_chat(L, "<span class='error'>You need a remote signaller!</span>")
 			else if(href_list["examine"])
@@ -180,7 +204,7 @@ var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown"
 			Interact(usr)
 
 	if(href_list["close"])
-		usr << browse(null, "window=wires")
+		close_browser(usr, "window=wires")
 		usr.unset_machine(holder)
 
 //
@@ -315,15 +339,17 @@ var/const/POWER = 8
 
 /datum/wires/proc/CutWireColour(var/colour)
 	var/index = GetIndex(colour)
-	CutWireIndex(index)
+	return CutWireIndex(index)
 
 /datum/wires/proc/CutWireIndex(var/index)
 	if(IsIndexCut(index))
 		wires_status &= ~index
 		UpdateCut(index, 1)
+		return 1
 	else
 		wires_status |= index
 		UpdateCut(index, 0)
+		return 0
 
 /datum/wires/proc/RandomCut()
 	var/r = rand(1, wires.len)

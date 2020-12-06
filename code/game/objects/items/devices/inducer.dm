@@ -9,7 +9,7 @@
 	var/coefficient = 0.9
 	var/opened = FALSE
 	var/failsafe = 0
-	var/obj/item/weapon/cell/cell = /obj/item/weapon/cell
+	var/obj/item/weapon/cell/cell = /obj/item/weapon/cell/standard
 	var/recharging = FALSE
 	origin_tech = list(TECH_POWER = 6, TECH_ENGINEERING = 4)
 	matter = list(MATERIAL_STEEL = 1000, MATERIAL_GLASS = 700)
@@ -107,7 +107,7 @@
 		if (user.get_skill_value(SKILL_ELECTRICAL) < SKILL_ADEPT)
 			length += rand(40, 60)
 		while(C.charge < C.maxcharge)
-			if(MyC.charge > max(0, MyC.charge*failsafe) && do_after(user, length, target = user))
+			if(MyC.charge > max(0, MyC.charge*failsafe) && do_after(user, length))
 				if(CannotUse(user))
 					return TRUE
 				if(QDELETED(C))
@@ -149,7 +149,7 @@
 
 
 /obj/item/inducer/examine(mob/living/M)
-	..()
+	. = ..()
 	var/obj/item/weapon/cell/MyC = get_cell()
 	if(MyC)
 		to_chat(M, "<span class='notice'>Its display shows: [MyC.percent()]%.</span>")

@@ -32,8 +32,8 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 	if(!P.hard_drive.try_store_file(program))
 		return SETUP_FAILED	//Not enough space or other issues.
 	P.hard_drive.store_file(program)
-	to_chat(M, "<span class='notice'>A portable object teleportation relay has been installed in your [P.name]. Simply enter the code \"[pda_pass]\" in your new program to unlock its hidden features.</span>")
-	M.mind.store_memory("<B>Uplink passcode:</B> [pda_pass] ([P.name]).")
+	to_chat(M, "<span class='notice'>A portable object teleportation relay has been installed in your [P.name]. Simply enter the code \"[pda_pass]\" in TaxQuickly program to unlock its hidden features.</span>")
+	M.StoreMemory("<B>Uplink passcode:</B> [pda_pass] ([P.name]).", /decl/memory_options/system)
 
 /decl/uplink_source/radio
 	name = "Radio"
@@ -58,11 +58,11 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 	R.hidden_uplink = T
 	R.traitor_frequency = freq
 	to_chat(M, "<span class='notice'>A portable object teleportation relay has been installed in your [R.name]. Simply dial the frequency [format_frequency(freq)] to unlock its hidden features.</span>")
-	M.mind.store_memory("<B>Radio Freq:</B> [format_frequency(freq)] ([R.name]).")
+	M.StoreMemory("<B>Radio Freq:</B> [format_frequency(freq)] ([R.name]).", /decl/memory_options/system)
 
 /decl/uplink_source/implant
 	name = "Implant"
-	desc = "Teleports an uplink implant into your head. Costs at least half the initial TC amount."
+	desc = "Teleports an uplink implant into your head. Costs 20% of the initial TC amount."
 
 /decl/uplink_source/implant/setup_uplink_source(var/mob/living/carbon/human/H, var/amount)
 	if(!istype(H))
@@ -72,7 +72,7 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 	if(!head)
 		return SETUP_FAILED
 
-	var/obj/item/weapon/implant/uplink/U = new(H, IMPLANT_TELECRYSTAL_AMOUNT(amount))
+	var/obj/item/weapon/implant/uplink/U = new(H, round(amount * 0.8))
 	U.imp_in = H
 	U.implanted = TRUE
 	U.part = head
@@ -82,17 +82,18 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 
 /decl/uplink_source/unit
 	name = "Uplink Unit"
-	desc = "Teleports an uplink unit to your location. Costs 10% of the initial TC amount."
+	desc = "Teleports an uplink unit to your location. Has 30% more TC."
 
 /decl/uplink_source/unit/setup_uplink_source(var/mob/M, var/amount)
-	var/obj/item/device/radio/uplink/U = new(M, M.mind, round(amount * 0.9))
+	var/obj/item/device/radio/uplink/U = new(M, M.mind, round(amount * 1.3))
 	put_on_mob(M, U, "\A [U]")
 
 /decl/uplink_source/telecrystals
 	name = "Telecrystals"
-	desc = "Get your telecrystals in pure form, without the means to trade them for goods."
+	desc = "Get your telecrystals in pure form, without the means to trade them for goods, Gives 150% of initial TC amount"
 
 /decl/uplink_source/telecrystals/setup_uplink_source(var/mob/M, var/amount)
+	amount = round(amount * 1.5)
 	var/obj/item/stack/telecrystal/TC = new(M, amount)
 	put_on_mob(M, TC, "[amount] telecrystal\s")
 

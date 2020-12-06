@@ -22,6 +22,7 @@
 /obj/structure/shuttle/engine/heater
 	name = "heater"
 	icon_state = "heater"
+	atom_flags = ATOM_FLAG_CLIMBABLE
 
 /obj/structure/shuttle/engine/platform
 	name = "platform"

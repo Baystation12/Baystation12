@@ -17,7 +17,7 @@
 	volume = 15
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
-	sharp = 1
+	sharp = TRUE
 	unacidable = 1 //glass
 	var/mode = SYRINGE_DRAW
 	var/image/filling //holds a reference to the current filling overlay
@@ -56,14 +56,6 @@
 /obj/item/weapon/reagent_containers/syringe/attackby(obj/item/I as obj, mob/user as mob)
 	return
 
-/obj/item/weapon/reagent_containers/syringe/do_surgery(mob/living/carbon/M, mob/living/user)
-	if(user.a_intent == I_HURT)
-		return 0
-	if(user.a_intent != I_HELP) //in case it is ever used as a surgery tool
-		return ..()
-	afterattack(M, user, 1)
-	return 1
-
 /obj/item/weapon/reagent_containers/syringe/afterattack(obj/target, mob/user, proximity)
 	if(!proximity)
 		return
@@ -87,6 +79,7 @@
 
 /obj/item/weapon/reagent_containers/syringe/on_update_icon()
 	overlays.Cut()
+	underlays.Cut()
 
 	if(mode == SYRINGE_BROKEN)
 		icon_state = "broken"
@@ -112,7 +105,7 @@
 		filling.icon_state = "syringe[rounded_vol]"
 
 		filling.color = reagents.get_color()
-		overlays += filling
+		underlays += filling
 
 /obj/item/weapon/reagent_containers/syringe/proc/handleTarget(var/atom/target, var/mob/user)
 	switch(mode)
@@ -144,15 +137,23 @@
 					CRASH("[T] \[[T.type]\] was missing their dna datum!")
 				return
 
-			var/injtime = time //Taking a blood sample through a hardsuit takes longer due to needing to find a port.
+
 			var/allow = T.can_inject(user, check_zone(user.zone_sel.selecting))
 			if(!allow)
 				return
-			if(allow == INJECTION_PORT)
-				injtime *= 2
-				user.visible_message("<span class='warning'>\The [user] begins hunting for an injection port on [target]'s suit!</span>")
+
+			if(allow == INJECTION_PORT) // Taking a blood sample through a hardsuit takes longer due to needing to find a port first.
+				if(target != user)
+					user.visible_message(SPAN_WARNING("\The [user] begins hunting for an injection port on \the [target]'s suit!"))
+				else
+					to_chat(user, SPAN_NOTICE("You begin hunting for an injection port on your suit."))
+				if(!user.do_skilled(INJECTION_PORT_DELAY, SKILL_MEDICAL, target))
+					return
+
+			if(target != user)
+				user.visible_message(SPAN_WARNING("\The [user] is trying to take a blood sample from \the [target]."))
 			else
-				user.visible_message("<span class='warning'>\The [user] is trying to take a blood sample from [target].</span>")
+				to_chat(user, SPAN_NOTICE("You start trying to take a blood sample from yourself."))
 
 			if(prob(user.skill_fail_chance(SKILL_MEDICAL, 60, SKILL_BASIC)))
 				to_chat(user, "<span class='warning'>You miss the vein!</span>")
@@ -160,17 +161,20 @@
 				T.apply_damage(3, BRUTE, target_zone, damage_flags=DAM_SHARP)
 				return
 
-			injtime *= user.skill_delay_mult(SKILL_MEDICAL)
 			user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 			user.do_attack_animation(target)
 
-			if(!do_mob(user, target, injtime))
+			if(!user.do_skilled(time, SKILL_MEDICAL, target))
 				return
 
 			T.take_blood(src, amount)
 			to_chat(user, "<span class='notice'>You take a blood sample from [target].</span>")
 			for(var/mob/O in viewers(4, user))
 				O.show_message("<span class='notice'>[user] takes a blood sample from [target].</span>", 1)
+
+			if(ishuman(target))
+				var/mob/living/carbon/human/H = target
+				H.custom_pain(SPAN_WARNING("The needle stings a bit."), 2, TRUE, H.get_organ(user.zone_sel.selecting))
 
 	else //if not mob
 		if(!target.reagents.total_volume)
@@ -229,26 +233,33 @@
 	if(!trackTarget)
 		trackTarget = target
 
-	if(target != user)
-		var/injtime = time //Injecting through a hardsuit takes longer due to needing to find a port.
-		var/allow = target.can_inject(user, check_zone(user.zone_sel.selecting))
-		if(!allow)
-			return
-		if(allow == INJECTION_PORT)
-			injtime *= 2
-			user.visible_message("<span class='warning'>\The [user] begins hunting for an injection port on [target]'s suit!</span>")
+	var/allow = target.can_inject(user, check_zone(user.zone_sel.selecting))
+	if(!allow)
+		return
+
+	if(allow == INJECTION_PORT) // Injecting through a hardsuit takes longer due to needing to find a port first.
+		if(target != user)
+			user.visible_message(SPAN_WARNING("\The [user] begins hunting for an injection port on \the [target]'s suit!"))
 		else
-			user.visible_message("<span class='warning'>\The [user] is trying to inject [target] with [visible_name]!</span>")
-
-		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
-		user.do_attack_animation(trackTarget)
-
-		if(!user.do_skilled(injtime, SKILL_MEDICAL, trackTarget))
+			to_chat(user, SPAN_NOTICE("You begin hunting for an injection port on your suit."))
+		if(!user.do_skilled(INJECTION_PORT_DELAY, SKILL_MEDICAL, trackTarget))
 			return
 
-		if(target != trackTarget && target.loc != trackTarget)
-			return
-	admin_inject_log(user, target, src, reagents.get_reagents(), amount_per_transfer_from_this)
+	if(target != user)
+		user.visible_message(SPAN_WARNING("\The [user] is trying to inject \the [target] with [visible_name]!"))
+	else
+		to_chat(user, SPAN_NOTICE("You begin injecting yourself with [visible_name]."))
+
+	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
+	user.do_attack_animation(trackTarget)
+
+	if(!user.do_skilled(time, SKILL_MEDICAL, trackTarget))
+		return
+
+	if(target != user && target != trackTarget && target.loc != trackTarget)
+		return
+	if (reagents.should_admin_log())
+		admin_inject_log(user, target, src, reagents.get_reagents(), amount_per_transfer_from_this)
 	var/trans = reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_BLOOD)
 
 	if(target != user)
@@ -256,12 +267,16 @@
 	else
 		to_chat(user, "<span class='notice'>You inject yourself with [trans] units of the solution. \The [src] now contains [src.reagents.total_volume] units.</span>")
 
+	if(ishuman(target))
+		var/mob/living/carbon/human/T = target
+		T.custom_pain(SPAN_WARNING("The needle stings a bit."), 2, TRUE, T.get_organ(user.zone_sel.selecting))
+
 	if(reagents.total_volume <= 0 && mode == SYRINGE_INJECT)
 		mode = SYRINGE_DRAW
 		update_icon()
 
 /obj/item/weapon/reagent_containers/syringe/proc/syringestab(var/mob/living/carbon/target, var/mob/living/carbon/user)
-
+	var/should_admin_log = reagents.should_admin_log()
 	if(istype(target, /mob/living/carbon/human))
 
 		var/mob/living/carbon/human/H = target
@@ -278,7 +293,7 @@
 		if((user != target) && H.check_shields(7, src, user, "\the [src]"))
 			return
 
-		if (target != user && H.getarmor(target_zone, "melee") > 5 && prob(50))
+		if (target != user && H.get_blocked_ratio(target_zone, BRUTE, damage_flags=DAM_SHARP) > 0.1 && prob(50))
 			for(var/mob/O in viewers(world.view, user))
 				O.show_message(text("<span class='danger'>[user] tries to stab [target] in \the [hit_area] with [src.name], but the attack is deflected by armor!</span>"), 1)
 			qdel(src)
@@ -294,10 +309,11 @@
 		target.apply_damage(3, BRUTE)
 
 	var/syringestab_amount_transferred = rand(0, (reagents.total_volume - 5)) //nerfed by popular demand
-	var/contained_reagents = reagents.get_reagents()
 	var/trans = reagents.trans_to_mob(target, syringestab_amount_transferred, CHEM_BLOOD)
 	if(isnull(trans)) trans = 0
-	admin_inject_log(user, target, src, contained_reagents, trans, violent=1)
+	if (should_admin_log)
+		var/contained_reagents = reagents.get_reagents()
+		admin_inject_log(user, target, src, contained_reagents, trans, violent=1)
 	break_syringe(target, user)
 
 /obj/item/weapon/reagent_containers/syringe/proc/break_syringe(mob/living/carbon/target, mob/living/carbon/user)
@@ -406,4 +422,3 @@
 	volume = 20
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT
 	icon_state = "cs"
-

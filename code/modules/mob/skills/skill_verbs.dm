@@ -83,8 +83,10 @@ Robots and antags can instruct.
 	if(!SV || !istype(target))
 		return
 	if(src == target)
+		to_chat(src, "<span class='notice'>Cannot instruct yourself.</span>")
 		return
 	if(incapacitated() || target.incapacitated())
+		to_chat(src, "<span class='notice'>[incapacitated() ? "You are in no state to teach right now!" : "\the [target] is in no state to be taught right now!"]</span>")
 		return
 
 	if(target.too_many_buffs(/datum/skill_buff/instruct))
@@ -95,6 +97,8 @@ Robots and antags can instruct.
 	for(var/decl/hierarchy/skill/S in GLOB.skills)
 		if(!target.skill_check(S.type, SKILL_BASIC) && skill_check(S.type, SKILL_EXPERT))
 			options[S.name] = S
+	if(!length(options))
+		to_chat(src, "<span class='notice'>There is nothing you can teach \the [target].</span>")
 	var/choice = input(src, "Select skill to instruct \the [target] in:", "Skill select") as null|anything in options
 	if(!(choice in options) || !(target in view(2)))
 		return
@@ -103,11 +107,15 @@ Robots and antags can instruct.
 	if(!do_skilled(6 SECONDS, skill.type, target))
 		return
 	if(incapacitated() || target.incapacitated())
+		to_chat(src, "<span class='notice'>[incapacitated() ? "You are in no state to teach right now!" : "\the [target] is in no state to be taught right now!"]</span>")
 		return
 	if(target.too_many_buffs(/datum/skill_buff/instruct))
 		to_chat(src, "<span class='notice'>\The [target] exhausted from all the training \he recieved.</span>")
 		return
-	if(target.skill_check(skill.type, SKILL_BASIC) || !skill_check(skill.type, SKILL_EXPERT))
+	if(target.skill_check(skill.type, SKILL_BASIC))
+		to_chat(src, "<span class='notice'>\The [target] is too skilled to gain any benefit from a short lesson.</span>")
+		return
+	if(!skill_check(skill.type, SKILL_EXPERT))
 		return
 
 	target.buff_skill(list(skill.type = 1), buff_type = /datum/skill_buff/instruct)
@@ -166,7 +174,7 @@ The Appraise verb. Used on objects to estimate their value.
 			var/high = low + level
 			if(!low && multiple >= 2)
 				low = 10 ** (multiple - 1) //Adjusts the lowball estimate away from 0 if the item has a high upper estimate.
-			message = "You appraise the item to be worth between [low] and [high] thaler."
+			message = "You appraise the item to be worth between [low] and [high] [GLOB.using_map.local_currency_name]."
 	to_chat(src, message)
 
 /proc/get_appraise_level(skill)

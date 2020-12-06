@@ -29,7 +29,7 @@
 				M.show_message("<spawn class='warning'>You hear the shuttle engines sputter... perhaps it doesn't have enough fuel?", AUDIBLE_MESSAGE,
 				"<spawn class='warning'>The shuttle shakes but fails to take off.", VISIBLE_MESSAGE)
 				return 0 //failure!
-	return 1 //sucess, continue with launch
+	return 1 //success, continue with launch
 
 /datum/shuttle/autodock/overmap/proc/can_go()
 	if(!next_location)
@@ -62,10 +62,11 @@
 
 /datum/shuttle/autodock/overmap/proc/get_possible_destinations()
 	var/list/res = list()
-	for (var/obj/effect/overmap/S in range(waypoint_sector(current_location), range))
-		for(var/obj/effect/shuttle_landmark/LZ in S.get_waypoints(src.name))
+	for (var/obj/effect/overmap/visitable/S in range(get_turf(waypoint_sector(current_location)), range))
+		var/list/waypoints = S.get_waypoints(name)
+		for(var/obj/effect/shuttle_landmark/LZ in waypoints)
 			if(LZ.is_valid(src))
-				res["[S.name] - [LZ.name]"] = LZ
+				res["[waypoints[LZ]] - [LZ.name]"] = LZ
 	return res
 
 /datum/shuttle/autodock/overmap/get_location_name()
@@ -78,7 +79,7 @@
 		return "None"
 	return "[waypoint_sector(next_location)] - [next_location]"
 
-/datum/shuttle/autodock/overmap/proc/try_consume_fuel() //returns 1 if sucessful, returns 0 if error (like insufficient fuel)
+/datum/shuttle/autodock/overmap/proc/try_consume_fuel() //returns 1 if successful, returns 0 if error (like insufficient fuel)
 	if(!fuel_consumption)
 		return 1 //shuttles with zero fuel consumption are magic and can always launch
 	if(!fuel_ports.len)

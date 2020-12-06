@@ -34,7 +34,7 @@
 	return G
 
 // When running the program, we also want to pass our enemy name to the nano module.
-/datum/computer_file/program/game/run_program()
+/datum/computer_file/program/game/on_startup()
 	. = ..()
 	if(. && NM)
 		var/datum/nano_module/arcade_classic/NMC = NM

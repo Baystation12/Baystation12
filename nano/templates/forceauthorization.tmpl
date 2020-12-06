@@ -1,33 +1,48 @@
-{{if data.message}}
-    {{:data.message}}
-{{/if}}
-<h1>Non-Cyborg Weapons</h1>
-{{for data.guns :value:index}}
-    <div>
-        {{:value.name}} registered to {{:value.owner}} at ({{:value.loc.x}}, {{:value.loc.y}}, {{:value.loc.z}})<br />
-        {{for value.modes :inner_value:inner_index}}
-            {{if inner_value.authorized == "1"}}
-                {{:helper.link("Unauthorize " + inner_value.mode_name, null, {"gun" : value.ref, "mode" : inner_value.index, "authorize" : 0})}}
-            {{else}}
-                {{:helper.link("Authorize " + inner_value.mode_name, null, {"gun" : value.ref, "mode" : inner_value.index, "authorize" : 1})}}
-            {{/if}}
-        {{/for}}
-    </div>
-    <br><br>
-{{/for}}
-{{if data.is_silicon_usr == 0}}
-	<h1>Cyborg Weapons</h1>
-	{{for data.cyborg_guns :value:index}}
+<h1>Registered Weapons</h1>
+{{if data.registered_guns.length}}
+	{{for data.registered_guns :value:index}}
 		<div>
-			{{:value.name}} registered to {{:value.owner}}<br />
-			{{for value.modes :inner_value:inner_index}}
-				{{if inner_value.authorized == "1"}}
-					{{:helper.link("Unauthorize " + inner_value.mode_name, null, {"cyborg_gun" : value.ref, "mode" : inner_value.index, "authorize" : 0})}}
-				{{else}}
-					{{:helper.link("Authorize " + inner_value.mode_name, null, {"cyborg_gun" : value.ref, "mode" : inner_value.index, "authorize" : 1})}}
+			{{:value.name}} registered to {{:value.owner}} in {{:value.area}}
+			{{if value.out_of_range == "0"}}
+				<br />
+				{{for value.modes :inner_value:inner_index}}
+					{{if inner_value.authorized == "1"}}
+						{{:helper.link("Unauthorize " + inner_value.mode_name, null, {"gun" : value.ref, "mode" : inner_value.index, "authorize" : 0})}}
+					{{else}}
+						{{:helper.link("Authorize " + inner_value.mode_name, null, {"gun" : value.ref, "mode" : inner_value.index, "authorize" : 1})}}
+					{{/if}}
+				{{/for}}
+				<br />
+				{{if index < data.registered_guns.length - 1}}
+					<br /> <!-- Divs and buttons being inline means we need to manually push the next line down, but I don't want unnecessary padding if it's the last element -->
 				{{/if}}
-			{{/for}}
+			{{/if}}
 		</div>
-		<br><br>
 	{{/for}}
+{{else}}
+	No registered weapons found.
+{{/if}}
+<h1>Unregistered Weapons</h1>
+{{if data.unregistered_guns.length}}
+	{{for data.unregistered_guns :value:index}}
+		<div>
+			{{:value.name}} in {{:value.area}}
+			{{if value.out_of_range == "0"}}
+				<br />
+				{{for value.modes :inner_value:inner_index}}
+					{{if inner_value.authorized == "1"}}
+						{{:helper.link("Unauthorize " + inner_value.mode_name, null, {"gun" : value.ref, "mode" : inner_value.index, "authorize" : 0})}}
+					{{else}}
+						{{:helper.link("Authorize " + inner_value.mode_name, null, {"gun" : value.ref, "mode" : inner_value.index, "authorize" : 1})}}
+					{{/if}}
+				{{/for}}
+				<br />
+				{{if index < data.unregistered_guns.length - 1 && value.modes.length}}
+					<br /> <!-- Divs and buttons being inline means we need to manually push the next line down, but I don't want unnecessary padding if it's the last element -->
+				{{/if}}
+			{{/if}}
+		</div>
+	{{/for}}
+{{else}}
+	No unregistered weapons found.
 {{/if}}

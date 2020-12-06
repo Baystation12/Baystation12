@@ -9,6 +9,7 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	layer = BELOW_OBJ_LAYER
 	explosion_resistance = 1
+	rad_resistance_modifier = 0.1
 	var/init_material = MATERIAL_STEEL
 	var/health = 10
 	var/destroyed = 0
@@ -34,6 +35,13 @@
 	health = max(1, round(material.integrity/15))
 	update_connections(1)
 	update_icon()
+
+/obj/structure/grille/Destroy()
+	var/turf/location = loc
+	. = ..()
+	for(var/obj/structure/grille/G in orange(1, location))
+		G.update_connections()
+		G.queue_icon_update()
 
 /obj/structure/grille/ex_act(severity)
 	qdel(src)
@@ -202,11 +210,11 @@
 /obj/structure/grille/proc/shock(mob/user as mob, prb)
 	if(!anchored || destroyed)		// anchored/destroyed grilles are never connected
 		return 0
-	if(!(material.conductive))
+	if(material && !material.conductive)
 		return 0
 	if(!prob(prb))
 		return 0
-	if(!in_range(src, user))//To prevent TK and mech users from getting shocked
+	if(!in_range(src, user))//To prevent TK and exosuit users from getting shocked
 		return 0
 	var/turf/T = get_turf(src)
 	var/obj/structure/cable/C = T.get_cable_node()

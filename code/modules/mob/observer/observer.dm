@@ -27,7 +27,7 @@ var/const/GHOST_IMAGE_ALL = ~GHOST_IMAGE_NONE
 		ghost_darkness_images |= ghost_image //so ghosts can see the eye when they disable darkness
 	if(ghost_image_flag & GHOST_IMAGE_SIGHTLESS)
 		ghost_sightless_images |= ghost_image //so ghosts can see the eye when they disable ghost sight
-	updateallghostimages()
+	SSghost_images.queue_global_image_update()
 
 /mob/observer/Destroy()
 	if (ghost_image)
@@ -35,7 +35,7 @@ var/const/GHOST_IMAGE_ALL = ~GHOST_IMAGE_NONE
 		ghost_sightless_images -= ghost_image
 		qdel(ghost_image)
 		ghost_image = null
-		updateallghostimages()
+		SSghost_images.queue_global_image_update()
 	. = ..()
 
 mob/observer/check_airflow_movable()
@@ -59,10 +59,6 @@ mob/observer/check_airflow_movable()
 /mob/observer/set_stat()
 	stat = DEAD // They are also always dead
 
-/proc/updateallghostimages()
-	for (var/mob/observer/ghost/O in GLOB.player_list)
-		O.updateghostimages()
-
 /mob/observer/touch_map_edge()
 	if(z in GLOB.using_map.sealed_levels)
 		return
@@ -83,6 +79,6 @@ mob/observer/check_airflow_movable()
 	if(T)
 		forceMove(T)
 		inertia_dir = 0
-		throwing = 0
+		throwing = null
 		to_chat(src, "<span class='notice'>You cannot move further in this direction.</span>")
 

@@ -1,10 +1,6 @@
 /datum
 	var/tmp/weakref/weakref
 
-/datum/Destroy()
-	weakref = null // Clear this reference to ensure it's kept for as brief duration as possible.
-	. = ..()
-
 //obtain a weak reference to a datum
 /proc/weakref(datum/D)
 	if(!istype(D))
@@ -32,6 +28,7 @@
 /weakref/Destroy()
 	// A weakref datum should not be manually destroyed as it is a shared resource,
 	//  rather it should be automatically collected by the BYOND GC when all references are gone.
+	SHOULD_CALL_PARENT(FALSE)
 	return QDEL_HINT_IWILLGC
 
 /weakref/proc/resolve()

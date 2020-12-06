@@ -8,6 +8,7 @@
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 	layer = TABLE_LAYER
 	throwpass = 1
+	mob_offset = 12
 	var/flipped = 0
 	var/maxhealth = 10
 	var/health = 10
@@ -94,9 +95,9 @@
 				to_chat(user, "<span class='warning'>It looks damaged!</span>")
 			if(0.5 to 1.0)
 				to_chat(user, "<span class='notice'>It has a few scrapes and dents.</span>")
-/obj/structure/table/attackby(obj/item/weapon/W, mob/user)
 
-	if(reinforced && istype(W, /obj/item/weapon/screwdriver))
+/obj/structure/table/attackby(obj/item/weapon/W, mob/user)
+	if(reinforced && isScrewdriver(W))
 		remove_reinforced(W, user)
 		if(!reinforced)
 			update_desc()
@@ -122,7 +123,7 @@
 			return 1
 		else
 			to_chat(user, "<span class='warning'>You don't have enough carpet!</span>")
-	if(!reinforced && !carpeted && material && istype(W, /obj/item/weapon/wrench))
+	if(!reinforced && !carpeted && material && isWrench(W) && user.a_intent == I_HURT) //robots dont have disarm so it's harm
 		remove_material(W, user)
 		if(!material)
 			update_connections(1)
@@ -133,7 +134,7 @@
 			update_material()
 		return 1
 
-	if(!carpeted && !reinforced && !material && istype(W, /obj/item/weapon/wrench))
+	if(!carpeted && !reinforced && !material && isWrench(W) && user.a_intent == I_HURT)
 		dismantle(W, user)
 		return 1
 
@@ -157,7 +158,10 @@
 			update_desc()
 			update_material()
 		return 1
-
+	if(istype(W, /obj/item/weapon/hand)) //playing cards
+		var/obj/item/weapon/hand/H = W
+		if(H.cards && H.cards.len == 1)
+			usr.visible_message("\The [user] plays \the [H.cards[1].name].")
 	return ..()
 
 /obj/structure/table/MouseDrop_T(obj/item/stack/material/what)
@@ -246,6 +250,7 @@
 	material = common_material_remove(user, material, 20, "plating", "bolts", 'sound/items/Ratchet.ogg')
 
 /obj/structure/table/proc/dismantle(obj/item/weapon/wrench/W, mob/user)
+	reset_mobs_offset()
 	if(manipulating) return
 	manipulating = 1
 	user.visible_message("<span class='notice'>\The [user] begins dismantling \the [src].</span>",
@@ -269,6 +274,7 @@
 // is to avoid filling the list with nulls, as place_shard won't place shards of certain materials (holo-wood, holo-steel)
 
 /obj/structure/table/proc/break_to_parts(full_return = 0)
+	reset_mobs_offset()
 	var/list/shards = list()
 	var/obj/item/weapon/material/shard/S = null
 	if(reinforced)
@@ -295,7 +301,8 @@
 	return shards
 
 /obj/structure/table/on_update_icon()
-	if(flipped != 1)
+	if(!flipped)
+		mob_offset = initial(mob_offset)
 		icon_state = "blank"
 		overlays.Cut()
 
@@ -327,6 +334,7 @@
 				I = image(icon, "carpet_[connections[i]]", dir = 1<<(i-1))
 				overlays += I
 	else
+		mob_offset = 0
 		overlays.Cut()
 		var/type = 0
 		var/tabledirs = 0

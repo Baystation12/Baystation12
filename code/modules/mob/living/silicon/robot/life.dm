@@ -59,7 +59,7 @@
 
 /mob/living/silicon/robot/proc/power_down()
 	if (has_power)
-		to_chat(src, "<span class='warning'>You are now running on emergency backup power.</span>")
+		visible_message("[src] beeps stridently as it begins to run on emergency backup power!", SPAN_WARNING("You beep stridently as you begin to run on emergency backup power!"))
 		has_power = 0
 		set_stat(UNCONSCIOUS)
 	if(lights_on) // Light is on but there is no power!
@@ -121,9 +121,9 @@
 
 	src.set_density(!src.lying)
 
-	if ((src.sdisabilities & BLIND))
+	if ((src.sdisabilities & BLINDED))
 		src.blinded = 1
-	if ((src.sdisabilities & DEAF))
+	if ((src.sdisabilities & DEAFENED))
 		src.ear_deaf = 1
 
 	if (src.eye_blurry > 0)
@@ -135,7 +135,7 @@
 		src.druggy = max(0, src.druggy)
 
 	//update the state of modules and components here
-	if (src.stat != 0)
+	if (src.stat != CONSCIOUS)
 		uneq_all()
 
 	if(silicon_radio)
@@ -144,7 +144,7 @@
 		else
 			silicon_radio.on = 1
 
-	if(is_component_functioning("camera"))
+	if(isnull(components["camera"]) || is_component_functioning("camera"))
 		src.blinded = 0
 	else
 		src.blinded = 1
@@ -234,9 +234,23 @@
 			else
 				src.bodytemp.icon_state = "temp-2"
 
-//Oxygen and fire does nothing yet!!
-//	if (src.oxygen) src.oxygen.icon_state = "oxy[src.oxygen_alert ? 1 : 0]"
-//	if (src.fire) src.fire.icon_state = "fire[src.fire_alert ? 1 : 0]"
+	var/datum/gas_mixture/environment = loc?.return_air()
+	if(fire && environment)
+		switch(environment.temperature)
+			if(-INFINITY to T100C)
+				src.fire.icon_state = "fire0"
+			else
+				src.fire.icon_state = "fire1"
+	if(oxygen && environment)
+		var/datum/species/species = all_species[SPECIES_HUMAN]
+		if(environment.gas[species.breath_type] >= species.breath_pressure)
+			src.oxygen.icon_state = "oxy0"
+			for(var/gas in species.poison_types)
+				if(environment.gas[gas])
+					src.oxygen.icon_state = "oxy1"
+					break
+		else
+			src.oxygen.icon_state = "oxy1"
 
 	if(stat != DEAD)
 		if(blinded)

@@ -55,22 +55,21 @@
 		return
 	return ..()
 
-/obj/machinery/power/supply_beacon/attack_hand(var/mob/user)
-
+/obj/machinery/power/supply_beacon/physical_attack_hand(var/mob/user)
 	if(expended)
 		update_use_power(POWER_USE_OFF)
 		to_chat(user, "<span class='warning'>\The [src] has used up its charge.</span>")
-		return
+		return TRUE
 
 	if(anchored)
-		return use_power ? deactivate(user) : activate(user)
+		if(use_power)
+			deactivate(user)
+		else
+			activate(user)
+		return TRUE
 	else
 		to_chat(user, "<span class='warning'>You need to secure the beacon with a wrench first!</span>")
-		return
-
-/obj/machinery/power/supply_beacon/attack_ai(var/mob/user)
-	if(user.Adjacent(src))
-		attack_hand(user)
+		return TRUE
 
 /obj/machinery/power/supply_beacon/proc/activate(var/mob/user)
 	if(expended)

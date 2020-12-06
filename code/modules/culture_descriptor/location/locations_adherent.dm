@@ -5,9 +5,6 @@
 		of the dead planet. To the Vigil, Canon is a shrine to their lost gods, untouchable and revered. Adherents stationed around Canon work \
 		directly under Core Traffic Control, carrying out tasks vital to the continued functioning of the Vigil as a whole. They are likely highly \
 		loyal and very traditionalist by comparison to their peers."
-	language = LANGUAGE_ADHERENT
-	additional_langs = null
-	secondary_langs = null
 	distance = "Unknown, more than 50 light years"
 	ruling_body = "Core System Traffic Control Hub 37-Q"
 

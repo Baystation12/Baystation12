@@ -1,6 +1,6 @@
 #include "mobius_rift_areas.dm"
 
-/obj/effect/overmap/sector/mobius_rift
+/obj/effect/overmap/visitable/sector/mobius_rift
 	name = "unusual asteroid"
 	desc = "Sensors error: ERROR #E0x003141592: recursive stack overflow for CALCULATE_APPROXIMATE_SIZE()."
 	icon_state = "object"
@@ -12,6 +12,10 @@
 	description = "Non-euclidian mess."
 	suffixes = list("mobius_rift/mobius_rift.dmm")
 	cost = 1
+	area_usage_test_exempted_root_areas = list(/area/mobius_rift)
+	apc_test_exempt_areas = list(
+		/area/mobius_rift = NO_SCRUBBER|NO_VENT|NO_APC
+	)
 
 /obj/effect/step_trigger/mobius_rift/seamless_portal
 	var/obj/effect/step_trigger/mobius_rift/seamless_portal/dest

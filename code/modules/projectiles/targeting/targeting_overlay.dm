@@ -6,7 +6,6 @@
 	anchored = 1
 	density = 0
 	opacity = 0
-	plane = ABOVE_HUMAN_PLANE
 	layer = ABOVE_HUMAN_LAYER
 	simulated = 0
 	mouse_opacity = 0
@@ -17,7 +16,7 @@
 	var/locked =    0          // Have we locked on?
 	var/lock_time = 0          // When -will- we lock on?
 	var/active =    0          // Is our owner intending to take hostages?
-	var/target_permissions = TARGET_CAN_RADIO // Permission bitflags.
+	var/target_permissions = TARGET_CAN_MOVE | TARGET_CAN_CLICK | TARGET_CAN_RADIO	// Permission bitflags.
 
 /obj/aiming_overlay/New(var/newowner)
 	..()
@@ -137,7 +136,7 @@ obj/aiming_overlay/proc/update_aiming_deferred()
 
 /obj/aiming_overlay/proc/aim_at(var/mob/target, var/obj/thing)
 
-	if(!owner)
+	if(!owner || !isliving(target))
 		return
 
 	if(owner.incapacitated())
@@ -164,7 +163,8 @@ obj/aiming_overlay/proc/update_aiming_deferred()
 	aiming_with = thing
 	aiming_at = target
 	if(istype(aiming_with, /obj/item/weapon/gun))
-		playsound(get_turf(owner), 'sound/weapons/TargetOn.ogg', 50,1)
+		sound_to(aiming_at, sound('sound/weapons/TargetOn.ogg'))
+		sound_to(owner, sound('sound/weapons/TargetOn.ogg'))
 
 	forceMove(get_turf(target))
 	START_PROCESSING(SSobj, src)
@@ -208,7 +208,8 @@ obj/aiming_overlay/proc/update_aiming_deferred()
 	if(!aiming_with || !aiming_at)
 		return
 	if(istype(aiming_with, /obj/item/weapon/gun))
-		playsound(get_turf(owner), 'sound/weapons/TargetOff.ogg', 50,1)
+		sound_to(aiming_at, sound('sound/weapons/TargetOff.ogg'))
+		sound_to(owner, sound('sound/weapons/TargetOff.ogg'))
 	if(!no_message)
 		owner.visible_message("<span class='notice'>\The [owner] lowers \the [aiming_with].</span>")
 

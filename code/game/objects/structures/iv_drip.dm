@@ -143,10 +143,10 @@
 	if(!attached)
 		return
 		
-	if(!usr.Adjacent(attached))
-		to_chat(usr, "<span class='warning'>You are too far away from the [attached]!</span>")
+	if(!CanPhysicallyInteractWith(usr, src))
+		to_chat(usr, SPAN_NOTICE("You're in no condition to do that!"))
 		return
-		
+
 	if(!usr.skill_check(SKILL_MEDICAL, SKILL_BASIC))
 		rip_out()
 	else
@@ -166,10 +166,10 @@
 	mode = !mode
 	to_chat(usr, "The IV drip is now [mode ? "injecting" : "taking blood"].")
 
-/obj/structure/iv_drip/examine(mob/user)
-	. = ..(user)
+/obj/structure/iv_drip/examine(mob/user, distance)
+	. = ..()
 
-	if (get_dist(src, user) > 2) 
+	if (distance >= 2) 
 		return
 
 	to_chat(user, "The IV drip is [mode ? "injecting" : "taking blood"].")

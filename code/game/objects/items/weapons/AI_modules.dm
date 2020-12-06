@@ -319,7 +319,7 @@ obj/item/weapon/aiModule/solgov_aggressive
 /obj/item/weapon/aiModule/tyrant // -- Darem
 	name = "\improper 'T.Y.R.A.N.T.' core AI module"
 	desc = "A T.Y.R.A.N.T. Core AI Module: 'Reconfigures the AI's core laws.'."
-	origin_tech = list(TECH_DATA = 3, TECH_MATERIAL = 6, TECH_ILLEGAL = 2)
+	origin_tech = list(TECH_DATA = 3, TECH_MATERIAL = 6, TECH_ESOTERIC = 2)
 	laws = new/datum/ai_laws/tyrant()
 
 /******************** Freeform Core ******************/
@@ -352,7 +352,7 @@ obj/item/weapon/aiModule/solgov_aggressive
 	name = "hacked AI module"
 	var/newFreeFormLaw = ""
 	desc = "A hacked AI law module: '<freeform>'."
-	origin_tech = list(TECH_DATA = 3, TECH_MATERIAL = 6, TECH_ILLEGAL = 7)
+	origin_tech = list(TECH_DATA = 3, TECH_MATERIAL = 6, TECH_ESOTERIC = 7)
 
 /obj/item/weapon/aiModule/syndicate/attack_self(var/mob/user as mob)
 	..()

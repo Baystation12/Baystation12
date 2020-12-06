@@ -20,7 +20,7 @@
 		A = D
 		if(A.icon && A.icon_state)
 			sprite = icon(A.icon, A.icon_state)
-			usr << browse_rsc(sprite, "view_vars_sprite.png")
+			send_rsc(usr, sprite, "view_vars_sprite.png")
 
 	send_rsc(usr,'code/js/view_variables.js', "view_variables.js")
 
@@ -98,7 +98,7 @@
 		</html>
 		"}
 
-	usr << browse(html, "window=variables\ref[D];size=475x650")
+	show_browser(usr, html, "window=variables\ref[D];size=475x650")
 
 /client
 	var/list/watched_variables = list()

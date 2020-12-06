@@ -7,7 +7,7 @@
 /mob/living/simple_animal/hostile/giant_spider
 	name = "giant spider"
 	desc = "A monstrously huge green spider with shimmering eyes."
-	icon = 'icons/mob/spider.dmi'
+	icon = 'icons/mob/simple_animal/spider.dmi'
 	icon_state = "green"
 	icon_living = "green"
 	icon_dead = "green_dead"
@@ -17,33 +17,42 @@
 	speak_chance = 5
 	turns_per_move = 5
 	see_in_dark = 10
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/spider
-	meat_amount = 3
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "pokes"
 	maxHealth = 125
 	health = 125
-	melee_damage_lower = 8
+	melee_damage_lower = 10
 	melee_damage_upper = 15
+	melee_damage_flags = DAM_SHARP
 	heat_damage_per_tick = 20
 	cold_damage_per_tick = 20
 	faction = "spiders"
 	pass_flags = PASS_FLAG_TABLE
 	move_to_delay = 3
 	speed = 1
-	max_gas = list("phoron" = 1, "carbon_dioxide" = 5, "methyl_bromide" = 1)
+	max_gas = list(GAS_PHORON = 1, GAS_CO2 = 5, GAS_METHYL_BROMIDE = 1)
 	bleed_colour = "#0d5a71"
 	break_stuff_probability = 25
 	pry_time = 8 SECONDS
 	pry_desc = "clawing"
 
-	var/poison_per_bite = 8
+	meat_type = /obj/item/weapon/reagent_containers/food/snacks/spider
+	meat_amount = 3
+	bone_material = null
+	bone_amount =   0
+	skin_material = MATERIAL_SKIN_CHITIN
+	skin_amount =   5
+
+	var/poison_per_bite = 6
 	var/poison_type = /datum/reagent/toxin/venom
 	var/busy = 0
 	var/eye_colour
 	var/allowed_eye_colours = list(COLOR_RED, COLOR_ORANGE, COLOR_YELLOW, COLOR_LIME, COLOR_DEEP_SKY_BLUE, COLOR_INDIGO, COLOR_VIOLET, COLOR_PINK)
 	var/hunt_chance = 1 //percentage chance the mob will run to a random nearby tile
+
+/mob/living/simple_animal/hostile/giant_spider/can_do_maneuver(var/decl/maneuver/maneuver, var/silent = FALSE)
+	. = ..() && can_act()
 
 //guards - less venomous, tanky, slower, prioritises protecting nurses
 /mob/living/simple_animal/hostile/giant_spider/guard
@@ -54,13 +63,13 @@
 	meat_amount = 4
 	maxHealth = 200
 	health = 200
-	melee_damage_lower = 10
-	melee_damage_upper = 15
+	melee_damage_lower = 13
+	melee_damage_upper = 18
 	poison_per_bite = 5
 	speed = 2
 	move_to_delay = 4
 	break_stuff_probability = 15
-	pry_time = 7 SECONDS
+	pry_time = 6 SECONDS
 
 	var/vengance
 	var/berserking
@@ -74,8 +83,8 @@
 	icon_dead = "beige_dead"
 	maxHealth = 80
 	health = 80
-	melee_damage_lower = 8
-	melee_damage_upper = 12
+	melee_damage_lower = 10
+	melee_damage_upper = 14
 	harm_intent_damage = 6 //soft
 	poison_per_bite = 5
 	speed = 0
@@ -101,21 +110,21 @@
 	icon_dead = "black_dead"
 	maxHealth = 150
 	health = 150
-	melee_damage_lower = 15
-	melee_damage_upper = 15
+	melee_damage_lower = 17
+	melee_damage_upper = 20
 	poison_per_bite = 10
 	speed = -1
 	move_to_delay = 2
 	break_stuff_probability = 30
 	hunt_chance = 25
 	can_escape = TRUE
-	pry_time = 6 SECONDS
+	pry_time = 5 SECONDS
 	flash_vulnerability = 2 //sensitive eyes for stalking prey
 	does_spin = FALSE
+	available_maneuvers = list(/decl/maneuver/leap/spider)
+	ability_cooldown = 3 MINUTES
 
 	var/leap_range = 5
-	var/last_leapt
-	var/leap_cooldown = 5 MINUTES
 
 //spitters - fast, comparatively weak, very venomous; projectile attacks but will resort to melee once out of ammo
 /mob/living/simple_animal/hostile/giant_spider/spitter
@@ -125,15 +134,15 @@
 	icon_dead = "purple_dead"
 	maxHealth = 90
 	health = 90
-	melee_damage_lower = 8
-	melee_damage_upper = 12
+	melee_damage_lower = 10
+	melee_damage_upper = 14
 	poison_per_bite = 15
 	ranged = TRUE
 	move_to_delay = 2
 	projectiletype = /obj/item/projectile/venom
 	projectilesound = 'sound/effects/hypospray.ogg'
 	fire_desc = "spits venom"
-	ranged_range = 5
+	ranged_range = 6
 	pry_time = 7 SECONDS
 	flash_vulnerability = 2
 
@@ -149,7 +158,7 @@
 /mob/living/simple_animal/hostile/giant_spider/proc/spider_randomify() //random math nonsense to get their damage, health and venomness values
 	melee_damage_lower = rand(0.8 * initial(melee_damage_lower), initial(melee_damage_lower))
 	melee_damage_upper = rand(initial(melee_damage_upper), (1.2 * initial(melee_damage_upper)))
-	maxHealth = rand(initial(maxHealth), (1.3 * initial(maxHealth)))
+	maxHealth = rand(initial(maxHealth), (1.4 * initial(maxHealth)))
 	health = maxHealth
 	eye_colour = pick(allowed_eye_colours)
 	if(eye_colour)
@@ -181,6 +190,11 @@
 	if(isliving(.))
 		if(health < maxHealth)
 			health += (0.2 * rand(melee_damage_lower, melee_damage_upper)) //heal a bit on hit
+		if(ishuman(.))
+			var/mob/living/carbon/human/H = .
+			var/obj/item/clothing/suit/space/S = H.get_covering_equipped_item_by_zone(BP_CHEST)
+			if(istype(S) && !length(S.breaches))
+				return
 		var/mob/living/L = .
 		if(L.reagents)
 			L.reagents.add_reagent(poison_type, rand(0.5 * poison_per_bite, poison_per_bite))
@@ -412,42 +426,33 @@ Nurse caste procs
 Hunter caste procs
 *****************/
 /mob/living/simple_animal/hostile/giant_spider/hunter/MoveToTarget()
-	if(!can_act())
+	if(!can_act() || perform_maneuver(/decl/maneuver/leap/spider, target_mob))
 		return
-	var/mob/living/target = target_mob
-	if(can_leap(target))
-		prepare_leap(target)
-		last_leapt = world.time + leap_cooldown
 	..()
 
-/mob/living/simple_animal/hostile/giant_spider/hunter/proc/can_leap(mob/living/target)
-	if(!can_act() || last_leapt > world.time || !isliving(target) || (get_dist(src, target) <= 3))
+/mob/living/simple_animal/hostile/giant_spider/hunter/get_jump_distance()
+	return leap_range
+
+/mob/living/simple_animal/hostile/giant_spider/hunter/perform_maneuver(var/maneuver, var/atom/target)
+	if(!isliving(target) || get_dist(src, target) <= 3)
 		return FALSE
-	if(get_dist(src, target) <= leap_range)
-		return TRUE
-
-/mob/living/simple_animal/hostile/giant_spider/hunter/proc/prepare_leap(mob/living/target)
-	face_atom(target)
 	walk(src,0)
-	stop_automation = TRUE
-	visible_message("<span class='warning'>\The [src] reels back and prepares to launch itself at \the [target]!</span>")
-	addtimer(CALLBACK(src, .proc/leap, target), 2 SECONDS)
-
-/mob/living/simple_animal/hostile/giant_spider/hunter/proc/leap(mob/living/target)
-	visible_message("<span class='danger'>\The [src] springs forward towards \the [target]!</span>")
-	throw_at(get_step(get_turf(target),get_turf(src)), leap_range, 1, src)
-	addtimer(CALLBACK(src, .proc/resolve_leap, target), 5)
-
-/mob/living/simple_animal/hostile/giant_spider/hunter/proc/resolve_leap(mob/living/target)
-	if(Adjacent(target))
-		visible_message("<span class='danger'>\The [src] slams into \the [target], knocking them over!</span>")
+	var/first_stop_automation
+	if(stop_automation)
+		first_stop_automation = stop_automation
+		stop_automation = TRUE
+	. = ..()
+	if(!isnull(first_stop_automation))
+		stop_automation = first_stop_automation
+	
+/mob/living/simple_animal/hostile/giant_spider/hunter/throw_impact(atom/hit_atom)
+	if(isliving(hit_atom))
+		var/mob/living/target = hit_atom
+		stop_automation = FALSE
+		visible_message(SPAN_DANGER("\The [src] slams into \the [target], knocking them over!"))
 		target.Weaken(1)
-		stop_automation = FALSE
 		MoveToTarget()
-	else
-		visible_message("<span class='warning'>\The [src] misses its quarry and gets staggered!</span>")
-		stop_automation = FALSE
-		Stun(3) //we missed!
+	. = ..()
 
 /******************
 Spitter caste procs

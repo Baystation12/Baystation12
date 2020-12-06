@@ -29,6 +29,11 @@
 
 /datum/goal/achievement/specific_object/food/New()
 	possible_objects = subtypesof(/obj/item/weapon/reagent_containers/food/snacks)
+	blacklisted_objects = list(
+		/obj/item/weapon/reagent_containers/food/snacks/meat/corgi,
+		/obj/item/weapon/reagent_containers/food/snacks/meat/human,
+		/obj/item/weapon/reagent_containers/food/snacks/meat/monkey
+	)
 	..()
 
 /datum/goal/achievement/specific_object/food/update_strings()

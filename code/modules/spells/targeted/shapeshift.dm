@@ -53,7 +53,7 @@
 		new /obj/effect/temporary(get_turf(M), 5, 'icons/effects/effects.dmi', "summoning")
 
 		M.forceMove(trans) //move inside the new dude to hide him.
-		M.status_flags |= GODMODE //dont want him to die or breathe or do ANYTHING
+		M.status_flags |= GODMODE //don't want him to die or breathe or do ANYTHING
 		transformed_dudes[trans] = M
 		GLOB.death_event.register(trans,src,/spell/targeted/shapeshift/proc/stop_transformation)
 		GLOB.destroyed_event.register(trans,src,/spell/targeted/shapeshift/proc/stop_transformation)
@@ -128,7 +128,7 @@
 	name = "Polymorph"
 	desc = "This spell transforms the wizard into the common parrot."
 	feedback = "AV"
-	possible_transformations = list(/mob/living/simple_animal/parrot)
+	possible_transformations = list(/mob/living/simple_animal/hostile/retaliate/parrot)
 
 	drop_items = 0
 	share_damage = 0

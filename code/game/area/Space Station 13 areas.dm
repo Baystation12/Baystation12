@@ -24,7 +24,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	name = "Unknown"
 	icon = 'icons/turf/areas.dmi'
 	icon_state = "unknown"
-	plane = BASE_PLANE
+	plane = DEFAULT_PLANE
 	layer = BASE_AREA_LAYER
 	luminosity = 0
 	mouse_opacity = 0
@@ -56,6 +56,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	var/list/forced_ambience = null
 	var/sound_env = STANDARD_STATION
 	var/turf/base_turf //The base turf type of the area, which can be used to override the z-level's base turf
+	var/planetary_surface = FALSE // true if the area belongs to a planet.
 
 /*-----------------------------------------------------------------------------*/
 
@@ -74,7 +75,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	power_environ = 0
 	has_gravity = 0
 	area_flags = AREA_FLAG_EXTERNAL | AREA_FLAG_IS_NOT_PERSISTENT
-	ambience = list('sound/ambience/ambispace.ogg','sound/music/title2.ogg','sound/music/space.ogg','sound/music/main.ogg','sound/music/traitor.ogg')
+	ambience = list('sound/ambience/ambispace1.ogg','sound/ambience/ambispace2.ogg','sound/ambience/ambispace3.ogg','sound/ambience/ambispace4.ogg','sound/ambience/ambispace5.ogg')
 	secure = FALSE
 
 area/space/atmosalert()
@@ -118,16 +119,6 @@ area/space/atmosalert()
 
 /area/medical
 	req_access = list(access_medical)
-
-/area/medical/virology
-	name = "\improper Virology"
-	icon_state = "virology"
-	req_access = list(access_virology)
-
-/area/medical/virologyaccess
-	name = "\improper Virology Access"
-	icon_state = "virology"
-	req_access = list() // This is like the lobby, needs low access to allow passing through in a different direction.
 
 /area/security
 	req_access = list(access_sec_doors)
@@ -173,6 +164,7 @@ area/space/atmosalert()
 /area/shuttle/specops/centcom
 	icon_state = "shuttlered"
 	req_access = list(access_cent_specops)
+	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
 
 /area/shuttle/syndicate_elite/mothership
 	icon_state = "shuttlered"
@@ -182,17 +174,12 @@ area/space/atmosalert()
 	icon_state = "shuttlered2"
 	req_access = list(access_syndicate)
 
-/area/skipjack_station/start
-	name = "\improper Skipjack"
-	icon_state = "yellow"
-	req_access = list(access_syndicate)
-
 /area/supply
 	name = "Supply Shuttle"
 	icon_state = "shuttle3"
 	req_access = list(access_cargo)
 
-/area/syndicate_mothership/elite_squad
+/area/syndicate_elite_squad
 	name = "\improper Elite Mercenary Squad"
 	icon_state = "syndie-elite"
 	req_access = list(access_syndicate)
@@ -211,13 +198,6 @@ area/space/atmosalert()
 /*
 * Special Areas
 */
-/area/wizard_station
-	name = "\improper Wizard's Den"
-	icon_state = "yellow"
-	requires_power = 0
-	dynamic_lighting = 0
-	req_access = list(access_syndicate)
-
 /area/beach
 	name = "Keelin's private beach"
 	icon_state = "null"
@@ -240,6 +220,7 @@ area/space/atmosalert()
 	process()
 
 /area/beach/Entered(atom/movable/Obj,atom/OldLoc)
+	. = ..()
 	if(ismob(Obj))
 		var/mob/M = Obj
 		if(M.client)

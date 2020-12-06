@@ -1,4 +1,4 @@
-<!-- 
+<!--
 Title: Basic Radio UI
 Used In File(s): /code/game/objects/item/devices/radio/radio.dm
 -->
@@ -16,6 +16,15 @@ Used In File(s): /code/game/objects/item/devices/radio/radio.dm
 		.sciradio				{color: #993399;}
 		.supradio				{color: #7F6539;}
 		.srvradio				{color: #6eaa2c;}
+		.seciradio				{color: #935050;}
+		.mediradio				{color: #509190;}
+
+		.hailradio				{color: #cc00aa;}
+		.exampleradio			{color: #FF00FF;}
+		.voxradio				{color: #f32b06;}
+		.bearcatradio			{color: #590e2d;}
+		.colonyradio			{color: #ceaf3e;}
+		.verneradio				{color: #738465;}
 	</style>
 </head>
 
@@ -23,6 +32,18 @@ Used In File(s): /code/game/objects/item/devices/radio/radio.dm
 
 {{if data.useSyndMode}}
 	{{:helper.syndicateMode()}}
+{{/if}}
+
+{{if data.charge}}
+	<div class="item">
+		<div class="itemLabelWide">
+			Power
+		</div>
+		<div class="itemContentMedium">
+			{{:helper.link('On', null, {'power' : 0}, data.power ? 'selected' : null)}}
+			{{:helper.link('Off', null, {'power' : 1}, data.power ? null : 'selected')}}
+		</div>
+	</div>
 {{/if}}
 
 <div class="item">
@@ -66,7 +87,7 @@ Used In File(s): /code/game/objects/item/devices/radio/radio.dm
 		</div>
 	</div>
 {{/if}}
-		
+
 {{if data.has_loudspeaker}}
 	<div class="item">
 		<div class="itemLabelWide">
@@ -100,6 +121,9 @@ Used In File(s): /code/game/objects/item/devices/radio/radio.dm
 		{{:helper.link('-', null, {'freq' : -2})}}
 		{{:helper.link('+', null, {'freq' : 2})}}
 		{{:helper.link('++', null, {'freq' : 10})}}
+		{{if data.default_freq}}
+			{{:helper.link(data.default_freq, null, {'default_freq' : 1})}}
+		{{/if}}
 	</div>
 </div>
 

@@ -107,7 +107,7 @@ AngleToHue(hue)
 	Converts an angle to a hue in the valid range.
 RotateHue(hsv, angle)
 	Takes an HSV or HSVA value and rotates the hue forward through red, green, and blue by an angle from 0 to 360.
-	(Rotating red by 60° produces yellow.) The result is another HSV or HSVA color with the same saturation and value
+	(Rotating red by 60 degrees produces yellow.) The result is another HSV or HSVA color with the same saturation and value
 	as the original, but a different hue.
 GrayScale(rgb)
 	Takes an RGB or RGBA color and converts it to grayscale. Returns an RGB or RGBA string.
@@ -161,9 +161,9 @@ mob
 			// Give it a name for the cache
 			var/iconName = "[ckey(src.name)]_flattened.dmi"
 			// Send the icon to src's local cache
-			src<<browse_rsc(getFlatIcon(src), iconName)
+			send_rsc(src, getFlatIcon(src), iconName)
 			// Display the icon in their browser
-			src<<browse("<body bgcolor='#000000'><p><img src='[iconName]'></p></body>")
+			show_browser(src, "<body bgcolor='#000000'><p><img src='[iconName]'></p></body>", null)
 
 		Output_Icon()
 			set name = "2. Output Icon"
@@ -176,7 +176,7 @@ mob
 			// Copy the file to the rsc manually
 			var/icon/I = fcopy_rsc(getFlatIcon(src))
 			// Send the icon to src's local cache
-			src<<browse_rsc(I, iconName)
+			send_rsc(src, I, iconName)
 			// Update the label to show it
 			winset(src,"imageLabel","image='\ref[I]'");
 
@@ -730,9 +730,15 @@ proc // Creates a single icon from a given /atom or /image.  Only the first argu
 		var/icon/add // Icon of overlay being added
 
 			// Current dimensions of flattened icon
-		var/{flatX1=1;flatX2=flat.Width();flatY1=1;flatY2=flat.Height()}
+		var/flatX1=1
+		var/flatX2=flat.Width()
+		var/flatY1=1
+		var/flatY2=flat.Height()
 			// Dimensions of overlay being added
-		var/{addX1;addX2;addY1;addY2}
+		var/addX1
+		var/addX2
+		var/addY1
+		var/addY2
 
 		for(var/I in layers)
 
@@ -761,7 +767,7 @@ proc // Creates a single icon from a given /atom or /image.  Only the first argu
 						// Pull the default direction.
 						add = icon(I:icon, I:icon_state)
 			else // 'I' is an appearance object.
-				if(istype(A,/obj/machinery/atmospherics) && I in A.underlays)
+				if(istype(A,/obj/machinery/atmospherics) && (I in A.underlays))
 					var/image/Im = I
 					add = getFlatIcon(new/image(I), Im.dir, curicon, curstate, curblend, 1)
 				else
@@ -920,4 +926,3 @@ proc/generate_image(var/tx as num, var/ty as num, var/tz as num, var/range as nu
 				cap.Blend(img, blendMode2iconMode(A.blend_mode),  A.pixel_x + xoff, A.pixel_y + yoff)
 
 	return cap
-

@@ -27,7 +27,8 @@
 		/datum/reagent/nutriment/cornoil = /obj/item/weapon/reagent_containers/food/condiment/cornoil,
 		/datum/reagent/sugar = /obj/item/weapon/reagent_containers/food/condiment/sugar,
 		/datum/reagent/nutriment/mayo = /obj/item/weapon/reagent_containers/food/condiment/mayo,
-		/datum/reagent/nutriment/vinegar = /obj/item/weapon/reagent_containers/food/condiment/vinegar
+		/datum/reagent/nutriment/vinegar = /obj/item/weapon/reagent_containers/food/condiment/vinegar,
+		/datum/reagent/oliveoil = /obj/item/weapon/reagent_containers/food/condiment/small/oliveoil
 		)
 
 /obj/item/weapon/reagent_containers/food/condiment/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
@@ -187,7 +188,7 @@
 
 /obj/item/weapon/reagent_containers/food/condiment/small/sugar
 	name = "sugar"
-	desc = "Sweetness in a bottle"
+	desc = "Sweetness in a bottle."
 	icon_state = "sugarsmall"
 	center_of_mass = "x=17;y=9"
 	starting_reagents = list(/datum/reagent/sugar = 20)
@@ -256,14 +257,14 @@
 	starting_reagents = list(/datum/reagent/nutriment/soysauce = 5)
 
 /obj/item/weapon/reagent_containers/food/condiment/small/packet/coffee
-	name = "coffee powder packet"
-	desc = "Contains 5u of coffee powder. Mix with 25u of water and heat."
-	starting_reagents = list(/datum/reagent/nutriment/coffee = 5)
+	name = "instant coffee powder packet"
+	desc = "Contains 5u of instant coffee powder. Mix with 25u of water."
+	starting_reagents = list(/datum/reagent/nutriment/coffee/instant = 5)
 
 /obj/item/weapon/reagent_containers/food/condiment/small/packet/tea
-	name = "tea powder packet"
-	desc = "Contains 5u of black tea powder. Mix with 25u of water and heat."
-	starting_reagents = list(/datum/reagent/nutriment/tea = 5)
+	name = "instant tea powder packet"
+	desc = "Contains 5u of instant black tea powder. Mix with 25u of water."
+	starting_reagents = list(/datum/reagent/nutriment/tea/instant = 5)
 
 /obj/item/weapon/reagent_containers/food/condiment/small/packet/cocoa
 	name = "cocoa powder packet"
@@ -362,3 +363,10 @@
 	amount_per_transfer_from_this = 1
 	volume = 20
 	starting_reagents = list(/datum/reagent/nutriment/soysauce = 20)
+
+/obj/item/weapon/reagent_containers/food/condiment/small/oliveoil
+	name = "olive oil"
+	desc = "Used in food preparation and flavoring."
+	icon_state = "oliveoilsmall"
+	center_of_mass = "x=16;y=8"
+	starting_reagents = list(/datum/reagent/oliveoil = 20)

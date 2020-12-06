@@ -20,7 +20,6 @@
 	var/treatment_oxy = /datum/reagent/tricordrazine
 	var/treatment_fire = /datum/reagent/tricordrazine
 	var/treatment_tox = /datum/reagent/tricordrazine
-	var/treatment_virus = /datum/reagent/spaceacillin
 	var/treatment_emag = /datum/reagent/toxin
 	var/declare_treatment = 0 //When attempting to treat a patient, should it notify everyone wearing medhuds?
 
@@ -76,7 +75,7 @@
 		broadcast_medical_hud_message("[src] is treating <b>[H]</b> in <b>[location]</b>", src)
 	busy = 1
 	update_icons()
-	if(do_mob(src, H, 30))
+	if(do_after(src, 3 SECONDS, H))
 		if(t == 1)
 			reagent_glass.reagents.trans_to_mob(H, injection_amount, CHEM_BLOOD)
 		else
@@ -207,7 +206,7 @@
 
 	new /obj/item/weapon/storage/firstaid(Tsec)
 	new /obj/item/device/assembly/prox_sensor(Tsec)
-	new /obj/item/device/healthanalyzer(Tsec)
+	new /obj/item/device/scanner/health(Tsec)
 	if (prob(50))
 		new /obj/item/robot_parts/l_arm(Tsec)
 
@@ -249,67 +248,3 @@
 
 	if((H.getToxLoss() >= heal_threshold) && (!H.reagents.has_reagent(treatment_tox)))
 		return treatment_tox
-
-/* Construction */
-
-/obj/item/weapon/storage/firstaid/attackby(var/obj/item/robot_parts/S, mob/user as mob)
-	if ((!istype(S, /obj/item/robot_parts/l_arm)) && (!istype(S, /obj/item/robot_parts/r_arm)))
-		..()
-		return
-
-	if(contents.len >= 1)
-		to_chat(user, "<span class='notice'>You need to empty [src] out first.</span>")
-		return
-
-	var/obj/item/weapon/firstaid_arm_assembly/A = new /obj/item/weapon/firstaid_arm_assembly
-
-	A.skin = icon_state
-	qdel(S)
-	user.put_in_hands(A)
-	to_chat(user, "<span class='notice'>You add the robot arm to the first aid kit.</span>")
-	qdel(src)
-
-/obj/item/weapon/firstaid_arm_assembly
-	name = "first aid/robot arm assembly"
-	desc = "A first aid kit with a robot arm permanently grafted to it."
-	icon = 'icons/mob/bot/medibot.dmi'
-	icon_state = "firstaid_arm"
-	var/build_step = 0
-	var/created_name = "Medibot" //To preserve the name if it's a unique medbot I guess
-	var/skin = null //Same as medbot, set to tox or ointment for the respective kits.
-	w_class = ITEM_SIZE_NORMAL
-
-/obj/item/weapon/firstaid_arm_assembly/Initialize()
-	. = ..()
-	if(skin != "firstaid")//Let's not add any unnecessary overlays.
-		overlays += image('icons/mob/bot/medibot_skins.dmi', "kit_skin_[src.skin]")
-
-/obj/item/weapon/firstaid_arm_assembly/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	..()
-	if(istype(W, /obj/item/weapon/pen))
-		var/t = sanitizeSafe(input(user, "Enter new robot name", name, created_name), MAX_NAME_LEN)
-		if(!t)
-			return
-		if(!in_range(src, usr) && loc != usr)
-			return
-		created_name = t
-	else
-		switch(build_step)
-			if(0)
-				if(istype(W, /obj/item/device/healthanalyzer))
-					qdel(W)
-					build_step++
-					to_chat(user, "<span class='notice'>You add the health sensor to [src].</span>")
-					SetName("First aid/robot arm/health analyzer assembly")
-					overlays += image('icons/mob/bot/medibot.dmi', "na_scanner")
-
-			if(1)
-				if(isprox(W))
-					qdel(W)
-					to_chat(user, "<span class='notice'>You complete the Medibot! Beep boop.</span>")
-					var/turf/T = get_turf(src)
-					var/mob/living/bot/medbot/S = new /mob/living/bot/medbot(T)
-					S.skin = skin
-					S.SetName(created_name)
-					S.update_icons() // apply the skin
-					qdel(src)

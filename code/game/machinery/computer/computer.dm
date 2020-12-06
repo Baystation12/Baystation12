@@ -6,7 +6,10 @@
 	anchored = 1.0
 	idle_power_usage = 300
 	active_power_usage = 300
-	var/circuit = null //The path to the circuit board type. If circuit==null, the computer can't be disassembled.
+	construct_state = /decl/machine_construction/default/panel_closed/computer
+	uncreated_component_parts = null
+	stat_immune = 0
+	frame_type = /obj/machinery/constructable_frame/computerframe/deconstruct
 	var/processing = 0
 
 	var/icon_keyboard = "generic_key"
@@ -24,7 +27,6 @@
 
 /obj/machinery/computer/Initialize()
 	. = ..()
-	power_change()
 	update_icon()
 
 /obj/machinery/computer/emp_act(severity)
@@ -57,6 +59,21 @@
 
 /obj/machinery/computer/on_update_icon()
 	overlays.Cut()
+	icon = initial(icon)
+	icon_state = initial(icon_state)
+
+	if(reason_broken & MACHINE_BROKEN_NO_PARTS)
+		set_light(0)
+		icon = 'icons/obj/computer.dmi'
+		icon_state = "wired"
+		var/screen = get_component_of_type(/obj/item/weapon/stock_parts/console_screen)
+		var/keyboard = get_component_of_type(/obj/item/weapon/stock_parts/keyboard)
+		if(screen)
+			overlays += "comp_screen"
+		if(keyboard)
+			overlays += icon_keyboard ? "[icon_keyboard]_off" : "keyboard"
+		return
+
 	if(stat & NOPOWER)
 		set_light(0)
 		if(icon_keyboard)
@@ -68,8 +85,14 @@
 	if(stat & BROKEN)
 		overlays += image(icon,"[icon_state]_broken", overlay_layer)
 	else
-		overlays += image(icon,icon_screen, overlay_layer)
+		overlays += get_screen_overlay()
 
+	overlays += get_keyboard_overlay()
+
+/obj/machinery/computer/proc/get_screen_overlay()
+	return image(icon,icon_screen, overlay_layer)
+
+/obj/machinery/computer/proc/get_keyboard_overlay()
 	if(icon_keyboard)
 		overlays += image(icon, icon_keyboard, overlay_layer)
 
@@ -78,30 +101,12 @@
 	text = replacetext(text, "\n", "<BR>")
 	return text
 
-/obj/machinery/computer/attackby(var/obj/item/I, var/mob/user)
-	if(isScrewdriver(I) && circuit)
-		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-		if(do_after(user, 20, src))
-			var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
-			A.set_dir(src.dir)
-			var/obj/item/weapon/circuitboard/M = new circuit( A )
-			A.circuit = M
-			A.anchored = 1
-			for (var/obj/C in src)
-				C.dropInto(loc)
-			if (src.stat & BROKEN)
-				to_chat(user, "<span class='notice'>The broken glass falls out.</span>")
-				new /obj/item/weapon/material/shard( src.loc )
-				A.state = 3
-				A.icon_state = "3"
-			else
-				to_chat(user, "<span class='notice'>You disconnect the monitor.</span>")
-				A.state = 4
-				A.icon_state = "4"
-			M.deconstruct(src)
-			qdel(src)
+/obj/machinery/computer/dismantle(mob/user)
+	if(stat & BROKEN)
+		to_chat(user, "<span class='notice'>The broken glass falls out.</span>")
+		for(var/obj/item/weapon/stock_parts/console_screen/screen in component_parts)
+			qdel(screen)
+			new /obj/item/weapon/material/shard(loc)
 	else
-		..()
-
-/obj/machinery/computer/attack_ghost(var/mob/ghost)
-	attack_hand(ghost)
+		to_chat(user, "<span class='notice'>You disconnect the monitor.</span>")
+	return ..()

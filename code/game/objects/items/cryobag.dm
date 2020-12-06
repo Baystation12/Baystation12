@@ -33,8 +33,8 @@
 	. = ..()
 	airtank = new()
 	airtank.temperature = T0C
-	airtank.adjust_gas("oxygen", MOLES_O2STANDARD, 0)
-	airtank.adjust_gas("nitrogen", MOLES_N2STANDARD)
+	airtank.adjust_gas(GAS_OXYGEN, MOLES_O2STANDARD, 0)
+	airtank.adjust_gas(GAS_NITROGEN, MOLES_N2STANDARD)
 	update_icon()
 
 /obj/structure/closet/body_bag/cryobag/Destroy()
@@ -102,7 +102,7 @@
 	if(Adjacent(user)) //The bag's rather thick and opaque from a distance.
 		to_chat(user, "<span class='info'>You peer into \the [src].</span>")
 		for(var/mob/living/L in contents)
-			L.examine(user)
+			L.examine(arglist(args))
 
 /obj/item/usedcryobag
 	name = "used stasis bag"

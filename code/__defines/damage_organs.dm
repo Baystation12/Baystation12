@@ -7,6 +7,7 @@
 #define CLONE       "clone"
 #define PAIN        "pain"
 #define ELECTROCUTE "electrocute"
+#define PSIONIC     "psi"
 
 #define CUT       "cut"
 #define BRUISE    "bruise"
@@ -24,9 +25,13 @@
 #define DROWSY    "drowsy"
 
 // Damage flags
-#define DAM_SHARP (1<<0)
-#define DAM_EDGE  (1<<1)
-#define DAM_LASER (1<<2)
+#define DAM_SHARP     1
+#define DAM_EDGE      2
+#define DAM_LASER     4
+#define DAM_BULLET    8
+#define DAM_EXPLODE   16
+#define DAM_DISPERSED 32 // Makes apply_damage calls without specified zone distribute damage rather than randomly choose organ (for humans)
+#define DAM_BIO       64 // Toxin damage that should be mitigated by biological (i.e. sterile) armor
 
 #define FIRE_DAMAGE_MODIFIER 0.0215 // Higher values result in more external fire damage to the skin. (default 0.0215)
 #define  AIR_DAMAGE_MODIFIER 2.025  // More means less damage from hot air scalding lungs, less = more damage. (default 2.025)
@@ -46,6 +51,13 @@
 #define ORGAN_BRITTLE    (1<<12) // The organ takes additional blunt damage. If robotic, cannot be repaired through normal means.
 #define ORGAN_CRYSTAL    (1<<13) // The organ does not suffer laser damage, but shatters on droplimb.
 
+// Flags for proc/take_organ_damage
+#define ORGAN_DAMAGE_SHARP       (1 << 0) // Damage should be treated as sharp when applied
+#define ORGAN_DAMAGE_EDGE        (1 << 1) // Damage should be treated as edged when applied
+#define ORGAN_DAMAGE_FLESH_ONLY  (1 << 2) // Damage should not be applied to robotic organs
+#define ORGAN_DAMAGE_ROBOT_ONLY  (1 << 3) // Damage should not be applied to flesh organs
+#define ORGAN_DAMAGE_SILICON_EMP (1 << 4) // Damage should be treated as bypassing armor for silicons
+
 // Organ flag defines.
 #define ORGAN_FLAG_CAN_AMPUTATE   (1<<0) // The organ can be amputated.
 #define ORGAN_FLAG_CAN_BREAK      (1<<1) // The organ can be broken.
@@ -55,6 +67,7 @@
 #define ORGAN_FLAG_FINGERPRINT    (1<<5) // The organ has a fingerprint.
 #define ORGAN_FLAG_GENDERED_ICON  (1<<6) // The icon state for this organ appends _m/_f.
 #define ORGAN_FLAG_HEALS_OVERKILL (1<<7) // The organ heals from overkill damage.
+#define ORGAN_FLAG_DEFORMED       (1<<8) // The organ is permanently disfigured.
 
 // Droplimb types.
 #define DROPLIMB_EDGE 0
@@ -85,6 +98,7 @@
 #define INFECTION_LEVEL_THREE 1000 // infections grow from two to three in ~10 minutes
 
 //Blood levels. These are percentages based on the species blood_volume far.
+#define BLOOD_VOLUME_FULL    100
 #define BLOOD_VOLUME_SAFE    85
 #define BLOOD_VOLUME_OKAY    70
 #define BLOOD_VOLUME_BAD     60

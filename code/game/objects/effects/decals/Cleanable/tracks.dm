@@ -40,9 +40,10 @@ var/global/list/image/fluidtrack_cache=list()
 /obj/effect/decal/cleanable/blood/tracks
 	amount = 0
 	random_icon_states = null
-	var/dirs=0
 	icon = 'icons/effects/fluidtracks.dmi'
-	icon_state = ""
+	cleanable_scent = null
+
+	var/dirs=0
 	var/coming_state="blood1"
 	var/going_state="blood2"
 	var/updatedtracks=0

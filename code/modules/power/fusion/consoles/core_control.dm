@@ -9,8 +9,8 @@
 		if(!istype(C))
 			return TOPIC_NOACTION
 
-		var/datum/fusion_plant/plant = get_fusion_plant()
-		if(!plant || !plant.fusion_cores[C])
+		var/datum/local_network/lan = get_local_network()
+		if(!lan || !lan.is_connected(C))
 			return TOPIC_NOACTION
 
 		if(!C.check_core_status())
@@ -18,6 +18,9 @@
 
 		if(href_list["toggle_active"])
 			if(!C.Startup()) //Startup() whilst the device is active will return null.
+				if(!C.owned_field.is_shutdown_safe())
+					if(alert(user, "Shutting down this fusion core without proper safety procedures will cause serious damage, do you wish to continue?", "Shut Down?", "Yes", "No") == "No")
+						return TOPIC_NOACTION
 				C.Shutdown()
 			return TOPIC_REFRESH
 
@@ -31,13 +34,14 @@
 
 /obj/machinery/computer/fusion/core_control/build_ui_data()
 	. = ..()
-	var/datum/extension/fusion_plant_member/fusion = get_extension(src, /datum/extension/fusion_plant_member)
-	var/datum/fusion_plant/plant = fusion.get_fusion_plant()
+	var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)
+	var/datum/local_network/lan = fusion.get_local_network()
 	var/list/cores = list()
-	if(plant)
-		for(var/i = 1 to LAZYLEN(plant.fusion_cores))
+	if(lan)
+		var/list/fusion_cores = lan.get_devices(/obj/machinery/power/fusion_core)
+		for(var/i = 1 to LAZYLEN(fusion_cores))
 			var/list/core = list()
-			var/obj/machinery/power/fusion_core/C = plant.fusion_cores[i]
+			var/obj/machinery/power/fusion_core/C = fusion_cores[i]
 			core["id"] =          "#[i]"
 			core["ref"] =         "\ref[C]"
 			core["field"] =       !isnull(C.owned_field)

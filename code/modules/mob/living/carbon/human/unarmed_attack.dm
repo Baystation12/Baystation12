@@ -8,8 +8,8 @@ var/global/list/sparring_attack_cache = list()
 	var/attack_sound = "punch"
 	var/miss_sound = 'sound/weapons/punchmiss.ogg'
 	var/shredding = 0 // Calls the old attack_alien() behavior on objects/mobs when on harm intent.
-	var/sharp = 0
-	var/edge = 0
+	var/sharp = FALSE
+	var/edge = FALSE
 	var/delay = 0
 
 	var/deal_halloss
@@ -33,30 +33,31 @@ var/global/list/sparring_attack_cache = list()
 
 /datum/unarmed_attack/proc/is_usable(var/mob/living/carbon/human/user, var/mob/target, var/zone)
 	if(user.restrained())
-		return 0
+		return FALSE
 
 	// Check if they have a functioning hand.
 	var/obj/item/organ/external/E = user.organs_by_name[BP_L_HAND]
 	if(E && !E.is_stump())
-		return 1
+		return TRUE
 
 	E = user.organs_by_name[BP_R_HAND]
 	if(E && !E.is_stump())
-		return 1
+		return TRUE
 
-	return 0
+	return FALSE
 
 /datum/unarmed_attack/proc/get_unarmed_damage()
 	return damage
 
-/datum/unarmed_attack/proc/apply_effects(var/mob/living/carbon/human/user,var/mob/living/carbon/human/target,var/armour,var/attack_damage,var/zone)
+/datum/unarmed_attack/proc/apply_effects(var/mob/living/carbon/human/user,var/mob/living/carbon/human/target,var/attack_damage,var/zone)
 
 	if(target.stat == DEAD)
 		return
 
 	var/stun_chance = rand(0, 100)
+	var/armour = target.get_blocked_ratio(zone, BRUTE, damage = attack_damage)
 
-	if(attack_damage >= 5 && armour < 100 && !(target == user) && stun_chance <= attack_damage * 5) // 25% standard chance
+	if(attack_damage >= 5 && armour < 1 && !(target == user) && stun_chance <= attack_damage * 5) // 25% standard chance
 		switch(zone) // strong punches can have effects depending on where they hit
 			if(BP_HEAD, BP_EYES, BP_MOUTH)
 				// Induce blurriness
@@ -89,12 +90,12 @@ var/global/list/sparring_attack_cache = list()
 				if(!target.lying)
 					target.visible_message("<span class='warning'>[target] gives way slightly.</span>")
 					target.apply_effect(attack_damage*3, PAIN, armour)
-	else if(attack_damage >= 5 && !(target == user) && (stun_chance + attack_damage * 5 >= 100) && armour < 100) // Chance to get the usual throwdown as well (25% standard chance)
+	else if(attack_damage >= 5 && !(target == user) && (stun_chance + attack_damage * 5 >= 100) && armour < 1) // Chance to get the usual throwdown as well (25% standard chance)
 		if(!target.lying)
 			target.visible_message("<span class='danger'>[target] [pick("slumps", "falls", "drops")] down to the ground!</span>")
 		else
 			target.visible_message("<span class='danger'>[target] has been weakened!</span>")
-		target.apply_effect(3, WEAKEN, armour)
+		target.apply_effect(3, WEAKEN, armour * 100)
 
 	var/obj/item/clothing/C = target.get_covering_equipped_item_by_zone(zone)
 	if(istype(C) && prob(10))
@@ -123,25 +124,23 @@ var/global/list/sparring_attack_cache = list()
 	attack_sound = 'sound/weapons/bite.ogg'
 	shredding = 0
 	damage = 0
-	sharp = 0
-	edge = 0
 	attack_name = "bite"
 
 /datum/unarmed_attack/bite/sharp
 	attack_verb = list("bit", "chomped")
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 
 /datum/unarmed_attack/bite/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
 
-	if(istype(user.wear_mask, /obj/item/clothing/mask/muzzle))
-		return 0
+	if(istype(user.wear_mask, /obj/item/clothing/mask))
+		return FALSE
 	for(var/obj/item/clothing/C in list(user.wear_mask, user.head, user.wear_suit))
 		if(C && (C.body_parts_covered & FACE) && (C.item_flags & ITEM_FLAG_THICKMATERIAL))
-			return 0 //prevent biting through a space helmet or similar
+			return FALSE //prevent biting through a space helmet or similar
 	if (user == target && (zone == BP_HEAD || zone == BP_EYES || zone == BP_MOUTH))
-		return 0 //how do you bite yourself in the head?
-	return 1
+		return FALSE //how do you bite yourself in the head?
+	return TRUE
 
 /datum/unarmed_attack/punch
 	attack_verb = list("punched")
@@ -159,7 +158,7 @@ var/global/list/sparring_attack_cache = list()
 
 	if(target == user)
 		user.visible_message("<span class='danger'>[user] [pick(attack_verb)] \himself in the [organ]!</span>")
-		return 0
+		return FALSE
 
 	target.update_personal_goal(/datum/goal/achievement/fistfight, TRUE)
 	user.update_personal_goal(/datum/goal/achievement/fistfight, TRUE)
@@ -200,17 +199,17 @@ var/global/list/sparring_attack_cache = list()
 
 /datum/unarmed_attack/kick/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
 	if(!(zone in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT, BP_GROIN)))
-		return 0
+		return FALSE
 
 	var/obj/item/organ/external/E = user.organs_by_name[BP_L_FOOT]
 	if(E && !E.is_stump())
-		return 1
+		return TRUE
 
 	E = user.organs_by_name[BP_R_FOOT]
 	if(E && !E.is_stump())
-		return 1
+		return TRUE
 
-	return 0
+	return TRUE
 
 /datum/unarmed_attack/kick/get_unarmed_damage(var/mob/living/carbon/human/user)
 	var/obj/item/clothing/shoes = user.shoes
@@ -238,20 +237,20 @@ var/global/list/sparring_attack_cache = list()
 
 /datum/unarmed_attack/stomp/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
 	if(!istype(target))
-		return 0
+		return FALSE
 
 	if (!user.lying && (target.lying || (zone in list(BP_L_FOOT, BP_R_FOOT))))
 		if(target.grabbed_by == user && target.lying)
-			return 0
+			return FALSE
 		var/obj/item/organ/external/E = user.organs_by_name[BP_L_FOOT]
 		if(E && !E.is_stump())
-			return 1
+			return TRUE
 
 		E = user.organs_by_name[BP_R_FOOT]
 		if(E && !E.is_stump())
-			return 1
+			return TRUE
 
-		return 0
+		return FALSE
 
 /datum/unarmed_attack/stomp/get_unarmed_damage(var/mob/living/carbon/human/user)
 	var/obj/item/clothing/shoes = user.shoes
@@ -282,6 +281,6 @@ var/global/list/sparring_attack_cache = list()
 	damage = 2
 	shredding = 0
 	damage = 0
-	sharp = 0
-	edge = 0
+	sharp = TRUE
+	edge = TRUE
 	attack_name = "light hit"

@@ -53,7 +53,6 @@
 /obj/effect/decal/cleanable/cobweb
 	name = "cobweb"
 	desc = "Somebody should remove that."
-	plane = ABOVE_HUMAN_PLANE
 	layer = ABOVE_HUMAN_LAYER
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "cobweb1"
@@ -69,7 +68,6 @@
 /obj/effect/decal/cleanable/cobweb2
 	name = "cobweb"
 	desc = "Somebody should remove that."
-	plane = ABOVE_HUMAN_PLANE
 	layer = ABOVE_HUMAN_LAYER
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "cobweb2"
@@ -79,17 +77,24 @@
 	name = "vomit"
 	desc = "Gosh, how unpleasant."
 	gender = PLURAL
-	icon = 'icons/effects/blood.dmi'
+	icon = 'icons/effects/vomit.dmi'
 	icon_state = "vomit_1"
-	random_icon_states = list("vomit_1", "vomit_2", "vomit_3", "vomit_4")
 	persistent = TRUE
 	generic_filth = TRUE
-	var/list/viruses = list()
 
 /obj/effect/decal/cleanable/vomit/New()
+	random_icon_states = icon_states(icon)
 	..()
 	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
-	create_reagents(20, src)
+	create_reagents(30, src)
+	if(prob(75))
+		var/matrix/M = matrix()
+		M.Turn(pick(90, 180, 270))
+		transform = M
+
+/obj/effect/decal/cleanable/vomit/on_update_icon()
+	. = ..()
+	color = reagents.get_color()
 
 /obj/effect/decal/cleanable/tomato_smudge
 	name = "tomato smudge"

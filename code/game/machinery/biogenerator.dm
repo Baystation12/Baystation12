@@ -12,6 +12,10 @@
 	density = 1
 	anchored = 1
 	idle_power_usage = 40
+	base_type = /obj/machinery/biogenerator
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 	var/processing = 0
 	var/obj/item/weapon/reagent_containers/glass/beaker = null
 	var/points = 0
@@ -25,7 +29,8 @@
 		"Food" = list(
 			/obj/item/weapon/reagent_containers/food/drinks/milk/smallcarton = 30,
 			/obj/item/weapon/reagent_containers/food/drinks/milk = 50,
-			/obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh = 50),
+			/obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh = 50,
+			/obj/item/weapon/storage/fancy/egg_box = 300),
 		"Nutrients" = list(
 			/obj/item/weapon/reagent_containers/glass/bottle/eznutrient = 60,
 			/obj/item/weapon/reagent_containers/glass/bottle/left4zed = 120,
@@ -49,13 +54,6 @@
 	create_reagents(1000)
 	beaker = new /obj/item/weapon/reagent_containers/glass/bottle(src)
 
-	component_parts = list()
-	component_parts += new /obj/item/weapon/circuitboard/biogenerator(src)
-	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-
-	RefreshParts()
-
 /obj/machinery/biogenerator/on_reagent_change()			//When the reagents change, change the icon as well.
 	update_icon()
 
@@ -68,23 +66,30 @@
 		icon_state = "biogen-work"
 	return
 
-/obj/machinery/biogenerator/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if(default_deconstruction_screwdriver(user, O))
+/obj/machinery/biogenerator/components_are_accessible(path)
+	return !processing && ..()
+
+/obj/machinery/biogenerator/cannot_transition_to(state_path)
+	if(processing)
+		return SPAN_NOTICE("You must turn \the [src] off first.")
+	return ..()
+
+/obj/machinery/biogenerator/attackby(var/obj/item/O, var/mob/user)
+	if((. = component_attackby(O, user)))
 		return
-	if(default_deconstruction_crowbar(user, O))
-		return
-	if(default_part_replacement(user, O))
-		return
+	if(processing)
+		to_chat(user, "<span class='notice'>\The [src] is currently processing.</span>")
 	if(istype(O, /obj/item/weapon/reagent_containers/glass))
 		if(beaker)
 			to_chat(user, "<span class='notice'>]The [src] is already loaded.</span>")
+			return TRUE
 		else if(user.unEquip(O, src))
 			beaker = O
 			state = BG_READY
 			updateUsrDialog()
-	else if(processing)
-		to_chat(user, "<span class='notice'>\The [src] is currently processing.</span>")
-	else if(ingredients >= capacity)
+			return TRUE
+
+	if(ingredients >= capacity)
 		to_chat(user, "<span class='notice'>\The [src] is already full! Activate it.</span>")
 	else if(istype(O, /obj/item/weapon/storage/plants))
 		var/obj/item/weapon/storage/plants/P = O
@@ -174,10 +179,9 @@
 			state = BG_READY
 	return TOPIC_REFRESH
 
-/obj/machinery/biogenerator/attack_hand(mob/user as mob)
-	if(stat & (BROKEN|NOPOWER))
-		return
+/obj/machinery/biogenerator/interface_interact(mob/user)
 	ui_interact(user)
+	return TRUE
 
 /obj/machinery/biogenerator/proc/activate()
 	if (usr.stat)
@@ -223,14 +227,5 @@
 
 /obj/machinery/biogenerator/RefreshParts()
 	..()
-	var/man_rating = 0
-	var/bin_rating = 0
-
-	for(var/obj/item/weapon/stock_parts/P in component_parts)
-		if(istype(P, /obj/item/weapon/stock_parts/matter_bin))
-			bin_rating += P.rating
-		if(istype(P, /obj/item/weapon/stock_parts/manipulator))
-			man_rating += P.rating
-
-	build_eff = man_rating
-	eat_eff = bin_rating
+	build_eff = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator), 1, 10)
+	eat_eff = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin), 1, 10)

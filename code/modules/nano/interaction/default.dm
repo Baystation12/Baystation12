@@ -40,7 +40,8 @@ GLOBAL_DATUM_INIT(default_state, /datum/topic_state/default, new)
 	// Prevents the AI from using Topic on admin levels (by for example viewing through the court/thunderdome cameras)
 	// unless it's on the same level as the object it's interacting with.
 	var/turf/T = get_turf(src_object)
-	if(!T || !(z == T.z || (T.z in GLOB.using_map.player_levels)))
+	var/turf/A = get_turf(src)
+	if(!A || !T || !AreConnectedZLevels(A.z, T.z))
 		return STATUS_CLOSE
 
 	// If an object is in view then we can interact with it
@@ -82,7 +83,7 @@ GLOBAL_DATUM_INIT(default_state, /datum/topic_state/default, new)
 	if(. != STATUS_CLOSE)
 		if(loc)
 			. = min(., loc.contents_nano_distance(src_object, src))
-	if(STATUS_INTERACTIVE)
+	if(. == STATUS_INTERACTIVE)
 		return STATUS_UPDATE
 
 /mob/living/carbon/human/default_can_use_topic(var/src_object)
@@ -92,5 +93,5 @@ GLOBAL_DATUM_INIT(default_state, /datum/topic_state/default, new)
 			. = min(., loc.contents_nano_distance(src_object, src))
 		else
 			. = min(., shared_living_nano_distance(src_object))
-		if(. == STATUS_UPDATE && (MUTATION_TK in mutations))	// If we have telekinesis and remain close enough, allow interaction.
+		if(. == STATUS_UPDATE && (psi && !psi.suppressed && psi.get_rank(PSI_PSYCHOKINESIS) >= PSI_RANK_OPERANT))
 			return STATUS_INTERACTIVE

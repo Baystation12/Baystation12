@@ -80,7 +80,7 @@
 	smoke_amt = 5
 	smoke_spread = 1
 
-	possible_transformations = list(/mob/living/simple_animal/hostile/armalis)
+	possible_transformations = list(/mob/living/simple_animal/hostile/retaliate/parrot/space/lesser)
 
 	hud_state = "wiz_vox"
 
@@ -93,7 +93,7 @@
 //UNATHI
 /spell/moghes_blessing
 	name = "Moghes Blessing"
-	desc = "Imbue your weapon with memories of Moghes"
+	desc = "Imbue your weapon with memories of Moghes."
 
 	school = "racial"
 	spell_flags = 0
@@ -115,9 +115,10 @@
 
 /spell/moghes_blessing/cast(var/list/targets, mob/user)
 	for(var/obj/item/I in targets)
-		set_extension(I, /datum/extension/moghes_blessing, /datum/extension/moghes_blessing)
+		set_extension(I, /datum/extension/moghes_blessing)
 
 /datum/extension/moghes_blessing
+	base_type = /datum/extension/moghes_blessing
 	expected_type = /obj/item
 	flags = EXTENSION_FLAG_IMMEDIATE
 

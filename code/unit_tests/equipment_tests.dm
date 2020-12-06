@@ -2,14 +2,15 @@
 #define FAILURE 0
 
 
-datum/unit_test/vision_glasses/
+/datum/unit_test/vision_glasses
 	name = "EQUIPMENT: Vision Template"
+	template = /datum/unit_test/vision_glasses
 	var/mob/living/carbon/human/H = null
 	var/expectation = SEE_INVISIBLE_NOLIGHTING
 	var/glasses_type = null
 	async = 1
 
-datum/unit_test/vision_glasses/start_test()
+/datum/unit_test/vision_glasses/start_test()
 	spawn(0)
 		var/list/test = create_test_mob_with_mind(null, /mob/living/carbon/human)
 		if(isnull(test))
@@ -29,10 +30,10 @@ datum/unit_test/vision_glasses/start_test()
 	return 1
 
 
-datum/unit_test/vision_glasses/check_result()
+/datum/unit_test/vision_glasses/check_result()
 
 	if(isnull(H) || H.life_tick < 2)
-		return 0       
+		return 0
 
 	if(isnull(H.glasses))
 		fail("Mob doesn't have glasses on")
@@ -46,25 +47,25 @@ datum/unit_test/vision_glasses/check_result()
 
 	return 1
 
-datum/unit_test/vision_glasses/NVG
+/datum/unit_test/vision_glasses/NVG
 	name = "EQUIPMENT: NVG see_invis"
 	glasses_type = /obj/item/clothing/glasses/night
 
-datum/unit_test/vision_glasses/mesons
+/datum/unit_test/vision_glasses/mesons
 	name = "EQUIPMENT: Mesons see_invis"
 	glasses_type = /obj/item/clothing/glasses/meson
 
-datum/unit_test/vision_glasses/plain
+/datum/unit_test/vision_glasses/plain
 	name = "EQUIPMENT: Plain glasses. see_invis"
-	glasses_type = /obj/item/clothing/glasses/regular
+	glasses_type = /obj/item/clothing/glasses/prescription
 	expectation = SEE_INVISIBLE_LIVING
 
 // ============================================================================
 
-datum/unit_test/storage_capacity_test
+/datum/unit_test/storage_capacity_test
 	name = "EQUIPMENT: Storage items should be able to actually hold their initial contents"
 
-datum/unit_test/storage_capacity_test/start_test()
+/datum/unit_test/storage_capacity_test/start_test()
 	var/bad_tests = 0
 
 	// obj/item/weapon/storage/internal cannot be tested sadly, as they expect their host object to create them

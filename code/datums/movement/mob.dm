@@ -193,7 +193,7 @@
 		return MOVEMENT_STOP
 
 	for(var/obj/item/grab/G in mob.grabbed_by)
-		if(G.stop_move())
+		if(G.assailant != mob && G.stop_move())
 			if(mover == mob)
 				to_chat(mob, "<span class='notice'>You're stuck in a grab!</span>")
 			mob.ProcessGrabs()
@@ -224,6 +224,7 @@
 // Finally.. the last of the mob movement junk
 /datum/movement_handler/mob/movement/DoMove(var/direction, var/mob/mover)
 	. = MOVEMENT_HANDLED
+
 	if(mob.moving)
 		return
 
@@ -234,7 +235,14 @@
 	mob.moving = 1
 
 	direction = mob.AdjustMovementDirection(direction)
-	var/old_turf = get_turf(mob)
+	var/turf/old_turf = get_turf(mob)
+
+	if(direction & (UP|DOWN))
+		var/txt_dir = direction & UP ? "upwards" : "downwards"
+		old_turf.visible_message(SPAN_NOTICE("[mob] moves [txt_dir]."))
+		if(mob.pulling)
+			mob.zPull(direction)
+
 	step(mob, direction)
 
 	// Something with pulling things
@@ -248,15 +256,37 @@
 	for (var/obj/item/grab/G in mob.grabbed_by)
 		G.adjust_position()
 
+	//Moving with objects stuck in you can cause bad times.
+	if(get_turf(mob) != old_turf)
+		if(MOVING_QUICKLY(mob))
+			mob.last_quick_move_time = world.time
+			mob.adjust_stamina(-(mob.get_stamina_used_per_step() * (1+mob.encumbrance())))
+		mob.handle_embedded_and_stomach_objects()
+
 	mob.moving = 0
 
 /datum/movement_handler/mob/movement/MayMove(var/mob/mover)
 	return IS_SELF(mover) &&  mob.moving ? MOVEMENT_STOP : MOVEMENT_PROCEED
 
+/mob/proc/get_stamina_used_per_step()
+	return 1
+
+/mob/living/carbon/human/get_stamina_used_per_step()
+	var/mod = (1-((get_skill_value(SKILL_HAULING) - SKILL_MIN)/(SKILL_MAX - SKILL_MIN)))
+	if(species && (species.species_flags & SPECIES_FLAG_LOW_GRAV_ADAPTED))
+		if(has_gravity(src))
+			mod *= 1.2
+		else
+			mod *= 0.8
+
+	return config.minimum_sprint_cost + (config.skill_sprint_cost_range * mod)
+
 /datum/movement_handler/mob/movement/proc/HandleGrabs(var/direction, var/old_turf)
 	. = 0
 	// TODO: Look into making grabs use movement events instead, this is a mess.
 	for (var/obj/item/grab/G in mob)
+		if(G.assailant == G.affecting)
+			return
 		. = max(., G.grab_slowdown())
 		var/list/L = mob.ret_grab()
 		if(istype(L, /list))

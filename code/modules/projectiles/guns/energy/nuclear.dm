@@ -16,12 +16,12 @@
 		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock, modifystate="energyshock"),
 		list(mode_name="kill", projectile_type=/obj/item/projectile/beam, modifystate="energykill"),
 		)
-		
+
 /obj/item/weapon/gun/energy/gun/skrell
 	name = "skrellian handgun"
 	desc = "A common Skrellian side-arm, the Xuxquu*'Voom-5, or XV-5, is a more traditional energy weapon, tuned to dispense beams in three different wavelengths."
 	w_class = ITEM_SIZE_NORMAL
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	icon = 'icons/obj/guns/skrell_pistol.dmi'
 	icon_state = "skrell_pistol_stun_100"
 	max_shots = 10
@@ -85,7 +85,8 @@
 //override for failcheck behaviour
 /obj/item/weapon/gun/energy/gun/nuclear/Process()
 	if(fail_counter > 0)
-		SSradiation.radiate(src, fail_counter--)
+		SSradiation.radiate(src, (fail_counter * 2))
+		fail_counter--
 
 	return ..()
 

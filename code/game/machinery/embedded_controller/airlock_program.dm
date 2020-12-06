@@ -25,8 +25,12 @@
 	var/target_state = TARGET_NONE
 
 	var/cycle_to_external_air = 0
+	var/scrubber_assist = 0
 	var/tag_pump_out_external
 	var/tag_pump_out_internal
+	var/tag_pump_out_scrubber
+
+	var/tag_air_alarm
 
 /datum/computer/file/embedded_program/airlock/New(var/obj/machinery/embedded_controller/M)
 	..(M)
@@ -44,9 +48,12 @@
 	if (istype(M, /obj/machinery/embedded_controller/radio/airlock))	//if our controller is an airlock controller than we can auto-init our tags
 		var/obj/machinery/embedded_controller/radio/airlock/controller = M
 		cycle_to_external_air = controller.cycle_to_external_air
+		scrubber_assist = controller.scrubber_assist
 		if(cycle_to_external_air)
 			tag_pump_out_external = "[id_tag]_pump_out_external"
 			tag_pump_out_internal = "[id_tag]_pump_out_internal"
+		if(scrubber_assist)
+			tag_pump_out_scrubber = "[id_tag]_pump_out_scrubber"
 		tag_exterior_door = controller.tag_exterior_door? controller.tag_exterior_door : "[id_tag]_outer"
 		tag_interior_door = controller.tag_interior_door? controller.tag_interior_door : "[id_tag]_inner"
 		tag_airpump = controller.tag_airpump? controller.tag_airpump : "[id_tag]_pump"
@@ -55,6 +62,7 @@
 		tag_interior_sensor = controller.tag_interior_sensor || "[id_tag]_interior_sensor"
 		tag_airlock_mech_sensor = controller.tag_airlock_mech_sensor? controller.tag_airlock_mech_sensor : "[id_tag]_airlock_mech"
 		tag_shuttle_mech_sensor = controller.tag_shuttle_mech_sensor? controller.tag_shuttle_mech_sensor : "[id_tag]_shuttle_mech"
+		tag_air_alarm = controller.tag_air_alarm || "[id_tag]_alarm"
 		memory["secure"] = controller.tag_secure
 
 		spawn(10)
@@ -275,11 +283,21 @@
 	state = STATE_IDLE
 	target_state = TARGET_INOPEN
 	memory["purge"] = cycle_to_external_air
+	playsound(master, 'sound/machines/warning-buzzer.ogg', 50)
+	shutAlarm()
+
+/datum/computer/file/embedded_program/airlock/proc/begin_dock_cycle()
+	state = STATE_IDLE
+	target_state = TARGET_INOPEN
+	playsound(master, 'sound/machines/warning-buzzer.ogg', 50)
+	shutAlarm()
 
 /datum/computer/file/embedded_program/airlock/proc/begin_cycle_out()
 	state = STATE_IDLE
 	target_state = TARGET_OUTOPEN
 	memory["purge"] = cycle_to_external_air
+	playsound(master, 'sound/machines/warning-buzzer.ogg', 50)
+	shutAlarm()
 
 /datum/computer/file/embedded_program/airlock/proc/close_doors()
 	toggleDoor(memory["interior_status"], tag_interior_door, 1, "close")
@@ -310,16 +328,23 @@
 	signal.data["command"] = command
 	post_signal(signal, RADIO_AIRLOCK)
 
+/datum/computer/file/embedded_program/airlock/proc/shutAlarm()
+	var/datum/signal/signal = new
+	signal.data["alarm_id"] = tag_air_alarm
+	signal.data["command"] = "shutdown"
+	post_signal(signal, RADIO_TO_AIRALARM)
+
 /datum/computer/file/embedded_program/airlock/proc/signalPump(var/tag, var/power, var/direction, var/pressure)
 	var/datum/signal/signal = new
 	signal.data = list(
 		"tag" = tag,
 		"sigtype" = "command",
-		"power" = power,
-		"direction" = direction,
-		"set_external_pressure" = pressure
+		"set_power" = power,
+		"set_direction" = direction ? "release" : "siphon",
+		"set_external_pressure" = pressure,
+		"status" = TRUE
 	)
-	post_signal(signal)
+	post_signal(signal, RADIO_FROM_AIRALARM)
 
 //this is called to set the appropriate door state at the end of a cycling process, or for the exterior buttons
 /datum/computer/file/embedded_program/airlock/proc/cycleDoors(var/target)

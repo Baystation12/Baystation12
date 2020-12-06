@@ -60,8 +60,8 @@
 		Toggle Component: 
 	</div>
 	<div class="itemContent">
-		{{:helper.link("ON", null, {'PC_enable_component' : value.name}, value.enabled ? 'disabled' : null)}}
-		{{:helper.link("OFF", null, {'PC_disable_component' : value.name}, value.enabled ? null : 'disabled')}}
+		{{:helper.link("ON", null, {'PC_enable_component' : value.ref}, value.enabled ? 'disabled' : null)}}
+		{{:helper.link("OFF", null, {'PC_disable_component' : value.ref}, value.enabled ? null : 'disabled')}}
 	</div>			
 	{{/if}}
 	<br><br>

@@ -52,7 +52,7 @@
 	name = BP_NUTRIENT
 	parent_organ = BP_CHEST
 	organ_tag = BP_NUTRIENT
-	icon = 'icons/mob/alien.dmi'
+	icon = 'icons/obj/alien.dmi'
 	icon_state = "claw"
 
 /obj/item/organ/internal/diona/nutrients/removed(var/mob/user)
@@ -62,7 +62,7 @@
 	name = "response node"
 	parent_organ = BP_HEAD
 	organ_tag = "response node"
-	icon = 'icons/mob/alien.dmi'
+	icon = 'icons/obj/alien.dmi'
 	icon_state = "claw"
 
 /obj/item/organ/internal/diona/node/Process()
@@ -73,9 +73,8 @@
 	if(isturf(owner.loc)) //else, there's considered to be no light
 		var/turf/T = owner.loc
 		light_amount = T.get_lumcount() * 10
-	owner.nutrition   += light_amount
+	owner.set_nutrition(Clamp(owner.nutrition + light_amount, 0, 550))
 	owner.shock_stage -= light_amount
-	owner.nutrition    = Clamp(owner.nutrition, 0, 550)
 
 /obj/item/organ/internal/diona/node/removed(var/mob/user)
 	return ..(user, 1)

@@ -283,10 +283,9 @@
 
 /obj/item/integrated_circuit/arithmetic/square_root/do_work()
 	var/result = 0
-	for(var/k in 2 to inputs.len)
-		var/I = get_pin_data(IC_INPUT, k)
-		if(isnum(I))
-			result += sqrt(I)
+	var/I = get_pin_data(IC_INPUT, 1)
+	if(isnum(I))
+		result = sqrt(I)
 
 	set_pin_data(IC_OUTPUT, 1, result)
 	push_data()

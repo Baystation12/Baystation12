@@ -7,10 +7,10 @@
 	response_disarm = "pushes"
 	response_harm = "hits"
 
-	universal_speak = 0
-	universal_understand = 1
+	universal_speak = FALSE
+	universal_understand = TRUE
 
-	min_gas = list("oxygen" = 1)
+	min_gas = list(GAS_OXYGEN = 1)
 	max_gas = null
 	unsuitable_atmos_damage = 1
 
@@ -18,14 +18,14 @@
 
 /mob/living/simple_animal/familiar/New()
 	..()
-	add_language(LANGUAGE_GALCOM)
+	add_language(LANGUAGE_HUMAN_EURO)
 	for(var/spell in wizardy_spells)
 		src.add_spell(new spell, "const_spell_ready")
 
 /mob/living/simple_animal/familiar/carcinus
 	name = "carcinus"
 	desc = "A small crab said to be made of stone and starlight."
-	icon = 'icons/mob/animal.dmi'
+	icon = 'icons/mob/simple_animal/animal.dmi'
 	icon_state = "evilcrab"
 	icon_living = "evilcrab"
 	icon_dead = "evilcrab_dead"
@@ -39,7 +39,8 @@
 	melee_damage_upper = 15
 	attacktext = "pinches"
 	resistance = 9
-	can_escape = 1 //snip snip
+	can_escape = TRUE //snip snip
+	density = 0
 
 /*familiar version of the Pike w/o all the other hostile/carp stuff getting in the way (namely life)
 */
@@ -48,7 +49,7 @@
 	name = "space pike"
 	desc = "A bigger, more magical cousin of the space carp."
 
-	icon = 'icons/mob/spaceshark.dmi'
+	icon = 'icons/mob/simple_animal/spaceshark.dmi'
 	icon_state = "shark"
 	icon_living = "shark"
 	icon_dead = "shark_dead"
@@ -60,7 +61,7 @@
 	maxHealth = 100
 	melee_damage_lower = 10
 	melee_damage_upper = 10
-	can_escape = 1
+	can_escape = TRUE
 
 	min_gas = null
 
@@ -106,7 +107,7 @@
 
 	speak_emote = list("entones")
 	mob_size = MOB_SMALL
-
+	density = 0
 	health = 25
 	maxHealth = 25
 
@@ -116,7 +117,7 @@
 
 
 /mob/living/simple_animal/familiar/pet //basically variants of normal animals with spells.
-	icon = 'icons/mob/animal.dmi'
+	icon = 'icons/mob/simple_animal/animal.dmi'
 	var/icon_rest //so that we can have resting little guys.
 
 /mob/living/simple_animal/familiar/pet/Life()
@@ -147,8 +148,9 @@
 	maxHealth = 15
 	melee_damage_lower = 1
 	melee_damage_upper = 1
-	can_escape = 1
+	can_escape = TRUE
 	attacktext = "nibbles"
+	density = 0
 
 	wizardy_spells = list(/spell/aoe_turf/smoke)
 
@@ -175,6 +177,7 @@
 	maxHealth = 25
 	melee_damage_lower = 3
 	melee_damage_upper = 4
-	attacktext = "claws"
+	attacktext = "scratched"
+	density = 0
 
 	wizardy_spells = list(/spell/targeted/subjugation)

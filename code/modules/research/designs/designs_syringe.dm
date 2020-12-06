@@ -12,7 +12,7 @@
 
 /datum/design/item/syringe/bluespacesyringe
 	name = "Bluespace Syringe"
-	desc = "An advanced syringe that can hold 60 units of chemicals"
+	desc = "An advanced syringe that can hold 60 units of chemicals."
 	id = "bluespacesyringe"
 	req_tech = list(TECH_BIO = 3, TECH_MATERIAL = 4, TECH_BLUESPACE = 2)
 	materials = list(MATERIAL_GLASS = 2000, MATERIAL_PHORON = 1000, MATERIAL_DIAMOND = 1000)

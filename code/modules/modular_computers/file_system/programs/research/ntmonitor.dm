@@ -10,6 +10,7 @@
 	required_access = access_network
 	available_on_ntnet = 1
 	nanomodule_path = /datum/nano_module/program/computer_ntnetmonitor/
+	category = PROG_ADMIN
 
 /datum/nano_module/program/computer_ntnetmonitor
 	name = "NTNet Diagnostics and Monitoring"
@@ -22,7 +23,7 @@
 
 	data += "skill_fail"
 	if(!user.skill_check(SKILL_COMPUTER, SKILL_BASIC))
-		var/datum/extension/fake_data/fake_data = get_or_create_extension(src, /datum/extension/fake_data, /datum/extension/fake_data, 20)
+		var/datum/extension/fake_data/fake_data = get_or_create_extension(src, /datum/extension/fake_data, 20)
 		data["skill_fail"] = fake_data.update_and_return_data()
 	data["terminal"] = !!program
 

@@ -22,7 +22,7 @@
 	dat += "<B>Four uses use them wisely:</B><BR>"
 	dat += "<A href='byond://?src=\ref[src];spell_teleport=1'>Teleport</A><BR>"
 	dat += "Kind regards,<br>Wizards Federation<br><br>P.S. Don't forget to bring your gear, you'll need it to cast most spells.<HR>"
-	user << browse(dat, "window=scroll")
+	show_browser(user, dat, "window=scroll")
 	onclose(user, "scroll")
 	return
 

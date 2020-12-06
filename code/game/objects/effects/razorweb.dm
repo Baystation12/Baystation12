@@ -3,7 +3,6 @@
 	desc = "A wad of crystalline monofilament."
 	icon = 'icons/effects/razorweb.dmi'
 	icon_state = "wad"
-
 	var/web_type = /obj/effect/razorweb
 
 /obj/item/razorweb/throw_impact(var/atom/hit_atom)
@@ -13,6 +12,7 @@
 		web.buckle_mob(hit_atom)
 		web.visible_message(SPAN_DANGER("\The [hit_atom] is tangled in \the [web]!"))
 	web.entangle(hit_atom, TRUE)
+	playsound(usr, 'sound/effects/razorweb_twang.ogg', 50)
 	qdel(src)
 
 // Hey, did you ever see The Cube (1997) directed by Vincenzo Natali?
@@ -23,11 +23,29 @@
 	icon_state = "razorweb"
 	anchored = TRUE
 
+	var/mob/owner
+	var/decays = TRUE
 	var/break_chance = 100
 	var/last_light
 	var/image/gleam
 	var/image/web
-	var/global/species_immunity_list = list()
+	var/global/species_immunity_list = list(
+		SPECIES_MANTID_ALATE   = TRUE,
+		SPECIES_MANTID_GYNE    = TRUE,
+		SPECIES_MONARCH_QUEEN  = TRUE,
+		SPECIES_MONARCH_WORKER = TRUE
+	)
+
+/obj/effect/razorweb/Destroy()
+	if(owner)
+		var/obj/item/organ/external/groin/insectoid/mantid/spinner = locate() in owner
+		if(spinner)
+			spinner.existing_webs -= src
+		owner = null
+	. = ..()
+
+/obj/effect/razorweb/mapped
+	decays = FALSE
 
 /obj/effect/razorweb/tough
 	name = "tough razorweb"
@@ -41,6 +59,9 @@
 		if(otherweb != src)
 			return INITIALIZE_HINT_QDEL
 
+	if(decays)
+		addtimer(CALLBACK(src, /obj/effect/razorweb/proc/decay), 15 MINUTES)
+
 	web = image(icon = icon, icon_state = "razorweb")
 	gleam = image(icon = icon, icon_state = "razorweb-gleam")
 	gleam.layer = EYE_GLOW_LAYER
@@ -51,6 +72,15 @@
 	update_icon()
 	START_PROCESSING(SSobj, src)
 
+/obj/effect/razorweb/proc/decay()
+	playsound(usr, 'sound/effects/razorweb_break.ogg', 50)
+	qdel_self()
+
+/obj/effect/razorweb/attack_hand(mob/living/user)
+	user.visible_message(SPAN_DANGER("\The [user] yanks on \the [src]!"))
+	entangle(user, TRUE)
+	qdel_self()
+
 /obj/effect/razorweb/attackby(var/obj/item/thing, var/mob/user)
 
 	var/destroy_self
@@ -58,7 +88,7 @@
 		visible_message(SPAN_DANGER("\The [user] breaks \the [src] with \the [thing]!"))
 		destroy_self = TRUE
 
-	if(user.unEquip(thing))
+	if(prob(15) && user.unEquip(thing))
 		visible_message(SPAN_DANGER("\The [thing] is sliced apart!"))
 		qdel(thing)
 
@@ -96,14 +126,7 @@
 
 /obj/effect/razorweb/proc/entangle(var/mob/living/L, var/silent)
 
-	if(istype(L, /obj/mecha))
-		var/obj/mecha/mech = L
-		visible_message(SPAN_DANGER("\The [mech] stomps through \the [src], breaking it apart!"))
-		mech.take_damage(rand(30, 50))
-		qdel(src)
-		return
-
-	if(!istype(L) || !L.simulated || L.lying || (MOVING_DELIBERATELY(L) && prob(25)))
+	if(!istype(L) || !L.simulated || L.lying || (MOVING_DELIBERATELY(L) && prob(25)) || L.is_floating)
 		return
 
 	var/mob/living/carbon/human/H
@@ -115,8 +138,9 @@
 	if(!silent)
 		visible_message(SPAN_DANGER("\The [L] blunders into \the [src]!"))
 
-	var/severed
-	if(H)
+	var/severed = FALSE
+	var/armour_prob = prob(100 * L.get_blocked_ratio(null, BRUTE, damage = ARMOR_MELEE_RESISTANT))
+	if(H && prob(35))
 		var/obj/item/organ/external/E
 		for(var/thing in shuffle(H.organs_by_name))
 			var/obj/item/organ/external/limb = H.organs_by_name[thing]
@@ -130,21 +154,20 @@
 			if(!is_vital)
 				E = thing
 				break
-
-		if(E && !prob(L.getarmor(E, "melee")))
+		if(E && !armour_prob)
 			E = H.organs_by_name[E]
 			visible_message(SPAN_DANGER("The crystalline strands slice straight through \the [H]'s [E.amputation_point || E.name]!"))
 			E.droplimb()
 			severed = TRUE
 
-	if(!severed)
-		var/armourval = L.getarmor(null, "melee")
-		if(!prob(armourval))
-			L.apply_damage(rand(25, 50), blocked = armourval, used_weapon = src)
-			visible_message(SPAN_DANGER("The crystalline strands cut deeply into \the [L]!"))
+	if(!severed && !armour_prob)
+		L.apply_damage(rand(25, 50), used_weapon = src)
+		visible_message(SPAN_DANGER("The crystalline strands cut deeply into \the [L]!"))
 
 	if(prob(break_chance))
 		visible_message(SPAN_DANGER("\The [src] breaks apart!"))
+		playsound(usr, 'sound/effects/razorweb_break.ogg', 50)
 		qdel(src)
 	else
+		playsound(usr, 'sound/effects/razorweb_twang.ogg', 50)
 		break_chance = min(break_chance+10, 100)

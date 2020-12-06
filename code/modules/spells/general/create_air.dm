@@ -10,7 +10,7 @@
 	number_of_channels = 0
 	time_between_channels = 200
 	hud_state = "wiz_air"
-	var/list/air_change = list("oxygen" = ONE_ATMOSPHERE)
+	var/list/air_change = list(GAS_OXYGEN = ONE_ATMOSPHERE)
 	number_of_channels = 0
 
 /spell/create_air/choose_targets()

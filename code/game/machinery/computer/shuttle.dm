@@ -4,6 +4,7 @@
 	icon_keyboard = "tech_key"
 	icon_screen = "shuttle"
 	light_color = "#00ffff"
+	construct_state = null
 	var/auth_need = 3.0
 	var/list/authorized = list(  )
 

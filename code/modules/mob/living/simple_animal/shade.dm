@@ -1,14 +1,14 @@
 /mob/living/simple_animal/shade
 	name = "Shade"
 	real_name = "Shade"
-	desc = "A bound spirit"
+	desc = "A bound spirit."
 	icon = 'icons/mob/mob.dmi'
 	icon_state = "shade"
 	icon_living = "shade"
 	icon_dead = "shade_dead"
 	maxHealth = 50
 	health = 50
-	universal_speak = 1
+	universal_speak = TRUE
 	speak_emote = list("hisses")
 	emote_hear = list("wails","screeches")
 	response_help  = "puts their hand through"
@@ -29,6 +29,13 @@
 	status_flags = CANPUSH
 
 	bleed_colour = "#181933"
+
+	meat_type =     null
+	meat_amount =   0
+	bone_material = null
+	bone_amount =   0
+	skin_material = null
+	skin_amount =   0
 
 /mob/living/simple_animal/shade/cultify()
 	return

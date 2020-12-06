@@ -67,7 +67,7 @@ client
 /obj/screen/credit/Initialize(mapload, credited, client/P)
 	. = ..()
 	parent = P
-	maptext = credited
+	maptext = {"<div style="font:'Small Fonts'">[credited]</div>"}
 	maptext_height = world.icon_size * 2
 	maptext_width = world.icon_size * 14
 
@@ -204,6 +204,7 @@ client
 						with the depiction of tobacco products, despite the copious amounts	of smoking depicted within.<br>\
 						(This disclaimer sponsored by Carcinoma - Carcinogens are our Business!(TM)).",
 						"No animals were harmed in the making of this motion picture except for those listed previously as dead. Do not try this at home.")
-	titles += "<center>[JOINTEXT(disclaimer)]</center>"
+	titles += "<hr>"
+	titles += "<center><span style='font-size:6pt;'>[JOINTEXT(disclaimer)]</span></center>"
 
 	return titles

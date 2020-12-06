@@ -2,7 +2,7 @@
 	name = "soap"
 	desc = "A cheap bar of soap. Doesn't smell."
 	gender = PLURAL
-	icon = 'icons/obj/lavatory.dmi'
+	icon = 'icons/obj/soap.dmi'
 	icon_state = "soap"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	w_class = ITEM_SIZE_SMALL
@@ -11,10 +11,28 @@
 	throw_range = 20
 	var/key_data
 
+	var/list/valid_colors = list(COLOR_GREEN_GRAY, COLOR_RED_GRAY, COLOR_BLUE_GRAY, COLOR_BROWN, COLOR_PALE_PINK, COLOR_PALE_BTL_GREEN, COLOR_OFF_WHITE, COLOR_GRAY40, COLOR_GOLD)
+	var/list/valid_scents = list("fresh air", "cinnamon", "mint", "cocoa", "lavender", "an ocean breeze", "a summer garden", "vanilla", "cheap perfume")
+	var/list/scent_intensity = list("faintly", "strongly", "overbearingly")
+	var/list/valid_shapes = list("oval", "circular", "rectangular", "square")
+	var/decal_name
+	var/list/decals = list("diamond", "heart", "circle", "triangle", "")
+
 /obj/item/weapon/soap/New()
 	..()
 	create_reagents(30)
 	wet()
+
+/obj/item/weapon/soap/Initialize()
+	. = ..()
+	var/shape = pick(valid_shapes)
+	var/scent = pick(valid_scents)
+	var/smelly = pick(scent_intensity)
+	icon_state = "soap-[shape]"
+	color = pick(valid_colors)
+	decal_name = pick(decals)
+	desc = "\A [shape] bar of soap. It smells [smelly] of [scent]."
+	update_icon()
 
 /obj/item/weapon/soap/proc/wet()
 	reagents.add_reagent(/datum/reagent/space_cleaner, 15)
@@ -50,7 +68,13 @@
 	else if(istype(target,/obj/structure/hygiene/sink))
 		to_chat(user, "<span class='notice'>You wet \the [src] in the sink.</span>")
 		wet()
-	else
+	else if(ishuman(target))
+		to_chat(user, "<span class='notice'>You clean \the [target.name].</span>")
+		if(reagents)
+			reagents.trans_to(target, reagents.total_volume / 8)
+		target.clean_blood() //Clean bloodied atoms. Blood decals themselves need to be handled above.
+		cleaned = TRUE
+	else 
 		to_chat(user, "<span class='notice'>You clean \the [target.name].</span>")
 		target.clean_blood() //Clean bloodied atoms. Blood decals themselves need to be handled above.
 		cleaned = TRUE
@@ -62,6 +86,8 @@
 /obj/item/weapon/soap/attack(mob/living/target, mob/living/user, var/target_zone)
 	if(target && user && ishuman(target) && ishuman(user) && !target.stat && !user.stat && user.zone_sel &&user.zone_sel.selecting == BP_MOUTH)
 		user.visible_message("<span class='danger'>\The [user] washes \the [target]'s mouth out with soap!</span>")
+		if(reagents)
+			reagents.trans_to_mob(target, reagents.total_volume / 2, CHEM_INGEST)
 		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN) //prevent spam
 		return
 	..()
@@ -80,22 +106,5 @@
 	overlays.Cut()
 	if(key_data)
 		overlays += image('icons/obj/items.dmi', icon_state = "soap_key_overlay")
-
-/obj/item/weapon/soap/nanotrasen
-	desc = "A NanoTrasen-brand bar of soap. Smells of phoron."
-	icon_state = "soapnt"
-
-/obj/item/weapon/soap/deluxe
-	icon_state = "soapdeluxe"
-
-/obj/item/weapon/soap/deluxe/New()
-	desc = "A deluxe Waffle Co. brand bar of soap. Smells of [pick("lavender", "vanilla", "strawberry", "chocolate" ,"space")]."
-	..()
-
-/obj/item/weapon/soap/syndie
-	desc = "An untrustworthy bar of soap. Smells of fear."
-	icon_state = "soapsyndie"
-
-/obj/item/weapon/soap/gold
-	desc = "One true soap to rule them all."
-	icon_state = "soapgold"
+	else if(decal_name)
+		overlays +=	overlay_image(icon, "decal-[decal_name]")

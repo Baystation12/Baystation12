@@ -49,6 +49,6 @@
 	var/job = null//Living
 	var/list/obj/aura/auras = null //Basically a catch-all aura/force-field thing.
 
-	var/obj/screen/cells = null
-
 	var/last_resist = 0
+
+	var/ghosted = 0 //For checks as to why a player has disconnected (can AI take over? etc.)

@@ -37,11 +37,10 @@ var/list/admin_ranks = list()								//list of all ranks with associated rights
 				if("stealth")					rights |= R_STEALTH
 				if("rejuv","rejuvinate")		rights |= R_REJUVINATE
 				if("varedit")					rights |= R_VAREDIT
-				if("everything","host","all")	rights |= (R_HOST | R_BUILDMODE | R_ADMIN | R_BAN | R_FUN | R_SERVER | R_DEBUG | R_PERMISSIONS | R_POSSESS | R_STEALTH | R_REJUVINATE | R_VAREDIT | R_SOUNDS | R_SPAWN | R_MOD| R_MENTOR)
+				if("everything","host","all")	rights |= (R_HOST | R_BUILDMODE | R_ADMIN | R_BAN | R_FUN | R_SERVER | R_DEBUG | R_PERMISSIONS | R_POSSESS | R_STEALTH | R_REJUVINATE | R_VAREDIT | R_SOUNDS | R_SPAWN | R_MOD)
 				if("sound","sounds")			rights |= R_SOUNDS
 				if("spawn","create")			rights |= R_SPAWN
 				if("mod")						rights |= R_MOD
-				if("mentor")				rights |= R_MENTOR
 
 		admin_ranks[rank] = rights
 		previous_rights = rights
@@ -64,6 +63,10 @@ var/list/admin_ranks = list()								//list of all ranks with associated rights
 		C.remove_admin_verbs()
 		C.holder = null
 	GLOB.admins.Cut()
+
+	// Flush profiler access.
+	for (var/admin in world.GetConfig("admin"))
+		world.SetConfig("APP/admin", admin, null)
 
 	if(config.admin_legacy_system)
 		load_admin_ranks()

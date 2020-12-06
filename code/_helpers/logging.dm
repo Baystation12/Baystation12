@@ -1,7 +1,3 @@
-//wrapper macros for easier grepping
-#define DIRECT_OUTPUT(A, B) A << B
-#define WRITE_FILE(file, text) DIRECT_OUTPUT(file, text)
-
 
 // On Linux/Unix systems the line endings are LF, on windows it's CRLF, admins that don't use notepad++
 // will get logs that are one big line if the system is Linux and they are using notepad.  This solves it by adding CR to every line ending
@@ -34,7 +30,7 @@
 	to_world_log("## TESTING: [msg][log_end]")
 
 /proc/game_log(category, text)
-	diary << "\[[time_stamp()]] [game_id] [category]: [text][log_end]"
+	to_file(diary, "\[[time_stamp()]] [game_id] [category]: [text][log_end]")
 
 /proc/log_admin(text)
 	GLOB.admin_log.Add(text)
@@ -99,10 +95,6 @@
 	if (config.log_adminwarn)
 		game_log("ADMINWARN", text)
 
-/proc/log_pda(text)
-	if (config.log_pda)
-		game_log("PDA", text)
-
 /proc/log_misc(text)
 	game_log("MISC", text)
 
@@ -111,7 +103,7 @@
 	log_debug(text)
 
 /proc/log_qdel(text)
-	WRITE_FILE(GLOB.world_qdel_log, "\[[time_stamp()]]QDEL: [text]")
+	to_file(GLOB.world_qdel_log, "\[[time_stamp()]]QDEL: [text]")
 
 //This replaces world.log so it displays both in DD and the file
 /proc/log_world(text)
@@ -145,7 +137,7 @@
 	else if(ismob(whom))
 		M = whom
 		C = M.client
-		key = M.key
+		key = LAST_KEY(M)
 	else if(istype(whom, /datum/mind))
 		var/datum/mind/D = whom
 		key = D.key

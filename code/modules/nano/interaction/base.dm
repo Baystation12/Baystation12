@@ -8,6 +8,17 @@
 	var/datum/src_object = nano_host()
 	return state.can_use_topic(src_object, user)
 
+/mob/CanUseTopic(mob/user, datum/topic_state/state, href_list)
+	if(href_list && href_list["flavor_more"])
+		return STATUS_INTERACTIVE
+	return ..()
+
+/datum/proc/CanUseTopicPhysical(mob/user)
+	return CanUseTopic(user, GLOB.physical_state)
+
+/datum/topic_state
+	var/check_access = TRUE // Whether this topic state should bypass access checks or not.
+
 /datum/topic_state/proc/href_list(var/mob/user)
 	return list()
 

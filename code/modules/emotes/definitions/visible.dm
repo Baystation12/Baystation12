@@ -44,11 +44,6 @@
 	key ="jump"
 	emote_message_3p = "USER jumps!"
 
-/decl/emote/visible/hiss
-	key ="hiss_"
-	emote_message_3p_target = "USER hisses softly at TARGET."
-	emote_message_3p = "USER hisses softly."
-
 /decl/emote/visible/shiver
 	key ="shiver"
 	emote_message_3p = "USER shivers."
@@ -88,6 +83,7 @@
 	key = "salute"
 	emote_message_3p_target = "USER salutes TARGET."
 	emote_message_3p = "USER salutes."
+	check_restraints = TRUE
 
 /decl/emote/visible/flap
 	key = "flap"
@@ -133,6 +129,7 @@
 	key = "wave"
 	emote_message_3p_target = "USER waves at TARGET."
 	emote_message_3p = "USER waves."
+	check_restraints = TRUE
 
 /decl/emote/visible/glare
 	key = "glare"
@@ -192,20 +189,13 @@
 	check_restraints = TRUE
 	emote_message_3p_target = "USER hugs TARGET."
 	emote_message_3p = "USER hugs USER_SELF."
+	check_range = 1
 
 /decl/emote/visible/dap
 	key = "dap"
 	check_restraints = TRUE
 	emote_message_3p_target = "USER gives daps to TARGET."
 	emote_message_3p = "USER sadly can't find anybody to give daps to, and daps USER_SELF."
-
-/decl/emote/visible/signal
-	key = "signal"
-	check_restraints = TRUE
-	emote_message_3p = "USER signals."
-
-/decl/emote/visible/signal/check_user(var/atom/user)
-	return ismob(user)
 
 /decl/emote/visible/bounce
 	key = "bounce"
@@ -232,7 +222,7 @@
 	check_restraints = TRUE
 	emote_message_3p_target = "USER shakes hands with TARGET."
 	emote_message_3p = "USER shakes hands with USER_SELF."
-	message_type = VISIBLE_MESSAGE
+	check_range = 1
 
 /decl/emote/visible/handshake/get_emote_message_3p(var/atom/user, var/atom/target, var/extra_params)
 	if(target && !user.Adjacent(target))
@@ -243,7 +233,10 @@
 	key = "signal"
 	emote_message_3p_target = "USER signals at TARGET."
 	emote_message_3p = "USER signals."
-	message_type = VISIBLE_MESSAGE
+	check_restraints = TRUE
+
+/decl/emote/visible/signal/check_user(atom/user)
+	return ismob(user)
 
 /decl/emote/visible/signal/get_emote_message_3p(var/mob/user, var/atom/target, var/extra_params)
 	if(istype(user) && !(user.r_hand && user.l_hand))

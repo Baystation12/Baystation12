@@ -100,12 +100,18 @@
 
 /obj/item/organ/internal/powered/float/Process()
 	. = ..()
-	if(active && owner && owner.floatiness <= 5)
-		owner.make_floating(5)
+	if(owner)
+		if(active)
+			owner.pass_flags |= PASS_FLAG_TABLE
+			if(owner.floatiness <= 5)
+				owner.make_floating(5)
+		else
+			owner.pass_flags &= ~PASS_FLAG_TABLE
 
 /obj/item/organ/internal/eyes/adherent
 	name = "receptor prism"
 	icon = 'icons/mob/human_races/species/adherent/organs.dmi'
+	eye_icon = 'icons/mob/human_races/species/adherent/eyes.dmi'
 	icon_state = "eyes"
 	status = ORGAN_ROBOTIC
 	phoron_guard = TRUE

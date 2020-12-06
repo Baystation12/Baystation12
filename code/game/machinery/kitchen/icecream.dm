@@ -70,11 +70,12 @@
 	reagents.add_reagent(/datum/reagent/sugar, 5)
 	reagents.add_reagent(/datum/reagent/drink/ice, 5)
 
-/obj/machinery/icecream_vat/attack_hand(mob/user as mob)
-	user.set_machine(src)
+/obj/machinery/icecream_vat/interface_interact(mob/user)
 	interact(user)
+	return TRUE
 
 /obj/machinery/icecream_vat/interact(mob/user as mob)
+	user.set_machine(src)
 	var/dat
 	dat += "<b>ICECREAM</b><br><div class='statusDisplay'>"
 	dat += "<b>Dispensing: [flavour_name] icecream </b> <br><br>"
@@ -103,7 +104,7 @@
 		var/obj/item/weapon/reagent_containers/food/snacks/icecream/I = O
 		if(!I.ice_creamed)
 			if(product_types[dispense_flavour] > 0)
-				src.visible_message("\icon[src] <span class='info'>[user] scoops delicious [flavour_name] icecream into [I].</span>")
+				src.visible_message("[icon2html(src, viewers(get_turf(src)))] <span class='info'>[user] scoops delicious [flavour_name] icecream into [I].</span>")
 				product_types[dispense_flavour] -= 1
 				I.add_ice_cream(flavour_name)
 			//	if(beaker)
@@ -140,7 +141,7 @@
 
 /obj/machinery/icecream_vat/OnTopic(user, href_list)
 	if(href_list["close"])
-		usr << browse(null,"window=icecreamvat")
+		close_browser(usr,"window=icecreamvat")
 		return TOPIC_HANDLED
 
 	if(href_list["select"])
@@ -175,8 +176,8 @@
 			reagents.del_reagent(R.type)
 		. = TOPIC_REFRESH
 
-	if(href_list["refresh"] || . == TOPIC_REFRESH)
-		interact(user)
+	if(href_list["refresh"])
+		. = TOPIC_REFRESH
 
 /obj/item/weapon/reagent_containers/food/snacks/icecream
 	name = "ice cream cone"

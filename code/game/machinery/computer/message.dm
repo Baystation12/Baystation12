@@ -6,7 +6,6 @@
 	icon_screen = "comm_logs"
 	light_color = "#00b000"
 	var/hack_icon = "error"
-	circuit = /obj/item/weapon/circuitboard/message_monitor
 	//Server linked to.
 	var/obj/machinery/message_server/linkedServer = null
 	//Sparks effect - For emag
@@ -71,11 +70,11 @@
 			linkedServer = message_servers[1]
 	return ..()
 
-/obj/machinery/computer/message_monitor/attack_hand(var/mob/living/user as mob)
-	if(stat & (NOPOWER|BROKEN))
-		return
-	if(!istype(user))
-		return
+/obj/machinery/computer/message_monitor/interface_interact(user)
+	interact(user)
+	return TRUE
+
+/obj/machinery/computer/message_monitor/interact(var/mob/living/user)
 	//If the computer is being hacked or is emagged, display the reboot message.
 	if(hacking || emag)
 		message = rebootmsg
@@ -192,9 +191,6 @@
 	popup.open()
 	return
 
-/obj/machinery/computer/message_monitor/attack_ai(mob/user as mob)
-	return src.attack_hand(user)
-
 /obj/machinery/computer/message_monitor/proc/BruteForce(mob/user as mob)
 	if(isnull(linkedServer))
 		to_chat(user, "<span class='warning'>Could not complete brute-force: Linked Server Disconnected!</span>")
@@ -300,7 +296,7 @@
 	if (href_list["back"])
 		src.screen = 0
 
-	return src.attack_hand(usr)
+	return interact(usr)
 
 
 /obj/item/weapon/paper/monitorkey

@@ -5,7 +5,7 @@ var/const/MAP_HAS_BRANCH = 1	//Branch system for occupations, togglable
 var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 /hook/startup/proc/initialise_map_list()
-	for(var/type in typesof(/datum/map) - /datum/map)
+	for(var/type in subtypesof(/datum/map))
 		var/datum/map/M
 		if(type == GLOB.using_map.type)
 			M = GLOB.using_map
@@ -13,7 +13,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		else
 			M = new type
 		if(!M.path)
-			log_error("Map '[M]' does not have a defined path, not adding to map list!")
+			log_error("Map '[M]' ([type]) does not have a defined path, not adding to map list!")
 		else
 			GLOB.all_maps[M.path] = M
 	return 1
@@ -23,6 +23,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/name = "Unnamed Map"
 	var/full_name = "Unnamed Map"
 	var/path
+	var/config_path = null
 
 	var/list/station_levels = list() // Z-levels the station exists on
 	var/list/admin_levels = list()   // Z-levels for admin functionality (Centcom, shuttle transit, etc)
@@ -57,7 +58,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/company_short = "BM"
 	var/system_name = "Uncharted System"
 
-	var/map_admin_faxes = list()
+	var/list/map_admin_faxes = list()
 
 	var/shuttle_docked_message
 	var/shuttle_leaving_dock
@@ -85,8 +86,8 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/overmap_z = 0		//If 0 will generate overmap zlevel on init. Otherwise will populate the zlevel provided.
 	var/overmap_event_areas = 0 //How many event "clouds" will be generated
 
-	var/lobby_icon									// The icon which contains the lobby image(s)
-	var/list/lobby_screens = list()                 // The list of lobby screen to pick() from. If left unset the first icon state is always selected.
+	var/list/lobby_screens = list('icons/default_lobby.png')    // The list of lobby screen images to pick() from.
+	var/current_lobby_screen
 	var/music_track/lobby_track                     // The track that will play in the lobby screen.
 	var/list/lobby_tracks = list()                  // The list of lobby tracks to pick() from. If left unset will randomly select among all available /music_track subtypes.
 	var/welcome_sound = 'sound/AI/welcome.ogg'		// Sound played on roundstart
@@ -110,6 +111,9 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 	var/supply_currency_name = "Credits"
 	var/supply_currency_name_short = "Cr."
+	var/local_currency_name = "thalers"
+	var/local_currency_name_singular = "thaler"
+	var/local_currency_name_short = "T"
 
 	var/list/available_cultural_info = list(
 		TAG_HOMEWORLD = list(
@@ -144,6 +148,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			FACTION_EXPEDITIONARY,
 			FACTION_FLEET,
 			FACTION_PCRC,
+			FACTION_SAARE,
 			FACTION_OTHER
 		),
 		TAG_CULTURE = list(
@@ -168,13 +173,18 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			RELIGION_JUDAISM,
 			RELIGION_HINDUISM,
 			RELIGION_BUDDHISM,
+			RELIGION_SIKHISM,
+			RELIGION_JAINISM,
 			RELIGION_ISLAM,
 			RELIGION_CHRISTIANITY,
+			RELIGION_BAHAI_FAITH,
 			RELIGION_AGNOSTICISM,
 			RELIGION_DEISM,
 			RELIGION_ATHEISM,
 			RELIGION_THELEMA,
-			RELIGION_SPIRITUALISM
+			RELIGION_SPIRITUALISM,
+			RELIGION_SHINTO,
+			RELIGION_TAOISM
 		)
 	)
 
@@ -196,9 +206,10 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	)
 
 	// List of /datum/department types to instantiate at roundstart.
-	var/list/departments = list(
-		/datum/department/medbay
-	)
+	var/list/departments
+
+	// List of events specific to a map
+	var/list/map_event_container = list()
 
 /datum/map/New()
 	if(!map_levels)
@@ -209,18 +220,60 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			var/datum/job/job = jtype
 			if(initial(job.available_by_default))
 				allowed_jobs += jtype
-	if(!planet_size)
+	if(!LAZYLEN(planet_size))
 		planet_size = list(world.maxx, world.maxy)
+	current_lobby_screen = pick(lobby_screens)
 
-/datum/map/proc/setup_map()
+/datum/map/proc/get_lobby_track(var/exclude)
 	var/lobby_track_type
 	if(lobby_tracks.len)
-		lobby_track_type = pick(lobby_tracks)
+		lobby_track_type = pickweight(lobby_tracks - exclude)
 	else
-		lobby_track_type = pick(subtypesof(/music_track))
+		lobby_track_type = pick(subtypesof(/music_track) - exclude)
+	return decls_repository.get_decl(lobby_track_type)
 
-	lobby_track = decls_repository.get_decl(lobby_track_type)
+/datum/map/proc/setup_config(name, value, filename)
+	switch (name)
+		if ("use_overmap") use_overmap = text2num_or_default(value, use_overmap)
+		if ("overmap_z") overmap_z = text2num_or_default(value, overmap_z)
+		if ("overmap_size") overmap_size = text2num_or_default(value, overmap_size)
+		if ("overmap_event_areas") overmap_event_areas = text2num_or_default(value, overmap_event_areas)
+		if ("num_exoplanets") num_exoplanets = text2num_or_default(value, num_exoplanets)
+		if ("away_site_budget") away_site_budget = text2num_or_default(value, away_site_budget)
+		if ("station_name") station_name = value
+		if ("station_short") station_short = value
+		if ("dock_name") dock_name = value
+		if ("boss_name") boss_name = value
+		if ("boss_short") boss_short = value
+		if ("company_name") company_name = value
+		if ("company_short") company_short = value
+		if ("shuttle_docked_message") shuttle_docked_message = value
+		if ("shuttle_leaving_dock") shuttle_leaving_dock = value
+		if ("shuttle_called_message") shuttle_called_message = value
+		if ("shuttle_recall_message") shuttle_recall_message = value
+		if ("emergency_shuttle_docked_message") emergency_shuttle_docked_message = value
+		if ("emergency_shuttle_leaving_dock") emergency_shuttle_leaving_dock = value
+		if ("emergency_shuttle_recall_message") emergency_shuttle_recall_message = value
+		if ("starting_money") starting_money = text2num_or_default(value, starting_money)
+		if ("department_money") department_money = text2num_or_default(value, department_money)
+		if ("salary_modifier") salary_modifier = text2num_or_default(value, salary_modifier)
+		if ("supply_currency_name") supply_currency_name = value
+		if ("supply_currency_name_short") supply_currency_name_short = value
+		if ("local_currency_name") local_currency_name = value
+		if ("local_currency_name_singular") local_currency_name_singular = value
+		if ("local_currency_name_short") local_currency_name_short = value
+		else log_misc("Unknown setting [name] in [filename].")
+
+/datum/map/proc/setup_map()
+	lobby_track = get_lobby_track()
 	world.update_status()
+	setup_events()
+
+/datum/map/proc/setup_events()
+	return
+
+/datum/map/proc/setup_job_lists()
+	return
 
 /datum/map/proc/send_welcome()
 	return
@@ -228,33 +281,84 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 /datum/map/proc/perform_map_generation()
 	return
 
+
+/* It is perfectly possible to create loops with TEMPLATE_FLAG_ALLOW_DUPLICATES and force/allow. Don't. */
+/proc/resolve_site_selection(datum/map_template/ruin/away_site/site, list/selected, list/available, list/unavailable, list/by_type)
+	var/cost = 0
+	if (site in selected)
+		if (!(site.template_flags & TEMPLATE_FLAG_ALLOW_DUPLICATES))
+			return cost
+	if (!(site.template_flags & TEMPLATE_FLAG_ALLOW_DUPLICATES))
+		available -= site
+	cost += site.cost
+	selected += site
+
+	for (var/forced_type in site.force_ruins)
+		cost += resolve_site_selection(by_type[forced_type], selected, available, unavailable, by_type)
+
+	for (var/banned_type in site.ban_ruins)
+		var/datum/map_template/ruin/away_site/banned = by_type[banned_type]
+		if (banned in unavailable)
+			continue
+		unavailable += banned
+		available -= banned
+
+	for (var/allowed_type in site.allow_ruins)
+		var/datum/map_template/ruin/away_site/allowed = by_type[allowed_type]
+		if (allowed in available)
+			continue
+		if (allowed in unavailable)
+			continue
+		if (allowed in selected)
+			if (!(allowed.template_flags & TEMPLATE_FLAG_ALLOW_DUPLICATES))
+				continue
+		available[allowed] = allowed.spawn_weight
+
+	return cost
+
+
 /datum/map/proc/build_away_sites()
 #ifdef UNIT_TEST
 	report_progress("Unit testing, so not loading away sites")
 	return // don't build away sites during unit testing
 #else
 	report_progress("Loading away sites...")
-	var/list/sites_by_spawn_weight = list()
+
+	var/list/guaranteed = list()
+	var/list/selected = list()
+	var/list/available = list()
+	var/list/unavailable = list()
+	var/list/by_type = list()
+
 	for (var/site_name in SSmapping.away_sites_templates)
 		var/datum/map_template/ruin/away_site/site = SSmapping.away_sites_templates[site_name]
+		if (site.template_flags & TEMPLATE_FLAG_SPAWN_GUARANTEED)
+			guaranteed += site
+			if ((site.template_flags & TEMPLATE_FLAG_ALLOW_DUPLICATES) && !(site.template_flags & TEMPLATE_FLAG_RUIN_STARTS_DISALLOWED))
+				available[site] = site.spawn_weight
+		else if (!(site.template_flags & TEMPLATE_FLAG_RUIN_STARTS_DISALLOWED))
+			available[site] = site.spawn_weight
+		by_type[site.type] = site
 
-		if((site.template_flags & TEMPLATE_FLAG_SPAWN_GUARANTEED) && site.load_new_z()) // no check for budget, but guaranteed means guaranteed
-			report_progress("Loaded guaranteed away site [site]!")
-			away_site_budget -= site.cost
-			continue
+	var/budget = away_site_budget
+	for (var/datum/map_template/ruin/away_site/site in guaranteed)
+		budget -= resolve_site_selection(site, selected, available, unavailable, by_type)
 
-		sites_by_spawn_weight[site] = site.spawn_weight
-	while (away_site_budget > 0 && sites_by_spawn_weight.len)
-		var/datum/map_template/ruin/away_site/selected_site = pickweight(sites_by_spawn_weight)
-		if (!selected_site)
-			break
-		sites_by_spawn_weight -= selected_site
-		if(selected_site.cost > away_site_budget)
+	while (budget > 0 && length(available))
+		var/datum/map_template/ruin/away_site/site = pickweight(available)
+		if (site.cost > budget)
+			unavailable += site
+			available -= site
 			continue
-		if (selected_site.load_new_z())
-			report_progress("Loaded away site [selected_site]!")
-			away_site_budget -= selected_site.cost
-	report_progress("Finished loading away sites, remaining budget [away_site_budget], remaining sites [sites_by_spawn_weight.len]")
+		budget -= resolve_site_selection(site, selected, available, unavailable, by_type)
+
+	report_progress("Finished selecting away sites ([english_list(selected)]) for [away_site_budget - budget] cost of [away_site_budget] budget.")
+
+	for (var/datum/map_template/template in selected)
+		if (template.load_new_z())
+			report_progress("Loaded away site [template]!")
+		else
+			report_progress("Failed loading away site [template]!")
 #endif
 
 /datum/map/proc/build_exoplanets()
@@ -262,8 +366,8 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		return
 
 	for(var/i = 0, i < num_exoplanets, i++)
-		var/exoplanet_type = pick(subtypesof(/obj/effect/overmap/sector/exoplanet))
-		var/obj/effect/overmap/sector/exoplanet/new_planet = new exoplanet_type(null, planet_size[1], planet_size[2])
+		var/exoplanet_type = pick(subtypesof(/obj/effect/overmap/visitable/sector/exoplanet))
+		var/obj/effect/overmap/visitable/sector/exoplanet/new_planet = new exoplanet_type(null, planet_size[1], planet_size[2])
 		new_planet.build_level()
 
 // Used to apply various post-compile procedural effects to the map.
@@ -309,20 +413,26 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		weighted_mundaneevent_locations[D] = D.viable_mundane_events.len
 
 	if(!station_account)
-		station_account = create_account("[station_name()] Primary Account", starting_money)
+		station_account = create_account("[station_name()] Primary Account", "[station_name()]", starting_money, ACCOUNT_TYPE_DEPARTMENT)
 
 	for(var/job in allowed_jobs)
-		var/datum/job/J = decls_repository.get_decl(job)
-		if(J.department)
-			station_departments |= J.department
-	for(var/department in station_departments)
-		department_accounts[department] = create_account("[department] Account", department_money)
+		var/datum/job/J = job
+		var/dept = initial(J.department)
+		if(dept)
+			station_departments |= dept
 
-	department_accounts["Vendor"] = create_account("Vendor Account", 0)
+	for(var/department in station_departments)
+		department_accounts[department] = create_account("[department] Account", "[department]", department_money, ACCOUNT_TYPE_DEPARTMENT)
+
+	department_accounts["Vendor"] = create_account("Vendor Account", "Vendor", 0, ACCOUNT_TYPE_DEPARTMENT)
 	vendor_account = department_accounts["Vendor"]
 
 /datum/map/proc/map_info(var/client/victim)
-	return
+	to_chat(victim, "<h2>Current map information</h2>")
+	to_chat(victim, get_map_info())
+
+/datum/map/proc/get_map_info()
+	return "No map information available"
 
 /datum/map/proc/bolt_saferooms()
 	return // overriden by torch
@@ -355,4 +465,16 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		num2text(SCI_FREQ)   = list(access_tox,access_robotics,access_xenobiology),
 		num2text(SUP_FREQ)   = list(access_cargo),
 		num2text(SRV_FREQ)   = list(access_janitor, access_hydroponics),
+		num2text(HAIL_FREQ)  = list(),
 	)
+
+/datum/map/proc/show_titlescreen(client/C)
+	winset(C, "lobbybrowser", "is-disabled=false;is-visible=true")
+
+	show_browser(C, current_lobby_screen, "file=titlescreen.png;display=0")
+	show_browser(C, file('html/lobby_titlescreen.html'), "window=lobbybrowser")
+
+/datum/map/proc/hide_titlescreen(client/C)
+	if(C.mob) // Check if the client is still connected to something
+		// Hide title screen, allowing player to see the map
+		winset(C, "lobbybrowser", "is-disabled=true;is-visible=false")

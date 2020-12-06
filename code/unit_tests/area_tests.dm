@@ -8,6 +8,8 @@
 			continue
 		if(A.type in GLOB.using_map.area_coherency_test_exempt_areas)
 			continue
+		if(is_path_in_list(A.type, GLOB.using_map.area_coherency_test_exempted_root_areas))
+			continue
 		var/list/area_turfs = list()
 		for(var/turf/T in A)
 			area_turfs += T

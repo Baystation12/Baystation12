@@ -31,7 +31,7 @@
 
 /obj/item/weapon/shield
 	name = "shield"
-	var/base_block_chance = 50
+	var/base_block_chance = 60
 
 /obj/item/weapon/shield/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	if(user.incapacitated())
@@ -51,7 +51,7 @@
 /obj/item/weapon/shield/riot
 	name = "riot shield"
 	desc = "A shield adept at blocking blunt objects from connecting with the torso of the shield wielder."
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/weapons/melee_physical.dmi'
 	icon_state = "riot"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BACK
@@ -64,7 +64,7 @@
 	matter = list(MATERIAL_GLASS = 7500, MATERIAL_STEEL = 1000)
 	attack_verb = list("shoved", "bashed")
 	var/cooldown = 0 //shield bash cooldown. based on world.time
-	var/max_block = 10
+	var/max_block = 15
 	var/can_block_lasers = FALSE
 
 /obj/item/weapon/shield/riot/handle_shield(mob/user)
@@ -92,6 +92,7 @@
 
 /obj/item/weapon/shield/riot/metal
 	name = "plasteel combat shield"
+	icon = 'icons/obj/weapons/melee_physical.dmi'
 	icon_state = "metal"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BACK
@@ -100,14 +101,14 @@
 	throw_range = 3
 	w_class = ITEM_SIZE_HUGE
 	matter = list(MATERIAL_PLASTEEL = 8500)
-	max_block = 35
+	max_block = 50
 	can_block_lasers = TRUE
 	slowdown_general = 1.5
 
 /obj/item/weapon/shield/buckler
 	name = "buckler"
 	desc = "A wooden buckler used to block sharp things from entering your body back in the day.."
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/weapons/melee_physical.dmi'
 	icon_state = "buckler"
 	slot_flags = SLOT_BACK
 	force = 8
@@ -136,7 +137,7 @@
 /obj/item/weapon/shield/energy
 	name = "energy combat shield"
 	desc = "A shield capable of stopping most projectile and melee attacks. It can be retracted, expanded, and stored anywhere."
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/weapons/melee_energy.dmi'
 	icon_state = "eshield0" // eshield1 for expanded
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = 3.0
@@ -144,7 +145,7 @@
 	throw_speed = 1
 	throw_range = 4
 	w_class = ITEM_SIZE_SMALL
-	origin_tech = list(TECH_MATERIAL = 4, TECH_MAGNET = 3, TECH_ILLEGAL = 4)
+	origin_tech = list(TECH_MATERIAL = 4, TECH_MAGNET = 3, TECH_ESOTERIC = 4)
 	attack_verb = list("shoved", "bashed")
 	var/active = 0
 
@@ -163,13 +164,13 @@
 	if(istype(damage_source, /obj/item/projectile))
 		var/obj/item/projectile/P = damage_source
 		if((is_sharp(P) && damage > 10) || istype(P, /obj/item/projectile/beam))
-			return (base_block_chance - round(damage / 3)) //block bullets and beams using the old block chance
+			return (base_block_chance - round(damage / 2.5)) //block bullets and beams using the old block chance
 	return base_block_chance
 
 /obj/item/weapon/shield/energy/attack_self(mob/living/user as mob)
 	if ((MUTATION_CLUMSY in user.mutations) && prob(50))
 		to_chat(user, "<span class='warning'>You beat yourself in the head with [src].</span>")
-		user.take_organ_damage(5)
+		user.take_organ_damage(5, 0)
 	active = !active
 	if (active)
 		force = 10
@@ -199,4 +200,3 @@
 		set_light(0.4, 0.1, 1, 2, "#006aff")
 	else
 		set_light(0)
-

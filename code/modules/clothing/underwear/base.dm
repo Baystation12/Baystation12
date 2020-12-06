@@ -51,7 +51,7 @@
 		return
 	if(user != H)
 		visible_message("<span class='danger'>\The [user] is trying to remove \the [H]'s [name]!</span>")
-		if(!do_after(user, HUMAN_STRIP_DELAY, H, progress = 0))
+		if(!do_after(user, HUMAN_STRIP_DELAY, H, do_flags = DO_DEFAULT & ~DO_SHOW_PROGRESS))
 			return FALSE
 	. = RemoveUnderwear(user, H)
 	if(. && user != H)
@@ -63,7 +63,7 @@
 		return
 	if(user != H)
 		user.visible_message("<span class='warning'>\The [user] has begun putting on \a [src] on \the [H].</span>", "<span class='notice'>You begin putting on \the [src] on \the [H].</span>")
-		if(!do_after(user, HUMAN_STRIP_DELAY, H, progress = FALSE))
+		if(!do_after(user, HUMAN_STRIP_DELAY, H, do_flags = DO_DEFAULT & ~DO_SHOW_PROGRESS))
 			return FALSE
 	. = EquipUnderwear(user, H)
 	if(. && user != H)

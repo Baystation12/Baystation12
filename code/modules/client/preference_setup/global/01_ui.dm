@@ -10,19 +10,19 @@
 	name = "UI"
 	sort_order = 1
 
-/datum/category_item/player_setup_item/player_global/ui/load_preferences(var/savefile/S)
-	S["UI_style"]		>> pref.UI_style
-	S["UI_style_color"]	>> pref.UI_style_color
-	S["UI_style_alpha"]	>> pref.UI_style_alpha
-	S["ooccolor"]		>> pref.ooccolor
-	S["clientfps"]		>> pref.clientfps
+/datum/category_item/player_setup_item/player_global/ui/load_preferences(datum/pref_record_reader/R)
+	pref.UI_style = R.read("UI_style")
+	pref.UI_style_color = R.read("UI_style_color")
+	pref.UI_style_alpha = R.read("UI_style_alpha")
+	pref.ooccolor = R.read("ooccolor")
+	pref.clientfps = R.read("clientfps")
 
-/datum/category_item/player_setup_item/player_global/ui/save_preferences(var/savefile/S)
-	S["UI_style"]		<< pref.UI_style
-	S["UI_style_color"]	<< pref.UI_style_color
-	S["UI_style_alpha"]	<< pref.UI_style_alpha
-	S["ooccolor"]		<< pref.ooccolor
-	S["clientfps"]		<< pref.clientfps
+/datum/category_item/player_setup_item/player_global/ui/save_preferences(datum/pref_record_writer/W)
+	W.write("UI_style", pref.UI_style)
+	W.write("UI_style_color", pref.UI_style_color)
+	W.write("UI_style_alpha", pref.UI_style_alpha)
+	W.write("ooccolor", pref.ooccolor)
+	W.write("clientfps", pref.clientfps)
 
 /datum/category_item/player_setup_item/player_global/ui/sanitize_preferences()
 	pref.UI_style		= sanitize_inlist(pref.UI_style, all_ui_styles, initial(pref.UI_style))
@@ -35,14 +35,14 @@
 	. += "<b>UI Settings</b><br>"
 	. += "<b>UI Style:</b> <a href='?src=\ref[src];select_style=1'><b>[pref.UI_style]</b></a><br>"
 	. += "<b>Custom UI</b> (recommended for White UI):<br>"
-	. += "-Color: <a href='?src=\ref[src];select_color=1'><b>[pref.UI_style_color]</b></a> <table style='display:inline;' bgcolor='[pref.UI_style_color]'><tr><td>__</td></tr></table> <a href='?src=\ref[src];reset=ui'>reset</a><br>"
-	. += "-Alpha(transparency): <a href='?src=\ref[src];select_alpha=1'><b>[pref.UI_style_alpha]</b></a> <a href='?src=\ref[src];reset=alpha'>reset</a><br>"
+	. += "-Color: <a href='?src=\ref[src];select_color=1'><b>[pref.UI_style_color]</b></a> <table style='display:inline;' bgcolor='[pref.UI_style_color]'><tr><td>__</td></tr></table> <a href='?src=\ref[src];reset=ui'>reset</a><br>"
+	. += "-Alpha(transparency): <a href='?src=\ref[src];select_alpha=1'><b>[pref.UI_style_alpha]</b></a> <a href='?src=\ref[src];reset=alpha'>reset</a><br>"
 	if(can_select_ooc_color(user))
-		. += "<b>OOC Color:</b> "
+		. += "<b>OOC Color:</b> "
 		if(pref.ooccolor == initial(pref.ooccolor))
 			. += "<a href='?src=\ref[src];select_ooc_color=1'><b>Using Default</b></a><br>"
 		else
-			. += "<a href='?src=\ref[src];select_ooc_color=1'><b>[pref.ooccolor]</b></a> <table style='display:inline;' bgcolor='[pref.ooccolor]'><tr><td>__</td></tr></table> <a href='?src=\ref[src];reset=ooc'>reset</a><br>"
+			. += "<a href='?src=\ref[src];select_ooc_color=1'><b>[pref.ooccolor]</b></a> <table style='display:inline;' bgcolor='[pref.ooccolor]'><tr><td>__</td></tr></table> <a href='?src=\ref[src];reset=ooc'>reset</a><br>"
 	. += "<b>Client FPS:</b> <a href='?src=\ref[src];select_fps=1'><b>[pref.clientfps]</b></a><br>"
 
 /datum/category_item/player_setup_item/player_global/ui/OnTopic(var/href,var/list/href_list, var/mob/user)

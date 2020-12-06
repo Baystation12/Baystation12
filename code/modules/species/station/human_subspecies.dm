@@ -12,9 +12,11 @@
 
 	flash_mod =     0.9
 	oxy_mod =       1.1
+	breath_pressure = 18
 	radiation_mod = 0.5
 	brute_mod =     0.85
 	slowdown =      1
+	strength = STR_HIGH
 
 	descriptors = list(
 		/datum/mob_descriptor/height = -1,
@@ -33,6 +35,7 @@
 	preview_icon= 'icons/mob/human_races/species/human/subspecies/spacer_preview.dmi'
 
 	oxy_mod =   0.8
+	breath_pressure = 14
 	toxins_mod =   0.9
 	flash_mod = 1.2
 	brute_mod = 1.1
@@ -46,13 +49,28 @@
 		)
 
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_SPCR | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
+	species_flags = SPECIES_FLAG_LOW_GRAV_ADAPTED
+
+	hazard_high_pressure = HAZARD_HIGH_PRESSURE * 0.8            // Dangerously high pressure.
+	warning_high_pressure = WARNING_HIGH_PRESSURE * 0.8          // High pressure warning.
+	warning_low_pressure = WARNING_LOW_PRESSURE * 0.8            // Low pressure warning.
+	hazard_low_pressure = HAZARD_LOW_PRESSURE * 0.8              // Dangerously low pressure.
 
 /datum/species/human/vatgrown
 	name = SPECIES_VATGROWN
 	name_plural = "Vat-Grown Humans"
 	description = "With cloning on the forefront of human scientific advancement, cheap mass production \
-	of bodies is a very real and rather ethically grey industry. Vat-grown humans tend to be paler than \
-	baseline, with no appendix and fewer inherited genetic disabilities, but a weakened metabolism."
+	of bodies is a very real and rather ethically grey industry. Although slavery, indentured servitude \
+	and flash-cloning are all illegal in SCG space, there still exists a margin for those legitimate \
+	corporations able to take up contracts for growing and raising vat-grown humans to populate new \
+	colonies or installations. Many vat-grown humans come from one of these projects, making up the \
+	majority of those referred to as the nonborn - those with singular names and an identifier, such as \
+	ID-John, BQ1-Bob or Thomas-582 - while others, bearing more human-sounding names, are created for \
+	and raised as members of regular human families. Still others are the lab-created designer progeny \
+	of the SCG's rich elite.<br/><br/>Vat-grown humans tend to be paler than baseline, though those \
+	with darker skin better display the dull, greenish hue resulting from their artificial growth. \
+	Vat-grown humans have no appendix and fewer inherited genetic disabilities but have a weakened \
+	metabolism."
 	icobase =     'icons/mob/human_races/species/human/subspecies/vatgrown_body.dmi'
 	preview_icon= 'icons/mob/human_races/species/human/subspecies/vatgrown_preview.dmi'
 
@@ -115,3 +133,94 @@
 		)
 
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_TRITON | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
+
+/datum/species/human/booster
+	name = SPECIES_BOOSTER
+	name_plural = "Boosters"
+	description = "The self-proclaimed 'boosters' are a loosely affiliated group of self-modifying \
+	bio-tinkers, engineers and radical philosophers dedicated to expanding the definition of what it \
+	means to be human. Conservatives frown on their excessive recklessness, and most booster habitats \
+	are found on the outskirts of systems - some even linger at the edge of human space.<br><br>The \
+	shared Booster genotype is extremely unstable and liable for rapid, apparently random change, \
+	but is certainly both unique and remarkable in its ability to cope with the extremes that the \
+	Universe can throw at it."
+
+#define MOD_BASE     0.85
+#define MOD_VARIANCE 0.35
+
+/datum/species/human/booster/proc/get_mod(var/mob/living/carbon/human/booster, var/mod_type)
+	if(istype(booster) && !booster.isSynthetic())
+		var/list/mods = SSkv.Get(booster, "mods")
+		if (!length(mods))
+			mods = list(
+				"brute" = MOD_BASE + rand() * MOD_VARIANCE,
+				"burn" = MOD_BASE + rand() * MOD_VARIANCE,
+				"toxins" = MOD_BASE + rand() * MOD_VARIANCE,
+				"radiation" = MOD_BASE + rand() * MOD_VARIANCE,
+				"slowdown" = pick(-0.5, 0, 0.5)
+			)
+			SSkv.Put(booster, "mods", mods)
+		return mods[mod_type] || 1
+
+#undef MOD_BASE
+#undef MOD_VARIANCE
+
+/datum/species/human/booster/get_brute_mod(var/mob/living/carbon/human/H)
+	. = get_mod(H, "brute")
+	if(isnull(.))
+		. = ..()
+
+/datum/species/human/booster/get_burn_mod(var/mob/living/carbon/human/H)
+	. = get_mod(H, "burn")
+	if(isnull(.))
+		. = ..()
+
+/datum/species/human/booster/get_toxins_mod(var/mob/living/carbon/human/H)
+	. = get_mod(H, "toxins")
+	if(isnull(.))
+		. = ..()
+
+/datum/species/human/booster/get_radiation_mod(var/mob/living/carbon/human/H)
+	. = get_mod(H, "radiation")
+	if(isnull(.))
+		. = ..()
+
+/datum/species/human/booster/get_slowdown(var/mob/living/carbon/human/H)
+	. = get_mod(H, "slowdown")
+	if(isnull(.))
+		. = ..()
+
+/datum/species/human/mule
+	name = SPECIES_MULE
+	name_plural = "Mules"
+	description = "There are a huge number of 'uncurated' genetic lines in human space, many of which fall under the \
+	general header of baseline humanity. One recently discovered genotype is remarkable for both being deeply feral, \
+	in the sense that it still has many of the inherited diseases and weaknesses that plagued pre-expansion humanity, \
+	and for a strange affinity for psionic operancy. The Mules, as they are called, are born on the very edges of \
+	civilization, and are physically diminutive and unimposing, with scrawny, often deformed bodies. Their physiology \
+	rejects prosthetics and synthetic organs, and their lifespans are short, but their raw psionic potential is unmatched."
+
+	spawn_flags =   SPECIES_CAN_JOIN | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN | SPECIES_NO_ROBOTIC_INTERNAL_ORGANS
+	brute_mod =     1.25
+	burn_mod =      1.25
+	oxy_mod =       1.25
+	toxins_mod =    1.25
+	radiation_mod = 1.25
+	flash_mod =     1.25
+	blood_volume =  SPECIES_BLOOD_DEFAULT * 0.85
+	min_age =       18
+	max_age =       45
+
+/datum/species/human/mule/handle_post_spawn(var/mob/living/carbon/human/H)
+	if(!H.psi)
+		H.psi = new(H)
+		var/list/faculties = list("[PSI_COERCION]", "[PSI_REDACTION]", "[PSI_ENERGISTICS]", "[PSI_PSYCHOKINESIS]")
+		for(var/i = 1 to rand(2,3))
+			H.set_psi_rank(pick_n_take(faculties), 1)
+	H.psi.max_stamina = 70
+	var/obj/item/organ/external/E = pick(H.organs)
+	if(!BP_IS_ROBOTIC(E))
+		E.mutate()
+		E.limb_flags |= ORGAN_FLAG_DEFORMED
+		E.status |= ORGAN_DISFIGURED
+		E.status |= ORGAN_MUTATED

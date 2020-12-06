@@ -32,7 +32,7 @@
 			target = null
 			error = "Connection to destination relay lost."
 
-/datum/computer_file/program/ntnet_dos/kill_program(var/forced)
+/datum/computer_file/program/ntnet_dos/on_shutdown(var/forced)
 	if(target)
 		target.dos_sources.Remove(src)
 		target = null
@@ -106,16 +106,13 @@
 		target.dos_sources.Add(src)
 		operator_skill = usr.get_skill_value(SKILL_COMPUTER)
 	
-		var/list/sources_to_show = list(computer.network_card.get_network_tag())
+		var/list/sources_to_show = list(computer.get_network_tag())
 		var/extra_to_show = 2 * max(operator_skill - SKILL_ADEPT, 0)
 		if(extra_to_show)
-			var/list/candidates = list()
-			for(var/obj/item/modular_computer/C in SSobj.processing) // Apparently the only place these are stored.
-				if(C.network_card && (C.z in GetConnectedZlevels(computer.z)))
-					candidates += C
 			for(var/i = 1, i <= extra_to_show, i++)
-				var/obj/item/modular_computer/C = pick_n_take(candidates)
-				sources_to_show += C.network_card.get_network_tag()
+				var/nid = pick(ntnet_global.registered_nids)
+				var/datum/extension/interactive/ntos/os = ntnet_global.registered_nids[nid]
+				sources_to_show |= os.get_network_tag()
 
 		if(ntnet_global.intrusion_detection_enabled)
 			ntnet_global.add_log("IDS WARNING - Excess traffic flood targeting relay [target.uid] detected from [length(sources_to_show)] device\s: [english_list(sources_to_show)]")

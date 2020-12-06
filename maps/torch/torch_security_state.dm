@@ -19,7 +19,7 @@
 
 //Torch map alert levels. Refer to security_state.dm.
 /decl/security_state/default/torchdept
-	all_security_levels = list(/decl/security_level/default/torchdept/code_green, /decl/security_level/default/torchdept/code_violet, /decl/security_level/default/torchdept/code_orange, /decl/security_level/default/torchdept/code_blue, /decl/security_level/default/torchdept/code_red, /decl/security_level/default/code_delta)
+	all_security_levels = list(/decl/security_level/default/torchdept/code_green, /decl/security_level/default/torchdept/code_violet, /decl/security_level/default/torchdept/code_orange, /decl/security_level/default/torchdept/code_blue, /decl/security_level/default/torchdept/code_red, /decl/security_level/default/torchdept/code_delta)
 
 /decl/security_level/default/torchdept
 	icon = 'maps/torch/icons/security_state.dmi'
@@ -117,7 +117,25 @@
 	GLOB.using_map.unbolt_saferooms()
 
 /decl/security_level/default/torchdept/code_red/switching_down_to()
-	security_announcement_red.Announce("The self-destruct mechanism has been deactivated. All staff are to report to their supervisor for orders. All crew should obey orders from relevant emergency personnel. Security personnel are permitted to search staff and facilities, and may have weapons unholstered at any time.", "Attention! Code red alert procedures now in effect!")
+	security_announcement_red.Announce("Code Delta has been disengaged. All staff are to report to their supervisor for orders. All crew should obey orders from relevant emergency personnel. Security personnel are permitted to search staff and facilities, and may have weapons unholstered at any time.", "Attention! Code red alert procedures now in effect!")
+	notify_station()
+
+/decl/security_level/default/torchdept/code_delta
+	name = "code delta"
+
+	light_max_bright = 0.75
+	light_inner_range = 0.1
+	light_outer_range = 3
+	light_color_alarm = COLOR_RED
+	light_color_status_display = COLOR_NAVY_BLUE
+
+	overlay_alarm = "alarm_delta"
+	overlay_status_display = "status_display_delta"
+
+	var/static/datum/announcement/priority/security/security_announcement_delta = new(do_log = 0, do_newscast = 1, new_sound = sound('sound/effects/siren.ogg'))
+
+/decl/security_level/default/torchdept/code_delta/switching_up_to()
+	security_announcement_delta.Announce("Code Delta procedures have been engaged. All crew are instructed to obey all instructions given by heads of staff. Any violations of these orders can be punished by death. This is not a drill.", "Attention! Delta security level reached!")
 	notify_station()
 
 #undef PSI_IMPLANT_AUTOMATIC

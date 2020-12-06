@@ -17,7 +17,7 @@
 	. = ..()
 	create_reagents(max_fuel)
 	reagents.add_reagent(/datum/reagent/fuel, max_fuel)
-	set_extension(src, /datum/extension/base_icon_state, /datum/extension/base_icon_state, icon_state)
+	set_extension(src, /datum/extension/base_icon_state, icon_state)
 	if(random_colour)
 		color = pick(available_colors)
 	update_icon()
@@ -29,19 +29,19 @@
 	lit = 1
 	update_icon()
 	light_effects(user)
-	set_light(0.6, 0.5, 2)
+	set_light(0.6, 0.5, 2, l_color = COLOR_PALE_ORANGE)
 	START_PROCESSING(SSobj, src)
 
 /obj/item/weapon/flame/lighter/proc/light_effects(mob/living/carbon/user)
 	if(prob(95))
-		user.visible_message("<span class='notice'>After a few attempts, [user] manages to light the [src].</span>")
+		user.visible_message("<span class='notice'>After a few attempts, [user] manages to light \the [src].</span>")
 	else
 		to_chat(user, "<span class='warning'>You burn yourself while lighting the lighter.</span>")
 		if (user.l_hand == src)
 			user.apply_damage(2,BURN,BP_L_HAND)
 		else
 			user.apply_damage(2,BURN,BP_R_HAND)
-		user.visible_message("<span class='notice'>After a few attempts, [user] manages to light the [src], burning their finger in the process.</span>")
+		user.visible_message("<span class='notice'>After a few attempts, [user] manages to light \the [src], burning their finger in the process.</span>")
 	playsound(src.loc, "light_bic", 100, 1, -4)
 
 /obj/item/weapon/flame/lighter/extinguish(var/mob/user, var/no_message)

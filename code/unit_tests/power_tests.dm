@@ -81,7 +81,7 @@ datum/unit_test/roundstart_cable_connectivity/start_test()
 		A.retally_power()
 		var/list/new_values = list(A.used_equip, A.used_light, A.used_environ)
 		for(var/i in 1 to length(old_values))
-			if(old_values[i] != new_values[i])
+			if(abs(old_values[i] - new_values[i]) > 1) // Round because there can in fact be roundoff error here apparently.
 				failed = TRUE
 				log_bad("The area [A.name] had improper power use values on the [channel_names[i]] channel: was [old_values[i]] but should be [new_values[i]].")
 

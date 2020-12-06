@@ -15,6 +15,12 @@
 	broken_damage = 100
 	w_class = ITEM_SIZE_NORMAL
 	var/icon_state_closed = "laptop-closed"
+	interact_sounds = list("keyboard", "keystroke")
+	interact_sound_volume = 20
+	
+/obj/item/modular_computer/laptop/Initialize()
+	. = ..()
+	screen_on = anchored
 
 /obj/item/modular_computer/laptop/AltClick(var/mob/user)
 // Prevents carrying of open laptops inhand.

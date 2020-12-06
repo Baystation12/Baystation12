@@ -22,6 +22,7 @@ Targeted spells have two useful flags: INCLUDEUSER and SELECTABLE. These are exp
 	var/amt_dam_brute = 0
 	var/amt_dam_oxy = 0
 	var/amt_dam_tox = 0
+	var/amt_dam_robo = 0
 	var/amt_brain = 0
 	var/amt_radiation = 0
 	var/amt_blood = 0 //Positive numbers to add blood
@@ -145,9 +146,13 @@ Targeted spells have two useful flags: INCLUDEUSER and SELECTABLE. These are exp
 	target.adjustOxyLoss(amt_dam_oxy)
 	if(ishuman(target))
 		var/mob/living/carbon/human/H = target
-		for(var/obj/item/organ/external/affecting in H.organs)
+		for(var/obj/item/organ/internal/affecting in H.internal_organs)
 			if(affecting && istype(affecting))
 				affecting.heal_damage(amt_organ, amt_organ)
+		for(var/obj/item/organ/external/affecting in H.organs)
+			if(affecting && istype(affecting))
+				var/dam = BP_IS_ROBOTIC(affecting) ? -amt_dam_robo : amt_organ
+				affecting.heal_damage(dam, dam, robo_repair = BP_IS_ROBOTIC(affecting))
 		H.vessel.add_reagent(/datum/reagent/blood,amt_blood)
 		H.adjustBrainLoss(amt_brain)
 		H.radiation += min(H.radiation, amt_radiation)

@@ -39,7 +39,7 @@ Frequency:
 <A href='byond://?src=\ref[src];freq=10'>+</A><BR>
 
 <A href='?src=\ref[src];refresh=1'>Refresh</A>"}
-	user << browse(dat, "window=radio")
+	show_browser(user, dat, "window=radio")
 	onclose(user, "radio")
 	return
 
@@ -61,6 +61,8 @@ Frequency:
 				src.temp += "<B>Located Beacons:</B><BR>"
 
 				for(var/obj/item/device/radio/beacon/W in world)
+					if(!W.functioning)
+						continue
 					if (W.frequency == src.frequency)
 						var/turf/tr = get_turf(W)
 						if (tr.z == sr.z && tr)

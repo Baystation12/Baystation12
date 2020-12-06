@@ -59,6 +59,26 @@
 		</div>
 	{{/if}}
 </div>
+{{if data.uses_coolant}}
+	<h3>Coolant</h3>
+	<div class='item'>
+		<div class="itemLabel">
+			Coolant Level:
+		</div>
+		<div class="itemContent">
+			{{if data.coolant_stored/data.coolant_capacity >= 0.4}}
+				{{:helper.displayBar(data.coolant_stored, 0, data.coolant_capacity, 'good')}}
+				<br><span class="good">{{:data.coolant_stored}}/{{:data.coolant_capacity}} u</span>
+			{{else data.coolant_stored/data.coolant_capacity >= 0.1}}
+				{{:helper.displayBar(data.coolant_stored, 0, data.coolant_capacity, 'average')}}
+				<br><span class="average">{{:data.coolant_stored}}/{{:data.coolant_capacity}} u</span>
+			{{else}}
+				{{:helper.displayBar(data.coolant_stored, 0, data.coolant_capacity, 'bad')}}
+				<br><span class="bad">{{:data.coolant_stored}}/{{:data.coolant_capacity}} u</span>
+			{{/if}}
+		</div>
+	</div>
+{{/if}}
 <h3>Output</h3>
 <div class='item'>
 	<div class="itemLabel">

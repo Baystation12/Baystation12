@@ -4,7 +4,7 @@
 	icon_state = "rod"
 	damage = 55
 	penetrating = 5
-	armor_penetration = 70
+	armor_penetration = 85
 	penetration_modifier = 1.1
 	fire_sound = 'sound/weapons/railgun.ogg'
 	distance_falloff = 1
@@ -19,7 +19,7 @@
 /obj/item/projectile/bullet/magnetic/flechette
 	name = "flechette"
 	icon_state = "flechette"
-	damage = 20
+	damage = 35
 	armor_penetration = 100
 	fire_sound = 'sound/weapons/rapidslice.ogg'
 	distance_falloff = 0.5

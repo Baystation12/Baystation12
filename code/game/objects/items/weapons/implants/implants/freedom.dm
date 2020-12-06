@@ -3,8 +3,9 @@
 /obj/item/weapon/implant/freedom
 	name = "freedom implant"
 	desc = "Use this to escape from those evil Red Shirts."
-	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 2, TECH_ILLEGAL = 2)
+	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 2, TECH_ESOTERIC = 2)
 	implant_color = "r"
+	hidden = 1
 	var/activation_emote
 	var/uses
 
@@ -30,11 +31,14 @@
 	return
 
 /obj/item/weapon/implant/freedom/trigger(emote, mob/living/carbon/source as mob)
-	if (src.uses < 1)	return 0
-	if (emote == src.activation_emote)
-		if(remove_cuffs_and_unbuckle(source))
-			src.uses--
-			to_chat(source, "You feel a faint click.")
+	if (emote == activation_emote)
+		activate()
+
+/obj/item/weapon/implant/freedom/activate()
+	if(uses < 1 || malfunction)	return 0
+	if(remove_cuffs_and_unbuckle(imp_in))
+		uses--
+		to_chat(imp_in, "You feel a faint click.")
 
 /obj/item/weapon/implant/freedom/proc/remove_cuffs_and_unbuckle(mob/living/carbon/user)
 	if(!user.handcuffed)
@@ -46,7 +50,7 @@
 
 /obj/item/weapon/implant/freedom/implanted(mob/living/carbon/source)
 	src.activation_emote = input("Choose activation emote:") in list("blink", "blink_r", "eyebrow", "chuckle", "twitch_v", "frown", "nod", "blush", "giggle", "grin", "groan", "shrug", "smile", "pale", "sniff", "whimper", "wink")
-	source.mind.store_memory("Freedom implant can be activated by using the [src.activation_emote] emote, <B>say *[src.activation_emote]</B> to attempt to activate.", 0, 0)
+	source.StoreMemory("Freedom implant can be activated by using the [src.activation_emote] emote, <B>say *[src.activation_emote]</B> to attempt to activate.", /decl/memory_options/system)
 	to_chat(source, "The implanted freedom implant can be activated by using the [src.activation_emote] emote, <B>say *[src.activation_emote]</B> to attempt to activate.")
 	return TRUE
 

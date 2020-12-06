@@ -1,6 +1,3 @@
-/var/const/meteor_wave_delay = 1 MINUTE //minimum wait between waves in tenths of seconds
-//set to at least 100 unless you want evarr ruining every round
-
 //Meteor groups, used for various random events and the Meteor gamemode.
 
 // Dust, used by space dust event and during earliest stages of meteor mode.
@@ -82,7 +79,7 @@
 	var/obj/effect/meteor/M = new Me(pickedstart)
 	M.dest = pickedgoal
 	spawn(0)
-		walk_towards(M, M.dest, 1)
+		walk_towards(M, M.dest, 3)
 	return
 
 /proc/spaceDebrisStartLoc(startSide, Z)
@@ -153,6 +150,10 @@
 	..()
 	z_original = z
 
+/obj/effect/meteor/Initialize()
+	. = ..()
+	GLOB.meteor_list += src
+
 /obj/effect/meteor/Move()
 	. = ..() //process movement...
 	move_count++
@@ -165,6 +166,7 @@
 
 /obj/effect/meteor/Destroy()
 	walk(src,0) //this cancels the walk_towards() proc
+	GLOB.meteor_list -= src
 	return ..()
 
 /obj/effect/meteor/New()

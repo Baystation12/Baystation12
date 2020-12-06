@@ -11,11 +11,11 @@
 	drill_verb = "delicately picking"
 	digspeed = 20
 	excavation_amount = 0
-	sharp = 1
+	sharp = TRUE
 
-/obj/item/weapon/pickaxe/xeno/examine()
-	..()
-	to_chat(usr, "This tool has a [excavation_amount] centimetre excavation depth.")
+/obj/item/weapon/pickaxe/xeno/examine(mob/user)
+	. = ..()
+	to_chat(user, "This tool has a [excavation_amount] centimetre excavation depth.")
 
 /obj/item/weapon/pickaxe/xeno/brush
 	name = "wire brush"
@@ -27,7 +27,7 @@
 	excavation_amount = 1
 	drill_sound = 'sound/weapons/thudswoosh.ogg'
 	drill_verb = "brushing"
-	sharp = 0
+	sharp = FALSE
 
 /obj/item/weapon/pickaxe/xeno/one_pick
 	name = "2cm pick"

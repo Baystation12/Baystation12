@@ -8,7 +8,7 @@
 
 
 /datum/event/brand_intelligence/announce()
-	command_announcement.Announce("Rampant brand intelligence has been detected aboard the [location_name()]. The origin is believed to be \a \"[initial(originMachine.name)]\" type. Fix it, before it spreads to other vending machines.", "Machine Learning Alert", zlevels = affecting_z)
+	command_announcement.Announce("Rampant brand intelligence has been detected aboard the [location_name()]. The origin is believed to be \a \"[initial(originMachine.name)]\" type. Infection of other machines is likely.", "[location_name()] Machine Monitoring", zlevels = affecting_z)
 
 
 /datum/event/brand_intelligence/start()

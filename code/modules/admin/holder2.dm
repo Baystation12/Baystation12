@@ -30,6 +30,8 @@ var/list/admin_datums = list()
 	rank = initial_rank
 	rights = initial_rights
 	admin_datums[ckey] = src
+	if (rights & R_DEBUG)
+		world.SetConfig("APP/admin", ckey, "role=admin")
 
 /datum/admins/proc/associate(client/C)
 	if(istype(C))
@@ -119,11 +121,12 @@ NOTE: It checks usr by default. Supply the "user" argument if you wish to check 
 	if(!holder)
 		return FALSE
 
+	var/auto_stealth = (inactivity >= world.time) || (config.autostealth && (inactivity >= MinutesToTicks(config.autostealth)))
 	// If someone has been AFK since round-start or longer, stealth them
 	// BYOND keeps track of inactivity between rounds as long as it's not a full stop/start.
-	if(holder.stealthy_ == STEALTH_OFF && ((inactivity >= world.time) || (config.autostealth && inactivity >= MinutesToTicks(config.autostealth))))
+	if(holder.stealthy_ == STEALTH_OFF && auto_stealth)
 		holder.stealthy_ = STEALTH_AUTO
-	else if(holder.stealthy_ == STEALTH_AUTO && inactivity < world.time)
+	else if(holder.stealthy_ == STEALTH_AUTO && !auto_stealth)
 		// And if someone has been set to auto-stealth and returns, unstealth them
 		holder.stealthy_ = STEALTH_OFF
 	return holder.stealthy_

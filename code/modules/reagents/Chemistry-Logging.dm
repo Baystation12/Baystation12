@@ -25,4 +25,4 @@
 	for(var/entry in chemical_reaction_logs)
 		html += "[entry]<br>"
 
-	usr << browse(html, "window=chemlogs")
+	show_browser(usr, html, "window=chemlogs")

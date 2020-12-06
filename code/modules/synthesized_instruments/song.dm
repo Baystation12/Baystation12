@@ -27,15 +27,12 @@
 	src.instrument_data = instrument
 	src.octave_range_min = GLOB.musical_config.lowest_octave
 	src.octave_range_max = GLOB.musical_config.highest_octave
-
 	instrument.create_full_sample_deviation_map()
-
-
-
 	available_channels = GLOB.musical_config.channels_per_instrument
 
 /datum/synthesized_song/Destroy()
 	player.event_manager.deactivate()
+	return ..()
 
 /datum/synthesized_song/proc/sanitize_tempo(new_tempo) // Identical to datum/song
 	new_tempo = abs(new_tempo)
@@ -52,7 +49,6 @@
 	var/note_num = delta1+delta2+GLOB.musical_config.nn2no[note]
 	if (note_num < 0 || note_num > 127)
 		CRASH("play_synthesized note failed because of 0..127 condition, [note], [acc], [oct]")
-		return
 
 	var/datum/sample_pair/pair = src.instrument_data.sample_map[GLOB.musical_config.n2t(note_num)]
 	#define Q 0.083 // 1/12

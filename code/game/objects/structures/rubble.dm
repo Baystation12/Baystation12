@@ -55,7 +55,7 @@
 		visible_message("[user] starts rummaging through \the [src].")
 		is_rummaging = 1
 		if(do_after(user, 30))
-			var/obj/item/booty = pick(loot)
+			var/obj/item/booty = pickweight(loot)
 			booty = new booty(loc)
 			lootleft--
 			update_icon()
@@ -71,7 +71,7 @@
 		if(do_after(user,P.digspeed, src))
 			visible_message("[user] clears away \the [src].")
 			if(lootleft && prob(1))
-				var/obj/item/booty = pick(loot)
+				var/obj/item/booty = pickweight(loot)
 				booty = new booty(loc)
 			qdel(src)
 	else 
@@ -92,20 +92,27 @@
 	/obj/item/weapon/archaeological_find/mask,
 	/obj/item/weapon/archaeological_find/coin,
 	/obj/item/weapon/archaeological_find,
-	/obj/item/weapon/archaeological_find/material)
+	/obj/item/weapon/archaeological_find/material = 5,
+	/obj/item/weapon/archaeological_find/material/exotic = 2,
+	/obj/item/weapon/archaeological_find/parts = 3
+	)
+
+/obj/structure/rubble/lab
+	emptyprob = 30
+	loot = list(
+	/obj/item/weapon/archaeological_find/statuette,
+	/obj/item/weapon/archaeological_find/instrument,
+	/obj/item/weapon/archaeological_find/mask,
+	/obj/item/weapon/archaeological_find,
+	/obj/item/weapon/archaeological_find/material = 10,
+	/obj/item/weapon/archaeological_find/material/exotic = 10,
+	/obj/item/weapon/archaeological_find/parts = 10
+	)
 
 /obj/structure/rubble/war
 	emptyprob = 95 //can't have piles upon piles of guns
 	loot = list(/obj/item/weapon/archaeological_find/knife,
-	/obj/item/weapon/archaeological_find/remains/xeno,
-	/obj/item/weapon/archaeological_find/remains/robot,
-	/obj/item/weapon/archaeological_find/remains,
 	/obj/item/weapon/archaeological_find/gun,
 	/obj/item/weapon/archaeological_find/laser,
-	/obj/item/weapon/archaeological_find/statuette,
-	/obj/item/weapon/archaeological_find/instrument,
-	/obj/item/weapon/archaeological_find/container,
-	/obj/item/weapon/archaeological_find/mask,
 	/obj/item/weapon/archaeological_find/sword,
-	/obj/item/weapon/archaeological_find/katana,
-	/obj/item/weapon/archaeological_find/trap)
+	/obj/item/weapon/archaeological_find/katana)

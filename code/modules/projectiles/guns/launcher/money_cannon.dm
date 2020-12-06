@@ -1,6 +1,6 @@
 /obj/item/weapon/gun/launcher/money
 	name = "money cannon"
-	desc = "A blocky, plastic novelty launcher that claims to be able to shoot thaler at considerable velocities."
+	desc = "A blocky, plastic novelty launcher that claims to be able to shoot money at considerable velocities."
 	icon_state = "money_launcher"
 	item_state = "money_launcher"
 	origin_tech = list(TECH_COMBAT = 1, TECH_MATERIAL = 1)
@@ -11,6 +11,7 @@
 	fire_delay = 1
 	fire_sound = 'sound/weapons/gunshot/money_launcher.ogg'
 	var/emagged = 0
+	var/max_capacity = 2000
 
 	var/receptacle_value = 0
 	var/dispensing = 20
@@ -20,6 +21,9 @@
 
 /obj/item/weapon/gun/launcher/money/proc/vomit_cash(var/mob/vomit_onto, var/projectile_vomit)
 	var/bundle_worth = Floor(receptacle_value / 10)
+	if(bundle_worth > max_capacity / 10)
+		bundle_worth = max_capacity / 10
+		log_warning("[src] has more than [max_capacity] currency loaded!")
 	var/turf/T = get_turf(vomit_onto)
 	for(var/i = 1 to 10)
 		var/nv = bundle_worth
@@ -40,7 +44,7 @@
 		vomit_onto.visible_message("<span class='danger'>\The [vomit_onto] blasts themselves full in the face with \the [src]!</span>")
 		playsound(T, "sound/weapons/gunshot/money_launcher_jackpot.ogg", 100, 1)
 	else
-		vomit_onto.visible_message("<span class='danger'>\The [vomit_onto] ejects a few thaler into their face.</span>")
+		vomit_onto.visible_message("<span class='danger'>\The [vomit_onto] ejects a few [GLOB.using_map.local_currency_name] into their face.</span>")
 		playsound(T, 'sound/weapons/gunshot/money_launcher.ogg', 100, 1)
 
 	receptacle_value = 0
@@ -65,15 +69,26 @@
 	bling.worth = receptacle_value
 	bling.update_icon()
 	user.put_in_hands(bling)
-	to_chat(user, "<span class='notice'>You eject [receptacle_value] thaler from [src]'s receptacle.</span>")
+	to_chat(user, "<span class='notice'>You eject [receptacle_value] [GLOB.using_map.local_currency_name_singular] from [src]'s receptacle.</span>")
 	receptacle_value = 0
 
 /obj/item/weapon/gun/launcher/money/proc/absorb_cash(var/obj/item/weapon/spacecash/bling, mob/user)
 	if(!istype(bling) || !bling.worth || bling.worth < 1)
 		to_chat(user, "<span class='warning'>[src] refuses to pick up [bling].</span>")
 		return
-
-	src.receptacle_value += bling.worth
+	if(receptacle_value >= max_capacity)
+		to_chat(user, SPAN_WARNING("There's no space in the receptacle for [bling]."))
+		return
+	else if (receptacle_value && receptacle_value + bling.worth >= max_capacity) //If we have enough money to fill it to capacity
+		bling.worth -= max_capacity - receptacle_value
+		receptacle_value = max_capacity
+		to_chat(user, SPAN_NOTICE("You load [src] to capacity with [bling]."))
+		if(!bling.worth)
+			qdel(bling)
+		else
+			bling.update_icon()
+		return
+	receptacle_value += bling.worth
 	to_chat(user, "<span class='notice'>You load [bling] into [src].</span>")
 	qdel(bling)
 
@@ -99,14 +114,14 @@
 	return bling
 
 /obj/item/weapon/gun/launcher/money/attack_self(mob/user as mob)
-	var/disp_amount = min(input(user, "How many thaler do you want to dispense at a time? (0 to [src.receptacle_value])", "Money Cannon Settings", 20) as num, receptacle_value)
+	var/disp_amount = min(input(user, "How many [GLOB.using_map.local_currency_name_singular] do you want to dispense at a time? (0 to [src.receptacle_value])", "Money Cannon Settings", 20) as num, receptacle_value)
 
 	if (disp_amount < 1)
-		to_chat(user, "<span class='warning'>You have to dispense at least one thaler at a time!</span>")
+		to_chat(user, "<span class='warning'>You have to dispense at least one [GLOB.using_map.local_currency_name_singular] at a time!</span>")
 		return
 
 	src.dispensing = disp_amount
-	to_chat(user, "<span class='notice'>You set [src] to dispense [dispensing] thaler at a time.</span>")
+	to_chat(user, "<span class='notice'>You set [src] to dispense [dispensing] [GLOB.using_map.local_currency_name_singular] at a time.</span>")
 
 /obj/item/weapon/gun/launcher/money/attack_hand(mob/user as mob)
 	if(user.get_inactive_hand() == src)
@@ -120,9 +135,20 @@
 		if(bling.worth < 1)
 			to_chat(user, "<span class='warning'>You can't seem to get the bills to slide into the receptacle.</span>")
 			return
-
+		if(receptacle_value >= max_capacity)
+			to_chat(user, SPAN_WARNING("There's no space in the receptacle for [bling]."))
+			return
+		else if (receptacle_value && receptacle_value + bling.worth > max_capacity) //If we have enough money to fill it to capacity
+			bling.worth -= max_capacity - receptacle_value
+			receptacle_value = max_capacity
+			to_chat(user, SPAN_NOTICE("You load [src] to capacity with [bling]."))
+			if(!bling.worth)
+				qdel(bling)
+			else
+				bling.update_icon()
+			return
 		receptacle_value += bling.worth
-		to_chat(user, "<span class='notice'>You slide [bling.worth] thaler into [src]'s receptacle.</span>")
+		to_chat(user, "<span class='notice'>You slide [bling.worth] [GLOB.using_map.local_currency_name_singular] into [src]'s receptacle.</span>")
 		qdel(bling)
 
 	else
@@ -130,10 +156,10 @@
 
 /obj/item/weapon/gun/launcher/money/examine(mob/user)
 	. = ..(user)
-	to_chat(user, "It is configured to dispense [dispensing] thaler at a time.")
+	to_chat(user, "It is configured to dispense [dispensing] [GLOB.using_map.local_currency_name_singular] at a time.")
 
 	if(receptacle_value >= 1)
-		to_chat(user, "The receptacle is loaded with [receptacle_value] thaler.")
+		to_chat(user, "The receptacle is loaded with [receptacle_value] [GLOB.using_map.local_currency_name_singular].")
 
 	else
 		to_chat(user, "The receptacle is empty.")
@@ -148,7 +174,7 @@
 	var/mob/living/carbon/human/M = user
 	M.visible_message("<span class='danger'>[user] sticks [src] in their mouth, ready to pull the trigger...</span>")
 
-	if(!do_after(user, 40, progress = 0))
+	if(!do_after(user, 40, do_flags = DO_DEFAULT & ~DO_SHOW_PROGRESS))
 		M.visible_message("<span class='notice'>[user] decided life was worth living.</span>")
 		return
 

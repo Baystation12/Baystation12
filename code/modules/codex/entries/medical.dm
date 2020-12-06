@@ -29,6 +29,12 @@
 	associated_paths = list(/obj/machinery/optable)
 	mechanics_text = "Click your target with Grab intent, then click on the table with an empty hand, to place them on it.<br>Click on table after that to enable knockout function."
 
+/datum/codex_entry/vitals_monitor
+	associated_paths = list(/obj/machinery/vitals_monitor)
+	mechanics_text = "Click and drag the vitals monitor onto your target to attach them. Doing the same action again will detatch them.<br>\
+	Click and drag the vitals monitor onto an operating table to connect it to the table. This will forward all patient info from the OR table to the vitals monitor.<br>\
+	The vitals monitor will continue reporting information as long as whatever it is attached to remains adjacent to it."
+
 /datum/codex_entry/operating
 	associated_paths = list(/obj/machinery/computer/operating)
 	mechanics_text = "This console gives information on the status of the patient on the adjacent operating table, notably their consciousness."

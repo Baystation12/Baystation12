@@ -50,7 +50,7 @@
 /obj/item/weapon/material/kitchen/utensil/fork/plastic,
 /obj/item/weapon/material/kitchen/utensil/fork/plastic,
 /obj/item/weapon/material/kitchen/utensil/fork/plastic,
-/obj/item/weapon/material/kitchen/utensil/knife/plastic,
+/obj/item/weapon/material/knife/table,
 /obj/effect/floor_decal/spline/fancy/wood/corner{
 	dir = 1
 	},
@@ -58,19 +58,19 @@
 /area/template_noop)
 "l" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/material/kitchen/utensil/knife/plastic,
-/obj/item/weapon/material/kitchen/utensil/knife/plastic,
+/obj/item/weapon/material/knife/table,
+/obj/item/weapon/material/knife/table,
 /obj/effect/floor_decal/spline/fancy/wood{
-	icon_state = "spline_fancy";
-	dir = 1
+	dir = 1;
+	icon_state = "spline_fancy"
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/template_noop)
 "m" = (
 /obj/structure/closet/crate/freezer,
 /obj/effect/floor_decal/spline/fancy/wood{
-	icon_state = "spline_fancy";
-	dir = 1
+	dir = 1;
+	icon_state = "spline_fancy"
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/template_noop)
@@ -89,9 +89,8 @@
 /area/template_noop)
 "p" = (
 /obj/structure/bed/chair/wood{
-	tag = "icon-wooden_chair_preview (WEST)";
-	icon_state = "wooden_chair_preview";
-	dir = 8
+	dir = 8;
+	icon_state = "wooden_chair_preview"
 	},
 /obj/effect/floor_decal/spline/fancy/wood/corner,
 /turf/simulated/floor/wood,
@@ -105,8 +104,8 @@
 /area/template_noop)
 "r" = (
 /obj/effect/floor_decal/spline/fancy/wood{
-	icon_state = "spline_fancy";
-	dir = 1
+	dir = 1;
+	icon_state = "spline_fancy"
 	},
 /turf/simulated/floor/wood,
 /area/template_noop)
@@ -115,7 +114,7 @@
 /obj/effect/decal/cleanable/blood/drip,
 /obj/effect/decal/cleanable/blood/drip,
 /obj/effect/decal/cleanable/blood/drip,
-/obj/item/weapon/material/knife/butch,
+/obj/item/weapon/material/knife/kitchen/cleaver,
 /turf/simulated/floor/tiled/monotile,
 /area/template_noop)
 "t" = (
@@ -133,9 +132,6 @@
 	name = "low-tech server"
 	},
 /turf/simulated/floor/tiled/monotile,
-/area/template_noop)
-"w" = (
-/turf/simulated/floor/wood/usedup,
 /area/template_noop)
 "x" = (
 /obj/structure/table/woodentable,
@@ -175,9 +171,8 @@
 /area/template_noop)
 "D" = (
 /obj/structure/bed/chair/wood{
-	tag = "icon-wooden_chair_preview (WEST)";
-	icon_state = "wooden_chair_preview";
-	dir = 8
+	dir = 8;
+	icon_state = "wooden_chair_preview"
 	},
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 4
@@ -293,7 +288,7 @@ b
 d
 i
 r
-w
+o
 E
 b
 a
@@ -398,7 +393,7 @@ b
 n
 u
 z
-w
+o
 b
 b
 b
@@ -413,7 +408,7 @@ o
 o
 o
 o
-w
+o
 Q
 S
 b

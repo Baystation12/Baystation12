@@ -13,7 +13,7 @@
 	var/datum/computer/file/embedded_program/docking/active_docking_controller
 
 	var/obj/effect/shuttle_landmark/landmark_transition  //This variable is type-abused initially: specify the landmark_tag, not the actual landmark.
-	var/move_time = 240		//the time spent in the transition area
+	var/move_time = 120		//the time spent in the transition area
 
 	category = /datum/shuttle/autodock
 	flags = SHUTTLE_FLAGS_PROCESS | SHUTTLE_FLAGS_ZERO_G
@@ -27,7 +27,7 @@
 	if(active_docking_controller)
 		set_docking_codes(active_docking_controller.docking_codes)
 	else if(GLOB.using_map.use_overmap)
-		var/obj/effect/overmap/location = map_sectors["[current_location.z]"]
+		var/obj/effect/overmap/visitable/location = map_sectors["[current_location.z]"]
 		if(location && location.docking_codes)
 			set_docking_codes(location.docking_codes)
 	dock()
@@ -57,7 +57,7 @@
 		current_dock_target = location.special_dock_targets[name]
 	else
 		current_dock_target = dock_target
-	shuttle_docking_controller = locate(current_dock_target)
+	shuttle_docking_controller = SSshuttle.docking_registry[current_dock_target]
 /*
 	Docking stuff
 */
@@ -123,7 +123,7 @@
 	return move_time
 
 /datum/shuttle/autodock/proc/process_launch()
-	if(!next_location.is_valid(src))
+	if(!next_location.is_valid(src) || current_location.cannot_depart(src))
 		process_state = IDLE_STATE
 		in_use = null
 		return
@@ -137,10 +137,10 @@
 	Guards
 */
 /datum/shuttle/autodock/proc/can_launch()
-	return (next_location && moving_status == SHUTTLE_IDLE && !in_use)
+	return (next_location && next_location.is_valid(src) && !current_location.cannot_depart(src) && moving_status == SHUTTLE_IDLE && !in_use)
 
 /datum/shuttle/autodock/proc/can_force()
-	return (next_location && moving_status == SHUTTLE_IDLE && process_state == WAIT_LAUNCH)
+	return (next_location && next_location.is_valid(src) && !current_location.cannot_depart(src) && moving_status == SHUTTLE_IDLE && process_state == WAIT_LAUNCH)
 
 /datum/shuttle/autodock/proc/can_cancel()
 	return (moving_status == SHUTTLE_WARMUP || process_state == WAIT_LAUNCH || process_state == FORCE_LAUNCH)

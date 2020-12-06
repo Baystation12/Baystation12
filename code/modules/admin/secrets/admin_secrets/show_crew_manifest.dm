@@ -9,4 +9,4 @@
 	dat += "<h4>Crew Manifest</h4>"
 	dat += html_crew_manifest()
 
-	user << browse(dat, "window=manifest;size=370x420;can_close=1")
+	show_browser(user, dat, "window=manifest;size=370x420;can_close=1")

@@ -51,6 +51,9 @@ SUBSYSTEM_DEF(lighting)
 		if (T.dynamic_lighting && T.loc:dynamic_lighting)
 			T.lighting_build_overlay()
 
+		// If this isn't here, BYOND will set-background us.
+		CHECK_TICK
+
 /datum/controller/subsystem/lighting/fire(resumed = FALSE, no_mc_tick = FALSE)
 	if (!resumed)
 		stats_queues["Source"] += processed_lights

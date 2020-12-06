@@ -45,6 +45,8 @@
 			rig.ai_override_enabled = !rig.ai_override_enabled
 			rig.visible_message("A small red light on [rig] [rig.ai_override_enabled?"goes dead":"flickers on"].")
 		if(RIG_SYSTEM_CONTROL)
+			if (rig.offline)
+				rig.visible_message("\The [rig] sparks, damaging its delicate control systems.")
 			rig.malfunctioning += 10
 			if(rig.malfunction_delay <= 0)
 				rig.malfunction_delay = 20

@@ -2,7 +2,6 @@
 	blend_mode = BLEND_ADD
 	icon = 'icons/effects/fire.dmi'
 	icon_state = "3"
-	plane = EFFECTS_BELOW_LIGHTING_PLANE
 	layer = FIRE_LAYER
 	var/lifetime = 10 SECONDS //0 for infinite
 	//See Fire.dm (the real one), but in a nutshell:

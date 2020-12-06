@@ -3,20 +3,7 @@
 	icon_state ="bookEngineering2"
 	author = "Engineering Encyclopedia"
 	title = "Engineering Textbook"
-
-/obj/item/weapon/book/manual/engineering_guide/New()
-	..()
-	dat = {"
-
-		<html><head>
-		</head>
-
-		<body>
-		<iframe width='100%' height='100%' src="[config.wikiurl]Guide_to_Engineering&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>		</body>
-
-		</html>
-
-		"}
+	url = "Engineering"
 
 /obj/item/weapon/book/manual/robotics_cyborgs
 	name = "Cyborgs for Dummies"
@@ -305,21 +292,7 @@
 	icon_state ="bookEngineering"
 	author = "Engineering Encyclopedia"		 // Who wrote the thing, can be changed by pen or PC. It is not automatically assigned
 	title = "Repairs and Construction"
-
-/obj/item/weapon/book/manual/engineering_construction/New()
-	..()
-	dat = {"
-
-		<html><head>
-		</head>
-
-		<body>
-		<iframe width='100%' height='97%' src="[config.wikiurl]Guide_to_construction&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>
-		</body>
-
-		</html>
-
-		"}
+	url = "Guide_to_Construction"
 
 /obj/item/weapon/book/manual/engineering_particle_accelerator
 	name = "Particle Accelerator User's Guide"
@@ -373,155 +346,21 @@
 	icon_state = "bookSupermatter"
 	author = "Central Engineering Division"
 	title = "Supermatter Engine Operating Manual"
-
-/obj/item/weapon/book/manual/supermatter_engine/New()
-	..()
-	dat = {"<html>
-				<head>
-				<style>
-				h1 {font-size: 18px; margin: 15px 0px 5px;}
-				h2 {font-size: 15px; margin: 15px 0px 5px;}
-				li {margin: 2px 0px 2px 15px;}
-				ul {margin: 5px; padding: 0px;}
-				ol {margin: 5px; padding: 0px 15px;}
-				body {font-size: 13px; font-family: Verdana;}
-				</style>
-				</head>
-				<body>
-				<h1>OPERATING MANUAL FOR MK 1 THERMOELECTRIC SUPERMATTER ENGINE "JUPITER"</h1>
-				<br>
-				<h2>OPERATING PRINCIPLES</h2>
-				<br>
-				<li>The supermatter crystal serves as the fundamental power source of the engine. Upon being charged, it begins to emit large amounts of heat and radiation, as well and oxygen and phoron gas. As oxygen accelerates the reaction, and phoron carries the risk of fire, these must be filtered out.</li>
-				<br>
-				<li>Gas in the reactor chamber housing the supermatter is circulated through the reactor loop, which passes through the filters and thermoelectric generators. The thermoelectric generators transfer heat from the reactor loop to the colder radiator loop, thereby generating power. Additional power is generated from internal turbines in the circulators.</li>
-				<br>
-				<li>Gas in the radiator loop is circulated through the radiator bank, located in space. The radiative cooling provides the temperature differential required for power generation.</li>
-				<br>
-				<li>The MK 1 Thermoelectric Supermatter Engine is designed to operate at reactor temperatures of 2000 K to 4000 K and generate up to 1 MW of power. Beyond 1 MW, the thermoelectric generators will begin to lose power through electrical discharge, reducing efficiency, but additional power generation remains feasible.</li>
-				<br>
-				<li>The crystal structure of the supermatter will begin to delaminate if its temperature exceeds 5000 K. This eventually results in a massive release of light, heat and radiation, disintegration of both the supermatter crystal and most of the surrounding area, and as as-of-yet poorly documented psychological effects on all animals within a 2km radius. Appropriate action should be taken to stabilize or eject the supermatter before such occurs.</li>
-				<br>
-				<h2>SUPERMATTER HANDLING</h2>
-				<li>Do not expose supermatter to oxygen.</li>
-				<li>Do not touch supermatter or allow supermatter to contact any solid object apart from the specially-designed supporting pallet.</li>
-				<li>Do not directly view supermatter without meson goggles.</li>
-				<li>While handles on pallet allow moving the supermatter via pulling, pushing should not be attempted.</li>
-				<br>
-				<h2>STARTUP PROCEDURE</h2>
-				<ol>
-				<li>Fill the reactor loop (green and yellow) and the radiator loop (cyan) with two (2) standard canisters of hydrogen gas each.</li>
-				<li>Additional canisters of hydrogen can be obtained from Atmospherics or Atmospherics Tank Storage if required.</li>
-				<li>Ensure that the Thermoelectric Generator (TEG) high-power pumps (on cyan pipes) are switched on at maximum pressure.</li>
-				<li><i>IMPORTANT: </i>Set filters (port-side of engine room) to Hydrogen instead of Carbon Dioxide, and afterwards ensure each filter is switched on.</li>
-				<li>Ensure the pump to the phoron canister is set to max.</li>
-				<li>Switch on the waste pump to the engines (connecting black pipes - under blast door near the phoron canister).</li>
-				<li>Monitoring EER with the Supermatter Monitoring program, fire the emitter until EER reaches 150-200. Reactor blast doors must be open for this procedure.</li>
-				</ol>
-				<br>
-				<h2>OPERATION AND MAINTENANCE</h2>
-				<ol>
-				<li>Ensure that radiation protection and meson goggles are worn at all times while working in the engine room.</li>
-				<li>Ensure that reactor and radiator loops are undamaged and unobstructed.</li>
-				<li>Ensure that phoron and oxygen gas exhaust from filters is properly contained or disposed. Do not allow exhaust pressure to exceed 4500 kPa.</li>
-				<li>Ensure that engine room Area Power Controller (APC) and engine Superconducting Magnetic Energy Storage unit (SMES) are properly charged.</li>
-				<li>Ensure that reactor temperature does not exceed 5000 K. In event of reactor temperature exceeding 5000 K, either pump in more gas to cool the engine, or see EMERGENCY COOLING PROCEDURE.</li>
-				<li>In event of imminent and/or unavoidable delamination, see EJECTION PROCEDURE.</li>
-				</ol>
-				<br>
-				<h2>EMERGENCY COOLING PROCEDURE</h2>
-				<ol>
-				<li>Open the Emergency Cooling Valve, which allows for Heat Exchangers to cool the reactor loop (green) with the radiator (cyan) loop</li>
-				<li>If the reactor temperature does not return to safe operating levels, open both the Emergency Cooling Bypass Valve and TEG Bypass Valve</li>
-				<li>If the reactor becomes safe, close the three aforementioned valves to resume power generation</li>
-				<li>If the reactor temperature does not return to safe operating levels, see EJECTION PROCEDURE.</li>
-				</ol>
-				<br>
-				<h2>EJECTION PROCEDURE</h2>
-				<ol>
-				<li>Press Engine Ventilatory Control button to open engine core vent to space.</li>
-				<li>Press Emergency Core Eject button to eject supermatter crystal. NOTE: Attempting crystal ejection while engine core vent is closed will result in ejection failure.</li>
-				<li>In event of ejection failure, <i>pending</i></li>
-				</ol>
-				</body>
-			</html>"}
-
+	url = "Supermatter_Engine"
 
 /obj/item/weapon/book/manual/rust_engine
 	name = "R-UST Operating Manual"
 	icon_state = "bookMagazine"
 	author = "Cindy Crawfish"
 	title = "R-UST Operating Manual"
-
-/obj/item/weapon/book/manual/rust_engine/New()
-	..()
-	dat = {"<html>
-				<head>
-				<style>
-				h1 {font-size: 18px; margin: 15px 0px 5px;}
-				h2 {font-size: 15px; margin: 15px 0px 5px;}
-				li {margin: 2px 0px 2px 15px;}
-				ul {margin: 5px; padding: 0px;}
-				ol {margin: 5px; padding: 0px 15px;}
-				body {font-size: 13px; font-family: Verdana;}
-				</style>
-				</head>
-				<body>
-				So you're the poor fucker who has to try and set this piece of shit up this shift. Congratulations! Here's what you need to know: this is a tokamak fusion reactor that uses a high energy plasma stream in a magnetic field enclosure to achieve fusion. It gets extremely hot extremely quickly, and the field is tempramental. The main principle of operation: maximize plasma temperature while minimizing field instability.
-				<br><br>
-				Deuterium and tritium are generally the most available fuel for the beast. If you're cautious, deut-deut reactions are capable of producing power without being unstable. Deut-trit is the bread and butter of the R-UST. You can keep field instability down by using the gyrotron near the core and not sticking your dick into the fusion torus.
-				<br><br>
-				Here's the idiot's guide to setting up a functional fusion cycle:
-				<ol>
-				<li>Put fuel (uranium, tritium) in the portable generator near the gyrotron and turn it to full. This is to provide initial power to the core. If the gen is fucked, hook it into the main grid.</li>
-				<li>Enable and max output on the SMES in the engine room. This is to power the gyrotron.</li>
-				<li>Go into the control room, interact with the fusion core control console. Turn the field on and raise size to 200. Any bigger and it will start EMP the machinery. Any smaller and the fuel pellets might miss.</li>
-				<li>Interact with the gyrotron control computer, set power as high as the SMES can support, usually around 3-5, and turn it on. This will start increasing the plasma temperature to the point where reactions can occur.</li>
-				<li>Go into the engine room and insert a deuterium fuel assembly and a tritium fuel assembly into two of the fuel injectors. You can make deuterium rods in the fuel compressor if you want to play it safe.</li>
-				<li>Go back to the control room and turn the fuel injectors on. This will start firing pellets into the field.</li>
-				<li>Wait for reactions to start (plasma temperature will spike and fuel amounts will drop, forming helium if you're using deut-trit). Adjust the gyrotron power and delay around until it's keeping up with field instability. This will prevent cumulative instability from the deuterium-tritium reaction fucking up the field. If you're using straight deuterium and NOTHING ELSE, instability isn't a problem and you can turn the gyrotron off.</li>
-				<li>Configure the SMES, turn the PACMAN off before it explodes.</li>
-				</ol>
-				<br>
-				<b>NOTES FOR NEWBIES</b>
-				<br>
-				Anything touching the field will mess with its stability and eventually cause it to rupture. Rupturing is bad. Use the gyrotron to keep instability down if you're running the engine on unstable fuel.
-				<br><br>
-				The more fuel in the field, the more fuel will react. Obvious, right? Don't load the field up with the ingredients for an unstable reaction (tritium and deuterium) before it has reached the point of fusion, or you will be trying to deal with a massive instability burst all at once.
-				<br><br>
-				Likewise, no matter how sad the core seems, don't fucking hug it, you'll blow the field out and set the engine room on fire.
-				<br><br>
-				IN CASE OF EMERGENCY:
-				<ol>
-				<li>Turn off the fuel injectors.</li>
-				<li>Maximize the gyrotron fire rate and shot power.</li>
-				<li>Open the main core chamber to vaccuum if you can.</li>
-				<li>Prep for irradiated crewmembers, a large EMP, and broken glass.</li>
-				<ol>
-				</body>
-			</html>"}
+	url = "R-UST"
 
 /obj/item/weapon/book/manual/engineering_hacking
 	name = "Hacking"
 	icon_state ="bookHacking"
 	author = "Engineering Encyclopedia"		 // Who wrote the thing, can be changed by pen or PC. It is not automatically assigned
 	title = "Hacking"
-
-/obj/item/weapon/book/manual/engineering_hacking/New()
-	..()
-	dat = {"
-
-		<html><head>
-		</head>
-
-		<body>
-		<iframe width='100%' height='97%' src="[config.wikiurl]Hacking&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>
-		</body>
-
-		</html>
-
-		"}
-
+	url = "Hacking"
 
 /obj/item/weapon/book/manual/engineering_singularity_safety
 	name = "Singularity Safety in Special Circumstances"
@@ -643,7 +482,7 @@
 					<li>A firesuit must be connected to the firefighter chassis for heat shielding.</li>
 					<li>Internal armor is plasteel for additional strength.</li>
 					<li>External armor must be installed in 2 parts, totalling 10 sheets.</li>
-					<li>Completed mech is more resilient against fire, and is a bit more durable overall.</li>
+					<li>Completed exosuit is more resilient against fire, and is a bit more durable overall.</li>
 					<li>The Company is determined to ensure the safety of its <s>investments</s> employees.</li>
 				</ul>
 				</body>

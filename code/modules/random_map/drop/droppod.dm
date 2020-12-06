@@ -15,7 +15,7 @@
 	floor_type = /turf/simulated/floor/reinforced
 	var/list/supplied_drop_types = list()
 	var/door_type = /obj/structure/droppod_door
-	var/drop_type = /mob/living/simple_animal/parrot
+	var/drop_type = /mob/living/simple_animal/hostile/retaliate/parrot
 	var/auto_open_doors
 
 	var/placement_explosion_dev =   1
@@ -215,12 +215,10 @@
 		else
 			spawned_mob.ckey = selected_player.mob.ckey
 		spawned_mobs = list(spawned_mob)
-		message_admins("[key_name(usr)] dropped a pod containing \the [spawned_mob] ([spawned_mob.key]) at ([usr.x],[usr.y],[usr.z])")
-		log_admin("[key_name(usr)] dropped a pod containing \the [spawned_mob] ([spawned_mob.key]) at ([usr.x],[usr.y],[usr.z])")
+		log_and_message_admins("dropped a pod containing \the [spawned_mob] ([spawned_mob.key]) at ([usr.x],[usr.y],[usr.z])")
 	else if(spawned_mobs.len)
 		automatic_pod = 1
-		message_admins("[key_name(usr)] dropped a pod containing [spawned_mobs.len] [spawned_mobs[1]] at ([usr.x],[usr.y],[usr.z])")
-		log_admin("[key_name(usr)] dropped a pod containing [spawned_mobs.len] [spawned_mobs[1]] at ([usr.x],[usr.y],[usr.z])")
+		log_and_message_admins("dropped a pod containing [spawned_mobs.len] [spawned_mobs[1]] at ([usr.x],[usr.y],[usr.z])")
 	else
 		return
 

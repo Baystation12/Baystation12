@@ -1,6 +1,4 @@
-var/datum/controller/subsystem/fluids/SSfluids
-
-/datum/controller/subsystem/fluids
+SUBSYSTEM_DEF(fluids)
 	name = "Fluids"
 	wait = 10
 	flags = SS_NO_INIT
@@ -28,9 +26,6 @@ var/datum/controller/subsystem/fluids/SSfluids
 		'sound/effects/gurgle3.ogg',
 		'sound/effects/gurgle4.ogg'
 		)
-
-/datum/controller/subsystem/fluids/New()
-	NEW_SS_GLOBAL(SSfluids)
 
 /datum/controller/subsystem/fluids/stat_entry()
 	..("A:[active_fluids.len] S:[water_sources.len]")
@@ -93,6 +88,9 @@ var/datum/controller/subsystem/fluids/SSfluids
 					continue
 				UPDATE_FLUID_BLOCKED_DIRS(T)
 				if((T.fluid_blocked_dirs & coming_from) || !T.CanFluidPass(coming_from))
+					continue
+				var/turf/current = get_turf(F)
+				if((F.fluid_amount + current.height) <= T.height) //Water cannot flow up height differences
 					continue
 				var/obj/effect/fluid/other = locate() in T.contents
 				if(other && (QDELETED(other) || other.fluid_amount <= FLUID_DELETING))

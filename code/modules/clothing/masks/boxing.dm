@@ -3,7 +3,7 @@
 	desc = "Designed to both hide identities and keep your face comfy and warm."
 	icon_state = "balaclava"
 	item_state = "balaclava"
-	flags_inv = HIDEFACE|BLOCKHAIR
+	flags_inv = HIDEFACE|BLOCKHAIR|HIDEEARS
 	body_parts_covered = FACE|HEAD
 	down_body_parts_covered = HEAD
 	down_flags_inv = BLOCKHEADHAIR
@@ -24,7 +24,7 @@
 	desc = "Worn by robust fighters, flying high to defeat their foes!"
 	icon_state = "luchag"
 	item_state = "luchag"
-	flags_inv = HIDEFACE|BLOCKHAIR
+	flags_inv = HIDEFACE|BLOCKHAIR|HIDEEARS
 	body_parts_covered = HEAD|FACE
 	w_class = ITEM_SIZE_SMALL
 	siemens_coefficient = 3.0

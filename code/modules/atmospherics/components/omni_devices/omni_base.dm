@@ -9,7 +9,6 @@
 	level = 1
 
 	var/configuring = 0
-	//var/target_pressure = ONE_ATMOSPHERE	//a base type as abstract as this should NOT be making these kinds of assumptions
 
 	var/tag_north = ATM_NONE
 	var/tag_south = ATM_NONE
@@ -23,8 +22,13 @@
 
 	var/list/ports = new()
 
-/obj/machinery/atmospherics/omni/New()
-	..()
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
+
+	pipe_class = PIPE_CLASS_OMNI
+	connect_dir_type = SOUTH | NORTH | EAST | WEST
+
+/obj/machinery/atmospherics/omni/Initialize()
+	. = ..()
 	icon_state = "base"
 
 	ports = new()
@@ -90,16 +94,12 @@
 			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
 			"<span class='notice'>You have unfastened \the [src].</span>", \
 			"You hear a ratchet.")
-		new /obj/item/pipe(loc, make_from=src)
+		new /obj/item/pipe(loc, src)
 		qdel(src)
 
-/obj/machinery/atmospherics/omni/attack_hand(user as mob)
-	if(..())
-		return
-
-	src.add_fingerprint(usr)
+/obj/machinery/atmospherics/omni/interface_interact(mob/user)
 	ui_interact(user)
-	return
+	return TRUE
 
 /obj/machinery/atmospherics/omni/proc/build_icons()
 	if(!check_icon_cache())

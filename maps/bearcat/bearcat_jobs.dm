@@ -7,6 +7,13 @@
 /datum/job/captain
 	supervisors = "the Merchant Code and your conscience"
 	outfit_type = /decl/hierarchy/outfit/job/bearcat/captain
+	min_skill = list(   SKILL_WEAPONS = SKILL_ADEPT,
+	                    SKILL_SCIENCE     = SKILL_ADEPT,
+	                    SKILL_PILOT       = SKILL_ADEPT)
+
+	max_skill = list(   SKILL_PILOT       = SKILL_MAX,
+	                    SKILL_WEAPONS     = SKILL_MAX)
+	skill_points = 30
 
 /datum/job/captain/equip(var/mob/living/carbon/human/H)
 	. = ..()
@@ -23,7 +30,7 @@
 		return
 	GLOB.using_map.station_short = ship
 	GLOB.using_map.station_name = "FTV [ship]"
-	var/obj/effect/overmap/ship/bearcat/B = locate() in world
+	var/obj/effect/overmap/visitable/ship/bearcat/B = locate() in world
 	if(B)
 		B.SetName(GLOB.using_map.station_name)
 	command_announcement.Announce("Attention all hands on [GLOB.using_map.station_name]! Thank you for your attention.", "Ship re-christened")
@@ -52,6 +59,19 @@
 	supervisors = "the Captain"
 	department_flag = ENG
 	outfit_type = /decl/hierarchy/outfit/job/bearcat/chief_engineer
+	min_skill = list(   SKILL_BUREAUCRACY  = SKILL_BASIC,
+	                    SKILL_COMPUTER     = SKILL_ADEPT,
+	                    SKILL_EVA          = SKILL_ADEPT,
+	                    SKILL_CONSTRUCTION = SKILL_ADEPT,
+	                    SKILL_ELECTRICAL   = SKILL_ADEPT,
+	                    SKILL_ATMOS        = SKILL_ADEPT,
+	                    SKILL_ENGINES      = SKILL_EXPERT)
+
+	max_skill = list(   SKILL_CONSTRUCTION = SKILL_MAX,
+	                    SKILL_ELECTRICAL   = SKILL_MAX,
+	                    SKILL_ATMOS        = SKILL_MAX,
+	                    SKILL_ENGINES      = SKILL_MAX)
+	skill_points = 30
 
 /datum/job/doctor
 	title = "Doc"
@@ -62,12 +82,30 @@
 	total_positions = 1
 	spawn_positions = 1
 	hud_icon = "hudmedicaldoctor"
+	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
+	                    SKILL_MEDICAL     = SKILL_EXPERT,
+	                    SKILL_ANATOMY     = SKILL_EXPERT,
+	                    SKILL_CHEMISTRY   = SKILL_BASIC)
+
+	max_skill = list(   SKILL_MEDICAL     = SKILL_MAX,
+	                    SKILL_ANATOMY     = SKILL_MAX,
+	                    SKILL_CHEMISTRY   = SKILL_MAX)
+	skill_points = 28
 
 /datum/job/hop
 	title = "First Mate"
 	supervisors = "the Captain and the Merchant Code"
 	outfit_type = /decl/hierarchy/outfit/job/bearcat/mate
 	hud_icon = "hudheadofpersonnel"
+	min_skill = list(   SKILL_WEAPONS     = SKILL_BASIC,
+	                    SKILL_FINANCE     = SKILL_EXPERT,
+	                    SKILL_BUREAUCRACY = SKILL_ADEPT,
+	                    SKILL_PILOT       = SKILL_ADEPT)
+
+	max_skill = list(   SKILL_PILOT       = SKILL_MAX,
+	                    SKILL_FINANCE     = SKILL_MAX,
+	                    SKILL_BUREAUCRACY = SKILL_ADEPT)
+	skill_points = 30
 
 /datum/job/assistant
 	title = "Deck Hand"
@@ -85,6 +123,18 @@
 	total_positions = 2
 	spawn_positions = 2
 	hud_icon = "hudengineer"
+	min_skill = list(   SKILL_COMPUTER     = SKILL_BASIC,
+	                    SKILL_EVA          = SKILL_BASIC,
+	                    SKILL_CONSTRUCTION = SKILL_ADEPT,
+	                    SKILL_ELECTRICAL   = SKILL_BASIC,
+	                    SKILL_ATMOS        = SKILL_BASIC,
+	                    SKILL_ENGINES      = SKILL_BASIC)
+
+	max_skill = list(   SKILL_CONSTRUCTION = SKILL_MAX,
+	                    SKILL_ELECTRICAL   = SKILL_MAX,
+	                    SKILL_ATMOS        = SKILL_MAX,
+	                    SKILL_ENGINES      = SKILL_MAX)
+	skill_points = 20
 
 /datum/job/cyborg
 	supervisors = "your laws and the Captain"
@@ -109,7 +159,7 @@
 	shoes = /obj/item/clothing/shoes/black
 	pda_type = /obj/item/modular_computer/pda/captain
 	r_pocket = /obj/item/device/radio
-	id_type = /obj/item/weapon/card/id/gold
+	id_types = list(/obj/item/weapon/card/id/gold)
 
 
 /decl/hierarchy/outfit/job/bearcat/captain/post_equip(var/mob/living/carbon/human/H)
@@ -132,7 +182,7 @@
 	pda_type = /obj/item/modular_computer/pda/heads/ce
 	l_hand = /obj/item/weapon/wrench
 	belt = /obj/item/weapon/storage/belt/utility/full
-	id_type = /obj/item/weapon/card/id/engineering/head
+	id_types = list(/obj/item/weapon/card/id/engineering/head)
 	r_pocket = /obj/item/device/radio
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
 

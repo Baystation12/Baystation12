@@ -3,6 +3,7 @@
 	rank =   /datum/mil_rank/civ/civ
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/civ)
+	required_language = null
 
 /datum/map/torch
 	branch_types = list(
@@ -11,7 +12,8 @@
 		/datum/mil_branch/civilian,
 		/datum/mil_branch/solgov,
 		/datum/mil_branch/army,
-		/datum/mil_branch/alien
+		/datum/mil_branch/alien,
+		/datum/mil_branch/skrell_fleet
 	)
 
 	spawn_branch_types = list(
@@ -19,27 +21,38 @@
 		/datum/mil_branch/fleet,
 		/datum/mil_branch/civilian,
 		/datum/mil_branch/solgov,
-		/datum/mil_branch/alien
+		/datum/mil_branch/alien,
+		/datum/mil_branch/skrell_fleet
 	)
 
 	species_to_branch_blacklist = list(
-		/datum/species/human   = list(/datum/mil_branch/alien),
-		/datum/species/machine = list(/datum/mil_branch/alien),
+		/datum/species/human   = list(/datum/mil_branch/alien, /datum/mil_branch/skrell_fleet),
+		/datum/species/machine = list(/datum/mil_branch/alien, /datum/mil_branch/skrell_fleet),
 		/datum/species/vox     = list(
 			/datum/mil_branch/expeditionary_corps,
 			/datum/mil_branch/fleet,
 			/datum/mil_branch/civilian,
-			/datum/mil_branch/solgov
+			/datum/mil_branch/solgov,
+			/datum/mil_branch/skrell_fleet
 		)
 	)
 
 	species_to_branch_whitelist = list(
-		/datum/species/diona      = list(/datum/mil_branch/civilian),
-		/datum/species/nabber     = list(/datum/mil_branch/civilian),
-		/datum/species/skrell     = list(/datum/mil_branch/civilian, /datum/mil_branch/expeditionary_corps),
-		/datum/species/unathi     = list(/datum/mil_branch/civilian, /datum/mil_branch/expeditionary_corps),
-		/datum/species/adherent   = list(/datum/mil_branch/civilian),
-		/datum/species/vox        = list(/datum/mil_branch/alien)
+		/datum/species/diona        = list(/datum/mil_branch/civilian),
+		/datum/species/nabber       = list(/datum/mil_branch/civilian),
+		/datum/species/skrell       = list(/datum/mil_branch/civilian, /datum/mil_branch/expeditionary_corps, /datum/mil_branch/skrell_fleet),
+		/datum/species/unathi       = list(/datum/mil_branch/civilian, /datum/mil_branch/expeditionary_corps),
+		/datum/species/unathi/yeosa = list(/datum/mil_branch/civilian, /datum/mil_branch/expeditionary_corps),
+		/datum/species/adherent     = list(/datum/mil_branch/civilian),
+		/datum/species/vox          = list(/datum/mil_branch/alien)
+	)
+
+	species_to_rank_blacklist = list(
+		/datum/species/machine = list(
+			/datum/mil_branch/solgov = list(
+				/datum/mil_rank/sol/agent
+			)
+		)
 	)
 
 	species_to_rank_whitelist = list(
@@ -59,9 +72,6 @@
 				/datum/mil_rank/fleet/e6,
 				/datum/mil_rank/fleet/e7,
 				/datum/mil_rank/fleet/o1
-			),
-			/datum/mil_branch/solgov = list(
-				/datum/mil_rank/sol/agent
 			)
 		),
 		/datum/species/skrell = list(
@@ -73,6 +83,12 @@
 			)
 		),
 		/datum/species/unathi = list(
+			/datum/mil_branch/expeditionary_corps = list(
+				/datum/mil_rank/ec/e3,
+				/datum/mil_rank/ec/e5
+			)
+		),
+		/datum/species/unathi/yeosa = list(
 			/datum/mil_branch/expeditionary_corps = list(
 				/datum/mil_rank/ec/e3,
 				/datum/mil_rank/ec/e5
@@ -117,7 +133,8 @@
 
 	assistant_job = /datum/job/crew
 
-	min_skill = list(	SKILL_SCIENCE = SKILL_BASIC,
+	min_skill = list(	SKILL_HAULING = SKILL_BASIC,
+						SKILL_SCIENCE = SKILL_BASIC,
 						SKILL_EVA     = SKILL_BASIC)
 
 /datum/mil_branch/fleet
@@ -214,6 +231,7 @@
 	name = "Civilian"
 	name_short = "Civ"
 	email_domain = "freemail.net"
+	allow_custom_email = TRUE
 
 	rank_types = list(
 		/datum/mil_rank/civ/civ,
@@ -485,7 +503,7 @@
 	name = "Admiral"
 	name_short = "ADM"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/ec/officer/o8)
-	sort_order = 16
+	sort_order = 18
 
 /*
  *  Army
@@ -633,7 +651,7 @@
  *  Civilians
  *  =========
  */
- 
+
 /datum/mil_rank/civ/civ
 	name = "Civilian"
 
@@ -654,9 +672,9 @@
 	accessory = list(/obj/item/clothing/accessory/badge/solgov/representative)
 
 /datum/mil_rank/sol/agent
-	name = "OCIE Agent"
+	name = "SFP Agent"
 	name_short = "AGT"
-	accessory = list(/obj/item/clothing/accessory/badge/ocieagent)
+	accessory = list(/obj/item/clothing/accessory/badge/agent)
 
 /datum/mil_rank/sol/scientist
 	name = "Government Scientist"

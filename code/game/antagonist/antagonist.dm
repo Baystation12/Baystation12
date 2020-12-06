@@ -37,7 +37,7 @@
 	var/initial_spawn_req = 1               // Gamemode using this template won't start without this # candidates.
 	var/initial_spawn_target = 3            // Gamemode will attempt to spawn this many antags.
 	var/announced                           // Has an announcement been sent?
-	var/spawn_announcement                  // When the datum spawn proc is called, does it announce to the world? (ie. xenos)
+	var/spawn_announcement                  // When the datum spawn proc is called, does it announce to the world? (ie. borers)
 	var/spawn_announcement_title            // Report title.
 	var/spawn_announcement_sound            // Report sound clip.
 	var/spawn_announcement_delay            // Time between initial spawn and round announcement.
@@ -51,6 +51,7 @@
 	var/flags = 0                           // Various runtime options.
 	var/show_objectives_on_creation = 1     // Whether or not objectives are shown when a player is added to this antag datum
 	var/datum/antag_skill_setter/skill_setter = /datum/antag_skill_setter/generic // Used to set up skills.
+	var/datum/language/required_language = null
 
 	// Used for setting appearance.
 	var/list/valid_species =       list(SPECIES_UNATHI,SPECIES_SKRELL,SPECIES_HUMAN,SPECIES_VOX)
@@ -78,12 +79,16 @@
 		and before taking extreme actions, please try to also contact the administration! \
 		Think through your actions and make the roleplay immersive! <b>Please remember all \
 		rules aside from those without explicit exceptions apply to antagonists.</b>"
+	
+	// Map template that antag needs to load before spawning. Nulled after it's loaded.
+	var/datum/map_template/base_to_load
 
 /datum/antagonist/New()
 	GLOB.all_antag_types_[id] = src
 	GLOB.all_antag_spawnpoints_[landmark_id] = list()
 	GLOB.antag_names_to_ids_[role_text] = id
-	skill_setter = new skill_setter
+	if(ispath(skill_setter))
+		skill_setter = new skill_setter
 	..()
 
 /datum/antagonist/proc/Initialize()
@@ -155,25 +160,25 @@
 
 	update_current_antag_max(SSticker.mode)
 	var/active_antags = get_active_antag_count()
-	log_debug("[uppertext(id)]: Found [active_antags]/[cur_max] active [role_text_plural].")
+	message_admins("[uppertext(id)]: Found [active_antags]/[cur_max] active [role_text_plural].")
 
 	if(active_antags >= cur_max)
-		log_debug("Could not auto-spawn a [role_text], active antag limit reached.")
+		message_admins("Could not auto-spawn a [role_text], active antag limit reached.")
 		return 0
 
 	build_candidate_list(SSticker.mode, flags & (ANTAG_OVERRIDE_MOB|ANTAG_OVERRIDE_JOB))
 	if(!candidates.len)
-		log_debug("Could not auto-spawn a [role_text], no candidates found.")
+		message_admins("Could not auto-spawn a [role_text], no candidates found.")
 		return 0
 
 	attempt_spawn(1) //auto-spawn antags one at a time
 	if(!pending_antagonists.len)
-		log_debug("Could not auto-spawn a [role_text], none of the available candidates could be selected.")
+		message_admins("Could not auto-spawn a [role_text], none of the available candidates could be selected.")
 		return 0
 
 	var/datum/mind/player = pending_antagonists[1]
 	if(!add_antagonist(player,0,0,0,1,1))
-		log_debug("Could not auto-spawn a [role_text], failed to add antagonist.")
+		message_admins("Could not auto-spawn a [role_text], failed to add antagonist.")
 		return 0
 
 	reset_antag_selection()

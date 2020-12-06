@@ -5,22 +5,31 @@
 */
 
 /datum/language
-	var/name = "an unknown language"  // Fluff name of language if any.
-	var/desc = "A language."          // Short description for 'Check Languages'.
+	var/name = "base language"  // Fluff name of language if any.
+	var/desc = "You should not have this language." // Short description for 'Check Languages'.
 	var/speech_verb = "says"          // 'says', 'hisses', 'farts'.
 	var/ask_verb = "asks"             // Used when sentence ends in a ?
 	var/exclaim_verb = "exclaims"     // Used when sentence ends in a !
 	var/whisper_verb                  // Optional. When not specified speech_verb + quietly/softly is used instead.
 	var/signlang_verb = list("signs", "gestures") // list of emotes that might be displayed if this language has NONVERBAL or SIGNLANG flags
 	var/colour = "body"               // CSS style to use for strings in this language.
-	var/key = "x"                     // Character used to speak in language eg. :o for Unathi.
+	var/key = ""                     // Character used to speak in language eg. :o for Unathi.
 	var/flags = 0                     // Various language flags.
 	var/native                        // If set, non-native speakers will have trouble speaking.
 	var/list/syllables                // Used when scrambling text for a non-speaker.
 	var/list/space_chance = 55        // Likelihood of getting a space in the random scramble string
 	var/machine_understands = 1       // Whether machines can parse and understand this language
-	var/shorthand = "UL"			  // Shorthand that shows up in chat for this language.
+	var/shorthand = "???"			  // Shorthand that shows up in chat for this language.
 	var/list/partial_understanding				  // List of languages that can /somehwat/ understand it, format is: name = chance of understanding a word
+	var/warning = ""
+	var/hidden_from_codex			  // If it should not show up in Codex
+	var/category = /datum/language    // Used to point at root language types that shouldn't be visible
+
+/datum/language/proc/can_be_spoken_properly_by(var/mob/speaker)
+	return TRUE
+
+/datum/language/proc/muddle(var/message)
+	return message
 
 /datum/language/proc/get_random_name(var/gender, name_count=2, syllable_count=4, syllable_divisor=2)
 	if(!syllables || !syllables.len)
@@ -190,7 +199,7 @@
 	if (only_species_language && speaking != all_languages[species_language])
 		return 0
 
-	return (speaking.can_speak_special(src) && (universal_speak || (speaking && speaking.flags & INNATE) || speaking in src.languages))
+	return (speaking.can_speak_special(src) && (universal_speak || (speaking && speaking.flags & INNATE) || (speaking in src.languages)))
 
 /mob/proc/get_language_prefix()
 	return get_prefix_key(/decl/prefix/language)
@@ -210,7 +219,7 @@
 		if(!(L.flags & NONGLOBAL))
 			dat += "<b>[L.name]([L.shorthand]) ([get_language_prefix()][L.key])</b><br/>[L.desc]<br/><br/>"
 
-	src << browse(dat, "window=checklanguage")
+	show_browser(src, dat, "window=checklanguage")
 	return
 
 /mob/living/check_languages()
@@ -228,9 +237,9 @@
 			else
 				dat += "<b>[L.name]([L.shorthand]) ([get_language_prefix()][L.key])</b> - cannot speak!<br/>[L.desc]<br/><br/>"
 
-	src << browse(dat, "window=checklanguage")
+	show_browser(src, dat, "window=checklanguage")
 
-/mob/living/Topic(href, href_list)
+/mob/living/OnSelfTopic(href_list)
 	if(href_list["default_lang"])
 		if(href_list["default_lang"] == "reset")
 
@@ -244,9 +253,8 @@
 			if(L && (L in languages))
 				set_default_language(L)
 		check_languages()
-		return 1
-	else
-		return ..()
+		return TOPIC_HANDLED
+	return ..()
 
 /proc/transfer_languages(var/mob/source, var/mob/target, var/except_flags)
 	for(var/datum/language/L in source.languages)

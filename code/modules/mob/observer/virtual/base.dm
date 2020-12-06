@@ -8,6 +8,7 @@ var/list/all_virtual_listeners = list()
 	sight = SEE_SELF
 
 	virtual_mob = null
+	no_z_overlay = TRUE
 
 	var/atom/movable/host
 	var/host_type = /atom/movable
@@ -26,7 +27,7 @@ var/list/all_virtual_listeners = list()
 	all_virtual_listeners += src
 
 	update_icon()
-   
+
 /mob/observer/virtual/Initialize()
 	. = ..()
 	STOP_PROCESSING(SSmobs, src)
@@ -59,12 +60,6 @@ var/list/all_virtual_listeners = list()
 	. = ..()
 	if(shall_have_virtual_mob())
 		virtual_mob = new virtual_mob(get_turf(src), src)
-
-/atom/movable/Destroy()
-	if(virtual_mob && !ispath(virtual_mob))
-		qdel(virtual_mob)
-	virtual_mob = null
-	return ..()
 
 /atom/movable/proc/shall_have_virtual_mob()
 	return ispath(initial(virtual_mob))

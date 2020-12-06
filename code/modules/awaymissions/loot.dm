@@ -6,6 +6,7 @@
 	var/loot = ""			//a list of possible items to spawn- a string of paths
 
 /obj/effect/spawner/lootdrop/Initialize()
+	SHOULD_CALL_PARENT(FALSE)
 	var/list/things = params2list(loot)
 
 	if(things && things.len)
@@ -21,4 +22,5 @@
 				continue
 
 			new loot_path(get_turf(src))
+	atom_flags |= ATOM_FLAG_INITIALIZED
 	return INITIALIZE_HINT_QDEL

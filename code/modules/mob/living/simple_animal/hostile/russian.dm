@@ -17,14 +17,15 @@
 	harm_intent_damage = 5
 	melee_damage_lower = 15
 	melee_damage_upper = 15
-	can_escape = 1
+	can_escape = TRUE
 	attacktext = "punched"
 	a_intent = I_HURT
 	var/corpse = /obj/effect/landmark/corpse/russian
-	var/weapon1 = /obj/item/weapon/material/knife
+	var/weapon1 = /obj/item/weapon/material/knife/combat
 	unsuitable_atmos_damage = 15
 	faction = "russian"
 	status_flags = CANPUSH
+	melee_damage_flags = DAM_SHARP|DAM_EDGE
 
 
 /mob/living/simple_animal/hostile/russian/ranged

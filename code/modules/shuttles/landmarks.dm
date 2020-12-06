@@ -20,7 +20,7 @@
 	//Will also leave this type of turf behind if set.
 	var/turf/base_turf
 	//Name of the shuttle, null for generic waypoint
-	var/shuttle_restricted 
+	var/shuttle_restricted
 	var/flags = 0
 
 /obj/effect/shuttle_landmark/Initialize()
@@ -43,18 +43,18 @@
 	if(!docking_controller)
 		return
 	var/docking_tag = docking_controller
-	docking_controller = locate(docking_tag)
+	docking_controller = SSshuttle.docking_registry[docking_tag]
 	if(!istype(docking_controller))
-		log_error("Could not find docking controller for shuttle waypoint '[name]', docking tag was '[docking_tag]'.")
+		CRASH("Could not find docking controller for shuttle waypoint '[name]', docking tag was '[docking_tag]'.")
 	if(GLOB.using_map.use_overmap)
-		var/obj/effect/overmap/location = map_sectors["[z]"]
+		var/obj/effect/overmap/visitable/location = map_sectors["[z]"]
 		if(location && location.docking_codes)
 			docking_controller.docking_codes = location.docking_codes
 
 /obj/effect/shuttle_landmark/forceMove()
-	var/obj/effect/overmap/map_origin = map_sectors["[z]"]
+	var/obj/effect/overmap/visitable/map_origin = map_sectors["[z]"]
 	. = ..()
-	var/obj/effect/overmap/map_destination = map_sectors["[z]"]
+	var/obj/effect/overmap/visitable/map_destination = map_sectors["[z]"]
 	if(map_origin != map_destination)
 		if(map_origin)
 			map_origin.remove_landmark(src, shuttle_restricted)
@@ -62,7 +62,7 @@
 			map_destination.add_landmark(src, shuttle_restricted)
 
 //Called when the landmark is added to an overmap sector.
-/obj/effect/shuttle_landmark/proc/sector_set(var/obj/effect/overmap/O, shuttle_name)
+/obj/effect/shuttle_landmark/proc/sector_set(var/obj/effect/overmap/visitable/O, shuttle_name)
 	shuttle_restricted = shuttle_name
 
 /obj/effect/shuttle_landmark/proc/is_valid(var/datum/shuttle/shuttle)
@@ -72,7 +72,16 @@
 		var/list/translation = get_turf_translation(get_turf(shuttle.current_location), get_turf(src), A.contents)
 		if(check_collision(base_area, list_values(translation)))
 			return FALSE
+	var/conn = GetConnectedZlevels(z)
+	for(var/w in (z - shuttle.multiz) to z)
+		if(!(w in conn))
+			return FALSE
 	return TRUE
+
+/obj/effect/shuttle_landmark/proc/cannot_depart(datum/shuttle/shuttle)
+	return FALSE
+
+/obj/effect/shuttle_landmark/proc/shuttle_arrived(datum/shuttle/shuttle)
 
 /proc/check_collision(area/target_area, list/target_turfs)
 	for(var/target_turf in target_turfs)
@@ -95,7 +104,7 @@
 	landmark_tag += "-[x]-[y]-[z]-[random_id("landmarks",1,9999)]"
 	return ..()
 
-/obj/effect/shuttle_landmark/automatic/sector_set(var/obj/effect/overmap/O)
+/obj/effect/shuttle_landmark/automatic/sector_set(var/obj/effect/overmap/visitable/O)
 	..()
 	SetName("[O.name] - [initial(name)] ([x],[y])")
 

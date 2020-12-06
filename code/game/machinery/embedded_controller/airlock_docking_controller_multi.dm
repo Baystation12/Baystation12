@@ -15,7 +15,7 @@
 		for (var/i = 1; i <= tags.len; i++)
 			child_names[tags[i]] = names[i]
 
-/obj/machinery/embedded_controller/radio/docking_port_multi/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/nano_ui/master_ui = null, var/datum/topic_state/state = GLOB.default_state)
+/obj/machinery/embedded_controller/radio/docking_port_multi/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/nanoui/master_ui = null, var/datum/topic_state/state = GLOB.default_state)
 	var/data[0]
 	var/datum/computer/file/embedded_program/docking/multi/docking_program = program
 
@@ -49,7 +49,7 @@
 	var/master_tag	//for mapping
 	tag_secure = 1
 
-/obj/machinery/embedded_controller/radio/airlock/docking_port_multi/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/nano_ui/master_ui = null, var/datum/topic_state/state = GLOB.default_state)
+/obj/machinery/embedded_controller/radio/airlock/docking_port_multi/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/nanoui/master_ui = null, var/datum/topic_state/state = GLOB.default_state)
 	var/data[0]
 	var/datum/computer/file/embedded_program/airlock/multi_docking/airlock_program
 

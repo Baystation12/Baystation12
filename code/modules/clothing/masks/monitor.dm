@@ -92,3 +92,6 @@
 	icon_state = monitor_states[monitor_state_index]
 	var/mob/living/carbon/human/H = loc
 	if(istype(H)) H.update_inv_wear_mask()
+
+/obj/item/clothing/mask/monitor/AltClick(var/mob/user)
+	set_monitor_state(user)

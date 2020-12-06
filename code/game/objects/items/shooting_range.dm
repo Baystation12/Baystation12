@@ -22,7 +22,7 @@
 			overlays.Cut()
 			bulletholes.Cut()
 			hp = initial(hp)
-			to_chat(usr, "<span class='notice'>You slice off [src]'s uneven chunks of aluminum and scorch marks.</span>")
+			to_chat(usr, "<span class='notice'>You slice off [src]'s uneven chunks of aluminium and scorch marks.</span>")
 			return
 
 /obj/item/target/attack_hand(var/mob/user)
@@ -66,7 +66,6 @@
 		bmark.pixel_x = p_x
 		bmark.pixel_y = p_y
 		bmark.icon = 'icons/effects/effects.dmi'
-		bmark.plane = OBJ_PLANE
 		bmark.layer = ABOVE_OBJ_LAYER
 		bmark.icon_state = "scorch"
 

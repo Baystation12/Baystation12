@@ -9,6 +9,7 @@
 	density = 0
 	unacidable = 1
 	use_power = POWER_USE_OFF
+	uncreated_component_parts = null
 	light_outer_range = 4
 	movable_flags = MOVABLE_FLAG_PROXMOVE
 	var/obj/machinery/field_generator/FG1 = null
@@ -22,13 +23,8 @@
 		FG2.cleanup()
 	. = ..()
 
-/obj/machinery/containment_field/attack_hand(mob/user as mob)
-	if(get_dist(src, user) > 1)
-		return 0
-	else
-		shock(user)
-		return 1
-
+/obj/machinery/containment_field/physical_attack_hand(mob/user)
+	return shock(user)
 
 /obj/machinery/containment_field/ex_act(severity)
 	return 0
@@ -61,7 +57,7 @@
 		sleep(20)
 
 		hasShocked = 0
-	return
+		return TRUE
 
 /obj/machinery/containment_field/proc/set_master(var/master1,var/master2)
 	if(!master1 || !master2)

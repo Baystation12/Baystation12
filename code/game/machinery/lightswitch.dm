@@ -43,8 +43,9 @@
 		overlays += overlay
 		set_light(0.1, 0.1, 1, 2, on ? "#82ff4c" : "#f86060")
 
-/obj/machinery/light_switch/examine(mob/user)
-	if(..(user, 1))
+/obj/machinery/light_switch/examine(mob/user, distance)
+	. = ..()
+	if(distance)
 		to_chat(user, "A light switch. It is [on? "on" : "off"].")
 
 /obj/machinery/light_switch/proc/set_state(var/newstate)
@@ -59,9 +60,11 @@
 		update_icon()
 		return 1
 
-/obj/machinery/light_switch/attack_hand(mob/user)
-	playsound(src, "switch", 30)
-	set_state(!on)
+/obj/machinery/light_switch/interface_interact(mob/user)
+	if(CanInteract(user, DefaultTopicState()))
+		playsound(src, "switch", 30)
+		set_state(!on)
+		return TRUE
 
 /obj/machinery/light_switch/attackby(obj/item/tool as obj, mob/user as mob)
 	if(istype(tool, /obj/item/weapon/screwdriver))

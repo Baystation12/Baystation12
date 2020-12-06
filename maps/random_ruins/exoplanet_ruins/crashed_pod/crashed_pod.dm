@@ -5,8 +5,10 @@ GLOBAL_LIST_INIT(crashed_pod_areas, new)
 	id = "crashed_pod"
 	description = "A crashed survival pod from a destroyed ship."
 	suffixes = list("crashed_pod/crashed_pod.dmm")
-	cost = 2
+	cost = 1.5
 	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS | TEMPLATE_FLAG_NO_RADS
+	ruin_tags = RUIN_HUMAN|RUIN_WRECK
+	spawn_weight = 0.33
 
 /area/map_template/crashed_pod
 	name = "\improper Crashed Survival Pod"
@@ -16,17 +18,18 @@ GLOBAL_LIST_INIT(crashed_pod_areas, new)
 	descriptor = "crashed survival pod"
 	crew_jobs = list(/datum/job/submap/pod)
 
-/datum/submap/crashed_pod/sync_cell(var/obj/effect/overmap/cell)
+/datum/submap/crashed_pod/sync_cell(var/obj/effect/overmap/visitable/cell)
 	cell.has_distress_beacon = name
 
 /datum/job/submap/pod
 	title = "Stranded Survivor"
 	info = "Your ship has been destroyed by a terrible disaster."
 	outfit_type = /decl/hierarchy/outfit/job/survivor
+	total_positions = 2
 
 /decl/hierarchy/outfit/job/survivor
 	name = OUTFIT_JOB_NAME("Survivor")
-	id_type = null
+	id_types = null
 	pda_type = null
 
 /datum/job/submap/pod/New(var/datum/submap/_owner, var/abstract_job = FALSE)

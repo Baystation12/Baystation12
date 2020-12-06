@@ -99,3 +99,20 @@
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "utlity shells crate"
 	access = access_pathfinder
+
+/decl/hierarchy/supply_pack/science/exploration_extragear
+	name = "Gear - Exploration equipment"
+	contains = list(/obj/item/weapon/material/hatchet/machete = 2,
+					/obj/item/device/gps = 2,
+					/obj/item/device/geiger = 2,
+					/obj/item/device/scanner/xenobio = 2,
+					/obj/item/device/radio/headset/exploration = 2,
+					/obj/item/weapon/storage/belt/holster/machete = 2,
+					/obj/item/weapon/storage/plants = 2,
+					/obj/item/device/scanner/plant = 2,
+					/obj/item/device/scanner/mining = 2,
+					/obj/item/device/binoculars = 2)
+	cost = 60
+	containertype = /obj/structure/closet/crate/secure
+	containername = "exploration equipment crate"
+	access = access_explorer

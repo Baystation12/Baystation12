@@ -12,11 +12,9 @@
 
 	if (!( istext(HTMLstring) ))
 		CRASH("Given non-text argument!")
-		return
 	else
 		if (length(HTMLstring) != 7)
 			CRASH("Given non-HTML argument!")
-			return
 	var/textr = copytext(HTMLstring, 2, 4)
 	var/textg = copytext(HTMLstring, 4, 6)
 	var/textb = copytext(HTMLstring, 6, 8)
@@ -33,7 +31,6 @@
 	if (length(textb) < 2)
 		textr = text("0[]", textb)
 	return text("#[][][]", textr, textg, textb)
-	return
 
 //Returns the middle-most value
 /proc/dd_range(var/low, var/high, var/num)
@@ -323,7 +320,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	var/select = null
 	var/list/borgs = list()
 	for (var/mob/living/silicon/robot/A in GLOB.player_list)
-		if (A.stat == 2 || A.connected_ai || A.scrambledcodes || istype(A,/mob/living/silicon/robot/drone) || !((get_turf(A))?.z in zs))
+		if (A.stat == 2 || A.connected_ai || A.scrambledcodes || istype(A,/mob/living/silicon/robot/drone) || !(get_z(A) in zs))
 			continue
 		var/name = "[A.real_name] ([A.modtype] [A.braintype])"
 		borgs[name] = A
@@ -338,7 +335,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 	. = list()
 	for(var/mob/living/silicon/ai/A in GLOB.living_mob_list_)
-		if(A.stat == DEAD || A.control_disabled || !((get_turf(A))?.z in zs))
+		if(A.stat == DEAD || A.control_disabled || !(get_z(A) in zs))
 			continue
 		. += A
 	return .
@@ -435,7 +432,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		moblist.Add(M)
 	for(var/mob/living/silicon/robot/M in sortmob)
 		moblist.Add(M)
-	for(var/mob/living/deity/M in sortmob)
+	for(var/mob/living/carbon/alien/chorus/M in sortmob)
 		moblist.Add(M)
 	for(var/mob/living/carbon/human/M in sortmob)
 		moblist.Add(M)
@@ -517,9 +514,11 @@ Turf and target are seperate in case you want to teleport some distance from a t
 /proc/between(var/low, var/middle, var/high)
 	return max(min(middle, high), low)
 
-proc/arctan(x)
+#if DM_VERSION < 513
+/proc/arctan(x)
 	var/y=arcsin(x/sqrt(1+x*x))
 	return y
+#endif
 
 //returns random gauss number
 proc/GaussRand(var/sigma)
@@ -915,10 +914,13 @@ var/global/list/common_tools = list(
 			return 3800
 		if(/obj/item/weapon/melee/energy)
 			return 3500
+		if(/obj/item/weapon/blob_tendril)
+			if(W.damtype == BURN)
+				return 1000
+			else
+				return 0
 		else
 			return 0
-
-	return 0
 
 //Whether or not the given item counts as sharp in terms of dealing damage
 /proc/is_sharp(obj/O as obj)
@@ -1089,7 +1091,10 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 
 	virtual_mob = null
 
-/mob/dview/Destroy()
+/mob/dview/Destroy(forced)
+	if(forced)
+		GLOB.dview_mob = new/mob/dview()
+		return ..()
 	crash_with("Prevented attempt to delete dview mob: [log_info_line(src)]")
 	return QDEL_HINT_LETMELIVE // Prevents destruction
 
@@ -1104,8 +1109,8 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 	STOP_PROCESSING(SSmobs, src)
 
 // call to generate a stack trace and print to runtime logs
-/proc/crash_with(msg)
-	CRASH(msg)
+/proc/crash_at(msg, file, line)
+	CRASH("%% [file],[line] %% [msg]")
 
 /proc/pass()
 	return
@@ -1120,3 +1125,4 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 		M.start_pulling(t)
 	else
 		step(user.pulling, get_dir(user.pulling.loc, A))
+

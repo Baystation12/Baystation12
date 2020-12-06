@@ -28,4 +28,3 @@
 	name = "slug cylinder"
 	desc = "A magazine containing slugs, the design harkening back to cylinders on revolvers."
 	projectile_type = /obj/item/projectile/bullet/magnetic/slug
-	remaining = 6

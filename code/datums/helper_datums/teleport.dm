@@ -10,7 +10,9 @@
 
 /decl/teleport/proc/teleport_target(var/atom/movable/target, var/atom/destination, var/precision)
 	var/list/possible_turfs = circlerangeturfs(destination, precision)
-	destination = safepick(possible_turfs)
+	destination = DEFAULTPICK(possible_turfs, null)
+	if (!destination)
+		return
 
 	target.forceMove(destination)
 	if(isliving(target))
@@ -24,17 +26,11 @@
 	if(!destination || !target || !target.loc || destination.z > max_default_z_level())
 		return 0
 
-	if(istype(target, /obj/mecha))
-		if(destination.z in GLOB.using_map.admin_levels)
-			var/obj/mecha/mech = target
-			to_chat(mech.occupant, "<span class='danger'>\The [target] would not survive the jump to a location so far away!</span>")
-			return 0
-
 	if(is_type_in_list(target, teleport_blacklist))
 		return 0
 
 	for(var/type in teleport_blacklist)
-		if(!isemptylist(target.search_contents_for(type)))
+		if(length(target.search_contents_for(type)))
 			return 0
 	return 1
 

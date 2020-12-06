@@ -13,8 +13,9 @@
 	if(holding)
 		GLOB.item_unequipped_event.unregister(holding, src)
 		if(holding.loc == src)
-			QDEL_NULL(holding)
-
+			qdel(holding)
+		holding = null
+	return ..()
 
 /obj/item/organ/internal/augment/active/simple/proc/holding_dropped()
 
@@ -67,7 +68,7 @@
 /obj/item/organ/internal/augment/active/simple/can_activate()
 	if(..())
 		if(!holding)
-			owner.visible_message(owner, SPAN_WARNING("The device is damaged and fails to deploy"))
+			to_chat(owner, SPAN_WARNING("The device is damaged and fails to deploy"))
 			return FALSE
 		return TRUE
 	return FALSE

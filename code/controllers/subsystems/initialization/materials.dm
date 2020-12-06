@@ -37,7 +37,6 @@ SUBSYSTEM_DEF(materials)
 					processable_ores[component] = TRUE
 					alloy_components[component] = TRUE
 
-	. = ..()
 
 /datum/controller/subsystem/materials/proc/get_material_by_name(name)
 	if(!materials_by_name)

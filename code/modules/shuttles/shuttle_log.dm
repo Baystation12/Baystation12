@@ -6,7 +6,7 @@
 	var/list/datum/shuttle_mission/queued_missions = list() //Missions which are queued up, in order ([1] is the next one scheduled).
 	var/datum/shuttle_mission/current_mission         //The current mission, planned or ongoing. Will also be in either missions or queued_missions, depending on stage.
 	var/home_base                                     //The landmark tag from which missions originate.
-	var/list/datum/nano_module/registered = list()    //Nanomodules using logs should register to recieve updates.
+	var/list/datum/nano_module/registered = list()    //Nanomodules using logs should register to receive updates.
 	var/last_spam = 0                                 //Helps with spam control from deck software.
 
 /datum/shuttle_log/New(datum/shuttle/given_shuttle)

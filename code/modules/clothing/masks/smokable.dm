@@ -9,6 +9,7 @@
 	var/type_butt = null
 	var/chem_volume = 0
 	var/smoketime = 0
+	var/genericmes = "<span class='notice'>USER lights their NAME with the FLAME.</span>"
 	var/matchmes = "USER lights NAME with FLAME"
 	var/lightermes = "USER lights NAME with FLAME"
 	var/zippomes = "USER lights NAME with FLAME"
@@ -51,8 +52,8 @@
 			extinguish()
 		else
 			environment.remove_by_flag(XGM_GAS_OXIDIZER, gas_consumption)
-			environment.adjust_gas("carbon_dioxide", 0.5*gas_consumption,0)
-			environment.adjust_gas("carbon_monoxide", 0.5*gas_consumption)
+			environment.adjust_gas(GAS_CO2, 0.5*gas_consumption,0)
+			environment.adjust_gas(GAS_CO, 0.5*gas_consumption)
 
 /obj/item/clothing/mask/smokable/Process()
 	var/turf/location = get_turf(src)
@@ -82,10 +83,18 @@
 		if(submerged(depth))
 			extinguish(no_message = TRUE)
 
+/obj/item/clothing/mask/smokable/proc/is_wet()
+	if(ishuman(loc))
+		var/mob/living/carbon/human/C = loc
+		return locate(/datum/reagent/water) in C.touching.reagent_list
+
 /obj/item/clothing/mask/smokable/proc/light(var/flavor_text = "[usr] lights the [name].")
 	if(QDELETED(src))
 		return
 	if(!lit)
+		if(is_wet())
+			to_chat(usr, "<span class='warning'>You are too wet to light \the [src].</span>")
+			return
 		if(submerged())
 			to_chat(usr, "<span class='warning'>You cannot light \the [src] underwater.</span>")
 			return
@@ -120,7 +129,7 @@
 
 /obj/item/clothing/mask/smokable/attackby(var/obj/item/weapon/W, var/mob/user)
 	..()
-	if(isflamesource(W))
+	if(isflamesource(W) || is_hot(W))
 		var/text = matchmes
 		if(istype(W, /obj/item/weapon/flame/match))
 			text = matchmes
@@ -132,6 +141,8 @@
 			text = weldermes
 		else if(istype(W, /obj/item/device/assembly/igniter))
 			text = ignitermes
+		else
+			text = genericmes
 		text = replacetext(text, "USER", "[user]")
 		text = replacetext(text, "NAME", "[name]")
 		text = replacetext(text, "FLAME", "[W.name]")
@@ -170,6 +181,11 @@
 	for(var/R in filling)
 		reagents.add_reagent(R, filling[R])
 
+/obj/item/clothing/mask/smokable/cigarette/light(var/flavor_text = "[usr] lights the [name].")
+	..()
+	if(is_processing)
+		set_scent_by_reagents(src)
+
 /obj/item/clothing/mask/smokable/cigarette/on_update_icon()
 	..()
 	overlays.Cut()
@@ -184,16 +200,19 @@
 
 /obj/item/clothing/mask/smokable/extinguish(var/mob/user, var/no_message)
 	..()
+	remove_extension(src, /datum/extension/scent)
 	if (type_butt)
 		var/obj/item/butt = new type_butt(get_turf(src))
 		transfer_fingerprints_to(butt)
 		butt.color = color
 		if(brand)
-			butt.desc += " This one is \a [brand]."
+			butt.desc += " This one is a [brand]."
 		if(ismob(loc))
 			var/mob/living/M = loc
 			if (!no_message)
 				to_chat(M, "<span class='notice'>Your [name] goes out.</span>")
+			// if the mob has free hands, put the cig in them
+			M.put_in_any_hand_if_possible(butt)
 		qdel(src)
 
 /obj/item/clothing/mask/smokable/cigarette/menthol
@@ -325,7 +344,7 @@
 
 /obj/item/clothing/mask/smokable/cigarette/attack_self(var/mob/user)
 	if(lit == 1)
-		user.visible_message("<span class='notice'>[user] calmly drops and treads on the lit [src], putting it out instantly.</span>")
+		user.visible_message("<span class='notice'>[user] puts out the lit [src].</span>")
 		extinguish(no_message = 1)
 	return ..()
 
@@ -359,6 +378,7 @@
 	zippomes = "<span class='rose'>With a flick of their wrist, USER lights their NAME with their FLAME.</span>"
 	weldermes = "<span class='notice'>USER insults NAME by lighting it with FLAME.</span>"
 	ignitermes = "<span class='notice'>USER fiddles with FLAME, and manages to light their NAME with the power of science.</span>"
+	brand = null
 	filling = list(/datum/reagent/tobacco/fine = 5)
 
 /obj/item/clothing/mask/smokable/cigarette/cigar/cohiba
@@ -366,6 +386,7 @@
 	desc = "There's little more you could want from a cigar."
 	icon_state = "cigar2off"
 	icon_on = "cigar2on"
+	brand = "Cohiba Robusto"
 
 /obj/item/clothing/mask/smokable/cigarette/cigar/havana
 	name = "premium Havanian cigar"
@@ -374,6 +395,7 @@
 	icon_on = "cigar2on"
 	smoketime = 3000
 	chem_volume = 20
+	brand = "Havana"
 	filling = list(/datum/reagent/tobacco/fine = 10)
 
 /obj/item/trash/cigbutt
@@ -402,217 +424,7 @@
 	user.update_inv_l_hand(0)
 	user.update_inv_r_hand(1)
 
-/////////// //Ported Straight from TG. I am not sorry. - BloodyMan
-//ROLLING//
-///////////
-/obj/item/paper/cig
-	name = "rolling paper"
-	desc = "A thin piece of paper used to make smokeables."
-	icon = 'icons/obj/cigarettes.dmi'
-	icon_state = "cig_paper"
-	w_class = ITEM_SIZE_TINY
-
-/obj/item/paper/cig/fancy
-	name = "\improper Trident rolling paper"
-	desc = "A thin piece of trident branded paper used to make fine smokeables."
-	icon_state = "cig_paperf"
-
-/obj/item/paper/cig/filter
-	name = "cigarette filter"
-	desc = "A small nub like filter for cigarettes."
-	icon_state = "cig_filter"
-	w_class = ITEM_SIZE_TINY
-
-//tobacco sold seperately if you're too snobby to grow it yourself.
-/obj/item/weapon/reagent_containers/terrbacco
-	name = "tobacco"
-	desc = "A wad of carefully cured and dried tobacco. Ground into a mess."
-	icon = 'icons/obj/clothing/obj_mask.dmi'
-	icon_state = "chew"
-	w_class = ITEM_SIZE_TINY
-	volume = 15
-	var/dry = 1
-	var/list/filling = list(/datum/reagent/tobacco = 5)
-
-/obj/item/weapon/reagent_containers/terrbacco/New()
-	..()
-	for(var/R in filling)
-		reagents.add_reagent(R, filling[R])
-
-/obj/item/weapon/reagent_containers/terrbacco/bad
-	desc = "A wad of carefully cured and dried tobacco. Ground into a coarse mess."
-	filling = list(/datum/reagent/tobacco/bad = 5)
-
-/obj/item/weapon/reagent_containers/terrbacco/fine
-	desc = "A wad of carefully cured and dried tobacco. Ground into a fine mess."
-	filling = list(/datum/reagent/tobacco/fine = 5)
-
-//cig paper interaction ported straight from TG with some adjustments for our derelict code
-/obj/item/paper/cig/afterattack(atom/target, mob/user, proximity)
-	if(!proximity)
-		return
-	if(istype(target, /obj/item/weapon/reagent_containers/food/snacks/grown))
-		var/obj/item/weapon/reagent_containers/food/snacks/grown/G = target
-		if(G.dry)
-			var/obj/item/clothing/mask/smokable/cigarette/rolled/R = new(user.loc)
-			R.chem_volume = target.reagents.total_volume
-			target.reagents.trans_to_holder(R.reagents, R.chem_volume)
-			qdel(target)
-			qdel(src)
-			user.put_in_active_hand(R)
-			to_chat(user, "<span class='notice'>You roll the [target.name] into a rolling paper.</span>")
-			R.desc = "A [target.name] rolled up in a thin piece of paper."
-		else
-			to_chat(user, "<span class='warning'>You need to dry this first!</span>")
-	else
-		..()
-
-//and if you are a savage you can just use a sheet of ordinary paper.
-/obj/item/weapon/paper/afterattack(atom/target, mob/user, proximity)
-	if(!proximity)
-		return
-	if(istype(target, /obj/item/weapon/reagent_containers/food/snacks/grown))
-		var/obj/item/weapon/reagent_containers/food/snacks/grown/G = target
-		if(G.dry)
-			var/obj/item/clothing/mask/smokable/cigarette/rolled/R = new(user.loc)
-			R.chem_volume = target.reagents.total_volume
-			target.reagents.trans_to_holder(R.reagents, R.chem_volume)
-			qdel(target)
-			qdel(src)
-			user.put_in_active_hand(R)
-			to_chat(user, "<span class='notice'>You roll the [target.name] into a regular sheet of paper. How bold.</span>")
-			R.desc = "A [target.name] rolled up in a piece of office paper. How bold."
-		else
-			to_chat(user, "<span class='warning'>You need to dry this first!</span>")
-	else
-		..()
-
-//and finally a use for those magic scrolls that are left over from wizard antags.
-/obj/item/weapon/teleportation_scroll/afterattack(atom/target, mob/user, proximity)
-	if(!proximity)
-		return
-	if(istype(target, /obj/item/weapon/reagent_containers/food/snacks/grown))
-		var/obj/item/weapon/reagent_containers/food/snacks/grown/G = target
-		if(G.dry)
-			var/obj/item/clothing/mask/smokable/cigarette/rolled/R = new(user.loc)
-			R.chem_volume = target.reagents.total_volume
-			target.reagents.trans_to_holder(R.reagents, R.chem_volume)
-			qdel(target)
-			qdel(src)
-			user.put_in_active_hand(R)
-			to_chat(user, "<span class='notice'>You roll the [target.name] into the wizard's teleportation scroll. Not like he'll be needing it anymore.</span>")
-			R.desc = "A [target.name] rolled up in a piece of arcane parchment. Magical!"
-		else
-			to_chat(user, "<span class='warning'>You need to dry this first!</span>")
-	else
-		..()
-
-//Repeating this for tobacco-wad objects
-/obj/item/paper/cig/afterattack(atom/target, mob/user, proximity)
-	if(!proximity)
-		return
-	if(istype(target, /obj/item/weapon/reagent_containers/terrbacco))
-		var/obj/item/weapon/reagent_containers/terrbacco/Z = target
-		if(Z.dry)
-			var/obj/item/clothing/mask/smokable/cigarette/rolled/R = new(user.loc)
-			R.chem_volume = target.reagents.total_volume
-			target.reagents.trans_to_holder(R.reagents, R.chem_volume)
-			qdel(target)
-			qdel(src)
-			user.put_in_active_hand(R)
-			to_chat(user, "<span class='notice'>You roll the [target.name] into a rolling paper.</span>")
-			R.desc = "A [target.name] rolled up in a thin piece of paper."
-		else
-			to_chat(user, "<span class='warning'>You need to dry this first!</span>")
-	else
-		..()
-
-/obj/item/weapon/paper/afterattack(atom/target, mob/user, proximity)
-	if(!proximity)
-		return
-	if(istype(target, /obj/item/weapon/reagent_containers/terrbacco))
-		var/obj/item/weapon/reagent_containers/terrbacco/Z = target
-		if(Z.dry)
-			var/obj/item/clothing/mask/smokable/cigarette/rolled/R = new(user.loc)
-			R.chem_volume = target.reagents.total_volume
-			target.reagents.trans_to_holder(R.reagents, R.chem_volume)
-			qdel(target)
-			qdel(src)
-			user.put_in_active_hand(R)
-			to_chat(user, "<span class='notice'>You roll the [target.name] into a regular sheet of paper. How bold.</span>")
-			R.desc = "A [target.name] rolled up in a piece of office paper. How bold."
-		else
-			to_chat(user, "<span class='warning'>You need to dry this first!</span>")
-	else
-		..()
-
-/obj/item/weapon/teleportation_scroll/afterattack(atom/target, mob/user, proximity)
-	if(!proximity)
-		return
-	if(istype(target, /obj/item/weapon/reagent_containers/terrbacco))
-		var/obj/item/weapon/reagent_containers/terrbacco/Z = target
-		if(Z.dry)
-			var/obj/item/clothing/mask/smokable/cigarette/rolled/R = new(user.loc)
-			R.chem_volume = target.reagents.total_volume
-			target.reagents.trans_to_holder(R.reagents, R.chem_volume)
-			qdel(target)
-			qdel(src)
-			user.put_in_active_hand(R)
-			to_chat(user, "<span class='notice'>You roll the [target.name] into the wizard's teleportation scroll. Not like he'll be needing it anymore.</span>")
-			R.desc = "A [target.name] rolled up in a piece of arcane parchment. Magical!"
-		else
-			to_chat(user, "<span class='warning'>You need to dry this first!</span>")
-	else
-		..()
-
-//crafting a filter into the existing rollie
-/obj/item/paper/cig/filter/afterattack(atom/target, mob/user, proximity)
-	if(!proximity)
-		return
-	if(istype(target, /obj/item/clothing/mask/smokable/cigarette/rolled))
-		var/obj/item/clothing/mask/smokable/cigarette/rolled/filtered/R = new(user.loc)
-		R.chem_volume = target.reagents.total_volume
-		target.reagents.trans_to_holder(R.reagents, R.chem_volume)
-		qdel(target)
-		qdel(src)
-		user.put_in_active_hand(R)
-		to_chat(user, "<span class='notice'>You roll the filter into the rolled cigarette.</span>")
-		R.desc = "A [target.name] with a filter."
-	else
-		..()
-
-// Rollies.
-
-/obj/item/clothing/mask/smokable/cigarette/rolled
-	name = "rolled cigarette"
-	desc = "A hand rolled cigarette using dried plant matter."
-	icon_state = "cigroll"
-	item_state = "cigoff"
-	type_butt = /obj/item/trash/cigbutt/rollbutt
-	chem_volume = 50
-	brand = "handrolled"
-	filling = list()
-
-/obj/item/clothing/mask/smokable/cigarette/rolled/office
-	brand = "handrolled from regular office paper. How bold."
-
-/obj/item/clothing/mask/smokable/cigarette/rolled/arcane
-	brand = "handrolled from a magic scroll"
-
-
-/obj/item/clothing/mask/smokable/cigarette/rolled/filtered
-	name = "filtered rolled cigarette"
-	desc = "A hand rolled cigarette using dried plant matter. Capped off one end with a filter."
-	icon_state = "cigoff"
-	brand = "handrolled with a filter"
-
-/obj/item/trash/cigbutt/rollbutt
-	name = "cigarette butt"
-	desc = "A cigarette butt."
-	icon_state = "rollbutt"
-
 //Bizarre
-
 /obj/item/clothing/mask/smokable/cigarette/rolled/sausage
 	name = "sausage"
 	desc = "A piece of mixed, long meat, with a smoky scent."
@@ -670,6 +482,7 @@
 			M.update_inv_wear_mask(0)
 			M.update_inv_l_hand(0)
 			M.update_inv_r_hand(1)
+		set_scent_by_reagents(src)
 
 /obj/item/clothing/mask/smokable/pipe/extinguish(var/mob/user, var/no_message)
 	..()
@@ -678,6 +491,7 @@
 		var/mob/living/M = loc
 		if (!no_message)
 			to_chat(M, "<span class='notice'>Your [name] goes out, and you empty the ash.</span>")
+	remove_extension(src, /datum/extension/scent)
 
 /obj/item/clothing/mask/smokable/pipe/attack_self(var/mob/user)
 	if(lit == 1)
@@ -685,6 +499,7 @@
 		lit = 0
 		update_icon()
 		STOP_PROCESSING(SSobj, src)
+		remove_extension(src, /datum/extension/scent)
 	else if (smoketime)
 		var/turf/location = get_turf(user)
 		user.visible_message("<span class='notice'>[user] empties out [src].</span>", "<span class='notice'>You empty out [src].</span>")

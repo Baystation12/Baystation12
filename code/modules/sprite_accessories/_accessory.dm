@@ -22,6 +22,7 @@
 	var/icon_state                                 // the icon_state of the accessory
 	var/preview_state                              // A custom preview state for whatever reason
 	var/gender = NEUTER                            // Restricted to specific genders.
-	var/list/species_allowed = list(SPECIES_HUMAN) // Restrict some styles to specific species
+	var/list/species_allowed = list(SPECIES_HUMAN) // Restrict some styles to specific bodytypes
+	var/list/subspecies_allowed                    // Restrict some styles to specific species names
 	var/do_colouration = 1                         // Whether or not the accessory can be affected by colouration
 	var/blend = ICON_ADD

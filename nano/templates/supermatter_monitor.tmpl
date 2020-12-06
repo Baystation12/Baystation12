@@ -1,5 +1,7 @@
 {{if data.active}}
-	{{:helper.link('Back to Menu', null, {'clear' : 1})}}<br>
+	{{:helper.link('Back to List', null, {'clear' : 1})}}
+	{{if data.screen == "main"}}
+		{{:helper.link('Configure', null, {'screen_threshholds' : 1})}}<br>
 		<div class="item">
 			<div class="itemLabel">
 				Core Integrity:
@@ -11,52 +13,26 @@
 				Relative EER:
 			</div>
 			<div class="itemContent">
-				{{if data.SM_power > 300}}
-					<span class='bad'>{{:data.SM_power}} MeV/cm3</span>
-				{{else data.SM_power > 150}}
-					<span class='average'>{{:data.SM_power}} MeV/cm3</span>
-				{{else}}
-					<span class='good'>{{:data.SM_power}} MeV/cm3</span>
-				{{/if}}
+				<span class='{{:data.SM_power_label}}'>{{:data.SM_power}} MeV/cm3</span>
 			</div>
 			<div class="itemLabel">
 				Temperature:
 			</div>
 			<div class="itemContent">
-				{{if data.SM_ambienttemp > 5000}}
-					<span class='bad'>{{:data.SM_ambienttemp}} K</span>
-				{{else data.SM_ambienttemp > 4000}}
-					<span class='average'>{{:data.SM_ambienttemp}} K</span>
-				{{else}}
-					<span class='good'>{{:data.SM_ambienttemp}} K</span>
-				{{/if}}
-			</div>		
+				<span class='{{:data.SM_ambienttemp_label}}'>{{:data.SM_ambienttemp}} K</span>
+			</div>
 			<div class="itemLabel">
 				Pressure:
 			</div>
 			<div class="itemContent">
-				{{if data.SM_ambientpressure > 10000}}
-					<span class='bad'>{{:data.SM_ambientpressure}} kPa</span>
-				{{else data.SM_ambientpressure > 5000}}
-					<span class='average'>{{:data.SM_ambientpressure}} kPa</span>
-				{{else}}
-					<span class='good'>{{:data.SM_ambientpressure}} kPa</span>
-				{{/if}}
+				<span class='{{:data.SM_ambientpressure_label}}'>{{:data.SM_ambientpressure}} kPa</span>
 			</div>
 			<div class="itemLabel">
 				Chamber EPR:
 			</div>
 			<div class="itemContent">
-				{{if data.SM_EPR > 4}}
-					<span class='bad'>{{:data.SM_EPR}}</span>
-				{{else data.SM_EPR > 2.5}}
-					<span class='average'>{{:data.SM_EPR}}</span>
-				{{else data.SM_EPR < 1}}
-					<span class='average'>{{:data.SM_EPR}}</span>
-				{{else}}
-					<span class='good'>{{:data.SM_EPR}}</span>
-				{{/if}}
-			</div>		
+				<span class='{{:data.SM_EPR_label}}'>{{:data.SM_EPR}}</span>
+			</div>
 		</div>
 		<hr><br
 		<div class="item">
@@ -70,7 +46,7 @@
 					</div>
 					<div class="itemContent">
 						{{:data.SM_gas_O2}} %
-					</div>	
+					</div>
 					<div class="itemLabel">
 						CO2:
 					</div>
@@ -102,8 +78,30 @@
 						{{:data.SM_gas_N2O}} %
 					</div>
 				</div>
-			</div>			
+			</div>
 		</div>
+	{{else data.screen == "threshholds"}}
+		{{:helper.link('Monitor', null, {'screen_main' : 1})}}<br>
+		<table class="fixed">
+			<tr>
+				<th>Threshholds</th>
+				<td><span class='bad'>min2</span></td>
+				<td><span class='average'>min1</span></td>
+				<td><span class='average'>max1</span></td>
+				<td><span class='bad'>max2</span></td>
+			</tr>
+
+			{{for data.threshholds}}
+				<tr>
+					<th>{{:value.name}}</th>
+					<td>{{:helper.link(value.min_h >= 0 ? value.min_h : "Off", null, {'set_threshhold' : 1, 'threshhold' : value.name, 'category' : 'min_h', 'value' : value.min_h})}}</td>
+					<td>{{:helper.link(value.min_l >= 0 ? value.min_l : "Off", null, {'set_threshhold' : 1, 'threshhold' : value.name, 'category' : 'min_l', 'value' : value.min_l})}}</td>
+					<td>{{:helper.link(value.max_l >= 0 ? value.max_l : "Off", null, {'set_threshhold' : 1, 'threshhold' : value.name, 'category' : 'max_l', 'value' : value.max_l})}}</td>
+					<td>{{:helper.link(value.max_h >= 0 ? value.max_h : "Off", null, {'set_threshhold' : 1, 'threshhold' : value.name, 'category' : 'max_h', 'value' : value.max_h})}}</td>
+				</tr>
+			{{/for}}
+		</table>
+	{{/if}}
 {{else}}
 	{{:helper.link('Refresh', null, {'refresh' : 1})}}<br>
 	{{for data.supermatters}}
@@ -125,7 +123,7 @@
 			</div>
 			<div class="itemContent">
 				{{:helper.link('View Details', null, {'set' : value.uid})}}
-			</div>			
-		</div>	
+			</div>
+		</div>
 	{{/for}}
 {{/if}}

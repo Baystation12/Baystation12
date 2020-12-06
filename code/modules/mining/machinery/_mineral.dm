@@ -2,6 +2,9 @@
 	icon = 'icons/obj/machines/mining_machines.dmi'
 	density =  TRUE
 	anchored = TRUE
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 
 	var/turf/input_turf
 	var/turf/output_turf
@@ -22,15 +25,10 @@
 	find_console()
 	. = ..()
 
-/obj/machinery/mineral/attackby(var/obj/item/O, var/mob/user)
-	if(default_deconstruction_screwdriver(user, O))
-		updateUsrDialog()
-		return
-	if(default_deconstruction_crowbar(user, O))
-		return
-	if(default_part_replacement(user, O))
-		return
+/obj/machinery/mineral/state_transition(var/decl/machine_construction/default/new_state)
 	. = ..()
+	if(istype(new_state))
+		updateUsrDialog()
 
 /obj/machinery/mineral/proc/set_input(var/_dir)
 	input_turf = _dir ? get_step(loc, _dir) : null
@@ -48,7 +46,7 @@
 		. += "<b>Output</b>: [dir2text(get_dir(src, output_turf))]."
 	else
 		. += "<b>Output</b>: disabled."
-	. += "<br><a href='?src=\ref[src];configure_input_output=1'>Configure.</a>"
+	. += "<br><a href='?src=\ref[src];configure_input_output=1'>Configure</a>"
 
 /obj/machinery/mineral/CanUseTopic(var/mob/user)
 	return max(..(), (console && console.CanUseTopic(user)))
@@ -77,12 +75,9 @@
 		usr.set_machine(console)
 		console.add_fingerprint(usr)
 
-/obj/machinery/mineral/attack_ai(var/mob/user)
+/obj/machinery/mineral/interface_interact(var/mob/user)
 	interact(user)
-
-/obj/machinery/mineral/attack_hand(var/mob/user)
-	add_fingerprint(user)
-	interact(user)
+	return TRUE
 
 /obj/machinery/mineral/proc/can_configure(var/mob/user)
 	if(user.incapacitated())

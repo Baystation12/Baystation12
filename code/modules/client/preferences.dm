@@ -1,10 +1,21 @@
 #define SAVE_RESET -1
 
+#define JOB_PRIORITY_HIGH   0x1
+#define JOB_PRIORITY_MEDIUM 0x2
+#define JOB_PRIORITY_LOW    0x4
+#define JOB_PRIORITY_LIKELY 0x3
+#define JOB_PRIORITY_PICKED 0x7
+
+#define MAX_LOAD_TRIES 5
+
 datum/preferences
 	//doohickeys for savefiles
-	var/path
+	var/is_guest = FALSE
 	var/default_slot = 1				//Holder so it doesn't default to slot 1, rather the last one used
-	var/savefile_version = 0
+
+	// Cache, mapping slot record ids to character names
+	// Saves reading all the slot records when listing
+	var/list/slot_names = null
 
 	//non-preference stuff
 	var/warns = 0
@@ -12,17 +23,18 @@ datum/preferences
 	var/last_ip
 	var/last_id
 
+	// Populated with an error message if loading fails.
+	var/load_failed = null
+
 	//game-preferences
 	var/lastchangelog = ""				//Saved changlog filesize to detect if there was a change
 
-		//Mob preview
+	// Mob preview
 	var/icon/preview_icon = null
 
 	var/client/client = null
 	var/client_ckey = null
 
-	var/savefile/loaded_preferences
-	var/savefile/loaded_character
 	var/datum/category_collection/player_setup_collection/player_setup
 	var/datum/browser/panel
 
@@ -30,7 +42,7 @@ datum/preferences
 	if(istype(C))
 		client = C
 		client_ckey = C.ckey
-		SScharacter_setup.preferences_datums += src
+		SScharacter_setup.preferences_datums[C.ckey] = src
 		if(SScharacter_setup.initialized)
 			setup()
 		else
@@ -45,20 +57,71 @@ datum/preferences
 	real_name = random_name(gender,species)
 	b_type = RANDOM_BLOOD_TYPE
 
-	if(client && !IsGuestKey(client.key))
-		load_path(client.ckey)
-		load_preferences()
-		load_and_update_character()
+	if(client)
+		if(IsGuestKey(client.key))
+			is_guest = TRUE
+		else
+			load_data()
+
 	sanitize_preferences()
 	if(client && istype(client.mob, /mob/new_player))
 		var/mob/new_player/np = client.mob
 		np.new_player_panel(TRUE)
 
-/datum/preferences/proc/load_and_update_character(var/slot)
-	load_character(slot)
-	if(update_setup(loaded_preferences, loaded_character))
-		save_preferences()
-		save_character()
+/datum/preferences/proc/load_data()
+	load_failed = null
+	var/stage = "pre"
+	try
+		var/pref_path = get_path(client_ckey, "preferences")
+		if(!fexists(pref_path))
+			stage = "migrate"
+			// Try to migrate legacy savefile-based preferences
+			if(!migrate_legacy_preferences())
+				// If there's no old save, there'll be nothing to load.
+				return
+
+		stage = "load"
+		load_preferences()
+		load_character()
+	catch(var/exception/E)
+		load_failed = "{[stage]} [E]"
+		throw E
+
+/datum/preferences/proc/migrate_legacy_preferences()
+	// We make some assumptions here:
+	// - all relevant savefiles were version 17, which covers anything saved from 2018+
+	// - legacy saves were only made on the "torch" map
+	// - a maximum of 40 slots were used
+
+	var/legacy_pref_path = get_path(client.ckey, "preferences", "sav")
+	if(!fexists(legacy_pref_path))
+		return 0
+
+	var/savefile/S = new(legacy_pref_path)
+	if(S["version"] != 17)
+		return 0
+
+	// Legacy version 17 ~= new version 1
+	var/datum/pref_record_reader/savefile/savefile_reader = new(S, 1)
+
+	player_setup.load_preferences(savefile_reader)
+	var/orig_slot = default_slot
+
+	S.cd = "/torch"
+	for(var/slot = 1 to 40)
+		if(!S.dir.Find("character[slot]"))
+			continue
+		S.cd = "/torch/character[slot]"
+		default_slot = slot
+		player_setup.load_character(savefile_reader)
+		save_character(override_key="character_torch_[slot]")
+		S.cd = "/torch"
+	S.cd = "/"
+
+	default_slot = orig_slot
+	save_preferences()
+
+	return 1
 
 /datum/preferences/proc/ShowChoices(mob/user)
 	if(!SScharacter_setup.initialized)
@@ -73,15 +136,16 @@ datum/preferences
 
 	var/dat = "<html><body><center>"
 
-	if(path)
+	if(is_guest)
+		dat += "Please create an account to save your preferences. If you have an account and are seeing this, please adminhelp for assistance."
+	else if(load_failed)
+		dat += "Loading your savefile failed. Please adminhelp for assistance."
+	else
 		dat += "Slot - "
 		dat += "<a href='?src=\ref[src];load=1'>Load slot</a> - "
 		dat += "<a href='?src=\ref[src];save=1'>Save slot</a> - "
 		dat += "<a href='?src=\ref[src];resetslot=1'>Reset slot</a> - "
 		dat += "<a href='?src=\ref[src];reload=1'>Reload slot</a>"
-
-	else
-		dat += "Please create an account to save your preferences."
 
 	dat += "<br>"
 	dat += player_setup.header()
@@ -100,7 +164,7 @@ datum/preferences
 
 	if(href_list["preference"] == "open_whitelist_forum")
 		if(config.forumurl)
-			user << link(config.forumurl)
+			send_link(user, config.forumurl)
 		else
 			to_chat(user, "<span class='danger'>The forum URL is not set in the server configuration.</span>")
 			return
@@ -145,14 +209,6 @@ datum/preferences
 	if(be_random_name)
 		var/decl/cultural_info/culture = SSculture.get_culture(cultural_info[TAG_CULTURE])
 		if(culture) real_name = culture.get_random_name(gender)
-
-	if(config.humans_need_surnames)
-		var/firstspace = findtext(real_name, " ")
-		var/name_length = length(real_name)
-		if(!firstspace)	//we need a surname
-			real_name += " [pick(GLOB.last_names)]"
-		else if(firstspace == name_length)
-			real_name += "[pick(GLOB.last_names)]"
 
 	character.fully_replace_character_name(real_name)
 
@@ -223,7 +279,7 @@ datum/preferences
 	//For species that don't care about your silly prefs
 	character.species.handle_limbs_setup(character)
 	if(!is_preview_copy)
-		for(var/name in list(BP_HEART,BP_EYES,BP_BRAIN,BP_LUNGS,BP_LIVER,BP_KIDNEYS))
+		for(var/name in list(BP_HEART,BP_EYES,BP_BRAIN,BP_LUNGS,BP_LIVER,BP_KIDNEYS,BP_STOMACH))
 			var/status = organ_data[name]
 			if(!status)
 				continue
@@ -243,7 +299,7 @@ datum/preferences
 			var/underwear_item_name = all_underwear[underwear_category_name]
 			var/datum/category_item/underwear/UWD = underwear_category.items_by_name[underwear_item_name]
 			var/metadata = all_underwear_metadata[underwear_category_name]
-			var/obj/item/underwear/UW = UWD.create_underwear(metadata)
+			var/obj/item/underwear/UW = UWD.create_underwear(character, metadata)
 			if(UW)
 				UW.ForceEquipUnderwear(character, FALSE)
 		else
@@ -301,25 +357,20 @@ datum/preferences
 			character.descriptors[entry] = body_descriptors[entry]
 
 	if(!character.isSynthetic())
-		character.nutrition = rand(140,360)
-
+		character.set_nutrition(rand(140,360))
+		character.set_hydration(rand(140,360))
 
 /datum/preferences/proc/open_load_dialog(mob/user)
 	var/dat  = list()
 	dat += "<body>"
 	dat += "<tt><center>"
 
-	var/savefile/S = new /savefile(path)
-	if(S)
-		dat += "<b>Select a character slot to load</b><hr>"
-		var/name
-		for(var/i=1, i<= config.character_slots, i++)
-			S.cd = GLOB.using_map.character_load_path(S, i)
-			S["real_name"] >> name
-			if(!name)	name = "Character[i]"
-			if(i==default_slot)
-				name = "<b>[name]</b>"
-			dat += "<a href='?src=\ref[src];changeslot=[i]'>[name]</a><br>"
+	dat += "<b>Select a character slot to load</b><hr>"
+	for(var/i=1, i<= config.character_slots, i++)
+		var/name = (slot_names && slot_names[get_slot_key(i)]) || "Character[i]"
+		if(i==default_slot)
+			name = "<b>[name]</b>"
+		dat += "<a href='?src=\ref[src];changeslot=[i]'>[name]</a><br>"
 
 	dat += "<hr>"
 	dat += "</center></tt>"
@@ -331,4 +382,75 @@ datum/preferences
 	if(panel)
 		panel.close()
 		panel = null
-	user << browse(null, "window=saves")
+	close_browser(user, "window=saves")
+
+/datum/preferences/proc/selected_jobs_titles(priority = JOB_PRIORITY_PICKED)
+	. = list()
+	if (priority & JOB_PRIORITY_HIGH)
+		. |= job_high
+	if (priority & JOB_PRIORITY_MEDIUM)
+		. |= job_medium
+	if (priority & JOB_PRIORITY_LOW)
+		. |= job_low
+
+/datum/preferences/proc/selected_jobs_list(priority = JOB_PRIORITY_PICKED)
+	. = list()
+	for (var/title in selected_jobs_titles(priority))
+		var/datum/job/job = SSjobs.get_by_title(title)
+		if (!job)
+			continue
+		. += job
+
+/datum/preferences/proc/selected_jobs_assoc(priority = JOB_PRIORITY_PICKED)
+	. = list()
+	for (var/title in selected_jobs_titles(priority))
+		var/datum/job/job = SSjobs.get_by_title(title)
+		if (!job)
+			continue
+		.[title] = job
+
+/datum/preferences/proc/selected_branches_list(priority = JOB_PRIORITY_PICKED)
+	. = list()
+	for (var/datum/job/job in selected_jobs_list(priority))
+		var/name = branches[job.title]
+		if (!name)
+			continue
+		. |= mil_branches.get_branch(name)
+
+/datum/preferences/proc/selected_branches_assoc(priority = JOB_PRIORITY_PICKED)
+	. = list()
+	for (var/datum/job/job in selected_jobs_list(priority))
+		var/name = branches[job.title]
+		if (!name || .[name])
+			continue
+		.[name] = mil_branches.get_branch(name)
+
+/datum/preferences/proc/for_each_selected_job(datum/callback/callback, priority = JOB_PRIORITY_LIKELY)
+	. = list()
+	if (!islist(priority))
+		priority = selected_jobs_assoc(priority)
+	for (var/title in priority)
+		var/datum/job/job = priority[title]
+		.[title] = callback.Invoke(job)
+
+/datum/preferences/proc/for_each_selected_job_multi(list/callbacks, priority = JOB_PRIORITY_LIKELY)
+	. = list()
+	if (!islist(priority))
+		priority = selected_jobs_assoc(priority)
+	for (var/callback in callbacks)
+		. += for_each_selected_job(callback, priority)
+
+/datum/preferences/proc/for_each_selected_branch(datum/callback/callback, priority = JOB_PRIORITY_LIKELY)
+	. = list()
+	if (!islist(priority))
+		priority = selected_branches_assoc(priority)
+	for (var/name in priority)
+		var/datum/mil_branch/branch = priority[name]
+		.[name] = callback.Invoke(branch)
+
+/datum/preferences/proc/for_each_selected_branch_multi(list/callbacks, priority = JOB_PRIORITY_LIKELY)
+	. = list()
+	if (!islist(priority))
+		priority = selected_branches_assoc(priority)
+	for (var/callback in callbacks)
+		. += for_each_selected_branch(callback, priority)

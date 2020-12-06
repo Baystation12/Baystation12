@@ -6,36 +6,36 @@
 	name = "Flavor"
 	sort_order = 4
 
-/datum/category_item/player_setup_item/physical/flavor/load_character(var/savefile/S)
-	S["flavor_texts_general"]	>> pref.flavor_texts["general"]
-	S["flavor_texts_head"]		>> pref.flavor_texts["head"]
-	S["flavor_texts_face"]		>> pref.flavor_texts["face"]
-	S["flavor_texts_eyes"]		>> pref.flavor_texts["eyes"]
-	S["flavor_texts_torso"]		>> pref.flavor_texts["torso"]
-	S["flavor_texts_arms"]		>> pref.flavor_texts["arms"]
-	S["flavor_texts_hands"]		>> pref.flavor_texts["hands"]
-	S["flavor_texts_legs"]		>> pref.flavor_texts["legs"]
-	S["flavor_texts_feet"]		>> pref.flavor_texts["feet"]
+/datum/category_item/player_setup_item/physical/flavor/load_character(datum/pref_record_reader/R)
+	pref.flavor_texts["general"] = R.read("flavor_texts_general")
+	pref.flavor_texts["head"] = R.read("flavor_texts_head")
+	pref.flavor_texts["face"] = R.read("flavor_texts_face")
+	pref.flavor_texts["eyes"] = R.read("flavor_texts_eyes")
+	pref.flavor_texts["torso"] = R.read("flavor_texts_torso")
+	pref.flavor_texts["arms"] = R.read("flavor_texts_arms")
+	pref.flavor_texts["hands"] = R.read("flavor_texts_hands")
+	pref.flavor_texts["legs"] = R.read("flavor_texts_legs")
+	pref.flavor_texts["feet"] = R.read("flavor_texts_feet")
 
 	//Flavour text for robots.
-	S["flavour_texts_robot_Default"] >> pref.flavour_texts_robot["Default"]
-	for(var/module in GLOB.robot_module_types)
-		S["flavour_texts_robot_[module]"] >> pref.flavour_texts_robot[module]
+	pref.flavour_texts_robot["Default"] = R.read("flavour_texts_robot_Default")
+	for(var/module in SSrobots.all_module_names)
+		pref.flavour_texts_robot[module] = R.read("flavour_texts_robot_[module]")
 
-/datum/category_item/player_setup_item/physical/flavor/save_character(var/savefile/S)
-	S["flavor_texts_general"]	<< pref.flavor_texts["general"]
-	S["flavor_texts_head"]		<< pref.flavor_texts["head"]
-	S["flavor_texts_face"]		<< pref.flavor_texts["face"]
-	S["flavor_texts_eyes"]		<< pref.flavor_texts["eyes"]
-	S["flavor_texts_torso"]		<< pref.flavor_texts["torso"]
-	S["flavor_texts_arms"]		<< pref.flavor_texts["arms"]
-	S["flavor_texts_hands"]		<< pref.flavor_texts["hands"]
-	S["flavor_texts_legs"]		<< pref.flavor_texts["legs"]
-	S["flavor_texts_feet"]		<< pref.flavor_texts["feet"]
+/datum/category_item/player_setup_item/physical/flavor/save_character(datum/pref_record_writer/W)
+	W.write("flavor_texts_general", pref.flavor_texts["general"])
+	W.write("flavor_texts_head", pref.flavor_texts["head"])
+	W.write("flavor_texts_face", pref.flavor_texts["face"])
+	W.write("flavor_texts_eyes", pref.flavor_texts["eyes"])
+	W.write("flavor_texts_torso", pref.flavor_texts["torso"])
+	W.write("flavor_texts_arms", pref.flavor_texts["arms"])
+	W.write("flavor_texts_hands", pref.flavor_texts["hands"])
+	W.write("flavor_texts_legs", pref.flavor_texts["legs"])
+	W.write("flavor_texts_feet", pref.flavor_texts["feet"])
 
-	S["flavour_texts_robot_Default"] << pref.flavour_texts_robot["Default"]
-	for(var/module in GLOB.robot_module_types)
-		S["flavour_texts_robot_[module]"] << pref.flavour_texts_robot[module]
+	W.write("flavour_texts_robot_Default", pref.flavour_texts_robot["Default"])
+	for(var/module in SSrobots.all_module_names)
+		W.write("flavour_texts_robot_[module]", pref.flavour_texts_robot[module])
 
 /datum/category_item/player_setup_item/physical/flavor/sanitize_character()
 	if(!istype(pref.flavor_texts))        pref.flavor_texts = list()
@@ -111,7 +111,7 @@
 	HTML += "<br>"
 	HTML += "<hr />"
 	HTML += "<tt>"
-	user << browse(HTML, "window=flavor_text;size=430x300")
+	show_browser(user, HTML, "window=flavor_text;size=430x300")
 	return
 
 /datum/category_item/player_setup_item/physical/flavor/proc/SetFlavourTextRobot(mob/user)
@@ -122,11 +122,11 @@
 	HTML += "<a href='?src=\ref[src];flavour_text_robot=Default'>Default:</a> "
 	HTML += TextPreview(pref.flavour_texts_robot["Default"])
 	HTML += "<hr />"
-	for(var/module in GLOB.robot_module_types)
+	for(var/module in SSrobots.all_module_names)
 		HTML += "<a href='?src=\ref[src];flavour_text_robot=[module]'>[module]:</a> "
 		HTML += TextPreview(pref.flavour_texts_robot[module])
 		HTML += "<br>"
 	HTML += "<hr />"
 	HTML += "<tt>"
-	user << browse(HTML, "window=flavour_text_robot;size=430x300")
+	show_browser(user, HTML, "window=flavour_text_robot;size=430x300")
 	return

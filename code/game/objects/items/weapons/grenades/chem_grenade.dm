@@ -113,11 +113,6 @@
 				else
 					to_chat(user, "<span class='warning'>\The [W] is empty.</span>")
 
-	examine(mob/user)
-		. = ..(user)
-		if(detonator)
-			to_chat(user, "With attached [detonator.name]")
-
 	activate(mob/user as mob)
 		if(active) return
 
@@ -184,6 +179,10 @@
 		spawn(50)		   //To make sure all reagents can work
 			qdel(src)	   //correctly before deleting the grenade.
 
+/obj/item/weapon/grenade/chem_grenade/examine(mob/user)
+	. = ..()
+	if(detonator)
+		to_chat(user, "With attached [detonator.name]")
 
 /obj/item/weapon/grenade/chem_grenade/large
 	name = "large chem grenade"
@@ -204,7 +203,7 @@
 		var/obj/item/weapon/reagent_containers/glass/beaker/B1 = new(src)
 		var/obj/item/weapon/reagent_containers/glass/beaker/B2 = new(src)
 
-		B1.reagents.add_reagent(/datum/reagent/aluminum, 30)
+		B1.reagents.add_reagent(/datum/reagent/aluminium, 30)
 		B2.reagents.add_reagent(/datum/reagent/foaming_agent, 10)
 		B2.reagents.add_reagent(/datum/reagent/acid/polyacid, 10)
 
@@ -225,7 +224,7 @@
 		var/obj/item/weapon/reagent_containers/glass/beaker/B1 = new(src)
 		var/obj/item/weapon/reagent_containers/glass/beaker/B2 = new(src)
 
-		B1.reagents.add_reagent(/datum/reagent/aluminum, 15)
+		B1.reagents.add_reagent(/datum/reagent/aluminium, 15)
 		B1.reagents.add_reagent(/datum/reagent/fuel,20)
 		B2.reagents.add_reagent(/datum/reagent/toxin/phoron, 15)
 		B2.reagents.add_reagent(/datum/reagent/acid, 15)
@@ -302,4 +301,26 @@
 		beakers += B1
 		beakers += B2
 		icon_state = initial(icon_state) +"_locked"
+
+/obj/item/weapon/grenade/chem_grenade/water
+	name = "water grenade"
+	desc = "A water grenade, generally used for firefighting."
+	icon_state = "waterg"
+	item_state = "waterg"
+	stage = 2
+	path = 1
+
+/obj/item/weapon/grenade/chem_grenade/water/Initialize()
+	. = ..()
+	var/obj/item/weapon/reagent_containers/glass/beaker/B1 = new(src)
+	var/obj/item/weapon/reagent_containers/glass/beaker/B2 = new(src)
+
+	B1.reagents.add_reagent(/datum/reagent/water, 40)
+	B2.reagents.add_reagent(/datum/reagent/water, 40)
+
+	detonator = new/obj/item/device/assembly_holder/timer_igniter(src)
+
+	beakers += B1
+	beakers += B2
+	icon_state = initial(icon_state) +"_locked"
 

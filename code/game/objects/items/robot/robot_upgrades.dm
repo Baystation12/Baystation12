@@ -121,13 +121,14 @@
 	require_module = 1
 
 /obj/item/borg/upgrade/vtec/action(var/mob/living/silicon/robot/R)
-	if(..()) return 0
+	if(..()) return FALSE
 
-	if(R.speed == -1)
-		return 0
+	if(R.vtec == TRUE)
+		return FALSE
 
 	R.speed--
-	return 1
+	R.vtec = TRUE
+	return TRUE
 
 
 /obj/item/borg/upgrade/weaponcooler
@@ -147,7 +148,7 @@
 
 	var/obj/item/weapon/gun/energy/gun/secure/mounted/T = locate() in R.module
 	if(!T)
-		T = locate() in R.module.modules
+		T = locate() in R.module.equipment
 	if(!T)
 		to_chat(usr, "This robot has had its energy gun removed!")
 		return 0
@@ -176,8 +177,8 @@
 		to_chat(usr, "There's no mounting point for the module!")
 		return 0
 	else
-		R.module.modules += new/obj/item/weapon/tank/jetpack/carbondioxide
-		for(var/obj/item/weapon/tank/jetpack/carbondioxide in R.module.modules)
+		R.module.equipment += new/obj/item/weapon/tank/jetpack/carbondioxide
+		for(var/obj/item/weapon/tank/jetpack/carbondioxide in R.module.equipment)
 			R.internals = src
 		//R.icon_state="Miner+j"
 		return 1
@@ -196,7 +197,7 @@
 		to_chat(usr, "There's no mounting point for the module!")
 		return 0
 	else
-		R.module.modules += new/obj/item/weapon/rcd/borg(R.module)
+		R.module.equipment += new/obj/item/weapon/rcd/borg(R.module)
 		return 1
 
 /obj/item/borg/upgrade/syndicate/

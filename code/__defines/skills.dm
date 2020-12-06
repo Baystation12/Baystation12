@@ -33,5 +33,4 @@
 #define SKILL_SCIENCE       /decl/hierarchy/skill/research/science
 #define SKILL_MEDICAL       /decl/hierarchy/skill/medical/medical
 #define SKILL_ANATOMY       /decl/hierarchy/skill/medical/anatomy
-#define SKILL_VIROLOGY      /decl/hierarchy/skill/medical/virology
 #define SKILL_CHEMISTRY     /decl/hierarchy/skill/medical/chemistry

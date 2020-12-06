@@ -3,32 +3,41 @@
 /obj/var/list/req_access = list()
 
 //returns 1 if this mob has sufficient access to use this object
-/obj/proc/allowed(mob/M)
+/atom/movable/proc/allowed(mob/M)
 	//check if it doesn't require any access at all
 	if(src.check_access(null))
-		return 1
+		return TRUE
 	if(!istype(M))
-		return 0
+		return FALSE
 	return check_access_list(M.GetAccess())
 
 /atom/movable/proc/GetAccess()
+	. = list()
 	var/obj/item/weapon/card/id/id = GetIdCard()
-	return id ? id.GetAccess() : list()
+	if(id)
+		. += id.GetAccess()
 
 /atom/movable/proc/GetIdCard()
 	return null
 
-/obj/proc/check_access(obj/item/I)
-	return check_access_list(I ? I.GetAccess() : list())
+/atom/movable/proc/check_access(atom/movable/A)
+	return check_access_list(A ? A.GetAccess() : list())
 
-/obj/proc/check_access_list(var/list/L)
-	if(!req_access)
-		req_access = list()
+/atom/movable/proc/check_access_list(list/L)
+	var/list/R = get_req_access()
+
+	if(!R)
+		R = list()
 	if(!istype(L, /list))
-		return 0
-	return has_access(req_access, L)
+		return FALSE
 
-/proc/has_access(var/list/req_access, var/list/accesses)
+	if(maint_all_access)
+		L = L.Copy()
+		L |= access_maint_tunnels
+
+	return has_access(R, L)
+
+/proc/has_access(list/req_access, list/accesses)
 	for(var/req in req_access)
 		if(islist(req))
 			var/found = FALSE
@@ -49,6 +58,13 @@
 	for(var/access_pattern in access_patterns)
 		if(has_access(access_pattern, access))
 			return 1
+
+// Used for retrieving required access information, if available
+/atom/movable/proc/get_req_access()
+	return null
+
+/obj/get_req_access()
+	return req_access
 
 /proc/get_centcom_access(job)
 	switch(job)
@@ -181,17 +197,7 @@
 
 /proc/get_access_by_id(id)
 	var/list/AS = priv_all_access_datums_id || get_all_access_datums_by_id()
-	return AS[num2text(id)]
-
-/proc/get_all_jobs()
-	var/list/all_jobs = list()
-	var/list/all_datums = typesof(/datum/job)
-	all_datums -= exclude_jobs
-	var/datum/job/jobdatum
-	for(var/jobtype in all_datums)
-		jobdatum = new jobtype
-		all_jobs.Add(jobdatum.title)
-	return all_jobs
+	return AS[id]
 
 /proc/get_all_centcom_jobs()
 	return list("VIP Guest",
@@ -227,6 +233,9 @@
 		var/obj/item/weapon/card/id = I ? I.GetIdCard() : null
 		if(id)
 			return id
+	var/obj/item/organ/internal/controller/controller = locate() in internal_organs
+	if(istype(controller))
+		return controller.GetIdCard()
 
 /mob/living/carbon/human/GetAccess()
 	. = list()
@@ -234,6 +243,9 @@
 		var/obj/item/I = item_slot
 		if(I)
 			. |= I.GetAccess()
+	var/obj/item/organ/internal/controller/controller = locate() in internal_organs
+	if(istype(controller))
+		. |= controller.GetAccess()
 #undef HUMAN_ID_CARDS
 
 /mob/living/silicon/GetIdCard()

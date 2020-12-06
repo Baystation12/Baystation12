@@ -34,6 +34,9 @@
 
 		return 0
 
+	if(!canUnEquip(W))
+		return 0
+
 	equip_to_slot(W, slot, redraw_mob) //This proc should not ever fail.
 	return 1
 
@@ -107,7 +110,7 @@ var/list/slot_equipment_priority = list( \
 /mob/proc/equip_to_storage_or_drop(obj/item/newitem)
 	var/stored = equip_to_storage(newitem)
 	if(!stored && newitem)
-		newitem.forceMove(loc)
+		newitem.dropInto(loc)
 	return stored
 
 //These procs handle putting s tuff in your hand. It's probably best to use these rather than setting l_hand = ...etc
@@ -115,6 +118,7 @@ var/list/slot_equipment_priority = list( \
 
 //Returns the thing in our active hand
 /mob/proc/get_active_hand()
+	RETURN_TYPE(/obj/item)
 	if(hand)	return l_hand
 	else		return r_hand
 
@@ -179,7 +183,7 @@ var/list/slot_equipment_priority = list( \
 	Removes the object from any slots the mob might have, calling the appropriate icon update proc.
 	Does nothing else.
 
-	>>>> *** DO NOT CALL THIS PROC DIRECTLY *** <<<<
+	*** DO NOT CALL THIS PROC DIRECTLY ***
 
 	It is meant to be called only by other inventory procs.
 	It's probably okay to use it if you are transferring the item between slots on the same mob,
@@ -212,7 +216,7 @@ var/list/slot_equipment_priority = list( \
 	if(!I) //If there's nothing to drop, the drop is automatically successful.
 		return 1
 	var/slot = get_inventory_slot(I)
-	if(!slot)
+	if(!slot && !istype(I.loc, /obj/item/rig_module))
 		return 1 //already unequipped, so success
 	return I.mob_can_unequip(src, slot)
 

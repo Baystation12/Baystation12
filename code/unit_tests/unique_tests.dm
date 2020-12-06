@@ -72,7 +72,7 @@
 
 	for(var/a in get_all_access_datums())
 		var/datum/access/access = a
-		group_by(access_ids, num2text(access.id), access)
+		group_by(access_ids, access.id, access)
 		group_by(access_descs, access.desc, access)
 
 	var/number_of_issues = number_of_issues(access_ids, "Ids")

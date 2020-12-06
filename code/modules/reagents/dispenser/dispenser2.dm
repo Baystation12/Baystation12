@@ -2,6 +2,7 @@
 	name = "chemical dispenser"
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "dispenser"
+	layer = BELOW_OBJ_LAYER
 	clicksound = "button"
 	clickvol = 20
 
@@ -107,6 +108,14 @@
 		..()
 	return
 
+/obj/machinery/chemical_dispenser/proc/eject_beaker(mob/user)
+	if(!container)
+		return
+	var/obj/item/weapon/reagent_containers/B = container
+	user.put_in_hands(B)
+	container = null
+	update_icon()
+
 /obj/machinery/chemical_dispenser/ui_interact(mob/user, ui_key = "main",var/datum/nanoui/ui = null, var/force_open = 1)
 	// this is the data which will be sent to the ui
 	var/data[0]
@@ -165,19 +174,20 @@
 		return TOPIC_HANDLED
 
 	else if(href_list["ejectBeaker"])
-		if(container)
-			var/obj/item/weapon/reagent_containers/B = container
-			B.dropInto(loc)
-			container = null
-			update_icon()
-			return TOPIC_REFRESH
-		return TOPIC_HANDLED
+		eject_beaker(user)
+		return TOPIC_REFRESH
 
-/obj/machinery/chemical_dispenser/attack_ai(mob/user as mob)
-	ui_interact(user)
 
-/obj/machinery/chemical_dispenser/attack_hand(mob/user as mob)
+
+/obj/machinery/chemical_dispenser/AltClick(mob/user)
+	if(CanDefaultInteract(user))
+		eject_beaker(user)
+	else
+		..()
+
+/obj/machinery/chemical_dispenser/interface_interact(mob/user)
 	ui_interact(user)
+	return TRUE
 
 /obj/machinery/chemical_dispenser/on_update_icon()
 	overlays.Cut()

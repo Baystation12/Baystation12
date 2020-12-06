@@ -12,7 +12,7 @@
 	gloves = /obj/item/clothing/gloves/thick/combat
 
 	id_slot = slot_wear_id
-	id_type = /obj/item/weapon/card/id/centcom/ERT
+	id_types = list(/obj/item/weapon/card/id/centcom/ERT)
 	id_desc = "Special operations ID."
 	id_pda_assignment = "Special Operations Officer"
 
@@ -35,19 +35,19 @@
 	back = /obj/item/weapon/storage/backpack/satchel
 
 	id_slot = slot_wear_id
-	id_type = /obj/item/weapon/card/id/centcom/ERT
+	id_types = list(/obj/item/weapon/card/id/centcom/ERT)
 
 /decl/hierarchy/outfit/death_command
 	name = "Spec Ops - Death commando"
 
-/decl/hierarchy/outfit/death_command/equip(var/mob/living/carbon/human/H)
+/decl/hierarchy/outfit/death_command/equip(mob/living/carbon/human/H, rank, assignment, equip_adjustments)
 	GLOB.deathsquad.equip(H)
 	return 1
 
 /decl/hierarchy/outfit/syndicate_command
 	name = "Spec Ops - Syndicate commando"
 
-/decl/hierarchy/outfit/syndicate_command/equip(var/mob/living/carbon/human/H)
+/decl/hierarchy/outfit/syndicate_command/equip(mob/living/carbon/human/H, rank, assignment, equip_adjustments)
 	GLOB.commandos.equip(H)
 	return 1
 
@@ -59,12 +59,13 @@
 	belt = /obj/item/weapon/storage/belt/holster/security
 	glasses = /obj/item/clothing/glasses/sunglasses
 	gloves = /obj/item/clothing/gloves/thick/swat
-
 	l_pocket = /obj/item/weapon/reagent_containers/pill/cyanide
 
 	id_slot = slot_wear_id
-	id_type = /obj/item/weapon/card/id/syndicate
+	id_types = list(/obj/item/weapon/card/id/syndicate)
 	id_pda_assignment = "Mercenary"
+
+	backpack_contents = list(/obj/item/clothing/suit/space/void/merc/prepared = 1, /obj/item/clothing/mask/gas/syndicate = 1)
 
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_RESET_EQUIPMENT
 
@@ -92,5 +93,4 @@
 	l_hand =   /obj/item/weapon/storage/briefcase/foundation
 	l_ear =    /obj/item/device/radio/headset/foundation
 	holster =  /obj/item/clothing/accessory/storage/holster/armpit
-	id_type =  /obj/item/weapon/card/id/foundation
 	id_slot =  slot_wear_id

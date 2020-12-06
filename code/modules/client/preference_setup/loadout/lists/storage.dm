@@ -4,45 +4,45 @@
 	slot = slot_tie
 
 /datum/gear/storage/brown_vest
-	display_name = "webbing, engineering"
+	display_name = "webbing, brown"
 	path = /obj/item/clothing/accessory/storage/brown_vest
 	cost = 3
 	allowed_roles = list(/datum/job/chief_engineer, /datum/job/engineer, /datum/job/roboticist, /datum/job/qm, /datum/job/cargo_tech,
 						/datum/job/mining, /datum/job/janitor)
 
 /datum/gear/storage/black_vest
-	display_name = "webbing, security"
+	display_name = "webbing, black"
 	path = /obj/item/clothing/accessory/storage/black_vest
 	cost = 3
 	allowed_roles = list(/datum/job/hos, /datum/job/warden, /datum/job/detective, /datum/job/officer)
 
 /datum/gear/storage/white_vest
-	display_name = "webbing, medical"
+	display_name = "webbing, white"
 	path = /obj/item/clothing/accessory/storage/white_vest
 	cost = 3
 	allowed_roles = list(/datum/job/cmo, /datum/job/doctor)
 
 /datum/gear/storage/brown_drop_pouches
-	display_name = "drop pouches, engineering"
+	display_name = "drop pouches, brown"
 	path = /obj/item/clothing/accessory/storage/drop_pouches/brown
 	cost = 3
 	allowed_roles = list(/datum/job/chief_engineer, /datum/job/engineer, /datum/job/roboticist, /datum/job/qm, /datum/job/cargo_tech,
 						/datum/job/mining, /datum/job/janitor)
 
 /datum/gear/storage/black_drop_pouches
-	display_name = "drop pouches, security"
+	display_name = "drop pouches, black"
 	path = /obj/item/clothing/accessory/storage/drop_pouches/black
 	cost = 3
 	allowed_roles = list(/datum/job/hos, /datum/job/warden, /datum/job/detective, /datum/job/officer)
 
 /datum/gear/storage/white_drop_pouches
-	display_name = "drop pouches, medical"
+	display_name = "drop pouches, white"
 	path = /obj/item/clothing/accessory/storage/drop_pouches/white
 	cost = 3
-	allowed_roles = list(/datum/job/cmo, , /datum/job/doctor)
+	allowed_roles = list(/datum/job/cmo, /datum/job/doctor)
 
 /datum/gear/storage/webbing
-	display_name = "webbing, simple"
+	display_name = "webbing, small"
 	path = /obj/item/clothing/accessory/storage/webbing
 	cost = 2
 

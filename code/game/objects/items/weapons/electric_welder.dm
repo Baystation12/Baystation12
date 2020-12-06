@@ -5,6 +5,8 @@
 	welding_resource = "stored charge"
 	tank = null
 	waterproof = TRUE
+	force = 7
+	throwforce = 7
 	var/obj/item/weapon/cell/cell = /obj/item/weapon/cell/high
 	var/fuel_cost_multiplier = 10
 
@@ -12,6 +14,13 @@
 	if(ispath(cell))
 		cell = new cell(src)
 	. = ..()
+
+/obj/item/weapon/weldingtool/electric/examine(mob/user, distance)
+	. = ..()
+	if (!cell)
+		to_chat(user, "There is no [welding_resource] source attached.")
+	else
+		to_chat(user, (distance == 0 ? "It has [get_fuel()] [welding_resource] remaining. " : "") + "[cell] is attached.")
 
 /obj/item/weapon/weldingtool/electric/afterattack(var/obj/O, var/mob/user, var/proximity)
 	if(proximity && istype(O, /obj/structure/reagent_dispensers/fueltank))
@@ -60,17 +69,15 @@
 		return
 	. = ..()
 
-/obj/item/weapon/weldingtool/electric/show_fuel(var/mob/user)
-	to_chat(user, SPAN_NOTICE("It can use [get_fuel()]W of charge."))
-
 /obj/item/weapon/weldingtool/electric/burn_fuel(var/amount)
 	spend_charge(amount * fuel_cost_multiplier)
 	var/turf/T = get_turf(src)
 	if(T) 
 		T.hotspot_expose(700, 5)
 
-/obj/item/weapon/weldingtool/electric/update_tank_underlay()
+/obj/item/weapon/weldingtool/electric/on_update_icon()
 	underlays.Cut()
+	item_state = welding ? "welder1" : "welder"
 	if(cell)
 		underlays += image(icon = icon, icon_state = "[initial(icon_state)]_cell")
 
@@ -78,3 +85,8 @@
 	var/obj/item/weapon/cell/cell = get_cell()
 	if(cell)
 		cell.use(amount * CELLRATE)
+
+/obj/item/weapon/weldingtool/electric/mantid
+	name = "mantid welding tool"
+	desc = "An oddly shaped alien welding tool."
+	icon = 'icons/obj/ascent.dmi'

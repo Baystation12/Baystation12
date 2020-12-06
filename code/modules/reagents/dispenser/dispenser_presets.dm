@@ -6,7 +6,7 @@
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/ammonia,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/acetone,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/sodium,
-			/obj/item/weapon/reagent_containers/chem_disp_cartridge/aluminum,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/aluminium,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/silicon,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/phosphorus,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/sulfur,
@@ -74,6 +74,8 @@
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/cream,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/tea,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/green_tea,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/chai_tea,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/red_tea,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/cola,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/smw,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/dr_gibb,
@@ -115,7 +117,10 @@
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/vermouth,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/cognac,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/ale,
-			/obj/item/weapon/reagent_containers/chem_disp_cartridge/mead
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/mead,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/triple_sec,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/creme_de_cacao,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/creme_de_menthe
 		)
 
 /obj/machinery/chemical_dispenser/bar_coffee
@@ -137,5 +142,11 @@
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/cream,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/tea,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/green_tea,
-			/obj/item/weapon/reagent_containers/chem_disp_cartridge/ice
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/chai_tea,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/red_tea,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/ice,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/syrup_chocolate,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/syrup_caramel,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/syrup_vanilla,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/syrup_pumpkin
 		)

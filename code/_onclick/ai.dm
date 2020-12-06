@@ -80,8 +80,10 @@
 */
 /mob/living/silicon/ai/UnarmedAttack(atom/A)
 	A.attack_ai(src)
-/mob/living/silicon/ai/RangedAttack(atom/A)
+
+/mob/living/silicon/ai/RangedAttack(atom/A, var/params)
 	A.attack_ai(src)
+	return TRUE
 
 /atom/proc/attack_ai(mob/user as mob)
 	return
@@ -104,8 +106,8 @@
 
 /mob/living/silicon/ai/CtrlClickOn(var/atom/A)
 	if(!control_disabled && A.AICtrlClick(src))
-		return
-	..()
+		return TRUE
+	. = ..()
 
 /mob/living/silicon/ai/AltClickOn(var/atom/A)
 	if(!control_disabled && A.AIAltClick(src))
@@ -151,28 +153,28 @@
 	return 1
 
 /atom/proc/AICtrlClick()
-	return
+	return FALSE
 
 /obj/machinery/door/airlock/AICtrlClick() // Bolts doors
 	if(usr.incapacitated())
-		return
+		return FALSE
 	if(locked)
 		Topic(src, list("command"="bolts", "activate" = "0"))
 	else
 		Topic(src, list("command"="bolts", "activate" = "1"))
-	return 1
+	return TRUE
 
 /obj/machinery/power/apc/AICtrlClick() // turns off/on APCs.
 	if(usr.incapacitated())
-		return
+		return FALSE
 	Topic(src, list("breaker"="1"))
-	return 1
+	return TRUE
 
 /obj/machinery/turretid/AICtrlClick() //turns off/on Turrets
 	if(usr.incapacitated())
-		return
+		return FALSE
 	Topic(src, list("command"="enable", "value"="[!enabled]"))
-	return 1
+	return TRUE
 
 /atom/proc/AIAltClick(var/atom/A)
 	return AltClick(A)

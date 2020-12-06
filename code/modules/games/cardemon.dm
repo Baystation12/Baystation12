@@ -3,7 +3,7 @@
 	desc = "Finally! A children's card game in space!"
 	icon_state = "card_pack_cardemon"
 
-/obj/item/weapon/pack/cardemon/New()
+/obj/item/weapon/pack/cardemon/SetupCards()
 	var/datum/playingcard/P
 	var/i
 	for(i=0; i<6; i++)

@@ -12,6 +12,53 @@
 
 #define TimeOfGame (get_game_time())
 #define TimeOfTick (world.tick_usage*0.01*world.tick_lag)
+
+#define TICKS *world.tick_lag
+
+#define DS2TICKS(DS) ((DS)/world.tick_lag)
+#define TICKS2DS(T) ((T) TICKS)
+
+
+/proc/minutes_to_readable(minutes)
+	var/hours = 0
+	var/days = 0
+	var/weeks = 0
+	var/months = 0
+	var/years = 0
+
+	if (minutes >= 518400)
+		years = round(minutes / 518400)
+		minutes = minutes - (years * 518400)
+	if (minutes >= 43200)
+		months = round(minutes / 43200)
+		minutes = minutes - (months * 43200)
+	if (minutes >= 10080)
+		weeks = round(minutes / 10080)
+		minutes = minutes - (weeks * 10080)
+	if (minutes >= 1440)
+		days = round(minutes / 1440)
+		minutes = minutes - (days * 1440)
+	if (minutes >= 60)
+		hours = round(minutes / 60)
+		minutes = minutes - (hours * 60)
+
+	var/result = list()
+	if (years)
+		result += "[years] year\s"
+	if (months)
+		result += "[months] month\s"
+	if (weeks)
+		result += "[weeks] week\s"
+	if (days)
+		result += "[days] day\s"
+	if (hours)
+		result += "[hours] hour\s"
+	if (minutes)
+		result += "[minutes] minute\s"
+
+	return jointext(result, ", ")
+
+
 /proc/get_game_time()
 	var/global/time_offset = 0
 	var/global/last_time = 0
@@ -93,7 +140,7 @@ var/round_start_time = 0
 	return last_round_duration
 
 /hook/startup/proc/set_roundstart_hour()
-	roundstart_hour = pick(2,7,12,17)
+	roundstart_hour = rand(0, 23)
 	return 1
 
 GLOBAL_VAR_INIT(midnight_rollovers, 0)
@@ -120,3 +167,13 @@ GLOBAL_VAR_INIT(rollovercheck_last_timeofday, 0)
 	while (world.tick_usage > min(TICK_LIMIT_TO_RUN, Master.current_ticklimit))
 
 #undef DELTA_CALC
+
+/proc/acquire_days_per_month()
+	. = list(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
+	if(isLeap(text2num(time2text(world.realtime, "YYYY"))))
+		.[2] = 29
+
+/proc/current_month_and_day()
+	var/time_string = time2text(world.realtime, "MM-DD")
+	var/time_list = splittext(time_string, "-")
+	return list(text2num(time_list[1]), text2num(time_list[2]))

@@ -6,9 +6,9 @@
 
 /turf/simulated/proc/update_graphic(list/graphic_add = null, list/graphic_remove = null)
 	if(graphic_add && graphic_add.len)
-		overlays += graphic_add
+		vis_contents += graphic_add
 	if(graphic_remove && graphic_remove.len)
-		overlays -= graphic_remove
+		vis_contents -= graphic_remove
 
 /turf/proc/update_air_properties()
 	var/block = c_airblock(src)

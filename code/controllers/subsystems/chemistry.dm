@@ -2,6 +2,7 @@ SUBSYSTEM_DEF(chemistry)
 	name = "Chemistry"
 	priority = SS_PRIORITY_CHEMISTRY
 	init_order = SS_INIT_CHEMISTRY
+	wait = 5
 
 	var/list/active_holders =               list()
 	var/list/chemical_reactions =           list()

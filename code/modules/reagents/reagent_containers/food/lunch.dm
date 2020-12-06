@@ -10,7 +10,9 @@ var/list/lunchables_lunches_ = list(
 									/obj/item/weapon/reagent_containers/food/snacks/tastybread,
 									/obj/item/weapon/reagent_containers/food/snacks/liquidfood,
 									/obj/item/weapon/reagent_containers/food/snacks/jellysandwich/cherry,
-									/obj/item/weapon/reagent_containers/food/snacks/tossedsalad
+									/obj/item/weapon/reagent_containers/food/snacks/tossedsalad,
+									/obj/item/weapon/reagent_containers/food/snacks/vegetablesoup,
+									/obj/item/weapon/reagent_containers/food/snacks/plainsteak
 								  )
 
 var/list/lunchables_snacks_ = list(
@@ -40,25 +42,40 @@ var/list/lunchables_snacks_ = list(
 									/obj/item/weapon/reagent_containers/food/snacks/watermelonslice,
 									/obj/item/weapon/reagent_containers/food/snacks/slice/applecake/filled,
 									/obj/item/weapon/reagent_containers/food/snacks/slice/pumpkinpie/filled,
-									/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks
+									/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks,
+									/obj/item/weapon/reagent_containers/food/snacks/venus,
+									/obj/item/weapon/reagent_containers/food/snacks/lunacake,
+									/obj/item/weapon/reagent_containers/food/snacks/mars
 								   )
 
 var/list/lunchables_drinks_ = list(
 									/obj/item/weapon/reagent_containers/food/drinks/cans/cola,
+									/obj/item/weapon/reagent_containers/food/drinks/cans/cola_apple,
+									/obj/item/weapon/reagent_containers/food/drinks/cans/cola_orange,
+									/obj/item/weapon/reagent_containers/food/drinks/cans/cola_grape,
+									/obj/item/weapon/reagent_containers/food/drinks/cans/cola_lemonlime,
+									/obj/item/weapon/reagent_containers/food/drinks/cans/cola_strawberry,
+									/obj/item/weapon/reagent_containers/food/drinks/cans/cola_diet,
+									/obj/item/weapon/reagent_containers/food/drinks/cans/vanillacola,
+									/obj/item/weapon/reagent_containers/food/drinks/cans/cherrycola,
+									/obj/item/weapon/reagent_containers/food/drinks/cans/orangecola,
+									/obj/item/weapon/reagent_containers/food/drinks/cans/coffeecola,
 									/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
 									/obj/item/weapon/reagent_containers/food/drinks/cans/space_mountain_wind,
 									/obj/item/weapon/reagent_containers/food/drinks/cans/dr_gibb,
-									/obj/item/weapon/reagent_containers/food/drinks/cans/starkist,
+									/obj/item/weapon/reagent_containers/food/drinks/cans/ionbru,
 									/obj/item/weapon/reagent_containers/food/drinks/cans/space_up,
 									/obj/item/weapon/reagent_containers/food/drinks/cans/lemon_lime,
 									/obj/item/weapon/reagent_containers/food/drinks/cans/iced_tea,
 									/obj/item/weapon/reagent_containers/food/drinks/cans/grape_juice,
 									/obj/item/weapon/reagent_containers/food/drinks/cans/tonic,
-									/obj/item/weapon/reagent_containers/food/drinks/cans/sodawater
+									/obj/item/weapon/reagent_containers/food/drinks/cans/sodawater,
+									/obj/item/weapon/reagent_containers/food/drinks/cans/rootbeer
 								   )
 
 // This default list is a bit different, it contains items we don't want
 var/list/lunchables_drink_reagents_ = list(
+											/datum/reagent/drink,
 											/datum/reagent/drink/nothing,
 											/datum/reagent/drink/doctor_delight,
 											/datum/reagent/drink/dry_ramen,
@@ -69,6 +86,8 @@ var/list/lunchables_drink_reagents_ = list(
 
 // This default list is a bit different, it contains items we don't want
 var/list/lunchables_ethanol_reagents_ = list(
+												/datum/reagent/ethanol,
+												/datum/reagent/ethanol/bilk,
 												/datum/reagent/ethanol/acid_spit,
 												/datum/reagent/ethanol/atomicbomb,
 												/datum/reagent/ethanol/beepsky_smash,
@@ -80,7 +99,10 @@ var/list/lunchables_ethanol_reagents_ = list(
 												/datum/reagent/ethanol/neurotoxin,
 												/datum/reagent/ethanol/pwine,
 												/datum/reagent/ethanol/threemileisland,
-												/datum/reagent/ethanol/toxins_special
+												/datum/reagent/ethanol/toxins_special,
+												/datum/reagent/ethanol/alien/qokkloa,
+												/datum/reagent/ethanol/alien/qokkhrona,
+												/datum/reagent/ethanol/iridast
 											)
 
 /proc/lunchables_lunches()

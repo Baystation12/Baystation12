@@ -2,12 +2,13 @@
 
 /mob/new_player
 	var/ready = 0
+	var/respawned_time = 0
 	var/spawning = 0//Referenced when you want to delete the new_player later on in the code.
 	var/totalPlayers = 0		 //Player counts for the Lobby tab
 	var/totalPlayersReady = 0
 	var/datum/browser/panel
 	var/show_invalid_jobs = 0
-	universal_speak = 1
+	universal_speak = TRUE
 
 	invisibility = 101
 
@@ -28,20 +29,14 @@
 		return // Not ready yet.
 	var/output = list()
 	output += "<div align='center'>"
+	output += "<i>[GLOB.using_map.get_map_info()]</i>"
 	output +="<hr>"
-	output += "<p><a href='byond://?src=\ref[src];show_preferences=1'>Setup Character</A></p>"
+	output += "<a href='byond://?src=\ref[src];show_preferences=1'>Setup Character</A> "
 
-	if(GAME_STATE <= RUNLEVEL_LOBBY)
-		if(ready)
-			output += "<p>\[ <span class='linkOn'><b>Ready</b></span> | <a href='byond://?src=\ref[src];ready=0'>Not Ready</a> \]</p>"
-		else
-			output += "<p>\[ <a href='byond://?src=\ref[src];ready=1'>Ready</a> | <span class='linkOn'><b>Not Ready</b></span> \]</p>"
+	if(GAME_STATE > RUNLEVEL_LOBBY)
+		output += "<a href='byond://?src=\ref[src];manifest=1'>View the Crew Manifest</A> "
 
-	else
-		output += "<a href='byond://?src=\ref[src];manifest=1'>View the Crew Manifest</A><br><br>"
-		output += "<p><a href='byond://?src=\ref[src];late_join=1'>Join Game!</A></p>"
-
-	output += "<p><a href='byond://?src=\ref[src];observe=1'>Observe</A></p>"
+	output += "<a href='byond://?src=\ref[src];observe=1'>Observe</A> "
 
 	if(!IsGuestKey(src.key))
 		establish_db_connection()
@@ -57,13 +52,22 @@
 				break
 
 			if(newpoll)
-				output += "<p><b><a href='byond://?src=\ref[src];showpoll=1'>Show Player Polls</A> (NEW!)</b></p>"
+				output += "<b><a href='byond://?src=\ref[src];showpoll=1'>Show Player Polls</A> (NEW!)</b> "
 			else
-				output += "<p><a href='byond://?src=\ref[src];showpoll=1'>Show Player Polls</A></p>"
+				output += "<a href='byond://?src=\ref[src];showpoll=1'>Show Player Polls</A> "
+
+	output += "<hr>Current character: <b>[client.prefs.real_name]</b>[client.prefs.job_high ? ", [client.prefs.job_high]" : null]<br>"
+	if(GAME_STATE <= RUNLEVEL_LOBBY)
+		if(ready)
+			output += "<a class='linkOn' href='byond://?src=\ref[src];ready=0'>Un-Ready</a>"
+		else
+			output += "<a href='byond://?src=\ref[src];ready=1'>Ready Up</a>"
+	else
+		output += "<a href='byond://?src=\ref[src];late_join=1'>Join Game!</A>"
 
 	output += "</div>"
 
-	panel = new(src, "Welcome","Welcome", 210, 280, src)
+	panel = new(src, "Welcome","Welcome to [GLOB.using_map.full_name]", 560, 280, src)
 	panel.set_window_options("can_close=0")
 	panel.set_content(JOINTEXT(output))
 	panel.open()
@@ -86,14 +90,19 @@
 			totalPlayersReady = 0
 			for(var/mob/new_player/player in GLOB.player_list)
 				var/highjob
-				if(player.client && player.client.prefs && player.client.prefs.job_high)
-					highjob = " as [player.client.prefs.job_high]"
+				if (player.client)
+					var/show_job = player.client.get_preference_value(/datum/client_preference/show_job) == GLOB.PREF_SHOW
+					if(player.client.prefs?.job_high && show_job)
+						highjob = " as [player.client.prefs.job_high]"
 				stat("[player.key]", (player.ready)?("(Playing[highjob])"):(null))
 				totalPlayers++
 				if(player.ready)totalPlayersReady++
 
-/mob/new_player/Topic(href, href_list[])
-	if(!client)	return 0
+/mob/new_player/Topic(href, href_list) // This is a full override; does not call parent.
+	if(usr != src)
+		return TOPIC_NOACTION
+	if(!client)
+		return TOPIC_NOACTION
 
 	if(href_list["show_preferences"])
 		client.prefs.ShowChoices(src)
@@ -152,10 +161,14 @@
 			return 1
 
 	if(href_list["late_join"])
-
 		if(GAME_STATE != RUNLEVEL_GAME)
-			to_chat(usr, "<span class='warning'>The round is either not ready, or has already finished...</span>")
+			to_chat(usr, SPAN_WARNING("The round has either not started yet or already ended."))
 			return
+		if (!client.holder)
+			var/dsdiff = config.respawn_menu_delay MINUTES - (world.time - respawned_time)
+			if (dsdiff > 0)
+				to_chat(usr, SPAN_WARNING("You must wait [time2text(dsdiff, "mm:ss")] before rejoining."))
+				return
 		LateChoices() //show the latejoin job selection menu
 
 	if(href_list["manifest"])
@@ -197,7 +210,7 @@
 			if("nostats")
 				option = "NOSTATS"
 			if("later")
-				usr << browse(null,"window=privacypoll")
+				show_browser(usr, null,"window=privacypoll")
 				return
 			if("abstain")
 				option = "ABSTAIN"
@@ -210,7 +223,7 @@
 			var/DBQuery/query_insert = dbcon.NewQuery(sql)
 			query_insert.Execute()
 			to_chat(usr, "<b>Thank you for your vote!</b>")
-			usr << browse(null,"window=privacypoll")
+			show_browser(usr, null,"window=privacypoll")
 
 	if(!ready && href_list["preference"])
 		if(client)
@@ -315,7 +328,7 @@
 		return 0
 
 	character = SSjobs.equip_rank(character, job.title, 1)					//equips the human
-	equip_custom_items(character)
+	SScustomitems.equip_custom_items(character)
 
 	// AIs don't need a spawnpoint, they must spawn at an empty core
 	if(character.mind.assigned_role == "AI")
@@ -347,7 +360,6 @@
 			AnnounceArrival(character, job, spawnpoint.msg)
 		else
 			AnnounceCyborg(character, job, spawnpoint.msg)
-		matchmaker.do_matchmaking()
 	log_and_message_admins("has joined the round as [character.mind.assigned_role].", character)
 
 	if(character.needs_wheelchair())
@@ -430,7 +442,7 @@
 		additional_dat += "<br>"
 		dat = additional_dat + dat
 	dat = header + dat
-	src << browse(jointext(dat, null), "window=latechoices;size=450x640;can_close=1")
+	show_browser(src, jointext(dat, null), "window=latechoices;size=450x640;can_close=1")
 
 /mob/new_player/proc/create_character(var/turf/spawn_turf)
 	spawning = 1
@@ -475,14 +487,7 @@
 		mind.active = 0 //we wish to transfer the key manually
 		mind.original = new_character
 		if(client.prefs.memory)
-			mind.store_memory(client.prefs.memory)
-		if(client.prefs.relations.len)
-			for(var/T in client.prefs.relations)
-				var/TT = matchmaker.relation_types[T]
-				var/datum/relation/R = new TT
-				R.holder = mind
-				R.info = client.prefs.relations_info[T]
-			mind.gen_relations_info = client.prefs.relations_info["general"]
+			mind.StoreMemory(client.prefs.memory)
 		mind.transfer_to(new_character)					//won't transfer key since the mind is not active
 
 	new_character.dna.ready_dna(new_character)
@@ -492,10 +497,6 @@
 		// Set defer to 1 if you add more crap here so it only recalculates struc_enzymes once. - N3X
 		new_character.dna.SetSEState(GLOB.GLASSESBLOCK,1,0)
 		new_character.disabilities |= NEARSIGHTED
-
-	// Give them their cortical stack if we're using them.
-	if(config && config.use_cortical_stacks && client && client.prefs.has_cortical_stack /*&& new_character.should_have_organ(BP_BRAIN)*/)
-		new_character.create_stack()
 
 	// Do the initial caching of the player's body icons.
 	new_character.force_update_limbs()
@@ -508,7 +509,7 @@
 /mob/new_player/proc/ViewManifest()
 	var/dat = "<div align='center'>"
 	dat += html_crew_manifest(OOC = 1)
-	//src << browse(dat, "window=manifest;size=370x420;can_close=1")
+	//show_browser(src, dat, "window=manifest;size=370x420;can_close=1")
 	var/datum/browser/popup = new(src, "Crew Manifest", "Crew Manifest", 370, 420, src)
 	popup.set_content(dat)
 	popup.open()
@@ -517,7 +518,7 @@
 	return 0
 
 /mob/new_player/proc/close_spawn_windows()
-	src << browse(null, "window=latechoices") //closes late choices window
+	close_browser(src, "window=latechoices") //closes late choices window
 	panel.close()
 
 /mob/new_player/proc/check_species_allowed(datum/species/S, var/show_alert=1)
@@ -565,3 +566,12 @@ mob/new_player/MayRespawn()
 
 /mob/new_player/say(var/message)
 	sanitize_and_communicate(/decl/communication_channel/ooc, client, message)
+
+/mob/new_player/verb/next_lobby_track()
+	set name = "Play Different Lobby Track"
+	set category = "OOC"
+
+	if(get_preference_value(/datum/client_preference/play_lobby_music) == GLOB.PREF_NO)
+		return
+	var/music_track/new_track = GLOB.using_map.get_lobby_track(GLOB.using_map.lobby_track.type)
+	new_track.play_to(src)

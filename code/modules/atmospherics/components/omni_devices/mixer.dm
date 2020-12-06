@@ -6,7 +6,7 @@
 	icon_state = "map_mixer"
 
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
-	power_rating = 3700			//3700 W ~ 5 HP
+	power_rating = 15000			// 15000 W ~ 20 HP
 
 	var/list/inputs = new()
 	var/datum/omni_port/output
@@ -22,9 +22,10 @@
 	var/set_flow_rate = ATMOS_DEFAULT_VOLUME_MIXER
 
 	var/list/mixing_inputs = list()
+	build_icon_state = "omni_mixer"
 
-/obj/machinery/atmospherics/omni/mixer/New()
-	..()
+/obj/machinery/atmospherics/omni/mixer/Initialize()
+	. = ..()
 	if(mapper_set())
 		var/con = 0
 		for(var/datum/omni_port/P in ports)

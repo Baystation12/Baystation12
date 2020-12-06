@@ -29,7 +29,8 @@
 	var/auto_eject_sound = null
 	var/mag_insert_sound = 'sound/weapons/guns/interaction/pistol_magin.ogg'
 	var/mag_remove_sound = 'sound/weapons/guns/interaction/pistol_magout.ogg'
-
+	var/can_special_reload = TRUE //Whether or not we can tactical/speed reload
+	
 	var/is_jammed = 0           //Whether this gun is jammed
 	var/jam_chance = 0          //Chance it jams on fire
 	//TODO generalize ammo icon states for guns
@@ -103,6 +104,7 @@
 	switch(handle_casings)
 		if(EJECT_CASINGS) //eject casing onto ground.
 			chambered.dropInto(loc)
+			chambered.throw_at(get_ranged_target_turf(get_turf(src),turn(loc.dir,270),1), rand(0,1), 5)
 			if(LAZYLEN(chambered.fall_sounds))
 				playsound(loc, pick(chambered.fall_sounds), 50, 1)
 		if(CYCLE_CASINGS) //cycle the casing back to the end.
@@ -113,6 +115,12 @@
 
 	if(handle_casings != HOLD_CASINGS)
 		chambered = null
+
+#define EXP_TAC_RELOAD 1 SECOND
+#define PROF_TAC_RELOAD 0.5 SECONDS
+#define EXP_SPD_RELOAD 0.5 SECONDS
+#define PROF_SPD_RELOAD 0.25 SECONDS
+
 
 
 //Attempts to load A into src, depending on the type of thing being loaded and the load_method
@@ -127,11 +135,41 @@
 		switch(AM.mag_type)
 			if(MAGAZINE)
 				if((ispath(allowed_magazines) && !istype(A, allowed_magazines)) || (islist(allowed_magazines) && !is_type_in_list(A, allowed_magazines)))
-					to_chat(user, "<span class='warning'>\The [A] won't fit into [src].</span>")
+					to_chat(user, SPAN_WARNING("\The [A] won't fit into [src]."))
 					return
 				if(ammo_magazine)
-					to_chat(user, "<span class='warning'>[src] already has a magazine loaded.</span>")//already a magazine here
-
+					if(user.a_intent == I_HELP || user.a_intent == I_DISARM || !user.skill_check(SKILL_WEAPONS, SKILL_EXPERT))
+						to_chat(user, SPAN_WARNING("[src] already has a magazine loaded."))//already a magazine here
+						return
+					else
+						if(user.a_intent == I_GRAB) //Tactical reloading
+							if(!can_special_reload)
+								to_chat(user, SPAN_WARNING("You can't tactically reload this gun!"))
+								return
+							if(!user.unEquip(AM, src))
+								return
+							//Experienced gets a 1 second delay, master gets a 0.5 second delay
+							if(do_after(user, user.get_skill_value(SKILL_WEAPONS) == SKILL_PROF ? PROF_TAC_RELOAD : EXP_TAC_RELOAD, src))
+								ammo_magazine.update_icon()
+								user.put_in_hands(ammo_magazine)
+								user.visible_message(SPAN_WARNING("\The [user] reloads \the [src] with \the [AM]!"),
+													 SPAN_WARNING("You tactically reload \the [src] with \the [AM]!"))
+						else //Speed reloading
+							if(!can_special_reload)
+								to_chat(user, SPAN_WARNING("You can't speed reload with this gun!"))
+								return
+							if(!user.unEquip(AM, src))
+								return
+							//Experienced gets a 0.5 second delay, master gets a 0.25 second delay
+							if(do_after(user, user.get_skill_value(SKILL_WEAPONS) == SKILL_PROF ? PROF_SPD_RELOAD : EXP_SPD_RELOAD, src))
+								ammo_magazine.update_icon()	
+								ammo_magazine.dropInto(user.loc)
+								user.visible_message(SPAN_WARNING("\The [user] reloads \the [src] with \the [AM]!"),
+													 SPAN_WARNING("You speed reload \the [src] with \the [AM]!"))
+					ammo_magazine = AM
+					playsound(loc, mag_insert_sound, 75, 1)
+					update_icon()
+					AM.update_icon()
 					return
 				if(!user.unEquip(AM, src))
 					return
@@ -170,6 +208,11 @@
 		playsound(loc, load_sound, 50, 1)
 
 	update_icon()
+
+#undef EXP_TAC_RELOAD
+#undef PROF_TAC_RELOAD
+#undef EXP_SPD_RELOAD
+#undef PROF_SPD_RELOAD
 
 //attempts to unload src. If allow_dump is set to 0, the speedloader unloading method will be disabled
 /obj/item/weapon/gun/projectile/proc/unload_ammo(mob/user, var/allow_dump=1)
@@ -227,7 +270,7 @@
 /obj/item/weapon/gun/projectile/afterattack(atom/A, mob/living/user)
 	..()
 	if(auto_eject && ammo_magazine && ammo_magazine.stored_ammo && !ammo_magazine.stored_ammo.len)
-		ammo_magazine.dropInto(loc)
+		ammo_magazine.dropInto(user.loc)
 		user.visible_message(
 			"[ammo_magazine] falls out and clatters on the floor!",
 			"<span class='notice'>[ammo_magazine] falls out and clatters on the floor!</span>"
@@ -239,14 +282,13 @@
 		update_icon() //make sure to do this after unsetting ammo_magazine
 
 /obj/item/weapon/gun/projectile/examine(mob/user)
-	. = ..(user)
+	. = ..()
 	if(is_jammed && user.skill_check(SKILL_WEAPONS, SKILL_BASIC))
 		to_chat(user, "<span class='warning'>It looks jammed.</span>")
 	if(ammo_magazine)
 		to_chat(user, "It has \a [ammo_magazine] loaded.")
 	if(user.skill_check(SKILL_WEAPONS, SKILL_ADEPT))
 		to_chat(user, "Has [getAmmo()] round\s remaining.")
-	return
 
 /obj/item/weapon/gun/projectile/proc/getAmmo()
 	var/bullets = 0
@@ -268,4 +310,4 @@
 	if(usr.stat || usr.restrained()) return
 
 	unload_ammo(usr)
-*/
+*/ 

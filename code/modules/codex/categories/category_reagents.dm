@@ -1,3 +1,7 @@
+/datum/codex_category/reagents/
+	name = "Reagents"
+	desc = "Chemicals and reagents, both natural and artificial."
+
 /datum/codex_category/reagents/Initialize()
 
 	for(var/thing in subtypesof(/datum/reagent))
@@ -44,4 +48,7 @@
 				entry.mechanics_text += "<br><br>It can be produced as follows:<br>"
 			entry.mechanics_text += jointext(production_strings, "<br>")
 
-		SScodex.entries_by_string[entry.display_name] = entry
+		entry.update_links()
+		SScodex.add_entry_by_string(entry.display_name, entry)
+		items += entry.display_name
+	..()

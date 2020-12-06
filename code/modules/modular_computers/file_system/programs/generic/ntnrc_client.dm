@@ -71,7 +71,8 @@
 		var/channel_title = sanitizeSafe(input(user,"Enter channel name or leave blank to cancel:"), 64)
 		if(!channel_title)
 			return
-		var/datum/ntnet_conversation/C = new/datum/ntnet_conversation(computer.z)
+		var/atom/A = computer.get_physical_host()
+		var/datum/ntnet_conversation/C = new/datum/ntnet_conversation(A.z)
 		C.add_client(src)
 		C.operator = src
 		channel = C
@@ -121,15 +122,8 @@
 			logfile.stored_data += "[logstring]\[BR\]"
 		logfile.stored_data += "\[b\]Logfile dump completed.\[/b\]"
 		logfile.calculate_size()
-		if(!computer || !computer.hard_drive || !computer.hard_drive.store_file(logfile))
-			if(!computer)
-				// This program shouldn't even be runnable without computer.
-				CRASH("Var computer is null!")
-				return 1
-			if(!computer.hard_drive)
-				computer.visible_message("\The [computer] shows an \"I/O Error - Hard drive connection error\" warning.")
-			else	// In 99.9% cases this will mean our HDD is full
-				computer.visible_message("\The [computer] shows an \"I/O Error - Hard drive may be full. Please free some space and try again. Required space: [logfile.size]GQ\" warning.")
+		if(!computer.store_file(logfile))
+			computer.show_error(user, "I/O Error - Check hard drive and free space. Required space: [logfile.size]GQ.")
 	if(href_list["PRG_renamechannel"])
 		. = 1
 		if(!operator_mode || !channel)
@@ -164,7 +158,8 @@
 
 	..()
 
-	if(channel && !(channel.source_z in GetConnectedZlevels(computer.z)))
+	var/atom/A = computer.get_physical_host()
+	if(channel && !(channel.source_z in GetConnectedZlevels(A.z)))
 		channel.remove_client(src)
 		channel = null
 
@@ -182,7 +177,7 @@
 	else
 		ui_header = "ntnrc_idle.gif"
 
-/datum/computer_file/program/chatclient/kill_program(var/forced = 0)
+/datum/computer_file/program/chatclient/on_shutdown(var/forced = 0)
 	if(channel)
 		channel.remove_client(src)
 		channel = null
@@ -223,7 +218,8 @@
 
 	else // Channel selection screen
 		var/list/all_channels[0]
-		var/list/connected_zs = GetConnectedZlevels(C.computer.z)
+		var/atom/A = C.computer.get_physical_host()
+		var/list/connected_zs = GetConnectedZlevels(A.z)
 		for(var/datum/ntnet_conversation/conv in ntnet_global.chat_channels)
 			if(conv && conv.title && (conv.source_z in connected_zs))
 				all_channels.Add(list(list(

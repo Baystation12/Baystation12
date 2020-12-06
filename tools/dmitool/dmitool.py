@@ -13,12 +13,11 @@ def _dmitool_call(*dmitool_args, **popen_args):
     return Popen(_JAVA_PATH + _DMITOOL_CMD + [str(arg) for arg in dmitool_args], **popen_args)
 
 
-def _safe_parse(dict, key, deferred_value):
+def parse_prop(dict, key, deferred_value):
     try:
         dict[key] = deferred_value()
-    except Exception as e: 
-        print("Could not parse property '%s': %s" % (key, e))
-        return e
+    except Exception as e:
+        raise Exception("Could not parse property '{}': {}".format(key, e))
     return False
 
 
@@ -35,11 +34,15 @@ def help():
 
 
 def info(filepath):
-    """ Totally not a hack that parses the output from dmitool into a dictionary. 
+    """ Totally not a hack that parses the output from dmitool into a dictionary.
         May break at any moment.
     """
     subproc = _dmitool_call("info", filepath, stdout=PIPE)
     stdout, stderr = subproc.communicate()
+
+    if subproc.returncode != 0:
+        print("Error in dmitool parsing {} - possibly empty or invalid DMI:\nstdout:\n{}\nstderr:\n{}".format(filepath, stdout, stderr))
+        raise Exception("dmitool execution failed")
 
     result = {}
     data = stdout.decode('UTF-8').split(os.linesep)[1:]
@@ -49,11 +52,11 @@ def info(filepath):
     if len(data) > 0:
         header = data.pop(0).split(",")
         # don't need to parse states, it's redundant
-        _safe_parse(result, "images", lambda: int(header[0].split()[0].strip()))
-        _safe_parse(result, "size", lambda: header[2].split()[1].strip())
+        parse_prop(result, "images", lambda: int(header[0].split()[0].strip()))
+        parse_prop(result, "size", lambda: header[2].split()[1].strip())
 
     # parse state information
-    states = []    
+    states = []
     for item in data:
         if not len(item):
             continue
@@ -62,9 +65,9 @@ def info(filepath):
         item = [x.strip() for x in re.split(r', (?=(?:"[^"]*?(?: [^"]*)*))|, (?=[^",]+(?:,|$))', item)]
 
         frames = item[2].split()[0].strip()
-        _safe_parse(stateinfo, "name", lambda: item[0].split()[1].strip(" \""))
-        _safe_parse(stateinfo, "dirs", lambda: int(item[1].split()[0].strip()))
-        _safe_parse(stateinfo, "frames", lambda: frames if frames == 'loop(infinite)' else int(frames))
+        parse_prop(stateinfo, "name", lambda: item[0].split()[1].strip(" \""))
+        parse_prop(stateinfo, "dirs", lambda: int(item[1].split()[0].strip()))
+        parse_prop(stateinfo, "frames", lambda: frames if frames == 'loop(infinite)' else int(frames))
         if len(item) > 3:
             stateinfo["misc"] = item[3]
 
@@ -91,7 +94,7 @@ def import_state(target_path, input_path, icon_state, replace=False, delays=None
     """ Inserts an input png given by the input_path into the target_path.
     """
     args = ["import", target_path, icon_state, input_path]
-    
+
     if replace:
         args.append("nodup")
     if rewind:

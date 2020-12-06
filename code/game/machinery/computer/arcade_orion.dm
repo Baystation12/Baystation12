@@ -31,7 +31,7 @@
 	name = "orion trail"
 	desc = "Imported straight from Outpost-T71!"
 	icon_state = "arcade"
-	circuit = /obj/item/weapon/circuitboard/arcade/orion_trail
+	random = FALSE
 	var/list/supplies = list("1" = 0, "2" = 0, "3" = 0, "4" = 0, "5" = 0, "6" = 0) //engine,hull,electronics,food,fuel
 	var/list/supply_cost = list("1" = 1000, "2" = 950, "3" = 1100, "4" = 75, "5" = 100)
 	var/list/supply_name = list("1" = "engine parts", "2" = "hull parts", "3" = "electronic parts", "4" = "food", "5" = "fuel", "6" = "thalers")
@@ -84,9 +84,7 @@
 	port = 0
 	view = ORION_VIEW_MAIN
 
-/obj/machinery/computer/arcade/orion_trail/attack_hand(mob/user)
-	if(..())
-		return
+/obj/machinery/computer/arcade/orion_trail/interact(mob/user)
 	var/dat = ""
 	if(event == null)
 		newgame()
@@ -95,7 +93,7 @@
 		if(ORION_VIEW_MAIN)
 			if(event == ORION_TRAIL_START) //new game? New game.
 				dat = "<center><h1>Orion Trail[emagged ? ": Realism Edition" : ""]</h1><br>Learn how our ancestors got to Orion, and have fun in the process!</center><br><P ALIGN=Right><a href='?src=\ref[src];continue=1'>Start New Game</a></P>"
-				user << browse(dat, "window=arcade")
+				show_browser(user, dat, "window=arcade")
 				return
 			else
 				event_title = event
@@ -158,7 +156,7 @@
 			dat = "<center><h1>[event_title]</h1>[event_desc]<br><br>Distance to next port: [distance]<br><b>[event_info]</b><br></center><br>[event_actions]"
 		if(ORION_VIEW_SUPPLIES)
 			dat  = "<center><h1>Supplies</h1>View your supplies or buy more when at a spaceport.</center><BR>"
-			dat += "<center>You have [supplies["6"]] thalers.</center>"
+			dat += "<center>You have [supplies["6"]] [GLOB.using_map.local_currency_name].</center>"
 			for(var/i=1; i<6; i++)
 				var/amm = (i>3?10:1)
 				dat += "[supplies["[i]"]] [supply_name["[i]"]][event==ORION_TRAIL_SPACEPORT ? ", <a href='?src=\ref[src];buy=[i]'>buy [amm] for [supply_cost["[i]"]]T</a>" : ""]<BR>"
@@ -173,7 +171,7 @@
 	dat += "[view==ORION_VIEW_MAIN ? "" : "<a href='?src=\ref[src];continue=1'>"]Main[view==ORION_VIEW_MAIN ? "" : "</a>"]<BR>"
 	dat += "[view==ORION_VIEW_SUPPLIES ? "" : "<a href='?src=\ref[src];supplies=1'>"]Supplies[view==ORION_VIEW_SUPPLIES ? "" : "</a>"]<BR>"
 	dat += "[view==ORION_VIEW_CREW ? "" : "<a href='?src=\ref[src];crew=1'>"]Crew[view==ORION_VIEW_CREW ? "" : "</a>"]</P>"
-	user << browse(dat, "window=arcade")
+	show_browser(user, dat, "window=arcade")
 
 /obj/machinery/computer/arcade/orion_trail/OnTopic(user, href_list)
 	if(href_list["continue"])
@@ -183,7 +181,6 @@
 				event = ORION_TRAIL_SPACEPORT
 			if(event == ORION_TRAIL_GAMEOVER)
 				event = null
-				attack_hand(user)
 				return TOPIC_REFRESH
 			if(!settlers.len)
 				event_desc = "You and your crew were killed on the way to Orion, your ship left abandoned for scavengers to find."
@@ -277,9 +274,6 @@
 					remove_settler(null, "died while you were escaping!")
 		event = ORION_TRAIL_SPACEPORT_RAIDED
 		return TOPIC_REFRESH
-
-	if(. == TOPIC_REFRESH)
-		attack_hand(user)
 
 /obj/machinery/computer/arcade/orion_trail/proc/change_resource(var/specific = null, var/add = 1)
 	if(!specific)
@@ -412,7 +406,7 @@
 					M.hallucination(50, 50)
 				else
 					to_chat(usr, "<span class='danger'>Something strikes you from behind! It hurts like hell and feel like a blunt weapon, but nothing is there...</span>")
-					M.take_organ_damage(10)
+					M.take_organ_damage(10, 0)
 			else
 				to_chat(usr, "<span class='warning'>The sounds of battle fill your ears...</span>")
 		if(ORION_TRAIL_ILLNESS)
@@ -431,7 +425,7 @@
 				var/mob/living/carbon/M = usr
 				M.Weaken(3)
 				src.visible_message("A sudden gust of powerful wind slams \the [M] into the floor!", "You hear a large fwooshing sound, followed by a bang.")
-				M.take_organ_damage(10)
+				M.take_organ_damage(10, 0)
 			else
 				to_chat(usr, "<span class='warning'>A violent gale blows past you, and you barely manage to stay standing!</span>")
 		if(ORION_TRAIL_MALFUNCTION)
@@ -451,7 +445,7 @@
 			to_chat(usr, "<span class='danger'><font size=3>You're never going to make it to Orion...</font></span>")
 			var/mob/living/M = usr
 			M.visible_message("\The [M] starts rapidly deteriorating.")
-			M << browse (null,"window=arcade")
+			close_browser(M, "window=arcade")
 			for(var/i=0;i<10;i++)
 				sleep(10)
 				M.Stun(5)
@@ -470,8 +464,7 @@
 	src.visible_message("\The [src] plays a triumpant tune, stating 'CONGRATULATIONS, YOU HAVE MADE IT TO ORION.'")
 	if(emagged)
 		new /obj/item/weapon/orion_ship(src.loc)
-		message_admins("[key_name_admin(usr)] made it to Orion on an emagged machine and got an explosive toy ship.")
-		log_game("[key_name(usr)] made it to Orion on an emagged machine and got an explosive toy ship.")
+		log_and_message_admins("made it to Orion on an emagged machine and got an explosive toy ship.")
 	else
 		prizevend()
 	event = null
@@ -495,8 +488,7 @@
 /obj/item/weapon/orion_ship/attack_self(mob/user)
 	if(active)
 		return
-	message_admins("[key_name_admin(usr)] primed an explosive Orion ship for detonation.")
-	log_game("[key_name(usr)] primed an explosive Orion ship for detonation.")
+	log_and_message_admins("primed an explosive Orion ship for detonation.", user)
 	to_chat(user, "<span class='warning'>You flip the switch on the underside of [src].</span>")
 	active = 1
 	src.visible_message("<span class='notice'>[src] softly beeps and whirs to life!</span>")

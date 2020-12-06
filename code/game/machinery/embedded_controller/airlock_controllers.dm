@@ -12,8 +12,10 @@
 	var/tag_airlock_mech_sensor
 	var/tag_shuttle_mech_sensor
 	var/tag_secure = 0
+	var/tag_air_alarm
 	var/list/dummy_terminals = list()
 	var/cycle_to_external_air = 0
+	var/scrubber_assist = 0
 
 /obj/machinery/embedded_controller/radio/airlock/Destroy()
 	for(var/thing in dummy_terminals)
@@ -32,7 +34,7 @@
 /obj/machinery/embedded_controller/radio/airlock/advanced_airlock_controller
 	name = "Advanced Airlock Controller"
 
-/obj/machinery/embedded_controller/radio/airlock/advanced_airlock_controller/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/nano_ui/master_ui = null, var/datum/topic_state/state = GLOB.default_state)
+/obj/machinery/embedded_controller/radio/airlock/advanced_airlock_controller/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/nanoui/master_ui = null, var/datum/topic_state/state = GLOB.default_state)
 	var/data[0]
 
 	data = list(
@@ -56,7 +58,7 @@
 	name = "Airlock Controller"
 	tag_secure = 1
 
-/obj/machinery/embedded_controller/radio/airlock/airlock_controller/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/nano_ui/master_ui = null, var/datum/topic_state/state = GLOB.default_state)
+/obj/machinery/embedded_controller/radio/airlock/airlock_controller/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/nanoui/master_ui = null, var/datum/topic_state/state = GLOB.default_state)
 	var/data[0]
 
 	data = list(
@@ -76,22 +78,10 @@
 //Access controller for door control - used in virology and the like
 /obj/machinery/embedded_controller/radio/airlock/access_controller
 	icon = 'icons/obj/airlock_machines.dmi'
-	icon_state = "access_control_standby"
-
 	name = "Access Controller"
 	tag_secure = 1
 
-
-/obj/machinery/embedded_controller/radio/airlock/access_controller/on_update_icon()
-	if(on && program)
-		if(program.memory["processing"])
-			icon_state = "access_control_process"
-		else
-			icon_state = "access_control_standby"
-	else
-		icon_state = "access_control_off"
-
-/obj/machinery/embedded_controller/radio/airlock/access_controller/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/nano_ui/master_ui = null, var/datum/topic_state/state = GLOB.default_state)
+/obj/machinery/embedded_controller/radio/airlock/access_controller/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/nanoui/master_ui = null, var/datum/topic_state/state = GLOB.default_state)
 	var/data[0]
 
 	data = list(

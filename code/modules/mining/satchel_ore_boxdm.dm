@@ -35,7 +35,7 @@
 			stored_ore[O.name] = 1
 
 /obj/structure/ore_box/examine(mob/user)
-	. = ..(user)
+	. = ..()
 
 	// Borgs can now check contents too.
 	if((!istype(user, /mob/living/carbon/human)) && (!istype(user, /mob/living/silicon/robot)))
@@ -83,7 +83,6 @@
 		return
 
 	for (var/obj/item/weapon/ore/O in contents)
-		contents -= O
 		O.dropInto(loc)
 	to_chat(usr, "<span class='notice'>You empty the ore box</span>")
 

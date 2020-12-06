@@ -74,8 +74,6 @@
 		return 1
 	if(usr.stat || usr.paralysis || usr.stunned || usr.weakened)
 		return 1
-	if (istype(usr.loc,/obj/mecha)) // stops inventory actions in a mech
-		return 1
 	if(master)
 		var/obj/item/I = usr.get_active_hand()
 		if(I)
@@ -198,8 +196,6 @@
 			usr.hud_used.hidden_inventory_update()
 
 		if("equip")
-			if (istype(usr.loc,/obj/mecha)) // stops inventory actions in a mech
-				return 1
 			if(ishuman(usr))
 				var/mob/living/carbon/human/H = usr
 				H.quick_equip()
@@ -209,11 +205,6 @@
 				var/mob/living/L = usr
 				L.resist()
 
-		if("mov_intent")
-			var/move_intent_type = next_in_list(usr.move_intent.type, usr.move_intents)
-			usr.move_intent = decls_repository.get_decl(move_intent_type)
-			usr.hud_used.move_intent.icon_state = usr.move_intent.hud_icon_state
-
 		if("Reset Machine")
 			usr.unset_machine()
 		if("internal")
@@ -221,10 +212,7 @@
 				var/mob/living/carbon/C = usr
 				if(!C.stat && !C.stunned && !C.paralysis && !C.restrained())
 					if(C.internal)
-						C.internal = null
-						to_chat(C, "<span class='notice'>No longer running on internals.</span>")
-						if(C.internals)
-							C.internals.icon_state = "internal0"
+						C.set_internals(null)
 					else
 
 						var/no_mask
@@ -239,7 +227,7 @@
 						else
 							var/list/nicename = null
 							var/list/tankcheck = null
-							var/breathes = "oxygen"    //default, we'll check later
+							var/breathes = GAS_OXYGEN    //default, we'll check later
 							var/list/contents = list()
 							var/from = "on"
 
@@ -266,7 +254,7 @@
 									if (!isnull(t.manipulated_by) && t.manipulated_by != C.real_name && findtext(t.desc,breathes))
 										contents.Add(t.air_contents.total_moles)	//Someone messed with the tank and put unknown gasses
 										continue					//in it, so we're going to believe the tank is what it says it is
-									if(t.air_contents.gas[breathes] && !t.air_contents.gas["phoron"])
+									if(t.air_contents.gas[breathes] && !t.air_contents.gas[GAS_PHORON])
 										contents.Add(t.air_contents.gas[breathes])
 									else
 										contents.Add(0)
@@ -289,15 +277,9 @@
 							//We've determined the best container now we set it as our internals
 
 							if(best)
-								to_chat(C, "<span class='notice'>You are now running on internals from [tankcheck[best]] [from] your [nicename[best]].</span>")
-								playsound(usr, 'sound/effects/internals.ogg', 50, 0)
-								C.internal = tankcheck[best]
+								C.set_internals(tankcheck[best], "\the [tankcheck[best]] [from] your [nicename[best]]")
 
-
-							if(C.internal)
-								if(C.internals)
-									C.internals.icon_state = "internal1"
-							else
+							if(!C.internal)
 								to_chat(C, "<span class='notice'>You don't have \a [breathes] tank.</span>")
 		if("act_intent")
 			usr.a_intent_change("right")
@@ -365,8 +347,6 @@
 	if(!usr.canClick())
 		return 1
 	if(usr.incapacitated())
-		return 1
-	if (istype(usr.loc,/obj/mecha)) // stops inventory actions in a mech
 		return 1
 	switch(name)
 		if("r_hand")

@@ -4,18 +4,7 @@
 	name = "engine control console"
 	icon_keyboard = "tech_key"
 	icon_screen = "engines"
-	circuit = /obj/item/weapon/circuitboard/engine
 	var/display_state = "status"
-
-/obj/machinery/computer/ship/engines/attack_hand(var/mob/user as mob)
-	if(..())
-		user.unset_machine()
-		return
-
-	if(!isAI(user))
-		user.set_machine(src)
-
-	ui_interact(user)
 
 /obj/machinery/computer/ship/engines/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(!linked)
@@ -45,7 +34,7 @@
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "engines_control.tmpl", "[linked.name] Engines Control", 380, 530)
+		ui = new(user, src, ui_key, "engines_control.tmpl", "[linked.name] Engines Control", 390, 530)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
@@ -61,8 +50,8 @@
 	if(href_list["global_toggle"])
 		linked.engines_state = !linked.engines_state
 		for(var/datum/ship_engine/E in linked.engines)
-			if(linked.engines_state != E.is_on())
-				E.toggle()				
+			if(linked.engines_state == !E.is_on())
+				E.toggle()
 		return TOPIC_REFRESH
 
 	if(href_list["set_global_limit"])

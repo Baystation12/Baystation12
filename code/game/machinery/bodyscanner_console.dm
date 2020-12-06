@@ -6,17 +6,15 @@
 	icon_state = "body_scannerconsole"
 	density = 0
 	anchored = 1
-	var/list/display_tags = list()
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 	var/list/connected_displays = list()
 	var/list/data = list()
 	var/scan_data
 
 /obj/machinery/body_scanconsole/Initialize()
 	. = ..()
-	component_parts = list(
-		new /obj/item/weapon/circuitboard/body_scanconsole(src),
-		new /obj/item/weapon/stock_parts/console_screen(src))
-	RefreshParts()
 	FindScanner()
 
 /obj/machinery/body_scanconsole/on_update_icon()
@@ -47,26 +45,28 @@
 
 /obj/machinery/body_scanconsole/proc/FindDisplays()
 	for(var/obj/machinery/body_scan_display/D in SSmachines.machinery)
-		if(D.tag in display_tags)
+		if (AreConnectedZLevels(D.z, z))
 			connected_displays += D
 			GLOB.destroyed_event.register(D, src, .proc/remove_display)
 	return !!connected_displays.len
 
-/obj/machinery/body_scanconsole/attack_ai(user as mob)
-	return src.attack_hand(user)
-
 /obj/machinery/body_scanconsole/attack_hand(mob/user)
-	if(..())
-		return
-	if(stat & (NOPOWER|BROKEN))
-		return
 	if(!connected || (connected.stat & (NOPOWER|BROKEN)))
 		to_chat(user, "<span class='warning'>This console is not connected to a functioning body scanner.</span>")
-		return
+		return TRUE
+	return ..()
+
+/obj/machinery/body_scanconsole/interface_interact(mob/user)
 	ui_interact(user)
+	return TRUE
+
+/obj/machinery/body_scanconsole/CanUseTopic(mob/user)
+	if(!connected)
+		return STATUS_CLOSE
+	return ..()
 
 /obj/machinery/body_scanconsole/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
-	if(connected.occupant)
+	if(connected && connected.occupant)
 		data["scanEnabled"] = TRUE
 		if(ishuman(connected.occupant))
 			data["isCompatible"] = TRUE
@@ -93,10 +93,10 @@
 /obj/machinery/body_scanconsole/OnTopic(mob/user, href_list)
 	if(href_list["scan"])
 		if (!connected.occupant)
-			to_chat(user, "\icon[src]<span class='warning'>The body scanner is empty.</span>")
+			to_chat(user, "[icon2html(src, user)]<span class='warning'>The body scanner is empty.</span>")
 			return TOPIC_REFRESH
 		if (!istype(connected.occupant))
-			to_chat(user, "\icon[src]<span class='warning'>The body scanner cannot scan that lifeform.</span>")
+			to_chat(user, "[icon2html(src, user)]<span class='warning'>The body scanner cannot scan that lifeform.</span>")
 			return TOPIC_REFRESH
 		data["printEnabled"] = TRUE
 		data["eraseEnabled"] = TRUE
@@ -108,11 +108,12 @@
 		
 		stored_scan_subject = connected.occupant
 		user.visible_message("<span class='notice'>\The [user] performs a scan of \the [connected.occupant] using \the [connected].</span>")
+		playsound(connected.loc, 'sound/machines/medbayscanner.ogg', 50)
 		return TOPIC_REFRESH
 
 	if (href_list["print"])
 		if (!data["scan"])
-			to_chat(user, "\icon[src]<span class='warning'>Error: No scan stored.</span>")
+			to_chat(user, "[icon2html(src, user)]<span class='warning'>Error: No scan stored.</span>")
 			return TOPIC_REFRESH
 		var/list/scan = data["scan"]
 		new /obj/item/weapon/paper/bodyscan(loc, "Printout error.", "Body scan report - [stored_scan_subject]", scan.Copy())
@@ -120,7 +121,7 @@
 
 	if(href_list["push"])		
 		if(!connected_displays.len && !FindDisplays())
-			to_chat(user, "\icon[src]<span class='warning'>Error: No configured displays detected.</span>")
+			to_chat(user, "[icon2html(src, user)]<span class='warning'>Error: No configured displays detected.</span>")
 			return TOPIC_REFRESH
 		for(var/obj/machinery/body_scan_display/D in connected_displays)
 			D.add_new_scan(data["scan"])
@@ -136,14 +137,10 @@
 		data["pushEnabled"] = FALSE
 		return TOPIC_REFRESH
 
-/obj/machinery/body_scanconsole/attackby(var/obj/item/O, user as mob)
-	if(default_deconstruction_screwdriver(user, O))
+/obj/machinery/body_scanconsole/state_transition(var/decl/machine_construction/default/new_state)
+	. = ..()
+	if(istype(new_state))
 		updateUsrDialog()
-		return
-	if(default_deconstruction_crowbar(user, O))
-		return
-	if(default_part_replacement(user, O))
-		return
 
 /obj/machinery/body_scanconsole/proc/remove_display(var/obj/machinery/body_scan_display/display)
 	connected_displays -= display

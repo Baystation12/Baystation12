@@ -8,12 +8,10 @@
 #define CANWEAKEN   0x2
 #define CANPARALYSE 0x4
 #define CANPUSH     0x8
-#define LEAPING     0x10
-#define PASSEMOTES  0x32    // Mob has a cortical borer or holders inside of it that need to see emotes.
+#define PASSEMOTES  0x10    // Mob has a cortical borer or holders inside of it that need to see emotes.
 #define GODMODE     0x1000
 #define FAKEDEATH   0x2000  // Replaces stuff like changeling.changeling_fakedeath.
 #define NO_ANTAG    0x4000  // Players are restricted from gaining antag roles when occupying this mob
-#define XENO_HOST   0x8000  // Tracks whether we're gonna be a baby alien's mummy.
 
 // Grab Types
 #define GRAB_NORMAL			"normal"
@@ -149,8 +147,9 @@
 #define FLASH_PROTECTION_VULNERABLE -2
 #define FLASH_PROTECTION_REDUCED -1
 #define FLASH_PROTECTION_NONE 0
-#define FLASH_PROTECTION_MODERATE 1
-#define FLASH_PROTECTION_MAJOR 2
+#define FLASH_PROTECTION_MINOR 1
+#define FLASH_PROTECTION_MODERATE 2
+#define FLASH_PROTECTION_MAJOR 3
 
 #define ANIMAL_SPAWN_DELAY round(config.respawn_delay / 6)
 #define DRONE_SPAWN_DELAY  round(config.respawn_delay / 3)
@@ -163,7 +162,10 @@
 #define INCAPACITATION_STUNNED 8
 #define INCAPACITATION_FORCELYING 16 //needs a better name - represents being knocked down BUT still conscious.
 #define INCAPACITATION_KNOCKOUT 32
+#define INCAPACITATION_WEAKENED 64
 
+#define INCAPACITATION_UNRESISTING (INCAPACITATION_KNOCKOUT|INCAPACITATION_STUNNED)
+#define INCAPACITATION_DISRUPTED (INCAPACITATION_UNRESISTING|INCAPACITATION_WEAKENED)
 #define INCAPACITATION_KNOCKDOWN (INCAPACITATION_KNOCKOUT|INCAPACITATION_FORCELYING)
 #define INCAPACITATION_DISABLED (INCAPACITATION_KNOCKDOWN|INCAPACITATION_STUNNED)
 #define INCAPACITATION_DEFAULT (INCAPACITATION_RESTRAINED|INCAPACITATION_BUCKLED_FULLY|INCAPACITATION_DISABLED)
@@ -195,14 +197,18 @@
 #define BP_PHORON   "phoron filter"
 #define BP_ACETONE  "acetone reactor"
 
+// Vox bits.
+#define BP_HINDTONGUE "hindtongue"
+
 // Robo Organs.
-#define BP_POSIBRAIN	"posibrain"
-#define BP_VOICE		"vocal synthesiser"
-#define BP_STACK		"stack"
-#define BP_OPTICS		"optics"
-#define BP_FLOAT		"floatation disc"
-#define BP_JETS			"maneuvering jets"
-#define BP_COOLING_FINS "cooling fins"
+#define BP_POSIBRAIN         "posibrain"
+#define BP_VOICE             "vocal synthesiser"
+#define BP_STACK             "stack"
+#define BP_OPTICS            "optics"
+#define BP_FLOAT             "floatation disc"
+#define BP_JETS              "maneuvering jets"
+#define BP_COOLING_FINS      "cooling fins"
+#define BP_SYSTEM_CONTROLLER "system controller"
 
 //Augmetations
 #define BP_AUGMENT_R_ARM         "right arm augment"
@@ -218,7 +224,6 @@
 //Augment flags
 #define AUGMENTATION_MECHANIC 1
 #define AUGMENTATION_ORGANIC  2
-
 
 // Limbs.
 #define BP_L_FOOT "l_foot"
@@ -236,10 +241,13 @@
 #define BP_BY_DEPTH list(BP_HEAD, BP_L_HAND, BP_R_HAND, BP_L_ARM, BP_R_ARM, BP_L_FOOT, BP_R_FOOT, BP_L_LEG, BP_R_LEG, BP_GROIN, BP_CHEST)
 
 // Prosthetic helpers.
-#define BP_IS_ROBOTIC(org)  (org.status & ORGAN_ROBOTIC)
-#define BP_IS_ASSISTED(org) (org.status & ORGAN_ASSISTED)
-#define BP_IS_BRITTLE(org)  (org.status & ORGAN_BRITTLE)
-#define BP_IS_CRYSTAL(org)  (org.status & ORGAN_CRYSTAL)
+#define BP_IS_ROBOTIC(org)  ((org) && ((org).status & ORGAN_ROBOTIC))
+#define BP_IS_ASSISTED(org) ((org) && ((org).status & ORGAN_ASSISTED))
+#define BP_IS_BRITTLE(org)  ((org) && ((org).status & ORGAN_BRITTLE))
+#define BP_IS_CRYSTAL(org)  ((org) && ((org).status & ORGAN_CRYSTAL))
+
+// Limb flag helpers
+#define BP_IS_DEFORMED(org) ((org) && ((org).limb_flags & ORGAN_FLAG_DEFORMED))
 
 #define SYNTH_BLOOD_COLOUR "#030303"
 #define SYNTH_FLESH_COLOUR "#575757"
@@ -282,12 +290,11 @@
 #define SPECIES_HUMAN       "Human"
 #define SPECIES_DIONA       "Diona"
 #define SPECIES_VOX         "Vox"
+#define SPECIES_VOX_ARMALIS "Vox Armalis"
 #define SPECIES_IPC         "Machine"
 #define SPECIES_UNATHI      "Unathi"
 #define SPECIES_SKRELL      "Skrell"
-#define SPECIES_NABBER      "giant armoured serpentid"
 #define SPECIES_PROMETHEAN  "Promethean"
-#define SPECIES_XENO        "Xenophage"
 #define SPECIES_ALIEN       "Humanoid"
 #define SPECIES_ADHERENT    "Adherent"
 #define SPECIES_GOLEM       "Golem"
@@ -296,9 +303,19 @@
 #define SPECIES_SPACER      "Space-Adapted Human"
 #define SPECIES_TRITONIAN   "Tritonian"
 #define SPECIES_GRAVWORLDER "Grav-Adapted Human"
+#define SPECIES_MULE        "Mule"
+#define SPECIES_BOOSTER     "Booster"
+#define SPECIES_MONKEY      "Monkey"
 
-#define STATION_SPECIES list(SPECIES_HUMAN, SPECIES_DIONA, SPECIES_IPC, SPECIES_UNATHI, SPECIES_SKRELL, SPECIES_TRITONIAN, SPECIES_SPACER, SPECIES_VATGROWN, SPECIES_GRAVWORLDER)
-#define RESTRICTED_SPECIES list(SPECIES_VOX, SPECIES_XENO, SPECIES_ALIEN, SPECIES_GOLEM)
+#define UNRESTRICTED_SPECIES list(SPECIES_HUMAN, SPECIES_DIONA, SPECIES_IPC, SPECIES_UNATHI, SPECIES_SKRELL, SPECIES_TRITONIAN, SPECIES_SPACER, SPECIES_VATGROWN, SPECIES_GRAVWORLDER, SPECIES_BOOSTER, SPECIES_MULE)
+#define RESTRICTED_SPECIES   list(SPECIES_VOX, SPECIES_ALIEN, SPECIES_GOLEM, SPECIES_MANTID_GYNE, SPECIES_MANTID_ALATE, SPECIES_MONARCH_WORKER, SPECIES_MONARCH_QUEEN)
+#define HUMAN_SPECIES        list(SPECIES_HUMAN, SPECIES_VATGROWN, SPECIES_SPACER, SPECIES_GRAVWORLDER, SPECIES_MULE, SPECIES_BOOSTER)
+
+#define SPECIES_NABBER         "giant armoured serpentid"
+#define SPECIES_MONARCH_WORKER "Monarch Serpentid Worker"
+#define SPECIES_MONARCH_QUEEN  "Monarch Serpentid Queen"
+#define SPECIES_MANTID_ALATE   "Kharmaan Alate"
+#define SPECIES_MANTID_GYNE    "Kharmaan Gyne"
 
 #define SURGERY_CLOSED 0
 #define SURGERY_OPEN 1
@@ -329,3 +346,40 @@
 #define MOB_CLIMB_TIME_MEDIUM 50
 
 #define MOB_FACTION_NEUTRAL "neutral"
+
+#define ROBOT_MODULE_TYPE_GROUNDED "grounded"
+#define ROBOT_MODULE_TYPE_FLYING   "flying"
+
+#define RADIO_INTERRUPT_DEFAULT 30
+
+#define MOB_FLAG_HOLY_BAD                0x001  // If this mob is allergic to holiness
+
+#define MARKING_TARGET_SKIN 0 // Draw a datum/sprite_accessory/marking to the mob's body, eg. tattoos
+#define MARKING_TARGET_HAIR 1 // Draw a datum/sprite_accessory/marking to the mob's hair, eg. ears & horns
+
+// used in /mob/living/carbon/human/can_inject, and by various callers of that proc
+#define CAN_INJECT 1
+#define INJECTION_PORT 2
+#define INJECTION_PORT_DELAY 3 SECONDS // used by injectors to apply delay due to searching for a port on the injectee's suit
+
+
+//used by /proc/do_after
+#define DO_USER_CAN_MOVE     0x1
+#define DO_USER_CAN_TURN     0x2
+#define DO_USER_UNIQUE_ACT   0x4
+#define DO_USER_SAME_HAND    0x8
+#define DO_USER_SAME_ZONE    0x10
+#define DO_TARGET_CAN_MOVE   0x20
+#define DO_TARGET_CAN_TURN   0x40
+#define DO_TARGET_UNIQUE_ACT 0x80
+#define DO_SHOW_PROGRESS     0x100
+#define DO_PUBLIC_PROGRESS   0x200
+
+#define DO_BOTH_CAN_MOVE     (DO_USER_CAN_MOVE | DO_TARGET_CAN_MOVE)
+#define DO_BOTH_CAN_TURN     (DO_USER_CAN_TURN | DO_TARGET_CAN_TURN)
+#define DO_BOTH_UNIQUE_ACT   (DO_USER_UNIQUE_ACT | DO_TARGET_UNIQUE_ACT)
+#define DO_DEFAULT           (DO_SHOW_PROGRESS | DO_USER_SAME_HAND | DO_BOTH_CAN_TURN)
+
+#define DO_MISSING_USER      (-1)
+#define DO_MISSING_TARGET    (-2)
+#define DO_INCAPACITATED     (-3)

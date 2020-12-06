@@ -39,7 +39,7 @@
 	icon_on = "ccigon"
 
 /obj/item/clothing/mask/smokable/ecig/simple/examine(mob/user)
-	..()
+	. = ..()
 	if(ec_cartridge)
 		to_chat(user,"<span class='notice'>There are [round(ec_cartridge.reagents.total_volume, 1)] units of liquid remaining.</span>")
 	else
@@ -59,7 +59,7 @@
 	color = pick(ecig_colors)
 
 obj/item/clothing/mask/smokable/ecig/util/examine(mob/user)
-	..()
+	. = ..()
 	if(ec_cartridge)
 		to_chat(user,"<span class='notice'>There are [round(ec_cartridge.reagents.total_volume, 1)] units of liquid remaining.</span>")
 	else
@@ -79,7 +79,7 @@ obj/item/clothing/mask/smokable/ecig/util/examine(mob/user)
 	cell_type = /obj/item/weapon/cell/device/high //enough for four catridges
 
 /obj/item/clothing/mask/smokable/ecig/deluxe/examine(mob/user)
-	..()
+	. = ..()
 	if(ec_cartridge)
 		to_chat(user,"<span class='notice'>There are [round(ec_cartridge.reagents.total_volume, 1)] units of liquid remaining.</span>")
 	else
@@ -220,8 +220,8 @@ obj/item/clothing/mask/smokable/ecig/util/examine(mob/user)
 	volume = 20
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER
 
-/obj/item/weapon/reagent_containers/ecig_cartridge/examine(mob/user as mob)//to see how much left
-	..()
+/obj/item/weapon/reagent_containers/ecig_cartridge/examine(mob/user)//to see how much left
+	. = ..()
 	to_chat(user, "The cartridge has [reagents.total_volume] units of liquid remaining.")
 
 //flavours

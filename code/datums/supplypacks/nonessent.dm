@@ -3,8 +3,7 @@
 
 /decl/hierarchy/supply_pack/nonessent/painters
 	name = "Art - Painting Supplies"
-	contains = list(/obj/item/device/pipe_painter = 2,
-					/obj/item/device/floor_painter = 2,
+	contains = list(/obj/item/device/paint_sprayer = 2,
 					/obj/item/device/cable_painter = 2)
 	cost = 10
 	containername = "painting supplies crate"
@@ -54,6 +53,7 @@
 	name = "Rec - Musical Instruments"
 	contains = list(/obj/item/device/synthesized_instrument/synthesizer,
 					/obj/item/device/synthesized_instrument/guitar/multi,
+					/obj/item/device/synthesized_instrument/guitar,
 					/obj/item/device/synthesized_instrument/trumpet)
 	cost = 40
 	containername = "musical instrument crate"
@@ -89,7 +89,7 @@
 	num_contained = 2
 	contains = list(/obj/item/clothing/suit/pirate,
 					/obj/item/clothing/suit/judgerobe,
-					/obj/item/clothing/accessory/wcoat,
+					/obj/item/clothing/accessory/wcoat/black,
 					/obj/item/clothing/suit/hastur,
 					/obj/item/clothing/suit/holidaypriest,
 					/obj/item/clothing/suit/nun,
@@ -136,7 +136,7 @@
 					/obj/item/clothing/shoes/black,
 					/obj/item/clothing/shoes/black,
 					/obj/item/clothing/shoes/leather,
-					/obj/item/clothing/accessory/wcoat)
+					/obj/item/clothing/accessory/wcoat/black)
 	name = "Costume - Formalwear"
 	cost = 30
 	containertype = /obj/structure/closet
@@ -248,64 +248,25 @@
 	cost = 10
 	containername = "chaplain equipment crate"
 
-/decl/hierarchy/supply_pack/nonessent/exosuit_mod_ripl1
-	name = "Mod - Ripley APLU modkit"
-	contains = list(/obj/item/device/kit/paint/ripley)
-	cost = 50
-	containername = "\improper EXO modkit heavy crate"
-
-/decl/hierarchy/supply_pack/nonessent/exosuit_mod_ripl2
-	name = "Mod - Death APLU modkit"
-	contains = list(/obj/item/device/kit/paint/ripley/death)
-	cost = 50
-	containername = "\improper EXO modkit heavy crate"
-
 /decl/hierarchy/supply_pack/nonessent/exosuit_mod_ripl3
-	name = "Mod - Hot Rod APLU modkit"
-	contains = list(/obj/item/device/kit/paint/ripley/flames_red)
+	name = "Mod - \"Firestarter\" exosuit modkit"
+	contains = list(/obj/item/device/kit/paint/powerloader/flames_red)
 	cost = 50
-	containername = "\improper EXO modkit heavy crate"
+	containername = "heavy exosuit modkit crate"
 
 /decl/hierarchy/supply_pack/nonessent/exosuit_mod_ripl4
 	num_contained = 1
-	name = "Mod - Cool Ice APLU modkit"
-	contains = list(/obj/item/device/kit/paint/ripley/flames_blue)
+	name = "Mod - \"Burning Chrome\" exosuit modkit"
+	contains = list(/obj/item/device/kit/paint/powerloader/flames_blue)
 	cost = 50
-	containername = "\improper EXO modkit heavy crate"
+	containername = "heavy exosuit modkit crate"
 
-/decl/hierarchy/supply_pack/nonessent/exosuit_mod_durand1
-	name = "Mod - Durand exosuit modkit"
-	contains = list(/obj/item/device/kit/paint/durand)
-	cost = 50
-	containername = "\improper EXO modkit heavy crate"
-	supply_method = /decl/supply_method/randomized
-
-/decl/hierarchy/supply_pack/nonessent/exosuit_mod_durand2
-	name = "Mod - Seraph Durand exosuit modkit"
-	contains = list(/obj/item/device/kit/paint/durand/seraph)
-	cost = 50
-	containername = "\improper EXO modkit heavy crate"
-
-/decl/hierarchy/supply_pack/nonessent/exosuit_mod_durand3
-	name = "Mod - Phazon Durand exosuit modkit"
-	contains = list(/obj/item/device/kit/paint/durand/phazon)
-	cost = 50
-	containername = "\improper EXO modkit heavy crate"
-
-/decl/hierarchy/supply_pack/nonessent/exosuit_mod_gygax1
-	name = "Mod - Gygax exosuit modkit"
-	contains = list(/obj/item/device/kit/paint/gygax)
-	cost = 50
-	containername = "\improper EXO modkit heavy crate"
-
-/decl/hierarchy/supply_pack/nonessent/exosuit_mod_gygax2
-	name = "Mod - Dark Gygax exosuit modkit"
-	contains = list(/obj/item/device/kit/paint/gygax/darkgygax)
-	cost = 50
-	containername = "\improper EXO modkit heavy crate"
-
-/decl/hierarchy/supply_pack/nonessent/exosuit_mod_gygax3
-	name = "Mod - Recitence Gygax exosuit modkit"
-	contains = list(/obj/item/device/kit/paint/gygax/recitence)
-	cost = 50
-	containername = "\improper EXO modkit heavy crate"
+/decl/hierarchy/supply_pack/nonessent/aromatherapy
+	name = "Rec - Aromatherapy"
+	contains = list(
+		/obj/item/weapon/paper/aromatherapy_disclaimer,
+		/obj/item/weapon/storage/candle_box/scented = 3,
+		/obj/item/weapon/storage/candle_box/incense = 6,
+		/obj/item/weapon/flame/lighter/random)
+	cost = 15
+	containername = "aromatherapy crate"

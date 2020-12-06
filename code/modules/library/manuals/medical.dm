@@ -96,6 +96,7 @@
 	icon_state = "bookMedical"
 	author = "Medical Department"
 	title = "Medical Diagnostics Manual"
+	url = "Guide_to_Medicine"
 
 /obj/item/weapon/book/manual/medical_diagnostics_manual/New()
 	..()
@@ -131,8 +132,16 @@
 
 				<HR COLOR="steelblue" WIDTH="60%" ALIGN="LEFT">
 
-				<iframe width='100%' height='100%' src="[config.wikiurl]Guide_to_Medicine&printable=yes&removelinks=1" frameborder="0" id="main_frame"></iframe>
+				<iframe width='100%' height='100%' src="[url]&printable=yes&removelinks=1" frameborder="0" id="main_frame"></iframe>
 				</body>
 			</html>
 
 		"}
+
+/obj/item/weapon/book/manual/chemistry_recipes
+	name = "Guide to Medicines & Drugs"
+	desc = "A thick manual of chemistry, formulae and recipes useful for a Chemist."
+	icon_state = "bookChemistry"
+	author = "Zeng-Hu Pharmaceuticals"
+	title = "Guide to Medicines & Drugs"
+	url = "List_of_Medical_Chemicals"

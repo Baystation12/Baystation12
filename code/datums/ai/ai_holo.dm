@@ -50,24 +50,32 @@
 /decl/ai_holo/nullicon
 	icon_state = "null"
 
+/decl/ai_holo/cat
+	icon_state = "Cat"
+
 /decl/ai_holo/clippy
+	name = "Clippy"
 	icon_state = "clippy"
 
 /decl/ai_holo/malfcursor
+	name = "Middle Finger"
 	requires_malf = TRUE
 	icon_state = "malf-cursor"
 
 /decl/ai_holo/missingno
+	name = "MissingNo"
 	requires_malf = TRUE
 	bypass_colorize = TRUE
 	icon_state = "malf-missingno"
 
 /decl/ai_holo/malfsingularity
+	name = "Singularity"
 	icon_state = "malf-singularity"
 	requires_malf = TRUE
 	bypass_colorize = TRUE
 
 /decl/ai_holo/malftcc
+	name = "TCC"
 	icon_state = "malf-TCC"
 	requires_malf = TRUE
 	bypass_colorize = TRUE

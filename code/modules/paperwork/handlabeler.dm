@@ -47,7 +47,7 @@
 /obj/attach_label(var/user, var/atom/labeler, var/label_text)
 	if(!simulated)
 		return
-	var/datum/extension/labels/L = get_or_create_extension(src, /datum/extension/labels, /datum/extension/labels)
+	var/datum/extension/labels/L = get_or_create_extension(src, /datum/extension/labels)
 	L.AttachLabel(user, label_text)
 
 /obj/item/weapon/hand_labeler/attack_self(mob/user as mob)

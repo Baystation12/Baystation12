@@ -7,7 +7,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	antag_indicator = "hudraider"
 	landmark_id = "voxstart"
 	welcome_text = "Use :H to talk on your encrypted channel."
-	flags = ANTAG_OVERRIDE_JOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_VOTABLE | ANTAG_SET_APPEARANCE | ANTAG_HAS_LEADER
+	flags = ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_VOTABLE | ANTAG_SET_APPEARANCE | ANTAG_HAS_LEADER
 	antaghud_indicator = "hudraider"
 
 	hard_cap = 6
@@ -19,8 +19,8 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	id_type = /obj/item/weapon/card/id/syndicate
 
 	faction = "pirate"
+	base_to_load = /datum/map_template/ruin/antag_spawn/heist
 
-	// Heist overrides check_victory() and doesn't need victory or loss strings/tags.
 	var/list/raider_uniforms = list(
 		/obj/item/clothing/under/soviet,
 		/obj/item/clothing/under/pirate,
@@ -136,59 +136,13 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	global_objectives |= new /datum/objective/heist/preserve_crew
 	return 1
 
-/datum/antagonist/raider/check_victory()
-	// Totally overrides the base proc.
-	var/win_type = "Major"
-	var/win_group = "Crew"
-	var/win_msg = ""
-
-	//No objectives, go straight to the feedback.
-	if(config.objectives_disabled == CONFIG_OBJECTIVE_NONE || !global_objectives.len)
-		return
-
-	var/success = global_objectives.len
-	//Decrease success for failed objectives.
-	for(var/datum/objective/O in global_objectives)
-		if(!(O.check_completion())) success--
-	//Set result by objectives.
-	if(success == global_objectives.len)
-		win_type = "Major"
-		win_group = "Raider"
-	else if(success > 2)
-		win_type = "Minor"
-		win_group = "Raider"
-	else
-		win_type = "Minor"
-		win_group = "Crew"
-	//Now we modify that result by the state of the vox crew.
-	if(antags_are_dead())
-		win_type = "Major"
-		win_group = "Crew"
-		win_msg += "<B>The Raiders have been wiped out!</B>"
-	else if(is_raider_crew_safe())
-		if(win_group == "Crew" && win_type == "Minor")
-			win_type = "Major"
-		win_group = "Crew"
-		win_msg += "<B>The Raiders have left someone behind!</B>"
-	else
-		if(win_group == "Raider")
-			if(win_type == "Minor")
-				win_type = "Major"
-			win_msg += "<B>The Raiders escaped!</B>"
-		else
-			win_msg += "<B>The Raiders were repelled!</B>"
-
-	to_world("<span class='danger'><font size = 3>[win_type] [win_group] victory!</font></span>")
-	to_world("[win_msg]")
-	SSstatistics.set_field_details("round_end_result","heist - [win_type] [win_group]")
-
 /datum/antagonist/raider/proc/is_raider_crew_safe()
 
 	if(!current_antagonists || current_antagonists.len == 0)
 		return 0
 
 	for(var/datum/mind/player in current_antagonists)
-		if(!player.current || get_area(player.current) != locate(/area/skipjack_station/start))
+		if(!player.current || get_area(player.current) != locate(/area/map_template/skipjack_station/start))
 			return 0
 	return 1
 
@@ -223,8 +177,8 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	id.assignment = "Visitor"
 	var/obj/item/weapon/storage/wallet/W = new(player)
 	W.handle_item_insertion(id)
-	player.equip_to_slot_or_del(W, slot_wear_id)
-	spawn_money(rand(50,150)*10,W)
+	if(player.equip_to_slot_or_del(W, slot_wear_id))
+		spawn_money(rand(50,150)*10,W)
 	create_radio(RAID_FREQ, player)
 
 	return 1
@@ -243,16 +197,14 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 		if(!(primary.slot_flags & SLOT_HOLSTER))
 			holster = new new_holster(T)
 			var/datum/extension/holster/H = get_extension(holster, /datum/extension/holster)
-			H.holstered = secondary
-			secondary.forceMove(holster)
+			H.holster(secondary, player)
 		else
 			player.equip_to_slot_or_del(secondary, slot_belt)
 
 	if(primary.slot_flags & SLOT_HOLSTER)
 		holster = new new_holster(T)
 		var/datum/extension/holster/H = get_extension(holster, /datum/extension/holster)
-		H.holstered = primary
-		primary.forceMove(holster)
+		H.holster(primary, player)
 	else if(!player.belt && (primary.slot_flags & SLOT_BELT))
 		player.equip_to_slot_or_del(primary, slot_belt)
 	else if(!player.back && (primary.slot_flags & SLOT_BACK))
@@ -287,6 +239,8 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 /datum/antagonist/raider/proc/equip_vox(var/mob/living/carbon/human/player)
 
 	var/uniform_type = pick(list(/obj/item/clothing/under/vox/vox_robes,/obj/item/clothing/under/vox/vox_casual))
+	var/new_glasses = pick(raider_glasses)
+	var/new_holster = pick(raider_holster)
 
 	player.equip_to_slot_or_del(new uniform_type(player), slot_w_uniform)
 	player.equip_to_slot_or_del(new /obj/item/clothing/shoes/magboots/vox(player), slot_shoes) // REPLACE THESE WITH CODED VOX ALTERNATIVES.
@@ -294,10 +248,72 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	player.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/swat/vox(player), slot_wear_mask)
 	player.equip_to_slot_or_del(new /obj/item/weapon/tank/nitrogen(player), slot_back)
 	player.equip_to_slot_or_del(new /obj/item/device/flashlight(player), slot_r_store)
+	player.equip_to_slot_or_del(new new_glasses(player),slot_glasses)
 
-	player.internal = locate(/obj/item/weapon/tank) in player.contents
-	if(istype(player.internal,/obj/item/weapon/tank) && player.internals)
-		player.internals.icon_state = "internal1"
+	var/obj/item/clothing/accessory/storage/holster/holster = new new_holster
+	if(holster)
+		var/obj/item/clothing/under/uniform = player.w_uniform
+		if(istype(uniform) && uniform.can_attach_accessory(holster))
+			uniform.attackby(holster, player)
+		else
+			player.put_in_any_hand_if_possible(holster)
 
+	player.set_internals(locate(/obj/item/weapon/tank) in player.contents)
 	return 1
 
+/obj/random/raider/hardsuit
+	name = "Random Raider Hardsuit"
+	desc = "This is a random hardsuit control module."
+	icon = 'icons/obj/rig_modules.dmi'
+	icon_state = "generic"
+
+/obj/random/raider/hardsuit/spawn_choices()
+	return list(/obj/item/weapon/rig/industrial,
+				/obj/item/weapon/rig/eva,
+				/obj/item/weapon/rig/light/hacker,
+				/obj/item/weapon/rig/light,
+				/obj/item/weapon/rig/unathi
+	)
+
+/obj/random/raider/lilgun
+	name = "Random Raider Light Weapon"
+	desc = "This is a random raider sidearm."
+	icon = 'icons/obj/guns/pistol.dmi'
+	icon_state = "secguncomp"
+
+/obj/random/raider/lilgun/spawn_choices()
+	return list(/obj/item/weapon/gun/projectile/pistol/sec,
+				/obj/item/weapon/gun/energy/gun,
+				/obj/item/weapon/gun/energy/stunrevolver,
+				/obj/item/weapon/gun/projectile/shotgun/doublebarrel/sawn,
+				/obj/item/weapon/gun/energy/xray/pistol,
+				/obj/item/weapon/gun/projectile/automatic/machine_pistol,
+				/obj/item/weapon/gun/projectile/pistol/military/alt,
+				/obj/item/weapon/gun/projectile/pistol/holdout,
+				/obj/item/weapon/gun/projectile/revolver,
+				/obj/item/weapon/gun/projectile/revolver/medium,
+				/obj/item/weapon/gun/energy/retro,
+				/obj/item/weapon/gun/projectile/pistol/throwback,
+				/obj/item/weapon/gun/energy/ionrifle/small
+	)
+
+/obj/random/raider/biggun
+	name = "Random Raider Heavy Weapon"
+	desc = "This is a random raider rifle."
+	icon = 'icons/obj/guns/assault_rifle.dmi'
+	icon_state = "arifle"
+
+/obj/random/raider/biggun/spawn_choices()
+	return list(/obj/item/weapon/gun/energy/lasercannon,
+				/obj/item/weapon/gun/energy/laser,
+				/obj/item/weapon/gun/energy/sniperrifle,
+				/obj/item/weapon/gun/projectile/shotgun/doublebarrel,
+				/obj/item/weapon/gun/energy/xray,
+				/obj/item/weapon/gun/projectile/heavysniper/boltaction,
+				/obj/item/weapon/gun/projectile/automatic/assault_rifle,
+				/obj/item/weapon/gun/projectile/automatic/sec_smg,
+				/obj/item/weapon/gun/energy/crossbow/largecrossbow,
+				/obj/item/weapon/gun/projectile/shotgun/pump/combat,
+				/obj/item/weapon/gun/energy/ionrifle,
+				/obj/item/weapon/gun/projectile/shotgun/pump
+	)

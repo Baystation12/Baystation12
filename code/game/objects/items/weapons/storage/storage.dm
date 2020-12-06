@@ -39,6 +39,7 @@
 
 	if ((ishuman(usr) || isrobot(usr) || issmall(usr)) && !usr.incapacitated())
 		if(over_object == usr && Adjacent(usr)) // this must come before the screen objects only block
+			src.add_fingerprint(usr)
 			src.open(usr)
 			return TRUE
 
@@ -57,6 +58,15 @@
 				if(BP_L_HAND)
 					usr.put_in_l_hand(src)
 
+/obj/item/weapon/storage/AltClick(var/mob/usr)
+
+	if(!canremove)
+		return
+
+	if ((ishuman(usr) || isrobot(usr) || issmall(usr)) && !usr.incapacitated() && Adjacent(usr))
+		src.add_fingerprint(usr)
+		src.open(usr)
+		return TRUE
 
 /obj/item/weapon/storage/proc/return_inv()
 
@@ -118,7 +128,7 @@
 /obj/item/weapon/storage/proc/can_be_inserted(obj/item/W, mob/user, stop_messages = 0)
 	if(!istype(W)) return //Not an item
 
-	if(user && user.isEquipped(W) && !user.canUnEquip(W))
+	if(user && !user.canUnEquip(W))
 		return 0
 
 	if(src.loc == W)
@@ -131,7 +141,7 @@
 	if(W.anchored)
 		return 0
 
-	if(can_hold.len)
+	if(length(can_hold))
 		if(!is_type_in_list(W, can_hold))
 			if(!stop_messages && ! istype(W, /obj/item/weapon/hand_labeler))
 				to_chat(user, "<span class='notice'>\The [src] cannot hold \the [W].</span>")
@@ -142,6 +152,10 @@
 				to_chat(user, "<span class='notice'>\The [src] has no more space specifically for \the [W].</span>")
 			return 0
 
+	//If attempting to label or forensically process the storage item, silently fail to store the attacking object so the action can be applied.
+	if(istype(W, /obj/item/weapon/hand_labeler || istype(W, /obj/item/weapon/forensics)) && user.a_intent != I_HELP)
+		return FALSE
+	
 	// Don't allow insertion of unsafed compressed matter implants
 	// Since they are sucking something up now, their afterattack will delete the storage
 	if(istype(W, /obj/item/weapon/implanter/compressed))
@@ -239,9 +253,13 @@
 	return 1
 
 // Only do ui functions for now; the obj is responsible for anything else.
-/obj/item/weapon/storage/proc/on_item_deletion(obj/item/W)
+/obj/item/weapon/storage/proc/on_item_pre_deletion(obj/item/W)
 	if(storage_ui)
 		storage_ui.on_pre_remove(null, W) // Supposed to be able to handle null user.
+
+// Only do ui functions for now; the obj is responsible for anything else.
+/obj/item/weapon/storage/proc/on_item_post_deletion(obj/item/W)
+	if(storage_ui)
 		update_ui_after_item_removal()
 	queue_icon_update()
 
@@ -252,7 +270,9 @@
 
 //This proc is called when you want to place an item into the storage item.
 /obj/item/weapon/storage/attackby(obj/item/W as obj, mob/user as mob)
-	..()
+	. = ..()
+	if (.) //if the item was used as a crafting component, just return
+		return
 
 	if(isrobot(user) && (W == user.get_active_hand()))
 		return //Robots can't store their modules.
@@ -279,7 +299,8 @@
 		src.open(user)
 	else
 		..()
-		storage_ui.on_hand_attack(user)
+		if (storage_ui)
+			storage_ui.on_hand_attack(user)
 	src.add_fingerprint(user)
 	return
 
@@ -339,7 +360,7 @@
 		verbs -= /obj/item/weapon/storage/verb/toggle_gathering_mode
 
 	if(isnull(max_storage_space) && !isnull(storage_slots))
-		max_storage_space = storage_slots*base_storage_cost(max_w_class)
+		max_storage_space = storage_slots*BASE_STORAGE_COST(max_w_class)
 
 	storage_ui = new storage_ui(src)
 	prepare_ui()
@@ -420,4 +441,4 @@
 
 /obj/item/proc/get_storage_cost()
 	//If you want to prevent stuff above a certain w_class from being stored, use max_w_class
-	return base_storage_cost(w_class)
+	return BASE_STORAGE_COST(w_class)

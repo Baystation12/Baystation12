@@ -33,6 +33,7 @@
 	SSstatistics.add_field_details("admin_verb","JT") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/jumptomob(var/mob/M in SSmobs.mob_list)
+	set popup_menu = FALSE
 	set category = "Admin"
 	set name = "Jump to Mob"
 
@@ -95,6 +96,7 @@
 		alert("Admin jumping disabled")
 
 /client/proc/Getmob(var/mob/M in SSmobs.mob_list)
+	set popup_menu = FALSE
 	set category = "Admin"
 	set name = "Get Mob"
 	set desc = "Mob to teleport"

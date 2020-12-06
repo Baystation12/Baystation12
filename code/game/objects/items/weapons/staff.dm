@@ -19,6 +19,6 @@
 /obj/item/weapon/staff/gentcane
 	name = "Gentlemans Cane"
 	desc = "An ebony can with an ivory tip."
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/weapons/melee_physical.dmi'
 	icon_state = "cane"
 	item_state = "stick"

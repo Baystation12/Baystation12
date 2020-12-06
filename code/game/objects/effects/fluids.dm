@@ -25,7 +25,7 @@
 /obj/effect/fluid/Initialize()
 	. = ..()
 	start_loc = get_turf(src)
-	if(!istype(start_loc))
+	if(!istype(start_loc) || start_loc.flooded)
 		qdel(src)
 		return
 	var/turf/simulated/T = start_loc
@@ -51,10 +51,8 @@
 
 	if(fluid_amount > FLUID_OVER_MOB_HEAD)
 		layer = DEEP_FLUID_LAYER
-		plane = EFFECTS_BELOW_LIGHTING_PLANE
 	else
 		layer = SHALLOW_FLUID_LAYER
-		plane = HIDING_MOB_PLANE
 
 	if(fluid_amount > FLUID_DEEP)
 		alpha = FLUID_MAX_ALPHA
@@ -92,7 +90,7 @@
 /obj/effect/flood
 	name = ""
 	mouse_opacity = 0
-	layer = FLY_LAYER
+	layer = DEEP_FLUID_LAYER
 	color = COLOR_OCEAN
 	icon = 'icons/effects/liquids.dmi'
 	icon_state = "ocean"

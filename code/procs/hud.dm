@@ -5,6 +5,8 @@ the HUD updates properly! */
 // hud overlay image type, used for clearing client.images precisely
 /image/hud_overlay
 	appearance_flags = RESET_COLOR|RESET_TRANSFORM|KEEP_APART
+	layer = ABOVE_HUMAN_LAYER
+	plane = DEFAULT_PLANE
 
 //Medical HUD outputs. Called by the Life() proc of the mob using it, usually.
 proc/process_med_hud(var/mob/M, var/local_scanner, var/mob/Alt)
@@ -21,10 +23,9 @@ proc/process_med_hud(var/mob/M, var/local_scanner, var/mob/Alt)
 			P.Client.images += patient.hud_list[HEALTH_HUD]
 			P.Client.images += patient.hud_list[STATUS_HUD]
 		else
-			var/sensor_level = getsensorlevel(patient)
-			if(sensor_level >= SUIT_SENSOR_VITAL)
+			if(hassensorlevel(patient, SUIT_SENSOR_VITAL))
 				P.Client.images += patient.hud_list[HEALTH_HUD]
-			if(sensor_level >= SUIT_SENSOR_BINARY)
+			if(hassensorlevel(patient, SUIT_SENSOR_BINARY))
 				P.Client.images += patient.hud_list[LIFE_HUD]
 
 //Security HUDs. Pass a value for the second argument to enable implant viewing or other special features.

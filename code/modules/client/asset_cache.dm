@@ -42,7 +42,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 		return 0
 
 	var/decl/asset_cache/asset_cache = decls_repository.get_decl(/decl/asset_cache)
-	client << browse_rsc(asset_cache.cache[asset_name], asset_name)
+	send_rsc(client, asset_cache.cache[asset_name], asset_name)
 	if(!verify || !winexists(client, "asset_cache_browser")) // Can't access the asset cache browser, rip.
 		if (client)
 			client.cache += asset_name
@@ -53,11 +53,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 	client.sending |= asset_name
 	var/job = ++client.last_asset_job
 
-	client << browse({"
-	<script>
-		window.location.href="?asset_cache_confirm_arrival=[job]"
-	</script>
-	"}, "window=asset_cache_browser")
+	show_browser(client, "<script>window.location.href=\"?asset_cache_confirm_arrival=[job]\"</script>", "window=asset_cache_browser")
 
 	var/t = 0
 	var/timeout_time = (ASSET_CACHE_SEND_TIMEOUT * client.sending.len) + ASSET_CACHE_SEND_TIMEOUT
@@ -94,7 +90,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 	var/decl/asset_cache/asset_cache = decls_repository.get_decl(/decl/asset_cache)
 	for(var/asset in unreceived)
 		if (asset in asset_cache.cache)
-			client << browse_rsc(asset_cache.cache[asset], asset)
+			send_rsc(client, asset_cache.cache[asset], asset)
 
 	if(!verify || !winexists(client, "asset_cache_browser")) // Can't access the asset cache browser, rip.
 		if (client)
@@ -105,11 +101,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 	client.sending |= unreceived
 	var/job = ++client.last_asset_job
 
-	client << browse({"
-	<script>
-		window.location.href="?asset_cache_confirm_arrival=[job]"
-	</script>
-	"}, "window=asset_cache_browser")
+	show_browser(client, "<script>window.location.href=\"?asset_cache_confirm_arrival=[job]\"</script>", "window=asset_cache_browser")
 
 	var/t = 0
 	var/timeout_time = ASSET_CACHE_SEND_TIMEOUT * client.sending.len
@@ -141,6 +133,12 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 	var/decl/asset_cache/asset_cache = decls_repository.get_decl(/decl/asset_cache)
 	asset_cache.cache[asset_name] = asset
 
+//Generated names do not include file extention.
+//Used mainly for code that deals with assets in a generic way
+//The same asset will always lead to the same asset name
+/proc/generate_asset_name(file)
+	return "asset.[md5(fcopy_rsc(file))]"
+
 //These datums are used to populate the asset cache, the proc "register()" does this.
 
 //all of our asset datums, used for referring to these later
@@ -154,6 +152,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 
 /datum/asset/New()
 	asset_datums[type] = src
+	register()
 
 /datum/asset/proc/register()
 	return
@@ -169,18 +168,24 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 /datum/asset/simple/register()
 	for(var/asset_name in assets)
 		register_asset(asset_name, assets[asset_name])
+
 /datum/asset/simple/send(client)
 	send_asset_list(client,assets,verify)
 
+// For registering or sending multiple others at once
+/datum/asset/group
+	var/list/children
+
+/datum/asset/group/register()
+	for(var/type in children)
+		get_asset_datum(type)
+
+/datum/asset/group/send(client/C)
+	for(var/type in children)
+		var/datum/asset/A = get_asset_datum(type)
+		A.send(C)
 
 //DEFINITIONS FOR ASSET DATUMS START HERE.
-
-/datum/asset/simple/tgui
-	assets = list(
-		"tgui.css"	= 'tgui/assets/tgui.css',
-		"tgui.js"	= 'tgui/assets/tgui.js'
-	)
-
 /datum/asset/nanoui
 	var/list/common = list()
 
@@ -192,8 +197,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 		"nano/js/"
 	)
 	var/list/uncommon_dirs = list(
-		"nano/templates/",
-		"news_articles/images/"
+		"nano/templates/"
 	)
 
 /datum/asset/nanoui/register()
@@ -230,6 +234,39 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 
 	send_asset_list(client, uncommon, FALSE)
 	send_asset_list(client, common, TRUE)
+
+/datum/asset/group/goonchat
+	children = list(
+		/datum/asset/simple/jquery,
+		/datum/asset/simple/goonchat,
+		/datum/asset/simple/fontawesome
+	)
+
+/datum/asset/simple/jquery
+	verify = FALSE
+	assets = list(
+		"jquery.min.js"            = 'code/modules/goonchat/browserassets/js/jquery.min.js',
+	)
+
+/datum/asset/simple/goonchat
+	verify = TRUE
+	assets = list(
+		"json2.min.js"             = 'code/modules/goonchat/browserassets/js/json2.min.js',
+		"browserOutput.js"         = 'code/modules/goonchat/browserassets/js/browserOutput.js',
+		"browserOutput.css"	       = 'code/modules/goonchat/browserassets/css/browserOutput.css',
+		"browserOutput_white.css"  = 'code/modules/goonchat/browserassets/css/browserOutput_white.css'
+	)
+
+/datum/asset/simple/fontawesome
+	verify = FALSE
+	assets = list(
+		"fa-regular-400.eot"  = 'html/font-awesome/webfonts/fa-regular-400.eot',
+		"fa-regular-400.woff" = 'html/font-awesome/webfonts/fa-regular-400.woff',
+		"fa-solid-900.eot"    = 'html/font-awesome/webfonts/fa-solid-900.eot',
+		"fa-solid-900.woff"   = 'html/font-awesome/webfonts/fa-solid-900.woff',
+		"font-awesome.css"    = 'html/font-awesome/css/all.min.css',
+		"v4shim.css"          = 'html/font-awesome/css/v4-shims.min.css'
+	)
 
 /*
 	Asset cache

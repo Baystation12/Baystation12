@@ -42,7 +42,7 @@ var/list/outfits_decls_by_type_
 	var/holster = null
 	var/list/backpack_contents = list() // In the list(path=count,otherpath=count) format
 
-	var/id_type
+	var/id_types
 	var/id_desc
 	var/id_slot
 
@@ -102,13 +102,14 @@ var/list/outfits_decls_by_type_
 
 // end of check_and_try_equip_xeno
 
-/decl/hierarchy/outfit/proc/equip(mob/living/carbon/human/H, var/rank, var/assignment, var/equip_adjustments)
+/decl/hierarchy/outfit/proc/equip(mob/living/carbon/human/H, rank, assignment, equip_adjustments)
 	equip_base(H, equip_adjustments)
 
 	rank = id_pda_assignment || rank
 	assignment = id_pda_assignment || assignment || rank
-	var/obj/item/weapon/card/id/W = equip_id(H, rank, assignment, equip_adjustments)
-	if(W)
+	var/list/id_cards = equip_ids(H, rank, assignment, equip_adjustments)
+	if(length(id_cards))
+		var/obj/item/weapon/card/id/W = id_cards[1]
 		rank = W.rank
 		assignment = W.assignment
 	equip_pda(H, rank, assignment, equip_adjustments)
@@ -120,10 +121,12 @@ var/list/outfits_decls_by_type_
 
 	if(!(OUTFIT_ADJUSTMENT_SKIP_POST_EQUIP & equip_adjustments))
 		post_equip(H)
-	H.regenerate_icons()
-	if(W) // We set ID info last to ensure the ID photo is as correct as possible.
-		H.set_id_info(W)
-	return 1
+	H.update_icons()
+
+	// We set ID info last to ensure the ID photo is as correct as possible.
+	for(var/id_card in id_cards)
+		H.set_id_info(id_card)
+	return TRUE
 
 /decl/hierarchy/outfit/proc/equip_base(mob/living/carbon/human/H, var/equip_adjustments)
 	pre_equip(H)
@@ -195,21 +198,30 @@ var/list/outfits_decls_by_type_
 		H.species.equip_survival_gear(H, flags&OUTFIT_EXTENDED_SURVIVAL)
 	check_and_try_equip_xeno(H)
 
-/decl/hierarchy/outfit/proc/equip_id(var/mob/living/carbon/human/H, var/rank, var/assignment, var/equip_adjustments)
-	if(!id_slot || !id_type)
+/decl/hierarchy/outfit/proc/equip_ids(mob/living/carbon/human/H, rank, assignment, equip_adjustments)
+	if(!id_slot || !length(id_types))
 		return
 	if(OUTFIT_ADJUSTMENT_SKIP_ID_PDA & equip_adjustments)
 		return
-	var/obj/item/weapon/card/id/W = new id_type(H)
-	if(id_desc)
-		W.desc = id_desc
-	if(rank)
-		W.rank = rank
-	if(assignment)
-		W.assignment = assignment
-	H.set_id_info(W)
-	if(H.equip_to_slot_or_store_or_drop(W, id_slot))
-		return W
+	var/created_cards = list()
+	for(var/id_type in id_types)
+		var/obj/item/weapon/card/id/W = new id_type(H)
+		if(id_desc)
+			W.desc = id_desc
+		if(rank)
+			W.rank = rank
+		if(assignment)
+			W.assignment = assignment
+
+		if((flags & OUTFIT_USES_ACCOUNT) && H.mind?.initial_account)
+			W.associated_account_number = H.mind.initial_account.account_number
+		if((flags & OUTFIT_USES_EMAIL) && H.mind?.initial_email_login)
+			W.associated_email_login = H.mind.initial_email_login.Copy()
+
+		var/item_slot = id_types[id_type] || id_slot
+		H.equip_to_slot_or_store_or_drop(W, item_slot)
+		created_cards += W
+	return created_cards
 
 /decl/hierarchy/outfit/proc/equip_pda(var/mob/living/carbon/human/H, var/rank, var/assignment, var/equip_adjustments)
 	if(!pda_slot || !pda_type)

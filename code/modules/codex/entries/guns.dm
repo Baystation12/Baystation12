@@ -16,8 +16,9 @@
 /obj/item/weapon/gun/get_lore_info()
 	var/list/entries = SScodex.retrieve_entries_for_string(general_codex_key)
 	var/datum/codex_entry/general_entry = LAZYACCESS(entries, 1)
+	. = "[desc]<br>"
 	if(general_entry && general_entry.lore_text)
-		return general_entry.lore_text
+		. += general_entry.lore_text
 
 /obj/item/weapon/gun/get_mechanics_info()
 	var/list/traits = list()

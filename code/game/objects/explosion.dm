@@ -2,7 +2,7 @@
 
 proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog = 1, z_transfer = UP|DOWN, shaped)
 	var/multi_z_scalar = 0.35
-	src = null	//so we don't abort once src is deleted
+	UNLINT(src = null)	//so we don't abort once src is deleted
 	spawn(0)
 		var/start = world.timeofday
 		epicenter = get_turf(epicenter)
@@ -45,9 +45,7 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 					M.playsound_local(epicenter, 'sound/effects/explosionfar.ogg', far_volume, 1, frequency, falloff = 5)
 
 		if(adminlog)
-			message_admins("Explosion with size ([devastation_range], [heavy_impact_range], [light_impact_range]) in area [epicenter.loc.name] ([epicenter.x],[epicenter.y],[epicenter.z]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[epicenter.x];Y=[epicenter.y];Z=[epicenter.z]'>JMP</a>)")
-			log_game("Explosion with size ([devastation_range], [heavy_impact_range], [light_impact_range]) in area [epicenter.loc.name] ")
-
+			log_and_message_admins("Explosion with size ([devastation_range], [heavy_impact_range], [light_impact_range]) in area [epicenter.loc.name] ([epicenter.x],[epicenter.y],[epicenter.z]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[epicenter.x];Y=[epicenter.y];Z=[epicenter.z]'>JMP</a>)")
 		var/approximate_intensity = (devastation_range * 3) + (heavy_impact_range * 2) + light_impact_range
 		// Large enough explosion. For performance reasons, powernets will be rebuilt manually
 		if(!defer_powernet_rebuild && (approximate_intensity > 25))
@@ -83,7 +81,7 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 
 		var/took = (world.timeofday-start)/10
 		//You need to press the DebugGame verb to see these now....they were getting annoying and we've collected a fair bit of data. Just -test- changes  to explosion code using this please so we can compare
-		if(Debug2) world.log << "## DEBUG: Explosion([x0],[y0],[z0])(d[devastation_range],h[heavy_impact_range],l[light_impact_range]): Took [took] seconds."
+		if(Debug2) to_world_log("## DEBUG: Explosion([x0],[y0],[z0])(d[devastation_range],h[heavy_impact_range],l[light_impact_range]): Took [took] seconds.")
 
 		sleep(8)
 

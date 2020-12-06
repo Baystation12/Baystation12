@@ -39,15 +39,15 @@
 			if(!current_value|| !_cultures[current_value])
 				pref.cultural_info[token] = _cultures[1]
 
-/datum/category_item/player_setup_item/background/culture/load_character(var/savefile/S)
+/datum/category_item/player_setup_item/background/culture/load_character(datum/pref_record_reader/R)
 	for(var/token in tokens)
 		var/load_val
-		from_file(S[token], load_val)
+		load_val = R.read(token)
 		pref.cultural_info[token] = load_val
 
-/datum/category_item/player_setup_item/background/culture/save_character(var/savefile/S)
+/datum/category_item/player_setup_item/background/culture/save_character(datum/pref_record_writer/W)
 	for(var/token in tokens)
-		to_file(S[token], pref.cultural_info[token])
+		W.write(token, pref.cultural_info[token])
 
 /datum/category_item/player_setup_item/background/culture/content()
 	. = list()
@@ -88,7 +88,7 @@
 			if(valid_values[choice])
 				var/decl/cultural_info/culture = SSculture.get_culture(choice)
 				if(check_href == 1)
-					user << browse(culture.get_description(), "window=[token];size=700x400")
+					show_browser(user, culture.get_description(), "window=[token];size=700x400")
 				else
 					pref.cultural_info[token] = choice
 				return TOPIC_REFRESH

@@ -15,10 +15,11 @@
 	var/toner = 30 //how much toner is left! woooooo~
 	var/maxcopies = 10	//how many copies can be copied at once- idea shamelessly stolen from bs12's copier!
 
-/obj/machinery/photocopier/attack_ai(mob/user as mob)
-	return attack_hand(user)
+/obj/machinery/photocopier/interface_interact(mob/user)
+	interact(user)
+	return TRUE
 
-/obj/machinery/photocopier/attack_hand(mob/user as mob)
+/obj/machinery/photocopier/interact(mob/user)
 	user.set_machine(src)
 
 	var/dat = "Photocopier<BR><BR>"
@@ -36,15 +37,12 @@
 	dat += "Current toner level: [toner]"
 	if(!toner)
 		dat +="<BR>Please insert a new toner cartridge!"
-	user << browse(dat, "window=copier")
+	show_browser(user, dat, "window=copier")
 	onclose(user, "copier")
 	return
 
-/obj/machinery/photocopier/Topic(href, href_list)
+/obj/machinery/photocopier/OnTopic(user, href_list, state)
 	if(href_list["copy"])
-		if(stat & (BROKEN|NOPOWER))
-			return
-
 		for(var/i = 0, i < copies, i++)
 			if(toner <= 0)
 				break
@@ -58,31 +56,31 @@
 				var/obj/item/weapon/paper_bundle/B = bundlecopy(copyitem)
 				sleep(15*B.pages.len)
 			else
-				to_chat(usr, "<span class='warning'>\The [copyitem] can't be copied by \the [src].</span>")
+				to_chat(user, "<span class='warning'>\The [copyitem] can't be copied by \the [src].</span>")
 				break
 
 			use_power_oneoff(active_power_usage)
-		updateUsrDialog()
-	else if(href_list["remove"])
-		if(copyitem)
-			usr.put_in_hands(copyitem)
-			to_chat(usr, "<span class='notice'>You take \the [copyitem] out of \the [src].</span>")
-			copyitem = null
-			updateUsrDialog()
-	else if(href_list["min"])
+		return TOPIC_REFRESH
+
+	if(href_list["remove"])
+		OnRemove(user)
+		return TOPIC_REFRESH
+
+	if(href_list["min"])
 		if(copies > 1)
 			copies--
-			updateUsrDialog()
+		return TOPIC_REFRESH
+
 	else if(href_list["add"])
 		if(copies < maxcopies)
 			copies++
-			updateUsrDialog()
-	else if(href_list["aipic"])
-		if(!istype(usr,/mob/living/silicon)) return
-		if(stat & (BROKEN|NOPOWER)) return
+		return TOPIC_REFRESH
+
+	if(href_list["aipic"])
+		if(!istype(user,/mob/living/silicon)) return
 
 		if(toner >= 5)
-			var/mob/living/silicon/tempAI = usr
+			var/mob/living/silicon/tempAI = user
 			var/obj/item/device/camera/siliconcam/camera = tempAI.silicon_camera
 
 			if(!camera)
@@ -98,7 +96,13 @@
 				p.desc += " - Copied by [tempAI.name]"
 			toner -= 5
 			sleep(15)
-		updateUsrDialog()
+		return TOPIC_REFRESH
+
+/obj/machinery/photocopier/proc/OnRemove(mob/user)
+	if(copyitem)
+		user.put_in_hands(copyitem)
+		to_chat(user, "<span class='notice'>You take \the [copyitem] out of \the [src].</span>")
+		copyitem = null
 
 /obj/machinery/photocopier/attackby(obj/item/O as obj, mob/user as mob)
 	if(istype(O, /obj/item/weapon/paper) || istype(O, /obj/item/weapon/photo) || istype(O, /obj/item/weapon/paper_bundle))
@@ -151,7 +155,7 @@
 		c.info = "<font color = #101010>"
 	else			//no toner? shitty copies for you!
 		c.info = "<font color = #808080>"
-	var/copied = html_decode(copy.info)
+	var/copied = copy.info
 	copied = replacetext(copied, "<font face=\"[c.deffont]\" color=", "<font face=\"[c.deffont]\" nocolor=")	//state of the art techniques in action
 	copied = replacetext(copied, "<font face=\"[c.crayonfont]\" color=", "<font face=\"[c.crayonfont]\" nocolor=")	//This basically just breaks the existing color tag, which we need to do because the innermost tag takes priority.
 	c.info += copied

@@ -10,10 +10,12 @@
 	icon = 'icons/obj/machines/heat_sources.dmi'
 	icon_state = "hotplate"
 	atom_flags = ATOM_FLAG_CLIMBABLE
-	density =    TRUE
-	anchored =   TRUE
+	anchored = TRUE
 	idle_power_usage = 0
 	active_power_usage = 1.2 KILOWATTS
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 
 	var/image/glow_icon
 	var/image/beaker_icon
@@ -21,34 +23,24 @@
 
 	var/heater_mode =          HEATER_MODE_HEAT
 	var/list/permitted_types = list(/obj/item/weapon/reagent_containers/glass)
-	var/max_temperature =      200 CELCIUS
-	var/min_temperature =      40  CELCIUS
+	var/max_temperature =      200 CELSIUS
+	var/min_temperature =      40  CELSIUS
 	var/heating_power =        10 // K
 	var/last_temperature
 	var/target_temperature
 	var/obj/item/container
-	var/circuit_type = /obj/item/weapon/circuitboard/reagent_heater
 
 /obj/machinery/reagent_temperature/cooler
 	name = "chemical cooler"
 	desc = "A small electric cooler, used to chill beakers and vials of chemicals."
 	icon_state = "coldplate"
 	heater_mode =      HEATER_MODE_COOL
-	max_temperature =  30 CELCIUS
-	min_temperature = -80 CELCIUS
-	circuit_type =     /obj/item/weapon/circuitboard/reagent_heater/cooler
+	max_temperature =  30 CELSIUS
+	min_temperature = -80 CELSIUS
 
 /obj/machinery/reagent_temperature/Initialize()
-
 	target_temperature = min_temperature
-
-	component_parts = list(
-		new circuit_type(src),
-		new /obj/item/weapon/stock_parts/micro_laser(src),
-		new /obj/item/weapon/stock_parts/capacitor(src)
-	)
 	. = ..()
-	RefreshParts()
 
 /obj/machinery/reagent_temperature/Destroy()
 	if(container)
@@ -57,29 +49,38 @@
 	. = ..()
 
 /obj/machinery/reagent_temperature/RefreshParts()
-	heating_power = initial(heating_power)
+	heating_power = initial(heating_power) * Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor), 0, 10)
 
-	var/obj/item/weapon/stock_parts/comp = locate(/obj/item/weapon/stock_parts/capacitor) in component_parts
+	var/comp = 0.25 KILOWATTS * total_component_rating_of_type(/obj/item/weapon/stock_parts/micro_laser)
 	if(comp)
-		heating_power *= comp.rating
-	comp = locate(/obj/item/weapon/stock_parts/micro_laser) in component_parts
-	if(comp)
-		change_power_consumption(max(0.5 KILOWATTS, initial(active_power_usage) - (comp.rating * 0.25 KILOWATTS)), POWER_USE_ACTIVE)
+		change_power_consumption(max(0.5 KILOWATTS, initial(active_power_usage) - comp), POWER_USE_ACTIVE)
+	..()
 
 /obj/machinery/reagent_temperature/Process()
-	. = ..()
-	if(. != PROCESS_KILL)
-		if(temperature != last_temperature)
-			queue_icon_update()
-		if(((stat & (BROKEN|NOPOWER)) || !anchored) && use_power >= POWER_USE_ACTIVE)
-			update_use_power(POWER_USE_IDLE)
-			queue_icon_update()
+	..()
+	if(temperature != last_temperature)
+		queue_icon_update()
+	if(((stat & (BROKEN|NOPOWER)) || !anchored) && use_power >= POWER_USE_ACTIVE)
+		update_use_power(POWER_USE_IDLE)
+		queue_icon_update()
 
-/obj/machinery/reagent_temperature/attack_hand(var/mob/user)
-	interact(user)
+/obj/machinery/reagent_temperature/proc/eject_beaker(mob/user)
+	if(!container)
+		return
+	var/obj/item/weapon/reagent_containers/B = container
+	user.put_in_hands(B)
+	container = null
+	update_icon()
 
-/obj/machinery/reagent_temperature/attack_ai(var/mob/user)
+/obj/machinery/reagent_temperature/AltClick(mob/user)
+	if(CanDefaultInteract(user))
+		eject_beaker(user)
+	else
+		..()
+
+/obj/machinery/reagent_temperature/interface_interact(var/mob/user)
 	interact(user)
+	return TRUE
 
 /obj/machinery/reagent_temperature/ProcessAtomTemperature()
 	if(use_power >= POWER_USE_ACTIVE)
@@ -96,18 +97,8 @@
 	. = ..()
 
 /obj/machinery/reagent_temperature/attackby(var/obj/item/thing, var/mob/user)
-
-	if(default_deconstruction_screwdriver(user, thing))
-		return
-
-	if(default_deconstruction_crowbar(user, thing))
-		return
-
-	if(default_part_replacement(user, thing))
-		return
-
 	if(isWrench(thing))
-		if(use_power)
+		if(use_power == POWER_USE_ACTIVE)
 			to_chat(user, SPAN_WARNING("Turn \the [src] off first!"))
 		else
 			anchored = !anchored
@@ -127,7 +118,6 @@
 					update_icon()
 				return
 		to_chat(user, SPAN_WARNING("\The [src] cannot accept \the [thing]."))
-	..()
 
 /obj/machinery/reagent_temperature/on_update_icon()
 
@@ -184,7 +174,7 @@
 	popup.open()
 
 /obj/machinery/reagent_temperature/CanUseTopic(var/mob/user, var/state, var/href_list)
-	if(href_list["remove_container"])
+	if(href_list && href_list["remove_container"])
 		. = ..(user, GLOB.physical_state, href_list)
 		if(. == STATUS_CLOSE)
 			to_chat(user, SPAN_WARNING("You are too far away."))
@@ -214,11 +204,7 @@
 			to_chat(user, SPAN_WARNING("The button clicks, but nothing happens."))
 
 	if(href_list["remove_container"])
-		if(container)
-			container.dropInto(loc)
-			user.put_in_hands(container)
-			container = null
-			update_icon()
+		eject_beaker(user)
 		. = TOPIC_REFRESH
 
 	if(. == TOPIC_REFRESH)

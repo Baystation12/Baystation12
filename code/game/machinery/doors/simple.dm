@@ -9,6 +9,7 @@
 	var/datum/lock/lock
 	var/initial_lock_value //for mapping purposes. Basically if this value is set, it sets the lock to this value.
 	autoset_access = FALSE // Doesn't even use access
+	pry_mod = 0.1
 
 /obj/machinery/door/unpowered/simple/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	TemperatureAct(exposed_temperature)
@@ -22,9 +23,8 @@
 		material_name = MATERIAL_STEEL
 	material = SSmaterials.get_material_by_name(material_name)
 	if(!material)
-		qdel(src)
-		return
-	maxhealth = max(100, material.integrity*10)
+		return INITIALIZE_HINT_QDEL
+	maxhealth = max(100, material.integrity*2)
 	health = maxhealth
 	if(!icon_base)
 		icon_base = material.door_icon_base
@@ -35,13 +35,20 @@
 		locked = initial_lock_value
 	if(locked)
 		lock = new(src,locked)
+	if(material.luminescence)
+		set_light(0.5, 1, material.luminescence, l_color = material.icon_colour)
 
 	if(material.opacity < 0.5)
 		glass = 1
+		alpha = 180
 		set_opacity(0)
-	else
-		set_opacity(1)
+	
+	if(!density)
+		set_opacity(0)
 	update_icon()
+
+/obj/machinery/door/unpowered/simple/c_airblock(turf/other)
+	return FALSE
 
 /obj/machinery/door/unpowered/simple/requiresID()
 	return 0
@@ -59,6 +66,7 @@
 		take_damage(min(damage, 100))
 
 /obj/machinery/door/unpowered/simple/on_update_icon()
+	update_dir()
 	if(density)
 		icon_state = "[icon_base]"
 	else
@@ -79,6 +87,14 @@
 /obj/machinery/door/unpowered/simple/close(var/forced = 0)
 	if(!can_close(forced))
 		return
+	
+	// If the door is blocked, don't close
+	for(var/turf/A in locs)
+		var/turf/T = A
+		var/obstruction = T.get_obstruction()
+		if (obstruction)
+			return
+	
 	playsound(src.loc, material.dooropen_noise, 100, 1)
 	..()
 
@@ -88,9 +104,10 @@
 	playsound(src.loc, material.dooropen_noise, 100, 1)
 	..()
 
-/obj/machinery/door/unpowered/simple/set_broken()
+/obj/machinery/door/unpowered/simple/set_broken(var/new_state, var/cause = MACHINE_BROKEN_GENERIC)
 	..()
-	deconstruct(null)
+	if(new_state)
+		deconstruct(null)
 
 /obj/machinery/door/unpowered/simple/deconstruct(mob/user, moved = FALSE)
 	material.place_dismantled_product(get_turf(src))
@@ -184,8 +201,9 @@
 
 	return
 
-/obj/machinery/door/unpowered/simple/examine(mob/user)
-	if(..(user,1) && lock)
+/obj/machinery/door/unpowered/simple/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 1 && lock)
 		to_chat(user, "<span class='notice'>It appears to have a lock.</span>")
 
 /obj/machinery/door/unpowered/simple/can_open()
@@ -194,9 +212,8 @@
 	return 1
 
 /obj/machinery/door/unpowered/simple/Destroy()
-	qdel(lock)
-	lock = null
-	..()
+	QDEL_NULL(lock)
+	return ..()
 
 /obj/machinery/door/unpowered/simple/iron/New(var/newloc,var/material_name,var/complexity)
 	..(newloc, MATERIAL_IRON, complexity)
@@ -216,10 +233,6 @@
 /obj/machinery/door/unpowered/simple/diamond/New(var/newloc,var/material_name,var/complexity)
 	..(newloc, MATERIAL_DIAMOND, complexity)
 
-/obj/machinery/door/unpowered/simple/wood
-	icon_state = "wood"
-	color = "#824b28"
-
 /obj/machinery/door/unpowered/simple/wood/New(var/newloc,var/material_name,var/complexity)
 	..(newloc, MATERIAL_WOOD, complexity)
 
@@ -235,18 +248,17 @@
 /obj/machinery/door/unpowered/simple/walnut/New(var/newloc,var/material_name,var/complexity)
 	..(newloc, MATERIAL_WALNUT, complexity)
 
-/obj/machinery/door/unpowered/simple/wood/saloon
-	icon_base = "saloon"
-	autoclose = 1
-	normalspeed = 0
+/obj/machinery/door/unpowered/simple/plastic/New(var/newloc,var/material_name,var/complexity)
+	..(newloc, MATERIAL_PLASTIC, complexity)
 
-/obj/machinery/door/unpowered/simple/wood/saloon/New(var/newloc,var/material_name,var/complexity)
-	..(newloc, MATERIAL_WOOD, complexity)
-	glass = 1
-	set_opacity(0)
+/obj/machinery/door/unpowered/simple/plastic/open
+	density = FALSE
 
-/obj/machinery/door/unpowered/simple/resin/New(var/newloc,var/material_name,var/complexity)
-	..(newloc, MATERIAL_RESIN, complexity)
+/obj/machinery/door/unpowered/simple/glass/New(var/newloc,var/material_name,var/complexity)
+	..(newloc, MATERIAL_GLASS, complexity)
 
 /obj/machinery/door/unpowered/simple/cult/New(var/newloc,var/material_name,var/complexity)
 	..(newloc, MATERIAL_CULT, complexity)
+
+/obj/machinery/door/unpowered/simple/supermatter/New(var/newloc,var/material_name,var/complexity)
+	..(newloc, MATERIAL_SUPERMATTER, complexity)

@@ -89,16 +89,19 @@
 				qdel(src)
 
 
-/obj/machinery/shield/hitby(AM as mob|obj)
+/obj/machinery/shield/hitby(AM as mob|obj, var/datum/thrownthing/TT)
 	//Let everyone know we've been hit!
 	visible_message("<span class='notice'><B>\[src] was hit by [AM].</B></span>")
 
 	//Super realistic, resource-intensive, real-time damage calculations.
 	var/tforce = 0
-	if(ismob(AM))
-		tforce = 40
+
+	if(ismob(AM)) // All mobs have a multiplier and a size according to mob_defines.dm
+		var/mob/I = AM
+		tforce = I.mob_size * (TT.speed/THROWFORCE_SPEED_DIVISOR)
 	else
-		tforce = AM:throwforce
+		var/obj/O = AM
+		tforce = O.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
 
 	src.health -= tforce
 
@@ -247,28 +250,30 @@
 				malfunction = 1
 	checkhp()
 
-/obj/machinery/shieldgen/attack_hand(mob/user as mob)
+/obj/machinery/shieldgen/interface_interact(mob/user as mob)
+	if(!CanInteract(user, DefaultTopicState()))
+		return FALSE
 	if(locked)
 		to_chat(user, "The machine is locked, you are unable to use it.")
-		return
+		return TRUE
 	if(is_open)
 		to_chat(user, "The panel must be closed before operating this machine.")
-		return
+		return TRUE
 
 	if (src.active)
-		user.visible_message("<span class='notice'>\icon[src] [user] deactivated the shield generator.</span>", \
-			"<span class='notice'>\icon[src] You deactivate the shield generator.</span>", \
+		user.visible_message("<span class='notice'>[icon2html(src, viewers(get_turf(src)))] [user] deactivated the shield generator.</span>", \
+			"<span class='notice'>[icon2html(src,user)] You deactivate the shield generator.</span>", \
 			"You hear heavy droning fade out.")
 		src.shields_down()
 	else
 		if(anchored)
-			user.visible_message("<span class='notice'>\icon[src] [user] activated the shield generator.</span>", \
-				"<span class='notice'>\icon[src] You activate the shield generator.</span>", \
+			user.visible_message("<span class='notice'>[icon2html(src, viewers(get_turf(src)))] [user] activated the shield generator.</span>", \
+				"<span class='notice'>[icon2html(src, user)] You activate the shield generator.</span>", \
 				"You hear heavy droning.")
 			src.shields_up()
 		else
 			to_chat(user, "The device must first be secured to the floor.")
-	return
+	return TRUE
 
 /obj/machinery/shieldgen/emag_act(var/remaining_charges, var/mob/user)
 	if(!malfunction)

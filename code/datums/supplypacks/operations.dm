@@ -1,13 +1,6 @@
 /decl/hierarchy/supply_pack/operations
 	name = "Operations"
 
-/decl/hierarchy/supply_pack/operations/mule
-	name = "Equipment - MULEbot"
-	contains = list()
-	cost = 20
-	containertype = /obj/structure/largecrate/animal/mulebot
-	containername = "mulebot crate"
-
 /decl/hierarchy/supply_pack/operations/cargotrain
 	name = "Equipment - Cargo Train Tug"
 	contains = list(/obj/vehicle/train/cargo/engine)
@@ -36,12 +29,20 @@
 	contraband = 1
 	supply_method = /decl/supply_method/randomized
 
-/decl/hierarchy/supply_pack/operations/hoverpod
-	name = "Equipment - Hoverpod Shipment"
-	contains = list()
-	cost = 80
-	containertype = /obj/structure/largecrate/hoverpod
-	containername = "hoverpod crate"
+/decl/hierarchy/supply_pack/operations/plasma_cutter
+	name = "Equipment - Plasma Cutter"
+	contains = list(/obj/item/weapon/gun/energy/plasmacutter)
+	cost = 120
+	containertype = /obj/structure/closet/crate/secure
+	containername = "plasma cutter crate"
+	access = list(list(access_mining,access_engine))
+
+/decl/hierarchy/supply_pack/operations/orebox
+	name = "Equipment - Ore box"
+	contains = list(/obj/structure/ore_box)
+	cost = 15
+	containertype = /obj/structure/largecrate
+	containername = "Ore box crate"
 
 /decl/hierarchy/supply_pack/operations/webbing
 	name = "Gear - Webbing, vests, holsters."
@@ -90,8 +91,8 @@
 /decl/hierarchy/supply_pack/operations/bureaucracy
 	contains = list(/obj/item/weapon/material/clipboard,
 					 /obj/item/weapon/material/clipboard,
-					 /obj/item/weapon/pen/red,
-					 /obj/item/weapon/pen/blue,
+					 /obj/item/weapon/pen/retractable/red,
+					 /obj/item/weapon/pen/retractable/blue,
 					 /obj/item/weapon/pen/green,
 					 /obj/item/device/camera_film,
 					 /obj/item/weapon/folder/blue,

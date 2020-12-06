@@ -16,7 +16,7 @@
 	ammonia		spawn_reagent = /datum/reagent/ammonia
 	acetone		spawn_reagent = /datum/reagent/acetone
 	sodium		spawn_reagent = /datum/reagent/sodium
-	aluminum	spawn_reagent = /datum/reagent/aluminum
+	aluminium	spawn_reagent = /datum/reagent/aluminium
 	silicon		spawn_reagent = /datum/reagent/silicon
 	phosphorus	spawn_reagent = /datum/reagent/phosphorus
 	sulfur		spawn_reagent = /datum/reagent/sulfur
@@ -43,11 +43,16 @@
 	cognac		spawn_reagent = /datum/reagent/ethanol/cognac
 	ale			spawn_reagent = /datum/reagent/ethanol/ale
 	mead		spawn_reagent = /datum/reagent/ethanol/mead
+	creme_de_menthe spawn_reagent = /datum/reagent/ethanol/creme_de_menthe
+	creme_de_cacao spawn_reagent = /datum/reagent/ethanol/creme_de_cacao
+	triple_sec  spawn_reagent = /datum/reagent/ethanol/triple_sec
 
 	// Bar, soft
 	ice			spawn_reagent = /datum/reagent/drink/ice
 	tea			spawn_reagent = /datum/reagent/drink/tea
 	green_tea	spawn_reagent = /datum/reagent/drink/tea/green
+	chai_tea	spawn_reagent = /datum/reagent/drink/tea/chai
+	red_tea		spawn_reagent = /datum/reagent/drink/tea/red
 	cola		spawn_reagent = /datum/reagent/drink/space_cola
 	smw			spawn_reagent = /datum/reagent/drink/spacemountainwind
 	dr_gibb		spawn_reagent = /datum/reagent/drink/dr_gibb
@@ -58,6 +63,12 @@
 	orange		spawn_reagent = /datum/reagent/drink/juice/orange
 	lime		spawn_reagent = /datum/reagent/drink/juice/lime
 	watermelon	spawn_reagent = /datum/reagent/drink/juice/watermelon
+
+	// Bar, syrups
+	syrup_chocolate	spawn_reagent = /datum/reagent/drink/syrup_chocolate
+	syrup_caramel	spawn_reagent = /datum/reagent/drink/syrup_caramel
+	syrup_vanilla	spawn_reagent = /datum/reagent/drink/syrup_vanilla
+	syrup_pumpkin	spawn_reagent = /datum/reagent/drink/syrup_pumpkin
 
 	// Bar, coffee
 	coffee		spawn_reagent = /datum/reagent/drink/coffee

@@ -1,5 +1,5 @@
 /obj/item/weapon/gun/energy/taser
-	name = "taser gun"
+	name = "electrolaser"
 	desc = "The NT Mk30 NL is a small, low capacity gun used for non-lethal takedowns. Produced by NT, it's actually a licensed version of a W-T design. It can switch between high and low intensity stun shots."
 	icon = 'icons/obj/guns/taser.dmi'
 	icon_state = "taser"
@@ -14,7 +14,7 @@
 		)
 
 /obj/item/weapon/gun/energy/taser/carbine
-	name = "taser carbine"
+	name = "electrolaser carbine"
 	desc = "The NT Mk44 NL is a high capacity gun used for non-lethal takedowns. It can switch between high and low intensity stun shots."
 	icon = 'icons/obj/guns/taser_carbine.dmi'
 	icon_state = "tasercarbine"
@@ -34,13 +34,13 @@
 		)
 
 /obj/item/weapon/gun/energy/taser/mounted
-	name = "mounted taser gun"
+	name = "mounted electrolaser"
 	self_recharge = 1
 	use_external_power = 1
 	has_safety = FALSE
 
 /obj/item/weapon/gun/energy/taser/mounted/cyborg
-	name = "taser gun"
+	name = "electrolaser"
 	max_shots = 6
 	recharge_time = 10 //Time it takes for shots to recharge (in ticks)
 
@@ -58,7 +58,7 @@
 
 /obj/item/weapon/gun/energy/stunrevolver/rifle
 	name = "stun rifle"
-	desc = "An A&M X10 Thor. A vastly oversized variant of the A&M X6 Zeus. Fires overcharged electrodes to take down hostile armored targets without harming them too much."
+	desc = "An A&M X10 Thor. A vastly oversized variant of the A&M X6 Zeus. Fires overcharged electrodes to obliterate pain receptors without harming them too much."
 	icon = 'icons/obj/guns/stunrifle.dmi'
 	icon_state = "stunrifle"
 	item_state = "stunrifle"
@@ -79,7 +79,7 @@
 	icon_state = "crossbow"
 	w_class = ITEM_SIZE_NORMAL
 	item_state = "crossbow"
-	origin_tech = list(TECH_COMBAT = 2, TECH_MAGNET = 2, TECH_ILLEGAL = 5)
+	origin_tech = list(TECH_COMBAT = 2, TECH_MAGNET = 2, TECH_ESOTERIC = 5)
 	matter = list(MATERIAL_STEEL = 2000)
 	slot_flags = SLOT_BELT
 	silenced = 1
@@ -94,6 +94,10 @@
 	name = "energy dart thrower"
 	projectile_type = /obj/item/projectile/energy/dart
 	max_shots = 5
+
+/obj/item/weapon/gun/energy/crossbow/ninja/mounted
+	use_external_power = 1
+	has_safety = FALSE
 
 /obj/item/weapon/gun/energy/crossbow/largecrossbow
 	name = "energy crossbow"
@@ -114,4 +118,16 @@
 	fire_delay = 20
 	max_shots = 4
 	projectile_type = /obj/item/projectile/energy/plasmastun
+	combustion = 0
+
+/obj/item/weapon/gun/energy/confuseray
+	name = "disorientator"
+	desc = "The W-T Mk. 4 Disorientator is a small, low capacity, and short-ranged energy projector intended for personal defense with minimal risk of permanent damage or cross-fire."
+	icon = 'icons/obj/guns/confuseray.dmi'
+	icon_state = "confuseray"
+	safety_icon = "safety"
+	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2, TECH_POWER = 2)
+	w_class = ITEM_SIZE_SMALL
+	max_shots = 4
+	projectile_type = /obj/item/projectile/beam/confuseray
 	combustion = 0

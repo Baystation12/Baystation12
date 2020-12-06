@@ -103,7 +103,7 @@
 /datum/dna/gene/disability/blindness
 	name="Blindness"
 	activation_message="You can't seem to see anything."
-	sdisability=BLIND
+	sdisability=BLINDED
 
 /datum/dna/gene/disability/blindness/New()
 	block=GLOB.BLINDBLOCK
@@ -111,7 +111,7 @@
 /datum/dna/gene/disability/deaf
 	name="Deafness"
 	activation_message="It's kinda quiet."
-	sdisability=DEAF
+	sdisability=DEAFENED
 
 /datum/dna/gene/disability/deaf/New()
 	block=GLOB.DEAFBLOCK

@@ -9,6 +9,10 @@
 	anchored = 1
 	density = 0
 	level = 1
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
+
 	var/alarm = 0
 	var/enabled = 1
 
@@ -26,14 +30,6 @@
 		for(var/obj/effect/shield/S in shielded_tile)
 			S.diffuse(5)
 
-/obj/machinery/shield_diffuser/attackby(obj/item/O as obj, mob/user as mob)
-	if(default_deconstruction_screwdriver(user, O))
-		return
-	if(default_deconstruction_crowbar(user, O))
-		return
-	if(default_part_replacement(user, O))
-		return
-
 /obj/machinery/shield_diffuser/on_update_icon()
 	if(alarm)
 		icon_state = "fdiffuser_emergency"
@@ -43,16 +39,19 @@
 	else
 		icon_state = "fdiffuser_on"
 
-/obj/machinery/shield_diffuser/attack_hand()
+/obj/machinery/shield_diffuser/interface_interact(mob/user)
+	if(!CanInteract(user, DefaultTopicState()))
+		return FALSE
 	if(alarm)
-		to_chat(usr, "You press an override button on \the [src], re-enabling it.")
+		to_chat(user, "You press an override button on \the [src], re-enabling it.")
 		alarm = 0
 		update_icon()
-		return
+		return TRUE
 	enabled = !enabled
 	update_use_power(enabled + 1)
 	update_icon()
-	to_chat(usr, "You turn \the [src] [enabled ? "on" : "off"].")
+	to_chat(user, "You turn \the [src] [enabled ? "on" : "off"].")
+	return TRUE
 
 /obj/machinery/shield_diffuser/proc/meteor_alarm(var/duration)
 	if(!duration)
@@ -60,7 +59,7 @@
 	alarm = round(max(alarm, duration))
 	update_icon()
 
-/obj/machinery/shield_diffuser/examine(var/mob/user)
+/obj/machinery/shield_diffuser/examine(mob/user)
 	. = ..()
 	to_chat(user, "It is [enabled ? "enabled" : "disabled"].")
 	if(alarm)

@@ -49,7 +49,6 @@
 	new /obj/item/device/core_sampler(src)
 	new /obj/item/device/gps(src)
 	new /obj/item/weapon/pinpointer/radio(src)
-	new /obj/item/device/radio/beacon(src)
 	new /obj/item/clothing/glasses/meson(src)
 	new /obj/item/weapon/pickaxe(src)
 	new /obj/item/device/measuring_tape(src)

@@ -25,7 +25,7 @@
 			return 1
 		user.visible_message(SPAN_NOTICE("[user] starts fitting [src] onto the [M]'s chest."))
 
-		if(!do_mob(user, M, 2 SECONDS))
+		if(!do_after(user, 2 SECONDS, M))
 			return
 			
 		if(user.unEquip(src))
@@ -57,6 +57,7 @@
 
 	if(world.time > last_pump + 15 SECONDS)
 		last_pump = world.time
+		playsound(src, 'sound/machines/pump.ogg', 25)
 		if(!skilled_setup && prob(20))
 			var/obj/item/organ/external/E = H.get_organ(BP_CHEST)
 			E.add_pain(15)

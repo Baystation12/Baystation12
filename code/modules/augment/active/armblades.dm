@@ -8,8 +8,8 @@
 	base_parry_chance = 30
 	unbreakable = 1
 	force_divisor = 0.2
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 	attack_verb = list("stabbed", "sliced", "cut")
 	applies_material_colour = 0
 

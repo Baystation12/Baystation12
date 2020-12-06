@@ -6,6 +6,7 @@
 	allowed_magazines = /obj/item/ammo_magazine/pistol
 	accuracy_power = 7
 	var/empty_icon = TRUE  //If it should change icon when empty
+	var/ammo_indicator = FALSE
 
 /obj/item/weapon/gun/projectile/pistol/on_update_icon()
 	..()
@@ -14,7 +15,15 @@
 			icon_state = initial(icon_state)
 		else
 			icon_state = "[initial(icon_state)]-e"
-
+	if(ammo_indicator)
+		if(!ammo_magazine || !LAZYLEN(ammo_magazine.stored_ammo))
+			overlays += image(icon, "ammo_bad")
+		else if(LAZYLEN(ammo_magazine.stored_ammo) <= 0.5 * ammo_magazine.max_ammo)
+			overlays += image(icon, "ammo_warn")
+			return
+		else
+			overlays += image(icon, "ammo_ok")
+	
 /obj/item/weapon/gun/projectile/pistol/military
 	name = "military pistol"
 	desc = "The Hephaestus Industries P20 - a mass produced kinetic sidearm in widespread service with the SCGDF."
@@ -22,16 +31,18 @@
 	allowed_magazines = /obj/item/ammo_magazine/pistol/double
 	icon = 'icons/obj/guns/military_pistol.dmi'
 	icon_state = "military"
+	item_state = "secgundark"
 	safety_icon = "safety"
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 2)
 	fire_delay = 7
+	ammo_indicator = TRUE
 
 /obj/item/weapon/gun/projectile/pistol/military/alt
 	desc = "The HelTek Optimus, best known as the standard-issue sidearm for the ICCG Navy."
 	icon = 'icons/obj/guns/military_pistol2.dmi'
 	icon_state = "military-alt"
 	safety_icon = "safety"
-	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 2, TECH_ILLEGAL = 8)
+	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 2, TECH_ESOTERIC = 8)
 	fire_delay = 8
 
 /obj/item/weapon/gun/projectile/pistol/sec
@@ -42,7 +53,7 @@
 	safety_icon = "safety"
 	magazine_type = /obj/item/ammo_magazine/pistol/rubber
 	accuracy = -1
-	fire_delay = 5
+	fire_delay = 6
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 
 /obj/item/weapon/gun/projectile/pistol/sec/lethal
@@ -53,7 +64,7 @@
 	desc = "The HelTek Magnus, a robust Terran handgun that uses high-caliber ammo."
 	icon = 'icons/obj/guns/magnum_pistol.dmi'
 	icon_state = "magnum"
-	item_state = "revolver"
+	item_state = "magnum"
 	safety_icon = "safety"
 	force = 9
 	caliber = CALIBER_PISTOL_MAGNUM
@@ -66,6 +77,7 @@
 	accuracy = 2
 	one_hand_penalty = 2
 	bulk = 3
+	ammo_indicator = TRUE
 
 /obj/item/weapon/gun/projectile/pistol/throwback
 	name = "pistol"
@@ -75,7 +87,7 @@
 	magazine_type = /obj/item/ammo_magazine/pistol/throwback
 	accuracy_power = 5
 	one_hand_penalty = 2
-	fire_delay = 5
+	fire_delay = 7
 	caliber = CALIBER_PISTOL_ANTIQUE
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	var/base_icon = "pistol1"
@@ -100,8 +112,9 @@
 	max_shells = 8
 	caliber = CALIBER_GYROJET
 	origin_tech = list(TECH_COMBAT = 3)
-	ammo_type = /obj/item/ammo_casing/gyrojet
 	magazine_type = /obj/item/ammo_magazine/gyrojet
+	allowed_magazines = /obj/item/ammo_magazine/gyrojet
+	handle_casings = CLEAR_CASINGS	//the projectile is the casing
 	fire_delay = 25
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
@@ -125,8 +138,8 @@
 	w_class = ITEM_SIZE_SMALL
 	caliber = CALIBER_PISTOL_SMALL
 	silenced = 0
-	fire_delay = 1
-	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2, TECH_ILLEGAL = 2)
+	fire_delay = 4
+	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2, TECH_ESOTERIC = 2)
 	magazine_type = /obj/item/ammo_magazine/pistol/small
 	allowed_magazines = /obj/item/ammo_magazine/pistol/small
 

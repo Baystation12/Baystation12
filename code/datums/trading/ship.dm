@@ -16,9 +16,10 @@
 
 /datum/trader/ship/bribe_to_stay_longer(var/amt)
 	if(prob(-disposition))
-		return get_response("bribe_refusal", "How about.... no?")
+		return ..()
 
 	var/length = round(amt/100)
 	duration_of_stay += length
-	. = get_response("bribe_accept", "Sure, I'll stay for TIME more minutes.")
-	. = replacetext(., "TIME", length)
+	var/datum/trade_response/tr = make_response(TRADER_BRIBE_SUCCESS, "Sure, I'll stay for TIME more minutes.", -amt, TRUE)
+	tr.text = replacetext(tr.text, "TIME", length)
+	return tr

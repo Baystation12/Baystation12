@@ -139,7 +139,7 @@
 	"Pens proclaim pencils obsolete, 'lead is dead'.",\
 	"Rock and paper sues scissors for discrimination.",\
 	"Steak tell-all book reveals he never liked sitting by potato.",\
-	"Woodchuck stops counting how many times he’s chucked 'Never again'.",\
+	"Woodchuck stops counting how many times he's chucked 'Never again'.",\
 	"[affected_dest.name] clerk first person able to pronounce '@*$%!'.",\
 	"[affected_dest.name] delis serving boiled paperback dictionaries, 'Adjectives chewy' customers declare.",\
 	"[affected_dest.name] weather deemed 'boring'; meteors and rad storms to be imported.",\
@@ -154,8 +154,8 @@
 	"Skrell marries computer; wedding attended by 100 modems.",\
 	"Chef reports successfully using harmonica as cheese grater.",\
 	"[GLOB.using_map.company_name] invents handkerchief that says 'Bless you' after sneeze.",\
-	"Clone accused of posing for other clones’s school photo.",\
-	"Clone accused of stealing other clones’s employee of the month award.",\
+	"Clone accused of posing for other clones's school photo.",\
+	"Clone accused of stealing other clones's employee of the month award.",\
 	"Woman robs [station_name()] with hair dryer; crewmen love new style.",\
 	"This space for rent.",\
 	"[affected_dest.name] Baker Wins Pickled Crumpet Toss Three Years Running",\

@@ -42,6 +42,7 @@
 	ringtype["signet ring"] = /obj/item/clothing/ring/seal/signet
 	ringtype["masonic ring"] = /obj/item/clothing/ring/seal/mason
 	ringtype["ring, steel"] = /obj/item/clothing/ring/material/steel
+	ringtype["ring, plasteel"] = /obj/item/clothing/ring/material/plasteel
 	ringtype["ring, bronze"] = /obj/item/clothing/ring/material/bronze
 	ringtype["ring, silver"] = /obj/item/clothing/ring/material/silver
 	ringtype["ring, gold"] = /obj/item/clothing/ring/material/gold

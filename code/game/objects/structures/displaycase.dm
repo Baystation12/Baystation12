@@ -18,8 +18,8 @@
 			AM.forceMove(src)
 	update_icon()
 
-/obj/structure/displaycase/examine(var/user)
-	..()
+/obj/structure/displaycase/examine(mob/user)
+	. = ..()
 	if(contents.len)
 		to_chat(user, "Inside you see [english_list(contents)].")
 

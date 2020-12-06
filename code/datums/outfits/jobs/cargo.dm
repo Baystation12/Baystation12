@@ -8,22 +8,22 @@
 	shoes = /obj/item/clothing/shoes/brown
 	glasses = /obj/item/clothing/glasses/sunglasses
 	l_hand = /obj/item/weapon/material/clipboard
-	id_type = /obj/item/weapon/card/id/cargo/head
+	id_types = list(/obj/item/weapon/card/id/cargo/head)
 	pda_type = /obj/item/modular_computer/pda/cargo
 
 /decl/hierarchy/outfit/job/cargo/cargo_tech
 	name = OUTFIT_JOB_NAME("Cargo technician")
 	uniform = /obj/item/clothing/under/rank/cargotech
-	id_type = /obj/item/weapon/card/id/cargo
+	id_types = list(/obj/item/weapon/card/id/cargo)
 	pda_type = /obj/item/modular_computer/pda/cargo
 
 /decl/hierarchy/outfit/job/cargo/mining
 	name = OUTFIT_JOB_NAME("Shaft miner")
 	uniform = /obj/item/clothing/under/rank/miner
-	id_type = /obj/item/weapon/card/id/cargo/mining
+	id_types = list(/obj/item/weapon/card/id/cargo/mining)
 	pda_type = /obj/item/modular_computer/pda/science
 	backpack_contents = list(/obj/item/weapon/crowbar = 1, /obj/item/weapon/storage/ore = 1)
-	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
+	flags = OUTFIT_FLAGS_JOB_DEFAULT | OUTFIT_EXTENDED_SURVIVAL
 
 /decl/hierarchy/outfit/job/cargo/mining/New()
 	..()

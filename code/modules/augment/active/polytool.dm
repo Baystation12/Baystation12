@@ -51,7 +51,7 @@
 			to_chat(owner, SPAN_WARNING("You must drop [I] before tool can be extend."))
 	else
 		var/obj/item = input(owner, "Select item for deploy") as null|anything in src
-		if(!item || !src.loc in owner.organs)
+		if(!item || !(src in owner.internal_organs))
 			return
 		if(owner.equip_to_slot_if_possible(item, slot))
 			items -= item

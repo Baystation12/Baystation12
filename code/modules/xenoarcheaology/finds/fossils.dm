@@ -31,15 +31,16 @@
 /obj/item/weapon/fossil/skull/horned
 	icon_state = "hskull"
 
-/obj/item/weapon/fossil/skull/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/weapon/fossil/skull/attackby(obj/item/weapon/W, mob/user)
 	if(istype(W,/obj/item/weapon/fossil/bone))
+		if(!user.canUnEquip(W))
+			return
+		var/mob/M = get_holder_of_type(src, /mob)
+		if(M && !M.unEquip(src))
+			return
 		var/obj/o = new /obj/skeleton(get_turf(src))
-		var/a = new /obj/item/weapon/fossil/bone
-		var/b = new src.type
-		o.contents.Add(a)
-		o.contents.Add(b)
-		qdel(W)
-		qdel(src)
+		user.unEquip(W, o)
+		forceMove(o)
 
 /obj/skeleton
 	name = "Incomplete skeleton"
@@ -55,12 +56,10 @@
 	src.breq = rand(6)+3
 	src.desc = "An incomplete skeleton, looks like it could use [src.breq-src.bnum] more bones."
 
-/obj/skeleton/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/skeleton/attackby(obj/item/weapon/W, mob/user)
 	if(istype(W,/obj/item/weapon/fossil/bone))
-		if(!bstate)
+		if(!bstate && user.unEquip(W, src))
 			bnum++
-			src.contents.Add(new/obj/item/weapon/fossil/bone)
-			qdel(W)
 			if(bnum==breq)
 				usr = user
 				icon_state = "skel"
@@ -78,7 +77,7 @@
 			..()
 	else if(istype(W,/obj/item/weapon/pen))
 		plaque_contents = sanitize(input("What would you like to write on the plaque:","Skeleton plaque",""))
-		user.visible_message("[user] writes something on the base of [src].","You relabel the plaque on the base of \icon[src] [src].")
+		user.visible_message("[user] writes something on the base of [icon2html(src, viewers(get_turf(src)))] [src].","You relabel the plaque on the base of [icon2html(src, user)] [src].")
 		if(src.contents.Find(/obj/item/weapon/fossil/skull/horned))
 			src.desc = "A creature made of [src.contents.len-1] assorted bones and a horned skull. The plaque reads \'[plaque_contents]\'."
 		else

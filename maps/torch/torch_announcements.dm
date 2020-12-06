@@ -27,7 +27,7 @@
 	unidentified_lifesigns_message = "Unidentified lifesigns detected. Please lock down all exterior access points."
 	unidentified_lifesigns_sound = sound('sound/AI/torch/aliens.ogg', volume = 45)
 
-	xenomorph_spawn_sound = sound('sound/AI/torch/aliens.ogg', volume = 45)
+	lifesign_spawn_sound = sound('sound/AI/torch/aliens.ogg', volume = 45)
 
 	electrical_storm_moderate_sound = sound('sound/AI/torch/electricalstormmoderate.ogg', volume = 45)
 	electrical_storm_major_sound = sound('sound/AI/torch/electricalstormmajor.ogg', volume = 45)

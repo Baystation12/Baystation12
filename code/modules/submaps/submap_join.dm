@@ -22,11 +22,15 @@
 		return FALSE
 
 	if(!available())
-		to_chat(joining, "<span class='warning'>Unfortunately, that job is no longer available.</span>")
+		to_chat(joining, SPAN_WARNING("Unfortunately, that job is no longer available."))
 		return FALSE
 
 	if(jobban_isbanned(joining, "Offstation Roles"))
-		to_chat(joining, "<span class='warning'>You are banned from playing offstation roles.</span>")
+		to_chat(joining, SPAN_WARNING("You are banned from playing offstation roles."))
+		return FALSE
+
+	if(job.is_semi_antagonist && jobban_isbanned(joining, MODE_MISC_AGITATOR))
+		to_chat(joining, SPAN_WARNING("You are banned from playing semi-antagonist roles."))
 		return FALSE
 
 	if(job.is_restricted(joining.client.prefs, joining))
@@ -51,13 +55,18 @@
 		return
 
 	log_debug("Player: [joining] is now offsite rank: [job.title] ([name]), JCP:[job.current_positions], JPL:[job.total_positions]")
-	joining.mind.assigned_job = job
-	joining.mind.assigned_role = job.title
+	if(joining.mind)
+		joining.mind.assigned_job = job
+		joining.mind.assigned_role = job.title
 	joining.faction = name
 	job.current_positions++
 
 	var/mob/living/character = joining.create_character(spawn_turf)
 	if(istype(character))
+
+		var/mob/living/other_mob = job.handle_variant_join(character, job.title)
+		if(istype(other_mob))
+			character = other_mob
 
 		var/mob/living/carbon/human/user_human
 		if(ishuman(character))
@@ -74,7 +83,7 @@
 			if(spawn_in_storage)
 				for(var/datum/gear/G in spawn_in_storage)
 					G.spawn_in_storage_or_drop(user_human, user_human.client.prefs.Gear()[G.display_name])
-			equip_custom_items(user_human)
+			SScustomitems.equip_custom_items(user_human)
 
 		character.job = job.title
 		if(character.mind)
@@ -90,7 +99,7 @@
 			to_chat(character, ojob.info)
 
 		if(user_human && user_human.disabilities & NEARSIGHTED)
-			var/equipped = user_human.equip_to_slot_or_del(new /obj/item/clothing/glasses/regular(user_human), slot_glasses)
+			var/equipped = user_human.equip_to_slot_or_del(new /obj/item/clothing/glasses/prescription(user_human), slot_glasses)
 			if(equipped)
 				var/obj/item/clothing/glasses/G = user_human.glasses
 				G.prescription = 7
@@ -103,6 +112,7 @@
 		GLOB.universe.OnPlayerLatejoin(character)
 		log_and_message_admins("has joined the round as offsite role [character.mind.assigned_role].", character)
 		if(character.cannot_stand()) equip_wheelchair(character)
+		job.post_equip_rank(character, job.title)
 		qdel(joining)
 
 	return character

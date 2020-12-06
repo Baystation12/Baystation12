@@ -7,7 +7,9 @@
 	icon_state = "guard"
 	item_state = "w_suit"
 	worn_state = "guard"
-	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 5, rad = 0)
+	armor = list(
+		melee = ARMOR_MELEE_SMALL
+		)
 	siemens_coefficient = 0.9
 	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/onmob_under_corporate.dmi')
 	gender_icons = 1
@@ -22,7 +24,9 @@
 	item_state = "w_suit"
 	worn_state = "smock"
 	permeability_coefficient = 0.50
-	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 10, bio = 10, rad = 0)
+	armor = list(
+		bio = ARMOR_BIO_MINOR
+		)
 	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/onmob_under_corporate.dmi')
 	gender_icons = 1
 	sprite_sheets = list(
@@ -43,7 +47,10 @@
 	icon_state = "work"
 	item_state = "lb_suit"
 	worn_state = "work"
-	armor = list(melee = 5, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 5, rad = 0)
+	armor = list(
+		melee = ARMOR_MELEE_MINOR, 
+		bio = ARMOR_BIO_MINOR
+		)
 	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/onmob_under_corporate.dmi')
 	gender_icons = 1
 	sprite_sheets = list(

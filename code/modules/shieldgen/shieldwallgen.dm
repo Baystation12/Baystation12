@@ -79,19 +79,21 @@
 			storedpower -= rand(storedpower/4, storedpower/2)
 	..()
 
-/obj/machinery/shieldwallgen/attack_hand(mob/user as mob)
-	if(anchored != 1)
+/obj/machinery/shieldwallgen/CanUseTopic(mob/user)
+	if(!anchored)
 		to_chat(user, "<span class='warning'>The shield generator needs to be firmly secured to the floor first.</span>")
-		return 1
+		return STATUS_CLOSE
 	if(src.locked && !istype(user, /mob/living/silicon))
 		to_chat(user, "<span class='warning'>The controls are locked!</span>")
-		return 1
+		return STATUS_CLOSE
 	if(power != 1)
 		to_chat(user, "<span class='warning'>The shield generator needs to be powered by wire underneath.</span>")
-		return 1
+		return STATUS_CLOSE
+	return ..()
 
-	src.ui_interact(user)
-	src.add_fingerprint(user)
+/obj/machinery/shieldwallgen/interface_interact(mob/user)
+	ui_interact(user)
+	return TRUE
 
 /obj/machinery/shieldwallgen/proc/power()
 	if(!anchored)
@@ -117,6 +119,7 @@
 	return 1
 
 /obj/machinery/shieldwallgen/Process()
+	..()
 	power = 0
 	if(!(stat & BROKEN))
 		power()
@@ -190,7 +193,7 @@
 		var/field_dir = get_dir(T2,get_step(T2, NSEW))
 		T = get_step(T2, NSEW)
 		T2 = T
-		var/obj/machinery/shieldwall/CF = new(T, G) //(ref to this gen, ref to connected gen)
+		var/obj/machinery/shieldwall/CF = new(T, src, G) //(ref to this gen, ref to connected gen)
 		CF.set_dir(field_dir)
 
 
@@ -271,11 +274,11 @@
 	var/power_usage = 800	//how much power it takes to sustain the shield
 	var/generate_power_usage = 5000	//how much power it takes to start up the shield
 
-/obj/machinery/shieldwall/New(var/obj/machinery/shieldwallgen/A, var/obj/machinery/shieldwallgen/B)
-	..()
+/obj/machinery/shieldwall/Initialize(mapload, obj/machinery/shieldwallgen/A, obj/machinery/shieldwallgen/B)
+	. = ..()
 	update_nearby_tiles()
-	src.gen_primary = A
-	src.gen_secondary = B
+	gen_primary = A
+	gen_secondary = B
 	if(A && B && A.active && B.active)
 		needs_power = 1
 		if(prob(50))
@@ -283,14 +286,11 @@
 		else
 			B.storedpower -= generate_power_usage
 	else
-		qdel(src) //need at least two generator posts
+		return INITIALIZE_HINT_QDEL
 
 /obj/machinery/shieldwall/Destroy()
 	update_nearby_tiles()
 	..()
-
-/obj/machinery/shieldwall/attack_hand(mob/user as mob)
-	return
 
 /obj/machinery/shieldwall/attackby(var/obj/item/I, var/mob/user)
 	var/obj/machinery/shieldwallgen/G = prob(50) ? gen_primary : gen_secondary
