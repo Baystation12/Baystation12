@@ -44,7 +44,7 @@
 /obj/item/weapon/grenade/plasma/activate(var/mob/living/carbon/human/h)
 	item_state_slots = list(slot_l_hand_str = "plasma_nade_on", slot_r_hand_str = "plasma_nade_on")
 	if(istype(h) && istype(h.species,/datum/species/unggoy) && prob(5))
-		playsound(h.loc, 'code/modules/halo/sounds/unggoy_grenade_throw.ogg', 100, 1)
+		playsound(h.loc, 'code/modules/halo/sounds/unggoy_grenade_throw.ogg', 100)
 	. = ..()
 	activated_at = world.time
 	if(istype(h))
