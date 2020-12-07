@@ -215,3 +215,53 @@
 	id = access_torch_helm
 	desc = "Torch Helm"
 	region = ACCESS_REGION_COMMAND
+
+// Torch Radio Access
+
+/var/const/access_radio_comm = "ACCESS_RADIO_COMM"
+/datum/access/access_radio_comm
+	id = access_radio_comm
+	desc = "Command Radio"
+	region = ACCESS_REGION_COMMAND
+
+/var/const/access_radio_eng = "ACCESS_RADIO_ENG"
+/datum/access/access_radio_eng
+	id = access_radio_eng
+	desc = "Engineering Radio"
+	region = ACCESS_REGION_ENGINEERING
+
+/var/const/access_radio_med = "ACCESS_RADIO_MED"
+/datum/access/access_radio_med
+	id = access_radio_med
+	desc = "Medical Radio"
+	region = ACCESS_REGION_MEDBAY
+
+/var/const/access_radio_sec = "ACCESS_RADIO_SEC"
+/datum/access/access_radio_sec
+	id = access_radio_sec
+	desc = "Security Radio"
+	region = ACCESS_REGION_SECURITY
+
+/var/const/access_radio_sci = "ACCESS_RADIO_SCI"
+/datum/access/access_radio_sic
+	id = access_radio_sci
+	desc = "Science Radio"
+	region = ACCESS_REGION_NT
+
+/var/const/access_radio_sup = "ACCESS_RADIO_SUP"
+/datum/access/access_radio_sup
+	id = access_radio_sup
+	desc = "Supply Radio"
+	region = ACCESS_REGION_GENERAL
+
+/var/const/access_radio_serv = "ACCESS_RADIO_SERV"
+/datum/access/access_radio_serv
+	id = access_radio_serv
+	desc = "Service Radio"
+	region = ACCESS_REGION_GENERAL
+
+/var/const/access_radio_exp = "ACCESS_RADIO_EXP"
+/datum/access/access_radio_exp
+	id = access_radio_exp
+	desc = "Exploration Radio"
+	region = ACCESS_REGION_GENERAL

@@ -29,9 +29,13 @@
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX)
 	skill_points = 18
 
-	access = list(access_maint_tunnels, access_bridge, access_emergency_storage, access_tech_storage,  access_cargo, access_guppy_helm,
-						access_cargo_bot, access_qm, access_mailsorting, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar,
-						access_mining, access_mining_office, access_mining_station, access_commissary, access_teleporter, access_eva, access_torch_fax)
+	access = list(
+		access_maint_tunnels, access_bridge, access_emergency_storage, access_tech_storage,  access_cargo, access_guppy_helm,
+		access_cargo_bot, access_qm, access_mailsorting, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar,
+		access_mining, access_mining_office, access_mining_station, access_commissary, access_teleporter, access_eva, access_torch_fax,
+		access_radio_sup, access_radio_exp, access_radio_comm
+	)
+
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/supply,
@@ -66,8 +70,12 @@
 
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX)
 
-	access = list(access_maint_tunnels, access_emergency_storage, access_cargo, access_guppy_helm,
-						access_cargo_bot, access_mailsorting, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar, access_commissary)
+	access = list(
+		access_maint_tunnels, access_emergency_storage, access_cargo, access_guppy_helm,
+		access_cargo_bot, access_mailsorting, access_solgov_crew, access_expedition_shuttle,
+		access_guppy, access_hangar, access_commissary, access_radio_sup
+	)
+
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/supply,
@@ -97,6 +105,11 @@
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
 
-	access = list(access_mining, access_mining_office, access_mining_station,
-						access_expedition_shuttle, access_guppy, access_hangar, access_guppy_helm, access_solgov_crew, access_eva)
+	access = list(
+		access_mining, access_mining_office, access_mining_station,
+		access_expedition_shuttle, access_guppy, access_hangar,
+		access_guppy_helm, access_solgov_crew, access_eva,
+		access_radio_exp, access_radio_sup
+	)
+
 	minimal_access = list()
