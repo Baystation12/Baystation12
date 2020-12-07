@@ -1,0 +1,6 @@
+author: "Mucker"
+delete-after: True
+changes: 
+  - tweak: "Allows exo event to occur on planetoid away sites."
+  - tweak: "Exo event occurrences on bluespaceriver will have a significantly reduced mob count."
+  - bugfix: "Fix exo event spawned mobs spawning in mineral deposits."
