@@ -17,7 +17,7 @@
 	opacity = 0
 	},
 /turf/simulated/floor,
-/area/space)
+/area/ship/scrap/cargo/lower)
 "ad" = (
 /obj/machinery/door/airlock/external/bolted/cycling{
 	id_tag = "cargo_out"
@@ -95,6 +95,21 @@
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor,
 /area/ship/scrap/cargo/lower)
+"an" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/effect/floor_decal/industrial/loading{
+	dir = 1;
+	icon_state = "loadingarea"
+	},
+/obj/machinery/power/apc/derelict,
+/obj/structure/cable/green{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/turf/simulated/floor/tiled,
+/area/ship/scrap/escape_star)
 "ao" = (
 /turf/simulated/wall,
 /area/ship/scrap/cargo/lower)
@@ -219,12 +234,10 @@
 	dir = 1;
 	icon_state = "loadingarea"
 	},
-/obj/machinery/power/apc/derelict{
-	dir = 4
-	},
-/obj/structure/cable{
-	d2 = 2;
-	icon_state = "0-2"
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
 	},
 /turf/simulated/floor/tiled,
 /area/ship/scrap/escape_port)
@@ -285,12 +298,10 @@
 	dir = 1;
 	icon_state = "loadingarea"
 	},
-/obj/machinery/power/apc/derelict{
-	dir = 8
-	},
-/obj/structure/cable{
-	d2 = 2;
-	icon_state = "0-2"
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
 	},
 /turf/simulated/floor/tiled,
 /area/ship/scrap/escape_star)
@@ -328,11 +339,10 @@
 /area/ship/scrap/gambling)
 "aM" = (
 /obj/machinery/door/airlock/autoname/bearcat,
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor,
 /area/ship/scrap/escape_port)
@@ -345,10 +355,9 @@
 /obj/machinery/power/apc/derelict{
 	dir = 8
 	},
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d2 = 2;
-	icon_state = "0-2";
-	pixel_y = 1
+	icon_state = "0-2"
 	},
 /turf/simulated/floor/tiled,
 /area/ship/scrap/cargo/lower)
@@ -388,11 +397,10 @@
 /area/ship/scrap/cargo/lower)
 "aS" = (
 /obj/machinery/door/airlock/autoname/bearcat,
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor,
 /area/ship/scrap/escape_star)
@@ -417,10 +425,9 @@
 /turf/simulated/floor,
 /area/ship/scrap/gambling)
 "aX" = (
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d2 = 2;
-	icon_state = "0-2";
-	pixel_y = 1
+	icon_state = "0-2"
 	},
 /obj/machinery/light_switch{
 	pixel_x = 24
@@ -435,11 +442,10 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/cobweb2,
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor,
 /area/ship/scrap/maintenance/lower)
@@ -453,7 +459,7 @@
 	dir = 8;
 	icon_state = "bulb1"
 	},
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
@@ -500,11 +506,10 @@
 /obj/structure/sign/deck/second{
 	pixel_x = -32
 	},
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor,
 /area/ship/scrap/maintenance/lower)
@@ -512,13 +517,9 @@
 /obj/machinery/power/apc/derelict{
 	dir = 1
 	},
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d2 = 2;
-	icon_state = "0-2";
-	pixel_y = 1
-	},
-/obj/machinery/light_switch{
-	pixel_x = -24
+	icon_state = "0-2"
 	},
 /obj/effect/floor_decal/corner/beige{
 	dir = 5;
@@ -593,7 +594,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 1;
 	d2 = 4;
 	icon_state = "1-4"
@@ -610,11 +611,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor,
 /area/ship/scrap/gambling)
@@ -625,14 +625,15 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
-/obj/structure/cable{
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 8;
 	icon_state = "2-8"
 	},
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor,
 /area/ship/scrap/maintenance/lower)
@@ -645,24 +646,18 @@
 	dir = 9;
 	icon_state = "corner_white"
 	},
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 1;
 	d2 = 4;
 	icon_state = "1-4"
 	},
 /turf/simulated/floor/tiled,
 /area/ship/scrap/cargo/lower)
-"bq" = (
-/obj/structure/cable{
+"br" = (
+/obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
-	},
-/turf/simulated/floor/tiled,
-/area/ship/scrap/cargo/lower)
-"br" = (
-/obj/structure/cable{
-	icon_state = "6-8"
 	},
 /turf/simulated/floor/tiled,
 /area/ship/scrap/cargo/lower)
@@ -670,11 +665,21 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
 	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/tiled,
 /area/ship/scrap/cargo/lower)
 "bt" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
+	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled,
 /area/ship/scrap/cargo/lower)
@@ -689,19 +694,28 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
-/turf/simulated/floor/tiled,
-/area/ship/scrap/cargo/lower)
-"bv" = (
-/obj/structure/cable{
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/structure/cable/green{
 	d1 = 2;
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+/turf/simulated/floor/tiled,
+/area/ship/scrap/cargo/lower)
+"bv" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -709,15 +723,19 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
 /turf/simulated/floor,
 /area/ship/scrap/maintenance/lower)
 "bw" = (
 /obj/machinery/door/airlock/autoname/bearcat,
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -734,7 +752,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 1;
 	d2 = 8;
 	icon_state = "1-8"
@@ -792,11 +810,10 @@
 "bE" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor,
 /area/ship/scrap/maintenance/lower)
@@ -822,9 +839,6 @@
 /turf/simulated/floor/tiled,
 /area/ship/scrap/cargo/lower)
 "bH" = (
-/obj/structure/cable{
-	icon_state = "4-9"
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
@@ -832,9 +846,6 @@
 /area/ship/scrap/cargo/lower)
 "bI" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/cable{
-	icon_state = "6-8"
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -856,19 +867,13 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor/tiled,
-/area/ship/scrap/cargo/lower)
-"bK" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
-/turf/simulated/floor,
-/area/ship/scrap/maintenance/lower)
+/turf/simulated/floor/tiled,
+/area/ship/scrap/cargo/lower)
 "bL" = (
 /obj/machinery/alarm{
 	dir = 4;
@@ -944,8 +949,10 @@
 	icon_state = "warningcorner"
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/cable{
-	icon_state = "2-9"
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
 	},
 /obj/machinery/light/small{
 	dir = 4
@@ -961,22 +968,14 @@
 	icon_state = "1-2";
 	pixel_y = 0
 	},
-/obj/item/device/radio/intercom/map_preset/bearcat{
-	dir = 8;
-	pixel_x = 22
-	},
-/obj/structure/cable{
+/obj/machinery/atmospherics/pipe/zpipe/up/scrubbers,
+/obj/machinery/atmospherics/pipe/zpipe/up/supply,
+/obj/structure/cable/green{
 	d1 = 16;
 	d2 = 0;
 	icon_state = "16-0"
 	},
-/obj/structure/cable{
-	d2 = 2;
-	icon_state = "0-2";
-	pixel_y = 1
-	},
-/obj/machinery/atmospherics/pipe/zpipe/up/scrubbers,
-/obj/machinery/atmospherics/pipe/zpipe/up/supply,
+/obj/structure/cable/green,
 /turf/simulated/floor,
 /area/ship/scrap/maintenance/lower)
 "bV" = (
@@ -995,10 +994,9 @@
 /turf/simulated/floor,
 /area/ship/scrap/broken2)
 "bY" = (
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d2 = 2;
-	icon_state = "0-2";
-	pixel_y = 1
+	icon_state = "0-2"
 	},
 /obj/machinery/light_switch{
 	pixel_x = 24
@@ -1017,11 +1015,10 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /obj/effect/decal/cleanable/cobweb,
 /obj/effect/decal/cleanable/cobweb2,
@@ -1080,7 +1077,7 @@
 	dir = 8;
 	icon_state = "warning"
 	},
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
@@ -1096,22 +1093,15 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
-	},
 /turf/simulated/floor,
 /area/ship/scrap/maintenance/lower)
 "ch" = (
 /turf/simulated/wall,
 /area/ship/scrap/crew/dorms2)
 "ci" = (
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d2 = 2;
-	icon_state = "0-2";
-	pixel_y = 1
+	icon_state = "0-2"
 	},
 /obj/machinery/light_switch{
 	pixel_x = -24
@@ -1188,7 +1178,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 1;
 	d2 = 4;
 	icon_state = "1-4"
@@ -1204,11 +1194,10 @@
 	dir = 4
 	},
 /obj/item/taperoll/engineering/applied,
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor,
 /area/ship/scrap/broken2)
@@ -1219,13 +1208,14 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 4
 	},
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
-/obj/structure/cable{
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 8;
 	icon_state = "2-8"
 	},
 /turf/simulated/floor,
@@ -1270,13 +1260,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 8
 	},
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
-	},
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 2;
 	d2 = 4;
 	icon_state = "2-4"
@@ -1291,11 +1275,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/ship/scrap/crew/dorms2)
@@ -1306,7 +1289,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 1;
 	d2 = 8;
 	icon_state = "1-8"
@@ -1357,7 +1340,7 @@
 	pixel_x = 24;
 	req_access = newlist()
 	},
-/obj/item/stack/cable_coil/random,
+/obj/item/stack/cable_coil/green,
 /turf/simulated/floor,
 /area/ship/scrap/broken2)
 "cG" = (
@@ -1391,6 +1374,9 @@
 	level = 2
 	},
 /obj/item/weapon/storage/briefcase,
+/obj/machinery/light_switch{
+	pixel_y = -25
+	},
 /turf/simulated/floor/tiled/dark,
 /area/ship/scrap/crew/dorms2)
 "cK" = (
@@ -1411,11 +1397,10 @@
 "cO" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /obj/machinery/door/airlock/autoname/bearcat,
 /turf/simulated/floor,
@@ -1477,7 +1462,7 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
@@ -1501,16 +1486,8 @@
 /turf/simulated/floor/tiled,
 /area/ship/scrap/broken1)
 "cX" = (
-/obj/structure/cable{
-	d2 = 2;
-	icon_state = "0-2";
-	pixel_y = 1
-	},
 /obj/machinery/light_switch{
 	pixel_x = 24
-	},
-/obj/machinery/power/apc/derelict{
-	dir = 1
 	},
 /obj/machinery/organ_printer/robot/mapped,
 /obj/item/device/radio/intercom/map_preset/bearcat{
@@ -1527,11 +1504,10 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor,
 /area/ship/scrap/maintenance/lower)
@@ -1585,7 +1561,7 @@
 	dir = 6;
 	icon_state = "corner_white"
 	},
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
@@ -1604,11 +1580,10 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /turf/simulated/floor,
 /area/ship/scrap/maintenance/lower)
@@ -1616,13 +1591,9 @@
 /turf/simulated/wall,
 /area/ship/scrap/crew/dorms3)
 "dh" = (
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d2 = 2;
-	icon_state = "0-2";
-	pixel_y = 1
-	},
-/obj/machinery/light_switch{
-	pixel_x = -24
+	icon_state = "0-2"
 	},
 /obj/effect/floor_decal/corner/beige{
 	dir = 5;
@@ -1684,6 +1655,11 @@
 	dir = 5
 	},
 /obj/item/device/robotanalyzer,
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
 /turf/simulated/floor,
 /area/ship/scrap/broken1)
 "dm" = (
@@ -1693,10 +1669,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 4;
-	icon_state = "1-4"
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
 	},
 /turf/simulated/floor,
 /area/ship/scrap/broken1)
@@ -1709,11 +1685,10 @@
 	dir = 4
 	},
 /obj/item/taperoll/engineering/applied,
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor,
 /area/ship/scrap/broken1)
@@ -1739,7 +1714,7 @@
 	dir = 6;
 	icon_state = "corner_white"
 	},
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
@@ -1757,11 +1732,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/ship/scrap/crew/dorms3)
@@ -1772,7 +1746,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 1;
 	d2 = 8;
 	icon_state = "1-8"
@@ -1824,6 +1798,11 @@
 	dir = 1;
 	level = 2
 	},
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
 /turf/simulated/floor/tiled,
 /area/ship/scrap/broken1)
 "dz" = (
@@ -1842,11 +1821,10 @@
 /turf/simulated/floor/tiled,
 /area/ship/scrap/cargo/lower)
 "dB" = (
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -1856,8 +1834,10 @@
 "dC" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/structure/cable{
-	icon_state = "1-10"
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
 	},
 /turf/simulated/floor,
 /area/ship/scrap/maintenance/lower)
@@ -1882,6 +1862,9 @@
 	level = 2
 	},
 /obj/structure/holostool,
+/obj/machinery/light_switch{
+	pixel_y = -25
+	},
 /turf/simulated/floor/tiled/dark,
 /area/ship/scrap/crew/dorms3)
 "dG" = (
@@ -1900,6 +1883,8 @@
 /area/ship/scrap/broken1)
 "dI" = (
 /obj/item/weapon/stool/padded,
+/obj/machinery/power/apc/derelict,
+/obj/structure/cable/green,
 /turf/simulated/floor/tiled,
 /area/ship/scrap/broken1)
 "dJ" = (
@@ -1920,7 +1905,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 1;
 	d2 = 4;
 	icon_state = "1-4"
@@ -1939,11 +1924,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor,
 /area/ship/scrap/maintenance/lower)
@@ -1954,16 +1938,15 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor,
 /area/ship/scrap/maintenance/lower)
 "dN" = (
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d2 = 4;
 	icon_state = "0-4"
 	},
@@ -1974,11 +1957,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor,
 /area/ship/scrap/maintenance/lower)
@@ -1987,7 +1969,7 @@
 	dir = 1;
 	icon_state = "bulb1"
 	},
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
@@ -2001,12 +1983,14 @@
 /turf/simulated/floor,
 /area/ship/scrap/maintenance/lower)
 "dP" = (
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 2;
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/obj/structure/cable{
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 8;
 	icon_state = "2-8"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -2015,6 +1999,11 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 1
+	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
 	},
 /turf/simulated/floor,
 /area/ship/scrap/maintenance/lower)
@@ -2025,7 +2014,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
@@ -2033,18 +2022,17 @@
 /turf/simulated/floor,
 /area/ship/scrap/maintenance/lower)
 "dR" = (
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 1;
 	d2 = 8;
 	icon_state = "1-8"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor,
 /area/ship/scrap/maintenance/lower)
@@ -2056,8 +2044,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/structure/cable{
-	icon_state = "5-8"
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
 	},
 /turf/simulated/floor,
 /area/ship/scrap/maintenance/lower)
@@ -2072,6 +2062,11 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
 /turf/simulated/floor,
 /area/ship/scrap/maintenance/lower)
 "dU" = (
@@ -2084,11 +2079,10 @@
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/maintenance/storage)
 "dX" = (
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -2204,7 +2198,7 @@
 /turf/simulated/floor,
 /area/ship/scrap/maintenance/storage)
 "ei" = (
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
@@ -2224,36 +2218,35 @@
 /area/ship/scrap/maintenance/eva)
 "ek" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/light/small{
-	dir = 1;
-	icon_state = "bulb1"
+/obj/machinery/power/apc/derelict{
+	dir = 1
 	},
 /obj/structure/table/rack,
 /obj/item/weapon/tank/jetpack/oxygen,
 /obj/item/weapon/tank/jetpack/oxygen,
+/obj/structure/cable/green{
+	d2 = 2;
+	icon_state = "0-2"
+	},
 /turf/simulated/floor,
 /area/ship/scrap/maintenance/eva)
 "el" = (
-/obj/machinery/power/apc/derelict{
-	dir = 1
-	},
 /obj/effect/floor_decal/corner/yellow{
 	dir = 6;
 	icon_state = "corner_white"
 	},
-/obj/structure/cable{
-	d2 = 2;
-	icon_state = "0-2";
-	pixel_y = 1
-	},
 /obj/machinery/atmospherics/portables_connector,
 /obj/machinery/portable_atmospherics/canister/air,
+/obj/machinery/light/small{
+	dir = 1;
+	icon_state = "bulb1"
+	},
 /turf/simulated/floor/tiled,
 /area/ship/scrap/maintenance/eva)
 "em" = (
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor,
-/area/space)
+/area/ship/scrap/maintenance/eva)
 "en" = (
 /obj/machinery/light/small{
 	dir = 8
@@ -2268,7 +2261,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 2;
 	d2 = 4;
 	icon_state = "2-4"
@@ -2282,11 +2275,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor,
 /area/ship/scrap/maintenance/techstorage)
@@ -2298,11 +2290,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
-	icon_state = "4-8";
-	pixel_x = 0
+	icon_state = "4-8"
 	},
 /turf/simulated/floor,
 /area/ship/scrap/maintenance/techstorage)
@@ -2318,8 +2309,15 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/structure/cable{
-	icon_state = "6-8"
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
 	},
 /turf/simulated/floor/tiled,
 /area/ship/scrap/maintenance/storage)
@@ -2332,6 +2330,11 @@
 	dir = 1;
 	icon_state = "map-scrubbers"
 	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/tiled,
 /area/ship/scrap/maintenance/storage)
 "et" = (
@@ -2339,6 +2342,11 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/tiled,
 /area/ship/scrap/maintenance/storage)
 "eu" = (
@@ -2349,21 +2357,33 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/tiled,
 /area/ship/scrap/maintenance/storage)
 "ev" = (
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
+	d2 = 4;
+	icon_state = "1-4"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
 /turf/simulated/floor/tiled,
 /area/ship/scrap/maintenance/storage)
 "ew" = (
-/obj/structure/cable{
-	icon_state = "4-10"
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
 	},
 /obj/machinery/door/airlock/autoname/bearcat,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2375,7 +2395,7 @@
 /turf/simulated/floor/tiled,
 /area/ship/scrap/maintenance/eva)
 "ex" = (
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
@@ -2390,10 +2410,10 @@
 /turf/simulated/floor/tiled,
 /area/ship/scrap/maintenance/eva)
 "ey" = (
-/obj/structure/cable{
-	d1 = 4;
+/obj/structure/cable/green{
+	d1 = 1;
 	d2 = 8;
-	icon_state = "4-8"
+	icon_state = "1-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
@@ -2404,11 +2424,6 @@
 /obj/effect/floor_decal/corner/yellow{
 	dir = 6;
 	icon_state = "corner_white"
-	},
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 5;
@@ -2524,7 +2539,7 @@
 	name = "south bump";
 	pixel_y = -24
 	},
-/obj/structure/cable,
+/obj/structure/cable/green,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
 	level = 2
@@ -2554,52 +2569,25 @@
 	icon_state = "corner_white"
 	},
 /obj/structure/table/rack,
-/obj/structure/cable{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
 /area/ship/scrap/maintenance/storage)
 "eI" = (
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/structure/cable{
-	icon_state = "4-9"
-	},
 /turf/simulated/floor/tiled,
 /area/ship/scrap/maintenance/storage)
 "eJ" = (
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
 /turf/simulated/floor/tiled,
 /area/ship/scrap/maintenance/storage)
 "eK" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8";
-	pixel_y = 0
-	},
 /turf/simulated/floor/tiled,
 /area/ship/scrap/maintenance/storage)
 "eL" = (
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
-	},
-/obj/structure/cable{
-	icon_state = "5-8"
-	},
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor,
 /area/ship/scrap/maintenance/storage)
@@ -2641,7 +2629,7 @@
 /obj/item/device/flashlight,
 /obj/item/weapon/storage/box/lights/bulbs,
 /obj/item/weapon/storage/box/lights/mixed,
-/obj/structure/cable,
+/obj/structure/cable/green,
 /obj/machinery/power/apc/derelict{
 	name = "Tools Storage APC"
 	},
@@ -2741,6 +2729,14 @@
 /obj/random/advdevice,
 /turf/simulated/floor/tiled,
 /area/ship/scrap/cargo/lower)
+"gV" = (
+/obj/effect/paint/brown,
+/turf/simulated/wall/r_wall,
+/area/ship/scrap/crew/dorms1)
+"kz" = (
+/obj/effect/paint/brown,
+/turf/simulated/wall/r_wall,
+/area/ship/scrap/broken2)
 "kH" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
@@ -2749,7 +2745,7 @@
 /area/space)
 "kV" = (
 /turf/simulated/floor/reinforced/airless,
-/area/space)
+/area/ship/scrap/gambling)
 "lQ" = (
 /obj/machinery/light_switch{
 	pixel_y = 25
@@ -2760,12 +2756,33 @@
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/broken1)
+"tc" = (
+/turf/simulated/floor/reinforced/airless,
+/area/ship/scrap/crew/dorms1)
+"tW" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/effect/floor_decal/industrial/loading{
+	dir = 1;
+	icon_state = "loadingarea"
+	},
+/obj/machinery/power/apc/derelict,
+/obj/structure/cable/green{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/turf/simulated/floor/tiled,
+/area/ship/scrap/escape_port)
 "va" = (
-/obj/structure/cable{
+/obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
-	icon_state = "1-2";
-	pixel_y = 0
+	icon_state = "1-2"
+	},
+/obj/item/device/radio/intercom/map_preset/bearcat{
+	dir = 8;
+	pixel_x = 22
 	},
 /turf/simulated/floor,
 /area/ship/scrap/maintenance/lower)
@@ -2795,6 +2812,9 @@
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/maintenance/eva)
+"En" = (
+/turf/simulated/floor/reinforced/airless,
+/area/ship/scrap/crew/dorms3)
 "EP" = (
 /obj/machinery/door/airlock/autoname/bearcat,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -2803,12 +2823,43 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor,
 /area/ship/scrap/cargo/lower)
+"Gr" = (
+/turf/simulated/floor/reinforced/airless,
+/area/ship/scrap/crew/dorms2)
 "GU" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/cargo/lower)
+"LF" = (
+/obj/effect/paint/brown,
+/turf/simulated/wall/r_wall,
+/area/ship/scrap/crew/dorms2)
+"NN" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/turf/simulated/floor,
+/area/ship/scrap/maintenance/lower)
 "Ro" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
@@ -2820,10 +2871,17 @@
 /obj/machinery/light/small/red,
 /turf/simulated/floor/tiled,
 /area/ship/scrap/escape_star)
+"Sf" = (
+/obj/effect/paint/brown,
+/turf/simulated/wall/r_wall,
+/area/ship/scrap/maintenance/storage)
+"Ul" = (
+/turf/simulated/floor/reinforced/airless,
+/area/ship/scrap/maintenance/storage)
 "UZ" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
-/area/space)
+/area/ship/scrap/gambling)
 
 (1,1,1) = {"
 aa
@@ -8619,15 +8677,15 @@ aa
 aa
 aa
 aa
-UZ
-UZ
-UZ
+vY
+vY
+vY
 UZ
 UZ
 kV
 UZ
 UZ
-UZ
+kz
 aa
 aa
 aa
@@ -8740,7 +8798,7 @@ aa
 aa
 aa
 aa
-UZ
+vY
 vY
 ah
 ah
@@ -8758,10 +8816,10 @@ dk
 oj
 oj
 oj
-UZ
-UZ
-UZ
-UZ
+yN
+yN
+yN
+yN
 aa
 aa
 aa
@@ -8884,7 +8942,7 @@ ea
 ea
 ea
 yN
-UZ
+yN
 aa
 aa
 aa
@@ -9006,7 +9064,7 @@ eb
 en
 eE
 ea
-UZ
+yN
 aa
 aa
 aa
@@ -9128,7 +9186,7 @@ ec
 eo
 eF
 ea
-UZ
+yN
 aa
 aa
 aa
@@ -9231,7 +9289,7 @@ aa
 kH
 ai
 ar
-aA
+tW
 aL
 aK
 bm
@@ -9250,8 +9308,8 @@ ed
 ep
 eG
 ea
-UZ
-UZ
+yN
+yN
 aa
 aa
 aa
@@ -9372,8 +9430,8 @@ dU
 eq
 ea
 ea
-dW
-UZ
+ea
+yN
 aa
 aa
 aa
@@ -9472,8 +9530,8 @@ aa
 aa
 aa
 aa
-UZ
-vY
+GU
+GU
 al
 al
 ao
@@ -9495,7 +9553,7 @@ er
 eH
 eQ
 dW
-UZ
+Sf
 aa
 aa
 aa
@@ -9595,7 +9653,7 @@ aa
 aa
 ac
 ac
-UZ
+GU
 al
 aC
 aN
@@ -9617,7 +9675,7 @@ es
 eI
 eR
 dW
-UZ
+Sf
 aa
 aa
 aa
@@ -9722,7 +9780,7 @@ at
 aD
 aO
 gb
-bq
+br
 bG
 bP
 cc
@@ -9739,7 +9797,7 @@ et
 eJ
 eS
 eY
-kV
+Ul
 aa
 aa
 aa
@@ -9861,7 +9919,7 @@ eu
 eK
 eT
 dW
-UZ
+Sf
 aa
 aa
 aa
@@ -9983,7 +10041,7 @@ ev
 eL
 eU
 dW
-UZ
+Sf
 aa
 aa
 aa
@@ -10105,7 +10163,7 @@ ew
 dZ
 dZ
 dZ
-UZ
+Bu
 aa
 aa
 aa
@@ -10227,7 +10285,7 @@ ex
 eM
 eV
 dZ
-UZ
+Bu
 aa
 aa
 aa
@@ -10326,7 +10384,7 @@ aa
 aa
 aa
 aa
-UZ
+GU
 GU
 ao
 ao
@@ -10349,7 +10407,7 @@ ey
 eN
 eW
 dY
-UZ
+Bu
 aa
 aa
 aa
@@ -10459,10 +10517,10 @@ va
 bU
 cg
 cx
-bK
+dC
 cO
 df
-cx
+NN
 dC
 dT
 dZ
@@ -10471,7 +10529,7 @@ ez
 eO
 eX
 dY
-UZ
+Bu
 aa
 aa
 aa
@@ -10573,7 +10631,7 @@ aa
 kH
 ap
 ax
-aI
+an
 aT
 aT
 bw
@@ -10593,7 +10651,7 @@ eA
 dZ
 dZ
 Bu
-UZ
+Bu
 aa
 aa
 aa
@@ -10709,12 +10767,12 @@ dh
 dt
 dE
 xc
-UZ
+Bu
 Bu
 eB
 Bu
-UZ
-UZ
+Bu
+Bu
 aa
 aa
 aa
@@ -11058,7 +11116,7 @@ aa
 aa
 aa
 aa
-UZ
+aq
 aq
 ay
 ay
@@ -11181,22 +11239,22 @@ aa
 aa
 aa
 aa
-UZ
-UZ
-UZ
-UZ
-UZ
-kV
-UZ
-UZ
-UZ
-kV
-UZ
-UZ
-UZ
-kV
-UZ
-UZ
+aq
+aq
+aq
+gV
+gV
+tc
+gV
+gV
+LF
+Gr
+LF
+LF
+xc
+En
+xc
+xc
 aa
 aa
 aa
