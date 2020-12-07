@@ -85,11 +85,11 @@ var/list/_client_preferences_by_type
 *********************/
 
 /datum/client_preference/play_admin_midis
-	description ="Play admin midis"
+	description = "Play admin midis"
 	key = "SOUND_MIDI"
 
 /datum/client_preference/play_lobby_music
-	description ="Play lobby music"
+	description = "Play lobby music"
 	key = "SOUND_LOBBY"
 
 /datum/client_preference/play_lobby_music/changed(var/mob/preference_mob, var/new_value)
@@ -100,7 +100,7 @@ var/list/_client_preferences_by_type
 		sound_to(preference_mob, sound(null, repeat = 0, wait = 0, volume = 85, channel = GLOB.lobby_sound_channel))
 
 /datum/client_preference/play_ambiance
-	description ="Play ambience"
+	description = "Play ambience"
 	key = "SOUND_AMBIENCE"
 
 /datum/client_preference/play_ambiance/changed(var/mob/preference_mob, var/new_value)
@@ -109,17 +109,17 @@ var/list/_client_preferences_by_type
 		sound_to(preference_mob, sound(null, repeat = 0, wait = 0, volume = 0, channel = GLOB.ambience_sound_channel))
 
 /datum/client_preference/ghost_ears
-	description ="Ghost ears"
+	description = "Ghost ears"
 	key = "CHAT_GHOSTEARS"
 	options = list(GLOB.PREF_ALL_SPEECH, GLOB.PREF_NEARBY)
 
 /datum/client_preference/ghost_sight
-	description ="Ghost sight"
+	description = "Ghost sight"
 	key = "CHAT_GHOSTSIGHT"
 	options = list(GLOB.PREF_ALL_EMOTES, GLOB.PREF_NEARBY)
 
 /datum/client_preference/ghost_radio
-	description ="Ghost radio"
+	description = "Ghost radio"
 	key = "CHAT_GHOSTRADIO"
 	options = list(GLOB.PREF_ALL_CHATTER, GLOB.PREF_NEARBY)
 
@@ -129,17 +129,17 @@ var/list/_client_preferences_by_type
 	options = list(GLOB.PREF_SHORTHAND, GLOB.PREF_FULL, GLOB.PREF_OFF)
 
 /datum/client_preference/ghost_follow_link_length
-	description ="Ghost Follow Links"
+	description = "Ghost Follow Links"
 	key = "CHAT_GHOSTFOLLOWLINKLENGTH"
 	options = list(GLOB.PREF_SHORT, GLOB.PREF_LONG)
 
 /datum/client_preference/chat_tags
-	description ="Chat tags"
+	description = "Chat tags"
 	key = "CHAT_SHOWICONS"
 	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
 /datum/client_preference/show_typing_indicator
-	description ="Typing indicator"
+	description = "Typing indicator"
 	key = "SHOW_TYPING"
 	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
@@ -148,12 +148,12 @@ var/list/_client_preferences_by_type
 		preference_mob.remove_typing_indicator()
 
 /datum/client_preference/show_ooc
-	description ="OOC chat"
+	description = "OOC chat"
 	key = "CHAT_OOC"
 	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
 /datum/client_preference/show_aooc
-	description ="AOOC chat"
+	description = "AOOC chat"
 	key = "CHAT_AOOC"
 	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
@@ -211,7 +211,7 @@ var/list/_client_preferences_by_type
 	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
 /datum/client_preference/play_instruments
-	description ="Play instruments"
+	description = "Play instruments"
 	key = "SOUND_INSTRUMENTS"
 
 /datum/client_preference/give_personal_goals
@@ -225,7 +225,7 @@ var/list/_client_preferences_by_type
 	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
 /datum/client_preference/examine_messages
-	description ="Examining messages"
+	description = "Examining messages"
 	key = "EXAMINE_MESSAGES"
 	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
@@ -273,7 +273,7 @@ var/list/_client_preferences_by_type
 	options = list(GLOB.PREF_HEAR, GLOB.PREF_SILENT)
 
 /datum/client_preference/staff/show_rlooc
-	description ="Remote LOOC chat"
+	description = "Remote LOOC chat"
 	key = "CHAT_RLOOC"
 	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
