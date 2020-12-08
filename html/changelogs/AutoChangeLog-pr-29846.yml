@@ -1,0 +1,4 @@
+author: "Textor45"
+delete-after: True
+changes: 
+  - tweak: "Switching off help intent will allow forensic tools to be used on storage containers without storing the tool."
