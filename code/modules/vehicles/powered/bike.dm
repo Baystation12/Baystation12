@@ -1,4 +1,4 @@
-/obj/vehicle/bike/
+/obj/vehicle/powered/bike/
 	name = "space-bike"
 	desc = "Space wheelies! Woo!"
 	icon = 'icons/obj/bike.dmi'
@@ -25,7 +25,7 @@
 	var/engine_type
 	var/prefilled = 0
 
-/obj/vehicle/bike/New()
+/obj/vehicle/powered/bike/New()
 	..()
 	if(engine_type)
 		load_engine(new engine_type(src.loc))
@@ -33,7 +33,7 @@
 			engine.prefill()
 	update_icon()
 
-/obj/vehicle/bike/verb/toggle()
+/obj/vehicle/powered/bike/verb/toggle()
 	set name = "Toggle Engine"
 	set category = "Object"
 	set src in view(0)
@@ -48,7 +48,7 @@
 	else
 		turn_off()
 
-/obj/vehicle/bike/verb/kickstand()
+/obj/vehicle/powered/bike/verb/kickstand()
 	set name = "Toggle Kickstand"
 	set category = "Object"
 	set src in view(0)
@@ -68,7 +68,7 @@
 	kickstand = !kickstand
 	anchored = (kickstand || on)
 
-/obj/vehicle/bike/proc/load_engine(var/obj/item/weapon/engine/E, var/mob/user)
+/obj/vehicle/powered/bike/proc/load_engine(var/obj/item/weapon/engine/E, var/mob/user)
 	if(engine)
 		return
 	if(user && !user.unEquip(E))
@@ -81,7 +81,7 @@
 	if(trail)
 		trail.set_up(src)
 
-/obj/vehicle/bike/proc/unload_engine()
+/obj/vehicle/powered/bike/proc/unload_engine()
 	if(!engine)
 		return
 	engine.dropInto(loc)
@@ -90,22 +90,22 @@
 		qdel(trail)
 	trail = null
 
-/obj/vehicle/bike/load(var/atom/movable/C)
+/obj/vehicle/powered/bike/load(var/atom/movable/C)
 	var/mob/living/M = C
 	if(!istype(M)) return 0
 	if(M.buckled || M.restrained() || !Adjacent(M) || !M.Adjacent(src))
 		return 0
 	return ..(M)
 
-/obj/vehicle/bike/emp_act(var/severity)
+/obj/vehicle/powered/bike/emp_act(var/severity)
 	if(engine)
 		engine.emp_act(severity)
 	..()
 
-/obj/vehicle/bike/insert_cell(var/obj/item/weapon/cell/C, var/mob/living/carbon/human/H)
+/obj/vehicle/powered/bike/insert_cell(var/obj/item/weapon/cell/C, var/mob/living/carbon/human/H)
 	return
 
-/obj/vehicle/bike/attackby(obj/item/W as obj, mob/user as mob)
+/obj/vehicle/powered/bike/attackby(obj/item/W as obj, mob/user as mob)
 	if(open)
 		if(istype(W, /obj/item/weapon/engine))
 			if(engine)
@@ -122,17 +122,17 @@
 			return 1
 	return ..()
 
-/obj/vehicle/bike/MouseDrop_T(var/atom/movable/C, mob/user as mob)
+/obj/vehicle/powered/bike/MouseDrop_T(var/atom/movable/C, mob/user as mob)
 	if(!load(C))
 		to_chat(user, "<span class='warning'> You were unable to load \the [C] onto \the [src].</span>")
 		return
 
-/obj/vehicle/bike/attack_hand(var/mob/user as mob)
+/obj/vehicle/powered/bike/attack_hand(var/mob/user as mob)
 	if(user == load)
 		unload(load)
 		to_chat(user, "You unbuckle yourself from \the [src]")
 
-/obj/vehicle/bike/relaymove(mob/user, direction)
+/obj/vehicle/powered/bike/relaymove(mob/user, direction)
 	if(user != load || !on)
 		return
 	if(user.incapacitated())
@@ -141,7 +141,7 @@
 		return
 	return Move(get_step(src, direction))
 
-/obj/vehicle/bike/Move(var/turf/destination)
+/obj/vehicle/powered/bike/Move(var/turf/destination)
 	if(kickstand || (world.time <= l_move_time + move_delay)) return
 	//these things like space, not turf. Dragging shouldn't weigh you down.
 	if(!pulledby)
@@ -158,7 +158,7 @@
 			return 0
 	return ..()
 
-/obj/vehicle/bike/turn_on()
+/obj/vehicle/powered/bike/turn_on()
 	if(!engine || on)
 		return
 
@@ -173,7 +173,7 @@
 		pulledby.stop_pulling()
 	..()
 
-/obj/vehicle/bike/turn_off()
+/obj/vehicle/powered/bike/turn_off()
 	if(!on)
 		return
 	if(engine)
@@ -188,13 +188,13 @@
 
 	..()
 
-/obj/vehicle/bike/bullet_act(var/obj/item/projectile/Proj)
+/obj/vehicle/powered/bike/bullet_act(var/obj/item/projectile/Proj)
 	if(buckled_mob && prob((100-protection_percent)))
 		buckled_mob.bullet_act(Proj)
 		return
 	..()
 
-/obj/vehicle/bike/on_update_icon()
+/obj/vehicle/powered/bike/on_update_icon()
 	overlays.Cut()
 
 	if(on)
@@ -205,21 +205,21 @@
 	..()
 
 
-/obj/vehicle/bike/Destroy()
+/obj/vehicle/powered/bike/Destroy()
 	qdel(trail)
 	qdel(engine)
 	..()
 
 
-/obj/vehicle/bike/thermal
+/obj/vehicle/powered/bike/thermal
 	engine_type = /obj/item/weapon/engine/thermal
 	prefilled = 1
 
-/obj/vehicle/bike/electric
+/obj/vehicle/powered/bike/electric
 	engine_type = /obj/item/weapon/engine/electric
 	prefilled = 1
 
-/obj/vehicle/bike/gyroscooter
+/obj/vehicle/powered/bike/gyroscooter
 	name = "gyroscooter"
 	desc = "A fancy space scooter."
 	icon_state = "gyroscooter_off"
