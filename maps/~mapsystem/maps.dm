@@ -147,8 +147,6 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			FACTION_DAIS,
 			FACTION_EXPEDITIONARY,
 			FACTION_FLEET,
-			FACTION_PCRC,
-			FACTION_SAARE,
 			FACTION_OTHER
 		),
 		TAG_CULTURE = list(

@@ -133,7 +133,28 @@
 	allowed_roles = list(/datum/job/pathfinder, /datum/job/explorer)
 
 /datum/gear/tactical/armor_deco
+	display_name = "armor customization"
+	path = /obj/item/clothing/accessory/armor/tag
 	allowed_roles = ARMORED_ROLES
+
+/datum/gear/tactical/armor_deco/New()
+	..()
+	var/armor_deco = list()
+	armor_deco["O+ blood patch"] = /obj/item/clothing/accessory/armor/tag/opos
+	armor_deco["O- blood patch"] = /obj/item/clothing/accessory/armor/tag/oneg
+	armor_deco["A+ blood patch"] = /obj/item/clothing/accessory/armor/tag/apos
+	armor_deco["A- blood patch"] = /obj/item/clothing/accessory/armor/tag/aneg
+	armor_deco["B+ blood patch"] = /obj/item/clothing/accessory/armor/tag/bpos
+	armor_deco["B- blood patch"] = /obj/item/clothing/accessory/armor/tag/bneg
+	armor_deco["AB+ blood patch"] = /obj/item/clothing/accessory/armor/tag/abpos
+	armor_deco["AB- blood patch"] = /obj/item/clothing/accessory/armor/tag/abneg
+	armor_deco["SCG Armor Patch"] = /obj/item/clothing/accessory/armor/tag/solgov
+	armor_deco["EC Armor Patch"] = /obj/item/clothing/accessory/armor/tag/solgov/ec
+	armor_deco["POLICE Armor Tag"] = /obj/item/clothing/accessory/armor/tag/solgov/sec
+	armor_deco["AGENT Armor Tag"] = /obj/item/clothing/accessory/armor/tag/solgov/agent
+	armor_deco["MEDIC Armor Tag"] = /obj/item/clothing/accessory/armor/tag/solgov/medic
+	armor_deco["SolGov Armor Tag"] = /obj/item/clothing/accessory/armor/tag/solgov/com
+	gear_tweaks += new/datum/gear_tweak/path(armor_deco)
 
 /datum/gear/tactical/press_tag
 	display_name = "Press tag"
@@ -141,7 +162,17 @@
 	allowed_roles = list(/datum/job/assistant)
 
 /datum/gear/tactical/helm_covers
+	display_name = "helmet covers"
+	path = /obj/item/clothing/accessory/armor/helmcover
 	allowed_roles = ARMORED_ROLES
+
+/datum/gear/tactical/helm_covers/New()
+	..()
+	var/helm_covers = list()
+	helm_covers["blue helmet cover"] = /obj/item/clothing/accessory/armor/helmcover/blue
+	helm_covers["navy helmet cover"] = /obj/item/clothing/accessory/armor/helmcover/navy
+	helm_covers["peacekeeper helmet cover"] = /obj/item/clothing/accessory/armor/helmcover/blue/sol
+	gear_tweaks += new/datum/gear_tweak/path(helm_covers)
 
 /datum/gear/clothing/hawaii
 	allowed_roles = SEMIFORMAL_ROLES

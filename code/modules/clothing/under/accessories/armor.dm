@@ -317,7 +317,7 @@
 	icon_override = 'icons/mob/onmob/onmob_modular_armor.dmi'
 	icon = 'icons/obj/clothing/obj_suit_modular_armor.dmi'
 	accessory_icons = list(slot_tie_str = 'icons/mob/onmob/onmob_modular_armor.dmi', slot_wear_suit_str = 'icons/mob/onmob/onmob_modular_armor.dmi')
-	icon_state = "null"
+	icon_state = "tag"
 	slot = ACCESSORY_SLOT_ARMOR_M
 	w_class = ITEM_SIZE_TINY
 
@@ -388,7 +388,7 @@
 	icon_override = 'icons/mob/onmob/onmob_modular_armor.dmi'
 	icon = 'icons/obj/clothing/obj_suit_modular_armor.dmi'
 	accessory_icons = list(slot_tie_str = 'icons/mob/onmob/onmob_modular_armor.dmi', slot_head_str = 'icons/mob/onmob/onmob_modular_armor.dmi')
-	icon_state = "null"
+	icon_state = "helmcover"
 	slot = ACCESSORY_SLOT_HELM_C
 	body_location = HEAD
 

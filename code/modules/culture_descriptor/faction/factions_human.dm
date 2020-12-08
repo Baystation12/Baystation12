@@ -113,24 +113,6 @@
 	economic_power = 1.3
 	subversive_potential = 15
 
-/decl/cultural_info/faction/pcrc
-	name = FACTION_PCRC
-	description = "Proxima Centauri Risk Control, often known as PCRC, is one of the largest suppliers of private security in Sol Space. \
-	PCRC handles numerous government, private and corporate contracts and provides a variety of services ranging from private law enforcement, \
-	security, close protection, asset protection, search and rescue and peacekeeping and escort duties. A relatively quiet and new company, \
-	it has quickly established itself as a reliable and effective provider of security solutions. This has often put it at odds with its main \
-	competitor, SAARE."
-	subversive_potential = 15
-
-/decl/cultural_info/faction/saare
-	name = FACTION_SAARE
-	description = "SAARE (Strategic Assault and Asset Retention Enterprises) is a quickly growing Private Military Corporation catering to large \
-	firms requiring discrete military and private security services. The company has taken to hiring skilled veterans from both private and public \
-	military services but have begun instituting training programs to breed their own operatives for the future. Typical assignments for SAARE \
-	contractors include private law enforcement, ship escort, location security, VIP escort, and VIP or asset recovery. In the last decade, the \
-	company has recently signed onto a number of contracts with NanoTrasen to complement their own Asset Protection forces."
-	subversive_potential = 15
-
 /decl/cultural_info/faction/dais
 	name = FACTION_DAIS
 	description = "Deimos Advanced Information Systems (DAIS) is a large corporation specializing in information technology such as computer hardware \

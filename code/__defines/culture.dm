@@ -19,8 +19,6 @@
 #define FACTION_XYNERGY        "Xynergy"
 #define FACTION_FLEET          "SCG Fleet"
 #define FACTION_EXPEDITIONARY  "Expeditionary Corps"
-#define FACTION_PCRC           "Proxima Centauri Risk Control"
-#define FACTION_SAARE          "Strategic Assault and Asset Retention Enterprises"
 #define FACTION_CORPORATE       "Expeditionary Corps Organisation"
 #define FACTION_DAIS           "Deimos Advanced Information Systems"
 #define FACTION_OTHER          "Other Faction"
@@ -160,12 +158,12 @@
 #define CULTURE_UNATHI_SALT_SWAMP     "Salt Swamp Clans"
 #define CULTURE_UNATHI_SPACE          "Space-Faring Clans"
 #define CULTURE_UNATHI_TERSTEN        "Tersten Clans"
- 
+
 #define HOME_SYSTEM_MOGHES          "Moghes"
 #define HOME_SYSTEM_OUERE           "Ouere"
 #define HOME_SYSTEM_UNATHI_TERSTEN  "Tersten - Unathi Clans"
 #define HOME_SYSTEM_OFFWORLD        "Off-world"
- 
+
 #define FACTION_UNATHI_HEGEMONY          "Moghes Hegemony"
 #define FACTION_UNATHI_TERSTEN_HEGEMONY  "Tersten Hegemony"
 #define FACTION_UNATHI_SSEN_UUMA         "Ssen-Uuma Convent"
@@ -174,7 +172,7 @@
 #define FACTION_UNATHI_GRESIS            "Gresis Krukzuz"
 #define FACTION_UNATHI_RAH_ZAKEH         "Rah'Zakeh League"
 #define FACTION_UNATHI_KHARZA            "Kharza Fleet"
- 
+
 #define RELIGION_UNATHI_STRATAGEM    "Grand Stratagem"
 #define RELIGION_UNATHI_PRECURSOR    "Precursor"
 #define RELIGION_UNATHI_VINE         "Hand of the Vine"

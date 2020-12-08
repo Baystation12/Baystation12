@@ -106,18 +106,6 @@
 	path = /obj/item/clothing/suit/armor/pcarrier/navy
 	allowed_branches = list(/datum/mil_branch/fleet, /datum/mil_branch/civilian)
 
-/datum/gear/tactical/pcarrier/misc
-	display_name = "miscellaneous plate carrier selection"
-	allowed_roles = ARMORED_ROLES
-	allowed_branches = CIVILIAN_BRANCHES
-
-/datum/gear/tactical/pcarrier/misc/New()
-	..()
-	var/armors = list()
-	armors["green plate carrier"] = /obj/item/clothing/suit/armor/pcarrier/green
-	armors["tan plate carrier"] = /obj/item/clothing/suit/armor/pcarrier/tan
-	gear_tweaks += new/datum/gear_tweak/path(armors)
-
 /datum/gear/suit/sfp
 	display_name = "Agent's jacket"
 	path = /obj/item/clothing/suit/storage/toggle/agent_jacket
