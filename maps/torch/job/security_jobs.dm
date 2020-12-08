@@ -29,9 +29,13 @@
 	                    SKILL_FORENSICS   = SKILL_MAX)
 	skill_points = 20
 
-	access = list(access_security, access_brig, access_armory, access_forensics_lockers,
-			            access_maint_tunnels, access_external_airlocks, access_emergency_storage,
-			            access_eva, access_sec_doors, access_solgov_crew, access_gun, access_torch_fax)
+	access = list(
+		access_security, access_brig, access_armory, access_forensics_lockers,
+		access_maint_tunnels, access_external_airlocks, access_emergency_storage,
+		access_eva, access_sec_doors, access_solgov_crew, access_gun, access_torch_fax,
+		access_radio_sec
+	)
+
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
@@ -78,10 +82,13 @@
 	                    SKILL_FORENSICS   = SKILL_MAX)
 	skill_points = 20
 
-	access = list(access_security, access_brig, access_forensics_lockers,
-			            access_maint_tunnels, access_emergency_storage,
-			            access_sec_doors, access_solgov_crew, access_morgue,
-			            access_torch_fax)
+	access = list(
+		access_security, access_brig, access_forensics_lockers,
+		access_maint_tunnels, access_emergency_storage,
+		access_sec_doors, access_solgov_crew, access_morgue,
+		access_torch_fax, access_radio_sec
+	)
+
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
@@ -117,9 +124,13 @@
 	                    SKILL_WEAPONS     = SKILL_MAX,
 	                    SKILL_FORENSICS   = SKILL_EXPERT)
 
-	access = list(access_security, access_brig, access_maint_tunnels,
-						access_external_airlocks, access_emergency_storage,
-			            access_eva, access_sec_doors, access_solgov_crew)
+	access = list(
+		access_security, access_brig, access_maint_tunnels,
+		access_external_airlocks, access_emergency_storage,
+		access_eva, access_sec_doors, access_solgov_crew,
+		access_radio_sec
+	)
+
 	minimal_access = list()
 
 	software_on_spawn = list(/datum/computer_file/program/digitalwarrant,
