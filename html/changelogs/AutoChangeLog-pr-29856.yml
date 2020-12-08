@@ -1,0 +1,5 @@
+author: "juxtaposed9930"
+delete-after: True
+changes: 
+  - tweak: "Radio channels on shortwaves now have their own access."
+  - bugfix: "Jobs can now access all their normal comms through shortwaves."
