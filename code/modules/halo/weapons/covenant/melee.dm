@@ -23,7 +23,9 @@
 	edge = 0
 	sharp = 0
 	var/failsafe = 0
+	slot_flags = SLOT_POCKET | SLOT_BELT
 	activate_sound = 'code/modules/halo/sounds/Energysworddeploy.ogg'
+	deactivate_sound = 'code/modules/halo/sounds/Energysworddeactivate.ogg'
 	matter = list("nanolaminate" = 1)
 
 	lunge_dist = ESWORD_LEAP_DIST
