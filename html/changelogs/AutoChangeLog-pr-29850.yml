@@ -1,9 +1,0 @@
-author: "Textor45"
-delete-after: True
-changes: 
-  - imageadd: "Adds radiation, medical, internals, and evacuation icons for status displays."
-  - tweak: "Adds radiation, medical, internals, and evacuation options in the C&C console for pushing to status displays."
-  - tweak: "Replaces icons for all alert levels."
-  - rscadd: "Alert Status Border toggle is added to C&C for all status displays, allowing all displays to reflect the current alert status without overriding the information the bridge wants on the screen."
-  - tweak: "Replaces the Nanotrasen default display state with an EC logo."
-  - bugfix: "Fixes issue with Code Delta not showing in overlays on status displays and fire alarms."
