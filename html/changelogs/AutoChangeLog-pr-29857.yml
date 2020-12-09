@@ -1,0 +1,4 @@
+author: "zkxs"
+delete-after: True
+changes: 
+  - bugfix: "Voidsuit patches no longer prevent actual repairs"
