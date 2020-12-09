@@ -69,7 +69,7 @@
 	name = "Fleet engineering CO"
 	min_rank = 11
 
-	utility_extra = list(/obj/item/clothing/under/solgov/utility/fleet/officer/command,
+	utility_extra = list(/obj/item/clothing/under/solgov/utility/fleet/officer/engineering,
 						 /obj/item/clothing/head/beret/solgov/fleet/command,
 						 /obj/item/clothing/head/beret/solgov/fleet/engineering,
 						 /obj/item/clothing/head/ushanka/solgov/fleet,
@@ -140,7 +140,7 @@
 	name = "Fleet security CO"
 	min_rank = 11
 
-	utility_extra = list(/obj/item/clothing/under/solgov/utility/fleet/officer/command,
+	utility_extra = list(/obj/item/clothing/under/solgov/utility/fleet/officer/security,
 						 /obj/item/clothing/head/beret/solgov/fleet/command,
 						 /obj/item/clothing/head/beret/solgov/fleet/security,
 						 /obj/item/clothing/head/ushanka/solgov/fleet,
@@ -211,7 +211,7 @@
 	name = "Fleet medical CO"
 	min_rank = 11
 
-	utility_extra = list(/obj/item/clothing/under/solgov/utility/fleet/officer/command,
+	utility_extra = list(/obj/item/clothing/under/solgov/utility/fleet/officer/medical,
 						 /obj/item/clothing/head/beret/solgov/fleet/command,
 						 /obj/item/clothing/head/beret/solgov/fleet/medical,
 						 /obj/item/clothing/head/ushanka/solgov/fleet,
