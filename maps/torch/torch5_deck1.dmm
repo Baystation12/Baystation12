@@ -17896,6 +17896,12 @@
 /obj/item/stack/material/steel{
 	amount = 30
 	},
+/obj/item/stack/material/plasteel{
+	amount = 20
+	},
+/obj/item/stack/material/ocp{
+	amount = 10
+	},
 /obj/structure/window/reinforced{
 	dir = 4
 	},
@@ -18893,15 +18899,11 @@
 /obj/structure/table/rack{
 	dir = 4
 	},
+/obj/item/weapon/storage/box/syringegun,
+/obj/item/weapon/gun/launcher/syringe,
 /obj/structure/window/reinforced,
 /obj/structure/window/reinforced{
 	dir = 4
-	},
-/obj/item/stack/material/ocp{
-	amount = 10
-	},
-/obj/item/stack/material/plasteel{
-	amount = 20
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/command/armoury)
