@@ -307,6 +307,11 @@ else if(##equipment_var) {\
 
 	..()
 
+/obj/item/clothing/suit/space/void/attack_hand(mob/user as mob)
+	if (loc == user)
+		return
+	return ..()
+
 /obj/item/clothing/suit/space/void/attack_self() //sole purpose of existence is to toggle the helmet
 	toggle_helmet()
 
