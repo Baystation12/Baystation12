@@ -42,6 +42,8 @@
 	icon_state = null
 	sprite_sheets = list("Sangheili" = SANGHEILI_ARMOUR_ICON)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+	allowed = list(/obj/item/weapon/gun/energy, /obj/item/weapon/gun/projectile, /obj/item/ammo_magazine,
+				   /obj/item/ammo_casing, /obj/item/weapon/melee/baton, /obj/item/weapon/melee/energy/elite_sword)
 	specials = list(/datum/armourspecials/shields/elite,/datum/armourspecials/shieldmonitor/sangheili)
 	armor = list(melee = 55, bullet = 40, laser = 55, energy = 50, bomb = 40, bio = 25, rad = 25)//ODST tier, but 5 lower bullet due to having shields.
 	armor_thickness_modifiers = list()
@@ -138,7 +140,7 @@
 		equip_dagger()
 		playsound(usr, 'code/modules/halo/sounds/Energysworddeploy.ogg',75, 1)
 	else
-		playsound(usr, 'sound/weapons/saberoff.ogg', 50, 1)
+		playsound(usr, 'code/modules/halo/sounds/Energysworddeactivate.ogg', 50, 1)
 		unequip_dagger()
 
 
@@ -146,7 +148,7 @@
 
 /obj/item/weapon/melee/energy/elite_sword/g_dagger
 	name = "Internal Energy Dagger"
-	desc = "A wrist-mounted Energy Dagger that extends from sangheili combat gauntlets"
+	desc = "A wrist-mounted energy dagger that extends from Sangheili combat gauntlets."
 
 	icon = 'code/modules/halo/weapons/icons/Covenant Weapons.dmi'
 	icon_state = "en_dag_deploy"
