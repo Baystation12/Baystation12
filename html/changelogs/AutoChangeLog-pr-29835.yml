@@ -1,0 +1,4 @@
+author: "Mucker"
+delete-after: True
+changes: 
+  - admin: "Stealthed admins will no longer show up in the pre-round lobby player list."
