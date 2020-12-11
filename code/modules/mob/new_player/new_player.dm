@@ -92,9 +92,10 @@
 				var/highjob
 				if (player.client)
 					var/show_job = player.client.get_preference_value(/datum/client_preference/show_job) == GLOB.PREF_SHOW
-					if(player.client.prefs?.job_high && show_job)
+					if (player.client.prefs?.job_high && show_job)
 						highjob = " as [player.client.prefs.job_high]"
-				stat("[player.key]", (player.ready)?("(Playing[highjob])"):(null))
+					if (!player.is_stealthed())
+						stat("[player.key]", (player.ready)?("(Playing[highjob])"):(null))
 				totalPlayers++
 				if(player.ready)totalPlayersReady++
 
