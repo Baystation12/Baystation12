@@ -1,0 +1,5 @@
+author: "juxtaposed9930"
+delete-after: True
+changes: 
+  - tweak: "Raider needs one less player rolling raider to start, from four to three."
+  - tweak: "Raider won't always try to fill the six slot team, the target is now four."
