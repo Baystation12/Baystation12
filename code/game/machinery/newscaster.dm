@@ -28,6 +28,7 @@
 	var/updated = 0
 	var/announcement = ""
 
+
 /datum/feed_message/proc/clear()
 	src.author = ""
 	src.body = ""
@@ -53,15 +54,16 @@
 	src.is_admin_channel = 0
 	src.announcement = ""
 	update()
-
 /datum/feed_network
 	var/list/datum/feed_channel/network_channels = list()
 	var/datum/feed_message/wanted_issue
+	var/list/newscasters = list()
+	var/list/z_levels = list()
 
 /datum/feed_network/New()
 	CreateFeedChannel("Announcements", "SS13", 1, 1, "New Announcement Available")
 
-/datum/feed_network/proc/CreateFeedChannel(var/channel_name, var/author, var/locked, var/adminChannel = 0, var/announcement_message)
+/datum/feed_network/proc/CreateFeedChannel(channel_name, author, locked, adminChannel = 0, announcement_message)
 	var/datum/feed_channel/newChannel = new /datum/feed_channel
 	newChannel.channel_name = channel_name
 	newChannel.author = author
@@ -73,7 +75,7 @@
 		newChannel.announcement = "Breaking news from [channel_name]!"
 	network_channels += newChannel
 
-/datum/feed_network/proc/SubmitArticle(var/msg, var/author, var/channel_name, var/obj/item/weapon/photo/photo, var/adminMessage = 0, var/message_type = "")
+/datum/feed_network/proc/SubmitArticle(msg, author, channel_name, obj/item/weapon/photo/photo, adminMessage = 0, message_type = "")
 	var/datum/feed_message/newMsg = new /datum/feed_message
 	newMsg.author = author
 	newMsg.body = msg
@@ -89,7 +91,7 @@
 			insert_message_in_channel(FC, newMsg) //Adding message to the network's appropriate feed_channel
 			break
 
-/datum/feed_network/proc/insert_message_in_channel(var/datum/feed_channel/FC, var/datum/feed_message/newMsg)
+/datum/feed_network/proc/insert_message_in_channel(datum/feed_channel/FC, datum/feed_message/newMsg)
 	FC.messages += newMsg
 	if(newMsg.img)
 		register_asset("newscaster_photo_[sanitize(FC.channel_name)]_[FC.messages.len].png", newMsg.img)
@@ -97,12 +99,12 @@
 	FC.update()
 	alert_readers(FC.announcement)
 
-/datum/feed_network/proc/alert_readers(var/annoncement)
-	for(var/obj/machinery/newscaster/NEWSCASTER in allCasters)
+/datum/feed_network/proc/alert_readers(annoncement)
+	for(var/obj/machinery/newscaster/NEWSCASTER in newscasters)
 		NEWSCASTER.newsAlert(annoncement)
 		NEWSCASTER.update_icon()
 
-var/datum/feed_network/news_network = new /datum/feed_network     //The global news-network, which is coincidentally a global list.
+var/list/datum/feed_network/news_network = list()     //The global news-network, which is coincidentally a global list.
 
 var/list/obj/machinery/newscaster/allCasters = list() //Global list that will contain reference to all newscasters in existence.
 
@@ -113,8 +115,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 	icon = 'icons/obj/terminals.dmi'
 	icon_state = "newscaster_normal"
 	//var/list/datum/feed_channel/channel_list = list() //This list will contain the names of the feed channels. Each name will refer to a data region where the messages of the feed channels are stored.
-	//OBSOLETE: We're now using a global news network
-	var/screen = 0                  //Or maybe I'll make it into a list within a list afterwards... whichever I prefer, go fuck yourselves :3
+	var/screen = 0
 		// 0 = welcome screen - main menu
 		// 1 = view feed channels
 		// 2 = create feed channel
@@ -148,24 +149,41 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 	var/c_locked=0;        //Will our new channel be locked to public submissions?
 	var/hitstaken = 0      //Death at 3 hits from an item with force>=15
 	var/datum/feed_channel/viewing_channel = null
+	var/datum/feed_network/connected_group
 	light_outer_range = 0
 	anchored = 1
 	layer = ABOVE_WINDOW_LAYER
 
-/obj/machinery/newscaster/security_unit                   //Security unit
+/obj/machinery/newscaster/security_unit
 	name = "Security Newscaster"
 	securityCaster = 1
 
-/obj/machinery/newscaster/New()         //Constructor, ho~
-	allCasters += src
+/obj/machinery/newscaster/Initialize()
+	. = ..()
+
+	for (var/datum/feed_network/G in news_network)
+		if (src.z in G.z_levels)
+			G.newscasters += src
+			connected_group = G
+
+			break
+
+	if (!connected_group)
+		var/datum/feed_network/G = new /datum/feed_network
+		G.newscasters += src
+		G.z_levels = GetConnectedZlevels(src.z)
+
+		connected_group = G
+		LAZYADD(news_network, G)
+
 	src.paper_remaining = 15            // Will probably change this to something better
-	for(var/obj/machinery/newscaster/NEWSCASTER in allCasters) // Let's give it an appropriate unit number
+	for (var/obj/machinery/newscaster/NEWSCASTER in connected_group.newscasters) // Let's give it an appropriate unit number
 		src.unit_no++
 	src.update_icon() //for any custom ones on the map...
-	..()                                //I just realised the newscasters weren't in the global machines list. The superconstructor call will tend to that
 
 /obj/machinery/newscaster/Destroy()
-	allCasters -= src
+	if (connected_group)
+		connected_group.newscasters -= src
 	..()
 
 /obj/machinery/newscaster/on_update_icon()
@@ -178,7 +196,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 
 	src.overlays.Cut() //reset overlays
 
-	if(news_network.wanted_issue) //wanted icon state, there can be no overlays on it as it's a priority message
+	if(connected_group.wanted_issue) //wanted icon state, there can be no overlays on it as it's a priority message
 		icon_state = "newscaster_wanted"
 		return
 
@@ -207,7 +225,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 			if(0)
 				dat += "Welcome to Newscasting Unit #[src.unit_no].<BR> Interface & News networks Operational."
 				dat += "<BR><FONT SIZE=1>Property of Ward-Takahashi GMB</FONT>"
-				if(news_network.wanted_issue)
+				if(connected_group.wanted_issue)
 					dat+= "<HR><A href='?src=\ref[src];view_wanted=1'>Read Wanted Issue</A>"
 				dat+= "<HR><BR><A href='?src=\ref[src];create_channel=1'>Create Feed Channel</A>"
 				dat+= "<BR><A href='?src=\ref[src];view=1'>View Feed Channels</A>"
@@ -217,7 +235,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 				dat+= "<BR><BR><A href='?src=\ref[human_or_robot_user];mach_close=newscaster_main'>Exit</A>"
 				if(src.securityCaster)
 					var/wanted_already = 0
-					if(news_network.wanted_issue)
+					if(connected_group.wanted_issue)
 						wanted_already = 1
 
 					dat+="<HR><B>Feed Security functions:</B><BR>"
@@ -227,10 +245,10 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 				dat+="<BR><HR>The newscaster recognises you as: <FONT COLOR='green'>[src.scanned_user]</FONT>"
 			if(1)
 				dat+= "Local Feed Channels<HR>"
-				if( !length(news_network.network_channels) )
+				if( !length(connected_group.network_channels) )
 					dat+="<I>No active channels found...</I>"
 				else
-					for(var/datum/feed_channel/CHANNEL in news_network.network_channels)
+					for(var/datum/feed_channel/CHANNEL in connected_group.network_channels)
 						if(CHANNEL.is_admin_channel)
 							dat+="<B><FONT style='BACKGROUND-COLOR: LightGreen '><A href='?src=\ref[src];show_channel=\ref[CHANNEL]'>[CHANNEL.channel_name]</A></FONT></B><BR>"
 						else
@@ -275,7 +293,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 			if(7)
 				dat+="<B><FONT COLOR='maroon'>ERROR: Could not submit Feed Channel to Network.</B></FONT><HR><BR>"
 				var/list/existing_authors = list()
-				for(var/datum/feed_channel/FC in news_network.network_channels)
+				for(var/datum/feed_channel/FC in connected_group.network_channels)
 					if(FC.author == "\[REDACTED\]")
 						existing_authors += FC.backup_author
 					else
@@ -285,7 +303,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 				if(src.channel_name=="" || src.channel_name == "\[REDACTED\]")
 					dat+="<FONT COLOR='maroon'>Invalid channel name.</FONT><BR>"
 				var/check = 0
-				for(var/datum/feed_channel/FC in news_network.network_channels)
+				for(var/datum/feed_channel/FC in connected_group.network_channels)
 					if(FC.channel_name == src.channel_name)
 						check = 1
 						break
@@ -295,10 +313,10 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 					dat+="<FONT COLOR='maroon'>Channel author unverified.</FONT><BR>"
 				dat+="<BR><A href='?src=\ref[src];setScreen=[2]'>Return</A><BR>"
 			if(8)
-				var/total_num=length(news_network.network_channels)
+				var/total_num=length(connected_group.network_channels)
 				var/active_num=total_num
 				var/message_num=0
-				for(var/datum/feed_channel/FC in news_network.network_channels)
+				for(var/datum/feed_channel/FC in connected_group.network_channels)
 					if(!FC.censored)
 						message_num += length(FC.messages)    //Dont forget, datum/feed_channel's var messages is a list of datum/feed_message
 					else
@@ -335,10 +353,10 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 				dat+="<FONT SIZE=1>NOTE: Due to the nature of news Feeds, total deletion of a Feed Story is not possible.<BR>"
 				dat+="Keep in mind that users attempting to view a censored feed will instead see the \[REDACTED\] tag above it.</FONT>"
 				dat+="<HR>Select Feed channel to get Stories from:<BR>"
-				if(!length(news_network.network_channels))
+				if(!length(connected_group.network_channels))
 					dat+="<I>No feed channels found active...</I><BR>"
 				else
-					for(var/datum/feed_channel/CHANNEL in news_network.network_channels)
+					for(var/datum/feed_channel/CHANNEL in connected_group.network_channels)
 						dat+="<A href='?src=\ref[src];pick_censor_channel=\ref[CHANNEL]'>[CHANNEL.channel_name]</A> [(CHANNEL.censored) ? ("<FONT COLOR='red'>***</FONT>") : null ]<BR>"
 				dat+="<BR><A href='?src=\ref[src];setScreen=[0]'>Cancel</A>"
 			if(11)
@@ -346,10 +364,10 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 				dat+="<FONT SIZE=1>A D-Notice is to be bestowed upon the channel if the handling Authority deems it as harmful for the [station_name()]'s"
 				dat+="morale, integrity or disciplinary behaviour. A D-Notice will render a channel unable to be updated by anyone, without deleting any feed"
 				dat+="stories it might contain at the time. You can lift a D-Notice if you have the required access at any time.</FONT><HR>"
-				if(!length(news_network.network_channels))
+				if(!length(connected_group.network_channels))
 					dat+="<I>No feed channels found active...</I><BR>"
 				else
-					for(var/datum/feed_channel/CHANNEL in news_network.network_channels)
+					for(var/datum/feed_channel/CHANNEL in connected_group.network_channels)
 						dat+="<A href='?src=\ref[src];pick_d_notice=\ref[CHANNEL]'>[CHANNEL.channel_name]</A> [(CHANNEL.censored) ? ("<FONT COLOR='red'>***</FONT>") : null ]<BR>"
 
 				dat+="<BR><A href='?src=\ref[src];setScreen=[0]'>Back</A>"
@@ -383,7 +401,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 				dat+="<B>Wanted Issue Handler:</B>"
 				var/wanted_already = 0
 				var/end_param = 1
-				if(news_network.wanted_issue)
+				if(connected_group.wanted_issue)
 					wanted_already = 1
 					end_param = 2
 
@@ -400,7 +418,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 				else
 					dat+="<A href='?src=\ref[src];set_attachment=1'>Attach Photo</A><BR>"
 				if(wanted_already)
-					dat+="<B>Wanted Issue created by:</B><FONT COLOR='green'> [news_network.wanted_issue.backup_author]</FONT><BR>"
+					dat+="<B>Wanted Issue created by:</B><FONT COLOR='green'> [connected_group.wanted_issue.backup_author]</FONT><BR>"
 				else
 					dat+="<B>Wanted Issue will be created under prosecutor:</B><FONT COLOR='green'> [src.scanned_user]</FONT><BR>"
 				dat+="<BR><A href='?src=\ref[src];submit_wanted=[end_param]'>[(wanted_already) ? ("Edit Issue") : ("Submit")]</A>"
@@ -423,12 +441,12 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 				dat+="<B>Wanted Issue successfully deleted from Circulation</B><BR>"
 				dat+="<BR><A href='?src=\ref[src];setScreen=[0]'>Return</A><BR>"
 			if(18)
-				dat+="<B><FONT COLOR ='maroon'>-- STATIONWIDE WANTED ISSUE --</B></FONT><BR><FONT SIZE=2>\[Submitted by: <FONT COLOR='green'>[news_network.wanted_issue.backup_author]</FONT>\]</FONT><HR>"
-				dat+="<B>Criminal</B>: [news_network.wanted_issue.author]<BR>"
-				dat+="<B>Description</B>: [news_network.wanted_issue.body]<BR>"
+				dat+="<B><FONT COLOR ='maroon'>-- STATIONWIDE WANTED ISSUE --</B></FONT><BR><FONT SIZE=2>\[Submitted by: <FONT COLOR='green'>[connected_group.wanted_issue.backup_author]</FONT>\]</FONT><HR>"
+				dat+="<B>Criminal</B>: [connected_group.wanted_issue.author]<BR>"
+				dat+="<B>Description</B>: [connected_group.wanted_issue.body]<BR>"
 				dat+="<B>Photo</B>: "
-				if(news_network.wanted_issue.img)
-					send_rsc(usr, news_network.wanted_issue.img, "tmp_photow.png")
+				if(connected_group.wanted_issue.img)
+					send_rsc(usr, connected_group.wanted_issue.img, "tmp_photow.png")
 					dat+="<BR><img src='tmp_photow.png' width = '180'>"
 				else
 					dat+="None"
@@ -467,14 +485,14 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 		else if(href_list["submit_new_channel"])
 			//var/list/existing_channels = list() //OBSOLETE
 			var/list/existing_authors = list()
-			for(var/datum/feed_channel/FC in news_network.network_channels)
+			for(var/datum/feed_channel/FC in connected_group.network_channels)
 				//existing_channels += FC.channel_name
 				if(FC.author == "\[REDACTED\]")
 					existing_authors += FC.backup_author
 				else
 					existing_authors  +=FC.author
 			var/check = 0
-			for(var/datum/feed_channel/FC in news_network.network_channels)
+			for(var/datum/feed_channel/FC in connected_group.network_channels)
 				if(FC.channel_name == src.channel_name)
 					check = 1
 					break
@@ -483,7 +501,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 			else
 				var/choice = alert("Please confirm Feed channel creation","Network Channel Handler","Confirm","Cancel")
 				if(choice=="Confirm")
-					news_network.CreateFeedChannel(src.channel_name, src.scanned_user, c_locked)
+					connected_group.CreateFeedChannel(src.channel_name, src.scanned_user, c_locked)
 					src.screen=5
 			src.updateUsrDialog()
 			//src.update_icon()
@@ -491,7 +509,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 		else if(href_list["set_channel_receiving"])
 			//var/list/datum/feed_channel/available_channels = list()
 			var/list/available_channels = list()
-			for(var/datum/feed_channel/F in news_network.network_channels)
+			for(var/datum/feed_channel/F in connected_group.network_channels)
 				if( (!F.locked || F.author == scanned_user) && !F.censored)
 					available_channels += F.channel_name
 			src.channel_name = input(usr, "Choose receiving Feed Channel", "Network Channel Handler") in available_channels
@@ -511,7 +529,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 			else
 				var/image = photo_data ? photo_data.photo : null
 				SSstatistics.add_field("newscaster_stories",1)
-				news_network.SubmitArticle(src.msg, src.scanned_user, src.channel_name, image, 0)
+				connected_group.SubmitArticle(src.msg, src.scanned_user, src.channel_name, image, 0)
 				if(photo_data)
 					qdel(photo_data)
 					photo_data = null
@@ -548,12 +566,12 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 
 		else if(href_list["menu_wanted"])
 			var/already_wanted = 0
-			if(news_network.wanted_issue)
+			if(connected_group.wanted_issue)
 				already_wanted = 1
 
 			if(already_wanted)
-				src.channel_name = news_network.wanted_issue.author
-				src.msg = news_network.wanted_issue.body
+				src.channel_name = connected_group.wanted_issue.author
+				src.msg = connected_group.wanted_issue.body
 			src.screen = 14
 			src.updateUsrDialog()
 
@@ -579,30 +597,30 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 						WANTED.backup_author = src.scanned_user //I know, a bit wacky
 						if(photo_data)
 							WANTED.img = photo_data.photo.img
-						news_network.wanted_issue = WANTED
-						news_network.alert_readers()
+						connected_group.wanted_issue = WANTED
+						connected_group.alert_readers()
 						src.screen = 15
 					else
-						if(news_network.wanted_issue.is_admin_message)
+						if(connected_group.wanted_issue.is_admin_message)
 							alert("The wanted issue has been distributed by a [GLOB.using_map.company_name] higherup. You cannot edit it.","Ok")
 							return
-						news_network.wanted_issue.author = src.channel_name
-						news_network.wanted_issue.body = src.msg
-						news_network.wanted_issue.backup_author = src.scanned_user
+						connected_group.wanted_issue.author = src.channel_name
+						connected_group.wanted_issue.body = src.msg
+						connected_group.wanted_issue.backup_author = src.scanned_user
 						if(photo_data)
-							news_network.wanted_issue.img = photo_data.photo.img
+							connected_group.wanted_issue.img = photo_data.photo.img
 						src.screen = 19
 
 			src.updateUsrDialog()
 
 		else if(href_list["cancel_wanted"])
-			if(news_network.wanted_issue.is_admin_message)
+			if(connected_group.wanted_issue.is_admin_message)
 				alert("The wanted issue has been distributed by a [GLOB.using_map.company_name] higherup. You cannot take it down.","Ok")
 				return
 			var/choice = alert("Please confirm Wanted Issue removal","Network Security Handler","Confirm","Cancel")
 			if(choice=="Confirm")
-				news_network.wanted_issue = null
-				for(var/obj/machinery/newscaster/NEWSCASTER in allCasters)
+				connected_group.wanted_issue = null
+				for(var/obj/machinery/newscaster/NEWSCASTER in connected_group.newscasters)
 					NEWSCASTER.update_icon()
 				src.screen=17
 			src.updateUsrDialog()
@@ -928,10 +946,10 @@ obj/item/weapon/newspaper/attackby(obj/item/weapon/W as obj, mob/user as mob)
 /obj/machinery/newscaster/proc/print_paper()
 	SSstatistics.add_field("newscaster_newspapers_printed",1)
 	var/obj/item/weapon/newspaper/NEWSPAPER = new /obj/item/weapon/newspaper
-	for(var/datum/feed_channel/FC in news_network.network_channels)
+	for(var/datum/feed_channel/FC in connected_group.network_channels)
 		NEWSPAPER.news_content += FC
-	if(news_network.wanted_issue)
-		NEWSPAPER.important_message = news_network.wanted_issue
+	if(connected_group.wanted_issue)
+		NEWSPAPER.important_message = connected_group.wanted_issue
 	NEWSPAPER.dropInto(loc)
 	src.paper_remaining--
 	return
