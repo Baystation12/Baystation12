@@ -1,0 +1,4 @@
+author: "Mucker"
+delete-after: True
+changes: 
+  - tweak: "Voidsuits can now only be dequipped by click-dragging them into an open hand."
