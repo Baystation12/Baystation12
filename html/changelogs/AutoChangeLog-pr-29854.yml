@@ -1,4 +1,0 @@
-author: "lorwp"
-delete-after: True
-changes: 
-  - rscadd: "A global preference has been added to suppress announcement SFX (Blob/Radiation announcements, Alert Change sirens, etc)"

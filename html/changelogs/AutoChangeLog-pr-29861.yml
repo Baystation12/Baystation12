@@ -1,5 +1,0 @@
-author: "SDTheCyanWyan"
-delete-after: True
-changes: 
-  - maptweak: "Removes the starting syringe gun from Medical Morgue Storage and Emergency Armory"
-  - maptweak: "Shifts the two plasteel sheets to the now-empty rack in the Emergency Armory"

@@ -1,4 +1,0 @@
-author: "zkxs"
-delete-after: True
-changes: 
-  - bugfix: "Constructed pressure tanks now have the correct 10,000L volume instead of 200L."
