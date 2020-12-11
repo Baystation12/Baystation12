@@ -2668,9 +2668,6 @@
 /area/assembly/robotics)
 "eS" = (
 /obj/structure/table/rack,
-/obj/item/weapon/gun/launcher/syringe,
-/obj/item/weapon/storage/box/syringegun,
-/obj/item/weapon/storage/box/syringegun,
 /obj/item/weapon/defibrillator/compact,
 /turf/simulated/floor/tiled/techfloor,
 /area/storage/medical)
