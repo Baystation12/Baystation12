@@ -1,0 +1,4 @@
+author: "RustingWithYou"
+delete-after: True
+changes: 
+  - rscadd: "gives MSQs a vocal synthesiser augment to let them speak Skrellian, as it's a language they start with and it fits their role as diplomats among the Ascent. The mantid vocal synthesiser also makes them able to speak the same languages as regular GAS, in the unlikely event that they end up knowing them."
