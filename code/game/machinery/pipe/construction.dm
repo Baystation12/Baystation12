@@ -154,6 +154,8 @@ Buildable meters
 	var/obj/machinery/atmospherics/P = new constructed_path(get_turf(src))
 
 	P.pipe_color = color
+	if (P.colorable)
+		P.color = color
 	P.set_dir(dir)
 	P.set_initial_level()
 

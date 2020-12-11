@@ -34,6 +34,7 @@ Pipelines + Other Objects -> Pipe network
 	var/atmos_initalized = FALSE
 	var/build_icon = 'icons/obj/pipe-item.dmi'
 	var/build_icon_state = "buildpipe"
+	var/colorable = FALSE
 
 	var/pipe_class = PIPE_CLASS_OTHER //If somehow something isn't set properly, handle it as something with zero connections. This will prevent runtimes.
 	var/rotate_class = PIPE_ROTATE_STANDARD
