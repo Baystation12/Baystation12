@@ -1,0 +1,4 @@
+author: "Mucker"
+delete-after: True
+changes: 
+  - bugfix: "Fix events occurring off of the Torch being announced on Torch newscasters."
