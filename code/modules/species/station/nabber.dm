@@ -489,7 +489,8 @@
 		BP_LIVER =             /obj/item/organ/internal/liver/insectoid/nabber,
 		BP_HEART =             /obj/item/organ/internal/heart/open,
 		BP_STOMACH =           /obj/item/organ/internal/stomach,
-		BP_SYSTEM_CONTROLLER = /obj/item/organ/internal/controller
+		BP_SYSTEM_CONTROLLER = /obj/item/organ/internal/controller,
+		BP_VOICE =    /obj/item/organ/internal/voicebox/nabber/ascent
 		)
 
 	has_limbs = list(
