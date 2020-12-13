@@ -122,17 +122,6 @@
 	item_cost = 40
 	path = /obj/item/device/powersink
 
-/datum/uplink_item/item/tools/teleporter
-	name = "Teleporter Circuit Board"
-	desc = "A circuit board that can be used to create a teleporter console, able to lock onto detected \
-	teleportation beacons. Requires a projector and teleporter hub nearby to work."
-	item_cost = 40
-	path = /obj/item/weapon/stock_parts/circuitboard/teleporter
-
-/datum/uplink_item/item/tools/teleporter/New()
-	..()
-	antag_roles = list(MODE_MERCENARY)
-
 /datum/uplink_item/item/tools/ai_module
 	name = "Hacked AI Upload Module"
 	desc = "A module that can be used anonymously add a singular, top level law to an active AI. \

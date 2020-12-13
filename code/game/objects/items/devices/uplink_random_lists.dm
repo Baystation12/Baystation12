@@ -74,7 +74,6 @@ var/list/uplink_random_selections_
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/heavy_armor)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/powersink, 10, 10)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/ai_module, 25, 0)
-	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/teleporter, 10, 0)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/polychromic_dye_bottle)
 
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/implants/imp_freedom)
@@ -106,7 +105,6 @@ var/list/uplink_random_selections_
 			/datum/uplink_item/item/ammo,
 			/datum/uplink_item/item/badassery,
 			/datum/uplink_item/item/telecrystal,
-			/datum/uplink_item/item/tools/teleporter,
 			/datum/uplink_item/item/tools/supply_beacon,
 			/datum/uplink_item/item/implants/imp_uplink,
 		)
