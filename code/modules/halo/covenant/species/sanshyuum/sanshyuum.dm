@@ -20,10 +20,9 @@ GLOBAL_LIST_INIT(sanshyuum_titles, world.file2list('code/modules/halo/covenant/s
 	additional_langs = list(LANGUAGE_SANSHYUUM, LANGUAGE_ENGLISH)
 	spawn_flags = SPECIES_CAN_JOIN
 	item_icon_offsets = list(list(0,2),list(0,2),null,list(0,2),null,null,null,list(0,2),null)
-	total_health = 200		//weaker than a human
-	brute_mod = 1.2
-	burn_mod = 1.2
-	equipment_slowdown_multiplier = 1
+	brute_mod = 1.1
+	burn_mod = 1.1
+	equipment_slowdown_multiplier = 1.2
 	default_faction = "Covenant"
 	gibbed_anim = null
 	dusted_anim = null

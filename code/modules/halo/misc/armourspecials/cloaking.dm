@@ -1,14 +1,23 @@
 
+#define CLOAKING_COLOUR "#808080"
+
 /datum/armourspecials/cloaking
 	var/cloak_active = 0
-	var/min_alpha = 10 //The minimum level of alpha to reach.
+	var/min_alpha = 15 //The minimum level of alpha to reach.
 	var/cloak_recover_time = 5 //The time in seconds it takes to recover to full cloak after being hit.
 	var/cloak_toggle_time = 2 //The time in seconds it takes to enable/disable the cloaking device.
 	var/cloak_disrupted = 0 //Is the cloak currently disrupted?
+	var/stored_blend_mode
+	var/stored_colour
+	var/stored_alpha
 
 /datum/armourspecials/cloaking/proc/activate_cloak(var/voluntary = 1)
+	stored_blend_mode = user.blend_mode
+	stored_colour = user.color
+	stored_alpha = user.alpha
 	src.cloak_active = 1
-	animate(user,alpha = min_alpha,time = (cloak_toggle_time SECONDS),flags = ANIMATION_END_NOW)
+	user.blend_mode = BLEND_ADD
+	animate(user,alpha = min_alpha, color = CLOAKING_COLOUR, time = (cloak_toggle_time SECONDS))
 	if(cloak_disrupted)//This stops span from cloak disruption, but still applies the affects.
 		return
 	if(voluntary)
@@ -19,7 +28,8 @@
 
 /datum/armourspecials/cloaking/proc/deactivate_cloak(var/voluntary = 1)
 	src.cloak_active = 0
-	animate(user,alpha = 255,time = (cloak_toggle_time SECONDS),flags = ANIMATION_END_NOW)
+	user.blend_mode = stored_blend_mode
+	animate(user,color = stored_colour, alpha = 255, time = (cloak_toggle_time SECONDS))
 	if(cloak_disrupted)//This stops span from cloak disruption, but still applies the affects.
 		return
 	if(voluntary)

@@ -19,6 +19,9 @@
 		beakers += B2
 		overlays += "red"
 
+/obj/item/device/landmine/explosive/active
+	state = STATE_ACTIVE
+
 /obj/item/device/landmine/emp
 	name = "anti-personnel mine"
 	desc = "A dangerous area denial device. Can be customised for various anti-personnel purposes."
@@ -38,6 +41,9 @@
 		beakers += B1
 		beakers += B2
 		overlays += "blue"
+
+/obj/item/device/landmine/emp/active
+	state = STATE_ACTIVE
 
 /obj/item/device/landmine/gas
 	name = "anti-personnel mine"
@@ -63,6 +69,9 @@
 		beakers += B2
 		overlays += "green"
 
+/obj/item/device/landmine/gas/active
+	state = STATE_ACTIVE
+
 /obj/item/device/landmine/frag
 	name = "anti-personnel mine"
 	desc = "A dangerous area denial device. Can be customised for various anti-personnel purposes."
@@ -85,6 +94,9 @@
 		beakers += B2
 		overlays += "purple"
 
+/obj/item/device/landmine/frag/active
+	state = STATE_ACTIVE
+
 /obj/item/device/landmine/flash
 	name = "anti-personnel mine"
 	desc = "A dangerous area denial device. Can be customised for various anti-personnel purposes."
@@ -105,6 +117,9 @@
 		beakers += B1
 		beakers += B2
 		overlays += "white"
+
+/obj/item/device/landmine/flash/active
+	state = STATE_ACTIVE
 
 /obj/item/device/landmine/foam
 	name = "anti-personnel mine"
@@ -148,6 +163,9 @@
 		beakers += B1
 		beakers += B2
 		overlays += "orange"
+
+/obj/item/device/landmine/flame/active
+	state = STATE_ACTIVE
 
 #undef STATE_INACTIVE
 #undef STATE_ARMING

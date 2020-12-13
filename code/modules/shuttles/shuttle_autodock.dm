@@ -19,6 +19,8 @@
 	..(_name, start_waypoint)
 
 	//Initial dock
+	if(!current_location)
+		return INITIALIZE_HINT_QDEL
 	active_docking_controller = current_location.docking_controller
 	current_dock_target = get_docking_target(current_location)
 	dock()

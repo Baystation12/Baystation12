@@ -145,7 +145,7 @@
 	overdose = REAGENTS_OVERDOSE * 0.5
 
 /datum/reagent/hyperzine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.adjustToxLoss(1)
+	M.adjustToxLoss(0.5)
 	M.add_chemical_effect(CE_SLOWREMOVE, 1)
 	M.add_chemical_effect(CE_PULSE, 2)
 
@@ -161,8 +161,8 @@
 /datum/reagent/hyperzine_concentrated/affect_blood(var/mob/living/carbon/human/H, var/alien, var/removed)
 	if(H.internal_organs_by_name[BP_LIVER])
 		var/obj/item/organ/user_liver = H.internal_organs_by_name[BP_LIVER]
-		user_liver.take_damage(1,1)
-	H.adjustToxLoss(1)
+		user_liver.take_damage(0.25,0.25)
+	H.adjustToxLoss(0.75)
 	if(prob(10))
 		H.emote(pick("twitch", "blink_r", "shiver"))
 	H.add_chemical_effect(CE_SPEEDBOOST, 1)

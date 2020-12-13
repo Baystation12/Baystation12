@@ -40,7 +40,8 @@
 	else
 		current_location = locate(current_location)
 	if(!istype(current_location))
-		CRASH("Shuttle \"[name]\" could not find its starting location.")
+		log_debug("Shuttle \"[name]\" could not find its starting location.")
+		return
 
 	if(src.name in shuttle_controller.shuttles)
 		CRASH("A shuttle with the name '[name]' is already defined.")
@@ -125,9 +126,9 @@
 //If you want to conditionally cancel shuttle launches, that logic must go in short_jump(), long_jump() or attempt_move()
 /datum/shuttle/proc/shuttle_moved(var/obj/effect/shuttle_landmark/destination, var/list/turf_translation)
 
-//	log_debug("move_shuttle() called for [shuttle_tag] leaving [origin] en route to [destination].")
+//	log_("move_shuttle() called for [shuttle_tag] leaving [origin] en route to [destination].")
 //	log_degug("area_coming_from: [origin]")
-//	log_debug("destination: [destination]")
+//	log_("destination: [destination]")
 	for(var/turf/src_turf in turf_translation)
 		var/turf/dst_turf = turf_translation[src_turf]
 		if(src_turf.is_solid_structure()) //in case someone put a hole in the shuttle and you were lucky enough to be under it

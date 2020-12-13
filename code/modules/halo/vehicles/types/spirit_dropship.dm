@@ -32,10 +32,10 @@
 	spawn_datum = /datum/mobile_spawn/covenant
 	ammo_containers = newlist(/obj/item/ammo_magazine/spirit_cannon)
 
-	min_speed = 17.25
+	min_speed = 9.75
 	max_speed = 2.25
 	acceleration = 6
-	drag = 7
+	drag = 6
 
 	internal_air = new
 

@@ -28,10 +28,10 @@
 
 	move_sound = 'code/modules/halo/sounds/sparrowhawk_move.ogg'
 
-	min_speed = 16.75
+	min_speed = 10.75
 	max_speed = 1.75
 	acceleration = 5
-	drag = 6
+	drag = 4
 
 /obj/item/vehicle_component/health_manager/sparrowhawk
 	integrity = 400

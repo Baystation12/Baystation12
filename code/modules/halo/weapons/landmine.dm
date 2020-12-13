@@ -31,6 +31,12 @@
 	create_reagents(1000)
 	. = ..()
 
+
+/obj/item/device/landmine/Initialize()
+	. = ..()
+	if(state == STATE_ACTIVE)
+		arm_landmine()
+
 /obj/item/device/landmine/attack_self(var/mob/user)
 	if(state == STATE_INACTIVE)
 		if(do_after(user, 30))

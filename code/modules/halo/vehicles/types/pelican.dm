@@ -29,10 +29,10 @@
 
 	light_color = "#E1FDFF"
 
-	min_speed = 17.25
+	min_speed = 9.75
 	max_speed = 2.25
 	acceleration = 6
-	drag = 7
+	drag = 5
 	internal_air = new
 
 /obj/vehicles/air/pelican/update_object_sprites()
@@ -108,10 +108,10 @@
 
 	light_color = "#E1FDFF"
 
-	min_speed = 17.25
+	min_speed = 9.75
 	max_speed = 2.25
 	acceleration = 6
-	drag = 7
+	drag = 5
 
 	internal_air = new
 

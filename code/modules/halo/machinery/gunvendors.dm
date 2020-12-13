@@ -81,6 +81,35 @@
 		/obj/item/weapon/plastique/breaching/longrange = 4,
 	)
 
+/obj/machinery/pointbased_vending/armory/heavy/innie // HEAVY WEAPONS
+	name = "Insurrectionist Heavy Weapons Rack"
+	desc = "Storage for advanced weapons and ammunition"
+	req_access = list(access_innie)
+	products = list(
+					"Guns" = -1,
+					/obj/item/weapon/gun/projectile/m545_lmg  = 0,
+					/obj/item/weapon/gun/projectile/heavysniper = 0,
+					/obj/item/weapon/gun/projectile/m41 = 0,
+					"Ammunition" = -1,
+					/obj/item/ammo_magazine/spnkr = 0,
+					/obj/item/ammo_box/heavysniper = 0,
+					/obj/item/ammo_magazine/m545/m118 = 0,
+					"Turrets" = -1,
+					/obj/item/turret_deploy_kit/HMG = 0,
+					"Explosives" = -1,
+					/obj/item/weapon/plastique = 0,
+					/obj/item/weapon/plastique/breaching = 0,
+					/obj/item/weapon/plastique/breaching/longrange = 0
+					)
+	amounts = list(\
+		/obj/item/weapon/gun/projectile/m545_lmg  = 1,
+		/obj/item/weapon/gun/projectile/heavysniper = 1,
+		/obj/item/weapon/gun/projectile/m41 = 1,
+		/obj/item/turret_deploy_kit/HMG = 2,
+		/obj/item/weapon/plastique = 8,
+		/obj/item/weapon/plastique/breaching = 4,
+		/obj/item/weapon/plastique/breaching/longrange = 4,
+	)
 
 /obj/machinery/vending/armory/police
 	name = "Shell Vendor"
@@ -375,11 +404,11 @@
 					/obj/item/weapon/gun/projectile/m545_lmg = 0,
 					/obj/item/weapon/gun/projectile/ma3_ar = 0,
 					"Ammunition" = -1,
-					/obj/item/ammo_box/heavysniper = 1,
+					/obj/item/ammo_box/heavysniper = 0,
 					/obj/item/ammo_magazine/ma3/m118 = 0,
 					/obj/item/ammo_magazine/m392/m120 = 0,
 					/obj/item/ammo_magazine/br55/m634 = 0,
-					/obj/item/ammo_magazine/m7 = 0,
+					/obj/item/ammo_magazine/m7/m443 = 0,
 					/obj/item/ammo_magazine/kv32 = 0,
 					/obj/item/ammo_box/shotgun = 0,
 					/obj/item/ammo_box/shotgun/slug = 0,
@@ -419,8 +448,8 @@
 					/obj/item/weapon/armor_patch = 0,
 					/obj/item/drop_pod_beacon = 0)
 	amounts = list(\
-		/obj/item/weapon/gun/projectile/heavysniper = 3,
-		/obj/item/weapon/gun/projectile/m545_lmg = 3,
+		/obj/item/weapon/gun/projectile/heavysniper = 1,
+		/obj/item/weapon/gun/projectile/m545_lmg = 1,
 		/obj/item/weapon/plastique = 12,
 		/obj/item/weapon/grenade/frag/m9_hedp = 15,
 		/obj/item/weapon/grenade/smokebomb = 15,

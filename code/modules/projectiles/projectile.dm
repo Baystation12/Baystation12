@@ -233,10 +233,19 @@
 
 	return 1
 
-/obj/item/projectile/proc/do_suppression_aoe(var/location)
-	for(var/mob/living/carbon/human/h in orange(1,location))
+/obj/item/projectile/proc/do_suppression_aoe(var/turf/location)
+	var/obj/effect/overmap/om = map_sectors["[location.z]"]
+	var/list/searchthrough
+	if(om)
+		searchthrough = GLOB.mobs_in_sectors[om]
+	else
+		searchthrough = orange(1,location) //A fallback.
+	for(var/mob/living/carbon/human/h in searchthrough)
 		if(h in permutated)
 			continue
+		if(om) //If we're not using the fallback, we need to check distance ourselves.
+			if(get_dist(location,h) > 1)
+				continue
 		spawn()
 			h.suppression_act(src)
 

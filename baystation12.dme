@@ -1833,6 +1833,7 @@
 #include "code\modules\halo\misc\armourspecials\armourspecials.dm"
 #include "code\modules\halo\misc\armourspecials\cloaking.dm"
 #include "code\modules\halo\misc\armourspecials\cloaking_limited.dm"
+#include "code\modules\halo\misc\armourspecials\cloaking_overrides.dm"
 #include "code\modules\halo\misc\armourspecials\dispenseitems.dm"
 #include "code\modules\halo\misc\armourspecials\gear.dm"
 #include "code\modules\halo\misc\armourspecials\gear_defs.dm"

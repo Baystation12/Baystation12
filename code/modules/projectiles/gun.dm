@@ -759,6 +759,8 @@
 
 /obj/item/weapon/gun/examine(mob/user)
 	. = ..()
+	if(slowdown_general == 0)
+		to_chat(user,"<span class = 'notice'>The relatively small size and low weight make it unencumbering and allows for faster movement than when utilising full rifles.</span>")
 	if(firemodes.len > 1)
 		var/datum/firemode/current_mode = firemodes[sel_mode]
 		to_chat(user, "The fire selector is set to [current_mode.name].")

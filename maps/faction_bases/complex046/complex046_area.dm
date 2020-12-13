@@ -1,4 +1,10 @@
 
+/area/shuttle/covenant_offsite_supply
+
+/obj/effect/shuttle_landmark/covenant_offsite_supply
+
+//The above are placeholders because this map is used to hold supply shuttles
+
 /area/faction_base/oni
 	name = "ONI Base"
 	has_gravity = 1

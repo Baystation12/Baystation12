@@ -85,10 +85,11 @@
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
 
-	firemodes = list(
-		list(mode_name="Semiauto",       burst=1,    fire_delay=0,    move_delay=null, use_launcher=null, one_hand_penalty=4, burst_accuracy=(1), dispersion=null),
-		list(mode_name="3-round bursts", burst=3,    fire_delay=null, move_delay=5,    use_launcher=null, one_hand_penalty=5, burst_accuracy=list(0,0,-1), dispersion=list(0.0, 0.6, 0.8))
-		)
+	burst = 5
+	burst_delay = 1.8
+	one_hand_penalty = -1
+	dispersion = list(0.0,0.2,0.4,0.6,0.73) //@ 7 tiles, deviation is 0 - 1 tiles.
+	hud_bullet_row_num = 20
 
 	attachment_slots = list("sight","stock","barrel")
 	//This is Here because the MA5B spawns with a stock.

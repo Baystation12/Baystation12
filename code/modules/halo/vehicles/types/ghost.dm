@@ -26,6 +26,7 @@
 
 	light_color = "#C1CEFF"
 
+	acceleration = 1.5
 	min_speed = 6.25
 	max_speed = 2.25
 	drag = 2.25

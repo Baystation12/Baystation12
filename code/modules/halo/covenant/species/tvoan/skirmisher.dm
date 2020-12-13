@@ -24,7 +24,7 @@
 	pain_mod = 0.9
 	brute_mod = 1.1
 	burn_mod = 1.1
-	slowdown = -0.8 //0.3 higher than a spartan.
+	slowdown = -0.3
 
 	equipment_slowdown_multiplier = 1.1 //Disincentives multiple weapon carry
 	gibbed_anim = null
@@ -55,6 +55,7 @@
 
 	roll_distance = 4
 	per_roll_delay = 1.5 //Slightly faster than a human's dodge roll
+	dodge_roll_delay = DODGE_ROLL_BASE_COOLDOWN - 2.5 SECOND
 
 /datum/species/kig_yar_skirmisher/get_random_name(var/gender)
 	return pick(GLOB.first_names_kig_yar)

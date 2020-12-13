@@ -29,7 +29,7 @@
 	min_speed = 13
 	max_speed = 4
 	acceleration = 4
-	drag = 7
+	drag = 5
 
 /obj/item/vehicle_component/health_manager/scorpion
 	integrity = 750

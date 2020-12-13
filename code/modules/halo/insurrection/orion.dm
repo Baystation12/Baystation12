@@ -6,10 +6,12 @@
 	total_health = 220 //Slightly more health then a normal human
 	metabolism_mod = 1.15 //Slightly faster metabolism
 	darksight = 3 //Slightly better night vision!
-	slowdown = -0.4 //Increased move speed, between elite and spartan
-	inherent_verbs = list(/mob/living/carbon/human/proc/dual_wield_weapons)
+	slowdown = -0.05 //Increased move speed.
+	inherent_verbs = list()
 	unarmed_types = list(/datum/unarmed_attack/spartan_punch)
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE | HAS_EYE_COLOR
+
+	dodge_roll_delay = DODGE_ROLL_BASE_COOLDOWN - 1 SECOND
 
 	//Spartan 1's have a bit better temperature tolerance
 	siemens_coefficient = 0.9 //Better insulated against temp changes

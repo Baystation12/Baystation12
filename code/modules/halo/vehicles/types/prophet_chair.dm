@@ -18,6 +18,7 @@
 	can_space_move = 1
 	internal_air = new
 
+	acceleration = 2
 	min_speed = 8.5
 	max_speed = 2.5
 

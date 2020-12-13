@@ -50,5 +50,5 @@
 	L.Weaken(stun_time)
 	L.confused += disorient_time
 	shake_camera(L,disorient_time,2)
-	L.overlay_fullscreen("supress",/obj/screen/fullscreen/oxy, suppress_intensity)
+	L.overlay_fullscreen("suppress",/obj/screen/fullscreen/oxy, suppress_intensity)
 	return 1

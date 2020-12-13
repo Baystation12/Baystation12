@@ -29,7 +29,7 @@
 	min_speed = 13
 	max_speed = 4
 	acceleration = 4
-	drag = 5 //Hovertech = less drag
+	drag = 5
 
 /obj/vehicles/wraith/update_object_sprites()
 	. = ..()
@@ -54,7 +54,7 @@
 	desc = "A arcing-projecile firing cannon capable of inflicting heavy damage on both infantry and vehicles."
 
 	fire_delay = 40
-	dispersion = list(2)
+	dispersion = list(0.73)
 	fire_sound = 'code/modules/halo/sounds/wraith_cannon_fire.ogg'
 
 	guns_switchto = newlist(/datum/vehicle_gun/wraith_cannon,/datum/vehicle_gun/wraith_machinegun)
@@ -66,7 +66,7 @@
 	desc = "A arcing-projecile firing cannon capable of inflicting heavy damage on both infantry and vehicles."
 	burst_size = 1
 	fire_delay = 40
-	dispersion = list(2)
+	dispersion = list(0.73)
 	fire_sound = 'code/modules/halo/sounds/wraith_cannon_fire.ogg'
 	mag_used = /obj/item/ammo_magazine/wraith_cannon
 
@@ -113,7 +113,7 @@
 
 /obj/item/projectile/bullet/covenant/wraith_cannon/setup_trajectory()
 	. = ..()
-	kill_count = get_dist(loc, original) - 2 + rand(0,4)
+	kill_count = get_dist(loc, original) + rand(0,2) //Only overshoot, don't undershoot. Undershoot is an irritating player experience.
 
 /obj/item/projectile/bullet/covenant/wraith_cannon/Move(var/newloc,var/dir)
 	if(get_dist(loc,original) > (get_dist(starting,original)/2))

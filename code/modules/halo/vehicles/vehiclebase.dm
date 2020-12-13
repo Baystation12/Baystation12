@@ -435,7 +435,7 @@
 /obj/vehicles/Bump(var/atom/obstacle)
 	..()
 	. = collide_with_obstacle(obstacle)
-
+/*
 /obj/vehicles/proc/movement_loop(var/speed_index_target = 1)
 	switch(speed_index_target)
 		if(1)
@@ -474,6 +474,56 @@
 			moving_x = 0
 		else
 			moving_y = 0
+*/
+
+/obj/vehicles/proc/drag_slowdown(var/index,var/slowdown_amount = drag)
+	if(speed[index] > 0)
+		speed[index] = max(speed[index] - drag,0)
+	else
+		speed[index] = min(speed[index] + drag,0)
+
+/obj/vehicles/proc/movement_loop(var/speed_index_target = 1)
+	var/noprocstart = 0
+	if(moving_x || moving_y)
+		noprocstart = 1
+	switch(speed_index_target)
+		if(1)
+			moving_x = 1
+		if(2)
+			moving_y = 1
+	if(noprocstart)
+		return
+	spawn()
+		while (moving_x || moving_y)
+			sleep(max(min_speed - (abs(speed[1]) + abs(speed[2]) ),max_speed))
+			if(speed[1] == 0)
+				moving_x = 0
+			else
+				if(speed[1] > 0)
+					last_move = EAST
+					. = Move(get_step(loc,EAST),EAST)
+				else
+					last_move = WEST
+					. = Move(get_step(loc,WEST),WEST)
+
+			if(speed[2] == 0)
+				moving_y = 0
+			else
+				if(speed[2] > 0)
+					last_move = NORTH
+					. = Move(get_step(loc,NORTH),NORTH)
+				else
+					last_move = SOUTH
+					. = Move(get_step(loc,SOUTH),SOUTH)
+			var/list/index_list = list(1,2)
+			for(var/index in index_list)
+				if(last_moved_axis == index)
+					continue
+				drag_slowdown(index)
+			if(world.time >= next_move_input_at)
+				last_moved_axis = 0
+			if(move_sound && world.time % 2 == 0)
+				playsound(loc,move_sound,75,0,4)
 
 /obj/vehicles/bullet_act(var/obj/item/projectile/P, var/def_zone)
 	var/pos_to_dam = should_damage_occ()
@@ -543,6 +593,10 @@
 		if(WEST)
 			last_moved_axis = 1
 			speed[1] = max(speed[1] - acceleration,-min_speed)
+	if(last_moved_axis == 1)
+		drag_slowdown(2,acceleration)
+	else
+		drag_slowdown(1,acceleration)
 	if(braking_mode == 1) //If we're braking, we don't get the leeway in movement.
 		last_moved_axis = 0
 

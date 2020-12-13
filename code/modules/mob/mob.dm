@@ -982,9 +982,6 @@ mob/proc/yank_out_object()
 /mob/update_icon()
 	return
 
-/mob/proc/disrupt_cloak_if_required() //Overrided in human_defense.dm, defined here for use in click.dm's define of base mob ClickOn()
-	return
-
 /mob/verb/face_direction()
 
 	set name = "Face Direction"

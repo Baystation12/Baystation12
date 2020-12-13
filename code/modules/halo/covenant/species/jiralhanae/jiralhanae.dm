@@ -27,14 +27,11 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/cove
 	additional_langs = list(LANGUAGE_BRUTE)
 	flags = NO_MINOR_CUT
 	appearance_flags = HAS_SKIN_TONE
-	total_health = 200 //Not quite elites, but their adrenline makes up for it
 	radiation_mod = 0.6
 	spawn_flags = SPECIES_CAN_JOIN
 	brute_mod = 0.9
 	burn_mod = 0.9
 	pain_mod = 0.55
-	//ABOVE MODIFIERS ARE PLACEHOLDERS TO START BALANCING FROM.//
-	slowdown = -0.1 //A miniscule amount faster than most.
 	adrenal_break_threshold = 30//Originally, this was lower, however, the higher threshold allows brutes
 	//to sustain a longer lasting lower-level painkill rather than having their adrenaline
 	//forcefully swapped for a very short term buff
@@ -51,6 +48,7 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/cove
 	dusted_anim = null
 
 	equipment_slowdown_multiplier = 0.9
+	dodge_roll_delay = DODGE_ROLL_BASE_COOLDOWN - 1 SECOND
 
 	pain_scream_sounds = list(\
 	'code/modules/halo/sounds/species_pain_screams/brutescream1.ogg',

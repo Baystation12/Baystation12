@@ -1,10 +1,11 @@
-#include "base_assault_gm.dm"
+#include "../base_assault/base_assault_gm.dm"
+#include "urf_unsc_gm.dm"
 
-/datum/map/base_assault
+/datum/map/base_assault_unsc_vs_urf
 	name = "UNSC Outpost"
 	full_name = "111 Tauri System, UNSC Outpost"
 	system_name = "111 Tauri"
-	path = "base_assault"
+	path = "base_assault_unsc_defend_vs_urf"
 	station_levels = list()
 	admin_levels = list()
 	accessible_z_levels = list()
@@ -23,12 +24,12 @@
 	overmap_size= 10
 	overmap_event_tokens = 1
 
-	allowed_gamemodes = list("base_assault")
-	map_admin_faxes = list("Ministry of Tranquility (General)","Ministry of Resolution (War Matters)","Ministry of Fervent Intercession (Internal Affairs)")
+	allowed_gamemodes = list("base_assault_unsc_urf")
+	map_admin_faxes = list("URF Command", "HIGHCOM")
 
 #if !defined(using_map_DATUM)
 
-	#define using_map_DATUM /datum/map/base_assault
+	#define using_map_DATUM /datum/map/base_assault_unsc_vs_urf
 
 	#include "unit_tests.dm"
 
@@ -41,14 +42,13 @@
 
 	#include "../faction_bases/CassiusMoonStation/cassiusmoon.dm"
 
-	#include "../CRS_Unyielding_Transgression/includes.dm"
+	#include "../urf_flagship/includes.dm"
 
 	#include "../../code/modules/halo/lobby_music/odst_music.dm"
 	#include "../../code/modules/halo/lobby_music/halo_music.dm"
 
 	#include "../../code/modules/halo/supply/unsc.dm"
 	#include "../../code/modules/halo/supply/oni.dm"
-	#include "../../code/modules/halo/supply/covenant.dm"
 
 #elif !defined(MAP_OVERRIDE)
 
@@ -61,7 +61,7 @@
 /obj/effect/overmap/unsc_cassius_moon
 	overmap_spawn_in_me = list(/obj/effect/overmap/complex046)
 
-/datum/map/base_assault
+/datum/map/base_assault_unsc_vs_urf
 	allowed_jobs = list(\
 	/datum/job/unsc/spartan_two,
 	/datum/job/unsc/marine,
@@ -72,27 +72,10 @@
 	/datum/job/unsc/odst/squad_leader,
 	/datum/job/unsc/commanding_officer,
 	/datum/job/unsc/executive_officer,
-	/datum/job/covenant/huragok,
-	/datum/job/covenant/sangheili_minor,
-	/datum/job/covenant/sangheili_major,
-	/datum/job/covenant/sangheili_ultra,
-	/datum/job/covenant/sangheili_shipmaster,
-	/datum/job/covenant/kigyarminor,
-	/datum/job/covenant/unggoy_minor,
-	/datum/job/covenant/unggoy_major,
-	/datum/job/covenant/unggoy_ultra,
-	/datum/job/covenant/unggoy_deacon,
-	/datum/job/covenant/unggoy_heavy,
-	/datum/job/covenant/skirmmurmillo,
-	/datum/job/covenant/skirmcommando,
-	/datum/job/covenant/skirmchampion,
-	/datum/job/covenant/brute_minor,
-	/datum/job/covenant/brute_major,
-	/datum/job/covenant/brute_captain,
-	/datum/job/covenant/yanmee_minor,
-	/datum/job/covenant/yanmee_major,
-	/datum/job/covenant/yanmee_ultra,
-	/datum/job/covenant/yanmee_leader,
+	/datum/job/geminus_innie,
+	/datum/job/geminus_innie/officer,
+	/datum/job/geminus_innie/commander,
+	/datum/job/geminus_innie/orion_defector,
 	)
 
 	allowed_spawns = list(\

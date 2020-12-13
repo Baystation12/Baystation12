@@ -233,6 +233,8 @@
 		return 1
 
 /obj/structure/destructible/proc/projectile_block_check(var/obj/item/projectile/P)
+	if(P.original && P.original == src) //If they're specifically shooting at us, we'll block them all the time.
+		return 1
 	var/modified_cover_rating = cover_rating
 	if(P.starting)
 		//get_dist() will return 0 for on top of, 1 for adjacent and surrounds

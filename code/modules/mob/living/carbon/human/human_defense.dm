@@ -486,15 +486,15 @@ cloak disrupt override
 /mob/living/carbon/human/proc/suppression_act(var/obj/item/projectile/P)
 	if(!client)
 		return
-	var/seconds_since_supression = (world.time - time_last_suppressed)/10
-	if(seconds_since_supression <= 2)
-		overlay_fullscreen("supress",/obj/screen/fullscreen/oxy, 6)
+	var/seconds_since_suppression = (world.time - time_last_suppressed)/10
+	if(seconds_since_suppression <= 1.5)
+		overlay_fullscreen("suppress",/obj/screen/fullscreen/oxy, 5)
 		//severe supression effects
-	else if(seconds_since_supression <=5)
-		overlay_fullscreen("supress",/obj/screen/fullscreen/oxy, 5)
+	else if(seconds_since_suppression <=4)
+		overlay_fullscreen("suppress",/obj/screen/fullscreen/oxy, 4)
 		//medium supression effects
-	else if(seconds_since_supression <=10)
-		overlay_fullscreen("supress",/obj/screen/fullscreen/oxy, 4)
+	else if(seconds_since_suppression <=8)
+		overlay_fullscreen("suppress",/obj/screen/fullscreen/oxy, 3)
 		//low supression effects
 	if(prob(SUPRESSION_SCREAM_CHANCE))
 		emote("painscream",AUDIBLE_MESSAGE)
@@ -510,9 +510,3 @@ cloak disrupt override
 	adjustBruteLoss(damage)
 
 	return ..()
-
-/mob/living/carbon/human/disrupt_cloak_if_required()
-	var/obj/item/clothing/suit/armor/special/suit_special = wear_suit
-	if(istype(suit_special))
-		for(var/datum/armourspecials/cloaking/cloak in suit_special.specials)
-			cloak.disrupt_cloak(cloak.cloak_recover_time*1.5)

@@ -31,6 +31,9 @@
 mob/living/proc/getPerRollDelay()
 	return 2
 
+/mob/living/proc/getRollCooldown()
+	return DODGE_ROLL_BASE_COOLDOWN
+
 /mob/living/silicon/getRollDist()
 	return 0
 
@@ -39,6 +42,9 @@ mob/living/proc/getPerRollDelay()
 
 /mob/living/carbon/human/getPerRollDelay()
 	return species.per_roll_delay
+
+/mob/living/carbon/human/getRollCooldown()
+	return species.dodge_roll_delay
 
 /mob/living/proc/rollDir(var/dir_roll)
 	if(world.time < next_roll_at)
@@ -52,7 +58,7 @@ mob/living/proc/getPerRollDelay()
 	var/obj/vehicles/v = loc
 	if(istype(v))
 		v.exit_vehicle(src)
-	next_roll_at = world.time + ((roll_delay * roll_dist) + DODGE_ROLL_BASE_COOLDOWN)
+	next_roll_at = world.time + ((roll_delay * roll_dist) + getRollCooldown())
 	doRoll(dir_roll,roll_dist,roll_delay)
 
 /mob/living/proc/doRoll(var/dir_roll,var/roll_dist,var/roll_delay)
@@ -91,5 +97,3 @@ mob/living/proc/getPerRollDelay()
 
 /datum/species/proc/handle_dodge_roll(var/mob/roller,var/rolldir)
 	return 0
-
-#undef DODGE_ROLL_BASE_COOLDOWN

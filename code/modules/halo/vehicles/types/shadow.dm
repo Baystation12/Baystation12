@@ -25,6 +25,7 @@
 
 	light_color = "#C1CEFF"
 
+	acceleration = 2
 	min_speed = 8.25
 	max_speed = 2.75
 

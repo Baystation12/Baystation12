@@ -9,7 +9,7 @@
 	icon = 'code/modules/halo/icons/machinery/rearm_repair_station.dmi'
 	icon_state = "human"
 	anchored = 1
-	density = 1
+	density = 0
 
 	var/list/sheets_to_materials = list("steel" = 10,"nanolaminate" = 10)
 	var/max_material = 100

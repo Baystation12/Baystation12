@@ -202,6 +202,7 @@
 
 	var/roll_distance = 2
 	var/per_roll_delay = 2
+	var/dodge_roll_delay = DODGE_ROLL_BASE_COOLDOWN
 
 	var/default_faction
 

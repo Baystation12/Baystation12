@@ -31,6 +31,8 @@
 		slot_belt_str = 'code/modules/halo/weapons/icons/Belt_Weapons.dmi',
 		)
 
+	slowdown_general = 0
+
 /obj/item/weapon/gun/projectile/m7_smg/update_icon()
 	if(ammo_magazine)
 		icon_state = "m7smg"

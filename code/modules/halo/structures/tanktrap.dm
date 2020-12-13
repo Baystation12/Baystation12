@@ -3,6 +3,7 @@
 	name = "tanktrap"
 	desc = "This space is blocked off by a barricade."
 	icon_state = "tanktrap"
+	cover_rating = 0
 	dead_type = /obj/structure/tanktrap_dead
 
 /obj/structure/destructible/tanktrap/update_icon()
