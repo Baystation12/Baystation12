@@ -1,0 +1,7 @@
+author: "juxtaposed9930"
+delete-after: True
+changes: 
+  - tweak: "The hardsuit stealth module costs five times as much energy to maintain stealth."
+  - tweak: "The hardsuit teleporter module costs eight times as much energy to trigger. Teleportation is expensive."
+  - tweak: "The ninja hardsuit is small enough where cuffs can fit around it. Don't get caught."
+  - tweak: "The ninja hardsuit's laser armor has been lowered."
