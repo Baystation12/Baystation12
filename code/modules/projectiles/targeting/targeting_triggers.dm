@@ -28,3 +28,4 @@
 	var/obj/item/weapon/gun/G = aiming_with
 	if(istype(G))
 		G.Fire(aiming_at, owner)
+	toggle_active(FALSE, TRUE)
