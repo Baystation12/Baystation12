@@ -32,6 +32,11 @@
 
 	unacidable = 1
 
+	executions_allowed = TRUE
+	start_execute_messages  = list(BP_CHEST = "\The USER prepares to run \the VICTIM through with \the WEAPON!", BP_HEAD = "\The USER steps over \the VICTIM and winds up their arm, holding \the WEAPON!")
+	finish_execute_messages = list(BP_CHEST = "\The USER runs \the VICTIM through with \the WEAPON!", BP_HEAD = "\The USER slices \the VICTIM's head clean off with \the WEAPON!")
+	var/decapitate = TRUE
+
 /obj/item/weapon/melee/energy/elite_sword/New()
 	. = ..()
 	verbs += /obj/item/weapon/melee/energy/elite_sword/proc/enable_failsafe
@@ -61,6 +66,17 @@
 	if(mob.species.type in ESWORD_LEAP_FAR_SPECIES)
 		return 4
 	return lunge_dist
+
+/obj/item/weapon/melee/energy/elite_sword/can_execute(mob/living/carbon/human/user, mob/living/carbon/human/victim)
+	if(!active)
+		return FALSE
+	return ..()
+	
+/obj/item/weapon/melee/energy/elite_sword/do_execute(mob/living/carbon/human/user, mob/living/carbon/human/victim)
+	if(!..())
+		return
+	if(user.zone_sel.selecting == BP_HEAD && decapitate)
+		victim.get_organ(BP_HEAD)?.droplimb() //Decapitate them
 
 /obj/item/weapon/melee/energy/elite_sword/proc/change_misc_variables(var/deactivate = 0)
 	if(deactivate)
@@ -135,6 +151,9 @@
 	sharp = 0
 
 	lunge_dist = 2
+	start_execute_messages  = list(BP_CHEST = "\The USER prepares to run \the VICTIM through with \the WEAPON!", BP_HEAD = "\The USER steps over \the VICTIM and winds up their arm, holding \the WEAPON!")
+	finish_execute_messages = list(BP_CHEST = "\The USER runs \the VICTIM through with \the WEAPON!", BP_HEAD = "\The USER slices \the VICTIM's throat wide open with \the WEAPON!")
+	decapitate = FALSE
 
 /obj/item/weapon/melee/energy/elite_sword/dagger/activate(mob/living/user)
 	..()
@@ -218,6 +237,10 @@ Luckily, this isn't a downside due to the explosive properties of such a large a
 	var/regen_at = -1
 	var/explode_damage = 60
 
+	executions_allowed = TRUE
+	start_execute_messages = list(BP_CHEST = "\The USER lines up \the WEAPON against \the VICTIM's back!", BP_HEAD = "\The USER lines up \the WEAPON against \the VICTIM's neck!")
+	finish_execute_messages = list(BP_CHEST ="\The USER impales \the VICTIM with \the WEAPON and detonates it!", BP_HEAD = "\The USER stabs clean through \the VICTIM's neck with \the WEAPON, detonating it!")
+
 /obj/item/weapon/melee/blamite/update_icon()
 	if(regen_at != -1)
 		icon_state = "[initial(icon_state)]_handle"
@@ -257,16 +280,18 @@ Luckily, this isn't a downside due to the explosive properties of such a large a
 	else
 		visible_message("<span class = 'warning'>[name] overloads, singing the air around it!</span>")
 
-/obj/item/weapon/melee/blamite/proc/do_explode_in_player(var/mob/living/player)
+/obj/item/weapon/melee/blamite/proc/do_explode_in_player(var/mob/living/player, var/silent = FALSE)
 	//Kabloeey in a player//
 	if(player)
 		player.adjustFireLoss(explode_damage)
-		player.visible_message("<span class = 'notice'>The embedded Blamite Blade overloads, burning [player.name]!</span>")
+		if(!silent)
+			player.visible_message("<span class = 'notice'>The embedded Blamite Blade overloads, burning [player.name]!</span>")
 
-/obj/item/weapon/melee/blamite/proc/pre_explode_in_player(var/mob/living/user,var/mob/living/carbon/human/target)
+/obj/item/weapon/melee/blamite/proc/pre_explode_in_player(var/mob/living/user,var/mob/living/carbon/human/target, var/silent = FALSE)
 	if(!istype(target))
 		return
-	user.visible_message("<span class = 'warning'>[user.name] lodges the blade of their [name] into [target.name], snapping it off at the hilt.</span>")
+	if(!silent)
+		user.visible_message("<span class = 'warning'>[user.name] lodges the blade of their [name] into [target.name], snapping it off at the hilt.</span>")
 	regen_at = world.time + regen_delay
 	explode_at = -1
 	update_icon()
@@ -278,7 +303,7 @@ Luckily, this isn't a downside due to the explosive properties of such a large a
 	embed_organ.embed(shard)
 	spawn(explode_delay)
 		if(target && locate(/obj/item/weapon/material/shard/shrapnel/blamite) in target.embedded)
-			do_explode_in_player(target)
+			do_explode_in_player(target, silent)
 
 /obj/item/weapon/melee/blamite/attack_self(var/mob/user)
 	if(regen_at != -1)
@@ -291,6 +316,18 @@ Luckily, this isn't a downside due to the explosive properties of such a large a
 	explode_at = world.time + explode_delay
 	GLOB.processing_objects |= src
 	update_icon()
+
+/obj/item/weapon/melee/blamite/can_execute(mob/living/carbon/human/user, mob/living/carbon/human/victim)
+	if(regen_at != -1)
+		return FALSE
+	return ..()
+
+//Instant explosion
+/obj/item/weapon/melee/blamite/do_execute(mob/living/carbon/human/user, mob/living/carbon/human/victim)
+	if(..())
+		explode_delay = 1
+		pre_explode_in_player(user, victim, TRUE)
+		explode_delay = initial(explode_delay)
 
 /obj/item/weapon/melee/blamite/process()
 	if(explode_at != -1 && world.time > explode_at)

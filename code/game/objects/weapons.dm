@@ -8,6 +8,12 @@
 		..()
 	return
 
+/obj/item/weapon/attack(mob/living/M, mob/living/user, target_zone)
+	if(user.a_intent == I_GRAB && can_execute(user, M) && M.lying)
+		do_execute(user, M)
+		return
+	. = ..()
+	
 /obj/item/weapon/handle_shield(var/mob/user, var/damage, var/atom/dam_source = null, var/mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	var/obj/item/damage_source = dam_source
 	if(isnull(damage_source))

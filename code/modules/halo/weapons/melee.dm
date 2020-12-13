@@ -1,6 +1,6 @@
 
 /obj/item/weapon/material/knife/combat_knife
-	name = "combat knife"
+	name = "\improper combat knife"
 	desc = "Multipurpose knife for utility use and close quarters combat"
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "Knife"
@@ -13,8 +13,12 @@
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	armor_penetration = 70
 
+	executions_allowed = TRUE
+	start_execute_messages = list(BP_CHEST = "\The USER steps on \the VICTIM and brandishes \the WEAPON!", BP_HEAD = "\The USER grips \the VICTIM's shoulder and brandishes \the WEAPON!")
+	finish_execute_messages = list(BP_CHEST = "\The USER guts VICTIM with \the WEAPON!", BP_HEAD = "\The USER slices clean through \the VICTIM's neck with \the WEAPON!")
+
 /obj/item/weapon/material/machete
-	name = "machete"
+	name = "\improper machete"
 	desc = "A standard issue machete used for hacking things apart. It is very sharp "
 	icon= 'code/modules/halo/weapons/icons/machete.dmi'
 	icon_state = "machete_obj"
@@ -37,6 +41,10 @@
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	unacidable = 1
 	lunge_dist = 2
+
+	executions_allowed = TRUE
+	start_execute_messages = list(BP_CHEST = "\The USER steps on \the VICTIM and brandishes \the WEAPON!", BP_HEAD = "\The USER grips \the VICTIM's shoulder and brandishes \the WEAPON!")
+	finish_execute_messages = list(BP_CHEST = "\The USER guts VICTIM with \the WEAPON!", BP_HEAD = "\The USER slices clean through \the VICTIM's neck with \the WEAPON!")
 
 /obj/item/weapon/material/machete/officersword
 	name = "CO's Sword"

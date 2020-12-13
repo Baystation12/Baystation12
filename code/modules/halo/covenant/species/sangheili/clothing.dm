@@ -167,6 +167,11 @@
 	slot_r_hand_str = "en_dag_r_hand" )
 	hitsound = 'code/modules/halo/sounds/Energyswordhit.ogg'
 
+/obj/item/weapon/melee/energy/elite_sword/g_dagger/can_execute(mob/living/carbon/human/user, mob/living/carbon/human/victim)
+	active = 1
+	. = ..()
+	active = initial(active)
+
 /obj/item/weapon/melee/energy/elite_sword/g_dagger/New(var/obj/created_by)
 	.=..()
 	creator_dagger = created_by
