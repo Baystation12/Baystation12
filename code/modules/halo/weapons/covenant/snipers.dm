@@ -21,6 +21,7 @@
 	accuracy = 1
 	wielded_item_state = "carbine-wielded"
 	advanced_covenant = 1
+	speed_reload_time = -1 //already auto-ejects
 	matter = list("nanolaminate" = 1)
 	hud_bullet_row_num = 9
 	hud_bullet_reffile = 'code/modules/halo/icons/hud_display/hud_bullet_7x8.dmi'
