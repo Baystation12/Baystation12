@@ -11,16 +11,12 @@
 
 			var/s_was =      "was"
 			var/s_survivor = "survivor"
-			var/s_escaped =  "escaped"
 
 			if(data["survivors"] != 1)
 				s_was = "were"
 				s_survivor = "survivors"
 
-			if(!evacuation_controller.emergency_evacuation)
-				s_escaped = "transferred"
-
-			desc += "There [s_was] **[data["survivors"]] [s_survivor] ([data["escaped"]] [s_escaped])** and **[data["ghosts"]] ghosts.**"
+			desc += "There [s_was] **[data["survivors"]] [s_survivor] ([data["escaped"]] escaped,  [data["marooned"]] marooned)** and **[data["ghosts"]] ghosts.**"
 		else
 			desc += "There were **no survivors** ([data["ghosts"]] ghosts)."
 

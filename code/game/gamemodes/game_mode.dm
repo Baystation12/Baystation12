@@ -332,6 +332,7 @@ var/global/list/additional_antag_types = list()
 	var/ghosts = 0
 	var/escaped_humans = 0
 	var/escaped_total = 0
+	var/marooned_total = 0
 
 	for(var/mob/M in GLOB.player_list)
 		if(M.client)
@@ -341,10 +342,14 @@ var/global/list/additional_antag_types = list()
 				if(ishuman(M))
 					surviving_humans++
 				var/area/A = get_area(M)
-				if(A && is_type_in_list(A, GLOB.using_map.post_round_safe_areas))
+				if(A && (istype(A, /area/shuttle) && isEscapeLevel(A.z)))
 					escaped_total++
 					if(ishuman(M))
 						escaped_humans++
+				if (evacuation_controller.emergency_evacuation && !isEscapeLevel(A.z)) //left behind after evac
+					marooned_total++
+				if (!evacuation_controller.emergency_evacuation && isNotStationLevel(A.z))
+					marooned_total++
 			else if(isghost(M))
 				ghosts++
 
@@ -357,7 +362,7 @@ var/global/list/additional_antag_types = list()
 	var/text = "<br><br>"
 	if(surviving_total > 0)
 		text += "There [surviving_total>1 ? "were <b>[surviving_total] survivors</b>" : "was <b>one survivor</b>"]"
-		text += " (<b>[escaped_total>0 ? escaped_total : "none"] [evacuation_controller.emergency_evacuation ? "escaped" : "transferred"]</b>) and <b>[ghosts] ghosts</b>.<br>"
+		text += " (<b>[escaped_total>0 ? escaped_total : "none"] escaped, [marooned_total > 0 ? marooned_total : "none"] marooned</b>) and <b>[ghosts] ghosts</b>.<br>"
 	else
 		text += "There were <b>no survivors</b> (<b>[ghosts] ghosts</b>)."
 
@@ -377,7 +382,7 @@ var/global/list/additional_antag_types = list()
 		SSstatistics.set_field("escaped_total",escaped_total)
 
 	send2mainirc("A round of [src.name] has ended - [surviving_total] survivor\s, [ghosts] ghost\s.")
-	SSwebhooks.send(WEBHOOK_ROUNDEND, list("survivors" = surviving_total, "escaped" = escaped_total, "ghosts" = ghosts))
+	SSwebhooks.send(WEBHOOK_ROUNDEND, list("survivors" = surviving_total, "escaped" = escaped_total, "ghosts" = ghosts, "marooned" = marooned_total))
 
 	return 0
 
