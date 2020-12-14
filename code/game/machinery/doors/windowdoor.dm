@@ -10,6 +10,7 @@
 	health = 150
 	visible = 0.0
 	use_power = POWER_USE_OFF
+	stat_immune = NOSCREEN | NOINPUT | NOPOWER
 	uncreated_component_parts = null
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CHECKS_BORDER
 	opacity = 0
@@ -160,12 +161,21 @@
 			return TRUE
 
 /obj/machinery/door/window/emag_act(var/remaining_charges, var/mob/user)
-	if (density && operable())
-		operating = -1
-		flick("[src.base_state]spark", src)
+	if (emagged)
+		to_chat(user, SPAN_WARNING("\The [src] has already been locked open."))
+		return FALSE
+	if (!operable())
+		to_chat(user, SPAN_WARNING("\The [src] is not functioning and doesn't respond to your attempt to short the circuitry."))
+		return FALSE
+
+	operating = -1
+	emagged = TRUE
+	to_chat(user, SPAN_NOTICE("You short out \the [src]'s internal circuitry, locking it open!"))
+	if (density)
+		flick("[base_state]spark", src)
 		sleep(6)
 		open()
-		return 1
+	return TRUE
 
 /obj/machinery/door/emp_act(severity)
 	if(prob(20/severity))
