@@ -344,6 +344,9 @@
 	else if(src.health < src.maxhealth * 3/4)
 		to_chat(user, "\The [src] shows signs of damage!")
 
+	if (emagged && ishuman(user) && user.skill_check(SKILL_COMPUTER, SKILL_ADEPT))
+		to_chat(user, SPAN_WARNING("\The [src]'s control panel looks fried."))
+
 
 /obj/machinery/door/set_broken(new_state)
 	. = ..()
