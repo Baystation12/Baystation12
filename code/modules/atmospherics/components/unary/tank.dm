@@ -42,6 +42,7 @@
 // required for paint sprayers to work due to an override in pipes.dm
 /obj/machinery/atmospherics/unary/tank/set_color(new_color)
 	color = new_color
+	pipe_color = new_color
 	icon_state = "air"
 
 /obj/machinery/atmospherics/unary/tank/update_underlays()
