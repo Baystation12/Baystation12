@@ -1,4 +1,0 @@
-author: "Mucker"
-delete-after: True
-changes: 
-  - tweak: "Visitable away sites will no longer sometimes spawn with hazards over top them."
