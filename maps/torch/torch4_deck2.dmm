@@ -10110,14 +10110,13 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/engineering/atmos)
 "xI" = (
-/obj/structure/fireaxecabinet{
-	pixel_y = -32
-	},
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 4;
 	icon_state = "1-4"
 	},
+/obj/structure/closet/secure_closet/medical_torch,
+/obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/techfloor,
 /area/storage/medical)
 "xJ" = (
@@ -17313,6 +17312,12 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/shieldbay)
+"SS" = (
+/obj/item/device/radio/intercom/department/medbay{
+	pixel_y = 23
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/storage/medical)
 "SU" = (
 /obj/structure/sign/warning/pods/east{
 	dir = 1;
@@ -17582,9 +17587,8 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/storage/cargo)
 "TW" = (
-/obj/item/device/radio/intercom/department/medbay{
-	dir = 1;
-	pixel_y = -28
+/obj/structure/fireaxecabinet{
+	pixel_y = -32
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/storage/medical)
@@ -42193,7 +42197,7 @@ aU
 Xr
 bW
 Lk
-eP
+SS
 eP
 TW
 Lk
