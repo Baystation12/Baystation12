@@ -40,6 +40,9 @@
 
 	forceMove(locate(start_x, start_y, GLOB.using_map.overmap_z))
 
+	for(var/obj/effect/overmap/event/E in loc)
+		qdel(E)
+
 	docking_codes = "[ascii2text(rand(65,90))][ascii2text(rand(65,90))][ascii2text(rand(65,90))][ascii2text(rand(65,90))]"
 
 	testing("Located sector \"[name]\" at [start_x],[start_y], containing Z [english_list(map_z)]")
