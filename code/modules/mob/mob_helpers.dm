@@ -39,6 +39,19 @@
 /mob/living/carbon/human/isMonkey()
 	return istype(species, /datum/species/monkey)
 
+
+/**
+ * Checks if the target has a grab from the user
+ */
+/mob/proc/has_danger_grab(mob/user)
+	if (user == src || istype(user, /mob/living/silicon/robot) || istype(user, /mob/living/bot))
+		return TRUE
+
+	for (var/obj/item/grab/G in grabbed_by)
+		if (G.force_danger())
+			return TRUE
+
+
 proc/isdeaf(A)
 	if(isliving(A))
 		var/mob/living/M = A

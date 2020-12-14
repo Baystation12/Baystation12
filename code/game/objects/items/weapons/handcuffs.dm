@@ -52,7 +52,7 @@
 				return
 
 			//check for an aggressive grab (or robutts)
-			if(can_place(C, user))
+			if(C.has_danger_grab(user))
 				place_handcuffs(C, user)
 			else
 				to_chat(user, "<span class='danger'>You need to have a firm grip on [C] before you can put \the [src] on!</span>")
@@ -90,7 +90,7 @@
 	if(!do_after(user,30, target))
 		return 0
 
-	if(!can_place(target, user)) // victim may have resisted out of the grab in the meantime
+	if(!target.has_danger_grab(user)) // victim may have resisted out of the grab in the meantime
 		return 0
 
 	var/obj/item/weapon/handcuffs/cuffs = src
