@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - admin: "Attack logs and other admin logs that didn't highlight antags now highlight them in yellow, similarly to admin help logs."
