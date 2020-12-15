@@ -8506,7 +8506,7 @@
 /obj/machinery/camera/network/command{
 	c_tag = "Sol Government Representative - Office";
 	dir = 4;
-	network = list("Command","Security")
+	network = list("Command")
 	},
 /turf/simulated/floor/carpet/blue2,
 /area/crew_quarters/heads/office/sgr)
