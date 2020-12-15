@@ -362,7 +362,8 @@
 			muzzle_effect(effect_transform)
 			first_step = 0
 		else if(!bumped)
-			tracer_effect(effect_transform)
+			spawn()
+				tracer_effect(effect_transform)
 
 		if(!hitscan)
 			sleep(step_delay)	//add delay between movement iterations if it's not a hitscan weapon
