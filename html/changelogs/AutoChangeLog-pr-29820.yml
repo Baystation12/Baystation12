@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - admin: "Injecting dangerous or harmful chemicals with a sleeper now produces attack logs, for consistency with other injection methods."
