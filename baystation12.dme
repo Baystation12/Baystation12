@@ -1566,6 +1566,8 @@
 #include "code\modules\clothing\under\accessories\holster.dm"
 #include "code\modules\clothing\under\accessories\lockets.dm"
 #include "code\modules\clothing\under\accessories\medals.dm"
+#include "code\modules\clothing\under\accessories\pridepins.dm"
+#include "code\modules\clothing\under\accessories\pronouns.dm"
 #include "code\modules\clothing\under\accessories\stethoscope.dm"
 #include "code\modules\clothing\under\accessories\storage.dm"
 #include "code\modules\clothing\under\accessories\ties.dm"
