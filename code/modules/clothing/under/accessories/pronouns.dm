@@ -12,8 +12,8 @@
 	desc = "A badge showing the wearer's pronouns: he, him and his."
 
 /obj/item/clothing/accessory/pronouns/sheherbadge
-	name = "she/hers pronouns badge"
-	desc = "A badge showing the wearer's pronouns: she, hers and hers."
+	name = "she/her pronouns badge"
+	desc = "A badge showing the wearer's pronouns: she, her and hers."
 
 /obj/item/clothing/accessory/pronouns/hetheybadge
 	name = "he/they pronouns badge"
