@@ -1177,7 +1177,7 @@
 /area/verne/hangar)
 "et" = (
 /obj/machinery/shipsensors,
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 4;
 	icon_state = "handrail"
 	},
@@ -2152,9 +2152,9 @@
 /obj/machinery/light/small/red{
 	dir = 1
 	},
-/obj/structure/handrai,
+/obj/structure/handrail,
 /obj/structure/anomaly_container,
-/obj/structure/handrai,
+/obj/structure/handrail,
 /turf/simulated/floor/plating,
 /area/verne/catfish/engineering)
 "mx" = (
@@ -2735,7 +2735,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 8;
 	icon_state = "handrail"
 	},
@@ -3968,7 +3968,7 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/verne/xenosci/workshop)
 "AE" = (
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 4;
 	icon_state = "handrail"
 	},
@@ -4075,7 +4075,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 8;
 	icon_state = "handrail"
 	},
@@ -4185,7 +4185,7 @@
 	dir = 10
 	},
 /obj/effect/floor_decal/industrial/warning,
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 8;
 	icon_state = "handrail"
 	},
@@ -4468,7 +4468,7 @@
 /turf/simulated/floor/plating,
 /area/verne/hangar)
 "EI" = (
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 4;
 	icon_state = "handrail"
 	},
@@ -4572,7 +4572,7 @@
 	dir = 4;
 	pixel_x = 32
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 8;
 	icon_state = "handrail"
 	},
@@ -4624,7 +4624,7 @@
 /turf/simulated/floor/reinforced/airless,
 /area/verne/engineering/external)
 "Ga" = (
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 1;
 	icon_state = "handrail"
 	},
@@ -4702,7 +4702,7 @@
 /turf/simulated/floor/tiled/white,
 /area/verne/xenosci/workshop)
 "GT" = (
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 4;
 	icon_state = "handrail"
 	},
@@ -4845,7 +4845,7 @@
 /obj/effect/floor_decal/techfloor{
 	dir = 6
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 8;
 	icon_state = "handrail"
 	},
@@ -5070,7 +5070,7 @@
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 4
 	},
-/obj/structure/handrai,
+/obj/structure/handrail,
 /obj/structure/closet/walllocker{
 	name = "Net Launcher Locker";
 	pixel_y = 32
@@ -5116,7 +5116,7 @@
 /area/verne/engineering/decktransfer)
 "Kq" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 8;
 	icon_state = "handrail"
 	},
@@ -5291,7 +5291,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 4;
 	icon_state = "handrail"
 	},
@@ -5445,7 +5445,7 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 8;
 	icon_state = "handrail"
 	},
@@ -6656,7 +6656,7 @@
 	dir = 1
 	},
 /obj/machinery/suspension_gen,
-/obj/structure/handrai,
+/obj/structure/handrail,
 /turf/simulated/floor/plating,
 /area/verne/catfish/engineering)
 "XP" = (
@@ -6838,7 +6838,7 @@
 /obj/machinery/porta_turret{
 	req_access = list("ACCESS_VERNE")
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 1;
 	icon_state = "handrail"
 	},

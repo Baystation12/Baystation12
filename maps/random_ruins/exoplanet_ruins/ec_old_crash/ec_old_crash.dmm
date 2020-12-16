@@ -254,7 +254,7 @@
 /area/map_template/ecship/crew)
 "aM" = (
 /obj/structure/reagent_dispensers/water_cooler,
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 4;
 	icon_state = "handrail"
 	},
@@ -284,7 +284,7 @@
 /area/map_template/ecship/crew)
 "aP" = (
 /obj/structure/closet/crate/freezer/rations,
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 8;
 	icon_state = "handrail"
 	},
@@ -296,7 +296,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/map_template/ecship/crew)
 "aQ" = (
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 4;
 	icon_state = "handrail"
 	},
@@ -496,7 +496,7 @@
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "bj" = (
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 8;
 	icon_state = "handrail"
 	},
@@ -565,7 +565,7 @@
 	dir = 9;
 	icon_state = "corner_white"
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 4;
 	icon_state = "handrail"
 	},
@@ -614,7 +614,7 @@
 	dir = 6;
 	icon_state = "corner_white"
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 8;
 	icon_state = "handrail"
 	},
@@ -684,7 +684,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/map_template/ecship/crew)
 "bA" = (
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 8;
 	icon_state = "handrail"
 	},
@@ -758,7 +758,7 @@
 	dir = 9;
 	icon_state = "corner_white"
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 4;
 	icon_state = "handrail"
 	},
@@ -809,7 +809,7 @@
 	dir = 6;
 	icon_state = "corner_white"
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 8;
 	icon_state = "handrail"
 	},
@@ -935,7 +935,7 @@
 	dir = 9;
 	icon_state = "corner_white"
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 4;
 	icon_state = "handrail"
 	},
@@ -1113,7 +1113,7 @@
 	dir = 9;
 	icon_state = "corner_white"
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 4;
 	icon_state = "handrail"
 	},
@@ -1174,7 +1174,7 @@
 /obj/structure/sign/warning/nosmoking_2{
 	pixel_x = 26
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 8;
 	icon_state = "handrail"
 	},
@@ -1227,7 +1227,7 @@
 	dir = 9;
 	icon_state = "corner_white"
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 4;
 	icon_state = "handrail"
 	},
@@ -1279,7 +1279,7 @@
 	dir = 6;
 	icon_state = "corner_white"
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 8;
 	icon_state = "handrail"
 	},
@@ -1363,7 +1363,7 @@
 	dir = 9;
 	icon_state = "corner_white"
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 4;
 	icon_state = "handrail"
 	},
@@ -1405,7 +1405,7 @@
 	dir = 6;
 	icon_state = "corner_white"
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 8;
 	icon_state = "handrail"
 	},
@@ -1596,7 +1596,7 @@
 	dir = 9;
 	icon_state = "corner_white"
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 4;
 	icon_state = "handrail"
 	},
@@ -1617,7 +1617,7 @@
 	dir = 6;
 	icon_state = "corner_white"
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 8;
 	icon_state = "handrail"
 	},
@@ -1642,13 +1642,13 @@
 /area/map_template/ecship/engineering)
 "dl" = (
 /obj/structure/catwalk,
-/obj/structure/handrai,
+/obj/structure/handrail,
 /obj/effect/landmark/scorcher,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "dm" = (
 /obj/structure/catwalk,
-/obj/structure/handrai,
+/obj/structure/handrail,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
 	dir = 6;
 	icon_state = "intact"
@@ -1667,7 +1667,7 @@
 /turf/simulated/floor,
 /area/map_template/ecship/engineering)
 "do" = (
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 1;
 	icon_state = "handrail"
 	},
@@ -1688,7 +1688,7 @@
 	dir = 8;
 	icon_state = "warning"
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 1;
 	icon_state = "handrail"
 	},
@@ -1743,7 +1743,7 @@
 	dir = 4;
 	icon_state = "warning"
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 1;
 	icon_state = "handrail"
 	},
@@ -1781,7 +1781,7 @@
 	dir = 4;
 	icon_state = "intact"
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 1;
 	icon_state = "handrail"
 	},
@@ -1793,7 +1793,7 @@
 /area/map_template/ecship/engineering)
 "dv" = (
 /obj/structure/catwalk,
-/obj/structure/handrai,
+/obj/structure/handrail,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
 	dir = 4;
 	icon_state = "intact"
@@ -1834,7 +1834,7 @@
 /area/map_template/ecship/engine)
 "dz" = (
 /obj/structure/catwalk,
-/obj/structure/handrai,
+/obj/structure/handrail,
 /obj/structure/cable{
 	d1 = 16;
 	d2 = 0;

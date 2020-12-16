@@ -13,7 +13,7 @@
 /obj/item/device/radio/intercom/map_preset/scavver{
 	pixel_y = 23
 	},
-/obj/structure/handrai,
+/obj/structure/handrail,
 /turf/simulated/floor/tiled/dark,
 /area/scavver/lifepod)
 "ac" = (
@@ -347,7 +347,7 @@
 /obj/effect/floor_decal/techfloor/orange{
 	dir = 1
 	},
-/obj/structure/handrai,
+/obj/structure/handrail,
 /obj/item/device/radio/intercom/map_preset/scavver{
 	pixel_y = 23
 	},
@@ -427,7 +427,7 @@
 	pressure_checks_default = 2;
 	pump_direction = 0
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 8
 	},
 /turf/simulated/floor/airless,
@@ -605,7 +605,7 @@
 /turf/simulated/wall,
 /area/scavver/gantry/up1)
 "fw" = (
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 4
 	},
 /obj/structure/railing/mapped{
@@ -1053,7 +1053,7 @@
 	icon_state = "map_injector";
 	id = "scavver_harvest_in"
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 8
 	},
 /turf/simulated/floor/airless,
@@ -1711,7 +1711,7 @@
 /turf/simulated/floor/airless,
 /area/scavver/yachtup)
 "nM" = (
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 1
 	},
 /obj/machinery/atmospherics/binary/pump/high_power{
@@ -1997,7 +1997,7 @@
 /turf/simulated/floor/airless,
 /area/scavver/gantry/up1)
 "qh" = (
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 4
 	},
 /obj/machinery/recharger/wallcharger{
@@ -2189,7 +2189,7 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark/monotile,
@@ -2338,7 +2338,7 @@
 /obj/machinery/shipsensors/weak{
 	use_power = 0
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 1
 	},
 /turf/simulated/floor/reinforced/airless,
@@ -2635,7 +2635,7 @@
 /obj/effect/floor_decal/corner/grey/border{
 	dir = 6
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 8
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -2716,7 +2716,7 @@
 /obj/effect/floor_decal/techfloor/orange{
 	dir = 6
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -2932,7 +2932,7 @@
 /obj/structure/railing/mapped{
 	dir = 4
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 1
 	},
 /turf/simulated/floor/airless,
@@ -3469,7 +3469,7 @@
 /obj/structure/railing/mapped{
 	dir = 4
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 4
 	},
 /turf/simulated/floor/airless,
@@ -3532,7 +3532,7 @@
 /turf/simulated/floor/airless,
 /area/scavver/yachtup)
 "BE" = (
-/obj/structure/handrai,
+/obj/structure/handrail,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
@@ -3658,7 +3658,7 @@
 	dir = 1;
 	id_tag = "scavpod_shuttle_pump_out_internal"
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 8
 	},
 /obj/machinery/embedded_controller/radio/airlock/tin_can{
@@ -3786,7 +3786,7 @@
 /turf/simulated/floor/airless,
 /area/scavver/yachtup)
 "Eg" = (
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 1
 	},
 /turf/simulated/floor/reinforced/airless,
@@ -4247,7 +4247,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 10
 	},
-/obj/structure/handrai,
+/obj/structure/handrail,
 /turf/simulated/floor/tiled/techfloor/grid{
 	initial_gas = newlist()
 	},
@@ -4556,7 +4556,7 @@
 /turf/simulated/floor/airless,
 /area/scavver/yachtup)
 "LS" = (
-/obj/structure/handrai,
+/obj/structure/handrail,
 /obj/structure/sign/kiddieplaque{
 	desc = "A plaque with information regarding this particular lifepod. It reads: 'Armalev Industries Skyfin-E, Exoplanetary Suvival Pod' there's a registry number, and an assigned mothership, but they've both been scratched to illegibility.";
 	name = "\improper Lifepod Plaque";
@@ -4874,7 +4874,7 @@
 	id_tag = "dropodeast_sensor_chamber";
 	pixel_x = 26
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 8
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
@@ -4982,7 +4982,7 @@
 /obj/structure/railing/mapped{
 	dir = 4
 	},
-/obj/structure/handrai,
+/obj/structure/handrail,
 /turf/simulated/floor/airless,
 /area/scavver/escapepod)
 "Qd" = (
@@ -5096,7 +5096,7 @@
 /obj/machinery/air_sensor{
 	id_tag = "scavver_harvest_sensor"
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 8
 	},
 /obj/structure/inflatable/door,
@@ -5288,7 +5288,7 @@
 /turf/simulated/floor/airless,
 /area/scavver/gantry/up2)
 "Ud" = (
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 1
 	},
 /obj/machinery/atmospherics/binary/pump/high_power{
@@ -5431,7 +5431,7 @@
 /obj/effect/decal/cleanable/liquid_fuel,
 /obj/item/weapon/csi_marker/n1,
 /obj/item/ammo_casing/rifle/used,
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 4
 	},
 /obj/structure/railing/mapped{
@@ -5452,7 +5452,7 @@
 /turf/simulated/floor/airless,
 /area/scavver/yachtup)
 "VQ" = (
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 4
 	},
 /obj/machinery/atmospherics/unary/vent_pump/tank{
@@ -5602,7 +5602,7 @@
 /area/scavver/gantry/up2)
 "WW" = (
 /obj/effect/decal/cleanable/liquid_fuel,
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 4
 	},
 /obj/structure/railing/mapped{
@@ -5655,7 +5655,7 @@
 	tag_exterior_sensor = "dropodeast_sensor_external";
 	tag_interior_door = "dropodeast_interior_door"
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 8
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
@@ -5678,7 +5678,7 @@
 	power_rating = 15000;
 	scrubbing = "siphon"
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 8
 	},
 /obj/machinery/airlock_sensor{
@@ -5848,7 +5848,7 @@
 	master_tag = "dropodeast";
 	pixel_y = 24
 	},
-/obj/structure/handrai,
+/obj/structure/handrail,
 /obj/machinery/meter,
 /obj/machinery/atmospherics/pipe/simple/visible/blue{
 	dir = 4
