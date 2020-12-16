@@ -10,7 +10,7 @@
 	armor = list(
 		bio = ARMOR_BIO_RESISTANT
 		)
-	valid_accessory_slots = list(ACCESSORY_SLOT_ARMBAND)
+	valid_accessory_slots = list(ACCESSORY_SLOT_ARMBAND, ACCESSORY_SLOT_INSIGNIA, ACCESSORY_SLOT_RANK)
 	restricted_accessory_slots = list(ACCESSORY_SLOT_ARMBAND)
 
 /obj/item/clothing/suit/storage/toggle/labcoat/cmo
@@ -74,7 +74,7 @@
 	icon_open = "labcoat_xy_open"
 	icon_closed = "labcoat_xy"
 	armor = list(
-		melee = ARMOR_MELEE_MINOR, 
+		melee = ARMOR_MELEE_MINOR,
 		bio = ARMOR_BIO_MINOR
 		)
 	species_restricted = list(SPECIES_IPC)
