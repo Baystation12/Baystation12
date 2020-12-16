@@ -20,6 +20,14 @@
 
 
 /proc/minutes_to_readable(minutes)
+	if (!isnum(minutes))
+		minutes = text2num(minutes)
+
+	if (minutes < 0)
+		return "INFINITE"
+	else if (isnull(minutes))
+		return "BAD INPUT"
+
 	var/hours = 0
 	var/days = 0
 	var/weeks = 0
