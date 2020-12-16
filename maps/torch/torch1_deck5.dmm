@@ -15,8 +15,7 @@
 /obj/machinery/atmospherics/portables_connector,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/extinguisher_cabinet{
-	pixel_x = 32;
-	
+	pixel_x = 32
 	},
 /obj/machinery/light{
 	dir = 1
@@ -4918,8 +4917,9 @@
 "kQ" = (
 /obj/structure/table/rack,
 /obj/machinery/door/window/northright{
-	dir = 1;
-	name = "heavy suit storage"
+	autoset_access = 0;
+	name = "heavy suit storage";
+	req_access = list("ACCESS_TORCH_PATHFINDER")
 	},
 /obj/structure/window/reinforced{
 	dir = 8
