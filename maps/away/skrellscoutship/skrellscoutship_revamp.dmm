@@ -2305,7 +2305,7 @@
 	dir = 1
 	},
 /obj/structure/curtain/open/privacy,
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/skrell/blue,
@@ -4336,7 +4336,7 @@
 	dir = 1
 	},
 /obj/structure/curtain/open/shower/security,
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/skrell/blue,

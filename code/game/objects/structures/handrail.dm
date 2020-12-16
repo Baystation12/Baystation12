@@ -1,4 +1,4 @@
-/obj/structure/handrai
+/obj/structure/handrail
 	name = "handrail"
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "handrail"
@@ -7,7 +7,7 @@
 	anchored = 1
 	can_buckle = 1
 
-/obj/structure/handrai/buckle_mob(mob/living/M)
+/obj/structure/handrail/buckle_mob(mob/living/M)
 	. = ..()
 	if(.)
 		playsound(src, 'sound/effects/buckle.ogg', 20)

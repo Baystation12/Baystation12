@@ -268,7 +268,7 @@
 /area/ship/scrap/gambling)
 "aR" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 4;
 	icon_state = "handrail"
 	},
@@ -306,7 +306,7 @@
 /obj/random/accessory,
 /obj/random/accessory,
 /obj/item/weapon/reagent_containers/glass/paint/random,
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 8;
 	icon_state = "handrail"
 	},
@@ -376,7 +376,7 @@
 	icon_state = "0-2";
 	pixel_y = 1
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 4;
 	icon_state = "handrail"
 	},
@@ -418,7 +418,7 @@
 	dir = 4
 	},
 /obj/random/closet,
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 8;
 	icon_state = "handrail"
 	},
@@ -2266,7 +2266,7 @@
 /turf/space,
 /area/space)
 "fX" = (
-/obj/structure/handrai,
+/obj/structure/handrail,
 /turf/space,
 /area/space)
 "gb" = (
@@ -2473,7 +2473,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/ship/scrap/escape_star)
 "ql" = (
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 1;
 	icon_state = "handrail"
 	},
@@ -2492,7 +2492,7 @@
 /turf/simulated/wall/r_wall/hull,
 /area/ship/scrap/maintenance/techstorage)
 "rP" = (
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 4;
 	icon_state = "handrail"
 	},
@@ -3044,7 +3044,7 @@
 /turf/simulated/floor/tiled/techmaint,
 /area/ship/scrap/maintenance/techstorage)
 "XF" = (
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 8;
 	icon_state = "handrail"
 	},

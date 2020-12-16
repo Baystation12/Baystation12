@@ -172,7 +172,7 @@
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "aF" = (
-/obj/structure/handrai,
+/obj/structure/handrail,
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "aG" = (
@@ -181,7 +181,7 @@
 /area/bluespaceriver/ship)
 "aH" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/structure/handrai,
+/obj/structure/handrail,
 /obj/item/weapon/stool/padded,
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
@@ -557,7 +557,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 4
 	},
-/obj/structure/handrai,
+/obj/structure/handrail,
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "bM" = (
