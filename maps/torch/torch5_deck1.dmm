@@ -3520,14 +3520,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/medicalhallway)
-"age" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden{
-	dir = 1;
-	icon_state = "map"
-	},
-/obj/machinery/meter,
-/turf/simulated/floor/plating,
-/area/maintenance/firstdeck/aftstarboard)
 "agf" = (
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 6
@@ -3599,6 +3591,10 @@
 /obj/structure/railing/mapped{
 	dir = 4;
 	icon_state = "railing0-1"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 10;
+	icon_state = "intact"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/medical/foyer/storeroom)
@@ -8259,8 +8255,7 @@
 /area/hallway/primary/firstdeck/aft)
 "ayD" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 10;
-	icon_state = "intact"
+	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/aftstarboard)
@@ -14641,6 +14636,9 @@
 	name = "Infirmary Maintenance Access"
 	},
 /obj/machinery/door/firedoor,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/medical/foyer/storeroom)
 "bhb" = (
@@ -15951,10 +15949,21 @@
 /turf/simulated/floor/tiled/monotile,
 /area/security/processing)
 "cEb" = (
-/obj/structure/closet/secure_closet/medical_torch,
-/obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/light{
 	dir = 8
+	},
+/obj/machinery/atmospherics/unary/freezer{
+	dir = 1;
+	icon_state = "freezer";
+	set_temperature = 80;
+	use_power = 1
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/structure/window/reinforced{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/medical/foyer/storeroom)
@@ -16508,19 +16517,8 @@
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
 "dmb" = (
-/obj/machinery/atmospherics/unary/freezer{
-	dir = 1;
-	icon_state = "freezer";
-	set_temperature = 80;
-	use_power = 1
-	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/door/window/northleft{
-	autoset_access = 0;
-	name = "Cryogenic Maintenance";
-	req_access = list("ACCESS_MEDICAL_EQUIP")
-	},
-/turf/simulated/floor/tiled/techfloor,
+/turf/simulated/floor/plating,
 /area/maintenance/firstdeck/aftstarboard)
 "dmz" = (
 /obj/machinery/firealarm{
@@ -16535,19 +16533,10 @@
 /turf/simulated/floor/tiled,
 /area/security/detectives_office)
 "dnb" = (
-/obj/machinery/atmospherics/portables_connector{
-	dir = 1
-	},
-/obj/machinery/portable_atmospherics/canister/oxygen/prechilled,
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/window/reinforced{
+/obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
 	},
-/obj/machinery/door/window/northright{
-	autoset_access = 0;
-	name = "Cryogenic Maintenance";
-	req_access = list("ACCESS_MEDICAL_EQUIP")
-	},
+/obj/machinery/meter,
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/aftstarboard)
 "dob" = (
@@ -17681,8 +17670,18 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/aft)
 "fmb" = (
-/obj/structure/closet/secure_closet/medical_torch,
-/obj/effect/floor_decal/industrial/outline/grey,
+/obj/machinery/atmospherics/portables_connector{
+	dir = 4
+	},
+/obj/machinery/portable_atmospherics/canister/oxygen/prechilled,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/window/reinforced{
+	dir = 2;
+	health = 1e+007
+	},
+/obj/structure/window/reinforced{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/medical/foyer/storeroom)
 "fnu" = (
@@ -17777,8 +17776,9 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/sleeper)
 "fxb" = (
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 4
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 9;
+	icon_state = "intact"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/medical/foyer/storeroom)
@@ -18582,13 +18582,13 @@
 /turf/simulated/floor/plating,
 /area/medical/exam_room)
 "gZb" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
-	dir = 1
-	},
 /obj/structure/cable/green{
 	d1 = 2;
 	d2 = 4;
 	icon_state = "2-4"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
 /area/medical/foyer/storeroom)
@@ -19115,6 +19115,9 @@
 /obj/item/device/radio/intercom/department/medbay{
 	dir = 1;
 	pixel_y = -28
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
 /area/medical/foyer/storeroom)
@@ -24540,6 +24543,13 @@
 /obj/machinery/self_destruct,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/nuke_storage)
+"oty" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden,
+/turf/simulated/floor/tiled/dark,
+/area/medical/foyer/storeroom)
 "ouI" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/green{
@@ -24654,6 +24664,13 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/foreport)
+"ozN" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 1;
+	icon_state = "map"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/medical/foyer/storeroom)
 "oAp" = (
 /obj/effect/floor_decal/corner/research{
 	dir = 10;
@@ -30634,6 +30651,16 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/dark,
 /area/command/armoury/access)
+"wUg" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 1;
+	icon_state = "techfloor_edges"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/dark,
+/area/medical/foyer/storeroom)
 "wWc" = (
 /obj/structure/sign/warning/secure_area{
 	dir = 4;
@@ -30765,6 +30792,9 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/aftstarboard)
 "xuW" = (
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/dark,
 /area/medical/foyer/storeroom)
 "xvt" = (
@@ -52614,8 +52644,8 @@ acH
 adt
 uXe
 uXe
-age
-dmb
+ayD
+uXe
 dDb
 abm
 abs
@@ -52814,10 +52844,10 @@ mpy
 mpy
 uXe
 adw
-sde
+dmb
 sde
 ayD
-dnb
+sde
 dDb
 abn
 abt
@@ -53018,7 +53048,7 @@ acJ
 adw
 sde
 uXe
-sde
+ayD
 sde
 dDb
 dDb
@@ -53218,9 +53248,9 @@ mpy
 mpy
 acK
 adw
-sde
-sde
 uXe
+uXe
+dnb
 uXe
 cqb
 dDb
@@ -53422,7 +53452,7 @@ xTT
 adv
 sde
 sde
-sde
+ayD
 dEb
 dQb
 dDb
@@ -54432,7 +54462,7 @@ uXe
 adv
 kZb
 alo
-xuW
+ozN
 cEb
 fmb
 rAu
@@ -54635,7 +54665,7 @@ adw
 kZb
 afn
 agn
-xuW
+oty
 fxb
 dRb
 emb
@@ -54837,7 +54867,7 @@ adw
 kZb
 kYM
 cIb
-cGd
+wUg
 gZb
 uFk
 enb
