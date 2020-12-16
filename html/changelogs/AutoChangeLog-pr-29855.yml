@@ -1,0 +1,5 @@
+author: "Textor45"
+delete-after: True
+changes: 
+  - bugfix: "Airlock electronics UI now displays icons properly instead of using a caret for every icon.
+imgadd: Biohazard, First-aid, square, square-check icons have been added to NanoUI"
