@@ -59,6 +59,7 @@
 	if(ispath(camera))
 		camera = new camera(src)
 		camera.set_status(0)
+		camera.is_helmet_cam = TRUE
 
 	if(camera)
 		camera.set_status(!camera.status)

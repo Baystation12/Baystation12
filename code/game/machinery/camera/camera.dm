@@ -36,6 +36,8 @@
 
 	var/affected_by_emp_until = 0
 
+	var/is_helmet_cam = FALSE
+
 /obj/machinery/camera/examine(mob/user)
 	. = ..()
 	if(stat & BROKEN)
