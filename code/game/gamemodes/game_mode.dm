@@ -357,7 +357,7 @@ var/global/list/additional_antag_types = list()
 	var/text = "<br><br>"
 	if(surviving_total > 0)
 		text += "There [surviving_total>1 ? "were <b>[surviving_total] survivors</b>" : "was <b>one survivor</b>"]"
-		text += " (<b>[escaped_total>0 ? escaped_total : "none"] [evacuation_controller.emergency_evacuation ? "escaped" : "transferred"]</b>) and <b>[ghosts] ghosts</b>.<br>"
+		text += " and <b>[ghosts] ghosts</b>.<br>"
 	else
 		text += "There were <b>no survivors</b> (<b>[ghosts] ghosts</b>)."
 
