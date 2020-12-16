@@ -1,4 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - admin: "Vecuronium Bromide now generates attack logs when injected"

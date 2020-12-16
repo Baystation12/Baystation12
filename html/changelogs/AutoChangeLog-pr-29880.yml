@@ -1,6 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - admin: "Smothering people with a rag and hitting people with an ignited rag now generates attack logs."
-  - tweak: "You now require a grab to smother people with a rag."
-  - tweak: "Smothering people with a rag now has a timed progress bar - 3 seconds if your CQC skill is trained or above, 6 seconds for everyone else."
