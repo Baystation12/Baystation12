@@ -1772,6 +1772,7 @@
 #include "code\modules\goals\goal_mind.dm"
 #include "code\modules\goals\goal_mob.dm"
 #include "code\modules\goals\definitions\department.dm"
+#include "code\modules\goals\definitions\department_clerical.dm"
 #include "code\modules\goals\definitions\department_engineering.dm"
 #include "code\modules\goals\definitions\department_medical.dm"
 #include "code\modules\goals\definitions\department_science.dm"
