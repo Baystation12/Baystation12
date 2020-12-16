@@ -1,0 +1,6 @@
+author: "Sweedle & Rootoo807"
+delete-after: True
+changes: 
+  - rscadd: "Adds pronoun badges, found in the \"accessories\" tab of the loadout."
+  - rscadd: "Adds pride pins, found in the \"accessories\" tab of the loadout."
+  - tweak: "Ranks and pins can now be attached to labcoats."
