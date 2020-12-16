@@ -1,0 +1,4 @@
+author: "Textor45"
+delete-after: True
+changes: 
+  - tweak: "The end of round summary  no longer references the counter for escaped or transferred personnel."
