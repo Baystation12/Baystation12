@@ -123,6 +123,10 @@
 .uiIcon16.icon-transfer-e-w { background-position: -96px -80px; }
 .uiIcon16.icon-transferthick-e-w { background-position: -112px -80px; }
 .uiIcon16.icon-radiation { background-position: -128px -80px; }
+.uiIcon16.icon-biohazard { background-position: -144px -80px;}
+.uiIcon16.icon-first-aid { background-position: -160px -80px;}
+.uiIcon16.icon-square { background-position: -176px -80px;}
+.uiIcon16.icon-check-square { background-position: -192px -80px;}
 .uiIcon16.icon-folder-collapsed { background-position: 0 -96px; }
 .uiIcon16.icon-folder-open { background-position: -16px -96px; }
 .uiIcon16.icon-document { background-position: -32px -96px; }
