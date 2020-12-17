@@ -47,3 +47,4 @@
 	damage = 40
 	armor_penetration = 20
 	shield_damage = 20
+	steps_between_delays = 3

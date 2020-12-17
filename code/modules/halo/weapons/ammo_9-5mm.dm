@@ -10,3 +10,4 @@
 /obj/item/projectile/bullet/m634
 	damage = 20
 	shield_damage = 5
+	steps_between_delays = 3
