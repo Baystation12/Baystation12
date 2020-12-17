@@ -1,5 +1,5 @@
 #include "../base_assault/base_assault_gm.dm"
-#include "urf_unsc_gm.dm"
+#include "cov_v_unsc_gm.dm"
 
 /datum/map/base_assault_cov_vs_unsc
 	name = "Covenant Outpost"
