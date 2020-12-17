@@ -4,6 +4,7 @@
 /obj/effect/projectile/sniper_trail
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "sniper_trail"
+	alpha = 160
 
 /* M232 rounds */
 //used by: SRS99 sniper rifle

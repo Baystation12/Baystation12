@@ -90,6 +90,7 @@
 /obj/effect/projectile/beam_rifle
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "beam_rifle_trail"
+	alpha = 160
 
 //Covenant Magazine-Fed defines//
 
@@ -248,6 +249,7 @@
 /obj/effect/projectile/type51carbine
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "carbine_trail"
+	alpha = 160
 
 /obj/item/ammo_magazine/rifleneedlepack
 	name = "Rifle Needles"
@@ -285,6 +287,7 @@
 /obj/effect/projectile/bullet/covenant/needles/rifleneedle
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "needlerifle_trail"
+	alpha = 160
 
 /obj/item/ammo_magazine/fuel_rod
 	name = "Type-33 Light Anti-Armor Weapon Magazine"
