@@ -101,7 +101,7 @@
 		if(a.owner)
 			a.Remove(a.owner)
 		scope_actions -= a
-		del(a)
+		qdel(a)
 	scope_actions += new /datum/action/item_action/scope_action/scope_in (src)
 	if(create_scope_adjusters)
 		scope_actions += new /datum/action/item_action/scope_action/scope_zoom_down (src)

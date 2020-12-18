@@ -30,6 +30,7 @@
 /datum/action/Destroy()
 	if(owner)
 		Remove(owner)
+	return QDEL_HINT_QUEUE
 
 /datum/action/proc/Grant(mob/living/T)
 	if(owner)
