@@ -94,7 +94,7 @@
 		message_faction("Insurrection","<span class='danger'>No signs of UNSC intruders aboard the base. Defence systems have a lock on their strike craft.</span>")
 		return 1
 	if(faction == "UNSC")
-		message_faction("UNSC","<span class='danger'>Assault Team Leader reports Insurrection supression success. Awaiting extraction and medical care.</span>")
+		message_faction("UNSC","<span class='danger'>Assault Team Leader reports Insurrection suppression success. Awaiting extraction and medical care.</span>")
 		message_faction("Insurrection","<span class='danger'>Defence System Report: System intrusion detected. Manual System Override detec- </span>")
 		return 1
 	if(faction == "UNSC2") //Used for UNSC success via nuclear device.

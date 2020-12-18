@@ -38,6 +38,13 @@
 
 /* M120 Rounds */
 
+/* Tracer visual effect */
+
+/obj/effect/projectile/dmr_trail
+	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
+	icon_state = "dmr_trail"
+	alpha = 160
+
 /obj/item/ammo_casing/m120
 	desc = "A 7.62mm HP bullet casing."
 	caliber = "7.62mmdmr"
@@ -47,3 +54,6 @@
 	damage = 40
 	armor_penetration = 20
 	shield_damage = 20
+	tracer_type = /obj/effect/projectile/dmr_trail
+	tracer_delay_time = 0.5 SECONDS
+	steps_between_delays = 3

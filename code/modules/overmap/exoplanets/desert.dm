@@ -75,7 +75,7 @@
 	icon_state = "asteroidplating"
 
 /turf/simulated/floor/exoplanet/desert/New()
-	icon_state = "desert[rand(0,5)]"
+	icon_state = "desert[rand(0,8)]"
 	..()
 
 /turf/simulated/floor/exoplanet/desert/fire_act(datum/gas_mixture/air, temperature, volume)

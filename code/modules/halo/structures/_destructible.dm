@@ -278,7 +278,7 @@
 */
 /obj/structure/destructible/ex_act(severity)
 	//explosions do extra damage
-	take_damage(((3-severity) + 1)* 50)
+	take_damage(((3-severity) + 1)* 75)
 
 /obj/structure/destructible/proc/take_damage(var/amount)
 	health -= amount

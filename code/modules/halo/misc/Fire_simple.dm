@@ -9,6 +9,7 @@
 	light_color = "#ED9200"
 	var/heat_surroundings = 1
 	var/firelevel = 1 //Calculated by gas_mixture.calculate_firelevel()
+	var/fire_fuel = 5 //Only for no-heat fires. Reduces itself by firelevel per tick
 
 /obj/effect/fire/New(newLoc,fl = 1)
 	. = ..()
@@ -47,7 +48,12 @@
 	var/datum/gas_mixture/air_contents = my_tile.return_air()
 	var/datum/gas_mixture/burn_gas = air_contents.remove_ratio(vsc.fire_consuption_rate, 1)
 
-	var/firelevel = burn_gas.zburn(my_tile.zone, force_burn = 1, no_check = 1, target_turf = my_tile)
+	if(heat_surroundings)
+		firelevel = burn_gas.zburn(my_tile.zone, force_burn = 1, no_check = 1, target_turf = my_tile)
+	else
+		fire_fuel--
+		if(fire_fuel <= 0)
+			firelevel = 0
 
 	air_contents.merge(burn_gas)
 

@@ -46,11 +46,13 @@
 	var/drowsy = 0
 	var/agony = 0
 	var/embed = 0 // whether or not the projectile can embed itself in the mob
+	var/steps_taken = 0
 	var/pin_chance = 0
 	var/pin_range = 2 //this is essentially a knockback of
 
 	var/hitscan = 0		// whether the projectile should be hitscan
 	var/step_delay = 0.5	// the delay between iterations if not a hitscan projectile
+	var/steps_between_delays = 2 //The amount of steps we can take between each application of step_delay
 
 	// effect types to be used
 	var/muzzle_type
@@ -324,7 +326,6 @@
 	return 1
 
 /obj/item/projectile/process()
-	var/first_step = 1
 	spawn while(src && src.loc)
 		if(kill_count < initial(kill_count) - SUPPRESSION_GRACE_STEPS)
 			do_suppression_aoe(loc)
@@ -351,20 +352,20 @@
 			return
 		before_move()
 		Move(location.return_turf())
-
+		steps_taken++
 		if(!bumped && original && !isturf(original))
 			if(loc == get_turf(original))
 				if(!(original in permutated))
 					if(Bump(original))
 						return
 
-		if(first_step)
+		if(steps_taken == 1)
 			muzzle_effect(effect_transform)
-			first_step = 0
 		else if(!bumped)
-			tracer_effect(effect_transform)
+			spawn()
+				tracer_effect(effect_transform)
 
-		if(!hitscan)
+		if(!hitscan || steps_taken % steps_between_delays == 0)
 			sleep(step_delay)	//add delay between movement iterations if it's not a hitscan weapon
 
 /obj/item/projectile/proc/before_move()

@@ -71,11 +71,11 @@
 	desc = ""
 	damage = 55
 	armor_penetration = 60
+	penetrating = 1
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
-	icon_state = "carbine_casing"
+	icon_state = "beam_rifle_trail"
 	tracer_type = /obj/effect/projectile/beam_rifle
 	tracer_delay_time = 1.5 SECONDS
-	invisibility = 61
 	shield_damage = 210
 	step_delay = 0
 	muzzle_type = /obj/effect/projectile/muzzle/cov_cyan
@@ -84,12 +84,13 @@
 	if(!istype(L))
 		. = ..()
 		return
-	L.rad_act(6)
+	L.rad_act(3)
 	. = ..()
 
 /obj/effect/projectile/beam_rifle
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "beam_rifle_trail"
+	alpha = 160
 
 //Covenant Magazine-Fed defines//
 
@@ -132,13 +133,12 @@
 /obj/item/projectile/bullet/covenant/needles
 	name = "Needle"
 	desc = "A sharp, pink crystalline shard"
-	damage = 20 // Low damage, special effect would do the most damage.
+	damage = 25 // Low damage, special effect would do the most damage.
 	shield_damage = 20
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "Needler Shot"
 	embed = 1
 	sharp = 1
-	step_delay = 0.75 //slower than most
 	var/max_track_steps = 3 // 4 tiles worth of tracking
 	var/shards_to_explode = 6
 	var/shard_name = "Needle shrapnel"
@@ -237,17 +237,19 @@
 	sharp = 1
 	use_covenant_burndam_override = 0
 	muzzle_type = /obj/effect/projectile/muzzle/cov_green
+	steps_between_delays = 3
 
 /obj/item/projectile/bullet/covenant/type51carbine/attack_mob(var/mob/living/carbon/human/L)
 	if(!istype(L))
 		. = ..()
 		return
-	L.rad_act(3)
+	L.rad_act(1)
 	. = ..()
 
 /obj/effect/projectile/type51carbine
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "carbine_trail"
+	alpha = 160
 
 /obj/item/ammo_magazine/rifleneedlepack
 	name = "Rifle Needles"
@@ -278,13 +280,14 @@
 	tracer_type = /obj/effect/projectile/bullet/covenant/needles/rifleneedle
 	tracer_delay_time = 0.5 SECONDS
 	invisibility = 101
-	step_delay = 0.65 //slower than most, faster than normal needles
 	max_track_steps = 2
 	muzzle_type = /obj/effect/projectile/muzzle/cov_red
+	steps_between_delays = 3
 
 /obj/effect/projectile/bullet/covenant/needles/rifleneedle
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "needlerifle_trail"
+	alpha = 160
 
 /obj/item/ammo_magazine/fuel_rod
 	name = "Type-33 Light Anti-Armor Weapon Magazine"

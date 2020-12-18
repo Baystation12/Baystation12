@@ -81,6 +81,7 @@
 /obj/effect/projectile/binaryrifle
 	icon = 'code/modules/halo/weapons/icons/forerunner_sprites.dmi'
 	icon_state = "binaryrifle_trail"
+	alpha = 160
 
 /obj/item/ammo_magazine/suppressor
 	name = "Z-130 DEAW magazine"

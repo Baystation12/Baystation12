@@ -53,7 +53,7 @@
 	// update the current life tick, can be used to e.g. only do something every 4 ticks
 	life_tick++
 
-	clear_fullscreen("supress")
+	clear_fullscreen("suppress")
 
 	// This is not an ideal place for this but it will do for now.
 	if(wearing_rig && wearing_rig.offline)

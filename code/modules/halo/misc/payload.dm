@@ -176,10 +176,8 @@
 	if(OM)
 		GLOB.processing_objects |= OM //If they're not already processing, they better start now!
 		OM.superstructure_process()
+		OM.nuked_effects(b.loc)
 
 /datum/explosion/nuclearexplosion/New(var/obj/payload/b)
 	radiation_repository.radiate(b.loc,1000,10000)
 	. = ..()
-	var/obj/effect/overmap/OM = map_sectors["[b.z]"]
-	if(OM)
-		OM.nuked_effects(b.loc)

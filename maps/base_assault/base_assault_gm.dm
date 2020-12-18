@@ -47,7 +47,7 @@
 /datum/game_mode/base_assault/proc/get_attacker_loss_status()
 	var/obj/effect/overmap/base = GLOB.COVENANT.get_flagship()
 	if(!base || isnull(base.loc) || base.superstructure_failing > 0)
-		return 11
+		return 1
 	return 0
 
 /datum/game_mode/base_assault/check_finished()

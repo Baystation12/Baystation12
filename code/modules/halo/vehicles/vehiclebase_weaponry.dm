@@ -59,9 +59,6 @@
 
 /obj/item/weapon/gun/vehicle_turret/switchable/attack_self(var/mob/user)
 	. = ..()
-	if(world.time < next_fire_time)
-		to_chat(user,"<span class = 'notice'>Wait for the current burst to finish.</span>")
-		return
 	var/next_gun_index = current_index + 1
 	if(next_gun_index > guns_switchto.len)
 		next_gun_index = 1
@@ -75,7 +72,10 @@
 	fire_delay = next_gun.fire_delay
 	burst_delay = next_gun.burst_delay
 	fire_sound = next_gun.fire_sound
-	to_chat(user,"<span class = 'notice'>Switched to [name]</span>")
+	var/switch_msg = "Switched to [name]."
+	if(world.time < next_fire_time)
+		switch_msg = "Switched to [name]. System still cycling from previous firing operation."
+	to_chat(user,"<span class = 'notice'>[switch_msg]</span>")
 	current_index = next_gun_index
 
 /datum/vehicle_gun

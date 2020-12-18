@@ -3,7 +3,7 @@
 	name = "Base Assault (UNSC vs URF)"
 	config_tag = "base_assault_unsc_urf"
 	defenders = "The UNSC"
-	attackers = " The URF"
+	attackers = "The URF"
 	faction_balance = list(/datum/faction/insurrection,/datum/faction/unsc)
 
 /datum/game_mode/base_assault/unsc_urf/get_attacker_loss_status()
