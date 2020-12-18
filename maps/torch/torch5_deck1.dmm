@@ -15990,12 +15990,6 @@
 	use_power = 1
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/structure/window/reinforced{
-	dir = 1
-	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/medical/foyer/storeroom)
 "cFb" = (
@@ -17681,13 +17675,6 @@
 	},
 /obj/machinery/portable_atmospherics/canister/oxygen/prechilled,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/window/reinforced{
-	dir = 2;
-	health = 1e+007
-	},
-/obj/structure/window/reinforced{
-	dir = 8
-	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/medical/foyer/storeroom)
 "fnu" = (
@@ -21120,6 +21107,14 @@
 /obj/structure/table/standard,
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/misc_lab)
+"kaS" = (
+/obj/structure/closet/crate/freezer,
+/obj/random/medical,
+/obj/effect/floor_decal/industrial/outline/grey,
+/obj/random/medical,
+/obj/random/medical,
+/turf/simulated/floor/tiled/techfloor,
+/area/maintenance/firstdeck/aftstarboard)
 "kbb" = (
 /obj/structure/table/standard,
 /obj/machinery/light_switch{
@@ -27816,6 +27811,14 @@
 /obj/structure/sign/warning/biohazard,
 /turf/simulated/wall/r_wall/prepainted,
 /area/rnd/research)
+"scd" = (
+/obj/structure/closet/crate/freezer,
+/obj/random/medical,
+/obj/random/medical,
+/obj/effect/floor_decal/industrial/outline/grey,
+/obj/random/medical,
+/turf/simulated/floor/tiled/techfloor,
+/area/maintenance/firstdeck/aftstarboard)
 "scr" = (
 /obj/machinery/door/airlock/medical{
 	name = "Equipment Storage"
@@ -52646,7 +52649,7 @@ adt
 uXe
 uXe
 uXe
-uXe
+kaS
 dDb
 abm
 abs
@@ -52848,7 +52851,7 @@ adw
 sde
 sde
 uXe
-sde
+scd
 dDb
 abn
 abt
