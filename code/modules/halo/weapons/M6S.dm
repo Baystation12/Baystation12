@@ -17,6 +17,7 @@
 	dispersion = list(0.4)
 	silenced = 1
 	one_hand_penalty = 1
+	scope_zoom_amount = 1.1
 
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
@@ -28,7 +29,7 @@
 	set name = "Use Scope (Sidearm)"
 	set popup_menu = 1
 
-	toggle_scope(usr, 1.1)
+	toggle_scope(usr, scope_zoom_amount)
 
 /obj/item/weapon/gun/projectile/m6c_magnum_s/update_icon()
 	if(ammo_magazine)

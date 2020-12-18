@@ -28,6 +28,10 @@
 	charge_sound = null
 	auto_eject = 1
 
+	scope_zoom_amount = 8
+	min_zoom_amount = 3
+	is_scope_variable = 1
+
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/forerunner_sprites_inhand_l.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/forerunner_sprites_inhand_r.dmi',
@@ -41,7 +45,7 @@
 	set name = "Use Scope"
 	set popup_menu = 1
 
-	toggle_scope(usr, 1.75)
+	toggle_scope(usr, scope_zoom_amount)
 
 /obj/item/weapon/gun/projectile/binary_rifle/update_icon()
 	if(ammo_magazine)

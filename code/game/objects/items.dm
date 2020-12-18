@@ -491,7 +491,7 @@ var/list/global/slot_flags_enumeration = list(
 //This proc is executed when someone clicks the on-screen UI button. To make the UI button show, set the 'icon_action_button' to the icon_state of the image of the button in screen1_action.dmi
 //The default action is attack_self().
 //Checks before we get to here are: mob is alive, mob is not restrained, paralyzed, asleep, resting, laying, item is on the mob.
-/obj/item/proc/ui_action_click()
+/obj/item/proc/ui_action_click(var/action_name) //action_name is present to allow for multiple action buttons to be linked to the same ui_action_click
 	attack_self(usr)
 
 //RETURN VALUES

@@ -168,15 +168,16 @@
 /datum/explosion/New(var/obj/payload/b)
 	if(config.oni_discord)
 		message2discord(config.oni_discord, "Nuclear detonation detected. [b.name] @ ([b.loc.x],[b.loc.y],[b.loc.z])")
+	var/obj/effect/overmap/OM = map_sectors["[b.z]"]
+	if(OM)
+		OM.nuked_effects(b.loc)
 	explosion(get_turf(b),b.strength*20,b.strength*30,b.strength*35,b.strength*40)
 	for(var/mob/living/m in range(b.strength*20,b.loc))
 		to_chat(m,"<span class = 'userdanger'>A shockwave slams into you! You feel yourself falling apart...</span>")
 		m.gib() // Game over.
-	var/obj/effect/overmap/OM = map_sectors["[b.z]"]
 	if(OM)
 		GLOB.processing_objects |= OM //If they're not already processing, they better start now!
 		OM.superstructure_process()
-		OM.nuked_effects(b.loc)
 
 /datum/explosion/nuclearexplosion/New(var/obj/payload/b)
 	radiation_repository.radiate(b.loc,1000,10000)
