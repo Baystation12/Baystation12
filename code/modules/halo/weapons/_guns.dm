@@ -35,7 +35,10 @@
 			to_chat(user,"<span class = 'notice'>Zoom must be less than or equal to [max_zoom_amount]. Defaulting to [max_zoom_amount].</span>")
 		scope_zoom_amount = max_zoom_amount
 	else
+		if(user)
+			to_chat(user,"<span class = 'notice'>Zoom level set to [setzoom].</span>")
 		scope_zoom_amount = setzoom
+
 
 /obj/item/weapon/gun/proc/increase_decrease_zoom_amt(var/increase,var/mob/user)
 	if(user == loc)
