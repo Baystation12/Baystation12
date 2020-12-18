@@ -1,0 +1,5 @@
+author: "Mucker"
+delete-after: True
+changes: 
+  - tweak: "Helmet cameras can now be accessed independent of NT-Net."
+  - tweak: "The Camera Monitoring program can now be accessed without NT-Net, but regular security cameras are inaccessible when NT-Net is down."
