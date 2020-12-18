@@ -1,4 +1,4 @@
-#define FLIGHT_DODGE_DIVISOR 8
+#define FLIGHT_DODGE_DIVISOR 6
 #define FLIGHT_DODGE_MESSAGE_CHANCE 33
 
 /mob/living/CanPass(atom/movable/mover, turf/start, height=0, air_group=0)
