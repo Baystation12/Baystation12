@@ -16,6 +16,7 @@
 	reload_sound = 'code/modules/halo/sounds/Magnum_Reload_New.wav'
 	load_method = MAGAZINE
 	w_class = ITEM_SIZE_NORMAL
+	scope_zoom_amount = 1.1
 
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
@@ -42,7 +43,7 @@
 	set name = "Use Scope (Sidearm)"
 	set popup_menu = 1
 
-	toggle_scope(usr, 1.1)
+	toggle_scope(usr, scope_zoom_amount)
 
 /obj/item/weapon/gun/projectile/m6d_magnum/CO_magnum
 	name = "\improper CO\'s Magnum"
@@ -120,10 +121,6 @@
 		icon_state = "m6b"
 	else
 		icon_state = "m6b_unloaded"
-
-/obj/item/weapon/gun/projectile/m6d_magnum/civilian/scope()
-	..()
-	return
 
 /obj/item/weapon/gun/projectile/m6d_magnum/police
 	name = "\improper M6B Magnum"

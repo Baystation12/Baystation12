@@ -59,7 +59,7 @@
 		if(AB_ITEM)
 			if(target)
 				var/obj/item/item = target
-				item.ui_action_click()
+				item.ui_action_click(name)
 		//if(AB_SPELL)
 		//	if(target)
 		//		var/obj/effect/proc_holder/spell = target
@@ -210,7 +210,7 @@
 
 //Presets for item actions
 /datum/action/item_action
-	check_flags = AB_CHECK_RESTRAINED|AB_CHECK_STUNNED|AB_CHECK_LYING|AB_CHECK_ALIVE|AB_CHECK_INSIDE
+	check_flags = AB_CHECK_RESTRAINED|AB_CHECK_STUNNED|AB_CHECK_ALIVE|AB_CHECK_INSIDE
 
 /datum/action/item_action/CheckRemoval(mob/living/user)
 	return !(target in user)
