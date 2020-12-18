@@ -9,7 +9,7 @@
 	var/max_zoom_amount = 0
 	var/min_zoom_amount = BASE_MIN_MAGNIF
 	var/is_scope_variable = 0 //If this is set to 1, the set_scope_zoom verb will be added to the list of usable verbs.
-	var/list/scope_actions = list()
+	var/list/weapon_actions = list()
 
 /obj/item/weapon/gun/Initialize()
 	. = ..()
@@ -97,18 +97,18 @@
 	name = ACTION_ADJUST_ZOOM_MINUS
 
 /obj/item/weapon/gun/proc/create_scope_actions(var/create_scope_adjusters)
-	for(var/datum/action/a in scope_actions)
+	for(var/datum/action/a in weapon_actions)
 		if(a.owner)
 			a.Remove(a.owner)
-		scope_actions -= a
+		weapon_actions -= a
 		qdel(a)
-	scope_actions += new /datum/action/item_action/scope_action/scope_in (src)
+	weapon_actions += new /datum/action/item_action/scope_action/scope_in (src)
 	if(create_scope_adjusters)
-		scope_actions += new /datum/action/item_action/scope_action/scope_zoom_down (src)
-		scope_actions += new /datum/action/item_action/scope_action/scope_zoom_up (src)
+		weapon_actions += new /datum/action/item_action/scope_action/scope_zoom_down (src)
+		weapon_actions += new /datum/action/item_action/scope_action/scope_zoom_up (src)
 
 /obj/item/weapon/gun/proc/grant_scope_actions(var/mob/living/user)
-	for(var/datum/action/a in scope_actions)
+	for(var/datum/action/a in weapon_actions)
 		a.Grant(user)
 
 /obj/item/weapon/gun/equipped(var/mob/living/user)
