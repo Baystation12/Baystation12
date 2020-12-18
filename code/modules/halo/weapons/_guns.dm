@@ -14,12 +14,11 @@
 /obj/item/weapon/gun/Initialize()
 	. = ..()
 	if(scope_zoom_amount != 0)
-		scope_actions += new /datum/action/item_action/scope_action/scope_in (src)
+		create_scope_actions(0)
 		if(max_zoom_amount == 0)
 			max_zoom_amount = scope_zoom_amount
 	if(is_scope_variable)
-		scope_actions += new /datum/action/item_action/scope_action/scope_zoom_down (src)
-		scope_actions += new /datum/action/item_action/scope_action/scope_zoom_up (src)
+		create_scope_actions(1)
 		verbs += /obj/item/weapon/gun/proc/verb_set_scope_zoom
 		verbs += /obj/item/weapon/gun/proc/verb_increase_zoom_amt
 		verbs += /obj/item/weapon/gun/proc/verb_decrease_zoom_amt
@@ -96,6 +95,18 @@
 
 /datum/action/item_action/scope_action/scope_zoom_down
 	name = ACTION_ADJUST_ZOOM_MINUS
+
+/obj/item/weapon/gun/proc/create_scope_actions(var/create_scope_adjusters)
+	for(var/datum/action/a in scope_actions)
+		if(a.owner)
+			a.Remove(a.owner)
+		scope_actions -= a
+		qdel(a)
+	if(create_scope_adjusters)
+		scope_actions += new /datum/action/item_action/scope_action/scope_zoom_down (src)
+		scope_actions += new /datum/action/item_action/scope_action/scope_zoom_up (src)
+	else
+		scope_actions += new /datum/action/item_action/scope_action/scope_in (src)
 
 /obj/item/weapon/gun/proc/grant_scope_actions(var/mob/living/user)
 	for(var/datum/action/a in scope_actions)
