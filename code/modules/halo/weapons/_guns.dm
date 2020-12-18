@@ -1,4 +1,6 @@
 
+#define EASYMODIFY_SCOPE_ZOOM_VERB_INCREMENT 0.5
+
 /obj/item/weapon/gun
 	var/scope_zoom_amount = 0
 	var/max_zoom_amount = 0
@@ -30,25 +32,36 @@
 		scope_zoom_amount = min_zoom_amount
 	else if(setzoom > max_zoom_amount)
 		if(user)
-			to_chat(user,"<span class = 'notice'>Zoom must be less than or equal to [max_zoom_amount]. Defaulting to [mzx_zoom_amount].</span>")
+			to_chat(user,"<span class = 'notice'>Zoom must be less than or equal to [max_zoom_amount]. Defaulting to [max_zoom_amount].</span>")
 		scope_zoom_amount = max_zoom_amount
 	else
 		scope_zoom_amount = setzoom
+
+/obj/item/weapon/gun/proc/increase_decrease_zoom_amt(var/increase,var/mob/user)
+	if(user == loc)
+		var/do_rezoom = 0
+		if(zoom)
+			do_rezoom = 1
+			toggle_scope(user)
+		if(increase)
+			set_scope_zoom(scope_zoom_amount+EASYMODIFY_SCOPE_ZOOM_VERB_INCREMENT,user)
+		else
+			set_scope_zoom(scope_zoom_amount-EASYMODIFY_SCOPE_ZOOM_VERB_INCREMENT,user)
+		if(do_rezoom)
+			toggle_scope(user,scope_zoom_amount)
 
 /obj/item/weapon/gun/proc/verb_increase_zoom_amt()
 	set name = "Increase Scope Zoom"
 	set category = "Weapon"
 	set popup_menu = 1
 
-	var/mob/living/user = usr
-	if(user == loc)
-		set_scope_zoom(scope_zoom_amount+0.5,user)
+	increase_decrease_zoom_amt(1,usr)
 
 /obj/item/weapon/gun/proc/verb_decrease_zoom_amt()
 	set name = "Decrease Scope Zoom"
 	set category = "Weapon"
 	set popup_menu = 1
 
-	var/mob/living/user = usr
-	if(user == loc)
-		set_scope_zoom(scope_zoom_amount-0.5,user)
+	increase_decrease_zoom_amt(0,usr)
+
+#undef EASYMODIFY_SCOPE_ZOOM_VERB_INCREMENT
