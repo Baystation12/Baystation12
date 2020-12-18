@@ -1,0 +1,7 @@
+author: "juxtaposed9930"
+delete-after: True
+changes: 
+  - tweak: "The heavy exploration hardsuit is now pathfinder locked instead of all-access."
+  - tweak: "The heavy exploration hardsuit now has insulated gloves for all your scavenging needs."
+  - tweak: "The heavy exploration hardsuit can now actually fit exploration related items in it's suit storage."
+  - tweak: "The heavy exploration hardsuit now uses the proper OBJ sprite."
