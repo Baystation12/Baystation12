@@ -1,6 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - bugfix: "Windoors are now properly emag-able."
-  - tweak: "Emagged windoors will now provide feedback they are broken when you try to close them."
-  - tweak: "You can now tell if a door's control board has been fried by examining the door with an IT skill of trained or higher."
