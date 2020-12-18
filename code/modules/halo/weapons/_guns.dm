@@ -102,11 +102,10 @@
 			a.Remove(a.owner)
 		scope_actions -= a
 		qdel(a)
+	scope_actions += new /datum/action/item_action/scope_action/scope_in (src)
 	if(create_scope_adjusters)
 		scope_actions += new /datum/action/item_action/scope_action/scope_zoom_down (src)
 		scope_actions += new /datum/action/item_action/scope_action/scope_zoom_up (src)
-	else
-		scope_actions += new /datum/action/item_action/scope_action/scope_in (src)
 
 /obj/item/weapon/gun/proc/grant_scope_actions(var/mob/living/user)
 	for(var/datum/action/a in scope_actions)
