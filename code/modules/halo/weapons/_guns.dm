@@ -109,7 +109,6 @@
 
 /obj/item/weapon/gun/proc/grant_scope_actions(var/mob/living/user)
 	for(var/datum/action/a in scope_actions)
-		a.Remove(a.owner)
 		a.Grant(user)
 
 /obj/item/weapon/gun/equipped(var/mob/living/user)

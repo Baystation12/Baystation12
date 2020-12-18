@@ -7,7 +7,8 @@
 /mob/living/proc/movement_sfx()
 	var/move_sfx = get_move_sound()
 	if(move_sfx && world.time % 2 == 0)
-		playsound(loc,move_sfx, 20, 1,1,1)
+		spawn()
+			playsound(loc,move_sfx, 20, 1,1,1)
 
 /mob/living/Move()
 	. = ..()
