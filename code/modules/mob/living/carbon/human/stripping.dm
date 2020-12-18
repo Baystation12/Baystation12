@@ -110,7 +110,7 @@
 				return
 
 	var/obj/item/target_slot = get_equipped_item(text2num(slot_to_strip_text))
-	var/pickpocketable_list = list(slot_l_ear, slot_r_ear, slot_l_hand, slot_r_hand, slot_wear_id, slot_s_store)
+	var/pickpocketable_list = list(slot_l_ear, slot_r_ear, slot_l_hand, slot_r_hand, slot_s_store)
 	var/pickpocketable_object = (text2num(slot_to_strip_text) in pickpocketable_list)
 	if (stripping)
 		if (!istype(target_slot))  // They aren't holding anything valid and there's nothing to remove, why are we even here?
