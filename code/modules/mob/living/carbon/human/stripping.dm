@@ -105,7 +105,12 @@
 			var/obj/item/located_item = locate(slot_to_strip_text) in src
 			if (isunderwear(located_item))
 				var/obj/item/underwear/UW = located_item
+				visible_message(
+					SPAN_DANGER("\The [user] starts trying to remove \the [src]'s [UW.name]!"),
+					SPAN_WARNING("You start trying to remove \the [src]'s [UW.name]!")
+				)
 				if (UW.DelayedRemoveUnderwear(user, src))
+					admin_attack_log(user, src, "Stripped \an [UW] from \the [holder].", "Was stripped of \an [UW] from \the [holder].", "stripped \an [UW] from \the [holder] of")
 					user.put_in_active_hand(UW)
 				return
 
