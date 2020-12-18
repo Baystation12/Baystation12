@@ -3,6 +3,8 @@
 	name = "tanktrap"
 	desc = "This space is blocked off by a barricade."
 	icon_state = "tanktrap"
+	maxHealth = 125
+	health = 125
 	cover_rating = 0
 	dead_type = /obj/structure/tanktrap_dead
 
