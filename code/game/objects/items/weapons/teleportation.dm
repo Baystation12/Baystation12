@@ -60,8 +60,8 @@ Frequency:
 			if (sr)
 				temp += "<B>Located Beacons:</B><BR>"
 
-				for(var/obj/item/device/radio/beacon/W in world)
-					if(!W.functioning)
+				for(var/obj/machinery/teleport/beacon/W in world)
+					if(!W.functioning())
 						continue
 					var/turf/tr = get_turf(W)
 					if (tr.z == sr.z && tr)
@@ -74,7 +74,7 @@ Frequency:
 							direct = "weak"
 						else
 							direct = "very weak"
-						temp += "[W.code]-[dir2text(get_dir(sr, tr))]-[direct]<BR>"
+						temp += "[W.beacon_name]-[dir2text(get_dir(sr, tr))]-[direct]<BR>"
 
 				temp += "<B>Extranneous Signals:</B><BR>"
 				for (var/obj/item/implant/tracking/W in world)

@@ -228,7 +228,11 @@
 /turf/simulated/floor/tiled,
 /area/constructionsite)
 "N" = (
-/obj/item/device/radio/beacon,
+/obj/machinery/teleport/station,
+/turf/simulated/floor/tiled,
+/area/constructionsite)
+"O" = (
+/obj/machinery/teleport/hub,
 /turf/simulated/floor/tiled,
 /area/constructionsite)
 "P" = (
@@ -241,7 +245,7 @@
 /turf/simulated/floor/tiled,
 /area/constructionsite)
 "S" = (
-/obj/machinery/teleport/station,
+/obj/machinery/teleport/beacon,
 /turf/simulated/floor/tiled,
 /area/constructionsite)
 "U" = (
@@ -1254,10 +1258,10 @@ a
 a
 a
 b
+N
+c
 S
 c
-c
-N
 c
 o
 c
@@ -1288,7 +1292,7 @@ a
 a
 a
 b
-K
+O
 c
 v
 f

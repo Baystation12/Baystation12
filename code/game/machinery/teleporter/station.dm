@@ -31,10 +31,10 @@
 		I.layer = ABOVE_LIGHTING_LAYER
 		overlays += I
 
-/obj/machinery/teleport/station/attackby(var/obj/item/W, var/mob/user)
+/obj/machinery/teleport/station/attackby(obj/item/W, mob/user)
 	attack_hand(user)
 
-/obj/machinery/teleport/station/interface_interact(var/mob/user)
+/obj/machinery/teleport/station/interface_interact(mob/user)
 	if(!CanInteract(user, DefaultTopicState()))
 		return FALSE
 	if(engaged)
@@ -48,13 +48,17 @@
 		return
 
 	if (!(com && com.locked))
-		audible_message("<span class='warning'>Failure: Cannot authenticate locked on coordinates. Please reinstate coordinate matrix.</span>")
+		visible_message(
+			SPAN_WARNING("\The [src] flashes an error message: Failure: Cannot authenticate locked on coordinates. Please reinstate coordinate matrix.")
+		)
 		return
 
-	if(istype(com.locked, /obj/item/device/radio/beacon))
-		var/obj/item/device/radio/beacon/B = com.locked
-		if(!B.functioning)
-			audible_message("<span class='warning'>Failure: Unable to establish connection to provided coordinates. Please reinstate coordinate matrix.</span>")
+	if(istype(com.locked, /obj/machinery/teleport/beacon))
+		var/obj/machinery/teleport/beacon/B = com.locked
+		if(!B.functioning())
+			visible_message(
+				SPAN_WARNING("\The [src] flashes an error message: Failure: Unable to establish connection to provided coordinates. Please reinstate coordinate matrix.")
+			)
 			return
 
 	engaged = TRUE
@@ -64,7 +68,11 @@
 		use_power_oneoff(5000)
 		update_use_power(POWER_USE_ACTIVE)
 		hub.update_use_power(POWER_USE_ACTIVE)
-		audible_message("<span class='notice'>Teleporter engaged!</span>")
+		visible_message(
+			SPAN_NOTICE("\The [src] flashes a message: Teleporter engaged!")
+		)
+		if(istype(com.locked, /obj/machinery/teleport/beacon))
+			hub.connect_beacon(com.locked)
 	return
 
 /obj/machinery/teleport/station/proc/disengage()
@@ -77,7 +85,11 @@
 		hub.queue_icon_update()
 		hub.update_use_power(POWER_USE_IDLE)
 		update_use_power(POWER_USE_IDLE)
-		audible_message("<span class='notice'>Teleporter disengaged!</span>")
+		visible_message(
+			SPAN_NOTICE("\The [src] flashes a message: Teleporter disengaged!")
+		)
+		if (hub.beacon)
+			hub.disconnect_beacon()
 	return
 
 /obj/machinery/teleport/station/Destroy()

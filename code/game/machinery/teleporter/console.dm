@@ -5,7 +5,7 @@
 	icon_screen = "teleport"
 	var/obj/machinery/teleport/station/station = null
 	var/obj/machinery/teleport/hub/hub = null
-	var/obj/item/locked = null
+	var/obj/locked = null
 	var/id = null
 	var/one_time_use = 0 //Used for one-time-use teleport cards (such as clown planet coordinates.)
 						 //Setting this to 1 will set src.locked to null after a player enters the portal and will not allow hand-teles to open portals to that location.
@@ -50,10 +50,10 @@
 	. = ..()
 	if(locked)
 		var/turf/T = get_turf(locked)
-		to_chat(user, "<span class='notice'>The console is locked on to \[[T.loc.name]\].</span>")
+		to_chat(user, SPAN_NOTICE("The console is locked on to \[[T.loc.name]\]."))
 
 
-/obj/machinery/computer/teleporter/attackby(var/obj/I, var/mob/living/user)
+/obj/machinery/computer/teleporter/attackby(obj/I, mob/living/user)
 	if(istype(I, /obj/item/card/data/))
 		var/obj/item/card/data/C = I
 		if(stat & (NOPOWER|BROKEN) & (C.function != "teleporter"))
@@ -74,14 +74,15 @@
 		if(istype(L, /obj/effect/landmark/) && istype(L.loc, /turf))
 			if(!user.unEquip(I))
 				return
-			to_chat(usr, "You insert the coordinates into the machine.")
-			to_chat(usr, "A message flashes across the screen reminding the traveller that the nuclear authentication disk is to remain on the [station_name()] at all times.")
+			to_chat(user, SPAN_NOTICE("You insert the coordinates into the machine."))
+			to_chat(user, SPAN_NOTICE("A message flashes across the screen reminding the traveller that the nuclear authentication disk is to remain on the [station_name()] at all times."))
 			qdel(I)
 
 			if(C.data == "Clown Land")
 				//whoops
-				for(var/mob/O in hearers(src, null))
-					O.show_message("<span class='warning'>Incoming bluespace portal detected, unable to lock in.</span>", 2)
+				visible_message(
+					SPAN_WARNING("\The [src] flashes a warning message: Incoming bluespace portal detected, unable to lock in.")
+				)
 
 				for(var/obj/machinery/teleport/hub/H in range(1))
 					var/amount = rand(2,5)
@@ -89,8 +90,9 @@
 						new /mob/living/simple_animal/hostile/carp(get_turf(H))
 				//
 			else
-				for(var/mob/O in hearers(src, null))
-					O.show_message("<span class='notice'>Locked in.</span>", 2)
+				visible_message(
+					SPAN_NOTICE("\The [src] flashes a message: Locked in.")
+				)
 				src.locked = L
 				one_time_use = 1
 
@@ -100,7 +102,7 @@
 
 	return
 
-/obj/machinery/computer/teleporter/interface_interact(var/mob/user)
+/obj/machinery/computer/teleporter/interface_interact(mob/user)
 	/* Run full check because it's a direct selection */
 	if(!CanInteract(user, DefaultTopicState()))
 		return FALSE
@@ -109,15 +111,15 @@
 	var/list/areaindex = list()
 
 	. = TRUE
-	for(var/obj/item/device/radio/beacon/R in world)
-		if(!R.functioning)
+	for(var/obj/machinery/teleport/beacon/R in world)
+		if(!R.functioning())
 			continue
 		var/turf/T = get_turf(R)
 		if (!T)
 			continue
 		if(!(T.z in GLOB.using_map.player_levels))
 			continue
-		var/tmpname = T.loc.name
+		var/tmpname = R.beacon_name
 		if(areaindex[tmpname])
 			tmpname = "[tmpname] ([++areaindex[tmpname]])"
 		else
@@ -149,9 +151,15 @@
 		return
 	if(!CanInteract(user, DefaultTopicState()))
 		return FALSE
+	if (istype(desc, /obj/machinery/teleport/beacon))
+		var/obj/machinery/teleport/beacon/B = desc
+		if (!B.functioning())
+			to_chat(user, SPAN_WARNING("\The [B] labelled '[B.beacon_name]' is no longer lockable."))
+			return FALSE
 	set_target(L[desc])
-	for(var/mob/O in hearers(src, null))
-		O.show_message("<span class='notice'>Locked In</span>", 2)
+	visible_message(
+		SPAN_NOTICE("\The [src] flashes a message: Locked in.")
+	)
 	return
 
 /obj/machinery/computer/teleporter/verb/set_id(t as text)
@@ -167,7 +175,9 @@
 	return
 
 /obj/machinery/computer/teleporter/proc/target_lost()
-	audible_message("<span class='warning'>Connection with locked in coordinates has been lost.</span>")
+	visible_message(
+		SPAN_WARNING("\The [src] flashes a warning message: Connection with locked in coordinates has been lost.")
+	)
 	clear_target()
 
 /obj/machinery/computer/teleporter/proc/clear_target()
@@ -177,7 +187,7 @@
 	if(station && station.engaged)
 		station.disengage()
 
-/obj/machinery/computer/teleporter/proc/set_target(var/obj/O)
+/obj/machinery/computer/teleporter/proc/set_target(obj/O)
 	src.locked = O
 	GLOB.destroyed_event.register(locked, src, .proc/target_lost)
 

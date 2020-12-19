@@ -7004,7 +7004,7 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/seconddeck/elevator)
 "pJ" = (
-/obj/item/device/radio/beacon,
+/obj/machinery/teleport/beacon,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/seconddeck/fore)

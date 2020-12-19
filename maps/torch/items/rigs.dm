@@ -272,7 +272,6 @@
 				   /obj/item/device/core_sampler,
 				   /obj/item/device/gps,
 				   /obj/item/pinpointer/radio,
-				   /obj/item/device/radio/beacon,
 				   /obj/item/pickaxe/xeno,
 				   /obj/item/storage/bag/fossils,
 				   /obj/item/rig_module/grenade_launcher/light)
@@ -332,7 +331,6 @@
 		/obj/item/device/depth_scanner,
 		/obj/item/device/gps,
 		/obj/item/pinpointer/radio,
-		/obj/item/device/radio/beacon,
 		/obj/item/storage/plants
 	)
 
