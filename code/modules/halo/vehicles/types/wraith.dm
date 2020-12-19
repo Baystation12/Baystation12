@@ -38,7 +38,6 @@
 	else
 		bounds = "96,64"
 
-
 /obj/item/vehicle_component/health_manager/wraith
 	integrity = 750
 	resistances = list("bullet"=85,"energy"=85,"emp"=40,"bomb"=50)
@@ -107,13 +106,13 @@
 	icon_state = "Mortar_Projectile"
 	damage_type = "bomb"
 	damtype = "bomb"
-	step_delay = 1.5
+	step_delay = 1
 	armor_penetration = 50
 	shield_damage = 240
 
 /obj/item/projectile/bullet/covenant/wraith_cannon/setup_trajectory()
 	. = ..()
-	kill_count = get_dist(loc, original) + rand(0,2) //Only overshoot, don't undershoot. Undershoot is an irritating player experience.
+	kill_count = get_dist(loc, original) + rand(0,1) //Only overshoot, don't undershoot. Undershoot is an irritating player experience.
 
 /obj/item/projectile/bullet/covenant/wraith_cannon/Move(var/newloc,var/dir)
 	if(get_dist(loc,original) > (get_dist(starting,original)/2))
@@ -131,5 +130,5 @@
 	var/obj/effect/plasma_explosion/P = new(get_turf(src))
 	P.pixel_x += src.pixel_x
 	P.pixel_y += src.pixel_y
-	explosion(get_turf(impacted),0,1,2,5,guaranteed_damage = 100,guaranteed_damage_range = 3)
+	explosion(get_turf(impacted),0,2,4,5,guaranteed_damage = 100,guaranteed_damage_range = 3)
 	. = ..()
