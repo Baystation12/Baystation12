@@ -81,18 +81,27 @@
 			GLOB.processing_objects.Remove(src)
 
 /obj/structure/energybarricade/CanPass(atom/movable/A, turf/T, height=1.5, air_group = 0)
-
 	//can mobs pass unhindered using advanced alien technology?
 	if(ismob(A) && !blocks_mobs)
 		return ..()
 
 	//block movement from some directions if we are active
-	if(A && T && shield_health > 0 && !(A in climbing) && A.elevation == elevation)
-		var/turf/front_turf = get_step(src, dir)
+	if(A && shield_health > 0 && !(A in climbing) && A.elevation == elevation)
+	//Below code is taken from _destructible.dm to unify the handling methods
+	//this proc assumes that src is on a tile edge. return 1 if the mover will bump with that edge
+		var/turf/start_turf = get_turf(A)
+		var/turf/our_turf = get_turf(src)
 
-		//movement in front of the shield
-		if(front_turf == T)
-			to_chat(A,"<span class='warning'>[src] blocks your way.</span>")
+		//mover must be trying to enter our turf
+		var/check_dir = get_dir(our_turf,start_turf)
+
+		//it's a little easier to work in reverse here
+		var/list/block_dirs = list(src.dir)
+		block_dirs.Add(turn(src.dir, 45))
+		block_dirs.Add(turn(src.dir, -45))
+
+		//mover is trying to cross our tile edge
+		if(check_dir in block_dirs)
 			return 0
 
 	//do we seal off air on this turf?
