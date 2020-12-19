@@ -16,7 +16,7 @@
 
 	exposed_positions = list("gunner" = 0)
 
-	occupants = list(0,1)
+	occupants = list(4,0)
 
 	vehicle_size = ITEM_SIZE_VEHICLE
 
@@ -46,7 +46,7 @@
 	repair_materials = list("nanolaminate")
 
 /datum/component_profile/wraith
-	pos_to_check = "gunner"
+	pos_to_check = "driver"
 	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/switchable/wraith_cannon)
 	vital_components = newlist(/obj/item/vehicle_component/health_manager/wraith)
 

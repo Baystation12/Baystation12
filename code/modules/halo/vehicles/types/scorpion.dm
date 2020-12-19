@@ -16,7 +16,7 @@
 
 	exposed_positions = list("passenger" = 15)
 
-	occupants = list(4,1)
+	occupants = list(4,0)
 
 	vehicle_size = ITEM_SIZE_VEHICLE
 
@@ -39,7 +39,7 @@
 	repair_materials = list("plasteel")
 
 /datum/component_profile/scorpion
-	pos_to_check = "gunner"
+	pos_to_check = "driver"
 	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/switchable/scorpion_cannon)
 	vital_components = newlist(/obj/item/vehicle_component/health_manager/scorpion)
 
