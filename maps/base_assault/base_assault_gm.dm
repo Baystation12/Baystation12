@@ -8,7 +8,7 @@
 	round_description = "Assault a well-defended UNSC base."
 	extended_round_description = "Assault a well defended UNSC base and plant a bomb."
 	probability = 1
-	ship_lockdown_duration = 10
+	ship_lockdown_duration = 12 MINUTES
 	faction_balance = list(/datum/faction/covenant,/datum/faction/unsc)
 	var/stalemate_at = 0
 	var/defenders = "The UNSC"

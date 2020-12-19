@@ -9,7 +9,7 @@
 "ai" = (/obj/effect/shuttle_instance,/turf/simulated/floor,/area/urf_flagship/questareamarker)
 "aj" = (/turf/simulated/wall/r_wall,/area/urf_flagship/powercore)
 "ak" = (/obj/machinery/vending/armory/medical/innie,/turf/simulated/floor/tiled,/area/urf_flagship/medicalbay)
-"al" = (/obj/structure/table/standard,/obj/item/weapon/hand_labeler,/obj/item/weapon/storage/box/beakers,/turf/simulated/floor/tiled,/area/urf_flagship/medicalbay)
+"al" = (/obj/structure/table/standard,/obj/machinery/reagentgrinder,/obj/item/stack/material/phoron,/obj/item/stack/material/phoron,/turf/simulated/floor/tiled,/area/urf_flagship/medicalbay)
 "am" = (/turf/simulated/floor/plating,/area/urf_flagship/powercore)
 "an" = (/turf/simulated/wall/r_wall,/area/urf_flagship/Troopbunks)
 "ao" = (/obj/machinery/camera/autoname/invis/innie_base{icon_state = "camera"; dir = 8},/turf/simulated/floor/plating,/area/urf_flagship/powercore)
@@ -157,7 +157,7 @@
 "da" = (/obj/machinery/door/airlock/multi_tile/halo/blast,/obj/machinery/door/firedoor/multi_tile{tag = "icon-door_open (NORTH)"; icon_state = "door_open"; dir = 1},/turf/simulated/floor/tiled,/area/urf_flagship/medicalbay)
 "db" = (/obj/structure/ai_routing_node/innie,/turf/simulated/floor/tiled,/area/urf_flagship/medicalbay)
 "dc" = (/turf/simulated/wall/r_wall,/area/urf_flagship/Centralhallway)
-"dd" = (/obj/structure/table/standard,/obj/item/weapon/storage/box/pillbottles,/obj/item/weapon/storage/box/pillbottles,/turf/simulated/floor/tiled,/area/urf_flagship/medicalbay)
+"dd" = (/obj/structure/table/standard,/obj/item/weapon/hand_labeler,/obj/item/weapon/storage/box/beakers,/obj/item/weapon/storage/box/pillbottles,/obj/item/weapon/storage/box/pillbottles,/turf/simulated/floor/tiled,/area/urf_flagship/medicalbay)
 "de" = (/obj/machinery/power/apc{dir = 2; name = "south bump"; pixel_x = 0; pixel_y = -24},/obj/machinery/shuttle_fuel,/turf/simulated/floor/shuttle/red,/area/shuttle/innie_shuttle_transport)
 "df" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 4},/turf/simulated/floor/tiled,/area/urf_flagship/janitorial)
 "dg" = (/turf/simulated/floor/tiled,/area/urf_flagship/storageroom)
@@ -623,7 +623,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPasksasktkuasaQ
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaskrasasasasbjcpbjanbkiranbjcpbjanajamajaEaKaUblbmbnbobpbqakakbtbuaUaEaKaWbvbwbwbwbxbwbwbwbwbyaWaEaKdcgtgtgtgtgtgtgtgtgtgtgtgtgtgtgtgtdcaEaKaXbzbAbBbCbDbBbAbEbFbAaXaEaKajajajbGajajajamamamamajbHamamamamamajbIbibJambKaCaDaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPaPiqaPaPaPaPaPaPiqaPbLbMbNbMbOasanbPananbQaSananbPananajbRajaEaKaUbSbnbnkabnbTbnbTkabVaUaEaKaWbWeDeDeDeDeDeDeDeDbYaWaEbZgtgtgtgtgtgtgtgtgtgtgtgtgtgtgtgtgtgtaEbZaXcabCbEbBbAbFbzbFbFcbaXaEaKajccaLaLaLccajajajaqajajamamamamamamcdamceamamajcfaDaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaZaZaZcgchcgcichcRaZaPcjckasclcmiAcnaSaSaScogPaSaSaScqijajaoajaEcrcscscscscscscscscscsctcscucvbwcweDcxcycyczcAcBcCcDbwcucvgtgtgtgtgtgtgtgtgtgtgtgtgtgtgtgtgtgtcucvcEcEcEcEcEcEcEcEcEcEcFcGaEaKajcHaLaLaLccajcIcJamamcKcLcLcLcMamcNajamcOcPcQajaCaDaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaZcScThBhlhBhBcUcRaZaPcVcWasbNasasanbPanancXcYananbPananajamajaEcZdabnkabnbndbkbddalbnbndWaEaKdXdgdhcycycydidjcBcCdkdXaEaKkfgtgtgtgtgtgthNgtgtgtgtgtgtgtgtgtkfaEaKdfcGcGcGcGdmdncGcGcGcGdfaEbZajdoaLdpaLdqajcIdrcLtWdtamamamcJamdxajamdycPdzajaCaDaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaZcScThBhlhBhBcUcRaZaPcVcWasbNasasanbPanancXcYananbPananajamajaEcZdabnkabnbndbkbalddbnbndWaEaKdXdgdhcycycydidjcBcCdkdXaEaKkfgtgtgtgtgtgthNgtgtgtgtgtgtgtgtgtkfaEaKdfcGcGcGcGdmdncGcGcGcGdfaEbZajdoaLdpaLdqajcIdrcLtWdtamamamcJamdxajamdycPdzajaCaDaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaZdldAhBhBhBhBhBhBdBaZaPdDdEdFbMdGasbjcpbjandHaSanbjcpbjanajamajaEcZaUdIdJdJbrdLbnbTbTkadMaUaEaKaWdNeDcydOcycycycBcCdPaWaEaKdchPgtgtgtgtgtgtgtgtgtgtgtgtgtgthndcaEaKaXdQbDbFdRdRbBbFdSdTdUaXaEaKajccaLaLaLdVajamamamamamamWhiteeamefajegamehajajajaDaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaZdCdAhBhBdYeiejhBhBekaZbMbMeneoepasaQeqaQandHaSanaQeqaQanajamajzVcZaUeseteuevewexeyezeAeBaUWnaKaWeCbXeDeDeDeDeDeDeDeEaWWnaKdchZgtgtgtgtgtiTjXgtiTgtgtgtgtgthZdcWnaKaXbAbFbFbAeFeGdSeHeHbAaXWnaKajccaLaLaLccajamamamamamamamameKeLeMajajeNajajajajajaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaZelhBhBhBemcieOhBhBePaZasaseSasasasananananeTaSanananananajaqajeUeVaUaUaUaUaUaUaUaUaUaUaUaUaVaKaWaWaWaWaWaWaWaWaWaWaWaWaVaTdcdcdcdcjYgtdcdcdcdcdcdcjYgtdcdcdcdcaVaTaXaXaXaXaXaXaXaXaXaXaXaXaVaKajajajbGajajajeWeXeYamamamfaeXfbfcajajajajajajaaaaaaaaaaaaaaaaaaaa

@@ -11,6 +11,7 @@
 	var/movement_destroyed = 0
 	var/block_enter_exit //Set this to block entering/exiting.
 	var/can_traverse_zs = 0
+	var/can_overrun_cover = 0 //Allows these vehicles, on collision, to destroy barricade cover and collapse covenant shield cover.
 
 	var/next_move_input_at = 0//When can we send our next movement input?
 	var/moving_x = 0
@@ -48,7 +49,7 @@
 
 	var/vehicle_view_modifier = 1 //The view-size modifier to apply to the occupants of the vehicle.
 	var/move_sound = null
-	var/collision_sound = 'sound/effects/clang.ogg'
+	var/collision_sound = 'sound/effects/meteorimpact.ogg'
 
 	var/datum/mobile_spawn/spawn_datum //Setting this makes this a mobile spawn point.
 
@@ -236,7 +237,6 @@
 	. = ..()
 
 /obj/vehicles/proc/on_death()
-	explosion(get_turf(loc),-1,-1,2,5)
 	movement_destroyed = 1
 	guns_disabled = 1
 	icon_state = "[initial(icon_state)]_destroyed"
@@ -273,6 +273,16 @@
 
 		//eject it
 		eject_cargo_item(A, T)
+	for(var/mob/living/l in occupants)
+		var/dam_max = BASE_VEHICLE_DEATH_EXPLODE_DAMAGE * ((bound_height / 32) + (bound_width / 32))/2
+		l.adjustBruteLoss(dam_max/2)
+		dam_max /= 2
+		while(dam_max > 0)
+			var/dam_deal = rand(dam_max/3,dam_max)
+			dam_max -= dam_deal
+			l.adjustBruteLoss(dam_deal)
+	kick_occupants()
+	explosion(get_turf(src),1,2,3,5)
 
 /obj/vehicles/proc/inactive_pilot_effects() //Overriden on a vehicle-by-vehicle basis.
 
@@ -417,18 +427,26 @@
 	. = ..()
 
 /obj/vehicles/proc/collide_with_obstacle(var/atom/obstacle)
+	if(can_overrun_cover && obstacle.type in LIST_OVERRUN_COLLIDE_DESTROY)
+		playsound(loc,collision_sound,100,0,4)
+		if(istype(obstacle,/obj/structure/destructible))
+			var/obj/structure/destructible/b = obstacle
+			b.take_damage(b.health)
+		else if(istype(obstacle,/obj/structure/energybarricade))
+			var/obj/structure/energybarricade/b = obstacle
+			b.take_damage(b.shield_health)
 	if(istype(obstacle,/mob/living))
 		var/mob/living/hit_mob = obstacle
 		playsound(loc,collision_sound,100,0,4)
 		hit_mob.Weaken(2) //No damage for now, let's just knock them over.
 	else
 		next_move_input_at = world.time + min_speed
-		moving_x = 0
-		moving_y = 0
 		if(last_move == EAST || last_move == WEST)
+			moving_x = 0
 			speed[1] = 0
 		else if(last_move == NORTH || last_move == SOUTH)
 			speed[2] = 0
+			moving_y = 0
 		last_moved_axis = 0
 	visible_message("<span class = 'notice'>[src] collides wth [obstacle]</span>")
 

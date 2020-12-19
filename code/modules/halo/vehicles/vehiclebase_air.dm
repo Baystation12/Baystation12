@@ -83,6 +83,9 @@
 	return dropship_landing_controller.get_potential_landing_points(1,1,faction)
 
 /obj/vehicles/air/proc/create_waypoint_list()
+	if(ticker && ticker.mode && world.time < ticker.mode.ship_lockdown_until)
+		visible_message("<span class = 'notice'>[src] is still finalising deployment preperations. Please wait</span>")
+		return
 	var/list/landing_points_by_name = list()
 	for(var/obj/O in get_reachable_waypoints())
 		landing_points_by_name += O.name

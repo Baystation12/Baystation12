@@ -16,7 +16,7 @@
 
 	exposed_positions = list("gunner" = 0)
 
-	occupants = list(0,1)
+	occupants = list(4,0)
 
 	vehicle_size = ITEM_SIZE_VEHICLE
 
@@ -25,6 +25,8 @@
 	vehicle_view_modifier = 1.75
 
 	light_color = "#C1CEFF"
+
+	can_overrun_cover = 1
 
 	min_speed = 13
 	max_speed = 4
@@ -38,14 +40,13 @@
 	else
 		bounds = "96,64"
 
-
 /obj/item/vehicle_component/health_manager/wraith
 	integrity = 750
 	resistances = list("bullet"=85,"energy"=85,"emp"=40,"bomb"=50)
 	repair_materials = list("nanolaminate")
 
 /datum/component_profile/wraith
-	pos_to_check = "gunner"
+	pos_to_check = "driver"
 	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/switchable/wraith_cannon)
 	vital_components = newlist(/obj/item/vehicle_component/health_manager/wraith)
 
@@ -107,13 +108,13 @@
 	icon_state = "Mortar_Projectile"
 	damage_type = "bomb"
 	damtype = "bomb"
-	step_delay = 1.5
+	step_delay = 1
 	armor_penetration = 50
 	shield_damage = 240
 
 /obj/item/projectile/bullet/covenant/wraith_cannon/setup_trajectory()
 	. = ..()
-	kill_count = get_dist(loc, original) + rand(0,2) //Only overshoot, don't undershoot. Undershoot is an irritating player experience.
+	kill_count = get_dist(loc, original) + rand(0,1) //Only overshoot, don't undershoot. Undershoot is an irritating player experience.
 
 /obj/item/projectile/bullet/covenant/wraith_cannon/Move(var/newloc,var/dir)
 	if(get_dist(loc,original) > (get_dist(starting,original)/2))
@@ -131,5 +132,5 @@
 	var/obj/effect/plasma_explosion/P = new(get_turf(src))
 	P.pixel_x += src.pixel_x
 	P.pixel_y += src.pixel_y
-	explosion(get_turf(impacted),0,1,2,5,guaranteed_damage = 100,guaranteed_damage_range = 3)
+	explosion(get_turf(impacted),0,2,4,5,guaranteed_damage = 100,guaranteed_damage_range = 3)
 	. = ..()

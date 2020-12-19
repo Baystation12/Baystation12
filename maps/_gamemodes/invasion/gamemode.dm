@@ -11,7 +11,7 @@
 	round_description = "In an outer colony on the edge of human space, an insurrection is brewing. Meanwhile an alien threat lurks in the void."
 	extended_round_description = "In an outer colony on the edge of human space, an insurrection is brewing. Meanwhile an alien threat lurks in the void."
 	probability = 1
-	ship_lockdown_duration = 10 MINUTES
+	ship_lockdown_duration = 12 MINUTES
 	required_players = 6
 
 	var/safe_expire_warning = 0

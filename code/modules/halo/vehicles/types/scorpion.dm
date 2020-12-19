@@ -16,7 +16,7 @@
 
 	exposed_positions = list("passenger" = 15)
 
-	occupants = list(4,1)
+	occupants = list(4,0)
 
 	vehicle_size = ITEM_SIZE_VEHICLE
 
@@ -25,6 +25,8 @@
 	vehicle_view_modifier = 1.3
 
 	light_color = "#E1FDFF"
+
+	can_overrun_cover = 1
 
 	min_speed = 13
 	max_speed = 4
@@ -37,7 +39,7 @@
 	repair_materials = list("plasteel")
 
 /datum/component_profile/scorpion
-	pos_to_check = "gunner"
+	pos_to_check = "driver"
 	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/switchable/scorpion_cannon)
 	vital_components = newlist(/obj/item/vehicle_component/health_manager/scorpion)
 
@@ -58,6 +60,7 @@
 	desc = "A slow firing but devastatinly damaging cannon."
 	burst_size = 1
 	burst_delay = 1
+	dispersion = list(0)
 	fire_delay = 40
 	fire_sound = 'code/modules/halo/sounds/scorp_cannon_fire.ogg'
 	mag_used = /obj/item/ammo_magazine/scorp_shell
@@ -67,6 +70,7 @@
 	desc = "A short burst machinegun, used for anti-infantry purposes."
 	burst_size = 3
 	burst_delay = 1
+	dispersion = list(0.73)
 	fire_delay = 10
 	fire_sound = 'code/modules/halo/sounds/scorp_machinegun_fire.ogg'
 	mag_used = /obj/item/ammo_magazine/scorp_coax

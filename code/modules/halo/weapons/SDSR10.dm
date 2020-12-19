@@ -8,7 +8,7 @@
 	fire_sound = 'code/modules/halo/sounds/sound_rifle_firesound.ogg'
 	charge_meter = 0
 	self_recharge = 1
-	recharge_time = 10
+	recharge_time = 7
 	max_shots = 1
 	dispersion = list(0.26)
 	one_hand_penalty = -1

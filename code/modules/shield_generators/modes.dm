@@ -19,13 +19,13 @@
 	mode_desc = "This mode blocks majority of light. This includes beam weaponry and most of the visible light spectrum."
 	mode_flag = MODEFLAG_PHOTONIC
 	multiplier = 1.3
-/*
+
 /datum/shield_mode/humanoids
 	mode_name = "Humanoid Lifeforms"
 	mode_desc = "This mode blocks various humanoid lifeforms. Does not affect fully synthetic humanoids."
 	mode_flag = MODEFLAG_HUMANOIDS
 	multiplier = 1.5
-*/
+
 /datum/shield_mode/silicon
 	mode_name = "Silicon Lifeforms"
 	mode_desc = "This mode blocks various silicon based lifeforms."
