@@ -46,8 +46,8 @@
 /obj/item/weapon/gun/energy/process()
 	. = PROCESS_KILL
 	. = ..()
-	if(process_self_recharge())
-		return 0
+	if(self_recharge)
+		. = process_self_recharge()
 	return .
 
 /obj/item/weapon/gun/energy/proc/process_self_recharge()
