@@ -26,6 +26,8 @@
 
 	light_color = "#E1FDFF"
 
+	can_overrun_cover = 1
+
 	min_speed = 13
 	max_speed = 4
 	acceleration = 4

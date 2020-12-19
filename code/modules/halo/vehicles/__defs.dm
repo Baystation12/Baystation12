@@ -4,3 +4,4 @@
 #define ITEM_SIZE_VEHICLE_SMALL 7
 #define ITEM_SIZE_VEHICLE 8
 #define ITEM_SIZE_VEHICLE_LARGE 9
+#define LIST_OVERRUN_COLLIDE_DESTROY list(/obj/structure/destructible/steel_barricade,/obj/structure/destructible/plasteel_barricade,/obj/structure/destructible/marine_barricade,/obj/structure/destructible/covenant_barricade,/obj/structure/energybarricade)
