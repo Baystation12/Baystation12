@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - tweak: "Stripping someone else's underwear now creates a visible message and attack log, consistent with all other strip actions."
