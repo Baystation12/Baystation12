@@ -236,7 +236,6 @@
 	. = ..()
 
 /obj/vehicles/proc/on_death()
-	explosion(get_turf(loc),-1,-1,2,5)
 	movement_destroyed = 1
 	guns_disabled = 1
 	icon_state = "[initial(icon_state)]_destroyed"
@@ -273,6 +272,8 @@
 
 		//eject it
 		eject_cargo_item(A, T)
+	kick_occupants()
+	explosion(get_turf(src),1,2,3,5,guaranteed_damage = 50,guaranteed_damage_range = 1)
 
 /obj/vehicles/proc/inactive_pilot_effects() //Overriden on a vehicle-by-vehicle basis.
 
