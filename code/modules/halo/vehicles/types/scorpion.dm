@@ -60,6 +60,7 @@
 	desc = "A slow firing but devastatinly damaging cannon."
 	burst_size = 1
 	burst_delay = 1
+	dispersion = list(0)
 	fire_delay = 40
 	fire_sound = 'code/modules/halo/sounds/scorp_cannon_fire.ogg'
 	mag_used = /obj/item/ammo_magazine/scorp_shell
@@ -69,6 +70,7 @@
 	desc = "A short burst machinegun, used for anti-infantry purposes."
 	burst_size = 3
 	burst_delay = 1
+	dispersion = list(0.73)
 	fire_delay = 10
 	fire_sound = 'code/modules/halo/sounds/scorp_machinegun_fire.ogg'
 	mag_used = /obj/item/ammo_magazine/scorp_coax

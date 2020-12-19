@@ -273,8 +273,16 @@
 
 		//eject it
 		eject_cargo_item(A, T)
+	for(var/mob/living/l in occupants)
+		var/dam_max = BASE_VEHICLE_DEATH_EXPLODE_DAMAGE * ((bound_height / 32) + (bound_width / 32))/2
+		l.adjustBruteLoss(dam_max/2)
+		dam_max /= 2
+		while(dam_max > 0)
+			var/dam_deal = rand(dam_max/3,dam_max)
+			dam_max -= dam_deal
+			l.adjustBruteLoss(dam_deal)
 	kick_occupants()
-	explosion(get_turf(src),1,2,3,5,guaranteed_damage = 50,guaranteed_damage_range = 1)
+	explosion(get_turf(src),1,2,3,5)
 
 /obj/vehicles/proc/inactive_pilot_effects() //Overriden on a vehicle-by-vehicle basis.
 
