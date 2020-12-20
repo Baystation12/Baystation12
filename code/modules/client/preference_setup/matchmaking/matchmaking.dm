@@ -1,3 +1,5 @@
+/*
+
 var/global/datum/matchmaker/matchmaker = new()
 
 /hook/roundstart/proc/matchmaking()
@@ -206,3 +208,5 @@ var/global/datum/matchmaker/matchmaker = new()
 		else
 			show_browser(usr,null, "window=relations")
 		return 1
+
+*/

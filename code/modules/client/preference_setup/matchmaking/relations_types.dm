@@ -1,3 +1,4 @@
+/*
 /datum/relation/friend
 	name = "Friend"
 	desc = "You have known the fellow for a while now, and you get along pretty well."
@@ -67,3 +68,4 @@
 
 /datum/relation/spessnam/get_desc_string()
 	return "[holder] and [other.holder] served in military together at some point in the past."
+*/

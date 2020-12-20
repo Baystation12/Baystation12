@@ -1,3 +1,5 @@
+/*
+
 var/const/SKILL_NONE = 0
 var/const/SKILL_BASIC = 1
 var/const/SKILL_ADEPT = 2
@@ -296,3 +298,4 @@ var/global/list/SKILLS = null
 	desc_amateur = "You can make basic chemicals or medication--things like space cleaner or anti-toxin. You have some training in safety and you won't blow up the lab... probably."
 	desc_trained = "You work as a chemist, or else you are a doctor with training in chemistry. If you are a research chemist, you can create most useful chemicals; if you are a pharmacist, you can make most medications. At this stage, you're working mostly by-the-book. You can weaponize your chemicals by making grenades, smoke bombs, and similar devices."
 	desc_professional = "You specialized in chemistry or pharmaceuticals; you are either a medical researcher or professional chemist. You can create custom mixes and make even the trickiest of medications easily. You understand how your pharmaceuticals interact with the bodies of your patients. You are probably the originator of at least one new chemical innovation."
+*/

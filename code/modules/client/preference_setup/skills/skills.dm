@@ -1,3 +1,4 @@
+/*
 /datum/preferences
 	var/used_skillpoints = 0
 	var/list/skills          // skills can range from 0 to 3
@@ -69,3 +70,4 @@
 		return TOPIC_REFRESH
 
 	return ..()
+*/

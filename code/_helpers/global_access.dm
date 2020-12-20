@@ -85,8 +85,6 @@
 			return global.REMOTEVIEWBLOCK;
 		if("SHOCKIMMUNITYBLOCK")
 			return global.SHOCKIMMUNITYBLOCK;
-		if("SKILLS")
-			return global.SKILLS;
 		if("SMALLSIZEBLOCK")
 			return global.SMALLSIZEBLOCK;
 		if("SSatoms")
@@ -551,8 +549,6 @@
 			return global.hair_styles_male_list;
 		if("hazard_overlays")
 			return global.hazard_overlays;
-		if("hidden_skill_types")
-			return global.hidden_skill_types;
 		if("hiss_sound")
 			return global.hiss_sound;
 		if("hivemind_bank")
@@ -687,8 +683,6 @@
 			return global.master_controller;
 		if("master_mode")
 			return global.master_mode;
-		if("matchmaker")
-			return global.matchmaker;
 		if("maze_cell_count")
 			return global.maze_cell_count;
 		if("mechas_list")
@@ -1217,7 +1211,7 @@
 			return global.xenomorphs;
 		if("zone_blocked")
 			return global.zone_blocked;
-
+		
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -1304,8 +1298,6 @@
 			global.REMOTEVIEWBLOCK=newval;
 		if("SHOCKIMMUNITYBLOCK")
 			global.SHOCKIMMUNITYBLOCK=newval;
-		if("SKILLS")
-			global.SKILLS=newval;
 		if("SMALLSIZEBLOCK")
 			global.SMALLSIZEBLOCK=newval;
 		if("SSatoms")
@@ -1770,8 +1762,6 @@
 			global.hair_styles_male_list=newval;
 		if("hazard_overlays")
 			global.hazard_overlays=newval;
-		if("hidden_skill_types")
-			global.hidden_skill_types=newval;
 		if("hiss_sound")
 			global.hiss_sound=newval;
 		if("hivemind_bank")
@@ -1906,8 +1896,6 @@
 			global.master_controller=newval;
 		if("master_mode")
 			global.master_mode=newval;
-		if("matchmaker")
-			global.matchmaker=newval;
 		if("maze_cell_count")
 			global.maze_cell_count=newval;
 		if("mechas_list")
@@ -2436,7 +2424,7 @@
 			global.xenomorphs=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-
+		
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",
@@ -2480,7 +2468,6 @@
 	"REMOTETALKBLOCK",
 	"REMOTEVIEWBLOCK",
 	"SHOCKIMMUNITYBLOCK",
-	"SKILLS",
 	"SMALLSIZEBLOCK",
 	"SSatoms",
 	"SSgarbage",
@@ -2595,7 +2582,6 @@
 	"cargo_supply_pack_root",
 	"cargo_supply_packs",
 	"changelog_hash",
-	"channel_to_radio_key",
 	"chargen_robolimbs",
 	"checked_for_inactives",
 	"chemical_reaction_logs",
@@ -2642,7 +2628,6 @@
 	"deity",
 	"delta_index",
 	"department_accounts",
-	"department_radio_keys",
 	"description_icons",
 	"diary",
 	"dna_activity_bounds",
@@ -2714,9 +2699,7 @@
 	"hair_styles_female_list",
 	"hair_styles_list",
 	"hair_styles_male_list",
-	"halo_frequencies",
 	"hazard_overlays",
-	"hidden_skill_types",
 	"hiss_sound",
 	"hivemind_bank",
 	"holder_mob_icon_cache",
@@ -2784,7 +2767,6 @@
 	"mark",
 	"master_controller",
 	"master_mode",
-	"matchmaker",
 	"maze_cell_count",
 	"mechas_list",
 	"mechtoys",

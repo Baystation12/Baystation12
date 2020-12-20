@@ -50,7 +50,7 @@ datum/preferences
 	if(update_setup(loaded_preferences, loaded_character))
 		save_preferences()
 		save_character()
-
+/*
 /datum/preferences/proc/ZeroSkills(var/forced = 0)
 	for(var/V in SKILLS) for(var/datum/skill/S in SKILLS[V])
 		if(!skills.Find(S.ID) || forced)
@@ -102,7 +102,7 @@ datum/preferences
 			return "Genius"
 		if(24 to 1000)
 			return "God"
-
+*/
 /datum/preferences/proc/ShowChoices(mob/user)
 	if(!user || !user.client)	return
 
@@ -333,8 +333,8 @@ datum/preferences
 	character.personal_faction = faction
 	character.religion = religion
 
-	character.skills = skills
-	character.used_skillpoints = used_skillpoints
+	//character.skills = skills
+	//character.used_skillpoints = used_skillpoints
 
 	if(!character.isSynthetic())
 		character.nutrition = rand(140,360)

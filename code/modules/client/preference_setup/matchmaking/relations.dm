@@ -1,3 +1,4 @@
+/*
 /datum/preferences
 	var/list/relations
 	var/list/relations_info
@@ -54,3 +55,4 @@
 			pref.relations_info[R] = info
 		return TOPIC_REFRESH
 	return ..()
+*/
