@@ -225,16 +225,8 @@
 			wa.state = "02"
 			wa.update_icon()
 
-			var/obj/item/weapon/airlock_electronics/ae
-			if(!electronics)
-				create_electronics()
-			ae = electronics
-			electronics = null
-			ae.dropInto(loc)
-			ae.icon_state = "door_electronics_smoked"
-
-			operating = 0
 			shatter(src)
+			operating = 0
 			return
 
 	//If it's a weapon, smash windoor. Unless it's an id card, agent card, ect.. then ignore it (Cards really shouldnt damage a door anyway)
