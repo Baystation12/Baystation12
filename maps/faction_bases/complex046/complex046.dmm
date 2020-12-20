@@ -18,7 +18,7 @@
 "ar" = (/obj/effect/floor_decal/industrial/hatch/yellow,/turf/simulated/floor/road/empty,/area/faction_base/oni)
 "as" = (/turf/simulated/wall/iron/blue,/area/faction_base/oni/garage)
 "at" = (/obj/machinery/door/airlock/multi_tile/sol{name = "Complex 046"; req_access = list(142)},/turf/simulated/floor/tech/steel,/area/faction_base/oni/garage)
-"au" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 4; name = "Hangar"; req_access = list(142)},/turf/simulated/floor/tech/steel,/area/faction_base/oni/garage)
+"au" = (/obj/machinery/door/airlock/multi_tile/halo/blast_normal_triple{icon_state = "closed"; dir = 4},/turf/simulated/floor/tech/steel,/area/faction_base/oni/garage)
 "av" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tech/orange{tag = "icon-techfloor_orangefulltwogrid (NORTH)"; icon_state = "techfloor_orangefulltwogrid"; dir = 1},/area/faction_base/oni/cryodorms)
 "aw" = (/turf/simulated/floor/water,/area/faction_base/oni)
 "ax" = (/turf/simulated/floor/reinforced,/area/faction_base/oni/research)
@@ -45,7 +45,7 @@
 "aS" = (/obj/structure/reagent_dispensers/fueltank,/obj/machinery/light/small{dir = 4; pixel_y = 8},/turf/simulated/floor/tech/maint,/area/faction_base/oni/hangar)
 "aT" = (/obj/machinery/overmap_comms/receiver,/turf/simulated/floor/tech/maint,/area/faction_base/oni/hangar)
 "aU" = (/obj/machinery/door/blast/regular/quadruple{id = "oni_geminus_garage_outer"; name = "Complex 046 Garage Blast Doors"},/turf/simulated/floor/road{tag = "icon-road_empty (NORTH)"; icon_state = "road_empty"; dir = 1},/area/faction_base/oni/garage)
-"aV" = (/turf/simulated/floor/plating,/obj/effect/shuttle_landmark/oni_onsite_supply,/turf/simulated/shuttle/wall/corner/smoothwhite/sw,/area/shuttle/oni_shuttle_supply)
+"aV" = (/obj/effect/landmark/dropship_land_point/unsc/no_artifact{name = "ONI Complex 046 (Geminus) Vehicle Bay"},/turf/simulated/floor/road{tag = "icon-road_empty (NORTH)"; icon_state = "road_empty"; dir = 1},/area/faction_base/oni/garage)
 "aW" = (/turf/simulated/floor/road{tag = "icon-road_empty (NORTH)"; icon_state = "road_empty"; dir = 1},/area/faction_base/oni/garage)
 "aX" = (/obj/machinery/vending/engivend,/turf/simulated/floor/tech/maint,/area/faction_base/oni/hangar)
 "aY" = (/obj/machinery/light,/turf/simulated/floor/tech/orange,/area/faction_base/oni/cryodorms)
@@ -295,6 +295,7 @@
 "fI" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/structure/faction_banner/unsc{name = "ONI Complex 046"; pixel_y = 32},/turf/simulated/floor/road{tag = "icon-road_empty (NORTH)"; icon_state = "road_empty"; dir = 1},/area/faction_base/oni/garage)
 "fJ" = (/obj/machinery/door/airlock/halo{name = "Armory"; req_access = list(142)},/turf/simulated/floor/tech/gray,/area/faction_base/oni/barracks)
 "fK" = (/obj/structure/ai_routing_node/unsc,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/blacksite)
+"fL" = (/turf/simulated/floor/plating,/obj/effect/shuttle_landmark/oni_onsite_supply,/turf/simulated/shuttle/wall/corner/smoothwhite/sw,/area/shuttle/oni_shuttle_supply)
 "fM" = (/obj/machinery/overmap_weapon_console/ship_scanning_console{name = "Holotable - Scanning"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "holotable"; dir = 4},/obj/machinery/light,/turf/simulated/floor/tech,/area/faction_base/oni/research)
 "fN" = (/obj/machinery/overmap_weapon_console/ship_scanning_console{dir = 8; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "holotable"; name = "Holotable - Scanning"},/turf/simulated/floor/tech,/area/faction_base/oni/research)
 "fQ" = (/obj/structure/table/glass/white,/obj/item/weapon/storage/box/masks,/obj/item/weapon/storage/box/gloves,/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
@@ -364,13 +365,13 @@ aaasatbqasaUaWaWaWasasasasasasaDaDaDaDaeaeaeaeaeaeaeaeaeaeaeaeaeaDaEaQaIaLaLaDgR
 aaasbgbqbPaWaWaWaWcicjcjcjcjfIaDaDaDaDaeaeamaoazavazazavazazazaAaDaPaPaPaPaPaOaPaPaPaPaPaPaPaKdXgAaDaa
 aaasckbqaWaWaWaWaWcjapcjcjdDcjaDaDaDaDaeaBaCaFaCaFaCaFaCaFaCaFaGaDaNaPaPaPaSaDbLaPaKaKaKaPaPaKaKcfaDaa
 aaasbqbqaWaWaWaWaWaWaWaWaWaWaWaDaDaDaDaeaHaJfmezfmezfmezfmezfmaGaDdLaPaPaPaLaDaPaPaKaKaKdQdTdZfbfbaDaa
-aaasbqcmcjcjcjaWaWaWaWaWaWaWaWaDaDaDaDaeaRaZaZaZaYaZaZaZbabbaZbcaDbsaPaPgvdeaDdlaPaDaDaDfXgqguguguaDaa
+aaasbqcmcjcjcjaVaWaWaWaWaWaWaWaDaDaDaDaeaRaZaZaZaYaZaZaZbabbaZbcaDbsaPaPgvdeaDdlaPaDaDaDfXgqguguguaDaa
 aaasbqbqcjcjcjaWaWaWaWcjcjeAeDaDaDaDaDaeaeaeaeaeaeaecIddaeaeaeaDaDaDaDdKaDaDaDaPgxdFgtgndJeygogmgnaDaa
-aaasbqbqeGcjcjaWaWaWaWeAcjcjcjaseBeBdRdHdIdIdIdIdIdSeBeBbBaTaPcxaMeKgMaPaPaLdVaPgxgpemememgyememeqaDaa
+aaasbqbqeGcjcjaWaWaWaWeAcjcjcjbqeBeBdRdHdIdIdIdIdIdSeBeBbBaTaPcxaMeKgMaPaPaLdVaPgxgpemememgyememeqaDaa
 aaasckbqbqbqbqbqbqbqbqbqbqbqbqbqeBeBdMdNdNdNdNdNdNdOeBeBetaPaPaPaPaPaPaPaPaPaPaPgxgremememgyememeqaDaa
 aaasbqbqbqakcnbqbqbqakbqbqcnbqaueBeBdMdNdPdPdPdPdNdOfseBaPaPaPaPaPaPaPaPaPaPaPaPgxgsemememgyememeqaDaa
 aabfbfeIbVbfbfbfbfbfbfeIbVbfbfbfeBeBdMdNdPdPdPdPdNdOeBeBfHaPaPaPaPaPaPaPaPaPaPaPgxgpemememgyememeqaDaa
-aabfbibVbVbVbjbVbkbVbVbVbVfTfUbfeBeBdMfqdUdNdNdNdNdOeBeBaDaXcaflgRgRaPaPaPaPeagRgBaVgtgtgmgmgtgtgnaDaa
+aabfbibVbVbVbjbVbkbVbVbVbVfTfUbfeBeBdMfqdUdNdNdNdNdOeBeBaDaXcaflgRgRaPaPaPaPeagRgBfLgtgtgmgmgtgtgnaDaa
 aabfblbVbVbmbnbmbVbmbnbmbVbVbVbVeBeBdRdWdWdWdWdWdWdReBfgaDaDaDaDfYgbgwgzaPfYgbgbgwaDgDgEgEgEgEgEboboaa
 aabfbpbVbVbmbnbmbVbmbnbmbVbVbVfreBeBeBeBeBeBeBeBeBeBeBeBeBeBeBeBeBeBeBeBeBeBeBeBeBeBeBbrbrbrbrbrgSboaa
 aabfbtbVbVbmbnbmbVbmbnbmbVbVbubfeBeCeBeBeBeBeBdceBeBeCeBeBeBeBeCeBeBeBeBeBeBeBeBeBeBeBbrbrbrbrbrbrboaa

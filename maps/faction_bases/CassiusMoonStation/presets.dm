@@ -156,3 +156,16 @@
 
 /obj/effect/landmark/flank_marker/rightflank
 	name = "rightflank"
+
+//Placeholder so runtimes don't happen//
+/obj/effect/overmap/sector/exo_depot
+
+/obj/structure/bumpstairs/road/moonbase_to_oni
+	id_self = "oni_gem"
+	id_target = "gem_oni"
+	faction_restrict = "UNSC"
+
+/obj/structure/bumpstairs/road/moonbase_to_oni/Initialize()
+	. = ..()
+	if(locate(/obj/effect/overmap/sector/exo_depot))
+		return INITIALIZE_HINT_QDEL
