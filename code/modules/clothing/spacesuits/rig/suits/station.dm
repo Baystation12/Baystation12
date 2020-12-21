@@ -289,6 +289,7 @@
 		)
 
 /obj/item/clothing/shoes/magboots/rig/medical
+	germ_level = 0
 	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL, SPECIES_UNATHI, SPECIES_IPC)
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_feet_unathi.dmi'

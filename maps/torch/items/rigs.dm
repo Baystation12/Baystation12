@@ -179,6 +179,7 @@
 	icon_state = "command_med_rig"
 /obj/item/clothing/shoes/magboots/rig/command/medical
 /obj/item/clothing/gloves/rig/command/medical
+	germ_level = 0
 
 
 /obj/item/weapon/rig/command/medical/equipped
