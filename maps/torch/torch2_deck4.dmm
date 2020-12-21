@@ -188,7 +188,7 @@
 /obj/machinery/space_heater,
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/light/small{
-	dir = 4;
+	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/fourthdeck/starboard)
@@ -7916,11 +7916,11 @@
 	dir = 1;
 	icon_state = "techfloor_edges"
 	},
-/obj/machinery/embedded_controller/radio/airlock/airlock_controller{
+/obj/machinery/embedded_controller/radio/airlock/docking_port{
 	frequency = 1380;
 	id_tag = "eva_airlock";
-	name = "EVA Airlock Console";
-	pixel_y = 24;
+	name = "Fore Dock";
+	pixel_y = 21;
 	req_access = list("ACCESS_EVA");
 	tag_airpump = "eva_pump";
 	tag_chamber_sensor = "eva_sensor";
@@ -12800,9 +12800,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/command/captainmess)
 "QB" = (
-/obj/effect/shuttle_landmark/ninja/deck5{
-	name = "4th Deck, Fore Dock"
-	},
+/obj/effect/shuttle_landmark/merc/dock,
 /turf/space,
 /area/space)
 "QC" = (
