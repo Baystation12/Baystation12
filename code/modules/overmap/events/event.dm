@@ -250,9 +250,9 @@
 	name = "dark matter influx"
 	weaknesses = OVERMAP_WEAKNESS_EXPLOSIVE
 	events = list(/datum/event/gravity)
-	event_icon_states = list("grav1")
+	event_icon_states = list("grav1", "grav2", "grav3", "grav4")
 	opacity = 0
-	color = "#6c6c6c"
+	color = "#321945"
 
 //These now are basically only used to spawn hazards. Will be useful when we need to spawn group of moving hazards
 /datum/overmap_event

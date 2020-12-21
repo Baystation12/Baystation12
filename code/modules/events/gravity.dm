@@ -5,7 +5,7 @@
 	endWhen = rand(15, 60)
 
 /datum/event/gravity/announce()
-	command_announcement.Announce("Feedback surge detected in mass-distributions systems. Artificial gravity has been disabled whilst the system reinitializes.", "[location_name()] Gravity Subsystem", zlevels = affecting_z)
+	command_announcement.Announce("Feedback surge detected in mass-distributions systems. Artificial gravity has been disabled to avoid system overload.", "[location_name()] Gravity Subsystem", zlevels = affecting_z)
 
 /datum/event/gravity/start()
 	gravity_is_on = 0
