@@ -1,5 +1,0 @@
-author: "anconfuzedrock"
-delete-after: True
-changes: 
-  - tweak: "the gravity overload event no longer implies gravity will function as soon as the system recalibrates."
-  - imageadd: "the gravity influx space hazard has new sprites rather than one grey blob."
