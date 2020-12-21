@@ -12,10 +12,10 @@
 	suffixes = list("ascent/ascent-1.dmm")
 	cost = 0.5
 	shuttles_to_initialise = list(
-		/datum/shuttle/autodock/overmap/ascent, 
+		/datum/shuttle/autodock/overmap/ascent,
 		/datum/shuttle/autodock/overmap/ascent/two
 	)
-	spawn_weight = 0.67
+	spawn_weight = 0
 
 // Overmap objects.
 /obj/effect/overmap/visitable/ship/ascent_seedship
