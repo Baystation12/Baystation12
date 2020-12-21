@@ -1289,6 +1289,8 @@
 /obj/structure/table/rack,
 /obj/random/raider/hardsuit,
 /obj/item/clothing/glasses/thermal/plain/monocle,
+/obj/item/device/suit_cooling_unit,
+/obj/item/device/suit_cooling_unit,
 /turf/simulated/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
 "cU" = (
@@ -1611,10 +1613,6 @@
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
-"dJ" = (
-/obj/vehicle/bike/thermal,
-/turf/simulated/floor/plating,
-/area/map_template/skipjack_station/start)
 "dK" = (
 /obj/structure/closet/crate/freezer/rations,
 /obj/item/clothing/mask/gas/cyborg,
@@ -1698,7 +1696,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
 "dT" = (
-/obj/machinery/portable_atmospherics/hydroponics,
+/obj/machinery/recharge_station,
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
 "dU" = (
@@ -3953,7 +3951,7 @@ cI
 cS
 cZ
 dl
-dl
+dz
 dz
 dz
 dS
@@ -4027,8 +4025,8 @@ da
 dm
 du
 dm
-dJ
-dT
+dm
+dm
 eg
 el
 aa
