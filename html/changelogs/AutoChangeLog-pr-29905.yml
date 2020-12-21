@@ -1,0 +1,4 @@
+author: "lorwp"
+delete-after: True
+changes: 
+  - bugfix: "trainees now can't be autotraitored"
