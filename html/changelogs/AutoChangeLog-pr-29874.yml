@@ -1,0 +1,6 @@
+author: "juxtaposed9930"
+delete-after: True
+changes: 
+  - maptweak: "Replaces the merc spawn, the desperado, with the Cyclopes."
+  - maptweak: "The D4 fore airlock is now a docking port proper."
+  - tweak: "Mercenaries can no longer by teleporter circuits since they don't have a teleporter."
