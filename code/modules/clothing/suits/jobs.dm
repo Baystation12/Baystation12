@@ -201,6 +201,7 @@
 	allowed = list(/obj/item/stack/medical, /obj/item/weapon/reagent_containers/dropper, /obj/item/weapon/reagent_containers/hypospray, /obj/item/weapon/reagent_containers/syringe, \
 	/obj/item/device/scanner/health, /obj/item/device/flashlight, /obj/item/device/radio, /obj/item/weapon/tank/emergency, /obj/item/weapon/reagent_containers/ivbag)
 	body_parts_covered = UPPER_TORSO|ARMS
+	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
 
 /obj/item/clothing/suit/storage/toggle/fr_jacket/ems
 	name = "\improper EMS jacket"
