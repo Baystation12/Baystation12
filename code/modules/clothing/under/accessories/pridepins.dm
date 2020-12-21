@@ -20,6 +20,11 @@
 	name = "gay pride pin"
 	desc = "A pin celebrating gay pride."
 	icon_state = "gaypin"
+	
+/obj/item/clothing/accessory/pridepins/straightpin
+	name = "straight pride pin"
+	desc = "A pin celebrating straight pride."
+	icon_state = "straightpin"
 
 /obj/item/clothing/accessory/pridepins/pansexualpin
 	name = "pansexual pride pin"
