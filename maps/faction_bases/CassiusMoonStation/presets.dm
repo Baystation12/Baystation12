@@ -151,6 +151,9 @@
 /obj/effect/landmark/flank_marker
 	name = "Marks spots for wall-spawn when poplocking map flanks"
 
+/obj/effect/landmark/flank_marker/mid
+	name = "midlane"
+
 /obj/effect/landmark/flank_marker/left
 	name = "leftflank"
 
