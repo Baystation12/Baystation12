@@ -1,4 +1,4 @@
-#define EXECUTION_TIME 4 SECONDS
+#define EXECUTION_TIME 10 SECONDS
 
 /obj/item/weapon
     var/executions_allowed = FALSE

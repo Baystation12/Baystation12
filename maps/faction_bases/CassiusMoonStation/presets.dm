@@ -145,7 +145,7 @@
 /obj/item/weapon/light/tube/large_cavewall
 	name = "underground large light tube"
 	brightness_range = 10
-	brightness_power = 2
+	brightness_power = 4
 	brightness_color = "#362F29"
 
 /obj/effect/landmark/flank_marker
