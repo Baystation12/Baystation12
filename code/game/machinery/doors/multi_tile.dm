@@ -18,6 +18,7 @@
 	width = 2
 	appearance_flags = 0
 	opacity = 0
+	maxhealth = 1000
 	assembly_type = /obj/structure/door_assembly/multi_tile
 
 /obj/machinery/door/airlock/multi_tile/update_icon(state=0, override=0)

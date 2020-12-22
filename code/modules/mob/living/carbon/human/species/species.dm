@@ -126,7 +126,7 @@
 		)
 
 	var/explosion_effect_mod = 1.0 //Modifier on how much a species can resist explosive sideeffects
-	var/can_force_door = 0
+	var/can_force_door = 0 //Allows species members to force open unpowered doors
 	var/can_operate_advanced_covenant = 1
 
 	// HUD data vars.

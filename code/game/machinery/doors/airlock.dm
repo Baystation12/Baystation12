@@ -854,28 +854,20 @@ About the new airlock wires panel:
 
 	if (istype(h) && h.species.can_force_door == 1 && h.a_intent == I_GRAB)
 		if(arePowerSystemsOn() && !locked && !brace)
-			to_chat(h,"<span class='notice'>The airlock's motors are resisting your efforts to force it, but you're strong enough to overcome them.</span>")
-			if(!do_after(h, 5 SECONDS,src))
-				to_chat(h,"<span class = 'notice'>You stop forcing the airlock.</span>")
-				return
-			if(density)
-				to_chat(h,"<span class = 'notice'>You force the airlock open.</span>")
-				open()
-			else
-				to_chat(h,"<span class = 'notice'>You force the airlock closed.</span>")
-				close()
-
+			to_chat(user,"<span class='notice'>The airlock's motors lock down to prevent you from forcing it open, even with your amplified strength.</span>")
 		else if (locked)
 			to_chat(user, "<span class='notice'>The airlock's bolts prevent it from being forced.</span>")
 		else if(brace)
 			to_chat(user, "<span class='notice'>The airlock's brace holds it firmly in place.</span>")
 		else
-			if (density)
-				to_chat(h,"<span class = 'notice'>You force the airlock open.</span>")
-				open(1)
-			else
-				to_chat(h,"<span class = 'notice'>You force the airlock closed.</span>")
-				close(1)
+			visible_message("<span class='notice'>[h] starts forcing [src] [density ? "open" : "closed"]</span>")
+			if(do_after(h, 13 SECONDS,src))
+				if (density)
+					to_chat(h,"<span class = 'notice'>You force the airlock open.</span>")
+					spawn() open(1)
+				else
+					to_chat(h,"<span class = 'notice'>You force the airlock closed.</span>")
+					spawn() close(1)
 
 	if(src.p_open)
 		user.set_machine(src)
@@ -1138,7 +1130,7 @@ About the new airlock wires panel:
 		if(src.p_open && (operating < 0 || (!operating && welded && !src.arePowerSystemsOn() && density && !src.locked)) && !brace)
 			playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 			user.visible_message("[user] removes the electronics from the airlock assembly.", "You start to remove electronics from the airlock assembly.")
-			if(do_after(user,40,src))
+			if(do_after(user,4 SECONDS,src))
 				to_chat(user, "<span class='notice'>You removed the airlock electronics!</span>")
 				deconstruct(user)
 				return
@@ -1149,10 +1141,12 @@ About the new airlock wires panel:
 		else if(brace)
 			to_chat(user, "<span class='notice'>The airlock's brace holds it firmly in place.</span>")
 		else
-			if(density)
-				spawn(0)	open(1)
-			else
-				spawn(0)	close(1)
+			visible_message("<span class='notice'>[user] starts forcing [src] [density ? "open" : "closed"] with [C]</span>")
+			if(do_after(user, 8 SECONDS,src))
+				if(density)
+					spawn(0)	open(1)
+				else
+					spawn(0)	close(1)
 
 			//if door is unbroken, but at half health or less, hit with fire axe using harm intent
 	else if (istype(C, /obj/item/weapon/material/twohanded/fireaxe) && !(stat & BROKEN) && (src.health <= src.maxhealth / 2) && user.a_intent == I_HURT)
