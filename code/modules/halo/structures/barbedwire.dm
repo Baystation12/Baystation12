@@ -7,7 +7,7 @@
 	anchored = 1
 	throwpass = 1
 	var/first_dir = 0
-	var/damage = 5
+	var/damage = 20
 	var/health = 10
 
 /obj/structure/bardbedwire/verb/arrange_dir()
@@ -25,8 +25,7 @@
 	if(isliving(AM) && AM.elevation == elevation)
 		var/mob/living/L = AM
 		L.adjustBruteLoss(damage)
-		if(L && prob(25))
-			L.Weaken(2)
+		L.Stun(2)
 		if(ismob(AM))
 			to_chat(AM,"<span class='warning'>You are caught in [src]!</span>")
 		health -= 1
