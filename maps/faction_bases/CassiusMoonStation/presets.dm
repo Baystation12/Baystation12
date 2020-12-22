@@ -145,11 +145,14 @@
 /obj/item/weapon/light/tube/large_cavewall
 	name = "underground large light tube"
 	brightness_range = 10
-	brightness_power = 2
+	brightness_power = 4
 	brightness_color = "#362F29"
 
 /obj/effect/landmark/flank_marker
 	name = "Marks spots for wall-spawn when poplocking map flanks"
+
+/obj/effect/landmark/flank_marker/mid
+	name = "midlane"
 
 /obj/effect/landmark/flank_marker/left
 	name = "leftflank"

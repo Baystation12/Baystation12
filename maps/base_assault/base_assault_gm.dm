@@ -14,7 +14,7 @@
 	var/defenders = "The UNSC"
 	var/attackers = " The Covenant"
 	var/winning_side = "error"
-	var/list/flank_tags = list("rightflank","leftflank")
+	var/list/flank_tags = list("rightflank","leftflank","midlane")
 
 /datum/game_mode/base_assault/pre_setup()
 	. = ..()

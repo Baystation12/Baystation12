@@ -20,7 +20,7 @@
 	company_short = "UNSC"
 
 	use_overmap = 1
-	overmap_size= 10
+	overmap_size= 15
 	overmap_event_tokens = 1
 
 	allowed_gamemodes = list("base_assault")
