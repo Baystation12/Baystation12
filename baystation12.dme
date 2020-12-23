@@ -3159,6 +3159,7 @@
 #include "maps\bearcat\bearcat_define.dm"
 #include "maps\example\example_define.dm"
 #include "maps\random_ruins\exoplanet_ruins\exoplanet_ruins.dm"
+#include "maps\random_ruins\exoplanet_ruins\ascent_caulship\_ascent_caulship.dm"
 #include "maps\random_ruins\exoplanet_ruins\crashed_pod\crashed_pod.dm"
 #include "maps\random_ruins\exoplanet_ruins\datacapsule\datacapsule.dm"
 #include "maps\random_ruins\exoplanet_ruins\deserted_lab\deserted_lab.dm"
