@@ -10,8 +10,8 @@
 
 	layer = ABOVE_HUMAN_LAYER
 
-	maxHealth = 500
-	health = 500
+	maxHealth = 600
+	health = 600
 	unsuitable_atmos_damage = 0
 	var/crouched = 0
 
@@ -19,10 +19,12 @@
 	wander = 0
 	mob_size = MOB_LARGE
 	speed = 2
-	var/crouch_speed = 15
+	var/crouch_speed = 10
+	default_pixel_x = 20
+	pixel_x = 20
 
-	bound_width = 64
-	bound_height = 64
+	bound_width = 32
+	bound_height = 32
 
 	mob_bump_flag = HEAVY
 	mob_swap_flags = HEAVY
@@ -34,7 +36,7 @@
 	melee_damage_upper = 50
 	attacktext = "swiped"
 	a_intent = I_HURT
-	resistance = 35 //5 below an active energy sword
+	resistance = 20
 	attack_sound = 'sound/weapons/heavysmash.ogg'
 
 	/*response_help   = "pokes"
@@ -66,10 +68,16 @@
 	faction = "Covenant"
 
 /mob/living/simple_animal/mgalekgolo/proc/random_name()
- 	var/list/syllables = list("rg","rx","ll","rk","ck","rt","tr","rl","sn","ns","sl","ls","sp","ps")
- 	var/list/vowels = list("a","e","i","o","u")
- 	var/final_name = pick(syllables) + pick(vowels) + pick(syllables) + pick(vowels) + pick(syllables) + pick(vowels) + pick(syllables) + pick(vowels) + pick(syllables) + pick(vowels) + pick(syllables) + pick(vowels)
- 	//The loop that was doing the above in previous versions was causing crashes. I've only done it this way as a temporary fix until a more efficient version does not crash.
+	var/list/syllables = list("rg","rx","ll","rk","ck","rt","tr","rl","sn","ns","sl","ls","sp","ps")
+	var/list/vowels = list("a","e","i","o","u")
+	var/final_name = ""
+	for(var/i = 1 to 12)
+		var/list/pickfrom = syllables
+		if(i%2==0)
+			pickfrom = vowels
+		final_name += pick(pickfrom)
+
+	//The loop that was doing the above in previous versions was causing crashes. I've only done it this way as a temporary fix until a more efficient version does not crash.
  	return final_name
 
 /mob/living/simple_animal/mgalekgolo/Life()
