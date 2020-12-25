@@ -477,7 +477,7 @@ var/global/list/mining_floors = list()
 	mining_floors -= src
 	return ..()
 
-/turf/simulated/floor/asteroid/ex_act(severity)
+/turf/simulated/floor/asteroid/ex_act(severity,epi)
 	switch(severity)
 		if(3.0)
 			return
@@ -486,6 +486,8 @@ var/global/list/mining_floors = list()
 				gets_dug()
 		if(1.0)
 			gets_dug()
+
+	create_cover_precheck(severity,epi)
 	return
 
 /turf/simulated/floor/asteroid/is_plating()

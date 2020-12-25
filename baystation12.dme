@@ -1805,7 +1805,7 @@
 #include "code\modules\halo\misc\conversion_contracts.dm"
 #include "code\modules\halo\misc\custom_explosion.dm"
 #include "code\modules\halo\misc\executions.dm"
-#include "code\modules\halo\misc\explosion_cratering.dm"
+#include "code\modules\halo\misc\explosion_debris.dm"
 #include "code\modules\halo\misc\faction_banner.dm"
 #include "code\modules\halo\misc\faction_whitelist.dm"
 #include "code\modules\halo\misc\fakewall.dm"

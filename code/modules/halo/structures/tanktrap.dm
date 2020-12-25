@@ -5,6 +5,8 @@
 	icon_state = "tanktrap"
 	maxHealth = 150
 	health = 150
+	mob_climb_time = 2 SECONDS
+	bump_climb = 1
 	cover_rating = 0
 	dead_type = /obj/structure/tanktrap_dead
 

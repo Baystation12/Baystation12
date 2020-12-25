@@ -119,7 +119,7 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 				else if(dist < light_impact_range)	dist = 3
 				else								continue
 
-				T.ex_act(dist)
+				T.ex_act(dist,epicenter)
 				if(!T)
 					T = locate(x0,y0,z0)
 				//This method means an item can be hit multiple times by a single explosion.

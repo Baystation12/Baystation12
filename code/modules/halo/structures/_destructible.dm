@@ -18,6 +18,8 @@
 	var/list/loot_types = list(/obj/item/stack/material/steel)
 	var/list/scrap_types = list(/obj/item/salvage/metal)
 	var/dead_type
+	var/mob_climb_time = 3 SECONDS
+	var/bump_climb = 0
 	var/climbable = 1
 
 /obj/structure/destructible/New()
@@ -113,6 +115,11 @@
 	qdel(src)
 	return
 
+/obj/structure/destructible/Bumped(var/mob/living/bumper)
+	. = ..()
+	if(bump_climb)
+		structure_climb(bumper)
+
 /obj/structure/destructible/CanPass(atom/movable/mover, turf/start, height=0, air_group=0)//So bullets will fly over and stuff.
 
 	//this proc is called when something is trying to enter our turf
@@ -139,8 +146,10 @@
 	//by default, assume we will bump
 	var/is_bumping = 1
 
+	if(mob_climb_time == 0 && ismob(mover))
+		is_bumping = 0
 	//are we only blocking the edge of the tile?
-	if(src.flags & ON_BORDER)
+	else if(src.flags & ON_BORDER)
 		//check if we are trying to cross that edge
 		is_bumping = edge_bump_check(mover, get_turf(src))
 
@@ -159,9 +168,7 @@
 
 		return 0
 
-	else
-		//something is trying to enter the turf via a different edge to us
-		return 1
+	return 1
 
 /obj/structure/destructible/CheckExit(atom/movable/mover as mob|obj, turf/target as turf)
 
@@ -179,8 +186,10 @@
 
 	var/is_bumping = 0
 
+	if(mob_climb_time == 0 && ismob(mover))
+		is_bumping = 0
 	//are we only blocking the edge of the tile?
-	if(src.flags & ON_BORDER)
+	else if(src.flags & ON_BORDER)
 		//check if we are trying to cross that edge
 		is_bumping = edge_bump_check(mover, target)
 
@@ -278,7 +287,7 @@
 */
 /obj/structure/destructible/ex_act(severity)
 	//explosions do extra damage
-	take_damage(((3-severity) + 1)* 75)
+	take_damage(((4-severity))* 75)
 
 /obj/structure/destructible/proc/take_damage(var/amount)
 	health -= amount
@@ -336,7 +345,7 @@
 		if(T.CanPass(user, T))
 			user.dir = climb_dir
 			to_chat(user, "<span class='notice'>You start climbing over [src]...</span>")
-			if(do_after(user, 30))
+			if(do_after(user, mob_climb_time))
 				src.visible_message("<span class='info'>[user] climbs over [src].</span>")
 				user.loc = T
 		else
@@ -353,6 +362,7 @@
 	if(climbable && istype(target))
 		if(target.anchored)
 			to_chat(user,"<span class = 'notice'>You can't move [target]!</span>")
+			return
 		if(target == user)
 			structure_climb(user)
 		else

@@ -6,7 +6,9 @@
 	density = 1
 	anchored = 1
 	flags = ON_BORDER
-	cover_rating = 50
+	cover_rating = 60
+	maxHealth = 350
+	health = 350
 	deconstruct_tools = list(/obj/item/weapon/shovel, /obj/item/weapon/pickaxe)
 	loot_types = list(/obj/item/empty_sandbags)
 	scrap_types = list(/obj/item/stack/material/cloth, /obj/item/weapon/ore/glass)
