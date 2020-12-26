@@ -71,17 +71,11 @@
 	sm_radio.create_channel_dongle(RADIO_COV)
 
 /mob/living/simple_animal/mgalekgolo/proc/random_name()
-	var/list/syllables = list("rg","rx","ll","rk","ck","rt","tr","rl","sn","ns","sl","ls","sp","ps")
-	var/list/vowels = list("a","e","i","o","u")
-	var/final_name = ""
-	for(var/i = 1 to 12)
-		var/list/pickfrom = syllables
-		if(i%2==0)
-			pickfrom = vowels
-		final_name = "[final_name][pick(pickfrom)]"
-
-	//The loop that was doing the above in previous versions was causing crashes. I've only done it this way as a temporary fix until a more efficient version does not crash.
- 	return final_name
+ 	var/list/syllables = list("rg","rx","ll","rk","ck","rt","tr","rl","sn","ns","sl","ls","sp","ps")
+ 	var/list/vowels = list("a","e","i","o","u")
+ 	var/final_name = pick(syllables) + pick(vowels) + pick(syllables) + pick(vowels) + pick(syllables) + pick(vowels) + pick(syllables) + pick(vowels) + pick(syllables) + pick(vowels) + pick(syllables) + pick(vowels)
+ 	//The loop that was doing the above in previous versions was causing crashes. I've only done it this way as a temporary fix until a more efficient version does not crash.
+	return final_name
 
 /mob/living/simple_animal/mgalekgolo/Life()
 	//handle hud updates. there might be a better way to do this
