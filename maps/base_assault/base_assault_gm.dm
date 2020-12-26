@@ -69,3 +69,13 @@
 #undef STALEMATE_TIMER
 #undef BASE_ASSAULT_ONEFLANK_THRESHOLD
 #undef BASE_ASSAULT_TWOFLANK_THRESHOLD
+
+//Some extra jobstuff for mgalekgolo and spartans
+
+/datum/job/unsc/spartan_two
+	poplock_max = 2
+	poplock_divisor = 12
+
+/datum/job/covenant/mgalekgolo
+	poplock_max = 2
+	poplock_divisor = 12

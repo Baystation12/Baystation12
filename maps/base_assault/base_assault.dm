@@ -93,6 +93,7 @@
 	/datum/job/covenant/yanmee_major,
 	/datum/job/covenant/yanmee_ultra,
 	/datum/job/covenant/yanmee_leader,
+	/datum/job/covenant/mgalekgolo,
 	)
 
 	allowed_spawns = list(\
