@@ -71,10 +71,10 @@
 	sm_radio.create_channel_dongle(RADIO_COV)
 
 /mob/living/simple_animal/mgalekgolo/proc/random_name()
- 	var/list/syllables = list("rg","rx","ll","rk","ck","rt","tr","rl","sn","ns","sl","ls","sp","ps")
- 	var/list/vowels = list("a","e","i","o","u")
- 	var/final_name = pick(syllables) + pick(vowels) + pick(syllables) + pick(vowels) + pick(syllables) + pick(vowels) + pick(syllables) + pick(vowels) + pick(syllables) + pick(vowels) + pick(syllables) + pick(vowels)
- 	//The loop that was doing the above in previous versions was causing crashes. I've only done it this way as a temporary fix until a more efficient version does not crash.
+	var/list/syllables = list("rg","rx","ll","rk","ck","rt","tr","rl","sn","ns","sl","ls","sp","ps")
+	var/list/vowels = list("a","e","i","o","u")
+	var/final_name = pick(syllables) + pick(vowels) + pick(syllables) + pick(vowels) + pick(syllables) + pick(vowels) + pick(syllables) + pick(vowels) + pick(syllables) + pick(vowels) + pick(syllables) + pick(vowels)
+	//The loop that was doing the above in previous versions was causing crashes. I've only done it this way as a temporary fix until a more efficient version does not crash.
 	return final_name
 
 /mob/living/simple_animal/mgalekgolo/Life()
