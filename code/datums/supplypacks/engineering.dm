@@ -181,6 +181,14 @@
 	containername = "\improper Supermatter crate (CAUTION)"
 	access = access_ce
 
+/decl/hierarchy/supply_pack/engineering/smsmall
+	name = "Power - Supermatter shard"
+	contains = list(/obj/machinery/power/supermatter/shard)
+	cost = 75
+	containertype = /obj/structure/closet/crate/secure/large/phoron
+	containername = "\improper Supermatter crate (CAUTION)"
+	access = access_ce
+
 /decl/hierarchy/supply_pack/engineering/fueltank
 	name = "Liquid - Fuel tank"
 	contains = list(/obj/structure/reagent_dispensers/fueltank)
