@@ -63,7 +63,6 @@
 
 /datum/map/base_assault_unsc_vs_urf
 	allowed_jobs = list(\
-	/datum/job/unsc/spartan_two,
 	/datum/job/unsc/marine,
 	/datum/job/unsc/marine/specialist,
 	/datum/job/unsc/marine/hellbringer,\
