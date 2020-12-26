@@ -30,6 +30,19 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 /obj/item/clothing/under/unsc/marine_fatigues/oni_uniform = /mob/living/simple_animal/hostile/flood/combat_form/oni,\
 /obj/item/clothing/under/color/orange = /mob/living/simple_animal/hostile/flood/combat_form/prisoner)
 
+/datum/language/floodmind
+	name = LANGUAGE_FLOODMIND
+	desc = "The language of the flood's psychic hivemind"
+	speech_verb = "emits a rumbling sound"
+	ask_verb = "emits a rumbling sound"
+	exclaim_verb = "emits a rumbling sound"
+	colour = "lekgolo"
+	key = "f"
+	flags = RESTRICTED | NO_STUTTER
+	native = 1
+	syllables = list()
+	machine_understands = 0
+
 /mob/living/simple_animal/hostile/flood
 	attack_sfx = list(\
 		'sound/flood/melee.melee1.ogg','sound/flood/melee.melee10.ogg',\
@@ -75,6 +88,8 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	our_overmind = GLOB.flood_overmind
 	. = ..()
 	GLOB.live_flood_simplemobs.Add(src)
+	add_language(LANGUAGE_FLOODMIND)
+	sm_radio = new(src)
 	/*if(prob(50))
 		wander = 1
 		stop_automated_movement = 0*/
@@ -121,6 +136,13 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	if(new_combat_form.ckey)
 		new_combat_form.stop_automated_movement = 1
 	for(var/obj/i in h.contents)
+		if(istype(i,/obj/item/device/radio))
+			var/obj/item/device/radio/r = i
+			for(var/channel in r.channels_dongles)
+				if(channel == "Public")
+					continue
+				new_combat_form.sm_radio.create_channel_dongle(channel)
 		h.drop_from_inventory(i)
 	qdel(h)
+	sm_radio.examine(new_combat_form)
 

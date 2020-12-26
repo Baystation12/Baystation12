@@ -15,6 +15,7 @@
 
 #define LANGUAGE_SANGHEILI  "Sangheili"
 #define LANGUAGE_LEKGOLO    "Lekgolo"
+#define LANGUAGE_FLOODMIND  "Floodmind"
 #define LANGUAGE_UNGGOY     "Balahese"
 #define LANGUAGE_KIGYAR     "Ruuhti"
 #define LANGUAGE_BRUTE      "Doisacci"
