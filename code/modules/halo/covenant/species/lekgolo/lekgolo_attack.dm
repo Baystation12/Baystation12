@@ -17,7 +17,7 @@
 	var/charge_recharge_amount = 5 //The amount of "charge" to recharge each life tick.
 
 	var/next_shot
-	var/shot_delay = 2 //Delay between each shot, in seconds.
+	var/shot_delay = 6 //Delay between each shot, in seconds.
 
 /datum/mgalekgolo_weapon/fuel_rod_cannon
 	name = "Fuel Rod Cannon"

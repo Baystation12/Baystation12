@@ -20,8 +20,8 @@
 	mob_size = MOB_LARGE
 	speed = 2
 	var/crouch_speed = 10
-	default_pixel_x = 20
-	pixel_x = 20
+	default_pixel_x = -21
+	pixel_x = -21
 
 	bound_width = 32
 	bound_height = 32
@@ -54,6 +54,7 @@
 	. = ..()
 
 	name = capitalize(random_name())
+	real_name = name
 
 	active_weapon = new active_weapon()
 
@@ -66,6 +67,8 @@
 		new action_type(src)
 
 	faction = "Covenant"
+	sm_radio = new(src)
+	sm_radio.create_channel_dongle(RADIO_COV)
 
 /mob/living/simple_animal/mgalekgolo/proc/random_name()
 	var/list/syllables = list("rg","rx","ll","rk","ck","rt","tr","rl","sn","ns","sl","ls","sp","ps")
@@ -75,7 +78,7 @@
 		var/list/pickfrom = syllables
 		if(i%2==0)
 			pickfrom = vowels
-		final_name += pick(pickfrom)
+		final_name = "[final_name][pick(pickfrom)]"
 
 	//The loop that was doing the above in previous versions was causing crashes. I've only done it this way as a temporary fix until a more efficient version does not crash.
  	return final_name
