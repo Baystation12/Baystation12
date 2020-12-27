@@ -66,7 +66,7 @@
 		visible_message("<span class = 'warning'>[src] blurts a warning: ERROR: NO AVAILABLE DROP-TARGETS.</span>")
 		return
 	var/list/valid_points = list()
-	for(var/turf/l in view(drop_point,drop_accuracy))
+	for(var/turf/l in dview(drop_point,drop_accuracy))
 		if(istype(l,/turf/simulated/floor))
 			valid_points += l
 		if(istype(l,/turf/unsimulated/floor))
