@@ -12,7 +12,7 @@
 	/obj/item/weapon/reagent_containers/syringe/biofoam,
 	/obj/item/weapon/reagent_containers/pill/bicaridine,
 	/obj/item/weapon/reagent_containers/pill/dermaline,
-	/obj/item/weapon/reagent_containers/pill/tramadol,
+	/obj/item/weapon/storage/pill_bottle/polypseudomorphine,
 	/obj/item/weapon/reagent_containers/pill/iron,
 	)
 
