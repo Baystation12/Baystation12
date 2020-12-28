@@ -148,7 +148,7 @@
 		spawn(5)
 			M.add_chemical_effect(CE_PAINKILLER, 5)
 		if(volume <= metabolism)
-			holder.add_reagent(/datum/reagent/biofoampenaliser,overdose)
+			holder.add_reagent(/datum/reagent/biofoampenaliser,max(max_dose,overdose/2))
 
 /datum/reagent/biofoam/overdose(var/mob/living/carbon/M)
 	if(istype(M,/mob/living/carbon/human))
