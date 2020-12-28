@@ -98,7 +98,7 @@
 	desc = "Self-polarizing goggles with light amplification for dark environments. Made from durable synthetic."
 	icon_state = "swatgoggles"
 	origin_tech = list(TECH_MAGNET = 2)
-	darkness_view = 4
+	darkness_view = 3
 	action_button_name = "Toggle Goggles"
 	toggleable = 1
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
