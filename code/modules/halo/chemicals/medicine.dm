@@ -1,9 +1,9 @@
-#define BIOFOAM_COST_STOPBLEED 0.5
-#define BIOFOAM_COST_MENDBONE 1.5
-#define BIOFOAM_COST_MENDINTERNAL 1
-#define BIOFOAM_COST_MENDEXTERNAL 0.75
-#define BIOFOAM_COST_FIXWOUNDS 0.25
-#define BIOFOAM_COST_REMOVESHRAP 2
+#define BIOFOAM_COST_STOPBLEED 0.2
+#define BIOFOAM_COST_MENDBONE 0.3
+#define BIOFOAM_COST_MENDINTERNAL 0.1
+#define BIOFOAM_COST_MENDEXTERNAL 0.15
+#define BIOFOAM_COST_FIXWOUNDS 0.1
+#define BIOFOAM_COST_REMOVESHRAP 0.2
 
 #define POLYPSEUDOMORPHINE_PAINKILL 400
 
@@ -48,13 +48,13 @@
 	description = "The remnants of biofoam, clogging the person's body and stopping further biofoam usage"
 	reagent_state = LIQUID
 	color = "#edd9c0"
-	metabolism = REM*2
+	metabolism = REM*3
 	overdose = 0
 	scannable = 1
 
 /datum/reagent/biofoam
 	name = "Bio-Foam"
-	description = "A regenerative foaming agent which is capable of fixing bones and stopping bleeding."
+	description = "A regenerative foaming agent which is capable of fixing bones and stopping bleeding. Can only be injected every 15 seconds, as the remnants of previous injections stops future ones from working properly until fully processed by the body."
 	reagent_state = LIQUID
 	color = "#edd9c0"
 	metabolism = 1 //Biofoam is used quickly, and it uses more the more it does.
@@ -88,6 +88,7 @@
 			o.mend_fracture()
 			H.next_pain_time = world.time //Overrides the next pain timer
 			H.custom_pain("<span class = 'userdanger'>You feel the bones in your [o.name] being pushed into place.</span>",10)
+			fixed_anything = 1
 	if(fixed_anything)
 		to_chat(H,"<span class = 'notice'>You feel your limbs knitting themselves back together</span>")
 
@@ -294,11 +295,11 @@
 	var/intensity = 3
 	var/quarterOD = overdose/4
 	if(volume > quarterOD*3)
-		intensity = 7
-	else if(volume > quarterOD*2)
 		intensity = 6
-	else if(volume > quarterOD)
+	else if(volume > quarterOD*2)
 		intensity = 5
+	else if(volume > quarterOD)
+		intensity = 4
 	M.overlay_fullscreen("suppress",SUPPRESSION_FULLSCREEN_TYPE,intensity)
 
 /datum/reagent/polypseudomorphine/overdose(var/mob/living/carbon/M)

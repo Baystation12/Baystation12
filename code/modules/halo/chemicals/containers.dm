@@ -5,7 +5,7 @@
 
 /obj/item/weapon/reagent_containers/syringe/ld50_syringe/spartan
 	name = "Field Medical Syringe"
-	desc = "A potent cocktail of chemicals which allows for increased survivability in the field."
+	desc = "A potent cocktail of chemicals which allows for increased survivability in the field. Contains biofoam, Tricordrazine and Polypseudomorphine. Biofoam component will not function unless 15 seconds has passed between injections."
 	amount_per_transfer_from_this = 15
 	volume = 15
 	time = 30
@@ -20,7 +20,7 @@
 
 /obj/item/weapon/reagent_containers/syringe/biofoam
 	name = "Biofoam Syringe"
-	desc = "A syringe filled with biofoam, used to quickly fix internal and external injuries."
+	desc = "A syringe filled with biofoam, used to quickly fix internal and external injuries. Only inject a second dose after 15 seconds has passed, as remnants of previous injections interferes with the processing of future ones until fully processed."
 	amount_per_transfer_from_this = 10
 
 
@@ -41,7 +41,8 @@
 
 	New()
 		..()
-		reagents.add_reagent(/datum/reagent/triadrenaline, 15)
+		reagents.add_reagent(/datum/reagent/triadrenaline, 10)
+		reagents.add_reagent(/datum/reagent/polypseudomorphine, 5)
 		mode = SYRINGE_INJECT
 		update_icon()
 
