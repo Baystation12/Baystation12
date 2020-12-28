@@ -52,7 +52,7 @@
 
 /datum/game_mode/base_assault/check_finished()
 	if(world.time >= stalemate_at)
-		winning_side = "Nobody. Stalemate!"
+		winning_side = "Stalemate! [defenders] have attained a minor victory!"
 		return 1
 	if(get_defender_loss_status())
 		winning_side = attackers
