@@ -14,7 +14,7 @@
 		..() //There was Tri-Adrenaline here. It led to lots of scorespam.
 		reagents.add_reagent(/datum/reagent/biofoam,5)
 		reagents.add_reagent(/datum/reagent/tricordrazine,5)
-		reagents.add_reagent(/datum/reagent/tramadol,5)
+		reagents.add_reagent(/datum/reagent/polypseudomorphine,5)
 		mode = SYRINGE_INJECT
 		update_icon()
 
@@ -47,7 +47,7 @@
 
 //Iron pills + bottle define//
 /obj/item/weapon/reagent_containers/pill/iron
-	name = "Iron pill"
+	name = "Iron pill (20u)"
 	desc = "Used to increase the speed of blood replenishment."
 	icon_state = "pill18"
 	New()
@@ -61,7 +61,7 @@
 	startswith = list(/obj/item/weapon/reagent_containers/pill/iron = 7)
 
 /obj/item/weapon/reagent_containers/pill/hyronalin
-	name = "Hyronalin pill"
+	name = "Hyronalin pill (5u)"
 	desc = "Used to remove radiation poisoning."
 	icon_state = "pill17"
 	New()
@@ -73,6 +73,20 @@
 	desc = "Contains pills used to assist in radiation damage."
 
 	startswith = list(/obj/item/weapon/reagent_containers/pill/hyronalin = 7)
+
+/obj/item/weapon/reagent_containers/pill/polypseudomorphine
+	name = "Polypseudomorphine pill (10u)"
+	desc = "Used to kill pain and in higher doses, sedate people. Do not exceed 10u unless attempting sedation."
+	icon_state = "pill17"
+	New()
+		..()
+		reagents.add_reagent(/datum/reagent/polypseudomorphine, 10)
+
+/obj/item/weapon/storage/pill_bottle/polypseudomorphine
+	name = "bottle of polypseudomorphine pills"
+	desc = "Contains pills used to kill pain and in higher doses, sedate people. Do not exceed 10u."
+
+	startswith = list(/obj/item/weapon/reagent_containers/pill/polypseudomorphine = 7)
 
 
 #undef SYRINGE_DRAW

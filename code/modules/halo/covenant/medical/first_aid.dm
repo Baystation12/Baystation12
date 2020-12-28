@@ -15,7 +15,7 @@
 		/obj/item/weapon/reagent_containers/hypospray/autoinjector,
 		/obj/item/stack/medical/ointment,
 		/obj/item/weapon/storage/pill_bottle/covenant/kelotane,
-		/obj/item/weapon/storage/pill_bottle/covenant/paracetamol
+		/obj/item/weapon/storage/pill_bottle/covenant/polypseudomorphine
 		)
 
 /obj/item/weapon/storage/firstaid/fire/covenant/New()
@@ -50,7 +50,7 @@
 		/obj/item/device/healthanalyzer/covenant,
 		/obj/item/weapon/reagent_containers/hypospray/autoinjector,
 		/obj/item/weapon/storage/pill_bottle/covenant/antidexafen,
-		/obj/item/weapon/storage/pill_bottle/covenant/paracetamol
+		/obj/item/weapon/storage/pill_bottle/covenant/polypseudomorphine
 		)
 
 /obj/item/weapon/storage/firstaid/o2/covenant
@@ -72,7 +72,7 @@
 		/obj/item/weapon/storage/pill_bottle/covenant/dermaline,
 		/obj/item/weapon/storage/pill_bottle/covenant/dexalin_plus,
 		/obj/item/weapon/storage/pill_bottle/covenant/dylovene,
-		/obj/item/weapon/storage/pill_bottle/covenant/tramadol,
+		/obj/item/weapon/storage/pill_bottle/covenant/polypseudomorphine,
 		/obj/item/weapon/storage/pill_bottle/covenant/spaceacillin,
 		/obj/item/stack/medical/splint/covenant,
 		)
@@ -110,7 +110,7 @@
 		/obj/item/weapon/reagent_containers/syringe/biofoam,
 		/obj/item/weapon/reagent_containers/syringe/biofoam,
 		/obj/item/weapon/storage/pill_bottle/covenant/iron,
-		/obj/item/weapon/storage/pill_bottle/covenant/tramadol,
+		/obj/item/weapon/storage/pill_bottle/covenant/polypseudomorphine,
 		/obj/item/device/healthanalyzer/covenant,
 		)
 

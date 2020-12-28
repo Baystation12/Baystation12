@@ -2,7 +2,6 @@
 	icon = 'code/modules/halo/covenant/medical/medical.dmi'
 	icon_state = "covie_pillbottle"
 
-
 /obj/item/weapon/storage/pill_bottle/covenant/tramadol
 	name = "bottle of Tramadol pills"
 	desc = "Contains pills used to relieve pain."
@@ -69,6 +68,12 @@
 
 	startswith = list(/obj/item/weapon/reagent_containers/pill/spaceacillin = 7)
 
+/obj/item/weapon/storage/pill_bottle/covenant/hyronalin
+	name = "bottle of Hyronalin pills"
+	desc = "Contains pills used to assist in radiation damage."
+
+	startswith = list(/obj/item/weapon/reagent_containers/pill/hyronalin = 7)
+
 /obj/item/weapon/storage/pill_bottle/covenant/tramadol
 	name = "bottle of Tramadol pills"
 	desc = "Contains pills used to relieve pain."
@@ -86,3 +91,9 @@
 	desc = "Contains pills used to assist in blood replenishment."
 
 	startswith = list(/obj/item/weapon/reagent_containers/pill/iron = 7)
+
+/obj/item/weapon/storage/pill_bottle/covenant/polypseudomorphine
+	name = "bottle of polypseudomorphine pills"
+	desc = "Contains pills used to kill pain and in higher doses, sedate people. Do not exceed 10u."
+
+	startswith = list(/obj/item/weapon/reagent_containers/pill/polypseudomorphine = 7)

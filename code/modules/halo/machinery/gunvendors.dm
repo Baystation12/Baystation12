@@ -551,6 +551,7 @@
 					/obj/item/weapon/storage/pill_bottle/bicaridine = 6,
 					/obj/item/weapon/storage/pill_bottle/dermaline = 6,
 					/obj/item/weapon/storage/pill_bottle/tramadol = 6,
+					/obj/item/weapon/storage/pill_bottle/polypseudomorphine = 6,
 					/obj/item/weapon/storage/pill_bottle/hyronalin = 6,
 					/obj/item/weapon/storage/pill_bottle/iron = 6,
 					/obj/item/weapon/storage/pill_bottle/dexalin_plus = 6,
