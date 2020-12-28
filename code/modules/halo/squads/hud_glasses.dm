@@ -324,6 +324,7 @@
 	screen_loc = ui_entire_screen
 	plane = LIGHTING_PLANE
 	layer = LIGHTING_LAYER
+	alpha = 150
 
 /obj/screen/fullscreen/night_vision/noise/New()
 	. = ..()
