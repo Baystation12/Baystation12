@@ -281,7 +281,7 @@
 
 /datum/reagent/polypseudomorphine
 	name = "Polypseudomorphine"
-	description = "A powerful painkiller that can cause a loss of awareness in smaller doses, and full unconsciousness in higher doses. Never administer more than 20u unless you allow the original dose to fully exist the system of the patient."
+	description = "A powerful painkiller that can cause a loss of awareness in smaller doses, and full unconsciousness in higher doses. No more than 10u should be administered."
 	taste_description = "chalk"
 	reagent_state = LIQUID
 	color = "#C8A5DC"
