@@ -23,7 +23,7 @@
 	if(health_deficiency >= 40) tally += (health_deficiency / 35)
 
 	if(can_feel_pain())
-		if(getHalLoss() >= 20) tally += (getHalLoss() / 30) //halloss shouldn't slow you down if you can't even feel it
+		if(get_shock() >= 20) tally += (get_shock() / 30) //halloss shouldn't slow you down if you can't even feel it
 
 	if(istype(buckled, /obj/structure/bed/chair/wheelchair))
 		for(var/organ_name in list(BP_L_HAND, BP_R_HAND, BP_L_ARM, BP_R_ARM))

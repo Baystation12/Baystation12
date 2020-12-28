@@ -660,11 +660,11 @@
 			for(var/atom/a in hallucinations)
 				qdel(a)
 
-		if(getHalLoss() >= (species.total_health - 100))
+		if(get_shock() >= (species.total_health - 100))
 			if(!stat)
 				to_chat(src, "<span class='warning'>[species.halloss_message_self]</span>")
 				src.visible_message("<B>[src]</B> [species.halloss_message].")
-			Paralyse(10)
+			Paralyse(4)
 
 		if(paralysis || sleeping)
 			blinded = 1
@@ -708,7 +708,7 @@
 
 		if (drowsyness > 0)
 			drowsyness = max(0, drowsyness-1)
-			eye_blurry = max(2, eye_blurry)
+			eye_blurry = max(1, eye_blurry)
 			if (prob(5))
 				sleeping += 1
 				Paralyse(5)
@@ -794,7 +794,7 @@
 						var/no_damage = 1
 						var/trauma_val = 0 // Used in calculating softcrit/hardcrit indicators.
 						if(can_feel_pain())
-							trauma_val = max(shock_stage,getHalLoss())/(species.total_health-100)
+							trauma_val = max(shock_stage,get_shock())/(species.total_health-100)
 						// Collect and apply the images all at once to avoid appearance churn.
 						var/list/health_images = list()
 						for(var/obj/item/organ/external/E in organs)
@@ -978,7 +978,7 @@
 	if(shock_stage >= 30)
 		if(shock_stage == 30) visible_message("<b>[src]</b> is having trouble keeping \his eyes open.")
 		if(prob(30))
-			eye_blurry = max(2, eye_blurry)
+			eye_blurry = max(1, eye_blurry)
 			stuttering = max(stuttering, 5)
 
 	if(shock_stage == 40)
