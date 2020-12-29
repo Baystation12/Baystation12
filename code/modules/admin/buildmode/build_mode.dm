@@ -3,6 +3,7 @@
 	var/name
 	var/icon_state
 	var/datum/click_handler/build_mode/host
+	var/datum/buildmode_overlay/overlay
 	var/mob/user
 
 /datum/build_mode/New(var/host)
@@ -11,6 +12,7 @@
 	user = src.host.user
 
 /datum/build_mode/Destroy()
+	QDEL_NULL(overlay)
 	host = null
 	. = ..()
 
@@ -31,6 +33,12 @@
 
 /datum/build_mode/proc/TimerEvent()
 	return
+
+/datum/build_mode/proc/UpdateOverlay(image/I, turf/T)
+	return
+
+/datum/build_mode/proc/CreateOverlay(icon_state)
+	overlay = new(user, src, icon_state)
 
 /datum/build_mode/proc/Log(message)
 	log_admin("BUILD MODE - [name] - [key_name(usr)] - [message]")

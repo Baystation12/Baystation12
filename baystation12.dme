@@ -1258,6 +1258,7 @@
 #include "code\modules\admin\buildmode\ladders.dm"
 #include "code\modules\admin\buildmode\light_maker.dm"
 #include "code\modules\admin\buildmode\move_into.dm"
+#include "code\modules\admin\buildmode\overlay.dm"
 #include "code\modules\admin\buildmode\relocate_to.dm"
 #include "code\modules\admin\buildmode\room_builder.dm"
 #include "code\modules\admin\buildmode\throw_at.dm"
