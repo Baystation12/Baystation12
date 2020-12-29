@@ -135,11 +135,6 @@
 
 /datum/reagent/biofoam/affect_blood(var/mob/living/carbon/M,var/alien,var/removed) //Biofoam stops internal and external bleeding, heals organs and fixes bones.
 	if(istype(M,/mob/living/carbon/human))
-		if(locate(/datum/reagent/biofoampenaliser) in holder.reagent_list)
-			holder.remove_reagent(/datum/reagent/biofoam,volume)
-			holder.add_reagent(/datum/reagent/biofoampenaliser,volume)
-			to_chat(M,"<span class = 'notice'>You feel the biofoam start to take effect, then suddenly stop as it reacts with remnants of a previous injection.</span>")
-			return
 		M.custom_pain("You feel a searing pain in your veins",3)
 		remove_embedded(M)
 		fix_wounds(M)
