@@ -31,6 +31,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/list/player_levels = list()  // Z-levels a character can typically reach
 	var/list/sealed_levels = list()  // Z-levels that don't allow random transit at edge
 	var/list/empty_levels = null     // Empty Z-levels that may be used for various things (currently used by bluespace jump)
+	var/list/escape_levels = list()  // Z-levels that when a player is in, are considered to have 'escaped' after evacuations.
 
 	var/list/map_levels              // Z-levels available to various consoles, such as the crew monitor. Defaults to station_levels if unset.
 
@@ -479,3 +480,89 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	if(C.mob) // Check if the client is still connected to something
 		// Hide title screen, allowing player to see the map
 		winset(C, "lobbybrowser", "is-disabled=true;is-visible=false")
+
+/datum/map/proc/roundend_player_status()
+	for(var/mob/Player in GLOB.player_list)
+		if(Player.mind && !isnewplayer(Player))
+			if(Player.stat != DEAD)
+				var/turf/playerTurf = get_turf(Player)
+				if(evacuation_controller.round_over() && evacuation_controller.emergency_evacuation)
+					if(isStationLevel(playerTurf.z))
+						to_chat(Player, "<span class='info'><b>You managed to survive, but were left behind on [station_name()] as [Player.real_name]...</b></span>")
+					else if (isEscapeLevel(playerTurf.z))
+						to_chat(Player, "<font color='green'><b>You managed to survive the events on [station_name()] as [Player.real_name].</b></font>")
+					else
+						to_chat(Player, "<span class='info'><b>You managed to survive, but were lost far from [station_name()] as [Player.real_name]...</b></span>")
+				else if(isAdminLevel(playerTurf.z))
+					to_chat(Player, "<font color='green'><b>You successfully underwent crew transfer after events on [station_name()] as [Player.real_name].</b></font>")
+				else if(issilicon(Player))
+					to_chat(Player, "<font color='green'><b>You remain operational after the events on [station_name()] as [Player.real_name].</b></font>")
+				else if (isNotStationLevel(playerTurf.z))
+					to_chat(Player, "<span class='info'><b>You managed to survive, but were lost far from [station_name()] as [Player.real_name]...</b></span>")
+				else
+					to_chat(Player, "<span class='info'><b>You got through just another workday on [station_name()] as [Player.real_name].</b></span>")
+			else
+				if(isghost(Player))
+					var/mob/observer/ghost/O = Player
+					if(!O.started_as_observer)
+						to_chat(Player, "<font color='red'><b>You did not survive the events on [station_name()]...</b></font>")
+				else
+					to_chat(Player, "<font color='red'><b>You did not survive the events on [station_name()]...</b></font>")
+
+/datum/map/proc/roundend_statistics()
+	var/data = list()
+	data["clients"] = 0
+	data["surviving_humans"] = 0
+	data["surviving_total"] = 0 //required field for roundend webhook!
+	data["ghosts"] = 0 //required field for roundend webhook!
+	data["escaped_humans"] = 0
+	data["escaped_total"] = 0
+	data["left_behind_total"] = 0 //players who didnt escape and aren't on the station.
+
+	for(var/mob/M in GLOB.player_list)
+		if(M.client)
+			data["clients"]++
+			if(M.stat != DEAD)
+				data["surviving_total"]++
+				if(ishuman(M))
+					data["surviving_humans"]++
+				var/area/A = get_area(M)
+				if(A && (istype(A, /area/shuttle) && isEscapeLevel(A.z)))
+					data["escaped_total"]++
+					if(ishuman(M))
+						data["escaped_humans"]++
+				if (evacuation_controller.emergency_evacuation && !isEscapeLevel(A.z)) //left behind after evac
+					data["left_behind_total"]++
+				if (!evacuation_controller.emergency_evacuation && isNotStationLevel(A.z))
+					data["left_behind_total"]++
+			else if(isghost(M))
+				data["ghosts"]++
+
+	if(data["clients"] > 0)
+		SSstatistics.set_field("round_end_clients",data["clients"])
+	if(data["ghosts"] > 0)
+		SSstatistics.set_field("round_end_ghosts",data["ghosts"])
+	if(data["surviving_humans"] > 0)
+		SSstatistics.set_field("survived_human",data["surviving_humans"])
+	if(data["surviving_total"] > 0)
+		SSstatistics.set_field("survived_total",data["surviving_total"])
+	if(data["escaped_humans"] > 0)
+		SSstatistics.set_field("escaped_human",data["escaped_humans"])
+	if(data["escaped_total"] > 0)
+		SSstatistics.set_field("escaped_total",data["escaped_total"])
+
+	return data
+
+/datum/map/proc/roundend_summary(list/data)
+	var/desc
+	if(data["surviving_total"] > 0)
+		var/survivors = data["surviving_total"]
+		var/escaped_total = data["escaped_total"]
+		var/ghosts = data["ghosts"]
+
+		desc += "There [survivors>1 ? "were <b>[survivors] survivors</b>" : "was <b>one survivor</b>"]"
+		desc += " (<b>[escaped_total>0 ? escaped_total : "none"] escaped</b> and <b>[ghosts] ghosts</b>.<br>"
+	else
+		desc += "There were <b>no survivors</b>, (<b>[data["ghosts"]] ghosts</b>)."
+
+	return desc

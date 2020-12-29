@@ -326,27 +326,10 @@ var/global/list/additional_antag_types = list()
 
 	sleep(2)
 
-	var/clients = 0
-	var/surviving_humans = 0
-	var/surviving_total = 0
-	var/ghosts = 0
-	var/escaped_humans = 0
-	var/escaped_total = 0
+	var/list/data = GLOB.using_map.roundend_statistics()
 
-	for(var/mob/M in GLOB.player_list)
-		if(M.client)
-			clients++
-			if(M.stat != DEAD)
-				surviving_total++
-				if(ishuman(M))
-					surviving_humans++
-				var/area/A = get_area(M)
-				if(A && is_type_in_list(A, GLOB.using_map.post_round_safe_areas))
-					escaped_total++
-					if(ishuman(M))
-						escaped_humans++
-			else if(isghost(M))
-				ghosts++
+	var/text = "<br><br>"
+	text += GLOB.using_map.roundend_summary(data)
 
 	var/departmental_goal_summary = SSgoals.get_roundend_summary()
 	for(var/thing in GLOB.clients)
@@ -354,30 +337,10 @@ var/global/list/additional_antag_types = list()
 		if(client.mob && client.mob.mind)
 			client.mob.mind.show_roundend_summary(departmental_goal_summary)
 
-	var/text = "<br><br>"
-	if(surviving_total > 0)
-		text += "There [surviving_total>1 ? "were <b>[surviving_total] survivors</b>" : "was <b>one survivor</b>"]"
-		text += " and <b>[ghosts] ghosts</b>.<br>"
-	else
-		text += "There were <b>no survivors</b> (<b>[ghosts] ghosts</b>)."
-
 	to_world(text)
 
-	if(clients > 0)
-		SSstatistics.set_field("round_end_clients",clients)
-	if(ghosts > 0)
-		SSstatistics.set_field("round_end_ghosts",ghosts)
-	if(surviving_humans > 0)
-		SSstatistics.set_field("survived_human",surviving_humans)
-	if(surviving_total > 0)
-		SSstatistics.set_field("survived_total",surviving_total)
-	if(escaped_humans > 0)
-		SSstatistics.set_field("escaped_human",escaped_humans)
-	if(escaped_total > 0)
-		SSstatistics.set_field("escaped_total",escaped_total)
-
-	send2mainirc("A round of [src.name] has ended - [surviving_total] survivor\s, [ghosts] ghost\s.")
-	SSwebhooks.send(WEBHOOK_ROUNDEND, list("survivors" = surviving_total, "escaped" = escaped_total, "ghosts" = ghosts))
+	send2mainirc("A round of [src.name] has ended - [data["surviving_total"]] survivor\s, [data["ghosts"]] ghost\s.")
+	SSwebhooks.send(WEBHOOK_ROUNDEND, data)
 
 	return 0
 
