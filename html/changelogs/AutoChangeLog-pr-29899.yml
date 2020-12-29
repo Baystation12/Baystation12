@@ -1,4 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - admin: "Spam flood autokicks no longer generate automatic notes."
