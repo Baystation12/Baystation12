@@ -1,0 +1,4 @@
+author: "Ninetailed"
+delete-after: True
+changes: 
+  - imageadd: "Adds a new EVA Ban status display, accessible from the command program"
