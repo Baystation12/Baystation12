@@ -1,0 +1,4 @@
+author: "Mucker"
+delete-after: True
+changes: 
+  - tweak: "Tweaks round-end messages to include a 'marooned' count, aka people who were left behind."
