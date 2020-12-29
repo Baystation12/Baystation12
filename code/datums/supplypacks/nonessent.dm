@@ -270,3 +270,32 @@
 		/obj/item/weapon/flame/lighter/random)
 	cost = 15
 	containername = "aromatherapy crate"
+
+/decl/hierarchy/supply_pack/nonessent/pins
+	name = "Costume - Pride Pin Crate"
+	contains = list(
+		/obj/item/clothing/accessory/pridepins = 2,
+		/obj/item/clothing/accessory/pridepins/lesbianpin = 2,
+		/obj/item/clothing/accessory/pridepins/bisexualpin = 2,
+		/obj/item/clothing/accessory/pridepins/gaypin = 2,
+		/obj/item/clothing/accessory/pridepins/pansexualpin = 2,
+		/obj/item/clothing/accessory/pridepins/nonbinarypin = 2,
+		/obj/item/clothing/accessory/pridepins/asexualpin = 2,
+		/obj/item/clothing/accessory/pridepins/intersexpin = 2
+	)
+	cost = 20
+	containername = "pin crate"
+
+/decl/hierarchy/supply_pack/nonessent/pronounbadges
+	name = "Costume - Pronoun Badge Crate"
+	contains = list(
+		/obj/item/clothing/accessory/pronouns = 2,
+		/obj/item/clothing/accessory/pronouns/hehimbadge = 2,
+		/obj/item/clothing/accessory/pronouns/sheherbadge = 2,
+		/obj/item/clothing/accessory/pronouns/hetheybadge = 2,
+		/obj/item/clothing/accessory/pronouns/shetheybadge = 2,
+		/obj/item/clothing/accessory/pronouns/zehirbadge = 2,
+		/obj/item/clothing/accessory/pronouns/pleaseaskbadge = 2
+	)
+	cost = 20
+	containername = "pronoun badge crate"
