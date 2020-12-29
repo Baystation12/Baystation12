@@ -82,7 +82,7 @@
 				playsound(loc, 'sound/items/Deconstruct.ogg', 75, TRUE)
 				qdel(src)
 				return
-			
+
 			if (LIGHT_STAGE_WIRED)
 				to_chat(user, SPAN_WARNING("You have to remove the wires first."))
 				return
@@ -599,6 +599,19 @@
 	var/b_colour = "#fffee0"
 	var/list/lighting_modes = list()
 	var/sound_on
+	var/random_tone = TRUE
+	var/list/random_tone_options = list(
+		"#fffee0",
+		"#e0feff",
+		"#ffe0fe",
+		"#fefefe",
+	)
+
+/obj/item/weapon/light/Initialize()
+	. = ..()
+	if (random_tone)
+		b_colour = pick(random_tone_options)
+		update_icon()
 
 /obj/item/weapon/light/examine(mob/user)
 	. = ..()
@@ -657,6 +670,7 @@
 /obj/item/weapon/light/bulb/red
 	color = "#da0205"
 	b_colour = "#da0205"
+	random_tone = FALSE
 
 /obj/item/weapon/light/bulb/red/readylight
 	lighting_modes = list(
