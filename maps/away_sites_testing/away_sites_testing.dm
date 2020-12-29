@@ -19,7 +19,6 @@
 	#include "../away/lar_maria/lar_maria.dm"
 	#include "../away/skrellscoutship/skrellscoutship.dm"
 	#include "../away/verne/verne.dm"
-	#include "../away/ascent/ascent.dm"
 	#include "../away/meatstation/meatstation.dm"
 	#include "../away/miningstation/miningstation.dm"
 	#include "../away/scavver/scavver_gantry.dm"
