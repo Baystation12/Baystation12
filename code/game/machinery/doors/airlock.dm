@@ -12,6 +12,7 @@
 #define AIRLOCK_PAINTABLE 1
 #define AIRLOCK_STRIPABLE 2
 #define AIRLOCK_DETAILABLE 4
+#define AIRLOCK_WINDOW_PAINTABLE 8
 
 var/list/airlock_overlays = list()
 
@@ -71,6 +72,9 @@ var/list/airlock_overlays = list()
 	var/door_color = null
 	var/stripe_color = null
 	var/symbol_color = null
+	var/window_color = null
+	var/init_material_window = MATERIAL_GLASS
+	var/material/window_material
 
 	var/fill_file = 'icons/obj/doors/station/fill_steel.dmi'
 	var/color_file = 'icons/obj/doors/station/color.dmi'
@@ -675,7 +679,15 @@ About the new airlock wires panel:
 			color_overlay.Blend(door_color, ICON_MULTIPLY)
 			airlock_icon_cache["[ikey]"] = color_overlay
 	if(glass)
-		filling_overlay = glass_file
+		if (window_color && window_color != "none")
+			var/ikey = "[airlock_type]-[window_color]-windowcolor"
+			filling_overlay = airlock_icon_cache["[ikey]"]
+			if (!filling_overlay)
+				filling_overlay = new(glass_file)
+				filling_overlay.Blend(window_color, ICON_MULTIPLY)
+				airlock_icon_cache["[ikey]"] = filling_overlay
+		else
+			filling_overlay = glass_file
 	else
 		if(door_color && !(door_color == "none"))
 			var/ikey = "[airlock_type]-[door_color]-fillcolor"
@@ -1381,6 +1393,11 @@ About the new airlock wires panel:
 			brace.electronics.set_access(src)
 			brace.update_access()
 		update_icon()
+	if (glass)
+		paintable |= AIRLOCK_WINDOW_PAINTABLE
+		window_material = SSmaterials.get_material_by_name(init_material_window)
+		if (!window_color)
+			window_color = window_material.icon_colour
 	. = ..()
 
 /obj/machinery/door/airlock/Destroy()
@@ -1448,6 +1465,10 @@ About the new airlock wires panel:
 
 /obj/machinery/door/airlock/proc/stripe_airlock(var/paint_color)
 	stripe_color = paint_color
+	update_icon()
+
+/obj/machinery/door/airlock/proc/paint_window(paint_color)
+	window_color = isnull(paint_color) ? GLASS_COLOR : paint_color
 	update_icon()
 
 // Public access

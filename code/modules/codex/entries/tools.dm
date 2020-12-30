@@ -49,7 +49,7 @@
 
 /datum/codex_entry/paint_sprayer
 	associated_paths = list(/obj/item/device/paint_sprayer)
-	mechanics_text = "<p>Used to paint floors, walls, pipes, mech parts and airlocks.</p>\
+	mechanics_text = "<p>Used to paint floors, walls, windows, pipes, mech parts and airlocks.</p>\
 	<p>While holding the paint sprayer in the active hand, Ctrl+Click on a target will pick its color and Shift+Click will remove paint from it.</p>\
 	<p>Using the paint sprayer in hand will allow you to choose a decal for painting floors.</p>\
 	<p>You can quickly select a color/preset by ctrl-clicking or alt-clicking the paint sprayer, respectively.</p>"
