@@ -9,6 +9,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 	var/area/chosen_area
 	var/obj/effect/overmap/visitable/sector/chosen_planet
 	var/required_players_count = 2 //how many players we need present on the planet for the event to start
+	var/list/players_on_site = list()
 	var/target_mob_count = 0 //overall target mob count, set to nonzero during setup
 	var/datum/mob_list/chosen_mob_list //the chosen list of mobs we will pick from when spawning, also based on severity
 	var/original_severity
@@ -19,6 +20,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 	var/arrival_message
 	var/limit //target number of mobs to spawn
 	var/length = 75 //length of time the event should run for
+	var/spawn_near_chance = 20 //chance a mob spawns near a player
 
 /datum/mob_list/major/meat
 	mobs = list(
@@ -32,6 +34,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 	arrival_message = "A blood curdling howl echoes through the air as the planet starts to shake violently. Something has woken up..."
 	arrival_sound   = 'sound/ambience/meat_monster_arrival.ogg'
 	limit = 55
+	spawn_near_chance = 30
 
 /datum/mob_list/major/spiders
 	mobs = list(
@@ -44,6 +47,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 	arrival_sound   = 'sound/effects/wind/wind_3_1.ogg'
 	limit = 25
 	length = 45
+	spawn_near_chance = 10
 
 /datum/mob_list/major/machines
 	mobs = list(
@@ -56,6 +60,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 	arrival_sound   = 'sound/effects/wind/wind_3_1.ogg'
 	limit = 45
 	length = 50
+	spawn_near_chance = 10
 
 /datum/mob_list/moderate/spiders
 	mobs = list(
@@ -68,6 +73,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 	arrival_sound = 'sound/effects/wind/wind_3_1.ogg'
 	limit = 15
 	length = 40
+	spawn_near_chance = 5
 
 /datum/mob_list/moderate/machines
 	mobs = list(
@@ -78,6 +84,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 	arrival_sound = 'sound/effects/wind/wind_3_1.ogg'
 	limit = 25
 	length = 50
+	spawn_near_chance = 15
 
 /datum/event/exo_awakening/setup()
 	announceWhen = rand(15, 45)
@@ -110,30 +117,40 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 
 /datum/event/exo_awakening/start()
 	var/torch_players_present = FALSE
-	var/list/players_on_site = list()
+	var/list/sites = list() //a list of sites that have players present
 
 	for (var/area/A in exoplanet_areas)
-		players_on_site = list() //make sure the list is empty before checking the next planet.
-		for (var/mob/M in GLOB.player_list)
+		players_on_site = list()
+		var/mob/M
+		for (var/i = length(GLOB.player_list) to 1 step -1)
+			M = GLOB.player_list[i]
 			if (M.stat != DEAD && (M.z in GetConnectedZlevels(A.z)))
-				LAZYADD(players_on_site, M)
+				players_on_site += M
 
-				if(get_crewmember_record(M.real_name || M.name)) //event is geared at torch/exploration, only valid if they're around.
+				if (get_crewmember_record(M.real_name || M.name))
 					torch_players_present = TRUE
 					chosen_area = A
 					chosen_planet = map_sectors["[A.z]"]
 					affecting_z = GetConnectedZlevels(A.z)
 
-		if (torch_players_present && players_on_site.len >= required_players_count)
+		if (length(players_on_site))
+			sites += A
+
+		if (torch_players_present && length(players_on_site) >= required_players_count)
 			break
 
 		torch_players_present = FALSE
 
 	if (!torch_players_present)
-		log_debug("Exoplanet Awakening failed to run, not enough players on any planet. Aborting.")
-		severity = original_severity
-		kill(TRUE)
-		return
+
+		if (!length(sites))
+			log_debug("Exoplanet Awakening failed to run, not enough players on any planet. Aborting.")
+			severity = original_severity
+			kill(TRUE)
+			return
+
+		chosen_area = pick(sites)
+		chosen_planet = map_sectors["[chosen_area.z]"]
 
 	for (var/mob/M in players_on_site)
 		if (severity > EVENT_LEVEL_MODERATE)
@@ -150,17 +167,17 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 
 /datum/event/exo_awakening/announce()
 	var/announcement = ""
-	if(severity > EVENT_LEVEL_MODERATE)
+	if (severity > EVENT_LEVEL_MODERATE)
 		announcement = "Extreme biological activity spike detected on [location_name()]. Recommend away team evacuation."
 	else
 		announcement = "Anomalous biological activity detected on [location_name()]."
 
-	for(var/obj/effect/overmap/visitable/ship/S in range(chosen_planet,2)) //announce the event to ships in range of the planet
+	for (var/obj/effect/overmap/visitable/ship/S in range(chosen_planet,2)) //announce the event to ships in range of the planet
 		command_announcement.Announce(announcement, "[S.name] Biological Sensor Array", zlevels = S.map_z)
 
 /datum/event/exo_awakening/tick()
 	count_mobs()
-	if(no_show && prob(98))
+	if (no_show && prob(98))
 		return
 
 	spawn_mob(chosen_area)
@@ -169,18 +186,20 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 	if(!living_observers_present(affecting_z))
 		return
 
+	var/list/area_turfs = get_area_turfs(chosen_area)
 	var/n = rand(severity-1, severity*2)
 	var/I = 0
 	while(I < n)
 		var/turf/T
-		for (var/i = 1; i <= 5; i++) //check up to 5 times for a good turf to spawn on
-			T = pick(get_area_turfs(chosen_area))
+		for (var/i = 1 to 5)
 
-			if (is_edge_turf(T))
-				continue
-			if (T.is_wall())
-				continue
-			if (T.density)
+			if (prob(chosen_mob_list.spawn_near_chance))
+				var/mob/M = pick(players_on_site)
+				T = pick(trange(10, M) - trange(7, M))
+			else
+				T = pick(area_turfs)
+
+			if (is_edge_turf(T) || T.is_wall() || T.density)
 				continue
 
 			break
