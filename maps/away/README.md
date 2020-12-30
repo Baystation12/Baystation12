@@ -22,7 +22,7 @@ BUT HEED MY RUMINATIONS
 
 ### Don't use Torch-specific types
 
-Away maps are expected to work whether you're on Torch, the example map, the Bearcat, or anything else you might want to load as the server's main map. That means your map mustn't use areas, turfs, objects, mobs or datums that are specific to any main map.
+Away maps are expected to work whether you're on Torch, the example map, or anything else you might want to load as the server's main map. That means your map mustn't use areas, turfs, objects, mobs or datums that are specific to any main map.
 
 e.g. you can use `/area/space`, or `/turf/simulated/wall`, because neither are specific to Torch. They live out in the main codebase, are always compiled in, and are available to all maps. But you can't use `/obj/random_multi/single_item/punitelly`, because Punitelli only exists when Torch is compiled.
 
