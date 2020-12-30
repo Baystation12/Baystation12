@@ -149,7 +149,8 @@
 		if(path)
 			new path(I)
 		else
-			log_debug("Failed to tweak item: Index [i] in [json_encode(metadata)] did not result in a valid path. Valid contents: [json_encode(valid_contents)]")
+			log_debug("Failed to tweak item: Index [i] in [json_encode(metadata)] did not result in a valid path.")
+			to_chat(owner, SPAN_WARNING("Your loadout selection for \the [I] that includes \the [metadata[i]] could not spawn properly. This likely means a saved configuration is no longer available or is invalid. Contact a dev for help. This is likely a bug."))
 
 /*
 * Ragent adjustment
