@@ -16,7 +16,7 @@
 				s_was = "were"
 				s_survivor = "survivors"
 
-			desc += "There [s_was] **[data["surviving_total"]] [s_survivor] ([data["escaped"]] escaped)** and **[data["ghosts"]] ghosts.**"
+			desc += "There [s_was] **[data["surviving_total"]] [s_survivor] ([data["escaped_total"]] escaped)** and **[data["ghosts"]] ghosts.**"
 		else
 			desc += "There were **no survivors** ([data["ghosts"]] ghosts)."
 
