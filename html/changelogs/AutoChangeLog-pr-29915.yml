@@ -1,4 +1,0 @@
-author: "anconfuzedrock"
-delete-after: True
-changes: 
-  - bugfix: "Gravity failure hazards will not give gravity to shuttles anymore."

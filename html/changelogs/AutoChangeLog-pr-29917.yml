@@ -1,5 +1,0 @@
-author: "Mucker"
-delete-after: True
-changes: 
-  - tweak: "Exo event can now occur for non-torch players if no torch personnel are on planets."
-  - tweak: "Exo event mobs now have a chance to be force-spawned near a player."
