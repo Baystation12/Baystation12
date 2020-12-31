@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - admin: "Debug logs now appear in a distinct pink to better separate them from other text."
