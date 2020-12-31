@@ -160,7 +160,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 		to_chat(src, "<span class='warning'>[T] is not compatible with our biology.</span>")
 		return
 
-	if(T.species.species_flags & SPECIES_FLAG_NO_SCAN)
+	if((T.species.species_flags & SPECIES_FLAG_NO_SCAN) || T.isSynthetic())
 		to_chat(src, "<span class='warning'>We cannot extract DNA from this creature!</span>")
 		return
 
