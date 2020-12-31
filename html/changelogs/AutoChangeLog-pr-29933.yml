@@ -1,0 +1,4 @@
+author: "Mucker"
+delete-after: True
+changes: 
+  - bugfix: "Fix 'ÿ' appearing ahead of the station name in the late-join list in certain circumstances."
