@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - rscadd: "Light bulbs now have a random tone to their lighting color, just like real light bulbs. The tones are yellowish, blueish, pinkish, or if you're lucky, pure white."
