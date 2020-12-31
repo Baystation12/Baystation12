@@ -92,6 +92,7 @@ h1.alert, h2.alert		{color: #000080;}
 .boldannounce			{color: #ff0000; font-weight: bold;}
 .rose					{color: #ff5050;}
 .info					{color: #0000cc;}
+.debug					{color: #ff00ff;}
 .notice					{color: #000099;}
 .subtle					{color: #000099; font-size: 75%; font-style: italic;}
 .alium					{color: #00ff00;}

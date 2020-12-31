@@ -180,6 +180,8 @@
 
 #define SPAN_INFO(X) "<span class='info'>[X]</span>"
 
+#define SPAN_DEBUG(X) "<span class='debug'>[X]</span>"
+
 #define FONT_COLORED(color, text) "<font color='[color]'>[text]</font>"
 
 #define FONT_SMALL(X) "<font size='1'>[X]</font>"
