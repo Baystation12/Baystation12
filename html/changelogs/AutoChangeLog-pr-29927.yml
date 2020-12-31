@@ -1,4 +1,0 @@
-author: "Mucker"
-delete-after: True
-changes: 
-  - bugfix: "Fix the webhook not displaying the escaped count."
