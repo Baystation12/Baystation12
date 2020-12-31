@@ -43,6 +43,7 @@
 	req_access = list(access_ascent)
 	silicon_radio = null
 	machine_restriction = FALSE
+	faction = "kharmaani"
 	var/global/ascent_drone_count = 0
 
 /mob/living/silicon/robot/flying/ascent/add_ion_law(law)
