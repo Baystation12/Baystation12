@@ -2954,6 +2954,43 @@
 	required_reagents = list(/datum/reagent/nutriment/protein/egg = 1, /datum/reagent/drink/milk/ = 1, /datum/reagent/sugar = 1)
 	result_amount = 3
 
+/datum/chemical_reaction/espresso
+	name = "Espresso"
+	result = /datum/reagent/drink/coffee/espresso
+	required_reagents = list(/datum/reagent/drink/coffee = 2, /datum/reagent/water = 1)
+	result_amount = 3
+	minimum_temperature = 80 CELSIUS
+	mix_message = "The coffee boils over into a rich, dark texture."
+
+/datum/chemical_reaction/americano
+	name = "Americano"
+	result = /datum/reagent/drink/coffee/americano
+	required_reagents = list(/datum/reagent/drink/coffee/espresso = 2, /datum/reagent/water = 1)
+	minimum_temperature = 50 CELSIUS
+	result_amount = 3
+	mix_message = "The water mixes with the coffee to dilute it."
+
+/datum/chemical_reaction/yuenyeung
+	name = "Yuenyeung"
+	result = /datum/reagent/drink/coffee/yuenyeung
+	required_reagents = list(/datum/reagent/drink/coffee = 1, /datum/reagent/drink/tea = 1)
+	result_amount = 2
+
+/datum/chemical_reaction/frappe
+	name = "Iced Frappe"
+	result = /datum/reagent/drink/coffee/iced/frappe
+	required_reagents = list(/datum/reagent/drink/coffee = 2, /datum/reagent/drink/ice = 1, /datum/reagent/sugar = 1)
+	result_amount = 4
+	minimum_temperature = (0 CELSIUS) - 100
+	maximum_temperature = 0 CELSIUS
+	mix_message = "The solution chills"
+
+/datum/chemical_reaction/carajillo
+	name = "Carajillo"
+	result = /datum/reagent/ethanol/coffee/carajillo
+	required_reagents = list(/datum/reagent/drink/coffee = 2, /datum/reagent/ethanol/coffee/kahlua = 1)
+	result_amount = 3
+
 /datum/chemical_reaction/capilliumate
 	name = "Capilliumate"
 	result =/datum/reagent/capilliumate

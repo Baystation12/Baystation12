@@ -135,6 +135,8 @@
 /obj/machinery/chemical_dispenser/bar_coffee/full
 	spawn_cartridges = list(
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/coffee,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/decaf_cof,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/espresso,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/cafe_latte,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/soy_latte,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/hot_coco,
@@ -144,6 +146,7 @@
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/green_tea,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/chai_tea,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/red_tea,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/decaf_tea,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/ice,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/syrup_chocolate,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/syrup_caramel,
