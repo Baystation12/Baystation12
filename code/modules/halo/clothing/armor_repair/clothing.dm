@@ -26,11 +26,11 @@
 	var/mob/user = src.loc
 	if(istype(user))
 		if(new_thickness < 0)
-			visible_message("<span class = 'warning'>Your [name]'s armor plating is [damage_type == BURN ? "melted away" : "destroyed"]! </span>")
+			to_chat(user, "<span class = 'warning'>Your [name]'s armor plating is [damage_type == BURN ? "melted away" : "destroyed"]! </span>")
 
 		else if(istype(user) && world.time >= next_warning_time)
 			next_warning_time = world.time + WARNING_DELAY
-			visible_message("<span class = 'warning'>Your [name]'s armor plating is [damage_type == BURN ? "scorched" : "damaged"]! </span>")
+			to_chat(user, "<span class = 'warning'>Your [name]'s armor plating is [damage_type == BURN ? "scorched" : "damaged"]! </span>")
 
 /obj/item/clothing/proc/update_damage_description(var/damage_type = BRUTE)
 	var/desc_addition_to_apply = " "
