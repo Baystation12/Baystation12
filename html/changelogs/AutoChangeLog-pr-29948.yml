@@ -1,0 +1,4 @@
+author: "zkxs"
+delete-after: True
+changes: 
+  - tweak: "The miner cyborg module now has built in magboots"
