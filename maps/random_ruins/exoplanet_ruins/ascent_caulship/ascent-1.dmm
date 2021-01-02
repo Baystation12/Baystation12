@@ -21,15 +21,15 @@
 /area/ship/ascent_caulship)
 "ag" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	icon_state = "intact";
-	dir = 6
+	dir = 6;
+	icon_state = "intact"
 	},
 /turf/simulated/wall/r_wall/ascent,
 /area/ship/ascent_caulship)
 "ah" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	icon_state = "intact";
-	dir = 10
+	dir = 10;
+	icon_state = "intact"
 	},
 /turf/simulated/wall/r_wall/ascent,
 /area/ship/ascent_caulship)
@@ -58,8 +58,8 @@
 "an" = (
 /obj/machinery/computer/ship/sensors/ascent,
 /obj/machinery/atmospherics/pipe/simple/visible/universal{
-	icon_state = "map_universal";
-	dir = 2
+	dir = 2;
+	icon_state = "map_universal"
 	},
 /obj/effect/catwalk_plated/ascent,
 /turf/simulated/floor/ascent,
@@ -147,8 +147,8 @@
 /area/ship/ascent_caulship)
 "aC" = (
 /obj/machinery/atmospherics/portables_connector{
-	icon_state = "map_connector";
-	dir = 8
+	dir = 8;
+	icon_state = "map_connector"
 	},
 /obj/machinery/portable_atmospherics/hydroponics/ascent,
 /turf/simulated/floor/ascent,
@@ -206,8 +206,8 @@
 	},
 /obj/effect/catwalk_plated/ascent,
 /obj/machinery/atmospherics/binary/pump/high_power/on/distribution{
-	icon_state = "map_on";
-	dir = 1
+	dir = 1;
+	icon_state = "map_on"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
@@ -248,8 +248,8 @@
 	},
 /obj/effect/catwalk_plated/ascent,
 /obj/machinery/atmospherics/pipe/simple/visible/universal{
-	icon_state = "map_universal";
-	dir = 2
+	dir = 2;
+	icon_state = "map_universal"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
@@ -366,12 +366,12 @@
 	icon_state = "2-4"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/supply{
-	icon_state = "intact-supply";
-	dir = 6
+	dir = 6;
+	icon_state = "intact-supply"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/scrubbers{
-	icon_state = "intact-scrubbers";
-	dir = 6
+	dir = 6;
+	icon_state = "intact-scrubbers"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /turf/simulated/floor/ascent,
@@ -382,8 +382,8 @@
 	},
 /obj/effect/catwalk_plated/ascent,
 /obj/machinery/atmospherics/pipe/simple/visible/universal{
-	icon_state = "map_universal";
-	dir = 2
+	dir = 2;
+	icon_state = "map_universal"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
@@ -408,22 +408,22 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/scrubbers{
-	icon_state = "intact-scrubbers";
-	dir = 4
+	dir = 4;
+	icon_state = "intact-scrubbers"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/supply{
-	icon_state = "intact-supply";
-	dir = 4
+	dir = 4;
+	icon_state = "intact-supply"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
 "bk" = (
 /obj/effect/catwalk_plated/ascent,
 /obj/structure/cable/cyan{
-	icon_state = "4-8";
-	dir = 8;
 	d1 = 1;
-	d2 = 4
+	d2 = 4;
+	dir = 8;
+	icon_state = "4-8"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
@@ -469,8 +469,8 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/supply{
-	icon_state = "intact-supply";
-	dir = 2
+	dir = 2;
+	icon_state = "intact-supply"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/scrubbers,
 /turf/simulated/floor/ascent,
@@ -554,12 +554,12 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/scrubbers{
-	icon_state = "intact-scrubbers";
-	dir = 9
+	dir = 9;
+	icon_state = "intact-scrubbers"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/supply{
-	icon_state = "intact-supply";
-	dir = 4
+	dir = 4;
+	icon_state = "intact-supply"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
@@ -606,23 +606,23 @@
 "bD" = (
 /obj/effect/submap_landmark/spawnpoint/ascent_caulship,
 /obj/machinery/sleeper/ascent{
-	icon_state = "sleeper_0";
-	dir = 1
+	dir = 1;
+	icon_state = "sleeper_0"
 	},
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent_caulship)
 "bE" = (
 /obj/machinery/sleeper/ascent{
-	icon_state = "sleeper_0";
-	dir = 1
+	dir = 1;
+	icon_state = "sleeper_0"
 	},
 /obj/effect/submap_landmark/spawnpoint/ascent_caulship/alate,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent_caulship)
 "bF" = (
 /obj/machinery/atmospherics/pipe/simple/visible/supply{
-	icon_state = "intact-supply";
-	dir = 4
+	dir = 4;
+	icon_state = "intact-supply"
 	},
 /obj/effect/catwalk_plated/ascent,
 /turf/simulated/floor/ascent,
@@ -647,8 +647,8 @@
 /area/ship/ascent_caulship)
 "bK" = (
 /obj/machinery/atmospherics/pipe/simple/visible/supply{
-	icon_state = "intact-supply";
-	dir = 10
+	dir = 10;
+	icon_state = "intact-supply"
 	},
 /obj/effect/catwalk_plated/ascent,
 /turf/simulated/floor/ascent,
@@ -657,26 +657,26 @@
 /obj/effect/overmap/visitable/ship/landable/ascent,
 /obj/effect/catwalk_plated/ascent,
 /obj/structure/cable/cyan{
-	icon_state = "2-4";
-	dir = 8;
 	d1 = 1;
-	d2 = 4
+	d2 = 4;
+	dir = 8;
+	icon_state = "2-4"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/supply{
-	icon_state = "intact-supply";
-	dir = 4
+	dir = 4;
+	icon_state = "intact-supply"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
 "bM" = (
 /obj/machinery/door/airlock/ascent,
 /obj/machinery/atmospherics/pipe/simple/visible/scrubbers{
-	icon_state = "intact-scrubbers";
-	dir = 4
+	dir = 4;
+	icon_state = "intact-scrubbers"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/supply{
-	icon_state = "intact-supply";
-	dir = 4
+	dir = 4;
+	icon_state = "intact-supply"
 	},
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent_caulship)
@@ -690,8 +690,8 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold4w/visible/scrubbers,
 /obj/machinery/atmospherics/pipe/manifold/visible/supply{
-	icon_state = "map-supply";
-	dir = 4
+	dir = 4;
+	icon_state = "map-supply"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
@@ -700,21 +700,21 @@
 	dir = 1
 	},
 /obj/structure/cable/cyan{
-	icon_state = "2-8";
-	dir = 8;
 	d1 = 1;
-	d2 = 4
+	d2 = 4;
+	dir = 8;
+	icon_state = "2-8"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
 "bP" = (
 /obj/machinery/atmospherics/pipe/simple/visible/supply{
-	icon_state = "intact-supply";
-	dir = 5
+	dir = 5;
+	icon_state = "intact-supply"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/scrubbers{
-	icon_state = "intact-scrubbers";
-	dir = 6
+	dir = 6;
+	icon_state = "intact-scrubbers"
 	},
 /obj/effect/catwalk_plated/ascent,
 /turf/simulated/floor/ascent,
@@ -727,8 +727,8 @@
 /area/ship/ascent_caulship)
 "bR" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on/ascent{
-	icon_state = "map_scrubber_on";
-	dir = 4
+	dir = 4;
+	icon_state = "map_scrubber_on"
 	},
 /obj/effect/catwalk_plated/ascent,
 /turf/simulated/floor/ascent,
@@ -750,8 +750,8 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/supply{
-	icon_state = "intact-supply";
-	dir = 4
+	dir = 4;
+	icon_state = "intact-supply"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
@@ -880,8 +880,7 @@
 /area/ship/ascent_caulship)
 "ci" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
-	dir = 2;
-	id_tag = "ascent_caulship_pump"
+	id_tag = "ascent_caulship_pump_out_internal"
 	},
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
 	cycle_to_external_air = 1;
@@ -925,15 +924,14 @@
 /area/ship/ascent_caulship)
 "cn" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
-	dir = 2;
-	id_tag = "ascent_caulship_pump"
+	id_tag = "ascent_caulship_pump_out_internal"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
 "co" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 4;
-	id_tag = "ascent_caulship_pump"
+	id_tag = "ascent_caulship_pump_out_external"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
@@ -972,7 +970,7 @@
 "cs" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 8;
-	id_tag = "ascent_caulship_pump"
+	id_tag = "ascent_caulship_pump_out_external"
 	},
 /obj/machinery/airlock_sensor{
 	frequency = 1331;
@@ -1016,8 +1014,8 @@
 "cw" = (
 /obj/effect/catwalk_plated/ascent,
 /obj/machinery/atmospherics/pipe/simple/visible/supply{
-	icon_state = "intact-supply";
-	dir = 4
+	dir = 4;
+	icon_state = "intact-supply"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
@@ -1032,8 +1030,8 @@
 	pixel_y = 24
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/supply{
-	icon_state = "intact-supply";
-	dir = 4
+	dir = 4;
+	icon_state = "intact-supply"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
@@ -1067,8 +1065,8 @@
 /obj/item/weapon/gun/energy/particle/small,
 /obj/item/weapon/gun/energy/particle/small,
 /obj/machinery/atmospherics/pipe/simple/visible/supply{
-	icon_state = "intact-supply";
-	dir = 2
+	dir = 2;
+	icon_state = "intact-supply"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/scrubbers,
 /turf/simulated/floor/ascent,
@@ -1107,8 +1105,8 @@
 /obj/item/weapon/tank/mantid/methyl_bromide,
 /obj/item/weapon/tank/mantid/methyl_bromide,
 /obj/machinery/atmospherics/pipe/simple/visible/supply{
-	icon_state = "intact-supply";
-	dir = 2
+	dir = 2;
+	icon_state = "intact-supply"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/scrubbers,
 /turf/simulated/floor/ascent,
@@ -1128,8 +1126,8 @@
 	icon_state = "railing0-1"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/supply{
-	icon_state = "intact-supply";
-	dir = 10
+	dir = 10;
+	icon_state = "intact-supply"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /turf/simulated/floor/ascent,
@@ -1158,8 +1156,8 @@
 /area/ship/ascent_caulship)
 "cK" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on/ascent{
-	icon_state = "map_scrubber_on";
-	dir = 8
+	dir = 8;
+	icon_state = "map_scrubber_on"
 	},
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent_caulship)
@@ -1167,15 +1165,15 @@
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/effect/catwalk_plated/ascent,
 /obj/machinery/atmospherics/pipe/simple/visible/supply{
-	icon_state = "intact-supply";
-	dir = 9
+	dir = 9;
+	icon_state = "intact-supply"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
 "cM" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on/ascent{
-	icon_state = "map_scrubber_on";
-	dir = 4
+	dir = 4;
+	icon_state = "map_scrubber_on"
 	},
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent_caulship)
@@ -1193,12 +1191,12 @@
 /obj/item/weapon/rig/mantid/gyne/seed,
 /obj/item/weapon/rig/mantid/seed,
 /obj/machinery/atmospherics/pipe/simple/visible/supply{
-	icon_state = "intact-supply";
-	dir = 5
+	dir = 5;
+	icon_state = "intact-supply"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/scrubbers{
-	icon_state = "intact-scrubbers";
-	dir = 5
+	dir = 5;
+	icon_state = "intact-scrubbers"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
@@ -1213,19 +1211,19 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/supply{
-	icon_state = "intact-supply";
-	dir = 4
+	dir = 4;
+	icon_state = "intact-supply"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/scrubbers{
-	icon_state = "intact-scrubbers";
-	dir = 4
+	dir = 4;
+	icon_state = "intact-scrubbers"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
 "cP" = (
 /obj/machinery/atmospherics/unary/vent_pump/on/ascent{
-	icon_state = "map_vent_out";
-	dir = 8
+	dir = 8;
+	icon_state = "map_vent_out"
 	},
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent_caulship)
@@ -1250,12 +1248,12 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/supply{
-	icon_state = "intact-supply";
-	dir = 4
+	dir = 4;
+	icon_state = "intact-supply"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/scrubbers{
-	icon_state = "intact-scrubbers";
-	dir = 4
+	dir = 4;
+	icon_state = "intact-scrubbers"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
@@ -1267,16 +1265,16 @@
 	icon_state = "2-8"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden{
-	icon_state = "map";
-	dir = 1
+	dir = 1;
+	icon_state = "map"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/supply{
-	icon_state = "intact-supply";
-	dir = 10
+	dir = 10;
+	icon_state = "intact-supply"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/scrubbers{
-	icon_state = "intact-scrubbers";
-	dir = 10
+	dir = 10;
+	icon_state = "intact-scrubbers"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
@@ -1314,27 +1312,27 @@
 /obj/effect/catwalk_plated/ascent,
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/machinery/atmospherics/pipe/simple/visible/supply{
-	icon_state = "intact-supply";
-	dir = 5
+	dir = 5;
+	icon_state = "intact-supply"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/scrubbers{
-	icon_state = "intact-scrubbers";
-	dir = 9
+	dir = 9;
+	icon_state = "intact-scrubbers"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
 "cV" = (
 /obj/machinery/atmospherics/pipe/simple/visible/scrubbers{
-	icon_state = "intact-scrubbers";
-	dir = 4
+	dir = 4;
+	icon_state = "intact-scrubbers"
 	},
 /obj/effect/catwalk_plated/ascent,
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
 "cW" = (
 /obj/machinery/atmospherics/pipe/simple/visible/scrubbers{
-	icon_state = "intact-scrubbers";
-	dir = 9
+	dir = 9;
+	icon_state = "intact-scrubbers"
 	},
 /obj/effect/catwalk_plated/ascent,
 /turf/simulated/floor/ascent,
