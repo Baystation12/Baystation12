@@ -1,0 +1,4 @@
+author: "juxtaposed9930"
+delete-after: True
+changes: 
+  - bugfix: "The caulship airlock now cycles properly."
