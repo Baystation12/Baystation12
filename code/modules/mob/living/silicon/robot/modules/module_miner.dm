@@ -37,6 +37,7 @@
 		SKILL_EVA          = SKILL_PROF,
 		SKILL_CONSTRUCTION = SKILL_EXPERT
 	)
+	no_slip = 1
 
 /obj/item/weapon/robot_module/miner/handle_emagged()
 	var/obj/item/weapon/pickaxe/D = locate(/obj/item/weapon/pickaxe/borgdrill) in equipment
