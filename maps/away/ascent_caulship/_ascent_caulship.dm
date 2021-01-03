@@ -4,17 +4,23 @@
 #include "ascent_shuttles.dm"
 
 // Map template data.
-/datum/map_template/ruin/exoplanet/ascent_caulship
+/datum/map_template/ruin/away_site/ascent_caulship_docking_ring
 	name = "Ascent Caulship"
 	id = "awaysite_ascent_caulship"
-	description = "A small Ascent civilian ship."
+	description = "A small Ascent caulship with a tiny crew."
 	suffixes = list("ascent_caulship/ascent-1.dmm")
-	shuttles_to_initialise = list(/datum/shuttle/autodock/overmap/ascent)
+	area_usage_test_exempted_areas = list(
+		/area/ship/ascent_caulship
+	)
 	cost = 0.5
-	spawn_weight = 0.33
-	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS | TEMPLATE_FLAG_NO_RADS
-	area_usage_test_exempted_areas = list(/area/ship/ascent_caulship)
-	ruin_tags = RUIN_ALIEN|RUIN_HABITAT
+	shuttles_to_initialise = list(/datum/shuttle/autodock/overmap/ascent)
+
+/obj/effect/overmap/visitable/sector/ascent_caulship_ring
+	name = "Ruined Bluespace Jump Ring"
+	desc = "A ruined jumpdrive ring of Ascent design, used to transport individual ships at FTL speeds."
+	in_space = 1
+	icon_state = "event"
+	hide_from_reports = TRUE
 
 /obj/effect/submap_landmark/joinable_submap/ascent_caulship
 	name = "Ascent Caulship"
