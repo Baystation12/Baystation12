@@ -15,12 +15,12 @@
 	var/applies_material_colour = 1
 	var/applies_material_name = 1 //if false, does not rename item to 'material item.name'
 	var/furniture_icon  //icon states for non-material colorable overlay, i.e. handles
-	
+
 	var/max_force = 40	 //any damage above this is added to armor penetration value
 	var/force_divisor = 0.5	// multiplier (sic) to material's generic damage value for this specific type of weapon
 	var/thrown_force_divisor = 0.5
 
-	var/attack_cooldown_modifier
+	var/attack_cooldown_modifier = 0
 	var/unbreakable
 	var/drops_debris = 1
 	var/worth_multiplier = 1

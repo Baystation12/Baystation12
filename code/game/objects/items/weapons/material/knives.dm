@@ -108,6 +108,5 @@
 
 /obj/item/weapon/material/knife/utility/lightweight
 	name = "lightweight utility knife"
-	desc = "A lightweight utility knife made out of a titanium alloy."
+	desc = "A lightweight utility knife made out of a steel alloy."
 	icon_state = "titanium"
-	matter = list(MATERIAL_TITANIUM = 12000)
