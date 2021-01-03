@@ -256,6 +256,7 @@
 	color = COLOR_LIGHT_CYAN
 	b_colour = COLOR_LIGHT_CYAN
 	desc = "Some kind of strange alien lightbulb technology."
+	random_tone = FALSE
 
 /obj/item/weapon/light/tube/large/skrell
 	name = "skrellian light filament"

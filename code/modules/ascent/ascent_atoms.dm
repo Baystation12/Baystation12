@@ -20,3 +20,4 @@ MANTIDIFY(/obj/item/weapon/tank/jetpack/carbondioxide, "maneuvering pack",      
 	color = COLOR_CYAN
 	b_colour = COLOR_CYAN
 	desc = "Some kind of strange alien lightbulb technology."
+	random_tone = FALSE
