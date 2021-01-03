@@ -3,35 +3,30 @@
 	category = /datum/gear/storage/
 	slot = slot_tie
 
-/datum/gear/storage/brown_vest
-	display_name = "webbing, brown"
-	path = /obj/item/clothing/accessory/storage/brown_vest
+/datum/gear/storage/vest
+	display_name = "webbing vest selection"
+	path = /obj/item/clothing/accessory/storage
 	cost = 3
 
-/datum/gear/storage/black_vest
-	display_name = "webbing, black"
-	path = /obj/item/clothing/accessory/storage/black_vest
-	cost = 3
+/datum/gear/storage/vest/New()
+	..()
+	var/vests = list()
+	vests += /obj/item/clothing/accessory/storage/black_vest
+	vests += /obj/item/clothing/accessory/storage/brown_vest
+	vests += /obj/item/clothing/accessory/storage/white_vest
+	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(vests)
 
-/datum/gear/storage/white_vest
-	display_name = "webbing, white"
-	path = /obj/item/clothing/accessory/storage/white_vest
-	cost = 3
+/datum/gear/storage/pouches
+	display_name = "drop pouches selection"
+	path = /obj/item/clothing/accessory/storage/drop_pouches
 
-/datum/gear/storage/brown_drop_pouches
-	display_name = "drop pouches, brown"
-	path = /obj/item/clothing/accessory/storage/drop_pouches/brown
-	cost = 3
-
-/datum/gear/storage/black_drop_pouches
-	display_name = "drop pouches, black"
-	path = /obj/item/clothing/accessory/storage/drop_pouches/black
-	cost = 3
-
-/datum/gear/storage/white_drop_pouches
-	display_name = "drop pouches, white"
-	path = /obj/item/clothing/accessory/storage/drop_pouches/white
-	cost = 3
+/datum/gear/storage/pouches/New()
+	..()
+	var/pouches = list()
+	pouches += /obj/item/clothing/accessory/storage/drop_pouches/black
+	pouches += /obj/item/clothing/accessory/storage/drop_pouches/brown
+	pouches += /obj/item/clothing/accessory/storage/drop_pouches/white
+	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(pouches)
 
 /datum/gear/storage/webbing
 	display_name = "webbing, small"
