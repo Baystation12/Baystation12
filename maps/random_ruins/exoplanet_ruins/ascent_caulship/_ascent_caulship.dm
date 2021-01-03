@@ -11,7 +11,7 @@
 	suffixes = list("ascent_caulship/ascent-1.dmm")
 	shuttles_to_initialise = list(/datum/shuttle/autodock/overmap/ascent)
 	cost = 0.5
-	spawn_weight = 0.33
+	spawn_weight = 0.67
 	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS | TEMPLATE_FLAG_NO_RADS
 	area_usage_test_exempted_areas = list(/area/ship/ascent_caulship)
 	ruin_tags = RUIN_ALIEN|RUIN_HABITAT
