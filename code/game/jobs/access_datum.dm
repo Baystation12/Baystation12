@@ -442,6 +442,12 @@
 	desc = "Syndicate"
 	access_type = ACCESS_TYPE_SYNDICATE
 
+/var/const/access_hunter = "ACCESS_HUNTER"
+/datum/access/hunter
+	id = access_hunter
+	desc = "Bounty Hunter"
+	access_type = ACCESS_TYPE_SYNDICATE
+
 /*******
 * Misc *
 *******/
@@ -468,4 +474,10 @@
 /datum/access/ascent
 	id = access_ascent
 	desc = "Ascent Materiel"
+	access_type = ACCESS_TYPE_NONE
+
+/var/const/access_ascent_warship = "ACCESS_ASCENT_WARSHIP"
+/datum/access/ascent_warship
+	id = access_ascent_warship
+	desc = "Ascent Military"
 	access_type = ACCESS_TYPE_NONE

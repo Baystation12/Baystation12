@@ -1,10 +1,7 @@
 // Visit x exosites
 // Activate x artifacts
 // Extract x coloured slime cores.
-/datum/department/science
-	name = "Science"
-	flag = SCI
-	goals = list(/datum/goal/department/extract_slime_cores)
+I
 
 /datum/goal/department/extract_slime_cores
 	var/min_cores

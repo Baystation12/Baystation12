@@ -22,6 +22,23 @@
 	boot_type = /obj/item/clothing/shoes/magboots/rig/unathi
 	glove_type = /obj/item/clothing/gloves/rig/unathi
 
+/obj/item/weapon/rig/unathi/bodyguard
+	name = "guardian chassis control module"
+	desc = "A suit of ancient and well-kept light powered armour traditionally employed by the defenders of high-profile Unathi personages."
+	online_slowdown = 2
+	offline_slowdown = 6
+	suit_type = "guardian chassis"
+	icon_state = "breacher_rig"
+	armor = list(
+		melee =  ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_RESISTANT,
+		laser =  ARMOR_LASER_HANDGUNS,
+		energy = ARMOR_ENERGY_RESISTANT,
+		bomb =   ARMOR_BOMB_RESISTANT,
+		bio =    ARMOR_BIO_SHIELDED,
+		rad =    ARMOR_RAD_SMALL
+	)
+
 /obj/item/weapon/rig/unathi/fancy
 	name = "breacher chassis control module"
 	desc = "An (outwardly) authentic Unathi breacher chassis. Huge, bulky and absurdly heavy. It must be like wearing a tank."
@@ -34,7 +51,8 @@
 		energy = ARMOR_ENERGY_STRONG,
 		bomb = ARMOR_BOMB_RESISTANT,
 		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_SMALL)
+		rad = ARMOR_RAD_SMALL
+	)
 
 /obj/item/clothing/head/helmet/space/rig/unathi
 	species_restricted = list(SPECIES_UNATHI)
