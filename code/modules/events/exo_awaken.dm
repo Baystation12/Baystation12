@@ -151,6 +151,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 
 		chosen_area = pick(sites)
 		chosen_planet = map_sectors["[chosen_area.z]"]
+		affecting_z = GetConnectedZlevels(chosen_area.z)
 
 	for (var/mob/M in players_on_site)
 		if (severity > EVENT_LEVEL_MODERATE)
