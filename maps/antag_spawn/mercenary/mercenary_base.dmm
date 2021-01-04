@@ -1345,8 +1345,6 @@
 	icon_state = "map"
 	},
 /obj/machinery/door/airlock/external{
-	density = 1;
-	dir = 2;
 	frequency = 1380;
 	id_tag = "merc_shuttle_outer";
 	name = "Ship External Access"
@@ -1512,9 +1510,9 @@
 	pixel_y = -25;
 	req_access = list("ACCESS_SYNDICATE");
 	tag_airpump = "merc_shuttle_pump";
-	tag_exterior_door = "merc_shuttle_exterior";
+	tag_exterior_door = "merc_shuttle_outer";
 	tag_exterior_sensor = "merc_shuttle_exterior_sensor";
-	tag_interior_door = "merc_shuttle_interior";
+	tag_interior_door = "merc_shuttle_inner";
 	tag_interior_sensor = "merc_shuttle_sensor"
 	},
 /obj/structure/handrail{
