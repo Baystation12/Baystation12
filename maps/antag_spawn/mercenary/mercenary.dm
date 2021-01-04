@@ -51,7 +51,7 @@
 /obj/effect/shuttle_landmark/merc/start
 	landmark_tag = "nav_merc_start"
 	name = "Hidden Base"
-	docking_controller = "merc_base"
+	docking_controller = "merc_shuttle_base"
 
 /obj/effect/shuttle_landmark/merc/nav1
 	landmark_tag = "nav_merc_1"
@@ -66,9 +66,8 @@
 	landmark_tag = "nav_merc_4"
 
 /obj/effect/shuttle_landmark/merc/dock
-	name = "Docking Port"
+	name = "4th Deck, Fore Airlock"
 	landmark_tag = "nav_merc_dock"
-	docking_controller = "eva_airlock"
 
 /obj/effect/shuttle_landmark/transit/merc
 	name = "In transit"

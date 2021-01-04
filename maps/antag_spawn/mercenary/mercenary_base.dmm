@@ -638,7 +638,7 @@
 "gK" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
-	id_tag = "merc_base_hatch"
+	id_tag = "merc_shuttle_base_inner"
 	},
 /obj/structure/cable/green{
 	d1 = 4;
@@ -1176,9 +1176,14 @@
 /area/map_template/merc_spawn)
 "mn" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
-	id_tag = "merc_base_pump"
+	id_tag = "merc_shuttle_base_pump"
 	},
 /obj/structure/handrail,
+/obj/machinery/airlock_sensor{
+	frequency = 1380;
+	id_tag = "merc_shuttle_base_sensor";
+	pixel_y = 25
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_spawn)
 "mo" = (
@@ -1272,6 +1277,7 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
+/obj/effect/shuttle_landmark/merc/start,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_shuttle)
 "nu" = (
@@ -1345,8 +1351,6 @@
 	icon_state = "map"
 	},
 /obj/machinery/door/airlock/external{
-	density = 1;
-	dir = 2;
 	frequency = 1380;
 	id_tag = "merc_shuttle_outer";
 	name = "Ship External Access"
@@ -1368,7 +1372,7 @@
 "oC" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
-	id_tag = "merc_base_hatch"
+	id_tag = "merc_shuttle_base_outer"
 	},
 /obj/structure/cable{
 	d1 = 4;
@@ -1439,7 +1443,6 @@
 /obj/effect/floor_decal/techfloor/corner{
 	dir = 1
 	},
-/obj/effect/shuttle_landmark/merc/start,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/merc_shuttle)
 "pc" = (
@@ -1512,9 +1515,9 @@
 	pixel_y = -25;
 	req_access = list("ACCESS_SYNDICATE");
 	tag_airpump = "merc_shuttle_pump";
-	tag_exterior_door = "merc_shuttle_exterior";
+	tag_exterior_door = "merc_shuttle_outer";
 	tag_exterior_sensor = "merc_shuttle_exterior_sensor";
-	tag_interior_door = "merc_shuttle_interior";
+	tag_interior_door = "merc_shuttle_inner";
 	tag_interior_sensor = "merc_shuttle_sensor"
 	},
 /obj/structure/handrail{
@@ -2038,7 +2041,7 @@
 "xd" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 1;
-	id_tag = "merc_base_pump"
+	id_tag = "merc_shuttle_base_pump"
 	},
 /obj/structure/handrail{
 	dir = 1;
@@ -3045,6 +3048,21 @@
 /obj/effect/floor_decal/techfloor,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/merc_shuttle)
+"TK" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	id_tag = "merc_shuttle_base_pump"
+	},
+/obj/structure/handrail,
+/obj/machinery/embedded_controller/radio/airlock/docking_port{
+	id_tag = "merc_shuttle_base";
+	pixel_y = 19;
+	tag_airpump = "merc_shuttle_base_pump";
+	tag_exterior_door = "merc_shuttle_base_outer";
+	tag_interior_door = "merc_shuttle_base_inner";
+	tag_interior_sensor = "merc_shuttle_base_sensor"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_spawn)
 "TL" = (
 /obj/structure/table/rack{
 	pixel_x = -1
@@ -3173,11 +3191,6 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_spawn)
 "Ya" = (
-/obj/machinery/embedded_controller/radio/simple_docking_controller{
-	frequency = 1380;
-	id_tag = "merc_base";
-	pixel_y = 19
-	},
 /obj/effect/floor_decal/corner/orange/border{
 	dir = 8
 	},
@@ -6919,7 +6932,7 @@ aa
 aa
 aa
 mo
-mn
+TK
 Eh
 xd
 mo
