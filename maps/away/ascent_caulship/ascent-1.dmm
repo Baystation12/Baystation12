@@ -118,14 +118,14 @@
 /obj/structure/bed/chair/padded/purple/ascent{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "ay" = (
 /obj/machinery/hologram/holopad/longrange/ascent,
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "az" = (
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "aA" = (
 /obj/machinery/light/ascent{
@@ -162,7 +162,7 @@
 /obj/machinery/light/ascent{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "aG" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
@@ -174,25 +174,25 @@
 /obj/machinery/body_scanconsole/ascent{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "aI" = (
 /obj/machinery/bodyscanner/ascent{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "aJ" = (
 /obj/item/weapon/storage/firstaid/surgery,
 /obj/structure/table/steel_reinforced,
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "aK" = (
 /obj/machinery/light/ascent{
 	dir = 1
 	},
 /obj/machinery/optable/ascent,
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "aL" = (
 /obj/item/device/radio/intercom/hailing{
@@ -289,7 +289,7 @@
 /area/ship/ascent_caulship)
 "aW" = (
 /obj/machinery/botany/extractor,
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "aX" = (
 /obj/machinery/atmospherics/pipe/simple/hidden,
@@ -299,7 +299,7 @@
 /area/ship/ascent_caulship)
 "aY" = (
 /obj/machinery/computer/ship/sensors/ascent,
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "aZ" = (
 /obj/structure/railing/mapped{
@@ -310,7 +310,7 @@
 /area/ship/ascent_caulship)
 "ba" = (
 /obj/structure/table/steel_reinforced,
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "bb" = (
 /obj/structure/table/steel_reinforced,
@@ -318,7 +318,7 @@
 	color = "PURPLE";
 	name = "compression dynamo control"
 	},
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "bc" = (
 /obj/structure/ore_box{
@@ -345,11 +345,11 @@
 	},
 /obj/item/stack/material/rods/fifty,
 /obj/item/stack/material/rods/fifty,
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "be" = (
 /obj/machinery/biogenerator,
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "bf" = (
 /obj/effect/catwalk_plated/ascent,
@@ -391,7 +391,7 @@
 /area/ship/ascent_caulship)
 "bi" = (
 /obj/machinery/botany/editor,
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "bj" = (
 /obj/effect/catwalk_plated/ascent,
@@ -453,7 +453,7 @@
 "bo" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/weapon/storage/box/botanydisk,
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "bp" = (
 /obj/machinery/atmospherics/pipe/simple/hidden,
@@ -563,17 +563,17 @@
 /obj/machinery/light/ascent{
 	dir = 8
 	},
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "bz" = (
 /obj/structure/bed/chair/padded/purple/ascent/gyne{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "bA" = (
 /obj/structure/bed/chair/padded/purple/ascent,
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "bB" = (
 /obj/structure/table/rack/dark,
@@ -587,7 +587,7 @@
 /obj/item/clothing/mask/gas/ascent_captive,
 /obj/item/clothing/mask/gas/ascent_captive,
 /obj/item/clothing/mask/gas/ascent_captive,
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "bC" = (
 /obj/structure/table/rack/dark,
@@ -599,7 +599,7 @@
 /obj/item/stack/medical/resin,
 /obj/item/stack/medical/resin,
 /obj/item/stack/medical/resin,
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "bD" = (
 /obj/effect/submap_landmark/spawnpoint/ascent_caulship,
@@ -607,7 +607,7 @@
 	dir = 1;
 	icon_state = "sleeper_0"
 	},
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "bE" = (
 /obj/machinery/sleeper/ascent{
@@ -615,7 +615,7 @@
 	icon_state = "sleeper_0"
 	},
 /obj/effect/submap_landmark/spawnpoint/ascent_caulship/alate,
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "bF" = (
 /obj/machinery/atmospherics/pipe/simple/visible/supply{
@@ -633,16 +633,16 @@
 "bH" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh,
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "bI" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/weapon/reagent_containers/food/snacks/meat/beef,
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "bJ" = (
 /obj/structure/reagent_dispensers/water_cooler/ascent,
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "bK" = (
 /obj/machinery/atmospherics/pipe/simple/visible/supply{
@@ -662,7 +662,7 @@
 	dir = 4;
 	icon_state = "intact-supply"
 	},
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "bN" = (
 /obj/machinery/atmospherics/pipe/simple/hidden,
@@ -707,7 +707,7 @@
 /obj/machinery/light/ascent{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "bR" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on/ascent{
@@ -1158,7 +1158,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on/ascent{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "cJ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden,
@@ -1171,7 +1171,7 @@
 	dir = 8;
 	icon_state = "map_scrubber_on"
 	},
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "cL" = (
 /obj/machinery/atmospherics/pipe/simple/hidden,
@@ -1187,7 +1187,7 @@
 	dir = 4;
 	icon_state = "map_scrubber_on"
 	},
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "cN" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
@@ -1237,7 +1237,7 @@
 	dir = 8;
 	icon_state = "map_vent_out"
 	},
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "cQ" = (
 /obj/structure/bed/chair/padded/purple/ascent{
@@ -1352,25 +1352,25 @@
 "cX" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/clustertool,
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "cY" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/weapon/reagent_containers/glass/bucket/ascent,
 /obj/item/weapon/mop/advanced/ascent,
 /obj/item/weapon/material/knife/kitchen/cleaver/ascent,
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "cZ" = (
 /obj/effect/submap_landmark/spawnpoint/ascent_caulship/drone,
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "da" = (
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/space)
 "db" = (
 /obj/machinery/door/airlock/ascent,
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/space)
 "dc" = (
 /turf/simulated/floor/ascent,
@@ -1383,7 +1383,7 @@
 	name = "burned-out bluespace drive"
 	},
 /obj/effect/overmap/visitable/sector/ascent_caulship_ring,
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/space)
 "dF" = (
 /obj/effect/catwalk_plated/ascent,
@@ -1408,7 +1408,7 @@
 /area/ship/ascent_caulship)
 "in" = (
 /obj/machinery/computer/ship/engines/ascent,
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "sH" = (
 /obj/machinery/atmospherics/pipe/simple/visible/supply{
@@ -1420,7 +1420,7 @@
 /area/ship/ascent_caulship)
 "uK" = (
 /obj/structure/closet/crate/freezer/meat/ascent,
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "vq" = (
 /obj/item/weapon/reagent_containers/food/snacks/meat/beef,
@@ -1442,7 +1442,7 @@
 /area/ship/ascent_caulship)
 "wR" = (
 /obj/machinery/computer/ship/helm/ascent,
-/turf/simulated/floor/tiled/ascent,
+/turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "En" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{

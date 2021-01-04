@@ -1,13 +1,3 @@
-/decl/flooring/tiling_ascent
-	name = "floor"
-	desc = "An odd jigsaw puzzle of alloy plates."
-	icon = 'icons/turf/flooring/alium.dmi'
-	icon_base = "jaggy"
-	has_base_range = 6
-	color = COLOR_GRAY40
-	flags = TURF_CAN_BREAK | TURF_CAN_BURN
-	footstep_type = /decl/footsteps/tiles
-
 /turf/simulated/wall/ascent
 	color = COLOR_PURPLE
 
@@ -24,16 +14,17 @@
 	color = COLOR_GRAY20
 	initial_gas = list(GAS_METHYL_BROMIDE = MOLES_CELLSTANDARD * 0.5, GAS_OXYGEN = MOLES_CELLSTANDARD * 0.5)
 	icon_state = "curvy"
+	footstep_type = /decl/footsteps/tiles
 	icon = 'icons/turf/flooring/alium.dmi'
+
+/turf/simulated/floor/ascent/is_plating()
+	. = TRUE
 
 /turf/simulated/floor/ascent/Initialize()
 	. = ..()
-	icon_state = "curvy[rand(0,6)]"
+	icon_state = "[initial(icon_state)][rand(0,6)]"
 
-/turf/simulated/floor/tiled/ascent
-	name = "mantid tiling"
+/turf/simulated/floor/ascent/tiled
+	name = "floor"
 	icon_state = "jaggy"
-	icon = 'icons/turf/flooring/alium.dmi'
 	color = COLOR_GRAY40
-	initial_gas = list(GAS_METHYL_BROMIDE = MOLES_CELLSTANDARD * 0.5, GAS_OXYGEN = MOLES_CELLSTANDARD * 0.5)
-	initial_flooring = /decl/flooring/tiling_ascent
