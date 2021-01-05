@@ -118,11 +118,6 @@ Teleporter beacon, and its subtypes
 /*
 Special projectiles
 */
-/obj/item/projectile/bullet/gyro/megabot
-	name = "microrocket"
-	gyro_light_impact = 1
-	distance_falloff = 1.3
-
 /obj/item/projectile/beam/megabot
 	damage = 45
 	distance_falloff = 0.5
@@ -132,7 +127,6 @@ The megabot
 */
 #define ATTACK_MODE_MELEE    "melee"
 #define ATTACK_MODE_LASER    "laser"
-#define ATTACK_MODE_ROCKET   "rocket"
 
 /mob/living/simple_animal/hostile/hivebot/mega
 	name = "hivemind"
@@ -149,7 +143,7 @@ The megabot
 	attacktext = "sawed"
 	speed = 0
 	natural_armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
+		melee = ARMOR_MELEE_RESISTANT,
 		bullet = ARMOR_BALLISTIC_PISTOL
 		)
 	can_escape = TRUE
@@ -165,15 +159,15 @@ The megabot
 
 /mob/living/simple_animal/hostile/hivebot/mega/Initialize()
 	. = ..()
-	switch_mode(ATTACK_MODE_ROCKET)
+	switch_mode(ATTACK_MODE_LASER)
 
 /mob/living/simple_animal/hostile/hivebot/mega/Life()
 	. = ..()
 	if(!.)
 		return
-	
+
 	if(time_last_used_ability < world.time)
-		switch_mode(ATTACK_MODE_ROCKET)
+		switch_mode(ATTACK_MODE_LASER)
 
 /mob/living/simple_animal/hostile/hivebot/mega/emp_act(severity)
 	. = ..()
@@ -194,9 +188,7 @@ The megabot
 				overlays += image(icon, "melee")
 			if(ATTACK_MODE_LASER)
 				overlays += image(icon, "laser")
-			if(ATTACK_MODE_ROCKET)
-				overlays += image(icon, "rocket")
-		
+
 /mob/living/simple_animal/hostile/hivebot/mega/proc/switch_mode(var/new_mode)
 	if(!new_mode || new_mode == attack_mode)
 		return
@@ -218,15 +210,6 @@ The megabot
 			num_shots = 12
 			fire_desc = "fires a laser"
 			visible_message(SPAN_MFAUNA("\The [src]'s laser cannon whines!"))
-		if(ATTACK_MODE_ROCKET)
-			attack_mode = ATTACK_MODE_ROCKET
-			ranged = TRUE
-			projectilesound = 'sound/effects/Explosion1.ogg'
-			projectiletype = /obj/item/projectile/bullet/gyro/megabot
-			num_shots = 4
-			cooldown_ability(ability_cooldown)
-			fire_desc = "launches a microrocket"
-			visible_message(SPAN_MFAUNA("\The [src]'s missile pod rumbles!"))
 
 	update_icon()
 
@@ -251,9 +234,7 @@ The megabot
 
 /mob/living/simple_animal/hostile/hivebot/mega/OpenFire(target_mob)
 	if(num_shots <= 0)
-		if(attack_mode == ATTACK_MODE_ROCKET)
-			switch_mode(ATTACK_MODE_LASER)
-		else
+		if(attack_mode == ATTACK_MODE_LASER)
 			switch_mode(ATTACK_MODE_MELEE)
 		return
 	..()
@@ -264,4 +245,3 @@ The megabot
 
 #undef ATTACK_MODE_MELEE
 #undef ATTACK_MODE_LASER
-#undef ATTACK_MODE_ROCKET
