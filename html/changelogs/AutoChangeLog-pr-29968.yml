@@ -1,0 +1,4 @@
+author: "Mucker"
+delete-after: True
+changes: 
+  - rscdel: "Removed an unused debug-message in exo awakening."
