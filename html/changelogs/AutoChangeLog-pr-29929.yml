@@ -1,0 +1,5 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - tweak: "Loadout items that fail to spawn selected contents properly now display a warning to the user indicating there was a problem. If you see this message that says 'contact a dev', contact a dev."
+  - admin: "Item tweak failure debug logs no longer include the massive text dump of all valid entries."
