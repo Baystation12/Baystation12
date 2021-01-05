@@ -1,4 +1,0 @@
-author: "Mucker"
-delete-after: True
-changes: 
-  - rscdel: "Removed rockets from the megabot."

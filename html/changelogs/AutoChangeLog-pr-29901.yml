@@ -1,4 +1,0 @@
-author: "Mucker"
-delete-after: True
-changes: 
-  - admin: "Add the 'Mob Spawner Mode' to buildmode to allow for the automated spawning of mobs via spawners."
