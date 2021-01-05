@@ -601,7 +601,7 @@
 	var/sound_on
 	var/random_tone = TRUE
 	var/list/random_tone_options = list(
-		"#fefee0",
+		"#fffee0",
 		"#e0fefe",
 		"#fefefe",
 	)
