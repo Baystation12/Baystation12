@@ -205,7 +205,6 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 			break
 
 		if (is_edge_turf(T) || T.is_wall() || T.density)
-			log_debug("Exoplanet Awakening: Failed to spawn mob on a viable turf.")
 			return
 
 
