@@ -8,7 +8,7 @@
 	fire_sound = 'code/modules/halo/sounds/Rocket_Launcher_Fire_New.wav'
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/spnkr
-	fire_delay = 8
+	fire_delay = 10
 	one_hand_penalty = -1
 	dispersion = list(0.26)
 	hud_bullet_row_num = 2
