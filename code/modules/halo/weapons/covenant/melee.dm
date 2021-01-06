@@ -16,7 +16,7 @@
 	var/inhand_icon_state = "Energy sword_inhand Human" // " l" or " r" is added after this to make the variants
 	force = 1
 	throwforce = 1
-	active_force = 55 //Hits like a sniper
+	active_force = 40
 	active_throwforce = 12
 	armor_penetration = 70
 	var/hits_burn_mobs = 1
@@ -71,7 +71,7 @@
 	if(!active)
 		return FALSE
 	return ..()
-	
+
 /obj/item/weapon/melee/energy/elite_sword/do_execute(mob/living/carbon/human/user, mob/living/carbon/human/victim)
 	if(!..())
 		return
@@ -345,7 +345,7 @@ Luckily, this isn't a downside due to the explosive properties of such a large a
 	name = "Blamite Cutlass"
 	icon_state = "bl_cutlass"
 	item_state = "blamite_cutlass"
-	force = 30
+	force = 35
 	throwforce = 15
 	lunge_dist = 3
 
