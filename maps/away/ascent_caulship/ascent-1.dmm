@@ -1055,6 +1055,7 @@
 /obj/item/stack/material/glass/fifty,
 /obj/item/stack/material/plasteel/ten,
 /obj/item/stack/material/plastic/fifty,
+/obj/item/stack/material/steel/fifty,
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
 "cB" = (
@@ -1129,6 +1130,8 @@
 /obj/item/clustertool,
 /obj/item/clustertool,
 /obj/item/clustertool,
+/obj/item/device/multitool/mantid,
+/obj/item/device/multitool/mantid,
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
 "cG" = (
