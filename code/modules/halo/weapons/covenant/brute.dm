@@ -218,6 +218,9 @@
 	matter = list("nanolaminate" = 2, "duridium" = 3)
 
 /obj/item/weapon/grav_hammer/afterattack(atom/A as mob|obj|turf|area, mob/user, proximity)
+	if(lunge_dist > 0)
+		. = ..()
+
 	if(get_dist(A,user) > 1)
 		return
 
