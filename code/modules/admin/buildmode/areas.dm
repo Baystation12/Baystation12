@@ -33,7 +33,8 @@ Right Click       - List/Create Area
 	overlay.Show()
 
 /datum/build_mode/areas/Unselected()
-	overlay.Hide()
+	if (overlay)
+		overlay.Hide()
 
 /datum/build_mode/areas/UpdateOverlay(image/I, turf/T)
 	if (!overlay?.shown)
