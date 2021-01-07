@@ -23,6 +23,7 @@
 	contents["radius"] = radius
 	contents["spawn_count"] = spawn_count
 	contents["paused"] = paused
+	contents["next_spawn_time"] = next_spawn_time
 
 	return contents
 
@@ -38,7 +39,10 @@
 	radius = contents["radius"]
 	spawn_count = contents["spawn_count"]
 	paused = contents["paused"]
+	next_spawn_time = contents["next_spawn_time"]
 
+	if (!paused)
+		START_PROCESSING(SSprocessing, src)
 
 /datum/mob_spawner/Process()
 	if (interval == 0 && spawn_count >= 0)

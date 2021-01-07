@@ -262,7 +262,7 @@ GLOBAL_LIST_INIT(mob_spawners, list())
 
 	var/datum/mob_spawner/spawner = GLOB.mob_spawners[current_turf]
 
-	if (!spawner && !pa["right"])
+	if (!spawner)
 		spawner = new /datum/mob_spawner
 		spawner.area = current_area
 		GLOB.mob_spawners[current_turf] = spawner
