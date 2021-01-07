@@ -98,9 +98,9 @@
 	playsound(src.loc, 'sound/effects/smoke.ogg', 50, 1, -3)
 	smoke.set_up(10, 0, usr.loc)
 	spawn(0)
-	smoke.start()
-	sleep(1)
-	smoke.start()
+		smoke.start()
+		sleep(1)
+		smoke.start()
 	..()
 
 /obj/item/projectile/bullet/g40mm/illumination
