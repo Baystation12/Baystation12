@@ -30,7 +30,7 @@ GLOBAL_LIST_INIT(proteinbar_flavors, list(
 		/datum/reagent/nutriment/honey,
 		/datum/reagent/drink/juice/grape
 	),
-	"powerful peppermint" = /datum/reagent/nutriment/mint,
+	"powerful peppermint" = /datum/reagent/drink/syrup/mint,
 	"magical melons" = list(
 		/datum/reagent/drink/juice/melon
 	),

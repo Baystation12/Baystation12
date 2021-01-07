@@ -176,3 +176,14 @@
 	touch_mob(target)
 
 /datum/reagent/proc/custom_temperature_effects(var/temperature)
+	return
+
+/datum/reagent/proc/get_presentation_name(var/obj/item/prop)
+	. = glass_name || name
+	if(prop?.reagents?.total_volume)
+		. = build_presentation_name_from_reagents(prop, .)
+
+/datum/reagent/proc/build_presentation_name_from_reagents(var/obj/item/prop, var/supplied)
+	. = supplied
+	if(type != /datum/reagent/drink/ice && prop.reagents.has_reagent(/datum/reagent/drink/ice))
+		. = "iced [.]"

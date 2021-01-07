@@ -13,9 +13,13 @@
 	var/base_name = null // Name to put in front of drinks, i.e. "[base_name] of [contents]"
 	var/base_icon = null // Base icon name for fill states
 
+/obj/item/weapon/reagent_containers/food/drinks/get_base_name()
+	. = base_name
+
 /obj/item/weapon/reagent_containers/food/drinks/on_reagent_change()
-	update_icon()
-	return
+	. = ..()
+	var/datum/reagent/R = reagents.get_master_reagent()
+	desc = R?.glass_desc || initial(desc)
 
 /obj/item/weapon/reagent_containers/food/drinks/on_color_transfer_reagent_change()
 	return
@@ -98,18 +102,10 @@
 /obj/item/weapon/reagent_containers/food/drinks/on_update_icon()
 	overlays.Cut()
 	if(reagents.reagent_list.len > 0)
-		if(base_name)
-			var/datum/reagent/R = reagents.get_master_reagent()
-			SetName("[base_name] of [R.glass_name ? R.glass_name : "something"]")
-			desc = R.glass_desc ? R.glass_desc : initial(desc)
 		if(filling_states)
 			var/image/filling = image(icon, src, "[base_icon][get_filling_state()]")
 			filling.color = reagents.get_color()
 			overlays += filling
-	else
-		SetName(initial(name))
-		desc = initial(desc)
-
 
 ////////////////////////////////////////////////////////////////////////////////
 /// Drinks. END
@@ -225,12 +221,12 @@
 	volume = 10
 	center_of_mass = "x=16;y=12"
 
-/obj/item/weapon/reagent_containers/food/drinks/sillycup/on_reagent_change()
+/obj/item/weapon/reagent_containers/food/drinks/sillycup/on_update_icon()
+	. = ..()
 	if(reagents.total_volume)
 		icon_state = "water_cup"
 	else
 		icon_state = "water_cup_e"
-
 
 //////////////////////////pitchers, pots, flasks and cups //
 //Note by Darem: This code handles the mixing of drinks. New drinks go in three places: In Chemistry-Reagents.dm (for the drink
@@ -311,7 +307,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/tea/black/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/drink/tea, 30)
+	reagents.add_reagent(/datum/reagent/drink/tea/black, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/tea/green
 	name = "cup of green tea"
@@ -328,3 +324,17 @@
 /obj/item/weapon/reagent_containers/food/drinks/tea/chai/Initialize()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/drink/tea/chai, 30)
+
+/obj/item/weapon/reagent_containers/food/drinks/decafcoffee
+	name = "cup of decaf coffee"
+	desc = "A tall plastic cup of hot decaffeinated coffee."
+	icon_state = "coffee"
+	item_state = "coffee"
+	center_of_mass = "x=16;y=14"
+	filling_states = "100"
+	base_name = "cup"
+	base_icon = "cup"
+
+/obj/item/weapon/reagent_containers/food/drinks/decafcoffee/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/coffee/decaf, 30)

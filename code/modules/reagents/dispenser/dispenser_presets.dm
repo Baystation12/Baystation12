@@ -135,10 +135,10 @@
 /obj/machinery/chemical_dispenser/bar_coffee/full
 	spawn_cartridges = list(
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/coffee,
-			/obj/item/weapon/reagent_containers/chem_disp_cartridge/cafe_latte,
-			/obj/item/weapon/reagent_containers/chem_disp_cartridge/soy_latte,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/hot_coco,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/decaf_coffee,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/milk,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/soymilk,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/cream,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/tea,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/green_tea,
@@ -148,5 +148,6 @@
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/syrup_chocolate,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/syrup_caramel,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/syrup_vanilla,
-			/obj/item/weapon/reagent_containers/chem_disp_cartridge/syrup_pumpkin
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/syrup_pumpkin,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/syrup_mint
 		)

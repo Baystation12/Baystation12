@@ -1,0 +1,4 @@
+author: MistakeNot4892
+delete-after: True
+changes: 
+  - tweak: "Coffee and tea types (mocha, soy latte, iced, etc) are now a property of the reagent combination instead of a chemical reaction. Ie. to make a cafe latte, put coffee and milk in a proper cup and it will become 'a cup of latte'."

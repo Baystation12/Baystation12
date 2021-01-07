@@ -286,9 +286,65 @@
 	adj_sleepy = -2
 	adj_temp = 25
 	overdose = 60
-
 	glass_name = "coffee"
 	glass_desc = "Don't drop it, or you'll send scalding liquid and glass shards everywhere."
+	var/make_jittery = TRUE
+
+/datum/reagent/drink/coffee/decaf
+	name = "Decaffeinated Coffee"
+	description = "Coffee but without the caffeine."
+	taste_description = "decaffeinated bitterness"
+	color = "#482000"
+	glass_name = "decaf coffee"
+	glass_desc = "Don't drop it, or you'll send scalding liquid and glass shards everywhere."
+	make_jittery = FALSE
+
+/datum/reagent/drink/coffee/decaf/build_presentation_name_from_reagents(var/obj/item/prop, var/supplied)
+	. = "decaf [..()]"
+
+// This is a bit of a hacky mess as it was originally written for a decl
+// reagent system that didn't need to worry about all this bollocks.
+GLOBAL_LIST_INIT(coffee_flavour_modifiers, new)
+/datum/reagent/drink/coffee/New()
+	..()
+	if(!length(GLOB.coffee_flavour_modifiers))
+		var/obj/item/temporary_holder = new
+		temporary_holder.create_reagents(length(subtypesof(/datum/reagent/drink/syrup)))
+		for(var/stype in subtypesof(/datum/reagent/drink/syrup))
+			temporary_holder.reagents.add_reagent(stype, 1)
+			var/inserted
+			var/datum/reagent/drink/syrup/syrup = temporary_holder.reagents.get_reagent(stype)
+			for(var/i = 1 to length(GLOB.coffee_flavour_modifiers))
+				var/datum/reagent/drink/syrup/osyrup = GLOB.coffee_flavour_modifiers[i]
+				if(syrup.coffee_priority <= osyrup.coffee_priority)
+					GLOB.coffee_flavour_modifiers.Insert(i, syrup)
+					inserted = TRUE
+					break
+			if(!inserted)
+				GLOB.coffee_flavour_modifiers += syrup
+
+/datum/reagent/drink/coffee/build_presentation_name_from_reagents(var/obj/item/prop, var/supplied)
+
+	var/is_flavoured
+	for(var/datum/reagent/drink/syrup/syrup in GLOB.coffee_flavour_modifiers)
+		if(prop.reagents.has_reagent(syrup.type))
+			is_flavoured = TRUE
+			. = "[.][syrup.coffee_modifier] "
+
+	var/milk =  prop.reagents.has_reagent(/datum/reagent/drink/milk)
+	var/soy =   prop.reagents.has_reagent(/datum/reagent/drink/milk/soymilk)
+	var/cream = prop.reagents.has_reagent(/datum/reagent/drink/milk/cream)
+	var/chai =  prop.reagents.has_reagent(/datum/reagent/drink/tea/chai) ? "dirty " : ""
+	if(!soy && !milk && !cream)
+		if(is_flavoured)
+			. = "[.]flavoured [chai]coffee"
+		else
+			. = "[.][chai]coffee"
+	else if((milk+cream) > soy)
+		. = "[.][chai]latte"
+	else
+		. = "[.][chai]soy latte"
+	. = ..(prop, .)
 
 /datum/reagent/drink/coffee/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -297,153 +353,23 @@
 
 	if(adj_temp > 0)
 		holder.remove_reagent(/datum/reagent/frostoil, 10 * removed)
-	if(volume > 15)
-		M.add_chemical_effect(CE_PULSE, 1)
-	if(volume > 45)
-		M.add_chemical_effect(CE_PULSE, 1)
+	if(!make_jittery)
+		if(volume > 15)
+			M.add_chemical_effect(CE_PULSE, 1)
+		if(volume > 45)
+			M.add_chemical_effect(CE_PULSE, 1)
 
-/datum/reagent/nutriment/coffee/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/drink/coffee/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
-	M.add_chemical_effect(CE_PULSE, 2)
+	if(!make_jittery)
+		M.add_chemical_effect(CE_PULSE, 2)
 
 /datum/reagent/drink/coffee/overdose(var/mob/living/carbon/M, var/alien)
 	if(alien == IS_DIONA)
 		return
-	M.make_jittery(5)
-	M.add_chemical_effect(CE_PULSE, 1)
-
-/datum/reagent/drink/coffee/icecoffee
-	name = "Iced Coffee"
-	description = "Coffee and ice, refreshing and cool."
-	taste_description = "bitter coldness"
-	color = "#102838"
-	adj_temp = -5
-
-	glass_name = "iced coffee"
-	glass_desc = "A drink to perk you up and refresh you!"
-	glass_special = list(DRINK_ICE)
-
-/datum/reagent/drink/coffee/soy_latte
-	name = "Soy Latte"
-	description = "A nice and tasty beverage while you are reading your hippie books."
-	taste_description = "bitter creamy coffee"
-	color = "#c65905"
-	adj_temp = 5
-
-	glass_name = "soy latte"
-	glass_desc = "A nice and refreshing beverage while you are reading your hippie books."
-
-/datum/reagent/drink/coffee/soy_latte/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	..()
-	M.heal_organ_damage(0.5 * removed, 0)
-
-/datum/reagent/drink/coffee/icecoffee/soy_latte
-	name = "Iced Soy Latte"
-	description = "A nice and tasty beverage while you are reading your hippie books. This one's cold."
-	taste_description = "cold bitter creamy coffee"
-	color = "#c65905"
-
-	glass_name = "iced soy latte"
-	glass_desc = "A nice and refreshing beverage while you are reading your hippie books. This one's cold."
-
-/datum/reagent/drink/coffee/icecoffee/soy_latte/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	..()
-	M.heal_organ_damage(0.5 * removed, 0)
-
-/datum/reagent/drink/coffee/cafe_latte
-	name = "Cafe Latte"
-	description = "A nice, strong and tasty beverage while you are reading."
-	taste_description = "bitter creamy coffee"
-	color = "#c65905"
-	adj_temp = 5
-	protein_amount = 0.5
-
-	glass_name = "cafe latte"
-	glass_desc = "A nice, strong and refreshing beverage while you are reading."
-
-/datum/reagent/drink/coffee/cafe_latte/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	..()
-	M.heal_organ_damage(0.5 * removed, 0)
-
-/datum/reagent/drink/coffee/icecoffee/cafe_latte
-	name = "Iced Cafe Latte"
-	description = "A nice, strong and refreshing beverage while you are reading. This one's cold."
-	taste_description = "cold bitter creamy coffee"
-	color = "#c65905"
-	protein_amount = 0.5
-
-	glass_name = "iced cafe latte"
-	glass_desc = "A nice, strong and refreshing beverage while you are reading. This one's cold."
-
-/datum/reagent/drink/coffee/icecoffee/cafe_latte/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	..()
-	M.heal_organ_damage(0.5 * removed, 0)
-
-/datum/reagent/drink/coffee/cafe_latte/mocha
-	name = "Mocha Latte"
-	description = "Coffee and chocolate, smooth and creamy."
-	taste_description = "bitter creamy chocolate"
-	protein_amount = 0.3
-	glass_name = "mocha latte"
-	glass_desc = "Coffee and chocolate, smooth and creamy."
-
-/datum/reagent/drink/coffee/soy_latte/mocha
-	name = "Mocha Soy Latte"
-	description = "Coffee, soy, and chocolate, smooth and creamy."
-	taste_description = "bitter creamy chocolate"
-
-	glass_name = "mocha soy latte"
-	glass_desc = "Coffee, soy, and chocolate, smooth and creamy."
-
-/datum/reagent/drink/coffee/icecoffee/cafe_latte/mocha
-	name = "Iced Mocha Latte"
-	description = "Coffee and chocolate, smooth and creamy. This one's cold."
-	taste_description = "cold bitter creamy chocolate"
-	protein_amount = 0.3
-
-	glass_name = "iced mocha latte"
-	glass_desc = "Coffee and chocolate, smooth and creamy. This one's cold."
-
-/datum/reagent/drink/coffee/icecoffee/soy_latte/mocha
-	name = "Iced Soy Mocha Latte"
-	description = "Coffee, soy, and chocolate, smooth and creamy. This one's cold."
-	taste_description = "cold bitter creamy chocolate"
-
-	glass_name = "iced soy mocha latte"
-	glass_desc = "Coffee, soy, and chocolate, smooth and creamy. This one's cold."
-
-/datum/reagent/drink/coffee/cafe_latte/pumpkin
-	name = "Pumpkin Spice Latte"
-	description = "Smells and tastes like Autumn."
-	taste_description = "bitter creamy pumpkin spice"
-
-	glass_name = "pumpkin spice latte"
-	glass_desc = "Smells and tastes like Autumn."
-
-/datum/reagent/drink/coffee/soy_latte/pumpkin
-	name = "Pumpkin Spice Soy Latte"
-	description = "Smells and tastes like Autumn."
-	taste_description = "bitter creamy pumpkin spice"
-
-	glass_name = "pumpkin spice soy latte"
-	glass_desc = "Smells and tastes like Autumn."
-
-/datum/reagent/drink/coffee/icecoffee/cafe_latte/pumpkin
-	name = "Iced Pumpkin Spice Latte"
-	description = "Smells and tastes like Autumn. This one's cold"
-	taste_description = "cold bitter creamy pumpkin spice"
-	protein_amount = 0.3
-
-	glass_name = "iced pumpkin spice latte"
-	glass_desc = "Smells and tastes like Autumn. This one's cold."
-
-/datum/reagent/drink/coffee/icecoffee/soy_latte/pumpkin
-	name = "Iced Pumpkin Spice Soy Latte"
-	description = "Smells and tastes like Autumn. This one's cold"
-	taste_description = "cold bitter creamy pumpkin spice"
-
-	glass_name = "iced pumpkin spice soy latte"
-	glass_desc = "Smells and tastes like Autumn. This one's cold."
+	if(!make_jittery)
+		M.make_jittery(5)
+		M.add_chemical_effect(CE_PULSE, 1)
 
 /datum/reagent/drink/hot_coco
 	name = "Hot Chocolate"
@@ -1071,19 +997,19 @@
 	glass_desc = "A freezing container of beer"
 
 // Tea
-// black tea
 /datum/reagent/drink/tea
-	name = "Black Tea"
-	description = "Tasty black tea, it has antioxidants, it's good for you!"
-	taste_description = "tart black tea"
-	color = "#101000"
 	adj_dizzy = -2
 	adj_drowsy = -1
 	adj_sleepy = -3
 	adj_temp = 20
 
-	glass_name = "black tea"
-	glass_desc = "Tasty black tea, it has antioxidants, it's good for you!"
+/datum/reagent/drink/tea/build_presentation_name_from_reagents(var/obj/item/prop, var/supplied)
+	. = supplied || glass_name
+	if(prop.reagents.has_reagent(/datum/reagent/sugar) || prop.reagents.has_reagent(/datum/reagent/nutriment/honey))
+		. = "sweet [.]"
+	if(prop.reagents.has_reagent(/datum/reagent/drink/syrup/mint))
+		. = "mint [.]"
+	. = ..(prop, .)
 
 /datum/reagent/drink/tea/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -1091,65 +1017,25 @@
 		return
 	M.adjustToxLoss(-0.5 * removed)
 
-/datum/reagent/drink/tea/icetea
-	name = "Iced Black Tea"
-	description = "It's the black tea you know and love, but now it's cold."
-	taste_description = "cold black tea"
-	adj_temp = -5
+// black tea
+/datum/reagent/drink/tea/black
+	name = "Black Tea"
+	description = "Tasty black tea, it has antioxidants, it's good for you!"
+	taste_description = "tart black tea"
+	color = "#101000"
 
-	glass_name = "iced black tea"
-	glass_desc = "It's the black tea you know and love, but now it's cold."
-	glass_special = list(DRINK_ICE)
+	glass_name = "black tea"
+	glass_desc = "Tasty black tea, it has antioxidants, it's good for you!"
 
-/datum/reagent/drink/tea/icetea/sweet
-	name = "Sweet Black Tea"
-	description = "It's the black tea you know and love, but now it's cold. And sweet."
-	taste_description = "sweet tea"
-
-	glass_name = "sweet black tea"
-	glass_desc = "It's the black tea you know and love, but now it's cold. And sweet."
-
-/datum/reagent/drink/tea/barongrey
-	name = "Baron Grey Tea"
-	description = "Black tea prepared with standard orange flavoring. Much less fancy than the bergamot in Earl Grey, but the chances of you getting any of that stuff out here is pretty slim."
-	taste_description = "tangy black tea"
-
-	glass_name = "Baron Grey tea"
-	glass_desc = "Black tea prepared with standard orange flavoring. Much less fancy than the bergamot in Earl Grey, but the chances of you getting any of that stuff out here is pretty slim."
-
-/datum/reagent/drink/tea/barongrey/latte
-	name = "London Fog"
-	description = "A blend of Earl Grey (Or more likely Baron Grey) and steamed milk, making a pleasant tangy tea latte."
-	taste_description = "creamy, tangy black tea"
-	protein_amount = 0.5
-
-	glass_name = "London Fog"
-	glass_desc = "A blend of Earl Grey (Or more likely Baron Grey) and steamed milk, making a pleasant tangy tea latte."
-
-/datum/reagent/drink/tea/barongrey/soy_latte
-	name = "Soy London Fog"
-	description = "A blend of Earl Grey (Or more likely Baron Grey) and steamed soy milk, making a pleasant tangy tea latte."
-	taste_description = "creamy, tangy black tea"
-
-	glass_name = "Soy London Fog"
-	glass_desc = "A blend of Earl Grey (Or more likely Baron Grey) and steamed soy milk, making a pleasant tangy tea latte."
-
-/datum/reagent/drink/tea/icetea/barongrey/latte
-	name = "Iced London Fog"
-	description = "A blend of Earl Grey (Or more likely Baron Grey) and steamed milk, making a pleasant tangy tea latte. This one's cold."
-	taste_description = "cold, creamy, tangy black tea"
-	protein_amount = 0.5
-
-	glass_name = "iced london fog"
-	glass_desc = "A blend of Earl Grey (Or more likely Baron Grey) and steamed milk, making a pleasant tangy tea latte. This one's cold."
-
-/datum/reagent/drink/tea/icetea/barongrey/soy_latte
-	name = "Iced Soy London Fog"
-	description = "A blend of Earl Grey (Or more likely Baron Grey) and steamed soy milk, making a pleasant tangy tea latte. This one's cold."
-	taste_description = "cold, creamy, tangy black tea"
-
-	glass_name = "iced soy london fog"
-	glass_desc = "A blend of Earl Grey (Or more likely Baron Grey) and steamed soy milk, making a pleasant tangy tea latte. This one's cold."
+/datum/reagent/drink/tea/black/build_presentation_name_from_reagents(var/obj/item/prop, var/supplied)
+	if(prop.reagents.has_reagent(/datum/reagent/drink/juice/orange))
+		if(prop.reagents.has_reagent(/datum/reagent/drink/milk))
+			. = "London Fog"
+		else if(prop.reagents.has_reagent(/datum/reagent/drink/milk/soymilk))
+			. = "soy London Fog"
+		else
+			. = "Baron Grey"
+	. = ..(prop, .)
 
 //green tea
 /datum/reagent/drink/tea/green
@@ -1161,31 +1047,10 @@
 	glass_name = "green tea"
 	glass_desc = "Subtle green tea, it has antioxidants, it's good for you!"
 
-/datum/reagent/drink/tea/icetea/green
-	name = "Iced Green Tea"
-	description = "It's the green tea you know and love, but now it's cold."
-	taste_description = "cold green tea"
-	color = "#b4cd94"
-
-	glass_name = "iced green tea"
-	glass_desc = "It's the green tea you know and love, but now it's cold."
-
-/datum/reagent/drink/tea/icetea/green/sweet
-	name = "Sweet Green Tea"
-	description = "It's the green tea you know and love, but now it's cold. And sweet."
-	taste_description = "sweet green tea"
-	color = "#b4cd94"
-
-	glass_name = "sweet green tea"
-	glass_desc = "It's the green tea you know and love, but now it's cold. And sweet."
-
-/datum/reagent/drink/tea/icetea/green/sweet/mint
-	name = "Maghrebi Tea"
-	description = "Iced green tea prepared with mint and sugar. Refreshing!"
-	taste_description = "refreshing mint tea"
-
-	glass_name = "Maghrebi mint tea"
-	glass_desc = "Iced green tea prepared with mint and sugar. Refreshing!"
+/datum/reagent/drink/tea/green/build_presentation_name_from_reagents(var/obj/item/prop, var/supplied)
+	if(prop?.reagents?.has_reagent(/datum/reagent/drink/syrup/mint))
+		. = "Maghrebi tea"
+	. = ..(prop, .)
 
 /datum/reagent/drink/tea/chai
 	name = "Chai Tea"
@@ -1196,60 +1061,12 @@
 	glass_name = "chai tea"
 	glass_desc = "A spiced, dark tea. Goes great with milk."
 
-/datum/reagent/drink/tea/icetea/chai
-	name = "Iced Chai Tea"
-	description = "It's the chai tea you know and love, but now it's cold."
-	taste_description = "cold spiced black tea"
-	color = "#151000"
-
-	glass_name = "iced chai tea"
-	glass_desc = "It's the chai tea you know and love, but now it's cold."
-
-/datum/reagent/drink/tea/icetea/chai/sweet
-	name = "Sweet Chai Tea"
-	description = "It's the chai tea you know and love, but now it's cold. And sweet."
-	taste_description = "sweet spiced black tea"
-
-	glass_name = "sweet chai tea"
-	glass_desc = "It's the chai tea you know and love, but now it's cold. And sweet."
-
-/datum/reagent/drink/tea/chai/latte
-	name = "Chai Latte"
-	description = "A warm, inviting cup of spiced, dark tea mixed with steamed milk."
-	taste_description = "creamy spiced tea"
-	color = "#c8a988"
-	protein_amount = 0.5
-
-	glass_name = "chai latte"
-	glass_desc = "A warm, inviting cup of spiced, dark tea mixed with steamed milk."
-
-/datum/reagent/drink/tea/chai/soy_latte
-	name = "Chai Soy Latte"
-	description = "A warm, inviting cup of spiced, dark tea mixed with steamed soy milk."
-	taste_description = "creamy spiced tea"
-	color = "#c8a988"
-
-	glass_name = "chai soy latte"
-	glass_desc = "A warm, inviting cup of spiced, dark tea mixed with steamed soy milk."
-
-/datum/reagent/drink/tea/icetea/chai/latte
-	name = "Iced Chai Latte"
-	description = "A warm, inviting cup of spiced, dark tea mixed with steamed milk. This one's cold."
-	taste_description = "cold creamy spiced tea"
-	color = "#c8a988"
-	protein_amount = 0.5
-
-	glass_name = "iced chai latte"
-	glass_desc = "A warm, inviting cup of spiced, dark tea mixed with steamed milk. This one's cold."
-
-/datum/reagent/drink/tea/icetea/chai/soy_latte
-	name = "Iced Chai Soy Latte"
-	description = "A warm, inviting cup of spiced, dark tea mixed with steamed soy milk. This one's cold."
-	taste_description = "cold creamy spiced tea"
-	color = "#c8a988"
-
-	glass_name = "iced chai soy latte"
-	glass_desc = "A warm, inviting cup of spiced, dark tea mixed with steamed soy milk. This one's cold."
+/datum/reagent/drink/tea/chai/build_presentation_name_from_reagents(var/obj/item/prop, var/supplied)
+	if(prop.reagents.has_reagent(/datum/reagent/drink/milk))
+		. = "chai latte"
+	else if(prop.reagents.has_reagent(/datum/reagent/drink/milk/soymilk))
+		. = "soy chai latte"
+	. = ..(prop, .)
 
 /datum/reagent/drink/tea/red
 	name = "Rooibos Tea"
@@ -1260,55 +1077,63 @@
 	glass_name = "rooibos tea"
 	glass_desc = "A caffeine-free dark red tea, flavorful and full of antioxidants."
 
-/datum/reagent/drink/tea/icetea/red
-	name = "Iced Rooibos Tea"
-	description = "It's the red tea you know and love, but now it's cold."
-	taste_description = "cold nutty red tea"
-	color = "#ab4c3a"
+/datum/reagent/drink/syrup
+	var/coffee_priority
+	var/coffee_modifier
 
-	glass_name = "iced rooibos tea"
-	glass_desc = "It's the red tea you know and love, but now it's cold."
+/datum/reagent/drink/syrup/New()
+	..()
+	if(!coffee_modifier)
+		coffee_modifier = taste_description
 
-/datum/reagent/drink/tea/icetea/red/sweet
-	name = "Sweet Rooibos Tea"
-	description = "It's the red tea you know and love, but now it's cold. And sweet."
-	taste_description = "sweet nutty red tea"
+/datum/reagent/drink/syrup/mint
+	name = "Mint Syrup"
+	description = "Thick mint syrup used to flavor drinks."
+	taste_description = "sweet mint"
+	color = "#07aab2"
+	coffee_priority = 1
+	coffee_modifier = "mint"
 
-	glass_name = "sweet rooibos tea"
-	glass_desc = "It's the red tea you know and love, but now it's cold. And sweet."
+	glass_name = "mint syrup"
+	glass_desc = "Thick mint syrup used to flavor drinks."
 
-/datum/reagent/drink/syrup_chocolate
+/datum/reagent/drink/syrup/chocolate
 	name = "Chocolate Syrup"
 	description = "Thick chocolate syrup used to flavor drinks."
 	taste_description = "chocolate"
 	color = "#542a0c"
+	coffee_modifier = "mocha"
+	coffee_priority = 5
 
 	glass_name = "chocolate syrup"
 	glass_desc = "Thick chocolate syrup used to flavor drinks."
 
-/datum/reagent/drink/syrup_caramel
+/datum/reagent/drink/syrup/caramel
 	name = "Caramel Syrup"
 	description = "Thick caramel syrup used to flavor drinks."
 	taste_description = "caramel"
 	color = "#85461e"
+	coffee_priority = 2
 
 	glass_name = "caramel syrup"
 	glass_desc = "Thick caramel syrup used to flavor drinks."
 
-/datum/reagent/drink/syrup_vanilla
+/datum/reagent/drink/syrup/vanilla
 	name = "Vanilla Syrup"
 	description = "Thick vanilla syrup used to flavor drinks."
 	taste_description = "vanilla"
 	color = "#f3e5ab"
+	coffee_priority = 3
 
 	glass_name = "vanilla syrup"
 	glass_desc = "Thick vanilla syrup used to flavor drinks."
 
-/datum/reagent/drink/syrup_pumpkin
+/datum/reagent/drink/syrup/pumpkin
 	name = "Pumpkin Spice Syrup"
 	description = "Thick spiced pumpkin syrup used to flavor drinks."
 	taste_description = "spiced pumpkin"
 	color = "#d88b4c"
+	coffee_priority = 4
 
 	glass_name = "pumpkin spice syrup"
 	glass_desc = "Thick spiced pumpkin syrup used to flavor drinks."

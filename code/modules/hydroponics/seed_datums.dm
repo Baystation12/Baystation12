@@ -1336,7 +1336,7 @@
 	name = "vanilla"
 	seed_name = "vanilla flower"
 	display_name = "vanilla flower"
-	chems = list(/datum/reagent/nutriment = list(1,10), /datum/reagent/drink/syrup_vanilla = list(4,5))
+	chems = list(/datum/reagent/nutriment = list(1,10), /datum/reagent/drink/syrup/vanilla = list(4,5))
 	fruit_size = ITEM_SIZE_TINY
 
 /datum/seed/vanilla/New()

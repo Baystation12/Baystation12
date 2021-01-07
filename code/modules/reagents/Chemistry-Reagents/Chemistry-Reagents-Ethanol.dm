@@ -891,19 +891,6 @@
 	glass_name = "Hooch"
 	glass_desc = "You've really hit rock bottom now... your liver packed its bags and left last night."
 
-/datum/reagent/ethanol/iced_beer
-	name = "Iced Beer"
-	description = "A beer which is so cold the air around it freezes."
-	taste_description = "refreshingly cold"
-	color = "#ffd300"
-	strength = 50
-	adj_temp = -20
-	targ_temp = 270
-
-	glass_name = "iced beer"
-	glass_desc = "A beer so frosty, the air around it freezes."
-	glass_special = list(DRINK_ICE)
-
 /datum/reagent/ethanol/irishslammer
 	name = "Irish Slammer"
 	description = "Mmm, tastes like chocolate cake..."

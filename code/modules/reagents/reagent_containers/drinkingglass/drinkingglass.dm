@@ -25,7 +25,7 @@
 
 	amount_per_transfer_from_this = 5
 	possible_transfer_amounts = "5;10;15;30"
-	atom_flags = ATOM_FLAG_OPEN_CONTAINER
+	atom_flags = ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_SHOW_REAGENT_NAME
 	temperature_coefficient = 4
 
 	var/custom_name
@@ -91,7 +91,9 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/on_reagent_change()
 	temperature_coefficient = 4 / max(1, reagents.total_volume)
-	update_icon()
+	..()
+	var/datum/reagent/R = reagents.get_master_reagent()
+	desc = R?.glass_desc || custom_desc || initial(desc)
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/throw_impact(atom/hit_atom)
 	if(QDELETED(src))
@@ -138,9 +140,6 @@
 
 	if (length(reagents?.reagent_list))
 		var/datum/reagent/R = reagents.get_master_reagent()
-		SetName("[base_name] of [R.glass_name ? R.glass_name : "something"]")
-		desc = R.glass_desc || custom_desc || initial(desc)
-
 		var/list/under_liquid = list()
 		var/list/over_liquid = list()
 
@@ -171,10 +170,6 @@
 			underlays += filling
 
 		overlays += over_liquid
-		
-	else
-		SetName(custom_name || initial(name))
-		desc = custom_desc || initial(desc)
 
 	var/side = "left"
 	for(var/item in extras)

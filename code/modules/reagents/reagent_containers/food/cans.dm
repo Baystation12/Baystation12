@@ -90,7 +90,8 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/iced_tea/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/drink/tea/icetea, 30)
+	reagents.add_reagent(/datum/reagent/drink/tea/black, 20)
+	reagents.add_reagent(/datum/reagent/drink/ice, 10)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/grape_juice
 	name = "\improper Grapel Juice"

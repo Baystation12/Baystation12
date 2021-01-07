@@ -49,7 +49,7 @@
 
 	// Bar, soft
 	ice			spawn_reagent = /datum/reagent/drink/ice
-	tea			spawn_reagent = /datum/reagent/drink/tea
+	tea			spawn_reagent = /datum/reagent/drink/tea/black
 	green_tea	spawn_reagent = /datum/reagent/drink/tea/green
 	chai_tea	spawn_reagent = /datum/reagent/drink/tea/chai
 	red_tea		spawn_reagent = /datum/reagent/drink/tea/red
@@ -65,46 +65,47 @@
 	watermelon	spawn_reagent = /datum/reagent/drink/juice/watermelon
 
 	// Bar, syrups
-	syrup_chocolate	spawn_reagent = /datum/reagent/drink/syrup_chocolate
-	syrup_caramel	spawn_reagent = /datum/reagent/drink/syrup_caramel
-	syrup_vanilla	spawn_reagent = /datum/reagent/drink/syrup_vanilla
-	syrup_pumpkin	spawn_reagent = /datum/reagent/drink/syrup_pumpkin
+	syrup_chocolate	spawn_reagent = /datum/reagent/drink/syrup/chocolate
+	syrup_caramel	spawn_reagent = /datum/reagent/drink/syrup/caramel
+	syrup_vanilla	spawn_reagent = /datum/reagent/drink/syrup/vanilla
+	syrup_pumpkin	spawn_reagent = /datum/reagent/drink/syrup/pumpkin
+	syrup_mint		spawn_reagent = /datum/reagent/drink/syrup/mint
 
 	// Bar, coffee
-	coffee		spawn_reagent = /datum/reagent/drink/coffee
-	cafe_latte	spawn_reagent = /datum/reagent/drink/coffee/cafe_latte
-	soy_latte	spawn_reagent = /datum/reagent/drink/coffee/soy_latte
-	hot_coco	spawn_reagent = /datum/reagent/drink/hot_coco
-	milk		spawn_reagent = /datum/reagent/drink/milk
-	cream		spawn_reagent = /datum/reagent/drink/milk/cream
+	coffee			spawn_reagent = /datum/reagent/drink/coffee
+	decaf_coffee	spawn_reagent = /datum/reagent/drink/coffee/decaf
+	hot_coco		spawn_reagent = /datum/reagent/drink/hot_coco
+	milk			spawn_reagent = /datum/reagent/drink/milk
+	soymilk			spawn_reagent = /datum/reagent/drink/milk/soymilk
+	cream			spawn_reagent = /datum/reagent/drink/milk/cream
 
 	// ERT
-	inaprov		spawn_reagent = /datum/reagent/inaprovaline
-	ryetalyn	spawn_reagent = /datum/reagent/ryetalyn
-	paracetamol	spawn_reagent = /datum/reagent/paracetamol
-	tramadol	spawn_reagent = /datum/reagent/tramadol
-	oxycodone	spawn_reagent = /datum/reagent/tramadol/oxycodone
-	sterilizine	spawn_reagent = /datum/reagent/sterilizine
-	leporazine	spawn_reagent = /datum/reagent/leporazine
-	kelotane	spawn_reagent = /datum/reagent/kelotane
-	dermaline	spawn_reagent = /datum/reagent/dermaline
-	dexalin		spawn_reagent = /datum/reagent/dexalin
+	inaprov			spawn_reagent = /datum/reagent/inaprovaline
+	ryetalyn		spawn_reagent = /datum/reagent/ryetalyn
+	paracetamol		spawn_reagent = /datum/reagent/paracetamol
+	tramadol		spawn_reagent = /datum/reagent/tramadol
+	oxycodone		spawn_reagent = /datum/reagent/tramadol/oxycodone
+	sterilizine		spawn_reagent = /datum/reagent/sterilizine
+	leporazine		spawn_reagent = /datum/reagent/leporazine
+	kelotane		spawn_reagent = /datum/reagent/kelotane
+	dermaline		spawn_reagent = /datum/reagent/dermaline
+	dexalin			spawn_reagent = /datum/reagent/dexalin
 	dexalin/small	volume = CARTRIDGE_VOLUME_SMALL // For the medicine cartridge crate, so it's not too easy to get large amounts of dexalin
-	dexalin_p	spawn_reagent = /datum/reagent/dexalinp
-	tricord		spawn_reagent = /datum/reagent/tricordrazine
-	dylovene	spawn_reagent = /datum/reagent/dylovene
-	synaptizine	spawn_reagent = /datum/reagent/synaptizine
-	hyronalin	spawn_reagent = /datum/reagent/hyronalin
-	arithrazine	spawn_reagent = /datum/reagent/arithrazine
-	alkysine	spawn_reagent = /datum/reagent/alkysine
-	imidazoline	spawn_reagent = /datum/reagent/imidazoline
-	peridaxon	spawn_reagent = /datum/reagent/peridaxon
-	bicaridine	spawn_reagent = /datum/reagent/bicaridine
-	hyperzine	spawn_reagent = /datum/reagent/hyperzine
-	rezadone	spawn_reagent = /datum/reagent/rezadone
+	dexalin_p		spawn_reagent = /datum/reagent/dexalinp
+	tricord			spawn_reagent = /datum/reagent/tricordrazine
+	dylovene		spawn_reagent = /datum/reagent/dylovene
+	synaptizine		spawn_reagent = /datum/reagent/synaptizine
+	hyronalin		spawn_reagent = /datum/reagent/hyronalin
+	arithrazine		spawn_reagent = /datum/reagent/arithrazine
+	alkysine		spawn_reagent = /datum/reagent/alkysine
+	imidazoline		spawn_reagent = /datum/reagent/imidazoline
+	peridaxon		spawn_reagent = /datum/reagent/peridaxon
+	bicaridine		spawn_reagent = /datum/reagent/bicaridine
+	hyperzine		spawn_reagent = /datum/reagent/hyperzine
+	rezadone		spawn_reagent = /datum/reagent/rezadone
 	spaceacillin	spawn_reagent = /datum/reagent/spaceacillin
-	ethylredox	spawn_reagent = /datum/reagent/ethylredoxrazine
-	sleeptox	spawn_reagent = /datum/reagent/soporific
-	chloral		spawn_reagent = /datum/reagent/chloralhydrate
-	cryoxadone	spawn_reagent = /datum/reagent/cryoxadone
-	clonexadone	spawn_reagent = /datum/reagent/clonexadone
+	ethylredox		spawn_reagent = /datum/reagent/ethylredoxrazine
+	sleeptox		spawn_reagent = /datum/reagent/soporific
+	chloral			spawn_reagent = /datum/reagent/chloralhydrate
+	cryoxadone		spawn_reagent = /datum/reagent/cryoxadone
+	clonexadone		spawn_reagent = /datum/reagent/clonexadone

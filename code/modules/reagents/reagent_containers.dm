@@ -18,6 +18,19 @@
 		return TRUE
 	return FALSE
 
+/obj/item/weapon/reagent_containers/proc/get_base_name()
+	. = initial(name)
+
+/obj/item/weapon/reagent_containers/on_reagent_change()
+	if(atom_flags & ATOM_FLAG_SHOW_REAGENT_NAME)
+		var/datum/reagent/R = reagents?.get_master_reagent()
+		var/newname = get_base_name()
+		if(R)
+			newname = "[newname] of [R.get_presentation_name(src)]"
+		if(newname != name)
+			SetName(newname)
+	update_icon()
+
 /obj/item/weapon/reagent_containers/verb/set_amount_per_transfer_from_this()
 	set name = "Set transfer amount"
 	set category = "Object"

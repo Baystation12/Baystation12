@@ -393,5 +393,5 @@ obj/item/weapon/reagent_containers/pill/noexcutite/New()
 
 /obj/item/weapon/reagent_containers/pill/pod/mint/New()
 	..()
-	reagents.add_reagent(/datum/reagent/nutriment/mint, 1) //mint is used as a catalyst in all reactions as of writing
+	reagents.add_reagent(/datum/reagent/drink/syrup/mint, 1) //mint is used as a catalyst in all reactions as of writing
 	color = reagents.get_color()

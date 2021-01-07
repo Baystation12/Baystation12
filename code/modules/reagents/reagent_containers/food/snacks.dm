@@ -1914,7 +1914,7 @@
 	bitesize = 1
 /obj/item/weapon/reagent_containers/food/snacks/mint/Initialize()
 	.=..()
-	reagents.add_reagent(/datum/reagent/nutriment/mint, 1)
+	reagents.add_reagent(/datum/reagent/drink/syrup/mint, 1)
 
 
 /obj/item/weapon/reagent_containers/food/snacks/mushroomsoup

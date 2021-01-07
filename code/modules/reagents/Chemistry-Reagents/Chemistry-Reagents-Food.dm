@@ -297,13 +297,6 @@
 	nutriment_factor = 1
 	color = "#ff00ff"
 
-/datum/reagent/nutriment/mint
-	name = "Mint"
-	description = "Also known as Mentha."
-	taste_description = "sweet mint"
-	reagent_state = LIQUID
-	color = "#07aab2"
-
 /datum/reagent/lipozine // The anti-nutriment.
 	name = "Lipozine"
 	description = "A chemical compound that causes a powerful fat-burning reaction."
