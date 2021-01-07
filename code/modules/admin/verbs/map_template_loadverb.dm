@@ -25,7 +25,7 @@
 		to_chat(usr, "Attempting to place map template [log_name].")
 		if(template.load(T, centered = TRUE))
 			log_and_message_admins("has placed a map template [log_name].")
-			to_chat(usr, "Successfully place map template [log_name].")
+			to_chat(usr, "Successfully placed map template [log_name].")
 		else
 			log_and_message_admins("has failed to place a map template [log_name].")
 			to_chat(usr, "Failed to place map template [log_name].")
