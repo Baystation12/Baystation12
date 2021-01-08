@@ -2601,7 +2601,7 @@
 /obj/machinery/door/airlock/glass/medical{
 	autoset_access = 0;
 	name = "Medical Foyer";
-	req_access = list(list(access_medical,access_morgue,access_forensics_lockers))
+	req_access = list(list("ACCESS_MEDICAL","ACCESS_MORGUE","ACCESS_FORENSICS"))
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden{
@@ -10980,6 +10980,8 @@
 	pixel_x = -2;
 	pixel_y = -2
 	},
+/obj/item/weapon/storage/box/smokes,
+/obj/item/weapon/storage/box/smokes,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/storage)
 "aLA" = (
