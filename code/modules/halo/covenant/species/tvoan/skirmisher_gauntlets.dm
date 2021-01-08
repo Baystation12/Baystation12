@@ -9,9 +9,8 @@
 	item_state = "murmilloshield"
 	siemens_coefficient = 0
 	permeability_coefficient = 0.05
-	body_parts_covered = HANDS
-	var/list/armour_values = list(melee = 30, bullet = 40, laser = 30, energy = 30, bomb = 25, bio = 0, rad = 0)
-	armor = list()
+	body_parts_covered = ARMS | HANDS
+	armor = list(melee = 30, bullet = 40, laser = 30, energy = 30, bomb = 25, bio = 0, rad = 0)
 	species_restricted = list("Tvaoan Kig-Yar")
 	var/datum/armourspecials/shields/tvoan/my_shield
 	var/shieldstrength = 1
