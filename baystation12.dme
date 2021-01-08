@@ -2051,6 +2051,7 @@
 #include "code\modules\halo\structures\diesel_gen.dm"
 #include "code\modules\halo\structures\electric_fence.dm"
 #include "code\modules\halo\structures\explosive.dm"
+#include "code\modules\halo\structures\girder_override.dm"
 #include "code\modules\halo\structures\repairable_component.dm"
 #include "code\modules\halo\structures\sandbag.dm"
 #include "code\modules\halo\structures\scrap.dm"
