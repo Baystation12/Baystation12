@@ -35,6 +35,10 @@
 	. = ..()
 	START_PROCESSING(SSobj, src)
 
+/obj/effect/blob/Destroy()
+	STOP_PROCESSING(SSobj, src)
+	. = ..()
+
 /obj/effect/blob/CanPass(var/atom/movable/mover, var/turf/target, var/height = 0, var/air_group = 0)
 	if(air_group || height == 0)
 		return 1
@@ -221,7 +225,7 @@ the master core becomes more vulnereable to damage as it weakens,
 but it also becomes more aggressive, and channels more of its energy into regenerating rather than spreading
 regen() will cover update_icon() for this proc
 */
-/obj/effect/blob/core/proc/process_core_health() 
+/obj/effect/blob/core/proc/process_core_health()
 	switch(get_health_percent())
 		if(75 to INFINITY)
 			brute_resist = 3.5
