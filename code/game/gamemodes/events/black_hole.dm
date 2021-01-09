@@ -4,7 +4,7 @@
 	desc = "FUCK FUCK FUCK AAAHHH!"
 	icon_state = "bhole3"
 	opacity = 1
-	unacidable = 1
+	unacidable = TRUE
 	density = 0
 	anchored = 1
 

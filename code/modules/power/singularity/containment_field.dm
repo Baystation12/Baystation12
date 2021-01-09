@@ -7,7 +7,7 @@
 	icon_state = "Contain_F"
 	anchored = 1
 	density = 0
-	unacidable = 1
+	unacidable = TRUE
 	use_power = POWER_USE_OFF
 	uncreated_component_parts = null
 	light_outer_range = 4

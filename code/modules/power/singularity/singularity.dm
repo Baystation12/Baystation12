@@ -1,6 +1,6 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:33
 
-/obj/singularity/
+/obj/singularity
 	name = "gravitational singularity"
 	desc = "A gravitational singularity."
 	icon = 'icons/obj/singularity.dmi'
@@ -9,7 +9,7 @@
 	density = 1
 	layer = SINGULARITY_LAYER
 	light_outer_range = 6
-	unacidable = 1 //Don't comment this out.
+	unacidable = TRUE
 
 	var/current_size = 1
 	var/allowed_size = 1

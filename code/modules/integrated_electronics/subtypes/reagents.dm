@@ -6,7 +6,7 @@
 
 /obj/item/integrated_circuit/reagent
 	category_text = "Reagent"
-	unacidable = 1
+	unacidable = TRUE
 	cooldown_per_use = 10
 	var/volume = 0
 
@@ -510,7 +510,7 @@
 		"on transfer" = IC_PINTYPE_PULSE_OUT
 	)
 
-	unacidable = 1
+	unacidable = TRUE
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
 	complexity = 4
 	power_draw_per_use = 5

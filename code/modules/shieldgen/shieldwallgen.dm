@@ -262,7 +262,7 @@
 	icon_state = "shieldwall"
 	anchored = 1
 	density = 1
-	unacidable = 1
+	unacidable = TRUE
 	light_outer_range = 3
 	var/needs_power = 0
 	var/active = 1

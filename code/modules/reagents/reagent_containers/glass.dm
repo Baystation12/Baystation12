@@ -14,7 +14,7 @@
 	volume = 60
 	w_class = ITEM_SIZE_SMALL
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	unacidable = 1 //glass doesn't dissolve in acid
+	unacidable = TRUE
 
 
 	var/list/can_be_placed_into = list(
@@ -179,7 +179,7 @@
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = "5;10;15;25;30;60;180"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	unacidable = 0
+	unacidable = FALSE
 
 /obj/item/weapon/reagent_containers/glass/beaker/noreact
 	name = "cryostasis beaker"
@@ -256,7 +256,7 @@
 	possible_transfer_amounts = "10;20;30;60;120;150;180"
 	volume = 180
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	unacidable = 0
+	unacidable = FALSE
 
 /obj/item/weapon/reagent_containers/glass/bucket/wood
 	name = "bucket"

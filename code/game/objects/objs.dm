@@ -6,7 +6,7 @@
 
 	var/list/matter //Used to store information about the contents of the object.
 	var/w_class // Size of the object.
-	var/unacidable = 0 //universal "unacidabliness" var, here so you can use it in any obj.
+	var/unacidable = FALSE //universal "unacidabliness" var, here so you can use it in any obj.
 	var/throwforce = 1
 	var/sharp = FALSE		// whether this object cuts
 	var/edge = FALSE		// whether this object is more likely to dismember

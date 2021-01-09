@@ -8,7 +8,7 @@
 	icon_state = "jar"
 	item_state = "beaker"
 	center_of_mass = "x=15;y=8"
-	unacidable = 1
+	unacidable = TRUE
 
 /obj/item/weapon/reagent_containers/food/drinks/jar/on_reagent_change()
 	if (reagents.reagent_list.len > 0)

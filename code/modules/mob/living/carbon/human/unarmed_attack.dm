@@ -7,7 +7,7 @@ var/global/list/sparring_attack_cache = list()
 	var/damage = 0						// Extra empty hand attack damage.
 	var/attack_sound = "punch"
 	var/miss_sound = 'sound/weapons/punchmiss.ogg'
-	var/shredding = 0 // Calls the old attack_alien() behavior on objects/mobs when on harm intent.
+	var/shredding = FALSE // Calls the old attack_alien() behavior on objects/mobs when on harm intent.
 	var/sharp = FALSE
 	var/edge = FALSE
 	var/delay = 0
@@ -122,7 +122,6 @@ var/global/list/sparring_attack_cache = list()
 /datum/unarmed_attack/bite
 	attack_verb = list("bit")
 	attack_sound = 'sound/weapons/bite.ogg'
-	shredding = 0
 	damage = 0
 	attack_name = "bite"
 
@@ -279,7 +278,6 @@ var/global/list/sparring_attack_cache = list()
 	attack_noun = list("tap","light strike")
 	attack_verb = list("tapped", "lightly struck")
 	damage = 2
-	shredding = 0
 	damage = 0
 	sharp = TRUE
 	edge = TRUE

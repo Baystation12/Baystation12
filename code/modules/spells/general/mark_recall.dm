@@ -54,7 +54,7 @@
 	icon_state = "wizard_mark"
 
 	anchored = 1
-	unacidable = 1
+	unacidable = TRUE
 	layer = TURF_LAYER
 
 	var/spell/mark_recall/spell

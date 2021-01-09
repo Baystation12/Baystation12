@@ -4,7 +4,7 @@
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "energynet"
 	anchored = 1
-	unacidable = 1
+	unacidable = TRUE
 	simulated = 0
 	invisibility = 101
 

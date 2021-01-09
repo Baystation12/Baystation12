@@ -1,7 +1,7 @@
 /datum/unarmed_attack/bite/sharp //eye teeth
 	attack_verb = list("bit", "chomped on")
 	attack_sound = 'sound/weapons/bite.ogg'
-	shredding = 0
+	shredding = FALSE
 	sharp = TRUE
 	edge = TRUE
 	attack_name = "sharp bite"
@@ -77,7 +77,7 @@
 /datum/unarmed_attack/claws/strong
 	attack_verb = list("slashed")
 	damage = 5
-	shredding = 1
+	shredding = TRUE
 	attack_name = "strong claws"
 
 /datum/unarmed_attack/claws/strong/gloves
@@ -86,7 +86,7 @@
 /datum/unarmed_attack/bite/strong
 	attack_verb = list("mauled")
 	damage = 8
-	shredding = 1
+	shredding = TRUE
 	attack_name = "strong bite"
 
 /datum/unarmed_attack/slime_glomp
@@ -156,7 +156,7 @@
 	attack_verb = list("mauled", "slashed", "struck", "pierced")
 	attack_noun = list("forelimb")
 	damage = 8
-	shredding = 1
+	shredding = TRUE
 	sharp = TRUE
 	edge = TRUE
 	delay = 20
@@ -166,7 +166,7 @@
 
 /datum/unarmed_attack/punch/starborn
 	attack_verb = list("scorched", "burned", "fried")
-	shredding = 1
+	shredding = TRUE
 	attack_name = "starborn strike"
 
 /datum/unarmed_attack/punch/starborn/get_damage_type()

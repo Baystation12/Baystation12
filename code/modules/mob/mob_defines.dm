@@ -94,7 +94,7 @@
 
 	var/radio_interrupt_cooldown = 0
 
-	var/unacidable = 0
+	var/unacidable = FALSE
 	var/list/pinned = list()            // List of things pinning this creature to walls (see living_defense.dm)
 	var/list/embedded = list()          // Embedded items, since simple mobs don't have organs.
 	var/list/languages = list()         // For speaking/listening.

@@ -10,7 +10,7 @@
 	sharp = TRUE
 	damage_flags = DAM_LASER
 	eyeblur = 4
-	hitscan = 1
+	hitscan = TRUE
 	invisibility = 101	//beam projectiles are invisible as they are rendered by the effect engine
 	penetration_modifier = 0.3
 	distance_falloff = 2.5
@@ -115,7 +115,7 @@
 	icon_state = "bluelaser"
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GLASS | PASS_FLAG_GRILLE
 	damage = 0
-	no_attack_log = 1
+	no_attack_log = TRUE
 	damage_type = BURN
 
 	muzzle_type = /obj/effect/projectile/laser/blue/muzzle
@@ -134,7 +134,7 @@
 	icon_state = "laser"
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GLASS | PASS_FLAG_GRILLE
 	damage = 0
-	no_attack_log = 1
+	no_attack_log = TRUE
 	damage_type = BURN
 
 /obj/item/projectile/beam/lastertag/red/on_hit(var/atom/target, var/blocked = 0)

@@ -6,14 +6,14 @@
 	icon = 'icons/obj/projectiles.dmi'
 	icon_state = "bullet"
 	density = 1
-	unacidable = 1
+	unacidable = TRUE
 	anchored = 1 //There's a reason this is here, Mport. God fucking damn it -Agouri. Find&Fix by Pete. The reason this is here is to stop the curving of emitter shots.
 	pass_flags = PASS_FLAG_TABLE
 	mouse_opacity = 0
 	var/bumped = 0		//Prevents it from hitting more than one guy at once
 	var/def_zone = ""	//Aiming at
 	var/mob/firer = null//Who shot it
-	var/silenced = 0	//Attack message
+	var/silenced = FALSE	//Attack message
 	var/yo = null
 	var/xo = null
 	var/current = null
@@ -32,7 +32,7 @@
 
 	var/damage = 10
 	var/damage_type = BRUTE //BRUTE, BURN, TOX, OXY, CLONE, ELECTROCUTE are the only things that should be in here, Try not to use PAIN as it doesn't go through stun_effect_act
-	var/nodamage = 0 //Determines if the projectile will skip any damage inflictions
+	var/nodamage = FALSE //Determines if the projectile will skip any damage inflictions
 	var/damage_flags = DAM_BULLET
 	var/projectile_type = /obj/item/projectile
 	var/penetrating = 0 //If greater than zero, the projectile will pass through dense objects as specified by on_penetrate()
@@ -46,10 +46,10 @@
 	var/eyeblur = 0
 	var/drowsy = 0
 	var/agony = 0
-	var/embed = 0 // whether or not the projectile can embed itself in the mob
+	var/embed = FALSE // whether or not the projectile can embed itself in the mob
 	var/penetration_modifier = 0.2 //How much internal damage this projectile can deal, as a multiplier.
 
-	var/hitscan = 0		// whether the projectile should be hitscan
+	var/hitscan = FALSE		// whether the projectile should be hitscan
 	var/step_delay = 1	// the delay between iterations if not a hitscan projectile
 
 	// effect types to be used

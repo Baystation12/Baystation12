@@ -10,7 +10,7 @@
 	icon_state = "hypo"
 	origin_tech = list(TECH_MATERIAL = 4, TECH_BIO = 5)
 	amount_per_transfer_from_this = 5
-	unacidable = 1
+	unacidable = TRUE
 	volume = 30
 	possible_transfer_amounts = null
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
