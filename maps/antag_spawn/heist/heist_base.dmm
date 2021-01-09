@@ -114,14 +114,6 @@
 	icon_state = "white"
 	},
 /area/map_template/syndicate_mothership/raider_base)
-"au" = (
-/obj/vehicle/bike/thermal,
-/obj/random/trash,
-/turf/unsimulated/floor{
-	icon_state = "plating";
-	name = "plating"
-	},
-/area/map_template/syndicate_mothership/raider_base)
 "av" = (
 /obj/vehicle/bike/thermal,
 /turf/unsimulated/floor{
@@ -5081,7 +5073,7 @@ ab
 ab
 ab
 ae
-au
+aw
 aj
 aj
 aw
@@ -5156,7 +5148,7 @@ ae
 aj
 aj
 aG
-av
+aj
 ae
 be
 bs
@@ -5299,8 +5291,8 @@ ab
 ae
 eI
 aj
-av
-av
+aj
+aj
 ae
 bg
 bu
