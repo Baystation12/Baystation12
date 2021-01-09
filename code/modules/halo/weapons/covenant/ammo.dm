@@ -309,12 +309,16 @@
 
 /obj/item/projectile/bullet/fuel_rod
 	name = "fuel rod"
+	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
+	icon_state = "Overcharged_Plasmapistol shot"
 	check_armour = "bomb"
+	damage_type = "bomb"
+	damtype = "bomb"
 	step_delay = 1.2
 	kill_count = 15
 	shield_damage = 100
-	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
-	icon_state = "Overcharged_Plasmapistol shot"
+	damage = 50
+	armor_penetration = 50
 	muzzle_type = /obj/effect/projectile/muzzle/cov_green
 
 /obj/item/projectile/bullet/fuel_rod/throw_impact(atom/hit_atom)
