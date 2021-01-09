@@ -2,7 +2,7 @@ GLOBAL_LIST_INIT(mob_spawners, list())
 
 /datum/build_mode/mob_mode
 	name = "Mob Spawning"
-	icon_state = "buildmode10"
+	icon_state = "buildmode11"
 	var/area/current_area
 	var/turf/current_turf
 	var/turf/center

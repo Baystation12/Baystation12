@@ -1261,6 +1261,7 @@
 #include "code\modules\admin\buildmode\mob_spawning.dm"
 #include "code\modules\admin\buildmode\move_into.dm"
 #include "code\modules\admin\buildmode\overlay.dm"
+#include "code\modules\admin\buildmode\portals.dm"
 #include "code\modules\admin\buildmode\relocate_to.dm"
 #include "code\modules\admin\buildmode\room_builder.dm"
 #include "code\modules\admin\buildmode\throw_at.dm"
