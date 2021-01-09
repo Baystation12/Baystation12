@@ -1,4 +1,0 @@
-author: "eckff (Ported by SierraKomodo)"
-delete-after: True
-changes: 
-  - tweak: "Lightbulb sprites are now drawn above the lighting overlay to make them more 'bright light vibrant' looking"
