@@ -254,6 +254,9 @@
 	if(istype(lightbulb, /obj/item/weapon/light/))
 		var/image/I = image(icon, src, _state)
 		I.color = lightbulb.b_colour
+		if (on)
+			I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+			I.layer = ABOVE_LIGHTING_LAYER
 		overlays += I
 
 	if(on)
