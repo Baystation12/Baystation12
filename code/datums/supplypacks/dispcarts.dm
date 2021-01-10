@@ -86,6 +86,9 @@ PACK(soy_latte,  /obj/item/weapon/reagent_containers/chem_disp_cartridge/soy_lat
 PACK(hot_coco,   /obj/item/weapon/reagent_containers/chem_disp_cartridge/hot_coco,   "Reagent refill - Hot Coco",            "hot coco reagent cartridge crate",                      15)
 PACK(milk,       /obj/item/weapon/reagent_containers/chem_disp_cartridge/milk,       "Reagent refill - Milk",                "milk reagent cartridge crate",                          15)
 PACK(cream,      /obj/item/weapon/reagent_containers/chem_disp_cartridge/cream,      "Reagent refill - Cream",               "cream reagent cartridge crate",                         15)
+PACK(decaf_cof,  /obj/item/weapon/reagent_containers/chem_disp_cartridge/decaf_cof,  "Reagent refill - Decaf Coffee",        "decaf coffee reagent cartridge crate",                  15)
+PACK(decaf_tea,  /obj/item/weapon/reagent_containers/chem_disp_cartridge/decaf_tea,  "Reagent refill - Decaf Tea",           "decaf tea reagent cartridge crate",                     15)
+PACK(espresso,  /obj/item/weapon/reagent_containers/chem_disp_cartridge/espresso,    "Reagent refill - Espresso",           "espresso reagent cartridge crate",                       15)
 
 PACK(syrup_chocolate, /obj/item/weapon/reagent_containers/chem_disp_cartridge/syrup_chocolate, "Reagent refill - Chocolate Syrup",     "chocolate syrup reagent cartridge crate", 15)
 PACK(syrup_caramel,   /obj/item/weapon/reagent_containers/chem_disp_cartridge/syrup_caramel,   "Reagent refill - Caramel Syrup",       "caramel syrup reagent cartridge crate",   15)

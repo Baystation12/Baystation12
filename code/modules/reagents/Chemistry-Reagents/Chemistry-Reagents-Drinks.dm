@@ -1313,6 +1313,69 @@
 	glass_name = "pumpkin spice syrup"
 	glass_desc = "Thick spiced pumpkin syrup used to flavor drinks."
 
+/datum/reagent/drink/decafcoffee
+	name = "Decaffeinated Coffee"
+	description = "Coffee but without the caffeine."
+	taste_description = "decaffeinated bitterness"
+	color = "#482000"
+
+	glass_name = "decaf coffee"
+	glass_desc = "Don't drop it, or you'll send scalding liquid and glass shards everywhere."
+
+/datum/reagent/drink/coffee/espresso
+	name = "Espresso"
+	description = "Extra strong coffee."
+	taste_description = "deluxe bitterness"
+	color = "#482000"
+
+	glass_name = "espresso"
+	glass_desc = "Don't drop it, or you'll send scalding liquid and glass shards everywhere."
+
+/datum/reagent/drink/coffee/americano
+	name = "Americano"
+	description = "Diluted Espresso."
+	taste_description = "dark bitterness"
+	color = "#482000"
+
+	glass_name = "americano"
+	glass_desc = "Pa pa l' americano"
+
+/datum/reagent/drink/coffee/yuenyeung
+	name = "Yuenyeung"
+	description = "Also known as Coffee with Tea."
+	taste_description = "refreshing and energising"
+	color = "#482000"
+
+	glass_name = "yeunyeung"
+	glass_desc = "Coffee with tea. Delicious."
+
+/datum/reagent/drink/coffee/iced/frappe
+	name = "Iced Frappe"
+	description = "A cool coffee chilled with ice."
+	taste_description = "refreshing brainfreeze"
+	color = "#482000"
+
+	glass_name = "iced frappe"
+	glass_desc = "A cool coffee with ice."
+
+/datum/reagent/ethanol/coffee/carajillo
+	name = "Carajillo"
+	description = "Just a regular coffee, hombre."
+	taste_description = "la voluntad de vivir"
+	color = "#482000"
+
+	glass_name = "iced frappe"
+	glass_desc = "A cool, milky coffee with ice... And Kahlua."
+
+/datum/reagent/drink/tea/decaf
+	name = "Decaffeinated Tea"
+	description = "Tea, already with limited caffeine, now with even less."
+	taste_description = "bitter tea"
+	color = "#101000"
+
+	glass_name = "decaf tea"
+	glass_desc = "Tasty black tea, it has antioxidants, it's good for you!"
+
 // Alien Drinks
 
 /datum/reagent/drink/alien/unathijuice

@@ -678,10 +678,12 @@
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 	vend_power_usage = 85000 //85 kJ to heat a 250 mL cup of coffee
 	products = list(/obj/item/weapon/reagent_containers/food/drinks/coffee = 15,
+					/obj/item/weapon/reagent_containers/food/drinks/decafcoffee = 15,
 					/obj/item/weapon/reagent_containers/food/drinks/tea/black = 15,
 					/obj/item/weapon/reagent_containers/food/drinks/tea/green = 15,
 					/obj/item/weapon/reagent_containers/food/drinks/tea/chai = 15,
-					/obj/item/weapon/reagent_containers/food/drinks/h_chocolate = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/tea/decaf = 15,
+					/obj/item/weapon/reagent_containers/food/drinks/h_chocolate = 15,
 					/obj/item/weapon/reagent_containers/food/condiment/small/packet/sugar = 25,
 					/obj/item/weapon/reagent_containers/pill/pod/cream = 25,
 					/obj/item/weapon/reagent_containers/pill/pod/cream_soy = 25,
@@ -690,16 +692,18 @@
 					/obj/item/weapon/reagent_containers/food/drinks/ice = 10)
 
 	prices = list(/obj/item/weapon/reagent_containers/food/drinks/coffee = 10,
+				  /obj/item/weapon/reagent_containers/food/drinks/decafcoffee = 10,
 				  /obj/item/weapon/reagent_containers/food/drinks/tea/black = 10,
 				  /obj/item/weapon/reagent_containers/food/drinks/tea/green = 10,
 				  /obj/item/weapon/reagent_containers/food/drinks/tea/chai = 10,
-				  /obj/item/weapon/reagent_containers/food/drinks/h_chocolate = 15,
-				  /obj/item/weapon/reagent_containers/food/condiment/small/packet/sugar = 1,
+				  /obj/item/weapon/reagent_containers/food/drinks/tea/decaf = 10,
+				  /obj/item/weapon/reagent_containers/food/drinks/h_chocolate = 10,
+				  /obj/item/weapon/reagent_containers/food/condiment/small/packet/sugar = 5,
 				  /obj/item/weapon/reagent_containers/pill/pod/cream = 5,
 				  /obj/item/weapon/reagent_containers/pill/pod/cream_soy = 5,
 				  /obj/item/weapon/reagent_containers/pill/pod/orange = 5,
 				  /obj/item/weapon/reagent_containers/pill/pod/mint = 5,
-				  /obj/item/weapon/reagent_containers/food/drinks/ice = 1)
+				  /obj/item/weapon/reagent_containers/food/drinks/ice = 5)
 
 /obj/machinery/vending/coffee/on_update_icon()
 	..()
