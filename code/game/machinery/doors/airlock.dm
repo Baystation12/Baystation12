@@ -1468,7 +1468,12 @@ About the new airlock wires panel:
 	update_icon()
 
 /obj/machinery/door/airlock/proc/paint_window(paint_color)
-	window_color = isnull(paint_color) ? GLASS_COLOR : paint_color
+	if (paint_color)
+		window_color = paint_color
+	else if (window_material?.icon_colour)
+		window_color = window_material.icon_colour
+	else
+		window_color = GLASS_COLOR
 	update_icon()
 
 // Public access
