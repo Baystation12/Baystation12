@@ -12,7 +12,7 @@ GLOBAL_LIST_INIT(filter_gas_to_mode, list(    \
 	"Hydrogen" =       ATM_H2,                \
 	"Methyl Bromide" = ATM_CH3BR              \
 ))
-	
+
 GLOBAL_LIST_INIT(filter_mode_to_gas, list(    \
 	"[ATM_O2]" =       "Oxygen",              \
 	"[ATM_N2]" =       "Nitrogen",            \
@@ -128,7 +128,12 @@ GLOBAL_LIST_INIT(filter_mode_to_gas_id, list( \
 	return 1
 
 /obj/machinery/atmospherics/omni/filter/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
-	usr.set_machine(src)
+	if(!user)
+		if (ui)
+			ui.close()
+		return
+
+	user.set_machine(src)
 
 	var/list/data = new()
 

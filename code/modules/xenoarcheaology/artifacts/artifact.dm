@@ -49,6 +49,9 @@
 /obj/machinery/artifact/proc/check_triggers(trigger_proc)
 	. = FALSE
 	for(var/datum/artifact_effect/effect in list(my_effect, secondary_effect))
+		if (!effect.trigger)
+			return
+
 		var/triggered = call(effect.trigger, trigger_proc)(arglist(args.Copy(2)))
 		if(effect.trigger.toggle && triggered)
 			effect.ToggleActivate(1)
@@ -97,7 +100,7 @@
 	if(check_triggers(/datum/artifact_trigger/proc/on_explosion, severity))
 		return
 	switch(severity)
-		if(1) 
+		if(1)
 			qdel(src)
 		if(2)
 			if (prob(50))

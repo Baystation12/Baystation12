@@ -154,8 +154,8 @@
 						//delete it when the ids match to account for duplicate ids having different effects
 						if(inserted_battery.battery_effect && inserted_battery.stored_charge <= 0)
 							qdel(inserted_battery.battery_effect)
+							return
 
-						//
 						var/datum/artifact_effect/source_effect
 
 						//if we already have charge in the battery, we can only recharge it from the source artifact
