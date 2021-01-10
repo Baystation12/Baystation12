@@ -1,4 +1,0 @@
-author: "juxtaposed9930"
-delete-after: True
-changes: 
-  - bugfix: "Shuttle-specific navpoints on the Torch will no longer show up on other shuttles."

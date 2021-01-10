@@ -1,4 +1,0 @@
-author: "Mucker"
-delete-after: True
-changes: 
-  - bugfix: "Mob spawners put on shuttles now stay with the shuttle after transitions."
