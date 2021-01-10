@@ -157,4 +157,12 @@
 		if(isEye(M)) continue // If we need to check for more mobs, I'll add a variable
 		M.forceMove(new_turf)
 
+	if (GLOB.mob_spawners[source])
+		var/datum/mob_spawner/source_spawner = GLOB.mob_spawners[source]
+		source_spawner.area = get_area(new_turf)
+		source_spawner.center = new_turf
+		GLOB.mob_spawners[new_turf] = source_spawner
+
+		GLOB.mob_spawners[source] = null
+
 	return new_turf
