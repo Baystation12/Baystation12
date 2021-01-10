@@ -1,0 +1,4 @@
+author: "Mucker"
+delete-after: True
+changes: 
+  - admin: "Adds a new buildmode mode for placing portals."
