@@ -12,6 +12,7 @@
 		"Aquila" = list("nav_hangar_aquila"),
 		"Ascent Caulship" = list("nav_ascent_caulship_torch"), //restricts caulship specific docking waypoint on deck 4 starboard side
 		"Skrellian Scout" = list("nav_skrellscout_dock"), //restricts Skrell Scoutship specific docking waypoint on deck 4 portside
+		"Skrellian Shuttle" = list("nav_skrellscoutsh_altdock"),
 		"Rescue" = list("nav_ert_dock"), //restricts ERT Shuttle specific docking waypoint on deck 4 portside
 		"ITV The Reclaimer" = list("nav_hangar_gantry_torch"), //gantry shuttles
 		"ITV Vulcan" = list("nav_hangar_gantry_torch_two"),
@@ -70,12 +71,6 @@
 		"nav_ninja_hanger",
 		"nav_skipjack_hanger",
 		"nav_ert_hanger",
-
-		"nav_skrellscoutsh_altdock",
-		"nav_ascent_caulship_torch",
-		"nav_skrellscout_dock",
-		"nav_ert_dock",
-		"nav_verne_5",
 	)
 
 /obj/effect/overmap/visitable/ship/landable/exploration_shuttle
@@ -139,4 +134,4 @@
 	desc = "Trace radiation emanating from this sector is consistent with the aftermath of a bluespace jump."
 	icon_state = "event"
 	known = TRUE
-	
+
