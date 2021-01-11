@@ -111,6 +111,8 @@
 	if(isliving(target))
 		var/mob/living/M = target
 		if(on_fire)
+			if (user.a_intent == I_HELP)
+				return FALSE
 			user.visible_message(
 				SPAN_DANGER("\The [user] hits \the [target] with \the [src]!"),
 				SPAN_DANGER("You hit \the [target] with \the [src]!")
