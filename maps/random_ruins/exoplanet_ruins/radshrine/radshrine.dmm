@@ -19,6 +19,11 @@
 	},
 /turf/simulated/floor/exoplanet/water/shallow,
 /area/template_noop)
+"j" = (
+/obj/item/weapon/stool,
+/obj/item/remains/xeno/charred,
+/turf/simulated/floor/fixed/alium,
+/area/template_noop)
 "k" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 4
@@ -51,17 +56,6 @@
 	},
 /turf/simulated/floor/fixed/alium,
 /area/template_noop)
-"E" = (
-/obj/effect/decal/cleanable/cobweb,
-/obj/item/weapon/stool/stone,
-/obj/item/remains/xeno/charred,
-/turf/simulated/floor/fixed/alium,
-/area/template_noop)
-"H" = (
-/obj/item/weapon/stool/stone,
-/obj/item/remains/xeno/charred,
-/turf/simulated/floor/fixed/alium,
-/area/template_noop)
 "K" = (
 /turf/simulated/floor/fixed/alium,
 /area/template_noop)
@@ -87,7 +81,7 @@ d
 "}
 (2,1,1) = {"
 Y
-E
+j
 K
 K
 y
@@ -98,7 +92,7 @@ Y
 Y
 K
 K
-H
+j
 e
 x
 Y
@@ -124,7 +118,7 @@ Y
 (6,1,1) = {"
 Y
 K
-H
+j
 K
 y
 y
