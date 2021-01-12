@@ -1,10 +1,4 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
-"b" = (
-/obj/effect/decal/cleanable/cobweb,
-/obj/item/weapon/stool/stone,
-/obj/item/remains/xeno/charred,
-/turf/simulated/floor/fixed/alium,
-/area/template_noop)
 "c" = (
 /obj/machinery/door/unpowered/simple/uranium,
 /turf/template_noop,
@@ -14,41 +8,34 @@
 /area/template_noop)
 "e" = (
 /obj/effect/floor_decal/spline/fancy/wood{
-	dir = 5
-	},
-/turf/simulated/floor/exoplanet/water/shallow,
-/area/template_noop)
-"n" = (
-/obj/effect/floor_decal/spline/fancy/wood{
-	dir = 8
-	},
-/turf/simulated/floor/exoplanet/water/shallow,
-/area/template_noop)
-"u" = (
-/turf/simulated/floor/fixed/alium,
-/area/template_noop)
-"y" = (
-/obj/structure/totem,
-/turf/simulated/floor/fixed/alium,
-/area/template_noop)
-"z" = (
-/obj/effect/floor_decal/spline/fancy/wood{
 	dir = 9;
 	icon_state = "spline_fancy"
 	},
 /turf/simulated/floor/exoplanet/water/shallow,
 /area/template_noop)
-"D" = (
-/obj/item/trash/candle,
-/turf/simulated/floor/fixed/alium,
+"g" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 5
+	},
+/turf/simulated/floor/exoplanet/water/shallow,
 /area/template_noop)
-"L" = (
+"k" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 4
 	},
 /turf/simulated/floor/exoplanet/water/shallow,
 /area/template_noop)
-"P" = (
+"x" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 8
+	},
+/turf/simulated/floor/exoplanet/water/shallow,
+/area/template_noop)
+"y" = (
+/obj/item/trash/candle,
+/turf/simulated/floor/fixed/alium,
+/area/template_noop)
+"A" = (
 /obj/machinery/artifact,
 /obj/effect/floor_decal/spline/fancy/wood/cee{
 	dir = 1
@@ -64,82 +51,91 @@
 	},
 /turf/simulated/floor/fixed/alium,
 /area/template_noop)
-"T" = (
+"E" = (
+/obj/effect/decal/cleanable/cobweb,
 /obj/item/weapon/stool/stone,
 /obj/item/remains/xeno/charred,
 /turf/simulated/floor/fixed/alium,
 /area/template_noop)
-"W" = (
-/turf/simulated/wall/alium,
+"H" = (
+/obj/item/weapon/stool/stone,
+/obj/item/remains/xeno/charred,
+/turf/simulated/floor/fixed/alium,
 /area/template_noop)
-"X" = (
+"K" = (
+/turf/simulated/floor/fixed/alium,
+/area/template_noop)
+"N" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 1;
 	icon_state = "spline_fancy"
 	},
 /turf/simulated/floor/exoplanet/water/shallow,
 /area/template_noop)
+"Y" = (
+/turf/simulated/wall/alium,
+/area/template_noop)
 
 (1,1,1) = {"
 d
-W
-W
+Y
+Y
 d
-W
-W
+Y
+Y
 d
 "}
 (2,1,1) = {"
-W
-b
-u
-u
-D
-D
-W
+Y
+E
+K
+K
+y
+y
+Y
 "}
 (3,1,1) = {"
-W
-u
-u
-T
-z
-n
-W
+Y
+K
+K
+H
+e
+x
+Y
 "}
 (4,1,1) = {"
 c
-u
-y
-u
-X
-P
+K
+K
+K
+N
+A
 d
 "}
 (5,1,1) = {"
-W
-u
-u
-u
-e
-L
-W
+Y
+K
+K
+K
+g
+k
+Y
 "}
 (6,1,1) = {"
-W
-u
-T
-u
-D
-D
-W
+Y
+K
+H
+K
+y
+y
+Y
 "}
 (7,1,1) = {"
 d
-W
-W
+Y
+Y
 d
-W
-W
+Y
+Y
 d
 "}
