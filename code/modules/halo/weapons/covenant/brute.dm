@@ -218,6 +218,9 @@
 	matter = list("nanolaminate" = 2, "duridium" = 3)
 
 /obj/item/weapon/grav_hammer/afterattack(atom/A as mob|obj|turf|area, mob/user, proximity)
+	if(lunge_dist > 0)
+		. = ..()
+
 	if(get_dist(A,user) > 1)
 		return
 
@@ -245,8 +248,8 @@
 	name = "Type-2 Energy Weapon/Hammer, Depowered"
 	desc = "A long haft and a heavy head with a tungsten-alloy blade on the reverse end. The short-range gravity field in the head of the weapon has been disabled."
 	icon_state = "gravlesshammer"
-	force = 45
-	lunge_dist = 3
+	force = 40
+	lunge_dist = 4
 	hitsound = "swing_hit"
 	item_state_slots = list(slot_l_hand_str = "gravlesshammer", slot_r_hand_str = "gravlesshammer", slot_back_str = "back_hammer")
 

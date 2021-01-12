@@ -31,7 +31,7 @@
 
 
 	w_class = ITEM_SIZE_LARGE
-	force_divisor = 0.6
+	force_divisor = 0.67
 	thrown_force_divisor = 0.6
 	slot_flags = SLOT_BELT | SLOT_BACK
 	sharp = 1

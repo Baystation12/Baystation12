@@ -8,7 +8,7 @@
 	fire_sound = 'code/modules/halo/sounds/Rocket_Launcher_Fire_New.wav'
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/spnkr
-	fire_delay = 8
+	fire_delay = 10
 	one_hand_penalty = -1
 	dispersion = list(0.26)
 	hud_bullet_row_num = 2
@@ -55,7 +55,9 @@
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	check_armour = "bomb"
 	step_delay = 1.2
-	shield_damage = 200 //just below elite minor shields, meaning subsequent explosion and guaranteed damage will collapse it.
+	shield_damage = 180
+	damage = 100
+	armor_penetration = 50
 
 /obj/item/projectile/bullet/ssr/on_impact(var/atom/target)
 	explosion(get_turf(target), -1, 1, 3, 4,guaranteed_damage = 65,guaranteed_damage_range = 2)

@@ -53,7 +53,7 @@
 
 /datum/language/vox/get_random_name()
 	return ..(FEMALE,1,6)
-
+/*
 /datum/language/cultcommon
 	name = LANGUAGE_CULT
 	desc = "The chants of the occult, the incomprehensible."
@@ -72,7 +72,7 @@
 		"gal'h'rfikk", "harfrandid", "mud'gib", "fuu", "ma'jin", "dedo", "ol'btoh", "n'ath", "reth", "sh'yro", "eth", \
 		"d'rekkathnor", "khari'd", "gual'te", "nikka", "nikt'o", "barada", "kla'atu", "barhah", "hra" ,"zar'garis")
 	machine_understands = 0
-
+*/
 /datum/language/cult
 	name = "Occult"
 	desc = "The initiated can share their thoughts by means defying all reason."

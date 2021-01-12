@@ -59,7 +59,7 @@
 	set name = "Turn Clockwise"
 
 	visible_message("\icon[src] <span class='notice'>[src] shuffles to face the right.</span>")
-	if(do_after(src, 7))
+	if(do_after(src, 4))
 		facedir(GLOB.cw_dir[dir], 1)
 
 /obj/item/hunter_action/turn_ccw
@@ -75,7 +75,7 @@
 	set name = "Turn Counterclockwise"
 
 	visible_message("\icon[src] <span class='notice'>[src] shuffles to face the left.</span>")
-	if(do_after(src, 7))
+	if(do_after(src, 4))
 		facedir(GLOB.cww_dir[dir], 1)
 
 //see code\modules\mob\mob.dm

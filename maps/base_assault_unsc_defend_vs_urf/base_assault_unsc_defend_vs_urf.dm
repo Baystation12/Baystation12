@@ -21,7 +21,7 @@
 	company_short = "UNSC"
 
 	use_overmap = 1
-	overmap_size= 10
+	overmap_size= 15
 	overmap_event_tokens = 1
 
 	allowed_gamemodes = list("base_assault_unsc_urf")
@@ -63,7 +63,6 @@
 
 /datum/map/base_assault_unsc_vs_urf
 	allowed_jobs = list(\
-	/datum/job/unsc/spartan_two,
 	/datum/job/unsc/marine,
 	/datum/job/unsc/marine/specialist,
 	/datum/job/unsc/marine/hellbringer,\

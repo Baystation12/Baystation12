@@ -3,7 +3,6 @@
 #define NEEDLER_SHRAPNEL_AP 40
 #define FUEL_ROD_IRRADIATE_RANGE 2
 #define FUEL_ROD_IRRADIATE_AMOUNT 10
-#define FUEL_ROD_MAX_OVERSHOOT 3
 
  // need icons for all projectiles and magazines
 /obj/item/projectile/bullet/covenant
@@ -310,20 +309,17 @@
 
 /obj/item/projectile/bullet/fuel_rod
 	name = "fuel rod"
+	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
+	icon_state = "Overcharged_Plasmapistol shot"
 	check_armour = "bomb"
+	damage_type = "bomb"
+	damtype = "bomb"
 	step_delay = 1.2
 	kill_count = 15
 	shield_damage = 100
-	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
-	icon_state = "Overcharged_Plasmapistol shot"
+	damage = 50
+	armor_penetration = 50
 	muzzle_type = /obj/effect/projectile/muzzle/cov_green
-
-/obj/item/projectile/bullet/fuel_rod/launch(atom/target, var/target_zone, var/x_offset=0, var/y_offset=0, var/angle_offset=0)
-	//kill count is the number of turfs the bullet travels, at the end it automatically calls on_impact()
-	//we want the fuel rod to not fly off into the distance if it misses
-	//add a bit of randomness
-	. = ..()
-	kill_count = world.view + (rand(0, FUEL_ROD_MAX_OVERSHOOT * 2) - FUEL_ROD_MAX_OVERSHOOT)
 
 /obj/item/projectile/bullet/fuel_rod/throw_impact(atom/hit_atom)
 	return on_impact(hit_atom)

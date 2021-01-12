@@ -52,7 +52,7 @@
 
 /datum/game_mode/base_assault/check_finished()
 	if(world.time >= stalemate_at)
-		winning_side = "Nobody. Stalemate!"
+		winning_side = "Stalemate! [defenders] have attained a minor victory!"
 		return 1
 	if(get_defender_loss_status())
 		winning_side = attackers
@@ -69,3 +69,13 @@
 #undef STALEMATE_TIMER
 #undef BASE_ASSAULT_ONEFLANK_THRESHOLD
 #undef BASE_ASSAULT_TWOFLANK_THRESHOLD
+
+//Some extra jobstuff for mgalekgolo and spartans
+
+/datum/job/unsc/spartan_two
+	poplock_max = 2
+	poplock_divisor = 12
+
+/datum/job/covenant/mgalekgolo
+	poplock_max = 2
+	poplock_divisor = 12

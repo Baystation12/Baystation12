@@ -45,7 +45,7 @@
 	icon_state = "minor_harness"
 	item_state = "minor_harness"
 	species_restricted = list("Yanme e")
-	armor = list(melee = 55, bullet = 45, laser = 55, energy = 50, bomb = 40, bio = 25, rad = 25)
+	armor = list(melee = 52, bullet = 47, laser = 52, energy = 42, bomb = 37, bio = 25, rad = 25)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS|HEAD
 	item_flags = AIRTIGHT|FLEXIBLEMATERIAL
 	canremove = 0
@@ -58,13 +58,13 @@
 /obj/item/clothing/suit/armor/special/yanmee/ultra
 	icon_state = "ultra_harness"
 	item_state = "ultra_harness"
-	specials = list(/datum/armourspecials/shields/elite)
+	specials = list(/datum/armourspecials/shields/unggoy)
 	totalshields = 20
 
 /obj/item/clothing/suit/armor/special/yanmee/leader
 	icon_state = "leader_harness"
 	item_state = "leader_harness"
-	specials = list(/datum/armourspecials/shields/elite)
+	specials = list(/datum/armourspecials/shields/unggoy)
 	totalshields = 40
 
 #undef YANMEE_ICON
