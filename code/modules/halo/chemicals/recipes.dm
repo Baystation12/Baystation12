@@ -11,6 +11,12 @@
 	required_reagents = list(/datum/reagent/foaming_agent = 1, /datum/reagent/tricordrazine = 1, /datum/reagent/bicaridine = 1)
 	result_amount = 2
 
+/datum/chemical_reaction/biofoampenalise
+	name = "Bio-Foam Remnant Neutralisation"
+	result = /datum/reagent/biofoampenaliser
+	required_reagents = list(/datum/reagent/biofoam = 1,/datum/reagent/biofoampenaliser = 1)
+	result_amount = 1
+
 /datum/chemical_reaction/hyperzine_concentrated
 	name = "Concentrated Hyperzine"
 	result = /datum/reagent/hyperzine_concentrated

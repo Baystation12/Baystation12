@@ -1,9 +1,12 @@
-#define BIOFOAM_COST_STOPBLEED 0.5
-#define BIOFOAM_COST_MENDBONE 1.5
-#define BIOFOAM_COST_MENDINTERNAL 1
-#define BIOFOAM_COST_MENDEXTERNAL 0.75
-#define BIOFOAM_COST_FIXWOUNDS 0.25
-#define BIOFOAM_COST_REMOVESHRAP 2
+#define BIOFOAM_COST_STOPBLEED 0.2
+#define BIOFOAM_COST_MENDBONE 0.3
+#define BIOFOAM_COST_MENDINTERNAL 0.1
+#define BIOFOAM_COST_MENDEXTERNAL 0.15
+#define BIOFOAM_COST_FIXWOUNDS 0.1
+#define BIOFOAM_COST_REMOVESHRAP 0.2
+
+#define POLYPSEUDOMORPHINE_PAINKILL 400
+
 
 /datum/reagent/triadrenaline
 	name = "Tri-Adrenaline"
@@ -40,9 +43,18 @@
 		to_chat(H,"You feel your heart thundering in your chest")
 		O.pulse = PULSE_2FAST //This can actually cause heart damage now
 
+/datum/reagent/biofoampenaliser
+	name = "Bio-Foam Remnants"
+	description = "The remnants of biofoam, clogging the person's body and stopping further biofoam usage"
+	reagent_state = LIQUID
+	color = "#edd9c0"
+	metabolism = REM*3
+	overdose = 0
+	scannable = 1
+
 /datum/reagent/biofoam
 	name = "Bio-Foam"
-	description = "A regenerative foaming agent which is capable of fixing bones and stopping bleeding"
+	description = "A regenerative foaming agent which is capable of fixing bones and stopping bleeding. Can only be injected every 15 seconds, as the remnants of previous injections stops future ones from working properly until fully processed by the body."
 	reagent_state = LIQUID
 	color = "#edd9c0"
 	metabolism = 1 //Biofoam is used quickly, and it uses more the more it does.
@@ -52,7 +64,7 @@
 
 /datum/reagent/biofoam/proc/check_and_consume_cost(var/cost)
 	if(volume >= cost)
-		holder.remove_reagent("biofoam",cost)
+		holder.remove_reagent(/datum/reagent/biofoam,cost)
 		return 1
 	else
 		return 0
@@ -66,33 +78,43 @@
 		to_chat(o.owner,"<span class = 'notice'>You feel the biofoam stop the bleeding in your [o.name]</span>")
 
 /datum/reagent/biofoam/proc/mend_external(var/mob/living/carbon/human/H)
+	var/fixed_anything = 0
 	for(var/obj/item/organ/external/o in H.organs)
 		check_and_stop_bleeding(o)
 		if(o.brute_dam + o.burn_dam >= o.min_bruised_damage && check_and_consume_cost(BIOFOAM_COST_MENDEXTERNAL))
 			o.heal_damage(o.min_bruised_damage,o.min_bruised_damage)
-			to_chat(H,"<span class = 'notice'>You feel your [o.name] knitting itself back together</span>")
+			fixed_anything = 1
 		if(o.status & ORGAN_BROKEN && check_and_consume_cost(BIOFOAM_COST_MENDBONE))
 			o.mend_fracture()
 			H.next_pain_time = world.time //Overrides the next pain timer
 			H.custom_pain("<span class = 'userdanger'>You feel the bones in your [o.name] being pushed into place.</span>",10)
+			fixed_anything = 1
+	if(fixed_anything)
+		to_chat(H,"<span class = 'notice'>You feel your limbs knitting themselves back together</span>")
 
 /datum/reagent/biofoam/proc/mend_internal(var/mob/living/carbon/human/H)
+	var/fixed_anything = 0
 	for(var/obj/item/organ/I in H.internal_organs)
 		check_and_stop_bleeding(I)
 		if(I.damage >= I.min_bruised_damage && check_and_consume_cost(BIOFOAM_COST_MENDINTERNAL))
-			I.damage -= I.min_bruised_damage
-			to_chat(H,"<span class = 'notice'>You feel your [I.name] knitting itself back together</span>")
+			I.damage = max(I.min_bruised_damage,I.damage-I.min_bruised_damage)
+			fixed_anything = 1
+	if(fixed_anything)
+		to_chat(H,"<span class = 'notice'>You feel your organs knitting themselves back together</span>")
 
 /datum/reagent/biofoam/proc/fix_wounds(var/mob/living/carbon/human/H)
+	var/fixed_anything = 0
 	for(var/obj/item/organ/external/o in H.organs)
 		for(var/wounds in o.wounds)
 			var/datum/wound/W = wounds
 			if(W.bleed_timer > 0 && check_and_consume_cost(BIOFOAM_COST_FIXWOUNDS))
 				W.bleed_timer = 0
-				to_chat(o.owner,"<span class = 'notice'>You feel the bleeding in your [o.name] slow, then stop.</span>")
 				W.bandaged = 1
 				W.salved = 1
 				o.update_damages()
+				fixed_anything = 1
+	if(fixed_anything)
+		to_chat(H,"<span class = 'notice'>You feel the bleeding of your wounds slow, then stop.</span>")
 
 /datum/reagent/biofoam/proc/remove_embedded(var/mob/living/carbon/human/M)
 	for(var/obj/item/organ/external/o in M.bad_external_organs)
@@ -120,12 +142,16 @@
 		mend_internal(M)
 		spawn(5)
 			M.add_chemical_effect(CE_PAINKILLER, 5)
+		if(volume <= metabolism)
+			holder.add_reagent(/datum/reagent/biofoampenaliser,max(max_dose,overdose/2))
 
 /datum/reagent/biofoam/overdose(var/mob/living/carbon/M)
 	if(istype(M,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
 		for(var/o in H.internal_organs)
 			var/obj/item/organ/O = o
+			if(!O)
+				continue
 			var/dam = rand((O.min_bruised_damage*0.5) ,(O.min_broken_damage*1.5))
 			O.damage += dam
 			if(dam < O.min_broken_damage)
@@ -133,7 +159,8 @@
 			else
 				dam = 1
 			to_chat(M,"<span class ='userdanger'>You feel [dam ? "your [O.name] collapse" : "immense pressure on your [O.name]" ].</span>")
-			holder.remove_reagent("biofoam",volume)
+			holder.remove_reagent(/datum/reagent/biofoam,volume)
+			holder.add_reagent(/datum/reagent/biofoampenaliser,overdose)
 
 /datum/reagent/hyperzine
 	name = "Hyperzine"
@@ -246,3 +273,40 @@
 
 	if(M.bodytemperature > target)
 		M.bodytemperature = max(target, M.bodytemperature - (50 * TEMPERATURE_DAMAGE_COEFFICIENT)) //A bit better than leporazine
+
+/datum/reagent/polypseudomorphine
+	name = "Polypseudomorphine"
+	description = "A powerful painkiller that can cause a loss of awareness in smaller doses, and full unconsciousness in higher doses. No more than 10u should be administered."
+	taste_description = "chalk"
+	reagent_state = LIQUID
+	color = "#C8A5DC"
+	scannable = 1
+	metabolism = REM*2
+	overdose = 10
+	flags = IGNORE_MOB_SIZE
+
+/datum/reagent/polypseudomorphine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	M.add_chemical_effect(CE_PAINKILLER, POLYPSEUDOMORPHINE_PAINKILL)
+	var/intensity = 3
+	var/quarterOD = overdose/4
+	if(volume > quarterOD*3)
+		intensity = 6
+	else if(volume > quarterOD*2)
+		intensity = 5
+	else if(volume > quarterOD)
+		intensity = 4
+	M.overlay_fullscreen("suppress",SUPPRESSION_FULLSCREEN_TYPE,intensity)
+
+/datum/reagent/polypseudomorphine/overdose(var/mob/living/carbon/M)
+	to_chat(M,"<span class = 'warning'>You feel sleepy...</span>")
+	M.sleeping = 30
+	M.Paralyse(6)
+	holder.remove_reagent(/datum/reagent/polypseudomorphine,volume)
+
+#undef POLYPSEUDOMORPHINE_PAINKILL
+#undef BIOFOAM_COST_STOPBLEED
+#undef BIOFOAM_COST_MENDBONE
+#undef BIOFOAM_COST_MENDINTERNAL
+#undef BIOFOAM_COST_MENDEXTERNAL
+#undef BIOFOAM_COST_FIXWOUNDS
+#undef BIOFOAM_COST_REMOVESHRAP

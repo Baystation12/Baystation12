@@ -483,23 +483,6 @@ cloak disrupt override
 
 	return perm
 
-/mob/living/carbon/human/proc/suppression_act(var/obj/item/projectile/P)
-	if(!client)
-		return
-	var/seconds_since_suppression = (world.time - time_last_suppressed)/10
-	if(seconds_since_suppression <= 1.5)
-		overlay_fullscreen("suppress",/obj/screen/fullscreen/oxy, 5)
-		//severe supression effects
-	else if(seconds_since_suppression <=4)
-		overlay_fullscreen("suppress",/obj/screen/fullscreen/oxy, 4)
-		//medium supression effects
-	else if(seconds_since_suppression <=8)
-		overlay_fullscreen("suppress",/obj/screen/fullscreen/oxy, 3)
-		//low supression effects
-	if(prob(SUPRESSION_SCREAM_CHANCE))
-		emote("painscream",AUDIBLE_MESSAGE)
-	time_last_suppressed = world.time
-
 /mob/living/carbon/human/attack_generic(var/mob/user, var/damage, var/attack_message,environment_smash)
 	if(!damage || !istype(user))
 		return

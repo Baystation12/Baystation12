@@ -41,7 +41,7 @@
 	damage = 40
 	//NOTE: Life() calls happen every two seconds, and life() reduces dizziness by one
 	var/stun_time = 4 //This is in ticks
-	var/suppress_intensity = 8
+	var/suppress_intensity = 7
 	var/disorient_time = 6
 
 /obj/item/projectile/SDSS_proj/on_hit(var/mob/living/carbon/human/L, var/blocked = 0, var/def_zone = null)

@@ -188,7 +188,7 @@
 	flags = IGNORE_MOB_SIZE
 
 /datum/reagent/paracetamol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.add_chemical_effect(CE_PAINKILLER, 30)
+	M.add_chemical_effect(CE_PAINKILLER, 25)
 
 /datum/reagent/paracetamol/overdose(var/mob/living/carbon/M, var/alien)
 	..()
@@ -206,7 +206,7 @@
 	flags = IGNORE_MOB_SIZE
 
 /datum/reagent/tramadol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.add_chemical_effect(CE_PAINKILLER, 100)
+	M.add_chemical_effect(CE_PAINKILLER, 80)
 
 /datum/reagent/tramadol/overdose(var/mob/living/carbon/M, var/alien)
 	..()
@@ -219,11 +219,11 @@
 	reagent_state = LIQUID
 	color = "#800080"
 	overdose = 20
-	metabolism = 0.02
+	metabolism = REM*1.5
 	flags = IGNORE_MOB_SIZE
 
 /datum/reagent/oxycodone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.add_chemical_effect(CE_PAINKILLER, 225)
+	M.add_chemical_effect(CE_PAINKILLER, 200)
 
 /datum/reagent/oxycodone/overdose(var/mob/living/carbon/M, var/alien)
 	..()
