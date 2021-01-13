@@ -1,6 +1,0 @@
-author: "juxtaposed9930"
-delete-after: True
-changes: 
-  - bugfix: "The admin shuttle can dock again."
-  - bugfix: "The new merc airlock doors work properly."
-  - bugfix: "The new merc shuttle can dock again."
