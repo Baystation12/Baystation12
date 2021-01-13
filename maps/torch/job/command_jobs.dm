@@ -385,26 +385,24 @@
 /datum/job/sea/get_description_blurb()
 	return "You are the Senior Enlisted Advisor. You are the highest enlisted person on the ship. You are directly subordinate to the CO. You advise them on enlisted concerns and provide expertise and advice to officers. You are responsible for ensuring discipline and good conduct among enlisted, as well as notifying officers of any issues and \"advising\" them on mistakes they make. You also handle various duties on behalf of the CO and XO. You are an experienced enlisted person, very likely equal only in experience to the CO and XO. You know the regulations better than anyone."
 
-/datum/job/bridgeofficer
-	title = "Bridge Officer"
+/datum/job/bridgewatchman
+	title = "Bridge Watchman"
 	department = "Support"
 	department_flag = SPT
 	total_positions = 3
 	spawn_positions = 3
-	supervisors = "the Commanding Officer and heads of staff"
+	supervisors = "the CO, XO and heads of staff"
 	selection_color = "#2f2f7f"
 	minimal_player_age = 0
 	economic_power = 8
 	minimum_character_age = list(SPECIES_HUMAN = 22)
 	ideal_character_age = 24
-	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/bridgeofficer
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/bridgewatchman
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/command/bridgeofficer/fleet
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/ec/o1,
-		/datum/mil_rank/fleet/o1
+		/datum/mil_rank/ec/e7,
 	)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
 	                    SKILL_PILOT       = SKILL_ADEPT)
@@ -432,4 +430,4 @@
 							 /datum/computer_file/program/deck_management)
 
 /datum/job/bridgeofficer/get_description_blurb()
-	return "You are a Bridge Officer. You are a very junior officer. You do not give orders of your own. You are subordinate to all of command. You handle matters on the bridge and report directly to the CO and XO. You take the Torch's helm and pilot the Aquila if needed. You monitor bridge computer programs and communications and report relevant information to command."
+	return "You are a Bridge Watchman. You are Senior Enlisted personnel aboard the Torch. You are subordinate to all of command. You handle matters on the bridge and report directly to the CO and XO. You take the Torch's helm and pilot the Aquila if needed. You monitor bridge computer programs and communications and report relevant information to command."

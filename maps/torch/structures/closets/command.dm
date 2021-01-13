@@ -108,7 +108,7 @@
 	)
 
 /obj/structure/closet/secure_closet/bridgeofficer
-	name = "bridge officer's locker"
+	name = "bridge watchman's locker"
 	req_access = list(access_bridge, access_keycard_auth)
 	closet_appearance = /decl/closet_appearance/secure_closet/torch/command/bo
 
@@ -123,8 +123,8 @@
 		/obj/item/weapon/material/clipboard,
 		/obj/item/weapon/folder/blue,
 		/obj/item/modular_computer/tablet/lease/preset/command,
-		/obj/item/device/radio/headset/bridgeofficer,
-		/obj/item/device/radio/headset/bridgeofficer/alt,
+		/obj/item/device/radio/headset/bridgewatchman,
+		/obj/item/device/radio/headset/bridgewatchman/alt,
 		/obj/item/weapon/storage/belt/general,
 		/obj/item/weapon/material/knife/folding/swiss/officer,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack, /obj/item/weapon/storage/backpack/satchel/grey)),

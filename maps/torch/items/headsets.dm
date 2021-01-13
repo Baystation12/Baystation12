@@ -95,15 +95,15 @@
 	icon_state = "com_headset_alt"
 	item_state = "com_headset_alt"
 
-/obj/item/device/radio/headset/bridgeofficer
-	name = "bridge officer's headset"
+/obj/item/device/radio/headset/bridgewatchman
+	name = "bridge watchman's headset"
 	desc = "A headset with access to the command, engineering and exploration channels."
 	icon_state = "com_headset"
 	item_state = "headset"
-	ks1type = /obj/item/device/encryptionkey/bridgeofficer
+	ks1type = /obj/item/device/encryptionkey/bridgewatchman
 
-/obj/item/device/radio/headset/bridgeofficer/alt
-	name = "bridge officer's bowman headset"
+/obj/item/device/radio/headset/bridgewatchman/alt
+	name = "bridge watchman's bowman headset"
 	icon_state = "com_headset_alt"
 	item_state = "com_headset_alt"
 	max_keys = 4

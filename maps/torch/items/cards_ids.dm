@@ -137,8 +137,8 @@
 	detail_color = COLOR_COMMAND_BLUE
 	extra_details = list("onegoldstripe")
 
-/obj/item/weapon/card/id/torch/crew/bridgeofficer
-	job_access_type = /datum/job/bridgeofficer
+/obj/item/weapon/card/id/torch/crew/bridgewatchman
+	job_access_type = /datum/job/bridgewatchman
 	detail_color = COLOR_COMMAND_BLUE
 
 /obj/item/weapon/card/id/torch/crew/pathfinder

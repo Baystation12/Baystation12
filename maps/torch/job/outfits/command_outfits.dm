@@ -120,15 +120,10 @@
 	id_types = list(/obj/item/weapon/card/id/torch/crew/sea)
 	pda_type = /obj/item/modular_computer/pda/heads
 
-/decl/hierarchy/outfit/job/torch/crew/command/bridgeofficer
-	name = OUTFIT_JOB_NAME("Bridge Officer")
-	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/command
+/decl/hierarchy/outfit/job/torch/crew/command/bridgewatchman
+	name = OUTFIT_JOB_NAME("Bridge Watchman")
+	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/command
 	shoes = /obj/item/clothing/shoes/dutyboots
-	id_types = list(/obj/item/weapon/card/id/torch/crew/bridgeofficer)
+	id_types = list(/obj/item/weapon/card/id/torch/crew/bridgewatchman)
 	pda_type = /obj/item/modular_computer/pda/heads
-	l_ear = /obj/item/device/radio/headset/bridgeofficer
-
-/decl/hierarchy/outfit/job/torch/crew/command/bridgeofficer/fleet
-	name = OUTFIT_JOB_NAME("Bridge Officer - Fleet")
-	uniform = /obj/item/clothing/under/solgov/utility/fleet/command
-	shoes = /obj/item/clothing/shoes/dutyboots
+	l_ear = /obj/item/device/radio/headset/bridgewatchman
