@@ -4,7 +4,7 @@
 /area/template_noop)
 "c" = (
 /obj/machinery/door/unpowered/simple/uranium,
-/turf/template_noop,
+/turf/simulated/floor/tiled,
 /area/template_noop)
 "d" = (
 /turf/simulated/wall/uranium,

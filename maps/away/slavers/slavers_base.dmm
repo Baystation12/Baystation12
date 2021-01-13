@@ -4307,10 +4307,6 @@
 	},
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/maint)
-"kV" = (
-/obj/machinery/door/airlock/external,
-/turf/space,
-/area/slavers_base/maint)
 "kW" = (
 /obj/effect/overmap/visitable/sector/slavers_base,
 /turf/space,
@@ -19632,7 +19628,7 @@ gI
 kO
 kH
 gI
-kV
+kO
 ag
 ag
 ag
@@ -19834,7 +19830,7 @@ kL
 kP
 kS
 kU
-kV
+kO
 ag
 ag
 ag
