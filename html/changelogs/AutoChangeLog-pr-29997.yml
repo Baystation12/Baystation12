@@ -1,0 +1,5 @@
+author: "Mucker"
+delete-after: True
+changes: 
+  - bugfix: "Fix mob spawner copying sometimes not copying the mob list."
+  - bugfix: "Fix spawners putting mobs in walls or on occupied turfs."
