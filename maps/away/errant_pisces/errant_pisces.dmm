@@ -5510,7 +5510,6 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/aft_hallway)
 "nu" = (
-/obj/machinery/door/airlock,
 /obj/machinery/door/firedoor,
 /obj/structure/cable/green{
 	d1 = 4;
@@ -5734,7 +5733,6 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/aft_hallway)
 "nI" = (
-/obj/machinery/door/airlock,
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -5814,11 +5812,6 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/aft_hallway)
 "nS" = (
-/turf/simulated/floor/tiled,
-/area/errant_pisces/aft_hallway)
-"nT" = (
-/obj/machinery/door/airlock,
-/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/aft_hallway)
 "nU" = (
@@ -7023,6 +7016,14 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/errant_pisces/head_m)
+"Ph" = (
+/obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/multi_tile{
+	dir = 4;
+	name = "Airlock"
+	},
+/turf/simulated/floor/tiled,
+/area/errant_pisces/aft_hallway)
 "Ti" = (
 /obj/machinery/computer/modular{
 	dir = 4
@@ -25725,7 +25726,7 @@ jz
 jz
 jz
 nu
-nT
+Ph
 mz
 mz
 aa
@@ -33401,7 +33402,7 @@ hF
 hF
 hF
 nI
-nT
+Ph
 oi
 oi
 oi
