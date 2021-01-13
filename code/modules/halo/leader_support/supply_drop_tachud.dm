@@ -22,3 +22,6 @@
 
 /obj/item/clothing/glasses/hud/tactical/covenant
 	support_pad_type = /obj/item/support_pad/covenant
+	
+/obj/item/clothing/glasses/hud/tactical/kigyar_nv
+	support_pad_type = /obj/item/support_pad/covenant
