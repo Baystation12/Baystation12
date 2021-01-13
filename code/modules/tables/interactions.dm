@@ -64,16 +64,12 @@
 	return 1
 
 
-/obj/structure/table/MouseDrop_T(obj/O as obj, mob/user as mob)
-
-	if ((!( istype(O, /obj/item/weapon) ) || user.get_active_hand() != O))
-		return ..()
-	if(isrobot(user))
+/obj/structure/table/MouseDrop_T(mob/target, mob/user)
+	if (isrobot(user))
 		return
-	user.unequip_item()
-	if (O.loc != src.loc)
-		step(O, get_dir(O, src))
-	return
+	if (target.loc != loc)
+		step(target, get_dir(target, loc))
+	..()
 
 /obj/structure/table/attackby(obj/item/W, mob/user, var/click_params)
 	if (!W) return

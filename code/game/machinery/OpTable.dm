@@ -99,13 +99,10 @@
 		return 0
 
 
-/obj/machinery/optable/MouseDrop_T(obj/O as obj, mob/user as mob)
-	if ((!( istype(O, /obj/item/weapon) ) || user.get_active_hand() != O))
-		return
-	if(!user.unequip_item())
-		return
-	if (O.loc != src.loc)
-		step(O, get_dir(O, src))
+/obj/machinery/optable/MouseDrop_T(mob/target, mob/user)
+	if (target.loc != loc)
+		step(target, get_dir(target, loc))
+	..()
 
 /obj/machinery/optable/proc/check_victim()
 	if(!victim || !victim.lying || victim.loc != loc)

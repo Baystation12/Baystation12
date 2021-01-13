@@ -1604,10 +1604,6 @@
 		if(!check_rights(R_SPAWN))	return
 		return create_object(usr)
 
-	else if(href_list["quick_create_object"])
-		if(!check_rights(R_SPAWN))	return
-		return quick_create_object(usr)
-
 	else if(href_list["create_turf"])
 		if(!check_rights(R_SPAWN))	return
 		return create_turf(usr)

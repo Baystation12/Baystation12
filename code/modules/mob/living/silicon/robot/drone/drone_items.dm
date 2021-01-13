@@ -435,46 +435,21 @@
 	if(!module)
 		module = new /obj/item/weapon/robot_module/drone(src)
 
-	var/dat = "<HEAD><TITLE>Drone modules</TITLE></HEAD><BODY>\n"
-	dat += {"
-	<B>Activated Modules</B>
-	<BR>
-	Module 1: [module_state_1 ? "<A HREF=?src=\ref[src];mod=\ref[module_state_1]>[module_state_1]<A>" : "No Module"]<BR>
-	Module 2: [module_state_2 ? "<A HREF=?src=\ref[src];mod=\ref[module_state_2]>[module_state_2]<A>" : "No Module"]<BR>
-	Module 3: [module_state_3 ? "<A HREF=?src=\ref[src];mod=\ref[module_state_3]>[module_state_3]<A>" : "No Module"]<BR>
-	<BR>
-	<B>Installed Modules</B><BR><BR>"}
-
-
-	var/tools = "<B>Tools and devices</B><BR>"
-	var/resources = "<BR><B>Resources</B><BR>"
-
+	var/window = {"
+	<b>Activated Modules</b><br>
+	Module 1: [module_state_1 ? "<a href=?src=\ref[src];mod=\ref[module_state_1]>[module_state_1]<a>" : "No Module"]<br>
+	Module 2: [module_state_2 ? "<a href=?src=\ref[src];mod=\ref[module_state_2]>[module_state_2]<a>" : "No Module"]<br>
+	Module 3: [module_state_3 ? "<a href=?src=\ref[src];mod=\ref[module_state_3]>[module_state_3]<a>" : "No Module"]<br>
+	<br><b>Available Modules</b><br>"}
 	for (var/O in module.equipment)
-
-		var/module_string = ""
-
 		if (!O)
-			module_string += text("<B>Resource depleted</B><BR>")
-		else if(activated(O))
-			module_string += text("[O]: <B>Activated</B><BR>")
+			window += "<br><b>Depleted Resource</b>"
 		else
-			module_string += text("[O]: <A HREF=?src=\ref[src];act=\ref[O]>Activate</A><BR>")
-
-		if((istype(O,/obj/item/weapon) || istype(O,/obj/item/device)) && !(istype(O,/obj/item/stack/cable_coil)))
-			tools += module_string
-		else
-			resources += module_string
-
-	dat += tools
-
+			window += "<br>[O]: [activated(O) ? "<b>Activated</b>" : "<a href='?src=\ref[src];act=\ref[O]'>Activate</a>"]"
 	if (emagged)
 		if (!module.emag)
-			dat += text("<B>Resource depleted</B><BR>")
-		else if(activated(module.emag))
-			dat += text("[module.emag]: <B>Activated</B><BR>")
+			window += "<br><b>Depleted Resource</b>"
 		else
-			dat += text("[module.emag]: <A HREF=?src=\ref[src];act=\ref[module.emag]>Activate</A><BR>")
-
-	dat += resources
-
-	show_browser(src, dat, "window=robotmod")
+			window += "<br>[module.emag]: [activated(module.emag) ? "<b>Activated</b>" : "<a href='?src=\ref[src];act=\ref[module.emag]'>Activate</a>"]"
+	window = strip_improper("<head><title>Drone modules</title></head><tt>[JOINTEXT(window)]</tt>")
+	show_browser(src, window, "window=robotmod")

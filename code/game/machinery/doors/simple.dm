@@ -173,18 +173,7 @@
 			health = between(health, health + used*DOOR_REPAIR_AMOUNT, maxhealth)
 		return
 
-	//psa to whoever coded this, there are plenty of objects that need to call attack() on doors without bludgeoning them.
-	if(src.density && istype(I, /obj/item/weapon) && user.a_intent == I_HURT && !istype(I, /obj/item/weapon/card))
-		var/obj/item/weapon/W = I
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		if(W.damtype == BRUTE || W.damtype == BURN)
-			user.do_attack_animation(src)
-			if(W.force < min_force)
-				user.visible_message("<span class='danger'>\The [user] hits \the [src] with \the [W] with no visible effect.</span>")
-			else
-				user.visible_message("<span class='danger'>\The [user] forcefully strikes \the [src] with \the [W]!</span>")
-				playsound(src.loc, hitsound, 100, 1)
-				take_damage(W.force)
+	if (check_force(I, user))
 		return
 
 	if(src.operating) return
