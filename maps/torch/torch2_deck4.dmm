@@ -188,7 +188,7 @@
 /obj/machinery/space_heater,
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/light/small{
-	dir = 4;
+	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/fourthdeck/starboard)
@@ -2877,6 +2877,10 @@
 /obj/structure/grille,
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/aft)
+"jQ" = (
+/obj/effect/shuttle_landmark/admin/out,
+/turf/space,
+/area/space)
 "jX" = (
 /obj/machinery/door/blast/regular/escape_pod,
 /turf/simulated/floor/reinforced/airless,
@@ -40887,7 +40891,7 @@ aa
 aa
 aa
 aa
-aa
+jQ
 TX
 UT
 QM
