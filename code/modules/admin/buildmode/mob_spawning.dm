@@ -272,10 +272,6 @@ GLOBAL_LIST_INIT(mob_spawners, list())
 
 	if (pa["ctrl"])
 		if (pa["left"])
-			if (!spawner)
-				to_chat(user, SPAN_WARNING("There is no spawner in this area to copy from!"))
-				return
-
 			copied_spawner = spawner.copy()
 			to_chat(user, "Spawner from area [current_area] copied.")
 

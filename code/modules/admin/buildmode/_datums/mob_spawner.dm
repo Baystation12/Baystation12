@@ -15,7 +15,7 @@
 /datum/mob_spawner/proc/copy()
 	var/list/contents = list()
 
-	contents["mobs"] = mobs
+	contents["mobs"] = mobs.Copy()
 	contents["interval"] = interval
 	contents["variation"] = variation
 	contents["message"] = messages
@@ -31,7 +31,8 @@
 	if(contents.len == 0)
 		return
 
-	mobs = contents["mobs"]
+	var/list/mob_list = contents["mobs"]
+	mobs = mob_list.Copy()
 	interval = contents["interval"]
 	variation = contents["variation"]
 	messages = contents["message"]
@@ -53,7 +54,10 @@
 		var/mob/living/M
 		for (var/i = 1; i <= 10; i++)
 			if (radius == -1)
-				T = pick_area_turf(area)
+				T = pick_area_turf(area, list(/proc/not_turf_contains_dense_objects))
+
+				if (!T) //no open spaces to spawn on
+					T = pick_area_turf(area)
 			else
 				var/list/turfs = trange(radius, center)
 				T = pick(turfs)
