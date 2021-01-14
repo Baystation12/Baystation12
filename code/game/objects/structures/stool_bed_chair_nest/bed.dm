@@ -289,7 +289,7 @@
 		else
 			attach_iv(buckled_mob, usr)
 		return
-	if(ishuman(over_object))
+	if(over_object != usr && ishuman(over_object))
 		if(user_buckle_mob(over_object, usr))
 			attach_iv(buckled_mob, usr)
 			return
