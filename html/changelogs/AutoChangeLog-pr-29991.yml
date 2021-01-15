@@ -1,4 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - tweak: "Pumps, valves, and other interactable pipe stuff now render above catwalks so they're easier to access."
