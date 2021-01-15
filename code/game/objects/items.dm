@@ -378,7 +378,7 @@ var/list/global/slot_flags_enumeration = list(
 		if(!H.slot_is_accessible(slot, src, _user))
 			return 0
 
-	
+
 	if (!force && istype(src, /obj/item/clothing))
 		var/obj/item/clothing/SC = src
 		var/bulky = SC.get_bulky_coverage() //disallow bulky things from covering one another
@@ -549,6 +549,8 @@ var/list/global/slot_flags_enumeration = list(
 	return loc
 
 /obj/item/proc/eyestab(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+	if (user.a_intent == I_HELP)
+		return FALSE
 
 	var/mob/living/carbon/human/H = M
 	if(istype(H))

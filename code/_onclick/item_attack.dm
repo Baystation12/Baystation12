@@ -69,6 +69,8 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		return 0
 	if(M == user && user.a_intent != I_HURT)
 		return 0
+	if (user.a_intent == I_HELP)
+		return FALSE
 
 	/////////////////////////
 
@@ -101,4 +103,3 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	if(MUTATION_HULK in user.mutations)
 		power *= 2
 	return target.hit_with_weapon(src, user, power, hit_zone)
-
