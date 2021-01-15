@@ -22,6 +22,7 @@
 	var/basestate = "window"
 	var/reinf_basestate = "rwindow"
 	var/paint_color
+	var/base_color // The windows initial color. Used for resetting purposes.
 	rad_resistance_modifier = 0.5
 	blend_objects = list(/obj/machinery/door, /turf/simulated/wall) // Objects which to blend with
 	noblend_objects = list(/obj/machinery/door/window)
@@ -65,6 +66,8 @@
 		set_anchored(FALSE)
 		construction_state = 0
 
+	base_color = get_color()
+
 	update_connections(1)
 	update_icon()
 	update_nearby_tiles(need_rebuild=1)
@@ -99,7 +102,14 @@
 		to_chat(user, SPAN_NOTICE("The glass is stained with paint."))
 
 /obj/structure/window/get_color()
-	return paint_color ? paint_color : ..()
+	if (paint_color)
+		return paint_color
+	else if (material?.icon_colour)
+		return material.icon_colour
+	else if (base_color)
+		return base_color
+	else
+		return ..()
 
 /obj/structure/window/set_color(color)
 	paint_color = color
@@ -536,10 +546,10 @@
 		return
 	if(opacity)
 		animate(src, color=get_color(), time=5)
-		set_opacity(0)
+		set_opacity(FALSE)
 	else
 		animate(src, color=GLASS_COLOR_TINTED, time=5)
-		set_opacity(1)
+		set_opacity(TRUE)
 
 /obj/structure/window/proc/is_on_frame()
 	if(locate(/obj/structure/wall_frame) in loc)
