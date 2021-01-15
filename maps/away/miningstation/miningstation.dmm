@@ -16,7 +16,7 @@
 /area/miningstation/hangar)
 "af" = (
 /obj/machinery/door/blast/regular,
-/turf/space,
+/turf/simulated/floor/tiled/monotile,
 /area/miningstation/hangar)
 "ag" = (
 /turf/simulated/floor/tiled/monotile,

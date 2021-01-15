@@ -2052,7 +2052,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
-/turf/space,
+/turf/simulated/floor/plating,
 /area/lost_supply_base/supply)
 "fQ" = (
 /obj/structure/door_assembly,
