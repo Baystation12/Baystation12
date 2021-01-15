@@ -29,15 +29,19 @@
 /obj/item/clothing/suit/space/rig/light
 	name = "suit"
 	breach_threshold = 18 //comparable to voidsuits
+	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC)
 
 /obj/item/clothing/gloves/rig/light
 	name = "gloves"
+	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC)
 
 /obj/item/clothing/shoes/magboots/rig/light
 	name = "shoes"
+	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC)
 
 /obj/item/clothing/head/helmet/space/rig/light
 	name = "hood"
+	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC)
 
 /obj/item/weapon/rig/light/hacker
 	name = "cybersuit control module"
@@ -155,9 +159,11 @@
 /obj/item/clothing/gloves/rig/light/ninja
 	name = "insulated gloves"
 	siemens_coefficient = 0
+	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC)
 
 /obj/item/clothing/suit/space/rig/light/ninja
 	breach_threshold = 38 //comparable to regular hardsuits
+	species_restricted = list(SPECIES_HUMAN,SPECIES_IPC)
 
 /obj/item/weapon/rig/light/stealth
 	name = "stealth suit control module"
