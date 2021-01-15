@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - admin: "Players joining submap roles no longer trigger debug logs."
