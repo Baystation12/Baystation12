@@ -8,6 +8,7 @@
 	level = 1
 	dir = SOUTH
 	initialize_directions = SOUTH|NORTH
+	layer = ABOVE_CATWALK_LAYER
 
 	var/open = 0
 	var/openDuringInit = 0

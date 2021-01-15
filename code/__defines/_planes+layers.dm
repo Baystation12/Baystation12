@@ -98,21 +98,22 @@ What is the naming convention for planes or layers?
 	#define EXPOSED_WIRE_LAYER          2.07
 	#define EXPOSED_WIRE_TERMINAL_LAYER 2.08
 	#define CATWALK_LAYER               2.09
-	#define BLOOD_LAYER                 2.10
-	#define MOUSETRAP_LAYER             2.11
-	#define PLANT_LAYER                 2.12
-	#define AO_LAYER                    2.13
+	#define ABOVE_CATWALK_LAYER         2.10
+	#define BLOOD_LAYER                 2.11
+	#define MOUSETRAP_LAYER             2.12
+	#define PLANT_LAYER                 2.13
+	#define AO_LAYER                    2.14
 	//HIDING MOB
-	#define HIDING_MOB_LAYER            2.14
-	#define SHALLOW_FLUID_LAYER         2.15
-	#define MOB_SHADOW_LAYER            2.16
+	#define HIDING_MOB_LAYER            2.15
+	#define SHALLOW_FLUID_LAYER         2.16
+	#define MOB_SHADOW_LAYER            2.17
 	//OBJ
-	#define BELOW_DOOR_LAYER            2.17
-	#define OPEN_DOOR_LAYER             2.18
-	#define BELOW_TABLE_LAYER           2.19
-	#define TABLE_LAYER                 2.20
-	#define BELOW_OBJ_LAYER             2.21
-	#define STRUCTURE_LAYER             2.22
+	#define BELOW_DOOR_LAYER            2.18
+	#define OPEN_DOOR_LAYER             2.19
+	#define BELOW_TABLE_LAYER           2.20
+	#define TABLE_LAYER                 2.21
+	#define BELOW_OBJ_LAYER             2.22
+	#define STRUCTURE_LAYER             2.23
 	// OBJ_LAYER                        3
 	#define ABOVE_OBJ_LAYER             3.01
 	#define CLOSED_DOOR_LAYER           3.02
