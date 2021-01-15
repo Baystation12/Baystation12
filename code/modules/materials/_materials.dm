@@ -35,6 +35,11 @@
 	if(material)
 		return material.name
 
+/obj/proc/get_material_display_name()
+	var/material/material = get_material()
+	if (material)
+		return material.display_name
+
 // Material definition and procs follow.
 /material
 	var/name	                          // Unique name for use in indexing the list.
