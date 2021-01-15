@@ -118,14 +118,14 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 /datum/event/exo_awakening/start()
 	var/torch_players_present = FALSE
 	var/list/sites = list() //a list of sites that have players present
+	var/list/players = list()
 
 	for (var/area/A in exoplanet_areas)
-		players_on_site = list()
 		var/mob/M
 		for (var/i = length(GLOB.player_list) to 1 step -1)
 			M = GLOB.player_list[i]
 			if (M.stat != DEAD && (M.z in GetConnectedZlevels(A.z)))
-				players_on_site += M
+				players += M
 
 				if (get_crewmember_record(M.real_name || M.name))
 					torch_players_present = TRUE
@@ -133,10 +133,11 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 					chosen_planet = map_sectors["[A.z]"]
 					affecting_z = GetConnectedZlevels(A.z)
 
-		if (length(players_on_site))
+		if (length(players))
 			sites += A
+			players_on_site[A] = players
 
-		if (torch_players_present && length(players_on_site) >= required_players_count)
+		if (torch_players_present && (length(players_on_site[A]) >= required_players_count))
 			break
 
 		torch_players_present = FALSE
@@ -153,7 +154,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 		chosen_planet = map_sectors["[chosen_area.z]"]
 		affecting_z = GetConnectedZlevels(chosen_area.z)
 
-	for (var/mob/M in players_on_site)
+	for (var/mob/M in players_on_site[chosen_area])
 		if (severity > EVENT_LEVEL_MODERATE)
 			to_chat(M, SPAN_DANGER(chosen_mob_list.arrival_message))
 		else
@@ -195,7 +196,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 		for (var/i = 1 to 5)
 
 			if (prob(chosen_mob_list.spawn_near_chance))
-				var/mob/M = pick(players_on_site)
+				var/mob/M = pick(players_on_site[chosen_area])
 				var/turf/MT = get_turf(M)
 				if(MT)
 					T = pick(trange(10, MT) - trange(7, MT))
