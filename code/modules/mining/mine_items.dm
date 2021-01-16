@@ -179,10 +179,10 @@
 
 /obj/item/stack/flag/green
 	light_color = COLOR_LIME
-	
+
 /obj/item/stack/flag/blue
 	light_color = COLOR_BLUE
-	
+
 /obj/item/stack/flag/teal
 	light_color = COLOR_TEAL
 
@@ -239,7 +239,7 @@
 		addon.layer = ABOVE_LIGHTING_LAYER
 		addon.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 		overlays += addon
-		set_light(0.2, 0.1, 1) // Very dim so the rest of the thingie is barely visible - if the turf is completely dark, you can't see anything on it, no matter what
+		set_light(0.5, 0.5, 3) 
 	else
 		pixel_x = rand(-randpixel, randpixel)
 		pixel_y = rand(-randpixel, randpixel)
