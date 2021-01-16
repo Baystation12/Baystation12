@@ -6,9 +6,9 @@
 	item_state = "claymore"
 	slot_flags = SLOT_BELT
 	w_class = ITEM_SIZE_LARGE
-	force_divisor = 0.5 // 30 when wielded with hardnes 60 (steel)
+	force_multiplier = 0.5 // 30 when wielded with hardnes 60 (steel)
 	armor_penetration = 10
-	thrown_force_divisor = 0.5 // 10 when thrown with weight 20 (steel)
+	thrown_force_multiplier = 0.5 // 10 when thrown with weight 20 (steel)
 	sharp = TRUE
 	edge = TRUE
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
@@ -21,8 +21,8 @@
 	max_force = 10
 	edge = FALSE
 	sharp = FALSE
-	force_divisor = 0.2
-	thrown_force_divisor = 0.2
+	force_multiplier = 0.2
+	thrown_force_multiplier = 0.2
 	worth_multiplier = 15
 
 /obj/item/weapon/material/sword/katana
@@ -38,8 +38,8 @@
 	max_force = 10
 	edge = FALSE
 	sharp = FALSE
-	force_divisor = 0.2
-	thrown_force_divisor = 0.2
+	force_multiplier = 0.2
+	thrown_force_multiplier = 0.2
 
 /obj/item/weapon/material/sword/katana/vibro
 	name = "vibrokatana"
@@ -50,4 +50,3 @@
 /obj/item/weapon/material/sword/katana/vibro/equipped(mob/user, slot)
 	if(slot == slot_l_hand || slot == slot_r_hand)
 		playsound(src, 'sound/weapons/katana_out.wav', 50, 1, -5)
-	

@@ -3,16 +3,16 @@
 	desc = "A knife blade. Unusable as a weapon without a grip."
 	icon = 'icons/obj/buildingobject.dmi'
 	icon_state = "butterfly2"
-	force_divisor = 0.1
-	thrown_force_divisor = 0.1
+	force_multiplier = 0.1
+	thrown_force_multiplier = 0.1
 
 /obj/item/weapon/material/butterflyhandle
 	name = "concealed knife grip"
 	desc = "A plasteel grip with screw fittings for a blade."
 	icon = 'icons/obj/buildingobject.dmi'
 	icon_state = "butterfly1"
-	force_divisor = 0.1
-	thrown_force_divisor = 0.1
+	force_multiplier = 0.1
+	thrown_force_multiplier = 0.1
 
 /decl/crafting_stage/balisong_blade
 	begins_with_object_type = /obj/item/weapon/material/butterflyhandle

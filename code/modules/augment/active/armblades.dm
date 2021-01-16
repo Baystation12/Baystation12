@@ -7,7 +7,7 @@
 	desc = "A handy utility blade for the discerning augmentee. Warranty void if used for cutting."
 	base_parry_chance = 30
 	unbreakable = 1
-	force_divisor = 0.2
+	force_multiplier = 0.2
 	sharp = TRUE
 	edge = TRUE
 	attack_verb = list("stabbed", "sliced", "cut")
@@ -28,7 +28,7 @@
 	name = "combat claws"
 	desc = "These do not grow back."
 	base_parry_chance = 40
-	force_divisor = 0.3
+	force_multiplier = 0.3
 
 //Alternate look
 /obj/item/organ/internal/augment/active/simple/wolverine
