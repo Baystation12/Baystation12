@@ -85,17 +85,18 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 		hud_images = null
 	return ..()
 
-/mob/observer/ghost/OnSelfTopic(href_list)
-	if (href_list["track"])
-		if(istype(href_list["track"],/mob))
-			var/mob/target = locate(href_list["track"]) in SSmobs.mob_list
-			if(target)
-				start_following(target)
-		else
-			var/atom/target = locate(href_list["track"])
-			if(istype(target))
-				start_following(target)
-		return TOPIC_HANDLED
+/mob/observer/ghost/OnSelfTopic(href_list, topic_status)
+	if (topic_status == STATUS_INTERACTIVE)
+		if (href_list["track"])
+			if(istype(href_list["track"],/mob))
+				var/mob/target = locate(href_list["track"]) in SSmobs.mob_list
+				if(target)
+					start_following(target)
+			else
+				var/atom/target = locate(href_list["track"])
+				if(istype(target))
+					start_following(target)
+			return TOPIC_HANDLED
 	return ..()
 
 /*

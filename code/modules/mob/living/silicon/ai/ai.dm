@@ -402,39 +402,40 @@ var/list/ai_verbs_default = list(
 		view_core()
 	..()
 
-/mob/living/silicon/ai/OnSelfTopic(href_list)
-	if (href_list["mach_close"]) // Overrides behavior handled in the ..()
-		if (href_list["mach_close"] == "aialerts")
-			viewalerts = 0
-		return ..() // Does further work on this key
+/mob/living/silicon/ai/OnSelfTopic(href_list, topic_status)
+	if (topic_status == STATUS_INTERACTIVE)
+		if (href_list["mach_close"]) // Overrides behavior handled in the ..()
+			if (href_list["mach_close"] == "aialerts")
+				viewalerts = 0
+			return ..() // Does further work on this key
 
-	if (href_list["switchcamera"])
-		switchCamera(locate(href_list["switchcamera"])) in cameranet.cameras
-		return TOPIC_HANDLED
+		if (href_list["switchcamera"])
+			switchCamera(locate(href_list["switchcamera"])) in cameranet.cameras
+			return TOPIC_HANDLED
 
-	if (href_list["showalerts"])
-		open_subsystem(/datum/nano_module/alarm_monitor/all)
-		return TOPIC_HANDLED
+		if (href_list["showalerts"])
+			open_subsystem(/datum/nano_module/alarm_monitor/all)
+			return TOPIC_HANDLED
 
-	//Carn: holopad requests
-	if (href_list["jumptoholopad"])
-		var/obj/machinery/hologram/holopad/H = locate(href_list["jumptoholopad"])
-		if(stat == CONSCIOUS)
-			if(H)
-				H.attack_ai(src) //may as well recycle
+		//Carn: holopad requests
+		if (href_list["jumptoholopad"])
+			var/obj/machinery/hologram/holopad/H = locate(href_list["jumptoholopad"])
+			if(stat == CONSCIOUS)
+				if(H)
+					H.attack_ai(src) //may as well recycle
+				else
+					to_chat(src, "<span class='notice'>Unable to locate the holopad.</span>")
+			return TOPIC_HANDLED
+
+		if (href_list["track"])
+			var/mob/target = locate(href_list["track"]) in SSmobs.mob_list
+			var/mob/living/carbon/human/H = target
+
+			if(!istype(H) || (html_decode(href_list["trackname"]) == H.get_visible_name()) || (html_decode(href_list["trackname"]) == H.get_id_name()))
+				ai_actual_track(target)
 			else
-				to_chat(src, "<span class='notice'>Unable to locate the holopad.</span>")
-		return TOPIC_HANDLED
-
-	if (href_list["track"])
-		var/mob/target = locate(href_list["track"]) in SSmobs.mob_list
-		var/mob/living/carbon/human/H = target
-
-		if(!istype(H) || (html_decode(href_list["trackname"]) == H.get_visible_name()) || (html_decode(href_list["trackname"]) == H.get_id_name()))
-			ai_actual_track(target)
-		else
-			to_chat(src, "<span class='warning'>System error. Cannot locate [html_decode(href_list["trackname"])].</span>")
-		return TOPIC_HANDLED
+				to_chat(src, "<span class='warning'>System error. Cannot locate [html_decode(href_list["trackname"])].</span>")
+			return TOPIC_HANDLED
 
 	return ..()
 

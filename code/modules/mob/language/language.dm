@@ -239,7 +239,7 @@
 
 	show_browser(src, dat, "window=checklanguage")
 
-/mob/living/OnSelfTopic(href_list)
+/mob/living/OnSelfTopic(href_list, topic_status)
 	if(href_list["default_lang"])
 		if(href_list["default_lang"] == "reset")
 

@@ -403,19 +403,12 @@
 	for(var/atom/E in EMP)
 		E.emp_act(severity)
 
-/mob/living/carbon/human/OnSelfTopic(href_list)
+/mob/living/carbon/human/OnSelfTopic(href_list, topic_status)
 	if (href_list["lookitem"])
 		var/obj/item/I = locate(href_list["lookitem"])
 		if(I)
 			src.examinate(I)
 			return TOPIC_HANDLED
-
-	if (href_list["lookmob"])
-		var/mob/M = locate(href_list["lookmob"])
-		if(M)
-			src.examinate(M)
-			return TOPIC_HANDLED
-
 	return ..()
 
 /mob/living/carbon/human/CanUseTopic(mob/user, datum/topic_state/state, href_list)

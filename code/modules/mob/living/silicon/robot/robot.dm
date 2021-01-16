@@ -796,69 +796,70 @@
 	show_browser(src, dat, "window=robotmod")
 
 
-/mob/living/silicon/robot/OnSelfTopic(href_list)
-	if (href_list["showalerts"])
-		open_subsystem(/datum/nano_module/alarm_monitor/all)
-		return TOPIC_HANDLED
-
-	if (href_list["mod"])
-		var/obj/item/O = locate(href_list["mod"])
-		if (istype(O) && (O.loc == src))
-			O.attack_self(src)
-		return TOPIC_HANDLED
-
-	if (href_list["act"])
-		var/obj/item/O = locate(href_list["act"])
-		if (!istype(O))
+/mob/living/silicon/robot/OnSelfTopic(href_list, topic_status)
+	if (topic_status == STATUS_INTERACTIVE)
+		if (href_list["showalerts"])
+			open_subsystem(/datum/nano_module/alarm_monitor/all)
 			return TOPIC_HANDLED
 
-		if(!((O in module.equipment) || (O == src.module.emag)))
+		if (href_list["mod"])
+			var/obj/item/O = locate(href_list["mod"])
+			if (istype(O) && (O.loc == src))
+				O.attack_self(src)
 			return TOPIC_HANDLED
 
-		if(activated(O))
-			to_chat(src, "Already activated")
-			return TOPIC_HANDLED
-		if(!module_state_1)
-			module_state_1 = O
-			O.hud_layerise()
-			O.forceMove(src)
-			if(istype(module_state_1,/obj/item/borg/sight))
-				sight_mode |= module_state_1:sight_mode
-		else if(!module_state_2)
-			module_state_2 = O
-			O.hud_layerise()
-			O.forceMove(src)
-			if(istype(module_state_2,/obj/item/borg/sight))
-				sight_mode |= module_state_2:sight_mode
-		else if(!module_state_3)
-			module_state_3 = O
-			O.hud_layerise()
-			O.forceMove(src)
-			if(istype(module_state_3,/obj/item/borg/sight))
-				sight_mode |= module_state_3:sight_mode
-		else
-			to_chat(src, "You need to disable a module first!")
-		installed_modules()
-		return TOPIC_HANDLED
+		if (href_list["act"])
+			var/obj/item/O = locate(href_list["act"])
+			if (!istype(O))
+				return TOPIC_HANDLED
 
-	if (href_list["deact"])
-		var/obj/item/O = locate(href_list["deact"])
-		if(activated(O))
-			if(module_state_1 == O)
-				module_state_1 = null
-				O.forceMove(null)
-			else if(module_state_2 == O)
-				module_state_2 = null
-				O.forceMove(null)
-			else if(module_state_3 == O)
-				module_state_3 = null
-				O.forceMove(null)
+			if(!((O in module.equipment) || (O == src.module.emag)))
+				return TOPIC_HANDLED
+
+			if(activated(O))
+				to_chat(src, "Already activated")
+				return TOPIC_HANDLED
+			if(!module_state_1)
+				module_state_1 = O
+				O.hud_layerise()
+				O.forceMove(src)
+				if(istype(module_state_1,/obj/item/borg/sight))
+					sight_mode |= module_state_1:sight_mode
+			else if(!module_state_2)
+				module_state_2 = O
+				O.hud_layerise()
+				O.forceMove(src)
+				if(istype(module_state_2,/obj/item/borg/sight))
+					sight_mode |= module_state_2:sight_mode
+			else if(!module_state_3)
+				module_state_3 = O
+				O.hud_layerise()
+				O.forceMove(src)
+				if(istype(module_state_3,/obj/item/borg/sight))
+					sight_mode |= module_state_3:sight_mode
 			else
-				to_chat(src, "Module isn't activated.")
-		else
-			to_chat(src, "Module isn't activated")
-		installed_modules()
-		return TOPIC_HANDLED
+				to_chat(src, "You need to disable a module first!")
+			installed_modules()
+			return TOPIC_HANDLED
+
+		if (href_list["deact"])
+			var/obj/item/O = locate(href_list["deact"])
+			if(activated(O))
+				if(module_state_1 == O)
+					module_state_1 = null
+					O.forceMove(null)
+				else if(module_state_2 == O)
+					module_state_2 = null
+					O.forceMove(null)
+				else if(module_state_3 == O)
+					module_state_3 = null
+					O.forceMove(null)
+				else
+					to_chat(src, "Module isn't activated.")
+			else
+				to_chat(src, "Module isn't activated")
+			installed_modules()
+			return TOPIC_HANDLED
 	return ..()
 
 /mob/living/silicon/robot/proc/radio_menu()

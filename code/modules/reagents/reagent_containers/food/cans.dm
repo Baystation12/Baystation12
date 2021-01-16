@@ -7,7 +7,7 @@
 //DRINKS
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/cola
-	name = "\improper Space Cola"
+	name = "space cola"
 	desc = "Cola. in space."
 	icon_state = "cola"
 	center_of_mass = "x=16;y=10"
@@ -33,7 +33,7 @@
 	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/space_mountain_wind
-	name = "\improper Space Mountain Wind"
+	name = "space mountain wind"
 	desc = "Blows right through you like a space wind."
 	icon_state = "space_mountain_wind"
 	center_of_mass = "x=16;y=10"
@@ -43,7 +43,7 @@
 	reagents.add_reagent(/datum/reagent/drink/spacemountainwind, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/thirteenloko
-	name = "\improper Thirteen Loko"
+	name = "thirteen loko"
 	desc = "The CMO has advised crew members that consumption of Thirteen Loko may result in seizures, blindness, drunkeness, or even death. Please Drink Responsibly."
 	icon_state = "thirteen_loko"
 	center_of_mass = "x=16;y=8"
@@ -53,7 +53,7 @@
 	reagents.add_reagent(/datum/reagent/ethanol/thirteenloko, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/dr_gibb
-	name = "\improper Dr. Gibb"
+	name = "dr. gibb"
 	desc = "A delicious mixture of 42 different flavors."
 	icon_state = "dr_gibb"
 	center_of_mass = "x=16;y=10"
@@ -63,7 +63,7 @@
 	reagents.add_reagent(/datum/reagent/drink/dr_gibb, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/space_up
-	name = "\improper Space-Up"
+	name = "space-up"
 	desc = "Tastes like a hull breach in your mouth."
 	icon_state = "space-up"
 	center_of_mass = "x=16;y=10"
@@ -73,7 +73,7 @@
 	reagents.add_reagent(/datum/reagent/drink/space_up, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/lemon_lime
-	name = "\improper Lemon-Lime"
+	name = "lemon-lime"
 	desc = "You wanted ORANGE. It gave you Lemon Lime."
 	icon_state = "lemon-lime"
 	center_of_mass = "x=16;y=10"
@@ -83,7 +83,7 @@
 	reagents.add_reagent(/datum/reagent/drink/lemon_lime, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/iced_tea
-	name = "\improper Vrisk Serket Iced Tea"
+	name = "vrisk serket iced tea"
 	desc = "That sweet, refreshing southern earthy flavor. That's where it's from, right? South Earth?"
 	icon_state = "ice_tea_can"
 	center_of_mass = "x=16;y=10"
@@ -93,7 +93,7 @@
 	reagents.add_reagent(/datum/reagent/drink/tea/icetea, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/grape_juice
-	name = "\improper Grapel Juice"
+	name = "grapel juice"
 	desc = "500 pages of rules of how to appropriately enter into a combat with this juice!"
 	icon_state = "purple_can"
 	center_of_mass = "x=16;y=10"
@@ -103,7 +103,7 @@
 	reagents.add_reagent(/datum/reagent/drink/juice/grape, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/tonic
-	name = "\improper T-Borg's Tonic Water"
+	name = "t-borg's tonic water"
 	desc = "Quinine tastes funny, but at least it'll keep that Space Malaria away."
 	icon_state = "tonic"
 	center_of_mass = "x=16;y=10"
@@ -123,7 +123,7 @@
 	reagents.add_reagent(/datum/reagent/drink/sodawater, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/beastenergy
-	name = "Beast Energy"
+	name = "beast energy"
 	desc = "100% pure energy, and 150% pure liver disease."
 	icon_state = "beastenergy"
 	center_of_mass = "x=16;y=6"
@@ -135,7 +135,7 @@
 //Items exclusive to the BODA machine on deck 4 and wherever else it pops up. First two are a bit jokey. Second two are genuine article.
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/syndicolax
-	name = "\improper Red Army Twist!"
+	name = "red army twist"
 	desc = "A taste of what keeps our glorious nation running! Served as Space Commissariat Stahlin prefers it! Luke warm."
 	icon_state = "syndi_cola_x"
 	center_of_mass = "x=16;y=10"
@@ -145,7 +145,7 @@
 	reagents.add_reagent(/datum/reagent/drink/juice/potato, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/artbru
-	name = "\improper Arstotzka Bru"
+	name = "arstotzka bru"
 	desc = "Just what any bureaucrat needs to get through the day. Keep stamping those papers!"
 	icon_state = "art_bru"
 	center_of_mass = "x=16;y=10"
@@ -155,7 +155,7 @@
 	reagents.add_reagent(/datum/reagent/drink/juice/turnip, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/syndicola
-	name = "\improper TerraCola"
+	name = "terra-cola"
 	desc = "A can of the only soft drink state approved for the benefit of the people. Served at room temperature regardless of ambient temperatures thanks to innovative Terran insulation technology."
 	icon_state = "syndi_cola"
 	center_of_mass = "x=16;y=10"
@@ -197,7 +197,7 @@
 //Canned alcohols.
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/speer
-	name = "\improper Space Beer"
+	name = "space beer"
 	desc = "Now in a can!"
 	icon_state = "beercan"
 	center_of_mass = "x=16;y=10"
@@ -207,7 +207,7 @@
 	reagents.add_reagent(/datum/reagent/ethanol/beer/good, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/ale
-	name = "\improper Magm-Ale"
+	name = "magm-ale"
 	desc = "Now in a can!"
 	icon_state = "alecan"
 	center_of_mass = "x=16;y=10"
@@ -222,7 +222,7 @@
 
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/cola_diet
-	name = "\improper Diet Space Cola"
+	name = "diet space cola"
 	desc = "Cola... in space! Now with extra self-confidence."
 	icon_state = "cola-blue"
 
@@ -231,7 +231,7 @@
 	reagents.add_reagent(/datum/reagent/drink/diet_cola, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/rootbeer
-	name = "\improper Rocket Root Beer"
+	name = "rocket root beer"
 	desc = "Blast away with Rocket Root Beer!"
 	icon_state = "cola-brown"
 
@@ -240,7 +240,7 @@
 	reagents.add_reagent(/datum/reagent/drink/rootbeer, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/cola_apple
-	name = "\improper Andromeda Apple"
+	name = "andromeda apple"
 	desc = "Look to the stars with Andromeda Apple!"
 	icon_state = "cola-green"
 
@@ -249,7 +249,7 @@
 	reagents.add_reagent(/datum/reagent/drink/apple_soda, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/cola_orange
-	name = "\improper Orbital Orange"
+	name = "orbital orange"
 	desc = "Feel out-of-this-world with Orbital Orange!"
 	icon_state = "cola-orange"
 
@@ -258,7 +258,7 @@
 	reagents.add_reagent(/datum/reagent/drink/orange_soda, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/cola_grape
-	name = "\improper Gravity Grape"
+	name = "gravity grape"
 	desc = "Feel the planetfall with Gravity Grape!"
 	icon_state = "cola-purple"
 
@@ -267,7 +267,7 @@
 	reagents.add_reagent(/datum/reagent/drink/grapesoda, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/cola_lemonlime
-	name = "\improper Citrus Star"
+	name = "citrus star"
 	desc = "Shoot to space with Citrus Star!"
 	icon_state = "cola-yellow"
 
@@ -276,7 +276,7 @@
 	reagents.add_reagent(/datum/reagent/drink/lemon_lime, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/cola_strawberry
-	name = "\improper Sirius Strawberry"
+	name = "sirius strawberry"
 	desc = "See stars with Sirius Strawberry!"
 	icon_state = "cola-pink"
 
@@ -285,7 +285,7 @@
 	reagents.add_reagent(/datum/reagent/drink/strawberry_soda, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/cola_pork
-	name = "\improper Pork Soda"
+	name = "pork soda"
 	desc = "Primus sucks!"
 	icon_state = "cola-pork"
 
@@ -296,7 +296,7 @@
 // Cola
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/vanillacola
-	name = "Vanilla Cola"
+	name = "vanilla cola"
 	desc = "Delicious vanilla cola in a can."
 	icon_state = "vcola"
 	center_of_mass = "x=16;y=6"
@@ -306,7 +306,7 @@
 	reagents.add_reagent(/datum/reagent/drink/vanilla_cola, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/cherrycola
-	name = "Cherry Cola"
+	name = "cherry cola"
 	desc = "Delicious cherry cola in a can."
 	icon_state = "ccola"
 	center_of_mass = "x=16;y=6"
@@ -316,7 +316,7 @@
 	reagents.add_reagent(/datum/reagent/drink/cherry_cola, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/orangecola
-	name = "Orange Cola"
+	name = "orange cola"
 	desc = "Delicious orange cola in a can."
 	icon_state = "ocola"
 	center_of_mass = "x=16;y=6"
@@ -326,7 +326,7 @@
 	reagents.add_reagent(/datum/reagent/drink/orange_cola, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/coffeecola
-	name = "Coffee Cola"
+	name = "coffee cola"
 	desc = "Delicious coffee cola in a can."
 	icon_state = "ccola"
 	center_of_mass = "x=16;y=6"
@@ -336,7 +336,7 @@
 	reagents.add_reagent(/datum/reagent/drink/coffee/coffee_cola, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/ionbru
-	name = "Ion-Bru"
+	name = "ion-bru"
 	desc = "Ion-Bru, the drink of all true scotsmen."
 	icon_state = "ionbru"
 	center_of_mass = "x=16;y=6"
