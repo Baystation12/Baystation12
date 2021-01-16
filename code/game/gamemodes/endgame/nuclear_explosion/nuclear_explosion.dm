@@ -16,7 +16,6 @@
 	cinematic.screen_loc = "1,0"
 
 /datum/universal_state/nuclear_explosion/OnEnter()
-	set waitfor = FALSE
 	if(SSticker.mode)
 		SSticker.mode.explosion_in_progress = 1
 

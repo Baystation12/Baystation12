@@ -18,22 +18,23 @@
 	color = material.icon_colour
 
 /obj/item/clothing/ring/material/attackby(var/obj/item/S, var/mob/user)
-	Inscribe(S, user)
-
-/obj/item/clothing/ring/material/proc/Inscribe(var/obj/item/S, var/mob/user)
-	set waitfor = FALSE
 	if(S.sharp)
 		var/inscription = sanitize(input("Enter an inscription to engrave.", "Inscription") as null|text)
-		if(inscription && S.loc == user && CanPhysicallyInteract(user))
+
+		if(!user.stat && !user.incapacitated() && user.Adjacent(src) && S.loc == user)
+			if(!inscription)
+				return
 			desc = "A ring made from [material.display_name]."
 			to_chat(user, "<span class='warning'>You carve \"[inscription]\" into \the [src].</span>")
 			desc += "<br>Written on \the [src] is the inscription \"[inscription]\""
 
 /obj/item/clothing/ring/material/OnTopic(var/mob/user, var/list/href_list)
 	if(href_list["examine"])
-		if(istype(user) && user.Adjacent(user))
-			user.examinate(src)
-		return TOPIC_HANDLED
+		if(istype(user))
+			var/mob/living/carbon/human/H = get_holder_of_type(src, /mob/living/carbon/human)
+			if(H.Adjacent(user))
+				user.examinate(src)
+				return TOPIC_HANDLED
 
 /obj/item/clothing/ring/material/get_examine_line()
 	. = ..()
