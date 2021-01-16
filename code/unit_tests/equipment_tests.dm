@@ -20,7 +20,7 @@
 			fail(test["msg"])
 			async = 0
 
-			return
+			return 0
 
 		H = locate(test["mobref"])
 

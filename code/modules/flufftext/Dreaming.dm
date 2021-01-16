@@ -20,17 +20,17 @@ var/list/dreams = list(
 	)
 
 mob/living/carbon/proc/dream()
-	set waitfor = FALSE
 	dreaming = 1
 
-	for(var/i = rand(1,4),i > 0, i--)
-		to_chat(src, "<span class='notice'><i>... [pick(dreams)] ...</i></span>")
-		sleep(rand(40,70))
-		if(paralysis <= 0)
-			dreaming = 0
-			return 0
-	dreaming = 0
-	return 1
+	spawn(0)
+		for(var/i = rand(1,4),i > 0, i--)
+			to_chat(src, "<span class='notice'><i>... [pick(dreams)] ...</i></span>")
+			sleep(rand(40,70))
+			if(paralysis <= 0)
+				dreaming = 0
+				return 0
+		dreaming = 0
+		return 1
 
 mob/living/carbon/proc/handle_dreams()
 	if(client && !dreaming && prob(5))

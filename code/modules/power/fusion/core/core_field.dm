@@ -335,7 +335,6 @@
 
 //the !!fun!! part
 /obj/effect/fusion_em_field/proc/React()
-	set waitfor = FALSE
 	//loop through the reactants in random order
 	var/list/react_pool = reactants.Copy()
 

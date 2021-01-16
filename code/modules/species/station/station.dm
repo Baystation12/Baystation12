@@ -365,7 +365,7 @@
 			if(D)
 				if(!D.ckey || !D.client)
 					D.death()
-		return
+		return 1
 
 #define DIONA_LIMB_DEATH_COUNT 9
 /datum/species/diona/handle_death_check(var/mob/living/carbon/human/H)

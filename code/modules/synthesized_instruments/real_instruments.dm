@@ -1,7 +1,7 @@
 //This is the combination of logic pertaining music
 //An atom should use the logic and call it as it wants
 /datum/real_instrument
-	var/list/instruments
+	var/datum/instrument/instruments
 	var/datum/sound_player/player
 	var/datum/nano_module/song_editor/song_editor
 	var/datum/nano_module/usage_info/usage_info
@@ -16,7 +16,7 @@
 	owner = who
 	maximum_lines = GLOB.musical_config.max_lines
 	maximum_line_length = GLOB.musical_config.max_line_length
-	instruments = istype(what) ? list(what) : what
+	instruments = what //This can be a list, or it can also not be one
 
 /datum/real_instrument/proc/Topic_call(href, href_list, usr)
 	var/target = href_list["target"]
@@ -201,7 +201,7 @@
 	var/datum/real_instrument/real_instrument
 	icon = 'icons/obj/musician.dmi'
 	//Initialization data
-	var/list/instruments = list()
+	var/datum/instrument/instruments = list()
 	var/path = /datum/instrument
 	var/sound_player = /datum/sound_player
 
@@ -253,19 +253,17 @@
 /obj/item/device/synthesized_instrument
 	var/datum/real_instrument/real_instrument
 	icon = 'icons/obj/musician.dmi'
-	var/list/instruments = list()
+	var/datum/instrument/instruments = list()
 	var/path = /datum/instrument
 	var/sound_player = /datum/sound_player
 
 /obj/item/device/synthesized_instrument/Initialize()
 	. = ..()
 	for (var/type in typesof(path))
-		var/datum/instrument/new_instrument = type
-		if (!initial(new_instrument.id))
-			continue
-		new_instrument = new type
+		var/datum/instrument/new_instrument = new type
+		if (!new_instrument.id) continue
 		new_instrument.create_full_sample_deviation_map()
-		instruments[new_instrument.name] = new_instrument
+		src.instruments[new_instrument.name] = new_instrument
 	src.real_instrument = new /datum/real_instrument(src, new sound_player(src, instruments[pick(instruments)]), instruments)
 
 /obj/item/device/synthesized_instrument/Destroy()
