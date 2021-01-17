@@ -17,8 +17,8 @@
 	var/furniture_icon  //icon states for non-material colorable overlay, i.e. handles
 
 	var/max_force = 40	 //any damage above this is added to armor penetration value
-	var/force_divisor = 0.5	// multiplier (sic) to material's generic damage value for this specific type of weapon
-	var/thrown_force_divisor = 0.5
+	var/force_multiplier = 0.5	// multiplier to material's generic damage value for this specific type of weapon
+	var/thrown_force_multiplier = 0.5
 
 	var/attack_cooldown_modifier = 0
 	var/unbreakable
@@ -39,7 +39,7 @@
 	if(matter.len)
 		for(var/material_type in matter)
 			if(!isnull(matter[material_type]))
-				matter[material_type] *= force_divisor // May require a new var instead.
+				matter[material_type] *= force_multiplier // May require a new var instead.
 
 /obj/item/weapon/material/get_material()
 	return material
@@ -50,14 +50,14 @@
 		new_force = material.get_edge_damage()
 	else
 		new_force = material.get_blunt_damage()
-	new_force = round(new_force*force_divisor)
+	new_force = round(new_force*force_multiplier)
 	force = min(new_force, max_force)
 
 	if(new_force > max_force)
 		armor_penetration = initial(armor_penetration) + new_force - max_force
 	armor_penetration += 2*max(0, material.brute_armor - 2)
 
-	throwforce = round(material.get_blunt_damage()*thrown_force_divisor)
+	throwforce = round(material.get_blunt_damage()*thrown_force_multiplier)
 	attack_cooldown = material.get_attack_cooldown() + attack_cooldown_modifier
 	//spawn(1)
 //		log_debug("[src] has force [force] and throwforce [throwforce] when made from default material [material.name]")

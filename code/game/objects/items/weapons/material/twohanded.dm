@@ -75,7 +75,7 @@
 	desc = "Truly, the weapon of a madman. Who would think to fight fire with an axe?"
 
 	max_force = 60	//for wielded
-	force_divisor = 0.6
+	force_multiplier = 0.6
 	unwielded_force_divisor = 0.3
 	sharp = TRUE
 	edge = TRUE
@@ -108,9 +108,9 @@
 	desc = "A haphazardly-constructed yet still deadly weapon of ancient design."
 	max_force = 20	//for wielded
 	applies_material_colour = 0
-	force_divisor = 0.33 // 12/19 with hardness 60 (steel) or 10/16 with hardness 50 (glass)
+	force_multiplier = 0.33 // 12/19 with hardness 60 (steel) or 10/16 with hardness 50 (glass)
 	unwielded_force_divisor = 0.20
-	thrown_force_divisor = 1.5 // 20 when thrown with weight 15 (glass)
+	thrown_force_multiplier = 1.5 // 20 when thrown with weight 15 (glass)
 	throw_speed = 3
 	sharp = TRUE
 	hitsound = 'sound/weapons/bladeslice.ogg'
@@ -138,7 +138,7 @@
 	hitsound = 'sound/weapons/genhit3.ogg'
 	default_material = MATERIAL_MAPLE
 	max_force = 40	//for wielded
-	force_divisor = 1.1           // 22 when wielded with weight 20 (steel)
+	force_multiplier = 1.1           // 22 when wielded with weight 20 (steel)
 	unwielded_force_divisor = 0.7 // 15 when unwielded based on above.
 	attack_cooldown_modifier = 1
 	melee_accuracy_bonus = -10

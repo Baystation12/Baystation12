@@ -6,7 +6,7 @@
 	icon_state = "knife"
 	item_state = "knife"
 	max_force = 15
-	force_divisor = 0.3
+	force_multiplier = 0.3
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	matter = list(MATERIAL_STEEL = 12000)
 	origin_tech = list(TECH_MATERIAL = 1)
@@ -35,7 +35,7 @@
 	icon_state = "table"
 	default_material = MATERIAL_ALUMINIUM
 	max_force = 7
-	force_divisor = 0.1
+	force_multiplier = 0.1
 	sharp = FALSE
 	attack_verb = list("prodded")
 	applies_material_name = FALSE
@@ -64,21 +64,21 @@
 	desc = "A heavy blade used to process food, especially animal carcasses."
 	icon_state = "butch"
 	armor_penetration = 5
-	force_divisor = 0.18
+	force_multiplier = 0.18
 	attack_verb = list("cleaved", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 
 /obj/item/weapon/material/knife/kitchen/cleaver/bronze
 	name = "master chef's cleaver"
 	desc = "A heavy blade used to process food. This one is so fancy, it must be for a truly exceptional chef. There aren't any here, so what it's doing here is anyone's guess."
 	default_material = MATERIAL_BRONZE
-	force_divisor = 1 //25 with material bronze
+	force_multiplier = 1 //25 with material bronze
 
 //fighting knives
 /obj/item/weapon/material/knife/combat
 	name = "combat knife"
 	desc = "A blade with a saw-like pattern on the reverse edge and a heavy handle."
 	icon_state = "tacknife"
-	force_divisor = 0.2
+	force_multiplier = 0.2
 	w_class = ITEM_SIZE_SMALL
 
 //random stuff
@@ -103,7 +103,7 @@
 	desc = "An utility knife with a polymer handle, commonly used through human space."
 	icon_state = "utility"
 	max_force = 10
-	force_divisor = 0.2
+	force_multiplier = 0.2
 	w_class = ITEM_SIZE_SMALL
 
 /obj/item/weapon/material/knife/utility/lightweight

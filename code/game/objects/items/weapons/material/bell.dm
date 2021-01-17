@@ -6,8 +6,8 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "bell"
 	max_force = 5
-	force_divisor = 0.8
-	thrown_force_divisor = 0.3
+	force_multiplier = 0.8
+	thrown_force_multiplier = 0.3
 	hitsound = 'sound/items/oneding.ogg'
 	default_material = MATERIAL_ALUMINIUM
 

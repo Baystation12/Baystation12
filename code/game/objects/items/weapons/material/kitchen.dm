@@ -7,12 +7,12 @@
  */
 /obj/item/weapon/material/kitchen/utensil
 	w_class = ITEM_SIZE_TINY
-	thrown_force_divisor = 1
+	thrown_force_multiplier = 1
 	origin_tech = list(TECH_MATERIAL = 1)
 	attack_verb = list("attacked", "stabbed", "poked")
 	max_force = 5
-	force_divisor = 0.1 // 6 when wielded with hardness 60 (steel)
-	thrown_force_divisor = 0.25 // 5 when thrown with weight 20 (steel)
+	force_multiplier = 0.1 // 6 when wielded with hardness 60 (steel)
+	thrown_force_multiplier = 0.25 // 5 when thrown with weight 20 (steel)
 	default_material = MATERIAL_ALUMINIUM
 
 	var/loaded      //Descriptive string for currently loaded food object.
@@ -83,7 +83,7 @@
 	desc = "It's a spoon. You can see your own upside-down face in it."
 	icon_state = "spoon"
 	attack_verb = list("attacked", "poked")
-	force_divisor = 0.1 //2 when wielded with weight 20 (steel)
+	force_multiplier = 0.1 //2 when wielded with weight 20 (steel)
 
 /obj/item/weapon/material/kitchen/utensil/spoon/plastic
 	default_material = MATERIAL_PLASTIC
@@ -115,8 +115,8 @@
 	attack_verb = list("bashed", "battered", "bludgeoned", "thrashed", "whacked")
 	default_material = MATERIAL_WOOD
 	max_force = 15
-	force_divisor = 0.7 // 10 when wielded with weight 15 (wood)
-	thrown_force_divisor = 1 // as above
+	force_multiplier = 0.7 // 10 when wielded with weight 15 (wood)
+	thrown_force_multiplier = 1 // as above
 
 /obj/item/weapon/material/kitchen/rollingpin/attack(mob/living/M as mob, mob/living/user as mob)
 	if ((MUTATION_CLUMSY in user.mutations) && prob(50) && user.unEquip(src))

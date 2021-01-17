@@ -10,8 +10,8 @@
 	edge = TRUE
 	w_class = ITEM_SIZE_SMALL
 	max_force = 8
-	force_divisor = 0.12 // 6 with hardness 30 (glass)
-	thrown_force_divisor = 0.4 // 4 with weight 15 (glass)
+	force_multiplier = 0.12 // 6 with hardness 30 (glass)
+	thrown_force_multiplier = 0.4 // 4 with weight 15 (glass)
 	item_state = "shard-glass"
 	attack_verb = list("stabbed", "slashed", "sliced", "cut")
 	default_material = MATERIAL_GLASS

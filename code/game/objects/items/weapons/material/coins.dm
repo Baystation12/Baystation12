@@ -7,8 +7,8 @@
 	force = 1
 	throwforce = 1
 	max_force = 5
-	force_divisor = 0.1
-	thrown_force_divisor = 0.1
+	force_multiplier = 0.1
+	thrown_force_multiplier = 0.1
 	w_class = 1
 	slot_flags = SLOT_EARS
 	var/string_colour
