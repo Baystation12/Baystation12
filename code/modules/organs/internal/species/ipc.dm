@@ -14,7 +14,7 @@
 	throw_range = 5
 	origin_tech = list(TECH_ENGINEERING = 4, TECH_MATERIAL = 4, TECH_BLUESPACE = 2, TECH_DATA = 4)
 	attack_verb = list("attacked", "slapped", "whacked")
-	max_damage = 90
+	max_damage = 200
 	min_bruised_damage = 30
 	min_broken_damage = 60
 	relative_size = 60
