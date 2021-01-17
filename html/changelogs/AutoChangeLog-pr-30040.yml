@@ -1,0 +1,4 @@
+author: "juxtaposed9930"
+delete-after: True
+changes: 
+  - tweak: "Mining beacons emit a more useful amount of light."
