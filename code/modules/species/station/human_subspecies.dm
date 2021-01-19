@@ -59,7 +59,7 @@
 /datum/species/human/vatgrown
 	name = SPECIES_VATGROWN
 	name_plural = "Vat-Grown Humans"
-	description = "With cloning on the forefront of human scientific advancement, cheap mass production \
+	description = "With cloning on the forefront of human scientific advancement, mass production \
 	of bodies is a very real and rather ethically grey industry. Although slavery, indentured servitude \
 	and flash-cloning are all illegal in SCG space, there still exists a margin for those legitimate \
 	corporations able to take up contracts for growing and raising vat-grown humans to populate new \
