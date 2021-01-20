@@ -779,6 +779,9 @@
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 1
 	},
+/obj/machinery/light/small{
+	dir = 1
+	},
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/starboard)
 "cK" = (
@@ -861,6 +864,10 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4;
 	icon_state = "pipe-c"
+	},
+/obj/structure/sign/directions/janitor{
+	dir = 8;
+	pixel_y = 32
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/starboard)
@@ -1711,6 +1718,10 @@
 /obj/structure/catwalk,
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 4
+	},
+/obj/structure/sign/directions/janitor{
+	dir = 1;
+	pixel_y = 32
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/starboard)
@@ -2839,6 +2850,9 @@
 	dir = 8
 	},
 /obj/random/maintenance/solgov,
+/obj/machinery/light/small{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/fourthdeck/starboard)
 "jB" = (
@@ -3392,11 +3406,6 @@
 	dir = 4
 	},
 /obj/item/device/radio/beacon,
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 4;
-	icon_state = "1-4"
-	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fourthdeck/aft)
 "lU" = (
@@ -6394,6 +6403,17 @@
 	req_access = list(list("ACCESS_CARGO","ACCESS_MINING"))
 	},
 /turf/simulated/floor/tiled,
+/area/hallway/primary/fourthdeck/aft)
+"vj" = (
+/obj/effect/floor_decal/corner/brown/half{
+	dir = 1;
+	icon_state = "bordercolorhalf"
+	},
+/obj/structure/sign/directions/janitor{
+	dir = 1;
+	pixel_y = 32
+	},
+/turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fourthdeck/aft)
 "vk" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
@@ -13733,6 +13753,11 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
+	},
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fourthdeck/aft)
@@ -38491,7 +38516,7 @@ PJ
 PJ
 PJ
 PJ
-gq
+vj
 lM
 RW
 vZ
@@ -39501,7 +39526,7 @@ RU
 SL
 po
 Xn
-ru
+gq
 SO
 WS
 au
