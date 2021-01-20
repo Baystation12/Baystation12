@@ -294,16 +294,16 @@
 //Tries to generate num landmarks, but avoids repeats.
 /obj/effect/overmap/visitable/sector/exoplanet/proc/generate_landing(num = 1)
 	var/places = list()
-	var/attempts = 10*num
+	var/attempts = 30*num
 	var/new_type = landmark_type
 	while(num)
 		attempts--
-		var/turf/T = locate(rand(20, maxx-20), rand(20, maxy - 10),map_z[map_z.len])
+		var/turf/T = locate(rand(20, maxx - 30), rand(20, maxy - 30),map_z[map_z.len])
 		if(!T || (T in places)) // Two landmarks on one turf is forbidden as the landmark code doesn't work with it.
 			continue
 		if(attempts >= 0) // While we have the patience, try to find better spawn points. If out of patience, put them down wherever, so long as there are no repeats.
 			var/valid = 1
-			var/list/block_to_check = block(locate(T.x - 10, T.y - 10, T.z), locate(T.x + 10, T.y + 10, T.z))
+			var/list/block_to_check = block(locate(T.x - 15, T.y - 15, T.z), locate(T.x + 15, T.y + 15, T.z))
 			for(var/turf/check in block_to_check)
 				if(!istype(get_area(check), /area/exoplanet) || check.turf_flags & TURF_FLAG_NORUINS)
 					valid = 0
