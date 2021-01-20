@@ -458,15 +458,16 @@
 	return GLOB.view_state
 
 // Use to field Topic calls for which usr == src is required, which will first be funneled into here.
-/mob/proc/OnSelfTopic(href_list)
-	if(href_list["mach_close"])
-		var/t1 = text("window=[href_list["mach_close"]]")
-		unset_machine()
-		show_browser(src, null, t1)
-		return TOPIC_HANDLED
-	if(href_list["flavor_change"])
-		update_flavor_text(href_list["flavor_change"])
-		return TOPIC_HANDLED
+/mob/proc/OnSelfTopic(href_list, topic_status)
+	if (topic_status == STATUS_INTERACTIVE)
+		if(href_list["mach_close"])
+			var/t1 = text("window=[href_list["mach_close"]]")
+			unset_machine()
+			show_browser(src, null, t1)
+			return TOPIC_HANDLED
+		if(href_list["flavor_change"])
+			update_flavor_text(href_list["flavor_change"])
+			return TOPIC_HANDLED
 
 // If usr != src, or if usr == src but the Topic call was not resolved, this is called next.
 /mob/OnTopic(mob/user, href_list, datum/topic_state/state)
@@ -478,11 +479,10 @@
 
 // You probably do not need to override this proc. Use one of the two above.
 /mob/Topic(href, href_list, datum/topic_state/state)
-	if(CanUseTopic(usr, GLOB.self_state, href_list) == STATUS_INTERACTIVE)
-		. = OnSelfTopic(href_list)
-		if(.)
-			return
-	else if(href_list["flavor_change"] && !is_admin(usr) && (usr != src))
+	. = OnSelfTopic(href_list, CanUseTopic(usr, GLOB.self_state, href_list))
+	if (.)
+		return
+	if (href_list["flavor_change"] && !is_admin(usr) && (usr != src))
 		log_and_message_admins(usr, "is suspected of trying to change flavor text on [key_name_admin(src)] via Topic exploits.")
 	return ..()
 
