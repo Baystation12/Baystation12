@@ -3005,7 +3005,6 @@
 /area/map_template/merc_spawn)
 "RT" = (
 /obj/structure/closet,
-/obj/item/weapon/storage/backpack/chameleon/sydie_kit,
 /obj/item/weapon/storage/belt/security,
 /obj/item/weapon/storage/belt/holster/security/tactical,
 /obj/item/clothing/accessory/storage/holster/thigh,
