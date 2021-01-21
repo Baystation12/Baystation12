@@ -48,3 +48,6 @@ lib/*.so
 # python
 *.pyc
 __pycache__
+
+# flyway config
+flyway.conf
