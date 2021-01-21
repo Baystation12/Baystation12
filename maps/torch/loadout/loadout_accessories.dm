@@ -113,6 +113,8 @@
 /datum/gear/accessory/tie_color
 	allowed_branches = CIVILIAN_BRANCHES
 
+/datum/gear/accessory/neckerchief
+
 /datum/gear/accessory/stethoscope
 	allowed_roles = STERILE_ROLES
 

@@ -136,3 +136,9 @@
 	display_name = "pride pin selection"
 	path = /obj/item/clothing/accessory/pridepins
 	flags = GEAR_HAS_TYPE_SELECTION
+
+/datum/gear/accessory/neckerchief
+	display_name = "neckerchief, colour select"
+	description = "A piece of cloth tied around the neck. A favorite of Sailors and Partisans everywhere."
+	path = /obj/item/clothing/accessory/neckerchief
+	flags = GEAR_HAS_COLOR_SELECTION
