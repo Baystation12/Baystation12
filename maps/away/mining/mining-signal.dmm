@@ -1217,9 +1217,6 @@
 /area/outpost/abandoned)
 "dZ" = (
 /obj/effect/decal/cleanable/liquid_fuel,
-/obj/structure/sign/directions/medical{
-	dir = 8
-	},
 /turf/simulated/wall/titanium,
 /area/outpost/abandoned)
 "ea" = (
@@ -1351,17 +1348,10 @@
 /turf/simulated/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "ex" = (
-/obj/machinery/door/airlock/medical,
-/obj/machinery/door/firedoor,
-/turf/simulated/floor/tiled/airless,
-/area/outpost/abandoned)
-"ey" = (
-/obj/effect/decal/cleanable/liquid_fuel,
-/obj/effect/floor_decal/corner/paleblue{
-	dir = 9;
-	icon_state = "corner_white"
+/obj/structure/sign/directions/medical{
+	dir = 8
 	},
-/turf/simulated/floor/tiled/airless,
+/turf/simulated/wall/titanium,
 /area/outpost/abandoned)
 "ez" = (
 /obj/effect/decal/cleanable/dirt,
@@ -1417,6 +1407,7 @@
 	dir = 1;
 	icon_state = "warningcee"
 	},
+/obj/effect/floor_decal/industrial/warning/cee,
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
 "eI" = (
@@ -1593,19 +1584,6 @@
 "fe" = (
 /turf/simulated/floor/tiled/airless,
 /area/mine/explored)
-"ff" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/floor_decal/industrial/warning/dust{
-	dir = 4;
-	icon_state = "warning_dust"
-	},
-/turf/simulated/floor/asteroid,
-/area/mine/explored)
-"fg" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/floor_decal/industrial/warning/cee,
-/turf/simulated/floor/plating,
-/area/outpost/abandoned)
 "fh" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -13090,7 +13068,7 @@ af
 cG
 cG
 cG
-dD
+af
 eQ
 af
 af
@@ -13291,8 +13269,8 @@ aa
 aa
 aa
 aa
+av
 af
-ex
 eR
 af
 aa
@@ -13493,8 +13471,8 @@ aa
 aa
 aa
 aa
+av
 af
-ey
 eS
 af
 af
@@ -13695,8 +13673,8 @@ aa
 aa
 aa
 aa
+av
 af
-dH
 eT
 fr
 fI
@@ -13898,7 +13876,7 @@ aa
 af
 af
 dZ
-dH
+ex
 eU
 fs
 fJ
@@ -19151,7 +19129,7 @@ af
 af
 ek
 eF
-ff
+ej
 ek
 ab
 ab
@@ -19353,7 +19331,7 @@ aa
 af
 af
 eG
-eG
+af
 cy
 aa
 aa
@@ -19555,8 +19533,8 @@ aa
 af
 af
 eH
-fg
-af
+cG
+av
 aa
 aa
 aa
@@ -19757,7 +19735,7 @@ af
 af
 af
 eI
-eI
+cG
 cG
 af
 af

@@ -2754,7 +2754,6 @@
 	icon_state = "4-8";
 	pixel_x = 0
 	},
-/obj/machinery/door/airlock/glass,
 /turf/simulated/floor/tiled,
 /area/lar_maria/mess_hall)
 "hD" = (
@@ -2910,7 +2909,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/door/airlock/glass,
+/obj/machinery/door/airlock/multi_tile/glass{
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/mess_hall)
 "hZ" = (

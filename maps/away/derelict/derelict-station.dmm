@@ -1467,25 +1467,18 @@
 "eH" = (
 /obj/machinery/access_button/airlock_exterior{
 	master_tag = "constructionsite_airlock";
-	pixel_x = 20;
-	pixel_y = 0;
+	pixel_x = 23;
+	pixel_y = -10;
 	req_access = newlist()
 	},
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite/hallway/fore)
 "eI" = (
-/obj/structure/sign/warning/vacuum{
-	pixel_x = -32
-	},
 /obj/machinery/access_button/airlock_interior{
 	master_tag = "constructionsite_airlock";
-	pixel_x = -20;
-	pixel_y = 0;
+	pixel_x = -25;
+	pixel_y = -10;
 	req_access = newlist()
-	},
-/obj/effect/floor_decal/industrial/warning/corner{
-	dir = 1;
-	icon_state = "warningcorner"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
@@ -1520,42 +1513,36 @@
 /obj/machinery/door/airlock/glass/science{
 	name = "Research"
 	},
-/obj/machinery/door/blast/shutters,
+/obj/machinery/door/blast/shutters{
+	dir = 8
+	},
 /turf/simulated/floor/airless,
 /area/constructionsite/storage)
 "eQ" = (
-/obj/machinery/door/airlock/glass/science{
-	name = "Research"
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4;
+	icon_state = "warning"
 	},
-/obj/machinery/door/blast/shutters,
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/fore)
 "eR" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1379;
 	icon_state = "door_locked";
-	id_tag = "constructionsite_outer";
+	id_tag = "constructionsite_inner";
 	locked = 1
 	},
 /turf/simulated/floor,
 /area/constructionsite/teleporter)
 "eS" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
-	id_tag = "constructionsite_vent"
-	},
 /obj/effect/floor_decal/industrial/warning{
-	dir = 9;
+	dir = 4;
 	icon_state = "warning"
 	},
-/turf/simulated/floor,
-/area/constructionsite/teleporter)
+/turf/simulated/floor/tiled/dark/airless,
+/area/constructionsite/hallway/fore)
 "eU" = (
-/obj/machinery/door/airlock/external{
-	frequency = 1379;
-	icon_state = "door_locked";
-	id_tag = "constructionsite_inner";
-	locked = 1
-	},
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor,
 /area/constructionsite/teleporter)
 "eV" = (
@@ -1584,34 +1571,24 @@
 /obj/machinery/door/airlock/glass/science{
 	name = "Research"
 	},
-/obj/machinery/door/blast/shutters/open,
+/obj/machinery/door/blast/shutters/open{
+	dir = 8
+	},
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/fore)
 "fa" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/blue{
-	dir = 5;
-	icon_state = "intact"
-	},
 /obj/machinery/light/small,
-/obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1379;
-	id_tag = "constructionsite_airlock";
-	pixel_x = 0;
-	pixel_y = -25;
-	req_access = newlist();
-	tag_airpump = "constructionsite_vent";
-	tag_chamber_sensor = "constructionsite_sensor";
-	tag_exterior_door = "constructionsite_outer";
-	tag_interior_door = "constructionsite_inner"
-	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 10;
 	icon_state = "warning"
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/blue{
+	dir = 5;
+	icon_state = "intact"
+	},
 /turf/simulated/floor,
 /area/constructionsite/teleporter)
 "fb" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden/blue,
 /obj/machinery/airlock_sensor{
 	frequency = 1379;
 	id_tag = "constructionsite_sensor";
@@ -1622,6 +1599,7 @@
 	dir = 6;
 	icon_state = "warning"
 	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/blue,
 /turf/simulated/floor,
 /area/constructionsite/teleporter)
 "fc" = (
@@ -1722,6 +1700,9 @@
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 4;
 	icon_state = "warningcorner"
+	},
+/obj/structure/sign/warning/vacuum{
+	pixel_x = -32
 	},
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
@@ -2654,7 +2635,8 @@
 /turf/simulated/floor/reinforced/airmix,
 /area/constructionsite/atmospherics)
 "iJ" = (
-/obj/machinery/door/airlock/glass/medical{
+/obj/machinery/door/airlock/multi_tile/glass/medical{
+	dir = 4;
 	name = "Medbay"
 	},
 /turf/simulated/floor/airless,
@@ -3635,15 +3617,15 @@
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "ob" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
-	id_tag = "constructionsite_vent"
+/obj/machinery/camera/motion{
+	c_tag = "Construction Site Teleporter Airlock"
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 5;
 	icon_state = "warning"
 	},
-/obj/machinery/camera/motion{
-	c_tag = "Construction Site Teleporter Airlock"
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+	id_tag = "constructionsite_vent"
 	},
 /turf/simulated/floor,
 /area/constructionsite/teleporter)
@@ -3661,6 +3643,32 @@
 "DP" = (
 /obj/structure/grille,
 /obj/structure/wall_frame,
+/turf/simulated/floor/airless,
+/area/constructionsite/hallway/aft)
+"HP" = (
+/obj/machinery/embedded_controller/radio/airlock/airlock_controller{
+	id_tag = "constructionsite_airlock";
+	pixel_y = 19;
+	req_access = newlist();
+	tag_airpump = "constructionsite_vent";
+	tag_chamber_sensor = "constructionsite_sensor";
+	tag_exterior_door = "constructionsite_outer";
+	tag_interior_door = "constructionsite_inner"
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 9;
+	icon_state = "warning"
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+	id_tag = "constructionsite_vent"
+	},
+/turf/simulated/floor,
+/area/constructionsite/teleporter)
+"Jz" = (
+/obj/machinery/door/airlock/multi_tile/glass/engineering{
+	dir = 4;
+	name = "Atmospherics"
+	},
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/aft)
 "Lk" = (
@@ -22298,7 +22306,7 @@ dY
 dY
 dY
 dY
-eP
+dY
 eP
 dY
 dY
@@ -22362,10 +22370,10 @@ hn
 gO
 gO
 iE
-iJ
-iJ
+gQ
 iJ
 iE
+gO
 gO
 gO
 jg
@@ -22500,7 +22508,7 @@ bo
 bo
 bo
 dY
-eh
+dY
 eh
 dY
 bo
@@ -22702,7 +22710,7 @@ bo
 bu
 ev
 dY
-eh
+dY
 es
 dY
 bo
@@ -22903,8 +22911,8 @@ dz
 dz
 dz
 dz
+dz
 eG
-eQ
 eZ
 eG
 dA
@@ -23510,8 +23518,8 @@ ea
 cN
 cw
 eH
-cw
-cN
+eQ
+eS
 cw
 cw
 dR
@@ -23712,7 +23720,7 @@ dz
 dz
 dz
 eb
-eR
+eU
 eR
 eb
 dA
@@ -23914,7 +23922,7 @@ bo
 bo
 bo
 eb
-eS
+HP
 fa
 eb
 bo
@@ -24382,10 +24390,10 @@ hr
 gO
 gO
 iF
-ij
-ij
-ij
+gQ
+Jz
 iF
+gO
 gO
 gO
 aR
@@ -24586,7 +24594,7 @@ hr
 hr
 iK
 iN
-iN
+hr
 hr
 hr
 hP
