@@ -12,7 +12,7 @@
 	uncreated_component_parts = null
 	stat_immune = 0
 	var/mob/living/carbon/human/occupant = null
-	var/list/base_chemicals = list("Inaprovaline" = /datum/reagent/inaprovaline, "Soporific" = /datum/reagent/soporific, "Paracetamol" = /datum/reagent/paracetamol, "Dylovene" = /datum/reagent/dylovene, "Dexalin" = /datum/reagent/dexalin)
+	var/list/base_chemicals = list("Inaprovaline" = /datum/reagent/inaprovaline, "Paracetamol" = /datum/reagent/paracetamol, "Dylovene" = /datum/reagent/dylovene, "Dexalin" = /datum/reagent/dexalin)
 	var/list/available_chemicals = list()
 	var/list/upgrade_chemicals = list("Kelotane" = /datum/reagent/kelotane)
 	var/list/upgrade2_chemicals = list("Hyronalin" = /datum/reagent/hyronalin)
