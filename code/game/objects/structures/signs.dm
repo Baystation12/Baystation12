@@ -370,6 +370,10 @@
 	name = "\improper Research Division"
 	icon_state = "direction_sci"
 
+/obj/structure/sign/directions/janitor
+	name = "\improper Custodial Closet"
+	icon_state = "direction_jan"
+
 /obj/structure/sign/directions/engineering
 	name = "\improper Engineering Bay"
 	icon_state = "direction_eng"
