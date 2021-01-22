@@ -91,11 +91,11 @@
 			for(var/mob/new_player/player in GLOB.player_list)
 				var/highjob
 				if (player.client)
-					var/show_job = player.client.get_preference_value(/datum/client_preference/show_job) == GLOB.PREF_SHOW
-					if (player.client.prefs?.job_high && show_job)
+					var/show_ready = player.client.get_preference_value(/datum/client_preference/show_ready) == GLOB.PREF_SHOW
+					if (player.client.prefs?.job_high)
 						highjob = " as [player.client.prefs.job_high]"
 					if (!player.is_stealthed())
-						stat("[player.key]", (player.ready)?("(Playing[highjob])"):(null))
+						stat("[player.key]", (player.ready && show_ready)?("(Playing[highjob])"):(null))
 				totalPlayers++
 				if(player.ready)totalPlayersReady++
 

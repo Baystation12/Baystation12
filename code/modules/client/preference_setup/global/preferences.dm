@@ -209,9 +209,9 @@ var/list/_client_preferences_by_type
 	key = "SHOW_CKEY_DEADCHAT"
 	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
-/datum/client_preference/show_job
-	description = "Show Job in Lobby"
-	key = "SHOW_HIGH_JOB"
+/datum/client_preference/show_ready
+	description = "Show Ready Status in Lobby"
+	key = "SHOW_READY"
 	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
 /datum/client_preference/play_instruments
