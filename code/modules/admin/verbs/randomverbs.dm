@@ -88,7 +88,7 @@
 
 	to_world(result[1])
 
-	log_and_message_admins(" - GlobalNarrate [result[2]]/[result[3]]: [result[4]]")
+	log_and_message_staff(" - GlobalNarrate [result[2]]/[result[3]]: [result[4]]")
 	SSstatistics.add_field_details("admin_verb","GLN") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
@@ -206,7 +206,7 @@
 		return
 
 	to_chat(M, result[1])
-	log_and_message_admins(" - DirectNarrate [result[2]]/[result[3]] to ([M.name]/[M.key]): [result[4]]")
+	log_and_message_staff(" - DirectNarrate [result[2]]/[result[3]] to ([M.name]/[M.key]): [result[4]]")
 	SSstatistics.add_field_details("admin_verb","DIRN") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 // Local narrate, narrates to everyone who can see where you are regardless of whether they are blind or deaf.
@@ -226,7 +226,7 @@
 
 	for(var/listener in listening_hosts)
 		to_chat(listener, result[1])
-	log_and_message_admins(" - LocalNarrate [result[2]]/[result[3]]: [result[4]]")
+	log_and_message_staff(" - LocalNarrate [result[2]]/[result[3]]: [result[4]]")
 
 // Visible narrate, it's as if it's a visible message
 /client/proc/cmd_admin_visible_narrate(var/atom/A)
@@ -249,7 +249,7 @@
 		return
 
 	M.visible_message(result[1], result[1], narrate = TRUE)
-	log_and_message_admins(" - VisibleNarrate [result[2]]/[result[3]] on [A]: [result[4]]")
+	log_and_message_staff(" - VisibleNarrate [result[2]]/[result[3]] on [A]: [result[4]]")
 
 // Visible narrate, it's as if it's a audible message
 /client/proc/cmd_admin_audible_narrate(var/atom/A)
@@ -273,7 +273,7 @@
 		return
 
 	M.audible_message(result[1], result[1], narrate = TRUE)
-	log_and_message_admins(" - AudibleNarrate [result[2]]/[result[3]] on [A]: [result[4]]")
+	log_and_message_staff(" - AudibleNarrate [result[2]]/[result[3]] on [A]: [result[4]]")
 
 /client/proc/cmd_admin_godmode(mob/M as mob in SSmobs.mob_list)
 	set category = "Special Verbs"
