@@ -1404,7 +1404,7 @@ var/global/floorIsLava = 0
 		else
 			H.paralysis = 0
 			msg = "has unparalyzed [key_name(H)]."
-		log_and_message_admins(msg)
+		log_and_message_staff(msg)
 
 
 /datum/admins/proc/sendFax()
