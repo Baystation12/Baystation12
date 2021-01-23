@@ -31,6 +31,9 @@
 /obj/structure/proc/take_damage(var/damage)
 	return
 
+/obj/structure/proc/repair_damage(amount)
+	return
+
 /obj/structure/Destroy()
 	reset_mobs_offset()
 	var/turf/T = get_turf(src)
