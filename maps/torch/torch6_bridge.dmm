@@ -2119,6 +2119,13 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/substation/bridge)
+"dA" = (
+/obj/structure/sign/double/solgovflag/left{
+	dir = 4;
+	pixel_x = -32
+	},
+/turf/simulated/floor/wood/walnut,
+/area/crew_quarters/heads/office/co)
 "dE" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -4036,6 +4043,17 @@
 /obj/structure/bed/chair/shuttle/blue,
 /turf/simulated/floor/tiled/dark,
 /area/aquila/mess)
+"hU" = (
+/obj/structure/bed/chair/padded/blue,
+/obj/effect/floor_decal/corner/blue{
+	dir = 6
+	},
+/obj/structure/sign/double/solgovflag/left{
+	dir = 8;
+	pixel_x = 32
+	},
+/turf/simulated/floor/tiled/dark,
+/area/crew_quarters/heads/office/sea)
 "hV" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/sol{
@@ -5463,6 +5481,28 @@
 	},
 /turf/simulated/floor/plating,
 /area/bridge)
+"mp" = (
+/obj/structure/table/woodentable/walnut,
+/obj/item/weapon/storage/briefcase{
+	pixel_x = 3;
+	pixel_y = 0
+	},
+/obj/item/weapon/hand_labeler,
+/obj/item/device/taperecorder{
+	pixel_x = -4;
+	pixel_y = 2
+	},
+/obj/item/device/camera{
+	pixel_x = 3;
+	pixel_y = -4
+	},
+/obj/structure/sign/double/solgovflag/right{
+	dir = 1;
+	pixel_x = 0;
+	pixel_y = -32
+	},
+/turf/simulated/floor/carpet/blue2,
+/area/crew_quarters/heads/office/sgr)
 "mx" = (
 /obj/effect/paint/red,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
@@ -7989,33 +8029,6 @@
 	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/sgr)
-"tA" = (
-/obj/structure/table/steel_reinforced,
-/obj/item/weapon/reagent_containers/food/drinks/glass2/carafe,
-/obj/item/weapon/reagent_containers/food/drinks/glass2/square,
-/obj/structure/sign/double/icarus/solgovflag/left{
-	pixel_y = 32
-	},
-/obj/effect/floor_decal/corner/blue/three_quarters{
-	dir = 8
-	},
-/obj/structure/sign/warning/nosmoking_1{
-	dir = 4;
-	icon_state = "nosmoking";
-	pixel_x = -37
-	},
-/turf/simulated/floor/tiled/dark,
-/area/bridge/disciplinary_board_room)
-"tB" = (
-/obj/structure/bed/chair/padded/blue,
-/obj/structure/sign/double/icarus/solgovflag/right{
-	pixel_y = 32
-	},
-/obj/effect/floor_decal/corner/blue{
-	dir = 5
-	},
-/turf/simulated/floor/tiled/dark,
-/area/bridge/disciplinary_board_room)
 "tC" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 5
@@ -8029,26 +8042,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/simulated/floor/tiled/dark,
-/area/bridge/disciplinary_board_room)
-"tD" = (
-/obj/structure/sign/double/icarus/solgovflag/left{
-	pixel_y = 32
-	},
-/obj/effect/floor_decal/corner/blue{
-	dir = 5
-	},
-/obj/structure/bed/chair/padded/blue,
-/turf/simulated/floor/tiled/dark,
-/area/bridge/disciplinary_board_room)
-"tE" = (
-/obj/structure/sign/double/icarus/solgovflag/right{
-	pixel_y = 32
-	},
-/obj/structure/bed/chair/padded/blue,
-/obj/effect/floor_decal/corner/blue/three_quarters{
-	dir = 1
-	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/disciplinary_board_room)
 "tH" = (
@@ -8386,14 +8379,6 @@
 	},
 /turf/simulated/floor/airless,
 /area/aquila/maintenance)
-"ux" = (
-/obj/structure/sign/double/icarus/solgovflag/left{
-	dir = 4;
-	icon_state = "solgovflag-left";
-	pixel_x = -32
-	},
-/turf/simulated/floor/wood/walnut,
-/area/crew_quarters/heads/office/co)
 "uy" = (
 /turf/simulated/wall/walnut,
 /area/crew_quarters/heads/cobed)
@@ -8438,18 +8423,6 @@
 	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/co)
-"uE" = (
-/obj/structure/bed/chair/padded/blue,
-/obj/structure/sign/double/icarus/solgovflag/left{
-	dir = 8;
-	icon_state = "solgovflag-left";
-	pixel_x = 32
-	},
-/obj/effect/floor_decal/corner/blue{
-	dir = 6
-	},
-/turf/simulated/floor/tiled/dark,
-/area/crew_quarters/heads/office/sea)
 "uG" = (
 /obj/structure/bed/chair/padded/blue,
 /turf/simulated/floor/tiled/dark,
@@ -8536,6 +8509,24 @@
 /obj/item/weapon/tableflag,
 /turf/simulated/floor/carpet/blue2,
 /area/crew_quarters/heads/office/sgr)
+"uS" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/weapon/reagent_containers/food/drinks/glass2/carafe,
+/obj/item/weapon/reagent_containers/food/drinks/glass2/square,
+/obj/effect/floor_decal/corner/blue/three_quarters{
+	dir = 8
+	},
+/obj/structure/sign/warning/nosmoking_1{
+	dir = 4;
+	icon_state = "nosmoking";
+	pixel_x = -37
+	},
+/obj/structure/sign/double/solgovflag/left{
+	pixel_x = 0;
+	pixel_y = 32
+	},
+/turf/simulated/floor/tiled/dark,
+/area/bridge/disciplinary_board_room)
 "uT" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 9
@@ -8673,21 +8664,6 @@
 	},
 /obj/item/weapon/pen,
 /turf/simulated/floor/tiled/dark,
-/area/crew_quarters/heads/office/sea)
-"vl" = (
-/obj/structure/table/standard{
-	name = "plastic table frame"
-	},
-/obj/structure/sign/double/icarus/solgovflag/right{
-	dir = 8;
-	icon_state = "solgovflag-right";
-	pixel_x = 32
-	},
-/obj/effect/floor_decal/corner/blue{
-	dir = 6
-	},
-/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
-/turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/sea)
 "vm" = (
 /obj/structure/filingcabinet/chestdrawer{
@@ -9314,28 +9290,6 @@
 	pixel_x = -21
 	},
 /obj/machinery/light,
-/turf/simulated/floor/carpet/blue2,
-/area/crew_quarters/heads/office/sgr)
-"wE" = (
-/obj/structure/table/woodentable/walnut,
-/obj/structure/sign/double/icarus/solgovflag/right{
-	dir = 1;
-	icon_state = "solgovflag-right";
-	pixel_z = -32
-	},
-/obj/item/weapon/storage/briefcase{
-	pixel_x = 3;
-	pixel_y = 0
-	},
-/obj/item/weapon/hand_labeler,
-/obj/item/device/taperecorder{
-	pixel_x = -4;
-	pixel_y = 2
-	},
-/obj/item/device/camera{
-	pixel_x = 3;
-	pixel_y = -4
-	},
 /turf/simulated/floor/carpet/blue2,
 /area/crew_quarters/heads/office/sgr)
 "wH" = (
@@ -9994,6 +9948,20 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/aquila/medical)
+"yp" = (
+/obj/structure/table/standard{
+	name = "plastic table frame"
+	},
+/obj/effect/floor_decal/corner/blue{
+	dir = 6
+	},
+/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
+/obj/structure/sign/double/solgovflag/right{
+	dir = 8;
+	pixel_x = 32
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/crew_quarters/heads/office/sea)
 "yw" = (
 /obj/effect/floor_decal/corner/paleblue/diagonal,
 /obj/structure/table/glass,
@@ -11287,6 +11255,17 @@
 /obj/effect/paint/hull,
 /turf/simulated/wall/titanium,
 /area/aquila/head)
+"DV" = (
+/obj/structure/bed/chair/padded/blue,
+/obj/effect/floor_decal/corner/blue{
+	dir = 5
+	},
+/obj/structure/sign/double/solgovflag/right{
+	pixel_x = 0;
+	pixel_y = 32
+	},
+/turf/simulated/floor/tiled/dark,
+/area/bridge/disciplinary_board_room)
 "DY" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
@@ -11658,6 +11637,17 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
+"FX" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 5
+	},
+/obj/structure/bed/chair/padded/blue,
+/obj/structure/sign/double/solgovflag/left{
+	pixel_x = 0;
+	pixel_y = 32
+	},
+/turf/simulated/floor/tiled/dark,
+/area/bridge/disciplinary_board_room)
 "Ga" = (
 /obj/effect/floor_decal/corner/yellow{
 	dir = 10;
@@ -12155,6 +12145,21 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
+"HJ" = (
+/obj/structure/table/woodentable/walnut,
+/obj/item/weapon/stamp/solgov,
+/obj/item/weapon/stamp/denied{
+	pixel_x = 4;
+	pixel_y = -2
+	},
+/obj/random_multi/single_item/summarydocuments/scgr,
+/obj/structure/sign/double/solgovflag/left{
+	dir = 1;
+	pixel_x = 0;
+	pixel_y = -32
+	},
+/turf/simulated/floor/carpet/blue2,
+/area/crew_quarters/heads/office/sgr)
 "HK" = (
 /obj/effect/overmap/visitable/ship/torch,
 /turf/simulated/floor/tiled/dark,
@@ -13129,6 +13134,13 @@
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/fuel,
 /turf/simulated/floor/airless,
 /area/aquila/maintenance)
+"LY" = (
+/obj/structure/sign/double/solgovflag/right{
+	dir = 4;
+	pixel_x = -32
+	},
+/turf/simulated/floor/wood/walnut,
+/area/crew_quarters/heads/office/co)
 "Ma" = (
 /obj/structure/railing/mapped{
 	dir = 1;
@@ -13872,14 +13884,6 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/aquila/airlock)
-"PF" = (
-/obj/structure/sign/double/icarus/solgovflag/right{
-	dir = 4;
-	icon_state = "solgovflag-right";
-	pixel_x = -32
-	},
-/turf/simulated/floor/wood/walnut,
-/area/crew_quarters/heads/office/co)
 "PP" = (
 /obj/machinery/firealarm{
 	dir = 4;
@@ -14922,6 +14926,17 @@
 /obj/machinery/light,
 /turf/simulated/floor/tiled/dark,
 /area/bridge/storage)
+"TJ" = (
+/obj/structure/bed/chair/padded/blue,
+/obj/effect/floor_decal/corner/blue/three_quarters{
+	dir = 1
+	},
+/obj/structure/sign/double/solgovflag/right{
+	pixel_x = 0;
+	pixel_y = 32
+	},
+/turf/simulated/floor/tiled/dark,
+/area/bridge/disciplinary_board_room)
 "TK" = (
 /obj/effect/floor_decal/corner/blue/three_quarters,
 /obj/structure/cable/green{
@@ -16164,21 +16179,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/meeting_room)
-"Zf" = (
-/obj/structure/table/woodentable/walnut,
-/obj/structure/sign/double/icarus/solgovflag/left{
-	dir = 1;
-	icon_state = "solgovflag-left";
-	pixel_y = -32
-	},
-/obj/item/weapon/stamp/solgov,
-/obj/item/weapon/stamp/denied{
-	pixel_x = 4;
-	pixel_y = -2
-	},
-/obj/random_multi/single_item/summarydocuments/scgr,
-/turf/simulated/floor/carpet/blue2,
-/area/crew_quarters/heads/office/sgr)
 "Zg" = (
 /obj/effect/floor_decal/scglogo{
 	icon_state = "center-right"
@@ -23939,8 +23939,8 @@ BI
 RV
 Mz
 Yz
-PF
-ux
+LY
+dA
 An
 uy
 Kq
@@ -26162,8 +26162,8 @@ fS
 sB
 tm
 tZ
-uE
-vl
+hU
+yp
 vQ
 wx
 sB
@@ -28185,7 +28185,7 @@ ui
 uN
 Sf
 vY
-wE
+mp
 sL
 JG
 GI
@@ -28387,7 +28387,7 @@ uj
 uO
 vu
 vY
-Zf
+HJ
 sL
 JG
 Ma
@@ -29796,7 +29796,7 @@ yW
 rk
 qz
 TX
-tA
+uS
 uo
 uT
 Lh
@@ -29998,7 +29998,7 @@ qt
 rl
 zF
 TX
-tB
+DV
 up
 uU
 Mh
@@ -30402,7 +30402,7 @@ fW
 Cv
 pI
 kJ
-tD
+FX
 lS
 Fn
 rA
@@ -30604,7 +30604,7 @@ qv
 rn
 KP
 kJ
-tE
+TJ
 dj
 uW
 Lb
