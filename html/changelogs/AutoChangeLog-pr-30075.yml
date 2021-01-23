@@ -1,5 +1,0 @@
-author: "lorwp"
-delete-after: True
-changes: 
-  - admin: "Direct/Global/Local Narrates now show for all staff, not just those with R_ADMIN"
-  - admin: "Ditto with paralyze logs"

@@ -1,4 +1,0 @@
-author: "Mucker"
-delete-after: True
-changes: 
-  - tweak: "Replaces the 'Show Job in Lobby' preference with 'Show Ready Status in Lobby' to make it easier for players to keep characters anonymous."
