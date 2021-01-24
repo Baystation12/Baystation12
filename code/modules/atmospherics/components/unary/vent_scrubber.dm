@@ -102,16 +102,33 @@
 	if (!id_tag)
 		id_tag = num2text(sequential_id("obj/machinery"))
 	if(!scrubbing_gas)
-		scrubbing_gas = list()
-		for(var/g in gas_data.gases)
-			if(g != GAS_OXYGEN && g != GAS_NITROGEN)
-				scrubbing_gas += g
+		reset_scrubbing()
 	var/area/A = get_area(src)
 	if(A && !A.air_scrub_names[id_tag])
 		var/new_name = "[A.name] Vent Scrubber #[A.air_scrub_names.len+1]"
 		A.air_scrub_names[id_tag] = new_name
 		SetName(new_name)
 	. = ..()
+
+
+/obj/machinery/atmospherics/unary/vent_scrubber/proc/reset_scrubbing()
+	if (initial(scrubbing_gas))
+		scrubbing_gas = initial(scrubbing_gas)
+	else
+		scrubbing_gas = list()
+		for(var/g in gas_data.gases)
+			if(g != GAS_OXYGEN && g != GAS_NITROGEN)
+				add_to_scrubbing(g)
+
+
+/obj/machinery/atmospherics/unary/vent_scrubber/proc/add_to_scrubbing(new_gas)
+	scrubbing_gas |= new_gas
+
+
+/obj/machinery/atmospherics/unary/vent_scrubber/proc/remove_from_scrubbing(old_gas)
+	if (old_gas in scrubbing_gas)
+		scrubbing_gas -= old_gas
+
 
 /obj/machinery/atmospherics/unary/vent_scrubber/RefreshParts()
 	. = ..()
@@ -236,9 +253,9 @@
 	hibernate = FALSE
 	toggle_input_toggle()
 
-/obj/machinery/atmospherics/unary/vent_scrubber/on/sauna/Initialize()
-	. = ..()
-	scrubbing_gas -= GAS_STEAM
+/obj/machinery/atmospherics/unary/vent_scrubber/on/sauna/reset_scrubbing()
+	..()
+	remove_from_scrubbing(GAS_STEAM)
 
 /decl/public_access/public_variable/scrubbing
 	expected_type = /obj/machinery/atmospherics/unary/vent_scrubber
