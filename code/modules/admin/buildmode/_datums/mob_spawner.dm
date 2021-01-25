@@ -10,6 +10,7 @@
 	var/list/messages = list() //messages spawner will pick from to display alongside spawning mobs
 	var/message_class = "none" //the span class applied to the chosen message
 	var/paused = TRUE
+	var/atmos_immune = FALSE //if the mobs are immune to all atmospheric conditions
 
 
 /datum/mob_spawner/proc/copy()
@@ -24,6 +25,7 @@
 	contents["spawn_count"] = spawn_count
 	contents["paused"] = paused
 	contents["next_spawn_time"] = next_spawn_time
+	contents["atmos_immune"] = atmos_immune
 
 	return contents
 
@@ -41,6 +43,7 @@
 	spawn_count = contents["spawn_count"]
 	paused = contents["paused"]
 	next_spawn_time = contents["next_spawn_time"]
+	atmos_immune = contents["atmos_immune"]
 
 	if (!paused)
 		START_PROCESSING(SSprocessing, src)
@@ -51,7 +54,7 @@
 
 	if (mobs.len > 0 && next_spawn_time < world.time)
 		var/turf/T
-		var/mob/living/M
+		var/mob/living/simple_animal/M
 		for (var/i = 1; i <= 10; i++)
 			if (radius == -1)
 				T = pick_area_turf(area, list(/proc/not_turf_contains_dense_objects))
@@ -71,6 +74,11 @@
 			return
 
 		M = new M(T)
+		if(atmos_immune)
+			M.min_gas = null
+			M.max_gas = null
+			M.minbodytemp = 0
+			M.maxbodytemp = 5000
 
 		if (messages.len > 0)
 			if (message_class != "none")
@@ -78,13 +86,11 @@
 			else
 				M.visible_message(pick(messages))
 
-
-
 		if (spawn_count > 0)
 			spawn_count--
 
 			if (spawn_count <= 0)
-				log_debug("Mob spawner at [area] finished spawning.")
+				log_debug(append_admin_tools("Mob spawner at ([center.x], [center.y], [center.z]) finished spawning.", null, center))
 				qdel(src) //delete spawner once we're done spawning mobs
 
 		next_spawn_time = world.time + interval + rand(0, variation)
