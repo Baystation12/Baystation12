@@ -1,4 +1,0 @@
-author: "Mucker"
-delete-after: True
-changes: 
-  - rscadd: "Adds a preference option to toggle whether or not your presence is announced when joining as an observer, called 'Announce When Joining as Observer'."
