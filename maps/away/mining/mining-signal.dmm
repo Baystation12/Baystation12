@@ -926,14 +926,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/outpost/abandoned)
-"df" = (
-/obj/effect/wallframe_spawn/reinforced,
-/obj/effect/decal/cleanable/dirt,
-/obj/machinery/door/blast/regular{
-	id_tag = "mars_blast"
-	},
-/turf/simulated/floor/plating,
-/area/outpost/abandoned)
 "dg" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 10;
@@ -942,28 +934,10 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/carpet,
 /area/outpost/abandoned)
-"dh" = (
-/turf/simulated/floor/carpet{
-	icon_state = "carpet_broken"
-	},
-/area/outpost/abandoned)
-"di" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/carpet{
-	icon_state = "carpet_broken"
-	},
-/area/outpost/abandoned)
 "dj" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/carpet,
-/area/outpost/abandoned)
-"dk" = (
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/carpet{
-	icon_state = "carpet_broken"
-	},
 /area/outpost/abandoned)
 "dl" = (
 /obj/effect/floor_decal/spline/fancy/wood{
@@ -1016,12 +990,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/red,
 /turf/simulated/wall/titanium,
 /area/outpost/abandoned)
-"dv" = (
-/turf/simulated/floor/asteroid,
-/turf/simulated/shuttle/wall{
-	icon_state = "diagonalWall3"
-	},
-/area/outpost/abandoned)
 "dw" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 10;
@@ -1036,24 +1004,6 @@
 /obj/structure/table/woodentable,
 /turf/simulated/floor/carpet,
 /area/outpost/abandoned)
-"dy" = (
-/obj/effect/floor_decal/spline/fancy/wood,
-/obj/structure/flora/pottedplant{
-	icon_state = "plant-25"
-	},
-/obj/machinery/light/small,
-/turf/simulated/floor/carpet{
-	icon_state = "carpet_broken"
-	},
-/area/outpost/abandoned)
-"dz" = (
-/obj/effect/floor_decal/spline/fancy/wood,
-/obj/structure/table/woodentable,
-/obj/random/loot,
-/turf/simulated/floor/carpet{
-	icon_state = "carpet_broken"
-	},
-/area/outpost/abandoned)
 "dA" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 6;
@@ -1061,13 +1011,6 @@
 	},
 /obj/structure/table/woodentable,
 /turf/simulated/floor/carpet,
-/area/outpost/abandoned)
-"dB" = (
-/turf/simulated/floor/asteroid,
-/turf/simulated/shuttle/wall{
-	dir = 4;
-	icon_state = "diagonalWall3"
-	},
 /area/outpost/abandoned)
 "dC" = (
 /obj/machinery/vending/coffee{
@@ -2531,6 +2474,15 @@
 /obj/effect/shuttle_landmark/away/nav7,
 /turf/simulated/floor/asteroid,
 /area/mine/explored)
+"iX" = (
+/obj/effect/wallframe_spawn/reinforced,
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/door/blast/regular{
+	dir = 4;
+	id_tag = "mars_blast"
+	},
+/turf/simulated/floor/plating,
+/area/outpost/abandoned)
 "jb" = (
 /obj/effect/shuttle_landmark/away/nav1,
 /turf/simulated/floor/asteroid,
@@ -2547,6 +2499,14 @@
 /obj/effect/shuttle_landmark/away/nav6,
 /turf/simulated/floor/asteroid,
 /area/mine/explored)
+"mk" = (
+/obj/effect/floor_decal/spline/fancy/wood,
+/obj/structure/flora/pottedplant{
+	icon_state = "plant-25"
+	},
+/obj/machinery/light/small,
+/turf/simulated/floor/carpet,
+/area/outpost/abandoned)
 "nb" = (
 /obj/effect/shuttle_landmark/away/nav5,
 /turf/simulated/floor/asteroid,
@@ -2654,6 +2614,14 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/outpost/abandoned)
+"Bp" = (
+/obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/blast/regular{
+	dir = 4;
+	id_tag = "mars_blast"
+	},
+/turf/simulated/floor/plating,
+/area/outpost/abandoned)
 "HD" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -2664,6 +2632,23 @@
 /obj/machinery/door/blast/regular/open,
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
+/area/outpost/abandoned)
+"JD" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/floor_decal/spline/fancy/wood/corner,
+/turf/simulated/floor/carpet,
+/area/outpost/abandoned)
+"Kt" = (
+/obj/effect/floor_decal/spline/fancy/wood/corner{
+	dir = 8
+	},
+/turf/simulated/floor/carpet,
+/area/outpost/abandoned)
+"XS" = (
+/obj/effect/floor_decal/spline/fancy/wood,
+/obj/structure/table/woodentable,
+/obj/random/loot,
+/turf/simulated/floor/carpet,
 /area/outpost/abandoned)
 
 (1,1,1) = {"
@@ -17104,8 +17089,8 @@ bQ
 af
 af
 af
-df
-dv
+iX
+af
 ab
 ab
 ab
@@ -17307,8 +17292,8 @@ bY
 cm
 cH
 dg
-dm
-dv
+af
+af
 ab
 ab
 ab
@@ -17508,7 +17493,7 @@ bS
 bZ
 cn
 cI
-dh
+Kt
 dw
 dm
 ab
@@ -17710,7 +17695,7 @@ bT
 bZ
 co
 cJ
-di
+dj
 dx
 dm
 ei
@@ -17913,7 +17898,7 @@ bZ
 cp
 cK
 dj
-dy
+mk
 dm
 ab
 ab
@@ -18115,7 +18100,7 @@ bZ
 cq
 cI
 dj
-dz
+XS
 dm
 ab
 ab
@@ -18316,7 +18301,7 @@ bP
 bZ
 cr
 cL
-dk
+JD
 dA
 dm
 ab
@@ -18519,8 +18504,8 @@ bY
 cs
 cM
 dl
-dm
-dB
+af
+af
 ab
 ab
 ej
@@ -18720,8 +18705,8 @@ bU
 af
 af
 af
-dm
-dB
+Bp
+af
 ab
 ab
 ab
