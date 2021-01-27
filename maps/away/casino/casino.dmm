@@ -1216,22 +1216,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/casino/casino_hangar)
-"do" = (
-/turf/simulated/shuttle/wall,
-/area/casino/casino_cutter)
-"dp" = (
-/turf/simulated/shuttle/wall{
-	dir = 4;
-	icon_state = "swall_straight"
-	},
-/area/casino/casino_cutter)
-"dq" = (
-/obj/structure/fuel_port,
-/turf/simulated/shuttle/wall{
-	dir = 8;
-	icon_state = "swall"
-	},
-/area/casino/casino_cutter)
 "dr" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8;
@@ -1312,53 +1296,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/casino/casino_hangar)
-"dF" = (
-/obj/effect/wallframe_spawn/reinforced,
-/turf/simulated/floor/tiled,
-/area/casino/casino_cutter)
-"dG" = (
-/obj/structure/bed/chair{
-	dir = 8;
-	icon_state = "chair_preview"
-	},
-/obj/machinery/door/window,
-/obj/item/key,
-/obj/machinery/embedded_controller/radio/airlock/docking_port{
-	frequency = 1380;
-	id_tag = "casino_cutter";
-	pixel_y = 25
-	},
-/turf/simulated/floor/shuttle/yellow,
-/area/casino/casino_cutter)
-"dH" = (
-/obj/structure/cable/green{
-	d2 = 2;
-	icon_state = "0-2"
-	},
-/obj/machinery/power/apc{
-	dir = 1;
-	name = "north bump";
-	pixel_x = 0;
-	pixel_y = 24;
-	req_access = newlist()
-	},
-/turf/simulated/floor/shuttle/yellow,
-/area/casino/casino_cutter)
-"dI" = (
-/turf/simulated/floor/shuttle/yellow,
-/area/casino/casino_cutter)
-"dJ" = (
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/turf/simulated/floor/shuttle/yellow,
-/area/casino/casino_cutter)
-"dK" = (
-/obj/structure/shuttle/engine/propulsion{
-	dir = 4
-	},
-/turf/simulated/floor/tiled,
-/area/casino/casino_cutter)
 "dL" = (
 /obj/structure/cable/yellow{
 	d1 = 1;
@@ -1426,48 +1363,6 @@
 /obj/random/ammo,
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
-"dW" = (
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/turf/simulated/floor/shuttle/yellow,
-/area/casino/casino_cutter)
-"dX" = (
-/obj/item/weapon/storage/backpack/dufflebag,
-/obj/random/cash,
-/obj/random/cash,
-/obj/random/cash,
-/obj/random/cash,
-/obj/random/cash,
-/obj/structure/bed/chair/comfy/captain{
-	dir = 1
-	},
-/turf/simulated/floor/shuttle/yellow,
-/area/casino/casino_cutter)
-"dY" = (
-/obj/structure/bed/chair/comfy/captain{
-	dir = 1
-	},
-/obj/item/weapon/storage/bag/cash,
-/turf/simulated/floor/shuttle/yellow,
-/area/casino/casino_cutter)
-"dZ" = (
-/obj/structure/bed/chair/comfy/captain{
-	dir = 1
-	},
-/turf/simulated/floor/shuttle/yellow,
-/area/casino/casino_cutter)
-"ea" = (
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/obj/structure/bed/chair/comfy/captain{
-	dir = 1
-	},
-/turf/simulated/floor/shuttle/yellow,
-/area/casino/casino_cutter)
 "eb" = (
 /obj/effect/overmap/visitable/ship/casino,
 /turf/space,
@@ -1557,25 +1452,6 @@
 /obj/structure/safe,
 /turf/simulated/floor/plating,
 /area/casino/casino_security)
-"eo" = (
-/obj/effect/shuttle_landmark/nav_casino/cutter_hangar,
-/obj/machinery/door/unpowered/shuttle{
-	desc = "Cutter door. It opens and closes. It has no safety devices so be careful.";
-	name = "cutter door"
-	},
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/turf/simulated/floor/shuttle/blue,
-/area/casino/casino_cutter)
-"ep" = (
-/turf/simulated/shuttle/wall{
-	dir = 8;
-	icon_state = "swall"
-	},
-/area/casino/casino_cutter)
 "eq" = (
 /obj/structure/cable/yellow{
 	d1 = 2;
@@ -5234,6 +5110,10 @@
 	},
 /turf/simulated/floor/tiled,
 /area/casino/casino_crew_cantina)
+"uL" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/turf/simulated/floor/plating,
+/area/casino/casino_cutter)
 "vb" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/item/ammo_casing/rifle/used,
@@ -5306,6 +5186,19 @@
 	},
 /turf/simulated/floor/tiled,
 /area/casino/casino_crew_cantina)
+"xu" = (
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/casino/casino_cutter)
+"xC" = (
+/obj/structure/bed/chair/comfy/captain{
+	dir = 1
+	},
+/obj/item/weapon/storage/bag/cash,
+/turf/simulated/floor/tiled/steel_grid,
+/area/casino/casino_cutter)
 "yb" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/item/ammo_casing/pistol/magnum/used,
@@ -5347,6 +5240,14 @@
 	},
 /turf/simulated/floor/tiled,
 /area/casino/casino_mainfloor)
+"ze" = (
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/casino/casino_cutter)
 "Ab" = (
 /obj/item/weapon/gun/projectile/pistol/sec/MK,
 /obj/item/ammo_casing/pistol/magnum/used,
@@ -5361,6 +5262,18 @@
 	},
 /turf/simulated/floor/tiled,
 /area/casino/casino_mainfloor)
+"AT" = (
+/obj/effect/shuttle_landmark/nav_casino/cutter_hangar,
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/door/airlock{
+	name = "Cutter door"
+	},
+/turf/simulated/floor/tiled/steel_ridged,
+/area/casino/casino_cutter)
 "Bb" = (
 /obj/item/weapon/material/shard,
 /obj/item/ammo_casing/pistol/magnum/used,
@@ -5475,6 +5388,18 @@
 "Fc" = (
 /turf/simulated/wall/r_wall,
 /area/casino/casino_mainfloor)
+"FM" = (
+/obj/item/weapon/storage/backpack/dufflebag,
+/obj/random/cash,
+/obj/random/cash,
+/obj/random/cash,
+/obj/random/cash,
+/obj/random/cash,
+/obj/structure/bed/chair/comfy/captain{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/casino/casino_cutter)
 "Gb" = (
 /obj/item/ammo_casing/pistol/magnum/used,
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -5533,6 +5458,21 @@
 	},
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
+"Ik" = (
+/obj/structure/bed/chair/comfy/captain{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/casino/casino_cutter)
+"In" = (
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/bed/chair/comfy/captain{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/casino/casino_cutter)
 "Jb" = (
 /obj/machinery/power/smes/buildable{
 	RCon_tag = "Solar - Starboard";
@@ -5660,6 +5600,12 @@
 	},
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
+"Nx" = (
+/turf/simulated/floor/tiled/steel_grid,
+/area/casino/casino_cutter)
+"NZ" = (
+/turf/simulated/wall/r_titanium,
+/area/casino/casino_cutter)
 "Ob" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -5688,6 +5634,16 @@
 	},
 /turf/simulated/floor/plating,
 /area/casino/casino_crew_atmos)
+"OB" = (
+/obj/structure/window/basic{
+	dir = 4;
+	icon_state = "window"
+	},
+/obj/machinery/computer/shuttle_control/explore/casino_cutter{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/casino/casino_cutter)
 "Pb" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -5721,6 +5677,13 @@
 	},
 /turf/simulated/floor/plating,
 /area/casino/casino_crew_atmos)
+"Px" = (
+/obj/machinery/light{
+	dir = 1;
+	icon_state = "tube1"
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/casino/casino_cutter)
 "Qb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -5738,6 +5701,26 @@
 	},
 /turf/simulated/floor/plating,
 /area/casino/casino_bow)
+"Qi" = (
+/obj/structure/shuttle/engine/propulsion{
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/casino/casino_cutter)
+"QB" = (
+/obj/structure/bed/chair{
+	dir = 8;
+	icon_state = "chair_preview"
+	},
+/obj/machinery/door/window,
+/obj/item/key,
+/obj/machinery/embedded_controller/radio/airlock/docking_port{
+	frequency = 1380;
+	id_tag = "casino_cutter";
+	pixel_y = 25
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/casino/casino_cutter)
 "Rb" = (
 /obj/machinery/light/small{
 	dir = 4
@@ -5801,12 +5784,19 @@
 	},
 /turf/simulated/floor/airless,
 /area/casino/casino_bow)
-"Tb" = (
-/obj/machinery/light{
-	dir = 1;
-	icon_state = "tube1"
+"SP" = (
+/obj/structure/cable/green{
+	d2 = 2;
+	icon_state = "0-2"
 	},
-/turf/simulated/floor/shuttle/yellow,
+/obj/machinery/power/apc{
+	dir = 1;
+	name = "north bump";
+	pixel_x = 0;
+	pixel_y = 24;
+	req_access = newlist()
+	},
+/turf/simulated/floor/tiled/steel_grid,
 /area/casino/casino_cutter)
 "Tc" = (
 /obj/machinery/atmospherics/pipe/simple/visible/black{
@@ -5817,16 +5807,6 @@
 	},
 /turf/simulated/floor/airless,
 /area/casino/casino_bow)
-"Ub" = (
-/obj/structure/window/basic{
-	dir = 4;
-	icon_state = "window"
-	},
-/obj/machinery/computer/shuttle_control/explore/casino_cutter{
-	dir = 1
-	},
-/turf/simulated/floor/shuttle/yellow,
-/area/casino/casino_cutter)
 "Uc" = (
 /obj/structure/hygiene/sink{
 	dir = 8;
@@ -5884,6 +5864,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/white,
 /area/casino/casino_patron_bathroom)
+"Vu" = (
+/obj/structure/fuel_port,
+/turf/simulated/wall/r_titanium,
+/area/casino/casino_cutter)
 "Wb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -12239,10 +12223,10 @@ bO
 ch
 bq
 cU
-do
-dF
-dF
-do
+NZ
+uL
+uL
+NZ
 eG
 eX
 bq
@@ -12341,10 +12325,10 @@ bP
 ci
 cD
 cV
-dp
-dG
-Ub
-dp
+NZ
+QB
+OB
+NZ
 eG
 eX
 bq
@@ -12443,10 +12427,10 @@ bQ
 cj
 cD
 cV
-dp
-dH
-dW
-eo
+NZ
+SP
+ze
+AT
 eH
 eY
 br
@@ -12545,10 +12529,10 @@ bR
 ck
 cD
 cV
-dp
-dI
-dX
-dp
+NZ
+Nx
+FM
+NZ
 eG
 eZ
 br
@@ -12647,10 +12631,10 @@ bS
 cl
 cE
 cW
-dp
-Tb
-dY
-dp
+NZ
+Px
+xC
+NZ
 eG
 cF
 br
@@ -12749,10 +12733,10 @@ bq
 bq
 bq
 cU
-dp
-dI
-dZ
-dp
+NZ
+Nx
+Ik
+NZ
 eG
 cF
 br
@@ -12851,10 +12835,10 @@ bT
 cm
 cF
 cV
-dp
-dJ
-ea
-dp
+NZ
+xu
+In
+NZ
 eG
 fa
 br
@@ -12953,10 +12937,10 @@ br
 cn
 cF
 cV
-dq
-dK
-dK
-ep
+Vu
+Qi
+Qi
+NZ
 eG
 fa
 br
