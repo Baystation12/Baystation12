@@ -49,6 +49,7 @@ To start the server, run Dream Daemon and enter the path to your compiled `bayst
 If you wish to use Discord webhooks, which are a way of passing information from the server to a Discord channel, you will need to copy `webhooks.json` into `config/` from `config/example/` and add definitions pointing the desired event at the desired [Discord webhook URL](https://support.discordapp.com/hc/en-us/articles/228383668-Intro-to-Webhooks). Valid webhook IDs as of time of writing are as follows:
 - webhook_roundend: The round has ended. Will include the mode name and summarize survivors and ghosts.
 - webhook_roundstart: The master controller has finished initializing and the round will begin soon.
+- webhook_ooc: Displaying OCC chat.
 - webhook_submap_loaded: A submap has been loaded and placed, and is available for people to join. Includes the name of the submap.
 - webhook_submap_vox: The vox submap specifically has been loaded and placed. This is distinct for the purposes of tagging vox players with a @mention.
 - webhook_submap_skrell: The Skrell submap specifically has been loaded and placed. This is distinct for the purposes of tagging Skrell players with a @mention.
