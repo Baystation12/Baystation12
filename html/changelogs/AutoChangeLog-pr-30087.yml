@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - bugfix: "Lights in emergency lighting mode now use the correct overlay color instead of still appearing bright white."
