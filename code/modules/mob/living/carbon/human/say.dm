@@ -46,7 +46,7 @@
 			var/temp = winget(client, "input", "text")
 			if(findtextEx(temp, "Say \"", 1, 7) && length(temp) > 5)	//case sensitive means
 				var/main_key = get_prefix_key(/decl/prefix/radio_main_channel)
-				temp = replacetext(temp, main_key, "")	//general radio
+				temp = replacetext_char(temp, main_key, "")	//general radio
 
 				var/channel_key = get_prefix_key(/decl/prefix/radio_channel_selection)
 				if(findtext(trim_left(temp), channel_key, 6, 7))	//dept radio

@@ -7,7 +7,7 @@
 
 /obj/machinery/telecomms/hub/map_preset/Initialize()
 	if (preset_name)
-		var/name_lower = replacetext(lowertext(preset_name), " ", "_")
+		var/name_lower = replacetext_char(lowertext(preset_name), " ", "_")
 		id = "[preset_name] Hub"
 		network = "tcomm_[name_lower]"
 		autolinkers = list(
@@ -40,7 +40,7 @@
 
 /obj/machinery/telecomms/receiver/map_preset/Initialize()
 	if (preset_name)
-		var/name_lower = replacetext(lowertext(preset_name), " ", "_")
+		var/name_lower = replacetext_char(lowertext(preset_name), " ", "_")
 		id = "[preset_name] Receiver"
 		network = "tcomm_[name_lower]"
 		freq_listening += list(assign_away_freq(preset_name), HAIL_FREQ)
@@ -79,7 +79,7 @@
 
 /obj/machinery/telecomms/bus/map_preset/Initialize()
 	if (preset_name)
-		var/name_lower = replacetext(lowertext(preset_name), " ", "_")
+		var/name_lower = replacetext_char(lowertext(preset_name), " ", "_")
 		id = "[preset_name] Bus"
 		network = "tcomm_[name_lower]"
 		freq_listening += list(assign_away_freq(preset_name), HAIL_FREQ)
@@ -136,7 +136,7 @@
 
 /obj/machinery/telecomms/processor/map_preset/Initialize()
 	if (preset_name)
-		var/name_lower = replacetext(lowertext(preset_name), " ", "_")
+		var/name_lower = replacetext_char(lowertext(preset_name), " ", "_")
 		id = "[preset_name] Processor"
 		network = "tcomm_[name_lower]"
 		autolinkers = list(
@@ -179,7 +179,7 @@
 
 /obj/machinery/telecomms/server/map_preset/Initialize()
 	if (preset_name)
-		var/name_lower = replacetext(lowertext(preset_name), " ", "_")
+		var/name_lower = replacetext_char(lowertext(preset_name), " ", "_")
 		id = "[preset_name] Server"
 		network = "tcomm_[name_lower]"
 		freq_listening += list(
@@ -282,7 +282,7 @@
 
 /obj/machinery/telecomms/broadcaster/map_preset/Initialize()
 	if (preset_name)
-		var/name_lower = replacetext(lowertext(preset_name), " ", "_")
+		var/name_lower = replacetext_char(lowertext(preset_name), " ", "_")
 		id = "[preset_name] Broadcaster"
 		network = "tcomm_[name_lower]"
 		autolinkers = list(

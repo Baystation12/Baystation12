@@ -217,7 +217,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 	if(istype(user, /mob/living/carbon/human) || istype(user,/mob/living/silicon) )
 		var/mob/living/human_or_robot_user = user
 		var/dat
-		dat = text("<HEAD><TITLE>Newscaster</TITLE></HEAD><H3>Newscaster Unit #[src.unit_no]</H3>")
+		dat = text("<meta charset=\"UTF-8\"><HEAD><TITLE>Newscaster</TITLE></HEAD><H3>Newscaster Unit #[src.unit_no]</H3>")
 
 		src.scan_user(human_or_robot_user) //Newscaster scans you
 
@@ -863,7 +863,7 @@ obj/item/weapon/newspaper/attack_self(mob/user)
 			else
 				dat+="I'm sorry to break your immersion. This shit's bugged. Report this bug to Agouri, polyxenitopalidou@gmail.com"
 
-		dat+="<BR><HR><div align='center'>[src.curr_page+1]</div>"
+		dat+="<meta charset=\"UTF-8\"><BR><HR><div align='center'>[src.curr_page+1]</div>"
 		show_browser(human_user, dat, "window=newspaper_main;size=300x400")
 		onclose(human_user, "newspaper_main")
 	else

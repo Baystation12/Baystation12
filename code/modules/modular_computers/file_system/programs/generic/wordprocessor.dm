@@ -104,9 +104,9 @@
 
 	if(href_list["PRG_editfile"])
 		var/oldtext = html_decode(loaded_data)
-		oldtext = replacetext(oldtext, "\[br\]", "\n")
+		oldtext = replacetext_char(oldtext, "\[br\]", "\n")
 
-		var/newtext = sanitize(replacetext(input(usr, "Editing file '[open_file]'. You may use most tags used in paper formatting:", "Text Editor", oldtext) as message|null, "\n", "\[br\]"), MAX_TEXTFILE_LENGTH)
+		var/newtext = sanitize(replacetext_char(input(usr, "Editing file '[open_file]'. You may use most tags used in paper formatting:", "Text Editor", oldtext) as message|null, "\n", "\[br\]"), MAX_TEXTFILE_LENGTH)
 		if(!newtext)
 			return
 		loaded_data = newtext

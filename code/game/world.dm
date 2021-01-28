@@ -145,7 +145,7 @@ var/world_topic_spam_protect_time = world.timeofday
 		s["players"] = 0
 		s["stationtime"] = stationtime2text()
 		s["roundduration"] = roundduration2text()
-		s["map"] = replacetext(GLOB.using_map.full_name, "\improper", "") //Done to remove the non-UTF-8 text macros 
+		s["map"] = replacetext_char(GLOB.using_map.full_name, "\improper", "") //Done to remove the non-UTF-8 text macros 
 
 		var/active = 0
 		var/list/players = list()
@@ -620,7 +620,7 @@ var/world_topic_spam_protect_time = world.timeofday
 	if(game_id)
 		GLOB.log_directory += "[game_id]"
 	else
-		GLOB.log_directory += "[replacetext(time_stamp(), ":", ".")]"
+		GLOB.log_directory += "[replacetext_char(time_stamp(), ":", ".")]"
 
 	GLOB.world_qdel_log = file("[GLOB.log_directory]/qdel.log")
 	to_file(GLOB.world_qdel_log, "\n\nStarting up round ID [game_id]. [time_stamp()]\n---------------------")

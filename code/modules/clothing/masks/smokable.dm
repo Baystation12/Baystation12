@@ -143,9 +143,9 @@
 			text = ignitermes
 		else
 			text = genericmes
-		text = replacetext(text, "USER", "[user]")
-		text = replacetext(text, "NAME", "[name]")
-		text = replacetext(text, "FLAME", "[W.name]")
+		text = replacetext_char(text, "USER", "[user]")
+		text = replacetext_char(text, "NAME", "[name]")
+		text = replacetext_char(text, "FLAME", "[W.name]")
 		light(text)
 
 /obj/item/clothing/mask/smokable/attack(var/mob/living/M, var/mob/living/user, def_zone)

@@ -27,11 +27,11 @@ SUBSYSTEM_DEF(chat)
 
 	//Some macros remain in the string even after parsing and fuck up the eventual output
 	var/original_message = message
-	message = replacetext(message, "\improper", "")
-	message = replacetext(message, "\proper", "")
+	message = replacetext_char(message, "\improper", "")
+	message = replacetext_char(message, "\proper", "")
 	if(handle_whitespace)
-		message = replacetext(message, "\n", "<br>")
-		message = replacetext(message, "\t", "[FOURSPACES][FOURSPACES]")
+		message = replacetext_char(message, "\n", "<br>")
+		message = replacetext_char(message, "\t", "[FOURSPACES][FOURSPACES]")
 	if (trailing_newline)
 		message += "<br>"
 

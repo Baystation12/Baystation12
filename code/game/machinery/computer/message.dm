@@ -79,7 +79,7 @@
 	if(hacking || emag)
 		message = rebootmsg
 	var/list/dat = list()
-	dat += "<head><title>Message Monitor Console</title></head><body>"
+	dat += "<meta charset=\"UTF-8\"><head><title>Message Monitor Console</title></head><body>"
 	dat += "<center><h2>Message Monitor Console</h2></center><hr>"
 	dat += "<center><h4><font color='blue'[message]</h5></center>"
 
