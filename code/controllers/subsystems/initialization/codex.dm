@@ -54,7 +54,7 @@ SUBSYSTEM_DEF(codex)
 		var/replacement = linkRegex.group[4]
 		if(linked_entry)
 			replacement = "<a href='?src=\ref[SScodex];show_examined_info=\ref[linked_entry];show_to=\ref[viewer]'>[replacement]</a>"
-		string = replacetextEx(string, linkRegex.match, replacement)
+		string = replacetextEx_char(string, linkRegex.match, replacement)
 	return string
 
 /datum/controller/subsystem/codex/proc/get_codex_entry(var/entry)

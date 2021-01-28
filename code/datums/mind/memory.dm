@@ -54,7 +54,7 @@
 		var/datum/memory/M = mem
 		var/owner_name = M.OwnerName()
 		if(owner_name != last_owner_name && current)
-			output += "<B>[current.real_name]'s Memories</B><HR>"
+			output += "<meta charset=\"UTF-8\"><B>[current.real_name]'s Memories</B><HR>"
 			last_owner_name = owner_name
 		output += "[M.memory] <a href='?src=\ref[src];remove_memory=\ref[M]'>\[Remove\]</a>"
 
@@ -70,7 +70,7 @@
 		var/datum/goal/ambition/ambition = SSgoals.ambitions[src]
 		output += "<HR><B>Ambitions:</B> [ambition.summarize()]"
 
-	show_browser(recipient, replacetext(jointext(output, "<BR>"),"\n","<BR>"),"window=memory")
+	show_browser(recipient, replacetext_char(jointext(output, "<BR>"),"\n","<BR>"),"window=memory")
 
 /***********
 * Memories *

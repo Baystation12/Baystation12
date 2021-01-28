@@ -112,10 +112,10 @@
 		. = speech[key]
 	else
 		. = default
-	. = replacetext(., "MERCHANT", name)
-	. = replacetext(., "ORIGIN", origin)
-	. = replacetext(.,"CURRENCY_SINGULAR", GLOB.using_map.local_currency_name_singular)
-	. = replacetext(.,"CURRENCY", GLOB.using_map.local_currency_name)
+	. = replacetext_char(., "MERCHANT", name)
+	. = replacetext_char(., "ORIGIN", origin)
+	. = replacetext_char(.,"CURRENCY_SINGULAR", GLOB.using_map.local_currency_name_singular)
+	. = replacetext_char(.,"CURRENCY", GLOB.using_map.local_currency_name)
 
 /datum/trader/proc/print_trading_items(var/num)
 	num = Clamp(num,1,trading_items.len)
@@ -210,7 +210,7 @@
 	if(!speech[TRADER_HAIL_START + specific])
 		specific = "generic"
 	var/datum/trade_response/tr = make_response(TRADER_HAIL_START + specific, "Greetings, MOB!", 0, TRUE)
-	tr.text = replacetext(tr.text, "MOB", user.name)
+	tr.text = replacetext_char(tr.text, "MOB", user.name)
 	return tr
 
 /datum/trader/proc/can_hail()
@@ -238,7 +238,7 @@
 	for(var/offer in offers)
 		if(istype(offer,/mob))
 			var/text = mob_transfer_message
-			to_chat(offer, replacetext(text, "ORIGIN", origin))
+			to_chat(offer, replacetext_char(text, "ORIGIN", origin))
 		qdel(offer)
 
 	num = Clamp(num, 1, trading_items.len)
@@ -255,7 +255,7 @@
 	num = Clamp(num, 1, trading_items.len)
 	var/atom/movable/M = trading_items[num]
 	var/datum/trade_response/tr = make_response(TRADER_HOW_MUCH, "Hmm.... how about VALUE CURRENCY?", 0, FALSE)
-	tr.text = replacetext(replacetext(tr.text, "ITEM", initial(M.name)), "VALUE", get_item_value(num, skill))
+	tr.text = replacetext_char(replacetext_char(tr.text, "ITEM", initial(M.name)), "VALUE", get_item_value(num, skill))
 	return tr
 
 /datum/trader/proc/what_do_you_want()

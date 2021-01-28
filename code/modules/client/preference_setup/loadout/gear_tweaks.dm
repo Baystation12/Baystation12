@@ -67,7 +67,7 @@
 		var/selection_type = valid_paths[path_name]
 		if(!ispath(selection_type, /obj/item))
 			CRASH("Expected an /obj/item path, was [log_info_line(selection_type)]")
-		var/path_name_san = replacetext(path_name, "\improper", "")
+		var/path_name_san = replacetext_char(path_name, "\improper", "")
 		valid_paths_san[path_name_san] = selection_type
 	src.valid_paths = sortAssoc(valid_paths_san)
 

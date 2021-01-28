@@ -226,8 +226,8 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/tmp/iconCache.sav")) //Cache o
 
 	var/original_message = message
 	if(handle_whitespace)
-		message = replacetext(message, "\n", "<br>")
-		message = replacetext(message, "\t", "[FOURSPACES][FOURSPACES]")
+		message = replacetext_char(message, "\n", "<br>")
+		message = replacetext_char(message, "\t", "[FOURSPACES][FOURSPACES]")
 
 	//Replace expanded \icon macro with icon2html
 	//regex/Replace with a proc won't work here because icon2html takes target as an argument and there is no way to pass it to the replacement proc

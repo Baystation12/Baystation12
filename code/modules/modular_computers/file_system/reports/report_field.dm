@@ -132,10 +132,10 @@ Basic field subtypes.
 
 /datum/report_field/pencode_text/set_value(given_value)
 	if(istext(given_value))
-		value = sanitize(replacetext(given_value, "\n", "\[br\]"), MAX_PAPER_MESSAGE_LEN) || ""
+		value = sanitize(replacetext_char(given_value, "\n", "\[br\]"), MAX_PAPER_MESSAGE_LEN) || ""
 
 /datum/report_field/pencode_text/ask_value(mob/user)
-	set_value(input(user, "[display_name()] (You may use HTML paper formatting tags):", "Form Input", replacetext(html_decode(value), "\[br\]", "\n")) as null|message)
+	set_value(input(user, "[display_name()] (You may use HTML paper formatting tags):", "Form Input", replacetext_char(html_decode(value), "\[br\]", "\n")) as null|message)
 
 //Uses hh:mm format for times.
 /datum/report_field/time
