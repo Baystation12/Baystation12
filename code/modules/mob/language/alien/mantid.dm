@@ -32,16 +32,16 @@
 	return FALSE
 
 /datum/language/mantid/muddle(var/message)
-	message = replacetext(message, "...",  ".")
-	message = replacetext(message, "!?",   ".")
-	message = replacetext(message, "?!",   ".")
-	message = replacetext(message, "!",    ".")
-	message = replacetext(message, "?",    ".")
-	message = replacetext(message, ",",    "")
-	message = replacetext(message, ";",    "")
-	message = replacetext(message, ":",    "")
-	message = replacetext(message, ".",    "...")
-	message = replacetext(message, "&#39", "'")
+	message = replacetext_char(message, "...",  ".")
+	message = replacetext_char(message, "!?",   ".")
+	message = replacetext_char(message, "?!",   ".")
+	message = replacetext_char(message, "!",    ".")
+	message = replacetext_char(message, "?",    ".")
+	message = replacetext_char(message, ",",    "")
+	message = replacetext_char(message, ";",    "")
+	message = replacetext_char(message, ":",    "")
+	message = replacetext_char(message, ".",    "...")
+	message = replacetext_char(message, "&#39", "'")
 	return message
 
 /datum/language/mantid/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)

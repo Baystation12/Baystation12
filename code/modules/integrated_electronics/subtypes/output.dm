@@ -35,7 +35,7 @@
 		if(d)
 			stuff_to_display = "[d]"
 	else
-		stuff_to_display = replacetext("[I.data]", eol , "<br>")
+		stuff_to_display = replacetext_char("[I.data]", eol , "<br>")
 
 /obj/item/integrated_circuit/output/screen/medium
 	name = "screen"

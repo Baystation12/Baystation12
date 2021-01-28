@@ -91,7 +91,7 @@ obj/item/weapon/paper/admin/proc/updateDisplay()
 		unformatedText = t
 
 		//t = html_encode(t)
-		t = replacetext(t, "\n", "<BR>")
+		t = replacetext_char(t, "\n", "<BR>")
 		t = parsepencode(t,,, isCrayon) // Encode everything from pencode to html
 
 

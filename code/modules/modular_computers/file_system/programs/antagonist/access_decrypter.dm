@@ -140,7 +140,7 @@
 			for(var/access in get_region_accesses(i))
 				if (get_access_desc(access))
 					accesses.Add(list(list(
-						"desc" = replacetext(get_access_desc(access), " ", "&nbsp"),
+						"desc" = replacetext_char(get_access_desc(access), " ", "&nbsp"),
 						"ref" = access,
 						"allowed" = (access in id_card.access) ? 1 : 0,
 						"blocked" = ((access in PRG.restricted_access_codes) || ((access in PRG.skill_restricted_access_codes_master) && PRG.operator_skill < SKILL_PROF)) ? 1 : 0)))
