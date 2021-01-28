@@ -1,0 +1,4 @@
+author: "Spookerton"
+delete-after: True
+changes: 
+  - tweak: "The lobby tab now displays the time until the next continue vote, or the initial and subsequent times before the round starts."
