@@ -6,8 +6,7 @@
 	. = ..()
 	var/desc = "A new round is starting"
 	if(data && data["url"])
-		desc += " on \[Tor4\](<[data["url"]]>)"
-	desc += "."
+		desc += " on Tor4. \n <[data["url"]]>"
 
 	.["embeds"] = list(list(
 		"title" = "Round starting.",
