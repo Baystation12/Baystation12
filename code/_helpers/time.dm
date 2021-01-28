@@ -103,7 +103,7 @@ var/next_station_date_change = 1 DAY
 	if(!station_date || update_time)
 		var/extra_days = round(station_time_in_ticks / (1 DAY)) DAYS
 		var/timeofday = world.timeofday + extra_days
-		station_date = num2text(game_year) + "-" + time2text(timeofday, "MM-DD")
+		station_date = "[GLOB.using_map.game_year]-[time2text(timeofday, "MM-DD")]"
 	return station_date
 
 /proc/time_stamp()

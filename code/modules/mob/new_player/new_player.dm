@@ -478,10 +478,6 @@
 
 	new_character.lastarea = get_area(spawn_turf)
 
-	if(GLOB.random_players)
-		client.prefs.gender = pick(MALE, FEMALE)
-		client.prefs.real_name = random_name(new_character.gender)
-		client.prefs.randomize_appearance_and_body_for(new_character)
 	client.prefs.copy_to(new_character)
 
 	sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = GLOB.lobby_sound_channel))// MAD JAMS cant last forever yo

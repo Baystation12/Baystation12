@@ -28,6 +28,9 @@
 #COMPANY_NAME Sol Central Government
 #COMPANY_SHORT SolGov
 
+## Other fluff options
+#GAME_YEAR_OFFSET 288
+
 ## Messages to use for different round-end conditions. %ETA% is replaced with a time.
 #SHUTTLE_DOCKED_MESSAGE Attention all hands: Jump preparation complete. The bluespace drive is now spooling up, secure all stations for departure. Time to jump: approximately %ETD%.
 #SHUTTLE_LEAVING_DOCK Attention all hands: Jump initiated, exiting bluespace in %ETA%.

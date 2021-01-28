@@ -27,6 +27,8 @@ SUBSYSTEM_DEF(ticker)
 	var/list/antag_pool = list()
 	var/looking_for_antags = 0
 
+	var/secret_force_mode = "secret"
+
 /datum/controller/subsystem/ticker/Initialize()
 	to_world("<span class='info'><B>Welcome to the pre-game lobby!</B></span>")
 	to_world("Please, setup your character and select ready. Game will start in [round(pregame_timeleft/10)] seconds")

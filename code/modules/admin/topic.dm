@@ -974,7 +974,7 @@
 		for(var/mode in config.modes)
 			dat += {"<A href='?src=\ref[src];f_secret2=[mode]'>[config.mode_names[mode]]</A><br>"}
 		dat += {"<A href='?src=\ref[src];f_secret2=secret'>Random (default)</A><br>"}
-		dat += {"Now: [secret_force_mode]"}
+		dat += {"Now: [SSticker.secret_force_mode]"}
 		show_browser(usr, dat, "window=f_secret")
 
 	else if(href_list["c_mode2"])
@@ -997,8 +997,8 @@
 			return alert(usr, "The game has already started.", null, null, null, null)
 		if(SSticker.master_mode != "secret")
 			return alert(usr, "The game mode has to be secret!", null, null, null, null)
-		secret_force_mode = href_list["f_secret2"]
-		log_and_message_admins("set the forced secret mode as [secret_force_mode].")
+		SSticker.secret_force_mode = href_list["f_secret2"]
+		log_and_message_admins("set the forced secret mode as [SSticker.secret_force_mode].")
 		Game() // updates the main game menu
 		.(href, list("f_secret"=1))
 

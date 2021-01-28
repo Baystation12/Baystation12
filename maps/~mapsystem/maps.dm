@@ -1,3 +1,5 @@
+#define DEFAULT_GAME_YEAR_OFFSET 288
+
 GLOBAL_DATUM_INIT(using_map, /datum/map, new using_map_DATUM)
 GLOBAL_LIST_EMPTY(all_maps)
 
@@ -116,6 +118,8 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/local_currency_name_singular = "thaler"
 	var/local_currency_name_short = "T"
 
+	var/game_year
+
 	var/list/available_cultural_info = list(
 		TAG_HOMEWORLD = list(
 			HOME_SYSTEM_MARS,
@@ -224,6 +228,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	if(!LAZYLEN(planet_size))
 		planet_size = list(world.maxx, world.maxy)
 	current_lobby_screen = pick(lobby_screens)
+	game_year = text2num(time2text(world.timeofday, "YYYY")) + DEFAULT_GAME_YEAR_OFFSET
 
 /datum/map/proc/get_lobby_track(var/exclude)
 	var/lobby_track_type
@@ -263,6 +268,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		if ("local_currency_name") local_currency_name = value
 		if ("local_currency_name_singular") local_currency_name_singular = value
 		if ("local_currency_name_short") local_currency_name_short = value
+		if ("game_year_offset") game_year = text2num(time2text(world.timeofday, "YYYY")) + text2num_or_default(value, DEFAULT_GAME_YEAR_OFFSET)
 		else log_misc("Unknown setting [name] in [filename].")
 
 /datum/map/proc/setup_map()
@@ -566,3 +572,5 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		desc += "There were <b>no survivors</b>, (<b>[data["ghosts"]] ghosts</b>)."
 
 	return desc
+
+#undef DEFAULT_GAME_YEAR_OFFSET

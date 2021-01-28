@@ -39,12 +39,7 @@
 			show_browser(src, F,"window=investigate[subject];size=800x300")
 
 		if("hrefs")				//persistant logs and stuff
-			if(config && config.log_hrefs)
-				if(href_logfile)
-					show_browser(src, href_logfile,"window=investigate[subject];size=800x300")
-				else
-					to_chat(src, "<span class='warning'>Error: admin_investigate: No href logfile found.</span>")
-					return
+			if (GLOB.href_logfile)
+				show_browser(src, GLOB.href_logfile, "window=investigate[subject];size=800x300")
 			else
-				to_chat(src, "<span class='warning'>Error: admin_investigate: Href Logging is not on.</span>")
-				return
+				to_chat(src, "<span class='warning'>Error: admin_investigate: Href Logging [config.log_hrefs ? "failed to start" : "is disabled"].</span>")

@@ -4,7 +4,7 @@
 
 /obj/structure/sign/dedicationplaque/Initialize()
 	. = ..()
-	desc = "S.E.V. Torch - Mako Class - Sol Expeditionary Corps Registry 95519 - Shiva Fleet Yards, Mars - First Vessel To Bear The Name - Launched [game_year-5] - Sol Central Government - 'Never was anything great achieved without danger.'"
+	desc = "S.E.V. Torch - Mako Class - Sol Expeditionary Corps Registry 95519 - Shiva Fleet Yards, Mars - First Vessel To Bear The Name - Launched [GLOB.using_map.game_year - 5] - Sol Central Government - 'Never was anything great achieved without danger.'"
 
 /obj/structure/sign/ecplaque
 	name = "\improper Expeditionary Directives"

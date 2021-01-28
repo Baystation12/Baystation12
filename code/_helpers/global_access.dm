@@ -19,8 +19,6 @@
 			return global.CMinutes;
 		if("DEPT_FREQS")
 			return global.DEPT_FREQS;
-		if("Debug2")
-			return global.Debug2;
 		if("Failsafe")
 			return global.Failsafe;
 		if("GLOB")
@@ -311,8 +309,6 @@
 			return global.can_call_ert;
 		if("captain_announcement")
 			return global.captain_announcement;
-		if("changelog_hash")
-			return global.changelog_hash;
 		if("channel_color_presets")
 			return global.channel_color_presets;
 		if("channel_to_radio_key")
@@ -355,8 +351,6 @@
 			return global.crew_repository;
 		if("csrfz_check")
 			return global.csrfz_check;
-		if("custom_event_msg")
-			return global.custom_event_msg;
 		if("damage_icon_parts")
 			return global.damage_icon_parts;
 		if("dbcon")
@@ -425,8 +419,6 @@
 			return global.failed_unit_tests;
 		if("file_uid")
 			return global.file_uid;
-		if("fileaccess_timer")
-			return global.fileaccess_timer;
 		if("finds_as_strings")
 			return global.finds_as_strings;
 		if("fire_alarm")
@@ -453,10 +445,6 @@
 			return global.fusion_reactions;
 		if("game_id")
 			return global.game_id;
-		if("game_version")
-			return global.game_version;
-		if("game_year")
-			return global.game_year;
 		if("gamemode_cache")
 			return global.gamemode_cache;
 		if("gas_data")
@@ -477,8 +465,6 @@
 			return global.global_message_listener;
 		if("global_vars_")
 			return global.global_vars_;
-		if("gravity_is_on")
-			return global.gravity_is_on;
 		if("gzn_check")
 			return global.gzn_check;
 		if("hadevent")
@@ -489,8 +475,6 @@
 			return global.holder_mob_icon_cache;
 		if("host")
 			return global.host;
-		if("href_logfile")
-			return global.href_logfile;
 		if("human_icon_cache")
 			return global.human_icon_cache;
 		if("id_card_states")
@@ -511,8 +495,6 @@
 			return global.jobban_keylist;
 		if("jobban_runonce")
 			return global.jobban_runonce;
-		if("join_motd")
-			return global.join_motd;
 		if("landmarks_list")
 			return global.landmarks_list;
 		if("language_keys")
@@ -745,8 +727,6 @@
 			return global.rune_list;
 		if("same_wires")
 			return global.same_wires;
-		if("secret_force_mode")
-			return global.secret_force_mode;
 		if("send_emergency_team")
 			return global.send_emergency_team;
 		if("sent_spiders_to_station")
@@ -936,8 +916,6 @@
 			global.CMinutes=newval;
 		if("DEPT_FREQS")
 			global.DEPT_FREQS=newval;
-		if("Debug2")
-			global.Debug2=newval;
 		if("Failsafe")
 			global.Failsafe=newval;
 		if("GLOB")
@@ -1228,8 +1206,6 @@
 			global.can_call_ert=newval;
 		if("captain_announcement")
 			global.captain_announcement=newval;
-		if("changelog_hash")
-			global.changelog_hash=newval;
 		if("channel_color_presets")
 			global.channel_color_presets=newval;
 		if("channel_to_radio_key")
@@ -1272,8 +1248,6 @@
 			global.crew_repository=newval;
 		if("csrfz_check")
 			global.csrfz_check=newval;
-		if("custom_event_msg")
-			global.custom_event_msg=newval;
 		if("damage_icon_parts")
 			global.damage_icon_parts=newval;
 		if("dbcon")
@@ -1342,8 +1316,6 @@
 			global.failed_unit_tests=newval;
 		if("file_uid")
 			global.file_uid=newval;
-		if("fileaccess_timer")
-			global.fileaccess_timer=newval;
 		if("finds_as_strings")
 			global.finds_as_strings=newval;
 		if("fire_alarm")
@@ -1370,10 +1342,6 @@
 			global.fusion_reactions=newval;
 		if("game_id")
 			global.game_id=newval;
-		if("game_version")
-			global.game_version=newval;
-		if("game_year")
-			global.game_year=newval;
 		if("gamemode_cache")
 			global.gamemode_cache=newval;
 		if("gas_data")
@@ -1394,8 +1362,6 @@
 			global.global_message_listener=newval;
 		if("global_vars_")
 			global.global_vars_=newval;
-		if("gravity_is_on")
-			global.gravity_is_on=newval;
 		if("gzn_check")
 			global.gzn_check=newval;
 		if("hadevent")
@@ -1406,8 +1372,6 @@
 			global.holder_mob_icon_cache=newval;
 		if("host")
 			global.host=newval;
-		if("href_logfile")
-			global.href_logfile=newval;
 		if("human_icon_cache")
 			global.human_icon_cache=newval;
 		if("id_card_states")
@@ -1428,8 +1392,6 @@
 			global.jobban_keylist=newval;
 		if("jobban_runonce")
 			global.jobban_runonce=newval;
-		if("join_motd")
-			global.join_motd=newval;
 		if("landmarks_list")
 			global.landmarks_list=newval;
 		if("language_keys")
@@ -1662,8 +1624,6 @@
 			global.rune_list=newval;
 		if("same_wires")
 			global.same_wires=newval;
-		if("secret_force_mode")
-			global.secret_force_mode=newval;
 		if("send_emergency_team")
 			global.send_emergency_team=newval;
 		if("sent_spiders_to_station")
@@ -1843,7 +1803,6 @@
 	"CENT_FREQS",
 	"CMinutes",
 	"DEPT_FREQS",
-	"Debug2",
 	"Failsafe",
 	"GLOB",
 	"IClog",
@@ -1989,7 +1948,6 @@
 	"cameranet",
 	"can_call_ert",
 	"captain_announcement",
-	"changelog_hash",
 	"channel_color_presets",
 	"channel_to_radio_key",
 	"chargen_robolimbs",
@@ -2011,7 +1969,6 @@
 	"created",
 	"crew_repository",
 	"csrfz_check",
-	"custom_event_msg",
 	"damage_icon_parts",
 	"dbcon",
 	"dbcon_old",
@@ -2046,7 +2003,6 @@
 	"failed_old_db_connections",
 	"failed_unit_tests",
 	"file_uid",
-	"fileaccess_timer",
 	"finds_as_strings",
 	"fire_alarm",
 	"flesh_hud_colours",
@@ -2060,8 +2016,6 @@
 	"fruit_icon_cache",
 	"fusion_reactions",
 	"game_id",
-	"game_version",
-	"game_year",
 	"gamemode_cache",
 	"gas_data",
 	"gear_datums",
@@ -2072,13 +2026,11 @@
 	"ghost_traps",
 	"global_message_listener",
 	"global_vars_",
-	"gravity_is_on",
 	"gzn_check",
 	"hadevent",
 	"hivemind_bank",
 	"holder_mob_icon_cache",
 	"host",
-	"href_logfile",
 	"human_icon_cache",
 	"id_card_states",
 	"image_repository",
@@ -2089,7 +2041,6 @@
 	"jobMax",
 	"jobban_keylist",
 	"jobban_runonce",
-	"join_motd",
 	"landmarks_list",
 	"language_keys",
 	"last_chew",
@@ -2206,7 +2157,6 @@
 	"roundstart_hour",
 	"rune_list",
 	"same_wires",
-	"secret_force_mode",
 	"send_emergency_team",
 	"sent_spiders_to_station",
 	"server_name",

@@ -818,10 +818,9 @@ var/global/floorIsLava = 0
 	if(!check_rights(R_ADMIN))
 		return
 
-	//BYOND hates actually changing world.visibility at runtime, so let's just change if we give it the hub password.
-	world.update_hub_visibility() //proc defined in hub.dm
-	var/long_message = "toggled hub visibility. The server is now [GLOB.visibility_pref ? "visible" : "invisible"] ([GLOB.visibility_pref])."
-	if (GLOB.visibility_pref && !world.reachable)
+	world.update_hub_visibility(TRUE)
+	var/long_message = "Updated hub visibility. The server is now [config.hub_visible ? "visible" : "invisible"]."
+	if (config.hub_visible && !world.reachable)
 		message_admins("WARNING: The server will not show up on the hub because byond is detecting that a firewall is blocking incoming connections.")
 
 	send2adminirc("[key_name(src)]" + long_message)
