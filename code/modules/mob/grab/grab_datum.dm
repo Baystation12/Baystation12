@@ -71,10 +71,10 @@
 // This is for the strings defined as datum variables. It takes them and swaps out keywords for relevent ones from the grab
 // object involved.
 /datum/grab/proc/string_process(var/obj/item/grab/G, var/to_write, var/obj/item/used_item)
-	to_write = replacetext(to_write, "rep_affecting", G.affecting)
-	to_write = replacetext(to_write, "rep_assailant", G.assailant)
+	to_write = replacetext_char(to_write, "rep_affecting", G.affecting)
+	to_write = replacetext_char(to_write, "rep_assailant", G.assailant)
 	if(used_item)
-		to_write = replacetext(to_write, "rep_item", used_item)
+		to_write = replacetext_char(to_write, "rep_item", used_item)
 	return to_write
 
 /datum/grab/proc/upgrade(var/obj/item/grab/G)

@@ -124,11 +124,11 @@
 
 	if(istype(pages[page], /obj/item/weapon/paper))
 		var/obj/item/weapon/paper/P = W
-		dat+= "<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[P.show_info(user)][P.stamps]</BODY></HTML>"
+		dat+= "<HTML><meta charset=\"UTF-8\"><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[P.show_info(user)][P.stamps]</BODY></HTML>"
 		show_browser(user, dat, "window=[name]")
 	else if(istype(pages[page], /obj/item/weapon/photo))
 		var/obj/item/weapon/photo/P = W
-		dat += "<html><head><title>[P.name]</title></head><body style='overflow:hidden'>"
+		dat += "<html><meta charset=\"UTF-8\"><head><title>[P.name]</title></head><body style='overflow:hidden'>"
 		dat += "<div> <img src='tmp_photo.png' width = '180'[P.scribble ? "<div> Written on the back:<br><i>[P.scribble]</i>" : null ]</body></html>"
 		send_rsc(user, P.img, "tmp_photo.png")
 		show_browser(user, JOINTEXT(dat), "window=[name]")

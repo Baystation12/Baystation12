@@ -418,7 +418,7 @@
 	if(announce_despawn)
 		announce.autosay("[occupant.real_name], [role_alt_title], [on_store_message]", "[on_store_name]")
 
-	var/despawnmessage = replacetext(on_store_visible_message, "$occupant$", occupant.real_name)
+	var/despawnmessage = replacetext_char(on_store_visible_message, "$occupant$", occupant.real_name)
 	visible_message(SPAN_NOTICE("\The [initial(name)] " + despawnmessage), range = 3)
 
 	//This should guarantee that ghosts don't spawn.

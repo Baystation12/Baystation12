@@ -66,7 +66,7 @@
 						regen_organ.damage = max(regen_organ.damage - organ_mult, 0)
 						H.adjust_nutrition(-organ_mult)
 						if(prob(5))
-							to_chat(H, replacetext(regen_message,"ORGAN", regen_organ.name))
+							to_chat(H, replacetext_char(regen_message,"ORGAN", regen_organ.name))
 					else
 						low_nut_warning(regen_organ.name)
 

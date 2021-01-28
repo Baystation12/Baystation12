@@ -3,7 +3,7 @@
 	if(!get_value())
 		return //No one to send to anyway.
 	var/subject = sanitize(input(user, "Email Subject:", "Document Email", "Report Submission: [owner.display_name()]") as null|text)
-	var/body = sanitize(replacetext(input(user, "Email Body:", "Document Email", "Please see the attached document.") as null|message, "\n", "\[br\]"), MAX_PAPER_MESSAGE_LEN)
+	var/body = sanitize(replacetext_char(input(user, "Email Body:", "Document Email", "Please see the attached document.") as null|message, "\n", "\[br\]"), MAX_PAPER_MESSAGE_LEN)
 	var/attach_report = (alert(user, "Do you wish to attach [owner.display_name()]?","Document Email", "Yes.", "No.") == "Yes.") ? 1 : 0
 	if(alert(user, "Are you sure you want to send this email?","Document Email", "Yes.", "No.") == "No.")
 		return

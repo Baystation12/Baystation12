@@ -67,7 +67,7 @@
 	for(var/obj/item/P in src)
 		dat += "<tr><td><a href='?src=\ref[src];retrieve=\ref[P]'>[P.name]</a></td></tr>"
 	dat += "</table></center>"
-	show_browser(user, "<html><head><title>[name]</title></head><body>[jointext(dat,null)]</body></html>", "window=filingcabinet;size=350x300")
+	show_browser(user, "<html><meta charset=\"UTF-8\"><head><title>[name]</title></head><body>[jointext(dat,null)]</body></html>", "window=filingcabinet;size=350x300")
 
 /obj/structure/filingcabinet/Topic(href, href_list)
 	if(href_list["retrieve"])
