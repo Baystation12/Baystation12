@@ -472,3 +472,10 @@
 
 	images -= powernet_markers
 	QDEL_NULL_LIST(powernet_markers)
+
+/client/proc/toggle_planet_repopulating()
+	set category = "Debug"
+	set name = "Toggle Planet Mob Repopulating"
+
+	GLOB.planet_repopulation_disabled = !GLOB.planet_repopulation_disabled
+	log_and_message_admins("toggled planet mob repopulating [GLOB.planet_repopulation_disabled ? "OFF" : "ON"].")
