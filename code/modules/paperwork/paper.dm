@@ -83,7 +83,7 @@
 	if(!forceshow && istype(user,/mob/living/silicon/ai))
 		var/mob/living/silicon/ai/AI = user
 		can_read = get_dist(src, AI.camera) < 2
-	show_browser(user, "<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY bgcolor='[color]'>[can_read ? info : stars(info)][stamps]</BODY></HTML>", "window=[name]")
+	show_browser(user, "<HTML><meta charset=\"UTF-8\"><HEAD><TITLE>[name]</TITLE></HEAD><BODY bgcolor='[color]'>[can_read ? info : stars(info)][stamps]</BODY></HTML>", "window=[name]")
 	onclose(user, "[name]")
 
 /obj/item/weapon/paper/verb/rename()
@@ -202,20 +202,20 @@
 		return ""
 
 	if(findtext(t, "\[sign\]"))
-		t = replacetext(t, "\[sign\]", "<font face=\"[signfont]\"><i>[get_signature(P, user)]</i></font>")
+		t = replacetext_char(t, "\[sign\]", "<font face=\"[signfont]\"><i>[get_signature(P, user)]</i></font>")
 
 	if(iscrayon) // If it is a crayon, and he still tries to use these, make them empty!
-		t = replacetext(t, "\[*\]", "")
-		t = replacetext(t, "\[hr\]", "")
-		t = replacetext(t, "\[small\]", "")
-		t = replacetext(t, "\[/small\]", "")
-		t = replacetext(t, "\[list\]", "")
-		t = replacetext(t, "\[/list\]", "")
-		t = replacetext(t, "\[table\]", "")
-		t = replacetext(t, "\[/table\]", "")
-		t = replacetext(t, "\[row\]", "")
-		t = replacetext(t, "\[cell\]", "")
-		t = replacetext(t, "\[logo\]", "")
+		t = replacetext_char(t, "\[*\]", "")
+		t = replacetext_char(t, "\[hr\]", "")
+		t = replacetext_char(t, "\[small\]", "")
+		t = replacetext_char(t, "\[/small\]", "")
+		t = replacetext_char(t, "\[list\]", "")
+		t = replacetext_char(t, "\[/list\]", "")
+		t = replacetext_char(t, "\[table\]", "")
+		t = replacetext_char(t, "\[/table\]", "")
+		t = replacetext_char(t, "\[row\]", "")
+		t = replacetext_char(t, "\[cell\]", "")
+		t = replacetext_char(t, "\[logo\]", "")
 
 	if(iscrayon)
 		t = "<font face=\"[crayonfont]\" color=[P ? P.colour : "black"]><b>[t]</b></font>"
@@ -326,7 +326,7 @@
 
 		update_space(t)
 
-		show_browser(usr, "<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY bgcolor='[color]'>[info_links][stamps]</BODY></HTML>", "window=[name]") // Update the window
+		show_browser(usr, "<HTML><meta charset=\"UTF-8\"><HEAD><TITLE>[name]</TITLE></HEAD><BODY bgcolor='[color]'>[info_links][stamps]</BODY></HTML>", "window=[name]") // Update the window
 
 		playsound(src, pick('sound/effects/pen1.ogg','sound/effects/pen2.ogg'), 10)
 		update_icon()
@@ -380,7 +380,7 @@
 		if ( istype(RP) && RP.mode == 2 )
 			RP.RenamePaper(user,src)
 		else
-			show_browser(user, "<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY bgcolor='[color]'>[info_links][stamps]</BODY></HTML>", "window=[name]")
+			show_browser(user, "<HTML><meta charset=\"UTF-8\"><HEAD><TITLE>[name]</TITLE></HEAD><BODY bgcolor='[color]'>[info_links][stamps]</BODY></HTML>", "window=[name]")
 		return
 
 	else if(istype(P, /obj/item/weapon/stamp) || istype(P, /obj/item/clothing/ring/seal))

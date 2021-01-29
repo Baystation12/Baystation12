@@ -412,7 +412,7 @@
 
 /mob/proc/print_flavor_text()
 	if (flavor_text && flavor_text != "")
-		var/msg = replacetext(flavor_text, "\n", " ")
+		var/msg = replacetext_char(flavor_text, "\n", " ")
 		if(length(msg) <= 40)
 			return "<span class='notice'>[msg]</span>"
 		else
@@ -472,7 +472,7 @@
 // If usr != src, or if usr == src but the Topic call was not resolved, this is called next.
 /mob/OnTopic(mob/user, href_list, datum/topic_state/state)
 	if(href_list["flavor_more"])
-		var/text = "<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY><TT>[replacetext(flavor_text, "\n", "<BR>")]</TT></BODY></HTML>"
+		var/text = "<HTML><meta charset=\"UTF-8\"><HEAD><TITLE>[name]</TITLE></HEAD><BODY><TT>[replacetext_char(flavor_text, "\n", "<BR>")]</TT></BODY></HTML>"
 		show_browser(user, text, "window=[name];size=500x200")
 		onclose(user, "[name]")
 		return TOPIC_HANDLED

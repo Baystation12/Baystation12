@@ -26,6 +26,7 @@
 
 	var/html = {"
 		<html>
+		<meta charset=\"UTF-8\">
 		<head>
 			<script src='view_variables.js'></script>
 			<title>[D] (\ref[D] - [D.type])</title>
@@ -43,7 +44,7 @@
 							<td><div align='center'>[D.get_view_variables_header()]</div></td>
 						</tr></table>
 						<div align='center'>
-							<b><font size='1'>[replacetext("[D.type]", "/", "/<wbr>")]</font></b>
+							<b><font size='1'>[replacetext_char("[D.type]", "/", "/<wbr>")]</font></b>
 							[holder.marked_datum() == D ? "<br/><font size='1' color='red'><b>Marked Object</b></font>" : ""]
 						</div>
 					</td>

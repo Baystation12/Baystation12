@@ -84,7 +84,7 @@ If the override option is set to 0, the access supplied will instead be added as
 
 /datum/computer_file/report/proc/rename_file(append)
 	append = append || time_stamp()
-	append = replacetext(append, ":", "_")
+	append = replacetext_char(append, ":", "_")
 	filename = "[form_name]_[append]"
 
 //Don't add fields except through this proc.
