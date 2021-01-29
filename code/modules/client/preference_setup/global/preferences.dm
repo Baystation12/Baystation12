@@ -214,6 +214,11 @@ var/list/_client_preferences_by_type
 	key = "SHOW_READY"
 	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
+/datum/client_preference/announce_ghost_join
+	description = "Announce When Joining as Observer"
+	key = "ANNOUNCE_GHOST"
+	options = list(GLOB.PREF_YES, GLOB.PREF_NO)
+
 /datum/client_preference/play_instruments
 	description = "Play instruments"
 	key = "SOUND_INSTRUMENTS"

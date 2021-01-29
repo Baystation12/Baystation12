@@ -13,6 +13,9 @@
 	var/turf/T = get_turf(target)
 	if (!user.TurfAdjacent(T))
 		return
+	if (isspaceturf(T) || isopenspace(T))
+		to_chat(user, SPAN_WARNING("You cannot use \the [src] in open space."))
+		return
 	var/obstruction = T.get_obstruction()
 	if (obstruction)
 		to_chat(user, SPAN_WARNING("\The [english_list(obstruction)] is blocking that spot."))

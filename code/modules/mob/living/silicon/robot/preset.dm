@@ -71,6 +71,23 @@
 	components["diagnosis unit"] = new/datum/robot_component/diagnosis_unit(src)
 	components["armour"] =         new/datum/robot_component/armour/light(src)
 
+/mob/living/silicon/robot/flying/ascent/law_channels()
+	var/list/channels = new()
+	channels += additional_law_channels
+	channels += LANGUAGE_MANTID_BROADCAST
+	return channels
+
+/mob/living/silicon/robot/flying/ascent/statelaws(datum/ai_laws/laws)
+	var/prefix = ""
+	if (lawchannel == LANGUAGE_MANTID_BROADCAST)
+		prefix = "[get_language_prefix()]\["
+
+	if (prefix)
+		dostatelaws(lawchannel, prefix, laws)
+	else
+		..()
+
+
 // Since they don't have binary, camera or radio to soak
 // damage, they get some hefty buffs to cell and actuator.
 /datum/robot_component/actuator/ascent

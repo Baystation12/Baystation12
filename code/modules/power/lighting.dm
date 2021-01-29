@@ -253,7 +253,7 @@
 
 	if(istype(lightbulb, /obj/item/weapon/light/))
 		var/image/I = image(icon, src, _state)
-		I.color = lightbulb.b_colour
+		I.color = get_mode_color()
 		if (on)
 			I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 			I.layer = ABOVE_LIGHTING_LAYER
@@ -306,6 +306,12 @@
 	if(current_mode != new_mode)
 		current_mode = new_mode
 		update_icon(0)
+
+/obj/machinery/light/proc/get_mode_color()
+	if (current_mode && (current_mode in lightbulb.lighting_modes))
+		return lightbulb.lighting_modes[current_mode]["l_color"]
+	else
+		return lightbulb.b_colour
 
 /obj/machinery/light/proc/set_emergency_lighting(var/enable)
 	if(!lightbulb)
