@@ -30,6 +30,7 @@ SUBSYSTEM_DEF(ticker)
 /datum/controller/subsystem/ticker/Initialize()
 	to_world("<span class='info'><B>Welcome to the pre-game lobby!</B></span>")
 	to_world("Please, setup your character and select ready. Game will start in [round(pregame_timeleft/10)] seconds")
+	callHook("roundstart")
 	return ..()
 
 /datum/controller/subsystem/ticker/fire(resumed = 0)
@@ -89,8 +90,6 @@ SUBSYSTEM_DEF(ticker)
 			var/datum/job/job = SSjobs.get_by_title(H.mind.assigned_role)
 			if(job && job.create_record)
 				CreateModularRecord(H)
-
-	callHook("roundstart")
 
 	spawn(0)//Forking here so we dont have to wait for this to finish
 		mode.post_setup() // Drafts antags who don't override jobs.

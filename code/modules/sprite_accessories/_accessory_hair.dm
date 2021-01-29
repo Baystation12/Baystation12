@@ -905,3 +905,13 @@
 	name = "Mullet-Hawk"
 	icon_state = "hair_mullethawk"
 	gender = MALE
+
+/datum/sprite_accessory/hair/leon
+	name = "Leon"
+	icon_state = "hair_leon"
+	gender = MALE
+
+/datum/sprite_accessory/hair/wong
+	name = "Wong"
+	icon_state = "hair_wong"
+	gender = FEMALE
