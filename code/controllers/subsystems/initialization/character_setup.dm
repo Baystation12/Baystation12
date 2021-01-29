@@ -14,9 +14,10 @@ SUBSYSTEM_DEF(character_setup)
 
 /datum/controller/subsystem/character_setup/Initialize()
 	while(prefs_awaiting_setup.len)
-		var/datum/preferences/prefs = prefs_awaiting_setup[prefs_awaiting_setup.len]
-		prefs_awaiting_setup.len--
-		prefs.setup()
+		if(SScharacter_setup.initialized)
+			var/mob/new_player/prefs = prefs_awaiting_setup[prefs_awaiting_setup.len]
+			prefs_awaiting_setup.len--
+			prefs.deferred_login()
 	while(newplayers_requiring_init.len)
 		var/mob/new_player/new_player = newplayers_requiring_init[newplayers_requiring_init.len]
 		newplayers_requiring_init.len--
