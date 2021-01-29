@@ -1280,9 +1280,9 @@
 "cT" = (
 /obj/structure/table/rack,
 /obj/random/raider/hardsuit,
-/obj/item/clothing/glasses/thermal/plain/monocle,
 /obj/item/device/suit_cooling_unit,
 /obj/item/device/suit_cooling_unit,
+/obj/item/clothing/glasses/night,
 /turf/simulated/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
 "cU" = (
