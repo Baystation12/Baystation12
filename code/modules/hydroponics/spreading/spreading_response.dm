@@ -71,6 +71,10 @@
 	if(!Adjacent(victim))
 		return
 
+	if(victim.is_floating)
+		victim.visible_message("<span class='danger'>Tendrils lash out towards \the [victim] but \the [src] can't quite reach them as they float above!</span>", "<span class='danger'>Tendrils lash out from \the [src] below but can't quite reach you!</span>")
+		return
+
 	if(ishuman(victim))
 		var/mob/living/carbon/human/H = victim
 		if(H.species.species_flags & SPECIES_FLAG_NO_TANGLE)

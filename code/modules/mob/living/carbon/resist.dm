@@ -18,11 +18,6 @@
 			ExtinguishMob()
 		return TRUE
 
-	if(istype(buckled, /obj/effect/vine))
-		var/obj/effect/vine/V = buckled
-		spawn() V.manual_unbuckle(src)
-		return TRUE
-
 	if(..())
 		return TRUE
 
