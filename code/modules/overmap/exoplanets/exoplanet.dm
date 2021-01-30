@@ -1,3 +1,5 @@
+GLOBAL_VAR(planet_repopulation_disabled)
+
 /obj/effect/overmap/visitable/sector/exoplanet
 	name = "exoplanet"
 	icon_state = "globe"
@@ -31,7 +33,7 @@
 	var/list/actors = list() //things that appear in engravings on xenoarch finds.
 	var/list/species = list() //list of names to use for simple animals
 
-	var/repopulating = 0
+	var/repopulating = FALSE
 	var/repopulate_types = list() // animals which have died that may come back
 
 	var/list/possible_themes = list(/datum/exoplanet_theme/mountains,/datum/exoplanet_theme)
@@ -111,10 +113,10 @@
 
 /obj/effect/overmap/visitable/sector/exoplanet/Process(wait, tick)
 	if(animals.len < 0.5*max_animal_count && !repopulating)
-		repopulating = 1
+		repopulating = TRUE
 		max_animal_count = round(max_animal_count * 0.5)
 	for(var/zlevel in map_z)
-		if(repopulating)
+		if(repopulating && !GLOB.planet_repopulation_disabled)
 			for(var/i = 1 to round(max_animal_count - animals.len))
 				if(prob(10))
 					var/turf/simulated/T = pick_area_turf(planetary_area, list(/proc/not_turf_contains_dense_objects))
@@ -125,7 +127,7 @@
 					GLOB.destroyed_event.register(S, src, /obj/effect/overmap/visitable/sector/exoplanet/proc/remove_animal)
 					adapt_animal(S)
 			if(animals.len >= max_animal_count)
-				repopulating = 0
+				repopulating = FALSE
 
 		if(!atmosphere)
 			continue
