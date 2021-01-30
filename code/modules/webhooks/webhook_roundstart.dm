@@ -5,8 +5,8 @@
 /decl/webhook/roundstart/get_message(var/list/data)
 	. = ..()
 	var/desc = "A new round is starting in 3 minutes"
-	if(data && data["url"])
-		desc += " on Tor4. \n <[world.url]>"
+//	if(data && data["url"])
+//		desc += " on Tor4. \n <[world.url]>"
 
 	.["embeds"] = list(list(
 		"title" = "Round starting.",
