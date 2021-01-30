@@ -1,0 +1,4 @@
+author: "Mucker"
+delete-after: True
+changes: 
+  - admin: "Add a debug toggle to turn on/off planets repopulating mobs."
