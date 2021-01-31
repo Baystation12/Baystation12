@@ -1,0 +1,6 @@
+author: "Spookerton"
+delete-after: True
+changes: 
+  - admin: "removed legacy log access verbs"
+  - admin: "removed legacy randomize everyone on spawn secret"
+  - admin: "removed legacy triple AI slot at roundstart secret"
