@@ -44,4 +44,4 @@
 			receive_communication(C, target, "<span class='ooc'><span class='[ooc_style]'>[sent_message]</span></span>")
 	
 	// Discord OOC
-	SSwebhooks.send(WEBHOOK_OOC, list("key" = C.key, "message" = message))
+	SSwebhooks.send(WEBHOOK_OOC, list("key" = C.key, "message" = message, type="OOC"))

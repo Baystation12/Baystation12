@@ -117,11 +117,23 @@ var/world_topic_spam_protect_time = world.timeofday
 	* The following topic calls are available without a comms secret.
 	* * * * * * * */
 
+	var/input[] = params2list(T)
+	var/key_valid = config.comms_password && input["key"] == config.comms_password
+	
+
 	if (T == "ping")
 		var/x = 1
 		for (var/client/C)
 			x++
 		return x
+	
+	if(input["type"] == "who")
+		var/n = ""
+		for(var/mob/M in GLOB.player_list)
+			if(M.client)
+				n+=M.key
+				n+=" "
+		return n
 
 	else if(T == "players")
 		var/n = 0
@@ -131,7 +143,6 @@ var/world_topic_spam_protect_time = world.timeofday
 		return n
 
 	else if (copytext(T,1,7) == "status")
-		var/input[] = params2list(T)
 		var/list/s = list()
 		s["version"] = game_version
 		s["mode"] = PUBLIC_GAME_MODE
@@ -210,7 +221,6 @@ var/world_topic_spam_protect_time = world.timeofday
 	* * * * * * * */
 
 	if(copytext(T,1,14) == "placepermaban")
-		var/input[] = params2list(T)
 		if(!config.ban_comms_password)
 			return "Not enabled"
 		if(input["bankey"] != config.ban_comms_password)
@@ -240,6 +250,30 @@ var/world_topic_spam_protect_time = world.timeofday
 		ban_unban_log_save("[input["id"]] has permabanned [C.ckey]. - Reason: [input["reason"]] - This is a ban until appeal.")
 		notes_add(target,"[input["id"]] has permabanned [C.ckey]. - Reason: [input["reason"]] - This is a ban until appeal.",input["id"])
 		qdel(C)
+	
+	else if(input["type"]=="ooc")
+		if(!key_valid)
+			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
+				spawn(50)
+				world_topic_spam_protect_time = world.time
+				return "Bad Key (Throttled)"
+			world_topic_spam_protect_time = world.time
+			return "Bad Key"
+		var/ckey = input["user"] 
+		var/message = replacetext_char(input["message"],"@#$%^","я")
+		if(!ckey||!message)
+			return
+		if(!config.vars["ooc_allowed"]&&!input["isadmin"])
+			return "globally muted"
+		var/sent_message = "[create_text_tag("DISCORD OOC:")] <EM>[ckey]:</EM> <span class='message linkify'>[message]</span>"
+		SSwebhooks.send(WEBHOOK_OOC, list("key" = ckey, "message" = message, type="DOOC"))
+		for(var/client/target in GLOB.clients)
+			if(!target)
+				continue //sanity
+			if(target.is_key_ignored(ckey) || target.get_preference_value(/datum/client_preference/show_ooc) == GLOB.PREF_HIDE || target.get_preference_value(/datum/client_preference/show_discord_ooc) == GLOB.PREF_HIDE  && !input["isadmin"]) // If we're ignored by this person, then do nothing.
+				continue //if it shouldn't see then it doesn't
+			to_chat(target, "<span class='ooc'><span class='everyone'>[sent_message]</span></span>")
+		
 
 	/* * * * * * * *
 	* Secure Topic Calls
@@ -250,7 +284,6 @@ var/world_topic_spam_protect_time = world.timeofday
 		return "Not enabled"
 
 	else if(copytext(T,1,5) == "laws")
-		var/input[] = params2list(T)
 		if(input["key"] != config.comms_password)
 			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
 
@@ -305,7 +338,6 @@ var/world_topic_spam_protect_time = world.timeofday
 			return list2params(ret)
 
 	else if(copytext(T,1,5) == "info")
-		var/input[] = params2list(T)
 		if(input["key"] != config.comms_password)
 			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
 
@@ -373,7 +405,6 @@ var/world_topic_spam_protect_time = world.timeofday
 		*/
 
 
-		var/input[] = params2list(T)
 		if(input["key"] != config.comms_password)
 			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
 
@@ -423,7 +454,6 @@ var/world_topic_spam_protect_time = world.timeofday
 				1. notes = ckey of person the notes lookup is for
 				2. validationkey = the key the bot has, it should match the gameservers commspassword in it's configuration.
 		*/
-		var/input[] = params2list(T)
 		if(input["key"] != config.comms_password)
 			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
 
@@ -438,7 +468,6 @@ var/world_topic_spam_protect_time = world.timeofday
 		return show_player_info_irc(ckey(input["notes"]))
 
 	else if(copytext(T,1,4) == "age")
-		var/input[] = params2list(T)
 		if(input["key"] != config.comms_password)
 			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
 				spawn(50)
@@ -459,7 +488,6 @@ var/world_topic_spam_protect_time = world.timeofday
 			return "Database connection failed or not set up"
 
 	else if(copytext(T,1,19) == "prometheus_metrics")
-		var/input[] = params2list(T)
 		if(input["key"] != config.comms_password)
 			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
 				spawn(50)

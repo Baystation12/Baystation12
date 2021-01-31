@@ -91,3 +91,12 @@
 					winset(src, "output", list2params(list("on-show" = "", "is-disabled" = "false", "is-visible" = "true")))
 					winset(src, "browseroutput", "is-disabled=true;is-visible=false")
 				log_game("GOONCHAT: [key_name(src)] Failed to fix their goonchat window after manually calling start() and forcing a load()")
+
+/client/verb/con_dis()
+	set name = "Connect Discord"
+	set category = "OOC"
+
+
+	var/auth_key = input("Enter the key, that bot gave you.") as text
+	if(auth_key):
+		SSwebhooks.send(WEBHOOK_REG, list("auth_key" = auth_key, "ckey" = src.key))

@@ -4,3 +4,4 @@
 #define WEBHOOK_SUBMAP_LOADED     "webhook_submap_loaded"
 #define WEBHOOK_CUSTOM_EVENT      "webhook_custom_event"
 #define WEBHOOK_OOC      		  "webhook_ooc"
+#define WEBHOOK_REG      		  "webhook_reg"
