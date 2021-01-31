@@ -28,6 +28,20 @@
 	pouches += /obj/item/clothing/accessory/storage/drop_pouches/white
 	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(pouches)
 
+/datum/gear/storage/belt
+	display_name = "storage belt selection"
+	path = /obj/item/weapon/storage/belt
+	slot = slot_belt
+	cost = 2
+
+/datum/gear/storage/belt/New()
+	..()
+	var/belts = list(
+		/obj/item/weapon/storage/belt/general,
+		/obj/item/weapon/storage/belt/utility
+	)
+	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(belts)
+
 /datum/gear/storage/webbing
 	display_name = "webbing, small"
 	path = /obj/item/clothing/accessory/storage/webbing
