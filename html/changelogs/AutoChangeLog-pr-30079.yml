@@ -1,0 +1,5 @@
+author: "Mucker"
+delete-after: True
+changes: 
+  - admin: "Changed the mob spawner expiration debug message to include a jump-to button and show its coordinates."
+  - admin: "Added the 'Atmos immune' toggle to the mob spawner, making spawned mobs immune to all atmospheric conditions."
