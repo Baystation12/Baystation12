@@ -58,6 +58,7 @@ GLOBAL_LIST_INIT(mob_spawners, list())
 	data["interval"] = spawner.interval
 	data["variation"] = spawner.variation
 	data["radius"] = spawner.radius
+	data["atmos_immune"] = spawner.atmos_immune
 	data["spawn_count"] = spawner.spawn_count
 	data["paused"] = spawner.paused
 
@@ -83,7 +84,7 @@ GLOBAL_LIST_INIT(mob_spawners, list())
 
 	if (href_list["pick"])
 		var/type = input("Search for a mob", "Mob") as text
-		var/list/types = typesof(/mob)
+		var/list/types = typesof(/mob/living/simple_animal)
 		var/list/matches = new()
 
 		for (var/M in types)
@@ -93,7 +94,7 @@ GLOBAL_LIST_INIT(mob_spawners, list())
 		if (!matches.len)
 			return TOPIC_HANDLED
 
-		var/mob/living/chosen
+		var/mob/living/simple_animal/chosen
 		if(matches.len==1)
 			chosen = matches[1]
 		else
@@ -155,6 +156,11 @@ GLOBAL_LIST_INIT(mob_spawners, list())
 			return TOPIC_HANDLED
 
 		spawner.radius = radius
+
+		return TOPIC_HANDLED
+
+	if (href_list["atmos_immune"])
+		spawner.atmos_immune = !spawner.atmos_immune
 
 		return TOPIC_HANDLED
 

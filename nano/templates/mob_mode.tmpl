@@ -41,6 +41,14 @@
 		</div>
 
 		<div class="itemLabel">
+			Atmos Immunity:
+		</div>
+
+		<div class="itemContent">
+			{{:helper.link(data.atmos_immune ? 'ON' : 'OFF', null, {'atmos_immune' : 1}, null, null)}}
+		</div>
+
+		<div class="itemLabel">
 			Mobs:
 		</div>
 		<div class="item">
@@ -65,9 +73,10 @@
 				"{{:value}}"<br>
 			{{/for}}
 		</div>
-			{{:helper.link(data.paused ? 'START' : 'STOP', null, {'pause' : 1}, null, null)}}
-		<div class="item">
 
+		<div class="item">
+			{{:helper.link(data.paused ? 'START' : 'STOP', null, {'pause' : 1}, null, null)}}
+		</div>
 
 		<div class="item">
 			{{:helper.link('Delete Spawner', 'alert', {'delete' : '1'}, null)}}
