@@ -1,0 +1,4 @@
+author: Pebblesthe2nd
+delete-after: True
+changes:
+  - rscadd: "New style for suit icons. Replaces most of the current ones. Purpose: Standardize icons with something that looks better than the onmob sprite."
