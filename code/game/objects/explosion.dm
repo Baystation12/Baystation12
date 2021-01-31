@@ -4,7 +4,6 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 	var/multi_z_scalar = 0.35
 	UNLINT(src = null)	//so we don't abort once src is deleted
 	spawn(0)
-		var/start = world.timeofday
 		epicenter = get_turf(epicenter)
 		if(!epicenter) return
 
@@ -78,10 +77,6 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 					var/atom/movable/AM = atom_movable
 					if(AM && AM.simulated && !T.protects_atom(AM))
 						AM.ex_act(dist)
-
-		var/took = (world.timeofday-start)/10
-		//You need to press the DebugGame verb to see these now....they were getting annoying and we've collected a fair bit of data. Just -test- changes  to explosion code using this please so we can compare
-		if(Debug2) to_world_log("## DEBUG: Explosion([x0],[y0],[z0])(d[devastation_range],h[heavy_impact_range],l[light_impact_range]): Took [took] seconds.")
 
 		sleep(8)
 

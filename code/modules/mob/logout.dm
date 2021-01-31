@@ -20,6 +20,6 @@
 		message_staff("[holder.rank] logout: [key_name(src)]")
 		if(!GLOB.admins.len) //Apparently the admin logging out is no longer an admin at this point, so we have to check this towards 0 and not towards 1. Awell.
 			send2adminirc("[key_name(src)] logged out - no more admins online.")
-			if(config.delist_when_no_admins && GLOB.visibility_pref)
-				world.update_hub_visibility()
-				send2adminirc("Toggled hub visibility. The server is now invisible ([GLOB.visibility_pref]).")
+			if(config.delist_when_no_admins && config.hub_visible)
+				world.update_hub_visibility(FALSE)
+				send2adminirc("Updated hub visibility. The server is now invisible.")

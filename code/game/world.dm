@@ -1,6 +1,8 @@
 /var/server_name = "Baystation 12"
-
 /var/game_id = null
+
+GLOBAL_VAR(href_logfile)
+
 /hook/global_init/proc/generate_gameid()
 	if(game_id != null)
 		return
@@ -74,19 +76,19 @@
 	//logs
 	SetupLogs()
 	var/date_string = time2text(world.realtime, "YYYY/MM/DD")
-	href_logfile = file("data/logs/[date_string] hrefs.htm")
 	diary = file("data/logs/[date_string].log")
 	to_file(diary, "[log_end]\n[log_end]\nStarting up. (ID: [game_id]) [time2text(world.timeofday, "hh:mm.ss")][log_end]\n---------------------[log_end]")
-	changelog_hash = md5('html/changelog.html')					//used for telling if the changelog has changed recently
 
 	if(config && config.server_name != null && config.server_suffix && world.port > 0)
-		// dumb and hardcoded but I don't care~
 		config.server_name += " #[(world.port % 1000) / 100]"
 
 	if(config && config.log_runtime)
 		var/runtime_log = file("data/logs/runtime/[date_string]_[time2text(world.timeofday, "hh:mm")]_[game_id].log")
 		to_file(runtime_log, "Game [game_id] starting up at [time2text(world.timeofday, "hh:mm.ss")]")
 		log = runtime_log // Note that, as you can see, this is misnamed: this simply moves world.log into the runtime log file.
+
+	if (config && config.log_hrefs)
+		GLOB.href_logfile = file("data/logs/[date_string] hrefs.htm")
 
 	if(byond_version < RECOMMENDED_VERSION)
 		to_world_log("Your server's byond version does not meet the recommended requirements for this server. Please update BYOND")
@@ -133,7 +135,7 @@ var/world_topic_spam_protect_time = world.timeofday
 	else if (copytext(T,1,7) == "status")
 		var/input[] = params2list(T)
 		var/list/s = list()
-		s["version"] = game_version
+		s["version"] = config.game_version
 		s["mode"] = PUBLIC_GAME_MODE
 		s["respawn"] = config.abandon_allowed
 		s["enter"] = config.enter_allowed
@@ -523,22 +525,15 @@ var/world_topic_spam_protect_time = world.timeofday
 	fdel(F)
 	to_file(F, the_mode)
 
-/hook/startup/proc/loadMOTD()
-	world.load_motd()
-	return 1
-
-/world/proc/load_motd()
-	join_motd = file2text("config/motd.txt")
-
-
 /proc/load_configuration()
 	config = new /datum/configuration()
 	config.load("config/config.txt")
 	config.load("config/game_options.txt","game_options")
 	if (GLOB.using_map?.config_path)
 		config.load(GLOB.using_map.config_path, "using_map")
+	config.load_text("config/motd.txt", "motd")
+	config.load_text("config/event.txt", "event")
 	config.loadsql("config/dbconfig.txt")
-	config.load_event("config/custom_event.txt")
 
 /hook/startup/proc/loadMods()
 	world.load_mods()
@@ -574,7 +569,6 @@ var/world_topic_spam_protect_time = world.timeofday
 	s += "<b>[station_name()]</b>";
 	s += " ("
 	s += "<a href=\"https://forums.baystation12.net/\">" //Change this to wherever you want the hub to link to.
-//	s += "[game_version]"
 	s += "Forums"  //Replace this with something else. Or ever better, delete it and uncomment the game version.
 	s += "</a>"
 	s += ")"

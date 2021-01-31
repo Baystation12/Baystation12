@@ -11,3 +11,6 @@ GLOBAL_REAL_VAR(sqlpass)      = ""
 GLOBAL_REAL_VAR(sqlfdbkdb)    = "test"
 GLOBAL_REAL_VAR(sqlfdbklogin) = "root"
 GLOBAL_REAL_VAR(sqlfdbkpass)  = ""
+
+var/DBConnection/dbcon = new()
+var/DBConnection/dbcon_old = new()
