@@ -39,9 +39,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 		)
 
 	var/list/raider_glasses = list(
-		/obj/item/clothing/glasses/thermal,
-		/obj/item/clothing/glasses/thermal/plain/eyepatch,
-		/obj/item/clothing/glasses/thermal/plain/monocle
+		/obj/item/clothing/glasses/night
 		)
 
 	var/list/raider_helmets = list(

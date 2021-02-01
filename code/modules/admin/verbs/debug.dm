@@ -1,22 +1,3 @@
-/client/proc/Debug2()
-	set category = "Debug"
-	set name = "Debug-Game"
-	if(!check_rights(R_DEBUG))	return
-
-	if(Debug2)
-		Debug2 = 0
-		message_admins("[key_name(src)] toggled debugging off.")
-		log_admin("[key_name(src)] toggled debugging off.")
-	else
-		Debug2 = 1
-		message_admins("[key_name(src)] toggled debugging on.")
-		log_admin("[key_name(src)] toggled debugging on.")
-
-	SSstatistics.add_field_details("admin_verb","DG2") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
-// callproc moved to code/modules/admin/callproc
-
-
 /client/proc/Cell()
 	set category = "Debug"
 	set name = "Cell"
@@ -472,3 +453,10 @@
 
 	images -= powernet_markers
 	QDEL_NULL_LIST(powernet_markers)
+
+/client/proc/toggle_planet_repopulating()
+	set category = "Debug"
+	set name = "Toggle Planet Mob Repopulating"
+
+	GLOB.planet_repopulation_disabled = !GLOB.planet_repopulation_disabled
+	log_and_message_admins("toggled planet mob repopulating [GLOB.planet_repopulation_disabled ? "OFF" : "ON"].")

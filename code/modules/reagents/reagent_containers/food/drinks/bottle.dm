@@ -503,7 +503,7 @@
 	..()
 	reagents.add_reagent(/datum/reagent/ethanol/wine/premium, 100)
 	var/namepick = pick("Calumont","Sciacchemont","Recioto","Torcalota")
-	var/agedyear = rand(game_year-150,game_year)
+	var/agedyear = rand(GLOB.using_map.game_year - 150, GLOB.using_map.game_year)
 	name = "Chateau [namepick] De Blanc"
 	desc += " This bottle is marked as [agedyear] Vintage."
 

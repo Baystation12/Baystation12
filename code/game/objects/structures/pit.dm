@@ -151,7 +151,7 @@
 
 	var/decl/cultural_info/S = SSculture.get_culture(CULTURE_HUMAN)
 	var/nam = S.get_random_name(pick(MALE,FEMALE))
-	var/cur_year = game_year
+	var/cur_year = GLOB.using_map.game_year
 	var/born = cur_year - rand(5,150)
 	var/died = max(cur_year - rand(0,70),born)
 

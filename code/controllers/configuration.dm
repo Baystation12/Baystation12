@@ -3,6 +3,7 @@ var/list/gamemode_cache = list()
 /datum/configuration
 	var/server_name = null				// server name (for world name / status)
 	var/server_suffix = 0				// generate numeric suffix based on server port
+	var/game_version = "Baystation12" //for topic status requests
 
 	var/log_ooc = 0						// log OOC channel
 	var/log_access = 0					// log login/logout
@@ -207,6 +208,12 @@ var/list/gamemode_cache = list()
 	var/do_not_prevent_spam = FALSE //If this is true, skips spam prevention for user actions; inputs, verbs, macros, etc.
 	var/max_acts_per_interval = 140 //Number of actions per interval permitted for spam protection.
 	var/act_interval = 0.1 SECONDS //Interval for spam prevention.
+
+	var/max_explosion_range = 14
+	var/hub_visible = FALSE
+
+	var/motd = ""
+	var/event = ""
 
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
@@ -680,8 +687,8 @@ var/list/gamemode_cache = list()
 					radiation_lower_limit = text2num(value)
 				if("player_limit")
 					player_limit = text2num(value)
-				if("hub")
-					world.update_hub_visibility()
+				if("hub_visible")
+					world.update_hub_visibility(TRUE)
 
 				if ("allow_unsafe_narrates")
 					config.allow_unsafe_narrates = TRUE
@@ -723,6 +730,12 @@ var/list/gamemode_cache = list()
 
 				if ("minimum_player_age")
 					config.minimum_player_age = text2num(value)
+
+				if ("max_explosion_range")
+					config.max_explosion_range = text2num_or_default(value, config.max_explosion_range)
+
+				if ("game_version")
+					config.game_version = value
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
@@ -831,6 +844,16 @@ var/list/gamemode_cache = list()
 			else
 				log_misc("Unknown setting in configuration: '[name]'")
 
+/datum/configuration/proc/load_text(filename, type)
+	var/file = file2text(filename) || ""
+	switch (type)
+		if ("motd")
+			config.motd = file
+		if ("event")
+			config.event = file
+		else
+			log_misc("Unknown type [type] in config.load_text")
+
 /datum/configuration/proc/pick_mode(mode_name)
 	// I wish I didn't have to instance the game modes in order to look up
 	// their information, but it is the only way (at least that I know of).
@@ -846,9 +869,3 @@ var/list/gamemode_cache = list()
 		if(M && !M.startRequirements() && !isnull(config.probabilities[M.config_tag]) && config.probabilities[M.config_tag] > 0)
 			runnable_modes[M.config_tag] = config.probabilities[M.config_tag]
 	return runnable_modes
-
-/datum/configuration/proc/load_event(filename)
-	var/event_info = file2text(filename)
-
-	if (event_info)
-		custom_event_msg = event_info

@@ -22,7 +22,7 @@ SUBSYSTEM_DEF(webhooks)
 			all_webhooks_by_id[webhook.id] = webhook
 
 	webhook_decls.Cut()
-	var/webhook_config = return_file_text("config/webhooks.json")
+	var/webhook_config = file2text("config/webhooks.json") || "{}"
 	if(webhook_config)
 		for(var/webhook_data in json_decode(webhook_config))
 			var/wid = webhook_data["id"]
