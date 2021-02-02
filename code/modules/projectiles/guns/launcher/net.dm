@@ -5,6 +5,7 @@
 	item_state = "netgun"
 	fire_sound = 'sound/weapons/empty.ogg'
 	fire_sound_text = "a metallic thunk"
+	release_force = 5
 	var/obj/item/weapon/net_shell/chambered
 
 /obj/item/weapon/net_shell
@@ -70,11 +71,18 @@
 		return new /obj/item/weapon/energy_net/safari(src)
 
 /obj/item/weapon/gun/launcher/net/borg
+	has_safety = FALSE // Selecting the module for activation makes a safety redundant
 	var/list/shells
-	var/list/max_shells = 3
+	var/max_shells = 3
+
+/obj/item/weapon/gun/launcher/net/borg/Initialize()
+	. = ..()
+	// Start fully loaded
+	for(var/i in 1 to (max_shells + 1))
+		load(new /obj/item/weapon/net_shell)
 
 /obj/item/weapon/gun/launcher/net/borg/can_load(var/obj/item/weapon/net_shell/S, var/mob/user)
-	if(LAZYLEN(shells) >= 3)
+	if(LAZYLEN(shells) >= max_shells)
 		to_chat(user, SPAN_WARNING("\The [src] already has the maximum number of shells loaded."))
 		return FALSE
 	return TRUE
@@ -93,8 +101,8 @@
 	update_chambered_shell()
 
 /obj/item/weapon/gun/launcher/net/borg/consume_next_projectile()
-	update_chambered_shell()
 	. = ..()
+	update_chambered_shell()
 
 /obj/item/weapon/gun/launcher/net/borg/examine(mob/user)
 	. = ..()

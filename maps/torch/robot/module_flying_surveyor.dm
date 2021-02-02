@@ -41,7 +41,8 @@
 		/obj/item/weapon/wirecutters,
 		/obj/item/device/multitool,
 		/obj/item/bioreactor,
-		/obj/item/weapon/inflatable_dispenser/robot
+		/obj/item/weapon/inflatable_dispenser/robot,
+		/obj/item/weapon/robot_harvester
 	)
 
 	emag = /obj/item/weapon/melee/energy/machete
@@ -56,7 +57,7 @@
 	if(!gun)
 		gun = new(src)
 		equipment += gun
-	if(length(gun.shells) < gun.max_shells)
+	if(LAZYLEN(gun.shells) < gun.max_shells)
 		gun.load(new /obj/item/weapon/net_shell)
 
 	for(var/flagtype in flag_types)
