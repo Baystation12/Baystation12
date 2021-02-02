@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - rscadd: "You can now select equipment belts and toolbelts in loadout options. The belts will spawn empty - Find your own tools."
