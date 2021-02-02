@@ -26,6 +26,13 @@
 		if(L)
 			stat("Coordinates:", "[L.get_coordinates()]")
 
+/mob/living/silicon/robot/Stat()
+	. = ..()
+	if(statpanel("Status") && (istype(module_state_1, /obj/item/device/gps) || istype(module_state_2, /obj/item/device/gps) || istype(module_state_3, /obj/item/device/gps)))
+		var/obj/item/device/gps/L = locate() in src
+		if(L)
+			stat("Coordinates:", "[L.get_coordinates()]")
+
 /obj/item/device/measuring_tape
 	name = "measuring tape"
 	desc = "A coiled metallic tape used to check dimensions and lengths."
