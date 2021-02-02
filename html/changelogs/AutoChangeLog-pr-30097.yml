@@ -1,0 +1,11 @@
+author: "Ninetailed"
+delete-after: True
+changes: 
+  - rscadd: "Robots can now unbuckle themselves and others from things by clicking on them, just like a real boy!"
+  - rscadd: "Robots with the GPS/RPD as an active module now get coordinates in the Status box the same as humans do"
+  - rscadd: "Surveyor module now has a harvester to gather plants for the bioreactor"
+  - tweak: "Robot net gun no longer has a safety, as selecting the module for use serves the same purpose"
+  - tweak: "Vines can no longer grab you if you're flying"
+  - bugfix: "Net gun now actually fires nets instead of dropping them"
+  - bugfix: "Robot net gun now spawns with shells loaded"
+  - bugfix: "All living mobs, including robots, can break free of vines using the Resist verb, rather than this being restricted to carbon life"
