@@ -267,7 +267,7 @@ var/world_topic_spam_protect_time = world.timeofday
 			world_topic_spam_protect_time = world.time
 			return "Bad Key"
 		var/ckey = input["user"] 
-		var/message = replacetext_char(input["message"],"@#$%^","я")
+		var/message = input["message"]
 		if(!ckey||!message)
 			return
 		if(!config.vars["ooc_allowed"]&&!input["isadmin"])
