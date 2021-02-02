@@ -120,6 +120,11 @@ var/world_topic_spam_protect_time = world.timeofday
 	* * * * * * * */
 
 	var/input[] = params2list(T)
+	if(input["message"])
+		var/mes_to_replace = splittext(input["message"], "|")
+		input["message"] = ""
+		for(var/pos in mes_to_replace)
+			input["message"] += ascii2text(text2num(pos))
 	var/key_valid = config.comms_password && input["key"] == config.comms_password
 	
 
