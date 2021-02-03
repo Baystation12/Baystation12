@@ -822,16 +822,18 @@
 		speak_incantation(user, "Uhrast ka'hfa heldsagen ver[pick("'","`")]lot!")
 		to_chat(user, "<span class='warning'>In the last moment of your humble life, you feel an immense pain as fabric of reality mends... with your blood.</span>")
 		for(var/mob/M in GLOB.living_mob_list_)
-			if(iscultist(M))
-				to_chat(M, "You see a vision of \the [user] keeling over dead, his blood glowing blue as it escapes \his body and dissipates into thin air; you hear an otherwordly scream and feel that a great disaster has just been averted.")
+			if (!iscultist(M))
+				to_chat(M, SPAN_OCCULT("You see a vision of \the [user] keeling over dead, their blood glowing blue as it escapes their body and dissipates into thin air; you hear an otherwordly scream and feel that a great disaster has just been averted."))
 			else
-				to_chat(M, "You see a vision of [name] keeling over dead, his blood glowing blue as it escapes his body and dissipates into thin air; you hear an otherwordly scream and feel very weak for a moment.")
+				to_chat(M, SPAN_OCCULT("You see a vision of [name] keeling over dead, their blood glowing blue as it escapes their body and dissipates into thin air; you hear an otherwordly scream and feel very weak for a moment."))
 		log_and_message_admins("mended reality with the greatest sacrifice", user)
 		user.dust()
 		GLOB.cult.powerless = 1
 		qdel(HECOMES)
 		qdel(src)
-		return
+
+		if (GLOB.universe.type == /datum/universal_state/hell)
+			SetUniversalState(/datum/universal_state)
 
 /obj/effect/rune/tearreality/attackby()
 	if(the_end_comes)
