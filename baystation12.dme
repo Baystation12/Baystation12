@@ -3024,6 +3024,7 @@
 #include "code\modules\webhooks\_webhook.dm"
 #include "code\modules\webhooks\webhook_custom_event.dm"
 #include "code\modules\webhooks\webhook_ooc.dm"
+#include "code\modules\webhooks\webhook_reg.dm"
 #include "code\modules\webhooks\webhook_roundend.dm"
 #include "code\modules\webhooks\webhook_roundstart.dm"
 #include "code\modules\webhooks\webhook_submap.dm"
