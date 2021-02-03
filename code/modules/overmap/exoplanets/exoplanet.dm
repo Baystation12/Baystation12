@@ -66,9 +66,13 @@ GLOBAL_VAR(planet_repopulation_disabled)
 
 	maxx = max_x ? max_x : world.maxx
 	maxy = max_y ? max_y : world.maxy
-	planetary_area = new planetary_area()
 
-	name = "[generate_planet_name()], \a [name]"
+	var/planet_name = generate_planet_name()
+	name = "[planet_name], \a [name]"
+
+	planetary_area = new planetary_area()
+	GLOB.using_map.area_purity_test_exempt_areas += planetary_area.type
+	planetary_area.name = "Surface of [planet_name]"
 
 	world.maxz++
 	forceMove(locate(1,1,world.maxz))
