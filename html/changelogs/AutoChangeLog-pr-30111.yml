@@ -1,4 +1,0 @@
-author: "Mucker"
-delete-after: True
-changes: 
-  - bugfix: "Fix the gravity event end announcement being spammed."
