@@ -29,7 +29,9 @@
 	var/mothershuttle //tag of mothershuttle
 	var/motherdock    //tag of mothershuttle landmark, defaults to starting location
 
-/datum/shuttle/New(_name, var/obj/effect/shuttle_landmark/initial_location)
+	var/list/shadows = list() //turfs that are darkened as a shuttle lands
+
+/datum/shuttle/New(_name, obj/effect/shuttle_landmark/initial_location)
 	..()
 	if(_name)
 		src.name = _name
@@ -72,9 +74,11 @@
 	if(SSsupply.shuttle == src)
 		SSsupply.shuttle = null
 
+	remove_shadows()
+
 	. = ..()
 
-/datum/shuttle/proc/short_jump(var/obj/effect/shuttle_landmark/destination)
+/datum/shuttle/proc/short_jump(obj/effect/shuttle_landmark/destination)
 	if(moving_status != SHUTTLE_IDLE) return
 
 	moving_status = SHUTTLE_WARMUP
@@ -94,7 +98,7 @@
 		attempt_move(destination)
 		moving_status = SHUTTLE_IDLE
 
-/datum/shuttle/proc/long_jump(var/obj/effect/shuttle_landmark/destination, var/obj/effect/shuttle_landmark/interim, var/travel_time)
+/datum/shuttle/proc/long_jump(obj/effect/shuttle_landmark/destination, obj/effect/shuttle_landmark/interim, travel_time)
 	if(moving_status != SHUTTLE_IDLE) return
 
 	var/obj/effect/shuttle_landmark/start_location = current_location
@@ -122,10 +126,17 @@
 		arrive_time = world.time + travel_time*10
 		moving_status = SHUTTLE_INTRANSIT
 		if(attempt_move(interim))
-			var/fwooshed = 0
+			var/fwooshed = FALSE
+			var/shadows_created = FALSE
+			//create_shadows(destination, arrive_time)
 			while (world.time < arrive_time)
+
+				if (!shadows_created && (arrive_time - world.time) < 250)
+					create_shadows(destination)
+					shadows_created = TRUE
+
 				if(!fwooshed && (arrive_time - world.time) < 100)
-					fwooshed = 1
+					fwooshed = TRUE
 					playsound(destination, sound_landing, 100, 0, 7)
 					if (!istype(destination.base_area, /area/space))
 						var/area/A = get_area(destination)
@@ -148,7 +159,8 @@
 * Shuttle Pre Move Handling * (Observer Pattern Implementation: Shuttle Pre Move)
 *****************/
 
-/datum/shuttle/proc/attempt_move(var/obj/effect/shuttle_landmark/destination)
+/datum/shuttle/proc/attempt_move(obj/effect/shuttle_landmark/destination)
+	remove_shadows()
 	if(current_location == destination)
 		return FALSE
 
@@ -171,7 +183,7 @@
 //just moves the shuttle from A to B, if it can be moved
 //A note to anyone overriding move in a subtype. shuttle_moved() must absolutely not, under any circumstances, fail to move the shuttle.
 //If you want to conditionally cancel shuttle launches, that logic must go in short_jump(), long_jump() or attempt_move()
-/datum/shuttle/proc/shuttle_moved(var/obj/effect/shuttle_landmark/destination, var/list/turf_translation)
+/datum/shuttle/proc/shuttle_moved(obj/effect/shuttle_landmark/destination, list/turf_translation)
 
 //	log_debug("move_shuttle() called for [shuttle_tag] leaving [origin] en route to [destination].")
 //	log_degug("area_coming_from: [origin]")
@@ -284,3 +296,31 @@
 	if(!next_location)
 		return "None"
 	return next_location.name
+
+
+/datum/shuttle/proc/create_shadows(obj/effect/shuttle_landmark/destination)
+	if (!destination)
+		log_debug("Failed to create shadows for [src]: Destination was null!")
+		return
+
+	var/list/translation = list()
+	for(var/area/A in shuttle_area)
+		translation += get_turf_translation(get_turf(current_location), get_turf(destination), A.contents)
+
+
+	for(var/turf/T in translation)
+		if(!T)
+			continue
+
+		var/turf/next_turf = translation[T]
+		next_turf.set_light(-0.8, 1, 2)
+		shadows += next_turf
+
+/datum/shuttle/proc/remove_shadows()
+	if (!shadows)
+		return
+
+	for (var/turf/T in shadows)
+		T.set_light(0)
+
+	shadows.Cut()
