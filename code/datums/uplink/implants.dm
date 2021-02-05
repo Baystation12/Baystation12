@@ -40,3 +40,4 @@
 	set of law-like instructions to follow. This kit contains a dose of Mindbreaker Toxin."
 	item_cost = 20
 	path = /obj/item/weapon/storage/box/syndie_kit/imp_imprinting
+	antag_roles = list(MODE_TRAITOR)
