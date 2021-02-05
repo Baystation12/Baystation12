@@ -104,6 +104,15 @@
 		if(role_text) GLOB.hud_icon_reference[role_text] = antaghud_indicator
 		if(faction_role_text) GLOB.hud_icon_reference[faction_role_text] = antaghud_indicator
 
+/datum/antagonist/proc/get_antag_text(mob/recipient)
+	return antag_text
+
+/datum/antagonist/proc/get_welcome_text(mob/recipient)
+	return welcome_text
+
+/datum/antagonist/proc/get_leader_welcome_text(mob/recipient)
+	return leader_welcome_text
+
 /datum/antagonist/proc/tick()
 	return 1
 
