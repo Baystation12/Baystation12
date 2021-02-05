@@ -416,9 +416,9 @@
 	w_class = ITEM_SIZE_LARGE
 	obj_flags = OBJ_FLAG_CONDUCTIBLE | OBJ_FLAG_ROTATABLE
 
-	flashlight_max_bright = 1
-	flashlight_inner_range = 3
-	flashlight_outer_range = 7
+	flashlight_max_bright = 0.8
+	flashlight_inner_range = 1
+	flashlight_outer_range = 5
 
 /obj/item/device/flashlight/lamp/floodlamp/green
 	icon_state = "greenfloodlamp"
