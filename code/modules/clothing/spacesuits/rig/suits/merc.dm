@@ -32,7 +32,8 @@
 		/obj/item/rig_module/power_sink,
 		/obj/item/rig_module/electrowarfare_suite,
 		/obj/item/rig_module/chem_dispenser/combat,
-		/obj/item/rig_module/fabricator/energy_net
+		/obj/item/rig_module/fabricator/energy_net,
+		/obj/item/rig_module/cooling_unit
 		)
 
 /obj/item/clothing/gloves/rig/merc
@@ -44,6 +45,7 @@
 	initial_modules = list(
 		/obj/item/rig_module/ai_container,
 		/obj/item/rig_module/electrowarfare_suite,
+		/obj/item/rig_module/cooling_unit
 		)
 
 /obj/item/weapon/rig/merc/heavy
