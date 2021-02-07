@@ -236,26 +236,29 @@ var/list/global/organ_rel_size = list(
 
 proc/slur(phrase)
 	phrase = html_decode(phrase)
-	var/leng=length(phrase)
-	var/counter=length(phrase)
-	var/newphrase=""
-	var/newletter=""
-	while(counter>=1)
-		newletter=copytext(phrase,(leng-counter)+1,(leng-counter)+2)
-		if(rand(1,3)==3)
-			if(lowertext(newletter)=="o")	newletter="u"
-			if(lowertext(newletter)=="s")	newletter="ch"
-			if(lowertext(newletter)=="a")	newletter="ah"
-			if(lowertext(newletter)=="c")	newletter="k"
-		switch(rand(1,15))
-			if(1,3,5,8)	newletter="[lowertext(newletter)]"
-			if(2,4,6,15)	newletter="[uppertext(newletter)]"
-			if(7)	newletter+="'"
-			//if(9,10)	newletter="<b>[newletter]</b>"
-			//if(11,12)	newletter="<big>[newletter]</big>"
-			//if(13)	newletter="<small>[newletter]</small>"
-		newphrase+="[newletter]";counter-=1
-	return newphrase
+	var/new_phrase = ""
+	var/list/replacements_consonants = list(
+		"s" = "ch", "c" = "k",
+		"г" = "х", "к" = "х", "з" = "с", "ц" = "с", "ч" = "щ", "щ" = "шш", "п" = "б"
+		)
+	var/list/replacements_vowels = list(
+		"o" = "u",
+		"ы" = "'", "а" = "'", "е" = "э", "ё" = "'", "и" = "'", "о" = "'", "у" = "'", "ю" = "'"
+		)
+	for(var/i = 1, i <= length_char(phrase), i++)
+		var/letter = copytext_char(phrase, i, i + 1)
+		if(lowertext(letter) in replacements_consonants)
+			if(prob(40))
+				letter = replacements_consonants[lowertext(letter)]
+		else if(lowertext(letter) in replacements_vowels)
+			if(prob(12))
+				letter = replacements_vowels[lowertext(letter)]
+		new_phrase += pick(
+			65; letter,
+			20; lowertext(letter),
+			15; uppertext(letter),
+			)
+	return html_encode(new_phrase)
 
 /proc/stutter(n)
 	var/te = html_decode(n)
