@@ -4556,13 +4556,6 @@
 /obj/structure/railing/mapped,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftstarboard)
-"jy" = (
-/obj/structure/table/glass,
-/obj/effect/floor_decal/corner/blue{
-	dir = 5
-	},
-/turf/simulated/floor/tiled/dark/monotile,
-/area/bridge)
 "jz" = (
 /obj/machinery/computer/modular/preset/cardslot/command,
 /obj/effect/floor_decal/corner/blue/three_quarters{
@@ -5919,6 +5912,14 @@
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/space)
+"nu" = (
+/obj/structure/table/glass,
+/obj/effect/floor_decal/corner/blue{
+	dir = 5
+	},
+/obj/item/device/binoculars,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/bridge)
 "nE" = (
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 1;
@@ -25139,7 +25140,7 @@ yM
 eP
 hV
 eP
-jy
+nu
 vf
 lo
 yh
