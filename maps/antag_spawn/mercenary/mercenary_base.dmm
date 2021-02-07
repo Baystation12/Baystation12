@@ -683,12 +683,12 @@
 /obj/structure/table/rack{
 	pixel_x = -1
 	},
-/obj/item/clothing/accessory/storage/drop_pouches/white,
-/obj/item/clothing/accessory/storage/drop_pouches/white,
-/obj/item/clothing/accessory/storage/drop_pouches/black,
-/obj/item/clothing/accessory/storage/drop_pouches/black,
-/obj/item/clothing/accessory/storage/drop_pouches/brown,
-/obj/item/clothing/accessory/storage/drop_pouches/brown,
+/obj/item/clothing/accessory/storage/white_drop,
+/obj/item/clothing/accessory/storage/white_drop,
+/obj/item/clothing/accessory/storage/black_drop,
+/obj/item/clothing/accessory/storage/black_drop,
+/obj/item/clothing/accessory/storage/brown_drop,
+/obj/item/clothing/accessory/storage/brown_drop,
 /obj/item/clothing/accessory/storage/bandolier,
 /obj/item/clothing/accessory/storage/bandolier,
 /turf/simulated/floor/tiled/techfloor,
