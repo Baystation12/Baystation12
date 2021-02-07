@@ -524,23 +524,27 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	data["escaped_humans"] = 0
 	data["escaped_total"] = 0
 	data["left_behind_total"] = 0 //players who didnt escape and aren't on the station.
+	data["offship_players"] = 0
 
 	for(var/mob/M in GLOB.player_list)
 		if(M.client)
 			data["clients"]++
 			if(M.stat != DEAD)
-				data["surviving_total"]++
-				if(ishuman(M))
-					data["surviving_humans"]++
-				var/area/A = get_area(M)
-				if(A && (istype(A, /area/shuttle) && isEscapeLevel(A.z)))
-					data["escaped_total"]++
+				if (get_crewmember_record(M.real_name || M.name))
+					data["surviving_total"]++
 					if(ishuman(M))
-						data["escaped_humans"]++
-				if (evacuation_controller.emergency_evacuation && !isEscapeLevel(A.z)) //left behind after evac
-					data["left_behind_total"]++
-				if (!evacuation_controller.emergency_evacuation && isNotStationLevel(A.z))
-					data["left_behind_total"]++
+						data["surviving_humans"]++
+					var/area/A = get_area(M)
+					if(A && (istype(A, /area/shuttle) && isEscapeLevel(A.z)))
+						data["escaped_total"]++
+						if(ishuman(M))
+							data["escaped_humans"]++
+					if (evacuation_controller.emergency_evacuation && !isEscapeLevel(A.z)) //left behind after evac
+						data["left_behind_total"]++
+					if (!evacuation_controller.emergency_evacuation && isNotStationLevel(A.z))
+						data["left_behind_total"]++
+				else
+					data["offship_players"]++
 			else if(isghost(M))
 				data["ghosts"]++
 
@@ -565,11 +569,13 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		var/survivors = data["surviving_total"]
 		var/escaped_total = data["escaped_total"]
 		var/ghosts = data["ghosts"]
+		var/offship_players = data["offship_players"]
 
 		desc += "There [survivors>1 ? "were <b>[survivors] survivors</b>" : "was <b>one survivor</b>"]"
-		desc += " (<b>[escaped_total>0 ? escaped_total : "none"] escaped</b> and <b>[ghosts] ghosts</b>.<br>"
+		desc += " (<b>[escaped_total>0 ? escaped_total : "none"] escaped</b>), <b>[offship_players] off-ship player(s)."
+		data += " and <b>[ghosts] ghosts</b>.</b><br>"
 	else
-		desc += "There were <b>no survivors</b>, (<b>[data["ghosts"]] ghosts</b>)."
+		desc += "There were <b>no survivors</b>, <b>[data["offship_players"]] off-ship player(s)</b>, (<b>[data["ghosts"]] ghosts</b>)."
 
 	return desc
 
