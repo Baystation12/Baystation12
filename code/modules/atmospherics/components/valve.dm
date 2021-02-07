@@ -98,6 +98,9 @@
 	else if(network_node2)
 		network_node2.update = 1
 
+	if (usr)
+		visible_message(SPAN_WARNING("\The [usr] opens \the [src]."), range = 5)
+
 	return 1
 
 /obj/machinery/atmospherics/valve/proc/close()
@@ -113,6 +116,9 @@
 		qdel(network_node2)
 
 	build_network()
+
+	if (usr)
+		visible_message(SPAN_WARNING("\The [usr] closes \the [src]."), range = 5)
 
 	return 1
 
