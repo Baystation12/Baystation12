@@ -1,6 +1,0 @@
-author: "Ilysen"
-delete-after: True
-changes: 
-  - spellcheck: "Fixed some improper naming conventions on labcoats and the radiation suit."
-  - spellcheck: "Surgical tools and advanced kits now have more descriptive examine texts."
-  - spellcheck: "Added descriptions to bone gel, bone setters, and the FixOVein."
