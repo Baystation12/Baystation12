@@ -52,7 +52,8 @@ mob/living/proc/getPerRollDelay()
 		return 0
 	var/roll_dist = getRollDist()
 	var/roll_delay = getPerRollDelay()
-	if(roll_dist <= 0 || incapacitated())
+	update_canmove()
+	if(roll_dist <= 0 || incapacitated(INCAPACITATION_DISABLED) || incapacitated(INCAPACITATION_KNOCKDOWN))
 		to_chat(src,"<span class = 'notice'>You can't dodge roll in your current state.</span>")
 		return 0
 	var/obj/vehicles/v = loc

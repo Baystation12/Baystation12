@@ -189,8 +189,8 @@
 			switch(blood_volume)
 
 				if(BLOOD_VOLUME_SAFE to INFINITY)
-					if((damage%damage_threshold_value)>=1 || (damage >= 1 && owner.chem_effects[CE_BRAIN_REGEN]))
-						damage--
+					if((damage%damage_threshold_value)>=1 || (damage && owner.chem_effects[CE_BRAIN_REGEN]))
+						damage = max(damage - 1,0)
 				if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
 					if(prob(1))
 						to_chat(owner, "<span class='warning'>You feel [pick("dizzy","woozy","faint")]...</span>")

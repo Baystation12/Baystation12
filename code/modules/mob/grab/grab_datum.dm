@@ -214,6 +214,7 @@
 // What happens when you let go of someone by either dropping the grab
 // or by downgrading from the lowest grab state.
 /datum/grab/proc/let_go_effect(var/obj/item/grab/G)
+	G.affecting.update_canmove()
 
 // What happens each tic when process is called.
 /datum/grab/proc/process_effect(var/obj/item/grab/G)
