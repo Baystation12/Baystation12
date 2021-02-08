@@ -1,0 +1,4 @@
+author: "Ilysen"
+delete-after: True
+changes: 
+  - bugfix: "The \"custom event is taking place\" popup no longer appears every round."
