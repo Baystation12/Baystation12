@@ -58,7 +58,7 @@
 	boot_type = /obj/item/clothing/shoes/magboots/rig/industrial
 	glove_type = /obj/item/clothing/gloves/rig/industrial
 
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/stack/flag,/obj/item/weapon/storage/ore,/obj/item/device/t_scanner,/obj/item/weapon/pickaxe, /obj/item/weapon/rcd)
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/stack/flag,/obj/item/weapon/storage/ore,/obj/item/device/t_scanner,/obj/item/weapon/pickaxe, /obj/item/weapon/rcd,/obj/item/weapon/rpd)
 
 /obj/item/clothing/head/helmet/space/rig/industrial
 	camera = /obj/machinery/camera/network/mining
@@ -107,7 +107,7 @@
 	boot_type = /obj/item/clothing/shoes/magboots/rig/eva
 	glove_type = /obj/item/clothing/gloves/rig/eva
 
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/toolbox,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/weapon/inflatable_dispenser,/obj/item/device/t_scanner,/obj/item/weapon/rcd)
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/toolbox,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/weapon/inflatable_dispenser,/obj/item/device/t_scanner,/obj/item/weapon/rcd,/obj/item/weapon/rpd)
 
 	req_access = list(access_engine_equip)
 
@@ -174,7 +174,7 @@
 	helm_type = /obj/item/clothing/head/helmet/space/rig/ce
 	glove_type = /obj/item/clothing/gloves/rig/ce
 
-	allowed = list(/obj/item/weapon/gun,/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/ore,/obj/item/weapon/storage/toolbox,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/weapon/inflatable_dispenser,/obj/item/device/t_scanner,/obj/item/weapon/pickaxe,/obj/item/weapon/rcd)
+	allowed = list(/obj/item/weapon/gun,/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/ore,/obj/item/weapon/storage/toolbox,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/weapon/inflatable_dispenser,/obj/item/device/t_scanner,/obj/item/weapon/pickaxe,/obj/item/weapon/rcd,/obj/item/weapon/rpd)
 
 	req_access = list(access_ce)
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
