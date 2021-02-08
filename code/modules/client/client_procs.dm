@@ -181,7 +181,7 @@
 
 	GLOB.using_map.map_info(src)
 
-	if (!config.event)
+	if (config.event)
 		to_chat(src, "<h1 class='alert'>Event</h1>")
 		to_chat(src, "<h2 class='alert'>An event is taking place. OOC Info:</h2>")
 		to_chat(src, "<span class='alert'>[config.event]</span>")
