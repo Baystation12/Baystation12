@@ -13,7 +13,7 @@
  */
 /obj/item/weapon/retractor
 	name = "retractor"
-	desc = "Retracts stuff."
+	desc = "Used to separate the edges of a surgical incision to get to the juicy organs inside."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "retractor"
 	matter = list(MATERIAL_STEEL = 10000, MATERIAL_GLASS = 5000)
@@ -26,7 +26,7 @@
  */
 /obj/item/weapon/hemostat
 	name = "hemostat"
-	desc = "You think you have seen this before."
+	desc = "A type of forceps used to prevent an incision from bleeding, or to extract objects from the inside of the body."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "hemostat"
 	matter = list(MATERIAL_STEEL = 5000, MATERIAL_GLASS = 2500)
@@ -40,7 +40,7 @@
  */
 /obj/item/weapon/cautery
 	name = "cautery"
-	desc = "This stops bleeding."
+	desc = "Uses chemicals to quickly cauterize incisions and other small cuts without causing further damage."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "cautery"
 	matter = list(MATERIAL_STEEL = 5000, MATERIAL_GLASS = 2500, MATERIAL_ALUMINIUM = 1000)
@@ -54,7 +54,7 @@
  */
 /obj/item/weapon/surgicaldrill
 	name = "surgical drill"
-	desc = "You can drill using this item. You dig?"
+	desc = "Effectively a very precise hand drill, used to bore holes through bone."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "drill"
 	hitsound = 'sound/weapons/circsawhit.ogg'
@@ -70,7 +70,7 @@
  */
 /obj/item/weapon/scalpel
 	name = "scalpel"
-	desc = "Cut, cut, and once more cut."
+	desc = "A tiny and extremely sharp steel cutting tool used for surgery, dissection, autopsy, and very precise cuts. The cornerstone of any surgical procedure."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "scalpel"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
@@ -120,7 +120,7 @@
  */
 /obj/item/weapon/circular_saw
 	name = "circular saw"
-	desc = "For heavy duty cutting."
+	desc = "A small and nasty-looking hand saw used to cut through bone, or in an emergency, pizza."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "saw3"
 	hitsound = 'sound/weapons/circsawhit.ogg'
@@ -139,6 +139,7 @@
 //misc, formerly from code/defines/weapons.dm
 /obj/item/weapon/bonegel
 	name = "bone gel"
+	desc = "Sophisticated chemical gel used to mend fractures and broken bones before setting."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "bone-gel"
 	force = 0
@@ -147,6 +148,7 @@
 
 /obj/item/weapon/FixOVein
 	name = "FixOVein"
+	desc = "Derived from a Vey-Med design, this is a very precise surgical tool used to mend cut tendons and severed arteries."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "fixovein"
 	force = 0
@@ -157,6 +159,7 @@
 
 /obj/item/weapon/bonesetter
 	name = "bone setter"
+	desc = "A large, heavy clamp for setting dislocated or fractured bones back in place."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "bone setter"
 	force = 8.0
