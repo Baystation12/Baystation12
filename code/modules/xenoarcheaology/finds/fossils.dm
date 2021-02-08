@@ -9,14 +9,20 @@
 	desc = "It's a fossil."
 	var/animal = 1
 
-/obj/item/weapon/fossil/base/New()
-	var/list/l = list(/obj/item/weapon/fossil/bone=9,/obj/item/weapon/fossil/skull=3,
-	/obj/item/weapon/fossil/skull/horned=2)
-	var/t = pickweight(l)
-	var/obj/item/weapon/W = new t(src.loc)
-	var/turf/T = get_turf(src)
-	if(istype(T, /turf/simulated/mineral))
-		T:last_find = W
+/obj/item/weapon/fossil/base/Initialize()
+	. = ..()
+	if (. == INITIALIZE_HINT_QDEL)
+		return
+	var/list/fossil_weights = list(
+		/obj/item/weapon/fossil/bone = 9,
+		/obj/item/weapon/fossil/skull = 3,
+		/obj/item/weapon/fossil/skull/horned = 2
+	)
+	var/fossil_type = pickweight(fossil_weights)
+	var/obj/item/I = new fossil_type (loc)
+	var/turf/simulated/mineral/T = get_turf(src)
+	if (istype(T))
+		T.last_find = I
 	qdel(src)
 
 /obj/item/weapon/fossil/bone

@@ -10,7 +10,7 @@
 	var/datum/research/techonly/files 	//The device uses the same datum structure as the R&D computer/server.
 										//This analyzer can only store tech levels, however.
 
-	var/obj/item/weapon/loaded_item	//What is currently inside the analyzer.
+	var/obj/item/loaded_item	//What is currently inside the analyzer.
 
 /obj/item/weapon/portable_destructive_analyzer/New()
 	..()
