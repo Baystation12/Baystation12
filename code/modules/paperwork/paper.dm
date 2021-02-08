@@ -35,6 +35,8 @@
 	var/last_modified_ckey
 	var/age = 0
 	var/list/metadata
+	var/readable = TRUE  //Paper will not be able to be written on and will not bring up a window upon examine if FALSE
+	var/is_memo = FALSE  //If TRUE, paper will act the same as readable = FALSE, but will also be unrenameable.
 
 	var/const/deffont = "Verdana"
 	var/const/signfont = "Times New Roman"
@@ -58,7 +60,7 @@
 	updateinfolinks()
 
 /obj/item/weapon/paper/on_update_icon()
-	if(icon_state == "paper_talisman")
+	if(icon_state == "paper_talisman" || is_memo)
 		return
 	else if(info)
 		icon_state = "paper_words"
@@ -80,7 +82,9 @@
 
 /obj/item/weapon/paper/proc/show_content(mob/user, forceshow)
 	var/can_read = (istype(user, /mob/living/carbon/human) || isghost(user) || istype(user, /mob/living/silicon)) || forceshow
-	if(!forceshow && istype(user,/mob/living/silicon/ai))
+	if(!readable || is_memo)
+		return
+	else if(!forceshow && istype(user,/mob/living/silicon/ai))
 		var/mob/living/silicon/ai/AI = user
 		can_read = get_dist(src, AI.camera) < 2
 	show_browser(user, "<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY bgcolor='[color]'>[can_read ? info : stars(info)][stamps]</BODY></HTML>", "window=[name]")
@@ -93,6 +97,9 @@
 
 	if((MUTATION_CLUMSY in usr.mutations) && prob(50))
 		to_chat(usr, "<span class='warning'>You cut yourself on the paper.</span>")
+		return
+	else if(is_memo)
+		to_chat(usr, SPAN_NOTICE("You decide not to alter the name of \the [src]."))
 		return
 	var/n_name = sanitizeSafe(input(usr, "What would you like to label the paper?", "Paper Labelling", null)  as text, MAX_NAME_LEN)
 
@@ -379,6 +386,8 @@
 		var/obj/item/weapon/pen/robopen/RP = P
 		if ( istype(RP) && RP.mode == 2 )
 			RP.RenamePaper(user,src)
+		if(is_memo || !readable)
+			return
 		else
 			show_browser(user, "<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY bgcolor='[color]'>[info_links][stamps]</BODY></HTML>", "window=[name]")
 		return
