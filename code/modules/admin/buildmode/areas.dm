@@ -36,7 +36,7 @@ Right Click       - List/Create Area
 	if (overlay)
 		overlay.Hide()
 
-/datum/build_mode/areas/UpdateOverlay(image/I, turf/T)
+/datum/build_mode/areas/UpdateOverlay(atom/movable/M, turf/T)
 	if (!overlay?.shown)
 		return
 	var/color = area_colors[T.loc]
@@ -48,7 +48,7 @@ Right Click       - List/Create Area
 		else
 			color = "#" + copytext(md5("\ref[T.loc]"), 1, 7)
 		area_colors[T.loc] = color
-	I.color = color
+	M.color = color
 
 /datum/build_mode/areas/OnClick(var/atom/A, var/list/parameters)
 	if (parameters["right"])

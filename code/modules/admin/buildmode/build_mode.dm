@@ -34,7 +34,7 @@
 /datum/build_mode/proc/TimerEvent()
 	return
 
-/datum/build_mode/proc/UpdateOverlay(image/I, turf/T)
+/datum/build_mode/proc/UpdateOverlay(atom/movable/M, turf/T)
 	return
 
 /datum/build_mode/proc/CreateOverlay(icon_state)
