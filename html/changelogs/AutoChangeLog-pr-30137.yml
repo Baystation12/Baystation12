@@ -1,0 +1,5 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - maptweak: "The miscellaneous research lab's teleport beacon has been moved outside of the containment cell."
+  - maptweak: "The miscellaneous research lab's containment cell's siphon now starts off by default."
