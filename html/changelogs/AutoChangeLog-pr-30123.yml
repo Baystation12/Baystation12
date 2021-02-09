@@ -1,0 +1,5 @@
+author: "SealCure"
+delete-after: True
+changes: 
+  - tweak: "Refactors departmental memos to be subtypes of paper, making them able to be clipped, filed and bundled."
+  - rscadd: "Adds readable and memo checks to paper, enabling the creation of unreadable and unwritable papers."
