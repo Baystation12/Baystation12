@@ -226,33 +226,34 @@ GLOBAL_LIST_INIT(mob_spawners, list())
 
 		return TOPIC_HANDLED
 
-/datum/build_mode/mob_mode/TimerEvent()
-	if (!user.client)
-		return
-	user.client.images -= vision_images
+/datum/build_mode/mob_mode/Selected()
+	if (!overlay)
+		CreateOverlay("whiteOverlay")
+	distinct_colors = initial(distinct_colors)
 	vision_images = list()
-
-	var/used_colors = 0
-	var/list/max_colors = length(distinct_colors)
-	var/list/vision_colors = list()
-	for (var/turf/T in GLOB.mob_spawners)
-		var/image/I = new('icons/turf/overlays.dmi', T, "whiteOverlay")
-		var/ref = "\ref[T.loc]"
-		if (!vision_colors[ref])
-			if (++used_colors > max_colors)
-				vision_colors[ref] = "#" + copytext(md5(ref), 1, 7)
-			else
-				vision_colors[ref] = distinct_colors[used_colors]
-		I.color = vision_colors[ref]
-		I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-		I.appearance_flags = RESET_COLOR|RESET_ALPHA|RESET_TRANSFORM|NO_CLIENT_COLOR|KEEP_APART
-		vision_images.Add(I)
-	user.client.images += vision_images
+	overlay.Show()
 
 /datum/build_mode/mob_mode/Unselected()
-	if (user.client)
-		user.client.images -= vision_images
-	vision_images = list()
+	if (overlay)
+		overlay.Hide()
+
+/datum/build_mode/mob_mode/UpdateOverlay(atom/movable/M, turf/T)
+	if (!overlay?.shown)
+		return
+	var/color = vision_images[T]
+	if (GLOB.mob_spawners[T])
+		if (!color)
+			var/len = length(distinct_colors)
+			if (len)
+				color = distinct_colors[len]
+				distinct_colors.Cut(len)
+			else
+				color = "#" + copytext(md5("\ref[T]"), 1, 7)
+			vision_images[T] = color
+		M.color = color
+		M.alpha = 255
+	else
+		M.alpha = 0
 
 /datum/build_mode/mob_mode/OnClick(atom/object, list/pa)
 	current_area = get_area(object)
