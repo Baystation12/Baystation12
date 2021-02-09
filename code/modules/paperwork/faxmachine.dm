@@ -42,6 +42,11 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 			destination = pick(GLOB.alldepartments)
 
 /obj/machinery/photocopier/faxmachine/attackby(obj/item/O as obj, mob/user as mob)
+	if(istype(O, /obj/item/weapon/paper))
+		var/obj/item/weapon/paper/P = O
+		if(!P.readable)
+			to_chat(user, SPAN_NOTICE("\The [src] beeps. Error, invalid document detected."))
+			return
 	if(istype(O, /obj/item/weapon/card/id))
 		if(!user.unEquip(O, src))
 			return
