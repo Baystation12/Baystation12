@@ -73,7 +73,7 @@
 
 /obj/item/weapon/paper/examine(mob/user, distance)
 	. = ..()
-	if(name != "sheet of paper")
+	if(!is_memo && name != "sheet of paper")
 		to_chat(user, "It's titled '[name]'.")
 	if(distance <= 1)
 		show_content(usr)

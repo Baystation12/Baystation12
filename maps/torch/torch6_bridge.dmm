@@ -642,7 +642,7 @@
 /area/maintenance/bridge/aftstarboard)
 "bn" = (
 /obj/structure/table/woodentable_reinforced/walnut,
-/obj/random_multi/single_item/summarydocuments/corp,
+/obj/random_multi/single_item/memo_corporate,
 /turf/simulated/floor/carpet,
 /area/crew_quarters/heads/office/cl)
 "bo" = (
@@ -1867,8 +1867,8 @@
 /obj/item/weapon/pen,
 /obj/item/weapon/stamp/xo,
 /obj/structure/table/woodentable_reinforced/walnut,
-/obj/random_multi/single_item/summarydocuments/sol,
-/obj/random_multi/single_item/summarydocuments/sup,
+/obj/random_multi/single_item/memo_command,
+/obj/random_multi/single_item/memo_supply,
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/xo)
 "de" = (
@@ -2262,9 +2262,9 @@
 /area/hallway/primary/bridge/fore)
 "dP" = (
 /obj/structure/table/woodentable/walnut,
-/obj/random_multi/single_item/summarydocuments/scgr,
-/obj/random_multi/single_item/summarydocuments/sol,
-/obj/random_multi/single_item/summarydocuments/corp,
+/obj/random_multi/single_item/memo_scgr,
+/obj/random_multi/single_item/memo_command,
+/obj/random_multi/single_item/memo_corporate,
 /turf/simulated/floor/carpet/blue2,
 /area/bridge/meeting_room)
 "dQ" = (
@@ -3052,8 +3052,8 @@
 "fl" = (
 /obj/structure/table/glass,
 /obj/random/clipboard,
-/obj/random_multi/single_item/summarydocuments/sci,
-/obj/random_multi/single_item/summarydocuments/explo,
+/obj/random_multi/single_item/memo_research,
+/obj/random_multi/single_item/memo_exploration,
 /turf/simulated/floor/tiled,
 /area/crew_quarters/heads/office/rd)
 "fm" = (
@@ -4368,7 +4368,7 @@
 /obj/effect/floor_decal/corner/yellow{
 	dir = 6
 	},
-/obj/random_multi/single_item/summarydocuments/eng,
+/obj/random_multi/single_item/memo_engineering,
 /turf/simulated/floor/tiled,
 /area/crew_quarters/heads/office/ce)
 "iU" = (
@@ -5143,9 +5143,9 @@
 	pixel_x = -5;
 	pixel_y = 5
 	},
-/obj/random_multi/single_item/summarydocuments/sol,
-/obj/random_multi/single_item/summarydocuments/sup,
-/obj/random_multi/single_item/summarydocuments/med,
+/obj/random_multi/single_item/memo_command,
+/obj/random_multi/single_item/memo_supply,
+/obj/random_multi/single_item/memo_medical,
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "lu" = (
@@ -9278,7 +9278,7 @@
 	dir = 6
 	},
 /obj/item/weapon/stamp/cos,
-/obj/random_multi/single_item/summarydocuments/sec,
+/obj/random_multi/single_item/memo_security,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/heads/office/cos)
 "wD" = (
@@ -12153,7 +12153,7 @@
 	pixel_x = 4;
 	pixel_y = -2
 	},
-/obj/random_multi/single_item/summarydocuments/scgr,
+/obj/random_multi/single_item/memo_scgr,
 /obj/structure/sign/double/solgovflag/left{
 	dir = 1;
 	pixel_x = 0;
@@ -12737,7 +12737,7 @@
 "Kf" = (
 /obj/effect/floor_decal/corner/paleblue/diagonal,
 /obj/structure/table/glass,
-/obj/random_multi/single_item/summarydocuments/med,
+/obj/random_multi/single_item/memo_medical,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/heads/office/cmo)
 "Kh" = (
@@ -14082,10 +14082,10 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/random_multi/single_item/summarydocuments/sec,
-/obj/random_multi/single_item/summarydocuments/eng,
-/obj/random_multi/single_item/summarydocuments/sci,
-/obj/random_multi/single_item/summarydocuments/explo,
+/obj/random_multi/single_item/memo_security,
+/obj/random_multi/single_item/memo_engineering,
+/obj/random_multi/single_item/memo_research,
+/obj/random_multi/single_item/memo_exploration,
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "Qz" = (

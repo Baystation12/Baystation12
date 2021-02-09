@@ -9781,7 +9781,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/random_multi/single_item/summarydocuments/sec,
+/obj/random_multi/single_item/memo_security,
 /turf/simulated/floor/tiled/dark,
 /area/security/bo)
 "aFS" = (
@@ -21274,7 +21274,7 @@
 	pixel_y = -3
 	},
 /obj/item/weapon/book/manual/sol_sop,
-/obj/random_multi/single_item/summarydocuments/sec,
+/obj/random_multi/single_item/memo_security,
 /turf/simulated/floor/tiled/monotile,
 /area/security/locker)
 "kku" = (
@@ -24441,7 +24441,7 @@
 "ojb" = (
 /obj/structure/table/standard,
 /obj/effect/floor_decal/corner/research/mono,
-/obj/random_multi/single_item/summarydocuments/sci,
+/obj/random_multi/single_item/memo_research,
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/office)
 "okp" = (
@@ -30879,7 +30879,7 @@
 	pixel_y = 5
 	},
 /obj/structure/table/glass,
-/obj/random_multi/single_item/summarydocuments/med,
+/obj/random_multi/single_item/memo_medical,
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/physicianoffice)
 "xBk" = (

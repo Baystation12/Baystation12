@@ -12851,8 +12851,8 @@
 	icon_state = "1-2"
 	},
 /obj/item/weapon/stamp/path,
-/obj/random_multi/single_item/summarydocuments/sci,
-/obj/random_multi/single_item/summarydocuments/explo,
+/obj/random_multi/single_item/memo_research,
+/obj/random_multi/single_item/memo_exploration,
 /turf/simulated/floor/tiled,
 /area/command/pathfinder)
 "QI" = (
@@ -13578,7 +13578,7 @@
 /obj/structure/noticeboard{
 	pixel_x = 32
 	},
-/obj/random_multi/single_item/summarydocuments/sup,
+/obj/random_multi/single_item/memo_supply,
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/deckchief)
 "Sz" = (
