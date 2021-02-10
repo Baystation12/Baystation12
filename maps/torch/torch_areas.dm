@@ -1618,6 +1618,11 @@ area/assembly/robotics/office
 	color = COLOR_GRAY80
 	sound_env = SMALL_SOFTFLOOR
 
+/area/chapel/memorial
+	name = "\improper Memorial Room"
+	color = COLOR_GRAY80
+	sound_env = SMALL_SOFTFLOOR
+
 // Merchant
 
 /area/merchant_station
