@@ -1,4 +1,0 @@
-author: "Mucker"
-delete-after: True
-changes: 
-  - tweak: "Separates off-ship roles in the round-end statistics."
