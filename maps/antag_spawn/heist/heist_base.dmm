@@ -876,7 +876,7 @@
 /obj/item/clothing/head/helmet/space/vox/stealth,
 /obj/item/clothing/shoes/magboots/vox,
 /obj/item/clothing/gloves/vox,
-/obj/item/clothing/glasses/thermal/plain/monocle,
+/obj/item/clothing/glasses/night,
 /obj/item/clothing/under/vox/vox_robes,
 /obj/item/weapon/gun/projectile/dartgun/vox/medical,
 /turf/unsimulated/floor{
