@@ -1,0 +1,4 @@
+author: "SDTheCyanWyan"
+delete-after: True
+changes: 
+  - tweak: "Print a message when a manual valve is opened/closed"
