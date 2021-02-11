@@ -1,46 +1,70 @@
-/datum/build_mode/advanced
-	name = "Advanced"
-	icon_state = "buildmode2"
+/datum/build_mode/build
+	the_default = TRUE
+	name = "Build Mode"
+	icon_state = "mode_build"
 	var/build_type
+	var/help_text = {"\
+	***********Build Mode***********
+	Left Click = Create Atom
+	Right Click = Delete Atom
+	Middle Click = Copy Atom Path
+	Left Click + Ctrl = Copy Atom Path
+	Right Click on Mode Button = Choose Path Dialog
+	Directional Arrow Button = Direction On Creation
+	********************************
+	"}
 
-/datum/build_mode/advanced/Help()
-	to_chat(user, "<span class='notice'>***********************************************************</span>")
-	to_chat(user, "<span class='notice'>Left Click                       = Create objects</span>")
-	to_chat(user, "<span class='notice'>Right Click                      = Delete objects</span>")
-	to_chat(user, "<span class='notice'>Left Click + Ctrl                = Capture object type</span>")
-	to_chat(user, "<span class='notice'>Middle Click                     = Capture object type</span>")
-	to_chat(user, "<span class='notice'>Right Click on Build Mode Button = Select object type</span>")
-	to_chat(user, "")
-	to_chat(user, "<span class='notice'>Use the directional button in the upper left corner to</span>")
-	to_chat(user, "<span class='notice'>change the direction of built objects.</span>")
-	to_chat(user, "<span class='notice'>***********************************************************</span>")
+/datum/build_mode/build/Help()
+	to_chat(user, help_text)
 
-/datum/build_mode/advanced/Configurate()
-	SetBuildType(select_subpath(build_type || /obj/structure/closet))
+/datum/build_mode/build/Configurate()
+	build_type = select_subpath(build_type || /obj/item/latexballon)
 
-/datum/build_mode/advanced/OnClick(var/atom/A, var/list/parameters)
-	if(parameters["left"] && !parameters["ctrl"])
-		if(ispath(build_type,/turf))
-			var/turf/T = get_turf(A)
-			T.ChangeTurf(build_type)
-		else if(ispath(build_type))
-			var/atom/new_atom = new build_type (get_turf(A))
-			new_atom.set_dir(host.dir)
-			Log("Created - [log_info_line(new_atom)]")
-		else
-			to_chat(user, "<span>Select a type to construct.</span>")
-	else if(parameters["right"])
-		Log("Deleted - [log_info_line(A)]")
-		qdel(A)
-	else if((parameters["left"] && parameters["ctrl"]) || parameters["middle"])
-		SetBuildType(A.type)
-
-/datum/build_mode/advanced/proc/SetBuildType(var/atom_type)
-	if(!atom_type || atom_type == build_type)
+/datum/build_mode/build/OnClick(atom/target, list/parameters)
+	if (!target)
 		return
+	if (parameters["middle"] || parameters["ctrl"] && parameters["left"])
+		if (ispath(target.type, /atom))
+			to_chat(user, "Selected Type [target.type]")
+			build_type = target.type
+			return
+	var/turf/location = get_turf(target)
+	if (parameters["right"])
+		if (isturf(target))
+			return
+		to_chat(user, "Deleted [target] at (<a href='?src=\ref[src];jump=\ref[location]'>[location.x],[location.y],[location.z]</a>)")
+		qdel(target)
+	else if (parameters["left"])
+		if (!build_type)
+			to_chat(user, SPAN_WARNING("Select a type to construct."))
+			return
+		if (!location)
+			return
+		else if (ispath(build_type, /turf))
+			location.ChangeTurf(build_type)
+			to_chat(user, "Updated [location] at (<a href='?src=\ref[src];jump=\ref[location]'>[location.x],[location.y],[location.z]</a>)")
+		else
+			var/atom/instance = new build_type (location)
+			instance.set_dir(host.dir)
+			to_chat(user, "Created [instance] at (<a href='?src=\ref[src];jump=\ref[location]'>[location.x],[location.y],[location.z]</a>)")
 
-	if(ispath(atom_type, /atom))
-		build_type = atom_type
-		to_chat(user, "<span class='notice'>Will now construct instances of the type [atom_type].</span>")
-	else
-		to_chat(user, "<span class='warning'>Cannot construct instances of type [atom_type].</span>")
+/datum/build_mode/build/CanUseTopic(mob/user)
+	if (!is_admin(user))
+		return STATUS_CLOSE
+	return ..()
+
+/datum/build_mode/build/Topic(href, list/href_list)
+	if (!length(href_list))
+		return
+	if (href_list["jump"])
+		var/turf/location = locate(href_list["jump"])
+		if (!location)
+			return
+		if (!isghost(user))
+			var/client/user_client = user.client
+			if (!user_client)
+				return
+			user_client.admin_ghost()
+			user_client.mob.jumpTo(location)
+		else
+			user.jumpTo(location)

@@ -1250,7 +1250,6 @@
 #include "code\modules\admin\buildmode\_color_pool.dm"
 #include "code\modules\admin\buildmode\advance.dm"
 #include "code\modules\admin\buildmode\areas.dm"
-#include "code\modules\admin\buildmode\basic.dm"
 #include "code\modules\admin\buildmode\build_mode.dm"
 #include "code\modules\admin\buildmode\buttons.dm"
 #include "code\modules\admin\buildmode\click_handler.dm"
