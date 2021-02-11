@@ -1,6 +1,0 @@
-author: "Spookerton"
-delete-after: True
-changes: 
-  - tweak: "EC service uniforms are back to utility + jacket."
-  - tweak: "EC dress uniforms use the previous service under icons."
-  - rscdel: "No more colored jumpers on EC dress unders."
