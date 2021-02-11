@@ -56,7 +56,7 @@
 			else
 				output += "<a href='byond://?src=\ref[src];showpoll=1'>Show Player Polls</A> "
 
-	output += "<hr>Current character: <b>[client.prefs.real_name]</b>[client.prefs.job_high ? ", [client.prefs.job_high]" : null]<br>"
+	output += "<hr>Current character: <a href='byond://?src=\ref[client.prefs];load=1'>[client.prefs.real_name]</a>[client.prefs.job_high ? ", [client.prefs.job_high]" : null]<br>"
 	if(GAME_STATE <= RUNLEVEL_LOBBY)
 		if(ready)
 			output += "<a class='linkOn' href='byond://?src=\ref[src];ready=0'>Un-Ready</a>"
