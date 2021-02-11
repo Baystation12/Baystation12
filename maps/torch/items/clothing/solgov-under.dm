@@ -282,129 +282,6 @@
 	worn_state = "whiteservice"
 	siemens_coefficient = 0.9
 
-/obj/item/clothing/under/solgov/service/expeditionary
-	name = "expeditionary service uniform"
-	desc = "The service uniform of the SCG Expeditionary Corps in silver trim."
-	icon_state = "greydress"
-	worn_state = "greydress"
-	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_under_unathi.dmi'
-		)
-
-/obj/item/clothing/under/solgov/service/expeditionary/command
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/command/jumper)
-
-/obj/item/clothing/under/solgov/service/expeditionary/engineering
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/engineering/jumper)
-
-/obj/item/clothing/under/solgov/service/expeditionary/security
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/security/jumper)
-
-/obj/item/clothing/under/solgov/service/expeditionary/medical
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/medical/jumper)
-
-/obj/item/clothing/under/solgov/service/expeditionary/supply
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/supply/jumper)
-
-/obj/item/clothing/under/solgov/service/expeditionary/service
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/service/jumper)
-
-/obj/item/clothing/under/solgov/service/expeditionary/exploration
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/exploration/jumper)
-
-/obj/item/clothing/under/solgov/service/expeditionary/research
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/research/jumper)
-
-/obj/item/clothing/under/solgov/service/expeditionary/skirt
-	name = "expeditionary service skirt"
-	desc = "A feminine version of the SCG Expeditionary Corps service uniform in silver trim."
-	icon_state = "greydressfem"
-	worn_state = "greydressfem"
-
-/obj/item/clothing/under/solgov/service/expeditionary/skirt/command
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/command/jumper)
-
-/obj/item/clothing/under/solgov/service/expeditionary/skirt/engineering
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/engineering/jumper)
-
-/obj/item/clothing/under/solgov/service/expeditionary/skirt/security
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/security/jumper)
-
-/obj/item/clothing/under/solgov/service/expeditionary/skirt/medical
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/medical/jumper)
-
-/obj/item/clothing/under/solgov/service/expeditionary/skirt/supply
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/supply/jumper)
-
-/obj/item/clothing/under/solgov/service/expeditionary/skirt/service
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/service/jumper)
-
-/obj/item/clothing/under/solgov/service/expeditionary/skirt/exploration
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/exploration/jumper)
-
-/obj/item/clothing/under/solgov/service/expeditionary/skirt/research
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/research/jumper)
-
-/obj/item/clothing/under/solgov/service/expeditionary/command
-	name = "expeditionary officer's service uniform"
-	desc = "The service uniform of the SCG Expeditionary Corps in gold trim."
-	icon_state = "greydress_com"
-	worn_state = "greydress_com"
-
-/obj/item/clothing/under/solgov/service/expeditionary/command/command
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/command/jumper)
-
-/obj/item/clothing/under/solgov/service/expeditionary/command/engineering
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/engineering/jumper)
-
-/obj/item/clothing/under/solgov/service/expeditionary/command/security
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/security/jumper)
-
-/obj/item/clothing/under/solgov/service/expeditionary/command/medical
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/medical/jumper)
-
-/obj/item/clothing/under/solgov/service/expeditionary/command/supply
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/supply/jumper)
-
-/obj/item/clothing/under/solgov/service/expeditionary/command/service
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/service/jumper)
-
-/obj/item/clothing/under/solgov/service/expeditionary/command/exploration
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/exploration/jumper)
-
-/obj/item/clothing/under/solgov/service/expeditionary/command/research
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/research/jumper)
-
-/obj/item/clothing/under/solgov/service/expeditionary/command/skirt
-	name = "expeditionary officer's service skirt"
-	desc = "A feminine version of the SCG Expeditionary Corps service uniform in gold trim."
-	icon_state = "greydressfem_com"
-	worn_state = "greydressfem_com"
-
-/obj/item/clothing/under/solgov/service/expeditionary/command/skirt/command
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/command/jumper)
-
-/obj/item/clothing/under/solgov/service/expeditionary/command/skirt/engineering
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/engineering/jumper)
-
-/obj/item/clothing/under/solgov/service/expeditionary/command/skirt/security
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/security/jumper)
-
-/obj/item/clothing/under/solgov/service/expeditionary/command/skirt/medical
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/medical/jumper)
-
-/obj/item/clothing/under/solgov/service/expeditionary/command/skirt/supply
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/supply/jumper)
-
-/obj/item/clothing/under/solgov/service/expeditionary/command/skirt/service
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/service/jumper)
-
-/obj/item/clothing/under/solgov/service/expeditionary/command/skirt/exploration
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/exploration/jumper)
-
-/obj/item/clothing/under/solgov/service/expeditionary/command/skirt/research
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/research/jumper)
-
 /obj/item/clothing/under/solgov/service/fleet
 	name = "fleet service uniform"
 	desc = "The service uniform of the SCG Fleet, made from immaculate white fabric."
@@ -478,6 +355,91 @@
 	desc = "A feminine version of the SCG Army dress uniform, even classier in gold."
 	icon_state = "blackdressfem"
 	worn_state = "blackdressfem_com"
+
+//dress
+
+/obj/item/clothing/under/solgov/dress/expeditionary
+	name = "expeditionary dress uniform"
+	desc = "The dress uniform of the SCG Expeditionary Corps in silver trim."
+	icon_state = "greydress"
+	worn_state = "greydress"
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_under_unathi.dmi'
+		)
+
+/obj/item/clothing/under/solgov/dress/expeditionary/engineering
+
+/obj/item/clothing/under/solgov/dress/expeditionary/security
+
+/obj/item/clothing/under/solgov/dress/expeditionary/medical
+
+/obj/item/clothing/under/solgov/dress/expeditionary/supply
+
+/obj/item/clothing/under/solgov/dress/expeditionary/service
+
+/obj/item/clothing/under/solgov/dress/expeditionary/exploration
+
+/obj/item/clothing/under/solgov/dress/expeditionary/research
+
+/obj/item/clothing/under/solgov/dress/expeditionary/skirt
+	name = "expeditionary dress skirt"
+	desc = "A feminine version of the SCG Expeditionary Corps dress uniform in silver trim."
+	icon_state = "greydressfem"
+	worn_state = "greydressfem"
+
+/obj/item/clothing/under/solgov/dress/expeditionary/skirt/engineering
+
+/obj/item/clothing/under/solgov/dress/expeditionary/skirt/security
+
+/obj/item/clothing/under/solgov/dress/expeditionary/skirt/medical
+
+/obj/item/clothing/under/solgov/dress/expeditionary/skirt/supply
+
+/obj/item/clothing/under/solgov/dress/expeditionary/skirt/service
+
+/obj/item/clothing/under/solgov/dress/expeditionary/skirt/exploration
+
+/obj/item/clothing/under/solgov/dress/expeditionary/skirt/research
+
+/obj/item/clothing/under/solgov/dress/expeditionary/command
+	name = "expeditionary officer's dress uniform"
+	desc = "The dress uniform of the SCG Expeditionary Corps in gold trim."
+	icon_state = "greydress_com"
+	worn_state = "greydress_com"
+
+/obj/item/clothing/under/solgov/dress/expeditionary/command/engineering
+
+/obj/item/clothing/under/solgov/dress/expeditionary/command/security
+
+/obj/item/clothing/under/solgov/dress/expeditionary/command/medical
+
+/obj/item/clothing/under/solgov/dress/expeditionary/command/supply
+
+/obj/item/clothing/under/solgov/dress/expeditionary/command/service
+
+/obj/item/clothing/under/solgov/dress/expeditionary/command/exploration
+
+/obj/item/clothing/under/solgov/dress/expeditionary/command/research
+
+/obj/item/clothing/under/solgov/dress/expeditionary/command/skirt
+	name = "expeditionary officer's dress skirt"
+	desc = "A feminine version of the SCG Expeditionary Corps dress uniform in gold trim."
+	icon_state = "greydressfem_com"
+	worn_state = "greydressfem_com"
+
+/obj/item/clothing/under/solgov/dress/expeditionary/command/skirt/engineering
+
+/obj/item/clothing/under/solgov/dress/expeditionary/command/skirt/security
+
+/obj/item/clothing/under/solgov/dress/expeditionary/command/skirt/medical
+
+/obj/item/clothing/under/solgov/dress/expeditionary/command/skirt/supply
+
+/obj/item/clothing/under/solgov/dress/expeditionary/command/skirt/service
+
+/obj/item/clothing/under/solgov/dress/expeditionary/command/skirt/exploration
+
+/obj/item/clothing/under/solgov/dress/expeditionary/command/skirt/research
 
 //misc garbage
 /obj/item/clothing/under/rank/internalaffairs/plain/solgov
