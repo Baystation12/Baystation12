@@ -878,8 +878,8 @@
 	req_access = list("ACCESS_ASCENT")
 	},
 /obj/structure/hygiene/shower/ascent{
-	icon_state = "shower";
-	dir = 4
+	dir = 4;
+	icon_state = "shower"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
@@ -895,8 +895,8 @@
 	id_tag = "ascent_caulship_pump"
 	},
 /obj/structure/hygiene/shower/ascent{
-	icon_state = "shower";
-	dir = 4
+	dir = 4;
+	icon_state = "shower"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
@@ -917,8 +917,8 @@
 	id_tag = "ascent_caulship_pump"
 	},
 /obj/structure/hygiene/shower/ascent{
-	icon_state = "shower";
-	dir = 8
+	dir = 8;
+	icon_state = "shower"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
@@ -1023,8 +1023,8 @@
 "cx" = (
 /obj/effect/catwalk_plated/ascent,
 /obj/machinery/atmospherics/pipe/manifold/visible/supply{
-	icon_state = "map-supply";
-	dir = 8
+	dir = 8;
+	icon_state = "map-supply"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
@@ -1347,8 +1347,8 @@
 	},
 /obj/effect/catwalk_plated/ascent,
 /obj/structure/hygiene/sink/ascent{
-	icon_state = "sink";
-	dir = 4
+	dir = 4;
+	icon_state = "sink"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
@@ -1377,16 +1377,6 @@
 /area/space)
 "dc" = (
 /turf/simulated/floor/ascent,
-/area/space)
-"dd" = (
-/obj/structure/showcase{
-	desc = "A large, complex chunk of machinery similar to the bluespace drive found on some SCG ships. This one is definitely not Skrell design, and seems to have been destroyed in its last jump.";
-	icon = 'icons/obj/power.dmi';
-	icon_state = "tracker";
-	name = "burned-out bluespace drive"
-	},
-/obj/effect/overmap/visitable/sector/ascent_caulship_ring,
-/turf/simulated/floor/ascent/tiled,
 /area/space)
 "dF" = (
 /obj/effect/catwalk_plated/ascent,
@@ -1452,11 +1442,22 @@
 	id_tag = "ascent_caulship_pump_out_internal"
 	},
 /obj/structure/hygiene/shower/ascent{
-	icon_state = "shower";
-	dir = 8
+	dir = 8;
+	icon_state = "shower"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
+"Fb" = (
+/obj/structure/showcase{
+	color = "#800080";
+	desc = "A large, complex chunk of machinery similar to the bluespace drive found on some SCG ships. This one is definitely not Skrell design, and seems to have been destroyed in its last jump.";
+	icon = 'icons/obj/power.dmi';
+	icon_state = "tracker";
+	name = "burned-out bluespace drive"
+	},
+/obj/effect/overmap/visitable/sector/ascent_caulship_ring,
+/turf/simulated/floor/ascent/tiled,
+/area/space)
 "Ri" = (
 /obj/structure/cable/cyan{
 	d1 = 1;
@@ -21384,7 +21385,7 @@ cr
 aa
 db
 da
-dd
+Fb
 da
 da
 da
