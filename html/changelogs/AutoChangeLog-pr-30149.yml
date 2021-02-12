@@ -1,4 +1,0 @@
-author: "Mucker"
-delete-after: True
-changes: 
-  - rscadd: "Characters can now be quickly swapped by clicking on the 'Current Character' name in the main lobby menu."
