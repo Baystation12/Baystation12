@@ -8,10 +8,10 @@ var/global/nttransfer_uid = 0
 	program_key_state = "generic_key"
 	program_menu_icon = "transferthick-e-w"
 	size = 7
-	requires_ntnet = 1
+	requires_ntnet = TRUE
 	requires_ntnet_feature = NTNET_PEERTOPEER
 	network_destination = "other device via P2P tunnel"
-	available_on_ntnet = 1
+	available_on_ntnet = TRUE
 	nanomodule_path = /datum/nano_module/program/computer_nttransfer/
 	category = PROG_UTIL
 

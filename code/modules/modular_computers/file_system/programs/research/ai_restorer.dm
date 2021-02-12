@@ -6,10 +6,10 @@
 	program_menu_icon = "person"
 	extended_desc = "This program is capable of reconstructing damaged AI systems. It can also be used to upload basic laws to the AI. Requires direct AI connection via inteliCard slot."
 	size = 12
-	requires_ntnet = 0
+	requires_ntnet = FALSE
 	required_access = access_bridge
-	requires_access_to_run = 0
-	available_on_ntnet = 1
+	requires_access_to_run = FALSE
+	available_on_ntnet = TRUE
 	nanomodule_path = /datum/nano_module/program/computer_aidiag/
 	var/restoring = 0
 

@@ -14,8 +14,8 @@ The answer was five and a half years -ZeroBits
 	program_key_state = "atmos_key"
 	program_menu_icon = "note"
 	size = 6
-	requires_ntnet = 1
-	available_on_ntnet = 1
+	requires_ntnet = TRUE
+	available_on_ntnet = TRUE
 
 	nanomodule_path = /datum/nano_module/library
 
