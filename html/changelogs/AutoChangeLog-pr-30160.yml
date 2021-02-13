@@ -1,0 +1,4 @@
+author: "CrimsonShrike"
+delete-after: True
+changes: 
+  - rscadd: "Added exosuit pilot count information. Now you know something."
