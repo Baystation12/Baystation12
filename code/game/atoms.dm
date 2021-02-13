@@ -355,7 +355,7 @@ its easier to just keep the beam vertical.
 	var/list/y_arr = null
 	for(cur_x=1,cur_x<=GLOB.global_map.len,cur_x++)
 		y_arr = GLOB.global_map[cur_x]
-		cur_y = y_arr.Find(src.z)
+		cur_y = list_find(y_arr, src.z)
 		if(cur_y)
 			break
 //	log_debug("X = [cur_x]; Y = [cur_y]")

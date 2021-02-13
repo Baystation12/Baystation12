@@ -94,7 +94,7 @@
 	text=lowertext(text)
 	for(var/ya,ya <= limit,ya++)
 
-		if(heard_words.Find("[text]"))
+		if(list_find(heard_words, "[text]"))
 			var/list/w = heard_words["[text]"]
 			text=pick(w)
 		else

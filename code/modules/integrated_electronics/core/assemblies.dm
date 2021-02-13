@@ -244,7 +244,7 @@
 
 			add_allowed_scanner(usr.ckey)
 
-			var/current_pos = assembly_components.Find(component)
+			var/current_pos = list_find(assembly_components, component)
 
 			if(href_list["remove"])
 				try_remove_component(component, usr)

@@ -121,7 +121,7 @@
 	if(href_list["PRG_downloadfile"])
 		if(!downloaded_file)
 			begin_file_download(href_list["PRG_downloadfile"], usr.get_skill_value(SKILL_COMPUTER))
-		else if(check_file_download(href_list["PRG_downloadfile"]) && !downloads_queue.Find(href_list["PRG_downloadfile"]) && downloaded_file.filename != href_list["PRG_downloadfile"])
+		else if(check_file_download(href_list["PRG_downloadfile"]) && !list_find(downloads_queue, href_list["PRG_downloadfile"]) && downloaded_file.filename != href_list["PRG_downloadfile"])
 			downloads_queue[href_list["PRG_downloadfile"]] = usr.get_skill_value(SKILL_COMPUTER)
 		return 1
 	if(href_list["PRG_removequeued"])

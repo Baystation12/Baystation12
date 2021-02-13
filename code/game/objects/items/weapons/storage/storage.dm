@@ -388,7 +388,7 @@
 /obj/item/weapon/storage/attack_self(mob/user as mob)
 	//Clicking on itself will empty it, if it has the verb to do that.
 	if(user.get_active_hand() == src)
-		if(src.verbs.Find(/obj/item/weapon/storage/verb/quick_empty))
+		if(list_find(src.verbs, /obj/item/weapon/storage/verb/quick_empty))
 			src.quick_empty()
 			return 1
 

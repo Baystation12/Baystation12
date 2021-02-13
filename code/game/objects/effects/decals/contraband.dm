@@ -25,7 +25,7 @@
 
 /obj/item/weapon/contraband/poster/Initialize()
 	var/list/posters = subtypesof(/decl/poster)
-	var/serial_number = posters.Find(poster_type)
+	var/serial_number = list_find(posters, poster_type)
 	name += " - No. [serial_number]"
 
 	return ..()
