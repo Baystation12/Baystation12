@@ -5,8 +5,8 @@
 	program_icon_state = "word"
 	program_key_state = "atmos_key"
 	size = 4
-	requires_ntnet = 0
-	available_on_ntnet = 1
+	requires_ntnet = FALSE
+	available_on_ntnet = TRUE
 	nanomodule_path = /datum/nano_module/program/computer_wordprocessor/
 	var/browsing
 	var/open_file

@@ -7,8 +7,8 @@
 	nanomodule_path = /datum/nano_module/program/reports
 	extended_desc = "A general paperwork viewing and editing utility."
 	size = 2
-	available_on_ntnet = 1
-	requires_ntnet = 0
+	available_on_ntnet = TRUE
+	requires_ntnet = FALSE
 	usage_flags = PROGRAM_ALL
 	category = PROG_OFFICE
 
@@ -50,12 +50,12 @@
 	switch(new_state)
 		if(REPORTS_VIEW)
 			program.requires_ntnet_feature = null
-			program.requires_ntnet = 0
+			program.requires_ntnet = FALSE
 			prog_state = REPORTS_VIEW
 		if(REPORTS_DOWNLOAD)
 			close_report()
 			program.requires_ntnet_feature = NTNET_SOFTWAREDOWNLOAD
-			program.requires_ntnet = 1
+			program.requires_ntnet = TRUE
 			prog_state = REPORTS_DOWNLOAD
 
 /datum/nano_module/program/reports/proc/close_report()

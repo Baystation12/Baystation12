@@ -5,8 +5,8 @@
 	program_icon_state = "generic"
 	program_key_state = "generic_key"
 	size = 6
-	requires_ntnet = 0
-	available_on_ntnet = 1
+	requires_ntnet = FALSE
+	available_on_ntnet = TRUE
 	usage_flags = PROGRAM_ALL
 	nanomodule_path = /datum/nano_module/program/scanner
 	category = PROG_UTIL

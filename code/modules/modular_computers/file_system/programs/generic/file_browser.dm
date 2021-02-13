@@ -6,8 +6,8 @@
 	program_key_state = "generic_key"
 	program_menu_icon = "folder-collapsed"
 	size = 8
-	requires_ntnet = 0
-	available_on_ntnet = 0
+	requires_ntnet = FALSE
+	available_on_ntnet = FALSE
 	undeletable = 1
 	nanomodule_path = /datum/nano_module/program/computer_filemanager/
 	var/open_file
