@@ -71,7 +71,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 	var/list/atoms_to_initialise = list()
 	var/list/atoms_to_delete = list()
 
-	while(dmmRegex.Find(tfile, stored_index))
+	while(regex_find(dmmRegex, tfile, stored_index))
 		stored_index = dmmRegex.next
 
 		// "aa" = (/type{vars=blah})
@@ -419,12 +419,8 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 
 //text trimming (both directions) helper proc
 //optionally removes quotes before and after the text (for variable name)
-/dmm_suite/proc/trim_text(what as text,trim_quotes=0)
-	if(trim_quotes)
-		return trimQuotesRegex.Replace(what, "")
-	else
-		return trimRegex.Replace(what, "")
-
+/dmm_suite/proc/trim_text(text, trim_quotes)
+	return replacetext_char(text, trim_quotes ? trimQuotesRegex : trimRegex, "")
 
 //find the position of the next delimiter,skipping whatever is comprised between opening_escape and closing_escape
 //returns 0 if reached the last delimiter
