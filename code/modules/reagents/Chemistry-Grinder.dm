@@ -257,7 +257,7 @@
 	density = FALSE
 	anchored = FALSE
 	grind_sound = 'sound/machines/juicer.ogg'
-	max_item_size = ITEM_SIZE_SMALL
+	max_item_size = ITEM_SIZE_NORMAL
 	skill = SKILL_COOKING
 	banned_items = list(
 		/obj/item/stack/material
