@@ -20769,38 +20769,35 @@
 /turf/simulated/wall/prepainted,
 /area/medical/morgue/autopsy)
 "jCU" = (
-/obj/effect/floor_decal/corner/paleblue{
-	dir = 5
-	},
 /obj/machinery/button/blast_door{
-	id_tag = "infirm_pub";
-	name = "Infirmary Public Hallway Lockdown";
-	pixel_x = 7;
-	pixel_y = -34;
-	req_access = list("ACCESS_MEDICAL")
-	},
-/obj/machinery/button/blast_door{
-	id_tag = "infirm_windows";
-	name = "Infirmary Windows Lockdown";
-	pixel_x = -7;
-	pixel_y = -34;
+	id_tag = "infirm_stage";
+	name = "Infirmary Staging Lockdown";
+	pixel_x = -6;
+	pixel_y = 7;
 	req_access = list("ACCESS_MEDICAL")
 	},
 /obj/machinery/button/blast_door{
 	id_tag = "inf_recep_window";
 	name = "Infirmary Reception Lockdown";
-	pixel_x = 7;
-	pixel_y = -24;
+	pixel_x = 6;
+	pixel_y = 7;
 	req_access = list("ACCESS_MEDICAL")
 	},
 /obj/machinery/button/blast_door{
-	id_tag = "infirm_stage";
-	name = "Infirmary Staging Lockdown";
-	pixel_x = -7;
-	pixel_y = -24;
+	id_tag = "infirm_windows";
+	name = "Infirmary Windows Lockdown";
+	pixel_x = -6;
+	pixel_y = -2;
 	req_access = list("ACCESS_MEDICAL")
 	},
-/turf/simulated/floor/tiled/white,
+/obj/machinery/button/blast_door{
+	id_tag = "infirm_pub";
+	name = "Infirmary Public Hallway Lockdown";
+	pixel_x = 6;
+	pixel_y = -2;
+	req_access = list("ACCESS_MEDICAL")
+	},
+/turf/simulated/wall/prepainted,
 /area/medical/staging)
 "jDX" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
@@ -52259,8 +52256,8 @@ afY
 lHO
 anH
 agx
+agY
 jCU
-leb
 hdb
 hYM
 iUb
