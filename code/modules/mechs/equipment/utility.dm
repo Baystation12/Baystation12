@@ -546,36 +546,4 @@
 	holding_type = /obj/item/weapon/gun/energy/plasmacutter/mounted/mech
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND, HARDPOINT_LEFT_SHOULDER, HARDPOINT_RIGHT_SHOULDER)
 	restricted_software = list(MECH_SOFTWARE_UTILITY)
-	origin_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 4, TECH_ENGINEERING = 6, TECH_COMBAT = 3)
-
-//Similar to mounted systems but for stuff that could feasibly be removed or dropped
-// /obj/item/mech_equipment/removable_item
-// 	name = ""
-// 	desc = ""
-// 	icon_state = ""
-// 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
-// 	restricted_software = list(MECH_SOFTWARE_UTILITY)
-// 	origin_tech = list(TECH_MATERIAL = 3)
-// 	var/obj/item/holding = null
-// 	holding_type = null
-
-// /obj/item/mech_equipment/removable_item/Initialize()
-// 	. = ..()
-// 	holding = new holding_type(src)
-// /obj/item/mech_equipment/removable_item/attack(mob/living/M, mob/living/user, var/target_zone)
-// 	if(!owner)
-// 		return 0
-// 	if(!holding)
-// 		return 0
-// 	if(!(owner.get_cell()?.check_charge(active_power_use * CELLRATE)))
-// 		to_chat(user, SPAN_WARNING("The power indicator flashes briefly as you attempt to use \the [src]"))
-// 		return 0
-
-// 	holding.attack(M, user, zone_sel.selecting)
-
-
-// /obj/item/mech_equipment/removable_item/afterattack(atom/target, mob/living/user, inrange, params)
-// 	. = ..()
-// 	if(.)
-// 		if(istype(target, holding_type) && !holding)
-			
+	origin_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 4, TECH_ENGINEERING = 6, TECH_COMBAT = 3)			
