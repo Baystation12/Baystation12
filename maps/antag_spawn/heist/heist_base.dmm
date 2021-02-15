@@ -1153,8 +1153,7 @@
 /area/map_template/skipjack_station/start)
 "cH" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
-	dir = 2;
-	id_tag = "merc_shuttle_pump"
+	id_tag = "skipjack_shuttle_pump"
 	},
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
