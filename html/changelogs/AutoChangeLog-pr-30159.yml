@@ -1,4 +1,0 @@
-author: "Mucker"
-delete-after: True
-changes: 
-  - tweak: "The main welcome menu now auto refreshes when swapping characters or when the game starts."
