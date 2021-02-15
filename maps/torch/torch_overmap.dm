@@ -89,7 +89,7 @@
 	name = "Aquila"
 	desc = "A PM-24 modular transport, broadcasting SCGEC codes and the callsign \"Torch-1 Aquila\"."
 	shuttle = "Aquila"
-	vessel_mass = 20000
+	vessel_mass = 10000
 	max_speed = 1/(1 SECONDS)
 	burn_delay = 0.5 SECONDS //spammable, but expensive
 	fore_dir = NORTH
