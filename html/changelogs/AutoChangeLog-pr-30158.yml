@@ -1,4 +1,0 @@
-author: "Mucker"
-delete-after: True
-changes: 
-  - tweak: "Stops the character setup menu from appearing when quick-swapping characters."
