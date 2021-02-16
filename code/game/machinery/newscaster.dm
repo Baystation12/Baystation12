@@ -58,6 +58,7 @@
 	var/list/datum/feed_channel/network_channels = list()
 	var/datum/feed_message/wanted_issue
 	var/list/newscasters = list()
+	var/list/news_programs = list()
 	var/list/z_levels = list()
 
 /datum/feed_network/New()
@@ -103,6 +104,8 @@
 	for(var/obj/machinery/newscaster/NEWSCASTER in newscasters)
 		NEWSCASTER.newsAlert(annoncement)
 		NEWSCASTER.update_icon()
+	for(var/datum/nano_module/program/newscast/program in news_programs)
+		program.news_alert(annoncement)
 
 var/list/datum/feed_network/news_network = list()     //The global news-network, which is coincidentally a global list.
 
