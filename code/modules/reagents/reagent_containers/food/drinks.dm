@@ -156,20 +156,27 @@
 	. = ..()
 	reagents.add_reagent(/datum/reagent/drink/milk/soymilk, 50)
 
-/obj/item/weapon/reagent_containers/food/drinks/milk/smallcarton
+/obj/item/weapon/reagent_containers/food/drinks/small_milk
 	name = "small milk carton"
-	volume = 30
+	desc = "It's milk. White and nutritious goodness!"
 	icon_state = "mini-milk"
+	item_state = "carton"
+	center_of_mass = "x=16;y=9"
+	volume = 30
 
-/obj/item/weapon/reagent_containers/food/drinks/milk/smallcarton/Initialize()
+/obj/item/weapon/reagent_containers/food/drinks/small_milk/Initialize()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/drink/milk, 30)
 
-/obj/item/weapon/reagent_containers/food/drinks/milk/smallcarton/chocolate
+/obj/item/weapon/reagent_containers/food/drinks/small_milk_choc
 	name = "small chocolate milk carton"
 	desc = "It's milk! This one is in delicious chocolate flavour."
+	icon_state = "mini-milk"
+	item_state = "carton"
+	center_of_mass = "x=16;y=9"
+	volume = 30
 
-/obj/item/weapon/reagent_containers/food/drinks/milk/smallcarton/chocolate/Initialize()
+/obj/item/weapon/reagent_containers/food/drinks/small_milk_choc/Initialize()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/drink/milk/chocolate, 30)
 

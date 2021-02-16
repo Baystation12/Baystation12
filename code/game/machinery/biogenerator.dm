@@ -27,7 +27,7 @@
 	var/capacity = 10   //How many ingredients can we store?
 	var/list/products = list(
 		"Food" = list(
-			/obj/item/weapon/reagent_containers/food/drinks/milk/smallcarton = 30,
+			/obj/item/weapon/reagent_containers/food/drinks/small_milk = 30,
 			/obj/item/weapon/reagent_containers/food/drinks/milk = 50,
 			/obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh = 50,
 			/obj/item/weapon/storage/fancy/egg_box = 300),
