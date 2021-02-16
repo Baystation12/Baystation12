@@ -234,28 +234,28 @@
 	if (!istype(A, /mob/living))
 		return ..()
 
-	if(user.a_intent == I_HURT)
+	if (user.a_intent == I_HURT)
 		user.setClickCooldown(0.7 SECONDS)
 		user.visible_message(SPAN_DANGER("\The [user] swings \the [src] at \the [A]!"))
 		playsound(user, 'sound/mecha/mechmove03.ogg', 35, 1)
-		if(do_after(user, 0.7 SECONDS, A, do_flags = DO_SHOW_PROGRESS | DO_TARGET_CAN_TURN | DO_PUBLIC_PROGRESS | DO_USER_UNIQUE_ACT))
+		if (do_after(user, 0.7 SECONDS, A, do_flags = DO_SHOW_PROGRESS | DO_TARGET_CAN_TURN | DO_PUBLIC_PROGRESS | DO_USER_UNIQUE_ACT))
 			attack(A, user, user.zone_sel.selecting, TRUE)
 			return TRUE
 
 /obj/item/weapon/material/hatchet/machete/mech/attack_self(mob/living/user)
 	. = ..()
-	if(user.a_intent != I_HURT)
+	if (user.a_intent != I_HURT)
 		return
 	var/obj/item/mech_equipment/mounted_system/melee/mechete/MC = loc
-	if(istype(MC))
+	if (istype(MC))
 		//SPIN BLADE ATTACK GO!
 		var/mob/living/exosuit/E = MC.owner
-		if(E)
+		if (E)
 			E.setClickCooldown(1.2 SECONDS)
 			E.visible_message(SPAN_DANGER("\The [E] swings \the [src] back, preparing for an attack!"), blind_message = SPAN_DANGER("You hear the loud hissing of hydraulics!"))
 			playsound(E, 'sound/mecha/mechmove03.ogg', 35, 1)
-			if(do_after(E, 1.2 SECONDS, get_turf(user), do_flags = DO_SHOW_PROGRESS | DO_TARGET_CAN_TURN | DO_PUBLIC_PROGRESS | DO_USER_UNIQUE_ACT) && E && MC)
-				for(var/mob/living/M in orange(1, E))
+			if (do_after(E, 1.2 SECONDS, get_turf(user), do_flags = DO_SHOW_PROGRESS | DO_TARGET_CAN_TURN | DO_PUBLIC_PROGRESS | DO_USER_UNIQUE_ACT) && E && MC)
+				for (var/mob/living/M in orange(1, E))
 					attack(M, E, E.zone_sel.selecting, FALSE)
 				E.spin(0.65 SECONDS, 0.125 SECONDS)
 				playsound(E, 'sound/mecha/mechturn.ogg', 40, 1)
