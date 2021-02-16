@@ -303,6 +303,7 @@
 		sleep(6)
 		open()
 		operating = -1
+		set_broken(TRUE)
 		return 1
 
 /obj/machinery/door/proc/check_force(obj/item/I, mob/user)
