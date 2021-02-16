@@ -5574,11 +5574,6 @@
 	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/head/sauna)
-"kV" = (
-/obj/item/clothing/under/swimsuit/red,
-/obj/item/weapon/stool/wood,
-/turf/simulated/floor/wood/walnut,
-/area/crew_quarters/head/sauna)
 "kW" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
@@ -15584,8 +15579,8 @@
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/port)
 "KZ" = (
-/obj/item/weapon/stool/padded,
 /obj/effect/floor_decal/corner/green/half,
+/obj/structure/closet/athletic_mixed,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/observation)
 "La" = (
@@ -15881,7 +15876,15 @@
 /obj/structure/table/standard{
 	name = "plastic table frame"
 	},
-/obj/item/weapon/lipstick/random,
+/obj/item/weapon/lipstick/random{
+	pixel_x = 5;
+	pixel_y = 3
+	},
+/obj/item/device/flashlight/lamp/lava/red{
+	pixel_x = -5;
+	pixel_y = -8;
+	pixel_z = 14
+	},
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head)
 "LM" = (
@@ -18580,12 +18583,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/chapel/office)
 "TZ" = (
-/obj/structure/table/standard{
-	name = "plastic table frame"
-	},
-/obj/item/device/flashlight/lamp/lava/red{
-	pixel_z = 14
-	},
+/obj/structure/closet/athletic_mixed,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head)
 "Ub" = (
@@ -40718,7 +40716,7 @@ hp
 hL
 jp
 kh
-kV
+km
 hL
 CE
 Ez
