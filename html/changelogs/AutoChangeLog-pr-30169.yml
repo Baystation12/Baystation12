@@ -1,0 +1,4 @@
+author: "Pawn"
+delete-after: True
+changes: 
+  - rscadd: "Adds an athletics locker into the Deck 3 Head and Observatory."
