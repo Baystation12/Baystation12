@@ -26,7 +26,7 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/cove
 	language = LANGUAGE_SANGHEILI
 	additional_langs = list(LANGUAGE_BRUTE)
 	flags = NO_MINOR_CUT
-	appearance_flags = HAS_SKIN_TONE
+	appearance_flags = HAS_SKIN_TONE | HAS_EYE_COLOR
 	radiation_mod = 0.6
 	spawn_flags = SPECIES_CAN_JOIN
 	brute_mod = 0.9
@@ -46,6 +46,20 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/cove
 	inherent_verbs = list()
 	gibbed_anim = null
 	dusted_anim = null
+
+	has_limbs = list(
+		BP_CHEST =  list("path" = /obj/item/organ/external/chest),
+		BP_GROIN =  list("path" = /obj/item/organ/external/groin),
+		BP_HEAD =   list("path" = /obj/item/organ/external/head/jiralhanae),
+		BP_L_ARM =  list("path" = /obj/item/organ/external/arm),
+		BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right),
+		BP_L_LEG =  list("path" = /obj/item/organ/external/leg),
+		BP_R_LEG =  list("path" = /obj/item/organ/external/leg/right),
+		BP_L_HAND = list("path" = /obj/item/organ/external/hand),
+		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right),
+		BP_L_FOOT = list("path" = /obj/item/organ/external/foot),
+		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right)
+		)
 
 	equipment_slowdown_multiplier = 0.9
 	dodge_roll_delay = DODGE_ROLL_BASE_COOLDOWN - 1 SECOND
@@ -75,3 +89,7 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/cove
     eye_attack_text = "fingers"
     eye_attack_text_victim = "digits"
     damage = 25
+
+/obj/item/organ/external/head/jiralhanae
+	eye_icon = "eyes_s"
+	eye_icon_location = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_mob.dmi'

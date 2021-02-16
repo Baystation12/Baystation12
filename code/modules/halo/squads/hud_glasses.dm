@@ -163,9 +163,7 @@
 #define VISION_CONE_LAYER 7
 
 /obj/item/clothing/glasses/hud/tactical
-	darkness_view = 3	//6 = fullscreen, because this adds to the default mob darkvision of 2 (1 = self tile only)
-	see_invisible = SEE_INVISIBLE_NOLIGHTING
-	var/nv_enabled = 1
+	var/nv_enabled = 0
 	var/nv_screen_colour = /obj/screen/fullscreen/night_vision/green
 	var/nv_screen_impair = /obj/screen/fullscreen/night_vision/cone
 	action_button_name = "Toggle HUD Night Vision"
@@ -199,8 +197,7 @@
 
 /obj/item/clothing/glasses/hud/tactical/proc/reset_effect(var/mob/living/user)
 	if(nv_enabled)
-		darkness_view = max(initial(darkness_view), 2)
-		darkness_view = min(darkness_view, 7)
+		darkness_view = 3	//6 = fullscreen, because this adds to the default mob darkvision of 2 (1 = self tile only)
 		see_invisible = SEE_INVISIBLE_NOLIGHTING
 		enable_effect(user)
 

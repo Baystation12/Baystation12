@@ -24,7 +24,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/covena
 	total_health = 250 // Stronger than humans at base health.
 	radiation_mod = 0.6 //Covie weapons emit beta radiation. Resistant to 1/3 types of radiation.
 	spawn_flags = SPECIES_CAN_JOIN
-	appearance_flags = HAS_SKIN_TONE
+	appearance_flags = HAS_SKIN_TONE | HAS_EYE_COLOR
 	brute_mod = 0.9
 	burn_mod = 0.9
 	pain_mod = 0.85
@@ -40,6 +40,20 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/covena
 	unarmed_types = list(/datum/unarmed_attack/elite_punch)
 	gibbed_anim = null
 	dusted_anim = null
+
+	has_limbs = list(
+		BP_CHEST =  list("path" = /obj/item/organ/external/chest),
+		BP_GROIN =  list("path" = /obj/item/organ/external/groin),
+		BP_HEAD =   list("path" = /obj/item/organ/external/head/sangheili),
+		BP_L_ARM =  list("path" = /obj/item/organ/external/arm),
+		BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right),
+		BP_L_LEG =  list("path" = /obj/item/organ/external/leg),
+		BP_R_LEG =  list("path" = /obj/item/organ/external/leg/right),
+		BP_L_HAND = list("path" = /obj/item/organ/external/hand),
+		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right),
+		BP_L_FOOT = list("path" = /obj/item/organ/external/foot),
+		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right)
+		)
 
 	has_organ = list(
 	BP_HEART =    /obj/item/organ/internal/heart,
@@ -85,6 +99,10 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/covena
 	eye_attack_text = "fingers"
 	eye_attack_text_victim = "digits"
 	damage = 15
+
+/obj/item/organ/external/head/sangheili
+	eye_icon = "eyes_s"
+	eye_icon_location = 'code/modules/halo/covenant/species/sangheili/r_elite.dmi'
 
 /mob/living/carbon/human/covenant/sangheili/New(var/new_loc)
 	. = ..(new_loc,"Sangheili")

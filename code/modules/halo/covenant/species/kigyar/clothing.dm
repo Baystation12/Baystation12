@@ -27,11 +27,13 @@
 	armor =  list(melee = 10, bullet = 10, laser = 0, energy = 10, bomb = 0, bio = 0, rad = 0)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	matter = list("cloth" = 1)
+	rolled_sleeves = 0
 
 /obj/item/clothing/under/kigyar/armless //Purposefully a visual change only so their armour still applies.
 	icon_state = "jackal_bodysuit_armless_obj"
-	worn_state = "jackal_bodysuit_armless"
+	worn_state = "jackal_bodysuit_r"
 	species_restricted = list("Kig-Yar")
+	rolled_sleeves = -1
 
 /obj/item/clothing/suit/armor/kigyar
 	name = "Kig-Yar Combat Harness"
