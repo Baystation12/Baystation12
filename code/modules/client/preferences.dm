@@ -184,7 +184,7 @@ datum/preferences
 		sanitize_preferences()
 	else if(href_list["load"])
 		if(!IsGuestKey(usr.key))
-			open_load_dialog(usr)
+			open_load_dialog(usr, href_list["details"])
 			return 1
 	else if(href_list["changeslot"])
 		load_character(text2num(href_list["changeslot"]))
@@ -194,6 +194,9 @@ datum/preferences
 		if (istype(client.mob, /mob/new_player))
 			var/mob/new_player/M = client.mob
 			M.new_player_panel()
+
+		if (href_list["details"])
+			return 1
 	else if(href_list["resetslot"])
 		if(real_name != input("This will reset the current slot. Enter the character's full name to confirm."))
 			return 0
@@ -364,7 +367,7 @@ datum/preferences
 		character.set_nutrition(rand(140,360))
 		character.set_hydration(rand(140,360))
 
-/datum/preferences/proc/open_load_dialog(mob/user)
+/datum/preferences/proc/open_load_dialog(mob/user, details)
 	var/dat  = list()
 	dat += "<body>"
 	dat += "<tt><center>"
@@ -374,7 +377,7 @@ datum/preferences
 		var/name = (slot_names && slot_names[get_slot_key(i)]) || "Character[i]"
 		if(i==default_slot)
 			name = "<b>[name]</b>"
-		dat += "<a href='?src=\ref[src];changeslot=[i]'>[name]</a><br>"
+		dat += "<a href='?src=\ref[src];changeslot=[i];[details?"details=1":""]'>[name]</a><br>"
 
 	dat += "<hr>"
 	dat += "</center></tt>"
