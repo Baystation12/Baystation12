@@ -76,7 +76,7 @@
 	base_parry_chance = 50
 	attack_cooldown_modifier = 1
 	max_force = 20
-	force_multiplier = 0.20 //20 with hardness 80 (titanium) or 15 with hardness 60 (steel)
+	force_multiplier = 0.2
 
 /obj/item/weapon/material/hatchet/machete/unbreakable
 	unbreakable = TRUE
