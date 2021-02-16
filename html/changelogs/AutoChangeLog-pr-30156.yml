@@ -1,0 +1,4 @@
+author: "Ilysen"
+delete-after: True
+changes: 
+  - rscadd: "Added the Newscast program to computers. Acts like a read-only newscaster, but on your PDA, Tablet, or Console. Comes installed on PDAs by default."
