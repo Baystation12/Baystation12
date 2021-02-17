@@ -1,0 +1,4 @@
+author: "EvenInDeathIStillServe"
+delete-after: True
+changes: 
+  - rscadd: "Stacks created on or moved into the same turf while not being thrown will merge automatically."
