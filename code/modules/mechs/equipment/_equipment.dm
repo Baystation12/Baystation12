@@ -16,7 +16,7 @@
 	var/mech_layer = MECH_GEAR_LAYER //For the part where it's rendered as mech gear
 	var/require_adjacent = TRUE
 
-/obj/item/mech_equipment/attack() //Generally it's not desired to be able to attack with items
+/obj/item/mech_equipment/attack(mob/living/M, mob/living/user, target_zone) //Generally it's not desired to be able to attack with items
 	return 0
 
 /obj/item/mech_equipment/afterattack(var/atom/target, var/mob/living/user, var/inrange, var/params)

@@ -418,6 +418,11 @@
 	req_tech = list(TECH_COMBAT = 4, TECH_MAGNET = 4)
 	build_path = /obj/item/mech_equipment/mounted_system/taser/laser
 
+/datum/design/item/exosuit/weapon/machete
+	name = "Mechete"
+	id = "mech_machete"
+	req_tech = list(TECH_COMBAT = 2)
+	build_path = /obj/item/mech_equipment/mounted_system/melee/mechete
 /datum/design/item/exosuit/rcd
 	name = "RCD"
 	id = "mech_rcd"
