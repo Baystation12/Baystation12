@@ -1,4 +1,0 @@
-author: "PhosphoricPanda"
-delete-after: True
-changes: 
-  - bugfix: "Cryptographic Sequencers correctly break open doors again."
