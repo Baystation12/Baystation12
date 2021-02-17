@@ -43,6 +43,7 @@
 	click_cooldown = 30 SECONDS
 	activation_cost_resource = /datum/chorus_resource/growth_nutrients
 	activation_cost_amount = 15
+	death_message = "ruptures, spilling its corrosive contents around itself."
 
 /obj/structure/chorus/gastric_emitter/activate()
 	flick("growth_gastric_emit", src)
