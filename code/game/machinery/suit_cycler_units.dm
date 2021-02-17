@@ -19,6 +19,13 @@
 	available_modifications = list(/decl/item_modifier/space_suit/mining)
 	species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
 
+
+/obj/machinery/suit_cycler/salvage
+	name = "Salvage suit cycler"
+	model_text = "Salvage"
+	available_modifications = list(/decl/item_modifier/space_suit/salvage)
+	species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
+
 /obj/machinery/suit_cycler/science
 	name = "Excavation suit cycler"
 	model_text = "Excavation"

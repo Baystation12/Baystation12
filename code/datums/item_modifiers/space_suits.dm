@@ -45,6 +45,21 @@
 			)
 		)
 	)
+/decl/item_modifier/space_suit/salvage
+	name = "Salvage"
+	type_setups = list(
+		/obj/item/clothing/head/helmet/space = list(
+			SETUP_NAME = "salvage voidsuit helmet",
+			SETUP_ICON_STATE = "rig0-salvage",
+			SETUP_ITEM_STATE = "salvage_helm"
+		),
+		/obj/item/clothing/suit/space/void = list(
+			SETUP_NAME = "salvage voidsuit",
+			SETUP_ICON_STATE = "rig-salvage"
+		)
+	)
+
+
 
 /decl/item_modifier/space_suit/science
 	name = "Science"
