@@ -53,7 +53,7 @@
 		if(stored_paper >= max_paper)
 			to_chat(user, "You try to add \the [W] into \the [src], but its paper bin is full.")
 			return
-		for(var/obj/item/weapon/bundleitem in B) //loop through items in bundle
+		for(var/obj/item/bundleitem in B) //loop through items in bundle
 			if(istype(bundleitem, /obj/item/weapon/paper)) //if item is paper (and not photo), add into the bin
 				B.pages.Remove(bundleitem)
 				qdel(bundleitem)

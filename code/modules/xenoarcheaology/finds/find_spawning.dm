@@ -260,7 +260,7 @@
 	find_type = ARCHAEO_TOOL
 
 /obj/item/weapon/archaeological_find/tool/spawn_item()
-	var/obj/item/weapon/new_item
+	var/obj/item/new_item
 	if(prob(25))
 		new_item = new /obj/item/weapon/wrench(loc)
 	else if(prob(25))

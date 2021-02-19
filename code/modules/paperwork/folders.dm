@@ -87,7 +87,7 @@
 				P.attack_self(usr)
 				onclose(usr, "[P.name]")
 		else if(href_list["rename"])
-			var/obj/item/weapon/O = locate(href_list["rename"])
+			var/obj/item/O = locate(href_list["rename"])
 
 			if(O && (O.loc == src))
 				if(istype(O, /obj/item/weapon/paper))

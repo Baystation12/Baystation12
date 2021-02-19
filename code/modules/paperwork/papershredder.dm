@@ -78,7 +78,7 @@
 		// Move papers one by one as they fit; stop when we are empty or can't fit any more
 		while(paperamount > 0)
 
-			var/obj/item/weapon/shred_temp = get_shredded_paper()
+			var/obj/item/shred_temp = get_shredded_paper()
 
 			if(empty_into.can_be_inserted(shred_temp, user, 0))
 				empty_into.handle_item_insertion(shred_temp)

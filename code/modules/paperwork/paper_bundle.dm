@@ -104,7 +104,7 @@
 
 /obj/item/weapon/paper_bundle/proc/show_content(mob/user as mob)
 	var/dat
-	var/obj/item/weapon/W = pages[page]
+	var/obj/item/W = pages[page]
 
 	// first
 	if(page == 1)
@@ -144,7 +144,7 @@
 		return 1
 	if((src in usr.contents) || (istype(src.loc, /obj/item/weapon/folder) && (src.loc in usr.contents)))
 		usr.set_machine(src)
-		var/obj/item/weapon/in_hand = usr.get_active_hand()
+		var/obj/item/in_hand = usr.get_active_hand()
 		if(href_list["next_page"])
 			if(in_hand && (istype(in_hand, /obj/item/weapon/paper) || istype(in_hand, /obj/item/weapon/photo)))
 				insert_sheet_at(usr, page+1, in_hand)
@@ -158,7 +158,7 @@
 				page--
 				playsound(src.loc, "pageturn", 50, 1)
 		if(href_list["remove"])
-			var/obj/item/weapon/W = pages[page]
+			var/obj/item/W = pages[page]
 			usr.put_in_hands(W)
 			pages.Remove(pages[page])
 

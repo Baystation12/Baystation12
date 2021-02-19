@@ -91,7 +91,7 @@
 	w_class = ITEM_SIZE_TINY
 	layer = ABOVE_OBJ_LAYER
 
-	var/obj/item/weapon/stuck = null
+	var/obj/item/stuck = null
 
 /obj/item/weapon/ducttape/attack_hand(var/mob/user)
 	anchored = FALSE // Unattach it from whereever it's on, if anything.

@@ -60,7 +60,7 @@
 			var/list/bits = list()
 			for(var/obj/item/organ/internal/organ in internal_organs)
 				bits += organ.get_visible_state()
-			for(var/obj/item/weapon/implant in implants)
+			for(var/obj/item/implant in implants)
 				bits += implant.name
 			if(bits.len)
 				wound_descriptors["[english_list(bits)] visible in the wounds"] = 1

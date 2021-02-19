@@ -9,7 +9,7 @@
 	throw_speed = 3
 	throw_range = 10
 	var/obj/item/weapon/pen/haspen		//The stored pen.
-	var/obj/item/weapon/toppaper	//The topmost piece of paper.
+	var/obj/item/toppaper	//The topmost piece of paper.
 	slot_flags = SLOT_BELT
 	default_material = MATERIAL_WOOD
 	applies_material_name = FALSE
@@ -112,7 +112,7 @@
 					to_chat(usr, "<span class='notice'>You slot the pen into \the [src].</span>")
 
 		else if(href_list["write"])
-			var/obj/item/weapon/P = locate(href_list["write"])
+			var/obj/item/P = locate(href_list["write"])
 
 			if(P && (P.loc == src) && istype(P, /obj/item/weapon/paper) && (P == toppaper) )
 
@@ -136,7 +136,7 @@
 						toppaper = null
 
 		else if(href_list["rename"])
-			var/obj/item/weapon/O = locate(href_list["rename"])
+			var/obj/item/O = locate(href_list["rename"])
 
 			if(O && (O.loc == src))
 				if(istype(O, /obj/item/weapon/paper))
