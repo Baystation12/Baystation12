@@ -105,6 +105,7 @@
 		
 
 /obj/item/mech_equipment/mounted_system/Destroy()
+	GLOB.destroyed_event.unregister(holding, src, .proc/forget_holding)
 	if(holding)
 		QDEL_NULL(holding)
 	. = ..()
