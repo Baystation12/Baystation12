@@ -61,11 +61,9 @@
 							playsound(FD, 'sound/machines/airlock_creaking.ogg', 100, 1)
 							if(FD.density)
 								FD.visible_message(SPAN_DANGER("\The [owner] forces \the [FD] open!"))
-								FD.set_broken(TRUE)
 								addtimer(CALLBACK(FD, /obj/machinery/door/firedoor/.proc/open, TRUE), 0)
 							else
 								FD.visible_message(SPAN_WARNING("\The [owner] forces \the [FD] closed!"))
-								FD.set_broken(TRUE)
 								addtimer(CALLBACK(FD, /obj/machinery/door/firedoor/.proc/close, TRUE), 0)
 					return
 				else if(istype(O, /obj/machinery/door/airlock))
@@ -88,11 +86,13 @@
 								playsound(AD, 'sound/machines/airlock_creaking.ogg', 100, 1)
 								if(AD.density)
 									addtimer(CALLBACK(AD, /obj/machinery/door/airlock/.proc/open, TRUE), 0)
-									AD.set_broken(TRUE)
+									if(!AD.is_broken(NOPOWER))
+										AD.set_broken(TRUE)
 									AD.visible_message(SPAN_DANGER("\The [owner] forces \the [AD] open!"))
 								else
 									addtimer(CALLBACK(AD, /obj/machinery/door/airlock/.proc/close, TRUE), 0)
-									AD.set_broken(TRUE)
+									if(!AD.is_broken(NOPOWER))
+										AD.set_broken(TRUE)
 									AD.visible_message(SPAN_DANGER("\The [owner] forces \the [AD] closed!"))
 					if(AD.locked)
 						to_chat(user, SPAN_NOTICE("The airlock's bolts prevent it from being forced."))
