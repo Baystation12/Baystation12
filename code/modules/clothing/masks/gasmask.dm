@@ -66,6 +66,11 @@
 	siemens_coefficient = 0.7
 	body_parts_covered = FACE
 	w_class = ITEM_SIZE_SMALL
+	down_gas_transfer_coefficient = 1
+	down_body_parts_covered = null
+	down_item_flags = null
+	down_icon_state = "halfgasdown"
+	pull_mask = TRUE
 	armor = list(
 		melee = ARMOR_MELEE_SMALL,
 		bullet = ARMOR_BALLISTIC_MINOR,
