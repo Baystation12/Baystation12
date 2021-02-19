@@ -7,6 +7,7 @@ GLOBAL_LIST_INIT(mob_spawners, list())
 	var/turf/current_turf
 	var/turf/center
 	var/list/copied_spawner = list()
+	var/color_pool/colors
 	var/help_text = {"\
 	***** Build Mode: Mob Spawner ******
 	Left Click         - Create/Edit Spawner
@@ -24,13 +25,28 @@ GLOBAL_LIST_INIT(mob_spawners, list())
 	************************************\
 	"}
 
-	var/list/distinct_colors = list(
-		"#e6194b", "#3cb44b", "#ffe119", "#4363d8", "#f58231", "#42d4f4",
-		"#f032e6", "#fabebe", "#469990", "#e6beff", "#9a6324", "#fffac8",
-		"#800000", "#aaffc3", "#000075", "#a9a9a9", "#ffffff", "#000000"
-	)
-	var/area/selected_area
-	var/list/vision_images = list()
+/datum/build_mode/mob_mode/Destroy()
+	Unselected()
+	. = ..()
+
+/datum/build_mode/mob_mode/Selected()
+	if (!overlay)
+		CreateOverlay("whiteOverlay")
+	colors = new
+	overlay.Show()
+
+/datum/build_mode/mob_mode/Unselected()
+	if (overlay)
+		overlay.Hide()
+	QDEL_NULL(colors)
+
+/datum/build_mode/mob_mode/UpdateOverlay(atom/movable/M, turf/T)
+	if (!overlay?.shown)
+		return
+	var/spawner = GLOB.mob_spawners[T]
+	if (spawner)
+		M.color = colors.get(spawner)
+	M.alpha = spawner ? 255 : 0
 
 /datum/build_mode/mob_mode/Help()
 	to_chat(user, SPAN_NOTICE(help_text))
@@ -226,35 +242,6 @@ GLOBAL_LIST_INIT(mob_spawners, list())
 
 		return TOPIC_HANDLED
 
-/datum/build_mode/mob_mode/Selected()
-	if (!overlay)
-		CreateOverlay("whiteOverlay")
-	distinct_colors = initial(distinct_colors)
-	vision_images = list()
-	overlay.Show()
-
-/datum/build_mode/mob_mode/Unselected()
-	if (overlay)
-		overlay.Hide()
-
-/datum/build_mode/mob_mode/UpdateOverlay(atom/movable/M, turf/T)
-	if (!overlay?.shown)
-		return
-	var/color = vision_images[T]
-	if (GLOB.mob_spawners[T])
-		if (!color)
-			var/len = length(distinct_colors)
-			if (len)
-				color = distinct_colors[len]
-				distinct_colors.Cut(len)
-			else
-				color = "#" + copytext(md5("\ref[T]"), 1, 7)
-			vision_images[T] = color
-		M.color = color
-		M.alpha = 255
-	else
-		M.alpha = 0
-
 /datum/build_mode/mob_mode/OnClick(atom/object, list/pa)
 	current_area = get_area(object)
 	current_turf = get_turf(object)
@@ -297,12 +284,3 @@ GLOBAL_LIST_INIT(mob_spawners, list())
 		if (spawner)
 			QDEL_NULL(spawner)
 			to_chat(user, "Deleted spawner in [current_area].")
-
-
-
-/datum/build_mode/mob_mode/Destroy()
-	. = ..()
-
-	if (user.client)
-		user.client.images -= vision_images
-	vision_images = list()
