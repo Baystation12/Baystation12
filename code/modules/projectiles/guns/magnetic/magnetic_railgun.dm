@@ -16,20 +16,13 @@
 	combustion = 1
 	bulk = GUN_BULK_RIFLE + 3
 
-	var/initial_cell_type = /obj/item/weapon/cell/hyper
-	var/initial_capacitor_type = /obj/item/weapon/stock_parts/capacitor/adv // 6-8 shots
+	cell = /obj/item/weapon/cell/hyper
+	capacitor = /obj/item/weapon/stock_parts/capacitor/adv
 	gun_unreliable = 0
 	var/slowdown_held = 3
 	var/slowdown_worn = 2
 
 /obj/item/weapon/gun/magnetic/railgun/Initialize()
-
-	capacitor = new initial_capacitor_type(src)
-	capacitor.charge = capacitor.max_charge
-
-	cell = new initial_cell_type(src)
-	if (ispath(loaded))
-		loaded = new loaded (src, load_sheet_max)
 	slowdown_per_slot[slot_l_hand] =  slowdown_held
 	slowdown_per_slot[slot_r_hand] =  slowdown_held
 	slowdown_per_slot[slot_back] =    slowdown_worn
@@ -76,8 +69,8 @@
 	icon_state = "railgun-tcc"
 	removable_components = TRUE // Railgunners are expected to be able to completely disassemble and reassemble their weapons in the field. But we don't have that mechanic, so the cell and capacitor will do.
 
-	initial_cell_type = /obj/item/weapon/cell/hyper // Standard power
-	initial_capacitor_type = /obj/item/weapon/stock_parts/capacitor/adv // 6-8 shots
+	cell = /obj/item/weapon/cell/hyper // Standard power
+	capacitor = /obj/item/weapon/stock_parts/capacitor/adv // 6-8 shots
 	power_cost = 280 // Same number of shots, but it'll seem to recharge slightly faster
 
 	loaded = /obj/item/stack/material/rods
@@ -116,8 +109,8 @@
 	icon_state = "heavy_railgun"
 	removable_components = FALSE // Absolutely not. This has an infinity cell.
 
-	initial_cell_type = /obj/item/weapon/cell/infinite
-	initial_capacitor_type = /obj/item/weapon/stock_parts/capacitor/super
+	cell = /obj/item/weapon/cell/infinite
+	capacitor = /obj/item/weapon/stock_parts/capacitor/super
 
 	fire_delay =  8
 	slowdown_held = 4
@@ -153,8 +146,8 @@
 	one_hand_penalty = 2
 	fire_delay = 8
 	removable_components = FALSE
-	initial_cell_type = /obj/item/weapon/cell/hyper
-	initial_capacitor_type = /obj/item/weapon/stock_parts/capacitor/adv
+	cell = /obj/item/weapon/cell/hyper
+	capacitor = /obj/item/weapon/stock_parts/capacitor/adv
 	slot_flags = SLOT_BACK
 	power_cost = 100
 	load_type = /obj/item/weapon/magnetic_ammo
@@ -169,7 +162,7 @@
 
 /obj/item/weapon/gun/magnetic/railgun/flechette/out_of_ammo()
 	visible_message("<span class='warning'>\The [src] beeps to indicate the magazine is empty.</span>")
-	
+
 
 /obj/item/weapon/gun/magnetic/railgun/flechette/skrell
 	name = "skrellian rifle"
@@ -182,8 +175,8 @@
 	slowdown_held = 1
 	slowdown_worn = 1
 	removable_components = FALSE
-	initial_cell_type = /obj/item/weapon/cell/hyper
-	initial_capacitor_type = /obj/item/weapon/stock_parts/capacitor/adv
+	cell = /obj/item/weapon/cell/hyper
+	capacitor = /obj/item/weapon/stock_parts/capacitor/adv
 	load_type = /obj/item/weapon/magnetic_ammo/skrell
 	loaded = /obj/item/weapon/magnetic_ammo/skrell/slug
 	projectile_type = /obj/item/projectile/bullet/magnetic/slug

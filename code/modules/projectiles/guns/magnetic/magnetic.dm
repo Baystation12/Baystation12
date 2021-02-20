@@ -24,8 +24,21 @@
 	var/power_cost = 950                                       // Cost per fire, should consume almost an entire basic cell.
 	var/power_per_tick                                         // Capacitor charge per process(). Updated based on capacitor rating.
 
+/obj/item/weapon/gun/magnetic/preloaded
+	cell = /obj/item/weapon/cell/high
+	capacitor = /obj/item/weapon/stock_parts/capacitor/adv
+
 /obj/item/weapon/gun/magnetic/Initialize()
 	START_PROCESSING(SSobj, src)
+
+	if (ispath(cell))
+		cell = new cell(src)
+	if (ispath(capacitor))
+		capacitor = new capacitor(src)
+		capacitor.charge = capacitor.max_charge
+	if (ispath(loaded))
+		loaded = new loaded (src, load_sheet_max)
+
 	if(capacitor)
 		power_per_tick = (power_cost*0.15) * capacitor.rating
 	update_icon()
