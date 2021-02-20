@@ -19,9 +19,7 @@
 	stop_automated_movement_when_pulled = 0
 	maxHealth = 60
 	health = 60
-	melee_damage_lower = 20
-	melee_damage_upper = 30
-	melee_damage_flags = DAM_SHARP
+	natural_weapon = /obj/item/natural_weapon/claws/strong
 	can_escape = TRUE
 	faction = "russian"
 

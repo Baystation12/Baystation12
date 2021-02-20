@@ -102,20 +102,6 @@ var/list/airlock_overlays = list()
 	)
 	stock_part_presets = list(/decl/stock_part_preset/radio/receiver/airlock = 1)
 
-/obj/machinery/door/airlock/attack_generic(var/mob/user, var/damage)
-	if(stat & (BROKEN|NOPOWER))
-		if(damage >= 10)
-			if(src.density)
-				visible_message("<span class='danger'>\The [user] forces \the [src] open!</span>")
-				open(1)
-			else
-				visible_message("<span class='danger'>\The [user] forces \the [src] closed!</span>")
-				close(1)
-		else
-			visible_message("<span class='notice'>\The [user] strains fruitlessly to force \the [src] [density ? "open" : "closed"].</span>")
-		return
-	..()
-
 /obj/machinery/door/airlock/get_material()
 	return SSmaterials.get_material_by_name(mineral ? mineral : MATERIAL_STEEL)
 
@@ -1171,7 +1157,19 @@ About the new airlock wires panel:
 
 	else if(istype(C, /obj/item/device/paint_sprayer))
 		return
-
+	else if((stat & (BROKEN|NOPOWER)) && istype(user, /mob/living/simple_animal))
+		var/mob/living/simple_animal/A = user
+		var/obj/item/I = A.get_natural_weapon()
+		if(I.force >= 10)
+			if(density)
+				visible_message(SPAN_DANGER("\The [A] forces \the [src] open!"))
+				open(1)
+			else
+				visible_message(SPAN_DANGER("\The [A] forces \the [src] closed!"))
+				close(1)
+		else
+			visible_message(SPAN_NOTICE("\The [A] strains fruitlessly to force \the [src] [density ? "open" : "closed"]."))
+		return
 	else
 		..()
 	return

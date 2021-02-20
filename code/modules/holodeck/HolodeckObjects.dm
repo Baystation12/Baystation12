@@ -444,16 +444,17 @@
 	set_light(0.5, 0.1, 2) //hologram lighting
 
 /mob/living/simple_animal/hostile/carp/holodeck/proc/set_safety(var/safe)
+	var/obj/item/NW = get_natural_weapon()
 	if (safe)
 		faction = MOB_FACTION_NEUTRAL
-		melee_damage_lower = 0
-		melee_damage_upper = 0
+		if(NW)
+			NW.force = 0
 		environment_smash = 0
 		destroy_surroundings = 0
 	else
 		faction = "carp"
-		melee_damage_lower = initial(melee_damage_lower)
-		melee_damage_upper = initial(melee_damage_upper)
+		if(NW)
+			NW.force = initial(NW.force)
 		environment_smash = initial(environment_smash)
 		destroy_surroundings = initial(destroy_surroundings)
 

@@ -6,12 +6,10 @@
 	desc = "a cloud of tiny, tiny robots."
 	icon = 'icons/mob/simple_animal/critter.dmi'
 	icon_state = "blobsquiggle_grey"
-	attacktext = "swarmed"
 	health = 10
 	maxHealth = 10
 	var/regen_time = 0
-	melee_damage_lower = 1
-	melee_damage_upper = 2
+	natural_weapon = /obj/item/natural_weapon/nanomachine
 	can_escape = TRUE
 	var/emergency_protocols = 0
 	known_commands = list("stay", "stop", "attack", "follow", "heal", "emergency protocol")
@@ -19,6 +17,12 @@
 	response_help = "waves their hands through"
 	response_harm = "hits"
 	response_disarm = "fans at"
+
+/obj/item/natural_weapon/nanomachine
+	name = "decompilers"
+	attack_verb = list("swarmed")
+	force = 2
+	sharp = TRUE
 
 /mob/living/simple_animal/hostile/commanded/nanomachine/Life()
 	regen_time++

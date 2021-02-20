@@ -1,8 +1,6 @@
 /mob/living/simple_animal/aquatic
 	icon = 'icons/mob/simple_animal/aquatic.dmi'
 	turns_per_move = 5
-	attacktext = "bitten"
-	attack_sound = 'sound/weapons/bite.ogg'
 	speed = 4
 	mob_size = MOB_SMALL
 	emote_see = list("glubs", "blubs", "bloops")

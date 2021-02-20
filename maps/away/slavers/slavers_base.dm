@@ -148,9 +148,7 @@
 	stop_automated_movement_when_pulled = 0
 	maxHealth = 100
 	health = 100
-	harm_intent_damage = 5
-	melee_damage_lower = 10
-	melee_damage_upper = 30
+	natural_weapon = /obj/item/natural_weapon/punch
 	can_escape = TRUE
 	unsuitable_atmos_damage = 15
 	var/corpse = /obj/effect/landmark/corpse/abolitionist

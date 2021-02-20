@@ -40,7 +40,7 @@
 	speed = 8
 	can_escape = TRUE
 	stop_automated_movement_when_pulled = 0
-	attacktext = "punched"
+	natural_weapon = /obj/item/natural_weapon/punch
 	var/obj/effect/landmark/corpse/lar_maria/corpse = null
 	var/weapon = null
 
@@ -62,8 +62,6 @@
 	maxHealth = 40
 	health = 40
 	harm_intent_damage = 5
-	melee_damage_lower = 10
-	melee_damage_upper = 10
 	corpse = /obj/effect/landmark/corpse/lar_maria/test_subject
 
 /obj/effect/landmark/corpse/lar_maria/test_subject
@@ -99,8 +97,7 @@
 	maxHealth = 60
 	health = 60
 	harm_intent_damage = 5
-	melee_damage_lower = 20
-	melee_damage_upper = 20
+	natural_weapon = /obj/item/weapon/melee/baton
 	weapon = /obj/item/weapon/melee/baton
 	corpse = /obj/effect/landmark/corpse/lar_maria/zhp_guard
 
@@ -134,8 +131,6 @@
 	maxHealth = 50
 	health = 50
 	harm_intent_damage = 5
-	melee_damage_lower = 8
-	melee_damage_upper = 12
 	corpse = /obj/effect/landmark/corpse/lar_maria/virologist
 
 /obj/effect/landmark/corpse/lar_maria/virologist

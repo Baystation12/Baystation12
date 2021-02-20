@@ -8,9 +8,7 @@
 	health = 15
 	maxHealth = 15
 	harm_intent_damage = 5
-	melee_damage_lower = 2
-	melee_damage_upper = 4
-	melee_damage_flags = DAM_SHARP
+	natural_weapon = /obj/item/natural_weapon/bite/weak
 	pass_flags = PASS_FLAG_TABLE
 	faction = "leeches"
 	can_pry = FALSE

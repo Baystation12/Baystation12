@@ -55,15 +55,10 @@
 	var/speed = 0 //LETS SEE IF I CAN SET SPEEDS FOR SIMPLE MOBS WITHOUT DESTROYING EVERYTHING. Higher speed is slower, negative speed is faster
 
 	//LETTING SIMPLE ANIMALS ATTACK? WHAT COULD GO WRONG. Defaults to zero so Ian can still be cuddly
-	var/melee_damage_lower = 0
-	var/melee_damage_upper = 0
-	var/attacktext = "attacked"
-	var/attack_sound = null
+	var/obj/item/natural_weapon/natural_weapon
 	var/friendly = "nuzzles"
 	var/environment_smash = 0
 	var/resistance		  = 0	// Damage reduction
-	var/damtype = BRUTE
-	var/defense = "melee" //what armor protects against its attacks
 	var/armor_type = /datum/extension/armor
 	var/list/natural_armor //what armor animal has
 	var/flash_vulnerability = 1 // whether or not the mob can be flashed; 0 = no, 1 = yes, 2 = very yes
@@ -91,6 +86,11 @@
 	. = ..()
 	if(LAZYLEN(natural_armor))
 		set_extension(src, armor_type, natural_armor)
+
+/mob/living/simple_animal/Destroy()
+	if(istype(natural_weapon))
+		QDEL_NULL(natural_weapon)
+	. = ..()
 
 /mob/living/simple_animal/Life()
 	. = ..()
@@ -288,7 +288,7 @@
 
 	if(istype(O, /obj/item/device/flash))
 		if(stat != DEAD)
-			O.attack(src, user, user.zone_sel.selecting)
+			O.attack(src, user, user.zone_sel ? user.zone_sel.selecting : ran_zone())
 			return
 
 	if(meat_type && (stat == DEAD) && meat_amount)
@@ -316,7 +316,7 @@
 		if(!O.force)
 			visible_message("<span class='notice'>[user] gently taps [src] with \the [O].</span>")
 		else
-			O.attack(src, user, user.zone_sel.selecting)
+			O.attack(src, user, user.zone_sel ? user.zone_sel.selecting : ran_zone())
 
 /mob/living/simple_animal/hit_with_weapon(obj/item/O, mob/living/user, var/effective_force, var/hit_zone)
 
@@ -510,3 +510,8 @@
 		attacker.apply_damage(rand(return_damage_min, return_damage_max), damage_type, hand_hurtie, used_weapon = description)
 		if(rand(25))
 			to_chat(attacker, SPAN_WARNING("Your attack has no obvious effect on \the [src]'s [description]!"))
+
+/mob/living/simple_animal/proc/get_natural_weapon()
+	if(ispath(natural_weapon))
+		natural_weapon = new natural_weapon(src)
+	return natural_weapon 

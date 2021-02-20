@@ -12,9 +12,7 @@
 	response_disarm = "pushes aside"
 	response_harm   = "smacks"
 	harm_intent_damage = 5
-	melee_damage_upper = 15
-	melee_damage_lower = 10
-	attacktext = "mauled"
+	natural_weapon = /obj/item/natural_weapon/bite
 	pass_flags = PASS_FLAG_TABLE
 	density = 0
 

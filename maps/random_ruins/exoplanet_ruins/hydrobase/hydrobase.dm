@@ -87,9 +87,11 @@
 	desc = "An impressive goat, in size and coat. His horns look pretty serious!"
 	health = 100
 	maxHealth = 100
-	melee_damage_lower = 10
-	melee_damage_upper = 15
+	natural_weapon = /obj/item/natural_weapon/hooves/strong
 	faction = "farmbots"
+
+/obj/item/natural_weapon/hooves/strong
+	force = 15
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/hydro
 	name = "Farmbot"
