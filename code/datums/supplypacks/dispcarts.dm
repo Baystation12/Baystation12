@@ -61,6 +61,10 @@ SEC_PACK(cognac,   /obj/item/weapon/reagent_containers/chem_disp_cartridge/cogna
 SEC_PACK(ale,      /obj/item/weapon/reagent_containers/chem_disp_cartridge/ale,      "Reagent refill - Ale",      "ale reagent cartridge crate",      15, access_bar)
 SEC_PACK(mead,     /obj/item/weapon/reagent_containers/chem_disp_cartridge/mead,     "Reagent refill - Mead",     "mead reagent cartridge crate",     15, access_bar)
 
+// Engineering-restricted
+//
+SEC_PACK(boron,     /obj/item/weapon/reagent_containers/chem_disp_cartridge/boron,   "Reagent refill - Boron",    "boron reagent cartridge crate",    45, access_engine)
+
 // Unrestricted (water, sugar, non-alcoholic drinks)
 //  Datum path   Contents type                                                       Supply pack name                        Container name                                          Cost
 PACK(water,      /obj/item/weapon/reagent_containers/chem_disp_cartridge/water,      "Reagent refill - Water",               "water reagent cartridge crate",                         15)

@@ -160,8 +160,8 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 /decl/fusion_reaction/boron_hydrogen
 	p_react = "boron"
 	s_react = GAS_HYDROGEN
-	minimum_energy_level = FUSION_HEAT_CAP * 0.5
+	minimum_energy_level = 15000
 	energy_consumption = 3
-	energy_production = 15
+	energy_production = 12
 	radiation = 3
-	instability = 3
+	instability = 2.5

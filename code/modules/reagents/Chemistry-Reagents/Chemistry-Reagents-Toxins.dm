@@ -928,3 +928,12 @@
 	heating_products = list(/datum/reagent/acetone, /datum/reagent/carbon, /datum/reagent/ethanol)
 	heating_point = 145 CELSIUS
 	heating_message = "separates."
+
+/datum/reagent/toxin/boron
+	name = "Boron"
+	description = "A chemical that is highly valued for its potential in fusion energy."
+	taste_description = "metal"
+	reagent_state = SOLID
+	color = "#837e79"
+	value = 4
+	strength = 7

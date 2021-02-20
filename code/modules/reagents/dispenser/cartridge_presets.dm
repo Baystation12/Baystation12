@@ -81,6 +81,9 @@
 	decaf_cof	spawn_reagent = /datum/reagent/drink/decafcoffee
 	espresso	spawn_reagent = /datum/reagent/drink/coffee/espresso
 
+// Engineering
+	boron		spawn_reagent = /datum/reagent/toxin/boron
+
 	// ERT
 	inaprov		spawn_reagent = /datum/reagent/inaprovaline
 	ryetalyn	spawn_reagent = /datum/reagent/ryetalyn
