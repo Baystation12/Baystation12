@@ -454,6 +454,14 @@
 	materials = list(MATERIAL_STEEL = 20000, MATERIAL_SILVER = 12000, MATERIAL_GOLD = 12000)
 	req_tech = list(TECH_MATERIAL = 4, TECH_MAGNET = 4, TECH_POWER = 4, TECH_COMBAT = 2)
 	build_path = /obj/item/mech_equipment/shields
+
+/datum/design/item/exosuit/mechshields/ballistic
+	name = "plasteel mech shield"
+	id = "mech_shield_ballistic"
+	time = 45
+	materials = list(MATERIAL_STEEL = 40000, MATERIAL_ALUMINIUM = 5000)
+	req_tech = list(TECH_MATERIAL = 3)
+	build_path = /obj/item/mech_equipment/ballistic_shield
 // End mechs.
 
 /datum/design/item/synthetic_flash

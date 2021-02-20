@@ -136,7 +136,7 @@
 			M.Weaken(rand(4,8))
 		M.visible_message(SPAN_DANGER("\The [M] collides with \the [src]!"))
 
-	if(!aura_check(AURA_TYPE_THROWN, AM, TT.speed))
+	if (!aura_check(AURA_TYPE_THROWN, AM, TT))
 		return
 
 	if(istype(AM,/obj/))

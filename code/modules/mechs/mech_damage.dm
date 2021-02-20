@@ -145,3 +145,6 @@
 			for(var/thing in pilots)
 				var/mob/pilot = thing
 				pilot.emp_act(severity)
+				
+/mob/living/exosuit/get_bullet_impact_effect_type(def_zone)
+	return BULLET_IMPACT_METAL
