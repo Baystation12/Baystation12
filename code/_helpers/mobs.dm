@@ -144,6 +144,12 @@ proc/age2agedescription(age)
 
 	var/target_zone = do_flags & DO_USER_SAME_ZONE ? user.zone_sel.selecting : null
 
+	if (do_flags & DO_MOVE_CHECKS_TURFS)
+		if (user_loc)
+			user_loc = get_turf(user)
+		if (target_loc)
+			target_loc = get_turf(target)
+
 	var/datum/progressbar/bar
 	if (do_flags & DO_SHOW_PROGRESS)
 		if (do_flags & DO_PUBLIC_PROGRESS)
@@ -169,10 +175,10 @@ proc/age2agedescription(age)
 		if (user.incapacitated(incapacitation_flags))
 			. = DO_INCAPACITATED
 			break
-		if (user_loc && user_loc != user.loc)
+		if (user_loc && user_loc != (do_flags & DO_MOVE_CHECKS_TURFS ? get_turf(user) : user.loc))
 			. = DO_USER_CAN_MOVE
 			break
-		if (target_loc && target_loc != target.loc)
+		if (target_loc && target_loc != (do_flags & DO_MOVE_CHECKS_TURFS ? get_turf(target) : target.loc))
 			. = DO_TARGET_CAN_MOVE
 			break
 		if (user_dir && user_dir != user.dir)
