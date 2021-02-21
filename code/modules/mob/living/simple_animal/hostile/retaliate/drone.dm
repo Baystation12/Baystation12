@@ -231,7 +231,7 @@
 		var/list/options = list(1,2,4,8,16,32,64,128,256,512)
 		for(var/i=0, i<num_boards, i++)
 			var/chosen = pick(options)
-			options.Remove(options.Find(chosen))
+			options.Remove(list_find(options, chosen))
 			spawnees |= chosen
 
 		if(spawnees & 1)

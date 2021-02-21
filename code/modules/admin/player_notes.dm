@@ -52,7 +52,7 @@
 	var/list/note_keys
 	from_save(note_list, note_keys)
 	if(!note_keys) note_keys = list()
-	if(!note_keys.Find(key)) note_keys += key
+	if(!list_find(note_keys, key)) note_keys += key
 	to_save(note_list, note_keys)
 	del(note_list) // savefile, so NOT qdel
 

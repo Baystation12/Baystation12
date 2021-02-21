@@ -27,9 +27,9 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 				fusion_reactions[cur_reaction.s_react] = list()
 			fusion_reactions[cur_reaction.s_react][cur_reaction.p_react] = cur_reaction
 
-	if(fusion_reactions.Find(p_react))
+	if(list_find(fusion_reactions, p_react))
 		var/list/secondary_reactions = fusion_reactions[p_react]
-		if(secondary_reactions.Find(s_react))
+		if(list_find(secondary_reactions, s_react))
 			return fusion_reactions[p_react][s_react]
 
 // Material fuels

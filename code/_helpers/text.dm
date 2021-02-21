@@ -568,7 +568,7 @@ proc/TextPreview(var/string,var/len=40)
 // If char isn't part of the text the entire text is returned
 /proc/copytext_after_last(var/text, var/char)
 	var/regex/R = regex("(\[^[char]\]*)$")
-	R.Find(text)
+	regex_find(R, text)
 	return R.group[1]
 
 /proc/sql_sanitize_text(var/text)
@@ -595,5 +595,5 @@ proc/TextPreview(var/string,var/len=40)
 	if (message && length(config.chat_markup))
 		for (var/list/entry in config.chat_markup)
 			var/regex/matcher = entry[1]
-			message = matcher.Replace(message, entry[2])
+			message = replacetext_char(message, matcher, entry[2])
 	return message

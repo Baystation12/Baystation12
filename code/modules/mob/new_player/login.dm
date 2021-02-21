@@ -15,7 +15,7 @@
 	set_sight(sight|SEE_TURFS)
 
 	// Add to player list if missing
-	if (!GLOB.player_list.Find(src))
+	if (!list_find(GLOB.player_list, src))
 		ADD_SORTED(GLOB.player_list, src, /proc/cmp_mob_key)
 
 	new_player_panel()

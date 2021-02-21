@@ -267,7 +267,7 @@
 	effect_str.Cut()
 
 /datum/light_source/proc/recalc_corner(var/datum/lighting_corner/C)
-	if(effect_str.Find(C)) // Already have one.
+	if(list_find(effect_str, C)) // Already have one.
 		REMOVE_CORNER(C)
 
 	APPLY_CORNER(C)

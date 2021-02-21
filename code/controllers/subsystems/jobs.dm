@@ -316,7 +316,7 @@ SUBSYSTEM_DEF(jobs)
 		for(var/mob/new_player/player in unassigned_roundstart)
 			// Loop through all jobs
 			for(var/datum/job/job in shuffledoccupations) // SHUFFLE ME BABY
-				if(job && !mode.disabled_jobs.Find(job.title) )
+				if(job && !list_find(mode.disabled_jobs, job.title))
 					if(job.defer_roundstart_spawn)
 						deferred_jobs[job] = TRUE
 					else if(attempt_role_assignment(player, job, level, mode))

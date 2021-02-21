@@ -82,7 +82,7 @@
 			return
 		components = holder.assembly.assembly_components
 
-	var/component_number = components.Find(holder)
+	var/component_number = list_find(components, holder)
 
 	var/list/pin_holder_list
 	switch(pin_type)
@@ -95,7 +95,7 @@
 		else
 			return
 
-	var/pin_number = pin_holder_list.Find(src)
+	var/pin_number = list_find(pin_holder_list, src)
 
 	return list(component_number, pin_type, pin_number)
 

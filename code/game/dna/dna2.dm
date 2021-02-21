@@ -122,12 +122,12 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	// FIXME:  Species-specific defaults pls
 	if(!character.h_style)
 		character.h_style = "Skinhead"
-	var/hair = GLOB.hair_styles_list.Find(character.h_style)
+	var/hair = list_find(GLOB.hair_styles_list, character.h_style)
 
 	// Facial Hair
 	if(!character.f_style)
 		character.f_style = "Shaved"
-	var/beard	= GLOB.facial_hair_styles_list.Find(character.f_style)
+	var/beard	= list_find(GLOB.facial_hair_styles_list, character.f_style)
 
 	SetUIValueRange(DNA_UI_HAIR_R,    character.r_hair,    255,    1)
 	SetUIValueRange(DNA_UI_HAIR_G,    character.g_hair,    255,    1)

@@ -68,11 +68,11 @@ var/savefile/Banlist
 
 	if (!length(Banlist.dir)) log_admin("Banlist is empty.")
 
-	if (!Banlist.dir.Find("base"))
+	if (!list_find(Banlist.dir, "base"))
 		log_admin("Banlist missing base dir.")
 		Banlist.dir.Add("base")
 		Banlist.cd = "/base"
-	else if (Banlist.dir.Find("base"))
+	else if (list_find(Banlist.dir, "base"))
 		Banlist.cd = "/base"
 
 	ClearTempbans()
@@ -105,7 +105,7 @@ var/savefile/Banlist
 		bantimestamp = CMinutes + minutes
 
 	Banlist.cd = "/base"
-	if ( Banlist.dir.Find("[ckey][computerid]") )
+	if (list_find(Banlist.dir, "[ckey][computerid]"))
 		to_chat(usr, "<span class='warning'>Ban already exists.</span>")
 		return 0
 	else if (!ckey)
