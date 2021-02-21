@@ -2228,6 +2228,8 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
+/obj/item/device/suit_cooling_unit,
+/obj/item/device/suit_cooling_unit,
 /turf/simulated/floor,
 /area/ship/scrap/maintenance/eva)
 "el" = (
@@ -2679,8 +2681,8 @@
 /turf/simulated/floor,
 /area/ship/scrap/maintenance/storage)
 "eV" = (
-/obj/structure/dispenser/oxygen,
-/turf/simulated/floor,
+/obj/machinery/suit_cycler/salvage/bearcat,
+/turf/simulated/floor/tiled,
 /area/ship/scrap/maintenance/eva)
 "eW" = (
 /obj/machinery/suit_storage_unit/engineering/salvage/bearcat,

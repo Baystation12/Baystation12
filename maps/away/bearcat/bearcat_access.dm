@@ -42,3 +42,6 @@
 
 /obj/machinery/suit_storage_unit/engineering/salvage/bearcat
 	req_access = list(access_bearcat)
+
+/obj/machinery/suit_cycler/salvage/bearcat
+	req_access = list(access_bearcat)

@@ -4720,12 +4720,14 @@
 /turf/simulated/floor/tiled/airless,
 /area/ship/scrap/maintenance/atmos)
 "ih" = (
+/obj/structure/dispenser/oxygen,
 /obj/effect/floor_decal/corner/blue,
 /obj/effect/floor_decal/corner/yellow{
 	dir = 4;
 	icon_state = "corner_white"
 	},
 /obj/item/device/radio/intercom/map_preset/bearcat{
+	default_hailing = 1;
 	dir = 8;
 	pixel_x = 22
 	},
