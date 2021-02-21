@@ -13,7 +13,7 @@
 
 /obj/structure/chorus/processor/chorus_click(var/mob/living/carbon/alien/chorus/C)
 	if(warning && C)
-		to_chat(C, SPAN_WARNING("\The [src] is automatic; it does not need to be activated"))
+		to_chat(C, SPAN_WARNING("\The [src] is automatic; it can't be used manually, and instead activates on its own."))
 		warning = FALSE
 
 /obj/structure/chorus/processor/clicker
