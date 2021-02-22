@@ -52,7 +52,7 @@
 /obj/item/device/encryptionkey/headset_mining
 	name = "prospector radio encryption key"
 	icon_state = "srv_cypherkey"
-	channels = list("Exploration" = 1, "Supply" = 1)
+	channels = list("Supply" = 1, "Exploration" = 1)
 
 /obj/item/weapon/storage/box/encryptionkey/exploration
 	name = "box of spare exploration radio keys"
