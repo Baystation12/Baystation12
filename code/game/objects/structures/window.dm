@@ -346,7 +346,7 @@
 			construction_state = 0
 			set_anchored(0)
 
-	else if (istype(W, /obj/item/stack/material/glass))
+	else if (istype(W, /obj/item/stack/material))
 		if (health == maxhealth)
 			to_chat(user, SPAN_NOTICE("\The [src] does not need repair."))
 			return
@@ -355,7 +355,7 @@
 			to_chat(user, SPAN_NOTICE("\The [src] already has enough new [material] applied."))
 			return
 
-		var/obj/item/stack/material/glass/G = W
+		var/obj/item/stack/material/G = W
 		if (material != G.material || reinf_material != G.reinf_material)
 			to_chat(user, SPAN_WARNING("\The [src] must be repaired with the same type of [get_material_display_name()] it was made of."))
 			return
