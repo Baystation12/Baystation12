@@ -29,7 +29,7 @@
 	owner = newowner
 
 /obj/screen/exosuit/Click()
-	return (!owner || !usr.incapacitated() && (usr == owner || usr.loc == owner))
+	return (!usr.incapacitated() && usr.canClick() && (usr == owner || usr.loc == owner))
 
 /obj/screen/exosuit/hardpoint
 	name = "hardpoint"
@@ -281,7 +281,9 @@
 /obj/screen/exosuit/health/Click()
 	if(..())
 		if(owner && owner.body && owner.body.diagnostics?.is_functional())
+			usr.setClickCooldown(0.2 SECONDS)
 			to_chat(usr, SPAN_NOTICE("The diagnostics panel blinks several times as it updates:"))
+			playsound(owner.loc,'sound/effects/scanbeep.ogg',30,0)
 			for(var/obj/item/mech_component/MC in list(owner.arms, owner.legs, owner.body, owner.head))
 				if(MC)
 					MC.return_diagnostics(usr)	
