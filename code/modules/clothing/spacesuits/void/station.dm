@@ -60,10 +60,10 @@
 		slot_r_hand_str = "mining_helm",
 		)
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
+		melee = ARMOR_MELEE_KNIVES,
 		bullet = ARMOR_BALLISTIC_MINOR,
 		laser = ARMOR_LASER_MINOR,
-		bomb = ARMOR_BOMB_RESISTANT,
+		bomb = ARMOR_BOMB_PADDED,
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_MINOR
 		)
@@ -79,10 +79,10 @@
 		slot_r_hand_str = "mining_voidsuit",
 	)
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
+		melee = ARMOR_MELEE_KNIVES,
 		bullet = ARMOR_BALLISTIC_MINOR,
 		laser = ARMOR_LASER_MINOR,
-		bomb = ARMOR_BOMB_RESISTANT,
+		bomb = ARMOR_BOMB_PADDED,
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_MINOR
 		)
