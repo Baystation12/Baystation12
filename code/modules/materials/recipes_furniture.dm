@@ -123,6 +123,7 @@ ARMCHAIR(yellow)
 /datum/stack_recipe/furniture/barricade
 	title = "barricade"
 	result_type = /obj/structure/barricade
+	difficulty = 0
 	req_amount = 5
 	time = 50
 
