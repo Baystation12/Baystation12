@@ -3,7 +3,7 @@
 	desc = "A handgun holster."
 	icon_state = "holster"
 	slot = ACCESSORY_SLOT_HOLSTER
-	slots = 1
+	slots = 1 STORAGE_SLOTS
 	max_w_class = ITEM_SIZE_NORMAL
 	var/list/can_holster = null
 	var/sound_in = 'sound/effects/holster/holsterin.ogg'
@@ -11,7 +11,8 @@
 
 /obj/item/clothing/accessory/storage/holster/Initialize()
 	. = ..()
-	set_extension(src, /datum/extension/holster, hold, sound_in, sound_out, can_holster)
+	INIT_SKIP_QDELETED
+	set_extension(src, /datum/extension/holster, container, sound_in, sound_out, can_holster)
 
 /obj/item/clothing/accessory/storage/holster/attackby(obj/item/W as obj, mob/user as mob)
 	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)
@@ -56,12 +57,14 @@
 	name = "armpit holster"
 	desc = "A worn-out handgun holster. Perfect for concealed carry."
 	icon_state = "holster"
+	body_location = UPPER_TORSO
 
 /obj/item/clothing/accessory/storage/holster/waist
 	name = "waist holster"
 	desc = "A handgun holster. Made of expensive leather."
 	icon_state = "holster"
 	overlay_state = "holster_low"
+	body_location = UPPER_TORSO
 
 /obj/item/clothing/accessory/storage/holster/hip
 	name = "hip holster"

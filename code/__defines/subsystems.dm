@@ -16,6 +16,17 @@
 	}\
 }
 
+#define INIT_SKIP_QDELETED if (. == INITIALIZE_HINT_QDEL) {\
+return;\
+}
+
+#define INIT_DISALLOW_TYPE(path) if (type == path) {\
+. = INITIALIZE_HINT_QDEL;\
+crash_with("disallowed type [type] created");\
+return;\
+}
+
+
 // Subsystem init_order, from highest priority to lowest priority
 // Subsystems shutdown in the reverse of the order they initialize in
 // The numbers just define the ordering, they are meaningless otherwise.

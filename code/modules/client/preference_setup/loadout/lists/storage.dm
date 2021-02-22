@@ -1,6 +1,6 @@
-/datum/gear/storage/
+/datum/gear/storage
 	sort_category = "Storage Accessories"
-	category = /datum/gear/storage/
+	category = /datum/gear/storage
 	slot = slot_tie
 
 /datum/gear/storage/vest
@@ -18,14 +18,14 @@
 
 /datum/gear/storage/pouches
 	display_name = "drop pouches selection"
-	path = /obj/item/clothing/accessory/storage/drop_pouches
+	path = /obj/item/clothing/accessory/storage
 
 /datum/gear/storage/pouches/New()
 	..()
 	var/pouches = list()
-	pouches += /obj/item/clothing/accessory/storage/drop_pouches/black
-	pouches += /obj/item/clothing/accessory/storage/drop_pouches/brown
-	pouches += /obj/item/clothing/accessory/storage/drop_pouches/white
+	pouches += /obj/item/clothing/accessory/storage/black_drop
+	pouches += /obj/item/clothing/accessory/storage/brown_drop
+	pouches += /obj/item/clothing/accessory/storage/white_drop
 	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(pouches)
 
 /datum/gear/storage/belt
