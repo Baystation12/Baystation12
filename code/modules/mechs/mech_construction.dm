@@ -90,13 +90,14 @@
 					break
 			if(!found)
 				return FALSE
-		ME.installed(src)
 		GLOB.destroyed_event.register(system, src, .proc/forget_module)
 
 	
-
-	system.forceMove(src)
-	hardpoints[system_hardpoint] = system
+		system.forceMove(src)
+		hardpoints[system_hardpoint] = system
+		ME.installed(src)
+	else
+		return FALSE
 
 	var/obj/screen/exosuit/hardpoint/H = hardpoint_hud_elements[system_hardpoint]
 	H.holding = system
