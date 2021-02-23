@@ -172,6 +172,7 @@
 	#include "../away/mininghome/mininghome.dm"
 	#include "../away/scavver/scavver_gantry.dm"
 	#include "../away/verne/verne.dm"
+	#include "../away/rawl/rawl.dm"
 
 	#include "../../code/datums/music_tracks/chasing_time.dm"
 

@@ -156,6 +156,7 @@
 #define COLOR_SABER_SKRELL     "#6600cc"
 #define COLOR_SABER_AXE        "#00ccff"
 #define COLOR_SABER_CUTLASS    "#ff0033"
+#define COLOR_SABER_UNATHI     "#ceca2b"
 
 // Used by fluid system.
 #define COLOR_OCEAN "#99f5ff"

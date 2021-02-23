@@ -15042,6 +15042,10 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/foreport)
+"Wt" = (
+/obj/effect/shuttle_landmark/rawl/torch,
+/turf/space,
+/area/space)
 "Wu" = (
 /obj/effect/floor_decal/corner/yellow{
 	dir = 9
@@ -22963,7 +22967,7 @@ aa
 aa
 aa
 aa
-aa
+Wt
 aa
 aa
 aa

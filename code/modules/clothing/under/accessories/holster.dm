@@ -93,7 +93,7 @@
 	name = "leather knife sheath"
 	desc = "A synthetic leather knife sheath which you can strap on your leg."
 	icon_state = "sheath_leather"
-	can_holster = list(/obj/item/weapon/material/knife)
+	can_holster = list(/obj/item/weapon/material/knife, /obj/item/weapon/melee/energy/knife)
 	sound_in = 'sound/effects/holster/sheathin.ogg'
 	sound_out = 'sound/effects/holster/sheathout.ogg'
 	body_location = LEGS
