@@ -8,6 +8,8 @@ DM version compatibility macros & procs
 #define islist(A) istype(A, /list)
 #define ismovable(A) istype(A, /atom/movable)
 
+#define arctan(X) arcsin((X) / sqrt(1 + (X) * (X)))
+
 #define copytext_char(ARGS...) copytext(ARGS)
 #define findlasttext_char(ARGS...) findlasttext(ARGS)
 #define findlasttextEx_char(ARGS...) findlasttextEx(ARGS)
