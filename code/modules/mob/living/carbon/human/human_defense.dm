@@ -168,7 +168,7 @@ meteor_act
 	var/weapon_mention
 	if(I.attack_message_name())
 		weapon_mention = " with [I.attack_message_name()]"
-	visible_message(SPAN_DANGER("[src] has been [I.attack_verb.len? pick(I.attack_verb) : "attacked"] in the [affecting.name][weapon_mention] by [user]!"))
+	visible_message(SPAN_DANGER("\The [src] has been [I.attack_verb.len? pick(I.attack_verb) : "attacked"] in the [affecting.name][weapon_mention] by \the [user]!"))
 	return standard_weapon_hit_effects(I, user, effective_force, hit_zone)
 
 /mob/living/carbon/human/standard_weapon_hit_effects(obj/item/I, mob/living/user, var/effective_force, var/hit_zone)

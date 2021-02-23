@@ -55,16 +55,15 @@
 	. = ..()
 	if(.)
 		var/mob/living/simple_animal/hostile/giant_spider/GS = user
-		if(istype(GS) && target)
-			if(ishuman(target))
-				var/mob/living/carbon/human/H = target
-				var/obj/item/clothing/suit/space/S = H.get_covering_equipped_item_by_zone(BP_CHEST)
-				if(istype(S) && !length(S.breaches))
-					return
-				if(target.reagents)
-					target.reagents.add_reagent(GS.poison_type, rand(0.5 * GS.poison_per_bite, GS.poison_per_bite))
+		if(istype(GS) && target && ishuman(target))
+			var/mob/living/carbon/human/H = target
+			var/obj/item/clothing/suit/space/S = H.get_covering_equipped_item_by_zone(BP_CHEST)
+			if(istype(S) && !length(S.breaches))
+				return
+			if(target.reagents)
+				target.reagents.add_reagent(GS.poison_type, rand(0.5 * GS.poison_per_bite, GS.poison_per_bite))
 				if(prob(GS.poison_per_bite))
-					to_chat(H, "<span class='warning'>You feel a tiny prick.</span>")
+					to_chat(H, SPAN_WARNING("You feel a tiny prick."))
 
 
 /mob/living/simple_animal/hostile/giant_spider/can_do_maneuver(var/decl/maneuver/maneuver, var/silent = FALSE)

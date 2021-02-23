@@ -105,7 +105,7 @@
 	var/weapon_mention
 	if(I.attack_message_name())
 		weapon_mention = " with [I.attack_message_name()]"
-	visible_message(SPAN_DANGER("[src] has been [I.attack_verb.len? pick(I.attack_verb) : "attacked"][weapon_mention] by [user]!"))
+	visible_message(SPAN_DANGER("\The [src] has been [I.attack_verb.len? pick(I.attack_verb) : "attacked"][weapon_mention] by \the [user]!"))
 
 	. = standard_weapon_hit_effects(I, user, effective_force, hit_zone)
 
