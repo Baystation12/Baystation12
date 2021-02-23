@@ -28,6 +28,33 @@ DM version compatibility macros & procs
 #define regex_find_char(RE, ARGS...) RE.Find(ARGS)
 #define regex_find(RE, ARGS...) RE.Find(ARGS)
 
+/proc/hex2num(hex)
+	. = 0
+	var/place = 1
+	for (var/i in length(hex) to 1 step -1)
+		var/num = text2ascii(hex, i)
+		switch (num)
+			if (45) return . * -1 // -
+			if (48 to 57) num -= 48 // 0-9
+			if (65 to 70) num -= 55 // A-F
+			if (97 to 102) num -= 87 // a-f
+			else
+				crash_with("invalid hex '[hex]'")
+				return 0
+		. += num * place
+		place *= 16
+
+/proc/num2hex(num)
+	if (!isfinite(num) || !num)
+		return "0"
+	num = round(abs(num))
+	while (num)
+		switch (num & 0xf)
+			if (0) . = "0[.]"
+			if (1 to 9) . = "[num & 0xf][.]"
+			else . = "[ascii2text((num & 0xf) + 87)][.]"
+		num >>= 4
+
 
 #else //513+
 
@@ -37,6 +64,8 @@ DM version compatibility macros & procs
 #define regex_find_char(RE, ARGS...) RE.Find_char(ARGS)
 #define regex_find(RE, ARGS...) RE.Find(ARGS)
 
+#define hex2num(hex) (text2num(hex, 16) || 0)
+#define num2hex(num) num2text(num, 1, 16)
 
 
 #endif
