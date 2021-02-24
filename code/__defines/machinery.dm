@@ -120,6 +120,11 @@ var/list/restricted_camera_networks = list(NETWORK_ERT, NETWORK_MERCENARY, NETWO
 #define SUPERMATTER_DATA_PRESSURE    "Pressure"
 #define SUPERMATTER_DATA_EPR         "Chamber EPR"
 
+// Emitter states
+#define EMITTER_LOOSE 0 // the goose is loose
+#define EMITTER_WRENCHED 1
+#define EMITTER_WELDED 2
+
 // Scrubber modes
 #define SCRUBBER_SIPHON   "siphon"
 #define SCRUBBER_SCRUB    "scrub"
