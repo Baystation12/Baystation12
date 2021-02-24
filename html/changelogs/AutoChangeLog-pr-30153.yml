@@ -1,4 +1,0 @@
-author: "SealCure"
-delete-after: True
-changes: 
-  - rscadd: "Adds two new implants: a medHUD and a secHUD, toggleable with an action button. Both can be implanted into normal and prosthetic heads."

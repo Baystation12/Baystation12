@@ -1,8 +1,0 @@
-author: "Ilysen"
-delete-after: True
-changes: 
-  - spellcheck: "Adjusted descriptions for several Chorus-related things."
-  - rscadd: "Added death sounds for Chorus structures."
-  - rscadd: "Added different death messages for each Chorus structure."
-  - tweak: "Chorus structures can be examined to show their rough health."
-  - bugfix: "Chorus spinal columns now work correctly."

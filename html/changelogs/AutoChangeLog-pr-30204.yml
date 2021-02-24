@@ -1,4 +1,0 @@
-author: "Ilysen"
-delete-after: True
-changes: 
-  - tweak: "The Background menu in character selection no longer puts the user through a popup to select an option. Instead, clicking the name of an entry expands a list that lets you select from all entries in realtime, which should hopefully make it a lot smoother to use and open the door for new ones to be added again."
