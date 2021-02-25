@@ -1,5 +1,0 @@
-author: "Ilysen"
-delete-after: True
-changes: 
-  - tweak: "The ChemMaster has received a visual revamp. It's no longer stuck with the ancient basic HTML browser, and has received a NanoUI facelift."
-  - tweak: "You can now cancel pill or bottle creation in the ChemMaster, instead of being forced to finish once you started."

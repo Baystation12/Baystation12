@@ -1,6 +1,0 @@
-author: "AzlanonPC"
-delete-after: True
-changes: 
-  - imageadd: "Sprites for robot components have been completely replaced."
-  - imageadd: "Different exosuit plating components now have unique sprites."
-  - tweak: "Robot components now have descriptions."
