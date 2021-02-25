@@ -13,6 +13,7 @@
 	power_usage = 0
 	var/number = 0
 	var/last_tick //used to delay the powercheck
+	intercom_handling = TRUE
 
 /obj/item/device/radio/intercom/get_storage_cost()
 	return ITEM_SIZE_NO_CONTAINER

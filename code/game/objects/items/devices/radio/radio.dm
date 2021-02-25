@@ -37,6 +37,8 @@
 
 	var/last_radio_sound = -INFINITY
 
+	var/intercom_handling = FALSE
+
 /obj/item/device/radio/hailing
 	name = "shortwave radio (Hailing)"
 	frequency = HAIL_FREQ
@@ -103,7 +105,7 @@
 
 	return ui_interact(user)
 
-/obj/item/device/radio/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/item/device/radio/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, datum/nanoui/master_ui = null, datum/topic_state/state = GLOB.default_state)
 	var/data[0]
 
 	data["power"] = on
@@ -129,7 +131,7 @@
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
-		ui = new(user, src, ui_key, "radio_basic.tmpl", "[name]", 400, 430)
+		ui = new(user, src, ui_key, "radio_basic.tmpl", "[name]", 400, 430, state = state)
 		ui.set_initial_data(data)
 		ui.open()
 
@@ -897,6 +899,7 @@
 /obj/item/device/radio/exosuit
 	name = "exosuit radio"
 	cell = null
+	intercom_handling = TRUE
 
 /obj/item/device/radio/exosuit/get_cell()
 	. = ..()
@@ -926,5 +929,5 @@
 		if(istype(exosuit) && exosuit.head && exosuit.head.radio && exosuit.head.radio.is_functional())
 			return ..()
 
-/obj/item/device/radio/exosuit/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.mech_state)
+/obj/item/device/radio/exosuit/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, datum/nanoui/master_ui = null, var/datum/topic_state/state = GLOB.mech_state)
 	. = ..()
