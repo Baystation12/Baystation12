@@ -62,6 +62,14 @@
 	if(. && !CanFluidPass())
 		fluid_update()
 
+/obj/structure/attackby(obj/item/O, mob/user)
+	if(user.a_intent != I_HELP)
+		//Bit dirty, but the entire attackby chain seems kinda wrong to begin with
+		//Things should probably be parent first and return true if something handled it already, not child first
+		src.add_fingerprint(user)
+		attack_generic(user, O.force, pick(O.attack_verb))
+		return
+	. = ..()
 
 /obj/structure/attack_hand(mob/user)
 	..()

@@ -40,8 +40,7 @@
 	emote_hear = list("squawks","bawks")
 	emote_see = list("flutters its wings")
 
-	melee_damage_lower = 5 //pick
-	melee_damage_upper = 10 //peck
+	natural_weapon = /obj/item/natural_weapon/beak
 	speak_chance = 1//1% (1 in 100) chance every tick; So about once per 150 seconds, assuming an average tick is 1.5s
 	turns_per_move = 5
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/cracker/
@@ -496,18 +495,7 @@
 				return
 
 			//Time for the hurt to begin!
-			var/damage = rand(melee_damage_lower, melee_damage_upper)
-
-			if(ishuman(parrot_interest))
-				var/mob/living/carbon/human/H = parrot_interest
-				var/obj/item/organ/external/affecting = H.get_organ(ran_zone(pick(parrot_dam_zone)))
-
-				H.apply_damage(damage, BRUTE, affecting, DAM_SHARP|DAM_EDGE)
-				visible_emote(pick("pecks [H]'s [affecting].", "cuts [H]'s [affecting] with its talons."))
-
-			else
-				L.adjustBruteLoss(damage)
-				visible_emote(pick("pecks at [L].", "claws [L]."))
+			L.attackby(get_natural_weapon(), src)
 			return
 
 		//Otherwise, fly towards the mob!

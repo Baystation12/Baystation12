@@ -67,7 +67,7 @@
 	flash_vulnerability = 0 //eyeless
 	turns_per_move = 5
 	wander = 1
-	attack_sound = 'sound/weapons/bite.ogg'
+	natural_weapon = /obj/item/natural_weapon/bite/weak
 	faction = "meat"
 	min_gas = null
 	minbodytemp = 0
@@ -86,11 +86,8 @@
 	speed = -2
 	maxHealth = 20
 	health = 20
-	melee_damage_lower = 5
-	melee_damage_upper = 10
-	melee_damage_flags = DAM_SHARP
+	natural_weapon = /obj/item/natural_weapon/bite/weak
 	emote_see = list("gnashes", "thrashes about", "chomps the air")
-	attacktext = "gnawed"
 	mob_size = MOB_SMALL
 	meat_amount = 2
 	can_escape = FALSE
@@ -105,13 +102,15 @@
 	speed = 2
 	maxHealth = 50
 	health = 50
-	melee_damage_lower = 10
-	melee_damage_upper = 15
-	attacktext = "thwacked"
+	natural_weapon = /obj/item/natural_weapon/meatball
 	emote_hear = list("cackles","gibbers")
 	emote_see = list("gnashes", "writhes", "gurgles","clicks its teeth")
 	meat_amount = 2
 	can_escape = FALSE
+
+/obj/item/natural_weapon/meatball
+	force = 12
+	attack_verb = list("thwacked")
 
 /mob/living/simple_animal/hostile/meatstation/wormscientist
 	name = "infested scientist"
@@ -123,12 +122,14 @@
 	speed = 7
 	maxHealth = 90
 	health = 90
-	melee_damage_lower = 15
-	melee_damage_upper = 20
+	natural_weapon = /obj/item/natural_weapon/wormscience
 	emote_hear = list("gurgles","moans")
 	emote_see = list("wobbles", "writhes", "twitches","shudders", "trembles")
-	attacktext = "whacked"
 	meat_amount = 3
+
+/obj/item/natural_weapon/wormscience
+	force = 15
+	attack_verb = list("whacked")
 
 /mob/living/simple_animal/hostile/meatstation/wormguard
 	name = "infested guard"
@@ -140,16 +141,17 @@
 	speed = 7
 	maxHealth = 60
 	health = 60
-	melee_damage_lower = 10
-	melee_damage_upper = 20
+	natural_weapon = /obj/item/natural_weapon/wormguard
 	emote_hear = list("gurgles","moans")
 	emote_see = list("wobbles", "writhes", "twitches","shudders", "trembles")
-	attacktext = "slammed"
 	meat_amount = 3
 	projectilesound = 'sound/weapons/laser.ogg'
 	ranged = 1
 	projectiletype = /obj/item/projectile/beam/meatstation
 
+/obj/item/natural_weapon/wormguard
+	force = 17
+	attack_verb = list("slammed")
 
 /mob/living/simple_animal/hostile/meatstation/meatmound
 	name = "meat horror"
@@ -162,14 +164,16 @@
 	speed = 10
 	maxHealth = 160
 	health = 160
-	melee_damage_lower = 20
-	melee_damage_upper = 30
-	melee_damage_flags = DAM_SHARP
+	natural_weapon = /obj/item/natural_weapon/meatmound
 	emote_hear = list("roars","moans","growls")
 	emote_see = list("gnashes", "undulates", "gurgles","chomps")
-	attacktext = "chomped"
 	meat_amount = 4
 	mob_size = MOB_LARGE
+
+/obj/item/natural_weapon/meatmound
+	force = 25
+	sharp = TRUE
+	attack_verb = list("chomped")
 
 //projectile
 

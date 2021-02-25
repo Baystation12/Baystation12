@@ -60,19 +60,6 @@
 		if(!shattered)
 			shatter()
 
-/obj/item/weapon/storage/mirror/attack_generic(var/mob/user, var/damage)
-	attack_animation(user)
-	if(shattered)
-		playsound(src.loc, 'sound/effects/hit_on_shattered_glass.ogg', 70, 1)
-		return 0
-
-	if(damage)
-		user.visible_message("<span class='danger'>[user] smashes [src]!</span>")
-		shatter()
-	else
-		user.visible_message("<span class='danger'>[user] hits [src] and bounces off!</span>")
-	return 1
-
 /obj/item/weapon/storage/mirror/Destroy()
 	clear_ui_users(ui_users)
 	. = ..()

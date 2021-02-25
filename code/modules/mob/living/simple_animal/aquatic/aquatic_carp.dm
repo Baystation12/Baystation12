@@ -7,10 +7,6 @@
 	faction = "fishes"
 	maxHealth = 20
 	health = 20
-	harm_intent_damage = 5
-	melee_damage_lower = 12
-	melee_damage_upper = 12
-	melee_damage_flags = DAM_SHARP
 
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/fish/carp
 	meat_amount = 3

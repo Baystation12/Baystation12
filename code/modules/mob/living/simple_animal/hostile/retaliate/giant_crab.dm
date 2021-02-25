@@ -16,14 +16,12 @@
 	meat_amount = 12
 	can_escape = TRUE //snip snip
 	break_stuff_probability = 15
-	attacktext = "crushed"
 	faction = "crabs"
 	pry_time = 2 SECONDS
 
 	health = 350
 	maxHealth = 350
-	melee_damage_lower = 15
-	melee_damage_upper = 18
+	natural_weapon = /obj/item/natural_weapon/pincers/giant
 	return_damage_min = 2
 	return_damage_max = 5
 	harm_intent_damage = 1
@@ -38,6 +36,10 @@
 	var/grab_damage = 6 //brute damage before reductions, per crab's life tick
 	var/list/grab_desc = list("thrashes", "squeezes", "crushes")
 	var/continue_grab_prob = 35 //probability that a successful grab will be extended by one life tick
+
+/obj/item/natural_weapon/pincers/giant
+	force = 15
+	attack_verb = list("snipped", "pinched", "crushed")
 
 /mob/living/simple_animal/hostile/retaliate/giant_crab/Initialize() //embiggen
 	. = ..()

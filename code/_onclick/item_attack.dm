@@ -42,7 +42,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		return 0
 	if(can_operate(src,user) && I.do_surgery(src,user)) //Surgery
 		return 1
-	return I.attack(src, user, user.zone_sel.selecting)
+	return I.attack(src, user, user.zone_sel ? user.zone_sel.selecting : ran_zone())
 
 /mob/living/carbon/human/attackby(obj/item/I, mob/user)
 	if(user == src && zone_sel.selecting == BP_MOUTH && can_devour(I, silent = TRUE))

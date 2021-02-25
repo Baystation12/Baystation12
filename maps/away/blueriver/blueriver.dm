@@ -46,14 +46,18 @@
 	can_escape = TRUE
 
 	harm_intent_damage = 8
-	melee_damage_lower = 30
-	melee_damage_upper = 35
-	attacktext = "eviscerated"
-	attack_sound = 'sound/weapons/slash.ogg'
+	natural_weapon = /obj/item/natural_weapon/defender_blades
 	var/attack_mode = FALSE
 
 	var/transformation_delay_min = 4
 	var/transformation_delay_max = 8
+
+/obj/item/natural_weapon/defender_blades
+	name = "blades"
+	attack_verb = list("eviscerated")
+	force = 30
+	edge = TRUE
+	hitsound = 'sound/weapons/slash.ogg'
 
 /mob/living/simple_animal/hostile/hive_alien/defender/proc/mode_movement() //Slightly broken, but it's alien and unpredictable so w/e
 	set waitfor = 0

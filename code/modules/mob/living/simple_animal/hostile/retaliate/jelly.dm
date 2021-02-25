@@ -9,13 +9,16 @@
 	maxHealth = 75
 	health = 75
 	speed = 1
-	melee_damage_lower = 3
-	melee_damage_upper = 12
-	attacktext = "stung"
-	damtype = BURN
+	natural_weapon = /obj/item/natural_weapon/tentacles
 	speak_chance = 1
 	emote_see = list("wobbles slightly","oozes something out of tentacles' ends")
 	var/gets_random_color = TRUE
+
+/obj/item/natural_weapon/tentacles
+	name = "tentacles"
+	attack_verb = list("stung","slapped")
+	force = 10
+	damtype = BURN
 
 /mob/living/simple_animal/hostile/retaliate/jelly/Initialize()
 	. = ..()
@@ -33,8 +36,6 @@
 	desc = "A gigantic jellyfish-like creature. Its bell wobbles about almost as if it's ready to burst."
 	maxHealth = 300
 	health = 300
-	melee_damage_lower = 18
-	melee_damage_upper = 30
 	gets_random_color = FALSE
 	can_escape = TRUE
 
@@ -47,6 +48,9 @@
 	var/matrix/M = new
 	M.Scale(jelly_scale)
 	transform = M
+	var/obj/item/W = get_natural_weapon()
+	if(W)
+		W.force *= jelly_scale
 	if(!megajelly_color)
 		megajelly_color = color_rotation(round(rand(0,360),20))
 	color = megajelly_color
@@ -73,8 +77,6 @@
 	desc = "A huge jellyfish-like creature."
 	maxHealth = 150
 	health = 150
-	melee_damage_lower = 9
-	melee_damage_upper = 15
 	can_escape = TRUE
 	jelly_scale = 1.5
 	split_type = /mob/living/simple_animal/hostile/retaliate/jelly/mega/quarter
@@ -84,8 +86,6 @@
 	desc = "A jellyfish-like creature."
 	health = 75
 	maxHealth = 75
-	melee_damage_lower = 4.5
-	melee_damage_upper = 7.5
 	jelly_scale = 0.75
 	can_escape = FALSE
 	split_type = /mob/living/simple_animal/hostile/retaliate/jelly/mega/fourth
@@ -95,8 +95,6 @@
 	desc = "A tiny jellyfish-like creature."
 	health = 40
 	maxHealth = 40
-	melee_damage_lower = 3
-	melee_damage_upper = 4
 	jelly_scale = 0.375
 	split_type = /mob/living/simple_animal/hostile/retaliate/jelly/mega/eighth
 
@@ -105,7 +103,5 @@
 	desc = "An absolutely tiny jellyfish-like creature."
 	health = 20
 	maxHealth = 20
-	melee_damage_lower = 1.5
-	melee_damage_upper = 2
 	jelly_scale = 0.1875
 	split_type = null

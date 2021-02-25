@@ -49,10 +49,6 @@
 				return
 			T.ChangeTurf(type)
 
-/turf/unsimulated/wall/supermatter/attack_generic(mob/user as mob)
-	if(istype(user))
-		return attack_hand(user)
-
 /turf/unsimulated/wall/supermatter/attack_robot(mob/user as mob)
 	if(Adjacent(user))
 		return attack_hand(user)

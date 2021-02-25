@@ -32,10 +32,7 @@ var/global/list/protected_objects = list(/obj/machinery,
 	health = 100
 
 	harm_intent_damage = 5
-	melee_damage_lower = 8
-	melee_damage_upper = 12
-	attacktext = "attacked"
-	attack_sound = 'sound/weapons/bite.ogg'
+	natural_weapon = /obj/item/natural_weapon/bite
 
 	min_gas = null
 	max_gas = null
@@ -76,18 +73,17 @@ var/global/list/protected_objects = list(/obj/machinery,
 		appearance = O
 		icon_living = icon_state
 
+		var/obj/item/W = get_natural_weapon()
 		if(istype(O, /obj/structure))
 			health = (anchored * 50) + 50
 			destroy_objects = 1
 			if(O.density && O.anchored)
 				knockdown_people = 1
-				melee_damage_lower *= 2
-				melee_damage_upper *= 2
+				W.force = 2 * initial(W.force)
 		else if(istype(O, /obj/item))
 			var/obj/item/I = O
 			health = 15 * I.w_class
-			melee_damage_lower = 2 + I.force
-			melee_damage_upper = 2 + I.force
+			W.force = 2 + initial(I.force)
 			move_to_delay = 2 * I.w_class
 
 		maxHealth = health
