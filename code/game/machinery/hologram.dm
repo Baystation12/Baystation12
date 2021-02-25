@@ -51,6 +51,8 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 	var/obj/machinery/hologram/holopad/targetpad
 	var/last_message
 
+	var/list/recent_calls = list()
+
 	var/holopadType = HOLOPAD_SHORT_RANGE //Whether the holopad is short-range or long-range.
 	var/base_icon = "holopad-B"
 
@@ -59,6 +61,16 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 /obj/machinery/hologram/holopad/New()
 	..()
 	desc = "It's a floor-mounted device for projecting holographic images. Its ID is '[loc.loc]'"
+
+/obj/machinery/hologram/holopad/examine(mob/user)
+	. = ..()
+	if (incoming_connection && sourcepad)
+		to_chat(user, SPAN_NOTICE("There is currently an incoming call from [get_area(sourcepad)]!"))
+	var/callstring = "Recent incoming calls:"
+	for (var/id in recent_calls)
+		callstring += "\n[id]"
+	callstring = SPAN_NOTICE(callstring)
+	to_chat(user, callstring)
 
 /obj/machinery/hologram/holopad/interface_interact(var/mob/living/carbon/human/user) //Carn: Hologram requests.
 	if(!CanInteract(user, DefaultTopicState()))
@@ -148,6 +160,7 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 	targetpad.icon_state = "[targetpad.base_icon]1"
 	targetpad.audible_message("<b>\The [src]</b> announces, \"Incoming communications request from [targetpad.sourcepad.loc.loc].\"")
 	to_chat(user, "<span class='notice'>Trying to establish a connection to the holopad in [targetpad.loc.loc]... Please await confirmation from recipient.</span>")
+	targetpad.addrecentcall(get_area(src))
 
 
 /obj/machinery/hologram/holopad/proc/take_call(mob/living/carbon/user)
@@ -165,6 +178,11 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 	caller_id.reset_view() //Send the caller back to his body
 	clear_holo(0, caller_id) // destroy the hologram
 	caller_id = null
+
+/obj/machinery/hologram/holopad/proc/addrecentcall(id)
+	recent_calls += id
+	if (recent_calls.len > 5)
+		recent_calls -= recent_calls[1]
 
 /obj/machinery/hologram/holopad/check_eye(mob/user)
 	return 0
