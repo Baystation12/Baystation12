@@ -1,0 +1,6 @@
+author: "Ilysen"
+delete-after: True
+changes: 
+  - tweak: "Emitters can be rotated with alt-click if they're unsecured from the floor."
+  - tweak: "Examining an emitter with Trained engines skill or higher will show you if it's emagged."
+  - spellcheck: "Emitters have received a grammar and message pass."
