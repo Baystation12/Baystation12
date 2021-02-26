@@ -1,0 +1,4 @@
+author: "Spookerton"
+delete-after: True
+changes: 
+  - admin: "Build Mode Basic is gone, advanced was renamed to \"build mode\" and became the default mode."
