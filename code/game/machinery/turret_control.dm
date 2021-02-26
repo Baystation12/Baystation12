@@ -169,7 +169,7 @@
 			check_anomalies = value
 
 		if(!isnull(log_action))
-			log_and_message_admins("has [log_action]", 1)
+			log_and_message_admins("has [log_action]", usr, loc)
 
 		updateTurrets()
 		return 1
