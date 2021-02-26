@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - admin: "Fixes the cremation attack log reversing the order of attacker/victim and claiming the crematee was the one creating the cremator."
