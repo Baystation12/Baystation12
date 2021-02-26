@@ -1,4 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - admin: "Turret admin logs now display the user instead of 'INVALID' and have working MOB and LOC links."
