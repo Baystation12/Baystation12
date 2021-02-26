@@ -1,0 +1,4 @@
+author: "Spookerton"
+delete-after: True
+changes: 
+  - bugfix: "Yeosa'Unathi can spawn in the same locations as Sinta'Unathi."
