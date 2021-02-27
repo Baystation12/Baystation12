@@ -446,6 +446,7 @@
 	var/mob/living/carbon/human/M = user
 
 	mouthshoot = 1
+	admin_attacker_log(user, "is attempting to suicide with \a [src]")
 	M.visible_message("<span class='danger'>[user] sticks their gun in their mouth, ready to pull the trigger...</span>")
 	if(!do_after(user, 40, do_flags = DO_DEFAULT & ~DO_SHOW_PROGRESS))
 		M.visible_message("<span class='notice'>[user] decided life was worth living</span>")
@@ -466,7 +467,7 @@
 
 		in_chamber.on_hit(M)
 		if (in_chamber.damage_type != PAIN)
-			log_and_message_admins("[key_name(user)] commited suicide using \a [src]")
+			admin_attacker_log(user, "commited suicide using \a [src]")
 			user.apply_damage(in_chamber.damage*2.5, in_chamber.damage_type, BP_HEAD, in_chamber.damage_flags(), used_weapon = "Point blank shot in the mouth with \a [in_chamber]")
 			user.death()
 		else
