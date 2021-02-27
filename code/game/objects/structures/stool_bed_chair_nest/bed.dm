@@ -215,7 +215,7 @@
 /obj/structure/bed/roller/attackby(obj/item/I, mob/user)
 	if(isWrench(I) || istype(I, /obj/item/stack) || isWirecutter(I))
 		return 1
-	if(iv_stand && !beaker && istype(I, /obj/item/weapon/reagent_containers))
+	if(iv_stand && !beaker && istype(I, /obj/item/weapon/reagent_containers/ivbag))
 		if(!user.unEquip(I, src))
 			return
 		to_chat(user, "You attach \the [I] to \the [src].")
