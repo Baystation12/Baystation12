@@ -19,6 +19,7 @@
 
 /datum/build_mode/build/Configurate()
 	build_type = select_subpath(build_type || /obj/item/latexballon)
+	to_chat(user, "Selected Type [build_type]")
 
 /datum/build_mode/build/OnClick(atom/target, list/parameters)
 	if (!target)
@@ -32,7 +33,6 @@
 	if (parameters["right"])
 		if (isturf(target))
 			return
-		to_chat(user, "Deleted [target] at (<a href='?src=\ref[src];jump=\ref[location]'>[location.x],[location.y],[location.z]</a>)")
 		qdel(target)
 	else if (parameters["left"])
 		if (!build_type)
@@ -42,11 +42,9 @@
 			return
 		else if (ispath(build_type, /turf))
 			location.ChangeTurf(build_type)
-			to_chat(user, "Updated [location] at (<a href='?src=\ref[src];jump=\ref[location]'>[location.x],[location.y],[location.z]</a>)")
 		else
 			var/atom/instance = new build_type (location)
 			instance.set_dir(host.dir)
-			to_chat(user, "Created [instance] at (<a href='?src=\ref[src];jump=\ref[location]'>[location.x],[location.y],[location.z]</a>)")
 
 /datum/build_mode/build/CanUseTopic(mob/user)
 	if (!is_admin(user))
