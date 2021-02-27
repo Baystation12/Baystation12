@@ -93,11 +93,14 @@
 			var/area/A = get_area(src)
 			if (active)
 				active = FALSE
-				user.visible_message(
-					SPAN_NOTICE("\The [user] turns off \the [src]."),
-					SPAN_NOTICE("You power down \the [src]."),
-					SPAN_ITALIC("You hear a switch being flicked.")
-				)
+				if (user?.Adjacent(src))
+					user.visible_message(
+						SPAN_NOTICE("\The [user] turns off \the [src]."),
+						SPAN_NOTICE("You power down \the [src]."),
+						SPAN_ITALIC("You hear a switch being flicked.")
+					)
+				else
+					visible_message(SPAN_NOTICE("\The [src] turns off."))
 				playsound(src, "switch", 50)
 				log_and_message_admins("turned off \the [src] in [A.name]", user, src)
 				investigate_log("turned <font color='red'>off</font> by [key_name_admin(user || usr)] in [A.name]","singulo")
@@ -105,13 +108,16 @@
 				active = TRUE
 				if (user)
 					operator_skill = user.get_skill_value(core_skill)
-				update_efficiency()
-				user.visible_message(
-					SPAN_NOTICE("\The [user] turns on \the [src]."),
-					SPAN_NOTICE("You configure \the [src] and turn it on."), // Mention configuration to allude to operator skill playing into efficiency
-					SPAN_ITALIC("You hear a switch being flicked.")
-				)
+				if (user?.Adjacent(src))
+					user.visible_message(
+						SPAN_NOTICE("\The [user] turns on \the [src]."),
+						SPAN_NOTICE("You configure \the [src] and turn it on."), // Mention configuration to allude to operator skill playing into efficiency
+						SPAN_ITALIC("You hear a switch being flicked.")
+					)
+				else
+					visible_message(SPAN_NOTICE("\The [src] turns on."))
 				playsound(src, "switch", 50)
+				update_efficiency()
 				shot_number = 0
 				fire_delay = get_initial_fire_delay()
 				log_and_message_admins("turned on \the [src] in [A.name]", user, src)
@@ -147,7 +153,7 @@
 			if (!powered)
 				powered = TRUE
 				update_icon()
-				visible_message(SPAN_WARNING("\The [src] turns on!"))
+				visible_message(SPAN_WARNING("\The [src] powers up!"))
 				investigate_log("regained power and turned <font color='green'>on</font>","singulo")
 		else
 			if (powered)
