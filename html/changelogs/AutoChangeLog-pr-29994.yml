@@ -1,5 +1,0 @@
-author: "RustingWithYou"
-delete-after: True
-changes: 
-  - rscadd: "The OFD can now fire at away sites again."
-  - rscadd: "The OFD now has strength and range settings on its console again."
