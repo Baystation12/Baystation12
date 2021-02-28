@@ -1,5 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - admin: "Supply beacons now generate attack logs when activated"
-  - admin: "Suicide by gun in the mouth now trigger attack logs instead of admin logs, including a new log when starting the suicide process"
