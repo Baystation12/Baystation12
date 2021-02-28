@@ -847,7 +847,7 @@
 	listening = 0
 	canhear_range = 0
 	anchored = 1
-	simulated = 0
+	simulated = FALSE
 	power_usage = 0
 	channels=list("Engineering" = 1, "Security" = 1, "Medical" = 1, "Command" = 1, "Common" = 1, "Science" = 1, "Supply" = 1, "Service" = 1, "Exploration" = 1)
 	cell = null

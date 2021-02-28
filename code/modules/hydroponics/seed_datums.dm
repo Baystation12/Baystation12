@@ -202,7 +202,7 @@
 	seed_name = "killer tomato"
 	display_name = "killer tomato plant"
 	mutants = null
-	can_self_harvest = 1
+	can_self_harvest = TRUE
 	has_mob_product = /mob/living/simple_animal/tomato
 
 /datum/seed/tomato/killer/New()
@@ -402,7 +402,7 @@
 	seed_name = "walking mushroom"
 	display_name = "walking mushrooms"
 	mutants = null
-	can_self_harvest = 1
+	can_self_harvest = TRUE
 	has_mob_product = /mob/living/simple_animal/mushroom
 
 /datum/seed/mushroom/plump/walking/New()
@@ -1116,7 +1116,7 @@
 	seed_name = "diona"
 	seed_noun = SEED_NOUN_NODES
 	display_name = "replicant pods"
-	can_self_harvest = 1
+	can_self_harvest = TRUE
 	has_mob_product = /mob/living/carbon/alien/diona
 
 /datum/seed/diona/New()

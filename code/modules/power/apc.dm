@@ -113,7 +113,7 @@
 	var/lastused_total = 0
 	var/main_status = 0     // UI var for whether we are getting external power. 0 = no external power at all, 1 = some, but not enough, 2 = getting enough.
 	var/mob/living/silicon/ai/hacker = null // Malfunction var. If set AI hacked the APC and has full control.
-	var/wiresexposed = 0 // whether you can access the wires for hacking or not.
+	var/wiresexposed = FALSE // whether you can access the wires for hacking or not.
 	powernet = 0		 // set so that APCs aren't found as powernet nodes //Hackish, Horrible, was like this before I changed it :(
 	var/debug= 0         // Legacy debug toggle, left in for admin use.
 	var/autoflag= 0		 // 0 = off, 1= eqp and lights off, 2 = eqp off, 3 = all on.
@@ -588,7 +588,7 @@
 			to_chat(user, SPAN_WARNING("You must first open the cover."))
 			return TRUE
 		if(emagged)
-			emagged = 0
+			emagged = FALSE
 			if(opened==2)
 				opened = 1
 			user.visible_message(\
@@ -670,7 +670,7 @@
 			flick("apc-spark", src)
 			if (do_after(user,6,src))
 				if(prob(50))
-					emagged = 1
+					emagged = TRUE
 					req_access.Cut()
 					locked = 0
 					to_chat(user, "<span class='notice'>You emag the APC interface.</span>")
@@ -693,12 +693,12 @@
 
 			var/allcut = wires.IsAllCut()
 
-			if(beenhit >= pick(3, 4) && wiresexposed != 1)
-				wiresexposed = 1
+			if(beenhit >= pick(3, 4) && !wiresexposed)
+				wiresexposed = TRUE
 				src.update_icon()
 				src.visible_message("<span class='warning'>\The The [src]'s cover flies open, exposing the wires!</span>")
 
-			else if(wiresexposed == 1 && allcut == 0)
+			else if(wiresexposed && allcut == 0)
 				wires.CutAll()
 				src.update_icon()
 				src.visible_message("<span class='warning'>\The [src]'s wires are shredded!</span>")

@@ -85,7 +85,7 @@ Class Procs:
 	var/stat = 0
 	var/reason_broken = 0
 	var/stat_immune = NOSCREEN | NOINPUT // The machine will never set stat to these flags.
-	var/emagged = 0
+	var/emagged = FALSE
 	var/malf_upgraded = 0
 	var/datum/wires/wires //wire datum, if any. If you place a type path, it will be autoinitialized.
 	var/use_power = POWER_USE_IDLE

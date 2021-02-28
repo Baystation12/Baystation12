@@ -4,7 +4,7 @@
 	icon_state = "x2"
 	anchored = 1.0
 	unacidable = TRUE
-	simulated = 0
+	simulated = FALSE
 	invisibility = 101
 	var/delete_me = 0
 

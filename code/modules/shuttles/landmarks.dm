@@ -5,7 +5,7 @@
 	icon_state = "energynet"
 	anchored = 1
 	unacidable = TRUE
-	simulated = 0
+	simulated = FALSE
 	invisibility = 101
 
 	var/landmark_tag

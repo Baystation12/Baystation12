@@ -272,7 +272,7 @@
 		explode() //if they're foolish enough to emag while it's running
 
 	if (!emagged)
-		emagged = 1
+		emagged = TRUE
 		return 1
 
 /obj/machinery/power/port_gen/pacman/components_are_accessible(path)

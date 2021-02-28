@@ -306,7 +306,7 @@
 
 /obj/machinery/smartfridge/secure/emag_act(var/remaining_charges, var/mob/user)
 	if(!emagged)
-		emagged = 1
+		emagged = TRUE
 		locked = -1
 		req_access.Cut()
 		to_chat(user, "You short out the product lock on [src].")

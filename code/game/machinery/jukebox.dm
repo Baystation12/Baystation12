@@ -180,7 +180,7 @@ datum/track/proc/GetTrack()
 
 /obj/machinery/media/jukebox/emag_act(var/remaining_charges, var/mob/user)
 	if(!emagged)
-		emagged = 1
+		emagged = TRUE
 		StopPlaying()
 		visible_message("<span class='danger'>\The [src] makes a fizzling sound.</span>")
 		update_icon()

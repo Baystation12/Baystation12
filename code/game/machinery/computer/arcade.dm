@@ -188,7 +188,7 @@
 		gameover = 0
 		turtle = 0
 		if(emagged)
-			emagged = 0
+			emagged = FALSE
 			SetupGame()
 		. = TOPIC_REFRESH
 
@@ -204,7 +204,7 @@
 				new /obj/item/clothing/head/collectable/petehat(src.loc)
 				log_and_message_admins("has outbombed Cuban Pete and been awarded a bomb.")
 				SetupGame()
-				emagged = 0
+				emagged = FALSE
 			else
 				SSstatistics.add_field("arcade_win_normal")
 				src.prizevend()
@@ -264,7 +264,7 @@
 		enemy_mp = 20
 		gameover = 0
 		blocked = 0
-		emagged = 1
+		emagged = TRUE
 
 		enemy_name = "Cuban Pete"
 		name = "Outbomb Cuban Pete"

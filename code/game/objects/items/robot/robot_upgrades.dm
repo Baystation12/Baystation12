@@ -87,7 +87,7 @@
 		to_chat(usr, "This cyborg's light was already upgraded")
 		return 0
 	else
-		R.intenselight = 1
+		R.intenselight = TRUE
 		R.update_robot_light()
 		to_chat(R, "Lighting systems upgrade detected.")
 	return 1
@@ -123,7 +123,7 @@
 /obj/item/borg/upgrade/vtec/action(var/mob/living/silicon/robot/R)
 	if(..()) return FALSE
 
-	if(R.vtec == TRUE)
+	if(R.vtec)
 		return FALSE
 
 	R.speed--
@@ -209,8 +209,8 @@
 /obj/item/borg/upgrade/syndicate/action(var/mob/living/silicon/robot/R)
 	if(..()) return 0
 
-	if(R.emagged == 1)
+	if(R.emagged)
 		return 0
 
-	R.emagged = 1
+	R.emagged = TRUE
 	return 1

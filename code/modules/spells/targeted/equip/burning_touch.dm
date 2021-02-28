@@ -20,7 +20,7 @@
 	icon_state = "grabbed+1"
 	force = 10
 	damtype = BURN
-	simulated = 0
+	simulated = FALSE
 	var/burn_power = 0
 	var/burn_timer
 	var/obj/item/organ/external/hand/connected

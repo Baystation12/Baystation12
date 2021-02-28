@@ -140,7 +140,7 @@
 	playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
 	last_to_emag = user //emag again to change the owner
 	if (!emagged)
-		emagged = 1
+		emagged = TRUE
 		safety_disabled = 1
 		update_projections()
 		to_chat(user, "<span class='notice'>You vastly increase projector power and override the safety and security protocols.</span>")

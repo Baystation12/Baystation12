@@ -150,7 +150,7 @@
 	desc = "This is probably bad for your eyes."
 	icon = 'icons/effects/lens_flare.dmi'
 	icon_state = "party_strobe"
-	simulated = 0
+	simulated = FALSE
 	anchored = 1
 	pixel_x = -30
 	pixel_y = -4

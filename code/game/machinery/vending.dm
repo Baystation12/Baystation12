@@ -63,7 +63,6 @@
 	var/slogan_delay = 6000 //How long until we can pitch again?
 
 	// Things that can go wrong
-	emagged = 0 //Ignores if somebody doesn't have card access to that machine.
 	var/seconds_electrified = 0 //Shock customers like an airlock.
 	var/shoot_inventory = 0 //Fire items at customers! We're broken!
 	var/shooting_chance = 2 //The chance that items are being shot per tick
@@ -138,7 +137,7 @@
 
 /obj/machinery/vending/emag_act(var/remaining_charges, var/mob/user)
 	if (!emagged)
-		emagged = 1
+		emagged = TRUE
 		wires.CutWireIndex(VENDING_WIRE_CONTRABAND, FALSE)
 		req_access.Cut()
 		SSnano.update_uis(src)

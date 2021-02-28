@@ -56,7 +56,7 @@
 /obj/machinery/atm/emag_act(var/remaining_charges, var/mob/user)
 	if(!emagged)
 		//short out the machine, shoot sparks, spew money!
-		emagged = 1
+		emagged = TRUE
 		spark_system.start()
 		spawn_money(rand(100,500),src.loc)
 		//we don't want to grief people by locking their id in an emagged ATM

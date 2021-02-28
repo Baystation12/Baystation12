@@ -26,7 +26,7 @@
 	var/open = 0	//Maint panel
 	var/locked = 1
 	var/stat = 0
-	var/emagged = 0
+	var/emagged = FALSE
 	var/powered = 0		//set if vehicle is powered and should use fuel when moving
 	var/move_delay = 1	//set this to limit the speed of the vehicle
 
@@ -182,7 +182,7 @@
 
 /obj/vehicle/emag_act(var/remaining_charges, mob/user as mob)
 	if(!emagged)
-		emagged = 1
+		emagged = TRUE
 		if(locked)
 			locked = 0
 			to_chat(user, "<span class='warning'>You bypass [src]'s controls.</span>")

@@ -31,7 +31,7 @@ var/list/mob_hat_cache = list()
 	gender = NEUTER
 	pass_flags = PASS_FLAG_TABLE
 	braintype = "Drone"
-	lawupdate = 0
+	lawupdate = FALSE
 	density = 1
 	req_access = list(access_engine, access_robotics)
 	integrated_light_max_bright = 0.5
@@ -254,8 +254,8 @@ var/list/mob_hat_cache = list()
 	var/time = time2text(world.realtime,"hh:mm:ss")
 	GLOB.lawchanges.Add("[time] <B>:</B> [user.name]([user.key]) emagged [name]([key])")
 
-	emagged = 1
-	lawupdate = 0
+	emagged = TRUE
+	lawupdate = FALSE
 	connected_ai = null
 	clear_supplied_laws()
 	clear_inherent_laws()
@@ -336,7 +336,7 @@ var/list/mob_hat_cache = list()
 	if(player.mob && player.mob.mind)
 		player.mob.mind.transfer_to(src)
 
-	lawupdate = 0
+	lawupdate = FALSE
 	to_chat(src, "<b>Systems rebooted</b>. Loading base pattern maintenance protocol... <b>loaded</b>.")
 	full_law_reset()
 	welcome_drone()

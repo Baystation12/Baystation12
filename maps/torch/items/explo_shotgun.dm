@@ -118,7 +118,7 @@
 	closet_appearance = /decl/closet_appearance/wall/explo_gun
 	density = 0
 	anchored = 1
-	wall_mounted = 1
+	wall_mounted = TRUE
 	storage_types = CLOSET_STORAGE_ITEMS
 
 /obj/structure/closet/secure_closet/explo_gun/WillContain()
