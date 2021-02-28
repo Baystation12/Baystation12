@@ -72,6 +72,9 @@
 
 /atom/proc/reveal_blood()
 	return
+	
+/atom/proc/MayZoom()
+	return TRUE
 
 /atom/proc/assume_air(datum/gas_mixture/giver)
 	return null

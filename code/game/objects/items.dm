@@ -687,6 +687,9 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	if(zoom)
 		return
 
+	if(!user.loc?.MayZoom())
+		return
+
 	var/devicename = zoomdevicename || name
 
 	var/mob/living/carbon/human/H = user
@@ -703,6 +706,8 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	if(user.hud_used.hud_shown)
 		user.toggle_zoom_hud()	// If the user has already limited their HUD this avoids them having a HUD when they zoom in
 	user.client.view = viewsize
+	if(istype(H))
+		H.handle_vision()
 	zoom = 1
 
 	var/viewoffset = WORLD_ICON_SIZE * tileoffset
@@ -757,6 +762,10 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 	user.client.pixel_x = 0
 	user.client.pixel_y = 0
+	
+	var/mob/living/carbon/human/H = user
+	if(istype(H))
+		H.handle_vision()
 	user.visible_message("[zoomdevicename ? "\The [user] looks up from [src]" : "\The [user] lowers [src]"].")
 
 /obj/item/proc/pwr_drain()
