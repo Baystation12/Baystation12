@@ -12385,15 +12385,14 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/atmos)
 "DL" = (
-/obj/machinery/atmospherics/binary/pump/high_power/on{
-	dir = 4;
-	target_pressure = 15000
-	},
 /obj/effect/floor_decal/techfloor{
 	dir = 1;
 	icon_state = "techfloor_edges"
 	},
 /obj/effect/floor_decal/industrial/warning,
+/obj/machinery/atmospherics/binary/pump/high_power/on/distribution{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/atmos)
 "DM" = (
