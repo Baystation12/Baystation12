@@ -11976,7 +11976,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/port)
 "Oc" = (
-/obj/machinery/deployable/barrier,
+/obj/machinery/barrier,
 /turf/simulated/floor/tiled/monotile,
 /area/maintenance/fourthdeck/forestarboard)
 "Od" = (
