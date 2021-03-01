@@ -67,7 +67,9 @@
 	playsound(start, 'sound/machines/disperser_fire.ogg', 100, 1)
 	handle_beam(start, direction)
 	handle_overbeam()
-	qdel(atomcharge)
+
+	if (chargetype != OVERMAP_WEAKNESS_DROPPOD)
+		qdel(atomcharge)
 
 	//Some moron disregarded the cooldown warning. Let's blow in their face.
 	if(prob(cool_failchance()))
