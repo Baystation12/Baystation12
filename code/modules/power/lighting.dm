@@ -181,6 +181,15 @@
 
 	var/current_mode = null
 
+/obj/machinery/light/get_color()
+	return lightbulb ? lightbulb.get_color() : null
+
+/obj/machinery/light/set_color(color)
+	if (!lightbulb)
+		return
+	lightbulb.set_color(color)
+	queue_icon_update()
+
 // the smaller bulb light fixture
 /obj/machinery/light/small
 	icon_state = "bulb_map"
@@ -227,6 +236,7 @@
 /obj/machinery/light/on_update_icon(var/trigger = 1)
 	overlays.Cut()
 	icon_state = "[base_state]_empty" //Never use the initial state. That'll just reset it to the mapping icon.
+	atom_flags = atom_flags & ~ATOM_FLAG_CAN_BE_PAINTED
 	pixel_y = 0
 	pixel_x = 0
 	var/turf/T = get_step(get_turf(src), dir)
@@ -242,6 +252,7 @@
 	switch(get_status())		// set icon_states
 		if(LIGHT_OK)
 			_state = "[base_state][on]"
+			atom_flags |= ATOM_FLAG_CAN_BE_PAINTED
 		if(LIGHT_EMPTY)
 			on = 0
 		if(LIGHT_BURNED)
@@ -385,7 +396,7 @@
 		// attempt to break the light
 		//If xenos decide they want to smash a light bulb with a toolbox, who am I to stop them? /N
 
-	else if(lightbulb && (lightbulb.status != LIGHT_BROKEN))
+	else if(lightbulb && (lightbulb.status != LIGHT_BROKEN) && user.a_intent != I_HELP)
 
 		if(prob(1 + W.force * 5))
 
@@ -600,6 +611,7 @@
 	var/switchcount = 0	// number of times switched
 	matter = list(MATERIAL_STEEL = 60)
 	var/broken_chance = 2
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CAN_BE_PAINTED
 
 	var/b_max_bright = 0.9
 	var/b_inner_range = 1
@@ -625,6 +637,13 @@
 	. = ..()
 	if (reagents?.total_volume && Adjacent(user))
 		to_chat(user, SPAN_WARNING("There's some sort of fluid inside [src]."))
+
+/obj/item/weapon/light/get_color()
+	return b_colour
+
+/obj/item/weapon/light/set_color(color)
+	b_colour = isnull(color) ? COLOR_WHITE : color
+	update_icon()
 
 /obj/item/weapon/light/tube
 	name = "light tube"
