@@ -1,0 +1,5 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - tweak: "The scavver gantry coilgun now comes pre-loaded with a fully-charged power cell and advanced capacitor, instead of having to load it yourself."
+  - tweak: "Magnetic weapons (Coilguns and railguns) now have proper codex entries, including mechanics tips on how to use them."
