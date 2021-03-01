@@ -145,6 +145,7 @@
 						hair_s.Blend(rgb(h_col[1], h_col[2], h_col[3]), hair_style.blend)
 					res.overlays |= hair_s
 
+	var/list/sorted = list()
 	for (var/E in markings)
 		var/datum/sprite_accessory/marking/M = E
 		var/color = markings[E]
@@ -159,7 +160,9 @@
 			else
 				I.Blend(color, ICON_ADD)
 			icon_cache_key += "[M.name][color]"
-			res.overlays |= I
+			ADD_SORTED(sorted, list(list(M.draw_order, I)), /proc/cmp_marking_order)
+	for (var/entry in sorted)
+		res.overlays |= entry[2]
 
 	return res
 

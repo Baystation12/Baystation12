@@ -6,6 +6,7 @@
 /datum/sprite_accessory/marking/booster/ears
 	body_parts = list(BP_HEAD)
 	draw_target = MARKING_TARGET_HAIR
+	draw_order = 75 //before horns
 	do_colouration = FALSE
 	disallows = list(/datum/sprite_accessory/marking/booster/ears)
 

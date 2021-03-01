@@ -56,6 +56,7 @@ var/list/limb_icon_cache = list()
 		addtimer(CALLBACK(owner, /mob/living/carbon/human/proc/update_hair), 1, TIMER_UNIQUE)
 	..()
 
+	var/list/sorted = list()
 	for(var/E in markings)
 		var/datum/sprite_accessory/marking/M = E
 		var/color = markings[E]
@@ -63,8 +64,10 @@ var/list/limb_icon_cache = list()
 			var/icon/I = icon(M.icon, "[M.icon_state]-[organ_tag]")
 			I.Blend(color, M.blend)
 			icon_cache_key += "[M.name][color]"
-			overlays |= I
-			mob_icon.Blend(I, M.layer_blend)
+			ADD_SORTED(sorted, list(list(M.draw_order, I, M)), /proc/cmp_marking_order)
+	for (var/entry in sorted)
+		overlays |= entry[2]
+		mob_icon.Blend(entry[2], entry[3]["layer_blend"])
 
 /obj/item/organ/external/var/icon_cache_key
 /obj/item/organ/external/on_update_icon(var/regenerate = 0)
@@ -97,6 +100,7 @@ var/list/limb_icon_cache = list()
 
 	mob_icon = apply_colouration(new/icon(icon, icon_state))
 
+	var/list/sorted = list()
 	for(var/E in markings)
 		var/datum/sprite_accessory/marking/M = E
 		var/color = markings[E]
@@ -104,8 +108,10 @@ var/list/limb_icon_cache = list()
 			var/icon/I = icon(M.icon, "[M.icon_state]-[organ_tag]")
 			I.Blend(color, M.blend)
 			icon_cache_key += "[M.name][color]"
-			overlays |= I
-			mob_icon.Blend(I, M.layer_blend)
+			ADD_SORTED(sorted, list(list(M.draw_order, I, M)), /proc/cmp_marking_order)
+	for (var/entry in sorted)
+		overlays |= entry[2]
+		mob_icon.Blend(entry[2], entry[3]["layer_blend"])
 
 	if(body_hair && islist(h_col) && h_col.len >= 3)
 		var/cache_key = "[body_hair]-[icon_name]-[h_col[1]][h_col[2]][h_col[3]]"
