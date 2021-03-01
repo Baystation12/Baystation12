@@ -59,8 +59,8 @@ var/list/limb_icon_cache = list()
 	var/list/sorted = list()
 	for(var/E in markings)
 		var/datum/sprite_accessory/marking/M = E
-		var/color = markings[E]
 		if (M.draw_target == MARKING_TARGET_SKIN)
+			var/color = markings[E]
 			var/icon/I = icon(M.icon, "[M.icon_state]-[organ_tag]")
 			I.Blend(color, M.blend)
 			icon_cache_key += "[M.name][color]"
@@ -103,8 +103,8 @@ var/list/limb_icon_cache = list()
 	var/list/sorted = list()
 	for(var/E in markings)
 		var/datum/sprite_accessory/marking/M = E
-		var/color = markings[E]
 		if (M.draw_target == MARKING_TARGET_SKIN)
+			var/color = markings[E]
 			var/icon/I = icon(M.icon, "[M.icon_state]-[organ_tag]")
 			I.Blend(color, M.blend)
 			icon_cache_key += "[M.name][color]"
