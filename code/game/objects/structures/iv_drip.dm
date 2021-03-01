@@ -65,7 +65,7 @@
 		hook_up(over_object, usr)
 
 /obj/structure/iv_drip/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/weapon/reagent_containers))
+	if (istype(W, /obj/item/weapon/reagent_containers/ivbag))
 		if(!isnull(src.beaker))
 			to_chat(user, "There is already a reagent container loaded!")
 			return
