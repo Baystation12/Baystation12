@@ -1,4 +1,0 @@
-author: "Mucker"
-delete-after: True
-changes: 
-  - bugfix: "Fix crates/closets being deleted when fired from the OFD instead of sent to their target."
