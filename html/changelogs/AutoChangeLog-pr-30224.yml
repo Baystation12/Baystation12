@@ -1,0 +1,6 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - rscadd: "Light bulbs and lights can now be painted with paint sprayers."
+  - tweak: "You will no longer bash lights with random objects if you're on help intent."
+  - admin: "Light colors can now be easily modified by running the `set_color()` proc on a light tube or a light fixture that has lighting installed."
