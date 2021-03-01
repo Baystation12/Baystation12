@@ -4374,9 +4374,7 @@
 	pixel_x = 23;
 	pixel_y = -3
 	},
-/obj/item/weapon/gun/magnetic,
-/obj/item/weapon/stock_parts/capacitor/adv,
-/obj/item/weapon/cell/high,
+/obj/item/weapon/gun/magnetic/preloaded,
 /obj/item/weapon/cell/high,
 /obj/item/weapon/cell/high,
 /turf/simulated/floor/tiled/dark/monotile,
