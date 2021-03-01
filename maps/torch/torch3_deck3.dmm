@@ -6235,6 +6235,15 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
+"mt" = (
+/obj/effect/floor_decal/corner/blue/diagonal{
+	dir = 4
+	},
+/obj/machinery/vending/mredispenser{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white,
+/area/crew_quarters/mess)
 "mv" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -38682,7 +38691,7 @@ jd
 jd
 nj
 Lx
-jc
+mt
 Nw
 Xn
 sj
