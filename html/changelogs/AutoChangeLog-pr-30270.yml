@@ -1,0 +1,4 @@
+author: "Spookerton"
+delete-after: True
+changes: 
+  - rscadd: "You can add fades to your hair through markings now, if you're a human."
