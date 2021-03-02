@@ -1,30 +1,31 @@
 /decl/cultural_info/location/human
-	name = HOME_SYSTEM_MARS
-	description = "Mars, the current capital of the SCG, known by its nickname the Red Planet, is one of the most populous centres of Humanity. \
-	Since the founding of the first colony by Jimmy Gideon many years ago Mars has been an important player on the Human stage. Terraforming on \
-	Mars was only partially successful, and today much of the population lives either in huge domed cities/agri-zones or within a vast underground \
-	tunnel network connecting large underground cities. Often seen as the primary divide on the planet, the rich surfaces versus the poor \
-	tunnellers, Mars is rife with dissent, crime and continuous unrest, especially underground.<br><br>The people of Mars vary, from the poor, \
-	downtrodden tunnellers to the cosmopolitan urbanites of Olympus to the hardy farmers of the agri-domes, though they all share a strong sense \
-	of Martian pride. The Martian people have not had an easy history. As the new, primary home of humanity the people have seen great struggles \
-	over the centuries, ranging from revolutions to political upheaval and regular rioting. The people of Mars consider themselves somewhat tougher \
-	than most with a fierce pride that often clashes not just with those from other planets, but those from other parts of Mars."
-	distance = "1.5AU"
-	capital = "Olympus"
-	economic_power = 1.1
-	
-
-/decl/cultural_info/location/human/earth
 	name = HOME_SYSTEM_EARTH
 	description = "Earth, home of humankind, has long been in a state of recovery following centuries of pollution and exploitation. Today, much of \
-	the Earth exists as a nature reserve, dedicated to preserving the history of humanity. The humans that remain live mostly in large urban zones \
+	the Earth exists as a battered, but slowly recovering world. The humans that remain live mostly in large urban zones \
 	across the globe. Huge, planned cities consisting of numerous arcologies with a focus on eco-friendliness. No longer the political power of \
-	Humanity, Earth is content to be something of a backwater and tourist destination for those looking to discover their heritage.<br><br>People from \
-	Earth are among the wealthier humans on average, though they are still comparable with those of Mars. Remarkably average, the people of Earth are \
-	much as they have been for hundreds of years, and are generally content with their lot in life. From a variety of ancient cultures, the people of \
-	Earth are as diverse as they have always been."
+	Humanity, Earth has been somewhat unfriendly to the government since the beginning of the SCG. Most Earthers are taught that they are the true humans \
+	unlike the Martians and Lunarians who are descended from those rich enough to escape the early days of climate change.\
+	<br><br>People from Earth are among the wealthier humans on average, largely due to Earth's revival as a major food provider, and one of the few places in the SCG \
+	that can provide genuine organic fruits, vegetables, and meat. From a variety of ancient cultures, the people of Earth are as diverse as they have always been."
 	distance = "1AU"
-	capital = "Geneva"
+	system = "Sol"
+	capital = "New Benin"
+	economic_power = 1.1
+
+/decl/cultural_info/location/human/mars
+	name = HOME_SYSTEM_MARS
+	description = "Mars, the current capital of the SCG, known by its nickname the Red Planet, is one of the most populous centres of Humanity. \
+	Since the founding of the first colony by Jimmy Gideon in the Schiaparelli Crater, much of the population have lived in either vast domed cities, or \
+	deep within the undercities, built into ancient caves and lava tubes.  <br><br> Terraforming on Mars was never able to turn the world fully green. \
+	Much of the surface remains inhospitable.  However, under the domes, it is a vastly different story.  Countless green spaces and agri-zones have been \
+	established.  Though Mars cannot feed itself, it can produce enough oxygen and water to keep its domes self-sufficient.  Mars is a planet of diversity and history, \
+	much of it dating back to the former nation states of Earth.  As such, Mars is disunited into a collection of semi-independent City States, overseen by the United Nations of Mars. \
+	Social Welfare, Economic Class, and Culture differs widely from state to state, from the cosmopolitan urbanites of the Olympus Megalopolis, to the friendly and kind-hearted Delphins,\
+	to the reclusive and socially isolated Aresians.  They all share a strong sense of pride in their homeworld.<br><br> Mars has not had an easy past, but has fought to become the \
+	cultural and military capital of the SCG. The Martians consider themselves tougher than most, with a fierce pride in their place of birth."
+	distance = "1.5AU"
+	system = "Sol"
+	capital = "Olympus"
 	economic_power = 1.2
 
 /decl/cultural_info/location/human/luna
@@ -42,6 +43,7 @@
 	'old money' of humanity, with many of them having distinct, traceable lineages to the first settlers, old Earth dynasties and heavy corporate \
 	ties. Most of the people of Luna are rich, cultured and refined. Not all are, however, and many of the people of the city of New Vegas are on \
 	the poverty line, often holding feelings of resentment against the other people of Luna."
+	system = "Sol"
 	capital = "Selene"
 	economic_power = 1.3
 	secondary_langs = list(LANGUAGE_HUMAN_SELENIAN)
@@ -49,199 +51,287 @@
 /decl/cultural_info/location/human/venus
 	name = HOME_SYSTEM_VENUS
 	distance = "0.7AU"
-	description = "Venus, in the Sol System, is a planet which has a largely unsustainable surface atmosphere.\
-	However, early terraforming was successful in maintaining a desirable, habitable atmosphere high up in the clouds and it is here that \
-	much of the population of Venus resides. Venus itself is covered in huge platforms, supporting these cloud cities and numerous \
-	agricultural zones, which quickly earned Venus the reputation of 'sol's breadbasket.' Today Venus is the home of some of the more \
-	extravagantly wealthy with the entire planet being a dedicated tourist destination, most of its infrastructure and residential zones are \
-	dedicated to providing entertainment, hotels, casinos and various other attractions. Venus is one of the richest planets in the SCG and \
-	most of its residents enjoy a decadent, elitist lifestyle.<br><br>Many of the people of Venus come in two categories. The rich, the retirees, \
-	the more public corporate workers, who reside high in the clouds. These people often enjoy an extravagant and somewhat decadent lifestyle. \
-	Apart from those rich enough to live there permanently most of the people of Venus are service workers, living there only for the duration \
-	of their employment. The second group, the surfacers are hardy labourers who work in large, windowless, industrial complexes on the planets \
-	surface. These surfacers often resent and are at odds with their rich, carefree employers."
+	description = "Venus be like aeugh"
+	system = "Sol"
 	capital = "Central Administration Zone"
 	economic_power = 1.4
 
-/decl/cultural_info/location/human/ceres
-	name = HOME_SYSTEM_CERES
-	distance = "2.7AU"
-	description = "Ceres station, officially the Ceres Mining and Habitation Outpost is historically a significant mining facility for humanity. However \
-	this importance has diminished greatly in the past few decades and today Ceres is a sprawling, populous facility covering much of its namesake. \
-	Operated primarily by Falco Designs, one of the SCG's premier shipbuilding corporations, Ceres is home to a multitude of drydocks and service centres \
-	for vessels. Ceres is a melting pot and is the primary stopping point for vessels entering the Sol system. It is often said anything worth anything \
-	passes through Ceres, giving it a reputation for having a diverse black market. Commonly called 'Belters' the people of Ceres are today are mostly \
-	employed in shipbuilding, manufacturing, vessel services and hospitality. Belters generally regard themselves as adaptive, proud members of the SCG \
-	and some of the best engineers Humanity has to offer."
-	capital = "Government Zone, Ceres Station"
+/decl/cultural_info/location/human/titan
+	name = HOME_SYSTEM_TITAN
+	distance = "9.5AU"
+	description = "Titan is a moon of Saturn. It is home to much of Sol's tech industry and computing power, including the Library of Knowledge, a repository of all human knowledge available.\
+	Many compare the facility to the ancient archive known as 'Wikipedia'. The planet has not been terraformed, and much of its habitation has been built underground to protect it from the harsh atmosphere."
+	system = "Sol"
+	capital = "Huygens"
 
-/decl/cultural_info/location/human/pluto
-	name = HOME_SYSTEM_PLUTO
-	distance = "45AU"
-	description = "Pluto, nominally a Democratic Republic, is a small planet in the Sol system. Pluto has a fairly small population compared \
-	to many other planets in the SCG, with much of it being centred around only two cities, both of which are in desperate need of modernisation \
-	and repair, with much infrastructure long since collapsed. Pluto is dominated by criminal elements and corruption is rampant. Those who live on \
-	Pluto either work a desperate, tough existence trying to escape the planet or are part of or under the thumbs of one of the many local crime \
-	syndicates. In spite of a number of modernisation efforts the Pluto of today has seen very little in the way of improvement.<br><br>The people \
-	of Pluto are, surprisingly, some of the worst off in the SCG. Downtrodden, poor, and from a locale that is so infested with crime it has become \
-	part of the local culture. Most of the people of Pluto are very rough around the edges, hardened by years of poverty or criminality. Those that \
-	manage to escape rarely wish to return, though often possess a looser set of morales as a result of their time on the planet."
-	capital = "New Santa Domingo"
+/decl/cultural_info/location/human/europa
+	name = HOME_SYSTEM_EUROPA
+	distance = "5.2AU"
+	description = "One of the more uninteresting moons in Jupiter's vast swathe of satellites, Europa underwent several abortive and abandoned colonization attempts in the early 22nd Century that \
+	resulted in the collapse of several colony domes and the lonely deaths of thousands of people. The moon has since been reoccupied by Tritonian settlements, the largest of these being Dodona. \
+	Its people are primarily engaged in the extraction of water ices, exporting to most of the outer systems. Countless forms of native and non-native aquatic life exists on the planet."
+	system = "Sol"
+	capital = "Dodona"
 	economic_power = 0.8
-	secondary_langs = list(LANGUAGE_GUTTER)
 
-/decl/cultural_info/location/human/cetiepsilon
+/decl/cultural_info/location/human/tiamat
+	name = HOME_SYSTEM_TIAMAT
+	system = "Alpha Centauri"
+	distance = "4.3 light years"
+	description = "Tiamat (Alpha Centauri Bb) is a large ocean world, bigger than Earth by only slightly, and covered almost entirely by liquid water. In orbit around Toliman (Alpha Centauri B),\
+	the planet has no landmasses and human settlements are either built as floating cities, or as underwater habitats. The planet is comprised of mostly CO2, with no natural life to convert it into oxygen.\
+	Wherever volcanic islands exist, alien seaweed covers the land in a slick red hue. It is named after Tiamat, a Babylonian goddess. It has a single moon, a small, Enceladus-sized moon, called Abzu.<br><br>\
+	The planet was one of the first exoplanets to be colonised by humanity, and it holds this reputation to heart, retaining its early 22nd Century neobabylonian aesthetic, "
+	capital = "New Babylon"
+
+/decl/cultural_info/location/human/valentina
+	name = HOME_SYSTEM_VALENTINA
+	system = "Alpha Centauri"
+	distance = "4.3 light years"
+	description = "Valentina (Proxima Centuri b) is a tidally-locked superearth. While it has a thin atmosphere, one side is constantly bathed in light while the other is frozen. \
+	Around the terminal line, human colonies have developed into large settlements. It is the closest planet to Sol and serves as the government's largest source of energy and minerals.\
+	The planet's powerful magnetic field protects the planet from the violent flares of its parent star, which allows for the existence of life along the habitable terminator line.\
+	It is named after Valentina Tereshkova, the first woman in space."
+	capital = "Tereshkovagorad"
+
+/decl/cultural_info/location/human/sopdet
+	name = HOME_SYSTEM_SIRIUS
+	capital = "Sopdet Orbital Habitat"
+	system = "Sirius"
+	distance = "8.6 light years"
+	description = "Sirius is a binary star system, with no habitable planets. It contains the Sobdet Orbital Habitat and Gateway, which orbits the ice giant Sopdu. <br><br>\
+	Sopdet is the vast orbital administration facility and habitat, originally built as a refinery for harvesting volitiles from the atmosphere of Sopdu, it became the staging ground for the\
+	Battle of Sirius during the Gaia Conflict thanks to its bluespace gate. While it suffered minimal damage during the battle, much of its industrial capability was converted into housing for \
+	many space-adapted refugees. Since the war, it has only grown in size to become the de-facto capital of the Space-Adapted Humans."
+
+/decl/cultural_info/location/human/struthio
 	name = HOME_SYSTEM_TAU_CETI
 	distance = "11.9 light years"
-	description = "Ceti Epsilon, the only habitable planet in the Tau Ceti system, is home to its largest population centre. \
-	The planet itself is effectively covered in one large city with a few 'green' areas dispersed throughout. The most urban location \
-	in the wider SCG, the planet attracts many to its glittering neon lights and easy to get lost in streets. More importantly, \
-	Ceti Epsilon is home to the Ceti Institute of Technology, the premier learning location in Sol and, arguably, all of humanity. \
-	The Ceti Institute of Technology is a public university and, for the most part, offers free tuition to all. However, places are \
-	competitive and preference is given to natives to the Tau Ceti system. The universe attracts as many newcomers as the rest of the cityscape \
-	combined. Today Ceti Epsilon is a major technology and population hub, being a destination for those seeking a better life, or to simply get \
-	lost.<br><br>The people of Ceti Epsilon are some of the most, well, average in the SCG. Being from a largely built up world with a focus on \
-	the cutting edge, most Episoloners are tech-savvy, at the very least and are usually well educated, with a focus on the sciences. The people \
-	of Ceti Episilon have developed a reputation for being some of the best and brightest that Sol has to offer."
+	description = "Struthio is a small planet in the Tau Ceti system. The Tau Ceti system has a large number of planets, many of which have been occupied by corporations as non-colonial industries. \
+	This has made Struthio extremely rich and well off, though extremly reliant on off-world imports. It is home to the Ceti Institute of Technology,  which operates closely with many corporations to produce the next \
+	generation of technologically-minded thinkers. Some of Sol's most famous inventors, economists, and eccentric billionaires all graduated from this university.<br><br>\
+	While the conditions for life are right, nothing larger than microbial life evolved.  This proved hazardous to human colonisation efforts, starting the first alien biohazard outbreak threat. \
+	Medical efforts proved successful and their base of operations evolved into the modern day CIT. "
+	system = "Tau Ceti"
 	capital = "Verlize"
 	economic_power = 1.4
 
+/decl/cultural_info/location/human/nueva_castilla
+	name = HOME_SYSTEM_CULEBRE
+	distance = "12.3 light years"
+	system = "Culebre"
+	capital = "Toledo"
+	description = "Nueva Castilla is a body in the late stages of slow terraforming. Previously a dry, rocky world with an inhospitable geography of high plains and deep ravines, \
+	it was chosen as a colonization candidate due to its molten iron-rich core and human-tolerable temperature variations. It is one of the few worlds that has been terraformed \
+	within human lifetimes, and is home to many scientific expeditions and test sites."
+
+/decl/cultural_info/location/human/emerson
+	name = HOME_SYSTEM_BARNARD
+	system = "Barnard's Star"
+	description = "Barnard's Star is a red dwarf with one inhabited exoplanet, a large super-earth named Emerson. The system is home to a large consortium of Free Trade Union \
+	orbital stations and offices, and is considered to be their de facto headquarters. The FTU runs many trade routes out of Barnard's Star. Most notable are the ones between the Unathi and the Skrell, who both maintain a presence in the system. \
+	<br><br>Emerson is a large and cold, mountainous exoplanet. From initial observation, the high gravity, freezing temperatures, and inhospitable surface conditions would suggest no life could exist on this planet. \
+	Yet under the surface, much of the planet is covered in large karsts, some filled with large lakes, and fed by the planet's geothermal activity. Most of these lakes are alive with alien life. \
+	The planet's heavy gravity keeps its internal mechanisms working, fueling a large underground ecosystem. The planet has been colonised by many humans adapted for life on this planet, coming to be known as <b>Grav-Adapted Humans</b>. \
+	Many of these karst areas have been converted into colonies, harvesting the planet's boundless volatiles and minerals. It is hard for a non-adapted human to live on this world, and as a result, it has become a homeworld of sorts for the Grav-Adapts. \
+	<br>The planet is named Emerson after E. E. Barnard, who discovered the system."
+	capital = "Varku"
+	distance = "5.9 light years"
+
 /decl/cultural_info/location/human/eos
 	name = HOME_SYSTEM_HELIOS
-	description = "Eos, in the Helios system, is itself a small, hot, dense world. The world itself is of only marginal importance, though it supports a densely packed city, Surya, \
-	which has become known for its banking services. Of more import is the system itself, Helios, and what orbits Eos: The Helios Gateway Installation. The HGI is the largest \
-	gateway installation in SCG space and provides vital links to many other SCG systems. Practically a city in space unto itself, the HGI is home to a hodgepodge of private individuals, \
-	Fleet and law enforcement outposts, government services and a wide array of private enterprises all catering to the many hangabouts, travellers, merchants and soldiers who pass through it daily. \
-	This fact alone is what has allowed the Helios system and Eos as a whole to weather multiple economic recessions and has allowed Eos to establish itself as a premier commercial centre of the wider \
-	SCG. This process was hindered during the Gaia conflict, when the Helios Gateway was destroyed in a suicide action of the Fourth Fleet to stop the GCC advance. It has recovered rapidly \
-	since the occupation, though the memories of that event carry in the collective consciousness of those who remained through it."
+	system = "Helios"
+	description = "Helios is an occupied system and contains a large amount of space infrastructure. It has one occupied planet, Eos. Eos is a hot and barren world, with only one major\
+	settlement, Boreas, settled at the planet's northern pole. It is largely unimportant in the grand scheme of things, and a forgotten planet.<br><br> \
+	More importantly, the system contains two significant orbital facilities; Fleet Station Helios, at the Eos-Helios L5 Lagrange point; and the Helios Gateway Installation, at the Eos-Helios L3 point.\
+	Helios has a significant amount of spacers living and working in the system, making up the majority of workers on the HGI."
 	capital = "Surya"
 	economic_power = 1.3
 	distance = "10 light years"
 
+/decl/cultural_info/location/human/arcadia
+	name = HOME_SYSTEM_VICTOR
+	system = "Victor's Star"
+
+/decl/cultural_info/location/human/alexander
+	name = HOME_SYSTEM_ALEXANDER
+	system = "Alexander"
+
+/decl/cultural_info/location/human/beisel
+	name = HOME_SYSTEM_BEISEL
+	system = "Epsilon Eridani"
+
+/decl/cultural_info/location/human/novy_omsk
+	name = HOME_SYSTEM_LACAILLE
+	system = "Lacaille"
+
 /decl/cultural_info/location/human/terra
 	name = HOME_SYSTEM_TERRA
-	description = "Terra, in the Gilgamesh system. Is not the planet Earth as some may be lead to believe. No, Terra is the home of the Gilgamesh Colonial Confederation, and the capital of that \
-	particular superpower. Terra is one of the many affiliated planets in the GCC and the one that is perhaps the most important. Terra, much like most of the GCC, is isolationist, with a minimal \
-	non-human presence. Much of Terra is heavily industrialised, with a lower standard of living than on equivalent SCG planets. Much of the population works in services, industry or the military. \
-	Still recovering from an economic crash toward the end of the Gaia conflict, much of Terra is in decline, with public services and works being minimal and much of the population burdened by \
-	increasingly high taxes. This state of affairs has seen the immigration of many Terran citizens to the SCG in recent years, hoping to escape the poor conditions they found themselves in. Despite this,\
-	the people of Terra are a proud and unbroken people who are heavily patriotic and tend to bring this with them wherever they go."
+	system = "Gilgamesh"
+	description = ""
 	capital = "Ameranth"
 	distance = "22.5 light years."
 	economic_power = 0.9
 	ruling_body = "Gilgamesh Colonial Confederation"
 	language = LANGUAGE_HUMAN_RUSSIAN
 
+/decl/cultural_info/location/human/amelie
+	name = HOME_SYSTEM_SESTRIS
+	system = "Sestris"
+	description = ""
+	ruling_body = "Gilgamesh Colonial Confederation"
+	language = LANGUAGE_HUMAN_RUSSIAN
+
+/decl/cultural_info/location/human/savoie
+	name = HOME_SYSTEM_BRATIS
+	system = "Bratis"
+	description = ""
+	ruling_body = "Gilgamesh Colonial Confederation"
+	language = LANGUAGE_HUMAN_RUSSIAN
+
+/decl/cultural_info/location/human/zemlya
+	name = HOME_SYSTEM_ZEMLYA
+	system = "Gilgamesh"
+	description = ""
+	ruling_body = "Gilgamesh Colonial Confederation"
+	language = LANGUAGE_HUMAN_RUSSIAN
+
+/decl/cultural_info/location/human/kopeychik
+	name = HOME_SYSTEM_GAGARIN
+	description = ""
+	ruling_body = "Gilgamesh Colonial Confederation"
+	language = LANGUAGE_HUMAN_RUSSIAN
+
+/decl/cultural_info/location/human/valy
+	name = HOME_SYSTEM_VALY
+	system = "Valy"
+	description = ""
+	ruling_body = "Gilgamesh Colonial Confederation"
+	language = LANGUAGE_HUMAN_RUSSIAN
+
+/decl/cultural_info/location/human/greymoor
+	name = HOME_SYSTEM_PROVIDENCE
+	description = ""
+	system = "Providence"
+	ruling_body = "Gilgamesh Colonial Confederation"
+	language = LANGUAGE_HUMAN_RUSSIAN
+
+/decl/cultural_info/location/human/nouveaulyon
+	name = HOME_SYSTEM_TETH
+	system = "Teth"
+	description = ""
+	ruling_body = "Confederate Systems of Lordania"
+
+/decl/cultural_info/location/human/tyannani
+	name = HOME_SYSTEM_TYANNANI
+	system = "Tyannani"
+	description = ""
+	ruling_body = "Confederate Systems of Lordania"
+
+/decl/cultural_info/location/human/indus
+	name = HOME_SYSTEM_INDUS
+	system = "Indus"
+	description = ""
+	ruling_body = "Confederate Systems of Lordania"
+
+/decl/cultural_info/location/human/visser
+	name = HOME_SYSTEM_VISSER
+	system = "Visseran"
+	description = ""
+	ruling_body = "Confederate Systems of Lordania"
+
+/decl/cultural_info/location/human/evergreen
+	name = HOME_SYSTEM_EVERGREEN
+	system = "Evergreen"
+	description = "Evergreen is a G-Type star system located between Human and Skrell space."
+
 /decl/cultural_info/location/human/tersten
 	name = HOME_SYSTEM_TERSTEN
+	system = "Gavil"
 	distance = "52 light years"
-	description = "Tersten is a large plains world in the Gavil system.  With vast mountain ranges, prairie, mesas, forests and deserts, it is a diverse planet. \
-	The capital city is known as Tersten City, or locally as Freetown. Originally founded as a penal colony, the planet abolished this system in 2480. \
-	It is the 4th largest producer of food in the Sol Central Government. Additional exports include building materials and electronics. \
-	The planet's population is primarily divided into northern, urban Tersteners who often are seen in the military; and southern, rural Tersteners, who make up the farmers and ranchers of the planet. \
-	While much of the North has been developed, large parts of the South remain undeveloped. \
-	Tersten is an isolated border world, with little influence in the larger community. Still, it is a proud member of the SCG, and Tersten City has become a haunt for Third Fleet forces on shore leave. \
-	The SFP maintain an office in the city of Moore, and various Trans-Stellar Corporations have a foothold in the city of South Harelstone. \
-	<br><br>The Tersten people are separated into various cultures. For example, urban Tersteners, known as 'Pinascs', live around Tersten City, and are often seen in the defence forces.  \
-	Rural Tersteners, known as 'Nevokies', live in the south central region around the city of Nevada.  Many Martian and Earthling enclaves exist on the planet, significantly in South Harelstone. \
-	The divide between north and south could also be considered a divide between rich and poor. Even the poorest city dweller will likely be richer than most farmers. \
-	Typically untrusting, once a Terstener has made a friend, they will often be that way for life.  Known for their community and attitudes to strangers, they are considered the cowboys of Sol Central. \
-	Many Tersteners serve in the Defence Forces, and many gave their lives in the Gaian Conflict."
+	description = ""
 	capital = "Tersten City"
 	economic_power = 1.0
 
 /decl/cultural_info/location/human/lorriman
 	name = HOME_SYSTEM_LORRIMAN
+	system = "Gessshire"
 	distance = "44 light years"
-	description = "Lorriman is an arctic planet in the Gessshire system.  It is a frozen wasteland with winds reaching 200mph, with an average temperature is -50°C. \
-	Because of this, the planet's cities are either domed or built into mountains. Its economy is built around a technological backbone, providing the technology \
-	and the people skilled to use them.  Its infrastructure is developed enough to support mass transit across the planet. Its capital city is called The Hub, a massive domed structure \
-	that serves both as a spaceport, administrative hub, and habitation zone. It remains the only place on the planet accessible to non-Lorrimanians. \
-	Despite its isolation, the Scientific Institute of Gessshire remains amicable with Sol Central.  The Institute is a technocratic republic led by Dr. Johan Montgomery. \
-	It is known by most Defence Forces personnel to act begrudgingly towards any requests given, and only a select few have visited the planet itself.<br><br>\
-	Lorrimanians are a quiet, unassuming, academically-driven bunch. They are often sought as researchers or other scientifically-driven career.  It is rare for anyone to immigrate \
-	to the planet, but exceptions have been made. A scientifically driven people, they have served many organisations loyally."
+	description = ""
 	capital = "The Hub"
 	economic_power = 1.0
 
 /decl/cultural_info/location/human/cinu
 	name = HOME_SYSTEM_CINU
+	system = "Lucinaer"
 	distance = "48 light years"
-	description = "Cinu is an occupied desert planet, located in the Lucinaer system. It is today part of a greater community within the Sol Central Government. \
-	Twice the size of Earth, much of its surface is unoccupied desert, with the vast majority of population living around either the various oases, or in the less \
-	harsh northern regions.  Home to around 20 Million people, it welcomes nearly 50,000 immigrants yearly. Cinu's capital, 'Al-Mular', is home to several major \
-	Peacekeeping Forces offices, with nearly 30,000 Cinuans serving every year.  The Republic of Cinu is comprised of seven political regions, and maintained by \
-	the Congress of the Cinuan People. A direct democracy, its people vote directly on matters related to their state. Because of this, Cinu exerts little influence \
-	on the rest of space. Cinu's population are overall well off, with a stable economy and decent education.  This varies by region however, with some of the population \
-	falling well below the standard poverty line. Cinu is considered one of the most developed democratic systems in space, with relatively little internal conflict. \
-	<br><br>The Cinuan people ethnically range from Martian Tharseese to Old Earth Arabic, West Asian and Central Asian cultures. From a harsh, duned desert planet, they \
-	are known for characteristic firmness disguising fierce friendliness. Its people have suffered in the past, but today look towards a bright future. They are known to be pacifist,\
-	with many refusing to participate in the Defence Forces. Instead, they serve as peacekeepers and diplomats. The Cinuan People were controversially non-aligned during the Gaian Conflict."
+	description = ""
 	capital = "Al-Mular"
 	economic_power = 1.0
 
 /decl/cultural_info/location/human/yuklid
 	name = HOME_SYSTEM_YUKLID
+	system = "Yuklid"
 	distance = "42 light years"
-	description = "Yuklid V is an occupied jungle world in the Yuklid system.  It is home to large medical facilities and corporate holdings, serving as home to this region of space's medical academia. \
-	Large parts of Yuklid have been retained as nature and botanical reserves.  Most medicines produced in the outer regions of Sol Central can trace their origins to this planet. \
-	Much of Yuklid is uncolonised, with infrastructure focused around the planet's poles.  One such facility is the Vey-Med Operational Headquarters. \
-	The Republic of Yuklid is a minor political player within the SCG, and the Expeditionary Corps use the planet for exoplanet training. It is protected by the Third Fleet. \
-	<br><br>The Yuklid people mostly keep to themselves, with little emigration.  The population that do leave the planet typically pursue careers in medicine. \
-	Being from a small colonial system, those that do join the Defence Forces have usually never seen the level of development the Sol System has. \
-	More recently, a spiritualist movement has developed on the planet, taking aspects of religious theory and the hippocratic oath."
+	description = ""
 	capital = "Iyeegi"
 	economic_power = 0.9
 
 /decl/cultural_info/location/human/lordania
 	name = HOME_SYSTEM_LORDANIA
+	system = "Lordania"
 	distance = "40 light years"
-	description = "Lordania is a heavily developed plains world in the Lordania system.  The planet has developed five large mega-cities, connected by various suburban developments. \
-	Heavy use of dams and nature reserves have allowed the people to terraform parts of the planet.  Historically, the planet has had a large wealth gap, \
-	which recent years have only made worse.  The planet's economy has been rebuilt from the ground up around entertainment and the arts. The New Ares Metroplex is the entertainment, \
-	and fashion capital of the outer rim of the SCG.  Numerous TSCs bought up parts of the planet during the economic depression, and now fully exploit the success.  It is not a city planet, but \
-	it could become one in the next 300 years. The planet enjoys warm relations with its neighbor Kingston. Lordania can be described as an aristocratic republic, and have historical \
-	ties with the political families of Luna. <br><br>  The people of Lordania are divided into two parts, Upper and Lower Lordanians.  Upper Lordanians are wealthy, and are \
-	typically only seen on the planet, or in entertainment medias. Lower Lordanians are more common, and many opt leave their home planet. Historically, Lordanians have a superiority complex, \
-	and often see themselves as better. Most Lordanians are seen as untrustworthy, or selfish. As such, they are rarely seen within Sol's Defence Forces."
+	description = ""
 	capital = "New Ares"
 	economic_power = 1.2
 
 /decl/cultural_info/location/human/kingston
 	name = HOME_SYSTEM_KINGSTON
+	system = "Lordania"
 	distance = "40 light years"
-	description = "Kingston is an occupied ocean world made of various archipelagos, within the Lordania system. The planet's surface is 90% water, and much of the population live around the equator. \
-	The planet is a humid subtropical world, and a huge tourist destination for Sol citizens.  Kingston is extremely multicultural, and many old human cultures still hold an enclave. It also contains a large \
-	number of Tritonians, both as tourists and residents. An estimated 15 million tourists visit annually.  While a highway and magnetic train system link many of the islands, boats are incredibly popular amongst \
-	tourists and workers alike. Many of the islands on the planet have been created via tectonic plates or volcanic eruption, making the planet more geologically active than Earth. \
-	Despite this, technology of the 26th century has developed enough to mitigate most structural damage done in the event of earthquakes or tsunamis. \
-	Formally the United Nations of Kingston, the planet is made up of multiple island nations and several planetary representatives.<br><br>The people of Kingston are relatively unassuming. They have much in common with \
-	their Sol brothers, and are usually seen onboard most SCG Vessels.  Growing up on a waterworld, most Kingstonians can sail a boat, something rare in the 26th Century.  \
-	Typically dark in skin due to the planet's proximity to it's sun, Kingstonians come in various forms."
+	description = ""
 	capital = "New Havana"
 	economic_power = 1.1
 
 /decl/cultural_info/location/human/gaia
 	name = HOME_SYSTEM_GAIA
 	distance = "14 light years"
-	description = "Gaia is the sole planet in the Galilei system, serving as the DMZ between the SCG and the GCC. \
-	It is an agricultural world, though various conflicts across the planet's surface have left it scarred. The planet is divided into \
-	Sol-Controlled <b>Southern Gaia</b> and Independent-Controlled <b>Northern Gaia</b>, with New Venice remaining a neutral zone inside the DMZ. \
-	The planet's population remain divided even 10 years after the Gaian Conflict. New Venice sits on the edge of Lake Cabot. While Gaia is divided \
-	the current Mayor of New Venice serves as a vital mediator between both sides. <br><br> The Gaian People are tired of war, and long to see their families \
-	once again.  They suffered hard twenty years prior, and fear they may suffer again."
+	description = ""
 	capital = "New Venice"
 	economic_power = 1.0
 
 /decl/cultural_info/location/human/magnitka
 	name = HOME_SYSTEM_MAGNITKA
 	distance = "24 light years"
-	description = "Magnitka is an independent, industrialized mining and ore processing colony located in the Ursa system. \
-	Ruled by an authoritarian government heavily associated with the corporations that founded it, Magnitka's recent history is marked by civil war. Even today, a large number of rebel groups populate the planet. \
-	Founded by German companies in the 2300s, the overwhelming majority of Magnitka's population is descended from Eastern European laborers and their German managers. \
-	Unfortunately, Magnitka's economy is in a decline as its principle export, iron, grows cheaper by the day. The primary careers available to Magnitkans are military service, mining, or organized crime.  \
-	Though historically relatively isolationist, today Magnitka finds itself more and more closely associated with the Gilgamesh Colonial Confederation, in an effort to offset its economic decline."
+	description = ""
 	capital = "Labortown"
 	economic_power = 0.8
 	ruling_body = "Magnitka"
+
+/decl/cultural_info/location/human/mariana
+	name = HOME_SYSTEM_THEIA
+	system = "Theia"
+
+/decl/cultural_info/location/human/fosters_world
+	name = HOME_SYSTEM_SANURA
+	system = "Sanura"
+
+/decl/cultural_info/location/human/nyx
+	name = HOME_SYSTEM_NYX
+	system = "Nyx"
+
+/decl/cultural_info/location/human/saveel
+	name = HOME_SYSTEM_WYTHE
+	system = "Saveel"
+
+/decl/cultural_info/location/human/lichfield
+	name = HOME_SYSTEM_LICHFIELD
+	system = "Barstow"
+
+/decl/cultural_info/location/human/coventry
+	name = HOME_SYSTEM_COVENTRY
+	system = "Barstow"
+
+/decl/cultural_info/location/human/avalon
+	name = HOME_SYSTEM_AVALON
+	system = "Klaudof"
