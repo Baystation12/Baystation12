@@ -96,3 +96,6 @@
 		return 1
 
 	return sorttext(B.key, A.key)
+
+/proc/cmp_marking_order(list/A, list/B)
+	return A[1] - B[1][1]
