@@ -138,7 +138,10 @@
 		to_chat(user, SPAN_WARNING("Turn \the [WT] on, first."))
 		return
 	if(WT.remove_fuel((SKILL_MAX + 1) - user.get_skill_value(SKILL_CONSTRUCTION), user))
-		user.visible_message("\The [user] begins welding the damage on \the [src]...")
+		user.visible_message(
+			SPAN_NOTICE("\The [user] begins welding the damage on \the [src]..."),
+			SPAN_NOTICE("You begin welding the damage on \the [src]...")
+		)
 		var/repair_value = 10 * max(user.get_skill_value(SKILL_CONSTRUCTION), user.get_skill_value(SKILL_DEVICES))
 		if(user.do_skilled(10, SKILL_DEVICES , src, 0.6, DO_PUBLIC_PROGRESS | DO_DEFAULT) && brute_damage)
 			repair_brute_damage(repair_value)
