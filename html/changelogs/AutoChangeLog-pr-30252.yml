@@ -1,4 +1,0 @@
-author: "Spookerton"
-delete-after: True
-changes: 
-  - admin: "Took per-action logs back out of build mode after spam complaints."

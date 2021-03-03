@@ -1,4 +1,0 @@
-author: "JAR-OSKI"
-delete-after: True
-changes: 
-  - rscdel: "Removes thermals from uplinks"
