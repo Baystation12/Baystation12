@@ -1,0 +1,5 @@
+author: "Mucker"
+delete-after: True
+changes: 
+  - rscadd: "Adds 3 new artifact effects."
+  - tweak: "The teleportation anomaly now has a small buildup and warns affected players before the teleportation occurs."
