@@ -348,24 +348,19 @@
 		TAG_RELIGION =  list(RELIGION_OTHER)
 	)
 
-/proc/spawn_diona_nymph(var/turf/target)
-	if(!istype(target))
-		return 0
+/proc/spawn_diona_nymph(turf/target)
+	if (!istype(target))
+		return
+	var/mob/living/carbon/alien/diona/nymph = new (target)
+	var/datum/ghosttrap/trap = get_ghost_trap("living plant")
+	trap.request_player(nymph, "A diona nymph has split from its gestalt.", 30 SECONDS)
+	addtimer(CALLBACK(nymph, /mob/living/carbon/alien/diona/proc/check_spawn_death), 30 SECONDS)
 
-	//This is a terrible hack and I should be ashamed.
-	var/datum/seed/diona = SSplants.seeds["diona"]
-	if(!diona)
-		return 0
-
-	spawn(1) // So it has time to be thrown about by the gib() proc.
-		var/mob/living/carbon/alien/diona/D = new(target)
-		var/datum/ghosttrap/plant/P = get_ghost_trap("living plant")
-		P.request_player(D, "A diona nymph has split off from its gestalt. ")
-		spawn(60)
-			if(D)
-				if(!D.ckey || !D.client)
-					D.death()
-		return 1
+/mob/living/carbon/alien/diona/proc/check_spawn_death()
+	if (QDELETED(src))
+		return
+	if (!ckey || !client)
+		death()
 
 #define DIONA_LIMB_DEATH_COUNT 9
 /datum/species/diona/handle_death_check(var/mob/living/carbon/human/H)
