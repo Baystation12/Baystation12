@@ -207,8 +207,13 @@ atom/proc/add_fibers(mob/living/carbon/human/M)
 			to_chat(src, SPAN_NOTICE("You notice a partial print on \the [A]."))
 			clue = 1
 		if(LAZYLEN(A.gunshot_residue))
-			var/mob/living/carbon/human/M = src
-			if(M.isSynthetic())
+			if(isliving(src))
+				var/mob/living/M = src
+				if(M.isSynthetic())
+					to_chat(src, SPAN_NOTICE("You notice faint black residue on \the [A]."))
+				else
+					to_chat(src, SPAN_NOTICE("You notice a faint acrid smell coming from \the [A]."))
+			else if(isrobot(src))
 				to_chat(src, SPAN_NOTICE("You notice faint black residue on \the [A]."))
 			else
 				to_chat(src, SPAN_NOTICE("You notice a faint acrid smell coming from \the [A]."))

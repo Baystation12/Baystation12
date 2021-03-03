@@ -102,12 +102,6 @@
 	item_cost = 28
 	path = /obj/item/weapon/storage/backpack/satchel/syndie_kit/space
 
-/datum/uplink_item/item/tools/thermal
-	name = "Thermal Imaging Glasses"
-	desc = "A pair of meson goggles that have been modified to instead show synthetics or living creatures, through thermal imaging."
-	item_cost = 24
-	path = /obj/item/clothing/glasses/thermal/syndi
-
 /datum/uplink_item/item/tools/flashdark
 	name = "Flashdark"
 	desc = "A device similar to a flash light that absorbs the surrounding light, casting a shadowy, black mass."
