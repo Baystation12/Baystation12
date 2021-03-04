@@ -295,9 +295,9 @@
 /turf/simulated/floor/plating/vox,
 /area/voxship/engineering)
 "aR" = (
-/obj/machinery/atmospherics/binary/pump/high_power/on/max_pressure{
+/obj/machinery/atmospherics/binary/pump/high_power/on{
 	dir = 4;
-	icon_state = "map_on"
+	target_pressure = 150
 	},
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/engineering)
@@ -2295,9 +2295,9 @@
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/engineering)
 "fa" = (
-/obj/machinery/atmospherics/binary/pump/high_power/on/max_pressure{
+/obj/machinery/atmospherics/binary/pump/high_power/on{
 	dir = 4;
-	icon_state = "map_on"
+	target_pressure = 5000
 	},
 /obj/machinery/vending/engineering{
 	req_access = list()
