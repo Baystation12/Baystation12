@@ -1691,6 +1691,10 @@
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/icarus/vessel)
+"Dx" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/turf/simulated/floor/tiled/monotile,
+/area/icarus/vessel)
 "DA" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/device/flashlight/lamp,
@@ -2387,11 +2391,6 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
-/area/icarus/vessel)
-"Uj" = (
-/obj/effect/shuttle_landmark/escape_pod/start/pod6,
-/obj/effect/wallframe_spawn/reinforced/titanium,
-/turf/simulated/floor/tiled/monotile,
 /area/icarus/vessel)
 "UD" = (
 /obj/machinery/light{
@@ -21270,7 +21269,7 @@ ak
 Ga
 jR
 jR
-Uj
+Dx
 jR
 jR
 fd
@@ -26724,7 +26723,7 @@ ag
 Ga
 jR
 jR
-Uj
+Dx
 jR
 jR
 fd
