@@ -1942,6 +1942,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
+/obj/item/device/paint_sprayer,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/assembly/robotics)
 "dG" = (
