@@ -35,11 +35,11 @@
 		)
 
 /obj/item/natural_weapon/meatbits
-	force = 20
+	force = 30
 	sharp = TRUE
 	edge = TRUE
 	attack_verb = list("mauled", "slashed")
-		
+
 /mob/living/simple_animal/hostile/meat/abomination
 	name = "abomination"
 	desc = "A monstrously huge wall of flesh, it looks like you took who knows how many humans and put them together..."
