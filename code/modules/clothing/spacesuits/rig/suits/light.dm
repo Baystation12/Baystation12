@@ -85,6 +85,16 @@
 	siemens_coefficient = 0
 	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_NOCUFFS
 
+/obj/item/weapon/rig/light/hacker/meson
+		initial_modules = list(
+		/obj/item/rig_module/ai_container,
+		/obj/item/rig_module/power_sink,
+		/obj/item/rig_module/datajack,
+		/obj/item/rig_module/electrowarfare_suite,
+		/obj/item/rig_module/voice,
+		/obj/item/rig_module/cooling_unit,
+		/obj/item/rig_module/vision/meson,
+		)
 
 /obj/item/weapon/rig/light/ninja
 	name = "ominous suit control module"

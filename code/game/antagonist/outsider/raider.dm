@@ -268,7 +268,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 /obj/random/raider/hardsuit/spawn_choices()
 	return list(/obj/item/weapon/rig/industrial,
 				/obj/item/weapon/rig/eva,
-				/obj/item/weapon/rig/light/hacker,
+				/obj/item/weapon/rig/light/hacker/meson,
 				/obj/item/weapon/rig/light,
 				/obj/item/weapon/rig/unathi
 	)
