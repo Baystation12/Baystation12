@@ -143,7 +143,7 @@
 		return
 	setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	if(istype(A,/mob/living))
-		if(!istype(natural_weapon) || a_intent == I_HELP)
+		if(!get_natural_weapon() || a_intent == I_HELP)
 			custom_emote(1,"[friendly] [A]!")
 			return
 		if(ckey)
