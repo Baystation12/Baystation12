@@ -41,7 +41,7 @@ exactly 3 "update_icon() override" '/update_icon\((.*)\)'  -P
 exactly 1 "goto use" 'goto '
 exactly 484 "spawn uses" 'spawn\s*\(\s*(-\s*)?\d*\s*\)' -P
 exactly 0 "tag uses" '\stag = ' -P '**/*.dmm'
-exactly 233 "/global/ or /static/ vars defined" '/(global|static)/' -P
+exactly 234 "/global/ or /static/ vars defined" '/(global|static)/' -P
 exactly 4 ".Replace( matches" '\.Replace(_char)?\(' -P
 exactly 5 ".Find( matches" '\.Find(_char)?\(' -P
 # With the potential exception of << if you increase any of these numbers you're probably doing it wrong
