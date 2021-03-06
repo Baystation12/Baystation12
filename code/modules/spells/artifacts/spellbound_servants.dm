@@ -8,7 +8,7 @@
 	set waitfor = 0
 	var/mob/living/carbon/human/H = new(a)
 	H.ckey = user.ckey
-	H.change_appearance(APPEARANCE_GENDER|APPEARANCE_EYE_COLOR|APPEARANCE_HAIR|APPEARANCE_FACIAL_HAIR|APPEARANCE_HAIR_COLOR|APPEARANCE_FACIAL_HAIR_COLOR|APPEARANCE_SKIN)
+	H.change_appearance(APPEARANCE_ALL_HAIR|APPEARANCE_GENDER|APPEARANCE_SKIN|APPEARANCE_EYE_COLOR)
 
 	var/obj/item/implant/translator/natural/I = new()
 	I.implant_in_mob(H, BP_HEAD)
