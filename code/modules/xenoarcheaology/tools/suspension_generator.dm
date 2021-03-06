@@ -8,6 +8,8 @@
 	uncreated_component_parts = null
 	stat_immune = 0
 	active_power_usage = 5 KILOWATTS
+	machine_name = "suspension generator"
+	machine_desc = "Projects a pacifying energy field, used to hold xenofauna (among other things) for safe study."
 	var/obj/effect/suspension_field/suspension_field
 
 /obj/machinery/suspension_gen/Process()

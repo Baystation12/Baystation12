@@ -12,6 +12,9 @@
 
 	power_rating = 7500 //7500 W ~ 10 HP
 	power_losses = 150
+	
+	machine_name = "portable scrubber"
+	machine_desc = "Portable scrubbers can be freely moved from place to place in order to draw harmful gases out of the air. It runs on a battery backup and can be connected to atmospherics networks."
 
 	var/minrate = 0
 	var/maxrate = 10 * ONE_ATMOSPHERE
@@ -158,6 +161,9 @@
 	maximum_component_parts = list(/obj/item/stock_parts = 15)
 	idle_power_usage = 500		//internal circuitry, friction losses and stuff
 	power_rating = 100000 //100 kW ~ 135 HP
+	
+	machine_name = "large portable scrubber"
+	machine_desc = "A heavy-duty scrubbing machine with greatly enhanced filtration power. Typically used around areas where a gas breach could be disastrous."
 
 	var/global/gid = 1
 	var/id = 0
@@ -205,6 +211,8 @@
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary
 	name = "Stationary Air Scrubber"
 	base_type = /obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary
+	machine_name = "large stationary portable scrubber"
+	machine_desc = "This is simply a large portable scrubber that can't be moved once it's bolted into place, and is otherwise identical."
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary/attackby(var/obj/item/I as obj, var/mob/user as mob)
 	if(isWrench(I))

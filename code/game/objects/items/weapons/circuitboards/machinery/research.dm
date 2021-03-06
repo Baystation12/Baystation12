@@ -86,7 +86,7 @@
 	)
 
 /obj/item/stock_parts/circuitboard/mechfab
-	name = "Circuit board (Exosuit Fabricator)"
+	name = T_BOARD("exosuit fabricator")
 	build_path = /obj/machinery/robotics_fabricator
 	board_type = "machine"
 	origin_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 3)
@@ -101,7 +101,7 @@
 	)
 
 /obj/item/stock_parts/circuitboard/ntnet_relay
-	name = "Circuit board (NTNet Quantum Relay)"
+	name = T_BOARD("\improper NTNet quantum relay")
 	build_path = /obj/machinery/ntnet_relay
 	board_type = "machine"
 	origin_tech = list(TECH_DATA = 4)

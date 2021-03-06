@@ -4,6 +4,8 @@
 	icon_screen = "tank"
 
 	name = "Atmospherics Control Console"
+	machine_name = "atmosphere monitoring console"
+	machine_desc = "Allows for the monitoring of the gases in an area by using a connected gas sensor, as well as controlling injection and output."
 
 	var/frequency = 1441
 	var/datum/radio_frequency/radio_connection
@@ -260,6 +262,8 @@ obj/machinery/computer/air_control/Destroy()
 /obj/machinery/computer/air_control/fuel_injection
 	icon = 'icons/obj/computer.dmi'
 	icon_screen = "alert:0"
+	machine_name = "injector control"
+	machine_desc = "An atmosphere monitoring console, modified specifically for controlling gas injectors."
 
 	var/device_tag
 	var/list/device_info = list()
@@ -327,3 +331,5 @@ obj/machinery/computer/air_control/Destroy()
 	icon = 'icons/obj/computer.dmi'
 	frequency = 1438
 	out_pressure_mode = 1
+	machine_name = "core control"
+	machine_desc = "An atmosphere monitoring console, modified for use in a supermatter engine."

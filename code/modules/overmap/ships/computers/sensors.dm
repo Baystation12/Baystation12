@@ -5,6 +5,8 @@
 	light_color = "#77fff8"
 	extra_view = 4
 	silicon_restriction = STATUS_UPDATE
+	machine_name = "sensors console"
+	machine_desc = "Used to activate, monitor, and configure a spaceship's sensors. Higher range means higher temperature; dangerously high temperatures may fry the delicate equipment."
 	var/obj/machinery/shipsensors/sensors
 
 /obj/machinery/computer/ship/sensors/attempt_hook_up(obj/effect/overmap/visitable/ship/sector)

@@ -5,6 +5,8 @@
 	desc = "Used to access and maintain data on messaging servers. Allows you to view request console messages."
 	icon_screen = "comm_logs"
 	light_color = "#00b000"
+	machine_name = "message monitor console"
+	machine_desc = "A console that allows the user to browse request console messages when a special encryption key is provided."
 	var/hack_icon = "error"
 	//Server linked to.
 	var/obj/machinery/message_server/linkedServer = null

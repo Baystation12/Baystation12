@@ -12,6 +12,9 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	
+	machine_name = "exosuit fabricator"
+	machine_desc = "A heavy-duty fabricator that can produce parts for exosuits and robots."
 
 	var/speed = 1
 	var/mat_efficiency = 1

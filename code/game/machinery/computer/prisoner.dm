@@ -7,6 +7,8 @@
 	icon_screen = "explosive"
 	light_color = "#a91515"
 	req_access = list(access_armory)
+	machine_name = "prison management console"
+	machine_desc = "Prison management consoles display a readout of active tracking and chemical implants, and allows for remote activation of them."
 	var/id = 0.0
 	var/temp = null
 	var/status = 0

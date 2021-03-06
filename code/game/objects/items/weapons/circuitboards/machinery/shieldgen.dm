@@ -31,7 +31,6 @@
 /obj/item/stock_parts/circuitboard/pointdefense
 	name = T_BOARD("point defense battery")
 	board_type = "machine"
-	desc = "Control systems for a Kuiper pattern point defense battery. Aim away from vessel."
 	build_path = /obj/machinery/pointdefense
 	origin_tech = list(TECH_ENGINEERING = 3, TECH_COMBAT = 2)
 	req_components = list(
@@ -49,6 +48,5 @@
 /obj/item/stock_parts/circuitboard/pointdefense_control
 	name = T_BOARD("fire assist mainframe")
 	board_type = "machine"
-	desc = "A control computer to synchronize point defense batteries."
 	build_path = /obj/machinery/pointdefense_control
 	origin_tech = list(TECH_ENGINEERING = 3, TECH_COMBAT = 2)

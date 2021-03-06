@@ -3,6 +3,8 @@
 	name = "general shuttle control console"
 	ui_template = "shuttle_control_console_exploration.tmpl"
 	base_type = /obj/machinery/computer/shuttle_control/explore
+	machine_name = "long range shuttle console"
+	machine_desc = "Used to control spacecraft that are designed to move between local sectors in open space."
 
 /obj/machinery/computer/shuttle_control/explore/get_ui_data(var/datum/shuttle/autodock/overmap/shuttle)
 	. = ..()

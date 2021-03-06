@@ -27,6 +27,9 @@
 	// Power
 	idle_power_usage = 10
 	active_power_usage = 150
+	
+	machine_name = "washing machine"
+	machine_desc = "Uses detergent and water to get your clothes minty fresh. Good for those pesky bloodstains! Also decontaminates clothing that has been exposed to toxic elements, as long as detergent is used in the washing process."
 
 /obj/machinery/washing_machine/Destroy()
 	QDEL_NULL(crayon)

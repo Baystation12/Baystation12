@@ -9,6 +9,15 @@
 	base_storage_capacity = list(
 		/datum/reagent/nutriment = 100
 	)
+	machine_name = "replicator"
+	machine_desc = "A voice-operated machine that dispenses bland food from raw nutriment."
+
+/obj/machinery/fabricator/replicator/replicator/Initialize()
+	. = ..()
+	if (prob(1))
+		machine_desc = "\
+		<i>\"Fish!\" \
+		<br>\"Today's fish is trout a la creme. Enjoy your meal.\"</i>"
 
 /obj/machinery/fabricator/replicator/hear_talk(var/mob/M, var/text, var/verb, var/datum/language/speaking)
 	if(speaking && !speaking.machine_understands)

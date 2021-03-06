@@ -4,6 +4,7 @@
 	icon_state = "arcade"
 	icon_keyboard = null
 	icon_screen = "invaders"
+	machine_desc = "A simple arcade machine used for entertainment."
 	var/random = TRUE
 	var/list/prizes = list(	/obj/item/storage/box/snappops										= 200,
 							/obj/item/toy/blink															= 200,
@@ -78,6 +79,7 @@
 	desc = "Does not support Pinball."
 	icon_state = "arcade"
 	random = FALSE
+	machine_name = "battle arcade machine"
 	var/enemy_name = "Space Villian"
 	var/temp = "Winners don't use space drugs" //Temporary message, for attack messages, etc
 	var/player_hp = 30 //Player health/attack points

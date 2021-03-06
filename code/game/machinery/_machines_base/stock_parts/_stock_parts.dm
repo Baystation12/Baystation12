@@ -1,7 +1,7 @@
 /obj/item/stock_parts
 	name = "stock part"
 	desc = "What?"
-	gender = PLURAL
+	gender = NEUTER
 	icon = 'icons/obj/stock_parts.dmi'
 	randpixel = 5
 	w_class = ITEM_SIZE_SMALL

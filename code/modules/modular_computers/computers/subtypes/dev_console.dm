@@ -1,6 +1,8 @@
 /obj/machinery/computer/modular
 	name = "console"
 	maximum_component_parts = list(/obj/item/stock_parts = 14)	//There's a lot of stuff that goes in these
+	machine_name = "general-purpose computer motherboard"
+	machine_desc = "Used to build \"modular computers\" - stationary or portable devices that connect to NTNet and support a wide array of programs."
 	var/list/interact_sounds = list("keyboard", "keystroke")
 	var/obj/item/stock_parts/computer/hard_drive/portable/portable_drive
 

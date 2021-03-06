@@ -32,6 +32,7 @@
 	desc = "Imported straight from Outpost-T71!"
 	icon_state = "arcade"
 	random = FALSE
+	machine_name = "orion trail arcade machine"
 	var/list/supplies = list("1" = 0, "2" = 0, "3" = 0, "4" = 0, "5" = 0, "6" = 0) //engine,hull,electronics,food,fuel
 	var/list/supply_cost = list("1" = 1000, "2" = 950, "3" = 1100, "4" = 75, "5" = 100)
 	var/list/supply_name = list("1" = "engine parts", "2" = "hull parts", "3" = "electronic parts", "4" = "food", "5" = "fuel", "6" = "thalers")

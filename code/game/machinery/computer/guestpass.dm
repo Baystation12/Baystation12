@@ -51,6 +51,8 @@
 	icon_keyboard = null
 	icon_screen = "pass"
 	density = FALSE
+	machine_name = "guest pass terminal"
+	machine_desc = "Guest passes are limited-time access passes that can be used to enter areas that would otherwise be inaccessible. This terminal allows them to be configured and created."
 
 	var/obj/item/card/id/giver
 	var/list/accesses = list()

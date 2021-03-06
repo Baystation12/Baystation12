@@ -4,6 +4,8 @@
 	icon_state = "server"
 	base_type = /obj/machinery/r_n_d/server
 	construct_state = /decl/machine_construction/default/panel_closed
+	machine_name = "\improper R&D server"
+	machine_desc = "A powerful piece of hardware used as the hub of a research matrix, containing every byte of data gleaned from an experiment."
 	var/datum/research/files
 	var/health = 100
 	var/list/id_with_upload = list()	//List of R&D consoles with upload to server access.
@@ -117,6 +119,8 @@
 	icon_keyboard = "rd_key"
 	icon_screen = "rdcomp"
 	light_color = "#a97faa"
+	machine_name = "\improper R&D server control console"
+	machine_desc = "If an R&D server is the heart of a research setup, this is the brain. Any kind of data manipulation on the server happens from this console."
 	var/screen = 0
 	var/obj/machinery/r_n_d/server/temp_server
 	var/list/servers = list()

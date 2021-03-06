@@ -12,6 +12,9 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	
+	machine_name = "oxygen regenerator"
+	machine_desc = "Catalyzes gaseous CO2 to convert it into gaseous oxygen. The excess carbon is condensed and ejected as graphite sheets."
 
 	var/target_pressure = 10*ONE_ATMOSPHERE
 	var/id = null

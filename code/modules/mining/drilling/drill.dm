@@ -15,6 +15,8 @@
 	power_channel = LOCAL
 	active_power_usage = 10 KILOWATTS
 	base_type = /obj/machinery/mining/drill
+	machine_name = "mining drill"
+	machine_desc = "A cell-powered industrial drill, used to crack through dirt and rock to harvest minerals beneath the surface. Requires two adjacent braces to operate."
 	var/braces_needed = 2
 	var/list/supports = list()
 	var/supported = 0
@@ -255,6 +257,9 @@
 	icon_state = "mining_brace"
 	obj_flags = OBJ_FLAG_ROTATABLE
 	interact_offline = 1
+	
+	machine_name = "mining drill brace"
+	machine_desc = "A mobile support strut that provides support for the head of a mining drill when anchored. Placed on either side of the drill head."
 
 	var/obj/machinery/mining/drill/connected
 

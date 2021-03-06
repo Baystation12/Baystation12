@@ -8,6 +8,9 @@
 	anchored = FALSE
 	interact_offline = TRUE
 
+	machine_name = "portable generator"
+	machine_desc = "A portable generator often used for backup power."
+
 	var/active = 0
 	var/power_gen = 5000
 	var/recent_fault = 0
@@ -110,6 +113,9 @@
 /obj/machinery/power/port_gen/pacman
 	name = "\improper P.A.C.M.A.N.-type Portable Generator"
 	desc = "A power generator that runs on solid phoron sheets. Rated for 80 kW max safe output."
+	
+	machine_name = "\improper PACMAN-type generator"
+	machine_desc = "A portable generator often used for backup power or running small spacecraft. Runs on solid phoron sheets; rated for 80 kW max safe output."
 
 	var/sheet_name = "Phoron Sheets"
 	var/sheet_path = /obj/item/stack/material/phoron
@@ -416,6 +422,8 @@
 	sheet_path = /obj/item/stack/material/uranium
 	sheet_name = "Uranium Sheets"
 	time_per_sheet = 576 //same power output, but a 50 sheet stack will last 2 hours at max safe power
+	machine_name = "\improper SUPERPACMAN-type generator"
+	machine_desc = "A portable generator used for providing backup power for extended periods. Efficiently runs on uranium sheets; rated for 80 kW max safe output."
 	var/rad_power = 4
 
 //nuclear energy is green energy!
@@ -464,6 +472,8 @@
 	rad_power = 12
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	anchored = TRUE
+	machine_name = "\improper PTTO-3 nuclear generator"
+	machine_desc = "This nuclear generator uses a combination of uranium and, strangely, vodka. Rated for 150 kW max safe output."
 	var/coolant_volume = 120
 	var/coolant_use = 1
 	var/coolant_reagent = /datum/reagent/ethanol/vodka
@@ -519,6 +529,8 @@
 	coolant_use = 0.2
 	coolant_volume = 360
 	coolant_reagent = /datum/reagent/coolant
+	machine_name = "\improper ICRER-2 nuclear generator"
+	machine_desc = "A standard nuclear generator that produces a respectable amount of power by processing uranium and industrial coolant. Rated for 180 kW max safe output."
 
 /obj/machinery/power/port_gen/pacman/mrs
 	name = "M.R.S.P.A.C.M.A.N.-type Portable Generator"
@@ -535,6 +547,8 @@
 	time_per_sheet = 576
 	max_temperature = 800
 	temperature_gain = 90
+	machine_name = "\improper MRSPACMAN-type generator"
+	machine_desc = "A powerful and reliable backup generator that provides a hefty amount of electricity from tritium sheets. Rated for 200 kW max safe output."
 
 /obj/machinery/power/port_gen/pacman/mrs/explode()
 	//no special effects, but the explosion is pretty big (same as a supermatter shard).

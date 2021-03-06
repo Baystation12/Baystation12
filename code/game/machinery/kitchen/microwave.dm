@@ -13,6 +13,9 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	
+	machine_name = "microwave"
+	machine_desc = "Required for preparing any dish more complicated than a slice of bread. In the future, <i>everything</i> is microwaved."
 
 	var/operating = FALSE // Is it on?
 	var/dirtiness = 0 // Ranges from 0 to 100, increasing a little with failed recipes and emptying reagents

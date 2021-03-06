@@ -10,6 +10,9 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	
+	machine_name = "meat grinder"
+	machine_desc = "Messily turns animals - living or dead - into edible meat. Installed safety mechanisms prevent use on humans."
 
 	var/operating = 0        //Is it on?
 	var/dirty = 0            // Does it need cleaning?

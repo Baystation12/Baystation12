@@ -10,6 +10,8 @@
 	active_power_usage = 100
 	obj_flags = OBJ_FLAG_ANCHORABLE
 	construct_state = /decl/machine_construction/default/panel_closed
+	machine_name = "reagent grinder"
+	machine_desc = "An industrial grinder with durable blades that shreds objects into their component reagents."
 
 	var/skill = SKILL_CHEMISTRY
 	var/grind_sound = 'sound/machines/grinder.ogg'
@@ -270,3 +272,5 @@
 		/obj/item/reagent_containers/glass/beaker,
 		/obj/item/reagent_containers/food/drinks/shaker
 	)
+	machine_name = "blender"
+	machine_desc = "Blends or juices food placed inside it - useful for things like flour. Can't process raw material sheets."

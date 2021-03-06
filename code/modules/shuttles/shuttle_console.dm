@@ -4,6 +4,8 @@
 	icon_keyboard = "atmos_key"
 	icon_screen = "shuttle"
 	base_type = /obj/machinery/computer/shuttle_control
+	machine_name = "basic shuttle console"
+	machine_desc = "A simple control system for small spacecraft, allowing automated movement from one navigation point to another."
 
 	var/shuttle_tag  // Used to coordinate data in shuttle controller.
 	var/hacked = 0   // Has been emagged, no access restrictions.

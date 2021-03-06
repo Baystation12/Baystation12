@@ -13,6 +13,9 @@
 	power_channel = EQUIP
 	use_power = POWER_USE_OFF
 
+	machine_name = "pipe dispenser"
+	machine_desc = "A semi-portable dispenser that uses compressed matter to create atmospherics pipes. Vital for repair or construction efforts."
+
 	var/pipe_color = "white"
 
 /obj/machinery/pipedispenser/Initialize()//for mapping purposes. Anchor them by map var edit if needed.
@@ -109,6 +112,8 @@
 	name = "Disposal Pipe Dispenser"
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "pipe_d"
+	machine_name = "disposal pipe dispenser"
+	machine_desc = "Similar to a normal pipe dispenser, but calibrated for the heavy, dense metal tubes used in disposals networks."
 
 //Allow you to drag-drop disposal pipes into it
 /obj/machinery/pipedispenser/disposal/MouseDrop_T(var/obj/structure/disposalconstruct/pipe as obj, mob/user as mob)

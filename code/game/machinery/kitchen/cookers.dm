@@ -255,6 +255,9 @@
 			"desc" = "made into jelly"
 		)
 	)
+	
+	machine_name = "modular cooker"
+	machine_desc = "Can prepare nearly any kind of food a certain way, such as making pies, cookies, or candy bars."
 
 
 /obj/machinery/cooker/fryer

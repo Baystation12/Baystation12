@@ -11,6 +11,9 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	
+	machine_name = "operating table"
+	machine_desc = "A sterile and well-lit surface to conduct surgery. Operating tables are the only completely safe surfaces to perform operations. Comes with built-in neural suppressors to anesthetize a patient laying on top of it."
 
 	var/suppressing = FALSE
 	var/mob/living/carbon/human/victim = null
