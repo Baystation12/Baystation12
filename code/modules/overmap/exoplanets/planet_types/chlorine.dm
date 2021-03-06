@@ -9,9 +9,7 @@
 	ruin_tags_blacklist = RUIN_HABITAT|RUIN_WATER
 	surface_color = "#a3b879"
 	water_color = COLOR_BOTTLE_GREEN
-
-/obj/effect/overmap/visitable/sector/exoplanet/chlorine/generate_habitability()
-	return HABITABILITY_BAD
+	habitability_distribution = HABITABILITY_BAD
 
 /obj/effect/overmap/visitable/sector/exoplanet/chlorine/get_atmosphere_color()
 	return "#e5f2bd"

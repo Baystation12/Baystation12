@@ -6,6 +6,7 @@
 	rock_colors = list(COLOR_ASTEROID_ROCK, COLOR_GRAY80, COLOR_BROWN)
 	plant_colors = list("#0e1e14","#1a3e38","#5a7467","#9eab88","#6e7248", "RANDOM")
 	map_generators = list(/datum/random_map/noise/exoplanet/grass)
+	habitability_distribution = list(HABITABILITY_IDEAL = 70, HABITABILITY_OKAY = 20, HABITABILITY_BAD = 5)
 
 /obj/effect/overmap/visitable/sector/exoplanet/grass/generate_map()
 	if(prob(40))
@@ -65,4 +66,38 @@
 	large_flora_prob = 30
 	flora_diversity = 6
 	fauna_types = list(/mob/living/simple_animal/yithian, /mob/living/simple_animal/tindalos, /mob/living/simple_animal/hostile/retaliate/jelly)
+	megafauna_types = list(/mob/living/simple_animal/hostile/retaliate/parrot/space/megafauna, /mob/living/simple_animal/hostile/retaliate/goose/dire)
+
+/obj/effect/overmap/visitable/sector/exoplanet/grass/terraformed
+	name = "life seeded exoplanet"
+	desc = "Planet with abundant flora and fauna. Shows signs of human terraformation."
+	color = "#58aa8b"
+	planetary_area = /area/exoplanet/grass
+	rock_colors = list(COLOR_ASTEROID_ROCK, COLOR_GRAY80, COLOR_BROWN)
+	plant_colors = list("#2f573e","#24574e","#6e9280","#9eab88","#868b58", "#84be7c", "RANDOM")
+	map_generators = list(/datum/random_map/noise/exoplanet/grass/terraformed)
+	lightlevel = 0.5
+
+	//Animals being named alien creature is a bit odd as these would just be earth transplants
+	species = list( /mob/living/simple_animal/cat 					  = "wild cat", 
+					/mob/living/simple_animal/chicken 				  = "wild chicken",
+					/mob/living/simple_animal/mouse 				  = "mouse",
+					/mob/living/simple_animal/opossum 				  =	"opossum",
+					/mob/living/simple_animal/hostile/retaliate/goat  = "wild goat",
+					/mob/living/simple_animal/hostile/retaliate/goose = "goose",
+					/mob/living/simple_animal/cow 					  = "wild cow")
+
+/obj/effect/overmap/visitable/sector/exoplanet/grass/terraformed/generate_habitability()
+	habitability_class = HABITABILITY_IDEAL
+
+/obj/effect/overmap/visitable/sector/exoplanet/grass/generate_map()
+	lightlevel = rand(0.7,0.9)/10
+	..()
+	
+/datum/random_map/noise/exoplanet/grass/terraformed
+	descriptor = "terraformed grass exoplanet"
+	flora_prob = 8
+	large_flora_prob = 10
+
+	fauna_types = list(/mob/living/simple_animal/cat, /mob/living/simple_animal/chicken, /mob/living/simple_animal/mouse, /mob/living/simple_animal/opossum, /mob/living/simple_animal/hostile/retaliate/goat, /mob/living/simple_animal/hostile/retaliate/goose, /mob/living/simple_animal/cow)
 	megafauna_types = list(/mob/living/simple_animal/hostile/retaliate/parrot/space/megafauna, /mob/living/simple_animal/hostile/retaliate/goose/dire)

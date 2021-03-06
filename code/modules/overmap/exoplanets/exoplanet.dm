@@ -48,17 +48,15 @@ GLOBAL_VAR(planet_repopulation_disabled)
 	var/list/possible_features = list()
 	var/list/spawned_features
 
+	//Either a type or a list of types and weights. You must include all types if it's a list
+	var/list/habitability_distribution = list(HABITABILITY_IDEAL = 10, HABITABILITY_OKAY = 40, HABITABILITY_BAD = 50)
 	var/habitability_class
 
 /obj/effect/overmap/visitable/sector/exoplanet/proc/generate_habitability()
-	var/roll = rand(1,100)
-	switch(roll)
-		if(1 to 10)
-			habitability_class = HABITABILITY_IDEAL
-		if(11 to 50)
-			habitability_class = HABITABILITY_OKAY
-		else
-			habitability_class = HABITABILITY_BAD
+	if(isnum(habitability_distribution))
+		habitability_class = habitability_distribution
+	else
+		habitability_class = pickweightindex(habitability_distribution)
 
 /obj/effect/overmap/visitable/sector/exoplanet/New(nloc, max_x, max_y)
 	if(!GLOB.using_map.use_overmap)
