@@ -118,10 +118,6 @@
 	if(!effective_force)
 		return 0
 
-	//Hulk modifier
-	if(MUTATION_HULK in user.mutations)
-		effective_force *= 2
-
 	//Apply weapon damage
 	var/damage_flags = I.damage_flags()
 
