@@ -25,6 +25,7 @@
 	spawn_mech_equipment()
 
 /mob/living/exosuit/premade/proc/spawn_mech_equipment()
+	set waitfor = FALSE
 	install_system(new /obj/item/mech_equipment/light(src), HARDPOINT_HEAD)
 
 /mob/living/exosuit/premade/random
