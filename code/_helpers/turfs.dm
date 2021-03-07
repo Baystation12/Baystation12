@@ -65,10 +65,10 @@
 	return !is_space_turf(T)
 
 /proc/is_open_space(turf/T)
-	return isopenspace(T)
+	return istype(T, /turf/simulated/open)
 
 /proc/is_not_open_space(turf/T)
-	return !isopenspace(T)
+	return !is_open_space(T)
 
 /proc/is_holy_turf(var/turf/T)
 	return T && T.holy
@@ -178,10 +178,7 @@
 */
 
 /proc/get_turfs_in_range(turf/center, range, list/predicates)
-	. = list()
-
-	if (!istype(center))
-		return
+	. = new/list()
 
 	for (var/turf/T in trange(range, center))
 		if (!predicates || all_predicates_true(list(T), predicates))
@@ -193,5 +190,5 @@
 
 /proc/pick_turf_in_range(turf/center, range, list/turf_predicates)
 	var/list/turfs = get_turfs_in_range(center, range, turf_predicates)
-	if (length(turfs))
+	if (turfs && length(turfs))
 		return pick(turfs)
