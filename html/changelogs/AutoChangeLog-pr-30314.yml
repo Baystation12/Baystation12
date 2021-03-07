@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - bugfix: "Teleporters and other things dependent on the `player_levels` global no longer break whenever a `teleport_far` anomaly is loaded."
