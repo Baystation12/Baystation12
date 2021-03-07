@@ -9,7 +9,7 @@
 /datum/artifact_effect/teleport_far/New()
 	..()
 	effect = EFFECT_PULSE
-	zlevels = GLOB.using_map.player_levels
+	zlevels = GLOB.using_map.player_levels.Copy()
 
 	//filters out station levels and most provac sites
 	zlevels -= GLOB.using_map.station_levels
@@ -25,7 +25,7 @@
 			zlevels -= O.map_z
 
 	if (length(zlevels) == 0) //no away sites!
-		zlevels = GLOB.using_map.station_levels //resort to just porting them around the station
+		zlevels = GLOB.using_map.station_levels.Copy() //resort to just porting them around the station
 
 
 //pulse is setup so each pulse puts all affected players in the same area
