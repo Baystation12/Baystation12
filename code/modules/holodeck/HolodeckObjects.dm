@@ -317,12 +317,12 @@
 	else
 		return ..(mover, target, height, air_group)
 
-//VOLEYBALL OBJECTS
+//VOLLEYBALL OBJECTS
 
 /obj/item/weapon/beach_ball/holovolleyball
 	icon = 'icons/obj/basketball.dmi'
 	icon_state = "volleyball"
-	name = "voleyball"
+	name = "volleyball"
 	item_state = "volleyball"
 	desc = "You can be my wingman anytime."
 	w_class = ITEM_SIZE_LARGE //Stops people from hiding it in their pockets
