@@ -67,8 +67,14 @@
 /obj/item/mech_equipment/proc/get_effective_obj()
 	return src
 
-/obj/item/mech_equipment/proc/MouseDragInteraction()
-	return 0
+/obj/item/mech_equipment/proc/MouseDragInteraction(src_object, over_object, src_location, over_location, src_control, over_control, params, var/mob/user)
+	//Get intent updated
+	if(user != owner)
+		owner.a_intent = user.a_intent
+	if(user.zone_sel)
+		owner.zone_sel.set_selected_zone(user.zone_sel.selecting)
+	else
+		owner.zone_sel.set_selected_zone(BP_CHEST)
 
 /obj/item/mech_equipment/mob_can_unequip(mob/M, slot, disable_warning)
 	. = ..()

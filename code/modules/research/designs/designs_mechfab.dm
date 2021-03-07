@@ -406,6 +406,13 @@
 	req_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 4, TECH_ENGINEERING = 3)
 	build_path = /obj/item/mech_equipment/mounted_system/taser/plasma
 
+/datum/design/item/exosuit/weapon/plasma/auto
+	name = "mounted rotatory plasma cutter"
+	id = "mech_plasma_auto"
+	materials = list(MATERIAL_STEEL = 20000, MATERIAL_SILVER = 2000, MATERIAL_GOLD = 2000)
+	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 5, TECH_ENGINEERING = 3)
+	build_path = /obj/item/mech_equipment/mounted_system/taser/autoplasma
+
 /datum/design/item/exosuit/weapon/ion
 	name = "mounted ion rifle"
 	id = "mech_ion"

@@ -6,6 +6,14 @@
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_WEAPONS)
 
+/obj/item/mech_equipment/mounted_system/taser/MouseDragInteraction(src_object, over_object, src_location, over_location, src_control, over_control, params, var/mob/user)
+	. = ..()
+	
+	if(over_object)
+		var/obj/item/weapon/gun/gun = holding
+		if(istype(gun) && gun.can_autofire())
+			gun.Fire(get_turf(over_object), owner, params, (get_dist(over_object, owner) <= 1), FALSE)
+
 /obj/item/mech_equipment/mounted_system/taser/ion
 	name = "mounted ion rifle"
 	desc = "An exosuit-mounted ion rifle. Handle with care."
