@@ -35,18 +35,18 @@
 	camera = locate() in src
 	software = locate() in src
 
-/obj/item/mech_component/sensors/proc/get_sight()
+/obj/item/mech_component/sensors/proc/get_sight(powered)
 	var/flags = 0
-	if(total_damage >= 0.8 * max_damage)
+	if(total_damage >= 0.8 * max_damage || !powered)
 		flags |= BLIND
-	else if(active_sensors)
+	else if(active_sensors && powered)
 		flags |= vision_flags
 
 	return flags
 
-/obj/item/mech_component/sensors/proc/get_invisible()
+/obj/item/mech_component/sensors/proc/get_invisible(powered)
 	var/invisible = 0
-	if((total_damage <= 0.8 * max_damage) && active_sensors)
+	if((total_damage <= 0.8 * max_damage) && active_sensors && powered)
 		invisible = see_invisible
 	return invisible
 

@@ -15,6 +15,7 @@
 	var/passive_power_use = 0          // For gear that for some reason takes up power even if it's supposedly doing nothing (mech will idly consume power)
 	var/mech_layer = MECH_GEAR_LAYER //For the part where it's rendered as mech gear
 	var/require_adjacent = TRUE
+	var/active = FALSE //For gear that has an active state (ie, floodlights)
 
 /obj/item/mech_equipment/attack(mob/living/M, mob/living/user, target_zone) //Generally it's not desired to be able to attack with items
 	return 0
@@ -51,12 +52,18 @@
 		if(length(restricted_hardpoints))
 			to_chat(user, SPAN_SUBTLE("You figure it could be mounted in the [english_list(restricted_hardpoints)]."))
 
+/obj/item/mech_equipment/proc/deactivate()
+	active = FALSE
+	return
+
 /obj/item/mech_equipment/proc/installed(var/mob/living/exosuit/_owner)
 	owner = _owner
 	//generally attached. Nothing should be able to grab it
 	canremove = FALSE
 
 /obj/item/mech_equipment/proc/uninstalled()
+	if(active)
+		deactivate()
 	owner = null
 	canremove = TRUE
 
