@@ -28,12 +28,12 @@
 	hitsound = null
 
 /obj/item/natural_weapon/bite/strong
-	force = 20
+	force = 25
 
 /obj/item/natural_weapon/claws
 	name = "claws"
 	attack_verb = list("mauled", "clawed", "slashed")
-	force = 10
+	force = 15
 	sharp = TRUE
 	edge = TRUE
 
@@ -56,7 +56,7 @@
 
 /obj/item/natural_weapon/pincers
 	name = "pincers"
-	force = 5
+	force = 10
 	attack_verb = list("snipped", "pinched")
 
 /obj/item/natural_weapon/drone_slicer
@@ -79,4 +79,4 @@
 	force = 15
 
 /obj/item/natural_weapon/giant
-	force = 30 
+	force = 30

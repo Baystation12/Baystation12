@@ -50,6 +50,7 @@
 	var/hunt_chance = 1 //percentage chance the mob will run to a random nearby tile
 
 /obj/item/natural_weapon/bite/spider
+	force = 20
 
 /obj/item/natural_weapon/bite/spider/apply_hit_effect(mob/living/target, mob/living/user, hit_zone)
 	. = ..()
@@ -90,7 +91,6 @@
 	var/mob/living/simple_animal/hostile/giant_spider/nurse/paired_nurse
 
 /obj/item/natural_weapon/bite/spider/strong
-	force = 15
 
 //nursemaids - these create webs and eggs - the weakest and least threatening
 /mob/living/simple_animal/hostile/giant_spider/nurse
@@ -375,7 +375,7 @@ Nurse caste procs
 
 						if(O.anchored)
 							continue
-						
+
 						if(is_type_in_list(O, cocoon_blacklist))
 							continue
 
@@ -448,7 +448,7 @@ Hunter caste procs
 	. = ..()
 	if(!isnull(first_stop_automation))
 		stop_automation = first_stop_automation
-	
+
 /mob/living/simple_animal/hostile/giant_spider/hunter/throw_impact(atom/hit_atom)
 	if(isliving(hit_atom))
 		var/mob/living/target = hit_atom
