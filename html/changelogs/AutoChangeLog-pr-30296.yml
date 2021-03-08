@@ -1,4 +1,0 @@
-author: "Parazoid"
-delete-after: True
-changes: 
-  - tweak: "Departmental pagers will now still alert you if you're using any handheld computer instead of just PDAs."

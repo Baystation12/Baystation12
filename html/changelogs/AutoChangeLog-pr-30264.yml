@@ -1,7 +1,0 @@
-author: "Spookerton"
-delete-after: True
-changes: 
-  - tweak: "Deployable barriers use access_brig because half the damn ship has access_security."
-  - tweak: "Deployable barriers have more health, show condition on examine, and apply cooldowns."
-  - tweak: "Deployable barriers fail to anchor if EMPd or emagged. This is shown on nearby examine."
-  - tweak: "You can repair barrier health with a wrench and its anchorability with a welding tool."
