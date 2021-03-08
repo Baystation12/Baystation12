@@ -35,3 +35,7 @@
 			if(rig.air_supply)
 				player.set_internals(rig.air_supply)
 		return rig 
+
+//Some modes allow swapping to a vox from their initial mobs. Equip them here.
+/datum/antagonist/proc/equip_vox(mob/living/carbon/human/vox, mob/living/carbon/human/old)
+	return

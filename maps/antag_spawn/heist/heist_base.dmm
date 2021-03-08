@@ -387,7 +387,7 @@
 	pixel_x = -12;
 	pixel_y = 2
 	},
-/obj/item/storage/mirror/raider{
+/obj/item/vox_changer/raider{
 	pixel_x = -28;
 	pixel_y = 0
 	},
