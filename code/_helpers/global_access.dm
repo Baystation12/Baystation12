@@ -385,8 +385,6 @@
 			return global.dna_genes;
 		if("doppler_arrays")
 			return global.doppler_arrays;
-		if("dreams")
-			return global.dreams;
 		if("dummy_lighting_corner")
 			return global.dummy_lighting_corner;
 		if("empty_playable_ai_cores")
@@ -881,10 +879,6 @@
 			return global.whitelist;
 		if("wireColours")
 			return global.wireColours;
-		if("world_topic_spam_protect_ip")
-			return global.world_topic_spam_protect_ip;
-		if("world_topic_spam_protect_time")
-			return global.world_topic_spam_protect_time;
 		if("world_uplinks")
 			return global.world_uplinks;
 		if("worths")
@@ -1282,8 +1276,6 @@
 			global.dna_genes=newval;
 		if("doppler_arrays")
 			global.doppler_arrays=newval;
-		if("dreams")
-			global.dreams=newval;
 		if("dummy_lighting_corner")
 			global.dummy_lighting_corner=newval;
 		if("empty_playable_ai_cores")
@@ -1778,10 +1770,6 @@
 			global.whitelist=newval;
 		if("wireColours")
 			global.wireColours=newval;
-		if("world_topic_spam_protect_ip")
-			global.world_topic_spam_protect_ip=newval;
-		if("world_topic_spam_protect_time")
-			global.world_topic_spam_protect_time=newval;
 		if("world_uplinks")
 			global.world_uplinks=newval;
 		if("worths")
@@ -1986,7 +1974,6 @@
 	"dna_activity_bounds",
 	"dna_genes",
 	"doppler_arrays",
-	"dreams",
 	"dummy_lighting_corner",
 	"empty_playable_ai_cores",
 	"endgame_exits",
@@ -2234,8 +2221,6 @@
 	"weighted_randomevent_locations",
 	"whitelist",
 	"wireColours",
-	"world_topic_spam_protect_ip",
-	"world_topic_spam_protect_time",
 	"world_uplinks",
 	"worths",
 	"wrapped_species_by_ref",
