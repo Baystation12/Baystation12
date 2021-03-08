@@ -155,6 +155,13 @@ steam.start() -- spawns the effect
 		sleep(5)
 		step(sparks,direction)
 
+//and to shortcut all that
+/proc/sparks(n = 3, c = 0, loca)
+	var/datum/effect/effect/system/spark_spread/S = new
+	S.set_up(n, c, loca)
+	S.start()
+	return S
+
 /////////////////////////////////////////////
 //// SMOKE SYSTEMS
 // direct can be optinally added when set_up, to make the smoke always travel in one direction
