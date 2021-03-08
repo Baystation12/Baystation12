@@ -143,6 +143,24 @@
 	check_dna()
 	dna.ready_dna(src)
 
+/mob/living/carbon/human/proc/generate_valid_languages()
+	var/list/result = list()
+	for (var/cult_key in cultural_info)
+		var/decl/cultural_info/culture = cultural_info[cult_key]
+		if (!istype(culture))
+			continue
+		if (culture.language)
+			result[culture.language] = all_languages[culture.language]
+		if (culture.name_language)
+			result[culture.name_language] = all_languages[culture.name_language]
+		if (culture.default_language)
+			result[culture.default_language] = all_languages[culture.default_language]
+		for (var/lang_key in culture.secondary_langs)
+			result[lang_key] = all_languages[lang_key]
+		for (var/lang_key in culture.additional_langs)
+			result[lang_key] = all_languages[lang_key]
+	return result
+
 /mob/living/carbon/human/proc/generate_valid_species(var/check_whitelist = 1, var/list/whitelist = list(), var/list/blacklist = list())
 	var/list/valid_species = new()
 	for(var/current_species_name in all_species)

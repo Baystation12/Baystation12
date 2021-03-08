@@ -82,7 +82,7 @@
 	var/W = weakref(user)
 	var/datum/nano_module/appearance_changer/changer = LAZYACCESS(ui_cache, W)
 	if (!changer)
-		changer = new(user, APPEARANCE_HAIR|APPEARANCE_FACIAL_HAIR)
+		changer = new(user, APPEARANCE_HEAD|APPEARANCE_FACE)
 		changer.name = "SalonPro Nano-Mirror"
 		LAZYSET(ui_cache, W, changer)
 	changer.ui_interact(user)
