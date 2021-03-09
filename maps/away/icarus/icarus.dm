@@ -41,7 +41,7 @@
 	id = "awaysite_icarus"
 	description = "The crashlanding site of the SEV Icarus."
 	suffixes = list("icarus/icarus-1.dmm", "icarus/icarus-2.dmm")
-	cost = 2
+	spawn_cost = 2
 	generate_mining_by_z = list(1, 2)
 	area_usage_test_exempted_root_areas = list(/area/icarus)
 	area_coherency_test_exempt_areas = list(/area/icarus/vessel, /area/icarus/open)

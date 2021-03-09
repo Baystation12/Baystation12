@@ -16,7 +16,7 @@
 	id = "awaysite_miningstation"
 	description = "An orbital Mining Station bearing authentication codes from Grayson Mining Industries, sensors show inconsistant lifesigns aboard the station."
 	suffixes = list("miningstation/miningstation.dmm")
-	cost = 1
+	spawn_cost = 1
 	area_usage_test_exempted_root_areas = list(/area/miningstation)
 
 /obj/effect/shuttle_landmark/nav_miningstation/hangar

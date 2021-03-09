@@ -103,6 +103,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/num_exoplanets = 0
 	var/list/planet_size  //dimensions of planet zlevel, defaults to world size. Due to how maps are generated, must be (2^n+1) e.g. 17,33,65,129 etc. Map will just round up to those if set to anything other.
 	var/away_site_budget = 0
+	var/min_offmap_players = 0
 
 	var/list/loadout_blacklist	//list of types of loadout items that will not be pickable
 
@@ -269,6 +270,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		if ("local_currency_name_singular") local_currency_name_singular = value
 		if ("local_currency_name_short") local_currency_name_short = value
 		if ("game_year_offset") game_year = text2num(time2text(world.timeofday, "YYYY")) + text2num_or_default(value, DEFAULT_GAME_YEAR_OFFSET)
+		if ("min_offmap_players") min_offmap_players = text2num_or_default(value, min_offmap_players)
 		else log_misc("Unknown setting [name] in [filename].")
 
 /datum/map/proc/setup_map()
@@ -291,17 +293,21 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 /* It is perfectly possible to create loops with TEMPLATE_FLAG_ALLOW_DUPLICATES and force/allow. Don't. */
 /proc/resolve_site_selection(datum/map_template/ruin/away_site/site, list/selected, list/available, list/unavailable, list/by_type)
-	var/cost = 0
+	var/spawn_cost = 0
+	var/player_cost = 0
 	if (site in selected)
 		if (!(site.template_flags & TEMPLATE_FLAG_ALLOW_DUPLICATES))
-			return cost
+			return list(spawn_cost, player_cost)
 	if (!(site.template_flags & TEMPLATE_FLAG_ALLOW_DUPLICATES))
 		available -= site
-	cost += site.cost
+	spawn_cost += site.spawn_cost
+	player_cost += site.player_cost
 	selected += site
 
 	for (var/forced_type in site.force_ruins)
-		cost += resolve_site_selection(by_type[forced_type], selected, available, unavailable, by_type)
+		var/list/costs = resolve_site_selection(by_type[forced_type], selected, available, unavailable, by_type)
+		spawn_cost += costs[1]
+		player_cost += costs[2]
 
 	for (var/banned_type in site.ban_ruins)
 		var/datum/map_template/ruin/away_site/banned = by_type[banned_type]
@@ -321,7 +327,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 				continue
 		available[allowed] = allowed.spawn_weight
 
-	return cost
+	return list(spawn_cost, player_cost)
 
 
 /datum/map/proc/build_away_sites()
@@ -347,19 +353,27 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			available[site] = site.spawn_weight
 		by_type[site.type] = site
 
-	var/budget = away_site_budget
-	for (var/datum/map_template/ruin/away_site/site in guaranteed)
-		budget -= resolve_site_selection(site, selected, available, unavailable, by_type)
+	var/points = away_site_budget
+	var/players = -min_offmap_players
+	for (var/client/C)
+		++players
 
-	while (budget > 0 && length(available))
+	for (var/datum/map_template/ruin/away_site/site in guaranteed)
+		var/list/costs = resolve_site_selection(site, selected, available, unavailable, by_type)
+		points -= costs[1]
+		players -= costs[2]
+
+	while (points > 0 && length(available))
 		var/datum/map_template/ruin/away_site/site = pickweight(available)
-		if (site.cost > budget)
+		if (site.spawn_cost && site.spawn_cost > points || site.player_cost && site.player_cost > players)
 			unavailable += site
 			available -= site
 			continue
-		budget -= resolve_site_selection(site, selected, available, unavailable, by_type)
+		var/list/costs = resolve_site_selection(site, selected, available, unavailable, by_type)
+		points -= costs[1]
+		players -= costs[2]
 
-	report_progress("Finished selecting away sites ([english_list(selected)]) for [away_site_budget - budget] cost of [away_site_budget] budget.")
+	report_progress("Finished selecting away sites ([english_list(selected)]) for [away_site_budget - points] cost of [away_site_budget] budget.")
 
 	for (var/datum/map_template/template in selected)
 		if (template.load_new_z())

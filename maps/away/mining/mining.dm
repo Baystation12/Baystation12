@@ -29,7 +29,7 @@
 	id = "awaysite_mining_asteroid"
 	description = "A medium-sized asteroid full of minerals."
 	suffixes = list("mining/mining-asteroid.dmm")
-	cost = 1
+	spawn_cost = 1
 	accessibility_weight = 10
 	generate_mining_by_z = 1
 	apc_test_exempt_areas = list(
@@ -100,7 +100,7 @@
 	id = "awaysite_mining_signal"
 	description = "A mineral-rich, formerly-volcanic site on a planetoid."
 	suffixes = list("mining/mining-signal.dmm")
-	cost = 1
+	spawn_cost = 1
 	generate_mining_by_z = 1
 	base_turf_for_zs = /turf/simulated/floor/asteroid
 	area_usage_test_exempted_root_areas = list(/area/mine, /area/outpost)
@@ -168,7 +168,7 @@
 	id = "awaysite_mining_orb"
 	description = "A sort of circular asteroid with a bird."
 	suffixes = list("mining/mining-orb.dmm")
-	cost = 1
+	spawn_cost = 1
 	accessibility_weight = 10
 	generate_mining_by_z = 1
 	base_turf_for_zs = /turf/simulated/floor/asteroid

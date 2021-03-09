@@ -3,7 +3,7 @@
 	id = "ec_old_wreck"
 	description = "An abandoned ancient STL exploration ship."
 	suffixes = list("ec_old_crash/ec_old_crash.dmm")
-	cost = 0.5
+	spawn_cost = 0.5
 	apc_test_exempt_areas = list(
 		/area/map_template/ecship/engine = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/map_template/ecship/cockpit = NO_SCRUBBER|NO_APC

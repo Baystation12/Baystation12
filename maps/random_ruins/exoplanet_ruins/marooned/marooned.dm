@@ -3,7 +3,7 @@
 	id = "awaysite_marooned" 
 	description = "crashed dropship with marooned Magnitka officer" 
 	suffixes = list("marooned/marooned.dmm") 
-	cost = 1 
+	spawn_cost = 1 
 	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS
 	ruin_tags = RUIN_HUMAN|RUIN_WRECK
 	apc_test_exempt_areas = list(
