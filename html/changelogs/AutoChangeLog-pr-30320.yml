@@ -1,0 +1,5 @@
+author: "Ilysen"
+delete-after: True
+changes: 
+  - spellcheck: "Lowercased the names of the emergency softsuit, emergency space helmet, anomaly suit, and anomaly hood, to bring them in line with normal object naming schemes."
+  - spellcheck: "Fixed run-on sentences in the descriptions of the emergency softsuit and emergency space helmet."
