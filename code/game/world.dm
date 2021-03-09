@@ -109,10 +109,15 @@ GLOBAL_VAR(href_logfile)
 #undef RECOMMENDED_VERSION
 
 GLOBAL_LIST_EMPTY(world_topic_throttle)
+GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 #define SET_THROTTLE(TIME, REASON) throttle[1] = world.timeofday + (TIME); throttle[2] = (REASON);
 
 /world/Topic(T, addr, master, key)
 	to_file(diary, "TOPIC: \"[T]\", from:[addr], master:[master], key:[key][log_end]")
+
+	if (GLOB.world_topic_last > world.timeofday)
+		GLOB.world_topic_throttle = list() //probably passed midnight
+	GLOB.world_topic_last = world.timeofday
 
 	var/list/throttle = GLOB.world_topic_throttle[addr]
 	if (!throttle)
