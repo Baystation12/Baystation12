@@ -242,7 +242,7 @@
 	playsound(user, projectilesound, 100, 1)
 	if(!A)	return
 	var/def_zone = get_exposed_defense_zone(target)
-	A.launch(target, def_zone)
+	A.launch_from_mob(target, src, def_zone)
 
 /mob/living/simple_animal/hostile/proc/DestroySurroundings() //courtesy of Lohikar
 	if(!can_act())
