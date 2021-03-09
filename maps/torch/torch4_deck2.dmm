@@ -295,8 +295,8 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/vacant/prototype/engine)
 "az" = (
-/turf/simulated/wall/r_wall/prepainted,
-/area/maintenance/seconddeck/forestarboard)
+/turf/simulated/wall/prepainted,
+/area/engineering/engine_smes)
 "aA" = (
 /obj/machinery/access_button{
 	command = "cycle_exterior";
@@ -407,7 +407,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/storage/tech)
 "aK" = (
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/vacant/armory)
 "aL" = (
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
@@ -5070,7 +5070,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/engineering/storage)
 "kD" = (
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/hallway/primary/seconddeck/center)
 "kE" = (
 /obj/structure/table/standard,
@@ -5386,7 +5386,7 @@
 	dir = 4;
 	pixel_z = 10
 	},
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/hallway/primary/seconddeck/center)
 "lp" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -6093,7 +6093,7 @@
 	dir = 4;
 	pixel_z = 10
 	},
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/hallway/primary/seconddeck/elevator)
 "nb" = (
 /obj/machinery/disposal/deliveryChute{
@@ -6439,7 +6439,7 @@
 	dir = 1;
 	pixel_z = 6
 	},
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/hallway/primary/seconddeck/center)
 "nQ" = (
 /obj/structure/sign/directions/security{
@@ -6449,7 +6449,7 @@
 	dir = 1;
 	pixel_z = 6
 	},
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/hallway/primary/seconddeck/elevator)
 "nS" = (
 /obj/machinery/atmospherics/portables_connector{
@@ -6468,7 +6468,7 @@
 	dir = 2;
 	pixel_z = 6
 	},
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/hallway/primary/seconddeck/elevator)
 "nW" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -7372,7 +7372,7 @@
 /turf/space,
 /area/space)
 "qv" = (
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/engineering/drone_fabrication)
 "qw" = (
 /turf/simulated/wall/r_wall/hull,
@@ -7675,7 +7675,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/engineering/engineering_monitoring)
 "qV" = (
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/engineering/engine_monitoring)
 "qW" = (
 /obj/structure/disposalpipe/segment{
@@ -8434,7 +8434,7 @@
 	pixel_y = 3;
 	pixel_z = 0
 	},
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/engineering/engineering_monitoring)
 "sW" = (
 /obj/effect/wallframe_spawn/reinforced,
@@ -10243,8 +10243,8 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/foreport)
 "yf" = (
-/turf/simulated/wall/r_wall/prepainted,
-/area/maintenance/incinerator)
+/turf/simulated/wall/prepainted,
+/area/vacant/prototype/control)
 "yg" = (
 /turf/simulated/wall/prepainted,
 /area/maintenance/incinerator)
@@ -10866,7 +10866,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/atmos)
 "zO" = (
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/engineering/atmos/storage)
 "zP" = (
 /obj/structure/railing/mapped{
@@ -13890,6 +13890,9 @@
 "HQ" = (
 /turf/simulated/floor/tiled/white/monotile,
 /area/assembly/robotics/surgery)
+"HS" = (
+/turf/simulated/wall/r_wall,
+/area/engineering/storage)
 "HU" = (
 /obj/structure/table/rack,
 /obj/random/maintenance/solgov,
@@ -15363,6 +15366,9 @@
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/vacant/prototype/engine)
+"Nc" = (
+/turf/simulated/wall/r_wall,
+/area/teleporter/seconddeck)
 "Nd" = (
 /obj/machinery/power/terminal{
 	dir = 1;
@@ -15475,7 +15481,7 @@
 	dir = 1;
 	pixel_z = 6
 	},
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/hallway/primary/seconddeck/center)
 "Nl" = (
 /obj/structure/table/standard,
@@ -16019,7 +16025,7 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/engineering/atmos)
 "OV" = (
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/hallway/primary/seconddeck/elevator)
 "OW" = (
 /obj/structure/cable/green{
@@ -17565,7 +17571,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/forestarboard)
 "TJ" = (
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/engineering/shieldbay)
 "TK" = (
 /obj/structure/grille,
@@ -18925,7 +18931,7 @@
 /area/engineering/atmos)
 "YI" = (
 /obj/structure/sign/warning/high_voltage,
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/engineering/engine_smes)
 "YL" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction{
@@ -19219,8 +19225,12 @@
 /turf/simulated/wall/prepainted,
 /area/assembly/robotics/surgery)
 "ZH" = (
-/turf/simulated/wall/r_wall/prepainted,
-/area/engineering/engineering_monitoring)
+/obj/structure/sign/warning/radioactive{
+	dir = 4;
+	icon_state = "radiation"
+	},
+/turf/simulated/wall/prepainted,
+/area/vacant/prototype/control)
 "ZI" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -30292,7 +30302,7 @@ ir
 fU
 JX
 Sx
-Qe
+yf
 mf
 Rf
 Pg
@@ -30494,7 +30504,7 @@ is
 fU
 JX
 xR
-Qe
+yf
 Mi
 Sf
 Qg
@@ -30696,7 +30706,7 @@ gK
 fU
 JX
 LT
-Qe
+yf
 Gf
 Jh
 ri
@@ -30704,7 +30714,7 @@ vk
 Ij
 Rj
 Wj
-Qe
+yf
 uf
 Wp
 vt
@@ -30898,15 +30908,15 @@ gL
 fU
 JX
 xR
-Qe
+yf
 Hf
 Vh
 Gi
-Qe
+yf
 bl
 Sj
 Xi
-Qe
+yf
 ZV
 Wp
 vt
@@ -31100,15 +31110,15 @@ JX
 JX
 JX
 SU
-Qe
+yf
 Ug
 Vf
 vi
-Qe
+yf
 Fi
 Oi
 Nl
-Qe
+yf
 Mz
 Wp
 Wp
@@ -31302,15 +31312,15 @@ bd
 bI
 tj
 xR
-Qe
-Qe
-Qe
+yf
+yf
+yf
 qk
-VL
-Qe
-Qe
-Qe
-Qe
+ZH
+yf
+yf
+yf
+yf
 ZV
 uM
 UQ
@@ -32730,8 +32740,8 @@ Lp
 dX
 aK
 aK
-yf
-yf
+yg
+yg
 yg
 yg
 yg
@@ -32918,7 +32928,7 @@ zw
 zw
 Uf
 NQ
-az
+bI
 JH
 JL
 pJ
@@ -35353,7 +35363,7 @@ nc
 NJ
 sK
 fS
-lr
+nc
 zO
 qB
 yl
@@ -38989,11 +38999,11 @@ Qp
 Ab
 QI
 jy
-fp
+HS
 Yy
 kj
-Yy
-Yy
+Nc
+Nc
 Is
 Fn
 AN
@@ -39191,11 +39201,11 @@ Sv
 Ol
 hr
 fc
-fp
+HS
 jX
 kk
 kE
-Yy
+Nc
 tX
 SM
 AO
@@ -39393,12 +39403,12 @@ Ad
 ZB
 hr
 yv
-fp
+HS
 jZ
 km
 nB
-Yy
-Yy
+Nc
+Nc
 Fn
 AN
 TV
@@ -39600,7 +39610,7 @@ vS
 WA
 xC
 kG
-Yy
+Nc
 Fn
 AN
 Cf
@@ -39802,7 +39812,7 @@ Qv
 kx
 xC
 kM
-Yy
+Nc
 Fn
 AN
 AN
@@ -39999,12 +40009,12 @@ kh
 kB
 Qz
 PA
-fp
+HS
 kf
 zZ
 xC
 FV
-Yy
+Nc
 wL
 NF
 Cg
@@ -40201,12 +40211,12 @@ jy
 jy
 jy
 jy
-fp
+HS
 vS
 FI
-Yy
-Yy
-Yy
+Nc
+Nc
+Nc
 KE
 Bw
 Cg
@@ -41408,7 +41418,7 @@ HN
 pH
 qP
 CC
-ZH
+Ia
 sZ
 sZ
 sZ
@@ -42406,11 +42416,11 @@ xI
 Lk
 MD
 gt
-hp
-hp
+az
+az
 hk
-hp
-hp
+az
+az
 hQ
 tg
 fa
@@ -42608,11 +42618,11 @@ VP
 Lk
 fH
 gu
-hp
+az
 NZ
 sw
 OI
-hp
+az
 qV
 lL
 qV
@@ -43012,7 +43022,7 @@ gQ
 yp
 ZJ
 oU
-hp
+az
 Gd
 Nd
 Td
@@ -43214,7 +43224,7 @@ Ul
 Lk
 hj
 ke
-hp
+az
 hh
 Od
 Ud
@@ -43416,7 +43426,7 @@ eQ
 Lk
 hq
 WK
-hp
+az
 Id
 Pd
 Wd
@@ -43820,7 +43830,7 @@ eS
 Lk
 fM
 WK
-hp
+az
 Kd
 hm
 hG
@@ -44022,7 +44032,7 @@ Lk
 Lk
 dA
 tx
-hp
+az
 hp
 iX
 jH
