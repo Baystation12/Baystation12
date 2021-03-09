@@ -698,7 +698,7 @@
 /obj/item/clothing/under/lawyer/black,
 /obj/item/clothing/under/lawyer/bluesuit,
 /obj/item/clothing/under/rank/mailman,
-/obj/item/clothing/accessory/storage,
+/obj/item/clothing/accessory/storage/webbing_large,
 /obj/item/clothing/under/rank/dispatch,
 /turf/unsimulated/floor{
 	icon_state = "carpet";
