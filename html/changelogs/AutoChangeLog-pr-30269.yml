@@ -1,5 +1,0 @@
-author: "Ilysen"
-delete-after: True
-changes: 
-  - rscadd: "Emergency shutters now play sounds when they open and close."
-  - spellcheck: "Rewrote some emergency shutter messages from past tense to present tense (i.e. \"has opened\" -> \"opens\")."
