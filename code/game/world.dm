@@ -117,7 +117,7 @@ GLOBAL_LIST_EMPTY(world_topic_throttle)
 	var/list/throttle = GLOB.world_topic_throttle[addr]
 	if (!throttle)
 		GLOB.world_topic_throttle[addr] = throttle = list(0, null)
-	else if (throttle[1] && throttle[1] < world.timeofday)
+	else if (throttle[1] && throttle[1] > world.timeofday)
 		return throttle[2] ? "Throttled ([throttle[2]])" : "Throttled"
 	SET_THROTTLE(3 SECONDS, null)
 
