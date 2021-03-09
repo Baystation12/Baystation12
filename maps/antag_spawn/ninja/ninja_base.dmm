@@ -185,14 +185,14 @@
 	},
 /area/map_template/ninja_dojo/dojo)
 "ay" = (
-/obj/machinery/teleport/station,
+/obj/machinery/tele_projector,
 /turf/unsimulated/floor{
 	icon_state = "plating";
 	name = "plating"
 	},
 /area/map_template/ninja_dojo/dojo)
 "az" = (
-/obj/machinery/teleport/hub,
+/obj/machinery/tele_pad,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/unsimulated/floor{
 	icon_state = "plating";
@@ -1269,11 +1269,11 @@
 /turf/simulated/floor/plating,
 /area/map_template/ninja_dojo/start)
 "cI" = (
-/obj/machinery/teleport/station,
+/obj/machinery/tele_projector,
 /turf/simulated/floor/plating,
 /area/map_template/ninja_dojo/start)
 "cJ" = (
-/obj/machinery/teleport/hub,
+/obj/machinery/tele_pad,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/plating,
 /area/map_template/ninja_dojo/start)

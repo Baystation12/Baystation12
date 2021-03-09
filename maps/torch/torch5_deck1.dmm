@@ -9049,7 +9049,7 @@
 /turf/simulated/wall/prepainted,
 /area/rnd/development)
 "aCp" = (
-/obj/machinery/teleport/hub,
+/obj/machinery/tele_pad,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/teleporter/firstdeck)
@@ -24239,7 +24239,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/firstdeck/aftstarboard)
 "nZB" = (
-/obj/machinery/teleport/station,
+/obj/machinery/tele_projector,
 /obj/machinery/button/blast_door{
 	id_tag = "teleport1";
 	name = "First Deck Teleporter Access Shutter Control";

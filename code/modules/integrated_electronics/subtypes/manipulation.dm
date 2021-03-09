@@ -558,32 +558,32 @@
 	matter = list(MATERIAL_STEEL = 10000, MATERIAL_SILVER = 2000, MATERIAL_GOLD = 200)
 
 /obj/item/integrated_circuit/manipulation/bluespace_rift/do_work()
-	var/obj/machinery/computer/teleporter/tporter = get_pin_data_as_type(IC_INPUT, 1, /obj/machinery/computer/teleporter)
-	var/step_dir = get_pin_data(IC_INPUT, 2)
+	var/obj/machinery/computer/teleporter/computer = get_pin_data_as_type(IC_INPUT, 1, /obj/machinery/computer/teleporter)
+	if (computer && !AreConnectedZLevels(get_z(src), get_z(computer)))
+		computer = null
 
-	if(!AreConnectedZLevels(get_z(src), get_z(tporter)))
-		tporter = null
-
-	var/turf/rift_location = get_turf(src)
-	if(!rift_location || !isPlayerLevel(rift_location.z))
+	var/turf/depart = get_turf(src)
+	if (!depart || !isPlayerLevel(depart.z))
 		playsound(src, 'sound/effects/sparks2.ogg', 50, 1)
 		return
 
-	if(isnum(step_dir) && (!step_dir || (step_dir in GLOB.cardinal)))
-		rift_location = get_step(rift_location, step_dir) || rift_location
+	var/turf/arrive
+	if (computer?.target && computer.operable())
+		arrive = get_turf(computer.target)
 	else
-		var/obj/item/device/electronic_assembly/assembly = get_object()
-		if(assembly)
-			rift_location = get_step(rift_location, assembly.dir) || rift_location
+		arrive = get_random_turf_in_range(src, 10)
+	if (!arrive || !isPlayerLevel(arrive.z))
+		playsound(src, 'sound/effects/sparks2.ogg', 50, 1)
+		return
 
-	if(tporter && tporter.locked && !tporter.one_time_use && tporter.operable())
-		new /obj/effect/portal(rift_location, get_turf(tporter.locked))
-	else
-		var/turf/destination = get_random_turf_in_range(src, 10)
-		if(destination)
-			new /obj/effect/portal(rift_location, destination, 30 SECONDS, 33)
-		else
-			playsound(src, 'sound/effects/sparks2.ogg', 50, 1)
+	var/step_dir = get_pin_data(IC_INPUT, 2)
+	if (!isnum(step_dir) || !(step_dir in GLOB.cardinal))
+		var/obj/item/device/electronic_assembly/assembly = get_object()
+		step_dir = assembly.dir
+	depart = get_step(depart, step_dir) || depart
+
+	new /obj/effect/portal(depart, arrive, 30 SECONDS, 33)
+	playsound(src, 'sound/effects/sparks2.ogg', 50, 1)
 
 
 /obj/item/integrated_circuit/manipulation/ai

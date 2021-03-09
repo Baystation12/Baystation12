@@ -695,7 +695,6 @@ var/list/worths = list(
 					/obj/machinery/sleeper = -4000,
 					/obj/machinery/space_heater = -500,
 					/obj/machinery/ai_status_display = -600,
-					/obj/machinery/teleport = -15000,
 					/obj/machinery/camera = -700,
 					/obj/machinery/airlock_sensor = -800,
 					/obj/machinery/door/airlock = -800,
