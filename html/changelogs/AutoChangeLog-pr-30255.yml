@@ -1,0 +1,4 @@
+author: "SierraKomodo & Pawn"
+delete-after: True
+changes: 
+  - imageadd: "New sprites and lighting overlays for teleporters have been added."
