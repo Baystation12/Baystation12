@@ -1,0 +1,4 @@
+author: "EvenInDeathIStillServe"
+delete-after: True
+changes: 
+  - rscadd: "The R-UST fusion field now changes coloration and light intensity depending on temperature."
