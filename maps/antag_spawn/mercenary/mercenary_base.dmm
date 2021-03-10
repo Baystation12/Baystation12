@@ -2420,7 +2420,9 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle)
 "BU" = (
-/obj/machinery/atmospherics/binary/pump/high_power/on/max_pressure,
+/obj/machinery/atmospherics/binary/pump/high_power/on{
+	target_pressure = 10000
+	},
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/map_template/merc_shuttle)

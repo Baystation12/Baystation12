@@ -200,15 +200,17 @@
 	pixel_x = -24
 	},
 /obj/effect/catwalk_plated/ascent,
-/obj/machinery/atmospherics/binary/pump/high_power/on/distribution{
+/obj/machinery/atmospherics/binary/pump/high_power/on{
 	dir = 1;
-	icon_state = "map_on"
+	target_pressure = 5000
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
 "aM" = (
 /obj/effect/catwalk_plated/ascent,
-/obj/machinery/atmospherics/binary/pump/high_power/on/distribution,
+/obj/machinery/atmospherics/binary/pump/high_power/on{
+	target_pressure = 150
+	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
 "aN" = (
