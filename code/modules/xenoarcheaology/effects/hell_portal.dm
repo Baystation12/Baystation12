@@ -1,9 +1,9 @@
 /datum/artifact_effect/hellportal
 	name = "hellportal"
 	effect_type = EFFECT_BLUESPACE
-	var/convert_count = 0 //how many turfs are converted to lava each activation
-	var/active_portals_max = 2 //how many portals can be spawned at each interval
-	var/maximum_mob_count = 0
+	var/convert_count //how many turfs are converted to lava each activation
+	var/active_portals_max //how many portals can be spawned at each interval
+	var/maximum_mob_count
 	var/target_temp = 500
 	var/activation_sound = 'sound/effects/ghost.ogg'
 	var/mob_spawn_sounds = list(

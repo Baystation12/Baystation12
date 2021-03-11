@@ -1147,7 +1147,7 @@ var/global/floorIsLava = 0
 			A.secondary_effect = new secondary_effect
 			A.secondary_effect.trigger = new secondary_trigger
 		else
-			A.secondary_effect = null
+			QDEL_NULL(A.secondary_effect)
 
 /datum/admins/proc/show_traitor_panel(var/mob/M in SSmobs.mob_list)
 	set category = "Admin"
