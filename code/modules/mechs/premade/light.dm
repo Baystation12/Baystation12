@@ -65,7 +65,6 @@
 	hatch_descriptor = "canopy"
 	pilot_coverage = 100
 	transparent_cabin =  TRUE
-	hide_pilot = TRUE //Sprite too small, legs clip through, so for now hide pilot
 	exosuit_desc_string = "an open and light chassis"
 	icon_state = "light_body"
 	max_damage = 50
@@ -81,10 +80,10 @@
 /obj/item/mech_component/chassis/light/Initialize()
 	pilot_positions = list(
 		list(
-			"[NORTH]" = list("x" = 8,  "y" = -2),
-			"[SOUTH]" = list("x" = 8,  "y" = -2),
-			"[EAST]"  = list("x" = 1,  "y" = -2),
-			"[WEST]"  = list("x" = 9,  "y" = -2)
+			"[NORTH]" = list("x" = 8,  "y" = 0),
+			"[SOUTH]" = list("x" = 8,  "y" = 0),
+			"[EAST]"  = list("x" = 3,  "y" = 0),
+			"[WEST]"  = list("x" = 13, "y" = 0)
 		)
 	)
 	. = ..()
