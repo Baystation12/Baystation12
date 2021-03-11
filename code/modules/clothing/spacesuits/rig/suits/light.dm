@@ -87,13 +87,13 @@
 
 /obj/item/weapon/rig/light/hacker/meson
 		initial_modules = list(
-		/obj/item/rig_module/ai_container,
-		/obj/item/rig_module/power_sink,
-		/obj/item/rig_module/datajack,
-		/obj/item/rig_module/electrowarfare_suite,
-		/obj/item/rig_module/voice,
-		/obj/item/rig_module/cooling_unit,
-		/obj/item/rig_module/vision/meson,
+			/obj/item/rig_module/ai_container,
+			/obj/item/rig_module/power_sink,
+			/obj/item/rig_module/datajack,
+			/obj/item/rig_module/electrowarfare_suite,
+			/obj/item/rig_module/voice,
+			/obj/item/rig_module/cooling_unit,
+			/obj/item/rig_module/vision/meson
 		)
 
 /obj/item/weapon/rig/light/ninja
