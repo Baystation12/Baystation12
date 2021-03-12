@@ -1,10 +1,10 @@
 /obj/item/clothing/suit/bio_suit/anomaly
-	name = "Anomaly suit"
+	name = "anomaly suit"
 	desc = "A suit that protects against exotic alien energies and biological contamination."
 	icon_state = "bio_anom"
 
 /obj/item/clothing/head/bio_hood/anomaly
-	name = "Anomaly hood"
+	name = "anomaly hood"
 	desc = "A hood that protects the head and face from exotic alien energies and biological contamination."
 	icon_state = "bio_anom"
 	item_state = "bio_anom"

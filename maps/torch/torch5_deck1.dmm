@@ -12277,7 +12277,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/command/armoury)
 "aQr" = (
-/obj/machinery/deployable/barrier,
+/obj/machinery/barrier,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/command/armoury)
@@ -12570,7 +12570,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
 "aRm" = (
-/obj/machinery/deployable/barrier,
+/obj/machinery/barrier,
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/camera/network/command{
 	c_tag = "Bridge - Emergency Armory - Port";
@@ -16278,7 +16278,7 @@
 /area/command/armoury)
 "cZi" = (
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/machinery/deployable/barrier,
+/obj/machinery/barrier,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/storage)
 "cZS" = (

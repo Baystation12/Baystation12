@@ -155,6 +155,16 @@
 	addtimer(CALLBACK(src, .proc/finalize_launch, curloc, targloc, x_offset, y_offset, angle_offset),0)
 	return 0
 
+/obj/item/projectile/proc/launch_from_mob(atom/target, mob/user, target_zone, x_offset = 0, y_offset = 0, angle_offset = 0)
+	if(user == target) //Shooting yourself
+		user.bullet_act(src, target_zone)
+		qdel(src)
+		return 0
+
+	firer = user
+
+	return launch(target, target_zone, x_offset, y_offset)
+
 /obj/item/projectile/proc/finalize_launch(var/turf/curloc, var/turf/targloc, var/x_offset, var/y_offset, var/angle_offset)
 	setup_trajectory(curloc, targloc, x_offset, y_offset, angle_offset) //plot the initial trajectory
 	Process()

@@ -40,6 +40,7 @@
 	. = ..()
 	QDEL_NULL(S)
 
+<<<<<<< HEAD:maps/random_ruins/exoplanet_ruins/icarus/icarus.dm
 //Areas
 
 /area/map_template/icarus
@@ -69,6 +70,21 @@
 
 /area/map_template/icarus/driver
 	icon_state = "driver"
+=======
+/datum/map_template/ruin/away_site/icarus
+	name = "Fallen Icarus"
+	id = "awaysite_icarus"
+	description = "The crashlanding site of the SEV Icarus."
+	suffixes = list("icarus/icarus-1.dmm", "icarus/icarus-2.dmm")
+	spawn_cost = 2
+	generate_mining_by_z = list(1, 2)
+	area_usage_test_exempted_root_areas = list(/area/icarus)
+	area_coherency_test_exempt_areas = list(/area/icarus/vessel, /area/icarus/open)
+	apc_test_exempt_areas = list(
+		/area/icarus/vessel = NO_APC,
+		/area/icarus/open = NO_SCRUBBER|NO_VENT|NO_APC
+	)
+>>>>>>> f3bed9a9ca6bfe4d530783ffe9d371044826e1ef:maps/away/icarus/icarus.dm
 
 /area/map_template/icarus/driver/west
 	name = "SEV Icarus Port Mass Driver"

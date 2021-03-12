@@ -225,8 +225,8 @@
 				grab = 1
 				break
 
-		//We can grab the item, finally.
-		if(grab)
+		//We can grab the item, finally. (prevent grabbing if the target's loc is in a robot frame)
+		if(grab && !istype(target.loc,/obj/item/weapon/robot_module))
 			if(I == user.s_active)
 				var/obj/item/weapon/storage/storage = I
 				storage.close(user) //Closes the ui.

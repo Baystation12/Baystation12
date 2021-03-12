@@ -475,7 +475,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	amount = MAXCOIL
 	max_amount = MAXCOIL
 	color = COLOR_MAROON
-	desc = "A coil of wiring, for delicate electronics use aswell as the more basic cable laying."
+	desc = "A coil of wiring, used for delicate electronics and basic power transfer."
 	throwforce = 0
 	w_class = ITEM_SIZE_NORMAL
 	throw_speed = 2
@@ -486,6 +486,8 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	item_state = "coil"
 	attack_verb = list("whipped", "lashed", "disciplined", "flogged")
 	stacktype = /obj/item/stack/cable_coil
+	singular_name = "length"
+	plural_name = "lengths"
 
 /obj/item/stack/cable_coil/single
 	amount = 1
@@ -567,19 +569,6 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		w_class = ITEM_SIZE_TINY
 	else
 		w_class = ITEM_SIZE_SMALL
-
-/obj/item/stack/cable_coil/examine(mob/user, distance)
-	. = ..()
-	if(distance > 1)
-		return
-
-	if(get_amount() == 1)
-		to_chat(user, "A short piece of power cable.")
-	else if(get_amount() == 2)
-		to_chat(user, "A piece of power cable.")
-	else
-		to_chat(user, "A coil of power cable. There are [get_amount()] lengths of cable in the coil.")
-
 
 /obj/item/stack/cable_coil/verb/make_restraint()
 	set name = "Make Cable Restraints"

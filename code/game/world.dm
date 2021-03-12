@@ -108,11 +108,23 @@ GLOBAL_VAR(href_logfile)
 
 #undef RECOMMENDED_VERSION
 
-var/world_topic_spam_protect_ip = "0.0.0.0"
-var/world_topic_spam_protect_time = world.timeofday
+GLOBAL_LIST_EMPTY(world_topic_throttle)
+GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
+#define SET_THROTTLE(TIME, REASON) throttle[1] = world.timeofday + (TIME); throttle[2] = (REASON);
 
 /world/Topic(T, addr, master, key)
 	to_file(diary, "TOPIC: \"[T]\", from:[addr], master:[master], key:[key][log_end]")
+
+	if (GLOB.world_topic_last > world.timeofday)
+		GLOB.world_topic_throttle = list() //probably passed midnight
+	GLOB.world_topic_last = world.timeofday
+
+	var/list/throttle = GLOB.world_topic_throttle[addr]
+	if (!throttle)
+		GLOB.world_topic_throttle[addr] = throttle = list(0, null)
+	else if (throttle[1] && throttle[1] > world.timeofday)
+		return throttle[2] ? "Throttled ([throttle[2]])" : "Throttled"
+	SET_THROTTLE(3 SECONDS, null)
 
 	/* * * * * * * *
 	* Public Topic Calls
@@ -214,15 +226,10 @@ var/world_topic_spam_protect_time = world.timeofday
 	if(copytext(T,1,14) == "placepermaban")
 		var/input[] = params2list(T)
 		if(!config.ban_comms_password)
-			return "Not enabled"
+			SET_THROTTLE(10 SECONDS, "Bans Not Enabled")
+			return "Not Enabled"
 		if(input["bankey"] != config.ban_comms_password)
-			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
-				spawn(50)
-					world_topic_spam_protect_time = world.time
-					return "Bad Key (Throttled)"
-
-			world_topic_spam_protect_time = world.time
-			world_topic_spam_protect_ip = addr
+			SET_THROTTLE(30 SECONDS, "Bad Bans Key")
 			return "Bad Key"
 
 		var/target = ckey(input["target"])
@@ -249,20 +256,13 @@ var/world_topic_spam_protect_time = world.timeofday
 	* * * * * * * */
 
 	if (!config.comms_password)
+		SET_THROTTLE(10 SECONDS, "Comms Not Enabled")
 		return "Not enabled"
 
 	else if(copytext(T,1,5) == "laws")
 		var/input[] = params2list(T)
 		if(input["key"] != config.comms_password)
-			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
-
-				spawn(50)
-					world_topic_spam_protect_time = world.time
-					return "Bad Key (Throttled)"
-
-			world_topic_spam_protect_time = world.time
-			world_topic_spam_protect_ip = addr
-
+			SET_THROTTLE(30 SECONDS, "Bad Comms Key")
 			return "Bad Key"
 
 		var/list/match = text_find_mobs(input["laws"], /mob/living/silicon)
@@ -309,15 +309,7 @@ var/world_topic_spam_protect_time = world.timeofday
 	else if(copytext(T,1,5) == "info")
 		var/input[] = params2list(T)
 		if(input["key"] != config.comms_password)
-			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
-
-				spawn(50)
-					world_topic_spam_protect_time = world.time
-					return "Bad Key (Throttled)"
-
-			world_topic_spam_protect_time = world.time
-			world_topic_spam_protect_ip = addr
-
+			SET_THROTTLE(30 SECONDS, "Bad Comms Key")
 			return "Bad Key"
 
 		var/list/match = text_find_mobs(input["info"])
@@ -377,15 +369,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 		var/input[] = params2list(T)
 		if(input["key"] != config.comms_password)
-			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
-
-				spawn(50)
-					world_topic_spam_protect_time = world.time
-					return "Bad Key (Throttled)"
-
-			world_topic_spam_protect_time = world.time
-			world_topic_spam_protect_ip = addr
-
+			SET_THROTTLE(30 SECONDS, "Bad Comms Key")
 			return "Bad Key"
 
 		var/client/C
@@ -427,30 +411,15 @@ var/world_topic_spam_protect_time = world.timeofday
 		*/
 		var/input[] = params2list(T)
 		if(input["key"] != config.comms_password)
-			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
-
-				spawn(50)
-					world_topic_spam_protect_time = world.time
-					return "Bad Key (Throttled)"
-
-			world_topic_spam_protect_time = world.time
-			world_topic_spam_protect_ip = addr
+			SET_THROTTLE(30 SECONDS, "Bad Comms Key")
 			return "Bad Key"
-
 		return show_player_info_irc(ckey(input["notes"]))
 
 	else if(copytext(T,1,4) == "age")
 		var/input[] = params2list(T)
 		if(input["key"] != config.comms_password)
-			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
-				spawn(50)
-					world_topic_spam_protect_time = world.time
-					return "Bad Key (Throttled)"
-
-			world_topic_spam_protect_time = world.time
-			world_topic_spam_protect_ip = addr
+			SET_THROTTLE(30 SECONDS, "Bad Comms Key")
 			return "Bad Key"
-
 		var/age = get_player_age(input["age"])
 		if(isnum(age))
 			if(age >= 0)
@@ -463,20 +432,13 @@ var/world_topic_spam_protect_time = world.timeofday
 	else if(copytext(T,1,19) == "prometheus_metrics")
 		var/input[] = params2list(T)
 		if(input["key"] != config.comms_password)
-			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
-				spawn(50)
-					world_topic_spam_protect_time = world.time
-					return "Bad Key (Throttled)"
-
-			world_topic_spam_protect_time = world.time
-			world_topic_spam_protect_ip = addr
+			SET_THROTTLE(30 SECONDS, "Bad Comms Key")
 			return "Bad Key"
-
 		if(!GLOB || !GLOB.prometheus_metrics)
 			return "Metrics not ready"
-
 		return GLOB.prometheus_metrics.collect()
 
+#undef SET_THROTTLE
 
 /world/Reboot(var/reason)
 	/*spawn(0)

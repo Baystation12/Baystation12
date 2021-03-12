@@ -304,9 +304,11 @@
 			if(hardpoints[hardpoint] == null)
 				free_hardpoints += hardpoint
 		var/to_place = input("Where would you like to install it?") as null|anything in (realThing.restricted_hardpoints & free_hardpoints)
+		if(!to_place)
+			to_chat(user, SPAN_WARNING("There is no room to install \the [thing]."))
 		if(install_system(thing, to_place, user))
 			return
-		to_chat(user, SPAN_WARNING("\The [src] could not be installed in that hardpoint."))
+		to_chat(user, SPAN_WARNING("\The [thing] could not be installed in that hardpoint."))
 		return
 
 	else if(istype(thing, /obj/item/device/kit/paint))
