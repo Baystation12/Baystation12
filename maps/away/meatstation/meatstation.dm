@@ -18,7 +18,7 @@
 	id = "awaysite_meatstation"
 	description = "It's a research station full of baddies and some unique loot."
 	suffixes = list("meatstation/meatstation.dmm")
-	cost = 2
+	spawn_cost = 2
 	area_usage_test_exempted_root_areas = list(/area/meatstation)
 
 /obj/effect/shuttle_landmark/nav_meatstation/nav1

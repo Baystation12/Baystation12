@@ -19,7 +19,7 @@
 	id = "awaysite_magshield"
 	description = "It's an orbital shield station."
 	suffixes = list("magshield/magshield.dmm")
-	cost = 1
+	spawn_cost = 1
 	area_usage_test_exempted_root_areas = list(/area/magshield)
 
 /obj/effect/shuttle_landmark/nav_magshield/nav1

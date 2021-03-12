@@ -5,7 +5,8 @@
 	id = "playablecolony2"
 	description = "a recently landed colony ship"
 	suffixes = list("playablecolony2/colony2.dmm")
-	cost = 2
+	spawn_cost = 2
+	player_cost = 4
 	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS | TEMPLATE_FLAG_NO_RADS
 	ruin_tags = RUIN_HUMAN|RUIN_HABITAT
 	ban_ruins = list(/datum/map_template/ruin/exoplanet/playablecolony)
