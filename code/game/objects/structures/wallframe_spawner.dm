@@ -3,7 +3,7 @@
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "wingrille"
 	density = 1
-	anchored = 1.0
+	anchored = TRUE
 	var/win_path = /obj/structure/window/basic/full
 	var/frame_path = /obj/structure/wall_frame/standard
 	var/grille_path = /obj/structure/grille

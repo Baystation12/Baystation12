@@ -79,7 +79,7 @@
 	icon = 'maps/torch/icons/obj/solgov-64x.dmi'
 	icon_state = "memorial"
 	density = 1
-	anchored = 1
+	anchored = TRUE
 	pixel_x = -16
 	pixel_y = -16
 	unacidable = TRUE

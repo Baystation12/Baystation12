@@ -8,7 +8,7 @@
 	icon_state = "frame"
 
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE | ATOM_FLAG_CAN_BE_PAINTED
-	anchored = 1
+	anchored = TRUE
 	density = 1
 	throwpass = 1
 	layer = TABLE_LAYER

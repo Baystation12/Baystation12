@@ -308,7 +308,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 			hologram.overlays += icon("icons/effects/effects.dmi", "malf-scanline")
 	hologram.mouse_opacity = 0//So you can't click on it.
 	hologram.layer = ABOVE_HUMAN_LAYER //Above all the other objects/mobs. Or the vast majority of them.
-	hologram.anchored = 1//So space wind cannot drag it.
+	hologram.anchored = TRUE//So space wind cannot drag it.
 	if(caller_id)
 		hologram.SetName("[caller_id.name] (Hologram)")
 		hologram.forceMove(get_step(src,1))
@@ -399,7 +399,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
  */
 
 /obj/machinery/hologram
-	anchored = 1
+	anchored = TRUE
 	idle_power_usage = 5
 	active_power_usage = 100
 

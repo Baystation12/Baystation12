@@ -5,7 +5,7 @@
 	desc = "A gravitational singularity."
 	icon = 'icons/obj/singularity.dmi'
 	icon_state = "singularity_s1"
-	anchored = 1
+	anchored = TRUE
 	density = 1
 	layer = SINGULARITY_LAYER
 	light_outer_range = 6

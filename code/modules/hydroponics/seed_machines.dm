@@ -27,7 +27,7 @@
 	icon = 'icons/obj/hydroponics_machines.dmi'
 	icon_state = "hydrotray3"
 	density = 1
-	anchored = 1
+	anchored = TRUE
 
 	var/obj/item/seeds/seed // Currently loaded seed packet.
 	var/obj/item/disk/botany/loaded_disk //Currently loaded data disk.

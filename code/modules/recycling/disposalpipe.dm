@@ -4,7 +4,7 @@
 	icon = 'icons/obj/pipes/disposal.dmi'
 	name = "disposal pipe"
 	desc = "An underfloor disposal pipe."
-	anchored = 1
+	anchored = TRUE
 	density = 0
 
 	level = 1			// underfloor only
@@ -250,7 +250,7 @@ obj/structure/disposalpipe/Destroy()
 	var/obj/structure/disposalconstruct/C = new (src.loc, src)
 	src.transfer_fingerprints_to(C)
 	C.set_density(0)
-	C.anchored = 1
+	C.anchored = TRUE
 	C.update()
 
 	qdel(src)

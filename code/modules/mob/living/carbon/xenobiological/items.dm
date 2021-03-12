@@ -237,7 +237,7 @@
 		qdel(src)
 
 /obj/effect/golemrune
-	anchored = 1
+	anchored = TRUE
 	desc = "a strange rune used to create golems. It glows when it can be activated."
 	name = "rune"
 	icon = 'icons/obj/rune.dmi'

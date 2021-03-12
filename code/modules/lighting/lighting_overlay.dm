@@ -3,7 +3,7 @@
 	name = ""
 	mouse_opacity = 0
 	simulated = FALSE
-	anchored = 1
+	anchored = TRUE
 	icon = LIGHTING_ICON
 	plane = LIGHTING_PLANE
 	layer = LIGHTING_LAYER

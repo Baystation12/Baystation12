@@ -157,7 +157,7 @@ Class Procs:
 		pulse2.icon = 'icons/effects/effects.dmi'
 		pulse2.icon_state = "empdisable"
 		pulse2.SetName("emp sparks")
-		pulse2.anchored = 1
+		pulse2.anchored = TRUE
 		pulse2.set_dir(pick(GLOB.cardinal))
 
 		spawn(10)

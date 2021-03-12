@@ -3,7 +3,7 @@
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "photocopier"
 	var/insert_anim = "photocopier_animation"
-	anchored = 1
+	anchored = TRUE
 	density = 1
 	idle_power_usage = 30
 	active_power_usage = 200

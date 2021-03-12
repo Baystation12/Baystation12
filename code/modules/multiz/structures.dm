@@ -9,7 +9,7 @@
 	icon = 'icons/obj/structures.dmi'
 	density = 0
 	opacity = 0
-	anchored = 1
+	anchored = TRUE
 	obj_flags = OBJ_FLAG_NOFALL
 
 	var/allowed_directions = DOWN
@@ -210,7 +210,7 @@
 	icon = 'icons/obj/stairs.dmi'
 	density = 0
 	opacity = 0
-	anchored = 1
+	anchored = TRUE
 	layer = RUNE_LAYER
 
 /obj/structure/stairs/Initialize()

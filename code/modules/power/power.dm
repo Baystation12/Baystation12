@@ -9,7 +9,7 @@
 /obj/machinery/power
 	name = null
 	icon = 'icons/obj/power.dmi'
-	anchored = 1.0
+	anchored = TRUE
 	var/datum/powernet/powernet = null
 	use_power = POWER_USE_OFF
 	idle_power_usage = 0

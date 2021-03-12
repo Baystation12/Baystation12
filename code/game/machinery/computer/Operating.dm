@@ -3,7 +3,7 @@
 /obj/machinery/computer/operating
 	name = "patient monitoring console"
 	density = 1
-	anchored = 1.0
+	anchored = TRUE
 	icon_keyboard = "med_key"
 	icon_screen = "crew"
 	var/mob/living/carbon/human/victim = null

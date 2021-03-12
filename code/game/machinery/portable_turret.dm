@@ -11,7 +11,7 @@
 	name = "turret"
 	icon = 'icons/obj/turrets.dmi'
 	icon_state = "turretCover"
-	anchored = 1
+	anchored = TRUE
 
 	density = 0
 	idle_power_usage = 50		//when inactive, this turret takes up constant 50 Equipment power
@@ -315,12 +315,12 @@ var/list/turret_icons
 			//This code handles moving the turret around. After all, it's a portable turret!
 			if(!anchored)
 				playsound(loc, 'sound/items/Ratchet.ogg', 100, 1)
-				anchored = 1
+				anchored = TRUE
 				update_icon()
 				to_chat(user, "<span class='notice'>You secure the exterior bolts on the turret.</span>")
 			else if(anchored)
 				playsound(loc, 'sound/items/Ratchet.ogg', 100, 1)
-				anchored = 0
+				anchored = FALSE
 				to_chat(user, "<span class='notice'>You unsecure the exterior bolts on the turret.</span>")
 				update_icon()
 		wrenching = 0
@@ -676,7 +676,7 @@ var/list/turret_icons
 			if(isWrench(I) && !anchored)
 				playsound(loc, 'sound/items/Ratchet.ogg', 100, 1)
 				to_chat(user, "<span class='notice'>You secure the external bolts.</span>")
-				anchored = 1
+				anchored = TRUE
 				build_step = 1
 				return
 
@@ -701,7 +701,7 @@ var/list/turret_icons
 			else if(istype(I, /obj/item/wrench))
 				playsound(loc, 'sound/items/Ratchet.ogg', 75, 1)
 				to_chat(user, "<span class='notice'>You unfasten the external bolts.</span>")
-				anchored = 0
+				anchored = FALSE
 				build_step = 0
 				return
 

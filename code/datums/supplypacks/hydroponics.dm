@@ -82,7 +82,7 @@
 
 /decl/hierarchy/supply_pack/hydroponics/hydrotray
 	name = "Equipment - Hydroponics tray"
-	contains = list(/obj/machinery/portable_atmospherics/hydroponics{anchored = 0})
+	contains = list(/obj/machinery/portable_atmospherics/hydroponics{anchored = FALSE})
 	cost = 30
 	containertype = /obj/structure/closet/crate/large/hydroponics
 	containername = "hydroponics tray crate"

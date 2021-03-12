@@ -5,7 +5,7 @@
 	desc = "You probably can't get sucked down the plughole."
 	icon = 'icons/obj/drain.dmi'
 	icon_state = "drain"
-	anchored = 1
+	anchored = TRUE
 	density = 0
 	layer = TURF_LAYER+0.1
 	can_drain = 1

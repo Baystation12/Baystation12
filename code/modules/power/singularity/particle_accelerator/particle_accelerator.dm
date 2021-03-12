@@ -63,7 +63,7 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 	desc = "Part of a Particle Accelerator."
 	icon = 'icons/obj/machines/particle_accelerator2.dmi'
 	icon_state = "none"
-	anchored = 0
+	anchored = FALSE
 	density = 1
 	obj_flags = OBJ_FLAG_ROTATABLE
 
@@ -187,14 +187,14 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 		if(0)
 			if(isWrench(O))
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
-				src.anchored = 1
+				src.anchored = TRUE
 				user.visible_message("[user.name] secures the [src.name] to the floor.", \
 					"You secure the external bolts.")
 				temp_state++
 		if(1)
 			if(isWrench(O))
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
-				src.anchored = 0
+				src.anchored = FALSE
 				user.visible_message("[user.name] detaches the [src.name] from the floor.", \
 					"You remove the external bolts.")
 				temp_state--
@@ -233,7 +233,7 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 	desc = "Part of a Particle Accelerator."
 	icon = 'icons/obj/machines/particle_accelerator2.dmi'
 	icon_state = "none"
-	anchored = 0
+	anchored = FALSE
 	density = 1
 	use_power = POWER_USE_OFF
 	idle_power_usage = 0
@@ -302,14 +302,14 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 		if(0)
 			if(isWrench(O))
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
-				src.anchored = 1
+				src.anchored = TRUE
 				user.visible_message("[user.name] secures the [src.name] to the floor.", \
 					"You secure the external bolts.")
 				temp_state++
 		if(1)
 			if(isWrench(O))
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
-				src.anchored = 0
+				src.anchored = FALSE
 				user.visible_message("[user.name] detaches the [src.name] from the floor.", \
 					"You remove the external bolts.")
 				temp_state--

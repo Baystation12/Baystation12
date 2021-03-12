@@ -49,7 +49,7 @@
 /obj/machinery/sleeper/mounted
 	name = "\improper mounted sleeper"
 	density = 0
-	anchored = 0
+	anchored = FALSE
 	idle_power_usage = 0
 	active_power_usage = 0 //It'd be hard to handle, so for now all power is consumed by mech sleeper object
 	synth_modifier = 0

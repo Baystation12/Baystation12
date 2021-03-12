@@ -215,7 +215,7 @@
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "totem"
 	density = 1
-	anchored = 1
+	anchored = TRUE
 	unacidable = TRUE
 	var/number
 

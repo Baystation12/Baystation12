@@ -3,7 +3,7 @@
 	desc = "Place things here to trade."
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "tele0"
-	anchored = 1
+	anchored = TRUE
 	density = 0
 
 /obj/machinery/merchant_pad/proc/get_target()

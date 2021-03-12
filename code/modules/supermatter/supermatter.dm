@@ -193,7 +193,7 @@
 		return
 
 	log_and_message_admins("Supermatter delaminating at [x] [y] [z]")
-	anchored = 1
+	anchored = TRUE
 	grav_pulling = 1
 	exploded = 1
 	sleep(pull_time)

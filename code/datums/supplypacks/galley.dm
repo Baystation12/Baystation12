@@ -142,7 +142,7 @@
 /decl/hierarchy/supply_pack/galley/beer_dispenser
 	name = "Equipment - Booze dispenser"
 	contains = list(
-			/obj/machinery/chemical_dispenser/bar_alc{anchored = 0}
+			/obj/machinery/chemical_dispenser/bar_alc{anchored = FALSE}
 		)
 	cost = 25
 	containertype = /obj/structure/largecrate
@@ -151,7 +151,7 @@
 /decl/hierarchy/supply_pack/galley/soda_dispenser
 	name = "Equipment - Soda dispenser"
 	contains = list(
-			/obj/machinery/chemical_dispenser/bar_soft{anchored = 0}
+			/obj/machinery/chemical_dispenser/bar_soft{anchored = FALSE}
 		)
 	cost = 25
 	containertype = /obj/structure/largecrate
@@ -160,7 +160,7 @@
 /decl/hierarchy/supply_pack/galley/mre_dispenser
 	name = "Equipment - MRE dispenser"
 	contains = list(
-			/obj/machinery/vending/mredispenser{anchored = 0}
+			/obj/machinery/vending/mredispenser{anchored = FALSE}
 		)
 	cost = 50
 	containertype = /obj/structure/largecrate

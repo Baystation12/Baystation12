@@ -7,7 +7,7 @@
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "heater_0"
 	density = 1
-	anchored = 1
+	anchored = TRUE
 	use_power = POWER_USE_OFF
 	idle_power_usage = 5			//5 Watts for thermostat related circuitry
 	base_type = /obj/machinery/atmospherics/unary/heater

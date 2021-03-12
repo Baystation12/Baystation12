@@ -8,7 +8,7 @@
 	desc = "A solar directional tracker."
 	icon = 'icons/obj/power.dmi'
 	icon_state = "tracker"
-	anchored = 1
+	anchored = TRUE
 	density = 1
 
 	var/id = 0
@@ -42,7 +42,7 @@
 		S = new /obj/item/solar_assembly(src)
 		S.glass_type = /obj/item/stack/material/glass
 		S.tracker = 1
-		S.anchored = 1
+		S.anchored = TRUE
 	S.forceMove(src)
 	update_icon()
 

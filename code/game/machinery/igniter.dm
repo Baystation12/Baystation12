@@ -4,7 +4,7 @@
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "igniter1"
 	var/on = 0
-	anchored = 1
+	anchored = TRUE
 	idle_power_usage = 20
 	active_power_usage = 1000
 
@@ -80,7 +80,7 @@
 	var/disable = 0
 	var/last_spark = 0
 	var/base_state = "migniter"
-	anchored = 1
+	anchored = TRUE
 	idle_power_usage = 20
 	active_power_usage = 1000
 

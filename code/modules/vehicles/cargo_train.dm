@@ -27,7 +27,7 @@
 	name = "cargo train trolley"
 	icon = 'icons/obj/vehicles.dmi'
 	icon_state = "cargo_trailer"
-	anchored = 0
+	anchored = FALSE
 	passenger_allowed = 0
 	locked = 0
 
@@ -373,6 +373,6 @@
 	src.active_engines = active_engines
 
 	if(!lead && !tow)
-		anchored = 0
+		anchored = FALSE
 	else
-		anchored = 1
+		anchored = TRUE

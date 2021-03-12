@@ -8,7 +8,7 @@
 	icon = 'icons/obj/machines/power/fusion.dmi'
 	icon_state = "fuel_compressor1"
 	density = 1
-	anchored = 1
+	anchored = TRUE
 	layer = 4
 	construct_state = /decl/machine_construction/default/panel_closed
 

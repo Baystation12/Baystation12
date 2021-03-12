@@ -4,7 +4,7 @@
 	icon = 'icons/obj/machines/gateway.dmi'
 	icon_state = "off"
 	density = 1
-	anchored = 1
+	anchored = TRUE
 	var/active = 0
 
 

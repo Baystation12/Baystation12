@@ -3,7 +3,7 @@
 	desc = "Stick 'em up!"
 	icon = 'icons/effects/Targeted.dmi'
 	icon_state = "locking"
-	anchored = 1
+	anchored = TRUE
 	density = 0
 	opacity = 0
 	layer = ABOVE_HUMAN_LAYER

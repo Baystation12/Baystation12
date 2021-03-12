@@ -4,7 +4,7 @@
 	icon = 'icons/obj/meter.dmi'
 	icon_state = "meterX"
 	var/atom/target = null //A pipe for the base type
-	anchored = 1.0
+	anchored = TRUE
 	power_channel = ENVIRON
 	idle_power_usage = 15
 

@@ -10,7 +10,7 @@
 	var/last_flash = 0 //Don't want it getting spammed like regular flashes
 	var/strength = 10 //How weakened targets are when flashed.
 	var/base_state = "mflash"
-	anchored = 1
+	anchored = TRUE
 	idle_power_usage = 2
 	movable_flags = MOVABLE_FLAG_PROXMOVE
 
@@ -106,7 +106,7 @@
 	desc = "A portable flashing device. Wrench to activate and deactivate. Cannot detect slow movements."
 	icon_state = "pflash1"
 	strength = 8
-	anchored = 0
+	anchored = FALSE
 	base_state = "pflash"
 	density = 1
 

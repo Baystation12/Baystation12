@@ -5,7 +5,7 @@
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "mirror"
 	density = 0
-	anchored = 1
+	anchored = TRUE
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = DEFAULT_LARGEBOX_STORAGE
 	use_sound = 'sound/effects/closet_open.ogg'

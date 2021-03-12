@@ -85,7 +85,7 @@
 	name = "poster"
 	desc = "A large piece of space-resistant printed paper."
 	icon = 'icons/obj/contraband.dmi'
-	anchored = 1
+	anchored = TRUE
 	var/poster_type
 	var/ruined = 0
 

@@ -8,7 +8,7 @@
 	icon_state = "E-W"
 	density = 1
 	layer = ABOVE_HUMAN_LAYER
-	anchored = 1.0
+	anchored = TRUE
 	var/list/tube_dirs = null
 	var/exit_delay = 2
 	var/enter_delay = 1
@@ -40,7 +40,7 @@
 	icon = 'icons/obj/pipes/transit_tube_pod.dmi'
 	icon_state = "pod"
 	animate_movement = FORWARD_STEPS
-	anchored = 1.0
+	anchored = TRUE
 	density = 1
 	var/moving = 0
 	var/datum/gas_mixture/air_contents = new()

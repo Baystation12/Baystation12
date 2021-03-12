@@ -26,10 +26,10 @@
 			var/turf/simulated/mineral/M = A
 			drilling_turf = get_turf(src)
 			src.visible_message("<span class='notice'>\The [src] begins to drill into \the [M].</span>")
-			anchored = 1
+			anchored = TRUE
 			spawn(drill_time)
 				if(get_turf(src) == drilling_turf && active)
 					M.GetDrilled()
 					forceMove(M)
 				drilling_turf = null
-				anchored = 0
+				anchored = FALSE

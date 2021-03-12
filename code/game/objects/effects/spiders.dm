@@ -3,7 +3,7 @@
 	name = "web"
 	desc = "It's stringy and sticky."
 	icon = 'icons/effects/effects.dmi'
-	anchored = 1
+	anchored = TRUE
 	density = 0
 	var/health = 15
 
@@ -116,7 +116,7 @@
 	name = "spiderling"
 	desc = "It never stays still for long."
 	icon_state = "guard"
-	anchored = 0
+	anchored = FALSE
 	layer = BELOW_OBJ_LAYER
 	health = 3
 	var/mob/living/simple_animal/hostile/giant_spider/greater_form
@@ -304,7 +304,7 @@
 	desc = "Green squishy mess."
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "greenshatter"
-	anchored = 1
+	anchored = TRUE
 	layer = BLOOD_LAYER
 
 /obj/effect/spider/cocoon

@@ -65,7 +65,7 @@ Teleporter beacon, and its subtypes
 	health = 200
 	maxHealth = 200
 	status_flags = 0
-	anchored = 1
+	anchored = TRUE
 	stop_automated_movement = 1
 
 	var/bot_type = /mob/living/simple_animal/hostile/hivebot

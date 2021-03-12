@@ -62,7 +62,7 @@
 	name = "inflatable"
 	desc = "An inflated membrane. Do not puncture."
 	density = 1
-	anchored = 1
+	anchored = TRUE
 	opacity = 0
 	icon = 'icons/obj/inflatable.dmi'
 	icon_state = "wall"
@@ -228,7 +228,7 @@
 /obj/structure/inflatable/door //Based on mineral door code
 	name = "inflatable door"
 	density = 1
-	anchored = 1
+	anchored = TRUE
 	opacity = 0
 
 	icon_state = "door_closed"

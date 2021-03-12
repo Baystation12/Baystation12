@@ -1,6 +1,6 @@
 //A temporary effect that does not DO anything except look pretty.
 /obj/effect/temporary
-	anchored = 1
+	anchored = TRUE
 	unacidable = TRUE
 	mouse_opacity = 0
 	density = 0

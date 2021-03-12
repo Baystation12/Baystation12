@@ -4,7 +4,7 @@
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "cameracase"
 	w_class = ITEM_SIZE_SMALL
-	anchored = 0
+	anchored = FALSE
 
 	matter = list(MATERIAL_ALUMINIUM = 700, MATERIAL_GLASS = 300)
 
@@ -32,7 +32,7 @@
 			if(isWrench(W) && isturf(src.loc))
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 				to_chat(user, "You wrench the assembly into place.")
-				anchored = 1
+				anchored = TRUE
 				state = 1
 				update_icon()
 				auto_turn()
@@ -43,14 +43,14 @@
 			if(isWelder(W))
 				if(weld(W, user))
 					to_chat(user, "You weld the assembly securely into place.")
-					anchored = 1
+					anchored = TRUE
 					state = 2
 				return
 
 			else if(isWrench(W))
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 				to_chat(user, "You unattach the assembly from its place.")
-				anchored = 0
+				anchored = FALSE
 				update_icon()
 				state = 0
 				return
@@ -71,7 +71,7 @@
 				if(weld(W, user))
 					to_chat(user, "You unweld the assembly from its place.")
 					state = 1
-					anchored = 1
+					anchored = TRUE
 				return
 
 

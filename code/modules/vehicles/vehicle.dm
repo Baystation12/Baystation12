@@ -9,7 +9,7 @@
 	icon = 'icons/obj/vehicles.dmi'
 	layer = ABOVE_HUMAN_LAYER
 	density = 1
-	anchored = 1
+	anchored = TRUE
 	animate_movement=1
 	light_outer_range = 3
 
@@ -52,7 +52,7 @@
 			turn_off()
 
 		var/init_anc = anchored
-		anchored = 0
+		anchored = FALSE
 		if(!..())
 			anchored = init_anc
 			return 0
@@ -142,7 +142,7 @@
 	pulse2.icon = 'icons/effects/effects.dmi'
 	pulse2.icon_state = "empdisable"
 	pulse2.SetName("emp sparks")
-	pulse2.anchored = 1
+	pulse2.anchored = TRUE
 	pulse2.set_dir(pick(GLOB.cardinal))
 
 	spawn(10)
@@ -278,7 +278,7 @@
 
 	C.forceMove(loc)
 	C.set_dir(dir)
-	C.anchored = 1
+	C.anchored = TRUE
 
 	load = C
 
@@ -327,7 +327,7 @@
 
 	load.forceMove(dest)
 	load.set_dir(get_dir(loc, dest))
-	load.anchored = 0		//we can only load non-anchored items, so it makes sense to set this to false
+	load.anchored = FALSE		//we can only load non-anchored items, so it makes sense to set this to false
 	if(ismob(load)) //atoms should probably have their own procs to define how their pixel shifts and layer can be manipulated, someday
 		var/mob/M = load
 		M.pixel_x = M.default_pixel_x

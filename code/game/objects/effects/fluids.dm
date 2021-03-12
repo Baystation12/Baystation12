@@ -1,7 +1,7 @@
 /obj/effect/fluid
 	name = ""
 	icon = 'icons/effects/liquids.dmi'
-	anchored = 1
+	anchored = TRUE
 	simulated = FALSE
 	opacity = 0
 	mouse_opacity = 0
@@ -98,7 +98,7 @@
 	simulated = FALSE
 	density = 0
 	opacity = 0
-	anchored = 1
+	anchored = TRUE
 
 /obj/effect/flood/ex_act()
 	return

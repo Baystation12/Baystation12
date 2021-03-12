@@ -90,7 +90,7 @@
 	icon = 'maps/away/casino/casino_sprites.dmi'
 	icon_state = "roulette_r"
 	density = 0
-	anchored = 1
+	anchored = TRUE
 	var/busy=0
 
 /obj/structure/casino/roulette/attack_hand(mob/user as mob)
@@ -122,7 +122,7 @@
 	icon = 'maps/away/casino/casino_sprites.dmi'
 	icon_state = "roulette_l"
 	density = 0
-	anchored = 1
+	anchored = TRUE
 
 /obj/structure/casino/bj_table
 	name = "blackjack table"
@@ -130,7 +130,7 @@
 	icon = 'maps/away/casino/casino_sprites.dmi'
 	icon_state = "bj_left"
 	density = 0
-	anchored = 1
+	anchored = TRUE
 
 /obj/structure/casino/bj_table/bj_right
 	icon_state = "bj_right"
@@ -141,7 +141,7 @@
 	icon = 'maps/away/casino/casino_sprites.dmi'
 	icon_state = "slot_machine"
 	density = 0
-	anchored = 1
+	anchored = TRUE
 
 /obj/structure/casino/craps
 	name = "craps table"
@@ -149,7 +149,7 @@
 	icon = 'maps/away/casino/casino_sprites.dmi'
 	icon_state = "craps_top"
 	density = 0
-	anchored = 1
+	anchored = TRUE
 
 /obj/structure/casino/craps/craps_down
 	icon_state = "craps_down"

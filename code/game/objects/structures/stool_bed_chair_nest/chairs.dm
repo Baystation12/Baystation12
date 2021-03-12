@@ -214,7 +214,7 @@
 	name = "office chair"
 	icon_state = "officechair_preview"
 	base_icon = "officechair"
-	anchored = 0
+	anchored = FALSE
 
 /obj/structure/bed/chair/office/Move()
 	. = ..()

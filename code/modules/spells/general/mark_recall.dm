@@ -53,7 +53,7 @@
 	icon = 'icons/obj/rune.dmi'
 	icon_state = "wizard_mark"
 
-	anchored = 1
+	anchored = TRUE
 	unacidable = TRUE
 	layer = TURF_LAYER
 

@@ -1,6 +1,6 @@
 /obj/structure/girder
 	icon_state = "girder"
-	anchored = 1
+	anchored = TRUE
 	density = 1
 	layer = BELOW_OBJ_LAYER
 	w_class = ITEM_SIZE_NO_CONTAINER
@@ -16,7 +16,7 @@
 
 /obj/structure/girder/displaced
 	icon_state = "displaced"
-	anchored = 0
+	anchored = FALSE
 	health = 50
 	cover = 25
 
@@ -56,7 +56,7 @@
 	return TRUE
 
 /obj/structure/girder/proc/reset_girder()
-	anchored = 1
+	anchored = TRUE
 	cover = initial(cover)
 	health = min(health,initial(health))
 	state = 0
@@ -131,7 +131,7 @@
 		if(do_after(user, 40,src))
 			to_chat(user, "<span class='notice'>You dislodged the girder!</span>")
 			icon_state = "displaced"
-			anchored = 0
+			anchored = FALSE
 			health = 50
 			cover = 25
 

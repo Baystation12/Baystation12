@@ -38,7 +38,7 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 	icon_state = "server"
 	name = "Messaging Server"
 	density = 1
-	anchored = 1.0
+	anchored = TRUE
 	idle_power_usage = 10
 	active_power_usage = 100
 

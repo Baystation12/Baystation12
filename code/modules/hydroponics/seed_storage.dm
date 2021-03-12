@@ -23,7 +23,7 @@
 	icon = 'icons/obj/vending.dmi'
 	icon_state = "seeds"
 	density = 1
-	anchored = 1
+	anchored = TRUE
 	idle_power_usage = 100
 
 	var/list/datum/seed_pile/piles = list()

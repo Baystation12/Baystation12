@@ -5,7 +5,7 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "watertank"
 	density = 1
-	anchored = 0
+	anchored = FALSE
 
 	var/initial_capacity = 1000
 	var/initial_reagent_types  // A list of reagents and their ratio relative the initial capacity. list(/datum/reagent/water = 0.5) would fill the dispenser halfway to capacity.
@@ -266,7 +266,7 @@
 	desc = "Refills pepper spray canisters."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "peppertank"
-	anchored = 1
+	anchored = TRUE
 	density = 0
 	amount_per_transfer_from_this = 45
 	initial_reagent_types = list(/datum/reagent/capsaicin/condensed = 1)
@@ -279,7 +279,7 @@
 	icon = 'icons/obj/vending.dmi'
 	icon_state = "water_cooler"
 	possible_transfer_amounts = null
-	anchored = 1
+	anchored = TRUE
 	initial_capacity = 500
 	initial_reagent_types = list(/datum/reagent/water = 1)
 	var/cups = 12
@@ -333,5 +333,5 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "acidtank"
 	amount_per_transfer_from_this = 10
-	anchored = 1
+	anchored = TRUE
 	initial_reagent_types = list(/datum/reagent/acid = 1)

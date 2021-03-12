@@ -11,7 +11,7 @@
 	use_power = POWER_USE_IDLE
 	idle_power_usage = 50
 	active_power_usage = 500 //multiplied by field strength
-	anchored = 0
+	anchored = FALSE
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
@@ -22,7 +22,7 @@
 	var/initial_id_tag
 
 /obj/machinery/power/fusion_core/mapped
-	anchored = 1
+	anchored = TRUE
 
 /obj/machinery/power/fusion_core/Initialize()
 	. = ..()
