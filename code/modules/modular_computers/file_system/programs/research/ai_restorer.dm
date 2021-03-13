@@ -23,7 +23,7 @@
 	if(..())
 		return 1
 
-	if(!usr.skill_check(SKILL_COMPUTER, SKILL_ADEPT))
+	if(!usr.skill_check(SKILL_COMPUTER, SKILL_TRAINED))
 		return 1
 
 	var/mob/living/silicon/ai/A = get_ai()
@@ -92,7 +92,7 @@
 	var/list/data = host.initial_data()
 
 	data += "skill_fail"
-	if(!user.skill_check(SKILL_COMPUTER, SKILL_ADEPT))
+	if(!user.skill_check(SKILL_COMPUTER, SKILL_TRAINED))
 		var/datum/extension/fake_data/fake_data = get_or_create_extension(src, /datum/extension/fake_data, 25)
 		data["skill_fail"] = fake_data.update_and_return_data()
 	data["terminal"] = !!program

@@ -18,7 +18,7 @@
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/workplace_liaison
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
-	min_skill = list(   SKILL_BUREAUCRACY	= SKILL_EXPERT,
+	min_skill = list(   SKILL_BUREAUCRACY	= SKILL_EXPERIENCED,
 	                    SKILL_FINANCE		= SKILL_BASIC)
 	skill_points = 20
 
@@ -60,9 +60,9 @@
 	                    SKILL_COMBAT      = SKILL_BASIC,
 	                    SKILL_WEAPONS     = SKILL_BASIC,
 	                    SKILL_FORENSICS   = SKILL_BASIC)
-	max_skill = list(   SKILL_COMBAT      = SKILL_EXPERT,
-	                    SKILL_WEAPONS     = SKILL_EXPERT,
-	                    SKILL_FORENSICS   = SKILL_EXPERT)
+	max_skill = list(   SKILL_COMBAT      = SKILL_EXPERIENCED,
+	                    SKILL_WEAPONS     = SKILL_EXPERIENCED,
+	                    SKILL_FORENSICS   = SKILL_EXPERIENCED)
 	alt_titles = list(
 		"Union Enforcer",
 		"Loss Prevention Associate",

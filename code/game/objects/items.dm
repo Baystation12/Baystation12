@@ -528,7 +528,7 @@ var/list/global/slot_flags_enumeration = list(
 /obj/item/proc/get_parry_chance(mob/user)
 	. = base_parry_chance
 	if(user)
-		if(base_parry_chance || user.skill_check(SKILL_COMBAT, SKILL_ADEPT))
+		if(base_parry_chance || user.skill_check(SKILL_COMBAT, SKILL_TRAINED))
 			. += 10 * (user.get_skill_value(SKILL_COMBAT) - SKILL_BASIC)
 
 /obj/item/proc/on_disarm_attempt(mob/target, mob/living/attacker)

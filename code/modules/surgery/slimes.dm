@@ -18,7 +18,7 @@
 	return isslime(target) && target.stat == DEAD
 
 /decl/surgery_step/slime/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
-	return list(SKILL_SCIENCE = SKILL_ADEPT)
+	return list(SKILL_SCIENCE = SKILL_TRAINED)
 
 //////////////////////////////////////////////////////////////////
 //	slime flesh cutting surgery step

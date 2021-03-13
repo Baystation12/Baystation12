@@ -3,9 +3,9 @@
 	wire_count = 5
 	descriptions = list(
 		new /datum/wire_description(SMES_WIRE_RCON, "This wire runs to a remote signaling mechanism."),
-		new /datum/wire_description(SMES_WIRE_INPUT, "This seems to be the primary input.", SKILL_EXPERT),
-		new /datum/wire_description(SMES_WIRE_OUTPUT, "This seems to be the primary output.", SKILL_EXPERT),
-		new /datum/wire_description(SMES_WIRE_GROUNDING, "This wire appeas to connect directly to the floor.", SKILL_EXPERT),
+		new /datum/wire_description(SMES_WIRE_INPUT, "This seems to be the primary input.", SKILL_EXPERIENCED),
+		new /datum/wire_description(SMES_WIRE_OUTPUT, "This seems to be the primary output.", SKILL_EXPERIENCED),
+		new /datum/wire_description(SMES_WIRE_GROUNDING, "This wire appeas to connect directly to the floor.", SKILL_EXPERIENCED),
 		new /datum/wire_description(SMES_WIRE_FAILSAFES, "This wire appears to connect to a failsafe mechanism.")
 	)
 

@@ -174,7 +174,7 @@
 	user.do_attack_animation(src)
 	playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
 	if(isWirecutter(W))
-		if(prob(user.skill_fail_chance(SKILL_SCIENCE, 90, SKILL_EXPERT)))
+		if(prob(user.skill_fail_chance(SKILL_SCIENCE, 90, SKILL_EXPERIENCED)))
 			to_chat(user, SPAN_WARNING("You fail to collect a sample from \the [src]."))
 			return
 		else

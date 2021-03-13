@@ -541,5 +541,5 @@
 	. = ..()
 	if(distance <= 1)
 		to_chat(user, "<span class='notice'>It looks long enough to hold [max_capacity] seconds worth of recording.</span>")
-		if(doctored && user.skill_check(SKILL_FORENSICS, SKILL_PROF))
+		if(doctored && user.skill_check(SKILL_FORENSICS, SKILL_MASTER))
 			to_chat(user, "<span class='notice'>It has been tampered with...</span>")

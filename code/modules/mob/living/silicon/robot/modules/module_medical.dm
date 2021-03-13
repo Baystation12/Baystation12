@@ -51,11 +51,11 @@
 	)
 	emag = /obj/item/weapon/reagent_containers/spray
 	skills = list(
-		SKILL_ANATOMY     = SKILL_PROF,
-		SKILL_MEDICAL     = SKILL_EXPERT,
-		SKILL_CHEMISTRY   = SKILL_ADEPT,
-		SKILL_BUREAUCRACY = SKILL_ADEPT,
-		SKILL_DEVICES     = SKILL_EXPERT
+		SKILL_ANATOMY     = SKILL_MASTER,
+		SKILL_MEDICAL     = SKILL_EXPERIENCED,
+		SKILL_CHEMISTRY   = SKILL_TRAINED,
+		SKILL_BUREAUCRACY = SKILL_TRAINED,
+		SKILL_DEVICES     = SKILL_EXPERIENCED
 	)
 
 /obj/item/weapon/robot_module/medical/surgeon/finalize_equipment()
@@ -123,10 +123,10 @@
 	emag = /obj/item/weapon/reagent_containers/spray
 	skills = list(
 		SKILL_ANATOMY     = SKILL_BASIC,
-		SKILL_MEDICAL     = SKILL_PROF,
-		SKILL_CHEMISTRY   = SKILL_ADEPT,
-		SKILL_BUREAUCRACY = SKILL_ADEPT,
-		SKILL_EVA         = SKILL_EXPERT
+		SKILL_MEDICAL     = SKILL_MASTER,
+		SKILL_CHEMISTRY   = SKILL_TRAINED,
+		SKILL_BUREAUCRACY = SKILL_TRAINED,
+		SKILL_EVA         = SKILL_EXPERIENCED
 	)
 
 /obj/item/weapon/robot_module/medical/crisis/finalize_equipment()

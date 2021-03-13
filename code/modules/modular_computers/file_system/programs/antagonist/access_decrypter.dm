@@ -43,11 +43,11 @@
 	progress += get_speed()
 
 	if(progress >= target_progress)
-		if(prob(20 * max(SKILL_ADEPT - operator_skill, 0))) // Oops
+		if(prob(20 * max(SKILL_TRAINED - operator_skill, 0))) // Oops
 			var/list/valid_access_values = get_all_station_access()
 			valid_access_values -= restricted_access_codes
 			valid_access_values -= RFID.stored_card.access
-			if(operator_skill < SKILL_PROF) // Don't want to randomly assign an access that we wouldn't be able to decrypt normally
+			if(operator_skill < SKILL_MASTER) // Don't want to randomly assign an access that we wouldn't be able to decrypt normally
 				valid_access_values -= skill_restricted_access_codes_master
 			target_access = get_access_by_id(pick(valid_access_values))
 		RFID.stored_card.access |= target_access.id
@@ -83,7 +83,7 @@
 			return 1
 		if(access in restricted_access_codes)
 			return 1
-		if((access in skill_restricted_access_codes_master) && operator_skill < SKILL_PROF)
+		if((access in skill_restricted_access_codes_master) && operator_skill < SKILL_MASTER)
 			return 1
 		target_access = get_access_by_id(access)
 		if(!target_access)
@@ -97,10 +97,10 @@
 		return 1
 
 /datum/computer_file/program/access_decrypter/proc/get_sneak_chance()
-	return max(operator_skill - SKILL_ADEPT, 0) * 30
+	return max(operator_skill - SKILL_TRAINED, 0) * 30
 
 /datum/computer_file/program/access_decrypter/proc/get_speed()
-	var/skill_speed_modifier = 1 + (operator_skill - SKILL_ADEPT)/(SKILL_MAX - SKILL_MIN)
+	var/skill_speed_modifier = 1 + (operator_skill - SKILL_TRAINED)/(SKILL_MAX - SKILL_MIN)
 	var/obj/item/weapon/stock_parts/computer/processor_unit/CPU = computer.get_component(PART_CPU)
 	return CPU?.processing_power * skill_speed_modifier
 
@@ -143,7 +143,7 @@
 						"desc" = replacetext(get_access_desc(access), " ", "&nbsp"),
 						"ref" = access,
 						"allowed" = (access in id_card.access) ? 1 : 0,
-						"blocked" = ((access in PRG.restricted_access_codes) || ((access in PRG.skill_restricted_access_codes_master) && PRG.operator_skill < SKILL_PROF)) ? 1 : 0)))
+						"blocked" = ((access in PRG.restricted_access_codes) || ((access in PRG.skill_restricted_access_codes_master) && PRG.operator_skill < SKILL_MASTER)) ? 1 : 0)))
 
 			regions.Add(list(list(
 				"name" = get_region_accesses_name(i),

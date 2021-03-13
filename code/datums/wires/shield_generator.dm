@@ -2,7 +2,7 @@
 	holder_type = /obj/machinery/power/shield_generator/
 	wire_count = 5
 	descriptions = list(
-		new /datum/wire_description(SHIELDGEN_WIRE_POWER, "This wire seems to be carrying a heavy current.", SKILL_EXPERT),
+		new /datum/wire_description(SHIELDGEN_WIRE_POWER, "This wire seems to be carrying a heavy current.", SKILL_EXPERIENCED),
 		new /datum/wire_description(SHIELDGEN_WIRE_HACK, "This wire seems designed to enable a manual override."),
 		new /datum/wire_description(SHIELDGEN_WIRE_CONTROL, "This wire connects to the main control panel."),
 		new /datum/wire_description(SHIELDGEN_WIRE_AICONTROL, "This wire connects to automated control systems.")

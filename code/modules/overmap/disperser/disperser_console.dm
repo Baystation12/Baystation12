@@ -6,7 +6,7 @@
 	icon_state = "computer"
 
 	core_skill = SKILL_PILOT
-	var/skill_offset = SKILL_ADEPT - 1 //After which skill level it starts to matter. -1, because we have to index from zero
+	var/skill_offset = SKILL_TRAINED - 1 //After which skill level it starts to matter. -1, because we have to index from zero
 
 	icon_keyboard = "rd_key"
 	icon_screen = "teleport"

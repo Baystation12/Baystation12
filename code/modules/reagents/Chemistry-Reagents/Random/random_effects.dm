@@ -192,25 +192,25 @@
 		M.add_chemical_effect(chem_effect_define, value)
 
 /decl/random_chem_effect/random_properties/get_interactions(var/datum/reagent/random/reagent, var/sci_skill, var/chem_skill)
-	if(chem_skill < SKILL_EXPERT)
+	if(chem_skill < SKILL_EXPERIENCED)
 		return
 	. = list("<br>")
-	if(sci_skill > SKILL_ADEPT)
+	if(sci_skill > SKILL_TRAINED)
 		. += "For [desc]:<br>"
 	var/list/interactions = list()
-	if(chem_skill == SKILL_PROF)
+	if(chem_skill == SKILL_MASTER)
 		. += "Heating: "
 	for(var/interaction in distillation_inhibitor_cache[reagent.type])
 		var/datum/reagent/R = interaction
 		interactions += initial(R.name)
-	if(chem_skill == SKILL_PROF)
+	if(chem_skill == SKILL_MASTER)
 		. += english_list(interactions)
 		interactions.Cut()
 		. += ". Cooling: "
 	for(var/interaction in cooling_enhancer_cache[reagent.type])
 		var/datum/reagent/R = interaction
 		interactions += initial(R.name)
-	if(chem_skill <= SKILL_PROF)
+	if(chem_skill <= SKILL_MASTER)
 		shuffle(interactions)
 	. += english_list(interactions)
 	. += "."

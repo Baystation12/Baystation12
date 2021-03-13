@@ -223,7 +223,7 @@
 	)
 
 	assistant_job = /datum/job/crew
-	min_skill = list(	SKILL_HAULING = SKILL_ADEPT,
+	min_skill = list(	SKILL_HAULING = SKILL_TRAINED,
 	                    SKILL_WEAPONS = SKILL_BASIC,
 	                    SKILL_COMBAT  = SKILL_BASIC)
 

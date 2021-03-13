@@ -92,7 +92,7 @@
 				H.visible_message("<span class='notice'>\The [H] performs CPR on \the [src]!</span>")
 
 				if(is_asystole())
-					if(prob(5 + 5 * (SKILL_EXPERT - pumping_skill)))
+					if(prob(5 + 5 * (SKILL_EXPERIENCED - pumping_skill)))
 						var/obj/item/organ/external/chest = get_organ(BP_CHEST)
 						if(chest)
 							chest.fracture()

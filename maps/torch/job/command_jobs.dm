@@ -13,8 +13,8 @@
 		/datum/mil_rank/ec/o6
 	)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
-	                    SKILL_SCIENCE     = SKILL_ADEPT,
-	                    SKILL_PILOT       = SKILL_ADEPT)
+	                    SKILL_SCIENCE     = SKILL_TRAINED,
+	                    SKILL_PILOT       = SKILL_TRAINED)
 
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX,
 	                    SKILL_SCIENCE     = SKILL_MAX)
@@ -52,7 +52,7 @@
 		/datum/mil_rank/fleet/o4,
 		/datum/mil_rank/fleet/o5
 	)
-	min_skill = list(   SKILL_BUREAUCRACY = SKILL_ADEPT,
+	min_skill = list(   SKILL_BUREAUCRACY = SKILL_TRAINED,
 	                    SKILL_COMPUTER    = SKILL_BASIC,
 	                    SKILL_PILOT       = SKILL_BASIC)
 
@@ -115,13 +115,13 @@
 		/datum/mil_rank/ec/o3
 	)
 
-	min_skill = list(   SKILL_BUREAUCRACY = SKILL_ADEPT,
+	min_skill = list(   SKILL_BUREAUCRACY = SKILL_TRAINED,
 	                    SKILL_COMPUTER    = SKILL_BASIC,
-	                    SKILL_FINANCE     = SKILL_ADEPT,
+	                    SKILL_FINANCE     = SKILL_TRAINED,
 	                    SKILL_BOTANY      = SKILL_BASIC,
 	                    SKILL_ANATOMY     = SKILL_BASIC,
 	                    SKILL_DEVICES     = SKILL_BASIC,
-	                    SKILL_SCIENCE     = SKILL_ADEPT)
+	                    SKILL_SCIENCE     = SKILL_TRAINED)
 
 	max_skill = list(   SKILL_ANATOMY     = SKILL_MAX,
 	                    SKILL_DEVICES     = SKILL_MAX,
@@ -167,10 +167,10 @@
 		/datum/mil_rank/ec/o3
 	)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
-	                    SKILL_MEDICAL     = SKILL_EXPERT,
-	                    SKILL_ANATOMY     = SKILL_EXPERT,
+	                    SKILL_MEDICAL     = SKILL_EXPERIENCED,
+	                    SKILL_ANATOMY     = SKILL_EXPERIENCED,
 	                    SKILL_CHEMISTRY   = SKILL_BASIC,
-						SKILL_DEVICES     = SKILL_ADEPT)
+						SKILL_DEVICES     = SKILL_TRAINED)
 
 	max_skill = list(   SKILL_MEDICAL     = SKILL_MAX,
 	                    SKILL_ANATOMY     = SKILL_MAX,
@@ -214,12 +214,12 @@
 		/datum/mil_rank/fleet/o3
 	)
 	min_skill = list(   SKILL_BUREAUCRACY  = SKILL_BASIC,
-	                    SKILL_COMPUTER     = SKILL_ADEPT,
-	                    SKILL_EVA          = SKILL_ADEPT,
-	                    SKILL_CONSTRUCTION = SKILL_ADEPT,
-	                    SKILL_ELECTRICAL   = SKILL_ADEPT,
-	                    SKILL_ATMOS        = SKILL_ADEPT,
-	                    SKILL_ENGINES      = SKILL_EXPERT)
+	                    SKILL_COMPUTER     = SKILL_TRAINED,
+	                    SKILL_EVA          = SKILL_TRAINED,
+	                    SKILL_CONSTRUCTION = SKILL_TRAINED,
+	                    SKILL_ELECTRICAL   = SKILL_TRAINED,
+	                    SKILL_ATMOS        = SKILL_TRAINED,
+	                    SKILL_ENGINES      = SKILL_EXPERIENCED)
 
 	max_skill = list(   SKILL_CONSTRUCTION = SKILL_MAX,
 	                    SKILL_ELECTRICAL   = SKILL_MAX,
@@ -277,10 +277,10 @@
 		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/fleet/o3
 	)
-	min_skill = list(   SKILL_BUREAUCRACY = SKILL_ADEPT,
+	min_skill = list(   SKILL_BUREAUCRACY = SKILL_TRAINED,
 	                    SKILL_EVA         = SKILL_BASIC,
 	                    SKILL_COMBAT      = SKILL_BASIC,
-	                    SKILL_WEAPONS     = SKILL_ADEPT,
+	                    SKILL_WEAPONS     = SKILL_TRAINED,
 	                    SKILL_FORENSICS   = SKILL_BASIC)
 
 	max_skill = list(   SKILL_COMBAT      = SKILL_MAX,
@@ -320,7 +320,7 @@
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/representative
 	allowed_branches = list(/datum/mil_branch/solgov)
 	allowed_ranks = list(/datum/mil_rank/sol/gov)
-	min_skill = list(   SKILL_BUREAUCRACY = SKILL_EXPERT,
+	min_skill = list(   SKILL_BUREAUCRACY = SKILL_EXPERIENCED,
 	                    SKILL_FINANCE     = SKILL_BASIC)
 	skill_points = 20
 	minimum_character_age = list(SPECIES_HUMAN = 27)
@@ -359,11 +359,11 @@
 	)
 	min_skill = list(   SKILL_EVA        = SKILL_BASIC,
 	                    SKILL_COMBAT     = SKILL_BASIC,
-	                    SKILL_WEAPONS    = SKILL_ADEPT)
+	                    SKILL_WEAPONS    = SKILL_TRAINED)
 
-	max_skill = list(	SKILL_PILOT        = SKILL_ADEPT,
-	                    SKILL_COMBAT       = SKILL_EXPERT,
-	                    SKILL_WEAPONS      = SKILL_EXPERT,
+	max_skill = list(	SKILL_PILOT        = SKILL_TRAINED,
+	                    SKILL_COMBAT       = SKILL_EXPERIENCED,
+	                    SKILL_WEAPONS      = SKILL_EXPERIENCED,
 	                    SKILL_CONSTRUCTION = SKILL_MAX,
 	                    SKILL_ELECTRICAL   = SKILL_MAX,
 	                    SKILL_ENGINES      = SKILL_MAX,
@@ -407,7 +407,7 @@
 		/datum/mil_rank/fleet/o1
 	)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
-	                    SKILL_PILOT       = SKILL_ADEPT)
+	                    SKILL_PILOT       = SKILL_TRAINED)
 
 	max_skill = list(   SKILL_PILOT       = SKILL_MAX)
 	skill_points = 20

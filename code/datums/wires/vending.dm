@@ -5,7 +5,7 @@
 		new /datum/wire_description(VENDING_WIRE_THROW, "This wire leads to the item dispensor force controls."),
 		new /datum/wire_description(VENDING_WIRE_CONTRABAND, "This wire appears connected to a reserve inventory compartment."),
 		new /datum/wire_description(VENDING_WIRE_ELECTRIFY, "This wire seems to be carrying a heavy current."),
-		new /datum/wire_description(VENDING_WIRE_IDSCAN, "This wire is connected to the ID scanning panel.", SKILL_EXPERT)
+		new /datum/wire_description(VENDING_WIRE_IDSCAN, "This wire is connected to the ID scanning panel.", SKILL_EXPERIENCED)
 	)
 
 var/const/VENDING_WIRE_THROW = 1

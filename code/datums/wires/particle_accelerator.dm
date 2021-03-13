@@ -2,7 +2,7 @@
 	wire_count = 5
 	holder_type = /obj/machinery/particle_accelerator/control_box
 	descriptions = list(
-		new /datum/wire_description(PARTICLE_TOGGLE_WIRE, "This wire seems to connect to the main power toggle.", SKILL_EXPERT),
+		new /datum/wire_description(PARTICLE_TOGGLE_WIRE, "This wire seems to connect to the main power toggle.", SKILL_EXPERIENCED),
 		new /datum/wire_description(PARTICLE_STRENGTH_WIRE, "This wire connects to the primary magnets."),
 		new /datum/wire_description(PARTICLE_INTERFACE_WIRE, "This wire appears connected to the user panel."),
 		new /datum/wire_description(PARTICLE_LIMIT_POWER_WIRE, "This wire connects to the primary magnets.")

@@ -198,7 +198,7 @@ atom/proc/add_fibers(mob/living/carbon/human/M)
 
 
 	//Detective is on the case
-	if(get_skill_value(SKILL_FORENSICS) >= SKILL_EXPERT && get_dist(src, A) <= (get_skill_value(SKILL_FORENSICS) - SKILL_ADEPT))
+	if(get_skill_value(SKILL_FORENSICS) >= SKILL_EXPERIENCED && get_dist(src, A) <= (get_skill_value(SKILL_FORENSICS) - SKILL_TRAINED))
 		var/clue
 		if(LAZYLEN(A.suit_fibers))
 			to_chat(src, SPAN_NOTICE("You notice some fibers embedded in \the [A]."))
@@ -219,7 +219,7 @@ atom/proc/add_fibers(mob/living/carbon/human/M)
 				to_chat(src, SPAN_NOTICE("You notice a faint acrid smell coming from \the [A]."))
 			clue = 1
 		//Noticing wiped blood is a bit harder
-		if((get_skill_value(SKILL_FORENSICS) >= SKILL_PROF) && LAZYLEN(A.blood_DNA))
+		if((get_skill_value(SKILL_FORENSICS) >= SKILL_MASTER) && LAZYLEN(A.blood_DNA))
 			to_chat(src, SPAN_WARNING("You notice faint blood traces on \The [A]."))
 			clue = 1
 		if(clue && has_client_color(/datum/client_color/noir))

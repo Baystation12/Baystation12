@@ -7,7 +7,7 @@
 	descriptions = list(
 		new /datum/wire_description(CAMERA_WIRE_FOCUS, "This wire runs to the camera's lens adjustment motors."),
 		new /datum/wire_description(CAMERA_WIRE_POWER, "This wire seems to be carrying a heavy current."),
-		new /datum/wire_description(CAMERA_WIRE_LIGHT, "This wire seems connected to the built-in light.", SKILL_EXPERT),
+		new /datum/wire_description(CAMERA_WIRE_LIGHT, "This wire seems connected to the built-in light.", SKILL_EXPERIENCED),
 		new /datum/wire_description(CAMERA_WIRE_ALARM, "This wire is connected to a remote signaling device of some sort.")
 	)
 

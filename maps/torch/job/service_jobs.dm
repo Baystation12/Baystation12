@@ -88,7 +88,7 @@
 		/datum/mil_rank/fleet/e3,
 		/datum/mil_rank/fleet/e4
 	)
-	min_skill = list(   SKILL_COOKING   = SKILL_ADEPT,
+	min_skill = list(   SKILL_COOKING   = SKILL_TRAINED,
 	                    SKILL_BOTANY    = SKILL_BASIC,
 	                    SKILL_CHEMISTRY = SKILL_BASIC)
 

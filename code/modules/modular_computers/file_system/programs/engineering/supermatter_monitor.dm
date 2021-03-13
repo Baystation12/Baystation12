@@ -64,7 +64,7 @@
 
 /datum/nano_module/supermatter_monitor/proc/process_data_output(skill, value)
 	switch(skill)
-		if(SKILL_NONE)
+		if(SKILL_UNSKILLED)
 			return (0.6 + 0.8 * rand()) * value
 		if(SKILL_BASIC)
 			return (0.8 + 0.4 * rand()) * value

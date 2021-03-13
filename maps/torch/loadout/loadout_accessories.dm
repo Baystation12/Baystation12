@@ -61,7 +61,7 @@
 /datum/gear/accessory/pilot_pin
 	display_name = "pilot's qualification pin"
 	path = /obj/item/clothing/accessory/solgov/specialty/pilot
-	allowed_skills = list(SKILL_PILOT = SKILL_ADEPT)
+	allowed_skills = list(SKILL_PILOT = SKILL_TRAINED)
 	allowed_branches = list(
 		/datum/mil_branch/fleet,
 		/datum/mil_branch/expeditionary_corps

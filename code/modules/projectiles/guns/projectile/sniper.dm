@@ -33,7 +33,7 @@
 
 /obj/item/weapon/gun/projectile/heavysniper/handle_post_fire(mob/user, atom/target, var/pointblank=0, var/reflex=0)
 	..()
-	if(user && user.skill_check(SKILL_WEAPONS, SKILL_PROF))
+	if(user && user.skill_check(SKILL_WEAPONS, SKILL_MASTER))
 		to_chat(user, "<span class='notice'>You work the bolt open with a reflexive motion, ejecting [chambered]!</span>")
 		unload_shell()
 

@@ -48,7 +48,7 @@
 		to_chat(user, "<span class='notice'>You stop examining \the [sample].</span>")
 		return
 
-	if(!user.skill_check(SKILL_FORENSICS, SKILL_ADEPT))
+	if(!user.skill_check(SKILL_FORENSICS, SKILL_TRAINED))
 		to_chat(user, "<span class='warning'>You can't figure out what it means...</span>")
 		return
 

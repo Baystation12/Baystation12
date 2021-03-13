@@ -42,7 +42,7 @@
 			to_chat(user, "It is loaded with a beaker.")
 		if(occupant)
 			occupant.examine(arglist(args))
-		if (emagged && user.skill_check(SKILL_MEDICAL, SKILL_EXPERT))
+		if (emagged && user.skill_check(SKILL_MEDICAL, SKILL_EXPERIENCED))
 			to_chat(user, "The sleeper chemical synthesis controls look tampered with.")
 
 
@@ -104,7 +104,7 @@
 	data["reagents"] = reagents.Copy()
 
 	if(istype(occupant))
-		var/scan = user.skill_check(SKILL_MEDICAL, SKILL_ADEPT) ? medical_scan_results(occupant) : "<span class='white'><b>Contains: \the [occupant]</b></span>"
+		var/scan = user.skill_check(SKILL_MEDICAL, SKILL_TRAINED) ? medical_scan_results(occupant) : "<span class='white'><b>Contains: \the [occupant]</b></span>"
 		scan = replacetext(scan,"'scan_notice'","'white'")
 		scan = replacetext(scan,"'scan_warning'","'average'")
 		scan = replacetext(scan,"'scan_danger'","'bad'")

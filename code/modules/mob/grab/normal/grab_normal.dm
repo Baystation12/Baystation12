@@ -61,7 +61,7 @@
 	var/mob/living/carbon/human/assailant = G.assailant
 	var/mob/living/carbon/human/affecting = G.affecting
 
-	if(!assailant.skill_check(SKILL_COMBAT, SKILL_ADEPT))
+	if(!assailant.skill_check(SKILL_COMBAT, SKILL_TRAINED))
 		return
 
 	if(!O)
@@ -96,7 +96,7 @@
 	var/mob/living/carbon/human/assailant = G.assailant
 	var/mob/living/carbon/human/affecting = G.affecting
 
-	if(!assailant.skill_check(SKILL_COMBAT, SKILL_ADEPT))
+	if(!assailant.skill_check(SKILL_COMBAT, SKILL_TRAINED))
 		return
 
 	if(!O)
@@ -289,7 +289,7 @@
 /datum/grab/normal/proc/attack_tendons(var/obj/item/grab/G, var/obj/item/W, var/mob/living/carbon/human/user, var/target_zone)
 	var/mob/living/carbon/human/affecting = G.affecting
 
-	if(!user.skill_check(SKILL_COMBAT, SKILL_ADEPT))
+	if(!user.skill_check(SKILL_COMBAT, SKILL_TRAINED))
 		return
 
 	if(user.a_intent != I_HURT)
