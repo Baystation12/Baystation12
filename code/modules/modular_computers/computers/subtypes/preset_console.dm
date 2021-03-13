@@ -165,3 +165,9 @@
 		/datum/computer_file/program/email_client,
 		/datum/computer_file/program/wordprocessor
 	)
+
+/obj/machinery/computer/modular/preset/filemanager
+	default_software = list(
+		/datum/computer_file/program/wordprocessor
+	)
+	autorun_program = /datum/computer_file/program/filemanager
