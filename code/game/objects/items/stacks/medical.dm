@@ -110,6 +110,8 @@
 					user.visible_message(SPAN_NOTICE("\The [user] places a bandaid over \a [W.desc] on [M]'s [affecting.name]."), \
 					                              SPAN_NOTICE("You place a bandaid over \a [W.desc] on [M]'s [affecting.name].") )
 				W.bandage()
+				if (M.stat == UNCONSCIOUS && prob(25))
+					to_chat(M, SPAN_NOTICE(SPAN_BOLD("... [pick("feels a little better", "hurts a little less")] ...")))
 				playsound(src, pick(apply_sounds), 25)
 				used++
 			affecting.update_damages()
@@ -203,6 +205,8 @@
 				W.disinfect()
 				W.heal_damage(heal_brute)
 				used++
+				if (M.stat == UNCONSCIOUS && prob(25))
+					to_chat(M, SPAN_NOTICE(SPAN_BOLD("... [pick("feels better", "hurts less")] ...")))
 			affecting.update_damages()
 			if(used == amount)
 				if(affecting.is_bandaged())
@@ -247,6 +251,8 @@
 			use(1)
 			affecting.salve()
 			affecting.disinfect()
+			if (M.stat == UNCONSCIOUS && prob(25))
+				to_chat(M, SPAN_NOTICE(SPAN_BOLD("... [pick("feels better", "hurts less")] ...")))
 
 /obj/item/stack/medical/splint
 	name = "medical splints"
