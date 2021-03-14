@@ -19,7 +19,7 @@
 		NETWORK_THUNDER
 	)
 	equipment = list(
-		/obj/item/device/boombox,
+		/obj/item/boombox,
 		/obj/item/bikehorn/airhorn,
 		/obj/item/party_light,
 		/obj/item/gun/launcher/money

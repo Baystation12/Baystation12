@@ -168,7 +168,9 @@ var/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 
 #define SPAN_WARNING(X) "<span class='warning'>[X]</span>"
 
-#define SPAN_STYLE(style, X) "<span style=\"[style]\">[X]</span>"
+#define SPAN_GOOD(X) "<span class='good'>[X]</span>"
+
+#define SPAN_BAD(X) "<span class='bad'>[X]</span>"
 
 #define SPAN_DANGER(X) "<span class='danger'>[X]</span>"
 
@@ -181,6 +183,8 @@ var/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 #define SPAN_INFO(X) "<span class='info'>[X]</span>"
 
 #define SPAN_DEBUG(X) "<span class='debug'>[X]</span>"
+
+#define SPAN_STYLE(style, X) "<span style=\"[style]\">[X]</span>"
 
 #define FONT_COLORED(color, text) "<font color='[color]'>[text]</font>"
 

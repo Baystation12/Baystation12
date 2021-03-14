@@ -1795,7 +1795,7 @@
 	dir = 1;
 	pixel_y = -28
 	},
-/obj/machinery/media/jukebox/old,
+/obj/machinery/jukebox/old,
 /turf/simulated/floor/tiled,
 /area/scavver/hab)
 "ow" = (

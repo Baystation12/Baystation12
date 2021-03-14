@@ -3707,7 +3707,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/media/jukebox{
+/obj/machinery/jukebox{
 	pixel_y = 4
 	},
 /turf/simulated/floor/tiled/white,
@@ -16138,7 +16138,7 @@
 /turf/simulated/floor/tiled,
 /area/hydroponics)
 "My" = (
-/obj/machinery/media/jukebox/old,
+/obj/machinery/jukebox/old,
 /obj/effect/floor_decal/spline/fancy/wood,
 /obj/item/device/radio/intercom{
 	pixel_y = 23
@@ -16544,7 +16544,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/thirddeck/foreport)
 "NM" = (
-/obj/machinery/media/jukebox/old,
+/obj/machinery/jukebox/old,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/plating,
 /area/vacant/mess)

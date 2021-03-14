@@ -2906,7 +2906,7 @@
 	dir = 1;
 	icon_state = "tube1"
 	},
-/obj/machinery/media/jukebox,
+/obj/machinery/jukebox,
 /turf/simulated/floor/wood,
 /area/errant_pisces/rooms)
 "gv" = (

@@ -1557,7 +1557,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/common)
 "eJ" = (
-/obj/machinery/media/jukebox,
+/obj/machinery/jukebox,
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/common)
 "eQ" = (
