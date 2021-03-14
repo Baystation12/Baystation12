@@ -541,10 +541,11 @@
 		drug_strength = drug_strength * 0.8
 
 	M.druggy = max(M.druggy, drug_strength)
-	if(prob(10))
-		M.SelfMove(pick(GLOB.cardinal))
-	if(prob(7))
-		M.emote(pick("twitch", "drool", "moan", "giggle"))
+	if (alien != IS_SKRELL)
+		if (prob(10))
+			M.SelfMove(pick(GLOB.cardinal))
+		if(prob(7))
+			M.emote(pick("twitch", "drool", "moan", "giggle"))
 	M.add_chemical_effect(CE_PULSE, -1)
 
 /datum/reagent/serotrotium
