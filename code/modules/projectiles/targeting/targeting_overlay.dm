@@ -7,7 +7,7 @@
 	density = 0
 	opacity = 0
 	layer = ABOVE_HUMAN_LAYER
-	simulated = 0
+	simulated = FALSE
 	mouse_opacity = 0
 
 	var/mob/living/aiming_at   // Who are we currently targeting, if anyone?

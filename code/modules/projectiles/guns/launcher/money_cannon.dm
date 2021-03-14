@@ -10,14 +10,14 @@
 	fire_sound_text = "a whoosh and a crisp, papery rustle"
 	fire_delay = 1
 	fire_sound = 'sound/weapons/gunshot/money_launcher.ogg'
-	var/emagged = 0
+	var/emagged = FALSE
 	var/max_capacity = 2000
 
 	var/receptacle_value = 0
 	var/dispensing = 20
 
 /obj/item/weapon/gun/launcher/money/hacked
-	emagged = 1
+	emagged = TRUE
 
 /obj/item/weapon/gun/launcher/money/proc/vomit_cash(var/mob/vomit_onto, var/projectile_vomit)
 	var/bundle_worth = Floor(receptacle_value / 10)
@@ -183,7 +183,7 @@
 /obj/item/weapon/gun/launcher/money/emag_act(var/remaining_charges, var/mob/user)
 	// Overloads the motors, causing it to shoot money harder and do harm.
 	if(!emagged)
-		emagged = 1
+		emagged = TRUE
 		to_chat(user, "<span class='notice'>You slide the sequencer into [src]... only for it to spit it back out and emit a motorized squeal!</span>")
 		var/datum/effect/effect/system/spark_spread/s = new()
 		s.set_up(3, 1, src)

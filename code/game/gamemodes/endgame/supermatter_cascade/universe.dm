@@ -108,7 +108,7 @@ AUTOMATED ALERT: Link to [command_name()] lost.
 			var/obj/item/weapon/cell/cell = APC.get_cell()
 			if(cell)
 				cell.charge = 0
-			APC.emagged = 1
+			APC.emagged = TRUE
 			APC.queue_icon_update()
 
 /datum/universal_state/supermatter_cascade/proc/PlayerSet()

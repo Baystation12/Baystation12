@@ -7,7 +7,7 @@
 
 	matter = list(MATERIAL_ALUMINIUM = 60,MATERIAL_GLASS = 30)
 
-	var/emagged = 0.0
+	var/emagged = FALSE
 	var/recording = 0.0
 	var/playing = 0.0
 	var/playsleepseconds = 0.0
@@ -130,8 +130,8 @@
 		mytape.record_noise("[strip_html_properly(recordedtext)]")
 
 /obj/item/device/taperecorder/emag_act(var/remaining_charges, var/mob/user)
-	if(emagged == 0)
-		emagged = 1
+	if(!emagged)
+		emagged = TRUE
 		recording = 0
 		to_chat(user, "<span class='warning'>PZZTTPFFFT</span>")
 		update_icon()

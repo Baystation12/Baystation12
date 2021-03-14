@@ -54,7 +54,7 @@ var/list/ai_verbs_default = list(
 	var/obj/machinery/camera/camera = null
 	var/list/connected_robots = list()
 	var/aiRestorePowerRoutine = 0
-	var/viewalerts = 0
+	var/viewalerts = FALSE
 	var/icon/holo_icon//Blue hologram. Face is assigned when AI is created.
 	var/icon/holo_icon_longrange //Yellow hologram.
 	var/holo_icon_malf = FALSE // for new hologram system
@@ -406,7 +406,7 @@ var/list/ai_verbs_default = list(
 	if (topic_status == STATUS_INTERACTIVE)
 		if (href_list["mach_close"]) // Overrides behavior handled in the ..()
 			if (href_list["mach_close"] == "aialerts")
-				viewalerts = 0
+				viewalerts = TRUE
 			return ..() // Does further work on this key
 
 		if (href_list["switchcamera"])

@@ -21,7 +21,7 @@
 	var/l_set = 0
 	var/l_setshort = 0
 	var/l_hacking = 0
-	var/emagged = 0
+	var/emagged = FALSE
 	var/open = 0
 	w_class = ITEM_SIZE_NORMAL
 	max_w_class = ITEM_SIZE_SMALL
@@ -98,7 +98,7 @@
 				if ((src.l_set == 0) && (length(src.code) == 5) && (!src.l_setshort) && (src.code != "ERROR"))
 					src.l_code = src.code
 					src.l_set = 1
-				else if ((src.code == src.l_code) && (src.emagged == 0) && (src.l_set == 1))
+				else if ((src.code == src.l_code) && (!src.emagged) && (src.l_set == 1))
 					src.locked = 0
 					overlays.Cut()
 					overlays += image('icons/obj/storage.dmi', icon_opened)
@@ -106,7 +106,7 @@
 				else
 					src.code = "ERROR"
 			else
-				if ((href_list["type"] == "R") && (src.emagged == 0) && (!src.l_setshort))
+				if ((href_list["type"] == "R") && (!src.emagged) && (!src.l_setshort))
 					src.locked = 1
 					overlays.Cut()
 					src.code = null
@@ -129,7 +129,7 @@
 
 /obj/item/weapon/storage/secure/emag_act(var/remaining_charges, var/mob/user, var/feedback)
 	if(!emagged)
-		emagged = 1
+		emagged = TRUE
 		src.overlays += image('icons/obj/storage.dmi', icon_sparking)
 		sleep(6)
 		overlays.Cut()

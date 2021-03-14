@@ -146,4 +146,4 @@
 	icon = 'icons/obj/projectiles.dmi'
 	icon_state = "ibeam"
 	anchored = 1
-	simulated = 0
+	simulated = FALSE

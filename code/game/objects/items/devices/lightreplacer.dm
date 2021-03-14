@@ -51,7 +51,7 @@
 
 	var/max_uses = 32
 	var/uses = 32
-	var/emagged = 0
+	var/emagged = FALSE
 	var/charge = 0
 
 /obj/item/device/lightreplacer/examine(mob/user, distance)

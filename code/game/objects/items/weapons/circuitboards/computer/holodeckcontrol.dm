@@ -15,7 +15,7 @@
 			HC.linkedholodeck	= locate(linkedholodeck_area)
 		if(last_to_emag)
 			HC.last_to_emag		= last_to_emag
-			HC.emagged 			= 1
+			HC.emagged = TRUE
 			HC.safety_disabled	= 1
 
 /obj/item/weapon/stock_parts/circuitboard/holodeckcontrol/deconstruct(var/obj/machinery/computer/HolodeckControl/HC)

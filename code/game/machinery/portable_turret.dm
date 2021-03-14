@@ -352,7 +352,7 @@ var/list/turret_icons
 		//the turret shoot much, much faster.
 		to_chat(user, "<span class='warning'>You short out [src]'s threat assessment circuits.</span>")
 		visible_message("[src] hums oddly...")
-		emagged = 1
+		emagged = TRUE
 		iconholder = 1
 		controllock = 1
 		enabled = 0 //turns off the turret temporarily
@@ -399,7 +399,7 @@ var/list/turret_icons
 		check_access = prob(20)	// check_access is a pretty big deal, so it's least likely to get turned on
 		check_anomalies = prob(50)
 		if(prob(5))
-			emagged = 1
+			emagged = TRUE
 
 	disabled = 1
 	var/power = 4 - severity

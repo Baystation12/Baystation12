@@ -1078,7 +1078,7 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 	density = 0
 
 	anchored = 1
-	simulated = 0
+	simulated = FALSE
 
 	see_in_dark = 1e6
 

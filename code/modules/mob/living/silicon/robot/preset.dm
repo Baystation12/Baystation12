@@ -1,6 +1,6 @@
 /mob/living/silicon/robot/syndicate
-	lawupdate = 0
-	scrambledcodes = 1
+	lawupdate = FALSE
+	scrambledcodes = TRUE
 	icon_state = "securityrobot"
 	modtype = "Security"
 	lawchannel = "State"
@@ -10,16 +10,16 @@
 	silicon_radio = /obj/item/device/radio/borg/syndicate
 	spawn_sound = 'sound/mecha/nominalsyndi.ogg'
 	cell = /obj/item/weapon/cell/super
-	pitch_toggle = 0
+	pitch_toggle = FALSE
 
 /mob/living/silicon/robot/combat
-	lawupdate = 0
-	scrambledcodes = 1
+	lawupdate = FALSE
+	scrambledcodes = TRUE
 	modtype = "Combat"
 	module = /obj/item/weapon/robot_module/security/combat
 	spawn_sound = 'sound/mecha/nominalsyndi.ogg'
 	cell = /obj/item/weapon/cell/super
-	pitch_toggle = 0
+	pitch_toggle = FALSE
 
 /mob/living/silicon/robot/combat/nt
 	laws = /datum/ai_laws/nanotrasen_aggressive
@@ -31,7 +31,7 @@
 	speak_statement = "clicks"
 	speak_exclamation = "rasps"
 	speak_query = "chirps"
-	lawupdate =      FALSE
+	lawupdate = FALSE
 	scrambledcodes = TRUE
 	speed = -2
 	icon_state = "drone-ascent"

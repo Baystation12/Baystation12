@@ -75,7 +75,7 @@
 	var/mob/living/carbon/human/daddy
 	anchored = 1
 	var/reality = 0
-	simulated = 0
+	simulated = FALSE
 
 /obj/effect/bluegoast/New(nloc, ndaddy)
 	..(nloc)

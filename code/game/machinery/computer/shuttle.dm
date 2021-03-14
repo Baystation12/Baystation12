@@ -73,7 +73,7 @@
 					if("Launch")
 						to_world("<span class='notice'><b>Alert: Shuttle launch time shortened to 10 seconds!</b></span>")
 						evacuation_controller.set_launch_time(world.time+100)
-						emagged = 1
+						emagged = TRUE
 					if("Cancel")
 						return
 		return

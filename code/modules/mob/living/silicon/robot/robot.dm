@@ -13,14 +13,14 @@
 	mob_push_flags = ~HEAVY //trundle trundle
 	skillset = /datum/skillset/silicon/robot
 
-	var/lights_on = 0 // Is our integrated light on?
+	var/lights_on = FALSE
 	var/used_power_this_tick = 0
 	var/power_efficiency = 1
 	var/sight_mode = 0
 	var/custom_name = ""
-	var/custom_sprite = 0 //Due to all the sprites involved, a var for our custom borgs may be best
+	var/custom_sprite = FALSE
 	var/crisis //Admin-settable for combat module use.
-	var/crisis_override = 0
+	var/crisis_override = FALSE
 	var/integrated_light_max_bright = 0.75
 	var/datum/wires/robot/wires
 	var/module_category = ROBOT_MODULE_TYPE_GROUNDED
@@ -66,35 +66,27 @@
 
 	var/obj/item/weapon/stock_parts/matter_bin/storage = null
 
-	var/opened = 0
-	var/emagged = 0
-	var/wiresexposed = 0
-	var/locked = 1
-	var/has_power = 1
+	var/opened = FALSE
+	var/emagged = FALSE
+	var/wiresexposed = FALSE
+	var/locked = TRUE
+	var/has_power = TRUE
 	var/spawn_module = null
 
 	var/spawn_sound = 'sound/voice/liveagain.ogg'
-	var/pitch_toggle = 1
+	var/pitch_toggle = TRUE
 	var/list/req_access = list(access_robotics)
 	var/ident = 0
-	var/viewalerts = 0
 	var/modtype = "Default"
-	var/lower_mod = 0
-	var/jetpack = 0
 	var/datum/effect/effect/system/ion_trail_follow/ion_trail = null
-	var/datum/effect/effect/system/spark_spread/spark_system//So they can initialize sparks whenever/N
-	var/jeton = 0
-	var/killswitch = 0
-	var/killswitch_time = 60
-	var/weapon_lock = 0
-	var/weaponlock_time = 120
-	var/lawupdate = 1 //Cyborgs will sync their laws with their AI by default
+	var/datum/effect/effect/system/spark_spread/spark_system //So they can initialize sparks whenever/N
+	var/lawupdate = TRUE //Cyborgs will sync their laws with their AI by default
 	var/lockcharge //If a robot is locked down
-	var/speed = 0 //Cause sec borgs gotta go fast //No they dont!
-	var/scrambledcodes = 0 // Used to determine if a borg shows up on the robotics console.  Setting to one hides them.
+	var/speed = 0
+	var/scrambledcodes = FALSE // Used to determine if a borg shows up on the robotics console.  Setting to one hides them.
 	var/tracking_entities = 0 //The number of known entities currently accessing the internal camera
 	var/braintype = "Cyborg"
-	var/intenselight = 0	// Whether cyborg's integrated light was upgraded
+	var/intenselight = FALSE	// Whether cyborg's integrated light was upgraded
 	var/vtec = FALSE
 
 	var/list/robot_verbs_default = list(
@@ -172,10 +164,10 @@
 	if(lawupdate)
 		var/new_ai = select_active_ai_with_fewest_borgs(get_z(src))
 		if(new_ai)
-			lawupdate = 1
+			lawupdate = TRUE
 			connect_to_ai(new_ai)
 		else
-			lawupdate = 0
+			lawupdate = FALSE
 
 	playsound(loc, spawn_sound, 75, pitch_toggle)
 
@@ -234,7 +226,7 @@
 		module_sprites = new_sprites.Copy()
 		//Custom_sprite check and entry
 
-		if (custom_sprite == 1)
+		if (custom_sprite)
 			var/list/valid_states = icon_states(CUSTOM_ITEM_SYNTH)
 			if("[ckey]-[modtype]" in valid_states)
 				module_sprites["Custom"] = "[src.ckey]-[modtype]"
@@ -543,7 +535,7 @@
 				user.visible_message("<span class='notice'>\The [user] begins clasping shut \the [src]'s maintenance hatch.</span>", "<span class='notice'>You begin closing up \the [src].</span>")
 				if(do_after(user, 50, src))
 					to_chat(user, "<span class='notice'>You close \the [src]'s maintenance hatch.</span>")
-					opened = 0
+					opened = FALSE
 					update_icon()
 
 			else if(wiresexposed && wires.IsAllCut())
@@ -588,7 +580,7 @@
 				user.visible_message("<span class='notice'>\The [user] begins prying open \the [src]'s maintenance hatch.</span>", "<span class='notice'>You start opening \the [src]'s maintenance hatch.</span>")
 				if(do_after(user, 50, src))
 					to_chat(user, "<span class='notice'>You open \the [src]'s maintenance hatch.</span>")
-					opened = 1
+					opened = TRUE
 					update_icon()
 
 	// If the robot is having something inserted which will remain inside it, self-inserting must be handled before exiting to avoid logic errors. Use the handle_selfinsert proc.
@@ -757,9 +749,6 @@
 		return
 
 /mob/living/silicon/robot/proc/installed_modules()
-	if(weapon_lock)
-		to_chat(src, "<span class='warning'>Weapon lock active, unable to use modules! Count:[weaponlock_time]</span>")
-		return
 
 	if(!module)
 		pick_module()
@@ -911,9 +900,9 @@
 
 /mob/living/silicon/robot/proc/UnlinkSelf()
 	disconnect_from_ai()
-	lawupdate = 0
-	lockcharge = 0
-	scrambledcodes = 1
+	lawupdate = FALSE
+	lockcharge = FALSE
+	scrambledcodes = TRUE
 	//Disconnect it's camera so it's not so easily tracked.
 	if(src.camera)
 		src.camera.clear_all_networks()
@@ -1046,7 +1035,7 @@
 		if(locked)
 			if(prob(90))
 				to_chat(user, "You emag the cover lock.")
-				locked = 0
+				locked = FALSE
 			else
 				to_chat(user, "You fail to emag the cover lock.")
 				to_chat(src, "Hack attempt detected.")
@@ -1064,8 +1053,8 @@
 		else
 			sleep(6)
 			if(prob(50))
-				emagged = 1
-				lawupdate = 0
+				emagged = TRUE
+				lawupdate = FALSE
 				disconnect_from_ai()
 				to_chat(user, "You emag [src]'s interface.")
 				log_and_message_admins("emagged cyborg [key_name_admin(src)].  Laws overridden.", src)

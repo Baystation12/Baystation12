@@ -72,7 +72,7 @@
 	var/rcon_setting = 2
 	var/rcon_time = 0
 	var/locked = 1
-	var/wiresexposed = 0 // If it's been screwdrivered open.
+	var/wiresexposed = FALSE // If it's been screwdrivered open.
 	var/aidisabled = 0
 	var/shorted = 0
 
@@ -138,7 +138,7 @@
 
 	if(istype(frame))
 		buildstage = 0
-		wiresexposed = 1
+		wiresexposed = TRUE
 		pixel_x = (dir & 3)? 0 : (dir == 4 ? -21 : 21)
 		pixel_y = (dir & 3)? (dir ==1 ? -21 : 21) : 0
 		update_icon()
@@ -904,7 +904,7 @@ FIRE ALARM
 	active_power_usage = 6
 	power_channel = ENVIRON
 	var/last_process = 0
-	var/wiresexposed = 0
+	var/wiresexposed = FALSE
 	var/buildstage = 2 // 2 = complete, 1 = no wires,  0 = circuit gone
 	var/seclevel
 	var/global/list/overlays_cache
@@ -1155,7 +1155,7 @@ FIRE ALARM
 
 	if(istype(frame))
 		buildstage = 0
-		wiresexposed = 1
+		wiresexposed = TRUE
 		pixel_x = (dir & 3)? 0 : (dir == 4 ? -21 : 21)
 		pixel_y = (dir & 3)? (dir ==1 ? -21 : 21) : 0
 		update_icon()

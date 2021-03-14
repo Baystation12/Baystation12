@@ -75,7 +75,7 @@ GLOBAL_DATUM_INIT(traitors, /datum/antagonist/traitor, new)
 		if(istype(traitor_mob, /mob/living/silicon/robot))
 			var/mob/living/silicon/robot/R = traitor_mob
 			R.SetLockdown(0)
-			R.emagged = 1 // Provides a traitor robot with its module's emag item
+			R.emagged = TRUE // Provides a traitor robot with its module's emag item
 			R.verbs |= /mob/living/silicon/robot/proc/ResetSecurityCodes
 		return 1
 
