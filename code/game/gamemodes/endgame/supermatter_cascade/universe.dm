@@ -68,7 +68,7 @@ There is no known way to stop the formation of the rift, nor any way to escape i
 
 God help your s\[\[###!!!-
 
-AUTOMATED ALERT: Link to [command_name()] lost.
+AUTOMATED ALERT: Link to [GLOB.using_map.boss_name] lost.
 
 "}
 		priority_announcement.Announce(txt,"SUPERMATTER CASCADE DETECTED")

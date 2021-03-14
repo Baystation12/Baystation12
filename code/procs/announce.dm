@@ -26,8 +26,8 @@
 
 /datum/announcement/priority/command/New(var/do_log = 1, var/new_sound = 'sound/misc/notice2.ogg', var/do_newscast = 0)
 	..(do_log, new_sound, do_newscast)
-	title = "[command_name()] Update"
-	announcement_type = "[command_name()] Update"
+	title = "[GLOB.using_map.boss_name] Update"
+	announcement_type = "[GLOB.using_map.boss_name] Update"
 
 /datum/announcement/proc/Announce(var/message as text, var/new_title = "", var/new_sound = null, var/do_newscast = newscast, var/msg_sanitized = 0, var/zlevels = GLOB.using_map.contact_levels)
 	if(!message)
@@ -70,7 +70,7 @@ datum/announcement/priority/FormMessage(message as text, message_title as text)
 	. += "<br>"
 
 datum/announcement/priority/command/FormMessage(message as text, message_title as text)
-	. = "<h1 class='alert'>[command_name()] Update</h1>"
+	. = "<h1 class='alert'>[GLOB.using_map.boss_name] Update</h1>"
 	if (message_title)
 		. += "<br><h2 class='alert'>[message_title]</h2>"
 

@@ -43,8 +43,8 @@
 	item_cost = round(DEFAULT_TELECRYSTAL_AMOUNT / 2)
 
 	spawn(2)
-		name = "[command_name()] Update Announcement"
-		desc = "Causes a falsified [command_name()] Update."
+		name = "[GLOB.using_map.boss_name] Update Announcement"
+		desc = "Causes a falsified [GLOB.using_map.boss_name] Update."
 
 /***************
 * Service Item *
