@@ -13,6 +13,8 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 	var/target_mob_count = 0 //overall target mob count, set to nonzero during setup
 	var/datum/mob_list/chosen_mob_list //the chosen list of mobs we will pick from when spawning, also based on severity
 	var/original_severity
+	var/delay_time // Amount of time between the event starting and mobs beginning spawns
+	var/spawning = FALSE // Set to TRUE once the initial delay passes
 
 /datum/mob_list
 	var/list/mobs = list()
@@ -21,6 +23,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 	var/limit //target number of mobs to spawn
 	var/length = 75 //length of time the event should run for
 	var/spawn_near_chance = 20 //chance a mob spawns near a player
+	var/delay_time = 600 // Amount of time between the event starting and mobs beginning spawns
 
 /datum/mob_list/major/meat
 	mobs = list(
@@ -106,6 +109,15 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 	endWhen = chosen_mob_list.length
 	endWhen += severity*25
 
+	delay_time = chosen_mob_list.delay_time
+	var/delay_mod = delay_time / 6
+	var/delay_max = (EVENT_LEVEL_MAJOR - severity) * delay_mod
+	var/delay_min = -1 * severity * delay_mod
+	delay_mod = max(rand(delay_min, delay_max), 0)
+	delay_time += delay_mod
+	endWhen += delay_time
+	log_debug("Exoplanet Awakening spawns delayed [delay_time / 10] seconds.")
+
 /datum/event/exo_awakening/proc/count_mobs()
 	var/total_mobs
 	total_mobs = GLOB.exo_event_mob_count.len
@@ -166,6 +178,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 	if (dimensions["x"] <= 100)
 		target_mob_count = round(target_mob_count / 3.5) //keep mob count lower in smaller areas.
 
+	addtimer(CALLBACK(src, /datum/event/exo_awakening/proc/start_spawning), delay_time)
 
 /datum/event/exo_awakening/announce()
 	var/announcement = ""
@@ -179,10 +192,14 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 
 /datum/event/exo_awakening/tick()
 	count_mobs()
-	if (no_show && prob(98))
+	if (!spawning || (no_show && prob(98)))
 		return
 
 	spawn_mob()
+
+/datum/event/exo_awakening/proc/start_spawning()
+	spawning = TRUE
+	log_debug("Exoplanet Awakening spawning initiated.")
 
 /datum/event/exo_awakening/proc/spawn_mob()
 	if(!living_observers_present(affecting_z))
