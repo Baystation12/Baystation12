@@ -137,7 +137,7 @@
 
 
 /obj/item/weapon/gun/launcher/crossbow/attackby(obj/item/W, mob/user)
-	
+
 	if(istype(W, /obj/item/weapon/rcd))
 		var/obj/item/weapon/rcd/rcd = W
 		if(rcd.crafting && user.unEquip(rcd) && user.unEquip(src))
@@ -159,7 +159,6 @@
 			if (R.use(1))
 				bolt = new /obj/item/weapon/arrow/rod(src)
 				bolt.fingerprintslast = src.fingerprintslast
-				bolt.dropInto(loc)
 				update_icon()
 				user.visible_message("[user] jams [bolt] into [src].","You jam [bolt] into [src].")
 				superheat_rod(user)
