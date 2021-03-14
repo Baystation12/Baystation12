@@ -247,11 +247,15 @@
 /obj/item/gun/launcher/crossbow/rapidcrossbowdevice/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/rcd_ammo))
 		var/obj/item/rcd_ammo/cartridge = W
-		if((stored_matter + cartridge.remaining) > max_stored_matter)
-			to_chat(user, "<span class='notice'>The RCD can't hold that many additional matter-units.</span>")
+		if(stored_matter >= max_stored_matter)
+			to_chat(user, "<span class='notice'>The RCD is at maximum capacity.</span>")
 			return
-		stored_matter += cartridge.remaining
-		qdel(W)
+		var/matter_exchange = min(cartridge.remaining,max_stored_matter - stored_matter)
+		stored_matter += matter_exchange
+		cartridge.remaining -= matter_exchange
+		if(cartridge.remaining <= 0)
+			qdel(W)
+		cartridge.matter = list(MATERIAL_STEEL = 500 * cartridge.remaining,MATERIAL_GLASS = 250 * cartridge.remaining)
 		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 		to_chat(user, "<span class='notice'>The RCD now holds [stored_matter]/[max_stored_matter] matter-units.</span>")
 		update_icon()
