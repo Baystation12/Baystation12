@@ -191,7 +191,7 @@
 	material = MATERIAL_TITANIUM
 
 /obj/structure/wall_frame/hull
-	paint_color = COLOR_HULL
+	paint_color = COLOR_SOL
 
 /obj/structure/wall_frame/hull/vox
 	paint_color = COLOR_GREEN_GRAY
