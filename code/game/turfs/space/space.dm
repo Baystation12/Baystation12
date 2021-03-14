@@ -63,7 +63,7 @@
 		O.hide(0)
 
 /turf/space/is_solid_structure()
-	return locate(/obj/structure/lattice, src) //counts as solid structure if it has a lattice
+	return locate(/obj/structure/lattice, src) || locate(/obj/structure/catwalk, src) //counts as solid structure if it has a lattice or catwalk
 
 /turf/space/proc/update_starlight()
 	if(!config.starlight)
