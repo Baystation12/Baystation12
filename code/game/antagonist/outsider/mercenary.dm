@@ -45,11 +45,11 @@ GLOBAL_DATUM_INIT(mercs, /datum/antagonist/mercenary, new)
 	vox.equip_to_slot_or_del(new /obj/item/clothing/shoes/magboots/vox(vox), slot_shoes)
 	vox.equip_to_slot_or_del(new /obj/item/clothing/gloves/vox(vox), slot_gloves)
 	vox.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/swat/vox(vox), slot_wear_mask)
-	vox.equip_to_slot_or_del(new /obj/item/weapon/tank/nitrogen(vox), slot_back)
+	vox.equip_to_slot_or_del(new /obj/item/tank/nitrogen(vox), slot_back)
 	vox.equip_to_slot_or_del(new /obj/item/clothing/glasses/sunglasses(vox), slot_glasses)
-	vox.equip_to_slot_or_del(new /obj/item/weapon/card/id/syndicate(vox), slot_wear_id)
+	vox.equip_to_slot_or_del(new /obj/item/card/id/syndicate(vox), slot_wear_id)
 	vox.put_in_hands(locate(/obj/item/device/radio/uplink) in old.contents)
-	vox.set_internals(locate(/obj/item/weapon/tank) in vox.contents)
+	vox.set_internals(locate(/obj/item/tank) in vox.contents)
 
 
 /obj/item/vox_changer/merc

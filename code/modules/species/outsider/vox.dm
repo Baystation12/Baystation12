@@ -211,8 +211,8 @@
 /obj/item/vox_changer/proc/OnCreated(mob/living/carbon/human/vox, mob/living/carbon/human/old)
 	vox.equip_to_slot_or_del(new /obj/item/clothing/under/vox/vox_casual(vox), slot_w_uniform)
 	vox.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/vox(vox), slot_wear_mask)
-	vox.equip_to_slot_or_del(new /obj/item/weapon/tank/nitrogen(vox), slot_back)
-	vox.set_internals(locate(/obj/item/weapon/tank) in vox.contents)
+	vox.equip_to_slot_or_del(new /obj/item/tank/nitrogen(vox), slot_back)
+	vox.set_internals(locate(/obj/item/tank) in vox.contents)
 
 /obj/item/vox_changer/proc/OnReady(mob/living/carbon/human/vox, mob/living/carbon/human/old)
 	return

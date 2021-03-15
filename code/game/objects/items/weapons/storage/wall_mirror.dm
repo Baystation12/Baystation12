@@ -72,7 +72,7 @@
 	clear_mirror_ui_cache(ui_cache)
 	. = ..()
 
-/obj/item/weapon/mirror/attack_self(mob/user)
+/obj/item/mirror/attack_self(mob/user)
 	open_mirror_ui(src, user, ui_cache)
 
 
