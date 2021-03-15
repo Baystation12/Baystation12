@@ -12,6 +12,7 @@
 	origin_tech = list(TECH_COMBAT = 2)
 	attack_verb = list("beaten")
 	base_parry_chance = 30
+	attack_ignore_harm_check = TRUE
 	var/stunforce = 0
 	var/agonyforce = 30
 	var/status = 0		//whether the thing is on or not
