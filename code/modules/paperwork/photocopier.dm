@@ -146,8 +146,12 @@
 					toner = 0
 	return
 
-/obj/machinery/photocopier/proc/copy(var/obj/item/paper/copy, var/need_toner=1)
-	var/obj/item/paper/c = new copy.type(loc, copy.text, copy.name, copy.metadata )
+/obj/machinery/photocopier/proc/copy(obj/item/paper/copy, need_toner = TRUE, copy_admin = FALSE)
+	var/copy_type = copy.type
+	if (istype(copy, /obj/item/paper/admin) && !copy_admin) // Edge case for admin faxes so that they don't show the editing form
+		copy_type = /obj/item/paper
+	
+	var/obj/item/paper/c = new copy_type(loc, copy.text, copy.name, copy.metadata )
 
 	c.color = COLOR_WHITE
 
