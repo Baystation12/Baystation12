@@ -267,18 +267,18 @@
 			src.MouseDrop_T(G.affecting, user)      //act like they were dragged onto the closet
 			return 0
 		if(isWelder(W))
-			var/obj/item/weapon/weldingtool/WT = W
+			var/obj/item/weldingtool/WT = W
 			if(WT.remove_fuel(0,user))
 				slice_into_parts(WT, user)
 				return
-		if(istype(W, /obj/item/weapon/gun/energy/plasmacutter))
-			var/obj/item/weapon/gun/energy/plasmacutter/cutter = W
+		if(istype(W, /obj/item/gun/energy/plasmacutter))
+			var/obj/item/gun/energy/plasmacutter/cutter = W
 			if(!cutter.slice(user))
 				return
 			slice_into_parts(W, user)
 			return
-		if(istype(W, /obj/item/weapon/storage/laundry_basket) && W.contents.len)
-			var/obj/item/weapon/storage/laundry_basket/LB = W
+		if(istype(W, /obj/item/storage/laundry_basket) && W.contents.len)
+			var/obj/item/storage/laundry_basket/LB = W
 			var/turf/T = get_turf(src)
 			for(var/obj/item/I in LB.contents)
 				LB.remove_from_storage(I, T, 1)
@@ -294,7 +294,7 @@
 			W.pixel_z = 0
 			W.pixel_w = 0
 		return
-	else if(istype(W, /obj/item/weapon/melee/energy/blade))
+	else if(istype(W, /obj/item/melee/energy/blade))
 		if(emag_act(INFINITY, user, "<span class='danger'>The locker has been sliced open by [user] with \an [W]</span>!", "<span class='danger'>You hear metal being sliced and sparks flying.</span>"))
 			var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
 			spark_system.set_up(5, 0, src.loc)
@@ -305,7 +305,7 @@
 	else if(istype(W, /obj/item/stack/package_wrap))
 		return
 	else if(isWelder(W) && (setup & CLOSET_CAN_BE_WELDED))
-		var/obj/item/weapon/weldingtool/WT = W
+		var/obj/item/weldingtool/WT = W
 		if(!WT.remove_fuel(0,user))
 			if(!WT.isOn())
 				return
@@ -474,7 +474,7 @@
 
 	return togglelock(usr)
 
-/obj/structure/closet/proc/togglelock(var/mob/user, var/obj/item/weapon/card/id/id_card)
+/obj/structure/closet/proc/togglelock(var/mob/user, var/obj/item/card/id/id_card)
 	if(!(setup & CLOSET_HAS_LOCK))
 		return FALSE
 	if(!CanPhysicallyInteract(user))
@@ -507,7 +507,7 @@
 		to_chat(user, "<span class='warning'>Access denied!</span>")
 		return FALSE
 
-/obj/structure/closet/proc/CanToggleLock(var/mob/user, var/obj/item/weapon/card/id/id_card)
+/obj/structure/closet/proc/CanToggleLock(var/mob/user, var/obj/item/card/id/id_card)
 	return allowed(user) || (istype(id_card) && check_access_list(id_card.GetAccess()))
 
 /obj/structure/closet/AltClick(var/mob/user)

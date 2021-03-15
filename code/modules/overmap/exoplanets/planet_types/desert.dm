@@ -140,7 +140,7 @@
 	exposed = 1
 	update_icon()
 
-/obj/structure/quicksand/attackby(obj/item/weapon/W, mob/user)
+/obj/structure/quicksand/attackby(obj/item/W, mob/user)
 	if(!exposed && W.force)
 		expose()
 	else

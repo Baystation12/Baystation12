@@ -1,6 +1,6 @@
 //This is the generic parent class, which doesn't actually do anything.
 
-/obj/item/weapon/stock_parts/computer/scanner
+/obj/item/stock_parts/computer/scanner
 	name = "scanner module"
 	desc = "A generic scanner module. This one doesn't seem to do anything."
 	power_usage = 50
@@ -15,11 +15,11 @@
 	var/can_view_scan = 1	//Whether the scan output can be viewed in the program.
 	var/can_save_scan = 1	//Whether the scan output can be saved to disk.
 
-/obj/item/weapon/stock_parts/computer/scanner/Destroy()
+/obj/item/stock_parts/computer/scanner/Destroy()
 	do_before_uninstall()
 	. = ..()
 
-/obj/item/weapon/stock_parts/computer/scanner/proc/do_after_install(user, atom/device)
+/obj/item/stock_parts/computer/scanner/proc/do_after_install(user, atom/device)
 	var/datum/extension/interactive/ntos/os = get_extension(device, /datum/extension/interactive/ntos)
 	if(!driver_type || !device || !os)
 		return 0
@@ -40,22 +40,22 @@
 	driver_file.connect_scanner()
 	return 1
 
-/obj/item/weapon/stock_parts/computer/scanner/proc/do_before_uninstall()
+/obj/item/stock_parts/computer/scanner/proc/do_before_uninstall()
 	if(driver)
 		driver.disconnect_scanner()
 	if(driver)	//In case the driver doesn't find it.
 		driver = null
 
-/obj/item/weapon/stock_parts/computer/scanner/proc/run_scan(mob/user, datum/computer_file/program/scanner/program) //For scans done from the software.
+/obj/item/stock_parts/computer/scanner/proc/run_scan(mob/user, datum/computer_file/program/scanner/program) //For scans done from the software.
 
-/obj/item/weapon/stock_parts/computer/scanner/proc/do_on_afterattack(mob/user, atom/target, proximity)
+/obj/item/stock_parts/computer/scanner/proc/do_on_afterattack(mob/user, atom/target, proximity)
 
-/obj/item/weapon/stock_parts/computer/scanner/attackby(obj/W, mob/living/user)
+/obj/item/stock_parts/computer/scanner/attackby(obj/W, mob/living/user)
 	do_on_attackby(user, W)
 
-/obj/item/weapon/stock_parts/computer/scanner/proc/do_on_attackby(mob/user, atom/target)
+/obj/item/stock_parts/computer/scanner/proc/do_on_attackby(mob/user, atom/target)
 
-/obj/item/weapon/stock_parts/computer/scanner/proc/can_use_scanner(mob/user, atom/target, proximity = TRUE)
+/obj/item/stock_parts/computer/scanner/proc/can_use_scanner(mob/user, atom/target, proximity = TRUE)
 	if(!check_functionality())
 		return 0
 	if(user.incapacitated())

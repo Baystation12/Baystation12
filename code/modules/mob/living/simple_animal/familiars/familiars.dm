@@ -142,7 +142,7 @@
 	icon_rest = "mouse_gray_sleep"
 
 	speak_emote = list("squeeks")
-	holder_type = /obj/item/weapon/holder/mouse
+	holder_type = /obj/item/holder/mouse
 	pass_flags = PASS_FLAG_TABLE
 	mob_size = MOB_MINISCULE
 
@@ -172,7 +172,7 @@
 
 
 	speak_emote = list("meows", "purrs")
-	holder_type = /obj/item/weapon/holder/cat
+	holder_type = /obj/item/holder/cat
 	mob_size = MOB_SMALL
 
 	health = 25

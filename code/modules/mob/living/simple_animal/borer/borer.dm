@@ -20,7 +20,7 @@
 	wander = 0
 	pass_flags = PASS_FLAG_TABLE
 	universal_understand = TRUE
-	holder_type = /obj/item/weapon/holder/borer
+	holder_type = /obj/item/holder/borer
 	mob_size = MOB_SMALL
 	can_escape = TRUE
 	density = 0

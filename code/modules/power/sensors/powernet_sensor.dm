@@ -108,7 +108,7 @@
 		for(var/obj/machinery/power/apc/A in L)
 			out += "<tr><td>\The [A.area]" 															// Add area name
 			out += "<td>[S[A.equipment+1]]<td>[S[A.lighting+1]]<td>[S[A.environ+1]]" 				// Show status of channels
-			var/obj/item/weapon/cell/cell = A.get_cell()
+			var/obj/item/cell/cell = A.get_cell()
 			if(cell)
 				out += "<td>[round(cell.percent())]% - [chg[A.charging+1]]"
 			else
@@ -156,7 +156,7 @@
 			APC_entry["s_lighting"] = S[A.lighting+1]
 			APC_entry["s_environment"] = S[A.environ+1]
 			// Cell Status
-			var/obj/item/weapon/cell/cell = A.get_cell()
+			var/obj/item/cell/cell = A.get_cell()
 			APC_entry["cell_charge"] = cell ? round(cell.percent()) : "NO CELL"
 			APC_entry["cell_status"] = cell ? chg[A.charging+1] : "N"
 			// Other info

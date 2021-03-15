@@ -29,7 +29,7 @@
 	var/const/FREQ_LISTENING = 1
 	var/list/internal_channels
 
-	var/obj/item/weapon/cell/device/cell = /obj/item/weapon/cell/device/standard
+	var/obj/item/cell/device/cell = /obj/item/cell/device/standard
 	var/power_usage = 11 // about an hour, give or take 10 minutes.
 
 	var/datum/radio_frequency/radio_connection
@@ -66,7 +66,7 @@
 
 /obj/item/device/radio/Process()
 	if(power_usage && on) //radio will use power and is on
-		var/obj/item/weapon/cell/has_cell = get_cell()
+		var/obj/item/cell/has_cell = get_cell()
 		if(!has_cell) // No cell
 			on = FALSE
 			STOP_PROCESSING(SSobj, src)
@@ -112,7 +112,7 @@
 	data["freq"] = format_frequency(frequency)
 	data["default_freq"] = format_frequency(default_frequency)
 	data["rawfreq"] = num2text(frequency)
-	var/obj/item/weapon/cell/has_cell = get_cell()
+	var/obj/item/cell/has_cell = get_cell()
 	if(has_cell)
 		var/charge = round(has_cell.percent())
 		data["charge"] = charge ? "[charge]%" : "NONE"
@@ -165,7 +165,7 @@
 	return user.has_internal_radio_channel_access(internal_channels[freq])
 
 /mob/proc/has_internal_radio_channel_access(var/list/req_one_accesses)
-	var/obj/item/weapon/card/id/I = GetIdCard()
+	var/obj/item/card/id/I = GetIdCard()
 	if (!length(req_one_accesses))
 		return TRUE // No access flags means all access
 	else
@@ -197,7 +197,7 @@
 /obj/item/device/radio/proc/TogglePower()
 	if(!power_usage)
 		return FALSE //Can't toggle power if there's no power to use
-	var/obj/item/weapon/cell/has_cell = get_cell()
+	var/obj/item/cell/has_cell = get_cell()
 	if(!has_cell || !has_cell.check_charge(power_usage * CELLRATE)) // No cell or not enough power to turn on
 		return FALSE
 
@@ -512,7 +512,7 @@
 		"verb" = verb
 	)
 	signal.frequency = connection.frequency // Quick frequency set
-	var/obj/item/weapon/cell/has_cell = get_cell()
+	var/obj/item/cell/has_cell = get_cell()
 	if(has_cell && has_cell.percent() < 20)
 		signal.data["compression"] = max(0, 80 - has_cell.percent()*3)
 	for(var/obj/machinery/telecomms/receiver/R in telecomms_list)
@@ -593,7 +593,7 @@
 		if (power_usage && cell)
 			to_chat(user, "<span class='notice'>\The [src] charge meter reads [round(cell.percent(), 0.1)]%.</span>")
 
-/obj/item/device/radio/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/device/radio/attackby(obj/item/W as obj, mob/user as mob)
 	..()
 	user.set_machine(src)
 	if(isScrewdriver(W))
@@ -605,7 +605,7 @@
 				user.show_message("<span class='notice'>\The [src] can no longer be modified or attached!</span>")
 			updateDialog()
 			return
-	if(!cell && power_usage && istype(W, /obj/item/weapon/cell/device) && user.unEquip(W, target = src))
+	if(!cell && power_usage && istype(W, /obj/item/cell/device) && user.unEquip(W, target = src))
 		to_chat(user, "<span class='notice'>You put [W] in \the [src].</span>")
 		cell = W
 		return
@@ -675,7 +675,7 @@
 		var/datum/robot_component/C = R.components["radio"]
 		R.cell_use_power(C.active_usage)
 
-/obj/item/device/radio/borg/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/device/radio/borg/attackby(obj/item/W as obj, mob/user as mob)
 //	..()
 	user.set_machine(src)
 	if (!( isScrewdriver(W) || (istype(W, /obj/item/device/encryptionkey/ ))))

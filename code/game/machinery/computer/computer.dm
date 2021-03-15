@@ -66,8 +66,8 @@
 		set_light(0)
 		icon = 'icons/obj/computer.dmi'
 		icon_state = "wired"
-		var/screen = get_component_of_type(/obj/item/weapon/stock_parts/console_screen)
-		var/keyboard = get_component_of_type(/obj/item/weapon/stock_parts/keyboard)
+		var/screen = get_component_of_type(/obj/item/stock_parts/console_screen)
+		var/keyboard = get_component_of_type(/obj/item/stock_parts/keyboard)
 		if(screen)
 			overlays += "comp_screen"
 		if(keyboard)
@@ -104,9 +104,9 @@
 /obj/machinery/computer/dismantle(mob/user)
 	if(stat & BROKEN)
 		to_chat(user, "<span class='notice'>The broken glass falls out.</span>")
-		for(var/obj/item/weapon/stock_parts/console_screen/screen in component_parts)
+		for(var/obj/item/stock_parts/console_screen/screen in component_parts)
 			qdel(screen)
-			new /obj/item/weapon/material/shard(loc)
+			new /obj/item/material/shard(loc)
 	else
 		to_chat(user, "<span class='notice'>You disconnect the monitor.</span>")
 	return ..()

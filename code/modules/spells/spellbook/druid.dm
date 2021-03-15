@@ -1,6 +1,6 @@
 //all about the summons, nature, and a bit o' healin.
 
-/obj/item/weapon/spellbook/druid
+/obj/item/spellbook/druid
 	spellbook_type = /datum/spellbook/druid
 
 /datum/spellbook/druid
@@ -29,13 +29,13 @@
 				/spell/portal_teleport = 							2,
 				/spell/noclothes = 									1,
 				/obj/structure/closet/wizard/souls = 				1,
-				/obj/item/weapon/magic_rock = 						1,
-				/obj/item/weapon/summoning_stone = 					2,
-				/obj/item/weapon/contract/wizard/telepathy = 		1,
-				/obj/item/weapon/contract/apprentice = 				1
+				/obj/item/magic_rock = 						1,
+				/obj/item/summoning_stone = 					2,
+				/obj/item/contract/wizard/telepathy = 		1,
+				/obj/item/contract/apprentice = 				1
 				)
 	sacrifice_objects = list(/obj/item/seeds,
-							/obj/item/weapon/wirecutters/clippers,
+							/obj/item/wirecutters/clippers,
 							/obj/item/device/scanner/plant,
-							/obj/item/weapon/material/hatchet,
-							/obj/item/weapon/material/minihoe)
+							/obj/item/material/hatchet,
+							/obj/item/material/minihoe)

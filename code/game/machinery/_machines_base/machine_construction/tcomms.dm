@@ -98,7 +98,7 @@
 		machine.dismantle()
 		return
 
-	if(istype(I, /obj/item/weapon/storage/part_replacer))
+	if(istype(I, /obj/item/storage/part_replacer))
 		return machine.part_replacement(I, user)
 
 	if(isWrench(I))

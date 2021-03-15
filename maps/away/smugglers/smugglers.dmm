@@ -36,7 +36,7 @@
 	pixel_y = 5
 	},
 /obj/item/ammo_casing/pistol/magnum,
-/obj/item/weapon/shovel{
+/obj/item/shovel{
 	pixel_x = 10;
 	pixel_y = -5
 	},
@@ -62,7 +62,7 @@
 	id_tag = "asteroid_base_dock_pump"
 	},
 /obj/effect/floor_decal/industrial/warning/full,
-/obj/item/weapon/beartrap{
+/obj/item/beartrap{
 	anchored = 1;
 	deployed = 1;
 	icon_state = "beartrap1"
@@ -295,7 +295,7 @@
 /turf/simulated/floor,
 /area/smugglers/base)
 "aJ" = (
-/obj/item/weapon/beartrap{
+/obj/item/beartrap{
 	anchored = 1;
 	deployed = 1;
 	icon_state = "beartrap1"
@@ -361,7 +361,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/item/weapon/wirecutters,
+/obj/item/wirecutters,
 /turf/simulated/floor,
 /area/smugglers/base)
 "aQ" = (
@@ -472,7 +472,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
-/obj/item/weapon/paper/smug_1,
+/obj/item/paper/smug_1,
 /turf/simulated/floor,
 /area/smugglers/base)
 "bc" = (
@@ -498,14 +498,14 @@
 /obj/structure/table/rack{
 	dir = 8
 	},
-/obj/item/weapon/tank/air{
+/obj/item/tank/air{
 	pixel_x = 5
 	},
-/obj/item/weapon/tank/air,
+/obj/item/tank/air,
 /turf/simulated/floor,
 /area/smugglers/base)
 "bg" = (
-/obj/item/weapon/pickaxe/xeno/hand{
+/obj/item/pickaxe/xeno/hand{
 	pixel_x = -15
 	},
 /turf/simulated/floor/asteroid,
@@ -555,8 +555,8 @@
 /turf/simulated/floor/asteroid,
 /area/mine/explored)
 "bo" = (
-/obj/item/weapon/ore/silver,
-/obj/item/weapon/ore/silver{
+/obj/item/ore/silver,
+/obj/item/ore/silver{
 	pixel_x = 10;
 	pixel_y = -5
 	},
@@ -574,7 +574,7 @@
 /turf/simulated/floor,
 /area/smugglers/base)
 "bq" = (
-/obj/item/weapon/paper/smug_2,
+/obj/item/paper/smug_2,
 /turf/simulated/floor,
 /area/smugglers/base)
 "br" = (
@@ -641,12 +641,12 @@
 /turf/simulated/wall/r_wall,
 /area/smugglers/office)
 "bx" = (
-/obj/item/weapon/ore/slag,
-/obj/item/weapon/ore/slag{
+/obj/item/ore/slag,
+/obj/item/ore/slag{
 	pixel_x = 5;
 	pixel_y = -2
 	},
-/obj/item/weapon/ore/slag,
+/obj/item/ore/slag,
 /turf/simulated/floor,
 /area/smugglers/base)
 "by" = (
@@ -698,8 +698,8 @@
 /area/smugglers/office)
 "bD" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/paper,
-/obj/item/weapon/pen,
+/obj/item/paper,
+/obj/item/pen,
 /obj/item/device/flashlight/lamp,
 /obj/structure/cable{
 	d2 = 8;
@@ -759,14 +759,14 @@
 	pixel_y = -3
 	},
 /obj/random/coin,
-/obj/item/weapon/storage/bible/booze{
+/obj/item/storage/bible/booze{
 	pixel_x = 10
 	},
-/obj/item/weapon/paper/smug_4{
+/obj/item/paper/smug_4{
 	pixel_x = -5;
 	pixel_y = 4
 	},
-/obj/item/weapon/paper/smug_5,
+/obj/item/paper/smug_5,
 /turf/simulated/floor/tiled,
 /area/smugglers/office)
 "bL" = (
@@ -790,7 +790,7 @@
 /area/smugglers/base)
 "bO" = (
 /obj/machinery/portable_atmospherics/canister/air,
-/obj/item/weapon/wrench,
+/obj/item/wrench,
 /obj/machinery/light/small{
 	dir = 4;
 	pixel_y = 8
@@ -967,15 +967,15 @@
 "cs" = (
 /obj/structure/table/standard,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/weapon/paper/smug_3,
-/obj/item/weapon/flame/lighter,
+/obj/item/paper/smug_3,
+/obj/item/flame/lighter,
 /obj/random/coin,
 /turf/simulated/floor/tiled,
 /area/smugglers/dorms)
 "ct" = (
 /obj/structure/table/standard,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/weapon/spacecash/bundle/c10,
+/obj/item/spacecash/bundle/c10,
 /obj/random/smokes,
 /obj/random/snack,
 /turf/simulated/floor/tiled,
@@ -1049,7 +1049,7 @@
 /obj/structure/hygiene/sink{
 	pixel_y = 15
 	},
-/obj/item/weapon/storage/mirror{
+/obj/item/storage/mirror{
 	pixel_y = 30
 	},
 /obj/random/soap,

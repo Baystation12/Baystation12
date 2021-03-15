@@ -146,7 +146,7 @@
 		to_chat(usr, "There's no mounting point for the module!")
 		return 0
 
-	var/obj/item/weapon/gun/energy/gun/secure/mounted/T = locate() in R.module
+	var/obj/item/gun/energy/gun/secure/mounted/T = locate() in R.module
 	if(!T)
 		T = locate() in R.module.equipment
 	if(!T)
@@ -177,8 +177,8 @@
 		to_chat(usr, "There's no mounting point for the module!")
 		return 0
 	else
-		R.module.equipment += new/obj/item/weapon/tank/jetpack/carbondioxide
-		for(var/obj/item/weapon/tank/jetpack/carbondioxide in R.module.equipment)
+		R.module.equipment += new/obj/item/tank/jetpack/carbondioxide
+		for(var/obj/item/tank/jetpack/carbondioxide in R.module.equipment)
 			R.internals = src
 		//R.icon_state="Miner+j"
 		return 1
@@ -197,7 +197,7 @@
 		to_chat(usr, "There's no mounting point for the module!")
 		return 0
 	else
-		R.module.equipment += new/obj/item/weapon/rcd/borg(R.module)
+		R.module.equipment += new/obj/item/rcd/borg(R.module)
 		return 1
 
 /obj/item/borg/upgrade/syndicate/

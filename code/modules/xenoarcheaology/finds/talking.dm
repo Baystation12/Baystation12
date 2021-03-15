@@ -60,7 +60,7 @@
 		spawn(2)
 			SaySomething(pick(seperate))
 
-/*/obj/item/weapon/talkingcrystal/proc/debug()
+/*/obj/item/talkingcrystal/proc/debug()
 	//set src in view()
 	for(var/v in heard_words)
 		log_debug("[uppertext(v)]")

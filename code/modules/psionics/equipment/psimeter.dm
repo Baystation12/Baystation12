@@ -52,7 +52,7 @@
 		var/refresh
 		if(href_list["print"])
 			if(last_assay)
-				var/obj/item/weapon/paper/P = new(loc)
+				var/obj/item/paper/P = new(loc)
 				P.name = "paper - Psi-Assay ([last_assayed.name])"
 				P.info = jointext(last_assay - last_assay[last_assay.len],null) // Last line is 'print | clear' link line.
 				return TRUE

@@ -1,4 +1,4 @@
-/obj/item/weapon/reagent_containers/borghypo
+/obj/item/reagent_containers/borghypo
 	name = "cyborg hypospray"
 	desc = "An advanced chemical synthesizer and injection system, designed for heavy-duty medical equipment."
 	icon = 'icons/obj/syringe.dmi'
@@ -18,13 +18,13 @@
 	var/list/reagent_volumes = list()
 	var/list/reagent_names = list()
 
-/obj/item/weapon/reagent_containers/borghypo/surgeon
+/obj/item/reagent_containers/borghypo/surgeon
 	reagent_ids = list(/datum/reagent/bicaridine, /datum/reagent/dexalin, /datum/reagent/tramadol)
 
-/obj/item/weapon/reagent_containers/borghypo/crisis
+/obj/item/reagent_containers/borghypo/crisis
 	reagent_ids = list(/datum/reagent/tricordrazine, /datum/reagent/inaprovaline, /datum/reagent/tramadol)
 
-/obj/item/weapon/reagent_containers/borghypo/Initialize()
+/obj/item/reagent_containers/borghypo/Initialize()
 	. = ..()
 
 	for(var/T in reagent_ids)
@@ -32,15 +32,15 @@
 		var/datum/reagent/R = T
 		reagent_names += initial(R.name)
 
-/obj/item/weapon/reagent_containers/borghypo/Initialize()
+/obj/item/reagent_containers/borghypo/Initialize()
 	. = ..()
 	START_PROCESSING(SSobj, src)
 
-/obj/item/weapon/reagent_containers/borghypo/Destroy()
+/obj/item/reagent_containers/borghypo/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-/obj/item/weapon/reagent_containers/borghypo/Process() //Every [recharge_time] seconds, recharge some reagents for the cyborg+
+/obj/item/reagent_containers/borghypo/Process() //Every [recharge_time] seconds, recharge some reagents for the cyborg+
 	if(++charge_tick < recharge_time)
 		return 0
 	charge_tick = 0
@@ -54,7 +54,7 @@
 					reagent_volumes[T] = min(reagent_volumes[T] + 5, volume)
 	return 1
 
-/obj/item/weapon/reagent_containers/borghypo/attack(var/mob/living/M, var/mob/user, var/target_zone)
+/obj/item/reagent_containers/borghypo/attack(var/mob/living/M, var/mob/user, var/target_zone)
 	if(!istype(M))
 		return
 
@@ -84,7 +84,7 @@
 			to_chat(user, "<span class='notice'>[t] units injected. [reagent_volumes[reagent_ids[mode]]] units remaining.</span>")
 	return
 
-/obj/item/weapon/reagent_containers/borghypo/attack_self(mob/user as mob) //Change the mode
+/obj/item/reagent_containers/borghypo/attack_self(mob/user as mob) //Change the mode
 	var/t = ""
 	for(var/i = 1 to reagent_ids.len)
 		if(t)
@@ -98,7 +98,7 @@
 
 	return
 
-/obj/item/weapon/reagent_containers/borghypo/OnTopic(var/href, var/list/href_list)
+/obj/item/reagent_containers/borghypo/OnTopic(var/href, var/list/href_list)
 	if(href_list["reagent_index"])
 		var/index = text2num(href_list["reagent_index"])
 		if(index > 0 && index <= reagent_ids.len)
@@ -108,7 +108,7 @@
 			to_chat(usr, "<span class='notice'>Synthesizer is now producing '[initial(R.name)]'.</span>")
 		return TOPIC_REFRESH
 
-/obj/item/weapon/reagent_containers/borghypo/examine(mob/user, distance)
+/obj/item/reagent_containers/borghypo/examine(mob/user, distance)
 	. = ..()
 	if(distance > 2)
 		return
@@ -116,7 +116,7 @@
 	var/datum/reagent/R = reagent_ids[mode]
 	to_chat(user, "<span class='notice'>It is currently producing [initial(R.name)] and has [reagent_volumes[reagent_ids[mode]]] out of [volume] units left.</span>")
 
-/obj/item/weapon/reagent_containers/borghypo/service
+/obj/item/reagent_containers/borghypo/service
 	name = "cyborg drink synthesizer"
 	desc = "A portable drink dispencer."
 	icon = 'icons/obj/drinks.dmi'
@@ -161,10 +161,10 @@
 		/datum/reagent/ethanol/coffee/kahlua
 		)
 
-/obj/item/weapon/reagent_containers/borghypo/service/attack(var/mob/M, var/mob/user)
+/obj/item/reagent_containers/borghypo/service/attack(var/mob/M, var/mob/user)
 	return
 
-/obj/item/weapon/reagent_containers/borghypo/service/afterattack(var/obj/target, var/mob/user, var/proximity)
+/obj/item/reagent_containers/borghypo/service/afterattack(var/obj/target, var/mob/user, var/proximity)
 	if(!proximity)
 		return
 

@@ -93,7 +93,7 @@
 
 /obj/machinery/portable_atmospherics/powered/scrubber/ui_interact(mob/user, ui_key = "rcon", datum/nanoui/ui=null, force_open=1)
 	var/list/data[0]
-	var/obj/item/weapon/cell/cell = get_cell()
+	var/obj/item/cell/cell = get_cell()
 	data["portConnected"] = connected_port ? 1 : 0
 	data["tankPressure"] = round(air_contents.return_pressure() > 0 ? air_contents.return_pressure() : 0)
 	data["rate"] = round(volume_rate)
@@ -141,7 +141,7 @@
 
 /obj/machinery/portable_atmospherics/powered/scrubber/broken/Initialize()
 	. = ..()
-	var/part = uninstall_component(/obj/item/weapon/stock_parts/power/battery/buildable/stock)
+	var/part = uninstall_component(/obj/item/stock_parts/power/battery/buildable/stock)
 	if(part)
 		qdel(part)
 
@@ -154,8 +154,8 @@
 	volume_rate = 5000
 	base_type = /obj/machinery/portable_atmospherics/powered/scrubber/huge
 
-	uncreated_component_parts = list(/obj/item/weapon/stock_parts/power/apc)
-	maximum_component_parts = list(/obj/item/weapon/stock_parts = 15)
+	uncreated_component_parts = list(/obj/item/stock_parts/power/apc)
+	maximum_component_parts = list(/obj/item/stock_parts = 15)
 	idle_power_usage = 500		//internal circuitry, friction losses and stuff
 	power_rating = 100000 //100 kW ~ 135 HP
 
@@ -196,7 +196,7 @@
 
 		return
 	//doesn't hold tanks
-	if(istype(I, /obj/item/weapon/tank))
+	if(istype(I, /obj/item/tank))
 		return
 
 	return ..()

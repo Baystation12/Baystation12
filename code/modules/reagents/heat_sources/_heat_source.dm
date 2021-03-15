@@ -22,7 +22,7 @@
 	var/image/on_icon
 
 	var/heater_mode =          HEATER_MODE_HEAT
-	var/list/permitted_types = list(/obj/item/weapon/reagent_containers/glass)
+	var/list/permitted_types = list(/obj/item/reagent_containers/glass)
 	var/max_temperature =      200 CELSIUS
 	var/min_temperature =      40  CELSIUS
 	var/heating_power =        10 // K
@@ -49,9 +49,9 @@
 	. = ..()
 
 /obj/machinery/reagent_temperature/RefreshParts()
-	heating_power = initial(heating_power) * Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor), 0, 10)
+	heating_power = initial(heating_power) * Clamp(total_component_rating_of_type(/obj/item/stock_parts/capacitor), 0, 10)
 
-	var/comp = 0.25 KILOWATTS * total_component_rating_of_type(/obj/item/weapon/stock_parts/micro_laser)
+	var/comp = 0.25 KILOWATTS * total_component_rating_of_type(/obj/item/stock_parts/micro_laser)
 	if(comp)
 		change_power_consumption(max(0.5 KILOWATTS, initial(active_power_usage) - comp), POWER_USE_ACTIVE)
 	..()
@@ -67,7 +67,7 @@
 /obj/machinery/reagent_temperature/proc/eject_beaker(mob/user)
 	if(!container)
 		return
-	var/obj/item/weapon/reagent_containers/B = container
+	var/obj/item/reagent_containers/B = container
 	user.put_in_hands(B)
 	container = null
 	update_icon()

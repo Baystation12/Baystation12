@@ -155,7 +155,7 @@
 		return
 	to_chat(user, "You're now an alien humanoid of some undiscovered species. Make up what lore you want, no one knows a thing about your species! You can check info about your traits with Check Species Info verb in IC tab.")
 	to_chat(user, "You can't speak GalCom or any other languages by default. You can use translator implant that spawns on top of this monolith - it will give you knowledge of any language if you hear it enough times.")
-	new/obj/item/weapon/implanter/translator(get_turf(src))
+	new/obj/item/implanter/translator(get_turf(src))
 	user.set_species(SPECIES_ALIEN)
 	var/decl/cultural_info/culture = user.get_cultural_value(TAG_CULTURE)
 	user.fully_replace_character_name(culture.get_random_name(user.gender))

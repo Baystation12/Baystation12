@@ -60,7 +60,7 @@
 	STOP_PROCESSING(SSobj, src)
 	if(istype(stored_pen))
 		QDEL_NULL(stored_pen)
-	for(var/obj/item/weapon/stock_parts/computer/CH in src.get_all_components())
+	for(var/obj/item/stock_parts/computer/CH in src.get_all_components())
 		uninstall_component(null, CH)
 		qdel(CH)
 	return ..()

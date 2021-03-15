@@ -176,7 +176,7 @@
 		if(blacklisted_trade_items && blacklisted_trade_items.len && is_type_in_list(offer,blacklisted_trade_items))
 			return make_response(TRADER_NO_BLACKLISTED, "I refuse to take one of those items.", 0, FALSE)
 
-		if(istype(offer,/obj/item/weapon/spacecash))
+		if(istype(offer,/obj/item/spacecash))
 			if(!(trade_flags & TRADER_MONEY))
 				return make_response(TRADER_NO_MONEY, "I don't take money.", 0, FALSE)
 		else

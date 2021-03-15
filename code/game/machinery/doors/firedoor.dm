@@ -204,7 +204,7 @@
 		return //Already doing something.
 			
 	if(isWelder(C) && !repairing)
-		var/obj/item/weapon/weldingtool/W = C
+		var/obj/item/weldingtool/W = C
 		if(W.remove_fuel(0, user))
 			user.visible_message(
 				SPAN_WARNING("\The [user] starts [!blocked ? "welding \the [src] shut" : "cutting open \the [src]"]."),
@@ -266,7 +266,7 @@
 		to_chat(user, SPAN_DANGER("\The [src] is welded shut!"))
 		return
 
-	if(isCrowbar(C) || istype(C,/obj/item/weapon/material/twohanded/fireaxe))
+	if(isCrowbar(C) || istype(C,/obj/item/material/twohanded/fireaxe))
 		if(operating)
 			return
 
@@ -278,8 +278,8 @@
 			)
 			return
 
-		if(istype(C,/obj/item/weapon/material/twohanded/fireaxe))
-			var/obj/item/weapon/material/twohanded/fireaxe/F = C
+		if(istype(C,/obj/item/material/twohanded/fireaxe))
+			var/obj/item/material/twohanded/fireaxe/F = C
 			if(!F.wielded)
 				return
 
@@ -320,9 +320,9 @@
 
 /obj/machinery/door/firedoor/deconstruct(mob/user, var/moved = FALSE)
 	if (stat & BROKEN)
-		new /obj/item/weapon/stock_parts/circuitboard/broken(loc)
+		new /obj/item/stock_parts/circuitboard/broken(loc)
 	else
-		new/obj/item/weapon/airalarm_electronics(loc)
+		new/obj/item/airalarm_electronics(loc)
 
 	var/obj/structure/firedoor_assembly/FA = new/obj/structure/firedoor_assembly(loc)
 	FA.anchored = !moved

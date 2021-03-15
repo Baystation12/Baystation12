@@ -105,7 +105,7 @@ AUTOMATED ALERT: Link to [GLOB.using_map.boss_name] lost.
 	for (var/obj/machinery/power/apc/APC in SSmachines.machinery)
 		if (!(APC.stat & BROKEN) && !APC.is_critical)
 			APC.chargemode = 0
-			var/obj/item/weapon/cell/cell = APC.get_cell()
+			var/obj/item/cell/cell = APC.get_cell()
 			if(cell)
 				cell.charge = 0
 			APC.emagged = TRUE

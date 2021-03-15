@@ -18,7 +18,7 @@
 
 /obj/machinery/r_n_d/server/RefreshParts()
 	var/tot_rating = 0
-	for(var/obj/item/weapon/stock_parts/SP in src)
+	for(var/obj/item/stock_parts/SP in src)
 		tot_rating += SP.rating
 	change_power_consumption(initial(idle_power_usage)/max(1, tot_rating), POWER_USE_IDLE)
 

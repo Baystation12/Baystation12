@@ -80,9 +80,9 @@
 				to_chat(user, "<span class='notice'>You secured the girder!</span>")
 				reset_girder()
 
-	else if(istype(W, /obj/item/weapon/gun/energy/plasmacutter) || istype(W, /obj/item/psychic_power/psiblade/master/grand/paramount))
-		if(istype(W, /obj/item/weapon/gun/energy/plasmacutter))
-			var/obj/item/weapon/gun/energy/plasmacutter/cutter = W
+	else if(istype(W, /obj/item/gun/energy/plasmacutter) || istype(W, /obj/item/psychic_power/psiblade/master/grand/paramount))
+		if(istype(W, /obj/item/gun/energy/plasmacutter))
+			var/obj/item/gun/energy/plasmacutter/cutter = W
 			if(!cutter.slice(user))
 				return
 		playsound(src.loc, 'sound/items/Welder.ogg', 100, 1)
@@ -93,7 +93,7 @@
 				reinf_material.place_dismantled_product(get_turf(src))
 			dismantle()
 
-	else if(istype(W, /obj/item/weapon/pickaxe/diamonddrill))
+	else if(istype(W, /obj/item/pickaxe/diamonddrill))
 		playsound(src.loc, 'sound/weapons/Genhit.ogg', 100, 1)
 		if(do_after(user,reinf_material ? 60 : 40,src))
 			to_chat(user, "<span class='notice'>You drill through the girder!</span>")
@@ -259,9 +259,9 @@
 			to_chat(user, "<span class='notice'>You dissasembled the girder!</span>")
 			dismantle()
 
-	else if(istype(W, /obj/item/weapon/gun/energy/plasmacutter) || istype(W, /obj/item/psychic_power/psiblade/master/grand/paramount))
-		if(istype(W, /obj/item/weapon/gun/energy/plasmacutter))
-			var/obj/item/weapon/gun/energy/plasmacutter/cutter = W
+	else if(istype(W, /obj/item/gun/energy/plasmacutter) || istype(W, /obj/item/psychic_power/psiblade/master/grand/paramount))
+		if(istype(W, /obj/item/gun/energy/plasmacutter))
+			var/obj/item/gun/energy/plasmacutter/cutter = W
 			if(!cutter.slice(user))
 				return
 		playsound(src.loc, 'sound/items/Welder.ogg', 100, 1)
@@ -270,7 +270,7 @@
 			to_chat(user, "<span class='notice'>You slice apart the girder!</span>")
 			dismantle()
 
-	else if(istype(W, /obj/item/weapon/pickaxe/diamonddrill))
+	else if(istype(W, /obj/item/pickaxe/diamonddrill))
 		playsound(src.loc, 'sound/weapons/Genhit.ogg', 100, 1)
 		if(do_after(user,40,src))
 			to_chat(user, "<span class='notice'>You drill through the girder!</span>")

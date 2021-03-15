@@ -519,11 +519,11 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 //// Zombie Atoms
 
 
-/obj/item/weapon/reagent_containers/syringe/zombie
+/obj/item/reagent_containers/syringe/zombie
 	name = "Syringe (unknown serum)"
 	desc = "Contains a strange, crimson substance."
 
-/obj/item/weapon/reagent_containers/syringe/zombie/Initialize()
+/obj/item/reagent_containers/syringe/zombie/Initialize()
 	..()
 	reagents.add_reagent(/datum/reagent/zombie, 15)
 	mode = SYRINGE_INJECT

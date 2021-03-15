@@ -2,7 +2,7 @@
 	name = "mounted electrolaser carbine"
 	desc = "A dual fire mode electrolaser system connected to the exosuit's targetting system."
 	icon_state = "mech_taser"
-	holding_type = /obj/item/weapon/gun/energy/taser/carbine/mounted/mech
+	holding_type = /obj/item/gun/energy/taser/carbine/mounted/mech
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_WEAPONS)
 
@@ -10,7 +10,7 @@
 	. = ..()
 	
 	if(over_object)
-		var/obj/item/weapon/gun/gun = holding
+		var/obj/item/gun/gun = holding
 		if(istype(gun) && gun.can_autofire())
 			gun.Fire(get_turf(over_object), owner, params, (get_dist(over_object, owner) <= 1), FALSE)
 
@@ -18,35 +18,35 @@
 	name = "mounted ion rifle"
 	desc = "An exosuit-mounted ion rifle. Handle with care."
 	icon_state = "mech_ionrifle"
-	holding_type = /obj/item/weapon/gun/energy/ionrifle/mounted/mech
+	holding_type = /obj/item/gun/energy/ionrifle/mounted/mech
 
 /obj/item/mech_equipment/mounted_system/taser/laser
 	name = "\improper CH-PS \"Immolator\" laser"
 	desc = "An exosuit-mounted laser rifle. Handle with care."
 	icon_state = "mech_lasercarbine"
-	holding_type = /obj/item/weapon/gun/energy/laser/mounted/mech
+	holding_type = /obj/item/gun/energy/laser/mounted/mech
 
-/obj/item/weapon/gun/energy/taser/carbine/mounted/mech
+/obj/item/gun/energy/taser/carbine/mounted/mech
 	use_external_power = TRUE
 	has_safety = FALSE
 	self_recharge = TRUE
 
-/obj/item/weapon/gun/energy/ionrifle/mounted/mech
+/obj/item/gun/energy/ionrifle/mounted/mech
 	use_external_power = TRUE
 	has_safety = FALSE
 	self_recharge = TRUE
 
-/obj/item/weapon/gun/energy/laser/mounted/mech
+/obj/item/gun/energy/laser/mounted/mech
 	name = "\improper CH-PS \"Immolator\" laser"
 	use_external_power = TRUE
 	has_safety = FALSE
 	self_recharge = TRUE
 
-/obj/item/weapon/gun/energy/get_hardpoint_maptext()
+/obj/item/gun/energy/get_hardpoint_maptext()
 	return "[round(power_supply.charge / charge_cost)]/[max_shots]"
 
-/obj/item/weapon/gun/energy/get_hardpoint_status_value()
-	var/obj/item/weapon/cell/C = get_cell()
+/obj/item/gun/energy/get_hardpoint_status_value()
+	var/obj/item/cell/C = get_cell()
 	if(istype(C))
 		return C.charge/C.maxcharge
 	return null
@@ -117,7 +117,7 @@
 		return
 	if((world.time - last_recharge) < cooldown)
 		return	
-	var/obj/item/weapon/cell/cell = owner.get_cell()
+	var/obj/item/cell/cell = owner.get_cell()
 	
 	var/actual_required_power = Clamp(max_charge - charge, 0, charging_rate)
 
@@ -219,7 +219,7 @@
 /obj/item/mech_equipment/mounted_system/melee
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_UTILITY)
-/obj/item/weapon/material/hatchet/machete/mech
+/obj/item/material/hatchet/machete/mech
 	name = "Mechete"
 	desc = "That thing was too big to be called a machete. Too big, too thick, too heavy, and too rough, it was more like a large hunk of iron."
 	w_class = ITEM_SIZE_GARGANTUAN
@@ -230,14 +230,14 @@
 	force_multiplier = 0.35 //21 with hardness 60 (steel)
 	unbreakable = TRUE //Else we need a whole system for replacement blades
 
-/obj/item/weapon/material/hatchet/machete/mech/apply_hit_effect(mob/living/target, mob/living/user, hit_zone)
+/obj/item/material/hatchet/machete/mech/apply_hit_effect(mob/living/target, mob/living/user, hit_zone)
 	. = ..()
 	if (.)
 		do_attack_effect(target, "smash")
 		if (target.mob_size < user.mob_size) //Damaging attacks overwhelm smaller mobs
 			target.throw_at(get_edge_target_turf(target,get_dir(user, target)),1, 1)
 
-/obj/item/weapon/material/hatchet/machete/mech/resolve_attackby(atom/A, mob/user, click_params)
+/obj/item/material/hatchet/machete/mech/resolve_attackby(atom/A, mob/user, click_params)
 	//Case 1: Default, you are hitting something that isn't a mob. Just do whatever, this isn't dangerous or op.
 	if (!istype(A, /mob/living))
 		return ..()
@@ -250,7 +250,7 @@
 			attack(A, user, user.zone_sel.selecting, TRUE)
 			return TRUE
 
-/obj/item/weapon/material/hatchet/machete/mech/attack_self(mob/living/user)
+/obj/item/material/hatchet/machete/mech/attack_self(mob/living/user)
 	. = ..()
 	if (user.a_intent != I_HURT)
 		return
@@ -270,7 +270,7 @@
 
 /obj/item/mech_equipment/mounted_system/melee/mechete
 	icon_state = "mech_blade"
-	holding_type = /obj/item/weapon/material/hatchet/machete/mech
+	holding_type = /obj/item/material/hatchet/machete/mech
 
 
 //Ballistic shield

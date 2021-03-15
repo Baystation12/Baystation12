@@ -50,7 +50,7 @@
 				SSstatistics.add_field(STAT_FLAGS_PLANTED, 1)
 		qdel(src)
 		var/obj/structure/solbanner/exo/E = new(T)
-		var/obj/item/weapon/card/id/ID = user.GetIdCard()
+		var/obj/item/card/id/ID = user.GetIdCard()
 		var/dudename = ID.registered_name
 		if(istype(ID.military_rank))
 			dudename = "[ID.military_rank.name] [dudename]"

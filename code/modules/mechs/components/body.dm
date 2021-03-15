@@ -1,4 +1,4 @@
-/obj/item/weapon/storage/mech
+/obj/item/storage/mech
 	w_class = ITEM_SIZE_NO_CONTAINER
 	max_w_class = ITEM_SIZE_LARGE
 	storage_slots = 4
@@ -11,7 +11,7 @@
 		. = E.Adjacent(neighbor, recurse)
 	return . || ..()
 
-/obj/item/weapon/storage/mech/Adjacent(var/atom/neighbor, var/recurse = 1) //in order to properly retrieve items
+/obj/item/storage/mech/Adjacent(var/atom/neighbor, var/recurse = 1) //in order to properly retrieve items
 	var/obj/item/mech_component/chassis/C = loc
 	if(istype(C))
 		. = C.Adjacent(neighbor, recurse-1)
@@ -23,11 +23,11 @@
 	gender = NEUTER
 
 	var/mech_health = 300
-	var/obj/item/weapon/cell/cell
+	var/obj/item/cell/cell
 	var/obj/item/robot_parts/robot_component/diagnosis_unit/diagnostics
 	var/obj/item/robot_parts/robot_component/armour/exosuit/m_armour
 	var/obj/machinery/portable_atmospherics/canister/air_supply
-	var/obj/item/weapon/storage/mech/storage_compartment
+	var/obj/item/storage/mech/storage_compartment
 	var/datum/gas_mixture/cockpit
 	var/transparent_cabin = FALSE
 	var/hide_pilot =        FALSE
@@ -140,7 +140,7 @@
 
 /obj/item/mech_component/chassis/prebuild()
 	diagnostics = new(src)
-	cell = new /obj/item/weapon/cell/high(src)
+	cell = new /obj/item/cell/high(src)
 	cell.charge = cell.maxcharge
 
 /obj/item/mech_component/chassis/attackby(var/obj/item/thing, var/mob/user)
@@ -149,7 +149,7 @@
 			to_chat(user, SPAN_WARNING("\The [src] already has a diagnostic system installed."))
 			return
 		if(install_component(thing, user)) diagnostics = thing
-	else if(istype(thing, /obj/item/weapon/cell))
+	else if(istype(thing, /obj/item/cell))
 		if(cell)
 			to_chat(user, SPAN_WARNING("\The [src] already has a cell installed."))
 			return

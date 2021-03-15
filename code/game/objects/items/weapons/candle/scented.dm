@@ -1,4 +1,4 @@
-/obj/item/weapon/flame/candle/scented
+/obj/item/flame/candle/scented
 	name = "scented candle"
 	desc = "A candle which releases pleasant-smelling oils into the air when burned."
 
@@ -10,25 +10,25 @@
 								/decl/scent_type/seabreeze,
 								/decl/scent_type/lavender)
 
-/obj/item/weapon/flame/candle/scented/Initialize()
+/obj/item/flame/candle/scented/Initialize()
 	. = ..()
 	get_scent()
 
-/obj/item/weapon/flame/candle/scented/attack_self(mob/user as mob)
+/obj/item/flame/candle/scented/attack_self(mob/user as mob)
 	..()
 	if(!lit)
 		remove_extension(src, /datum/extension/scent)
 
-/obj/item/weapon/flame/candle/scented/extinguish(var/mob/user, var/no_message)
+/obj/item/flame/candle/scented/extinguish(var/mob/user, var/no_message)
 	..()
 	remove_extension(src, /datum/extension/scent)
 
-/obj/item/weapon/flame/candle/scented/light(mob/user)
+/obj/item/flame/candle/scented/light(mob/user)
 	..()
 	if(lit)
 		set_extension(src, style.scent_datum)
 
-/obj/item/weapon/flame/candle/scented/proc/get_scent()
+/obj/item/flame/candle/scented/proc/get_scent()
 	var/scent_type = DEFAULTPICK(scent_types, null)
 	if(scent_type)
 		style = decls_repository.get_decl(scent_type)
@@ -38,9 +38,9 @@
 		desc += " This one smells of [scent]."
 	update_icon()
 
-/obj/item/weapon/storage/candle_box/scented
+/obj/item/storage/candle_box/scented
 	name = "scented candle box"
 	desc = "An unbranded pack of scented candles, in a variety of scents."
 	max_storage_space = 5
 
-	startswith = list(/obj/item/weapon/flame/candle/scented = 5)
+	startswith = list(/obj/item/flame/candle/scented = 5)

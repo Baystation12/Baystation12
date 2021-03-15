@@ -8,7 +8,7 @@
 	w_class = ITEM_SIZE_SMALL
 	var/active = FALSE
 	var/range = 2 // This is a radius, thus a range of 7 covers the entire visible screen
-	var/obj/item/weapon/cell/bcell = /obj/item/weapon/cell/high
+	var/obj/item/cell/bcell = /obj/item/cell/high
 	var/suit_sensor_jammer_method/jammer_method
 	var/list/suit_sensor_jammer_methods_by_type
 	var/list/suit_sensor_jammer_methods
@@ -52,7 +52,7 @@
 			bcell = null
 		else
 			to_chat(user, "<span class='warning'>There is no cell to remove.</span>")
-	else if(istype(I, /obj/item/weapon/cell))
+	else if(istype(I, /obj/item/cell))
 		if(bcell)
 			to_chat(user, "<span class='warning'>There's already a cell in \the [src].</span>")
 		else if(user.unEquip(I))

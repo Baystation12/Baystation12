@@ -1,4 +1,4 @@
-/obj/item/weapon/stock_parts/circuitboard/atmoscontrol
+/obj/item/stock_parts/circuitboard/atmoscontrol
 	name = "\improper Central Atmospherics Computer Circuitboard"
 	build_path = /obj/machinery/computer/atmoscontrol
 

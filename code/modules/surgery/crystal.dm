@@ -1,8 +1,8 @@
 /decl/surgery_step/generic/cut_open/crystal
 	name = "Drill keyhole incision"
 	allowed_tools = list(
-		/obj/item/weapon/pickaxe/drill = 80,
-		/obj/item/weapon/surgicaldrill = 100
+		/obj/item/pickaxe/drill = 80,
+		/obj/item/surgicaldrill = 100
 	)
 	fail_string = "cracking"
 	access_string = "a neat hole"
@@ -20,7 +20,7 @@
 /decl/surgery_step/open_encased/crystal
 	name = "Saw through crystal"
 	allowed_tools = list(
-		/obj/item/weapon/circular_saw = 100
+		/obj/item/circular_saw = 100
 	)
 	surgery_candidate_flags = SURGERY_NO_ROBOTIC | SURGERY_NO_STUMP | SURGERY_NEEDS_RETRACTED | SURGERY_NO_FLESH
 
@@ -41,8 +41,8 @@
 /decl/surgery_step/internal/detatch_organ/crystal
 	name = "Detach crystalline internal organ"
 	allowed_tools = list(
-		/obj/item/weapon/pickaxe/drill = 80,
-		/obj/item/weapon/surgicaldrill = 100
+		/obj/item/pickaxe/drill = 80,
+		/obj/item/surgicaldrill = 100
 	)
 	surgery_candidate_flags = SURGERY_NO_ROBOTIC | SURGERY_NO_STUMP | SURGERY_NEEDS_ENCASEMENT | SURGERY_NO_FLESH
 

@@ -13,7 +13,7 @@
 
 /atom/movable/proc/GetAccess()
 	. = list()
-	var/obj/item/weapon/card/id/id = GetIdCard()
+	var/obj/item/card/id/id = GetIdCard()
 	if(id)
 		. += id.GetAccess()
 
@@ -213,7 +213,7 @@
 		"Emergency Response Team Leader")
 
 /mob/observer/ghost
-	var/static/obj/item/weapon/card/id/all_access/ghost_all_access
+	var/static/obj/item/card/id/all_access/ghost_all_access
 
 /mob/observer/ghost/GetIdCard()
 	if(!is_admin(src))
@@ -230,7 +230,7 @@
 /mob/living/carbon/human/GetIdCard()
 	for(var/item_slot in HUMAN_ID_CARDS)
 		var/obj/item/I = item_slot
-		var/obj/item/weapon/card/id = I ? I.GetIdCard() : null
+		var/obj/item/card/id = I ? I.GetIdCard() : null
 		if(id)
 			return id
 	var/obj/item/organ/internal/controller/controller = locate() in internal_organs
@@ -254,7 +254,7 @@
 	return idcard
 
 /proc/FindNameFromID(var/mob/M, var/missing_id_name = "Unknown")
-	var/obj/item/weapon/card/id/C = M.GetIdCard()
+	var/obj/item/card/id/C = M.GetIdCard()
 	if(C)
 		return C.registered_name
 	return missing_id_name
@@ -263,7 +263,7 @@
 	return SSjobs.titles_to_datums + list("Prisoner")
 
 /obj/proc/GetJobName() //Used in secHUD icon generation
-	var/obj/item/weapon/card/id/I = GetIdCard()
+	var/obj/item/card/id/I = GetIdCard()
 
 	if(I)
 		var/job_icons = get_all_job_icons()

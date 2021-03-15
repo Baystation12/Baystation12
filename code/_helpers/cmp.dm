@@ -67,7 +67,7 @@
 /proc/cmp_clientcolor_priority(datum/client_color/A, datum/client_color/B)
 	return B.priority - A.priority
 
-/proc/cmp_power_component_priority(obj/item/weapon/stock_parts/power/A, obj/item/weapon/stock_parts/power/B)
+/proc/cmp_power_component_priority(obj/item/stock_parts/power/A, obj/item/stock_parts/power/B)
 	return B.priority - A.priority
 
 /proc/cmp_fusion_reaction_asc(var/decl/fusion_reaction/A, var/decl/fusion_reaction/B)

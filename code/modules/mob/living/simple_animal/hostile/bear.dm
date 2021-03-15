@@ -28,7 +28,7 @@
 	max_gas = null
 	minbodytemp = 0
 
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/bearmeat
+	meat_type = /obj/item/reagent_containers/food/snacks/bearmeat
 	meat_amount = 10
 	bone_amount = 20
 	skin_amount = 20

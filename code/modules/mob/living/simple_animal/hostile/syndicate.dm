@@ -42,9 +42,9 @@
 /mob/living/simple_animal/hostile/syndicate/melee
 	icon_state = "syndicatemelee"
 	icon_living = "syndicatemelee"
-	natural_weapon = /obj/item/weapon/melee/energy/sword/red/activated
-	weapon1 = /obj/item/weapon/melee/energy/sword/red/activated
-	weapon2 = /obj/item/weapon/shield/energy
+	natural_weapon = /obj/item/melee/energy/sword/red/activated
+	weapon1 = /obj/item/melee/energy/sword/red/activated
+	weapon2 = /obj/item/shield/energy
 	status_flags = 0
 
 /mob/living/simple_animal/hostile/syndicate/melee/attackby(var/obj/item/O as obj, var/mob/user as mob)
@@ -91,7 +91,7 @@
 	projectilesound = 'sound/weapons/gunshot/gunshot_smg.ogg'
 	projectiletype = /obj/item/projectile/bullet/pistol
 
-	weapon1 = /obj/item/weapon/gun/projectile/automatic/merc_smg
+	weapon1 = /obj/item/gun/projectile/automatic/merc_smg
 
 /mob/living/simple_animal/hostile/syndicate/ranged/space
 	icon_state = "syndicaterangedpsace"

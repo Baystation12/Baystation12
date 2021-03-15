@@ -1,5 +1,5 @@
 // Shim for non-stock_parts machine components
-/obj/item/weapon/stock_parts/building_material
+/obj/item/stock_parts/building_material
 	name = "building materials"
 	desc = "Various standard wires, pipes, and other materials."
 	icon = 'icons/obj/power.dmi'
@@ -7,11 +7,11 @@
 	part_flags = PART_FLAG_QDEL
 	var/list/materials
 
-/obj/item/weapon/stock_parts/building_material/Destroy()
+/obj/item/stock_parts/building_material/Destroy()
 	QDEL_NULL_LIST(materials)
 	. = ..()
 
-/obj/item/weapon/stock_parts/building_material/proc/number_of_type(var/type)
+/obj/item/stock_parts/building_material/proc/number_of_type(var/type)
 	. = 0
 	for(var/obj/item/thing in materials)
 		if(istype(thing, type))
@@ -21,7 +21,7 @@
 			else
 				.++
 
-/obj/item/weapon/stock_parts/building_material/proc/add_material(var/obj/item/new_material)
+/obj/item/stock_parts/building_material/proc/add_material(var/obj/item/new_material)
 	if(istype(new_material, /obj/item/stack))
 		var/obj/item/stack/stack = new_material
 		for(var/obj/item/stack/old_stack in materials)
@@ -31,7 +31,7 @@
 	new_material.forceMove(null)
 
 // amount will cap the amount given in a stack, but may return less than amount specified.
-/obj/item/weapon/stock_parts/building_material/proc/remove_material(material_type, amount)
+/obj/item/stock_parts/building_material/proc/remove_material(material_type, amount)
 	if(ispath(material_type, /obj/item/stack))
 		for(var/obj/item/stack/stack in materials)
 			if(stack.stacktype == material_type)
@@ -50,7 +50,7 @@
 			item.dropInto(loc)
 			return item
 
-/obj/item/weapon/stock_parts/building_material/on_uninstall(var/obj/machinery/machine)
+/obj/item/stock_parts/building_material/on_uninstall(var/obj/machinery/machine)
 	for(var/obj/item/I in materials)
 		I.dropInto(loc)
 	materials = null

@@ -10,7 +10,7 @@
 	min_gas = list()
 	minbodytemp = 0
 
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/fish
+	meat_type = /obj/item/reagent_containers/food/snacks/fish
 	meat_amount = 3
 	bone_amount = 5
 	skin_amount = 5

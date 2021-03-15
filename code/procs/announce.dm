@@ -93,7 +93,7 @@ datum/announcement/proc/NewsCast(message as text, message_title as text, zlevels
 	news.can_be_redacted = 0
 	announce_newscaster_news(news, zlevels)
 
-/proc/GetNameAndAssignmentFromId(var/obj/item/weapon/card/id/I)
+/proc/GetNameAndAssignmentFromId(var/obj/item/card/id/I)
 	// Format currently matches that of newscaster feeds: Registered Name (Assigned Rank)
 	return I.assignment ? "[I.registered_name] ([I.assignment])" : I.registered_name
 

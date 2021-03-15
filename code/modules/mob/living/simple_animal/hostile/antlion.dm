@@ -21,7 +21,7 @@
 		)
 	ability_cooldown = 30 SECONDS
 
-	meat_type =     /obj/item/weapon/reagent_containers/food/snacks/xenomeat
+	meat_type =     /obj/item/reagent_containers/food/snacks/xenomeat
 	meat_amount =   5
 	skin_material = MATERIAL_SKIN_CHITIN
 	skin_amount =   15

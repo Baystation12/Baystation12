@@ -95,8 +95,8 @@
 	if (implants && implants.len)
 		var/unknown_body = 0
 		for(var/I in implants)
-			var/obj/item/weapon/implant/imp = I
-			if(istype(I,/obj/item/weapon/implant))
+			var/obj/item/implant/imp = I
+			if(istype(I,/obj/item/implant))
 				if(imp.hidden)
 					continue
 				if (imp.known)

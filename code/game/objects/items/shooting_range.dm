@@ -17,7 +17,7 @@
 
 /obj/item/target/attackby(var/obj/item/W, var/mob/user)
 	if(isWelder(W))
-		var/obj/item/weapon/weldingtool/WT = W
+		var/obj/item/weldingtool/WT = W
 		if(WT.remove_fuel(0, user))
 			overlays.Cut()
 			bulletholes.Cut()

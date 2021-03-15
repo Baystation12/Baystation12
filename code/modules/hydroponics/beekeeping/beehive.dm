@@ -206,11 +206,11 @@
 			honey += processing
 			processing = 0
 			icon_state = "centrifuge"
-	else if(istype(I, /obj/item/weapon/reagent_containers/glass))
+	else if(istype(I, /obj/item/reagent_containers/glass))
 		if(!honey)
 			to_chat(user, "<span class='notice'>There is no honey in \the [src].</span>")
 			return
-		var/obj/item/weapon/reagent_containers/glass/G = I
+		var/obj/item/reagent_containers/glass/G = I
 		var/transferred = min(G.reagents.maximum_volume - G.reagents.total_volume, honey)
 		G.reagents.add_reagent(/datum/reagent/nutriment/honey, transferred)
 		honey -= transferred
@@ -309,4 +309,4 @@ var/global/list/datum/stack_recipe/wax_recipes = list(
 	new /obj/item/honey_frame(src)
 	new /obj/item/honey_frame(src)
 	new /obj/item/bee_pack(src)
-	new /obj/item/weapon/crowbar(src)
+	new /obj/item/crowbar(src)

@@ -64,7 +64,7 @@
 	data["dos_capacity"] = dos_capacity
 	data["dos_overload"] = dos_overload
 	data["dos_crashed"] = dos_failure
-	data["portable_drive"] = !!get_component_of_type(/obj/item/weapon/stock_parts/computer/hard_drive/portable)
+	data["portable_drive"] = !!get_component_of_type(/obj/item/stock_parts/computer/hard_drive/portable)
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
@@ -95,7 +95,7 @@
 		ntnet_global.banned_nids.Cut()
 		ntnet_global.add_log("Manual override: Network blacklist cleared.")
 		return 1
-	else if(href_list["eject_drive"] && uninstall_component(/obj/item/weapon/stock_parts/computer/hard_drive/portable))
+	else if(href_list["eject_drive"] && uninstall_component(/obj/item/stock_parts/computer/hard_drive/portable))
 		visible_message("[icon2html(src, viewers(get_turf(src)))] [src] beeps and ejects its portable disk.")
 
 /obj/machinery/ntnet_relay/New()
@@ -118,9 +118,9 @@
 	..()
 
 /obj/machinery/ntnet_relay/attackby(obj/item/P, mob/user)
-	if (!istype(P,/obj/item/weapon/stock_parts/computer/hard_drive/portable))
+	if (!istype(P,/obj/item/stock_parts/computer/hard_drive/portable))
 		return
-	else if (get_component_of_type(/obj/item/weapon/stock_parts/computer/hard_drive/portable))
+	else if (get_component_of_type(/obj/item/stock_parts/computer/hard_drive/portable))
 		to_chat(user, "This relay's portable drive slot is already occupied.")
 	else if(user.unEquip(P,src))
 		install_component(P)

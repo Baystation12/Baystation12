@@ -1,4 +1,4 @@
-/obj/item/weapon/engine
+/obj/item/engine
 	name = "engine"
 	desc = "An engine used to power a small vehicle."
 	icon = 'icons/obj/objects.dmi'
@@ -7,33 +7,33 @@
 	var/trail_type
 	var/cost_per_move = 5
 
-/obj/item/weapon/engine/proc/get_trail()
+/obj/item/engine/proc/get_trail()
 	if(trail_type)
 		return new trail_type
 	return null
 
-/obj/item/weapon/engine/proc/prefill()
+/obj/item/engine/proc/prefill()
 	return
 
-/obj/item/weapon/engine/proc/use_power()
+/obj/item/engine/proc/use_power()
 	return 0
 
-/obj/item/weapon/engine/proc/rev_engine(var/atom/movable/M)
+/obj/item/engine/proc/rev_engine(var/atom/movable/M)
 	return
 
-/obj/item/weapon/engine/proc/putter(var/atom/movable/M)
+/obj/item/engine/proc/putter(var/atom/movable/M)
 	return
 
-/obj/item/weapon/engine/electric
+/obj/item/engine/electric
 	name = "electric engine"
 	desc = "A battery-powered engine used to power a small vehicle."
 	icon_state = "engine_electric"
 	trail_type = /datum/effect/effect/system/trail/ion
 	cost_per_move = 200	// W
-	var/obj/item/weapon/cell/cell
+	var/obj/item/cell/cell
 
-/obj/item/weapon/engine/electric/attackby(var/obj/item/I, var/mob/user)
-	if(istype(I,/obj/item/weapon/cell))
+/obj/item/engine/electric/attackby(var/obj/item/I, var/mob/user)
+	if(istype(I,/obj/item/cell))
 		if(cell)
 			to_chat(user, "<span class='warning'>There is already a cell in \the [src].</span>")
 		else
@@ -49,26 +49,26 @@
 			return 1
 	..()
 
-/obj/item/weapon/engine/electric/prefill()
-	cell = new /obj/item/weapon/cell/high(src.loc)
+/obj/item/engine/electric/prefill()
+	cell = new /obj/item/cell/high(src.loc)
 
-/obj/item/weapon/engine/electric/use_power()
+/obj/item/engine/electric/use_power()
 	if(!cell)
 		return 0
 	return cell.use(cost_per_move * CELLRATE)
 
-/obj/item/weapon/engine/electric/rev_engine(var/atom/movable/M)
+/obj/item/engine/electric/rev_engine(var/atom/movable/M)
 	M.audible_message("\The [M] beeps, spinning up.")
 
-/obj/item/weapon/engine/electric/putter(var/atom/movable/M)
+/obj/item/engine/electric/putter(var/atom/movable/M)
 	M.audible_message("\The [M] makes one depressed beep before winding down.")
 
-/obj/item/weapon/engine/electric/emp_act(var/severity)
+/obj/item/engine/electric/emp_act(var/severity)
 	if(cell)
 		cell.emp_act(severity)
 	..()
 
-/obj/item/weapon/engine/thermal
+/obj/item/engine/thermal
 	name = "thermal engine"
 	desc = "A fuel-powered engine used to power a small vehicle."
 	icon_state = "engine_fuel"
@@ -78,26 +78,26 @@
 	var/fuel_points = 0
 	//fuel points are determined by differing reagents
 
-/obj/item/weapon/engine/thermal/prefill()
+/obj/item/engine/thermal/prefill()
 	fuel_points = 5000
 
-/obj/item/weapon/engine/thermal/New()
+/obj/item/engine/thermal/New()
 	..()
 	create_reagents(500)
 	temp_reagents_holder = new()
 	temp_reagents_holder.create_reagents(15)
 	temp_reagents_holder.atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 
-/obj/item/weapon/engine/thermal/attackby(var/obj/item/I, var/mob/user)
-	if(istype(I,/obj/item/weapon/reagent_containers) && I.is_open_container())
-		if(istype(I,/obj/item/weapon/reagent_containers/food/snacks) || istype(I,/obj/item/weapon/reagent_containers/pill))
+/obj/item/engine/thermal/attackby(var/obj/item/I, var/mob/user)
+	if(istype(I,/obj/item/reagent_containers) && I.is_open_container())
+		if(istype(I,/obj/item/reagent_containers/food/snacks) || istype(I,/obj/item/reagent_containers/pill))
 			return 0
-		var/obj/item/weapon/reagent_containers/C = I
+		var/obj/item/reagent_containers/C = I
 		C.standard_pour_into(user,src)
 		return 1
 	..()
 
-/obj/item/weapon/engine/thermal/use_power()
+/obj/item/engine/thermal/use_power()
 	if(fuel_points >= cost_per_move)
 		fuel_points -= cost_per_move
 		return 1
@@ -136,8 +136,8 @@
 	temp_reagents_holder.reagents.clear_reagents()
 	return use_power()
 
-/obj/item/weapon/engine/thermal/rev_engine(var/atom/movable/M)
+/obj/item/engine/thermal/rev_engine(var/atom/movable/M)
 	M.audible_message("\The [M] rumbles to life.")
 
-/obj/item/weapon/engine/electric/putter(var/atom/movable/M)
+/obj/item/engine/electric/putter(var/atom/movable/M)
 	M.audible_message("\The [M] putters before turning off.")

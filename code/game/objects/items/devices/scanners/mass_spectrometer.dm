@@ -26,7 +26,7 @@
 /obj/item/device/scanner/spectrometer/is_valid_scan_target(atom/O)
 	if(!O.reagents || !O.reagents.total_volume)
 		return FALSE
-	return (O.atom_flags & ATOM_FLAG_OPEN_CONTAINER) || istype(O, /obj/item/weapon/reagent_containers/syringe)
+	return (O.atom_flags & ATOM_FLAG_OPEN_CONTAINER) || istype(O, /obj/item/reagent_containers/syringe)
 
 /obj/item/device/scanner/spectrometer/scan(atom/A, mob/user)
 	if(A != src)

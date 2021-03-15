@@ -8,7 +8,7 @@
 	maxHealth = 20
 	health = 20
 
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/fish/carp
+	meat_type = /obj/item/reagent_containers/food/snacks/fish/carp
 	meat_amount = 3
 	bone_amount = 5
 	skin_amount = 5

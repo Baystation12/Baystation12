@@ -9,7 +9,7 @@
 	mob_swap_flags = MONKEY|SLIME|SIMPLE_ANIMAL
 	mob_push_flags = MONKEY|SLIME|SIMPLE_ANIMAL
 
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat
+	meat_type = /obj/item/reagent_containers/food/snacks/meat
 	meat_amount = 3
 	bone_material = MATERIAL_BONE_GENERIC
 	bone_amount = 5
@@ -292,7 +292,7 @@
 			return
 
 	if(meat_type && (stat == DEAD) && meat_amount)
-		if(istype(O, /obj/item/weapon/material/knife/kitchen/cleaver))
+		if(istype(O, /obj/item/material/knife/kitchen/cleaver))
 			var/victim_turf = get_turf(src)
 			if(!locate(/obj/structure/table, victim_turf))
 				to_chat(user, SPAN_NOTICE("You need to place \the [src] on a table to butcher it."))
@@ -331,7 +331,7 @@
 		damage = 0
 	if (O.damtype == STUN)
 		damage = (O.force / 8)
-	if(supernatural && istype(O,/obj/item/weapon/nullrod))
+	if(supernatural && istype(O,/obj/item/nullrod))
 		damage *= 2
 		purge = 3
 	adjustBruteLoss(damage)

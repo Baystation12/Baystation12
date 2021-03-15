@@ -316,7 +316,7 @@ armbands
 	desc = "An armlet, worn by the crew to display which department they're assigned to. This one is white with 'MA' in navy blue."
 	icon_state = "maband"
 
-/obj/item/weapon/storage/box/armband
+/obj/item/storage/box/armband
 	name = "box of spare military police armbands"
 	desc = "A box full of security armbands. For use in emergencies when provisional security personnel are needed."
 	startswith = list(/obj/item/clothing/accessory/armband/solgov/mp = 5)

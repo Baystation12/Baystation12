@@ -54,8 +54,8 @@
 
 
 /obj/machinery/computer/teleporter/attackby(var/obj/I, var/mob/living/user)
-	if(istype(I, /obj/item/weapon/card/data/))
-		var/obj/item/weapon/card/data/C = I
+	if(istype(I, /obj/item/card/data/))
+		var/obj/item/card/data/C = I
 		if(stat & (NOPOWER|BROKEN) & (C.function != "teleporter"))
 			attack_hand(user)
 
@@ -124,7 +124,7 @@
 			areaindex[tmpname] = 1
 		L[tmpname] = R
 
-	for (var/obj/item/weapon/implant/tracking/I in world)
+	for (var/obj/item/implant/tracking/I in world)
 		if (!I.implanted || !ismob(I.loc))
 			continue
 		else
@@ -290,7 +290,7 @@
 		I.layer = ABOVE_LIGHTING_LAYER
 		overlays += I
 
-/obj/machinery/teleport/station/attackby(var/obj/item/weapon/W, var/mob/user)
+/obj/machinery/teleport/station/attackby(var/obj/item/W, var/mob/user)
 	attack_hand(user)
 
 /obj/machinery/teleport/station/interface_interact(var/mob/user)

@@ -15,7 +15,7 @@
 
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/radio/receiver,
+		/obj/item/stock_parts/radio/receiver,
 	)
 	stat_immune = 0
 	base_type = /obj/machinery/power/emitter/gyrotron

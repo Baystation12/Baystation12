@@ -245,7 +245,7 @@
 			return
 	// Repair
 	if(isWelder(W))
-		var/obj/item/weapon/weldingtool/F = W
+		var/obj/item/weldingtool/F = W
 		if(F.isOn())
 			if(health >= maxhealth)
 				to_chat(user, "<span class='warning'>\The [src] does not need repairs.</span>")

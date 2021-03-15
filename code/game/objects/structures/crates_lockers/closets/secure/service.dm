@@ -8,12 +8,12 @@
 		/obj/item/clothing/under/rank/chaplain,
 		/obj/item/clothing/shoes/black,
 		/obj/item/clothing/suit/chaplain_hoodie,
-		/obj/item/weapon/storage/candle_box = 2,
-		/obj/item/weapon/storage/candle_box/incense,
-		/obj/item/weapon/deck/tarot,
-		/obj/item/weapon/reagent_containers/food/drinks/bottle/holywater,
-		/obj/item/weapon/nullrod,
-		/obj/item/weapon/storage/bible,
-		/obj/item/weapon/storage/belt/general,
-		/obj/item/weapon/material/urn
+		/obj/item/storage/candle_box = 2,
+		/obj/item/storage/candle_box/incense,
+		/obj/item/deck/tarot,
+		/obj/item/reagent_containers/food/drinks/bottle/holywater,
+		/obj/item/nullrod,
+		/obj/item/storage/bible,
+		/obj/item/storage/belt/general,
+		/obj/item/material/urn
 	)

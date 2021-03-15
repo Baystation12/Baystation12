@@ -334,8 +334,8 @@
 			src.id = t
 			to_chat(user, "<span class='notice'>The new ID of the window is [id]</span>")
 		return
-	else if(istype(W, /obj/item/weapon/gun/energy/plasmacutter) && anchored)
-		var/obj/item/weapon/gun/energy/plasmacutter/cutter = W
+	else if(istype(W, /obj/item/gun/energy/plasmacutter) && anchored)
+		var/obj/item/gun/energy/plasmacutter/cutter = W
 		if(!cutter.slice(user))
 			return
 		playsound(src, 'sound/items/Welder.ogg', 80, 1)
@@ -373,7 +373,7 @@
 			to_chat(user, SPAN_WARNING("It looks like it could use more sheets."))
 		return
 
-	else if (istype(W, /obj/item/weapon/weldingtool))
+	else if (istype(W, /obj/item/weldingtool))
 		if (health == maxhealth)
 			to_chat(user, SPAN_NOTICE("\The [src] does not need repair."))
 			return
@@ -382,7 +382,7 @@
 			to_chat(user, SPAN_WARNING("\The [src] needs some [get_material_display_name()] applied before you can weld it."))
 			return
 
-		var/obj/item/weapon/weldingtool/T = W
+		var/obj/item/weldingtool/T = W
 		if (!T.welding)
 			to_chat(user, SPAN_WARNING("\The [T] needs to be turned on first."))
 			return
@@ -398,7 +398,7 @@
 		)
 		return
 
-	else if (!istype(W, /obj/item/weapon/rcd) && !istype(W, /obj/item/device/paint_sprayer))
+	else if (!istype(W, /obj/item/rcd) && !istype(W, /obj/item/device/paint_sprayer))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		if(W.damtype == BRUTE || W.damtype == BURN)
 			user.do_attack_animation(src)
@@ -643,7 +643,7 @@
 	var/range = 7
 	stock_part_presets = null // This isn't a radio-enabled button; it communicates with nearby structures in view.
 	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/power/apc
+		/obj/item/stock_parts/power/apc
 	)
 
 /obj/machinery/button/windowtint/attackby(obj/item/device/W as obj, mob/user as mob)
@@ -660,7 +660,7 @@
 			src.id = t
 			to_chat(user, "<span class='notice'>The new ID of the button is [id]</span>")
 		return
-	if(istype(W, /obj/item/weapon/screwdriver))
+	if(istype(W, /obj/item/screwdriver))
 		new /obj/item/frame/light_switch/windowtint(user.loc, 1)
 		qdel(src)
 

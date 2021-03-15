@@ -7,14 +7,14 @@
 /*
  * Banana Peals
  */
-/obj/item/weapon/bananapeel/Crossed(AM as mob|obj)
+/obj/item/bananapeel/Crossed(AM as mob|obj)
 	if (istype(AM, /mob/living))
 		var/mob/living/M = AM
 		M.slip("the [src.name]",4)
 /*
  * Bike Horns
  */
-/obj/item/weapon/bikehorn
+/obj/item/bikehorn
 	name = "bike horn"
 	desc = "A horn off of a bicycle."
 	icon = 'icons/obj/items.dmi'
@@ -28,7 +28,7 @@
 	var/spam_flag = 0
 	var/audio_files = list("sound/items/bikehorn.ogg")
 
-/obj/item/weapon/bikehorn/attack_self(mob/user as mob)
+/obj/item/bikehorn/attack_self(mob/user as mob)
 	if (spam_flag == 0)
 		spam_flag = 1
 		playsound(src.loc, pick(src.audio_files), 50, 1)
@@ -37,7 +37,7 @@
 			spam_flag = 0
 	return
 
-/obj/item/weapon/bikehorn/airhorn
+/obj/item/bikehorn/airhorn
 	name = "air horn"
 	desc = "A can of compressed air hooked up to an obnoxiously loud horn. SPRING BREAK!"
 	icon_state = "air_horn"
