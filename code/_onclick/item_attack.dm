@@ -69,7 +69,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		return 0
 	if(M == user && user.a_intent != I_HURT)
 		return 0
-	if (user.a_intent == I_HELP)
+	if (user.a_intent == I_HELP && !attack_ignore_harm_check)
 		return FALSE
 
 	/////////////////////////
