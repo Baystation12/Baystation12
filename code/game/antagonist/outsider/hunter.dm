@@ -39,13 +39,13 @@ GLOBAL_DATUM_INIT(hunters, /datum/antagonist/hunter, new)
 	. = ..()
 	if(.)
 		if(player.species.get_bodytype(player) == SPECIES_MANTID_GYNE)
-			equip_rig(/obj/item/weapon/rig/mantid/gyne, player)
+			equip_rig(/obj/item/rig/mantid/gyne, player)
 		else
-			equip_rig(/obj/item/weapon/rig/mantid, player)
-			player.put_in_hands(new /obj/item/weapon/gun/energy/particle)
+			equip_rig(/obj/item/rig/mantid, player)
+			player.put_in_hands(new /obj/item/gun/energy/particle)
 
 /datum/antagonist/hunter/equip_rig(rig_type, mob/living/carbon/human/player)
-	var/obj/item/weapon/rig/mantid/rig = ..()
+	var/obj/item/rig/mantid/rig = ..()
 	if(rig)
 		rig.visible_name = player.real_name
 		return rig

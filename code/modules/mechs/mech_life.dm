@@ -41,7 +41,7 @@
 		radiation--
 
 /mob/living/exosuit/get_cell()
-	RETURN_TYPE(/obj/item/weapon/cell)
+	RETURN_TYPE(/obj/item/cell)
 	return body ? body.cell : null
 
 /mob/living/exosuit/proc/calc_power_draw()

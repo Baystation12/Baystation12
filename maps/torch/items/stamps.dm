@@ -1,39 +1,39 @@
-/obj/item/weapon/stamp/co
+/obj/item/stamp/co
 	name = "commanding officer's rubber stamp"
 	icon_state = "stamp-cap"
 
-/obj/item/weapon/stamp/xo
+/obj/item/stamp/xo
 	name = "executive officer's rubber stamp"
 	icon_state = "stamp-xo"
 
-/obj/item/weapon/stamp/sea
+/obj/item/stamp/sea
 	name = "senior enlisted advisor's rubber stamp"
 	icon_state = "stamp-xo"
 
-/obj/item/weapon/stamp/cos
+/obj/item/stamp/cos
 	name = "chief of security's rubber stamp"
 	icon_state = "stamp-cos"
 
-/obj/item/weapon/stamp/brig
+/obj/item/stamp/brig
 	name = "brig chief's rubber stamp"
 	icon_state = "stamp-brig"
 
-/obj/item/weapon/stamp/solgov
+/obj/item/stamp/solgov
 	name = "\improper Sol Central Government rubber stamp"
 	icon_state = "stamp-solgov"
 
-/obj/item/weapon/stamp/nt
+/obj/item/stamp/nt
 	name = "\improper corporate rubber stamp"
 	icon_state = "stamp-corp"
 
-/obj/item/weapon/stamp/deckoff
+/obj/item/stamp/deckoff
 	name = "deck chief's rubber stamp"
 	icon_state = "stamp-deckchief"
 
-/obj/item/weapon/stamp/supply
+/obj/item/stamp/supply
 	name = "supply rubber stamp"
 	icon_state = "stamp-cargo"
 
-/obj/item/weapon/stamp/path
+/obj/item/stamp/path
 	name = "pathfinder's rubber stamp"
 	icon_state = "stamp-pf"

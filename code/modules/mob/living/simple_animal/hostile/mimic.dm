@@ -23,7 +23,7 @@ var/global/list/protected_objects = list(/obj/machinery,
 	icon_state = "crate"
 	icon_living = "crate"
 
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/fish
+	meat_type = /obj/item/reagent_containers/food/snacks/fish
 	response_help = "touches"
 	response_disarm = "pushes"
 	response_harm = "hits"
@@ -105,8 +105,8 @@ var/global/list/protected_objects = list(/obj/machinery,
 			for(var/atom/movable/M in src)
 				M.forceMove(C)
 
-		if(istype(C,/obj/item/weapon/storage))
-			var/obj/item/weapon/storage/S = C
+		if(istype(C,/obj/item/storage))
+			var/obj/item/storage/S = C
 			for(var/atom/movable/M in src)
 				if(S.can_be_inserted(M,null,1))
 					S.handle_item_insertion(M)

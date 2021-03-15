@@ -1,4 +1,4 @@
-/obj/item/weapon/robot_module/flying/ascent
+/obj/item/robot_module/flying/ascent
 	name = "\improper Ascent drone module"
 	display_name = "Ascent"
 	upgrade_locked = TRUE
@@ -10,28 +10,28 @@
 	// hack doors, windows etc. without having to constantly cycle through tools.
 	equipment = list(
 		/obj/item/device/flash,
-		/obj/item/weapon/gun/energy/particle/small,
+		/obj/item/gun/energy/particle/small,
 		/obj/item/device/multitool/mantid,
 		/obj/item/clustertool,
 		/obj/item/clustertool, 
 		/obj/item/clustertool,
-		/obj/item/weapon/soap,
-		/obj/item/weapon/mop/advanced,
+		/obj/item/soap,
+		/obj/item/mop/advanced,
 		/obj/item/device/plunger/robot,
-		/obj/item/weapon/weldingtool/electric/mantid,
-		/obj/item/weapon/extinguisher,
+		/obj/item/weldingtool/electric/mantid,
+		/obj/item/extinguisher,
 		/obj/item/device/t_scanner,
 		/obj/item/device/scanner/gas,
 		/obj/item/device/scanner/health,
 		/obj/item/device/geiger,
-		/obj/item/weapon/gripper,
-		/obj/item/weapon/gripper/no_use/loader,
+		/obj/item/gripper,
+		/obj/item/gripper/no_use/loader,
 		/obj/item/inducer/borg,
 		/obj/item/stack/medical/resin,
-		/obj/item/weapon/surgicaldrill,
-		/obj/item/weapon/hemostat,
-		/obj/item/weapon/bonesetter,
-		/obj/item/weapon/circular_saw,
+		/obj/item/surgicaldrill,
+		/obj/item/hemostat,
+		/obj/item/bonesetter,
+		/obj/item/circular_saw,
 		/obj/item/stack/material/cyborg/steel,
 		/obj/item/stack/material/cyborg/aluminium,
 		/obj/item/stack/material/rods/cyborg,
@@ -83,7 +83,7 @@
 	)
 
 // Copypasted from repair bot - todo generalize this step.
-/obj/item/weapon/robot_module/flying/ascent/finalize_synths()
+/obj/item/robot_module/flying/ascent/finalize_synths()
 	. = ..()
 	var/datum/matter_synth/metal/metal =       locate() in synths
 	var/datum/matter_synth/glass/glass =       locate() in synths
@@ -119,7 +119,7 @@
 
 	. = ..()
 
-/obj/item/weapon/robot_module/flying/ascent/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
+/obj/item/robot_module/flying/ascent/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	var/obj/item/stack/medical/resin/drone/resin = locate() in equipment
 	if(!resin)
 		resin = new(src, amount = 1)
@@ -128,7 +128,7 @@
 		resin.add(1)
 	..()
 
-/obj/item/weapon/robot_module/flying/ascent/finalize_equipment()
+/obj/item/robot_module/flying/ascent/finalize_equipment()
 	. = ..()
 	var/obj/item/stack/nanopaste/N = locate() in equipment
 	N.uses_charge = 1

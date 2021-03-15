@@ -1,8 +1,8 @@
 /datum/extension/interactive/multitool/circuitboards/buildtype_select
-	expected_type = /obj/item/weapon/stock_parts/circuitboard
+	expected_type = /obj/item/stock_parts/circuitboard
 
 /datum/extension/interactive/multitool/circuitboards/buildtype_select/get_interact_window(var/obj/item/device/multitool/M, var/mob/user)
-	var/obj/item/weapon/stock_parts/circuitboard/board = holder
+	var/obj/item/stock_parts/circuitboard/board = holder
 	var/dat = list()
 	dat += "<b>Select Built Machine:</b><br>"
 	dat += "<table>"
@@ -18,7 +18,7 @@
 	return JOINTEXT(dat)
 
 /datum/extension/interactive/multitool/circuitboards/buildtype_select/on_topic(href, href_list, user)
-	var/obj/item/weapon/stock_parts/circuitboard/board = holder
+	var/obj/item/stock_parts/circuitboard/board = holder
 	if(href_list["choose"])
 		var/path = locate(href_list["choose"])
 		if(path && (path in board.get_buildable_types()))

@@ -29,7 +29,7 @@
 	if(!state_is_valid(machine))
 		return "[log_info_line(machine)] had an invalid construction state of type [type]."
 	if(needs_board)
-		var/obj/item/weapon/stock_parts/circuitboard/C = machine.get_component_of_type(/obj/item/weapon/stock_parts/circuitboard)
+		var/obj/item/stock_parts/circuitboard/C = machine.get_component_of_type(/obj/item/stock_parts/circuitboard)
 		if(!C)
 			return "Machine [log_info_line(machine)] lacked a circuitboard."
 		if(C.board_type != needs_board)
@@ -43,7 +43,7 @@
 // Fetches the components the machine is supposed to have to function fully. Not related to state validity.
 /decl/machine_construction/proc/get_requirements(obj/machinery/machine)
 	if(needs_board)
-		var/obj/item/weapon/stock_parts/circuitboard/board = machine.get_component_of_type(/obj/item/weapon/stock_parts/circuitboard)
+		var/obj/item/stock_parts/circuitboard/board = machine.get_component_of_type(/obj/item/stock_parts/circuitboard)
 		if(board)
 			return board.req_components
 

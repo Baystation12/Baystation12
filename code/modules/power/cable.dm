@@ -580,7 +580,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		if(!src.use(15))
 			to_chat(usr, "<span class='warning'>You need at least 15 lengths to make restraints!</span>")
 			return
-		var/obj/item/weapon/handcuffs/cable/B = new /obj/item/weapon/handcuffs/cable(usr.loc)
+		var/obj/item/handcuffs/cable/B = new /obj/item/handcuffs/cable(usr.loc)
 		B.color = color
 		to_chat(usr, "<span class='notice'>You wind some cable together to make some restraints.</span>")
 	else
@@ -829,13 +829,13 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		return R.get_cell()
 
 /obj/item/stack/cable_coil/fabricator/use(var/used)
-	var/obj/item/weapon/cell/cell = get_cell()
+	var/obj/item/cell/cell = get_cell()
 	if(cell) cell.use(used * cost_per_cable)
 
 /obj/item/stack/cable_coil/fabricator/get_amount()
-	var/obj/item/weapon/cell/cell = get_cell()
+	var/obj/item/cell/cell = get_cell()
 	. = (cell ? Floor(cell.charge / cost_per_cable) : 0)
 
 /obj/item/stack/cable_coil/fabricator/get_max_amount()
-	var/obj/item/weapon/cell/cell = get_cell()
+	var/obj/item/cell/cell = get_cell()
 	. = (cell ? Floor(cell.maxcharge / cost_per_cable) : 0)

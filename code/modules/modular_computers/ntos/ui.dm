@@ -14,7 +14,7 @@
 
 	// We are still here, that means there is no program loaded. Load the BIOS/ROM/OS/whatever you want to call it.
 	// This screen simply lists available programs and user may select them.
-	var/obj/item/weapon/stock_parts/computer/hard_drive/hard_drive = get_component(PART_HDD)
+	var/obj/item/stock_parts/computer/hard_drive/hard_drive = get_component(PART_HDD)
 	if(!hard_drive || !length(hard_drive.stored_files))
 		show_error(user, "DISK ERROR")
 		return // No HDD, No HDD files list or no stored files. Something is very broken.
@@ -66,13 +66,13 @@
 		kill_program(active_program)
 		return TOPIC_HANDLED
 	if(href_list["PC_enable_component"] )
-		var/obj/item/weapon/stock_parts/computer/H = locate(href_list["PC_enable_component"]) in holder
+		var/obj/item/stock_parts/computer/H = locate(href_list["PC_enable_component"]) in holder
 		if(H && istype(H) && !H.enabled)
 			H.enabled = 1
 			H.on_enable(src)
 		return TOPIC_REFRESH
 	if(href_list["PC_disable_component"] )
-		var/obj/item/weapon/stock_parts/computer/H = locate(href_list["PC_disable_component"]) in holder
+		var/obj/item/stock_parts/computer/H = locate(href_list["PC_disable_component"]) in holder
 		if(H && istype(H) && H.enabled)
 			H.enabled = 0
 			H.on_disable()
@@ -115,7 +115,7 @@
 
 /datum/extension/interactive/ntos/proc/regular_ui_update()
 	var/ui_update_needed = 0
-	var/obj/item/weapon/stock_parts/computer/battery_module/battery_module = get_component(PART_BATTERY)
+	var/obj/item/stock_parts/computer/battery_module/battery_module = get_component(PART_BATTERY)
 	if(battery_module)
 		var/batery_percent = battery_module.battery.percent()
 		if(last_battery_percent != batery_percent) //Let's update UI on percent change
@@ -158,7 +158,7 @@
 /datum/extension/interactive/ntos/proc/get_header_data()
 	var/list/data = list()
 
-	var/obj/item/weapon/stock_parts/computer/battery_module/battery_module = get_component(PART_BATTERY)
+	var/obj/item/stock_parts/computer/battery_module/battery_module = get_component(PART_BATTERY)
 	if(battery_module)
 		switch(battery_module.battery.percent())
 			if(80 to 200) // 100 should be maximal but just in case..
@@ -180,11 +180,11 @@
 		data["PC_batterypercent"] = "N/C"
 		data["PC_showbatteryicon"] = battery_module ? 1 : 0
 
-	var/obj/item/weapon/stock_parts/computer/tesla_link/tesla_link = get_component(PART_TESLA)
+	var/obj/item/stock_parts/computer/tesla_link/tesla_link = get_component(PART_TESLA)
 	if(tesla_link && tesla_link.enabled)
 		data["PC_apclinkicon"] = "charging.gif"
 
-	var/obj/item/weapon/stock_parts/computer/network_card/network_card = get_component(PART_NETWORK)
+	var/obj/item/stock_parts/computer/network_card/network_card = get_component(PART_NETWORK)
 	if(network_card && network_card.is_banned())
 		data["PC_ntneticon"] = "sig_warning.gif"
 	else

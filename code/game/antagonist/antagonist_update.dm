@@ -18,7 +18,7 @@
 	return player.current
 
 /datum/antagonist/proc/update_access(var/mob/living/player)
-	for(var/obj/item/weapon/card/id/id in player.contents)
+	for(var/obj/item/card/id/id in player.contents)
 		player.set_id_info(id)
 
 /datum/antagonist/proc/clear_indicators(var/datum/mind/recipient)

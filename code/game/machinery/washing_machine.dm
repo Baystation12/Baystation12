@@ -19,7 +19,7 @@
 	var/state = 0
 	var/gibs_ready = 0
 	var/obj/crayon
-	var/obj/item/weapon/reagent_containers/pill/detergent/detergent
+	var/obj/item/reagent_containers/pill/detergent/detergent
 	obj_flags = OBJ_FLAG_ANCHORABLE
 	clicksound = "button"
 	clickvol = 40
@@ -124,19 +124,19 @@
 /obj/machinery/washing_machine/components_are_accessible(path)
 	return !(state & WASHER_STATE_RUNNING) && ..()
 
-/obj/machinery/washing_machine/attackby(obj/item/weapon/W, mob/user)
+/obj/machinery/washing_machine/attackby(obj/item/W, mob/user)
 	if(!(state & WASHER_STATE_CLOSED))
-		if(!crayon && istype(W,/obj/item/weapon/pen/crayon))
+		if(!crayon && istype(W,/obj/item/pen/crayon))
 			if(!user.unEquip(W, src))
 				return
 			crayon = W
 			return TRUE
-		if(!detergent && istype(W,/obj/item/weapon/reagent_containers/pill/detergent))
+		if(!detergent && istype(W,/obj/item/reagent_containers/pill/detergent))
 			if(!user.unEquip(W, src))
 				return
 			detergent = W
 			return TRUE
-	if(istype(W, /obj/item/weapon/holder)) // Mob holder
+	if(istype(W, /obj/item/holder)) // Mob holder
 		for(var/mob/living/doggy in W)
 			doggy.forceMove(src)
 		qdel(W)
@@ -151,7 +151,7 @@
 		istype(W,/obj/item/clothing/gloves) || \
 		istype(W,/obj/item/clothing/shoes)  || \
 		istype(W,/obj/item/clothing/suit)   || \
-		istype(W,/obj/item/weapon/bedsheet) || \
+		istype(W,/obj/item/bedsheet) || \
 		istype(W,/obj/item/underwear/))
 
 		//YES, it's hardcoded... saves a var/can_be_washed for every single clothing item.

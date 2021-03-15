@@ -43,7 +43,7 @@
 	natural_weapon = /obj/item/natural_weapon/beak
 	speak_chance = 1//1% (1 in 100) chance every tick; So about once per 150 seconds, assuming an average tick is 1.5s
 	turns_per_move = 5
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/cracker/
+	meat_type = /obj/item/reagent_containers/food/snacks/cracker/
 
 	response_help  = "pets"
 	response_disarm = "gently moves aside"
@@ -51,7 +51,7 @@
 	stop_automated_movement = 1
 	universal_speak = TRUE
 
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/chicken/game
+	meat_type = /obj/item/reagent_containers/food/snacks/meat/chicken/game
 	meat_amount = 3
 	skin_material = MATERIAL_SKIN_FEATHERS
 
@@ -654,8 +654,8 @@
 		return 0
 
 	if(!drop_gently)
-		if(istype(held_item, /obj/item/weapon/grenade))
-			var/obj/item/weapon/grenade/G = held_item
+		if(istype(held_item, /obj/item/grenade))
+			var/obj/item/grenade/G = held_item
 			G.dropInto(loc)
 			G.detonate()
 			to_chat(src, "You let go of the [held_item]!")

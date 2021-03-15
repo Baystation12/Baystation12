@@ -41,11 +41,11 @@
 	// Micro lasers speed cooking up at higher tiers.
 	// Matter bins decrease the chance of breaking or getting dirty.
 	..()
-	var/laser_rating = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/micro_laser), 1, 5)
+	var/laser_rating = Clamp(total_component_rating_of_type(/obj/item/stock_parts/micro_laser), 1, 5)
 
 	speed_multiplier = (laser_rating * 0.5)
-	power_efficiency = total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator)
-	break_multiplier = 1 / Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin), 1, 3)
+	power_efficiency = total_component_rating_of_type(/obj/item/stock_parts/manipulator)
+	break_multiplier = 1 / Clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 1, 3)
 
 /*******************
 *   Item Adding
@@ -92,7 +92,7 @@
 		return
 
 	else if(dirtiness == 100) // The microwave is all dirty, so it can't be used!
-		var/has_rag = istype(O, /obj/item/weapon/reagent_containers/glass/rag)
+		var/has_rag = istype(O, /obj/item/reagent_containers/glass/rag)
 		var/has_cleaner = O.reagents != null && O.reagents.has_reagent(/datum/reagent/space_cleaner, 5)
 
 		// If they're trying to clean it, let them
@@ -150,9 +150,9 @@
 
 		return
 
-	else if(istype(O,/obj/item/weapon/reagent_containers/glass) || \
-	        istype(O,/obj/item/weapon/reagent_containers/food/drinks) || \
-	        istype(O,/obj/item/weapon/reagent_containers/food/condiment) \
+	else if(istype(O,/obj/item/reagent_containers/glass) || \
+	        istype(O,/obj/item/reagent_containers/food/drinks) || \
+	        istype(O,/obj/item/reagent_containers/food/condiment) \
 		)
 		if (!O.reagents)
 			return
@@ -161,12 +161,12 @@
 				to_chat(user, SPAN_WARNING("Your [O] contains components unsuitable for cookery."))
 		return
 
-	else if(istype(O, /obj/item/weapon/storage))
+	else if(istype(O, /obj/item/storage))
 		if (LAZYLEN(ingredients) >= SScuisine.microwave_maximum_item_storage)
 			to_chat(user, SPAN_WARNING("[src] is completely full!"))
 			return
 
-		var/obj/item/weapon/storage/bag/P = O
+		var/obj/item/storage/bag/P = O
 		var/objects_loaded = 0
 		for(var/obj/G in P.contents)
 			if(is_type_in_list(G, SScuisine.microwave_accepts_items) && LAZYLEN(ingredients) < SScuisine.microwave_maximum_item_storage && P.remove_from_storage(G, src, 1))
@@ -253,20 +253,20 @@
 		var/list/items_measures_p = new
 		for (var/obj/O in InsertedContents())
 			var/display_name = O.name
-			if (istype(O,/obj/item/weapon/reagent_containers/food/snacks/egg))
+			if (istype(O,/obj/item/reagent_containers/food/snacks/egg))
 				items_measures[display_name] = "egg"
 				items_measures_p[display_name] = "eggs"
-			if (istype(O,/obj/item/weapon/reagent_containers/food/snacks/tofu))
+			if (istype(O,/obj/item/reagent_containers/food/snacks/tofu))
 				items_measures[display_name] = "tofu chunk"
 				items_measures_p[display_name] = "tofu chunks"
-			if (istype(O,/obj/item/weapon/reagent_containers/food/snacks/meat)) //any meat
+			if (istype(O,/obj/item/reagent_containers/food/snacks/meat)) //any meat
 				items_measures[display_name] = "slab of meat"
 				items_measures_p[display_name] = "slabs of meat"
-			if (istype(O,/obj/item/weapon/reagent_containers/food/snacks/donkpocket))
+			if (istype(O,/obj/item/reagent_containers/food/snacks/donkpocket))
 				display_name = "Turnovers"
 				items_measures[display_name] = "turnover"
 				items_measures_p[display_name] = "turnovers"
-			if (istype(O,/obj/item/weapon/reagent_containers/food/snacks/fish))
+			if (istype(O,/obj/item/reagent_containers/food/snacks/fish))
 				items_measures[display_name] = "fillet of fish"
 				items_measures_p[display_name] = "fillets of fish"
 			items_counts[display_name]++
@@ -373,7 +373,7 @@
 
 /obj/machinery/microwave/proc/has_extra_item()
 	for (var/obj/O in ingredients) // do not use src or contents unless you want to cook your own components
-		if (!istype(O, /obj/item/weapon/reagent_containers/food))
+		if (!istype(O, /obj/item/reagent_containers/food))
 			return TRUE
 	return FALSE
 
@@ -448,7 +448,7 @@
 	var/amount = 0
 
 	// Kill + delete mobs in mob holders
-	for (var/obj/item/weapon/holder/H in ingredients)
+	for (var/obj/item/holder/H in ingredients)
 		for (var/mob/living/M in H.contents)
 			M.death()
 			qdel(M)
@@ -463,7 +463,7 @@
 
 	LAZYCLEARLIST(ingredients)
 	reagents.clear_reagents()
-	var/obj/item/weapon/reagent_containers/food/snacks/badrecipe/ffuu = new(src)
+	var/obj/item/reagent_containers/food/snacks/badrecipe/ffuu = new(src)
 	ffuu.reagents.add_reagent(/datum/reagent/carbon, amount)
 	ffuu.reagents.add_reagent(/datum/reagent/toxin, amount / 10)
 	return ffuu

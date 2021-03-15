@@ -8,7 +8,7 @@
 	if(camera)
 		camera.status = 0
 	if(module)
-		for(var/obj/item/weapon/gripper/G in module.equipment)
+		for(var/obj/item/gripper/G in module.equipment)
 			G.drop_gripped_item()
 	locked = FALSE
 	remove_robot_verbs()

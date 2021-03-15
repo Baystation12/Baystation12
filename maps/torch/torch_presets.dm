@@ -139,13 +139,13 @@ var/const/NETWORK_NANOTRASEN  = "Petrov"
 
 // Substation SMES
 /obj/machinery/power/smes/buildable/preset/torch/substation
-	uncreated_component_parts = list(/obj/item/weapon/stock_parts/smes_coil = 1) // Note that it gets one more from construction
+	uncreated_component_parts = list(/obj/item/stock_parts/smes_coil = 1) // Note that it gets one more from construction
 	_input_maxed = TRUE
 	_output_maxed = TRUE
 
 // Substation SMES (charged and with full I/O setting)
 /obj/machinery/power/smes/buildable/preset/torch/substation_full
-	uncreated_component_parts = list(/obj/item/weapon/stock_parts/smes_coil = 1)
+	uncreated_component_parts = list(/obj/item/stock_parts/smes_coil = 1)
 	_input_maxed = TRUE
 	_output_maxed = TRUE
 	_input_on = TRUE
@@ -155,8 +155,8 @@ var/const/NETWORK_NANOTRASEN  = "Petrov"
 // Main Engine output SMES
 /obj/machinery/power/smes/buildable/preset/torch/engine_main
 	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/smes_coil/super_io = 2,
-		/obj/item/weapon/stock_parts/smes_coil/super_capacity = 2)
+		/obj/item/stock_parts/smes_coil/super_io = 2,
+		/obj/item/stock_parts/smes_coil/super_capacity = 2)
 	_input_maxed = TRUE
 	_output_maxed = TRUE
 	_input_on = TRUE
@@ -166,8 +166,8 @@ var/const/NETWORK_NANOTRASEN  = "Petrov"
 // Shuttle SMES
 /obj/machinery/power/smes/buildable/preset/torch/shuttle
 	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/smes_coil/super_io = 1,
-		/obj/item/weapon/stock_parts/smes_coil/super_capacity = 1)
+		/obj/item/stock_parts/smes_coil/super_io = 1,
+		/obj/item/stock_parts/smes_coil/super_capacity = 1)
 	_input_maxed = TRUE
 	_output_maxed = TRUE
 	_input_on = TRUE
@@ -177,7 +177,7 @@ var/const/NETWORK_NANOTRASEN  = "Petrov"
 // Hangar SMES. Charges the shuttles so needs a pretty big throughput.
 /obj/machinery/power/smes/buildable/preset/torch/hangar
 	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/smes_coil/super_io = 2)
+		/obj/item/stock_parts/smes_coil/super_io = 2)
 	_input_maxed = TRUE
 	_output_maxed = TRUE
 	_input_on = TRUE

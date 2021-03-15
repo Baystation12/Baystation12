@@ -151,10 +151,10 @@
 	add_fingerprint(user)
 	return
 
-/obj/structure/inflatable/attackby(obj/item/weapon/W, mob/user)
-	if(!istype(W) || istype(W, /obj/item/weapon/inflatable_dispenser)) return
+/obj/structure/inflatable/attackby(obj/item/W, mob/user)
+	if(!istype(W) || istype(W, /obj/item/inflatable_dispenser)) return
 
-	if(istype(W, /obj/item/weapon/tape_roll) && health < initial(health) - 3)
+	if(istype(W, /obj/item/tape_roll) && health < initial(health) - 3)
 		if(taped)
 			to_chat(user, SPAN_NOTICE("\The [src] can't be patched any more with \the [W]!"))
 			return TRUE
@@ -340,7 +340,7 @@
 		to_chat(user, "<span class='notice'>The inflatable door is too torn to be inflated!</span>")
 		add_fingerprint(user)
 
-/obj/item/weapon/storage/briefcase/inflatable
+/obj/item/storage/briefcase/inflatable
 	name = "inflatable barrier box"
 	desc = "Contains inflatable walls and doors."
 	icon_state = "inf_box"

@@ -119,7 +119,7 @@
 	icon_state = "tube1"
 	},
 /obj/structure/table/glass,
-/obj/item/weapon/disk/astrodata,
+/obj/item/disk/astrodata,
 /turf/simulated/floor/tiled/white,
 /area/map_template/ecship/science)
 "av" = (
@@ -175,7 +175,7 @@
 	dir = 4;
 	level = 2
 	},
-/obj/item/weapon/stool/padded,
+/obj/item/stool/padded,
 /turf/simulated/floor/tiled/airless,
 /area/map_template/ecship/crew)
 "aD" = (
@@ -188,7 +188,7 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/obj/item/weapon/reagent_containers/chem_disp_cartridge/coffee{
+/obj/item/reagent_containers/chem_disp_cartridge/coffee{
 	name = "coffee canister"
 	},
 /turf/simulated/floor/tiled/airless,
@@ -215,7 +215,7 @@
 	dir = 4;
 	icon_state = "tube1"
 	},
-/obj/item/weapon/stool/padded,
+/obj/item/stool/padded,
 /turf/simulated/floor/tiled/airless,
 /area/map_template/ecship/crew)
 "aH" = (
@@ -230,8 +230,8 @@
 /area/map_template/ecship/cryo)
 "aJ" = (
 /obj/structure/table/glass,
-/obj/item/weapon/ecletters,
-/obj/item/weapon/paper/ecrashlog,
+/obj/item/ecletters,
+/obj/item/paper/ecrashlog,
 /turf/simulated/floor/tiled/white,
 /area/map_template/ecship/science)
 "aK" = (
@@ -279,7 +279,7 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/obj/item/weapon/deck/cards,
+/obj/item/deck/cards,
 /turf/simulated/floor/tiled/airless,
 /area/map_template/ecship/crew)
 "aP" = (
@@ -301,7 +301,7 @@
 	icon_state = "handrail"
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/item/weapon/stool/padded,
+/obj/item/stool/padded,
 /obj/effect/floor_decal/corner/paleblue/diagonal{
 	dir = 4;
 	icon_state = "corner_white_diagonal"
@@ -383,7 +383,7 @@
 	icon_state = "corner_white"
 	},
 /obj/structure/table/glass,
-/obj/item/weapon/storage/box/monkeycubes,
+/obj/item/storage/box/monkeycubes,
 /turf/simulated/floor/tiled/white,
 /area/map_template/ecship/science)
 "aZ" = (
@@ -420,7 +420,7 @@
 /turf/simulated/floor,
 /area/map_template/ecship/science)
 "bc" = (
-/obj/item/weapon/soap,
+/obj/item/soap,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -501,7 +501,7 @@
 	icon_state = "handrail"
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/item/weapon/stool/padded,
+/obj/item/stool/padded,
 /obj/effect/floor_decal/corner/paleblue/diagonal{
 	dir = 4;
 	icon_state = "corner_white_diagonal"
@@ -606,7 +606,7 @@
 /area/map_template/ecship/science)
 "bt" = (
 /obj/structure/reagent_dispensers/watertank,
-/obj/item/weapon/reagent_containers/glass/bucket,
+/obj/item/reagent_containers/glass/bucket,
 /turf/simulated/floor/tiled/white,
 /area/map_template/ecship/science)
 "bu" = (
@@ -663,7 +663,7 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/obj/item/weapon/board,
+/obj/item/board,
 /turf/simulated/floor/tiled/airless,
 /area/map_template/ecship/crew)
 "bz" = (
@@ -722,7 +722,7 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/obj/item/weapon/stool/padded,
+/obj/item/stool/padded,
 /turf/simulated/floor/tiled/airless,
 /area/map_template/ecship/crew)
 "bC" = (
@@ -978,7 +978,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/item/weapon/scalpel{
+/obj/item/scalpel{
 	pixel_y = 12
 	},
 /turf/simulated/floor/tiled/white,
@@ -1271,7 +1271,7 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/ecship/science)
 "cz" = (
-/obj/item/weapon/stool/padded,
+/obj/item/stool/padded,
 /turf/simulated/floor/tiled/white,
 /area/map_template/ecship/science)
 "cA" = (
@@ -1451,7 +1451,7 @@
 	dir = 6;
 	icon_state = "corner_white"
 	},
-/obj/item/weapon/stool/padded,
+/obj/item/stool/padded,
 /turf/simulated/floor,
 /area/map_template/ecship/engineering)
 "cT" = (
@@ -2172,7 +2172,7 @@
 /area/template_noop)
 "Vy" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/item/weapon/circular_saw,
+/obj/item/circular_saw,
 /turf/simulated/floor/tiled/white,
 /area/map_template/ecship/science)
 "YW" = (

@@ -34,7 +34,7 @@
 	icon_state = "larva"
 	icon_living = "larva"
 	icon_dead = "larva_dead"
-	holder_type = /obj/item/weapon/holder
+	holder_type = /obj/item/holder
 	destroy_surroundings = FALSE
 	health = 10
 	maxHealth = 10

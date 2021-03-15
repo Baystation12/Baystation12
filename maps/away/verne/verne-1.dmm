@@ -1158,9 +1158,9 @@
 /obj/random/powercell,
 /obj/random/powercell,
 /obj/random/powercell,
-/obj/item/weapon/stock_parts/capacitor/super,
-/obj/item/weapon/stock_parts/micro_laser/ultra,
-/obj/item/weapon/paper/verne,
+/obj/item/stock_parts/capacitor/super,
+/obj/item/stock_parts/micro_laser/ultra,
+/obj/item/paper/verne,
 /turf/simulated/floor/tiled/monotile,
 /area/verne/engineering)
 "hX" = (
@@ -1871,7 +1871,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 10
 	},
-/obj/item/weapon/stool/padded,
+/obj/item/stool/padded,
 /obj/effect/floor_decal/industrial/fire{
 	dir = 4
 	},
@@ -1975,7 +1975,7 @@
 /obj/effect/floor_decal/industrial/radiation/fulltile,
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction,
 /obj/effect/catwalk_plated/dark,
-/obj/item/weapon/reagent_containers/glass/bucket,
+/obj/item/reagent_containers/glass/bucket,
 /turf/simulated/floor/plating,
 /area/verne/engineering/powergen)
 "qL" = (
@@ -3038,8 +3038,8 @@
 /obj/structure/table/rack,
 /obj/item/device/radio/map_preset/verne,
 /obj/item/device/radio/map_preset/verne,
-/obj/item/weapon/storage/belt/utility/full,
-/obj/item/weapon/storage/belt/utility/full,
+/obj/item/storage/belt/utility/full,
+/obj/item/storage/belt/utility/full,
 /obj/item/device/multitool,
 /obj/item/device/multitool,
 /obj/item/clothing/gloves/insulated,
@@ -3052,9 +3052,9 @@
 /obj/effect/floor_decal/corner/b_green{
 	dir = 5
 	},
-/obj/item/weapon/storage/box/lights/bulbs,
-/obj/item/weapon/storage/box/lights/tubes,
-/obj/item/weapon/storage/box/lights/mixed,
+/obj/item/storage/box/lights/bulbs,
+/obj/item/storage/box/lights/tubes,
+/obj/item/storage/box/lights/mixed,
 /turf/simulated/floor/tiled,
 /area/verne/engineering)
 "Bg" = (
@@ -3540,7 +3540,7 @@
 	dir = 6
 	},
 /obj/structure/closet/toolcloset,
-/obj/item/weapon/storage/briefcase/inflatable,
+/obj/item/storage/briefcase/inflatable,
 /turf/simulated/floor/tiled/techmaint,
 /area/verne/engineering/atmospherics)
 "Fy" = (
@@ -4543,7 +4543,7 @@
 	pixel_y = -24
 	},
 /obj/structure/table/standard,
-/obj/item/weapon/rpd,
+/obj/item/rpd,
 /obj/machinery/recharger,
 /turf/simulated/floor/tiled/monotile,
 /area/verne/engineering)

@@ -21,8 +21,8 @@
 	clicksound = "button"
 	clickvol = 20
 	core_skill = SKILL_CHEMISTRY
-	var/obj/item/weapon/reagent_containers/beaker = null
-	var/obj/item/weapon/storage/pill_bottle/loaded_pill_bottle = null
+	var/obj/item/reagent_containers/beaker = null
+	var/obj/item/storage/pill_bottle/loaded_pill_bottle = null
 
 	var/to_beaker = FALSE // If TRUE, reagents will move from buffer -> beaker. If FALSE, reagents will be destroyed when moved from the buffer.
 	var/useramount = 30 // Last used amount
@@ -56,9 +56,9 @@
 				qdel(src)
 				return
 
-/obj/machinery/chem_master/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob)
+/obj/machinery/chem_master/attackby(var/obj/item/B as obj, var/mob/user as mob)
 
-	if(istype(B, /obj/item/weapon/reagent_containers/glass))
+	if(istype(B, /obj/item/reagent_containers/glass))
 
 		if(beaker)
 			to_chat(user, "A beaker is already loaded into the machine.")
@@ -70,7 +70,7 @@
 		icon_state = "mixer1"
 		atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 
-	else if(istype(B, /obj/item/weapon/storage/pill_bottle))
+	else if(istype(B, /obj/item/storage/pill_bottle))
 
 		if(loaded_pill_bottle)
 			to_chat(user, "A pill bottle is already loaded into the machine.")
@@ -83,7 +83,7 @@
 /obj/machinery/chem_master/proc/eject_beaker(mob/user)
 	if(!beaker)
 		return
-	var/obj/item/weapon/reagent_containers/B = beaker
+	var/obj/item/reagent_containers/B = beaker
 	user.put_in_hands(B)
 	beaker = null
 	reagents.clear_reagents()
@@ -224,7 +224,7 @@
 				return
 
 			while (count-- && count >= 0)
-				var/obj/item/weapon/reagent_containers/pill/P = new/obj/item/weapon/reagent_containers/pill(loc)
+				var/obj/item/reagent_containers/pill/P = new/obj/item/reagent_containers/pill(loc)
 				if(!name) name = reagents.get_master_reagent_name()
 				P.SetName("[name] pill")
 				P.icon_state = "pill"+pillsprite
@@ -274,7 +274,7 @@
 	var/name = sanitizeSafe(input(usr, "Name:", "Name your bottle!", bottle_name) as null|text, MAX_NAME_LEN)
 	if (!name)
 		return
-	var/obj/item/weapon/reagent_containers/glass/bottle/P = new/obj/item/weapon/reagent_containers/glass/bottle(loc)
+	var/obj/item/reagent_containers/glass/bottle/P = new/obj/item/reagent_containers/glass/bottle(loc)
 	P.SetName("[name] bottle")
 	P.icon_state = bottlesprite
 	reagents.trans_to_obj(P, bottle_dosage)
@@ -368,7 +368,7 @@
 	return ..(reagent, "Condiment Info", 0)
 
 /obj/machinery/chem_master/condimaster/create_bottle(mob/user)
-	var/obj/item/weapon/reagent_containers/food/condiment/P = new/obj/item/weapon/reagent_containers/food/condiment(loc)
+	var/obj/item/reagent_containers/food/condiment/P = new/obj/item/reagent_containers/food/condiment(loc)
 	reagents.trans_to_obj(P, 50)
 
 #undef CHEMMASTER_OPTIONS_BASE

@@ -40,12 +40,12 @@
 
 	var/cutting
 	if(isWelder(W))
-		var/obj/item/weapon/weldingtool/WT = W
+		var/obj/item/weldingtool/WT = W
 		if(WT.isOn())
 			cutting = TRUE
 		else
 			to_chat(user, SPAN_WARNING("Turn the torch on, first."))
-	else if(istype(W, /obj/item/weapon/gun/energy/plasmacutter))
+	else if(istype(W, /obj/item/gun/energy/plasmacutter))
 		cutting = TRUE
 
 	if(cutting)

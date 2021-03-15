@@ -292,7 +292,7 @@
 /area/map_template/mininghome_lockers)
 "cf" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
-/obj/item/weapon/storage/belt/utility{
+/obj/item/storage/belt/utility{
 	pixel_x = -6;
 	pixel_y = 12
 	},
@@ -1039,7 +1039,7 @@
 /area/map_template/mininghome_hangar)
 "hN" = (
 /obj/structure/bed/roller/ironingboard,
-/obj/item/weapon/ironingiron,
+/obj/item/ironingiron,
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/mininghome_lockers)
 "hP" = (
@@ -1088,7 +1088,7 @@
 /area/map_template/mininghome_hall)
 "if" = (
 /obj/structure/bed,
-/obj/item/weapon/bedsheet/ce,
+/obj/item/bedsheet/ce,
 /obj/effect/floor_decal/corner/brown/half{
 	dir = 4;
 	icon_state = "bordercolorhalf"
@@ -1526,7 +1526,7 @@
 /obj/machinery/light,
 /obj/random/tool,
 /obj/random/tool,
-/obj/item/weapon/pickaxe/drill,
+/obj/item/pickaxe/drill,
 /obj/item/device/scanner/gas{
 	pixel_x = 6;
 	pixel_y = -6
@@ -2152,7 +2152,7 @@
 /area/map_template/mininghome_hall)
 "sQ" = (
 /obj/structure/bed,
-/obj/item/weapon/bedsheet,
+/obj/item/bedsheet,
 /obj/effect/floor_decal/corner/brown/half{
 	dir = 4;
 	icon_state = "bordercolorhalf"
@@ -2833,7 +2833,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/mininghome_power)
 "za" = (
-/obj/item/weapon/shovel,
+/obj/item/shovel,
 /turf/simulated/floor/asteroid,
 /area/space)
 "zd" = (
@@ -2972,7 +2972,7 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/item/weapon/mop/advanced,
+/obj/item/mop/advanced,
 /obj/effect/floor_decal/corner/red{
 	dir = 1
 	},
@@ -3402,7 +3402,7 @@
 /obj/effect/floor_decal/corner/brown/half,
 /obj/random/tool,
 /obj/random/tool,
-/obj/item/weapon/pickaxe/diamonddrill,
+/obj/item/pickaxe/diamonddrill,
 /turf/simulated/floor/steel_dirty,
 /area/map_template/mininghome_hall)
 "DL" = (
@@ -3868,7 +3868,7 @@
 /turf/simulated/floor/steel_dirty,
 /area/map_template/mininghome_hall)
 "It" = (
-/obj/item/weapon/storage/toolbox/mechanical{
+/obj/item/storage/toolbox/mechanical{
 	pixel_x = 6;
 	pixel_y = 8
 	},
@@ -4270,7 +4270,7 @@
 /area/map_template/mininghome_robotics)
 "LZ" = (
 /obj/structure/bed,
-/obj/item/weapon/bedsheet/blue,
+/obj/item/bedsheet/blue,
 /obj/effect/floor_decal/corner/brown/half{
 	dir = 4;
 	icon_state = "bordercolorhalf"
@@ -4511,10 +4511,10 @@
 /area/map_template/mininghome_hangar)
 "NQ" = (
 /obj/structure/table/steel,
-/obj/item/weapon/storage/box/detergent{
+/obj/item/storage/box/detergent{
 	pixel_x = -3
 	},
-/obj/item/weapon/storage/box/detergent{
+/obj/item/storage/box/detergent{
 	pixel_x = -5;
 	pixel_y = 5
 	},
@@ -5431,7 +5431,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/item/weapon/storage/toolbox/emergency{
+/obj/item/storage/toolbox/emergency{
 	pixel_x = -13;
 	pixel_y = -6
 	},
@@ -5512,7 +5512,7 @@
 /area/map_template/mininghome_hall)
 "Vr" = (
 /obj/structure/bed,
-/obj/item/weapon/bedsheet/blue,
+/obj/item/bedsheet/blue,
 /obj/effect/floor_decal/corner/brown/half{
 	dir = 4;
 	icon_state = "bordercolorhalf"

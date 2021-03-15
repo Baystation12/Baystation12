@@ -12,7 +12,7 @@
 	var/syndie = 0
 	var/list/channels = list()
 
-/obj/item/device/encryptionkey/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/device/encryptionkey/attackby(obj/item/W as obj, mob/user as mob)
 
 /obj/item/device/encryptionkey/map_preset
 	var/preset_name

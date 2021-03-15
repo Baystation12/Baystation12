@@ -3,7 +3,7 @@
 	name = OUTFIT_JOB_NAME("SCGA Soldier - Torch")
 	uniform = /obj/item/clothing/under/solgov/utility/army
 	head = /obj/item/clothing/head/solgov/utility/army
-	back = /obj/item/weapon/storage/backpack/rucksack/green
+	back = /obj/item/storage/backpack/rucksack/green
 	shoes = /obj/item/clothing/shoes/jungleboots
 
 /decl/hierarchy/outfit/job/torch/armyservice

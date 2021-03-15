@@ -6,9 +6,9 @@
 	var/synced = FALSE
 	// Sync borg images to the master AI.
 	// We don't care about syncing the other way around
-	for(var/obj/item/weapon/photo/borg_photo in silicon_camera.aipictures)
+	for(var/obj/item/photo/borg_photo in silicon_camera.aipictures)
 		var/copied = FALSE
-		for(var/obj/item/weapon/photo/ai_photo in master_cam.aipictures)
+		for(var/obj/item/photo/ai_photo in master_cam.aipictures)
 			if(borg_photo.id == ai_photo.id)
 				copied = TRUE
 				break

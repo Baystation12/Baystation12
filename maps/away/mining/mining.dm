@@ -228,7 +228,7 @@
 	to_chat(user, "It's been engraved with the symbols '<font face='Shage'>RWH QaG [number]</font>'.") //i am not a linguist
 
 
-/obj/item/weapon/stool/stone/New(var/newloc)
+/obj/item/stool/stone/New(var/newloc)
 	..(newloc,"sandstone")
 
 /turf/simulated/floor/airless/stone

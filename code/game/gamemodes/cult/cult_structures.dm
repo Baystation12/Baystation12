@@ -150,7 +150,7 @@
 		else
 			for(var/obj/item/W in M)
 				M.drop_from_inventory(W)
-				if(istype(W, /obj/item/weapon/implant))
+				if(istype(W, /obj/item/implant))
 					qdel(W)
 
 		var/mob/living/new_mob = new /mob/living/simple_animal/corgi(A.loc)

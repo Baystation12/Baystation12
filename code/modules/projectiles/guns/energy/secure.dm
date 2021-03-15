@@ -1,4 +1,4 @@
-/obj/item/weapon/gun/energy/gun/small/secure
+/obj/item/gun/energy/gun/small/secure
 	name = "compact smartgun"
 	desc = "Combining the two LAEP90 variants, the secure and compact LAEP90-CS is the next best thing to keeping your security forces on a literal leash."
 	icon = 'icons/obj/guns/small_egun_secure.dmi'
@@ -9,7 +9,7 @@
 	req_access = list(list(access_brig, access_bridge))
 	authorized_modes = list(ALWAYS_AUTHORIZED, AUTHORIZED)
 
-/obj/item/weapon/gun/energy/stunrevolver/secure
+/obj/item/gun/energy/stunrevolver/secure
 	name = "smart stun revolver"
 	desc = "This A&M X6 is fitted with an NT1019 chip which allows remote authorization of weapon functionality. It has an SCG emblem on the grip."
 	icon = 'icons/obj/guns/stunrevolver_secure.dmi'
@@ -22,7 +22,7 @@
 	item_state = null
 	req_access = list(list(access_brig, access_bridge))
 
-/obj/item/weapon/gun/energy/gun/secure
+/obj/item/gun/energy/gun/secure
 	name = "smartgun"
 	desc = "A more secure LAEP90, the LAEP90-S is designed to please paranoid constituents. Body cam not included."
 	icon = 'icons/obj/guns/energy_gun_secure.dmi'
@@ -34,10 +34,10 @@
 	req_access = list(list(access_brig, access_bridge))
 	authorized_modes = list(ALWAYS_AUTHORIZED, AUTHORIZED)
 
-/obj/item/weapon/gun/energy/gun/secure/preauthorized
+/obj/item/gun/energy/gun/secure/preauthorized
 	authorized_modes = list(ALWAYS_AUTHORIZED, AUTHORIZED, AUTHORIZED)
 
-/obj/item/weapon/gun/energy/revolver/secure
+/obj/item/gun/energy/revolver/secure
 	name = "smart service revolver"
 	desc = "The LAER680-S, a standard issue service revolver commonly used by higher ranking offcers among the SCG. Fitted with an NT1019 chip which allows remote authorization of the weapon's functionality."
 	icon = 'icons/obj/guns/energy_revolver.dmi'
@@ -56,7 +56,7 @@
 	req_access = list(list(access_brig, access_heads))
 	authorized_modes = list(ALWAYS_AUTHORIZED, AUTHORIZED)
 
-/obj/item/weapon/gun/energy/gun/secure/mounted
+/obj/item/gun/energy/gun/secure/mounted
 	name = "robot energy gun"
 	desc = "A robot-mounted equivalent of the LAEP90-S, which is always registered to its owner."
 	self_recharge = 1
@@ -65,7 +65,7 @@
 	has_safety = FALSE
 	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON
 
-/obj/item/weapon/gun/energy/gun/secure/mounted/Initialize()
+/obj/item/gun/energy/gun/secure/mounted/Initialize()
 	var/mob/borg = get_holder_of_type(src, /mob/living/silicon/robot)
 	if(!borg)
 		CRASH("Invalid spawn location.")
@@ -73,7 +73,7 @@
 	GLOB.secure_weapons |= src
 	. = ..()
 
-/obj/item/weapon/gun/energy/laser/secure
+/obj/item/gun/energy/laser/secure
 	name = "laser carbine"
 	desc = "A Hephaestus Industries G40E carbine, designed to kill with concentrated energy blasts. Fitted with an NT1019 chip to make sure killcount is tracked appropriately."
 	icon_state = "lasersec"

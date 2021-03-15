@@ -1,29 +1,29 @@
-/obj/item/weapon/gun
+/obj/item/gun
 	var/general_codex_key = "guns"
 
-/obj/item/weapon/gun/projectile
+/obj/item/gun/projectile
 	general_codex_key = "ballistic weapons"
 
-/obj/item/weapon/gun/energy
+/obj/item/gun/energy
 	general_codex_key = "energy weapons"
 
-/obj/item/weapon/gun/magnetic
+/obj/item/gun/magnetic
 	general_codex_key = "magnetic weapons"
 
-/obj/item/weapon/gun/get_antag_info()
+/obj/item/gun/get_antag_info()
 	var/list/entries = SScodex.retrieve_entries_for_string(general_codex_key)
 	var/datum/codex_entry/general_entry = LAZYACCESS(entries, 1)
 	if(general_entry && general_entry.antag_text)
 		return general_entry.antag_text
 
-/obj/item/weapon/gun/get_lore_info()
+/obj/item/gun/get_lore_info()
 	var/list/entries = SScodex.retrieve_entries_for_string(general_codex_key)
 	var/datum/codex_entry/general_entry = LAZYACCESS(entries, 1)
 	. = "[desc]<br>"
 	if(general_entry && general_entry.lore_text)
 		. += general_entry.lore_text
 
-/obj/item/weapon/gun/get_mechanics_info()
+/obj/item/gun/get_mechanics_info()
 	var/list/traits = list()
 
 	var/list/entries = SScodex.retrieve_entries_for_string(general_codex_key)
@@ -48,7 +48,7 @@
 
 	return jointext(traits, "<br>")
 
-/obj/item/weapon/gun/projectile/get_mechanics_info()
+/obj/item/gun/projectile/get_mechanics_info()
 	. = ..()
 	var/list/traits = list()
 
@@ -71,7 +71,7 @@
 
 	. += jointext(traits, "<br>")
 
-/obj/item/weapon/gun/energy/get_mechanics_info()
+/obj/item/gun/energy/get_mechanics_info()
 	. = ..()
 	var/list/traits = list()
 
@@ -82,23 +82,23 @@
 
 	. += jointext(traits, "<br>")
 
-/obj/item/weapon/gun/projectile/shotgun/pump/get_mechanics_info()
+/obj/item/gun/projectile/shotgun/pump/get_mechanics_info()
 	. = ..()
 	. += "<br>To pump it, click it in hand.<br>"
 
-/obj/item/weapon/gun/energy/crossbow/get_antag_info()
+/obj/item/gun/energy/crossbow/get_antag_info()
 	. = ..()
 	. += "This is a stealthy weapon which fires poisoned bolts at your target. When it hits someone, they will suffer a stun effect, in \
 	addition to toxins. The energy crossbow recharges itself slowly, and can be concealed in your pocket or bag.<br>"
 
-/obj/item/weapon/gun/energy/chameleon/get_antag_info()
+/obj/item/gun/energy/chameleon/get_antag_info()
 	. = ..()
 	. += "This gun is actually a hologram projector that can alter its appearance to mimick other weapons. To change the appearance, use \
 	the appropriate verb in the object tab. Any beams or projectiles fired from this gun are actually holograms and useless for actual combat. \
 	Projecting these holograms over distance uses a little bit of charge.<br>"
 
 
-/obj/item/weapon/gun/magnetic/get_mechanics_info()
+/obj/item/gun/magnetic/get_mechanics_info()
 	. = ..()
 	if (removable_components)
 		. += "<p>Its cell and capacitor can be removed and replaced. You can remove the components by clicking the gun with an empty hand while it's unloaded.</p>"

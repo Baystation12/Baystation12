@@ -28,7 +28,7 @@
 /datum/computer_file/data/bodyscan
 	filetype = "BSC"
 	read_only = 1
-	papertype = /obj/item/weapon/paper/bodyscan
+	papertype = /obj/item/paper/bodyscan
 
 /datum/computer_file/data/bodyscan/generate_file_data(var/mob/user)
 	return display_medical_data(metadata, user.get_skill_value(SKILL_MEDICAL), TRUE)

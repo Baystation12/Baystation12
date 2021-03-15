@@ -47,7 +47,7 @@ var/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 
 #define ishuman(A) istype(A, /mob/living/carbon/human)
 
-#define isid(A) istype(A, /obj/item/weapon/card/id)
+#define isid(A) istype(A, /obj/item/card/id)
 
 #define isitem(A) istype(A, /obj/item)
 

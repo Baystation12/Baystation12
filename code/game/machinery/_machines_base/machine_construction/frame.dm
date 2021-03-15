@@ -19,7 +19,7 @@
 			to_chat(user, "<span class='notice'>You wrench \the [machine] into place.</span>")
 			machine.anchored = TRUE
 	if(isWelder(I))
-		var/obj/item/weapon/weldingtool/WT = I
+		var/obj/item/weldingtool/WT = I
 		if(!WT.remove_fuel(0, user))
 			to_chat(user, "The welding tool must be on to complete this task.")
 			return TRUE
@@ -86,8 +86,8 @@
 			try_change_state(machine, /decl/machine_construction/frame/unwrenched)
 
 /decl/machine_construction/frame/awaiting_circuit/attackby(obj/item/I, mob/user, obj/machinery/constructable_frame/machine)
-	if(istype(I, /obj/item/weapon/stock_parts/circuitboard))
-		var/obj/item/weapon/stock_parts/circuitboard/circuit = I
+	if(istype(I, /obj/item/stock_parts/circuitboard))
+		var/obj/item/stock_parts/circuitboard/circuit = I
 		if(circuit.board_type == machine.expected_machine_type)
 			if(!user.canUnEquip(I))
 				return FALSE

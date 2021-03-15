@@ -107,7 +107,7 @@
 		explosion(T, 2, 3, 4, 10, 1)
 		empulse(src, heavy_range*2, lighter_range*2, 1)
 		qdel(src)
-	if(istype(W, /obj/item/weapon/mop))
+	if(istype(W, /obj/item/mop))
 		to_chat(user, "<span class='notice'> You stick [W] into rotating hands. It breaks to smallest pieces.</span>")
 		qdel(W)
 
@@ -139,7 +139,7 @@
 	icon_state = "nav_light_red"
 
 
-/obj/item/weapon/book/manual/magshield_manual
+/obj/item/book/manual/magshield_manual
 	name = "SOP for Planetary Shield Orbital Station"
 	icon = 'magshield_sprites.dmi'
 	icon_state = "mg_guide"
@@ -174,10 +174,10 @@
 			</html>
 			"}
 
-/obj/item/weapon/paper/magshield/tornpage
+/obj/item/paper/magshield/tornpage
 	name = "torn book page"
 	info = "...you must carefully control radiation sensor automatics during solar flares. Sudden burst of high-energy plasma may cause positive feedback loop and increase magnetic genretors output in order of magnitude. This situation would lead to general damage of unprotected electronic devices as well as trajectory changes in nearby nickel-ferrum astero#&$"
 
-/obj/item/weapon/paper/magshield/log
+/obj/item/paper/magshield/log
 	name = "printed page"
 	info = "\[07:31\] Attention: solar flare detected! Automatic countermeasures activated.<br>\[07:33\] Warning: ERROR: NULL input at FARADAY_CAGE#12.TFI - line 2067: No command found. System will be rebooted.<br>\[07:39\] Warning: radiaton countermeasures inactive. Please initiate emergency protocol.<br>\[07:40\] Warning: radiaton countermeasures inactive. Please initiate emergency protocol.<br>\[07:41\] Warning: radiaton countermeasures inactive. Please initiate emergency protocol.<br>\[07:45\] Attention! Multiple systems failure. Please initiate emergency protocol<br>\[07:52\] Warning: LIDAR-ASTRA system detected multiple meteors approaching. Estimate impact time: 12.478 seconds. <br>\[07:52\] Warning! Miltiple hull breaches det~!!@#"

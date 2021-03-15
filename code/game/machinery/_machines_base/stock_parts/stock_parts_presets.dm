@@ -10,11 +10,11 @@ Do not work with lazy-initialized parts.
 /decl/stock_part_preset
 	var/expected_part_type
 
-/decl/stock_part_preset/proc/apply(obj/machinery/machine, obj/item/weapon/stock_parts/part)
+/decl/stock_part_preset/proc/apply(obj/machinery/machine, obj/item/stock_parts/part)
 	if(machine)
 		part.on_uninstall(machine, TRUE) // don't delete
 	do_apply(machine, part)
 	if(machine)
 		part.on_install(machine)
 
-/decl/stock_part_preset/proc/do_apply(obj/machinery/machine, obj/item/weapon/stock_parts/part)
+/decl/stock_part_preset/proc/do_apply(obj/machinery/machine, obj/item/stock_parts/part)

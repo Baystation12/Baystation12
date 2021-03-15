@@ -412,7 +412,7 @@
 				hud_open.queue_icon_update()
 				queue_icon_update()
 				return
-			else if(istype(thing, /obj/item/weapon/cell))
+			else if(istype(thing, /obj/item/cell))
 				if(!maintenance_protocols)
 					to_chat(user, SPAN_WARNING("The cell compartment remains locked while maintenance protocols are disabled."))
 					return

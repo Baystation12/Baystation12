@@ -142,10 +142,10 @@
 	r_ear = null
 	uniform = /obj/item/clothing/under/frontier
 	r_pocket = /obj/item/device/radio/map_preset/scavver
-	l_pocket = /obj/item/weapon/crowbar/prybar
+	l_pocket = /obj/item/crowbar/prybar
 	shoes = /obj/item/clothing/shoes/workboots
 	gloves = /obj/item/clothing/gloves/thick
-	belt = /obj/item/weapon/gun/energy/gun/small
+	belt = /obj/item/gun/energy/gun/small
 	hierarchy_type = /decl/hierarchy/outfit/job/scavver
 	id_types = null
 	pda_type = null
@@ -154,7 +154,7 @@
 	name = "Salvage Engineer"
 	uniform = /obj/item/clothing/under/hazard
 	r_pocket = /obj/item/device/radio/map_preset/scavver
-	l_pocket = /obj/item/weapon/crowbar/prybar
+	l_pocket = /obj/item/crowbar/prybar
 	shoes = /obj/item/clothing/shoes/workboots
 	gloves = /obj/item/clothing/gloves/thick/duty
 	glasses = /obj/item/clothing/glasses/meson
@@ -165,7 +165,7 @@
 	uniform = /obj/item/clothing/under/rank/dispatch
 	suit = /obj/item/clothing/suit/armor/pcarrier/light
 	r_pocket = /obj/item/device/radio/map_preset/scavver
-	l_pocket = /obj/item/weapon/crowbar/prybar
+	l_pocket = /obj/item/crowbar/prybar
 	shoes = /obj/item/clothing/shoes/jackboots
 	belt = null
 
@@ -173,7 +173,7 @@
 	name = "Salvage Doctor"
 	uniform = /obj/item/clothing/under/caretaker
 	r_pocket = /obj/item/device/radio/map_preset/scavver
-	l_pocket = /obj/item/weapon/crowbar/prybar
+	l_pocket = /obj/item/crowbar/prybar
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat
 	shoes = /obj/item/clothing/shoes/white
 	gloves = /obj/item/clothing/gloves/latex

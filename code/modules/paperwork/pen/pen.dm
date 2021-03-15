@@ -1,4 +1,4 @@
-/obj/item/weapon/pen
+/obj/item/pen
 	desc = "It's a normal black ink pen."
 	name = "pen"
 	icon = 'icons/obj/bureaucracy.dmi'
@@ -17,33 +17,33 @@
 	var/iscrayon = FALSE
 	var/isfancy = FALSE
 
-/obj/item/weapon/pen/blue
+/obj/item/pen/blue
 	name = "blue pen"
 	desc = "It's a normal blue ink pen."
 	icon_state = "pen_blue"
 	colour = "blue"
 	color_description = "blue ink"
 
-/obj/item/weapon/pen/red
+/obj/item/pen/red
 	name = "red pen"
 	desc = "It's a normal red ink pen."
 	icon_state = "pen_red"
 	colour = "red"
 	color_description = "red ink"
 
-/obj/item/weapon/pen/green
+/obj/item/pen/green
 	name = "green pen"
 	desc = "It's a normal green ink pen."
 	icon_state = "pen_green"
 	colour = "green"
 
-/obj/item/weapon/pen/invisible
+/obj/item/pen/invisible
 	desc = "It's an invisble pen marker."
 	icon_state = "pen"
 	colour = "white"
 	color_description = "transluscent ink"
 
-/obj/item/weapon/pen/attack(atom/A, mob/user, target_zone)
+/obj/item/pen/attack(atom/A, mob/user, target_zone)
 	if(ismob(A))
 		var/mob/M = A
 		if(ishuman(A) && user.a_intent == I_HELP && target_zone == BP_HEAD)
@@ -58,5 +58,5 @@
 		var/obj/item/organ/external/head/head = A
 		head.write_on(user, color_description)
 
-/obj/item/weapon/pen/proc/toggle()
+/obj/item/pen/proc/toggle()
 	return

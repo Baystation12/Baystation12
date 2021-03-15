@@ -33,7 +33,7 @@ obj/structure/firedoor_assembly/attackby(var/obj/item/C, var/mob/user)
 			new/obj/item/stack/cable_coil(src.loc, 1)
 			wired = 0
 
-	else if(istype(C, /obj/item/weapon/airalarm_electronics) && wired)
+	else if(istype(C, /obj/item/airalarm_electronics) && wired)
 		if(anchored)
 			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 			user.visible_message("<span class='warning'>[user] has inserted a circuit into \the [src]!</span>",
@@ -52,7 +52,7 @@ obj/structure/firedoor_assembly/attackby(var/obj/item/C, var/mob/user)
 							  "You have [anchored ? "" : "un" ]secured \the [src]!")
 		update_icon()
 	else if(!anchored && isWelder(C))
-		var/obj/item/weapon/weldingtool/WT = C
+		var/obj/item/weldingtool/WT = C
 		if(WT.remove_fuel(0, user))
 			user.visible_message("<span class='warning'>[user] dissassembles \the [src].</span>",
 			"You start to dissassemble \the [src].")

@@ -1,4 +1,4 @@
-/obj/item/weapon/storage/messenger
+/obj/item/storage/messenger
 	name = "messenger bag"
 	desc = "A small green-grey messenger bag with a blue Corvid Couriers logo on it."
 	icon = 'icons/mob/simple_animal/crow.dmi'
@@ -32,8 +32,8 @@
 	universal_speak = TRUE
 	pass_flags = PASS_FLAG_TABLE
 
-	var/obj/item/weapon/storage/messenger/messenger_bag
-	var/obj/item/weapon/card/id/access_card
+	var/obj/item/storage/messenger/messenger_bag
+	var/obj/item/card/id/access_card
 
 /obj/item/natural_weapon/crow_claws
 	name = "claws"
@@ -100,10 +100,10 @@
 		switch(href_list["add_inv"])
 			if("access cuff")
 				equipped = access_card
-				checktype = /obj/item/weapon/card/id
+				checktype = /obj/item/card/id
 			if("back")
 				equipped = messenger_bag
-				checktype = /obj/item/weapon/storage/messenger
+				checktype = /obj/item/storage/messenger
 		if(equipped)
 			to_chat(user, "<span class='warning'>There is already something worn on \the [src]'s [href_list["add_inv"]].</span>")
 			return TOPIC_HANDLED

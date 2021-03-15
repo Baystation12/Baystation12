@@ -5,7 +5,7 @@
 	icon_state = "empty"
 	density = 0
 	anchored = 1
-	var/obj/item/weapon/nuclear_cylinder/cylinder
+	var/obj/item/nuclear_cylinder/cylinder
 	var/armed = 0
 	var/damaged = 0
 
@@ -14,14 +14,14 @@
 		if(damaged)
 			user.visible_message("[user] begins to repair [src].", "You begin repairing [src].")
 			if(do_after(usr, 100, src))
-				var/obj/item/weapon/weldingtool/w
+				var/obj/item/weldingtool/w
 				if(w.burn_fuel(10))
 					damaged = 0
 					user.visible_message("[user] repairs [src].", "You repair [src].")
 				else
 					to_chat(user, "<span class='warning'>There is not enough fuel to repair [src].</span>")
 				return
-	if(istype(W, /obj/item/weapon/nuclear_cylinder))
+	if(istype(W, /obj/item/nuclear_cylinder))
 		if(damaged)
 			to_chat(user, "<span class='warning'>[src] is damaged, you cannot place the cylinder.</span>")
 			return

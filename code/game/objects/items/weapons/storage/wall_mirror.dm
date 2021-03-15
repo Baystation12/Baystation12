@@ -1,5 +1,5 @@
 //wip wip wup
-/obj/item/weapon/storage/mirror
+/obj/item/storage/mirror
 	name = "mirror"
 	desc = "A SalonPro Nano-Mirror(TM) mirror! The leading brand in hair salon products, utilizing nano-machinery to style your hair just right. The black box inside warns against attempting to release the nanomachines."
 	icon = 'icons/obj/watercloset.dmi'
@@ -13,36 +13,36 @@
 	var/list/ui_users
 
 	startswith = list(
-		/obj/item/weapon/haircomb/random,
-		/obj/item/weapon/haircomb/brush,
+		/obj/item/haircomb/random,
+		/obj/item/haircomb/brush,
 		/obj/random/medical/lite,
-		/obj/item/weapon/lipstick/random,
+		/obj/item/lipstick/random,
 		/obj/random/soap,
-		/obj/item/weapon/reagent_containers/spray/cleaner/deodorant,
-		/obj/item/weapon/towel/random)
+		/obj/item/reagent_containers/spray/cleaner/deodorant,
+		/obj/item/towel/random)
 
-/obj/item/weapon/storage/mirror/MouseDrop(obj/over_object as obj)
+/obj/item/storage/mirror/MouseDrop(obj/over_object as obj)
 	if(!(. = ..()))
 		return
 	flick("mirror_open",src)
 
-/obj/item/weapon/storage/mirror/attack_hand(var/mob/living/carbon/human/user)
+/obj/item/storage/mirror/attack_hand(var/mob/living/carbon/human/user)
 	use_mirror(user)
 
-/obj/item/weapon/storage/mirror/proc/use_mirror(var/mob/living/carbon/human/user)
+/obj/item/storage/mirror/proc/use_mirror(var/mob/living/carbon/human/user)
 	if(shattered)
 		to_chat(user, "<spawn class='notice'>You enter the key combination for the style you want on the panel, but the nanomachines inside \the [src] refuse to come out.")
 		return
 	open_mirror_ui(user, ui_users, "SalonPro Nano-Mirror&trade;", mirror = src)
 
-/obj/item/weapon/storage/mirror/proc/shatter()
+/obj/item/storage/mirror/proc/shatter()
 	if(shattered)	return
 	shattered = 1
 	icon_state = "mirror_broke"
 	playsound(src, "shatter", 70, 1)
 	desc = "Oh no, seven years of bad luck!"
 
-/obj/item/weapon/storage/mirror/bullet_act(var/obj/item/projectile/Proj)
+/obj/item/storage/mirror/bullet_act(var/obj/item/projectile/Proj)
 
 	if(prob(Proj.get_structure_damage() * 2))
 		if(!shattered)
@@ -51,7 +51,7 @@
 			playsound(src, 'sound/effects/hit_on_shattered_glass.ogg', 70, 1)
 	..()
 
-/obj/item/weapon/storage/mirror/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/storage/mirror/attackby(obj/item/W as obj, mob/user as mob)
 	if(!(. = ..()))
 		return
 	flick("mirror_open",src)
@@ -60,21 +60,21 @@
 		if(!shattered)
 			shatter()
 
-/obj/item/weapon/storage/mirror/Destroy()
+/obj/item/storage/mirror/Destroy()
 	clear_ui_users(ui_users)
 	. = ..()
 
-/obj/item/weapon/mirror
+/obj/item/mirror
 	name = "mirror"
 	desc = "A SalonPro Nano-Mirror(TM) brand mirror! Now a portable version."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "mirror"
 	var/list/ui_users
 
-/obj/item/weapon/mirror/attack_self(mob/user as mob)
+/obj/item/mirror/attack_self(mob/user as mob)
 	open_mirror_ui(user, ui_users, "SalonPro Nano-Mirror&trade;", APPEARANCE_HAIR, src)
 
-/obj/item/weapon/mirror/Destroy()
+/obj/item/mirror/Destroy()
 	clear_ui_users(ui_users)
 	. = ..()
 

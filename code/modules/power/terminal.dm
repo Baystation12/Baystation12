@@ -9,7 +9,7 @@
 	desc = "It's an underfloor wiring terminal for power equipment."
 	level = 1
 	layer = EXPOSED_WIRE_TERMINAL_LAYER
-	var/obj/item/weapon/stock_parts/power/terminal/master
+	var/obj/item/stock_parts/power/terminal/master
 	anchored = 1
 
 /obj/machinery/power/terminal/New()

@@ -9,7 +9,7 @@
 	desc = "A DIY modular assembly, courtesy of Xion Industrial. Circuitry not included"
 
 
-/obj/item/organ/internal/augment/active/simple/circuit/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/organ/internal/augment/active/simple/circuit/attackby(obj/item/W as obj, mob/user as mob)
 	if(isCrowbar(W))
 		//Remove internal circuit
 		if(holding)

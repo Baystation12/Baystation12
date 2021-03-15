@@ -34,7 +34,7 @@
 		computer.delete_file(href_list["PRG_deletefile"])
 	if(href_list["PRG_usbdeletefile"])
 		. = 1
-		var/obj/item/weapon/stock_parts/computer/hard_drive/RHDD = computer.get_component(PART_DRIVE)
+		var/obj/item/stock_parts/computer/hard_drive/RHDD = computer.get_component(PART_DRIVE)
 		computer.delete_file(href_list["PRG_usbdeletefile"], RHDD)
 
 	if(href_list["PRG_closefile"])
@@ -128,7 +128,7 @@
 					"undeletable" = F.undeletable
 				)))
 			data["files"] = files
-			var/obj/item/weapon/stock_parts/computer/hard_drive/portable/RHDD = PRG.computer.get_component(PART_DRIVE)
+			var/obj/item/stock_parts/computer/hard_drive/portable/RHDD = PRG.computer.get_component(PART_DRIVE)
 			if(RHDD)
 				data["usbconnected"] = 1
 				var/list/usbfiles[0]

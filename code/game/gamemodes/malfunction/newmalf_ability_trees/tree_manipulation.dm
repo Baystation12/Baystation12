@@ -129,7 +129,7 @@
 			return
 		else if (istype(N, /obj/machinery/power/apc)) // APC. Explosion is increased by available cell power.
 			var/obj/machinery/power/apc/A = N
-			var/obj/item/weapon/cell/cell = A.get_cell()
+			var/obj/item/cell/cell = A.get_cell()
 			if(cell && cell.charge)
 				explosion_intensity = 4 + round((cell.charge / CELLRATE) / 100000)
 			else

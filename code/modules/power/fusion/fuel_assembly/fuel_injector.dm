@@ -15,7 +15,7 @@
 	var/fuel_usage = 0.001
 	var/initial_id_tag
 	var/injecting = 0
-	var/obj/item/weapon/fuel_assembly/cur_assembly
+	var/obj/item/fuel_assembly/cur_assembly
 	var/injection_rate = 1
 
 /obj/machinery/fusion_fuel_injector/Initialize()
@@ -48,7 +48,7 @@
 		lanm.set_tag(null, initial_id_tag)
 		return
 
-	if(istype(W, /obj/item/weapon/fuel_assembly))
+	if(istype(W, /obj/item/fuel_assembly))
 
 		if(injecting)
 			to_chat(user, "<span class='warning'>Shut \the [src] off before playing with the fuel rod!</span>")

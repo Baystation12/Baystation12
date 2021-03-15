@@ -17,7 +17,7 @@
 	var/list/upgrade_chemicals = list("Kelotane" = /datum/reagent/kelotane)
 	var/list/upgrade2_chemicals = list("Hyronalin" = /datum/reagent/hyronalin)
 	var/list/antag_chemicals = list("Hair Remover" = /datum/reagent/toxin/hair_remover, "Chloral Hydrate" = /datum/reagent/chloralhydrate)
-	var/obj/item/weapon/reagent_containers/glass/beaker = null
+	var/obj/item/reagent_containers/glass/beaker = null
 	var/filtering = 0
 	var/pump
 	var/list/stasis_settings = list(1, 2, 5, 10)
@@ -32,7 +32,7 @@
 /obj/machinery/sleeper/Initialize(mapload, d = 0, populate_parts = TRUE)
 	. = ..()
 	if(populate_parts)
-		beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large(src)
+		beaker = new /obj/item/reagent_containers/glass/beaker/large(src)
 	update_icon()
 
 /obj/machinery/sleeper/examine(mob/user, distance)
@@ -167,7 +167,7 @@
 		go_out()
 
 /obj/machinery/sleeper/attackby(var/obj/item/I, var/mob/user)
-	if(istype(I, /obj/item/weapon/reagent_containers/glass))
+	if(istype(I, /obj/item/reagent_containers/glass))
 		add_fingerprint(user)
 		if(!beaker)
 			if(!user.unEquip(I, src))
@@ -304,12 +304,12 @@
 
 /obj/machinery/sleeper/RefreshParts()
 	..()
-	var/T = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/scanning_module), 1, 10)
+	var/T = Clamp(total_component_rating_of_type(/obj/item/stock_parts/scanning_module), 1, 10)
 	T = max(T,1)
 	synth_modifier = 1/T
 	pump_speed = 2 + T
 
-	T = total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator)
+	T = total_component_rating_of_type(/obj/item/stock_parts/manipulator)
 	available_chemicals = base_chemicals.Copy()
 	if (T >= 4)
 		available_chemicals |= upgrade_chemicals

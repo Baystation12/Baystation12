@@ -15,7 +15,7 @@
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "ah" = (
-/obj/item/weapon/ore/slag,
+/obj/item/ore/slag,
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "ai" = (
@@ -54,7 +54,7 @@
 	pixel_y = 0
 	},
 /obj/structure/table/steel_reinforced,
-/obj/item/weapon/storage/box/ammo/flashshells,
+/obj/item/storage/box/ammo/flashshells,
 /obj/effect/floor_decal/corner/red{
 	dir = 9
 	},
@@ -84,10 +84,10 @@
 /area/icarus/vessel)
 "aY" = (
 /obj/structure/table/rack,
-/obj/item/weapon/airlock_brace,
-/obj/item/weapon/airlock_brace,
-/obj/item/weapon/airlock_brace,
-/obj/item/weapon/crowbar/brace_jack,
+/obj/item/airlock_brace,
+/obj/item/airlock_brace,
+/obj/item/airlock_brace,
+/obj/item/crowbar/brace_jack,
 /turf/simulated/floor/tiled/dark,
 /area/icarus/vessel)
 "aZ" = (
@@ -115,12 +115,12 @@
 /area/icarus/vessel)
 "bi" = (
 /obj/structure/table/rack,
-/obj/item/weapon/storage/box/teargas{
+/obj/item/storage/box/teargas{
 	pixel_x = 3;
 	pixel_y = 2
 	},
-/obj/item/weapon/storage/box/handcuffs,
-/obj/item/weapon/storage/box/flashbangs{
+/obj/item/storage/box/handcuffs,
+/obj/item/storage/box/flashbangs{
 	pixel_x = -2;
 	pixel_y = -2
 	},
@@ -128,8 +128,8 @@
 /area/icarus/vessel)
 "bj" = (
 /obj/structure/table/rack,
-/obj/item/weapon/gun/projectile/shotgun/pump,
-/obj/item/weapon/gun/projectile/shotgun/pump,
+/obj/item/gun/projectile/shotgun/pump,
+/obj/item/gun/projectile/shotgun/pump,
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "bk" = (
@@ -161,13 +161,13 @@
 /area/icarus/vessel)
 "bq" = (
 /obj/structure/table/rack,
-/obj/item/weapon/melee/baton,
-/obj/item/weapon/melee/baton,
+/obj/item/melee/baton,
+/obj/item/melee/baton,
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "br" = (
 /obj/structure/table/rack,
-/obj/item/weapon/handcuffs,
+/obj/item/handcuffs,
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "bs" = (
@@ -208,12 +208,12 @@
 /area/icarus/vessel)
 "bN" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/weapon/handcuffs,
+/obj/item/handcuffs,
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "bO" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/weapon/material/harpoon,
+/obj/item/material/harpoon,
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "bP" = (
@@ -221,7 +221,7 @@
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "bT" = (
-/obj/item/weapon/ore/slag,
+/obj/item/ore/slag,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/dark,
 /area/icarus/vessel)
@@ -811,7 +811,7 @@
 "fH" = (
 /obj/structure/table/standard,
 /obj/machinery/reagentgrinder/juicer,
-/obj/item/weapon/reagent_containers/glass/beaker/large,
+/obj/item/reagent_containers/glass/beaker/large,
 /obj/effect/floor_decal/corner/research{
 	dir = 5;
 	icon_state = "corner_white"
@@ -857,8 +857,8 @@
 /area/icarus/vessel)
 "gJ" = (
 /obj/structure/closet,
-/obj/item/weapon/reagent_containers/food/drinks/bottle/tequilla,
-/obj/item/weapon/reagent_containers/food/drinks/bottle/wine,
+/obj/item/reagent_containers/food/drinks/bottle/tequilla,
+/obj/item/reagent_containers/food/drinks/bottle/wine,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
 	level = 2
@@ -959,7 +959,7 @@
 /area/icarus/vessel)
 "kr" = (
 /obj/machinery/computer/modular,
-/obj/item/weapon/paper/icarus/log,
+/obj/item/paper/icarus/log,
 /turf/simulated/floor/lino,
 /area/icarus/vessel)
 "kY" = (
@@ -1010,7 +1010,7 @@
 	icon_state = "alarm0";
 	pixel_x = 24
 	},
-/obj/item/weapon/storage/toolbox/emergency,
+/obj/item/storage/toolbox/emergency,
 /turf/simulated/floor/tiled/dark,
 /area/icarus/vessel)
 "lZ" = (
@@ -1037,7 +1037,7 @@
 /area/icarus/vessel)
 "mk" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/weapon/storage/box/trackimp,
+/obj/item/storage/box/trackimp,
 /turf/simulated/floor/tiled/dark,
 /area/icarus/vessel)
 "mm" = (
@@ -1052,7 +1052,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "mA" = (
-/obj/item/weapon/ore/slag,
+/obj/item/ore/slag,
 /obj/structure/wall_frame/hull,
 /turf/simulated/floor/tiled/dark,
 /area/icarus/vessel)
@@ -1175,7 +1175,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "pq" = (
-/obj/item/weapon/ore/slag,
+/obj/item/ore/slag,
 /obj/structure/wall_frame/hull,
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
@@ -1255,7 +1255,7 @@
 /turf/simulated/floor/wood,
 /area/icarus/vessel)
 "rN" = (
-/obj/item/weapon/stool,
+/obj/item/stool,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -1297,8 +1297,8 @@
 /area/icarus/vessel)
 "tD" = (
 /obj/structure/closet,
-/obj/item/weapon/storage/backpack/industrial,
-/obj/item/weapon/storage/toolbox/electrical,
+/obj/item/storage/backpack/industrial,
+/obj/item/storage/toolbox/electrical,
 /obj/effect/floor_decal/corner/yellow{
 	dir = 5;
 	icon_state = "corner_white"
@@ -1324,7 +1324,7 @@
 /area/icarus/vessel)
 "uf" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/weapon/reagent_containers/spray/pepper,
+/obj/item/reagent_containers/spray/pepper,
 /obj/effect/floor_decal/corner/red{
 	dir = 10
 	},
@@ -1414,7 +1414,7 @@
 /area/icarus/vessel)
 "wd" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/weapon/storage/box/PDAs,
+/obj/item/storage/box/PDAs,
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/tiled/dark,
 /area/icarus/vessel)
@@ -1466,7 +1466,7 @@
 /area/icarus/vessel)
 "xP" = (
 /obj/structure/bed,
-/obj/item/weapon/bedsheet/captain,
+/obj/item/bedsheet/captain,
 /turf/simulated/floor/wood,
 /area/icarus/vessel)
 "yd" = (
@@ -1537,9 +1537,9 @@
 /area/icarus/vessel)
 "zS" = (
 /obj/structure/closet,
-/obj/item/weapon/gun/projectile/shotgun/pump,
-/obj/item/weapon/reagent_containers/spray/pepper,
-/obj/item/weapon/storage/box/handcuffs,
+/obj/item/gun/projectile/shotgun/pump,
+/obj/item/reagent_containers/spray/pepper,
+/obj/item/storage/box/handcuffs,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
@@ -1575,7 +1575,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/icarus/vessel)
 "Be" = (
-/obj/item/weapon/disk/secret_project/science,
+/obj/item/disk/secret_project/science,
 /obj/effect/floor_decal/corner/research{
 	dir = 6;
 	icon_state = "corner_white"
@@ -1744,7 +1744,7 @@
 /area/icarus/vessel)
 "EV" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/reagent_containers/food/drinks/bottle/whiskey,
+/obj/item/reagent_containers/food/drinks/bottle/whiskey,
 /turf/simulated/floor/wood,
 /area/icarus/vessel)
 "Fh" = (
@@ -1767,8 +1767,8 @@
 /area/icarus/vessel)
 "Fs" = (
 /obj/structure/closet,
-/obj/item/weapon/storage/backpack/industrial,
-/obj/item/weapon/storage/toolbox/mechanical,
+/obj/item/storage/backpack/industrial,
+/obj/item/storage/toolbox/mechanical,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/effect/floor_decal/corner/yellow{
 	dir = 5;
@@ -1782,7 +1782,7 @@
 /area/icarus/vessel)
 "Fu" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/storage/backpack/captain,
+/obj/item/storage/backpack/captain,
 /obj/machinery/alarm{
 	alarm_id = "xenobio3_alarm";
 	dir = 8;
@@ -1821,8 +1821,8 @@
 /area/icarus/vessel)
 "GD" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/paper/icarus/crew_roster,
-/obj/item/weapon/folder/blue,
+/obj/item/paper/icarus/crew_roster,
+/obj/item/folder/blue,
 /turf/simulated/floor/wood,
 /area/icarus/vessel)
 "GK" = (
@@ -1848,7 +1848,7 @@
 /area/icarus/vessel)
 "HK" = (
 /obj/structure/closet,
-/obj/item/weapon/reagent_containers/food/drinks/flask/shiny,
+/obj/item/reagent_containers/food/drinks/flask/shiny,
 /turf/simulated/floor/wood,
 /area/icarus/vessel)
 "Ig" = (
@@ -1887,7 +1887,7 @@
 /area/icarus/vessel)
 "JC" = (
 /obj/structure/closet,
-/obj/item/weapon/reagent_containers/food/drinks/golden_cup,
+/obj/item/reagent_containers/food/drinks/golden_cup,
 /turf/simulated/floor/wood,
 /area/icarus/vessel)
 "JQ" = (
@@ -2152,7 +2152,7 @@
 /area/icarus/vessel)
 "PS" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/weapon/storage/box/fingerprints,
+/obj/item/storage/box/fingerprints,
 /obj/effect/floor_decal/corner/red{
 	dir = 9
 	},
@@ -2211,7 +2211,7 @@
 	dir = 1
 	},
 /obj/structure/table/standard,
-/obj/item/weapon/storage/box/monkeycubes,
+/obj/item/storage/box/monkeycubes,
 /obj/effect/floor_decal/corner/research{
 	dir = 5;
 	icon_state = "corner_white"
@@ -2225,7 +2225,7 @@
 "RD" = (
 /obj/structure/closet,
 /obj/item/clothing/suit/storage/toggle/labcoat/blue,
-/obj/item/weapon/disk/survey,
+/obj/item/disk/survey,
 /obj/effect/floor_decal/corner/research{
 	dir = 5;
 	icon_state = "corner_white"
@@ -2264,7 +2264,7 @@
 /area/icarus/vessel)
 "Sg" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/weapon/storage/box/survival,
+/obj/item/storage/box/survival,
 /turf/simulated/floor/tiled/dark,
 /area/icarus/vessel)
 "Sk" = (
@@ -2279,7 +2279,7 @@
 /area/icarus/vessel)
 "SA" = (
 /obj/structure/table/standard,
-/obj/item/weapon/storage/box/beakers,
+/obj/item/storage/box/beakers,
 /obj/effect/floor_decal/corner/research{
 	dir = 5;
 	icon_state = "corner_white"
@@ -2305,7 +2305,7 @@
 /area/icarus/vessel)
 "Tr" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/weapon/storage/fancy/cigarettes/killthroat,
+/obj/item/storage/fancy/cigarettes/killthroat,
 /turf/simulated/floor/tiled/dark,
 /area/icarus/vessel)
 "Tu" = (
@@ -2336,7 +2336,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "TM" = (
-/obj/item/weapon/stool,
+/obj/item/stool,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
@@ -2464,7 +2464,7 @@
 /area/icarus/vessel)
 "VX" = (
 /obj/machinery/computer/modular,
-/obj/item/weapon/disk/icarus,
+/obj/item/disk/icarus,
 /turf/simulated/floor/tiled/dark,
 /area/icarus/vessel)
 "Wn" = (

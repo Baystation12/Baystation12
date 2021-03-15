@@ -25,8 +25,8 @@
 	core_skill = SKILL_ENGINES
 
 	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/radio/receiver,
-		/obj/item/weapon/stock_parts/power/apc
+		/obj/item/stock_parts/radio/receiver,
+		/obj/item/stock_parts/power/apc
 	)
 	public_variables = list(
 		/decl/public_access/public_variable/emitter_active,
@@ -215,7 +215,7 @@
 		return
 
 	if (isWelder(W))
-		var/obj/item/weapon/weldingtool/WT = W
+		var/obj/item/weldingtool/WT = W
 		if (active)
 			to_chat(user, SPAN_WARNING("Turn \the [src] off first."))
 			return
@@ -266,7 +266,7 @@
 					to_chat(user, SPAN_WARNING("You need more welding fuel to complete this task."))
 		return
 
-	if (istype(W, /obj/item/weapon/card/id) || istype(W, /obj/item/modular_computer))
+	if (istype(W, /obj/item/card/id) || istype(W, /obj/item/modular_computer))
 		if (emagged)
 			to_chat(user, SPAN_WARNING("The control lock seems to be broken."))
 			return

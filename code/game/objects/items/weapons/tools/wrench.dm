@@ -1,4 +1,4 @@
-/obj/item/weapon/wrench
+/obj/item/wrench
 	name = "wrench"
 	desc = "A good, durable combination wrench, with self-adjusting, universal open- and ring-end mechanisms to match a wide variety of nuts and bolts."
 	icon = 'icons/obj/tools.dmi'
@@ -14,6 +14,6 @@
 	center_of_mass = "x=17;y=16"
 	attack_verb = list("bashed", "battered", "bludgeoned", "whacked")
 
-/obj/item/weapon/wrench/Initialize()
+/obj/item/wrench/Initialize()
 	icon_state = "wrench[pick("","_red","_black","_green","_blue")]"
 	. = ..()

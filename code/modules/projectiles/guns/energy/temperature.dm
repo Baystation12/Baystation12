@@ -1,4 +1,4 @@
-/obj/item/weapon/gun/energy/temperature
+/obj/item/gun/energy/temperature
 	name = "temperature gun"
 	icon = 'icons/obj/guns/freezegun.dmi'
 	icon_state = "freezegun"
@@ -14,21 +14,21 @@
 	wielded_item_state = "gun_wielded"
 
 	projectile_type = /obj/item/projectile/temp
-	cell_type = /obj/item/weapon/cell/high
+	cell_type = /obj/item/cell/high
 	combustion = 0
 
 
-/obj/item/weapon/gun/energy/temperature/Initialize()
+/obj/item/gun/energy/temperature/Initialize()
 	. = ..()
 	START_PROCESSING(SSobj, src)
 
 
-/obj/item/weapon/gun/energy/temperature/Destroy()
+/obj/item/gun/energy/temperature/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
 
-/obj/item/weapon/gun/energy/temperature/attack_self(mob/living/user as mob)
+/obj/item/gun/energy/temperature/attack_self(mob/living/user as mob)
 	user.set_machine(src)
 	var/temp_text = ""
 	if(firing_temperature > (T0C - 50))
@@ -44,10 +44,10 @@
 	show_browser(user, dat, "window=freezegun;size=450x300;can_resize=1;can_close=1;can_minimize=1")
 	onclose(user, "window=freezegun", src)
 
-/obj/item/weapon/gun/energy/temperature/Topic(user, href_list, state = GLOB.inventory_state)
+/obj/item/gun/energy/temperature/Topic(user, href_list, state = GLOB.inventory_state)
 	..()
 
-/obj/item/weapon/gun/energy/temperature/OnTopic(user, href_list)
+/obj/item/gun/energy/temperature/OnTopic(user, href_list)
 	if(href_list["temp"])
 		var/amount = text2num(href_list["temp"])
 		if(amount > 0)
@@ -58,7 +58,7 @@
 
 		attack_self(user)
 
-/obj/item/weapon/gun/energy/temperature/Process()
+/obj/item/gun/energy/temperature/Process()
 	switch(firing_temperature)
 		if(0 to 100) charge_cost = 100
 		if(100 to 250) charge_cost = 50

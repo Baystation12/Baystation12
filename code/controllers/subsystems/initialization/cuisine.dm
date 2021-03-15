@@ -6,8 +6,8 @@ SUBSYSTEM_DEF(cuisine)
 	var/list/microwave_recipes = list()
 	var/list/microwave_accepts_reagents = list()
 	var/list/microwave_accepts_items = list(
-		/obj/item/weapon/holder,
-		/obj/item/weapon/reagent_containers/food/snacks/grown
+		/obj/item/holder,
+		/obj/item/reagent_containers/food/snacks/grown
 	)
 
 /datum/controller/subsystem/cuisine/Initialize()

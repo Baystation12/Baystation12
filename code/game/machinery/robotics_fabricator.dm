@@ -60,12 +60,12 @@
 	..()
 
 /obj/machinery/robotics_fabricator/RefreshParts()
-	res_max_amount = 100000 * total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin)
+	res_max_amount = 100000 * total_component_rating_of_type(/obj/item/stock_parts/matter_bin)
 
-	var/T = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator), 0, 4)
+	var/T = Clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator), 0, 4)
 	mat_efficiency = 1 - (T - 1) / 4 // 1 -> 0.5
 
-	T += total_component_rating_of_type(/obj/item/weapon/stock_parts/micro_laser)// Not resetting T is intended; speed is affected by both
+	T += total_component_rating_of_type(/obj/item/stock_parts/micro_laser)// Not resetting T is intended; speed is affected by both
 	speed = T / 2 // 1 -> 3
 
 /obj/machinery/robotics_fabricator/interface_interact(var/mob/user)

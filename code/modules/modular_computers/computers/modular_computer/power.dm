@@ -37,7 +37,7 @@
 // Handles power-related things, such as battery interaction, recharging, shutdown when it's discharged
 /obj/item/modular_computer/proc/calculate_power_usage()
 	var/power_usage = screen_on ? base_active_power_usage : base_idle_power_usage
-	for(var/obj/item/weapon/stock_parts/computer/H in get_all_components())
+	for(var/obj/item/stock_parts/computer/H in get_all_components())
 		if(H.enabled)
 			power_usage += H.power_usage
 

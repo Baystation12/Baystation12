@@ -67,7 +67,7 @@
 		return TRUE
 
 /obj/machinery/light_switch/attackby(obj/item/tool as obj, mob/user as mob)
-	if(istype(tool, /obj/item/weapon/screwdriver))
+	if(istype(tool, /obj/item/screwdriver))
 		new /obj/item/frame/light_switch(user.loc, 1)
 		qdel(src)
 

@@ -75,7 +75,7 @@
 	icon_state = "dead_personnel"
 	w_class = ITEM_SIZE_LARGE//pile of bones
 
-/obj/item/weapon/disk/icarus
+/obj/item/disk/icarus
 	name = "black box backup disk"
 	desc = "Digital storage. Inscription says: \"Deliver to Sol Goverment Expeditionary Corps Command!\". Content is encrypted with quantum crypthography methods."
 	icon = 'icons/obj/items.dmi'
@@ -83,7 +83,7 @@
 	item_state = "card-id"
 	w_class = ITEM_SIZE_TINY
 
-/obj/item/weapon/paper/icarus/log
+/obj/item/paper/icarus/log
 	name = "Printed piece of paper"
 	info = "\[LOG\]: Orbit stabilized. Next correction burst, est.: 2 hrs 12 m<br>\
 			\[LOG\]: Orbit stabiliztion. Announcing...<br>\
@@ -115,7 +115,7 @@
 			\[LOG\]: Now you can you safely turn off your computer.<br>"
 
 
-/obj/item/weapon/paper/icarus/crew_roster
+/obj/item/paper/icarus/crew_roster
 	name = "Printed piece of paper"
 	info = "<center>\[solcrest]<BR>\
 			<b>SEV Icarus</b><br>\
