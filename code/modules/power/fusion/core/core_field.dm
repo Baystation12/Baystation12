@@ -121,7 +121,7 @@
 					light_color = COLOR_BLUE
 					alpha = 200
 
-	if (last_range != use_range || last_power != use_power)
+	if (last_range != use_range || last_power != use_power || color != light_color)
 		color = light_color
 		set_light(min(use_power, 1), use_range / 6, use_range) //cap first arg at 1 to avoid breaking lighting stuff.
 		last_range = use_range
