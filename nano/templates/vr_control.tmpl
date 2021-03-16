@@ -1,12 +1,28 @@
+{{if data.active_template}}
+    <b>Loaded template:</b> {{:data.active_template}}
+{{else}}
+    <span class='average'><i>No VR template loaded.</i></span>
+{{/if}}
 <h3><u>Connected occupants</u></h3>
 <table>
 {{for data.occupants}}
     <tr>
-    <td>{{:value.name}}&nbsp&nbsp
     <td>{{:helper.link("Message", null, {'msg_occupant': value.mob_ref})}}
+    <td>{{:value.name}}
 {{empty}}
     <tr>
     <td>None.
 {{/for}}
 </table>
 {{:helper.link("Message all occupants", 'signal-diag', {'msg_all_occupants' : 1})}}
+<h3><u>Available templates</u></h3>
+<table>
+{{for data.templates}}
+    <tr>
+    <td>{{:helper.link("Load", null, {'load_template': value.name})}}
+    <td>{{:value.name}}
+{{empty}}
+    <tr>
+    <td>None.
+{{/for}}
+</table>

@@ -1,0 +1,66 @@
+"a" = (/turf/unsimulated/wall{desc = "This is as far as the simulated area goes out."},/area/virtual_reality/infirmary)
+"b" = (/obj/machinery/atmospherics/unary/freezer{icon_state = "freezer"; set_temperature = 80; use_power = 1},/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"c" = (/obj/effect/floor_decal/corner/paleblue{dir = 5},/obj/machinery/atmospherics/pipe/simple/hidden{dir = 5; icon_state = "intact"},/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"d" = (/turf/simulated/wall/r_wall/prepainted,/area/virtual_reality/infirmary)
+"e" = (/obj/machinery/computer/modular/preset/vr_control{dir = 8},/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"f" = (/obj/structure/table/reinforced,/obj/machinery/reagent_temperature/cooler,/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"g" = (/obj/effect/floor_decal/corner/paleblue/full,/obj/structure/table/reinforced,/obj/item/reagent_containers/glass/beaker/cryoxadone,/obj/item/reagent_containers/glass/beaker/cryoxadone,/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"h" = (/obj/machinery/atmospherics/pipe/simple/hidden{dir = 4},/turf/unsimulated/wall{desc = "This is as far as the simulated area goes out."},/area/virtual_reality/infirmary)
+"i" = (/obj/effect/floor_decal/corner/paleblue/full,/obj/structure/table/reinforced,/obj/item/storage/firstaid/surgery,/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"j" = (/obj/effect/floor_decal/corner/paleblue/three_quarters{dir = 8; icon_state = "corner_white_three_quarters"},/obj/structure/table/reinforced,/obj/item/reagent_containers/glass/beaker/large,/obj/item/reagent_containers/glass/beaker/large,/obj/item/reagent_containers/glass/beaker/large,/obj/item/reagent_containers/glass/beaker/large,/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"k" = (/obj/effect/floor_decal/corner/paleblue/three_quarters{dir = 1},/obj/structure/table/reinforced,/obj/item/storage/firstaid/adv,/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"l" = (/obj/effect/floor_decal/corner/paleblue{dir = 5},/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"m" = (/obj/effect/floor_decal/corner/paleblue/full,/obj/machinery/vitals_monitor,/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"n" = (/obj/effect/floor_decal/spline/plain/blue{dir = 4; icon_state = "spline_plain"},/obj/structure/bed/roller,/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"o" = (/obj/effect/floor_decal/corner/paleblue{dir = 5},/obj/machinery/atmospherics/pipe/simple/hidden{dir = 4; icon_state = "intact"},/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"p" = (/obj/effect/floor_decal/corner/pink/mono,/obj/machinery/body_scanconsole{dir = 1},/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"q" = (/obj/effect/floor_decal/corner/paleblue{dir = 6},/obj/machinery/chemical_dispenser/full,/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"r" = (/obj/effect/floor_decal/corner/paleblue/full,/obj/structure/table/reinforced,/obj/item/storage/box/syringes,/obj/item/storage/box/syringes,/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"s" = (/obj/effect/floor_decal/corner/paleblue{dir = 6},/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"t" = (/obj/effect/floor_decal/corner/paleblue{dir = 9},/obj/machinery/chem_master,/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"u" = (/obj/effect/floor_decal/corner/paleblue/mono,/obj/machinery/atmospherics/unary/cryo_cell,/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"v" = (/obj/effect/floor_decal/corner/paleblue/three_quarters{dir = 8; icon_state = "corner_white_three_quarters"},/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"w" = (/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"x" = (/obj/effect/floor_decal/corner/paleblue/full,/obj/structure/table/reinforced,/obj/item/reagent_containers/ivbag/nanoblood,/obj/item/reagent_containers/ivbag/nanoblood,/obj/item/reagent_containers/ivbag/nanoblood,/obj/item/reagent_containers/ivbag/nanoblood,/obj/item/reagent_containers/ivbag/nanoblood,/obj/item/reagent_containers/ivbag/nanoblood,/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"y" = (/obj/effect/floor_decal/corner/pink/mono,/obj/machinery/bodyscanner{dir = 1; icon_state = "body_scanner_0"},/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"z" = (/obj/effect/floor_decal/spline/plain/blue{dir = 9; icon_state = "spline_plain"},/obj/structure/bed/roller,/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"A" = (/turf/space,/area/space)
+"B" = (/obj/effect/floor_decal/corner/paleblue/full,/obj/structure/table/reinforced,/obj/item/storage/box/beakers,/obj/item/storage/box/beakers,/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"C" = (/obj/effect/floor_decal/corner/paleblue{dir = 6},/obj/effect/landmark{name = "vr entrance"},/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"D" = (/obj/machinery/atmospherics/portables_connector{dir = 1},/obj/machinery/portable_atmospherics/canister/oxygen/prechilled,/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"E" = (/obj/machinery/atmospherics/pipe/manifold/hidden{dir = 4; icon_state = "map"},/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"G" = (/obj/effect/floor_decal/corner/paleblue{dir = 10},/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"H" = (/obj/machinery/sleeper{dir = 4},/obj/effect/floor_decal/corner/paleblue/mono,/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"I" = (/obj/effect/floor_decal/spline/plain/blue{dir = 5; icon_state = "spline_plain"},/obj/structure/bed/roller,/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"J" = (/obj/structure/table/reinforced,/obj/machinery/reagent_temperature,/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"K" = (/obj/effect/floor_decal/corner/paleblue/full,/obj/structure/table/reinforced,/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"L" = (/obj/effect/floor_decal/corner/paleblue/three_quarters{dir = 4},/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"M" = (/obj/effect/floor_decal/corner/paleblue{dir = 5},/obj/structure/iv_drip,/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"N" = (/obj/effect/floor_decal/corner/paleblue/full,/obj/machinery/optable,/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"O" = (/obj/effect/floor_decal/corner/paleblue/three_quarters,/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"P" = (/obj/effect/floor_decal/spline/plain/blue{dir = 6; icon_state = "spline_plain"},/obj/structure/closet/wardrobe/white,/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"Q" = (/obj/effect/floor_decal/corner/paleblue{dir = 10},/obj/machinery/chemical_dispenser/ert,/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"R" = (/obj/effect/floor_decal/corner/paleblue,/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"S" = (/obj/machinery/atmospherics/pipe/simple/hidden{dir = 4},/turf/simulated/wall/r_wall/prepainted,/area/virtual_reality/infirmary)
+"T" = (/obj/effect/floor_decal/corner/paleblue{dir = 9},/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"U" = (/obj/effect/floor_decal/corner/paleblue{dir = 5},/obj/machinery/chem_master,/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"V" = (/obj/effect/floor_decal/corner/paleblue/full,/obj/structure/iv_drip,/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"W" = (/obj/effect/floor_decal/spline/plain/blue{dir = 5; icon_state = "spline_plain"},/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"X" = (/obj/effect/floor_decal/corner/paleblue{dir = 5},/obj/effect/landmark{name = "vr entrance"},/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"Y" = (/obj/effect/landmark{name = "vr entrance"},/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+"Z" = (/obj/effect/floor_decal/corner/paleblue{dir = 5},/obj/machinery/atmospherics/pipe/manifold/hidden,/turf/simulated/floor/holofloor/tiled/white,/area/virtual_reality/infirmary)
+
+(1,1,1) = {"
+aaaaaaaaaaaaAA
+addddddddddaaa
+admNiKVugudaba
+adMllkvcoZShEa
+adwwwsTwwwdaDa
+adWYyCTHYedaaa
+adnYpCTHYwddaA
+adPRGLOGGGQdaA
+adJsjXXlllUdaA
+adfqtzIxBrKdaA
+adddddddddddaA
+aaaaaaaaaaaaaA
+"}
