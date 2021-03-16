@@ -1,0 +1,8 @@
+author: "Mucker"
+delete-after: True
+changes: 
+  - rscdel: "Removes gas generation artifact effects."
+  - bugfix: "The artifact scanner will now properly detect secondary artifact effects."
+  - bugfix: "Fixed the 'Touch' trigger for artifacts, poking rocks now actually has consequences!"
+  - tweak: "Artifact effects will now remain on for longer when activated in order for effects to have time to happen."
+  - tweak: "'Pushback' artifact effect will no longer tear off limbs."
