@@ -20,10 +20,10 @@
 		activate()
 		
 /obj/item/implant/virtual_reality/activate()
-	var/list/spawn_locs = list()
-	for (var/obj/effect/landmark/L in landmarks_list)
-		if (L.name == "vr entrance")
-			spawn_locs += get_turf(L)
+	var/list/spawn_locs = SSvirtual_reality.get_vr_spawns()
+	if (!spawn_locs.len)
+		to_chat(imp_in, SPAN_WARNING("You briefly go lightheaded but then return to normal as your implant fails to find a spot to send you."))
+		return
 	imp_in.visible_message(
 		SPAN_WARNING("\The [imp_in] abruptly stiffens and goes unresponsive."),
 		SPAN_NOTICE("Your awareness rapidly shifts as your VR implant activates.")

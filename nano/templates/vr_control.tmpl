@@ -15,11 +15,11 @@
 {{/for}}
 </table>
 {{:helper.link("Message all occupants", 'signal-diag', {'msg_all_occupants' : 1})}}
-<h3><u>Available templates</u></h3>
+<h3><u>Available areas</u></h3>
 <table>
 {{for data.templates}}
     <tr>
-    <td>{{:helper.link("Load", null, {'load_template': value.name})}}
+    <td>{{:helper.link("Activate", null, {'load_template': value.name}, value.name === data.active_template ? 'disabled' : null)}}
     <td>{{:value.name}}
 {{empty}}
     <tr>

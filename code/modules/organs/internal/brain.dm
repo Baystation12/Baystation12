@@ -99,7 +99,10 @@
 	if (!has_extension(owner, /datum/extension/virtual_surrogate)) // do digital brains dream of electric sheep?
 		transfer_identity(owner)
 	else
-		user.death()
+		owner.death()
+		..()
+		qdel(src)
+		return
 
 	..()
 

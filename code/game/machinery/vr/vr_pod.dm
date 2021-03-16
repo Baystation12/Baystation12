@@ -184,17 +184,18 @@
 	update_use_power(POWER_USE_ACTIVE)
 
 /obj/machinery/vr_pod/proc/simulate(mob_type)
-	playsound(src, 'sound/machines/medbayscanner.ogg', 100, FALSE)
-	var/list/spawn_locs = list()
-	for (var/obj/effect/landmark/L in landmarks_list)
-		if (L.name == "vr entrance")
-			spawn_locs += get_turf(L)
+	var/list/spawn_locs = SSvirtual_reality.get_vr_spawns()
+	if (!spawn_locs.len)
+		to_chat(occupant, SPAN_WARNING("Your [initial(name)] blips as it fails to find a valid location to project you to."))
+		return
+	playsound(src, 'sound/machines/signal.ogg', 100)
 	var/mob/living/simulated_mob = SSvirtual_reality.create_virtual_mob(occupant, mob_type, pick(spawn_locs))
 	simulated_mob.visible_message(
 		SPAN_NOTICE("The world shimmers and distorts. There's a small *pop* as \the [simulated_mob] appears from nothing."),
 		SPAN_NOTICE("Your pod fills with light and sound. You feel weightless and disoriented. And then, suddenly, you're someone else!")
 	)
 	audible_message(SPAN_NOTICE("\The [src] emits a series of beeping and clicks as it shunts its occupant into virtual reality."))
+	return TRUE
 
 /obj/machinery/vr_pod/proc/unsimulate()
 	if (!occupant)
@@ -219,8 +220,8 @@
 			playsound(loc, 'sound/machines/bolts_up.ogg', 50)
 		. = TOPIC_REFRESH
 	else if (href_list["simulate"])
-		close_browser(user, "window=vrpod")
-		simulate(user.type)
+		if (simulate(user.type))
+			close_browser(user, "window=vrpod")
 		. = TOPIC_HANDLED
 	
 	if (. == TOPIC_REFRESH)

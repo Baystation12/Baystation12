@@ -1,3 +1,10 @@
+GLOBAL_VAR_INIT(active_vr_area, null)
+GLOBAL_LIST_INIT(vr_areas, list(
+	"Infirmary" = /area/virtual_reality/infirmary,
+	"Beach" = /area/virtual_reality/beach
+))
+
+
 // Keeps tabs on every client currently in VR, as well as every occupant and very virtual mob.
 // If an occupant is no longer valid in VR (i.e. pod depowered), it will yank them out and put them into their original mob.
 SUBSYSTEM_DEF(virtual_reality)
@@ -66,6 +73,7 @@ SUBSYSTEM_DEF(virtual_reality)
 		dat += SPAN_NOTICE("If you die in this form, you'll be forced back to your body. You can also use the \[Exit-VR\] verb at any time, which you can find in the VR tab.")
 		dat += SPAN_NOTICE(SPAN_BOLD(FONT_LARGE("<br>-=-=-=-")))
 		to_chat(simulated_mob, dat)
+		playsound(simulated_mob.loc, 'sound/machines/boop1.ogg', 50)
 	return simulated_mob
 
 // Removes a mob from VR. Accepts both occupants and virtual mobs as a first argument.
@@ -126,3 +134,9 @@ SUBSYSTEM_DEF(virtual_reality)
 	if (!istype(M))
 		return
 	return M
+
+/datum/controller/subsystem/virtual_reality/proc/get_vr_spawns()
+	. = list()
+	for (var/obj/effect/landmark/L in landmarks_list)
+		if (L.name == "vr entrance" && get_area(L) == GLOB.active_vr_area) // this sucks on ice
+			. += get_turf(L)
