@@ -96,7 +96,10 @@
 	if(borer)
 		borer.detatch() //Should remove borer if the brain is removed - RR
 
-	transfer_identity(owner)
+	if (!has_extension(owner, /datum/extension/virtual_surrogate)) // do digital brains dream of electric sheep?
+		transfer_identity(owner)
+	else
+		user.death()
 
 	..()
 

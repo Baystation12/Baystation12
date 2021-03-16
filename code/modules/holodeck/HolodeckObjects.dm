@@ -41,6 +41,13 @@
 	icon_state = "steel"
 	initial_flooring = /decl/flooring/tiling
 
+/turf/simulated/floor/holofloor/tiled/white
+	name = "holo deck"
+	desc = "Get it?"
+	icon = 'icons/turf/flooring/tiles.dmi'
+	icon_state = "white"
+	initial_flooring = /decl/flooring/tiling/white
+
 /turf/simulated/floor/holofloor/tiled/dark
 	name = "dark floor"
 	icon_state = "dark"

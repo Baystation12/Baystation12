@@ -990,9 +990,13 @@
 	name = "\improper Computer Lab"
 	icon_state = "conference"
 
+/area/crew_quarters/virtual_reality_control
+	name = "\improper VR Control"
+	icon_state = "vr_control"
+
 /area/crew_quarters/virtual_reality
 	name = "\improper VR Suites"
-	icon_state = "Holodeck"
+	icon_state = "vr_suites"
 	sound_env = SMALL_SOFTFLOOR
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED // don't want to fry people who are in VR!
 
@@ -1367,7 +1371,6 @@
 	name = "\improper Virtual Reality"
 	icon_state = "Holodeck"
 	dynamic_lighting = FALSE
-	sound_env = SMALL_ENCLOSED
 	requires_power = FALSE
 
 /area/virtual_reality/infirmary
@@ -1376,6 +1379,11 @@
 /area/virtual_reality/shady_room
 	name = "\improper Virtual Reality - Shady Room"
 	dynamic_lighting = TRUE
+
+/area/virtual_reality/beach
+	name = "\improper Virtual Reality - Beach"
+	sound_env = PLAIN
+	ambience = list('sound/music/europa/WildEncounters.ogg')
 
 // Holodecks
 

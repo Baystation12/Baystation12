@@ -1,0 +1,12 @@
+<h3><u>Connected occupants</u></h3>
+<table>
+{{for data.occupants}}
+    <tr>
+    <td>{{:value.name}}&nbsp&nbsp
+    <td>{{:helper.link("Message", null, {'msg_occupant': value.mob_ref})}}
+{{empty}}
+    <tr>
+    <td>None.
+{{/for}}
+</table>
+{{:helper.link("Message all occupants", 'signal-diag', {'msg_all_occupants' : 1})}}

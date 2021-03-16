@@ -2,6 +2,7 @@
 	name = "\improper VR implant"
 	desc = "Allows remote access to VR, anywhere, anytime."
 	origin_tech = list(TECH_MATERIAL = 2, TECH_BIO = 2, TECH_DATA = 3)
+	var/activation_emote
 
 /obj/item/implant/virtual_reality/get_data()
 	return {"
@@ -15,7 +16,7 @@
 	<b>Special Features:</b> Like a VR pod, the implant will fully block all external stimuli. Unlike a VR pod, you won't be dragged back to reality if you're moved or your pod malfunctions. <b><i>You will have no way of knowing what's happening to your biological body without exiting VR.</i></b>"}
 
 /obj/item/implant/virtual_reality/trigger(emote, mob/source)
-	if (emote == "pale")
+	if (emote == activation_emote)
 		activate()
 		
 /obj/item/implant/virtual_reality/activate()
@@ -42,8 +43,10 @@
 			virtual_mob.Weaken(4)
 
 /obj/item/implant/virtual_reality/implanted(mob/source)
-	source.StoreMemory("A implant can be activated by using the pale emote, <B>say *pale</B> to attempt to activate.", /decl/memory_options/system)
-	to_chat(source, "The implanted VR implant can be activated by using the pale emote, <B>say *pale</B> to attempt to activate.")
+	activation_emote = input("Choose activation emote:") in list("blink", "blink_r", "eyebrow", "chuckle", "twitch_v", "frown", "nod", "blush", "giggle", "grin", "groan", "shrug", "smile", "pale", "sniff", "whimper", "wink")
+	if (source.mind)
+		source.StoreMemory("Your VR implant can be activated by using the [activation_emote] emote, <B>say *[activation_emote]</B> to attempt to activate.", /decl/memory_options/system)
+	to_chat(source, "The VR implant can be activated by using the [activation_emote] emote, <B>say *[activation_emote]</B> to attempt to activate.")
 	return TRUE
 
 /obj/item/implanter/virtual_reality

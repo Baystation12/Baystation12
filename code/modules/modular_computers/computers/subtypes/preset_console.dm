@@ -165,3 +165,9 @@
 		/datum/computer_file/program/email_client,
 		/datum/computer_file/program/wordprocessor
 	)
+
+/obj/machinery/computer/modular/preset/vr_control
+	default_software = list(
+		/datum/computer_file/program/vr_control
+	)
+	autorun_program = /datum/computer_file/program/vr_control

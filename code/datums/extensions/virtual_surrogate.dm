@@ -1,6 +1,7 @@
 // Attached to surrogate mobs that are being controlled by a living occupant in VR.
 // Virtual mobs can return to their occupant at any time, and vanish on death.
 // This file also includes VR-related verbs.
+// This extension has a lot of custom logic. Gibbing and brainmobs are disabled on virtual mobs, for instance.
 /datum/extension/virtual_surrogate
 	base_type = /datum/extension/virtual_surrogate
 	expected_type = /mob

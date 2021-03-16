@@ -120,8 +120,11 @@
 			SPAN_NOTICE("You start putting \the [target] into \the [src].")
 		)
 	if (!do_after(user, 3 SECONDS, target))
-		if (occupant)
-			to_chat(user, SPAN_WARNING("Someone entered \the [src] before you[user == target ? "" : " finished"]!"))
+		return
+	if (occupant)
+		to_chat(user, SPAN_WARNING("Someone entered \the [src] before you[user == target ? "" : " finished"]!"))
+		return
+	if (!target.Adjacent(src))
 		return
 	set_occupant(target)
 	return TRUE
@@ -154,6 +157,7 @@
 	else
 		to_chat(occupant, SPAN_DANGER("You're forced out of your pod!"))
 	occupant.Weaken(3)
+	occupant.confused += 20
 	exit_pod(TRUE)
 
 /obj/machinery/vr_pod/relaymove(mob/living/user)
@@ -169,7 +173,7 @@
 		playsound(loc, 'sound/machines/windowdoor.ogg', 50, TRUE)
 		return
 	to_chat(new_occupant, SPAN_NOTICE("\The [src] hisses shut, cutting off the outside world. A touchscreen menu appears on the glass above you. \
-	\n<i>Interact with \the [src] from inside to configure it and begin a simulation."))
+	\n<i>Interact with \the [src] from inside to configure it and begin a simulation.</i>"))
 	playsound(loc, 'sound/machines/windowdoor.ogg', 50, TRUE)
 	new_occupant.forceMove(src)
 	new_occupant.stop_pulling() 
