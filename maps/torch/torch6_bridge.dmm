@@ -29,7 +29,7 @@
 /turf/simulated/wall/r_wall/hull,
 /area/maintenance/bridge/forestarboard)
 "ag" = (
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/maintenance/bridge/aftstarboard)
 "ah" = (
 /obj/structure/cable/yellow{
@@ -348,7 +348,7 @@
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/heads/office/cl)
 "aK" = (
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/crew_quarters/heads/cobed)
 "aL" = (
 /obj/structure/table/rack,
@@ -387,7 +387,7 @@
 /turf/simulated/floor/plating,
 /area/hallway/primary/bridge/fore)
 "aO" = (
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/crew_quarters/heads/office/xo)
 "aP" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -510,7 +510,7 @@
 	dir = 4;
 	icon_state = "shock"
 	},
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/crew_quarters/heads/office/xo)
 "bb" = (
 /obj/structure/closet/emcloset,
@@ -642,7 +642,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/forestarboard)
 "bq" = (
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/crew_quarters/heads/office/co)
 "bs" = (
 /obj/structure/cable/green{
@@ -1109,8 +1109,8 @@
 /turf/simulated/floor/tiled,
 /area/crew_quarters/heads/office/rd)
 "ck" = (
-/turf/simulated/wall/r_wall/prepainted,
-/area/security/bridgecheck)
+/turf/simulated/wall/prepainted,
+/area/bridge)
 "cl" = (
 /turf/simulated/floor/tiled/dark,
 /area/bridge/hallway/starboard)
@@ -1909,7 +1909,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge/disciplinary_board_room)
 "dk" = (
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/crew_quarters/heads/office/cl/backroom)
 "dl" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -3027,7 +3027,7 @@
 /obj/structure/sign/warning/secure_area{
 	pixel_y = -7
 	},
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/crew_quarters/heads/office/xo)
 "fy" = (
 /obj/structure/cable/green{
@@ -3184,7 +3184,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/aux_eva)
 "fI" = (
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/hallway/primary/bridge/aft)
 "fJ" = (
 /obj/machinery/light{
@@ -3804,7 +3804,7 @@
 	dir = 1;
 	icon_state = "shock"
 	},
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/crew_quarters/heads/office/ce)
 "hz" = (
 /obj/structure/cable/green{
@@ -4006,7 +4006,7 @@
 /turf/simulated/floor/plating,
 /area/bridge/meeting_room)
 "ie" = (
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/crew_quarters/heads/office/ce)
 "ig" = (
 /obj/structure/filingcabinet/chestdrawer{
@@ -4113,7 +4113,7 @@
 	dir = 2;
 	pixel_z = -10
 	},
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/hallway/primary/bridge/fore)
 "io" = (
 /obj/structure/cable/green{
@@ -4639,7 +4639,7 @@
 	pixel_y = -4;
 	pixel_z = 0
 	},
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/hallway/primary/bridge/aft)
 "jV" = (
 /turf/simulated/floor/tiled,
@@ -4655,7 +4655,7 @@
 	pixel_y = 3;
 	pixel_z = 0
 	},
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/hallway/primary/bridge/aft)
 "jX" = (
 /obj/structure/cable/green{
@@ -4871,7 +4871,7 @@
 /turf/simulated/floor/tiled,
 /area/crew_quarters/heads/office/ce)
 "kJ" = (
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/crew_quarters/heads/office/cmo)
 "kK" = (
 /obj/structure/cable/green{
@@ -5117,7 +5117,7 @@
 	dir = 8;
 	icon_state = "shock"
 	},
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/crew_quarters/heads/office/cmo)
 "lB" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -5486,7 +5486,7 @@
 /turf/simulated/floor/plating,
 /area/security/bridgecheck)
 "mE" = (
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/crew_quarters/heads/office/cos)
 "mG" = (
 /obj/machinery/papershredder,
@@ -6131,7 +6131,7 @@
 /turf/simulated/floor/plating,
 /area/aux_eva)
 "on" = (
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/aux_eva)
 "ox" = (
 /obj/structure/cable/green,
@@ -6797,7 +6797,7 @@
 /area/aux_eva)
 "qm" = (
 /obj/structure/sign/warning/high_voltage,
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/crew_quarters/heads/office/cos)
 "qn" = (
 /obj/structure/cable/green{
@@ -6976,8 +6976,8 @@
 /turf/simulated/floor/tiled,
 /area/aquila/storage)
 "qH" = (
-/turf/simulated/wall/r_wall/prepainted,
-/area/maintenance/bridge/aftport)
+/turf/simulated/wall/prepainted,
+/area/crew_quarters/heads/office/sea)
 "qI" = (
 /obj/machinery/sleeper{
 	dir = 8
@@ -7711,17 +7711,17 @@
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/sgr)
 "sJ" = (
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/crew_quarters/heads/office/cl)
 "sL" = (
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/crew_quarters/heads/office/sgr)
 "sP" = (
 /obj/structure/sign/warning/high_voltage{
 	dir = 1;
 	icon_state = "shock"
 	},
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/crew_quarters/heads/office/sgr)
 "sQ" = (
 /obj/structure/cable/green{
@@ -7750,7 +7750,7 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/disciplinary_board_room)
 "sT" = (
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/crew_quarters/heads/office/rd)
 "sU" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -8542,7 +8542,7 @@
 	dir = 8;
 	icon_state = "deck-b"
 	},
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/hallway/primary/bridge/fore)
 "uW" = (
 /obj/effect/floor_decal/corner/blue{
@@ -8559,9 +8559,6 @@
 /area/bridge/disciplinary_board_room)
 "uX" = (
 /turf/simulated/wall/prepainted,
-/area/maintenance/auxsolarbridge)
-"uY" = (
-/turf/simulated/wall/r_wall/prepainted,
 /area/maintenance/auxsolarbridge)
 "uZ" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -8711,7 +8708,7 @@
 /turf/simulated/floor/carpet/blue2,
 /area/crew_quarters/heads/office/sgr)
 "vv" = (
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/bridge/disciplinary_board_room/deliberation)
 "vx" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -9891,7 +9888,7 @@
 /area/bridge)
 "yg" = (
 /obj/machinery/status_display,
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/crew_quarters/heads/office/xo)
 "yh" = (
 /obj/effect/floor_decal/scglogo{
@@ -11370,7 +11367,7 @@
 /area/crew_quarters/heads/cobed)
 "EM" = (
 /obj/structure/sign/warning/detailed,
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/crew_quarters/heads/office/xo)
 "EN" = (
 /obj/effect/floor_decal/corner/paleblue/diagonal,
@@ -12697,7 +12694,7 @@
 /obj/structure/sign/warning/high_voltage{
 	pixel_y = -6
 	},
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/crew_quarters/heads/office/rd)
 "Kc" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
@@ -12922,7 +12919,7 @@
 /area/bridge/disciplinary_board_room)
 "Le" = (
 /obj/structure/sign/warning/high_voltage,
-/turf/simulated/wall/r_wall/prepainted,
+/turf/simulated/wall/prepainted,
 /area/crew_quarters/heads/office/cl)
 "Lf" = (
 /obj/structure/cable/green{
@@ -13885,9 +13882,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/hallway/primary/bridge/fore)
-"Pi" = (
-/turf/simulated/wall/r_wall/prepainted,
-/area/bridge/disciplinary_board_room)
 "Pl" = (
 /obj/structure/closet/secure_closet/liaison,
 /obj/machinery/camera/network/command{
@@ -15794,9 +15788,6 @@
 /obj/structure/lattice,
 /turf/simulated/open,
 /area/maintenance/bridge/foreport)
-"Xr" = (
-/turf/simulated/wall/r_wall/prepainted,
-/area/maintenance/bridge/forestarboard)
 "Xx" = (
 /obj/effect/floor_decal/corner/paleblue/diagonal,
 /obj/machinery/door/airlock/medical{
@@ -24339,7 +24330,7 @@ hn
 hn
 SJ
 ev
-eP
+ck
 UY
 Fg
 Ig
@@ -24945,7 +24936,7 @@ Kt
 Lw
 fN
 HW
-eP
+ck
 qQ
 rJ
 Ii
@@ -25356,10 +25347,10 @@ RT
 vm
 tW
 Iq
-sB
-sB
-sB
-sB
+qH
+qH
+qH
+qH
 Rl
 jc
 bH
@@ -25561,7 +25552,7 @@ En
 vj
 vO
 ww
-sB
+qH
 Oi
 lT
 Ht
@@ -25763,7 +25754,7 @@ Is
 vk
 vP
 IE
-sB
+qH
 aK
 aK
 aK
@@ -25958,14 +25949,14 @@ eD
 fa
 fA
 fR
-sB
+qH
 ZR
 vZ
 uG
 Nn
 Ck
 mz
-sB
+qH
 xc
 xc
 xc
@@ -26160,7 +26151,7 @@ eE
 fc
 fC
 fS
-sB
+qH
 tm
 tZ
 hU
@@ -27145,7 +27136,7 @@ af
 af
 aj
 VB
-Xr
+al
 aO
 aO
 kA
@@ -27347,7 +27338,7 @@ af
 af
 VB
 VB
-Xr
+al
 bb
 AR
 bU
@@ -27561,17 +27552,17 @@ bF
 bK
 cg
 cs
-hs
-hs
-hs
-hs
-hs
-hs
-hs
-hs
-hs
-hs
-hs
+hq
+hq
+hq
+hq
+hq
+hq
+hq
+hq
+hq
+hq
+hq
 rc
 cG
 XN
@@ -28985,7 +28976,7 @@ kX
 eF
 Wj
 Eq
-ck
+yW
 FS
 yb
 sL
@@ -29594,10 +29585,10 @@ pF
 mN
 rg
 yb
-Pi
-Pi
-Pi
-Pi
+TX
+TX
+TX
+TX
 vv
 nI
 vv
@@ -29787,8 +29778,8 @@ hC
 La
 iX
 Lk
-hC
-ck
+fB
+yW
 mO
 oK
 zM
@@ -30387,10 +30378,10 @@ fl
 Jj
 Rj
 sT
-hC
-hC
-hC
-hC
+fB
+fB
+fB
+fB
 uV
 in
 kL
@@ -31609,12 +31600,12 @@ SN
 nb
 mX
 Ey
-qH
-qH
-qH
-qH
-qH
-qH
+oh
+oh
+oh
+oh
+oh
+oh
 tH
 ut
 fO
@@ -32021,7 +32012,7 @@ on
 on
 on
 on
-uY
+uX
 Pc
 wn
 wT
@@ -32223,7 +32214,7 @@ yi
 Bp
 Ci
 on
-uY
+uX
 vI
 wo
 wU
@@ -32626,7 +32617,7 @@ pR
 yD
 Fi
 Dt
-on
+CO
 dV
 dV
 wq
@@ -32820,7 +32811,7 @@ DN
 kT
 lO
 nd
-on
+CO
 Sh
 pQ
 pQ
@@ -32828,7 +32819,7 @@ QE
 Ai
 Ai
 Zy
-on
+CO
 dV
 dV
 Tc
@@ -33022,7 +33013,7 @@ DN
 kU
 Sg
 ne
-on
+CO
 Th
 Dq
 Uh
@@ -33030,7 +33021,7 @@ fH
 bk
 zz
 IW
-on
+CO
 dV
 dV
 ws
