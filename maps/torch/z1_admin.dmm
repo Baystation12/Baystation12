@@ -11230,14 +11230,6 @@
 	icon_state = "steel"
 	},
 /area/centcom/holding)
-"byu" = (
-/obj/machinery/light/small{
-	dir = 1
-	},
-/obj/structure/bed/chair/wood/walnut,
-/obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/holofloor/concrete,
-/area/virtual_reality/shady_room)
 "bBb" = (
 /obj/machinery/computer/modular/preset/library{
 	dir = 8;
@@ -11252,10 +11244,6 @@
 	name = "plating"
 	},
 /area/acting/backstage)
-"bCx" = (
-/obj/item/tape_roll,
-/turf/simulated/floor/holofloor/concrete,
-/area/virtual_reality/shady_room)
 "bDb" = (
 /obj/machinery/bookbinder,
 /turf/unsimulated/floor{
@@ -11300,12 +11288,6 @@
 	icon_state = "wood"
 	},
 /area/centcom/living)
-"bNq" = (
-/obj/structure/table/woodentable/mahogany,
-/obj/random/soap,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/holofloor/concrete,
-/area/virtual_reality/shady_room)
 "bOb" = (
 /obj/structure/hygiene/sink{
 	dir = 1;
@@ -11359,11 +11341,6 @@
 	},
 /turf/simulated/floor/holofloor/concrete,
 /area/holodeck/source_volleyball)
-"cuV" = (
-/obj/effect/decal/cleanable/blood,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/holofloor/concrete,
-/area/virtual_reality/shady_room)
 "czt" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
@@ -11514,10 +11491,6 @@
 "ffh" = (
 /turf/unsimulated/floor/plating,
 /area/centcom/evac)
-"foN" = (
-/obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/holofloor/concrete,
-/area/virtual_reality/shady_room)
 "fpW" = (
 /obj/effect/floor_decal/spline/fancy/wood/corner{
 	dir = 8
@@ -11542,27 +11515,12 @@
 	},
 /turf/simulated/floor/holofloor/concrete,
 /area/holodeck/source_plaza)
-"fNo" = (
-/turf/simulated/floor/holofloor/concrete,
-/area/virtual_reality/shady_room)
-"giU" = (
-/obj/structure/table/woodentable/mahogany,
-/obj/machinery/light/small,
-/obj/item/material/knife/folding/combat/balisong,
-/obj/item/melee/classic_baton,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/holofloor/concrete,
-/area/virtual_reality/shady_room)
 "glo" = (
 /turf/simulated/floor/holofloor/concrete,
 /area/holodeck/source_volleyball)
 "gnX" = (
 /turf/simulated/floor/holofloor/beach/water,
 /area/holodeck/source_temple)
-"grh" = (
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/holofloor/concrete,
-/area/virtual_reality/shady_room)
 "gse" = (
 /obj/structure/table/holo_woodentable,
 /obj/effect/floor_decal/spline/fancy/wood{
@@ -11579,10 +11537,6 @@
 	icon_state = "wood_broken4"
 	},
 /area/holodeck/source_temple)
-"gBd" = (
-/obj/machinery/door/blast/regular,
-/turf/simulated/floor/holofloor/concrete,
-/area/virtual_reality/shady_room)
 "hzB" = (
 /obj/structure/flora/ausbushes/lavendergrass,
 /obj/structure/flora/ausbushes/ywflowers,
@@ -11596,9 +11550,6 @@
 "hJx" = (
 /turf/simulated/wall/r_titanium,
 /area/centcom/evac)
-"hMB" = (
-/turf/simulated/wall/r_wall/prepainted,
-/area/virtual_reality/shady_room)
 "icO" = (
 /obj/structure/bed/chair/wood{
 	dir = 1;
@@ -11622,11 +11573,6 @@
 /obj/effect/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/shuttle/administration/centcom)
-"izE" = (
-/turf/unsimulated/wall{
-	desc = "This is as far as the simulated area goes out."
-	},
-/area/virtual_reality/shady_room)
 "iBC" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 4
@@ -32571,15 +32517,15 @@ aaq
 aaq
 aaa
 aab
-izE
-izE
-izE
-izE
-izE
-izE
-izE
-izE
-izE
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 aab
 aab
 aab
@@ -32773,15 +32719,15 @@ uJE
 wDD
 ajo
 aab
-izE
-hMB
-hMB
-hMB
-hMB
-hMB
-hMB
-hMB
-izE
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 aab
 aab
 aab
@@ -32975,15 +32921,15 @@ uIr
 vQS
 ajo
 aab
-izE
-hMB
-grh
-grh
-foN
-grh
-giU
-hMB
-izE
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 aab
 aab
 aab
@@ -33177,15 +33123,15 @@ qIk
 rIu
 ajo
 aab
-izE
-hMB
-fNo
-grh
-fNo
-fNo
-bNq
-hMB
-izE
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 aab
 aab
 aab
@@ -33379,15 +33325,15 @@ dIU
 dIU
 ajo
 aab
-izE
-hMB
-byu
-fNo
-grh
-fNo
-grh
-gBd
-izE
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 aab
 aab
 aab
@@ -33581,15 +33527,15 @@ dIU
 pgJ
 ajo
 aab
-izE
-hMB
-grh
-fNo
-fNo
-bCx
-fNo
-hMB
-izE
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 aab
 aab
 aab
@@ -33783,15 +33729,15 @@ tDw
 qMl
 ajo
 aab
-izE
-hMB
-grh
-grh
-fNo
-grh
-cuV
-hMB
-izE
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 aab
 aab
 aab
@@ -33985,15 +33931,15 @@ gnX
 dNG
 ajo
 aab
-izE
-hMB
-hMB
-hMB
-hMB
-hMB
-hMB
-hMB
-izE
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 aab
 aab
 aab
@@ -34187,15 +34133,15 @@ gnX
 dNG
 ajo
 aab
-izE
-izE
-izE
-izE
-izE
-izE
-izE
-izE
-izE
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
+aab
 aab
 aab
 aab

@@ -19,10 +19,20 @@
 <table>
 {{for data.templates}}
     <tr>
-    <td>{{:helper.link("Activate", null, {'load_template': value.name}, value.name === data.active_template ? 'disabled' : null)}}
+    <td>{{:helper.link("Activate", null, {'load_template': value.name}, data.on_cooldown ? 'disabled' : null)}}
     <td>{{:value.name}}
 {{empty}}
     <tr>
     <td>None.
 {{/for}}
 </table>
+{{if data.emag_templates}}
+    <h3><span class='bad'><u>Nonstandard areas</u></span></h3>
+    <table>
+    {{for data.emag_templates}}
+        <tr>
+        <td>{{:helper.link("Activate", null, {'load_template': value.name}, data.on_cooldown ? 'disabled' : null)}}
+        <td>{{:value.name}}
+    {{/for}}
+    </table>
+{{/if}}

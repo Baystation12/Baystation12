@@ -8,12 +8,20 @@
 	extended_desc = "Maintains the active digital space used by VR pods and VR implants. Can be used to monitor occupants, change the area, or send a message to everyone inside VR."
 	size = 32
 	available_on_ntnet = FALSE
-	usage_flags = PROGRAM_ALL
+	usage_flags = PROGRAM_CONSOLE | PROGRAM_LAPTOP | PROGRAM_TELESCREEN
 	nanomodule_path = /datum/nano_module/program/vr_control
+
+/datum/computer_file/program/vr_control/process_tick()
+	..()	
+	var/datum/nano_module/program/vr_control/VRC = NM
+	if(istype(VRC))
+		VRC.emagged = computer.emagged()
 
 /datum/nano_module/program/vr_control
 	name = "VR Control"
 	var/prog_state = VRCONTROL_HOME
+	var/emagged
+	var/area_cooldown = 0
 
 /datum/nano_module/program/vr_control/Topic(href, href_list)
 	if(..())
@@ -41,19 +49,35 @@
 		return TRUE
 
 	if (href_list["load_template"])
+		var/list/the_matrix = SSvirtual_reality.virtual_occupants_to_mobs
 		var/P = GLOB.vr_areas[href_list["load_template"]]
 		var/area/A = locate(P)
 		if (!A)
-			to_chat(usr, SPAN_WARNING("The system could not find the specified template: [href_list["load_template"]]"))
+			P = GLOB.emagged_vr_areas[href_list["load_template"]]
+			A = locate(P)
+			if (!A) // if we still don't have our area after checking for emagged ones, throw an error
+				to_chat(usr, SPAN_WARNING("The system could not find the specified template: [href_list["load_template"]]"))
+				return TRUE
+		if (GLOB.active_vr_area == A)
 			return TRUE
+		if (the_matrix.len)
+			if (alert(usr, "Switching the VR area will eject [the_matrix.len] users from the simulation. Continue?", "Change Area", "Yes", "No") != "Yes")
+				return TRUE
+			log_and_message_admins("changed the VR area to [A.name], ejecting [the_matrix.len] occupants.", usr)
+		else
+			log_and_message_admins("changed the VR area to [A.name].", usr)
 		GLOB.active_vr_area = A
+		for (var/mob/living/L in SSvirtual_reality.virtual_occupants_to_mobs)
+			SSvirtual_reality.remove_virtual_mob(L, TRUE)
 		to_chat(usr, SPAN_NOTICE("Successfully loaded new area: [A.name]!"))
 		playsound(program.computer.holder, 'sound/machines/ping.ogg', 50)
+		area_cooldown = world.time + 30 SECONDS
 		return TRUE
 
 /datum/nano_module/program/vr_control/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = GLOB.default_state)
 	var/list/data = host.initial_data()
 
+	data["on_cooldown"] = area_cooldown > world.time
 	data["occupants"] = list()
 	for (var/mob/living/L in SSvirtual_reality.virtual_occupants_to_mobs)
 		var/mob/living/virtual = SSvirtual_reality.get_surrogate_for(L)
@@ -71,6 +95,14 @@
 		template_data["name"] = V
 
 		data["templates"] += list(template_data)
+	
+	if (emagged)
+		data["emag_templates"] = list()
+		for (var/V in GLOB.emagged_vr_areas)
+			var/list/template_data = list()
+			template_data["name"] = V
+
+			data["emag_templates"] += list(template_data)
 	
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)

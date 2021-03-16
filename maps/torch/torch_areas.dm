@@ -1369,7 +1369,7 @@
 
 /area/virtual_reality
 	name = "\improper Virtual Reality"
-	icon_state = "Holodeck"
+	icon_state = "vr_suites"
 	dynamic_lighting = FALSE
 	requires_power = FALSE
 
@@ -1384,6 +1384,9 @@
 	name = "\improper Virtual Reality - Beach"
 	sound_env = PLAIN
 	ambience = list('sound/music/europa/WildEncounters.ogg')
+
+/area/virtual_reality/plaza
+	name = "\improper Virtual Reality - Plaza"
 
 // Holodecks
 

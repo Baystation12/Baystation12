@@ -1,7 +1,11 @@
 GLOBAL_VAR_INIT(active_vr_area, null)
 GLOBAL_LIST_INIT(vr_areas, list(
 	"Infirmary" = /area/virtual_reality/infirmary,
-	"Beach" = /area/virtual_reality/beach
+	"Beach" = /area/virtual_reality/beach,
+	"Plaza" = /area/virtual_reality/plaza
+))
+GLOBAL_LIST_INIT(emagged_vr_areas, list(
+	"Shady Room" = /area/virtual_reality/shady_room
 ))
 
 
