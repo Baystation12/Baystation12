@@ -93,3 +93,14 @@
 		var/obj/machinery/vending/vendor = path
 		var/base_type = initial(vendor.base_type) || path
 		. |= base_type
+
+/obj/item/stock_parts/circuitboard/vr_pod
+	name = T_BOARD("VR pod")
+	build_path = /obj/machinery/vr_pod
+	board_type = "machine"
+	origin_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 2)
+	req_components = list(
+							/obj/item/stock_parts/capacitor = 2,
+							/obj/item/stock_parts/scanning_module/adv = 1,
+							/obj/item/stock_parts/manipulator = 2,
+							/obj/item/stack/cable_coil = 5)

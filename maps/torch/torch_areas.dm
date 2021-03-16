@@ -990,6 +990,10 @@
 	name = "\improper Computer Lab"
 	icon_state = "conference"
 
+/area/crew_quarters/virtual_reality
+	name = "\improper VR Suites"
+	icon_state = "Holodeck"
+
 /area/holocontrol
 	name = "\improper Holodeck Control"
 	icon_state = "Holodeck"
@@ -1354,6 +1358,18 @@
 /area/storage/tools
 	name = "Auxiliary Tool Storage"
 	icon_state = "auxstorage"
+
+// VR
+
+/area/virtual_reality
+	name = "\improper Virtual Reality"
+	icon_state = "Holodeck"
+	dynamic_lighting = FALSE
+	sound_env = SMALL_ENCLOSED
+	requires_power = FALSE
+
+/area/virtual_reality/infirmary
+	name = "\improper Virtual Reality - Infirmary"
 
 // Holodecks
 

@@ -127,6 +127,8 @@
 /obj/item/organ/internal/brain/proc/handle_severe_brain_damage()
 	set waitfor = FALSE
 	healed_threshold = 0
+	if (owner && has_extension(owner, /datum/extension/virtual_surrogate)) // Virtual mobs don't get memory loss from brain damage
+		return
 	to_chat(owner, "<span class = 'notice' font size='10'><B>Where am I...?</B></span>")
 	sleep(5 SECONDS)
 	if(!owner)

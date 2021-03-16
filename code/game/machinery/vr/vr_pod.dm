@@ -1,6 +1,6 @@
 /obj/machinery/vr_pod
 	name = "\improper VR pod"
-	desc = "An advanced machine that simulates lifelike environments and scenarios for its occupant. Useful for hands-on training as well as recreation."
+	desc = "An advanced machine that simulates extremely lifelike environments and sensations. Useful for hands-on training as well as recreation."
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "sleeper_0"
 	density = TRUE
@@ -13,7 +13,12 @@
 	active_power_usage = 1 KILOWATTS
 	
 	var/mob/living/carbon/human/occupant	// The person using the pod.
-	var/hatch_locked						// If TRUE, the occupant can't exit.
+	var/hatch_locked						// If TRUE, the occupant can't exit, and also can't be ejected.
+
+/obj/machinery/vr_pod/Initialize()
+	. = ..()
+	if (prob(1))
+		desc = "Don't even think about it."
 
 /obj/machinery/vr_pod/Destroy()
 	if (occupant)
@@ -78,7 +83,7 @@
 /obj/machinery/vr_pod/examine(mob/user)
 	. = ..()
 	if (occupant)
-		to_chat(user, SPAN_NOTICE("\icon[occupant] You can see \the [occupant] inside."))
+		to_chat(user, SPAN_NOTICE("You can see \the [occupant] inside."))
 
 /obj/machinery/vr_pod/MouseDrop_T(mob/living/target, mob/living/user)
 	if (!CanMouseDrop(target, user))
@@ -93,6 +98,12 @@
 		return
 	if (occupant)
 		to_chat(user, SPAN_WARNING("\The [src] is occupied!"))
+		return
+	if (has_extension(user, /datum/extension/virtual_surrogate))
+		to_chat(user, SPAN_WARNING("[user == target ? "You are" : "\The [target] is"] already a virtual surrogate. That might result in \ 
+		[pick("an infinite", "an endless", "a repeating")] \
+		[pick("feedback", "reality", "stability", "causality")] \
+		[pick("loop", "paradox", "logic chain", "runtime", "typecast")]!"))
 		return
 	enter_pod(target, user)
 
@@ -140,8 +151,7 @@
 
 /obj/machinery/vr_pod/proc/eject(forceful)
 	if (SSvirtual_reality.virtual_occupants_to_mobs[occupant])
-		SSvirtual_reality.remove_virtual_mob(occupant)
-		to_chat(occupant, SPAN_DANGER(FONT_LARGE("You're abruptly ripped back to reality as [QDELETED(src) ? "you're thrown out of your pod" : "your pod's hatch opens"]!")))
+		SSvirtual_reality.remove_virtual_mob(occupant, TRUE)
 	else
 		to_chat(occupant, SPAN_DANGER("You're forced out of your pod!"))
 	occupant.Weaken(3)
@@ -172,14 +182,20 @@
 
 /obj/machinery/vr_pod/proc/simulate(mob_type)
 	playsound(src, 'sound/machines/signal.ogg', 100, FALSE)
-	var/mob/living/simulated_mob = SSvirtual_reality.create_virtual_mob(occupant, mob_type)
+	var/list/spawn_locs = list()
+	for (var/obj/effect/landmark/L in landmarks_list)
+		if (L.name == "vr entrance")
+			spawn_locs += get_turf(L)
+	var/mob/living/simulated_mob = SSvirtual_reality.create_virtual_mob(occupant, mob_type, pick(spawn_locs))
 	simulated_mob.visible_message(
 		SPAN_NOTICE("The world shimmers and distorts. There's a small *pop* as \the [simulated_mob] appears from nothing."),
-		SPAN_NOTICE("Your pod fills with light and sound. You feel weightless and disoriented. And then, as soon as it started, you're someone else!")
+		SPAN_NOTICE("Your pod fills with light and sound. You feel weightless and disoriented. And then, suddenly, you're someone else!")
 	)
 	audible_message(SPAN_NOTICE("\The [src] emits a series of beeping and clicks as it shunts its occupant into a virtual mind."))
 
 /obj/machinery/vr_pod/proc/unsimulate()
+	if (!occupant)
+		return
 	SSvirtual_reality.remove_virtual_mob(occupant)
 	audible_message(SPAN_NOTICE("\The [src] chimes as it drags its occupant back to the real world."))
 	playsound(src, 'sound/machines/chime.ogg', 100, FALSE)
@@ -198,10 +214,15 @@
 			playsound(loc, 'sound/machines/bolts_down.ogg', 50)
 		else
 			playsound(loc, 'sound/machines/bolts_up.ogg', 50)
-		return TOPIC_REFRESH
-	if (href_list["simulate"])
+		. = TOPIC_REFRESH
+	else if (href_list["simulate"])
 		simulate(user.type)
-		return TOPIC_HANDLED
+		. = TOPIC_HANDLED
+	
+	if (. == TOPIC_REFRESH)
+		interface_interact(user)
+	else if (. == TOPIC_HANDLED)
+		close_browser(user, "window=vrpod")
 
 /obj/machinery/vr_pod/interface_interact(mob/user)
 	var/dat = ""
@@ -226,36 +247,3 @@
 		icon_state = "sleeper_1"
 	else
 		icon_state = "sleeper_2"
-
-// VR verbs. Being completely virtual, people controlling VR mobs can do a bunch of stuff.
-/mob/living/proc/exit_vr_mob()
-	set name = "Exit VR"
-	set desc = "Exits your virtual mob, and returns to your normal body."
-	set category = "VR"
-	set src = usr
-
-	SSvirtual_reality.remove_virtual_mob(src)
-
-/mob/living/proc/clear_reagents_vr()
-	set name = "Clear Reagents"
-	set desc = "Removes any reagents in your stomach and bloodstream."
-	set category = "VR"
-	set src = usr
-
-	if (reagents)
-		to_chat(usr, SPAN_NOTICE("You clear your virtual body of reagents."))
-		reagents.clear_reagents()
-
-/mob/living/proc/rejuvenate_self_vr()
-	set name = "Rejuvenate"
-	set desc = "Fully undoes any kind of damage on your body, as well as clearing reagents and stuns."
-	set category = "VR"
-	set src = usr
-
-	rejuvenate()
-	if (ishuman(src))
-		var/mob/living/carbon/human/H = src
-		usr.client.prefs.copy_to(H) // Redo hair, augments, and limbs after rejuvenating
-		H.set_nutrition(400)
-		H.set_hydration(400)
-	to_chat(usr, SPAN_NOTICE("You fully rejuvenate your virtual body."))

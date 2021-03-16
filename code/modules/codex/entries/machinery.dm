@@ -20,3 +20,7 @@
 /datum/codex_entry/conveyor_construct
 	associated_paths = list(/obj/machinery/conveyor_switch,/obj/machinery/conveyor_switch/oneway,/obj/item/conveyor_switch_construct,/obj/item/conveyor_switch_construct/oneway)
 	mechanics_text = "This device can connect to a number of conveyor belts and control their movement. A two-way switch will allow you to make the conveyors run in forward and reverse mode, the one-way switch will only allow one direction. Can be removed with a crowbar."
+
+/datum/codex_entry/vr
+	display_name = "VR"
+	associated_paths = list(/obj/machinery/vr_pod)
