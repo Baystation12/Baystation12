@@ -80,8 +80,8 @@
 	overlays.Cut()
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
 	if(os)
-		overlays += os.get_screen_overlay()
-		overlays += os.get_keyboard_overlay()
+		overlays += os.get_screen_overlay(FALSE) // prevent glowmasking on PDAs/etc - unfortunately, it breaks inventory icons
+		overlays += os.get_keyboard_overlay(FALSE)
 
 	if(enabled)
 		set_light(0.2, 0.1, light_strength)

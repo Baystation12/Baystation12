@@ -962,7 +962,7 @@ FIRE ALARM
 			var/decl/security_level/sl = security_state.current_security_level
 
 			set_light(sl.light_max_bright, sl.light_inner_range, sl.light_outer_range, 2, sl.light_color_alarm)
-			overlays += image(sl.icon, sl.overlay_alarm)
+			overlays += glowmasked_image(sl.icon, sl.overlay_alarm)
 		else
 			overlays += get_cached_overlay("fire0")
 

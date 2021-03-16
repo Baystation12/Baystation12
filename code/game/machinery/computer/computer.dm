@@ -90,11 +90,12 @@
 	overlays += get_keyboard_overlay()
 
 /obj/machinery/computer/proc/get_screen_overlay()
-	return image(icon,icon_screen, overlay_layer)
+	if (icon_screen)
+		return glowmasked_image(icon, icon_screen)
 
 /obj/machinery/computer/proc/get_keyboard_overlay()
 	if(icon_keyboard)
-		overlays += image(icon, icon_keyboard, overlay_layer)
+		return glowmasked_image(icon, icon_keyboard)
 
 /obj/machinery/computer/proc/decode(text)
 	// Adds line breaks

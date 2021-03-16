@@ -4,7 +4,7 @@
 	if(istype(A))
 		A.update_icon()
 
-/datum/extension/interactive/ntos/proc/get_screen_overlay()
+/datum/extension/interactive/ntos/proc/get_screen_overlay(should_glowmask = TRUE)
 	if(!on)
 		return image(screen_icon_file, screensaver_icon)
 	if(!screen_icon_file)
@@ -12,11 +12,14 @@
 		if(istype(A))
 			screen_icon_file = A.icon
 	if(active_program)
-		return image(screen_icon_file, active_program.program_icon_state)
+		if (should_glowmask)
+			return glowmasked_image(screen_icon_file, active_program.program_icon_state)
+		else
+			return image(screen_icon_file, active_program.program_icon_state)
 	else
-		return image(screen_icon_file, menu_icon)
+		return glowmasked_image(screen_icon_file, menu_icon)
 
-/datum/extension/interactive/ntos/proc/get_keyboard_overlay()
+/datum/extension/interactive/ntos/proc/get_keyboard_overlay(should_glowmask = TRUE)
 	if(!on)
 		return
 	if(!screen_icon_file)
@@ -24,7 +27,10 @@
 		if(istype(A))
 			screen_icon_file = A.icon
 	if(active_program && active_program.program_key_state)
-		return image(screen_icon_file, active_program.program_key_state)
+		if (should_glowmask)
+			return glowmasked_image(screen_icon_file, active_program.program_key_state)
+		else
+			return image(screen_icon_file, active_program.program_key_state)
 	
 /datum/extension/interactive/ntos/proc/visible_error(message)
 	var/atom/A = holder

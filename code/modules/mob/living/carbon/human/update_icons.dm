@@ -12,8 +12,17 @@ GLOBAL_LIST_EMPTY(species_icon_template_cache)
 
 /proc/overlay_image(icon,icon_state,color,flags)
 	var/image/ret = image(icon,icon_state)
-	ret.color = color
-	ret.appearance_flags = flags
+	if (color)
+		ret.color = color
+	if (flags)
+		ret.appearance_flags = flags
+	return ret
+
+// Creates a standard overlay image, but adds a "glowmask" by placing it above lighting.
+/proc/glowmasked_image(icon, icon_state, color, flags)
+	var/image/ret = overlay_image(icon, icon_state, color, flags)
+	ret.layer = ABOVE_LIGHTING_LAYER
+	ret.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 	return ret
 
 	///////////////////////
