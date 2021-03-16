@@ -221,7 +221,7 @@
 		//Start power up sequence
 		power = MECH_POWER_TRANSITION
 		playsound(src, 'sound/mecha/powerup.ogg', 50, 0)
-		if(user.do_skilled(1.5 SECONDS, SKILL_MECH, src, 0.5) && power == MECH_POWER_TRANSITION)
+		if (do_after(user, DO_AFTER_TIME_MIN, src) && power == MECH_POWER_TRANSITION)
 			playsound(src, 'sound/mecha/nominal.ogg', 50, 0)
 			power = MECH_POWER_ON
 		else
@@ -230,5 +230,3 @@
 		hud_power_control?.queue_icon_update()
 	else
 		to_chat(user, SPAN_WARNING("Error: No power cell was detected."))
-
-

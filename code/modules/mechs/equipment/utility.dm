@@ -240,7 +240,7 @@
 	//Check our layers
 	if(owner && (owner.hardpoints[HARDPOINT_HEAD] == src))
 		mech_layer = MECH_INTERMEDIATE_LAYER
-	else mech_layer = initial(mech_layer)	
+	else mech_layer = initial(mech_layer)
 
 #define CATAPULT_SINGLE 1
 #define CATAPULT_AREA   2
@@ -607,11 +607,11 @@
 	if (istype(C))
 		if (C.checked_use(movement_power * CELLRATE))
 			return TRUE
-		else 
+		else
 			deactivate()
 
 	return FALSE
-				
+
 /obj/item/mech_equipment/ionjets/attack_self(mob/user)
 	. = ..()
 	if (!.)
@@ -619,7 +619,7 @@
 
 	if (active)
 		deactivate()
-	else 
+	else
 		activate()
 
 /obj/item/mech_equipment/ionjets/CtrlClick(mob/user)
@@ -635,7 +635,7 @@
 	ion_trail.start()
 	active = TRUE
 	update_icon()
-	
+
 /obj/item/mech_equipment/ionjets/deactivate()
 	. = ..()
 	passive_power_use = 0 KILOWATTS
@@ -718,7 +718,7 @@
 	if(owner)
 		camera.c_tag = "[owner.name] camera feed"
 		invalidateCameraCache()
-	
+
 /obj/item/mech_equipment/camera/uninstalled()
 	. = ..()
 	camera.c_tag = "null"
@@ -740,7 +740,7 @@
 
 /obj/item/mech_equipment/camera/attackby(obj/item/W, mob/user)
 	. = ..()
-	
+
 	if(isScrewdriver(W))
 		var/list/all_networks = list()
 		for(var/network in GLOB.using_map.station_networks)
@@ -752,8 +752,7 @@
 		var/network = input("Which network would you like to configure it for?") as null|anything in (all_networks)
 		if(!network)
 			to_chat(user, SPAN_WARNING("You cannot connect to any camera network!."))
-		var/delay = 20 * user.skill_delay_mult(SKILL_DEVICES)
-		if(do_after(user, delay, src) && network)
+		if(do_after(user, 20 SECONDS, src, do_skill = SKILL_DEVICES, delay_flags = DO_AFTER_TIME_FLAG_USER_SKILL) && network)
 			camera.network = list(network)
 			camera.update_coverage(TRUE)
 			to_chat(user, SPAN_NOTICE("You configure the camera for \the [network] network."))

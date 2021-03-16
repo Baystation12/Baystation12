@@ -78,22 +78,20 @@
 			if(!found)
 				return FALSE
 	else
-		return FALSE	
+		return FALSE
 
 	if(user)
-		var/delay = 30 * user.skill_delay_mult(SKILL_DEVICES)
-		if(delay > 0)
-			user.visible_message(
-				SPAN_NOTICE("\The [user] begins trying to install \the [system] into \the [src]."),
-				SPAN_NOTICE("You begin trying to install \the [system] into \the [src].")
-			)
-			if(!do_after(user, delay, src) || user.get_active_hand() != system)
-				return FALSE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] begins trying to install \the [system] into \the [src]."),
+			SPAN_NOTICE("You begin trying to install \the [system] into \the [src].")
+		)
+		if(!do_after(user, DO_AFTER_TIME_QUICK, src, DO_PUBLIC_UNIQUE, do_skill = SKILL_DEVICES, delay_flags = DO_AFTER_TIME_FLAG_USER_SKILL) || user.get_active_hand() != system)
+			return FALSE
 
-			if(user.unEquip(system))
-				to_chat(user, SPAN_NOTICE("You install \the [system] in \the [src]'s [system_hardpoint]."))
-				playsound(user.loc, 'sound/items/Screwdriver.ogg', 100, 1)
-			else return FALSE
+		if(user.unEquip(system))
+			to_chat(user, SPAN_NOTICE("You install \the [system] in \the [src]'s [system_hardpoint]."))
+			playsound(user.loc, 'sound/items/Screwdriver.ogg', 100, 1)
+		else return FALSE
 
 	GLOB.destroyed_event.register(system, src, .proc/forget_module)
 
@@ -120,11 +118,9 @@
 
 	var/obj/item/system = hardpoints[system_hardpoint]
 	if(user)
-		var/delay = 30 * user.skill_delay_mult(SKILL_DEVICES)
-		if(delay > 0)
-			user.visible_message(SPAN_NOTICE("\The [user] begins trying to remove \the [system] from \the [src]."))
-			if(!do_after(user, delay, src) || hardpoints[system_hardpoint] != system)
-				return FALSE
+		user.visible_message(SPAN_NOTICE("\The [user] begins trying to remove \the [system] from \the [src]."))
+		if(!do_after(user, DO_AFTER_TIME_QUICK, src, DO_PUBLIC_PROGRESS, do_skill = SKILL_DEVICES, delay_flags = DO_AFTER_TIME_FLAG_USER_SKILL) || hardpoints[system_hardpoint] != system)
+			return FALSE
 
 	hardpoints[system_hardpoint] = null
 

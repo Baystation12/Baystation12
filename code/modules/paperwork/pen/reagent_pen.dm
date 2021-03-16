@@ -20,7 +20,7 @@
 				to_chat(user, SPAN_WARNING("You begin hunting for an injection port on \the [M]'s suit!"))
 			else
 				to_chat(user, SPAN_NOTICE("You begin hunting for an injection port on your suit."))
-			if(!user.do_skilled(INJECTION_PORT_DELAY, SKILL_MEDICAL, M))
+			if (!do_after(user, INJECTION_PORT_DELAY, M, DO_DEFAULT | DO_BOTH_UNIQUE_ACT, do_skill = SKILL_MEDICAL, delay_flags = DO_AFTER_TIME_FLAG_USER_SKILL))
 				return
 		if(reagents.total_volume)
 			if(M.reagents)

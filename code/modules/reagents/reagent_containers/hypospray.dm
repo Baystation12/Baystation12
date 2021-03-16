@@ -16,15 +16,7 @@
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	slot_flags = SLOT_BELT
 
-	// autoinjectors takes less time than a normal syringe (overriden for hypospray).
-	// This delay is only applied when injecting concious mobs, and is not applied for self-injection
-	// The 1.9 factor scales it so it takes the following number of seconds:
-	// NONE   1.47
-	// BASIC  1.00
-	// ADEPT  0.68
-	// EXPERT 0.53
-	// PROF   0.39
-	var/time = (1 SECONDS) / 1.9
+	var/time = DO_AFTER_TIME_MIN
 	var/single_use = TRUE // autoinjectors are not refillable (overriden for hypospray)
 
 /obj/item/reagent_containers/hypospray/attack(mob/living/M, mob/user)
@@ -43,7 +35,7 @@
 			user.visible_message(SPAN_WARNING("\The [user] begins hunting for an injection port on \the [M]'s suit!"))
 		else
 			to_chat(user, SPAN_NOTICE("You begin hunting for an injection port on your suit."))
-		if(!user.do_skilled(INJECTION_PORT_DELAY, SKILL_MEDICAL, M))
+		if (!do_after(user, INJECTION_PORT_DELAY, M, DO_DEFAULT | DO_BOTH_UNIQUE_ACT, do_skill = SKILL_MEDICAL, delay_flags = DO_AFTER_TIME_FLAG_USER_SKILL))
 			return
 
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
@@ -51,7 +43,7 @@
 
 	if(user != M && !M.incapacitated() && time) // you're injecting someone else who is concious, so apply the device's intrisic delay
 		to_chat(user, SPAN_WARNING("\The [user] is trying to inject \the [M] with \the [name]."))
-		if(!user.do_skilled(time, SKILL_MEDICAL, M))
+		if (!do_after(user, time, M, DO_PUBLIC_UNIQUE, do_skill = SKILL_MEDICAL, delay_flags = DO_AFTER_TIME_FLAG_USER_SKILL))
 			return
 
 	if(single_use && reagents.total_volume <= 0) // currently only applies to autoinjectors

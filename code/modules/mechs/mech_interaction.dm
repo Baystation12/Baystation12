@@ -348,8 +348,7 @@
 					return
 
 				visible_message(SPAN_WARNING("\The [user] begins unwrenching the securing bolts holding \the [src] together."))
-				var/delay = 60 * user.skill_delay_mult(SKILL_DEVICES)
-				if(!do_after(user, delay) || !maintenance_protocols)
+				if(!do_after(user, DO_AFTER_TIME_SHORT, src, DO_PUBLIC_UNIQUE, do_skill = SKILL_DEVICES, delay_flags = DO_AFTER_TIME_FLAG_USER_SKILL) || !maintenance_protocols)
 					return
 				visible_message(SPAN_NOTICE("\The [user] loosens and removes the securing bolts, dismantling \the [src]."))
 				dismantle()
@@ -383,8 +382,7 @@
 				if(!body || !body.cell)
 					to_chat(user, SPAN_WARNING("There is no cell here for you to remove!"))
 					return
-				var/delay = 20 * user.skill_delay_mult(SKILL_DEVICES)
-				if(!do_after(user, delay) || !maintenance_protocols || !body || !body.cell)
+				if(!do_after(user, DO_AFTER_TIME_QUICK, src, DO_PUBLIC_UNIQUE, do_skill = SKILL_DEVICES, delay_flags = DO_AFTER_TIME_FLAG_USER_SKILL) || !maintenance_protocols || !body || !body.cell)
 					return
 
 				user.put_in_hands(body.cell)
@@ -401,9 +399,8 @@
 					return
 				if(!body) //Error
 					return
-				var/delay = min(50 * user.skill_delay_mult(SKILL_DEVICES), 50 * user.skill_delay_mult(SKILL_EVA))
 				visible_message(SPAN_NOTICE("\The [user] starts forcing the \the [src]'s emergency [body.hatch_descriptor] release using \the [thing]."))
-				if(!do_after(user, delay, src, DO_DEFAULT | DO_PUBLIC_PROGRESS))
+				if(!do_after(user, DO_AFTER_TIME_SHORT, src, DO_PUBLIC_UNIQUE, do_skill = SKILL_DEVICES, delay_flags = DO_AFTER_TIME_FLAG_USER_SKILL))
 					return
 				visible_message(SPAN_NOTICE("\The [user] forces \the [src]'s [body.hatch_descriptor] open using the \the [thing]."))
 				playsound(user.loc, 'sound/machines/bolts_up.ogg', 25, 1)

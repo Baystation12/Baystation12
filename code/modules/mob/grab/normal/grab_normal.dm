@@ -254,7 +254,7 @@
 	user.visible_message("<span class='danger'>\The [user] begins to slit [affecting]'s throat with \the [W]!</span>")
 
 	user.next_move = world.time + 20 //also should prevent user from triggering this repeatedly
-	if(!do_after(user, 20 * user.skill_delay_mult(SKILL_COMBAT), do_flags = DO_DEFAULT & ~DO_SHOW_PROGRESS))
+	if(!do_after(user, DO_AFTER_TIME_QUICK, affecting, DO_DEFAULT, do_skill = SKILL_COMBAT, delay_flags = DO_AFTER_TIME_FLAG_USER_SKILL))
 		return 0
 	if(!(G && G.affecting == affecting)) //check that we still have a grab
 		return 0

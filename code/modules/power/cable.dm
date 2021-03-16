@@ -166,12 +166,12 @@ By design, d1 is the smallest direction and d2 is the highest
 
 		if(W.force < 5)
 			visible_message("<span class='warning'>[user] starts sawing away roughly at the cable with \the [W].</span>")
-			delay_holder = 8 SECONDS
+			delay_holder = DO_AFTER_TIME_MEDIUM
 		else
 			visible_message("<span class='warning'>[user] begins to cut through the cable with \the [W].</span>")
-			delay_holder = 3 SECONDS
+			delay_holder = DO_AFTER_TIME_QUICK
 
-		if(user.do_skilled(delay_holder, SKILL_ELECTRICAL, src))
+		if (do_after(user, delay_holder, src, DO_PUBLIC_UNIQUE, do_skill = SKILL_ELECTRICAL, delay_flags = DO_AFTER_TIME_FLAG_USER_SKILL))
 			cut_wire(W, user)
 			if(W.obj_flags & OBJ_FLAG_CONDUCTIBLE)
 				shock(user, 66, 0.7)

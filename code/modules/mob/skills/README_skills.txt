@@ -23,8 +23,6 @@ User's Guide to Skills
 	Additional helper procs may be given to mobs to convert skill values into times, probabilities, or whatever in a reusable way.
 	Currently implemented examples:
 		skill_check(SKILL_PATH, SKILL_VALUE) returns 1 if the mob's skill is >= value.
-		skill_delay_mult(SKILL_PATH, factor) gives a generic way to modify times via skills.
-		do_skilled(base_delay, SKILL_PATH, atom/target, factor) is like do_after, but modifies the time by skill_delay_mult
 		skill_fail_chance(SKILL_PATH, fail_chance, no_more_fail, factor) modifies fail probabilities according to skill.
 
 4. What determines what skill options are available in player setup? How can you change them?
@@ -33,7 +31,7 @@ User's Guide to Skills
 	This minimum value is given for free to the player, and does not use up allocation points.
 	For each job, a maximum value can also be assigned. Add a similar entry to the max_skills list.
 	For each job, a base number of free points can be assigned. This is given in the job datum's skill_points variable (should be a number).
-	Free point bonuses/penalties can be specified, for each species, as a function of a player's selected age. 
+	Free point bonuses/penalties can be specified, for each species, as a function of a player's selected age.
 	This can be done by overwriting species datum's skills_from_age proc, which takes in the age and returns an integer (positive or negative) which will be added to all jobs' available skill points.
 	Free point bonuses/penalties can be specified, for each species, as a function of the job.
 	To do this, add the entry /datum/job/my_job = points_to_add to the species datum's job_skill_buffs variable (this is a list). Then points_to_add (positive or negative) will be added to that job's available skill points.

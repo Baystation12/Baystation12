@@ -288,7 +288,7 @@
 				to_chat(user, SPAN_DANGER("You can't apply a splint to the arm you're using!"))
 				return
 			user.visible_message(SPAN_DANGER("[user] starts to apply \the [src] to their [limb]."), SPAN_DANGER("You start to apply \the [src] to your [limb]."), SPAN_DANGER("You hear something being wrapped."))
-		if(user.do_skilled(5 SECONDS, SKILL_MEDICAL, M))
+		if (do_after(user, DO_AFTER_TIME_SHORT, M, DO_PUBLIC_UNIQUE, do_skill = SKILL_MEDICAL, delay_flags = DO_AFTER_TIME_FLAG_USER_SKILL))
 			if((M == user && prob(75)) || prob(user.skill_fail_chance(SKILL_MEDICAL,50, SKILL_ADEPT)))
 				user.visible_message(SPAN_DANGER("\The [user] fumbles [src]."), SPAN_DANGER("You fumble [src]."), SPAN_DANGER("You hear something being wrapped."))
 				return

@@ -333,7 +333,7 @@
 
 	//beginning to place the paddles on patient's chest to allow some time for people to move away to stop the process
 	user.visible_message("<span class='warning'>\The [user] begins to place [src] on [H]'s chest.</span>", "<span class='warning'>You begin to place [src] on [H]'s chest...</span>")
-	if(!user.do_skilled(3 SECONDS, SKILL_MEDICAL, H))
+	if (!do_after(user, DO_AFTER_TIME_QUICK, H, DO_PUBLIC_UNIQUE, do_skill = SKILL_MEDICAL, delay_flags = DO_AFTER_TIME_FLAG_USER_SKILL))
 		return
 	user.visible_message("<span class='notice'>\The [user] places [src] on [H]'s chest.</span>", "<span class='warning'>You place [src] on [H]'s chest.</span>")
 	playsound(get_turf(src), 'sound/machines/defib_charge.ogg', 50, 0)

@@ -104,7 +104,7 @@ Robots and antags can instruct.
 		return
 	var/decl/hierarchy/skill/skill = options[choice]
 
-	if(!do_skilled(6 SECONDS, skill.type, target))
+	if (!do_after(src, DO_AFTER_TIME_SHORT, target, DO_DEFAULT, do_skill = skill.type, delay_flags = DO_AFTER_TIME_FLAG_USER_SKILL))
 		return
 	if(incapacitated() || target.incapacitated())
 		to_chat(src, "<span class='notice'>[incapacitated() ? "You are in no state to teach right now!" : "\the [target] is in no state to be taught right now!"]</span>")
@@ -219,7 +219,3 @@ The Appraise verb. Used on objects to estimate their value.
 		add_client_color(/datum/client_color/noir)
 	else
 		to_chat(src, "You stop looking for clues.")
-
-
-
-
