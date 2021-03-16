@@ -20,6 +20,9 @@
 		activate()
 		
 /obj/item/implant/virtual_reality/activate()
+	if (!SSvirtual_reality.can_enter_vr(imp_in))
+		to_chat(imp_in, SPAN_WARNING("Your implant blips inside of your head as its safety mechanisms prevent you from activating it."))
+		return
 	var/list/spawn_locs = SSvirtual_reality.get_vr_spawns()
 	if (!spawn_locs.len)
 		to_chat(imp_in, SPAN_WARNING("You briefly go lightheaded but then return to normal as your implant fails to find a spot to send you."))

@@ -184,6 +184,9 @@
 	update_use_power(POWER_USE_ACTIVE)
 
 /obj/machinery/vr_pod/proc/simulate(mob_type)
+	if (!SSvirtual_reality.can_enter_vr(occupant))
+		to_chat(occupant, SPAN_WARNING("\The [initial(name)] buzzes. It won't activate with your current vital signs."))
+		return
 	var/list/spawn_locs = SSvirtual_reality.get_vr_spawns()
 	if (!spawn_locs.len)
 		to_chat(occupant, SPAN_WARNING("Your [initial(name)] blips as it fails to find a valid location to project you to."))

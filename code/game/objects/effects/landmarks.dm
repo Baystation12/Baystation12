@@ -62,6 +62,10 @@
 			endgame_exits += loc
 			delete_me = 1
 			return
+		if ("vr entrance")
+			GLOB.vr_spawnlocs += loc
+			delete_me = 1
+			return
 
 	landmarks_list += src
 	return 1
