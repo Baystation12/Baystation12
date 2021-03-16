@@ -1081,7 +1081,7 @@
 	icon_state = "top-center"
 	},
 /obj/structure/table/glass,
-/obj/item/weapon/icarus_disk,
+/obj/item/icarus_disk,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/icarus/bridge)
 "HH" = (

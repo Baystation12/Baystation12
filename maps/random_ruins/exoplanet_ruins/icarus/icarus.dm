@@ -79,7 +79,7 @@
 
 //Objects
 
-/obj/item/weapon/icarus_disk
+/obj/item/icarus_disk
 	name = "disk"
 	desc = "A dusty disk. Its label says: \"Deliver to SCG Expeditionary Corps Command!\". Its content is encrypted with quantum crypthography methods."
 	icon = 'icons/obj/items.dmi'
