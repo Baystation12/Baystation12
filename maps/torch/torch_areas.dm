@@ -1373,6 +1373,10 @@
 /area/virtual_reality/infirmary
 	name = "\improper Virtual Reality - Infirmary"
 
+/area/virtual_reality/shady_room
+	name = "\improper Virtual Reality - Shady Room"
+	dynamic_lighting = TRUE
+
 // Holodecks
 
 /area/holodeck

@@ -1058,6 +1058,7 @@
 #include "code\game\objects\items\weapons\implants\implants\tracking.dm"
 #include "code\game\objects\items\weapons\implants\implants\translator.dm"
 #include "code\game\objects\items\weapons\implants\implants\uplink.dm"
+#include "code\game\objects\items\weapons\implants\implants\virtual_reality.dm"
 #include "code\game\objects\items\weapons\material\ashtray.dm"
 #include "code\game\objects\items\weapons\material\bell.dm"
 #include "code\game\objects\items\weapons\material\coins.dm"

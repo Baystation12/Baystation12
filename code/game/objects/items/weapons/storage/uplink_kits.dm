@@ -36,6 +36,9 @@
 		/obj/item/reagent_containers/hypospray/autoinjector/mindbreaker
 		)
 
+/obj/item/storage/box/syndie_kit/imp_virtual_reality
+	startswith = list(/obj/item/implanter/virtual_reality)
+
 // Space suit uplink kit
 /obj/item/storage/backpack/satchel/syndie_kit/space
 	//name = "\improper EVA gear pack"

@@ -5,7 +5,7 @@
 	icon_state = "redpod0"
 	density = TRUE
 	anchored = TRUE
-	clicksound = 'sound/machines/buttonbeep.ogg'
+	clicksound = 'sound/machines/pda_click.ogg'
 	clickvol = 30
 	base_type = /obj/machinery/vr_pod
 	construct_state = /decl/machine_construction/default/panel_closed
@@ -78,9 +78,9 @@
 		return
 	. = ..()
 
-/obj/machinery/vr_pod/examine(mob/user)
+/obj/machinery/vr_pod/examine(mob/user, distance)
 	. = ..()
-	if (occupant)
+	if (occupant && distance <= 1)
 		to_chat(user, SPAN_NOTICE("You can see \the [occupant] inside..."))
 		user.examinate(occupant)
 
@@ -180,7 +180,7 @@
 	update_use_power(POWER_USE_ACTIVE)
 
 /obj/machinery/vr_pod/proc/simulate(mob_type)
-	playsound(src, 'sound/machines/signal.ogg', 100, FALSE)
+	playsound(src, 'sound/machines/medbayscanner.ogg', 100, FALSE)
 	var/list/spawn_locs = list()
 	for (var/obj/effect/landmark/L in landmarks_list)
 		if (L.name == "vr entrance")
@@ -190,7 +190,7 @@
 		SPAN_NOTICE("The world shimmers and distorts. There's a small *pop* as \the [simulated_mob] appears from nothing."),
 		SPAN_NOTICE("Your pod fills with light and sound. You feel weightless and disoriented. And then, suddenly, you're someone else!")
 	)
-	audible_message(SPAN_NOTICE("\The [src] emits a series of beeping and clicks as it shunts its occupant into a virtual mind."))
+	audible_message(SPAN_NOTICE("\The [src] emits a series of beeping and clicks as it shunts its occupant into virtual reality."))
 
 /obj/machinery/vr_pod/proc/unsimulate()
 	if (!occupant)
@@ -215,13 +215,12 @@
 			playsound(loc, 'sound/machines/bolts_up.ogg', 50)
 		. = TOPIC_REFRESH
 	else if (href_list["simulate"])
+		close_browser(user, "window=vrpod")
 		simulate(user.type)
 		. = TOPIC_HANDLED
 	
 	if (. == TOPIC_REFRESH)
 		interface_interact(user)
-	else if (. == TOPIC_HANDLED)
-		close_browser(user, "window=vrpod")
 
 /obj/machinery/vr_pod/interface_interact(mob/user)
 	var/dat = ""

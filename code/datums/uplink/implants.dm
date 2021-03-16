@@ -41,3 +41,11 @@
 	item_cost = 20
 	path = /obj/item/storage/box/syndie_kit/imp_imprinting
 	antag_roles = list(MODE_TRAITOR)
+
+/datum/uplink_item/item/implants/imp_vr
+	name = "VR Implant"
+	desc = "With this implant, you can remotely access the shared digital space maintained by VR pods, allowing you to enter VR at any time. \
+	NOTE: You will have absolutely no way of knowing what's happening to your body while you're in VR. Use carefully."
+	item_cost = 16
+	path = /obj/item/storage/box/syndie_kit/imp_virtual_reality
+	antag_roles = list(MODE_TRAITOR)

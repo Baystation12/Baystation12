@@ -216,8 +216,12 @@
 			var/mob/living/carbon/human/H = src
 			if(istype(H)) show_ssd = H.species.show_ssd
 			if(show_ssd && ssd_check())
+				var/mob/living/surrogate = SSvirtual_reality.virtual_occupants_to_mobs[H]
 				M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [t_him] up!</span>", \
-				"<span class='notice'>You shake [src], but they do not respond... Maybe they have S.S.D?</span>")
+				"<span class='notice'>You shake [src], but they do not respond...[surrogate ? "" : " maybe they have S.S.D?"]</span>")
+				if (surrogate)
+					to_chat(surrogate, SPAN_NOTICE(FONT_LARGE("Someone is shaking your body!")))
+					surrogate.playsound_local(surrogate.loc, 'sound/weapons/thudswoosh.ogg', 50, TRUE)
 			else if(lying || src.sleeping || player_triggered_sleeping)
 				src.player_triggered_sleeping = 0
 				src.sleeping = max(0,src.sleeping - 5)

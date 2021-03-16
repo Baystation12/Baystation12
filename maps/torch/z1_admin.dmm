@@ -11332,6 +11332,10 @@
 	icon_state = "wood"
 	},
 /area/centcom/living)
+"bNq" = (
+/obj/machinery/door/blast/regular,
+/turf/simulated/wall/r_wall/prepainted,
+/area/virtual_reality/shady_room)
 "bOb" = (
 /obj/structure/hygiene/sink{
 	dir = 1;
@@ -11452,6 +11456,10 @@
 	icon_state = "white"
 	},
 /area/virtual_reality/infirmary)
+"cTg" = (
+/obj/effect/decal/cleanable/blood,
+/turf/unsimulated/floor/steel,
+/area/virtual_reality/shady_room)
 "cXx" = (
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 5
@@ -11513,6 +11521,11 @@
 /obj/item/beach_ball/holovolleyball,
 /turf/simulated/floor/holofloor/beach/sand,
 /area/holodeck/source_volleyball)
+"dka" = (
+/obj/structure/table/woodentable/mahogany,
+/obj/random/soap,
+/turf/unsimulated/floor/steel,
+/area/virtual_reality/shady_room)
 "dkh" = (
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 5
@@ -11560,6 +11573,9 @@
 /obj/effect/floor_decal/beach/corner,
 /turf/simulated/floor/holofloor/concrete,
 /area/holodeck/source_volleyball)
+"dLy" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/virtual_reality/shady_room)
 "dMH" = (
 /obj/effect/floor_decal/spline/plain{
 	dir = 10;
@@ -11602,6 +11618,9 @@
 "efq" = (
 /turf/simulated/floor/holofloor/concrete,
 /area/holodeck/source_cafe)
+"eiI" = (
+/turf/unsimulated/floor/steel,
+/area/virtual_reality/shady_room)
 "eta" = (
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 5
@@ -11774,6 +11793,13 @@
 	icon_state = "white"
 	},
 /area/virtual_reality/infirmary)
+"gif" = (
+/obj/structure/table/woodentable/mahogany,
+/obj/machinery/light/small,
+/obj/item/material/knife/folding/combat/balisong,
+/obj/item/melee/classic_baton,
+/turf/unsimulated/floor/steeldirty,
+/area/virtual_reality/shady_room)
 "giU" = (
 /obj/effect/floor_decal/spline/plain/blue{
 	dir = 4;
@@ -11875,6 +11901,14 @@
 	icon_state = "white"
 	},
 /area/virtual_reality/infirmary)
+"hXt" = (
+/obj/machinery/light/small{
+	dir = 1
+	},
+/obj/structure/bed/chair/wood/walnut,
+/obj/effect/decal/cleanable/blood,
+/turf/unsimulated/floor/steel,
+/area/virtual_reality/shady_room)
 "icO" = (
 /obj/structure/bed/chair/wood{
 	dir = 1;
@@ -12054,6 +12088,10 @@
 	},
 /turf/simulated/floor/holofloor/concrete,
 /area/holodeck/source_plaza)
+"jZN" = (
+/obj/item/tape_roll,
+/turf/unsimulated/floor/steeldirty,
+/area/virtual_reality/shady_room)
 "kce" = (
 /turf/simulated/floor/holofloor/beach/sand{
 	icon_state = "desert4"
@@ -12294,6 +12332,12 @@
 	},
 /turf/simulated/floor/holofloor/lino,
 /area/holodeck/source_meetinghall)
+"pby" = (
+/obj/effect/landmark{
+	name = "vr entrance"
+	},
+/turf/unsimulated/floor/steel,
+/area/virtual_reality/shady_room)
 "pgJ" = (
 /obj/structure/holostool,
 /turf/simulated/floor/holofloor/tiled/stone,
@@ -12590,6 +12634,9 @@
 "uJY" = (
 /turf/simulated/floor/holofloor/beach/sand,
 /area/holodeck/source_volleyball)
+"uRF" = (
+/turf/unsimulated/floor/steeldirty,
+/area/virtual_reality/shady_room)
 "uZF" = (
 /turf/simulated/floor/plating,
 /turf/simulated/wall/r_titanium,
@@ -12597,6 +12644,9 @@
 "vbR" = (
 /turf/simulated/floor/holofloor/wood,
 /area/holodeck/source_cafe)
+"vfX" = (
+/turf/unsimulated/wall,
+/area/virtual_reality/shady_room)
 "vgY" = (
 /obj/structure/table/rack/holorack,
 /turf/simulated/floor/holofloor/wood{
@@ -35954,15 +36004,15 @@ gse
 oql
 ajo
 aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+vfX
+vfX
+vfX
+vfX
+vfX
+vfX
+vfX
+vfX
+vfX
 aab
 aab
 aab
@@ -36156,15 +36206,15 @@ vbR
 vbR
 ajo
 aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+vfX
+dLy
+dLy
+dLy
+dLy
+dLy
+dLy
+dLy
+vfX
 aab
 aab
 aab
@@ -36358,15 +36408,15 @@ vbR
 fxB
 ajo
 aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+vfX
+dLy
+uRF
+uRF
+cTg
+eiI
+gif
+dLy
+vfX
 aab
 aab
 aab
@@ -36560,15 +36610,15 @@ vbR
 jhl
 ajo
 aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+vfX
+dLy
+uRF
+eiI
+eiI
+eiI
+dka
+dLy
+vfX
 aab
 aab
 aab
@@ -36762,15 +36812,15 @@ vbR
 jhl
 ajo
 aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+vfX
+dLy
+hXt
+eiI
+pby
+uRF
+eiI
+bNq
+vfX
 aab
 aab
 aab
@@ -36964,15 +37014,15 @@ vbR
 bcS
 ajo
 aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+vfX
+dLy
+eiI
+eiI
+eiI
+jZN
+uRF
+dLy
+vfX
 aab
 aab
 aab
@@ -37166,15 +37216,15 @@ vbR
 vbR
 ajo
 aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+vfX
+dLy
+uRF
+eiI
+eiI
+eiI
+cTg
+dLy
+vfX
 aab
 aab
 aab
@@ -37368,15 +37418,15 @@ aat
 aat
 aaa
 aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+vfX
+dLy
+dLy
+dLy
+dLy
+dLy
+dLy
+dLy
+vfX
 aab
 aab
 aab
@@ -37570,15 +37620,15 @@ aeN
 aeN
 ajo
 aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+vfX
+vfX
+vfX
+vfX
+vfX
+vfX
+vfX
+vfX
+vfX
 aab
 aab
 aab

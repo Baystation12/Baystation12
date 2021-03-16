@@ -22,5 +22,15 @@
 	mechanics_text = "This device can connect to a number of conveyor belts and control their movement. A two-way switch will allow you to make the conveyors run in forward and reverse mode, the one-way switch will only allow one direction. Can be removed with a crowbar."
 
 /datum/codex_entry/vr
-	display_name = "VR"
 	associated_paths = list(/obj/machinery/vr_pod)
+	mechanics_text = "VR pods are full-body beds that can send a user into virtual reality. While in VR, you'll effectively control a different person inside a virtual space, bringing along none of your belongings and being unable to see or hear around your normal self.<br>\
+	<br>\
+	VR affords a great deal of freedom. Several new verbs, found in the VR tab, allow you to do things such as heal your virtual body, as well as maxing out all of your skills. It's an ideal place to test out and learn new things before you do them in person. You'll be able to interact with anyone else that's using VR in the same area, as well.<br>\
+	<br>\
+	When you exit VR, you'll drop all the items your digital body had so that they aren't removed from the simulation. You'll be forced out if your pod is opened or if your virtual body dies. Obviously, dying in real life will cancel your VR session."
+	lore_text = "VR tech really took off after the 21st century, but simulating entire detailed worlds takes a lot of processing power and is mostly a novelty. It's possible in some places - usually tourist destinations - but nothing of the sort in this humble little pod. Simulated environments are an excellent place for hands-on training and experience without risking danger in the real world, and are especially useful for learning delicate procedures like surgery without any risk of collateral damage.<br>\
+	<br>\
+	This design is manufactured by Ward-Takahashi. It's unassuming on the outside and inside, but it works by physically intercepting and altering the stimuli your brain receives to effectively shift your entire perception into that of your virtual body, making it feel like you're really there. This is also why you're incapable of seeing, hearing, or feeling anything from your normal body when you're in VR - with a few exceptions."
+	antag_text = "If you're looking for a place for a covert meeting or discussion where nobody can spy on you without having to make themselves known, a VR room might be just the thing you need.<br>\
+	<br>\
+	Under normal circumstances, the pod's design provides a complete separation between the stimuli of the an occupant and their virtual self. However, settings exist to allow partial or full mirroring of some things. This is usually used to help ease people into using VR, but with the right tools, you could do other things with it. Like hurt people."

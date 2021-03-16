@@ -21,6 +21,8 @@ SUBSYSTEM_DEF(virtual_reality)
 	var/obj/machinery/vr_pod/pod = user.loc
 	if (istype(pod)) // Check for powered and operable VR pod
 		is_valid = pod.is_powered() && pod.operable()
+	else // Finally, check for a VR implant, but only if nothing else is active
+		is_valid = locate(/obj/item/implant/virtual_reality) in user
 	return is_valid
 
 // Creates a virtual mob for the provided occupant. Humans will take appearance based on client prefs.
