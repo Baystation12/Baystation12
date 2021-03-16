@@ -87,7 +87,7 @@
 	if(H.psi)
 		H.psi.update()
 		if(give_psionic_implant_on_join)
-			var/obj/item/weapon/implant/psi_control/imp = new
+			var/obj/item/implant/psi_control/imp = new
 			imp.implanted(H)
 			imp.forceMove(H)
 			imp.imp_in = H

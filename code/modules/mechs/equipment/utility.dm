@@ -281,7 +281,7 @@
 						log_and_message_admins("used [src] to throw [locked] at [target].", user, owner.loc)
 						locked = null
 
-						var/obj/item/weapon/cell/C = owner.get_cell()
+						var/obj/item/cell/C = owner.get_cell()
 						if(istype(C))
 							C.use(active_power_use * CELLRATE)
 
@@ -302,7 +302,7 @@
 
 
 				log_and_message_admins("used [src]'s area throw on [target].", user, owner.loc)
-				var/obj/item/weapon/cell/C = owner.get_cell()
+				var/obj/item/cell/C = owner.get_cell()
 				if(istype(C))
 					C.use(active_power_use * CELLRATE * 2) //bit more expensive to throw all
 
@@ -312,17 +312,17 @@
 #undef CATAPULT_AREA
 
 
-/obj/item/weapon/material/drill_head
+/obj/item/material/drill_head
 	var/durability = 0
 	name = "drill head"
 	desc = "A replaceable drill head usually used in exosuit drills."
 	icon = 'icons/obj/weapons/other.dmi'
 	icon_state = "drill_head"
 
-/obj/item/weapon/material/drill_head/proc/get_percent_durability()
+/obj/item/material/drill_head/proc/get_percent_durability()
 	return round((durability / material.integrity) * 50)
 
-/obj/item/weapon/material/drill_head/proc/get_visible_durability()
+/obj/item/material/drill_head/proc/get_visible_durability()
 	switch (get_percent_durability())
 		if (95 to INFINITY) . = "shows no wear"
 		if (75 to 95) . = "shows some wear"
@@ -330,24 +330,24 @@
 		if (10 to 50) . = "is very worn"
 		else . = "looks close to breaking"
 
-/obj/item/weapon/material/drill_head/examine(mob/user, distance)
+/obj/item/material/drill_head/examine(mob/user, distance)
 	. = ..()
 	to_chat(user, "It [get_visible_durability()].")
 
 
-/obj/item/weapon/material/drill_head/steel
+/obj/item/material/drill_head/steel
 	default_material = MATERIAL_STEEL
 
-/obj/item/weapon/material/drill_head/titanium
+/obj/item/material/drill_head/titanium
 	default_material = MATERIAL_TITANIUM
 
-/obj/item/weapon/material/drill_head/plasteel
+/obj/item/material/drill_head/plasteel
 	default_material = MATERIAL_PLASTEEL
 
-/obj/item/weapon/material/drill_head/diamond
+/obj/item/material/drill_head/diamond
 	default_material = MATERIAL_DIAMOND
 
-/obj/item/weapon/material/drill_head/Initialize()
+/obj/item/material/drill_head/Initialize()
 	. = ..()
 	durability = 2 * material.integrity
 
@@ -360,7 +360,7 @@
 	equipment_delay = 10
 
 	//Drill can have a head
-	var/obj/item/weapon/material/drill_head/drill_head
+	var/obj/item/material/drill_head/drill_head
 	origin_tech = list(TECH_MATERIAL = 2, TECH_ENGINEERING = 2)
 
 
@@ -391,7 +391,7 @@
 	else
 		to_chat(user, "It does not have a drill head installed.")
 
-/obj/item/mech_equipment/drill/proc/attach_head(obj/item/weapon/material/drill_head/DH, mob/user)
+/obj/item/mech_equipment/drill/proc/attach_head(obj/item/material/drill_head/DH, mob/user)
 	if (user && !user.unEquip(DH))
 		return
 	if (drill_head)
@@ -403,7 +403,7 @@
 
 
 /obj/item/mech_equipment/drill/attackby(obj/item/I, mob/user)
-	if (istype(I, /obj/item/weapon/material/drill_head))
+	if (istype(I, /obj/item/material/drill_head))
 		attach_head(I, user)
 		return TRUE
 	. = ..()
@@ -419,7 +419,7 @@
 		if (!ore_box)
 			continue
 		var/list/atoms_in_range = range(1, at_turf)
-		for(var/obj/item/weapon/ore/ore in atoms_in_range)
+		for(var/obj/item/ore/ore in atoms_in_range)
 			if (!(get_dir(owner, ore) & owner.dir))
 				continue
 			ore.Move(ore_box)
@@ -428,7 +428,7 @@
 	if (!..()) // /obj/item/mech_equipment/afterattack implements a usage guard
 		return
 
-	if (istype(target, /obj/item/weapon/material/drill_head))
+	if (istype(target, /obj/item/material/drill_head))
 		attach_head(target, user)
 		return
 
@@ -454,7 +454,7 @@
 		to_chat(user, SPAN_WARNING("\The [target] can't be drilled away."))
 		return
 
-	var/obj/item/weapon/cell/mech_cell = owner.get_cell()
+	var/obj/item/cell/mech_cell = owner.get_cell()
 	mech_cell.use(active_power_use * CELLRATE) //supercall made sure we have one
 
 	var/delay = 3 SECONDS //most things
@@ -522,19 +522,19 @@
 
 
 /obj/item/mech_equipment/drill/steel
-	drill_head = /obj/item/weapon/material/drill_head/steel
+	drill_head = /obj/item/material/drill_head/steel
 
 /obj/item/mech_equipment/drill/titanium
-	drill_head = /obj/item/weapon/material/drill_head/titanium
+	drill_head = /obj/item/material/drill_head/titanium
 
 /obj/item/mech_equipment/drill/plasteel
-	drill_head = /obj/item/weapon/material/drill_head/plasteel
+	drill_head = /obj/item/material/drill_head/plasteel
 
 /obj/item/mech_equipment/drill/diamond
-	drill_head = /obj/item/weapon/material/drill_head/diamond
+	drill_head = /obj/item/material/drill_head/diamond
 
 
-/obj/item/weapon/gun/energy/plasmacutter/mounted/mech
+/obj/item/gun/energy/plasmacutter/mounted/mech
 	use_external_power = TRUE
 	has_safety = FALSE
 
@@ -543,19 +543,19 @@
 	name = "mounted plasma cutter"
 	desc = "An industrial plasma cutter mounted onto the chassis of the mech. "
 	icon_state = "railauto" //TODO: Make a new sprite that doesn't get sec called on you.
-	holding_type = /obj/item/weapon/gun/energy/plasmacutter/mounted/mech
+	holding_type = /obj/item/gun/energy/plasmacutter/mounted/mech
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND, HARDPOINT_LEFT_SHOULDER, HARDPOINT_RIGHT_SHOULDER)
 	restricted_software = list(MECH_SOFTWARE_UTILITY)
 	origin_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 4, TECH_ENGINEERING = 6, TECH_COMBAT = 3)
 
 /obj/item/mech_equipment/mounted_system/taser/autoplasma
 	icon_state = "mech_energy"
-	holding_type = /obj/item/weapon/gun/energy/plasmacutter/mounted/mech/auto
+	holding_type = /obj/item/gun/energy/plasmacutter/mounted/mech/auto
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_UTILITY)
 	origin_tech = list(TECH_MATERIAL = 5, TECH_PHORON = 4, TECH_ENGINEERING = 6, TECH_COMBAT = 4)
 
-/obj/item/weapon/gun/energy/plasmacutter/mounted/mech/auto
+/obj/item/gun/energy/plasmacutter/mounted/mech/auto
 	charge_cost = 13
 	name = "rotatory plasma cutter"
 	desc = "A state of the art rotating, variable intensity, sequential-cascade plasma cutter. Resist the urge to aim this at your coworkers."

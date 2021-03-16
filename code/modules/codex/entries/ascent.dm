@@ -4,10 +4,10 @@
 	associated_paths = list(
 		/mob/living/silicon/robot/flying/ascent,
 		/obj/item/device/multitool/mantid,
-		/obj/item/weapon/weldingtool/electric/mantid,
-		/obj/item/weapon/cell/mantid,
-		/obj/item/weapon/gun/energy/particle,
-		/obj/item/weapon/gun/energy/particle/small
+		/obj/item/weldingtool/electric/mantid,
+		/obj/item/cell/mantid,
+		/obj/item/gun/energy/particle,
+		/obj/item/gun/energy/particle/small
 	)
 	lore_text = "The Ascent is a human-hostile alien culture located rimward of the Skrellian \
 	territories. Little is known about them, and diplomatic channels do not currently exist. \

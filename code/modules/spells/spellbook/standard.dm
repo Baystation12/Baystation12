@@ -1,6 +1,6 @@
 //the spellbook we know and love. Well, the one we know, at least.
 
-/obj/item/weapon/spellbook/standard
+/obj/item/spellbook/standard
 	spellbook_type = /datum/spellbook/standard
 
 /datum/spellbook/standard
@@ -26,27 +26,27 @@
 							/spell/targeted/heal_target = 						1,
 							/spell/aoe_turf/knock = 							1,
 							/spell/noclothes = 									2,
-							/obj/item/weapon/gun/energy/staff/focus = 			1,
+							/obj/item/gun/energy/staff/focus = 			1,
 							/obj/structure/closet/wizard/souls = 				1,
-							/obj/item/weapon/gun/energy/staff/animate = 		1,
+							/obj/item/gun/energy/staff/animate = 		1,
 							/obj/structure/closet/wizard/scrying = 				1,
-							/obj/item/weapon/summoning_stone = 					2,
-							/obj/item/weapon/magic_rock = 						1,
-							/obj/item/weapon/contract/wizard/telepathy = 		1,
-							/obj/item/weapon/contract/apprentice = 				1
+							/obj/item/summoning_stone = 					2,
+							/obj/item/magic_rock = 						1,
+							/obj/item/contract/wizard/telepathy = 		1,
+							/obj/item/contract/apprentice = 				1
 							)
 
-	sacrifice_objects = list(/obj/item/weapon/storage/toolbox,
-							/obj/item/weapon/cane,
-							/obj/item/weapon/flamethrower,
-							/obj/item/weapon/plastique,
-							/obj/item/weapon/dice,
-							/obj/item/weapon/soap,
-							/obj/item/weapon/flame/candle,
-							/obj/item/weapon/flame/candle/scented/incense,
-							/obj/item/weapon/caution,
-							/obj/item/weapon/towel,
-							/obj/item/weapon/tank/jetpack,
+	sacrifice_objects = list(/obj/item/storage/toolbox,
+							/obj/item/cane,
+							/obj/item/flamethrower,
+							/obj/item/plastique,
+							/obj/item/dice,
+							/obj/item/soap,
+							/obj/item/flame/candle,
+							/obj/item/flame/candle/scented/incense,
+							/obj/item/caution,
+							/obj/item/towel,
+							/obj/item/tank/jetpack,
 							/obj/item/clothing/mask/plunger,
 							/obj/item/device/megaphone,
-							/obj/item/weapon/deck/cards)
+							/obj/item/deck/cards)

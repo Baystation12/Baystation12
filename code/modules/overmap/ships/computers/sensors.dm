@@ -101,7 +101,7 @@
 		var/obj/effect/overmap/O = locate(href_list["scan"])
 		if(istype(O) && !QDELETED(O) && (O in view(7,linked)))
 			playsound(loc, "sound/machines/dotprinter.ogg", 30, 1)
-			new/obj/item/weapon/paper/(get_turf(src), O.get_scan_data(user), "paper (Sensor Scan - [O])")
+			new/obj/item/paper/(get_turf(src), O.get_scan_data(user), "paper (Sensor Scan - [O])")
 		return TOPIC_HANDLED
 
 /obj/machinery/computer/ship/sensors/Process()
@@ -128,11 +128,11 @@
 	var/range = 1
 	idle_power_usage = 5000
 
-/obj/machinery/shipsensors/attackby(obj/item/weapon/W, mob/user)
+/obj/machinery/shipsensors/attackby(obj/item/W, mob/user)
 	var/damage = max_health - health
 	if(damage && isWelder(W))
 
-		var/obj/item/weapon/weldingtool/WT = W
+		var/obj/item/weldingtool/WT = W
 
 		if(!WT.isOn())
 			return

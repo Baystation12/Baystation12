@@ -120,7 +120,7 @@ field_generator power level display
 				to_chat(user, "<span class='warning'> The [src.name] needs to be unwelded from the floor.</span>")
 				return
 	else if(isWelder(W))
-		var/obj/item/weapon/weldingtool/WT = W
+		var/obj/item/weldingtool/WT = W
 		switch(state)
 			if(0)
 				to_chat(user, "<span class='warning'>The [src.name] needs to be wrenched to the floor.</span>")

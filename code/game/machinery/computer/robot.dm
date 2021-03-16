@@ -84,7 +84,7 @@
 			return TOPIC_HANDLED
 
 		log_and_message_admins("emagged [target.name] using robotic console!")
-		target.emagged = 1
+		target.emagged = TRUE
 		to_chat(target, "<span class='notice'>Failsafe protocols overriden. New tools available.</span>")
 		. = TOPIC_REFRESH
 

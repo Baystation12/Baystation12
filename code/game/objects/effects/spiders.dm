@@ -20,7 +20,7 @@
 				qdel(src)
 	return
 
-/obj/effect/spider/attackby(var/obj/item/weapon/W, var/mob/user)
+/obj/effect/spider/attackby(var/obj/item/W, var/mob/user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 
 	if(W.attack_verb.len)
@@ -34,7 +34,7 @@
 		damage += 5
 
 	if(isWelder(W))
-		var/obj/item/weapon/weldingtool/WT = W
+		var/obj/item/weldingtool/WT = W
 
 		if(WT.remove_fuel(0, user))
 			damage = 15
@@ -165,7 +165,7 @@
 	walk(src, 0) // Because we might have called walk_to, we must stop the walk loop or BYOND keeps an internal reference to us forever.
 	. = ..()
 
-/obj/effect/spider/spiderling/attackby(var/obj/item/weapon/W, var/mob/user)
+/obj/effect/spider/spiderling/attackby(var/obj/item/W, var/mob/user)
 	..()
 	if(health > 0)
 		disturbed()

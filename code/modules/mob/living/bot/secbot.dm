@@ -28,8 +28,8 @@
 	var/is_ranged = 0
 	var/awaiting_surrender = 0
 
-	var/obj/item/weapon/melee/baton/stun_baton
-	var/obj/item/weapon/handcuffs/cyborg/handcuffs
+	var/obj/item/melee/baton/stun_baton
+	var/obj/item/handcuffs/cyborg/handcuffs
 
 	var/list/threat_found_sounds = list('sound/voice/bcriminal.ogg', 'sound/voice/bjustice.ogg', 'sound/voice/bfreeze.ogg')
 	var/list/preparing_arrest_sounds = list('sound/voice/bfreeze.ogg')
@@ -41,7 +41,7 @@
 
 /mob/living/bot/secbot/Initialize()
 	stun_baton = new(src)
-	stun_baton.bcell = new /obj/item/weapon/cell/infinite(stun_baton)
+	stun_baton.bcell = new /obj/item/cell/infinite(stun_baton)
 	stun_baton.set_status(1, null)
 	. = ..()
 
@@ -217,7 +217,7 @@
 	visible_message("<span class='warning'>[src] blows apart!</span>")
 	var/turf/Tsec = get_turf(src)
 	new /obj/item/device/assembly/prox_sensor(Tsec)
-	new /obj/item/weapon/melee/baton(Tsec)
+	new /obj/item/melee/baton(Tsec)
 	if(prob(50))
 		new /obj/item/robot_parts/l_arm(Tsec)
 

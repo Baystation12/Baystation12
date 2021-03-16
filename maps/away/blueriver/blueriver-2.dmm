@@ -108,12 +108,12 @@
 /obj/machinery/recharger/wallcharger{
 	pixel_y = -24
 	},
-/obj/item/weapon/storage/pill_bottle/antitox,
-/obj/item/weapon/cell/standard,
-/obj/item/weapon/storage/box/matches,
+/obj/item/storage/pill_bottle/antitox,
+/obj/item/cell/standard,
+/obj/item/storage/box/matches,
 /obj/random/maintenance/clean,
 /obj/random/cash,
-/obj/item/weapon/paper{
+/obj/item/paper{
 	info = "We've landed, and aside from the permafrost, there's not a lot to mention on this rock. The readings are strongest in the middle of an open field near the ship, but there's nothing there, meaning we really only have one choice. Digging down. One of the others thinks theres a good chance that it's underground, so we might as well see if they're onto something. We don't have any other decent plans, and we need this find. Fortunate we brought the larger scale excavation equipment."
 	},
 /turf/simulated/floor/tiled,
@@ -182,7 +182,7 @@
 "aH" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/handrail,
-/obj/item/weapon/stool/padded,
+/obj/item/stool/padded,
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "aI" = (
@@ -196,15 +196,15 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/item/weapon/material/knife/table,
-/obj/item/weapon/paper{
+/obj/item/material/knife/table,
+/obj/item/paper{
 	info = "Well, it didn't take the three days I was betting on, so i'm out twenty bucks, but we managed to punch through into a cave of some sort with the drilling equipment. We're lowering a ladder down now and sending one of the guards down to check that there's no spiders in there or anything. Once they report back, we'll Move the whole basecamp down there, and- SO, We've moved down into the cave now, and what we've found is astounding! It looks a LOT like a lake or river of blue goo, but... not? I took some scans, but couldn't pick anything up aside from radiation spikes from the pool. I also lowered a swab into the fluid to take a sample, but when I touched the swab to the surface of the... Fluid? the Swab just... Ceased And yes, that's the best way to describe it. it just stopped existing in my hand. We figure it's best we DON'T touch the blue stuff for now. one of our help has started moving supplies down into the cave to build a bridge of sorts though across the pool. We spotted some sort of structure on the far side, and the bridge is the only way to get to it, so now we wait."
 	},
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "aJ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/item/weapon/stool/padded,
+/obj/item/stool/padded,
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "aK" = (
@@ -218,7 +218,7 @@
 /area/bluespaceriver/ship)
 "aM" = (
 /obj/machinery/r_n_d/protolathe,
-/obj/item/weapon/paper{
+/obj/item/paper{
 	info = "Well, it only took three weeks... this trip... but we finally found something worth investigating! An energy signature, just on or under the planet's surface. It's bizarre, similar to a bluespace signature, but... not. I'll need to get down there to really get a reading on it, but this could be the kind of discovery that makes a career. We've identified a landing site, so our pilot is setting the ship down there in the next couple of hours. it'll take some more time after that to set up a base camp and such."
 	},
 /turf/simulated/floor/tiled,
@@ -233,17 +233,17 @@
 /area/bluespaceriver/ship)
 "aP" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/item/weapon/stool/padded,
+/obj/item/stool/padded,
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "aQ" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/storage/lunchbox/nt,
+/obj/item/storage/lunchbox/nt,
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "aR" = (
 /obj/structure/table/steel,
-/obj/item/weapon/storage/box/glasses/mug,
+/obj/item/storage/box/glasses/mug,
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "aS" = (
@@ -299,7 +299,7 @@
 "bb" = (
 /obj/machinery/r_n_d/circuit_imprinter,
 /obj/item/device/ano_scanner,
-/obj/item/weapon/paper{
+/obj/item/paper{
 	info = "I don't understand where they could have gone, but one of the researchers and a guard disappeared last night. We've started looking for them, figuring maybe they got trapped somewhere in the ruins, maybe a booby trap or something that was still functioning, but we haven't seen any sign of them. their equipment, both of their equipment, is still in the ship, and there's no signs of anything grabbing them in the night, they're just... Gone.  Tomorrow morning we head back into space to go resupply and submit what we've found so far, but when we come back we'll have more than enough manpower to really dig into this place."
 	},
 /turf/simulated/floor/tiled,
@@ -308,7 +308,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
-/obj/item/weapon/reagent_containers/spray,
+/obj/item/reagent_containers/spray,
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "bd" = (
@@ -401,7 +401,7 @@
 /area/bluespaceriver/ship)
 "bn" = (
 /obj/structure/bed/padded,
-/obj/item/weapon/bedsheet/rd,
+/obj/item/bedsheet/rd,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8;
 	level = 2
@@ -454,7 +454,7 @@
 "bv" = (
 /obj/structure/curtain/open/bed,
 /obj/structure/bed/padded,
-/obj/item/weapon/bedsheet/brown,
+/obj/item/bedsheet/brown,
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "bw" = (
@@ -481,15 +481,15 @@
 /area/bluespaceriver/ship)
 "bA" = (
 /obj/structure/table/glass,
-/obj/item/weapon/pen,
-/obj/item/weapon/storage/secure/briefcase/money{
+/obj/item/pen,
+/obj/item/storage/secure/briefcase/money{
 	code = "63214"
 	},
-/obj/item/weapon/form_printer,
-/obj/item/weapon/gun/energy/gun/small,
-/obj/item/weapon/rig/hazmat/equipped,
+/obj/item/form_printer,
+/obj/item/gun/energy/gun/small,
+/obj/item/rig/hazmat/equipped,
 /obj/random/cash,
-/obj/item/weapon/paper{
+/obj/item/paper{
 	info = "We've finished the bridge and began our initial investigation into the site. Thus far, we're finding a lot of structures clearly made by a sapient species, one that from all indications was relatively advanced, but no signs of what actually happened to them. There's clear signs of habitation, but no signs of what caused abandonment. We're setting up camp in the ruins tonight so that we can continue studying as long as possible before our scheduled departure for refueling, but I feel confident we'll have enough to secure funds for the forseeable future at least!"
 	},
 /turf/simulated/floor/tiled,
@@ -536,8 +536,8 @@
 /area/bluespaceriver/ship)
 "bI" = (
 /obj/structure/bed/padded,
-/obj/item/weapon/bedsheet/red,
-/obj/item/weapon/storage/secure/safe{
+/obj/item/bedsheet/red,
+/obj/item/storage/secure/safe{
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled,
@@ -562,8 +562,8 @@
 /area/bluespaceriver/ship)
 "bM" = (
 /obj/structure/bed/padded,
-/obj/item/weapon/bedsheet/green,
-/obj/item/weapon/storage/secure/safe{
+/obj/item/bedsheet/green,
+/obj/item/storage/secure/safe{
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled,
@@ -612,7 +612,7 @@
 	level = 2
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/item/weapon/mop,
+/obj/item/mop,
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "bT" = (
@@ -650,16 +650,16 @@
 /area/bluespaceriver/ship)
 "bX" = (
 /obj/structure/bed/padded,
-/obj/item/weapon/bedsheet/yellow,
-/obj/item/weapon/storage/secure/safe{
+/obj/item/bedsheet/yellow,
+/obj/item/storage/secure/safe{
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "bY" = (
 /obj/structure/bed/padded,
-/obj/item/weapon/bedsheet/captain,
-/obj/item/weapon/storage/secure/safe{
+/obj/item/bedsheet/captain,
+/obj/item/storage/secure/safe{
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled,
@@ -667,7 +667,7 @@
 "bZ" = (
 /obj/structure/table/woodentable,
 /obj/random/energy,
-/obj/item/weapon/storage/pill_bottle/happy,
+/obj/item/storage/pill_bottle/happy,
 /obj/random/contraband,
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)

@@ -15,7 +15,7 @@
 	charge_type = Sp_RECHARGE
 	charge_max = 900
 	cooldown_min = 300
-	equipped_summons = list("off hand" = /obj/item/weapon/shield/)
+	equipped_summons = list("off hand" = /obj/item/shield/)
 	duration = 300
 	delete_old = 0
 	var/item_color = "#6666ff"
@@ -24,7 +24,7 @@
 	hud_state = "wiz_shield"
 
 /spell/targeted/equip_item/shield/summon_item(var/new_type)
-	var/obj/item/weapon/shield/I = new new_type()
+	var/obj/item/shield/I = new new_type()
 	I.icon_state = "buckler"
 	I.color = item_color
 	I.SetName("Wizard's Shield")

@@ -30,7 +30,7 @@
 			var/mob/living/carbon/human/H = A
 			if(H.isSynthetic())
 				return FALSE
-			if(istype(H.head, /obj/item/weapon/holder/drone))
+			if(istype(H.head, /obj/item/holder/drone))
 				return FALSE
 			if(istype(H.wear_suit, /obj/item/clothing/suit/cardborg) && istype(H.head, /obj/item/clothing/head/cardborg))
 				return FALSE

@@ -12,8 +12,8 @@
 	var/on_icon = "sign_on"
 
 	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/radio/receiver,
-		/obj/item/weapon/stock_parts/power/apc
+		/obj/item/stock_parts/radio/receiver,
+		/obj/item/stock_parts/power/apc
 	)
 	public_variables = list(
 		/decl/public_access/public_variable/holosign_on

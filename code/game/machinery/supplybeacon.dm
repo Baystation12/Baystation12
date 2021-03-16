@@ -44,7 +44,7 @@
 	name = "supermatter supply beacon"
 	drop_type = "supermatter"
 
-/obj/machinery/power/supply_beacon/attackby(var/obj/item/weapon/W, var/mob/user)
+/obj/machinery/power/supply_beacon/attackby(var/obj/item/W, var/mob/user)
 	if(!use_power && isWrench(W))
 		if(!anchored && !connect_to_network())
 			to_chat(user, "<span class='warning'>This device must be placed over an exposed cable.</span>")

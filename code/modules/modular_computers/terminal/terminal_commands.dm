@@ -80,7 +80,7 @@ Subtypes
 	pattern = "^ifconfig$"
 
 /datum/terminal_command/ifconfig/proper_input_entered(text, mob/user, datum/terminal/terminal)
-	var/obj/item/weapon/stock_parts/computer/network_card/network_card = terminal.computer.get_component(PART_NETWORK)
+	var/obj/item/stock_parts/computer/network_card/network_card = terminal.computer.get_component(PART_NETWORK)
 	if(!istype(network_card))
 		return "No network adaptor found."
 	if(!network_card.check_functionality())
@@ -95,13 +95,13 @@ Subtypes
 /datum/terminal_command/hwinfo/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	if(text == "hwinfo")
 		. = list("Hardware Detected:")
-		for(var/obj/item/weapon/stock_parts/computer/ch in  terminal.computer.get_all_components())
+		for(var/obj/item/stock_parts/computer/ch in  terminal.computer.get_all_components())
 			. += ch.name
 		return
 	if(length(text) < 8)
 		return "hwinfo: Improper syntax. Use hwinfo \[name\]."
 	text = copytext(text, 8)
-	var/obj/item/weapon/stock_parts/computer/ch = terminal.computer.find_hardware_by_name(text)
+	var/obj/item/stock_parts/computer/ch = terminal.computer.find_hardware_by_name(text)
 	if(!ch)
 		return "hwinfo: No such hardware found."
 	. = list("Running diagnostic protocols...")
@@ -223,7 +223,7 @@ Subtypes
 
 /datum/terminal_command/proxy/proper_input_entered(text, mob/user, datum/terminal/terminal)
 	var/datum/extension/interactive/ntos/comp = terminal.computer
-	var/obj/item/weapon/stock_parts/computer/network_card/network_card = comp && comp.get_component(PART_NETWORK)
+	var/obj/item/stock_parts/computer/network_card/network_card = comp && comp.get_component(PART_NETWORK)
 	if(!comp || !network_card || !network_card.check_functionality())
 		return "proxy: Error; check networking hardware."
 	if(text == "proxy")

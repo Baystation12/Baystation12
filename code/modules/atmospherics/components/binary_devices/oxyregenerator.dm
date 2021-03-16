@@ -26,18 +26,18 @@
 
 /obj/machinery/atmospherics/binary/oxyregenerator/RefreshParts()
 	carbon_efficiency = initial(carbon_efficiency)
-	carbon_efficiency += 0.25 * total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin)
-	carbon_efficiency -= 0.25 * number_of_components(/obj/item/weapon/stock_parts/matter_bin)
+	carbon_efficiency += 0.25 * total_component_rating_of_type(/obj/item/stock_parts/matter_bin)
+	carbon_efficiency -= 0.25 * number_of_components(/obj/item/stock_parts/matter_bin)
 	carbon_efficiency = Clamp(carbon_efficiency, initial(carbon_efficiency), 5)
 
 	intake_power_efficiency = initial(intake_power_efficiency)
-	intake_power_efficiency -= 0.1 * total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator)
-	intake_power_efficiency += 0.1 * number_of_components(/obj/item/weapon/stock_parts/manipulator)
+	intake_power_efficiency -= 0.1 * total_component_rating_of_type(/obj/item/stock_parts/manipulator)
+	intake_power_efficiency += 0.1 * number_of_components(/obj/item/stock_parts/manipulator)
 	intake_power_efficiency = Clamp(intake_power_efficiency, 0.1, initial(intake_power_efficiency))
 
 	power_rating = 1
-	power_rating -= 0.05 * total_component_rating_of_type(/obj/item/weapon/stock_parts/micro_laser)
-	power_rating += 0.05 * number_of_components(/obj/item/weapon/stock_parts/micro_laser)
+	power_rating -= 0.05 * total_component_rating_of_type(/obj/item/stock_parts/micro_laser)
+	power_rating += 0.05 * number_of_components(/obj/item/stock_parts/micro_laser)
 	power_rating = Clamp(power_rating, 0.1, 1)
 	power_rating *= initial(power_rating)
 	..()

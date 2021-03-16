@@ -1,4 +1,4 @@
-/obj/item/weapon/reagent_containers/spray
+/obj/item/reagent_containers/spray
 	name = "spray bottle"
 	desc = "A spray bottle, with an unscrewable top."
 	icon = 'icons/obj/janitor.dmi'
@@ -19,12 +19,12 @@
 	var/step_delay = 10 // lower is faster
 	volume = 250
 
-/obj/item/weapon/reagent_containers/spray/New()
+/obj/item/reagent_containers/spray/New()
 	..()
-	src.verbs -= /obj/item/weapon/reagent_containers/verb/set_amount_per_transfer_from_this
+	src.verbs -= /obj/item/reagent_containers/verb/set_amount_per_transfer_from_this
 
-/obj/item/weapon/reagent_containers/spray/afterattack(atom/A as mob|obj, mob/user as mob, proximity)
-	if(istype(A, /obj/item/weapon/storage) || istype(A, /obj/structure/table) || istype(A, /obj/structure/closet) || istype(A, /obj/item/weapon/reagent_containers) || istype(A, /obj/structure/hygiene/sink) || istype(A, /obj/structure/janitorialcart))
+/obj/item/reagent_containers/spray/afterattack(atom/A as mob|obj, mob/user as mob, proximity)
+	if(istype(A, /obj/item/storage) || istype(A, /obj/structure/table) || istype(A, /obj/structure/closet) || istype(A, /obj/item/reagent_containers) || istype(A, /obj/structure/hygiene/sink) || istype(A, /obj/structure/janitorialcart))
 		return
 
 	if(istype(A, /spell))
@@ -43,7 +43,7 @@
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 	return
 
-/obj/item/weapon/reagent_containers/spray/proc/Spray_at(atom/A as mob|obj, mob/user as mob, proximity)
+/obj/item/reagent_containers/spray/proc/Spray_at(atom/A as mob|obj, mob/user as mob, proximity)
 	playsound(src.loc, 'sound/effects/spray2.ogg', 50, 1, -6)
 	if (reagents.should_admin_log())
 		var/contained = reagents.get_reagents()
@@ -69,19 +69,19 @@
 			D.set_up(my_target, spray_size, step_delay)
 	return
 
-/obj/item/weapon/reagent_containers/spray/attack_self(var/mob/user)
+/obj/item/reagent_containers/spray/attack_self(var/mob/user)
 	if(!possible_transfer_amounts)
 		return
 	amount_per_transfer_from_this = next_in_list(amount_per_transfer_from_this, cached_number_list_decode(possible_transfer_amounts))
 	spray_size = next_in_list(spray_size, spray_sizes)
 	to_chat(user, "<span class='notice'>You adjusted the pressure nozzle. You'll now use [amount_per_transfer_from_this] units per spray.</span>")
 
-/obj/item/weapon/reagent_containers/spray/examine(mob/user, distance)
+/obj/item/reagent_containers/spray/examine(mob/user, distance)
 	. = ..()
 	if(distance == 0 && loc == user)
 		to_chat(user, "[round(reagents.total_volume)] unit\s left.")
 
-/obj/item/weapon/reagent_containers/spray/verb/empty()
+/obj/item/reagent_containers/spray/verb/empty()
 
 	set name = "Empty Spray Bottle"
 	set category = "Object"
@@ -94,32 +94,32 @@
 		reagents.splash(usr.loc, reagents.total_volume)
 
 //space cleaner
-/obj/item/weapon/reagent_containers/spray/cleaner
+/obj/item/reagent_containers/spray/cleaner
 	name = "space cleaner"
 	desc = "BLAM!-brand non-foaming space cleaner!"
 	step_delay = 6
 
-/obj/item/weapon/reagent_containers/spray/cleaner/New()
+/obj/item/reagent_containers/spray/cleaner/New()
 	..()
 	reagents.add_reagent(/datum/reagent/space_cleaner, volume)
 
-/obj/item/weapon/reagent_containers/spray/sterilizine
+/obj/item/reagent_containers/spray/sterilizine
 	name = "sterilizine"
 	desc = "Great for hiding incriminating bloodstains and sterilizing scalpels."
 
-/obj/item/weapon/reagent_containers/spray/sterilizine/New()
+/obj/item/reagent_containers/spray/sterilizine/New()
 	..()
 	reagents.add_reagent(/datum/reagent/sterilizine, volume)
 
-/obj/item/weapon/reagent_containers/spray/hair_remover
+/obj/item/reagent_containers/spray/hair_remover
 	name = "hair remover"
 	desc = "Very effective at removing hair, feathers, spines and horns."
 
-/obj/item/weapon/reagent_containers/spray/hair_remover/New()
+/obj/item/reagent_containers/spray/hair_remover/New()
 	..()
 	reagents.add_reagent(/datum/reagent/toxin/hair_remover, volume)
 
-/obj/item/weapon/reagent_containers/spray/pepper
+/obj/item/reagent_containers/spray/pepper
 	name = "pepperspray"
 	desc = "Manufactured by Uhang Inc., it fires a mist of condensed capsaicin to blind and down an opponent quickly."
 	icon = 'icons/obj/weapons/other.dmi'
@@ -130,26 +130,26 @@
 	var/safety = 1
 	step_delay = 1
 
-/obj/item/weapon/reagent_containers/spray/pepper/New()
+/obj/item/reagent_containers/spray/pepper/New()
 	..()
 	reagents.add_reagent(/datum/reagent/capsaicin/condensed, 60)
 
-/obj/item/weapon/reagent_containers/spray/pepper/examine(mob/user, distance)
+/obj/item/reagent_containers/spray/pepper/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1)
 		to_chat(user, "The safety is [safety ? "on" : "off"].")
 
-/obj/item/weapon/reagent_containers/spray/pepper/attack_self(var/mob/user)
+/obj/item/reagent_containers/spray/pepper/attack_self(var/mob/user)
 	safety = !safety
 	to_chat(usr, "<span class = 'notice'>You switch the safety [safety ? "on" : "off"].</span>")
 
-/obj/item/weapon/reagent_containers/spray/pepper/Spray_at(atom/A as mob|obj)
+/obj/item/reagent_containers/spray/pepper/Spray_at(atom/A as mob|obj)
 	if(safety)
 		to_chat(usr, "<span class = 'warning'>The safety is on!</span>")
 		return
 	..()
 
-/obj/item/weapon/reagent_containers/spray/waterflower
+/obj/item/reagent_containers/spray/waterflower
 	name = "water flower"
 	desc = "A seemingly innocent sunflower...with a twist."
 	icon = 'icons/obj/device.dmi'
@@ -159,11 +159,11 @@
 	possible_transfer_amounts = null
 	volume = 10
 
-/obj/item/weapon/reagent_containers/spray/waterflower/New()
+/obj/item/reagent_containers/spray/waterflower/New()
 	..()
 	reagents.add_reagent(/datum/reagent/water, 10)
 
-/obj/item/weapon/reagent_containers/spray/chemsprayer
+/obj/item/reagent_containers/spray/chemsprayer
 	name = "chem sprayer"
 	desc = "A utility used to spray large amounts of reagent in a given area."
 	icon = 'icons/obj/weapons/other.dmi'
@@ -176,7 +176,7 @@
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_ENGINEERING = 3)
 	step_delay = 8
 
-/obj/item/weapon/reagent_containers/spray/chemsprayer/Spray_at(atom/A as mob|obj)
+/obj/item/reagent_containers/spray/chemsprayer/Spray_at(atom/A as mob|obj)
 	var/direction = get_dir(src, A)
 	var/turf/T = get_turf(A)
 	var/turf/T1 = get_step(T,turn(direction, 90))
@@ -196,7 +196,7 @@
 			D.set_up(my_target, rand(6, 8), 2)
 	return
 
-/obj/item/weapon/reagent_containers/spray/plantbgone
+/obj/item/reagent_containers/spray/plantbgone
 	name = "Plant-B-Gone"
 	desc = "Kills those pesky weeds!"
 	icon = 'icons/obj/hydroponics_machines.dmi'
@@ -204,11 +204,11 @@
 	item_state = "plantbgone"
 	volume = 100
 
-/obj/item/weapon/reagent_containers/spray/plantbgone/New()
+/obj/item/reagent_containers/spray/plantbgone/New()
 	..()
 	reagents.add_reagent(/datum/reagent/toxin/plantbgone, 100)
 
-/obj/item/weapon/reagent_containers/spray/plantbgone/afterattack(atom/A as mob|obj, mob/user as mob, proximity)
+/obj/item/reagent_containers/spray/plantbgone/afterattack(atom/A as mob|obj, mob/user as mob, proximity)
 	if(!proximity) return
 
 	if(istype(A, /obj/effect/blob)) // blob damage in blob code
@@ -216,7 +216,7 @@
 
 	..()
 
-/obj/item/weapon/reagent_containers/spray/cleaner/deodorant
+/obj/item/reagent_containers/spray/cleaner/deodorant
 	name = "deodorant"
 	desc = "A can of Gold Standard spray deodorant - for when you're too lazy to shower."
 	gender = PLURAL

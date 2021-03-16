@@ -32,7 +32,7 @@
 	var/obj/item/clothing/suit/space/suit = null
 	var/obj/item/clothing/head/helmet/space/helmet = null
 	var/obj/item/clothing/shoes/magboots/boots = null
-	var/obj/item/weapon/tank/tank = null
+	var/obj/item/tank/tank = null
 	var/obj/item/clothing/mask/mask = null
 
 	var/isopen = FALSE
@@ -152,7 +152,7 @@
 	TRY_INSERT_SUIT_PIECE(suit, clothing/suit/space)
 	TRY_INSERT_SUIT_PIECE(helmet, clothing/head/helmet/space)
 	TRY_INSERT_SUIT_PIECE(boots, clothing/shoes/magboots)
-	TRY_INSERT_SUIT_PIECE(tank, weapon/tank)
+	TRY_INSERT_SUIT_PIECE(tank, tank)
 	TRY_INSERT_SUIT_PIECE(mask, clothing/mask)
 	update_icon()
 	SSnano.update_uis(src)

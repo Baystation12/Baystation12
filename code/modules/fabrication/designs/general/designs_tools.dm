@@ -1,12 +1,12 @@
 /datum/fabricator_recipe/tool
-	path = /obj/item/weapon/crowbar
+	path = /obj/item/crowbar
 	category = "Tools"
 
 /datum/fabricator_recipe/tool/prybar
-	path = /obj/item/weapon/crowbar/prybar
+	path = /obj/item/crowbar/prybar
 
 /datum/fabricator_recipe/tool/rescuetool
-	path = /obj/item/weapon/crowbar/emergency_forcing_tool
+	path = /obj/item/crowbar/emergency_forcing_tool
 
 /datum/fabricator_recipe/tool/int_wirer
 	path = /obj/item/device/integrated_electronics/wirer
@@ -24,23 +24,23 @@
 	path = /obj/item/device/t_scanner
 
 /datum/fabricator_recipe/tool/weldertool
-	path = /obj/item/weapon/weldingtool
+	path = /obj/item/weldingtool
 
 /datum/fabricator_recipe/tool/screwdriver
-	path = /obj/item/weapon/screwdriver
+	path = /obj/item/screwdriver
 
 /datum/fabricator_recipe/tool/wirecutters
-	path = /obj/item/weapon/wirecutters
+	path = /obj/item/wirecutters
 
 /datum/fabricator_recipe/tool/wrench
-	path = /obj/item/weapon/wrench
+	path = /obj/item/wrench
 
 /datum/fabricator_recipe/tool/hatchet
-	path = /obj/item/weapon/material/hatchet
+	path = /obj/item/material/hatchet
 
 /datum/fabricator_recipe/tool/minihoe
-	path = /obj/item/weapon/material/minihoe
+	path = /obj/item/material/minihoe
 
 /datum/fabricator_recipe/tool/welder_industrial
-	path = /obj/item/weapon/weldingtool/largetank
+	path = /obj/item/weldingtool/largetank
 	hidden = TRUE

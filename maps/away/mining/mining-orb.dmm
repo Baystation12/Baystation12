@@ -102,7 +102,7 @@
 /turf/simulated/floor/airless/stone,
 /area/mine/explored)
 "aM" = (
-/obj/item/weapon/stool/stone,
+/obj/item/stool/stone,
 /turf/simulated/floor/fixed/alium/airless,
 /area/mine/explored)
 "aN" = (

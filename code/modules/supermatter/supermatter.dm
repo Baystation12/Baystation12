@@ -482,8 +482,8 @@
 		ui.set_auto_update(1)
 
 
-/obj/machinery/power/supermatter/attackby(obj/item/weapon/W as obj, mob/living/user as mob)
-	if(istype(W, /obj/item/weapon/tape_roll))
+/obj/machinery/power/supermatter/attackby(obj/item/W as obj, mob/living/user as mob)
+	if(istype(W, /obj/item/tape_roll))
 		to_chat(user, SPAN_NOTICE("You repair some of the damage to \the [src] with \the [W]."))
 		damage = max(damage - 10, 0)
 		playsound(src, 'sound/effects/tape.ogg', 25)

@@ -85,7 +85,7 @@
 	activators = list("calculate path" = IC_PINTYPE_PULSE_IN, "on calculated" = IC_PINTYPE_PULSE_OUT,"not calculated" = IC_PINTYPE_PULSE_OUT)
 	spawn_flags = IC_SPAWN_RESEARCH
 	power_draw_per_use = 80
-	var/obj/item/weapon/card/id/idc
+	var/obj/item/card/id/idc
 
 /obj/item/integrated_circuit/smart/advanced_pathfinder/Initialize()
 	.=..()

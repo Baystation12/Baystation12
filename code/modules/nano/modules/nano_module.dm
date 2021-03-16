@@ -28,7 +28,7 @@
 /datum/nano_module/proc/get_access(mob/user)
 	. = using_access
 	if(istype(user))
-		var/obj/item/weapon/card/id/I = user.GetIdCard()
+		var/obj/item/card/id/I = user.GetIdCard()
 		if(I)
 			. |= I.access
 

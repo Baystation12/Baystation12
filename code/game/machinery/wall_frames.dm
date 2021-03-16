@@ -9,7 +9,7 @@
 	var/refund_type = /obj/item/stack/material/steel
 	var/reverse = 0 //if resulting object faces opposite its dir (like light fixtures)
 
-/obj/item/frame/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/frame/attackby(obj/item/W as obj, mob/user as mob)
 	if(isWrench(W))
 		new refund_type( get_turf(src.loc), refund_amt)
 		qdel(src)

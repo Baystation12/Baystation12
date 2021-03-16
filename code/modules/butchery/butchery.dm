@@ -4,7 +4,7 @@
 #define CARCASS_JOINTED  "jointed"
 
 /mob/living
-	var/meat_type =         /obj/item/weapon/reagent_containers/food/snacks/meat
+	var/meat_type =         /obj/item/reagent_containers/food/snacks/meat
 	var/meat_amount =       3
 	var/skin_material =     MATERIAL_SKIN_GENERIC
 	var/skin_amount =       3
@@ -25,13 +25,13 @@
 	blood_splatter(get_turf(src), src, large = TRUE)
 	var/meat_count = 0
 	for(var/i=0;i<meat_amount;i++)
-		var/obj/item/weapon/reagent_containers/food/snacks/meat/slab = new effective_meat_type(get_turf(src))
+		var/obj/item/reagent_containers/food/snacks/meat/slab = new effective_meat_type(get_turf(src))
 		. += slab
 		if(istype(slab))
 			meat_count++
 	if(reagents && meat_count > 0)
 		var/reagent_split = round(reagents.total_volume/meat_count,1)
-		for(var/obj/item/weapon/reagent_containers/food/snacks/meat/slab in .)
+		for(var/obj/item/reagent_containers/food/snacks/meat/slab in .)
 			reagents.trans_to_obj(slab, reagent_split)
 
 /mob/living/carbon/human/harvest_meat()

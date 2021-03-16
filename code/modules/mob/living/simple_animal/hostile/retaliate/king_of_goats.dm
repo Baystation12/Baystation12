@@ -140,7 +140,7 @@
 		else if(prob(5)) //stun move
 			spellscast++
 			visible_message(SPAN_MFAUNA("\The [src]' fleece flashes with blinding light!"))
-			new /obj/item/weapon/grenade/flashbang/instant(src.loc)
+			new /obj/item/grenade/flashbang/instant(src.loc)
 
 		else if(prob(5)) //spawn adds
 			spellscast++
@@ -186,7 +186,7 @@
 	phase3 = TRUE
 	spellscast = 0
 	health = 750
-	new /obj/item/weapon/grenade/flashbang/instant(src.loc)
+	new /obj/item/grenade/flashbang/instant(src.loc)
 	QDEL_NULL(boss_theme)
 	boss_theme = GLOB.sound_player.PlayLoopingSound(src, sound_id, 'sound/music/Visager-Miniboss_Fight.ogg', volume = 10, range = 8, falloff = 4, prefer_mute = TRUE)
 	stun_chance = 10
@@ -224,7 +224,7 @@
 	QDEL_NULL(boss_theme)
 	if(phase3)
 		visible_message(SPAN_MFAUNA("\The [src] shrieks as the seal on his power breaks and his wool sheds off!"))
-		new /obj/item/weapon/towel/fleece(src.loc)
+		new /obj/item/towel/fleece(src.loc)
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/death()
 	..()

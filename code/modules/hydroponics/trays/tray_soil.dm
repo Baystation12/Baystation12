@@ -9,7 +9,7 @@
 	tray_light = 0
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if(istype(O,/obj/item/weapon/tank))
+	if(istype(O,/obj/item/tank))
 		return
 	else
 		..()

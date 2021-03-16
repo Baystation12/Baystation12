@@ -4,9 +4,9 @@
 	icon_screen = "command"
 	var/mob/living/silicon/current
 
-/obj/machinery/computer/upload/attackby(obj/item/weapon/O, mob/user)
-	if(istype(O, /obj/item/weapon/aiModule))
-		var/obj/item/weapon/aiModule/M = O
+/obj/machinery/computer/upload/attackby(obj/item/O, mob/user)
+	if(istype(O, /obj/item/aiModule))
+		var/obj/item/aiModule/M = O
 		M.install(src, user)
 	else
 		..()

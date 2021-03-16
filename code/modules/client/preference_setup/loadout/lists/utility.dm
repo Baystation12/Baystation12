@@ -5,15 +5,15 @@
 
 /datum/gear/utility/briefcase
 	display_name = "briefcase"
-	path = /obj/item/weapon/storage/briefcase
+	path = /obj/item/storage/briefcase
 
 /datum/gear/utility/clipboard
 	display_name = "clipboard"
-	path = /obj/item/weapon/material/clipboard
+	path = /obj/item/material/clipboard
 
 /datum/gear/utility/folder
 	display_name = "folders"
-	path = /obj/item/weapon/folder
+	path = /obj/item/folder
 
 /datum/gear/utility/taperecorder
 	display_name = "tape recorder"
@@ -22,11 +22,11 @@
 /datum/gear/utility/folder/New()
 	..()
 	var/folders = list()
-	folders["blue folder"] = /obj/item/weapon/folder/blue
-	folders["grey folder"] = /obj/item/weapon/folder
-	folders["red folder"] = /obj/item/weapon/folder/red
-	folders["white folder"] = /obj/item/weapon/folder/white
-	folders["yellow folder"] = /obj/item/weapon/folder/yellow
+	folders["blue folder"] = /obj/item/folder/blue
+	folders["grey folder"] = /obj/item/folder
+	folders["red folder"] = /obj/item/folder/red
+	folders["white folder"] = /obj/item/folder/white
+	folders["yellow folder"] = /obj/item/folder/yellow
 	gear_tweaks += new/datum/gear_tweak/path(folders)
 
 /datum/gear/utility/paicard
@@ -39,7 +39,7 @@
 
 /datum/gear/utility/photo_album
 	display_name = "photo album"
-	path = /obj/item/weapon/storage/photo_album
+	path = /obj/item/storage/photo_album
 
 /datum/gear/utility/film_roll
 	display_name = "film roll"
@@ -52,17 +52,17 @@
 
 /datum/gear/utility/pen
 	display_name = "Multicolored Pen"
-	path = /obj/item/weapon/pen/multi
+	path = /obj/item/pen/multi
 	cost = 2
 
 /datum/gear/utility/fancy
 	display_name = "Fancy Pen"
-	path = /obj/item/weapon/pen/fancy
+	path = /obj/item/pen/fancy
 	cost = 2
 
 /datum/gear/utility/hand_labeler
 	display_name = "hand labeler"
-	path = /obj/item/weapon/hand_labeler
+	path = /obj/item/hand_labeler
 	cost = 3
 
 /****************
@@ -104,5 +104,5 @@ Pouches and kits
 
 /datum/gear/utility/pencilcase
 	display_name = "Pencil case"
-	path = /obj/item/weapon/storage/fancy/pencilcase
+	path = /obj/item/storage/fancy/pencilcase
 	cost = 2

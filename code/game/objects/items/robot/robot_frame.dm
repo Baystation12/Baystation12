@@ -138,7 +138,7 @@
 		O.Namepick()
 		qdel(src)
 
-	else if(istype(W, /obj/item/weapon/pen))
+	else if(istype(W, /obj/item/pen))
 		var/t = sanitizeSafe(input(user, "Enter new robot name", src.name, src.created_name), MAX_NAME_LEN)
 		if(t && (in_range(src, user) || loc == user))
 			created_name = t

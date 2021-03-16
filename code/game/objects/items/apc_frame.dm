@@ -7,7 +7,7 @@
 	icon_state = "apc_frame"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
-/obj/item/frame/apc/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/frame/apc/attackby(obj/item/W as obj, mob/user as mob)
 	..()
 	if(isWrench(W))
 		new /obj/item/stack/material/steel( get_turf(src.loc), 2 )

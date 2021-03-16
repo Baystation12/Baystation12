@@ -18,11 +18,11 @@
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 	obj_flags = OBJ_FLAG_ANCHORABLE
 	var/list/can_hold = list(
-		/obj/item/weapon/paper,
-		/obj/item/weapon/folder,
-		/obj/item/weapon/photo,
-		/obj/item/weapon/paper_bundle,
-		/obj/item/weapon/sample)
+		/obj/item/paper,
+		/obj/item/folder,
+		/obj/item/photo,
+		/obj/item/paper_bundle,
+		/obj/item/sample)
 
 /obj/structure/filingcabinet/chestdrawer
 	name = "chest drawer"

@@ -1,4 +1,4 @@
-/obj/item/weapon/book/tome
+/obj/item/book/tome
 	name = "arcane tome"
 	icon = 'icons/obj/weapons/melee_physical.dmi'
 	icon_state = "tome"
@@ -8,20 +8,20 @@
 	unique = 1
 	carved = 2 // Don't carve it
 
-/obj/item/weapon/book/tome/attack_self(var/mob/user)
+/obj/item/book/tome/attack_self(var/mob/user)
 	if(!iscultist(user))
 		to_chat(user, "\The [src] seems full of illegible scribbles. Is this a joke?")
 	else
 		to_chat(user, "Hold \the [src] in your hand while drawing a rune to use it.")
 
-/obj/item/weapon/book/tome/examine(mob/user)
+/obj/item/book/tome/examine(mob/user)
 	. = ..()
 	if(!iscultist(user))
 		to_chat(user, "An old, dusty tome with frayed edges and a sinister looking cover.")
 	else
 		to_chat(user, "The scriptures of Nar-Sie, The One Who Sees, The Geometer of Blood. Contains the details of every ritual his followers could think of. Most of these are useless, though.")
 
-/obj/item/weapon/book/tome/afterattack(var/atom/A, var/mob/user, var/proximity)
+/obj/item/book/tome/afterattack(var/atom/A, var/mob/user, var/proximity)
 	if(!proximity || !iscultist(user))
 		return
 	if(A.reagents && A.reagents.has_reagent(/datum/reagent/water/holywater))
@@ -34,7 +34,7 @@
 	var/has_tome = 0
 	var/has_robes = 0
 	var/cult_ground = 0
-	if(istype(get_active_hand(), /obj/item/weapon/book/tome) || istype(get_inactive_hand(), /obj/item/weapon/book/tome))
+	if(istype(get_active_hand(), /obj/item/book/tome) || istype(get_inactive_hand(), /obj/item/book/tome))
 		has_tome = 1
 	else if(tome_required && mob_needs_tome())
 		to_chat(src, "<span class='warning'>This rune is too complex to draw by memory, you need to have a tome in your hand to draw it.</span>")

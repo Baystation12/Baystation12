@@ -1,4 +1,4 @@
-/obj/item/weapon/gun/projectile/flare
+/obj/item/gun/projectile/flare
 	name = "flaregun"
 	desc = "A single shot polymer flare gun, the XI-54 \"Sirius\" is a reliable way to launch flares away from yourself."
 	icon = 'icons/obj/guns/flaregun.dmi'
@@ -18,15 +18,15 @@
 	max_shells = 1
 	load_sound = 'sound/weapons/guns/interaction/shotgun_instert.ogg'
 
-/obj/item/weapon/gun/projectile/flare/loaded
+/obj/item/gun/projectile/flare/loaded
 	ammo_type = /obj/item/ammo_casing/shotgun/flash
 
-/obj/item/weapon/gun/projectile/flare/examine(mob/user, distance)
+/obj/item/gun/projectile/flare/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 2 && loaded.len)
 		to_chat(user, "\A [loaded[1]] is chambered.")
 
-/obj/item/weapon/gun/projectile/flare/special_check()
+/obj/item/gun/projectile/flare/special_check()
 	if(length(loaded))
 		var/obj/item/ammo_casing/casing = loaded[1]
 		if(istype(casing) && !istype(casing, /obj/item/ammo_casing/shotgun/flash))

@@ -224,7 +224,7 @@
 /datum/unit_test/storage_map_test/start_test()
 	var/bad_tests = 0
 
-	for(var/obj/item/weapon/storage/S in world)
+	for(var/obj/item/storage/S in world)
 		if(isPlayerLevel(S.z))
 			var/bad_msg = "[ascii_red]--------------- [S.name] \[[S.type]\] \[[S.x] / [S.y] / [S.z]\]"
 			bad_tests += test_storage_capacity(S, bad_msg)

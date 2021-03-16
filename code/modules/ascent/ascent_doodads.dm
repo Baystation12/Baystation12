@@ -1,12 +1,12 @@
 //Mantidified objects
 
-/obj/item/weapon/mop/advanced/ascent
+/obj/item/mop/advanced/ascent
 	name = "deck detritus delaminator"
 	desc = "An alien staff with spongy filaments on one end."
 	icon = 'icons/obj/ascent_doodads.dmi'
 	item_state = "advmop"
 
-/obj/item/weapon/reagent_containers/glass/bucket/ascent
+/obj/item/reagent_containers/glass/bucket/ascent
 	name = "portable liquid cleaning agent carrier"
 	desc = "An alien container of some sort."
 	icon = 'icons/obj/ascent_doodads.dmi'
@@ -17,7 +17,7 @@
 	desc = "An alien container of some sort."
 	icon = 'icons/obj/ascent_doodads.dmi'
 
-/obj/item/weapon/material/knife/kitchen/cleaver/ascent
+/obj/item/material/knife/kitchen/cleaver/ascent
 	name = "xenobiological flenser"
 	desc = "A mindboggingly alien tool for flensing flesh."
 	icon = 'icons/obj/ascent_doodads.dmi'
@@ -28,27 +28,27 @@
 	desc = "A bizarre alien stasis unit."
 	icon = 'icons/obj/ascent_doodads.dmi'
 
-/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle/ascent
+/obj/item/reagent_containers/food/drinks/cans/waterbottle/ascent
 	name = "hydration cylinder"
 	desc = "An alien portable long term storage device for potable water."
 	icon = 'icons/obj/ascent_doodads.dmi'
 
-/obj/item/weapon/reagent_containers/food/snacks/hydration
+/obj/item/reagent_containers/food/snacks/hydration
 	name = "hydration ration"
 	desc = "Approximately ten units of liquid hydration in a edible membrane. Unflavored."
 	icon = 'icons/obj/ascent_doodads.dmi'
 	icon_state = "h2o_ration"
 	bitesize = 10
-/obj/item/weapon/reagent_containers/food/snacks/hydration/Initialize()
+/obj/item/reagent_containers/food/snacks/hydration/Initialize()
 	.=..()
 	reagents.add_reagent(/datum/reagent/water, 10)
 
-/obj/item/weapon/storage/box/water/ascent
+/obj/item/storage/box/water/ascent
 	name = "box of hydration cylinders"
 	desc = "A box full of bottled water."
 	icon = 'icons/obj/ascent_doodads.dmi'
 	icon_state = "box"
-	startswith = list(/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle/ascent = 7)
+	startswith = list(/obj/item/reagent_containers/food/drinks/cans/waterbottle/ascent = 7)
 
 /obj/structure/hygiene/shower/ascent
 	name = "hydrating decontamination armature"
@@ -65,7 +65,7 @@
 	desc = "An alien device housing liquid for alien purposes."
 	icon = 'icons/obj/ascent_doodads.dmi'
 	cups = 50
-	cup_type = /obj/item/weapon/reagent_containers/food/snacks/hydration
+	cup_type = /obj/item/reagent_containers/food/snacks/hydration
 
 /obj/structure/reagent_dispensers/water_cooler/ascent/DispenserMessages(var/mob/user)
 	return list("\The [user] grabs a hydration ration orb from \the [src].", "You grab a hydration ration orb from \the [src].")

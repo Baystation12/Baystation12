@@ -72,7 +72,7 @@
 	var/rcon_setting = 2
 	var/rcon_time = 0
 	var/locked = 1
-	var/wiresexposed = 0 // If it's been screwdrivered open.
+	var/wiresexposed = FALSE // If it's been screwdrivered open.
 	var/aidisabled = 0
 	var/shorted = 0
 
@@ -138,7 +138,7 @@
 
 	if(istype(frame))
 		buildstage = 0
-		wiresexposed = 1
+		wiresexposed = TRUE
 		pixel_x = (dir & 3)? 0 : (dir == 4 ? -21 : 21)
 		pixel_y = (dir & 3)? (dir ==1 ? -21 : 21) : 0
 		update_icon()
@@ -818,7 +818,7 @@
 				update_icon()
 				return
 
-			if (istype(W, /obj/item/weapon/card/id) || istype(W, /obj/item/modular_computer))// trying to unlock the interface with an ID card
+			if (istype(W, /obj/item/card/id) || istype(W, /obj/item/modular_computer))// trying to unlock the interface with an ID card
 				if(stat & (NOPOWER|BROKEN))
 					to_chat(user, "It does nothing")
 					return
@@ -847,13 +847,13 @@
 				playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
 				if(do_after(user,20) && buildstage == 1)
 					to_chat(user, "You pry out the circuit!")
-					var/obj/item/weapon/airalarm_electronics/circuit = new /obj/item/weapon/airalarm_electronics()
+					var/obj/item/airalarm_electronics/circuit = new /obj/item/airalarm_electronics()
 					circuit.dropInto(user.loc)
 					buildstage = 0
 					update_icon()
 				return
 		if(0)
-			if(istype(W, /obj/item/weapon/airalarm_electronics))
+			if(istype(W, /obj/item/airalarm_electronics))
 				to_chat(user, "You insert the circuit!")
 				qdel(W)
 				buildstage = 1
@@ -878,7 +878,7 @@
 AIR ALARM CIRCUIT
 Just a object used in constructing air alarms
 */
-/obj/item/weapon/airalarm_electronics
+/obj/item/airalarm_electronics
 	name = "air alarm electronics"
 	icon = 'icons/obj/doors/door_assembly.dmi'
 	icon_state = "door_electronics"
@@ -904,7 +904,7 @@ FIRE ALARM
 	active_power_usage = 6
 	power_channel = ENVIRON
 	var/last_process = 0
-	var/wiresexposed = 0
+	var/wiresexposed = FALSE
 	var/buildstage = 2 // 2 = complete, 1 = no wires,  0 = circuit gone
 	var/seclevel
 	var/global/list/overlays_cache
@@ -1017,12 +1017,12 @@ FIRE ALARM
 					playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
 					if (do_after(user,20))
 						to_chat(user, "You pry out the circuit!")
-						var/obj/item/weapon/firealarm_electronics/circuit = new /obj/item/weapon/firealarm_electronics()
+						var/obj/item/firealarm_electronics/circuit = new /obj/item/firealarm_electronics()
 						circuit.dropInto(user.loc)
 						buildstage = 0
 						update_icon()
 			if(0)
-				if(istype(W, /obj/item/weapon/firealarm_electronics))
+				if(istype(W, /obj/item/firealarm_electronics))
 					to_chat(user, "You insert the circuit!")
 					qdel(W)
 					buildstage = 1
@@ -1155,7 +1155,7 @@ FIRE ALARM
 
 	if(istype(frame))
 		buildstage = 0
-		wiresexposed = 1
+		wiresexposed = TRUE
 		pixel_x = (dir & 3)? 0 : (dir == 4 ? -21 : 21)
 		pixel_y = (dir & 3)? (dir ==1 ? -21 : 21) : 0
 		update_icon()
@@ -1170,7 +1170,7 @@ FIRE ALARM
 FIRE ALARM CIRCUIT
 Just a object used in constructing fire alarms
 */
-/obj/item/weapon/firealarm_electronics
+/obj/item/firealarm_electronics
 	name = "fire alarm electronics"
 	icon = 'icons/obj/doors/door_assembly.dmi'
 	icon_state = "door_electronics"

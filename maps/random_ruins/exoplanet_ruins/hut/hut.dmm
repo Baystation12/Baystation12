@@ -53,7 +53,7 @@
 /area/template_noop)
 "m" = (
 /obj/structure/table/marble,
-/obj/item/weapon/paper_bin,
+/obj/item/paper_bin,
 /obj/random/voidhelmet,
 /turf/simulated/floor/tiled/dark,
 /area/template_noop)
@@ -71,7 +71,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/template_noop)
 "q" = (
-/obj/item/weapon/pen/multi,
+/obj/item/pen/multi,
 /turf/simulated/floor/tiled/dark,
 /area/template_noop)
 "r" = (
@@ -80,7 +80,7 @@
 /area/template_noop)
 "t" = (
 /obj/structure/bed,
-/obj/item/weapon/bedsheet/rainbow,
+/obj/item/bedsheet/rainbow,
 /obj/random/drinkbottle,
 /obj/random/trash,
 /turf/simulated/floor/carpet,

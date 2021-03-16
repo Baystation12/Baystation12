@@ -1,4 +1,4 @@
-/obj/item/weapon/towel
+/obj/item/towel
 	name = "towel"
 	icon = 'icons/obj/weapons/other.dmi'
 	icon_state = "towel"
@@ -10,15 +10,15 @@
 	hitsound = 'sound/weapons/towelwhip.ogg'
 	desc = "A soft cotton towel."
 
-/obj/item/weapon/towel/attack_self(mob/living/user as mob)
+/obj/item/towel/attack_self(mob/living/user as mob)
 	user.visible_message("<span class='notice'>[user] uses [src] to towel themselves off.</span>")
 	playsound(user, 'sound/weapons/towelwipe.ogg', 25, 1)
 
-/obj/item/weapon/towel/random/New()
+/obj/item/towel/random/New()
 	..()
 	color = get_random_colour()
 
-/obj/item/weapon/towel/fleece // loot from the king of goats. it's a golden towel
+/obj/item/towel/fleece // loot from the king of goats. it's a golden towel
 	name = "golden fleece"
 	desc = "The legendary Golden Fleece of Jason made real."
 	color = "#ffd700"

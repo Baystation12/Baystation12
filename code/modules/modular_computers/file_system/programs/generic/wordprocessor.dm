@@ -143,7 +143,7 @@
 					)))
 			data["files"] = files
 
-			var/obj/item/weapon/stock_parts/computer/hard_drive/portable/RHDD = PRG.computer.get_component(PART_DRIVE)
+			var/obj/item/stock_parts/computer/hard_drive/portable/RHDD = PRG.computer.get_component(PART_DRIVE)
 			if(RHDD)
 				data["usbconnected"] = 1
 				var/list/usbfiles[0]

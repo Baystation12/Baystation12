@@ -8,7 +8,7 @@
 
 /datum/artifact_trigger/chemical/on_hit(obj/O, mob/user)
 	. = ..()
-	if(istype(O, /obj/item/weapon/reagent_containers))
+	if(istype(O, /obj/item/reagent_containers))
 		if(O.reagents.has_any_reagent(required_chemicals))
 			return TRUE
 

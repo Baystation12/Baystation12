@@ -16,7 +16,7 @@
 		var/area/A = get_area(src)
 		location = A.name
 
-/obj/machinery/pager/attackby(obj/item/weapon/W, mob/user as mob)
+/obj/machinery/pager/attackby(obj/item/W, mob/user as mob)
 	return attack_hand(user)
 
 /obj/machinery/pager/interface_interact(mob/living/user)

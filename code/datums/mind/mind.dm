@@ -393,7 +393,7 @@
 
 		switch(href_list["implant"])
 			if("remove")
-				for(var/obj/item/weapon/implant/loyalty/I in H.contents)
+				for(var/obj/item/implant/loyalty/I in H.contents)
 					for(var/obj/item/organ/external/organs in H.organs)
 						if(I in organs.implants)
 							qdel(I)
@@ -412,7 +412,7 @@
 			if("unemag")
 				var/mob/living/silicon/robot/R = current
 				if (istype(R))
-					R.emagged = 0
+					R.emagged = FALSE
 					if (R.activated(R.module.emag))
 						R.module_active = null
 					if(R.module_state_1 == R.module.emag)
@@ -430,7 +430,7 @@
 				if (istype(current, /mob/living/silicon/ai))
 					var/mob/living/silicon/ai/ai = current
 					for (var/mob/living/silicon/robot/R in ai.connected_robots)
-						R.emagged = 0
+						R.emagged = FALSE
 						if (R.module)
 							if (R.activated(R.module.emag))
 								R.module_active = null

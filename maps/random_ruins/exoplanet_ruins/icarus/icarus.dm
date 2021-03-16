@@ -70,6 +70,7 @@
 /area/map_template/icarus/driver
 	icon_state = "driver"
 
+<<<<<<< HEAD:maps/random_ruins/exoplanet_ruins/icarus/icarus.dm
 /area/map_template/icarus/driver/west
 	name = "SEV Icarus Port Mass Driver"
 
@@ -82,11 +83,42 @@
 /obj/item/icarus_disk
 	name = "disk"
 	desc = "A dusty disk. Its label says: \"Deliver to SCG Expeditionary Corps Command!\". Its content is encrypted with quantum crypthography methods."
+=======
+/obj/effect/shuttle_landmark/nav_icarus/nav1
+	name = "Planetary Navpoint #1"
+	landmark_tag = "nav_icarus_1"
+	flags = SLANDMARK_FLAG_AUTOSET
+
+/obj/effect/shuttle_landmark/nav_icarus/nav2
+	name = "Planetary Navpoint #2"
+	landmark_tag = "nav_icarus_2"
+	flags = SLANDMARK_FLAG_AUTOSET
+
+/obj/effect/shuttle_landmark/nav_icarus/nav3
+	name = "Planetary Navpoint #3"
+	landmark_tag = "nav_icarus_antag"
+	flags = SLANDMARK_FLAG_AUTOSET
+
+/obj/structure/broken_cryo/icarus
+	remains_type = /obj/item/icarus/dead_personnel
+
+/obj/item/icarus/dead_personnel
+	name = "partial skeleton remains"
+	desc = "Human bones wrapped in the shredded remnants of a familiar black uniform."
+	icon = 'maps/away/icarus/icarus_sprites.dmi'
+	icon_state = "dead_personnel"
+	w_class = ITEM_SIZE_LARGE//pile of bones
+
+/obj/item/disk/icarus
+	name = "black box backup disk"
+	desc = "Digital storage. Inscription says: \"Deliver to Sol Goverment Expeditionary Corps Command!\". Content is encrypted with quantum crypthography methods."
+>>>>>>> upstream/dev:maps/away/icarus/icarus.dm
 	icon = 'icons/obj/items.dmi'
 	icon_state = "nucleardisk"
 	item_state = "card-id"
 	w_class = ITEM_SIZE_TINY
 
+<<<<<<< HEAD:maps/random_ruins/exoplanet_ruins/icarus/icarus.dm
 /obj/item/toy/icarus_model
 	name = "table-top SEV Icarus model"
 	desc = "A small model of a spaceship mounted on a wooden stand. On the stand is engraved: \"SEV Icarus 1:278th scale\". The small lights on the hull and the engine exhaust still light up and blink."
@@ -136,6 +168,10 @@
 
 /obj/item/weapon/paper/icarus/log
 	name = "Printed log"
+=======
+/obj/item/paper/icarus/log
+	name = "Printed piece of paper"
+>>>>>>> upstream/dev:maps/away/icarus/icarus.dm
 	info = "\[LOG\]: Orbit stabilized. Next correction burst, est.: 2 hrs 12 m<br>\
 			\[LOG\]: Orbit stabiliztion. Announcing...<br>\
 			\[ANN\]: Attention all hands, SEV Icarus is stabilizing orbit in 30 seconds. Prepare for possible gravitational spikes.<br>\
@@ -166,8 +202,13 @@
 			\[LOG\]: Now you can you safely turn off your computer.<br>"
 
 
+<<<<<<< HEAD:maps/random_ruins/exoplanet_ruins/icarus/icarus.dm
 /obj/item/weapon/paper/icarus/crew_roster
 	name = "Printed crew manifest"
+=======
+/obj/item/paper/icarus/crew_roster
+	name = "Printed piece of paper"
+>>>>>>> upstream/dev:maps/away/icarus/icarus.dm
 	info = "<center>\[solcrest]<BR>\
 			<b>SEV Icarus</b><br>\
 			Crew roster</center><br>\

@@ -23,7 +23,7 @@
 		"switch mode" = IC_PINTYPE_PULSE_IN
 
 	)
-	var/obj/item/weapon/gun/energy/installed_gun = null
+	var/obj/item/gun/energy/installed_gun = null
 	spawn_flags = IC_SPAWN_RESEARCH
 	action_flags = IC_ACTION_COMBAT
 	power_draw_per_use = 30
@@ -35,8 +35,8 @@
 	return ..()
 
 /obj/item/integrated_circuit/manipulation/weapon_firing/attackby(var/obj/O, var/mob/user)
-	if(istype(O, /obj/item/weapon/gun/energy))
-		var/obj/item/weapon/gun/energy/gun = O
+	if(istype(O, /obj/item/gun/energy))
+		var/obj/item/gun/energy/gun = O
 		if(installed_gun)
 			to_chat(user, "<span class='warning'>There's already a weapon installed.</span>")
 			return
@@ -165,7 +165,7 @@
 	activators = list("prime grenade" = IC_PINTYPE_PULSE_IN)
 	spawn_flags = IC_SPAWN_RESEARCH
 	action_flags = IC_ACTION_COMBAT
-	var/obj/item/weapon/grenade/attached_grenade
+	var/obj/item/grenade/attached_grenade
 	var/pre_attached_grenade_type
 
 /obj/item/integrated_circuit/manipulation/grenade/Initialize()
@@ -180,7 +180,7 @@
 	detach_grenade()
 	return ..()
 
-/obj/item/integrated_circuit/manipulation/grenade/attackby(var/obj/item/weapon/grenade/G, var/mob/user)
+/obj/item/integrated_circuit/manipulation/grenade/attackby(var/obj/item/grenade/G, var/mob/user)
 	if(istype(G))
 		if(attached_grenade)
 			to_chat(user, "<span class='warning'>There is already a grenade attached!</span>")
@@ -207,12 +207,12 @@
 			dt = Clamp(detonation_time.data, 1, 12)*10
 		else
 			dt = 15
-		addtimer(CALLBACK(attached_grenade, /obj/item/weapon/grenade.proc/activate), dt)
+		addtimer(CALLBACK(attached_grenade, /obj/item/grenade.proc/activate), dt)
 		var/atom/holder = loc
 		log_and_message_admins("activated a grenade assembly. Last touches: Assembly: [holder.fingerprintslast] Circuit: [fingerprintslast] Grenade: [attached_grenade.fingerprintslast]")
 
 // These procs do not relocate the grenade, that's the callers responsibility
-/obj/item/integrated_circuit/manipulation/grenade/proc/attach_grenade(var/obj/item/weapon/grenade/G)
+/obj/item/integrated_circuit/manipulation/grenade/proc/attach_grenade(var/obj/item/grenade/G)
 	attached_grenade = G
 	G.forceMove(src)
 	desc += " \An [attached_grenade] is attached to it!"
@@ -312,7 +312,7 @@
 
 /obj/item/integrated_circuit/manipulation/seed_extractor/do_work()
 	..()
-	var/obj/item/weapon/reagent_containers/food/snacks/grown/O = get_pin_data_as_type(IC_INPUT, 1, /obj/item/weapon/reagent_containers/food/snacks/grown)
+	var/obj/item/reagent_containers/food/snacks/grown/O = get_pin_data_as_type(IC_INPUT, 1, /obj/item/reagent_containers/food/snacks/grown)
 	if(!check_target(O))
 		push_data()
 		activate_pin(2)
@@ -351,7 +351,7 @@
 	var/atom/movable/acting_object = get_object()
 	var/turf/T = get_turf(acting_object)
 	var/obj/item/AM = get_pin_data_as_type(IC_INPUT, 1, /obj/item)
-	if(!QDELETED(AM) && !istype(AM, /obj/item/device/electronic_assembly) && !istype(AM, /obj/item/device/transfer_valve) && !istype(AM, /obj/item/weapon/material/twohanded) && !istype(assembly.loc, /obj/item/weapon/implant))
+	if(!QDELETED(AM) && !istype(AM, /obj/item/device/electronic_assembly) && !istype(AM, /obj/item/device/transfer_valve) && !istype(AM, /obj/item/material/twohanded) && !istype(assembly.loc, /obj/item/implant))
 		var/mode = get_pin_data(IC_INPUT, 2)
 		if(mode == 1)
 			if(check_target(AM))
@@ -495,10 +495,10 @@
 	var/target_y_rel = round(get_pin_data(IC_INPUT, 2))
 	var/obj/item/A = get_pin_data_as_type(IC_INPUT, 3, /obj/item)
 
-	if(!A || A.anchored || A.throwing || A == assembly || istype(A, /obj/item/weapon/material/twohanded) || istype(A, /obj/item/device/transfer_valve))
+	if(!A || A.anchored || A.throwing || A == assembly || istype(A, /obj/item/material/twohanded) || istype(A, /obj/item/device/transfer_valve))
 		return
 
-	if (istype(assembly.loc, /obj/item/weapon/implant/compressed)) //Prevents the more abusive form of chestgun.
+	if (istype(assembly.loc, /obj/item/implant/compressed)) //Prevents the more abusive form of chestgun.
 		return
 
 	if(A.w_class > assembly.w_class)
@@ -646,7 +646,7 @@
 
 
 /obj/item/integrated_circuit/manipulation/ai/attackby(var/obj/item/I, var/mob/user)
-	if(is_type_in_list(I, list(/obj/item/weapon/aicard, /obj/item/device/paicard, /obj/item/device/mmi)))
+	if(is_type_in_list(I, list(/obj/item/aicard, /obj/item/device/paicard, /obj/item/device/mmi)))
 		load_ai(user, I)
 	else return ..()
 

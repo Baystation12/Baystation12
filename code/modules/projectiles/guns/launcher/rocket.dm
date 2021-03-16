@@ -1,4 +1,4 @@
-/obj/item/weapon/gun/launcher/rocket
+/obj/item/gun/launcher/rocket
 	name = "rocket launcher"
 	desc = "MAGGOT."
 	icon_state = "rocket"
@@ -18,12 +18,12 @@
 	var/max_rockets = 1
 	var/list/rockets = new/list()
 
-/obj/item/weapon/gun/launcher/rocket/examine(mob/user, distance)
+/obj/item/gun/launcher/rocket/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 2)
 		to_chat(user, "<span class='notice'>[rockets.len] / [max_rockets] rockets.</span>")
 
-/obj/item/weapon/gun/launcher/rocket/attackby(obj/item/I as obj, mob/user as mob)
+/obj/item/gun/launcher/rocket/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/ammo_casing/rocket))
 		if(rockets.len < max_rockets)
 			if(!user.unEquip(I, src))
@@ -34,7 +34,7 @@
 		else
 			to_chat(usr, "<span class='warning'>\The [src] cannot hold more rockets.</span>")
 
-/obj/item/weapon/gun/launcher/rocket/consume_next_projectile()
+/obj/item/gun/launcher/rocket/consume_next_projectile()
 	if(rockets.len)
 		var/obj/item/ammo_casing/rocket/I = rockets[1]
 		var/obj/item/missile/M = new (src)
@@ -43,6 +43,6 @@
 		return M
 	return null
 
-/obj/item/weapon/gun/launcher/rocket/handle_post_fire(mob/user, atom/target)
+/obj/item/gun/launcher/rocket/handle_post_fire(mob/user, atom/target)
 	log_and_message_admins("fired a rocket from a rocket launcher ([src.name]) at [target].")
 	..()

@@ -20,9 +20,9 @@
 /decl/hierarchy/supply_pack/science/robotics
 	name = "Parts - Robotics"
 	contains = list(/obj/item/device/assembly/prox_sensor = 3,
-					/obj/item/weapon/storage/toolbox/electrical,
+					/obj/item/storage/toolbox/electrical,
 					/obj/item/device/flash = 4,
-					/obj/item/weapon/cell/high = 2)
+					/obj/item/cell/high = 2)
 	cost = 10
 	containertype = /obj/structure/closet/crate/secure/gear
 	containername = "robotics assembly crate"
@@ -30,7 +30,7 @@
 
 /decl/hierarchy/supply_pack/science/phoron
 	name = "Parts - Phoron device kit"
-	contains = list(/obj/item/weapon/tank/phoron = 3,
+	contains = list(/obj/item/tank/phoron = 3,
 					/obj/item/device/assembly/igniter = 3,
 					/obj/item/device/assembly/prox_sensor = 3,
 					/obj/item/device/assembly/timer = 3)
@@ -41,23 +41,23 @@
 
 /decl/hierarchy/supply_pack/science/scanner_module
 	name = "Electronics - Reagent scanner modules"
-	contains = list(/obj/item/weapon/stock_parts/computer/scanner/reagent = 4)
+	contains = list(/obj/item/stock_parts/computer/scanner/reagent = 4)
 	cost = 20
 	containername = "reagent scanner module crate"
 
 /decl/hierarchy/supply_pack/science/minergear
 	name = "Shaft miner equipment"
-	contains = list(/obj/item/weapon/storage/backpack/industrial,
-					/obj/item/weapon/storage/backpack/satchel/eng,
+	contains = list(/obj/item/storage/backpack/industrial,
+					/obj/item/storage/backpack/satchel/eng,
 					/obj/item/device/radio/headset/headset_cargo,
 					/obj/item/clothing/under/rank/miner,
 					/obj/item/clothing/gloves/thick,
 					/obj/item/clothing/shoes/black,
 					/obj/item/device/scanner/gas,
-					/obj/item/weapon/storage/ore,
+					/obj/item/storage/ore,
 					/obj/item/device/flashlight/lantern,
-					/obj/item/weapon/shovel,
-					/obj/item/weapon/pickaxe,
+					/obj/item/shovel,
+					/obj/item/pickaxe,
 					/obj/item/device/scanner/mining,
 					/obj/item/clothing/glasses/material,
 					/obj/item/clothing/glasses/meson)
@@ -77,6 +77,6 @@
 
 /decl/hierarchy/supply_pack/science/illuminate
 	name = "Gear - Illumination grenades"
-	contains = list(/obj/item/weapon/grenade/light = 8)
+	contains = list(/obj/item/grenade/light = 8)
 	cost = 20
 	containername = "illumination grenade crate"

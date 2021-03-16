@@ -127,7 +127,7 @@
 			to_chat(user, SPAN_NOTICE("It has been signed by: [english_list(has_signed)]."))
 
 /obj/item/paperwork/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/weapon/pen))
+	if(istype(W, /obj/item/pen))
 		if(user.real_name in has_signed)
 			to_chat(user, SPAN_WARNING("You have already signed \the [src]."))
 			return

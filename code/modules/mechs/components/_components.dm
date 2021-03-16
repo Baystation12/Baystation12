@@ -128,7 +128,7 @@
 /obj/item/mech_component/proc/update_components()
 	return
 
-/obj/item/mech_component/proc/repair_brute_generic(var/obj/item/weapon/weldingtool/WT, var/mob/user)
+/obj/item/mech_component/proc/repair_brute_generic(var/obj/item/weldingtool/WT, var/mob/user)
 	if(!istype(WT))
 		return
 	if(!brute_damage)

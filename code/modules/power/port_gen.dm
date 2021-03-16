@@ -148,10 +148,10 @@
 	return ..()
 
 /obj/machinery/power/port_gen/pacman/RefreshParts()
-	var/temp_rating = total_component_rating_of_type(/obj/item/weapon/stock_parts/micro_laser)
-	temp_rating += total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor)
+	var/temp_rating = total_component_rating_of_type(/obj/item/stock_parts/micro_laser)
+	temp_rating += total_component_rating_of_type(/obj/item/stock_parts/capacitor)
 
-	max_sheets = 50 * Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin), 0, 5) ** 2
+	max_sheets = 50 * Clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 0, 5) ** 2
 
 	power_gen = round(initial(power_gen) * Clamp(temp_rating, 0, 20) / 2)
 	..()
@@ -272,7 +272,7 @@
 		explode() //if they're foolish enough to emag while it's running
 
 	if (!emagged)
-		emagged = 1
+		emagged = TRUE
 		return 1
 
 /obj/machinery/power/port_gen/pacman/components_are_accessible(path)
@@ -495,8 +495,8 @@
 		icon_state = "potatodanger"
 
 /obj/machinery/power/port_gen/pacman/super/potato/attackby(var/obj/item/O, var/mob/user)
-	if(istype(O, /obj/item/weapon/reagent_containers/))
-		var/obj/item/weapon/reagent_containers/R = O
+	if(istype(O, /obj/item/reagent_containers/))
+		var/obj/item/reagent_containers/R = O
 		if(R.standard_pour_into(src,user))
 			if(reagents.has_reagent("vodka"))
 				audible_message("<span class='notice'>[src] blips happily</span>")

@@ -76,10 +76,10 @@
 	new /obj/item/clothing/head/chaplain_hood(src)
 	new /obj/item/clothing/suit/holidaypriest(src)
 	new /obj/item/clothing/under/wedding/bride_white(src)
-	new /obj/item/weapon/storage/backpack/cultpack (src)
-	new /obj/item/weapon/storage/candle_box(src)
-	new /obj/item/weapon/storage/candle_box(src)
-	new /obj/item/weapon/deck/tarot(src)
+	new /obj/item/storage/backpack/cultpack (src)
+	new /obj/item/storage/candle_box(src)
+	new /obj/item/storage/candle_box(src)
+	new /obj/item/deck/tarot(src)
 
 /obj/structure/closet/wardrobe/green
 	name = "green wardrobe"
@@ -349,7 +349,7 @@
 	new /obj/item/clothing/head/helmet/tactical(src)
 	new /obj/item/clothing/mask/balaclava/tactical(src)
 	new /obj/item/clothing/glasses/tacgoggles(src)
-	new /obj/item/weapon/storage/belt/holster/security/tactical(src)
+	new /obj/item/storage/belt/holster/security/tactical(src)
 	new /obj/item/clothing/shoes/tactical(src)
 	new /obj/item/clothing/gloves/tactical(src)
 
@@ -397,5 +397,5 @@
 	new /obj/item/clothing/shoes/brown(src)
 	new /obj/item/clothing/glasses/sunglasses/big(src)
 	new /obj/item/clothing/glasses/sunglasses/big(src)
-	new /obj/item/weapon/storage/briefcase(src)
-	new /obj/item/weapon/storage/briefcase(src)
+	new /obj/item/storage/briefcase(src)
+	new /obj/item/storage/briefcase(src)

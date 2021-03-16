@@ -122,7 +122,7 @@
 		new_security_level.switching_down_to()
 
 	for(var/thing in SSpsi.psi_dampeners)
-		var/obj/item/weapon/implant/psi_control/implant = thing
+		var/obj/item/implant/psi_control/implant = thing
 		implant.update_functionality()
 
 	log_and_message_admins("has changed the security level from [previous_security_level.name] to [new_security_level.name].")

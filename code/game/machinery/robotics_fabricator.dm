@@ -60,12 +60,12 @@
 	..()
 
 /obj/machinery/robotics_fabricator/RefreshParts()
-	res_max_amount = 100000 * total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin)
+	res_max_amount = 100000 * total_component_rating_of_type(/obj/item/stock_parts/matter_bin)
 
-	var/T = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator), 0, 4)
+	var/T = Clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator), 0, 4)
 	mat_efficiency = 1 - (T - 1) / 4 // 1 -> 0.5
 
-	T += total_component_rating_of_type(/obj/item/weapon/stock_parts/micro_laser)// Not resetting T is intended; speed is affected by both
+	T += total_component_rating_of_type(/obj/item/stock_parts/micro_laser)// Not resetting T is intended; speed is affected by both
 	speed = T / 2 // 1 -> 3
 
 /obj/machinery/robotics_fabricator/interface_interact(var/mob/user)
@@ -178,23 +178,13 @@
 
 
 /obj/machinery/robotics_fabricator/emag_act(var/remaining_charges, var/mob/user)
-	switch(emagged)
-		if(0)
-			emagged = 0.5
-			visible_message("[icon2html(src, viewers(get_turf(src)))] <b>[src]</b> beeps: \"DB error \[Code 0x00F1\]\"")
-			sleep(10)
-			visible_message("[icon2html(src, viewers(get_turf(src)))] <b>[src]</b> beeps: \"Attempting auto-repair\"")
-			sleep(15)
-			visible_message("[icon2html(src, viewers(get_turf(src)))] <b>[src]</b> beeps: \"User DB corrupted \[Code 0x00FA\]. Truncating data structure...\"")
-			sleep(30)
-			visible_message("[icon2html(src, viewers(get_turf(src)))] <b>[src]</b> beeps: \"User DB truncated. Please contact your [GLOB.using_map.company_name] system operator for future assistance.\"")
-			req_access = null
-			emagged = 1
-			return 1
-		if(0.5)
-			visible_message("[icon2html(src, viewers(get_turf(src)))] <b>[src]</b> beeps: \"DB not responding \[Code 0x0003\]...\"")
-		if(1)
-			visible_message("[icon2html(src, viewers(get_turf(src)))] <b>[src]</b> beeps: \"No records in User DB\"")
+	if (emagged)
+		to_chat(user, SPAN_WARNING("No records in user DB."))
+		return
+	emagged = TRUE
+	req_access.Cut()
+	to_chat(user, SPAN_NOTICE("User DB truncated; defaulting to open access."))
+	return 1
 
 /obj/machinery/robotics_fabricator/proc/update_busy()
 	if(queue.len)

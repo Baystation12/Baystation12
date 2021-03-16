@@ -35,7 +35,7 @@
 	pry_time = 8 SECONDS
 	pry_desc = "clawing"
 
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/spider
+	meat_type = /obj/item/reagent_containers/food/snacks/spider
 	meat_amount = 3
 	bone_material = null
 	bone_amount =   0

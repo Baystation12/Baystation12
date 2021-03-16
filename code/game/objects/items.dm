@@ -105,7 +105,7 @@
 	if(ismob(loc))
 		var/mob/m = loc
 		m.drop_from_inventory(src)
-	var/obj/item/weapon/storage/storage = loc
+	var/obj/item/storage/storage = loc
 	if(istype(storage))
 		// some ui cleanup needs to be done
 		storage.on_item_pre_deletion(src) // must be done before deletion
@@ -131,7 +131,7 @@
 
 /obj/item/proc/is_held_twohanded(mob/living/M)
 
-	if(istype(loc, /obj/item/rig_module) || istype(loc, /obj/item/weapon/rig))
+	if(istype(loc, /obj/item/rig_module) || istype(loc, /obj/item/rig))
 		return TRUE
 
 	var/check_hand
@@ -222,8 +222,8 @@
 	var/old_loc = loc
 
 	pickup(user)
-	if (istype(loc, /obj/item/weapon/storage))
-		var/obj/item/weapon/storage/S = loc
+	if (istype(loc, /obj/item/storage))
+		var/obj/item/storage/S = loc
 		S.remove_from_storage(src)
 
 	if(!QDELETED(throwing))
@@ -252,7 +252,7 @@
 			pixel_y = 0
 
 /obj/item/attack_ai(mob/user as mob)
-	if (istype(src.loc, /obj/item/weapon/robot_module))
+	if (istype(src.loc, /obj/item/robot_module))
 		//If the item is part of a cyborg module, equip it
 		if(!isrobot(user))
 			return
@@ -260,12 +260,12 @@
 		R.activate_module(src)
 		R.hud_used.update_robot_modules_display()
 
-/obj/item/attackby(obj/item/weapon/W, mob/user)
+/obj/item/attackby(obj/item/W, mob/user)
 	if((. = SSfabrication.try_craft_with(src, W, user)))
 		return
 
-	if(istype(W, /obj/item/weapon/storage))
-		var/obj/item/weapon/storage/S = W
+	if(istype(W, /obj/item/storage))
+		var/obj/item/storage/S = W
 		if(S.use_to_pickup)
 			if(S.collection_mode) //Mode is set to collect all items
 				if(isturf(src.loc))
@@ -296,11 +296,11 @@
 	return
 
 // called when this item is removed from a storage item, which is passed on as S. The loc variable is already set to the new destination before this is called.
-/obj/item/proc/on_exit_storage(obj/item/weapon/storage/S as obj)
+/obj/item/proc/on_exit_storage(obj/item/storage/S as obj)
 	return
 
 // called when this item is added into a storage item, which is passed on as S. The loc variable is already set to the storage item.
-/obj/item/proc/on_enter_storage(obj/item/weapon/storage/S as obj)
+/obj/item/proc/on_enter_storage(obj/item/storage/S as obj)
 	return
 
 // called when "found" in pockets and storage items. Returns 1 if the search should end.
@@ -424,15 +424,15 @@ var/list/global/slot_flags_enumeration = list(
 				if(!disable_warning)
 					to_chat(usr, "<span class='warning'>You somehow have a suit with no defined allowed items for suit storage, stop that.</span>")
 				return 0
-			if( !(istype(src, /obj/item/modular_computer/pda) || istype(src, /obj/item/weapon/pen) || is_type_in_list(src, H.wear_suit.allowed)) )
+			if( !(istype(src, /obj/item/modular_computer/pda) || istype(src, /obj/item/pen) || is_type_in_list(src, H.wear_suit.allowed)) )
 				return 0
 		if(slot_handcuffed)
-			if(!istype(src, /obj/item/weapon/handcuffs))
+			if(!istype(src, /obj/item/handcuffs))
 				return 0
 		if(slot_in_backpack) //used entirely for equipping spawned mobs or at round start
 			var/allow = 0
-			if(H.back && istype(H.back, /obj/item/weapon/storage/backpack))
-				var/obj/item/weapon/storage/backpack/B = H.back
+			if(H.back && istype(H.back, /obj/item/storage/backpack))
+				var/obj/item/storage/backpack/B = H.back
 				if(B.can_be_inserted(src,M,1))
 					allow = 1
 			if(!allow)
@@ -629,7 +629,7 @@ var/list/global/slot_flags_enumeration = list(
 	if (!..())
 		return 0
 
-	if(istype(src, /obj/item/weapon/melee/energy))
+	if(istype(src, /obj/item/melee/energy))
 		return
 
 	//if we haven't made our blood_overlay already
@@ -811,7 +811,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	else if(item_icons && item_icons[slot])
 		mob_icon = item_icons[slot]
 	else
-		mob_icon = default_onmob_icons[slot]
+		mob_icon = GLOB.default_onmob_icons[slot]
 
 	if(user_human)
 		return user_human.species.get_offset_overlay_image(spritesheet, mob_icon, mob_state, color, slot)

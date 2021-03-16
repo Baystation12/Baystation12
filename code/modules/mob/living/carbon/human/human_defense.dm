@@ -427,8 +427,8 @@ meteor_act
 	if(damtype != BURN && damtype != BRUTE) return
 
 	// The rig might soak this hit, if we're wearing one.
-	if(back && istype(back,/obj/item/weapon/rig))
-		var/obj/item/weapon/rig/rig = back
+	if(back && istype(back,/obj/item/rig))
+		var/obj/item/rig/rig = back
 		rig.take_hit(damage)
 
 	// We may also be taking a suit breach.

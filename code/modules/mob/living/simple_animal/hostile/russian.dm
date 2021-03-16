@@ -18,8 +18,8 @@
 	can_escape = TRUE
 	a_intent = I_HURT
 	var/corpse = /obj/effect/landmark/corpse/russian
-	var/dropped_weapon = /obj/item/weapon/material/knife/combat
-	natural_weapon = /obj/item/weapon/material/knife/combat
+	var/dropped_weapon = /obj/item/material/knife/combat
+	natural_weapon = /obj/item/material/knife/combat
 	unsuitable_atmos_damage = 15
 	faction = "russian"
 	status_flags = CANPUSH
@@ -29,7 +29,7 @@
 	icon_state = "russianranged"
 	icon_living = "russianranged"
 	corpse = /obj/effect/landmark/corpse/russian/ranged
-	dropped_weapon = /obj/item/weapon/gun/projectile/revolver
+	dropped_weapon = /obj/item/gun/projectile/revolver
 	ranged = 1
 	projectiletype = /obj/item/projectile/bullet
 	projectilesound = 'sound/weapons/gunshot/gunshot2.ogg'
