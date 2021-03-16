@@ -1,0 +1,7 @@
+author: "Imienny"
+delete-after: True
+changes: 
+  - bugfix: "Prescription glasses once again work while using camera."
+  - bugfix: "Goggles once again work when looking up."
+  - tweak: "Its no longer possible to use binoculars inside of mechs with sensors providing any vision flags."
+  - tweak: "Binoculars/scopes temporarily disable worn goggles when used."
