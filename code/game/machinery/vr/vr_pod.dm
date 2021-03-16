@@ -56,10 +56,8 @@
 	. = ..()
 
 /obj/machinery/vr_pod/attackby(obj/item/I, mob/living/user)
-	if (isCrowbar(I) && user.a_intent != I_HELP)
-		if (!hatch_locked)
-			eject()
-		else
+	if ((isCrowbar(I) || istype(I, /obj/item/natural_weapon)) && user.a_intent != I_HELP)
+		if (hatch_locked)
 			user.visible_message(
 				SPAN_WARNING("\The [user] starts prying open \the [src]'s hatch!"),
 				SPAN_DANGER("You start trying to pry open \the [src]...")
@@ -69,21 +67,22 @@
 			if (L)
 				to_chat(L, SPAN_DANGER(FONT_LARGE("You hear a loud groaning sound as something starts trying to force open your pod!")))
 				L.playsound_local(L.loc,'sound/machines/airlock_creaking.ogg', 75)
-			if (!do_after(user, 4 SECONDS, src))
+			if (!do_after(user, 5 SECONDS, src))
 				return
-			user.visible_message(
-				SPAN_WARNING("\The [user] pries open \the [src]!"),
-				SPAN_DANGER("You force open \the [src], ejecting its occupant.")
-			)
-			playsound(loc, 'sound/items/Deconstruct.ogg', 75)
-			eject()
+		user.visible_message(
+			SPAN_WARNING("\The [user] pries open \the [src]!"),
+			SPAN_DANGER("You force open \the [src], ejecting its occupant.")
+		)
+		playsound(loc, 'sound/items/Deconstruct.ogg', 75)
+		eject()
 		return
 	. = ..()
 
 /obj/machinery/vr_pod/examine(mob/user)
 	. = ..()
 	if (occupant)
-		to_chat(user, SPAN_NOTICE("You can see \the [occupant] inside."))
+		to_chat(user, SPAN_NOTICE("You can see \the [occupant] inside..."))
+		user.examinate(occupant)
 
 /obj/machinery/vr_pod/MouseDrop_T(mob/living/target, mob/living/user)
 	if (!CanMouseDrop(target, user))
@@ -149,13 +148,13 @@
 	for(var/obj/O in (contents - component_parts))
 		O.dropInto(loc)
 
-/obj/machinery/vr_pod/proc/eject(forceful)
+/obj/machinery/vr_pod/proc/eject()
 	if (SSvirtual_reality.virtual_occupants_to_mobs[occupant])
 		SSvirtual_reality.remove_virtual_mob(occupant, TRUE)
 	else
 		to_chat(occupant, SPAN_DANGER("You're forced out of your pod!"))
 	occupant.Weaken(3)
-	exit_pod(forceful)
+	exit_pod(TRUE)
 
 /obj/machinery/vr_pod/relaymove(mob/living/user)
 	..()

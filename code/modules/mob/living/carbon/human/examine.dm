@@ -170,7 +170,7 @@
 	if(fire_stacks)
 		msg += "[T.He] looks flammable.\n"
 	if(on_fire)
-		msg += "<span class='warning'>[T.He] [T.is] on fire!.</span>\n"
+		msg += "<span class='warning'>[T.He] [T.is] on fire!</span>\n"
 
 	var/ssd_msg = species.get_ssd(src)
 	if(ssd_msg && (!should_have_organ(BP_BRAIN) || has_brain()) && stat != DEAD)
@@ -180,7 +180,7 @@
 			else if(!client)
 				msg += "<span class='deadsay'>[T.He] [T.is] [ssd_msg].</span>\n"
 		else // We are in VR - intercept the SSD message and replace it with something else
-			msg += SPAN_NOTICE(SPAN_ITALIC("[T.He] [T.is] [species.get_vr(src)]."))
+			msg += SPAN_NOTICE(SPAN_ITALIC("[T.He] [T.is] [species.get_vr(src)].\n"))
 
 	var/obj/item/organ/external/head/H = organs_by_name[BP_HEAD]
 	if(istype(H) && H.forehead_graffiti && H.graffiti_style)

@@ -54,7 +54,7 @@
 	var/mob_size	= MOB_MEDIUM
 	var/strength    = STR_MEDIUM
 	var/show_ssd = "fast asleep"
-	var/show_vr = "looking around and responding to unseen stimuli"
+	var/show_vr = "apparently unaware of their surroundings, only responding to stimuli that you can't see"
 	var/short_sighted                         // Permanent weldervision.
 	var/light_sensitive                       // Ditto, but requires sunglasses to fix
 	var/blood_volume = SPECIES_BLOOD_DEFAULT  // Initial blood volume.
