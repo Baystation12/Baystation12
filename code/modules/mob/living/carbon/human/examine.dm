@@ -174,10 +174,13 @@
 
 	var/ssd_msg = species.get_ssd(src)
 	if(ssd_msg && (!should_have_organ(BP_BRAIN) || has_brain()) && stat != DEAD)
-		if(!key)
-			msg += "<span class='deadsay'>[T.He] [T.is] [ssd_msg]. It doesn't look like [T.he] [T.is] waking up anytime soon.</span>\n"
-		else if(!client)
-			msg += "<span class='deadsay'>[T.He] [T.is] [ssd_msg].</span>\n"
+		if (!SSvirtual_reality.virtual_occupants_to_mobs[src]) // We are not in VR
+			if(!key)
+				msg += "<span class='deadsay'>[T.He] [T.is] [ssd_msg]. It doesn't look like [T.he] [T.is] waking up anytime soon.</span>\n"
+			else if(!client)
+				msg += "<span class='deadsay'>[T.He] [T.is] [ssd_msg].</span>\n"
+		else // We are in VR - intercept the SSD message and replace it with something else
+			msg += SPAN_NOTICE(SPAN_ITALIC("[T.He] [T.is] [species.get_vr(src)]."))
 
 	var/obj/item/organ/external/head/H = organs_by_name[BP_HEAD]
 	if(istype(H) && H.forehead_graffiti && H.graffiti_style)

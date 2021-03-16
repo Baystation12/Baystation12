@@ -993,6 +993,8 @@
 /area/crew_quarters/virtual_reality
 	name = "\improper VR Suites"
 	icon_state = "Holodeck"
+	sound_env = SMALL_SOFTFLOOR
+	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED // don't want to fry people who are in VR!
 
 /area/holocontrol
 	name = "\improper Holodeck Control"

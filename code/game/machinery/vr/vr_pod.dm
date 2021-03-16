@@ -2,7 +2,7 @@
 	name = "\improper VR pod"
 	desc = "An advanced machine that simulates extremely lifelike environments and sensations. Useful for hands-on training as well as recreation."
 	icon = 'icons/obj/Cryogenic2.dmi'
-	icon_state = "sleeper_0"
+	icon_state = "redpod0"
 	density = TRUE
 	anchored = TRUE
 	clicksound = 'sound/machines/buttonbeep.ogg'
@@ -242,8 +242,8 @@
 
 /obj/machinery/vr_pod/on_update_icon()
 	if(!occupant)
-		icon_state = "sleeper_0"
+		icon_state = "redpod0"
 	else if(stat & (BROKEN|NOPOWER))
-		icon_state = "sleeper_1"
+		icon_state = "redpod2"
 	else
-		icon_state = "sleeper_2"
+		icon_state = "redpod1"

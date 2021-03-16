@@ -46,6 +46,9 @@
 /datum/species/proc/get_ssd(var/mob/living/carbon/human/H)
 	return ((H && H.isSynthetic()) ? "flashing a 'system offline' glyph on their monitor" : show_ssd)
 
+/datum/species/proc/get_vr(mob/living/carbon/human/H)
+	return ((H && H.isSynthetic()) ? "flashing a 'system occupied' glyph on their monitor" : show_vr)
+
 /datum/species/proc/get_blood_colour(var/mob/living/carbon/human/H)
 	return ((H && H.isSynthetic()) ? SYNTH_BLOOD_COLOUR : blood_color)
 
