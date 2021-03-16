@@ -84,7 +84,4 @@
 				message = success_message[min(1 + round(skill - weight), fail_message.len)]
 				user.visible_message("<span class='notice'>\The [user] lift\s the weights [message].</span>", "<span class='notice'>You lift the weights [message].</span>")
 				user.update_personal_goal(/datum/goal/weights, 1)
-			being_used = 0
-		else
-			to_chat(user, "<span class='notice'>Against your previous judgement, perhaps working out is not for you.</span>")
-			being_used = 0
+		being_used = FALSE

@@ -450,10 +450,7 @@
 		to_chat(user, SPAN_WARNING("\The [target] isn't close enough."))
 		return
 	add_fingerprint(user)
-	var/reason = do_after_detailed(user, 2 SECONDS, src, do_flags = DO_DEFAULT | DO_TARGET_UNIQUE_ACT | DO_PUBLIC_PROGRESS)
-	if (reason)
-		if (reason == DO_TARGET_UNIQUE_ACT)
-			to_chat(user, SPAN_WARNING("\The [do_unique_target_user] is already using \the [src]."))
+	if (!do_after(user, 2 SECONDS, src, do_flags = DO_DEFAULT | DO_TARGET_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		return
 	if (QDELETED(target))
 		return

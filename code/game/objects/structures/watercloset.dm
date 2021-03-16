@@ -488,7 +488,6 @@
 		to_chat(user, SPAN_WARNING("\The [src] is already clogged."))
 		return
 	if (!do_after(user, 3 SECONDS, src))
-		to_chat(user, SPAN_WARNING("You must stay still to clog \the [src]."))
 		return
 	if (clogged || QDELETED(I) || !user.unEquip(I))
 		return
@@ -553,7 +552,7 @@
 		playsound(src.loc, 'sound/effects/closet_open.ogg', 20, 1)
 	else
 		playsound(src.loc, 'sound/effects/closet_close.ogg', 20, 1)
-	
+
 	user.visible_message(SPAN_NOTICE("\The [user] has [open ? "opened" : "closed"] the faucet."))
 	update_icon()
 
@@ -579,7 +578,7 @@
 
 /obj/structure/hygiene/faucet/Process()
 	..()
-	if(open) 
+	if(open)
 		water_flow()
 
 /obj/structure/hygiene/faucet/examine(mob/user)

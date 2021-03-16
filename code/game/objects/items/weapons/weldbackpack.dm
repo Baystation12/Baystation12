@@ -209,12 +209,7 @@
 		if (!selection)
 			return TRUE
 		var/time_cost = 5 - round(user.get_skill_value(SKILL_ATMOS) * 0.5) //0,1,1,2,2
-		var/failed = do_after_detailed(user, time_cost SECONDS, src, do_flags = DO_DEFAULT | DO_BOTH_UNIQUE_ACT)
-		if (failed)
-			if (failed == DO_USER_UNIQUE_ACT)
-				to_chat(user, SPAN_WARNING("You stop what you're doing with \the [src]."))
-			else if (failed == DO_TARGET_UNIQUE_ACT)
-				to_chat(user, SPAN_WARNING("\The [do_unique_target_user] is already busy with \the [src]."))
+		if (!do_after(user, time_cost SECONDS, src, do_flags = DO_DEFAULT | DO_BOTH_UNIQUE_ACT))
 			return TRUE
 		var/removed
 		if (selection == "cell")

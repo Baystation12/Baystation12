@@ -145,8 +145,6 @@
 			to_chat(user, "<span class='notice'>You begin prying at \the [src]...</span>")
 			if(do_after(user, 2 SECONDS, src))
 				force_toggle()
-			else
-				to_chat(user, "<span class='warning'>You must remain still while working on \the [src].</span>")
 		else
 			to_chat(user, "<span class='notice'>[src]'s motors resist your effort.</span>")
 		return

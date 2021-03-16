@@ -270,7 +270,6 @@
 			"<span class='info'>With a quiet hum, the suit begins running checks and adjusting components.</span>")
 
 			if(seal_delay && !do_after(wearer,seal_delay, src))
-				if(wearer) to_chat(wearer, "<span class='warning'>You must remain still while the suit is adjusting the components.</span>")
 				failed_to_seal = 1
 
 		if(!wearer)
