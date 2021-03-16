@@ -14,6 +14,7 @@
 	
 	var/mob/living/carbon/human/occupant	// The person using the pod.
 	var/hatch_locked						// If TRUE, the occupant can't exit, and also can't be ejected.
+	var/antispam = 0						// Used to prevent message spam when trying to move out of a locked pod.
 
 /obj/machinery/vr_pod/Initialize()
 	. = ..()
@@ -45,7 +46,9 @@
 			return
 		if (user.a_intent == I_GRAB && occupant)
 			if (hatch_locked)
-				to_chat(user, SPAN_WARNING("\The [src]'s hatch is locked!"))
+				if (antispam <= world.time)
+					to_chat(user, SPAN_WARNING("\The [src]'s hatch is locked!"))
+					antispam = world.time + 5
 				return
 			user.visible_message(
 				SPAN_WARNING("\The [user] opens \the [src]'s hatch, ejecting \the [occupant]!"),

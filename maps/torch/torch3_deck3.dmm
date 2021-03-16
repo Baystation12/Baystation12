@@ -3780,10 +3780,9 @@
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/starboard)
 "hA" = (
-/turf/simulated/floor/reinforced{
-	name = "Holodeck Projector Floor"
-	},
-/area/holodeck/alphadeck)
+/obj/structure/closet/firecloset,
+/turf/simulated/floor/wood/walnut,
+/area/crew_quarters/virtual_reality)
 "hB" = (
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/structure/table/marble,
@@ -5194,7 +5193,6 @@
 /turf/simulated/floor/tiled,
 /area/hydroponics/storage)
 "kd" = (
-/obj/structure/table/standard,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
@@ -5202,8 +5200,15 @@
 	dir = 4;
 	pixel_x = -21
 	},
-/turf/simulated/floor/tiled/dark,
-/area/holocontrol)
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 8
+	},
+/obj/machinery/light/spot{
+	dir = 8
+	},
+/obj/structure/table/woodentable,
+/turf/simulated/floor/carpet/blue,
+/area/crew_quarters/virtual_reality)
 "ke" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on/sauna{
 	dir = 1;
@@ -5273,6 +5278,14 @@
 /obj/item/stool/wood,
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/head/sauna)
+"kn" = (
+/obj/machinery/light/spot{
+	dir = 1
+	},
+/obj/structure/table/woodentable,
+/obj/item/newspaper,
+/turf/simulated/floor/wood/walnut,
+/area/crew_quarters/virtual_reality)
 "ko" = (
 /obj/machinery/space_heater,
 /obj/effect/floor_decal/industrial/outline/grey,
@@ -5576,10 +5589,14 @@
 	dir = 8;
 	pixel_x = -24
 	},
-/obj/machinery/light/spot,
-/obj/structure/table/standard,
-/turf/simulated/floor/tiled/dark,
-/area/holocontrol)
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 10;
+	icon_state = "spline_fancy"
+	},
+/obj/machinery/recharger,
+/obj/structure/table/woodentable,
+/turf/simulated/floor/carpet/blue,
+/area/crew_quarters/virtual_reality)
 "kX" = (
 /obj/structure/railing/mapped{
 	dir = 8;
@@ -6242,13 +6259,13 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/monotile,
-/area/holocontrol)
+/area/crew_quarters/virtual_reality_control)
 "my" = (
 /obj/structure/table/standard,
 /obj/item/paper{
 	desc = "";
-	info = "Bruises sustained in the holodeck can be healed simply by sleeping.";
-	name = "Holodeck Disclaimer"
+	info = "VR users cannot hear over the radio or loudspeakers. Please use the VR Control program to directly message occupants, or eject them from the pod. Thanks!";
+	name = "VR disclaimer"
 	},
 /obj/machinery/alarm{
 	pixel_y = 24
@@ -6258,7 +6275,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/monotile,
-/area/holocontrol)
+/area/crew_quarters/virtual_reality_control)
 "mB" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/item/flame/candle/scented/incense{
@@ -6526,8 +6543,14 @@
 	dir = 8;
 	pixel_x = -24
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
 /turf/simulated/floor/tiled,
-/area/holocontrol)
+/area/crew_quarters/virtual_reality_control)
 "nm" = (
 /obj/structure/table/steel,
 /obj/random/maintenance/solgov,
@@ -6537,8 +6560,14 @@
 /area/maintenance/thirddeck/starboard)
 "nn" = (
 /obj/effect/wallframe_spawn/no_grille,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
 /turf/simulated/floor/plating,
-/area/holocontrol)
+/area/crew_quarters/virtual_reality_control)
 "no" = (
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 1;
@@ -6565,14 +6594,17 @@
 /area/maintenance/substation/thirddeck)
 "nt" = (
 /obj/effect/floor_decal/industrial/warning/corner,
-/obj/machinery/computer/HolodeckControl{
-	dir = 8;
-	icon_state = "computer";
-	linkedholodeck_area = /area/holodeck/alphadeck;
-	programs_list_id = "TorchMainPrograms"
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/computer/modular/preset/vr_control{
+	dir = 8
 	},
 /turf/simulated/floor/tiled,
-/area/holocontrol)
+/area/crew_quarters/virtual_reality_control)
 "nu" = (
 /obj/structure/disposalpipe/segment{
 	dir = 8;
@@ -6593,6 +6625,12 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/observation)
+"nx" = (
+/obj/machinery/vending/cola{
+	dir = 1
+	},
+/turf/simulated/floor/wood/walnut,
+/area/crew_quarters/virtual_reality)
 "ny" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/ladder,
@@ -6658,6 +6696,11 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/grass,
 /area/crew_quarters/observation)
+"nN" = (
+/obj/machinery/disposal,
+/obj/structure/disposalpipe/trunk,
+/turf/simulated/floor/wood/walnut,
+/area/crew_quarters/virtual_reality)
 "nO" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -6807,6 +6850,9 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/forestarboard)
+"nX" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/crew_quarters/virtual_reality_control)
 "nY" = (
 /obj/structure/table/gamblingtable,
 /obj/random/coin,
@@ -6933,11 +6979,12 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 6
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled,
-/area/holocontrol)
+/area/crew_quarters/virtual_reality_control)
 "ol" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
@@ -6946,10 +6993,11 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
-/area/holocontrol)
+/area/crew_quarters/virtual_reality_control)
 "om" = (
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_ridged,
-/area/holocontrol)
+/area/crew_quarters/virtual_reality_control)
 "on" = (
 /obj/structure/dispenser/oxygen,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -7019,6 +7067,16 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
+"ow" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/effect/floor_decal/spline/fancy/wood,
+/obj/machinery/vr_pod{
+	dir = 4
+	},
+/turf/simulated/floor/carpet/blue,
+/area/crew_quarters/virtual_reality)
 "oy" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -7115,6 +7173,10 @@
 /obj/random/drinkbottle,
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/recreation)
+"oP" = (
+/obj/structure/reagent_dispensers/water_cooler,
+/turf/simulated/floor/wood/walnut,
+/area/crew_quarters/virtual_reality)
 "oT" = (
 /obj/structure/railing/mapped{
 	dir = 1;
@@ -7371,9 +7433,6 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 6
-	},
 /obj/machinery/light{
 	dir = 8
 	},
@@ -7381,8 +7440,16 @@
 	dir = 4;
 	pixel_x = -21
 	},
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8
+	},
 /turf/simulated/floor/tiled,
-/area/holocontrol)
+/area/crew_quarters/virtual_reality_control)
 "pk" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
@@ -7390,8 +7457,13 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
 	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/tiled,
-/area/holocontrol)
+/area/crew_quarters/virtual_reality_control)
 "pm" = (
 /obj/machinery/light/small,
 /obj/effect/floor_decal/corner/yellow/half,
@@ -7473,6 +7545,9 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/thruster/d3port)
+"pt" = (
+/turf/simulated/wall/prepainted,
+/area/crew_quarters/virtual_reality_control)
 "pw" = (
 /obj/structure/railing/mapped{
 	dir = 8;
@@ -7704,7 +7779,7 @@
 /area/crew_quarters/mess)
 "qc" = (
 /obj/machinery/door/airlock/multi_tile/glass/civilian{
-	name = "Holodeck"
+	name = "VR Control"
 	},
 /obj/structure/cable/green{
 	d1 = 1;
@@ -7713,15 +7788,16 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_ridged,
-/area/holocontrol)
+/area/crew_quarters/virtual_reality_control)
 "qd" = (
 /turf/simulated/wall/prepainted,
-/area/holocontrol)
+/area/crew_quarters/virtual_reality)
 "qe" = (
 /obj/machinery/status_display,
 /turf/simulated/wall/prepainted,
-/area/holocontrol)
+/area/crew_quarters/virtual_reality)
 "qh" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/railing/mapped,
@@ -7871,6 +7947,19 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/carpet,
 /area/crew_quarters/recreation)
+"qK" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 1;
+	icon_state = "spline_fancy"
+	},
+/obj/machinery/vr_pod{
+	dir = 8
+	},
+/turf/simulated/floor/carpet/blue,
+/area/crew_quarters/virtual_reality)
 "qL" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -8073,6 +8162,15 @@
 /obj/item/sticky_pad/random,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/galley)
+"ro" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 6
+	},
+/obj/machinery/light/spot{
+	dir = 4
+	},
+/turf/simulated/floor/carpet/blue,
+/area/crew_quarters/virtual_reality)
 "rp" = (
 /obj/machinery/door/firedoor,
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -8118,18 +8216,20 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
 "rv" = (
-/obj/machinery/hologram/holopad,
 /obj/machinery/camera/network/third_deck{
-	c_tag = "Holodeck - Center"
+	c_tag = "VR Suites - Front"
 	},
-/obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/alarm{
 	dir = 4;
 	pixel_x = -23;
 	pixel_y = 0
 	},
-/turf/simulated/floor/tiled/dark,
-/area/holocontrol)
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 9
+	},
+/obj/machinery/hologram/holopad,
+/turf/simulated/floor/carpet/blue,
+/area/crew_quarters/virtual_reality)
 "rw" = (
 /obj/effect/floor_decal/corner/green{
 	dir = 5
@@ -8228,6 +8328,14 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/starboard)
+"rI" = (
+/obj/structure/bed/chair/comfy/brown,
+/obj/machinery/firealarm{
+	dir = 2;
+	pixel_y = 24
+	},
+/turf/simulated/floor/wood/walnut,
+/area/crew_quarters/virtual_reality)
 "rK" = (
 /obj/structure/railing/mapped{
 	dir = 8;
@@ -8358,6 +8466,9 @@
 	},
 /turf/simulated/floor/carpet,
 /area/crew_quarters/recreation)
+"rY" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/crew_quarters/virtual_reality)
 "sc" = (
 /obj/effect/floor_decal/corner/green/half{
 	dir = 1;
@@ -9010,6 +9121,19 @@
 	},
 /turf/simulated/floor/reinforced,
 /area/thruster/d3starboard)
+"ti" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8
+	},
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 1;
+	icon_state = "spline_fancy"
+	},
+/obj/machinery/vr_pod{
+	dir = 8
+	},
+/turf/simulated/floor/carpet/blue,
+/area/crew_quarters/virtual_reality)
 "tj" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable/green{
@@ -9019,6 +9143,11 @@
 	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/observation)
+"tk" = (
+/obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/maintenance,
+/turf/simulated/floor/tiled/steel_ridged,
+/area/crew_quarters/virtual_reality)
 "tl" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -9293,6 +9422,10 @@
 "ub" = (
 /turf/simulated/wall/walnut,
 /area/vacant/cabin)
+"ud" = (
+/obj/machinery/light/spot,
+/turf/simulated/floor/wood/walnut,
+/area/crew_quarters/virtual_reality)
 "ue" = (
 /obj/effect/floor_decal/corner/green/half,
 /obj/structure/cable/green{
@@ -10402,6 +10535,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/dark,
 /area/engineering/hardstorage)
+"xC" = (
+/obj/item/modular_computer/telescreen/preset/generic{
+	pixel_y = 32
+	},
+/obj/structure/bed/chair/comfy/brown,
+/turf/simulated/floor/wood/walnut,
+/area/crew_quarters/virtual_reality)
 "xE" = (
 /obj/effect/floor_decal/corner/green{
 	dir = 4
@@ -10739,6 +10879,12 @@
 /obj/item/storage/box/cups,
 /turf/simulated/floor/tiled/white/monotile,
 /area/crew_quarters/sleep/cryo)
+"yl" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 4
+	},
+/turf/simulated/floor/carpet/blue,
+/area/crew_quarters/virtual_reality)
 "yp" = (
 /obj/structure/ladder,
 /obj/effect/floor_decal/corner/brown{
@@ -11199,6 +11345,12 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/teleporter/thirddeck)
+"zM" = (
+/obj/machinery/vr_pod{
+	dir = 4
+	},
+/turf/simulated/floor/carpet/blue,
+/area/crew_quarters/virtual_reality)
 "zR" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/ladder/updown,
@@ -11419,6 +11571,10 @@
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head)
+"AH" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/turf/simulated/floor/wood/walnut,
+/area/crew_quarters/virtual_reality)
 "AI" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -11742,6 +11898,9 @@
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head)
+"BI" = (
+/turf/simulated/floor/wood/walnut,
+/area/crew_quarters/virtual_reality)
 "BK" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -11812,6 +11971,19 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/port)
+"BT" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 1;
+	icon_state = "spline_fancy"
+	},
+/obj/machinery/vr_pod{
+	dir = 4
+	},
+/turf/simulated/floor/carpet/blue,
+/area/crew_quarters/virtual_reality)
 "BU" = (
 /obj/machinery/alarm{
 	dir = 4;
@@ -11999,6 +12171,14 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/white/monotile,
 /area/crew_quarters/sleep/cryo)
+"Cu" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/wood/walnut,
+/area/crew_quarters/virtual_reality)
 "Cv" = (
 /obj/structure/table/steel,
 /obj/random/tech_supply,
@@ -12324,6 +12504,10 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/thirddeck/port)
+"Dm" = (
+/obj/effect/floor_decal/spline/fancy/wood,
+/turf/simulated/floor/carpet/blue,
+/area/crew_quarters/virtual_reality)
 "Dn" = (
 /turf/simulated/wall/prepainted,
 /area/vacant/cabin)
@@ -13162,10 +13346,16 @@
 "Fr" = (
 /obj/machinery/door/airlock/multi_tile/glass/civilian{
 	dir = 8;
-	name = "Holodeck"
+	name = "VR Suites"
 	},
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_ridged,
-/area/holocontrol)
+/area/crew_quarters/virtual_reality_control)
 "Fs" = (
 /obj/structure/disposalpipe/segment,
 /obj/structure/cable/green{
@@ -13796,6 +13986,16 @@
 	},
 /turf/simulated/floor/tiled,
 /area/crew_quarters/cryolocker)
+"Hb" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/effect/floor_decal/spline/fancy/wood,
+/turf/simulated/floor/carpet/blue,
+/area/crew_quarters/virtual_reality)
 "Hc" = (
 /turf/simulated/open,
 /area/crew_quarters/sleep/cryo)
@@ -14277,6 +14477,13 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/command/disperser)
+"Iu" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/effect/floor_decal/spline/fancy/wood,
+/turf/simulated/floor/carpet/blue,
+/area/crew_quarters/virtual_reality)
 "Iv" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -14644,6 +14851,15 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3starboard)
+"Ji" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 5
+	},
+/obj/machinery/light/spot{
+	dir = 4
+	},
+/turf/simulated/floor/carpet/blue,
+/area/crew_quarters/virtual_reality)
 "Jj" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 5
@@ -15554,6 +15770,10 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/port)
+"KY" = (
+/obj/structure/bed/chair/comfy/brown,
+/turf/simulated/floor/wood/walnut,
+/area/crew_quarters/virtual_reality)
 "KZ" = (
 /obj/effect/floor_decal/corner/green/half,
 /obj/structure/closet/athletic_mixed,
@@ -15935,6 +16155,13 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/chapel/memorial)
+"LS" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1;
+	level = 2
+	},
+/turf/simulated/floor/wood/walnut,
+/area/crew_quarters/virtual_reality)
 "LT" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -16061,6 +16288,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/dark,
 /area/chapel/main)
+"Mm" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 1;
+	icon_state = "spline_fancy"
+	},
+/turf/simulated/floor/carpet/blue,
+/area/crew_quarters/virtual_reality)
 "Mn" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4;
@@ -16108,6 +16342,12 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/forestarboard)
+"Mr" = (
+/obj/machinery/vr_pod{
+	dir = 8
+	},
+/turf/simulated/floor/carpet/blue,
+/area/crew_quarters/virtual_reality)
 "Ms" = (
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
@@ -16227,6 +16467,16 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/starboard)
+"ML" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/effect/floor_decal/spline/fancy/wood,
+/obj/machinery/vr_pod{
+	dir = 8
+	},
+/turf/simulated/floor/carpet/blue,
+/area/crew_quarters/virtual_reality)
 "MM" = (
 /turf/simulated/wall/r_wall/hull,
 /area/hallway/primary/thirddeck/aft)
@@ -16366,6 +16616,13 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
+"Ng" = (
+/obj/machinery/door/airlock/multi_tile/glass/civilian{
+	name = "VR Suites"
+	},
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/tiled/steel_ridged,
+/area/crew_quarters/virtual_reality)
 "Nj" = (
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/portable_atmospherics/canister/empty/carbon_dioxide,
@@ -16423,6 +16680,9 @@
 /obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor/reinforced,
 /area/thruster/d3port)
+"Nv" = (
+/turf/simulated/floor/carpet/blue,
+/area/crew_quarters/virtual_reality)
 "Nw" = (
 /obj/effect/wallframe_spawn/no_grille,
 /obj/machinery/door/firedoor,
@@ -16640,6 +16900,19 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/hydroponics/storage)
+"Of" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 10;
+	icon_state = "spline_fancy"
+	},
+/turf/simulated/floor/carpet/blue,
+/area/crew_quarters/virtual_reality)
 "Og" = (
 /obj/structure/table/standard,
 /obj/item/paper_bin{
@@ -16958,6 +17231,12 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/crew_quarters/gym)
+"Pb" = (
+/obj/machinery/vending/snack{
+	dir = 1
+	},
+/turf/simulated/floor/wood/walnut,
+/area/crew_quarters/virtual_reality)
 "Pc" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 9
@@ -17220,6 +17499,12 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/aft)
+"PU" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 8
+	},
+/turf/simulated/floor/carpet/blue,
+/area/crew_quarters/virtual_reality)
 "PV" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -17256,6 +17541,19 @@
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/thruster/d3starboard)
+"PZ" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 8
+	},
+/obj/machinery/newscaster{
+	pixel_x = -32
+	},
+/obj/machinery/light_switch{
+	pixel_x = -24;
+	pixel_y = 24
+	},
+/turf/simulated/floor/carpet/blue,
+/area/crew_quarters/virtual_reality)
 "Qd" = (
 /obj/structure/reagent_dispensers/water_cooler{
 	dir = 4;
@@ -17347,6 +17645,19 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hydroponics)
+"Qo" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 1;
+	icon_state = "spline_fancy"
+	},
+/obj/machinery/vr_pod{
+	dir = 4
+	},
+/turf/simulated/floor/carpet/blue,
+/area/crew_quarters/virtual_reality)
 "Qq" = (
 /turf/simulated/wall/r_wall/hull,
 /area/command/disperser)
@@ -17582,6 +17893,18 @@
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/aftport)
+"Rd" = (
+/obj/machinery/power/apc{
+	dir = 2;
+	name = "south bump";
+	pixel_y = -24
+	},
+/obj/structure/cable/green{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/turf/simulated/floor/wood/walnut,
+/area/crew_quarters/virtual_reality)
 "Re" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -17659,6 +17982,16 @@
 	},
 /turf/simulated/floor/tiled,
 /area/crew_quarters/gym)
+"Rp" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 4
+	},
+/obj/structure/sign/warning/nosmoking_1{
+	dir = 4;
+	pixel_x = 16
+	},
+/turf/simulated/floor/carpet/blue,
+/area/crew_quarters/virtual_reality)
 "Rq" = (
 /obj/machinery/status_display,
 /turf/simulated/wall/prepainted,
@@ -18150,6 +18483,11 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/engineering/hardstorage)
+"SN" = (
+/obj/effect/wallframe_spawn/no_grille,
+/obj/structure/disposalpipe/segment,
+/turf/simulated/floor/plating,
+/area/crew_quarters/virtual_reality)
 "SO" = (
 /obj/machinery/power/terminal{
 	dir = 8
@@ -18290,6 +18628,10 @@
 	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/observation)
+"Ti" = (
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/tiled/steel_ridged,
+/area/crew_quarters/virtual_reality)
 "Tk" = (
 /obj/structure/railing/mapped{
 	dir = 4;
@@ -18297,6 +18639,19 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/aftport)
+"Tl" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/effect/floor_decal/spline/fancy/wood,
+/obj/machinery/vr_pod{
+	dir = 8
+	},
+/turf/simulated/floor/carpet/blue,
+/area/crew_quarters/virtual_reality)
 "Tm" = (
 /obj/machinery/light{
 	dir = 8
@@ -18431,6 +18786,10 @@
 "TE" = (
 /turf/simulated/wall/prepainted,
 /area/chapel/office)
+"TF" = (
+/obj/effect/wallframe_spawn/no_grille,
+/turf/simulated/floor/plating,
+/area/crew_quarters/virtual_reality)
 "TG" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
 	dir = 2;
@@ -19408,6 +19767,12 @@
 "Wb" = (
 /turf/simulated/wall/prepainted,
 /area/crew_quarters/gym)
+"Wc" = (
+/obj/effect/floor_decal/spline/fancy/wood/corner{
+	dir = 8
+	},
+/turf/simulated/floor/carpet/blue,
+/area/crew_quarters/virtual_reality)
 "We" = (
 /obj/random_multi/single_item/poppy,
 /turf/simulated/floor/tiled,
@@ -19493,6 +19858,14 @@
 /obj/effect/floor_decal/industrial/outline/orange,
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
+"Wv" = (
+/obj/item/device/radio/intercom/entertainment{
+	dir = 4;
+	pixel_x = -22
+	},
+/obj/structure/closet/emcloset,
+/turf/simulated/floor/wood/walnut,
+/area/crew_quarters/virtual_reality)
 "Ww" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/crew_quarters/observation)
@@ -20186,6 +20559,20 @@
 "Yn" = (
 /turf/simulated/wall/prepainted,
 /area/chapel/memorial)
+"Yo" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 4
+	},
+/obj/item/device/radio/intercom/entertainment{
+	dir = 8;
+	pixel_x = 22
+	},
+/obj/machinery/camera/network/third_deck{
+	c_tag = "VR Suites - Back";
+	dir = 8
+	},
+/turf/simulated/floor/carpet/blue,
+/area/crew_quarters/virtual_reality)
 "Yr" = (
 /turf/simulated/floor/grass,
 /area/crew_quarters/observation)
@@ -20220,6 +20607,16 @@
 /obj/item/reagent_containers/glass/beaker/large,
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/bar)
+"Yz" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 1;
+	icon_state = "spline_fancy"
+	},
+/turf/simulated/floor/carpet/blue,
+/area/crew_quarters/virtual_reality)
 "YA" = (
 /obj/structure/lattice,
 /turf/simulated/floor/reinforced/hydrogen,
@@ -20281,6 +20678,13 @@
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/port)
+"YI" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/vr_pod{
+	dir = 8
+	},
+/turf/simulated/floor/carpet/blue,
+/area/crew_quarters/virtual_reality)
 "YJ" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -20464,6 +20868,16 @@
 	},
 /turf/simulated/floor/tiled,
 /area/storage/tools)
+"Zk" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/effect/floor_decal/spline/fancy/wood,
+/obj/machinery/vr_pod{
+	dir = 4
+	},
+/turf/simulated/floor/carpet/blue,
+/area/crew_quarters/virtual_reality)
 "Zl" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -43295,11 +43709,11 @@ rA
 xW
 FR
 nA
-qd
-qd
-qd
-qd
-qd
+nX
+nX
+nX
+nX
+nX
 sW
 sv
 sW
@@ -43901,11 +44315,11 @@ rv
 kd
 kW
 qd
-qd
+pt
 nn
 om
 Fr
-qd
+pt
 rr
 sG
 je
@@ -44098,16 +44512,16 @@ Zg
 SY
 qd
 hA
-hA
-hA
-hA
-hA
-hA
-hA
-hA
-hA
-hA
-qd
+Wv
+Mm
+Nv
+Wc
+PU
+PZ
+Of
+BI
+Cu
+TF
 Bg
 AR
 ua
@@ -44298,17 +44712,17 @@ co
 dZ
 dn
 YV
-qd
-hA
-hA
-hA
-hA
-hA
-hA
-hA
-hA
-hA
-hA
+tk
+BI
+BI
+Mm
+Nv
+Nv
+Nv
+Nv
+Hb
+BI
+Rd
 qd
 PX
 Wh
@@ -44500,17 +44914,17 @@ dl
 ea
 dl
 dl
-qd
-hA
-hA
-hA
-hA
-hA
-hA
-hA
-hA
-hA
-hA
+rY
+oP
+AH
+ti
+YI
+YI
+YI
+YI
+Tl
+LS
+ud
 qd
 wB
 sJ
@@ -44702,17 +45116,17 @@ dm
 eb
 eJ
 yL
-qd
-hA
-hA
-hA
-hA
-hA
-hA
-hA
-hA
-hA
-hA
+rY
+kn
+BI
+Qo
+zM
+zM
+zM
+zM
+Zk
+BI
+BI
 qd
 Wx
 sF
@@ -44904,18 +45318,18 @@ dl
 ec
 eK
 nq
-qd
-hA
-hA
-hA
-hA
-hA
-hA
-hA
-hA
-hA
-hA
-qd
+rY
+KY
+BI
+Yz
+Nv
+Nv
+Nv
+Nv
+Iu
+BI
+BI
+Ng
 rt
 kR
 ue
@@ -45106,18 +45520,18 @@ dl
 ed
 ab
 hk
-qd
-hA
-hA
-hA
-hA
-hA
-hA
-hA
-hA
-hA
-hA
-qd
+rY
+KY
+BI
+Yz
+Nv
+Nv
+Nv
+Nv
+Iu
+BI
+BI
+Ti
 lc
 Xv
 UV
@@ -45308,17 +45722,17 @@ dl
 dl
 eM
 dl
-qd
-hA
-hA
-hA
-hA
-hA
-hA
-hA
-hA
-hA
-hA
+rY
+rI
+BI
+qK
+Mr
+Mr
+Mr
+Mr
+ML
+BI
+BI
 qd
 ru
 Xv
@@ -45511,16 +45925,16 @@ OA
 eN
 cq
 qd
-hA
-hA
-hA
-hA
-hA
-hA
-hA
-hA
-hA
-hA
+KY
+AH
+BT
+zM
+zM
+zM
+zM
+ow
+LS
+nx
 qd
 WE
 Xv
@@ -45713,16 +46127,16 @@ Js
 Ju
 cq
 qd
-hA
-hA
-hA
-hA
-hA
-hA
-hA
-hA
-hA
-hA
+xC
+BI
+Mm
+Nv
+Nv
+Nv
+Nv
+Dm
+BI
+Pb
 qe
 lJ
 AR
@@ -45915,17 +46329,17 @@ Xu
 Jt
 fX
 qd
-hA
-hA
-hA
-hA
-hA
-hA
-hA
-hA
-hA
-hA
-qd
+KY
+BI
+Ji
+yl
+Rp
+yl
+Yo
+ro
+BI
+nN
+SN
 rw
 Xv
 je
@@ -46120,7 +46534,7 @@ qd
 qd
 qd
 qd
-qd
+tk
 qd
 qd
 qd
