@@ -102,10 +102,7 @@
 		to_chat(user, SPAN_WARNING("\The [src] is occupied!"))
 		return
 	if (has_extension(user, /datum/extension/virtual_surrogate))
-		to_chat(user, SPAN_WARNING("[user == target ? "You are" : "\The [target] is"] already a virtual surrogate. That might result in \ 
-		[pick("an infinite", "an endless", "a repeating")] \
-		[pick("feedback", "reality", "stability", "causality")] \
-		[pick("loop", "paradox", "logic chain", "runtime", "typecast")]!"))
+		to_chat(user, SPAN_WARNING("[user == target ? "You are" : "\The [target] is"] already a virtual surrogate. That might result in a paradox."))
 		return
 	enter_pod(target, user)
 
