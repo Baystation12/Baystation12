@@ -51,7 +51,16 @@
 	equipment_darkness_modifier = 0
 	equipment_overlays.Cut()
 
-	if (!client || client.eye == src || client.eye == src.loc) // !client is so the unit tests function
+	if(istype(glasses, /obj/item/clothing/glasses))
+		process_prescription(glasses)
+	
+	var/binoc_check
+	if(client)
+		binoc_check = client.view == world.view
+	else
+		binoc_check = TRUE
+
+	if ((!client || client.eye == src || client.eye == loc || client.eye == bound_overlay) && binoc_check) // !client is so the unit tests function
 		if(istype(src.head, /obj/item/clothing/head))
 			add_clothing_protection(head)
 		if(istype(src.glasses, /obj/item/clothing/glasses))
@@ -61,24 +70,25 @@
 		if(istype(back,/obj/item/rig))
 			process_rig(back)
 
-/mob/living/carbon/human/proc/process_glasses(var/obj/item/clothing/glasses/G)
+/mob/living/carbon/human/proc/process_prescription(var/obj/item/clothing/glasses/G)
 	if(G)
-		// prescription applies regardless of if the glasses are active
 		equipment_prescription += G.prescription
-		if(G.active)
-			equipment_darkness_modifier += G.darkness_view
-			equipment_vision_flags |= G.vision_flags
-			equipment_light_protection += G.light_protection
-			if(G.overlay)
-				equipment_overlays |= G.overlay
-			if(G.see_invisible >= 0)
-				if(equipment_see_invis)
-					equipment_see_invis = min(equipment_see_invis, G.see_invisible)
-				else
-					equipment_see_invis = G.see_invisible
 
-			add_clothing_protection(G)
-			G.process_hud(src)
+/mob/living/carbon/human/proc/process_glasses(var/obj/item/clothing/glasses/G)
+	if(G?.active)
+		equipment_darkness_modifier += G.darkness_view
+		equipment_vision_flags |= G.vision_flags
+		equipment_light_protection += G.light_protection
+		if(G.overlay)
+			equipment_overlays |= G.overlay
+		if(G.see_invisible >= 0)
+			if(equipment_see_invis)
+				equipment_see_invis = min(equipment_see_invis, G.see_invisible)
+			else
+				equipment_see_invis = G.see_invisible
+
+		add_clothing_protection(G)
+		G.process_hud(src)
 
 /mob/living/carbon/human/proc/process_rig(var/obj/item/rig/O)
 	if(O.visor && O.visor.active && O.visor.vision && O.visor.vision.glasses && (!O.helmet || (head && O.helmet == head)))

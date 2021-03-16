@@ -70,6 +70,11 @@
 	var/obj/screen/exosuit/toggle/hatch_open/hud_open
 	var/obj/screen/exosuit/power/hud_power
 
+/mob/living/exosuit/MayZoom()
+	if(head?.vision_flags)
+		return FALSE
+	return TRUE
+
 /mob/living/exosuit/is_flooded(lying_mob, absolute)
 	. = (body && body.pilot_coverage >= 100 && hatch_closed) ? FALSE : ..()
 
