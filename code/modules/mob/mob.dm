@@ -588,11 +588,11 @@
 			else if(H.has_organ(BP_L_ARM) || H.has_organ(BP_R_ARM)) //If they only have one arm
 				grabtype = "arm"
 			else //If they have no arms
-				grabtype = "torso"	
+				grabtype = "torso"
 
 			visible_message(SPAN_WARNING("\The [src] leans down and grips \the [H]'s [grabtype]."), SPAN_NOTICE("You lean down and grip \the [H]'s [grabtype]."), exclude_mobs = list(H))
 			if(!H.stat)
-				to_chat(H, SPAN_WARNING("\The [src] leans down and grips your [grabtype]."))	
+				to_chat(H, SPAN_WARNING("\The [src] leans down and grips your [grabtype]."))
 
 		else //Otherwise we're probably just holding their arm to lead them somewhere
 			var/grabtype
@@ -1028,6 +1028,45 @@
 /mob/verb/westfaceperm()
 	set hidden = 1
 	set_face_dir(client.client_dir(WEST))
+
+/mob/proc/can_shift()
+	return !(incapacitated() || buckled || grabbed_by.len)
+
+/mob/verb/shiftnorth()
+	set hidden = TRUE
+	if(!canface() || !can_shift())
+		return FALSE
+	if(pixel_y <= 16)
+		pixel_y++
+		is_shifted = TRUE
+		UPDATE_OO_IF_PRESENT
+
+/mob/verb/shiftsouth()
+	set hidden = TRUE
+	if(!canface() || !can_shift())
+		return FALSE
+	if(pixel_y >= -8)
+		pixel_y--
+		is_shifted = TRUE
+		UPDATE_OO_IF_PRESENT
+
+/mob/verb/shiftwest()
+	set hidden = TRUE
+	if(!canface() || !can_shift())
+		return FALSE
+	if(pixel_x >= -8)
+		pixel_x--
+		is_shifted = TRUE
+		UPDATE_OO_IF_PRESENT
+
+/mob/verb/shifteast()
+	set hidden = TRUE
+	if(!canface() || !can_shift())
+		return FALSE
+	if(pixel_x <= 8)
+		pixel_x++
+		is_shifted = TRUE
+		UPDATE_OO_IF_PRESENT
 
 /mob/proc/adjustEarDamage()
 	return
