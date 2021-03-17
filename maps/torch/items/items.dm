@@ -122,7 +122,7 @@ Weapons
 	initial_ammo = 1
 
 /obj/effect/paint/hull
-	color = COLOR_HULL
+	color = COLOR_SOL
 
 /obj/effect/paint/expeditionary
 	color = "#68099e"
