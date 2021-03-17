@@ -3,7 +3,7 @@
 	desc = "A machine that dispenses holo-clothing for those in need."
 	icon = 'icons/obj/vending.dmi'
 	icon_state = "cart"
-	anchored = 1
+	anchored = TRUE
 	density = 1
 	var/active = 1
 
@@ -21,7 +21,7 @@
 	desc = "For when you need to be someone else right now."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "bioprinter"
-	anchored = 1
+	anchored = TRUE
 	density = 1
 
 /obj/machinery/acting/changer/attack_hand(var/mob/user as mob)
@@ -41,5 +41,5 @@
 	desc = "For when you need to be someone else right now."
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "mirror_broke"
-	anchored = 1
+	anchored = TRUE
 	density = 0

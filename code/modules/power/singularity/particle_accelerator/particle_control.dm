@@ -6,7 +6,7 @@
 	icon = 'icons/obj/machines/particle_accelerator2.dmi'
 	icon_state = "control_box"
 	reference = "control_box"
-	anchored = 0
+	anchored = FALSE
 	density = 1
 	idle_power_usage = 500
 	active_power_usage = 70000 //70 kW per unit of strength

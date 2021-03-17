@@ -154,7 +154,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 	var/datum/feed_channel/viewing_channel = null
 	var/datum/feed_network/connected_group
 	light_outer_range = 0
-	anchored = 1
+	anchored = TRUE
 	layer = ABOVE_WINDOW_LAYER
 
 /obj/machinery/newscaster/security_unit

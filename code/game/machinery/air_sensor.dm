@@ -3,7 +3,7 @@
 	icon_state = "gsensor1"
 	name = "Gas Sensor"
 
-	anchored = 1
+	anchored = TRUE
 
 	uncreated_component_parts = list(
 		/obj/item/stock_parts/radio/transmitter/basic,

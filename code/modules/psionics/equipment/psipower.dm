@@ -2,7 +2,7 @@
 	name = "psychic power"
 	icon = 'icons/obj/psychic_powers.dmi'
 	atom_flags = 0
-	anchored = 1
+	anchored = TRUE
 	var/maintain_cost = 3
 	var/mob/living/owner
 

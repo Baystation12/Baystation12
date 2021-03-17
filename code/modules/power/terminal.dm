@@ -10,7 +10,7 @@
 	level = 1
 	layer = EXPOSED_WIRE_TERMINAL_LAYER
 	var/obj/item/stock_parts/power/terminal/master
-	anchored = 1
+	anchored = TRUE
 
 /obj/machinery/power/terminal/New()
 	..()

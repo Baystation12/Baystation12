@@ -31,7 +31,7 @@
 	name = "FORCEWALL"
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "m_shield"
-	anchored = 1.0
+	anchored = TRUE
 	opacity = 0
 	density = 1
 	unacidable = TRUE

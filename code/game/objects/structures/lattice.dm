@@ -4,7 +4,7 @@
 	icon = 'icons/obj/smoothlattice.dmi'
 	icon_state = "lattice0"
 	density = 0
-	anchored = 1
+	anchored = TRUE
 	w_class = ITEM_SIZE_NORMAL
 	layer = LATTICE_LAYER
 	color = COLOR_STEEL

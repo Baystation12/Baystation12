@@ -5,7 +5,7 @@
 	desc = "An all-purpose recharger for a variety of devices."
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "recharger0"
-	anchored = 1
+	anchored = TRUE
 	idle_power_usage = 4
 	active_power_usage = 30 KILOWATTS
 	var/obj/item/charging = null

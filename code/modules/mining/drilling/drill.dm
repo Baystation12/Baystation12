@@ -1,6 +1,6 @@
 /obj/machinery/mining
 	icon = 'icons/obj/mining_drill.dmi'
-	anchored = 0
+	anchored = FALSE
 	use_power = POWER_USE_OFF //The drill takes power directly from a cell.
 	density = 1
 	layer = ABOVE_HUMAN_LAYER //So it draws over mobs in the tile north of it.
@@ -204,10 +204,10 @@
 	supported = 0
 
 	if((!supports || !supports.len) && initial(anchored) == 0)
-		anchored = 0
+		anchored = FALSE
 		set_active(FALSE)
 	else
-		anchored = 1
+		anchored = TRUE
 
 	if(supports && supports.len >= braces_needed)
 		supported = 1

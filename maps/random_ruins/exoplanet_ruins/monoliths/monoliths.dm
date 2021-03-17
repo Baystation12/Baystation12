@@ -14,7 +14,7 @@
 	icon_state = "jaggy1"
 	layer = ABOVE_HUMAN_LAYER
 	density = 1
-	anchored = 1
+	anchored = TRUE
 	var/active = 0
 
 /obj/structure/monolith/Initialize()

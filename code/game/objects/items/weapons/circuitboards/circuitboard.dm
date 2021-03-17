@@ -5,7 +5,7 @@
 	item_state = "electronic"
 	origin_tech = list(TECH_DATA = 2)
 	density = 0
-	anchored = 0
+	anchored = FALSE
 	w_class = ITEM_SIZE_SMALL
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = 5.0

@@ -14,7 +14,7 @@
 	icon_state = "frame"
 	name = "status display"
 	layer = ABOVE_WINDOW_LAYER
-	anchored = 1
+	anchored = TRUE
 	density = 0
 	idle_power_usage = 10
 	var/mode = 1	// 0 = Blank

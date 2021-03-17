@@ -100,7 +100,7 @@
 					 /obj/item/folder/yellow,
 					 /obj/item/hand_labeler,
 					 /obj/item/tape_roll,
-					 /obj/structure/filingcabinet/chestdrawer{anchored = 0},
+					 /obj/structure/filingcabinet/chestdrawer{anchored = FALSE},
 					 /obj/item/paper_bin)
 	name = "Office supplies"
 	cost = 15

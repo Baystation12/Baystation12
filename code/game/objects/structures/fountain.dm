@@ -6,7 +6,7 @@
 	icon = 'icons/obj/fountain.dmi'
 	icon_state = "fountain"
 	density = 1
-	anchored = 1
+	anchored = TRUE
 	unacidable = TRUE
 	pixel_x = -16
 	var/used = FALSE

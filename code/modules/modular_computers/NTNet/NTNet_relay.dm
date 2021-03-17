@@ -6,7 +6,7 @@
 	active_power_usage = 20000 //20kW, apropriate for machine that keeps massive cross-Zlevel wireless network operational.
 	idle_power_usage = 100
 	icon_state = "bus"
-	anchored = 1
+	anchored = TRUE
 	density = 1
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null

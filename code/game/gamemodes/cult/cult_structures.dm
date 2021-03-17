@@ -1,6 +1,6 @@
 /obj/structure/cult
 	density = 1
-	anchored = 1
+	anchored = TRUE
 	icon = 'icons/obj/cult.dmi'
 
 /obj/structure/cult/talisman
@@ -92,7 +92,7 @@
 	icon_state = "hole"
 	density = 1
 	unacidable = TRUE
-	anchored = 1.0
+	anchored = TRUE
 	var/spawnable = null
 
 /obj/effect/gateway/active

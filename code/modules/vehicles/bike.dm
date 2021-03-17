@@ -165,7 +165,7 @@
 	engine.rev_engine(src)
 	if(trail)
 		trail.start()
-	anchored = 1
+	anchored = TRUE
 
 	update_icon()
 

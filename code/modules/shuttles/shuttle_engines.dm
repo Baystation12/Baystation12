@@ -8,7 +8,7 @@
 	icon_state = "1"
 	density = 1
 	opacity = 0
-	anchored = 1
+	anchored = TRUE
 
 /obj/structure/shuttle/window/CanPass(atom/movable/mover, turf/target, height, air_group)
 		if(!height || air_group) return 0
@@ -17,7 +17,7 @@
 /obj/structure/shuttle/engine
 	name = "engine"
 	density = 1
-	anchored = 1.0
+	anchored = TRUE
 
 /obj/structure/shuttle/engine/heater
 	name = "heater"

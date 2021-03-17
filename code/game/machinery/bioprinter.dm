@@ -7,7 +7,7 @@
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "bioprinter"
 
-	anchored = 1
+	anchored = TRUE
 	density = 1
 	idle_power_usage = 40
 	active_power_usage = 300

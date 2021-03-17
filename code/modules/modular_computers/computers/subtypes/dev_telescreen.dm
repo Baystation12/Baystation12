@@ -50,7 +50,7 @@
 					valid = TRUE
 
 			if(valid)
-				anchored = 1
+				anchored = TRUE
 				screen_on = TRUE
 				to_chat(user, "You secure \the [src].")
 			return

@@ -29,7 +29,7 @@
 			created_field.Add(E)
 			E.strength = 1
 			E.set_density(1)
-			E.anchored = 1
+			E.anchored = TRUE
 			E.color = fieldcolor
 			E.set_invisibility(0)
 		spawn(10)
@@ -51,7 +51,7 @@
 			//for now, just instantly respawn the fields when they get destroyed
 			var/obj/effect/energy_field/E = new (locate(T.x,T.y,T))
 			created_field.Add(E)
-			E.anchored = 1
+			E.anchored = TRUE
 			E.set_density(1)
 			E.set_invisibility(0)
 

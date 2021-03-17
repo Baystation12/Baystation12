@@ -1194,7 +1194,7 @@ About the new airlock wires panel:
 		s.set_up(5, 1, src)
 		s.start()
 	else
-		da.anchored = 1
+		da.anchored = TRUE
 	da.state = 1
 	da.created_name = src.name
 	da.update_state()

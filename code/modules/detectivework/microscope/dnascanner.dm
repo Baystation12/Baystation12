@@ -4,7 +4,7 @@
 	desc = "A high tech machine that is designed to read DNA samples properly."
 	icon = 'icons/obj/forensics.dmi'
 	icon_state = "dnaopen"
-	anchored = 1
+	anchored = TRUE
 	density = 1
 
 	var/obj/item/forensics/swab/bloodsamp = null

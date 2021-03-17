@@ -5,7 +5,7 @@
 	icon = 'icons/obj/power.dmi'
 	icon_state = "portgen0"
 	density = 1
-	anchored = 0
+	anchored = FALSE
 	interact_offline = TRUE
 
 	var/active = 0
@@ -463,7 +463,7 @@
 	time_per_sheet = 400
 	rad_power = 12
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	anchored = 1
+	anchored = TRUE
 	var/coolant_volume = 120
 	var/coolant_use = 1
 	var/coolant_reagent = /datum/reagent/ethanol/vodka

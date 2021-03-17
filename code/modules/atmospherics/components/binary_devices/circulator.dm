@@ -6,7 +6,7 @@
 	desc = "A gas circulator turbine and heat exchanger."
 	icon = 'icons/obj/power.dmi'
 	icon_state = "circ-unassembled"
-	anchored = 0
+	anchored = FALSE
 
 	var/kinetic_efficiency = 0.04 //combined kinetic and kinetic-to-electric efficiency
 	var/volume_ratio = 0.2

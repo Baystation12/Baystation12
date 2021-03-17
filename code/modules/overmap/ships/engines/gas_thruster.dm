@@ -198,7 +198,7 @@
 	icon = 'icons/obj/ship_engine.dmi'
 	icon_state = "nozzle_burn"
 	light_color = "#00a2ff"
-	anchored = 1
+	anchored = TRUE
 
 /obj/effect/engine_exhaust/New(turf/nloc, ndir)
 	..(nloc)

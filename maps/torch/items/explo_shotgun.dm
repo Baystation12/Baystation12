@@ -117,7 +117,7 @@
 	req_access = list(access_expedition_shuttle_helm)
 	closet_appearance = /decl/closet_appearance/wall/explo_gun
 	density = 0
-	anchored = 1
+	anchored = TRUE
 	wall_mounted = TRUE
 	storage_types = CLOSET_STORAGE_ITEMS
 

@@ -6,7 +6,7 @@
 	desc = "A huge pipe segment used for constructing disposal systems."
 	icon = 'icons/obj/pipes/disposal.dmi'
 	icon_state = "conpipe-s"
-	anchored = 0
+	anchored = FALSE
 	density = 0
 	matter = list(MATERIAL_STEEL = 1850)
 	level = 2
@@ -133,7 +133,7 @@
 
 	if(isWrench(I))
 		if(anchored)
-			anchored = 0
+			anchored = FALSE
 			wrench_down(FALSE)
 			to_chat(user, "You detach \the [src] from the underfloor.")
 		else

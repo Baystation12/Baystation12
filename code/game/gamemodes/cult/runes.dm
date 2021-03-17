@@ -1,7 +1,7 @@
 /obj/effect/rune
 	name = "rune"
 	desc = "A strange collection of symbols drawn in blood."
-	anchored = 1
+	anchored = TRUE
 	icon = 'icons/effects/uristrunes.dmi'
 	icon_state = "blank"
 	unacidable = TRUE
@@ -259,7 +259,7 @@
 	icon = 'icons/effects/effects.dmi'//TODO: better icon
 	icon_state = "smoke"
 	color = "#ff0000"
-	anchored = 1
+	anchored = TRUE
 	density = 1
 	unacidable = TRUE
 	var/obj/effect/rune/wall/rune

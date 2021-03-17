@@ -183,7 +183,7 @@
 	w_class = ITEM_SIZE_NO_CONTAINER
 	max_w_class = ITEM_SIZE_HUGE
 	max_storage_space = 56
-	anchored = 1.0
+	anchored = TRUE
 	density = 0
 	cant_hold = list(/obj/item/storage/secure/briefcase)
 

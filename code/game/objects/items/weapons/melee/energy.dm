@@ -204,7 +204,7 @@
 	armor_penetration = 100
 	sharp = TRUE
 	edge = TRUE
-	anchored = 1    // Never spawned outside of inventory, should be fine.
+	anchored = TRUE    // Never spawned outside of inventory, should be fine.
 	active_throwforce = 1  //Throwing or dropping the item deletes it.
 	throw_speed = 1
 	throw_range = 1

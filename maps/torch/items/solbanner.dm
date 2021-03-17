@@ -3,7 +3,7 @@
 	icon = 'maps/torch/icons/obj/solbanner.dmi'
 	icon_state = "wood"
 	desc = "A wooden pole bearing a banner of Sol Central Government. Ave."
-	anchored = 1
+	anchored = TRUE
 	obj_flags = OBJ_FLAG_ANCHORABLE
 	layer = ABOVE_HUMAN_LAYER
 

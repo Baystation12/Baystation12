@@ -2,7 +2,7 @@
 	name = "Mine"
 	desc = "I Better stay away from that thing."
 	density = 1
-	anchored = 1
+	anchored = TRUE
 	layer = OBJ_LAYER
 	icon = 'icons/obj/weapons/other.dmi'
 	icon_state = "uglymine"

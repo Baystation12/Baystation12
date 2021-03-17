@@ -4,7 +4,7 @@
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "sleeper_0"
 	density = 1
-	anchored = 1
+	anchored = TRUE
 	clicksound = 'sound/machines/buttonbeep.ogg'
 	clickvol = 30
 	base_type = /obj/machinery/sleeper

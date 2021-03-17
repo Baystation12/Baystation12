@@ -13,7 +13,7 @@
 	var/c_tag_order = 999
 	var/number = 0 //camera number in area
 	var/status = 1
-	anchored = 1.0
+	anchored = TRUE
 	var/invuln = null
 	var/bugged = 0
 	var/obj/item/camera_assembly/assembly = null
@@ -189,7 +189,7 @@
 		if(weld(W, user))
 			if(assembly)
 				assembly.dropInto(loc)
-				assembly.anchored = 1
+				assembly.anchored = TRUE
 				assembly.camera_name = c_tag
 				assembly.camera_network = english_list(network, "Exodus", ",", ",")
 				assembly.update_icon()

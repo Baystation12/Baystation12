@@ -4,7 +4,7 @@
 	desc = "A highly advanced microscope capable of zooming up to 3000x."
 	icon = 'icons/obj/forensics.dmi'
 	icon_state = "microscope"
-	anchored = 1
+	anchored = TRUE
 	density = 1
 
 	var/obj/item/sample = null

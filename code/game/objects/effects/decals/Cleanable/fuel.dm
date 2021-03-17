@@ -28,7 +28,7 @@
 
 /obj/effect/decal/cleanable/liquid_fuel/flamethrower_fuel
 	icon_state = "mustard"
-	anchored = 0
+	anchored = FALSE
 
 /obj/effect/decal/cleanable/liquid_fuel/flamethrower_fuel/Initialize(mapload, amt=1, d=0)
 	set_dir(d) //Setting this direction means you won't get torched by your own flamethrower.

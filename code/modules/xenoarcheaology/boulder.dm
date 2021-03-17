@@ -5,7 +5,7 @@
 	icon_state = "boulder1"
 	density = 1
 	opacity = 1
-	anchored = 1
+	anchored = TRUE
 	var/excavation_level = 0
 	var/datum/geosample/geological_data
 	var/datum/artifact_find/artifact_find

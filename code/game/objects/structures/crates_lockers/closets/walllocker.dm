@@ -6,7 +6,7 @@
 	name = "Wall Locker"
 	closet_appearance = /decl/closet_appearance/wall
 	density = 0
-	anchored = 1
+	anchored = TRUE
 	wall_mounted = TRUE
 	storage_types = CLOSET_STORAGE_ITEMS
 	setup = 0

@@ -2,7 +2,7 @@
 	name = "airlock assembly"
 	icon = 'icons/obj/doors/station/door.dmi'
 	icon_state = "construction"
-	anchored = 0
+	anchored = FALSE
 	density = 1
 	w_class = ITEM_SIZE_NO_CONTAINER
 	var/state = 0

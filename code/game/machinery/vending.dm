@@ -8,7 +8,7 @@
 	icon = 'icons/obj/vending.dmi'
 	icon_state = "generic"
 	layer = BELOW_OBJ_LAYER
-	anchored = 1
+	anchored = TRUE
 	density = 1
 	obj_flags = OBJ_FLAG_ANCHORABLE | OBJ_FLAG_ROTATABLE
 	clicksound = "button"

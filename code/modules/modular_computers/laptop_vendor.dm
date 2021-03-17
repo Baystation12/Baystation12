@@ -6,7 +6,7 @@
 	icon = 'icons/obj/vending.dmi'
 	icon_state = "laptop"
 	layer = BELOW_OBJ_LAYER
-	anchored = 1
+	anchored = TRUE
 	density = 1
 
 	// The actual laptop/tablet
@@ -281,7 +281,7 @@ obj/machinery/lapvend/attackby(obj/item/W as obj, mob/user as mob)
 					fabricated_laptop.battery_module.charge_to_full()
 				fabricated_laptop.forceMove(src.loc)
 				fabricated_laptop.screen_on = 0
-				fabricated_laptop.anchored = 0
+				fabricated_laptop.anchored = FALSE
 				fabricated_laptop.update_icon()
 				fabricated_laptop.update_verbs()
 				fabricated_laptop = null

@@ -10,7 +10,7 @@
 	desc = "You shouldn't be seeing this!"
 	icon = 'icons/obj/cooking_machines.dmi'
 	density = 1
-	anchored = 1
+	anchored = TRUE
 	idle_power_usage = 0
 	active_power_usage = 1000
 	construct_state = /decl/machine_construction/default/panel_closed

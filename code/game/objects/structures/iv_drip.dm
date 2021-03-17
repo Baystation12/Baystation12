@@ -1,7 +1,7 @@
 /obj/structure/iv_drip
 	name = "\improper IV drip"
 	icon = 'icons/obj/iv_drip.dmi'
-	anchored = 0
+	anchored = FALSE
 	density = 0
 	var/mob/living/carbon/human/attached
 	var/mode = 1 // 1 is injecting, 0 is taking blood.

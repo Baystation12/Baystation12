@@ -110,7 +110,7 @@
 	name = "Engine Setup Marker"
 	desc = "You shouldn't see this."
 	invisibility = 101
-	anchored = 1
+	anchored = TRUE
 	density = 0
 	icon = 'icons/mob/screen1.dmi'
 	icon_state = "x3"

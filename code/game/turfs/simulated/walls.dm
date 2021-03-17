@@ -250,7 +250,7 @@
 	O.desc = "Looks hot."
 	O.icon = 'icons/effects/fire.dmi'
 	O.icon_state = "2"
-	O.anchored = 1
+	O.anchored = TRUE
 	O.set_density(1)
 	O.plane = LIGHTING_PLANE
 	O.layer = FIRE_LAYER

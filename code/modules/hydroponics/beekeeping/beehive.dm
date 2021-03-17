@@ -4,7 +4,7 @@
 	icon_state = "beehive-0"
 	desc = "A wooden box designed specifically to house our buzzling buddies. Far more efficient than traditional hives. Just insert a frame and a queen, close it up, and you're good to go!"
 	density = 1
-	anchored = 1
+	anchored = TRUE
 	layer = BELOW_OBJ_LAYER
 
 	var/closed = 0
@@ -168,7 +168,7 @@
 	desc = "A machine used to extract honey and wax from a beehive frame."
 	icon = 'icons/obj/virology.dmi'
 	icon_state = "centrifuge"
-	anchored = 1
+	anchored = TRUE
 	density = 1
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null

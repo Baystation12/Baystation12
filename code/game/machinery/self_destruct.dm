@@ -4,7 +4,7 @@
 	icon = 'icons/obj/machines/self_destruct.dmi'
 	icon_state = "empty"
 	density = 0
-	anchored = 1
+	anchored = TRUE
 	var/obj/item/nuclear_cylinder/cylinder
 	var/armed = 0
 	var/damaged = 0

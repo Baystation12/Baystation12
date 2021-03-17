@@ -8,7 +8,7 @@
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "wingrille"
 	density = 1
-	anchored = 1.0
+	anchored = TRUE
 	var/win_path = /obj/structure/window/basic
 	var/activated = FALSE
 	var/fulltile = FALSE

@@ -3,7 +3,7 @@
 	desc = "A drop pod door. Opens rapidly using explosive bolts."
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "droppod_door_closed"
-	anchored = 1
+	anchored = TRUE
 	density = 1
 	opacity = 1
 	layer = ABOVE_DOOR_LAYER

@@ -137,7 +137,7 @@
 	desc = "A small light fixture under construction."
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "bulb-construct-stage1"
-	anchored = 1
+	anchored = TRUE
 	layer = ABOVE_HUMAN_LAYER
 	stage = 1
 	fixture_type = /obj/machinery/light/small
@@ -163,7 +163,7 @@
 	var/base_state = "tube"		// base description and icon_state
 	icon_state = "tube_map"
 	desc = "A lighting fixture."
-	anchored = 1
+	anchored = TRUE
 	layer = ABOVE_HUMAN_LAYER  					// They were appearing under mobs which is a little weird - Ostaf
 	use_power = POWER_USE_ACTIVE
 	idle_power_usage = 2

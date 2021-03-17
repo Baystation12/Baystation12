@@ -6,7 +6,7 @@
 	use_power = POWER_USE_ACTIVE
 	idle_power_usage = 100
 	active_power_usage = 2000
-	anchored = 1
+	anchored = TRUE
 	density = 0
 	level = 1
 	construct_state = /decl/machine_construction/default/panel_closed

@@ -199,7 +199,7 @@
 	name = "teleport"
 	icon = 'icons/obj/teleporter.dmi'
 	density = 1
-	anchored = 1.0
+	anchored = TRUE
 	var/lockeddown = 0
 
 

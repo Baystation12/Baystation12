@@ -6,7 +6,7 @@
 	desc = "Impenetrable field of energy, capable of blocking anything as long as it's active."
 	icon = 'icons/obj/machines/shielding.dmi'
 	icon_state = "shield_normal"
-	anchored = 1
+	anchored = TRUE
 	layer = PROJECTILE_LAYER
 	density = 0
 	invisibility = 101

@@ -1,6 +1,6 @@
 /obj/structure/sign
 	icon = 'icons/obj/decals.dmi'
-	anchored = 1
+	anchored = TRUE
 	opacity = 0
 	density = 0
 	layer = ABOVE_WINDOW_LAYER

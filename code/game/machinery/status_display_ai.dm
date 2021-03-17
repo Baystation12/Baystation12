@@ -58,7 +58,7 @@ var/list/ai_status_emotions = list(
 	icon = 'icons/obj/status_display.dmi'
 	icon_state = "frame"
 	name = "AI display"
-	anchored = 1
+	anchored = TRUE
 	density = 0
 
 	var/mode = 0	// 0 = Blank

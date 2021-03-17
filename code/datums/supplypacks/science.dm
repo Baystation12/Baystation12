@@ -4,7 +4,7 @@
 /decl/hierarchy/supply_pack/science/chemistry_dispenser
 	name = "Equipment - Chemical Reagent dispenser"
 	contains = list(
-			/obj/machinery/chemical_dispenser{anchored = 0}
+			/obj/machinery/chemical_dispenser{anchored = FALSE}
 		)
 	cost = 25
 	containertype = /obj/structure/largecrate

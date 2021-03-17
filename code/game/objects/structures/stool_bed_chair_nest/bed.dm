@@ -13,7 +13,7 @@
 	desc = "This is used to lie in, sleep in or strap on."
 	icon = 'icons/obj/furniture.dmi'
 	icon_state = "bed"
-	anchored = 1
+	anchored = TRUE
 	can_buckle = 1
 	buckle_dir = SOUTH
 	buckle_lying = 1
@@ -187,7 +187,7 @@
 	name = "roller bed"
 	icon = 'icons/obj/rollerbed.dmi'
 	icon_state = "down"
-	anchored = 0
+	anchored = FALSE
 	buckle_pixel_shift = "x=0;y=0;z=6"
 	var/item_form_type = /obj/item/roller	//The folded-up object path.
 	var/obj/item/reagent_containers/beaker
@@ -329,7 +329,7 @@
 	icon = 'icons/obj/furniture.dmi'
 	icon_state = "mattress"
 	desc = "A bare mattress. It doesn't look very comfortable."
-	anchored = 0
+	anchored = FALSE
 
 /obj/structure/mattress/dirty
 	name = "dirty mattress"

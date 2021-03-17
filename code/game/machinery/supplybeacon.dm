@@ -27,7 +27,7 @@
 	icon = 'icons/obj/supplybeacon.dmi'
 	icon_state = "beacon"
 
-	anchored = 0
+	anchored = FALSE
 	density = 1
 	stat = 0
 

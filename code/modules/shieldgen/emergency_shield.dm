@@ -5,7 +5,7 @@
 	icon_state = "shield-old"
 	density = 1
 	opacity = 0
-	anchored = 1
+	anchored = TRUE
 	unacidable = TRUE
 	var/const/max_health = 200
 	var/health = max_health //The shield can only take so much beating (prevents perma-prisons)
@@ -122,7 +122,7 @@
 	icon_state = "shieldoff"
 	density = 1
 	opacity = 0
-	anchored = 0
+	anchored = FALSE
 	req_access = list(access_engine)
 	var/const/max_health = 100
 	var/health = max_health
@@ -312,12 +312,12 @@
 			if(active)
 				to_chat(user, "<span class='notice'>The [src] shuts off!</span>")
 				src.shields_down()
-			anchored = 0
+			anchored = FALSE
 		else
 			if(istype(get_turf(src), /turf/space)) return //No wrenching these in space!
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 			to_chat(user, "<span class='notice'>You secure the [src] to the floor!</span>")
-			anchored = 1
+			anchored = TRUE
 
 
 	else if(istype(W, /obj/item/card/id) || istype(W, /obj/item/modular_computer/pda))

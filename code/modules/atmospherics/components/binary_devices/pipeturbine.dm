@@ -3,7 +3,7 @@
 	desc = "A gas turbine. Converting pressure into energy since 1884."
 	icon = 'icons/obj/pipeturbine.dmi'
 	icon_state = "turbine"
-	anchored = 0
+	anchored = FALSE
 	density = 1
 
 	var/efficiency = 0.4
@@ -225,7 +225,7 @@
 	desc = "Electrogenerator. Converts rotation into power."
 	icon = 'icons/obj/pipeturbine.dmi'
 	icon_state = "motor"
-	anchored = 0
+	anchored = FALSE
 	density = 1
 
 	var/kin_to_el_ratio = 0.1	//How much kinetic energy will be taken from turbine and converted into electricity

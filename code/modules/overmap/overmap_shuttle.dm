@@ -115,7 +115,7 @@
 	icon = 'icons/turf/shuttle.dmi'
 	icon_state = "fuel_port"
 	density = 0
-	anchored = 1
+	anchored = TRUE
 	var/icon_closed = "fuel_port"
 	var/icon_empty = "fuel_port_empty"
 	var/icon_full = "fuel_port_full"
