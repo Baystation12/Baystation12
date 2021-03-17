@@ -1,6 +1,0 @@
-author: "CrimsonShrike"
-delete-after: True
-changes: 
-  - rscadd: "Adds terraformed planet subtype: Safe and a good source of meat and animal products."
-  - tweak: "Planet generation has been tweaked. Expect more habitable or tolerable planets where you won't need to use spacesuits."
-  - bugfix: "Fixes some planets not being hostile as often they should be."
