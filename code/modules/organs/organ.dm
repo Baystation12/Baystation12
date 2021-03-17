@@ -142,23 +142,19 @@ var/list/organ_cache = list()
 		handle_rejection()
 		handle_germ_effects()
 
-/*	if(owner && length(ailments))					Temporary
+	if(owner && length(ailments))
 		for(var/datum/ailment/ailment in ailments)
 			if(!ailment.treated_by_reagent_type)
 				continue
 			var/treated
-			var/datum/reagents/bloodstr_reagents = owner.get_injected_reagents()
-			if(bloodstr_reagents)
-				if(REAGENT_VOLUME(bloodstr_reagents, ailment.treated_by_reagent_type) >= ailment.treated_by_reagent_dosage)
-					treated = bloodstr_reagents
-				else if(REAGENT_VOLUME(owner.reagents, ailment.treated_by_reagent_type) >= ailment.treated_by_reagent_dosage)
-					treated = owner.reagents
-				else
-					var/datum/reagents/ingested = owner.get_ingested_reagents()
-					if(ingested && REAGENT_VOLUME(ingested, ailment.treated_by_reagent_type) >= ailment.treated_by_reagent_dosage)
-						treated = ingested
+			if(owner.reagents.get_reagent_amount(ailment.treated_by_reagent_type, 1) >= ailment.treated_by_reagent_dosage)
+				treated = owner.reagents
+			else
+				var/datum/reagents/ingested = owner.get_ingested_reagents()
+				if(ingested && ingested.get_reagent_amount(ailment.treated_by_reagent_type, 1) >= ailment.treated_by_reagent_dosage)
+					treated = ingested
 			if(treated)
-				ailment.was_treated_by_medication(treated) */
+				ailment.was_treated_by_medication(treated)
 
 /obj/item/organ/proc/is_preserved()
 	if(istype(loc,/obj/item/organ))

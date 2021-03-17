@@ -316,6 +316,51 @@
 			return
 		holder.Topic(href, list("makeai"=href_list["makeai"]))
 
+	else if(href_list["addailment"])
+
+		var/mob/living/carbon/human/H = locate(href_list["addailment"])
+		if(!istype(H))
+			to_chat(usr, "This can only be done to instances of type /mob/living/carbon/human")
+			return
+		var/obj/item/organ/O = input("Select a limb to add the ailment to.", "Add Ailment") as null|anything in (H.organs|H.internal_organs)
+		if(QDELETED(H) || QDELETED(O) || O.owner != H)
+			return
+		var/list/possible_ailments = list()
+		for(var/atype in subtypesof(/datum/ailment))
+			var/datum/ailment/ailment = get_ailment_reference(atype)
+			if(ailment && ailment.category != ailment.type && ailment.can_apply_to(O))
+				possible_ailments |= ailment
+
+		var/datum/ailment/ailment = input("Select an ailment type to add.", "Add Ailment") as null|anything in possible_ailments
+		if(!istype(ailment))
+			return
+		if(!QDELETED(H) && !QDELETED(O) && O.owner == H && O.add_ailment(ailment))
+			to_chat(usr, SPAN_NOTICE("Added [ailment] to \the [H]."))
+		else
+			to_chat(usr, SPAN_WARNING("Failed to add [ailment] to \the [H]."))
+		return
+
+	else if(href_list["remailment"])
+
+		var/mob/living/carbon/human/H = locate(href_list["remailment"])
+		if(!istype(H))
+			to_chat(usr, "This can only be done to instances of type /mob/living/carbon/human")
+			return
+		var/list/all_ailments = list()
+		for(var/obj/item/organ/O in (H.organs|H.internal_organs))
+			for(var/datum/ailment/ailment in O.ailments)
+				all_ailments["[ailment.name] - [O.name]"] = ailment
+
+		var/datum/ailment/ailment = input("Which ailment do you wish to remove?", "Removing Ailment") as null|anything in all_ailments
+		if(!ailment)
+			return
+		ailment = all_ailments[ailment]
+		if(istype(ailment) && ailment.organ && ailment.organ.owner == H && ailment.organ.remove_ailment(ailment))
+			to_chat(usr, SPAN_NOTICE("Removed [ailment] from \the [H]."))
+		else
+			to_chat(usr, SPAN_WARNING("Failed to remove [ailment] from \the [H]."))
+		return
+
 	else if(href_list["setspecies"])
 		if(!check_rights(R_SPAWN))	return
 

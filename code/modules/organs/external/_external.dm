@@ -1375,3 +1375,8 @@ obj/item/organ/external/proc/remove_clamps()
 		. += max_delay * 3/8
 	else if(BP_IS_ROBOTIC(src))
 		. += max_delay * CLAMP01(damage/max_damage)
+
+/obj/item/organ/external/add_ailment(var/datum/ailment/ailment)
+	. = ..()
+	if(. && owner)
+		owner.bad_external_organs |= src

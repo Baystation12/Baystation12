@@ -115,6 +115,11 @@
 		return
 
 	user.visible_message("<span class='notice'>[user] starts inspecting [owner]'s [name] carefully.</span>")
+
+	for(var/datum/ailment/ailment in ailments)
+		if(ailment.diagnosis_string)
+			to_chat(user, SPAN_NOTICE(ailment.replace_tokens(message = ailment.diagnosis_string, user = user)))
+
 	if(LAZYLEN(wounds))
 		to_chat(user, "<span class='warning'>You find [get_wounds_desc()]</span>")
 		var/list/stuff = list()

@@ -24,7 +24,7 @@
 	to_chat(organ.owner, SPAN_DANGER("Your ears ring with an irritating, high-pitched tone."))
 	organ.owner.ear_deaf = max(organ.owner.ear_deaf,15)	//This feels fucked
 
-/datum/ailment/mouth/sore_throat
+/datum/ailment/head/sore_throat
 	name = "sore throat"
 	treated_by_reagent_type = /datum/reagent/menthol
 	treated_by_reagent_dosage = 1

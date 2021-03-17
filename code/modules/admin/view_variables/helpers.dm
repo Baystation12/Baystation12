@@ -72,6 +72,8 @@
 /mob/living/carbon/human/get_view_variables_options()
 	return ..() + {"
 		<option value='?_src_=vars;setspecies=\ref[src]'>Set Species</option>
+		<option value='?_src_=vars;addailment=\ref[src]'>Add Ailment</option>
+		<option value='?_src_=vars;remailment=\ref[src]'>Remove Ailment</option>
 		<option value='?_src_=vars;dressup=\ref[src]'>Dressup</option>
 		<option value='?_src_=vars;makeai=\ref[src]'>Make AI</option>
 		<option value='?_src_=vars;makerobot=\ref[src]'>Make cyborg</option>

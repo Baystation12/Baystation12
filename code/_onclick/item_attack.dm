@@ -52,6 +52,13 @@ avoid code duplication. This includes items that may sometimes act as a standard
 			return TRUE
 		if(devour(I))
 			return TRUE
+		if(user.a_intent == I_HELP)
+			var/obj/item/organ/external/E = get_organ(user.zone_sel.selecting)
+			if(istype(E) && !E.is_stump())
+				for(var/datum/ailment/ailment in E.ailments)
+					if(ailment.treated_by_item(I))
+						ailment.was_treated_by_item(I, user, src)
+						return TRUE
 	return ..()
 
 // Proximity_flag is 1 if this afterattack was called on something adjacent, in your square, or on your person.
