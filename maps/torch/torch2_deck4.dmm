@@ -10154,7 +10154,7 @@
 /turf/simulated/floor/crystal,
 /area/crew_quarters/adherent)
 "IF" = (
-/obj/structure/bed/chair/padded/brown{
+/obj/structure/bed/chair/office/light{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
@@ -12956,7 +12956,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/foreport)
 "Rb" = (
-/obj/structure/bed/chair/padded/brown,
+/obj/structure/bed/chair/office/light,
 /turf/simulated/floor/tiled,
 /area/quartermaster/office)
 "Re" = (
