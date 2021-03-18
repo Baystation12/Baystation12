@@ -1,5 +1,0 @@
-author: "CrimsonShrike"
-delete-after: True
-changes: 
-  - tweak: "Intercomm quick access will now use exosuit radios if possible. (Use :i while in a mech to use the mech radio)"
-  - bugfix: "Exosuit radios now will check distance correctly."

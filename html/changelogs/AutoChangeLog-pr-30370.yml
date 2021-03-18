@@ -1,5 +1,0 @@
-author: "lorwp"
-delete-after: True
-changes: 
-  - tweak: "High Visibility Jackets from loadout can now take ACCESSORY_SLOT_INSIGNIA (pins, badges, etc)"
-  - bugfix: "Yeosa'Unathi can now take Cultural Exchange Patches"
