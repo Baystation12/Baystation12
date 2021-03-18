@@ -1,0 +1,4143 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/obj/machinery/constructable_frame/computerframe,
+/obj/item/stock_parts/circuitboard/broken,
+/obj/effect/decal/cleanable/dirt,
+/obj/item/material/shard,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"ab" = (
+/obj/machinery/constructable_frame/computerframe,
+/obj/item/material/shard,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"ac" = (
+/obj/machinery/constructable_frame/computerframe,
+/obj/item/stock_parts/circuitboard/broken,
+/obj/item/material/shard,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"ad" = (
+/obj/effect/floor_decal/icarus_scglogo{
+	dir = 8;
+	icon_state = "center-left"
+	},
+/obj/machinery/constructable_frame/computerframe,
+/obj/item/material/shard,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"af" = (
+/obj/item/material/shard,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"ag" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/constructable_frame/computerframe,
+/obj/item/stock_parts/circuitboard/broken,
+/obj/item/material/shard,
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/icarus/driver/west)
+"ah" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/constructable_frame/computerframe,
+/obj/item/stock_parts/circuitboard/broken,
+/obj/item/material/shard,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/driver/east)
+"ak" = (
+/obj/random/trash,
+/turf/simulated/floor/tiled,
+/area/map_template/icarus/sec)
+"am" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 6
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/icarus/sec)
+"ax" = (
+/obj/item/stack/tile/techmaint,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"ay" = (
+/turf/simulated/floor/wood/walnut,
+/area/map_template/icarus/bridge)
+"aB" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/icarus/driver/east)
+"aI" = (
+/turf/template_noop,
+/area/template_noop)
+"aN" = (
+/obj/effect/wallframe_spawn/reinforced/hull,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/sec)
+"aT" = (
+/obj/structure/grille,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/icarus/driver/east)
+"aV" = (
+/obj/machinery/door/airlock/sol{
+	name = "Bridge";
+	secured_wires = 1
+	},
+/turf/simulated/floor/tiled/steel_ridged,
+/area/map_template/icarus/bridge)
+"aX" = (
+/obj/effect/floor_decal/corner/yellow/half,
+/obj/effect/decal/cleanable/dirt,
+/obj/item/frame/fire_alarm,
+/turf/simulated/floor/tiled,
+/area/map_template/icarus/eng)
+"be" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 6
+	},
+/obj/item/ore/slag,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"br" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 6
+	},
+/obj/effect/floor_decal/corner/blue{
+	dir = 8;
+	icon_state = "corner_white"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"bv" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 6
+	},
+/obj/item/frame/air_alarm,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"bB" = (
+/obj/machinery/mass_driver{
+	dir = 1
+	},
+/obj/machinery/door/blast/regular{
+	density = 0;
+	icon_state = "pdoor0";
+	opacity = 0
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/icarus/driver/east)
+"bK" = (
+/obj/random/junk,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"ca" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 9
+	},
+/obj/effect/floor_decal/corner/blue{
+	dir = 4
+	},
+/obj/item/frame/fire_alarm,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"cd" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 1;
+	icon_state = "spline_fancy"
+	},
+/obj/item/ore/slag,
+/turf/simulated/floor/carpet/blue,
+/area/map_template/icarus/bridge)
+"cq" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/item/frame/apc,
+/turf/simulated/floor/tiled/white,
+/area/map_template/icarus/sci)
+"cx" = (
+/obj/machinery/artifact,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/map_template/icarus/sci)
+"cF" = (
+/obj/effect/landmark/clear,
+/obj/structure/stasis_cage,
+/turf/template_noop,
+/area/template_noop)
+"cS" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/driver/east)
+"cT" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/item/ore/slag,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/driver/east)
+"cZ" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/icarus/driver/west)
+"dn" = (
+/obj/random/trash,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/sci)
+"dD" = (
+/obj/structure/sign/icarus_solgov,
+/turf/simulated/wall/r_wall/hull,
+/area/map_template/icarus/driver/east)
+"dL" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 9
+	},
+/obj/machinery/light_construct,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"dR" = (
+/obj/machinery/light_construct,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"dW" = (
+/obj/structure/sign/icarus_ecplaque{
+	pixel_x = 26
+	},
+/obj/item/frame/fire_alarm,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"er" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/item/stack/material/rods,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/sci)
+"ev" = (
+/obj/effect/floor_decal/corner/blue/three_quarters{
+	dir = 1
+	},
+/obj/item/frame/air_alarm,
+/obj/structure/filingcabinet/chestdrawer{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"ex" = (
+/obj/effect/wallframe_spawn/reinforced,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/sec)
+"ez" = (
+/obj/structure/bed,
+/obj/item/bedsheet/captain,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/carpet/blue,
+/area/map_template/icarus/bridge)
+"fq" = (
+/obj/item/stack/material/rods,
+/obj/effect/floor_decal/corner/research{
+	dir = 5;
+	icon_state = "corner_white"
+	},
+/obj/structure/filingcabinet/chestdrawer,
+/turf/simulated/floor/tiled/white,
+/area/map_template/icarus/sci)
+"fx" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 6
+	},
+/obj/machinery/photocopier,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"fy" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 5
+	},
+/obj/machinery/light_construct,
+/turf/simulated/floor/tiled,
+/area/map_template/icarus/sec)
+"fz" = (
+/obj/effect/floor_decal/corner/research{
+	dir = 5;
+	icon_state = "corner_white"
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/light_construct,
+/turf/simulated/floor/tiled/white,
+/area/map_template/icarus/sci)
+"fE" = (
+/obj/structure/table/standard,
+/obj/random/loot,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"fJ" = (
+/obj/effect/floor_decal/corner/research{
+	dir = 5;
+	icon_state = "corner_white"
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/bookcase/manuals/research_and_development,
+/turf/simulated/floor/tiled/white,
+/area/map_template/icarus/sci)
+"fN" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/driver/west)
+"gk" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/random/trash,
+/turf/simulated/floor/tiled,
+/area/map_template/icarus/sec)
+"gp" = (
+/obj/item/stack/material/rods,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"gq" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/bridge)
+"gt" = (
+/obj/structure/table/steel_reinforced,
+/obj/machinery/photocopier/faxmachine,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/carpet/purple,
+/area/map_template/icarus/sci)
+"gy" = (
+/obj/random/junk,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/map_template/icarus/sci)
+"gF" = (
+/obj/machinery/door/airlock/highsecurity/bolted,
+/turf/simulated/floor/tiled/steel_ridged,
+/area/map_template/icarus/armory)
+"gM" = (
+/obj/structure/table/steel_reinforced,
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/item/folder/nt,
+/turf/simulated/floor/carpet/purple,
+/area/map_template/icarus/sci)
+"gZ" = (
+/obj/effect/floor_decal/corner/blue/three_quarters{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/table/standard,
+/obj/machinery/photocopier/faxmachine,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"hc" = (
+/obj/structure/anomaly_container,
+/turf/simulated/floor/tiled/white,
+/area/map_template/icarus/sci)
+"hf" = (
+/obj/effect/floor_decal/icarus_scglogo{
+	dir = 8;
+	icon_state = "center-right"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"hg" = (
+/obj/machinery/light_construct,
+/turf/simulated/floor/carpet/red,
+/area/map_template/icarus/sec)
+"hA" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/item/stack/material/rods,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/eng)
+"hO" = (
+/obj/effect/floor_decal/corner/red,
+/turf/simulated/floor/tiled,
+/area/map_template/icarus/sec)
+"ia" = (
+/obj/random/junk,
+/turf/simulated/floor/tiled/white,
+/area/map_template/icarus/sci)
+"ir" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/sec)
+"iy" = (
+/turf/simulated/floor/tiled/white,
+/area/map_template/icarus/sci)
+"iB" = (
+/obj/effect/floor_decal/icarus_scglogo{
+	dir = 8;
+	icon_state = "bottom-left"
+	},
+/obj/machinery/constructable_frame/computerframe,
+/obj/item/stock_parts/circuitboard/broken,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"iD" = (
+/turf/simulated/wall/r_wall/hull,
+/area/map_template/icarus/bridge)
+"iG" = (
+/obj/item/frame/air_alarm,
+/turf/simulated/floor/tiled/white,
+/area/map_template/icarus/sci)
+"iJ" = (
+/obj/structure/bed/chair/comfy/blue,
+/turf/simulated/floor/wood/walnut,
+/area/map_template/icarus/bridge)
+"iW" = (
+/obj/item/frame/air_alarm,
+/turf/simulated/floor/tiled,
+/area/map_template/icarus/sec)
+"je" = (
+/obj/item/frame/fire_alarm,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/sec)
+"jo" = (
+/obj/machinery/computer/modular/preset/security,
+/turf/simulated/floor/carpet/red,
+/area/map_template/icarus/sec)
+"jS" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 6
+	},
+/obj/random/trash,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"jZ" = (
+/obj/structure/filingcabinet,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"kd" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/map_template/icarus/sci)
+"kf" = (
+/obj/item/stack/material/rods,
+/obj/effect/landmark/clear,
+/obj/effect/decal/cleanable/greenglow,
+/turf/template_noop,
+/area/template_noop)
+"ks" = (
+/obj/item/ore/slag,
+/turf/simulated/floor/tiled,
+/area/map_template/icarus/sec)
+"kt" = (
+/obj/structure/filingcabinet,
+/turf/simulated/floor/carpet/red,
+/area/map_template/icarus/sec)
+"kz" = (
+/obj/effect/floor_decal/corner/yellow/mono,
+/obj/structure/table/steel_reinforced,
+/obj/item/paper_bin,
+/obj/item/pen,
+/turf/simulated/floor/tiled,
+/area/map_template/icarus/eng)
+"kK" = (
+/obj/machinery/constructable_frame/computerframe,
+/obj/item/stock_parts/circuitboard/broken,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"lh" = (
+/obj/effect/landmark/clear,
+/obj/random/toolbox,
+/turf/template_noop,
+/area/template_noop)
+"li" = (
+/obj/item/ore/slag,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"lu" = (
+/obj/effect/floor_decal/icarus_scglogo{
+	dir = 8;
+	icon_state = "top-left"
+	},
+/obj/machinery/constructable_frame/computerframe,
+/obj/item/stock_parts/circuitboard/broken,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"lv" = (
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/icarus/driver/west)
+"lA" = (
+/obj/machinery/door/airlock/sol{
+	name = "Commanding Officer";
+	secured_wires = 1
+	},
+/turf/simulated/floor/tiled/steel_ridged,
+/area/map_template/icarus/bridge)
+"lB" = (
+/obj/structure/table/standard,
+/obj/random/contraband,
+/turf/simulated/floor/carpet/red,
+/area/map_template/icarus/sec)
+"lM" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled,
+/area/map_template/icarus/sec)
+"mC" = (
+/obj/random/junk,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/icarus/driver/west)
+"mN" = (
+/obj/machinery/light_construct,
+/turf/simulated/floor/wood/walnut,
+/area/map_template/icarus/bridge)
+"mZ" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/item/ore/slag,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/bridge)
+"nn" = (
+/obj/effect/floor_decal/industrial/outline/grey,
+/obj/structure/closet/emcloset,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/icarus/bridge)
+"nO" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/icarus/driver/west)
+"oj" = (
+/turf/simulated/floor/plating,
+/area/map_template/icarus/bridge)
+"ow" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled,
+/area/map_template/icarus/sec)
+"oy" = (
+/obj/item/stack/tile/floor_dark,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"oD" = (
+/obj/effect/floor_decal/industrial/outline/grey,
+/obj/machinery/suit_storage_unit/security,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/icarus/armory)
+"oI" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/item/ore/slag,
+/turf/simulated/floor/tiled,
+/area/map_template/icarus/sec)
+"oJ" = (
+/obj/effect/floor_decal/corner/yellow/half{
+	dir = 8;
+	icon_state = "bordercolorhalf"
+	},
+/obj/machinery/light_construct,
+/turf/simulated/floor/tiled,
+/area/map_template/icarus/eng)
+"oN" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 9
+	},
+/obj/effect/floor_decal/corner/blue{
+	dir = 4
+	},
+/obj/machinery/light_construct,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"oS" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 9
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"oX" = (
+/obj/structure/table/woodentable/walnut,
+/obj/item/toy/icarus_model,
+/turf/simulated/floor/wood/walnut,
+/area/map_template/icarus/bridge)
+"pa" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 10
+	},
+/obj/item/frame/air_alarm,
+/turf/simulated/floor/tiled,
+/area/map_template/icarus/sec)
+"pk" = (
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/table/rack,
+/obj/effect/floor_decal/industrial/outline/grey,
+/obj/random/projectile,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/icarus/armory)
+"pL" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 1;
+	icon_state = "spline_fancy"
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/carpet/blue,
+/area/map_template/icarus/bridge)
+"pU" = (
+/obj/structure/sign/double/icarus_solgovflag/right{
+	pixel_y = 32
+	},
+/obj/effect/floor_decal/corner/blue{
+	dir = 5
+	},
+/obj/machinery/vending/cigarette,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"pW" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 6
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/light_construct,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"qo" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 6
+	},
+/obj/random/junk,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"qD" = (
+/obj/item/frame/air_alarm,
+/obj/machinery/light_construct,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/armory)
+"ra" = (
+/obj/item/frame/apc,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/armory)
+"rc" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 9
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/random/junk,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"rn" = (
+/obj/structure/closet/crate,
+/obj/random/loot,
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/icarus/bridge)
+"rr" = (
+/obj/effect/icarus_irradiate,
+/turf/simulated/floor/tiled/white,
+/area/map_template/icarus/sci)
+"ru" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/undies_wardrobe,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/bridge)
+"rC" = (
+/obj/item/frame/apc,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/driver/west)
+"rN" = (
+/obj/effect/floor_decal/corner/yellow/mono,
+/obj/structure/closet/crate/secure/large/phoron/experimentalsm,
+/turf/simulated/floor/tiled,
+/area/map_template/icarus/eng)
+"rW" = (
+/obj/structure/skele_stand/maint,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/icarus/bridge)
+"sj" = (
+/obj/machinery/door/airlock/hatch/maintenance,
+/turf/simulated/floor/tiled/steel_ridged,
+/area/map_template/icarus/bridge)
+"sl" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"sr" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"su" = (
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"sx" = (
+/obj/machinery/door/airlock/sol{
+	name = "Bridge Storage";
+	secured_wires = 1
+	},
+/turf/simulated/floor/tiled/steel_ridged,
+/area/map_template/icarus/bridge)
+"sG" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/icarus/bridge)
+"sM" = (
+/obj/structure/table/glass,
+/obj/effect/decal/cleanable/dirt,
+/obj/item/gun/projectile/pistol/military/icarus,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"sO" = (
+/obj/structure/bed/chair/comfy/red{
+	dir = 8
+	},
+/turf/simulated/floor/carpet/red,
+/area/map_template/icarus/sec)
+"sR" = (
+/obj/item/frame/air_alarm,
+/turf/simulated/floor/tiled,
+/area/map_template/icarus/eng)
+"sS" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 10;
+	icon_state = "corner_white"
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/light_construct,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"sZ" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 9
+	},
+/obj/item/frame/air_alarm,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"tF" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 6
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/item/ore/slag,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"tJ" = (
+/obj/structure/bed/chair,
+/turf/simulated/floor/plating,
+/area/template_noop)
+"tW" = (
+/obj/item/frame/fire_alarm,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"tY" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/blue{
+	dir = 9
+	},
+/obj/random/trash,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"uA" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/door/airlock/hatch/maintenance,
+/turf/simulated/floor/tiled/steel_ridged,
+/area/map_template/icarus/bridge)
+"uB" = (
+/obj/effect/wallframe_spawn/reinforced/hull,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/bridge)
+"uC" = (
+/obj/structure/closet,
+/turf/simulated/floor/carpet/red,
+/area/map_template/icarus/sec)
+"uH" = (
+/obj/random/trash,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/map_template/icarus/sci)
+"ve" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 6
+	},
+/obj/random/trash,
+/turf/simulated/floor/tiled,
+/area/map_template/icarus/sec)
+"vq" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 9
+	},
+/obj/item/frame/apc,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"vJ" = (
+/obj/structure/girder,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/driver/east)
+"vK" = (
+/obj/structure/bed/chair/padded/blue{
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/blue{
+	dir = 10;
+	icon_state = "corner_white"
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"vP" = (
+/obj/machinery/mass_driver{
+	dir = 1
+	},
+/obj/machinery/door/blast/regular{
+	density = 0;
+	icon_state = "pdoor0";
+	opacity = 0
+	},
+/obj/structure/ship_munition/ap_slug,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/icarus/driver/west)
+"wr" = (
+/obj/machinery/computer/modular/preset,
+/turf/simulated/floor/carpet/purple,
+/area/map_template/icarus/sci)
+"wT" = (
+/obj/effect/floor_decal/corner/yellow/half{
+	dir = 8;
+	icon_state = "bordercolorhalf"
+	},
+/obj/item/frame/apc,
+/turf/simulated/floor/tiled,
+/area/map_template/icarus/eng)
+"wV" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 9
+	},
+/obj/item/frame/fire_alarm,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"xd" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/item/ore/slag,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/eng)
+"xq" = (
+/obj/effect/floor_decal/icarus_scglogo{
+	dir = 8;
+	icon_state = "bottom-right"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"xu" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/item/folder/red,
+/turf/simulated/floor/tiled,
+/area/map_template/icarus/sec)
+"xJ" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 10
+	},
+/obj/item/frame/apc,
+/turf/simulated/floor/tiled,
+/area/map_template/icarus/sec)
+"xQ" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/armory)
+"xY" = (
+/obj/effect/landmark/clear,
+/obj/machinery/suspension_gen,
+/turf/template_noop,
+/area/template_noop)
+"yi" = (
+/obj/structure/table/standard,
+/obj/effect/floor_decal/corner/blue{
+	dir = 10;
+	icon_state = "corner_white"
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/item/folder/blue,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"yt" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"yS" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/map_template/icarus/armory)
+"yX" = (
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/table/rack,
+/obj/effect/floor_decal/industrial/outline/grey,
+/obj/random/hardsuit,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/icarus/armory)
+"ze" = (
+/obj/item/stack/material/rods,
+/obj/effect/floor_decal/corner/blue{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"zp" = (
+/obj/structure/bed/chair/office/comfy/purple{
+	dir = 1
+	},
+/obj/item/remains/human,
+/turf/simulated/floor/carpet/purple,
+/area/map_template/icarus/sci)
+"zS" = (
+/turf/simulated/wall/r_wall/hull,
+/area/map_template/icarus/eng)
+"zX" = (
+/obj/structure/bed/chair/comfy/blue{
+	dir = 1;
+	icon_state = "comfychair_preview"
+	},
+/obj/item/remains/human,
+/obj/machinery/light_construct,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"Ad" = (
+/obj/structure/girder,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/eng)
+"Ag" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/closet/crate,
+/obj/item/disk/secret_project/science,
+/turf/simulated/floor/tiled/white,
+/area/map_template/icarus/sci)
+"AB" = (
+/obj/effect/floor_decal/icarus_scglogo{
+	dir = 8
+	},
+/obj/structure/bed/chair/comfy/captain{
+	color = "#666666";
+	dir = 1;
+	icon_state = "capchair_preview"
+	},
+/obj/item/remains/human,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"AG" = (
+/obj/effect/floor_decal/corner/yellow/half{
+	dir = 8;
+	icon_state = "bordercolorhalf"
+	},
+/obj/structure/table/steel_reinforced,
+/obj/item/folder/yellow,
+/turf/simulated/floor/tiled,
+/area/map_template/icarus/eng)
+"AI" = (
+/obj/item/frame/apc,
+/turf/simulated/floor/wood/walnut,
+/area/map_template/icarus/bridge)
+"AK" = (
+/obj/item/frame/air_alarm,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"AQ" = (
+/obj/structure/table/standard,
+/obj/item/paper_bin,
+/obj/item/pen,
+/turf/simulated/floor/carpet/red,
+/area/map_template/icarus/sec)
+"Br" = (
+/obj/structure/sign/icarus_solgov,
+/turf/simulated/wall/r_wall/hull,
+/area/map_template/icarus/driver/west)
+"BN" = (
+/obj/structure/sign/icarus_solgov,
+/turf/simulated/wall/r_wall/hull,
+/area/map_template/icarus/bridge)
+"Ca" = (
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/bridge)
+"Cg" = (
+/obj/machinery/door/blast/regular{
+	density = 0;
+	icon_state = "pdoor0";
+	opacity = 0
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/icarus/driver/west)
+"Ck" = (
+/obj/structure/girder,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/bridge)
+"Cr" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/map_template/icarus/driver/west)
+"CR" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/item/stack/material/rods,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/bridge)
+"Da" = (
+/obj/structure/sign/icarus_dedicationplaque{
+	pixel_y = 26
+	},
+/obj/effect/floor_decal/corner/blue/three_quarters{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"De" = (
+/obj/effect/landmark/clear,
+/obj/structure/girder/displaced,
+/turf/template_noop,
+/area/template_noop)
+"Dw" = (
+/obj/effect/floor_decal/corner/yellow/half{
+	dir = 1
+	},
+/obj/random/junk,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled,
+/area/map_template/icarus/eng)
+"DB" = (
+/obj/structure/bed/chair/comfy/blue{
+	dir = 1;
+	icon_state = "comfychair_preview"
+	},
+/obj/item/remains/human,
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/light_construct,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"DL" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/item/ore/slag,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/driver/west)
+"DR" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/wall_frame/hull,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/bridge)
+"DV" = (
+/obj/structure/bed/chair/padded/blue{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"Ej" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/light_construct,
+/turf/simulated/floor/tiled,
+/area/map_template/icarus/eng)
+"Ew" = (
+/obj/structure/grille,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/icarus/driver/west)
+"EB" = (
+/obj/random/obstruction,
+/turf/simulated/floor/tiled/white,
+/area/map_template/icarus/sci)
+"ES" = (
+/obj/random/junk,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/sci)
+"EU" = (
+/obj/effect/landmark/clear,
+/obj/item/folder/nt,
+/turf/template_noop,
+/area/template_noop)
+"Fi" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 6
+	},
+/obj/effect/floor_decal/corner/blue{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"Fr" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 9
+	},
+/obj/random/obstruction,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"Fu" = (
+/obj/structure/table/woodentable/walnut,
+/obj/item/paper/icarus_roster,
+/turf/simulated/floor/wood/walnut,
+/area/map_template/icarus/bridge)
+"FK" = (
+/obj/effect/floor_decal/industrial/outline/grey,
+/obj/structure/closet/firecloset,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/icarus/bridge)
+"Gl" = (
+/turf/simulated/wall/r_wall/hull,
+/area/map_template/icarus/driver/east)
+"Gx" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 5
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled,
+/area/map_template/icarus/sec)
+"GB" = (
+/obj/structure/sign/icarus_ecplaque{
+	pixel_x = -26
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"Hq" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/item/stack/material/rods,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/driver/east)
+"HB" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/item/ore/slag,
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/icarus/driver/east)
+"HD" = (
+/obj/effect/floor_decal/icarus_scglogo{
+	dir = 8;
+	icon_state = "top-center"
+	},
+/obj/structure/table/glass,
+/obj/item/icarus_disk,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"HH" = (
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"HM" = (
+/turf/simulated/wall/r_wall/hull,
+/area/map_template/icarus/sec)
+"HQ" = (
+/obj/item/stack/material/rods,
+/obj/effect/floor_decal/corner/blue{
+	dir = 6
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"HZ" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 6
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/item/ore/slag,
+/turf/simulated/floor/tiled,
+/area/map_template/icarus/sec)
+"IB" = (
+/obj/item/remains/human,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/eng)
+"IE" = (
+/turf/simulated/floor/carpet/purple,
+/area/map_template/icarus/sci)
+"II" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 6
+	},
+/obj/machinery/light_construct,
+/turf/simulated/floor/tiled,
+/area/map_template/icarus/sec)
+"IO" = (
+/obj/item/frame/apc,
+/turf/simulated/floor/carpet/red,
+/area/map_template/icarus/sec)
+"IR" = (
+/obj/random/trash,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/bridge)
+"Jd" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 5
+	},
+/obj/effect/floor_decal/corner/red,
+/turf/simulated/floor/tiled,
+/area/map_template/icarus/sec)
+"Jk" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/icarus/driver/east)
+"JO" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/random/obstruction,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/eng)
+"JU" = (
+/obj/structure/bed/chair/padded/red{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/icarus/sec)
+"Km" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/random/junk,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/sec)
+"KX" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/eng)
+"Lj" = (
+/obj/structure/girder,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/driver/west)
+"Lu" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/map_template/icarus/sec)
+"LO" = (
+/obj/structure/girder,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/sci)
+"LR" = (
+/obj/structure/girder,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/driver/east)
+"LZ" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/light_construct,
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/icarus/driver/west)
+"Mf" = (
+/obj/effect/floor_decal/corner/research{
+	dir = 5;
+	icon_state = "corner_white"
+	},
+/obj/machinery/papershredder,
+/turf/simulated/floor/tiled/white,
+/area/map_template/icarus/sci)
+"Mq" = (
+/obj/item/shreddedp,
+/turf/simulated/floor/tiled/white,
+/area/map_template/icarus/sci)
+"Mv" = (
+/obj/structure/bed/chair/office/comfy/yellow{
+	dir = 8
+	},
+/obj/item/remains/human,
+/turf/simulated/floor/tiled,
+/area/map_template/icarus/eng)
+"MD" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled,
+/area/map_template/icarus/sec)
+"MU" = (
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/table/rack,
+/obj/effect/floor_decal/industrial/outline/grey,
+/obj/random/energy,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/icarus/armory)
+"MV" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white,
+/area/map_template/icarus/sci)
+"No" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 10;
+	icon_state = "corner_white"
+	},
+/obj/item/frame/apc,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"Nt" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/carpet/purple,
+/area/map_template/icarus/sci)
+"Nu" = (
+/obj/item/frame/air_alarm,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/icarus/driver/east)
+"NE" = (
+/obj/machinery/computer/modular/preset/cardslot/command{
+	dir = 4
+	},
+/turf/simulated/floor/wood/walnut,
+/area/map_template/icarus/bridge)
+"NJ" = (
+/obj/effect/landmark/clear,
+/obj/item/shreddedp,
+/turf/template_noop,
+/area/template_noop)
+"NN" = (
+/obj/item/frame/apc,
+/obj/machinery/light_construct,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"NQ" = (
+/obj/structure/ship_munition/ap_slug,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/icarus/driver/east)
+"NU" = (
+/obj/effect/floor_decal/corner/yellow/half{
+	dir = 8;
+	icon_state = "bordercolorhalf"
+	},
+/obj/machinery/computer/modular/preset/engineering{
+	dir = 4;
+	icon_state = "console"
+	},
+/obj/item/paper/icarus_log,
+/turf/simulated/floor/tiled,
+/area/map_template/icarus/eng)
+"Ow" = (
+/obj/random/trash,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/eng)
+"OH" = (
+/obj/random/junk,
+/obj/random/trash,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/driver/west)
+"Pp" = (
+/turf/simulated/floor/tiled,
+/area/map_template/icarus/sec)
+"Ps" = (
+/obj/random/junk,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"Pt" = (
+/obj/effect/floor_decal/icarus_scglogo{
+	dir = 8;
+	icon_state = "top-right"
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"PO" = (
+/obj/structure/sign/icarus_solgov,
+/turf/simulated/wall/r_wall/hull,
+/area/map_template/icarus/eng)
+"PP" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/light_construct,
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/icarus/driver/east)
+"Ql" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/sci)
+"Qo" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/map_template/icarus/eng)
+"QL" = (
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/icarus/driver/east)
+"Rm" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"Ru" = (
+/obj/effect/floor_decal/icarus_scglogo{
+	dir = 8;
+	icon_state = "bottom-center"
+	},
+/obj/structure/table/glass,
+/obj/item/paper/icarus_roster,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"RD" = (
+/obj/effect/landmark/clear,
+/obj/effect/decal/cleanable/greenglow,
+/turf/template_noop,
+/area/template_noop)
+"RP" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 6
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"Sj" = (
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/armory)
+"Sp" = (
+/obj/structure/girder,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/armory)
+"Sw" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 9
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/light_construct,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"Tt" = (
+/obj/structure/girder,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/bridge)
+"TG" = (
+/obj/effect/floor_decal/corner/blue,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"TK" = (
+/turf/simulated/wall/r_wall,
+/area/map_template/icarus/bridge)
+"TU" = (
+/obj/random/contraband,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/eng)
+"Uj" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/item/ore/slag,
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/icarus/driver/west)
+"Uo" = (
+/obj/random/junk,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/icarus/driver/east)
+"Uu" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/template_noop)
+"UT" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/item/stock_parts/circuitboard/broken,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"UU" = (
+/obj/structure/bed/chair/padded/blue{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/blue/three_quarters,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"Vs" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 6
+	},
+/obj/random/obstruction,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"VS" = (
+/obj/random/trash,
+/turf/simulated/floor/tiled,
+/area/map_template/icarus/eng)
+"VU" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/carpet/blue,
+/area/map_template/icarus/bridge)
+"VY" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 10
+	},
+/obj/effect/floor_decal/corner/red{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/icarus/sec)
+"Wp" = (
+/obj/item/frame/air_alarm,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/icarus/driver/west)
+"Wq" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/map_template/icarus/driver/east)
+"WJ" = (
+/obj/structure/bed/chair/padded/blue{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/blue{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"Xa" = (
+/obj/effect/wallframe_spawn/reinforced,
+/turf/simulated/floor/plating,
+/area/map_template/icarus/bridge)
+"Xk" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/map_template/icarus/bridge)
+"Xm" = (
+/obj/structure/sign/double/icarus_solgovflag/left{
+	pixel_y = 32
+	},
+/obj/effect/floor_decal/corner/blue{
+	dir = 5
+	},
+/obj/machinery/vending/coffee,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"XO" = (
+/obj/item/frame/apc,
+/obj/effect/floor_decal/corner/blue{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"XX" = (
+/turf/simulated/wall/r_wall/hull,
+/area/map_template/icarus/driver/west)
+"XZ" = (
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/icarus/bridge)
+"YB" = (
+/obj/structure/table/glass,
+/obj/random/loot,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"YJ" = (
+/obj/item/frame/apc,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/icarus/driver/east)
+"YO" = (
+/obj/random/trash,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/icarus/driver/east)
+"Zh" = (
+/obj/structure/bed/chair/comfy/captain{
+	color = "#666666";
+	dir = 8;
+	icon_state = "capchair_preview"
+	},
+/turf/simulated/floor/wood/walnut,
+/area/map_template/icarus/bridge)
+"Zk" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/icarus/bridge)
+"ZJ" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/wall/r_wall/hull,
+/area/map_template/icarus/bridge)
+"ZQ" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 1;
+	icon_state = "spline_fancy"
+	},
+/obj/item/frame/air_alarm,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/carpet/blue,
+/area/map_template/icarus/bridge)
+
+(1,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(2,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(3,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(4,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(5,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(6,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(7,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(8,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(9,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(10,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+HH
+XX
+XX
+XX
+Lj
+Lj
+XX
+XX
+XX
+XX
+XX
+fN
+HH
+RD
+HH
+HH
+HH
+HH
+HH
+zS
+zS
+zS
+zS
+zS
+HH
+HH
+PO
+KX
+PO
+HH
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(11,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+RD
+Br
+Ew
+Ew
+Ew
+Ew
+XX
+Cr
+Cr
+Lj
+fN
+fN
+HH
+HH
+HH
+HH
+KX
+zS
+zS
+zS
+Qo
+TU
+IB
+zS
+zS
+zS
+zS
+KX
+zS
+HH
+HH
+HH
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(12,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+HH
+Cg
+cZ
+cZ
+lv
+lv
+vP
+nO
+LZ
+Wp
+Uj
+ax
+HH
+HH
+HH
+HH
+Ad
+Qo
+Qo
+Qo
+Qo
+Qo
+Qo
+Qo
+Qo
+Qo
+Qo
+KX
+Qo
+Qo
+Ad
+HH
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(13,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+HH
+HH
+Br
+Ew
+Ew
+Ew
+Ew
+XX
+mC
+ag
+nO
+fN
+OH
+HH
+HH
+HH
+HH
+xd
+KX
+Qo
+rN
+wT
+oJ
+AG
+NU
+kz
+Qo
+HH
+gp
+HH
+HH
+HH
+HH
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(14,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+HH
+HH
+iD
+XX
+XX
+XX
+XX
+XX
+XX
+rC
+DL
+fN
+ax
+HH
+HH
+HH
+HH
+HH
+HH
+KX
+Qo
+Dw
+Ej
+VS
+sR
+Mv
+aX
+Qo
+KX
+HH
+HH
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(15,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+RD
+HH
+iD
+iD
+Xk
+Xk
+Xk
+Xk
+Xk
+Uu
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+oy
+HH
+HH
+HH
+Ad
+xd
+JO
+hA
+KX
+xd
+KX
+HH
+KX
+KX
+HH
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(16,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+HH
+iD
+iD
+rn
+XZ
+sG
+Ca
+Ca
+oj
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+hA
+KX
+KX
+Ow
+HH
+HH
+HH
+HH
+HH
+HH
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(17,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+HH
+HH
+HH
+HH
+gq
+Xk
+Xk
+sj
+Xk
+Xk
+Xk
+Xk
+Xk
+gq
+Xk
+HH
+HH
+oy
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(18,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+HH
+gq
+gq
+gq
+Ck
+Xk
+tY
+sr
+sZ
+dL
+wV
+sr
+rc
+gq
+oS
+HH
+HH
+HH
+HH
+HH
+NJ
+HH
+cF
+HH
+lh
+HH
+gp
+HH
+HH
+HH
+HH
+HH
+HH
+RD
+HH
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(19,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+HH
+Ck
+Xk
+Xk
+Xk
+Xk
+sl
+TG
+be
+Zk
+ze
+Zk
+RP
+gq
+RP
+HQ
+HH
+HH
+EU
+oy
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+De
+HH
+HH
+HH
+HH
+HH
+HH
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(20,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+HH
+iD
+Xk
+FK
+oN
+sr
+yt
+No
+Xk
+lA
+Xk
+Xk
+Xk
+CR
+Xk
+uA
+Xk
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(21,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+HH
+iD
+Xk
+nn
+Fi
+Zk
+Vs
+br
+Xk
+ay
+oX
+NE
+ZQ
+IR
+ru
+oj
+kd
+kd
+kd
+HH
+HH
+kd
+kd
+Ql
+HH
+HH
+HH
+HH
+HH
+HH
+gp
+HH
+HH
+HH
+HH
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(22,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+HH
+iD
+Xk
+Xk
+Xa
+aV
+Xa
+Xk
+Xk
+iJ
+Fu
+Zh
+pL
+VU
+Tt
+oj
+LO
+fJ
+gy
+Ql
+uH
+gy
+Ag
+Ql
+HH
+HH
+NJ
+HH
+HH
+HH
+HH
+HH
+RD
+HH
+HH
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(23,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+HH
+uB
+kK
+DB
+sM
+su
+Ps
+GB
+lA
+ay
+mN
+AI
+cd
+ez
+Xk
+oj
+Ql
+fz
+iy
+iG
+iy
+Ql
+HH
+Ql
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(24,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+HH
+RD
+aa
+Rm
+Rm
+Rm
+af
+NN
+Xk
+Xk
+Xk
+Xk
+Xk
+Xk
+Xk
+oj
+kd
+fq
+iy
+EB
+iy
+Ql
+HH
+HH
+HH
+HH
+HH
+gp
+HH
+HH
+HH
+HH
+HH
+HH
+RD
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(25,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+HH
+DR
+gq
+Rm
+iB
+Ru
+xq
+jZ
+Xk
+Da
+dL
+XO
+WJ
+UU
+Xk
+oj
+kd
+Mf
+Mq
+rr
+iy
+er
+dn
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(26,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+HH
+BN
+Rm
+UT
+ad
+AB
+hf
+su
+aV
+sl
+Ps
+su
+fE
+yi
+Xk
+oj
+kd
+gM
+IE
+IE
+ia
+hc
+Ql
+HH
+Ql
+HH
+HH
+yS
+Sp
+Sp
+yS
+yS
+yS
+yS
+HH
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(27,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+HH
+uB
+Rm
+li
+lu
+HD
+Pt
+jZ
+Xk
+Xm
+su
+tW
+DV
+vK
+Xk
+oj
+kd
+wr
+zp
+Nt
+uH
+iy
+ES
+Ql
+er
+HH
+HH
+yS
+yS
+yS
+yS
+yS
+yS
+yS
+HH
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(28,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+HH
+uB
+ab
+af
+Ps
+su
+AK
+dR
+Xk
+pU
+su
+su
+Rm
+sS
+Ck
+oj
+kd
+gt
+Nt
+Nt
+Ql
+MV
+cq
+cx
+kd
+HH
+HH
+yS
+yS
+pk
+ra
+oD
+yS
+yS
+HH
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(29,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+HH
+uB
+ac
+zX
+YB
+su
+su
+dW
+Xk
+ev
+Zk
+Zk
+fx
+gZ
+Xk
+oj
+kd
+Ql
+kd
+kd
+HH
+kd
+kd
+kd
+kd
+HH
+HH
+Sp
+yS
+yX
+Sj
+Sj
+gF
+xQ
+HH
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(30,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+HH
+iD
+Xk
+Xk
+Xa
+aV
+Xa
+Xk
+Xk
+Xa
+Xa
+sx
+Xk
+Xk
+Xk
+sj
+TK
+HH
+gp
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+Sp
+yS
+MU
+qD
+oD
+yS
+yS
+HH
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(31,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+HH
+iD
+Xk
+FK
+ca
+sr
+sr
+vq
+sr
+Fr
+oS
+Sw
+CR
+IR
+sr
+sr
+gp
+HH
+HH
+HH
+NJ
+HH
+HH
+HH
+HH
+xY
+HH
+yS
+yS
+yS
+yS
+yS
+yS
+yS
+HH
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(32,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+HH
+iD
+Xk
+nn
+Fi
+bv
+pW
+tF
+RP
+jS
+gq
+mZ
+gq
+Zk
+qo
+HH
+HH
+tJ
+HH
+HH
+HH
+HH
+HH
+EU
+HH
+HH
+HH
+yS
+yS
+yS
+yS
+Sp
+Sp
+yS
+HH
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(33,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+HH
+iD
+Xk
+Xk
+Xk
+Xk
+Xk
+sj
+Xk
+Xk
+Xk
+Xk
+Xk
+Xk
+Xk
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+gp
+RD
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+gp
+HH
+HH
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(34,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+HH
+iD
+Ck
+Ck
+iD
+sG
+sG
+sG
+sG
+Ca
+Ca
+oj
+oj
+HH
+HH
+HH
+oy
+HH
+HH
+HH
+oy
+HH
+bK
+HH
+HH
+gp
+HH
+HH
+HH
+HH
+RD
+HH
+HH
+HH
+HH
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(35,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+HH
+HH
+HH
+HH
+iD
+ZJ
+rW
+IR
+CR
+oj
+Ca
+Ca
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+ir
+ir
+Pp
+ak
+lM
+xu
+ow
+oI
+ir
+ir
+HH
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(36,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+RD
+HH
+iD
+iD
+Xk
+Ck
+Xk
+Xk
+Xk
+Xk
+ax
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+Km
+hO
+II
+je
+ir
+ir
+am
+am
+MD
+Km
+HH
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(37,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+HH
+HH
+iD
+Gl
+LR
+LR
+Gl
+Gl
+Gl
+YJ
+HB
+NQ
+HH
+HH
+oy
+HH
+HH
+ks
+xJ
+Lu
+Lu
+ir
+ex
+ex
+Lu
+Gx
+ir
+HH
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(38,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+HH
+cS
+cS
+aT
+aT
+aT
+Gl
+aB
+YO
+Nu
+ax
+HH
+RD
+HH
+HH
+HH
+pa
+Lu
+JU
+Pp
+Pp
+iW
+Lu
+fy
+gk
+HH
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(39,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+HH
+cS
+cS
+Jk
+QL
+QL
+bB
+Uo
+PP
+Hq
+ah
+HH
+HH
+HH
+HH
+ve
+VY
+Lu
+AQ
+lB
+hg
+kt
+Lu
+Jd
+HZ
+HH
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(40,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+HH
+dD
+cS
+cS
+aT
+aT
+Gl
+Wq
+Wq
+vJ
+HH
+HH
+HH
+oy
+HH
+Lu
+Lu
+Lu
+jo
+sO
+IO
+uC
+Lu
+Lu
+Lu
+HH
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(41,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+RD
+HH
+cS
+LR
+Gl
+Gl
+Gl
+Gl
+Gl
+Gl
+cS
+cT
+HH
+HH
+HH
+HM
+HM
+HM
+aN
+aN
+HM
+HM
+HM
+HM
+HH
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(42,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+HH
+HH
+HH
+HH
+HH
+RD
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+HH
+kf
+HH
+HH
+HH
+HH
+gp
+HH
+HH
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(43,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(44,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(45,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(46,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(47,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(48,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(49,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
+(50,1,1) = {"
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+aI
+"}
