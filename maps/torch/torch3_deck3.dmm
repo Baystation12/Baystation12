@@ -10857,7 +10857,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/substation/thirddeck)
 "yN" = (
-/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall/prepainted,
 /area/teleporter/thirddeck)
 "yO" = (
 /obj/machinery/door/blast/shutters{

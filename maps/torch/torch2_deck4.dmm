@@ -925,7 +925,7 @@
 /turf/simulated/floor/plating,
 /area/hallway/primary/fourthdeck/aft)
 "dg" = (
-/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall/prepainted,
 /area/teleporter/fourthdeck)
 "dh" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
@@ -4205,7 +4205,7 @@
 /area/hallway/primary/fourthdeck/fore)
 "oz" = (
 /obj/machinery/status_display,
-/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall/prepainted,
 /area/teleporter/fourthdeck)
 "oA" = (
 /turf/simulated/wall/prepainted,

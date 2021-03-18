@@ -7177,9 +7177,6 @@
 "auk" = (
 /turf/simulated/wall/prepainted,
 /area/hallway/primary/firstdeck/aft)
-"aul" = (
-/turf/simulated/wall/r_wall,
-/area/teleporter/firstdeck)
 "auv" = (
 /obj/effect/catwalk_plated,
 /obj/structure/disposalpipe/segment{
@@ -26467,7 +26464,7 @@
 /area/hallway/primary/firstdeck/fore)
 "qHx" = (
 /obj/structure/sign/warning/secure_area,
-/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall/prepainted,
 /area/teleporter/firstdeck)
 "qIb" = (
 /obj/machinery/atmospherics/pipe/simple/visible/blue,
@@ -30656,7 +30653,7 @@
 	dir = 4;
 	icon_state = "securearea"
 	},
-/turf/simulated/wall/r_wall,
+/turf/simulated/wall/r_wall/prepainted,
 /area/teleporter/firstdeck)
 "wWr" = (
 /obj/effect/floor_decal/corner/green/half{
@@ -43759,13 +43756,13 @@ afI
 atA
 auE
 avS
-aul
+aAT
 brb
 ngb
 npb
 nub
 nEb
-aul
+aAT
 aEU
 aFV
 aGP
@@ -43961,7 +43958,7 @@ afI
 atB
 auF
 avT
-aul
+aAT
 mXb
 nhb
 nqb
@@ -44163,7 +44160,7 @@ qHq
 atC
 auG
 avU
-aul
+aAT
 atw
 atw
 gDm
@@ -44365,13 +44362,13 @@ rZf
 atD
 auH
 wMo
-aul
+aAT
 lYS
 nZB
 aCp
-aul
-aul
-aul
+aAT
+aAT
+aAT
 iAZ
 aGf
 aGP
@@ -44567,11 +44564,11 @@ asB
 jxG
 auI
 avV
-aul
+aAT
 wWc
-aul
+aAT
 uXr
-aul
+aAT
 eZQ
 fVw
 obZ

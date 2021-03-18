@@ -13890,9 +13890,6 @@
 "HQ" = (
 /turf/simulated/floor/tiled/white/monotile,
 /area/assembly/robotics/surgery)
-"HS" = (
-/turf/simulated/wall/r_wall,
-/area/engineering/storage)
 "HU" = (
 /obj/structure/table/rack,
 /obj/random/maintenance/solgov,
@@ -15366,9 +15363,6 @@
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/vacant/prototype/engine)
-"Nc" = (
-/turf/simulated/wall/r_wall,
-/area/teleporter/seconddeck)
 "Nd" = (
 /obj/machinery/power/terminal{
 	dir = 1;
@@ -38999,11 +38993,11 @@ Qp
 Ab
 QI
 jy
-HS
+fp
 Yy
 kj
-Nc
-Nc
+Yy
+Yy
 Is
 Fn
 AN
@@ -39201,11 +39195,11 @@ Sv
 Ol
 hr
 fc
-HS
+fp
 jX
 kk
 kE
-Nc
+Yy
 tX
 SM
 AO
@@ -39403,12 +39397,12 @@ Ad
 ZB
 hr
 yv
-HS
+fp
 jZ
 km
 nB
-Nc
-Nc
+Yy
+Yy
 Fn
 AN
 TV
@@ -39610,7 +39604,7 @@ vS
 WA
 xC
 kG
-Nc
+Yy
 Fn
 AN
 Cf
@@ -39812,7 +39806,7 @@ Qv
 kx
 xC
 kM
-Nc
+Yy
 Fn
 AN
 AN
@@ -40009,12 +40003,12 @@ kh
 kB
 Qz
 PA
-HS
+fp
 kf
 zZ
 xC
 FV
-Nc
+Yy
 wL
 NF
 Cg
@@ -40211,12 +40205,12 @@ jy
 jy
 jy
 jy
-HS
+fp
 vS
 FI
-Nc
-Nc
-Nc
+Yy
+Yy
+Yy
 KE
 Bw
 Cg
