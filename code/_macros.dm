@@ -13,6 +13,8 @@ var/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 //var/const/NEGATIVE_NAN = (1#INF/1#INF) //win: -1.#IND, lin: -nan -- demonstration of creation, but not useful
 #define isfinite(N) (isnum(N) && ((N) == (N)) && ((N) != POSITIVE_INFINITY) && ((N) != NEGATIVE_INFINITY))
 
+#define isnan(N) (isnum(N) && (N) != (N))
+
 #define get_turf(A) get_step(A,0)
 
 #define get_x(A) (get_step(A, 0)?.x || 0)
