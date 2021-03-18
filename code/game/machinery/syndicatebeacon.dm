@@ -13,7 +13,7 @@
 	icon_state = "syndbeacon"
 
 	anchored = TRUE
-	density = 1
+	density = TRUE
 
 	var/temptext = ""
 	var/selfdestructing = 0
@@ -87,7 +87,7 @@
 	icon_state = "beacon"
 
 	anchored = FALSE
-	density = 1
+	density = TRUE
 	layer = BASE_ABOVE_OBJ_LAYER //so people can't hide it and it's REALLY OBVIOUS
 	stat = 0
 

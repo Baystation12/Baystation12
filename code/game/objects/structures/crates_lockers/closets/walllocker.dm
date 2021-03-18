@@ -5,7 +5,7 @@
 	desc = "A wall mounted storage locker."
 	name = "Wall Locker"
 	closet_appearance = /decl/closet_appearance/wall
-	density = 0
+	density = FALSE
 	anchored = TRUE
 	wall_mounted = TRUE
 	storage_types = CLOSET_STORAGE_ITEMS

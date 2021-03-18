@@ -6,7 +6,7 @@
 	icon = 'icons/obj/drain.dmi'
 	icon_state = "drain"
 	anchored = TRUE
-	density = 0
+	density = FALSE
 	layer = TURF_LAYER+0.1
 	can_drain = 1
 	var/welded

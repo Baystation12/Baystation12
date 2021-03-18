@@ -4,7 +4,7 @@
 	desc = "..."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "watertank"
-	density = 1
+	density = TRUE
 	anchored = FALSE
 
 	var/initial_capacity = 1000
@@ -267,7 +267,7 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "peppertank"
 	anchored = TRUE
-	density = 0
+	density = FALSE
 	amount_per_transfer_from_this = 45
 	initial_reagent_types = list(/datum/reagent/capsaicin/condensed = 1)
 

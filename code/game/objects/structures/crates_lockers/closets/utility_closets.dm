@@ -154,7 +154,7 @@
 	desc = "It's a storage unit for fire-fighting supplies."
 	closet_appearance = /decl/closet_appearance/wall/hydrant
 	anchored = TRUE
-	density = 0
+	density = FALSE
 	wall_mounted = TRUE
 	storage_types = CLOSET_STORAGE_ITEMS
 	setup = 0
@@ -175,7 +175,7 @@
 	desc = "It's a wall-mounted storage unit for first aid supplies."
 	closet_appearance = /decl/closet_appearance/wall/medical
 	anchored = TRUE
-	density = 0
+	density = FALSE
 	wall_mounted = TRUE
 	storage_types = CLOSET_STORAGE_ITEMS
 	setup = 0
@@ -215,7 +215,7 @@
 	desc = "It's a wall-mounted storage unit containing supplies for preparing shipments."
 	closet_appearance = /decl/closet_appearance/wall/shipping
 	anchored = TRUE
-	density = 0
+	density = FALSE
 	wall_mounted = TRUE
 	storage_types = CLOSET_STORAGE_ITEMS
 	setup = 0

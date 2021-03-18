@@ -5,7 +5,7 @@
 	icon_state = "operating"
 	var/icon_state_unpowered = "telescreen"
 	anchored = TRUE
-	density = 0
+	density = FALSE
 	idle_power_usage = 75
 	active_power_usage = 300
 	construct_state = /decl/machine_construction/default/panel_closed

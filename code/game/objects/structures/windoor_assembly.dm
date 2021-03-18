@@ -14,7 +14,7 @@ obj/structure/windoor_assembly
 	icon = 'icons/obj/doors/windoor.dmi'
 	icon_state = "l_windoor_assembly01"
 	anchored = FALSE
-	density = 0
+	density = FALSE
 	dir = NORTH
 	w_class = ITEM_SIZE_NORMAL
 

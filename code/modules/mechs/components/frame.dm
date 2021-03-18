@@ -11,7 +11,7 @@
 	desc = "The frame for an exosuit, apparently."
 	icon = 'icons/mecha/mech_parts.dmi'
 	icon_state = "backbone"
-	density = 1
+	density = TRUE
 	pixel_x = -8
 	atom_flags = ATOM_FLAG_CAN_BE_PAINTED
 

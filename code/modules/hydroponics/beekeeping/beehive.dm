@@ -3,7 +3,7 @@
 	icon = 'icons/obj/beekeeping.dmi'
 	icon_state = "beehive-0"
 	desc = "A wooden box designed specifically to house our buzzling buddies. Far more efficient than traditional hives. Just insert a frame and a queen, close it up, and you're good to go!"
-	density = 1
+	density = TRUE
 	anchored = TRUE
 	layer = BELOW_OBJ_LAYER
 
@@ -169,7 +169,7 @@
 	icon = 'icons/obj/virology.dmi'
 	icon_state = "centrifuge"
 	anchored = TRUE
-	density = 1
+	density = TRUE
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0

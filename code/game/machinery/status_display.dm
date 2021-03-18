@@ -15,7 +15,7 @@
 	name = "status display"
 	layer = ABOVE_WINDOW_LAYER
 	anchored = TRUE
-	density = 0
+	density = FALSE
 	idle_power_usage = 10
 	var/mode = 1	// 0 = Blank
 					// 1 = Shuttle timer

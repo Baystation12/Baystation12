@@ -28,7 +28,7 @@
 	icon_state = "beacon"
 
 	anchored = FALSE
-	density = 1
+	density = TRUE
 	stat = 0
 
 	var/target_drop_time

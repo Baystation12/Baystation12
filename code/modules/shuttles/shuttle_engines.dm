@@ -6,7 +6,7 @@
 	name = "shuttle window"
 	icon = 'icons/obj/podwindows.dmi'
 	icon_state = "1"
-	density = 1
+	density = TRUE
 	opacity = 0
 	anchored = TRUE
 
@@ -16,7 +16,7 @@
 
 /obj/structure/shuttle/engine
 	name = "engine"
-	density = 1
+	density = TRUE
 	anchored = TRUE
 
 /obj/structure/shuttle/engine/heater

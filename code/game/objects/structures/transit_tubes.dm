@@ -6,7 +6,7 @@
 /obj/structure/transit_tube
 	icon = 'icons/obj/pipes/transit_tube.dmi'
 	icon_state = "E-W"
-	density = 1
+	density = TRUE
 	layer = ABOVE_HUMAN_LAYER
 	anchored = TRUE
 	var/list/tube_dirs = null
@@ -41,7 +41,7 @@
 	icon_state = "pod"
 	animate_movement = FORWARD_STEPS
 	anchored = TRUE
-	density = 1
+	density = TRUE
 	var/moving = 0
 	var/datum/gas_mixture/air_contents = new()
 

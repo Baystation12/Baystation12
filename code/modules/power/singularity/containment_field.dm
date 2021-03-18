@@ -6,7 +6,7 @@
 	icon = 'icons/obj/singularity.dmi'
 	icon_state = "Contain_F"
 	anchored = TRUE
-	density = 0
+	density = FALSE
 	unacidable = TRUE
 	use_power = POWER_USE_OFF
 	uncreated_component_parts = null

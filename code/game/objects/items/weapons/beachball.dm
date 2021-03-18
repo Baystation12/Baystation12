@@ -3,7 +3,7 @@
 	icon_state = "ball"
 	name = "beach ball"
 	item_state = "beachball"
-	density = 0
+	density = FALSE
 	anchored = FALSE
 	w_class = ITEM_SIZE_HUGE
 	force = 0.0

@@ -2,7 +2,7 @@
 /obj/structure/flora/tree
 	name = "tree"
 	anchored = TRUE
-	density = 1
+	density = TRUE
 	pixel_x = -16
 	layer = ABOVE_HUMAN_LAYER
 

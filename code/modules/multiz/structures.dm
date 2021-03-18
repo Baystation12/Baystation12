@@ -7,7 +7,7 @@
 	desc = "A ladder. You can climb it up and down."
 	icon_state = "ladder01"
 	icon = 'icons/obj/structures.dmi'
-	density = 0
+	density = FALSE
 	opacity = 0
 	anchored = TRUE
 	obj_flags = OBJ_FLAG_NOFALL
@@ -208,7 +208,7 @@
 	name = "stairs"
 	desc = "Stairs leading to another deck.  Not too useful if the gravity goes out."
 	icon = 'icons/obj/stairs.dmi'
-	density = 0
+	density = FALSE
 	opacity = 0
 	anchored = TRUE
 	layer = RUNE_LAYER

@@ -360,7 +360,7 @@
 /mob/living/simple_animal/death(gibbed, deathmessage = "dies!", show_dead_message)
 	icon_state = icon_dead
 	update_icon()
-	density = 0
+	density = FALSE
 	adjustBruteLoss(maxHealth) //Make sure dey dead.
 	walk_to(src,0)
 	return ..(gibbed,deathmessage,show_dead_message)

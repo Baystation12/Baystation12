@@ -20,7 +20,7 @@
 	response_help = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm = "stamps on"
-	density = 0
+	density = FALSE
 	minbodytemp = 223
 	maxbodytemp = 323
 	universal_speak = FALSE

@@ -4,7 +4,7 @@
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "portal"
 	blend_mode = BLEND_SUBTRACT
-	density = 1
+	density = TRUE
 	unacidable = TRUE
 	anchored = TRUE
 	var/boom_time = 1

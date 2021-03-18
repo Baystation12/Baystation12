@@ -114,7 +114,7 @@
 	desc = "The fuel input port of the shuttle. Holds one fuel tank. Use a crowbar to open and close it."
 	icon = 'icons/turf/shuttle.dmi'
 	icon_state = "fuel_port"
-	density = 0
+	density = FALSE
 	anchored = TRUE
 	var/icon_closed = "fuel_port"
 	var/icon_empty = "fuel_port_empty"

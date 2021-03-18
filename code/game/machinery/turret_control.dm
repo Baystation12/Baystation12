@@ -12,7 +12,7 @@
 	icon = 'icons/obj/machines/turret_control.dmi'
 	icon_state = "control_standby"
 	anchored = TRUE
-	density = 0
+	density = FALSE
 	var/enabled = 0
 	var/lethal = 0
 	var/locked = 1

@@ -9,7 +9,7 @@
 	name = "cooker"
 	desc = "You shouldn't be seeing this!"
 	icon = 'icons/obj/cooking_machines.dmi'
-	density = 1
+	density = TRUE
 	anchored = TRUE
 	idle_power_usage = 0
 	active_power_usage = 1000

@@ -4,7 +4,7 @@
 	icon_state = "photocopier"
 	var/insert_anim = "photocopier_animation"
 	anchored = TRUE
-	density = 1
+	density = TRUE
 	idle_power_usage = 30
 	active_power_usage = 200
 	power_channel = EQUIP

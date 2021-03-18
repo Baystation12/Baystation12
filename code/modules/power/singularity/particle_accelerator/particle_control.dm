@@ -7,7 +7,7 @@
 	icon_state = "control_box"
 	reference = "control_box"
 	anchored = FALSE
-	density = 1
+	density = TRUE
 	idle_power_usage = 500
 	active_power_usage = 70000 //70 kW per unit of strength
 	construction_state = 0

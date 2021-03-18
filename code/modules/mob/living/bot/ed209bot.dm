@@ -5,7 +5,7 @@
 	icon_state = "ed2090"
 	attack_state = "ed209-c"
 	layer = MOB_LAYER
-	density = 1
+	density = TRUE
 	health = 100
 	maxHealth = 100
 

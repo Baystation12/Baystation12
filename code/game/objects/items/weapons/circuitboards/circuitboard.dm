@@ -4,7 +4,7 @@
 	icon_state = "id_mod"
 	item_state = "electronic"
 	origin_tech = list(TECH_DATA = 2)
-	density = 0
+	density = FALSE
 	anchored = FALSE
 	w_class = ITEM_SIZE_SMALL
 	obj_flags = OBJ_FLAG_CONDUCTIBLE

@@ -7,7 +7,7 @@
 	idle_power_usage = 100
 	icon_state = "bus"
 	anchored = TRUE
-	density = 1
+	density = TRUE
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0

@@ -48,7 +48,7 @@
 	icon = 'magshield_sprites.dmi'
 	icon_state = "maggen"
 	anchored = TRUE
-	density = 1
+	density = TRUE
 	light_outer_range = 3
 	light_max_bright = 1
 	light_color = "#ffea61"
@@ -124,7 +124,7 @@
 	icon = 'magshield_sprites.dmi'
 	icon_state = "nav_light_green"
 	anchored = TRUE
-	density = 1
+	density = TRUE
 	light_outer_range = 10
 	light_max_bright = 1
 	light_color = "#00ee00"

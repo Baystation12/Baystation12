@@ -22,7 +22,7 @@
 	icon = 'icons/obj/suitstorage.dmi'
 	icon_state = "close"
 	anchored = TRUE
-	density = 1
+	density = TRUE
 	idle_power_usage = 50
 	active_power_usage = 200
 	interact_offline = 1

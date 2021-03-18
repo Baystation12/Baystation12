@@ -14,7 +14,7 @@
 	maxHealth = 60
 	available_maneuvers = list(/decl/maneuver/leap)
 	status_flags = NO_ANTAG
-	density = 0
+	density = FALSE
 
 
 	language = LANGUAGE_ROOTLOCAL

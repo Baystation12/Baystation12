@@ -6,7 +6,7 @@
 	icon = 'icons/obj/vending.dmi'
 	icon_state = "fridge_sci"
 	layer = BELOW_OBJ_LAYER
-	density = 1
+	density = TRUE
 	anchored = TRUE
 	idle_power_usage = 5
 	active_power_usage = 100

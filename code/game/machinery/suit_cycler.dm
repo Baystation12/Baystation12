@@ -3,7 +3,7 @@
 	name = "suit cycler unit"
 	desc = "An industrial machine for painting and refitting voidsuits."
 	anchored = TRUE
-	density = 1
+	density = TRUE
 
 	icon = 'icons/obj/suitstorage.dmi'
 	icon_state = "close"

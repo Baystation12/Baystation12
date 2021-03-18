@@ -13,7 +13,7 @@
 	icon = 'icons/obj/library.dmi'
 	icon_state = "bigscanner"
 	anchored = TRUE
-	density = 1
+	density = TRUE
 	var/obj/item/book/cache		// Last scanned book
 
 /obj/machinery/libraryscanner/attackby(var/obj/O as obj, var/mob/user as mob)
@@ -66,7 +66,7 @@
 	icon = 'icons/obj/library.dmi'
 	icon_state = "binder"
 	anchored = TRUE
-	density = 1
+	density = TRUE
 
 /obj/machinery/bookbinder/attackby(var/obj/O as obj, var/mob/user as mob)
 	if(istype(O, /obj/item/paper))

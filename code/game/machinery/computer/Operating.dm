@@ -2,7 +2,7 @@
 
 /obj/machinery/computer/operating
 	name = "patient monitoring console"
-	density = 1
+	density = TRUE
 	anchored = TRUE
 	icon_keyboard = "med_key"
 	icon_screen = "crew"

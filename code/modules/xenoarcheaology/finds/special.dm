@@ -187,7 +187,7 @@
 	name = "shadow wight"
 	icon = 'icons/mob/mob.dmi'
 	icon_state = "shade"
-	density = 1
+	density = TRUE
 
 /obj/effect/shadow_wight/Initialize()
 	. = ..()

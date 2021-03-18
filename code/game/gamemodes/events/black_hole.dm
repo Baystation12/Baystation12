@@ -5,7 +5,7 @@
 	icon_state = "bhole3"
 	opacity = 1
 	unacidable = TRUE
-	density = 0
+	density = FALSE
 	anchored = TRUE
 
 /obj/effect/bhole/New()

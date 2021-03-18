@@ -6,7 +6,7 @@
 	var/active = 0
 	var/drill_time = 10
 	var/turf/drilling_turf
-	density = 1
+	density = TRUE
 	layer = ABOVE_OBJ_LAYER		//to go over ores
 
 /obj/machinery/giga_drill/physical_attack_hand(mob/user)

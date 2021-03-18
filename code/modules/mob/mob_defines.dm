@@ -1,5 +1,5 @@
 /mob
-	density = 1
+	density = TRUE
 	plane = DEFAULT_PLANE
 	layer = MOB_LAYER
 

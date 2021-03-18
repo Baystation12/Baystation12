@@ -9,7 +9,7 @@
 
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE | ATOM_FLAG_CAN_BE_PAINTED
 	anchored = TRUE
-	density = 1
+	density = TRUE
 	throwpass = 1
 	layer = TABLE_LAYER
 

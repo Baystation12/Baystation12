@@ -4,7 +4,7 @@
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "xenoarch_console"
 	anchored = 1
-	density = 1
+	density = TRUE
 	var/scan_in_progress = 0
 	var/scan_num = 0
 	var/obj/scanned_obj

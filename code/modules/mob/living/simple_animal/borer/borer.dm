@@ -23,7 +23,7 @@
 	holder_type = /obj/item/holder/borer
 	mob_size = MOB_SMALL
 	can_escape = TRUE
-	density = 0
+	density = FALSE
 
 	bleed_colour = "#816e12"
 

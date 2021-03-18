@@ -108,7 +108,7 @@
 	strength = 8
 	anchored = FALSE
 	base_state = "pflash"
-	density = 1
+	density = TRUE
 
 /obj/machinery/flasher/portable/HasProximity(atom/movable/AM as mob|obj)
 	if(!anchored || disable || last_flash && world.time < last_flash + 150)

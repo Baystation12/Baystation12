@@ -4,7 +4,7 @@
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "droppod_door_closed"
 	anchored = TRUE
-	density = 1
+	density = TRUE
 	opacity = 1
 	layer = ABOVE_DOOR_LAYER
 	var/deploying

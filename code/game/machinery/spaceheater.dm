@@ -1,7 +1,7 @@
 /obj/machinery/space_heater
 	use_power = POWER_USE_OFF
 	anchored = FALSE
-	density = 1
+	density = TRUE
 	icon = 'icons/obj/atmos.dmi'
 	icon_state = "sheater-off"
 	name = "space heater"

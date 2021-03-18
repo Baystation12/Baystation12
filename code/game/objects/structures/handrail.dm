@@ -3,7 +3,7 @@
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "handrail"
 	desc = "A safety railing with buckles to secure yourself to when floor isn't stable enough."
-	density = 0
+	density = FALSE
 	anchored = TRUE
 	can_buckle = 1
 

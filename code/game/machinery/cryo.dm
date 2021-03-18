@@ -4,7 +4,7 @@
 	name = "cryo cell"
 	icon = 'icons/obj/cryogenics.dmi' // map only
 	icon_state = "pod_preview"
-	density = 1
+	density = TRUE
 	anchored = TRUE
 	interact_offline = 1
 	layer = ABOVE_HUMAN_LAYER

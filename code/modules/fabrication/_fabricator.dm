@@ -3,7 +3,7 @@
 	desc = "It produces common day to day items from a variety of materials."
 	icon = 'icons/obj/machines/fabricators/autolathe.dmi'
 	icon_state = "autolathe"
-	density = 1
+	density = TRUE
 	anchored = TRUE
 	idle_power_usage = 10
 	active_power_usage = 2000

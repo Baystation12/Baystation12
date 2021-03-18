@@ -4,7 +4,7 @@
 	icon = 'icons/obj/pit.dmi'
 	icon_state = "pit1"
 	blend_mode = BLEND_MULTIPLY
-	density = 0
+	density = FALSE
 	anchored = TRUE
 	var/open = 1
 

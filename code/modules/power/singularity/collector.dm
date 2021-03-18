@@ -7,7 +7,7 @@ var/global/list/rad_collectors = list()
 	icon = 'icons/obj/machines/rad_collector.dmi'
 	icon_state = "ca"
 	anchored = FALSE
-	density = 1
+	density = TRUE
 	req_access = list(access_engine_equip)
 	var/obj/item/tank/phoron/P = null
 

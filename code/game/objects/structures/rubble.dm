@@ -5,7 +5,7 @@
 	icon_state = "base"
 	appearance_flags = PIXEL_SCALE
 	opacity = 1
-	density = 1
+	density = TRUE
 	anchored = TRUE
 
 	var/list/loot = list(/obj/item/cell,/obj/item/stack/material/iron,/obj/item/stack/material/rods)

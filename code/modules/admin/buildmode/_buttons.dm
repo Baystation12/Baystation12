@@ -1,5 +1,5 @@
 /obj/effect/bmode
-	density = 1
+	density = TRUE
 	anchored = TRUE
 	plane = HUD_PLANE
 	layer = HUD_BASE_LAYER

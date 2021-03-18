@@ -3,8 +3,8 @@
 	desc = "An immense, standalone touchscreen on a swiveling base, equipped with phased array speakers. Embossed on one corner of the ultrathin bezel is the brand name, 'Leitmotif Enterprise Edition'."
 	icon = 'icons/obj/jukebox_new.dmi'
 	icon_state = "jukebox3"
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 	power_channel = EQUIP
 	idle_power_usage = 10
 	active_power_usage = 100

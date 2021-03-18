@@ -2,7 +2,7 @@
 	icon = 'icons/obj/decals.dmi'
 	anchored = TRUE
 	opacity = 0
-	density = 0
+	density = FALSE
 	layer = ABOVE_WINDOW_LAYER
 	w_class = ITEM_SIZE_NORMAL
 

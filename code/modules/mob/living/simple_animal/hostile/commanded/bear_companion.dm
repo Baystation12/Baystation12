@@ -10,7 +10,7 @@
 	health = 75
 	maxHealth = 75
 
-	density = 1
+	density = TRUE
 
 	natural_weapon = /obj/item/natural_weapon/claws
 	can_escape = TRUE

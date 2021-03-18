@@ -3,7 +3,7 @@
 	desc = "A mysterious gateway built by unknown hands, it allows for faster than light travel to far-flung locations."
 	icon = 'icons/obj/machines/gateway.dmi'
 	icon_state = "off"
-	density = 1
+	density = TRUE
 	anchored = TRUE
 	var/active = 0
 
@@ -24,7 +24,7 @@
 
 //this is da important part wot makes things go
 /obj/machinery/gateway/centerstation
-	density = 1
+	density = TRUE
 	icon_state = "offcenter"
 
 	//warping vars
@@ -136,7 +136,7 @@ obj/machinery/gateway/centerstation/Process()
 
 
 /obj/machinery/gateway/centeraway
-	density = 1
+	density = TRUE
 	icon_state = "offcenter"
 	use_power = POWER_USE_OFF
 	var/calibrated = 1

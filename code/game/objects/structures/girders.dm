@@ -1,7 +1,7 @@
 /obj/structure/girder
 	icon_state = "girder"
 	anchored = TRUE
-	density = 1
+	density = TRUE
 	layer = BELOW_OBJ_LAYER
 	w_class = ITEM_SIZE_NO_CONTAINER
 	var/state = 0

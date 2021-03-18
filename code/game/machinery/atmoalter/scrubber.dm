@@ -3,7 +3,7 @@
 
 	icon = 'icons/obj/atmos.dmi'
 	icon_state = "pscrubber:0"
-	density = 1
+	density = TRUE
 	w_class = ITEM_SIZE_NORMAL
 	base_type = /obj/machinery/portable_atmospherics/powered/scrubber
 	var/volume_rate = 800

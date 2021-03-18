@@ -7,7 +7,7 @@ var/list/mining_floors = list()
 	icon = 'icons/turf/walls.dmi'
 	icon_state = "rock-dark"
 	blocks_air = 1
-	density = 1
+	density = TRUE
 	opacity = 1
 
 /turf/simulated/mineral //wall piece
@@ -16,7 +16,7 @@ var/list/mining_floors = list()
 	icon_state = "rock"
 	initial_gas = null
 	opacity = 1
-	density = 1
+	density = TRUE
 	blocks_air = 1
 	temperature = T0C
 	color = COLOR_ASTEROID_ROCK

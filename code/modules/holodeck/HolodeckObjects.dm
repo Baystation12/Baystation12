@@ -300,7 +300,7 @@
 	icon = 'icons/obj/basketball.dmi'
 	icon_state = "hoop"
 	anchored = TRUE
-	density = 1
+	density = TRUE
 	throwpass = 1
 
 /obj/structure/holohoop/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
@@ -332,7 +332,7 @@
 	desc = "Bullshit, you can be mine!"
 	icon = 'icons/obj/basketball.dmi'
 	icon_state = "volleynet_mid"
-	density = 1
+	density = TRUE
 	anchored = TRUE
 	layer = TABLE_LAYER
 	throwpass = 1

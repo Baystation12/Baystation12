@@ -260,7 +260,7 @@
 	icon_state = "smoke"
 	color = "#ff0000"
 	anchored = TRUE
-	density = 1
+	density = TRUE
 	unacidable = TRUE
 	var/obj/effect/rune/wall/rune
 	var/health

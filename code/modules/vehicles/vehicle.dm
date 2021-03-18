@@ -8,7 +8,7 @@
 	name = "vehicle"
 	icon = 'icons/obj/vehicles.dmi'
 	layer = ABOVE_HUMAN_LAYER
-	density = 1
+	density = TRUE
 	anchored = TRUE
 	animate_movement=1
 	light_outer_range = 3

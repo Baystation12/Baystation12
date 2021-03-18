@@ -25,7 +25,7 @@
 /obj/effect/dead_plant
 	anchored = TRUE
 	opacity = 0
-	density = 0
+	density = FALSE
 	color = DEAD_PLANT_COLOUR
 
 /obj/effect/dead_plant/attack_hand()

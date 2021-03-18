@@ -12,7 +12,7 @@
 	light_color = "#ffcc33"
 
 	//computer stuff
-	density = 1
+	density = TRUE
 	anchored = TRUE
 	var/alerting = 0
 	idle_power_usage = 300

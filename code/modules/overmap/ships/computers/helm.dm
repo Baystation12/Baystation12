@@ -272,7 +272,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 
 /obj/machinery/computer/ship/navigation/telescreen	//little hacky but it's only used on one ship so it should be okay
 	icon_state = "tele_nav"
-	density = 0
+	density = FALSE
 
 /obj/machinery/computer/ship/navigation/telescreen/on_update_icon()
 	if(reason_broken & MACHINE_BROKEN_NO_PARTS || stat & NOPOWER || stat & BROKEN)

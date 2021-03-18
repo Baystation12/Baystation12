@@ -137,7 +137,7 @@
 	icon_living = "yithian"
 	icon_dead = "yithian_dead"
 	mob_size = MOB_TINY
-	density = 0
+	density = FALSE
 
 /mob/living/simple_animal/tindalos
 	name = "tindalos"
@@ -146,7 +146,7 @@
 	icon_living = "tindalos"
 	icon_dead = "tindalos_dead"
 	mob_size = MOB_TINY
-	density = 0
+	density = FALSE
 
 /mob/living/simple_animal/thinbug
 	name = "taki"
@@ -157,7 +157,7 @@
 	speak_chance = 1
 	emote_hear = list("scratches the ground","chitters")
 	mob_size = MOB_MINISCULE
-	density = 0
+	density = FALSE
 
 /mob/living/simple_animal/hostile/retaliate/royalcrab
 	name = "cragenoy"

@@ -6,7 +6,7 @@
 	desc = "Cools gas when connected to a pipe network."
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "freezer_0"
-	density = 1
+	density = TRUE
 	anchored = TRUE
 	use_power = POWER_USE_OFF
 	idle_power_usage = 5			// 5 Watts for thermostat related circuitry

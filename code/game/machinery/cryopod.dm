@@ -13,7 +13,7 @@
 	desc = "An interface between crew and the cryogenic storage oversight systems."
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "cellconsole"
-	density = 0
+	density = FALSE
 	interact_offline = 1
 	var/mode = null
 
@@ -137,7 +137,7 @@
 	desc = "A man-sized pod for entering suspended animation."
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "body_scanner_0"
-	density = 1
+	density = TRUE
 	anchored = TRUE
 	dir = WEST
 
@@ -592,7 +592,7 @@
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "broken_cryo"
 	anchored = TRUE
-	density = 1
+	density = TRUE
 	var/closed = 1
 	var/busy = 0
 	var/remains_type = /obj/item/remains/human

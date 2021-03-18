@@ -13,7 +13,7 @@
 	desc = "A large cabinet with drawers."
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "filingcabinet"
-	density = 1
+	density = TRUE
 	anchored = TRUE
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 	obj_flags = OBJ_FLAG_ANCHORABLE
@@ -32,7 +32,7 @@
 	name = "wall-mounted filing cabinet"
 	desc = "A filing cabinet installed into a cavity in the wall to save space. Wow!"
 	icon_state = "wallcabinet"
-	density = 0
+	density = FALSE
 	obj_flags = 0
 
 

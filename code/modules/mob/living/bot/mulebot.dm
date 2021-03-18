@@ -14,7 +14,7 @@
 	icon_state = "mulebot0"
 	layer = MOB_LAYER
 	anchored = TRUE
-	density = 1
+	density = TRUE
 	health = 150
 	maxHealth = 150
 	mob_bump_flag = HEAVY

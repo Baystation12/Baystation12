@@ -8,7 +8,7 @@
 	maxHealth = 100
 	natural_weapon = /obj/item/natural_weapon/bite/strong
 	faction = MOB_FACTION_NEUTRAL
-	density = 0
+	density = FALSE
 	stop_automated_movement = 1
 	wander = 0
 	anchored = TRUE

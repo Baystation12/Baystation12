@@ -3,7 +3,7 @@
 	desc = "For those documents you don't want seen."
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "papershredder0"
-	density = 1
+	density = TRUE
 	anchored = TRUE
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 	obj_flags = OBJ_FLAG_ANCHORABLE
