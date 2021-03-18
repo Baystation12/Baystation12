@@ -31,6 +31,11 @@
 	if(message_mode)
 		if(message_mode == "general")
 			message_mode = null
+		if(message_mode == "intercom")
+			for(var/obj/item/device/radio/I in view(1))
+				if(I.intercom_handling)
+					I.talk_into(src, message, null, verb, speaking)
+					used_radios += I
 		return silicon_radio.talk_into(src,message,message_mode,verb,speaking)
 
 /mob/living/silicon/say_quote(var/text)
