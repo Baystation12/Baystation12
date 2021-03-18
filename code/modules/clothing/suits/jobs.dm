@@ -166,6 +166,7 @@
 	icon_closed = "highvis"
 	blood_overlay_type = "coat"
 	body_parts_covered = UPPER_TORSO|ARMS
+	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
 
 //Lawyer
 /obj/item/clothing/suit/storage/toggle/suit
