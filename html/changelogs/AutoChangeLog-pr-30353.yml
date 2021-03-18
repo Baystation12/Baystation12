@@ -1,0 +1,4 @@
+author: "Ilysen"
+delete-after: True
+changes: 
+  - bugfix: "Admin-sent faxes no longer open the fax editing menu when you finish writing on them."
