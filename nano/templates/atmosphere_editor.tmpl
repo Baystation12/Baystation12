@@ -1,0 +1,62 @@
+<div style="min-width: 480px">
+	<h3>{{:data.title}}</h3>
+
+	<div class="item" style="padding-top: 10px">
+
+		<div class="itemLabel">
+			Mode:
+		</div>
+
+		<div class="itemContent">
+			{{:helper.link(data.mode, null, {'change_mode' : '1'}, null, null)}}
+		</div>
+
+		<div class="itemLabel">
+			Total Moles:
+		</div>
+
+		<div class="itemContent">
+			{{:helper.link(data.total_moles, null, {'moles_total' : '1'}, null, null)}}
+		</div>
+
+		<div class="itemLabel">
+			Temperature:
+		</div>
+
+		<div class="itemContent">
+			{{:helper.link(data.temperature, null, {'temperature' : '1'}, null, null)}}
+		</div>
+
+		<div class="itemLabel">
+			Volume:
+		</div>
+
+		<div class="itemContent">
+			{{:data.volume_total}}
+		</div>
+
+		<div class="itemLabel">
+			Gases:
+		</div>
+		<div class="item">
+			{{props data.gases :value :index}}
+				<div class="itemLabel">
+					{{:index}}
+				</div>
+				<div class="itemContent">
+					{{:helper.link(value, null, {'modify_gas' : index}, null, null)}}
+				</div>
+			{{/for}}
+			{{:helper.link('Add Gas', null, {'add_gas' : '1'}, null, null)}}
+			{{:helper.link('Remove Gas', null, {'remove_gas' : '1'}, null, null)}}
+			<br>
+		</div>
+
+		<div class="itemLabel">
+			Predefined Atmospheres:
+
+		<div class="item">
+			{{:helper.link('O2/N2 STANDARD', null, {'set_predefined_atmos' : 'o2n2_standard'}, null)}}
+		</div>
+	</div>
+</div>
