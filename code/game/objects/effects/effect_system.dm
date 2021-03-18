@@ -242,8 +242,7 @@ steam.start() -- spawns the effect
 	if (M.coughedtime != 1)
 		M.coughedtime = 1
 		M.emote("cough")
-		spawn ( 20 )
-			M.coughedtime = 0
+		addtimer(CALLBACK(M, /mob/living/carbon/proc/clear_coughedtime), 2 SECONDS)
 
 /obj/effect/effect/smoke/bad/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1
@@ -271,8 +270,7 @@ steam.start() -- spawns the effect
 	if (M.coughedtime != 1)
 		M.coughedtime = 1
 		M.emote("cough")
-		spawn ( 20 )
-			M.coughedtime = 0
+		addtimer(CALLBACK(M, /mob/living/carbon/proc/clear_coughedtime), 2 SECONDS)
 /////////////////////////////////////////////
 // Mustard Gas
 /////////////////////////////////////////////
@@ -297,8 +295,7 @@ steam.start() -- spawns the effect
 	if (R.coughedtime != 1)
 		R.coughedtime = 1
 		R.emote("gasp")
-		spawn (20)
-			R.coughedtime = 0
+		addtimer(CALLBACK(R, /mob/living/carbon/proc/clear_coughedtime), 2 SECONDS)
 	R.updatehealth()
 	return
 

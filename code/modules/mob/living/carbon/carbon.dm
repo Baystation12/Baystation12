@@ -81,6 +81,9 @@
 		visible_message(SPAN_DANGER("\The [M] bursts out of \the [src]!"))
 	..()
 
+/mob/living/carbon/proc/clear_coughedtime()
+	coughedtime = 0
+
 /mob/living/carbon/attack_hand(mob/M as mob)
 	if(!istype(M, /mob/living/carbon)) return
 	if (ishuman(M))

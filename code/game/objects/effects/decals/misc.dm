@@ -7,6 +7,10 @@
 	anchored = TRUE
 	mouse_opacity = 0
 
+/obj/effect/decal/point/Initialize()
+	. = ..()
+	addtimer(CALLBACK(null, /proc/qdel, src), 2 SECONDS)
+
 // Used for spray that you spray at walls, tables, hydrovats etc
 /obj/effect/decal/spraystill
 	density = FALSE

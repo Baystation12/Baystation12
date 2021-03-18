@@ -356,10 +356,6 @@
 
 	var/obj/P = new /obj/effect/decal/point(tile)
 	P.set_invisibility(invisibility)
-	spawn (20)
-		if(P)
-			qdel(P)	// qdel
-
 	face_atom(A)
 	return 1
 

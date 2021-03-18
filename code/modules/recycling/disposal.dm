@@ -665,8 +665,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		dirs = list( direction, turn(direction, -45), turn(direction, 45))
 	else
 		dirs = GLOB.alldirs.Copy()
-
-	src.streak(dirs)
+	addtimer(CALLBACK(src, .proc/streak, dirs), 0)
 
 /obj/effect/decal/cleanable/blood/gibs/robot/pipe_eject(var/direction)
 	var/list/dirs
@@ -674,5 +673,4 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		dirs = list( direction, turn(direction, -45), turn(direction, 45))
 	else
 		dirs = GLOB.alldirs.Copy()
-
-	src.streak(dirs)
+	addtimer(CALLBACK(src, .proc/streak, dirs), 0)
