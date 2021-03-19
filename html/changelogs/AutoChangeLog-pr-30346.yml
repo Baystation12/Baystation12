@@ -1,0 +1,6 @@
+author: "Spookerton"
+delete-after: True
+changes: 
+  - tweak: "Emagging a jukebox no longer causes it to airhorn everyone and then explode."
+  - tweak: "Boomboxes don't break on their own anymore, and only do so when EMPd."
+  - tweak: "Boomboxes and headphones share a new simplified jukebox nano interface."
