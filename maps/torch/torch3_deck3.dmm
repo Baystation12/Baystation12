@@ -11175,7 +11175,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/teleporter/thirddeck)
 "zI" = (
-/obj/machinery/teleport/station,
+/obj/machinery/tele_projector,
 /obj/machinery/button/blast_door{
 	id_tag = "teleport3";
 	name = "Third Deck Teleporter Access Shutter Control";
@@ -11185,7 +11185,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/teleporter/thirddeck)
 "zJ" = (
-/obj/machinery/teleport/hub,
+/obj/machinery/tele_pad,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/teleporter/thirddeck)

@@ -19,14 +19,14 @@
 	},
 /area/map_template/rescue_base/base)
 "af" = (
-/obj/machinery/teleport/station,
+/obj/machinery/tele_projector,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "ag" = (
-/obj/machinery/teleport/hub,
+/obj/machinery/tele_pad,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"

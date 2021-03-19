@@ -1843,7 +1843,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "fI" = (
-/obj/machinery/teleport/station,
+/obj/machinery/tele_projector,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1;
 	icon_state = "warning"
@@ -1851,7 +1851,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "fJ" = (
-/obj/machinery/teleport/hub,
+/obj/machinery/tele_pad,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1;
 	icon_state = "warning"
@@ -3444,7 +3444,7 @@
 /turf/simulated/floor/airless,
 /area/AIsattele)
 "lD" = (
-/obj/machinery/teleport/station,
+/obj/machinery/tele_projector,
 /obj/structure/cable{
 	d2 = 2;
 	icon_state = "0-2"
@@ -3452,7 +3452,7 @@
 /turf/simulated/floor/airless,
 /area/AIsattele)
 "lE" = (
-/obj/machinery/teleport/hub,
+/obj/machinery/tele_pad,
 /turf/simulated/floor/airless,
 /area/AIsattele)
 "lF" = (

@@ -5083,7 +5083,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/engineering/storage)
 "kG" = (
-/obj/machinery/teleport/hub,
+/obj/machinery/tele_pad,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/teleporter/seconddeck)
 "kH" = (
@@ -5116,7 +5116,7 @@
 	dir = 1;
 	pixel_y = -22
 	},
-/obj/machinery/teleport/station,
+/obj/machinery/tele_projector,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/teleporter/seconddeck)
 "kN" = (

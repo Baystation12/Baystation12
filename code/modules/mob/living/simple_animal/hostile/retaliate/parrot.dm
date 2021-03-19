@@ -76,13 +76,20 @@
 	//Parrots will generally sit on their perch unless something catches their eye.
 	//These vars store their preferred perch and if they don't have one, what they can use as a perch
 	var/obj/parrot_perch = null
-	var/obj/desired_perches = list(/obj/machinery/constructable_frame/computerframe, 		/obj/structure/displaycase, \
-									/obj/structure/filingcabinet,		/obj/machinery/teleport, \
-									/obj/machinery/computer,			/obj/machinery/telecomms, \
-									/obj/machinery/nuclearbomb,			/obj/machinery/particle_accelerator, \
-									/obj/machinery/recharge_station,	/obj/machinery/smartfridge, \
-									/obj/machinery/suit_storage_unit,	/obj/structure/showcase, \
-									/obj/structure/fountain)
+	var/list/desired_perches = list(
+		/obj/machinery/constructable_frame/computerframe,
+		/obj/structure/displaycase,
+		/obj/structure/filingcabinet,
+		/obj/machinery/computer,
+		/obj/machinery/telecomms,
+		/obj/machinery/nuclearbomb,
+		/obj/machinery/particle_accelerator,
+		/obj/machinery/recharge_station,
+		/obj/machinery/smartfridge,
+		/obj/machinery/suit_storage_unit,
+		/obj/structure/showcase,
+		/obj/structure/fountain
+	)
 
 	//Parrots are kleptomaniacs. This variable ... stores the item a parrot is holding.
 	var/obj/item/held_item = null
