@@ -91,8 +91,8 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 	var/list/lobby_screens = list('icons/default_lobby.png')    // The list of lobby screen images to pick() from.
 	var/current_lobby_screen
-	var/music_track/lobby_track                     // The track that will play in the lobby screen.
-	var/list/lobby_tracks = list()                  // The list of lobby tracks to pick() from. If left unset will randomly select among all available /music_track subtypes.
+	var/decl/audio/track/lobby_track                     // The track that will play in the lobby screen.
+	var/list/lobby_tracks = list()                  // The list of lobby tracks to pick() from. If left unset will randomly select among all available decl/audio/track subtypes.
 	var/welcome_sound = 'sound/AI/welcome.ogg'		// Sound played on roundstart
 
 	var/default_law_type = /datum/ai_laws/nanotrasen  // The default lawset use by synth units, if not overriden by their laws var.
@@ -231,13 +231,22 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	current_lobby_screen = pick(lobby_screens)
 	game_year = text2num(time2text(world.timeofday, "YYYY")) + DEFAULT_GAME_YEAR_OFFSET
 
-/datum/map/proc/get_lobby_track(var/exclude)
-	var/lobby_track_type
-	if(lobby_tracks.len)
-		lobby_track_type = pickweight(lobby_tracks - exclude)
+
+/datum/map/proc/get_lobby_track(banned)
+	var/path = /decl/audio/track/absconditus
+	var/count = length(lobby_tracks)
+	if (count != 1)
+		var/allowed
+		if (count > 1)
+			allowed = lobby_tracks - banned
+		if (!length(allowed))
+			allowed = subtypesof(/decl/audio/track) - banned
+		if (length(allowed))
+			path = pickweight(allowed)
 	else
-		lobby_track_type = pick(subtypesof(/music_track) - exclude)
-	return decls_repository.get_decl(lobby_track_type)
+		path = lobby_tracks[1]
+	return decls_repository.get_decl(path)
+
 
 /datum/map/proc/setup_config(name, value, filename)
 	switch (name)

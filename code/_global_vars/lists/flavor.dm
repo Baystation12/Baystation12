@@ -73,52 +73,6 @@ GLOBAL_LIST_INIT(numbers_as_words, list("One", "Two", "Three", "Four",
 	"Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen",
 	"Eighteen", "Nineteen"))
 
-GLOBAL_LIST_INIT(music_tracks, list(
-	"80s All Over Again" = /music_track/eighties,
-	"Absconditus" = /music_track/absconditus,
-	"As Far As It Gets" = /music_track/asfarasitgets,
-	"Asteroids" = /music_track/df_theme,
-	"Beyond" = /music_track/ambispace,
-	"Clouds of Fire" = /music_track/clouds_of_fire,
-	"Comet Halley" = /music_track/comet_haley,
-	"Endless Space" = /music_track/endless_space,
-	"every light is blinking at once" = /music_track/elibao,
-	"Fleet Party Theme" = /music_track/one_loop,
-	"Floating" = /music_track/floating,
-	"Human" = /music_track/human,
-	"Hull Ruptre" = /music_track/hull_rupture,
-	"In Orbit" = /music_track/inorbit,
-	"lasers rip apart the bulkhead" = /music_track/lasers,
-	"Marhaba" = /music_track/marhaba,
-	"Martian Cowboy" = /music_track/martiancowboy,
-	"Maschine Klash" = /music_track/digit_one,
-	"Memories of Lysendraa" = /music_track/lysendraa,
-	"Misanthropic Corridors" = /music_track/misanthropic_corridors,
-	"Monument" = /music_track/monument,
-	"Nebula" = /music_track/nebula,
-	"On the Rocks" = /music_track/on_the_rocks,
-	"phoron will make us rich" = /music_track/pwmur,
-	"Please Come Back Any Time" = /music_track/elevator,
-	"Rimward Cruise" = /music_track/rimward_cruise,
-	"Scratch" = /music_track/level3_mod,
-	"Space Oddity" = /music_track/space_oddity,
-	"Stage Three" = /music_track/dilbert,
-	"THUNDERDOME" = /music_track/thunderdome,
-	"Torch: A Light in the Darkness" = /music_track/torch,
-	"Torn" = /music_track/torn,
-	"Treacherous Voyage" = /music_track/treacherous_voyage,
-	"Voidsent" = /music_track/voidsent,
-	"Wake" = /music_track/wake,
-	"Wild Encounters" = /music_track/wildencounters,
-))
-
-/proc/setup_music_tracks(var/list/tracks)
-	. = list()
-	var/track_list = LAZYLEN(tracks) ? tracks : GLOB.music_tracks
-	for(var/track_name in track_list)
-		var/track_path = track_list[track_name]
-		. += new/datum/track(track_name, track_path)
-
 GLOBAL_LIST_INIT(possible_cable_colours, SetupCableColors())
 
 /proc/SetupCableColors()

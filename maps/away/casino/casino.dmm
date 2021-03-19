@@ -4136,7 +4136,7 @@
 /turf/simulated/floor/wood,
 /area/casino/casino_private_vip)
 "lj" = (
-/obj/machinery/media/jukebox,
+/obj/machinery/jukebox,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
