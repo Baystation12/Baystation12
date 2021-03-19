@@ -128,7 +128,6 @@
 
 	to_chat(user, "<span class='notice'>Checking skin now...</span>")
 	if(!do_after(user, 1 SECOND, owner))
-		to_chat(user, "<span class='notice'>You must stand still to check [owner]'s skin for abnormalities.</span>")
 		return
 
 	var/list/badness = list()
@@ -144,7 +143,6 @@
 
 	to_chat(user, "<span class='notice'>Checking bones now...</span>")
 	if(!do_after(user, 1 SECOND, owner))
-		to_chat(user, "<span class='notice'>You must stand still to feel [src] for fractures.</span>")
 		return
 
 	if(status & ORGAN_BROKEN)

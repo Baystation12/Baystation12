@@ -334,7 +334,6 @@
 			to_chat(D, "<span class='danger'>You begin decompiling [M].</span>")
 
 			if(!do_after(D,50,M))
-				to_chat(D, "<span class='danger'>You need to remain still while decompiling such a large object.</span>")
 				return
 
 			if(!M || !D) return
@@ -404,7 +403,7 @@
 				to_chat(user, SPAN_NOTICE("The amount of rods is too high to fit into your decompiler."))
 				continue
 			if(metal)
-				metal.add_charge(500*amt)				
+				metal.add_charge(500*amt)
 		else if(istype(W,/obj/item/material/shard))
 			if(glass)
 				glass.add_charge(1000)

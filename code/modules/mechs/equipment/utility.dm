@@ -470,7 +470,6 @@
 		blind_message = SPAN_WARNING("You hear a large motor whirring.")
 	)
 	if (!do_after(owner, delay, target, DO_DEFAULT & ~DO_USER_CAN_TURN))
-		to_chat(user, SPAN_WARNING("You must stay still while \the [src] is running."))
 		return
 	if (src != owner.selected_system)
 		to_chat(user, SPAN_WARNING("You must keep \the [src] selected to use it."))
