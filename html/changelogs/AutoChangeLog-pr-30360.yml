@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - maptweak: "The crashed survivor pod's fuel tank has been moved to a less exposed area so it stops being shot randomly by mobs, events, and security."
