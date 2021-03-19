@@ -1,0 +1,5 @@
+author: "Spookerton"
+delete-after: True
+changes: 
+  - tweak: "Teleporters are only configured by their console. No more projector clicking."
+  - tweak: "Teleporters can be reconnected if they get trashed but you have the bits."
