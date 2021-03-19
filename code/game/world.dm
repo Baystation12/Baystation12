@@ -110,7 +110,8 @@ GLOBAL_VAR(href_logfile)
 
 GLOBAL_LIST_EMPTY(world_topic_throttle)
 GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
-#define SET_THROTTLE(TIME, REASON) throttle[1] = world.timeofday + (TIME); throttle[2] = (REASON);
+#define SET_THROTTLE(TIME, REASON) throttle[1] = base_throttle + (TIME); throttle[2] = (REASON);
+#define THROTTLE_MAX_BURST 15 SECONDS
 
 /world/Topic(T, addr, master, key)
 	to_file(diary, "TOPIC: \"[T]\", from:[addr], master:[master], key:[key][log_end]")
@@ -122,8 +123,10 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 	var/list/throttle = GLOB.world_topic_throttle[addr]
 	if (!throttle)
 		GLOB.world_topic_throttle[addr] = throttle = list(0, null)
-	else if (throttle[1] && throttle[1] > world.timeofday)
+	else if (throttle[1] && throttle[1] > world.timeofday + THROTTLE_MAX_BURST)
 		return throttle[2] ? "Throttled ([throttle[2]])" : "Throttled"
+
+	var/base_throttle = max(throttle[1], world.timeofday)
 	SET_THROTTLE(3 SECONDS, null)
 
 	/* * * * * * * *
