@@ -9,7 +9,7 @@
 	effect_type = pick(EFFECT_PARTICLE, EFFECT_ORGANIC)
 
 /datum/artifact_effect/radiate/DoEffectTouch(var/mob/living/user)
-	if(user)
+	if(istype(user))
 		user.apply_damage(radiation_strength * 2,IRRADIATE, damage_flags = DAM_DISPERSED)
 		user.updatehealth()
 		return 1

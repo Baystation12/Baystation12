@@ -4,7 +4,8 @@
 	var/list/teleporting = list() //mobs waiting to be teleported
 
 /datum/artifact_effect/teleport/DoEffectTouch(var/mob/user)
-	try_teleport(user, get_turf(holder))
+	if (istype(user))
+		try_teleport(user, get_turf(holder))
 
 /datum/artifact_effect/teleport/DoEffectAura()
 	if(holder)
