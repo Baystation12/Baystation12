@@ -1,0 +1,4 @@
+author: Lorwp
+delete-after: true
+changes:
+  - tweak: New changelog generation method
