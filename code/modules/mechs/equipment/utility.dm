@@ -210,10 +210,20 @@
 /obj/item/mech_equipment/light/attack_self(var/mob/user)
 	. = ..()
 	if(.)
-		on = !on
+		toggle()
 		to_chat(user, "You switch \the [src] [on ? "on" : "off"].")
-		update_icon()
-		owner.update_icon()
+
+/obj/item/mech_equipment/light/proc/toggle()
+	on = !on
+	update_icon()
+	owner.update_icon()
+	active = on
+	passive_power_use = on ? 0.1 KILOWATTS : 0
+
+/obj/item/mech_equipment/light/deactivate()
+	if(on)
+		toggle()
+	..()
 
 /obj/item/mech_equipment/light/on_update_icon()
 	if(on)
