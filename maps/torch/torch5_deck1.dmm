@@ -28562,6 +28562,7 @@
 /area/rnd/xenobiology)
 "sOd" = (
 /obj/structure/table/steel_reinforced,
+/obj/item/storage/slide_projector,
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
 "sOo" = (
