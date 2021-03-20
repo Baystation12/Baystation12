@@ -44,6 +44,10 @@ exactly 0 "tag uses" '\stag = ' -P '**/*.dmm'
 exactly 233 "/global/ or /static/ vars defined" '/(global|static)/' -P
 exactly 4 ".Replace( matches" '\.Replace(_char)?\(' -P
 exactly 5 ".Find( matches" '\.Find(_char)?\(' -P
+exactly 0 "anchored = 0/1" 'anchored\s*=\s*\d' -P
+exactly 0 "density = 0/1" 'density\s*=\s*\d' -P
+exactly 0 "emagged = 0/1" 'emagged\s*=\s*\d' -P
+exactly 0 "simulated = 0/1" 'simulated\s*=\s*\d' -P
 # With the potential exception of << if you increase any of these numbers you're probably doing it wrong
 
 broken_files=0

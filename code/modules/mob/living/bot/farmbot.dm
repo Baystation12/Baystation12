@@ -92,7 +92,7 @@
 		if(user)
 			to_chat(user, "<span class='notice'>You short out [src]'s plant identifier circuits.</span>")
 			ignore_list |= user
-		emagged = 2
+		emagged = TRUE
 		return 1
 
 /mob/living/bot/farmbot/update_icons()

@@ -78,7 +78,7 @@
 /mob/living/bot/floorbot/emag_act(var/remaining_charges, var/mob/user)
 	. = ..()
 	if(!emagged)
-		emagged = 1
+		emagged = TRUE
 		if(user)
 			to_chat(user, "<span class='notice'>The [src] buzzes and beeps.</span>")
 		return 1

@@ -89,10 +89,7 @@
 		return TRUE
 	else if(isWrench(W))
 		if(!suspension_field)
-			if(anchored)
-				anchored = 0
-			else
-				anchored = 1
+			anchored = !anchored
 			to_chat(user, "<span class='info'>You wrench the stabilising legs [anchored ? "into place" : "up against the body"].</span>")
 			if(anchored)
 				desc = "It is resting securely on four stubby legs."
@@ -171,7 +168,7 @@
 /obj/effect/suspension_field
 	name = "energy field"
 	icon = 'icons/effects/effects.dmi'
-	anchored = 1
+	anchored = TRUE
 	density = TRUE
 
 /obj/effect/suspension_field/Destroy()

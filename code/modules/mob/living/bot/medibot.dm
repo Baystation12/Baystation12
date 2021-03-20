@@ -194,7 +194,7 @@
 		flick("medibot_spark", src)
 		target = null
 		busy = 0
-		emagged = 1
+		emagged = TRUE
 		on = 1
 		update_icons()
 		. = 1

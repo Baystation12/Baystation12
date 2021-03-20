@@ -18,7 +18,7 @@
 	var/on = 1
 	var/open = 0
 	var/locked = 1
-	var/emagged = 0
+	var/emagged = FALSE
 	var/light_strength = 3
 	var/busy = 0
 
