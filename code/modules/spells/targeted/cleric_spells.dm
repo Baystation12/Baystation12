@@ -200,7 +200,7 @@
 	icon_state = "rift"
 	unacidable = TRUE
 	anchored = TRUE
-	density = 0
+	density = FALSE
 
 /obj/effect/rift/Destroy()
 	for(var/o in contents)

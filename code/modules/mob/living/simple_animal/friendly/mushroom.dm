@@ -20,7 +20,7 @@
 	bone_amount =   0
 	skin_material = null 
 	skin_amount =   null
-	density = 0
+	density = FALSE
 
 	var/datum/seed/seed
 	var/harvest_time

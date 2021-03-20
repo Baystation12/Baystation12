@@ -4,7 +4,7 @@
 	desc = "A SalonPro Nano-Mirror(TM) mirror! The leading brand in hair salon products, utilizing nano-machinery to style your hair just right. The black box inside warns against attempting to release the nanomachines."
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "mirror"
-	density = 0
+	density = FALSE
 	anchored = TRUE
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = DEFAULT_LARGEBOX_STORAGE

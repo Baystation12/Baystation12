@@ -7,7 +7,7 @@
 	icon = 'icons/obj/machines/power/fusion_core.dmi'
 	icon_state = "core0"
 	layer = ABOVE_HUMAN_LAYER
-	density = 1
+	density = TRUE
 	use_power = POWER_USE_IDLE
 	idle_power_usage = 50
 	active_power_usage = 500 //multiplied by field strength

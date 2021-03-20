@@ -73,7 +73,7 @@
 	icon_state = "tiny"
 	icon_keyboard = "tiny_keyboard"
 	icon_screen = "lift"
-	density = 0
+	density = FALSE
 
 /obj/effect/shuttle_landmark/lift/top
 	name = "Top Deck"

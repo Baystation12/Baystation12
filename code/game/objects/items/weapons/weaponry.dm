@@ -91,7 +91,7 @@
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "energynet"
 
-	density = 1
+	density = TRUE
 	opacity = 0
 	mouse_opacity = 1
 	anchored = TRUE

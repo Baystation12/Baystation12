@@ -11,7 +11,7 @@
 	//directwired = 0
 	var/icon_state_on = "bbox_on"
 	var/icon_state_off = "bbox_off"
-	density = 1
+	density = TRUE
 	anchored = TRUE
 	var/on = 0
 	var/busy = 0

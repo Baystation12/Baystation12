@@ -5,7 +5,7 @@
 	icon_state = "shield_normal"
 	anchored = TRUE
 	layer = ABOVE_HUMAN_LAYER
-	density = 1
+	density = TRUE
 	invisibility = 0
 	var/obj/machinery/power/shield_generator/gen = null
 	var/disabled_for = 0

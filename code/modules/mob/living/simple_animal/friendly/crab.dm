@@ -22,7 +22,7 @@
 	natural_armor = list(
 		melee = ARMOR_MELEE_KNIVES
 	)
-	density = 0
+	density = FALSE
 
 	meat_amount =   3
 	skin_material = MATERIAL_SKIN_CHITIN

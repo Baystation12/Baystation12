@@ -3,7 +3,7 @@
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "glassbox"
 	desc = "A display case for prized possessions. It taunts you to kick it."
-	density = 1
+	density = TRUE
 	anchored = TRUE
 	unacidable = TRUE
 	alpha = 150

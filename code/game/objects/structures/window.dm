@@ -2,7 +2,7 @@
 	name = "window"
 	desc = "A window."
 	icon = 'icons/obj/window.dmi'
-	density = 1
+	density = TRUE
 	w_class = ITEM_SIZE_NORMAL
 
 	layer = SIDE_WINDOW_LAYER

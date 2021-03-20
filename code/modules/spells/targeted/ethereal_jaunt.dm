@@ -82,7 +82,7 @@
 	icon_state = "nothing"
 	var/canmove = 1
 	var/reappearing = 0
-	density = 0
+	density = FALSE
 	anchored = TRUE
 	var/turf/last_valid_turf
 

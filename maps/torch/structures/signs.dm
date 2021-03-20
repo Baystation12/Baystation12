@@ -78,7 +78,7 @@
 	desc = "A large stone slab, engraved with the names of uniformed personnel who gave their lives for scientific progress. Not a list you'd want to make. Add the dog tags of the fallen to the monument to memorialize them."
 	icon = 'maps/torch/icons/obj/solgov-64x.dmi'
 	icon_state = "memorial"
-	density = 1
+	density = TRUE
 	anchored = TRUE
 	pixel_x = -16
 	pixel_y = -16

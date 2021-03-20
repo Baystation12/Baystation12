@@ -7,7 +7,7 @@
 	icon = 'icons/obj/pipes/disposal.dmi'
 	icon_state = "conpipe-s"
 	anchored = FALSE
-	density = 0
+	density = FALSE
 	matter = list(MATERIAL_STEEL = 1850)
 	level = 2
 	obj_flags = OBJ_FLAG_ROTATABLE

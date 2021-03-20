@@ -268,7 +268,7 @@ var/list/airlock_overlays = list()
 	frequency = 1379
 
 /obj/machinery/door/airlock/external/bolted_open
-	density = 0
+	density = FALSE
 	locked = 1
 	opacity = 0
 
@@ -285,7 +285,7 @@ var/list/airlock_overlays = list()
 	frequency = 1379
 
 /obj/machinery/door/airlock/external/glass/bolted_open
-	density = 0
+	density = FALSE
 	locked = 1
 	opacity = 0
 

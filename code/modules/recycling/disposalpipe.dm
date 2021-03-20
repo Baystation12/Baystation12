@@ -5,7 +5,7 @@
 	name = "disposal pipe"
 	desc = "An underfloor disposal pipe."
 	anchored = TRUE
-	density = 0
+	density = FALSE
 
 	level = 1			// underfloor only
 	var/dpdir = 0		// bitmask of pipe directions

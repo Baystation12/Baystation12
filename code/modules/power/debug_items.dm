@@ -2,7 +2,7 @@
 	icon = 'icons/obj/power.dmi'
 	icon_state = "tracker"
 	anchored = TRUE
-	density = 1
+	density = TRUE
 	var/show_extended_information = 1	// Set to 0 to disable extra information on examining (for example, when used on admin events)
 
 /obj/machinery/power/debug_items/examine(mob/user)

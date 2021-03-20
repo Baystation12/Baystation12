@@ -3,7 +3,7 @@
 	desc = "It has stubby legs bolted up against it's body for stabilising."
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "suspension2"
-	density = 1
+	density = TRUE
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
@@ -172,7 +172,7 @@
 	name = "energy field"
 	icon = 'icons/effects/effects.dmi'
 	anchored = 1
-	density = 1
+	density = TRUE
 
 /obj/effect/suspension_field/Destroy()
 	for(var/atom/movable/I in src)

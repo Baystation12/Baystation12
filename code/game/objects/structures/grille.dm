@@ -4,7 +4,7 @@
 	icon = 'icons/obj/grille.dmi'
 	icon_state = "grille"
 	color = COLOR_STEEL
-	density = 1
+	density = TRUE
 	anchored = TRUE
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	layer = BELOW_OBJ_LAYER
@@ -245,7 +245,7 @@
 /obj/structure/grille/broken
 	destroyed = 1
 	icon_state = "broken"
-	density = 0
+	density = FALSE
 
 /obj/structure/grille/broken/Initialize()
 	. = ..()

@@ -1,7 +1,7 @@
 var/global/list/empty_playable_ai_cores = list()
 
 /obj/structure/AIcore
-	density = 1
+	density = TRUE
 	anchored = FALSE
 	name = "\improper AI core"
 	icon = 'icons/mob/AI.dmi'

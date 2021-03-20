@@ -8,7 +8,7 @@
 	uncreated_component_parts = null
 	interact_offline = TRUE
 	anchored = TRUE
-	density = 1
+	density = TRUE
 
 	var/charges = 1
 	var/insisting = 0

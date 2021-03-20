@@ -3,7 +3,7 @@
 	name = "barricade"
 	icon_state = "barricade"
 	anchored = TRUE
-	density = 1
+	density = TRUE
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 	layer = ABOVE_WINDOW_LAYER
 

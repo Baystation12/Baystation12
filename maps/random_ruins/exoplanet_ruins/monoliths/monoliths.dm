@@ -13,7 +13,7 @@
 	icon = 'icons/obj/monolith.dmi'
 	icon_state = "jaggy1"
 	layer = ABOVE_HUMAN_LAYER
-	density = 1
+	density = TRUE
 	anchored = TRUE
 	var/active = 0
 

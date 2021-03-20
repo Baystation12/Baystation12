@@ -21,7 +21,7 @@
 	var/stored_energy = 0
 	var/temperature_overlay
 
-	density = 1
+	density = TRUE
 
 /obj/machinery/atmospherics/binary/circulator/Initialize()
 	. = ..()

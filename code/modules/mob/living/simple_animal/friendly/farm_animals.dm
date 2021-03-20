@@ -173,7 +173,7 @@
 	health = 1
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GRILLE
 	mob_size = MOB_MINISCULE
-	density = 0
+	density = FALSE
 
 	meat_type = /obj/item/reagent_containers/food/snacks/meat/chicken
 	meat_amount = 1
@@ -218,7 +218,7 @@ var/global/chicken_count = 0
 	health = 10
 	pass_flags = PASS_FLAG_TABLE
 	mob_size = MOB_SMALL
-	density = 0
+	density = FALSE
 
 	meat_type = /obj/item/reagent_containers/food/snacks/meat/chicken
 	meat_amount = 2

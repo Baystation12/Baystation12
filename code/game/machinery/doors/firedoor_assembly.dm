@@ -5,7 +5,7 @@ obj/structure/firedoor_assembly
 	icon_state = "construction"
 	anchored = FALSE
 	opacity = 0
-	density = 1
+	density = TRUE
 	var/wired = 0
 
 //construction: wrenched > cables > electronics > screwdriver & open

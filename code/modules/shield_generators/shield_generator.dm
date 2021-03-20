@@ -3,7 +3,7 @@
 	desc = "A heavy-duty shield generator and capacitor, capable of generating energy shields at large distances."
 	icon = 'icons/obj/machines/shielding.dmi'
 	icon_state = "generator0"
-	density = 1
+	density = TRUE
 	base_type = /obj/machinery/power/shield_generator
 	construct_state = /decl/machine_construction/default/panel_closed
 	wires = /datum/wires/shield_generator

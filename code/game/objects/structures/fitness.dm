@@ -7,7 +7,7 @@
 	name = "punching bag"
 	desc = "A punching bag."
 	icon_state = "punchingbag"
-	density = 1
+	density = TRUE
 	var/list/hit_message = list("hit", "punch", "kick", "robust")
 
 /obj/structure/fitness/punchingbag/attack_hand(var/mob/living/carbon/human/user)

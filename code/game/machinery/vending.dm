@@ -9,7 +9,7 @@
 	icon_state = "generic"
 	layer = BELOW_OBJ_LAYER
 	anchored = TRUE
-	density = 1
+	density = TRUE
 	obj_flags = OBJ_FLAG_ANCHORABLE | OBJ_FLAG_ROTATABLE
 	clicksound = "button"
 	clickvol = 40
@@ -963,7 +963,7 @@
 	icon_deny = "wallmed-deny"
 	icon_vend = "wallmed-vend"
 	base_type = /obj/machinery/vending/wallmed1
-	density = 0 //It is wall-mounted, and thus, not dense. --Superxpdude
+	density = FALSE //It is wall-mounted, and thus, not dense. --Superxpdude
 	products = list(
 		/obj/item/stack/medical/bruise_pack = 3,
 		/obj/item/stack/medical/ointment = 3,
@@ -982,7 +982,7 @@
 	icon_state = "wallmed"
 	icon_deny = "wallmed-deny"
 	icon_vend = "wallmed-vend"
-	density = 0 //It is wall-mounted, and thus, not dense. --Superxpdude
+	density = FALSE //It is wall-mounted, and thus, not dense. --Superxpdude
 	base_type = /obj/machinery/vending/wallmed2
 	products = list(
 		/obj/item/reagent_containers/hypospray/autoinjector = 5,

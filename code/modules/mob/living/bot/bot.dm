@@ -4,7 +4,7 @@
 	maxHealth = 20
 	icon = 'icons/mob/bot/placeholder.dmi'
 	universal_speak = TRUE
-	density = 0
+	density = FALSE
 
 	meat_type = null
 	meat_amount = 0

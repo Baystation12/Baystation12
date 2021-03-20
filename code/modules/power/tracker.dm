@@ -9,7 +9,7 @@
 	icon = 'icons/obj/power.dmi'
 	icon_state = "tracker"
 	anchored = TRUE
-	density = 1
+	density = TRUE
 
 	var/id = 0
 	var/sun_angle = 0		// sun angle as set by sun datum

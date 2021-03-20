@@ -1,5 +1,5 @@
 /obj/structure/cult
-	density = 1
+	density = TRUE
 	anchored = TRUE
 	icon = 'icons/obj/cult.dmi'
 
@@ -90,7 +90,7 @@
 	desc = "You're pretty sure that abyss is staring back."
 	icon = 'icons/obj/cult.dmi'
 	icon_state = "hole"
-	density = 1
+	density = TRUE
 	unacidable = TRUE
 	anchored = TRUE
 	var/spawnable = null

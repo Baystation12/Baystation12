@@ -15,7 +15,7 @@
 	icon = 'icons/obj/library.dmi'
 	icon_state = "book-0"
 	anchored = TRUE
-	density = 1
+	density = TRUE
 	opacity = 1
 	obj_flags = OBJ_FLAG_ANCHORABLE
 

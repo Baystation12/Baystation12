@@ -19,7 +19,7 @@ field_generator power level display
 	icon = 'icons/obj/machines/field_generator.dmi'
 	icon_state = "Field_Gen"
 	anchored = FALSE
-	density = 1
+	density = TRUE
 	use_power = POWER_USE_OFF
 	var/const/num_power_levels = 6	// Total number of power level icon has
 	var/Varedit_start = 0

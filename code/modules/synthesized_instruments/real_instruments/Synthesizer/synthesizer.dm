@@ -8,7 +8,7 @@
 	desc = "This thing emits shockwaves as it plays. This is not good for your hearing."
 	icon_state = "synthesizer"
 	anchored = TRUE
-	density = 1
+	density = TRUE
 	path = /datum/instrument
 	sound_player = /datum/sound_player/synthesizer
 

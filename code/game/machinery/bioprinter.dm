@@ -8,7 +8,7 @@
 	icon_state = "bioprinter"
 
 	anchored = TRUE
-	density = 1
+	density = TRUE
 	idle_power_usage = 40
 	active_power_usage = 300
 	construct_state = /decl/machine_construction/default/panel_closed

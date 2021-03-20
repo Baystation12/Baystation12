@@ -4,7 +4,7 @@
 	desc = "It's stringy and sticky."
 	icon = 'icons/effects/effects.dmi'
 	anchored = TRUE
-	density = 0
+	density = FALSE
 	var/health = 15
 
 //similar to weeds, but only barfed out by nurses manually

@@ -2,7 +2,7 @@
 	name = "commanded"
 	stance = COMMANDED_STOP
 	natural_weapon = /obj/item/natural_weapon
-	density = 0
+	density = FALSE
 	var/list/command_buffer = list()
 	var/list/known_commands = list("stay", "stop", "attack", "follow")
 	var/mob/master = null //undisputed master. Their commands hold ultimate sway and ultimate power.

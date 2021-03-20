@@ -1,6 +1,6 @@
 /obj/structure/skele_stand
 	name = "hanging skeleton model"
-	density = 1
+	density = TRUE
 	anchored = FALSE
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "hangskele"

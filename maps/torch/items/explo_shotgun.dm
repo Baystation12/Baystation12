@@ -116,7 +116,7 @@
 	desc = "Wall locker holding the boomstick."
 	req_access = list(access_expedition_shuttle_helm)
 	closet_appearance = /decl/closet_appearance/wall/explo_gun
-	density = 0
+	density = FALSE
 	anchored = TRUE
 	wall_mounted = TRUE
 	storage_types = CLOSET_STORAGE_ITEMS

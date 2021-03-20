@@ -8,7 +8,7 @@
 	icon_state = "door1"
 	anchored = TRUE
 	opacity = 1
-	density = 1
+	density = TRUE
 	layer = CLOSED_DOOR_LAYER
 	interact_offline = TRUE
 

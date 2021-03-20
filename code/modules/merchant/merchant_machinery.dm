@@ -4,7 +4,7 @@
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "tele0"
 	anchored = TRUE
-	density = 0
+	density = FALSE
 
 /obj/machinery/merchant_pad/proc/get_target()
 	var/turf/T = get_turf(src)

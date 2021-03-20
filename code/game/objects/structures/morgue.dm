@@ -16,7 +16,7 @@
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "morgue1"
 	dir = EAST
-	density = 1
+	density = TRUE
 	var/obj/structure/m_tray/connected = null
 	anchored = TRUE
 
@@ -133,7 +133,7 @@
 	desc = "Apply corpse before closing."
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "morguet"
-	density = 1
+	density = TRUE
 	layer = BELOW_OBJ_LAYER
 	var/obj/structure/morgue/connected = null
 	anchored = TRUE
@@ -382,7 +382,7 @@
 	desc = "Apply body before burning."
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "cremat"
-	density = 1
+	density = TRUE
 	layer = BELOW_OBJ_LAYER
 	var/obj/structure/crematorium/connected = null
 	anchored = TRUE

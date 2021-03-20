@@ -67,7 +67,7 @@
 	name = "sand"
 	icon = 'icons/obj/quicksand.dmi'
 	icon_state = "intact0"
-	density = 0
+	density = FALSE
 	anchored = TRUE
 	can_buckle = 1
 	buckle_dir = SOUTH

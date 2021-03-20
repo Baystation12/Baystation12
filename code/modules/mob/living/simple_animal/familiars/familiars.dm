@@ -38,7 +38,7 @@
 	natural_weapon = /obj/item/natural_weapon/pincers/strong
 	resistance = 9
 	can_escape = TRUE //snip snip
-	density = 0
+	density = FALSE
 
 /obj/item/natural_weapon/pincers/strong
 	force = 15
@@ -111,7 +111,7 @@
 
 	speak_emote = list("entones")
 	mob_size = MOB_SMALL
-	density = 0
+	density = FALSE
 	health = 25
 	maxHealth = 25
 
@@ -152,7 +152,7 @@
 	maxHealth = 15
 	natural_weapon = /obj/item/natural_weapon/bite/mouse
 	can_escape = TRUE
-	density = 0
+	density = FALSE
 
 	wizardy_spells = list(/spell/aoe_turf/smoke)
 
@@ -178,6 +178,6 @@
 	health = 25
 	maxHealth = 25
 	natural_weapon = /obj/item/natural_weapon/claws/weak
-	density = 0
+	density = FALSE
 
 	wizardy_spells = list(/spell/targeted/subjugation)

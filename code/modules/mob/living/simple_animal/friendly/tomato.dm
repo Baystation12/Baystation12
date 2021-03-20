@@ -14,7 +14,7 @@
 	harm_intent_damage = 5
 	natural_weapon = /obj/item/natural_weapon/bite
 	pass_flags = PASS_FLAG_TABLE
-	density = 0
+	density = FALSE
 
 	meat_type = /obj/item/reagent_containers/food/snacks/tomatomeat
 	bone_material = null

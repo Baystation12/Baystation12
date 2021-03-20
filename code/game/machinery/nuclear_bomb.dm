@@ -5,7 +5,7 @@ var/bomb_set
 	desc = "Uh oh. RUN!"
 	icon = 'icons/obj/nuke.dmi'
 	icon_state = "idle"
-	density = 1
+	density = TRUE
 	use_power = POWER_USE_OFF
 	uncreated_component_parts = null
 	unacidable = TRUE

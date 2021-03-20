@@ -229,7 +229,7 @@ var/list/tape_roll_applications = list()
 
 		var/can_place = 1
 		while (can_place)
-			if(cur.density == 1)
+			if(cur.density)
 				can_place = 0
 			else if (istype(cur, /turf/space))
 				can_place = 0

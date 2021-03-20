@@ -47,7 +47,7 @@
 	icon = 'icons/obj/airlock_machines.dmi'
 	icon_state = "airlock_control_off"
 	power_channel = ENVIRON
-	density = 0
+	density = FALSE
 	unacidable = TRUE
 	var/frequency = 1379
 	var/radio_filter = null

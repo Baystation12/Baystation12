@@ -5,7 +5,7 @@
 	icon = 'icons/obj/forensics.dmi'
 	icon_state = "dnaopen"
 	anchored = TRUE
-	density = 1
+	density = TRUE
 
 	var/obj/item/forensics/swab/bloodsamp = null
 	var/closed = 0

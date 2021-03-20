@@ -17,7 +17,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	icon = 'icons/obj/pipes/disposal.dmi'
 	icon_state = "disposal"
 	anchored = TRUE
-	density = 1
+	density = TRUE
 	var/datum/gas_mixture/air_contents	// internal reservoir
 	var/mode = 1	// item mode 0=off 1=charging 2=charged
 	var/flush = 0	// true if flush handle is pulled
@@ -561,7 +561,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	desc = "An outlet for the pneumatic disposal system."
 	icon = 'icons/obj/pipes/disposal.dmi'
 	icon_state = "outlet"
-	density = 1
+	density = TRUE
 	anchored = TRUE
 	var/active = 0
 	var/turf/target	// this will be where the output objects are 'thrown' to.

@@ -5,7 +5,7 @@
 	icon = 'icons/obj/forensics.dmi'
 	icon_state = "microscope"
 	anchored = TRUE
-	density = 1
+	density = TRUE
 
 	var/obj/item/sample = null
 	var/report_num = 0

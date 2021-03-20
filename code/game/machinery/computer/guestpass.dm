@@ -50,7 +50,7 @@
 	icon_state = "guest"
 	icon_keyboard = null
 	icon_screen = "pass"
-	density = 0
+	density = FALSE
 
 	var/obj/item/card/id/giver
 	var/list/accesses = list()

@@ -6,7 +6,7 @@ var/list/default_material_composition = list(MATERIAL_STEEL = 0, MATERIAL_ALUMIN
 /obj/machinery/r_n_d
 	name = "R&D Device"
 	icon = 'icons/obj/machines/research.dmi'
-	density = 1
+	density = TRUE
 	anchored = TRUE
 	uncreated_component_parts = null
 	stat_immune = 0

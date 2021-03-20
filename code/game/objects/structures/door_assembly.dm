@@ -3,7 +3,7 @@
 	icon = 'icons/obj/doors/station/door.dmi'
 	icon_state = "construction"
 	anchored = FALSE
-	density = 1
+	density = TRUE
 	w_class = ITEM_SIZE_NO_CONTAINER
 	var/state = 0
 	var/base_icon_state = ""

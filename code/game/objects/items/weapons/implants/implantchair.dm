@@ -5,7 +5,7 @@
 	desc = "Used to implant occupants with loyalty implants."
 	icon = 'icons/obj/machines/implantchair.dmi'
 	icon_state = "implantchair"
-	density = 1
+	density = TRUE
 	opacity = 0
 	anchored = TRUE
 

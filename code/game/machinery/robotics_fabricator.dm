@@ -3,7 +3,7 @@
 	desc = "A machine used for construction of robotics and mechs."
 	icon = 'icons/obj/robotics.dmi'
 	icon_state = "fab-idle"
-	density = 1
+	density = TRUE
 	anchored = TRUE
 	idle_power_usage = 20
 	active_power_usage = 5000

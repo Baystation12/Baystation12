@@ -6,7 +6,7 @@
 	icon_state_unpowered = "telescreen"
 	hardware_flag = PROGRAM_TELESCREEN
 	anchored = TRUE
-	density = 0
+	density = FALSE
 	base_idle_power_usage = 75
 	base_active_power_usage = 300
 	max_hardware_size = 2

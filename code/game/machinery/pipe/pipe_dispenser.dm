@@ -2,7 +2,7 @@
 	name = "Pipe Dispenser"
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "pipe_d"
-	density = 1
+	density = TRUE
 	anchored = FALSE
 	stat_immune = NOSCREEN//Doesn't need screen, just input for the parts wanted
 
