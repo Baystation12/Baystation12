@@ -99,19 +99,31 @@
 		return
 	if(prob(80))
 		if(reagents.reagent_list.len > 0)
-			visible_message(SPAN_DANGER("\The [src] shatters from the impact and spills all its contents!"), SPAN_DANGER("You hear the sound of glass shattering!"))
+			visible_message(
+				SPAN_DANGER("\The [src] shatters from the impact and spills all its contents!"),
+				SPAN_DANGER("You hear the sound of glass shattering!")
+			)
 			reagents.splash(hit_atom, reagents.total_volume)
-		else 
-			visible_message(SPAN_DANGER("\The [src] shatters from the impact!"), SPAN_DANGER("You hear the sound of glass shattering!"))
+		else
+			visible_message(
+				SPAN_DANGER("\The [src] shatters from the impact!"),
+				SPAN_DANGER("You hear the sound of glass shattering!")
+			)
 		playsound(src.loc, pick(GLOB.shatter_sound), 100)
 		new /obj/item/material/shard(src.loc)
 		qdel(src)
 	else
 		if (reagents.reagent_list.len > 0)
-			visible_message(SPAN_DANGER("\The [src] bounces and spills all its contents!"), SPAN_WARNING("You hear the sound of glass hitting something."))
+			visible_message(
+				SPAN_DANGER("\The [src] bounces and spills all its contents!"),
+				SPAN_WARNING("You hear the sound of glass hitting something.")
+			)
 			reagents.splash(hit_atom, reagents.total_volume)
 		else
-			visible_message(SPAN_WARNING("\The [src] bounces dangerously. Luckily it didn't break."), SPAN_WARNING("You hear the sound of glass hitting something."))
+			visible_message(
+				SPAN_WARNING("\The [src] bounces dangerously. Luckily it didn't break."),
+				SPAN_WARNING("You hear the sound of glass hitting something.")
+			)
 		playsound(src.loc, "sound/effects/Glasshit.ogg", 50)
 
 /obj/item/reagent_containers/food/drinks/glass2/proc/can_add_extra(obj/item/glass_extra/GE)
@@ -172,7 +184,7 @@
 			underlays += filling
 
 		overlays += over_liquid
-		
+
 	else
 		SetName(custom_name || initial(name))
 		desc = custom_desc || initial(desc)
@@ -199,6 +211,11 @@
 			underlays += I
 		else continue
 		side = "right"
+
+/obj/item/reagent_containers/food/drinks/glass2/afterattack(obj/target, mob/user, proximity)
+	if (!proximity || standard_dispenser_refill(user, target) || standard_pour_into(user, target))
+		return TRUE
+	splashtarget(target, user)
 
 /obj/item/reagent_containers/food/drinks/glass2/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/material/kitchen/utensil/spoon))
