@@ -1228,6 +1228,7 @@
 #include "code\modules\admin\buildmode\_color_pool.dm"
 #include "code\modules\admin\buildmode\_overlay.dm"
 #include "code\modules\admin\buildmode\areas.dm"
+#include "code\modules\admin\buildmode\atmosphere.dm"
 #include "code\modules\admin\buildmode\build.dm"
 #include "code\modules\admin\buildmode\edit.dm"
 #include "code\modules\admin\buildmode\ladders.dm"
