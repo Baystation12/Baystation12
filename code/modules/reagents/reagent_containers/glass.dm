@@ -48,7 +48,7 @@
 	. = ..()
 	if(distance > 2)
 		return
-	
+
 	if(reagents && reagents.reagent_list.len)
 		to_chat(user, "<span class='notice'>It contains [reagents.total_volume] units of liquid.</span>")
 	else
@@ -87,24 +87,42 @@
 		for(var/datum/reagent/R in reagents.reagent_list)
 			user.update_personal_goal(/datum/goal/achievement/specific_object/drink, R.type)
 
-/obj/item/reagent_containers/glass/afterattack(var/obj/target, var/mob/user, var/proximity)
-	if(!is_open_container() || !proximity) //Is the container open & are they next to whatever they're clicking?
-		return 1 //If not, do nothing.
-	for(var/type in can_be_placed_into) //Is it something it can be placed into?
-		if(istype(target, type))
-			return 1
-	if(standard_dispenser_refill(user, target)) //Are they clicking a water tank/some dispenser?
-		return 1
-	if(standard_pour_into(user, target)) //Pouring into another beaker?
+/obj/item/reagent_containers/glass/throw_impact(atom/hit_atom)
+	if (QDELETED(src))
 		return
-	if(user.a_intent == I_HURT)
-		if(standard_splash_mob(user,target))
-			return 1
-		if(reagents && reagents.total_volume)
-			to_chat(user, "<span class='notice'>You splash the contents of \the [src] onto [target].</span>") //They are on harm intent, aka wanting to spill it.
-			reagents.splash(target, reagents.total_volume)
-			return 1
-	..()
+	if (prob(80))
+		if (reagents.reagent_list.len > 0)
+			visible_message(
+				SPAN_DANGER("\The [src] shatters from the impact and spills all its contents!"),
+				SPAN_DANGER("You hear the sound of glass shattering!")
+			)
+			reagents.splash(hit_atom, reagents.total_volume)
+		else
+			visible_message(
+				SPAN_DANGER("\The [src] shatters from the impact!"),
+				SPAN_DANGER("You hear the sound of glass shattering!")
+			)
+		playsound(src.loc, pick(GLOB.shatter_sound), 100)
+		new /obj/item/material/shard(src.loc)
+		qdel(src)
+	else
+		if (reagents.reagent_list.len > 0)
+			visible_message(
+				SPAN_DANGER("\The [src] bounces and spills all its contents!"),
+				SPAN_WARNING("You hear the sound of glass hitting something.")
+			)
+			reagents.splash(hit_atom, reagents.total_volume)
+		else
+			visible_message(
+				SPAN_WARNING("\The [src] bounces dangerously. Luckily it didn't break."),
+				SPAN_WARNING("You hear the sound of glass hitting something.")
+			)
+		playsound(src.loc, "sound/effects/Glasshit.ogg", 50)
+
+/obj/item/reagent_containers/glass/afterattack(obj/target, mob/user, proximity)
+	if (!proximity || standard_dispenser_refill(user, target) || standard_pour_into(user, target))
+		return TRUE
+	splashtarget(target, user)
 
 /obj/item/reagent_containers/glass/beaker
 	name = "beaker"

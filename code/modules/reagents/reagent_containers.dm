@@ -105,6 +105,19 @@
 	reagents.splash(target, reagents.total_volume)
 	return 1
 
+/obj/item/reagent_containers/proc/splashtarget(obj/target, mob/user)
+	if (user.a_intent == I_HURT)
+		if (standard_splash_mob(user,target))
+			return TRUE
+		if (reagents && reagents.total_volume)
+			user.visible_message(
+				SPAN_NOTICE("\The [user] splashes \the [src] onto \the [target]."),
+				SPAN_NOTICE("You splash the contents of \the [src] onto \the [target]."),
+				SPAN_NOTICE("You hear the sound of liquid splashing.")
+			)
+			reagents.splash(target, reagents.total_volume)
+			return TRUE
+
 /obj/item/reagent_containers/proc/self_feed_message(var/mob/user)
 	to_chat(user, "<span class='notice'>You eat \the [src]</span>")
 
@@ -130,11 +143,13 @@
 		if(target == user)
 			if(istype(user, /mob/living/carbon/human))
 				var/mob/living/carbon/human/H = user
-				if(!H.check_has_mouth())
+				if (user.a_intent == I_HURT)
+					return
+				if (!H.check_has_mouth())
 					to_chat(user, "Where do you intend to put \the [src]? You don't have a mouth!")
 					return
 				var/obj/item/blocked = H.check_mouth_coverage()
-				if(blocked)
+				if (blocked)
 					to_chat(user, "<span class='warning'>\The [blocked] is in the way!</span>")
 					return
 
@@ -147,12 +162,14 @@
 
 
 		else
+			if (user.a_intent == I_HURT)
+				return
 			var/mob/living/carbon/H = target
-			if(!H.check_has_mouth())
+			if (!H.check_has_mouth())
 				to_chat(user, "Where do you intend to put \the [src]? \The [H] doesn't have a mouth!")
 				return
 			var/obj/item/blocked = H.check_mouth_coverage()
-			if(blocked)
+			if (blocked)
 				to_chat(user, "<span class='warning'>\The [blocked] is in the way!</span>")
 				return
 
