@@ -32,3 +32,33 @@
 
 /datum/computer_file/data/bodyscan/generate_file_data(var/mob/user)
 	return display_medical_data(metadata, user.get_skill_value(SKILL_MEDICAL), TRUE)
+
+/// Mapping tool - creates a named modular computer file in a computer's storage on late initialize.
+/// Use this to do things like automatic records and blackboxes. Alternative for paper records.
+/// Values can be in the editor for each map or as a subtype.
+/// This is an obj because raw atoms can't be placed in DM or third-party mapping tools.
+/obj/effect/computer_file_creator
+	name = "computer file creator"
+	desc = "This is a mapping tool used for installing text files onto a modular device when it's mapped on top of them. If you see it, it's bugged."
+	icon = 'icons/effects/landmarks.dmi'
+	icon_state = "x3"
+	anchored = TRUE
+	unacidable = TRUE
+	simulated = FALSE
+	invisibility = 101
+	var/file_name = "helloworld" // The name that the file will have once it's created
+	var/file_info = "Hello World!" // The contents of this file. Uses paper formatting.
+
+/obj/effect/computer_file_creator/Initialize()
+	. = ..()
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/effect/computer_file_creator/LateInitialize()
+	var/turf/T = get_turf(src)
+	for (var/obj/O in T)
+		if (!istype(O, /obj/machinery/computer/modular) && !istype(O, /obj/item/modular_computer))
+			continue
+		var/datum/extension/interactive/ntos/os = get_extension(O, /datum/extension/interactive/ntos)
+		if (os)
+			os.save_file(file_name, file_info, /datum/computer_file/data/text)
+	qdel(src)

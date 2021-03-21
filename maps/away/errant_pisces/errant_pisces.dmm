@@ -483,6 +483,11 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
+/obj/machinery/computer/modular/preset/filemanager{
+	desc = "A brightly-colored terminal built from stress-resistant materials. Used to read data from a connected flight recorder.";
+	name = "black box terminal"
+	},
+/obj/effect/computer_file_creator/ahabs_harpoon02,
 /turf/simulated/floor/plating,
 /area/errant_pisces/enginering)
 "bq" = (
@@ -6242,9 +6247,12 @@
 /turf/simulated/floor/wood,
 /area/errant_pisces/bridge)
 "oY" = (
-/obj/machinery/computer/modular{
-	dir = 8
+/obj/machinery/computer/modular/preset/filemanager{
+	desc = "This console is stamped with the Xynergy logo and appears well-used. It sports an antenna on the back, poking above the screen.";
+	dir = 8;
+	name = "command terminal"
 	},
+/obj/effect/computer_file_creator/ahabs_harpoon01,
 /turf/simulated/floor/wood,
 /area/errant_pisces/bridge)
 "oZ" = (
@@ -6322,9 +6330,10 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/bridge)
 "pj" = (
-/obj/machinery/computer/modular{
+/obj/machinery/computer/modular/preset/filemanager{
 	dir = 1
 	},
+/obj/effect/computer_file_creator/ahabs_harpoon01,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/bridge)
 "pk" = (
@@ -6343,6 +6352,10 @@
 /area/errant_pisces/bridge)
 "pn" = (
 /obj/structure/table/woodentable,
+/obj/item/modular_computer/tablet/lease/preset/command{
+	desc = "A small, portable microcomputer. This one has a Xynergy logo in purple, and a serial number stamped into the case."
+	},
+/obj/effect/computer_file_creator/ahabs_harpoon03,
 /turf/simulated/floor/wood,
 /area/errant_pisces/bridge)
 "po" = (
