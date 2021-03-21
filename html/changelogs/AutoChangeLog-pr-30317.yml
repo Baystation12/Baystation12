@@ -1,0 +1,7 @@
+author: Spookerton
+delete-after: true
+changes:
+  - tweak: The appearance editor from antag appearance selection has languages on
+      it.
+  - bugfix: The vox mirror creates vox mobs appropriately equipped for their antag
+      type.
