@@ -174,3 +174,45 @@
 		slot_back_str =   list("[NORTH]" = list("x" = 0, "y" = 8), "[EAST]" = list("x" = -3, "y" = 8), "[SOUTH]" = list("x" = 0, "y" = 8), "[WEST]" = list("x" =  3, "y" = 8)),
 		slot_belt_str =   list("[NORTH]" = list("x" = 0, "y" = 8), "[EAST]" = list("x" = -4, "y" = 8), "[SOUTH]" = list("x" = 0, "y" = 8), "[WEST]" = list("x" =  4, "y" = 8))
 	)
+
+
+/obj/item/vox_changer
+	name = "mouldy mirror"
+	desc = "Something seems strange about this old, dirty mirror. Your reflection doesn't look like you remember it."
+	icon = 'icons/obj/watercloset.dmi'
+	icon_state = "mirror_broke"
+	color = "#bcd4a9"
+	anchored = TRUE
+	density = FALSE
+	var/allowed_role
+
+/obj/item/vox_changer/attack_hand(mob/living/carbon/human/user)
+	if (!istype(user))
+		return
+	if (allowed_role && user.mind?.special_role != allowed_role)
+		return
+	if (user.species.name == SPECIES_VOX || !is_alien_whitelisted(user, SPECIES_VOX))
+		return
+	var/data = input(user, "Become Vox?", "Become Vox") as null | anything in list("No", "Yes")
+	if (isnull(data) || data == "No")
+		return
+	var/mob/living/carbon/human/vox/vox = new(get_turf(src), SPECIES_VOX)
+	user.mind.transfer_to(vox)
+	OnCreated(vox, user)
+	data = sanitizeSafe(input(vox, "Enter Name:", "Enter Name", "") as text, MAX_NAME_LEN)
+	if (!length(data))
+		var/decl/cultural_info/culture = SSculture.get_culture(CULTURE_VOX_RAIDER)
+		data = culture.get_random_name()
+	vox.real_name = data
+	vox.SetName(data)
+	OnReady(vox)
+	qdel(user)
+
+/obj/item/vox_changer/proc/OnCreated(mob/living/carbon/human/vox, mob/living/carbon/human/old)
+	vox.equip_to_slot_or_del(new /obj/item/clothing/under/vox/vox_casual(vox), slot_w_uniform)
+	vox.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/vox(vox), slot_wear_mask)
+	vox.equip_to_slot_or_del(new /obj/item/tank/nitrogen(vox), slot_back)
+	vox.set_internals(locate(/obj/item/tank) in vox.contents)
+
+/obj/item/vox_changer/proc/OnReady(mob/living/carbon/human/vox, mob/living/carbon/human/old)
+	return

@@ -2768,6 +2768,16 @@
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/merc_spawn)
+"JQ" = (
+/obj/structure/hygiene/sink{
+	dir = 1;
+	pixel_y = 16
+	},
+/obj/item/vox_changer/merc{
+	pixel_y = 32
+	},
+/turf/simulated/floor/tiled/freezer,
+/area/map_template/merc_spawn)
 "KT" = (
 /obj/machinery/light/small{
 	dir = 8
@@ -3192,6 +3202,13 @@
 "XL" = (
 /obj/machinery/portable_atmospherics/powered/scrubber,
 /turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"XQ" = (
+/obj/structure/hygiene/sink{
+	dir = 1;
+	pixel_y = 16
+	},
+/turf/simulated/floor/tiled/freezer,
 /area/map_template/merc_spawn)
 "Ya" = (
 /obj/effect/floor_decal/corner/orange/border{
@@ -8661,7 +8678,7 @@ AB
 ID
 PC
 mo
-am
+XQ
 zj
 Do
 qC
@@ -8763,7 +8780,7 @@ Rb
 TL
 Wr
 mo
-am
+JQ
 zT
 Bf
 mo
