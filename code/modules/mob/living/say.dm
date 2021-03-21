@@ -211,7 +211,7 @@ proc/get_radio_key_from_channel(var/channel)
 	message = handle_autohiss(message, speaking)
 	message = format_say_message(message)
 	message = process_chat_markup(message)
-	
+
 	if(speaking && !speaking.can_be_spoken_properly_by(src))
 		message = speaking.muddle(message)
 
@@ -282,6 +282,7 @@ proc/get_radio_key_from_channel(var/channel)
 	var/image/speech_bubble = image('icons/mob/talk.dmi',src,"h[speech_bubble_test]")
 	speech_bubble.layer = layer
 	speech_bubble.plane = plane
+	speech_bubble.alpha = 0
 	// VOREStation Port - Attempt Multi-Z Talking
 	// for (var/atom/movable/AM in get_above_oo())
 	// 	var/turf/ST = get_turf(AM)
@@ -323,12 +324,16 @@ proc/get_radio_key_from_channel(var/channel)
 				if(O) //It's possible that it could be deleted in the meantime.
 					O.hear_talk(src, stars(message), verb, speaking)
 
-	flick_overlay(speech_bubble, speech_bubble_recipients, 30)
-
 	if(whispering)
 		log_whisper("[name]/[key] : [message]")
 	else
 		log_say("[name]/[key] : [message]")
+
+	flick_overlay(speech_bubble, speech_bubble_recipients, 50)
+	animate(speech_bubble, alpha = 255, time = 10, easing = CIRCULAR_EASING)
+	animate(time = 20)
+	animate(alpha = 0, pixel_y = 12, time = 20, easing = CIRCULAR_EASING)
+
 	return 1
 
 /mob/living/proc/say_signlang(var/message, var/verb="gestures", var/datum/language/language)
