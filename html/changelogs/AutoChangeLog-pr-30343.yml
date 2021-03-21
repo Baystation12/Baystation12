@@ -1,0 +1,5 @@
+author: EvenInDeathIStillServe
+delete-after: true
+changes:
+  - tweak: Matter cartridges can be partially loaded to refill RCDs, both of the construction
+      and crossbow varieties.
