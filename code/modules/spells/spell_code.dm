@@ -106,7 +106,8 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 		holder = user //just in case
 	if(!cast_check(skipcharge, user))
 		return
-	to_chat(user, SPAN_NOTICE("You start casting [name]..."))
+	if (cast_delay > 1)
+		to_chat(user, SPAN_NOTICE("You start casting [name]..."))
 	if(cast_delay && !spell_do_after(user, cast_delay))
 		return
 	var/list/targets = choose_targets(user)
