@@ -30,6 +30,6 @@ jobs:
       - name: Commit And Push
         run: |
           git config --local user.email "${{ secrets.BOT_EMAIL }}"
-          git config --local user.name "$${{ secrets.BOT_NAME }}"
+          git config --local user.name "${{ secrets.BOT_NAME }}"
           git commit -m "Automatic changelog generation" -a
           git push https://${{ secrets.BOT_TOKEN }}:x-oauth-basic@github.com/Baystation12/Baystation12.git dev
