@@ -138,7 +138,7 @@
 		var/area/A = get_area(B)
 		if (!A)
 			continue
-		result["[A.name] \[[++ids[A]]\]"] = B
+		result["[A.name] \[[++ids[A.name]]\]"] = B
 	for (var/obj/item/implant/tracking/T)
 		if (QDELETED(T) || !T.implanted || !ismob(T.loc))
 			continue
@@ -147,7 +147,7 @@
 			continue
 		if (!isPlayerLevel(M.z))
 			continue
-		result["[M.name] \[[++ids[M]]\]"] = T
+		result["[M.name] \[[++ids[M.name]]\]"] = T
 	return result
 
 
