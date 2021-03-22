@@ -78,7 +78,7 @@
 		if(fully_repaired())
 			charging.show_message(SPAN_NOTICE("Exosuit integrity has been fully restored."))
 
-	var/obj/item/cell/cell = charging.get_cell()
+	var/obj/item/cell/cell = charging.get_cell(TRUE)
 	if(cell && !cell.fully_charged() && remaining_energy > 0)
 		cell.give(remaining_energy * CELLRATE)
 		if(cell.fully_charged())

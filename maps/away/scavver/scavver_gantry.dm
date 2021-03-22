@@ -95,6 +95,7 @@
 	install_system(new /obj/item/mech_equipment/light(src), HARDPOINT_HEAD)
 	install_system(new /obj/item/mech_equipment/clamp(src), HARDPOINT_RIGHT_HAND)
 	install_system(new /obj/item/mech_equipment/mounted_system/taser/plasma(src), HARDPOINT_LEFT_HAND)
+	install_system(new /obj/item/mech_equipment/ionjets(src), HARDPOINT_BACK)
 
 /area/scavver
 	icon = 'maps/away/scavver/scavver_gantry_sprites.dmi'
