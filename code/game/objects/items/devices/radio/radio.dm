@@ -601,13 +601,12 @@
 	user.set_machine(src)
 	if(isScrewdriver(W))
 		b_stat = !b_stat
-		if(!istype(src, /obj/item/device/radio/beacon))
-			if (b_stat)
-				user.show_message("<span class='notice'>\The [src] can now be attached and modified!</span>")
-			else
-				user.show_message("<span class='notice'>\The [src] can no longer be modified or attached!</span>")
-			updateDialog()
-			return
+		if (b_stat)
+			user.show_message("<span class='notice'>\The [src] can now be attached and modified!</span>")
+		else
+			user.show_message("<span class='notice'>\The [src] can no longer be modified or attached!</span>")
+		updateDialog()
+		return
 	if(!cell && power_usage && istype(W, /obj/item/cell/device) && user.unEquip(W, target = src))
 		to_chat(user, "<span class='notice'>You put [W] in \the [src].</span>")
 		cell = W

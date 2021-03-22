@@ -228,7 +228,7 @@
 /turf/simulated/floor/tiled,
 /area/constructionsite)
 "N" = (
-/obj/item/device/radio/beacon,
+/obj/machinery/tele_beacon,
 /turf/simulated/floor/tiled,
 /area/constructionsite)
 "P" = (

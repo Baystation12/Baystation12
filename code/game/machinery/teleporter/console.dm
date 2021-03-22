@@ -97,8 +97,12 @@
 /obj/machinery/computer/teleporter/proc/clear_target()
 	if (!target)
 		return
+	var/old_target = target
 	GLOB.destroyed_event.unregister(target, src, /obj/machinery/computer/teleporter/proc/lost_target)
 	target = null
+	if (istype(old_target, /obj/machinery/tele_beacon))
+		var/obj/machinery/tele_beacon/beacon = old_target
+		beacon.disconnect_computer(src)
 	set_active(FALSE)
 
 
@@ -111,8 +115,13 @@
 	if (target == _target)
 		return
 	clear_target()
+	if (istype(_target, /obj/machinery/tele_beacon))
+		var/obj/machinery/tele_beacon/beacon = _target
+		if (!beacon.connect_computer(src))
+			return FALSE
 	target = _target
 	GLOB.destroyed_event.register(target, src, /obj/machinery/computer/teleporter/proc/lost_target)
+	return TRUE
 
 
 /obj/machinery/computer/teleporter/proc/set_active(_active, notify)
@@ -134,13 +143,13 @@
 /obj/machinery/computer/teleporter/proc/get_targets()
 	var/list/ids = list()
 	var/list/result = list()
-	for (var/obj/item/device/radio/beacon/B)
-		if (QDELETED(B) || !B.functioning || !isPlayerLevel(B.z))
+	for (var/obj/machinery/tele_beacon/B)
+		if (QDELETED(B) || !B.functioning() || !isPlayerLevel(B.z))
 			continue
 		var/area/A = get_area(B)
 		if (!A)
 			continue
-		result["[A.name] \[[++ids[A]]\]"] = B
+		result["[B.beacon_name] \[[++ids[B.beacon_name]]\]"] = B
 	for (var/obj/item/implant/tracking/T)
 		if (QDELETED(T) || !T.implanted || !ismob(T.loc))
 			continue
@@ -149,7 +158,7 @@
 			continue
 		if (!isPlayerLevel(M.z))
 			continue
-		result["[M.name] \[[++ids[M]]\]"] = T
+		result["[M.name] \[[++ids[M.name]]\]"] = T
 	return result
 
 
@@ -187,5 +196,7 @@
 			var/data_target = input(user, "Select Target", "Teleporter") in null | targets
 			if (isnull(data_target) || !CanDefaultInteract(user))
 				return TRUE
-			audible_message(SPAN_NOTICE("\The [src] hums, \"Target updated.\""))
-			set_target(targets[data_target])
+			if (set_target(targets[data_target]))
+				audible_message(SPAN_NOTICE("\The [src] hums, \"Target updated.\""))
+			else
+				audible_message(SPAN_WARNING("\The [src] buzzes, \"Failed to establish teleporter lock.\""))
