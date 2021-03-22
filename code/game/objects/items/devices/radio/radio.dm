@@ -600,7 +600,7 @@
 	user.set_machine(src)
 	if(isScrewdriver(W))
 		b_stat = !b_stat
-		if(!istype(src, /obj/item/device/radio/beacon))
+		if(!istype(src, /obj/machinery/tele_beacon))
 			if (b_stat)
 				user.show_message("<span class='notice'>\The [src] can now be attached and modified!</span>")
 			else

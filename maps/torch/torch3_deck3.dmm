@@ -5856,7 +5856,7 @@
 	dir = 8;
 	icon_state = "techfloor_corners"
 	},
-/obj/item/device/radio/beacon,
+/obj/machinery/tele_beacon,
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/thirddeck)
 "lH" = (
@@ -8311,7 +8311,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/item/device/radio/beacon,
+/obj/machinery/tele_beacon,
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 9;
 	icon_state = "corner_white"
@@ -8551,7 +8551,7 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
-/obj/item/device/radio/beacon,
+/obj/machinery/tele_beacon,
 /obj/structure/disposalpipe/segment{
 	dir = 1;
 	icon_state = "pipe-c"
@@ -10944,7 +10944,7 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
-/obj/item/device/radio/beacon,
+/obj/machinery/tele_beacon,
 /obj/effect/landmark{
 	name = "Observer-Start"
 	},

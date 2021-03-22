@@ -37,7 +37,7 @@
 	/obj/item/device/paicard,
 	/obj/item/device/radio,
 	/obj/item/device/radio/headset,
-	/obj/item/device/radio/beacon,
+	/obj/machinery/tele_beacon,
 	/obj/item/autopsy_scanner,
 	/obj/item/bikehorn,
 	/obj/item/bonesetter,

@@ -334,7 +334,7 @@
 	find_type = ARCHAEO_TELEBEACON
 
 /obj/item/archaeological_find/beacon/spawn_item()
-	var/obj/item/device/radio/beacon/new_item = new(loc)
+	var/obj/machinery/tele_beacon/new_item = new(loc)
 	new_item.icon = 'icons/obj/xenoarchaeology.dmi'
 	new_item.icon_state = "unknown[rand(1,4)]"
 	new_item.desc = ""

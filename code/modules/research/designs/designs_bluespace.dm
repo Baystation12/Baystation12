@@ -7,7 +7,7 @@
 	id = "beacon"
 	req_tech = list(TECH_BLUESPACE = 1)
 	materials = list (MATERIAL_ALUMINIUM = 20, MATERIAL_GLASS = 10)
-	build_path = /obj/item/device/radio/beacon
+	build_path = /obj/machinery/tele_beacon
 	sort_string = "VADAA"
 
 /datum/design/item/bluespace/gps

@@ -1,4 +1,4 @@
-/obj/item/device/radio/beacon
+/obj/machinery/tele_beacon
 	name = "tracking beacon"
 	desc = "A beacon used by a teleporter."
 	icon_state = "beacon"
@@ -10,22 +10,22 @@
 	var/code = "electronic"
 	var/functioning = TRUE
 
-/obj/item/device/radio/beacon/hear_talk()
+/obj/machinery/tele_beacon/hear_talk()
 	return
 
-/obj/item/device/radio/beacon/send_hear()
+/obj/machinery/tele_beacon/send_hear()
 	return null
 
-/obj/item/device/radio/beacon/emp_act(severity)
+/obj/machinery/tele_beacon/emp_act(severity)
 	if(functioning && severity >= 1)
 		fry()
 	..()
 
-/obj/item/device/radio/beacon/emag_act(remaining_charges, user, emag_source)
+/obj/machinery/tele_beacon/emag_act(remaining_charges, user, emag_source)
 	if(functioning)
 		fry()
 
-/obj/item/device/radio/beacon/proc/fry()
+/obj/machinery/tele_beacon/proc/fry()
 	functioning = FALSE
 	visible_message(SPAN_WARNING("\The [src] pops and cracks, and a thin wisp of dark smoke rises from the vents."), range = 2)
 	update_icon()
@@ -33,13 +33,13 @@
 		if (T.target == src)
 			T.lost_target()
 
-/obj/item/device/radio/beacon/on_update_icon()
+/obj/machinery/tele_beacon/on_update_icon()
 	if(!functioning)
 		icon_state = "[initial(icon_state)]_dead"
 	else
 		icon_state = "[initial(icon_state)]"
 
-/obj/item/device/radio/beacon/verb/alter_signal(newcode as text)
+/obj/machinery/tele_beacon/verb/alter_signal(newcode as text)
 	set name = "Alter Beacon's Signal"
 	set category = "Object"
 	set src in usr
@@ -49,20 +49,20 @@
 		code = newcode
 		add_fingerprint(user)
 
-/obj/item/device/radio/beacon/anchored
+/obj/machinery/tele_beacon
 	icon_state = "floor_beacon"
 	anchored = TRUE
 	w_class = ITEM_SIZE_HUGE
 	randpixel = 0
-	
+
 	var/repair_fail_chance = 35
 
-/obj/item/device/radio/beacon/anchored/Initialize()
+/obj/machinery/tele_beacon/Initialize()
 	. = ..()
 	var/turf/T = get_turf(src)
 	hide(hides_under_flooring() && !T.is_plating())
 
-/obj/item/device/radio/beacon/anchored/attackby(obj/item/I, mob/living/user)
+/obj/machinery/tele_beacon/attackby(obj/item/I, mob/living/user)
 	..()
 	if(istype(I, /obj/item/stack/nanopaste))
 		var/obj/item/stack/nanopaste/S = I

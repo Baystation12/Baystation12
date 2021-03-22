@@ -95,8 +95,12 @@
 /obj/machinery/computer/teleporter/proc/clear_target()
 	if (!target)
 		return
+	var/old_target = target
 	GLOB.destroyed_event.unregister(target, src, /obj/machinery/computer/teleporter/proc/lost_target)
 	target = null
+	if (istype(old_target, /obj/machinery/tele_beacon))
+		var/obj/machinery/tele_beacon/beacon = old_target
+		beacon.disconnect_computer(src)
 	set_active(FALSE)
 
 
@@ -111,6 +115,9 @@
 	clear_target()
 	target = _target
 	GLOB.destroyed_event.register(target, src, /obj/machinery/computer/teleporter/proc/lost_target)
+	if (istype(target, /obj/machinery/tele_beacon))
+		var/obj/machinery/tele_beacon/beacon = target
+		beacon.connect_computer(src)
 
 
 /obj/machinery/computer/teleporter/proc/set_active(_active, notify)
@@ -132,13 +139,13 @@
 /obj/machinery/computer/teleporter/proc/get_targets()
 	var/list/ids = list()
 	var/list/result = list()
-	for (var/obj/item/device/radio/beacon/B)
-		if (QDELETED(B) || !B.functioning || !isPlayerLevel(B.z))
+	for (var/obj/machinery/tele_beacon/B)
+		if (QDELETED(B) || !B.functioning() || !isPlayerLevel(B.z))
 			continue
 		var/area/A = get_area(B)
 		if (!A)
 			continue
-		result["[A.name] \[[++ids[A]]\]"] = B
+		result["[B.beacon_name] \[[++ids[B.beacon_name]]\]"] = B
 	for (var/obj/item/implant/tracking/T)
 		if (QDELETED(T) || !T.implanted || !ismob(T.loc))
 			continue
@@ -147,7 +154,7 @@
 			continue
 		if (!isPlayerLevel(M.z))
 			continue
-		result["[M.name] \[[++ids[M]]\]"] = T
+		result["[M.name] \[[++ids[M.name]]\]"] = T
 	return result
 
 
