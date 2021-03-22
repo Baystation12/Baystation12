@@ -454,7 +454,6 @@
 		/obj/item/paper,
 		/obj/item/pen,
 		/obj/item/device/spaceflare,
-		/obj/item/device/radio/beacon,
 		/obj/item/pinpointer/radio,
 		/obj/item/device/taperecorder,
 		/obj/item/device/tape,

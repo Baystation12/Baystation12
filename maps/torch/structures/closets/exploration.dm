@@ -36,7 +36,6 @@
 		/obj/item/device/tape/random,
 		/obj/item/device/gps,
 		/obj/item/pinpointer/radio,
-		/obj/item/device/radio/beacon,
 		/obj/item/taperoll/research,
 		/obj/item/material/hatchet/machete/deluxe,
 		/obj/item/storage/belt/holster/machete,
@@ -110,4 +109,3 @@
 		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/dufflebag, /obj/item/storage/backpack/messenger)),
 		new /datum/atom_creator/weighted(list(/obj/item/device/flashlight, /obj/item/device/flashlight/flare, /obj/item/device/flashlight/flare/glowstick/random))
 	)
-
