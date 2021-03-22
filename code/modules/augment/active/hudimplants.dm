@@ -36,6 +36,7 @@
 	if (!can_activate())
 		return
 	active = !active
+	to_chat(owner, SPAN_NOTICE("You [active ? "enable" : "disable"] \the [src]."))
 
 /obj/item/organ/internal/augment/active/hud/health
 	name = "integrated health HUD"
