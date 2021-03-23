@@ -1,5 +1,8 @@
 #define any2ref(x) "\ref[x]"
 
+//Do (almost) nothing - indev placeholder for switch case implementations etc
+#define NOOP (.=.);
+
 #define list_find(L, needle, LIMITS...) L.Find(needle, LIMITS)
 
 #define PUBLIC_GAME_MODE SSticker.master_mode
