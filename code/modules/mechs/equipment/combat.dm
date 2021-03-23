@@ -234,9 +234,10 @@
 	slot_flags = 0
 	default_material = MATERIAL_STEEL
 	base_parry_chance = 0 //Irrelevant for exosuits, revise if this changes
-	max_force = 50
-	force_multiplier = 0.35 //21 with hardness 60 (steel)
+	max_force = 25
+	force_multiplier = 0.75 // Equals 20 AP with 25 force
 	unbreakable = TRUE //Else we need a whole system for replacement blades
+	attack_cooldown_modifier = 10
 
 /obj/item/material/hatchet/machete/mech/apply_hit_effect(mob/living/target, mob/living/user, hit_zone)
 	. = ..()
@@ -251,12 +252,9 @@
 		return ..()
 
 	if (user.a_intent == I_HURT)
-		user.setClickCooldown(0.7 SECONDS)
 		user.visible_message(SPAN_DANGER("\The [user] swings \the [src] at \the [A]!"))
 		playsound(user, 'sound/mecha/mechmove03.ogg', 35, 1)
-		if (do_after(user, 0.7 SECONDS, A, do_flags = DO_SHOW_PROGRESS | DO_TARGET_CAN_TURN | DO_PUBLIC_PROGRESS | DO_USER_UNIQUE_ACT))
-			attack(A, user, user.zone_sel.selecting, TRUE)
-			return TRUE
+		return ..()
 
 /obj/item/material/hatchet/machete/mech/attack_self(mob/living/user)
 	. = ..()
@@ -267,7 +265,7 @@
 		//SPIN BLADE ATTACK GO!
 		var/mob/living/exosuit/E = MC.owner
 		if (E)
-			E.setClickCooldown(1.2 SECONDS)
+			E.setClickCooldown(1.35 SECONDS)
 			E.visible_message(SPAN_DANGER("\The [E] swings \the [src] back, preparing for an attack!"), blind_message = SPAN_DANGER("You hear the loud hissing of hydraulics!"))
 			playsound(E, 'sound/mecha/mechmove03.ogg', 35, 1)
 			if (do_after(E, 1.2 SECONDS, get_turf(user), do_flags = DO_SHOW_PROGRESS | DO_TARGET_CAN_TURN | DO_PUBLIC_PROGRESS | DO_USER_UNIQUE_ACT) && E && MC)
