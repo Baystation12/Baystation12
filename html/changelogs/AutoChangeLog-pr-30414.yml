@@ -1,0 +1,4 @@
+author: CrimsonShrike
+delete-after: true
+changes:
+  - tweak: Flaregun impacts now have a chance to set victim on fire
