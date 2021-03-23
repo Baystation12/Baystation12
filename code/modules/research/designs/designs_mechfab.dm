@@ -469,6 +469,14 @@
 	materials = list(MATERIAL_STEEL = 40000, MATERIAL_ALUMINIUM = 5000)
 	req_tech = list(TECH_MATERIAL = 3)
 	build_path = /obj/item/mech_equipment/ballistic_shield
+
+/datum/design/item/exosuit/ionjets
+	name = "exosuit manouvering unit"
+	id = "mech_ionjets"
+	time = 30
+	materials = list(MATERIAL_STEEL = 20000, MATERIAL_ALUMINIUM = 10000, MATERIAL_PHORON = 2500)
+	req_tech = list(TECH_ENGINEERING = 2, TECH_MAGNET = 2)
+	build_path = /obj/item/mech_equipment/ionjets
 // End mechs.
 
 /datum/design/item/synthetic_flash
