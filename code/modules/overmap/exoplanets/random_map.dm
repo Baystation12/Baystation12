@@ -8,6 +8,10 @@
 	var/land_type = /turf/simulated/floor
 	var/water_type
 
+	//The chance that a planet might get overgrown with stuff like dionaea. This piggybacks off water_type
+	var/infestation_multiplier	= 100	//Tennessee116 extravagant debug remove on PR-ing
+	var/infestation_types = list(/turf/simulated/floor/diona) //Gestalt planet
+
 	//intended x*y size, used to adjust spawn probs
 	var/intended_x = 150
 	var/intended_y = 150
@@ -27,6 +31,10 @@
 /datum/random_map/noise/exoplanet/New(var/seed, var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/never_be_priority = 0, var/used_area, var/list/_plant_colors)
 	target_turf_type = world.turf
 	water_level = rand(water_level_min,water_level_max)
+	if(prob(infestation_multiplier))
+		water_type = pick(infestation_types)
+		water_level_min = 3
+		water_level_max = 5
 	//automagically adjust probs for bigger maps to help with lag
 	var/size_mod = intended_x / tlx * intended_y / tly
 	flora_prob *= size_mod
