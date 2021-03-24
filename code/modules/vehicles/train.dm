@@ -26,6 +26,13 @@
 	for(var/obj/vehicle/train/T in orange(1, src))
 		latch(T)
 
+/obj/vehicle/train/examine(mob/user)
+	. = ..()
+	if (lead)
+		to_chat(user, SPAN_NOTICE("It is hitched to \the [lead]."))
+	if (tow)
+		to_chat(user, SPAN_NOTICE("It is towing \the [tow]."))
+
 /obj/vehicle/train/Move()
 	var/old_loc = get_turf(src)
 	if(..())
@@ -186,12 +193,7 @@
 	if(!istype(T) || !Adjacent(T))
 		return 0
 
-	var/T_dir = get_dir(src, T)	//figure out where T is wrt src
-
-	if(dir == T_dir) 	//if car is ahead
-		src.attach_to(T, user)
-	else if(reverse_direction(dir) == T_dir)	//else if car is behind
-		T.attach_to(src, user)
+	T.attach_to(src, user)
 
 //returns 1 if this is the lead car of the train
 /obj/vehicle/train/proc/is_train_head()
