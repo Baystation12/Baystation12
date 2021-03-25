@@ -9,9 +9,9 @@
 /decl/surgery_step/open_encased
 	name = "Saw through bone"
 	allowed_tools = list(
-		/obj/item/weapon/circular_saw = 100,
-		/obj/item/weapon/material/knife = 50,
-		/obj/item/weapon/material/hatchet = 75
+		/obj/item/circular_saw = 100,
+		/obj/item/material/knife = 50,
+		/obj/item/material/hatchet = 75
 	)
 	can_infect = 1
 	blood_level = 1

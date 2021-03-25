@@ -1,6 +1,6 @@
 //CONTAINS: Evidence bags and fingerprint cards
 
-/obj/item/weapon/evidencebag
+/obj/item/evidencebag
 	name = "evidence bag"
 	desc = "An empty evidence bag."
 	icon = 'icons/obj/storage.dmi'
@@ -9,7 +9,7 @@
 	w_class = ITEM_SIZE_SMALL
 	var/obj/item/stored_item = null
 
-/obj/item/weapon/evidencebag/MouseDrop(obj/item/I)
+/obj/item/evidencebag/MouseDrop(obj/item/I)
 	if (!ishuman(usr) || !istype(I))
 		return
 
@@ -23,12 +23,12 @@
 			return
 	else
 		//If it isn't on the floor. Do some checks to see if it's in our hands or a box. Otherwise give up.
-		if(istype(I.loc,/obj/item/weapon/storage))	//in a container.
+		if(istype(I.loc,/obj/item/storage))	//in a container.
 			var/sdepth = I.storage_depth(user)
 			if (sdepth == -1 || sdepth > 1)
 				return	//too deeply nested to access
 
-			var/obj/item/weapon/storage/U = I.loc
+			var/obj/item/storage/U = I.loc
 			user.client.screen -= I
 			U.contents.Remove(I)
 		else if(user.l_hand == I)					//in a hand
@@ -41,7 +41,7 @@
 	if(!istype(I) || I.anchored)
 		return
 
-	if(istype(I, /obj/item/weapon/evidencebag))
+	if(istype(I, /obj/item/evidencebag))
 		to_chat(user, "<span class='notice'>You find putting an evidence bag in another evidence bag to be slightly absurd.</span>")
 		return
 
@@ -62,7 +62,7 @@
 	w_class = I.w_class
 	update_icon()
 
-/obj/item/weapon/evidencebag/on_update_icon()
+/obj/item/evidencebag/on_update_icon()
 	underlays.Cut()
 	if(stored_item)
 		icon_state = "evidence"
@@ -80,7 +80,7 @@
 		icon_state = "evidenceobj"
 		desc = "An empty evidence bag."
 
-/obj/item/weapon/evidencebag/attack_self(mob/user)
+/obj/item/evidencebag/attack_self(mob/user)
 	if(stored_item)
 		user.visible_message("[user] takes [stored_item] out of [src]", "You take [stored_item] out of [src].",\
 		"You hear someone rustle around in a plastic bag, and remove something.")
@@ -91,12 +91,12 @@
 		to_chat(user, "[src] is empty.")
 		update_icon()
 
-/obj/item/weapon/evidencebag/proc/empty()
+/obj/item/evidencebag/proc/empty()
 	stored_item = null
 	w_class = initial(w_class)
 	update_icon()
 
-/obj/item/weapon/evidencebag/examine(mob/user)
+/obj/item/evidencebag/examine(mob/user)
 	. = ..()
 	if (stored_item)
 		user.examinate(stored_item)

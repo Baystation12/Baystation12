@@ -6,8 +6,8 @@
 	desc = "A huge pipe segment used for constructing disposal systems."
 	icon = 'icons/obj/pipes/disposal.dmi'
 	icon_state = "conpipe-s"
-	anchored = 0
-	density = 0
+	anchored = FALSE
+	density = FALSE
 	matter = list(MATERIAL_STEEL = 1850)
 	level = 2
 	obj_flags = OBJ_FLAG_ROTATABLE
@@ -133,7 +133,7 @@
 
 	if(isWrench(I))
 		if(anchored)
-			anchored = 0
+			anchored = FALSE
 			wrench_down(FALSE)
 			to_chat(user, "You detach \the [src] from the underfloor.")
 		else
@@ -145,9 +145,9 @@
 		update()
 		update_verbs()
 
-	else if(istype(I, /obj/item/weapon/weldingtool))
+	else if(istype(I, /obj/item/weldingtool))
 		if(anchored)
-			var/obj/item/weapon/weldingtool/W = I
+			var/obj/item/weldingtool/W = I
 			if(W.remove_fuel(0,user))
 				playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
 				to_chat(user, "Welding \the [src] in place.")

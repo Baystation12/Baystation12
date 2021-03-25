@@ -1,4 +1,0 @@
-author: "Ilysen"
-delete-after: True
-changes: 
-  - bugfix: "Robots/synthetics can now repair windows with their sheet synthesizers."

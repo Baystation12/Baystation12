@@ -35,7 +35,7 @@ Thus, the two variables affect pump operation are set in New():
 	build_icon_state = "pump"
 
 	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/power/apc
+		/obj/item/stock_parts/power/apc
 	)
 	public_variables = list(
 		/decl/public_access/public_variable/input_toggle,

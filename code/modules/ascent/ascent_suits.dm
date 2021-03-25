@@ -33,10 +33,10 @@
 	sprite_sheets = list(SPECIES_MANTID_ALATE = 'icons/mob/species/mantid/onmob_suit_alate.dmi')
 	allowed = list(
 		/obj/item/clustertool,
-		/obj/item/weapon/tank/mantid,
-		/obj/item/weapon/gun/energy/particle/small,
-		/obj/item/weapon/weldingtool/electric/mantid,
+		/obj/item/tank/mantid,
+		/obj/item/gun/energy/particle/small,
+		/obj/item/weldingtool/electric/mantid,
 		/obj/item/device/multitool/mantid,
 		/obj/item/stack/medical/resin,
-		/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle/ascent
+		/obj/item/reagent_containers/food/drinks/cans/waterbottle/ascent
 	)

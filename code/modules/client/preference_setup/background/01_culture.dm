@@ -66,11 +66,15 @@
 				. += "<br>"
 			. += "<table width=100%><tr><td colspan=3>"
 			for (var/V in valid_values)
-				var/decl/cultural_info/CI = V
-				if (pref.cultural_info[token] == CI)
-					. += "<span class='linkOn'>[CI]</span> "
+				// this is yucky but we need to do it because, right now, the culture subsystem references decls by their string names
+				// html_encode() doesn't properly sanitize + symbols, otherwise we could just use that
+				// instead, we manually rip out the plus symbol and then replace it on OnTopic
+				var/sanitized_value = html_encode(replacetext(V, "+", "PLUS"))
+				
+				if (pref.cultural_info[token] == V)
+					. += "<span class='linkOn'>[V]</span> "
 				else
-					. += "<a href='?src=\ref[src];set_token_entry_[token]=[CI]'>[CI]</a> "
+					. += "<a href='?src=\ref[src];set_token_entry_[token]=[sanitized_value]'>[V]</a> "
 			. += "</table>"
 		. += "<hr>"
 	. = jointext(.,null)
@@ -89,7 +93,7 @@
 
 		var/new_token = href_list["set_token_entry_[token]"]
 		if (!isnull(new_token))
-			pref.cultural_info[token] = new_token
+			pref.cultural_info[token] = html_decode(replacetext(new_token, "PLUS", "+"))
 			return TOPIC_REFRESH
 			
 	. = ..()

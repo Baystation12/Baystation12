@@ -4,8 +4,8 @@
 	icon = 'icons/obj/grille.dmi'
 	icon_state = "grille"
 	color = COLOR_STEEL
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	layer = BELOW_OBJ_LAYER
 	explosion_resistance = 1
@@ -143,7 +143,7 @@
 
 	take_damage(damage*0.2)
 
-/obj/structure/grille/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/grille/attackby(obj/item/W as obj, mob/user as mob)
 	if(isWirecutter(W))
 		if(!shock(user, 100))
 			playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
@@ -245,7 +245,7 @@
 /obj/structure/grille/broken
 	destroyed = 1
 	icon_state = "broken"
-	density = 0
+	density = FALSE
 
 /obj/structure/grille/broken/Initialize()
 	. = ..()

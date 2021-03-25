@@ -1,36 +1,7 @@
 #define any2ref(x) "\ref[x]"
 
-#if DM_VERSION < 513
-
-	#define islist(A) istype(A, /list)
-	#define ismovable(A) istype(A, /atom/movable)
-
-	#define copytext_char(ARGS...) copytext(ARGS)
-	#define findlasttext_char(ARGS...) findlasttext(ARGS)
-	#define findlasttextEx_char(ARGS...) findlasttextEx(ARGS)
-	#define findtext_char(ARGS...) findtext(ARGS)
-	#define findtextEx_char(ARGS...) findtextEx(ARGS)
-	#define length_char(X) length(X)
-	#define nonspantext_char(ARGS...) nonspantext(ARGS)
-	#define replacetext_char(ARGS...) replacetext(ARGS)
-	#define replacetextEx_char(ARGS...) replacetextEx(ARGS)
-	#define spantext_char(ARGS...) spantext(ARGS)
-	#define splittext_char(ARGS...) splittext(ARGS)
-	#define text2ascii_char(ARGS...) text2ascii(ARGS)
-
-	#define regex_replace_char(RE, ARGS...) RE.Replace(ARGS)
-	#define regex_replace(RE, ARGS...) RE.Replace(ARGS)
-	#define regex_find_char(RE, ARGS...) RE.Find(ARGS)
-	#define regex_find(RE, ARGS...) RE.Find(ARGS)
-
-#else //513+
-
-	#define regex_replace_char(RE, ARGS...) RE.Replace_char(ARGS)
-	#define regex_replace(RE, ARGS...) RE.Replace(ARGS)
-	#define regex_find_char(RE, ARGS...) RE.Find_char(ARGS)
-	#define regex_find(RE, ARGS...) RE.Find(ARGS)
-
-#endif
+//Do (almost) nothing - indev placeholder for switch case implementations etc
+#define NOOP (.=.);
 
 #define list_find(L, needle, LIMITS...) L.Find(needle, LIMITS)
 
@@ -38,6 +9,14 @@
 
 #define Clamp(value, low, high) (value <= low ? low : (value >= high ? high : value))
 #define CLAMP01(x) 		(Clamp(x, 0, 1))
+
+var/const/POSITIVE_INFINITY = 1#INF // win: 1.#INF, lin: inf
+var/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
+//var/const/POSITIVE_NAN = -(1#INF/1#INF) // win: 1.#QNAN, lin: nan -- demonstration of creation, but not useful
+//var/const/NEGATIVE_NAN = (1#INF/1#INF) //win: -1.#IND, lin: -nan -- demonstration of creation, but not useful
+#define isfinite(N) (isnum(N) && ((N) == (N)) && ((N) != POSITIVE_INFINITY) && ((N) != NEGATIVE_INFINITY))
+
+#define isnan(N) (isnum(N) && (N) != (N))
 
 #define get_turf(A) get_step(A,0)
 
@@ -73,7 +52,7 @@
 
 #define ishuman(A) istype(A, /mob/living/carbon/human)
 
-#define isid(A) istype(A, /obj/item/weapon/card/id)
+#define isid(A) istype(A, /obj/item/card/id)
 
 #define isitem(A) istype(A, /obj/item)
 
@@ -194,7 +173,9 @@
 
 #define SPAN_WARNING(X) "<span class='warning'>[X]</span>"
 
-#define SPAN_STYLE(style, X) "<span style=\"[style]\">[X]</span>"
+#define SPAN_GOOD(X) "<span class='good'>[X]</span>"
+
+#define SPAN_BAD(X) "<span class='bad'>[X]</span>"
 
 #define SPAN_DANGER(X) "<span class='danger'>[X]</span>"
 
@@ -207,6 +188,8 @@
 #define SPAN_INFO(X) "<span class='info'>[X]</span>"
 
 #define SPAN_DEBUG(X) "<span class='debug'>[X]</span>"
+
+#define SPAN_STYLE(style, X) "<span style=\"[style]\">[X]</span>"
 
 #define FONT_COLORED(color, text) "<font color='[color]'>[text]</font>"
 

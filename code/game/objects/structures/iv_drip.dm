@@ -1,11 +1,11 @@
 /obj/structure/iv_drip
 	name = "\improper IV drip"
 	icon = 'icons/obj/iv_drip.dmi'
-	anchored = 0
-	density = 0
+	anchored = FALSE
+	density = FALSE
 	var/mob/living/carbon/human/attached
 	var/mode = 1 // 1 is injecting, 0 is taking blood.
-	var/obj/item/weapon/reagent_containers/beaker
+	var/obj/item/reagent_containers/beaker
 	var/list/transfer_amounts = list(REM, 1, 2)
 	var/transfer_amount = 1
 
@@ -64,8 +64,8 @@
 	else if(ishuman(over_object))
 		hook_up(over_object, usr)
 
-/obj/structure/iv_drip/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/weapon/reagent_containers))
+/obj/structure/iv_drip/attackby(obj/item/W as obj, mob/user as mob)
+	if (istype(W, /obj/item/reagent_containers/ivbag))
 		if(!isnull(src.beaker))
 			to_chat(user, "There is already a reagent container loaded!")
 			return

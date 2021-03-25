@@ -29,7 +29,7 @@
 	name = "open space"
 	icon = 'icons/turf/space.dmi'
 	icon_state = ""
-	density = 0
+	density = FALSE
 	pathweight = INFINITY //Seriously, don't try and path over this one numbnuts
 
 	z_flags = ZM_MIMIC_DEFAULTS | ZM_MIMIC_OVERWRITE | ZM_MIMIC_NO_AO | ZM_ALLOW_ATMOS

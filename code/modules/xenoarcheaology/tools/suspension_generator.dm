@@ -3,7 +3,7 @@
 	desc = "It has stubby legs bolted up against it's body for stabilising."
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "suspension2"
-	density = 1
+	density = TRUE
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
@@ -34,7 +34,7 @@
 
 /obj/machinery/suspension_gen/interact(var/mob/user)
 	var/dat = "<b>Multi-phase mobile suspension field generator MK II \"Steadfast\"</b><br>"
-	var/obj/item/weapon/cell/cell = get_cell()
+	var/obj/item/cell/cell = get_cell()
 	if(cell)
 		var/colour = "red"
 		var/percent = cell.percent()
@@ -56,7 +56,7 @@
 /obj/machinery/suspension_gen/OnTopic(var/mob/user, href_list)
 	if(href_list["toggle_field"])
 		if(!suspension_field)
-			var/obj/item/weapon/cell/cell = get_cell()
+			var/obj/item/cell/cell = get_cell()
 			if(cell.charge > 0)
 				if(anchored)
 					activate()
@@ -84,15 +84,12 @@
 		return SPAN_NOTICE("Turn \the [src] off first.")
 	return ..()
 
-/obj/machinery/suspension_gen/attackby(obj/item/weapon/W, mob/user)
+/obj/machinery/suspension_gen/attackby(obj/item/W, mob/user)
 	if(component_attackby(W, user))
 		return TRUE
 	else if(isWrench(W))
 		if(!suspension_field)
-			if(anchored)
-				anchored = 0
-			else
-				anchored = 1
+			anchored = !anchored
 			to_chat(user, "<span class='info'>You wrench the stabilising legs [anchored ? "into place" : "up against the body"].</span>")
 			if(anchored)
 				desc = "It is resting securely on four stubby legs."
@@ -171,8 +168,8 @@
 /obj/effect/suspension_field
 	name = "energy field"
 	icon = 'icons/effects/effects.dmi'
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 
 /obj/effect/suspension_field/Destroy()
 	for(var/atom/movable/I in src)

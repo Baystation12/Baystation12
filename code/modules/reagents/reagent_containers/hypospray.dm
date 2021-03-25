@@ -2,7 +2,7 @@
 /// HYPOSPRAY
 ////////////////////////////////////////////////////////////////////////////////
 
-/obj/item/weapon/reagent_containers/hypospray //obsolete, use hypospray/vial for the actual hypospray item
+/obj/item/reagent_containers/hypospray //obsolete, use hypospray/vial for the actual hypospray item
 	name = "hypospray"
 	desc = "The DeForest Medical Corporation, a subsidiary of Zeng-Hu Pharmaceuticals, hypospray is a sterile, air-needle autoinjector for rapid administration of drugs to patients."
 	icon = 'icons/obj/syringe.dmi'
@@ -27,7 +27,7 @@
 	var/time = (1 SECONDS) / 1.9
 	var/single_use = TRUE // autoinjectors are not refillable (overriden for hypospray)
 
-/obj/item/weapon/reagent_containers/hypospray/attack(mob/living/M, mob/user)
+/obj/item/reagent_containers/hypospray/attack(mob/living/M, mob/user)
 	if(!reagents.total_volume)
 		to_chat(user, "<span class='warning'>[src] is empty.</span>")
 		return
@@ -75,24 +75,24 @@
 
 	return
 
-/obj/item/weapon/reagent_containers/hypospray/vial
+/obj/item/reagent_containers/hypospray/vial
 	name = "hypospray"
 	item_state = "autoinjector"
 	desc = "The DeForest Medical Corporation, a subsidiary of Zeng-Hu Pharmaceuticals, hypospray is a sterile, air-needle autoinjector for rapid administration of drugs to patients. Uses a replacable 30u vial."
-	var/obj/item/weapon/reagent_containers/glass/beaker/vial/loaded_vial
+	var/obj/item/reagent_containers/glass/beaker/vial/loaded_vial
 	possible_transfer_amounts = "1;2;5;10;15;20;30"
 	amount_per_transfer_from_this = 5
 	volume = 0
 	time = 0 // hyposprays are instant for conscious people
 	single_use = FALSE
 
-/obj/item/weapon/reagent_containers/hypospray/vial/New()
+/obj/item/reagent_containers/hypospray/vial/New()
 	..()
-	loaded_vial = new /obj/item/weapon/reagent_containers/glass/beaker/vial(src)
+	loaded_vial = new /obj/item/reagent_containers/glass/beaker/vial(src)
 	volume = loaded_vial.volume
 	reagents.maximum_volume = loaded_vial.reagents.maximum_volume
 
-/obj/item/weapon/reagent_containers/hypospray/vial/proc/remove_vial(mob/user, swap_mode)
+/obj/item/reagent_containers/hypospray/vial/proc/remove_vial(mob/user, swap_mode)
 	if(!loaded_vial)
 		return
 	reagents.trans_to_holder(loaded_vial.reagents,volume)
@@ -103,7 +103,7 @@
 	if (swap_mode != "swap") // if swapping vials, we will print a different message in another proc
 		to_chat(user, "You remove the vial from the [src].")
 
-/obj/item/weapon/reagent_containers/hypospray/vial/attack_hand(mob/user)
+/obj/item/reagent_containers/hypospray/vial/attack_hand(mob/user)
 	if(user.get_inactive_hand() == src)
 		if(!loaded_vial)
 			to_chat(user, "<span class='notice'>There is no vial loaded in the [src].</span>")
@@ -114,9 +114,9 @@
 		return
 	return ..()
 
-/obj/item/weapon/reagent_containers/hypospray/vial/attackby(obj/item/weapon/W, mob/user)
+/obj/item/reagent_containers/hypospray/vial/attackby(obj/item/W, mob/user)
 	var/usermessage = ""
-	if(istype(W, /obj/item/weapon/reagent_containers/glass/beaker/vial))
+	if(istype(W, /obj/item/reagent_containers/glass/beaker/vial))
 		if(!do_after(user,10) || !(W in user))
 			return 0
 		if(!user.unEquip(W, src))
@@ -138,13 +138,13 @@
 		return
 	..()
 
-/obj/item/weapon/reagent_containers/hypospray/vial/afterattack(obj/target, mob/user, proximity) // hyposprays can be dumped into, why not out? uses standard_pour_into helper checks.
+/obj/item/reagent_containers/hypospray/vial/afterattack(obj/target, mob/user, proximity) // hyposprays can be dumped into, why not out? uses standard_pour_into helper checks.
 	if(!proximity)
 		return
-	if (!reagents.total_volume && istype(target, /obj/item/weapon/reagent_containers/glass))
+	if (!reagents.total_volume && istype(target, /obj/item/reagent_containers/glass))
 		var/good_target = is_type_in_list(target, list(
-			/obj/item/weapon/reagent_containers/glass/beaker,
-			/obj/item/weapon/reagent_containers/glass/bottle
+			/obj/item/reagent_containers/glass/beaker,
+			/obj/item/reagent_containers/glass/bottle
 		))
 		if (!good_target)
 			return
@@ -159,7 +159,7 @@
 		return
 	standard_pour_into(user, target)
 
-/obj/item/weapon/reagent_containers/hypospray/autoinjector
+/obj/item/reagent_containers/hypospray/autoinjector
 	name = "autoinjector"
 	desc = "A rapid and safe way to administer small amounts of drugs by untrained or trained personnel."
 	icon_state = "injector"
@@ -172,18 +172,18 @@
 	var/list/starts_with = list(/datum/reagent/inaprovaline = 5)
 	var/band_color = COLOR_CYAN
 
-/obj/item/weapon/reagent_containers/hypospray/autoinjector/New()
+/obj/item/reagent_containers/hypospray/autoinjector/New()
 	..()
 	for(var/T in starts_with)
 		reagents.add_reagent(T, starts_with[T])
 	update_icon()
 	return
 
-/obj/item/weapon/reagent_containers/hypospray/autoinjector/attack(mob/M as mob, mob/user as mob)
+/obj/item/reagent_containers/hypospray/autoinjector/attack(mob/M as mob, mob/user as mob)
 	..()
 	update_icon()
 
-/obj/item/weapon/reagent_containers/hypospray/autoinjector/on_update_icon()
+/obj/item/reagent_containers/hypospray/autoinjector/on_update_icon()
 	overlays.Cut()
 	if(reagents.total_volume > 0)
 		icon_state = "[initial(icon_state)]1"
@@ -191,39 +191,39 @@
 		icon_state = "[initial(icon_state)]0"
 	overlays+= overlay_image(icon,"injector_band",band_color,RESET_COLOR)
 
-/obj/item/weapon/reagent_containers/hypospray/autoinjector/examine(mob/user)
+/obj/item/reagent_containers/hypospray/autoinjector/examine(mob/user)
 	. = ..(user)
 	if(reagents && reagents.reagent_list.len)
 		to_chat(user, "<span class='notice'>It is currently loaded.</span>")
 	else
 		to_chat(user, "<span class='notice'>It is spent.</span>")
 
-/obj/item/weapon/reagent_containers/hypospray/autoinjector/detox
+/obj/item/reagent_containers/hypospray/autoinjector/detox
 	name = "autoinjector (antitox)"
 	band_color = COLOR_GREEN
 	starts_with = list(/datum/reagent/dylovene = 5)
 
-/obj/item/weapon/reagent_containers/hypospray/autoinjector/pain
+/obj/item/reagent_containers/hypospray/autoinjector/pain
 	name = "autoinjector (painkiller)"
 	band_color = COLOR_PURPLE
 	starts_with = list(/datum/reagent/tramadol = 5)
 
-/obj/item/weapon/reagent_containers/hypospray/autoinjector/combatpain
+/obj/item/reagent_containers/hypospray/autoinjector/combatpain
 	name = "autoinjector (oxycodone)"
 	band_color = COLOR_DARK_GRAY
 	starts_with = list(/datum/reagent/tramadol/oxycodone = 5)
 
-/obj/item/weapon/reagent_containers/hypospray/autoinjector/antirad
+/obj/item/reagent_containers/hypospray/autoinjector/antirad
 	name = "autoinjector (anti-rad)"
 	band_color = COLOR_AMBER
 	starts_with = list(/datum/reagent/hyronalin = 5)
 
-/obj/item/weapon/reagent_containers/hypospray/autoinjector/mindbreaker
+/obj/item/reagent_containers/hypospray/autoinjector/mindbreaker
 	name = "autoinjector"
 	band_color = COLOR_DARK_GRAY
 	starts_with = list(/datum/reagent/mindbreaker = 5)
 
-/obj/item/weapon/reagent_containers/hypospray/autoinjector/empty
+/obj/item/reagent_containers/hypospray/autoinjector/empty
 	name = "autoinjector"
 	band_color = COLOR_WHITE
 	starts_with = list()

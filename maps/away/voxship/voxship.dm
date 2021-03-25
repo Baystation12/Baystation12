@@ -9,7 +9,8 @@
 	id = "awaysite_voxship2"
 	description = "Vox Scavenger Ship."
 	suffixes = list("voxship/voxship-2.dmm")
-	cost = 0.5
+	spawn_cost = 0.5
+	player_cost = 4
 	shuttles_to_initialise = list(/datum/shuttle/autodock/overmap/vox_ship, /datum/shuttle/autodock/overmap/vox_lander)
 	area_usage_test_exempted_root_areas = list(/area/voxship)
 	spawn_weight = 0.67
@@ -102,7 +103,7 @@
 
 //shuttle APC terminal kept being deleted by z level changes
 /obj/machinery/power/apc/debug/vox
-	cell_type = /obj/item/weapon/cell/infinite
+	cell_type = /obj/item/cell/infinite
 	req_access = list(access_voxship)
 
 /obj/effect/submap_landmark/joinable_submap/voxship/scavship/New()
@@ -147,8 +148,8 @@
 
 /obj/machinery/power/smes/buildable/preset/voxship/ship
 	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/smes_coil/super_capacity = 1,
-		/obj/item/weapon/stock_parts/smes_coil/super_io = 1
+		/obj/item/stock_parts/smes_coil/super_capacity = 1,
+		/obj/item/stock_parts/smes_coil/super_io = 1
 	)
 	_input_maxed = TRUE
 	_output_maxed = TRUE

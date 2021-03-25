@@ -83,7 +83,7 @@
 
 		//Last check, list of items that could plausibly be used to climb but aren't climbable themselves
 		var/list/objects_to_stand_on = list(
-				/obj/item/weapon/stool,
+				/obj/item/stool,
 				/obj/structure/bed,
 			)
 		for(var/type in objects_to_stand_on)

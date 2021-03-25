@@ -29,19 +29,22 @@
 	emote_see = list("flaps around", "rolls")
 
 	faction = "whales"
-	attacktext = "ramed"
+	natural_weapon = /obj/item/natural_weapon/whalebone
 	response_help = "strokes"
 	response_disarm = "bumps"
 	response_harm = "strikes"
 
-	melee_damage_lower = 20
-	melee_damage_upper = 50
 	natural_armor = list(melee = ARMOR_MELEE_RESISTANT,
 						bullet = ARMOR_BALLISTIC_SMALL)
 
 	var/chosen_color
 	var/species_colors = list(COLOR_COMMAND_BLUE, COLOR_PURPLE, COLOR_DARK_BLUE_GRAY, COLOR_PALE_PINK)
 	var/mob/living/simple_animal/juvenile_space_whale/baby
+
+/obj/item/natural_weapon/whalebone
+	name = "head"
+	attack_verb = list("ramed")
+	force = 37
 
 /mob/living/simple_animal/hostile/retaliate/space_whale/Initialize()
 	. = ..()

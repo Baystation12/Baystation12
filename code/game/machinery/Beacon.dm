@@ -5,7 +5,7 @@
 	name = "Bluespace Gigabeacon"
 	desc = "A device that draws power from bluespace and creates a permanent tracking beacon."
 	level = 1		// underfloor
-	anchored = 1
+	anchored = TRUE
 	idle_power_usage = 0
 	var/obj/item/device/radio/beacon/Beacon
 

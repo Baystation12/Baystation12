@@ -9,7 +9,7 @@
 	var/list/spawn_cartridges = null // Set to a list of types to spawn one of each on New()
 
 	var/list/cartridges = list() // Associative, label -> cartridge
-	var/obj/item/weapon/reagent_containers/container = null
+	var/obj/item/reagent_containers/container = null
 
 	var/ui_title = "Chemical Dispenser"
 
@@ -17,8 +17,8 @@
 	var/amount = 30
 
 	idle_power_usage = 100
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	obj_flags = OBJ_FLAG_ANCHORABLE
 	core_skill = SKILL_CHEMISTRY
 	var/can_contaminate = TRUE
@@ -34,7 +34,7 @@
 	. = ..()
 	to_chat(user, "It has [cartridges.len] cartridges installed, and has space for [DISPENSER_MAX_CARTRIDGES - cartridges.len] more.")
 
-/obj/machinery/chemical_dispenser/proc/add_cartridge(obj/item/weapon/reagent_containers/chem_disp_cartridge/C, mob/user)
+/obj/machinery/chemical_dispenser/proc/add_cartridge(obj/item/reagent_containers/chem_disp_cartridge/C, mob/user)
 	if(!istype(C))
 		if(user)
 			to_chat(user, "<span class='warning'>\The [C] will not fit in \the [src]!</span>")
@@ -71,26 +71,26 @@
 	cartridges -= label
 	SSnano.update_uis(src)
 
-/obj/machinery/chemical_dispenser/attackby(obj/item/weapon/W, mob/user)
-	if(istype(W, /obj/item/weapon/reagent_containers/chem_disp_cartridge))
+/obj/machinery/chemical_dispenser/attackby(obj/item/W, mob/user)
+	if(istype(W, /obj/item/reagent_containers/chem_disp_cartridge))
 		add_cartridge(W, user)
 
 	else if(isScrewdriver(W))
 		var/label = input(user, "Which cartridge would you like to remove?", "Chemical Dispenser") as null|anything in cartridges
 		if(!label) return
-		var/obj/item/weapon/reagent_containers/chem_disp_cartridge/C = remove_cartridge(label)
+		var/obj/item/reagent_containers/chem_disp_cartridge/C = remove_cartridge(label)
 		if(C)
 			to_chat(user, "<span class='notice'>You remove \the [C] from \the [src].</span>")
 			C.dropInto(loc)
 
-	else if(istype(W, /obj/item/weapon/reagent_containers/glass) || istype(W, /obj/item/weapon/reagent_containers/food))
+	else if(istype(W, /obj/item/reagent_containers/glass) || istype(W, /obj/item/reagent_containers/food))
 		if(container)
 			to_chat(user, "<span class='warning'>There is already \a [container] on \the [src]!</span>")
 			return
 
-		var/obj/item/weapon/reagent_containers/RC = W
+		var/obj/item/reagent_containers/RC = W
 
-		if(!accept_drinking && istype(RC,/obj/item/weapon/reagent_containers/food))
+		if(!accept_drinking && istype(RC,/obj/item/reagent_containers/food))
 			to_chat(user, "<span class='warning'>This machine only accepts beakers!</span>")
 			return
 
@@ -111,7 +111,7 @@
 /obj/machinery/chemical_dispenser/proc/eject_beaker(mob/user)
 	if(!container)
 		return
-	var/obj/item/weapon/reagent_containers/B = container
+	var/obj/item/reagent_containers/B = container
 	user.put_in_hands(B)
 	container = null
 	update_icon()
@@ -137,7 +137,7 @@
 
 	var chemicals[0]
 	for(var/label in cartridges)
-		var/obj/item/weapon/reagent_containers/chem_disp_cartridge/C = cartridges[label]
+		var/obj/item/reagent_containers/chem_disp_cartridge/C = cartridges[label]
 		chemicals[++chemicals.len] = list("label" = label, "amount" = C.reagents.total_volume)
 	data["chemicals"] = chemicals
 
@@ -158,14 +158,14 @@
 	if(href_list["dispense"])
 		var/label = href_list["dispense"]
 		if(cartridges[label] && container && container.is_open_container())
-			var/obj/item/weapon/reagent_containers/chem_disp_cartridge/C = cartridges[label]
+			var/obj/item/reagent_containers/chem_disp_cartridge/C = cartridges[label]
 			var/mult = 1 + (-0.5 + round(rand(), 0.1))*(user.skill_fail_chance(core_skill, 0.3, SKILL_ADEPT))
 			C.reagents.trans_to(container, amount*mult)
 			var/contaminants_left = rand(0, max(SKILL_ADEPT - user.get_skill_value(core_skill), 0)) * can_contaminate
 			var/choices = cartridges.Copy()
 			while(length(choices) && contaminants_left)
 				var/chosen_label = pick_n_take(choices)
-				var/obj/item/weapon/reagent_containers/chem_disp_cartridge/choice = cartridges[chosen_label]
+				var/obj/item/reagent_containers/chem_disp_cartridge/choice = cartridges[chosen_label]
 				if(choice == C)
 					continue
 				choice.reagents.trans_to(container, round(rand()*amount/5, 0.1))

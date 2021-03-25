@@ -3,8 +3,8 @@
 	desc = "This sends messages through bluespace! Wow!"
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "bspacerelay"
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 	idle_power_usage = 15000
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null

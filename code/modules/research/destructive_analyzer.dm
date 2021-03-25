@@ -19,7 +19,7 @@ Note: Must be placed within 3 tiles of the R&D Console
 
 /obj/machinery/r_n_d/destructive_analyzer/RefreshParts()
 	var/T = 0
-	for(var/obj/item/weapon/stock_parts/S in src)
+	for(var/obj/item/stock_parts/S in src)
 		T += S.rating
 	decon_mod = min(T * 0.1, 3)
 	..()

@@ -11,7 +11,7 @@
 /*
  * Retractor
  */
-/obj/item/weapon/retractor
+/obj/item/retractor
 	name = "retractor"
 	desc = "Used to separate the edges of a surgical incision to get to the juicy organs inside."
 	icon = 'icons/obj/surgery.dmi'
@@ -24,7 +24,7 @@
 /*
  * Hemostat
  */
-/obj/item/weapon/hemostat
+/obj/item/hemostat
 	name = "hemostat"
 	desc = "A type of forceps used to prevent an incision from bleeding, or to extract objects from the inside of the body."
 	icon = 'icons/obj/surgery.dmi'
@@ -38,7 +38,7 @@
 /*
  * Cautery
  */
-/obj/item/weapon/cautery
+/obj/item/cautery
 	name = "cautery"
 	desc = "Uses chemicals to quickly cauterize incisions and other small cuts without causing further damage."
 	icon = 'icons/obj/surgery.dmi'
@@ -52,7 +52,7 @@
 /*
  * Surgical Drill
  */
-/obj/item/weapon/surgicaldrill
+/obj/item/surgicaldrill
 	name = "surgical drill"
 	desc = "Effectively a very precise hand drill, used to bore holes through bone."
 	icon = 'icons/obj/surgery.dmi'
@@ -68,7 +68,7 @@
 /*
  * Scalpel
  */
-/obj/item/weapon/scalpel
+/obj/item/scalpel
 	name = "scalpel"
 	desc = "A tiny and extremely sharp steel cutting tool used for surgery, dissection, autopsy, and very precise cuts. The cornerstone of any surgical procedure."
 	icon = 'icons/obj/surgery.dmi'
@@ -89,27 +89,27 @@
 /*
  * Researchable Scalpels
  */
-/obj/item/weapon/scalpel/laser1
+/obj/item/scalpel/laser1
 	name = "laser scalpel"
 	desc = "A scalpel augmented with a directed laser, for more precise cutting without blood entering the field.  This one looks basic and could be improved."
 	icon_state = "scalpel_laser1_on"
 	damtype = "fire"
 
-/obj/item/weapon/scalpel/laser2
+/obj/item/scalpel/laser2
 	name = "laser scalpel"
 	desc = "A scalpel augmented with a directed laser, for more precise cutting without blood entering the field.  This one looks somewhat advanced."
 	icon_state = "scalpel_laser2_on"
 	damtype = "fire"
 	force = 12.0
 
-/obj/item/weapon/scalpel/laser3
+/obj/item/scalpel/laser3
 	name = "laser scalpel"
 	desc = "A scalpel augmented with a directed laser, for more precise cutting without blood entering the field.  This one looks to be the pinnacle of precision energy cutlery!"
 	icon_state = "scalpel_laser3_on"
 	damtype = "fire"
 	force = 15.0
 
-/obj/item/weapon/scalpel/manager
+/obj/item/scalpel/manager
 	name = "incision management system"
 	desc = "A true extension of the surgeon's body, this marvel instantly and completely prepares an incision allowing for the immediate commencement of therapeutic steps."
 	icon_state = "scalpel_manager_on"
@@ -118,7 +118,7 @@
 /*
  * Circular Saw
  */
-/obj/item/weapon/circular_saw
+/obj/item/circular_saw
 	name = "circular saw"
 	desc = "A small and nasty-looking hand saw used to cut through bone, or in an emergency, pizza."
 	icon = 'icons/obj/surgery.dmi'
@@ -137,7 +137,7 @@
 	edge = TRUE
 
 //misc, formerly from code/defines/weapons.dm
-/obj/item/weapon/bonegel
+/obj/item/bonegel
 	name = "bone gel"
 	desc = "Sophisticated chemical gel used to mend fractures and broken bones before setting."
 	icon = 'icons/obj/surgery.dmi'
@@ -146,7 +146,7 @@
 	w_class = ITEM_SIZE_SMALL
 	throwforce = 1.0
 
-/obj/item/weapon/FixOVein
+/obj/item/FixOVein
 	name = "FixOVein"
 	desc = "Derived from a Vey-Med design, this is a very precise surgical tool used to mend cut tendons and severed arteries."
 	icon = 'icons/obj/surgery.dmi'
@@ -157,7 +157,7 @@
 	w_class = ITEM_SIZE_SMALL
 	var/usage_amount = 10
 
-/obj/item/weapon/bonesetter
+/obj/item/bonesetter
 	name = "bone setter"
 	desc = "A large, heavy clamp for setting dislocated or fractured bones back in place."
 	icon = 'icons/obj/surgery.dmi'

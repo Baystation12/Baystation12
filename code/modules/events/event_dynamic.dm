@@ -111,13 +111,13 @@ var/list/event_last_fired = list()
 		if(istype(M, /mob/living/silicon/robot))
 			var/mob/living/silicon/robot/R = M
 			if(R.module)
-				if(istype(R.module, /obj/item/weapon/robot_module/engineering))
+				if(istype(R.module, /obj/item/robot_module/engineering))
 					active_with_role["Engineer"]++
-				else if(istype(R.module, /obj/item/weapon/robot_module/security))
+				else if(istype(R.module, /obj/item/robot_module/security))
 					active_with_role["Security"]++
-				else if(istype(R.module, /obj/item/weapon/robot_module/medical))
+				else if(istype(R.module, /obj/item/robot_module/medical))
 					active_with_role["Medical"]++
-				else if(istype(R.module, /obj/item/weapon/robot_module/research))
+				else if(istype(R.module, /obj/item/robot_module/research))
 					active_with_role["Scientist"]++
 
 		if(M.mind.assigned_role in SSjobs.titles_by_department(ENG))

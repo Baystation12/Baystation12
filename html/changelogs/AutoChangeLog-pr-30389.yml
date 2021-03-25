@@ -1,0 +1,4 @@
+author: "Mucker"
+delete-after: True
+changes: 
+  - rscdel: "Removed the 'teleport_far' artifact effect."

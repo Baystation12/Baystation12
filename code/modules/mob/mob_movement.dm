@@ -205,6 +205,8 @@
 	for(var/obj/O in orange(1, src))
 		if(istype(O, /obj/structure/lattice))
 			return 1
+		if(istype(O, /obj/structure/catwalk))
+			return 1
 		if(O && O.density && O.anchored)
 			return 1
 

@@ -9,7 +9,7 @@
 	var/list/authorized = list(  )
 
 
-	attackby(var/obj/item/weapon/card/W as obj, var/mob/user as mob)
+	attackby(var/obj/item/card/W as obj, var/mob/user as mob)
 		if(stat & (BROKEN|NOPOWER))	return
 
 		var/datum/evacuation_controller/shuttle/evac_control = evacuation_controller
@@ -17,10 +17,10 @@
 			to_chat(user, "<span class='danger'>This console should not in use on this map. Please report this to a developer.</span>")
 			return
 
-		if ((!( istype(W, /obj/item/weapon/card) ) || evacuation_controller.has_evacuated() || !( user )))
+		if ((!( istype(W, /obj/item/card) ) || evacuation_controller.has_evacuated() || !( user )))
 			return
 
-		if (istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/modular_computer))
+		if (istype(W, /obj/item/card/id)||istype(W, /obj/item/modular_computer))
 			if (istype(W, /obj/item/modular_computer))
 				W = W.GetIdCard()
 			if (!W:access) //no access
@@ -65,7 +65,7 @@
 					src.authorized.len = 0
 					src.authorized = list(  )
 
-		else if (istype(W, /obj/item/weapon/card/emag) && !emagged)
+		else if (istype(W, /obj/item/card/emag) && !emagged)
 			var/choice = alert(user, "Would you like to launch the shuttle?","Shuttle control", "Launch", "Cancel")
 
 			if(!emagged && !evacuation_controller.is_prepared() && user.get_active_hand() == W)
@@ -73,7 +73,7 @@
 					if("Launch")
 						to_world("<span class='notice'><b>Alert: Shuttle launch time shortened to 10 seconds!</b></span>")
 						evacuation_controller.set_launch_time(world.time+100)
-						emagged = 1
+						emagged = TRUE
 					if("Cancel")
 						return
 		return

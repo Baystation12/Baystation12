@@ -210,10 +210,20 @@
 /obj/item/mech_equipment/light/attack_self(var/mob/user)
 	. = ..()
 	if(.)
-		on = !on
+		toggle()
 		to_chat(user, "You switch \the [src] [on ? "on" : "off"].")
-		update_icon()
-		owner.update_icon()
+
+/obj/item/mech_equipment/light/proc/toggle()
+	on = !on
+	update_icon()
+	owner.update_icon()
+	active = on
+	passive_power_use = on ? 0.1 KILOWATTS : 0
+
+/obj/item/mech_equipment/light/deactivate()
+	if(on)
+		toggle()
+	..()
 
 /obj/item/mech_equipment/light/on_update_icon()
 	if(on)
@@ -281,7 +291,7 @@
 						log_and_message_admins("used [src] to throw [locked] at [target].", user, owner.loc)
 						locked = null
 
-						var/obj/item/weapon/cell/C = owner.get_cell()
+						var/obj/item/cell/C = owner.get_cell()
 						if(istype(C))
 							C.use(active_power_use * CELLRATE)
 
@@ -302,7 +312,7 @@
 
 
 				log_and_message_admins("used [src]'s area throw on [target].", user, owner.loc)
-				var/obj/item/weapon/cell/C = owner.get_cell()
+				var/obj/item/cell/C = owner.get_cell()
 				if(istype(C))
 					C.use(active_power_use * CELLRATE * 2) //bit more expensive to throw all
 
@@ -312,17 +322,17 @@
 #undef CATAPULT_AREA
 
 
-/obj/item/weapon/material/drill_head
+/obj/item/material/drill_head
 	var/durability = 0
 	name = "drill head"
 	desc = "A replaceable drill head usually used in exosuit drills."
 	icon = 'icons/obj/weapons/other.dmi'
 	icon_state = "drill_head"
 
-/obj/item/weapon/material/drill_head/proc/get_percent_durability()
+/obj/item/material/drill_head/proc/get_percent_durability()
 	return round((durability / material.integrity) * 50)
 
-/obj/item/weapon/material/drill_head/proc/get_visible_durability()
+/obj/item/material/drill_head/proc/get_visible_durability()
 	switch (get_percent_durability())
 		if (95 to INFINITY) . = "shows no wear"
 		if (75 to 95) . = "shows some wear"
@@ -330,24 +340,24 @@
 		if (10 to 50) . = "is very worn"
 		else . = "looks close to breaking"
 
-/obj/item/weapon/material/drill_head/examine(mob/user, distance)
+/obj/item/material/drill_head/examine(mob/user, distance)
 	. = ..()
 	to_chat(user, "It [get_visible_durability()].")
 
 
-/obj/item/weapon/material/drill_head/steel
+/obj/item/material/drill_head/steel
 	default_material = MATERIAL_STEEL
 
-/obj/item/weapon/material/drill_head/titanium
+/obj/item/material/drill_head/titanium
 	default_material = MATERIAL_TITANIUM
 
-/obj/item/weapon/material/drill_head/plasteel
+/obj/item/material/drill_head/plasteel
 	default_material = MATERIAL_PLASTEEL
 
-/obj/item/weapon/material/drill_head/diamond
+/obj/item/material/drill_head/diamond
 	default_material = MATERIAL_DIAMOND
 
-/obj/item/weapon/material/drill_head/Initialize()
+/obj/item/material/drill_head/Initialize()
 	. = ..()
 	durability = 2 * material.integrity
 
@@ -360,7 +370,7 @@
 	equipment_delay = 10
 
 	//Drill can have a head
-	var/obj/item/weapon/material/drill_head/drill_head
+	var/obj/item/material/drill_head/drill_head
 	origin_tech = list(TECH_MATERIAL = 2, TECH_ENGINEERING = 2)
 
 
@@ -391,7 +401,7 @@
 	else
 		to_chat(user, "It does not have a drill head installed.")
 
-/obj/item/mech_equipment/drill/proc/attach_head(obj/item/weapon/material/drill_head/DH, mob/user)
+/obj/item/mech_equipment/drill/proc/attach_head(obj/item/material/drill_head/DH, mob/user)
 	if (user && !user.unEquip(DH))
 		return
 	if (drill_head)
@@ -403,7 +413,7 @@
 
 
 /obj/item/mech_equipment/drill/attackby(obj/item/I, mob/user)
-	if (istype(I, /obj/item/weapon/material/drill_head))
+	if (istype(I, /obj/item/material/drill_head))
 		attach_head(I, user)
 		return TRUE
 	. = ..()
@@ -419,7 +429,7 @@
 		if (!ore_box)
 			continue
 		var/list/atoms_in_range = range(1, at_turf)
-		for(var/obj/item/weapon/ore/ore in atoms_in_range)
+		for(var/obj/item/ore/ore in atoms_in_range)
 			if (!(get_dir(owner, ore) & owner.dir))
 				continue
 			ore.Move(ore_box)
@@ -428,7 +438,7 @@
 	if (!..()) // /obj/item/mech_equipment/afterattack implements a usage guard
 		return
 
-	if (istype(target, /obj/item/weapon/material/drill_head))
+	if (istype(target, /obj/item/material/drill_head))
 		attach_head(target, user)
 		return
 
@@ -454,7 +464,7 @@
 		to_chat(user, SPAN_WARNING("\The [target] can't be drilled away."))
 		return
 
-	var/obj/item/weapon/cell/mech_cell = owner.get_cell()
+	var/obj/item/cell/mech_cell = owner.get_cell()
 	mech_cell.use(active_power_use * CELLRATE) //supercall made sure we have one
 
 	var/delay = 3 SECONDS //most things
@@ -470,7 +480,6 @@
 		blind_message = SPAN_WARNING("You hear a large motor whirring.")
 	)
 	if (!do_after(owner, delay, target, DO_DEFAULT & ~DO_USER_CAN_TURN))
-		to_chat(user, SPAN_WARNING("You must stay still while \the [src] is running."))
 		return
 	if (src != owner.selected_system)
 		to_chat(user, SPAN_WARNING("You must keep \the [src] selected to use it."))
@@ -522,19 +531,19 @@
 
 
 /obj/item/mech_equipment/drill/steel
-	drill_head = /obj/item/weapon/material/drill_head/steel
+	drill_head = /obj/item/material/drill_head/steel
 
 /obj/item/mech_equipment/drill/titanium
-	drill_head = /obj/item/weapon/material/drill_head/titanium
+	drill_head = /obj/item/material/drill_head/titanium
 
 /obj/item/mech_equipment/drill/plasteel
-	drill_head = /obj/item/weapon/material/drill_head/plasteel
+	drill_head = /obj/item/material/drill_head/plasteel
 
 /obj/item/mech_equipment/drill/diamond
-	drill_head = /obj/item/weapon/material/drill_head/diamond
+	drill_head = /obj/item/material/drill_head/diamond
 
 
-/obj/item/weapon/gun/energy/plasmacutter/mounted/mech
+/obj/item/gun/energy/plasmacutter/mounted/mech
 	use_external_power = TRUE
 	has_safety = FALSE
 
@@ -543,7 +552,136 @@
 	name = "mounted plasma cutter"
 	desc = "An industrial plasma cutter mounted onto the chassis of the mech. "
 	icon_state = "railauto" //TODO: Make a new sprite that doesn't get sec called on you.
-	holding_type = /obj/item/weapon/gun/energy/plasmacutter/mounted/mech
+	holding_type = /obj/item/gun/energy/plasmacutter/mounted/mech
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND, HARDPOINT_LEFT_SHOULDER, HARDPOINT_RIGHT_SHOULDER)
 	restricted_software = list(MECH_SOFTWARE_UTILITY)
 	origin_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 4, TECH_ENGINEERING = 6, TECH_COMBAT = 3)
+
+/obj/item/mech_equipment/mounted_system/taser/autoplasma
+	icon_state = "mech_energy"
+	holding_type = /obj/item/gun/energy/plasmacutter/mounted/mech/auto
+	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
+	restricted_software = list(MECH_SOFTWARE_UTILITY)
+	origin_tech = list(TECH_MATERIAL = 5, TECH_PHORON = 4, TECH_ENGINEERING = 6, TECH_COMBAT = 4)
+
+/obj/item/gun/energy/plasmacutter/mounted/mech/auto
+	charge_cost = 13
+	name = "rotatory plasma cutter"
+	desc = "A state of the art rotating, variable intensity, sequential-cascade plasma cutter. Resist the urge to aim this at your coworkers."
+	max_shots = 15
+	firemodes = list(
+		list(mode_name="single shot",	can_autofire=0, burst=1, fire_delay=6,  dispersion = list(0.0)),
+		list(mode_name="full auto",		can_autofire=1, burst=1, fire_delay=1, burst_accuracy = list(0,-1,-1,-1,-1,-2,-2,-2), dispersion = list(1.0, 1.0, 1.0, 1.0, 1.1)),
+		)
+
+/obj/item/mech_equipment/ionjets
+	name = "\improper exosuit manouvering unit"
+	desc = "A testament to the fact that sometimes more is actually more. These oversized electric resonance boosters allow exosuits to move in microgravity and can even provide brief speed boosts. The stabilizers can be toggled with ctrl-click."
+	icon_state = "mech_jet_off"
+	restricted_hardpoints = list(HARDPOINT_BACK)
+	restricted_software = list(MECH_SOFTWARE_UTILITY)
+	active_power_use = 90 KILOWATTS
+	passive_power_use = 0 KILOWATTS
+	var/activated_passive_power = 2 KILOWATTS
+	var/movement_power = 75
+	origin_tech = list(TECH_ENGINEERING = 3, TECH_MAGNET = 3, TECH_PHORON = 3)
+	var/datum/effect/effect/system/trail/ion/ion_trail
+	require_adjacent = FALSE
+	var/stabilizers = FALSE
+	var/slide_distance = 6
+
+/obj/item/mech_equipment/ionjets/Initialize()
+	. = ..()
+	ion_trail = new /datum/effect/effect/system/trail/ion()
+	ion_trail.set_up(src)
+
+/obj/item/mech_equipment/ionjets/proc/allowSpaceMove()
+	if (!active)
+		return FALSE
+
+	var/obj/item/cell/C = owner.get_cell()
+	if (istype(C))
+		if (C.checked_use(movement_power * CELLRATE))
+			return TRUE
+		else 
+			deactivate()
+
+	return FALSE
+				
+/obj/item/mech_equipment/ionjets/attack_self(mob/user)
+	. = ..()
+	if (!.)
+		return
+
+	if (active)
+		deactivate()
+	else 
+		activate()
+
+/obj/item/mech_equipment/ionjets/CtrlClick(mob/user)
+	if (owner && ((user in owner.pilots) || user == owner))
+		if (active)
+			stabilizers = !stabilizers
+			to_chat(user, SPAN_NOTICE("You toggle the stabilizers [stabilizers ? "on" : "off"]"))
+	else
+		..()
+
+/obj/item/mech_equipment/ionjets/proc/activate()
+	passive_power_use = activated_passive_power
+	ion_trail.start()
+	active = TRUE
+	update_icon()
+	
+/obj/item/mech_equipment/ionjets/deactivate()
+	. = ..()
+	passive_power_use = 0 KILOWATTS
+	ion_trail.stop()
+	update_icon()
+
+/obj/item/mech_equipment/ionjets/on_update_icon()
+	. = ..()
+	if (active)
+		icon_state = "mech_jet_on"
+		set_light(1, 1, 1, l_color = COLOR_LIGHT_CYAN)
+	else
+		icon_state = "mech_jet_off"
+		set_light(0)
+	if(owner)
+		owner.update_icon()
+
+/obj/item/mech_equipment/ionjets/get_hardpoint_maptext()
+	if (active)
+		return "ONLINE - Stabilizers [stabilizers ? "on" : "off"]"
+	else return "OFFLINE"
+
+/obj/item/mech_equipment/ionjets/proc/slideCheck(turf/target)
+	if (owner && istype(target))
+		if ((get_dist(owner, target) <= slide_distance) && (get_dir(get_turf(owner), target) == owner.dir))
+			return TRUE
+	return FALSE
+
+/obj/item/mech_equipment/ionjets/afterattack(atom/target, mob/living/user, inrange, params)
+	. = ..()
+	if (. && active)
+		if (owner.z != target.z)
+			to_chat(user, SPAN_WARNING("You cannot reach that level!"))
+			return FALSE
+		var/turf/TT = get_turf(target)
+		if (slideCheck(TT))
+			playsound(src, 'sound/magic/forcewall.ogg', 30, 1)
+			owner.visible_message(
+				SPAN_WARNING("\The [src] charges up in preparation for a slide!"),
+				blind_message = SPAN_WARNING("You hear a loud hum and an intense crackling.")
+			)
+			new /obj/effect/temporary(get_step(owner.loc, reverse_direction(owner.dir)), 2 SECONDS, 'icons/effects/effects.dmi',"cyan_sparkles")
+			owner.setClickCooldown(2 SECONDS)
+			if (do_after(owner, 2 SECONDS, do_flags = (DO_DEFAULT | DO_PUBLIC_PROGRESS | DO_USER_UNIQUE_ACT) & ~DO_USER_CAN_TURN) && slideCheck(TT))
+				owner.visible_message(SPAN_DANGER("Burning hard, \the [owner] thrusts forward!"))
+				owner.throw_at(get_ranged_target_turf(owner, owner.dir, slide_distance), slide_distance, 1, owner, FALSE)
+			else
+				owner.visible_message(SPAN_DANGER("\The [src] sputters and powers down"))
+				owner.sparks.set_up(3,0,owner)
+				owner.sparks.start()
+
+		else
+			to_chat(user, SPAN_WARNING("You cannot slide there!"))

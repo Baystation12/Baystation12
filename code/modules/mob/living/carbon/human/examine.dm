@@ -126,7 +126,7 @@
 
 	//handcuffed?
 	if(handcuffed)
-		if(istype(handcuffed, /obj/item/weapon/handcuffs/cable))
+		if(istype(handcuffed, /obj/item/handcuffs/cable))
 			msg += "<span class='warning'>[T.He] [T.is] [icon2html(handcuffed, user)] restrained with cable!</span>\n"
 		else
 			msg += "<span class='warning'>[T.He] [T.is] [icon2html(handcuffed, user)] handcuffed!</span>\n"
@@ -268,7 +268,7 @@
 		var/perpname = "wot"
 		var/criminal = "None"
 
-		var/obj/item/weapon/card/id/id = GetIdCard()
+		var/obj/item/card/id/id = GetIdCard()
 		if(istype(id))
 			perpname = id.registered_name
 		else
@@ -286,7 +286,7 @@
 		var/perpname = "wot"
 		var/medical = "None"
 
-		var/obj/item/weapon/card/id/id = GetIdCard()
+		var/obj/item/card/id/id = GetIdCard()
 		if(istype(id))
 			perpname = id.registered_name
 		else
@@ -320,7 +320,7 @@
 	if(istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
 		var/obj/item/clothing/glasses/G = H.glasses
-		var/obj/item/weapon/card/id/ID = M.GetIdCard()
+		var/obj/item/card/id/ID = M.GetIdCard()
 
 		return (istype(G) && ((G.hud_type & hudtype) || (G.hud && (G.hud.hud_type & hudtype)))) && G.check_access(ID)
 	else if(istype(M, /mob/living/silicon/robot))

@@ -541,10 +541,11 @@
 		drug_strength = drug_strength * 0.8
 
 	M.druggy = max(M.druggy, drug_strength)
-	if(prob(10))
-		M.SelfMove(pick(GLOB.cardinal))
-	if(prob(7))
-		M.emote(pick("twitch", "drool", "moan", "giggle"))
+	if (alien != IS_SKRELL)
+		if (prob(10))
+			M.SelfMove(pick(GLOB.cardinal))
+		if(prob(7))
+			M.emote(pick("twitch", "drool", "moan", "giggle"))
 	M.add_chemical_effect(CE_PULSE, -1)
 
 /datum/reagent/serotrotium
@@ -812,7 +813,7 @@
 	M.overlays.Cut()
 	M.set_invisibility(101)
 	for(var/obj/item/W in M)
-		if(istype(W, /obj/item/weapon/implant)) //TODO: Carn. give implants a dropped() or something
+		if(istype(W, /obj/item/implant)) //TODO: Carn. give implants a dropped() or something
 			qdel(W)
 			continue
 		M.drop_from_inventory(W)

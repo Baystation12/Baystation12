@@ -1,0 +1,6 @@
+author: CrimsonShrike
+delete-after: true
+changes:
+  - rscadd: Exosuits now have power states. Remember to turn them on using power button!
+  - tweak: Adjusts some exosuit buttons to better reflect real state of suit
+  - tweak: Some exosuit modules will now consume power passively too.

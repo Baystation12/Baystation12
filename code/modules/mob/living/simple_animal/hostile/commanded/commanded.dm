@@ -1,9 +1,8 @@
 /mob/living/simple_animal/hostile/commanded
 	name = "commanded"
 	stance = COMMANDED_STOP
-	melee_damage_lower = 0
-	melee_damage_upper = 0
-	density = 0
+	natural_weapon = /obj/item/natural_weapon
+	density = FALSE
 	var/list/command_buffer = list()
 	var/list/known_commands = list("stay", "stop", "attack", "follow")
 	var/mob/master = null //undisputed master. Their commands hold ultimate sway and ultimate power.

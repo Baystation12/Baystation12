@@ -1,0 +1,4 @@
+author: Mucker
+delete-after: true
+changes:
+  - admin: Adds a buildmode for editing an area, turf, and container atmospheres.

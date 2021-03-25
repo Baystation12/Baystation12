@@ -14,7 +14,7 @@
 	var/restoring = 0
 
 /datum/computer_file/program/aidiag/proc/get_ai()
-	var/obj/item/weapon/stock_parts/computer/ai_slot/ai_slot = computer.get_component(PART_AI)
+	var/obj/item/stock_parts/computer/ai_slot/ai_slot = computer.get_component(PART_AI)
 
 	if(ai_slot && ai_slot.check_functionality() && ai_slot.enabled && ai_slot.stored_card)
 		return ai_slot.stored_card.carded_ai
@@ -78,7 +78,7 @@
 		A.switch_from_dead_to_living_mob_list()
 		A.add_ai_verbs()
 		A.update_icon()
-		var/obj/item/weapon/aicard/AC = A.loc
+		var/obj/item/aicard/AC = A.loc
 		if(AC)
 			AC.update_icon()
 	// Finished restoring

@@ -158,7 +158,7 @@
 	desc = "Vox Ship"
 	region = ACCESS_REGION_NONE
 
-/obj/item/weapon/card/id/voxship
+/obj/item/card/id/voxship
 	access = list(access_voxship)
 
 /obj/machinery/door/airlock/hatch/voxship
@@ -170,14 +170,14 @@
 	r_ear = null
 
 /decl/hierarchy/outfit/job/voxship/crew
-	id_types = list(/obj/item/weapon/card/id/voxship)
+	id_types = list(/obj/item/card/id/voxship)
 	name = ("Vox - Job - Shoal Scavenger")
 	uniform = /obj/item/clothing/under/vox/vox_robes
 	r_pocket = /obj/item/device/radio
 	shoes = /obj/item/clothing/shoes/magboots/vox
-	belt = /obj/item/weapon/storage/belt/utility/full
+	belt = /obj/item/storage/belt/utility/full
 	r_pocket = /obj/item/device/radio
-	l_pocket = /obj/item/weapon/crowbar/prybar
+	l_pocket = /obj/item/crowbar/prybar
 	l_ear = /obj/item/device/radio/headset/map_preset/voxship
 
 /obj/effect/submap_landmark/spawnpoint/voxship_crew

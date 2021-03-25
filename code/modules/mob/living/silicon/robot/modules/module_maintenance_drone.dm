@@ -1,4 +1,4 @@
-/obj/item/weapon/robot_module/drone
+/obj/item/robot_module/drone
 	name = "drone module"
 	hide_on_manifest = 1
 	no_slip = 1
@@ -9,26 +9,26 @@
 		LANGUAGE_HUMAN_EURO = FALSE
 	)
 	equipment = list(
-		/obj/item/weapon/weldingtool,
-		/obj/item/weapon/screwdriver,
-		/obj/item/weapon/wrench,
-		/obj/item/weapon/crowbar,
-		/obj/item/weapon/wirecutters,
+		/obj/item/weldingtool,
+		/obj/item/screwdriver,
+		/obj/item/wrench,
+		/obj/item/crowbar,
+		/obj/item/wirecutters,
 		/obj/item/device/multitool,
 		/obj/item/device/t_scanner,
 		/obj/item/device/lightreplacer,
-		/obj/item/weapon/gripper,
-		/obj/item/weapon/soap,
-		/obj/item/weapon/gripper/no_use/loader,
-		/obj/item/weapon/extinguisher/mini,
+		/obj/item/gripper,
+		/obj/item/soap,
+		/obj/item/gripper/no_use/loader,
+		/obj/item/extinguisher/mini,
 		/obj/item/device/paint_sprayer,
 		/obj/item/inducer/borg,
 		/obj/item/device/plunger/robot,
-		/obj/item/weapon/inflatable_dispenser/robot,
-		/obj/item/weapon/reagent_containers/spray/cleaner/drone,
+		/obj/item/inflatable_dispenser/robot,
+		/obj/item/reagent_containers/spray/cleaner/drone,
 		/obj/item/borg/sight/hud/jani,
-		/obj/item/weapon/tank/jetpack/carbondioxide,
-		/obj/item/weapon/matter_decompiler,
+		/obj/item/tank/jetpack/carbondioxide,
+		/obj/item/matter_decompiler,
 		/obj/item/stack/material/cyborg/steel,
 		/obj/item/stack/material/rods/cyborg,
 		/obj/item/stack/tile/floor/cyborg,
@@ -46,7 +46,7 @@
 		/datum/matter_synth/plastic = 1000,
 		/datum/matter_synth/wire =    30
 	)
-	emag = /obj/item/weapon/gun/energy/plasmacutter
+	emag = /obj/item/gun/energy/plasmacutter
 	skills = list(
 		SKILL_ATMOS        = SKILL_EXPERT,
 		SKILL_ENGINES      = SKILL_EXPERT,
@@ -54,16 +54,16 @@
 		SKILL_ELECTRICAL   = SKILL_EXPERT
 	)
 
-/obj/item/weapon/robot_module/drone/finalize_equipment(var/mob/living/silicon/robot/R)
+/obj/item/robot_module/drone/finalize_equipment(var/mob/living/silicon/robot/R)
 	. = ..()
 	if(istype(R))
-		R.internals = locate(/obj/item/weapon/tank/jetpack/carbondioxide) in equipment
+		R.internals = locate(/obj/item/tank/jetpack/carbondioxide) in equipment
 
-/obj/item/weapon/robot_module/drone/finalize_emag()
+/obj/item/robot_module/drone/finalize_emag()
 	. = ..()
 	emag.SetName("Plasma Cutter")
 
-/obj/item/weapon/robot_module/drone/finalize_synths()
+/obj/item/robot_module/drone/finalize_synths()
 	. = ..()
 	var/datum/matter_synth/metal/metal =     locate() in synths
 	var/datum/matter_synth/glass/glass =     locate() in synths
@@ -71,7 +71,7 @@
 	var/datum/matter_synth/plastic/plastic = locate() in synths
 	var/datum/matter_synth/wire/wire =       locate() in synths
 
-	var/obj/item/weapon/matter_decompiler/MD = locate() in equipment
+	var/obj/item/matter_decompiler/MD = locate() in equipment
 	MD.metal = metal
 	MD.glass = glass
 	MD.wood = wood
@@ -106,20 +106,20 @@
 	var/obj/item/stack/material/cyborg/plastic/P = locate() in equipment
 	P.synths = list(plastic)
 
-/obj/item/weapon/robot_module/drone/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
+/obj/item/robot_module/drone/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	..()
-	var/obj/item/weapon/reagent_containers/spray/cleaner/drone/SC = locate() in equipment
+	var/obj/item/reagent_containers/spray/cleaner/drone/SC = locate() in equipment
 	SC.reagents.add_reagent(/datum/reagent/space_cleaner, 8 * amount)
 
-/obj/item/weapon/robot_module/drone/construction
+/obj/item/robot_module/drone/construction
 	name = "construction drone module"
 	hide_on_manifest = 1
 
-/obj/item/weapon/robot_module/drone/construction/Initialize()
-	equipment += /obj/item/weapon/rcd/borg
+/obj/item/robot_module/drone/construction/Initialize()
+	equipment += /obj/item/rcd/borg
 	. = ..()
 
-/obj/item/weapon/robot_module/drone/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
+/obj/item/robot_module/drone/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	var/obj/item/device/lightreplacer/LR = locate() in equipment
 	LR.Charge(R, amount)
 	..()

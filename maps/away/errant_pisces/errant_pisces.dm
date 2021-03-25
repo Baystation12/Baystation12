@@ -13,7 +13,7 @@
 	id = "awaysite_errant_pisces"
 	description = "Xynergy carp trawler"
 	suffixes = list("errant_pisces/errant_pisces.dmm")
-	cost = 1
+	spawn_cost = 1
 	area_usage_test_exempted_root_areas = list(/area/errant_pisces)
 
 /mob/living/simple_animal/hostile/carp/shark // generally stronger version of a carp that doesn't die from a mean look. Fance new sprites included, credits to F-Tang Steve
@@ -25,13 +25,12 @@
 	icon_dead = "shark_dead"
 	icon_gib = "shark_dead"
 	turns_per_move = 5
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/sharkmeat
+	meat_type = /obj/item/reagent_containers/food/snacks/sharkmeat
 	speed = 2
 	maxHealth = 100
 	health = 100
 	harm_intent_damage = 5
-	melee_damage_lower = 15
-	melee_damage_upper = 25
+	natural_weapon = /obj/item/natural_weapon/bite/strong
 	break_stuff_probability = 35
 	faction = "shark"
 
@@ -67,14 +66,14 @@
 				L.forceMove(T)
 			visible_message("<span class='danger'>\The [src] releases [L].</span>")
 
-/obj/item/weapon/reagent_containers/food/snacks/sharkmeat
+/obj/item/reagent_containers/food/snacks/sharkmeat
 	name = "cosmoshark fillet"
 	desc = "A fillet of cosmoshark meat."
 	icon_state = "fishfillet"
 	filling_color = "#cecece"
 	center_of_mass = "x=17;y=13"
 
-/obj/item/weapon/reagent_containers/food/snacks/sharkmeat/New()
+/obj/item/reagent_containers/food/snacks/sharkmeat/New()
 	..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 5)
 	reagents.add_reagent(/datum/reagent/space_drugs, 1)
@@ -87,7 +86,7 @@
 	desc = "A sturdy industrial net of synthetic belts reinforced with plasteel threads."
 	icon = 'maps/away/errant_pisces/errant_pisces_sprites.dmi'
 	icon_state = "net_f"
-	anchored = 1
+	anchored = TRUE
 	layer = CATWALK_LAYER//probably? Should cover cables, pipes and the rest of objects that are secured on the floor
 	var/health = 100
 
@@ -111,9 +110,9 @@ obj/structure/net/Initialize(var/mapload)
 	else if (health < 90)
 		to_chat(user, "Few ribbons of \the [src] are cut away.")
 
-/obj/structure/net/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/weapon/material)) //sharp objects can cut thorugh
-		var/obj/item/weapon/material/SH = W
+/obj/structure/net/attackby(obj/item/W as obj, mob/user as mob)
+	if (istype(W, /obj/item/material)) //sharp objects can cut thorugh
+		var/obj/item/material/SH = W
 		if (!(SH.sharp) || (SH.sharp && SH.force < 10))//is not sharp enough or at all
 			to_chat(user,"<span class='warning'>You can't cut throught \the [src] with \the [W], it's too dull.</span>")
 			return
@@ -147,7 +146,7 @@ obj/structure/net/Initialize(var/mapload)
 
 /obj/structure/net/net_wall
 	icon_state = "net_w"
-	density = 1
+	density = TRUE
 	layer = ABOVE_HUMAN_LAYER
 
 /obj/structure/net/net_wall/Initialize(var/mapload)
@@ -243,6 +242,61 @@ obj/structure/net/Initialize(var/mapload)
 	name = "Dead carp fisher"
 	uniform = /obj/item/clothing/under/color/green
 	suit = /obj/item/clothing/suit/apron/overalls
-	belt = /obj/item/weapon/material/knife/combat
+	belt = /obj/item/material/knife/combat
 	shoes = /obj/item/clothing/shoes/jackboots
 	head = /obj/item/clothing/head/hardhat/dblue
+
+/obj/effect/computer_file_creator/ahabs_harpoon01
+	name = "ahab's harpoon file spawner - sensor dump"
+
+/obj/effect/computer_file_creator/ahabs_harpoon01/Initialize()
+	var/i_month = max(text2num(time2text(world.timeofday, "MM")) - 1, 1) // Prevent month from going below 1
+	var/i_day = max(text2num(time2text(world.timeofday, "DD")) - 5, 1)
+	file_name = "NETMON_SENSORDUMP-BLACKBOX"
+	file_info = " \
+		<h2>XCV Ahab's Harpoon Sensor Log - <i>[GLOB.using_map.game_year]-[i_month]-[i_day]</i></h2> \
+		<hr> \
+		\<08:33:07\> Space carp migration detected within 1 Gm.<br>\
+		\<08:51:29\> Main net extended.<br>\
+		\<09:00:00\> Hourly report. Security level: GREEN. Crew status: NOMINAL. SMES charge: NOMINAL.<br>\
+		\<09:02:53\> Outflow cells opened.<br>\
+		\<09:04:12\> Exterior airlock cycling: Port Solar Control.<br>\
+		\<09:04:25\> <b>VITAL SIGNS ALERT:</b> C. BANCROFT, Retrieval Specialist, Port Solar Control<br>\
+		\<09:04:33\> <b>BRAIN ACTIVITY FLATLINE:</b> C. BANCROFT, Retrieval Specialist, Port Solar Control<br>\
+		\<09:04:39\> Unidentified lifesigns aboard.<br>\
+		\<09:04:45\> Multiple unidentified lifesigns aboard.<br>\
+		\<09:05:21\> <b>SECURITY LEVEL ALERT:</b> Elevated to RED.<br>\
+		\<09:33:07\> <b>SECURITY LEVEL ALERT:</b> Logging flight and sensor data to ship black box.<br>\
+		\<09:41:13\> <b>MULTIPLE VITAL SIGNS ALERTS</b><br>\
+		\<09:47:03\> All vital signs alerts cleared.<br>\
+		\<10:00:00\> Hourly report. Security level: RED. Crew status: CRITICAL. SMES charge: NOMINAL.<br>\
+		\<11:00:00\> Hourly report. Security level: RED. Crew status: CRITICAL. SMES charge: NOMINAL.<br>\
+		\<12:00:00\> Hourly report. Security level: RED. Crew status: CRITICAL. SMES charge: NOMINAL.<br>\
+		\<13:00:00\> Hourly report. Security level: RED. Crew status: CRITICAL. SMES charge: NOMINAL.<br>\
+		\<14:00:00\> Hourly report. Security level: RED. Crew status: CRITICAL. SMES charge: LOW.<br>\
+		\<15:00:00\> Hourly report. Security level: RED. Crew status: CRITICAL. SMES charge: LOW.<br>\
+		\<16:00:00\> Hourly report. Security level: RED. Crew status: CRITICAL. SMES charge: CRITICAL.<br>\
+		\<17:00:00\> Hourly report. Security level: RED. Crew status: CRITICAL. SMES charge: CRITICAL.<br>\
+		\<17:03:41\> Low power. Entering hibernation. Data dumped to local drive and stored in ship black box.<br>\
+		\<17:03:41\> Black box data pushed to access terminal.<br>\
+		\<17:03:42\> Shutting down.<br>\
+	"
+	. = ..()
+
+/obj/effect/computer_file_creator/ahabs_harpoon02
+	name = "ahab's harpoon file spawner - black box"
+	file_name = "NETMON_BLACKBOX"
+	file_info = "<p><i>This is the flight recorder data for the XCV Ahab's Harpoon. Its callsign and flight registration indicate that this is a medium size, long-haul commerical space carp fishing vessel, owned by Xynergy. The data recording here only includes hourly status reports, but they indicate that the ship went from nominal function at 09:00 to red alert and critical crew status by 10:00, before continuing at these levels for most of the day until SMES power failed.</i></p>\
+	\
+	<p><i>This data contains a wealth of information about the ship's records, manifest, and specifications, but nothing immediately useful about the events that happened on board. You may be able to glean further information if you could find more complete records.</i></p>"
+
+/obj/effect/computer_file_creator/ahabs_harpoon03
+	name = "ahab's harpoon file spawner - captain's log"
+	file_name = "captainslog"
+
+/obj/effect/computer_file_creator/ahabs_harpoon03/Initialize()
+	var/captain_name = "[capitalize(pick(GLOB.first_names_male + GLOB.first_names_female))] [capitalize(pick(GLOB.last_names))]"
+	file_info = "<p><i>This is the captain's log of the XCV Ahab's Harpoon, authored by Xynergy general manager [captain_name]. According to the log's contents, the ship embarked on its final voyage six months ago. All entries except the last one seem mundane - routine checks, inventory reports, flight path, and so on. The final entry seems to have been written in a hurry, with several typos that didn't get caught by the autocorrect:</i></p>\
+	\
+	<p>Had a major incident, have lost control f the ship. Hit a big shoal off Nine and scooped up a bunch but itr got the net tangled. Charlie went out to untangle it and a bunch got in. Big motherfuckers, got everywhere. Lkarger than pike. Got trhough doors. Gettim vital alerts for half the crew. Turning on distress but the emergency mode eats up a lot of powedr and it won't last forever. Solars might keep the lights on but it'll be brownouts/blackouts eventually. Going to make for engi where the blackbox comp is. Wish me luck. Please report to xyn/gov if you find this.</p>"
+	. = ..()

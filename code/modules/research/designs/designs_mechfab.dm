@@ -406,6 +406,13 @@
 	req_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 4, TECH_ENGINEERING = 3)
 	build_path = /obj/item/mech_equipment/mounted_system/taser/plasma
 
+/datum/design/item/exosuit/weapon/plasma/auto
+	name = "mounted rotatory plasma cutter"
+	id = "mech_plasma_auto"
+	materials = list(MATERIAL_STEEL = 20000, MATERIAL_SILVER = 2000, MATERIAL_GOLD = 2000)
+	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 5, TECH_ENGINEERING = 3)
+	build_path = /obj/item/mech_equipment/mounted_system/taser/autoplasma
+
 /datum/design/item/exosuit/weapon/ion
 	name = "mounted ion rifle"
 	id = "mech_ion"
@@ -462,6 +469,14 @@
 	materials = list(MATERIAL_STEEL = 40000, MATERIAL_ALUMINIUM = 5000)
 	req_tech = list(TECH_MATERIAL = 3)
 	build_path = /obj/item/mech_equipment/ballistic_shield
+
+/datum/design/item/exosuit/ionjets
+	name = "exosuit manouvering unit"
+	id = "mech_ionjets"
+	time = 30
+	materials = list(MATERIAL_STEEL = 20000, MATERIAL_ALUMINIUM = 10000, MATERIAL_PHORON = 2500)
+	req_tech = list(TECH_ENGINEERING = 2, TECH_MAGNET = 2)
+	build_path = /obj/item/mech_equipment/ionjets
 // End mechs.
 
 /datum/design/item/synthetic_flash
@@ -559,7 +574,7 @@
 /datum/design/item/mechfab/rig/zero
 	category = "Hardsuits"
 	name = "Null suit control module"
-	build_path = /obj/item/weapon/rig/zero
+	build_path = /obj/item/rig/zero
 	materials = list(DEFAULT_WALL_MATERIAL = 30000, "glass" = 5000, "silver" = 1000)
 	id = "null _suit"
 	time = 120

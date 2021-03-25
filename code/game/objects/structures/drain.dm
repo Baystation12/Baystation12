@@ -5,8 +5,8 @@
 	desc = "You probably can't get sucked down the plughole."
 	icon = 'icons/obj/drain.dmi'
 	icon_state = "drain"
-	anchored = 1
-	density = 0
+	anchored = TRUE
+	density = FALSE
 	layer = TURF_LAYER+0.1
 	can_drain = 1
 	var/welded
@@ -14,7 +14,7 @@
 /obj/structure/hygiene/drain/attackby(var/obj/item/thing, var/mob/user)
 	..()
 	if(isWelder(thing))
-		var/obj/item/weapon/weldingtool/WT = thing
+		var/obj/item/weldingtool/WT = thing
 		if(WT.isOn())
 			welded = !welded
 			to_chat(user, "<span class='notice'>You weld \the [src] [welded ? "closed" : "open"].</span>")

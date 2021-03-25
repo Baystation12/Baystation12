@@ -17,7 +17,7 @@
 /datum/nano_module/atmos_control
 	name = "Atmospherics Control"
 	var/obj/access = new()
-	var/emagged = 0
+	var/emagged = FALSE
 	var/ui_ref
 	var/list/monitored_alarms = list()
 

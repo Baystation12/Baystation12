@@ -1,4 +1,4 @@
-/obj/item/weapon/grenade/supermatter
+/obj/item/grenade/supermatter
 	name = "supermatter grenade"
 	icon_state = "banana"
 	item_state = "emergency_engi"
@@ -6,24 +6,24 @@
 	arm_sound = 'sound/effects/3.wav'
 	var/implode_at
 
-/obj/item/weapon/grenade/supermatter/Destroy()
+/obj/item/grenade/supermatter/Destroy()
 	if(implode_at)
 		STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-/obj/item/weapon/grenade/supermatter/detonate()
+/obj/item/grenade/supermatter/detonate()
 	..()
 	START_PROCESSING(SSobj, src)
 	implode_at = world.time + 10 SECONDS
 	update_icon()
 	playsound(src, 'sound/weapons/wave.ogg', 100)
 
-/obj/item/weapon/grenade/supermatter/on_update_icon()
+/obj/item/grenade/supermatter/on_update_icon()
 	overlays.Cut()
 	if(implode_at)
 		overlays += image(icon = 'icons/obj/machines/power/fusion.dmi', icon_state = "emfield_s1")
 
-/obj/item/weapon/grenade/supermatter/Process()
+/obj/item/grenade/supermatter/Process()
 	if(!isturf(loc))
 		if(ismob(loc))
 			var/mob/M = loc

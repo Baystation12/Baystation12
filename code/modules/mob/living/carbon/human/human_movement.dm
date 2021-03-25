@@ -92,12 +92,12 @@
 	// End 'eugh'
 
 	//Do we have a working jetpack?
-	var/obj/item/weapon/tank/jetpack/thrust
+	var/obj/item/tank/jetpack/thrust
 	if(back)
-		if(istype(back,/obj/item/weapon/tank/jetpack))
+		if(istype(back,/obj/item/tank/jetpack))
 			thrust = back
-		else if(istype(back,/obj/item/weapon/rig))
-			var/obj/item/weapon/rig/rig = back
+		else if(istype(back,/obj/item/rig))
+			var/obj/item/rig/rig = back
 			for(var/obj/item/rig_module/maneuvering_jets/module in rig.installed_modules)
 				thrust = module.jets
 				break
@@ -141,7 +141,7 @@
 	if(!can_feel_pain())
 		return
 	var/crutches = 0
-	for(var/obj/item/weapon/cane/C in list(l_hand, r_hand))
+	for(var/obj/item/cane/C in list(l_hand, r_hand))
 		if(istype(C))
 			crutches++
 	for(var/organ_name in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))

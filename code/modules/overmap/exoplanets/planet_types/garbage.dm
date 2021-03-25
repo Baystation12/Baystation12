@@ -9,6 +9,7 @@
 	plant_colors = list("#efdd6f","#7b4a12","#e49135","#ba6222","#5c755e","#120309")
 	surface_color = "#a5a18b"
 	water_color = null
+	habitability_distribution = list(HABITABILITY_IDEAL = 5, HABITABILITY_OKAY = 40, HABITABILITY_BAD = 35)
 
 /obj/effect/overmap/visitable/sector/exoplanet/garbage/generate_map()
 	if(prob(50))

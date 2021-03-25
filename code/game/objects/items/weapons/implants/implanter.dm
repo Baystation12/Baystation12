@@ -1,4 +1,4 @@
-/obj/item/weapon/implanter
+/obj/item/implanter
 	name = "implanter"
 	icon = 'icons/obj/items.dmi'
 	icon_state = "implanter0"
@@ -7,21 +7,21 @@
 	throw_range = 5
 	w_class = ITEM_SIZE_SMALL
 	matter = list(MATERIAL_ALUMINIUM = 1000, MATERIAL_GLASS = 1000)
-	var/obj/item/weapon/implant/imp = null
+	var/obj/item/implant/imp = null
 
-/obj/item/weapon/implanter/New()
+/obj/item/implanter/New()
 	if(ispath(imp))
 		imp = new imp(src)
 	..()
 	update_icon()
 
-/obj/item/weapon/implanter/on_update_icon()
+/obj/item/implanter/on_update_icon()
 	if (imp)
 		icon_state = "implanter1"
 	else
 		icon_state = "implanter0"
 
-/obj/item/weapon/implanter/proc/can_use()
+/obj/item/implanter/proc/can_use()
 
 	if(!ismob(loc))
 		return 0
@@ -34,15 +34,15 @@
 		return 1
 	return 0
 
-/obj/item/weapon/implanter/attackby(obj/item/weapon/I, mob/user)
-	if(!imp && istype(I, /obj/item/weapon/implant) && user.unEquip(I,src))
+/obj/item/implanter/attackby(obj/item/I, mob/user)
+	if(!imp && istype(I, /obj/item/implant) && user.unEquip(I,src))
 		to_chat(usr, "<span class='notice'>You slide \the [I] into \the [src].</span>")
 		imp = I
 		update_icon()
 	else
 		..()
 
-/obj/item/weapon/implanter/attack(mob/M as mob, mob/user as mob)
+/obj/item/implanter/attack(mob/M as mob, mob/user as mob)
 	if (!istype(M, /mob/living/carbon))
 		return
 	if (user && src.imp)

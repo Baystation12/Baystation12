@@ -3,9 +3,9 @@
 	desc = "A exosuit recharger, built into the floor."
 	icon = 'icons/mecha/mech_bay.dmi'
 	icon_state = "recharge_floor"
-	density = 0
+	density = FALSE
 	layer = ABOVE_TILE_LAYER
-	anchored = 1
+	anchored = TRUE
 	idle_power_usage = 200	// Some electronics, passive drain.
 	active_power_usage = 60 KILOWATTS // When charging
 	base_type = /obj/machinery/mech_recharger
@@ -31,15 +31,15 @@
 /obj/machinery/mech_recharger/RefreshParts()
 	..()
 	// Calculates an average rating of components that affect charging rate.
-	var/chargerate_multiplier = total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor)
-	chargerate_multiplier += total_component_rating_of_type(/obj/item/weapon/stock_parts/scanning_module)
+	var/chargerate_multiplier = total_component_rating_of_type(/obj/item/stock_parts/capacitor)
+	chargerate_multiplier += total_component_rating_of_type(/obj/item/stock_parts/scanning_module)
 
-	var/chargerate_divisor = number_of_components(/obj/item/weapon/stock_parts/capacitor)
-	chargerate_divisor += number_of_components(/obj/item/weapon/stock_parts/scanning_module)
+	var/chargerate_divisor = number_of_components(/obj/item/stock_parts/capacitor)
+	chargerate_divisor += number_of_components(/obj/item/stock_parts/scanning_module)
 
 	repair = -5
-	repair += 2 * total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator)
-	repair += total_component_rating_of_type(/obj/item/weapon/stock_parts/scanning_module)
+	repair += 2 * total_component_rating_of_type(/obj/item/stock_parts/manipulator)
+	repair += total_component_rating_of_type(/obj/item/stock_parts/scanning_module)
 
 	if(chargerate_multiplier)
 		change_power_consumption(base_charge_rate * (chargerate_multiplier / chargerate_divisor), POWER_USE_ACTIVE)
@@ -78,7 +78,7 @@
 		if(fully_repaired())
 			charging.show_message(SPAN_NOTICE("Exosuit integrity has been fully restored."))
 
-	var/obj/item/weapon/cell/cell = charging.get_cell()
+	var/obj/item/cell/cell = charging.get_cell(TRUE)
 	if(cell && !cell.fully_charged() && remaining_energy > 0)
 		cell.give(remaining_energy * CELLRATE)
 		if(cell.fully_charged())

@@ -4,8 +4,8 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 
 /proc/cache_circuits_by_build_path()
 	. = list()
-	for(var/board_path in subtypesof(/obj/item/weapon/stock_parts/circuitboard))
-		var/obj/item/weapon/stock_parts/circuitboard/board = board_path //fake type
+	for(var/board_path in subtypesof(/obj/item/stock_parts/circuitboard))
+		var/obj/item/stock_parts/circuitboard/board = board_path //fake type
 		if(initial(board.buildtype_select))
 			board = new board_path()
 			for(var/path in board.get_buildable_types())
@@ -20,7 +20,7 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 		var/path_to_check = base_type || type
 		var/board_path = GLOB.machine_path_to_circuit_type[path_to_check]
 		if(board_path)
-			var/obj/item/weapon/stock_parts/circuitboard/board = install_component(board_path, refresh_parts = FALSE)
+			var/obj/item/stock_parts/circuitboard/board = install_component(board_path, refresh_parts = FALSE)
 			var/list/req_components = board.spawn_components || board.req_components
 			req_components = req_components.Copy()
 			if(board.additional_spawn_components)
@@ -49,7 +49,7 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 	for(var/path in stock_part_presets)
 		var/decl/stock_part_preset/preset = decls_repository.get_decl(path)
 		var/number = stock_part_presets[path] || 1
-		for(var/obj/item/weapon/stock_parts/part in component_parts)
+		for(var/obj/item/stock_parts/part in component_parts)
 			if(processed_parts[part])
 				continue // only apply one preset per part
 			if(istype(part, preset.expected_part_type))
@@ -60,7 +60,7 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 					break
 
 // Returns the first valid preset decl for a given part, or null
-/obj/machinery/proc/can_apply_preset_to(var/obj/item/weapon/stock_parts/part)
+/obj/machinery/proc/can_apply_preset_to(var/obj/item/stock_parts/part)
 	if(!stock_part_presets)
 		return
 	for(var/path in stock_part_presets)
@@ -69,7 +69,7 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 			return preset
 
 // Applies the first valid preset to the given part. Returns preset applied, or null.
-/obj/machinery/proc/apply_preset_to(var/obj/item/weapon/stock_parts/part)
+/obj/machinery/proc/apply_preset_to(var/obj/item/stock_parts/part)
 	var/decl/stock_part_preset/preset = can_apply_preset_to(part)
 	if(preset)
 		preset.apply(null, part)
@@ -110,9 +110,9 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 
 // Can be given a path or an instance. False will guarantee part creation.
 // If an instance is given or created, it is returned, otherwise null is returned.
-/obj/machinery/proc/install_component(var/obj/item/weapon/stock_parts/part, force = FALSE, refresh_parts = TRUE)
+/obj/machinery/proc/install_component(var/obj/item/stock_parts/part, force = FALSE, refresh_parts = TRUE)
 	if(ispath(part))
-		if(force || !(ispath(part, /obj/item/weapon/stock_parts) && initial(part.part_flags) & PART_FLAG_LAZY_INIT))
+		if(force || !(ispath(part, /obj/item/stock_parts) && initial(part.part_flags) & PART_FLAG_LAZY_INIT))
 			part = new part(src) // Forced to make, or we don't lazy-init, so create.
 
 			if(istype(part, /obj/item/stack)) // Compatibility with legacy construction code
@@ -132,16 +132,16 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 		LAZYINITLIST(uncreated_component_parts)
 		uncreated_component_parts[part] += 1
 	else // Wrong type
-		var/obj/item/weapon/stock_parts/building_material/material = get_component_of_type(/obj/item/weapon/stock_parts/building_material)
+		var/obj/item/stock_parts/building_material/material = get_component_of_type(/obj/item/stock_parts/building_material)
 		if(!material)
-			material = install_component(/obj/item/weapon/stock_parts/building_material, refresh_parts = FALSE)
+			material = install_component(/obj/item/stock_parts/building_material, refresh_parts = FALSE)
 		material.add_material(part)
 
 	if(refresh_parts)
 		RefreshParts()
 
 // This will force-init components.
-/obj/machinery/proc/uninstall_component(var/obj/item/weapon/stock_parts/part, refresh_parts = TRUE)
+/obj/machinery/proc/uninstall_component(var/obj/item/stock_parts/part, refresh_parts = TRUE)
 	if(ispath(part))
 		part = get_component_of_type(part)
 	else if(!(part in component_parts))
@@ -158,7 +158,7 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 		GLOB.destroyed_event.unregister(part, src)
 		return part
 
-/obj/machinery/proc/replace_part(mob/user, var/obj/item/weapon/storage/part_replacer/R, var/obj/item/weapon/stock_parts/old_part, var/obj/item/weapon/stock_parts/new_part)
+/obj/machinery/proc/replace_part(mob/user, var/obj/item/storage/part_replacer/R, var/obj/item/stock_parts/old_part, var/obj/item/stock_parts/new_part)
 	if(ispath(old_part))
 		old_part = get_component_of_type(old_part, TRUE)
 	old_part = uninstall_component(old_part)
@@ -178,16 +178,16 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 	. = 0
 	for(var/thing in component_parts)
 		if(istype(thing, part_type))
-			var/obj/item/weapon/stock_parts/part = thing
+			var/obj/item/stock_parts/part = thing
 			. += part.rating
 	for(var/path in uncreated_component_parts)
 		if(ispath(path, part_type))
-			var/obj/item/weapon/stock_parts/comp = path
+			var/obj/item/stock_parts/comp = path
 			. += initial(comp.rating) * uncreated_component_parts[path]
 
 /obj/machinery/proc/number_of_components(var/part_type)
-	if(!ispath(part_type, /obj/item/weapon/stock_parts))
-		var/obj/item/weapon/stock_parts/building_material/material = get_component_of_type(/obj/item/weapon/stock_parts/building_material)
+	if(!ispath(part_type, /obj/item/stock_parts))
+		var/obj/item/stock_parts/building_material/material = get_component_of_type(/obj/item/stock_parts/building_material)
 		return material && material.number_of_type(part_type)
 	var/list/comps = types_of_component(part_type)
 	. = 0
@@ -199,7 +199,7 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 	return panel_open
 
 // Installation. Returns number of such components which can be inserted, or 0.
-/obj/machinery/proc/can_add_component(var/obj/item/weapon/stock_parts/component, var/mob/user)
+/obj/machinery/proc/can_add_component(var/obj/item/stock_parts/component, var/mob/user)
 	if(!istype(component)) // Random items. Only insert if actually needed.
 		var/list/missing = missing_parts()
 		for(var/path in missing)
@@ -218,7 +218,7 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 	return 1
 
 // Hook to get updates.
-/obj/machinery/proc/component_stat_change(var/obj/item/weapon/stock_parts/part, old_stat, flag)
+/obj/machinery/proc/component_stat_change(var/obj/item/stock_parts/part, old_stat, flag)
 
 /obj/machinery/attackby(obj/item/I, mob/user)
 	if(component_attackby(I, user))
@@ -226,7 +226,7 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 	return ..()
 
 /obj/machinery/proc/component_attackby(obj/item/I, mob/user)
-	for(var/obj/item/weapon/stock_parts/part in component_parts)
+	for(var/obj/item/stock_parts/part in component_parts)
 		if(!components_are_accessible(part.type))
 			continue
 		if((. = part.attackby(I, user)))
@@ -234,7 +234,7 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 	return construct_state && construct_state.attackby(I, user, src)
 
 /obj/machinery/proc/component_attack_hand(mob/user)
-	for(var/obj/item/weapon/stock_parts/part in component_parts)
+	for(var/obj/item/stock_parts/part in component_parts)
 		if(!components_are_accessible(part.type))
 			continue
 		if((. = part.attack_hand(user)))
@@ -245,28 +245,28 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 Standard helpers for users interacting with machinery parts.
 */
 
-/obj/machinery/proc/part_replacement(mob/user, obj/item/weapon/storage/part_replacer/R)
-	for(var/obj/item/weapon/stock_parts/A in component_parts)
+/obj/machinery/proc/part_replacement(mob/user, obj/item/storage/part_replacer/R)
+	for(var/obj/item/stock_parts/A in component_parts)
 		if(!A.base_type)
 			continue
 		if(!(A.part_flags & PART_FLAG_HAND_REMOVE))
 			continue
-		for(var/obj/item/weapon/stock_parts/B in R.contents)
+		for(var/obj/item/stock_parts/B in R.contents)
 			if(istype(B, A.base_type) && B.rating > A.rating)
 				replace_part(user, R, A, B)
 				return TRUE
 	for(var/path in uncreated_component_parts)
-		var/obj/item/weapon/stock_parts/A = path
+		var/obj/item/stock_parts/A = path
 		if(!(initial(A.part_flags) & PART_FLAG_HAND_REMOVE))
 			continue
 		var/base_type = initial(A.base_type)
 		if(base_type)
-			for(var/obj/item/weapon/stock_parts/B in R.contents)
+			for(var/obj/item/stock_parts/B in R.contents)
 				if(istype(B, base_type) && B.rating > initial(A.rating))
 					replace_part(user, R, A, B)
 					return TRUE
 
-/obj/machinery/proc/part_insertion(mob/user, obj/item/weapon/stock_parts/part) // Second argument may actually be an arbitrary item.
+/obj/machinery/proc/part_insertion(mob/user, obj/item/stock_parts/part) // Second argument may actually be an arbitrary item.
 	if(!user.canUnEquip(part) && !isstack(part))
 		return FALSE
 	var/number = can_add_component(part, user)
@@ -283,8 +283,8 @@ Standard helpers for users interacting with machinery parts.
 
 /obj/machinery/proc/part_removal(mob/user)
 	var/list/removable_parts = list()
-	for(var/path in types_of_component(/obj/item/weapon/stock_parts))
-		var/obj/item/weapon/stock_parts/part = path
+	for(var/path in types_of_component(/obj/item/stock_parts))
+		var/obj/item/stock_parts/part = path
 		if(!(initial(part.part_flags) & PART_FLAG_HAND_REMOVE))
 			continue
 		if(components_are_accessible(path))
@@ -300,7 +300,7 @@ Standard helpers for users interacting with machinery parts.
 		return TRUE
 
 /obj/machinery/proc/remove_part_and_give_to_user(var/path, mob/user)
-	var/obj/item/weapon/stock_parts/part = uninstall_component(get_component_of_type(path, TRUE))
+	var/obj/item/stock_parts/part = uninstall_component(get_component_of_type(path, TRUE))
 	if(part)
 		user.put_in_hands(part) // Already dropped at loc, so that's the fallback.
 		user.visible_message(SPAN_NOTICE("\The [user] removes \the [part] from \the [src]."), SPAN_NOTICE("You remove \the [part] from \the [src]."))

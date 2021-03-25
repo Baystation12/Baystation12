@@ -8,6 +8,7 @@
 	map_generators = list(/datum/random_map/noise/exoplanet/desert, /datum/random_map/noise/ore/rich)
 	surface_color = "#d6cca4"
 	water_color = null
+	habitability_distribution = list(HABITABILITY_IDEAL = 30, HABITABILITY_OKAY = 50, HABITABILITY_BAD = 10)
 
 /obj/effect/overmap/visitable/sector/exoplanet/desert/generate_map()
 	if(prob(70))
@@ -66,8 +67,8 @@
 	name = "sand"
 	icon = 'icons/obj/quicksand.dmi'
 	icon_state = "intact0"
-	density = 0
-	anchored = 1
+	density = FALSE
+	anchored = TRUE
 	can_buckle = 1
 	buckle_dir = SOUTH
 	var/exposed = 0
@@ -140,7 +141,7 @@
 	exposed = 1
 	update_icon()
 
-/obj/structure/quicksand/attackby(obj/item/weapon/W, mob/user)
+/obj/structure/quicksand/attackby(obj/item/W, mob/user)
 	if(!exposed && W.force)
 		expose()
 	else

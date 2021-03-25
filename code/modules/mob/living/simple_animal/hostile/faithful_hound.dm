@@ -6,15 +6,12 @@
 	blend_mode = BLEND_SUBTRACT
 	health = 100
 	maxHealth = 100
-	melee_damage_lower = 15
-	melee_damage_upper = 30
-	attacktext = "bitten"
-	attack_sound = 'sound/weapons/bite.ogg'
+	natural_weapon = /obj/item/natural_weapon/bite/strong
 	faction = MOB_FACTION_NEUTRAL
-	density = 0
+	density = FALSE
 	stop_automated_movement = 1
 	wander = 0
-	anchored = 1
+	anchored = TRUE
 	var/password
 	var/list/allowed_mobs = list() //Who we allow past us
 	var/last_check = 0
@@ -22,7 +19,7 @@
 	supernatural = 1
 
 /mob/living/simple_animal/faithful_hound/death()
-	new /obj/item/weapon/ectoplasm (get_turf(src))
+	new /obj/item/ectoplasm (get_turf(src))
 	..(null, "disappears!")
 	qdel(src)
 
@@ -45,7 +42,7 @@
 			var/mob/living/M = m
 			var/dist = get_dist(M, src)
 			if(dist < 2) //Attack! Attack!
-				M.attack_generic(src,10,"bitten")
+				M.attackby(get_natural_weapon(), src)
 				return .
 			else if(dist == 2)
 				new_aggress = 3

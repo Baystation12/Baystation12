@@ -3,8 +3,8 @@
 	desc = "Extracts and bags seeds from produce."
 	icon = 'icons/obj/hydroponics_machines.dmi'
 	icon_state = "sextractor"
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	use_power = POWER_USE_ACTIVE
 	idle_power_usage = 10
 	active_power_usage = 2000
@@ -16,11 +16,11 @@ obj/machinery/seed_extractor/attackby(var/obj/item/O, var/mob/user)
 	if((. = component_attackby(O, user)))
 		return
 	// Fruits and vegetables.
-	if(istype(O, /obj/item/weapon/reagent_containers/food/snacks/grown))
+	if(istype(O, /obj/item/reagent_containers/food/snacks/grown))
 		if(!user.unEquip(O))
 			return
 
-		var/obj/item/weapon/reagent_containers/food/snacks/grown/F = O
+		var/obj/item/reagent_containers/food/snacks/grown/F = O
 		var/datum/seed/new_seed_type = SSplants.seeds[F.plantname]
 
 		if(new_seed_type)
@@ -42,7 +42,7 @@ obj/machinery/seed_extractor/attackby(var/obj/item/O, var/mob/user)
 			to_chat(user, "<span class='notice'>You extract some seeds from the grass tile.</span>")
 			new /obj/item/seeds/grassseed(loc)
 
-	else if(istype(O, /obj/item/weapon/fossil/plant)) // Fossils
+	else if(istype(O, /obj/item/fossil/plant)) // Fossils
 		var/obj/item/seeds/random/R = new(get_turf(src))
 		to_chat(user, "\The [src] scans \the [O] and spits out \a [R].")
 		qdel(O)

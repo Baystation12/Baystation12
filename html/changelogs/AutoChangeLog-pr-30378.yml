@@ -1,0 +1,4 @@
+author: "SealCure"
+delete-after: True
+changes: 
+  - tweak: "Nymphs engulfing drinking glasses will now obtain a glass shard instead of deleting the container."

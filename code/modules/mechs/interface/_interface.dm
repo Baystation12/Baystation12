@@ -21,6 +21,7 @@
 			i++
 
 		var/list/additional_hud_elements = list(
+			/obj/screen/exosuit/toggle/power_control,
 			/obj/screen/exosuit/toggle/maint,
 			/obj/screen/exosuit/eject,
 			/obj/screen/exosuit/toggle/hardpoint,
@@ -47,6 +48,8 @@
 		hud_power = new /obj/screen/exosuit/power(src)
 		hud_power.screen_loc = "EAST-1:12,CENTER-4:25"
 		hud_elements |= hud_power
+		hud_power_control = locate(/obj/screen/exosuit/toggle/power_control) in hud_elements
+		hud_camera = locate(/obj/screen/exosuit/toggle/camera) in hud_elements
 
 	refresh_hud()
 
@@ -55,10 +58,16 @@
 		var/obj/screen/exosuit/hardpoint/H = hardpoint_hud_elements[hardpoint]
 		if(H) H.update_system_info()
 	handle_hud_icons_health()
-	var/obj/item/weapon/cell/C = get_cell()
+	var/obj/item/cell/C = get_cell()
 	if(istype(C)) 
+		hud_power.maptext_x = initial(hud_power.maptext_x)
+		hud_power.maptext_y = initial(hud_power.maptext_y)
 		hud_power.maptext = SPAN_STYLE("font-family: 'Small Fonts'; -dm-text-outline: 1 black; font-size: 7px;",  "[round(get_cell().charge)]/[round(get_cell().maxcharge)]")
-	else hud_power.maptext = SPAN_STYLE("font-family: 'Small Fonts'; -dm-text-outline: 1 black; font-size: 7px;", "CHECK POWER")
+	else
+		hud_power.maptext_x = 16
+		hud_power.maptext_y = -8
+		hud_power.maptext = SPAN_STYLE("font-family: 'Small Fonts'; -dm-text-outline: 1 black; font-size: 7px;", "CHECK POWER")
+
 	refresh_hud()
 
 /mob/living/exosuit/handle_hud_icons_health()

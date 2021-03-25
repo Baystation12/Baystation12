@@ -14,8 +14,8 @@
 	icon_state = "frame"
 	name = "status display"
 	layer = ABOVE_WINDOW_LAYER
-	anchored = 1
-	density = 0
+	anchored = TRUE
+	density = FALSE
 	idle_power_usage = 10
 	var/mode = 1	// 0 = Blank
 					// 1 = Shuttle timer

@@ -12,8 +12,8 @@
 	light_color = "#ffcc33"
 
 	//computer stuff
-	density = 1
-	anchored = 1.0
+	density = TRUE
+	anchored = TRUE
 	var/alerting = 0
 	idle_power_usage = 300
 	active_power_usage = 300

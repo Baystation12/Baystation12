@@ -95,8 +95,8 @@
 	if (implants && implants.len)
 		var/unknown_body = 0
 		for(var/I in implants)
-			var/obj/item/weapon/implant/imp = I
-			if(istype(I,/obj/item/weapon/implant))
+			var/obj/item/implant/imp = I
+			if(istype(I,/obj/item/implant))
 				if(imp.hidden)
 					continue
 				if (imp.known)
@@ -128,7 +128,6 @@
 
 	to_chat(user, "<span class='notice'>Checking skin now...</span>")
 	if(!do_after(user, 1 SECOND, owner))
-		to_chat(user, "<span class='notice'>You must stand still to check [owner]'s skin for abnormalities.</span>")
 		return
 
 	var/list/badness = list()
@@ -144,7 +143,6 @@
 
 	to_chat(user, "<span class='notice'>Checking bones now...</span>")
 	if(!do_after(user, 1 SECOND, owner))
-		to_chat(user, "<span class='notice'>You must stand still to feel [src] for fractures.</span>")
 		return
 
 	if(status & ORGAN_BROKEN)

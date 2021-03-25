@@ -4,7 +4,7 @@
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "ano00"
 	var/icon_num = 0
-	density = 1
+	density = TRUE
 	var/datum/artifact_effect/my_effect
 	var/datum/artifact_effect/secondary_effect
 	var/being_used = 0
@@ -23,7 +23,6 @@
 			secondary_effect.ToggleActivate(0)
 
 	icon_num = rand(0, 11)
-
 	icon_state = "ano[icon_num]0"
 	if(icon_num == 7 || icon_num == 8)
 		name = "large crystal"
@@ -60,6 +59,9 @@
 			effect.ToggleActivate(1)
 			. = TRUE
 
+		if (. && istype(effect.trigger, /datum/artifact_trigger/touch))
+			effect.DoEffectTouch(arglist(args.Copy(2)))
+
 /obj/machinery/artifact/Process()
 	var/turf/T = loc
 	if(!istype(T)) 	// We're inside a container or on null turf, either way stop processing effects
@@ -85,7 +87,7 @@
 	visible_message("[user] touches \the [src].")
 	check_triggers(/datum/artifact_trigger/proc/on_touch, user)
 
-/obj/machinery/artifact/attackby(obj/item/weapon/W, mob/living/user)
+/obj/machinery/artifact/attackby(obj/item/W, mob/living/user)
 	. = ..()
 	check_triggers(/datum/artifact_trigger/proc/on_hit, W, user)
 

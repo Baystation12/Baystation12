@@ -7,7 +7,7 @@ var/global/list/navbeacons = list()
 	desc = "A radio beacon used for bot navigation."
 	level = 1
 	layer = ABOVE_WIRE_LAYER
-	anchored = 1
+	anchored = TRUE
 
 	var/open = 0		// true if cover is open
 	var/locked = 1		// true if controls are locked

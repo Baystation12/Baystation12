@@ -1,0 +1,31 @@
+tags:
+    bugfix: bugfix
+    wip: wip
+    tweak: tweak
+    soundadd: soundadd
+    sounddel: sounddel
+    rscdel: rscdel
+    rscadd: rscadd
+    imageadd: imageadd
+    imagedel: imagedel
+    maptweak: maptweak
+    spellcheck: spellcheck
+    experiment: experiment
+    balance: balance
+    admin: admin
+
+defaults:
+    bugfix: fixed a few things
+    wip: implemented wip things
+    tweak: tweaked a few things
+    soundadd: added a new sound thingy
+    sounddel: removed an old sound thingy
+    rscdel: removed old things
+    rscadd: added new things
+    imageadd: added some icons and images
+    imagedel: deleted some icons and images
+    maptweak: edited some maps
+    spellcheck: fixed a few typos
+    experiment: implemented experiment things
+    balance: rebalanced something
+    admin: messed with admin stuff

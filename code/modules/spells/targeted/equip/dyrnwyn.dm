@@ -13,7 +13,7 @@
 	level_max = list(Sp_TOTAL = 1, Sp_SPEED = 0, Sp_POWER = 1)
 	duration = 300 //30 seconds
 	max_targets = 1
-	equipped_summons = list("active hand" = /obj/item/weapon/material/sword)
+	equipped_summons = list("active hand" = /obj/item/material/sword)
 	delete_old = 0
 	var/material = MATERIAL_GOLD
 

@@ -10,12 +10,10 @@
 	ruin_tags_blacklist = RUIN_HABITAT|RUIN_WATER
 	surface_color = "#261e19"
 	water_color = "#c74d00"
+	habitability_distribution = HABITABILITY_BAD
 
 /obj/effect/overmap/visitable/sector/exoplanet/volcanic/get_atmosphere_color()
 	return COLOR_GRAY20
-
-/obj/effect/overmap/visitable/sector/exoplanet/volcanic/generate_habitability()
-	return HABITABILITY_BAD
 
 /obj/effect/overmap/visitable/sector/exoplanet/volcanic/generate_atmosphere()
 	..()

@@ -2,43 +2,51 @@
 	name = "mounted electrolaser carbine"
 	desc = "A dual fire mode electrolaser system connected to the exosuit's targetting system."
 	icon_state = "mech_taser"
-	holding_type = /obj/item/weapon/gun/energy/taser/carbine/mounted/mech
+	holding_type = /obj/item/gun/energy/taser/carbine/mounted/mech
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_WEAPONS)
+
+/obj/item/mech_equipment/mounted_system/taser/MouseDragInteraction(src_object, over_object, src_location, over_location, src_control, over_control, params, var/mob/user)
+	. = ..()
+	
+	if(over_object)
+		var/obj/item/gun/gun = holding
+		if(istype(gun) && gun.can_autofire())
+			gun.Fire(get_turf(over_object), owner, params, (get_dist(over_object, owner) <= 1), FALSE)
 
 /obj/item/mech_equipment/mounted_system/taser/ion
 	name = "mounted ion rifle"
 	desc = "An exosuit-mounted ion rifle. Handle with care."
 	icon_state = "mech_ionrifle"
-	holding_type = /obj/item/weapon/gun/energy/ionrifle/mounted/mech
+	holding_type = /obj/item/gun/energy/ionrifle/mounted/mech
 
 /obj/item/mech_equipment/mounted_system/taser/laser
 	name = "\improper CH-PS \"Immolator\" laser"
 	desc = "An exosuit-mounted laser rifle. Handle with care."
 	icon_state = "mech_lasercarbine"
-	holding_type = /obj/item/weapon/gun/energy/laser/mounted/mech
+	holding_type = /obj/item/gun/energy/laser/mounted/mech
 
-/obj/item/weapon/gun/energy/taser/carbine/mounted/mech
+/obj/item/gun/energy/taser/carbine/mounted/mech
 	use_external_power = TRUE
 	has_safety = FALSE
 	self_recharge = TRUE
 
-/obj/item/weapon/gun/energy/ionrifle/mounted/mech
+/obj/item/gun/energy/ionrifle/mounted/mech
 	use_external_power = TRUE
 	has_safety = FALSE
 	self_recharge = TRUE
 
-/obj/item/weapon/gun/energy/laser/mounted/mech
+/obj/item/gun/energy/laser/mounted/mech
 	name = "\improper CH-PS \"Immolator\" laser"
 	use_external_power = TRUE
 	has_safety = FALSE
 	self_recharge = TRUE
 
-/obj/item/weapon/gun/energy/get_hardpoint_maptext()
+/obj/item/gun/energy/get_hardpoint_maptext()
 	return "[round(power_supply.charge / charge_cost)]/[max_shots]"
 
-/obj/item/weapon/gun/energy/get_hardpoint_status_value()
-	var/obj/item/weapon/cell/C = get_cell()
+/obj/item/gun/energy/get_hardpoint_status_value()
+	var/obj/item/cell/C = get_cell()
 	if(istype(C))
 		return C.charge/C.maxcharge
 	return null
@@ -93,7 +101,14 @@
 		START_PROCESSING(SSobj, src)
 	else 
 		STOP_PROCESSING(SSobj, src)
+	active = aura.active
+	passive_power_use = active ? 1 KILOWATTS : 0
 	owner.update_icon()
+
+/obj/item/mech_equipment/shields/deactivate()
+	if(active)
+		toggle()
+	..()
 
 /obj/item/mech_equipment/shields/on_update_icon()
 	. = ..()
@@ -109,11 +124,12 @@
 		return
 	if((world.time - last_recharge) < cooldown)
 		return	
-	var/obj/item/weapon/cell/cell = owner.get_cell()
+	var/obj/item/cell/cell = owner.get_cell()
 	
 	var/actual_required_power = Clamp(max_charge - charge, 0, charging_rate)
 
-	charge += cell.use(actual_required_power)
+	if(cell)
+		charge += cell.use(actual_required_power)
 
 /obj/item/mech_equipment/shields/get_hardpoint_status_value()
 	return charge / max_charge
@@ -211,38 +227,36 @@
 /obj/item/mech_equipment/mounted_system/melee
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_UTILITY)
-/obj/item/weapon/material/hatchet/machete/mech
+/obj/item/material/hatchet/machete/mech
 	name = "Mechete"
 	desc = "That thing was too big to be called a machete. Too big, too thick, too heavy, and too rough, it was more like a large hunk of iron."
 	w_class = ITEM_SIZE_GARGANTUAN
 	slot_flags = 0
 	default_material = MATERIAL_STEEL
 	base_parry_chance = 0 //Irrelevant for exosuits, revise if this changes
-	max_force = 50
-	force_multiplier = 0.35 //21 with hardness 60 (steel)
+	max_force = 25
+	force_multiplier = 0.75 // Equals 20 AP with 25 force
 	unbreakable = TRUE //Else we need a whole system for replacement blades
+	attack_cooldown_modifier = 10
 
-/obj/item/weapon/material/hatchet/machete/mech/apply_hit_effect(mob/living/target, mob/living/user, hit_zone)
+/obj/item/material/hatchet/machete/mech/apply_hit_effect(mob/living/target, mob/living/user, hit_zone)
 	. = ..()
 	if (.)
 		do_attack_effect(target, "smash")
 		if (target.mob_size < user.mob_size) //Damaging attacks overwhelm smaller mobs
 			target.throw_at(get_edge_target_turf(target,get_dir(user, target)),1, 1)
 
-/obj/item/weapon/material/hatchet/machete/mech/resolve_attackby(atom/A, mob/user, click_params)
+/obj/item/material/hatchet/machete/mech/resolve_attackby(atom/A, mob/user, click_params)
 	//Case 1: Default, you are hitting something that isn't a mob. Just do whatever, this isn't dangerous or op.
 	if (!istype(A, /mob/living))
 		return ..()
 
 	if (user.a_intent == I_HURT)
-		user.setClickCooldown(0.7 SECONDS)
 		user.visible_message(SPAN_DANGER("\The [user] swings \the [src] at \the [A]!"))
 		playsound(user, 'sound/mecha/mechmove03.ogg', 35, 1)
-		if (do_after(user, 0.7 SECONDS, A, do_flags = DO_SHOW_PROGRESS | DO_TARGET_CAN_TURN | DO_PUBLIC_PROGRESS | DO_USER_UNIQUE_ACT))
-			attack(A, user, user.zone_sel.selecting, TRUE)
-			return TRUE
+		return ..()
 
-/obj/item/weapon/material/hatchet/machete/mech/attack_self(mob/living/user)
+/obj/item/material/hatchet/machete/mech/attack_self(mob/living/user)
 	. = ..()
 	if (user.a_intent != I_HURT)
 		return
@@ -251,7 +265,7 @@
 		//SPIN BLADE ATTACK GO!
 		var/mob/living/exosuit/E = MC.owner
 		if (E)
-			E.setClickCooldown(1.2 SECONDS)
+			E.setClickCooldown(1.35 SECONDS)
 			E.visible_message(SPAN_DANGER("\The [E] swings \the [src] back, preparing for an attack!"), blind_message = SPAN_DANGER("You hear the loud hissing of hydraulics!"))
 			playsound(E, 'sound/mecha/mechmove03.ogg', 35, 1)
 			if (do_after(E, 1.2 SECONDS, get_turf(user), do_flags = DO_SHOW_PROGRESS | DO_TARGET_CAN_TURN | DO_PUBLIC_PROGRESS | DO_USER_UNIQUE_ACT) && E && MC)
@@ -262,7 +276,7 @@
 
 /obj/item/mech_equipment/mounted_system/melee/mechete
 	icon_state = "mech_blade"
-	holding_type = /obj/item/weapon/material/hatchet/machete/mech
+	holding_type = /obj/item/material/hatchet/machete/mech
 
 
 //Ballistic shield

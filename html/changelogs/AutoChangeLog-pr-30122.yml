@@ -1,6 +1,0 @@
-author: "Spookerton"
-delete-after: True
-changes: 
-  - tweak: "Drop pouches get 5 small slots worth of freeform storage and are renamed to drop bags."
-  - tweak: "Webbing vests get 5 small slots worth of freeform storage."
-  - tweak: "Large webbing gets 4 small slots worth of freeform storage."

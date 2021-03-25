@@ -30,7 +30,7 @@
 		sleeper.ui_interact(user)
 
 /obj/item/mech_equipment/sleeper/attackby(var/obj/item/I, var/mob/user)
-	if(istype(I, /obj/item/weapon/reagent_containers/glass))
+	if(istype(I, /obj/item/reagent_containers/glass))
 		sleeper.attackby(I, user)
 	else return ..()
 
@@ -48,8 +48,8 @@
 
 /obj/machinery/sleeper/mounted
 	name = "\improper mounted sleeper"
-	density = 0
-	anchored = 0
+	density = FALSE
+	anchored = FALSE
 	idle_power_usage = 0
 	active_power_usage = 0 //It'd be hard to handle, so for now all power is consumed by mech sleeper object
 	synth_modifier = 0
@@ -68,7 +68,7 @@
 
 //You cannot modify these, it'd probably end with something in nullspace. In any case basic meds are plenty for an ambulance
 /obj/machinery/sleeper/mounted/attackby(var/obj/item/I, var/mob/user)
-	if(istype(I, /obj/item/weapon/reagent_containers/glass))
+	if(istype(I, /obj/item/reagent_containers/glass))
 		if(!user.unEquip(I, src))
 			return
 

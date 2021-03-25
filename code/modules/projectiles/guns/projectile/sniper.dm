@@ -1,4 +1,4 @@
-/obj/item/weapon/gun/projectile/heavysniper
+/obj/item/gun/projectile/heavysniper
 	name = "anti-materiel rifle"
 	desc = "A portable anti-armour rifle fitted with a scope, the HI PTR-7 Rifle was originally designed to be used against armoured exosuits. It is capable of punching through windows and non-reinforced walls with ease."
 	icon = 'icons/obj/guns/heavysniper.dmi'
@@ -24,20 +24,20 @@
 	load_sound = 'sound/weapons/guns/interaction/rifle_load.ogg'
 	fire_delay = 12
 
-/obj/item/weapon/gun/projectile/heavysniper/on_update_icon()
+/obj/item/gun/projectile/heavysniper/on_update_icon()
 	..()
 	if(bolt_open)
 		icon_state = "[initial(icon_state)]-open"
 	else
 		icon_state = "[initial(icon_state)]"
 
-/obj/item/weapon/gun/projectile/heavysniper/handle_post_fire(mob/user, atom/target, var/pointblank=0, var/reflex=0)
+/obj/item/gun/projectile/heavysniper/handle_post_fire(mob/user, atom/target, var/pointblank=0, var/reflex=0)
 	..()
 	if(user && user.skill_check(SKILL_WEAPONS, SKILL_PROF))
 		to_chat(user, "<span class='notice'>You work the bolt open with a reflexive motion, ejecting [chambered]!</span>")
 		unload_shell()
 
-/obj/item/weapon/gun/projectile/heavysniper/proc/unload_shell()
+/obj/item/gun/projectile/heavysniper/proc/unload_shell()
 	if(chambered)
 		if(!bolt_open)
 			playsound(src.loc, 'sound/weapons/guns/interaction/rifle_boltback.ogg', 50, 1)
@@ -46,7 +46,7 @@
 		loaded -= chambered
 		chambered = null
 
-/obj/item/weapon/gun/projectile/heavysniper/attack_self(mob/user as mob)
+/obj/item/gun/projectile/heavysniper/attack_self(mob/user as mob)
 	bolt_open = !bolt_open
 	if(bolt_open)
 		if(chambered)
@@ -61,24 +61,24 @@
 	add_fingerprint(user)
 	update_icon()
 
-/obj/item/weapon/gun/projectile/heavysniper/special_check(mob/user)
+/obj/item/gun/projectile/heavysniper/special_check(mob/user)
 	if(bolt_open)
 		to_chat(user, "<span class='warning'>You can't fire [src] while the bolt is open!</span>")
 		return 0
 	return ..()
 
-/obj/item/weapon/gun/projectile/heavysniper/load_ammo(var/obj/item/A, mob/user)
+/obj/item/gun/projectile/heavysniper/load_ammo(var/obj/item/A, mob/user)
 	if(!bolt_open)
 		return
 	..()
 
-/obj/item/weapon/gun/projectile/heavysniper/unload_ammo(mob/user, var/allow_dump=1)
+/obj/item/gun/projectile/heavysniper/unload_ammo(mob/user, var/allow_dump=1)
 	if(!bolt_open)
 		return
 	..()
 
 
-/obj/item/weapon/gun/projectile/heavysniper/boltaction
+/obj/item/gun/projectile/heavysniper/boltaction
 	name = "bolt action rifle"
 	desc = "An old bolt action rifle from some forgotten war, still commonplace among farmers and colonists as an anti-varmint rifle."
 	icon = 'icons/obj/guns/boltaction.dmi'

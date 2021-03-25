@@ -3,7 +3,7 @@
 // -----------------------------
 // An item designed for hauling the belongings of a character.
 // So this cannot be abused for other uses, we make it two-handed and inable to have its storage looked into.
-/obj/item/weapon/storage/laundry_basket
+/obj/item/storage/laundry_basket
 	name = "laundry basket"
 	icon = 'icons/obj/janitor.dmi'
 	icon_state = "laundry-empty"
@@ -21,7 +21,7 @@
 	var/linked
 
 
-/obj/item/weapon/storage/laundry_basket/attack_hand(mob/user as mob)
+/obj/item/storage/laundry_basket/attack_hand(mob/user as mob)
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		var/obj/item/organ/external/temp = H.get_organ(BP_R_HAND)
@@ -36,13 +36,13 @@
 		return
 	return ..()
 
-/obj/item/weapon/storage/laundry_basket/attack_self(mob/user as mob)
+/obj/item/storage/laundry_basket/attack_self(mob/user as mob)
 	var/turf/T = get_turf(user)
 	to_chat(user, "<span class='notice'>You dump the [src]'s contents onto \the [T].</span>")
 	return ..()
 
-/obj/item/weapon/storage/laundry_basket/pickup(mob/user)
-	var/obj/item/weapon/storage/laundry_basket/offhand/O = new(user)
+/obj/item/storage/laundry_basket/pickup(mob/user)
+	var/obj/item/storage/laundry_basket/offhand/O = new(user)
 	O.SetName("[name] - second hand")
 	O.desc = "Your second grip on the [name]."
 	O.linked = src
@@ -50,7 +50,7 @@
 	linked = O
 	return
 
-/obj/item/weapon/storage/laundry_basket/on_update_icon()
+/obj/item/storage/laundry_basket/on_update_icon()
 	if(contents.len)
 		icon_state = "laundry-full"
 	else
@@ -58,30 +58,30 @@
 	return
 
 
-/obj/item/weapon/storage/laundry_basket/MouseDrop(obj/over_object as obj)
+/obj/item/storage/laundry_basket/MouseDrop(obj/over_object as obj)
 	if(over_object == usr)
 		return
 	else
 		return ..()
 
-/obj/item/weapon/storage/laundry_basket/dropped(mob/user as mob)
+/obj/item/storage/laundry_basket/dropped(mob/user as mob)
 	qdel(linked)
 	return ..()
 
-/obj/item/weapon/storage/laundry_basket/show_to(mob/user as mob)
+/obj/item/storage/laundry_basket/show_to(mob/user as mob)
 	return
 
-/obj/item/weapon/storage/laundry_basket/open(mob/user as mob)
+/obj/item/storage/laundry_basket/open(mob/user as mob)
 
 
 //Offhand
-/obj/item/weapon/storage/laundry_basket/offhand
+/obj/item/storage/laundry_basket/offhand
 	icon = 'icons/obj/weapons/other.dmi'
 	icon_state = "offhand"
 	name = "second hand"
 	use_to_pickup = 0
 
-/obj/item/weapon/storage/laundry_basket/offhand/dropped(mob/user as mob)
+/obj/item/storage/laundry_basket/offhand/dropped(mob/user as mob)
 	..()
 	user.drop_from_inventory(linked)
 	return

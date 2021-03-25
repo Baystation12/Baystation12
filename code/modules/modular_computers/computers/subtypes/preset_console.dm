@@ -5,21 +5,21 @@
 
 /obj/machinery/computer/modular/preset/full
 	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/power/apc,
-		/obj/item/weapon/stock_parts/computer/card_slot,
-		/obj/item/weapon/stock_parts/computer/ai_slot
+		/obj/item/stock_parts/power/apc,
+		/obj/item/stock_parts/computer/card_slot,
+		/obj/item/stock_parts/computer/ai_slot
 		)
 
 /obj/machinery/computer/modular/preset/aislot
 	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/power/apc,
-		/obj/item/weapon/stock_parts/computer/ai_slot
+		/obj/item/stock_parts/power/apc,
+		/obj/item/stock_parts/computer/ai_slot
 		)
 
 /obj/machinery/computer/modular/preset/cardslot
 	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/power/apc,
-		/obj/item/weapon/stock_parts/computer/card_slot
+		/obj/item/stock_parts/power/apc,
+		/obj/item/stock_parts/computer/card_slot
 		)
 
 /obj/machinery/computer/modular/preset/Initialize()
@@ -165,3 +165,9 @@
 		/datum/computer_file/program/email_client,
 		/datum/computer_file/program/wordprocessor
 	)
+
+/obj/machinery/computer/modular/preset/filemanager
+	default_software = list(
+		/datum/computer_file/program/wordprocessor
+	)
+	autorun_program = /datum/computer_file/program/filemanager

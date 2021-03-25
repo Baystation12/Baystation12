@@ -16,12 +16,9 @@
 	response_harm   = "pokes"
 	maxHealth = 250
 	health = 250
-	melee_damage_lower = 20
-	melee_damage_upper = 25
-	melee_damage_flags = DAM_SHARP | DAM_EDGE
+	natural_weapon = /obj/item/natural_weapon/meatbits
 	heat_damage_per_tick = 20
 	cold_damage_per_tick = 0
-	attacktext = "mauled and slashed"
 	faction = "meat"
 	pass_flags = PASS_FLAG_TABLE
 	move_to_delay = 3
@@ -36,6 +33,12 @@
 	natural_armor = list(
 		melee = ARMOR_MELEE_KNIVES
 		)
+
+/obj/item/natural_weapon/meatbits
+	force = 30
+	sharp = TRUE
+	edge = TRUE
+	attack_verb = list("mauled", "slashed")
 
 /mob/living/simple_animal/hostile/meat/abomination
 	name = "abomination"
@@ -55,12 +58,9 @@
 	response_harm   = "pokes"
 	maxHealth = 250
 	health = 250
-	melee_damage_lower = 20
-	melee_damage_upper = 25
-	melee_damage_flags = DAM_SHARP | DAM_EDGE
+	natural_weapon = /obj/item/natural_weapon/meatbits
 	heat_damage_per_tick = 20
 	cold_damage_per_tick = 0
-	attacktext = "mauled and slashed"
 	faction = "meat"
 	pass_flags = PASS_FLAG_TABLE
 	move_to_delay = 3
@@ -94,9 +94,7 @@
 	response_harm   = "pokes"
 	maxHealth = 150
 	health = 150
-	melee_damage_lower = 10
-	melee_damage_upper = 15
-	melee_damage_flags = DAM_SHARP | DAM_EDGE
+	natural_weapon = /obj/item/natural_weapon/claws
 	heat_damage_per_tick = 100
 	cold_damage_per_tick = 0
 	faction = "meat"
@@ -132,12 +130,9 @@
 	response_harm   = "pokes"
 	maxHealth = 100
 	health = 100
-	melee_damage_lower = 5
-	melee_damage_upper = 10
-	melee_damage_flags = DAM_SHARP | DAM_EDGE
+	natural_weapon = /obj/item/natural_weapon/claws/weak
 	heat_damage_per_tick = 100
 	cold_damage_per_tick = 0
-	attacktext = "mauled"
 	faction = "meat"
 	pass_flags = PASS_FLAG_TABLE
 	move_to_delay = 3
@@ -171,12 +166,9 @@
 	response_harm   = "pokes"
 	maxHealth = 200
 	health = 200
-	melee_damage_lower = 10
-	melee_damage_upper = 15
-	melee_damage_flags = DAM_SHARP | DAM_EDGE
+	natural_weapon = /obj/item/natural_weapon/claws
 	heat_damage_per_tick = 100
 	cold_damage_per_tick = 0
-	attacktext = "slashed"
 	faction = "meat"
 	pass_flags = PASS_FLAG_TABLE
 	move_to_delay = 3
@@ -210,12 +202,9 @@
 	response_harm   = "pokes"
 	maxHealth = 150
 	health = 150
-	melee_damage_lower = 10
-	melee_damage_upper = 15
-	melee_damage_flags = DAM_SHARP | DAM_EDGE
+	natural_weapon = /obj/item/natural_weapon/claws
 	heat_damage_per_tick = 100
 	cold_damage_per_tick = 0
-	attacktext = "slashes"
 	faction = "meat"
 	pass_flags = PASS_FLAG_TABLE
 	move_to_delay = 3
@@ -244,15 +233,12 @@
 	speak_chance = 5
 	turns_per_move = 5
 	see_in_dark = 10
-	attacktext = "slashed"
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "pokes"
 	maxHealth = 50
 	health = 50
-	melee_damage_lower = 10
-	melee_damage_upper = 15
-	melee_damage_flags = DAM_SHARP | DAM_EDGE
+	natural_weapon = /obj/item/natural_weapon/claws
 	heat_damage_per_tick = 100
 	cold_damage_per_tick = 0
 	faction = "meat"

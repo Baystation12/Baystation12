@@ -2,8 +2,8 @@
 	name = "Pipe Dispenser"
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "pipe_d"
-	density = 1
-	anchored = 0
+	density = TRUE
+	anchored = FALSE
 	stat_immune = NOSCREEN//Doesn't need screen, just input for the parts wanted
 
 	construct_state = /decl/machine_construction/default/panel_closed
@@ -86,7 +86,7 @@
 						"<span class='notice'>\The [user] unfastens \the [src].</span>", \
 						"<span class='notice'>You have unfastened \the [src]. Now it can be pulled somewhere else.</span>", \
 						"You hear ratchet.")
-					anchored = 0
+					anchored = FALSE
 					stat |= MAINT
 					update_use_power(POWER_USE_OFF)
 					if(user.machine==src)
@@ -99,7 +99,7 @@
 						"<span class='notice'>\The [user] fastens \the [src].</span>", \
 						"<span class='notice'>You have fastened \the [src]. Now it can dispense pipes.</span>", \
 						"You hear ratchet.")
-					anchored = 1
+					anchored = TRUE
 					stat &= ~MAINT
 					update_use_power(POWER_USE_IDLE)
 			return

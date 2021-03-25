@@ -15,13 +15,13 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "broadcaster"
 	desc = "A dish-shaped machine used to broadcast processed subspace signals."
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	idle_power_usage = 25
 	machinetype = 5
 	produces_heat = 0
 	delay = 7
-	circuitboard = /obj/item/weapon/stock_parts/circuitboard/telecomms/broadcaster
+	circuitboard = /obj/item/stock_parts/circuitboard/telecomms/broadcaster
 	base_type = /obj/machinery/telecomms/broadcaster
 	outage_probability = 10
 
@@ -116,13 +116,13 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "comm_server"
 	desc = "A compact machine used for portable subspace telecommuniations processing."
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	use_power = POWER_USE_OFF
 	idle_power_usage = 0
 	machinetype = 6
 	produces_heat = 0
-	circuitboard = /obj/item/weapon/stock_parts/circuitboard/telecomms/allinone
+	circuitboard = /obj/item/stock_parts/circuitboard/telecomms/allinone
 	construct_state = /decl/machine_construction/tcomms/panel_closed/cannot_print
 	var/listening_freqs
 	var/channel_color

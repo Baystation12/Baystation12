@@ -20,12 +20,12 @@
 	response_help = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm = "stamps on"
-	density = 0
+	density = FALSE
 	minbodytemp = 223
 	maxbodytemp = 323
 	universal_speak = FALSE
 	universal_understand = TRUE
-	holder_type = /obj/item/weapon/holder/possum
+	holder_type = /obj/item/holder/possum
 	mob_size = MOB_SMALL
 	possession_candidate = 1
 	can_escape = TRUE
@@ -97,7 +97,7 @@
 	item_state = "poppy"
 	icon_living = "poppy"
 	icon_dead = "poppy_dead"
-	holder_type = /obj/item/weapon/holder/possum/poppy
+	holder_type = /obj/item/holder/possum/poppy
 	var/aaa_words = list("delaminat", "meteor", "fire", "breach")
 
 /mob/living/simple_animal/opossum/poppy/hear_broadcast(datum/language/language, mob/speaker, speaker_name, message)

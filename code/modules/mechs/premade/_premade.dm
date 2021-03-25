@@ -25,6 +25,7 @@
 	spawn_mech_equipment()
 
 /mob/living/exosuit/premade/proc/spawn_mech_equipment()
+	set waitfor = FALSE
 	install_system(new /obj/item/mech_equipment/light(src), HARDPOINT_HEAD)
 
 /mob/living/exosuit/premade/random
@@ -56,7 +57,7 @@
 			COLOR_GRAY80,
 			COLOR_OFF_WHITE,
 			COLOR_GUNMETAL,
-			COLOR_HULL,
+			COLOR_SOL,
 			COLOR_TITANIUM,
 			COLOR_DARK_GUNMETAL,
 			COLOR_BRONZE,
@@ -114,7 +115,7 @@
 			COLOR_CYAN_BLUE,
 			COLOR_LIGHT_CYAN,
 			COLOR_PAKISTAN_GREEN,
-			COLOR_HULL,
+			COLOR_SOL,
 			COLOR_AMBER,
 			COLOR_COMMAND_BLUE,
 			COLOR_SKY_BLUE,

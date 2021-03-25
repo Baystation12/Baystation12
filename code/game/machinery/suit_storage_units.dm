@@ -1,7 +1,7 @@
 /obj/machinery/suit_storage_unit/standard_unit
 	suit= /obj/item/clothing/suit/space
 	helmet = /obj/item/clothing/head/helmet/space/fishbowl
-	tank = /obj/item/weapon/tank/oxygen
+	tank = /obj/item/tank/oxygen
 	mask = /obj/item/clothing/mask/breath
 	req_access = list(access_eva)
 
@@ -10,7 +10,7 @@
 	suit= /obj/item/clothing/suit/space/void/atmos
 	helmet = /obj/item/clothing/head/helmet/space/void/atmos
 	boots = /obj/item/clothing/shoes/magboots
-	tank = /obj/item/weapon/tank/oxygen
+	tank = /obj/item/tank/oxygen
 	mask = /obj/item/clothing/mask/breath
 	req_access = list(access_atmospherics)
 	islocked = 1
@@ -24,7 +24,7 @@
 	suit= /obj/item/clothing/suit/space/void/engineering
 	helmet = /obj/item/clothing/head/helmet/space/void/engineering
 	boots = /obj/item/clothing/shoes/magboots
-	tank = /obj/item/weapon/tank/oxygen
+	tank = /obj/item/tank/oxygen
 	mask = /obj/item/clothing/mask/breath
 	req_access = list(access_construction)
 	islocked = 1
@@ -48,7 +48,7 @@
 	suit= /obj/item/clothing/suit/space/void/medical
 	helmet = /obj/item/clothing/head/helmet/space/void/medical
 	boots = /obj/item/clothing/shoes/magboots
-	tank = /obj/item/weapon/tank/oxygen
+	tank = /obj/item/tank/oxygen
 	mask = /obj/item/clothing/mask/breath
 	req_access = list(access_medical)
 	islocked = 1
@@ -63,7 +63,7 @@
 	suit= /obj/item/clothing/suit/space/void/mining
 	helmet = /obj/item/clothing/head/helmet/space/void/mining
 	boots = /obj/item/clothing/shoes/magboots
-	tank = /obj/item/weapon/tank/oxygen
+	tank = /obj/item/tank/oxygen
 	mask = /obj/item/clothing/mask/breath
 	req_access = list(access_mining)
 	islocked = 1
@@ -78,7 +78,7 @@
 	suit= /obj/item/clothing/suit/space/void/excavation
 	helmet = /obj/item/clothing/head/helmet/space/void/excavation
 	boots = /obj/item/clothing/shoes/magboots
-	tank = /obj/item/weapon/tank/oxygen
+	tank = /obj/item/tank/oxygen
 	mask = /obj/item/clothing/mask/breath
 	req_access = list(access_xenoarch)
 	islocked = 1
@@ -88,7 +88,7 @@
 	suit= /obj/item/clothing/suit/space/void/security
 	helmet = /obj/item/clothing/head/helmet/space/void/security
 	boots = /obj/item/clothing/shoes/magboots
-	tank = /obj/item/weapon/tank/oxygen
+	tank = /obj/item/tank/oxygen
 	mask = /obj/item/clothing/mask/breath
 	req_access = list(access_security)
 	islocked = 1
@@ -103,7 +103,7 @@
 	suit= /obj/item/clothing/suit/space/void/merc
 	helmet = /obj/item/clothing/head/helmet/space/void/merc
 	boots = /obj/item/clothing/shoes/magboots
-	tank = /obj/item/weapon/tank/oxygen
+	tank = /obj/item/tank/oxygen
 	mask = /obj/item/clothing/mask/breath
 	req_access = list(access_syndicate)
 	islocked = 1
@@ -113,7 +113,7 @@
 	suit= /obj/item/clothing/suit/space/void/ceti
 	helmet = /obj/item/clothing/head/helmet/space/void/ceti
 	boots = /obj/item/clothing/shoes/magboots
-	tank = /obj/item/weapon/tank/oxygen
+	tank = /obj/item/tank/oxygen
 	mask = /obj/item/clothing/mask/breath
 	req_access = list(access_xenoarch)
 	islocked = 1

@@ -22,9 +22,7 @@
 	response_harm   = "pokes"
 	maxHealth = 125
 	health = 125
-	melee_damage_lower = 10
-	melee_damage_upper = 15
-	melee_damage_flags = DAM_SHARP
+	natural_weapon = /obj/item/natural_weapon/bite/spider
 	heat_damage_per_tick = 20
 	cold_damage_per_tick = 20
 	faction = "spiders"
@@ -37,7 +35,7 @@
 	pry_time = 8 SECONDS
 	pry_desc = "clawing"
 
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/spider
+	meat_type = /obj/item/reagent_containers/food/snacks/spider
 	meat_amount = 3
 	bone_material = null
 	bone_amount =   0
@@ -51,6 +49,24 @@
 	var/allowed_eye_colours = list(COLOR_RED, COLOR_ORANGE, COLOR_YELLOW, COLOR_LIME, COLOR_DEEP_SKY_BLUE, COLOR_INDIGO, COLOR_VIOLET, COLOR_PINK)
 	var/hunt_chance = 1 //percentage chance the mob will run to a random nearby tile
 
+/obj/item/natural_weapon/bite/spider
+	force = 20
+
+/obj/item/natural_weapon/bite/spider/apply_hit_effect(mob/living/target, mob/living/user, hit_zone)
+	. = ..()
+	if(.)
+		var/mob/living/simple_animal/hostile/giant_spider/GS = user
+		if(istype(GS) && target && ishuman(target))
+			var/mob/living/carbon/human/H = target
+			var/obj/item/clothing/suit/space/S = H.get_covering_equipped_item_by_zone(BP_CHEST)
+			if(istype(S) && !length(S.breaches))
+				return
+			if(target.reagents)
+				target.reagents.add_reagent(GS.poison_type, rand(0.5 * GS.poison_per_bite, GS.poison_per_bite))
+				if(prob(GS.poison_per_bite))
+					to_chat(H, SPAN_WARNING("You feel a tiny prick."))
+
+
 /mob/living/simple_animal/hostile/giant_spider/can_do_maneuver(var/decl/maneuver/maneuver, var/silent = FALSE)
 	. = ..() && can_act()
 
@@ -63,8 +79,7 @@
 	meat_amount = 4
 	maxHealth = 200
 	health = 200
-	melee_damage_lower = 13
-	melee_damage_upper = 18
+	natural_weapon = /obj/item/natural_weapon/bite/spider/strong
 	poison_per_bite = 5
 	speed = 2
 	move_to_delay = 4
@@ -75,6 +90,8 @@
 	var/berserking
 	var/mob/living/simple_animal/hostile/giant_spider/nurse/paired_nurse
 
+/obj/item/natural_weapon/bite/spider/strong
+
 //nursemaids - these create webs and eggs - the weakest and least threatening
 /mob/living/simple_animal/hostile/giant_spider/nurse
 	desc = "A monstrously huge beige spider with shimmering eyes."
@@ -83,8 +100,6 @@
 	icon_dead = "beige_dead"
 	maxHealth = 80
 	health = 80
-	melee_damage_lower = 10
-	melee_damage_upper = 14
 	harm_intent_damage = 6 //soft
 	poison_per_bite = 5
 	speed = 0
@@ -110,8 +125,7 @@
 	icon_dead = "black_dead"
 	maxHealth = 150
 	health = 150
-	melee_damage_lower = 17
-	melee_damage_upper = 20
+	natural_weapon = /obj/item/natural_weapon/bite/spider/strong
 	poison_per_bite = 10
 	speed = -1
 	move_to_delay = 2
@@ -134,8 +148,6 @@
 	icon_dead = "purple_dead"
 	maxHealth = 90
 	health = 90
-	melee_damage_lower = 10
-	melee_damage_upper = 14
 	poison_per_bite = 15
 	ranged = TRUE
 	move_to_delay = 2
@@ -156,8 +168,6 @@
 	. = ..()
 
 /mob/living/simple_animal/hostile/giant_spider/proc/spider_randomify() //random math nonsense to get their damage, health and venomness values
-	melee_damage_lower = rand(0.8 * initial(melee_damage_lower), initial(melee_damage_lower))
-	melee_damage_upper = rand(initial(melee_damage_upper), (1.2 * initial(melee_damage_upper)))
 	maxHealth = rand(initial(maxHealth), (1.4 * initial(maxHealth)))
 	health = maxHealth
 	eye_colour = pick(allowed_eye_colours)
@@ -189,17 +199,9 @@
 	. = ..()
 	if(isliving(.))
 		if(health < maxHealth)
-			health += (0.2 * rand(melee_damage_lower, melee_damage_upper)) //heal a bit on hit
-		if(ishuman(.))
-			var/mob/living/carbon/human/H = .
-			var/obj/item/clothing/suit/space/S = H.get_covering_equipped_item_by_zone(BP_CHEST)
-			if(istype(S) && !length(S.breaches))
-				return
-		var/mob/living/L = .
-		if(L.reagents)
-			L.reagents.add_reagent(poison_type, rand(0.5 * poison_per_bite, poison_per_bite))
-			if(prob(poison_per_bite))
-				to_chat(L, "<span class='warning'>You feel a tiny prick.</span>")
+			var/obj/item/W = get_natural_weapon()
+			if(W)
+				health += (0.2 * W.force) //heal a bit on hit
 
 /mob/living/simple_animal/hostile/giant_spider/Life()
 	. = ..()
@@ -263,8 +265,9 @@ Guard caste procs
 
 /mob/living/simple_animal/hostile/giant_spider/guard/proc/go_berserk()
 	audible_message("<span class='danger'>\The [src] chitters wildly!</span>")
-	melee_damage_lower +=5
-	melee_damage_upper +=5
+	var/obj/item/W = get_natural_weapon()
+	if(W)
+		W.force = initial(W.force) + 5
 	move_to_delay--
 	break_stuff_probability = 45
 	addtimer(CALLBACK(src, .proc/calm_down), 3 MINUTES)
@@ -272,8 +275,9 @@ Guard caste procs
 /mob/living/simple_animal/hostile/giant_spider/guard/proc/calm_down()
 	berserking = FALSE
 	visible_message("<span class='notice'>\The [src] calms down and surveys the area.</span>")
-	melee_damage_lower -= 5
-	melee_damage_upper -= 5
+	var/obj/item/W = get_natural_weapon()
+	if(W)
+		W.force = initial(W.force)
 	move_to_delay++
 	break_stuff_probability = 10
 
@@ -371,7 +375,7 @@ Nurse caste procs
 
 						if(O.anchored)
 							continue
-						
+
 						if(is_type_in_list(O, cocoon_blacklist))
 							continue
 
@@ -444,7 +448,7 @@ Hunter caste procs
 	. = ..()
 	if(!isnull(first_stop_automation))
 		stop_automation = first_stop_automation
-	
+
 /mob/living/simple_animal/hostile/giant_spider/hunter/throw_impact(atom/hit_atom)
 	if(isliving(hit_atom))
 		var/mob/living/target = hit_atom

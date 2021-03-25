@@ -2,8 +2,8 @@
 	name = "fuel injector"
 	icon = 'icons/obj/machines/power/fusion.dmi'
 	icon_state = "injector0"
-	density = 1
-	anchored = 0
+	density = TRUE
+	anchored = FALSE
 	req_access = list(access_engine)
 	idle_power_usage = 10
 	active_power_usage = 500
@@ -15,7 +15,7 @@
 	var/fuel_usage = 0.001
 	var/initial_id_tag
 	var/injecting = 0
-	var/obj/item/weapon/fuel_assembly/cur_assembly
+	var/obj/item/fuel_assembly/cur_assembly
 	var/injection_rate = 1
 
 /obj/machinery/fusion_fuel_injector/Initialize()
@@ -32,7 +32,7 @@
 	. = ..()
 
 /obj/machinery/fusion_fuel_injector/mapped
-	anchored = 1
+	anchored = TRUE
 
 /obj/machinery/fusion_fuel_injector/Process()
 	if(injecting)
@@ -48,7 +48,7 @@
 		lanm.set_tag(null, initial_id_tag)
 		return
 
-	if(istype(W, /obj/item/weapon/fuel_assembly))
+	if(istype(W, /obj/item/fuel_assembly))
 
 		if(injecting)
 			to_chat(user, "<span class='warning'>Shut \the [src] off before playing with the fuel rod!</span>")

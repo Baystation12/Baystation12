@@ -62,6 +62,14 @@
 	if(. && !CanFluidPass())
 		fluid_update()
 
+/obj/structure/attackby(obj/item/O, mob/user)
+	if(user.a_intent != I_HELP)
+		//Bit dirty, but the entire attackby chain seems kinda wrong to begin with
+		//Things should probably be parent first and return true if something handled it already, not child first
+		src.add_fingerprint(user)
+		attack_generic(user, O.force, pick(O.attack_verb))
+		return
+	. = ..()
 
 /obj/structure/attack_hand(mob/user)
 	..()
@@ -96,7 +104,7 @@
 		else
 			playsound(loc, 'sound/weapons/tablehit1.ogg', 50, 1)
 		var/list/L = take_damage(rand(1,5))
-		for(var/obj/item/weapon/material/shard/S in L)
+		for(var/obj/item/material/shard/S in L)
 			if(S.sharp && prob(50))
 				G.affecting.visible_message("<span class='danger'>\The [S] slices into [G.affecting]'s face!</span>", "<span class='danger'>\The [S] slices into your face!</span>")
 				G.affecting.standard_weapon_hit_effects(S, G.assailant, S.force*2, BP_HEAD)

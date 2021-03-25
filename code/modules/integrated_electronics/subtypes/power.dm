@@ -40,11 +40,11 @@
 	var/obj/O = get_pin_data_as_type(IC_INPUT, 1, /obj)
 	if(!O)
 		return FALSE
-	if(istype(O, /obj/item/weapon/gun/energy))
+	if(istype(O, /obj/item/gun/energy))
 		return FALSE
 	if(!assembly)
 		return FALSE // Pointless to do everything else if there's no battery to draw from.
-	var/obj/item/weapon/cell/cell = O.get_cell()
+	var/obj/item/cell/cell = O.get_cell()
 	if(cell)
 		var/transfer_amount = amount_to_move
 		var/turf/A = get_turf(src)

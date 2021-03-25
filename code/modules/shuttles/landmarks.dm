@@ -3,9 +3,9 @@
 	name = "Nav Point"
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "energynet"
-	anchored = 1
+	anchored = TRUE
 	unacidable = TRUE
-	simulated = 0
+	simulated = FALSE
 	invisibility = 101
 
 	var/landmark_tag
@@ -143,7 +143,7 @@
 		return
 
 	active = 1
-	anchored = 1
+	anchored = TRUE
 
 	var/obj/effect/shuttle_landmark/automatic/mark = new(T)
 	mark.SetName("Beacon signal ([T.x],[T.y])")

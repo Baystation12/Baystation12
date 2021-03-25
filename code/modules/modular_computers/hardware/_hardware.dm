@@ -1,4 +1,4 @@
-/obj/item/weapon/stock_parts/computer/
+/obj/item/stock_parts/computer/
 	name = "Hardware"
 	desc = "Unknown Hardware."
 	icon = 'icons/obj/modular_components.dmi'
@@ -15,7 +15,7 @@
 	var/usage_flags = PROGRAM_ALL
 	var/external_slot				// Whether attackby will be passed on it even with a closed panel
 
-/obj/item/weapon/stock_parts/computer/attackby(var/obj/item/W as obj, var/mob/living/user as mob)
+/obj/item/stock_parts/computer/attackby(var/obj/item/W as obj, var/mob/living/user as mob)
 	// Multitool. Runs diagnostics
 	if(isMultitool(W))
 		to_chat(user, "***** DIAGNOSTICS REPORT *****")
@@ -45,21 +45,21 @@
 
 
 // Called on multitool click, prints diagnostic information to the user.
-/obj/item/weapon/stock_parts/computer/proc/diagnostics()
+/obj/item/stock_parts/computer/proc/diagnostics()
 	return list("Hardware Integrity Test... (Corruption: [damage]/[max_damage]) [damage > damage_failure ? "FAIL" : damage > damage_malfunction ? "WARN" : "PASS"]")
 
-/obj/item/weapon/stock_parts/computer/Initialize()
+/obj/item/stock_parts/computer/Initialize()
 	. = ..()
 	w_class = hardware_size
 
-/obj/item/weapon/stock_parts/computer/Destroy()
+/obj/item/stock_parts/computer/Destroy()
 	if(istype(loc, /obj/item/modular_computer))
 		var/obj/item/modular_computer/C = loc
 		C.uninstall_component(null, src)
 	return ..()
 
 // Handles damage checks
-/obj/item/weapon/stock_parts/computer/proc/check_functionality()
+/obj/item/stock_parts/computer/proc/check_functionality()
 	// Turned off
 	if(!enabled)
 		return 0
@@ -73,7 +73,7 @@
 	// Good to go.
 	return 1
 
-/obj/item/weapon/stock_parts/computer/examine(mob/user)
+/obj/item/stock_parts/computer/examine(mob/user)
 	. = ..()
 	if(damage > damage_failure)
 		to_chat(user, "<span class='danger'>It seems to be severely damaged!</span>")
@@ -83,15 +83,15 @@
 		to_chat(user, "It seems to be slightly damaged.")
 
 // Damages the component. Contains necessary checks. Negative damage "heals" the component.
-/obj/item/weapon/stock_parts/computer/proc/take_damage(var/amount)
+/obj/item/stock_parts/computer/proc/take_damage(var/amount)
 	damage += round(amount) 					// We want nice rounded numbers here.
 	damage = between(0, damage, max_damage)		// Clamp the value.
 
 // Called when component is disabled/enabled by the OS
-/obj/item/weapon/stock_parts/computer/proc/on_disable()
-/obj/item/weapon/stock_parts/computer/proc/on_enable(var/datum/extension/interactive/ntos/os)
+/obj/item/stock_parts/computer/proc/on_disable()
+/obj/item/stock_parts/computer/proc/on_enable(var/datum/extension/interactive/ntos/os)
 
-/obj/item/weapon/stock_parts/computer/proc/update_power_usage()
+/obj/item/stock_parts/computer/proc/update_power_usage()
 	var/datum/extension/interactive/ntos/os = get_extension(loc, /datum/extension/interactive/ntos)
 	if(os)
 		os.recalc_power_usage()

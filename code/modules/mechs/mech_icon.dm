@@ -28,8 +28,8 @@ proc/get_mech_images(var/list/components = list(), var/overlay_layer = FLOAT_LAY
 
 /mob/living/exosuit/on_update_icon()
 	var/list/new_overlays = get_mech_images(list(body, head), MECH_BASE_LAYER)
-	if(body && !hatch_closed)
-		new_overlays += get_mech_image(body.decal, "[body.icon_state]_cockpit", body.on_mech_icon, MECH_BASE_LAYER)
+	if(body)
+		new_overlays += get_mech_image(body.decal, "[body.icon_state]_cockpit", body.on_mech_icon, overlay_layer = MECH_INTERMEDIATE_LAYER)
 	update_pilots(FALSE)
 	if(LAZYLEN(pilot_overlays))
 		new_overlays += pilot_overlays

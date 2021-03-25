@@ -18,19 +18,19 @@
 	var/max_item_size = ITEM_SIZE_HUGE
 	var/list/banned_items = list()
 	var/list/storage_types = list(
-		/obj/item/weapon/storage/pill_bottle,
-		/obj/item/weapon/storage/sheetsnatcher,
-		/obj/item/weapon/storage/plants
+		/obj/item/storage/pill_bottle,
+		/obj/item/storage/sheetsnatcher,
+		/obj/item/storage/plants
 	)
 	var/list/allowed_containers = list(
-		/obj/item/weapon/reagent_containers/glass/beaker
+		/obj/item/reagent_containers/glass/beaker
 	)
 	var/list/banned_containers = list(
-		/obj/item/weapon/reagent_containers/glass/beaker/bowl,
-		/obj/item/weapon/reagent_containers/glass/beaker/vial
+		/obj/item/reagent_containers/glass/beaker/bowl,
+		/obj/item/reagent_containers/glass/beaker/vial
 	)
 	var/grind_time = 6 SECONDS
-	var/obj/item/weapon/reagent_containers/container
+	var/obj/item/reagent_containers/container
 	var/grinding
 
 
@@ -131,7 +131,7 @@
 			updateUsrDialog()
 
 	else if (is_type_in_list(I, storage_types))
-		var/obj/item/weapon/storage/S = I
+		var/obj/item/storage/S = I
 		if (!S.contents.len)
 			to_chat(user, SPAN_WARNING("\The [S] is empty."))
 		else if (items.len >= max_items)
@@ -263,10 +263,10 @@
 		/obj/item/stack/material
 	)
 	storage_types = list(
-		/obj/item/weapon/storage/pill_bottle,
-		/obj/item/weapon/storage/plants
+		/obj/item/storage/pill_bottle,
+		/obj/item/storage/plants
 	)
 	allowed_containers = list(
-		/obj/item/weapon/reagent_containers/glass/beaker,
-		/obj/item/weapon/reagent_containers/food/drinks/shaker
+		/obj/item/reagent_containers/glass/beaker,
+		/obj/item/reagent_containers/food/drinks/shaker
 	)

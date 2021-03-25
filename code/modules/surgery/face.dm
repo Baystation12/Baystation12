@@ -4,10 +4,10 @@
 /decl/surgery_step/fix_face
 	name = "Repair face"
 	allowed_tools = list(
-		/obj/item/weapon/hemostat = 100,
+		/obj/item/hemostat = 100,
 		/obj/item/stack/cable_coil = 75,
 		/obj/item/device/assembly/mousetrap = 10,
-		/obj/item/weapon/material/kitchen/utensil/fork = 75
+		/obj/item/material/kitchen/utensil/fork = 75
 	)
 	min_duration = 100
 	max_duration = 120

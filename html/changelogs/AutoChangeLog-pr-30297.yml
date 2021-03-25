@@ -1,0 +1,17 @@
+author: Ilysen
+delete-after: true
+changes:
+  - tweak: Cultist pylons are now destroyed permanently when they shatter, instead
+      of being placed into a weird "broken" state where have the exact same sprite
+      but can be passed over.
+  - tweak: Cult pylons now have a proper health system, instead of using random chance
+      to determine if they're damaged.
+  - tweak: Wraiths now float, preventing them from falling down z-levels and letting
+      them counteract gravity. They'll still drift in space, though.
+  - tweak: Artificer abilities no longer use a super loud sound.
+  - bugfix: Finally fixed wraiths being unable to use their Phase Shift.
+  - bugfix: Fixed player-controlled simple animals (like constructs) being unable
+      to hurt things.
+  - bugfix: Natural weapons can no longer embed into wounds.
+  - bugfix: Artificers now correctly repair constructs on an attack instead of bashing
+      them.

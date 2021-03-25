@@ -15,15 +15,15 @@
 	a_intent = I_HURT
 	stop_automated_movement = 1
 	status_flags = CANPUSH
-	attacktext = "nipped"
+	natural_weapon = /obj/item/natural_weapon/bite/weak
 	friendly = "prods"
 	wander = 0
 	pass_flags = PASS_FLAG_TABLE
 	universal_understand = TRUE
-	holder_type = /obj/item/weapon/holder/borer
+	holder_type = /obj/item/holder/borer
 	mob_size = MOB_SMALL
 	can_escape = TRUE
-	density = 0
+	density = FALSE
 
 	bleed_colour = "#816e12"
 

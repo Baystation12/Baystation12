@@ -8,7 +8,7 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	icon_state = "ghost"
 	appearance_flags = KEEP_TOGETHER
 	blinded = 0
-	anchored = 1	//  don't get pushed around
+	anchored = TRUE	//  don't get pushed around
 	universal_speak = TRUE
 
 	mob_flags = MOB_FLAG_HOLY_BAD

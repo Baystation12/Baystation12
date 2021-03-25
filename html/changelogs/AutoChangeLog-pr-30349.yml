@@ -1,0 +1,6 @@
+author: Ryan180602
+delete-after: true
+changes:
+  - rscadd: Drinking glasses can now be used to splash mobs
+  - rscadd: Beakers can now break when thrown, spilling its contents
+  - tweak: Add a harm-intent check when clicking on self with glasses/beakers
