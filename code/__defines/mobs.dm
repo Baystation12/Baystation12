@@ -379,6 +379,7 @@
 #define DO_BOTH_UNIQUE_ACT   (DO_USER_UNIQUE_ACT | DO_TARGET_UNIQUE_ACT)
 #define DO_DEFAULT           (DO_SHOW_PROGRESS | DO_USER_SAME_HAND | DO_BOTH_CAN_TURN | DO_FAIL_FEEDBACK)
 #define DO_PUBLIC_UNIQUE     (DO_DEFAULT | DO_BOTH_UNIQUE_ACT | DO_PUBLIC_PROGRESS)
+#define DO_MEDICAL           (DO_DEFAULT | DO_PUBLIC_PROGRESS) // Seperate define for medical activities, as medical is currently balanced around being able to perform multiple steps at the same time
 
 #define DO_MISSING_USER      (-1)
 #define DO_MISSING_TARGET    (-2)
