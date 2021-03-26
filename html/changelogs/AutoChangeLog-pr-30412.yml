@@ -1,7 +1,0 @@
-author: CrimsonShrike
-delete-after: true
-changes:
-  - tweak: Mech light legs now prevent fall damage.
-  - rscadd: Exosuit manouvering units added. Space awaits! Added one to the exploration
-      exosuit to make it usable for away sites. Added another to salvage gantry mech
-      so it stops floating into space and dying.
