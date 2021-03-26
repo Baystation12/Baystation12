@@ -73,7 +73,7 @@
 			to_chat(user, "<span class='danger'>\The [reinf_material.display_name] feels porous and crumbly.</span>")
 		else
 			to_chat(user, "<span class='danger'>\The [material.display_name] crumbles under your touch!</span>")
-			dismantle_wall()
+			dismantle_wall(TRUE)
 			return 1
 
 	if(!can_open)
@@ -110,7 +110,7 @@
 					return
 				if(rotting && !reinf_material)
 					M.visible_message(SPAN_DANGER("[M.name] punches \the [src] and it crumbles!"), SPAN_DANGER("You punch \the [src] and it crumbles!"))
-					dismantle_wall()
+					dismantle_wall(TRUE)
 					playsound(src, pick(GLOB.punch_sound), 20)
 				if (MUTATION_FERAL in user.mutations)
 					M.visible_message(SPAN_DANGER("[M.name] slams into \the [src]!"), SPAN_DANGER("You slam into \the [src]!"))
@@ -283,7 +283,7 @@
 						return
 
 					to_chat(user, "<span class='notice'>You tear through the wall's support system and plating!</span>")
-					dismantle_wall()
+					dismantle_wall(TRUE)
 					user.visible_message("<span class='warning'>The wall was torn open by [user]!</span>")
 					playsound(src, 'sound/items/Welder.ogg', 100, 1)
 
@@ -397,18 +397,27 @@
 	else if(!istype(W,/obj/item/rcd) && !istype(W, /obj/item/reagent_containers))
 		if(!W.force)
 			return attack_hand(user)
-		var/dam_threshhold = material.integrity
-		if(reinf_material)
-			dam_threshhold = ceil(max(dam_threshhold,reinf_material.integrity)/2)
-		var/dam_prob = min(100,material.hardness*1.5)
-		if(dam_prob < 100 && W.force > (dam_threshhold/10))
-			playsound(src, 'sound/effects/metalhit.ogg', 50, 1)
-			if(!prob(dam_prob))
-				visible_message("<span class='danger'>\The [user] attacks \the [src] with \the [W] and it [material.destruction_desc]!</span>")
-				dismantle_wall(1)
-			else
-				visible_message("<span class='danger'>\The [user] attacks \the [src] with \the [W]!</span>")
+
+		var/received_damage = W.force
+		if (W.damtype == BRUTE && brute_armor)
+			received_damage /= brute_armor
+		else if (W.damtype == BURN && burn_armor)
+			received_damage /= burn_armor
+		received_damage = round(received_damage)
+
+		if (W.force > force_damage_threshhold && received_damage > 0)
+			playsound(src, hitsound, 50, 1)
+			user.visible_message(
+				SPAN_DANGER("\The [user] attacks \the [src] with \the [W]!"),
+				SPAN_WARNING("You attack \the [src] with \the [W]!"),
+				SPAN_WARNING("You hear the sound of something hitting a wall.")
+			)
+			take_damage(received_damage)
 		else
-			visible_message("<span class='danger'>\The [user] attacks \the [src] with \the [W], but it bounces off!</span>")
 			playsound(src, hitsound, 25, 1)
+			user.visible_message(
+				SPAN_WARNING("\The [user] attacks \the [src] with \the [W], but it bounces off!"),
+				SPAN_WARNING("You attack \the [src] with \the [W], but it bounces off! You need something stronger."),
+				SPAN_WARNING("You hear the sound of something hitting a wall.")
+			)
 		return
