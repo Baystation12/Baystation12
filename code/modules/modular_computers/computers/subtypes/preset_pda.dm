@@ -87,3 +87,7 @@
 /obj/item/modular_computer/pda/captain/install_default_hardware()
 	..()
 	scanner = new /obj/item/stock_parts/computer/scanner/paper(src)
+
+/obj/item/modular_computer/pda/roboticist/install_default_hardware()
+	..()
+	scanner = new /obj/item/stock_parts/computer/scanner/robotic(src)
