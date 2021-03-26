@@ -1,6 +1,6 @@
 #define ONLY_DEPLOY 1
 #define ONLY_RETRACT 2
-#define SEAL_DELAY 30
+#define SEAL_DELAY DO_AFTER_TIME_QUICK
 
 /*
  * Defines the behavior of hardsuits/rigs/power armour.
@@ -269,7 +269,7 @@
 			"<span class='info'>[wearer]'s suit emits a quiet hum as it begins to adjust its seals.</span>", \
 			"<span class='info'>With a quiet hum, the suit begins running checks and adjusting components.</span>")
 
-			if(seal_delay && !do_after(wearer,seal_delay, src))
+			if(seal_delay && !do_after(wearer, seal_delay, src, DO_PUBLIC_UNIQUE))
 				failed_to_seal = 1
 
 		if(!wearer)
@@ -292,7 +292,7 @@
 
 				if(!failed_to_seal && wearer.back == src && piece == compare_piece)
 
-					if(seal_delay && !instant && !do_after(wearer, seal_delay, src, do_flags = DO_DEFAULT & ~DO_USER_SAME_HAND))
+					if(seal_delay && !instant && !do_after(wearer, seal_delay, src, DO_PUBLIC_UNIQUE & ~DO_USER_SAME_HAND))
 						failed_to_seal = 1
 
 					piece.icon_state = "[initial(icon_state)][!seal_target ? "_sealed" : ""]"
@@ -679,7 +679,7 @@
 		"<span class='info'>[M] starts putting on \the [src]...</span>", \
 		"<span class='info'>You start putting on \the [src]...</span>")
 
-		if(!do_after(M,seal_delay,src))
+		if(!do_after(M, seal_delay, src, DO_PUBLIC_UNIQUE))
 			if(M && M.back == src)
 				if(!M.unEquip(src))
 					return

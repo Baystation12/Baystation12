@@ -86,7 +86,7 @@
 				return
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 		to_chat(user, "<span class='notice'>Now disassembling the low wall...</span>")
-		if(do_after(user, 40,src))
+		if(do_after_construct(user, src))
 			to_chat(user, "<span class='notice'>You dissasembled the low wall!</span>")
 			dismantle()
 
@@ -96,7 +96,7 @@
 			return
 		playsound(src.loc, 'sound/items/Welder.ogg', 100, 1)
 		to_chat(user, "<span class='notice'>Now slicing through the low wall...</span>")
-		if(do_after(user, 20,src))
+		if(do_after(user, DO_AFTER_TIME_QUICK, src, DO_PUBLIC_UNIQUE))
 			to_chat(user, "<span class='warning'>You have sliced through the low wall!</span>")
 			dismantle()
 	return ..()

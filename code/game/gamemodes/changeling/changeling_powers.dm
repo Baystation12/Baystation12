@@ -195,7 +195,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 				affecting.take_external_damage(39, 0, DAM_SHARP, "large organic needle")
 
 		SSstatistics.add_field_details("changeling_powers","A[stage]")
-		if(!do_after(src, 15 SECONDS, T))
+		if(!do_after(src, DO_AFTER_TIME_EXTREME, T))
 			to_chat(src, "<span class='warning'>Our absorption of [T] has been interrupted!</span>")
 			changeling.isabsorbing = 0
 			return
@@ -278,10 +278,10 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 
 	var/S_name = chosen_dna.speciesName
 	var/datum/species/S_dat = all_species[S_name]
-	var/changeTime = 2 SECONDS
+	var/changeTime = DO_AFTER_TIME_QUICK
 	if(mob_size != S_dat.mob_size)
 		src.visible_message("<span class='warning'>[src]'s body begins to twist, their mass changing rapidly!</span>")
-		changeTime = 8 SECONDS
+		changeTime = DO_AFTER_TIME_MEDIUM
 	else
 		src.visible_message("<span class='warning'>[src]'s body begins to twist, changing rapidly!</span>")
 

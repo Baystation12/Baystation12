@@ -43,7 +43,7 @@
 /obj/structure/plasticflaps/attackby(obj/item/W, mob/user)
 	if(isCrowbar(W) && !anchored)
 		user.visible_message("<span class='notice'>\The [user] begins deconstructing \the [src].</span>", "<span class='notice'>You start deconstructing \the [src].</span>")
-		if (do_after(user, DO_AFTER_TIME_QUICK, src, DO_PUBLIC_UNIQUE, do_skill = SKILL_CONSTRUCTION, delay_flags = DO_AFTER_TIME_FLAG_USER_SKILL))
+		if (do_after_construct(user, src))
 			user.visible_message("<span class='warning'>\The [user] deconstructs \the [src].</span>", "<span class='warning'>You deconstruct \the [src].</span>")
 			qdel(src)
 	if(isScrewdriver(W) && anchored)

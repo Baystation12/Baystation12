@@ -44,7 +44,7 @@
 
 	to_chat(user, "<span class='notice'>The microscope whirrs as you examine \the [sample].</span>")
 
-	if (!do_after(user, DO_AFTER_TIME_QUICK, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT, do_skill = SKILL_FORENSICS, delay_flags = DO_AFTER_TIME_FLAG_USER_SKILL) || !sample)
+	if (!do_after(user, DO_AFTER_TIME_QUICK, src, DO_PUBLIC_PROGRESS, do_skill = SKILL_FORENSICS, delay_flags = DO_AFTER_TIME_FLAG_USER_SKILL) || !sample)
 		to_chat(user, "<span class='notice'>You stop examining \the [sample].</span>")
 		return
 

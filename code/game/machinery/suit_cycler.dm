@@ -99,7 +99,7 @@
 
 		visible_message("<span class='notice'>[user] starts putting [G.affecting.name] into the suit cycler.</span>", range = 3)
 
-		if(do_after(user, 20, src))
+		if(do_after_put_in_thing(user, src, G.affecting))
 			if(!G || !G.affecting) return
 			var/mob/M = G.affecting
 			if (M.client)
@@ -138,7 +138,7 @@
 			return
 		to_chat(user, "You fit \the [I] into the suit cycler.")
 		helmet = I
-		
+
 		updateUsrDialog()
 		return
 

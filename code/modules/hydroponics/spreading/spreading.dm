@@ -221,7 +221,7 @@
 			damage *= 2
 		adjust_health(-damage)
 		playsound(get_turf(src), W.hitsound, 100, 1)
-		
+
 /obj/effect/vine/AltClick(var/mob/user)
 	if(!CanPhysicallyInteract(user) || user.incapacitated())
 		return ..()
@@ -230,9 +230,7 @@
 		visible_message(SPAN_NOTICE("[user] starts chopping down \the [src]."))
 		playsound(, W.hitsound, 100, 1)
 		var/chop_time = (health/W.force) * 0.5 SECONDS
-		if(user.skill_check(SKILL_BOTANY, SKILL_ADEPT))
-			chop_time *= 0.5
-		if(do_after(user, chop_time, src))
+		if(do_after(user, chop_time, src, DO_PUBLIC_UNIQUE, do_skill = SKILL_BOTANY, delay_flags = DO_AFTER_TIME_FLAG_USER_SKILL))
 			visible_message(SPAN_NOTICE("[user] chops down \the [src]."))
 			playsound(get_turf(src), W.hitsound, 100, 1)
 			die_off()

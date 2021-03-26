@@ -63,7 +63,7 @@
 		if(!T)
 			return
 		user.visible_message("<span class='warning'>[user] starts scrubbing \the [T].</span>")
-		T.clean(src, user, 80, "<span class='notice'>You scrub \the [target.name] clean.</span>")
+		T.clean(src, user, DO_AFTER_TIME_MEDIUM, "<span class='notice'>You scrub \the [target.name] clean.</span>")
 		cleaned = TRUE
 	else if(istype(target,/obj/structure/hygiene/sink))
 		to_chat(user, "<span class='notice'>You wet \the [src] in the sink.</span>")
@@ -74,7 +74,7 @@
 			reagents.trans_to(target, reagents.total_volume / 8)
 		target.clean_blood() //Clean bloodied atoms. Blood decals themselves need to be handled above.
 		cleaned = TRUE
-	else 
+	else
 		to_chat(user, "<span class='notice'>You clean \the [target.name].</span>")
 		target.clean_blood() //Clean bloodied atoms. Blood decals themselves need to be handled above.
 		cleaned = TRUE

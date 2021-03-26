@@ -411,7 +411,7 @@
 		if(istype(loc, /turf) && (IC_FLAG_ANCHORABLE & circuit_flags))
 			user.visible_message("\The [user] wrenches \the [src]'s anchoring bolts [anchored ? "back" : "into position"].")
 			playsound(get_turf(user), 'sound/items/Ratchet.ogg',50)
-			if (do_after(user, DO_AFTER_TIME_SHORT, src, DO_PUBLIC_UNIQUE, do_skill = SKILL_CONSTRUCTION, delay_flags = DO_AFTER_TIME_FLAG_USER_SKILL))
+			if (do_after_anchor(user, src))
 				anchored = !anchored
 	else if(istype(I, /obj/item/integrated_circuit))
 		if(!user.canUnEquip(I))
@@ -473,7 +473,7 @@
 		update_icon()
 	else if(isCoil(I))
 		var/obj/item/stack/cable_coil/C = I
-		if(health != initial(health) && do_after(user, 10, src) && C.use(1))
+		if(health != initial(health) && do_after_repair(user, src, 5) && C.use(1))
 			user.visible_message("\The [user] patches up \the [src]")
 			health = min(initial(health), health + 5)
 	else

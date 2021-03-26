@@ -27,7 +27,7 @@
 	// Power
 	idle_power_usage = 10
 	active_power_usage = 150
-	
+
 	machine_name = "washing machine"
 	machine_desc = "Uses detergent and water to get your clothes minty fresh. Good for those pesky bloodstains! Also decontaminates clothing that has been exposed to toxic elements, as long as detergent is used in the washing process."
 
@@ -110,8 +110,8 @@
 		return
 	if(state & WASHER_STATE_CLOSED)
 		to_chat(usr, SPAN_WARNING("\The [src] is closed."))
-		return	
-	if(!do_after(usr, 2 SECONDS, src))
+		return
+	if(!do_after(usr, DO_AFTER_TIME_QUICK, src, DO_PUBLIC_UNIQUE))
 		return
 	if(!(state & WASHER_STATE_CLOSED))
 		usr.dropInto(loc)
@@ -122,7 +122,7 @@
 /obj/machinery/washing_machine/clean_blood()
 	. = ..()
 	state &= ~WASHER_STATE_BLOODY
-	update_icon()	
+	update_icon()
 
 /obj/machinery/washing_machine/components_are_accessible(path)
 	return !(state & WASHER_STATE_RUNNING) && ..()

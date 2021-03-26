@@ -101,8 +101,8 @@
 	var/countdown = 15
 	var/temporary = 1
 	var/mob/living/carbon/captured = null
-	var/min_free_time = 50
-	var/max_free_time = 85
+	var/min_free_time = DO_AFTER_TIME_SHORT
+	var/max_free_time = DO_AFTER_TIME_MEDIUM
 
 /obj/effect/energy_net/safari
 	name = "animal net"
@@ -222,7 +222,7 @@ obj/effect/energy_net/user_unbuckle_mob(mob/user)
 		"<span class='warning'>\The [user] attempts to free themselves from \the [src]!</span>",
 		"<span class='warning'>You attempt to free yourself from \the [src]!</span>"
 		)
-	if(do_after(user, rand(min_free_time, max_free_time), src, incapacitation_flags = INCAPACITATION_DISABLED))
+	if(do_after(user, rand(min_free_time, max_free_time), src, DO_PUBLIC_UNIQUE, incapacitation_flags = INCAPACITATION_DISABLED))
 		health = 0
 		healthcheck()
 		return 1

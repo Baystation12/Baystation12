@@ -168,8 +168,8 @@
 	if(!istype(C))
 		return ..()
 	if(pilot_coverage < 100)
-		to_chat(user, SPAN_NOTICE("This type of chassis doesn't support internals."))	
-	if(!C.anchored && do_after(user, 5, src))
+		to_chat(user, SPAN_NOTICE("This type of chassis doesn't support internals."))
+	if(!C.anchored && do_after_piping(user, src))
 		if(C.anchored)
 			return
 		to_chat(user, SPAN_NOTICE("You install the canister in the [src]."))
@@ -197,5 +197,3 @@ obj/item/mech_component/chassis/MouseDrop(atom/over)
 		to_chat(user, SPAN_NOTICE(" Armor Integrity: <b>[round((((m_armour.max_dam - m_armour.total_dam) / m_armour.max_dam)) * 100)]%</b>"))
 	else
 		to_chat(user, SPAN_WARNING(" Armor Missing or Non-functional."))
-
-

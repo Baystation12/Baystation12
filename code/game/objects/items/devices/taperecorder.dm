@@ -440,7 +440,7 @@
 			to_chat(user, "<span class='notice'>There is no tape left inside.</span>")
 			return
 		to_chat(user, "<span class='notice'>You start winding the tape back in...</span>")
-		if(do_after(user, 120, src))
+		if(do_after(user, DO_AFTER_TIME_QUICK, src, DO_PUBLIC_UNIQUE))
 			to_chat(user, "<span class='notice'>You wound the tape back in.</span>")
 			fix()
 		return
@@ -496,7 +496,7 @@
 		var/index = text2num(href_list["cut_after"])
 		if(index >= timestamp.len)
 			return
-		
+
 		to_chat(user, "<span class='notice'>You remove part of the tape off.</span>")
 		get_loose_tape(user, index)
 		cut(user)

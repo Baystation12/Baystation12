@@ -87,7 +87,7 @@
 
 	user.visible_message("<span class='danger'>\The [user] is attempting to put [cuff_type] on \the [H]!</span>")
 
-	if(!do_after(user,30, target))
+	if(!do_after(user, DO_AFTER_TIME_QUICK, target, DO_PUBLIC_UNIQUE))
 		return 0
 
 	if(!target.has_danger_grab(user)) // victim may have resisted out of the grab in the meantime

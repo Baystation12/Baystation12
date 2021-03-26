@@ -5,7 +5,7 @@
 	desc = "An inactive, hacked supply beacon stamped with the Nyx Rapid Fabrication logo. Good for one (1) ballistic supply pod shipment."
 	icon_state = "beacon"
 	var/deploy_path = /obj/machinery/power/supply_beacon
-	var/deploy_time = 30
+	var/deploy_time = DO_AFTER_TIME_QUICK
 
 /obj/item/supply_beacon/supermatter
 	name = "inactive supermatter supply beacon"
@@ -13,7 +13,7 @@
 
 /obj/item/supply_beacon/attack_self(var/mob/user)
 	user.visible_message("<span class='notice'>\The [user] begins setting up \the [src].</span>")
-	if(!do_after(user, deploy_time, src))
+	if(!do_after(user, deploy_time, src, DO_PUBLIC_UNIQUE))
 		return
 	if(!user.unEquip(src))
 		return

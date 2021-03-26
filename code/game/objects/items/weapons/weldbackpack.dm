@@ -208,8 +208,7 @@
 		var/selection = input("Which would you like to remove?") as null|anything in options
 		if (!selection)
 			return TRUE
-		var/time_cost = 5 - round(user.get_skill_value(SKILL_ATMOS) * 0.5) //0,1,1,2,2
-		if (!do_after(user, time_cost SECONDS, src, do_flags = DO_DEFAULT | DO_BOTH_UNIQUE_ACT))
+		if (!do_after(user, DO_AFTER_TIME_SHORT, src, DO_PUBLIC_UNIQUE, do_skill = SKILL_ATMOS, delay_flags = DO_AFTER_TIME_FLAG_USER_SKILL))
 			return TRUE
 		var/removed
 		if (selection == "cell")

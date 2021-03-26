@@ -288,7 +288,7 @@
 	flags = TURF_REMOVE_WRENCH | TURF_ACID_IMMUNE
 	build_type = /obj/item/stack/material/steel
 	build_cost = 1
-	build_time = 30
+	build_time = DO_AFTER_TIME_QUICK
 	apply_thermal_conductivity = 0.025
 	apply_heat_capacity = 325000
 	can_paint = 1
@@ -388,7 +388,7 @@
 	damage_temperature = T0C + 100
 	build_type = null
 	flags = TURF_ACID_IMMUNE | TURF_REMOVE_CROWBAR
-	remove_timer = 60
+	remove_timer = DO_AFTER_TIME_SHORT
 	can_engrave = FALSE
 
 /decl/flooring/pool

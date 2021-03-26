@@ -450,7 +450,7 @@
 		to_chat(user, SPAN_WARNING("\The [target] isn't close enough."))
 		return
 	add_fingerprint(user)
-	if (!do_after(user, 2 SECONDS, src, do_flags = DO_DEFAULT | DO_TARGET_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
+	if (!do_after_put_in_thing(user, src, target))
 		return
 	if (QDELETED(target))
 		return
@@ -531,7 +531,7 @@
 
 	visible_message("\The [usr] starts climbing into \the [src].", range = 3)
 
-	if(do_after(usr, 20, src))
+	if(do_after_put_in_thing(usr, src))
 
 		if(!usr || !usr.client)
 			return
@@ -612,7 +612,7 @@
 		if (isCrowbar(W))
 			busy = 1
 			visible_message("[user] starts to pry the glass cover off of \the [src].")
-			if (!do_after(user, 50, src))
+			if (!do_after_leverage(user, src))
 				visible_message("[user] stops trying to pry the glass off of \the [src].")
 				busy = 0
 				return

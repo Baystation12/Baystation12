@@ -213,7 +213,7 @@
 				SPAN_ITALIC("You hear welding.")
 			)
 			playsound(loc, 'sound/items/Welder.ogg', 50, TRUE)
-			if(do_after(user, 2 SECONDS, src))
+			if(do_after_tool(user, src))
 				if(!W.isOn())
 					return
 				blocked = !blocked
@@ -247,7 +247,7 @@
 				SPAN_ITALIC("You hear metal bumping against metal.")
 			)
 			playsound(loc, 'sound/items/Crowbar.ogg', 100, TRUE)
-			if(do_after(user, 30, src))
+			if(do_after_construct(user, src))
 				if(blocked && density && hatch_open)
 					playsound(loc, 'sound/items/Deconstruct.ogg', 100, TRUE)
 					user.visible_message(
@@ -285,7 +285,7 @@
 			SPAN_WARNING("You hear metal groaning and grinding!")
 		)
 		playsound(loc, 'sound/machines/airlock_creaking.ogg', 100, TRUE)
-		if(do_after(user, 30, src))
+		if(do_after_leverage(user, src))
 			if(isCrowbar(C))
 				if(stat & (BROKEN|NOPOWER) || !density)
 					user.visible_message(

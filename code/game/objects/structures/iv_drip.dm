@@ -197,7 +197,7 @@
 
 /proc/do_IV_hookup(mob/living/carbon/human/target, mob/user, obj/IV)
 	to_chat(user, "<span class='notice'>You start to hook up \the [target] to \the [IV].</span>")
-	if (!do_after(user, DO_AFTER_TIME_QUICK, target, DO_DEFAULT | DO_PUBLIC_PROGRESS, do_skill = SKILL_MEDICAL, delay_flags = DO_AFTER_TIME_FLAG_USER_SKILL))
+	if (!do_after(user, DO_AFTER_TIME_QUICK, target, DO_MEDICAL, do_skill = SKILL_MEDICAL, delay_flags = DO_AFTER_TIME_FLAG_USER_SKILL))
 		return FALSE
 
 	if(prob(user.skill_fail_chance(SKILL_MEDICAL, 80, SKILL_BASIC)))

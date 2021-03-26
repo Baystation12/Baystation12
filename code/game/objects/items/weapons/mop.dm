@@ -11,7 +11,7 @@
 	attack_verb = list("mopped", "bashed", "bludgeoned", "whacked")
 	var/mopping = 0
 	var/mopcount = 0
-	var/mopspeed = 40
+	var/mopspeed = DO_AFTER_TIME_SHORT
 	var/list/moppable_types = list(
 		/obj/effect/decal/cleanable,
 		/obj/effect/rune,
@@ -35,7 +35,7 @@
 				to_chat(user, SPAN_WARNING("There is too much water here to be mopped up."))
 			else
 				user.visible_message("<span class='notice'>\The [user] begins to mop up \the [T].</span>")
-				if(do_after(user, mopspeed, T, do_flags = DO_DEFAULT | DO_PUBLIC_PROGRESS) && F && !QDELETED(F))
+				if(do_after(user, mopspeed, T, DO_PUBLIC_UNIQUE) && F && !QDELETED(F))
 					if(F.fluid_amount > FLUID_SHALLOW)
 						to_chat(user, SPAN_WARNING("There is too much water here to be mopped up."))
 					else
@@ -57,7 +57,7 @@
 
 		user.visible_message("<span class='warning'>\The [user] begins to clean \the [T].</span>")
 
-		if(do_after(user, mopspeed, T, do_flags = DO_DEFAULT | DO_PUBLIC_PROGRESS))
+		if(do_after(user, mopspeed, T, DO_PUBLIC_UNIQUE))
 			if(T)
 				T.clean(src, user)
 			to_chat(user, "<span class='notice'>You have finished mopping!</span>")
@@ -75,7 +75,7 @@
 	item_state = "mop"
 	force = 6
 	throwforce = 11
-	mopspeed = 20
+	mopspeed = DO_AFTER_TIME_QUICK
 	var/refill_enabled = TRUE //Self-refill toggle for when a janitor decides to mop with something other than water.
 	var/refill_rate = 1 //Rate per process() tick mop refills itself
 	var/refill_reagent = /datum/reagent/space_cleaner //Determins what reagent to use for refilling, just in case someone wanted to make a HOLY MOP OF PURGING

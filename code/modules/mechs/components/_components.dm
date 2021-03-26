@@ -143,7 +143,7 @@
 			SPAN_NOTICE("You begin welding the damage on \the [src]...")
 		)
 		var/repair_value = 10 * max(user.get_skill_value(SKILL_CONSTRUCTION), user.get_skill_value(SKILL_DEVICES))
-		if (do_after(user, DO_AFTER_TIME_MIN, src, DO_PUBLIC_UNIQUE, do_skill = SKILL_DEVICES, delay_flags = DO_AFTER_TIME_FLAG_USER_SKILL) && brute_damage)
+		if (do_after_repair(user, src, repair_value, SKILL_DEVICES) && brute_damage)
 			repair_brute_damage(repair_value)
 			to_chat(user, SPAN_NOTICE("You mend the damage to \the [src]."))
 			playsound(user.loc, 'sound/items/Welder.ogg', 25, 1)
@@ -162,7 +162,7 @@
 
 	user.visible_message("\The [user] begins replacing the wiring of \the [src]...")
 
-	if (do_after(user, DO_AFTER_TIME_MIN, src, DO_PUBLIC_UNIQUE, do_skill = SKILL_DEVICES, delay_flags = DO_AFTER_TIME_FLAG_USER_SKILL) && burn_damage)
+	if (do_after_repair(user, src, 25, SKILL_DEVICES) && burn_damage)
 		if(QDELETED(CC) || QDELETED(src) || !CC.use(needed_amount))
 			return
 

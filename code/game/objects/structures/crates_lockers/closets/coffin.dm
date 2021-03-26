@@ -5,7 +5,7 @@
 	setup = 0
 	closet_appearance = null
 
-	var/screwdriver_time_needed = 7.5 SECONDS
+	var/screwdriver_time_needed = DO_AFTER_TIME_MEDIUM
 
 /obj/structure/closet/coffin/examine(mob/user, distance)
 	. = ..()
@@ -21,7 +21,7 @@
 	if(!opened && isScrewdriver(W))
 		to_chat(user, SPAN_NOTICE("You begin screwing [src]'s lid [locked ? "open" : "shut"]."))
 		playsound(src, 'sound/items/Screwdriver.ogg', 100, 1)
-		if(do_after(user, screwdriver_time_needed, src))
+		if(do_after(user, screwdriver_time_needed, src, DO_PUBLIC_UNIQUE, do_skill = SKILL_CONSTRUCTION, delay_flags = DO_AFTER_TIME_FLAG_USER_SKILL))
 			locked = !locked
 			to_chat(user, SPAN_NOTICE("You [locked ? "screw down" : "unscrew"] [src]'s lid."))
 	else

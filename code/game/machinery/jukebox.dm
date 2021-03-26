@@ -62,7 +62,7 @@
 /obj/machinery/jukebox/attackby(obj/item/I, mob/user)
 	if (isWrench(I))
 		add_fingerprint(user)
-		wrench_floor_bolts(user, 0)
+		wrench_floor_bolts(user)
 		power_change()
 		return
 	return ..()
