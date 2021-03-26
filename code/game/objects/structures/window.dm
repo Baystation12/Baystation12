@@ -16,6 +16,7 @@
 	var/init_reinf_material = null
 	var/maxhealth
 	var/health
+	var/force_damage_threshhold = 0 // Minimum amount of requried force to damage the wall
 	var/damage_per_fire_tick = 2 		// Amount of damage per fire tick. Regular windows are not fireproof so they might as well break quickly.
 	var/construction_state = 2
 	var/id
@@ -72,6 +73,11 @@
 		layer = FULL_WINDOW_LAYER
 
 	health = maxhealth
+
+	force_damage_threshhold = material.hardness * 1.25
+	if (reinf_material)
+		force_damage_threshhold += round(reinf_material.hardness * 0.625)
+	force_damage_threshhold = round(force_damage_threshhold / 10)
 
 	if (constructed)
 		set_anchored(FALSE)
@@ -267,7 +273,7 @@
 		user.do_attack_animation(src)
 	if(!damage)
 		return
-	if(damage >= 10)
+	if(damage > force_damage_threshhold)
 		visible_message("<span class='danger'>[user] [attack_verb] into [src]!</span>")
 		take_damage(damage)
 	else
@@ -398,16 +404,12 @@
 		)
 		return
 
-	else if (!istype(W, /obj/item/rcd) && !istype(W, /obj/item/device/paint_sprayer))
+	else if (user.a_intent != I_HELP && !istype(W, /obj/item/rcd) && !istype(W, /obj/item/device/paint_sprayer))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		if(W.damtype == BRUTE || W.damtype == BURN)
+		if(!istype(W, /obj/item/natural_weapon) && (W.damtype == BRUTE || W.damtype == BURN))
 			user.do_attack_animation(src)
-			hit(W.force)
-			if(health <= 7)
-				set_anchored(FALSE)
-				step(src, get_dir(user, src))
-		else
-			playsound(loc, 'sound/effects/Glasshit.ogg', 75, 1)
+			hit(W.force, user, W)
+			return
 		..()
 	return
 
@@ -423,17 +425,34 @@
 		if (prob(50))
 			G.affecting.Weaken(1)
 		G.affecting.apply_damage(10, BRUTE, def_zone, used_weapon = src)
-		hit(25)
+		hit(25, G.assailant, G.affecting)
 	else
 		G.affecting.visible_message("<span class='danger'>[G.assailant] crushes [G.affecting] against \the [src]!</span>")
 		G.affecting.Weaken(5)
 		G.affecting.apply_damage(20, BRUTE, def_zone, used_weapon = src)
-		hit(50)
+		hit(50, G.assailant, G.affecting)
 	return TRUE
 
-/obj/structure/window/proc/hit(var/damage, var/sound_effect = 1)
-	if(reinf_material) damage *= 0.5
-	take_damage(damage)
+/obj/structure/window/proc/hit(damage, mob/user, atom/weapon = null)
+	if (damage > force_damage_threshhold)
+		var/weapon_text = weapon ? " with \the [weapon]" : null
+		user.visible_message(
+			SPAN_DANGER("\The [user] attacks \the [src][weapon_text]!"),
+			SPAN_WARNING("You attack \the [src][weapon_text]!"),
+			SPAN_WARNING("You hear the sound of something hitting a window.")
+		)
+		take_damage(damage)
+		if(health <= maxhealth * 0.15)
+			set_anchored(FALSE)
+			step(src, get_dir(user, src))
+	else
+		var/weapon_text = weapon ? " with \the [weapon]" : null
+		playsound(loc, 'sound/effects/Glasshit.ogg', 50, 1)
+		user.visible_message(
+			SPAN_WARNING("\The [user] attacks \the [src][weapon_text], but it bounces off!"),
+			SPAN_WARNING("You attack \the [src][weapon_text], but it bounces off! You need something stronger."),
+			SPAN_WARNING("You hear the sound of something hitting a window.")
+		)
 
 /obj/structure/window/rotate(mob/user)
 	if(!CanPhysicallyInteract(user))
@@ -549,7 +568,7 @@
 	if(reinf_material)
 		melting_point += 0.25*reinf_material.melting_point
 	if(exposed_temperature > melting_point)
-		hit(damage_per_fire_tick, 0)
+		take_damage(damage_per_fire_tick, FALSE)
 	..()
 
 /obj/structure/window/basic

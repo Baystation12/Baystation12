@@ -63,7 +63,7 @@
 		fluid_update()
 
 /obj/structure/attackby(obj/item/O, mob/user)
-	if(user.a_intent != I_HELP)
+	if(user.a_intent != I_HELP && istype(O, /obj/item/natural_weapon))
 		//Bit dirty, but the entire attackby chain seems kinda wrong to begin with
 		//Things should probably be parent first and return true if something handled it already, not child first
 		src.add_fingerprint(user)
