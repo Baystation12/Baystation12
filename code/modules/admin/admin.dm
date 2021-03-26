@@ -1429,7 +1429,7 @@ var/global/floorIsLava = 0
 	log_and_message_admins("attempting to force mode autospawn.")
 	SSticker.mode.process_autoantag()
 
-/datum/admins/proc/paralyze_mob(mob/H as mob in GLOB.player_list)
+/datum/admins/proc/paralyze_mob(mob/living/H as mob in GLOB.player_list)
 	set category = null
 	set name = "Toggle Paralyze"
 	set desc = "Toggles paralyze state, which stuns, blinds and mutes the victim."
@@ -1440,12 +1440,18 @@ var/global/floorIsLava = 0
 		return
 
 	if(check_rights(R_INVESTIGATE))
-		if (H.paralysis == 0)
+		if (!H.admin_paralyzed)
 			H.paralysis = 8000
+			H.admin_paralyzed = TRUE
 			msg = "has paralyzed [key_name(H)]."
+			H.visible_message(SPAN_DEBUG("OOC: \The [H] has been paralyzed by a staff member. Please hold all interactions with them until staff have finished with them."))
+			to_chat(H, SPAN_DEBUG("OOC: You have been paralyzed by a staff member. Please refer to your currently open admin help ticket or, if you don't have one, admin help for assistance."))
 		else
 			H.paralysis = 0
+			H.admin_paralyzed = FALSE
 			msg = "has unparalyzed [key_name(H)]."
+			H.visible_message(SPAN_DEBUG("OOC: \The [H] has been released from paralysis by staff. You may resume interactions with them."))
+			to_chat(H, SPAN_DEBUG("OOC: You have been released from paralysis by staff and can return to your game."))
 		log_and_message_staff(msg)
 
 

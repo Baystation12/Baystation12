@@ -5,6 +5,11 @@
 	else
 		add_to_living_mob_list()
 
+/mob/living/examine(mob/user, distance, infix, suffix)
+	. = ..()
+	if (admin_paralyzed)
+		to_chat(user, SPAN_DEBUG("OOC: They have been paralyzed by staff. Please avoid interacting with them unless cleared to do so by staff."))
+
 //mob verbs are faster than object verbs. See mob/verb/examine.
 /mob/living/verb/pulled(atom/movable/AM as mob|obj in oview(1))
 	set name = "Pull"
