@@ -275,6 +275,8 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	circuitboard = /obj/item/stock_parts/circuitboard/telecomms/receiver
 	base_type = /obj/machinery/telecomms/receiver
 	outage_probability = 10
+	machine_name = "subspace receiver"
+	machine_desc = "Receives messages from connected radio devices and passes them to a linked hub. Part of a telecommunications network."
 
 /obj/machinery/telecomms/receiver/receive_signal(datum/signal/signal)
 
@@ -327,6 +329,8 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	long_range_link = 1
 	netspeed = 40
 	outage_probability = 10
+	machine_name = "telecommunication hub"
+	machine_desc = "A massive server, used to route huge quantities of information very quickly. The heart of a telecommunications network."
 
 /obj/machinery/telecomms/hub/receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)
 	if(is_freq_listening(signal))
@@ -358,6 +362,8 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	circuitboard = /obj/item/stock_parts/circuitboard/telecomms/bus
 	base_type = /obj/machinery/telecomms/bus
 	netspeed = 40
+	machine_name = "bus mainframe"
+	machine_desc = "Serves as a relay, transferring messages from place to place depending on configuration. Part of a telecommunications network."
 	var/change_frequency = 0
 
 /obj/machinery/telecomms/bus/receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)
@@ -410,6 +416,8 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	delay = 5
 	circuitboard = /obj/item/stock_parts/circuitboard/telecomms/processor
 	base_type = /obj/machinery/telecomms/processor
+	machine_name = "processor unit"
+	machine_desc = "Decompresses subspace signals into understandable sounds. Networks don't need processors, but it's very hard to understand communications without them. Part of a telecommunications network."
 	var/process_mode = 1 // 1 = Uncompress Signals, 0 = Compress Signals
 
 /obj/machinery/telecomms/processor/receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)
@@ -447,6 +455,8 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	machinetype = 4
 	circuitboard = /obj/item/stock_parts/circuitboard/telecomms/server
 	base_type = /obj/machinery/telecomms/server
+	machine_name = "telecommunications server"
+	machine_desc = "Used to store logs from subspace communications after processing, then sends them to a broadcaster. Part of a telecommunications network."
 	var/list/log_entries = list()
 	var/list/stored_names = list()
 	var/list/TrafficActions = list()

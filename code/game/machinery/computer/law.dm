@@ -14,6 +14,8 @@
 /obj/machinery/computer/upload/ai
 	name = "\improper AI upload console"
 	desc = "Used to upload laws to the AI."
+	machine_name = "\improper AI upload console"
+	machine_desc = "Maintains a one-way link to ship-bound AI units, allowing remote modification of their laws."
 
 /obj/machinery/computer/upload/ai/interface_interact(mob/user)
 	if(!CanInteract(user, DefaultTopicState()))
@@ -28,6 +30,8 @@
 /obj/machinery/computer/upload/robot
 	name = "cyborg upload console"
 	desc = "Used to upload laws to Cyborgs."
+	machine_name = "cyborg upload console"
+	machine_desc = "Maintains a one-way link to ship-bound synthetics such as cyborgs and robots, allowing remote modification of their laws."
 
 /obj/machinery/computer/upload/robot/interface_interact(mob/user)
 	if(!CanInteract(user, DefaultTopicState()))

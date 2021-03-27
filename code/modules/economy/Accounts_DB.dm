@@ -2,6 +2,8 @@
 /obj/machinery/computer/account_database
 	name = "accounts uplink terminal"
 	desc = "Access transaction logs, account data and all kinds of other financial records."
+	machine_name = "accounts uplink terminal"
+	machine_desc = "Displays financial records, account information, and all sorts of info for anything related to network banking accounts."
 	var/needed_access = list(list(access_hop, access_captain))
 	var/receipt_num
 	var/machine_id = ""

@@ -9,6 +9,9 @@
 	console = /obj/machinery/computer/mining
 	input_turf =  NORTH
 	output_turf = SOUTH
+	
+	machine_name = "ore processor"
+	machine_desc = "Essentially a glorified furnace, ore processors can smelt, compress, or alloy raw minerals into new forms. Improper processing will result in useless slag!"
 
 	var/sheets_per_tick = 10
 	var/list/ores_processing

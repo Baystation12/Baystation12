@@ -12,6 +12,10 @@
 	uncreated_component_parts = null
 	stat_immune = 0
 	w_class = ITEM_SIZE_HUGE
+	
+	machine_name = "body scanner display"
+	machine_desc = "Receives body scans from a linked body scanner and allows them to be viewed remotely."
+	
 	var/list/bodyscans = list()
 	var/selected = 0
 

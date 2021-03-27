@@ -173,6 +173,9 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	
+	machine_name = "honey extractor"
+	machine_desc = "Extracts liquid honey and solid blocks of wax from filled beehive frames. Requires an attached reagent container to operate."
 
 	var/processing = 0
 	var/honey = 0

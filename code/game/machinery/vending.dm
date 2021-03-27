@@ -16,6 +16,9 @@
 	base_type = /obj/machinery/vending/assist
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
+	
+	machine_name = "vending machine"
+	machine_desc = "Holds an internal stock of items that can be dispensed on-demand or when a charged ID card is swiped, depending on the brand."
 
 	var/icon_vend //Icon_state when vending
 	var/icon_deny //Icon_state when denying access

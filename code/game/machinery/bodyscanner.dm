@@ -13,6 +13,9 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	
+	machine_name = "body scanner"
+	machine_desc = "A full-body scanning suite that provides a complete health assessment of a patient placed inside. Requires an adjacent console to operate."
 
 /obj/machinery/bodyscanner/examine(mob/user)
 	. = ..()

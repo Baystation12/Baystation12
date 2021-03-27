@@ -16,6 +16,8 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	machine_name = "biogenerator"
+	machine_desc = "Processes fruits, veggies, and other produce into raw biomatter that can be converted into food products and leather items."
 	var/processing = 0
 	var/obj/item/reagent_containers/glass/beaker = null
 	var/points = 0

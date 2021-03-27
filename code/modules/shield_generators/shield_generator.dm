@@ -9,6 +9,8 @@
 	wires = /datum/wires/shield_generator
 	uncreated_component_parts = null
 	stat_immune = 0
+	machine_name = "advanced shield generator"
+	machine_desc = "A powerful energy projector that uses huge amounts of power to form a large sheath of shielding force around an area."
 	var/list/field_segments = list()    // List of all shield segments owned by this generator.
 	var/list/damaged_segments = list()  // List of shield segments that have failed and are currently regenerating.
 	var/shield_modes = 0                // Enabled shield mode flags

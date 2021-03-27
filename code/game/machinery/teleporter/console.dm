@@ -3,6 +3,8 @@
 	desc = "Used to control a linked teleportation hub and station."
 	icon_keyboard = "teleport_key"
 	icon_screen = "teleport"
+	machine_name = "teleporter control console"
+	machine_desc = "Used in teleporter systems to configure a destination for the teleportation hub."
 
 	var/obj/machinery/tele_projector/projector
 	var/obj/machinery/tele_pad/pad

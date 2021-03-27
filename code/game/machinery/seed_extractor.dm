@@ -11,6 +11,8 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	machine_name = "seed extractor"
+	machine_desc = "Extracts a number of growable seed packets from a provided plant sample. The sample is destroyed in the process."
 
 obj/machinery/seed_extractor/attackby(var/obj/item/O, var/mob/user)
 	if((. = component_attackby(O, user)))

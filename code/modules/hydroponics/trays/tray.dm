@@ -10,6 +10,9 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	
+	machine_name = "hydroponics tray"
+	machine_desc = "These are waist-high trays that can grow a vast variety of plants in a nutrient bath. Also comes with a sealable lid for plants that don't grow in a surrounding atmosphere. A cornerstone of self-sufficient spaceships across the galaxy."
 
 	var/mechanical = 1         // Set to 0 to stop it from drawing the alert lights.
 	var/base_name = "tray"

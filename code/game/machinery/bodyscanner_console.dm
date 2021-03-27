@@ -10,6 +10,10 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	
+	machine_name = "body scanner console"
+	machine_desc = "A small touchscreen terminal, used to operate an adjacent body scanner, as well as viewing and manipulating its readouts."
+	
 	var/list/connected_displays = list()
 	var/list/data = list()
 	var/scan_data

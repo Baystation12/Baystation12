@@ -10,6 +10,8 @@
 /obj/machinery/computer/telecomms/monitor
 	name = "Telecommunications Monitor"
 	icon_screen = "comm_monitor"
+	machine_name = "telecomms monitor console"
+	machine_desc = "Tracks the traffic of a telecommunications network, and maintains information about connected machines."
 
 	var/screen = 0				// the screen number:
 	var/list/machinelist = list()	// the machines located by the computer

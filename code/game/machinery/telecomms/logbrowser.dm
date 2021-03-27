@@ -6,6 +6,8 @@
 /obj/machinery/computer/telecomms/server
 	name = "Telecommunications Server Monitor"
 	icon_screen = "comm_logs"
+	machine_name = "telecommunications server monitor console"
+	machine_desc = "A terminal used to view and browse the logs of a telecommunications network."
 
 	var/screen = 0				// the screen number:
 	var/list/servers = list()	// the servers located by the computer

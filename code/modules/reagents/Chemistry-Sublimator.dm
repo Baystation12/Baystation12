@@ -38,6 +38,8 @@
 	icon_state = "sublimator-off-unloaded-notank"
 	density = TRUE
 	use_power = POWER_USE_IDLE
+	machine_name = "reagent sublimator"
+	machine_desc = "Sublimators draw reagents from a provided container and converts them into gases."
 
 	var/icon_set = "subliminator"
 	var/sublimated_units_per_tick = 20
@@ -183,3 +185,5 @@
 	icon_set = "sauna"
 	reagent_whitelist = list(/datum/reagent/water)
 	output_temperature = T0C+40
+	machine_name = "sauna heater"
+	machine_desc = "A reagent sublimator that only works with water, converting it into hot steam. Toasty!"

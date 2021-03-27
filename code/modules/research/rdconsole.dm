@@ -50,6 +50,8 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	icon_screen = "rdcomp"
 	light_color = "#a97faa"
 	base_type = /obj/machinery/computer/rdconsole/core
+	machine_name = "\improper R&D control console"
+	machine_desc = "Used to operate an R&D setup, including protolathes, circuit imprinters, and destructive analyzers. Can be configured with a screwdriver."
 	var/datum/research/files							//Stores all the collected research data.
 	var/obj/item/disk/tech_disk/t_disk = null	//Stores the technology disk.
 	var/obj/item/disk/design_disk/d_disk = null	//Stores the design disk.

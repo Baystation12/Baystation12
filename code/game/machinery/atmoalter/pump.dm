@@ -17,6 +17,9 @@
 
 	power_rating = 7500 //7500 W ~ 10 HP
 	power_losses = 150
+	
+	machine_name = "portable pump"
+	machine_desc = "Used to equalize the pressure of the atmosphere in a surrounding area with its own contents, or to draw in air from the area around it. Runs on a battery backup; can be connected to atmospherics networks."
 
 /obj/machinery/portable_atmospherics/powered/pump/filled
 	start_pressure = 90 * ONE_ATMOSPHERE

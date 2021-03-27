@@ -14,6 +14,9 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	
+	machine_name = "gas heating system"
+	machine_desc = "While active, this machine increases the temperature of a connected gas line to the configured amount. Gas pressure increases with heat."
 
 	var/max_temperature = T20C + 680
 	var/internal_volume = 600	//L

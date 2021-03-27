@@ -5,6 +5,8 @@
 	icon_state = "compressor"
 	anchored = TRUE
 	density = TRUE
+	machine_name = "turbine control console"
+	machine_desc = "Used to monitor, operate, and configure a connected gas turbine."
 	var/obj/machinery/power/turbine/turbine
 	var/datum/gas_mixture/gas_contained
 	var/turf/simulated/inturf

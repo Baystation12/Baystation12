@@ -5,6 +5,8 @@
 	icon_keyboard = "power_key"
 	icon_screen = "power"
 	req_access = list(access_engine_equip)
+	machine_name = "drone control console"
+	machine_desc = "Used to monitor the status of the ship's maintenance drones. Also allows for simple pings to draw attention to areas in need of repairs."
 
 	//Used when pinging drones.
 	var/drone_call_area = "Engineering"

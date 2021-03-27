@@ -124,6 +124,8 @@
 		BP_CELL		= list(/obj/item/organ/internal/cell, 25)
 		)
 
+	machine_name = "prosthetic organ fabricator"
+	machine_desc = "Creates prosthetic limbs and organs by using steel sheets."
 	var/matter_amount_per_sheet = 10
 	var/matter_type = MATERIAL_STEEL
 
@@ -187,6 +189,8 @@
 	desc = "It's a machine that prints replacement organs."
 	icon_state = "bioprinter"
 	base_type = /obj/machinery/organ_printer/flesh
+	machine_name = "bioprinter"
+	machine_desc = "Bioprinters can create surrogate organs for many species by using a blood sample from the intended recipient. Uses meat for biological matter."
 	// null amount means it will calculate the cost based on get_organ_cost()
 	var/list/amount_list = list(
 		/obj/item/reagent_containers/food/snacks/meat = 50,

@@ -8,6 +8,9 @@
 	active_power_usage = 5000
 	base_type = /obj/machinery/r_n_d/protolathe
 	construct_state = /decl/machine_construction/default/panel_closed
+	
+	machine_name = "protolathe"
+	machine_desc = "Uses raw materials to produce prototypes. Part of an R&D network."
 
 	var/max_material_storage = 250000
 

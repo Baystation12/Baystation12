@@ -18,6 +18,9 @@
 	stat_immune = 0
 	stat = BROKEN         // Should be removed if the terminals initialize fully.
 	reason_broken = MACHINE_BROKEN_GENERIC
+	
+	machine_name = "superconductive magnetic energy storage"
+	machine_desc = "The SMES is effectively a giant battery. It stores vast quantities of power for later use, and can be remotely controlled using the RCON system."
 
 	var/capacity = 5e6 // maximum charge
 	var/charge = 1e6 // actual charge

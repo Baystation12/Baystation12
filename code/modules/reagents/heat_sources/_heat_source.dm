@@ -16,6 +16,8 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	machine_name = "chemical heater"
+	machine_desc = "A small, configurable burner used to heat beakers and other chemical containers."
 
 	var/image/glow_icon
 	var/image/beaker_icon
@@ -37,6 +39,8 @@
 	heater_mode =      HEATER_MODE_COOL
 	max_temperature =  30 CELSIUS
 	min_temperature = -80 CELSIUS
+	machine_name = "chemical cooler"
+	machine_desc = "Like a chemical heater, but chills things instead of heating them up."
 
 /obj/machinery/reagent_temperature/Initialize()
 	target_temperature = min_temperature

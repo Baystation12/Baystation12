@@ -12,6 +12,8 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	var/list/targets = list()
 	atom_flags =  ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
+	machine_name = "fire assist mainframe"
+	machine_desc = "A control computer used to synchronize point defense batteries."
 
 /obj/machinery/pointdefense_control/Initialize()
 	. = ..()
@@ -109,6 +111,8 @@
 	stock_part_presets = list(/decl/stock_part_preset/terminal_setup)
 	uncreated_component_parts = null
 	appearance_flags = PIXEL_SCALE
+	machine_name = "point defense battery"
+	machine_desc = "A mounted turret that locks onto and destroys incoming meteors. Aim away from vessel."
 	var/active = TRUE
 	var/charge_cooldown = 1 SECOND  //time between it can fire at different targets
 	var/last_shot = 0

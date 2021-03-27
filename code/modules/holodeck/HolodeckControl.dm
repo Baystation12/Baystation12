@@ -3,6 +3,8 @@
 	desc = "A computer used to control a nearby holodeck."
 	icon_keyboard = "tech_key"
 	icon_screen = "holocontrol"
+	machine_name = "holodeck control console"
+	machine_desc = "Holodecks are immensely complicated and delicate machines, and holodeck control consoles are the devices used to calibrate and modify them."
 	var/lock_access = list(access_bridge)
 	var/islocked = 0
 

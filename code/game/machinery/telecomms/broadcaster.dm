@@ -24,6 +24,8 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	circuitboard = /obj/item/stock_parts/circuitboard/telecomms/broadcaster
 	base_type = /obj/machinery/telecomms/broadcaster
 	outage_probability = 10
+	machine_name = "subspace broadcaster"
+	machine_desc = "A high-powered broadcaster that sends subspace signals to all connected radio devices in the area. Part of a telecommunications network."
 
 /obj/machinery/telecomms/broadcaster/receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)
 	// Don't broadcast rejected signals
@@ -124,6 +126,8 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	produces_heat = 0
 	circuitboard = /obj/item/stock_parts/circuitboard/telecomms/allinone
 	construct_state = /decl/machine_construction/tcomms/panel_closed/cannot_print
+	machine_name = "telecommunications mainframe"
+	machine_desc = "An awkward, clunky machine that serves as an all-in-one telecommunications hub. Provides peer-to-peer communication, and not much else."
 	var/listening_freqs
 	var/channel_color
 	var/channel_name

@@ -12,6 +12,9 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	
+	machine_name = "shield diffuser"
+	machine_desc = "These floor-mounted devices prevent formation of shields above them, and are typically placed near front of external airlocks."
 
 	var/alarm = 0
 	var/enabled = 1

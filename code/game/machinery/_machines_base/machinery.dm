@@ -116,6 +116,9 @@ Class Procs:
 	var/processing_flags         // What is being processed
 	var/silicon_restriction = FALSE // FALSE or one of the STATUS_* flags. If set, will force the given status flag if a silicon tries to access the machine.
 
+	var/machine_name = null // The human-readable name of this machine, shown when examining circuit boards.
+	var/machine_desc = null // A simple description of what this machine does, shown on examine for circuit boards.
+
 /obj/machinery/Initialize(mapload, d=0, populate_parts = TRUE)
 	. = ..()
 	if(d)
@@ -438,6 +441,8 @@ Class Procs:
 			var/obj/item/fake_thing = type
 			parts += "[num2text(missing[type])] [initial(fake_thing.name)]"
 		to_chat(user, "\The [src] is missing [english_list(parts)], rendering it inoperable.")
+	if (user.skill_check(SKILL_CONSTRUCTION, SKILL_BASIC) || isobserver(user))
+		to_chat(user, SPAN_NOTICE(machine_desc))
 
 // This is really pretty crap and should be overridden for specific machines.
 /obj/machinery/water_act(var/depth)
