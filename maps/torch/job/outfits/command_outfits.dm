@@ -83,7 +83,7 @@
 
 /decl/hierarchy/outfit/job/torch/crew/command/cos/fleet
 	name = OUTFIT_JOB_NAME("Chief of Security - Fleet")
-	uniform = /obj/item/clothing/under/solgov/utility/fleet/combat/security
+	uniform = /obj/item/clothing/under/solgov/utility/fleet/security
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/passenger/workplace_liaison
