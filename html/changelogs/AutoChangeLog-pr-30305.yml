@@ -1,8 +1,0 @@
-author: Ilysen
-delete-after: true
-changes:
-  - rscadd: You can now examine many circuit boards to learn some short information
-      about the machine they're used to build. Your Construction skill affects the
-      amount of info you glean, with Trained construction getting the most results.
-  - rscadd: Examining a machine with at least Basic construction skill will tell you
-      about its function.
