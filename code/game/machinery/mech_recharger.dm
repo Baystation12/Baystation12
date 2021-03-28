@@ -17,7 +17,7 @@
 	machine_desc = "An industrial recharger built into the floor. Exosuits standing on top of the dock will have their power cell recharged."
 
 	var/mob/living/exosuit/charging
-	var/base_charge_rate = 60 KILOWATTS
+	var/base_charge_rate = 80 KILOWATTS
 	var/repair_power_usage = 10 KILOWATTS		// Per 1 HP of health.
 	var/repair = 0
 
@@ -63,7 +63,7 @@
 		return
 
 	// Cell could have been removed.
-	if(!charging.get_cell())
+	if(!charging.get_cell(TRUE))
 		stop_charging()
 		return
 
@@ -98,7 +98,7 @@
 	if(stat & (NOPOWER | BROKEN))
 		M.show_message(SPAN_WARNING("Power port not responding. Terminating."))
 		return
-	if(M.get_cell())
+	if(M.get_cell(TRUE))
 		M.show_message(SPAN_NOTICE("Now charging..."))
 		charging = M
 		update_use_power(POWER_USE_ACTIVE)
