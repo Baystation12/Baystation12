@@ -275,6 +275,11 @@
 			else if(S.can_be_inserted(src, user))
 				S.handle_item_insertion(src)
 
+/obj/item/can_embed()
+	if (!canremove)
+		return FALSE
+	return ..()
+
 /obj/item/proc/talk_into(mob/M as mob, text)
 	return
 
@@ -764,7 +769,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 	user.client.pixel_x = 0
 	user.client.pixel_y = 0
-	
+
 	var/mob/living/carbon/human/H = user
 	if(istype(H))
 		H.handle_vision()
