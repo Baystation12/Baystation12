@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - tweak: There is now a delay between the exoplanet awakening event starting and
-      mobs actually spawning.

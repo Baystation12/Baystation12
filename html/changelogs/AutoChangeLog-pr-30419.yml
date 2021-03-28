@@ -1,7 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - tweak: Cargo trolleys can now be hitched together regardless of what direction
-      the trolley is facing.
-  - tweak: Cargo trolleys now tell you if and what they're linked to when you examine
-      them.

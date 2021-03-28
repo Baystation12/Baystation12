@@ -1,4 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Natural weapons (I.e. teeth) will no longer embed in people.
