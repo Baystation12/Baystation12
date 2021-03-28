@@ -43,7 +43,7 @@ var/list/airlock_overlays = list()
 	autoclose = 1
 	var/assembly_type = /obj/structure/door_assembly
 	var/mineral = null
-	var/justzap = 0
+	var/justzap = FALSE
 	var/safe = 1
 	normalspeed = 1
 	var/obj/item/airlock_electronics/electronics = null
@@ -417,7 +417,7 @@ var/list/airlock_overlays = list()
 /obj/machinery/door/airlock/phoron/proc/PhoronBurn(temperature)
 	for(var/turf/simulated/floor/target_tile in range(2,loc))
 		target_tile.assume_gas(GAS_PHORON, 35, 400+T0C)
-		spawn (0) target_tile.hotspot_expose(temperature, 400)
+		addtimer(CALLBACK(target_tile, /turf/proc/hotspot_expose, 400), 0)
 	for(var/turf/simulated/wall/W in range(3,src))
 		W.burn((temperature/4))//Added so that you can't set off a massive chain reaction with a small flame
 	for(var/obj/machinery/door/airlock/phoron/D in range(3,src))
@@ -444,11 +444,10 @@ About the new airlock wires panel:
 		if(src.isElectrified())
 			if(!src.justzap)
 				if(src.shock(user, 100))
-					src.justzap = 1
-					spawn (10)
-						src.justzap = 0
+					src.justzap = TRUE
+					addtimer(CALLBACK(src, .proc/set_justzap, FALSE), 1 SECOND)
 					return
-			else /*if(src.justzap)*/
+			else
 				return
 		else if(prob(10) && src.operating == 0)
 			var/mob/living/carbon/C = user
@@ -458,6 +457,9 @@ About the new airlock wires panel:
 				user.Stun(5)
 				return
 	..(user)
+
+/obj/machinery/door/airlock/proc/set_justzap(val)
+	justzap = val
 
 /obj/machinery/door/airlock/bumpopen(mob/living/simple_animal/user as mob)
 	..(user)
