@@ -20,6 +20,7 @@ GLOBAL_LIST_INIT(mob_spawners, list())
 	Variation: Adds a random number of seconds to the interval for each mob spawn, in the range of 0 - Variation.
 	Left to spawn: How many mobs will be spawned by the spawner. (set to 0 to spawn mobs indefinitely).
 	Radius: The radius in which mobs can spawn from around the designated center, (set to -1 to spawn anywhere in area).
+	Faction: The faction the mob will have. 'X' will reset the faction to default.
 	Mobs: List of mobs the spawner will randomly choose from when spawning a mob.
 	Messages: List of visible messages that will be displayed to players who see a mob spawned.
 	************************************\
@@ -75,6 +76,7 @@ GLOBAL_LIST_INIT(mob_spawners, list())
 	data["variation"] = spawner.variation
 	data["radius"] = spawner.radius
 	data["atmos_immune"] = spawner.atmos_immune
+	data["faction"] = spawner.faction
 	data["spawn_count"] = spawner.spawn_count
 	data["paused"] = spawner.paused
 
@@ -107,71 +109,53 @@ GLOBAL_LIST_INIT(mob_spawners, list())
 			if (findtext("[M]", type))
 				matches += M
 
-		if (!matches.len)
-			return TOPIC_HANDLED
-
-		var/mob/living/simple_animal/chosen
-		if(matches.len==1)
-			chosen = matches[1]
-		else
+		if (matches.len)
+			var/mob/living/simple_animal/chosen
 			chosen = input("Choose a mob", "Mob") as null | anything in matches
 
-		if (!chosen)
-			return TOPIC_HANDLED
-
-		if (!(chosen in spawner.mobs))
-			spawner.mobs += chosen
+			if (chosen && !(chosen in spawner.mobs))
+				spawner.mobs |= chosen
 
 		return TOPIC_HANDLED
 
 	if (href_list["remove"])
 		var/chosen = input("Choose mob to remove", "Mob") as null | anything in spawner.mobs
 
-		if (!chosen)
-			return TOPIC_HANDLED
-
-		spawner.mobs -= chosen
+		if (chosen)
+			spawner.mobs -= chosen
 
 		return TOPIC_HANDLED
 
 	if (href_list["set_spawn_count"])
 		var/count = input("Set how many mobs will spawn:", "Mob Spawner") as num | null
 
-		if (isnull(count))
-			return TOPIC_HANDLED
-
-		spawner.spawn_count = count
+		if (!isnull(count))
+			spawner.spawn_count = count
 
 		return TOPIC_HANDLED
 
 	if (href_list["set_spawn_interval"])
 		var/count = input("Set the interval mobs spawn on (in seconds):", "Mob Spawner") as num | null
 
-		if (isnull(count))
-			return TOPIC_HANDLED
-
-		spawner.interval = count SECONDS
-		spawner.next_spawn_time = 0
+		if (!isnull(count))
+			spawner.interval = count SECONDS
+			spawner.next_spawn_time = 0
 
 		return TOPIC_HANDLED
 
 	if (href_list["set_spawn_time_variation"])
 		var/count = input("Set the random max variation of the spawn interval:", "Mob Spawner") as num | null
 
-		if (!count)
-			return
-
-		spawner.variation = count SECONDS
+		if (count)
+			spawner.variation = count SECONDS
 
 		return TOPIC_HANDLED
 
 	if (href_list["set_radius"])
 		var/radius = input("Set the radius mobs can spawn in:", "Mob Spawner") as num | null
 
-		if (isnull(radius))
-			return TOPIC_HANDLED
-
-		spawner.radius = radius
+		if (!isnull(radius))
+			spawner.radius = radius
 
 		return TOPIC_HANDLED
 
@@ -180,23 +164,33 @@ GLOBAL_LIST_INIT(mob_spawners, list())
 
 		return TOPIC_HANDLED
 
+	if (href_list["set_faction"])
+
+		if (href_list["set_faction"] == "reset")
+			spawner.faction = null
+
+			return TOPIC_HANDLED
+
+		var/faction = input("Enter a faction name, leave blank to set it to default", "Mob Spawner") as text | null
+
+		if (faction)
+			spawner.faction = faction
+
+		return TOPIC_HANDLED
+
 	if (href_list["add_message"])
 		var/message = input("Enter a VISIBLE message to display alongside spawning mobs:", "Mob Spawner") as text | null
 
-		if (!message)
-			return TOPIC_HANDLED
-
-		spawner.messages += message
+		if (message)
+			spawner.messages += message
 
 		return TOPIC_HANDLED
 
 	if (href_list["remove_message"])
 		var/message = input("Choose a message to remove:", "Mob Spawner") as null | anything in spawner.messages
 
-		if (!message)
-			return TOPIC_HANDLED
-
-		spawner.messages -= message
+		if (message)
+			spawner.messages -= message
 
 		return TOPIC_HANDLED
 
@@ -216,10 +210,8 @@ GLOBAL_LIST_INIT(mob_spawners, list())
 
 		var/class = input("Pick a span-class to be applied to the spawn message:", "Mob Spawner") as null | anything in classes
 
-		if (!class)
-			return TOPIC_HANDLED
-
-		spawner.message_class = class
+		if (class)
+			spawner.message_class = class
 
 		return TOPIC_HANDLED
 
