@@ -26,6 +26,7 @@
 	SSradiation.resistance_cache.Remove(src)
 	update_connections(1)
 	update_icon()
+	calculate_damage_data()
 
 
 /turf/simulated/wall/proc/set_material(var/material/newmaterial, var/material/newrmaterial)

@@ -162,11 +162,7 @@
 		to_chat(user, ("<span class='notice'>It's a holowindow, you can't dismantle it!</span>"))
 	else
 		if(W.damtype == BRUTE || W.damtype == BURN)
-			hit(W.force)
-			if(health <= 7)
-				anchored = FALSE
-				update_nearby_icons()
-				step(src, get_dir(user, src))
+			hit(W.force, user, W)
 		else
 			playsound(loc, 'sound/effects/Glasshit.ogg', 75, 1)
 		..()
