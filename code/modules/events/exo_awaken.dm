@@ -27,12 +27,12 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 
 /datum/mob_list/major/meat
 	mobs = list(
-				list(/mob/living/simple_animal/hostile/meat/abomination, 95),
+				list(/mob/living/simple_animal/hostile/meat/abomination, 10),
 				list(/mob/living/simple_animal/hostile/meat/horror, 75),
 				list(/mob/living/simple_animal/hostile/meat/strippedhuman, 80),
 				list(/mob/living/simple_animal/hostile/meat/horrorminer, 80),
 				list(/mob/living/simple_animal/hostile/meat/horrorsmall, 98),
-				list(/mob/living/simple_animal/hostile/meat, 75)
+				list(/mob/living/simple_animal/hostile/meat, 10)
 			)
 	arrival_message = "A blood curdling howl echoes through the air as the planet starts to shake violently. Something has woken up..."
 	arrival_sound   = 'sound/ambience/meat_monster_arrival.ogg'
@@ -44,7 +44,8 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 				list(/mob/living/simple_animal/hostile/giant_spider/guard, 85),
 				list(/mob/living/simple_animal/hostile/giant_spider/hunter, 75),
 				list(/mob/living/simple_animal/hostile/giant_spider/nurse, 60),
-				list(/mob/living/simple_animal/hostile/giant_spider/spitter, 55)
+				list(/mob/living/simple_animal/hostile/giant_spider/spitter, 55),
+				list(/mob/living/simple_animal/hostile/giant_spider, 90)
 			)
 	arrival_message = "The planet rumbles as you begin to feel an uncountable number of eyes suddenly staring at you from all around."
 	arrival_sound   = 'sound/effects/wind/wind_3_1.ogg'
@@ -70,7 +71,8 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 				list(/mob/living/simple_animal/hostile/giant_spider/guard, 60),
 				list(/mob/living/simple_animal/hostile/giant_spider/hunter, 15),
 				list(/mob/living/simple_animal/hostile/giant_spider/nurse, 30),
-				list(/mob/living/simple_animal/hostile/giant_spider/spitter, 10)
+				list(/mob/living/simple_animal/hostile/giant_spider/spitter, 10),
+				list(/mob/living/simple_animal/hostile/giant_spider, 60)
 			)
 	arrival_message = "You feel uneasy as you hear something skittering about..."
 	arrival_sound = 'sound/effects/wind/wind_3_1.ogg'
@@ -136,7 +138,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 		var/mob/M
 		for (var/i = length(GLOB.player_list) to 1 step -1)
 			M = GLOB.player_list[i]
-			if (M.stat != DEAD && (M.z in GetConnectedZlevels(A.z)))
+			if (M.stat != DEAD && (get_z(M) in GetConnectedZlevels(A.z)))
 				players += M
 
 				if (get_crewmember_record(M.real_name || M.name))
