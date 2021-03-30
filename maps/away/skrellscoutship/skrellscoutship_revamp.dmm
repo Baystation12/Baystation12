@@ -1347,10 +1347,6 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/outline/red,
-/obj/item/clothing/glasses/thermal,
-/obj/item/clothing/glasses/thermal,
-/obj/item/clothing/glasses/thermal,
-/obj/item/clothing/glasses/thermal,
 /turf/simulated/floor/tiled/skrell/green,
 /area/ship/skrellscoutship/command/armory)
 "eE" = (
@@ -3261,12 +3257,6 @@
 /area/ship/skrellscoutship/robotics)
 "km" = (
 /obj/structure/table/rack,
-/obj/item/clothing/glasses/thermal,
-/obj/item/clothing/glasses/thermal,
-/obj/item/clothing/glasses/thermal,
-/obj/item/clothing/glasses/thermal,
-/obj/item/clothing/glasses/thermal,
-/obj/item/clothing/glasses/thermal,
 /turf/simulated/floor/tiled/skrell/green,
 /area/ship/skrellscoutship/robotics)
 "kn" = (
