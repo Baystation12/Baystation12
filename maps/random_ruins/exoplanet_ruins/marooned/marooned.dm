@@ -1,42 +1,42 @@
-/datum/map_template/ruin/exoplanet/marooned 
-	name = "Marooned" 
-	id = "awaysite_marooned" 
-	description = "crashed dropship with marooned Magnitka officer" 
-	suffixes = list("marooned/marooned.dmm") 
-	spawn_cost = 1 
+/datum/map_template/ruin/exoplanet/marooned
+	name = "Marooned"
+	id = "awaysite_marooned"
+	description = "crashed dropship with marooned Magnitka officer"
+	suffixes = list("marooned/marooned.dmm")
+	spawn_cost = 1
 	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS
 	ruin_tags = RUIN_HUMAN|RUIN_WRECK
 	apc_test_exempt_areas = list(
 		/area/map_template/marooned = NO_SCRUBBER|NO_VENT|NO_APC
 	)
 
-/obj/item/clothing/under/magintka_uniform 
-	name = "officer uniform" 
-	desc = "A dark uniform coat worn by Magnitka fleet officers." 
-	icon_state = "magnitka_officer" 
-	icon = 'maps/random_ruins/exoplanet_ruins/marooned/marooned_icons.dmi' 
-	item_icons = list(slot_w_uniform_str = 'maps/random_ruins/exoplanet_ruins/marooned/marooned_icons.dmi') 
- 
-/obj/item/clothing/accessory/medal/silver/marooned_medal 
-	name = "silver medal" 
-	desc = "An silver round medal of marooned officer. It has inscription \"For Distinguished Service\" in lower part. On medal's plank it's engraved \"H. Warda\"" 
-	icon_state = "marooned_medal" 
-	icon = 'maps/random_ruins/exoplanet_ruins/marooned/marooned_icons.dmi' 
- 
-/obj/effect/landmark/corpse/marooned_officer 
-	name = "Horazy Warda" 
-	corpse_outfits = list(/decl/hierarchy/outfit/marooned_officer) 
-	spawn_flags = ~CORPSE_SPAWNER_RANDOM_NAME 
- 
-/decl/hierarchy/outfit/marooned_officer 
-	name = "Dead Magnitka's fleet officer" 
-	uniform = /obj/item/clothing/under/magintka_uniform 
-	suit = /obj/item/clothing/suit/storage/hooded/wintercoat 
-	shoes = /obj/item/clothing/shoes/jungleboots 
-	gloves = /obj/item/clothing/gloves/thick 
-	head = /obj/item/clothing/head/beret 
-	l_pocket = /obj/item/material/knife/folding/combat/switchblade 
- 
+/obj/item/clothing/under/magintka_uniform
+	name = "officer uniform"
+	desc = "A dark uniform coat worn by Magnitka fleet officers."
+	icon_state = "magnitka_officer"
+	icon = 'maps/random_ruins/exoplanet_ruins/marooned/marooned_icons.dmi'
+	item_icons = list(slot_w_uniform_str = 'maps/random_ruins/exoplanet_ruins/marooned/marooned_icons.dmi')
+
+/obj/item/clothing/accessory/medal/silver/marooned_medal
+	name = "silver medal"
+	desc = "An silver round medal of marooned officer. It has inscription \"For Distinguished Service\" in lower part. On medal's plank it's engraved \"H. Warda\""
+	icon_state = "marooned_medal"
+	icon = 'maps/random_ruins/exoplanet_ruins/marooned/marooned_icons.dmi'
+
+/obj/effect/landmark/corpse/marooned_officer
+	name = "Horazy Warda"
+	corpse_outfits = list(/decl/hierarchy/outfit/marooned_officer)
+	spawn_flags = ~CORPSE_SPAWNER_RANDOM_NAME
+
+/decl/hierarchy/outfit/marooned_officer
+	name = "Dead Magnitka's fleet officer"
+	uniform = /obj/item/clothing/under/magintka_uniform
+	suit = /obj/item/clothing/suit/storage/hooded/wintercoat
+	shoes = /obj/item/clothing/shoes/jungleboots
+	gloves = /obj/item/clothing/gloves/thick
+	head = /obj/item/clothing/head/beret
+	l_pocket = /obj/item/material/knife/folding/combat/switchblade
+
 /obj/item/gun/projectile/revolver/medium/marooned
 	name = "worn-out revolver"
 
@@ -51,6 +51,7 @@
 
 /obj/item/paper/marooned/
 	name = "diary page"
+	language = LANGUAGE_HUMAN_RUSSIAN
 /obj/item/paper/marooned/note01
 	info = "Horacy Warda, Captain First Rank of Magnitka Defence Forces, Special Observation Flotilia. I have been betrayed by my crew and illegally marooned.<br>Main conspirators were Lieutenant Igor Pytlak, Lieutenant Hans Kovac and Captain Third Rank Dragomir Mladic.<br>If you find this, please make sure those dogs face justice."
 /obj/item/paper/marooned/note02

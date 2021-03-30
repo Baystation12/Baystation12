@@ -580,7 +580,7 @@
 /area/constructionsite/bridge)
 "bP" = (
 /obj/structure/table/standard,
-/obj/item/paper{
+/obj/item/paper/spacer{
 	info = "\\\[center]\\\[b]ATTN: Regarding Meteor Storms\\\[/b]\[/center]\\\[br]\\\[br]We've recently heard mutterings from the Atmospheric Technicians that the meteor showers in this sector are becoming too much. However, this should be disregarded.\\\[br]\\\[br] High Command has assured us that our shields can easily keep pace with any meteor storm and then some. Any uneasiness the crew may feel should be disspelled swiftly. Thank you.";
 	name = "ATTN: Regarding Meteor Storms"
 	},

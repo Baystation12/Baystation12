@@ -34,6 +34,7 @@
 		var/obj/item/paper/carbon/c = src
 		var/copycontents = c.info
 		var/obj/item/paper/carbon/copy = new /obj/item/paper/carbon (usr.loc)
+		copy.language = language
 		// <font>
 		if(info)
 			copycontents = replacetext(copycontents, "<font face=\"[c.deffont]\" color=", "<font face=\"[c.deffont]\" nocolor=")	//state of the art techniques in action

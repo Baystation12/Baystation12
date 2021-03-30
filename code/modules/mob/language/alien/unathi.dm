@@ -21,6 +21,7 @@
 		"a",  "a",  "e",  "e",  "i",  "i",  "o",  "o",  "u",  "u",  "s",  "s"
 	)
 	shorthand = "UT"
+	has_written_form = TRUE
 
 /datum/language/yeosa
 	name = LANGUAGE_UNATHI_YEOSA
@@ -46,3 +47,4 @@
 		"a",  "a",  "e",  "e",  "i",  "i",  "o",  "o",  "u",  "u",  "s",  "s"
 	)
 	shorthand = "YU"
+	has_written_form = TRUE

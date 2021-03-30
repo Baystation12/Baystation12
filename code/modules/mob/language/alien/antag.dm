@@ -59,6 +59,7 @@
 	"SKRE","AHK","EHK","RAWK","KRA","AAA","EEE","KI","II","KRI","KA")
 	machine_understands = 0
 	shorthand = "Vox"
+	has_written_form = TRUE
 
 /datum/language/vox/can_speak_special(var/mob/speaker)
 	if(!ishuman(speaker))
@@ -93,6 +94,7 @@
 	machine_understands = 0
 	shorthand = "CT"
 	hidden_from_codex = TRUE
+	has_written_form = TRUE
 
 /datum/language/cult
 	name = LANGUAGE_CULT_GLOBAL
@@ -118,6 +120,7 @@
 	machine_understands = 0
 	shorthand = "AL"
 	hidden_from_codex = TRUE
+	has_written_form = TRUE
 
 /datum/language/alium/New()
 	speech_verb = pick("hisses","growls","whistles","blubbers","chirps","skreeches","rumbles","clicks")
