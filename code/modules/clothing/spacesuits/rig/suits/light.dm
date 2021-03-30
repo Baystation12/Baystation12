@@ -85,8 +85,7 @@
 	siemens_coefficient = 0
 	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_NOCUFFS
 
-/obj/item/rig/light/ninja
-	name = "ominous suit control module"
+/obj/item/weapon/rig/light/ninja	name = "ominous suit control module"
 	desc = "A unique, vaccum-proof suit of nano-enhanced armor designed specifically for assassins."
 	suit_type = "ominous"
 	icon_state = "ninja_rig"
