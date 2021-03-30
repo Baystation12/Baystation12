@@ -210,23 +210,14 @@
 /obj/item/clothing/under/solgov/utility/fleet/combat/exploration
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/exploration/fleet)
 
-/obj/item/clothing/under/solgov/utility/fleet/officer
-	name = "fleet officer's coveralls"
-	desc = "Alternative utility uniform of the SCG Fleet, for officers."
-	icon_state = "navyutilityoff"
-	worn_state = "navyutilityoff"
-
-/obj/item/clothing/under/solgov/utility/fleet/officer/command
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/command/fleet)
-
-/obj/item/clothing/under/solgov/utility/fleet/officer/engineering
+/obj/item/clothing/under/solgov/utility/fleet/combat/engineering
 	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/engineering/fleet)
 
-/obj/item/clothing/under/solgov/utility/fleet/officer/security
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/security/fleet)
+/obj/item/clothing/under/solgov/utility/fleet/combat/service
+	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/service/fleet)
 
-/obj/item/clothing/under/solgov/utility/fleet/officer/medical
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/medical/fleet)
+/obj/item/clothing/under/solgov/utility/fleet/combat/supply
+	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/supply/fleet)
 
 /obj/item/clothing/under/solgov/utility/army
 	name = "army fatigues"
