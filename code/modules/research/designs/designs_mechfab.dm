@@ -157,14 +157,6 @@
 	time = 15
 	materials = list(MATERIAL_STEEL = 5000)
 
-/datum/design/item/mechfab/exosuit/combat_head
-	name = "combat exosuit sensors"
-	id = "combat_head"
-	time = 30
-	materials = list(MATERIAL_STEEL = 10000)
-	build_path = /obj/item/mech_component/sensors/combat
-	req_tech = list(TECH_COMBAT = 2)
-
 /datum/design/item/mechfab/exosuit/combat_torso
 	name = "combat exosuit chassis"
 	id = "combat_body"
