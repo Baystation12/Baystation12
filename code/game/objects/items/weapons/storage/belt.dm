@@ -126,6 +126,7 @@
 		/obj/item/taperoll,
 		/obj/item/extinguisher/mini,
 		/obj/item/marshalling_wand,
+		/obj/item/device/geiger,
 		/obj/item/hand_labeler,
 		/obj/item/clothing/gloves,
 		/obj/item/tape_roll,
