@@ -6,7 +6,7 @@ GLOBAL_DATUM_INIT(deathsquad, /datum/antagonist/deathsquad, new)
 	role_text_plural = "Death Commandos"
 	welcome_text = "You work in the service of corporate Asset Protection, answering directly to the Board of Directors."
 	landmark_id = "Commando"
-	flags = ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB | ANTAG_HAS_NUKE | ANTAG_HAS_LEADER | ANTAG_RANDOM_EXCEPTED
+	flags = ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB | ANTAG_HAS_LEADER | ANTAG_RANDOM_EXCEPTED
 	default_access = list(access_cent_general, access_cent_specops, access_cent_living, access_cent_storage)
 	antaghud_indicator = "huddeathsquad"
 

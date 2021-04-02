@@ -26,11 +26,10 @@
 #define ANTAG_IMPLANT_IMMUNE     0x10 // Cannot be loyalty implanted.
 #define ANTAG_SUSPICIOUS         0x20 // Shows up on roundstart report.
 #define ANTAG_HAS_LEADER         0x40 // Generates a leader antagonist.
-#define ANTAG_HAS_NUKE           0x80 // Will spawn a nuke at supplied location.
-#define ANTAG_RANDSPAWN         0x100 // Potentially randomly spawns due to events.
-#define ANTAG_VOTABLE           0x200 // Can be voted as an additional antagonist before roundstart.
-#define ANTAG_SET_APPEARANCE    0x400 // Causes antagonists to use an appearance modifier on spawn.
-#define ANTAG_RANDOM_EXCEPTED   0x800 // If a game mode randomly selects antag types, antag types with this flag should be excluded.
+#define ANTAG_RANDSPAWN          0x80 // Potentially randomly spawns due to events.
+#define ANTAG_VOTABLE           0x100 // Can be voted as an additional antagonist before roundstart.
+#define ANTAG_SET_APPEARANCE    0x200 // Causes antagonists to use an appearance modifier on spawn.
+#define ANTAG_RANDOM_EXCEPTED   0x400 // If a game mode randomly selects antag types, antag types with this flag should be excluded.
 
 // Mode/antag template macros.
 #define MODE_BORER         "borer"
