@@ -1,7 +1,7 @@
 /obj/item/organ/internal/augment/active/hud
 	name = "integrated HUD"
 	desc = "A small implantable heads-up display."
-	icon_state = "booster"
+	icon_state = "eye"
 	action_button_name = "Toggle HUD"
 	allowed_organs = list(BP_AUGMENT_HEAD)
 	var/list/hud_type = list(HUD_MEDICAL, HUD_SECURITY)
@@ -41,6 +41,7 @@
 /obj/item/organ/internal/augment/active/hud/health
 	name = "integrated health HUD"
 	desc = "The Vey-Med H-27 is an implantable HUD, designed to interface directly with the user's optic nerve and display information about patient vitals."
+	icon_state = "eye_medical"
 	hud_type = HUD_MEDICAL
 
 /obj/item/organ/internal/augment/active/hud/security
