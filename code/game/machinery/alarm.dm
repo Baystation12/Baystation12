@@ -113,6 +113,11 @@
 	target_temperature = T0C+75
 	environment_type = /decl/environment_data/finnish
 
+/obj/machinery/alarm/warm/Initialize()
+	. = ..()
+	TLV["temperature"] = list(T0C-26, T0C, T0C+75, T0C+85) // K
+	TLV["pressure"] = list(ONE_ATMOSPHERE*0.80,ONE_ATMOSPHERE*0.90,ONE_ATMOSPHERE*1.30,ONE_ATMOSPHERE*1.50) /* kpa */
+
 /obj/machinery/alarm/nobreach
 	breach_pressure = -1
 
