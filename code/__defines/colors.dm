@@ -107,7 +107,11 @@
 #define	COMMS_COLOR_ENGINEER   "#a66300"
 #define	COMMS_COLOR_SECURITY   "#930000"
 #define	COMMS_COLOR_SECURITY_I "#935050"
-#define	COMMS_COLOR_COMMAND    "#3367ec"
+<<<<<<< HEAD
+#define	COMMS_COLOR_COMMAND    "#63abee"
+=======
+#define	COMMS_COLOR_COMMAND    "#204090"
+>>>>>>> parent of 1b39b0a... Change command radio color
 #define	COMMS_COLOR_CENTCOMM   "#5c5c7c"
 #define	COMMS_COLOR_SYNDICATE  "#6d3f40"
 #define	COMMS_COLOR_SKRELL     "#7331c4"
