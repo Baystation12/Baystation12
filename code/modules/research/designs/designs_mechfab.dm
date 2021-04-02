@@ -436,6 +436,18 @@
 	req_tech = list(TECH_ENGINEERING = 1)
 	build_path = /obj/item/mech_equipment/light
 
+/datum/design/item/exosuit/camera
+	name = "exosuit camera"
+	id = "mech_camera"
+	req_tech = list(TECH_ENGINEERING = 1)
+	build_path = /obj/item/mech_equipment/camera
+
+/datum/design/item/exosuit/flash
+	name = "exosuit flash"
+	id = "mech_flash"
+	req_tech = list(TECH_COMBAT = 1)
+	build_path = /obj/item/mech_equipment/flash
+
 /datum/design/item/exosuit/sleeper
 	name = "mounted sleeper"
 	id   = "mech_sleeper"

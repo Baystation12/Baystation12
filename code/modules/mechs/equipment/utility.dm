@@ -198,14 +198,18 @@
 	desc = "An exosuit-mounted light."
 	icon_state = "mech_floodlight"
 	item_state = "mech_floodlight"
-	restricted_hardpoints = list(HARDPOINT_HEAD)
-	mech_layer = MECH_INTERMEDIATE_LAYER
+	restricted_hardpoints = list(HARDPOINT_HEAD, HARDPOINT_LEFT_SHOULDER, HARDPOINT_RIGHT_SHOULDER)
+
 
 	var/on = 0
 	var/l_max_bright = 0.9
 	var/l_inner_range = 1
 	var/l_outer_range = 6
 	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 1)
+
+/obj/item/mech_equipment/light/installed(mob/living/exosuit/_owner)
+	. = ..()
+	update_icon()
 
 /obj/item/mech_equipment/light/attack_self(var/mob/user)
 	. = ..()
@@ -233,10 +237,10 @@
 		icon_state = "[initial(icon_state)]"
 		set_light(0, 0)
 
-/obj/item/mech_equipment/light/uninstalled()
-	on = FALSE
-	update_icon()
-	. = ..()
+	//Check our layers
+	if(owner && (owner.hardpoints[HARDPOINT_HEAD] == src))
+		mech_layer = MECH_INTERMEDIATE_LAYER
+	else mech_layer = initial(mech_layer)	
 
 #define CATAPULT_SINGLE 1
 #define CATAPULT_AREA   2
@@ -685,3 +689,80 @@
 
 		else
 			to_chat(user, SPAN_WARNING("You cannot slide there!"))
+
+/obj/item/mech_equipment/camera
+	name = "exosuit camera"
+	desc = "A dedicated visible light spectrum camera for remote feeds. It comes with its own transmitter!"
+	icon_state = "mech_camera"
+	restricted_hardpoints = list(HARDPOINT_LEFT_SHOULDER, HARDPOINT_RIGHT_SHOULDER)
+	restricted_software = list(MECH_SOFTWARE_UTILITY)
+	equipment_delay = 10
+
+	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 2, TECH_MAGNET = 2)
+	var/obj/machinery/camera/network/thunder/camera
+	var/list/additional_networks //If you want to make a subtype for mercs, ert etc... Write here the extra networks
+
+/obj/item/mech_equipment/camera/Destroy()
+	QDEL_NULL(camera)
+	. = ..()
+
+/obj/item/mech_equipment/camera/Initialize()
+	. = ..()
+	camera = new(src)
+	camera.c_tag = "null"
+	camera.status = FALSE
+	camera.is_helmet_cam = TRUE //Can transmit locally regardless of network
+
+/obj/item/mech_equipment/camera/installed(mob/living/exosuit/_owner)
+	. = ..()
+	if(owner)
+		camera.c_tag = "[owner.name] camera feed"
+	
+/obj/item/mech_equipment/camera/uninstalled()
+	. = ..()
+	camera.c_tag = "null"
+
+/obj/item/mech_equipment/camera/examine(mob/user)
+	. = ..()
+	to_chat(user, "Network: [english_list(camera.network)]; Feed is currently: [camera.status ? "Online" : "Offline"].")
+
+/obj/item/mech_equipment/camera/proc/activate()
+	camera.status = TRUE
+	passive_power_use = 0.2 KILOWATTS
+	active = TRUE
+
+/obj/item/mech_equipment/camera/deactivate()
+	camera.status = FALSE
+	passive_power_use = 0
+	. = ..()
+
+/obj/item/mech_equipment/camera/attackby(obj/item/W, mob/user)
+	. = ..()
+	
+	if(isScrewdriver(W))
+		var/list/all_networks = list()
+		for(var/network in GLOB.using_map.station_networks)
+			if(has_access(get_camera_access(network), GetIdCard(user)))
+				all_networks += network
+
+		all_networks += additional_networks
+
+		var/network = input("Which network would you like to configure it for?") as null|anything in (all_networks)
+		if(!network)
+			to_chat(user, SPAN_WARNING("You cannot connect to any camera network!."))
+		var/delay = 20 * user.skill_delay_mult(SKILL_DEVICES)
+		if(do_after(user, delay, src) && network)
+			camera.network = list(network)
+			to_chat(user, SPAN_NOTICE("You configure the camera for \the [network] network."))
+
+/obj/item/mech_equipment/camera/attack_self(mob/user)
+	. = ..()
+	if(.)
+		if(active)
+			deactivate()
+		else
+			activate()
+		to_chat(user, SPAN_NOTICE("You toggle \the [src] [active ? "on" : "off"]"))
+
+/obj/item/mech_equipment/camera/get_hardpoint_maptext()
+	return "[english_list(camera.network)]: [active ? "ONLINE" : "OFFLINE"]"

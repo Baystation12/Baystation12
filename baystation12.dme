@@ -1570,6 +1570,7 @@
 #include "code\modules\codex\entries\clothing.dm"
 #include "code\modules\codex\entries\codex.dm"
 #include "code\modules\codex\entries\engineering.dm"
+#include "code\modules\codex\entries\exosuits.dm"
 #include "code\modules\codex\entries\guns.dm"
 #include "code\modules\codex\entries\jukebox.dm"
 #include "code\modules\codex\entries\machinery.dm"
