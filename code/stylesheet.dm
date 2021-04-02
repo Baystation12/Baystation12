@@ -45,7 +45,7 @@ em						{font-style: normal;font-weight: bold;}
 .newscaster				{color: #750000;}
 
 /* Radio Channels */
-.comradio				{color: #204090;}
+.comradio				{color: #d3b50b;}
 .syndradio				{color: #6d3f40;}
 .centradio				{color: #5c5c7c;}
 .airadio				{color: #ff00ff;}
