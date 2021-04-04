@@ -344,24 +344,3 @@
 
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
-
-/obj/item/clothing/accessory/space_adapted/venter
-	name = "venter assembly"
-	desc = "A series of complex tubes, meant to dissipate heat from the skin passively."
-	icon_state = "venter"
-	item_state = "venter"
-	slot = "over"
-	body_location = UPPER_TORSO | LOWER_TORSO | ARMS | LEGS
-
-/obj/item/clothing/accessory/space_adapted/bracer
-	name = "legbrace"
-	desc = "A lightweight polymer frame meant to brace and hold someone's legs upright comfortably, protecting their bones from high levels of gravity."
-	icon_state = "legbrace"
-	item_state = "legbrace"
-	body_location = LOWER_TORSO | LEGS
-
-/obj/item/clothing/accessory/space_adapted/bracer/neckbrace
-	name = "neckbrace"
-	desc = "A lightweight polymer frame meant to brace and hold someone's neck upright comfortably, protecting their bones from high levels of gravity."
-	icon_state = "neckbrace"
-	item_state = "neckbrace"
