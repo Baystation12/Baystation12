@@ -267,35 +267,16 @@
 	icon_state = "coatec"
 	icon = 'maps/torch/icons/obj/obj_suit_solgov.dmi'
 	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
-	armor = list(
-		melee = ARMOR_MELEE_SMALL,
-		bullet = ARMOR_BALLISTIC_MINOR,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_MINOR,
-		rad = ARMOR_RAD_MINOR
-		)
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA,ACCESSORY_SLOT_RANK)
 
 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/army
 	name = "army winter coat"
 	icon_state = "coatar"
-	armor = list(
-		melee = ARMOR_MELEE_SMALL,
-		bullet = ARMOR_BALLISTIC_MINOR,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_MINOR
-		)
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA,ACCESSORY_SLOT_RANK)
 
 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet
 	name = "fleet winter coat"
 	icon_state = "coatfl"
-	armor = list(
-		melee = ARMOR_MELEE_SMALL,
-		bullet = ARMOR_BALLISTIC_MINOR,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_MINOR
-		)
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
 
 /obj/item/clothing/suit/storage/jacket/solgov/fleet
@@ -304,13 +285,6 @@
 	icon_state = "navyengjacket"
 	icon = 'maps/torch/icons/obj/obj_suit_solgov.dmi'
 	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
-	armor = list(
-		melee = ARMOR_MELEE_SMALL,
-		bullet = ARMOR_BALLISTIC_MINOR,
-		energy = ARMOR_ENERGY_MINOR,
-		bomb = ARMOR_BOMB_MINOR,
-		rad = ARMOR_RAD_MINOR
-		)
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA,ACCESSORY_SLOT_RANK)
 	allowed = list (/obj/item/pen,/obj/item/clothing/head/soft,/obj/item/clothing/head/beret,/obj/item/storage/fancy/cigarettes,/obj/item/flame/lighter,/obj/item/device/taperecorder,/obj/item/device/scanner/gas,/obj/item/device/radio,/obj/item/taperoll,/obj/item/device/scanner/gas, /obj/item/device/flashlight, /obj/item/device/multitool, /obj/item/device/radio, /obj/item/device/t_scanner, \
 	/obj/item/crowbar, /obj/item/screwdriver, /obj/item/weldingtool, /obj/item/wirecutters, /obj/item/wrench, /obj/item/tank/emergency, \
