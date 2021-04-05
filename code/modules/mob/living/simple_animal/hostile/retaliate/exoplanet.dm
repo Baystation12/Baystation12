@@ -39,9 +39,9 @@
 				else
 					qdel(S)
 
-/mob/living/simple_animal/proc/name_species()
+/mob/living/simple_animal/proc/name_species(newname as text)
 	set name = "Name Alien Species"
-	set category = "Exploration"
+	set category = "IC"
 	set src in view()
 
 	if(!GLOB.using_map.use_overmap)
@@ -51,7 +51,6 @@
 
 	for(var/obj/effect/overmap/visitable/sector/exoplanet/E)
 		if(src in E.animals)
-			var/newname = input("What do you want to name this species?", "Species naming", E.get_random_species_name()) as text|null
 			newname = sanitizeName(newname, allow_numbers = TRUE, force_first_letter_uppercase = FALSE)
 			if(newname && CanInteract(usr, GLOB.conscious_state))
 				if(E.rename_species(type, newname))
@@ -176,7 +175,7 @@
 	natural_armor = list(
 		melee = ARMOR_MELEE_RESISTANT
 		)
-	
+
 /mob/living/simple_animal/hostile/retaliate/beast/charbaby
 	name = "charbaby"
 	desc = "A huge grubby creature."
@@ -198,7 +197,7 @@
 	natural_armor = list(
 		laser = ARMOR_LASER_HANDGUNS
 		)
-		
+
 /obj/item/natural_weapon/charbaby
 	name = "scalding hide"
 	damtype = BURN
