@@ -19,6 +19,7 @@ var/global/list/sparring_attack_cache = list()
 	var/eye_attack_text_victim
 
 	var/attack_name = "fist"
+	var/should_attack_log = TRUE
 
 /datum/unarmed_attack/proc/get_damage_type()
 	if(deal_halloss)
@@ -277,8 +278,8 @@ var/global/list/sparring_attack_cache = list()
 	deal_halloss = 3
 	attack_noun = list("tap","light strike")
 	attack_verb = list("tapped", "lightly struck")
-	damage = 2
 	damage = 0
 	sharp = TRUE
 	edge = TRUE
 	attack_name = "light hit"
+	should_attack_log = FALSE
