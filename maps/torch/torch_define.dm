@@ -48,6 +48,7 @@
 
 	default_law_type = /datum/ai_laws/solgov
 	use_overmap = 1
+#warn Change this before push/release
 	num_exoplanets = 0
 
 	away_site_budget = 3
