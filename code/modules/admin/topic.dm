@@ -1054,6 +1054,25 @@
 		if (prefs)
 			usr.client.debug_variables(prefs)
 
+	else if (href_list["reloadchar"])
+		if (!check_rights(R_DEBUG))
+			return
+		var/mob/living/carbon/human/H = locate(href_list["reloadchar"])
+		if (!istype(H))
+			to_chat(usr, SPAN_WARNING("\The [H] is not a valid type to apply preferences to."))
+			return
+		var/datum/preferences/P = H.client?.prefs
+		if (!istype(P))
+			to_chat(usr, SPAN_WARNING("\The [H] has no client to apply preferences from."))
+			return
+		var/confirm = alert(usr, "This will erase the state of \the [H]!", "Reload Character", "Okay", "Cancel")
+		if (confirm != "Okay")
+			return
+		if (QDELETED(P) || QDELETED(H))
+			to_chat(usr, SPAN_WARNING("\The [H] or its preferences are no longer valid."))
+			return
+		P.copy_to(H)
+
 	else if(href_list["sendtoprison"])
 		if(!check_rights(R_ADMIN))	return
 
