@@ -18,4 +18,4 @@ GLOBAL_LIST_EMPTY(prisonwarped) // List of players already warped.
 
 GLOBAL_LIST_EMPTY(awaydestinations) // Away missions. A list of landmarks that the warpgate can take you to.
 
-GLOBAL_LIST_EMPTY(vr_spawnlocs)
+GLOBAL_LIST_EMPTY(vr_spawns) // A list of all ACTIVE vr spawn markers. Added to and removed from dynamically when templates are activated

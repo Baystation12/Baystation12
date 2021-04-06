@@ -124,6 +124,14 @@
 	for(var/thing in SSpsi.psi_dampeners)
 		var/obj/item/implant/psi_control/implant = thing
 		implant.update_functionality()
+	
+	if (new_security_level.kick_vr_users) // wake the fuck up, samurai
+		for (var/mob/living/M in SSvirtual_reality.virtual_occupants_to_mobs)
+			var/turf/T = get_turf(M)
+			if (T.z in GLOB.using_map.contact_levels)
+				var/mob/living/surrogate = SSvirtual_reality.virtual_occupants_to_mobs[M]
+				to_chat(surrogate, SPAN_DANGER(FONT_LARGE("ALERT: VR is no longer safe to use. Connection terminated.")))
+				SSvirtual_reality.remove_virtual_mob(M, TRUE, silent = TRUE)
 
 	log_and_message_admins("has changed the security level from [previous_security_level.name] to [new_security_level.name].")
 	return TRUE
@@ -153,6 +161,8 @@
 	var/up_description
 	var/down_description
 	var/psionic_control_level = PSI_IMPLANT_WARN
+
+	var/kick_vr_users = FALSE
 
 // Called when we're switching from a lower security level to this one.
 /decl/security_level/proc/switching_up_to()

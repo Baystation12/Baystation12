@@ -187,6 +187,10 @@
 	if (!SSvirtual_reality.can_enter_vr(occupant))
 		to_chat(occupant, SPAN_WARNING("\The [initial(name)] buzzes. It won't activate with your current vital signs."))
 		return
+	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+	if (security_state.current_security_level.kick_vr_users)
+		to_chat(occupant, SPAN_WARNING("\The [initial(name)] refuses to activate during the ship's current alert level!"))
+		return
 	var/list/spawn_locs = SSvirtual_reality.get_vr_spawns()
 	if (!spawn_locs.len)
 		to_chat(occupant, SPAN_WARNING("Your [initial(name)] blips as it fails to find a valid location to project you to."))
@@ -235,7 +239,7 @@
 	dat += "<a href='?src=\ref[src];toggle_lock=1'>[hatch_locked ? "Unlock" : "Lock"] Hatch</a><br><br>"
 	dat += "<a href='?src=\ref[src];simulate=1'><b>Begin Simulation</b></a>"
 
-	var/datum/browser/popup = new(usr, "vrpod", "[initial(name)]", 450, 550)
+	var/datum/browser/popup = new(usr, "vrpod", "[initial(name)]", 250, 200)
 	popup.set_content(dat)
 	popup.open()
 

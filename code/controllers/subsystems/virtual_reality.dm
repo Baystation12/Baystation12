@@ -6,7 +6,6 @@ GLOBAL_LIST_INIT(vr_areas, list(
 	"Theatre" = /area/virtual_reality/theatre,
 	"Cafe" = /area/virtual_reality/cafe,
 	"Temple" = /area/virtual_reality/temple,
-	"Infirmary" = /area/virtual_reality/infirmary,
 	"Boxing Ring" = /area/virtual_reality/boxing_ring,
 	"Empty Court" = /area/virtual_reality/empty_court,
 	"Volleyball Court" = /area/virtual_reality/volleyball_court,
@@ -36,6 +35,10 @@ SUBSYSTEM_DEF(virtual_reality)
 	var/list/virtual_clients = list()				// Associative list of /client => /mob/living. Each client is linked to its virtual mob.
 	var/list/was_warned = list()					// A list of clients that have already received the disclaimer message when entering VR.
 
+/datum/controller/subsystem/virtual_reality/Initialize(start_timeofday)
+	GLOB.active_vr_area = locate(/area/virtual_reality)
+	. = ..()
+
 /datum/controller/subsystem/virtual_reality/fire(resumed = FALSE)
 	for (var/mob/living/L in virtual_occupants_to_mobs)
 		if (!check_vr(L))
@@ -47,7 +50,7 @@ SUBSYSTEM_DEF(virtual_reality)
 
 // Checks whether or not the provided occupant can remain inside of VR. Returns TRUE or FALSE.
 /datum/controller/subsystem/virtual_reality/proc/check_vr(mob/living/user)
-	if ((user.getBrainLoss() >= 25) // Boot out mobs with moderate brain damage
+	if ((user.getBrainLoss() >= 25)) // Boot out mobs with moderate brain damage
 		return FALSE
 	if (ishuman(user))
 		var/mob/living/carbon/human/H = user
@@ -58,7 +61,7 @@ SUBSYSTEM_DEF(virtual_reality)
 			var/mob/living/carbon/human/H = user
 			var/obj/item/organ/internal/cell/C = H.internal_organs_by_name[BP_CELL]
 			if(istype(C) && C.percent() <= 25)
-				return FALSE)
+				return FALSE
 	var/is_valid = FALSE
 	var/obj/machinery/vr_pod/pod = user.loc
 	if (istype(pod)) // Check for a usable VR pod
@@ -108,13 +111,13 @@ SUBSYSTEM_DEF(virtual_reality)
 		playsound(simulated_mob.loc, 'sound/machines/boop1.ogg', 50)
 		simulated_mob.languages = new_occupant.languages.Copy()
 		simulated_mob.default_language = new_occupant.default_language
-	simulated_mob.lastarea = new_occupant.lastarea
+	simulated_mob.lastarea = null
 	simulated_mob.client.played = 0
 	return simulated_mob
 
 // Removes a mob from VR. Accepts both occupants and virtual mobs as a first argument.
 // Returns TRUE if the removal succeeded.
-/datum/controller/subsystem/virtual_reality/proc/remove_virtual_mob(mob/living/removed_mob, sudden = FALSE, easter_egg_chance = 1)
+/datum/controller/subsystem/virtual_reality/proc/remove_virtual_mob(mob/living/removed_mob, sudden = FALSE, easter_egg_chance = 1, silent = FALSE)
 	var/mob/living/occ_mob
 	var/mob/living/vir_mob
 
@@ -136,15 +139,16 @@ SUBSYSTEM_DEF(virtual_reality)
 	virtual_mobs_to_occupants -= vir_mob
 	virtual_clients -= C
 	
-	var/dat = ""
-	dat += SPAN_NOTICE(SPAN_BOLD(FONT_LARGE("-=-=-=-<br>You have left VR!<br>")))
-	if (!(vir_mob.client in was_warned))
-		was_warned += vir_mob.client
-		dat += SPAN_NOTICE("You have exited virtual reality and returned to your normal body.<br>")
-		dat += SPAN_NOTICE("Everything that happened in VR was simulated, but it did happen. In-character, you remember all the events that transpired inside.<br>")
-		dat += SPAN_NOTICE("Now that you've been in and out of VR, you won't see these messages again this round.<br>")
-	dat += SPAN_NOTICE(SPAN_BOLD(FONT_LARGE("-=-=-=-")))
-	to_chat(vir_mob, dat)
+	if (!silent)
+		var/dat = ""
+		dat += SPAN_NOTICE(SPAN_BOLD(FONT_LARGE("-=-=-=-<br>You have left VR!<br>")))
+		if (!(vir_mob.client in was_warned))
+			was_warned += vir_mob.client
+			dat += SPAN_NOTICE("You have exited virtual reality and returned to your normal body.<br>")
+			dat += SPAN_NOTICE("Everything that happened in VR was simulated, but it did happen. In-character, you remember all the events that transpired inside.<br>")
+			dat += SPAN_NOTICE("Now that you've been in and out of VR, you won't see these messages again this round.<br>")
+		dat += SPAN_NOTICE(SPAN_BOLD(FONT_LARGE("-=-=-=-")))
+		to_chat(vir_mob, dat)
 
 	if (!sudden)
 		vir_mob.visible_message(SPAN_NOTICE("\The [vir_mob] visibly pixelates, and then fades away."))
@@ -186,9 +190,9 @@ SUBSYSTEM_DEF(virtual_reality)
 // Gets a list of all turfs that are valid VR entry points at call time.
 /datum/controller/subsystem/virtual_reality/proc/get_vr_spawns()
 	. = list()
-	for (var/turf/T in GLOB.vr_spawnlocs)
-		if (get_area(T) == GLOB.active_vr_area) // this sucks on ice
-			. += T
+	for (var/obj/effect/vr_spawn/L in GLOB.vr_spawns)
+		var/turf/T = get_turf(L)
+		. += T
 
 // Returns TRUE if a mob can enter VR, and FALSE if it can't.
 /datum/controller/subsystem/virtual_reality/proc/can_enter_vr(mob/living/target)

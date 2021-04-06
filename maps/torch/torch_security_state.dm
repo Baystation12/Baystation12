@@ -113,6 +113,7 @@
 
 	up_description = "A severe emergency has occurred. All staff are to report to their supervisor for orders. All crew should obey orders from relevant emergency personnel. Security personnel are permitted to search staff and facilities, and may have weapons unholstered at any time. Saferooms have been unbolted."
 	psionic_control_level = PSI_IMPLANT_DISABLED
+	kick_vr_users = TRUE
 
 	var/static/datum/announcement/priority/security/security_announcement_red = new(do_log = 0, do_newscast = 1, new_sound = sound('sound/misc/redalert1.ogg'))
 
@@ -138,6 +139,8 @@
 	overlay_alarm = "alarm_delta"
 	overlay_status_display = "status_display_delta"
 	alert_border = "alert_border_delta"
+	
+	kick_vr_users = TRUE
 
 	var/static/datum/announcement/priority/security/security_announcement_delta = new(do_log = 0, do_newscast = 1, new_sound = sound('sound/effects/siren.ogg'))
 

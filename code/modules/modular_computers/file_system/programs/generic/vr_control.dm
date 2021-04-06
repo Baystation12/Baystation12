@@ -22,6 +22,7 @@
 	var/prog_state = VRCONTROL_HOME
 	var/emagged
 	var/area_cooldown = 0
+	var/list/simulated_objects = list()
 
 /datum/nano_module/program/vr_control/Topic(href, href_list)
 	if(..())
@@ -66,11 +67,39 @@
 			log_and_message_admins("changed the VR area to [A.name], ejecting [the_matrix.len] occupants.", usr)
 		else
 			log_and_message_admins("changed the VR area to [A.name].", usr)
-		GLOB.active_vr_area = A
+		
+		var/loaded_normally = TRUE
+		if (!emagged || prob(75))
+			for (var/SO in simulated_objects) // Clear the entire previous template before we place another one
+				qdel(SO)
+			for (var/turf/T in GLOB.active_vr_area)
+				if (!istype(T, /turf/unsimulated/floor/plating))
+					T.ChangeTurf(/turf/unsimulated/floor/plating)
+		else // we're emagged, just fuck our shit up a quarter of the time
+			loaded_normally = FALSE
+			var/atom/comp_holder = program.computer.holder
+			comp_holder.audible_message(SPAN_DANGER("\The [comp_holder] buzzes oddly!"))
+			to_chat(usr, SPAN_WARNING("updatevr.dm:[rand(10000, 20000)]:warning: Previous loaded template did not fully unload. Virtual space may be affected."))
+			playsound(program.computer.holder, 'sound/machines/buzz-sigh.ogg', 50)
+
 		for (var/mob/living/L in SSvirtual_reality.virtual_occupants_to_mobs)
+			to_chat(L, SPAN_DANGER(FONT_LARGE("ALERT: Loaded VR template reconfiguring. Terminating connection.")))
 			SSvirtual_reality.remove_virtual_mob(L, TRUE)
+
+		// in this way, we use the selected area as a template. we copy all of its contents to the actual area,
+		// allowing users to "reset" the template by refreshing it
+		var/area/active_area = GLOB.active_vr_area
+		simulated_objects = A.copy_contents_to(active_area)
+		active_area.forced_ambience = A.forced_ambience
+		active_area.dynamic_lighting = A.dynamic_lighting
+		active_area.sound_env = A.sound_env
+		listclearnulls(GLOB.vr_spawns)
+		for (var/obj/effect/vr_spawn/V in active_area)
+			LAZYADD(GLOB.vr_spawns, V)
+
 		to_chat(usr, SPAN_NOTICE("Successfully loaded new area: [A.name]!"))
-		playsound(program.computer.holder, 'sound/machines/ping.ogg', 50)
+		if (loaded_normally)
+			playsound(program.computer.holder, 'sound/machines/ping.ogg', 50)
 		area_cooldown = world.time + 30 SECONDS
 		return TRUE
 
