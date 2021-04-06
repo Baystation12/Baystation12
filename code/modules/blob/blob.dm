@@ -78,28 +78,31 @@
 	update_icon()
 
 /obj/effect/blob/proc/expand(var/turf/T)
+	var/damage = rand(damage_min, damage_max)
 	if(istype(T, /turf/unsimulated/) || istype(T, /turf/space) || (istype(T, /turf/simulated/mineral) && T.density))
 		return
 	if(istype(T, /turf/simulated/wall))
 		var/turf/simulated/wall/SW = T
-		SW.take_damage(80)
+		SW.take_damage(damage)
 		return
 	var/obj/structure/girder/G = locate() in T
 	if(G)
-		if(prob(40))
-			G.dismantle()
+		G.take_damage(damage)
 		return
 	var/obj/structure/window/W = locate() in T
 	if(W)
-		W.shatter()
+		W.take_damage(damage)
 		return
 	var/obj/structure/grille/GR = locate() in T
 	if(GR)
-		qdel(GR)
+		GR.take_damage(damage)
 		return
 	for(var/obj/machinery/door/D in T) // There can be several - and some of them can be open, locate() is not suitable
-		if(D.density)
-			D.ex_act(2)
+		if (D.density)
+			if (D.is_broken())
+				D.open(TRUE)
+				return
+			D.take_damage(damage)
 			return
 	var/obj/structure/foamedmetal/F = locate() in T
 	if(F)
@@ -107,12 +110,12 @@
 		return
 	var/obj/structure/inflatable/I = locate() in T
 	if(I)
-		I.deflate(1)
+		I.take_damage(damage)
 		return
 
 	var/obj/vehicle/V = locate() in T
 	if(V)
-		V.ex_act(2)
+		V.adjust_health(-damage)
 		return
 	var/obj/machinery/camera/CA = locate() in T
 	if(CA)

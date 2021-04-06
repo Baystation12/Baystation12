@@ -73,6 +73,11 @@
 	else
 		return 0
 
+/obj/vehicle/proc/adjust_health(adjust_health)
+	health += adjust_health
+	health = Clamp(health, 0, maxhealth)
+	healthcheck()
+
 /obj/vehicle/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/hand_labeler))
 		return
@@ -91,7 +96,7 @@
 		if(T.welding)
 			if(health < maxhealth)
 				if(open)
-					health = min(maxhealth, health+10)
+					adjust_health(10)
 					user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 					user.visible_message("<span class='warning'>\The [user] repairs \the [src]!</span>","<span class='notice'>You repair \the [src]!</span>")
 				else
@@ -104,16 +109,16 @@
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		switch(W.damtype)
 			if("fire")
-				health -= W.force * fire_dam_coeff
+				adjust_health(-W.force * fire_dam_coeff)
 			if("brute")
-				health -= W.force * brute_dam_coeff
+				adjust_health(-W.force * brute_dam_coeff)
 		..()
 		healthcheck()
 	else
 		..()
 
 /obj/vehicle/bullet_act(var/obj/item/projectile/Proj)
-	health -= Proj.get_structure_damage()
+	adjust_health(-Proj.get_structure_damage())
 	..()
 	healthcheck()
 
@@ -123,14 +128,14 @@
 			explode()
 			return
 		if(2.0)
-			health -= rand(5,10)*fire_dam_coeff
-			health -= rand(10,20)*brute_dam_coeff
+			adjust_health(-fire_dam_coeff * rand(5, 10))
+			adjust_health(-brute_dam_coeff * rand(10, 20))
 			healthcheck()
 			return
 		if(3.0)
 			if (prob(50))
-				health -= rand(1,5)*fire_dam_coeff
-				health -= rand(1,5)*brute_dam_coeff
+				adjust_health(-fire_dam_coeff * rand(1, 2))
+				adjust_health(-brute_dam_coeff * rand(1, 2))
 				healthcheck()
 				return
 	return
@@ -359,8 +364,7 @@
 	if(istype(user))
 		admin_attacker_log(user, "attacked \the [src]")
 		user.do_attack_animation(src)
-	src.health -= damage
+	adjust_health(-damage)
 	if(prob(10))
 		new /obj/effect/decal/cleanable/blood/oil(src.loc)
-	spawn(1) healthcheck()
 	return 1
