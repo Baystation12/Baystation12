@@ -80,7 +80,6 @@
 		/obj/item/clothing/accessory/stethoscope,
 		/obj/item/device/flashlight/pen,
 		/obj/item/clothing/glasses/hud/health,
-		/obj/item/device/flash,
 		/obj/item/device/megaphone,
 		/obj/item/storage/firstaid/adv,
 		/obj/item/material/knife/folding/swiss/medic,
