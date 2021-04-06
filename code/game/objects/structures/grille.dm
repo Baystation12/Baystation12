@@ -147,7 +147,7 @@
 	if(isWirecutter(W))
 		if(!shock(user, 100))
 			playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
-			new /obj/item/stack/material/rods(get_turf(src), destroyed ? 1 : 2)
+			new /obj/item/stack/material/rods(get_turf(src), destroyed ? 1 : 2, material.name)
 			qdel(src)
 	else if((isScrewdriver(W)) && (istype(loc, /turf/simulated) || anchored))
 		if(!shock(user, 90))
