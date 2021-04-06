@@ -192,7 +192,8 @@ var/list/admin_verbs_debug = list(
 	/client/proc/visualpower_remove,
 	/client/proc/ping_webhook,
 	/client/proc/reload_webhooks,
-	/client/proc/toggle_planet_repopulating
+	/client/proc/toggle_planet_repopulating,
+	/client/proc/spawn_exoplanet
 	)
 
 var/list/admin_verbs_paranoid_debug = list(

@@ -460,3 +460,38 @@
 
 	GLOB.planet_repopulation_disabled = !GLOB.planet_repopulation_disabled
 	log_and_message_admins("toggled planet mob repopulating [GLOB.planet_repopulation_disabled ? "OFF" : "ON"].")
+
+/client/proc/spawn_exoplanet(exoplanet_type as anything in subtypesof(/obj/effect/overmap/visitable/sector/exoplanet))
+	set category = "Debug"
+	set name = "Create Exoplanet"
+
+	var/budget = input("Ruins budget. Default is 5, a budget of 0 will not spawn any ruins, 5 will spawn around 3-5 ruins:", "Ruins Budget", 5) as num | null
+
+	if (isnull(budget) || budget < 0)
+		budget = 5
+
+	var/theme = input("Choose a theme:", "Theme") as anything in typesof(/datum/exoplanet_theme/) | null
+
+	if (!theme)
+		theme = /datum/exoplanet_theme
+
+	var/daycycle = alert("Should the planet have a day-night cycle?","Day Night Cycle", "Yes", "No")
+
+	if (daycycle == "Yes")
+		daycycle = TRUE
+	else
+		daycycle = FALSE
+
+	var/last_chance = alert("Spawn exoplanet?", "Final Confirmation", "Yes", "Cancel")
+
+	if (last_chance == "Cancel")
+		return
+
+	var/obj/effect/overmap/visitable/sector/exoplanet/new_planet = new exoplanet_type(null, world.maxx, world.maxy)
+	new_planet.features_budget = budget
+	new_planet.themes = list(new theme)
+	new_planet.lightlevel = rand(5, 10)/10
+
+	log_and_message_admins("is spawning [new_planet] at [new_planet.start_x],[new_planet.start_y], containing Z [english_list(new_planet.map_z)]")
+	new_planet.build_level()
+	message_admins("[new_planet] has completed generation.")
