@@ -5800,6 +5800,7 @@
 /obj/item/screwdriver,
 /obj/item/storage/box/masks,
 /obj/item/storage/box/gloves,
+/obj/item/storage/box/gloves,
 /obj/item/clothing/glasses/hud/health,
 /obj/item/clothing/glasses/hud/health,
 /obj/effect/floor_decal/corner/paleblue/mono,

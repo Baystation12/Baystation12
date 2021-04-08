@@ -117,7 +117,7 @@
 	name = "box of sterile gloves"
 	desc = "Contains sterile gloves."
 	icon_state = "latex"
-	startswith = list(/obj/item/clothing/gloves/latex = 5,
+	startswith = list(/obj/item/clothing/gloves/latex = 6,
 					/obj/item/clothing/gloves/latex/nitrile = 2)
 
 /obj/item/storage/box/masks

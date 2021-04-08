@@ -2,6 +2,12 @@
 	name = "Medical"
 	containertype = /obj/structure/closet/crate/medical
 
+/decl/hierarchy/supply_pack/medical/gloves
+	name = "Refills - Sterile gloves"
+	contains = list(/obj/item/storage/box/gloves = 4)
+	cost = 20
+	containername = "medical crate"
+
 /decl/hierarchy/supply_pack/medical/medical
 	name = "Refills - Medical supplies"
 	contains = list(/obj/item/storage/firstaid/regular,
