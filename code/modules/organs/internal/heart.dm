@@ -81,8 +81,11 @@
 			pulse = PULSE_NONE
 			return
 
-	// Pulse normally shouldn't go above PULSE_2FAST
-	pulse = Clamp(PULSE_NORM + pulse_mod, PULSE_SLOW, PULSE_2FAST)
+	// Pulse normally shouldn't go above PULSE_2FAST, unless extreme amounts of bad stuff in blood
+	if (pulse_mod < 6)
+		pulse = Clamp(PULSE_NORM + pulse_mod, PULSE_SLOW, PULSE_2FAST)
+	else
+		pulse = Clamp(PULSE_NORM + pulse_mod, PULSE_SLOW, PULSE_THREADY)
 
 	// If fibrillation, then it can be PULSE_THREADY
 	var/fibrillation = oxy <= BLOOD_VOLUME_SURVIVE || (prob(30) && owner.shock_stage > 120)
