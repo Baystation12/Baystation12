@@ -167,8 +167,10 @@
 		if((stat == DEAD || is_asystole() || src.losebreath) && distance <= 3)
 			msg += "<span class='warning'>[T.He] [T.does] not appear to be breathing.</span>\n"
 
-	if(fire_stacks)
+	if (fire_stacks > 0)
 		msg += "[T.He] looks flammable.\n"
+	else if (fire_stacks < 0)
+		msg += "[T.He] looks wet.\n"
 	if(on_fire)
 		msg += "<span class='warning'>[T.He] [T.is] on fire!.</span>\n"
 
