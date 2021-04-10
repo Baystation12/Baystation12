@@ -38,6 +38,7 @@
 		SKILL_ANATOMY       = SKILL_EXPERT,
 		SKILL_CHEMISTRY     = SKILL_EXPERT
 	)
+	use_species_whitelist = SPECIES_IPC
 
 /datum/job/ai/equip(var/mob/living/carbon/human/H)
 	if(!H)	return 0
@@ -64,6 +65,7 @@
 	hud_icon = "hudblank"
 	skill_points = 0
 	no_skill_buffs = TRUE
+	use_species_whitelist = SPECIES_IPC
 
 /datum/job/cyborg/handle_variant_join(var/mob/living/carbon/human/H, var/alt_title)
 	return H && H.Robotize(SSrobots.get_mob_type_by_title(alt_title || title))

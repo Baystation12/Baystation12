@@ -140,6 +140,7 @@ var/list/ghost_traps
 	ghost_trap_message = "They are occupying a positronic brain now."
 	ghost_trap_role = "Positronic Brain"
 	list_as_special_role = TRUE
+	species_whitelist = /datum/species/machine
 
 /datum/ghosttrap/positronic/welcome_candidate(mob/target)
 	to_chat(target, SPAN_BOLD("You are a positronic brain, activated on [station_name()]."))
