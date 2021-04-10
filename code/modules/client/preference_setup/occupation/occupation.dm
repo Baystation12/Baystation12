@@ -156,6 +156,8 @@
 					bad_message = "<b>\[UNAVAILABLE]</b>"
 				else if(jobban_isbanned(user, title))
 					bad_message = "<b>\[BANNED]</b>"
+				else if (!job.is_species_whitelist_allowed(user.client))
+					bad_message = "\[WHITELIST RESTRICTED ([job.use_species_whitelist])]"
 				else if(!job.player_old_enough(user.client))
 					var/available_in_days = job.available_in_days(user.client)
 					bad_message = "\[IN [(available_in_days)] DAYS]"
