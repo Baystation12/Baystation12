@@ -10,15 +10,15 @@ SUBSYSTEM_DEF(robots)
 	var/list/robot_alt_titles            = list()
 
 	var/list/mob_types_by_title = list(
-		"robot, flying" = /mob/living/silicon/robot/flying,
-		"drone, flying" = /mob/living/silicon/robot/flying,
+		"android, flying" = /mob/living/silicon/robot/flying,
+		"drone, flying"   = /mob/living/silicon/robot/flying,
 	)
 
 	var/list/mmi_types_by_title = list(
-		"robot"         = /obj/item/organ/internal/posibrain,
-		"drone"         = /obj/item/device/mmi/digital/robot,
-		"robot, flying" = /obj/item/organ/internal/posibrain,
-		"drone, flying" = /obj/item/device/mmi/digital/robot
+		"android"         = /obj/item/organ/internal/posibrain,
+		"drone"           = /obj/item/device/mmi/digital/robot,
+		"android, flying" = /obj/item/organ/internal/posibrain,
+		"drone, flying"   = /obj/item/device/mmi/digital/robot
 	)
 
 /datum/controller/subsystem/robots/Initialize()

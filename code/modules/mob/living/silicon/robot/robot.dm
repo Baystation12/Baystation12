@@ -1,8 +1,8 @@
 #define CYBORG_POWER_USAGE_MULTIPLIER 2.5 // Multiplier for amount of power cyborgs use.
 
 /mob/living/silicon/robot
-	name = "Robot"
-	real_name = "Robot"
+	name = "Android"
+	real_name = "Android"
 	icon = 'icons/mob/robots.dmi'
 	icon_state = "robot"
 	maxHealth = 300
@@ -85,7 +85,7 @@
 	var/speed = 0
 	var/scrambledcodes = FALSE // Used to determine if a borg shows up on the robotics console.  Setting to one hides them.
 	var/tracking_entities = 0 //The number of known entities currently accessing the internal camera
-	var/braintype = "Robot"
+	var/braintype = "Android"
 	var/intenselight = FALSE	// Whether cyborg's integrated light was upgraded
 	var/vtec = FALSE
 
@@ -302,7 +302,7 @@
 		modtype = prefix
 
 	if(istype(mmi, /obj/item/organ/internal/posibrain))
-		braintype = "Robot"
+		braintype = "Android"
 	else if(istype(mmi, /obj/item/device/mmi/digital/robot))
 		braintype = "Drone"
 	else
