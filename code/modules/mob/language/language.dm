@@ -24,6 +24,7 @@
 	var/warning = ""
 	var/hidden_from_codex			  // If it should not show up in Codex
 	var/category = /datum/language    // Used to point at root language types that shouldn't be visible
+	var/has_written_form = FALSE
 
 /datum/language/proc/can_be_spoken_properly_by(var/mob/speaker)
 	return TRUE
@@ -116,7 +117,7 @@
 	scramble_cache[input] = scrambled_text
 	if(scramble_cache.len > SCRAMBLE_CACHE_LEN)
 		scramble_cache.Cut(1, scramble_cache.len-SCRAMBLE_CACHE_LEN-1)
-	
+
 	return scrambled_text
 
 /datum/language/proc/format_message(message, verb)

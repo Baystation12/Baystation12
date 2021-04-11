@@ -88,6 +88,8 @@
 
 
 //Flavorful reminders
+/obj/item/paper/merc
+	language = LANGUAGE_SPACER
 
 /obj/item/paper/merc/tutorial_1
 	name = "highlighted note"

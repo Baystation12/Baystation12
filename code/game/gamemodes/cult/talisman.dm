@@ -2,6 +2,7 @@
 	icon_state = "paper_talisman"
 	var/imbue = null
 	info = "<center><img src='talisman.png'></center><br/><br/>"
+	language = LANGUAGE_CULT
 
 /obj/item/paper/talisman/attack_self(var/mob/living/user)
 	if(iscultist(user))

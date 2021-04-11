@@ -37,6 +37,7 @@
 	var/list/metadata
 	var/readable = TRUE  //Paper will not be able to be written on and will not bring up a window upon examine if FALSE
 	var/is_memo = FALSE  //If TRUE, paper will act the same as readable = FALSE, but will also be unrenameable.
+	var/datum/language/language = LANGUAGE_HUMAN_EURO // Language the paper was written in. Editable by users up until something's actually written
 
 	var/const/deffont = "Verdana"
 	var/const/signfont = "Times New Roman"
@@ -49,6 +50,12 @@
 	..(loc)
 	set_content(text ? text : info, title)
 	metadata = md
+
+	var/old_language = language
+	language = global.all_languages[language]
+	if (!language)
+		log_debug("[src] ([type]) initialized with invalid or missing language `[old_language]` defined.")
+		language = global.all_languages[LANGUAGE_HUMAN_EURO]
 
 /obj/item/paper/proc/set_content(text,title)
 	if(title)
@@ -80,15 +87,81 @@
 	else
 		to_chat(user, "<span class='notice'>You have to go closer if you want to read it.</span>")
 
-/obj/item/paper/proc/show_content(mob/user, forceshow)
+/obj/item/paper/verb/set_language()
+	set name = "Set writing language"
+	set category = "Object"
+	set src in usr
+
+	choose_language(usr)
+
+/obj/item/paper/proc/choose_language(mob/user, admin_force = FALSE)
+	if (info)
+		to_chat(user, SPAN_WARNING("\The [src] already has writing on it and cannot have its language changed."))
+		return
+	if (!admin_force && !user.languages.len)
+		to_chat(user, SPAN_WARNING("You don't know any languages to choose from."))
+		return
+
+	var/list/selectable_languages = list()
+	if (admin_force)
+		for (var/key in global.all_languages)
+			var/datum/language/L = global.all_languages[key]
+			if (L.has_written_form)
+				selectable_languages += L
+	else
+		for (var/datum/language/L in user.languages)
+			if (L.has_written_form)
+				selectable_languages += L
+
+	var/new_language = input(user, "What language do you want to write in?", "Change language", language) as null|anything in selectable_languages
+	if (!new_language || new_language == language)
+		to_chat(user, SPAN_NOTICE("You decide to leave the language as [language.name]."))
+		return
+	if (!admin_force && !Adjacent(src, user) && !CanInteract(user, GLOB.deep_inventory_state))
+		to_chat(user, SPAN_WARNING("You must remain next to or continue holding \the [src] to do that."))
+		return
+	language = new_language
+
+/obj/item/paper/proc/show_content(mob/user, forceshow, editable = FALSE)
 	var/can_read = (istype(user, /mob/living/carbon/human) || isghost(user) || istype(user, /mob/living/silicon)) || forceshow
 	if(!readable || is_memo)
 		return
 	else if(!forceshow && istype(user,/mob/living/silicon/ai))
 		var/mob/living/silicon/ai/AI = user
 		can_read = get_dist(src, AI.camera) < 2
-	show_browser(user, "<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY bgcolor='[color]'>[can_read ? info : stars(info)][stamps]</BODY></HTML>", "window=[name]")
+
+	var/html = "<html><head><title>[name]</title></head><body bgcolor='[color]'>"
+	var/body
+	if (can_read && editable)
+		body = info_links
+		if (isobserver(user) || (language in user.languages))
+			if (info)
+				html += "<p><i>This paper is written in [language.name].</i></p>"
+			else
+				html += "<p><i>You are writing in <a href='?src=\ref[src];change_language=1'>[language]</a>.</i></p>"
+		else
+			html += "<p style=\"color: red;\"><i>This paper is written in a language you don't understand.</i></p>"
+			body = language.scramble(info, user.languages)
+	else if (!can_read)
+		html += "<p style=\"color:red;\"><i>The paper is too far away to read.</i></p>"
+	else
+		body = info
+		if (isobserver(user) || (language in user.languages))
+			html += "<p><i>This paper is written in [language.name].</i></p>"
+		else
+			html += "<p style=\"color: red;\"><i>This paper is written in a language you don't understand.</i></p>"
+			body = language.scramble(body, user.languages)
+
+	html += "<hr />"
+	html += body + stamps
+	html += "</body></html>"
+	show_browser(user, html, "window=[name]")
+
+
 	onclose(user, "[name]")
+
+/obj/item/paper/proc/write_content(mob/user)
+
 
 /obj/item/paper/verb/rename()
 	set name = "Rename paper"
@@ -272,6 +345,11 @@
 	if(!usr || (usr.stat || usr.restrained()))
 		return
 
+	if (href_list["change_language"])
+		choose_language(usr)
+		show_content(usr, editable = TRUE)
+		return
+
 	if(href_list["write"])
 		var/id = href_list["write"]
 		//var/t = strip_html_simple(input(usr, "What text do you wish to add to " + (id=="end" ? "the end of the paper" : "field "+id) + "?", "[name]", null),8192) as message
@@ -293,7 +371,7 @@
 					return
 			else
 				return
-		
+
 		var/obj/item/pen/P = I
 		if(!P.active)
 			P.toggle()
@@ -333,7 +411,7 @@
 
 		update_space(t)
 
-		show_browser(usr, "<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY bgcolor='[color]'>[info_links][stamps]</BODY></HTML>", "window=[name]") // Update the window
+		show_content(usr, editable = TRUE)
 
 		playsound(src, pick('sound/effects/pen1.ogg','sound/effects/pen2.ogg'), 10)
 		update_icon()
@@ -386,10 +464,10 @@
 		var/obj/item/pen/robopen/RP = P
 		if ( istype(RP) && RP.mode == 2 )
 			RP.RenamePaper(user,src)
-		if(is_memo || !readable)
+		if(is_memo || !readable || !(language in user.languages))
 			return
 		else
-			show_browser(user, "<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY bgcolor='[color]'>[info_links][stamps]</BODY></HTML>", "window=[name]")
+			show_content(user, editable = TRUE)
 		return
 
 	else if(istype(P, /obj/item/stamp) || istype(P, /obj/item/clothing/ring/seal))
@@ -448,6 +526,7 @@
 /obj/item/paper/proc/show_info(var/mob/user)
 	return info
 
+
 //For supply.
 /obj/item/paper/manifest
 	name = "supply manifest"
@@ -455,6 +534,9 @@
 /*
  * Premade paper
  */
+/obj/item/paper/spacer
+	language = LANGUAGE_SPACER
+
 /obj/item/paper/Court
 	name = "Judgement"
 	info = "For crimes as specified, the offender is sentenced to:<BR>\n<BR>\n"

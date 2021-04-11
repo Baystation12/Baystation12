@@ -18,6 +18,7 @@
 		SPECIES_MONARCH_QUEEN,
 		SPECIES_MONARCH_WORKER
 	)
+	has_written_form = TRUE
 
 /datum/language/mantid/can_be_spoken_properly_by(var/mob/speaker)
 	var/mob/living/S = speaker
@@ -57,6 +58,7 @@
 	exclaim_verb = "flares"
 	flags = RESTRICTED | NO_STUTTER | SIGNLANG
 	shorthand = "KNV"
+	has_written_form = FALSE
 
 #define MANTID_SCRAMBLE_CACHE_LEN 20
 /datum/language/mantid/nonvocal/scramble(var/input)
@@ -92,8 +94,9 @@
 	speech_verb = "flashes"
 	ask_verb = "gleams"
 	exclaim_verb = "flares"
-	flags = RESTRICTED | NO_STUTTER | NONVERBAL | HIVEMIND 
+	flags = RESTRICTED | NO_STUTTER | NONVERBAL | HIVEMIND
 	shorthand = "KB"
+	has_written_form = FALSE
 
 /datum/language/mantid/worldnet/check_special_condition(var/mob/living/carbon/other)
 	if(istype(other, /mob/living/silicon/robot/flying/ascent))

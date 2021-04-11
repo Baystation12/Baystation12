@@ -15,3 +15,4 @@
 		"ko", "ne", "en", "po", "ra", "li", "on", "byl", "cto", "eni", "ost", "ol", "ego",
 		"ver", "stv", "pro"
 	)
+	has_written_form = TRUE

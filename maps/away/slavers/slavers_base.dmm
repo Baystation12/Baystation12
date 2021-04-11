@@ -66,7 +66,7 @@
 /area/slavers_base/mort)
 "aq" = (
 /obj/structure/table/standard,
-/obj/item/paper{
+/obj/item/paper/spacer{
 	info = "If they'll keep having fun with cargo in such manner, we'll run out of freezers to keep what's left from it.";
 	name = "Note"
 	},
@@ -487,7 +487,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "bw" = (
-/obj/item/paper{
+/obj/item/paper/spacer{
 	info = "Tonight, when lights are out. Prepare shivs, pieces of glass, whatever you might find.";
 	name = "Note"
 	},
@@ -1118,7 +1118,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/hangar)
 "cJ" = (
-/obj/item/paper{
+/obj/item/paper/spacer{
 	info = "Doc who checked us told implants won't explode our heads. Gotta make guys know. Seems I see a silver lining.";
 	name = "Note"
 	},
@@ -1710,7 +1710,7 @@
 /obj/structure/table/steel,
 /obj/item/device/flash,
 /obj/item/device/radio,
-/obj/item/paper{
+/obj/item/paper/spacer{
 	info = "If this fuck from A-3 keeps thinking he's better then piece of meat, throw him to hangar and show how little pressure turns diamonds into shit.";
 	name = "Note"
 	},
@@ -1975,7 +1975,7 @@
 /obj/structure/table/standard,
 /obj/item/storage/firstaid/o2,
 /obj/item/folder/white,
-/obj/item/paper{
+/obj/item/paper/spacer{
 	info = "Seems they don't really look over my shoulder anymore. We have now maybe a dozen of them with inactive implants. Hope they will pick right moment to flip the lid. I'll kill few bastards myself soon as I have a chance.";
 	name = "Note"
 	},
@@ -3419,7 +3419,7 @@
 /area/slavers_base/dorms)
 "iy" = (
 /obj/structure/table/woodentable,
-/obj/item/paper{
+/obj/item/paper/spacer{
 	info = "<center><b> Contract </b></center> <br>This contract describes exchanging of monetary pieces for the right o? the ownership for following examples: <list><*> Human, age 17. Price - 1500 thalers. <*> Human, age 49. Price - 1100 thalers. <*> Unathi, age 28. Good fist fighter. Price - 2400 thalers. <*> Human, age 34. Expirienced medic. Price - 6800 thalers. </list> <b> Overall price: 11800 thalers</b><br><small>Place for signatures</small>";
 	name = "Contract"
 	},
@@ -3882,7 +3882,7 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "jC" = (
-/obj/item/paper{
+/obj/item/paper/spacer{
 	info = "We made over 200 grands for two last weeks. We should stay low-key for month or so, or we'll get our base discovered by fucking marshalls so shut your whining and relax, I'l l get you three crates of booze and some cargo to play with.";
 	name = "Note"
 	},

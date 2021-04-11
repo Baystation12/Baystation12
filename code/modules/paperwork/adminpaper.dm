@@ -37,6 +37,7 @@
 	interactions += "<A href='?src=\ref[src];cancel=1'>Cancel fax</A> "
 	interactions += "<BR>"
 	interactions += "<A href='?src=\ref[src];changelogo=1'>Change logo</A> "
+	interactions += "<A href='?src=\ref[src];changelanguage=1'>Change language ([language])</A> "
 	interactions += "<A href='?src=\ref[src];toggleheader=1'>Toggle Header</A> "
 	interactions += "<A href='?src=\ref[src];togglefooter=1'>Toggle Footer</A> "
 	interactions += "<A href='?src=\ref[src];clear=1'>Clear page</A> "
@@ -155,6 +156,11 @@ obj/item/paper/admin/proc/updateDisplay()
 	if(href_list["changelogo"])
 		logo = input(usr, "What logo?", "Choose a logo", "") as null|anything in (logo_list)
 		generateHeader()
+		updateDisplay()
+		return
+
+	if (href_list["changelanguage"])
+		choose_language(usr, TRUE)
 		updateDisplay()
 		return
 
