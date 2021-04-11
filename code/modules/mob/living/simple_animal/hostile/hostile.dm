@@ -61,10 +61,15 @@
 /mob/living/simple_animal/hostile/proc/ValidTarget(var/mob/M)
 	if(M == src)
 		return FALSE
+
+	if (M.status_flags & NOTARGET)
+		return FALSE
+
 	if(istype(M, /mob/living/simple_animal/hostile))
 		var/mob/living/simple_animal/hostile/H = M
 		if(H.faction == faction && !attack_same && !H.attack_same)
 			return FALSE
+
 	if(istype(M))
 		if(M.faction == faction)
 			return FALSE
@@ -76,6 +81,7 @@
 			var/mob/living/carbon/human/H = M
 			if(H.is_cloaked())
 				return FALSE
+
 	return TRUE
 
 /mob/living/simple_animal/hostile/proc/MoveToTarget()

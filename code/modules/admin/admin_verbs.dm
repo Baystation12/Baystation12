@@ -93,7 +93,8 @@ var/list/admin_verbs_admin = list(
 	/client/proc/add_trader,
 	/client/proc/remove_trader,
 	/datum/admins/proc/sendFax,
-	/client/proc/check_fax_history
+	/client/proc/check_fax_history,
+	/client/proc/cmd_admin_notarget
 )
 var/list/admin_verbs_ban = list(
 	/client/proc/unban_panel,
@@ -269,7 +270,8 @@ var/list/admin_verbs_hideable = list(
 	/client/proc/enable_debug_verbs,
 	/client/proc/roll_dices,
 	/proc/possess,
-	/proc/release
+	/proc/release,
+	/client/proc/cmd_admin_notarget
 	)
 var/list/admin_verbs_mod = list(
 	/client/proc/cmd_admin_pm_context,	// right-click adminPM interface,

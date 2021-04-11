@@ -12,6 +12,7 @@
 #define GODMODE     0x1000
 #define FAKEDEATH   0x2000  // Replaces stuff like changeling.changeling_fakedeath.
 #define NO_ANTAG    0x4000  // Players are restricted from gaining antag roles when occupying this mob
+#define NOTARGET    0x8000  // Player is invisible to all simple mobs
 
 // Grab Types
 #define GRAB_NORMAL			"normal"
