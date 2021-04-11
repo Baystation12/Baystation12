@@ -48,6 +48,8 @@
 	var/eye_colour
 	var/allowed_eye_colours = list(COLOR_RED, COLOR_ORANGE, COLOR_YELLOW, COLOR_LIME, COLOR_DEEP_SKY_BLUE, COLOR_INDIGO, COLOR_VIOLET, COLOR_PINK)
 	var/hunt_chance = 1 //percentage chance the mob will run to a random nearby tile
+	var/use_ladder_chance = 25
+	var/climbing_ladder = FALSE
 
 /obj/item/natural_weapon/bite/spider
 	force = 20
@@ -108,9 +110,11 @@
 	pry_time = 9 SECONDS
 
 	var/atom/cocoon_target
+	var/obj/effect/spider/spiderling/spiderling_target
 	var/fed = 0
 	var/max_eggs = 8
 	var/infest_chance = 8
+	var/left_to_feed = 3 //number of spiderlings we can make giant
 	var/mob/living/simple_animal/hostile/giant_spider/guard/paired_guard
 
 	//things we can't encase in a cocoon
@@ -167,6 +171,12 @@
 	update_icon()
 	. = ..()
 
+/mob/living/simple_animal/hostile/giant_spider/nurse/Initialize(mapload, atom/parent)
+	. = ..()
+
+	if (prob(40)) //chance to be able to spawn eggs right away
+		fed = 1
+
 /mob/living/simple_animal/hostile/giant_spider/proc/spider_randomify() //random math nonsense to get their damage, health and venomness values
 	maxHealth = rand(initial(maxHealth), (1.4 * initial(maxHealth)))
 	health = maxHealth
@@ -209,13 +219,47 @@
 		return FALSE
 	if(stance == HOSTILE_STANCE_IDLE)
 		//chance to skitter madly away
-		if(!busy && prob(hunt_chance))
-			stop_automated_movement = 1
-			walk_to(src, pick(orange(20, src)), 1, move_to_delay)
-			addtimer(CALLBACK(src, .proc/disable_stop_automated_movement), 5 SECONDS)
+		if(!busy)
+			if (prob(hunt_chance))
+				stop_automated_movement = TRUE
+				walk_to(src, pick(orange(20, src)), 1, move_to_delay)
+				addtimer(CALLBACK(src, .proc/disable_stop_automated_movement), 5 SECONDS)
+
+			else if (!climbing_ladder && prob(use_ladder_chance))
+				for (var/obj/structure/ladder/L in view(10, src))
+					climbing_ladder = TRUE
+					stop_automated_movement = TRUE
+					walk_to(src, L, 0, move_to_delay)
+					addtimer(CALLBACK(src, .proc/give_up_ladder), 5 SECONDS)
+					break
+
+		if (climbing_ladder)
+			var/obj/structure/ladder/L = locate() in get_turf(src)
+
+			if (istype(L))
+				L.climb(src)
+				start_ladder_cooldown()
+
+	if (stance == HOSTILE_STANCE_ATTACK)
+		use_ladder_chance = 25 //reset cooldown so we can give chase
+
+/mob/living/simple_animal/hostile/giant_spider/proc/start_ladder_cooldown()
+	use_ladder_chance = 0
+	climbing_ladder = FALSE
+	walk_to(src, pick(orange(20, src)), 1, move_to_delay)
+	addtimer(CALLBACK(src, .proc/end_ladder_cooldown), 3 MINUTES)
+
+
+/mob/living/simple_animal/hostile/giant_spider/proc/end_ladder_cooldown()
+	use_ladder_chance = 25
+
+/mob/living/simple_animal/hostile/giant_spider/proc/give_up_ladder()
+	climbing_ladder = FALSE
+	disable_stop_automated_movement()
+
 
 /mob/living/simple_animal/hostile/giant_spider/proc/disable_stop_automated_movement()
-	stop_automated_movement = 0
+	stop_automated_movement = FALSE
 	walk(src,0)
 	kick_stance()
 
@@ -251,7 +295,7 @@ Guard caste procs
 		paired_nurse = null
 
 /mob/living/simple_animal/hostile/giant_spider/guard/proc/find_nurse()
-	for(var/mob/living/simple_animal/hostile/giant_spider/nurse/N in ListTargets(10))
+	for(var/mob/living/simple_animal/hostile/giant_spider/nurse/N in hearers(src, 10))
 		if(N.stat || N.paired_guard)
 			continue
 		paired_nurse = N
@@ -319,8 +363,16 @@ Nurse caste procs
 		if(busy == MOVING_TO_TARGET)
 			if(cocoon_target == C && get_dist(src,cocoon_target) > 1)
 				cocoon_target = null
+			if (spiderling_target == C && get_dist(src, spiderling_target) > 1)
+				spiderling_target = null
 			busy = 0
 			stop_automated_movement = 0
+
+/mob/living/simple_animal/hostile/giant_spider/nurse/proc/feed_spiderling(obj/effect/spider/spiderling/S)
+	visible_message(SPAN_WARNING("\The [src] secretes a strange green substance over \the [S], causing it to grow rapidly!."))
+	S.amount_grown += 2
+	spiderling_target = null
+	left_to_feed--
 
 /mob/living/simple_animal/hostile/giant_spider/nurse/Life()
 	. = ..()
@@ -330,6 +382,15 @@ Nurse caste procs
 		var/list/can_see = view(src, 10)
 		//30% chance to stop wandering and do something
 		if(!busy && prob(30))
+			if (left_to_feed > 0 && prob(50))
+				for (var/obj/effect/spider/spiderling/S in can_see)
+					if (S.amount_grown < 0)
+						spiderling_target = S
+						busy = MOVING_TO_TARGET
+						walk_to(src, S, 1, move_to_delay)
+						GiveUp(S)
+						return
+
 			//first, check for potential food nearby to cocoon
 			for(var/mob/living/C in can_see)
 				if(is_type_in_list(C, cocoon_blacklist))
@@ -379,7 +440,7 @@ Nurse caste procs
 						if(is_type_in_list(O, cocoon_blacklist))
 							continue
 
-						if(istype(O, /obj/item) || istype(O, /obj/structure) || istype(O, /obj/machinery))
+						if(istype(O, /obj/structure) || istype(O, /obj/machinery))
 							cocoon_target = O
 							busy = MOVING_TO_TARGET
 							stop_automated_movement = 1
@@ -387,8 +448,13 @@ Nurse caste procs
 							//give up if we can't reach them after 10 seconds
 							GiveUp(O)
 
-		else if(busy == MOVING_TO_TARGET && cocoon_target)
-			if(get_dist(src, cocoon_target) <= 1)
+		else if(busy == MOVING_TO_TARGET)
+
+			if (spiderling_target && get_dist(src, spiderling_target) <= 1)
+				feed_spiderling(spiderling_target)
+				return
+
+			if (cocoon_target && get_dist(src, cocoon_target) <= 1)
 				busy = SPINNING_COCOON
 				src.visible_message("<span class='notice'>\The [src] begins to secrete a sticky substance around \the [cocoon_target].</span>")
 				stop_automated_movement = 1
@@ -401,9 +467,13 @@ Nurse caste procs
 							C.pixel_x = cocoon_target.pixel_x
 							C.pixel_y = cocoon_target.pixel_y
 							for(var/mob/living/M in C.loc)
+								if (istype(M, /mob/living/simple_animal/hostile/giant_spider))
+									continue
+
 								large_cocoon = 1
 								fed++
 								max_eggs++
+								left_to_feed += rand(2, 4)
 								src.visible_message("<span class='warning'>\The [src] sticks a proboscis into \the [cocoon_target] and sucks a viscous substance out.</span>")
 								M.forceMove(C)
 								C.pixel_x = M.pixel_x

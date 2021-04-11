@@ -98,7 +98,7 @@
 	. = ..()
 
 /obj/effect/spider/eggcluster/Process()
-	if(prob(80))
+	if(prob(70))
 		amount_grown += rand(0,2)
 	if(amount_grown >= 100)
 		var/num = rand(3,9)
