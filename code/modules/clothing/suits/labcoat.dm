@@ -128,6 +128,13 @@
 	icon_open = "labcoat_morpheus_open"
 	icon_closed = "labcoat_morpheus"
 
+/obj/item/clothing/suit/storage/toggle/labcoat/science/xynergy
+	name = "\improper Xynergy labcoat"
+	desc = "A suit that protects against minor chemical spills. It is coloured magenta and cyan, as well as sporting the Xynergy logo, denoting it as a Xynergy labcoat."
+	icon_state = "labcoat_xynergy_open"
+	icon_open = "labcoat_xynergy_open"
+	icon_closed = "labcoat_xynergy"
+
 /obj/item/clothing/suit/storage/toggle/labcoat/science/dais
 	name = "\improper DAIS labcoat"
 	desc = "A labcoat with a the logo of Deimos Advanced Information Systems emblazoned on the back. It has a stylish blue \
