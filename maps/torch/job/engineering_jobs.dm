@@ -195,6 +195,8 @@
 	                    SKILL_DEVICES		= SKILL_ADEPT,
 	                    SKILL_EVA           = SKILL_ADEPT,
 	                    SKILL_ANATOMY       = SKILL_ADEPT,
+						SKILL_CONSTRUCTION  = SKILL_BASIC,
+						SKILL_ELECTRICAL    = SKILL_BASIC,
 	                    SKILL_MECH          = HAS_PERK)
 
 	max_skill = list(   SKILL_CONSTRUCTION = SKILL_MAX,
