@@ -114,6 +114,8 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 			H.bloody_body(target,0)
 	if(shock_level)
 		target.shock_stage = max(target.shock_stage, shock_level)
+	if (target.stat == UNCONSCIOUS && prob(20))
+		to_chat(target, SPAN_NOTICE(SPAN_BOLD("... [pick("bright light", "faraway pain", "something moving in you", "soft beeping")] ...")))
 	return
 
 // does stuff to end the step, which is normally print a message + do whatever this step changes

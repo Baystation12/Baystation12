@@ -91,6 +91,8 @@
 
 	suppressing = !suppressing
 	user.visible_message("<span class='notice'>\The [user] switches [suppressing ? "on" : "off"] \the [src]'s neural suppressor.</span>")
+	if (victim.stat == UNCONSCIOUS)
+		to_chat(victim, SPAN_NOTICE(SPAN_BOLD("... [pick("good feeling", "white light", "pain fades away", "safe now")] ...")))
 	return TRUE
 
 /obj/machinery/optable/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)

@@ -44,7 +44,10 @@
 	return ((H && H.isSynthetic()) ? "gives one shrill beep before falling lifeless." : death_message)
 
 /datum/species/proc/get_ssd(var/mob/living/carbon/human/H)
-	return ((H && H.isSynthetic()) ? "flashing a 'system offline' glyph on their monitor" : show_ssd)
+	if (H.key)
+		return ((H && H.isSynthetic()) ? "flashing a 'system offline' glyph on their monitor" : show_ssd)
+	else
+		return ((H && H.isSynthetic()) ? "displaying a blue screen on their monitor indicating total system failure" : show_coma)
 
 /datum/species/proc/get_blood_colour(var/mob/living/carbon/human/H)
 	return ((H && H.isSynthetic()) ? SYNTH_BLOOD_COLOUR : blood_color)

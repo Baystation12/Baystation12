@@ -252,6 +252,8 @@
 		var/has_cryo_medicine = occupant.reagents.has_any_reagent(list(/datum/reagent/cryoxadone, /datum/reagent/clonexadone, /datum/reagent/nanitefluid)) >= REM
 		if(beaker && !has_cryo_medicine)
 			beaker.reagents.trans_to_mob(occupant, REM, CHEM_BLOOD)
+		if (prob(2))
+			to_chat(occupant, SPAN_NOTICE(SPAN_BOLD("... [pick("floating", "cold")] ...")))
 
 /obj/machinery/atmospherics/unary/cryo_cell/proc/heat_gas_contents()
 	if(air_contents.total_moles < 1)
