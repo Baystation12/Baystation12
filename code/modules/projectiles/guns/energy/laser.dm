@@ -15,10 +15,18 @@
 	wielded_item_state = "laser-wielded"
 
 /obj/item/gun/energy/laser/mounted
+	name = "mounted laser carbine"
 	self_recharge = 1
 	use_external_power = 1
 	one_hand_penalty = 0 //just in case
 	has_safety = FALSE
+
+/obj/item/gun/energy/laser/mounted/burst
+	name = "mounted burst laser carbine"
+	burst = 3
+	burst_delay = 2
+	fire_delay = 3
+	max_shots = 15
 
 /obj/item/gun/energy/laser/practice
 	name = "practice laser carbine"

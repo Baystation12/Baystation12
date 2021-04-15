@@ -314,7 +314,7 @@
 		changed_name = custom_name
 		notify_ai(ROBOT_NOTIFICATION_NEW_NAME, real_name, changed_name)
 	else
-		changed_name = "[modtype] [braintype]-[num2text(ident)]"
+		changed_name = generate_default_name()
 
 	create_or_rename_email(changed_name, "root.rt")
 	real_name = changed_name
@@ -336,6 +336,9 @@
 			flavor_text = module_flavour
 		else
 			flavor_text = client.prefs.flavour_texts_robot["Default"]
+
+/mob/living/silicon/robot/proc/generate_default_name()
+	return "[modtype] [braintype]-[num2text(ident)]"
 
 /mob/living/silicon/robot/verb/Namepick()
 	set category = "Silicon Commands"

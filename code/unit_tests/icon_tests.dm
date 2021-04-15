@@ -6,7 +6,11 @@
 	name = "ICON STATE - Robot shall have eyes for each icon state"
 	var/list/excepted_icon_states_ = list(
 		"droid-combat-roll",
-		"droid-combat-shield"
+		"droid-combat-shield",
+		"droid-combat-sabr-roll",
+		"droid-combat-sabr-shield",
+		"droid-combat-sabr-command-roll",
+		"droid-combat-sabr-command-shield"
 	)
 
 /datum/unit_test/icon_test/robots_shall_have_eyes_for_each_state/start_test()

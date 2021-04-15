@@ -26,6 +26,25 @@
 	idcard = /obj/item/card/id/centcom/ERT
 	silicon_radio = /obj/item/device/radio/borg/ert
 
+/mob/living/silicon/robot/combat/sabr
+	desc = "A hardened military combat robot. This one has SCG Fifth Fleet insignia and serial numbers stamped on its chassis."
+	modtype = "S.A.B.R."
+	module = /obj/item/robot_module/security/combat/sabr
+	laws = /datum/ai_laws/solgov_aggressive
+	idcard = /obj/item/card/id/centcom/ERT
+	silicon_radio = null // Channels are covered in the module
+	braintype = "Robot"
+
+/mob/living/silicon/robot/combat/sabr/command
+	desc = "A hardened military combat robot. This one has SCG Fifth Fleet insignia and serial numbers stamped on its chassis, as well as golden markings."
+	module = /obj/item/robot_module/security/combat/sabr/command
+
+/mob/living/silicon/robot/combat/sabr/generate_default_name()
+	return "[modtype] [rand(1, 9)]-[rand(2, 9)]"
+
+/mob/living/silicon/robot/combat/sabr/command/generate_default_name()
+	return "[modtype] [rand(1, 9)]-1"
+
 /mob/living/silicon/robot/flying/ascent
 	desc = "A small, sleek, dangerous-looking hover-drone."
 	speak_statement = "clicks"

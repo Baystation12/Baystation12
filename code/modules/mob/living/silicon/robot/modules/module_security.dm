@@ -84,3 +84,39 @@
 	if (istype(R))
 		R.status_flags &= ~CANWEAKEN // Pre-install the optical matrix shielding
 		R.flash_protected = TRUE
+
+/obj/item/robot_module/security/combat/sabr
+	name = "S.A.B.R. module"
+	display_name = "S.A.B.R."
+	channels = list(
+		"Common" = TRUE,
+		"Hailing" = TRUE,
+		"Science" = TRUE,
+		"Command" = TRUE,
+		"Medical" = TRUE,
+		"Engineering" = TRUE,
+		"Security" = TRUE,
+		"Response Team" = TRUE,
+		"Exploration" = TRUE,
+		"Supply" = TRUE,
+		"Service" = TRUE
+	)
+	sprites = list(
+		"S.A.B.R." = "droid-combat-sabr"
+	)
+	equipment = list(
+		/obj/item/device/flash,
+		/obj/item/borg/sight/thermal,
+		/obj/item/gun/energy/gun/mounted/carbine,
+		/obj/item/gun/energy/laser/mounted/burst,
+		/obj/item/borg/combat/shield,
+		/obj/item/borg/combat/mobility,
+		/obj/item/crowbar
+	)
+
+/obj/item/robot_module/security/combat/sabr/command
+	name = "S.A.B.R. command module"
+	display_name = "S.A.B.R. Commander"
+	sprites = list(
+		"S.A.B.R. Commander" = "droid-combat-sabr-command"
+	)

@@ -61,6 +61,11 @@
 	use_external_power = 1
 	has_safety = FALSE
 
+/obj/item/gun/energy/gun/mounted/carbine
+	name = "mounted energy carbine"
+	max_shots = 15
+	fire_delay = 3
+
 /obj/item/gun/energy/gun/nuclear
 	name = "advanced energy gun"
 	desc = "An energy gun with an experimental miniaturized reactor."
