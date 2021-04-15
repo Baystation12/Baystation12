@@ -9727,6 +9727,13 @@
 /obj/item/beach_ball,
 /turf/simulated/floor/grass,
 /area/crew_quarters/observation)
+"vz" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
+/turf/simulated/floor/tiled/techfloor,
+/area/thruster/d3starboard)
 "vD" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable/green{
@@ -11846,12 +11853,10 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3starboard)
 "BZ" = (
-/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
-	dir = 4
-	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
 	},
+/obj/machinery/atmospherics/pipe/simple/visible/fuel,
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
 "Cb" = (
@@ -15527,6 +15532,9 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 6
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3starboard)
 "KV" = (
@@ -15578,6 +15586,9 @@
 	},
 /obj/machinery/light/small{
 	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 5
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
@@ -16025,12 +16036,13 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/foreport)
 "Mg" = (
-/obj/machinery/atmospherics/pipe/simple/visible/fuel{
-	dir = 5
-	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
 	},
+/obj/machinery/atmospherics/valve/digital{
+	id_tag = "fuelmode"
+	},
+/obj/effect/floor_decal/industrial/outline/red,
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3port)
 "Mh" = (
@@ -16269,8 +16281,7 @@
 "MW" = (
 /obj/machinery/atmospherics/binary/passive_gate/on{
 	dir = 1;
-	regulate_mode = 1;
-	target_pressure = 35000;
+	target_pressure = 2000;
 	use_power = 1
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -16802,12 +16813,13 @@
 /turf/simulated/floor/carpet/purple,
 /area/chapel/office)
 "OH" = (
-/obj/machinery/atmospherics/pipe/simple/visible/fuel{
-	dir = 6
-	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
 	},
+/obj/machinery/atmospherics/valve/digital{
+	id_tag = "fuelmode"
+	},
+/obj/effect/floor_decal/industrial/outline/red,
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3starboard)
 "OI" = (
@@ -17351,12 +17363,10 @@
 /turf/simulated/wall/r_wall/hull,
 /area/command/disperser)
 "Qr" = (
-/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
-	dir = 4
-	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
 	},
+/obj/machinery/atmospherics/pipe/simple/visible/fuel,
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3starboard)
 "Qs" = (
@@ -20360,9 +20370,7 @@
 /area/hallway/primary/thirddeck/aft)
 "YT" = (
 /obj/machinery/atmospherics/binary/passive_gate/on{
-	dir = 2;
-	regulate_mode = 1;
-	target_pressure = 35000;
+	target_pressure = 2000;
 	use_power = 1
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -49748,7 +49756,7 @@ ee
 lk
 Wo
 Jp
-iA
+vz
 Qr
 iA
 Jy
@@ -49782,7 +49790,7 @@ pI
 Kg
 Kh
 BZ
-Kh
+Pq
 Pq
 Xt
 Kz

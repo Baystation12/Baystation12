@@ -8001,6 +8001,11 @@
 	pixel_x = 8;
 	pixel_y = -24
 	},
+/obj/item/paper{
+	desc = "";
+	info = "To turn on burn mode, toggle the fuel mode then wait 15 seconds and press the ignition switch. If indicator light turns red, press the corresponding vent button. When disabling burn mode, vent all chambers to prevent a blowout.";
+	name = "Burn mode instructions"
+	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/engineering/engineering_monitoring)
 "rA" = (
