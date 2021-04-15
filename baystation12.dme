@@ -318,6 +318,7 @@
 #include "code\datums\item_modifiers\space_suits.dm"
 #include "code\datums\item_modifiers\~defines.dm"
 #include "code\datums\licences\license.dm"
+#include "code\datums\mind\language.dm"
 #include "code\datums\mind\memory.dm"
 #include "code\datums\mind\mind.dm"
 #include "code\datums\move_intent\move_intent.dm"

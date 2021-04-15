@@ -25,7 +25,7 @@
 	brainmob.timeofhostdeath = H.timeofdeath
 	brainmob.set_stat(CONSCIOUS)
 	if(H.mind)
-		H.mind.transfer_to(brainmob)
+		H.mind.transfer_to(brainmob, TRUE)
 	return
 
 /obj/item/device/mmi

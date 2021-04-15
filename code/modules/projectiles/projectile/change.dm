@@ -86,7 +86,7 @@
 
 			new_mob.a_intent = "hurt"
 			if(M.mind)
-				M.mind.transfer_to(new_mob)
+				M.mind.transfer_to(new_mob, TRUE)
 			else
 				new_mob.key = M.key
 

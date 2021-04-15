@@ -71,7 +71,7 @@
 	SSticker.minds -= src
 	. = ..()
 
-/datum/mind/proc/transfer_to(mob/living/new_character)
+/datum/mind/proc/transfer_to(mob/living/new_character, transfer_languages)
 	if(!istype(new_character))
 		to_world_log("## DEBUG: transfer_to(): Some idiot has tried to transfer_to() a non mob/living mob. Please inform Carn.")
 	if(current)					//remove ourself from our old body's mind variable
@@ -88,6 +88,11 @@
 
 	current = new_character		//link ourself to our new body
 	new_character.mind = src	//and link our new body to ourself
+
+	if (transfer_languages)
+		apply_languages_to_mob()
+	else
+		apply_languages_from_mob()
 
 	if(learned_spells && learned_spells.len)
 		restore_spells(new_character)
@@ -542,6 +547,7 @@
 	mind.current = src
 	if(player_is_antag(mind))
 		src.client.verbs += /client/proc/aooc
+	mind.apply_languages_from_mob()
 
 //HUMAN
 /mob/living/carbon/human/mind_initialize()

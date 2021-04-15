@@ -935,7 +935,7 @@
 			if(H.brainmob)
 				if(H.brainmob.real_name == src.real_name)
 					if(H.brainmob.mind)
-						H.brainmob.mind.transfer_to(src)
+						H.brainmob.mind.transfer_to(src, TRUE)
 						qdel(H)
 
 	losebreath = 0
@@ -1257,6 +1257,8 @@
 	if(update_lang)
 		languages.Cut()
 		default_language = null
+		if (mind)
+			mind.clear_languages()
 		update_languages()
 
 	//recheck species-restricted clothing
@@ -1304,6 +1306,8 @@
 
 	if(LAZYLEN(default_languages) && isnull(default_language))
 		default_language = default_languages[1]
+		if (mind)
+			mind.set_default_language(default_language)
 
 /mob/living/carbon/human/proc/bloody_doodle()
 	set category = "IC"

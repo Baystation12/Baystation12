@@ -105,8 +105,10 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 	H.set_see_in_dark(8)
 	H.set_see_invisible(SEE_INVISIBLE_LEVEL_TWO)
 
-	H.languages = list()
+	H.languages.Cut()
 	H.add_language(LANGUAGE_ZOMBIE)
+	if (H.mind)
+		H.mind.apply_languages_from_mob()
 
 	H.sleeping = 0
 	H.resting = 0

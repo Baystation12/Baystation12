@@ -244,7 +244,7 @@
 	else if (effective_dose > 10)
 		M.vomit(4, 2, rand(3 SECONDS, 10 SECONDS))
 	else
-		M.vomit(1, 1, rand(5 SECONDS, 15 SECONDS))	
+		M.vomit(1, 1, rand(5 SECONDS, 15 SECONDS))
 
 /datum/species/skrell/get_sex(var/mob/living/carbon/human/H)
 	return istype(H) && (H.descriptors["headtail length"] == 1 ? MALE : FEMALE)
@@ -397,7 +397,7 @@
 		if(101 to 200)	. = 12 // age bracket before this is 46 to 100 . = 8 making this +4
 		if(201 to 300)	. = 16 // + 8
 		else			. = ..()
-		
+
 // Dionaea spawned by hand or by joining will not have any
 // nymphs passed to them. This should take care of that.
 /datum/species/diona/handle_post_spawn(var/mob/living/carbon/human/H)
@@ -424,7 +424,7 @@
 		var/mob/living/carbon/alien/diona/S = new(get_turf(H))
 
 		if(H.mind)
-			H.mind.transfer_to(S)
+			H.mind.transfer_to(S, TRUE)
 		H.visible_message("<span class='danger'>\The [H] collapses into parts, revealing a solitary diona nymph at the core.</span>")
 		return
 	else

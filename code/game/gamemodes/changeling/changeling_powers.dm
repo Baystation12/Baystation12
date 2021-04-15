@@ -139,6 +139,9 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	//This isn't strictly necessary but just to be safe...
 	add_language(LANGUAGE_CHANGELING_GLOBAL)
 
+	if (mind)
+		mind.apply_languages_from_mob()
+
 	return
 
 //Absorbs the victim's DNA making them uncloneable. Requires a strong grip on the victim.

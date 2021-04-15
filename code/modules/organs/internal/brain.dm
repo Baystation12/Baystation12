@@ -72,7 +72,7 @@
 		brainmob.timeofhostdeath = H.timeofdeath
 
 	if(H.mind)
-		H.mind.transfer_to(brainmob)
+		H.mind.transfer_to(brainmob, TRUE)
 
 	to_chat(brainmob, "<span class='notice'>You feel slightly disoriented. That's normal when you're just \a [initial(src.name)].</span>")
 	callHook("debrain", list(brainmob))
@@ -109,7 +109,7 @@
 
 	if(brainmob)
 		if(brainmob.mind)
-			brainmob.mind.transfer_to(target)
+			brainmob.mind.transfer_to(target, TRUE)
 		else
 			target.key = brainmob.key
 

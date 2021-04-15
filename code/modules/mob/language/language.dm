@@ -179,12 +179,19 @@
 		return 0
 
 	languages.Add(new_language)
+
+	if (mind)
+		mind.add_language(language)
+
 	return 1
 
 /mob/proc/remove_language(var/rem_language)
 	var/datum/language/L = all_languages[rem_language]
 	. = (L in languages)
 	languages.Remove(L)
+
+	if (mind)
+		mind.remove_language(rem_language)
 
 /mob/living/remove_language(rem_language)
 	var/datum/language/L = all_languages[rem_language]

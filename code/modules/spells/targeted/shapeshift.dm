@@ -47,7 +47,7 @@
 			for(var/obj/item/I in M.contents)
 				M.drop_from_inventory(I)
 		if(M.mind)
-			M.mind.transfer_to(trans)
+			M.mind.transfer_to(trans, TRUE)
 		else
 			trans.key = M.key
 		new /obj/effect/temporary(get_turf(M), 5, 'icons/effects/effects.dmi', "summoning")
@@ -78,7 +78,7 @@
 		for(var/i in 1 to ceil(damage/10))
 			transformer.adjustBruteLoss(10)
 	if(target.mind)
-		target.mind.transfer_to(transformer)
+		target.mind.transfer_to(transformer, TRUE)
 	else
 		transformer.key = target.key
 	playsound(get_turf(target), revert_sound, 50, 1)

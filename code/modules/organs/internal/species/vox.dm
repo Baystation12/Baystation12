@@ -141,7 +141,7 @@
 						mat_stack.set_amount(mat_stack.amount + taking_sheets)
 						sheets -= taking_sheets
 						updated_stacks = TRUE
-						
+
 				// Create new stacks if needed.
 				while(sheets > 0)
 					var/obj/item/stack/material/mat_stack = new M.stack_type(src)
@@ -251,6 +251,8 @@
 	if (default_language)
 		owner.default_language = default_language
 	owner.languages = languages.Copy()
+	if (owner.mind)
+		owner.mind.apply_languages_from_mob()
 	to_chat(owner, SPAN_NOTICE("Consciousness slowly creeps over you as your new body awakens."))
 
 /datum/species/vox/handle_death(var/mob/living/carbon/human/H)

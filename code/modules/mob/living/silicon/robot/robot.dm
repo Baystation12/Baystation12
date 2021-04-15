@@ -207,7 +207,7 @@
 		if(mind)
 			mmi.dropInto(loc)
 			if(mmi.brainmob)
-				mind.transfer_to(mmi.brainmob)
+				mind.transfer_to(mmi.brainmob, TRUE)
 			else
 				to_chat(src, "<span class='danger'>Oops! Something went very wrong, your MMI was unable to receive your mind. You have been ghosted. Please make a bug report so we can fix this bug.</span>")
 				ghostize()
