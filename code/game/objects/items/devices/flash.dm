@@ -100,11 +100,14 @@
 				SA.flash_eyes(2)
 				SA.eye_blurry += flash_strength
 				SA.confused += flash_strength
-		else 
+		else
 			flashfail = 1
 
 	else if(issilicon(M))
-		M.Weaken(rand(str_min,6))
+		if (M.status_flags & CANWEAKEN)
+			M.Weaken(rand(str_min,6))
+		else
+			flashfail = TRUE
 
 	else
 		flashfail = 1

@@ -6,7 +6,7 @@
 		NETWORK_SECURITY
 	)
 	subsystems = list(
-		/datum/nano_module/crew_monitor, 
+		/datum/nano_module/crew_monitor,
 		/datum/nano_module/program/digitalwarrant
 	)
 	can_be_pushed = FALSE
@@ -77,3 +77,10 @@
 		/obj/item/crowbar
 	)
 	emag = /obj/item/gun/energy/lasercannon/mounted
+
+/obj/item/robot_module/security/combat/Initialize()
+	. = ..()
+	var/mob/living/silicon/robot/R = loc
+	if (istype(R))
+		R.status_flags &= ~CANWEAKEN // Pre-install the optical matrix shielding
+		R.flash_protected = TRUE

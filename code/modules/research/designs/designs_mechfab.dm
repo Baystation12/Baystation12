@@ -360,6 +360,13 @@
 	materials = list(MATERIAL_STEEL = 10000, MATERIAL_GLASS = 15000, MATERIAL_DIAMOND = 10000)
 	build_path = /obj/item/borg/upgrade/syndicate
 
+/datum/design/item/robot_upgrade/flash_protection
+	name = "Optical Matrix Shielding"
+	desc = "Provides shielding for the optical matrix, rendering the robot immune to flashes."
+	id = "borg_flash_protection_module"
+	materials = list(MATERIAL_STEEL = 80000, MATERIAL_GLASS = 6000, MATERIAL_GOLD = 5000)
+	build_path = /obj/item/borg/upgrade/flash_protection
+
 /datum/design/item/exosuit
 	build_type = MECHFAB
 	category = "Exosuit Equipment"
