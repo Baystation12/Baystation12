@@ -1747,7 +1747,6 @@
 #include "code\modules\goals\definitions\department.dm"
 #include "code\modules\goals\definitions\department_clerical.dm"
 #include "code\modules\goals\definitions\department_engineering.dm"
-#include "code\modules\goals\definitions\department_medical.dm"
 #include "code\modules\goals\definitions\department_science.dm"
 #include "code\modules\goals\definitions\personal.dm"
 #include "code\modules\goals\definitions\personal_achievement.dm"
