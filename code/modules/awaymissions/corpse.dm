@@ -107,10 +107,6 @@
 	name = "Chef"
 	corpse_outfits = list(/decl/hierarchy/outfit/job/service/chef)
 
-/obj/effect/landmark/corpse/doctor
-	name = "Doctor"
-	corpse_outfits = list(/decl/hierarchy/outfit/job/medical/doctor)
-
 /obj/effect/landmark/corpse/engineer
 	name = "Engineer"
 	corpse_outfits = list(/decl/hierarchy/outfit/job/engineering/engineer)
