@@ -1,7 +1,7 @@
 // See specific map job files for valid jobs. They use types so cannot be compiled at this level.
 /decl/cultural_info/culture/nabber
 	name = CULTURE_NABBER_CMINUS
-	
+
 	description = "You have been trained to Xynergy Grade PLACEHOLDER."
 	language = LANGUAGE_NABBER
 	secondary_langs = list(
@@ -58,7 +58,7 @@
 
 /decl/cultural_info/culture/nabber/a
 	name = CULTURE_NABBER_A
-	valid_jobs = list(/datum/job/chemist, /datum/job/roboticist)
+	valid_jobs = list(/datum/job/roboticist)
 
 /decl/cultural_info/culture/nabber/a/minus
 	name = CULTURE_NABBER_AMINUS

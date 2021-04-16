@@ -32,24 +32,6 @@
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/command
 	shoes = /obj/item/clothing/shoes/dutyboots
 
-/decl/hierarchy/outfit/job/torch/crew/command/cmo
-	name = OUTFIT_JOB_NAME("Chief Medical Officer - Torch")
-	l_ear  =/obj/item/device/radio/headset/heads/cmo
-	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/medical
-	shoes = /obj/item/clothing/shoes/dutyboots
-	id_types = list(/obj/item/card/id/torch/silver/medical)
-	pda_type = /obj/item/modular_computer/pda/heads/cmo
-	pda_slot = slot_l_store
-
-/decl/hierarchy/outfit/job/torch/crew/command/cmo/New()
-	..()
-	BACKPACK_OVERRIDE_MEDICAL
-
-/decl/hierarchy/outfit/job/torch/crew/command/cmo/fleet
-	name = OUTFIT_JOB_NAME("Chief Medical Officer - Fleet")
-	uniform = /obj/item/clothing/under/solgov/utility/fleet/medical
-	shoes = /obj/item/clothing/shoes/dutyboots
-
 /decl/hierarchy/outfit/job/torch/crew/command/chief_engineer
 	name = OUTFIT_JOB_NAME("Chief Engineer - Torch")
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/engineering

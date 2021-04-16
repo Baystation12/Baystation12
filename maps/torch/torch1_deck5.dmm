@@ -794,7 +794,7 @@
 "sK" = (/obj/machinery/shipsensors/weak,/turf/simulated/floor/plating,/area/guppy_hangar/start)
 "sN" = (/obj/structure/bed/padded,/obj/item/bedsheet/medical,/turf/simulated/floor/tiled/white,/area/vacant/infirmary)
 "sP" = (/obj/structure/filingcabinet/chestdrawer,/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/white,/area/vacant/infirmary)
-"sQ" = (/obj/structure/closet/secure_closet/medical2,/obj/item/defibrillator/loaded,/turf/simulated/floor/tiled/white,/area/vacant/infirmary)
+"sQ" = (/obj/item/defibrillator/loaded,/turf/simulated/floor/tiled/white,/area/vacant/infirmary)
 "sR" = (/obj/machinery/reagentgrinder,/obj/item/reagent_containers/glass/beaker/large,/turf/simulated/floor/plating,/area/vacant/infirmary)
 "sS" = (/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/white,/area/vacant/infirmary)
 "sT" = (/obj/random_multi/single_item/skelestand/maint,/turf/simulated/floor/plating,/area/vacant/infirmary)

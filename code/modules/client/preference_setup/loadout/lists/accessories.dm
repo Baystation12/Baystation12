@@ -75,15 +75,6 @@
 	display_name = "cargo armband"
 	path = /obj/item/clothing/accessory/armband/cargo
 
-/datum/gear/accessory/armband_medical
-	display_name = "medical armband"
-	path = /obj/item/clothing/accessory/armband/med
-
-/datum/gear/accessory/armband_emt
-	display_name = "EMT armband"
-	path = /obj/item/clothing/accessory/armband/medgreen
-	allowed_roles = list(/datum/job/doctor)
-
 /datum/gear/accessory/armband_engineering
 	display_name = "engineering armband"
 	path = /obj/item/clothing/accessory/armband/engine

@@ -32,32 +32,6 @@
 	job_access_type = DEFAULT_JOB_TYPE
 	color = COLOR_GRAY80
 
-
-/obj/item/card/id/torch/silver/medical
-	job_access_type = /datum/job/cmo
-	detail_color = COLOR_PALE_BLUE_GRAY
-
-/obj/item/card/id/torch/crew/medical
-	job_access_type = /datum/job/doctor
-	detail_color = COLOR_PALE_BLUE_GRAY
-
-/obj/item/card/id/torch/crew/medical/senior
-	job_access_type = /datum/job/senior_doctor
-
-/obj/item/card/id/torch/contractor/medical
-	job_access_type = /datum/job/doctor
-	detail_color = COLOR_PALE_BLUE_GRAY
-
-/obj/item/card/id/torch/contractor/medical/senior
-	job_access_type = /datum/job/senior_doctor
-
-/obj/item/card/id/torch/contractor/chemist
-	job_access_type = /datum/job/chemist
-	detail_color = COLOR_PALE_BLUE_GRAY
-
-/obj/item/card/id/torch/contractor/medical/counselor
-	job_access_type = /datum/job/psychiatrist
-
 /obj/item/card/id/torch/silver/security
 	job_access_type = /datum/job/hos
 	detail_color = "#e00000"

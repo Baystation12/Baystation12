@@ -64,9 +64,6 @@
 /datum/gear/tactical/tacticool
 	allowed_roles = CASUAL_ROLES
 
-/datum/gear/uniform/sterile
-	allowed_roles = MEDICAL_ROLES
-
 /datum/gear/uniform/hazard
 	allowed_roles = ENGINEERING_ROLES
 
