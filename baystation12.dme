@@ -288,6 +288,7 @@
 #include "code\datums\extensions\armor\armor.dm"
 #include "code\datums\extensions\armor\armor_psionic.dm"
 #include "code\datums\extensions\armor\armor_rig.dm"
+#include "code\datums\extensions\health\health.dm"
 #include "code\datums\extensions\holster\holster.dm"
 #include "code\datums\extensions\multitool\_multitool.dm"
 #include "code\datums\extensions\multitool\multitool.dm"
