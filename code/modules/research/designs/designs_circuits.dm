@@ -40,68 +40,6 @@
 	build_path = /obj/item/stock_parts/circuitboard/prisoner
 	sort_string = "DACAA"
 
-/datum/design/circuit/operating
-	name = "patient monitoring console"
-	id = "operating"
-	build_path = /obj/item/stock_parts/circuitboard/operating
-	sort_string = "FACAA"
-
-/datum/design/circuit/optable
-	name = "operating table"
-	id = "optable"
-	req_tech = list(TECH_ENGINEERING = 1, TECH_BIO = 3, TECH_DATA = 3)
-	build_path = /obj/item/stock_parts/circuitboard/optable
-	sort_string = "FACAB"
-
-/datum/design/circuit/bodyscanner
-	name = "body scanner"
-	id = "bodyscanner"
-	req_tech = list(TECH_ENGINEERING = 2, TECH_BIO = 4, TECH_DATA = 4)
-	build_path = /obj/item/stock_parts/circuitboard/bodyscanner
-	sort_string = "FACAC"
-
-/datum/design/circuit/body_scanconsole
-	name = "body scanner console"
-	id = "bodyscannerconsole"
-	req_tech = list(TECH_ENGINEERING = 2, TECH_BIO = 4, TECH_DATA = 4)
-	build_path = /obj/item/stock_parts/circuitboard/body_scanconsole
-	sort_string = "FACAD"
-
-/datum/design/circuit/sleeper
-	name = "sleeper"
-	id = "sleeper"
-	req_tech = list(TECH_ENGINEERING = 3, TECH_BIO = 5, TECH_DATA = 3)
-	build_path = /obj/item/stock_parts/circuitboard/sleeper
-	sort_string = "FACAE"
-
-/datum/design/circuit/cryo_cell
-	name = "cryo cell"
-	id = "cryo_cell"
-	req_tech = list(TECH_ENGINEERING = 3, TECH_BIO = 5, TECH_DATA = 3)
-	build_path = /obj/item/stock_parts/circuitboard/cryo_cell
-	sort_string = "FACAF"
-
-/datum/design/circuit/crewconsole
-	name = "crew monitoring console"
-	id = "crewconsole"
-	req_tech = list(TECH_DATA = 3, TECH_MAGNET = 2, TECH_BIO = 2)
-	build_path = /obj/item/stock_parts/circuitboard/crew
-	sort_string = "FAGAI"
-
-/datum/design/circuit/body_scan_display
-	name = "body scanner display"
-	id = "bodyscannerdisplay"
-	req_tech = list(TECH_BIO = 2, TECH_DATA = 2)
-	build_path = /obj/item/stock_parts/circuitboard/body_scanconsole/display
-	sort_string = "FACAJ"
-
-/datum/design/circuit/bioprinter
-	name = "bioprinter"
-	id = "bioprinter"
-	req_tech = list(TECH_ENGINEERING = 1, TECH_BIO = 3, TECH_DATA = 3)
-	build_path = /obj/item/stock_parts/circuitboard/bioprinter
-	sort_string = "FAGAK"
-
 /datum/design/circuit/roboprinter
 	name = "prosthetic organ fabricator"
 	id = "roboprinter"
