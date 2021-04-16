@@ -1539,7 +1539,7 @@
 
 			show_browser(usr, data, "window=[B.name]")
 		else
-			to_chat(usr, "<span class='warning'>The faxed item is not viewable. This is probably a bug, and should be reported on the tracker: [fax.type]</span>")
+			to_chat(usr, "<span class='warning'>The faxed item is not viewable. This is probably a bug, and should be reported on the tracker. Fax type: [fax ? fax.type : "null"]</span>")
 	else if (href_list["AdminFaxViewPage"])
 		var/page = text2num(href_list["AdminFaxViewPage"])
 		var/obj/item/paper_bundle/bundle = locate(href_list["paper_bundle"])
