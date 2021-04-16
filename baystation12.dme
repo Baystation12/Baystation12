@@ -1827,7 +1827,6 @@
 #include "code\modules\library\lib_readme.dm"
 #include "code\modules\library\manuals\engineering.dm"
 #include "code\modules\library\manuals\manuals.dm"
-#include "code\modules\library\manuals\medical.dm"
 #include "code\modules\library\manuals\nanotrasen.dm"
 #include "code\modules\library\manuals\union.dm"
 #include "code\modules\lighting\lighting_area.dm"

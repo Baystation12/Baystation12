@@ -657,7 +657,7 @@
 
 /area/crew_quarters/heads/office/cmo
 	icon_state = "heads_cmo"
-	name = "\improper Command - CMO's Office"
+	name = "\improper Command - Gender Neutral Public Bathroom"
 	req_access = list(access_cmo)
 
 /area/crew_quarters/heads/office/ce
@@ -794,12 +794,6 @@
 	icon_state = "quartstorage"
 	sound_env = SMALL_ENCLOSED
 	req_access = list(access_cargo)
-
-/area/storage/medical
-	name = "Medical Storage"
-	icon_state = "medbay4"
-	sound_env = SMALL_ENCLOSED
-	req_access = list(access_medical)
 
 /area/storage/research
 	name = "Research Storage"
