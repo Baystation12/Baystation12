@@ -40,16 +40,6 @@
 /obj/random/memo_engineering/spawn_choices()
 	return subtypesof(/obj/item/paper/memo/engineering) + subtypesof(/obj/item/paper/memo/generic)
 
-/obj/random/memo_medical
-	name = "random medical memo"
-	desc = "This may spawn one of the Medical Memos."
-	icon = 'icons/obj/bureaucracy.dmi'
-	icon_state = "docs_generic"
-	spawn_nothing_percentage = 15
-
-/obj/random/memo_medical/spawn_choices()
-	return subtypesof(/obj/item/paper/memo/medical) + subtypesof(/obj/item/paper/memo/generic)
-
 /obj/random/memo_exploration
 	name = "random exploration memo"
 	desc = "This may spawn one of the Exploration Memos."
@@ -111,11 +101,6 @@
 	name = "Multi Point - Engineering Memos"
 	id = "Engineering Memos"
 	item_path = /obj/random/memo_engineering
-
-/obj/random_multi/single_item/memo_medical
-	name = "Multi Point - Medical Memos"
-	id = "Medical Memos"
-	item_path = /obj/random/memo_medical
 
 /obj/random_multi/single_item/memo_exploration
 	name = "Multi Point - Exploration Memos"
@@ -337,58 +322,6 @@
 /obj/item/paper/memo/engineering/ealradio
 	name = "radio damage complaint"
 	info = {"An "internal use only" report on complaints of garbled static emitting from radios during shifts with IPC crew members onboard. The report further goes onto state that when inquiring about this to IPC crew members on the radio, their radios would emit the same noises instead of getting a clear answer from them."}
-
-
-
-// medical memos
-
-/obj/item/paper/memo/medical/donuts
-	name = "medical cleanliness standards"
-	info = {"Some "confidential" reports regarding instances of infirmary staff being treated with donuts, wiping their hands on their scrubs, and failing to follow cleanliness standards."}
-
-/obj/item/paper/memo/medical/jackets
-	name = "medical mistreatments"
-	info = {"Some "confidential" reports that apparently led to the removal of the straightjacket on all Expeditionary Corps vessels. Inhumane but deemed necessary treatments were applied with the help of those."}
-
-/obj/item/paper/memo/medical/ipccpr
-	name = "\improper IPC CPR notice"
-	info = {"An "internal use only" notice, reminding IPC medical staff that their inability to breathe may inhibit mouth to mouth resuscitation, but does not interfere with the capacity to perform chest compressions when attempting CPR."}
-
-/obj/item/paper/memo/medical/chemlab
-	name = "health and safety in the laboratory reminder"
-	info = {"An "internal use only" memo sent from the Chief Medical Officer to chemistry lab staff reminding them that the chemistry lab is a volatile area and smoking is prohibited. Further, chemists should avoid leaving water near potassium-based solutions as this has been known to result in injury."}
-
-/obj/item/paper/memo/medical/scrubswithranks
-	name = "uniform guide reminder"
-	info = {"An "internal use only" notice from the Senior Enlisted Advisor about which clothes are meant to be worn with ranks and which are not. Curiously, scrubs are mentioned often."}
-
-/obj/item/paper/memo/medical/washyourdamnhands
-	name = "sanitation reminder"
-	info = {"An "internal use only" memo sent from the Chief Medical Officer to all infirmary staff reminding them to wash their hands before and after surgery. It concludes with a note stating that they should NOT have to be asking their staff to do this."}
-
-/obj/item/paper/memo/medical/greytidevirus
-	name = "power notice"
-	info = {"An "internal use only" notice sent by a member of the engineering team stating that power must sometimes be shut down due to abnormalities in the power grid and that medical doesn't need to call them asking what happened. Especially after the announcement is made. Seriously."}
-
-/obj/item/paper/memo/medical/traineebeards
-	name = "grooming standards"
-	info = {"An "internal use only" memo from the Senior Enlisted Advisor and the Chief Medical Officer reminding staff of the importance of grooming standards in the infirmary. The example of a recently-dismissed medical trainee that refused to trim his beard is used as a warning to all staff, and helpful pictures of proper hair are included."}
-
-/obj/item/paper/memo/medical/spacies
-	name = "space-adapted humans"
-	info = {"An "internal use only" formal-looking report for the ship's medical staff by a prominent off-ship medical scholar noting the differences between baseline humans and the comparatively-rare space-adapted humans. It reads like something out of a boring thousand-page textbook, and you could probably learn more by simply talking to a space-adapted human."}
-
-/obj/item/paper/memo/medical/madaboutfrat
-	name = "sub-acute ward notice"
-	info = {"An "internal use only", hastily hand-written note from a civilian doctor stating that "The sub-acute ward is for NON-CRITICAL PATIENTS and not FLIRTING, YOU BUFFOONS!" They appear to have smashed the point of their marker into the note on the exclamation point's dot, and a small tear is present."}
-
-/obj/item/paper/memo/medical/bandages
-	name = "helpful trainee reminder"
-	info = {"An "internal use only" notice from the Chief Medical Officer that seems to radiate irritation, somehow. It notes that bleeding wounds should be "BANDAGED IN THE FIELD" and to "HAVE A SECURE GRIP ON PATIENTS YOU ARE TRANSPORTING." It concludes with a warning that the next trainee found dragging a surgical dummy around by the leg will receive a "STERN" talking to."}
-
-/obj/item/paper/memo/medical/organfab
-	name = "organ recyclers"
-	info = {"An "internal use only" notice intended to be posted near the various organ fabricators in the infirmary. It details how the fabricators are complex machines that have dedicated recyclers built in, allowing reprocessing of all organic or prosthetic organs into their respective fabricator. It ends by stating that the chronic underutliziation of the recycler function is a "travesty" and pleads to "stop wasting perfectly good necrotic organs!""}
 
 
 
