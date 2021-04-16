@@ -16,9 +16,9 @@
 	name = "SEV Icarus Radiation Spawner"
 	icon = 'icons/effects/landmarks.dmi'
 	icon_state = "x2"
-	var/radiation_power = 20//20 Bq. Dangerous but survivable for 10-15 minutes if crew is too lazy to read away map description
+	var/radiation_power = 20 //Dangerous but survivable for 10-15 minutes if crew is too lazy to read away map description
 	var/datum/radiation_source/S
-	var/req_range = 20//to cover part of the ruin
+	var/req_range = 20 //to cover part of the ruin
 
 /obj/effect/icarus_irradiate/Initialize()
 	. = ..()
@@ -35,6 +35,8 @@
 	S.source_turf = get_turf(src)
 	S.update_rad_power(radiation_power)
 	SSradiation.add_source(S)
+
+	loc.set_light(0.4, 1, req_range, l_color = COLOR_LIME) //The goo doesn't last, so this is another indicator
 
 /obj/effect/icarus_irradiate/Destroy()
 	. = ..()
