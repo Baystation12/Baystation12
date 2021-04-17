@@ -56,15 +56,6 @@
 	suits += /obj/item/clothing/under/det/grey
 	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(suits)
 
-/datum/gear/uniform/scrubs
-	display_name = "standard medical scrubs"
-	path = /obj/item/clothing/under/rank/medical/scrubs
-	flags = GEAR_HAS_TYPE_SELECTION
-
-/datum/gear/uniform/scrubs/custom
-	display_name = "scrubs, colour select"
-	flags = GEAR_HAS_COLOR_SELECTION
-
 /datum/gear/uniform/dress
 	display_name = "dress selection"
 	path = /obj/item/clothing/under

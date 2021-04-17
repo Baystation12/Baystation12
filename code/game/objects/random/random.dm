@@ -849,7 +849,6 @@ obj/random/obstruction/spawn_choices()
 				/obj/item/clothing/under/casual_pants/camo = 2,
 				/obj/item/clothing/under/frontier = 2,
 				/obj/item/clothing/under/harness = 2,
-				/obj/item/clothing/under/rank/medical/paramedic = 2,
 				/obj/item/clothing/under/overalls = 2,
 				/obj/item/clothing/ears/earmuffs = 2,
 				/obj/item/clothing/under/tactical = 1)

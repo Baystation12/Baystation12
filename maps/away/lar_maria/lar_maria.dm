@@ -84,7 +84,7 @@
 
 /decl/hierarchy/outfit/corpse/zhp_guard
 	name = "Dead ZHP guard"
-	uniform = /obj/item/clothing/under/rank/virologist
+	uniform = /obj/item/clothing/under/rank/clown
 	suit = /obj/item/clothing/suit/armor/pcarrier
 	head = /obj/item/clothing/head/soft/lar_maria/zhp_cap
 	shoes = /obj/item/clothing/shoes/dutyboots
@@ -139,7 +139,7 @@
 
 /decl/hierarchy/outfit/corpse/zhp_virologist
 	name = "Dead male ZHP virologist"
-	uniform = /obj/item/clothing/under/rank/virologist
+	uniform = /obj/item/clothing/under/rank/clown
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat
 	shoes = /obj/item/clothing/shoes/white
 	gloves = /obj/item/clothing/gloves/latex/nitrile
@@ -160,7 +160,7 @@
 
 /decl/hierarchy/outfit/corpse/zhp_virologist_female
 	name = "Dead female ZHP virologist"
-	uniform = /obj/item/clothing/under/rank/virologist
+	uniform = /obj/item/clothing/under/rank/clown
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat
 	shoes = /obj/item/clothing/shoes/white
 	gloves = /obj/item/clothing/gloves/latex/nitrile

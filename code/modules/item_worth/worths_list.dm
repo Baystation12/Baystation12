@@ -463,7 +463,6 @@ var/list/worths = list(
 					/obj/item/clothing/under/rank/head_of_personnel_whimsy = 80,
 					/obj/item/clothing/under/rank/chief_engineer = 95,
 					/obj/item/clothing/under/rank/research_director = 60,
-					/obj/item/clothing/under/rank/chief_medical_officer = 65,
 					/obj/item/clothing/under/rank/warden = 5,
 					/obj/item/clothing/under/caretaker = 10,
 					/obj/item/clothing/under/bluetunic = 60,
