@@ -448,11 +448,6 @@
 	req_tech = list(TECH_COMBAT = 1)
 	build_path = /obj/item/mech_equipment/flash
 
-/datum/design/item/exosuit/sleeper
-	name = "mounted sleeper"
-	id   = "mech_sleeper"
-	build_path = /obj/item/mech_equipment/sleeper
-
 /datum/design/item/exosuit/extinguisher
 	name = "mounted extinguisher"
 	id   = "mech_extinguisher"

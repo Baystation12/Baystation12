@@ -115,8 +115,6 @@ var/list/event_last_fired = list()
 					active_with_role["Engineer"]++
 				else if(istype(R.module, /obj/item/robot_module/security))
 					active_with_role["Security"]++
-				else if(istype(R.module, /obj/item/robot_module/medical))
-					active_with_role["Medical"]++
 				else if(istype(R.module, /obj/item/robot_module/research))
 					active_with_role["Scientist"]++
 

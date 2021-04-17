@@ -1,19 +1,9 @@
 #define OUTFIT_JOB_NAME(job_name) ("Job - " + job_name)
 
-#define BACKPACK_OVERRIDE_CHEMISTRY \
-backpack_overrides[/decl/backpack_outfit/backpack]      = /obj/item/storage/backpack/chemistry; \
-backpack_overrides[/decl/backpack_outfit/satchel]       = /obj/item/storage/backpack/satchel/chem; \
-backpack_overrides[/decl/backpack_outfit/messenger_bag] = /obj/item/storage/backpack/messenger/chem;
-
 #define BACKPACK_OVERRIDE_ENGINEERING \
 backpack_overrides[/decl/backpack_outfit/backpack]      = /obj/item/storage/backpack/industrial; \
 backpack_overrides[/decl/backpack_outfit/satchel]       = /obj/item/storage/backpack/satchel/eng; \
 backpack_overrides[/decl/backpack_outfit/messenger_bag] = /obj/item/storage/backpack/messenger/engi;
-
-#define BACKPACK_OVERRIDE_MEDICAL \
-backpack_overrides[/decl/backpack_outfit/backpack]      = /obj/item/storage/backpack/medic; \
-backpack_overrides[/decl/backpack_outfit/satchel]       = /obj/item/storage/backpack/satchel/med; \
-backpack_overrides[/decl/backpack_outfit/messenger_bag] = /obj/item/storage/backpack/messenger/med;
 
 #define BACKPACK_OVERRIDE_RESEARCH \
 backpack_overrides[/decl/backpack_outfit/backpack]      = /obj/item/storage/backpack/toxins; \
