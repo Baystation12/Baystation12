@@ -93,12 +93,6 @@
 	desc = "Senior Engineer"
 	region = ACCESS_REGION_ENGINEERING
 
-/var/const/access_senmed = "ACCESS_TORCH_SENIOR_MED" //91
-/datum/access/senmed
-	id = access_senmed
-	desc = "Physician"
-	region = ACCESS_REGION_MEDBAY
-
 /var/const/access_senadv = "ACCESS_TORCH_SENIOR_ADVISOR" //92
 /datum/access/senadv
 	id = access_senadv
@@ -128,9 +122,6 @@
 	id = access_commissary
 	desc = "Commissary"
 	region = ACCESS_REGION_GENERAL
-
-/datum/access/psychiatrist
-	desc = "Mental Health"
 
 /datum/access/hos
 	desc = "Chief of Security"
@@ -229,12 +220,6 @@
 	id = access_radio_eng
 	desc = "Engineering Radio"
 	region = ACCESS_REGION_ENGINEERING
-
-/var/const/access_radio_med = "ACCESS_RADIO_MED"
-/datum/access/access_radio_med
-	id = access_radio_med
-	desc = "Medical Radio"
-	region = ACCESS_REGION_MEDBAY
 
 /var/const/access_radio_sec = "ACCESS_RADIO_SEC"
 /datum/access/access_radio_sec

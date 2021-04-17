@@ -874,13 +874,6 @@
 	listening = 1
 	name = "phone"
 
-/obj/item/device/radio/phone/medbay
-	frequency = MED_I_FREQ
-
-/obj/item/device/radio/phone/medbay/New()
-	..()
-	internal_channels = GLOB.default_medbay_channels.Copy()
-
 /obj/item/device/radio/CouldUseTopic(var/mob/user)
 	..()
 	if(istype(user, /mob/living/carbon))

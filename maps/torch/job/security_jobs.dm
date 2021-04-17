@@ -85,7 +85,7 @@
 	access = list(
 		access_security, access_brig, access_forensics_lockers,
 		access_maint_tunnels, access_emergency_storage,
-		access_sec_doors, access_solgov_crew, access_morgue,
+		access_sec_doors, access_solgov_crew,
 		access_torch_fax, access_radio_sec
 	)
 

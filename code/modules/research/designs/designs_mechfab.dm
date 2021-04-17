@@ -543,13 +543,6 @@
 	materials = list(DEFAULT_WALL_MATERIAL = 10000, "glass" = 750)
 	id = "augment_armor"
 
-/datum/design/item/mechfab/augment/hud/health
-	name = "Implantable health HUD"
-	build_path = /obj/item/organ/internal/augment/active/hud/health
-	materials = list(DEFAULT_WALL_MATERIAL = 250, "glass" = 250)
-	req_tech = list(TECH_BIO = 2, TECH_MAGNET = 3)
-	id = "augment_med_hud"
-
 /datum/design/item/mechfab/augment/hud/security
 	name = "Implantable security HUD"
 	build_path = /obj/item/organ/internal/augment/active/hud/security

@@ -75,10 +75,6 @@
 	broadcasting = 0
 	listening = 1
 
-/obj/item/device/radio/intercom/department/medbay
-	name = "intercom (Medbay)"
-	frequency = MED_I_FREQ
-
 /obj/item/device/radio/intercom/department/security
 	name = "intercom (Security)"
 	frequency = SEC_I_FREQ
@@ -92,10 +88,6 @@
 	. = ..()
 	START_PROCESSING(SSobj, src)
 	update_icon()
-
-/obj/item/device/radio/intercom/department/medbay/Initialize()
-	. = ..()
-	internal_channels = GLOB.default_medbay_channels.Copy()
 
 /obj/item/device/radio/intercom/department/security/Initialize()
 	. = ..()

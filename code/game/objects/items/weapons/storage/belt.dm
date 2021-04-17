@@ -156,47 +156,6 @@
 	new /obj/item/device/t_scanner(src)
 	update_icon()
 
-
-
-/obj/item/storage/belt/medical
-	name = "medical belt"
-	desc = "Can hold various medical equipment."
-	icon_state = "medicalbelt"
-	item_state = "medical"
-	can_hold = list(
-		/obj/item/device/scanner/health,
-		/obj/item/reagent_containers/dropper,
-		/obj/item/reagent_containers/glass/beaker,
-		/obj/item/reagent_containers/glass/bottle,
-		/obj/item/reagent_containers/pill,
-		/obj/item/reagent_containers/syringe,
-		/obj/item/flame/lighter/zippo,
-		/obj/item/storage/fancy/cigarettes,
-		/obj/item/storage/pill_bottle,
-		/obj/item/stack/medical,
-		/obj/item/device/flashlight/pen,
-		/obj/item/clothing/mask/surgical,
-		/obj/item/clothing/head/surgery,
-		/obj/item/clothing/gloves/latex,
-		/obj/item/reagent_containers/hypospray,
-		/obj/item/clothing/glasses/hud/health,
-		/obj/item/crowbar,
-		/obj/item/device/flashlight,
-		/obj/item/taperoll,
-		/obj/item/extinguisher/mini,
-		/obj/item/storage/med_pouch,
-		/obj/item/bodybag,
-		/obj/item/clothing/gloves,
-		/obj/item/clothing/head/beret,
-		/obj/item/material/knife/folding/
-		)
-
-/obj/item/storage/belt/medical/emt
-	name = "EMT belt"
-	desc = "A sturdy black webbing belt with attached pouches."
-	icon_state = "emsbelt"
-	item_state = "emsbelt"
-
 /obj/item/storage/belt/holster/security
 	name = "security holster belt"
 	desc = "Can hold security gear like handcuffs and flashes. This one has a convenient holster."

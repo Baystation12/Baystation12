@@ -57,24 +57,6 @@
 	path = /obj/item/clothing/glasses/eyepatch/hud/security
 	cost = 2
 
-/datum/gear/eyes/medical
-	display_name = "Medical HUD"
-	path = /obj/item/clothing/glasses/hud/health
-
-/datum/gear/eyes/medical/prescription
-	display_name = "Medical HUD, prescription"
-	path = /obj/item/clothing/glasses/hud/health/prescription
-
-/datum/gear/eyes/medical/visor
-	display_name = "Medical HUD, Visor"
-	path = /obj/item/clothing/glasses/hud/health/visor
-	cost = 2
-
-/datum/gear/eyes/medical/ipatch
-	display_name = "HUDpatch, Medical"
-	path = /obj/item/clothing/glasses/eyepatch/hud/medical
-	cost = 2
-
 /datum/gear/eyes/meson
 	display_name = "Meson Goggles"
 	path = /obj/item/clothing/glasses/meson
@@ -87,11 +69,6 @@
 /datum/gear/eyes/welding
 	display_name = "Welding Goggles"
 	path = /obj/item/clothing/glasses/welding
-
-/datum/gear/eyes/meson/ipatch
-	display_name = "HUDpatch, Meson"
-	path = /obj/item/clothing/glasses/eyepatch/hud/meson
-	cost = 2
 
 /datum/gear/eyes/material
 	display_name = "Material Goggles"

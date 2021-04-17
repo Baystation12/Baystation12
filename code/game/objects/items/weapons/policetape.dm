@@ -120,20 +120,6 @@ var/list/tape_roll_applications = list()
 	req_access = list(access_research)
 	color = COLOR_WHITE
 
-/obj/item/taperoll/medical
-	name = "medical tape"
-	desc = "A roll of medical tape used to block off working areas from the public."
-	tape_type = /obj/item/tape/medical
-	color = COLOR_PALE_BLUE_GRAY
-
-/obj/item/tape/medical
-	name = "medical tape"
-	desc = "A length of medical tape. Better not cross it."
-	req_access = list(access_medical)
-	icon_base = "stripetape"
-	detail_overlay = "stripes"
-	detail_color = COLOR_PALE_BLUE_GRAY
-
 /obj/item/taperoll/bureaucracy
 	name = "red tape"
 	desc = "A roll of bureaucratic red tape used to block any meaningful work from being done."

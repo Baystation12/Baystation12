@@ -63,16 +63,6 @@
 	name = T_BOARD("R&D server control console")
 	build_path = /obj/machinery/computer/rdservercontrol
 
-/obj/item/stock_parts/circuitboard/crew
-	name = T_BOARD("crew monitoring console")
-	build_path = /obj/machinery/computer/crew
-	origin_tech = list(TECH_DATA = 3, TECH_BIO = 2, TECH_MAGNET = 2)
-
-/obj/item/stock_parts/circuitboard/operating
-	name = T_BOARD("patient monitoring console")
-	build_path = /obj/machinery/computer/operating
-	origin_tech = list(TECH_DATA = 2, TECH_BIO = 2)
-
 /obj/item/stock_parts/circuitboard/helm
 	name = T_BOARD("helm control console")
 	build_path = /obj/machinery/computer/ship/helm

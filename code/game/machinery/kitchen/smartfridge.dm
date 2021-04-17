@@ -70,27 +70,6 @@
 		return 1
 	return 0
 
-/obj/machinery/smartfridge/secure/medbay
-	name = "\improper Refrigerated Medicine Storage"
-	desc = "A refrigerated storage unit for storing medicine and chemicals."
-	icon_contents = "chem"
-	req_access = list(list(access_medical,access_chemistry))
-
-/obj/machinery/smartfridge/secure/medbay/accept_check(var/obj/item/O as obj)
-	if(istype(O,/obj/item/reagent_containers/glass/))
-		return 1
-	if(istype(O,/obj/item/storage/pill_bottle/))
-		return 1
-	if(istype(O,/obj/item/reagent_containers/pill/))
-		return 1
-	return 0
-
-/obj/machinery/smartfridge/secure/virology
-	name = "\improper Refrigerated Virus Storage"
-	desc = "A refrigerated storage unit for storing viral material."
-	req_access = list(access_virology)
-	icon_contents = "chem"
-
 /obj/machinery/smartfridge/secure/virology/accept_check(var/obj/item/O as obj)
 	if(istype(O,/obj/item/reagent_containers/glass/beaker/vial/))
 		return 1
@@ -105,11 +84,6 @@
 	if(istype(O,/obj/item/storage/pill_bottle) || istype(O,/obj/item/reagent_containers))
 		return 1
 	return 0
-
-/obj/machinery/smartfridge/chemistry/virology
-	name = "\improper Smart Virus Storage"
-	desc = "A refrigerated storage unit for volatile sample storage."
-
 
 /obj/machinery/smartfridge/drinks
 	name = "\improper Drink Showcase"

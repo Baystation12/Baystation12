@@ -13,11 +13,7 @@
 		return
 
 	if (active)
-		if (hud_type == HUD_MEDICAL)
-			req_access = list(access_medical)
-			if (allowed(owner))
-				process_med_hud(owner, 1)
-		else if (hud_type == HUD_SECURITY)
+		if (hud_type == HUD_SECURITY)
 			req_access = list(access_security)
 			if (allowed(owner))
 				process_sec_hud(owner, 1)
@@ -37,12 +33,6 @@
 		return
 	active = !active
 	to_chat(owner, SPAN_NOTICE("You [active ? "enable" : "disable"] \the [src]."))
-
-/obj/item/organ/internal/augment/active/hud/health
-	name = "integrated health HUD"
-	desc = "The Vey-Med H-27 is an implantable HUD, designed to interface directly with the user's optic nerve and display information about patient vitals."
-	icon_state = "eye_medical"
-	hud_type = HUD_MEDICAL
 
 /obj/item/organ/internal/augment/active/hud/security
 	name = "integrated security HUD"

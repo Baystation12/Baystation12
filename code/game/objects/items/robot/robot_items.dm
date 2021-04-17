@@ -44,18 +44,6 @@
 	name = "hud"
 	var/obj/item/clothing/glasses/hud/hud = null
 
-
-/obj/item/borg/sight/hud/med
-	name = "medical hud"
-	icon_state = "healthhud"
-	icon = 'icons/obj/clothing/obj_eyes.dmi'
-	hud_type = HUD_MEDICAL
-
-/obj/item/borg/sight/hud/med/Initialize()
-	. = ..()
-	hud = new /obj/item/clothing/glasses/hud/health(src)
-
-
 /obj/item/borg/sight/hud/sec
 	name = "security hud"
 	icon_state = "securityhud"

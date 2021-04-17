@@ -8,13 +8,6 @@
 /datum/design/item/hud/AssembleDesignDesc()
 	desc = "Allows for the construction of \a [item_name] HUD glasses."
 
-/datum/design/item/hud/health
-	name = "health scanner"
-	id = "health_hud"
-	req_tech = list(TECH_BIO = 2, TECH_MAGNET = 3)
-	build_path = /obj/item/clothing/glasses/hud/health
-	sort_string = "GAAAA"
-
 /datum/design/item/hud/security
 	name = "security records"
 	id = "security_hud"

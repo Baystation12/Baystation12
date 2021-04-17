@@ -6,4 +6,3 @@
 	density = FALSE
 	wall_mounted = TRUE
 	storage_types = CLOSET_STORAGE_ITEMS
-	req_access = list(access_medical_equip)

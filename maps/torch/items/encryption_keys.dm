@@ -1,7 +1,7 @@
 /obj/item/device/encryptionkey/heads/torchexec
 	name = "executive encryption key"
 	icon_state = "cap_cypherkey"
-	channels = list("Command" = 1, "Security" = 1, "Engineering" = 1, "Science" = 1, "Medical" = 1, "Supply" = 1, "Service" = 1, "Exploration" = 1, "Hailing" = 1)
+	channels = list("Command" = 1, "Security" = 1, "Engineering" = 1, "Science" = 1, "Supply" = 1, "Service" = 1, "Exploration" = 1, "Hailing" = 1)
 
 /obj/item/device/encryptionkey/headset_torchnt
 	name = "corporate radio encryption key"
@@ -37,7 +37,7 @@
 	name = "ai integrated encryption key"
 	desc = "Integrated encryption key."
 	icon_state = "cap_cypherkey"
-	channels = list("Command" = 1, "Security" = 1, "Engineering" = 1, "Science" = 1, "Medical" = 1, "Supply" = 1, "Service" = 1, "Exploration" = 1, "AI Private" = 1, "Hailing" = 1)
+	channels = list("Command" = 1, "Security" = 1, "Engineering" = 1, "Science" = 1, "Supply" = 1, "Service" = 1, "Exploration" = 1, "AI Private" = 1, "Hailing" = 1)
 
 /obj/item/device/encryptionkey/exploration
 	name = "exploration radio encryption key"
@@ -67,8 +67,7 @@
 /obj/item/storage/box/radiokeys
 	name = "box of radio encryption keys"
 	desc = "A box full of assorted encryption keys."
-	startswith = list(/obj/item/device/encryptionkey/headset_sec = 3,
-					  /obj/item/device/encryptionkey/headset_med = 3,
+	startswith = list(/obj/item/device/encryptionkey/headset_sec = 3,,
 					  /obj/item/device/encryptionkey/headset_cargo = 3,
 					  /obj/item/device/encryptionkey/headset_sci = 3)
 
@@ -79,4 +78,4 @@
 /obj/item/device/encryptionkey/heads/sea
 	name = "senior enlisted advisor's encryption key"
 	icon_state = "com_cypherkey"
-	channels = list("Command" = 1, "Security" = 1, "Engineering" = 1, "Medical" = 1, "Supply" = 1, "Service" = 1, "Exploration" = 1, "Hailing" = 1)
+	channels = list("Command" = 1, "Security" = 1, "Engineering" = 1, "Supply" = 1, "Service" = 1, "Exploration" = 1, "Hailing" = 1)

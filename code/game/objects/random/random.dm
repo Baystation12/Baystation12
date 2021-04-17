@@ -722,8 +722,6 @@ obj/random/obstruction/spawn_choices()
 				/obj/item/storage/wallet = 1,
 				/obj/item/storage/ore = 2,
 				/obj/item/storage/belt/utility/full = 2,
-				/obj/item/storage/belt/medical/emt = 2,
-				/obj/item/storage/belt/medical = 2,
 				/obj/item/storage/belt/holster/security = 2,
 				/obj/item/storage/belt/holster/security/tactical = 1)
 
@@ -789,8 +787,6 @@ obj/random/obstruction/spawn_choices()
 				/obj/item/clothing/glasses/science = 6,
 				/obj/item/clothing/glasses/material = 5,
 				/obj/item/clothing/glasses/welding = 3,
-				/obj/item/clothing/glasses/hud/health = 4,
-				/obj/item/clothing/glasses/hud/health/prescription = 3,
 				/obj/item/clothing/glasses/hud/security = 4,
 				/obj/item/clothing/glasses/hud/security/prescription = 3,
 				/obj/item/clothing/glasses/sunglasses/sechud = 2,

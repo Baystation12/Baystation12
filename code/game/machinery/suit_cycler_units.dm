@@ -43,16 +43,6 @@
 /obj/machinery/suit_cycler/security/alt
 	available_modifications = list(/decl/item_modifier/space_suit/security/alt)
 
-/obj/machinery/suit_cycler/medical
-	name = "Medical suit cycler"
-	model_text = "Medical"
-	req_access = list(access_medical)
-	available_modifications = list(/decl/item_modifier/space_suit/medical)
-	species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
-
-/obj/machinery/suit_cycler/medical/alt
-	available_modifications = list(/decl/item_modifier/space_suit/medical/alt)
-
 /obj/machinery/suit_cycler/syndicate
 	name = "Nonstandard suit cycler"
 	model_text = "Nonstandard"

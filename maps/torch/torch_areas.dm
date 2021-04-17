@@ -658,7 +658,6 @@
 /area/crew_quarters/heads/office/cmo
 	icon_state = "heads_cmo"
 	name = "\improper Command - Gender Neutral Public Bathroom"
-	req_access = list(access_cmo)
 
 /area/crew_quarters/heads/office/ce
 	icon_state = "heads_ce"
@@ -1063,92 +1062,6 @@
 	name = "\improper Fourth Deck Security Checkpoint"
 	icon_state = "checkpoint"
 
-// Medbay
-
-/area/medical/equipstorage
-	name = "\improper Medical Equipment Storage"
-	icon_state = "medbay4"
-	ambience = list('sound/ambience/signal.ogg')
-	req_access = list(access_medical_equip)
-
-/area/medical/medicalhallway
-	name = "\improper Medical Public Hallway"
-	icon_state = "medbay"
-
-/area/medical/foyer
-	name = "\improper Medical Foyer"
-	icon_state = "medbay"
-	req_access = list(list(access_medical,access_morgue,access_forensics_lockers))
-
-/area/medical/foyer/storeroom
-	name = "\improper Medical Storeroom"
-	icon_state = "medbay"
-
-/area/medical/locker
-	name = "\improper Medical Locker Room"
-	icon_state = "locker"
-	req_access = list(access_medical_equip)
-
-/area/medical/physicianoffice
-	name = "\improper Physician's Paperwork Office"
-	icon_state = "locker"
-	req_access = list(access_senmed)
-
-/area/medical/washroom
-	name = "\improper Medical Washroom"
-	icon_state = "toilet"
-	sound_env = SMALL_ENCLOSED
-	req_access = list()
-
-/area/medical/counselor
-	name = "\improper Counselor's Office"
-	icon_state = "medbay3"
-	ambience = list('sound/ambience/signal.ogg')
-	req_access = list(access_psychiatrist)
-	sound_env = SMALL_SOFTFLOOR
-
-/area/medical/counselor/therapy
-	name = "\improper Counselor's Therapy Room"
-	icon_state = "medbay3"
-
-/area/medical/sleeper
-	name = "\improper Emergency Treatment Centre"
-	icon_state = "exam_room"
-
-/area/medical/surgery
-	name = "\improper Operating Theatre 1"
-	icon_state = "surgery"
-	req_access = list(access_surgery)
-
-/area/medical/surgery2
-	name = "\improper Operating Theatre 2"
-	icon_state = "surgery"
-	req_access = list(access_surgery)
-
-/area/medical/staging
-	name = "\improper Infirmary Staging"
-	icon_state = "patients"
-	req_access = list(access_medical)
-
-/area/medical/chemistry
-	name = "\improper Chemistry"
-	icon_state = "chem"
-	req_access = list(access_chemistry)
-
-/area/medical/exam_room
-	name = "\improper Exam Room"
-	icon_state = "exam_room"
-
-/area/medical/morgue
-	name = "\improper Morgue"
-	icon_state = "morgue"
-	ambience = list('sound/ambience/ambimo1.ogg','sound/ambience/ambimo2.ogg','sound/music/main.ogg')
-	req_access = list(list(access_morgue,access_forensics_lockers))
-
-/area/medical/morgue/autopsy
-	name = "\improper Autopsy"
-	icon_state = "autopsy"
-
 // Shield Rooms
 
 /area/shield
@@ -1328,7 +1241,7 @@
 /area/maintenance/incinerator
 	name = "\improper Incinerator"
 	icon_state = "disposal"
-	req_access = list(list(access_engine, access_medical, access_cargo))
+	req_access = list(list(access_engine, access_cargo))
 
 /area/maintenance/waterstore
 	name = "\improper Cistern"
@@ -1508,7 +1421,7 @@
 
 /area/assembly/robotics/laboratory
 	name = "\improper Robotics Laboratory"
-	req_access = list(list(access_medical,access_robotics))
+	req_access = list(list(access_robotics))
 
 area/assembly/robotics/office
 	name = "\improper Robotics Office"

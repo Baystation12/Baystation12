@@ -34,18 +34,6 @@
 	desc = "Forensics"
 	region = ACCESS_REGION_SECURITY
 
-/var/const/access_medical = "ACCESS_MEDICAL" //5
-/datum/access/medical
-	id = access_medical
-	desc = "Medical"
-	region = ACCESS_REGION_MEDBAY
-
-/var/const/access_morgue = "ACCESS_MORGUE" //6
-/datum/access/morgue
-	id = access_morgue
-	desc = "Morgue"
-	region = ACCESS_REGION_MEDBAY
-
 /var/const/access_tox = "ACCESS_TOXINS" //7
 /datum/access/tox
 	id = access_tox
@@ -196,12 +184,6 @@
 	desc = "Construction Areas"
 	region = ACCESS_REGION_ENGINEERING
 
-/var/const/access_chemistry = "ACCESS_CHEMISTRY" //33
-/datum/access/chemistry
-	id = access_chemistry
-	desc = "Chemistry Lab"
-	region = ACCESS_REGION_MEDBAY
-
 /var/const/access_cargo_bot = "ACCESS_CARGO_BOT" //34
 /datum/access/cargo_bot
 	id = access_cargo_bot
@@ -232,18 +214,6 @@
 	desc = "Internal Affairs"
 	region = ACCESS_REGION_COMMAND
 
-/var/const/access_virology = "ACCESS_VIRO" //39
-/datum/access/virology
-	id = access_virology
-	desc = "Virology"
-	region = ACCESS_REGION_MEDBAY
-
-/var/const/access_cmo = "ACCESS_CHIEF_MEDICAL_OFFICER" //40
-/datum/access/cmo
-	id = access_cmo
-	desc = "Chief Medical Officer"
-	region = ACCESS_REGION_COMMAND
-
 /var/const/access_qm = "ACCESS_QUARTERMASTER" //41
 /datum/access/qm
 	id = access_qm
@@ -255,12 +225,6 @@
 	id = access_network
 	desc = "Primary Network"
 	region = ACCESS_REGION_RESEARCH
-
-/var/const/access_surgery = "ACCESS_SURGERY" //45
-/datum/access/surgery
-	id = access_surgery
-	desc = "Surgery"
-	region = ACCESS_REGION_MEDBAY
 
 /var/const/access_research = "ACCESS_RESEARCH" //47
 /datum/access/research
@@ -352,23 +316,11 @@
 	desc = "Security"
 	region = ACCESS_REGION_SECURITY
 
-/var/const/access_psychiatrist = "ACCESS_PSYCHIATRIST" // Psychiatrist's office 64
-/datum/access/psychiatrist
-	id = access_psychiatrist
-	desc = "Counselor's Office"
-	region = ACCESS_REGION_MEDBAY
-
 /var/const/access_xenoarch = "ACCESS_XENOARCH" //65
 /datum/access/xenoarch
 	id = access_xenoarch
 	desc = "Xenoarchaeology"
 	region = ACCESS_REGION_RESEARCH
-
-/var/const/access_medical_equip = "ACCESS_MEDICAL_EQUIP" //66
-/datum/access/medical_equip
-	id = access_medical_equip
-	desc = "Medical Equipment"
-	region = ACCESS_REGION_MEDBAY
 
 /var/const/access_heads = "ACCESS_HEADS" //67
 /datum/access/heads

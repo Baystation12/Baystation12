@@ -33,10 +33,6 @@
 	mode = "security HUD"
 	glasses = /obj/item/clothing/glasses/hud/security
 
-/datum/rig_vision/medhud
-	mode = "medical HUD"
-	glasses = /obj/item/clothing/glasses/hud/health
-
 /obj/item/rig_module/vision
 
 	name = "hardsuit visor"
@@ -78,8 +74,7 @@
 	vision_modes = list(/datum/rig_vision/meson,
 						/datum/rig_vision/nvg,
 						/datum/rig_vision/thermal,
-						/datum/rig_vision/sechud,
-						/datum/rig_vision/medhud)
+						/datum/rig_vision/sechud)
 
 /obj/item/rig_module/vision/meson
 
@@ -132,20 +127,6 @@
 	interface_desc = "An integrated security heads up display."
 
 	vision_modes = list(/datum/rig_vision/sechud)
-
-/obj/item/rig_module/vision/medhud
-
-	name = "hardsuit medical hud"
-	desc = "A simple medical status indicator for a hardsuit."
-	icon_state = "healthhud"
-	origin_tech = list(TECH_MAGNET = 3, TECH_BIO = 2, TECH_ENGINEERING = 5)
-	usable = 0
-
-	interface_name = "medical HUD"
-	interface_desc = "An integrated medical heads up display."
-
-	vision_modes = list(/datum/rig_vision/medhud)
-
 
 // There should only ever be one vision module installed in a suit.
 /obj/item/rig_module/vision/installed()

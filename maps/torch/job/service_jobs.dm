@@ -22,7 +22,7 @@
 	min_skill = list(SKILL_BUREAUCRACY = SKILL_BASIC)
 
 	access = list(
-		access_morgue, access_chapel_office,
+		access_chapel_office,
 		access_crematorium, access_solgov_crew,
 		access_radio_serv
 	)

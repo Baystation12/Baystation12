@@ -486,60 +486,6 @@
 				to_chat(user, "<span class='warning'>Unable to locate a data core entry for this person.</span>")
 			return TOPIC_HANDLED
 
-	if (href_list["medical"])
-		if(hasHUD(user, HUD_MEDICAL))
-			var/perpname = "wot"
-			var/modified = 0
-
-			var/obj/item/card/id/id = GetIdCard()
-			if(istype(id))
-				perpname = id.registered_name
-			else
-				perpname = src.name
-
-			var/datum/computer_file/report/crew_record/E = get_crewmember_record(perpname)
-			if(E)
-				var/setmedical = input(user, "Specify a new medical status for this person.", "Medical HUD", E.get_status()) as null|anything in GLOB.physical_statuses
-				if(hasHUD(user, HUD_MEDICAL) && setmedical)
-					E.set_status(setmedical)
-					modified = 1
-
-					spawn()
-						if(istype(user,/mob/living/carbon/human))
-							var/mob/living/carbon/human/U = user
-							U.handle_regular_hud_updates()
-						if(istype(user,/mob/living/silicon/robot))
-							var/mob/living/silicon/robot/U = user
-							U.handle_regular_hud_updates()
-
-			if(!modified)
-				to_chat(user, "<span class='warning'>Unable to locate a data core entry for this person.</span>")
-			return TOPIC_HANDLED
-
-	if (href_list["medrecord"])
-		if(hasHUD(user, HUD_MEDICAL))
-			var/perpname = "wot"
-			var/read = 0
-
-			var/obj/item/card/id/id = GetIdCard()
-			if(istype(id))
-				perpname = id.registered_name
-			else
-				perpname = src.name
-
-			var/datum/computer_file/report/crew_record/E = get_crewmember_record(perpname)
-			if(E)
-				if(hasHUD(user, HUD_MEDICAL))
-					to_chat(usr, "<b>Name:</b> [E.get_name()]")
-					to_chat(usr, "<b>Gender:</b> [E.get_sex()]")
-					to_chat(usr, "<b>Species:</b> [E.get_species()]")
-					to_chat(usr, "<b>Blood Type:</b> [E.get_bloodtype()]")
-					to_chat(usr, "<b>Details:</b> [E.get_medRecord()]")
-					read = 1
-			if(!read)
-				to_chat(user, "<span class='warning'>Unable to locate a data core entry for this person.</span>")
-			return TOPIC_HANDLED
-
 	return ..()
 
 /mob/living/carbon/human/update_flavor_text(key)

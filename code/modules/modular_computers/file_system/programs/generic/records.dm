@@ -38,7 +38,7 @@
 			)))
 		data["all_records"] = all_records
 		data["creation"] = check_access(user, access_bridge)
-		data["dnasearch"] = check_access(user, access_medical) || check_access(user, access_forensics_lockers)
+		data["dnasearch"] = check_access(user, access_forensics_lockers)
 		data["fingersearch"] = check_access(user, access_security)
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)

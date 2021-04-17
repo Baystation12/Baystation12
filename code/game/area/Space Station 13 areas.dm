@@ -117,9 +117,6 @@ area/space/atmosalert()
 /area/hallway
 	name = "hallway"
 
-/area/medical
-	req_access = list(access_medical)
-
 /area/security
 	req_access = list(access_sec_doors)
 

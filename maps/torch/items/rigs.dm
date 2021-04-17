@@ -148,49 +148,6 @@
 		/obj/item/rig_module/device/flash/advanced,
 		/obj/item/rig_module/grenade_launcher/smoke,
 		/obj/item/rig_module/cooling_unit)
-
-/*
- * CHIEF MEDICAL OFFICER
- */
-/obj/item/rig/command/medical
-	name = "medical command HCM"
-	suit_type = "medical command hardsuit"
-	desc = "A specialized hardsuit rig control module issued to ranking medical officers of the Expeditionary Corps and their peers."
-	icon_state = "command_med_rig"
-
-	chest_type = /obj/item/clothing/suit/space/rig/command/medical
-	helm_type = /obj/item/clothing/head/helmet/space/rig/command/medical
-
-	allowed = list(/obj/item/gun,
-				   /obj/item/ammo_magazine,
-				   /obj/item/device/flashlight,
-				   /obj/item/tank,
-			 	   /obj/item/device/suit_cooling_unit,
-				   /obj/item/storage/firstaid,
-				   /obj/item/device/scanner/health,
-				   /obj/item/stack/medical,
-				   /obj/item/roller)
-
-	req_access = list(access_cmo)
-
-/obj/item/clothing/head/helmet/space/rig/command/medical
-	icon_state = "command_med_rig"
-/obj/item/clothing/suit/space/rig/command/medical
-	icon_state = "command_med_rig"
-/obj/item/clothing/shoes/magboots/rig/command/medical
-/obj/item/clothing/gloves/rig/command/medical
-
-
-/obj/item/rig/command/medical/equipped
-	initial_modules = list(
-		/obj/item/rig_module/maneuvering_jets,
-		/obj/item/rig_module/device/flash,
-		/obj/item/rig_module/device/healthscanner,
-		/obj/item/rig_module/device/defib,
-		/obj/item/rig_module/chem_dispenser/injector,
-		/obj/item/rig_module/vision/medhud,
-		/obj/item/rig_module/cooling_unit)
-
 /*
 * CHIEF OF SECURITY
 */

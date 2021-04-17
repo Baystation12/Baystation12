@@ -106,7 +106,6 @@
 	if(!ears)
 		var/headset = pick(/obj/item/device/radio/headset/headset_sec, \
 						/obj/item/device/radio/headset/headset_eng, \
-						/obj/item/device/radio/headset/headset_med, \
 						/obj/item/device/radio/headset/headset_sci, \
 						/obj/item/device/radio/headset/headset_cargo)
 		ears = new headset(src)

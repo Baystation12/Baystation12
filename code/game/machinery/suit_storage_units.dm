@@ -43,21 +43,6 @@
 	helmet = /obj/item/clothing/head/helmet/space/void/engineering/salvage
 	mask = /obj/item/clothing/mask/breath
 
-/obj/machinery/suit_storage_unit/medical
-	name = "Medical Voidsuit Storage Unit"
-	suit= /obj/item/clothing/suit/space/void/medical
-	helmet = /obj/item/clothing/head/helmet/space/void/medical
-	boots = /obj/item/clothing/shoes/magboots
-	tank = /obj/item/tank/oxygen
-	mask = /obj/item/clothing/mask/breath
-	req_access = list(access_medical)
-	islocked = 1
-
-/obj/machinery/suit_storage_unit/medical/alt
-	suit= /obj/item/clothing/suit/space/void/medical/alt
-	helmet = /obj/item/clothing/head/helmet/space/void/medical/alt
-	mask = /obj/item/clothing/mask/breath
-
 /obj/machinery/suit_storage_unit/mining
 	name = "Mining Voidsuit Storage Unit"
 	suit= /obj/item/clothing/suit/space/void/mining

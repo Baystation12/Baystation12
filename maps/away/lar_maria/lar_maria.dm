@@ -145,7 +145,6 @@
 	gloves = /obj/item/clothing/gloves/latex/nitrile
 	head = /obj/item/clothing/head/surgery
 	mask = /obj/item/clothing/mask/surgical
-	glasses = /obj/item/clothing/glasses/eyepatch/hud/medical
 
 /mob/living/simple_animal/hostile/lar_maria/virologist/female
 	icon_state = "virologist_f"

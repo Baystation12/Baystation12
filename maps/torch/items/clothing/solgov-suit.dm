@@ -31,9 +31,6 @@
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_suit_unathi.dmi'
 	)
 
-/obj/item/clothing/suit/storage/solgov/service/expeditionary/medical
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/medical/service)
-
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/medical/command
 	icon_state = "ecservice_officer"
 

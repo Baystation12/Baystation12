@@ -1013,7 +1013,7 @@
 "Kh" = (/obj/machinery/atmospherics/pipe/simple/hidden,/obj/machinery/door/airlock/external{frequency = 1331; icon_state = "closed"; id_tag = "rescue_shuttle_dock_inner"; locked = 1; name = "Docking Port Airlock"},/turf/simulated/floor/plating,/area/hallway/primary/fourthdeck/aft)
 "Ki" = (/obj/structure/table/rack{dir = 8},/obj/item/storage/box/lights/mixed,/obj/machinery/light/small{dir = 8},/turf/simulated/floor/tiled/techfloor,/area/maintenance/fourthdeck/aft)
 "Kj" = (/obj/structure/ladder/up,/obj/effect/floor_decal/corner/green{dir = 6},/obj/machinery/light{dir = 4},/obj/machinery/firealarm{dir = 1; pixel_y = -24},/turf/simulated/floor/tiled/steel_grid,/area/hallway/primary/fourthdeck/aft)
-"Kk" = (/obj/effect/floor_decal/industrial/outline/grey,/obj/machinery/suit_cycler/medical/alt,/turf/simulated/floor/tiled/dark/monotile,/area/eva)
+"Kk" = (/obj/effect/floor_decal/industrial/outline/grey,/obj/machinery/suit_cycler,/turf/simulated/floor/tiled/dark/monotile,/area/eva)
 "Kl" = (/obj/structure/sign/warning/docking_area,/turf/simulated/wall/r_wall/hull,/area/maintenance/fourthdeck/port)
 "Kn" = (/obj/effect/shuttle_landmark/skipjack/dock,/turf/space,/area/space)
 "Ko" = (/obj/effect/shuttle_landmark/ert/dock,/obj/effect/shuttle_landmark/skrellscout/dock,/turf/space,/area/space)

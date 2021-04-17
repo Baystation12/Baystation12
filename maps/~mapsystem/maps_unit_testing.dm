@@ -26,7 +26,6 @@
 		/area/chapel,
 		/area/hallway,
 		/area/maintenance,
-		/area/medical,
 		/area/overmap,
 		/area/rnd,
 		/area/rnd/xenobiology,

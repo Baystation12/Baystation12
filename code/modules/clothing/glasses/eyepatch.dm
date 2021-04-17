@@ -66,21 +66,3 @@
 	hud = /obj/item/clothing/glasses/hud/security
 	eye_color = COLOR_RED
 	req_access = list(access_security)
-
-/obj/item/clothing/glasses/eyepatch/hud/medical
-	name = "MEDpatch"
-	desc = "A Medical-type heads-up display that connects directly to the ocular nerve of the user, replacing the need for that useless eyeball."
-	hud = /obj/item/clothing/glasses/hud/health
-	eye_color = COLOR_CYAN
-	req_access = list(access_medical)
-
-/obj/item/clothing/glasses/eyepatch/hud/meson
-	name = "MESpatch"
-	desc = "An optical meson scanner display that connects directly to the ocular nerve of the user, replacing the need for that useless eyeball."
-	vision_flags = SEE_TURFS
-	see_invisible = SEE_INVISIBLE_NOLIGHTING
-	eye_color = COLOR_LIME
-
-/obj/item/clothing/glasses/eyepatch/hud/meson/Initialize()
-	. = ..()
-	overlay = GLOB.global_hud.meson

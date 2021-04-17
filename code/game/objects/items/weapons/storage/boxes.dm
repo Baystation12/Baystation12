@@ -543,7 +543,6 @@
 						/obj/item/taperoll/engineering,
 						/obj/item/taperoll/atmos,
 						/obj/item/taperoll/research,
-						/obj/item/taperoll/medical,
 						/obj/item/taperoll/bureaucracy
 					)
 

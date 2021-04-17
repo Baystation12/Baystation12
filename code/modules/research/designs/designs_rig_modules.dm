@@ -12,15 +12,6 @@
 	build_path = /obj/item/rig_module/vision/meson
 	sort_string = "WCAAA"
 
-/datum/design/item/rig/medhud
-	name = "Medical HUD"
-	desc = "A simple medical status indicator for a RIG."
-	id = "rig_medhud"
-	req_tech = list(TECH_MAGNET = 3, TECH_BIO = 2, TECH_ENGINEERING = 5)
-	materials = list(MATERIAL_STEEL = 100, MATERIAL_GLASS = 200,  MATERIAL_PLASTIC = 300)
-	build_path = /obj/item/rig_module/vision/medhud
-	sort_string = "WCAAB"
-
 /datum/design/item/rig/sechud
 	name = "Security HUD"
 	desc = "A simple security status indicator for a RIG."

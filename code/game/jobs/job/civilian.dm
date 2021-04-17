@@ -81,8 +81,8 @@
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of personnel"
-	access = list(access_janitor, access_maint_tunnels, access_engine, access_research, access_sec_doors, access_medical)
-	minimal_access = list(access_janitor, access_maint_tunnels, access_engine, access_research, access_sec_doors, access_medical)
+	access = list(access_janitor, access_maint_tunnels, access_engine, access_research, access_sec_doors)
+	minimal_access = list(access_janitor, access_maint_tunnels, access_engine, access_research, access_sec_doors)
 	alt_titles = list("Custodian","Sanitation Technician")
 	outfit_type = /decl/hierarchy/outfit/job/service/janitor
 

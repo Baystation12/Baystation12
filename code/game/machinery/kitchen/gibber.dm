@@ -6,11 +6,11 @@
 	icon_state = "grinder"
 	density = TRUE
 	anchored = TRUE
-	req_access = list(access_kitchen,access_morgue)
+	req_access = list(access_kitchen)
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
-	
+
 	machine_name = "meat grinder"
 	machine_desc = "Messily turns animals - living or dead - into edible meat. Installed safety mechanisms prevent use on humans."
 
@@ -67,12 +67,12 @@
 	return 1
 
 /obj/machinery/gibber/components_are_accessible(path)
-	return !operating && ..()	
+	return !operating && ..()
 
 /obj/machinery/gibber/cannot_transition_to(state_path, mob/user)
 	if(operating)
 		return SPAN_NOTICE("You must wait for \the [src] to finish operating first!")
-	return ..()	
+	return ..()
 
 /obj/machinery/gibber/attackby(var/obj/item/W, var/mob/user)
 	if(!operating)

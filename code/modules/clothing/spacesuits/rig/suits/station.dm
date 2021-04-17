@@ -248,69 +248,6 @@
 		/obj/item/rig_module/cooling_unit,
 		)
 
-/obj/item/rig/medical
-	name = "rescue suit control module"
-	suit_type = "rescue hardsuit"
-	desc = "A durable suit designed for medical rescue in high risk areas."
-	icon_state = "medical_rig"
-	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_MINOR,
-		laser = ARMOR_LASER_SMALL,
-		energy = ARMOR_ENERGY_RESISTANT,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_SHIELDED
-		)
-	online_slowdown = 0
-	offline_vision_restriction = TINT_HEAVY
-
-	chest_type = /obj/item/clothing/suit/space/rig/medical
-	helm_type = /obj/item/clothing/head/helmet/space/rig/medical
-	boot_type = /obj/item/clothing/shoes/magboots/rig/medical
-	glove_type = /obj/item/clothing/gloves/rig/medical
-
-	allowed = list(/obj/item/device/flashlight,/obj/item/tank,/obj/item/device/suit_cooling_unit,/obj/item/storage/firstaid,/obj/item/device/scanner/health,/obj/item/stack/medical,/obj/item/roller,/obj/item/auto_cpr,/obj/item/inflatable_dispenser)
-
-	req_access = list(access_medical_equip)
-
-/obj/item/clothing/head/helmet/space/rig/medical
-	camera = /obj/machinery/camera/network/medbay
-	species_restricted = list(SPECIES_HUMAN, SPECIES_UNATHI, SPECIES_SKRELL, SPECIES_IPC)
-	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_head_helmet_unathi.dmi',
-		SPECIES_SKRELL = 'icons/mob/species/skrell/onmob_head_skrell.dmi',
-		)
-
-/obj/item/clothing/suit/space/rig/medical
-	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL, SPECIES_UNATHI, SPECIES_IPC)
-	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_suit_unathi.dmi'
-		)
-
-/obj/item/clothing/shoes/magboots/rig/medical
-	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL, SPECIES_UNATHI, SPECIES_IPC)
-	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_feet_unathi.dmi'
-		)
-
-/obj/item/clothing/gloves/rig/medical
-	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL, SPECIES_UNATHI, SPECIES_IPC)
-	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_hands_unathi.dmi'
-		)
-
-/obj/item/rig/medical/equipped
-
-	initial_modules = list(
-		/obj/item/rig_module/chem_dispenser/injector,
-		/obj/item/rig_module/maneuvering_jets,
-		/obj/item/rig_module/device/healthscanner,
-		/obj/item/rig_module/vision/medhud,
-		/obj/item/rig_module/device/defib,
-		/obj/item/rig_module/cooling_unit
-		)
-
 /obj/item/rig/hazard
 	name = "hazard hardsuit control module"
 	suit_type = "hazard hardsuit"

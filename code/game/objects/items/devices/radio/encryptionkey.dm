@@ -62,20 +62,10 @@
 	icon_state = "rob_cypherkey"
 	channels = list("Engineering" = 1, "Science" = 1)
 
-/obj/item/device/encryptionkey/headset_med
-	name = "medical radio encryption key"
-	icon_state = "med_cypherkey"
-	channels = list("Medical" = 1)
-
 /obj/item/device/encryptionkey/headset_sci
 	name = "science radio encryption key"
 	icon_state = "sci_cypherkey"
 	channels = list("Science" = 1)
-
-/obj/item/device/encryptionkey/headset_medsci
-	name = "medical research radio encryption key"
-	icon_state = "medsci_cypherkey"
-	channels = list("Medical" = 1, "Science" = 1)
 
 /obj/item/device/encryptionkey/headset_com
 	name = "command radio encryption key"
@@ -111,11 +101,6 @@
 	name = "chief engineer's encryption key"
 	icon_state = "ce_cypherkey"
 	channels = list("Engineering" = 1, "Command" = 1, "Hailing" = 1)
-
-/obj/item/device/encryptionkey/heads/cmo
-	name = "chief medical officer's encryption key"
-	icon_state = "cmo_cypherkey"
-	channels = list("Medical" = 1, "Command" = 1, "Hailing" = 1)
 
 /obj/item/device/encryptionkey/heads/hop
 	name = "head of personnel's encryption key"

@@ -133,22 +133,10 @@
 
 /obj/item/device/radio/headset/headset_rob
 	name = "robotics radio headset"
-	desc = "Made specifically for the roboticists who cannot decide between departments."
+	desc = "Made specifically for the roboticists, who now have no choice in department."
 	icon_state = "rob_headset"
 	item_state = "headset"
 	ks1type = /obj/item/device/encryptionkey/headset_rob
-
-/obj/item/device/radio/headset/headset_med
-	name = "medical radio headset"
-	desc = "A headset for the trained staff of the medbay."
-	icon_state = "med_headset"
-	item_state = "headset"
-	ks1type = /obj/item/device/encryptionkey/headset_med
-
-/obj/item/device/radio/headset/headset_med/alt
-	name = "medical bowman headset"
-	icon_state = "med_headset_alt"
-	item_state = "med_headset_alt"
 
 /obj/item/device/radio/headset/headset_sci
 	name = "science radio headset"
@@ -156,13 +144,6 @@
 	icon_state = "com_headset"
 	item_state = "headset"
 	ks1type = /obj/item/device/encryptionkey/headset_sci
-
-/obj/item/device/radio/headset/headset_medsci
-	name = "medical research radio headset"
-	desc = "A headset that is a result of the mating between medical and science."
-	icon_state = "med_headset"
-	item_state = "headset"
-	ks1type = /obj/item/device/encryptionkey/headset_medsci
 
 /obj/item/device/radio/headset/headset_com
 	name = "command radio headset"
@@ -240,18 +221,6 @@
 
 /obj/item/device/radio/headset/heads/ce/alt
 	name = "chief engineer's bowman headset"
-	icon_state = "com_headset_alt"
-	item_state = "com_headset_alt"
-
-/obj/item/device/radio/headset/heads/cmo
-	name = "chief medical officer's headset"
-	desc = "The headset of the highly trained medical chief."
-	icon_state = "com_headset"
-	item_state = "headset"
-	ks1type = /obj/item/device/encryptionkey/heads/cmo
-
-/obj/item/device/radio/headset/heads/cmo/alt
-	name = "chief medical officer's bowman headset"
 	icon_state = "com_headset_alt"
 	item_state = "com_headset_alt"
 

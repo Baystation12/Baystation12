@@ -42,15 +42,6 @@
 		/datum/computer_file/program/shields_monitor
 	)
 
-/obj/machinery/computer/modular/preset/medical
-	default_software = list(
-		/datum/computer_file/program/suit_sensors,
-		/datum/computer_file/program/camera_monitor,
-		/datum/computer_file/program/records,
-		/datum/computer_file/program/wordprocessor
-	)
-	autorun_program = /datum/computer_file/program/suit_sensors
-
 /obj/machinery/computer/modular/preset/aislot/research
 	default_software = list(
 		/datum/computer_file/program/ntnetmonitor,

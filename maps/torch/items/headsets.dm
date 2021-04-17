@@ -138,18 +138,6 @@
 /obj/item/device/radio/headset/headset_cargo/alt
 	desc = "A bowman headset used by the Deck Chief and his slaves."
 
-/obj/item/device/radio/headset/headset_corpsman
-	name = "medical headset"
-	desc = "A headset to yell into while patching open wounds. It has an inbuilt subspace antenna for better reception."
-	icon_state = "par_headset"
-	item_state = "headset"
-	ks1type = /obj/item/device/encryptionkey/headset_med
-
-/obj/item/device/radio/headset/headset_corpsman/alt
-	name = "medical bowman headset"
-	icon_state = "par_headset_alt"
-	item_state = "par_headset_alt"
-
 /obj/item/device/radio/headset/headset_pilot
 	name = "pilot's headset"
 	desc = "A headset for cool-tempered smugglers, cocky flyboys, and bus-drivers like you. It has an inbuilt subspace antenna for better reception."
