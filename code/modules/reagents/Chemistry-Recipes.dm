@@ -2674,10 +2674,8 @@
 /datum/chemical_reaction/fringe_weaver
 	name = "Fringe Weaver"
 	result = /datum/reagent/ethanol/fringe_weaver
-	required_reagents = list(/datum/reagent/sugar = 1, /datum/reagent/ethanol = 2)
-	result_amount = 3
-	minimum_temperature = (29 CELSIUS) - 100
-	maximum_temperature = 29 CELSIUS
+	required_reagents = list(/datum/reagent/sugar = 1, /datum/reagent/ethanol = 2, /datum/reagent/water= 1)
+	result_amount = 4
 
 // Non-Alcoholic Drinks
 
