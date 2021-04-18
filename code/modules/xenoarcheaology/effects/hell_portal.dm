@@ -20,12 +20,12 @@
 
 	var/damage = 0
 	var/list/monsters = list(
-		/mob/living/simple_animal/hostile/meat/abomination,
-		/mob/living/simple_animal/hostile/meat/horror,
-		/mob/living/simple_animal/hostile/meat/strippedhuman,
-		/mob/living/simple_animal/hostile/meat/horrorminer,
-		/mob/living/simple_animal/hostile/meat/horrorsmall,
-		/mob/living/simple_animal/hostile/meat
+		/mob/living/simple_animal/hostile/meat/abomination = 5,
+		/mob/living/simple_animal/hostile/meat/horror = 30,
+		/mob/living/simple_animal/hostile/meat/strippedhuman = 60,
+		/mob/living/simple_animal/hostile/meat/horrorminer = 60,
+		/mob/living/simple_animal/hostile/meat/horrorsmall = 80,
+		/mob/living/simple_animal/hostile/meat = 5
 	)
 	var/list/portals = list()
 	var/list/mobs = list()
@@ -135,7 +135,7 @@
 	addtimer(CALLBACK(src, .proc/create_and_delete), rand(15,30) SECONDS)
 
 /obj/effect/gateway/active/artifact/create_and_delete()
-	var/mob/living/simple_animal/T = pick(spawnable)
+	var/mob/living/simple_animal/T = pickweight(spawnable)
 	T = new T(src.loc)
 	T.min_gas = null
 	T.max_gas = null
