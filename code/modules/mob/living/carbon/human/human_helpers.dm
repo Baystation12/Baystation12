@@ -60,7 +60,7 @@
 	else
 		binoc_check = TRUE
 
-	if ((!client || client.eye == src || client.eye == loc || client.eye == bound_overlay) && binoc_check) // !client is so the unit tests function
+	if ((!client || client.eye == src || client.eye == loc || client.eye == z_eye) && binoc_check) // !client is so the unit tests function
 		if(istype(src.head, /obj/item/clothing/head))
 			add_clothing_protection(head)
 		if(istype(src.glasses, /obj/item/clothing/glasses))
