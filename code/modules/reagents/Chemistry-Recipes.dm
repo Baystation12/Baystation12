@@ -2622,6 +2622,12 @@
 	required_reagents = list(/datum/reagent/drink/milk/cream = 1, /datum/reagent/ethanol/cognac = 1, /datum/reagent/drink/hot_coco = 1)
 	result_amount = 3
 
+/datum/chemical_reaction/kamikaze
+	name = "Kamikaze"
+	result = /datum/reagent/ethanol/kamikaze
+	required_reagents = list(/datum/reagent/ethanol/vodka = 1, /datum/reagent/ethanol/triple_sec = 1, /datum/reagent/drink/juice/lime = 1)
+	result_amount = 3
+
 /datum/chemical_reaction/grasshopper
 	name = "Grasshopper"
 	result = /datum/reagent/ethanol/grasshopper
@@ -2674,8 +2680,8 @@
 /datum/chemical_reaction/fringe_weaver
 	name = "Fringe Weaver"
 	result = /datum/reagent/ethanol/fringe_weaver
-	required_reagents = list(/datum/reagent/sugar = 1, /datum/reagent/ethanol = 2)
-	result_amount = 3
+	required_reagents = list(/datum/reagent/sugar = 1, /datum/reagent/ethanol = 2, /datum/reagent/water= 1)
+	result_amount = 4
 
 // Non-Alcoholic Drinks
 
@@ -2807,7 +2813,7 @@
 /datum/chemical_reaction/strawberry_soda
 	name = "Strawberry Soda"
 	result = /datum/reagent/drink/strawberry_soda
-	required_reagents = list(/datum/reagent/drink/sodawater = 2, /datum/reagent/nutriment/cherryjelly = 1)
+	required_reagents = list(/datum/reagent/drink/sodawater = 2, /datum/reagent/drink/juice/berry = 1)
 	result_amount = 3
 	mix_message = "The liquid blends together smoothly"
 
@@ -2828,7 +2834,7 @@
 /datum/chemical_reaction/cherry_cola
 	name = "Cherry Cola"
 	result = /datum/reagent/drink/cherry_cola
-	required_reagents = list(/datum/reagent/drink/space_cola = 2, /datum/reagent/drink/juice/berry = 1)
+	required_reagents = list(/datum/reagent/drink/space_cola = 2, /datum/reagent/nutriment/cherryjelly = 1)
 	result_amount = 3
 	mix_message = "The liquid blends together smoothly"
 
