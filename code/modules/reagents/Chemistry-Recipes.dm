@@ -2676,7 +2676,7 @@
 	result = /datum/reagent/ethanol/fringe_weaver
 	required_reagents = list(/datum/reagent/sugar = 1, /datum/reagent/ethanol = 2)
 	result_amount = 3
-	maximum_temperature = 29
+	maximum_temperature = 29 CELSIUS
 
 // Non-Alcoholic Drinks
 
