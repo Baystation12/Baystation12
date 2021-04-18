@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - tweak: Blob attacks on structures now use consistent damage handling.
+  - rscadd: Blobs will now open broken doors.
