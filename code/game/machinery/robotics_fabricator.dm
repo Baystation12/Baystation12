@@ -12,7 +12,7 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
-	
+
 	machine_name = "exosuit fabricator"
 	machine_desc = "A heavy-duty fabricator that can produce parts for exosuits and robots."
 
@@ -206,7 +206,8 @@
 /obj/machinery/robotics_fabricator/proc/remove_from_queue(var/index)
 	if(index == 1)
 		progress = 0
-	queue.Cut(index, index + 1)
+	if (length(queue) >= index)
+		queue.Cut(index, index + 1)
 	update_busy()
 
 /obj/machinery/robotics_fabricator/proc/can_build(var/datum/design/D)
@@ -257,6 +258,9 @@
 	return english_list(F, and_text = ", ")
 
 /obj/machinery/robotics_fabricator/proc/get_design_time(var/datum/design/D)
+	if (speed == 0)
+		return "INFINITE"
+
 	return time2text(round(10 * D.time / speed), "mm:ss")
 
 /obj/machinery/robotics_fabricator/proc/update_categories()

@@ -150,6 +150,9 @@
 				if(!user.do_skilled(INJECTION_PORT_DELAY, SKILL_MEDICAL, target))
 					return
 
+				if (!reagents)
+					return
+
 			if(target != user)
 				user.visible_message(SPAN_WARNING("\The [user] is trying to take a blood sample from \the [target]."))
 			else
@@ -165,6 +168,9 @@
 			user.do_attack_animation(target)
 
 			if(!user.do_skilled(time, SKILL_MEDICAL, target))
+				return
+
+			if (!reagents)
 				return
 
 			T.take_blood(src, amount)

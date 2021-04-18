@@ -117,7 +117,7 @@
 	if (!new_language || new_language == language)
 		to_chat(user, SPAN_NOTICE("You decide to leave the language as [language.name]."))
 		return
-	if (!admin_force && !Adjacent(src, user) && !CanInteract(user, GLOB.deep_inventory_state))
+	if (!admin_force && !Adjacent(user) && !CanInteract(user, GLOB.deep_inventory_state))
 		to_chat(user, SPAN_WARNING("You must remain next to or continue holding \the [src] to do that."))
 		return
 	language = new_language
