@@ -15,6 +15,7 @@
 	greater_form = SPECIES_HUMAN
 	mob_size = MOB_SMALL
 	show_ssd = null
+	show_coma = null
 	health_hud_intensity = 1.75
 
 	gibbed_anim = "gibbed-m"
