@@ -29,7 +29,7 @@ jobs:
           python tools/changelog/ss13_genchangelog.py html/changelog.html html/changelogs
       - name: Commit And Push
         run: |
-          git config --local user.email "${{ secrets.BOT_EMAIL }}"
-          git config --local user.name "${{ secrets.BOT_NAME }}"
+          git config --global user.email "${{ secrets.BOT_EMAIL }}"
+          git config --global user.name "${{ secrets.BOT_NAME }}"
           git commit -m "Automatic changelog generation" -a
-          git push https://${{ secrets.BOT_TOKEN }}:x-oauth-basic@github.com/Baystation12/Baystation12.git dev
+          git push https://${{ secrets.BOT_TOKEN }}:x-oauth-basic@github.com/Baystation12/Baystation12.git dev --force
