@@ -25,7 +25,8 @@
 		/obj/item/device/multitool,
 		/obj/item/stack/medical/ointment,
 		/obj/item/stack/medical/bruise_pack,
-		/obj/item/stack/medical/splint
+		/obj/item/stack/medical/splint,
+		/obj/item/robot_rack/roller
 	)
 	synths = list(/datum/matter_synth/medicine = 15000)
 	emag = /obj/item/reagent_containers/spray
