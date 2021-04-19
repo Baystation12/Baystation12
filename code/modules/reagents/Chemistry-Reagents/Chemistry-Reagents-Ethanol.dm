@@ -822,7 +822,7 @@
 	description = "It's like drinking ethylic alcohol with a spoonful of sugar."
 	taste_description = "burning with a hint of sweetness"
 	color = "#ffafe0"
-	strength = 30
+	strength = 10
 
 	glass_name = "Fringe Weaver"
 	glass_desc = "It's like drinking ethylic alcohol with a spoonful of sugar."
@@ -940,6 +940,7 @@
 	description = "One must truly prepare themselves for this drink."
 	taste_description = "sour explosions"
 	color = "#e6e945"
+	strength = 15
 
 	glass_name = "Kamikaze"
 	glass_desc = "This must have started as a joke, right? No one is supposed to drink this..."
