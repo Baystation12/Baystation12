@@ -6549,7 +6549,7 @@
 /area/medical/foyer)
 "aqT" = (
 /obj/machinery/door/airlock/medical{
-	name = "Physicians Paperwork Office"
+	name = "Medical Paperwork Office"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -6560,7 +6560,7 @@
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/white/monotile,
-/area/medical/physicianoffice)
+/area/medical/medpaperworkoffice)
 "arb" = (
 /obj/machinery/door/airlock/vault/bolted{
 	autoset_access = 0;
@@ -6764,7 +6764,7 @@
 	},
 /obj/machinery/papershredder,
 /turf/simulated/floor/tiled/white/monotile,
-/area/medical/physicianoffice)
+/area/medical/medpaperworkoffice)
 "ask" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -6935,7 +6935,7 @@
 /obj/item/folder/white,
 /obj/effect/floor_decal/corner/paleblue/mono,
 /turf/simulated/floor/tiled/white/monotile,
-/area/medical/physicianoffice)
+/area/medical/medpaperworkoffice)
 "atg" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
@@ -6945,7 +6945,7 @@
 	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
-/area/medical/physicianoffice)
+/area/medical/medpaperworkoffice)
 "atm" = (
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 5
@@ -7130,11 +7130,6 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/exam_room)
 "aub" = (
-/obj/structure/table/standard,
-/obj/effect/floor_decal/corner/paleblue/mono,
-/turf/simulated/floor/tiled/white/monotile,
-/area/medical/exam_room)
-"auc" = (
 /obj/machinery/vending/wallmed1{
 	dir = 8;
 	icon_state = "wallmed";
@@ -7142,16 +7137,22 @@
 	pixel_x = 28;
 	pixel_y = 0
 	},
+/obj/structure/bed/chair/comfy/blue{
+	dir = 8
+	},
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 5
 	},
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 10
 	},
-/obj/structure/bed/chair/comfy/blue{
-	dir = 8
-	},
 /turf/simulated/floor/tiled/white,
+/area/medical/exam_room)
+"auc" = (
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/structure/table/standard,
+/obj/item/paper_bin,
+/turf/simulated/floor/tiled/white/monotile,
 /area/medical/exam_room)
 "aug" = (
 /obj/effect/floor_decal/corner/paleblue{
@@ -7427,9 +7428,6 @@
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 10
 	},
-/obj/effect/floor_decal/corner/paleblue{
-	dir = 5
-	},
 /obj/machinery/camera/network/medbay{
 	c_tag = "Infirmary - Examination Room";
 	dir = 1
@@ -7443,11 +7441,10 @@
 "avq" = (
 /obj/item/stool/padded,
 /obj/effect/floor_decal/corner/paleblue/mono,
-/obj/machinery/light/small{
-	dir = 1
-	},
+/obj/machinery/light/small,
 /obj/random_multi/single_item/runtime,
 /obj/random_multi/single_item/skelestand,
+/obj/structure/curtain/open/bed,
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/exam_room)
 "avs" = (
@@ -7466,7 +7463,7 @@
 	pixel_x = -37
 	},
 /turf/simulated/floor/tiled/white,
-/area/medical/physicianoffice)
+/area/medical/medpaperworkoffice)
 "avu" = (
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 10
@@ -7482,7 +7479,7 @@
 	pixel_y = -28
 	},
 /turf/simulated/floor/tiled/white,
-/area/medical/physicianoffice)
+/area/medical/medpaperworkoffice)
 "avx" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -15206,7 +15203,7 @@
 /obj/effect/floor_decal/corner/paleblue/mono,
 /obj/structure/table/glass,
 /turf/simulated/floor/tiled/white/monotile,
-/area/medical/physicianoffice)
+/area/medical/medpaperworkoffice)
 "bMb" = (
 /turf/simulated/wall/prepainted,
 /area/engineering/hardstorage/aux)
@@ -15529,9 +15526,7 @@
 /area/shuttle/escape_pod17/station)
 "cbj" = (
 /obj/effect/floor_decal/corner/paleblue/mono,
-/obj/machinery/computer/modular/preset/medical{
-	dir = 8
-	},
+/obj/machinery/computer/modular/preset/medical,
 /obj/machinery/alarm{
 	pixel_y = 24
 	},
@@ -16875,7 +16870,7 @@
 	pixel_x = 21
 	},
 /turf/simulated/floor/tiled/white,
-/area/medical/physicianoffice)
+/area/medical/medpaperworkoffice)
 "dTb" = (
 /obj/effect/floor_decal/floordetail/edgedrain{
 	dir = 8;
@@ -17208,7 +17203,7 @@
 	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
-/area/medical/physicianoffice)
+/area/medical/medpaperworkoffice)
 "epb" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
@@ -17723,7 +17718,7 @@
 	},
 /obj/structure/bed/chair/comfy/blue,
 /turf/simulated/floor/tiled/white,
-/area/medical/physicianoffice)
+/area/medical/medpaperworkoffice)
 "frA" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
@@ -18445,7 +18440,7 @@
 	dir = 10
 	},
 /turf/simulated/floor/tiled/white,
-/area/medical/physicianoffice)
+/area/medical/medpaperworkoffice)
 "gGO" = (
 /obj/item/device/radio/intercom/department/security{
 	pixel_y = 23
@@ -19336,6 +19331,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 8
 	},
+/obj/random_multi/single_item/runtime,
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralport)
 "hPt" = (
@@ -19602,7 +19598,7 @@
 /obj/structure/table/glass,
 /obj/random/smokes,
 /turf/simulated/floor/tiled/white/monotile,
-/area/medical/physicianoffice)
+/area/medical/medpaperworkoffice)
 "iqb" = (
 /obj/structure/bed/chair/comfy/lime,
 /turf/simulated/floor/tiled/dark,
@@ -19975,10 +19971,6 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralstarboard)
 "iMW" = (
-/obj/structure/bed/chair/padded/blue{
-	dir = 4;
-	icon_state = "chair_preview"
-	},
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 5
 	},
@@ -21543,9 +21535,6 @@
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 10
 	},
-/obj/effect/floor_decal/corner/paleblue{
-	dir = 5
-	},
 /obj/machinery/button/alternate/door{
 	id_tag = "examdoor";
 	name = "Examination Room Door Control";
@@ -22755,8 +22744,9 @@
 	dir = 4
 	},
 /obj/structure/bed/chair/comfy/blue,
+/obj/random_multi/single_item/runtime,
 /turf/simulated/floor/tiled/white,
-/area/medical/physicianoffice)
+/area/medical/medpaperworkoffice)
 "mlw" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -22796,7 +22786,7 @@
 	},
 /obj/structure/cable/green,
 /turf/simulated/floor/tiled/white,
-/area/medical/physicianoffice)
+/area/medical/medpaperworkoffice)
 "mmP" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/effect/floor_decal/corner/research{
@@ -23859,7 +23849,7 @@
 	},
 /obj/machinery/photocopier,
 /turf/simulated/floor/tiled/white/monotile,
-/area/medical/physicianoffice)
+/area/medical/medpaperworkoffice)
 "nDx" = (
 /obj/machinery/door/airlock/medical{
 	name = "Operating Room 2"
@@ -24446,10 +24436,6 @@
 /turf/simulated/floor/tiled/monotile,
 /area/security/locker)
 "omb" = (
-/obj/structure/table/standard,
-/obj/item/clothing/accessory/stethoscope,
-/obj/item/device/flashlight/pen,
-/obj/effect/floor_decal/corner/paleblue/mono,
 /obj/machinery/light{
 	dir = 1
 	},
@@ -24458,7 +24444,11 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/tiled/white/monotile,
+/obj/structure/bed/chair/padded/blue,
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/white,
 /area/medical/exam_room)
 "onM" = (
 /obj/effect/floor_decal/corner/blue,
@@ -29635,9 +29625,13 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/aftstarboard)
 "uuS" = (
-/obj/effect/floor_decal/corner/paleblue/mono,
-/obj/structure/curtain/open/bed,
-/turf/simulated/floor/tiled/white/monotile,
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 10
+	},
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/white,
 /area/medical/exam_room)
 "uvj" = (
 /obj/effect/floor_decal/corner/paleblue{
@@ -30068,8 +30062,6 @@
 /area/command/armoury)
 "vnC" = (
 /obj/effect/floor_decal/corner/paleblue/mono,
-/obj/structure/table/standard,
-/obj/item/paper_bin,
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "north bump";
@@ -30080,6 +30072,9 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
+/obj/structure/table/standard,
+/obj/item/device/flashlight/pen,
+/obj/item/clothing/accessory/stethoscope,
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/exam_room)
 "vpA" = (
@@ -30858,7 +30853,7 @@
 /obj/structure/table/glass,
 /obj/random_multi/single_item/memo_medical,
 /turf/simulated/floor/tiled/white/monotile,
-/area/medical/physicianoffice)
+/area/medical/medpaperworkoffice)
 "xBk" = (
 /obj/structure/railing/mapped{
 	dir = 4;
@@ -31065,7 +31060,7 @@
 /area/rnd/office)
 "xYM" = (
 /turf/simulated/wall/prepainted,
-/area/medical/physicianoffice)
+/area/medical/medpaperworkoffice)
 "ybv" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -54271,7 +54266,7 @@ afm
 qLr
 nCb
 omb
-aub
+twz
 avo
 nCb
 awM
@@ -54675,7 +54670,7 @@ afp
 aqR
 nCb
 cbj
-nCb
+aub
 uuS
 nCb
 axB
