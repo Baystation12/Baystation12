@@ -57,7 +57,7 @@
 			instance.set_dir(host.dir)
 
 /datum/build_mode/build/CanUseTopic(mob/user)
-	if (!is_admin(user))
+	if (!isadmin(user))
 		return STATUS_CLOSE
 	return ..()
 

@@ -37,7 +37,7 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 
 // Checks if this step applies to the user mob at all
 /decl/surgery_step/proc/is_valid_target(mob/living/carbon/human/target)
-	if(!hasorgans(target))
+	if(!ishuman(target))
 		return 0
 
 	if(allowed_species)

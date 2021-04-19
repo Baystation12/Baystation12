@@ -216,7 +216,7 @@
 	var/static/obj/item/card/id/all_access/ghost_all_access
 
 /mob/observer/ghost/GetIdCard()
-	if(!is_admin(src))
+	if(!isadmin(src))
 		return
 
 	if(!ghost_all_access)
