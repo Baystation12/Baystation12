@@ -5,7 +5,7 @@
 	id = WEBHOOK_SUBMAP_LOADED_ASCENT
 
 /decl/submap_archetype/ascent_caulship
-	descriptor = "Ascent colony ship"
+	descriptor = "Ascent caulship"
 	map = "Ascent Caulship"
 	blacklisted_species = null
 	whitelisted_species = null
