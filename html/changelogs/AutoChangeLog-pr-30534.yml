@@ -1,0 +1,7 @@
+author: Ryan180602
+delete-after: true
+changes:
+  - maptweak: Change Physician's Paperwork Office to Medical Paperwork Office (for
+      all medical personnel)
+  - maptweak: Remapped Exam Room
+  - maptweak: Added 3 Runtime spawn locations
