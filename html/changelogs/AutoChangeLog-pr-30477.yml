@@ -1,0 +1,9 @@
+author: Mucker
+delete-after: true
+changes:
+  - rscadd: Ported exoplanet themes from Nebula, includes Ruined City, Robot Guardians,
+      and Radiation Bombing
+  - tweak: Desert planets now have much less quicksand, but the quicksand that does
+      exist is now invisible.
+  - rscdel: Removed the ruined planet type, replaced with the 'Ruined City' theme
+      which can occur on any planet.
