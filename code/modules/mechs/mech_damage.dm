@@ -93,7 +93,8 @@
 		if(BURN)
 			adjustFireLoss(damage, target)
 		if(IRRADIATE)
-			radiation += damage
+			for(var/mob/living/pilot in pilots)
+				pilot.apply_damage(damage, IRRADIATE, def_zone, damage_flags, used_weapon)
 
 	if((damagetype == BRUTE || damagetype == BURN) && prob(25+(damage*2)))
 		sparks.set_up(3,0,src)
@@ -103,13 +104,14 @@
 	return 1
 
 /mob/living/exosuit/rad_act(var/severity)
-	if(severity)
-		apply_damage(severity, IRRADIATE, damage_flags = DAM_DISPERSED)
+	return FALSE // Pilots already query rads, modify this for radiation alerts and such
 
 /mob/living/exosuit/get_rads()
+	. = ..()
 	if(!hatch_closed || (body.pilot_coverage < 100)) //Open, environment is the source
-		return ..()
-	return radiation //Closed, what made it through our armour?
+		return .
+	var/list/after_armor = modify_damage_by_armor(null, ., IRRADIATE, DAM_DISPERSED, src, 0, TRUE)
+	return after_armor[1]	
 
 /mob/living/exosuit/getFireLoss()
 	var/total = 0
