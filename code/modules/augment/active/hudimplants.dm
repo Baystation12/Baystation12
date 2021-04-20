@@ -13,14 +13,17 @@
 		return
 
 	if (active)
-		if (hud_type == HUD_MEDICAL)
-			req_access = list(access_medical)
-			if (allowed(owner))
-				process_med_hud(owner, 1)
-		else if (hud_type == HUD_SECURITY)
-			req_access = list(access_security)
-			if (allowed(owner))
-				process_sec_hud(owner, 1)
+		switch(hud_type)
+			if (HUD_MEDICAL)
+				req_access = list(access_medical)
+				if (allowed(owner))
+					process_med_hud(owner, 1)
+			if (HUD_SECURITY)
+				req_access = list(access_security)
+				if (allowed(owner))
+					process_sec_hud(owner, 1)
+			if (HUD_JANITOR)
+				process_jani_hud(owner)
 
 /obj/item/organ/internal/augment/active/hud/emp_act(severity)
 	if (istype(src.loc, /mob/living/carbon/human))
@@ -40,11 +43,17 @@
 
 /obj/item/organ/internal/augment/active/hud/health
 	name = "integrated health HUD"
-	desc = "The Vey-Med H-27 is an implantable HUD, designed to interface directly with the user's optic nerve and display information about patient vitals."
+	desc = "The Vey-Med H-27 is an implantable HUD, designed to interface with the user's optic nerve and display information about patient vitals."
 	icon_state = "eye_medical"
 	hud_type = HUD_MEDICAL
 
 /obj/item/organ/internal/augment/active/hud/security
 	name = "integrated security HUD"
-	desc = "The Hephaestus Industries C-VSR is an implantable HUD, designed to interface directly with the user's optic nerve and local databases to display security information."
+	desc = "The Hephaestus Industries C-VSR is an implantable HUD, designed to interface with the user's optic nerve and local databases to display security information."
 	hud_type = HUD_SECURITY
+
+/obj/item/organ/internal/augment/active/hud/janitor
+	name = "integrated filth HUD"
+	desc = "An implantable HUD based on the wearable janitorial version, designed to interface with the user's optic nerve and display information about nearby messes."
+	icon_state = "eye_janitor"
+	hud_type = HUD_JANITOR
