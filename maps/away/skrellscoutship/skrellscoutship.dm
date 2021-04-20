@@ -3,6 +3,7 @@
 #include "skrellscoutship_areas.dm"
 #include "skrellscoutship_shuttles.dm"
 #include "skrellscoutship_radio.dm"
+#include "skrellscoutship_machines.dm"
 
 /datum/map_template/ruin/away_site/skrellscoutship
 	name = "Skrellian Scout Ship"
