@@ -25,6 +25,11 @@
 
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_GRAV | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 
+/datum/species/human/gravworlder/can_float(mob/living/carbon/human/H)
+	. = ..()
+	if(.)
+		return H.skill_check(SKILL_HAULING, SKILL_EXPERT) //Hard for them to swim
+	
 /datum/species/human/spacer
 	name = SPECIES_SPACER
 	name_plural = "Space-Adapted Humans"
@@ -134,6 +139,11 @@
 
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_TRITON | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
 
+/datum/species/human/tritonian/can_float(mob/living/carbon/human/H)
+	if(!H.is_physically_disabled())
+		if(H.encumbrance() < 2)
+			return TRUE
+	return FALSE
 
 /datum/species/human/mule
 	name = SPECIES_MULE

@@ -26,6 +26,7 @@
 			to_chat(mover, "<span class='warning'>\The [A] blocks you.</span>")
 			return MOVEMENT_HANDLED
 
+	area = get_area(destination)
 	if(direction == UP && area.has_gravity() && mob.can_fall(FALSE, destination))
 		to_chat(mover, "<span class='warning'>You see nothing to hold on to.</span>")
 		return MOVEMENT_HANDLED

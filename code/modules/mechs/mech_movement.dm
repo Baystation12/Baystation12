@@ -40,6 +40,10 @@
 	//mechs are always anchored, so falling should always ignore it
 	if(..(TRUE, location_override))
 		return !(can_overcome_gravity())
+
+/mob/living/exosuit/can_float()
+	return FALSE //Nope
+	
 /datum/movement_handler/mob/delay/exosuit
 	expected_host_type = /mob/living/exosuit
 

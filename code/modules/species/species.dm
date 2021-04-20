@@ -501,6 +501,14 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 /datum/species/proc/can_fall(var/mob/living/carbon/human/H)
 	return TRUE
 
+//Used for swimming
+/datum/species/proc/can_float(var/mob/living/carbon/human/H)
+	if(!H.is_physically_disabled())
+		if(H.skill_check(SKILL_HAULING, SKILL_BASIC))
+			if(H.encumbrance() < 1)
+				return TRUE //Is not possible to swim while pulling big things
+	return FALSE
+
 // Used to override normal fall behaviour. Use only when the species does fall down a level.
 /datum/species/proc/handle_fall_special(var/mob/living/carbon/human/H, var/turf/landing)
 	return FALSE
