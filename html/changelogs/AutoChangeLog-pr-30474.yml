@@ -1,0 +1,14 @@
+author: Paprikue/Dox
+delete-after: true
+changes:
+  - rscadd: You can now toggle your HUDs on and off, without having to remove them,
+      in case you wanted to pull off the look while resting your eyes. Includes new
+      sprites for when they're off, and flashy sound effects to boot.
+  - rscadd: The science nerds can now get prescription Science HUDs so they can be
+      even nerdier. Available in loadout.
+  - tweak: Tweaked the Medical HUD visor colors slightly to better match normal medHUD
+      colors.
+  - tweak: EMPs now don't blind you if your HUD or goggles are deactivated. Security
+      HUDs also don't protect from flashes if they're not active.
+  - bugfix: HUDs no longer say that you're blinded after being EMP'd when they're
+      not on your eyes.
