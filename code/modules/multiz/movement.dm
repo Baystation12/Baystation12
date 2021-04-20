@@ -274,3 +274,61 @@
 		else
 			visible_message("<span class='warning'>[src] gives up on trying to climb onto \the [A]!</span>", "<span class='warning'>You give up on trying to climb onto \the [A]!</span>")
 		return TRUE
+
+/mob/living
+	var/atom/movable/z_observer/z_eye
+
+/atom/movable/z_observer
+	name = ""
+	simulated = FALSE
+	anchored = TRUE
+	mouse_opacity = FALSE
+	var/mob/living/owner
+
+/atom/movable/z_observer/Initialize(mapload, var/mob/living/user)
+	. = ..()
+	owner = user
+	follow()
+	GLOB.moved_event.register(owner, src, /atom/movable/z_observer/proc/follow)
+
+/atom/movable/z_observer/proc/follow()
+
+/atom/movable/z_observer/z_up/follow()
+	forceMove(get_step(owner, UP))
+	if(isturf(src.loc))
+		var/turf/T = src.loc
+		if(T.z_flags & ZM_MIMIC_BELOW)
+			return
+	owner.reset_view(null)
+	owner.z_eye = null
+	qdel(src)
+
+/atom/movable/z_observer/z_down/follow()
+	forceMove(get_step(owner, DOWN))
+	var/turf/T = get_turf(owner)
+	if(T && (T.z_flags & ZM_MIMIC_BELOW))
+		return
+	owner.reset_view(null)
+	owner.z_eye = null
+	qdel(src)
+
+/atom/movable/z_observer/Destroy()
+	GLOB.moved_event.unregister(owner, src, /atom/movable/z_observer/proc/follow)
+	owner = null
+	. = ..()
+
+/atom/movable/z_observer/can_fall()
+	return FALSE
+
+/atom/movable/z_observer/ex_act()
+	SHOULD_CALL_PARENT(FALSE)
+	return
+
+/atom/movable/z_observer/singularity_act()
+	return
+
+/atom/movable/z_observer/singularity_pull()
+	return
+
+/atom/movable/z_observer/singuloCanEat()
+	return
