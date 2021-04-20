@@ -1,5 +1,0 @@
-author: Imienny
-delete-after: true
-changes:
-  - rscdel: Its no longer possible to make combat mech sensors(thermal mech sensors)
-  - rscdel: Skrell scout ship no longer spawns with thermal goggles

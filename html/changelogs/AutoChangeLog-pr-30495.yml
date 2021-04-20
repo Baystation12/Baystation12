@@ -1,5 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - admin: Adds the 'Notarget' verb to 'Special Verbs', toggling a mobs visibility
-      to simple mobs.

@@ -1,5 +1,0 @@
-author: Spookerton
-delete-after: true
-changes:
-  - admin: Added a Reload Character option to player panel - rebuilds a valid mob
-      from current preferences.

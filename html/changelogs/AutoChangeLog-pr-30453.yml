@@ -1,4 +1,0 @@
-author: ''
-delete-after: true
-changes:
-  - tweak: Fleet security enlisted now ACTUALLY spawn with coveralls.

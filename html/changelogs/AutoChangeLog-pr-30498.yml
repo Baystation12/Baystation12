@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Wet people no longer show up as 'flammable' when examined, and instead
-      show up as 'wet'.

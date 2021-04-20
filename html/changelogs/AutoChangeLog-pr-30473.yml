@@ -1,4 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - admin: Added a verb for spawning exoplanets, 'Create Exoplanet' in the Debug tab.

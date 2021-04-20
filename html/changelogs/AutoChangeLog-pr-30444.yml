@@ -1,4 +1,0 @@
-author: JAR-OSKI
-delete-after: true
-changes:
-  - bugfix: Fixes hudpatch rogue pixel

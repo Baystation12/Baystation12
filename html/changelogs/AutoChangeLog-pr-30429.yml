@@ -1,8 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - tweak: 'Windows now have a minimum damage threshold based on the hardness of their
-      material before they can actually be damaged by melee attacks, adjustments to
-      their health calculation based on material integrity, and now have proper armor
-      handling for melee attacks (Projectile processing for walls already had this).
-      Walls are overall more robust when attacking them. See PR #30429 for specifics.'
