@@ -658,17 +658,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/chemistry)
-"abw" = (
-/obj/effect/floor_decal/floordetail/edgedrain,
-/obj/effect/floor_decal/corner/red{
-	dir = 5
-	},
-/obj/item/device/radio/intercom/department/medbay{
-	dir = 8;
-	pixel_x = 24
-	},
-/turf/simulated/floor/tiled/dark/monotile,
-/area/medical/morgue/autopsy)
 "abx" = (
 /obj/structure/filingcabinet/chestdrawer{
 	dir = 1
@@ -16281,13 +16270,6 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/center)
-"dab" = (
-/obj/structure/table/standard,
-/obj/structure/sign/warning/nosmoking_1{
-	pixel_y = 24
-	},
-/turf/simulated/floor/tiled/dark/monotile,
-/area/medical/morgue/autopsy)
 "daB" = (
 /obj/machinery/disposal,
 /obj/effect/floor_decal/corner/red/mono,
@@ -20466,6 +20448,13 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/aft)
+"joT" = (
+/obj/structure/sign/warning/nosmoking_1{
+	pixel_y = 24
+	},
+/obj/machinery/uniform_vendor,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/medical/morgue/autopsy)
 "jpt" = (
 /obj/effect/floor_decal/corner/red{
 	dir = 10
@@ -29287,6 +29276,18 @@
 /obj/structure/table/standard,
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
+"tDE" = (
+/obj/effect/floor_decal/floordetail/edgedrain,
+/obj/effect/floor_decal/corner/red{
+	dir = 5
+	},
+/obj/item/device/radio/intercom/department/medbay{
+	dir = 8;
+	pixel_x = 24
+	},
+/obj/structure/table/standard,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/medical/morgue/autopsy)
 "tEs" = (
 /obj/structure/filingcabinet/chestdrawer{
 	dir = 1
@@ -55465,7 +55466,7 @@ cqb
 adv
 pZE
 jCM
-dab
+joT
 dub
 dKb
 jxa
@@ -55873,7 +55874,7 @@ jCM
 jCM
 abi
 abo
-abw
+tDE
 jCM
 amP
 vZI
