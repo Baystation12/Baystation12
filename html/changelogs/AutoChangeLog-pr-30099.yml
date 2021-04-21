@@ -1,0 +1,5 @@
+author: BlueNexus
+delete-after: true
+changes:
+  - tweak: Temperature should have an increased impact on thrust, and burn mode works
+      again.
