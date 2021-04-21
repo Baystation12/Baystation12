@@ -1,5 +1,0 @@
-author: CrimsonShrike
-delete-after: true
-changes:
-  - tweak: Exosuits no longer accumulate radiation. They will instead return radiation
-      at current location reduced by armour directly.
