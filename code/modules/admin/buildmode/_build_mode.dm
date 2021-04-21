@@ -66,3 +66,8 @@
 		return matches[1]
 	else
 		return (input("Select a type", "Select Type", matches[1]) as null|anything in matches)
+
+/datum/build_mode/CanUseTopic(mob/user)
+	if (check_rights(R_BUILDMODE, TRUE, user))
+		return STATUS_INTERACTIVE
+	return ..()
