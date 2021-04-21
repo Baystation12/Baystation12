@@ -142,7 +142,7 @@
 
 /obj/item/clothing/glasses/science/prescription
 	name = "prescription science goggles"
-	desc = "Science hoggles with prescription lenses."
+	desc = "Science goggles with prescription lenses."
 	prescription = 6
 
 /obj/item/clothing/glasses/science/Initialize()
