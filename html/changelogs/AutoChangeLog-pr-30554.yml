@@ -1,0 +1,4 @@
+author: Mucker
+delete-after: true
+changes:
+  - admin: Fixed some buildmode nanoui's not working if you weren't ghosted.
