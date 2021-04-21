@@ -46,12 +46,6 @@
 	lying = FALSE // Fuck off, carp.
 	handle_vision(powered)
 
-/mob/living/exosuit/handle_mutations_and_radiation()
-	radiation = Clamp(radiation,0,500) //Dont let exosuits accumulate radiation
-
-	if(radiation)
-		radiation--
-
 /mob/living/exosuit/get_cell(force)
 	RETURN_TYPE(/obj/item/cell)
 	if(power == MECH_POWER_ON || force) //For most intents we can assume that a powered off exosuit acts as if it lacked a cell
