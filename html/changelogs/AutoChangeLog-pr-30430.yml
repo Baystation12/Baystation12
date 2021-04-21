@@ -1,6 +1,0 @@
-author: CrimsonShrike
-delete-after: true
-changes:
-  - rscadd: Adds exosuit flash.
-  - rscadd: Adds exosuit camera.
-  - tweak: Exosuit floodlights can be mounted on shoulders now too.

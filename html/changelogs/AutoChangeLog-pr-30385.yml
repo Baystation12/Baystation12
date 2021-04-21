@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - admin: Mech weapons now generate proper attack logs instead of admin logs, and
-      only appear when targeting mobs.

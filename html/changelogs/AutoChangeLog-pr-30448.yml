@@ -1,4 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - admin: Pulled punches no longer generate attack logs.

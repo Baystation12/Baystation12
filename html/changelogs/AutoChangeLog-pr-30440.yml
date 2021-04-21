@@ -1,6 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - bugfix: Player mobs inside things are properly notified of exoplanet spawn events.
-  - tweak: Added spiders and lowered meat horror spawn chance for exoplanet spawn
-      events.

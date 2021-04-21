@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Grilles of non-default materials now drop the correct material rod when
-      dismantled with wirecutters.

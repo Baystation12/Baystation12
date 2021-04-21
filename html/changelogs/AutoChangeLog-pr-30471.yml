@@ -1,5 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - tweak: Moved the 'rename species' verb for exoplanet mobs to the IC tab and added
-      a right-click option.

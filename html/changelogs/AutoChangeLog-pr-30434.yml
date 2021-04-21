@@ -1,7 +1,0 @@
-author: ''
-delete-after: true
-changes:
-  - tweak: All torch fleet crew now spawn with departmental coveralls.
-  - tweak: All torch fleet crew can obtain fatigues from uniform vendors.
-  - tweak: The fleet jacket and fleet polo are no longer available from uniform vendors.
-  - rscdel: Fleet officer's coveralls no longer exist.
