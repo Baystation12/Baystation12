@@ -89,7 +89,7 @@ GLOBAL_VAR(planet_repopulation_disabled)
 	GLOB.using_map.area_purity_test_exempt_areas += planetary_area.type
 	planetary_area.name = "Surface of [planet_name]"
 
-	world.maxz++
+	INCREMENT_WORLD_Z_SIZE
 	forceMove(locate(1,1,world.maxz))
 
 	if (LAZYLEN(possible_themes))
