@@ -61,6 +61,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 	weaken_mod = 0.05
 	paralysis_mod = 0.2
 	show_ssd = null //No SSD message so NPC logic can take over
+	show_coma = null
 	warning_low_pressure = 0
 	hazard_low_pressure = 0
 	body_temperature = null
