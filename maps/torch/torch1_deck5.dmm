@@ -16084,7 +16084,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible/red,
 /obj/machinery/computer/atmoscontrol/laptop{
 	monitored_alarm_ids = list("petrov1","petrov2","petrov3");
-	req_access = list("ACCESS_TORCH_PETROV_MAINT")
+	req_access = list("ACCESS_TORCH_PETROV")
 	},
 /obj/item/device/radio/intercom{
 	dir = 4;
