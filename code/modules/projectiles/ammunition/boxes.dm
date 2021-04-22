@@ -146,7 +146,7 @@
 
 /obj/item/ammo_magazine/pistol
 	name = "pistol magazine"
-	icon_state = "pistol"
+	icon_state = "pistol_mag"
 	origin_tech = list(TECH_COMBAT = 2)
 	mag_type = MAGAZINE
 	caliber = CALIBER_PISTOL
@@ -164,7 +164,7 @@
 
 /obj/item/ammo_magazine/pistol/double
 	name = "doublestack pistol magazine"
-	icon_state = "pistol"
+	icon_state = "pistol_mag"
 	matter = list(MATERIAL_STEEL = 1050)
 	max_ammo = 15
 
