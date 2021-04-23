@@ -23,6 +23,11 @@
 	item_cost = 2
 	path = /obj/item/tape_roll
 
+/datum/uplink_item/item/tools/sunglasses
+	name = "Advanced Sunglasses"
+	item_cost = 4
+	path = /obj/item/clothing/glasses/sunglasses/flash
+
 /datum/uplink_item/item/tools/money
 	name = "Operations Funding"
 	item_cost = 8
@@ -30,6 +35,16 @@
 /datum/uplink_item/item/tools/money/New()
 	. = ..()
 	desc = "A briefcase with 10,000 untraceable [GLOB.using_map.local_currency_name]. Makes a great bribe if they're willing to take you up on your offer."
+
+/datum/uplink_item/item/tools/mask
+	name = "Flash Proof Mask"
+	item_cost = 8
+	path = /obj/item/clothing/mask/gas/syndicate
+
+/datum/uplink_item/item/tools/nvg
+	name = "Flash Proof NVG Goggles"
+	item_cost = 16
+	path = /obj/item/clothing/glasses/night
 
 /datum/uplink_item/item/tools/clerical
 	name = "Morphic Clerical Kit"
@@ -96,11 +111,10 @@
 			This device will be able to continuously reaccess the last 6 to 8  airlocks it was used on."
 
 /datum/uplink_item/item/tools/space_suit
-	name = "Voidsuit and Tactical Mask"
-	desc = "A satchel containing a non-regulation voidsuit, voidsuit helmet, tactical mask, and oxygen tank. \
-	Conceal your identity, while also not dying in space."
+	name = "Blood-Red Voidsuit"
+	desc = "Suspicious looking armored voidsuit with helmet, oxygen tank and magboots attached."
 	item_cost = 28
-	path = /obj/item/storage/backpack/satchel/syndie_kit/space
+	path = /obj/item/clothing/suit/space/void/merc/prepared
 
 /datum/uplink_item/item/tools/thermal
 	name = "Thermal Imaging Glasses"

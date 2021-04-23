@@ -6,6 +6,10 @@
 	darkness_view = -1
 	flash_protection = FLASH_PROTECTION_MINOR
 
+/obj/item/clothing/glasses/sunglasses/flash
+	desc = "Glasses with treated lenses to prevent glare. They provide excellent protection against a variety of flash attacks."
+	flash_protection = FLASH_PROTECTION_MODERATE
+
 /obj/item/clothing/glasses/sunglasses/prescription
 	name = "prescription sunglasses"
 	prescription = 5
