@@ -3,7 +3,10 @@ proc/get_mech_image(var/decal, var/cache_key, var/cache_icon, var/image_colour, 
 	if(!GLOB.mech_image_cache[use_key])
 		var/image/I = image(icon = cache_icon, icon_state = cache_key)
 		if(image_colour)
-			I.color = image_colour
+			var/image/masked_color = image(icon = cache_icon, icon_state = "[cache_key]_mask")
+			masked_color.color = image_colour
+			masked_color.blend_mode = BLEND_MULTIPLY
+			I.overlays += masked_color
 		if(decal)
 			var/decal_key = "[decal]-[cache_key]"
 			if(!GLOB.mech_icon_cache[decal_key])

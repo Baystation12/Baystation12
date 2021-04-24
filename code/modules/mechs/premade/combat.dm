@@ -5,16 +5,16 @@
 /mob/living/exosuit/premade/combat/Initialize()
 	if(!arms)
 		arms = new /obj/item/mech_component/manipulators/combat(src)
-		arms.color = COLOR_DARK_GUNMETAL
+		arms.color = COLOR_GUNMETAL
 	if(!legs)
 		legs = new /obj/item/mech_component/propulsion/combat(src)
-		legs.color = COLOR_DARK_GUNMETAL
+		legs.color = COLOR_GUNMETAL
 	if(!head)
 		head = new /obj/item/mech_component/sensors/combat(src)
-		head.color = COLOR_DARK_GUNMETAL
+		head.color = COLOR_GUNMETAL
 	if(!body)
 		body = new /obj/item/mech_component/chassis/combat(src)
-		body.color = COLOR_DARK_GUNMETAL
+		body.color = COLOR_GUNMETAL
 
 	. = ..()
 
@@ -59,7 +59,6 @@
 	name = "sealed exosuit chassis"
 	hatch_descriptor = "canopy"
 	pilot_coverage = 100
-	transparent_cabin =  TRUE
 	exosuit_desc_string = "an armoured chassis"
 	icon_state = "combat_body"
 	power_use = 40
