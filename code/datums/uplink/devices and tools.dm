@@ -39,11 +39,16 @@
 /datum/uplink_item/item/tools/mask
 	name = "Flash Proof Mask"
 	item_cost = 8
+	path = /obj/item/clothing/mask/gas/flash
+
+/datum/uplink_item/item/tools/maskgood
+	name = "Reinforced Flash Proof Mask"
+	item_cost = 12
 	path = /obj/item/clothing/mask/gas/syndicate
 
 /datum/uplink_item/item/tools/nvg
-	name = "Flash Proof NVG Goggles"
-	item_cost = 16
+	name = "NVG Goggles"
+	item_cost = 14
 	path = /obj/item/clothing/glasses/night
 
 /datum/uplink_item/item/tools/clerical

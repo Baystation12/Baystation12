@@ -139,7 +139,6 @@
 	action_button_name = "Toggle Goggles"
 	toggleable = TRUE
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
-	flash_protection = FLASH_PROTECTION_MODERATE
 	off_state = "denight"
 	electric = TRUE
 
