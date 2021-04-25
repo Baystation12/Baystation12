@@ -58,6 +58,10 @@
 
 	return filtered
 
+/obj/item/clothing/mask/gas/flash
+	desc = "A face-covering mask with dimmed lenses that can be connected to an air supply. Filters harmful gases from the air."
+	flash_protection = FLASH_PROTECTION_MODERATE
+
 /obj/item/clothing/mask/gas/half
 	name = "face mask"
 	desc = "A compact, durable gas mask that can be connected to an air supply."
