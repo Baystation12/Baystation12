@@ -1,0 +1,5 @@
+author: CrimsonShrike
+delete-after: true
+changes:
+  - rscadd: New exosuit sprites. Courtesy of Azlan.
+  - tweak: Combat chassis is no longer transparent. Power loss will affect it.
