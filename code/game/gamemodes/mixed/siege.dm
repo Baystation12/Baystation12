@@ -1,3 +1,4 @@
+/*
 /datum/game_mode/siege
 	name = "Mercenary & Revolution"
 	config_tag = "siege"
@@ -10,3 +11,4 @@
 	shuttle_delay = 2
 	antag_tags = list(MODE_REVOLUTIONARY, MODE_LOYALIST, MODE_MERCENARY)
 	require_all_templates = TRUE
+*/
