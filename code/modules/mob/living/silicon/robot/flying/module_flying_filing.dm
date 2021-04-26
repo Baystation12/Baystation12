@@ -7,7 +7,6 @@
 		)
 	sprites = list("Drone" = "drone-service")
 	equipment = list(
-		/obj/item/device/flash,
 		/obj/item/pen/robopen,
 		/obj/item/form_printer,
 		/obj/item/gripper/clerical,

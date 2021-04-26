@@ -22,7 +22,6 @@
 	)
 	no_slip = 1
 	equipment = list(
-		/obj/item/device/flash,
 		/obj/item/borg/sight/meson,
 		/obj/item/extinguisher,
 		/obj/item/weldingtool/hugetank,

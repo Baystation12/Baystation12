@@ -7,7 +7,6 @@
 		"Default" = "robot"
 	)
 	equipment = list(
-		/obj/item/device/flash,
 		/obj/item/extinguisher,
 		/obj/item/wrench,
 		/obj/item/crowbar,

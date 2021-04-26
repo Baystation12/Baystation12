@@ -10,7 +10,6 @@
 		"Mop Gear Rex" = "mopgearrex"
 	)
 	equipment = list(
-		/obj/item/device/flash,
 		/obj/item/soap,
 		/obj/item/storage/bag/trash,
 		/obj/item/mop/advanced,

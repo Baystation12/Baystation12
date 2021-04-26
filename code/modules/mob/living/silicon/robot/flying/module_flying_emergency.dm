@@ -9,7 +9,6 @@
 		"Eyebot" = "eyebot-medical"
 	)
 	equipment = list(
-		/obj/item/device/flash,
 		/obj/item/borg/sight/hud/med,
 		/obj/item/device/scanner/health,
 		/obj/item/device/scanner/reagent/adv,

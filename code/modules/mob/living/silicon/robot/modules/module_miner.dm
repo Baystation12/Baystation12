@@ -20,7 +20,6 @@
 		/obj/item/borg/upgrade/jetpack
 	)
 	equipment = list(
-		/obj/item/device/flash,
 		/obj/item/borg/sight/meson,
 		/obj/item/wrench,
 		/obj/item/screwdriver,

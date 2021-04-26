@@ -21,7 +21,6 @@
 		"Default" = "Service2"
 	)
 	equipment = list(
-		/obj/item/device/flash,
 		/obj/item/gripper/service,
 		/obj/item/reagent_containers/glass/bucket,
 		/obj/item/material/minihoe,
@@ -85,7 +84,6 @@
 		"Default" =  "Service2"
 	)
 	equipment = list(
-		/obj/item/device/flash,
 		/obj/item/pen/robopen,
 		/obj/item/form_printer,
 		/obj/item/gripper/clerical,
