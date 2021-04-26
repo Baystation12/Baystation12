@@ -1,0 +1,4 @@
+author: ''
+delete-after: true
+changes:
+  - tweak: CPR now is much less likely to restart a stopped heart.
