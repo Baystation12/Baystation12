@@ -1104,7 +1104,7 @@
 			QDEL_NULL(z_eye)
 			return
 		var/turf/above = GetAbove(src)
-		if(istype(above) && above.z_flags & ZM_MIMIC_BELOW)
+		if(TURF_IS_MIMICING(above))
 			z_eye = new /atom/movable/z_observer/z_up(src, src)
 			to_chat(src, "<span class='notice'>You look up.</span>")
 			reset_view(z_eye)
@@ -1124,7 +1124,7 @@
 			QDEL_NULL(z_eye)
 			return
 		var/turf/T = get_turf(src)
-		if(T && (T.z_flags & ZM_MIMIC_BELOW) && HasBelow(T.z))
+		if(TURF_IS_MIMICING(T) && HasBelow(T.z))
 			z_eye = new /atom/movable/z_observer/z_down(src, src)
 			to_chat(src, "<span class='notice'>You look down.</span>")
 			reset_view(z_eye)
