@@ -11,7 +11,6 @@
 		"Droid" = "droid-science"
 	)
 	equipment = list(
-		/obj/item/device/flash,
 		/obj/item/portable_destructive_analyzer,
 		/obj/item/gripper/research,
 		/obj/item/gripper/no_use/loader,
@@ -29,10 +28,16 @@
 		/obj/item/gripper/chemistry,
 		/obj/item/stack/nanopaste
 	)
+
 	synths = list(
 		/datum/matter_synth/nanite = 10000
 	)
-	emag = /obj/prefab/hand_teleporter
+
+	emag = list(
+		/obj/item/device/flash,
+		/obj/prefab/hand_teleporter
+	)
+
 	skills = list(
 		SKILL_BUREAUCRACY         = SKILL_EXPERT,
 		SKILL_FINANCE             = SKILL_EXPERT,

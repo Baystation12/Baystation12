@@ -22,7 +22,6 @@
 	)
 	no_slip = 1
 	equipment = list(
-		/obj/item/device/flash,
 		/obj/item/borg/sight/meson,
 		/obj/item/extinguisher,
 		/obj/item/weldingtool/hugetank,
@@ -64,7 +63,12 @@
 		/datum/matter_synth/plasteel = 20000,
 		/datum/matter_synth/wire =     50
 	)
-	emag = /obj/item/melee/baton/robot/electrified_arm
+
+	emag = list(
+		/obj/item/device/flash,
+		/obj/item/melee/baton/robot/electrified_arm
+	)
+
 	skills = list(
 		SKILL_ATMOS        = SKILL_PROF,
 		SKILL_ENGINES      = SKILL_PROF,

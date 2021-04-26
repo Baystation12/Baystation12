@@ -7,13 +7,17 @@
 		"Default" = "robot"
 	)
 	equipment = list(
-		/obj/item/device/flash,
 		/obj/item/extinguisher,
 		/obj/item/wrench,
 		/obj/item/crowbar,
 		/obj/item/device/scanner/health
 	)
-	emag = /obj/item/melee/energy/sword
+
+	emag = list(
+		/obj/item/device/flash,
+		/obj/item/melee/energy/sword
+	)
+
 	skills = list(
 		SKILL_COMBAT       = SKILL_ADEPT,
 		SKILL_MEDICAL      = SKILL_ADEPT,

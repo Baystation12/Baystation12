@@ -10,7 +10,6 @@
 		"Mop Gear Rex" = "mopgearrex"
 	)
 	equipment = list(
-		/obj/item/device/flash,
 		/obj/item/soap,
 		/obj/item/storage/bag/trash,
 		/obj/item/mop/advanced,
@@ -21,7 +20,11 @@
 		/obj/item/crowbar,
 		/obj/item/weldingtool
 	)
-	emag = /obj/item/reagent_containers/spray
+
+	emag = list(
+		/obj/item/device/flash,
+		/obj/item/reagent_containers/spray
+	)
 
 /obj/item/robot_module/janitor/finalize_emag()
 	. = ..()

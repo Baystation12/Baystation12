@@ -21,7 +21,6 @@
 		"Default" = "Service2"
 	)
 	equipment = list(
-		/obj/item/device/flash,
 		/obj/item/gripper/service,
 		/obj/item/reagent_containers/glass/bucket,
 		/obj/item/material/minihoe,
@@ -38,7 +37,12 @@
 		/obj/item/tray/robotray,
 		/obj/item/reagent_containers/borghypo/service
 	)
-	emag = /obj/item/reagent_containers/food/drinks/bottle/small/beer
+
+	emag =  list(
+		/obj/item/device/flash,
+		/obj/item/reagent_containers/food/drinks/bottle/small/beer
+	)
+
 	skills = list(
 		SKILL_BUREAUCRACY         = SKILL_PROF,
 		SKILL_COMPUTER            = SKILL_EXPERT,
@@ -85,7 +89,6 @@
 		"Default" =  "Service2"
 	)
 	equipment = list(
-		/obj/item/device/flash,
 		/obj/item/pen/robopen,
 		/obj/item/form_printer,
 		/obj/item/gripper/clerical,
@@ -96,7 +99,12 @@
 		/obj/item/crowbar,
 		/obj/item/stack/package_wrap/cyborg
 	)
-	emag = /obj/item/stamp/chameleon
+
+	emag = list(
+		/obj/item/device/flash,
+		/obj/item/stamp/chameleon
+	)
+
 	synths = list(
 		/datum/matter_synth/package_wrap
 	)

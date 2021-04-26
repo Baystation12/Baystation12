@@ -25,7 +25,6 @@
 		"Needles" = "medicalrobot"
 		)
 	equipment = list(
-		/obj/item/device/flash,
 		/obj/item/borg/sight/hud/med,
 		/obj/item/device/scanner/health,
 		/obj/item/reagent_containers/borghypo/surgeon,
@@ -46,10 +45,16 @@
 		/obj/item/stack/medical/advanced/bruise_pack,
 		/obj/item/reagent_containers/dropper
 	)
+
 	synths = list(
 		/datum/matter_synth/medicine = 10000,
 	)
-	emag = /obj/item/reagent_containers/spray
+
+	emag = list(
+		/obj/item/device/flash,
+		/obj/item/reagent_containers/spray
+	)
+
 	skills = list(
 		SKILL_ANATOMY     = SKILL_PROF,
 		SKILL_MEDICAL     = SKILL_EXPERT,
@@ -100,7 +105,6 @@
 	)
 	equipment = list(
 		/obj/item/crowbar,
-		/obj/item/device/flash,
 		/obj/item/borg/sight/hud/med,
 		/obj/item/device/scanner/health,
 		/obj/item/device/scanner/reagent/adv,
@@ -120,7 +124,11 @@
 	synths = list(
 		/datum/matter_synth/medicine = 15000
 	)
-	emag = /obj/item/reagent_containers/spray
+	emag = list(
+		/obj/item/device/flash,
+		/obj/item/reagent_containers/spray
+	)
+
 	skills = list(
 		SKILL_ANATOMY     = SKILL_BASIC,
 		SKILL_MEDICAL     = SKILL_PROF,

@@ -20,7 +20,6 @@
 		/obj/item/borg/upgrade/jetpack
 	)
 	equipment = list(
-		/obj/item/device/flash,
 		/obj/item/borg/sight/meson,
 		/obj/item/wrench,
 		/obj/item/screwdriver,
@@ -31,7 +30,12 @@
 		/obj/item/device/scanner/mining,
 		/obj/item/crowbar
 	)
-	emag = /obj/item/gun/energy/plasmacutter
+
+	emag = list(
+		/obj/item/device/flash,
+		/obj/item/gun/energy/plasmacutter
+	)
+
 	skills = list(
 		SKILL_PILOT        = SKILL_EXPERT,
 		SKILL_EVA          = SKILL_PROF,
