@@ -150,8 +150,8 @@
 /obj/effect/spawner/newbomb/timer/syndicate
 	name = "TTV bomb - merc"
 	//High yield bombs. Yes, it is possible to make these with toxins
-	phoron_amt = 18.5
-	oxygen_amt = 28.5
+	phoron_amt = 16.5
+	oxygen_amt = 23.5
 
 /obj/effect/spawner/newbomb/proximity
 	name = "TTV bomb - proximity"
