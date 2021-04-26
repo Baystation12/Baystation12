@@ -1,0 +1,4 @@
+author: Mucker
+delete-after: true
+changes:
+  - bugfix: Fixed science players not having access to Petrov cameras.
