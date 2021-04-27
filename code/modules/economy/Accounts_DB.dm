@@ -2,10 +2,12 @@
 /obj/machinery/computer/account_database
 	name = "accounts uplink terminal"
 	desc = "Access transaction logs, account data and all kinds of other financial records."
+	machine_name = "accounts uplink terminal"
+	machine_desc = "Displays financial records, account information, and all sorts of info for anything related to network banking accounts."
 	var/needed_access = list(list(access_hop, access_captain))
 	var/receipt_num
 	var/machine_id = ""
-	var/obj/item/weapon/card/id/held_card
+	var/obj/item/card/id/held_card
 	var/datum/money_account/detailed_account_view
 	var/creating_new_account = 0
 	var/const/fund_cap = 1000000
@@ -31,7 +33,7 @@
 	..()
 
 /obj/machinery/computer/account_database/attackby(obj/O, mob/user)
-	if(!istype(O, /obj/item/weapon/card/id))
+	if(!istype(O, /obj/item/card/id))
 		return ..()
 
 	if(!held_card)
@@ -144,7 +146,7 @@
 
 				else
 					var/obj/item/I = usr.get_active_hand()
-					if (istype(I, /obj/item/weapon/card/id))
+					if (istype(I, /obj/item/card/id))
 						if(!usr.unEquip(I, src))
 							return
 						held_card = I
@@ -166,7 +168,7 @@
 
 			if("print")
 				var/text
-				var/obj/item/weapon/paper/P = new(loc)
+				var/obj/item/paper/P = new(loc)
 				if (detailed_account_view)
 					P.SetName("account #[detailed_account_view.account_number] details")
 					var/title = "Account #[detailed_account_view.account_number] Details"

@@ -184,16 +184,16 @@
 		var/obj/O
 
 		//shards
-		O = new /obj/item/weapon/material/shard(src.loc)
+		O = new /obj/item/material/shard(src.loc)
 		step_to(O, get_turf(pick(view(7, src))))
 		if(prob(75))
-			O = new /obj/item/weapon/material/shard(src.loc)
+			O = new /obj/item/material/shard(src.loc)
 			step_to(O, get_turf(pick(view(7, src))))
 		if(prob(50))
-			O = new /obj/item/weapon/material/shard(src.loc)
+			O = new /obj/item/material/shard(src.loc)
 			step_to(O, get_turf(pick(view(7, src))))
 		if(prob(25))
-			O = new /obj/item/weapon/material/shard(src.loc)
+			O = new /obj/item/material/shard(src.loc)
 			step_to(O, get_turf(pick(view(7, src))))
 
 		//rods
@@ -223,7 +223,7 @@
 			step_to(O, get_turf(pick(view(7, src))))
 
 		//also drop dummy circuit boards deconstructable for research (loot)
-		var/obj/item/weapon/stock_parts/circuitboard/C
+		var/obj/item/stock_parts/circuitboard/C
 
 		//spawn 1-4 boards of a random type
 		var/spawnees = 0
@@ -231,7 +231,7 @@
 		var/list/options = list(1,2,4,8,16,32,64,128,256,512)
 		for(var/i=0, i<num_boards, i++)
 			var/chosen = pick(options)
-			options.Remove(options.Find(chosen))
+			options.Remove(list_find(options, chosen))
 			spawnees |= chosen
 
 		if(spawnees & 1)

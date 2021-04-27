@@ -1,4 +1,4 @@
-/obj/item/weapon/gun/projectile
+/obj/item/gun/projectile
 	name = "gun"
 	desc = "A gun that fires bullets."
 	icon = 'icons/obj/guns/pistol.dmi'
@@ -38,7 +38,7 @@
 	//var/list/icon_keys = list()		//keys
 	//var/list/ammo_states = list()	//values
 
-/obj/item/weapon/gun/projectile/Initialize()
+/obj/item/gun/projectile/Initialize()
 	. = ..()
 	if (starts_loaded)
 		if(ispath(ammo_type) && (load_method & (SINGLE_CASING|SPEEDLOADER)))
@@ -48,7 +48,7 @@
 			ammo_magazine = new magazine_type(src)
 	update_icon()
 
-/obj/item/weapon/gun/projectile/consume_next_projectile()
+/obj/item/gun/projectile/consume_next_projectile()
 	if(!is_jammed && prob(jam_chance))
 		src.visible_message("<span class='danger'>\The [src] jams!</span>")
 		is_jammed = 1
@@ -76,13 +76,13 @@
 		return chambered.BB
 	return null
 
-/obj/item/weapon/gun/projectile/handle_post_fire()
+/obj/item/gun/projectile/handle_post_fire()
 	..()
 	if(chambered)
 		chambered.expend()
 		process_chambered()
 
-/obj/item/weapon/gun/projectile/process_point_blank(obj/projectile, mob/user, atom/target)
+/obj/item/gun/projectile/process_point_blank(obj/projectile, mob/user, atom/target)
 	..()
 	if(chambered && ishuman(target))
 		var/mob/living/carbon/human/H = target
@@ -94,11 +94,11 @@
 			chambered.put_residue_on(E)
 			H.apply_damage(3, BURN, used_weapon = "Gunpowder Burn", given_organ = E)
 
-/obj/item/weapon/gun/projectile/handle_click_empty()
+/obj/item/gun/projectile/handle_click_empty()
 	..()
 	process_chambered()
 
-/obj/item/weapon/gun/projectile/proc/process_chambered()
+/obj/item/gun/projectile/proc/process_chambered()
 	if (!chambered) return
 
 	switch(handle_casings)
@@ -125,7 +125,7 @@
 
 //Attempts to load A into src, depending on the type of thing being loaded and the load_method
 //Maybe this should be broken up into separate procs for each load method?
-/obj/item/weapon/gun/projectile/proc/load_ammo(var/obj/item/A, mob/user)
+/obj/item/gun/projectile/proc/load_ammo(var/obj/item/A, mob/user)
 	if(istype(A, /obj/item/ammo_magazine))
 		. = TRUE
 		var/obj/item/ammo_magazine/AM = A
@@ -215,7 +215,7 @@
 #undef PROF_SPD_RELOAD
 
 //attempts to unload src. If allow_dump is set to 0, the speedloader unloading method will be disabled
-/obj/item/weapon/gun/projectile/proc/unload_ammo(mob/user, var/allow_dump=1)
+/obj/item/gun/projectile/proc/unload_ammo(mob/user, var/allow_dump=1)
 	if(is_jammed)
 		user.visible_message("\The [user] begins to unjam [src].", "You clear the jam and unload [src]")
 		if(!do_after(user, 4, src))
@@ -251,23 +251,23 @@
 		to_chat(user, "<span class='warning'>[src] is empty.</span>")
 	update_icon()
 
-/obj/item/weapon/gun/projectile/attackby(var/obj/item/A as obj, mob/user as mob)
+/obj/item/gun/projectile/attackby(var/obj/item/A as obj, mob/user as mob)
 	if(!load_ammo(A, user))
 		return ..()
 
-/obj/item/weapon/gun/projectile/attack_self(mob/user as mob)
+/obj/item/gun/projectile/attack_self(mob/user as mob)
 	if(firemodes.len > 1)
 		..()
 	else
 		unload_ammo(user)
 
-/obj/item/weapon/gun/projectile/attack_hand(mob/user as mob)
+/obj/item/gun/projectile/attack_hand(mob/user as mob)
 	if(user.get_inactive_hand() == src)
 		unload_ammo(user, allow_dump=0)
 	else
 		return ..()
 
-/obj/item/weapon/gun/projectile/afterattack(atom/A, mob/living/user)
+/obj/item/gun/projectile/afterattack(atom/A, mob/living/user)
 	..()
 	if(auto_eject && ammo_magazine && ammo_magazine.stored_ammo && !ammo_magazine.stored_ammo.len)
 		ammo_magazine.dropInto(user.loc)
@@ -281,7 +281,7 @@
 		ammo_magazine = null
 		update_icon() //make sure to do this after unsetting ammo_magazine
 
-/obj/item/weapon/gun/projectile/examine(mob/user)
+/obj/item/gun/projectile/examine(mob/user)
 	. = ..()
 	if(is_jammed && user.skill_check(SKILL_WEAPONS, SKILL_BASIC))
 		to_chat(user, "<span class='warning'>It looks jammed.</span>")
@@ -290,7 +290,7 @@
 	if(user.skill_check(SKILL_WEAPONS, SKILL_ADEPT))
 		to_chat(user, "Has [getAmmo()] round\s remaining.")
 
-/obj/item/weapon/gun/projectile/proc/getAmmo()
+/obj/item/gun/projectile/proc/getAmmo()
 	var/bullets = 0
 	if(loaded)
 		bullets += loaded.len
@@ -302,7 +302,7 @@
 
 /* Unneeded -- so far.
 //in case the weapon has firemodes and can't unload using attack_hand()
-/obj/item/weapon/gun/projectile/verb/unload_gun()
+/obj/item/gun/projectile/verb/unload_gun()
 	set name = "Unload Ammo"
 	set category = "Object"
 	set src in usr

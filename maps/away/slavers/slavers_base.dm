@@ -22,7 +22,7 @@
 	id = "awaysite_slavers"
 	description = "Asteroid with slavers base inside."
 	suffixes = list("slavers/slavers_base.dmm")
-	cost = 1
+	spawn_cost = 1
 	generate_mining_by_z = 1
 	area_usage_test_exempted_root_areas = list(/area/slavers_base)
 	apc_test_exempt_areas = list(
@@ -73,7 +73,7 @@
 
 /decl/hierarchy/outfit/corpse/slavers_base/slaver1
 	name = "Dead Slaver 1"
-	uniform = /obj/item/clothing/under/johnny
+	uniform = /obj/item/clothing/under/color/brown
 	shoes = /obj/item/clothing/shoes/black
 	glasses = /obj/item/clothing/glasses/sunglasses
 
@@ -148,13 +148,11 @@
 	stop_automated_movement_when_pulled = 0
 	maxHealth = 100
 	health = 100
-	harm_intent_damage = 5
-	melee_damage_lower = 10
-	melee_damage_upper = 30
+	natural_weapon = /obj/item/natural_weapon/punch
 	can_escape = TRUE
 	unsuitable_atmos_damage = 15
 	var/corpse = /obj/effect/landmark/corpse/abolitionist
-	var/weapon = /obj/item/weapon/gun/energy/laser
+	var/weapon = /obj/item/gun/energy/laser
 	projectilesound = 'sound/weapons/laser.ogg'
 	ranged = 1
 	projectiletype = /obj/item/projectile/beam
@@ -186,8 +184,8 @@
 	item_icons = list(slot_w_uniform_str = 'maps/away/slavers/slavers_base_sprites.dmi')
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	armor = list(
-		melee = ARMOR_MELEE_KNIVES, 
-		bullet = ARMOR_BALLISTIC_PISTOL, 
-		laser = ARMOR_LASER_MINOR, 
+		melee = ARMOR_MELEE_KNIVES,
+		bullet = ARMOR_BALLISTIC_PISTOL,
+		laser = ARMOR_LASER_MINOR,
 		energy = ARMOR_ENERGY_MINOR
 		)

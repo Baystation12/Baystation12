@@ -161,7 +161,7 @@ SUBSYSTEM_DEF(jobs)
 	if(airstatus || radlevel > 0)
 		var/reply = alert(spawner, "Warning. Your selected spawn location seems to have unfavorable conditions. \
 		You may die shortly after spawning. \
-		Spawn anyway? More information: [airstatus] Radiation: [radlevel] Roentgen", "Atmosphere warning", "Abort", "Spawn anyway")
+		Spawn anyway? More information: [airstatus] Radiation: [radlevel] IU/s", "Atmosphere warning", "Abort", "Spawn anyway")
 		if(reply == "Abort")
 			return FALSE
 		else
@@ -283,11 +283,6 @@ SUBSYSTEM_DEF(jobs)
  *  This proc must not have any side effect besides of modifying "assigned_role".
  **/
 /datum/controller/subsystem/jobs/proc/divide_occupations(datum/game_mode/mode)
-	if(GLOB.triai)
-		for(var/datum/job/A in primary_job_datums)
-			if(A.title == "AI")
-				A.spawn_positions = 3
-				break
 	//Get the players who are ready
 	for(var/mob/new_player/player in GLOB.player_list)
 		if(player.ready && player.mind && !player.mind.assigned_role)
@@ -321,7 +316,7 @@ SUBSYSTEM_DEF(jobs)
 		for(var/mob/new_player/player in unassigned_roundstart)
 			// Loop through all jobs
 			for(var/datum/job/job in shuffledoccupations) // SHUFFLE ME BABY
-				if(job && !mode.disabled_jobs.Find(job.title) )
+				if(job && !list_find(mode.disabled_jobs, job.title))
 					if(job.defer_roundstart_spawn)
 						deferred_jobs[job] = TRUE
 					else if(attempt_role_assignment(player, job, level, mode))

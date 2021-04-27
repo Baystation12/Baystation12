@@ -58,7 +58,10 @@
 
 /mob/Login()
 
-	GLOB.player_list |= src
+	// Add to player list if missing
+	if (!list_find(GLOB.player_list, src))
+		ADD_SORTED(GLOB.player_list, src, /proc/cmp_mob_key)
+
 	update_Login_details()
 	world.update_status()
 

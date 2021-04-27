@@ -40,6 +40,9 @@
 
 	forceMove(locate(start_x, start_y, GLOB.using_map.overmap_z))
 
+	for(var/obj/effect/overmap/event/E in loc)
+		qdel(E)
+
 	docking_codes = "[ascii2text(rand(65,90))][ascii2text(rand(65,90))][ascii2text(rand(65,90))][ascii2text(rand(65,90))]"
 
 	testing("Located sector \"[name]\" at [start_x],[start_y], containing Z [english_list(map_z)]")
@@ -105,7 +108,7 @@
 	name = "generic sector"
 	desc = "Sector with some stuff in it."
 	icon_state = "sector"
-	anchored = 1
+	anchored = TRUE
 
 
 /obj/effect/overmap/visitable/sector/Initialize()
@@ -131,7 +134,7 @@
 		return 1
 
 	testing("Building overmap...")
-	world.maxz++
+	INCREMENT_WORLD_Z_SIZE
 	GLOB.using_map.overmap_z = world.maxz
 
 	testing("Putting overmap on [GLOB.using_map.overmap_z]")

@@ -58,7 +58,7 @@
 		.+=360
 
 //Returns location. Returns null if no location was found.
-/proc/get_teleport_loc(turf/location,mob/target,distance = 1, density = 0, errorx = 0, errory = 0, eoffsetx = 0, eoffsety = 0)
+/proc/get_teleport_loc(turf/location,mob/target,distance = 1, density = FALSE, errorx = 0, errory = 0, eoffsetx = 0, eoffsety = 0)
 /*
 Location where the teleport begins, target that will teleport, distance to go, density checking 0/1(yes/no).
 Random error in tile placement x, error in tile placement y, and block offset.
@@ -514,12 +514,6 @@ Turf and target are seperate in case you want to teleport some distance from a t
 /proc/between(var/low, var/middle, var/high)
 	return max(min(middle, high), low)
 
-#if DM_VERSION < 513
-/proc/arctan(x)
-	var/y=arcsin(x/sqrt(1+x*x))
-	return y
-#endif
-
 //returns random gauss number
 proc/GaussRand(var/sigma)
 	var/x,y,rsq
@@ -603,8 +597,7 @@ proc/GaussRandRound(var/sigma,var/roundto)
 //Takes: Anything that could possibly have variables and a varname to check.
 //Returns: 1 if found, 0 if not.
 /proc/hasvar(var/datum/A, var/varname)
-	if(A.vars.Find(lowertext(varname))) return 1
-	else return 0
+	return !!list_find(A.vars, lowertext(varname))
 
 //Takes: Area type as text string or as typepath OR an instance of the area.
 //Returns: A list of all areas of that type in the world.
@@ -875,12 +868,12 @@ proc/get_mob_with_client_list()
 //Quick type checks for some tools
 var/global/list/common_tools = list(
 /obj/item/stack/cable_coil,
-/obj/item/weapon/wrench,
-/obj/item/weapon/weldingtool,
-/obj/item/weapon/screwdriver,
-/obj/item/weapon/wirecutters,
+/obj/item/wrench,
+/obj/item/weldingtool,
+/obj/item/screwdriver,
+/obj/item/wirecutters,
 /obj/item/device/multitool,
-/obj/item/weapon/crowbar)
+/obj/item/crowbar)
 
 /proc/istool(O)
 	if(O && is_type_in_list(O, common_tools))
@@ -889,18 +882,18 @@ var/global/list/common_tools = list(
 
 /proc/is_hot(obj/item/W as obj)
 	switch(W.type)
-		if(/obj/item/weapon/weldingtool)
-			var/obj/item/weapon/weldingtool/WT = W
+		if(/obj/item/weldingtool)
+			var/obj/item/weldingtool/WT = W
 			if(WT.isOn())
 				return 3800
 			else
 				return 0
-		if(/obj/item/weapon/flame/lighter)
+		if(/obj/item/flame/lighter)
 			if(W:lit)
 				return 1500
 			else
 				return 0
-		if(/obj/item/weapon/flame/match)
+		if(/obj/item/flame/match)
 			if(W:lit)
 				return 1000
 			else
@@ -910,11 +903,11 @@ var/global/list/common_tools = list(
 				return 1000
 			else
 				return 0
-		if(/obj/item/weapon/gun/energy/plasmacutter)
+		if(/obj/item/gun/energy/plasmacutter)
 			return 3800
-		if(/obj/item/weapon/melee/energy)
+		if(/obj/item/melee/energy)
 			return 3500
-		if(/obj/item/weapon/blob_tendril)
+		if(/obj/item/blob_tendril)
 			if(W.damtype == BURN)
 				return 1000
 			else
@@ -941,22 +934,22 @@ var/global/list/common_tools = list(
 /obj/item/proc/can_puncture()
 	return src.sharp
 
-/obj/item/weapon/screwdriver/can_puncture()
+/obj/item/screwdriver/can_puncture()
 	return 1
 
-/obj/item/weapon/pen/can_puncture()
+/obj/item/pen/can_puncture()
 	return 1
 
-/obj/item/weapon/weldingtool/can_puncture()
+/obj/item/weldingtool/can_puncture()
 	return 1
 
-/obj/item/weapon/screwdriver/can_puncture()
+/obj/item/screwdriver/can_puncture()
 	return 1
 
-/obj/item/weapon/shovel/can_puncture() //includes spades
+/obj/item/shovel/can_puncture() //includes spades
 	return 1
 
-/obj/item/weapon/flame/can_puncture()
+/obj/item/flame/can_puncture()
 	return src.lit
 
 /obj/item/clothing/mask/smokable/cigarette/can_puncture()
@@ -1013,8 +1006,8 @@ var/list/WALLITEMS = list(
 	/obj/structure/extinguisher_cabinet, /obj/structure/reagent_dispensers/peppertank,
 	/obj/machinery/status_display, /obj/machinery/requests_console, /obj/machinery/light_switch, /obj/structure/sign,
 	/obj/machinery/newscaster, /obj/machinery/firealarm, /obj/structure/noticeboard,
-	/obj/item/weapon/storage/secure/safe, /obj/machinery/door_timer, /obj/machinery/flasher, /obj/machinery/keycard_auth,
-	/obj/item/weapon/storage/mirror, /obj/structure/fireaxecabinet, /obj/structure/filingcabinet/wallcabinet
+	/obj/item/storage/secure/safe, /obj/machinery/door_timer, /obj/machinery/flasher, /obj/machinery/keycard_auth,
+	/obj/item/storage/mirror, /obj/structure/fireaxecabinet, /obj/structure/filingcabinet/wallcabinet
 	)
 /proc/gotwallitem(loc, dir)
 	for(var/obj/O in loc)
@@ -1082,10 +1075,10 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 
 /mob/dview
 	invisibility = 101
-	density = 0
+	density = FALSE
 
-	anchored = 1
-	simulated = 0
+	anchored = TRUE
+	simulated = FALSE
 
 	see_in_dark = 1e6
 

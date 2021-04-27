@@ -6,7 +6,7 @@
 	info = "You are an employee on the SRV Verne, as it carries the students of the prestigious Ceti Technical Institute conducting research \
 	in the depths of space. Your job on the Survey team is simple; pilot the SRV Verne and the SRV Venerable Catfish; protect the students; and assist in their studies. Your Survey team has awoken \
  	to find the Verne running at low capacity, under-staffed, with much of the automated life support systems doing the heavy lifting."
-	whitelisted_species = list(SPECIES_HUMAN,SPECIES_IPC,SPECIES_SPACER,SPECIES_GRAVWORLDER,SPECIES_VATGROWN,SPECIES_BOOSTER,SPECIES_TRITONIAN)
+	whitelisted_species = list(SPECIES_HUMAN,SPECIES_IPC,SPECIES_SPACER,SPECIES_GRAVWORLDER,SPECIES_VATGROWN,SPECIES_TRITONIAN)
 	required_language = LANGUAGE_HUMAN_EURO
 	min_skill = list(
 		SKILL_EVA     = SKILL_BASIC,
@@ -28,7 +28,7 @@
 	info = "You are an employee on the SRV Verne, as it carries the students of the prestigious Ceti Technical Institute conducting research \
  	in the depths of space. Your job on the Survey team is simple: Handle engineering work on the SRV Verne and the SRV Venerable Catfish, protect the students, and assist in their studies. Your Survey team has awoken \
 	to find the Verne running at low capacity, under-staffed, with much of the automated life support systems doing the heavy lifting."
-	whitelisted_species = list(SPECIES_HUMAN,SPECIES_IPC,SPECIES_SPACER,SPECIES_GRAVWORLDER,SPECIES_VATGROWN,SPECIES_BOOSTER,SPECIES_TRITONIAN)
+	whitelisted_species = list(SPECIES_HUMAN,SPECIES_IPC,SPECIES_SPACER,SPECIES_GRAVWORLDER,SPECIES_VATGROWN,SPECIES_TRITONIAN)
 	required_language = LANGUAGE_HUMAN_EURO
 	min_skill = list(
 		SKILL_COMPUTER     = SKILL_BASIC,
@@ -55,7 +55,7 @@
 	info = "You are an undergraduate xenoscience researcher on the SRV Verne, alongside the rest of your class of the prestigious Ceti Technical Institute conducting research \
 	in the depths of space. A survey team will be accompanying you, on hand to assist your studies on the exoplanets in this system. Your team has awoken \
 	to find the Verne running at low capacity, under-staffed, with much of the automated life support systems doing the heavy lifting."
-	whitelisted_species = list(SPECIES_HUMAN,SPECIES_SPACER,SPECIES_GRAVWORLDER,SPECIES_VATGROWN,SPECIES_BOOSTER,SPECIES_TRITONIAN)
+	whitelisted_species = list(SPECIES_HUMAN,SPECIES_SPACER,SPECIES_GRAVWORLDER,SPECIES_VATGROWN,SPECIES_TRITONIAN)
 	required_language = LANGUAGE_HUMAN_EURO
 	min_skill = list(
 		SKILL_BUREAUCRACY = SKILL_BASIC,
@@ -76,30 +76,30 @@
 	hierarchy_type = /decl/hierarchy/outfit/job/verne
 	pda_type = null
 	pda_slot = null
-	id_types = list(/obj/item/weapon/card/id/verne)
+	id_types = list(/obj/item/card/id/verne)
 	l_ear = /obj/item/device/radio/headset/map_preset/verne
 
 /decl/hierarchy/outfit/job/verne/pilot
 	name = VERNE_OUTFIT_JOB_NAME("Pilot")
 	uniform = /obj/item/clothing/under/suit_jacket/navy
 	shoes = /obj/item/clothing/shoes/dress/caretakershoes
-	belt = /obj/item/weapon/storage/belt/holster/general
-	r_pocket = /obj/item/weapon/gun/energy/gun/small
-	l_pocket = /obj/item/weapon/crowbar/prybar
+	belt = /obj/item/storage/belt/holster/general
+	r_pocket = /obj/item/gun/energy/gun/small
+	l_pocket = /obj/item/crowbar/prybar
 
 /decl/hierarchy/outfit/job/verne/engineer
 	name = VERNE_OUTFIT_JOB_NAME("Engineer")
 	uniform = /obj/item/clothing/under/rank/engineer
 	shoes = /obj/item/clothing/shoes/workboots
-	belt = /obj/item/weapon/storage/belt/utility/full
+	belt = /obj/item/storage/belt/utility/full
 	r_pocket = /obj/item/device/radio/map_preset/verne
-	l_pocket = /obj/item/weapon/crowbar/prybar
+	l_pocket = /obj/item/crowbar/prybar
 
 /decl/hierarchy/outfit/job/verne/engineer/New()
 	..()
-	backpack_overrides[/decl/backpack_outfit/backpack] = /obj/item/weapon/storage/backpack/industrial
-	backpack_overrides[/decl/backpack_outfit/satchel] = /obj/item/weapon/storage/backpack/satchel/eng
-	backpack_overrides[/decl/backpack_outfit/messenger_bag] = /obj/item/weapon/storage/backpack/messenger/engi
+	backpack_overrides[/decl/backpack_outfit/backpack] = /obj/item/storage/backpack/industrial
+	backpack_overrides[/decl/backpack_outfit/satchel] = /obj/item/storage/backpack/satchel/eng
+	backpack_overrides[/decl/backpack_outfit/messenger_bag] = /obj/item/storage/backpack/messenger/engi
 
 /decl/hierarchy/outfit/job/verne/researcher
 	name = VERNE_OUTFIT_JOB_NAME("Undergraduate Xenoscience Researcher")

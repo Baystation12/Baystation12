@@ -1,5 +1,6 @@
 #define AIRLOCK_REGION_PAINT    "Paint"
 #define AIRLOCK_REGION_STRIPE   "Stripe"
+#define AIRLOCK_REGION_WINDOW   "Window"
 
 /obj/item/device/paint_sprayer
 	name = "paint sprayer"
@@ -65,7 +66,7 @@
 		"Violet" =         COLOR_VIOLET,
 		"White" =          COLOR_WHITE,
 		"Yellow" =         COLOR_AMBER,
-		"Hull blue" =      COLOR_HULL,
+		"Sol blue" =       COLOR_SOL,
 		"Bulkhead black" = COLOR_WALL_GUNMETAL,
 		)
 
@@ -142,7 +143,7 @@
 		to_chat(user, SPAN_WARNING("You can't paint an active exosuit. Dismantle it first."))
 		. = FALSE
 	else
-		to_chat(user, SPAN_WARNING("\The [src] can only be used on floors, walls, exosuits or certain airlocks."))
+		to_chat(user, SPAN_WARNING("\The [src] can only be used on floors, windows, walls, exosuits or certain airlocks."))
 		. = FALSE
 	if (.)
 		add_fingerprint(user)
@@ -163,6 +164,7 @@
 		if (D.paintable)
 			D.paint_airlock(null)
 			D.stripe_airlock(null)
+			D.paint_window(null)
 			. = TRUE
 	else if (A.atom_flags & ATOM_FLAG_CAN_BE_PAINTED)
 		A.set_color(null)
@@ -248,6 +250,8 @@
 			return D.door_color
 		if (AIRLOCK_REGION_STRIPE)
 			return D.stripe_color
+		if (AIRLOCK_REGION_WINDOW)
+			return D.window_color
 		else
 			return FALSE
 
@@ -261,18 +265,22 @@
 			D.paint_airlock(paint_color)
 		if (AIRLOCK_REGION_STRIPE)
 			D.stripe_airlock(paint_color)
+		if (AIRLOCK_REGION_WINDOW)
+			D.paint_window(paint_color)
 		else
 			return FALSE
 	return TRUE
 
 /obj/item/device/paint_sprayer/proc/select_airlock_region(obj/machinery/door/airlock/D, mob/user, input_text)
 	var/choice
-	if (D.paintable == AIRLOCK_PAINTABLE)
-		choice = "Paint"
-	else if (D.paintable == AIRLOCK_STRIPABLE)
-		choice = "Stripe"
-	else if (D.paintable == AIRLOCK_PAINTABLE | AIRLOCK_STRIPABLE)
-		choice = input(user, input_text) as null|anything in list("Paint","Stripe")
+	var/list/choices = list()
+	if (D.paintable & AIRLOCK_PAINTABLE)
+		choices |= AIRLOCK_REGION_PAINT
+	if (D.paintable & AIRLOCK_STRIPABLE)
+		choices |= AIRLOCK_REGION_STRIPE
+	if (D.paintable & AIRLOCK_WINDOW_PAINTABLE)
+		choices |= AIRLOCK_REGION_WINDOW
+	choice = input(user, input_text) as null|anything in sortList(choices)
 	if (user.incapacitated() || !D || !user.Adjacent(D))
 		return FALSE
 	return choice

@@ -22,9 +22,7 @@
 	response_harm   = "pokes"
 	maxHealth = 125
 	health = 125
-	melee_damage_lower = 10
-	melee_damage_upper = 15
-	melee_damage_flags = DAM_SHARP
+	natural_weapon = /obj/item/natural_weapon/bite/spider
 	heat_damage_per_tick = 20
 	cold_damage_per_tick = 20
 	faction = "spiders"
@@ -37,7 +35,7 @@
 	pry_time = 8 SECONDS
 	pry_desc = "clawing"
 
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/spider
+	meat_type = /obj/item/reagent_containers/food/snacks/spider
 	meat_amount = 3
 	bone_material = null
 	bone_amount =   0
@@ -50,6 +48,26 @@
 	var/eye_colour
 	var/allowed_eye_colours = list(COLOR_RED, COLOR_ORANGE, COLOR_YELLOW, COLOR_LIME, COLOR_DEEP_SKY_BLUE, COLOR_INDIGO, COLOR_VIOLET, COLOR_PINK)
 	var/hunt_chance = 1 //percentage chance the mob will run to a random nearby tile
+	var/use_ladder_chance = 25
+	var/climbing_ladder = FALSE
+
+/obj/item/natural_weapon/bite/spider
+	force = 20
+
+/obj/item/natural_weapon/bite/spider/apply_hit_effect(mob/living/target, mob/living/user, hit_zone)
+	. = ..()
+	if(.)
+		var/mob/living/simple_animal/hostile/giant_spider/GS = user
+		if(istype(GS) && target && ishuman(target))
+			var/mob/living/carbon/human/H = target
+			var/obj/item/clothing/suit/space/S = H.get_covering_equipped_item_by_zone(BP_CHEST)
+			if(istype(S) && !length(S.breaches))
+				return
+			if(target.reagents)
+				target.reagents.add_reagent(GS.poison_type, rand(0.5 * GS.poison_per_bite, GS.poison_per_bite))
+				if(prob(GS.poison_per_bite))
+					to_chat(H, SPAN_WARNING("You feel a tiny prick."))
+
 
 /mob/living/simple_animal/hostile/giant_spider/can_do_maneuver(var/decl/maneuver/maneuver, var/silent = FALSE)
 	. = ..() && can_act()
@@ -63,8 +81,7 @@
 	meat_amount = 4
 	maxHealth = 200
 	health = 200
-	melee_damage_lower = 13
-	melee_damage_upper = 18
+	natural_weapon = /obj/item/natural_weapon/bite/spider/strong
 	poison_per_bite = 5
 	speed = 2
 	move_to_delay = 4
@@ -75,6 +92,8 @@
 	var/berserking
 	var/mob/living/simple_animal/hostile/giant_spider/nurse/paired_nurse
 
+/obj/item/natural_weapon/bite/spider/strong
+
 //nursemaids - these create webs and eggs - the weakest and least threatening
 /mob/living/simple_animal/hostile/giant_spider/nurse
 	desc = "A monstrously huge beige spider with shimmering eyes."
@@ -83,8 +102,6 @@
 	icon_dead = "beige_dead"
 	maxHealth = 80
 	health = 80
-	melee_damage_lower = 10
-	melee_damage_upper = 14
 	harm_intent_damage = 6 //soft
 	poison_per_bite = 5
 	speed = 0
@@ -93,9 +110,11 @@
 	pry_time = 9 SECONDS
 
 	var/atom/cocoon_target
+	var/obj/effect/spider/spiderling/spiderling_target
 	var/fed = 0
 	var/max_eggs = 8
 	var/infest_chance = 8
+	var/left_to_feed = 3 //number of spiderlings we can make giant
 	var/mob/living/simple_animal/hostile/giant_spider/guard/paired_guard
 
 	//things we can't encase in a cocoon
@@ -110,8 +129,7 @@
 	icon_dead = "black_dead"
 	maxHealth = 150
 	health = 150
-	melee_damage_lower = 17
-	melee_damage_upper = 20
+	natural_weapon = /obj/item/natural_weapon/bite/spider/strong
 	poison_per_bite = 10
 	speed = -1
 	move_to_delay = 2
@@ -134,8 +152,6 @@
 	icon_dead = "purple_dead"
 	maxHealth = 90
 	health = 90
-	melee_damage_lower = 10
-	melee_damage_upper = 14
 	poison_per_bite = 15
 	ranged = TRUE
 	move_to_delay = 2
@@ -155,9 +171,13 @@
 	update_icon()
 	. = ..()
 
+/mob/living/simple_animal/hostile/giant_spider/nurse/Initialize(mapload, atom/parent)
+	. = ..()
+
+	if (prob(40)) //chance to be able to spawn eggs right away
+		fed = 1
+
 /mob/living/simple_animal/hostile/giant_spider/proc/spider_randomify() //random math nonsense to get their damage, health and venomness values
-	melee_damage_lower = rand(0.8 * initial(melee_damage_lower), initial(melee_damage_lower))
-	melee_damage_upper = rand(initial(melee_damage_upper), (1.2 * initial(melee_damage_upper)))
 	maxHealth = rand(initial(maxHealth), (1.4 * initial(maxHealth)))
 	health = maxHealth
 	eye_colour = pick(allowed_eye_colours)
@@ -189,17 +209,9 @@
 	. = ..()
 	if(isliving(.))
 		if(health < maxHealth)
-			health += (0.2 * rand(melee_damage_lower, melee_damage_upper)) //heal a bit on hit
-		if(ishuman(.))
-			var/mob/living/carbon/human/H = .
-			var/obj/item/clothing/suit/space/S = H.get_covering_equipped_item_by_zone(BP_CHEST)
-			if(istype(S) && !length(S.breaches))
-				return
-		var/mob/living/L = .
-		if(L.reagents)
-			L.reagents.add_reagent(poison_type, rand(0.5 * poison_per_bite, poison_per_bite))
-			if(prob(poison_per_bite))
-				to_chat(L, "<span class='warning'>You feel a tiny prick.</span>")
+			var/obj/item/W = get_natural_weapon()
+			if(W)
+				health += (0.2 * W.force) //heal a bit on hit
 
 /mob/living/simple_animal/hostile/giant_spider/Life()
 	. = ..()
@@ -207,13 +219,47 @@
 		return FALSE
 	if(stance == HOSTILE_STANCE_IDLE)
 		//chance to skitter madly away
-		if(!busy && prob(hunt_chance))
-			stop_automated_movement = 1
-			walk_to(src, pick(orange(20, src)), 1, move_to_delay)
-			addtimer(CALLBACK(src, .proc/disable_stop_automated_movement), 5 SECONDS)
+		if(!busy)
+			if (prob(hunt_chance))
+				stop_automated_movement = TRUE
+				walk_to(src, pick(orange(20, src)), 1, move_to_delay)
+				addtimer(CALLBACK(src, .proc/disable_stop_automated_movement), 5 SECONDS)
+
+			else if (!climbing_ladder && prob(use_ladder_chance))
+				for (var/obj/structure/ladder/L in view(10, src))
+					climbing_ladder = TRUE
+					stop_automated_movement = TRUE
+					walk_to(src, L, 0, move_to_delay)
+					addtimer(CALLBACK(src, .proc/give_up_ladder), 5 SECONDS)
+					break
+
+		if (climbing_ladder)
+			var/obj/structure/ladder/L = locate() in get_turf(src)
+
+			if (istype(L))
+				L.climb(src)
+				start_ladder_cooldown()
+
+	if (stance == HOSTILE_STANCE_ATTACK)
+		use_ladder_chance = 25 //reset cooldown so we can give chase
+
+/mob/living/simple_animal/hostile/giant_spider/proc/start_ladder_cooldown()
+	use_ladder_chance = 0
+	climbing_ladder = FALSE
+	walk_to(src, pick(orange(20, src)), 1, move_to_delay)
+	addtimer(CALLBACK(src, .proc/end_ladder_cooldown), 3 MINUTES)
+
+
+/mob/living/simple_animal/hostile/giant_spider/proc/end_ladder_cooldown()
+	use_ladder_chance = 25
+
+/mob/living/simple_animal/hostile/giant_spider/proc/give_up_ladder()
+	climbing_ladder = FALSE
+	disable_stop_automated_movement()
+
 
 /mob/living/simple_animal/hostile/giant_spider/proc/disable_stop_automated_movement()
-	stop_automated_movement = 0
+	stop_automated_movement = FALSE
 	walk(src,0)
 	kick_stance()
 
@@ -249,7 +295,7 @@ Guard caste procs
 		paired_nurse = null
 
 /mob/living/simple_animal/hostile/giant_spider/guard/proc/find_nurse()
-	for(var/mob/living/simple_animal/hostile/giant_spider/nurse/N in ListTargets(10))
+	for(var/mob/living/simple_animal/hostile/giant_spider/nurse/N in hearers(src, 10))
 		if(N.stat || N.paired_guard)
 			continue
 		paired_nurse = N
@@ -263,8 +309,9 @@ Guard caste procs
 
 /mob/living/simple_animal/hostile/giant_spider/guard/proc/go_berserk()
 	audible_message("<span class='danger'>\The [src] chitters wildly!</span>")
-	melee_damage_lower +=5
-	melee_damage_upper +=5
+	var/obj/item/W = get_natural_weapon()
+	if(W)
+		W.force = initial(W.force) + 5
 	move_to_delay--
 	break_stuff_probability = 45
 	addtimer(CALLBACK(src, .proc/calm_down), 3 MINUTES)
@@ -272,8 +319,9 @@ Guard caste procs
 /mob/living/simple_animal/hostile/giant_spider/guard/proc/calm_down()
 	berserking = FALSE
 	visible_message("<span class='notice'>\The [src] calms down and surveys the area.</span>")
-	melee_damage_lower -= 5
-	melee_damage_upper -= 5
+	var/obj/item/W = get_natural_weapon()
+	if(W)
+		W.force = initial(W.force)
 	move_to_delay++
 	break_stuff_probability = 10
 
@@ -315,8 +363,16 @@ Nurse caste procs
 		if(busy == MOVING_TO_TARGET)
 			if(cocoon_target == C && get_dist(src,cocoon_target) > 1)
 				cocoon_target = null
+			if (spiderling_target == C && get_dist(src, spiderling_target) > 1)
+				spiderling_target = null
 			busy = 0
 			stop_automated_movement = 0
+
+/mob/living/simple_animal/hostile/giant_spider/nurse/proc/feed_spiderling(obj/effect/spider/spiderling/S)
+	visible_message(SPAN_WARNING("\The [src] secretes a strange green substance over \the [S], causing it to grow rapidly!."))
+	S.amount_grown += 2
+	spiderling_target = null
+	left_to_feed--
 
 /mob/living/simple_animal/hostile/giant_spider/nurse/Life()
 	. = ..()
@@ -326,6 +382,15 @@ Nurse caste procs
 		var/list/can_see = view(src, 10)
 		//30% chance to stop wandering and do something
 		if(!busy && prob(30))
+			if (left_to_feed > 0 && prob(50))
+				for (var/obj/effect/spider/spiderling/S in can_see)
+					if (S.amount_grown < 0)
+						spiderling_target = S
+						busy = MOVING_TO_TARGET
+						walk_to(src, S, 1, move_to_delay)
+						GiveUp(S)
+						return
+
 			//first, check for potential food nearby to cocoon
 			for(var/mob/living/C in can_see)
 				if(is_type_in_list(C, cocoon_blacklist))
@@ -371,11 +436,11 @@ Nurse caste procs
 
 						if(O.anchored)
 							continue
-						
+
 						if(is_type_in_list(O, cocoon_blacklist))
 							continue
 
-						if(istype(O, /obj/item) || istype(O, /obj/structure) || istype(O, /obj/machinery))
+						if(istype(O, /obj/structure) || istype(O, /obj/machinery))
 							cocoon_target = O
 							busy = MOVING_TO_TARGET
 							stop_automated_movement = 1
@@ -383,8 +448,13 @@ Nurse caste procs
 							//give up if we can't reach them after 10 seconds
 							GiveUp(O)
 
-		else if(busy == MOVING_TO_TARGET && cocoon_target)
-			if(get_dist(src, cocoon_target) <= 1)
+		else if(busy == MOVING_TO_TARGET)
+
+			if (spiderling_target && get_dist(src, spiderling_target) <= 1)
+				feed_spiderling(spiderling_target)
+				return
+
+			if (cocoon_target && get_dist(src, cocoon_target) <= 1)
 				busy = SPINNING_COCOON
 				src.visible_message("<span class='notice'>\The [src] begins to secrete a sticky substance around \the [cocoon_target].</span>")
 				stop_automated_movement = 1
@@ -397,9 +467,13 @@ Nurse caste procs
 							C.pixel_x = cocoon_target.pixel_x
 							C.pixel_y = cocoon_target.pixel_y
 							for(var/mob/living/M in C.loc)
+								if (istype(M, /mob/living/simple_animal/hostile/giant_spider))
+									continue
+
 								large_cocoon = 1
 								fed++
 								max_eggs++
+								left_to_feed += rand(2, 4)
 								src.visible_message("<span class='warning'>\The [src] sticks a proboscis into \the [cocoon_target] and sucks a viscous substance out.</span>")
 								M.forceMove(C)
 								C.pixel_x = M.pixel_x
@@ -444,7 +518,7 @@ Hunter caste procs
 	. = ..()
 	if(!isnull(first_stop_automation))
 		stop_automation = first_stop_automation
-	
+
 /mob/living/simple_animal/hostile/giant_spider/hunter/throw_impact(atom/hit_atom)
 	if(isliving(hit_atom))
 		var/mob/living/target = hit_atom

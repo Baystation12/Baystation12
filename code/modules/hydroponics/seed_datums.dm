@@ -202,7 +202,7 @@
 	seed_name = "killer tomato"
 	display_name = "killer tomato plant"
 	mutants = null
-	can_self_harvest = 1
+	can_self_harvest = TRUE
 	has_mob_product = /mob/living/simple_animal/tomato
 
 /datum/seed/tomato/killer/New()
@@ -402,7 +402,7 @@
 	seed_name = "walking mushroom"
 	display_name = "walking mushrooms"
 	mutants = null
-	can_self_harvest = 1
+	can_self_harvest = TRUE
 	has_mob_product = /mob/living/simple_animal/mushroom
 
 /datum/seed/mushroom/plump/walking/New()
@@ -707,7 +707,7 @@
 	seed_name = "banana"
 	display_name = "banana tree"
 	chems = list(/datum/reagent/drink/juice/banana = list(10,10), /datum/reagent/potassium = list(2,3))
-	trash_type = /obj/item/weapon/bananapeel
+	trash_type = /obj/item/bananapeel
 	kitchen_tag = "banana"
 
 /datum/seed/banana/New()
@@ -731,7 +731,7 @@
 	display_name = "ears of corn"
 	chems = list(/datum/reagent/nutriment = list(1,10), /datum/reagent/nutriment/cornoil = list(1,10))
 	kitchen_tag = "corn"
-	trash_type = /obj/item/weapon/carvable/corncob
+	trash_type = /obj/item/carvable/corncob
 
 /datum/seed/corn/New()
 	..()
@@ -1116,7 +1116,7 @@
 	seed_name = "diona"
 	seed_noun = SEED_NOUN_NODES
 	display_name = "replicant pods"
-	can_self_harvest = 1
+	can_self_harvest = TRUE
 	has_mob_product = /mob/living/carbon/alien/diona
 
 /datum/seed/diona/New()
@@ -1357,7 +1357,7 @@
 	seed_name = "pineapple"
 	display_name = "pineapple plant"
 	chems = list(/datum/reagent/drink/juice/pineapple = list(10,10), /datum/reagent/enzyme = list(1,5),/datum/reagent/nutriment = list(1,10))
-	trash_type = /obj/item/weapon/carvable/corncob/hollowpineapple
+	trash_type = /obj/item/carvable/corncob/hollowpineapple
 
 /datum/seed/pineapple/New()
 	..()
@@ -1400,7 +1400,7 @@
 	seed_name = "coconut"
 	display_name = "coconut trees"
 	chems = list(/datum/reagent/nutriment = list(1,20), /datum/reagent/drink/coconut = list(10,20))
-	trash_type = /obj/item/weapon/carvable/corncob/hollowcoconut
+	trash_type = /obj/item/carvable/corncob/hollowcoconut
 
 /datum/seed/coconut/New()
 	..()

@@ -12,8 +12,8 @@
 	unsendable = 1
 	undeletable = 1
 	size = 4
-	available_on_ntnet = 0
-	requires_ntnet = 0
+	available_on_ntnet = FALSE
+	requires_ntnet = FALSE
 	nanomodule_path = /datum/nano_module/program/computer_configurator/
 	usage_flags = PROGRAM_ALL
 	category = PROG_UTIL
@@ -29,7 +29,7 @@
 	data["disk_size"] = program.computer.max_disk_capacity()
 	data["disk_used"] = program.computer.used_disk_capacity()
 	data["power_usage"] = program.computer.get_power_usage()
-	var/obj/item/weapon/stock_parts/computer/battery_module/battery_module = program.computer.get_component(PART_BATTERY)
+	var/obj/item/stock_parts/computer/battery_module/battery_module = program.computer.get_component(PART_BATTERY)
 	data["battery_exists"] = !!battery_module
 	if(battery_module)
 		data["battery_rating"] = battery_module.battery.maxcharge
@@ -37,7 +37,7 @@
 
 	var/list/all_entries[0]
 	var/list/hardware = program.computer.get_all_components()
-	for(var/obj/item/weapon/stock_parts/computer/H in hardware)
+	for(var/obj/item/stock_parts/computer/H in hardware)
 		all_entries.Add(list(list(
 		"name" = H.name,
 		"desc" = H.desc,

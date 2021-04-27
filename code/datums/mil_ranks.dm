@@ -24,7 +24,7 @@ var/datum/mil_branches/mil_branches = new()
  *  Retrieve branch object by branch name
  */
 /datum/mil_branches/proc/get_branch(var/branch_name)
-	if(ispath(branch_name))
+	if(ispath(branch_name, /datum/mil_branch))
 		var/datum/mil_branch/branch = branch_name
 		branch_name = initial(branch.name)
 	if(branch_name && branch_name != "None")

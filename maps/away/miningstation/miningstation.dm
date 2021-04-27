@@ -3,7 +3,7 @@
 
 /obj/effect/overmap/visitable/sector/miningstation
 	name = "Orbital Mining Station"
-	desc = "An orbital Mining Station bearing authentication codes from Grayson Mining Industries, sensors show inconsistant lifesigns aboard the station. It is emitting a active distress beacon."
+	desc = "An orbital Mining Station bearing authentication codes from Grayson Mining Industries, sensors show inconsistant lifesigns aboard the station. It is emitting a weak signal on a public frequency, with no other discernible radio traffic."
 	icon_state = "object"
 	known = 0
 	initial_generic_waypoints = list(
@@ -16,7 +16,7 @@
 	id = "awaysite_miningstation"
 	description = "An orbital Mining Station bearing authentication codes from Grayson Mining Industries, sensors show inconsistant lifesigns aboard the station."
 	suffixes = list("miningstation/miningstation.dmm")
-	cost = 1
+	spawn_cost = 1
 	area_usage_test_exempted_root_areas = list(/area/miningstation)
 
 /obj/effect/shuttle_landmark/nav_miningstation/hangar
@@ -101,7 +101,7 @@
 
 ////////////////////////////Notes and papers
 
-/obj/item/weapon/paper/miner_note_1
+/obj/item/paper/miner_note_1
 	name = "Invoice"
 	info = {"
 			<center><b><font color='red'>Grayson Industries</font></b></center>
@@ -109,7 +109,7 @@
 			<i>A new supply of mechs have arrived today. We'll need to have them signed off and inventoried by the end of the night. Grayson doesn't like it when we daddle like that. Remind Lenny that he needs to do it, damn bastard is probably drunk but he can get it done if you push him hard enough.</i>
 			"}
 
-/obj/item/weapon/paper/miner_note_2
+/obj/item/paper/miner_note_2
 	name = "Headquarters Invoice"
 	info = {"
 			<center><b><font color='red'>Grayson Industries</font></b></center>
@@ -118,13 +118,13 @@
 			Jason Mowry, Grayson Financial.</i>
 			"}
 
-/obj/item/weapon/paper/miner_note_3
+/obj/item/paper/miner_note_3
 	name = "Letter to Home"
 	info = {"
 			<i>WOOOO! Paaaayday! Headquarters just gave us a bunch of new stuff! Woooo! We're rich now! Honey, we're gonna finally be able to afford that place you wanted in Selene! I'm coming home soon, just wait until I come home, then we'll be able to work on our new lives.</i>
 			"}
 
-/obj/item/weapon/paper/miner_note_4
+/obj/item/paper/miner_note_4
 	name = "Report"
 	info = {"
 			<center><b><font color='red'>Grayson Industries</font></b></center>
@@ -132,20 +132,20 @@
 			<i>We found something in one of the nearby asteroids... seems like it's some sort of artifact. This seems like something NT or maybe the FTU would be interested in. We brought it aboard and are contacting headquarters to see what we should do with it. Some of the guys say that they found some wierd markings near it.</i>
 			"}
 
-/obj/item/weapon/paper/miner_note_5
+/obj/item/paper/miner_note_5
 	name = "Invoice"
 	info = {"
 			<center><b><font color='red'>Grayson Industries</font></b></center>
 			<center><b><small>Internal department memo</small></b></center>
 			<i>A group of scientists are on their way here to investigate the artifact. I know you're all worried about it, but we'll be fine as long as we stay strong. Remember, our cycle is only a few months out, and then we'll be home. </i>
 			"}
-/obj/item/weapon/paper/miner_note_6_1
+/obj/item/paper/miner_note_6_1
 	name = "Letter"
 	info = {"
 			<i>My dearest Lily,
 			It's been quite some time since I've written. I know, you'd rather I send an email but this station is so far out we don't have the ability to send mail save for through the faxes they send to headquarters. Things are rough lately, we've had a lot of strange things going on, random equipment failures, random injuries, a few guys have even gotten sick. The docs don't know what's wrong with them but they're getting worse by the day. We're holding on while we can, the company wants us to stay out here until our cycle is over, which should be just over a few months.</i>
 			"}
-/obj/item/weapon/paper/miner_note_6_2
+/obj/item/paper/miner_note_6_2
 	name = "Scribbled note"
 	info = {"
 			<i>Lily,

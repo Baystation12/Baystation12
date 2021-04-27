@@ -12,11 +12,11 @@
 
 	invisibility = 101
 
-	density = 0
+	density = FALSE
 	stat = DEAD
 
 	movement_handlers = list()
-	anchored = 1	//  don't get pushed around
+	anchored = TRUE	//  don't get pushed around
 
 	virtual_mob = null // Hear no evil, speak no evil
 
@@ -37,26 +37,7 @@
 		output += "<a href='byond://?src=\ref[src];manifest=1'>View the Crew Manifest</A> "
 
 	output += "<a href='byond://?src=\ref[src];observe=1'>Observe</A> "
-
-	if(!IsGuestKey(src.key))
-		establish_db_connection()
-		if(dbcon.IsConnected())
-			var/isadmin = 0
-			if(src.client && src.client.holder)
-				isadmin = 1
-			var/DBQuery/query = dbcon.NewQuery("SELECT id FROM erro_poll_question WHERE [(isadmin ? "" : "adminonly = false AND")] Now() BETWEEN starttime AND endtime AND id NOT IN (SELECT pollid FROM erro_poll_vote WHERE ckey = \"[ckey]\") AND id NOT IN (SELECT pollid FROM erro_poll_textreply WHERE ckey = \"[ckey]\")")
-			query.Execute()
-			var/newpoll = 0
-			while(query.NextRow())
-				newpoll = 1
-				break
-
-			if(newpoll)
-				output += "<b><a href='byond://?src=\ref[src];showpoll=1'>Show Player Polls</A> (NEW!)</b> "
-			else
-				output += "<a href='byond://?src=\ref[src];showpoll=1'>Show Player Polls</A> "
-
-	output += "<hr>Current character: <b>[client.prefs.real_name]</b>[client.prefs.job_high ? ", [client.prefs.job_high]" : null]<br>"
+	output += "<hr>Current character: <a href='byond://?src=\ref[client.prefs];load=1;details=1'>[client.prefs.real_name]</a>[client.prefs.job_high ? ", [client.prefs.job_high]" : null]<br>"
 	if(GAME_STATE <= RUNLEVEL_LOBBY)
 		if(ready)
 			output += "<a class='linkOn' href='byond://?src=\ref[src];ready=0'>Un-Ready</a>"
@@ -82,6 +63,8 @@
 			stat("Game Mode:", PUBLIC_GAME_MODE)
 		var/extra_antags = list2params(additional_antag_types)
 		stat("Added Antagonists:", extra_antags ? extra_antags : "None")
+		stat("Initial Continue Vote:", "[round(config.vote_autotransfer_initial / 600, 1)] minutes")
+		stat("Additional Vote Every:", "[round(config.vote_autotransfer_interval / 600, 1)] minutes")
 
 		if(GAME_STATE <= RUNLEVEL_LOBBY)
 			stat("Time To Start:", "[round(SSticker.pregame_timeleft/10)][SSticker.round_progressing ? "" : " (DELAYED)"]")
@@ -90,11 +73,16 @@
 			totalPlayersReady = 0
 			for(var/mob/new_player/player in GLOB.player_list)
 				var/highjob
-				if(player.client && player.client.prefs && player.client.prefs.job_high)
-					highjob = " as [player.client.prefs.job_high]"
-				stat("[player.key]", (player.ready)?("(Playing[highjob])"):(null))
+				if (player.client)
+					var/show_ready = player.client.get_preference_value(/datum/client_preference/show_ready) == GLOB.PREF_SHOW
+					if (player.client.prefs?.job_high)
+						highjob = " as [player.client.prefs.job_high]"
+					if (!player.is_stealthed())
+						stat("[player.key]", (player.ready && show_ready)?("(Playing[highjob])"):(null))
 				totalPlayers++
 				if(player.ready)totalPlayersReady++
+		else
+			stat("Next Continue Vote:", "[max(round(transfer_controller.time_till_transfer_vote() / 600, 1), 0)] minutes")
 
 /mob/new_player/Topic(href, href_list) // This is a full override; does not call parent.
 	if(usr != src)
@@ -139,7 +127,9 @@
 				to_chat(src, "<span class='danger'>Could not locate an observer spawn point. Use the Teleport verb to jump to the map.</span>")
 			observer.timeofdeath = world.time // Set the time of death so that the respawn timer works correctly.
 
-			if(isnull(client.holder))
+			var/should_announce = client.get_preference_value(/datum/client_preference/announce_ghost_join) == GLOB.PREF_YES
+
+			if(isnull(client.holder) && should_announce)
 				announce_ghost_joinleave(src)
 
 			var/mob/living/carbon/human/dummy/mannequin = new()
@@ -185,108 +175,12 @@
 		AttemptLateSpawn(job, client.prefs.spawnpoint)
 		return
 
-	if(href_list["privacy_poll"])
-		establish_db_connection()
-		if(!dbcon.IsConnected())
-			return
-		var/voted = 0
-
-		//First check if the person has not voted yet.
-		var/DBQuery/query = dbcon.NewQuery("SELECT * FROM erro_privacy WHERE ckey='[src.ckey]'")
-		query.Execute()
-		while(query.NextRow())
-			voted = 1
-			break
-
-		//This is a safety switch, so only valid options pass through
-		var/option = "UNKNOWN"
-		switch(href_list["privacy_poll"])
-			if("signed")
-				option = "SIGNED"
-			if("anonymous")
-				option = "ANONYMOUS"
-			if("nostats")
-				option = "NOSTATS"
-			if("later")
-				show_browser(usr, null,"window=privacypoll")
-				return
-			if("abstain")
-				option = "ABSTAIN"
-
-		if(option == "UNKNOWN")
-			return
-
-		if(!voted)
-			var/sql = "INSERT INTO erro_privacy VALUES (null, Now(), '[src.ckey]', '[option]')"
-			var/DBQuery/query_insert = dbcon.NewQuery(sql)
-			query_insert.Execute()
-			to_chat(usr, "<b>Thank you for your vote!</b>")
-			show_browser(usr, null,"window=privacypoll")
-
 	if(!ready && href_list["preference"])
 		if(client)
 			client.prefs.process_link(src, href_list)
+
 	else if(!href_list["late_join"])
 		new_player_panel()
-
-	if(href_list["showpoll"])
-
-		handle_player_polling()
-		return
-
-	if(href_list["pollid"])
-
-		var/pollid = href_list["pollid"]
-		if(istext(pollid))
-			pollid = text2num(pollid)
-		if(isnum(pollid))
-			src.poll_player(pollid)
-		return
-
-	if(href_list["invalid_jobs"])
-		show_invalid_jobs = !show_invalid_jobs
-		LateChoices()
-
-	if(href_list["votepollid"] && href_list["votetype"])
-		var/pollid = text2num(href_list["votepollid"])
-		var/votetype = href_list["votetype"]
-		switch(votetype)
-			if("OPTION")
-				var/optionid = text2num(href_list["voteoptionid"])
-				vote_on_poll(pollid, optionid)
-			if("TEXT")
-				var/replytext = href_list["replytext"]
-				log_text_poll_reply(pollid, replytext)
-			if("NUMVAL")
-				var/id_min = text2num(href_list["minid"])
-				var/id_max = text2num(href_list["maxid"])
-
-				if( (id_max - id_min) > 100 )	//Basic exploit prevention
-					to_chat(usr, "The option ID difference is too big. Please contact administration or the database admin.")
-					return
-
-				for(var/optionid = id_min; optionid <= id_max; optionid++)
-					if(!isnull(href_list["o[optionid]"]))	//Test if this optionid was replied to
-						var/rating
-						if(href_list["o[optionid]"] == "abstain")
-							rating = null
-						else
-							rating = text2num(href_list["o[optionid]"])
-							if(!isnum(rating))
-								return
-
-						vote_on_numval_poll(pollid, optionid, rating)
-			if("MULTICHOICE")
-				var/id_min = text2num(href_list["minoptionid"])
-				var/id_max = text2num(href_list["maxoptionid"])
-
-				if( (id_max - id_min) > 100 )	//Basic exploit prevention
-					to_chat(usr, "The option ID difference is too big. Please contact administration or the database admin.")
-					return
-
-				for(var/optionid = id_min; optionid <= id_max; optionid++)
-					if(!isnull(href_list["option_[optionid]"]))	//Test if this optionid was selected
-						vote_on_poll(pollid, optionid, 1)
 
 /mob/new_player/proc/AttemptLateSpawn(var/datum/job/job, var/spawning_at)
 
@@ -381,12 +275,12 @@
 	header += "Round Duration: [roundduration2text()]<br>"
 
 	if(evacuation_controller.has_evacuated())
-		header += "<font color='red'><b>The [station_name()] has been evacuated.</b></font><br>"
+		header += "<font color='red'><b>\The [station_name()] has been evacuated.</b></font><br>"
 	else if(evacuation_controller.is_evacuating())
 		if(evacuation_controller.emergency_evacuation) // Emergency shuttle is past the point of no recall
-			header += "<font color='red'>The [station_name()] is currently undergoing evacuation procedures.</font><br>"
+			header += "<font color='red'>\The [station_name()] is currently undergoing evacuation procedures.</font><br>"
 		else                                           // Crew transfer initiated
-			header += "<font color='red'>The [station_name()] is currently undergoing crew transfer procedures.</font><br>"
+			header += "<font color='red'>\The [station_name()] is currently undergoing crew transfer procedures.</font><br>"
 
 	var/list/dat = list()
 	dat += "Choose from the following open/valid positions:<br>"
@@ -473,10 +367,6 @@
 
 	new_character.lastarea = get_area(spawn_turf)
 
-	if(GLOB.random_players)
-		client.prefs.gender = pick(MALE, FEMALE)
-		client.prefs.real_name = random_name(new_character.gender)
-		client.prefs.randomize_appearance_and_body_for(new_character)
 	client.prefs.copy_to(new_character)
 
 	sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = GLOB.lobby_sound_channel))// MAD JAMS cant last forever yo
@@ -571,5 +461,6 @@ mob/new_player/MayRespawn()
 
 	if(get_preference_value(/datum/client_preference/play_lobby_music) == GLOB.PREF_NO)
 		return
-	var/music_track/new_track = GLOB.using_map.get_lobby_track(GLOB.using_map.lobby_track.type)
-	new_track.play_to(src)
+	var/decl/audio/track/track = GLOB.using_map.get_lobby_track(GLOB.using_map.lobby_track.type)
+	sound_to(src, track.get_sound())
+	to_chat(src, track.get_info())

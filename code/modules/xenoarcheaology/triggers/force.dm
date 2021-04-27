@@ -6,9 +6,9 @@
 	if(istype(O, /obj/item/projectile))
 		var/obj/item/projectile/P = O
 		return (P.damage_type == BRUTE)
-	else if(istype(O, /obj/item/weapon))
-		var/obj/item/weapon/W = O
-		return (W.force >= 10)
+	else if(istype(O, /obj/item))
+		var/obj/item/I = O
+		return I.force >= 10
 
 /datum/artifact_trigger/force/on_explosion(severity)
 	return TRUE

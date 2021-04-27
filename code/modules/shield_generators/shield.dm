@@ -3,9 +3,9 @@
 	desc = "An impenetrable field of energy, capable of blocking anything as long as it's active."
 	icon = 'icons/obj/machines/shielding.dmi'
 	icon_state = "shield_normal"
-	anchored = 1
+	anchored = TRUE
 	layer = ABOVE_HUMAN_LAYER
-	density = 1
+	density = TRUE
 	invisibility = 0
 	var/obj/machinery/power/shield_generator/gen = null
 	var/disabled_for = 0
@@ -202,7 +202,7 @@
 
 
 // Attacks with hand tools. Blocked by Hyperkinetic flag.
-/obj/effect/shield/attackby(var/obj/item/weapon/I as obj, var/mob/user as mob)
+/obj/effect/shield/attackby(var/obj/item/I as obj, var/mob/user as mob)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(src)
 

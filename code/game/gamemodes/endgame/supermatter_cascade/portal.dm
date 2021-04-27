@@ -64,8 +64,7 @@
 				if (101 == AM.invisibility)
 					continue
 
-				spawn (0)
-					AM.singularity_pull(src, src.current_size)
+				addtimer(CALLBACK(AM, /atom/proc/singularity_pull, src, current_size), 0)
 
 
 /mob

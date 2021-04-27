@@ -25,15 +25,11 @@ var/list/admin_verbs_admin = list(
 	/client/proc/colorooc,				//allows us to set a custom colour for everythign we say in ooc,
 	/client/proc/admin_ghost,			//allows us to ghost/reenter body at will,
 	/client/proc/toggle_view_range,		//changes how far we can see,
-	/datum/admins/proc/view_txt_log,	//shows the server log (diary) for today,
-	/datum/admins/proc/view_atk_log,	//shows the server combat-log, doesn't do anything presently,
 	/client/proc/cmd_admin_pm_context,	//right-click adminPM interface,
 	/client/proc/cmd_admin_pm_panel,	//admin-pm list,
 	/client/proc/cmd_admin_delete,		//delete an instance/object/mob/etc,
 	/client/proc/cmd_admin_check_contents,	//displays the contents of an instance,
 	/datum/admins/proc/access_news_network,	//allows access of newscasters,
-	/client/proc/giveruntimelog,		//allows us to give access to runtime logs to somebody,
-	/client/proc/getserverlog,			//allows us to fetch server logs (diary) for other days,
 	/client/proc/jumptocoord,			//we ghost and jump to a coordinate,
 	/client/proc/Getmob,				//teleports a mob to our location,
 	/client/proc/Getkey,				//teleports a mob with a certain ckey to our location,
@@ -97,7 +93,8 @@ var/list/admin_verbs_admin = list(
 	/client/proc/add_trader,
 	/client/proc/remove_trader,
 	/datum/admins/proc/sendFax,
-	/client/proc/check_fax_history
+	/client/proc/check_fax_history,
+	/client/proc/cmd_admin_notarget
 )
 var/list/admin_verbs_ban = list(
 	/client/proc/unban_panel,
@@ -114,7 +111,6 @@ var/list/admin_verbs_fun = list(
 	/datum/admins/proc/cmd_admin_dress,
 	/client/proc/cmd_admin_gib_self,
 	/client/proc/drop_bomb,
-	/client/proc/everyone_random,
 	/client/proc/cinematic,
 	/client/proc/cmd_admin_add_freeform_ai_law,
 	/client/proc/cmd_admin_add_random_ai_law,
@@ -134,7 +130,7 @@ var/list/admin_verbs_spawn = list(
 	/datum/admins/proc/check_custom_items,
 	/datum/admins/proc/spawn_plant,
 	/datum/admins/proc/spawn_atom,		// allows us to spawn instances,
-	/client/proc/respawn_character,
+	/datum/admins/proc/spawn_artifact,
 	/client/proc/spawn_chemdisp_cartridge,
 	/datum/admins/proc/mass_debug_closet_icons
 	)
@@ -146,7 +142,6 @@ var/list/admin_verbs_server = list(
 	/datum/admins/proc/toggleaban,
 	/client/proc/toggle_log_hrefs,
 	/datum/admins/proc/immreboot,
-	/client/proc/everyone_random,
 	/client/proc/cmd_admin_delete,		// delete an instance/object/mob/etc,
 	/client/proc/cmd_debug_del_all,
 	/datum/admins/proc/adrev,
@@ -156,11 +151,9 @@ var/list/admin_verbs_server = list(
 	/client/proc/nanomapgen_DumpImage
 	)
 var/list/admin_verbs_debug = list(
-	/client/proc/getruntimelog, // allows us to access runtime logs to somebody,
 	/datum/admins/proc/jump_to_fluid_source,
 	/datum/admins/proc/jump_to_fluid_active,
 	/client/proc/cmd_admin_list_open_jobs,
-	/client/proc/Debug2,
 	/client/proc/ZASSettings,
 	/client/proc/cmd_debug_make_powernets,
 	/client/proc/debug_controller,
@@ -199,7 +192,9 @@ var/list/admin_verbs_debug = list(
 	/client/proc/visualpower,
 	/client/proc/visualpower_remove,
 	/client/proc/ping_webhook,
-	/client/proc/reload_webhooks
+	/client/proc/reload_webhooks,
+	/client/proc/toggle_planet_repopulating,
+	/client/proc/spawn_exoplanet
 	)
 
 var/list/admin_verbs_paranoid_debug = list(
@@ -216,7 +211,6 @@ var/list/admin_verbs_permissions = list(
 	/client/proc/edit_admin_permissions
 	)
 var/list/admin_verbs_rejuv = list(
-	/client/proc/respawn_character
 	)
 
 //verbs which can be hidden - needs work
@@ -230,8 +224,6 @@ var/list/admin_verbs_hideable = list(
 	/client/proc/colorooc,
 	/client/proc/admin_ghost,
 	/client/proc/toggle_view_range,
-	/datum/admins/proc/view_txt_log,
-	/datum/admins/proc/view_atk_log,
 	/client/proc/cmd_admin_check_contents,
 	/datum/admins/proc/access_news_network,
 	/client/proc/admin_call_shuttle,
@@ -261,7 +253,6 @@ var/list/admin_verbs_hideable = list(
 	/datum/admins/proc/toggleaban,
 	/client/proc/toggle_log_hrefs,
 	/datum/admins/proc/immreboot,
-	/client/proc/everyone_random,
 	/datum/admins/proc/adrev,
 	/datum/admins/proc/adspawn,
 	/datum/admins/proc/adjump,
@@ -269,7 +260,6 @@ var/list/admin_verbs_hideable = list(
 	/client/proc/cmd_admin_list_open_jobs,
 	/client/proc/callproc,
 	/client/proc/callproc_target,
-	/client/proc/Debug2,
 	/client/proc/reload_admins,
 	/client/proc/cmd_debug_make_powernets,
 	/client/proc/debug_controller,
@@ -280,7 +270,8 @@ var/list/admin_verbs_hideable = list(
 	/client/proc/enable_debug_verbs,
 	/client/proc/roll_dices,
 	/proc/possess,
-	/proc/release
+	/proc/release,
+	/client/proc/cmd_admin_notarget
 	)
 var/list/admin_verbs_mod = list(
 	/client/proc/cmd_admin_pm_context,	// right-click adminPM interface,
@@ -669,7 +660,7 @@ var/list/admin_verbs_mod = list(
 	if(!H) return
 
 	log_and_message_admins("is altering the appearance of [H].")
-	H.change_appearance(APPEARANCE_ALL, usr, usr, check_species_whitelist = 0, state = GLOB.admin_state)
+	H.change_appearance(APPEARANCE_ALL, FALSE, usr, state = GLOB.admin_state)
 	SSstatistics.add_field_details("admin_verb","CHAA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/change_human_appearance_self()
@@ -689,10 +680,10 @@ var/list/admin_verbs_mod = list(
 	switch(alert("Do you wish for [H] to be allowed to select non-whitelisted races?","Alter Mob Appearance","Yes","No","Cancel"))
 		if("Yes")
 			log_and_message_admins("has allowed [H] to change \his appearance, including races that requires whitelisting")
-			H.change_appearance(APPEARANCE_ALL, H.loc, check_species_whitelist = 0)
+			H.change_appearance(APPEARANCE_COMMON, FALSE)
 		if("No")
 			log_and_message_admins("has allowed [H] to change \his appearance, excluding races that requires whitelisting.")
-			H.change_appearance(APPEARANCE_ALL, H.loc, check_species_whitelist = 1)
+			H.change_appearance(APPEARANCE_COMMON, TRUE)
 	SSstatistics.add_field_details("admin_verb","CMAS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/change_security_level()

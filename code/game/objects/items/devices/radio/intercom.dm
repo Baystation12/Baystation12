@@ -3,7 +3,7 @@
 	desc = "Talk through this."
 	icon_state = "intercom"
 	randpixel = 0
-	anchored = 1
+	anchored = TRUE
 	w_class = ITEM_SIZE_HUGE
 	canhear_range = 2
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_BLOOD
@@ -13,6 +13,7 @@
 	power_usage = 0
 	var/number = 0
 	var/last_tick //used to delay the powercheck
+	intercom_handling = TRUE
 
 /obj/item/device/radio/intercom/get_storage_cost()
 	return ITEM_SIZE_NO_CONTAINER
@@ -137,15 +138,13 @@
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/obj/item/device/radio/intercom/attack_ai(mob/user as mob)
-	src.add_fingerprint(user)
-	spawn (0)
-		attack_self(user)
+/obj/item/device/radio/intercom/attack_ai(mob/user)
+	add_fingerprint(user)
+	attack_self(user)
 
-/obj/item/device/radio/intercom/attack_hand(mob/user as mob)
-	src.add_fingerprint(user)
-	spawn (0)
-		attack_self(user)
+/obj/item/device/radio/intercom/attack_hand(mob/user)
+	add_fingerprint(user)
+	attack_self(user)
 
 /obj/item/device/radio/intercom/receive_range(freq, level)
 	if (!on)

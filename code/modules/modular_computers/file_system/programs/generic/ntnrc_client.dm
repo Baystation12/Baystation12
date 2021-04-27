@@ -6,11 +6,11 @@
 	program_menu_icon = "comment"
 	extended_desc = "This program allows communication over NTNRC network"
 	size = 8
-	requires_ntnet = 1
+	requires_ntnet = TRUE
 	requires_ntnet_feature = NTNET_COMMUNICATION
 	network_destination = "NTNRC server"
 	ui_header = "ntnrc_idle.gif"
-	available_on_ntnet = 1
+	available_on_ntnet = TRUE
 	nanomodule_path = /datum/nano_module/program/computer_chatclient/
 	var/last_message = null				// Used to generate the toolbar icon
 	var/username

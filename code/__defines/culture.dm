@@ -173,6 +173,7 @@
 #define FACTION_UNATHI_BAASK             "Ba'ask Krukzuz"
 #define FACTION_UNATHI_GRESIS            "Gresis Krukzuz"
 #define FACTION_UNATHI_RAH_ZAKEH         "Rah'Zakeh League"
+#define FACTION_UNATHI_KHARZA            "Kharza Fleet"
  
 #define RELIGION_UNATHI_STRATAGEM    "Grand Stratagem"
 #define RELIGION_UNATHI_PRECURSOR    "Precursor"

@@ -1,11 +1,11 @@
-/obj/item/weapon/tape_roll
+/obj/item/tape_roll
 	name = "duct tape"
 	desc = "A roll of sticky tape. Possibly for taping ducks... or was that ducts?"
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "taperoll"
 	w_class = ITEM_SIZE_SMALL
 
-/obj/item/weapon/tape_roll/attack(var/mob/living/carbon/human/H, var/mob/user)
+/obj/item/tape_roll/attack(var/mob/living/carbon/human/H, var/mob/user)
 	if(istype(H))
 		if(user.zone_sel.selecting == BP_EYES)
 
@@ -62,7 +62,7 @@
 
 		else if(user.zone_sel.selecting == BP_R_HAND || user.zone_sel.selecting == BP_L_HAND)
 			playsound(src, 'sound/effects/tape.ogg',25)
-			var/obj/item/weapon/handcuffs/cable/tape/T = new(user)
+			var/obj/item/handcuffs/cable/tape/T = new(user)
 			if(!T.place_handcuffs(H, user))
 				qdel(T)
 
@@ -76,14 +76,14 @@
 			return ..()
 		return 1
 
-/obj/item/weapon/tape_roll/proc/stick(var/obj/item/weapon/W, mob/user)
-	if(!istype(W, /obj/item/weapon/paper) || istype(W, /obj/item/weapon/paper/sticky) || !user.unEquip(W))
+/obj/item/tape_roll/proc/stick(var/obj/item/W, mob/user)
+	if(!istype(W, /obj/item/paper) || istype(W, /obj/item/paper/sticky) || !user.unEquip(W))
 		return
-	var/obj/item/weapon/ducttape/tape = new(get_turf(src))
+	var/obj/item/ducttape/tape = new(get_turf(src))
 	tape.attach(W)
 	user.put_in_hands(tape)
 
-/obj/item/weapon/ducttape
+/obj/item/ducttape
 	name = "piece of tape"
 	desc = "A piece of sticky tape."
 	icon = 'icons/obj/bureaucracy.dmi'
@@ -91,20 +91,20 @@
 	w_class = ITEM_SIZE_TINY
 	layer = ABOVE_OBJ_LAYER
 
-	var/obj/item/weapon/stuck = null
+	var/obj/item/stuck = null
 
-/obj/item/weapon/ducttape/attack_hand(var/mob/user)
+/obj/item/ducttape/attack_hand(var/mob/user)
 	anchored = FALSE // Unattach it from whereever it's on, if anything.
 	return ..()
 
-/obj/item/weapon/ducttape/Initialize()
+/obj/item/ducttape/Initialize()
 	. = ..()
 	item_flags |= ITEM_FLAG_NO_BLUDGEON
 
-/obj/item/weapon/ducttape/examine()
+/obj/item/ducttape/examine()
 	return stuck ? stuck.examine(arglist(args)) : ..()
 
-/obj/item/weapon/ducttape/proc/attach(var/obj/item/weapon/W)
+/obj/item/ducttape/proc/attach(var/obj/item/W)
 	stuck = W
 	anchored = TRUE
 	W.forceMove(src)
@@ -112,7 +112,7 @@
 	name = W.name + " (taped)"
 	overlays = W.overlays
 
-/obj/item/weapon/ducttape/attack_self(mob/user)
+/obj/item/ducttape/attack_self(mob/user)
 	if(!stuck)
 		return
 
@@ -121,7 +121,7 @@
 	stuck = null
 	qdel(src)
 
-/obj/item/weapon/ducttape/afterattack(var/A, mob/user, flag, params)
+/obj/item/ducttape/afterattack(var/A, mob/user, flag, params)
 
 	if(!in_range(user, A) || istype(A, /obj/machinery/door) || !stuck)
 		return

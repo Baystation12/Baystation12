@@ -4,7 +4,7 @@
 	desc = "A shooting target."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "target_h"
-	density = 0
+	density = FALSE
 	var/obj/structure/target_stake/stake
 	var/hp = 1800
 	var/icon/virtualIcon
@@ -17,7 +17,7 @@
 
 /obj/item/target/attackby(var/obj/item/W, var/mob/user)
 	if(isWelder(W))
-		var/obj/item/weapon/weldingtool/WT = W
+		var/obj/item/weldingtool/WT = W
 		if(WT.remove_fuel(0, user))
 			overlays.Cut()
 			bulletholes.Cut()

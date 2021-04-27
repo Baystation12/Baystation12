@@ -2,8 +2,8 @@
 
 	name = "suit cycler unit"
 	desc = "An industrial machine for painting and refitting voidsuits."
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 
 	icon = 'icons/obj/suitstorage.dmi'
 	icon_state = "close"
@@ -176,7 +176,7 @@
 	var/additional_modifications = list_values(decls_repository.get_decls(emagged_modifications))
 	available_modifications |= additional_modifications
 
-	emagged = 1
+	emagged = TRUE
 	safeties = 0
 	req_access = list()
 	updateUsrDialog()

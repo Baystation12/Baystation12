@@ -6,11 +6,11 @@
 	icon_closed = "labcoat"
 	blood_overlay_type = "coat"
 	body_parts_covered = UPPER_TORSO|ARMS
-	allowed = list(/obj/item/device/scanner/gas,/obj/item/stack/medical,/obj/item/weapon/reagent_containers/dropper,/obj/item/weapon/reagent_containers/syringe,/obj/item/weapon/reagent_containers/hypospray,/obj/item/device/scanner/health,/obj/item/device/flashlight/pen,/obj/item/weapon/reagent_containers/glass/bottle,/obj/item/weapon/reagent_containers/glass/beaker,/obj/item/weapon/reagent_containers/pill,/obj/item/weapon/storage/pill_bottle,/obj/item/weapon/paper)
+	allowed = list(/obj/item/device/scanner/gas,/obj/item/stack/medical,/obj/item/reagent_containers/dropper,/obj/item/reagent_containers/syringe,/obj/item/reagent_containers/hypospray,/obj/item/device/scanner/health,/obj/item/device/flashlight/pen,/obj/item/reagent_containers/glass/bottle,/obj/item/reagent_containers/glass/beaker,/obj/item/reagent_containers/pill,/obj/item/storage/pill_bottle,/obj/item/paper)
 	armor = list(
 		bio = ARMOR_BIO_RESISTANT
 		)
-	valid_accessory_slots = list(ACCESSORY_SLOT_ARMBAND)
+	valid_accessory_slots = list(ACCESSORY_SLOT_ARMBAND, ACCESSORY_SLOT_INSIGNIA, ACCESSORY_SLOT_RANK)
 	restricted_accessory_slots = list(ACCESSORY_SLOT_ARMBAND)
 
 /obj/item/clothing/suit/storage/toggle/labcoat/cmo
@@ -35,21 +35,21 @@
 	icon_closed = "labgreen"
 
 /obj/item/clothing/suit/storage/toggle/labcoat/genetics
-	name = "Geneticist labcoat"
+	name = "geneticist labcoat"
 	desc = "A suit that protects against minor chemical spills. Has a blue stripe on the shoulder."
 	icon_state = "labcoat_gen_open"
 	icon_open = "labcoat_gen_open"
 	icon_closed = "labcoat_gen"
 
 /obj/item/clothing/suit/storage/toggle/labcoat/chemist
-	name = "Pharmacist labcoat"
+	name = "pharmacist labcoat"
 	desc = "A suit that protects against minor chemical spills. Has an orange stripe on the shoulder."
 	icon_state = "labcoat_chem_open"
 	icon_open = "labcoat_chem_open"
 	icon_closed = "labcoat_chem"
 
 /obj/item/clothing/suit/storage/toggle/labcoat/virologist
-	name = "Virologist labcoat"
+	name = "virologist labcoat"
 	desc = "A suit that protects against minor chemical spills. Offers slightly more protection against biohazards than the standard model. Has a green stripe on the shoulder."
 	icon_state = "labcoat_vir_open"
 	icon_open = "labcoat_vir_open"
@@ -74,7 +74,7 @@
 	icon_open = "labcoat_xy_open"
 	icon_closed = "labcoat_xy"
 	armor = list(
-		melee = ARMOR_MELEE_MINOR, 
+		melee = ARMOR_MELEE_MINOR,
 		bio = ARMOR_BIO_MINOR
 		)
 	species_restricted = list(SPECIES_IPC)
@@ -127,6 +127,13 @@
 	icon_state = "labcoat_morpheus_open"
 	icon_open = "labcoat_morpheus_open"
 	icon_closed = "labcoat_morpheus"
+
+/obj/item/clothing/suit/storage/toggle/labcoat/science/xynergy
+	name = "\improper Xynergy labcoat"
+	desc = "A suit that protects against minor chemical spills. It is coloured magenta and cyan, as well as sporting the Xynergy logo, denoting it as a Xynergy labcoat."
+	icon_state = "labcoat_xynergy_open"
+	icon_open = "labcoat_xynergy_open"
+	icon_closed = "labcoat_xynergy"
 
 /obj/item/clothing/suit/storage/toggle/labcoat/science/dais
 	name = "\improper DAIS labcoat"

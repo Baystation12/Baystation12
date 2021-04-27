@@ -8,7 +8,7 @@
 	icon_state = "pouches"
 	gender = PLURAL
 	slot = ACCESSORY_SLOT_ARMOR_S
-	slots = 2
+	slots = 2 STORAGE_SLOTS
 
 /obj/item/clothing/accessory/storage/pouches/blue
 	desc = "A collection of blue pouches that can be attached to a plate carrier. Carries up to two items."
@@ -30,7 +30,7 @@
 	name = "large storage pouches"
 	desc = "A collection of black pouches that can be attached to a plate carrier. Carries up to four items."
 	icon_state = "lpouches"
-	slots = 4
+	slots = 4 STORAGE_SLOTS
 	slowdown = 1
 
 /obj/item/clothing/accessory/storage/pouches/large/blue
@@ -191,6 +191,7 @@
 		bomb = ARMOR_BOMB_PADDED
 		)
 	siemens_coefficient = 0.5
+	removable = FALSE
 
 /obj/item/clothing/accessory/armguards/ballistic
 	name = "ballistic arm guards"
@@ -204,6 +205,7 @@
 		bomb = ARMOR_BOMB_PADDED
 		)
 	siemens_coefficient = 0.7
+	removable = FALSE
 
 /obj/item/clothing/accessory/armguards/ablative
 	name = "ablative arm guards"
@@ -217,6 +219,7 @@
 		bomb = ARMOR_BOMB_PADDED
 		)
 	siemens_coefficient = 0
+	removable = FALSE
 
 //Leg guards
 /obj/item/clothing/accessory/legguards
@@ -280,6 +283,7 @@
 		)
 	siemens_coefficient = 0.5
 	slowdown = 1
+	removable = FALSE
 
 /obj/item/clothing/accessory/legguards/ballistic
 	name = "ballistic leg guards"
@@ -294,6 +298,7 @@
 		)
 	siemens_coefficient = 0.7
 	slowdown = 1
+	removable = FALSE
 
 /obj/item/clothing/accessory/legguards/ablative
 	name = "ablative leg guards"
@@ -308,6 +313,7 @@
 		)
 	siemens_coefficient = 0
 	slowdown = 1
+	removable = FALSE
 
 
 //Decorative attachments

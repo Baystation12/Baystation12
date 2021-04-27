@@ -1,6 +1,6 @@
 // The lighting system
 //
-// consists of light fixtures (/obj/machinery/light) and light tube/bulb items (/obj/item/weapon/light)
+// consists of light fixtures (/obj/machinery/light) and light tube/bulb items (/obj/item/light)
 
 
 // status values shared between lighting fixtures and items
@@ -65,7 +65,7 @@
 		if(LIGHT_STAGE_WIRED) to_chat(user, "It's wired.")
 		if(LIGHT_STAGE_COMPLETE) to_chat(user, "The casing is closed.")
 
-/obj/machinery/light_construct/attackby(obj/item/weapon/W as obj, mob/living/user)
+/obj/machinery/light_construct/attackby(obj/item/W as obj, mob/living/user)
 	add_fingerprint(user)
 	if(isWrench(W))
 
@@ -82,7 +82,7 @@
 				playsound(loc, 'sound/items/Deconstruct.ogg', 75, TRUE)
 				qdel(src)
 				return
-			
+
 			if (LIGHT_STAGE_WIRED)
 				to_chat(user, SPAN_WARNING("You have to remove the wires first."))
 				return
@@ -137,7 +137,7 @@
 	desc = "A small light fixture under construction."
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "bulb-construct-stage1"
-	anchored = 1
+	anchored = TRUE
 	layer = ABOVE_HUMAN_LAYER
 	stage = 1
 	fixture_type = /obj/machinery/light/small
@@ -163,7 +163,7 @@
 	var/base_state = "tube"		// base description and icon_state
 	icon_state = "tube_map"
 	desc = "A lighting fixture."
-	anchored = 1
+	anchored = TRUE
 	layer = ABOVE_HUMAN_LAYER  					// They were appearing under mobs which is a little weird - Ostaf
 	use_power = POWER_USE_ACTIVE
 	idle_power_usage = 2
@@ -172,33 +172,42 @@
 
 	var/on = 0					// 1 if on, 0 if off
 	var/flickering = 0
-	var/light_type = /obj/item/weapon/light/tube		// the type of light item
+	var/light_type = /obj/item/light/tube		// the type of light item
 	var/construct_type = /obj/machinery/light_construct
 
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 
-	var/obj/item/weapon/light/lightbulb
+	var/obj/item/light/lightbulb
 
 	var/current_mode = null
+
+/obj/machinery/light/get_color()
+	return lightbulb ? lightbulb.get_color() : null
+
+/obj/machinery/light/set_color(color)
+	if (!lightbulb)
+		return
+	lightbulb.set_color(color)
+	queue_icon_update()
 
 // the smaller bulb light fixture
 /obj/machinery/light/small
 	icon_state = "bulb_map"
 	base_state = "bulb"
 	desc = "A small lighting fixture."
-	light_type = /obj/item/weapon/light/bulb
+	light_type = /obj/item/light/bulb
 	construct_type = /obj/machinery/light_construct/small
 
 /obj/machinery/light/small/emergency
-	light_type = /obj/item/weapon/light/bulb/red
+	light_type = /obj/item/light/bulb/red
 
 /obj/machinery/light/small/red
-	light_type = /obj/item/weapon/light/bulb/red
+	light_type = /obj/item/light/bulb/red
 
 /obj/machinery/light/spot
 	name = "spotlight"
 	desc = "A more robust socket for light tubes that demand more power."
-	light_type = /obj/item/weapon/light/tube/large
+	light_type = /obj/item/light/tube/large
 	construct_type = /obj/machinery/light_construct/spot
 
 // create a new lighting fixture
@@ -227,6 +236,7 @@
 /obj/machinery/light/on_update_icon(var/trigger = 1)
 	overlays.Cut()
 	icon_state = "[base_state]_empty" //Never use the initial state. That'll just reset it to the mapping icon.
+	atom_flags = atom_flags & ~ATOM_FLAG_CAN_BE_PAINTED
 	pixel_y = 0
 	pixel_x = 0
 	var/turf/T = get_step(get_turf(src), dir)
@@ -242,6 +252,7 @@
 	switch(get_status())		// set icon_states
 		if(LIGHT_OK)
 			_state = "[base_state][on]"
+			atom_flags |= ATOM_FLAG_CAN_BE_PAINTED
 		if(LIGHT_EMPTY)
 			on = 0
 		if(LIGHT_BURNED)
@@ -251,9 +262,12 @@
 			_state = "[base_state]_broken"
 			on = 0
 
-	if(istype(lightbulb, /obj/item/weapon/light/))
+	if(istype(lightbulb, /obj/item/light/))
 		var/image/I = image(icon, src, _state)
-		I.color = lightbulb.b_colour
+		I.color = get_mode_color()
+		if (on)
+			I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+			I.layer = ABOVE_LIGHTING_LAYER
 		overlays += I
 
 	if(on)
@@ -304,6 +318,12 @@
 		current_mode = new_mode
 		update_icon(0)
 
+/obj/machinery/light/proc/get_mode_color()
+	if (current_mode && (current_mode in lightbulb.lighting_modes))
+		return lightbulb.lighting_modes[current_mode]["l_color"]
+	else
+		return lightbulb.b_colour
+
 /obj/machinery/light/proc/set_emergency_lighting(var/enable)
 	if(!lightbulb)
 		return
@@ -338,12 +358,12 @@
 			to_chat(user, "The [fitting] has been smashed.")
 
 /obj/machinery/light/proc/get_fitting_name()
-	var/obj/item/weapon/light/L = light_type
+	var/obj/item/light/L = light_type
 	return initial(L.name)
 
 // attack with item - insert light (if right type), otherwise try to break the light
 
-/obj/machinery/light/proc/insert_bulb(obj/item/weapon/light/L)
+/obj/machinery/light/proc/insert_bulb(obj/item/light/L)
 	L.forceMove(src)
 	lightbulb = L
 
@@ -360,7 +380,7 @@
 /obj/machinery/light/attackby(obj/item/W, mob/user)
 
 	// attempt to insert light
-	if(istype(W, /obj/item/weapon/light))
+	if(istype(W, /obj/item/light))
 		if(lightbulb)
 			to_chat(user, SPAN_WARNING("There is a [get_fitting_name()] already inserted."))
 			return
@@ -376,7 +396,7 @@
 		// attempt to break the light
 		//If xenos decide they want to smash a light bulb with a toolbox, who am I to stop them? /N
 
-	else if(lightbulb && (lightbulb.status != LIGHT_BROKEN))
+	else if(lightbulb && (lightbulb.status != LIGHT_BROKEN) && user.a_intent != I_HELP)
 
 		if(prob(1 + W.force * 5))
 
@@ -393,7 +413,7 @@
 
 	// attempt to stick weapon into light socket
 	else if(!lightbulb)
-		if(istype(W, /obj/item/weapon/screwdriver)) //If it's a screwdriver open it.
+		if(istype(W, /obj/item/screwdriver)) //If it's a screwdriver open it.
 			playsound(loc, 'sound/items/Screwdriver.ogg', 50, TRUE)
 			user.visible_message(SPAN_NOTICE("[user] opens [src]'s casing."), SPAN_NOTICE("You open up [src]'s casing."), SPAN_ITALIC("You hear screws being loosened."))
 			var/obj/machinery/light_construct/C = new construct_type(loc, dir, src)
@@ -541,7 +561,7 @@
 		broken()
 
 /obj/machinery/light/small/readylight
-	light_type = /obj/item/weapon/light/bulb/red/readylight
+	light_type = /obj/item/light/bulb/red/readylight
 	var/state = 0
 
 /obj/machinery/light/small/readylight/proc/set_state(var/new_state)
@@ -557,7 +577,7 @@
 	icon = 'icons/obj/lighting_nav.dmi'
 	icon_state = "nav10"
 	base_state = "nav1"
-	light_type = /obj/item/weapon/light/tube/large
+	light_type = /obj/item/light/tube/large
 	on = TRUE
 
 /obj/machinery/light/navigation/delay2
@@ -581,7 +601,7 @@
 // can be tube or bulb subtypes
 // will fit into empty /obj/machinery/light of the corresponding type
 
-/obj/item/weapon/light
+/obj/item/light
 	icon = 'icons/obj/lighting.dmi'
 	force = 2
 	throwforce = 5
@@ -591,6 +611,7 @@
 	var/switchcount = 0	// number of times switched
 	matter = list(MATERIAL_STEEL = 60)
 	var/broken_chance = 2
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CAN_BE_PAINTED
 
 	var/b_max_bright = 0.9
 	var/b_inner_range = 1
@@ -599,13 +620,32 @@
 	var/b_colour = "#fffee0"
 	var/list/lighting_modes = list()
 	var/sound_on
+	var/random_tone = TRUE
+	var/list/random_tone_options = list(
+		"#fffee0",
+		"#e0fefe",
+		"#fefefe",
+	)
 
-/obj/item/weapon/light/examine(mob/user)
+/obj/item/light/Initialize()
+	. = ..()
+	if (random_tone)
+		b_colour = pick(random_tone_options)
+		update_icon()
+
+/obj/item/light/examine(mob/user)
 	. = ..()
 	if (reagents?.total_volume && Adjacent(user))
 		to_chat(user, SPAN_WARNING("There's some sort of fluid inside [src]."))
 
-/obj/item/weapon/light/tube
+/obj/item/light/get_color()
+	return b_colour
+
+/obj/item/light/set_color(color)
+	b_colour = isnull(color) ? COLOR_WHITE : color
+	update_icon()
+
+/obj/item/light/tube
 	name = "light tube"
 	desc = "A replacement light tube."
 	icon_state = "ltube"
@@ -620,11 +660,11 @@
 		)
 	sound_on = 'sound/machines/lightson.ogg'
 
-/obj/item/weapon/light/tube/party/Initialize() //Randomly colored light tubes. Mostly for testing, but maybe someone will find a use for them.
+/obj/item/light/tube/party/Initialize() //Randomly colored light tubes. Mostly for testing, but maybe someone will find a use for them.
 	. = ..()
 	b_colour = rgb(pick(0,255), pick(0,255), pick(0,255))
 
-/obj/item/weapon/light/tube/large
+/obj/item/light/tube/large
 	w_class = ITEM_SIZE_SMALL
 	name = "large light tube"
 	b_max_bright = 0.95
@@ -632,11 +672,11 @@
 	b_outer_range = 8
 	b_curve = 2.5
 
-/obj/item/weapon/light/tube/large/party/Initialize() //Randomly colored light tubes. Mostly for testing, but maybe someone will find a use for them.
+/obj/item/light/tube/large/party/Initialize() //Randomly colored light tubes. Mostly for testing, but maybe someone will find a use for them.
 	. = ..()
 	b_colour = rgb(pick(0,255), pick(0,255), pick(0,255))
 
-/obj/item/weapon/light/bulb
+/obj/item/light/bulb
 	name = "light bulb"
 	desc = "A replacement light bulb."
 	icon_state = "lbulb"
@@ -654,20 +694,21 @@
 		LIGHTMODE_EMERGENCY = list(l_outer_range = 3, l_max_bright = 1, l_color = "#da0205"),
 		)
 
-/obj/item/weapon/light/bulb/red
+/obj/item/light/bulb/red
 	color = "#da0205"
 	b_colour = "#da0205"
+	random_tone = FALSE
 
-/obj/item/weapon/light/bulb/red/readylight
+/obj/item/light/bulb/red/readylight
 	lighting_modes = list(
 		LIGHTMODE_READY = list(l_outer_range = 5, l_max_bright = 1, l_color = "#00ff00"),
 		)
 
-/obj/item/weapon/light/throw_impact(atom/hit_atom)
+/obj/item/light/throw_impact(atom/hit_atom)
 	..()
 	shatter()
 
-/obj/item/weapon/light/bulb/fire
+/obj/item/light/bulb/fire
 	name = "fire bulb"
 	desc = "A replacement fire bulb."
 	icon_state = "fbulb"
@@ -676,7 +717,7 @@
 	matter = list(MATERIAL_GLASS = 100)
 
 // update the icon state and description of the light
-/obj/item/weapon/light/on_update_icon()
+/obj/item/light/on_update_icon()
 	color = b_colour
 	var/broken
 	switch(status)
@@ -694,15 +735,15 @@
 	I.color = null
 	overlays += I
 
-/obj/item/weapon/light/New(atom/newloc, obj/machinery/light/fixture = null)
+/obj/item/light/New(atom/newloc, obj/machinery/light/fixture = null)
 	..()
 	update_icon()
 
 // attack bulb/tube with object
 // if a syringe, can inject phoron to make it explode
-/obj/item/weapon/light/attackby(var/obj/item/I, var/mob/user)
-	if(istype(I, /obj/item/weapon/reagent_containers/syringe) && status == LIGHT_OK)
-		var/obj/item/weapon/reagent_containers/syringe/S = I
+/obj/item/light/attackby(var/obj/item/I, var/mob/user)
+	if(istype(I, /obj/item/reagent_containers/syringe) && status == LIGHT_OK)
+		var/obj/item/reagent_containers/syringe/S = I
 
 		if(S.reagents.total_volume)
 			if (!reagents)
@@ -720,7 +761,7 @@
 // shatter light, unless it was an attempt to put it in a light socket
 // now only shatter if the intent was harm
 
-/obj/item/weapon/light/afterattack(atom/target, mob/user, proximity)
+/obj/item/light/afterattack(atom/target, mob/user, proximity)
 	if(!proximity)
 		return
 	if(istype(target, /obj/machinery/light))
@@ -730,7 +771,7 @@
 
 	shatter()
 
-/obj/item/weapon/light/proc/shatter()
+/obj/item/light/proc/shatter()
 	if(status == LIGHT_OK || status == LIGHT_BURNED)
 		visible_message(SPAN_WARNING("[src] shatters!"), SPAN_WARNING("You hear a small glass object shatter."))
 		status = LIGHT_BROKEN
@@ -739,7 +780,7 @@
 		playsound(loc, "glasscrack", 75, TRUE)
 		update_icon()
 
-/obj/item/weapon/light/proc/switch_on()
+/obj/item/light/proc/switch_on()
 	switchcount++
 	if(reagents)
 		if (reagents.get_reagent_amount(/datum/reagent/toxin/phoron) >= LIGHT_PHORON_EXPLODE_THRESHOLD)

@@ -60,8 +60,6 @@
 	// Runtime vars.
 	var/datum/mind/leader                   // Current leader, if any.
 	var/cur_max = 0                         // Autotraitor current effective maximum.
-	var/spawned_nuke                        // Has a bomb been spawned?
-	var/nuke_spawn_loc                      // If so, where should it be placed?
 	var/list/current_antagonists = list()   // All marked antagonists for this type.
 	var/list/pending_antagonists = list()   // Candidates that are awaiting finalized antag status.
 	var/list/starting_locations =  list()   // Spawn points.
@@ -71,7 +69,7 @@
 
 	// ID card stuff.
 	var/default_access = list()
-	var/id_type = /obj/item/weapon/card/id
+	var/id_type = /obj/item/card/id
 
 	var/antag_text = "You are an antagonist! Within the rules, \
 		try to act as an opposing force to the crew. Further RP and try to make sure \
@@ -79,7 +77,7 @@
 		and before taking extreme actions, please try to also contact the administration! \
 		Think through your actions and make the roleplay immersive! <b>Please remember all \
 		rules aside from those without explicit exceptions apply to antagonists.</b>"
-	
+
 	// Map template that antag needs to load before spawning. Nulled after it's loaded.
 	var/datum/map_template/base_to_load
 
@@ -103,6 +101,15 @@
 			GLOB.hud_icon_reference = list()
 		if(role_text) GLOB.hud_icon_reference[role_text] = antaghud_indicator
 		if(faction_role_text) GLOB.hud_icon_reference[faction_role_text] = antaghud_indicator
+
+/datum/antagonist/proc/get_antag_text(mob/recipient)
+	return antag_text
+
+/datum/antagonist/proc/get_welcome_text(mob/recipient)
+	return welcome_text
+
+/datum/antagonist/proc/get_leader_welcome_text(mob/recipient)
+	return leader_welcome_text
 
 /datum/antagonist/proc/tick()
 	return 1

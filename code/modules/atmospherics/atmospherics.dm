@@ -10,7 +10,7 @@ Pipelines + Other Objects -> Pipe network
 
 */
 /obj/machinery/atmospherics
-	anchored = 1
+	anchored = TRUE
 	idle_power_usage = 0
 	active_power_usage = 0
 	power_channel = ENVIRON
@@ -34,6 +34,7 @@ Pipelines + Other Objects -> Pipe network
 	var/atmos_initalized = FALSE
 	var/build_icon = 'icons/obj/pipe-item.dmi'
 	var/build_icon_state = "buildpipe"
+	var/colorable = FALSE
 
 	var/pipe_class = PIPE_CLASS_OTHER //If somehow something isn't set properly, handle it as something with zero connections. This will prevent runtimes.
 	var/rotate_class = PIPE_ROTATE_STANDARD

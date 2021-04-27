@@ -27,8 +27,8 @@
 	icon = 'icons/obj/supplybeacon.dmi'
 	icon_state = "beacon"
 
-	anchored = 0
-	density = 1
+	anchored = FALSE
+	density = TRUE
 	stat = 0
 
 	var/target_drop_time
@@ -44,7 +44,7 @@
 	name = "supermatter supply beacon"
 	drop_type = "supermatter"
 
-/obj/machinery/power/supply_beacon/attackby(var/obj/item/weapon/W, var/mob/user)
+/obj/machinery/power/supply_beacon/attackby(var/obj/item/W, var/mob/user)
 	if(!use_power && isWrench(W))
 		if(!anchored && !connect_to_network())
 			to_chat(user, "<span class='warning'>This device must be placed over an exposed cable.</span>")
@@ -80,6 +80,7 @@
 	set_light(1, 0.5, 2, 2, "#00ccaa")
 	icon_state = "beacon_active"
 	update_use_power(POWER_USE_IDLE)
+	admin_attacker_log(user, "has activated \a [src] at [get_area(src)]")
 	if(user) to_chat(user, "<span class='notice'>You activate the beacon. The supply drop will be dispatched soon.</span>")
 
 /obj/machinery/power/supply_beacon/proc/deactivate(var/mob/user, var/permanent)

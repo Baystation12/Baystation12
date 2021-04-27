@@ -19,6 +19,9 @@
 ## The number of away sites to pick for the overmap. Default 3
 #AWAY_SITE_BUDGET 3
 
+## The number of players subtracted from the player budget for away sites by the main map. Default 12
+#MIN_OFFMAP_PLAYERS 12
+
 ## The names of various entities to use for reports, listing, etc.
 #STATION_NAME Sev Torch
 #STATION_SHORT Torch
@@ -27,6 +30,9 @@
 #BOSS_SHORT Command
 #COMPANY_NAME Sol Central Government
 #COMPANY_SHORT SolGov
+
+## Other fluff options
+#GAME_YEAR_OFFSET 288
 
 ## Messages to use for different round-end conditions. %ETA% is replaced with a time.
 #SHUTTLE_DOCKED_MESSAGE Attention all hands: Jump preparation complete. The bluespace drive is now spooling up, secure all stations for departure. Time to jump: approximately %ETD%.

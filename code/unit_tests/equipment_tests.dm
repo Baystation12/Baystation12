@@ -19,8 +19,7 @@
 		if(test["result"] == FAILURE)
 			fail(test["msg"])
 			async = 0
-
-			return 0
+			return
 
 		H = locate(test["mobref"])
 
@@ -68,9 +67,9 @@
 /datum/unit_test/storage_capacity_test/start_test()
 	var/bad_tests = 0
 
-	// obj/item/weapon/storage/internal cannot be tested sadly, as they expect their host object to create them
-	for(var/storage_type in subtypesof(/obj/item/weapon/storage) - typesof(/obj/item/weapon/storage/internal))
-		var/obj/item/weapon/storage/S = new storage_type(null) //should be fine to put it in nullspace...
+	// obj/item/storage/internal cannot be tested sadly, as they expect their host object to create them
+	for(var/storage_type in subtypesof(/obj/item/storage) - typesof(/obj/item/storage/internal))
+		var/obj/item/storage/S = new storage_type(null) //should be fine to put it in nullspace...
 		var/bad_msg = "[ascii_red]--------------- [S.name] \[[S.type]\]"
 		bad_tests += test_storage_capacity(S, bad_msg)
 
@@ -81,7 +80,7 @@
 
 	return 1
 
-/proc/test_storage_capacity(obj/item/weapon/storage/S, var/bad_msg)
+/proc/test_storage_capacity(obj/item/storage/S, var/bad_msg)
 	var/bad_tests = 0
 
 	if(!isnull(S.storage_slots) && S.contents.len > S.storage_slots)
@@ -93,7 +92,7 @@
 		if(I.w_class > S.max_w_class)
 			log_unit_test("[bad_msg] Contains an item \[[I.type]\] that is too big to be held ([I.w_class] / [S.max_w_class]). [ascii_reset]")
 			bad_tests++
-		if(istype(I, /obj/item/weapon/storage) && I.w_class >= S.w_class)
+		if(istype(I, /obj/item/storage) && I.w_class >= S.w_class)
 			log_unit_test("[bad_msg] Contains a storage item \[[I.type]\] the same size or larger than its container ([I.w_class] / [S.w_class]). [ascii_reset]")
 			bad_tests++
 		total_storage_space += I.get_storage_cost()

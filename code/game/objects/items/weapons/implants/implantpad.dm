@@ -1,21 +1,21 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:32
 
-/obj/item/weapon/implantpad
+/obj/item/implantpad
 	name = "implant pad"
 	desc = "Used to reprogramm implants."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "implantpad-0"
 	item_state = "electronic"
 	w_class = ITEM_SIZE_SMALL
-	var/obj/item/weapon/implant/imp
+	var/obj/item/implant/imp
 
-/obj/item/weapon/implantpad/on_update_icon()
+/obj/item/implantpad/on_update_icon()
 	if (imp)
 		icon_state = "implantpad-1"
 	else
 		icon_state = "implantpad-0"
 
-/obj/item/weapon/implantpad/attack_hand(mob/user)
+/obj/item/implantpad/attack_hand(mob/user)
 	if ((imp && (user.l_hand == src || user.r_hand == src)))
 		user.put_in_active_hand(imp)
 		imp.add_fingerprint(user)
@@ -26,10 +26,10 @@
 	else
 		return ..()
 
-/obj/item/weapon/implantpad/attackby(obj/item/I, mob/user)
+/obj/item/implantpad/attackby(obj/item/I, mob/user)
 	..()
-	if(istype(I, /obj/item/weapon/implantcase))
-		var/obj/item/weapon/implantcase/C = I
+	if(istype(I, /obj/item/implantcase))
+		var/obj/item/implantcase/C = I
 		if(!imp && C.imp)
 			C.imp.forceMove(src)
 			imp = C.imp
@@ -39,8 +39,8 @@
 			C.imp = imp
 			imp = null
 		C.update_icon()
-	else if(istype(I, /obj/item/weapon/implanter))
-		var/obj/item/weapon/implanter/C = I
+	else if(istype(I, /obj/item/implanter))
+		var/obj/item/implanter/C = I
 		if(!imp && C.imp)
 			C.imp.forceMove(src)
 			imp = C.imp
@@ -50,11 +50,11 @@
 			C.imp = imp
 			imp = null
 		C.update_icon()
-	else if(istype(I, /obj/item/weapon/implant) && user.unEquip(I, src))
+	else if(istype(I, /obj/item/implant) && user.unEquip(I, src))
 		imp = I
 	update_icon()
 
-/obj/item/weapon/implantpad/attack_self(mob/user)
+/obj/item/implantpad/attack_self(mob/user)
 	if (imp)
 		imp.interact(user)
 	else

@@ -3,8 +3,8 @@
 	desc = "A gas turbine. Converting pressure into energy since 1884."
 	icon = 'icons/obj/pipeturbine.dmi'
 	icon_state = "turbine"
-	anchored = 0
-	density = 1
+	anchored = FALSE
+	density = TRUE
 
 	var/efficiency = 0.4
 	var/kin_energy = 0
@@ -81,7 +81,7 @@
 		if (kin_energy > 1000000)
 			overlays += image('icons/obj/pipeturbine.dmi', "hi-turb")
 
-	attackby(obj/item/weapon/W as obj, mob/user as mob)
+	attackby(obj/item/W as obj, mob/user as mob)
 		if(isWrench(W))
 			anchored = !anchored
 			to_chat(user, "<span class='notice'>You [anchored ? "secure" : "unsecure"] the bolts holding \the [src] to the floor.</span>")
@@ -143,7 +143,7 @@
 		else if(reference == node2)
 			network2 = new_network
 
-		if(new_network.normal_members.Find(src))
+		if(list_find(new_network.normal_members, src))
 			return 0
 
 		new_network.normal_members += src
@@ -225,8 +225,8 @@
 	desc = "Electrogenerator. Converts rotation into power."
 	icon = 'icons/obj/pipeturbine.dmi'
 	icon_state = "motor"
-	anchored = 0
-	density = 1
+	anchored = FALSE
+	density = TRUE
 
 	var/kin_to_el_ratio = 0.1	//How much kinetic energy will be taken from turbine and converted into electricity
 	var/obj/machinery/atmospherics/pipeturbine/turbine
@@ -243,8 +243,8 @@
 			if (turbine.stat & (BROKEN) || !turbine.anchored || turn(turbine.dir,180) != dir)
 				turbine = null
 
-	attackby(obj/item/weapon/W as obj, mob/user as mob)
-		if(istype(W, /obj/item/weapon/wrench))
+	attackby(obj/item/W as obj, mob/user as mob)
+		if(istype(W, /obj/item/wrench))
 			anchored = !anchored
 			turbine = null
 			to_chat(user, "<span class='notice'>You [anchored ? "secure" : "unsecure"] the bolts holding \the [src] to the floor.</span>")

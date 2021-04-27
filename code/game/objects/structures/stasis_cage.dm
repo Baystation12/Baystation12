@@ -3,7 +3,7 @@
 	desc = "A high-tech animal cage, designed to keep contained fauna docile and safe."
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "stasis_cage"
-	density = 1
+	density = TRUE
 	layer = ABOVE_OBJ_LAYER
 
 	var/mob/living/simple_animal/contained

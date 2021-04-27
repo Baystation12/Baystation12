@@ -21,7 +21,7 @@
 	if(body)
 		if(!body.MouseDrop(over_object))
 			return ..()
-	
+
 /mob/living/exosuit/RelayMouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params, var/mob/user)
 	if(user && (user in pilots) && user.loc == src)
 		return OnMouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params, user)
@@ -61,8 +61,8 @@
 	. = ..()
 	if(!hatch_closed)
 		return max(shared_living_nano_distance(src_object), .) //Either visible to mech(outside) or visible to user (inside)
-	
-	
+
+
 /mob/living/exosuit/ClickOn(var/atom/A, var/params, var/mob/user)
 
 	if(!user || incapacitated() || user.incapacitated())
@@ -75,20 +75,20 @@
 	if(modifiers["shift"])
 		user.examinate(A)
 		return
-		
+
 	if(modifiers["ctrl"])
 		if(selected_system)
 			if(selected_system == A)
 				selected_system.CtrlClick(user)
 				setClickCooldown(3)
-			return	
+			return
 
 	if(!(user in pilots) && user != src)
 		return
 
 	if(!canClick())
 		return
-	
+
 	// Are we facing the target?
 	if(A.loc != src && !(get_dir(src, A) & dir))
 		return
@@ -104,7 +104,8 @@
 		return
 
 	if(!get_cell()?.checked_use(arms.power_use * CELLRATE))
-		to_chat(user, SPAN_WARNING("Error: Power levels insufficient."))
+		to_chat(user, power == MECH_POWER_ON ? SPAN_WARNING("Error: Power levels insufficient.") :  SPAN_WARNING("\The [src] is powered off."))
+		return
 
 	// User is not necessarily the exosuit, or the same person, so update intent.
 	if(user != src)
@@ -174,7 +175,7 @@
 					ruser = user
 				temp_system.afterattack(A,ruser,adj,params)
 			if(system_moved) //We are using a proxy system that may not have logging like mech equipment does
-				log_and_message_admins("used [temp_system] targetting [A]", user, src.loc)
+				admin_attack_log(user, A, "Attacked using \a [temp_system] (MECH)", "Was attacked with \a [temp_system] (MECH)", "used \a [temp_system] (MECH) to attack")
 			//Mech equipment subtypes can add further click delays
 			var/extra_delay = 0
 			if(!isnull(selected_system))
@@ -246,7 +247,6 @@
 	LAZYDISTINCTADD(pilots, user)
 	sync_access()
 	playsound(src, 'sound/machines/windowdoor.ogg', 50, 1)
-	user.playsound_local(null, 'sound/mecha/nominal.ogg', 50)
 	if(user.client) user.client.screen |= hud_elements
 	LAZYDISTINCTADD(user.additional_vision_handlers, src)
 	update_pilots()
@@ -304,9 +304,11 @@
 			if(hardpoints[hardpoint] == null)
 				free_hardpoints += hardpoint
 		var/to_place = input("Where would you like to install it?") as null|anything in (realThing.restricted_hardpoints & free_hardpoints)
+		if(!to_place)
+			to_chat(user, SPAN_WARNING("There is no room to install \the [thing]."))
 		if(install_system(thing, to_place, user))
 			return
-		to_chat(user, SPAN_WARNING("\The [src] could not be installed in that hardpoint."))
+		to_chat(user, SPAN_WARNING("\The [thing] could not be installed in that hardpoint."))
 		return
 
 	else if(istype(thing, /obj/item/device/kit/paint))
@@ -389,6 +391,8 @@
 				to_chat(user, SPAN_NOTICE("You remove \the [body.cell] from \the [src]."))
 				playsound(user.loc, 'sound/items/Crowbar.ogg', 50, 1)
 				visible_message(SPAN_NOTICE("\The [user] pries out \the [body.cell] using \the [thing]."))
+				power = MECH_POWER_OFF
+				hud_power_control.queue_icon_update()
 				body.cell = null
 				return
 			else if(isCrowbar(thing))
@@ -410,14 +414,14 @@
 				hud_open.queue_icon_update()
 				queue_icon_update()
 				return
-			else if(istype(thing, /obj/item/weapon/cell))
+			else if(istype(thing, /obj/item/cell))
 				if(!maintenance_protocols)
 					to_chat(user, SPAN_WARNING("The cell compartment remains locked while maintenance protocols are disabled."))
 					return
 				if(!body || body.cell)
 					to_chat(user, SPAN_WARNING("There is already a cell in there!"))
 					return
-				
+
 				if(user.unEquip(thing))
 					thing.forceMove(body)
 					body.cell = thing
@@ -451,13 +455,8 @@
 		return
 
 	// Otherwise toggle the hatch.
-	if(hatch_locked)
-		to_chat(user, SPAN_WARNING("The [body.hatch_descriptor] is locked."))
-		return
-	hatch_closed = !hatch_closed
-	to_chat(user, SPAN_NOTICE("You [hatch_closed ? "close" : "open"] the [body.hatch_descriptor]."))
-	hud_open.queue_icon_update()
-	queue_icon_update()
+	if(hud_open)
+		hud_open.toggled()
 	return
 
 /mob/living/exosuit/attack_generic(var/mob/user, var/damage, var/attack_message = "smashes into")

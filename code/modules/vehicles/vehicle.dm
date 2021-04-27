@@ -8,8 +8,8 @@
 	name = "vehicle"
 	icon = 'icons/obj/vehicles.dmi'
 	layer = ABOVE_HUMAN_LAYER
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	animate_movement=1
 	light_outer_range = 3
 
@@ -26,11 +26,11 @@
 	var/open = 0	//Maint panel
 	var/locked = 1
 	var/stat = 0
-	var/emagged = 0
+	var/emagged = FALSE
 	var/powered = 0		//set if vehicle is powered and should use fuel when moving
 	var/move_delay = 1	//set this to limit the speed of the vehicle
 
-	var/obj/item/weapon/cell/cell
+	var/obj/item/cell/cell
 	var/charge_use = 200 //W
 
 	var/atom/movable/load		//all vehicles can take a load, since they should all be a least drivable
@@ -52,7 +52,7 @@
 			turn_off()
 
 		var/init_anc = anchored
-		anchored = 0
+		anchored = FALSE
 		if(!..())
 			anchored = init_anc
 			return 0
@@ -73,8 +73,13 @@
 	else
 		return 0
 
-/obj/vehicle/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/hand_labeler))
+/obj/vehicle/proc/adjust_health(adjust_health)
+	health += adjust_health
+	health = Clamp(health, 0, maxhealth)
+	healthcheck()
+
+/obj/vehicle/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/hand_labeler))
 		return
 	if(isScrewdriver(W))
 		if(!locked)
@@ -84,14 +89,14 @@
 	else if(isCrowbar(W) && cell && open)
 		remove_cell(user)
 
-	else if(istype(W, /obj/item/weapon/cell) && !cell && open)
+	else if(istype(W, /obj/item/cell) && !cell && open)
 		insert_cell(W, user)
 	else if(isWelder(W))
-		var/obj/item/weapon/weldingtool/T = W
+		var/obj/item/weldingtool/T = W
 		if(T.welding)
 			if(health < maxhealth)
 				if(open)
-					health = min(maxhealth, health+10)
+					adjust_health(10)
 					user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 					user.visible_message("<span class='warning'>\The [user] repairs \the [src]!</span>","<span class='notice'>You repair \the [src]!</span>")
 				else
@@ -104,16 +109,16 @@
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		switch(W.damtype)
 			if("fire")
-				health -= W.force * fire_dam_coeff
+				adjust_health(-W.force * fire_dam_coeff)
 			if("brute")
-				health -= W.force * brute_dam_coeff
+				adjust_health(-W.force * brute_dam_coeff)
 		..()
 		healthcheck()
 	else
 		..()
 
 /obj/vehicle/bullet_act(var/obj/item/projectile/Proj)
-	health -= Proj.get_structure_damage()
+	adjust_health(-Proj.get_structure_damage())
 	..()
 	healthcheck()
 
@@ -123,14 +128,14 @@
 			explode()
 			return
 		if(2.0)
-			health -= rand(5,10)*fire_dam_coeff
-			health -= rand(10,20)*brute_dam_coeff
+			adjust_health(-fire_dam_coeff * rand(5, 10))
+			adjust_health(-brute_dam_coeff * rand(10, 20))
 			healthcheck()
 			return
 		if(3.0)
 			if (prob(50))
-				health -= rand(1,5)*fire_dam_coeff
-				health -= rand(1,5)*brute_dam_coeff
+				adjust_health(-fire_dam_coeff * rand(1, 2))
+				adjust_health(-brute_dam_coeff * rand(1, 2))
 				healthcheck()
 				return
 	return
@@ -142,7 +147,7 @@
 	pulse2.icon = 'icons/effects/effects.dmi'
 	pulse2.icon_state = "empdisable"
 	pulse2.SetName("emp sparks")
-	pulse2.anchored = 1
+	pulse2.anchored = TRUE
 	pulse2.set_dir(pick(GLOB.cardinal))
 
 	spawn(10)
@@ -182,7 +187,7 @@
 
 /obj/vehicle/emag_act(var/remaining_charges, mob/user as mob)
 	if(!emagged)
-		emagged = 1
+		emagged = TRUE
 		if(locked)
 			locked = 0
 			to_chat(user, "<span class='warning'>You bypass [src]'s controls.</span>")
@@ -233,7 +238,7 @@
 		turn_on()
 		return
 
-/obj/vehicle/proc/insert_cell(var/obj/item/weapon/cell/C, var/mob/living/carbon/human/H)
+/obj/vehicle/proc/insert_cell(var/obj/item/cell/C, var/mob/living/carbon/human/H)
 	if(cell)
 		return
 	if(!istype(C))
@@ -278,7 +283,7 @@
 
 	C.forceMove(loc)
 	C.set_dir(dir)
-	C.anchored = 1
+	C.anchored = TRUE
 
 	load = C
 
@@ -327,7 +332,7 @@
 
 	load.forceMove(dest)
 	load.set_dir(get_dir(loc, dest))
-	load.anchored = 0		//we can only load non-anchored items, so it makes sense to set this to false
+	load.anchored = FALSE		//we can only load non-anchored items, so it makes sense to set this to false
 	if(ismob(load)) //atoms should probably have their own procs to define how their pixel shifts and layer can be manipulated, someday
 		var/mob/M = load
 		M.pixel_x = M.default_pixel_x
@@ -359,8 +364,7 @@
 	if(istype(user))
 		admin_attacker_log(user, "attacked \the [src]")
 		user.do_attack_animation(src)
-	src.health -= damage
+	adjust_health(-damage)
 	if(prob(10))
 		new /obj/effect/decal/cleanable/blood/oil(src.loc)
-	spawn(1) healthcheck()
 	return 1

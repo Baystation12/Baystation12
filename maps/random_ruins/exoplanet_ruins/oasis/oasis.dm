@@ -3,7 +3,7 @@
 	id = "oasis1"
 	description = "A tiny patch of life in a vast desert."
 	suffixes = list("oasis/oasis.dmm")
-	cost = 0.5
+	spawn_cost = 0.5
 	template_flags = TEMPLATE_FLAG_NO_RUINS | TEMPLATE_FLAG_ALLOW_DUPLICATES
 	ruin_tags = RUIN_NATURAL|RUIN_WATER
 

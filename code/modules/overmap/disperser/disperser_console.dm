@@ -22,6 +22,8 @@
 	var/list/calibration //what it is
 	var/list/calexpected //what is should be
 
+	var/range = 1 //range of the explosion
+	var/strength = 1 //strength of the explosion
 	var/next_shot = 0 //round time where the next shot can start from
 	var/const/coolinterval = 2 MINUTES //time to wait between safe shots in deciseconds
 
@@ -108,12 +110,18 @@ obj/machinery/computer/ship/disperser/proc/is_valid_setup()
 	var/obj/structure/ship_munition/disperser_charge/B = locate() in get_turf(back)
 	if(B)
 		return B.chargetype
+	var/obj/structure/closet/C = locate() in get_turf(back)
+	if(C)
+		return OVERMAP_WEAKNESS_DROPPOD
 	return OVERMAP_WEAKNESS_NONE
 
 /obj/machinery/computer/ship/disperser/proc/get_charge()
 	var/obj/structure/ship_munition/disperser_charge/B = locate() in get_turf(back)
 	if(B)
 		return B
+
+	var/obj/structure/closet/C = locate() in get_turf(back)
+	return C
 
 /obj/machinery/computer/ship/disperser/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = TRUE)
 	if(!linked)
@@ -128,6 +136,8 @@ obj/machinery/computer/ship/disperser/proc/is_valid_setup()
 		data["calibration"] = calibration
 		data["overmapdir"] = overmapdir
 		data["cal_accuracy"] = cal_accuracy()
+		data["strength"] = strength
+		data["range"] = range
 		data["next_shot"] = round(get_next_shot_seconds())
 		data["nopower"] = !data["faillink"] && (!front.powered() || !middle.powered() || !back.powered())
 		data["skill"] = user.get_skill_value(core_skill) > skill_offset
@@ -136,6 +146,8 @@ obj/machinery/computer/ship/disperser/proc/is_valid_setup()
 		switch(get_charge_type())
 			if(OVERMAP_WEAKNESS_NONE)
 				charge = "[SPAN_BOLD("ERROR")]: No valid charge detected."
+			if(OVERMAP_WEAKNESS_DROPPOD)
+				charge = "HERMES"
 			else
 				var/obj/structure/ship_munition/disperser_charge/B = get_charge()
 				charge = B.chargedesc
@@ -169,6 +181,18 @@ obj/machinery/computer/ship/disperser/proc/is_valid_setup()
 	if(href_list["skill_calibration"])
 		for(var/i = 1 to min(caldigit, user.get_skill_value(core_skill) - skill_offset))
 			calibration[i] = calexpected[i]
+
+	if(href_list["strength"])
+		var/input = input("1-5", "disperser strength", 1) as num|null
+		if(input && CanInteract(user, state))
+			strength = sanitize_integer(input, 1, 5, 1)
+			middle.idle_power_usage = strength * range * 100
+
+	if(href_list["range"])
+		var/input = input("1-5", "disperser radius", 1) as num|null
+		if(input && CanInteract(user, state))
+			range = sanitize_integer(input, 1, 5, 1)
+			middle.idle_power_usage = strength * range * 100
 
 	if(href_list["fire"])
 		fire(user)

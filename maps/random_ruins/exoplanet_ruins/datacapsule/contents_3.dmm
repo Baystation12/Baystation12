@@ -13,7 +13,7 @@
 /area/template_noop)
 "d" = (
 /obj/effect/spider/eggcluster,
-/obj/item/weapon/material/shard,
+/obj/item/material/shard,
 /turf/template_noop,
 /area/template_noop)
 "e" = (
@@ -25,12 +25,12 @@
 /turf/template_noop,
 /area/template_noop)
 "g" = (
-/obj/item/weapon/material/shard,
+/obj/item/material/shard,
 /turf/template_noop,
 /area/template_noop)
 "h" = (
 /obj/effect/spider/stickyweb,
-/obj/item/weapon/material/shard,
+/obj/item/material/shard,
 /turf/template_noop,
 /area/template_noop)
 "i" = (

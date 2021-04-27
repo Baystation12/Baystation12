@@ -38,7 +38,7 @@
 
 //return the position of an element or 0 if not found
 /PriorityQueue/proc/Seek(atom/A)
-	. = L.Find(A)
+	. = list_find(L, A)
 
 //return the element at the i_th position
 /PriorityQueue/proc/Get(i)

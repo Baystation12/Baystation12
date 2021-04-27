@@ -79,6 +79,9 @@
 /proc/isContactLevel(var/level)
 	return level in GLOB.using_map.contact_levels
 
+/proc/isEscapeLevel(var/level)
+	return level in GLOB.using_map.escape_levels
+
 /proc/circlerange(center=usr,radius=3)
 
 	var/turf/centerturf = get_turf(center)

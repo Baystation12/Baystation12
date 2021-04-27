@@ -30,7 +30,13 @@
 	description = "The most prominent yeosa faction, the Rah'Zakeh league's duties primarily focus on the yeosa and upholding the Aga-Eakhe. This includes \
 	a judicial body that handles piracy, tomb raiding, smuggling, etc. They resolve religious disputes and keep records of claims as well as \
 	function as arbiters. This is only a small fraction of their duties, with over two hundred yeosa'unathi shamans that handle smaller matters. \
-	Among them are the Sentinels, volunteers that function as a force to put the Tribunal's decisions into effect." 
+	Among them are the Sentinels, volunteers that function as a force to put the Tribunal's decisions into effect."
+
+/decl/cultural_info/faction/unathi/kharza
+	name = FACTION_UNATHI_KHARZA
+	description = "The Kharza fleet pride themselves on their mastery of the sea, their prowess seemingly unmatched. Hailing from some of the earliest \
+	seafaring explorers, the Kharza put themselves at the forefront of Yeosa sea exploration. Today, they run a massive trade route spanning the entire \
+	Moghes continent. Many coastal Yeosa and even some Sinta clans rely on the Kharza for their efficient and prominent trade routes." 
 
 /decl/cultural_info/faction/unathi/tersten
 	name = FACTION_UNATHI_TERSTEN_HEGEMONY

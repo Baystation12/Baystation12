@@ -7,6 +7,7 @@
 	icon_state = "base"
 	initialize_directions = 0
 	level = 1
+	layer = ABOVE_CATWALK_LAYER
 
 	var/configuring = 0
 
@@ -75,7 +76,7 @@
 		return 0
 	return 1
 
-/obj/machinery/atmospherics/omni/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
+/obj/machinery/atmospherics/omni/attackby(var/obj/item/W as obj, var/mob/user as mob)
 	if(!isWrench(W))
 		return ..()
 
@@ -171,7 +172,7 @@
 			if(ATM_OUTPUT)
 				ic_on += "_out_glow"
 				ic_off += "_out"
-			if(ATM_O2 to ATM_H2)
+			if(ATM_GAS_MIN to ATM_GAS_MAX)
 				ic_on += "_filter"
 				ic_off += "_out"
 
@@ -217,7 +218,7 @@
 			P.network = new_network
 			break
 
-	if(new_network.normal_members.Find(src))
+	if(list_find(new_network.normal_members, src))
 		return 0
 
 	new_network.normal_members += src

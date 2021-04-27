@@ -17,7 +17,7 @@
 		/obj/item/clothing/under/swimsuit/purple,
 		/obj/item/clothing/mask/snorkel = 2,
 		/obj/item/clothing/shoes/swimmingfins = 2,
-		/obj/item/weapon/towel = 2)
+		/obj/item/towel = 2)
 
 /obj/structure/closet/boxinggloves
 	name = "boxing gloves"
@@ -47,7 +47,7 @@
 
 /obj/structure/closet/lasertag/red/WillContain()
 	return list(
-		/obj/item/weapon/gun/energy/lasertag/red = 3,
+		/obj/item/gun/energy/lasertag/red = 3,
 		/obj/item/clothing/suit/redtag = 3)
 
 /obj/structure/closet/lasertag/blue
@@ -57,5 +57,5 @@
 
 /obj/structure/closet/lasertag/blue/WillContain()
 	return list(
-		/obj/item/weapon/gun/energy/lasertag/blue = 3,
+		/obj/item/gun/energy/lasertag/blue = 3,
 		/obj/item/clothing/suit/bluetag = 3)

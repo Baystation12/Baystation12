@@ -3,11 +3,11 @@
 	desc = "Stick 'em up!"
 	icon = 'icons/effects/Targeted.dmi'
 	icon_state = "locking"
-	anchored = 1
-	density = 0
+	anchored = TRUE
+	density = FALSE
 	opacity = 0
 	layer = ABOVE_HUMAN_LAYER
-	simulated = 0
+	simulated = FALSE
 	mouse_opacity = 0
 
 	var/mob/living/aiming_at   // Who are we currently targeting, if anyone?
@@ -162,7 +162,7 @@ obj/aiming_overlay/proc/update_aiming_deferred()
 	to_chat(target, "<span class='danger'>You now have a gun pointed at you. No sudden moves!</span>")
 	aiming_with = thing
 	aiming_at = target
-	if(istype(aiming_with, /obj/item/weapon/gun))
+	if(istype(aiming_with, /obj/item/gun))
 		sound_to(aiming_at, sound('sound/weapons/TargetOn.ogg'))
 		sound_to(owner, sound('sound/weapons/TargetOn.ogg'))
 
@@ -184,7 +184,7 @@ obj/aiming_overlay/proc/update_aiming_deferred()
 	else
 		icon_state = "locking"
 
-/obj/aiming_overlay/proc/toggle_active(var/force_state = null)
+/obj/aiming_overlay/proc/toggle_active(var/force_state = null, var/no_message = FALSE)
 	if(!isnull(force_state))
 		if(active == force_state)
 			return
@@ -193,25 +193,27 @@ obj/aiming_overlay/proc/update_aiming_deferred()
 		active = !active
 
 	if(!active)
-		cancel_aiming()
+		cancel_aiming(no_message)
 
 	if(owner.client)
 		if(active)
-			to_chat(owner, "<span class='notice'>You will now aim rather than fire.</span>")
+			if(!no_message)
+				to_chat(owner, "<span class='notice'>You will now aim rather than fire.</span>")
 			owner.client.add_gun_icons()
 		else
-			to_chat(owner, "<span class='notice'>You will no longer aim rather than fire.</span>")
+			if(!no_message)
+				to_chat(owner, "<span class='notice'>You will no longer aim rather than fire.</span>")
 			owner.client.remove_gun_icons()
 		owner.gun_setting_icon.icon_state = "gun[active]"
 
 /obj/aiming_overlay/proc/cancel_aiming(var/no_message = 0)
 	if(!aiming_with || !aiming_at)
 		return
-	if(istype(aiming_with, /obj/item/weapon/gun))
-		sound_to(aiming_at, sound('sound/weapons/TargetOff.ogg'))
-		sound_to(owner, sound('sound/weapons/TargetOff.ogg'))
 	if(!no_message)
 		owner.visible_message("<span class='notice'>\The [owner] lowers \the [aiming_with].</span>")
+		if(istype(aiming_with, /obj/item/gun))
+			sound_to(aiming_at, sound('sound/weapons/TargetOff.ogg'))
+			sound_to(owner, sound('sound/weapons/TargetOff.ogg'))
 
 	GLOB.moved_event.unregister(owner, src)
 	if(aiming_at)

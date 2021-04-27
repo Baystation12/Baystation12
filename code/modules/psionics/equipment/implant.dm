@@ -1,4 +1,4 @@
-/obj/item/weapon/implant/psi_control
+/obj/item/implant/psi_control
 	name = "psi dampener implant"
 	desc = "A safety implant for registered psi-operants."
 	known = TRUE
@@ -7,36 +7,36 @@
 	var/max_overload = 100
 	var/psi_mode = PSI_IMPLANT_AUTOMATIC
 
-/obj/item/weapon/implant/psi_control/islegal()
+/obj/item/implant/psi_control/islegal()
 	return TRUE
 
-/obj/item/weapon/implant/psi_control/Initialize()
+/obj/item/implant/psi_control/Initialize()
 	. = ..()
 	SSpsi.psi_dampeners += src
 
-/obj/item/weapon/implant/psi_control/Destroy()
+/obj/item/implant/psi_control/Destroy()
 	SSpsi.psi_dampeners -= src
 	. = ..()
 
-/obj/item/weapon/implant/psi_control/emp_act()
+/obj/item/implant/psi_control/emp_act()
 	. = ..()
 	update_functionality()
 
-/obj/item/weapon/implant/psi_control/meltdown()
+/obj/item/implant/psi_control/meltdown()
 	. = ..()
 	update_functionality()
 
-/obj/item/weapon/implant/psi_control/disrupts_psionics()
+/obj/item/implant/psi_control/disrupts_psionics()
 	var/use_psi_mode = get_psi_mode()
 	return (!malfunction && (use_psi_mode == PSI_IMPLANT_SHOCK || use_psi_mode == PSI_IMPLANT_WARN)) ? src : FALSE
 
-/obj/item/weapon/implant/psi_control/removed()
+/obj/item/implant/psi_control/removed()
 	var/mob/living/M = imp_in
 	if(disrupts_psionics() && istype(M) && M.psi)
 		to_chat(M, SPAN_NOTICE("You feel the chilly shackles around your psionic faculties fade away."))
 	. = ..()
 
-/obj/item/weapon/implant/psi_control/proc/update_functionality(var/silent)
+/obj/item/implant/psi_control/proc/update_functionality(var/silent)
 	var/mob/living/M = imp_in
 	if(get_psi_mode() == PSI_IMPLANT_DISABLED || malfunction)
 		if(implanted && !silent && istype(M) && M.psi)
@@ -45,7 +45,7 @@
 		if(implanted && !silent && istype(M) && M.psi)
 			to_chat(M, SPAN_NOTICE("Bands of hollow ice close themselves around your psionic faculties."))
 
-/obj/item/weapon/implant/psi_control/meltdown()
+/obj/item/implant/psi_control/meltdown()
 	if(!malfunction)
 		overload = 100
 		if(imp_in)
@@ -54,13 +54,13 @@
 				monitor.report_failure(src)
 	. = ..()
 
-/obj/item/weapon/implant/psi_control/proc/get_psi_mode()
+/obj/item/implant/psi_control/proc/get_psi_mode()
 	if(psi_mode == PSI_IMPLANT_AUTOMATIC)
 		var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
 		return security_state.current_security_level.psionic_control_level
 	return psi_mode
 
-/obj/item/weapon/implant/psi_control/withstand_psi_stress(var/stress, var/atom/source)
+/obj/item/implant/psi_control/withstand_psi_stress(var/stress, var/atom/source)
 
 	var/use_psi_mode = get_psi_mode()
 

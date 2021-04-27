@@ -53,7 +53,7 @@
 /proc/to_debug_listeners(text, prefix = "DEBUG")
 	for(var/client/C in GLOB.admins)
 		if(C.get_preference_value(/datum/client_preference/staff/show_debug_logs) == GLOB.PREF_SHOW)
-			to_chat(C, "[prefix]: [text]")
+			to_chat(C, SPAN_DEBUG("<b>[prefix]</b>: [text]"))
 
 /proc/log_game(text)
 	if (config.log_game)
@@ -173,7 +173,7 @@
 			name = M.name
 
 
-		if(include_link && is_special_character(M) && highlight_special_characters)
+		if(is_special_character(M) && highlight_special_characters)
 			. += "/(<font color='#ffa500'>[name]</font>)" //Orange
 		else
 			. += "/([name])"

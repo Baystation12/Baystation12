@@ -6,9 +6,9 @@
 	program_menu_icon = "unlocked"
 	extended_desc = "This highly advanced script can very slowly decrypt operational codes used in almost any network. These codes can be downloaded to an ID card to expand the available access. The system administrator will probably notice this."
 	size = 34
-	requires_ntnet = 1
-	available_on_ntnet = 0
-	available_on_syndinet = 1
+	requires_ntnet = TRUE
+	available_on_ntnet = FALSE
+	available_on_syndinet = TRUE
 	nanomodule_path = /datum/nano_module/program/access_decrypter/
 	var/message = ""
 	var/running = FALSE
@@ -31,8 +31,8 @@
 	. = ..()
 	if(!running)
 		return
-	var/obj/item/weapon/stock_parts/computer/processor_unit/CPU = computer.get_component(PART_CPU)
-	var/obj/item/weapon/stock_parts/computer/card_slot/RFID = computer.get_component(PART_CARD)
+	var/obj/item/stock_parts/computer/processor_unit/CPU = computer.get_component(PART_CPU)
+	var/obj/item/stock_parts/computer/card_slot/RFID = computer.get_component(PART_CARD)
 	if(!istype(CPU) || !CPU.check_functionality() || !istype(RFID) || !RFID.check_functionality())
 		message = "A fatal hardware error has been detected."
 		return
@@ -68,8 +68,8 @@
 	if(href_list["PRG_execute"])
 		if(running)
 			return 1
-		var/obj/item/weapon/stock_parts/computer/processor_unit/CPU = computer.get_component(PART_CPU)
-		var/obj/item/weapon/stock_parts/computer/card_slot/RFID = computer.get_component(PART_CARD)
+		var/obj/item/stock_parts/computer/processor_unit/CPU = computer.get_component(PART_CPU)
+		var/obj/item/stock_parts/computer/card_slot/RFID = computer.get_component(PART_CARD)
 		if(!istype(CPU) || !CPU.check_functionality() || !istype(RFID) || !RFID.check_functionality())
 			message = "A fatal hardware error has been detected."
 			return
@@ -78,7 +78,7 @@
 			return
 
 		var/access = href_list["PRG_execute"]
-		var/obj/item/weapon/card/id/id_card = RFID.stored_card
+		var/obj/item/card/id/id_card = RFID.stored_card
 		if(access in id_card.access)
 			return 1
 		if(access in restricted_access_codes)
@@ -101,7 +101,7 @@
 
 /datum/computer_file/program/access_decrypter/proc/get_speed()
 	var/skill_speed_modifier = 1 + (operator_skill - SKILL_ADEPT)/(SKILL_MAX - SKILL_MIN)
-	var/obj/item/weapon/stock_parts/computer/processor_unit/CPU = computer.get_component(PART_CPU)
+	var/obj/item/stock_parts/computer/processor_unit/CPU = computer.get_component(PART_CPU)
 	return CPU?.processing_power * skill_speed_modifier
 
 /datum/nano_module/program/access_decrypter
@@ -116,7 +116,7 @@
 		return
 	data = PRG.get_header_data()
 
-	var/obj/item/weapon/stock_parts/computer/card_slot/RFID = PRG.computer.get_component(PART_CARD)
+	var/obj/item/stock_parts/computer/card_slot/RFID = PRG.computer.get_component(PART_CARD)
 	if(PRG.message)
 		data["message"] = PRG.message
 	else if(PRG.running)
@@ -133,7 +133,7 @@
 			strings.Add(string)
 		data["dos_strings"] = strings
 	else if(RFID && RFID.stored_card)
-		var/obj/item/weapon/card/id/id_card = RFID.stored_card
+		var/obj/item/card/id/id_card = RFID.stored_card
 		var/list/regions = list()
 		for(var/i = ACCESS_REGION_MIN; i <= ACCESS_REGION_MAX; i++)
 			var/list/accesses = list()

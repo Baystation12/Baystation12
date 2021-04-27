@@ -22,7 +22,7 @@ BUT HEED MY RUMINATIONS
 
 ### Don't use Torch-specific types
 
-Away maps are expected to work whether you're on Torch, the example map, the Bearcat, or anything else you might want to load as the server's main map. That means your map mustn't use areas, turfs, objects, mobs or datums that are specific to any main map.
+Away maps are expected to work whether you're on Torch, the example map, or anything else you might want to load as the server's main map. That means your map mustn't use areas, turfs, objects, mobs or datums that are specific to any main map.
 
 e.g. you can use `/area/space`, or `/turf/simulated/wall`, because neither are specific to Torch. They live out in the main codebase, are always compiled in, and are available to all maps. But you can't use `/obj/random_multi/single_item/punitelly`, because Punitelli only exists when Torch is compiled.
 
@@ -54,13 +54,13 @@ The game will read this to learn about your new shiny away sites, including what
 
 ### Include your .dm file in any main map file, and away sites testing
 
-That's `maps/away_sites_testing/away_sites_testing.dm`, and probably `maps/torch/torch.dm`. It goes in the testing one to make sure Travis runs it through unit testing, and it goes in the Torch one to make it available while we play Torch. If we have since changed map, yell at someone to update this doc.
+That's `maps/away_sites_testing/away_sites_testing.dm`, and probably `maps/torch/torch.dm`. It goes in the testing one to make sure it is checked during unit testing, and it goes in the Torch one to make it available while we play Torch. If we have since changed map, yell at someone to update this doc.
 
 ### Don't include it, or the .dmms, in the .dme
 
 That means don't have any of your away map stuff checked in Dream Maker. It'll get included, as if by magic, via the work you did in the previous step!
 
-That's it! You're probably done! Unless Travis explodes at you.
+That's it! You're probably done! Unless the unit tests explode on you.
 
 ### Some of the stuff I put in my map isn't behaving properly!
 

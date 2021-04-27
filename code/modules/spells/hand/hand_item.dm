@@ -8,7 +8,7 @@ Basically: I can use it to target things where I click. I can then pass these ta
 	atom_flags = 0
 	item_flags = 0
 	obj_flags = 0
-	simulated = 0
+	simulated = FALSE
 	icon_state = "spell"
 	var/next_spell_time = 0
 	var/spell/hand/hand_spell

@@ -602,7 +602,7 @@
 	var/turf/location = get_turf(holder.my_atom.loc)
 	for(var/turf/simulated/floor/target_tile in range(0,location))
 		target_tile.assume_gas(/datum/reagent/toxin/phoron, created_volume, 400+T0C)
-		spawn (0) target_tile.hotspot_expose(700, 400)
+		addtimer(CALLBACK(target_tile, /turf/proc/hotspot_expose, 700, 400), 0)
 
 /datum/chemical_reaction/napalm
 	name = "Napalm"
@@ -972,7 +972,7 @@
 /datum/chemical_reaction/slime/monkey/on_reaction(var/datum/reagents/holder)
 	..()
 	for(var/i = 1, i <= 3, i++)
-		new /obj/item/weapon/reagent_containers/food/snacks/monkeycube(get_turf(holder.my_atom))
+		new /obj/item/reagent_containers/food/snacks/monkeycube(get_turf(holder.my_atom))
 
 //Green
 /datum/chemical_reaction/slime/mutate
@@ -1029,7 +1029,7 @@
 
 /datum/chemical_reaction/slime/bork/on_reaction(var/datum/reagents/holder)
 	..()
-	var/list/borks = typesof(/obj/item/weapon/reagent_containers/food/snacks) - /obj/item/weapon/reagent_containers/food/snacks
+	var/list/borks = typesof(/obj/item/reagent_containers/food/snacks) - /obj/item/reagent_containers/food/snacks
 	playsound(get_turf(holder.my_atom), 'sound/effects/phasein.ogg', 100, 1)
 	for(var/mob/living/carbon/human/M in viewers(get_turf(holder.my_atom), null))
 		if(M.eyecheck() < FLASH_PROTECTION_MODERATE)
@@ -1117,7 +1117,7 @@
 
 /datum/chemical_reaction/slime/cell/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
 	..()
-	new /obj/item/weapon/cell/slime(get_turf(holder.my_atom))
+	new /obj/item/cell/slime(get_turf(holder.my_atom))
 
 /datum/chemical_reaction/slime/glow
 	name = "Slime Glow"
@@ -1141,7 +1141,7 @@
 
 /datum/chemical_reaction/slime/psteroid/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
 	..()
-	new /obj/item/weapon/slimesteroid(get_turf(holder.my_atom))
+	new /obj/item/slimesteroid(get_turf(holder.my_atom))
 
 /datum/chemical_reaction/slime/jam
 	name = "Slime Jam"
@@ -1194,7 +1194,7 @@
 
 /datum/chemical_reaction/slime/ppotion/on_reaction(var/datum/reagents/holder)
 	..()
-	new /obj/item/weapon/slimepotion(get_turf(holder.my_atom))
+	new /obj/item/slimepotion(get_turf(holder.my_atom))
 
 //Black
 /datum/chemical_reaction/slime/mutate2
@@ -1229,7 +1229,7 @@
 
 /datum/chemical_reaction/slime/potion2/on_reaction(var/datum/reagents/holder)
 	..()
-	new /obj/item/weapon/slimepotion2(get_turf(holder.my_atom))
+	new /obj/item/slimepotion2(get_turf(holder.my_atom))
 
 //Adamantine
 /datum/chemical_reaction/slime/golem
@@ -1294,7 +1294,7 @@
 	required = /obj/item/slime_extract/pyrite
 
 /datum/chemical_reaction/slime/paint/on_reaction(var/datum/reagents/holder)
-	new /obj/item/weapon/reagent_containers/glass/paint/random(get_turf(holder.my_atom))
+	new /obj/item/reagent_containers/glass/paint/random(get_turf(holder.my_atom))
 	..()
 
 //cerulean
@@ -1305,7 +1305,7 @@
 	required = /obj/item/slime_extract/cerulean
 
 /datum/chemical_reaction/slime/extract_enhance/on_reaction(var/datum/reagents/holder)
-	new /obj/item/weapon/slimesteroid2(get_turf(holder.my_atom))
+	new /obj/item/slimesteroid2(get_turf(holder.my_atom))
 	..()
 
 /datum/chemical_reaction/soap_key
@@ -1315,14 +1315,14 @@
 	var/strength = 3
 
 /datum/chemical_reaction/soap_key/can_happen(var/datum/reagents/holder)
-	if(holder.my_atom && istype(holder.my_atom, /obj/item/weapon/soap))
+	if(holder.my_atom && istype(holder.my_atom, /obj/item/soap))
 		return ..()
 	return 0
 
 /datum/chemical_reaction/soap_key/on_reaction(var/datum/reagents/holder)
-	var/obj/item/weapon/soap/S = holder.my_atom
+	var/obj/item/soap/S = holder.my_atom
 	if(S.key_data)
-		var/obj/item/weapon/key/soap/key = new(get_turf(holder.my_atom), S.key_data)
+		var/obj/item/key/soap/key = new(get_turf(holder.my_atom), S.key_data)
 		key.uses = strength
 	..()
 
@@ -1340,7 +1340,7 @@
 	..()
 	var/location = get_turf(holder.my_atom)
 	for(var/i = 1, i <= created_volume, i++)
-		new /obj/item/weapon/reagent_containers/food/snacks/tofu(location)
+		new /obj/item/reagent_containers/food/snacks/tofu(location)
 
 /datum/chemical_reaction/chocolate_bar
 	name = "Chocolate Bar"
@@ -1353,7 +1353,7 @@
 	..()
 	var/location = get_turf(holder.my_atom)
 	for(var/i = 1, i <= created_volume, i++)
-		new /obj/item/weapon/reagent_containers/food/snacks/chocolatebar(location)
+		new /obj/item/reagent_containers/food/snacks/chocolatebar(location)
 
 /datum/chemical_reaction/chocolate_bar2
 	name = "Chocolate Bar"
@@ -1366,7 +1366,7 @@
 	..()
 	var/location = get_turf(holder.my_atom)
 	for(var/i = 1, i <= created_volume, i++)
-		new /obj/item/weapon/reagent_containers/food/snacks/chocolatebar(location)
+		new /obj/item/reagent_containers/food/snacks/chocolatebar(location)
 
 /datum/chemical_reaction/chocolate_milk
 	name = "Chocolate Milk"
@@ -1493,7 +1493,7 @@
 	..()
 	var/location = get_turf(holder.my_atom)
 	for(var/i = 1, i <= created_volume, i++)
-		new /obj/item/weapon/reagent_containers/food/snacks/sliceable/cheesewheel(location)
+		new /obj/item/reagent_containers/food/snacks/sliceable/cheesewheel(location)
 
 /datum/chemical_reaction/rawmeatball
 	name = "Raw Meatball"
@@ -1506,7 +1506,7 @@
 	..()
 	var/location = get_turf(holder.my_atom)
 	for(var/i = 1, i <= created_volume, i++)
-		new /obj/item/weapon/reagent_containers/food/snacks/rawmeatball(location)
+		new /obj/item/reagent_containers/food/snacks/rawmeatball(location)
 
 /datum/chemical_reaction/dough
 	name = "Dough"
@@ -1519,7 +1519,7 @@
 	..()
 	var/location = get_turf(holder.my_atom)
 	for(var/i = 1, i <= created_volume, i++)
-		new /obj/item/weapon/reagent_containers/food/snacks/dough(location)
+		new /obj/item/reagent_containers/food/snacks/dough(location)
 
 /datum/chemical_reaction/soydough
 	name = "Soy dough"
@@ -1532,7 +1532,7 @@
 	..()
 	var/location = get_turf(holder.my_atom)
 	for(var/i = 1, i <= created_volume, i++)
-		new /obj/item/weapon/reagent_containers/food/snacks/dough(location)
+		new /obj/item/reagent_containers/food/snacks/dough(location)
 
 //batter reaction as food precursor, for things that don't use pliable dough precursor.
 
@@ -1568,7 +1568,7 @@
 	..()
 	var/location = get_turf(holder.my_atom)
 	for(var/i = 1, i <= created_volume, i++)
-		new /obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh(location)
+		new /obj/item/reagent_containers/food/snacks/meat/syntiflesh(location)
 
 /datum/chemical_reaction/hot_ramen
 	name = "Hot Ramen"
@@ -2622,6 +2622,12 @@
 	required_reagents = list(/datum/reagent/drink/milk/cream = 1, /datum/reagent/ethanol/cognac = 1, /datum/reagent/drink/hot_coco = 1)
 	result_amount = 3
 
+/datum/chemical_reaction/kamikaze
+	name = "Kamikaze"
+	result = /datum/reagent/ethanol/kamikaze
+	required_reagents = list(/datum/reagent/ethanol/vodka = 1, /datum/reagent/ethanol/triple_sec = 1, /datum/reagent/drink/juice/lime = 1)
+	result_amount = 3
+
 /datum/chemical_reaction/grasshopper
 	name = "Grasshopper"
 	result = /datum/reagent/ethanol/grasshopper
@@ -2674,8 +2680,8 @@
 /datum/chemical_reaction/fringe_weaver
 	name = "Fringe Weaver"
 	result = /datum/reagent/ethanol/fringe_weaver
-	required_reagents = list(/datum/reagent/sugar = 1, /datum/reagent/ethanol = 2)
-	result_amount = 3
+	required_reagents = list(/datum/reagent/sugar = 1, /datum/reagent/ethanol = 2, /datum/reagent/water= 1)
+	result_amount = 4
 
 // Non-Alcoholic Drinks
 
@@ -2807,7 +2813,7 @@
 /datum/chemical_reaction/strawberry_soda
 	name = "Strawberry Soda"
 	result = /datum/reagent/drink/strawberry_soda
-	required_reagents = list(/datum/reagent/drink/sodawater = 2, /datum/reagent/nutriment/cherryjelly = 1)
+	required_reagents = list(/datum/reagent/drink/sodawater = 2, /datum/reagent/drink/juice/berry = 1)
 	result_amount = 3
 	mix_message = "The liquid blends together smoothly"
 
@@ -2828,7 +2834,7 @@
 /datum/chemical_reaction/cherry_cola
 	name = "Cherry Cola"
 	result = /datum/reagent/drink/cherry_cola
-	required_reagents = list(/datum/reagent/drink/space_cola = 2, /datum/reagent/drink/juice/berry = 1)
+	required_reagents = list(/datum/reagent/drink/space_cola = 2, /datum/reagent/nutriment/cherryjelly = 1)
 	result_amount = 3
 	mix_message = "The liquid blends together smoothly"
 
@@ -2953,3 +2959,173 @@
 	result = /datum/reagent/drink/eggnog
 	required_reagents = list(/datum/reagent/nutriment/protein/egg = 1, /datum/reagent/drink/milk/ = 1, /datum/reagent/sugar = 1)
 	result_amount = 3
+
+/datum/chemical_reaction/espresso
+	name = "Espresso"
+	result = /datum/reagent/drink/coffee/espresso
+	required_reagents = list(/datum/reagent/drink/coffee = 2, /datum/reagent/water = 1)
+	result_amount = 3
+	minimum_temperature = 80 CELSIUS
+	mix_message = "The coffee boils over into a rich, dark texture."
+
+/datum/chemical_reaction/americano
+	name = "Americano"
+	result = /datum/reagent/drink/coffee/americano
+	required_reagents = list(/datum/reagent/drink/coffee/espresso = 2, /datum/reagent/water = 1)
+	minimum_temperature = 50 CELSIUS
+	result_amount = 3
+	mix_message = "The water mixes with the coffee to dilute it."
+
+/datum/chemical_reaction/yuenyeung
+	name = "Yuenyeung"
+	result = /datum/reagent/drink/coffee/yuenyeung
+	required_reagents = list(/datum/reagent/drink/coffee = 1, /datum/reagent/drink/tea = 1)
+	result_amount = 2
+
+/datum/chemical_reaction/frappe
+	name = "Iced Frappe"
+	result = /datum/reagent/drink/coffee/iced/frappe
+	required_reagents = list(/datum/reagent/drink/coffee = 2, /datum/reagent/drink/ice = 1, /datum/reagent/sugar = 1)
+	result_amount = 4
+	minimum_temperature = (0 CELSIUS) - 100
+	maximum_temperature = 0 CELSIUS
+	mix_message = "The solution chills"
+
+/datum/chemical_reaction/carajillo
+	name = "Carajillo"
+	result = /datum/reagent/ethanol/coffee/carajillo
+	required_reagents = list(/datum/reagent/drink/coffee = 2, /datum/reagent/ethanol/coffee/kahlua = 1)
+	result_amount = 3
+
+/datum/chemical_reaction/capilliumate
+	name = "Capilliumate"
+	result =/datum/reagent/capilliumate
+	result_amount = 3
+	required_reagents = list(
+		/datum/reagent/radium = 1,
+		/datum/reagent/nutriment/protein = 1,
+		/datum/reagent/mutagen = 1
+	)
+	mix_message = "The solution bubbles and thickens into strands."
+
+/datum/chemical_reaction/hair_dye
+	name = "Hair Dye"
+	result = /datum/reagent/hair_dye
+	result_amount = 2
+	required_reagents = list(
+		/datum/reagent/enzyme = 1,
+		/datum/reagent/ammonia = 1
+	)
+
+/datum/chemical_reaction/colored_hair_dye/red
+	name = "Red Hair Dye"
+	result = /datum/reagent/colored_hair_dye/red
+	result_amount = 1
+	required_reagents = list(
+		/datum/reagent/hair_dye = 1,
+		/datum/reagent/crayon_dust/red = 1
+	)
+
+/datum/chemical_reaction/colored_hair_dye/orange
+	name = "Orange Hair Dye"
+	result = /datum/reagent/colored_hair_dye/orange
+	result_amount = 1
+	required_reagents = list(
+		/datum/reagent/hair_dye = 1,
+		/datum/reagent/crayon_dust/orange = 1
+	)
+
+/datum/chemical_reaction/colored_hair_dye/yellow
+	name = "Yellow Hair Dye"
+	result = /datum/reagent/colored_hair_dye/yellow
+	result_amount = 1
+	required_reagents = list(
+		/datum/reagent/hair_dye = 1,
+		/datum/reagent/crayon_dust/yellow = 1
+	)
+
+/datum/chemical_reaction/colored_hair_dye/green
+	name = "Green Hair Dye"
+	result = /datum/reagent/colored_hair_dye/green
+	result_amount = 1
+	required_reagents = list(
+		/datum/reagent/hair_dye = 1,
+		/datum/reagent/crayon_dust/green = 1
+	)
+
+/datum/chemical_reaction/colored_hair_dye/blue
+	name = "Blue Hair Dye"
+	result = /datum/reagent/colored_hair_dye/blue
+	result_amount = 1
+	required_reagents = list(
+		/datum/reagent/hair_dye = 1,
+		/datum/reagent/crayon_dust/blue = 1
+	)
+
+/datum/chemical_reaction/colored_hair_dye/purple
+	name = "Purple Hair Dye"
+	result = /datum/reagent/colored_hair_dye/purple
+	result_amount = 1
+	required_reagents = list(
+		/datum/reagent/hair_dye = 1,
+		/datum/reagent/crayon_dust/purple = 1
+	)
+
+/datum/chemical_reaction/colored_hair_dye/grey
+	name = "Grey Hair Dye"
+	result = /datum/reagent/colored_hair_dye/grey
+	result_amount = 1
+	required_reagents = list(
+		/datum/reagent/hair_dye = 1,
+		/datum/reagent/crayon_dust/grey = 1
+	)
+
+/datum/chemical_reaction/colored_hair_dye/brown
+	name = "Brown Hair Dye"
+	result = /datum/reagent/colored_hair_dye/brown
+	result_amount = 1
+	required_reagents = list(
+		/datum/reagent/hair_dye = 1,
+		/datum/reagent/crayon_dust/brown = 1
+	)
+
+/datum/chemical_reaction/colored_hair_dye/black
+	name = "Black Hair Dye"
+	result = /datum/reagent/colored_hair_dye/black
+	result_amount = 3
+	required_reagents = list(
+		/datum/reagent/colored_hair_dye/red = 1,
+		/datum/reagent/colored_hair_dye/blue = 1,
+		/datum/reagent/colored_hair_dye/yellow = 1
+	)
+
+/datum/chemical_reaction/colored_hair_dye/chaos
+	name = "Chaos Hair Dye"
+	result = /datum/reagent/colored_hair_dye/chaos
+	result_amount = 2
+	required_reagents = list(
+		/datum/reagent/hair_dye = 1,
+		/datum/reagent/mutagen = 1
+	)
+
+/datum/chemical_reaction/colored_hair_dye/light_brown
+	name = "Light Brown Hair Dye"
+	result = /datum/reagent/colored_hair_dye/light_brown
+	result_amount = 1
+	required_reagents = list(
+		/datum/reagent/colored_hair_dye/brown = 1
+	)
+	catalysts = list(
+		/datum/reagent/enzyme = 1
+	)
+
+/datum/chemical_reaction/colored_hair_dye/white
+	name = "White Hair Dye"
+	result = /datum/reagent/colored_hair_dye/white
+	result_amount = 1
+	required_reagents = list(
+		/datum/reagent/colored_hair_dye/grey = 1
+	)
+	catalysts = list(
+		/datum/reagent/enzyme = 1
+	)

@@ -17,11 +17,8 @@
 	meat_amount = 12
 	response_help  = "placates"
 	response_harm   = "assaults"
-	attacktext = "brutalized"
 	health = 500
 	maxHealth = 500
-	melee_damage_lower = 35
-	melee_damage_upper = 55
 	mob_size = MOB_LARGE
 	mob_bump_flag = HEAVY
 	can_escape = TRUE
@@ -31,7 +28,35 @@
 	minbodytemp = 0
 	break_stuff_probability = 35
 	flash_vulnerability = 0
+	natural_weapon = /obj/item/natural_weapon/goatking
+	var/current_damtype = BRUTE
+	var/list/elemental_weapons = list(
+		BURN = /obj/item/natural_weapon/goatking/fire,
+		ELECTROCUTE = /obj/item/natural_weapon/goatking/lightning
+	)
 	var/stun_chance = 5 //chance per attack to Weaken target
+
+/mob/living/simple_animal/hostile/retaliate/goat/king/get_natural_weapon()
+	if(!(current_damtype in elemental_weapons))
+		return ..()
+	if(ispath(elemental_weapons[current_damtype]))
+		var/T = elemental_weapons[current_damtype]
+		elemental_weapons[current_damtype] = new T(src)
+	return elemental_weapons[current_damtype]
+
+/obj/item/natural_weapon/goatking
+	name = "giant horns"
+	attack_verb = list("brutalized")
+	force = 40
+	sharp = TRUE
+
+/obj/item/natural_weapon/goatking/fire
+	name = "burning horns"
+	damtype = BURN
+
+/obj/item/natural_weapon/goatking/lightning
+	name = "lightning horns"
+	damtype = ELECTROCUTE
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/phase2
 	name = "emperor of goats"
@@ -41,8 +66,11 @@
 	meat_amount = 36
 	health = 750
 	maxHealth = 750
-	melee_damage_lower = 40
-	melee_damage_upper = 60
+	natural_weapon = /obj/item/natural_weapon/goatking/unleashed
+	elemental_weapons = list(
+		BURN = /obj/item/natural_weapon/goatking/fire/unleashed,
+		ELECTROCUTE = /obj/item/natural_weapon/goatking/lightning/unleashed
+	)
 	default_pixel_y = 5
 	break_stuff_probability = 40
 	stun_chance = 7
@@ -52,6 +80,15 @@
 	var/datum/sound_token/boss_theme
 	var/sound_id = "goat"
 	var/special_attacks = 0
+
+/obj/item/natural_weapon/goatking/unleashed
+	force = 55
+
+/obj/item/natural_weapon/goatking/lightning/unleashed
+	force = 55
+
+/obj/item/natural_weapon/goatking/fire/unleashed
+	force = 55
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/phase2/Initialize()
 	. = ..()
@@ -67,8 +104,13 @@
 	icon_dead = "goat_guard_dead"
 	health = 125
 	maxHealth = 125
-	melee_damage_lower = 10
-	melee_damage_upper = 15
+	natural_weapon = /obj/item/natural_weapon/goathorns
+
+/obj/item/natural_weapon/goathorns
+	name = "horns"
+	attack_verb = list("impaled", "stabbed")
+	force = 15
+	sharp = TRUE
 
 /mob/living/simple_animal/hostile/retaliate/goat/guard/master
 	name = "master of the guard"
@@ -78,8 +120,7 @@
 	icon_dead = "goat_guard_m_dead"
 	health = 200
 	maxHealth = 200
-	melee_damage_lower = 15
-	melee_damage_upper = 20
+	natural_weapon = /obj/item/natural_weapon/goathorns
 	move_to_delay = 3
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/Retaliate()
@@ -96,15 +137,10 @@
 			visible_message(SPAN_MFAUNA("\The [src] shimmers and seems to phase in and out of reality itself!"))
 			move_to_delay = 1
 
-		else if(prob(5) && melee_damage_lower != 50) //damage buff
-			spellscast++
-			visible_message(SPAN_MFAUNA("\The [src]' horns grow larger and more menacing!"))
-			melee_damage_lower = 50
-
 		else if(prob(5)) //stun move
 			spellscast++
 			visible_message(SPAN_MFAUNA("\The [src]' fleece flashes with blinding light!"))
-			new /obj/item/weapon/grenade/flashbang/instant(src.loc)
+			new /obj/item/grenade/flashbang/instant(src.loc)
 
 		else if(prob(5)) //spawn adds
 			spellscast++
@@ -118,14 +154,14 @@
 			visible_message(SPAN_MFAUNA("\The [src] disrupts nearby electrical equipment!"))
 			empulse(get_turf(src), 5, 2, 0)
 
-		else if(prob(5) && damtype == BRUTE && !special_attacks) //elemental attacks
+		else if(prob(5) && current_damtype == BRUTE && !special_attacks) //elemental attacks
 			spellscast++
 			if(prob(50))
 				visible_message(SPAN_MFAUNA("\The [src]' horns flicker with holy white flame!"))
-				damtype = BURN
+				current_damtype = BURN
 			else
 				visible_message(SPAN_MFAUNA("\The [src]' horns glimmer, electricity arcing between them!"))
-				damtype = ELECTROCUTE
+				current_damtype = ELECTROCUTE
 
 		else if(prob(5)) //earthquake spell
 			visible_message("<span class='cultannounce'>\The [src]' eyes begin to glow ominously as dust and debris in the area is kicked up in a light breeze.</span>")
@@ -150,7 +186,7 @@
 	phase3 = TRUE
 	spellscast = 0
 	health = 750
-	new /obj/item/weapon/grenade/flashbang/instant(src.loc)
+	new /obj/item/grenade/flashbang/instant(src.loc)
 	QDEL_NULL(boss_theme)
 	boss_theme = GLOB.sound_player.PlayLoopingSound(src, sound_id, 'sound/music/Visager-Miniboss_Fight.ogg', volume = 10, range = 8, falloff = 4, prefer_mute = TRUE)
 	stun_chance = 10
@@ -172,9 +208,9 @@
 	. = ..()
 	if(!.)
 		return FALSE
-	if(special_attacks >= 6 && damtype != BRUTE)
+	if(special_attacks >= 6 && current_damtype != BRUTE)
 		visible_message(SPAN_MFAUNA("The energy surrounding \the [src]'s horns dissipates."))
-		damtype = BRUTE
+		current_damtype = BRUTE
 
 	if(health <= 150 && !phase3 && spellscast == 5) //begin phase 3, reset spell limit and heal
 		phase3_transition()
@@ -188,7 +224,7 @@
 	QDEL_NULL(boss_theme)
 	if(phase3)
 		visible_message(SPAN_MFAUNA("\The [src] shrieks as the seal on his power breaks and his wool sheds off!"))
-		new /obj/item/weapon/towel/fleece(src.loc)
+		new /obj/item/towel/fleece(src.loc)
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/death()
 	..()
@@ -209,7 +245,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/phase2/AttackingTarget()
 	. = ..()
-	if(damtype != BRUTE)
+	if(current_damtype != BRUTE)
 		special_attacks++
 	
 /mob/living/simple_animal/hostile/retaliate/goat/king/Allow_Spacemove(check_drift = 0)

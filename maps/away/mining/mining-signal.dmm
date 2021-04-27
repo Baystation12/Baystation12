@@ -31,8 +31,8 @@
 /area/outpost/abandoned)
 "ak" = (
 /obj/structure/table/rack,
-/obj/item/weapon/cell/hyper,
-/obj/item/weapon/cell/hyper,
+/obj/item/cell/hyper,
+/obj/item/cell/hyper,
 /turf/simulated/floor/holofloor/tiled/dark,
 /area/outpost/abandoned)
 "am" = (
@@ -72,11 +72,11 @@
 /turf/simulated/floor/airless,
 /area/outpost/abandoned)
 "as" = (
-/obj/machinery/teleport/station,
+/obj/machinery/tele_projector,
 /turf/simulated/floor/airless,
 /area/outpost/abandoned)
 "at" = (
-/obj/machinery/teleport/hub,
+/obj/machinery/tele_pad,
 /turf/simulated/floor/airless,
 /area/outpost/abandoned)
 "au" = (
@@ -89,7 +89,7 @@
 /area/outpost/abandoned)
 "aw" = (
 /obj/structure/table/glass,
-/obj/item/weapon/newspaper,
+/obj/item/newspaper,
 /obj/effect/floor_decal/corner/paleblue/diagonal,
 /turf/simulated/floor/tiled/white,
 /area/outpost/abandoned)
@@ -168,7 +168,7 @@
 /area/outpost/abandoned)
 "aM" = (
 /obj/structure/table/glass,
-/obj/item/weapon/pen,
+/obj/item/pen,
 /obj/effect/floor_decal/corner/paleblue/diagonal,
 /turf/simulated/floor/tiled/white,
 /area/outpost/abandoned)
@@ -178,7 +178,7 @@
 /area/outpost/abandoned)
 "aO" = (
 /obj/effect/decal/cleanable/blood,
-/obj/item/weapon/material/shard,
+/obj/item/material/shard,
 /turf/simulated/floor/tiled/freezer,
 /area/outpost/abandoned)
 "aP" = (
@@ -216,7 +216,7 @@
 /area/outpost/abandoned)
 "aW" = (
 /obj/structure/table/glass,
-/obj/item/weapon/paper_bin,
+/obj/item/paper_bin,
 /obj/machinery/light/small{
 	dir = 8
 	},
@@ -241,7 +241,7 @@
 /area/outpost/abandoned)
 "aZ" = (
 /obj/structure/table/glass,
-/obj/item/weapon/paper_bin,
+/obj/item/paper_bin,
 /obj/machinery/light/small{
 	dir = 4
 	},
@@ -269,18 +269,18 @@
 /area/outpost/abandoned)
 "bf" = (
 /obj/structure/table/glass,
-/obj/item/weapon/cell/potato,
+/obj/item/cell/potato,
 /obj/effect/floor_decal/corner/paleblue/diagonal,
 /turf/simulated/floor/tiled/white,
 /area/outpost/abandoned)
 "bg" = (
-/obj/item/weapon/pen,
+/obj/item/pen,
 /obj/effect/floor_decal/corner/paleblue/diagonal,
 /turf/simulated/floor/tiled/white,
 /area/outpost/abandoned)
 "bh" = (
 /obj/structure/table/rack,
-/obj/item/weapon/rig/hazmat,
+/obj/item/rig/hazmat,
 /turf/simulated/floor/tiled/freezer,
 /area/outpost/abandoned)
 "bi" = (
@@ -694,7 +694,7 @@
 /area/outpost/abandoned)
 "cp" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/board,
+/obj/item/board,
 /turf/simulated/floor/wood,
 /area/outpost/abandoned)
 "cq" = (
@@ -926,14 +926,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/outpost/abandoned)
-"df" = (
-/obj/effect/wallframe_spawn/reinforced,
-/obj/effect/decal/cleanable/dirt,
-/obj/machinery/door/blast/regular{
-	id_tag = "mars_blast"
-	},
-/turf/simulated/floor/plating,
-/area/outpost/abandoned)
 "dg" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 10;
@@ -942,28 +934,10 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/carpet,
 /area/outpost/abandoned)
-"dh" = (
-/turf/simulated/floor/carpet{
-	icon_state = "carpet_broken"
-	},
-/area/outpost/abandoned)
-"di" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/carpet{
-	icon_state = "carpet_broken"
-	},
-/area/outpost/abandoned)
 "dj" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/carpet,
-/area/outpost/abandoned)
-"dk" = (
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/carpet{
-	icon_state = "carpet_broken"
-	},
 /area/outpost/abandoned)
 "dl" = (
 /obj/effect/floor_decal/spline/fancy/wood{
@@ -1016,12 +990,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/red,
 /turf/simulated/wall/titanium,
 /area/outpost/abandoned)
-"dv" = (
-/turf/simulated/floor/asteroid,
-/turf/simulated/shuttle/wall{
-	icon_state = "diagonalWall3"
-	},
-/area/outpost/abandoned)
 "dw" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 10;
@@ -1036,24 +1004,6 @@
 /obj/structure/table/woodentable,
 /turf/simulated/floor/carpet,
 /area/outpost/abandoned)
-"dy" = (
-/obj/effect/floor_decal/spline/fancy/wood,
-/obj/structure/flora/pottedplant{
-	icon_state = "plant-25"
-	},
-/obj/machinery/light/small,
-/turf/simulated/floor/carpet{
-	icon_state = "carpet_broken"
-	},
-/area/outpost/abandoned)
-"dz" = (
-/obj/effect/floor_decal/spline/fancy/wood,
-/obj/structure/table/woodentable,
-/obj/random/loot,
-/turf/simulated/floor/carpet{
-	icon_state = "carpet_broken"
-	},
-/area/outpost/abandoned)
 "dA" = (
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 6;
@@ -1061,13 +1011,6 @@
 	},
 /obj/structure/table/woodentable,
 /turf/simulated/floor/carpet,
-/area/outpost/abandoned)
-"dB" = (
-/turf/simulated/floor/asteroid,
-/turf/simulated/shuttle/wall{
-	dir = 4;
-	icon_state = "diagonalWall3"
-	},
 /area/outpost/abandoned)
 "dC" = (
 /obj/machinery/vending/coffee{
@@ -1082,7 +1025,7 @@
 "dE" = (
 /obj/effect/decal/remains,
 /obj/structure/table,
-/obj/item/weapon/material/shard{
+/obj/item/material/shard{
 	icon_state = "shardlarge"
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -1090,7 +1033,7 @@
 /area/outpost/abandoned)
 "dF" = (
 /obj/structure/table,
-/obj/item/weapon/material/shard{
+/obj/item/material/shard{
 	icon_state = "shardsmall"
 	},
 /obj/effect/floor_decal/corner/paleblue{
@@ -1173,7 +1116,7 @@
 /turf/simulated/floor/carpet/blue,
 /area/outpost/abandoned)
 "dS" = (
-/obj/item/weapon/material/shard{
+/obj/item/material/shard{
 	icon_state = "splinterslarge"
 	},
 /turf/simulated/floor/carpet/blue,
@@ -1217,9 +1160,6 @@
 /area/outpost/abandoned)
 "dZ" = (
 /obj/effect/decal/cleanable/liquid_fuel,
-/obj/structure/sign/directions/medical{
-	dir = 8
-	},
 /turf/simulated/wall/titanium,
 /area/outpost/abandoned)
 "ea" = (
@@ -1230,7 +1170,7 @@
 /area/outpost/abandoned)
 "eb" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/item/weapon/mop,
+/obj/item/mop,
 /turf/simulated/floor/plating{
 	icon_state = "dmg2"
 	},
@@ -1333,7 +1273,7 @@
 	dir = 1;
 	icon_state = "rwindow"
 	},
-/obj/item/weapon/material/shard,
+/obj/item/material/shard,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -1351,17 +1291,10 @@
 /turf/simulated/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "ex" = (
-/obj/machinery/door/airlock/medical,
-/obj/machinery/door/firedoor,
-/turf/simulated/floor/tiled/airless,
-/area/outpost/abandoned)
-"ey" = (
-/obj/effect/decal/cleanable/liquid_fuel,
-/obj/effect/floor_decal/corner/paleblue{
-	dir = 9;
-	icon_state = "corner_white"
+/obj/structure/sign/directions/medical{
+	dir = 8
 	},
-/turf/simulated/floor/tiled/airless,
+/turf/simulated/wall/titanium,
 /area/outpost/abandoned)
 "ez" = (
 /obj/effect/decal/cleanable/dirt,
@@ -1417,6 +1350,7 @@
 	dir = 1;
 	icon_state = "warningcee"
 	},
+/obj/effect/floor_decal/industrial/warning/cee,
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
 "eI" = (
@@ -1425,7 +1359,7 @@
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
 "eJ" = (
-/obj/item/weapon/material/shard{
+/obj/item/material/shard{
 	icon_state = "shardsmall"
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -1433,7 +1367,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)
 "eK" = (
-/obj/item/weapon/material/shard{
+/obj/item/material/shard{
 	icon_state = "piecesmall"
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -1545,7 +1479,7 @@
 "eY" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/weapon/wrench,
+/obj/item/wrench,
 /obj/machinery/atmospherics/pipe/simple/hidden/green{
 	dir = 4;
 	icon_state = "intact"
@@ -1593,26 +1527,13 @@
 "fe" = (
 /turf/simulated/floor/tiled/airless,
 /area/mine/explored)
-"ff" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/floor_decal/industrial/warning/dust{
-	dir = 4;
-	icon_state = "warning_dust"
-	},
-/turf/simulated/floor/asteroid,
-/area/mine/explored)
-"fg" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/floor_decal/industrial/warning/cee,
-/turf/simulated/floor/plating,
-/area/outpost/abandoned)
 "fh" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)
 "fi" = (
-/obj/item/weapon/pen,
+/obj/item/pen,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)
@@ -1721,7 +1642,7 @@
 /area/outpost/abandoned)
 "fB" = (
 /obj/structure/table/standard,
-/obj/item/weapon/paper_bin,
+/obj/item/paper_bin,
 /obj/machinery/door/window/northleft,
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)
@@ -1730,7 +1651,7 @@
 /obj/structure/window/reinforced{
 	dir = 1
 	},
-/obj/item/weapon/gun/energy/taser,
+/obj/item/gun/energy/taser,
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)
 "fD" = (
@@ -1788,7 +1709,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
 "fL" = (
-/obj/item/weapon/newspaper,
+/obj/item/newspaper,
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
 "fM" = (
@@ -1864,7 +1785,7 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/obj/item/weapon/reagent_containers/food/drinks/flask/vacuumflask,
+/obj/item/reagent_containers/food/drinks/flask/vacuumflask,
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)
 "fV" = (
@@ -2316,7 +2237,7 @@
 /area/outpost/abandoned)
 "hc" = (
 /obj/structure/table/steel,
-/obj/item/weapon/material/ashtray/glass,
+/obj/item/material/ashtray/glass,
 /obj/effect/decal/cleanable/cobweb2,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 5;
@@ -2441,7 +2362,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
 "hv" = (
-/obj/item/weapon/gun/energy/plasmacutter,
+/obj/item/gun/energy/plasmacutter,
 /obj/structure/cable/orange{
 	d1 = 4;
 	d2 = 8;
@@ -2553,6 +2474,15 @@
 /obj/effect/shuttle_landmark/away/nav7,
 /turf/simulated/floor/asteroid,
 /area/mine/explored)
+"iX" = (
+/obj/effect/wallframe_spawn/reinforced,
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/door/blast/regular{
+	dir = 4;
+	id_tag = "mars_blast"
+	},
+/turf/simulated/floor/plating,
+/area/outpost/abandoned)
 "jb" = (
 /obj/effect/shuttle_landmark/away/nav1,
 /turf/simulated/floor/asteroid,
@@ -2569,6 +2499,14 @@
 /obj/effect/shuttle_landmark/away/nav6,
 /turf/simulated/floor/asteroid,
 /area/mine/explored)
+"mk" = (
+/obj/effect/floor_decal/spline/fancy/wood,
+/obj/structure/flora/pottedplant{
+	icon_state = "plant-25"
+	},
+/obj/machinery/light/small,
+/turf/simulated/floor/carpet,
+/area/outpost/abandoned)
 "nb" = (
 /obj/effect/shuttle_landmark/away/nav5,
 /turf/simulated/floor/asteroid,
@@ -2656,7 +2594,7 @@
 /turf/simulated/floor/carpet/blue,
 /area/outpost/abandoned)
 "yb" = (
-/obj/item/weapon/storage/mirror{
+/obj/item/storage/mirror{
 	icon_state = "mirror_broke";
 	name = "mirror";
 	pixel_x = 30
@@ -2676,6 +2614,14 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/outpost/abandoned)
+"Bp" = (
+/obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/blast/regular{
+	dir = 4;
+	id_tag = "mars_blast"
+	},
+/turf/simulated/floor/plating,
+/area/outpost/abandoned)
 "HD" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -2686,6 +2632,23 @@
 /obj/machinery/door/blast/regular/open,
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
+/area/outpost/abandoned)
+"JD" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/floor_decal/spline/fancy/wood/corner,
+/turf/simulated/floor/carpet,
+/area/outpost/abandoned)
+"Kt" = (
+/obj/effect/floor_decal/spline/fancy/wood/corner{
+	dir = 8
+	},
+/turf/simulated/floor/carpet,
+/area/outpost/abandoned)
+"XS" = (
+/obj/effect/floor_decal/spline/fancy/wood,
+/obj/structure/table/woodentable,
+/obj/random/loot,
+/turf/simulated/floor/carpet,
 /area/outpost/abandoned)
 
 (1,1,1) = {"
@@ -13090,7 +13053,7 @@ af
 cG
 cG
 cG
-dD
+af
 eQ
 af
 af
@@ -13291,8 +13254,8 @@ aa
 aa
 aa
 aa
+av
 af
-ex
 eR
 af
 aa
@@ -13493,8 +13456,8 @@ aa
 aa
 aa
 aa
+av
 af
-ey
 eS
 af
 af
@@ -13695,8 +13658,8 @@ aa
 aa
 aa
 aa
+av
 af
-dH
 eT
 fr
 fI
@@ -13898,7 +13861,7 @@ aa
 af
 af
 dZ
-dH
+ex
 eU
 fs
 fJ
@@ -17126,8 +17089,8 @@ bQ
 af
 af
 af
-df
-dv
+iX
+af
 ab
 ab
 ab
@@ -17329,8 +17292,8 @@ bY
 cm
 cH
 dg
-dm
-dv
+af
+af
 ab
 ab
 ab
@@ -17530,7 +17493,7 @@ bS
 bZ
 cn
 cI
-dh
+Kt
 dw
 dm
 ab
@@ -17732,7 +17695,7 @@ bT
 bZ
 co
 cJ
-di
+dj
 dx
 dm
 ei
@@ -17935,7 +17898,7 @@ bZ
 cp
 cK
 dj
-dy
+mk
 dm
 ab
 ab
@@ -18137,7 +18100,7 @@ bZ
 cq
 cI
 dj
-dz
+XS
 dm
 ab
 ab
@@ -18338,7 +18301,7 @@ bP
 bZ
 cr
 cL
-dk
+JD
 dA
 dm
 ab
@@ -18541,8 +18504,8 @@ bY
 cs
 cM
 dl
-dm
-dB
+af
+af
 ab
 ab
 ej
@@ -18742,8 +18705,8 @@ bU
 af
 af
 af
-dm
-dB
+Bp
+af
 ab
 ab
 ab
@@ -19151,7 +19114,7 @@ af
 af
 ek
 eF
-ff
+ej
 ek
 ab
 ab
@@ -19353,7 +19316,7 @@ aa
 af
 af
 eG
-eG
+af
 cy
 aa
 aa
@@ -19555,8 +19518,8 @@ aa
 af
 af
 eH
-fg
-af
+cG
+av
 aa
 aa
 aa
@@ -19757,7 +19720,7 @@ af
 af
 af
 eI
-eI
+cG
 cG
 af
 af

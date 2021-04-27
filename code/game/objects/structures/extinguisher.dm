@@ -3,19 +3,19 @@
 	desc = "A small wall mounted cabinet designed to hold a fire extinguisher."
 	icon = 'icons/obj/extinguisher.dmi'
 	icon_state = "extinguisher_closed"
-	anchored = 1
-	density = 0
-	var/obj/item/weapon/extinguisher/has_extinguisher
+	anchored = TRUE
+	density = FALSE
+	var/obj/item/extinguisher/has_extinguisher
 	var/opened = 0
 
 /obj/structure/extinguisher_cabinet/New()
 	..()
-	has_extinguisher = new/obj/item/weapon/extinguisher(src)
+	has_extinguisher = new/obj/item/extinguisher(src)
 
 /obj/structure/extinguisher_cabinet/attackby(obj/item/O, mob/user)
 	if(isrobot(user))
 		return
-	if(istype(O, /obj/item/weapon/extinguisher))
+	if(istype(O, /obj/item/extinguisher))
 		if(!has_extinguisher && opened && user.unEquip(O, src))
 			has_extinguisher = O
 			to_chat(user, "<span class='notice'>You place [O] in [src].</span>")
@@ -53,7 +53,7 @@
 		icon_state = "extinguisher_closed"
 		return
 	if(has_extinguisher)
-		if(istype(has_extinguisher, /obj/item/weapon/extinguisher/mini))
+		if(istype(has_extinguisher, /obj/item/extinguisher/mini))
 			icon_state = "extinguisher_mini"
 		else
 			icon_state = "extinguisher_full"

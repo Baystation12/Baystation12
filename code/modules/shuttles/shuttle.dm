@@ -82,7 +82,7 @@
 		playsound(current_location, sound_takeoff, 100, 20, 0.2)
 	spawn(warmup_time*10)
 		if (moving_status == SHUTTLE_IDLE)
-			return FALSE	//someone cancelled the launch
+			return //someone cancelled the launch
 
 		if(!fuel_check()) //fuel error (probably out of fuel) occured, so cancel the launch
 			var/datum/shuttle/autodock/S = src
@@ -102,6 +102,13 @@
 	moving_status = SHUTTLE_WARMUP
 	if(sound_takeoff)
 		playsound(current_location, sound_takeoff, 100, 20, 0.2)
+		if (!istype(start_location.base_area, /area/space))
+			var/area/A = get_area(start_location)
+
+			for (var/mob/M in GLOB.player_list)
+				if (M.client && M.z == A.z && !istype(get_turf(M), /turf/space) && !(get_area(M) in src.shuttle_area))
+					to_chat(M, SPAN_NOTICE("The rumble of engines are heard as a shuttle lifts off."))
+
 	spawn(warmup_time*10)
 		if(moving_status == SHUTTLE_IDLE)
 			return	//someone cancelled the launch
@@ -120,6 +127,13 @@
 				if(!fwooshed && (arrive_time - world.time) < 100)
 					fwooshed = 1
 					playsound(destination, sound_landing, 100, 0, 7)
+					if (!istype(destination.base_area, /area/space))
+						var/area/A = get_area(destination)
+
+						for (var/mob/M in GLOB.player_list)
+							if (M.client && M.z == A.z && !istype(get_turf(M), /turf/space) && !(get_area(M) in src.shuttle_area))
+								to_chat(M, SPAN_NOTICE("The rumble of a shuttle's engines fill the area as a ship manuevers in for a landing."))
+
 				sleep(5)
 			if(!attempt_move(destination))
 				attempt_move(start_location) //try to go back to where we started. If that fails, I guess we're stuck in the interim location

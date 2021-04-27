@@ -62,7 +62,7 @@
 	id = "hypospray"
 	req_tech = list(TECH_MATERIAL = 4, TECH_BIO = 5)
 	materials = list(MATERIAL_STEEL = 8000, MATERIAL_GLASS = 8000, MATERIAL_SILVER = 2000)
-	build_path = /obj/item/weapon/reagent_containers/hypospray/vial
+	build_path = /obj/item/reagent_containers/hypospray/vial
 	sort_string = "MAEAA"
 
 /datum/design/item/medical/cryobag

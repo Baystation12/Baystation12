@@ -1,4 +1,4 @@
-/obj/item/weapon/lipstick
+/obj/item/lipstick
 	gender = PLURAL
 	name = "red lipstick"
 	desc = "A generic brand of lipstick."
@@ -9,27 +9,27 @@
 	var/colour = "red"
 	var/open = 0
 
-/obj/item/weapon/lipstick/purple
+/obj/item/lipstick/purple
 	name = "purple lipstick"
 	colour = "purple"
 
-/obj/item/weapon/lipstick/jade
+/obj/item/lipstick/jade
 	name = "jade lipstick"
 	colour = "jade"
 
-/obj/item/weapon/lipstick/black
+/obj/item/lipstick/black
 	name = "black lipstick"
 	colour = "black"
 
-/obj/item/weapon/lipstick/random
+/obj/item/lipstick/random
 	name = "lipstick"
 
-/obj/item/weapon/lipstick/random/Initialize()
+/obj/item/lipstick/random/Initialize()
 	. = ..()
 	colour = pick("red","purple","jade","black")
 	name = "[colour] lipstick"
 
-/obj/item/weapon/lipstick/attack_self(mob/user as mob)
+/obj/item/lipstick/attack_self(mob/user as mob)
 	to_chat(user, "<span class='notice'>You twist \the [src] [open ? "closed" : "open"].</span>")
 	open = !open
 	if(open)
@@ -37,7 +37,7 @@
 	else
 		icon_state = initial(icon_state)
 
-/obj/item/weapon/lipstick/attack(atom/A, mob/user as mob, target_zone)
+/obj/item/lipstick/attack(atom/A, mob/user as mob, target_zone)
 	if(!open)	return
 
 	if(ishuman(A))
@@ -73,7 +73,7 @@
 //you can wipe off lipstick with paper! see code/modules/paperwork/paper.dm, paper/attack()
 
 
-/obj/item/weapon/haircomb //sparklysheep's comb
+/obj/item/haircomb //sparklysheep's comb
 	name = "plastic comb"
 	desc = "A pristine comb made from flexible plastic."
 	w_class = ITEM_SIZE_TINY
@@ -82,15 +82,15 @@
 	icon_state = "comb"
 	item_state = "comb"
 
-/obj/item/weapon/haircomb/random/Initialize()
+/obj/item/haircomb/random/Initialize()
 	. = ..()
 	color = get_random_colour(lower = 150)
 
-/obj/item/weapon/haircomb/attack_self(var/mob/living/carbon/human/user)
+/obj/item/haircomb/attack_self(var/mob/living/carbon/human/user)
 	if(!user.incapacitated())
 		user.visible_message("<span class='notice'>\The [user] uses \the [src] to comb their hair with incredible style and sophistication. What a [user.gender == FEMALE ? "lady" : "guy"].</span>")
 
-/obj/item/weapon/haircomb/brush
+/obj/item/haircomb/brush
 	name = "hairbrush"
 	desc = "A surprisingly decent hairbrush with a false wood handle and semi-soft bristles."
 	w_class = ITEM_SIZE_SMALL
@@ -98,7 +98,7 @@
 	icon_state = "brush"
 	item_state = "brush"
 
-/obj/item/weapon/haircomb/brush/attack_self(mob/living/carbon/human/user)
+/obj/item/haircomb/brush/attack_self(mob/living/carbon/human/user)
 	if(!user.incapacitated())
 		var/datum/sprite_accessory/hair/hair_style = GLOB.hair_styles_list[user.h_style]
 		if(hair_style.flags & VERY_SHORT)

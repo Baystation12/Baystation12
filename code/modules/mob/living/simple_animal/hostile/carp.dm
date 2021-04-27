@@ -14,12 +14,8 @@
 	health = 50
 
 	harm_intent_damage = 8
-	melee_damage_lower = 10
-	melee_damage_upper = 20
-	attacktext = "bitten"
-	attack_sound = 'sound/weapons/bite.ogg'
+	natural_weapon = /obj/item/natural_weapon/bite
 	pry_time = 10 SECONDS
-	melee_damage_flags = DAM_SHARP
 	pry_desc = "biting"
 
 	//Space carp aren't affected by atmos.
@@ -32,7 +28,7 @@
 	bleed_colour = "#5d0d71"
 	pass_flags = PASS_FLAG_TABLE
 
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/fish/poison
+	meat_type = /obj/item/reagent_containers/food/snacks/fish/poison
 	skin_material = MATERIAL_SKIN_FISH_PURPLE
 	bone_material = MATERIAL_BONE_CARTILAGE
 
@@ -45,8 +41,6 @@
 	update_icon()
 
 /mob/living/simple_animal/hostile/carp/proc/carp_randomify()
-	melee_damage_lower = rand(0.8 * initial(melee_damage_lower), initial(melee_damage_lower))
-	melee_damage_upper = rand(initial(melee_damage_upper), (1.2 * initial(melee_damage_upper)))
 	maxHealth = rand(initial(maxHealth), (1.5 * initial(maxHealth)))
 	health = maxHealth
 	if(prob(1))

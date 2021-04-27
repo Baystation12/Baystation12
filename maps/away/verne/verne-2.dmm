@@ -190,7 +190,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/item/weapon/stool/padded,
+/obj/item/stool/padded,
 /turf/simulated/floor/tiled/techfloor,
 /area/verne/engineering/workshop)
 "aT" = (
@@ -896,14 +896,14 @@
 /obj/machinery/light_switch{
 	pixel_y = 22
 	},
-/obj/item/weapon/storage/belt/holster/machete,
-/obj/item/weapon/storage/belt/holster/machete,
-/obj/item/weapon/storage/belt/holster/machete,
-/obj/item/weapon/storage/belt/holster/machete,
-/obj/item/weapon/material/hatchet/machete/steel,
-/obj/item/weapon/material/hatchet/machete/steel,
-/obj/item/weapon/material/hatchet/machete/steel,
-/obj/item/weapon/material/hatchet/machete/steel,
+/obj/item/storage/belt/holster/machete,
+/obj/item/storage/belt/holster/machete,
+/obj/item/storage/belt/holster/machete,
+/obj/item/storage/belt/holster/machete,
+/obj/item/material/hatchet/machete/steel,
+/obj/item/material/hatchet/machete/steel,
+/obj/item/material/hatchet/machete/steel,
+/obj/item/material/hatchet/machete/steel,
 /turf/simulated/floor/tiled/white/monotile,
 /area/verne/xenosci/equipment)
 "dn" = (
@@ -1177,7 +1177,7 @@
 /area/verne/hangar)
 "et" = (
 /obj/machinery/shipsensors,
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 4;
 	icon_state = "handrail"
 	},
@@ -1248,19 +1248,19 @@
 /area/verne/hangar)
 "eU" = (
 /obj/structure/table/standard,
-/obj/item/weapon/paper_bin{
+/obj/item/paper_bin{
 	pixel_x = 1;
 	pixel_y = 9
 	},
-/obj/item/weapon/folder,
-/obj/item/weapon/pen,
-/obj/item/weapon/storage/toolbox/mechanical,
+/obj/item/folder,
+/obj/item/pen,
+/obj/item/storage/toolbox/mechanical,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/window/reinforced,
 /obj/machinery/light{
 	dir = 4
 	},
-/obj/item/weapon/reagent_containers/glass/bucket,
+/obj/item/reagent_containers/glass/bucket,
 /turf/simulated/floor/tiled/white/monotile,
 /area/verne/xenosci/workshop)
 "eW" = (
@@ -1304,8 +1304,8 @@
 /obj/structure/window/reinforced{
 	dir = 1
 	},
-/obj/item/weapon/storage/med_pouch/radiation,
-/obj/item/weapon/storage/firstaid/toxin,
+/obj/item/storage/med_pouch/radiation,
+/obj/item/storage/firstaid/toxin,
 /turf/simulated/floor/tiled/techfloor,
 /area/verne/engineering/smresearch/control)
 "fy" = (
@@ -1316,19 +1316,19 @@
 /obj/structure/table/rack{
 	dir = 8
 	},
-/obj/item/weapon/anobattery,
-/obj/item/weapon/anobattery,
-/obj/item/weapon/anobattery,
-/obj/item/weapon/anobattery,
+/obj/item/anobattery,
+/obj/item/anobattery,
+/obj/item/anobattery,
+/obj/item/anobattery,
 /obj/item/device/scanner/health,
-/obj/item/weapon/anodevice,
-/obj/item/weapon/anodevice,
+/obj/item/anodevice,
+/obj/item/anodevice,
 /obj/item/stack/material/phoron,
 /obj/structure/window/reinforced,
 /obj/item/device/scanner/spectrometer/adv,
-/obj/item/weapon/reagent_containers/dropper,
-/obj/item/weapon/storage/box/beakers,
-/obj/item/weapon/storage/box/syringes,
+/obj/item/reagent_containers/dropper,
+/obj/item/storage/box/beakers,
+/obj/item/storage/box/syringes,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/window/reinforced{
 	dir = 8
@@ -1744,12 +1744,12 @@
 /obj/item/mech_equipment/light,
 /obj/item/mech_equipment/drill,
 /obj/item/mech_equipment/mounted_system/extinguisher,
-/obj/item/weapon/cell/high,
+/obj/item/cell/high,
 /obj/item/robot_parts/robot_component/armour/exosuit,
 /obj/item/robot_parts/robot_component/radio,
 /obj/item/robot_parts/robot_component/actuator,
-/obj/item/weapon/circuitboard/exosystem/utility,
-/obj/item/weapon/circuitboard/exosystem/engineering,
+/obj/item/circuitboard/exosystem/utility,
+/obj/item/circuitboard/exosystem/engineering,
 /obj/item/robot_parts/robot_component/diagnosis_unit,
 /obj/item/robot_parts/robot_component/camera,
 /obj/item/robot_parts/robot_component/actuator,
@@ -1972,7 +1972,7 @@
 	dir = 4
 	},
 /obj/structure/reagent_dispensers/watertank,
-/obj/item/weapon/reagent_containers/glass/bucket,
+/obj/item/reagent_containers/glass/bucket,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 6
 	},
@@ -2010,10 +2010,10 @@
 /area/verne/xenosci/equipment)
 "lD" = (
 /obj/structure/table/rack,
-/obj/item/weapon/pickaxe,
+/obj/item/pickaxe,
 /obj/item/clothing/glasses/meson,
 /obj/item/device/scanner/mining,
-/obj/item/weapon/shovel,
+/obj/item/shovel,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/light_switch{
 	dir = 8;
@@ -2024,7 +2024,7 @@
 "lG" = (
 /obj/machinery/cell_charger,
 /obj/structure/table/steel,
-/obj/item/weapon/tank/hydrogen,
+/obj/item/tank/hydrogen,
 /obj/machinery/recharger/wallcharger{
 	pixel_y = 22
 	},
@@ -2089,9 +2089,9 @@
 /turf/simulated/floor/plating,
 /area/verne/catfish/engineering)
 "mc" = (
-/obj/item/weapon/storage/box/syringes,
-/obj/item/weapon/storage/box/beakers,
-/obj/item/weapon/storage/box/botanydisk,
+/obj/item/storage/box/syringes,
+/obj/item/storage/box/beakers,
+/obj/item/storage/box/botanydisk,
 /obj/structure/window/reinforced{
 	dir = 1
 	},
@@ -2137,8 +2137,8 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/obj/item/weapon/storage/toolbox/mechanical,
-/obj/item/weapon/storage/toolbox/electrical,
+/obj/item/storage/toolbox/mechanical,
+/obj/item/storage/toolbox/electrical,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/verne/engineering/workshop)
 "mq" = (
@@ -2152,9 +2152,9 @@
 /obj/machinery/light/small/red{
 	dir = 1
 	},
-/obj/structure/handrai,
+/obj/structure/handrail,
 /obj/structure/anomaly_container,
-/obj/structure/handrai,
+/obj/structure/handrail,
 /turf/simulated/floor/plating,
 /area/verne/catfish/engineering)
 "mx" = (
@@ -2510,9 +2510,9 @@
 /area/verne/engineering/decktransfer)
 "pY" = (
 /obj/structure/table/steel,
-/obj/item/weapon/paper_bin,
-/obj/item/weapon/folder,
-/obj/item/weapon/pen/retractable,
+/obj/item/paper_bin,
+/obj/item/folder,
+/obj/item/pen/retractable,
 /obj/random/clipboard,
 /obj/item/device/radio/intercom/map_preset/verne{
 	dir = 4;
@@ -2725,7 +2725,7 @@
 	pixel_y = 24
 	},
 /obj/structure/table/steel,
-/obj/item/weapon/board,
+/obj/item/board,
 /turf/simulated/floor/tiled/techfloor,
 /area/verne/engineering/workshop)
 "rg" = (
@@ -2735,7 +2735,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 8;
 	icon_state = "handrail"
 	},
@@ -2879,12 +2879,12 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/item/weapon/storage/box/monkeycubes,
+/obj/item/storage/box/monkeycubes,
 /obj/item/device/geiger,
 /obj/item/device/scanner/health,
-/obj/item/weapon/storage/box/monkeycubes/farwacubes,
-/obj/item/weapon/storage/box/monkeycubes/neaeracubes,
-/obj/item/weapon/storage/box/monkeycubes/stokcubes,
+/obj/item/storage/box/monkeycubes/farwacubes,
+/obj/item/storage/box/monkeycubes/neaeracubes,
+/obj/item/storage/box/monkeycubes/stokcubes,
 /turf/simulated/floor/tiled/white/monotile,
 /area/verne/xenosci)
 "rY" = (
@@ -2987,8 +2987,8 @@
 /area/verne/xenosci)
 "sU" = (
 /obj/structure/table/standard,
-/obj/item/weapon/storage/box/evidence,
-/obj/item/weapon/crowbar,
+/obj/item/storage/box/evidence,
+/obj/item/crowbar,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/alarm/verne{
 	dir = 8;
@@ -3721,7 +3721,7 @@
 /area/verne/engineering/storage)
 "yB" = (
 /obj/structure/table/steel,
-/obj/item/weapon/storage/toolbox/mechanical,
+/obj/item/storage/toolbox/mechanical,
 /obj/item/device/radio/intercom/map_preset/verne{
 	dir = 8;
 	pixel_x = 20
@@ -3798,7 +3798,7 @@
 /area/verne/hangar)
 "yV" = (
 /obj/structure/table/steel,
-/obj/item/weapon/storage/box/cola/beastenergy,
+/obj/item/storage/box/cola/beastenergy,
 /turf/simulated/floor/tiled/techfloor,
 /area/verne/engineering/smresearch/control)
 "zf" = (
@@ -3959,8 +3959,8 @@
 "Ay" = (
 /obj/structure/table/standard,
 /obj/machinery/cell_charger,
-/obj/item/weapon/melee/baton/loaded,
-/obj/item/weapon/screwdriver,
+/obj/item/melee/baton/loaded,
+/obj/item/screwdriver,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/window/reinforced{
 	dir = 8
@@ -3968,7 +3968,7 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/verne/xenosci/workshop)
 "AE" = (
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 4;
 	icon_state = "handrail"
 	},
@@ -4062,7 +4062,7 @@
 	dir = 4
 	},
 /obj/machinery/reagentgrinder,
-/obj/item/weapon/reagent_containers/glass/beaker/large,
+/obj/item/reagent_containers/glass/beaker/large,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/verne/xenosci/workshop)
 "Bh" = (
@@ -4075,7 +4075,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 8;
 	icon_state = "handrail"
 	},
@@ -4185,7 +4185,7 @@
 	dir = 10
 	},
 /obj/effect/floor_decal/industrial/warning,
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 8;
 	icon_state = "handrail"
 	},
@@ -4468,7 +4468,7 @@
 /turf/simulated/floor/plating,
 /area/verne/hangar)
 "EI" = (
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 4;
 	icon_state = "handrail"
 	},
@@ -4572,7 +4572,7 @@
 	dir = 4;
 	pixel_x = 32
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 8;
 	icon_state = "handrail"
 	},
@@ -4624,7 +4624,7 @@
 /turf/simulated/floor/reinforced/airless,
 /area/verne/engineering/external)
 "Ga" = (
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 1;
 	icon_state = "handrail"
 	},
@@ -4702,7 +4702,7 @@
 /turf/simulated/floor/tiled/white,
 /area/verne/xenosci/workshop)
 "GT" = (
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 4;
 	icon_state = "handrail"
 	},
@@ -4834,18 +4834,18 @@
 /area/verne/engineering/storage)
 "HI" = (
 /obj/structure/table/steel,
-/obj/item/weapon/storage/toolbox/electrical,
-/obj/item/weapon/stock_parts/circuitboard/helm,
-/obj/item/weapon/stock_parts/circuitboard/sensors,
-/obj/item/weapon/stock_parts/circuitboard/shuttle_console/explore,
-/obj/item/weapon/stock_parts/circuitboard/engine,
+/obj/item/storage/toolbox/electrical,
+/obj/item/stock_parts/circuitboard/helm,
+/obj/item/stock_parts/circuitboard/sensors,
+/obj/item/stock_parts/circuitboard/shuttle_console/explore,
+/obj/item/stock_parts/circuitboard/engine,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/verne/engineering/workshop)
 "HQ" = (
 /obj/effect/floor_decal/techfloor{
 	dir = 6
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 8;
 	icon_state = "handrail"
 	},
@@ -5032,7 +5032,7 @@
 /obj/item/ammo_magazine/shotholder,
 /obj/item/ammo_magazine/shotholder/stun,
 /obj/item/ammo_magazine/shotholder/flash,
-/obj/item/weapon/gun/projectile/shotgun/doublebarrel/flare,
+/obj/item/gun/projectile/shotgun/doublebarrel/flare,
 /turf/simulated/floor/tiled/white/monotile,
 /area/verne/catfish)
 "IY" = (
@@ -5070,13 +5070,13 @@
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 4
 	},
-/obj/structure/handrai,
+/obj/structure/handrail,
 /obj/structure/closet/walllocker{
 	name = "Net Launcher Locker";
 	pixel_y = 32
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
-/obj/item/weapon/gun/launcher/net,
+/obj/item/gun/launcher/net,
 /obj/item/clothing/accessory/storage/bandolier/safari,
 /turf/simulated/floor/tiled/white,
 /area/verne/catfish)
@@ -5116,7 +5116,7 @@
 /area/verne/engineering/decktransfer)
 "Kq" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 8;
 	icon_state = "handrail"
 	},
@@ -5291,7 +5291,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 4;
 	icon_state = "handrail"
 	},
@@ -5445,7 +5445,7 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 8;
 	icon_state = "handrail"
 	},
@@ -5919,7 +5919,7 @@
 	dir = 1;
 	pixel_y = 24
 	},
-/obj/item/weapon/stool/padded,
+/obj/item/stool/padded,
 /turf/simulated/floor/tiled/techfloor,
 /area/verne/engineering/workshop)
 "Sd" = (
@@ -5965,10 +5965,10 @@
 /turf/simulated/floor/reinforced/airless,
 /area/verne/engineering/external)
 "SM" = (
-/obj/item/weapon/storage/box/glowsticks,
-/obj/item/weapon/storage/belt/utility/full,
-/obj/item/weapon/material/hatchet,
-/obj/item/weapon/material/hatchet,
+/obj/item/storage/box/glowsticks,
+/obj/item/storage/belt/utility/full,
+/obj/item/material/hatchet,
+/obj/item/material/hatchet,
 /obj/structure/closet/crate/plastic,
 /obj/item/device/radio/map_preset/verne,
 /obj/item/device/radio/map_preset/verne,
@@ -5982,7 +5982,7 @@
 /obj/random/medical,
 /obj/item/device/geiger,
 /obj/effect/floor_decal/corner/b_green/mono,
-/obj/item/weapon/storage/firstaid/stab,
+/obj/item/storage/firstaid/stab,
 /obj/structure/cable/cyan{
 	d1 = 1;
 	d2 = 2;
@@ -6507,7 +6507,7 @@
 	name = "isolation tray"
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/item/weapon/storage/box/monkeycubes/spidercubes,
+/obj/item/storage/box/monkeycubes/spidercubes,
 /obj/item/glass_jar,
 /turf/simulated/floor/reinforced/airless,
 /area/verne/engineering/external)
@@ -6656,7 +6656,7 @@
 	dir = 1
 	},
 /obj/machinery/suspension_gen,
-/obj/structure/handrai,
+/obj/structure/handrail,
 /turf/simulated/floor/plating,
 /area/verne/catfish/engineering)
 "XP" = (
@@ -6665,7 +6665,7 @@
 /obj/item/device/flashlight/lantern,
 /obj/item/device/flashlight/lantern,
 /obj/item/device/scanner/gas,
-/obj/item/weapon/storage/box/greenglowsticks,
+/obj/item/storage/box/greenglowsticks,
 /obj/item/device/radio/map_preset/verne,
 /obj/item/device/radio/map_preset/verne,
 /obj/item/device/radio/map_preset/verne,
@@ -6838,7 +6838,7 @@
 /obj/machinery/porta_turret{
 	req_access = list("ACCESS_VERNE")
 	},
-/obj/structure/handrai{
+/obj/structure/handrail{
 	dir = 1;
 	icon_state = "handrail"
 	},

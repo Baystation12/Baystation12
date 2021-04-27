@@ -9,7 +9,6 @@
 
 //Human misc
 #define LANGUAGE_GUTTER         "Gutter"
-#define LANGUAGE_LEGALESE       "Legalese"
 #define LANGUAGE_SPACER         "Spacer"
 
 //Alien
@@ -50,3 +49,6 @@
 #define NO_TALK_MSG  128 // Do not show the "\The [speaker] talks into \the [radio]" message
 #define NO_STUTTER   256 // No stuttering, slurring, or other speech problems
 #define ALT_TRANSMIT 512 // Language is not based on vision or sound (Todo: add this into the say code and use it for the rootspeak languages)
+
+// Misc
+#define MAX_LANGUAGES 3

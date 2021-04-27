@@ -15,7 +15,7 @@
 	construct_state = /decl/machine_construction/tcomms/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
-	maximum_component_parts = list(/obj/item/weapon/stock_parts = 15)
+	maximum_component_parts = list(/obj/item/stock_parts = 15)
 
 /obj/machinery/telecomms/attackby(obj/item/P as obj, mob/user as mob)
 

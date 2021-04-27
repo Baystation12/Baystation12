@@ -3,8 +3,8 @@
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "photocopier"
 	var/insert_anim = "photocopier_animation"
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 	idle_power_usage = 30
 	active_power_usage = 200
 	power_channel = EQUIP
@@ -46,14 +46,14 @@
 		for(var/i = 0, i < copies, i++)
 			if(toner <= 0)
 				break
-			if (istype(copyitem, /obj/item/weapon/paper))
+			if (istype(copyitem, /obj/item/paper))
 				copy(copyitem, 1)
 				sleep(15)
-			else if (istype(copyitem, /obj/item/weapon/photo))
+			else if (istype(copyitem, /obj/item/photo))
 				photocopy(copyitem)
 				sleep(15)
-			else if (istype(copyitem, /obj/item/weapon/paper_bundle))
-				var/obj/item/weapon/paper_bundle/B = bundlecopy(copyitem)
+			else if (istype(copyitem, /obj/item/paper_bundle))
+				var/obj/item/paper_bundle/B = bundlecopy(copyitem)
 				sleep(15*B.pages.len)
 			else
 				to_chat(user, "<span class='warning'>\The [copyitem] can't be copied by \the [src].</span>")
@@ -85,11 +85,11 @@
 
 			if(!camera)
 				return
-			var/obj/item/weapon/photo/selection = camera.selectpicture()
+			var/obj/item/photo/selection = camera.selectpicture()
 			if (!selection)
 				return
 
-			var/obj/item/weapon/photo/p = photocopy(selection)
+			var/obj/item/photo/p = photocopy(selection)
 			if (p.desc == "")
 				p.desc += "Copied by [tempAI.name]"
 			else
@@ -105,7 +105,7 @@
 		copyitem = null
 
 /obj/machinery/photocopier/attackby(obj/item/O as obj, mob/user as mob)
-	if(istype(O, /obj/item/weapon/paper) || istype(O, /obj/item/weapon/photo) || istype(O, /obj/item/weapon/paper_bundle))
+	if(istype(O, /obj/item/paper) || istype(O, /obj/item/photo) || istype(O, /obj/item/paper_bundle))
 		if(!copyitem)
 			if(!user.unEquip(O, src))
 				return
@@ -146,8 +146,12 @@
 					toner = 0
 	return
 
-/obj/machinery/photocopier/proc/copy(var/obj/item/weapon/paper/copy, var/need_toner=1)
-	var/obj/item/weapon/paper/c = new copy.type(loc, copy.text, copy.name, copy.metadata )
+/obj/machinery/photocopier/proc/copy(obj/item/paper/copy, need_toner = TRUE, copy_admin = FALSE)
+	var/copy_type = copy.type
+	if (istype(copy, /obj/item/paper/admin) && !copy_admin) // Edge case for admin faxes so that they don't show the editing form
+		copy_type = /obj/item/paper
+	
+	var/obj/item/paper/c = new copy_type(loc, copy.text, copy.name, copy.metadata )
 
 	c.color = COLOR_WHITE
 
@@ -187,8 +191,8 @@
 	c.update_icon()
 	return c
 
-/obj/machinery/photocopier/proc/photocopy(var/obj/item/weapon/photo/photocopy, var/need_toner=1)
-	var/obj/item/weapon/photo/p = photocopy.copy()
+/obj/machinery/photocopier/proc/photocopy(var/obj/item/photo/photocopy, var/need_toner=1)
+	var/obj/item/photo/p = photocopy.copy()
 	p.dropInto(loc)
 
 	if(toner > 10)	//plenty of toner, go straight greyscale
@@ -206,17 +210,17 @@
 	return p
 
 //If need_toner is 0, the copies will still be lightened when low on toner, however it will not be prevented from printing. TODO: Implement print queues for fax machines and get rid of need_toner
-/obj/machinery/photocopier/proc/bundlecopy(var/obj/item/weapon/paper_bundle/bundle, var/need_toner=1)
-	var/obj/item/weapon/paper_bundle/p = new /obj/item/weapon/paper_bundle (src)
-	for(var/obj/item/weapon/W in bundle.pages)
+/obj/machinery/photocopier/proc/bundlecopy(var/obj/item/paper_bundle/bundle, var/need_toner=1)
+	var/obj/item/paper_bundle/p = new /obj/item/paper_bundle (src)
+	for(var/obj/item/W in bundle.pages)
 		if(toner <= 0 && need_toner)
 			toner = 0
 			visible_message("<span class='notice'>A red light on \the [src] flashes, indicating that it is out of toner.</span>")
 			break
 
-		if(istype(W, /obj/item/weapon/paper))
+		if(istype(W, /obj/item/paper))
 			W = copy(W)
-		else if(istype(W, /obj/item/weapon/photo))
+		else if(istype(W, /obj/item/photo))
 			W = photocopy(W)
 		W.forceMove(p)
 		p.pages += W

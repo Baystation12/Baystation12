@@ -14,9 +14,9 @@
 "d" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/structure/iv_drip,
-/obj/item/weapon/reagent_containers/ivbag/blood/OMinus,
-/obj/item/weapon/reagent_containers/ivbag/blood/OMinus,
-/obj/item/weapon/reagent_containers/ivbag/blood/OMinus,
+/obj/item/reagent_containers/ivbag/blood/OMinus,
+/obj/item/reagent_containers/ivbag/blood/OMinus,
+/obj/item/reagent_containers/ivbag/blood/OMinus,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "e" = (
@@ -35,15 +35,15 @@
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/structure/table/glass,
-/obj/item/weapon/storage/box/syringes,
-/obj/item/weapon/storage/box/freezer,
+/obj/item/storage/box/syringes,
+/obj/item/storage/box/freezer,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "h" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/structure/table/glass,
-/obj/item/weapon/storage/box/gloves,
-/obj/item/weapon/storage/box/masks,
+/obj/item/storage/box/gloves,
+/obj/item/storage/box/masks,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "i" = (
@@ -64,7 +64,7 @@
 "l" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/structure/table/glass,
-/obj/item/weapon/storage/firstaid/surgery,
+/obj/item/storage/firstaid/surgery,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "m" = (
@@ -81,8 +81,8 @@
 "o" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/structure/table/glass,
-/obj/item/weapon/reagent_containers/dropper,
-/obj/item/weapon/reagent_containers/chem_disp_cartridge/peridaxon,
+/obj/item/reagent_containers/dropper,
+/obj/item/reagent_containers/chem_disp_cartridge/peridaxon,
 /obj/item/stack/nanopaste,
 /obj/machinery/light{
 	dir = 8;
@@ -124,12 +124,12 @@
 "t" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/structure/table/glass,
-/obj/item/weapon/scalpel/laser1,
-/obj/item/weapon/scalpel/laser2,
-/obj/item/weapon/scalpel/laser3,
+/obj/item/scalpel/laser1,
+/obj/item/scalpel/laser2,
+/obj/item/scalpel/laser3,
 /obj/item/device/robotanalyzer,
 /obj/item/device/scanner/health,
-/obj/item/weapon/storage/firstaid/adv,
+/obj/item/storage/firstaid/adv,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "u" = (
@@ -182,7 +182,7 @@
 "C" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/machinery/atmospherics/pipe/manifold/visible/blue,
-/obj/item/weapon/reagent_containers/glass/beaker/cryoxadone,
+/obj/item/reagent_containers/glass/beaker/cryoxadone,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "D" = (
@@ -245,7 +245,7 @@
 /obj/item/stack/material/uranium/ten,
 /obj/item/stack/material/diamond/ten,
 /obj/item/stack/material/phoron/fifty,
-/obj/item/weapon/storage/belt/utility/full,
+/obj/item/storage/belt/utility/full,
 /obj/item/stack/material/steel/fifty,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
@@ -289,7 +289,7 @@
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
 /obj/machinery/reagentgrinder,
-/obj/item/weapon/reagent_containers/glass/beaker/large,
+/obj/item/reagent_containers/glass/beaker/large,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "Q" = (
@@ -352,9 +352,9 @@
 /area/medical/surgery)
 "Z" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/item/weapon/reagent_containers/glass/beaker/large,
-/obj/item/weapon/reagent_containers/glass/beaker/insulated/large,
-/obj/item/weapon/reagent_containers/glass/beaker/noreact,
+/obj/item/reagent_containers/glass/beaker/large,
+/obj/item/reagent_containers/glass/beaker/insulated/large,
+/obj/item/reagent_containers/glass/beaker/noreact,
 /obj/structure/table/rack,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)

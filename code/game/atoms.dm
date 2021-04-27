@@ -8,7 +8,7 @@
 	var/pass_flags = 0
 	var/throwpass = 0
 	var/germ_level = GERM_LEVEL_AMBIENT // The higher the germ level, the more germ on the atom.
-	var/simulated = 1 //filter for actions - used by lighting overlays
+	var/simulated = TRUE //filter for actions - used by lighting overlays
 	var/fluorescent // Shows up under a UV light.
 	var/datum/reagents/reagents // chemical contents.
 	var/list/climbers
@@ -72,6 +72,9 @@
 
 /atom/proc/reveal_blood()
 	return
+	
+/atom/proc/MayZoom()
+	return TRUE
 
 /atom/proc/assume_air(datum/gas_mixture/giver)
 	return null
@@ -355,7 +358,7 @@ its easier to just keep the beam vertical.
 	var/list/y_arr = null
 	for(cur_x=1,cur_x<=GLOB.global_map.len,cur_x++)
 		y_arr = GLOB.global_map[cur_x]
-		cur_y = y_arr.Find(src.z)
+		cur_y = list_find(y_arr, src.z)
 		if(cur_y)
 			break
 //	log_debug("X = [cur_x]; Y = [cur_y]")

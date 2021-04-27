@@ -3,7 +3,7 @@
 	form_name = "CTA-SGF-01"
 	title = "Crew Transfer Application"
 	logo = "\[solcrest\]\[logo\]"
-	available_on_ntnet = 1
+	available_on_ntnet = TRUE
 
 /datum/computer_file/report/recipient/crew_transfer/generate_fields()
 	..()
@@ -29,7 +29,7 @@
 	form_name = "AMA-SGF-02"
 	title = "Crew Access Modification Application"
 	logo = "\[solcrest\]\[logo\]"
-	available_on_ntnet = 1
+	available_on_ntnet = TRUE
 
 /datum/computer_file/report/recipient/access_modification/generate_fields()
 	..()

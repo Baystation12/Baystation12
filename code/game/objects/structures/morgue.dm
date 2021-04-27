@@ -16,9 +16,9 @@
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "morgue1"
 	dir = EAST
-	density = 1
+	density = TRUE
 	var/obj/structure/m_tray/connected = null
-	anchored = 1.0
+	anchored = TRUE
 
 /obj/structure/morgue/Destroy()
 	if(connected)
@@ -73,7 +73,7 @@
 		src.connected = new /obj/structure/m_tray( src.loc )
 		step(src.connected, src.dir)
 		var/turf/T = get_step(src, src.dir)
-		if (T.contents.Find(src.connected))
+		if (list_find(T.contents, src.connected))
 			src.connected.connected = src
 			src.icon_state = "morgue0"
 			for(var/atom/movable/A as mob|obj in src)
@@ -93,7 +93,7 @@
 	else return ..()
 
 /obj/structure/morgue/attackby(P as obj, mob/user as mob)
-	if (istype(P, /obj/item/weapon/pen))
+	if (istype(P, /obj/item/pen))
 		var/t = input(user, "What would you like the label to be?", text("[]", src.name), null)  as text
 		if (user.get_active_hand() != P)
 			return
@@ -113,7 +113,7 @@
 	src.connected = new /obj/structure/m_tray( src.loc )
 	step(src.connected, EAST)
 	var/turf/T = get_step(src, EAST)
-	if (T.contents.Find(src.connected))
+	if (list_find(T.contents, src.connected))
 		src.connected.connected = src
 		src.icon_state = "morgue0"
 		for(var/atom/movable/A as mob|obj in src)
@@ -133,10 +133,10 @@
 	desc = "Apply corpse before closing."
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "morguet"
-	density = 1
+	density = TRUE
 	layer = BELOW_OBJ_LAYER
 	var/obj/structure/morgue/connected = null
-	anchored = 1
+	anchored = TRUE
 	throwpass = 1
 
 /obj/structure/m_tray/Destroy()
@@ -159,7 +159,7 @@
 	return
 
 /obj/structure/m_tray/MouseDrop_T(atom/movable/O as mob|obj, mob/user as mob)
-	if ((!( istype(O, /atom/movable) ) || O.anchored || get_dist(user, src) > 1 || get_dist(user, O) > 1 || user.contents.Find(src) || user.contents.Find(O)))
+	if ((!( istype(O, /atom/movable) ) || O.anchored || get_dist(user, src) > 1 || get_dist(user, O) > 1 || list_find(user.contents, src) || list_find(user.contents, O)))
 		return
 	if (!ismob(O) && !istype(O, /obj/structure/closet/body_bag))
 		return
@@ -246,7 +246,7 @@
 		src.connected = new /obj/structure/c_tray(src.loc)
 		step(src.connected, dir)
 		var/turf/T = get_step(src, dir)
-		if (T.contents.Find(src.connected))
+		if (list_find(T.contents, src.connected))
 			src.connected.connected = src
 			src.icon_state = "crema0"
 			for(var/atom/movable/A as mob|obj in src)
@@ -259,7 +259,7 @@
 	update()
 
 /obj/structure/crematorium/attackby(P as obj, mob/user as mob)
-	if(istype(P, /obj/item/weapon/pen))
+	if(istype(P, /obj/item/pen))
 		var/t = input(user, "What would you like the label to be?", text("[]", src.name), null)  as text
 		if(user.get_active_hand() != P)
 			return
@@ -279,7 +279,7 @@
 	src.connected = new /obj/structure/c_tray( src.loc )
 	step(src.connected, SOUTH)
 	var/turf/T = get_step(src, SOUTH)
-	if (T.contents.Find(src.connected))
+	if (list_find(T.contents, src.connected))
 		src.connected.connected = src
 		src.icon_state = "crema0"
 		for(var/atom/movable/A as mob|obj in src)
@@ -298,7 +298,7 @@
 		return
 
 	else
-		if(length(search_contents_for(/obj/item/weapon/disk/nuclear)))
+		if(length(search_contents_for(/obj/item/disk/nuclear)))
 			to_chat(loc, "The button's status indicator flashes yellow, indicating that something important is inside the crematorium, and must be removed.")
 			return
 		src.audible_message("<span class='warning'>You hear a roar as the [src] activates.</span>", 1)
@@ -308,7 +308,7 @@
 		update()
 
 		for(var/mob/living/M in contents)
-			admin_attack_log(M, A, "Began cremating their victim.", "Has begun being cremated.", "began cremating")
+			admin_attack_log(A, M, "Began cremating their victim.", "Has begun being cremated.", "began cremating")
 			if(iscarbon(M))
 				var/mob/living/carbon/C = M
 				for(var/I, I < 60, I++)
@@ -382,10 +382,10 @@
 	desc = "Apply body before burning."
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "cremat"
-	density = 1
+	density = TRUE
 	layer = BELOW_OBJ_LAYER
 	var/obj/structure/crematorium/connected = null
-	anchored = 1
+	anchored = TRUE
 	throwpass = 1
 
 /obj/structure/c_tray/Destroy()
@@ -408,7 +408,7 @@
 	return
 
 /obj/structure/c_tray/MouseDrop_T(atom/movable/O as mob|obj, mob/user as mob)
-	if ((!( istype(O, /atom/movable) ) || O.anchored || get_dist(user, src) > 1 || get_dist(user, O) > 1 || user.contents.Find(src) || user.contents.Find(O)))
+	if ((!( istype(O, /atom/movable) ) || O.anchored || get_dist(user, src) > 1 || get_dist(user, O) > 1 || list_find(user.contents, src) || list_find(user.contents, O)))
 		return
 	if (!ismob(O) && !istype(O, /obj/structure/closet/body_bag))
 		return

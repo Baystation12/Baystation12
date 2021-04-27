@@ -198,9 +198,9 @@
 	desc = "a tear in space and time."
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "rift"
-	unacidable = 1
-	anchored = 1
-	density = 0
+	unacidable = TRUE
+	anchored = TRUE
+	density = FALSE
 
 /obj/effect/rift/Destroy()
 	for(var/o in contents)

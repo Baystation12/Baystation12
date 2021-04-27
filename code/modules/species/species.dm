@@ -54,6 +54,7 @@
 	var/mob_size	= MOB_MEDIUM
 	var/strength    = STR_MEDIUM
 	var/show_ssd = "fast asleep"
+	var/show_coma = "completely comatose"
 	var/short_sighted                         // Permanent weldervision.
 	var/light_sensitive                       // Ditto, but requires sunglasses to fix
 	var/blood_volume = SPECIES_BLOOD_DEFAULT  // Initial blood volume.
@@ -94,7 +95,7 @@
 	var/vision_flags = SEE_SELF               // Same flags as glasses.
 
 	// Death vars.
-	var/meat_type =     /obj/item/weapon/reagent_containers/food/snacks/meat/human
+	var/meat_type =     /obj/item/reagent_containers/food/snacks/meat/human
 	var/meat_amount =   3
 	var/skin_material = MATERIAL_SKIN_GENERIC
 	var/skin_amount =   3
@@ -353,12 +354,12 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		organ_data["descriptor"] = initial(limb_path.name)
 
 /datum/species/proc/equip_survival_gear(var/mob/living/carbon/human/H,var/extendedtank = 1)
-	if(istype(H.get_equipped_item(slot_back), /obj/item/weapon/storage/backpack))
-		if (extendedtank)	H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/engineer(H.back), slot_in_backpack)
-		else	H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H.back), slot_in_backpack)
+	if(istype(H.get_equipped_item(slot_back), /obj/item/storage/backpack))
+		if (extendedtank)	H.equip_to_slot_or_del(new /obj/item/storage/box/engineer(H.back), slot_in_backpack)
+		else	H.equip_to_slot_or_del(new /obj/item/storage/box/survival(H.back), slot_in_backpack)
 	else
-		if (extendedtank)	H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/engineer(H), slot_r_hand)
-		else	H.equip_to_slot_or_del(new /obj/item/weapon/storage/box/survival(H), slot_r_hand)
+		if (extendedtank)	H.equip_to_slot_or_del(new /obj/item/storage/box/engineer(H), slot_r_hand)
+		else	H.equip_to_slot_or_del(new /obj/item/storage/box/survival(H), slot_r_hand)
 
 /datum/species/proc/create_organs(var/mob/living/carbon/human/H) //Handles creation of mob organs.
 

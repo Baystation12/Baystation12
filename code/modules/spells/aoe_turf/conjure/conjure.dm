@@ -53,7 +53,7 @@ How they spawn stuff is decided by behaviour vars, which are explained below
 		var/atom/movable/overlay/animation = new /atom/movable/overlay(summoned_object)
 		animation.SetName("conjure")
 		animation.set_density(0)
-		animation.anchored = 1
+		animation.anchored = TRUE
 		animation.icon = 'icons/effects/effects.dmi'
 		animation.layer = BASE_HUMAN_LAYER
 		if(istype(summoned_object,/mob)) //we want them to NOT attack us.

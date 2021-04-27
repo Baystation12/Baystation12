@@ -1,29 +1,29 @@
 /mob/living/silicon/robot/syndicate
-	lawupdate = 0
-	scrambledcodes = 1
+	lawupdate = FALSE
+	scrambledcodes = TRUE
 	icon_state = "securityrobot"
 	modtype = "Security"
 	lawchannel = "State"
 	laws = /datum/ai_laws/syndicate_override
-	idcard = /obj/item/weapon/card/id/syndicate
-	module = /obj/item/weapon/robot_module/syndicate
+	idcard = /obj/item/card/id/syndicate
+	module = /obj/item/robot_module/syndicate
 	silicon_radio = /obj/item/device/radio/borg/syndicate
 	spawn_sound = 'sound/mecha/nominalsyndi.ogg'
-	cell = /obj/item/weapon/cell/super
-	pitch_toggle = 0
+	cell = /obj/item/cell/super
+	pitch_toggle = FALSE
 
 /mob/living/silicon/robot/combat
-	lawupdate = 0
-	scrambledcodes = 1
+	lawupdate = FALSE
+	scrambledcodes = TRUE
 	modtype = "Combat"
-	module = /obj/item/weapon/robot_module/security/combat
+	module = /obj/item/robot_module/security/combat
 	spawn_sound = 'sound/mecha/nominalsyndi.ogg'
-	cell = /obj/item/weapon/cell/super
-	pitch_toggle = 0
+	cell = /obj/item/cell/super
+	pitch_toggle = FALSE
 
 /mob/living/silicon/robot/combat/nt
 	laws = /datum/ai_laws/nanotrasen_aggressive
-	idcard = /obj/item/weapon/card/id/centcom/ERT
+	idcard = /obj/item/card/id/centcom/ERT
 	silicon_radio = /obj/item/device/radio/borg/ert
 
 /mob/living/silicon/robot/flying/ascent
@@ -31,18 +31,19 @@
 	speak_statement = "clicks"
 	speak_exclamation = "rasps"
 	speak_query = "chirps"
-	lawupdate =      FALSE
+	lawupdate = FALSE
 	scrambledcodes = TRUE
 	speed = -2
 	icon_state = "drone-ascent"
 	spawn_sound = 'sound/voice/ascent1.ogg'
-	cell =   /obj/item/weapon/cell/mantid
+	cell =   /obj/item/cell/mantid
 	laws =   /datum/ai_laws/ascent
-	idcard = /obj/item/weapon/card/id/ascent
-	module = /obj/item/weapon/robot_module/flying/ascent
+	idcard = /obj/item/card/id/ascent
+	module = /obj/item/robot_module/flying/ascent
 	req_access = list(access_ascent)
 	silicon_radio = null
 	machine_restriction = FALSE
+	faction = "kharmaani"
 	var/global/ascent_drone_count = 0
 
 /mob/living/silicon/robot/flying/ascent/add_ion_law(law)
@@ -69,6 +70,23 @@
 	components["power cell"] =     new/datum/robot_component/cell/ascent(src)
 	components["diagnosis unit"] = new/datum/robot_component/diagnosis_unit(src)
 	components["armour"] =         new/datum/robot_component/armour/light(src)
+
+/mob/living/silicon/robot/flying/ascent/law_channels()
+	var/list/channels = new()
+	channels += additional_law_channels
+	channels += LANGUAGE_MANTID_BROADCAST
+	return channels
+
+/mob/living/silicon/robot/flying/ascent/statelaws(datum/ai_laws/laws)
+	var/prefix = ""
+	if (lawchannel == LANGUAGE_MANTID_BROADCAST)
+		prefix = "[get_language_prefix()]\["
+
+	if (prefix)
+		dostatelaws(lawchannel, prefix, laws)
+	else
+		..()
+
 
 // Since they don't have binary, camera or radio to soak
 // damage, they get some hefty buffs to cell and actuator.

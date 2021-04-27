@@ -12,6 +12,7 @@
 #define GODMODE     0x1000
 #define FAKEDEATH   0x2000  // Replaces stuff like changeling.changeling_fakedeath.
 #define NO_ANTAG    0x4000  // Players are restricted from gaining antag roles when occupying this mob
+#define NOTARGET    0x8000  // Player is invisible to all simple mobs
 
 // Grab Types
 #define GRAB_NORMAL			"normal"
@@ -79,17 +80,22 @@
 #define ROBOT_NOTIFICATION_MODULE_RESET 4
 
 // Appearance change flags
-#define APPEARANCE_UPDATE_DNA  0x1
-#define APPEARANCE_RACE       (0x2|APPEARANCE_UPDATE_DNA)
-#define APPEARANCE_GENDER     (0x4|APPEARANCE_UPDATE_DNA)
-#define APPEARANCE_SKIN        0x8
-#define APPEARANCE_HAIR        0x10
-#define APPEARANCE_HAIR_COLOR  0x20
-#define APPEARANCE_FACIAL_HAIR 0x40
-#define APPEARANCE_FACIAL_HAIR_COLOR 0x80
-#define APPEARANCE_EYE_COLOR 0x100
-#define APPEARANCE_ALL_HAIR (APPEARANCE_HAIR|APPEARANCE_HAIR_COLOR|APPEARANCE_FACIAL_HAIR|APPEARANCE_FACIAL_HAIR_COLOR)
-#define APPEARANCE_ALL       0xFFFF
+#define APPEARANCE_ALL 0xffffff
+#define APPEARANCE_DNA2 (1 << 0)
+#define APPEARANCE_RACE (1 << 1)
+#define APPEARANCE_GENDER (1 << 2)
+#define APPEARANCE_SKIN (1 << 3)
+#define APPEARANCE_HEAD (1 << 4)
+#define APPEARANCE_HEAD_COLOR (1 << 5)
+#define APPEARANCE_FACE (1 << 6)
+#define APPEARANCE_FACE_COLOR (1 << 7)
+#define APPEARANCE_ALL_HAIR (APPEARANCE_HEAD | APPEARANCE_HEAD_COLOR | APPEARANCE_FACE | APPEARANCE_FACE_COLOR)
+#define APPEARANCE_EYES (1 << 8)
+#define APPEARANCE_LANG (1 << 9)
+#define APPEARANCE_LANG_ANY_NUMBER (1 << 10)
+#define APPEARANCE_LANG_ANY_ORIGIN (1 << 11)
+
+#define APPEARANCE_COMMON (APPEARANCE_DNA2|APPEARANCE_RACE|APPEARANCE_GENDER|APPEARANCE_SKIN|APPEARANCE_ALL_HAIR|APPEARANCE_EYES|APPEARANCE_LANG)
 
 // Click cooldown
 #define DEFAULT_ATTACK_COOLDOWN 8 //Default timeout for aggressive actions
@@ -304,12 +310,11 @@
 #define SPECIES_TRITONIAN   "Tritonian"
 #define SPECIES_GRAVWORLDER "Grav-Adapted Human"
 #define SPECIES_MULE        "Mule"
-#define SPECIES_BOOSTER     "Booster"
 #define SPECIES_MONKEY      "Monkey"
 
-#define UNRESTRICTED_SPECIES list(SPECIES_HUMAN, SPECIES_DIONA, SPECIES_IPC, SPECIES_UNATHI, SPECIES_SKRELL, SPECIES_TRITONIAN, SPECIES_SPACER, SPECIES_VATGROWN, SPECIES_GRAVWORLDER, SPECIES_BOOSTER, SPECIES_MULE)
+#define UNRESTRICTED_SPECIES list(SPECIES_HUMAN, SPECIES_DIONA, SPECIES_IPC, SPECIES_UNATHI, SPECIES_YEOSA, SPECIES_SKRELL, SPECIES_TRITONIAN, SPECIES_SPACER, SPECIES_VATGROWN, SPECIES_GRAVWORLDER, SPECIES_MULE)
 #define RESTRICTED_SPECIES   list(SPECIES_VOX, SPECIES_ALIEN, SPECIES_GOLEM, SPECIES_MANTID_GYNE, SPECIES_MANTID_ALATE, SPECIES_MONARCH_WORKER, SPECIES_MONARCH_QUEEN)
-#define HUMAN_SPECIES        list(SPECIES_HUMAN, SPECIES_VATGROWN, SPECIES_SPACER, SPECIES_GRAVWORLDER, SPECIES_MULE, SPECIES_BOOSTER)
+#define HUMAN_SPECIES        list(SPECIES_HUMAN, SPECIES_VATGROWN, SPECIES_SPACER, SPECIES_GRAVWORLDER, SPECIES_MULE)
 
 #define SPECIES_NABBER         "giant armoured serpentid"
 #define SPECIES_MONARCH_WORKER "Monarch Serpentid Worker"
@@ -355,7 +360,8 @@
 #define MOB_FLAG_HOLY_BAD                0x001  // If this mob is allergic to holiness
 
 #define MARKING_TARGET_SKIN 0 // Draw a datum/sprite_accessory/marking to the mob's body, eg. tattoos
-#define MARKING_TARGET_HAIR 1 // Draw a datum/sprite_accessory/marking to the mob's hair, eg. ears & horns
+#define MARKING_TARGET_HAIR 1 // Draw a datum/sprite_accessory/marking to the mob's hair, eg. color fades
+#define MARKING_TARGET_HEAD 2 // Draw a datum/sprite_accessory/marking to the mob's head after their hair, eg. ears, horns
 
 // used in /mob/living/carbon/human/can_inject, and by various callers of that proc
 #define CAN_INJECT 1
@@ -374,11 +380,13 @@
 #define DO_TARGET_UNIQUE_ACT 0x80
 #define DO_SHOW_PROGRESS     0x100
 #define DO_PUBLIC_PROGRESS   0x200
+#define DO_MOVE_CHECKS_TURFS 0x400
+#define DO_FAIL_FEEDBACK     0x800
 
 #define DO_BOTH_CAN_MOVE     (DO_USER_CAN_MOVE | DO_TARGET_CAN_MOVE)
 #define DO_BOTH_CAN_TURN     (DO_USER_CAN_TURN | DO_TARGET_CAN_TURN)
 #define DO_BOTH_UNIQUE_ACT   (DO_USER_UNIQUE_ACT | DO_TARGET_UNIQUE_ACT)
-#define DO_DEFAULT           (DO_SHOW_PROGRESS | DO_USER_SAME_HAND | DO_BOTH_CAN_TURN)
+#define DO_DEFAULT           (DO_SHOW_PROGRESS | DO_USER_SAME_HAND | DO_BOTH_CAN_TURN | DO_FAIL_FEEDBACK)
 
 #define DO_MISSING_USER      (-1)
 #define DO_MISSING_TARGET    (-2)

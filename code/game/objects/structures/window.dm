@@ -2,33 +2,47 @@
 	name = "window"
 	desc = "A window."
 	icon = 'icons/obj/window.dmi'
-	density = 1
+	density = TRUE
 	w_class = ITEM_SIZE_NORMAL
 
 	layer = SIDE_WINDOW_LAYER
-	anchored = 1.0
-	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE
+	anchored = TRUE
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CAN_BE_PAINTED
 	obj_flags = OBJ_FLAG_ROTATABLE
 	alpha = 180
 	var/material/reinf_material
+	var/damaged_reinf = FALSE
 	var/init_material = MATERIAL_GLASS
 	var/init_reinf_material = null
 	var/maxhealth
 	var/health
+	var/force_damage_threshhold = 0 // Minimum amount of requried force to damage the wall
 	var/damage_per_fire_tick = 2 		// Amount of damage per fire tick. Regular windows are not fireproof so they might as well break quickly.
 	var/construction_state = 2
 	var/id
 	var/polarized = 0
 	var/basestate = "window"
 	var/reinf_basestate = "rwindow"
+	var/paint_color
+	var/base_color // The windows initial color. Used for resetting purposes.
+	var/repair_pending = 0 // Amount of health pending repair once the window is welded
 	rad_resistance_modifier = 0.5
 	blend_objects = list(/obj/machinery/door, /turf/simulated/wall) // Objects which to blend with
 	noblend_objects = list(/obj/machinery/door/window)
 
 	atmos_canpass = CANPASS_PROC
 
+/obj/structure/window/get_mechanics_info()
+	. = "<p>If damaged, it can be repaired by applying some [get_material_display_name()] then welding it. This particular window can require up to [get_glass_cost()] sheets to fully repair depending on damage.</p>"
+
 /obj/structure/window/get_material()
 	return material
+
+/obj/structure/window/get_material_display_name()
+	. = ..()
+	. = "[.] sheets"
+	if (reinf_material)
+		. = "[reinf_material.display_name]-reinforced [.]"
 
 /obj/structure/window/Initialize(mapload, start_dir=null, constructed=0, var/new_material, var/new_reinf_material)
 	. = ..()
@@ -45,9 +59,8 @@
 	if(new_reinf_material)
 		reinf_material = SSmaterials.get_material_by_name(new_reinf_material)
 
-	name = "[reinf_material ? "reinforced " : ""][material.display_name] window"
-	desc = "A window pane made from [material.display_name]."
-	color =  material.icon_colour
+	name = "[reinf_material ? "[reinf_material.display_name]-reinforced " : ""][material.display_name] window"
+	desc = "A window pane made from [material.display_name][reinf_material ? " and reinforced with [reinf_material.display_name]" : ""]."
 
 	if (start_dir)
 		set_dir(start_dir)
@@ -61,9 +74,16 @@
 
 	health = maxhealth
 
+	force_damage_threshhold = material.hardness * 1.25
+	if (reinf_material)
+		force_damage_threshhold += round(reinf_material.hardness * 0.625)
+	force_damage_threshhold = round(force_damage_threshhold / 10)
+
 	if (constructed)
 		set_anchored(FALSE)
 		construction_state = 0
+
+	base_color = get_color()
 
 	update_connections(1)
 	update_icon()
@@ -80,20 +100,38 @@
 
 /obj/structure/window/examine(mob/user)
 	. = ..(user)
+	to_chat(user, SPAN_NOTICE("It is fitted with \a [material.display_name] pane."))
 	if(reinf_material)
-		to_chat(user, "<span class='notice'>It is reinforced with the [reinf_material.display_name] lattice.</span>")
+		to_chat(user, SPAN_NOTICE("It is reinforced with \a [reinf_material.display_name] lattice."))
 	if(health == maxhealth)
-		to_chat(user, "<span class='notice'>It looks fully intact.</span>")
+		to_chat(user, SPAN_NOTICE("It looks fully intact."))
 	else
 		var/perc = health / maxhealth
 		if(perc > 0.75)
-			to_chat(user, "<span class='notice'>It has a few cracks.</span>")
+			to_chat(user, SPAN_WARNING("\The [material] pane has a few cracks."))
 		else if(perc > 0.5)
-			to_chat(user, "<span class='warning'>It looks slightly damaged.</span>")
+			to_chat(user, SPAN_WARNING("\The [material] pane looks slightly damaged."))
 		else if(perc > 0.25)
-			to_chat(user, "<span class='warning'>It looks moderately damaged.</span>")
+			to_chat(user, SPAN_WARNING("\The [material] pane looks moderately damaged."))
 		else
-			to_chat(user, "<span class='danger'>It looks heavily damaged.</span>")
+			to_chat(user, SPAN_WARNING("\The [material] pane looks severely damaged."))
+
+	if (paint_color)
+		to_chat(user, SPAN_NOTICE("\The [material] pane is stained with paint."))
+
+/obj/structure/window/get_color()
+	if (paint_color)
+		return paint_color
+	else if (material?.icon_colour)
+		return material.icon_colour
+	else if (base_color)
+		return base_color
+	else
+		return ..()
+
+/obj/structure/window/set_color(color)
+	paint_color = color
+	update_icon()
 
 /obj/structure/window/CanFluidPass(var/coming_from)
 	return (!is_fulltile() && coming_from != dir)
@@ -105,31 +143,45 @@
 
 	if(health <= 0)
 		shatter()
+		return
+
+	if(sound_effect)
+		playsound(loc, 'sound/effects/Glasshit.ogg', 100, 1)
+	if(health < maxhealth / 4 && initialhealth >= maxhealth / 4)
+		visible_message(SPAN_DANGER("\The [src] looks like it's about to shatter!"))
+		playsound(loc, "glasscrack", 100, 1)
+	else if(health < maxhealth / 2 && initialhealth >= maxhealth / 2)
+		visible_message(SPAN_WARNING("\The [src] looks seriously damaged!"))
+		playsound(loc, "glasscrack", 100, 1)
+	else if(health < maxhealth * 3/4 && initialhealth >= maxhealth * 3/4)
+		visible_message(SPAN_WARNING("Cracks begin to appear in \the [src]!"))
+		playsound(loc, "glasscrack", 100, 1)
+	queue_icon_update()
+
+/obj/structure/window/repair_damage(amount = 0)
+	if (amount == 0)
+		health = maxhealth
 	else
-		if(sound_effect)
-			playsound(loc, 'sound/effects/Glasshit.ogg', 100, 1)
-		if(health < maxhealth / 4 && initialhealth >= maxhealth / 4)
-			visible_message(SPAN_DANGER("\The [src] looks like it's about to shatter!"))
-			playsound(loc, "glasscrack", 100, 1)
-		else if(health < maxhealth / 2 && initialhealth >= maxhealth / 2)
-			visible_message(SPAN_WARNING("\The [src] looks seriously damaged!"))
-			playsound(loc, "glasscrack", 100, 1)
-		else if(health < maxhealth * 3/4 && initialhealth >= maxhealth * 3/4)
-			visible_message(SPAN_WARNING("Cracks begin to appear in \the [src]!"))
-			playsound(loc, "glasscrack", 100, 1)
-		update_icon()
-	return
+		health = min(maxhealth, health + amount)
+	queue_icon_update()
+
+/obj/structure/window/proc/get_glass_cost()
+	return is_fulltile() ? 4 : 1
+
+/obj/structure/window/proc/get_repaired_per_unit()
+	return round(maxhealth / get_glass_cost())
 
 /obj/structure/window/proc/shatter(var/display_message = 1)
 	playsound(src, "shatter", 70, 1)
 	if(display_message)
 		visible_message("<span class='warning'>\The [src] shatters!</span>")
 
-	var/debris_count = is_fulltile() ? 4 : 1
+	var/debris_count = round(get_glass_cost() / rand(1, 4))
 	for(var/i = 1 to debris_count)
 		material.place_shard(loc)
 		if(reinf_material)
-			new /obj/item/stack/material/rods(loc, 1, reinf_material.name)
+			debris_count = rand(0, 1)
+			new /obj/item/stack/material/rods(loc, debris_count, reinf_material.name)
 	qdel(src)
 
 /obj/structure/window/bullet_act(var/obj/item/projectile/Proj)
@@ -221,7 +273,7 @@
 		user.do_attack_animation(src)
 	if(!damage)
 		return
-	if(damage >= 10)
+	if(damage > force_damage_threshhold)
 		visible_message("<span class='danger'>[user] [attack_verb] into [src]!</span>")
 		take_damage(damage)
 	else
@@ -288,8 +340,8 @@
 			src.id = t
 			to_chat(user, "<span class='notice'>The new ID of the window is [id]</span>")
 		return
-	else if(istype(W, /obj/item/weapon/gun/energy/plasmacutter) && anchored)
-		var/obj/item/weapon/gun/energy/plasmacutter/cutter = W
+	else if(istype(W, /obj/item/gun/energy/plasmacutter) && anchored)
+		var/obj/item/gun/energy/plasmacutter/cutter = W
 		if(!cutter.slice(user))
 			return
 		playsound(src, 'sound/items/Welder.ogg', 80, 1)
@@ -299,16 +351,65 @@
 			playsound(src, 'sound/items/Welder.ogg', 80, 1)
 			construction_state = 0
 			set_anchored(0)
-	else if (!istype(W, /obj/item/weapon/rcd))
+
+	else if (istype(W, /obj/item/stack/material))
+		if (health == maxhealth)
+			to_chat(user, SPAN_NOTICE("\The [src] does not need repair."))
+			return
+
+		if ((repair_pending + health) >= maxhealth)
+			to_chat(user, SPAN_NOTICE("\The [src] already has enough new [material] applied."))
+			return
+
+		var/obj/item/stack/material/G = W
+		if (material != G.material || reinf_material != G.reinf_material)
+			to_chat(user, SPAN_WARNING("\The [src] must be repaired with the same type of [get_material_display_name()] it was made of."))
+			return
+
+		if (!G.use(1))
+			to_chat(user, SPAN_WARNING("You need more [G] to repair \the [src]."))
+			return
+
+		repair_pending += get_repaired_per_unit()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] replaces some of \the [src]'s damaged [material]."),
+			SPAN_NOTICE("You replace some of \the [src]'s damaged [material].")
+		)
+		if (repair_pending < (maxhealth - health))
+			to_chat(user, SPAN_WARNING("It looks like it could use more sheets."))
+		return
+
+	else if (istype(W, /obj/item/weldingtool))
+		if (health == maxhealth)
+			to_chat(user, SPAN_NOTICE("\The [src] does not need repair."))
+			return
+
+		if (!repair_pending)
+			to_chat(user, SPAN_WARNING("\The [src] needs some [get_material_display_name()] applied before you can weld it."))
+			return
+
+		var/obj/item/weldingtool/T = W
+		if (!T.welding)
+			to_chat(user, SPAN_WARNING("\The [T] needs to be turned on first."))
+			return
+
+		if (!T.remove_fuel(1, user))
+			return
+
+		repair_damage(repair_pending)
+		repair_pending = 0
+		user.visible_message(
+			SPAN_NOTICE("\The [user] welds \the [src]'s [material] into place."),
+			SPAN_NOTICE("You weld \the [src]'s [material] into place.")
+		)
+		return
+
+	else if (user.a_intent != I_HELP && !istype(W, /obj/item/rcd) && !istype(W, /obj/item/device/paint_sprayer))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		if(W.damtype == BRUTE || W.damtype == BURN)
+		if(!istype(W, /obj/item/natural_weapon) && (W.damtype == BRUTE || W.damtype == BURN))
 			user.do_attack_animation(src)
-			hit(W.force)
-			if(health <= 7)
-				set_anchored(FALSE)
-				step(src, get_dir(user, src))
-		else
-			playsound(loc, 'sound/effects/Glasshit.ogg', 75, 1)
+			hit(W.force, user, W)
+			return
 		..()
 	return
 
@@ -324,17 +425,34 @@
 		if (prob(50))
 			G.affecting.Weaken(1)
 		G.affecting.apply_damage(10, BRUTE, def_zone, used_weapon = src)
-		hit(25)
+		hit(25, G.assailant, G.affecting)
 	else
 		G.affecting.visible_message("<span class='danger'>[G.assailant] crushes [G.affecting] against \the [src]!</span>")
 		G.affecting.Weaken(5)
 		G.affecting.apply_damage(20, BRUTE, def_zone, used_weapon = src)
-		hit(50)
+		hit(50, G.assailant, G.affecting)
 	return TRUE
 
-/obj/structure/window/proc/hit(var/damage, var/sound_effect = 1)
-	if(reinf_material) damage *= 0.5
-	take_damage(damage)
+/obj/structure/window/proc/hit(damage, mob/user, atom/weapon = null)
+	if (damage > force_damage_threshhold)
+		var/weapon_text = weapon ? " with \the [weapon]" : null
+		user.visible_message(
+			SPAN_DANGER("\The [user] attacks \the [src][weapon_text]!"),
+			SPAN_WARNING("You attack \the [src][weapon_text]!"),
+			SPAN_WARNING("You hear the sound of something hitting a window.")
+		)
+		take_damage(damage)
+		if(health <= maxhealth * 0.15)
+			set_anchored(FALSE)
+			step(src, get_dir(user, src))
+	else
+		var/weapon_text = weapon ? " with \the [weapon]" : null
+		playsound(loc, 'sound/effects/Glasshit.ogg', 50, 1)
+		user.visible_message(
+			SPAN_WARNING("\The [user] attacks \the [src][weapon_text], but it bounces off!"),
+			SPAN_WARNING("You attack \the [src][weapon_text], but it bounces off! You need something stronger."),
+			SPAN_WARNING("You hear the sound of something hitting a window.")
+		)
 
 /obj/structure/window/rotate(mob/user)
 	if(!CanPhysicallyInteract(user))
@@ -392,6 +510,12 @@
 		basestate = initial(basestate)
 	overlays.Cut()
 	layer = FULL_WINDOW_LAYER
+	if (paint_color)
+		color = paint_color
+	else if (material?.icon_colour)
+		color = material.icon_colour
+	else
+		color = GLASS_COLOR
 	if(!is_fulltile())
 		layer = SIDE_WINDOW_LAYER
 		icon_state = basestate
@@ -424,6 +548,7 @@
 
 /obj/structure/window/proc/process_icon(basestate, icon_group, damage_group, connections, img_dir, damage_alpha)
 	var/image/I = image(icon, "[basestate][icon_group][connections]", dir = img_dir)
+	I.color = get_color()
 	overlays += I
 
 	if (damage_group == "_onframe")
@@ -443,7 +568,7 @@
 	if(reinf_material)
 		melting_point += 0.25*reinf_material.melting_point
 	if(exposed_temperature > melting_point)
-		hit(damage_per_fire_tick, 0)
+		take_damage(damage_per_fire_tick, FALSE)
 	..()
 
 /obj/structure/window/basic
@@ -518,11 +643,11 @@
 	if(!polarized)
 		return
 	if(opacity)
-		animate(src, color=material.icon_colour, time=5)
-		set_opacity(0)
+		animate(src, color=get_color(), time=5)
+		set_opacity(FALSE)
 	else
 		animate(src, color=GLASS_COLOR_TINTED, time=5)
-		set_opacity(1)
+		set_opacity(TRUE)
 
 /obj/structure/window/proc/is_on_frame()
 	if(locate(/obj/structure/wall_frame) in loc)
@@ -537,7 +662,7 @@
 	var/range = 7
 	stock_part_presets = null // This isn't a radio-enabled button; it communicates with nearby structures in view.
 	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/power/apc
+		/obj/item/stock_parts/power/apc
 	)
 
 /obj/machinery/button/windowtint/attackby(obj/item/device/W as obj, mob/user as mob)
@@ -554,7 +679,7 @@
 			src.id = t
 			to_chat(user, "<span class='notice'>The new ID of the button is [id]</span>")
 		return
-	if(istype(W, /obj/item/weapon/screwdriver))
+	if(istype(W, /obj/item/screwdriver))
 		new /obj/item/frame/light_switch/windowtint(user.loc, 1)
 		qdel(src)
 

@@ -5,9 +5,9 @@
 	icon_state = "blob"
 	light_outer_range = 2
 	light_color = BLOB_COLOR_PULS
-	density = 1
+	density = TRUE
 	opacity = 1
-	anchored = 1
+	anchored = TRUE
 	mouse_opacity = 2
 
 	layer = BLOB_SHIELD_LAYER
@@ -23,7 +23,7 @@
 	var/damage_min = 15
 	var/damage_max = 30
 	var/pruned = FALSE
-	var/product = /obj/item/weapon/blob_tendril
+	var/product = /obj/item/blob_tendril
 	var/attack_freq = 5 //see proc/attempt_attack; lower is more often, min 1
 
 /obj/effect/blob/New(loc)
@@ -34,6 +34,10 @@
 /obj/effect/blob/Initialize()
 	. = ..()
 	START_PROCESSING(SSobj, src)
+
+/obj/effect/blob/Destroy()
+	STOP_PROCESSING(SSobj, src)
+	. = ..()
 
 /obj/effect/blob/CanPass(var/atom/movable/mover, var/turf/target, var/height = 0, var/air_group = 0)
 	if(air_group || height == 0)
@@ -74,28 +78,31 @@
 	update_icon()
 
 /obj/effect/blob/proc/expand(var/turf/T)
+	var/damage = rand(damage_min, damage_max)
 	if(istype(T, /turf/unsimulated/) || istype(T, /turf/space) || (istype(T, /turf/simulated/mineral) && T.density))
 		return
 	if(istype(T, /turf/simulated/wall))
 		var/turf/simulated/wall/SW = T
-		SW.take_damage(80)
+		SW.take_damage(damage)
 		return
 	var/obj/structure/girder/G = locate() in T
 	if(G)
-		if(prob(40))
-			G.dismantle()
+		G.take_damage(damage)
 		return
 	var/obj/structure/window/W = locate() in T
 	if(W)
-		W.shatter()
+		W.take_damage(damage)
 		return
 	var/obj/structure/grille/GR = locate() in T
 	if(GR)
-		qdel(GR)
+		GR.take_damage(damage)
 		return
 	for(var/obj/machinery/door/D in T) // There can be several - and some of them can be open, locate() is not suitable
-		if(D.density)
-			D.ex_act(2)
+		if (D.density)
+			if (D.is_broken())
+				D.open(TRUE)
+				return
+			D.take_damage(damage)
 			return
 	var/obj/structure/foamedmetal/F = locate() in T
 	if(F)
@@ -103,12 +110,12 @@
 		return
 	var/obj/structure/inflatable/I = locate() in T
 	if(I)
-		I.deflate(1)
+		I.take_damage(damage)
 		return
 
 	var/obj/vehicle/V = locate() in T
 	if(V)
-		V.ex_act(2)
+		V.adjust_health(-damage)
 		return
 	var/obj/machinery/camera/CA = locate() in T
 	if(CA)
@@ -165,7 +172,7 @@
 			take_damage((Proj.damage / laser_resist) / fire_resist)
 	return 0
 
-/obj/effect/blob/attackby(var/obj/item/weapon/W, var/mob/user)
+/obj/effect/blob/attackby(var/obj/item/W, var/mob/user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(src)
 	playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
@@ -203,7 +210,7 @@
 	damage_min = 30
 	damage_max = 40
 	expandType = /obj/effect/blob/shield
-	product = /obj/item/weapon/blob_tendril/core
+	product = /obj/item/blob_tendril/core
 
 	light_color = BLOB_COLOR_CORE
 	layer = BLOB_CORE_LAYER
@@ -221,7 +228,7 @@ the master core becomes more vulnereable to damage as it weakens,
 but it also becomes more aggressive, and channels more of its energy into regenerating rather than spreading
 regen() will cover update_icon() for this proc
 */
-/obj/effect/blob/core/proc/process_core_health() 
+/obj/effect/blob/core/proc/process_core_health()
 	switch(get_health_percent())
 		if(75 to INFINITY)
 			brute_resist = 3.5
@@ -294,7 +301,7 @@ regen() will cover update_icon() for this proc
 	damage_min = 15
 	damage_max = 20
 	layer = BLOB_NODE_LAYER
-	product = /obj/item/weapon/blob_tendril/core/aux
+	product = /obj/item/blob_tendril/core/aux
 	times_to_pulse = 4
 
 /obj/effect/blob/core/secondary/process_core_health()
@@ -346,7 +353,7 @@ regen() will cover update_icon() for this proc
 	color = "#ffd400" //Temporary, for until they get a new sprite.
 
 //produce
-/obj/item/weapon/blob_tendril
+/obj/item/blob_tendril
 	name = "asteroclast tendril"
 	desc = "A tendril removed from an asteroclast. It's entirely lifeless."
 	icon = 'icons/mob/blob.dmi'
@@ -357,7 +364,7 @@ regen() will cover update_icon() for this proc
 	var/is_tendril = TRUE
 	var/types_of_tendril = list("solid", "fire")
 
-/obj/item/weapon/blob_tendril/Initialize()
+/obj/item/blob_tendril/Initialize()
 	. = ..()
 	if(is_tendril)
 		var/tendril_type
@@ -375,7 +382,7 @@ regen() will cover update_icon() for this proc
 				color = COLOR_AMBER
 				origin_tech = list(TECH_POWER = 2)
 
-/obj/item/weapon/blob_tendril/afterattack(obj/O, mob/user, proximity)
+/obj/item/blob_tendril/afterattack(obj/O, mob/user, proximity)
 	if(!proximity)
 		return
 	if(is_tendril && prob(50))
@@ -386,7 +393,7 @@ regen() will cover update_icon() for this proc
 			new /obj/effect/decal/cleanable/ash(src.loc)
 			qdel(src)
 
-/obj/item/weapon/blob_tendril/core
+/obj/item/blob_tendril/core
 	name = "asteroclast nucleus sample"
 	desc = "A sample taken from an asteroclast's nucleus. It pulses with energy."
 	icon_state = "core_sample"
@@ -395,7 +402,7 @@ regen() will cover update_icon() for this proc
 	origin_tech = list(TECH_MATERIAL = 4, TECH_BLUESPACE = 5, TECH_BIO = 7)
 	is_tendril = FALSE
 
-/obj/item/weapon/blob_tendril/core/aux
+/obj/item/blob_tendril/core/aux
 	name = "asteroclast auxiliary nucleus sample"
 	desc = "A sample taken from an asteroclast's auxiliary nucleus."
 	icon_state = "core_sample_2"

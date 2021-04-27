@@ -24,11 +24,11 @@
 	else
 		O.vars[variable] = var_value
 
-/decl/vv_set_handler/location_hander
+/decl/vv_set_handler/location_handler
 	handled_type = /atom/movable
 	handled_vars = list("loc","x","y","z")
 
-/decl/vv_set_handler/location_hander/handle_set_var(var/atom/movable/AM, variable, var_value, client)
+/decl/vv_set_handler/location_handler/handle_set_var(var/atom/movable/AM, variable, var_value, client)
 	if(variable == "loc")
 		if(istype(var_value, /atom) || isnull(var_value) || var_value == "")	// Proper null or empty string is fine, 0 is not
 			AM.forceMove(var_value)

@@ -11,7 +11,7 @@
 	use_power = POWER_USE_OFF
 	uncreated_component_parts = null
 	construct_state = /decl/machine_construction/frame/unwrenched
-	var/obj/item/weapon/stock_parts/circuitboard/circuit = null
+	var/obj/item/stock_parts/circuitboard/circuit = null
 	var/expected_machine_type
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 

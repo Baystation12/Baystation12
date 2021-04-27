@@ -6,6 +6,7 @@
 	var/turn_delay = 5
 	var/obj/item/robot_parts/robot_component/actuator/motivator
 	power_use = 50
+	var/max_fall_damage = 30
 
 /obj/item/mech_component/propulsion/Destroy()
 	QDEL_NULL(motivator)
@@ -53,3 +54,10 @@
 		to_chat(user, SPAN_NOTICE(" Actuator Integrity: <b>[round((((motivator.max_dam - motivator.total_dam) / motivator.max_dam)) * 100)]%</b>"))
 	else
 		to_chat(user, SPAN_WARNING(" Actuator Missing or Non-functional."))
+
+//Expand here if the legs increase, reduce or otherwise affect fall damage for exosuit
+/obj/item/mech_component/propulsion/proc/handle_vehicle_fall()
+	if(max_fall_damage > 0)
+		var/mob/living/exosuit/E = loc
+		if(istype(E)) //route it through exosuit for proper handling
+			E.apply_damage(rand(0, max_fall_damage), BRUTE, BP_R_LEG) //Any leg is good, will damage us correctly

@@ -1,3 +1,38 @@
+// In theory these lists could be generated at runtime from values
+// on the XGM gas datums - would need to have a consistent/constant
+// id for the gasses but otherwise should allow for true omni filters.
+
+GLOBAL_LIST_INIT(filter_gas_to_mode, list(    \
+	"None" =           ATM_NONE,              \
+	"Oxygen" =         ATM_O2,                \
+	"Nitrogen" =       ATM_N2,                \
+	"Carbon Dioxide" = ATM_CO2,               \
+	"Phoron" =         ATM_P,                 \
+	"Nitrous Oxide" =  ATM_N2O,               \
+	"Hydrogen" =       ATM_H2,                \
+	"Methyl Bromide" = ATM_CH3BR              \
+))
+
+GLOBAL_LIST_INIT(filter_mode_to_gas, list(    \
+	"[ATM_O2]" =       "Oxygen",              \
+	"[ATM_N2]" =       "Nitrogen",            \
+	"[ATM_CO2]" =      "Carbon Dioxide",      \
+	"[ATM_P]" =        "Phoron",              \
+	"[ATM_N2O]" =      "Nitrous Oxide",       \
+	"[ATM_H2]" =       "Hydrogen",            \
+	"[ATM_CH3BR]" =    "Methyl Bromide"       \
+))
+
+GLOBAL_LIST_INIT(filter_mode_to_gas_id, list( \
+	"[ATM_O2]" =       "[GAS_OXYGEN]",        \
+	"[ATM_N2]" =       "[GAS_NITROGEN]",      \
+	"[ATM_CO2]" =      "[GAS_CO2]",           \
+	"[ATM_P]" =        "[GAS_PHORON]",        \
+	"[ATM_N2O]" =      "[GAS_N2O]",           \
+	"[ATM_H2]" =       "[GAS_HYDROGEN]",      \
+	"[ATM_CH3BR]" =    "[GAS_METHYL_BROMIDE]" \
+))
+
 //--------------------------------------------
 // Gas filter - omni variant
 //--------------------------------------------
@@ -18,6 +53,7 @@
 
 	var/list/filtering_outputs = list()	//maps gasids to gas_mixtures
 	build_icon_state = "omni_filter"
+
 /obj/machinery/atmospherics/omni/filter/Initialize()
 	. = ..()
 	rebuild_filtering_list()
@@ -46,7 +82,7 @@
 					input = P
 				if(ATM_OUTPUT)
 					output = P
-				if(ATM_O2 to ATM_H2)
+				if(ATM_GAS_MIN to ATM_GAS_MAX)
 					gas_filters += P
 
 /obj/machinery/atmospherics/omni/filter/error_check()
@@ -92,7 +128,12 @@
 	return 1
 
 /obj/machinery/atmospherics/omni/filter/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
-	usr.set_machine(src)
+	if(!user)
+		if (ui)
+			ui.close()
+		return
+
+	user.set_machine(src)
 
 	var/list/data = new()
 
@@ -128,7 +169,7 @@
 			if(ATM_OUTPUT)
 				output = 1
 				is_filter = 0
-			if(ATM_O2 to ATM_H2)
+			if(ATM_GAS_MIN to ATM_GAS_MAX)
 				f_type = mode_send_switch(P.mode)
 
 		portData[++portData.len] = list("dir" = dir_name(P.dir, capitalize = 1), \
@@ -146,21 +187,7 @@
 	return data
 
 /obj/machinery/atmospherics/omni/filter/proc/mode_send_switch(var/mode = ATM_NONE)
-	switch(mode)
-		if(ATM_O2)
-			return "Oxygen"
-		if(ATM_N2)
-			return "Nitrogen"
-		if(ATM_CO2)
-			return "Carbon Dioxide"
-		if(ATM_P)
-			return "Phoron" //*cough* Plasma *cough*
-		if(ATM_N2O)
-			return "Nitrous Oxide"
-		if(ATM_H2)
-			return "Hydrogen"
-		else
-			return null
+	return GLOB.filter_mode_to_gas["[mode]"]
 
 /obj/machinery/atmospherics/omni/filter/Topic(href, href_list)
 	if(..()) return 1
@@ -184,7 +211,7 @@
 			if("switch_mode")
 				switch_mode(dir_flag(href_list["dir"]), mode_return_switch(href_list["mode"]))
 			if("switch_filter")
-				var/new_filter = input(usr,"Select filter mode:","Change filter",href_list["mode"]) in list("None", "Oxygen", "Nitrogen", "Carbon Dioxide", "Phoron", "Nitrous Oxide", "Hydrogen")
+				var/new_filter = input(usr,"Select filter mode:","Change filter",href_list["mode"]) in GLOB.filter_gas_to_mode
 				switch_filter(dir_flag(href_list["dir"]), mode_return_switch(new_filter))
 
 	update_icon()
@@ -192,27 +219,13 @@
 	return
 
 /obj/machinery/atmospherics/omni/filter/proc/mode_return_switch(var/mode)
-	switch(mode)
-		if("Oxygen")
-			return ATM_O2
-		if("Nitrogen")
-			return ATM_N2
-		if("Carbon Dioxide")
-			return ATM_CO2
-		if("Phoron")
-			return ATM_P
-		if("Nitrous Oxide")
-			return ATM_N2O
-		if("Hydrogen")
-			return ATM_H2
-		if("in")
-			return ATM_INPUT
-		if("out")
-			return ATM_OUTPUT
-		if("None")
-			return ATM_NONE
-		else
-			return null
+	. = GLOB.filter_gas_to_mode[mode]
+	if(!.)
+		switch(mode)
+			if("in")
+				return ATM_INPUT
+			if("out")
+				return ATM_OUTPUT
 
 /obj/machinery/atmospherics/omni/filter/proc/switch_filter(var/dir, var/mode)
 	//check they aren't trying to disable the input or output ~this can only happen if they hack the cached tmpl file
@@ -259,7 +272,7 @@
 /obj/machinery/atmospherics/omni/filter/proc/rebuild_filtering_list()
 	filtering_outputs.Cut()
 	for(var/datum/omni_port/P in ports)
-		var/gasid = mode_to_gasid(P.mode)
+		var/gasid = GLOB.filter_mode_to_gas_id["[P.mode]"]
 		if(gasid)
 			filtering_outputs[gasid] = P.air
 

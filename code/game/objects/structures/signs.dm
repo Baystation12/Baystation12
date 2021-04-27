@@ -1,8 +1,8 @@
 /obj/structure/sign
 	icon = 'icons/obj/decals.dmi'
-	anchored = 1
+	anchored = TRUE
 	opacity = 0
-	density = 0
+	density = FALSE
 	layer = ABOVE_WINDOW_LAYER
 	w_class = ITEM_SIZE_NORMAL
 
@@ -39,7 +39,7 @@
 	var/sign_state = ""
 
 /obj/item/sign/attackby(obj/item/tool as obj, mob/user as mob)	//construction
-	if(istype(tool, /obj/item/weapon/screwdriver) && isturf(user.loc))
+	if(istype(tool, /obj/item/screwdriver) && isturf(user.loc))
 		var/direction = input("In which direction?", "Select direction.") in list("North", "East", "South", "West", "Cancel")
 		if(direction == "Cancel") return
 		var/obj/structure/sign/S = new(user.loc)
@@ -369,6 +369,10 @@
 /obj/structure/sign/directions/science
 	name = "\improper Research Division"
 	icon_state = "direction_sci"
+
+/obj/structure/sign/directions/janitor
+	name = "\improper Custodial Closet"
+	icon_state = "direction_jan"
 
 /obj/structure/sign/directions/engineering
 	name = "\improper Engineering Bay"

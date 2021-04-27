@@ -5,8 +5,9 @@
 	flags = MAP_HAS_BRANCH | MAP_HAS_RANK
 	config_path = "config/torch_config.txt"
 
-	admin_levels = list(7)
-	empty_levels = list(9)
+	admin_levels  = list(7)
+	escape_levels = list(8)
+	empty_levels  = list(9)
 	accessible_z_levels = list("1"=1,"2"=3,"3"=1,"4"=1,"5"=1,"6"=1,"9"=30)
 	overmap_size = 35
 	overmap_event_areas = 34
@@ -50,4 +51,6 @@
 	num_exoplanets = 1
 
 	away_site_budget = 3
+	min_offmap_players = 12
+
 	id_hud_icons = 'maps/torch/icons/assignment_hud.dmi'

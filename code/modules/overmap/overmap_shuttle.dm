@@ -84,21 +84,21 @@
 		return 1 //shuttles with zero fuel consumption are magic and can always launch
 	if(!fuel_ports.len)
 		return 0 //Nowhere to get fuel from
-	var/list/obj/item/weapon/tank/fuel_tanks = list()
+	var/list/obj/item/tank/fuel_tanks = list()
 	for(var/obj/structure/FP in fuel_ports) //loop through fuel ports and assemble list of all fuel tanks
-		var/obj/item/weapon/tank/FT = locate() in FP
+		var/obj/item/tank/FT = locate() in FP
 		if(FT)
 			fuel_tanks += FT
 	if(!fuel_tanks.len)
 		return 0 //can't launch if you have no fuel TANKS in the ports
 	var/total_flammable_gas_moles = 0
-	for(var/obj/item/weapon/tank/FT in fuel_tanks)
+	for(var/obj/item/tank/FT in fuel_tanks)
 		total_flammable_gas_moles += FT.air_contents.get_by_flag(XGM_GAS_FUEL)
 	if(total_flammable_gas_moles < fuel_consumption) //not enough fuel
 		return 0
 	// We are going to succeed if we got to here, so start consuming that fuel
 	var/fuel_to_consume = fuel_consumption
-	for(var/obj/item/weapon/tank/FT in fuel_tanks) //loop through tanks, consume their fuel one by one
+	for(var/obj/item/tank/FT in fuel_tanks) //loop through tanks, consume their fuel one by one
 		var/fuel_available = FT.air_contents.get_by_flag(XGM_GAS_FUEL)
 		if(!fuel_available) // Didn't even have fuel.
 			continue
@@ -114,8 +114,8 @@
 	desc = "The fuel input port of the shuttle. Holds one fuel tank. Use a crowbar to open and close it."
 	icon = 'icons/turf/shuttle.dmi'
 	icon_state = "fuel_port"
-	density = 0
-	anchored = 1
+	density = FALSE
+	anchored = TRUE
 	var/icon_closed = "fuel_port"
 	var/icon_empty = "fuel_port_empty"
 	var/icon_full = "fuel_port_full"
@@ -124,7 +124,7 @@
 
 /obj/structure/fuel_port/Initialize()
 	. = ..()
-	new /obj/item/weapon/tank/hydrogen(src)
+	new /obj/item/tank/hydrogen(src)
 
 /obj/structure/fuel_port/attack_hand(mob/user as mob)
 	if(!opened)
@@ -143,7 +143,7 @@
 	else
 		icon_state = icon_closed
 
-/obj/structure/fuel_port/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/fuel_port/attackby(obj/item/W as obj, mob/user as mob)
 	if(isCrowbar(W))
 		if(opened)
 			to_chat(user, "<spawn class='notice'>You tightly shut \the [src] door.")
@@ -153,7 +153,7 @@
 			to_chat(user, "<spawn class='notice'>You open up \the [src] door.")
 			playsound(src.loc, 'sound/effects/locker_open.ogg', 15, 1, -3)
 			opened = 1
-	else if(istype(W,/obj/item/weapon/tank))
+	else if(istype(W,/obj/item/tank))
 		if(!opened)
 			to_chat(user, "<spawn class='warning'>\The [src] door is still closed!")
 			return

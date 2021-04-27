@@ -5,8 +5,8 @@
 	program_icon_state = "generic"
 	program_key_state = "generic_key"
 	size = 4
-	requires_ntnet = 1
-	available_on_ntnet = 1
+	requires_ntnet = TRUE
+	available_on_ntnet = TRUE
 	nanomodule_path = /datum/nano_module/crew_manifest
 	usage_flags = PROGRAM_ALL
 	category = PROG_OFFICE

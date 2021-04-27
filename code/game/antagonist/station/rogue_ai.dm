@@ -54,7 +54,7 @@ GLOBAL_DATUM_INIT(malf, /datum/antagonist/rogue_ai, new)
 			error("Non-AI mob designated malf AI! Report this.")
 			to_world("##ERROR: Non-AI mob designated malf AI! Report this.")
 
-			return 0
+			return
 
 		A.setup_for_malf()
 		A.laws = new /datum/ai_laws/nanotrasen/malfunction
@@ -68,7 +68,7 @@ GLOBAL_DATUM_INIT(malf, /datum/antagonist/rogue_ai, new)
 		sleep(50)
 		to_chat(malf, "<B>MEMCHCK</B> Corrupted sectors confirmed. Recommended solution: Delete. Proceed? Y/N: Y")
 		sleep(10)
-		// this is so Travis doesn't complain about the backslash-B. Fixed at compile time (or should be).
+		// this is so unit testing doesn't complain about the backslash-B. Fixed at compile time (or should be).
 		to_chat(malf, "<span class='notice'>Corrupted files deleted: sys\\core\\users.dat sys\\core\\laws.dat sys\\core\\" + "backups.dat</span>")
 		sleep(20)
 		to_chat(malf, "<span class='notice'><b>CAUTION:</b> Law database not found! User database not found! Unable to restore backups. Activating failsafe AI shutd3wn52&&$#!##</span>")

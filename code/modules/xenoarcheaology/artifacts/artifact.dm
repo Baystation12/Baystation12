@@ -4,7 +4,7 @@
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "ano00"
 	var/icon_num = 0
-	density = 1
+	density = TRUE
 	var/datum/artifact_effect/my_effect
 	var/datum/artifact_effect/secondary_effect
 	var/being_used = 0
@@ -23,7 +23,6 @@
 			secondary_effect.ToggleActivate(0)
 
 	icon_num = rand(0, 11)
-
 	icon_state = "ano[icon_num]0"
 	if(icon_num == 7 || icon_num == 8)
 		name = "large crystal"
@@ -49,6 +48,9 @@
 /obj/machinery/artifact/proc/check_triggers(trigger_proc)
 	. = FALSE
 	for(var/datum/artifact_effect/effect in list(my_effect, secondary_effect))
+		if (!effect.trigger)
+			return
+
 		var/triggered = call(effect.trigger, trigger_proc)(arglist(args.Copy(2)))
 		if(effect.trigger.toggle && triggered)
 			effect.ToggleActivate(1)
@@ -56,6 +58,9 @@
 		else if(effect.activated != triggered)
 			effect.ToggleActivate(1)
 			. = TRUE
+
+		if (. && istype(effect.trigger, /datum/artifact_trigger/touch))
+			effect.DoEffectTouch(arglist(args.Copy(2)))
 
 /obj/machinery/artifact/Process()
 	var/turf/T = loc
@@ -82,7 +87,7 @@
 	visible_message("[user] touches \the [src].")
 	check_triggers(/datum/artifact_trigger/proc/on_touch, user)
 
-/obj/machinery/artifact/attackby(obj/item/weapon/W, mob/living/user)
+/obj/machinery/artifact/attackby(obj/item/W, mob/living/user)
 	. = ..()
 	check_triggers(/datum/artifact_trigger/proc/on_hit, W, user)
 
@@ -97,7 +102,7 @@
 	if(check_triggers(/datum/artifact_trigger/proc/on_explosion, severity))
 		return
 	switch(severity)
-		if(1) 
+		if(1)
 			qdel(src)
 		if(2)
 			if (prob(50))

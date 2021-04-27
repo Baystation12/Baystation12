@@ -24,11 +24,11 @@
 /turf/simulated/floor/airless,
 /area/djstation)
 "an" = (
-/obj/machinery/teleport/station,
+/obj/machinery/tele_projector,
 /turf/simulated/floor/airless,
 /area/djstation)
 "ao" = (
-/obj/machinery/teleport/hub,
+/obj/machinery/tele_pad,
 /turf/simulated/floor/airless,
 /area/djstation)
 "ap" = (
@@ -63,6 +63,14 @@
 /area/djstation)
 "ax" = (
 /obj/random/junk,
+/obj/machinery/embedded_controller/radio/airlock/airlock_controller{
+	id_tag = "lp_north_airlock";
+	pixel_x = 24;
+	tag_airpump = "lp_north_pump";
+	tag_chamber_sensor = "lp_north_sensor";
+	tag_exterior_door = "lp_north_outer";
+	tag_interior_door = "lp_north_inner"
+	},
 /turf/simulated/floor/airless,
 /area/djstation)
 "ay" = (
@@ -146,9 +154,8 @@
 /turf/simulated/floor/tiled/airless,
 /area/djstation)
 "aS" = (
-/obj/machinery/door/airlock/glass,
-/turf/simulated/floor/tiled/airless,
-/area/djstation)
+/turf/unsimulated/mask,
+/area/mine/explored)
 "aT" = (
 /obj/random/loot,
 /turf/simulated/floor/tiled/airless,
@@ -256,27 +263,22 @@
 /turf/simulated/floor/airless,
 /area/djstation)
 "lb" = (
-/obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	id_tag = "lp_north_airlock";
-	pixel_x = 24;
-	tag_airpump = "lp_north_pump";
-	tag_chamber_sensor = "lp_north_sensor";
-	tag_exterior_door = "lp_north_outer";
-	tag_interior_door = "lp_north_inner"
-	},
-/turf/simulated/floor/airless,
+/turf/unsimulated/mask,
 /area/djstation)
 "mb" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
 	id_tag = "lp_north_pump"
 	},
-/turf/simulated/floor/airless,
-/area/djstation)
-"nb" = (
 /obj/machinery/airlock_sensor{
 	id_tag = "lp_north_sensor";
 	master_tag = "lp_north_airlock";
 	pixel_x = 24
+	},
+/turf/simulated/floor/airless,
+/area/djstation)
+"nb" = (
+/obj/machinery/door/airlock/multi_tile{
+	name = "Glass Airlock"
 	},
 /turf/simulated/floor/airless,
 /area/djstation)
@@ -288,15 +290,6 @@
 	locked = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/visible,
-/turf/simulated/floor/airless,
-/area/djstation)
-"pb" = (
-/obj/machinery/door/airlock/external{
-	frequency = 1379;
-	icon_state = "closed";
-	id_tag = "lp_north_inner";
-	locked = 1
-	},
 /turf/simulated/floor/airless,
 /area/djstation)
 "qb" = (
@@ -360,6 +353,10 @@
 	id_tag = "lp_east_inner";
 	locked = 1
 	},
+/obj/machinery/atmospherics/pipe/simple/visible{
+	dir = 4;
+	icon_state = "intact"
+	},
 /turf/simulated/floor/airless,
 /area/djstation)
 "xb" = (
@@ -369,6 +366,10 @@
 	id_tag = "lp_east_sensor";
 	pixel_x = 0;
 	pixel_y = 24
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+	dir = 8;
+	id_tag = "lp_east_pump"
 	},
 /turf/simulated/floor/airless,
 /area/djstation)
@@ -399,27 +400,7 @@
 	dir = 6;
 	icon_state = "intact"
 	},
-/turf/simulated/floor/airless,
-/area/djstation)
-"Bb" = (
-/obj/machinery/door/airlock/external{
-	frequency = 1379;
-	icon_state = "closed";
-	id_tag = "lp_east_inner";
-	locked = 1
-	},
-/obj/machinery/atmospherics/pipe/simple/visible{
-	dir = 4;
-	icon_state = "intact"
-	},
-/turf/simulated/floor/airless,
-/area/djstation)
-"Cb" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
-	dir = 8;
-	id_tag = "lp_east_pump"
-	},
-/turf/simulated/floor/airless,
+/turf/simulated/floor/tiled/airless,
 /area/djstation)
 "Db" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
@@ -24019,8 +24000,8 @@ ar
 aL
 aP
 aM
-aS
-aS
+aM
+aP
 aH
 aP
 aL
@@ -24208,11 +24189,11 @@ af
 af
 af
 ak
-af
-kb
-lb
-nb
-pb
+aS
+aj
+aj
+aj
+aj
 ar
 ar
 ar
@@ -24409,18 +24390,18 @@ af
 af
 af
 af
-af
-af
-aj
-aj
-aj
+aS
+aS
+lb
+lb
+lb
 aj
 aA
 aC
 aE
 ar
 al
-aM
+nb
 aQ
 at
 as
@@ -24431,8 +24412,8 @@ aj
 aj
 aj
 aj
-ar
 Ab
+Db
 Db
 Db
 Eb
@@ -24622,7 +24603,7 @@ at
 aF
 at
 ar
-aM
+at
 ar
 ar
 at
@@ -24634,7 +24615,7 @@ ab
 ab
 aj
 wb
-Bb
+aj
 aj
 aj
 aj
@@ -24836,8 +24817,8 @@ ab
 ab
 aj
 xb
-Cb
 aj
+lb
 ab
 ab
 ab
@@ -25038,8 +25019,8 @@ ab
 ab
 aj
 yb
-at
 aj
+lb
 ab
 ab
 ab
@@ -25240,8 +25221,8 @@ ab
 ab
 aj
 zb
-zb
 aj
+lb
 ab
 ab
 ab
@@ -25443,7 +25424,7 @@ ab
 vb
 af
 af
-af
+aS
 ab
 ab
 ab

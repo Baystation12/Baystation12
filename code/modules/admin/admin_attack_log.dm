@@ -41,6 +41,8 @@
 /proc/admin_attack_log(var/mob/attacker, var/mob/victim, var/attacker_message, var/victim_message, var/admin_message)
 	if(!(attacker || victim))
 		EXCEPTION("Neither attacker or victim was supplied.")
+	if ((attacker && !istype(attacker)) || (victim && !istype(victim)))
+		return
 	if(!store_admin_attack_log(attacker, victim))
 		return
 

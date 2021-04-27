@@ -54,7 +54,6 @@
 	if(!check_general_join_blockers(joining, job))
 		return
 
-	log_debug("Player: [joining] is now offsite rank: [job.title] ([name]), JCP:[job.current_positions], JPL:[job.total_positions]")
 	if(joining.mind)
 		joining.mind.assigned_job = job
 		joining.mind.assigned_role = job.title

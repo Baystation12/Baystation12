@@ -3,9 +3,9 @@
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "glassbox"
 	desc = "A display case for prized possessions. It taunts you to kick it."
-	density = 1
-	anchored = 1
-	unacidable = 1//Dissolving the case would also delete the gun.
+	density = TRUE
+	anchored = TRUE
+	unacidable = TRUE
 	alpha = 150
 	var/health = 14
 	var/destroyed = 0
@@ -26,7 +26,7 @@
 /obj/structure/displaycase/ex_act(severity)
 	switch(severity)
 		if (1)
-			new /obj/item/weapon/material/shard(loc)
+			new /obj/item/material/shard(loc)
 			for(var/atom/movable/AM in src)
 				AM.dropInto(loc)
 			qdel(src)
@@ -47,7 +47,7 @@
 		if (!destroyed)
 			set_density(0)
 			destroyed = 1
-			new /obj/item/weapon/material/shard(loc)
+			new /obj/item/material/shard(loc)
 			for(var/atom/movable/AM in src)
 				AM.dropInto(loc)
 			playsound(src, "shatter", 70, 1)
@@ -64,7 +64,7 @@
 	for(var/atom/movable/AM in contents)
 		underlays += AM.appearance
 
-/obj/structure/displaycase/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/displaycase/attackby(obj/item/W as obj, mob/user as mob)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	take_damage(W.force)
 	..()

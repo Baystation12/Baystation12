@@ -3,7 +3,7 @@
 	id = "datacapsule"
 	description = "A damaged capsule with some strange contents."
 	suffixes = list("datacapsule/datacapsule.dmm")
-	cost = 1
+	spawn_cost = 0.5
 	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS
 	ruin_tags = RUIN_HUMAN|RUIN_WRECK
 
@@ -35,10 +35,10 @@
 	taste_description = "decayed blood"
 	color = "#800000"
 
-/obj/item/weapon/reagent_containers/glass/beaker/vial/random_podchem
+/obj/item/reagent_containers/glass/beaker/vial/random_podchem
 	name = "unmarked vial"
 
-/obj/item/weapon/reagent_containers/glass/beaker/vial/random_podchem/Initialize()
+/obj/item/reagent_containers/glass/beaker/vial/random_podchem/Initialize()
 	. = ..()
 	desc += "Label is smudged, and there's crusted blood fingerprints on it."
 	var/reagent_type = pick(/datum/reagent/random, /datum/reagent/zombie/science, /datum/reagent/rezadone, /datum/reagent/three_eye)
@@ -49,15 +49,21 @@
 	icon = 'icons/obj/machines/research.dmi'
 	icon_state = "server"
 	desc = "Impact resistant server rack. You might be able to pry a disk out."
-	var/disk_looted
+	var/obj/item/stock_parts/computer/hard_drive/cluster/drive = new /obj/item/stock_parts/computer/hard_drive/cluster
 
 /obj/structure/backup_server/attackby(obj/item/W, mob/user, var/click_params)
 	if(isCrowbar(W))
+		if (!drive)
+			to_chat(user, SPAN_WARNING("There is nothing else to take from \the [src]."))
+			return
+
 		to_chat(user, SPAN_NOTICE("You pry out the data drive from \the [src]."))
 		playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
-		var/obj/item/weapon/stock_parts/computer/hard_drive/cluster/drive = new(get_turf(src))
 		drive.origin_tech = list(TECH_DATA = rand(4,5), TECH_ENGINEERING = rand(4,5), TECH_PHORON = rand(4,5), TECH_COMBAT = rand(2,5), TECH_ESOTERIC = rand(0,6))
-		
+		var/obj/item/stock_parts/computer/hard_drive/cluster/extracted_drive = drive
+		user.put_in_hands(extracted_drive)
+		drive = null
+
 /obj/effect/landmark/map_load_mark/ejected_datapod
 	name = "random datapod contents"
 	templates = list(/datum/map_template/ejected_datapod_contents, /datum/map_template/ejected_datapod_contents/type2, /datum/map_template/ejected_datapod_contents/type3)

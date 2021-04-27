@@ -131,7 +131,7 @@
 	icon_state = "wizard"
 	species_restricted = null
 	body_parts_covered = 0
-	wizard_garb = 1
+	wizard_garb = TRUE
 	can_add_hidden_item = FALSE
 	can_add_cuffs = FALSE
 

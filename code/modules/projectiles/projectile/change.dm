@@ -4,7 +4,7 @@
 	damage = 0
 	damage_type = BURN
 	damage_flags = 0
-	nodamage = 1
+	nodamage = TRUE
 
 /obj/item/projectile/change/on_hit(var/atom/change)
 	wabbajack(change)
@@ -22,7 +22,7 @@
 				qdel(Robot.mmi)
 		else
 			for(var/obj/item/W in M)
-				if(istype(W, /obj/item/weapon/implant))	//TODO: Carn. give implants a dropped() or something
+				if(istype(W, /obj/item/implant))	//TODO: Carn. give implants a dropped() or something
 					qdel(W)
 					continue
 				M.drop_from_inventory(W)

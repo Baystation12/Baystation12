@@ -26,7 +26,6 @@ GLOBAL_LIST_EMPTY(ckey_punished_for_spam) // this round; to avoid redundant reco
 		qdel(C)
 		return
 	GLOB.ckey_punished_for_spam[ckey] = TRUE
-	notes_add(ckey, "\[AUTO\] Kicked for possible spam abuse.")
 	qdel(C)
 
 /client/Center()

@@ -7,9 +7,9 @@ var/global/list/sparring_attack_cache = list()
 	var/damage = 0						// Extra empty hand attack damage.
 	var/attack_sound = "punch"
 	var/miss_sound = 'sound/weapons/punchmiss.ogg'
-	var/shredding = 0 // Calls the old attack_alien() behavior on objects/mobs when on harm intent.
-	var/sharp = 0
-	var/edge = 0
+	var/shredding = FALSE // Calls the old attack_alien() behavior on objects/mobs when on harm intent.
+	var/sharp = FALSE
+	var/edge = FALSE
 	var/delay = 0
 
 	var/deal_halloss
@@ -19,6 +19,7 @@ var/global/list/sparring_attack_cache = list()
 	var/eye_attack_text_victim
 
 	var/attack_name = "fist"
+	var/should_attack_log = TRUE
 
 /datum/unarmed_attack/proc/get_damage_type()
 	if(deal_halloss)
@@ -122,16 +123,13 @@ var/global/list/sparring_attack_cache = list()
 /datum/unarmed_attack/bite
 	attack_verb = list("bit")
 	attack_sound = 'sound/weapons/bite.ogg'
-	shredding = 0
 	damage = 0
-	sharp = 0
-	edge = 0
 	attack_name = "bite"
 
 /datum/unarmed_attack/bite/sharp
 	attack_verb = list("bit", "chomped")
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 
 /datum/unarmed_attack/bite/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
 
@@ -280,9 +278,8 @@ var/global/list/sparring_attack_cache = list()
 	deal_halloss = 3
 	attack_noun = list("tap","light strike")
 	attack_verb = list("tapped", "lightly struck")
-	damage = 2
-	shredding = 0
 	damage = 0
-	sharp = 0
-	edge = 0
+	sharp = TRUE
+	edge = TRUE
 	attack_name = "light hit"
+	should_attack_log = FALSE

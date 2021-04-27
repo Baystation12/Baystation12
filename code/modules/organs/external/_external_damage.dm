@@ -305,7 +305,7 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 			return 1
 
 /obj/item/organ/external/proc/get_agony_multiplier()
-	return has_genitals() ? 2 : 1
+	return has_genitals() ? 1.5 : 1
 
 /obj/item/organ/external/proc/sever_artery()
 	if(species && species.has_organ[BP_HEART])

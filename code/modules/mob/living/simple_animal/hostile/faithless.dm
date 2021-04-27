@@ -14,10 +14,7 @@
 	health = 80
 
 	harm_intent_damage = 10
-	melee_damage_lower = 15
-	melee_damage_upper = 15
-	attacktext = "gripped"
-	attack_sound = 'sound/hallucinations/growl1.ogg'
+	natural_weapon = /obj/item/natural_weapon/faithless
 
 	min_gas = null
 	max_gas = null
@@ -33,6 +30,13 @@
 	bone_amount =   0
 	skin_material = null
 	skin_amount =   0
+
+/obj/item/natural_weapon/faithless
+	name = "shadow tendril"
+	attack_verb = list("gripped")
+	hitsound = 'sound/hallucinations/growl1.ogg'
+	damtype = BURN
+	force = 15
 
 /mob/living/simple_animal/hostile/faithless/Allow_Spacemove(var/check_drift = 0)
 	return 1

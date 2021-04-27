@@ -1,10 +1,10 @@
 /obj/item/clothing/suit/storage
-	var/obj/item/weapon/storage/internal/pockets/pockets
+	var/obj/item/storage/internal/pockets/pockets
 	var/slots = 2
 
 /obj/item/clothing/suit/storage/Initialize()
 	. = ..()
-	pockets = new/obj/item/weapon/storage/internal/pockets(src, slots, ITEM_SIZE_SMALL) //fit only pocket sized items
+	pockets = new/obj/item/storage/internal/pockets(src, slots, ITEM_SIZE_SMALL) //fit only pocket sized items
 
 /obj/item/clothing/suit/storage/Destroy()
 	QDEL_NULL(pockets)

@@ -2,14 +2,20 @@ GLOBAL_DATUM_INIT(provocateurs, /datum/antagonist/provocateur, new)
 
 /datum/antagonist/provocateur
 	id = MODE_MISC_AGITATOR
-	role_text = "Provocateur"
-	role_text_plural = "Provocateurs"
+	role_text = "Deuteragonist"
+	role_text_plural = "Deuteragonists"
 	antaghud_indicator = "hud_traitor"
 	flags = ANTAG_RANDOM_EXCEPTED
-	welcome_text = "You're an unsavoury sort, aren't you?"
-	antag_text = "This role is not a full license-to-kill antagonist role, but it does permit \
-	you to make trouble, commit crimes and make a nusiance of yourself beyond the restrictions \
-	normally placed on the crew, within reason. Think of it as a license to harass rather than \
-	a license to kill."
+	antag_text = "This role means you should feel free to pursue your goals even if they conflict with %WORLD_NAME%, but you aren't an antagonist and shouldn't act like one. Try to be reasonable and avoid killing or blowing things up!"
+	welcome_text = "You are a character in a side story!"
 	blacklisted_jobs = list()
 	skill_setter = null
+	min_player_age = 0
+
+	var/antag_text_updated
+
+/datum/antagonist/provocateur/get_antag_text(mob/recipient)
+	if (!antag_text_updated)
+		antag_text = replacetext(antag_text, "%WORLD_NAME%", station_name())
+		antag_text_updated = TRUE
+	return antag_text

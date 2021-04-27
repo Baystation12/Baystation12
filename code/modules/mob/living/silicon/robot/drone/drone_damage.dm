@@ -3,7 +3,7 @@
 	var/fireloss = 0
 	var/bruteloss = 0
 
-/mob/living/silicon/robot/drone/take_overall_damage(var/brute = 0, var/burn = 0, var/sharp = 0, var/used_weapon = null)
+/mob/living/silicon/robot/drone/take_overall_damage(var/brute = 0, var/burn = 0, var/sharp = FALSE, var/used_weapon = null)
 	bruteloss += brute
 	fireloss += burn
 

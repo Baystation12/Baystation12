@@ -6,8 +6,8 @@
 	program_key_state = "generic_key"
 	program_menu_icon = "mail-closed"
 	size = 7
-	requires_ntnet = 1
-	available_on_ntnet = 1
+	requires_ntnet = TRUE
+	available_on_ntnet = TRUE
 	var/stored_login = ""
 	var/stored_password = ""
 	usage_flags = PROGRAM_ALL
@@ -84,7 +84,7 @@
 
 /datum/nano_module/email_client/proc/get_functional_drive()
 	var/datum/extension/interactive/ntos/os = get_extension(nano_host(), /datum/extension/interactive/ntos)
-	var/obj/item/weapon/stock_parts/computer/hard_drive/drive = os && os.get_component(/obj/item/weapon/stock_parts/computer/hard_drive)
+	var/obj/item/stock_parts/computer/hard_drive/drive = os && os.get_component(/obj/item/stock_parts/computer/hard_drive)
 	if(!drive || !drive.check_functionality())
 		error = "Error uploading file. Are you using a functional and NTOSv2-compliant device?"
 		return
@@ -110,7 +110,7 @@
 /datum/nano_module/email_client/proc/log_in()
 	var/list/id_login
 	var/atom/movable/A = nano_host()
-	var/obj/item/weapon/card/id/id = A.GetIdCard()
+	var/obj/item/card/id/id = A.GetIdCard()
 	if(!id && ismob(A.loc))
 		var/mob/M = A.loc
 		id = M.GetIdCard()
@@ -303,7 +303,7 @@
 		return
 	download_progress = min(download_progress + netspeed, downloading.size)
 	if(download_progress >= downloading.size)
-		var/obj/item/weapon/stock_parts/computer/hard_drive/drive = get_functional_drive()
+		var/obj/item/stock_parts/computer/hard_drive/drive = get_functional_drive()
 		if(!drive)
 			downloading = null
 			download_progress = 0
@@ -503,7 +503,7 @@
 
 	if(href_list["save"])
 		// Fully dependant on modular computers here.
-		var/obj/item/weapon/stock_parts/computer/hard_drive/drive = get_functional_drive()
+		var/obj/item/stock_parts/computer/hard_drive/drive = get_functional_drive()
 		if(!drive)
 			return 1
 
@@ -525,7 +525,7 @@
 		return 1
 
 	if(href_list["addattachment"])
-		var/obj/item/weapon/stock_parts/computer/hard_drive/drive = get_functional_drive()
+		var/obj/item/stock_parts/computer/hard_drive/drive = get_functional_drive()
 		msg_attachment = null
 		if(!drive)
 			return 1
@@ -565,7 +565,7 @@
 	if(href_list["downloadattachment"])
 		if(!current_account || !current_message || !current_message.attachment)
 			return 1
-		var/obj/item/weapon/stock_parts/computer/hard_drive/drive = get_functional_drive()
+		var/obj/item/stock_parts/computer/hard_drive/drive = get_functional_drive()
 		if(!drive)
 			return 1
 

@@ -117,14 +117,14 @@
 		to_chat(user, "<span class='danger'>\The [src] is already cracked.</span>")
 		return
 	else
-		emagged = 1
+		emagged = TRUE
 		to_chat(user, "<span class='danger'>You crack the holobadge security checks.</span>")
 		return 1
 
 /obj/item/clothing/accessory/badge/holo/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if(istype(O, /obj/item/weapon/card/id) || istype(O, /obj/item/modular_computer))
+	if(istype(O, /obj/item/card/id) || istype(O, /obj/item/modular_computer))
 
-		var/obj/item/weapon/card/id/id_card = O.GetIdCard()
+		var/obj/item/card/id/id_card = O.GetIdCard()
 
 		if(!id_card)
 			return
@@ -138,13 +138,13 @@
 		return
 	..()
 
-/obj/item/weapon/storage/box/holobadge
+/obj/item/storage/box/holobadge
 	name = "holobadge box"
 	desc = "A box containing security holobadges."
 	startswith = list(/obj/item/clothing/accessory/badge/holo = 4,
 					  /obj/item/clothing/accessory/badge/holo/cord = 2)
 
-/obj/item/weapon/storage/box/holobadgeNT
+/obj/item/storage/box/holobadgeNT
 	name = "corporate holobadge box"
 	desc = "A box containing corporate security holobadges."
 	startswith = list(/obj/item/clothing/accessory/badge/holo/NT = 4,

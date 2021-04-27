@@ -73,7 +73,7 @@
 					aiRestorePowerRoutine = AI_RESTOREPOWER_FAILED
 					continue
 				// APC's cell is removed and/or below 1% charge. This prevents the AI from briefly regaining power as we force the APC on, only to lose it again next tick due to 0% cell charge.
-				var/obj/item/weapon/cell/cell = theAPC.get_cell()
+				var/obj/item/cell/cell = theAPC.get_cell()
 				if(cell && cell.percent() < 1)
 					to_chat(src, "<span class='danger'>APC internal power reserves are critical. Unable to restore main power.</span>")
 					aiRestorePowerRoutine = AI_RESTOREPOWER_FAILED
@@ -112,7 +112,7 @@
 	if(admin_powered)
 		return 0
 
-	if(istype(loc, /obj/item/weapon/aicard))
+	if(istype(loc, /obj/item/aicard))
 		return 0
 
 	if(self_shutdown)

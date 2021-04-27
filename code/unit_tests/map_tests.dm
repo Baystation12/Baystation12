@@ -224,7 +224,7 @@
 /datum/unit_test/storage_map_test/start_test()
 	var/bad_tests = 0
 
-	for(var/obj/item/weapon/storage/S in world)
+	for(var/obj/item/storage/S in world)
 		if(isPlayerLevel(S.z))
 			var/bad_msg = "[ascii_red]--------------- [S.name] \[[S.type]\] \[[S.x] / [S.y] / [S.z]\]"
 			bad_tests += test_storage_capacity(S, bad_msg)
@@ -824,6 +824,32 @@ datum/unit_test/ladder_check/start_test()
 		if(value == A.id)
 			return FALSE
 
+	return TRUE
+
+/datum/unit_test/doors_shall_be_on_appropriate_turfs
+	name = "MAP: Doors shall be on appropriate turfs"
+
+/datum/unit_test/doors_shall_be_on_appropriate_turfs/start_test()
+	var/bad_doors = 0
+	for(var/obj/machinery/door/D in world)
+		if(QDELETED(D))
+			continue
+		if(!istype(D.loc, /turf))
+			bad_doors++
+			log_bad("Invalid door turf: [log_info_line(D.loc)]]")
+		else
+			var/is_bad_door = FALSE
+			for(var/L in D.locs)
+				if(istype(L, /turf/simulated/open) || isspaceturf(L))
+					is_bad_door = TRUE
+					log_bad("Invalid door turf: [log_info_line(L)]]")
+			if(is_bad_door)
+				bad_doors++
+
+	if(bad_doors)
+		fail("Found [bad_doors] door\s on inappropriate turfs")
+	else
+		pass("All doors are on appropriate turfs")
 	return TRUE
 
 #undef SUCCESS

@@ -19,7 +19,7 @@
 	if(next_use > world.time) return
 	next_use = world.time + 10
 	var/mob/living/carbon/human/H = user
-	var/obj/item/weapon/cell/power_cell
+	var/obj/item/cell/power_cell
 	if(ishuman(user))
 		var/obj/item/organ/internal/cell/cell = locate() in H.internal_organs
 		if(cell && cell.cell)

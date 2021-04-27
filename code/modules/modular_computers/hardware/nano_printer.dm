@@ -1,4 +1,4 @@
-/obj/item/weapon/stock_parts/computer/nano_printer
+/obj/item/stock_parts/computer/nano_printer
 	name = "nano printer"
 	desc = "Small integrated printer with paper recycling module."
 	power_usage = 50
@@ -10,11 +10,11 @@
 	var/max_paper = 50
 	var/last_print
 
-/obj/item/weapon/stock_parts/computer/nano_printer/diagnostics()
+/obj/item/stock_parts/computer/nano_printer/diagnostics()
 	. = ..()
 	. += "Paper buffer level: [stored_paper]/[max_paper]"
 
-/obj/item/weapon/stock_parts/computer/nano_printer/proc/print_text(var/text_to_print, var/paper_title = null, var/paper_type = /obj/item/weapon/paper, var/list/md = null)
+/obj/item/stock_parts/computer/nano_printer/proc/print_text(var/text_to_print, var/paper_title = null, var/paper_type = /obj/item/paper, var/list/md = null)
 	if(printer_ready())
 		last_print = world.time
 		// Damaged printer causes the resulting paper to be somewhat harder to read.
@@ -27,7 +27,7 @@
 		T.visible_message("<span class='notice'>\The [src] prints out a paper.</span>")
 		return 1
 
-/obj/item/weapon/stock_parts/computer/nano_printer/proc/printer_ready()
+/obj/item/stock_parts/computer/nano_printer/proc/printer_ready()
 	if(!stored_paper)
 		return 0
 	if(!enabled)
@@ -38,8 +38,8 @@
 		return 0
 	return 1
 
-/obj/item/weapon/stock_parts/computer/nano_printer/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/paper))
+/obj/item/stock_parts/computer/nano_printer/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/paper))
 		if(stored_paper >= max_paper)
 			to_chat(user, "You try to add \the [W] into \the [src], but its paper bin is full.")
 			return
@@ -47,14 +47,14 @@
 		to_chat(user, "You insert \the [W] into [src].")
 		qdel(W)
 		stored_paper++
-	else if(istype(W, /obj/item/weapon/paper_bundle))
-		var/obj/item/weapon/paper_bundle/B = W
+	else if(istype(W, /obj/item/paper_bundle))
+		var/obj/item/paper_bundle/B = W
 		var/num_of_pages_added = 0
 		if(stored_paper >= max_paper)
 			to_chat(user, "You try to add \the [W] into \the [src], but its paper bin is full.")
 			return
-		for(var/obj/item/weapon/bundleitem in B) //loop through items in bundle
-			if(istype(bundleitem, /obj/item/weapon/paper)) //if item is paper (and not photo), add into the bin
+		for(var/obj/item/bundleitem in B) //loop through items in bundle
+			if(istype(bundleitem, /obj/item/paper)) //if item is paper (and not photo), add into the bin
 				B.pages.Remove(bundleitem)
 				qdel(bundleitem)
 				num_of_pages_added++

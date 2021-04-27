@@ -1,4 +1,4 @@
-/obj/item/weapon/rig/unathi
+/obj/item/rig/unathi
 	name = "\improper NT breacher chassis control module"
 	desc = "A NanoTrasen-made Unathi battle-rig. Looks like a fish, moves like a fish, steers like a cow."
 	suit_type = "\improper NT breacher rig"
@@ -22,7 +22,7 @@
 	boot_type = /obj/item/clothing/shoes/magboots/rig/unathi
 	glove_type = /obj/item/clothing/gloves/rig/unathi
 
-/obj/item/weapon/rig/unathi/fancy
+/obj/item/rig/unathi/fancy
 	name = "breacher chassis control module"
 	desc = "An (outwardly) authentic Unathi breacher chassis. Huge, bulky and absurdly heavy. It must be like wearing a tank."
 	suit_type = "breacher chassis"
@@ -39,7 +39,7 @@
 /obj/item/clothing/head/helmet/space/rig/unathi
 	species_restricted = list(SPECIES_UNATHI)
 	force = 5
-	sharp = 1 //poking people with the horn
+	sharp = TRUE
 
 /obj/item/clothing/suit/space/rig/unathi
 	species_restricted = list(SPECIES_UNATHI)

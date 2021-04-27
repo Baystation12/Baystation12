@@ -13,10 +13,10 @@
 	var/c_tag_order = 999
 	var/number = 0 //camera number in area
 	var/status = 1
-	anchored = 1.0
+	anchored = TRUE
 	var/invuln = null
 	var/bugged = 0
-	var/obj/item/weapon/camera_assembly/assembly = null
+	var/obj/item/camera_assembly/assembly = null
 
 	var/toughness = 5 //sorta fragile
 
@@ -35,6 +35,8 @@
 	var/on_open_network = 0
 
 	var/affected_by_emp_until = 0
+
+	var/is_helmet_cam = FALSE
 
 /obj/machinery/camera/examine(mob/user)
 	. = ..()
@@ -187,7 +189,7 @@
 		if(weld(W, user))
 			if(assembly)
 				assembly.dropInto(loc)
-				assembly.anchored = 1
+				assembly.anchored = TRUE
 				assembly.camera_name = c_tag
 				assembly.camera_network = english_list(network, "Exodus", ",", ",")
 				assembly.update_icon()
@@ -205,9 +207,9 @@
 			return
 
 	// OTHER
-	else if (can_use() && istype(W, /obj/item/weapon/paper) && isliving(user))
+	else if (can_use() && istype(W, /obj/item/paper) && isliving(user))
 		var/mob/living/U = user
-		var/obj/item/weapon/paper/X = W
+		var/obj/item/paper/X = W
 		var/itemname = X.name
 		var/info = X.info
 		to_chat(U, "You hold \a [itemname] up to the camera ...")
@@ -372,7 +374,7 @@
 
 	return null
 
-/obj/machinery/camera/proc/weld(var/obj/item/weapon/weldingtool/WT, var/mob/user)
+/obj/machinery/camera/proc/weld(var/obj/item/weldingtool/WT, var/mob/user)
 
 	if(busy)
 		return 0

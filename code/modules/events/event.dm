@@ -131,7 +131,7 @@
 	activeFor++
 
 //Called when start(), announce() and end() has all been called.
-/datum/event/proc/kill()
+/datum/event/proc/kill(reroll = FALSE)
 	// If this event was forcefully killed run end() for individual cleanup
 	if(isRunning)
 		isRunning = 0
@@ -139,6 +139,9 @@
 
 	endedAt = world.time
 	SSevent.event_complete(src)
+	if (reroll)
+		SSevent.event_containers[severity].start_event()
+
 
 //Called during building of skybox to get overlays
 /datum/event/proc/get_skybox_image()

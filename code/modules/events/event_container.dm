@@ -7,7 +7,6 @@
 #define ASSIGNMENT_MEDICAL "Medical"
 #define ASSIGNMENT_SCIENTIST "Scientist"
 #define ASSIGNMENT_SECURITY "Security"
-#define ASSIGNMENT_EXPLORER "Explorer"
 
 var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT_LEVEL_MODERATE = "Moderate", EVENT_LEVEL_MAJOR = "Major")
 
@@ -161,7 +160,7 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 		new /datum/event_meta/no_overmap(EVENT_LEVEL_MODERATE, "Carp School",				/datum/event/carp_migration,			100, 	list(ASSIGNMENT_ENGINEER = 10, ASSIGNMENT_SECURITY = 20), 1),
 		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Communication Blackout",				/datum/event/communications_blackout,	100,	list(ASSIGNMENT_AI = 100, ASSIGNMENT_ENGINEER = 20)),
 		new /datum/event_meta/no_overmap(EVENT_LEVEL_MODERATE, "Electrical Storm",			/datum/event/electrical_storm, 			10,		list(ASSIGNMENT_ENGINEER = 15, ASSIGNMENT_JANITOR = 10)),
-		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Gravity Failure",						/datum/event/gravity,	 				75,		list(ASSIGNMENT_ENGINEER = 25)),
+		new /datum/event_meta/no_overmap(EVENT_LEVEL_MODERATE, "Gravity Failure",			/datum/event/gravity,	 				75,		list(ASSIGNMENT_ENGINEER = 25)),
 		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Grid Check",							/datum/event/grid_check, 				200,	list(ASSIGNMENT_ENGINEER = 10)),
 		new /datum/event_meta/no_overmap(EVENT_LEVEL_MODERATE, "Ion Storm",					/datum/event/ionstorm, 					0,		list(ASSIGNMENT_AI = 50, ASSIGNMENT_CYBORG = 50, ASSIGNMENT_ENGINEER = 15, ASSIGNMENT_SCIENTIST = 5)),
 		new /datum/event_meta/no_overmap(EVENT_LEVEL_MODERATE, "Meteor Shower",				/datum/event/meteor_wave,				0,		list(ASSIGNMENT_ENGINEER = 20)),
@@ -175,7 +174,7 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Spider Infestation",					/datum/event/spider_infestation, 		25,		list(ASSIGNMENT_SECURITY = 15), 1),
 		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Toilet Flooding",						/datum/event/toilet_clog/flood,			50, 	list(ASSIGNMENT_JANITOR = 20)),
 		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Drone Uprising",						/datum/event/rogue_maint_drones/,		25,		list(ASSIGNMENT_ENGINEER = 30)),
-		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Exoplanet Awakening",					/datum/event/exo_awakening,             25,     list(ASSIGNMENT_EXPLORER = 100))
+		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Exoplanet Awakening",					/datum/event/exo_awakening,             75)
 	)
 
 /datum/event_container/major
@@ -188,7 +187,7 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Space Vines",						/datum/event/spacevine, 			0,	list(ASSIGNMENT_ENGINEER = 15), 1),
 		new /datum/event_meta/no_overmap(EVENT_LEVEL_MAJOR, "Electrical Storm",		/datum/event/electrical_storm, 		0,	list(ASSIGNMENT_ENGINEER = 10, ASSIGNMENT_JANITOR = 5)),
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Drone Revolution",				/datum/event/rogue_maint_drones/,	0,	list(ASSIGNMENT_ENGINEER = 10,ASSIGNMENT_MEDICAL = 10,ASSIGNMENT_SECURITY = 10)),
-		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Exoplanet Awakening",				/datum/event/exo_awakening,         0,  list(ASSIGNMENT_EXPLORER = 100))
+		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Exoplanet Awakening",				/datum/event/exo_awakening,         0,  list(ASSIGNMENT_ANY = 45))
 	)
 
 
@@ -201,4 +200,3 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 #undef ASSIGNMENT_MEDICAL
 #undef ASSIGNMENT_SCIENTIST
 #undef ASSIGNMENT_SECURITY
-#undef ASSIGNMENT_EXPLORER

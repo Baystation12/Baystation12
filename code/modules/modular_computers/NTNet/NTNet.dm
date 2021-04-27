@@ -42,12 +42,12 @@ var/global/datum/ntnet/ntnet_global = new()
 	build_reports_list()
 	add_log("NTNet logging system activated.")
 
-/datum/ntnet/proc/add_log_with_ids_check(var/log_string, var/obj/item/weapon/stock_parts/computer/network_card/source = null)
+/datum/ntnet/proc/add_log_with_ids_check(var/log_string, var/obj/item/stock_parts/computer/network_card/source = null)
 	if(intrusion_detection_enabled)
 		add_log(log_string, source)
 
 // Simplified logging: Adds a log. log_string is mandatory parameter, source is optional.
-/datum/ntnet/proc/add_log(var/log_string, var/obj/item/weapon/stock_parts/computer/network_card/source = null)
+/datum/ntnet/proc/add_log(var/log_string, var/obj/item/stock_parts/computer/network_card/source = null)
 	var/log_text = "[stationtime2text()] - "
 	if(source)
 		log_text += "[source.get_network_tag()] - "
@@ -65,7 +65,7 @@ var/global/datum/ntnet/ntnet_global = new()
 				break
 
 	for(var/obj/machinery/ntnet_relay/R in ntnet_global.relays)
-		var/obj/item/weapon/stock_parts/computer/hard_drive/portable/P = R.get_component_of_type(/obj/item/weapon/stock_parts/computer/hard_drive/portable)
+		var/obj/item/stock_parts/computer/hard_drive/portable/P = R.get_component_of_type(/obj/item/stock_parts/computer/hard_drive/portable)
 		if(P)
 			var/datum/computer_file/data/logfile/file = P.find_file_by_name("ntnet_log")
 			if(!istype(file))

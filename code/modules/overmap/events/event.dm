@@ -245,6 +245,15 @@
 	difficulty = EVENT_LEVEL_MAJOR
 	event_icon_states = list("carp3", "carp4")
 
+
+/obj/effect/overmap/event/gravity
+	name = "dark matter influx"
+	weaknesses = OVERMAP_WEAKNESS_EXPLOSIVE
+	events = list(/datum/event/gravity)
+	event_icon_states = list("grav1", "grav2", "grav3", "grav4")
+	opacity = 0
+	color = "#321945"
+
 //These now are basically only used to spawn hazards. Will be useful when we need to spawn group of moving hazards
 /datum/overmap_event
 	var/name = "map event"
@@ -294,3 +303,10 @@
 	count = 5
 	radius = 4
 	hazards = /obj/effect/overmap/event/carp/major
+
+/datum/overmap_event/gravity
+	name = "dark matter influx"
+	count = 12
+	radius = 4
+	opacity = 0
+	hazards = /obj/effect/overmap/event/gravity

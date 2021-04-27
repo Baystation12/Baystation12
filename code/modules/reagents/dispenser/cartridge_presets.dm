@@ -1,4 +1,4 @@
-/obj/item/weapon/reagent_containers/chem_disp_cartridge
+/obj/item/reagent_containers/chem_disp_cartridge
 	small
 		volume = CARTRIDGE_VOLUME_SMALL
 
@@ -63,6 +63,7 @@
 	orange		spawn_reagent = /datum/reagent/drink/juice/orange
 	lime		spawn_reagent = /datum/reagent/drink/juice/lime
 	watermelon	spawn_reagent = /datum/reagent/drink/juice/watermelon
+	decaf_tea	spawn_reagent = /datum/reagent/drink/tea/decaf
 
 	// Bar, syrups
 	syrup_chocolate	spawn_reagent = /datum/reagent/drink/syrup_chocolate
@@ -77,6 +78,11 @@
 	hot_coco	spawn_reagent = /datum/reagent/drink/hot_coco
 	milk		spawn_reagent = /datum/reagent/drink/milk
 	cream		spawn_reagent = /datum/reagent/drink/milk/cream
+	decaf_cof	spawn_reagent = /datum/reagent/drink/decafcoffee
+	espresso	spawn_reagent = /datum/reagent/drink/coffee/espresso
+
+// Engineering
+	boron		spawn_reagent = /datum/reagent/toxin/boron
 
 	// ERT
 	inaprov		spawn_reagent = /datum/reagent/inaprovaline

@@ -57,7 +57,7 @@
 
 /decl/hierarchy/supply_pack/security/pistol
 	name = "Weapons - Ballistic sidearms"
-	contains = list(/obj/item/weapon/gun/projectile/pistol/military = 4)
+	contains = list(/obj/item/gun/projectile/pistol/military = 4)
 	cost = 40
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "ballistic sidearms crate"
@@ -66,7 +66,7 @@
 
 /decl/hierarchy/supply_pack/security/laser
 	name = "Weapons - Laser carbines"
-	contains = list(/obj/item/weapon/gun/energy/laser/secure = 4)
+	contains = list(/obj/item/gun/energy/laser/secure = 4)
 	cost = 60
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "laser carbines crate"
@@ -75,16 +75,16 @@
 
 /decl/hierarchy/supply_pack/security/laser/shady
 	name = "Weapons - Laser carbines (For disposal)"
-	contains = list(/obj/item/weapon/gun/energy/laser = 4)
+	contains = list(/obj/item/gun/energy/laser = 4)
 	cost = 80
 	contraband = 1
 	security_level = null
 
 /decl/hierarchy/supply_pack/security/advancedlaser
 	name = "Weapons - Advanced Laser Weapons"
-	contains = list(/obj/item/weapon/gun/energy/xray = 2,
-					/obj/item/weapon/gun/energy/xray/pistol = 2,
-					/obj/item/weapon/shield/energy = 2)
+	contains = list(/obj/item/gun/energy/xray = 2,
+					/obj/item/gun/energy/xray/pistol = 2,
+					/obj/item/shield/energy = 2)
 	cost = 100
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "advanced Laser Weapons crate"
@@ -93,7 +93,7 @@
 
 /decl/hierarchy/supply_pack/security/sniperlaser
 	name = "Weapons - Energy marksman"
-	contains = list(/obj/item/weapon/gun/energy/sniperrifle = 2)
+	contains = list(/obj/item/gun/energy/sniperrifle = 2)
 	cost = 70
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "energy marksman crate"
@@ -102,7 +102,7 @@
 
 /decl/hierarchy/supply_pack/security/pdw
 	name = "Weapons - Ballistic PDWs"
-	contains = list(/obj/item/weapon/gun/projectile/automatic/sec_smg = 2)
+	contains = list(/obj/item/gun/projectile/automatic/sec_smg = 2)
 	cost = 40
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "\improper Ballistic PDW crate"
@@ -111,7 +111,7 @@
 
 /decl/hierarchy/supply_pack/security/bullpup
 	name = "Weapons - Ballistic rifles"
-	contains = list(/obj/item/weapon/gun/projectile/automatic/bullpup_rifle = 2)
+	contains = list(/obj/item/gun/projectile/automatic/bullpup_rifle = 2)
 	cost = 80 //Because 5.56 is OP as fuck right now.
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "bullpup automatic rifle crate"
@@ -155,11 +155,11 @@
 	name = "Gear - Master at Arms equipment"
 	contains = list(/obj/item/device/radio/headset/headset_sec,
 					/obj/item/device/radio/headset/headset_sec/alt,
-					/obj/item/weapon/storage/belt/holster/security,
+					/obj/item/storage/belt/holster/security,
 					/obj/item/device/flash,
-					/obj/item/weapon/reagent_containers/spray/pepper,
-					/obj/item/weapon/grenade/chem_grenade/teargas,
-					/obj/item/weapon/melee/baton/loaded,
+					/obj/item/reagent_containers/spray/pepper,
+					/obj/item/grenade/chem_grenade/teargas,
+					/obj/item/melee/baton/loaded,
 					/obj/item/clothing/glasses/sunglasses/sechud/goggles,
 					/obj/item/taperoll/police,
 					/obj/item/device/hailer,
@@ -169,7 +169,7 @@
 					/obj/item/clothing/gloves/thick/duty/solgov/sec,
 					/obj/item/device/holowarrant,
 					/obj/item/device/flashlight/maglight,
-					/obj/item/weapon/storage/belt/security)
+					/obj/item/storage/belt/security)
 	cost = 60
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Master at Arms equipment crate"
@@ -180,7 +180,7 @@
 	contains = list(/obj/item/device/radio/headset/heads/cos,
 					/obj/item/clothing/glasses/sunglasses/sechud/goggles,
 					/obj/item/taperoll/police,
-					/obj/item/weapon/storage/belt/holster/security,
+					/obj/item/storage/belt/holster/security,
 					/obj/item/device/hailer,
 					/obj/item/device/holowarrant,
 					/obj/item/clothing/gloves/thick,
@@ -192,7 +192,7 @@
 
 /decl/hierarchy/supply_pack/security/practicelasers
 	name = "Misc - Practice Laser Carbines"
-	contains = list(/obj/item/weapon/gun/energy/laser/practice = 4)
+	contains = list(/obj/item/gun/energy/laser/practice = 4)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure
 	containername = "practice laser carbine crate"

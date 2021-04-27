@@ -6,9 +6,9 @@
 /obj/structure/transit_tube
 	icon = 'icons/obj/pipes/transit_tube.dmi'
 	icon_state = "E-W"
-	density = 1
+	density = TRUE
 	layer = ABOVE_HUMAN_LAYER
-	anchored = 1.0
+	anchored = TRUE
 	var/list/tube_dirs = null
 	var/exit_delay = 2
 	var/enter_delay = 1
@@ -40,8 +40,8 @@
 	icon = 'icons/obj/pipes/transit_tube_pod.dmi'
 	icon_state = "pod"
 	animate_movement = FORWARD_STEPS
-	anchored = 1.0
-	density = 1
+	anchored = TRUE
+	density = TRUE
 	var/moving = 0
 	var/datum/gas_mixture/air_contents = new()
 
@@ -458,7 +458,7 @@ obj/structure/ex_act(severity)
 
 	tube_dirs = select_automatic_dirs(connected)
 
-	if(length(tube_dirs) == 2 && tube_dir_list.Find(tube_dirs[1]) > tube_dir_list.Find(tube_dirs[2]))
+	if(length(tube_dirs) == 2 && list_find(tube_dir_list, tube_dirs[1]) > list_find(tube_dir_list, tube_dirs[2]))
 		tube_dirs.Swap(1, 2)
 
 	generate_automatic_corners(tube_dirs)

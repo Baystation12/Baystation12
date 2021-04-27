@@ -356,10 +356,6 @@
 
 	var/obj/P = new /obj/effect/decal/point(tile)
 	P.set_invisibility(invisibility)
-	spawn (20)
-		if(P)
-			qdel(P)	// qdel
-
 	face_atom(A)
 	return 1
 
@@ -443,8 +439,8 @@
 		'html/changelog.html'
 		)
 	show_browser(src, 'html/changelog.html', "window=changes;size=675x650")
-	if(prefs.lastchangelog != changelog_hash)
-		prefs.lastchangelog = changelog_hash
+	if (SSmisc.changelog_hash && prefs.lastchangelog != SSmisc.changelog_hash)
+		prefs.lastchangelog = SSmisc.changelog_hash
 		SScharacter_setup.queue_preferences_save(prefs)
 		winset(src, "rpane.changelog", "background-color=none;font-style=;")
 
@@ -458,15 +454,16 @@
 	return GLOB.view_state
 
 // Use to field Topic calls for which usr == src is required, which will first be funneled into here.
-/mob/proc/OnSelfTopic(href_list)
-	if(href_list["mach_close"])
-		var/t1 = text("window=[href_list["mach_close"]]")
-		unset_machine()
-		show_browser(src, null, t1)
-		return TOPIC_HANDLED
-	if(href_list["flavor_change"])
-		update_flavor_text(href_list["flavor_change"])
-		return TOPIC_HANDLED
+/mob/proc/OnSelfTopic(href_list, topic_status)
+	if (topic_status == STATUS_INTERACTIVE)
+		if(href_list["mach_close"])
+			var/t1 = text("window=[href_list["mach_close"]]")
+			unset_machine()
+			show_browser(src, null, t1)
+			return TOPIC_HANDLED
+		if(href_list["flavor_change"])
+			update_flavor_text(href_list["flavor_change"])
+			return TOPIC_HANDLED
 
 // If usr != src, or if usr == src but the Topic call was not resolved, this is called next.
 /mob/OnTopic(mob/user, href_list, datum/topic_state/state)
@@ -478,11 +475,10 @@
 
 // You probably do not need to override this proc. Use one of the two above.
 /mob/Topic(href, href_list, datum/topic_state/state)
-	if(CanUseTopic(usr, GLOB.self_state, href_list) == STATUS_INTERACTIVE)
-		. = OnSelfTopic(href_list)
-		if(.)
-			return
-	else if(href_list["flavor_change"] && !is_admin(usr) && (usr != src))
+	. = OnSelfTopic(href_list, CanUseTopic(usr, GLOB.self_state, href_list))
+	if (.)
+		return
+	if (href_list["flavor_change"] && !is_admin(usr) && (usr != src))
 		log_and_message_admins(usr, "is suspected of trying to change flavor text on [key_name_admin(src)] via Topic exploits.")
 	return ..()
 
@@ -711,14 +707,14 @@
 	if(!resting && cannot_stand() && can_stand_overridden())
 		lying = 0
 	else if(buckled)
-		anchored = 1
+		anchored = TRUE
 		if(istype(buckled))
 			if(buckled.buckle_lying == -1)
 				lying = incapacitated(INCAPACITATION_KNOCKDOWN)
 			else
 				lying = buckled.buckle_lying
 			if(buckled.buckle_movable)
-				anchored = 0
+				anchored = FALSE
 	else
 		lying = incapacitated(INCAPACITATION_KNOCKDOWN)
 
@@ -867,16 +863,16 @@
 /mob/proc/remove_implant(var/obj/item/implant, var/surgical_removal = FALSE)
 	if(!LAZYLEN(get_visible_implants(0))) //Yanking out last object - removing verb.
 		verbs -= /mob/proc/yank_out_object
-	for(var/obj/item/weapon/O in pinned)
+	for(var/obj/item/O in pinned)
 		if(O == implant)
 			pinned -= O
 		if(!pinned.len)
-			anchored = 0
+			anchored = FALSE
 	implant.dropInto(loc)
 	implant.add_blood(src)
 	implant.update_icon()
-	if(istype(implant,/obj/item/weapon/implant))
-		var/obj/item/weapon/implant/imp = implant
+	if(istype(implant,/obj/item/implant))
+		var/obj/item/implant/imp = implant
 		imp.removed()
 	. = TRUE
 
@@ -937,7 +933,7 @@
 		else
 			to_chat(U, "[src] has nothing stuck in their wounds that is large enough to remove.")
 		return
-	var/obj/item/weapon/selection = input("What do you want to yank out?", "Embedded objects") in valid_objects
+	var/obj/item/selection = input("What do you want to yank out?", "Embedded objects") in valid_objects
 	if(self)
 		to_chat(src, "<span class='warning'>You attempt to get a good grip on [selection] in your body.</span>")
 	else

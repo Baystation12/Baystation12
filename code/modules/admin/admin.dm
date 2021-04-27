@@ -85,6 +85,7 @@ var/global/floorIsLava = 0
 	if(M.client)
 		body += "| <A HREF='?src=\ref[src];sendtoprison=\ref[M]'>Prison</A> | "
 		body += "<A HREF='?src=\ref[src];reloadsave=\ref[M]'>Reload Save</A> | "
+		body += "<A HREF='?src=\ref[src];reloadchar=\ref[M]'>Reload Character</A> | "
 		var/muted = M.client.prefs.muted
 		body += {"<br><b>Mute: </b>
 			\[<A href='?src=\ref[src];mute=\ref[M];mute_type=[MUTE_IC]'><font color='[(muted & MUTE_IC)?"red":"blue"]'>IC</font></a> |
@@ -390,6 +391,9 @@ var/global/floorIsLava = 0
 	if (!istype(src,/datum/admins))
 		to_chat(usr, "Error: you are not an admin!")
 		return
+
+	var/datum/feed_network/torch_network = news_network[1] //temp change until the UI can be updated to support switching networks.
+
 	var/dat
 	dat = text("<HEAD><TITLE>Admin Newscaster</TITLE></HEAD><H3>Admin Newscaster Unit</H3>")
 
@@ -399,7 +403,7 @@ var/global/floorIsLava = 0
 				<BR>Feed channels and stories entered through here will be uneditable and handled as official news by the rest of the units.
 				<BR>Note that this panel allows full freedom over the news network, there are no constrictions except the few basic ones. Don't break things!
 			"}
-			if(news_network.wanted_issue)
+			if(torch_network.wanted_issue)
 				dat+= "<HR><A href='?src=\ref[src];ac_view_wanted=1'>Read Wanted Issue</A>"
 
 			dat+= {"<HR><BR><A href='?src=\ref[src];ac_create_channel=1'>Create Feed Channel</A>
@@ -409,7 +413,7 @@ var/global/floorIsLava = 0
 			"}
 
 			var/wanted_already = 0
-			if(news_network.wanted_issue)
+			if(torch_network.wanted_issue)
 				wanted_already = 1
 
 			dat+={"<HR><B>Feed Security functions:</B><BR>
@@ -420,10 +424,10 @@ var/global/floorIsLava = 0
 			"}
 		if(1)
 			dat+= "Feed Channels<HR>"
-			if( !length(news_network.network_channels) )
+			if( !length(torch_network.network_channels) )
 				dat+="<I>No active channels found...</I>"
 			else
-				for(var/datum/feed_channel/CHANNEL in news_network.network_channels)
+				for(var/datum/feed_channel/CHANNEL in torch_network.network_channels)
 					if(CHANNEL.is_admin_channel)
 						dat+="<B><FONT style='BACKGROUND-COLOR: LightGreen'><A href='?src=\ref[src];ac_show_channel=\ref[CHANNEL]'>[CHANNEL.channel_name]</A></FONT></B><BR>"
 					else
@@ -470,7 +474,7 @@ var/global/floorIsLava = 0
 			if(src.admincaster_feed_channel.channel_name =="" || src.admincaster_feed_channel.channel_name == "\[REDACTED\]")
 				dat+="<FONT COLOR='maroon'>Invalid channel name.</FONT><BR>"
 			var/check = 0
-			for(var/datum/feed_channel/FC in news_network.network_channels)
+			for(var/datum/feed_channel/FC in torch_network.network_channels)
 				if(FC.channel_name == src.admincaster_feed_channel.channel_name)
 					check = 1
 					break
@@ -507,10 +511,10 @@ var/global/floorIsLava = 0
 				Keep in mind that users attempting to view a censored feed will instead see the \[REDACTED\] tag above it.</FONT>
 				<HR>Select Feed channel to get Stories from:<BR>
 			"}
-			if(!length(news_network.network_channels))
+			if(!length(torch_network.network_channels))
 				dat+="<I>No feed channels found active...</I><BR>"
 			else
-				for(var/datum/feed_channel/CHANNEL in news_network.network_channels)
+				for(var/datum/feed_channel/CHANNEL in torch_network.network_channels)
 					dat+="<A href='?src=\ref[src];ac_pick_censor_channel=\ref[CHANNEL]'>[CHANNEL.channel_name]</A> [(CHANNEL.censored) ? ("<FONT COLOR='red'>***</FONT>") : null ]<BR>"
 			dat+="<BR><A href='?src=\ref[src];ac_setScreen=[0]'>Cancel</A>"
 		if(11)
@@ -520,10 +524,10 @@ var/global/floorIsLava = 0
 				morale, integrity or disciplinary behaviour. A D-Notice will render a channel unable to be updated by anyone, without deleting any feed
 				stories it might contain at the time. You can lift a D-Notice if you have the required access at any time.</FONT><HR>
 			"}
-			if(!length(news_network.network_channels))
+			if(!length(torch_network.network_channels))
 				dat+="<I>No feed channels found active...</I><BR>"
 			else
-				for(var/datum/feed_channel/CHANNEL in news_network.network_channels)
+				for(var/datum/feed_channel/CHANNEL in torch_network.network_channels)
 					dat+="<A href='?src=\ref[src];ac_pick_d_notice=\ref[CHANNEL]'>[CHANNEL.channel_name]</A> [(CHANNEL.censored) ? ("<FONT COLOR='red'>***</FONT>") : null ]<BR>"
 
 			dat+="<BR><A href='?src=\ref[src];ac_setScreen=[0]'>Back</A>"
@@ -563,7 +567,7 @@ var/global/floorIsLava = 0
 			dat+="<B>Wanted Issue Handler:</B>"
 			var/wanted_already = 0
 			var/end_param = 1
-			if(news_network.wanted_issue)
+			if(torch_network.wanted_issue)
 				wanted_already = 1
 				end_param = 2
 			if(wanted_already)
@@ -574,7 +578,7 @@ var/global/floorIsLava = 0
 				<A href='?src=\ref[src];ac_set_wanted_desc=1'>Description</A>: [src.admincaster_feed_message.body] <BR>
 			"}
 			if(wanted_already)
-				dat+="<B>Wanted Issue created by:</B><FONT COLOR='green'> [news_network.wanted_issue.backup_author]</FONT><BR>"
+				dat+="<B>Wanted Issue created by:</B><FONT COLOR='green'> [torch_network.wanted_issue.backup_author]</FONT><BR>"
 			else
 				dat+="<B>Wanted Issue will be created under prosecutor:</B><FONT COLOR='green'> [src.admincaster_signature]</FONT><BR>"
 			dat+="<BR><A href='?src=\ref[src];ac_submit_wanted=[end_param]'>[(wanted_already) ? ("Edit Issue") : ("Submit")]</A>"
@@ -600,13 +604,13 @@ var/global/floorIsLava = 0
 			"}
 		if(18)
 			dat+={"
-				<B><FONT COLOR ='maroon'>-- STATIONWIDE WANTED ISSUE --</B></FONT><BR><FONT SIZE=2>\[Submitted by: <FONT COLOR='green'>[news_network.wanted_issue.backup_author]</FONT>\]</FONT><HR>
-				<B>Criminal</B>: [news_network.wanted_issue.author]<BR>
-				<B>Description</B>: [news_network.wanted_issue.body]<BR>
+				<B><FONT COLOR ='maroon'>-- STATIONWIDE WANTED ISSUE --</B></FONT><BR><FONT SIZE=2>\[Submitted by: <FONT COLOR='green'>[torch_network.wanted_issue.backup_author]</FONT>\]</FONT><HR>
+				<B>Criminal</B>: [torch_network.wanted_issue.author]<BR>
+				<B>Description</B>: [torch_network.wanted_issue.body]<BR>
 				<B>Photo:</B>:
 			"}
-			if(news_network.wanted_issue.img)
-				send_rsc(usr, news_network.wanted_issue.img, "tmp_photow.png")
+			if(torch_network.wanted_issue.img)
+				send_rsc(usr, torch_network.wanted_issue.img, "tmp_photow.png")
 				dat+="<BR><img src='tmp_photow.png' width = '180'>"
 			else
 				dat+="None"
@@ -652,7 +656,6 @@ var/global/floorIsLava = 0
 	dat += {"
 		<BR>
 		<A href='?src=\ref[src];create_object=1'>Create Object</A><br>
-		<A href='?src=\ref[src];quick_create_object=1'>Quick Create Object</A><br>
 		<A href='?src=\ref[src];create_turf=1'>Create Turf</A><br>
 		<A href='?src=\ref[src];create_mob=1'>Create Mob</A><br>
 		<br><A href='?src=\ref[src];vsc=airflow'>Edit Airflow Settings</A><br>
@@ -816,10 +819,9 @@ var/global/floorIsLava = 0
 	if(!check_rights(R_ADMIN))
 		return
 
-	//BYOND hates actually changing world.visibility at runtime, so let's just change if we give it the hub password.
-	world.update_hub_visibility() //proc defined in hub.dm
-	var/long_message = "toggled hub visibility. The server is now [GLOB.visibility_pref ? "visible" : "invisible"] ([GLOB.visibility_pref])."
-	if (GLOB.visibility_pref && !world.reachable)
+	world.update_hub_visibility(TRUE)
+	var/long_message = "Updated hub visibility. The server is now [config.hub_visible ? "visible" : "invisible"]."
+	if (config.hub_visible && !world.reachable)
 		message_admins("WARNING: The server will not show up on the hub because byond is detecting that a firewall is blocking incoming connections.")
 
 	send2adminirc("[key_name(src)]" + long_message)
@@ -1104,6 +1106,49 @@ var/global/floorIsLava = 0
 	log_and_message_admins("spawned [chosen] at ([usr.x],[usr.y],[usr.z])")
 	SSstatistics.add_field_details("admin_verb","SA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+/datum/admins/proc/spawn_artifact(effect in subtypesof(/datum/artifact_effect))
+	set category = "Debug"
+	set desc = "(atom path) Spawn an artifact with a specified effect."
+	set name = "Spawn Artifact"
+
+	if (!check_rights(R_SPAWN))
+		return
+
+	var/obj/machinery/artifact/A
+	var/datum/artifact_trigger/primary_trigger
+
+	var/datum/artifact_effect/secondary_effect
+	var/datum/artifact_trigger/secondary_trigger
+
+	if (ispath(effect))
+		primary_trigger = input(usr, "Choose a trigger", "Choose a trigger") as null | anything in subtypesof(/datum/artifact_trigger)
+
+		if (!ispath(primary_trigger))
+			return
+
+		var/choice = alert(usr, "Secondary effect?", "Secondary effect", "Yes", "No") == "Yes"
+
+		if (choice)
+			secondary_effect = input(usr, "Choose an effect", "Choose effect") as null | anything in subtypesof(/datum/artifact_effect)
+
+			if (!ispath(secondary_effect))
+				return
+
+			secondary_trigger = input(usr, "Choose a trigger", "Choose a trigger") as null | anything in subtypesof(/datum/artifact_trigger)
+
+			if (!ispath(secondary_trigger))
+				return
+
+
+		A = new(usr.loc)
+		A.my_effect = new effect(A)
+		A.my_effect.trigger = new primary_trigger(A.my_effect)
+
+		if (secondary_effect)
+			A.secondary_effect = new secondary_effect
+			A.secondary_effect.trigger = new secondary_trigger
+		else
+			QDEL_NULL(A.secondary_effect)
 
 /datum/admins/proc/show_traitor_panel(var/mob/M in SSmobs.mob_list)
 	set category = "Admin"
@@ -1385,7 +1430,7 @@ var/global/floorIsLava = 0
 	log_and_message_admins("attempting to force mode autospawn.")
 	SSticker.mode.process_autoantag()
 
-/datum/admins/proc/paralyze_mob(mob/H as mob in GLOB.player_list)
+/datum/admins/proc/paralyze_mob(mob/living/H as mob in GLOB.player_list)
 	set category = null
 	set name = "Toggle Paralyze"
 	set desc = "Toggles paralyze state, which stuns, blinds and mutes the victim."
@@ -1396,13 +1441,19 @@ var/global/floorIsLava = 0
 		return
 
 	if(check_rights(R_INVESTIGATE))
-		if (H.paralysis == 0)
+		if (!H.admin_paralyzed)
 			H.paralysis = 8000
+			H.admin_paralyzed = TRUE
 			msg = "has paralyzed [key_name(H)]."
+			H.visible_message(SPAN_DEBUG("OOC: \The [H] has been paralyzed by a staff member. Please hold all interactions with them until staff have finished with them."))
+			to_chat(H, SPAN_DEBUG("OOC: You have been paralyzed by a staff member. Please refer to your currently open admin help ticket or, if you don't have one, admin help for assistance."))
 		else
 			H.paralysis = 0
+			H.admin_paralyzed = FALSE
 			msg = "has unparalyzed [key_name(H)]."
-		log_and_message_admins(msg)
+			H.visible_message(SPAN_DEBUG("OOC: \The [H] has been released from paralysis by staff. You may resume interactions with them."))
+			to_chat(H, SPAN_DEBUG("OOC: You have been released from paralysis by staff and can return to your game."))
+		log_and_message_staff(msg)
 
 
 /datum/admins/proc/sendFax()
@@ -1421,7 +1472,7 @@ var/global/floorIsLava = 0
 
 			var/replyorigin = input(src.owner, "Please specify who the fax is coming from", "Origin") as text|null
 
-			var/obj/item/weapon/paper/admin/P = new /obj/item/weapon/paper/admin( null ) //hopefully the null loc won't cause trouble for us
+			var/obj/item/paper/admin/P = new /obj/item/paper/admin( null ) //hopefully the null loc won't cause trouble for us
 			faxreply = P
 
 			P.admindatum = src
@@ -1445,9 +1496,9 @@ var/global/floorIsLava = 0
 		data += "<center>No faxes yet.</center>"
 	show_browser(usr, "<HTML><HEAD><TITLE>Fax History</TITLE></HEAD><BODY>[data]</BODY></HTML>", "window=FaxHistory;size=450x400")
 
-datum/admins/var/obj/item/weapon/paper/admin/faxreply // var to hold fax replies in
+datum/admins/var/obj/item/paper/admin/faxreply // var to hold fax replies in
 
-/datum/admins/proc/faxCallback(var/obj/item/weapon/paper/admin/P, var/obj/machinery/photocopier/faxmachine/destination)
+/datum/admins/proc/faxCallback(var/obj/item/paper/admin/P, var/obj/machinery/photocopier/faxmachine/destination)
 	var/customname = input(src.owner, "Pick a title for the report", "Title") as text|null
 
 	P.SetName("[P.origin] - [customname]")
@@ -1479,7 +1530,7 @@ datum/admins/var/obj/item/weapon/paper/admin/faxreply // var to hold fax replies
 
 		if(!P.stamped)
 			P.stamped = new
-		P.stamped += /obj/item/weapon/stamp/boss
+		P.stamped += /obj/item/stamp/boss
 		P.overlays += stampoverlay
 
 	var/obj/item/rcvdcopy

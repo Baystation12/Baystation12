@@ -11,15 +11,15 @@
 	name = "Washing Machine"
 	icon = 'icons/obj/machines/washing_machine.dmi'
 	icon_state = "wm_00"
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
 	var/state = 0
 	var/gibs_ready = 0
 	var/obj/crayon
-	var/obj/item/weapon/reagent_containers/pill/detergent/detergent
+	var/obj/item/reagent_containers/pill/detergent/detergent
 	obj_flags = OBJ_FLAG_ANCHORABLE
 	clicksound = "button"
 	clickvol = 40
@@ -27,6 +27,9 @@
 	// Power
 	idle_power_usage = 10
 	active_power_usage = 150
+	
+	machine_name = "washing machine"
+	machine_desc = "Uses detergent and water to get your clothes minty fresh. Good for those pesky bloodstains! Also decontaminates clothing that has been exposed to toxic elements, as long as detergent is used in the washing process."
 
 /obj/machinery/washing_machine/Destroy()
 	QDEL_NULL(crayon)
@@ -124,19 +127,19 @@
 /obj/machinery/washing_machine/components_are_accessible(path)
 	return !(state & WASHER_STATE_RUNNING) && ..()
 
-/obj/machinery/washing_machine/attackby(obj/item/weapon/W, mob/user)
+/obj/machinery/washing_machine/attackby(obj/item/W, mob/user)
 	if(!(state & WASHER_STATE_CLOSED))
-		if(!crayon && istype(W,/obj/item/weapon/pen/crayon))
+		if(!crayon && istype(W,/obj/item/pen/crayon))
 			if(!user.unEquip(W, src))
 				return
 			crayon = W
 			return TRUE
-		if(!detergent && istype(W,/obj/item/weapon/reagent_containers/pill/detergent))
+		if(!detergent && istype(W,/obj/item/reagent_containers/pill/detergent))
 			if(!user.unEquip(W, src))
 				return
 			detergent = W
 			return TRUE
-	if(istype(W, /obj/item/weapon/holder)) // Mob holder
+	if(istype(W, /obj/item/holder)) // Mob holder
 		for(var/mob/living/doggy in W)
 			doggy.forceMove(src)
 		qdel(W)
@@ -151,7 +154,7 @@
 		istype(W,/obj/item/clothing/gloves) || \
 		istype(W,/obj/item/clothing/shoes)  || \
 		istype(W,/obj/item/clothing/suit)   || \
-		istype(W,/obj/item/weapon/bedsheet) || \
+		istype(W,/obj/item/bedsheet) || \
 		istype(W,/obj/item/underwear/))
 
 		//YES, it's hardcoded... saves a var/can_be_washed for every single clothing item.

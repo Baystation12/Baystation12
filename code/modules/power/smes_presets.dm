@@ -22,3 +22,14 @@
 	output_attempt = _output_on
 	if(_fully_charged)
 		charge = capacity
+
+/obj/machinery/power/smes/buildable/preset/admin
+	uncreated_component_parts = list(
+		/obj/item/stock_parts/smes_coil/advanced = 4
+	)
+	_input_maxed = TRUE
+	_output_maxed = TRUE
+	_input_on = TRUE
+	_output_on = TRUE
+	_fully_charged = TRUE
+	

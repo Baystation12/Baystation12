@@ -1,7 +1,7 @@
 // CPU that allows the computer to run programs.
 // Better CPUs are obtainable via research and can run more programs on background.
 
-/obj/item/weapon/stock_parts/computer/processor_unit
+/obj/item/stock_parts/computer/processor_unit
 	name = "standard processor"
 	desc = "A standard CPU used in most computers."
 	icon_state = "cpu_normal"
@@ -13,7 +13,7 @@
 
 	var/processing_power = 2 // Used for DDoS speed calculations
 
-/obj/item/weapon/stock_parts/computer/processor_unit/small
+/obj/item/stock_parts/computer/processor_unit/small
 	name = "standard microprocessor"
 	desc = "A standard miniaturised CPU used in portable devices. It can run up to two programs simultaneously."
 	icon_state = "cpu_small"
@@ -22,7 +22,7 @@
 	processing_power = 1
 	origin_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
 
-/obj/item/weapon/stock_parts/computer/processor_unit/photonic
+/obj/item/stock_parts/computer/processor_unit/photonic
 	name = "photonic processor"
 	desc = "An advanced experimental CPU that uses photonic core instead of regular circuitry. It is more power efficient than its elecron analog."
 	icon_state = "cpu_normal_photonic"
@@ -31,7 +31,7 @@
 	processing_power = 4
 	origin_tech = list(TECH_DATA = 5, TECH_ENGINEERING = 4)
 
-/obj/item/weapon/stock_parts/computer/processor_unit/photonic/small
+/obj/item/stock_parts/computer/processor_unit/photonic/small
 	name = "photonic microprocessor"
 	desc = "An advanced miniaturised CPU for use in portable devices. It uses photonic core instead of regular circuitry. It is more power efficient than its elecron analog."
 	icon_state = "cpu_small_photonic"

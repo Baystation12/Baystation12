@@ -1,6 +1,6 @@
 /obj/machinery/embedded_controller
 	name = "Embedded Controller"
-	anchored = 1
+	anchored = TRUE
 	idle_power_usage = 10
 	var/datum/computer/file/embedded_program/program	//the currently executing program
 	var/on = 1
@@ -47,8 +47,8 @@
 	icon = 'icons/obj/airlock_machines.dmi'
 	icon_state = "airlock_control_off"
 	power_channel = ENVIRON
-	density = 0
-	unacidable = 1
+	density = FALSE
+	unacidable = TRUE
 	var/frequency = 1379
 	var/radio_filter = null
 	var/datum/radio_frequency/radio_connection

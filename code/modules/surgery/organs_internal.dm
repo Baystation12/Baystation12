@@ -17,7 +17,7 @@
 	allowed_tools = list(
 		/obj/item/stack/medical/advanced/bruise_pack = 100,
 		/obj/item/stack/medical/bruise_pack = 40,
-		/obj/item/weapon/tape_roll = 20
+		/obj/item/tape_roll = 20
 	)
 	min_duration = 70
 	max_duration = 90
@@ -87,8 +87,8 @@
 /decl/surgery_step/internal/detatch_organ
 	name = "Detach organ"
 	allowed_tools = list(
-		/obj/item/weapon/scalpel = 100,
-		/obj/item/weapon/material/shard = 50
+		/obj/item/scalpel = 100,
+		/obj/item/material/shard = 50
 	)
 	min_duration = 90
 	max_duration = 110
@@ -136,10 +136,10 @@
 /decl/surgery_step/internal/remove_organ
 	name = "Remove internal organ"
 	allowed_tools = list(
-		/obj/item/weapon/hemostat = 100,
-		/obj/item/weapon/wirecutters = 75,
-		/obj/item/weapon/material/knife = 75,
-		/obj/item/weapon/material/kitchen/utensil/fork = 20
+		/obj/item/hemostat = 100,
+		/obj/item/wirecutters = 75,
+		/obj/item/material/knife = 75,
+		/obj/item/material/kitchen/utensil/fork = 20
 	)
 	min_duration = 60
 	max_duration = 80
@@ -294,9 +294,9 @@
 /decl/surgery_step/internal/attach_organ
 	name = "Attach internal organ"
 	allowed_tools = list(
-		/obj/item/weapon/FixOVein = 100,
+		/obj/item/FixOVein = 100,
 		/obj/item/stack/cable_coil = 75,
-		/obj/item/weapon/tape_roll = 50
+		/obj/item/tape_roll = 50
 	)
 	min_duration = 100
 	max_duration = 120
@@ -380,11 +380,11 @@
 /decl/surgery_step/internal/treat_necrosis
 	name = "Treat necrosis"
 	allowed_tools = list(
-		/obj/item/weapon/reagent_containers/dropper = 100,
-		/obj/item/weapon/reagent_containers/glass/bottle = 75,
-		/obj/item/weapon/reagent_containers/glass/beaker = 75,
-		/obj/item/weapon/reagent_containers/spray = 50,
-		/obj/item/weapon/reagent_containers/glass/bucket = 50,
+		/obj/item/reagent_containers/dropper = 100,
+		/obj/item/reagent_containers/glass/bottle = 75,
+		/obj/item/reagent_containers/glass/beaker = 75,
+		/obj/item/reagent_containers/spray = 50,
+		/obj/item/reagent_containers/glass/bucket = 50,
 	)
 
 	can_infect = 0
@@ -394,7 +394,7 @@
 	max_duration = 60
 
 /decl/surgery_step/internal/treat_necrosis/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	var/obj/item/weapon/reagent_containers/container = tool
+	var/obj/item/reagent_containers/container = tool
 	if(!istype(container) || !container.reagents.has_reagent(/datum/reagent/peridaxon) || !..())
 		return FALSE
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -425,7 +425,7 @@
 
 /decl/surgery_step/internal/treat_necrosis/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/internal/affected = LAZYACCESS(target.surgeries_in_progress, target_zone)
-	var/obj/item/weapon/reagent_containers/container = tool
+	var/obj/item/reagent_containers/container = tool
 
 	var/amount = container.amount_per_transfer_from_this
 	var/datum/reagents/temp_reagents = new(amount, GLOB.temp_reagents_holder)
@@ -447,10 +447,10 @@
 /decl/surgery_step/internal/treat_necrosis/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 
-	if (!istype(tool, /obj/item/weapon/reagent_containers))
+	if (!istype(tool, /obj/item/reagent_containers))
 		return
 
-	var/obj/item/weapon/reagent_containers/container = tool
+	var/obj/item/reagent_containers/container = tool
 
 	var/trans = container.reagents.trans_to_mob(target, container.amount_per_transfer_from_this, CHEM_BLOOD)
 

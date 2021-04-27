@@ -1,8 +1,11 @@
 ## Server name: This appears at the top of the screen in-game. In this case it will read "tgstation: station_name" where station_name is the randomly generated name of the station for the round. Remove the # infront of SERVERNAME and replace 'tgstation' with the name of your choice
 # SERVERNAME spacestation13
 
+## Game Version: The archetype of the server for topic status requests. Unless significantly deviated, avoid changing this. Default Baystation12
+# GAME_VERSION Baystation12
+
 ## Hub visibility: If you want to be visible on the hub, uncomment the below line and be sure that Dream Daemon is set to "Visible." This can be changed in-round as well with toggle-hub-visibility if Dream Daemon is set correctly.
-# HUB
+# HUB_VISIBLE
 
 ## Add a # infront of this if you want to use the SQL based admin system, the legacy system uses admins.txt. You need to set up your database to use the SQL based system.
 ADMIN_LEGACY_SYSTEM
@@ -127,11 +130,13 @@ VOTE_DELAY 6000
 ## time period (deciseconds) which voting session will last (default 1 minute)
 VOTE_PERIOD 600
 
-## autovote initial delay (deciseconds) before first automatic transfer vote call (default 180 minutes)
-VOTE_AUTOTRANSFER_INITIAL 108000
+## autovote initial delay in minutes before first automatic transfer vote call (default 120)
+# using seven semicolon (;) separated values allows for different weekday-based values
+VOTE_AUTOTRANSFER_INITIAL 120
 
-##autovote delay (deciseconds) before sequential automatic transfer votes are called (default 30 minutes)
-VOTE_AUTOTRANSFER_INTERVAL 18000
+##autovote delay in minutes before sequential automatic transfer votes are called (default 30)
+# using seven semicolon (;) separated values allows for different weekday-based values
+VOTE_AUTOTRANSFER_INTERVAL 30
 
 ## Time left (seconds) before round start when automatic gamemote vote is called (default 160).
 VOTE_AUTOGAMEMODE_TIMELEFT 160
@@ -312,7 +317,8 @@ STARLIGHT 0
 ## Enable asteroid tunnel/cave generation. Will behave strangely if turned off with a map that expects it on.
 # GENERATE_ASTEROID
 
-
+## Set a value for the maximum range in tiles of an explosion from its center. Default 14
+# MAX_EXPLOSION_RANGE 14
 
 ## Uncomment to enable organ decay outside of a body or storage item.
 #ORGANS_CAN_DECAY
@@ -370,10 +376,10 @@ RADIATION_LOWER_LIMIT 0.15
 #MAX_ACTS_PER_INTERVAL 140
 
 ##Clients will be unable to connect unless their version is equal to or higher than this (a number, e.g. 511)
-#MINIMUM_BYOND_VERSION
+#MINIMUM_BYOND_VERSION 512
 
 ## Clients will be unable to connect unless their build is equal to or higher than this (a number, e.g. 1000)
-#MINIMUM_BYOND_BUILD
+#MINIMUM_BYOND_BUILD 1488
 
 ## Uncomment or create lines to add user-accessible chat markup
 ## A chat markup line is in the form regex;replacer. The regular expression should be in the common

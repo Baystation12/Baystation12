@@ -160,7 +160,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 		to_chat(src, "<span class='warning'>[T] is not compatible with our biology.</span>")
 		return
 
-	if(T.species.species_flags & SPECIES_FLAG_NO_SCAN)
+	if((T.species.species_flags & SPECIES_FLAG_NO_SCAN) || T.isSynthetic())
 		to_chat(src, "<span class='warning'>We cannot extract DNA from this creature!</span>")
 		return
 
@@ -373,7 +373,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	C.dna = chosen_dna.Clone()
 
 	var/list/implants = list()
-	for (var/obj/item/weapon/implant/I in C) //Still preserving implants
+	for (var/obj/item/implant/I in C) //Still preserving implants
 		implants += I
 
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(C)
@@ -411,7 +411,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	O.setOxyLoss(C.getOxyLoss())
 	O.adjustFireLoss(C.getFireLoss())
 	O.set_stat(C.stat)
-	for (var/obj/item/weapon/implant/I in implants)
+	for (var/obj/item/implant/I in implants)
 		I.forceMove(O)
 		I.implanted = O
 
@@ -696,7 +696,7 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	return 1
 
 //Handles the general sting code to reduce on copypasta (seeming as somebody decided to make SO MANY dumb abilities)
-/mob/proc/changeling_sting(var/required_chems=0, var/verb_path, var/loud)
+/mob/proc/changeling_sting(var/required_chems=0, var/verb_path, var/loud, sting_name = "unnamed sting")
 	var/datum/changeling/changeling = changeling_power(required_chems)
 	if(!changeling)								return
 
@@ -721,6 +721,7 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 		to_chat(src, "<span class='notice'>We stealthily sting [T].</span>")
 	else
 		visible_message("<span class='danger'>[src] fires an organic shard into [T]!</span>")
+	admin_attack_log(src, T, "Stung their victim using [sting_name]", "Was stung using [sting_name]", "stung using [sting_name]")
 
 	for(var/obj/item/clothing/clothes in list(T.head, T.wear_mask, T.wear_suit, T.w_uniform, T.gloves, T.shoes))
 		if(istype(clothes) && (clothes.body_parts_covered & target_limb.body_part) && (clothes.item_flags & ITEM_FLAG_THICKMATERIAL))
@@ -738,7 +739,7 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	set name = "Hallucination Sting (15)"
 	set desc = "Causes terror in the target."
 
-	var/mob/living/carbon/human/T = changeling_sting(15,/mob/proc/changeling_lsdsting)
+	var/mob/living/carbon/human/T = changeling_sting(15, /mob/proc/changeling_lsdsting, sting_name = "Hallucination Sting")
 	if(!T)	return 0
 	spawn(rand(300,600))
 		if(T)	T.hallucination(400, 80)
@@ -750,7 +751,7 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	set name = "Silence sting (10)"
 	set desc="Sting target"
 
-	var/mob/living/carbon/human/T = changeling_sting(10,/mob/proc/changeling_silence_sting)
+	var/mob/living/carbon/human/T = changeling_sting(10,/mob/proc/changeling_silence_sting, sting_name = "Silence Sting")
 	if(!T)	return 0
 	T.silent += 30
 	SSstatistics.add_field_details("changeling_powers","SS")
@@ -761,7 +762,7 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	set name = "Blind sting (20)"
 	set desc="Sting target"
 
-	var/mob/living/carbon/human/T = changeling_sting(20,/mob/proc/changeling_blind_sting)
+	var/mob/living/carbon/human/T = changeling_sting(20,/mob/proc/changeling_blind_sting, sting_name = "Blind Sting")
 	if(!T)	return 0
 	to_chat(T, "<span class='danger'>Your eyes burn horrificly!</span>")
 	T.disabilities |= NEARSIGHTED
@@ -776,7 +777,7 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	set name = "Deaf sting (5)"
 	set desc="Sting target:"
 
-	var/mob/living/carbon/human/T = changeling_sting(5,/mob/proc/changeling_deaf_sting)
+	var/mob/living/carbon/human/T = changeling_sting(5,/mob/proc/changeling_deaf_sting, sting_name = "Deaf Sting")
 	if(!T)	return 0
 	to_chat(T, "<span class='danger'>Your ears pop and begin ringing loudly!</span>")
 	T.ear_deaf += 15
@@ -789,7 +790,7 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	set desc = "Causes spasms onto death."
 	var/loud = 1
 
-	var/mob/living/carbon/human/T = changeling_sting(40,/mob/proc/changeling_DEATHsting,loud)
+	var/mob/living/carbon/human/T = changeling_sting(40,/mob/proc/changeling_DEATHsting,loud, sting_name = "Death Sting")
 	if(!T)	return 0
 	to_chat(T, "<span class='danger'>You feel a small prick and your chest becomes tight.</span>")
 	T.make_jittery(400)
@@ -808,7 +809,7 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	if(!changeling)
 		return 0
 
-	var/mob/living/carbon/human/T = changeling_sting(40, /mob/proc/changeling_extract_dna_sting)
+	var/mob/living/carbon/human/T = changeling_sting(40, /mob/proc/changeling_extract_dna_sting, sting_name = "Extract DNA Sting")
 	if(!T)	return 0
 	if((MUTATION_HUSK in T.mutations) || (T.species.species_flags & SPECIES_FLAG_NO_SCAN))
 		to_chat(src, "<span class='warning'>We cannot extract DNA from this creature!</span>")

@@ -5,8 +5,7 @@
 	damage = 50
 	damage_type = BRUTE
 	damage_flags = DAM_BULLET | DAM_SHARP
-	nodamage = 0
-	embed = 1
+	embed = TRUE
 	penetration_modifier = 1.0
 	var/mob_passthrough_check = 0
 
@@ -142,7 +141,7 @@
 	damage_flags = 0
 	damage = 5
 	agony = 30
-	embed = 0
+	embed = FALSE
 
 /obj/item/projectile/bullet/pistol/rubber/holdout
 	agony = 20
@@ -153,7 +152,7 @@
 	damage = 23
 	penetrating = 1
 	armor_penetration = 70
-	embed = 0
+	embed = FALSE
 	distance_falloff = 2
 
 /* shotgun projectiles */
@@ -169,7 +168,7 @@
 	damage = 25
 	damage_flags = 0
 	agony = 60
-	embed = 0
+	embed = FALSE
 	armor_penetration = 0
 	distance_falloff = 3
 
@@ -231,7 +230,7 @@
 /obj/item/projectile/bullet/blank
 	invisibility = 101
 	damage = 1
-	embed = 0
+	embed = FALSE
 
 /* Practice */
 
@@ -252,8 +251,8 @@
 	damage_type = PAIN
 	damage_flags = 0
 	damage = 0
-	nodamage = 1
-	embed = 0
+	nodamage = TRUE
+	embed = FALSE
 
 /obj/item/projectile/bullet/pistol/cap/Process()
 	qdel(src)

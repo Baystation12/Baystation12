@@ -20,11 +20,12 @@
 	response_help = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm = "stamps on"
-	density = 0
+	density = FALSE
 	minbodytemp = 223
 	maxbodytemp = 323
 	universal_speak = FALSE
 	universal_understand = TRUE
+	holder_type = /obj/item/holder/possum
 	mob_size = MOB_SMALL
 	possession_candidate = 1
 	can_escape = TRUE
@@ -92,7 +93,11 @@
 /mob/living/simple_animal/opossum/poppy
 	name = "Poppy the Safety Possum"
 	desc = "It's an opossum, a small scavenging marsupial. It's wearing appropriate personal protective equipment, though."
-	icon = 'icons/mob/simple_animal/poppy_possum.dmi'
+	icon_state = "poppy"
+	item_state = "poppy"
+	icon_living = "poppy"
+	icon_dead = "poppy_dead"
+	holder_type = /obj/item/holder/possum/poppy
 	var/aaa_words = list("delaminat", "meteor", "fire", "breach")
 
 /mob/living/simple_animal/opossum/poppy/hear_broadcast(datum/language/language, mob/speaker, speaker_name, message)

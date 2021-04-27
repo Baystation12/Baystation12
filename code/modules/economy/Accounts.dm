@@ -53,7 +53,7 @@
 	var/datum/transaction/singular/T = new(M, (source_db ? source_db.machine_id : "NTGalaxyNet Terminal #[rand(111,1111)]"), starting_funds, "Account creation")
 	if(!source_db)
 		//set a random date, time and location some time over the past few decades
-		T.date = "[num2text(rand(1,31))] [pick("January","February","March","April","May","June","July","August","September","October","November","December")], [game_year-rand(8,18)]"
+		T.date = "[num2text(rand(1, 31))] [pick("January","February","March","April","May","June","July","August","September","October","November","December")], [GLOB.using_map.game_year-rand(8, 18)]"
 		T.time = "[rand(0,24)]:[rand(11,59)]"
 
 		M.account_number = random_id("station_account_number", 111111, 999999)
@@ -64,7 +64,7 @@
 		//create a sealed package containing the account details
 		var/obj/item/smallDelivery/P = new /obj/item/smallDelivery(source_db.loc)
 
-		var/obj/item/weapon/paper/R = new /obj/item/weapon/paper(P)
+		var/obj/item/paper/R = new /obj/item/paper(P)
 		P.wrapped = R
 		R.SetName("Account information: [M.account_name]")
 		R.info = "<b>Account details (confidential)</b><br><hr><br>"
@@ -81,7 +81,7 @@
 		stampoverlay.icon_state = "paper_stamp-boss"
 		if(!R.stamped)
 			R.stamped = new
-		R.stamped += /obj/item/weapon/stamp
+		R.stamped += /obj/item/stamp
 		R.overlays += stampoverlay
 		R.stamps += "<HR><i>This paper has been stamped by the Accounts Database.</i>"
 

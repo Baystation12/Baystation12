@@ -45,6 +45,9 @@
 /datum/goal/proc/check_success()
 	return TRUE
 
+/datum/goal/proc/try_initialize()
+	return TRUE
+
 /datum/goal/proc/on_completion()
 	if(completion_message && check_success())
 		if(istype(owner, /datum/mind))

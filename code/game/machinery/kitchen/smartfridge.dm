@@ -6,8 +6,8 @@
 	icon = 'icons/obj/vending.dmi'
 	icon_state = "fridge_sci"
 	layer = BELOW_OBJ_LAYER
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	idle_power_usage = 5
 	active_power_usage = 100
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT
@@ -46,7 +46,7 @@
 	return ..()
 
 /obj/machinery/smartfridge/proc/accept_check(var/obj/item/O as obj)
-	if(istype(O,/obj/item/weapon/reagent_containers/food/snacks/grown/) || istype(O,/obj/item/seeds/))
+	if(istype(O,/obj/item/reagent_containers/food/snacks/grown/) || istype(O,/obj/item/seeds/))
 		return 1
 	return 0
 
@@ -77,11 +77,11 @@
 	req_access = list(list(access_medical,access_chemistry))
 
 /obj/machinery/smartfridge/secure/medbay/accept_check(var/obj/item/O as obj)
-	if(istype(O,/obj/item/weapon/reagent_containers/glass/))
+	if(istype(O,/obj/item/reagent_containers/glass/))
 		return 1
-	if(istype(O,/obj/item/weapon/storage/pill_bottle/))
+	if(istype(O,/obj/item/storage/pill_bottle/))
 		return 1
-	if(istype(O,/obj/item/weapon/reagent_containers/pill/))
+	if(istype(O,/obj/item/reagent_containers/pill/))
 		return 1
 	return 0
 
@@ -92,7 +92,7 @@
 	icon_contents = "chem"
 
 /obj/machinery/smartfridge/secure/virology/accept_check(var/obj/item/O as obj)
-	if(istype(O,/obj/item/weapon/reagent_containers/glass/beaker/vial/))
+	if(istype(O,/obj/item/reagent_containers/glass/beaker/vial/))
 		return 1
 	return 0
 
@@ -102,7 +102,7 @@
 	icon_contents = "chem"
 
 /obj/machinery/smartfridge/chemistry/accept_check(var/obj/item/O as obj)
-	if(istype(O,/obj/item/weapon/storage/pill_bottle) || istype(O,/obj/item/weapon/reagent_containers))
+	if(istype(O,/obj/item/storage/pill_bottle) || istype(O,/obj/item/reagent_containers))
 		return 1
 	return 0
 
@@ -119,7 +119,7 @@
 	icon_contents = "drink"
 
 /obj/machinery/smartfridge/drinks/accept_check(var/obj/item/O as obj)
-	if(istype(O,/obj/item/weapon/reagent_containers/glass) || istype(O,/obj/item/weapon/reagent_containers/food/drinks) || istype(O,/obj/item/weapon/reagent_containers/food/condiment))
+	if(istype(O,/obj/item/reagent_containers/glass) || istype(O,/obj/item/reagent_containers/food/drinks) || istype(O,/obj/item/reagent_containers/food/condiment))
 		return 1
 
 /obj/machinery/smartfridge/foods
@@ -130,7 +130,7 @@
 	icon_contents = "food"
 
 /obj/machinery/smartfridge/foods/accept_check(var/obj/item/O as obj)
-	if(istype(O,/obj/item/weapon/reagent_containers/food/snacks) || istype(O,/obj/item/weapon/material/kitchen/utensil))
+	if(istype(O,/obj/item/reagent_containers/food/snacks) || istype(O,/obj/item/material/kitchen/utensil))
 		return 1
 
 /obj/machinery/smartfridge/drying_rack
@@ -139,8 +139,8 @@
 	icon_state = "drying_rack"
 
 /obj/machinery/smartfridge/drying_rack/accept_check(var/obj/item/O as obj)
-	if(istype(O, /obj/item/weapon/reagent_containers/food/snacks/))
-		var/obj/item/weapon/reagent_containers/food/snacks/S = O
+	if(istype(O, /obj/item/reagent_containers/food/snacks/))
+		var/obj/item/reagent_containers/food/snacks/S = O
 		return S.dried_type
 	else if(istype(O, /obj/item/stack/material))
 		var/obj/item/stack/material/mat = O
@@ -174,8 +174,8 @@
 	for(var/datum/stored_items/I in item_records)
 		for(var/thing in I.instances)
 			var/remove_thing = FALSE
-			if(istype(thing, /obj/item/weapon/reagent_containers/food/snacks))
-				var/obj/item/weapon/reagent_containers/food/snacks/S = thing
+			if(istype(thing, /obj/item/reagent_containers/food/snacks))
+				var/obj/item/reagent_containers/food/snacks/S = thing
 				if(S.dry || !I.get_specific_product(get_turf(src), S))
 					continue
 				if(S.dried_type == S.type)
@@ -282,8 +282,8 @@
 		user.visible_message("<span class='notice'>\The [user] has added \the [O] to \the [src].</span>", "<span class='notice'>You add \the [O] to \the [src].</span>")
 		update_icon()
 
-	else if(istype(O, /obj/item/weapon/storage))
-		var/obj/item/weapon/storage/bag/P = O
+	else if(istype(O, /obj/item/storage))
+		var/obj/item/storage/bag/P = O
 		var/plants_loaded = 0
 		for(var/obj/G in P.contents)
 			if(accept_check(G) && P.remove_from_storage(G, src, 1))
@@ -306,7 +306,7 @@
 
 /obj/machinery/smartfridge/secure/emag_act(var/remaining_charges, var/mob/user)
 	if(!emagged)
-		emagged = 1
+		emagged = TRUE
 		locked = -1
 		req_access.Cut()
 		to_chat(user, "You short out the product lock on [src].")

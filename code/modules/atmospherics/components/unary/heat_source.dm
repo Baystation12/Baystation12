@@ -6,14 +6,17 @@
 	desc = "Heats gas when connected to a pipe network."
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "heater_0"
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	use_power = POWER_USE_OFF
 	idle_power_usage = 5			//5 Watts for thermostat related circuitry
 	base_type = /obj/machinery/atmospherics/unary/heater
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	
+	machine_name = "gas heating system"
+	machine_desc = "While active, this machine increases the temperature of a connected gas line to the configured amount. Gas pressure increases with heat."
 
 	var/max_temperature = T20C + 680
 	var/internal_volume = 600	//L
@@ -131,8 +134,8 @@
 //upgrading parts
 /obj/machinery/atmospherics/unary/heater/RefreshParts()
 	..()
-	var/cap_rating = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor), 1, 20)
-	var/bin_rating = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin), 0, 10)
+	var/cap_rating = Clamp(total_component_rating_of_type(/obj/item/stock_parts/capacitor), 1, 20)
+	var/bin_rating = Clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 0, 10)
 
 	max_power_rating = initial(max_power_rating) * cap_rating / 2
 	max_temperature = max(initial(max_temperature) - T20C, 0) * ((bin_rating * 4 + cap_rating) / 5) + T20C

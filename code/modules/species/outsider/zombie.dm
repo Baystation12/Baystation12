@@ -39,8 +39,7 @@ GLOBAL_LIST_INIT(zombie_messages, list(
 GLOBAL_LIST_INIT(zombie_species, list(\
 	SPECIES_HUMAN, SPECIES_DIONA, SPECIES_UNATHI, SPECIES_VOX, SPECIES_VOX_ARMALIS,\
 	SPECIES_SKRELL, SPECIES_PROMETHEAN, SPECIES_ALIEN, SPECIES_YEOSA, SPECIES_VATGROWN,\
-	SPECIES_SPACER, SPECIES_TRITONIAN, SPECIES_GRAVWORLDER, SPECIES_MULE, SPECIES_BOOSTER,\
-	SPECIES_MONKEY
+	SPECIES_SPACER, SPECIES_TRITONIAN, SPECIES_GRAVWORLDER, SPECIES_MULE, SPECIES_MONKEY
 ))
 
 
@@ -384,6 +383,9 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 	adjustBruteLoss(100)
 	sleep(150)
 
+	if (QDELETED(src))
+		return
+
 	if (isspecies(src, SPECIES_ZOMBIE)) //Check again otherwise Consume can run this twice at once
 		return
 
@@ -517,11 +519,11 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 //// Zombie Atoms
 
 
-/obj/item/weapon/reagent_containers/syringe/zombie
+/obj/item/reagent_containers/syringe/zombie
 	name = "Syringe (unknown serum)"
 	desc = "Contains a strange, crimson substance."
 
-/obj/item/weapon/reagent_containers/syringe/zombie/Initialize()
+/obj/item/reagent_containers/syringe/zombie/Initialize()
 	..()
 	reagents.add_reagent(/datum/reagent/zombie, 15)
 	mode = SYRINGE_INJECT

@@ -10,13 +10,15 @@
 		"Charon" = list("nav_hangar_calypso"), 	//can't have random shuttles popping inside the ship
 		"Guppy" = list("nav_hangar_guppy"),
 		"Aquila" = list("nav_hangar_aquila"),
-		"Trichoptera" = list("nav_trichoptera_altdock"), //restricts Trichoptera specific docking waypoint on deck 4 portside
+		"Ascent Caulship" = list("nav_ascent_caulship_torch"), //restricts caulship specific docking waypoint on deck 4 starboard side
 		"Skrellian Scout" = list("nav_skrellscout_dock"), //restricts Skrell Scoutship specific docking waypoint on deck 4 portside
+		"Skrellian Shuttle" = list("nav_skrellscoutsh_altdock"),
 		"Rescue" = list("nav_ert_dock"), //restricts ERT Shuttle specific docking waypoint on deck 4 portside
 		"ITV The Reclaimer" = list("nav_hangar_gantry_torch"), //gantry shuttles
 		"ITV Vulcan" = list("nav_hangar_gantry_torch_two"),
 		"ITV Spiritus" = list("nav_hangar_gantry_torch_three"),
 		"SRV Venerable Catfish" = list("nav_verne_5"), //docking location for verne shuttle
+		"Cyclopes" = list("nav_merc_dock")
 	)
 
 	initial_generic_waypoints = list(
@@ -70,12 +72,6 @@
 		"nav_ninja_hanger",
 		"nav_skipjack_hanger",
 		"nav_ert_hanger",
-
-		"nav_skrellscoutsh_altdock",
-		"nav_trichoptera_altdock",
-		"nav_skrellscout_dock",
-		"nav_ert_dock",
-		"nav_verne_5",
 	)
 
 /obj/effect/overmap/visitable/ship/landable/exploration_shuttle
@@ -93,7 +89,7 @@
 	name = "Aquila"
 	desc = "A PM-24 modular transport, broadcasting SCGEC codes and the callsign \"Torch-1 Aquila\"."
 	shuttle = "Aquila"
-	vessel_mass = 20000
+	vessel_mass = 10000
 	max_speed = 1/(1 SECONDS)
 	burn_delay = 0.5 SECONDS //spammable, but expensive
 	fore_dir = NORTH
@@ -139,4 +135,3 @@
 	desc = "Trace radiation emanating from this sector is consistent with the aftermath of a bluespace jump."
 	icon_state = "event"
 	known = TRUE
-	

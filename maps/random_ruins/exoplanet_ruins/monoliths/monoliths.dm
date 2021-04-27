@@ -3,7 +3,7 @@
 	id = "planetsite_monoliths"
 	description = "Bunch of monoliths surrounding an artifact."
 	suffixes = list("monoliths/monoliths.dmm")
-	cost = 1
+	spawn_cost = 1
 	template_flags = TEMPLATE_FLAG_NO_RUINS
 	ruin_tags = RUIN_ALIEN
 
@@ -13,8 +13,8 @@
 	icon = 'icons/obj/monolith.dmi'
 	icon_state = "jaggy1"
 	layer = ABOVE_HUMAN_LAYER
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	var/active = 0
 
 /obj/structure/monolith/Initialize()

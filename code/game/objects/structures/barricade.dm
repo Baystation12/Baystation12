@@ -2,8 +2,8 @@
 /obj/structure/barricade
 	name = "barricade"
 	icon_state = "barricade"
-	anchored = 1.0
-	density = 1
+	anchored = TRUE
+	density = TRUE
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 	layer = ABOVE_WINDOW_LAYER
 
@@ -42,9 +42,8 @@
 				qdel(src)
 				return
 		else
-			to_chat(user, "<span class='warning'>You must remain still while building.</span>")
 			return
-	
+
 	if(istype(W, /obj/item/stack))
 		var/obj/item/stack/D = W
 		if(D.get_material_name() != material.name)
@@ -135,7 +134,7 @@
 
 	if(MOVING_DELIBERATELY(victim)) //walking into this is less hurty than running
 		damage_holder = (damage / 4)
-	
+
 	if(isanimal(victim)) //simple animals have simple health, reduce our damage
 		damage_holder = (damage / 4)
 

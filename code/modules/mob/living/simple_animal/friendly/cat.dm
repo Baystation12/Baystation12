@@ -18,11 +18,11 @@
 	response_harm   = "kicks"
 	minbodytemp = 223		//Below -50 Degrees Celsius
 	maxbodytemp = 323	//Above 50 Degrees Celsius
-	holder_type = /obj/item/weapon/holder/cat
+	holder_type = /obj/item/holder/cat
 	mob_size = MOB_SMALL
 	possession_candidate = 1
 	pass_flags = PASS_FLAG_TABLE
-	density = 0
+	density = FALSE
 
 	skin_material = MATERIAL_SKIN_FUR_ORANGE
 
@@ -238,7 +238,7 @@
 	skin_amount = 3
 
 // Leaving this here for now.
-/obj/item/weapon/holder/cat/fluff/bones
+/obj/item/holder/cat/fluff/bones
 	name = "Bones"
 	desc = "It's Bones! Meow."
 	gender = MALE
@@ -252,7 +252,7 @@
 	item_state = "cat3"
 	icon_living = "cat3"
 	icon_dead = "cat3_dead"
-	holder_type = /obj/item/weapon/holder/cat/fluff/bones
+	holder_type = /obj/item/holder/cat/fluff/bones
 	var/friend_name = "Erstatz Vryroxes"
 
 /mob/living/simple_animal/cat/kitten/New()

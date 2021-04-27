@@ -126,7 +126,7 @@
 
 	//handcuffed?
 	if(handcuffed)
-		if(istype(handcuffed, /obj/item/weapon/handcuffs/cable))
+		if(istype(handcuffed, /obj/item/handcuffs/cable))
 			msg += "<span class='warning'>[T.He] [T.is] [icon2html(handcuffed, user)] restrained with cable!</span>\n"
 		else
 			msg += "<span class='warning'>[T.He] [T.is] [icon2html(handcuffed, user)] handcuffed!</span>\n"
@@ -166,26 +166,23 @@
 		msg += "<span class='warning'>[T.He] [T.is]n't responding to anything around [T.him] and seems to be unconscious.</span>\n"
 		if((stat == DEAD || is_asystole() || src.losebreath) && distance <= 3)
 			msg += "<span class='warning'>[T.He] [T.does] not appear to be breathing.</span>\n"
-		if(ishuman(user) && !user.incapacitated() && Adjacent(user))
-			spawn(0)
-				user.visible_message("<b>\The [user]</b> checks \the [src]'s pulse.", "You check \the [src]'s pulse.")
-				if(do_after(user, 15, src))
-					if(pulse() == PULSE_NONE)
-						to_chat(user, "<span class='deadsay'>[T.He] [T.has] no pulse.</span>")
-					else
-						to_chat(user, "<span class='deadsay'>[T.He] [T.has] a pulse!</span>")
 
-	if(fire_stacks)
+	if (fire_stacks > 0)
 		msg += "[T.He] looks flammable.\n"
+	else if (fire_stacks < 0)
+		msg += "[T.He] looks wet.\n"
 	if(on_fire)
 		msg += "<span class='warning'>[T.He] [T.is] on fire!.</span>\n"
 
 	var/ssd_msg = species.get_ssd(src)
 	if(ssd_msg && (!should_have_organ(BP_BRAIN) || has_brain()) && stat != DEAD)
 		if(!key)
-			msg += "<span class='deadsay'>[T.He] [T.is] [ssd_msg]. It doesn't look like [T.he] [T.is] waking up anytime soon.</span>\n"
+			msg += "<span class='deadsay'>[T.He] [T.is] [ssd_msg]. [T.He] won't be recovering any time soon.</span>\n"
 		else if(!client)
 			msg += "<span class='deadsay'>[T.He] [T.is] [ssd_msg].</span>\n"
+
+	if (admin_paralyzed)
+		msg += SPAN_DEBUG("OOC: [T.He] [T.has] been paralyzed by staff. Please avoid interacting with [T.him] unless cleared to do so by staff.") + "\n"
 
 	var/obj/item/organ/external/head/H = organs_by_name[BP_HEAD]
 	if(istype(H) && H.forehead_graffiti && H.graffiti_style)
@@ -251,9 +248,9 @@
 				shown_objects += embedlist
 				var/parsedembed[0]
 				for(var/obj/embedded in embedlist)
-					if(!parsedembed.len || (!parsedembed.Find(embedded.name) && !parsedembed.Find("multiple [embedded.name]")))
+					if(!parsedembed.len || (!list_find(parsedembed, embedded.name) && !list_find(parsedembed, "multiple [embedded.name]")))
 						parsedembed.Add(embedded.name)
-					else if(!parsedembed.Find("multiple [embedded.name]"))
+					else if(!list_find(parsedembed, "multiple [embedded.name]"))
 						parsedembed.Remove(embedded.name)
 						parsedembed.Add("multiple "+embedded.name)
 				wound_flavor_text["[E.name]"] += "The [wound.desc] on [T.his] [E.name] has \a [english_list(parsedembed, and_text = " and \a ", comma_text = ", \a ")] sticking out of it!<br>"
@@ -276,7 +273,7 @@
 		var/perpname = "wot"
 		var/criminal = "None"
 
-		var/obj/item/weapon/card/id/id = GetIdCard()
+		var/obj/item/card/id/id = GetIdCard()
 		if(istype(id))
 			perpname = id.registered_name
 		else
@@ -294,7 +291,7 @@
 		var/perpname = "wot"
 		var/medical = "None"
 
-		var/obj/item/weapon/card/id/id = GetIdCard()
+		var/obj/item/card/id/id = GetIdCard()
 		if(istype(id))
 			perpname = id.registered_name
 		else
@@ -328,7 +325,7 @@
 	if(istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
 		var/obj/item/clothing/glasses/G = H.glasses
-		var/obj/item/weapon/card/id/ID = M.GetIdCard()
+		var/obj/item/card/id/ID = M.GetIdCard()
 
 		return (istype(G) && ((G.hud_type & hudtype) || (G.hud && (G.hud.hud_type & hudtype)))) && G.check_access(ID)
 	else if(istype(M, /mob/living/silicon/robot))

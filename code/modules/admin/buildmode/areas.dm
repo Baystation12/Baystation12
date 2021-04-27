@@ -9,13 +9,9 @@ Middle Click      - Copy Turf Area
 Right Click       - List/Create Area
 ************************************\
 "}
-	var/list/distinct_colors = list(
-		"#e6194b", "#3cb44b", "#ffe119", "#4363d8", "#f58231", "#42d4f4",
-		"#f032e6", "#fabebe", "#469990", "#e6beff", "#9a6324", "#fffac8",
-		"#800000", "#aaffc3", "#000075", "#a9a9a9", "#ffffff", "#000000"
-	)
+
 	var/area/selected_area
-	var/list/vision_images = list()
+	var/color_pool/colors
 
 /datum/build_mode/areas/Destroy()
 	UnselectArea()
@@ -24,6 +20,22 @@ Right Click       - List/Create Area
 
 /datum/build_mode/areas/Help()
 	to_chat(user, SPAN_NOTICE(help_text))
+
+/datum/build_mode/areas/Selected()
+	if (!overlay)
+		CreateOverlay("whiteOverlay")
+	colors = new
+	overlay.Show()
+
+/datum/build_mode/areas/Unselected()
+	if (overlay)
+		overlay.Hide()
+	QDEL_NULL(colors)
+
+/datum/build_mode/areas/UpdateOverlay(atom/movable/M, turf/T)
+	if (!overlay?.shown)
+		return
+	M.color = colors.get(T.loc)
 
 /datum/build_mode/areas/OnClick(var/atom/A, var/list/parameters)
 	if (parameters["right"])
@@ -65,34 +77,6 @@ Right Click       - List/Create Area
 		SelectArea(new_area)
 		user.client.debug_variables(selected_area)
 		to_chat(user, "Created area [new_area.name]")
-
-/datum/build_mode/areas/TimerEvent()
-	if (!user.client)
-		return
-	user.client.images -= vision_images
-	vision_images = list()
-
-	var/used_colors = 0
-	var/list/max_colors = length(distinct_colors)
-	var/list/vision_colors = list()
-	for (var/turf/T in range(user.client.view, user))
-		var/image/I = new('icons/turf/overlays.dmi', T, "whiteOverlay")
-		var/ref = "\ref[T.loc]"
-		if (!vision_colors[ref])
-			if (++used_colors > max_colors)
-				vision_colors[ref] = "#" + copytext(md5(ref), 1, 7)
-			else
-				vision_colors[ref] = distinct_colors[used_colors]
-		I.color = vision_colors[ref]
-		I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-		I.appearance_flags = RESET_COLOR|RESET_ALPHA|RESET_TRANSFORM|NO_CLIENT_COLOR|KEEP_APART
-		vision_images.Add(I)
-	user.client.images += vision_images
-
-/datum/build_mode/areas/Unselected()
-	if (user.client)
-		user.client.images -= vision_images
-	vision_images = list()
 
 /datum/build_mode/areas/proc/SelectArea(var/area/A)
 	if(!A || A == selected_area)

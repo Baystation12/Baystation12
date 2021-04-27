@@ -1,7 +1,7 @@
 SUBSYSTEM_DEF(goals)
 	name = "Goals"
 	init_order = SS_INIT_GOALS
-	flags = SS_NO_FIRE
+	wait = 1 SECOND
 	var/list/global_personal_goals = list(
 		/datum/goal/achievement/specific_object/food,
 		/datum/goal/achievement/specific_object/drink,
@@ -20,6 +20,14 @@ SUBSYSTEM_DEF(goals)
 	)
 	var/list/departments = list()
 	var/list/ambitions =   list()
+	var/list/pending_goals = list()
+
+/datum/controller/subsystem/goals/fire(resumed)
+	for(var/datum/goal/goal in pending_goals)
+		if(goal.try_initialize())
+			pending_goals -= goal
+	if(!length(pending_goals))
+		flags |= SS_NO_FIRE
 
 /datum/controller/subsystem/goals/Initialize()
 	var/list/all_depts = subtypesof(/datum/department)

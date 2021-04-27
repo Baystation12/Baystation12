@@ -1,11 +1,11 @@
-/obj/item/weapon/implant/tracking
+/obj/item/implant/tracking
 	name = "tracking implant"
 	desc = "Track with this."
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 2, TECH_BLUESPACE = 2)
 	known = 1
 	var/id = 1
 
-/obj/item/weapon/implant/tracking/get_data()
+/obj/item/implant/tracking/get_data()
 	. = {"<b>Implant Specifications:</b><BR>
 	<b>Name:</b> Tracking Beacon<BR>
 	<b>Life:</b> 10 minutes after death of host<BR>
@@ -26,22 +26,22 @@
 		<A href='byond://?src=\ref[src];tracking_id=1'>+</A>
 		<A href='byond://?src=\ref[src];tracking_id=10'>+</A><BR>"}
 
-/obj/item/weapon/implant/tracking/Topic(href, href_list)
+/obj/item/implant/tracking/Topic(href, href_list)
 	..()
 	if (href_list["tracking_id"])
 		id = Clamp(id+text2num(href_list["tracking_id"]), 1, 100)
 		interact(usr)
 
-/obj/item/weapon/implant/tracking/islegal()
+/obj/item/implant/tracking/islegal()
 	return TRUE
 
-/obj/item/weapon/implant/tracking/emp_act(severity)
+/obj/item/implant/tracking/emp_act(severity)
 	var/power = 4 - severity
 	if(prob(power * 15))
 		meltdown()
 	else if(prob(power * 40))
 		disable(rand(power*500,power*5000))//adds in extra time because this is the only other way to sabotage it
 
-/obj/item/weapon/implantcase/tracking
+/obj/item/implantcase/tracking
 	name = "glass case - 'tracking'"
-	imp = /obj/item/weapon/implant/tracking
+	imp = /obj/item/implant/tracking

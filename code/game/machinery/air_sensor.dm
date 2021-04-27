@@ -3,11 +3,11 @@
 	icon_state = "gsensor1"
 	name = "Gas Sensor"
 
-	anchored = 1
+	anchored = TRUE
 
 	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/radio/transmitter/basic,
-		/obj/item/weapon/stock_parts/power/apc
+		/obj/item/stock_parts/radio/transmitter/basic,
+		/obj/item/stock_parts/power/apc
 	)
 	public_variables = list(
 		/decl/public_access/public_variable/gas,

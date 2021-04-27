@@ -102,7 +102,10 @@
 
 //Called when the mob is hit with an item in combat. Returns the blocked result
 /mob/living/proc/hit_with_weapon(obj/item/I, mob/living/user, var/effective_force, var/hit_zone)
-	visible_message("<span class='danger'>[src] has been [I.attack_verb.len? pick(I.attack_verb) : "attacked"] with [I.name] by [user]!</span>")
+	var/weapon_mention
+	if(I.attack_message_name())
+		weapon_mention = " with [I.attack_message_name()]"
+	visible_message(SPAN_DANGER("\The [src] has been [I.attack_verb.len? pick(I.attack_verb) : "attacked"][weapon_mention] by \the [user]!"))
 
 	. = standard_weapon_hit_effects(I, user, effective_force, hit_zone)
 
@@ -114,10 +117,6 @@
 /mob/living/proc/standard_weapon_hit_effects(obj/item/I, mob/living/user, var/effective_force, var/hit_zone)
 	if(!effective_force)
 		return 0
-
-	//Hulk modifier
-	if(MUTATION_HULK in user.mutations)
-		effective_force *= 2
 
 	//Apply weapon damage
 	var/damage_flags = I.damage_flags()
@@ -136,7 +135,7 @@
 			M.Weaken(rand(4,8))
 		M.visible_message(SPAN_DANGER("\The [M] collides with \the [src]!"))
 
-	if(!aura_check(AURA_TYPE_THROWN, AM, TT.speed))
+	if (!aura_check(AURA_TYPE_THROWN, AM, TT))
 		return
 
 	if(istype(AM,/obj/))
@@ -182,7 +181,7 @@
 				if(T)
 					forceMove(T)
 					visible_message("<span class='warning'>[src] is pinned to the wall by [O]!</span>","<span class='warning'>You are pinned to the wall by [O]!</span>")
-					src.anchored = 1
+					src.anchored = TRUE
 					src.pinned += O
 
 /mob/living/proc/embed(var/obj/O, var/def_zone=null, var/datum/wound/supplied_wound)

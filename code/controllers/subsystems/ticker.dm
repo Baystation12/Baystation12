@@ -27,6 +27,8 @@ SUBSYSTEM_DEF(ticker)
 	var/list/antag_pool = list()
 	var/looking_for_antags = 0
 
+	var/secret_force_mode = "secret"
+
 /datum/controller/subsystem/ticker/Initialize()
 	to_world("<span class='info'><B>Welcome to the pre-game lobby!</B></span>")
 	to_world("Please, setup your character and select ready. Game will start in [round(pregame_timeleft/10)] seconds")
@@ -96,6 +98,9 @@ SUBSYSTEM_DEF(ticker)
 		mode.post_setup() // Drafts antags who don't override jobs.
 		to_world("<span class='info'><B>Enjoy the game!</B></span>")
 		sound_to(world, sound(GLOB.using_map.welcome_sound))
+
+		for (var/mob/new_player/player in GLOB.player_list)
+			player.new_player_panel()
 
 	if(!length(GLOB.admins))
 		send2adminirc("Round has started with no admins online.")
@@ -376,28 +381,9 @@ Helpers
 	for(var/client/C)
 		if(!C.credits)
 			C.RollCredits()
-	for(var/mob/Player in GLOB.player_list)
-		if(Player.mind && !isnewplayer(Player))
-			if(Player.stat != DEAD)
-				var/turf/playerTurf = get_turf(Player)
-				if(evacuation_controller.round_over() && evacuation_controller.emergency_evacuation)
-					if(isNotAdminLevel(playerTurf.z))
-						to_chat(Player, "<span class='info'><b>You managed to survive, but were marooned on [station_name()] as [Player.real_name]...</b></span>")
-					else
-						to_chat(Player, "<font color='green'><b>You managed to survive the events on [station_name()] as [Player.real_name].</b></font>")
-				else if(isAdminLevel(playerTurf.z))
-					to_chat(Player, "<font color='green'><b>You successfully underwent crew transfer after events on [station_name()] as [Player.real_name].</b></font>")
-				else if(issilicon(Player))
-					to_chat(Player, "<font color='green'><b>You remain operational after the events on [station_name()] as [Player.real_name].</b></font>")
-				else
-					to_chat(Player, "<span class='info'><b>You got through just another workday on [station_name()] as [Player.real_name].</b></span>")
-			else
-				if(isghost(Player))
-					var/mob/observer/ghost/O = Player
-					if(!O.started_as_observer)
-						to_chat(Player, "<font color='red'><b>You did not survive the events on [station_name()]...</b></font>")
-				else
-					to_chat(Player, "<font color='red'><b>You did not survive the events on [station_name()]...</b></font>")
+
+	GLOB.using_map.roundend_player_status()
+
 	to_world("<br>")
 
 	for(var/mob/living/silicon/ai/aiPlayer in SSmobs.mob_list)

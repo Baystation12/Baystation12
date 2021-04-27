@@ -72,7 +72,7 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 	if(!head)
 		return SETUP_FAILED
 
-	var/obj/item/weapon/implant/uplink/U = new(H, round(amount * 0.8))
+	var/obj/item/implant/uplink/U = new(H, round(amount * 0.8))
 	U.imp_in = H
 	U.implanted = TRUE
 	U.part = head

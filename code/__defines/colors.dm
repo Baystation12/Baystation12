@@ -65,7 +65,7 @@
 #define COLOR_CYAN_BLUE        "#3366cc"
 #define COLOR_LIGHT_CYAN       "#66ccff"
 #define COLOR_PAKISTAN_GREEN   "#006600"
-#define COLOR_HULL             "#436b8e"
+#define COLOR_SOL              "#436b8e"
 #define COLOR_AMBER            "#ffbf00"
 #define COLOR_COMMAND_BLUE     "#46698c"
 #define COLOR_SKY_BLUE         "#5ca1cc"
@@ -124,10 +124,10 @@
 #define WOOD_COLOR_CHOCOLATE   "#543c30"
 #define WOOD_COLOR_YELLOW      "#e3994e"
 
-#define GLASS_COLOR            "#74c1ee"
+#define GLASS_COLOR            "#aaccff"
 #define GLASS_COLOR_PHORON     "#7c3a9a"
 #define GLASS_COLOR_TINTED     "#222222"
-#define GLASS_COLOR_FROSTED    "#ffffff"
+#define GLASS_COLOR_FROSTED    "#eeeeee"
 
 #define COLOR_BLOOD_HUMAN      "#a10808"
 

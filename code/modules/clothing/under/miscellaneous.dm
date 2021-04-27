@@ -144,13 +144,6 @@
 	worn_state = "owl"
 	item_state = "owl"
 
-/obj/item/clothing/under/johnny
-	name = "johnny~~ jumpsuit"
-	desc = "Johnny~~"
-	icon_state = "johnny"
-	worn_state = "johnny"
-	item_state = "johnny"
-
 /obj/item/clothing/under/color/rainbow
 	name = "rainbow"
 	icon_state = "rainbow"

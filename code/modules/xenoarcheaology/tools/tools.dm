@@ -26,6 +26,13 @@
 		if(L)
 			stat("Coordinates:", "[L.get_coordinates()]")
 
+/mob/living/silicon/robot/Stat()
+	. = ..()
+	if(statpanel("Status") && (istype(module_state_1, /obj/item/device/gps) || istype(module_state_2, /obj/item/device/gps) || istype(module_state_3, /obj/item/device/gps)))
+		var/obj/item/device/gps/L = locate() in src
+		if(L)
+			stat("Coordinates:", "[L.get_coordinates()]")
+
 /obj/item/device/measuring_tape
 	name = "measuring tape"
 	desc = "A coiled metallic tape used to check dimensions and lengths."
@@ -35,7 +42,7 @@
 	matter = list(MATERIAL_STEEL = 100)
 	w_class = ITEM_SIZE_SMALL
 
-/obj/item/weapon/storage/bag/fossils
+/obj/item/storage/bag/fossils
 	name = "fossil satchel"
 	desc = "Transports delicate fossils in suspension so they don't break during transit."
 	icon = 'icons/obj/mining.dmi'
@@ -45,16 +52,16 @@
 	storage_slots = 50
 	max_storage_space = 200
 	max_w_class = ITEM_SIZE_NORMAL
-	can_hold = list(/obj/item/weapon/fossil)
+	can_hold = list(/obj/item/fossil)
 
-/obj/item/weapon/storage/box/samplebags
+/obj/item/storage/box/samplebags
 	name = "sample bag box"
 	desc = "A box claiming to contain sample bags."
 
-/obj/item/weapon/storage/box/samplebags/New()
+/obj/item/storage/box/samplebags/New()
 	..()
 	for(var/i = 1 to 7)
-		var/obj/item/weapon/evidencebag/S = new(src)
+		var/obj/item/evidencebag/S = new(src)
 		S.SetName("sample bag")
 		S.desc = "a bag for holding research samples."
 
@@ -194,7 +201,7 @@
 		dat += "Anomaly depth: [current.depth] cm<br>"
 		dat += "Anomaly size: [current.clearance] cm<br>"
 		dat += "Dissonance spread: [current.dissonance_spread]<br>"
-		var/index = responsive_carriers.Find(current.material)
+		var/index = list_find(responsive_carriers, current.material)
 		if(index > 0 && index <= finds_as_strings.len)
 			dat += "Anomaly material: [finds_as_strings[index]]<br>"
 		else
@@ -240,13 +247,13 @@
 	updateSelfDialog()
 
 //Radio beacon locator
-/obj/item/weapon/pinpointer/radio
+/obj/item/pinpointer/radio
 	name = "locator device"
 	desc = "Used to scan and locate signals on a particular frequency."
 	var/tracking_freq = PUB_FREQ
 	matter = list(MATERIAL_ALUMINIUM = 1000, MATERIAL_GLASS = 500)
 
-/obj/item/weapon/pinpointer/radio/acquire_target()
+/obj/item/pinpointer/radio/acquire_target()
 	var/turf/T = get_turf(src)
 	var/zlevels = GetConnectedZlevels(T.z)
 	var/cur_dist = world.maxx+world.maxy
@@ -259,10 +266,10 @@
 				cur_dist = check_dist
 				. = weakref(R)
 
-/obj/item/weapon/pinpointer/radio/attack_self(var/mob/user as mob)
+/obj/item/pinpointer/radio/attack_self(var/mob/user as mob)
 	interact(user)
 
-/obj/item/weapon/pinpointer/radio/interact(var/mob/user)
+/obj/item/pinpointer/radio/interact(var/mob/user)
 	var/dat = "<b>Radio frequency tracker</b><br>"
 	dat += {"
 				Tracking: <A href='byond://?src=\ref[src];toggle=1'>[active ? "Enabled" : "Disabled"]</A><BR>
@@ -277,7 +284,7 @@
 	show_browser(user, dat,"window=locater;size=300x150")
 	onclose(user, "locater")
 
-/obj/item/weapon/pinpointer/radio/OnTopic(user, href_list)
+/obj/item/pinpointer/radio/OnTopic(user, href_list)
 	if(href_list["toggle"])
 		toggle(user)
 		. = TOPIC_REFRESH

@@ -7,14 +7,14 @@
 	uniform = /obj/item/clothing/under/rank/ntpilot
 	shoes = /obj/item/clothing/shoes/workboots
 	l_ear = /obj/item/device/radio/headset/headset_pilot
-	id_types = list(/obj/item/weapon/card/id/torch/passenger/research/nt_pilot)
+	id_types = list(/obj/item/card/id/torch/passenger/research/nt_pilot)
 
 /decl/hierarchy/outfit/job/torch/passenger/research/scientist
 	name = OUTFIT_JOB_NAME("Scientist - Torch")
 	uniform = /obj/item/clothing/under/rank/scientist
 	shoes = /obj/item/clothing/shoes/white
 	pda_type = /obj/item/modular_computer/pda/science
-	id_types = list(/obj/item/weapon/card/id/torch/passenger/research/scientist)
+	id_types = list(/obj/item/card/id/torch/passenger/research/scientist)
 
 /decl/hierarchy/outfit/job/torch/passenger/research/scientist/New()
 	..()
@@ -25,7 +25,7 @@
 	uniform = /obj/item/clothing/under/rank/scientist
 	shoes = /obj/item/clothing/shoes/white
 	pda_type = /obj/item/modular_computer/pda/science
-	id_types = list(/obj/item/weapon/card/id/torch/passenger/research)
+	id_types = list(/obj/item/card/id/torch/passenger/research)
 
 /decl/hierarchy/outfit/job/torch/passenger/research/assist/testsubject
 	name = OUTFIT_JOB_NAME("Testing Assistant")

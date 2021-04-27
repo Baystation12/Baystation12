@@ -493,6 +493,7 @@
 	metabolism = REM * 0.5
 	overdose = REAGENTS_OVERDOSE * 0.5
 	value = 2.6
+	should_admin_log = TRUE
 
 /datum/reagent/vecuronium_bromide/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -540,10 +541,11 @@
 		drug_strength = drug_strength * 0.8
 
 	M.druggy = max(M.druggy, drug_strength)
-	if(prob(10))
-		M.SelfMove(pick(GLOB.cardinal))
-	if(prob(7))
-		M.emote(pick("twitch", "drool", "moan", "giggle"))
+	if (alien != IS_SKRELL)
+		if (prob(10))
+			M.SelfMove(pick(GLOB.cardinal))
+		if(prob(7))
+			M.emote(pick("twitch", "drool", "moan", "giggle"))
 	M.add_chemical_effect(CE_PULSE, -1)
 
 /datum/reagent/serotrotium
@@ -811,7 +813,7 @@
 	M.overlays.Cut()
 	M.set_invisibility(101)
 	for(var/obj/item/W in M)
-		if(istype(W, /obj/item/weapon/implant)) //TODO: Carn. give implants a dropped() or something
+		if(istype(W, /obj/item/implant)) //TODO: Carn. give implants a dropped() or something
 			qdel(W)
 			continue
 		M.drop_from_inventory(W)
@@ -927,3 +929,12 @@
 	heating_products = list(/datum/reagent/acetone, /datum/reagent/carbon, /datum/reagent/ethanol)
 	heating_point = 145 CELSIUS
 	heating_message = "separates."
+
+/datum/reagent/toxin/boron
+	name = "Boron"
+	description = "A chemical that is highly valued for its potential in fusion energy."
+	taste_description = "metal"
+	reagent_state = SOLID
+	color = "#837e79"
+	value = 4
+	strength = 7

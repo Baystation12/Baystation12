@@ -1,21 +1,14 @@
+
 /area/voxship
-	icon = 'voxship.dmi'
-
-/area/voxship/base
-	name = "\improper Vox Base"
-	icon_state = "base"
-
-/area/voxship/ship
-	name = "\improper Vox Ship"
-	icon_state = "ship"
+	icon = 'maps/away/voxship/voxship.dmi'
 
 /area/voxship/scavship
-	name = "\improper Vox Scavenger Ship"
+	name = "Vox Scavenger Ship"
 	icon_state = "scavship"
 	req_access = list(access_voxship)
 
 /area/voxship/fore
-	name = "\improper Vox Fore"
+	name = "Vox Fore"
 	icon_state = "fore"
 	req_access = list(access_voxship)
 

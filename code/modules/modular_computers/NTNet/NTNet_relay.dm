@@ -6,11 +6,13 @@
 	active_power_usage = 20000 //20kW, apropriate for machine that keeps massive cross-Zlevel wireless network operational.
 	idle_power_usage = 100
 	icon_state = "bus"
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	machine_name = "\improper NTNet quantum relay"
+	machine_desc = "Maintains a copy of proprietary software used to provide NTNet service to all valid devices in the region. Essentially a huge router."
 	var/datum/ntnet/NTNet = null // This is mostly for backwards reference and to allow varedit modifications from ingame.
 	var/enabled = 1				// Set to 0 if the relay was turned off
 	var/dos_failure = 0			// Set to 1 if the relay failed due to (D)DoS attack
@@ -64,7 +66,7 @@
 	data["dos_capacity"] = dos_capacity
 	data["dos_overload"] = dos_overload
 	data["dos_crashed"] = dos_failure
-	data["portable_drive"] = !!get_component_of_type(/obj/item/weapon/stock_parts/computer/hard_drive/portable)
+	data["portable_drive"] = !!get_component_of_type(/obj/item/stock_parts/computer/hard_drive/portable)
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
@@ -95,7 +97,7 @@
 		ntnet_global.banned_nids.Cut()
 		ntnet_global.add_log("Manual override: Network blacklist cleared.")
 		return 1
-	else if(href_list["eject_drive"] && uninstall_component(/obj/item/weapon/stock_parts/computer/hard_drive/portable))
+	else if(href_list["eject_drive"] && uninstall_component(/obj/item/stock_parts/computer/hard_drive/portable))
 		visible_message("[icon2html(src, viewers(get_turf(src)))] [src] beeps and ejects its portable disk.")
 
 /obj/machinery/ntnet_relay/New()
@@ -116,12 +118,3 @@
 		D.target = null
 		D.error = "Connection to quantum relay severed"
 	..()
-
-/obj/machinery/ntnet_relay/attackby(obj/item/P, mob/user)
-	if (!istype(P,/obj/item/weapon/stock_parts/computer/hard_drive/portable))
-		return
-	else if (get_component_of_type(/obj/item/weapon/stock_parts/computer/hard_drive/portable))
-		to_chat(user, "This relay's portable drive slot is already occupied.")
-	else if(user.unEquip(P,src))
-		install_component(P)
-		to_chat(user, "You install \the [P] into \the [src]")

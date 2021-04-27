@@ -326,8 +326,7 @@
 
 /datum/species/nabber/handle_post_spawn(var/mob/living/carbon/human/H)
 	..()
-	if(H.species.get_bodytype() == !SPECIES_MONARCH_QUEEN)
-		return H.pulling_punches = TRUE
+	return H.pulling_punches = TRUE
 
 /datum/species/nabber/has_fine_manipulation(var/mob/living/carbon/human/H)
 	if(H.species.get_bodytype() == SPECIES_MONARCH_QUEEN)
@@ -490,7 +489,8 @@
 		BP_LIVER =             /obj/item/organ/internal/liver/insectoid/nabber,
 		BP_HEART =             /obj/item/organ/internal/heart/open,
 		BP_STOMACH =           /obj/item/organ/internal/stomach,
-		BP_SYSTEM_CONTROLLER = /obj/item/organ/internal/controller
+		BP_SYSTEM_CONTROLLER = /obj/item/organ/internal/controller,
+		BP_VOICE =    /obj/item/organ/internal/voicebox/nabber/ascent
 		)
 
 	has_limbs = list(

@@ -1,6 +1,8 @@
 /var/server_name = "Baystation 12"
-
 /var/game_id = null
+
+GLOBAL_VAR(href_logfile)
+
 /hook/global_init/proc/generate_gameid()
 	if(game_id != null)
 		return
@@ -74,19 +76,19 @@
 	//logs
 	SetupLogs()
 	var/date_string = time2text(world.realtime, "YYYY/MM/DD")
-	href_logfile = file("data/logs/[date_string] hrefs.htm")
 	diary = file("data/logs/[date_string].log")
 	to_file(diary, "[log_end]\n[log_end]\nStarting up. (ID: [game_id]) [time2text(world.timeofday, "hh:mm.ss")][log_end]\n---------------------[log_end]")
-	changelog_hash = md5('html/changelog.html')					//used for telling if the changelog has changed recently
 
 	if(config && config.server_name != null && config.server_suffix && world.port > 0)
-		// dumb and hardcoded but I don't care~
 		config.server_name += " #[(world.port % 1000) / 100]"
 
 	if(config && config.log_runtime)
 		var/runtime_log = file("data/logs/runtime/[date_string]_[time2text(world.timeofday, "hh:mm")]_[game_id].log")
 		to_file(runtime_log, "Game [game_id] starting up at [time2text(world.timeofday, "hh:mm.ss")]")
 		log = runtime_log // Note that, as you can see, this is misnamed: this simply moves world.log into the runtime log file.
+
+	if (config && config.log_hrefs)
+		GLOB.href_logfile = file("data/logs/[date_string] hrefs.htm")
 
 	if(byond_version < RECOMMENDED_VERSION)
 		to_world_log("Your server's byond version does not meet the recommended requirements for this server. Please update BYOND")
@@ -106,11 +108,26 @@
 
 #undef RECOMMENDED_VERSION
 
-var/world_topic_spam_protect_ip = "0.0.0.0"
-var/world_topic_spam_protect_time = world.timeofday
+GLOBAL_LIST_EMPTY(world_topic_throttle)
+GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
+#define SET_THROTTLE(TIME, REASON) throttle[1] = base_throttle + (TIME); throttle[2] = (REASON);
+#define THROTTLE_MAX_BURST 15 SECONDS
 
 /world/Topic(T, addr, master, key)
 	to_file(diary, "TOPIC: \"[T]\", from:[addr], master:[master], key:[key][log_end]")
+
+	if (GLOB.world_topic_last > world.timeofday)
+		GLOB.world_topic_throttle = list() //probably passed midnight
+	GLOB.world_topic_last = world.timeofday
+
+	var/list/throttle = GLOB.world_topic_throttle[addr]
+	if (!throttle)
+		GLOB.world_topic_throttle[addr] = throttle = list(0, null)
+	else if (throttle[1] && throttle[1] > world.timeofday + THROTTLE_MAX_BURST)
+		return throttle[2] ? "Throttled ([throttle[2]])" : "Throttled"
+
+	var/base_throttle = max(throttle[1], world.timeofday)
+	SET_THROTTLE(3 SECONDS, null)
 
 	/* * * * * * * *
 	* Public Topic Calls
@@ -133,7 +150,7 @@ var/world_topic_spam_protect_time = world.timeofday
 	else if (copytext(T,1,7) == "status")
 		var/input[] = params2list(T)
 		var/list/s = list()
-		s["version"] = game_version
+		s["version"] = config.game_version
 		s["mode"] = PUBLIC_GAME_MODE
 		s["respawn"] = config.abandon_allowed
 		s["enter"] = config.enter_allowed
@@ -212,15 +229,10 @@ var/world_topic_spam_protect_time = world.timeofday
 	if(copytext(T,1,14) == "placepermaban")
 		var/input[] = params2list(T)
 		if(!config.ban_comms_password)
-			return "Not enabled"
+			SET_THROTTLE(10 SECONDS, "Bans Not Enabled")
+			return "Not Enabled"
 		if(input["bankey"] != config.ban_comms_password)
-			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
-				spawn(50)
-					world_topic_spam_protect_time = world.time
-					return "Bad Key (Throttled)"
-
-			world_topic_spam_protect_time = world.time
-			world_topic_spam_protect_ip = addr
+			SET_THROTTLE(30 SECONDS, "Bad Bans Key")
 			return "Bad Key"
 
 		var/target = ckey(input["target"])
@@ -247,20 +259,13 @@ var/world_topic_spam_protect_time = world.timeofday
 	* * * * * * * */
 
 	if (!config.comms_password)
+		SET_THROTTLE(10 SECONDS, "Comms Not Enabled")
 		return "Not enabled"
 
 	else if(copytext(T,1,5) == "laws")
 		var/input[] = params2list(T)
 		if(input["key"] != config.comms_password)
-			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
-
-				spawn(50)
-					world_topic_spam_protect_time = world.time
-					return "Bad Key (Throttled)"
-
-			world_topic_spam_protect_time = world.time
-			world_topic_spam_protect_ip = addr
-
+			SET_THROTTLE(30 SECONDS, "Bad Comms Key")
 			return "Bad Key"
 
 		var/list/match = text_find_mobs(input["laws"], /mob/living/silicon)
@@ -307,15 +312,7 @@ var/world_topic_spam_protect_time = world.timeofday
 	else if(copytext(T,1,5) == "info")
 		var/input[] = params2list(T)
 		if(input["key"] != config.comms_password)
-			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
-
-				spawn(50)
-					world_topic_spam_protect_time = world.time
-					return "Bad Key (Throttled)"
-
-			world_topic_spam_protect_time = world.time
-			world_topic_spam_protect_ip = addr
-
+			SET_THROTTLE(30 SECONDS, "Bad Comms Key")
 			return "Bad Key"
 
 		var/list/match = text_find_mobs(input["info"])
@@ -375,15 +372,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 		var/input[] = params2list(T)
 		if(input["key"] != config.comms_password)
-			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
-
-				spawn(50)
-					world_topic_spam_protect_time = world.time
-					return "Bad Key (Throttled)"
-
-			world_topic_spam_protect_time = world.time
-			world_topic_spam_protect_ip = addr
-
+			SET_THROTTLE(30 SECONDS, "Bad Comms Key")
 			return "Bad Key"
 
 		var/client/C
@@ -425,30 +414,15 @@ var/world_topic_spam_protect_time = world.timeofday
 		*/
 		var/input[] = params2list(T)
 		if(input["key"] != config.comms_password)
-			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
-
-				spawn(50)
-					world_topic_spam_protect_time = world.time
-					return "Bad Key (Throttled)"
-
-			world_topic_spam_protect_time = world.time
-			world_topic_spam_protect_ip = addr
+			SET_THROTTLE(30 SECONDS, "Bad Comms Key")
 			return "Bad Key"
-
 		return show_player_info_irc(ckey(input["notes"]))
 
 	else if(copytext(T,1,4) == "age")
 		var/input[] = params2list(T)
 		if(input["key"] != config.comms_password)
-			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
-				spawn(50)
-					world_topic_spam_protect_time = world.time
-					return "Bad Key (Throttled)"
-
-			world_topic_spam_protect_time = world.time
-			world_topic_spam_protect_ip = addr
+			SET_THROTTLE(30 SECONDS, "Bad Comms Key")
 			return "Bad Key"
-
 		var/age = get_player_age(input["age"])
 		if(isnum(age))
 			if(age >= 0)
@@ -461,20 +435,13 @@ var/world_topic_spam_protect_time = world.timeofday
 	else if(copytext(T,1,19) == "prometheus_metrics")
 		var/input[] = params2list(T)
 		if(input["key"] != config.comms_password)
-			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
-				spawn(50)
-					world_topic_spam_protect_time = world.time
-					return "Bad Key (Throttled)"
-
-			world_topic_spam_protect_time = world.time
-			world_topic_spam_protect_ip = addr
+			SET_THROTTLE(30 SECONDS, "Bad Comms Key")
 			return "Bad Key"
-
 		if(!GLOB || !GLOB.prometheus_metrics)
 			return "Metrics not ready"
-
 		return GLOB.prometheus_metrics.collect()
 
+#undef SET_THROTTLE
 
 /world/Reboot(var/reason)
 	/*spawn(0)
@@ -523,22 +490,15 @@ var/world_topic_spam_protect_time = world.timeofday
 	fdel(F)
 	to_file(F, the_mode)
 
-/hook/startup/proc/loadMOTD()
-	world.load_motd()
-	return 1
-
-/world/proc/load_motd()
-	join_motd = file2text("config/motd.txt")
-
-
 /proc/load_configuration()
 	config = new /datum/configuration()
 	config.load("config/config.txt")
 	config.load("config/game_options.txt","game_options")
 	if (GLOB.using_map?.config_path)
 		config.load(GLOB.using_map.config_path, "using_map")
+	config.load_text("config/motd.txt", "motd")
+	config.load_text("config/event.txt", "event")
 	config.loadsql("config/dbconfig.txt")
-	config.load_event("config/custom_event.txt")
 
 /hook/startup/proc/loadMods()
 	world.load_mods()
@@ -574,7 +534,6 @@ var/world_topic_spam_protect_time = world.timeofday
 	s += "<b>[station_name()]</b>";
 	s += " ("
 	s += "<a href=\"https://forums.baystation12.net/\">" //Change this to wherever you want the hub to link to.
-//	s += "[game_version]"
 	s += "Forums"  //Replace this with something else. Or ever better, delete it and uncomment the game version.
 	s += "</a>"
 	s += ")"

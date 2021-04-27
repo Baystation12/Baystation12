@@ -40,7 +40,7 @@
 		input = replace_characters(input, list("\n"=" ","\t"=" "))
 
 	if(encode)
-		// The below \ escapes have a space inserted to attempt to enable Travis auto-checking of span class usage. Please do not remove the space.
+		// The below \ escapes have a space inserted to attempt to enable unit testing of span class usage. Please do not remove the space.
 		//In addition to processing html, html_encode removes byond formatting codes like "\ red", "\ i" and other.
 		//It is important to avoid double-encode text, it can "break" quotes and some other characters.
 		//Also, keep in mind that escaped characters don't work in the interface (window titles, lower left corner of the main window, etc.)
@@ -439,8 +439,8 @@ proc/TextPreview(var/string,var/len=40)
 /proc/digitalPencode2html(var/text)
 	text = replacetext(text, "\[pre\]", "<pre>")
 	text = replacetext(text, "\[/pre\]", "</pre>")
-	text = replacetext(text, "\[fontred\]", "<font color=\"red\">") //</font> to pass travis html tag integrity check
-	text = replacetext(text, "\[fontblue\]", "<font color=\"blue\">")//</font> to pass travis html tag integrity check
+	text = replacetext(text, "\[fontred\]", "<font color=\"red\">") //</font> to pass html tag integrity unit test
+	text = replacetext(text, "\[fontblue\]", "<font color=\"blue\">")//</font> to pass html tag integrity unit test
 	text = replacetext(text, "\[fontgreen\]", "<font color=\"green\">")
 	text = replacetext(text, "\[/font\]", "</font>")
 	text = replacetext(text, "\[redacted\]", "<span class=\"redacted\">R E D A C T E D</span>")
@@ -450,8 +450,8 @@ proc/TextPreview(var/string,var/len=40)
 /proc/html2pencode(t)
 	t = replacetext(t, "<pre>", "\[pre\]")
 	t = replacetext(t, "</pre>", "\[/pre\]")
-	t = replacetext(t, "<font color=\"red\">", "\[fontred\]")//</font> to pass travis html tag integrity check
-	t = replacetext(t, "<font color=\"blue\">", "\[fontblue\]")//</font> to pass travis html tag integrity check
+	t = replacetext(t, "<font color=\"red\">", "\[fontred\]")//</font> to pass html tag integrity unit test
+	t = replacetext(t, "<font color=\"blue\">", "\[fontblue\]")//</font> to pass html tag integrity unit test
 	t = replacetext(t, "<font color=\"green\">", "\[fontgreen\]")
 	t = replacetext(t, "</font>", "\[/font\]")
 	t = replacetext(t, "<BR>", "\[br\]")
@@ -568,7 +568,7 @@ proc/TextPreview(var/string,var/len=40)
 // If char isn't part of the text the entire text is returned
 /proc/copytext_after_last(var/text, var/char)
 	var/regex/R = regex("(\[^[char]\]*)$")
-	R.Find(text)
+	regex_find(R, text)
 	return R.group[1]
 
 /proc/sql_sanitize_text(var/text)
@@ -595,5 +595,5 @@ proc/TextPreview(var/string,var/len=40)
 	if (message && length(config.chat_markup))
 		for (var/list/entry in config.chat_markup)
 			var/regex/matcher = entry[1]
-			message = matcher.Replace(message, entry[2])
+			message = replacetext_char(message, matcher, entry[2])
 	return message

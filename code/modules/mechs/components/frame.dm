@@ -11,7 +11,7 @@
 	desc = "The frame for an exosuit, apparently."
 	icon = 'icons/mecha/mech_parts.dmi'
 	icon_state = "backbone"
-	density = 1
+	density = TRUE
 	pixel_x = -8
 	atom_flags = ATOM_FLAG_CAN_BE_PAINTED
 
@@ -236,7 +236,7 @@
 		is_reinforced = (is_reinforced == FRAME_REINFORCED_SECURE) ? FRAME_REINFORCED : FRAME_REINFORCED_SECURE
 	// Welding metal.
 	else if(isWelder(thing))
-		var/obj/item/weapon/weldingtool/WT = thing
+		var/obj/item/weldingtool/WT = thing
 		if(!is_reinforced)
 			to_chat(user, SPAN_WARNING("There is no metal to secure inside \the [src]."))
 			return

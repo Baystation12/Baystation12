@@ -20,7 +20,7 @@
 	name = "\improper Electrowarfare Suite and Voice Synthesiser"
 	desc = "Includes two modules that, once installed and activated, are capable of masking your voice and disrupting the AI from tracking you."
 	item_cost = 24
-	path = /obj/item/weapon/storage/backpack/satchel/syndie_kit/ewar_voice
+	path = /obj/item/storage/backpack/satchel/syndie_kit/ewar_voice
 
 /datum/uplink_item/item/hardsuit_modules/maneuvering_jets
 	name = "\improper Maneuvering Jets"

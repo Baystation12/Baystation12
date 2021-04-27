@@ -10,8 +10,8 @@
 	desc = "A large automated factory for producing maintenance drones."
 	appearance_flags = 0
 
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	idle_power_usage = 20
 	active_power_usage = 5000
 

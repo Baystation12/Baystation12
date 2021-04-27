@@ -3,7 +3,7 @@
 	desc = "A simple bar railing designed to protect against careless trespass."
 	icon = 'icons/obj/railing.dmi'
 	icon_state = "railing0-1"
-	density = 1
+	density = TRUE
 	throwpass = 1
 	layer = OBJ_LAYER
 	climb_speed_mult = 0.25
@@ -25,7 +25,7 @@
 	color = COLOR_GUNMETAL // They're not painted!
 
 /obj/structure/railing/mapped/no_density
-	density = 0
+	density = FALSE
 
 /obj/structure/railing/mapped/no_density/Initialize()
 	. = ..()
@@ -237,15 +237,15 @@
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 			if(density)
 				user.visible_message("<span class='notice'>\The [user] wrenches \the [src] open.</span>", "<span class='notice'>You wrench \the [src] open.</span>")
-				density = 0
+				density = FALSE
 			else
 				user.visible_message("<span class='notice'>\The [user] wrenches \the [src] closed.</span>", "<span class='notice'>You wrench \the [src] closed.</span>")
-				density = 1
+				density = TRUE
 			update_icon()
 			return
 	// Repair
 	if(isWelder(W))
-		var/obj/item/weapon/weldingtool/F = W
+		var/obj/item/weldingtool/F = W
 		if(F.isOn())
 			if(health >= maxhealth)
 				to_chat(user, "<span class='warning'>\The [src] does not need repairs.</span>")

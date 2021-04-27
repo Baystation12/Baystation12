@@ -39,3 +39,8 @@ GLOBAL_LIST_INIT(mech_weapon_overlays, icon_states('icons/mecha/mech_weapon_over
 
 #define FRAME_WIRED 1
 #define FRAME_WIRED_ADJUSTED 2
+
+//POWER!
+#define MECH_POWER_OFF 0
+#define MECH_POWER_TRANSITION 1
+#define MECH_POWER_ON 2

@@ -1,4 +1,4 @@
-/obj/item/weapon/contract
+/obj/item/contract
 	name = "contract"
 	desc = "written in the blood of some unfortunate fellow."
 	icon = 'icons/mob/screen_spells.dmi'
@@ -7,7 +7,7 @@
 	var/contract_master = null
 	var/list/contract_spells = list(/spell/contract/reward,/spell/contract/punish,/spell/contract/return_master)
 
-/obj/item/weapon/contract/attack_self(mob/user as mob)
+/obj/item/contract/attack_self(mob/user as mob)
 	if(contract_master == null)
 		to_chat(user, "<span class='notice'>You bind the contract to your soul, making you the recipient of whatever poor fool's soul that decides to contract with you.</span>")
 		contract_master = user
@@ -32,16 +32,16 @@
 		log_and_message_admins("signed their soul over to \the [contract_master] using \the [src].", user)
 		qdel(src)
 
-/obj/item/weapon/contract/proc/contract_effect(mob/user as mob)
+/obj/item/contract/proc/contract_effect(mob/user as mob)
 	to_chat(user, "<span class='warning'>You've signed your soul over to \the [contract_master] and with that your unbreakable vow of servitude begins.</span>")
 	return 1
 
-/obj/item/weapon/contract/apprentice
+/obj/item/contract/apprentice
 	name = "apprentice wizarding contract"
 	desc = "a wizarding school contract for those who want to sign their soul for a piece of the magic pie."
 	color = "#993300"
 
-/obj/item/weapon/contract/apprentice/contract_effect(mob/user as mob)
+/obj/item/contract/apprentice/contract_effect(mob/user as mob)
 	if(user.mind.special_role == ANTAG_APPRENTICE)
 		to_chat(user, "<span class='warning'>You are already a wizarding apprentice!</span>")
 		return 0
@@ -54,15 +54,15 @@
 	return 0
 
 
-/obj/item/weapon/contract/wizard //contracts that involve making a deal with the Wizard Acadamy (or NON PLAYERS)
+/obj/item/contract/wizard //contracts that involve making a deal with the Wizard Acadamy (or NON PLAYERS)
 	contract_master = "\improper Wizard Academy"
 
-/obj/item/weapon/contract/wizard/xray
+/obj/item/contract/wizard/xray
 	name = "xray vision contract"
 	desc = "This contract is almost see-through..."
 	color = "#339900"
 
-/obj/item/weapon/contract/wizard/xray/contract_effect(mob/user as mob)
+/obj/item/contract/wizard/xray/contract_effect(mob/user as mob)
 	..()
 	if (!(MUTATION_XRAY in user.mutations))
 		user.mutations.Add(MUTATION_XRAY)
@@ -73,12 +73,12 @@
 		return 1
 	return 0
 
-/obj/item/weapon/contract/wizard/telepathy
+/obj/item/contract/wizard/telepathy
 	name = "telepathy contract"
 	desc = "The edges of the contract grow blurry when you look away from them. To be fair, actually reading it gives you a headache."
 	color = "#fcc605"
 
-/obj/item/weapon/contract/wizard/telepathy/contract_effect(mob/user as mob)
+/obj/item/contract/wizard/telepathy/contract_effect(mob/user as mob)
 	..()
 	if (!ishuman(user))
 		return 0
@@ -90,12 +90,12 @@
 	to_chat(H, "<span class='notice'>You expand your mind outwards.</span>")
 	return 1
 
-/obj/item/weapon/contract/boon
+/obj/item/contract/boon
 	name = "boon contract"
 	desc = "this contract grants you a boon for signing it."
 	var/path
 
-/obj/item/weapon/contract/boon/New(var/newloc, var/new_path)
+/obj/item/contract/boon/New(var/newloc, var/new_path)
 	..(newloc)
 	if(new_path)
 		path = new_path
@@ -108,7 +108,7 @@
 		item_name = initial(S.name)
 	name = "[item_name] contract"
 
-/obj/item/weapon/contract/boon/contract_effect(mob/user as mob)
+/obj/item/contract/boon/contract_effect(mob/user as mob)
 	..()
 	if(user.mind.special_role == ANTAG_SERVANT)
 		to_chat(user, "<span class='warning'>As a servant you find yourself unable to use this contract.</span>")
@@ -121,35 +121,35 @@
 		playsound(get_turf(usr),'sound/magic/charge.ogg',50,1)
 		return 1
 
-/obj/item/weapon/contract/boon/wizard
+/obj/item/contract/boon/wizard
 	contract_master = "\improper Wizard Academy"
 
-/obj/item/weapon/contract/boon/wizard/artificer
+/obj/item/contract/boon/wizard/artificer
 	path = /spell/aoe_turf/conjure/construct
 	desc = "This contract has a passage dedicated to an entity known as 'Nar-Sie'."
 
-/obj/item/weapon/contract/boon/wizard/fireball
+/obj/item/contract/boon/wizard/fireball
 	path = /spell/targeted/projectile/dumbfire/fireball
 	desc = "This contract feels warm to the touch."
 
-/obj/item/weapon/contract/boon/wizard/smoke
+/obj/item/contract/boon/wizard/smoke
 	path = /spell/aoe_turf/smoke
 	desc = "This contract smells as dank as they come."
 
-/obj/item/weapon/contract/boon/wizard/forcewall
+/obj/item/contract/boon/wizard/forcewall
 	path = /spell/aoe_turf/conjure/forcewall
 	contract_master = "\improper Mime Federation"
 	desc = "This contract has a dedication to mimes everywhere at the top."
 
-/obj/item/weapon/contract/boon/wizard/knock
+/obj/item/contract/boon/wizard/knock
 	path = /spell/aoe_turf/knock
 	desc = "This contract is hard to hold still."
 
-/obj/item/weapon/contract/boon/wizard/horsemask
+/obj/item/contract/boon/wizard/horsemask
 	path = /spell/targeted/equip_item/horsemask
 	desc = "This contract is more horse than your mind has room for."
 
-/obj/item/weapon/contract/boon/wizard/charge
+/obj/item/contract/boon/wizard/charge
 	path = /spell/aoe_turf/charge
 	desc = "This contract is made of 100% post-consumer wizard."
 

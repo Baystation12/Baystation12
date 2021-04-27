@@ -6,8 +6,8 @@
 	program_key_state = "generic_key"
 	program_menu_icon = "mail-open"
 	size = 12
-	requires_ntnet = 1
-	available_on_ntnet = 1
+	requires_ntnet = TRUE
+	available_on_ntnet = TRUE
 	nanomodule_path = /datum/nano_module/program/email_administration
 	required_access = access_network
 	category = PROG_ADMIN
@@ -82,7 +82,7 @@
 		return 1
 
 	// High security - can only be operated when the user has an ID with access on them.
-	var/obj/item/weapon/card/id/I = user.GetIdCard()
+	var/obj/item/card/id/I = user.GetIdCard()
 	if(!istype(I) || !(access_network in I.access))
 		return 1
 

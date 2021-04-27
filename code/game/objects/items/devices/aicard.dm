@@ -1,4 +1,4 @@
-/obj/item/weapon/aicard
+/obj/item/aicard
 	name = "inteliCard"
 	icon = 'icons/obj/pda.dmi'
 	icon_state = "aicard" // aicard-full
@@ -10,11 +10,11 @@
 
 	var/mob/living/silicon/ai/carded_ai
 
-/obj/item/weapon/aicard/attack_self(mob/user)
+/obj/item/aicard/attack_self(mob/user)
 
 	ui_interact(user)
 
-/obj/item/weapon/aicard/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.inventory_state)
+/obj/item/aicard/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.inventory_state)
 	var/data[0]
 	data["has_ai"] = carded_ai != null
 	if(carded_ai)
@@ -39,7 +39,7 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/item/weapon/aicard/Topic(href, href_list, state)
+/obj/item/aicard/Topic(href, href_list, state)
 	if(..())
 		return 1
 
@@ -69,7 +69,7 @@
 		update_icon()
 	return 1
 
-/obj/item/weapon/aicard/on_update_icon()
+/obj/item/aicard/on_update_icon()
 	overlays.Cut()
 	if(carded_ai)
 		if (!carded_ai.control_disabled)
@@ -81,7 +81,7 @@
 	else
 		icon_state = "aicard"
 
-/obj/item/weapon/aicard/proc/grab_ai(var/mob/living/silicon/ai/ai, var/mob/living/user)
+/obj/item/aicard/proc/grab_ai(var/mob/living/silicon/ai/ai, var/mob/living/user)
 	if(!ai.client)
 		to_chat(user, "<span class='danger'>ERROR:</span> AI [ai.name] is offline. Unable to download.")
 		return 0
@@ -117,7 +117,7 @@
 	update_icon()
 	return 1
 
-/obj/item/weapon/aicard/proc/clear()
+/obj/item/aicard/proc/clear()
 	if(carded_ai && istype(carded_ai.loc, /turf))
 		carded_ai.carded = 0
 	SetName(initial(name))
@@ -125,21 +125,21 @@
 	carded_ai = null
 	update_icon()
 
-/obj/item/weapon/aicard/see_emote(mob/living/M, text)
+/obj/item/aicard/see_emote(mob/living/M, text)
 	if(carded_ai && carded_ai.client)
 		var/rendered = "<span class='message'>[text]</span>"
 		carded_ai.show_message(rendered, 2)
 	..()
 
-/obj/item/weapon/aicard/show_message(msg, type, alt, alt_type)
+/obj/item/aicard/show_message(msg, type, alt, alt_type)
 	if(carded_ai && carded_ai.client)
 		var/rendered = "<span class='message'>[msg]</span>"
 		carded_ai.show_message(rendered, type)
 	..()
 
-/obj/item/weapon/aicard/relaymove(var/mob/user, var/direction)
+/obj/item/aicard/relaymove(var/mob/user, var/direction)
 	if(user.stat || user.stunned)
 		return
-	var/obj/item/weapon/rig/rig = src.get_rig()
+	var/obj/item/rig/rig = src.get_rig()
 	if(istype(rig))
 		rig.forced_move(direction, user)

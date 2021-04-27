@@ -1,4 +1,4 @@
-/obj/item/weapon/book/manual/chef_recipes
+/obj/item/book/manual/chef_recipes
 	name = "Chef Recipes"
 	icon_state = "cooked_book"
 	author = "Victoria Ponsonby"
@@ -57,7 +57,7 @@
 			"}
 
 
-/obj/item/weapon/book/manual/barman_recipes
+/obj/item/book/manual/barman_recipes
 	name = "Barman Recipes"
 	icon_state = "barbook"
 	author = "Sir John Rose"
@@ -112,7 +112,7 @@
 			"}
 
 
-/obj/item/weapon/book/manual/detective
+/obj/item/book/manual/detective
 	name = "The Film Noir: Proper Procedures for Investigations"
 	icon_state ="bookDetective"
 	author = "The Company"
@@ -155,7 +155,7 @@
 				</body>
 			</html>"}
 
-/obj/item/weapon/book/manual/nuclear
+/obj/item/book/manual/nuclear
 	name = "Fission Mailed: Nuclear Sabotage 101"
 	icon_state ="bookNuclear"
 	author = "Syndicate"
@@ -206,7 +206,7 @@
 			</html>
 			"}
 
-/obj/item/weapon/book/manual/psionics
+/obj/item/book/manual/psionics
 	name = "Psychonetics"
 	icon_state = "foundation"
 	author = "John Titor"

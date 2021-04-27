@@ -1,7 +1,7 @@
 /datum/extension/holster
 	base_type = /datum/extension/holster
 	var/atom/atom_holder
-	var/obj/item/weapon/storage/storage
+	var/obj/item/storage/storage
 	var/sound_in = 'sound/effects/holster/holsterin.ogg'
 	var/sound_out = 'sound/effects/holster/holsterout.ogg'
 	var/list/can_holster = null
@@ -74,8 +74,8 @@
 		var/sound_vol = 25
 		if(user.a_intent == I_HURT)
 			sound_vol = 50
-			if(istype(holstered, /obj/item/weapon/gun))
-				var/obj/item/weapon/gun/G = holstered
+			if(istype(holstered, /obj/item/gun))
+				var/obj/item/gun/G = holstered
 				G.check_accidents(user)
 				if(G.safety() && !user.skill_fail_prob(SKILL_WEAPONS, 100, SKILL_EXPERT, 0.5)) //Experienced shooter will disable safety before shooting.
 					G.toggle_safety(user)

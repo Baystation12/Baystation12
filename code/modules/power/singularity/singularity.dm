@@ -1,15 +1,15 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:33
 
-/obj/singularity/
+/obj/singularity
 	name = "gravitational singularity"
 	desc = "A gravitational singularity."
 	icon = 'icons/obj/singularity.dmi'
 	icon_state = "singularity_s1"
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 	layer = SINGULARITY_LAYER
 	light_outer_range = 6
-	unacidable = 1 //Don't comment this out.
+	unacidable = TRUE
 
 	var/current_size = 1
 	var/allowed_size = 1
@@ -35,8 +35,7 @@
 	energy = starting_energy
 
 	if (temp)
-		spawn (temp)
-			qdel(src)
+		addtimer(CALLBACK(null, /proc/qdel, src), temp)
 
 	..()
 	START_PROCESSING(SSobj, src)

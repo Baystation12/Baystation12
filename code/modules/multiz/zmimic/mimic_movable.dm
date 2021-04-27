@@ -59,6 +59,7 @@
 
 // No blowing up abstract objects.
 /atom/movable/openspace/ex_act(ex_sev)
+	SHOULD_CALL_PARENT(FALSE)
 	return
 
 /atom/movable/openspace/singularity_act()
@@ -69,6 +70,8 @@
 
 /atom/movable/openspace/singuloCanEat()
 	return
+
+// -- MULTIPLIER / SHADOWER --
 
 // Holder object used for dimming openspaces & copying lighting of below turf.
 /atom/movable/openspace/multiplier
@@ -133,6 +136,9 @@
 	if (bound_overlay)
 		update_above()
 
+// -- OPENSPACE OVERLAY --
+// todo: rename
+
 // Object used to hold a mimiced atom's appearance.
 /atom/movable/openspace/overlay
 	plane = OPENTURF_MAX_PLANE
@@ -141,6 +147,8 @@
 	var/queued = FALSE
 	var/destruction_timer
 	var/mimiced_type
+	var/original_z
+	var/override_depth
 
 /atom/movable/openspace/overlay/New()
 	atom_flags |= ATOM_FLAG_INITIALIZED
@@ -164,10 +172,8 @@
 /atom/movable/openspace/overlay/attack_hand(mob/user)
 	to_chat(user, SPAN_NOTICE("You cannot reach \the [src] from here."))
 
-/atom/movable/openspace/overlay/attack_generic(mob/user)
-	to_chat(user, SPAN_NOTICE("You cannot reach \the [src] from here."))
-
 /atom/movable/openspace/overlay/examine(...)
+	SHOULD_CALL_PARENT(FALSE)
 	. = associated_atom.examine(arglist(args))	// just pass all the args to the copied atom
 
 /atom/movable/openspace/overlay/forceMove(turf/dest)
@@ -184,18 +190,50 @@
 	if (!destruction_timer)
 		destruction_timer = addtimer(CALLBACK(src, /datum/.proc/qdel_self), 10 SECONDS, TIMER_STOPPABLE)
 
-// This one's a little different because it's mimicing a turf.
-/atom/movable/openspace/turf_overlay
-	plane = OPENTURF_MAX_PLANE
+// -- TURF DELEGATE --
 
-/atom/movable/openspace/turf_overlay/attackby(obj/item/W, mob/user)
+// This thing holds the mimic appearance for non-OVERWRITE turfs.
+/atom/movable/openspace/turf_delegate
+	plane = OPENTURF_MAX_PLANE
+	mouse_opacity = 0
+	no_z_overlay = TRUE  // Only one of these should ever be visible at a time, the mimic logic will handle that.
+
+/atom/movable/openspace/turf_delegate/attackby(obj/item/W, mob/user)
 	loc.attackby(W, user)
 
-/atom/movable/openspace/turf_overlay/attack_hand(mob/user as mob)
+/atom/movable/openspace/turf_delegate/attack_hand(mob/user as mob)
 	loc.attack_hand(user)
 
-/atom/movable/openspace/turf_overlay/attack_generic(mob/user as mob)
+/atom/movable/openspace/turf_delegate/attack_generic(mob/user as mob)
 	loc.attack_generic(user)
 
-/atom/movable/openspace/turf_overlay/examine(mob/examiner)
-	loc.examine(examiner)
+/atom/movable/openspace/turf_delegate/examine(mob/examiner)
+	SHOULD_CALL_PARENT(FALSE)
+	. = loc.examine(examiner)
+
+
+// -- DELEGATE COPY --
+
+// A type for copying delegates' self-appearance.
+/atom/movable/openspace/delegate_copy
+	plane = OPENTURF_MAX_PLANE	// These *should* only ever be at the top?
+	mouse_opacity = 0
+	var/turf/delegate
+
+/atom/movable/openspace/delegate_copy/Initialize(mapload, ...)
+	. = ..()
+	ASSERT(isturf(loc))
+	delegate = loc:below
+
+/atom/movable/openspace/delegate_copy/attackby(obj/item/W, mob/user)
+	loc.attackby(W, user)
+
+/atom/movable/openspace/delegate_copy/attack_hand(mob/user as mob)
+	to_chat(user, SPAN_NOTICE("You cannot reach \the [src] from here."))
+
+/atom/movable/openspace/delegate_copy/attack_generic(mob/user as mob)
+	to_chat(user, SPAN_NOTICE("You cannot reach \the [src] from here."))
+
+/atom/movable/openspace/delegate_copy/examine(mob/examiner)
+	SHOULD_CALL_PARENT(FALSE)
+	. = delegate.examine(examiner)

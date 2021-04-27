@@ -2,7 +2,7 @@
 	form_name = "CC-SGF-09"
 	title = "Cyborgification Contract"
 	logo = "\[solcrest\]"
-	available_on_ntnet = 1
+	available_on_ntnet = TRUE
 
 /datum/computer_file/report/recipient/borging/generate_fields()
 	..()

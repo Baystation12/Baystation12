@@ -8,24 +8,24 @@
 /obj/structure/closet/secure_closet/miner/WillContain()
 	return list(
 		new /datum/atom_creator/weighted(list(
-				/obj/item/weapon/storage/backpack/industrial,
-				/obj/item/weapon/storage/backpack/satchel/eng
+				/obj/item/storage/backpack/industrial,
+				/obj/item/storage/backpack/satchel/eng
 			)),
 		/obj/item/device/radio/headset/headset_cargo,
 		/obj/item/clothing/under/rank/miner,
 		/obj/item/clothing/gloves/thick,
 		/obj/item/clothing/shoes/black,
 		/obj/item/device/scanner/gas,
-		/obj/item/weapon/storage/ore,
+		/obj/item/storage/ore,
 		/obj/item/device/flashlight/lantern,
-		/obj/item/weapon/shovel,
-		/obj/item/weapon/pickaxe,
+		/obj/item/shovel,
+		/obj/item/pickaxe,
 		/obj/item/clothing/glasses/meson
 	)
 
 /**********'pickaxes' but theyre drills actually***************/
 
-/obj/item/weapon/pickaxe
+/obj/item/pickaxe
 	name = "mining drill"
 	desc = "The most basic of mining drills, for short excavations and small mineral extractions."
 	icon = 'icons/obj/tools.dmi'
@@ -42,25 +42,24 @@
 	attack_verb = list("hit", "pierced", "sliced", "attacked")
 	var/drill_sound = 'sound/weapons/Genhit.ogg'
 	var/drill_verb = "drilling"
-	sharp = 0
 
 	var/excavation_amount = 200
 	var/build_from_parts = FALSE
 	var/hardware_color
 
-/obj/item/weapon/pickaxe/Initialize()
+/obj/item/pickaxe/Initialize()
 	if(build_from_parts)
 		icon_state = "pick_hardware"
 		color = hardware_color
 		overlays += overlay_image(icon, "pick_handle", flags=RESET_COLOR)
 	. = ..()
 
-/obj/item/weapon/pickaxe/hammer
+/obj/item/pickaxe/hammer
 	name = "sledgehammer"
 	desc = "A mining hammer made of reinforced metal. You feel like smashing your boss in the face with this."
 	icon = 'icons/obj/weapons/melee_physical.dmi'
 
-/obj/item/weapon/pickaxe/drill
+/obj/item/pickaxe/drill
 	name = "advanced mining drill" // Can dig sand as well!
 	icon_state = "handdrill"
 	item_state = "jackhammer"
@@ -69,7 +68,7 @@
 	desc = "Yours is the drill that will pierce through the rock walls."
 	drill_verb = "drilling"
 
-/obj/item/weapon/pickaxe/jackhammer
+/obj/item/pickaxe/jackhammer
 	name = "sonic jackhammer"
 	icon_state = "jackhammer"
 	item_state = "jackhammer"
@@ -78,7 +77,7 @@
 	desc = "Cracks rocks with sonic blasts, perfect for killing cave lizards."
 	drill_verb = "hammering"
 
-/obj/item/weapon/pickaxe/diamonddrill //When people ask about the badass leader of the mining tools, they are talking about ME!
+/obj/item/pickaxe/diamonddrill //When people ask about the badass leader of the mining tools, they are talking about ME!
 	name = "diamond mining drill"
 	icon_state = "diamonddrill"
 	item_state = "jackhammer"
@@ -87,7 +86,7 @@
 	desc = "Yours is the drill that will pierce the heavens!"
 	drill_verb = "drilling"
 
-/obj/item/weapon/pickaxe/borgdrill
+/obj/item/pickaxe/borgdrill
 	name = "cyborg mining drill"
 	icon_state = "diamonddrill"
 	item_state = "jackhammer"
@@ -96,7 +95,7 @@
 	drill_verb = "drilling"
 
 //****************************actual pickaxes***********************
-/obj/item/weapon/pickaxe/silver
+/obj/item/pickaxe/silver
 	name = "silver pickaxe"
 	desc = "This makes no metallurgic sense."
 	icon_state = "pick_preview"
@@ -104,11 +103,11 @@
 	digspeed = 30
 	origin_tech = list(TECH_MATERIAL = 3)
 	drill_verb = "picking"
-	sharp = 1
+	sharp = TRUE
 	build_from_parts = TRUE
 	hardware_color = COLOR_SILVER
 
-/obj/item/weapon/pickaxe/gold
+/obj/item/pickaxe/gold
 	name = "golden pickaxe"
 	desc = "This makes no metallurgic sense."
 	icon_state = "pick_preview"
@@ -116,11 +115,11 @@
 	digspeed = 20
 	origin_tech = list(TECH_MATERIAL = 4)
 	drill_verb = "picking"
-	sharp = 1
+	sharp = TRUE
 	build_from_parts = TRUE
 	hardware_color = COLOR_GOLD
 
-/obj/item/weapon/pickaxe/diamond
+/obj/item/pickaxe/diamond
 	name = "diamond pickaxe"
 	desc = "A pickaxe with a diamond pick head."
 	icon_state = "pick_preview"
@@ -128,13 +127,13 @@
 	digspeed = 10
 	origin_tech = list(TECH_MATERIAL = 6, TECH_ENGINEERING = 4)
 	drill_verb = "picking"
-	sharp = 1
+	sharp = TRUE
 	build_from_parts = TRUE
 	hardware_color = COLOR_DIAMOND
 
 /*****************************Shovel********************************/
 
-/obj/item/weapon/shovel
+/obj/item/shovel
 	name = "shovel"
 	desc = "A large tool for digging and moving dirt."
 	icon = 'icons/obj/tools.dmi'
@@ -148,10 +147,9 @@
 	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 1)
 	matter = list(MATERIAL_STEEL = 50)
 	attack_verb = list("bashed", "bludgeoned", "thrashed", "whacked")
-	sharp = 0
-	edge = 1
+	edge = TRUE
 
-/obj/item/weapon/shovel/spade
+/obj/item/shovel/spade
 	name = "spade"
 	desc = "A small tool for digging and moving dirt."
 	icon_state = "spade"
@@ -181,10 +179,10 @@
 
 /obj/item/stack/flag/green
 	light_color = COLOR_LIME
-	
+
 /obj/item/stack/flag/blue
 	light_color = COLOR_BLUE
-	
+
 /obj/item/stack/flag/teal
 	light_color = COLOR_TEAL
 
@@ -227,7 +225,7 @@
 
 /obj/item/stack/flag/proc/set_up()
 	upright = 1
-	anchored = 1
+	anchored = TRUE
 	update_icon()
 
 /obj/item/stack/flag/on_update_icon()
@@ -241,7 +239,7 @@
 		addon.layer = ABOVE_LIGHTING_LAYER
 		addon.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 		overlays += addon
-		set_light(0.2, 0.1, 1) // Very dim so the rest of the thingie is barely visible - if the turf is completely dark, you can't see anything on it, no matter what
+		set_light(0.5, 0.5, 3) 
 	else
 		pixel_x = rand(-randpixel, randpixel)
 		pixel_y = rand(-randpixel, randpixel)
@@ -253,5 +251,5 @@
 
 /obj/item/stack/flag/proc/knock_down()
 	upright = 0
-	anchored = 0
+	anchored = FALSE
 	update_icon()

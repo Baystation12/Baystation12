@@ -28,7 +28,7 @@
 /obj/item/device/soulstone/proc/shatter()
 	playsound(loc, "shatter", 70, 1)
 	for(var/i=1 to rand(2,5))
-		new /obj/item/weapon/material/shard(get_turf(src), MATERIAL_NULLGLASS)
+		new /obj/item/material/shard(get_turf(src), MATERIAL_NULLGLASS)
 	qdel(src)
 
 /obj/item/device/soulstone/withstand_psi_stress(var/stress, var/atom/source)
@@ -65,7 +65,7 @@
 
 /obj/item/device/soulstone/attackby(var/obj/item/I, var/mob/user)
 	..()
-	if(is_evil && istype(I, /obj/item/weapon/nullrod))
+	if(is_evil && istype(I, /obj/item/nullrod))
 		to_chat(user, "<span class='notice'>You cleanse \the [src] of taint, purging its shackles to its creator..</span>")
 		is_evil = 0
 		return
