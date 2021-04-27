@@ -93,24 +93,27 @@
 	else
 		w_class = ITEM_SIZE_SMALL
 
-/obj/item/spacecash/bundle/attack_self()
-	var/amount = input(usr, "How many [GLOB.using_map.local_currency_name] do you want to take? (0 to [src.worth])", "Take Money", 20) as num
-	amount = round(Clamp(amount, 0, src.worth))
-	if(amount==0) return 0
+/obj/item/spacecash/bundle/attack_hand(mob/user as mob)
+	if (user.get_inactive_hand() == src)
+		var/amount = input(usr, "How many [GLOB.using_map.local_currency_name] do you want to take? (0 to [src.worth])", "Take Money", 20) as num
+		amount = round(Clamp(amount, 0, src.worth))
+		if (amount==0) return 0
 
-	src.worth -= amount
-	src.update_icon()
-	if(amount in list(1000,500,200,100,50,20,1))
-		var/cashtype = text2path("/obj/item/spacecash/bundle/c[amount]")
-		var/obj/cash = new cashtype (usr.loc)
-		usr.put_in_hands(cash)
+		src.worth -= amount
+		src.update_icon()
+		if (amount in list(1000,500,200,100,50,20,1))
+			var/cashtype = text2path("/obj/item/spacecash/bundle/c[amount]")
+			var/obj/cash = new cashtype (usr.loc)
+			usr.put_in_hands(cash)
+		else
+			var/obj/item/spacecash/bundle/bundle = new (usr.loc)
+			bundle.worth = amount
+			bundle.update_icon()
+			usr.put_in_hands(bundle)
+		if (!worth)
+			qdel(src)
 	else
-		var/obj/item/spacecash/bundle/bundle = new (usr.loc)
-		bundle.worth = amount
-		bundle.update_icon()
-		usr.put_in_hands(bundle)
-	if(!worth)
-		qdel(src)
+		..()
 
 /obj/item/spacecash/bundle/c1
 	name = "1 Thaler"
