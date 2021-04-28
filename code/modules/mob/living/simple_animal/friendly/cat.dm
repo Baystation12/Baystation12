@@ -165,6 +165,8 @@
 			stop_automated_movement = 0
 			if (prob(10))
 				say("Meow!")
+				var/meow = pick('sound/voice/meow.ogg', 'sound/voice/meow2.ogg')
+				playsound(src, meow, 50, 1)
 
 	if (!friend || movement_target != friend)
 		..()
@@ -179,9 +181,13 @@
 		if (friend.stat >= DEAD || friend.is_asystole())
 			if (prob((friend.stat < DEAD)? 50 : 15))
 				var/verb = pick("meows", "mews", "mrowls")
+				var/meow = pick('sound/voice/meow.ogg', 'sound/voice/meow2.ogg')
+				playsound(src, meow, 50, 1)
 				audible_emote(pick("[verb] in distress.", "[verb] anxiously."))
 		else
 			if (prob(5))
+				var/purr = pick('sound/voice/purr.ogg', 'sound/voice/purr2.ogg')
+				playsound(src, purr, 50, 1)
 				visible_emote(pick("nuzzles [friend].",
 								   "brushes against [friend].",
 								   "rubs against [friend].",
@@ -189,7 +195,9 @@
 	else if (friend.health <= 50)
 		if (prob(10))
 			var/verb = pick("meows", "mews", "mrowls")
+			var/meow = pick('sound/voice/meow.ogg', 'sound/voice/meow2.ogg')
 			audible_emote("[verb] anxiously.")
+			playsound(src, meow, 50, 1)
 
 /mob/living/simple_animal/cat/fluff/verb/become_friends()
 	set name = "Become Friends"
@@ -206,12 +214,14 @@
 
 	if(.)
 		set_dir(get_dir(src, friend))
+		var/purr = pick('sound/voice/purr.ogg', 'sound/voice/purr2.ogg')
+		playsound(src, purr, 50, 1)
 		visible_emote(pick("nuzzles [friend].",
 						   "brushes against [friend].",
 						   "rubs against [friend].",
 						   "purrs."))
 	else
-		to_chat(usr, "<span class='notice'>[src] ignores you.</span>")
+		to_chat(usr, SPAN_NOTICE("[src] ignores you."))
 	return
 
 //RUNTIME IS ALIVE! SQUEEEEEEEE~
