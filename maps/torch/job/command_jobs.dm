@@ -71,8 +71,8 @@
 		access_gateway, access_sec_doors, access_psychiatrist, access_xenoarch, access_medical_equip, access_heads, access_hangar, access_guppy_helm,
 		access_expedition_shuttle_helm, access_aquila, access_aquila_helm, access_solgov_crew, access_nanotrasen,
 		access_emergency_armory, access_sec_guard, access_gun, access_expedition_shuttle, access_guppy, access_seneng, access_senmed, access_senadv,
-		access_explorer, access_pathfinder, access_pilot, access_commissary, access_petrov, access_petrov_helm, access_petrov_analysis, access_petrov_phoron,
-		access_petrov_toxins, access_petrov_chemistry, access_petrov_security, access_petrov_maint, access_rd, access_petrov_rd, access_torch_fax, access_torch_helm,
+		access_explorer, access_pathfinder, access_pilot, access_commissary, access_collins, access_collins_helm, access_collins_analysis, access_collins_phoron,
+		access_collins_toxins, access_collins_chemistry, access_collins_security, access_collins_maint, access_rd, access_collins_rd, access_torch_fax, access_torch_helm,
 		access_radio_comm, access_radio_eng, access_radio_med, access_radio_sec, access_radio_sup, access_radio_serv, access_radio_exp, access_radio_sci
 	)
 
@@ -87,8 +87,8 @@
 		access_gateway, access_sec_doors, access_psychiatrist, access_xenoarch, access_medical_equip, access_heads, access_hangar, access_guppy_helm,
 		access_expedition_shuttle_helm, access_aquila, access_aquila_helm, access_solgov_crew, access_nanotrasen,
 		access_emergency_armory, access_sec_guard, access_gun, access_expedition_shuttle, access_guppy, access_seneng, access_senmed, access_senadv,
-		access_explorer, access_pathfinder, access_pilot, access_commissary, access_petrov, access_petrov_helm, access_petrov_analysis, access_petrov_phoron,
-		access_petrov_toxins, access_petrov_chemistry, access_petrov_security, access_petrov_maint, access_rd, access_petrov_rd, access_torch_fax, access_torch_helm,
+		access_explorer, access_pathfinder, access_pilot, access_commissary, access_collins, access_collins_helm, access_collins_analysis, access_collins_phoron,
+		access_collins_toxins, access_collins_chemistry, access_collins_security, access_collins_maint, access_rd, access_collins_rd, access_torch_fax, access_torch_helm,
 		access_radio_comm, access_radio_eng, access_radio_med, access_radio_sec, access_radio_sup, access_radio_serv, access_radio_exp, access_radio_sci
 	)
 
@@ -132,9 +132,9 @@
 		access_tox, access_tox_storage, access_emergency_storage, access_teleporter, access_bridge, access_rd,
 		access_research, access_mining, access_mining_office, access_mining_station, access_xenobiology, access_aquila,
 		access_RC_announce, access_keycard_auth, access_xenoarch, access_nanotrasen, access_sec_guard, access_heads,
-		access_expedition_shuttle, access_guppy, access_hangar, access_petrov, access_petrov_helm, access_guppy_helm,
-		access_petrov_analysis, access_petrov_phoron, access_petrov_toxins, access_petrov_chemistry, access_petrov_rd,
-		access_petrov_security, access_petrov_maint, access_pathfinder, access_explorer, access_eva, access_solgov_crew,
+		access_expedition_shuttle, access_guppy, access_hangar, access_collins, access_collins_helm, access_guppy_helm,
+		access_collins_analysis, access_collins_phoron, access_collins_toxins, access_collins_chemistry, access_collins_rd,
+		access_collins_security, access_collins_maint, access_pathfinder, access_explorer, access_eva, access_solgov_crew,
 		access_expedition_shuttle, access_expedition_shuttle_helm, access_maint_tunnels, access_torch_fax, access_radio_comm,
 		access_radio_sci, access_radio_exp
 	)

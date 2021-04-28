@@ -154,60 +154,60 @@
 	region = ACCESS_REGION_COMMAND
 
 /*************
-* NRV Petrov *
+* NRV Collins *
 *************/
-/var/const/access_petrov = "ACCESS_TORCH_PETROV" //200
-/datum/access/petrov
-	id = access_petrov
-	desc = "Petrov"
+/var/const/access_collins = "ACCESS_TORCH_COLLINS" //200
+/datum/access/collins
+	id = access_collins
+	desc = "Collins"
 	region = ACCESS_REGION_NT
 
-/var/const/access_petrov_helm = "ACCESS_TORCH_PETROV_HELM" //201
-/datum/access/petrov_helm
-	id = access_petrov_helm
-	desc = "Petrov Helm"
+/var/const/access_collins_helm = "ACCESS_TORCH_COLLINS_HELM" //201
+/datum/access/collins_helm
+	id = access_collins_helm
+	desc = "Collins Helm"
 	region = ACCESS_REGION_NT
 
-/var/const/access_petrov_analysis = "ACCESS_TORCH_PETROV_ANALYSIS" //202
-/datum/access/petrov_analysis
-	id = access_petrov_analysis
-	desc = "Petrov Analysis Lab"
+/var/const/access_collins_analysis = "ACCESS_TORCH_COLLINS_ANALYSIS" //202
+/datum/access/collins_analysis
+	id = access_collins_analysis
+	desc = "Collins Analysis Lab"
 	region = ACCESS_REGION_NT
 
-/var/const/access_petrov_phoron = "ACCESS_TORCH_PETROV_PHORON" //203
-/datum/access/petrov_phoron
-	id = access_petrov_phoron
-	desc = "Petrov Phoron Sublimation Lab"
+/var/const/access_collins_phoron = "ACCESS_TORCH_COLLINS_PHORON" //203
+/datum/access/collins_phoron
+	id = access_collins_phoron
+	desc = "Collins Phoron Sublimation Lab"
 	region = ACCESS_REGION_NT
 
-/var/const/access_petrov_toxins = "ACCESS_TORCH_PETROV_TOXINS" //204
-/datum/access/petrov_toxins
-	id = access_petrov_toxins
-	desc = "Petrov Toxins Lab"
+/var/const/access_collins_toxins = "ACCESS_TORCH_COLLINS_TOXINS" //204
+/datum/access/collins_toxins
+	id = access_collins_toxins
+	desc = "Collins Toxins Lab"
 	region = ACCESS_REGION_NT
 
-/var/const/access_petrov_chemistry = "ACCESS_TORCH_PETROV_CHEMISTRY" //205
-/datum/access/petrov_chemistry
-	id = access_petrov_chemistry
-	desc = "Petrov Chemistry Lab"
+/var/const/access_collins_chemistry = "ACCESS_TORCH_COLLINS_CHEMISTRY" //205
+/datum/access/collins_chemistry
+	id = access_collins_chemistry
+	desc = "Collins Chemistry Lab"
 	region = ACCESS_REGION_NT
 
-/var/const/access_petrov_rd = "ACCESS_TORCH_PETROV_RD" //206
-/datum/access/petrov_rd
-	id = access_petrov_rd
-	desc = "Petrov Chief Science Officer's Office"
+/var/const/access_collins_rd = "ACCESS_TORCH_COLLINS_RD" //206
+/datum/access/collins_rd
+	id = access_collins_rd
+	desc = "Collins Chief Science Officer's Office"
 	region = ACCESS_REGION_NT
 
-/var/const/access_petrov_security = "ACCESS_TORCH_PETROV_SEC" //207
-/datum/access/petrov_security
-	id = access_petrov_security
-	desc = "Petrov Security Office"
+/var/const/access_collins_security = "ACCESS_TORCH_COLLINS_SEC" //207
+/datum/access/collins_security
+	id = access_collins_security
+	desc = "Collins Security Office"
 	region = ACCESS_REGION_NT
 
-/var/const/access_petrov_maint = "ACCESS_TORCH_PETROV_MAINT" //208
-/datum/access/petrov_maint
-	id = access_petrov_maint
-	desc = "Petrov Maintenance"
+/var/const/access_collins_maint = "ACCESS_TORCH_COLLINS_MAINT" //208
+/datum/access/collins_maint
+	id = access_collins_maint
+	desc = "Collins Maintenance"
 	region = ACCESS_REGION_NT
 
 /var/const/access_torch_helm = "ACCESS_TORCH_HELM"

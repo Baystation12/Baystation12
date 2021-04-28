@@ -18,7 +18,7 @@
 /area/errant_pisces/bow_port)
 "af" = (
 /obj/machinery/alarm{
-	alarm_id = "petrov1";
+	alarm_id = "collins1";
 	dir = 4;
 	pixel_x = -25;
 	pixel_y = 0;
@@ -72,7 +72,7 @@
 /obj/structure/window/reinforced,
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/alarm{
-	alarm_id = "petrov1";
+	alarm_id = "collins1";
 	dir = 4;
 	pixel_x = -25;
 	pixel_y = 0;
@@ -1151,7 +1151,7 @@
 /area/errant_pisces/atmos)
 "df" = (
 /obj/machinery/alarm{
-	alarm_id = "petrov1";
+	alarm_id = "collins1";
 	dir = 4;
 	pixel_x = -25;
 	pixel_y = 0;
@@ -6137,7 +6137,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/alarm{
-	alarm_id = "petrov1";
+	alarm_id = "collins1";
 	dir = 4;
 	pixel_x = -25;
 	pixel_y = 0;
@@ -6150,7 +6150,7 @@
 	dir = 1
 	},
 /obj/machinery/alarm{
-	alarm_id = "petrov1";
+	alarm_id = "collins1";
 	dir = 4;
 	pixel_x = -25;
 	pixel_y = 0;
@@ -6414,7 +6414,7 @@
 /area/space)
 "px" = (
 /obj/machinery/alarm{
-	alarm_id = "petrov1";
+	alarm_id = "collins1";
 	dir = 4;
 	pixel_x = -25;
 	pixel_y = 0;

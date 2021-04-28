@@ -13592,7 +13592,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftport)
 "Hb" = (
-/obj/effect/shuttle_landmark/petrov/out,
+/obj/effect/shuttle_landmark/collins/out,
 /turf/space,
 /area/space)
 "Hc" = (

@@ -49,30 +49,30 @@ TORCH_ESCAPE_POD(15)
 TORCH_ESCAPE_POD(16)
 TORCH_ESCAPE_POD(17)
 
-//Petrov
+//Collins
 
-/datum/shuttle/autodock/ferry/petrov
-	name = "Petrov"
+/datum/shuttle/autodock/ferry/collins
+	name = "Collins"
 	warmup_time = 10
-	dock_target = "petrov_shuttle_airlock"
-	waypoint_station = "nav_petrov_start"
-	waypoint_offsite = "nav_petrov_out"
-	logging_home_tag = "nav_petrov_start"
-	logging_access = access_petrov_helm
+	dock_target = "collins_shuttle_airlock"
+	waypoint_station = "nav_collins_start"
+	waypoint_offsite = "nav_collins_out"
+	logging_home_tag = "nav_collins_start"
+	logging_access = access_collins_helm
 	ceiling_type = /turf/simulated/floor/shuttle_ceiling
 
-/datum/shuttle/autodock/ferry/petrov/New(_name, var/obj/effect/shuttle_landmark/initial_location)
-	shuttle_area = subtypesof(/area/shuttle/petrov)
+/datum/shuttle/autodock/ferry/collins/New(_name, var/obj/effect/shuttle_landmark/initial_location)
+	shuttle_area = subtypesof(/area/shuttle/collins)
 	..()
 
-/obj/effect/shuttle_landmark/petrov/start
+/obj/effect/shuttle_landmark/collins/start
 	name = "First Deck"
-	landmark_tag = "nav_petrov_start"
-	docking_controller = "petrov_shuttle_dock_airlock"
+	landmark_tag = "nav_collins_start"
+	docking_controller = "collins_shuttle_dock_airlock"
 
-/obj/effect/shuttle_landmark/petrov/out
+/obj/effect/shuttle_landmark/collins/out
 	name = "Space near the ship"
-	landmark_tag = "nav_petrov_out"
+	landmark_tag = "nav_collins_out"
 
 //Ninja Shuttle.
 /datum/shuttle/autodock/multi/antag/ninja

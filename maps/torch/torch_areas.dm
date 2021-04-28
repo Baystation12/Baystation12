@@ -416,83 +416,83 @@
 	req_access = list(access_guppy)
 
 
-//Petrov
+//Collins
 
-/area/shuttle/petrov
-	name = "\improper SRV Petrov"
+/area/shuttle/collins
+	name = "\improper SRV Collins"
 	requires_power = 1
 	dynamic_lighting = 1
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
-	req_access = list(access_petrov)
+	req_access = list(access_collins)
 
-/area/shuttle/petrov/cell1
-	name = "\improper SRV Petrov - Isolation Cell 1"
+/area/shuttle/collins/cell1
+	name = "\improper SRV Collins - Isolation Cell 1"
 	icon_state = "shuttle"
-/area/shuttle/petrov/cell2
-	name = "\improper SRV Petrov - Isolation Cell 2"
+/area/shuttle/collins/cell2
+	name = "\improper SRV Collins - Isolation Cell 2"
 	icon_state = "shuttlegrn"
-/area/shuttle/petrov/cell3
-	name = "\improper SRV Petrov - Isolation Cell 3"
+/area/shuttle/collins/cell3
+	name = "\improper SRV Collins - Isolation Cell 3"
 	icon_state = "shuttle"
 
-/area/shuttle/petrov/hallwaya
-	name = "\improper SRV Petrov - Lower Hallway"
+/area/shuttle/collins/hallwaya
+	name = "\improper SRV Collins - Lower Hallway"
 	icon_state = "hallA"
 
-/area/shuttle/petrov/security
-	name = "\improper SRV Petrov - Security Office"
+/area/shuttle/collins/security
+	name = "\improper SRV collins - Security Office"
 	icon_state = "checkpoint1"
-	req_access = list(access_petrov_security)
+	req_access = list(access_collins_security)
 
-/area/shuttle/petrov/rd
+/area/shuttle/collins/rd
 	icon_state = "heads_rd"
-	name = "\improper SRV Petrov - CSO's Office"
+	name = "\improper SRV Collins - CSO's Office"
 	icon_state = "head_quarters"
-	req_access = list(access_petrov_rd)
+	req_access = list(access_collins_rd)
 
-/area/shuttle/petrov/cockpit
-	name = "\improper SRV Petrov - Cockpit"
+/area/shuttle/collins/cockpit
+	name = "\improper SRV Collins - Cockpit"
 	icon_state = "shuttlered"
-	req_access = list(access_petrov_helm)
+	req_access = list(access_collins_helm)
 
-/area/shuttle/petrov/maint
-	name = "\improper SRV Petrov - Maintenance"
+/area/shuttle/collins/maint
+	name = "\improper SRV Collins - Maintenance"
 	icon_state = "engine"
-	req_access = list(access_petrov_maint)
+	req_access = list(access_collins_maint)
 
-/area/shuttle/petrov/analysis
-	name = "\improper SRV Petrov - Analysis Lab"
+/area/shuttle/collins/analysis
+	name = "\improper SRV Collins - Analysis Lab"
 	icon_state = "devlab"
-	req_access = list(access_petrov_analysis)
+	req_access = list(access_collins_analysis)
 
-/area/shuttle/petrov/toxins
-	name = "\improper SRV Petrov - Toxins Lab"
+/area/shuttle/collins/toxins
+	name = "\improper SRV Collins - Toxins Lab"
 	icon_state = "toxstorage"
-	req_access = list(access_petrov_toxins)
+	req_access = list(access_collins_toxins)
 
-/area/shuttle/petrov/rnd
-	name = "\improper SRV Petrov - Fabricator Lab"
+/area/shuttle/collins/rnd
+	name = "\improper SRV Collins - Fabricator Lab"
 	icon_state = "devlab"
 
-/area/shuttle/petrov/isolation
-	name = "\improper SRV Petrov - Isolation Lab"
+/area/shuttle/collins/isolation
+	name = "\improper SRV Collins - Isolation Lab"
 	icon_state = "xeno_lab"
 
-/area/shuttle/petrov/phoron
-	name = "\improper SRV Petrov - Sublimation Lab"
+/area/shuttle/collins/phoron
+	name = "\improper SRV Collins - Sublimation Lab"
 	icon_state = "toxstorage"
-	req_access = list(access_petrov_phoron)
+	req_access = list(access_collins_phoron)
 
-/area/shuttle/petrov/custodial
-	name = "\improper SRV Petrov - Custodial"
+/area/shuttle/collins/custodial
+	name = "\improper SRV Collins - Custodial"
 	icon_state = "decontamination"
 
-/area/shuttle/petrov/equipment
-	name = "\improper SRV Petrov - Equipment Storage"
+/area/shuttle/collins/equipment
+	name = "\improper SRV Collins - Equipment Storage"
 	icon_state = "locker"
 
-/area/shuttle/petrov/eva
-	name = "\improper SRV Petrov - EVA Storage"
+/area/shuttle/collins/eva
+	name = "\improper SRV Collins - EVA Storage"
 	icon_state = "locker"
 
 //Turbolift

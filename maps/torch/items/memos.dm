@@ -452,7 +452,7 @@
 
 /obj/item/paper/memo/research/annoyingtheft
 	name = "abuse of access to tools memo"
-	info = {"An "internal use only" memo sent from the Chief Science Officer to the pathfinder reminding them that the access to the Petrov is not to be abused, further asking that the pathfinder crack down on any explorers looting equipment from the Petrov for their "missions". It ends with a note that they have their own equipment that they should be using instead."}
+	info = {"An "internal use only" memo sent from the Chief Science Officer to the pathfinder reminding them that the access to the Collins is not to be abused, further asking that the pathfinder crack down on any explorers looting equipment from the Collins for their "missions". It ends with a note that they have their own equipment that they should be using instead."}
 
 /obj/item/paper/memo/research/toxinsfire
 	name = "toxin development memo"
@@ -466,9 +466,9 @@
 	name = "chatroom log"
 	info = {"Someone drew a big laughing face over this, but you can still read the contents. "What do you guys want the most?" "I wish we had our own security sometimes.""}
 
-/obj/item/paper/memo/research/petrov
-	name = "\improper Petrov map"
-	info = {"It's a portable map of the Petrov. Someone wrote over it in big letters: "What the fuck is the Petrov?", and it's now unusable."}
+/obj/item/paper/memo/research/collins
+	name = "\improper Collins map"
+	info = {"It's a portable map of the Collins. Someone wrote over it in big letters: "What the fuck is the Collins?", and it's now unusable."}
 
 /obj/item/paper/memo/research/fuckingdoors
 	name = "windoor guide"

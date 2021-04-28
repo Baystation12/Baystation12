@@ -21,7 +21,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "ae" = (
 /obj/machinery/atmospherics/binary/pump{
 	dir = 4;
@@ -32,7 +32,7 @@
 	},
 /obj/effect/paint/silver,
 /turf/simulated/wall/titanium,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "af" = (
 /obj/machinery/atmospherics/binary/pump{
 	dir = 4;
@@ -40,7 +40,7 @@
 	},
 /obj/effect/paint/silver,
 /turf/simulated/wall/titanium,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "ah" = (
 /obj/effect/floor_decal/corner/red/half{
 	dir = 1;
@@ -63,7 +63,7 @@
 	name = "suit storage"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/security)
+/area/shuttle/collins/security)
 "ai" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/cyan{
@@ -75,7 +75,7 @@
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
 	icon_state = "closed";
-	id_tag = "petrov_shuttle_dock_inner";
+	id_tag = "collins_shuttle_dock_inner";
 	locked = 0;
 	name = "Docking Port Airlock"
 	},
@@ -88,7 +88,7 @@
 	},
 /obj/effect/paint/silver,
 /turf/simulated/wall/ocp_wall,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "al" = (
 /obj/structure/disposalpipe/segment,
 /obj/structure/cable{
@@ -128,14 +128,14 @@
 	icon_state = "pipe-c"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "aq" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction,
 /obj/machinery/light/spot{
 	dir = 1
 	},
 /turf/simulated/floor/reinforced/airless,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "ar" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
@@ -213,7 +213,7 @@
 	},
 /obj/machinery/portable_atmospherics/powered/pump,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "ay" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4;
@@ -226,14 +226,14 @@
 	},
 /obj/item/storage/toolbox/mechanical,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "az" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging,
 /obj/machinery/air_sensor{
 	id_tag = "toxins_sensor"
 	},
 /turf/simulated/floor/reinforced/airless,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "aA" = (
 /obj/effect/floor_decal/corner/green{
 	dir = 10;
@@ -305,7 +305,7 @@
 	pixel_y = -21
 	},
 /turf/simulated/floor/tiled/dark,
-/area/shuttle/petrov/security)
+/area/shuttle/collins/security)
 "aH" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -454,7 +454,7 @@
 	pixel_y = 32
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 "aV" = (
 /obj/effect/wallframe_spawn/reinforced_phoron/titanium,
 /obj/machinery/door/firedoor,
@@ -473,7 +473,7 @@
 	opacity = 0
 	},
 /turf/simulated/floor/reinforced/airless,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "aW" = (
 /turf/simulated/wall/prepainted,
 /area/maintenance/fifthdeck/aftstarboard)
@@ -497,11 +497,11 @@
 "bb" = (
 /obj/effect/paint/silver,
 /turf/simulated/wall/titanium,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 "bc" = (
 /obj/effect/paint/silver,
 /turf/simulated/wall/titanium,
-/area/shuttle/petrov/eva)
+/area/shuttle/collins/eva)
 "bd" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/space_heater,
@@ -520,7 +520,7 @@
 	opacity = 0
 	},
 /turf/simulated/floor/reinforced/airless,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "bf" = (
 /obj/machinery/light/spot{
 	pixel_y = 32
@@ -582,7 +582,7 @@
 	pixel_z = -23
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "bm" = (
 /obj/effect/floor_decal/industrial/loading{
 	dir = 8;
@@ -614,7 +614,7 @@
 	pixel_z = -24
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "bo" = (
 /obj/machinery/light/spot{
 	pixel_y = 32
@@ -674,7 +674,7 @@
 	pixel_z = -23
 	},
 /turf/simulated/floor/reinforced/airless,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "bt" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/cyan{
@@ -692,7 +692,7 @@
 	},
 /obj/machinery/airlock_sensor{
 	frequency = 1380;
-	id_tag = "petrov_shuttle_dock_sensor";
+	id_tag = "collins_shuttle_dock_sensor";
 	pixel_x = -24;
 	pixel_y = 0
 	},
@@ -701,7 +701,7 @@
 "bu" = (
 /obj/effect/paint/silver,
 /turf/simulated/wall/titanium,
-/area/shuttle/petrov/maint)
+/area/shuttle/collins/maint)
 "bv" = (
 /obj/machinery/door/blast/regular/open{
 	density = 0;
@@ -905,7 +905,7 @@
 "bP" = (
 /obj/effect/paint/silver,
 /turf/simulated/wall/titanium,
-/area/shuttle/petrov/security)
+/area/shuttle/collins/security)
 "bQ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/cyan{
@@ -916,12 +916,12 @@
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
 	icon_state = "closed";
-	id_tag = "petrov_shuttle_outer";
+	id_tag = "collins_shuttle_outer";
 	locked = 0;
-	name = "Petrov Exterior Access"
+	name = "Collins Exterior Access"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/shuttle/petrov/maint)
+/area/shuttle/collins/maint)
 "bS" = (
 /obj/structure/table/steel_reinforced,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -2165,7 +2165,7 @@
 	icon_state = "2-4"
 	},
 /obj/machinery/alarm{
-	alarm_id = "petrov2";
+	alarm_id = "collins2";
 	dir = 4;
 	pixel_x = -21;
 	pixel_y = 0;
@@ -2437,7 +2437,7 @@
 /area/exploration_shuttle/atmos)
 "eA" = (
 /obj/machinery/alarm{
-	alarm_id = "petrov2";
+	alarm_id = "collins2";
 	dir = 4;
 	pixel_x = -21;
 	pixel_y = 0;
@@ -2448,7 +2448,7 @@
 "eB" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 1;
-	id_tag = "petrov_shuttle_dock_pump"
+	id_tag = "collins_shuttle_dock_pump"
 	},
 /obj/effect/floor_decal/techfloor,
 /obj/machinery/light/small,
@@ -2546,7 +2546,7 @@
 	level = 2
 	},
 /turf/simulated/floor/lino,
-/area/shuttle/petrov/rd)
+/area/shuttle/collins/rd)
 "eX" = (
 /obj/machinery/camera/network/exploration_shuttle{
 	dir = 4;
@@ -2798,7 +2798,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "fE" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -2807,11 +2807,11 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "fF" = (
 /obj/effect/paint/red,
 /turf/simulated/wall/titanium,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "fG" = (
 /obj/machinery/atmospherics/binary/pump,
 /obj/structure/handrail{
@@ -2819,7 +2819,7 @@
 	icon_state = "handrail"
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "fH" = (
 /obj/item/stool,
 /turf/simulated/floor/tiled,
@@ -2996,7 +2996,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "gg" = (
 /obj/machinery/door/airlock/external{
 	autoset_access = 0;
@@ -3117,7 +3117,7 @@
 	icon_state = "0-4"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/rnd)
+/area/shuttle/collins/rnd)
 "gv" = (
 /obj/effect/floor_decal/corner/brown{
 	dir = 4;
@@ -3155,7 +3155,7 @@
 	},
 /obj/structure/catwalk,
 /obj/machinery/alarm{
-	alarm_id = "petrov2";
+	alarm_id = "collins2";
 	frequency = 1439;
 	pixel_y = 23;
 	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
@@ -3279,13 +3279,13 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/cell2)
+/area/shuttle/collins/cell2)
 "ha" = (
 /obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced_phoron/titanium,
 /obj/effect/paint/silver,
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/cell2)
+/area/shuttle/collins/cell2)
 "hb" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -4206,7 +4206,7 @@
 	},
 /obj/structure/catwalk,
 /obj/machinery/alarm{
-	alarm_id = "petrov1";
+	alarm_id = "collins1";
 	dir = 4;
 	icon_state = "alarm0";
 	pixel_x = -24
@@ -4405,16 +4405,16 @@
 	},
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
 	dir = 8;
-	display_name = "Aft Dock (Petrov)";
+	display_name = "Aft Dock (Collins)";
 	frequency = 1380;
-	id_tag = "petrov_shuttle_dock_airlock";
+	id_tag = "collins_shuttle_dock_airlock";
 	pixel_x = 24;
 	pixel_y = 0;
-	req_access = list(list("ACCESS_SECURITY","ACCESS_EXTERNAL","ACCESS_TORCH_PETROV"));
-	tag_airpump = "petrov_shuttle_dock_pump";
-	tag_chamber_sensor = "petrov_shuttle_dock_sensor";
-	tag_exterior_door = "petrov_shuttle_dock_outer";
-	tag_interior_door = "petrov_shuttle_dock_inner"
+	req_access = list(list("ACCESS_SECURITY","ACCESS_EXTERNAL","ACCESS_TORCH_COLLINS"));
+	tag_airpump = "collins_shuttle_dock_pump";
+	tag_chamber_sensor = "collins_shuttle_dock_sensor";
+	tag_exterior_door = "collins_shuttle_dock_outer";
+	tag_interior_door = "collins_shuttle_dock_inner"
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/closet/emcloset,
@@ -5083,7 +5083,7 @@
 /area/quartermaster/hangar)
 "lj" = (
 /obj/machinery/alarm{
-	alarm_id = "petrov2";
+	alarm_id = "collins2";
 	dir = 4;
 	pixel_x = -21;
 	pixel_y = 0;
@@ -5433,7 +5433,7 @@
 	},
 /obj/structure/catwalk,
 /obj/machinery/alarm{
-	alarm_id = "petrov2";
+	alarm_id = "collins2";
 	frequency = 1439;
 	pixel_y = 23;
 	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
@@ -5475,7 +5475,7 @@
 /obj/item/reagent_containers/glass/beaker/large,
 /obj/item/reagent_containers/dropper,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 "mn" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 4
@@ -5557,7 +5557,7 @@
 "mv" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 2;
-	id_tag = "petrov_shuttle_dock_pump"
+	id_tag = "collins_shuttle_dock_pump"
 	},
 /obj/effect/floor_decal/techfloor{
 	dir = 1;
@@ -5565,7 +5565,7 @@
 	},
 /obj/machinery/airlock_sensor{
 	frequency = 1380;
-	id_tag = "petrov_shuttle_dock_sensor";
+	id_tag = "collins_shuttle_dock_sensor";
 	pixel_x = -24;
 	pixel_y = 0
 	},
@@ -5689,7 +5689,7 @@
 	},
 /obj/structure/catwalk,
 /obj/machinery/alarm{
-	alarm_id = "petrov2";
+	alarm_id = "collins2";
 	dir = 8;
 	icon_state = "alarm0";
 	pixel_x = 24
@@ -5738,7 +5738,7 @@
 	dir = 6
 	},
 /obj/machinery/alarm{
-	alarm_id = "petrov3";
+	alarm_id = "collins3";
 	dir = 8;
 	icon_state = "alarm0";
 	pixel_x = 24
@@ -7166,7 +7166,7 @@
 "pw" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 2;
-	id_tag = "petrov_shuttle_dock_pump"
+	id_tag = "collins_shuttle_dock_pump"
 	},
 /obj/effect/floor_decal/techfloor{
 	dir = 1;
@@ -7616,7 +7616,7 @@
 /area/quartermaster/expedition)
 "qv" = (
 /obj/machinery/alarm{
-	alarm_id = "petrov2";
+	alarm_id = "collins2";
 	frequency = 1439;
 	pixel_y = 23;
 	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
@@ -7645,7 +7645,7 @@
 	icon_state = "corner_white"
 	},
 /obj/machinery/alarm{
-	alarm_id = "petrov2";
+	alarm_id = "collins2";
 	frequency = 1439;
 	pixel_y = 23;
 	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
@@ -7683,7 +7683,7 @@
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
 	icon_state = "closed";
-	id_tag = "petrov_shuttle_dock_inner";
+	id_tag = "collins_shuttle_dock_inner";
 	locked = 0;
 	name = "Docking Port Airlock"
 	},
@@ -8261,7 +8261,7 @@
 	},
 /obj/structure/catwalk,
 /obj/machinery/alarm{
-	alarm_id = "petrov2";
+	alarm_id = "collins2";
 	dir = 8;
 	icon_state = "alarm0";
 	pixel_x = 24
@@ -9173,7 +9173,7 @@
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
 	icon_state = "closed";
-	id_tag = "petrov_shuttle_dock_inner";
+	id_tag = "collins_shuttle_dock_inner";
 	locked = 0;
 	name = "Docking Port Airlock"
 	},
@@ -9183,7 +9183,7 @@
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
 	icon_state = "closed";
-	id_tag = "petrov_shuttle_dock_outer";
+	id_tag = "collins_shuttle_dock_outer";
 	locked = 0;
 	name = "Docking Port Airlock"
 	},
@@ -9192,7 +9192,7 @@
 "tH" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 1;
-	id_tag = "petrov_shuttle_dock_pump"
+	id_tag = "collins_shuttle_dock_pump"
 	},
 /obj/effect/floor_decal/techfloor,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -9207,7 +9207,7 @@
 	},
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "tQ" = (
 /obj/effect/floor_decal/corner/brown{
 	dir = 10
@@ -9237,13 +9237,13 @@
 	dir = 9
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 "tT" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
 /turf/simulated/floor/reinforced/airless,
-/area/shuttle/petrov/security)
+/area/shuttle/collins/security)
 "tU" = (
 /obj/structure/railing/mapped,
 /obj/structure/railing/mapped{
@@ -9835,7 +9835,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/rnd)
+/area/shuttle/collins/rnd)
 "ve" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/effect/floor_decal/techfloor{
@@ -9848,7 +9848,7 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 8;
-	id_tag = "petrov_shuttle_dock_pump"
+	id_tag = "collins_shuttle_dock_pump"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/fifthdeck/aftstarboard)
@@ -9893,7 +9893,7 @@
 /obj/item/folder/nt,
 /obj/item/pen,
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 "vp" = (
 /obj/structure/cable/cyan{
 	d1 = 4;
@@ -9908,7 +9908,7 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "vq" = (
 /obj/machinery/atmospherics/binary/pump{
 	dir = 1
@@ -9918,7 +9918,7 @@
 	icon_state = "handrail"
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "vr" = (
 /obj/machinery/alarm{
 	pixel_y = 24
@@ -9929,7 +9929,7 @@
 	target_pressure = 200
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/shuttle/petrov/maint)
+/area/shuttle/collins/maint)
 "vt" = (
 /obj/structure/shuttle/engine/heater{
 	dir = 4;
@@ -9939,7 +9939,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/reinforced/airless,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "vA" = (
 /obj/structure/cable/cyan{
 	d1 = 2;
@@ -9952,7 +9952,7 @@
 	},
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/maint)
+/area/shuttle/collins/maint)
 "vC" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4;
@@ -9969,7 +9969,7 @@
 	pixel_y = 0
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "vD" = (
 /obj/machinery/atmospherics/pipe/manifold4w/hidden,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -9992,7 +9992,7 @@
 	pixel_x = 20
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/eva)
+/area/shuttle/collins/eva)
 "vH" = (
 /obj/random/obstruction,
 /turf/simulated/floor/plating,
@@ -10118,7 +10118,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 "wm" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/cyan{
@@ -10127,7 +10127,7 @@
 	icon_state = "1-8"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/phoron)
+/area/shuttle/collins/phoron)
 "wn" = (
 /obj/structure/table/standard,
 /obj/item/storage/toolbox/mechanical,
@@ -10136,7 +10136,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/phoron)
+/area/shuttle/collins/phoron)
 "wr" = (
 /obj/machinery/portable_atmospherics/canister/empty,
 /obj/effect/floor_decal/industrial/outline/red,
@@ -10163,7 +10163,7 @@
 	pixel_y = -32
 	},
 /turf/simulated/floor/lino,
-/area/shuttle/petrov/rd)
+/area/shuttle/collins/rd)
 "wx" = (
 /obj/structure/table/standard,
 /obj/item/device/integrated_electronics/wirer,
@@ -10185,7 +10185,7 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/equipment)
+/area/shuttle/collins/equipment)
 "wz" = (
 /obj/machinery/door/airlock/research{
 	id_tag = null;
@@ -10199,7 +10199,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/cockpit)
+/area/shuttle/collins/cockpit)
 "wA" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -10208,7 +10208,7 @@
 	},
 /obj/structure/catwalk,
 /obj/machinery/alarm{
-	alarm_id = "petrov2";
+	alarm_id = "collins2";
 	dir = 8;
 	icon_state = "alarm0";
 	pixel_x = 24
@@ -10227,7 +10227,7 @@
 "wE" = (
 /obj/machinery/door/airlock/hatch/maintenance,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "wF" = (
 /turf/simulated/wall/prepainted,
 /area/command/pilot)
@@ -10263,12 +10263,12 @@
 /obj/machinery/access_button{
 	command = "cycle_interior";
 	frequency = 1380;
-	master_tag = "petrov_shuttle_airlock";
+	master_tag = "collins_shuttle_airlock";
 	pixel_x = -24;
 	pixel_y = 32
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "wU" = (
 /obj/machinery/door/blast/regular{
 	density = 1;
@@ -10279,7 +10279,7 @@
 	opacity = 1
 	},
 /turf/simulated/floor/reinforced/airless,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "wW" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -10328,11 +10328,11 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/equipment)
+/area/shuttle/collins/equipment)
 "wZ" = (
 /obj/structure/catwalk,
 /obj/machinery/alarm{
-	alarm_id = "petrov2";
+	alarm_id = "collins2";
 	dir = 8;
 	icon_state = "alarm0";
 	pixel_x = 24
@@ -10350,7 +10350,7 @@
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/dark,
-/area/shuttle/petrov/security)
+/area/shuttle/collins/security)
 "xg" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
@@ -10363,13 +10363,13 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id_tag = "PetrovShield";
-	name = "Petrov Blast Shutters";
+	id_tag = "CollinsShield";
+	name = "Collins Blast Shutters";
 	opacity = 0
 	},
 /obj/effect/paint/silver,
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/cockpit)
+/area/shuttle/collins/cockpit)
 "xl" = (
 /obj/structure/ladder/up,
 /obj/effect/floor_decal/corner/brown{
@@ -10394,7 +10394,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 "xs" = (
 /obj/structure/closet/secure_closet/crew/research,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -10403,7 +10403,7 @@
 /obj/random/maintenance/clean,
 /obj/item/folder/nt,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/equipment)
+/area/shuttle/collins/equipment)
 "xu" = (
 /obj/machinery/floodlight,
 /obj/structure/handrail{
@@ -10427,7 +10427,7 @@
 	icon_state = "handrail"
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "xA" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/table/rack,
@@ -10436,7 +10436,7 @@
 /obj/item/clothing/mask/breath,
 /obj/item/clothing/head/bio_hood/anomaly,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "xB" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/r_n_d/protolathe,
@@ -10445,7 +10445,7 @@
 	health = 1e+006
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/rnd)
+/area/shuttle/collins/rnd)
 "xC" = (
 /obj/structure/shuttle/engine/heater,
 /obj/structure/window/reinforced{
@@ -10464,7 +10464,7 @@
 "xK" = (
 /obj/machinery/photocopier,
 /turf/simulated/floor/lino,
-/area/shuttle/petrov/rd)
+/area/shuttle/collins/rd)
 "xL" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -10492,14 +10492,14 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/security)
+/area/shuttle/collins/security)
 "xO" = (
 /obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced_phoron/titanium,
 /obj/machinery/atmospherics/pipe/simple/visible/universal,
 /obj/effect/paint/silver,
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/cell1)
+/area/shuttle/collins/cell1)
 "xP" = (
 /obj/structure/cable/cyan{
 	d1 = 4;
@@ -10529,18 +10529,18 @@
 	},
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/maint)
+/area/shuttle/collins/maint)
 "xV" = (
 /obj/structure/closet/crate/secure/biohazard,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/machinery/alarm{
-	alarm_id = "petrov2";
+	alarm_id = "collins2";
 	frequency = 1439;
 	pixel_y = 23;
 	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/custodial)
+/area/shuttle/collins/custodial)
 "xX" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
@@ -10552,12 +10552,12 @@
 	icon_state = "2-8"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 "xY" = (
 /obj/structure/closet/toolcloset/excavation,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/eva)
+/area/shuttle/collins/eva)
 "ya" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -10592,7 +10592,7 @@
 "yf" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging,
 /turf/simulated/floor/reinforced/airless,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "yi" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -10632,7 +10632,7 @@
 	level = 2
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "yo" = (
 /obj/structure/sign/warning/hot_exhaust{
 	dir = 4;
@@ -10640,7 +10640,7 @@
 	},
 /obj/effect/paint/silver,
 /turf/simulated/wall/ocp_wall,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "yq" = (
 /turf/simulated/wall/prepainted,
 /area/maintenance/fifthdeck/fore)
@@ -10663,7 +10663,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "ys" = (
 /obj/machinery/power/terminal{
 	dir = 4
@@ -10675,7 +10675,7 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/maint)
+/area/shuttle/collins/maint)
 "yu" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/effect/floor_decal/techfloor{
@@ -10684,7 +10684,7 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 8;
-	id_tag = "petrov_shuttle_dock_pump"
+	id_tag = "collins_shuttle_dock_pump"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/fifthdeck/aftstarboard)
@@ -10720,14 +10720,14 @@
 	icon_state = "pipe-c"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "yy" = (
 /obj/structure/table/standard,
 /obj/item/crowbar,
 /obj/item/flame/lighter/random,
 /obj/item/storage/box/evidence,
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 "yz" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 4
@@ -10783,7 +10783,7 @@
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/fabricator,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/rnd)
+/area/shuttle/collins/rnd)
 "yG" = (
 /obj/structure/cable/cyan{
 	d1 = 1;
@@ -10793,14 +10793,14 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/security)
+/area/shuttle/collins/security)
 "yI" = (
 /turf/simulated/floor/plating,
 /area/vacant/bar)
 "yL" = (
 /obj/machinery/atmospherics/pipe/manifold4w/hidden,
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "yM" = (
 /obj/machinery/camera/network/exploration_shuttle{
 	dir = 8;
@@ -10824,7 +10824,7 @@
 	icon_state = "intact"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "yP" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/research{
@@ -10840,7 +10840,7 @@
 	},
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 "yQ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -10868,7 +10868,7 @@
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/silver,
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/equipment)
+/area/shuttle/collins/equipment)
 "yU" = (
 /obj/machinery/atmospherics/unary/heater,
 /obj/machinery/light{
@@ -10880,7 +10880,7 @@
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "yW" = (
 /obj/effect/catwalk_plated,
 /obj/structure/cable/green{
@@ -10900,18 +10900,18 @@
 /area/maintenance/fifthdeck/aftstarboard)
 "za" = (
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "zd" = (
 /obj/machinery/atmospherics/binary/pump{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "ze" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "zf" = (
 /obj/effect/catwalk_plated,
 /obj/machinery/light/spot{
@@ -10937,7 +10937,7 @@
 	pixel_x = 24
 	},
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/cell2)
+/area/shuttle/collins/cell2)
 "zk" = (
 /obj/structure/cable/cyan{
 	d2 = 8;
@@ -10949,18 +10949,18 @@
 	pixel_x = 24
 	},
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/cell1)
+/area/shuttle/collins/cell1)
 "zl" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/silver,
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/rnd)
+/area/shuttle/collins/rnd)
 "zm" = (
 /obj/structure/table/standard,
 /obj/machinery/atmospherics/pipe/simple/visible/red,
 /obj/random/tool,
 /obj/machinery/button/blast_door{
-	id_tag = "petrovcell1";
+	id_tag = "collinscell1";
 	name = "Test Chamber Vent";
 	pixel_x = -26;
 	pixel_y = -26
@@ -10971,7 +10971,7 @@
 	pixel_y = -25
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "zn" = (
 /obj/random/tech_supply,
 /obj/effect/floor_decal/industrial/outline/grey,
@@ -10983,14 +10983,14 @@
 "zo" = (
 /obj/structure/table/reinforced,
 /obj/machinery/button/blast_door{
-	id_tag = "PetrovShield";
+	id_tag = "CollinsShield";
 	name = "Blast Shutter Control";
 	pixel_x = 5;
 	pixel_y = -3
 	},
 /obj/item/device/radio,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/cockpit)
+/area/shuttle/collins/cockpit)
 "zp" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/visible{
@@ -10998,7 +10998,7 @@
 	icon_state = "intact"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "zr" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/catwalk,
@@ -11010,7 +11010,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/phoron)
+/area/shuttle/collins/phoron)
 "zv" = (
 /obj/effect/floor_decal/industrial/warning/corner,
 /obj/machinery/button/blast_door{
@@ -11056,30 +11056,30 @@
 /obj/item/device/radio/intercom{
 	pixel_y = 23
 	},
-/obj/machinery/camera/network/petrov{
-	c_tag = "Petrov - Cockpit"
+/obj/machinery/camera/network/collins{
+	c_tag = "Collins - Cockpit"
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/cockpit)
+/area/shuttle/collins/cockpit)
 "zC" = (
 /turf/simulated/floor/tiled/dark,
-/area/shuttle/petrov/security)
+/area/shuttle/collins/security)
 "zH" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4;
 	icon_state = "intact"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "zK" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/security)
+/area/shuttle/collins/security)
 "zL" = (
 /obj/structure/table/steel,
 /obj/item/device/flashlight/lamp/green,
@@ -11091,7 +11091,7 @@
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/r_n_d/destructive_analyzer,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/rnd)
+/area/shuttle/collins/rnd)
 "zP" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4;
@@ -11099,7 +11099,7 @@
 	},
 /obj/machinery/meter,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "zS" = (
 /obj/structure/sign/solgov,
 /turf/simulated/wall/r_wall/hull,
@@ -11113,7 +11113,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/catwalk,
 /obj/machinery/alarm{
-	alarm_id = "petrov2";
+	alarm_id = "collins2";
 	dir = 8;
 	icon_state = "alarm0";
 	pixel_x = 24
@@ -11142,12 +11142,12 @@
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
 	icon_state = "closed";
-	id_tag = "petrov_shuttle_outer";
+	id_tag = "collins_shuttle_outer";
 	locked = 0;
-	name = "Petrov Exterior Access"
+	name = "Collins Exterior Access"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/shuttle/petrov/maint)
+/area/shuttle/collins/maint)
 "Ae" = (
 /obj/machinery/suit_cycler/science,
 /obj/machinery/firealarm{
@@ -11170,14 +11170,14 @@
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/eva)
+/area/shuttle/collins/eva)
 "Ag" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8;
 	icon_state = "warning"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 "Ah" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/cyan{
@@ -11191,7 +11191,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/maint)
+/area/shuttle/collins/maint)
 "Ak" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
@@ -11205,11 +11205,11 @@
 	icon_state = "2-4"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/equipment)
+/area/shuttle/collins/equipment)
 "Al" = (
 /obj/effect/paint/silver,
 /turf/simulated/wall/titanium,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "An" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -11235,18 +11235,18 @@
 	icon_state = "handrail"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "Ap" = (
 /obj/structure/reagent_dispensers/coolanttank,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 "Aq" = (
 /obj/item/stool/padded,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/equipment)
+/area/shuttle/collins/equipment)
 "Ar" = (
 /obj/machinery/atmospherics/unary/tank/air{
 	dir = 4;
@@ -11275,7 +11275,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "At" = (
 /obj/machinery/sparker{
 	id_tag = "Isocell2";
@@ -11287,11 +11287,11 @@
 	icon_state = "1-4"
 	},
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/cell2)
+/area/shuttle/collins/cell2)
 "Ax" = (
 /obj/random/trash,
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "Ay" = (
 /obj/structure/catwalk,
 /obj/machinery/power/apc{
@@ -11304,7 +11304,7 @@
 	icon_state = "0-8"
 	},
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/maint)
+/area/shuttle/collins/maint)
 "AE" = (
 /obj/machinery/light{
 	dir = 1;
@@ -11328,13 +11328,13 @@
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/artifact_analyser,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 "AL" = (
 /obj/structure/bed/chair/office/light{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/rnd)
+/area/shuttle/collins/rnd)
 "AM" = (
 /obj/machinery/computer/modular/preset/cardslot/command{
 	dir = 4;
@@ -11345,20 +11345,20 @@
 	pixel_x = -21
 	},
 /turf/simulated/floor/lino,
-/area/shuttle/petrov/rd)
+/area/shuttle/collins/rd)
 "AP" = (
 /obj/machinery/sparker{
 	id_tag = "Isocell3";
 	pixel_x = -18
 	},
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/cell3)
+/area/shuttle/collins/cell3)
 "AS" = (
 /obj/structure/table/glass,
 /obj/item/modular_computer/tablet/lease/preset/command,
 /obj/item/book/manual/nt_regs,
 /turf/simulated/floor/lino,
-/area/shuttle/petrov/rd)
+/area/shuttle/collins/rd)
 "AT" = (
 /obj/structure/table/steel,
 /obj/machinery/chemical_dispenser/bar_soft/full,
@@ -11380,7 +11380,7 @@
 	},
 /obj/machinery/door/airlock/hatch/maintenance,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/maint)
+/area/shuttle/collins/maint)
 "AZ" = (
 /obj/structure/cable/cyan{
 	d1 = 4;
@@ -11400,22 +11400,22 @@
 /area/maintenance/fifthdeck/aftstarboard)
 "Ba" = (
 /obj/effect/floor_decal/industrial/warning,
-/obj/machinery/computer/rdconsole/petrov{
+/obj/machinery/computer/rdconsole/collins{
 	dir = 4;
 	icon_state = "computer"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/rnd)
+/area/shuttle/collins/rnd)
 "Bf" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
 	icon_state = "closed";
-	id_tag = "petrov_shuttle_inner";
+	id_tag = "collins_shuttle_inner";
 	locked = 0;
-	name = "Petrov Interior Access"
+	name = "Collins Interior Access"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "Bg" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
@@ -11427,18 +11427,18 @@
 	pixel_y = -22
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "Bi" = (
 /obj/machinery/door/blast/regular{
 	density = 1;
 	dir = 1;
 	icon_state = "pdoor1";
-	id_tag = "petrovcell3";
+	id_tag = "collinscell3";
 	name = "Test Chamber Blast Doors";
 	opacity = 1
 	},
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/cell3)
+/area/shuttle/collins/cell3)
 "Bk" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -11469,7 +11469,7 @@
 	dir = 9
 	},
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/cell1)
+/area/shuttle/collins/cell1)
 "Bo" = (
 /obj/structure/cable/cyan{
 	d1 = 4;
@@ -11486,7 +11486,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "Bp" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -11517,7 +11517,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "Bu" = (
 /obj/structure/table/standard,
 /obj/item/storage/box/monkeycubes,
@@ -11525,15 +11525,15 @@
 	pixel_y = 32
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "Bx" = (
 /obj/structure/closet/l3closet/scientist/multi,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/equipment)
+/area/shuttle/collins/equipment)
 "By" = (
 /obj/machinery/atmospherics/pipe/manifold/visible,
 /turf/simulated/floor/tiled/techfloor,
-/area/shuttle/petrov/maint)
+/area/shuttle/collins/maint)
 "BC" = (
 /turf/simulated/wall/r_wall/hull,
 /area/rnd/canister)
@@ -11555,7 +11555,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "BG" = (
 /obj/machinery/atmospherics/valve/shutoff/supply{
 	dir = 4
@@ -11569,11 +11569,11 @@
 "BH" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/lino,
-/area/shuttle/petrov/rd)
+/area/shuttle/collins/rd)
 "BJ" = (
 /obj/item/stool/padded,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/equipment)
+/area/shuttle/collins/equipment)
 "BL" = (
 /obj/structure/catwalk,
 /obj/structure/cable/cyan{
@@ -11582,7 +11582,7 @@
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/maint)
+/area/shuttle/collins/maint)
 "BM" = (
 /obj/structure/cable/cyan{
 	d1 = 4;
@@ -11599,25 +11599,25 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "BN" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
 	level = 2
 	},
 /turf/simulated/floor/tiled/dark,
-/area/shuttle/petrov/security)
+/area/shuttle/collins/security)
 "BO" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/table/standard,
 /obj/item/stack/material/plastic/ten,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/rnd)
+/area/shuttle/collins/rnd)
 "BR" = (
 /obj/machinery/atmospherics/pipe/manifold4w/visible,
 /obj/machinery/meter,
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "BS" = (
 /obj/machinery/atmospherics/pipe/manifold/visible{
 	dir = 1
@@ -11634,7 +11634,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/reinforced/airless,
-/area/shuttle/petrov/custodial)
+/area/shuttle/collins/custodial)
 "BX" = (
 /obj/effect/floor_decal/techfloor{
 	dir = 1;
@@ -11661,7 +11661,7 @@
 /obj/machinery/portable_atmospherics/canister/empty,
 /obj/effect/floor_decal/industrial/outline/blue,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "Cf" = (
 /obj/effect/floor_decal/techfloor{
 	dir = 1;
@@ -11690,7 +11690,7 @@
 /obj/item/reagent_containers/glass/beaker/large,
 /obj/item/stack/material/phoron,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 "Cm" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/guppy{
 	dir = 4;
@@ -11709,7 +11709,7 @@
 	},
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/maint)
+/area/shuttle/collins/maint)
 "Cp" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel,
 /obj/effect/floor_decal/techfloor,
@@ -11764,7 +11764,7 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/phoron)
+/area/shuttle/collins/phoron)
 "CA" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/cyan{
@@ -11776,12 +11776,12 @@
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
 	icon_state = "closed";
-	id_tag = "petrov_shuttle_inner";
+	id_tag = "collins_shuttle_inner";
 	locked = 0;
-	name = "Petrov Interior Access"
+	name = "Collins Interior Access"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/shuttle/petrov/maint)
+/area/shuttle/collins/maint)
 "CB" = (
 /obj/random/trash,
 /turf/simulated/floor/tiled/techfloor,
@@ -11801,7 +11801,7 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/equipment)
+/area/shuttle/collins/equipment)
 "CE" = (
 /obj/structure/cable/cyan{
 	d1 = 1;
@@ -11825,14 +11825,14 @@
 	icon_state = "pipe-j2"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "CG" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 10;
 	icon_state = "intact"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "CH" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/multi_tile/glass/research{
@@ -11840,14 +11840,14 @@
 	name = "Sublimation Chamber"
 	},
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/phoron)
+/area/shuttle/collins/phoron)
 "CJ" = (
 /obj/structure/bed/chair/office/comfy/red{
 	dir = 1;
 	icon_state = "comfyofficechair_preview"
 	},
 /turf/simulated/floor/lino,
-/area/shuttle/petrov/rd)
+/area/shuttle/collins/rd)
 "CL" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -11881,11 +11881,11 @@
 "CS" = (
 /obj/effect/paint/silver,
 /turf/simulated/wall/titanium,
-/area/shuttle/petrov/custodial)
+/area/shuttle/collins/custodial)
 "CT" = (
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/reinforced/airless,
-/area/shuttle/petrov/rd)
+/area/shuttle/collins/rd)
 "CV" = (
 /obj/structure/table/standard,
 /obj/item/device/scanner/health,
@@ -11895,7 +11895,7 @@
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "CW" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/research{
@@ -11911,7 +11911,7 @@
 	},
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/rnd)
+/area/shuttle/collins/rnd)
 "CX" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -11920,7 +11920,7 @@
 	},
 /obj/structure/catwalk,
 /obj/machinery/alarm{
-	alarm_id = "petrov2";
+	alarm_id = "collins2";
 	frequency = 1439;
 	pixel_y = 23;
 	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
@@ -11974,7 +11974,7 @@
 	},
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/maint)
+/area/shuttle/collins/maint)
 "Df" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/cyan{
@@ -11995,14 +11995,14 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/cell2)
+/area/shuttle/collins/cell2)
 "Di" = (
 /obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced_phoron/titanium,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/effect/paint/silver,
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/cell3)
+/area/shuttle/collins/cell3)
 "Dl" = (
 /obj/structure/table/steel,
 /obj/machinery/chemical_dispenser/bar_alc/full,
@@ -12049,11 +12049,11 @@
 	icon_state = "2-4"
 	},
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/maint)
+/area/shuttle/collins/maint)
 "Dq" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "Dr" = (
 /obj/machinery/power/port_gen/pacman{
 	anchored = 1
@@ -12092,15 +12092,15 @@
 	pixel_x = -21
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/phoron)
+/area/shuttle/collins/phoron)
 "Du" = (
 /obj/structure/table/glass,
 /obj/item/device/paicard,
 /turf/simulated/floor/lino,
-/area/shuttle/petrov/rd)
+/area/shuttle/collins/rd)
 "Dv" = (
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/phoron)
+/area/shuttle/collins/phoron)
 "Dw" = (
 /obj/structure/cable/cyan{
 	d1 = 1;
@@ -12114,7 +12114,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/cockpit)
+/area/shuttle/collins/cockpit)
 "Dy" = (
 /obj/machinery/door/window/southright{
 	dir = 1;
@@ -12132,20 +12132,20 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/cell1)
+/area/shuttle/collins/cell1)
 "Dz" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/multi_tile/glass/research{
 	dir = 8;
 	icon_state = "closed";
-	id_tag = "PetrovAccess";
-	name = "Petrov Access"
+	id_tag = "CollinsAccess";
+	name = "Collins Access"
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "DE" = (
-/obj/machinery/camera/network/petrov{
-	c_tag = "Petrov - EVA";
+/obj/machinery/camera/network/collins{
+	c_tag = "Collins - EVA";
 	dir = 4
 	},
 /obj/machinery/light_switch{
@@ -12161,7 +12161,7 @@
 /obj/item/stack/flag/red,
 /obj/item/stack/flag/red,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/eva)
+/area/shuttle/collins/eva)
 "DF" = (
 /obj/structure/cable/cyan{
 	d1 = 4;
@@ -12187,17 +12187,17 @@
 	pixel_y = -25
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "DK" = (
 /obj/effect/paint/silver,
 /obj/machinery/button/blast_door{
-	id_tag = "PetrovBiohazard";
+	id_tag = "CollinsBiohazard";
 	name = "Biohazard Shutter Control";
 	pixel_x = -5;
 	pixel_y = -3
 	},
 /turf/simulated/wall/titanium,
-/area/shuttle/petrov/rd)
+/area/shuttle/collins/rd)
 "DN" = (
 /obj/machinery/atmospherics/portables_connector{
 	dir = 8
@@ -12205,8 +12205,8 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/machinery/camera/network/petrov{
-	c_tag = "Petrov - Anomaly Aft";
+/obj/machinery/camera/network/collins{
+	c_tag = "Collins - Anomaly Aft";
 	dir = 8
 	},
 /obj/item/device/radio/intercom{
@@ -12214,7 +12214,7 @@
 	pixel_x = 20
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "DO" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -12232,11 +12232,11 @@
 	pixel_y = -25
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "DQ" = (
 /obj/effect/paint/red,
 /turf/simulated/wall/titanium,
-/area/shuttle/petrov/custodial)
+/area/shuttle/collins/custodial)
 "DT" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -12247,7 +12247,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/catwalk,
 /obj/machinery/alarm{
-	alarm_id = "petrov2";
+	alarm_id = "collins2";
 	dir = 8;
 	icon_state = "alarm0";
 	pixel_x = 24
@@ -12259,7 +12259,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/reinforced/airless,
-/area/shuttle/petrov/equipment)
+/area/shuttle/collins/equipment)
 "DY" = (
 /obj/structure/railing/mapped{
 	dir = 4;
@@ -12280,7 +12280,7 @@
 "DZ" = (
 /obj/structure/bed/chair/office/light,
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 "Ea" = (
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/fifthdeck/aftstarboard)
@@ -12289,7 +12289,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/effect/paint/silver,
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "Ed" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/research{
@@ -12305,7 +12305,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/equipment)
+/area/shuttle/collins/equipment)
 "Ee" = (
 /obj/machinery/atmospherics/tvalve/digital{
 	dir = 1;
@@ -12326,7 +12326,7 @@
 	icon_state = "0-2"
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "Eg" = (
 /obj/structure/closet/secure_closet/prospector,
 /obj/effect/floor_decal/corner/brown/mono,
@@ -12358,7 +12358,7 @@
 /obj/item/device/scanner/reagent,
 /obj/item/device/scanner/spectrometer/adv,
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/phoron)
+/area/shuttle/collins/phoron)
 "Em" = (
 /turf/simulated/wall/prepainted,
 /area/quartermaster/storage)
@@ -12373,7 +12373,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/equipment)
+/area/shuttle/collins/equipment)
 "Ep" = (
 /obj/machinery/conveyor{
 	dir = 8;
@@ -12422,8 +12422,8 @@
 	pixel_x = -24;
 	pixel_y = 12
 	},
-/obj/machinery/camera/network/petrov{
-	c_tag = "Petrov - Toxins";
+/obj/machinery/camera/network/collins{
+	c_tag = "Collins - Toxins";
 	dir = 4
 	},
 /obj/structure/cable/cyan{
@@ -12436,7 +12436,7 @@
 	icon_state = "generic"
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "Ey" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -12482,11 +12482,11 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "EH" = (
 /obj/machinery/suit_storage_unit/science,
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/eva)
+/area/shuttle/collins/eva)
 "EI" = (
 /obj/structure/disposalpipe/segment,
 /obj/structure/cable{
@@ -12499,8 +12499,8 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftport)
 "EJ" = (
-/obj/machinery/camera/network/petrov{
-	c_tag = "Petrov - Desublimation";
+/obj/machinery/camera/network/collins{
+	c_tag = "Collins - Desublimation";
 	dir = 4
 	},
 /obj/machinery/power/apc{
@@ -12513,7 +12513,7 @@
 	icon_state = "0-4"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/phoron)
+/area/shuttle/collins/phoron)
 "EK" = (
 /obj/machinery/portable_atmospherics/canister/empty,
 /obj/effect/floor_decal/industrial/outline/red,
@@ -12545,7 +12545,7 @@
 	},
 /obj/structure/catwalk,
 /obj/machinery/alarm{
-	alarm_id = "petrov3";
+	alarm_id = "collins3";
 	dir = 8;
 	icon_state = "alarm0";
 	pixel_x = 24
@@ -12570,7 +12570,7 @@
 /area/maintenance/fifthdeck/aftstarboard)
 "Fd" = (
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/equipment)
+/area/shuttle/collins/equipment)
 "Ff" = (
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/atmospherics/binary/pump{
@@ -12580,7 +12580,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/phoron)
+/area/shuttle/collins/phoron)
 "Fg" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
@@ -12630,11 +12630,11 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 "Fu" = (
 /obj/structure/bed,
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/cell2)
+/area/shuttle/collins/cell2)
 "Fw" = (
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/techfloor,
@@ -12642,7 +12642,7 @@
 "Fx" = (
 /obj/effect/paint/silver,
 /turf/simulated/wall/titanium,
-/area/shuttle/petrov/cockpit)
+/area/shuttle/collins/cockpit)
 "Fy" = (
 /obj/machinery/light/small{
 	dir = 8
@@ -12653,7 +12653,7 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/cell2)
+/area/shuttle/collins/cell2)
 "FD" = (
 /obj/structure/table/standard,
 /obj/item/device/flashlight/lamp,
@@ -12662,12 +12662,12 @@
 	icon_state = "bulb1"
 	},
 /obj/machinery/alarm/monitor/isolation{
-	alarm_id = "petrov2";
+	alarm_id = "collins2";
 	dir = 8;
 	pixel_x = 24
 	},
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/cell2)
+/area/shuttle/collins/cell2)
 "FR" = (
 /obj/random/junk,
 /turf/simulated/floor/tiled/techfloor,
@@ -12679,8 +12679,8 @@
 /turf/space,
 /area/space)
 "FU" = (
-/obj/machinery/camera/network/petrov{
-	c_tag = "Petrov - Hallway Aft";
+/obj/machinery/camera/network/collins{
+	c_tag = "Collins - Hallway Aft";
 	dir = 1
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -12688,29 +12688,29 @@
 	level = 2
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "FW" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/dark,
-/area/shuttle/petrov/rnd)
+/area/shuttle/collins/rnd)
 "FX" = (
 /obj/structure/table/reinforced,
 /obj/machinery/button/blast_door{
-	id_tag = "PetrovShield";
+	id_tag = "CollinsShield";
 	name = "Blast Shutter Control";
 	pixel_x = 5;
 	pixel_y = -3
 	},
 /obj/machinery/button/blast_door{
-	id_tag = "PetrovBiohazard";
+	id_tag = "CollinsBiohazard";
 	name = "Biohazard Shutter Control";
 	pixel_x = -5;
 	pixel_y = -3
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/cockpit)
+/area/shuttle/collins/cockpit)
 "FZ" = (
 /obj/structure/closet/hydrant{
 	pixel_y = 32
@@ -12733,11 +12733,11 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/cell3)
+/area/shuttle/collins/cell3)
 "Gc" = (
 /obj/structure/table/glass,
 /obj/machinery/photocopier/faxmachine/torch{
-	department = "Petrov - Chief Science Officer"
+	department = "Collins - Chief Science Officer"
 	},
 /obj/machinery/requests_console{
 	announcementConsole = 1;
@@ -12748,7 +12748,7 @@
 	pixel_y = 0
 	},
 /turf/simulated/floor/lino,
-/area/shuttle/petrov/rd)
+/area/shuttle/collins/rd)
 "Ge" = (
 /obj/random_multi/single_item/poppy,
 /turf/simulated/floor/tiled/techfloor,
@@ -12759,7 +12759,7 @@
 	icon_state = "map"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "Gk" = (
 /obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced/titanium,
@@ -12767,13 +12767,13 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id_tag = "PetrovShield";
-	name = "Petrov Blast Shutters";
+	id_tag = "CollinsShield";
+	name = "Collins Blast Shutters";
 	opacity = 0
 	},
 /obj/effect/paint/silver,
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/cockpit)
+/area/shuttle/collins/cockpit)
 "Gl" = (
 /obj/structure/sign/warning/nosmoking_1{
 	dir = 1;
@@ -12797,7 +12797,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "Gr" = (
 /obj/structure/table/standard,
 /obj/random/tool,
@@ -12809,7 +12809,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "Gv" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -12835,7 +12835,7 @@
 /obj/effect/wallframe_spawn/reinforced_phoron/titanium,
 /obj/effect/paint/silver,
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/cell3)
+/area/shuttle/collins/cell3)
 "Gy" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -12849,7 +12849,7 @@
 	icon_state = "pipe-c"
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 "Gz" = (
 /obj/structure/disposaloutlet{
 	dir = 8
@@ -12868,16 +12868,16 @@
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/eva)
+/area/shuttle/collins/eva)
 "GG" = (
 /obj/machinery/artifact_scanpad,
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/cell1)
+/area/shuttle/collins/cell1)
 "GI" = (
 /obj/machinery/atmospherics/pipe/manifold/visible,
 /obj/machinery/meter,
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "GK" = (
 /obj/machinery/power/apc{
 	dir = 1;
@@ -12890,24 +12890,24 @@
 	icon_state = "0-8"
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/equipment)
+/area/shuttle/collins/equipment)
 "GL" = (
 /obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id_tag = "PetrovShield";
-	name = "Petrov Blast Shutters";
+	id_tag = "CollinsShield";
+	name = "Collins Blast Shutters";
 	opacity = 0
 	},
 /obj/effect/paint/silver,
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/rnd)
+/area/shuttle/collins/rnd)
 "GM" = (
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/cell3)
+/area/shuttle/collins/cell3)
 "GO" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 1
@@ -12981,7 +12981,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "GX" = (
 /obj/structure/bed/chair/padded/red,
 /obj/structure/cable/cyan{
@@ -12990,7 +12990,7 @@
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/lino,
-/area/shuttle/petrov/rd)
+/area/shuttle/collins/rd)
 "Ha" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
 	dir = 4;
@@ -13008,7 +13008,7 @@
 	icon_state = "2-4"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "Hb" = (
 /obj/machinery/disposal,
 /obj/machinery/light_switch{
@@ -13033,7 +13033,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/lino,
-/area/shuttle/petrov/rd)
+/area/shuttle/collins/rd)
 "Hc" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/power/emitter,
@@ -13041,20 +13041,20 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 "Hf" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
 	icon_state = "closed";
-	id_tag = "petrov_shuttle_inner";
+	id_tag = "collins_shuttle_inner";
 	locked = 0;
-	name = "Petrov Interior Access"
+	name = "Collins Interior Access"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "Hk" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -13069,7 +13069,7 @@
 "Hl" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 "Hm" = (
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide/engine_setup{
 	start_pressure = 4769
@@ -13100,13 +13100,13 @@
 	},
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/maint)
+/area/shuttle/collins/maint)
 "Ht" = (
 /obj/machinery/air_sensor{
 	id_tag = "phoron_sensor"
 	},
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/phoron)
+/area/shuttle/collins/phoron)
 "Hu" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/door/firedoor,
@@ -13115,7 +13115,7 @@
 	pixel_y = -24
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "Hv" = (
 /obj/structure/disposalpipe/segment{
 	dir = 8;
@@ -13144,22 +13144,22 @@
 	},
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/rnd)
+/area/shuttle/collins/rnd)
 "Hy" = (
 /obj/machinery/power/smes/buildable/preset/torch/shuttle{
-	RCon_tag = "Shuttle - Petrov"
+	RCon_tag = "Shuttle - Collins"
 	},
 /obj/structure/cable/cyan,
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/maint)
+/area/shuttle/collins/maint)
 "Hz" = (
 /obj/structure/table/glass,
 /obj/item/pen,
 /turf/simulated/floor/lino,
-/area/shuttle/petrov/rd)
+/area/shuttle/collins/rd)
 "HB" = (
 /turf/simulated/floor/tiled/dark,
-/area/shuttle/petrov/rnd)
+/area/shuttle/collins/rnd)
 "HC" = (
 /obj/machinery/door/airlock/hatch,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -13215,7 +13215,7 @@
 	},
 /obj/item/stool/padded,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/security)
+/area/shuttle/collins/security)
 "HK" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -13284,7 +13284,7 @@
 	},
 /obj/structure/catwalk,
 /obj/machinery/alarm{
-	alarm_id = "petrov2";
+	alarm_id = "collins2";
 	dir = 8;
 	icon_state = "alarm0";
 	pixel_x = 24
@@ -13308,7 +13308,7 @@
 	icon_state = "map_scrubber_off"
 	},
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/cell2)
+/area/shuttle/collins/cell2)
 "HX" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
@@ -13319,7 +13319,7 @@
 	},
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "HY" = (
 /obj/effect/catwalk_plated,
 /obj/structure/cable/green{
@@ -13347,14 +13347,14 @@
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/equipment)
+/area/shuttle/collins/equipment)
 "Ia" = (
 /obj/structure/table/steel,
 /turf/simulated/floor/plating,
 /area/vacant/bar)
 "Ib" = (
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 "Ic" = (
 /obj/structure/table/standard,
 /obj/machinery/cell_charger,
@@ -13372,7 +13372,7 @@
 	pixel_y = 0
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/rnd)
+/area/shuttle/collins/rnd)
 "Id" = (
 /obj/machinery/conveyor{
 	dir = 8;
@@ -13392,7 +13392,7 @@
 "Ij" = (
 /obj/machinery/artifact_harvester,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 "Ik" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -13406,7 +13406,7 @@
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/eva)
+/area/shuttle/collins/eva)
 "In" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -13437,7 +13437,7 @@
 "It" = (
 /obj/effect/paint/silver,
 /turf/simulated/wall/titanium,
-/area/shuttle/petrov/cell1)
+/area/shuttle/collins/cell1)
 "Iu" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -13449,15 +13449,15 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/equipment)
+/area/shuttle/collins/equipment)
 "IA" = (
 /obj/machinery/lapvend,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/equipment)
+/area/shuttle/collins/equipment)
 "IB" = (
 /obj/machinery/disposal,
-/obj/machinery/camera/network/petrov{
-	c_tag = "Petrov - Fabrication";
+/obj/machinery/camera/network/collins{
+	c_tag = "Collins - Fabrication";
 	dir = 2
 	},
 /obj/machinery/light_switch{
@@ -13474,24 +13474,24 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/rnd)
+/area/shuttle/collins/rnd)
 "IC" = (
 /obj/machinery/suspension_gen,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/equipment)
+/area/shuttle/collins/equipment)
 "IF" = (
 /obj/machinery/computer/shuttle_control{
 	dir = 4;
 	icon_state = "computer";
-	req_access = list("ACCESS_TORCH_PETROV_HELM");
-	shuttle_tag = "Petrov"
+	req_access = list("ACCESS_TORCH_COLLINS_HELM");
+	shuttle_tag = "Collins"
 	},
 /obj/machinery/newscaster{
 	pixel_y = -32
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/cockpit)
+/area/shuttle/collins/cockpit)
 "IH" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -13543,7 +13543,7 @@
 	pixel_y = 0
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/phoron)
+/area/shuttle/collins/phoron)
 "IU" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -13582,7 +13582,7 @@
 	pixel_y = 0
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/phoron)
+/area/shuttle/collins/phoron)
 "Ja" = (
 /obj/machinery/atmospherics/portables_connector{
 	dir = 4
@@ -13610,7 +13610,7 @@
 /obj/structure/sign/warning/deathsposal,
 /obj/effect/paint/silver,
 /turf/simulated/wall/titanium,
-/area/shuttle/petrov/maint)
+/area/shuttle/collins/maint)
 "Ji" = (
 /obj/structure/cable/cyan{
 	d1 = 1;
@@ -13618,7 +13618,7 @@
 	icon_state = "1-4"
 	},
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/cell3)
+/area/shuttle/collins/cell3)
 "Jj" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
 /obj/machinery/atmospherics/pipe/simple/visible{
@@ -13627,17 +13627,17 @@
 	},
 /obj/effect/paint/silver,
 /turf/simulated/wall/titanium,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "Jk" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
 	},
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/cockpit)
+/area/shuttle/collins/cockpit)
 "Jl" = (
 /obj/effect/paint/silver,
 /turf/simulated/wall/ocp_wall,
-/area/shuttle/petrov/cell1)
+/area/shuttle/collins/cell1)
 "Jn" = (
 /obj/effect/catwalk_plated,
 /obj/structure/closet/hydrant{
@@ -13661,7 +13661,7 @@
 	},
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/maint)
+/area/shuttle/collins/maint)
 "Jt" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -13690,14 +13690,14 @@
 	},
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/maint)
+/area/shuttle/collins/maint)
 "Jv" = (
 /obj/machinery/oxygen_pump{
 	pixel_y = 32
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 2;
-	id_tag = "petrov_shuttle_pump"
+	id_tag = "collins_shuttle_pump"
 	},
 /obj/effect/floor_decal/techfloor{
 	dir = 1;
@@ -13707,7 +13707,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "Jx" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -13717,7 +13717,7 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 "Jz" = (
 /obj/structure/cable/cyan{
 	d1 = 2;
@@ -13734,11 +13734,11 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/equipment)
+/area/shuttle/collins/equipment)
 "JA" = (
 /obj/structure/closet/crate/secure/biohazard,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/custodial)
+/area/shuttle/collins/custodial)
 "JB" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/blue{
 	dir = 8
@@ -13749,7 +13749,7 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "JD" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
@@ -13773,7 +13773,7 @@
 	},
 /obj/structure/catwalk,
 /obj/machinery/alarm{
-	alarm_id = "petrov2";
+	alarm_id = "collins2";
 	frequency = 1439;
 	pixel_y = 23;
 	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
@@ -13789,13 +13789,13 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/visible,
 /obj/machinery/button/blast_door{
-	id_tag = "petrovcell3";
+	id_tag = "collinscell3";
 	name = "Test Chamber Vent";
 	pixel_x = -26;
 	pixel_y = -26
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "JK" = (
 /obj/structure/mopbucket,
 /obj/item/mop,
@@ -13809,7 +13809,7 @@
 	pixel_x = 24
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/custodial)
+/area/shuttle/collins/custodial)
 "JL" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -13828,17 +13828,17 @@
 	icon_state = "shuttle_chair_preview"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/cockpit)
+/area/shuttle/collins/cockpit)
 "JO" = (
 /obj/structure/closet/bombcloset,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/equipment)
+/area/shuttle/collins/equipment)
 "JP" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/machinery/atmospherics/pipe/simple/hidden/universal,
 /obj/effect/paint/silver,
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "JS" = (
 /obj/structure/cable/cyan{
 	d1 = 1;
@@ -13861,7 +13861,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "JX" = (
 /obj/effect/floor_decal/industrial/warning/fulltile,
 /obj/machinery/firealarm{
@@ -13869,7 +13869,7 @@
 	pixel_y = -24
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "JY" = (
 /obj/structure/disposalpipe/segment,
 /obj/structure/cable/green{
@@ -13890,7 +13890,7 @@
 	},
 /obj/structure/catwalk,
 /obj/machinery/alarm{
-	alarm_id = "petrov1";
+	alarm_id = "collins1";
 	dir = 4;
 	icon_state = "alarm0";
 	pixel_x = -24
@@ -13903,14 +13903,14 @@
 	pixel_x = -18
 	},
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/cell1)
+/area/shuttle/collins/cell1)
 "Kc" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id_tag = "PetrovShield";
-	name = "Petrov Blast Shutters";
+	id_tag = "CollinsShield";
+	name = "Collins Blast Shutters";
 	opacity = 0
 	},
 /obj/effect/wallframe_spawn/reinforced/polarized{
@@ -13918,7 +13918,7 @@
 	},
 /obj/effect/paint/silver,
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/rd)
+/area/shuttle/collins/rd)
 "Kh" = (
 /obj/structure/table/standard,
 /obj/item/folder/nt,
@@ -13928,11 +13928,11 @@
 	pixel_y = 0
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/rnd)
+/area/shuttle/collins/rnd)
 "Ki" = (
 /obj/effect/floor_decal/industrial/warning/fulltile,
-/obj/machinery/camera/network/petrov{
-	c_tag = "Petrov - Hallway Fore";
+/obj/machinery/camera/network/collins{
+	c_tag = "Collins - Hallway Fore";
 	dir = 1
 	},
 /obj/machinery/alarm{
@@ -13941,7 +13941,7 @@
 	pixel_y = -22
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "Kj" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4;
@@ -13949,7 +13949,7 @@
 	},
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "Kk" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
@@ -13963,7 +13963,7 @@
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/custodial)
+/area/shuttle/collins/custodial)
 "Ko" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/power/port_gen/pacman{
@@ -13982,13 +13982,13 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/equipment)
+/area/shuttle/collins/equipment)
 "Kt" = (
 /obj/structure/shuttle/engine/propulsion{
 	dir = 4
 	},
 /turf/simulated/floor/reinforced/airless,
-/area/shuttle/petrov/custodial)
+/area/shuttle/collins/custodial)
 "Ku" = (
 /obj/structure/cable/cyan{
 	d1 = 1;
@@ -14006,7 +14006,7 @@
 "Kw" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/eva)
+/area/shuttle/collins/eva)
 "Ky" = (
 /obj/machinery/power/smes/buildable/preset/torch/shuttle{
 	RCon_tag = "Shuttle - Charon"
@@ -14057,7 +14057,7 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/phoron)
+/area/shuttle/collins/phoron)
 "KI" = (
 /obj/structure/disposalpipe/segment{
 	dir = 2;
@@ -14091,7 +14091,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/maint)
+/area/shuttle/collins/maint)
 "KN" = (
 /obj/structure/cable/cyan{
 	d1 = 1;
@@ -14099,7 +14099,7 @@
 	icon_state = "1-4"
 	},
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/cell1)
+/area/shuttle/collins/cell1)
 "KQ" = (
 /obj/machinery/light{
 	dir = 4
@@ -14111,7 +14111,7 @@
 	},
 /obj/machinery/papershredder,
 /turf/simulated/floor/lino,
-/area/shuttle/petrov/rd)
+/area/shuttle/collins/rd)
 "KU" = (
 /obj/machinery/light/small{
 	dir = 1
@@ -14129,7 +14129,7 @@
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "KW" = (
 /obj/structure/cable/cyan{
 	d1 = 2;
@@ -14151,7 +14151,7 @@
 	},
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "Lb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -14221,12 +14221,12 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "Li" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/silver,
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/phoron)
+/area/shuttle/collins/phoron)
 "Lj" = (
 /turf/simulated/floor/wood/walnut{
 	icon_state = "walnut_broken5"
@@ -14304,14 +14304,14 @@
 "Lt" = (
 /obj/effect/paint/silver,
 /turf/simulated/wall/titanium,
-/area/shuttle/petrov/rnd)
+/area/shuttle/collins/rnd)
 "Lu" = (
 /obj/machinery/atmospherics/pipe/simple/visible/blue{
 	dir = 4;
 	icon_state = "intact"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "Lv" = (
 /obj/machinery/portable_atmospherics/hydroponics,
 /obj/machinery/light/small{
@@ -14319,16 +14319,16 @@
 	icon_state = "bulb1"
 	},
 /obj/machinery/alarm/monitor/isolation{
-	alarm_id = "petrov3";
+	alarm_id = "collins3";
 	dir = 8;
 	pixel_x = 24
 	},
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/cell3)
+/area/shuttle/collins/cell3)
 "LA" = (
 /obj/effect/paint/silver,
 /turf/simulated/wall/titanium,
-/area/shuttle/petrov/rd)
+/area/shuttle/collins/rd)
 "LB" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/random/trash,
@@ -14349,7 +14349,7 @@
 	pixel_y = 23
 	},
 /turf/simulated/floor/tiled/dark,
-/area/shuttle/petrov/security)
+/area/shuttle/collins/security)
 "LE" = (
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 1
@@ -14364,14 +14364,14 @@
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 "LF" = (
 /obj/structure/table/standard,
 /obj/machinery/light{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 "LG" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 10;
@@ -14379,13 +14379,13 @@
 	},
 /obj/effect/paint/silver,
 /turf/simulated/wall/ocp_wall,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "LI" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/phoron)
+/area/shuttle/collins/phoron)
 "LL" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
@@ -14403,15 +14403,15 @@
 	dir = 4
 	},
 /turf/simulated/floor/reinforced/airless,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "LN" = (
 /obj/effect/paint/silver,
 /turf/simulated/wall/titanium,
-/area/shuttle/petrov/equipment)
+/area/shuttle/collins/equipment)
 "LP" = (
 /obj/structure/table/reinforced,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/cockpit)
+/area/shuttle/collins/cockpit)
 "LQ" = (
 /obj/structure/cable/cyan{
 	d1 = 4;
@@ -14419,7 +14419,7 @@
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/cell2)
+/area/shuttle/collins/cell2)
 "LT" = (
 /obj/structure/cable/cyan{
 	d1 = 1;
@@ -14440,14 +14440,14 @@
 	icon_state = "intact"
 	},
 /turf/simulated/floor/reinforced/airless,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "LW" = (
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "rd_windows"
 	},
 /obj/effect/paint/silver,
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/rd)
+/area/shuttle/collins/rd)
 "LX" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -14470,7 +14470,7 @@
 /obj/structure/table/steel,
 /obj/item/modular_computer/laptop/preset/custom_loadout/advanced,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/security)
+/area/shuttle/collins/security)
 "Mc" = (
 /obj/machinery/atmospherics/valve/shutoff/supply,
 /obj/structure/railing/mapped{
@@ -14484,7 +14484,7 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/closet/secure_closet/scientist_torch,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "Mj" = (
 /obj/structure/cable{
 	d1 = 2;
@@ -14518,10 +14518,10 @@
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/eva)
+/area/shuttle/collins/eva)
 "Mm" = (
 /turf/simulated/wall/titanium,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 "Mn" = (
 /obj/machinery/power/apc{
 	dir = 4;
@@ -14540,7 +14540,7 @@
 	level = 2
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/cockpit)
+/area/shuttle/collins/cockpit)
 "Mo" = (
 /obj/machinery/light/small{
 	dir = 8
@@ -14550,18 +14550,18 @@
 	icon_state = "map_scrubber_off"
 	},
 /obj/machinery/alarm/monitor/isolation{
-	alarm_id = "petrov1";
+	alarm_id = "collins1";
 	dir = 4;
 	pixel_x = -24
 	},
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/cell1)
+/area/shuttle/collins/cell1)
 "Mr" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
 	},
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/security)
+/area/shuttle/collins/security)
 "Mt" = (
 /obj/structure/handrail{
 	dir = 4;
@@ -14576,7 +14576,7 @@
 	pixel_y = -24
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 "Mu" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel,
@@ -14603,7 +14603,7 @@
 	pixel_x = 20
 	},
 /turf/simulated/floor/tiled/dark,
-/area/shuttle/petrov/security)
+/area/shuttle/collins/security)
 "Mx" = (
 /obj/structure/table/rack{
 	dir = 8
@@ -14611,7 +14611,7 @@
 /obj/item/clothing/mask/gas,
 /obj/item/clothing/mask/gas,
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/equipment)
+/area/shuttle/collins/equipment)
 "My" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -14622,24 +14622,24 @@
 "Mz" = (
 /obj/structure/stasis_cage,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/camera/network/petrov{
-	c_tag = "Petrov - Equipment";
+/obj/machinery/camera/network/collins{
+	c_tag = "Collins - Equipment";
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/equipment)
+/area/shuttle/collins/equipment)
 "MB" = (
 /obj/machinery/door/blast/regular{
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id_tag = "PetrovBiohazard";
-	name = "Petrov Biohazard Shutters";
+	id_tag = "CollinsBiohazard";
+	name = "Collins Biohazard Shutters";
 	opacity = 0
 	},
 /obj/effect/floor_decal/corner/red/mono,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "MC" = (
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -14663,7 +14663,7 @@
 /obj/machinery/hologram/holopad/longrange,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/cockpit)
+/area/shuttle/collins/cockpit)
 "ME" = (
 /obj/random/trash,
 /turf/simulated/floor/plating,
@@ -14676,19 +14676,19 @@
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
 	icon_state = "closed";
-	id_tag = "petrov_shuttle_outer";
+	id_tag = "collins_shuttle_outer";
 	locked = 0;
-	name = "Petrov Exterior Access"
+	name = "Collins Exterior Access"
 	},
-/obj/effect/shuttle_landmark/petrov/start,
+/obj/effect/shuttle_landmark/collins/start,
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "MN" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "MO" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -14720,7 +14720,7 @@
 /obj/structure/table/standard,
 /obj/machinery/reagent_temperature,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 "MR" = (
 /turf/simulated/floor/tiled/steel_ridged,
 /area/hallway/primary/fifthdeck/fore)
@@ -14741,7 +14741,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/equipment)
+/area/shuttle/collins/equipment)
 "Na" = (
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/portable_atmospherics/canister/empty/oxygen,
@@ -14754,13 +14754,13 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id_tag = "PetrovShield";
-	name = "Petrov Blast Shutters";
+	id_tag = "CollinsShield";
+	name = "Collins Blast Shutters";
 	opacity = 0
 	},
 /obj/effect/paint/silver,
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/cockpit)
+/area/shuttle/collins/cockpit)
 "Ne" = (
 /turf/simulated/floor/wood/walnut,
 /area/vacant/bar)
@@ -14768,14 +14768,14 @@
 /obj/structure/table/standard,
 /obj/item/storage/toolbox/mechanical,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 "Ng" = (
 /obj/effect/wallframe_spawn/reinforced_phoron/titanium,
 /obj/machinery/door/firedoor,
 /obj/effect/paint/silver,
 /obj/machinery/atmospherics/pipe/simple/visible,
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/phoron)
+/area/shuttle/collins/phoron)
 "Nh" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
@@ -14796,11 +14796,11 @@
 /obj/structure/table/steel,
 /obj/machinery/door/window/brigdoor/eastleft{
 	dir = 2;
-	name = "Petrov Security Desk"
+	name = "Collins Security Desk"
 	},
 /obj/machinery/door/window/brigdoor/westright{
 	dir = 1;
-	name = "Petrov Security Desk"
+	name = "Collins Security Desk"
 	},
 /obj/machinery/door/blast/shutters{
 	density = 0;
@@ -14811,7 +14811,7 @@
 	opacity = 0
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/security)
+/area/shuttle/collins/security)
 "Nl" = (
 /obj/machinery/alarm{
 	dir = 1;
@@ -14837,7 +14837,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/cell1)
+/area/shuttle/collins/cell1)
 "Nu" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
@@ -14853,7 +14853,7 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "Nv" = (
 /obj/structure/disposalpipe/segment,
 /obj/structure/cable/green{
@@ -14895,7 +14895,7 @@
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/eva)
+/area/shuttle/collins/eva)
 "NC" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -14909,14 +14909,14 @@
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/eva)
+/area/shuttle/collins/eva)
 "ND" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id_tag = "PetrovShield";
-	name = "Petrov Blast Shutters";
+	id_tag = "CollinsShield";
+	name = "Collins Blast Shutters";
 	opacity = 0
 	},
 /obj/effect/wallframe_spawn/reinforced/polarized{
@@ -14924,7 +14924,7 @@
 	},
 /obj/effect/paint/silver,
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/security)
+/area/shuttle/collins/security)
 "NF" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -14938,19 +14938,19 @@
 "NG" = (
 /obj/machinery/atmospherics/binary/pump,
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "NI" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
-/area/shuttle/petrov/security)
+/area/shuttle/collins/security)
 "NJ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
 	icon_state = "closed";
-	id_tag = "petrov_shuttle_dock_inner";
+	id_tag = "collins_shuttle_dock_inner";
 	locked = 0;
 	name = "Docking Port Airlock"
 	},
@@ -14969,13 +14969,13 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id_tag = "PetrovShield";
-	name = "Petrov Blast Shutters";
+	id_tag = "CollinsShield";
+	name = "Collins Blast Shutters";
 	opacity = 0
 	},
 /obj/effect/paint/silver,
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/security)
+/area/shuttle/collins/security)
 "NP" = (
 /obj/structure/table/rack{
 	dir = 8
@@ -14983,7 +14983,7 @@
 /obj/item/storage/toolbox/mechanical,
 /obj/item/storage/toolbox/mechanical,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/equipment)
+/area/shuttle/collins/equipment)
 "NS" = (
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -14991,11 +14991,11 @@
 	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/rnd)
+/area/shuttle/collins/rnd)
 "NW" = (
 /obj/effect/paint/silver,
 /turf/simulated/wall/titanium,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "NX" = (
 /obj/machinery/atmospherics/omni/filter{
 	tag_east = 2;
@@ -15003,7 +15003,7 @@
 	tag_west = 1
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "NY" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -15013,7 +15013,7 @@
 	icon_state = "1-8"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/rnd)
+/area/shuttle/collins/rnd)
 "NZ" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 10;
@@ -15024,7 +15024,7 @@
 	},
 /obj/effect/paint/silver,
 /turf/simulated/wall/titanium,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "Od" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/cyan{
@@ -15056,7 +15056,7 @@
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/custodial)
+/area/shuttle/collins/custodial)
 "Og" = (
 /obj/structure/cable/cyan{
 	d1 = 4;
@@ -15073,7 +15073,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "Oh" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
@@ -15085,11 +15085,11 @@
 	dir = 8
 	},
 /turf/simulated/floor/reinforced/airless,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "Oi" = (
 /obj/machinery/atmospherics/binary/pump,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "Ol" = (
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/structure/cable{
@@ -15117,12 +15117,12 @@
 	density = 1;
 	dir = 1;
 	icon_state = "pdoor1";
-	id_tag = "petrovcell1";
+	id_tag = "collinscell1";
 	name = "Test Chamber Blast Doors";
 	opacity = 1
 	},
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/cell1)
+/area/shuttle/collins/cell1)
 "Ow" = (
 /obj/structure/handrail{
 	dir = 4;
@@ -15161,7 +15161,7 @@
 	pixel_x = 21
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/phoron)
+/area/shuttle/collins/phoron)
 "OD" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/research{
@@ -15175,7 +15175,7 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "OG" = (
 /turf/simulated/floor/tiled,
 /area/quartermaster/storage)
@@ -15195,7 +15195,7 @@
 	dir = 6
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "OM" = (
 /obj/machinery/atmospherics/portables_connector,
 /obj/machinery/portable_atmospherics/canister/empty,
@@ -15204,7 +15204,7 @@
 	pixel_y = 32
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "ON" = (
 /obj/structure/cable/cyan{
 	d1 = 1;
@@ -15220,7 +15220,7 @@
 	dir = 9
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/cockpit)
+/area/shuttle/collins/cockpit)
 "OO" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/r_n_d/circuit_imprinter,
@@ -15235,24 +15235,24 @@
 	pixel_x = 21
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/rnd)
+/area/shuttle/collins/rnd)
 "OR" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal,
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
 	icon_state = "closed";
-	id_tag = "petrov_shuttle_inner";
+	id_tag = "collins_shuttle_inner";
 	locked = 0;
-	name = "Petrov Interior Access"
+	name = "Collins Interior Access"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/shuttle/petrov/maint)
+/area/shuttle/collins/maint)
 "OU" = (
 /obj/machinery/light{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
-/area/shuttle/petrov/rnd)
+/area/shuttle/collins/rnd)
 "OW" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -15300,7 +15300,7 @@
 	icon_state = "map_tvalvem0"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "Pd" = (
 /obj/random_multi/single_item/runtime,
 /turf/simulated/floor/tiled,
@@ -15310,7 +15310,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/reinforced/airless,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 "Pm" = (
 /obj/structure/cable/cyan{
 	d1 = 1;
@@ -15327,7 +15327,7 @@
 	icon_state = "pipe-c"
 	},
 /turf/simulated/floor/lino,
-/area/shuttle/petrov/rd)
+/area/shuttle/collins/rd)
 "Pn" = (
 /obj/structure/hygiene/sink{
 	dir = 4;
@@ -15345,7 +15345,7 @@
 	pixel_x = 21
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "Pr" = (
 /obj/structure/table/standard,
 /obj/machinery/atmospherics/pipe/manifold/visible/red{
@@ -15362,12 +15362,12 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/machinery/camera/network/petrov{
-	c_tag = "Petrov - Anomaly Fore";
+/obj/machinery/camera/network/collins{
+	c_tag = "Collins - Anomaly Fore";
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "Pt" = (
 /obj/structure/sign/warning/airlock{
 	dir = 8;
@@ -15375,7 +15375,7 @@
 	},
 /obj/effect/paint/silver,
 /turf/simulated/wall/titanium,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "Pv" = (
 /obj/machinery/door/firedoor,
 /obj/structure/sign/directions/bridge{
@@ -15399,7 +15399,7 @@
 	pixel_x = 21
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 "Py" = (
 /obj/machinery/atmospherics/portables_connector{
 	dir = 1
@@ -15430,7 +15430,7 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/maint)
+/area/shuttle/collins/maint)
 "PE" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
@@ -15439,7 +15439,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/reinforced/airless,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "PK" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
@@ -15450,7 +15450,7 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "PM" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/disposalpipe/segment,
@@ -15477,19 +15477,19 @@
 	pixel_y = 9
 	},
 /obj/machinery/button/blast_door{
-	id_tag = "PetrovShield";
+	id_tag = "CollinsShield";
 	name = "Blast Shutter Control";
 	pixel_x = 5;
 	pixel_y = -3
 	},
 /obj/machinery/button/blast_door{
-	id_tag = "PetrovBiohazard";
+	id_tag = "CollinsBiohazard";
 	name = "Biohazard Shutter Control";
 	pixel_x = -5;
 	pixel_y = -3
 	},
 /turf/simulated/floor/lino,
-/area/shuttle/petrov/rd)
+/area/shuttle/collins/rd)
 "Qd" = (
 /turf/simulated/wall/r_wall/hull,
 /area/vacant/bar)
@@ -15497,13 +15497,13 @@
 /obj/machinery/atmospherics/portables_connector,
 /obj/effect/floor_decal/industrial/outline/red,
 /obj/machinery/alarm{
-	alarm_id = "petrov2";
+	alarm_id = "collins2";
 	frequency = 1439;
 	pixel_y = 23;
 	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "Qg" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -15524,7 +15524,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible,
 /obj/effect/paint/silver,
 /turf/simulated/wall/ocp_wall,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "Qj" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
@@ -15542,38 +15542,38 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "Qm" = (
 /obj/effect/paint/silver,
 /turf/simulated/wall/titanium,
-/area/shuttle/petrov/cell2)
+/area/shuttle/collins/cell2)
 "Qn" = (
 /turf/simulated/wall/prepainted,
 /area/quartermaster/expedition/eva)
 "Qo" = (
 /obj/structure/table/steel,
 /obj/machinery/button/blast_door{
-	id_tag = "PetrovShield";
+	id_tag = "CollinsShield";
 	name = "Blast Shutter Control";
 	pixel_x = 5;
 	pixel_y = -3
 	},
 /obj/machinery/button/alternate/door{
 	desc = "A remote control-switch for airlocks.";
-	id_tag = "PetrovAccess";
-	name = "Petrov Interior Door Control";
+	id_tag = "CollinsAccess";
+	name = "Collins Interior Door Control";
 	pixel_x = -5;
 	pixel_y = 6;
-	req_access = list("ACCESS_TORCH_PETROV_SEC")
+	req_access = list("ACCESS_TORCH_COLLINS_SEC")
 	},
 /obj/machinery/button/blast_door{
-	id_tag = "PetrovBiohazard";
+	id_tag = "CollinsBiohazard";
 	name = "Biohazard Shutter Control";
 	pixel_x = -5;
 	pixel_y = -3
 	},
-/obj/machinery/camera/network/petrov{
-	c_tag = "Petrov - Security";
+/obj/machinery/camera/network/collins{
+	c_tag = "Collins - Security";
 	dir = 4
 	},
 /obj/machinery/light{
@@ -15586,7 +15586,7 @@
 	pixel_y = 6
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/security)
+/area/shuttle/collins/security)
 "Qp" = (
 /obj/machinery/door/firedoor,
 /obj/structure/cable/cyan{
@@ -15604,20 +15604,20 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "Qr" = (
 /obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id_tag = "PetrovShield";
-	name = "Petrov Blast Shutters";
+	id_tag = "CollinsShield";
+	name = "Collins Blast Shutters";
 	opacity = 0
 	},
 /obj/effect/paint/silver,
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/equipment)
+/area/shuttle/collins/equipment)
 "Qz" = (
 /obj/structure/cable/cyan{
 	d1 = 4;
@@ -15634,7 +15634,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "QA" = (
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 1
@@ -15663,7 +15663,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "QE" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
@@ -15680,13 +15680,13 @@
 /obj/item/stack/material/steel/fifty,
 /obj/item/stack/material/glass/fifty,
 /turf/simulated/floor/tiled/dark,
-/area/shuttle/petrov/rnd)
+/area/shuttle/collins/rnd)
 "QH" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
 /turf/simulated/floor/lino,
-/area/shuttle/petrov/rd)
+/area/shuttle/collins/rd)
 "QI" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/research{
@@ -15701,7 +15701,7 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/phoron)
+/area/shuttle/collins/phoron)
 "QJ" = (
 /obj/effect/paint/hull,
 /obj/structure/sign/solgov,
@@ -15712,7 +15712,7 @@
 /obj/item/device/scanner/reagent,
 /obj/item/device/scanner/spectrometer/adv,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/equipment)
+/area/shuttle/collins/equipment)
 "QL" = (
 /obj/effect/wallframe_spawn/reinforced/hull,
 /obj/machinery/door/blast/regular{
@@ -15735,7 +15735,7 @@
 	level = 2
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/custodial)
+/area/shuttle/collins/custodial)
 "QV" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/green{
@@ -15764,7 +15764,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "QX" = (
 /obj/structure/disposalpipe/segment,
 /obj/structure/cable/green{
@@ -15806,7 +15806,7 @@
 "Rc" = (
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/phoron)
+/area/shuttle/collins/phoron)
 "Rd" = (
 /obj/machinery/light{
 	dir = 8
@@ -15857,7 +15857,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "Rj" = (
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/structure/largecrate,
@@ -15869,7 +15869,7 @@
 "Rn" = (
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/reinforced/airless,
-/area/shuttle/petrov/rnd)
+/area/shuttle/collins/rnd)
 "Rp" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 5;
@@ -15890,7 +15890,7 @@
 	icon_state = "1-8"
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "Rr" = (
 /obj/machinery/atmospherics/binary/pump{
 	dir = 8
@@ -15901,15 +15901,15 @@
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "Rt" = (
 /obj/effect/paint/silver,
 /turf/simulated/wall/ocp_wall,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "Rv" = (
 /obj/machinery/atmospherics/pipe/manifold4w/visible,
 /turf/simulated/floor/tiled/techfloor,
-/area/shuttle/petrov/maint)
+/area/shuttle/collins/maint)
 "Rx" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 5;
@@ -15917,7 +15917,7 @@
 	},
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/maint)
+/area/shuttle/collins/maint)
 "Ry" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -15960,7 +15960,7 @@
 	use_power = 1
 	},
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/phoron)
+/area/shuttle/collins/phoron)
 "RE" = (
 /obj/machinery/suit_storage_unit/science,
 /obj/machinery/light{
@@ -15970,7 +15970,7 @@
 	pixel_y = 32
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/eva)
+/area/shuttle/collins/eva)
 "RG" = (
 /obj/machinery/door/window/southright{
 	dir = 1;
@@ -15982,12 +15982,12 @@
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/cell2)
+/area/shuttle/collins/cell2)
 "RN" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/artifact_scanpad,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 "RQ" = (
 /turf/simulated/wall/r_wall/hull,
 /area/vacant/infirmary)
@@ -16008,7 +16008,7 @@
 "RX" = (
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/cell2)
+/area/shuttle/collins/cell2)
 "RZ" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
@@ -16030,8 +16030,8 @@
 	pixel_x = 6;
 	pixel_y = 6
 	},
-/obj/machinery/camera/network/petrov{
-	c_tag = "Petrov - Analysis";
+/obj/machinery/camera/network/collins{
+	c_tag = "Collins - Analysis";
 	dir = 4
 	},
 /obj/structure/cable/cyan{
@@ -16044,18 +16044,18 @@
 	pixel_x = -24
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 "Sb" = (
 /obj/machinery/door/blast/regular{
 	density = 1;
 	dir = 1;
 	icon_state = "pdoor1";
-	id_tag = "petrovcell2";
+	id_tag = "collinscell2";
 	name = "Test Chamber Blast Doors";
 	opacity = 1
 	},
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/cell2)
+/area/shuttle/collins/cell2)
 "Sc" = (
 /obj/effect/catwalk_plated,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -16083,21 +16083,21 @@
 /obj/structure/table/standard,
 /obj/machinery/atmospherics/pipe/simple/visible/red,
 /obj/machinery/computer/atmoscontrol/laptop{
-	monitored_alarm_ids = list("petrov1","petrov2","petrov3");
-	req_access = list("ACCESS_TORCH_PETROV")
+	monitored_alarm_ids = list("collins1","collins2","collins3");
+	req_access = list("ACCESS_TORCH_COLLINS")
 	},
 /obj/item/device/radio/intercom{
 	dir = 4;
 	pixel_x = -21
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "So" = (
 /obj/machinery/portable_atmospherics/canister/air/airlock,
 /obj/effect/floor_decal/industrial/outline/blue,
 /obj/machinery/atmospherics/portables_connector,
 /turf/simulated/floor/tiled/techfloor,
-/area/shuttle/petrov/maint)
+/area/shuttle/collins/maint)
 "Sp" = (
 /obj/machinery/atmospherics/portables_connector{
 	dir = 4
@@ -16109,7 +16109,7 @@
 	pixel_x = -32
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "Sr" = (
 /obj/effect/floor_decal/corner/brown{
 	dir = 5
@@ -16124,7 +16124,7 @@
 "Ss" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 "Su" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 5;
@@ -16135,7 +16135,7 @@
 	icon_state = "pipe-c"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "Sv" = (
 /obj/random/torchcloset,
 /obj/random/maintenance/solgov,
@@ -16162,7 +16162,7 @@
 /obj/structure/closet/secure_closet/scientist_torch,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/equipment)
+/area/shuttle/collins/equipment)
 "SA" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/door/firedoor,
@@ -16181,7 +16181,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "SB" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
@@ -16216,7 +16216,7 @@
 	pixel_x = 24
 	},
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/cell3)
+/area/shuttle/collins/cell3)
 "SI" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 8
@@ -16230,7 +16230,7 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/cell1)
+/area/shuttle/collins/cell1)
 "SJ" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -16249,7 +16249,7 @@
 "SK" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/rnd)
+/area/shuttle/collins/rnd)
 "SM" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -16279,7 +16279,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/rnd)
+/area/shuttle/collins/rnd)
 "SQ" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 1
@@ -16296,7 +16296,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "SU" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 1
@@ -16307,7 +16307,7 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/cell1)
+/area/shuttle/collins/cell1)
 "SV" = (
 /obj/machinery/atmospherics/valve/shutoff/supply{
 	dir = 4
@@ -16334,7 +16334,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/phoron)
+/area/shuttle/collins/phoron)
 "Tg" = (
 /obj/structure/cable/cyan{
 	d1 = 1;
@@ -16348,7 +16348,7 @@
 	icon_state = "pipe-c"
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/equipment)
+/area/shuttle/collins/equipment)
 "Tm" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -16369,23 +16369,23 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id_tag = "PetrovShield";
-	name = "Petrov Blast Shutters";
+	id_tag = "CollinsShield";
+	name = "Collins Blast Shutters";
 	opacity = 0
 	},
 /obj/effect/paint/silver,
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/eva)
+/area/shuttle/collins/eva)
 "Tr" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
 	icon_state = "closed";
-	id_tag = "petrov_shuttle_outer";
+	id_tag = "collins_shuttle_outer";
 	locked = 0;
-	name = "Petrov Exterior Access"
+	name = "Collins Exterior Access"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "Ts" = (
 /obj/structure/cable/cyan{
 	d1 = 4;
@@ -16404,7 +16404,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "Tt" = (
 /obj/structure/cable/cyan{
 	d1 = 2;
@@ -16434,7 +16434,7 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "Tw" = (
 /obj/structure/cable/cyan{
 	d1 = 4;
@@ -16449,7 +16449,7 @@
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/silver,
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 "TA" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -16482,7 +16482,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "TF" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
 	dir = 4;
@@ -16494,7 +16494,7 @@
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "TG" = (
 /obj/effect/floor_decal/corner/red/half{
 	dir = 8;
@@ -16511,7 +16511,7 @@
 	},
 /obj/structure/table/steel,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/security)
+/area/shuttle/collins/security)
 "TH" = (
 /obj/structure/table/standard,
 /obj/machinery/cell_charger,
@@ -16520,7 +16520,7 @@
 	},
 /obj/item/melee/baton/loaded,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 "TL" = (
 /obj/structure/ladder/up,
 /obj/effect/floor_decal/corner/brown{
@@ -16540,7 +16540,7 @@
 /obj/item/folder/nt,
 /obj/item/folder/nt,
 /turf/simulated/floor/lino,
-/area/shuttle/petrov/rd)
+/area/shuttle/collins/rd)
 "TO" = (
 /obj/machinery/atmospherics/unary/vent_scrubber{
 	dir = 1;
@@ -16552,7 +16552,7 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/cell3)
+/area/shuttle/collins/cell3)
 "TP" = (
 /obj/effect/floor_decal/corner/brown{
 	dir = 5
@@ -16583,14 +16583,14 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "TS" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8;
 	icon_state = "warning"
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "TY" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable/cyan{
@@ -16599,7 +16599,7 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "TZ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/effect/floor_decal/techfloor{
@@ -16615,7 +16615,7 @@
 	icon_state = "bulb1"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/shuttle/petrov/maint)
+/area/shuttle/collins/maint)
 "Ub" = (
 /obj/machinery/door/firedoor,
 /obj/structure/cable/cyan{
@@ -16629,7 +16629,7 @@
 	name = "Checkpoint"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/security)
+/area/shuttle/collins/security)
 "Um" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -16644,7 +16644,7 @@
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
 	icon_state = "closed";
-	id_tag = "petrov_shuttle_dock_outer";
+	id_tag = "collins_shuttle_dock_outer";
 	locked = 0;
 	name = "Docking Port Airlock"
 	},
@@ -16667,7 +16667,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction,
 /turf/simulated/floor/reinforced/airless,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "Ur" = (
 /obj/machinery/vending/assist,
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -16678,7 +16678,7 @@
 	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "Us" = (
 /obj/structure/railing/mapped{
 	dir = 8;
@@ -16692,18 +16692,18 @@
 "Uu" = (
 /obj/machinery/atmospherics/pipe/manifold/visible,
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "Uw" = (
 /obj/effect/paint/silver,
 /turf/simulated/wall/titanium,
-/area/shuttle/petrov/cell3)
+/area/shuttle/collins/cell3)
 "Uy" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8;
 	icon_state = "warning"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 "UA" = (
 /obj/structure/cable/cyan{
 	d1 = 1;
@@ -16712,14 +16712,14 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/lino,
-/area/shuttle/petrov/rd)
+/area/shuttle/collins/rd)
 "UC" = (
 /obj/structure/table/rack,
 /obj/random/maintenance/solgov,
 /obj/random/maintenance/solgov,
 /obj/random/maintenance/solgov,
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "UE" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/cyan{
@@ -16734,7 +16734,7 @@
 /obj/structure/table/standard,
 /obj/item/device/integrated_circuit_printer,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/equipment)
+/area/shuttle/collins/equipment)
 "UG" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled,
@@ -16773,7 +16773,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/rd)
+/area/shuttle/collins/rd)
 "UO" = (
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fifthdeck/aft)
@@ -16786,7 +16786,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "UT" = (
 /obj/effect/floor_decal/industrial/warning/fulltile,
 /obj/structure/cable/cyan{
@@ -16804,7 +16804,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "UW" = (
 /obj/structure/cable/cyan{
 	d1 = 4;
@@ -16816,11 +16816,11 @@
 "UX" = (
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "Va" = (
 /obj/machinery/airlock_sensor{
 	frequency = 1380;
-	id_tag = "petrov_shuttle_sensor";
+	id_tag = "collins_shuttle_sensor";
 	pixel_x = -24;
 	pixel_y = 12
 	},
@@ -16833,10 +16833,10 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 2;
-	id_tag = "petrov_shuttle_pump"
+	id_tag = "collins_shuttle_pump"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "Vb" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
@@ -16869,7 +16869,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 "Vm" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/cyan{
@@ -16880,7 +16880,7 @@
 /obj/machinery/door/airlock/external{
 	frequency = 1380;
 	icon_state = "closed";
-	id_tag = "petrov_shuttle_dock_outer";
+	id_tag = "collins_shuttle_dock_outer";
 	locked = 0;
 	name = "Docking Port Airlock"
 	},
@@ -16894,7 +16894,7 @@
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/security)
+/area/shuttle/collins/security)
 "Vr" = (
 /obj/structure/sign/solgov,
 /turf/simulated/wall/r_wall/hull,
@@ -16912,7 +16912,7 @@
 	icon_state = "pipe-c"
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/rnd)
+/area/shuttle/collins/rnd)
 "Vy" = (
 /obj/machinery/light/small{
 	dir = 8
@@ -16921,7 +16921,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/cell3)
+/area/shuttle/collins/cell3)
 "Vz" = (
 /obj/structure/ladder/up,
 /obj/effect/floor_decal/corner/brown{
@@ -16945,8 +16945,8 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id_tag = "PetrovBiohazard";
-	name = "Petrov Biohazard Shutters";
+	id_tag = "CollinsBiohazard";
+	name = "Collins Biohazard Shutters";
 	opacity = 0
 	},
 /obj/effect/floor_decal/corner/red/mono,
@@ -16965,7 +16965,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "VC" = (
 /obj/structure/railing/mapped,
 /turf/simulated/floor/plating,
@@ -16982,7 +16982,7 @@
 	icon_state = "intact"
 	},
 /obj/machinery/button/blast_door{
-	id_tag = "petrovcell2";
+	id_tag = "collinscell2";
 	name = "Test Chamber Vent";
 	pixel_x = -26;
 	pixel_y = -26
@@ -16993,7 +16993,7 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "VF" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 9;
@@ -17001,7 +17001,7 @@
 	},
 /obj/machinery/light,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "VG" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/cyan{
@@ -17028,15 +17028,15 @@
 	pixel_x = 0;
 	pixel_y = 32
 	},
-/obj/machinery/camera/network/petrov{
-	c_tag = "Petrov - Chief Science Officer";
+/obj/machinery/camera/network/collins{
+	c_tag = "Collins - Chief Science Officer";
 	dir = 4
 	},
 /obj/machinery/light{
 	dir = 8
 	},
 /turf/simulated/floor/lino,
-/area/shuttle/petrov/rd)
+/area/shuttle/collins/rd)
 "VN" = (
 /obj/structure/closet/hydrant{
 	pixel_x = -32
@@ -17059,13 +17059,13 @@
 	pixel_y = -2
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/eva)
+/area/shuttle/collins/eva)
 "VP" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
 	},
 /turf/simulated/floor/reinforced/airless,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "VR" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
@@ -17080,7 +17080,7 @@
 /area/exploration_shuttle/cargo)
 "VT" = (
 /turf/simulated/floor/lino,
-/area/shuttle/petrov/rd)
+/area/shuttle/collins/rd)
 "VU" = (
 /obj/structure/table/rack,
 /obj/item/device/scanner/xenobio,
@@ -17089,7 +17089,7 @@
 /obj/item/storage/excavation,
 /obj/item/device/measuring_tape,
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/eva)
+/area/shuttle/collins/eva)
 "VV" = (
 /obj/structure/closet/secure_closet/scientist_torch,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -17097,7 +17097,7 @@
 	pixel_y = 32
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/equipment)
+/area/shuttle/collins/equipment)
 "VX" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/disposalpipe/segment,
@@ -17157,10 +17157,10 @@
 "Wl" = (
 /obj/effect/paint/silver,
 /turf/simulated/wall/titanium,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "Wn" = (
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "Wo" = (
 /obj/structure/cable/green{
 	d1 = 2;
@@ -17186,14 +17186,14 @@
 	},
 /obj/random/cash,
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/cockpit)
+/area/shuttle/collins/cockpit)
 "Wt" = (
 /obj/machinery/light{
 	dir = 8
 	},
 /obj/structure/flora/pottedplant/unusual,
 /turf/simulated/floor/lino,
-/area/shuttle/petrov/rd)
+/area/shuttle/collins/rd)
 "Wy" = (
 /obj/machinery/portable_atmospherics/canister/phoron,
 /obj/machinery/atmospherics/unary/vent_pump/tank{
@@ -17211,7 +17211,7 @@
 	use_power = 0
 	},
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/phoron)
+/area/shuttle/collins/phoron)
 "Wz" = (
 /obj/machinery/computer/air_control{
 	dir = 2;
@@ -17222,7 +17222,7 @@
 	sensor_tag = "phoron_sensor"
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/phoron)
+/area/shuttle/collins/phoron)
 "WD" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
@@ -17257,7 +17257,7 @@
 "WG" = (
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/phoron)
+/area/shuttle/collins/phoron)
 "WH" = (
 /obj/machinery/suit_storage_unit/mining,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -17279,10 +17279,10 @@
 	pixel_y = -4
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/rnd)
+/area/shuttle/collins/rnd)
 "WR" = (
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/cell2)
+/area/shuttle/collins/cell2)
 "WU" = (
 /turf/simulated/wall/prepainted,
 /area/quartermaster/expedition)
@@ -17290,7 +17290,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/effect/paint/silver,
 /turf/simulated/wall/titanium,
-/area/shuttle/petrov/maint)
+/area/shuttle/collins/maint)
 "Xb" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 1
@@ -17315,7 +17315,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
-/area/shuttle/petrov/rnd)
+/area/shuttle/collins/rnd)
 "Xd" = (
 /obj/structure/sign/warning/nosmoking_1{
 	dir = 8;
@@ -17327,11 +17327,11 @@
 	},
 /obj/machinery/light,
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "Xe" = (
 /obj/structure/bed/chair/office/comfy/red,
 /turf/simulated/floor/tiled/dark,
-/area/shuttle/petrov/security)
+/area/shuttle/collins/security)
 "Xf" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
@@ -17380,7 +17380,7 @@
 	},
 /obj/structure/catwalk,
 /obj/machinery/alarm{
-	alarm_id = "petrov1";
+	alarm_id = "collins1";
 	dir = 4;
 	icon_state = "alarm0";
 	pixel_x = -24
@@ -17392,14 +17392,14 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "Xs" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
 	level = 2
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/equipment)
+/area/shuttle/collins/equipment)
 "Xt" = (
 /obj/effect/paint/hull,
 /obj/structure/disposalpipe/segment{
@@ -17446,7 +17446,7 @@
 	dir = 10
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "XD" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/green{
@@ -17469,7 +17469,7 @@
 "XG" = (
 /obj/effect/paint/silver,
 /turf/simulated/wall/ocp_wall,
-/area/shuttle/petrov/phoron)
+/area/shuttle/collins/phoron)
 "XH" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 10;
@@ -17491,7 +17491,7 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "XI" = (
 /turf/simulated/wall/prepainted,
 /area/vacant/bar)
@@ -17512,20 +17512,20 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 2;
-	id_tag = "petrov_shuttle_pump"
+	id_tag = "collins_shuttle_pump"
 	},
 /obj/machinery/airlock_sensor{
 	frequency = 1380;
-	id_tag = "petrov_shuttle_sensor";
+	id_tag = "collins_shuttle_sensor";
 	pixel_x = -24;
 	pixel_y = 12
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/shuttle/petrov/maint)
+/area/shuttle/collins/maint)
 "XQ" = (
 /obj/machinery/atmospherics/portables_connector,
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/phoron)
+/area/shuttle/collins/phoron)
 "XT" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -17557,11 +17557,11 @@
 /area/maintenance/fifthdeck/aftstarboard)
 "XW" = (
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/equipment)
+/area/shuttle/collins/equipment)
 "Yb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "Yc" = (
 /obj/machinery/computer/ship/sensors{
 	dir = 8
@@ -17576,7 +17576,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "Yg" = (
 /obj/structure/table/steel,
 /obj/item/book/manual/nt_regs,
@@ -17591,7 +17591,7 @@
 	pixel_y = 0
 	},
 /turf/simulated/floor/tiled/dark,
-/area/shuttle/petrov/security)
+/area/shuttle/collins/security)
 "Yi" = (
 /obj/structure/table/rack{
 	dir = 4
@@ -17625,7 +17625,7 @@
 "Yk" = (
 /obj/effect/paint/silver,
 /turf/simulated/wall/titanium,
-/area/shuttle/petrov/phoron)
+/area/shuttle/collins/phoron)
 "Ym" = (
 /turf/simulated/floor/plating,
 /area/quartermaster/storage)
@@ -17644,7 +17644,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/equipment)
+/area/shuttle/collins/equipment)
 "Yo" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -17667,13 +17667,13 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/visible,
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "Yr" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
 /turf/simulated/floor/reinforced/airless,
-/area/shuttle/petrov/eva)
+/area/shuttle/collins/eva)
 "Ys" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/research{
@@ -17695,7 +17695,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "Yu" = (
 /obj/effect/catwalk_plated,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -17717,7 +17717,7 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "Yz" = (
 /obj/structure/cable/cyan{
 	d1 = 1;
@@ -17732,7 +17732,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "YE" = (
 /obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced/titanium,
@@ -17745,7 +17745,7 @@
 	opacity = 0
 	},
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/security)
+/area/shuttle/collins/security)
 "YG" = (
 /obj/structure/cable/cyan{
 	d1 = 4;
@@ -17768,7 +17768,7 @@
 	icon_state = "pipe-j1"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "YH" = (
 /obj/random/obstruction,
 /obj/structure/cable/cyan{
@@ -17780,7 +17780,7 @@
 /area/vacant/bar)
 "YJ" = (
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/phoron)
+/area/shuttle/collins/phoron)
 "YL" = (
 /obj/structure/disposalpipe/segment{
 	dir = 2;
@@ -17804,7 +17804,7 @@
 	pixel_x = -24
 	},
 /turf/simulated/floor/lino,
-/area/shuttle/petrov/rd)
+/area/shuttle/collins/rd)
 "YS" = (
 /obj/structure/cable/cyan{
 	d1 = 4;
@@ -17828,7 +17828,7 @@
 	icon_state = "pipe-j2"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "YV" = (
 /obj/structure/hygiene/shower{
 	dir = 4;
@@ -17837,8 +17837,8 @@
 	pixel_y = 0
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/camera/network/petrov{
-	c_tag = "Petrov - Entry";
+/obj/machinery/camera/network/collins{
+	c_tag = "Collins - Entry";
 	dir = 4
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
@@ -17846,18 +17846,18 @@
 	cycle_to_external_air = 0;
 	dir = 4;
 	frequency = 1380;
-	id_tag = "petrov_shuttle_airlock";
+	id_tag = "collins_shuttle_airlock";
 	pixel_x = -24;
 	pixel_y = 0;
-	req_access = list("ACCESS_TORCH_PETROV");
-	tag_airpump = "petrov_shuttle_pump";
-	tag_chamber_sensor = "petrov_shuttle_sensor";
-	tag_exterior_door = "petrov_shuttle_outer";
+	req_access = list("ACCESS_TORCH_COLLINS");
+	tag_airpump = "collins_shuttle_pump";
+	tag_chamber_sensor = "collins_shuttle_sensor";
+	tag_exterior_door = "collins_shuttle_outer";
 	tag_exterior_sensor = null;
-	tag_interior_door = "petrov_shuttle_inner"
+	tag_interior_door = "collins_shuttle_inner"
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "YW" = (
 /obj/random/junk,
 /turf/simulated/floor/plating,
@@ -17876,7 +17876,7 @@
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "Za" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
@@ -17900,7 +17900,7 @@
 "Zc" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 1;
-	id_tag = "petrov_shuttle_pump"
+	id_tag = "collins_shuttle_pump"
 	},
 /obj/effect/floor_decal/techfloor,
 /obj/structure/handrail{
@@ -17909,7 +17909,7 @@
 	},
 /obj/machinery/light/small,
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "Zd" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 4
@@ -17930,7 +17930,7 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/computer/modular/preset/civilian,
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/security)
+/area/shuttle/collins/security)
 "Zg" = (
 /obj/effect/floor_decal/techfloor,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -18003,7 +18003,7 @@
 	sensor_tag = "toxins_sensor"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/toxins)
+/area/shuttle/collins/toxins)
 "Zr" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -18013,7 +18013,7 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "Zu" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 9;
@@ -18024,11 +18024,11 @@
 	pixel_y = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/shuttle/petrov/maint)
+/area/shuttle/collins/maint)
 "Zw" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 1;
-	id_tag = "petrov_shuttle_pump"
+	id_tag = "collins_shuttle_pump"
 	},
 /obj/effect/floor_decal/techfloor,
 /obj/structure/handrail{
@@ -18036,16 +18036,16 @@
 	icon_state = "handrail"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "Zx" = (
 /obj/structure/window/reinforced,
 /obj/structure/closet/crate/radiation,
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/equipment)
+/area/shuttle/collins/equipment)
 "Zy" = (
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/reinforced,
-/area/shuttle/petrov/cell1)
+/area/shuttle/collins/cell1)
 "ZA" = (
 /turf/simulated/wall/prepainted,
 /area/rnd/canister)
@@ -18056,7 +18056,7 @@
 	},
 /obj/machinery/portable_atmospherics/canister,
 /obj/machinery/alarm{
-	alarm_id = "petrov2";
+	alarm_id = "collins2";
 	frequency = 1439;
 	pixel_y = 23;
 	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
@@ -18067,14 +18067,14 @@
 	icon_state = "2-8"
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "ZD" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
 /obj/machinery/light,
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/hallwaya)
+/area/shuttle/collins/hallwaya)
 "ZE" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/disposalpipe/segment,
@@ -18094,13 +18094,13 @@
 /obj/machinery/door/blast/regular{
 	density = 0;
 	icon_state = "pdoor0";
-	id_tag = "PetrovShield";
-	name = "Petrov Blast Shutters";
+	id_tag = "CollinsShield";
+	name = "Collins Blast Shutters";
 	opacity = 0
 	},
 /obj/effect/paint/silver,
 /turf/simulated/floor/plating,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 "ZL" = (
 /obj/structure/sign/directions/science{
 	dir = 1;
@@ -18134,7 +18134,7 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "ZT" = (
 /obj/machinery/atmospherics/pipe/manifold/visible,
 /obj/structure/catwalk,
@@ -18147,7 +18147,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/isolation)
+/area/shuttle/collins/isolation)
 "ZV" = (
 /obj/structure/window/reinforced{
 	dir = 8
@@ -18162,10 +18162,10 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark/monotile,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 "ZY" = (
 /turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/analysis)
+/area/shuttle/collins/analysis)
 
 (1,1,1) = {"
 aa

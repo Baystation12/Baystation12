@@ -266,7 +266,7 @@
 "aW" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/alarm{
-	alarm_id = "petrov3";
+	alarm_id = "collins3";
 	dir = 4;
 	pixel_x = -25;
 	pixel_y = 0;
