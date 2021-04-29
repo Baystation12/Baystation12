@@ -1,4 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: AI-controlled zombies are no longer permanently comatose.
