@@ -120,18 +120,6 @@
 		qdel(G)
 		return TRUE
 
-/obj/structure/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			qdel(src)
-			return
-		if(2.0)
-			if(prob(50))
-				qdel(src)
-				return
-		if(3.0)
-			return
-
 /obj/structure/proc/can_visually_connect()
 	return anchored
 
