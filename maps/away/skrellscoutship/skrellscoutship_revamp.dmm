@@ -1643,10 +1643,6 @@
 	},
 /turf/simulated/floor/tiled/skrell/green,
 /area/ship/skrellscoutship/robotics)
-"fy" = (
-/obj/structure/table/rack,
-/turf/simulated/floor/tiled/skrell/green,
-/area/ship/skrellscoutship/robotics)
 "fA" = (
 /obj/effect/wallframe_spawn/reinforced_phoron/hull,
 /obj/effect/paint/black,
@@ -4634,6 +4630,8 @@
 /obj/item/clothing/glasses/hud/health,
 /obj/item/clothing/glasses/hud/health,
 /obj/item/clothing/glasses/hud/health,
+/obj/item/storage/belt/medical/emt,
+/obj/item/storage/belt/medical/emt,
 /turf/simulated/floor/tiled/skrell/white,
 /area/ship/skrellscoutship/crew/medbay)
 "Dy" = (
@@ -12761,7 +12759,7 @@ iv
 PT
 fw
 fx
-fy
+km
 fM
 Cd
 Wu
