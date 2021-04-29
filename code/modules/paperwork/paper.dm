@@ -1,6 +1,12 @@
 // large amount of fields creates a heavy load on the server, see updateinfolinks() and addtofield()
 #define MAX_FIELDS 50
 
+#define PAPER_CAMERA_DISTANCE 2
+#define PAPER_EYEBALL_DISTANCE 3
+
+#define PAPER_META(message) "<p><i>[message]</i></p>"
+#define PAPER_META_BAD(message) "<p style='color:red'><i>[message]</i></p>"
+
 /*
  * Paper
  * also scraps of paper
@@ -122,45 +128,51 @@
 		return
 	language = new_language
 
-/obj/item/paper/proc/show_content(mob/user, forceshow, editable = FALSE)
-	var/can_read = (istype(user, /mob/living/carbon/human) || isghost(user) || istype(user, /mob/living/silicon)) || forceshow
-	if(!readable || is_memo)
+
+/obj/item/paper/proc/show_content(mob/user, force, editable)
+	if (!readable || is_memo)
 		return
-	else if(!forceshow && istype(user,/mob/living/silicon/ai))
-		var/mob/living/silicon/ai/AI = user
-		can_read = get_dist(src, AI.camera) < 2
-
+	if (isclient(user))
+		var/client/C = user
+		user = C.mob
+	if (!user)
+		return
+	var/can_read = force || isghost(user)
+	if (!can_read)
+		can_read = isAI(user)
+		if (can_read)
+			var/mob/living/silicon/ai/AI = user
+			can_read = get_dist(src, AI.camera) < PAPER_CAMERA_DISTANCE
+		else
+			can_read = ishuman(user) || issilicon(user)
+			if (can_read)
+				can_read = get_dist(src, user) < PAPER_EYEBALL_DISTANCE
 	var/html = "<html><head><title>[name]</title></head><body bgcolor='[color]'>"
-	var/body
-	if (can_read && editable)
-		body = info_links
-		if (isobserver(user) || (language in user.languages))
-			if (info)
-				html += "<p><i>This paper is written in [language.name].</i></p>"
-			else
-				html += "<p><i>You are writing in <a href='?src=\ref[src];change_language=1'>[language]</a>.</i></p>"
+	if (!can_read)
+		html += PAPER_META_BAD("The paper is too far away or you can't read.")
+		html += "<hr/></body></html>"
+	var/has_content = length(info)
+	var/has_language = force || (language in user.languages)
+	if (has_content && !has_language && !isghost(user))
+		html += PAPER_META_BAD("The paper is written in a language you don't understand.")
+		html += "<hr/>" + language.scramble(info)
+	else if (editable)
+		if (has_content)
+			html += PAPER_META("The paper is written in [language.name].")
+			html += "<hr/>" + info_links
+		else if (force || length(user.languages))
+			if (!has_language)
+				language = user.languages[1]
+			html += PAPER_META("You are writing in <a href='?src=\ref[src];change_language=1'>[language.name]</a>.")
+			html += "<hr/>" + info_links
 		else
-			html += "<p style=\"color: red;\"><i>This paper is written in a language you don't understand.</i></p>"
-			body = language.scramble(info, user.languages)
-	else if (!can_read)
-		html += "<p style=\"color:red;\"><i>The paper is too far away to read.</i></p>"
-	else
-		body = info
-		if (isobserver(user) || (language in user.languages))
-			html += "<p><i>This paper is written in [language.name].</i></p>"
-		else
-			html += "<p style=\"color: red;\"><i>This paper is written in a language you don't understand.</i></p>"
-			body = language.scramble(body, user.languages)
-
-	html += "<hr />"
-	html += body + stamps
-	html += "</body></html>"
+			html += PAPER_META_BAD("You can't write without knowing a language.")
+	else if (has_content)
+		html += PAPER_META("The paper is written in [language.name].")
+		html += "<hr/>" + info
+	html += "[stamps]</body></html>"
 	show_browser(user, html, "window=[name]")
-
-
 	onclose(user, "[name]")
-
-/obj/item/paper/proc/write_content(mob/user)
 
 
 /obj/item/paper/verb/rename()
@@ -464,8 +476,6 @@
 		var/obj/item/pen/robopen/RP = P
 		if ( istype(RP) && RP.mode == 2 )
 			RP.RenamePaper(user,src)
-		if(is_memo || !readable || !(language in user.languages))
-			return
 		else
 			show_content(user, editable = TRUE)
 		return
@@ -588,3 +598,10 @@
 /obj/item/paper/aromatherapy_disclaimer
 	name = "aromatherapy disclaimer"
 	info = "<I>The manufacturer and the retailer make no claims of the contained products' effacy.</I> <BR><BR><B>Use at your own risk.</B>"
+
+
+#undef PAPER_CAMERA_DISTANCE
+#undef PAPER_EYEBALL_DISTANCE
+
+#undef PAPER_META
+#undef PAPER_META_BAD
