@@ -1,5 +1,0 @@
-author: ''
-delete-after: true
-changes:
-  - maptweak: The cyclopes now has ~70% less fuel in the pipes, to prevent roundstart
-      explosions.

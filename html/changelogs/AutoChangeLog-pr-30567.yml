@@ -1,6 +1,0 @@
-author: CrimsonShrike
-delete-after: true
-changes:
-  - tweak: Jumping into deep water is no longer harmful.
-  - tweak: Water allows overcoming of gravity so long you can swim.
-  - tweak: You will no longer sink as long as water is deep enough.
