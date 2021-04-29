@@ -1213,7 +1213,7 @@
 /turf/simulated/floor/plating,
 /area/scavver/calypso)
 "uB" = (
-/obj/machinery/computer/ship/sensors,
+/obj/machinery/computer/ship/sensors/spacer,
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/monotile,
 /area/scavver/calypso)

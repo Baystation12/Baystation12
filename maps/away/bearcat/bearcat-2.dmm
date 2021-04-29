@@ -99,7 +99,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/ship/scrap/command/bridge)
 "ao" = (
-/obj/machinery/computer/ship/sensors{
+/obj/machinery/computer/ship/sensors/spacer{
 	dir = 8;
 	icon_state = "computer"
 	},

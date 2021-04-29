@@ -2631,7 +2631,7 @@
 	dir = 4;
 	icon_state = "techfloor_edges"
 	},
-/obj/machinery/computer/ship/sensors{
+/obj/machinery/computer/ship/sensors/spacer{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,

@@ -1536,7 +1536,7 @@
 /turf/simulated/floor/reinforced/airless,
 /area/voxship/thrusters)
 "dq" = (
-/obj/machinery/computer/ship/sensors{
+/obj/machinery/computer/ship/sensors/vox{
 	dir = 1;
 	icon_state = "computer"
 	},
@@ -3089,7 +3089,7 @@
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/shuttle)
 "ha" = (
-/obj/machinery/computer/ship/sensors{
+/obj/machinery/computer/ship/sensors/vox{
 	dir = 1;
 	icon_state = "computer"
 	},

@@ -1210,7 +1210,7 @@
 /turf/simulated/floor/tiled/skrell/blue,
 /area/ship/skrellscoutship/crew/quarters)
 "en" = (
-/obj/machinery/computer/ship/sensors{
+/obj/machinery/computer/ship/sensors/skrell{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/skrell/red,
@@ -1821,7 +1821,7 @@
 /turf/simulated/floor/tiled/skrell/red,
 /area/ship/skrellscoutship/hangar)
 "ga" = (
-/obj/machinery/computer/ship/sensors,
+/obj/machinery/computer/ship/sensors/skrell,
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutshuttle)
 "gc" = (
@@ -2195,7 +2195,7 @@
 /area/ship/skrellscoutship/crew/rec)
 "gX" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/computer/ship/sensors{
+/obj/machinery/computer/ship/sensors/skrell{
 	dir = 4
 	},
 /obj/structure/window/reinforced{
@@ -3249,10 +3249,6 @@
 "kj" = (
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide,
 /obj/effect/floor_decal/industrial/outline/blue,
-/turf/simulated/floor/tiled/skrell/green,
-/area/ship/skrellscoutship/robotics)
-"km" = (
-/obj/structure/table/rack,
 /turf/simulated/floor/tiled/skrell/green,
 /area/ship/skrellscoutship/robotics)
 "kn" = (
@@ -12254,7 +12250,7 @@ PT
 jP
 bC
 bC
-km
+fy
 PT
 Gw
 Gw
