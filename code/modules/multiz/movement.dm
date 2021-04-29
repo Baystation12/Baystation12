@@ -77,6 +77,10 @@
 	if(species && species.can_overcome_gravity(src))
 		return 1
 	else
+		var/turf/T = loc
+		if(((T.height + T.get_fluid_depth()) >= FLUID_DEEP) || T.get_fluid_depth() >= FLUID_MAX_DEPTH)
+			return can_float()
+
 		for(var/atom/a in src.loc)
 			if(a.atom_flags & ATOM_FLAG_CLIMBABLE)
 				return 1
@@ -169,6 +173,11 @@
 			if(!A.CanPass(src, location_override))
 				return FALSE
 
+		if(location_override.get_fluid_depth() >= FLUID_DEEP)
+			if(below == loc) //We are checking above, 
+				if(!(below.get_fluid_depth() >= 0.95 * FLUID_MAX_DEPTH)) //No salmon skipping up a stream of falling water
+					return TRUE
+			return !can_float()
 
 	return TRUE
 
@@ -200,6 +209,10 @@
 /atom/movable/proc/handle_fall(var/turf/landing)
 	forceMove(landing)
 	if(locate(/obj/structure/stairs) in landing)
+		return 1
+	else if(landing.get_fluid_depth() >= FLUID_DEEP)
+		visible_message(SPAN_NOTICE("\The [src] falls into the water!"), SPAN_NOTICE("What a splash!"))
+		playsound(src,  'sound/effects/watersplash.ogg', 30, TRUE)
 		return 1
 	else
 		handle_fall_effect(landing)
@@ -274,6 +287,21 @@
 		else
 			visible_message("<span class='warning'>[src] gives up on trying to climb onto \the [A]!</span>", "<span class='warning'>You give up on trying to climb onto \the [A]!</span>")
 		return TRUE
+
+/atom/movable/proc/can_float()
+	return FALSE
+
+/mob/living/can_float()
+	return !is_physically_disabled()
+
+/mob/living/aquatic/can_float()
+	return TRUE
+
+/mob/living/carbon/human/can_float()
+	return species.can_float(src)
+
+/mob/living/silicon/can_float()
+	return FALSE //If they can fly otherwise it will be checked first
 
 /mob/living
 	var/atom/movable/z_observer/z_eye

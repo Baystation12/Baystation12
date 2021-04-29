@@ -48,3 +48,9 @@
 		BP_EYES =     /obj/item/organ/internal/eyes
 		)
 
+
+/datum/species/unathi/yeosa/can_float(mob/living/carbon/human/H)
+	if(!H.is_physically_disabled())
+		if(H.encumbrance() < 2)
+			return TRUE
+	return FALSE

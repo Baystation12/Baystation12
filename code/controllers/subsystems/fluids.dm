@@ -73,7 +73,7 @@ SUBSYSTEM_DEF(fluids)
 				if(istype(current, /turf/simulated/open))
 					var/turf/T = GetBelow(F)
 					var/obj/effect/fluid/other = locate() in T
-					if(!istype(other) || other.fluid_amount < FLUID_MAX_DEPTH)
+					if((!istype(other) || other.fluid_amount < FLUID_MAX_DEPTH) && T.CanFluidPass(UP))
 						if(!other)
 							other = new /obj/effect/fluid(T)
 						F.equalizing_fluids += other

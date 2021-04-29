@@ -251,6 +251,12 @@
 
 /datum/species/skrell/check_background()
 	return TRUE
+	
+/datum/species/skrell/can_float(mob/living/carbon/human/H)
+	if(!H.is_physically_disabled())
+		if(H.encumbrance() < 2)
+			return TRUE
+	return FALSE
 
 /datum/species/diona
 	name = SPECIES_DIONA
