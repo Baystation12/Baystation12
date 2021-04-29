@@ -835,6 +835,11 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/steel_grid,
 /area/janitor)
+"cT" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/synthesized_instrument/synthesizer/piano,
+/turf/simulated/floor/tiled,
+/area/crew_quarters/commissary)
 "cU" = (
 /obj/structure/catwalk,
 /obj/effect/floor_decal/industrial/warning/corner,
@@ -29393,7 +29398,7 @@ PM
 LZ
 Ku
 RZ
-Wc
+cT
 Ct
 Oh
 vF
