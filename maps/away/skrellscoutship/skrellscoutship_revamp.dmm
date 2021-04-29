@@ -1643,6 +1643,11 @@
 	},
 /turf/simulated/floor/tiled/skrell/green,
 /area/ship/skrellscoutship/robotics)
+"fy" = (
+/obj/structure/table/rack,
+/obj/effect/floor_decal/industrial/outline/red,
+/turf/simulated/floor/tiled/skrell/green,
+/area/ship/skrellscoutship/robotics)
 "fA" = (
 /obj/effect/wallframe_spawn/reinforced_phoron/hull,
 /obj/effect/paint/black,
@@ -3249,6 +3254,10 @@
 "kj" = (
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide,
 /obj/effect/floor_decal/industrial/outline/blue,
+/turf/simulated/floor/tiled/skrell/green,
+/area/ship/skrellscoutship/robotics)
+"km" = (
+/obj/structure/table/rack,
 /turf/simulated/floor/tiled/skrell/green,
 /area/ship/skrellscoutship/robotics)
 "kn" = (
