@@ -1951,8 +1951,8 @@
 	dir = 4
 	},
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide{
-	maximum_pressure = 50000;
-	start_pressure = 50000
+	maximum_pressure = 12000;
+	start_pressure = 12000
 	},
 /obj/effect/floor_decal/industrial/outline/orange,
 /obj/machinery/light{
@@ -2034,8 +2034,8 @@
 	dir = 4
 	},
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide{
-	maximum_pressure = 50000;
-	start_pressure = 50000
+	maximum_pressure = 12000;
+	start_pressure = 12000
 	},
 /obj/effect/floor_decal/industrial/outline/orange,
 /turf/simulated/floor/tiled/techfloor,
