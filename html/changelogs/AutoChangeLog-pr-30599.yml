@@ -1,0 +1,4 @@
+author: Mucker
+delete-after: true
+changes:
+  - admin: Search results in VV will remain in view after clicking 'refresh'.
