@@ -41,6 +41,7 @@
 
 /decl/hierarchy/outfit/job/torch/crew/engineering/roboticist
 	name = OUTFIT_JOB_NAME("Roboticist - Contractor")
+	l_ear = /obj/item/device/radio/headset/headset_rob
 	uniform = /obj/item/clothing/under/rank/roboticist
 	shoes = /obj/item/clothing/shoes/black
 	id_types = list(/obj/item/card/id/torch/contractor/engineering/roboticist)
@@ -48,6 +49,7 @@
 
 /decl/hierarchy/outfit/job/torch/crew/engineering/roboticistec
 	name = OUTFIT_JOB_NAME("Roboticist - Torch")
+	l_ear = /obj/item/device/radio/headset/headset_rob
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/engineering
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_types = list(/obj/item/card/id/torch/contractor/engineering/roboticist)
@@ -55,6 +57,7 @@
 
 /decl/hierarchy/outfit/job/torch/crew/engineering/roboticistfleet
 	name = OUTFIT_JOB_NAME("Roboticist - Fleet")
+	l_ear = /obj/item/device/radio/headset/headset_rob
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/engineering
 	id_types = list(/obj/item/card/id/torch/contractor/engineering/roboticist)
 	shoes = /obj/item/clothing/shoes/dutyboots
