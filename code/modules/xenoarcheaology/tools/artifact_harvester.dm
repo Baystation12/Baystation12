@@ -62,16 +62,17 @@
 				dat += "No battery inserted.<BR>"
 	else
 		dat += "<B><font color=red>Unable to locate analysis pad.</font><BR></b>"
-	//
+	dat += "<A href='?src=\ref[src];close=1'>Close</a><BR>"
 	dat += "<HR>"
-	dat += "<A href='?src=\ref[src];refresh=1'>Refresh</A> <A href='?src=\ref[src];close=1'>Close<BR>"
-	show_browser(user, dat, "window=artharvester;size=450x500")
-	onclose(user, "artharvester")
+	var/datum/browser/popup = new(user, "artifact_harvester", "Artifact Power Harvester", 450, 500)
+	popup.set_content(dat)
+	popup.open()
 
 /obj/machinery/artifact_harvester/Process()
 	if(stat & (NOPOWER|BROKEN))
 		return
 
+	updateDialog()
 	if(harvesting > 0)
 		//charge at 33% consumption rate
 		inserted_battery.stored_charge += (world.time - last_process) / 3

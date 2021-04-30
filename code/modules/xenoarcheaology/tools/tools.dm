@@ -187,10 +187,13 @@
 
 			to_chat(user, "<span class='notice'>[icon2html(src, user)] [src] pings [pick("madly","wildly","excitedly","crazily")]!</span>")
 
+	updateSelfDialog()
+
 /obj/item/device/depth_scanner/attack_self(var/mob/living/user)
 	interact(user)
 
 /obj/item/device/depth_scanner/interact(var/mob/user as mob)
+	user.set_machine(src)
 	var/dat = "<b>Coordinates with positive matches</b><br>"
 
 	dat += "<A href='?src=\ref[src];clear=0'>== Clear all ==</a><br>"
@@ -219,9 +222,11 @@
 		dat += "No entries recorded."
 
 	dat += "<hr>"
-	dat += "<A href='?src=\ref[src];refresh=1'>Refresh</a><br>"
-	dat += "<A href='?src=\ref[src];close=1'>Close</a><br>"
-	show_browser(user, dat,"window=depth_scanner;size=300x500")
+	dat += "<a href='?src=\ref[src];close=1'>Close</a>"
+
+	var/datum/browser/popup = new(user, "depth_scanner", "Results", 300, 500)
+	popup.set_content(dat)
+	popup.open()
 	onclose(user, "depth_scanner")
 
 /obj/item/device/depth_scanner/OnTopic(user, href_list)
@@ -244,7 +249,10 @@
 		. = TOPIC_REFRESH
 	else if(href_list["close"])
 		close_browser(user, "window=depth_scanner")
-	updateSelfDialog()
+		return TOPIC_HANDLED
+
+	if (. == TOPIC_REFRESH)
+		interact(user)
 
 //Radio beacon locator
 /obj/item/pinpointer/radio
