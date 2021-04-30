@@ -1,0 +1,8 @@
+author: Cupax3
+delete-after: true
+changes:
+  - bugfix: Both Silicons and Organics now use !; or ,2.h to use languages and emotes
+      over radio.
+  - bugfix: Holopads no longer have phantom conversations and connections due to people
+      calling when you're on a call.
+  - bugfix: Four suits were slightly adjusted in size to match with accessories.
