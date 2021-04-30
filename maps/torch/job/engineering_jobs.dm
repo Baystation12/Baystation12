@@ -209,7 +209,7 @@
 	skill_points = 20
 
 	access = list(
-		access_robotics, access_engine, access_solgov_crew, access_radio_eng
+		access_robotics, access_engine, access_solgov_crew, access_radio_eng, access_radio_med
 	)
 
 	minimal_access = list()

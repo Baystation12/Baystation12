@@ -12459,6 +12459,8 @@
 /obj/structure/closet/wardrobe/robotics_black,
 /obj/item/clothing/under/rank/roboticist/skirt,
 /obj/item/clothing/under/rank/roboticist/skirt,
+/obj/item/device/radio/headset/headset_rob,
+/obj/item/device/radio/headset/headset_rob,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
