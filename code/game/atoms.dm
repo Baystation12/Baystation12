@@ -13,6 +13,7 @@
 	var/datum/reagents/reagents // chemical contents.
 	var/list/climbers
 	var/climb_speed_mult = 1
+	var/init_flags = EMPTY_BITFIELD
 
 /atom/New(loc, ...)
 	//atom creation method that preloads variables at creation
