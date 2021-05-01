@@ -1,0 +1,5 @@
+author: Paprikue
+delete-after: true
+changes:
+  - tweak: Syringes now use the current transfer amount for taking blood samples instead
+      of filling the whole thing immediately.
