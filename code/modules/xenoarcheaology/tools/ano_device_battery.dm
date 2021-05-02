@@ -70,12 +70,16 @@
 		dat += "Please insert battery<br>"
 
 	dat += "<hr>"
-	dat += "<a href='?src=\ref[src];refresh=1'>Refresh</a> <a href='?src=\ref[src];close=1'>Close</a>"
+	dat += "<a href='?src=\ref[src];close=1'>Close</a>"
 
-	show_browser(user, dat, "window=anodevice;size=400x500")
+	var/datum/browser/popup = new(user, "anodevice", "Anomaly Power Utilizer", 400, 500)
+	popup.set_content(dat)
+	popup.open()
+	user.set_machine(src)
 	onclose(user, "anodevice")
 
 /obj/item/anodevice/Process()
+	updateSelfDialog()
 	if(activated)
 		if(inserted_battery && inserted_battery.battery_effect && (inserted_battery.stored_charge > 0) )
 			//make sure the effect is active
