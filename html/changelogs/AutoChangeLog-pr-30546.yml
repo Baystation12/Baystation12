@@ -1,7 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - bugfix: Fix the Depth Scanner's UI not updating on button clicks.
-  - tweak: Updates the Depth Scanner, Anomaly Power Utilizer, Artifact Scanner, Artifact
-      Harvester, Suspension Field Generator, and the Reagent Grinder UI's to use modern
-      browsers.

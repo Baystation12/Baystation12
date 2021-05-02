@@ -1,7 +1,0 @@
-author: Paprikue
-delete-after: true
-changes:
-  - bugfix: Computer modules will now consume power as originally intended.
-  - bugfix: Computers now die when you remove their batteries (as long as they don't
-      have a tesla link to directly power them)
-  - tweak: Tweaked battery depletion rates so that they don't discharge almost immediately.

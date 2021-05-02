@@ -1,5 +1,0 @@
-author: Domic2
-delete-after: true
-changes:
-  - rscadd: Adds pipe sparkers, pipe fires can now be started without heating the
-      mix. Can be controlled via signalers and buttons, or disabled with a screwdriver.

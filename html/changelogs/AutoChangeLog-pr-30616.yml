@@ -1,5 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - bugfix: Fix mined exoplanet mineral turfs not having gravity.
-  - tweak: Lowered the amount of quicksand on desert planets.
