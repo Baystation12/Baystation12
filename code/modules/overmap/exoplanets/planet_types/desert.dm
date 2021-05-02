@@ -53,7 +53,7 @@
 /datum/random_map/noise/exoplanet/desert/get_additional_spawns(var/value, var/turf/T)
 	..()
 	var/v = noise2value(value)
-	if(v > 6 && prob(10))
+	if(v > 6 && prob(2))
 		new/obj/effect/quicksand(T)
 
 /area/exoplanet/desert
