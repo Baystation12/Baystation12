@@ -1,0 +1,4 @@
+author: NL208
+delete-after: true
+changes:
+  - tweak: Makes all modular scanners repairable with nanopaste or cable.
