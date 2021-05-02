@@ -72,7 +72,7 @@
 
 /atom/proc/reveal_blood()
 	return
-	
+
 /atom/proc/MayZoom()
 	return TRUE
 
@@ -480,6 +480,25 @@ its easier to just keep the beam vertical.
 		return 0
 
 	var/obj/occupied = turf_is_crowded(user)
+	//because Adjacent() has exceptions for windows, those must be handled here
+	if(!occupied && istype(src, /obj/structure/wall_frame))
+		var/original_dir = get_dir(src, user.loc)
+		var/progress_dir = original_dir
+		for(var/atom/A in loc.contents)
+			if(A.atom_flags & ATOM_FLAG_CHECKS_BORDER)
+				var/obj/structure/window/W = A
+				if(istype(W))
+					//progressively check if a window matches the X or Y component of the dir, if collision, set the dir bit off
+					if(W.is_fulltile() || (progress_dir &= ~W.dir) == 0) //if dir components are 0, fully blocked on diagonal
+						occupied = A
+						break
+		//if true, means one dir was blocked and bit set off, so check the unblocked
+		if(progress_dir != original_dir && progress_dir != 0)
+			var/turf/here = get_turf(src)
+			if(!here.Adjacent_free_dir(user, progress_dir))
+				to_chat(user, SPAN_DANGER("You can't climb there, the way is blocked."))
+				return FALSE
+
 	if(occupied)
 		to_chat(user, "<span class='danger'>There's \a [occupied] in the way.</span>")
 		return 0
@@ -502,7 +521,7 @@ its easier to just keep the beam vertical.
 
 /atom/proc/turf_is_crowded(var/atom/ignore)
 	var/turf/T = get_turf(src)
-	if(!T || !istype(T))
+	if(!istype(T))
 		return 0
 	for(var/atom/A in T.contents)
 		if(ignore && ignore == A)
