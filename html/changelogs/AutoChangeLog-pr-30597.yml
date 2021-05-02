@@ -1,0 +1,9 @@
+author: ''
+delete-after: true
+changes:
+  - bugfix: Fix border windows, window click-through and enforce window construction
+      steps.
+  - bugfix: Fix mineral processor eviscerating mobs.
+  - bugfix: IC signalers no longer require refreshing a pin to work after printing.
+  - tweak: Full-tile windows can only be anchored to floor/low wall/grille/non-dense
+      objects.
