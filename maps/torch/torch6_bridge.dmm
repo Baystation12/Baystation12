@@ -12678,6 +12678,7 @@
 /area/maintenance/bridge/foreport)
 "JT" = (
 /obj/effect/floor_decal/industrial/outline/grey,
+/obj/random_multi/single_item/piano,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/bridge/forestarboard)
 "JV" = (

@@ -837,7 +837,7 @@
 /area/janitor)
 "cT" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/synthesized_instrument/synthesizer/piano,
+/obj/random_multi/single_item/piano,
 /turf/simulated/floor/tiled,
 /area/crew_quarters/commissary)
 "cU" = (

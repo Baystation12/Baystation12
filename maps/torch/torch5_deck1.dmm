@@ -20006,6 +20006,11 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralport)
+"iOh" = (
+/obj/effect/floor_decal/industrial/outline/grey,
+/obj/random_multi/single_item/piano,
+/turf/simulated/floor/tiled/techfloor,
+/area/maintenance/firstdeck/centralport)
 "iPb" = (
 /obj/machinery/door/blast/regular{
 	density = 0;
@@ -50454,7 +50459,7 @@ aHn
 aHn
 cQo
 cQo
-tzg
+iOh
 aJS
 aPU
 cQo
