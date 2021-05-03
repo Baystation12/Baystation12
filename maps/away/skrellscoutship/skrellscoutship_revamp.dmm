@@ -4544,7 +4544,7 @@
 /obj/item/storage/firstaid/regular,
 /obj/item/bodybag/cryobag,
 /obj/item/bodybag/cryobag,
-/obj/item/autopsy_scanner,
+/obj/item/injury_scanner,
 /obj/item/stack/material/phoron/fifty,
 /turf/simulated/floor/tiled/skrell/green,
 /area/ship/skrellscoutship/robotics)

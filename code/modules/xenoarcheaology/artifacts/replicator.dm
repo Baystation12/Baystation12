@@ -38,7 +38,7 @@
 	/obj/item/device/radio,
 	/obj/item/device/radio/headset,
 	/obj/item/device/radio/beacon,
-	/obj/item/autopsy_scanner,
+	/obj/item/injury_scanner,
 	/obj/item/bikehorn,
 	/obj/item/bonesetter,
 	/obj/item/material/knife/kitchen/cleaver,

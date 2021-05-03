@@ -2,26 +2,26 @@
 //moved these here from code/defines/obj/weapon.dm
 //please preference put stuff where it's easy to find - C
 
-/obj/item/autopsy_scanner
-	name = "autopsy scanner"
+/obj/item/injury_scanner
+	name = "injury scanner"
 	desc = "Used to gather information on wounds."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "autopsy_scanner"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 1)
-	var/list/datum/autopsy_data_scanner/wdata = list()
+	var/list/datum/injury_data_scanner/wdata = list()
 	var/list/chemtraces = list()
 	var/target_name = null
 	var/timeofdeath = null
 
-/datum/autopsy_data_scanner
+/datum/injury_data_scanner
 	var/weapon = null // this is the DEFINITE weapon type that was used
 	var/list/organs_scanned = list() // this maps a number of scanned organs to
 									 // the wounds to those organs with this data's weapon type
 	var/organ_names = ""
 
-/datum/autopsy_data
+/datum/injury_data
 	var/weapon = null
 	var/pretend_weapon = null
 	var/damage = 0
@@ -29,7 +29,7 @@
 	var/time_inflicted = 0
 
 	proc/copy()
-		var/datum/autopsy_data/W = new()
+		var/datum/injury_data/W = new()
 		W.weapon = weapon
 		W.pretend_weapon = pretend_weapon
 		W.damage = damage
@@ -37,17 +37,17 @@
 		W.time_inflicted = time_inflicted
 		return W
 
-/obj/item/autopsy_scanner/proc/add_data(var/obj/item/organ/external/O)
-	if(!O.autopsy_data.len) return
+/obj/item/injury_scanner/proc/add_data(var/obj/item/organ/external/O)
+	if(!O.injury_data.len) return
 
-	for(var/V in O.autopsy_data)
-		var/datum/autopsy_data/W = O.autopsy_data[V]
+	for(var/V in O.injury_data)
+		var/datum/injury_data/W = O.injury_data[V]
 
 		if(!W.pretend_weapon)
 			W.pretend_weapon = W.weapon
 
 
-		var/datum/autopsy_data_scanner/D = wdata[V]
+		var/datum/injury_data_scanner/D = wdata[V]
 		if(!D)
 			D = new()
 			D.weapon = W.weapon
@@ -62,7 +62,7 @@
 		qdel(D.organs_scanned[O.name])
 		D.organs_scanned[O.name] = W.copy()
 
-/obj/item/autopsy_scanner/verb/print_data()
+/obj/item/injury_scanner/verb/print_data()
 	set category = "Object"
 	set src in view(usr, 1)
 	set name = "Print Data"
@@ -77,14 +77,14 @@
 
 	var/n = 1
 	for(var/wdata_idx in wdata)
-		var/datum/autopsy_data_scanner/D = wdata[wdata_idx]
+		var/datum/injury_data_scanner/D = wdata[wdata_idx]
 		var/total_hits = 0
 		var/total_score = 0
 		var/list/weapon_chances = list() // maps weapon names to a score
 		var/age = 0
 
 		for(var/wound_idx in D.organs_scanned)
-			var/datum/autopsy_data/W = D.organs_scanned[wound_idx]
+			var/datum/injury_data/W = D.organs_scanned[wound_idx]
 			total_hits += W.hits
 
 			var/wname = W.pretend_weapon
@@ -141,12 +141,12 @@
 
 	sleep(10)
 
-	var/obj/item/paper/P = new(usr.loc, "<tt>[scan_data]</tt>", "Autopsy Data ([target_name])")
+	var/obj/item/paper/P = new(usr.loc, "<tt>[scan_data]</tt>", "Injury Data ([target_name])")
 	if(istype(usr,/mob/living/carbon))
 		// place the item in the usr's hand if possible
 		usr.put_in_hands(P)
 
-/obj/item/autopsy_scanner/do_surgery(mob/living/carbon/human/M, mob/living/user)
+/obj/item/injury_scanner/do_surgery(mob/living/carbon/human/M, mob/living/user)
 	if(!istype(M))
 		return 0
 
@@ -170,7 +170,7 @@
 
 	return 1
 
-/obj/item/autopsy_scanner/proc/set_target(atom/new_target, user)
+/obj/item/injury_scanner/proc/set_target(atom/new_target, user)
 	if(target_name != new_target.name)
 		target_name = new_target.name
 		wdata.Cut()
@@ -178,7 +178,7 @@
 		timeofdeath = null
 		to_chat(user, "<span class='notice'>A new patient has been registered. Purging data for previous patient.</span>")
 
-/obj/item/autopsy_scanner/afterattack(obj/item/organ/external/target, mob/user, proximity_flag, click_parameters)
+/obj/item/injury_scanner/afterattack(obj/item/organ/external/target, mob/user, proximity_flag, click_parameters)
 	if(!proximity_flag)
 		return
 	if(!istype(target))
@@ -187,5 +187,5 @@
 	set_target(target, user)
 	add_data(target)
 
-/obj/item/autopsy_scanner/attack_self(mob/user)
+/obj/item/injury_scanner/attack_self(mob/user)
 	print_data(user)

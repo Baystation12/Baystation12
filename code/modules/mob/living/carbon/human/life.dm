@@ -289,7 +289,7 @@
 			updatehealth()
 			if(!isSynthetic() && organs.len)
 				var/obj/item/organ/external/O = pick(organs)
-				if(istype(O)) O.add_autopsy_data("Radiation Poisoning", damage)
+				if(istype(O)) O.add_injury_data("Radiation Poisoning", damage)
 
 	/** breathing **/
 

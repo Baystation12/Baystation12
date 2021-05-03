@@ -54,7 +54,7 @@
 	var/genetic_degradation = 0        // Amount of current genetic damage.
 
 	//Forensics stuff
-	var/list/autopsy_data = list()    // Trauma data for forensics.
+	var/list/injury_data = list()    // Trauma data for forensics.
 
 	// Joint/state stuff.
 	var/joint = "joint"                // Descriptive string used in dislocation.
@@ -135,7 +135,7 @@
 		while(null in owner.organs)
 			owner.organs -= null
 
-	if(autopsy_data)    autopsy_data.Cut()
+	if(injury_data)    injury_data.Cut()
 
 	return ..()
 
@@ -1349,13 +1349,13 @@ obj/item/organ/external/proc/remove_clamps()
 		var/max_halloss = round(owner.species.total_health * 0.8 * ((100 - armor) / 100)) //up to 80% of passing out, further reduced by armour
 		add_pain(Clamp(0, max_halloss - owner.getHalLoss(), 30))
 
-//Adds autopsy data for used_weapon.
-/obj/item/organ/external/proc/add_autopsy_data(var/used_weapon, var/damage)
-	var/datum/autopsy_data/W = autopsy_data[used_weapon]
+//Adds injury data for used_weapon.
+/obj/item/organ/external/proc/add_injury_data(var/used_weapon, var/damage)
+	var/datum/injury_data/W = injury_data[used_weapon]
 	if(!W)
 		W = new()
 		W.weapon = used_weapon
-		autopsy_data[used_weapon] = W
+		injury_data[used_weapon] = W
 
 	W.hits += 1
 	W.damage += damage

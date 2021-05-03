@@ -22,7 +22,7 @@
 		/obj/item/borg/sight/hud/sec,
 		/obj/item/taperoll/police,
 		/obj/item/scalpel/laser1,
-		/obj/item/autopsy_scanner,
+		/obj/item/injury_scanner,
 		/obj/item/device/scanner/reagent,
 		/obj/item/reagent_containers/spray/luminol,
 		/obj/item/device/uv_light,

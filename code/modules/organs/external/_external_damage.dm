@@ -30,7 +30,7 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 			owner.visible_message("<span class='warning'>\The [owner]'s crystalline [name] shines with absorbed energy!</span>")
 
 	if(used_weapon)
-		add_autopsy_data("[used_weapon]", brute + burn)
+		add_injury_data("[used_weapon]", brute + burn)
 
 	var/spillover = 0
 	var/pure_brute = brute

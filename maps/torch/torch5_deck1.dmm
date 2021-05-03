@@ -3684,7 +3684,7 @@
 /obj/machinery/alarm{
 	pixel_y = 24
 	},
-/obj/item/autopsy_scanner,
+/obj/item/injury_scanner,
 /obj/item/scalpel,
 /obj/machinery/light/small{
 	dir = 4

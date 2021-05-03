@@ -572,7 +572,7 @@ its easier to just keep the beam vertical.
 				to_chat(M, "<span class='danger'>You land heavily on your [affecting.name]!</span>")
 				affecting.take_external_damage(damage, 0)
 				if(affecting.parent)
-					affecting.parent.add_autopsy_data("Misadventure", damage)
+					affecting.parent.add_injury_data("Misadventure", damage)
 			else
 				to_chat(H, "<span class='danger'>You land heavily!</span>")
 				H.adjustBruteLoss(damage)
