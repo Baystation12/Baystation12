@@ -149,6 +149,10 @@
 /obj/item/autopsy_scanner/do_surgery(mob/living/carbon/human/M, mob/living/user)
 	if(!istype(M))
 		return 0
+	
+	if (M.stat != DEAD)
+		to_chat(user, SPAN_WARNING("\The [name] buzzes. 'Alert, vitals detected. Aborting scan.'"))
+		return FALSE
 
 	set_target(M, user)
 
