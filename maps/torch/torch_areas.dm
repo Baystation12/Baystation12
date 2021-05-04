@@ -873,6 +873,12 @@
 	name = "\improper Hangar Upper Walkway"
 	req_access = list()
 
+/area/quartermaster/supply_pod_dock
+	name = "\improper Supply Pod Dock"
+	icon_state = "supply_pod"
+	sound_env = LARGE_ENCLOSED
+	req_access = list(access_hangar)
+
 /area/quartermaster/flightcontrol
 	name = "\improper Flight Control Tower"
 	icon_state = "hangar"

@@ -2647,7 +2647,7 @@
 	dir = 8;
 	icon_state = "propulsion_r"
 	},
-/turf/simulated/floor/plating,
+/turf/simulated/wall/r_titanium,
 /area/supply/dock)
 "auR" = (
 /obj/machinery/light{
