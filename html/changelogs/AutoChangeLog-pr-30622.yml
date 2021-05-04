@@ -1,5 +1,0 @@
-author: CrimsonShrike
-delete-after: true
-changes:
-  - tweak: Mobs that can drown will not drown if there is not enough fluid on turf
-      above to allow swimming, if they are able to overcome gravity.
