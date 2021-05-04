@@ -2422,14 +2422,6 @@
 	name = "plating"
 	},
 /area/centcom/suppy)
-"atS" = (
-/turf/unsimulated/wall{
-	desc = "That looks like it doesn't open easily.";
-	icon = 'icons/obj/doors/rapid_pdoor.dmi';
-	icon_state = "pdoor1";
-	name = "Shuttle Bay Blast Door"
-	},
-/area/centcom/suppy)
 "atU" = (
 /obj/structure/shuttle/engine/propulsion{
 	dir = 8;
@@ -2541,19 +2533,9 @@
 	name = "plating"
 	},
 /area/centcom/living)
-"auo" = (
-/obj/effect/paint/silver,
-/turf/simulated/wall/r_titanium,
-/area/supply/dock)
 "auq" = (
-/obj/structure/shuttle/engine/heater{
-	dir = 1;
-	icon_state = "heater"
-	},
-/obj/structure/window/reinforced,
-/obj/effect/paint/silver,
-/turf/simulated/wall/r_titanium,
-/area/supply/dock)
+/turf/unsimulated/floor/plating,
+/area/space)
 "aus" = (
 /obj/effect/decal/cleanable/blood,
 /turf/unsimulated/wall,
@@ -2571,22 +2553,14 @@
 	},
 /turf/simulated/floor/shuttle/red,
 /area/shuttle/administration/centcom)
-"auw" = (
-/obj/machinery/button/blast_door{
-	id_tag = "supply_shuttle";
-	name = "Supply Drone Shutter Control";
-	pixel_x = 0;
-	pixel_y = 0
-	},
-/obj/effect/paint/silver,
-/turf/simulated/wall/r_titanium,
-/area/supply/dock)
 "auy" = (
-/obj/machinery/light/spot{
-	dir = 1
+/turf/unsimulated/wall{
+	desc = "That looks like it doesn't open easily.";
+	icon = 'icons/obj/doors/rapid_pdoor.dmi';
+	icon_state = "pdoor1";
+	name = "Shuttle Bay Blast Door"
 	},
-/turf/simulated/floor/plating,
-/area/supply/dock)
+/area/centcom/suppy)
 "auz" = (
 /turf/simulated/floor/plating,
 /area/supply/dock)
@@ -2669,11 +2643,9 @@
 	},
 /area/centcom/living)
 "auQ" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/machinery/door/blast/shutters{
-	dir = 4;
-	id_tag = "supply_shuttle";
-	name = "Supply Drone Shutters"
+/obj/structure/shuttle/engine/propulsion{
+	dir = 8;
+	icon_state = "propulsion_r"
 	},
 /turf/simulated/floor/plating,
 /area/supply/dock)
@@ -2716,7 +2688,13 @@
 	},
 /area/centcom/living)
 "auX" = (
-/obj/effect/shuttle_landmark/supply/centcom,
+/obj/machinery/embedded_controller/radio/simple_docking_controller{
+	frequency = 1380;
+	id_tag = "supply_shuttle";
+	pixel_y = 24;
+	req_access = list("ACCESS_CENT_GENERAL");
+	tag_door = "supply_pod_hatch"
+	},
 /turf/simulated/floor/plating,
 /area/supply/dock)
 "auY" = (
@@ -2907,14 +2885,14 @@
 	},
 /area/centcom/living)
 "avB" = (
-/obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
-	},
-/obj/structure/showcase{
-	desc = "A self-contained autopilot that controls supply drones.";
-	icon_state = "comm_server";
-	name = "Supply Drone Virtual Intelligence"
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/door/airlock/external{
+	autoset_access = 0;
+	frequency = 1380;
+	icon_state = "closed";
+	id_tag = "supply_pod_hatch";
+	locked = 1;
+	name = "Supply Pod Hatch"
 	},
 /turf/simulated/floor/plating,
 /area/supply/dock)
@@ -11456,6 +11434,18 @@
 "euY" = (
 /turf/simulated/wall/wood,
 /area/holodeck/source_cafe)
+"ewb" = (
+/obj/structure/window/reinforced{
+	dir = 8;
+	health = 1e+006
+	},
+/obj/structure/showcase{
+	desc = "A self-contained autopilot that controls supply drones.";
+	icon_state = "comm_server";
+	name = "Supply Drone Virtual Intelligence"
+	},
+/turf/simulated/floor/plating,
+/area/supply/dock)
 "ezo" = (
 /obj/structure/table/holo_woodentable,
 /obj/item/device/synthesized_instrument/violin{
@@ -11618,9 +11608,8 @@
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_cafe)
 "jlA" = (
-/obj/machinery/light/spot,
-/turf/simulated/floor/plating,
-/area/supply/dock)
+/turf/unsimulated/floor/plating,
+/area/centcom/suppy)
 "joZ" = (
 /obj/structure/fountain/mundane{
 	alpha = 204;
@@ -11714,6 +11703,12 @@
 /obj/structure/flora/ausbushes/ywflowers,
 /turf/simulated/floor/holofloor/grass,
 /area/holodeck/source_plaza)
+"lkV" = (
+/obj/machinery/light/spot{
+	dir = 8
+	},
+/turf/simulated/floor/plating,
+/area/supply/dock)
 "lwD" = (
 /obj/structure/bed/chair/wood{
 	dir = 1;
@@ -12024,10 +12019,8 @@
 /turf/simulated/floor/holofloor/wood,
 /area/holodeck/source_cafe)
 "rxE" = (
-/obj/structure/shuttle/engine/propulsion{
-	dir = 1
-	},
-/turf/simulated/floor/plating,
+/obj/effect/paint,
+/turf/simulated/wall/r_titanium,
 /area/supply/dock)
 "rIb" = (
 /obj/structure/table/rack/holorack,
@@ -12043,6 +12036,17 @@
 	icon_state = "desert2"
 	},
 /area/holodeck/source_temple)
+"saJ" = (
+/obj/effect/paint,
+/obj/structure/shuttle/engine/heater{
+	dir = 8;
+	icon_state = "heater"
+	},
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/turf/simulated/wall/r_titanium,
+/area/supply/dock)
 "skD" = (
 /obj/effect/floor_decal/beach{
 	dir = 8;
@@ -12135,6 +12139,10 @@
 	},
 /turf/simulated/floor/holofloor/grass,
 /area/holodeck/source_cafe)
+"ucd" = (
+/obj/effect/shuttle_landmark/supply/centcom,
+/turf/simulated/floor/plating,
+/area/supply/dock)
 "ufC" = (
 /obj/structure/table/holo_woodentable,
 /turf/simulated/floor/holofloor/concrete,
@@ -12185,6 +12193,12 @@
 "uJY" = (
 /turf/simulated/floor/holofloor/beach/sand,
 /area/holodeck/source_volleyball)
+"uMC" = (
+/obj/machinery/light/spot{
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/supply/dock)
 "uZF" = (
 /turf/simulated/floor/plating,
 /turf/simulated/wall/r_titanium,
@@ -23254,7 +23268,7 @@ aLW
 aLW
 aLG
 aLG
-aab
+auq
 aab
 aab
 aab
@@ -26504,10 +26518,10 @@ atR
 atR
 atR
 atR
-atR
-atR
-atR
 atx
+aab
+aab
+aab
 aab
 aab
 aab
@@ -26698,18 +26712,18 @@ aab
 aab
 aab
 atx
-atR
-atR
-auo
-auw
+jlA
+jlA
 auQ
 auQ
 auQ
-auw
-auo
-atR
-atR
+auQ
+jlA
+jlA
 atx
+aab
+aab
+aab
 aab
 aab
 aab
@@ -26900,18 +26914,18 @@ aab
 aab
 aab
 atx
-atR
+jlA
 rxE
-auo
-auz
-auz
-auz
-auz
-auz
-auo
-auo
-atR
+rxE
+saJ
+saJ
+rxE
+rxE
+jlA
 atx
+aab
+aab
+aab
 aab
 aab
 aab
@@ -27102,18 +27116,18 @@ aab
 aab
 aab
 atx
-atR
-rxE
-auq
-auy
-auz
-auz
-auz
 jlA
-auo
-auo
-atR
+rxE
+auz
+auz
+lkV
+auz
+rxE
+jlA
 atx
+aab
+aab
+aab
 aab
 aab
 aab
@@ -27304,18 +27318,18 @@ aab
 aab
 aab
 atx
-atR
+jlA
 rxE
-auq
 auz
 auz
-auX
 auz
 auz
-avB
-auo
-atR
+rxE
+jlA
 atx
+aab
+aab
+aab
 aab
 aab
 aab
@@ -27506,18 +27520,18 @@ aab
 aab
 aab
 atx
-atR
+jlA
+avB
+auz
+ucd
+auz
+auz
 rxE
-auo
-auz
-auz
-auz
-auz
-auz
-auo
-auo
-atR
+jlA
 atx
+aab
+aab
+aab
 aab
 aab
 aab
@@ -27708,18 +27722,18 @@ aab
 aab
 aab
 atx
-atR
-atR
-auo
-auw
-auQ
-auQ
-auQ
-auw
-auo
-atR
-atR
+jlA
+avB
+auz
+auz
+auz
+auz
+rxE
+jlA
 atx
+aab
+aab
+aab
 aab
 aab
 aab
@@ -27910,18 +27924,18 @@ aab
 aab
 aab
 atx
-atR
-atR
-atR
-atR
-atR
-atR
-atR
-atR
-atR
-atR
-atR
+jlA
+rxE
+auX
+auz
+uMC
+auz
+rxE
+jlA
 atx
+aab
+aab
+aab
 aab
 aab
 aab
@@ -28112,18 +28126,18 @@ aab
 aab
 aab
 atx
-atS
-atS
-atS
-atS
-atS
-atS
-atS
-atS
-atS
-atS
-atS
+jlA
+rxE
+rxE
+ewb
+rxE
+rxE
+rxE
+jlA
 atx
+aab
+aab
+aab
 aab
 aab
 aab
@@ -28313,16 +28327,16 @@ aab
 aab
 aab
 aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+atx
+jlA
+jlA
+rxE
+rxE
+rxE
+rxE
+jlA
+jlA
+atx
 aab
 aab
 aab
@@ -28515,16 +28529,16 @@ aab
 aab
 aab
 aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+atx
+jlA
+jlA
+jlA
+jlA
+jlA
+jlA
+jlA
+jlA
+atx
 aab
 aab
 aab
@@ -28717,16 +28731,16 @@ aab
 aab
 aab
 aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
-aab
+atx
+auy
+auy
+auy
+auy
+auy
+auy
+auy
+auy
+atx
 aab
 aab
 aab

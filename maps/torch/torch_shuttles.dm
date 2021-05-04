@@ -144,6 +144,7 @@ TORCH_ESCAPE_POD(17)
 
 /datum/shuttle/autodock/ferry/administration
 	name = "Administration"
+	location = 1
 	warmup_time = 10	//want some warmup time so people can cancel.
 	shuttle_area = /area/shuttle/administration/centcom
 	dock_target = "admin_shuttle"
@@ -328,6 +329,7 @@ TORCH_ESCAPE_POD(17)
 	name = "Supply Drone"
 	location = 1
 	warmup_time = 10
+	dock_target = "supply_shuttle"
 	shuttle_area = /area/supply/dock
 	waypoint_offsite = "nav_cargo_start"
 	waypoint_station = "nav_cargo_station"
@@ -335,12 +337,14 @@ TORCH_ESCAPE_POD(17)
 /obj/effect/shuttle_landmark/supply/centcom
 	name = "Offsite"
 	landmark_tag = "nav_cargo_start"
+	docking_controller = "supply_shuttle"
+	base_area = /area/centcom
+	base_turf = /turf/simulated/floor/plating
 
 /obj/effect/shuttle_landmark/supply/station
 	name = "Hangar"
 	landmark_tag = "nav_cargo_station"
-	base_area = /area/quartermaster/hangar
-	base_turf = /turf/simulated/floor/plating
+	docking_controller = "supply_shuttle_dock_airlock"
 
 /datum/shuttle/autodock/overmap/exploration_shuttle
 	name = "Charon"

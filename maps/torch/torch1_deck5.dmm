@@ -1989,6 +1989,16 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
+"dH" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	dir = 1;
+	id_tag = "supply_shuttle_dock_pump"
+	},
+/obj/machinery/light/spot{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/quartermaster/hangar)
 "dK" = (
 /obj/effect/paint/hull,
 /turf/simulated/wall/titanium,
@@ -2512,6 +2522,9 @@
 	},
 /turf/simulated/floor/tiled/steel_ridged,
 /area/exploration_shuttle/cargo)
+"eR" = (
+/turf/simulated/wall/r_wall/hull,
+/area/quartermaster/hangar)
 "eS" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4;
@@ -2979,8 +2992,10 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/cargo)
 "gc" = (
-/obj/effect/shuttle_landmark/supply/station,
-/turf/simulated/floor/plating,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/techfloor,
 /area/quartermaster/hangar)
 "gd" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -3594,6 +3609,21 @@
 	icon_state = "warningcorner"
 	},
 /turf/simulated/floor/tiled/monotile,
+/area/quartermaster/hangar)
+"hV" = (
+/obj/machinery/door/airlock/external{
+	autoset_access = 1;
+	frequency = 1380;
+	icon_state = "closed";
+	id_tag = "supply_shuttle_dock_inner";
+	locked = 1;
+	name = "Supply Pod Dock Internal"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 8;
+	icon_state = "map"
+	},
+/turf/simulated/floor/tiled/techfloor,
 /area/quartermaster/hangar)
 "hY" = (
 /obj/effect/floor_decal/industrial/warning/corner{
@@ -5924,16 +5954,15 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/fore)
 "nh" = (
+/obj/machinery/atmospherics/binary/pump/on{
+	dir = 8;
+	target_pressure = 200
+	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
+	dir = 9
 	},
-/obj/machinery/meter,
-/obj/structure/railing/mapped{
-	dir = 1;
-	icon_state = "railing0-1"
-	},
-/turf/simulated/floor/plating,
-/area/maintenance/fifthdeck/aftport)
+/turf/simulated/floor/tiled/techfloor,
+/area/quartermaster/hangar)
 "ni" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -5982,15 +6011,18 @@
 /turf/simulated/floor/plating,
 /area/hallway/primary/fifthdeck/aft)
 "nm" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 6
+/obj/machinery/airlock_sensor{
+	dir = 0;
+	frequency = 1380;
+	id_tag = "supply_shuttle_dock_sensor";
+	pixel_x = 24
 	},
-/obj/structure/railing/mapped{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 1;
-	icon_state = "railing0-1"
+	id_tag = "supply_shuttle_dock_pump"
 	},
-/turf/simulated/floor/plating,
-/area/maintenance/fifthdeck/aftport)
+/turf/simulated/floor/tiled/techfloor,
+/area/quartermaster/hangar)
 "nn" = (
 /obj/structure/disposalpipe/segment{
 	dir = 1;
@@ -6007,16 +6039,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/fore)
-"no" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/structure/railing/mapped{
-	dir = 1;
-	icon_state = "railing0-1"
-	},
-/turf/simulated/floor/plating,
-/area/maintenance/fifthdeck/aftport)
 "nq" = (
 /obj/structure/cable/green{
 	d1 = 2;
@@ -6025,7 +6047,7 @@
 	},
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
-/area/maintenance/fifthdeck/aftport)
+/area/quartermaster/hangar)
 "nr" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -6225,7 +6247,7 @@
 	},
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
-/area/maintenance/fifthdeck/aftport)
+/area/quartermaster/hangar)
 "nH" = (
 /obj/structure/disposalpipe/segment,
 /obj/structure/cable{
@@ -6269,7 +6291,7 @@
 	},
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
-/area/maintenance/fifthdeck/aftport)
+/area/quartermaster/hangar)
 "nM" = (
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 4;
@@ -6480,11 +6502,11 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftport)
 "of" = (
-/obj/structure/disposalpipe/segment{
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/floor/plating,
-/area/maintenance/fifthdeck/aftport)
+/turf/simulated/floor/tiled/techfloor,
+/area/quartermaster/hangar)
 "og" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
@@ -6632,32 +6654,22 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftport)
 "oo" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 9
+/obj/machinery/door/airlock/external{
+	autoset_access = 1;
+	frequency = 1380;
+	icon_state = "closed";
+	id_tag = "supply_shuttle_dock_outer";
+	locked = 1;
+	name = "Supply Pod Dock"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 9
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
-	},
-/turf/simulated/floor/plating,
-/area/maintenance/fifthdeck/aftport)
+/turf/simulated/floor/tiled/techfloor,
+/area/quartermaster/hangar)
 "oq" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 8;
-	icon_state = "pipe-c"
 	},
 /obj/structure/cable/green{
 	d1 = 1;
@@ -6666,7 +6678,7 @@
 	},
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
-/area/maintenance/fifthdeck/aftport)
+/area/quartermaster/hangar)
 "or" = (
 /obj/structure/cable/cyan{
 	d1 = 1;
@@ -6998,6 +7010,15 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
+"pd" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/quartermaster/hangar)
 "pe" = (
 /obj/structure/cable,
 /obj/structure/cable{
@@ -7183,15 +7204,9 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/hallway/primary/fifthdeck/aft)
 "px" = (
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/random/trash,
-/obj/structure/catwalk,
-/turf/simulated/floor/plating,
-/area/maintenance/fifthdeck/aftport)
+/obj/effect/shuttle_landmark/supply/station,
+/turf/space,
+/area/space)
 "py" = (
 /obj/random/trash,
 /turf/simulated/floor/tiled/techfloor,
@@ -8498,20 +8513,33 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/turf/simulated/floor/plating,
-/area/maintenance/fifthdeck/aftport)
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 5;
+	icon_state = "intact"
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4;
+	icon_state = "pipe-c"
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/quartermaster/hangar)
 "rZ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/meter,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/plating,
-/area/maintenance/fifthdeck/aftport)
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/quartermaster/hangar)
 "sa" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -8521,8 +8549,15 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/plating,
-/area/maintenance/fifthdeck/aftport)
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 10;
+	icon_state = "intact"
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/quartermaster/hangar)
 "sb" = (
 /obj/structure/cable/cyan{
 	d1 = 4;
@@ -8551,10 +8586,13 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/structure/disposalpipe/segment,
 /obj/structure/catwalk,
+/obj/structure/disposalpipe/segment{
+	dir = 8;
+	icon_state = "pipe-c"
+	},
 /turf/simulated/floor/plating,
-/area/maintenance/fifthdeck/aftport)
+/area/quartermaster/hangar)
 "sd" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -10029,10 +10067,6 @@
 	icon_state = "drying_rack"
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/fifthdeck/aftport)
-"vO" = (
-/obj/random/junk,
-/turf/simulated/floor/tiled/techfloor,
 /area/maintenance/fifthdeck/aftport)
 "vP" = (
 /obj/machinery/atmospherics/pipe/simple/hidden,
@@ -11755,6 +11789,15 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
+"Ct" = (
+/obj/structure/cable/green{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
+/area/quartermaster/hangar)
 "Cy" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -11926,7 +11969,7 @@
 	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
 	},
 /turf/simulated/floor/plating,
-/area/maintenance/fifthdeck/aftport)
+/area/quartermaster/hangar)
 "CY" = (
 /obj/machinery/portable_atmospherics/canister/hydrogen,
 /obj/machinery/alarm{
@@ -12115,6 +12158,18 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/cockpit)
+"Dx" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/quartermaster/hangar)
 "Dy" = (
 /obj/machinery/door/window/southright{
 	dir = 1;
@@ -12668,6 +12723,16 @@
 	},
 /turf/simulated/floor/reinforced,
 /area/shuttle/petrov/cell2)
+"FF" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 1;
+	icon_state = "map"
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/quartermaster/hangar)
 "FR" = (
 /obj/random/junk,
 /turf/simulated/floor/tiled/techfloor,
@@ -12878,6 +12943,14 @@
 /obj/machinery/meter,
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/isolation)
+"GJ" = (
+/obj/machinery/portable_atmospherics/canister/air/airlock,
+/obj/machinery/atmospherics/portables_connector{
+	dir = 4;
+	icon_state = "map_connector"
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/quartermaster/hangar)
 "GK" = (
 /obj/machinery/power/apc{
 	dir = 1;
@@ -12982,6 +13055,15 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/hallwaya)
+"GW" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/quartermaster/hangar)
 "GX" = (
 /obj/structure/bed/chair/padded/red,
 /obj/structure/cable/cyan{
@@ -13544,21 +13626,6 @@
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/phoron)
-"IU" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/structure/railing/mapped{
-	dir = 4;
-	icon_state = "railing0-1"
-	},
-/turf/simulated/floor/plating,
-/area/maintenance/fifthdeck/aftport)
 "IV" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden{
 	dir = 1;
@@ -13718,6 +13785,21 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/analysis)
+"Jy" = (
+/obj/machinery/door/airlock/external{
+	autoset_access = 1;
+	frequency = 1380;
+	icon_state = "closed";
+	id_tag = "supply_shuttle_dock_inner";
+	locked = 1;
+	name = "Supply Pod Dock Internal"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 10;
+	icon_state = "intact"
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/quartermaster/hangar)
 "Jz" = (
 /obj/structure/cable/cyan{
 	d1 = 2;
@@ -14464,8 +14546,8 @@
 	icon_state = "4-8";
 	pixel_x = 0
 	},
-/turf/simulated/floor/plating,
-/area/maintenance/fifthdeck/aftport)
+/turf/simulated/floor/tiled/techfloor,
+/area/quartermaster/hangar)
 "Mb" = (
 /obj/structure/table/steel,
 /obj/item/modular_computer/laptop/preset/custom_loadout/advanced,
@@ -14485,6 +14567,12 @@
 /obj/structure/closet/secure_closet/scientist_torch,
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/hallwaya)
+"Mh" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/quartermaster/hangar)
 "Mj" = (
 /obj/structure/cable{
 	d1 = 2;
@@ -14828,6 +14916,24 @@
 /obj/machinery/meter,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/atmos)
+"No" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 8;
+	icon_state = "pipe-c"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/quartermaster/hangar)
 "Np" = (
 /obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
@@ -14925,16 +15031,6 @@
 /obj/effect/paint/silver,
 /turf/simulated/floor/plating,
 /area/shuttle/petrov/security)
-"NF" = (
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
-/obj/structure/railing/mapped{
-	dir = 4;
-	icon_state = "railing0-1"
-	},
-/turf/simulated/floor/plating,
-/area/maintenance/fifthdeck/aftport)
 "NG" = (
 /obj/machinery/atmospherics/binary/pump,
 /turf/simulated/floor/tiled/white,
@@ -15457,19 +15553,11 @@
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
 "PO" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+/obj/machinery/atmospherics/pipe/simple/hidden/universal{
 	dir = 4
 	},
-/obj/structure/railing/mapped{
-	dir = 1;
-	icon_state = "railing0-1"
-	},
-/obj/structure/railing/mapped{
-	dir = 4;
-	icon_state = "railing0-1"
-	},
-/turf/simulated/floor/plating,
-/area/maintenance/fifthdeck/aftport)
+/turf/simulated/floor/tiled/techfloor,
+/area/quartermaster/hangar)
 "PR" = (
 /obj/structure/table/glass,
 /obj/item/paper_bin{
@@ -17659,7 +17747,7 @@
 /obj/structure/catwalk,
 /obj/random_multi/single_item/poppy,
 /turf/simulated/floor/plating,
-/area/maintenance/fifthdeck/aftport)
+/area/quartermaster/hangar)
 "Yp" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4;
@@ -17793,6 +17881,31 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/fifthdeck/aftport)
+"YO" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/embedded_controller/radio/airlock/docking_port{
+	display_name = "Supply Shuttle Dock";
+	frequency = 1380;
+	id_tag = "supply_shuttle_dock_airlock";
+	pixel_y = -32;
+	req_access = list("ACCESS_CARGO");
+	tag_airpump = "supply_shuttle_dock_pump";
+	tag_chamber_sensor = "supply_shuttle_dock_sensor";
+	tag_exterior_door = "supply_shuttle_dock_outer";
+	tag_interior_door = "supply_shuttle_dock_inner"
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/quartermaster/hangar)
 "YQ" = (
 /obj/structure/cable/cyan{
 	d2 = 4;
@@ -37671,14 +37784,14 @@ bi
 bi
 fS
 aX
-aJ
+UH
 Yo
 nL
-gI
-vK
+GJ
+fX
 LX
-ws
-ws
+eR
+eR
 aa
 aa
 aa
@@ -37873,14 +37986,14 @@ bi
 bi
 fS
 aX
-aJ
-mU
-wj
-nm
+UH
+pd
+fX
+FF
 rY
-oo
-ws
-ws
+No
+eR
+eR
 aa
 aa
 aa
@@ -38068,21 +38181,21 @@ bi
 bi
 bi
 bi
-gc
+bi
 bi
 bi
 bi
 bi
 fS
 aX
-aJ
-mU
-vO
+UH
+pd
+gc
 nh
 rZ
-of
-ws
-ws
+eR
+eR
+eR
 aa
 aa
 aa
@@ -38279,15 +38392,15 @@ fS
 aX
 aJ
 CX
-wj
-no
-sa
 of
-ws
-ws
+PO
+sa
+hV
+dH
+oo
 aa
 aa
-aa
+px
 aa
 aa
 aa
@@ -38479,14 +38592,14 @@ bi
 bi
 fS
 lf
-aJ
-mU
-wj
-no
-sa
-of
-ws
-ws
+UH
+pd
+Mh
+GW
+Dx
+Jy
+nm
+oo
 aa
 aa
 aa
@@ -38681,14 +38794,14 @@ eT
 eT
 fT
 lg
-aJ
-px
-wj
-PO
-IU
-NF
-ws
-ws
+UH
+pd
+fX
+of
+YO
+eR
+eR
+eR
 aa
 aa
 aa
@@ -38883,14 +38996,14 @@ iU
 iV
 iV
 oG
-aJ
+UH
 nq
-nD
+Ct
 nG
 sc
 oq
-ws
-ws
+eR
+eR
 aa
 aa
 aa
