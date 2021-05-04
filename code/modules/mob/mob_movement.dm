@@ -199,7 +199,7 @@
 			return 1
 		else
 			var/area/A = T.loc
-			if(A.has_gravity || shoegrip)
+			if(A.has_gravity || (shoegrip && !isopenspace(T)))
 				return 1
 
 	for(var/obj/O in orange(1, src))
