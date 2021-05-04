@@ -19,6 +19,11 @@
 
 	next_location = get_location_waypoint(!location)
 
+	if (location) //shuttle is initially at its offsite location
+		if (next_location.docking_controller) //give the shuttle the docking codes of the on-station controller so it can dock
+			var/datum/computer/file/embedded_program/docking/controller = next_location.docking_controller
+			set_docking_codes(controller.docking_codes)
+
 //Gets the shuttle landmark associated with the given location (defaults to current location)
 /datum/shuttle/autodock/ferry/proc/get_location_waypoint(location_id = null)
 	if (isnull(location_id))
