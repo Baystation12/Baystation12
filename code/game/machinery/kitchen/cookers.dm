@@ -16,6 +16,7 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	init_flags = EMPTY_BITFIELD
 
 	var/capacity = 1 //how many things the cooker can hold at once
 	var/cook_time = 20 SECONDS //how many seconds the cooker takes to cook its contents
@@ -38,7 +39,6 @@
 	smoke.set_up(2, 0)
 
 /obj/machinery/cooker/Destroy()
-	STOP_PROCESSING(SSmachines, src)
 	QDEL_NULL_LIST(cooking)
 	. = ..()
 
@@ -63,14 +63,14 @@
 
 /obj/machinery/cooker/proc/enable()
 	update_use_power(active_power_usage)
-	START_PROCESSING(SSmachines, src)
+	START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 	icon_state = "[initial(icon_state)]_on"
 	started = world.time
 	threshold = 0
 
 /obj/machinery/cooker/proc/disable()
 	update_use_power(idle_power_usage)
-	STOP_PROCESSING(SSmachines, src)
+	STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 	icon_state = initial(icon_state)
 
 /obj/machinery/cooker/proc/empty()

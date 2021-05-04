@@ -81,6 +81,7 @@ Class Procs:
 	icon = 'icons/obj/stationobjs.dmi'
 	w_class = ITEM_SIZE_NO_CONTAINER
 	layer = STRUCTURE_LAYER // Layer under items
+	init_flags = INIT_MACHINERY_PROCESS_SELF
 
 	var/stat = 0
 	var/reason_broken = 0
@@ -123,7 +124,8 @@ Class Procs:
 	. = ..()
 	if(d)
 		set_dir(d)
-	START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF) // It's safe to remove machines from here, but only if base machinery/Process returned PROCESS_KILL.
+	if (init_flags & INIT_MACHINERY_PROCESS_ALL)
+		START_PROCESSING_MACHINE(src, init_flags & INIT_MACHINERY_PROCESS_ALL)
 	SSmachines.machinery += src // All machines should remain in this list, always.
 	if(ispath(wires))
 		wires = new wires(src)

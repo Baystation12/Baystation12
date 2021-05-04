@@ -281,3 +281,14 @@
 #define CLIENT_FROM_VAR(I) (ismob(I) ? I:client : (isclient(I) ? I : (istype(I, /datum/mind) ? I:current?:client : null)))
 
 #define INCREMENT_WORLD_Z_SIZE world.maxz++; if (SSzcopy.zlev_maximums.len) { SSzcopy.calculate_zstack_limits() }
+
+//Semantic; usage intent of variable
+#define EMPTY_BITFIELD 0
+
+//-- Masks for /atom/var/init_flags --
+//- machinery
+#define INIT_MACHINERY_PROCESS_SELF 0x1
+#define INIT_MACHINERY_PROCESS_COMPONENTS 0x2
+#define INIT_MACHINERY_PROCESS_ALL 0x3
+//--
+
