@@ -288,3 +288,8 @@
 	icon_state="bsposter59"
 	name = "poster - Miss Science 2299"
 	desc = "A large piece of space-resistant printed paper. This pin-up poster depicts a woman wearing a corporate labcoat, a bikini, and a sheepish grin. She's shyly posing atop some highly specialized research equipment."
+
+/decl/poster/bay_60
+	icon_state="bsposter60"
+	name = "John Fleet poster"
+	desc = "A poster produced by the SCGF. It depicts Petty Officer John Fleet, a character used to boost troop morale, standing in front of the SCG flag proudly. Nobody knows if he really existed."
