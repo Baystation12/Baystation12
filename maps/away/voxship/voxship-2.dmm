@@ -1244,7 +1244,9 @@
 /area/voxship/thrusters)
 "cQ" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging,
-/obj/machinery/igniter,
+/obj/machinery/igniter{
+	id_tag = "Voxship_igniter"
+	},
 /turf/simulated/floor/reinforced/airless,
 /area/voxship/thrusters)
 "cR" = (
@@ -2152,6 +2154,10 @@
 /obj/machinery/atmospherics/omni/mixer,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
+	},
+/obj/machinery/button/ignition{
+	id_tag = "Voxship_igniter";
+	pixel_y = -25
 	},
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/thrusters)
