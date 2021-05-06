@@ -1,0 +1,5 @@
+author: Cupax3
+delete-after: true
+changes:
+  - tweak: Attacking point blank with a gun on harm intent no longer attacks, and
+      instead aims, if gun mode is aiming.
