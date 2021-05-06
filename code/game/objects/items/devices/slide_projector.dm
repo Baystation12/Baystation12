@@ -83,6 +83,8 @@
 	stop_projecting()
 	if(!current_slide)
 		return
+	if(!(target in view(7,get_turf(src))))
+		return
 	var/projection_type
 	for(var/T in projection_types)
 		if(istype(current_slide, T))
