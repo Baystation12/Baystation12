@@ -1068,7 +1068,7 @@
 /area/space)
 "cw" = (
 /obj/effect/paint/black,
-/turf/simulated/wall/voxshuttle,
+/turf/simulated/wall/r_titanium,
 /area/map_template/skipjack_station/start)
 "cx" = (
 /obj/machinery/door/airlock/hatch{
@@ -1088,7 +1088,7 @@
 	req_access = list("ACCESS_SYNDICATE")
 	},
 /obj/effect/paint/black,
-/turf/simulated/wall/voxshuttle,
+/turf/simulated/wall/r_titanium,
 /area/map_template/skipjack_station/start)
 "cz" = (
 /obj/machinery/door/blast/regular{
@@ -1264,7 +1264,7 @@
 /area/map_template/skipjack_station/start)
 "cR" = (
 /obj/effect/paint/brown,
-/turf/simulated/wall/voxshuttle,
+/turf/simulated/wall/titanium,
 /area/map_template/skipjack_station/start)
 "cS" = (
 /obj/machinery/door/airlock/hatch{
