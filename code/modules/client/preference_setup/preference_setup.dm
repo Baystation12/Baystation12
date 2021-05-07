@@ -1,5 +1,6 @@
 #define TOPIC_UPDATE_PREVIEW 4
-#define TOPIC_REFRESH_UPDATE_PREVIEW (TOPIC_REFRESH|TOPIC_UPDATE_PREVIEW)
+#define TOPIC_HARD_REFRESH   8 // use to force a browse() call, unblocking some rsc operations
+#define TOPIC_REFRESH_UPDATE_PREVIEW (TOPIC_HARD_REFRESH|TOPIC_UPDATE_PREVIEW)
 
 var/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 
@@ -109,7 +110,7 @@ var/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 		. = 1
 
 	if(.)
-		user.client.prefs.ShowChoices(user)
+		user.client.prefs.update_setup_window(user)
 
 /**************************
 * Category Category Setup *
@@ -231,10 +232,12 @@ var/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 	if(!pref_mob || !pref_mob.client)
 		return 1
 
-	if(. & TOPIC_UPDATE_PREVIEW)
+	if (. & TOPIC_UPDATE_PREVIEW)
 		pref_mob.client.prefs.preview_icon = null
-	if(. & TOPIC_REFRESH)
-		pref_mob.client.prefs.ShowChoices(usr)
+	if (. & TOPIC_HARD_REFRESH)
+		pref_mob.client.prefs.open_setup_window(usr)
+	else if (. & TOPIC_REFRESH)
+		pref_mob.client.prefs.update_setup_window(usr)
 
 /datum/category_item/player_setup_item/CanUseTopic(var/mob/user)
 	return 1
