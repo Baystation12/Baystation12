@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - maptweak: The Errant Pisces shuttle landmarks have been moved, to prevent shuttles
-      from landing inside nets and deleting their walls.

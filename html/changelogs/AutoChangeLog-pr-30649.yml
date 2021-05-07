@@ -1,5 +1,0 @@
-author: ''
-delete-after: true
-changes:
-  - bugfix: The LMG no longer disappears it's half empty, full, or someone sneezes
-      weirdly.

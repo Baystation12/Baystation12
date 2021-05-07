@@ -1,4 +1,0 @@
-author: SealCure
-delete-after: true
-changes:
-  - bugfix: AntagHUD now shows mutineers and loyalists properly.
