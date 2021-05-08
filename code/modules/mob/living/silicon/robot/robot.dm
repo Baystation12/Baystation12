@@ -88,6 +88,7 @@
 	var/braintype = "Cyborg"
 	var/intenselight = FALSE	// Whether cyborg's integrated light was upgraded
 	var/vtec = FALSE
+	var/flash_protected = FALSE
 
 	var/list/robot_verbs_default = list(
 		/mob/living/silicon/robot/proc/sensor_mode,

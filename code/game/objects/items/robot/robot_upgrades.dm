@@ -214,3 +214,19 @@
 
 	R.emagged = TRUE
 	return 1
+
+/obj/item/borg/upgrade/flash_protection
+	name = "optical matrix shielding"
+	desc = "Provides shielding for the optical matrix, rendering the robot immune to flashes."
+
+/obj/item/borg/upgrade/flash_protection/action(mob/living/silicon/robot/R)
+	if (..())
+		return FALSE
+
+	if (R.flash_protected)
+		to_chat(usr, SPAN_WARNING("\The [R]'s optical matrix is already shielded."))
+		return FALSE
+
+	R.status_flags &= ~CANWEAKEN
+	R.flash_protected = TRUE
+	return TRUE
