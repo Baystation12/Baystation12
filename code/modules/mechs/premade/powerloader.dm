@@ -14,7 +14,7 @@
 		head.color = "#ffbc37"
 	if(!body) 
 		body = new /obj/item/mech_component/chassis/powerloader(src)
-		body.color = "#ffdc37"
+		body.color = "#ffbc37"
 
 	. = ..()
 

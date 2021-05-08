@@ -16,7 +16,9 @@ proc/get_mech_image(var/decal, var/cache_key, var/cache_icon, var/image_colour, 
 				var/icon/decal_icon = icon('icons/mecha/mech_decals.dmi',decal)
 				decal_icon.AddAlphaMask(GLOB.mech_icon_cache[template_key])
 				GLOB.mech_icon_cache[decal_key] = decal_icon
-			I.overlays += get_mech_image(null, decal_key, GLOB.mech_icon_cache[decal_key])
+			var/image/decal_image = get_mech_image(null, decal_key, GLOB.mech_icon_cache[decal_key])
+			decal_image.blend_mode = BLEND_MULTIPLY
+			I.overlays += decal_image
 		I.appearance_flags |= RESET_COLOR
 		I.layer = overlay_layer
 		I.plane = FLOAT_PLANE

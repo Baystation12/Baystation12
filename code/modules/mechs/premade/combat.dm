@@ -25,6 +25,17 @@
 	install_system(new /obj/item/mech_equipment/flash(src), HARDPOINT_LEFT_SHOULDER)
 	install_system(new /obj/item/mech_equipment/light(src), HARDPOINT_RIGHT_SHOULDER)
 
+/mob/living/exosuit/premade/combat/military
+	decal = "cammo1"
+
+/mob/living/exosuit/premade/combat/military/alpine
+	decal = "cammo2"
+
+/mob/living/exosuit/premade/combat/military/Initialize()
+	. = ..()
+	for(var/obj/thing in list(arms,legs,head,body))
+		thing.color = COLOR_WHITE
+
 /obj/item/mech_component/manipulators/combat
 	name = "combat arms"
 	exosuit_desc_string = "flexible, advanced manipulators"
