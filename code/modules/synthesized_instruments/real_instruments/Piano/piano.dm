@@ -4,3 +4,7 @@
 	icon_state = "piano"
 	path = /datum/instrument/piano
 
+/obj/random_multi/single_item/piano
+	name = "piano spawnpoint"
+	id = "spacepiano"
+	item_path = /obj/structure/synthesized_instrument/synthesizer/piano

@@ -3243,6 +3243,7 @@
 /area/crew_quarters/mess)
 "gB" = (
 /obj/effect/floor_decal/industrial/outline/grey,
+/obj/random_multi/single_item/piano,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/forestarboard)
 "gC" = (

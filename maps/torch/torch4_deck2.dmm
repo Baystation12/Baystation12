@@ -2789,6 +2789,7 @@
 	pixel_x = -22;
 	pixel_y = 0
 	},
+/obj/random_multi/single_item/piano,
 /turf/simulated/floor/plating,
 /area/vacant/chapel)
 "fg" = (
