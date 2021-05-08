@@ -1116,6 +1116,8 @@
 /obj/item/aicard,
 /obj/item/clothing/gloves/insulated,
 /obj/item/clothing/gloves/insulated,
+/obj/item/device/radio/headset/headset_eng,
+/obj/item/device/radio/headset/headset_eng,
 /obj/item/device/multitool{
 	pixel_x = 3
 	},
