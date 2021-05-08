@@ -1,0 +1,4 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - admin: Attack logs now show the attacker's selected target zone.
