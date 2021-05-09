@@ -1,9 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - rscadd: Borgs can now have a new upgrade module installed, available from robotics
-      fabricators, called "optical matrix shielding". This upgrade makes the borg
-      immune to flashes when installed.
-  - rscadd: Traitor borgs now have flash immunity when antagged. De-antagged traitor
-      borgs will lose this immunity.
-  - rscadd: Combat borgs now have flash immunity by default.

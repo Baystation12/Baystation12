@@ -1,5 +1,0 @@
-author: Ryan180602
-delete-after: true
-changes:
-  - maptweak: Moves Lar-Maria's shuttle landmarks to not cause the Charon from flying
-      into the station, deleting turfs.
