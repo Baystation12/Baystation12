@@ -152,8 +152,6 @@
 		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/suit/storage/toggle/labcoat/foundation,
 		/obj/item/clothing/shoes/white,
-		/obj/item/reagent_containers/glass/bottle/stoxin,
-		/obj/item/reagent_containers/syringe,
 		/obj/item/storage/pill_bottle/citalopram,
 		/obj/item/reagent_containers/pill/methylphenidate,
 		/obj/item/material/clipboard,
