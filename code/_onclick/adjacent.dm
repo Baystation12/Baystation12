@@ -130,7 +130,7 @@ turf/proc/Adjacent_free_dir(atom/destination, path_dir = 0)
 	This is defined as any dense ATOM_FLAG_CHECKS_BORDER object, or any dense object without throwpass.
 	The border_only flag allows you to not objects (for source and destination squares)
 */
-/turf/proc/ClickCross(var/target_dir, var/border_only, var/target_atom = null)
+/turf/proc/ClickCross(target_dir, border_only, atom/target_atom = null)
 	for(var/obj/O in src)
 		if( !O.density || O == target_atom || O.throwpass) continue // throwpass is used for anything you can click through
 
@@ -139,7 +139,7 @@ turf/proc/Adjacent_free_dir(atom/destination, path_dir = 0)
 				var/obj/structure/window/W = target_atom
 				if(istype(W) && W.is_fulltile()) //exception for breaking full tile windows on top of single pane windows
 					return 1
-				if(istype(target_atom, /obj/structure/wall_frame)) // exception for low walls beneath windows
+				if(target_atom && (target_atom.atom_flags & ATOM_FLAG_ADJACENT_EXCEPTION)) // exception for atoms that should always be reachable
 					return 1
 				else
 					return 0

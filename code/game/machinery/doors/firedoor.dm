@@ -22,6 +22,7 @@
 	closed_layer = ABOVE_WINDOW_LAYER
 	movable_flags = MOVABLE_FLAG_Z_INTERACT
 	pry_mod = 0.75
+	atom_flags = ATOM_FLAG_ADJACENT_EXCEPTION
 	var/locked = FALSE //If the door is forced open, it will not close again until the next atmosphere alert in the area
 
 	//These are frequently used with windows, so make sure zones can pass.
