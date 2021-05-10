@@ -28,6 +28,8 @@
 		return FALSE
 
 	var/list/available_goals = SSgoals.global_personal_goals ? SSgoals.global_personal_goals.Copy() : list()
+	if(job && LAZYLEN(job.possible_goals))
+		available_goals |= job.possible_goals
 	if(ishuman(current))
 		var/mob/living/carbon/human/H = current
 		for(var/token in H.cultural_info)
@@ -38,8 +40,7 @@
 	if(isnull(add_amount))
 		var/min_goals = 1
 		var/max_goals = 3
-		if(job && LAZYLEN(job.possible_goals))
-			available_goals |= job.possible_goals
+		if(job)
 			min_goals = job.min_goals
 			max_goals = job.max_goals
 		add_amount = rand(min_goals, max_goals)

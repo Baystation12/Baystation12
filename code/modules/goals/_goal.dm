@@ -2,6 +2,7 @@
 	var/description
 	var/owner
 	var/completion_message
+	var/failure_message
 	var/can_reroll = TRUE
 	var/can_abandon = TRUE
 
@@ -53,6 +54,11 @@
 		if(istype(owner, /datum/mind))
 			var/datum/mind/mind = owner
 			to_chat(mind.current, "<font color='green'><b>[completion_message]</b></font>")
+
+/datum/goal/proc/on_failure()
+	if(failure_message && !check_success() && istype(owner, /datum/mind))
+		var/datum/mind/mind = owner
+		to_chat(mind.current, SPAN_DANGER(failure_message))
 
 /datum/goal/proc/is_valid()
 	return TRUE

@@ -25,3 +25,9 @@
 // Personal:
 	// xenobio: finish a round without being attacked by a slime
 	// explorer: name an alien species, plant a flag on an undiscovered world
+
+/datum/goal/achievement/notslimefodder
+	success = TRUE
+	failable = TRUE
+	description = "You're feeling extra careful today. Don't let a slime snack on you."
+	failure_message = "You feel sticky and miserable."
