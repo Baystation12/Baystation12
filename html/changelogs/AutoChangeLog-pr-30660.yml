@@ -1,7 +1,0 @@
-author: CrimsonShrike
-delete-after: true
-changes:
-  - rscadd: Added two new exosuit modkits.
-  - tweak: Tweaked exosuit decal rendering. Should make decals mesh better with existing
-      geometry.
-  - tweak: Exosuit modkits no longer consume on use.

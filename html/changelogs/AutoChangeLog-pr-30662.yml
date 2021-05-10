@@ -1,4 +1,0 @@
-author: Nirnael
-delete-after: true
-changes:
-  - bugfix: Shutters are again reachable on window tiles.

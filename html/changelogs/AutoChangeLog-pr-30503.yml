@@ -1,4 +1,0 @@
-author: afterthought, Mucker
-delete-after: true
-changes:
-  - bugfix: Fixes the skill panel refresh bug (for real this time).
