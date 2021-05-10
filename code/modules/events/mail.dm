@@ -42,7 +42,7 @@
 		kill(TRUE)
 
 /datum/event/mail/announce()
-	command_announcement.Announce("A batch of mail adressed to the crew of \the [location_name()] has arrived at the sorting office and will arrive on the next available supply shuttle.", pick("Major Bill's Shipping", "Flefingbridge Transport", "SolX Freight", "QuiCo. Mailing Services"), zlevels = affecting_z)
+	command_announcement.Announce("A batch of mail addressed to the crew of \the [location_name()] has arrived at the sorting office and will arrive on the next available supply shuttle.", pick("Major Bill's Shipping", "Flefingbridge Transport", "SolX Freight", "QuiCo. Mailing Services"), zlevels = affecting_z)
 
 /datum/event/mail/tick()
 	var/datum/shuttle/autodock/ferry/supply/shuttle = SSsupply.shuttle
@@ -66,7 +66,7 @@
 		var/obj/item/documents/letter = new()
 		letter.SetName("letter to [name]")
 		letter.desc = "A letter from home."
-		letter.description_antag = "It's a letter from someone back home. This one is adressed to [name]."
+		letter.description_antag = "It's a letter from someone back home. This one is addressed to [name]."
 		letter.icon_state = "paper_words"
 
 		var/gift_path = pick(possible_gifts)
