@@ -123,18 +123,13 @@ datum/preferences
 
 	return 1
 
-/datum/preferences/proc/ShowChoices(mob/user)
+/datum/preferences/proc/get_content(mob/user)
 	if(!SScharacter_setup.initialized)
 		return
 	if(!user || !user.client)
 		return
 
-	if(!get_mob_by_key(client_ckey))
-		to_chat(user, "<span class='danger'>No mob exists for the given client!</span>")
-		close_load_dialog(user)
-		return
-
-	var/dat = "<html><body><center>"
+	var/dat = "<center>"
 
 	if(is_guest)
 		dat += "Please create an account to save your preferences. If you have an account and are seeing this, please adminhelp for assistance."
@@ -151,11 +146,25 @@ datum/preferences
 	dat += player_setup.header()
 	dat += "<br><HR></center>"
 	dat += player_setup.content(user)
+	return dat
 
-	dat += "</html></body>"
-	var/datum/browser/popup = new(user, "Character Setup","Character Setup", 1200, 800, src)
-	popup.set_content(dat)
+/datum/preferences/proc/open_setup_window(mob/user)
+	if (!SScharacter_setup.initialized)
+		return
+	var/datum/browser/popup = new(user, "preferences_browser", "Character Setup", 1200, 800, src)
+	var/content = {"
+	<script type='text/javascript'>
+		function update_content(data){
+			document.getElementById('content').innerHTML = data;
+		}
+	</script>
+	<div id='content'>[get_content(user)]</div>
+	"}
+	popup.set_content(content)
 	popup.open()
+
+/datum/preferences/proc/update_setup_window(mob/user)
+	send_output(user, url_encode(get_content(user)), "preferences_browser.browser:update_content")
 
 /datum/preferences/proc/process_link(mob/user, list/href_list)
 
@@ -168,7 +177,7 @@ datum/preferences
 		else
 			to_chat(user, "<span class='danger'>The forum URL is not set in the server configuration.</span>")
 			return
-	ShowChoices(usr)
+	update_setup_window(usr)
 	return 1
 
 /datum/preferences/Topic(href, list/href_list)
@@ -205,7 +214,7 @@ datum/preferences
 	else
 		return 0
 
-	ShowChoices(usr)
+	update_setup_window(usr)
 	return 1
 
 /datum/preferences/proc/copy_to(mob/living/carbon/human/character, is_preview_copy = FALSE)
