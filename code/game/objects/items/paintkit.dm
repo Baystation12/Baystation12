@@ -90,12 +90,23 @@
 	to_chat(user, "This kit will add a '[new_name]' decal to a exosuit'.")
 
 // exosuit kits.
-/obj/item/device/kit/paint/powerloader/flames_red
+/obj/item/device/kit/paint/use(amt, mob/user)
+	playsound(get_turf(user), 'sound/items/Screwdriver.ogg', 50, 1)
+	
+/obj/item/device/kit/paint/flames_red
 	name = "\"Firestarter\" exosuit customisation kit"
-	new_name = "red flames"
 	new_icon = "flames_red"
 
-/obj/item/device/kit/paint/powerloader/flames_blue
+/obj/item/device/kit/paint/flames_blue
 	name = "\"Burning Chrome\" exosuit customisation kit"
-	new_name = "blue flames"
 	new_icon = "flames_blue"
+
+/obj/item/device/kit/paint/camouflage
+	name = "\"Guerilla\" exosuit customisation kit"
+	desc = "The exact same pattern the 76th Armored Gauntlet used in the Gaia war, now available for general use."
+	new_icon = "cammo1"
+
+/obj/item/device/kit/paint/camouflage/forest
+	name = "\"Alpine\" exosuit customisation kit"
+	new_icon = "cammo2"
+	desc = "A muted pattern for alpine environments. Don't miss the forest for the trees!"
