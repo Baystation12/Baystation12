@@ -8,7 +8,7 @@
 	req_access = list(access_voxship)
 
 /area/voxship/fore
-	name = "Vox Fore"
+	name = "Unknown Vessel Cockpit"
 	icon_state = "fore"
 	req_access = list(access_voxship)
 
