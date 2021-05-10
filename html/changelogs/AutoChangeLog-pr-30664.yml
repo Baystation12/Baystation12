@@ -1,0 +1,4 @@
+author: ''
+delete-after: true
+changes:
+  - tweak: The number of mercs that can spawn is now 3 to 5, down from 4 to 6.
