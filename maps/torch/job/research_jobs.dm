@@ -39,7 +39,9 @@
 
 	max_skill = list(   SKILL_ANATOMY     = SKILL_MAX,
 	                    SKILL_DEVICES     = SKILL_MAX,
-	                    SKILL_SCIENCE     = SKILL_MAX)
+	                    SKILL_SCIENCE     = SKILL_MAX,
+						SKILL_CHEMISTRY   = SKILL_MAX
+					)
 	skill_points = 20
 
 /datum/job/scientist
@@ -65,8 +67,9 @@
 
 	max_skill = list(   SKILL_ANATOMY     = SKILL_MAX,
 	                    SKILL_DEVICES     = SKILL_MAX,
-	                    SKILL_SCIENCE     = SKILL_MAX)
-
+	                    SKILL_SCIENCE     = SKILL_MAX,
+						SKILL_CHEMISTRY   = SKILL_MAX
+					)
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/research/scientist
 	allowed_branches = list(
 		/datum/mil_branch/civilian,
@@ -122,8 +125,9 @@
 	)
 	max_skill = list(   SKILL_ANATOMY     = SKILL_MAX,
 	                    SKILL_DEVICES     = SKILL_MAX,
-	                    SKILL_SCIENCE     = SKILL_MAX)
-
+	                    SKILL_SCIENCE     = SKILL_MAX,
+						SKILL_CHEMISTRY   = SKILL_MAX
+					)
 	access = list(
 		access_tox, access_tox_storage, access_research, access_petrov,
 		access_mining_office, access_mining_station, access_xenobiology, access_guppy_helm,

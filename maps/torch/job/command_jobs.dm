@@ -125,7 +125,9 @@
 
 	max_skill = list(   SKILL_ANATOMY     = SKILL_MAX,
 	                    SKILL_DEVICES     = SKILL_MAX,
-	                    SKILL_SCIENCE     = SKILL_MAX)
+	                    SKILL_SCIENCE     = SKILL_MAX,
+						SKILL_CHEMISTRY   = SKILL_MAX
+					)
 	skill_points = 30
 
 	access = list(
@@ -170,11 +172,12 @@
 	                    SKILL_MEDICAL     = SKILL_EXPERT,
 	                    SKILL_ANATOMY     = SKILL_EXPERT,
 	                    SKILL_CHEMISTRY   = SKILL_BASIC,
-						SKILL_DEVICES     = SKILL_ADEPT)
-
+						SKILL_DEVICES     = SKILL_ADEPT
+					)
 	max_skill = list(   SKILL_MEDICAL     = SKILL_MAX,
 	                    SKILL_ANATOMY     = SKILL_MAX,
-	                    SKILL_CHEMISTRY   = SKILL_MAX)
+	                    SKILL_CHEMISTRY   = SKILL_MAX
+					)
 	skill_points = 26
 
 	access = list(
