@@ -182,40 +182,6 @@
 /datum/job/medical_trainee/get_description_blurb()
 	return "You are a Trainee Medical Technician. You are learning how to treat and recover wounded crew from the more experienced medical personnel aboard. You are subordinate to the rest of the medical team."
 
-/datum/job/chemist
-	title = "Laboratory Technician"
-	department = "Medical"
-	department_flag = MED
-	total_positions = 1
-	spawn_positions = 1
-	supervisors = "the Chief Medical Officer, the Corporate Liaison and Medical Personnel"
-	selection_color = "#013d3b"
-	economic_power = 4
-	minimum_character_age = list(SPECIES_HUMAN = 25)
-	ideal_character_age = 30
-	minimal_player_age = 7
-	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/chemist
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/contractor)
-	min_skill = list(   SKILL_MEDICAL   = SKILL_BASIC,
-	                    SKILL_CHEMISTRY = SKILL_ADEPT)
-
-	max_skill = list(   SKILL_MEDICAL     = SKILL_BASIC,
-						SKILL_ANATOMY	  = SKILL_BASIC,
-	                    SKILL_CHEMISTRY   = SKILL_MAX)
-	skill_points = 16
-
-	access = list(
-		access_medical, access_maint_tunnels, access_emergency_storage,
-		access_medical_equip, access_solgov_crew, access_chemistry,
-	 	access_virology, access_morgue, access_crematorium, access_radio_med
-	)
-
-	minimal_access = list()
-
-/datum/job/chemist/get_description_blurb()
-	return "You are a Laboratory Technician. You make medicine. You are not a doctor or medic, but have surface level knowledge in those fields. You should not be treating patients, but rather providing the the medicine to do so. You are subordinate to Physicians and Medical Techncians."
-
 /datum/job/psychiatrist
 	title = "Counselor"
 	total_positions = 1
