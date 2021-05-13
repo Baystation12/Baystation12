@@ -234,9 +234,9 @@
 /mob/living/carbon/human/proc/can_autoheal(var/dam_type)
 	if(!species || !dam_type) return FALSE
 
-	if(dam_type == BRUTE)
+	if(dam_type == DAMAGE_BRUTE)
 		return(getBruteLoss() < species.total_health / 2)
-	else if(dam_type == BURN)
+	else if(dam_type == DAMAGE_BURN)
 		return(getFireLoss() < species.total_health / 2)
 	return FALSE
 
@@ -350,9 +350,9 @@ In most cases it makes more sense to use apply_damage() instead! And make sure t
 			continue // The code below may affect the children of an organ.
 
 		if(brute_avg)
-			apply_damage(damage = brute_avg, damagetype = BRUTE, damage_flags = dam_flags, used_weapon = used_weapon, silent = TRUE, given_organ = E)
+			apply_damage(damage = brute_avg, damagetype = DAMAGE_BRUTE, damage_flags = dam_flags, used_weapon = used_weapon, silent = TRUE, given_organ = E)
 		if(burn_avg)
-			apply_damage(damage = burn_avg, damagetype = BURN, damage_flags = dam_flags, used_weapon = used_weapon, silent = TRUE, given_organ = E)
+			apply_damage(damage = burn_avg, damagetype = DAMAGE_BURN, damage_flags = dam_flags, used_weapon = used_weapon, silent = TRUE, given_organ = E)
 
 	updatehealth()
 	BITSET(hud_updateflag, HEALTH_HUD)
@@ -392,7 +392,7 @@ This function restores all organs.
 /mob/living/carbon/human/proc/get_organ(var/zone)
 	return organs_by_name[check_zone(zone)]
 
-/mob/living/carbon/human/apply_damage(var/damage = 0, var/damagetype = BRUTE, var/def_zone = null, var/damage_flags = 0, var/obj/used_weapon = null, var/armor_pen, var/silent = FALSE, var/obj/item/organ/external/given_organ = null)
+/mob/living/carbon/human/apply_damage(var/damage = 0, var/damagetype = DAMAGE_BRUTE, var/def_zone = null, var/damage_flags = 0, var/obj/used_weapon = null, var/armor_pen, var/silent = FALSE, var/obj/item/organ/external/given_organ = null)
 
 	var/obj/item/organ/external/organ = given_organ
 	if(!organ)
@@ -415,7 +415,7 @@ This function restores all organs.
 			organ = get_organ(check_zone(def_zone))
 
 	//Handle other types of damage
-	if(!(damagetype in list(BRUTE, BURN, PAIN, CLONE)))
+	if(!(damagetype in list(DAMAGE_BRUTE, DAMAGE_BURN, DAMAGE_PAIN, DAMAGE_GENETIC)))
 		return ..()
 	if(!istype(organ))
 		return 0 // This is reasonable and means the organ is missing.
@@ -434,13 +434,13 @@ This function restores all organs.
 	var/datum/wound/created_wound
 	damageoverlaytemp = 20
 	switch(damagetype)
-		if(BRUTE)
+		if(DAMAGE_BRUTE)
 			created_wound = organ.take_external_damage(damage, 0, damage_flags, used_weapon)
-		if(BURN)
+		if(DAMAGE_BURN)
 			created_wound = organ.take_external_damage(0, damage, damage_flags, used_weapon)
-		if(PAIN)
+		if(DAMAGE_PAIN)
 			organ.add_pain(damage)
-		if(CLONE)
+		if(DAMAGE_GENETIC)
 			organ.add_genetic_damage(damage)
 
 	// Will set our damageoverlay icon to the next level, which will then be set back to the normal level the next mob.Life().

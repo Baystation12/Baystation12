@@ -1,4 +1,4 @@
-#define SHIELD_DAMTYPE_PHYSICAL 1	// Physical damage - bullets, meteors, various hand objects - aka. "brute" damtype.
+#define SHIELD_DAMTYPE_PHYSICAL 1	// Physical damage - bullets, meteors, various hand objects - aka. DAMAGE_BRUTE damtype.
 #define SHIELD_DAMTYPE_EM 2			// Electromagnetic damage - Ion weaponry, stun beams, ...
 #define SHIELD_DAMTYPE_HEAT 3		// Heat damage - Lasers, fire
 

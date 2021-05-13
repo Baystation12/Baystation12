@@ -30,6 +30,6 @@
 	playsound(src, 'sound/weapons/pierce.ogg', 50, 1)
 	if(istype(L, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = L
-		H.apply_damage(damage, BRUTE, BP_CHEST, armor_pen = penetration)
+		H.apply_damage(damage, DAMAGE_BRUTE, BP_CHEST, armor_pen = penetration)
 	else
 		L.adjustBruteLoss(damage)

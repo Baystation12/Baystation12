@@ -63,9 +63,9 @@
 	else
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		switch(W.damtype)
-			if(BURN)
+			if(DAMAGE_BURN)
 				take_damage(W.force * 1)
-			if(BRUTE)
+			if(DAMAGE_BRUTE)
 				take_damage(W.force * 0.75)
 		..()
 
@@ -138,5 +138,5 @@
 	if(isanimal(victim)) //simple animals have simple health, reduce our damage
 		damage_holder = (damage / 4)
 
-	victim.apply_damage(damage_holder, BRUTE, target_zone, damage_flags = DAM_SHARP, used_weapon = src)
+	victim.apply_damage(damage_holder, DAMAGE_BRUTE, target_zone, damage_flags = DAM_SHARP, used_weapon = src)
 	visible_message(SPAN_DANGER("\The [victim] is [pick(poke_description)] by \the [src]!"))

@@ -45,14 +45,14 @@
 /obj/item/modular_computer/emp_act(var/severity)
 	take_damage(rand(100,200) / severity, 50 / severity, 0)
 
-// "Stun" weapons can cause minor damage to components (short-circuits?)
-// "Burn" damage is equally strong against internal components and exterior casing
-// "Brute" damage mostly damages the casing.
+// DAMAGE_STUN weapons can cause minor damage to components (short-circuits?)
+// DAMAGE_BURN damage is equally strong against internal components and exterior casing
+// DAMAGE_BRUTE damage mostly damages the casing.
 /obj/item/modular_computer/bullet_act(var/obj/item/projectile/Proj)
 	switch(Proj.damage_type)
-		if(BRUTE)
+		if(DAMAGE_BRUTE)
 			take_damage(Proj.damage, Proj.damage / 2)
-		if(PAIN)
+		if(DAMAGE_STUN)
 			take_damage(Proj.damage, Proj.damage / 3, 0)
-		if(BURN)
+		if(DAMAGE_BURN)
 			take_damage(Proj.damage, Proj.damage / 1.5)

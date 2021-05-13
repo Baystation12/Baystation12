@@ -81,7 +81,7 @@
 		switch(damage_type)
 			if(BRUISE, CUT, PIERCE)
 				return bandaged
-			if(BURN)
+			if(DAMAGE_BURN)
 				return salved
 
 	// Checks whether other other can be merged into src.
@@ -126,7 +126,7 @@
 	switch (damage_type)
 		if (BRUISE)
 			return prob(dam_coef*5)
-		if (BURN)
+		if (DAMAGE_BURN)
 			return prob(dam_coef*25)
 		if (CUT)
 			return prob(dam_coef*10)
@@ -148,7 +148,7 @@
 	if(LAZYLEN(embedded_objects))
 		return amount // heal nothing
 	if(parent_organ)
-		if(damage_type == BURN && !(parent_organ.burn_ratio < 1 || (parent_organ.limb_flags & ORGAN_FLAG_HEALS_OVERKILL)))
+		if(damage_type == DAMAGE_BURN && !(parent_organ.burn_ratio < 1 || (parent_organ.limb_flags & ORGAN_FLAG_HEALS_OVERKILL)))
 			return amount	//We don't want to heal wounds on irreparable organs.
 		else if(!(parent_organ.brute_ratio < 1 || (parent_organ.limb_flags & ORGAN_FLAG_HEALS_OVERKILL)))
 			return amount

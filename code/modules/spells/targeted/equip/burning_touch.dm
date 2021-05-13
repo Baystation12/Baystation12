@@ -19,7 +19,7 @@
 	icon = 'icons/mob/screen1.dmi'
 	icon_state = "grabbed+1"
 	force = 10
-	damtype = BURN
+	damtype = DAMAGE_BURN
 	simulated = FALSE
 	var/burn_power = 0
 	var/burn_timer

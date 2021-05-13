@@ -102,8 +102,8 @@
 /datum/artifact_effect/hellportal/proc/hurt_players()
 	for (var/mob/living/carbon/human/H in range(src.effectrange,get_turf(holder)))
 		var/weakness = GetAnomalySusceptibility(H)
-		H.apply_damage(damage * weakness, BRUTE, damage_flags = DAM_DISPERSED)
-		H.apply_damage(damage * weakness, BURN, damage_flags = DAM_DISPERSED)
+		H.apply_damage(damage * weakness, DAMAGE_BRUTE, damage_flags = DAM_DISPERSED)
+		H.apply_damage(damage * weakness, DAMAGE_BURN, damage_flags = DAM_DISPERSED)
 		if (weakness == 0)
 			to_chat(H, SPAN_WARNING("Some unseen force tries to tear into your suit, but fails!"))
 		else

@@ -908,7 +908,7 @@ var/global/list/common_tools = list(
 		if(/obj/item/melee/energy)
 			return 3500
 		if(/obj/item/blob_tendril)
-			if(W.damtype == BURN)
+			if(W.damtype == DAMAGE_BURN)
 				return 1000
 			else
 				return 0
@@ -1118,4 +1118,3 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 		M.start_pulling(t)
 	else
 		step(user.pulling, get_dir(user.pulling.loc, A))
-

@@ -29,10 +29,10 @@
 	break_stuff_probability = 35
 	flash_vulnerability = 0
 	natural_weapon = /obj/item/natural_weapon/goatking
-	var/current_damtype = BRUTE
+	var/current_damtype = DAMAGE_BRUTE
 	var/list/elemental_weapons = list(
-		BURN = /obj/item/natural_weapon/goatking/fire,
-		ELECTROCUTE = /obj/item/natural_weapon/goatking/lightning
+		DAMAGE_BURN = /obj/item/natural_weapon/goatking/fire,
+		DAMAGE_SHOCK = /obj/item/natural_weapon/goatking/lightning
 	)
 	var/stun_chance = 5 //chance per attack to Weaken target
 
@@ -52,11 +52,11 @@
 
 /obj/item/natural_weapon/goatking/fire
 	name = "burning horns"
-	damtype = BURN
+	damtype = DAMAGE_BURN
 
 /obj/item/natural_weapon/goatking/lightning
 	name = "lightning horns"
-	damtype = ELECTROCUTE
+	damtype = DAMAGE_SHOCK
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/phase2
 	name = "emperor of goats"
@@ -154,14 +154,14 @@
 			visible_message(SPAN_MFAUNA("\The [src] disrupts nearby electrical equipment!"))
 			empulse(get_turf(src), 5, 2, 0)
 
-		else if(prob(5) && current_damtype == BRUTE && !special_attacks) //elemental attacks
+		else if(prob(5) && current_damtype == DAMAGE_BRUTE && !special_attacks) //elemental attacks
 			spellscast++
 			if(prob(50))
 				visible_message(SPAN_MFAUNA("\The [src]' horns flicker with holy white flame!"))
-				current_damtype = BURN
+				current_damtype = DAMAGE_BURN
 			else
 				visible_message(SPAN_MFAUNA("\The [src]' horns glimmer, electricity arcing between them!"))
-				current_damtype = ELECTROCUTE
+				current_damtype = DAMAGE_SHOCK
 
 		else if(prob(5)) //earthquake spell
 			visible_message("<span class='cultannounce'>\The [src]' eyes begin to glow ominously as dust and debris in the area is kicked up in a light breeze.</span>")
@@ -208,9 +208,9 @@
 	. = ..()
 	if(!.)
 		return FALSE
-	if(special_attacks >= 6 && current_damtype != BRUTE)
+	if(special_attacks >= 6 && current_damtype != DAMAGE_BRUTE)
 		visible_message(SPAN_MFAUNA("The energy surrounding \the [src]'s horns dissipates."))
-		current_damtype = BRUTE
+		current_damtype = DAMAGE_BRUTE
 
 	if(health <= 150 && !phase3 && spellscast == 5) //begin phase 3, reset spell limit and heal
 		phase3_transition()
@@ -245,8 +245,8 @@
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/phase2/AttackingTarget()
 	. = ..()
-	if(current_damtype != BRUTE)
+	if(current_damtype != DAMAGE_BRUTE)
 		special_attacks++
-	
+
 /mob/living/simple_animal/hostile/retaliate/goat/king/Allow_Spacemove(check_drift = 0)
 	return 1

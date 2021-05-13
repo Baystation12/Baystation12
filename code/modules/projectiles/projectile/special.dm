@@ -3,7 +3,7 @@
 	icon_state = "ion"
 	fire_sound = 'sound/weapons/Laser.ogg'
 	damage = 0
-	damage_type = BURN
+	damage_type = DAMAGE_BURN
 	damage_flags = 0
 	nodamage = TRUE
 	var/heavy_effect_range = 1
@@ -37,7 +37,7 @@
 	icon_state = "ice_2"
 	fire_sound = 'sound/weapons/pulse3.ogg'
 	damage = 0
-	damage_type = BURN
+	damage_type = DAMAGE_BURN
 	damage_flags = 0
 	nodamage = TRUE
 	var/firing_temperature = 300
@@ -53,7 +53,7 @@
 	icon = 'icons/obj/meteor.dmi'
 	icon_state = "smallf"
 	damage = 0
-	damage_type = BRUTE
+	damage_type = DAMAGE_BRUTE
 	nodamage = TRUE
 
 	Bump(atom/A as mob|obj|turf|area, forced=0)
@@ -82,7 +82,7 @@
 	icon_state = "energy"
 	fire_sound = 'sound/effects/stealthoff.ogg'
 	damage = 0
-	damage_type = TOX
+	damage_type = DAMAGE_TOXIN
 	nodamage = TRUE
 
 	on_hit(var/atom/target, var/blocked = 0)
@@ -115,7 +115,7 @@
 	icon_state = "energy2"
 	fire_sound = 'sound/effects/stealthoff.ogg'
 	damage = 0
-	damage_type = TOX
+	damage_type = DAMAGE_TOXIN
 	nodamage = TRUE
 	var/decl/plantgene/gene = null
 
@@ -124,7 +124,7 @@
 	icon_state = "energy2"
 	fire_sound = 'sound/effects/stealthoff.ogg'
 	damage = 0
-	damage_type = TOX
+	damage_type = DAMAGE_TOXIN
 	nodamage = TRUE
 
 	on_hit(var/atom/target, var/blocked = 0)
@@ -153,7 +153,7 @@
 	damage = 1 // stop trying to murderbone with a fake gun dumbass!!!
 	embed = FALSE // nope
 	nodamage = TRUE
-	damage_type = PAIN
+	damage_type = DAMAGE_PAIN
 	damage_flags = 0
 	muzzle_type = /obj/effect/projectile/bullet/muzzle
 
@@ -161,7 +161,7 @@
 	name = "venom bolt"
 	icon_state = "venom"
 	damage = 5 //most damage is in the reagent
-	damage_type = TOX
+	damage_type = DAMAGE_TOXIN
 	damage_flags = 0
 
 /obj/item/projectile/venom/on_hit(atom/target, blocked, def_zone)
@@ -187,7 +187,7 @@
 /obj/item/projectile/hotgas
 	name = "gas vent"
 	icon_state = null
-	damage_type = BURN
+	damage_type = DAMAGE_BURN
 	damage_flags = 0
 	life_span = 3
 	silenced = TRUE

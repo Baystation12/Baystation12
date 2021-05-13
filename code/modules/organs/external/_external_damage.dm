@@ -87,7 +87,7 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 			if(prob(40))
 				owner.IgniteMob()
 		else
-			createwound(BURN, burn)
+			createwound(DAMAGE_BURN, burn)
 
 	//Initial pain spike
 	add_pain(0.6*burn + 0.4*brute)
@@ -180,7 +180,7 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 			break
 
 		// heal brute damage
-		if(W.damage_type == BURN)
+		if(W.damage_type == DAMAGE_BURN)
 			burn = W.heal_damage(burn)
 		else
 			brute = W.heal_damage(brute)

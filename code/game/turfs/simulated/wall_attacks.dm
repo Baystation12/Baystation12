@@ -120,7 +120,7 @@
 					attack_animation(user)
 				else
 					M.visible_message(SPAN_DANGER("[M.name] punches \the [src]!"), SPAN_DANGER("You punch \the [src]!"))
-					M.apply_damage(3, BRUTE, M.hand ? BP_L_HAND : BP_R_HAND)
+					M.apply_damage(3, DAMAGE_BRUTE, M.hand ? BP_L_HAND : BP_R_HAND)
 					playsound(src, pick(GLOB.punch_sound), 40)
 
 	else
@@ -399,9 +399,9 @@
 			return attack_hand(user)
 
 		var/received_damage = W.force
-		if (W.damtype == BRUTE && brute_armor)
+		if (W.damtype == DAMAGE_BRUTE && brute_armor)
 			received_damage /= brute_armor
-		else if (W.damtype == BURN && burn_armor)
+		else if (W.damtype == DAMAGE_BURN && burn_armor)
 			received_damage /= burn_armor
 		received_damage = round(received_damage)
 

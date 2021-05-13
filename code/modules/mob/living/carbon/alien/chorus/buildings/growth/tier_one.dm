@@ -64,6 +64,6 @@
 		if(istype(L, /mob/living/carbon/human))
 			var/target_foot = pick(list(BP_L_FOOT, BP_R_FOOT))
 			var/mob/living/carbon/human/H = L
-			H.apply_damage(damage, BRUTE, target_foot)
+			H.apply_damage(damage, DAMAGE_BRUTE, target_foot)
 		else
 			L.adjustBruteLoss(damage)

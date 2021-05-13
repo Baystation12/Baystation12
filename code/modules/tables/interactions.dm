@@ -43,7 +43,7 @@
 	return 1
 
 /obj/structure/table/bullet_act(obj/item/projectile/P)
-	if(!(P.damage_type == BRUTE || P.damage_type == BURN))
+	if(!(P.damage_type in list(DAMAGE_BRUTE, DAMAGE_BURN)))
 		return 0
 
 	if(take_damage(P.damage/2))

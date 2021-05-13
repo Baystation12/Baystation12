@@ -189,9 +189,9 @@
 	else
 		attacker.visible_message("<span class='danger'>[attacker] thrusts \his head into [target]'s skull!</span>")
 
-	var/armor = target.get_blocked_ratio(BP_HEAD, BRUTE, damage = 10)
-	target.apply_damage(damage, BRUTE, BP_HEAD, damage_flags)
-	attacker.apply_damage(10, BRUTE, BP_HEAD)
+	var/armor = target.get_blocked_ratio(BP_HEAD, DAMAGE_BRUTE, damage = 10)
+	target.apply_damage(damage, DAMAGE_BRUTE, BP_HEAD, damage_flags)
+	attacker.apply_damage(10, DAMAGE_BRUTE, BP_HEAD)
 
 	if(armor < 0.5 && target.headcheck(BP_HEAD) && prob(damage))
 		target.apply_effect(20, PARALYZE)
@@ -249,7 +249,7 @@
 	if(user.a_intent != I_HURT)
 		return 0 // Not trying to hurt them.
 
-	if(!W.edge || !W.force || W.damtype != BRUTE)
+	if(!W.edge || !W.force || W.damtype != DAMAGE_BRUTE)
 		return 0 //unsuitable weapon
 	user.visible_message("<span class='danger'>\The [user] begins to slit [affecting]'s throat with \the [W]!</span>")
 
@@ -266,7 +266,7 @@
 	if(istype(helmet) && (helmet.body_parts_covered & HEAD) && (helmet.item_flags & ITEM_FLAG_AIRTIGHT) && !isnull(helmet.max_pressure_protection))
 		var/datum/extension/armor/armor_datum = get_extension(helmet, /datum/extension/armor)
 		if(armor_datum)
-			damage_mod -= armor_datum.get_blocked(BRUTE, damage_flags, W.armor_penetration, W.force*1.5)
+			damage_mod -= armor_datum.get_blocked(DAMAGE_BRUTE, damage_flags, W.armor_penetration, W.force*1.5)
 
 	var/total_damage = 0
 	for(var/i in 1 to 3)
@@ -295,7 +295,7 @@
 	if(user.a_intent != I_HURT)
 		return 0 // Not trying to hurt them.
 
-	if(!W.edge || !W.force || W.damtype != BRUTE)
+	if(!W.edge || !W.force || W.damtype != DAMAGE_BRUTE)
 		return 0 //unsuitable weapon
 
 	var/obj/item/organ/external/O = affecting.get_organ(target_zone)

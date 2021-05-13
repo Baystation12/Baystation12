@@ -222,11 +222,11 @@
 		return
 
 	var/damage = Proj.damage
-	if(Proj.damtype == STUN)
+	if(Proj.damtype == DAMAGE_STUN)
 		damage = Proj.damage / 6
-	if(Proj.damtype == BRUTE)
+	if(Proj.damtype == DAMAGE_BRUTE)
 		damage = Proj.damage / 2
-	if(Proj.damtype == BURN)
+	if(Proj.damtype == DAMAGE_BURN)
 		damage = Proj.damage / 1.5
 	if(Proj.agony)
 		damage += Proj.agony / 6
@@ -380,7 +380,7 @@
 		if(3)
 			damage = 30
 
-	apply_damage(damage, BRUTE, damage_flags = DAM_EXPLODE)
+	apply_damage(damage, DAMAGE_BRUTE, damage_flags = DAM_EXPLODE)
 
 /mob/living/simple_animal/adjustBruteLoss(damage)
 	..()
@@ -449,7 +449,7 @@
 	..()
 	switch(get_bullet_impact_effect_type(def_zone))
 		if(BULLET_IMPACT_MEAT)
-			if(P.damtype == BRUTE)
+			if(P.damtype == DAMAGE_BRUTE)
 				var/hit_dir = get_dir(P.starting, src)
 				var/obj/effect/decal/cleanable/blood/B = blood_splatter(get_step(src, hit_dir), src, 1, hit_dir)
 				B.icon_state = pick("dir_splatter_1","dir_splatter_2")

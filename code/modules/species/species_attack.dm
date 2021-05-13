@@ -170,7 +170,7 @@
 	attack_name = "starborn strike"
 
 /datum/unarmed_attack/punch/starborn/get_damage_type()
-	return BURN
+	return DAMAGE_BURN
 
 /datum/unarmed_attack/bite/venom
 	attack_verb = list("bit", "sank their fangs into")

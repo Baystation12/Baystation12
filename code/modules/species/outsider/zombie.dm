@@ -293,7 +293,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 	var/vuln = 1 - target.get_blocked_ratio(zone, TOX, damage_flags = DAM_BIO) //Are they protected from bites?
 	if (vuln > 0.05)
 		if (prob(vuln * 100)) //Protective infection chance
-			if (prob(min(100 - target.get_blocked_ratio(zone, BRUTE) * 100, 70))) //General infection chance
+			if (prob(min(100 - target.get_blocked_ratio(zone, DAMAGE_BRUTE) * 100, 70))) //General infection chance
 				target.reagents.add_reagent(/datum/reagent/zombie, 1) //Infect 'em
 
 
@@ -497,7 +497,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 		if (isspecies(target, SPECIES_ZOMBIE)) //Just in case they turn whilst being eaten
 			return
 
-		target.apply_damage(rand(50, 60), BRUTE, BP_CHEST)
+		target.apply_damage(rand(50, 60), DAMAGE_BRUTE, BP_CHEST)
 		target.adjustBruteLoss(20)
 		target.update_surgery() //Update broken ribcage sprites etc.
 

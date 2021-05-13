@@ -30,7 +30,7 @@
 	var/mag_insert_sound = 'sound/weapons/guns/interaction/pistol_magin.ogg'
 	var/mag_remove_sound = 'sound/weapons/guns/interaction/pistol_magout.ogg'
 	var/can_special_reload = TRUE //Whether or not we can tactical/speed reload
-	
+
 	var/is_jammed = 0           //Whether this gun is jammed
 	var/jam_chance = 0          //Chance it jams on fire
 	//TODO generalize ammo icon states for guns
@@ -92,7 +92,7 @@
 		var/obj/item/organ/external/E = H.get_organ(zone)
 		if(E)
 			chambered.put_residue_on(E)
-			H.apply_damage(3, BURN, used_weapon = "Gunpowder Burn", given_organ = E)
+			H.apply_damage(3, DAMAGE_BURN, used_weapon = "Gunpowder Burn", given_organ = E)
 
 /obj/item/gun/projectile/handle_click_empty()
 	..()
@@ -162,7 +162,7 @@
 								return
 							//Experienced gets a 0.5 second delay, master gets a 0.25 second delay
 							if(do_after(user, user.get_skill_value(SKILL_WEAPONS) == SKILL_PROF ? PROF_SPD_RELOAD : EXP_SPD_RELOAD, src))
-								ammo_magazine.update_icon()	
+								ammo_magazine.update_icon()
 								ammo_magazine.dropInto(user.loc)
 								user.visible_message(SPAN_WARNING("\The [user] reloads \the [src] with \the [AM]!"),
 													 SPAN_WARNING("You speed reload \the [src] with \the [AM]!"))
@@ -310,4 +310,4 @@
 	if(usr.stat || usr.restrained()) return
 
 	unload_ammo(usr)
-*/ 
+*/

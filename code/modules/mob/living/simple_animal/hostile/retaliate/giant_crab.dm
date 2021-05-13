@@ -26,7 +26,7 @@
 	return_damage_max = 5
 	harm_intent_damage = 1
 	natural_armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
+		melee = ARMOR_MELEE_RESISTANT,
 		bullet = ARMOR_BALLISTIC_PISTOL
 		)
 	ability_cooldown = 2 MINUTES
@@ -53,7 +53,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/giant_crab/attack_hand(mob/living/carbon/human/H)
 	. = ..()
-	reflect_unarmed_damage(H, BRUTE, "armoured carapace")
+	reflect_unarmed_damage(H, DAMAGE_BRUTE, "armoured carapace")
 
 /mob/living/simple_animal/hostile/retaliate/giant_crab/Life()
 	. = ..()
@@ -62,7 +62,7 @@
 
 	if(!.)
 		return FALSE
-	
+
 	if((health > maxHealth / 1.5) && enemies.len && prob(10))
 		if(victim)
 			release_grab()
@@ -105,7 +105,7 @@
 			release_grab()
 			return
 		visible_message(SPAN_DANGER("\The [src] [pick(grab_desc)] \the [victim] in its pincer!"))
-		victim.apply_damage(grab_damage, BRUTE, BP_CHEST, DAM_EDGE, used_weapon = "crab's pincer")
+		victim.apply_damage(grab_damage, DAMAGE_BRUTE, BP_CHEST, DAM_EDGE, used_weapon = "crab's pincer")
 
 /mob/living/simple_animal/hostile/retaliate/giant_crab/proc/release_grab()
 	if(victim)

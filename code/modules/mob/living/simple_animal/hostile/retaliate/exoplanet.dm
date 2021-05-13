@@ -200,13 +200,13 @@
 
 /obj/item/natural_weapon/charbaby
 	name = "scalding hide"
-	damtype = BURN
+	damtype = DAMAGE_BURN
 	force = 5
 	attack_verb = list("singed")
 
 /mob/living/simple_animal/hostile/retaliate/beast/charbaby/attack_hand(mob/living/carbon/human/H)
 	. = ..()
-	reflect_unarmed_damage(H, BURN, "amorphous mass")
+	reflect_unarmed_damage(H, DAMAGE_BURN, "amorphous mass")
 
 /mob/living/simple_animal/hostile/retaliate/beast/charbaby/AttackingTarget()
 	. = ..()

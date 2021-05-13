@@ -306,7 +306,7 @@
 		user.do_attack_animation(src)
 
 /obj/effect/cultwall/bullet_act(var/obj/item/projectile/Proj)
-	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
+	if(!(Proj.damage_type in list(DAMAGE_BRUTE, DAMAGE_BURN)))
 		return
 	take_damage(Proj.damage)
 	..()

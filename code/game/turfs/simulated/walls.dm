@@ -106,9 +106,9 @@
 	if(Proj.ricochet_sounds && prob(15))
 		playsound(src, pick(Proj.ricochet_sounds), 100, 1)
 
-	if(Proj.damage_type == BURN && burn_armor)
+	if(Proj.damage_type == DAMAGE_BURN && burn_armor)
 		proj_damage /= burn_armor
-	else if(Proj.damage_type == BRUTE && brute_armor)
+	else if(Proj.damage_type == DAMAGE_BRUTE && brute_armor)
 		proj_damage /= brute_armor
 	proj_damage = round(proj_damage)
 

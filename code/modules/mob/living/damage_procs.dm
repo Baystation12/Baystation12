@@ -7,7 +7,7 @@
 	Returns
 	standard 0 if fail
 */
-/mob/living/proc/apply_damage(var/damage = 0,var/damagetype = BRUTE, var/def_zone = null, var/damage_flags = 0, var/used_weapon = null, var/armor_pen, var/silent = FALSE)
+/mob/living/proc/apply_damage(var/damage = 0,var/damagetype = DAMAGE_BRUTE, var/def_zone = null, var/damage_flags = 0, var/used_weapon = null, var/armor_pen, var/silent = FALSE)
 	if(!damage)
 		return FALSE
 
@@ -19,23 +19,23 @@
 		return FALSE
 
 	switch(damagetype)
-		if(BRUTE)
+		if(DAMAGE_BRUTE)
 			adjustBruteLoss(damage)
-		if(BURN)
+		if(DAMAGE_BURN)
 			if(MUTATION_COLD_RESISTANCE in mutations)
 				damage = 0
 			adjustFireLoss(damage)
-		if(TOX)
+		if(DAMAGE_TOXIN)
 			adjustToxLoss(damage)
-		if(OXY)
+		if(DAMAGE_OXY)
 			adjustOxyLoss(damage)
-		if(CLONE)
+		if(DAMAGE_GENETIC)
 			adjustCloneLoss(damage)
-		if(PAIN)
+		if(DAMAGE_PAIN)
 			adjustHalLoss(damage)
-		if(ELECTROCUTE)
+		if(DAMAGE_SHOCK)
 			electrocute_act(damage, used_weapon, 1, def_zone)
-		if(IRRADIATE)
+		if(DAMAGE_RADIATION)
 			apply_radiation(damage)
 
 	updatehealth()
@@ -51,12 +51,12 @@
 
 
 /mob/living/proc/apply_damages(var/brute = 0, var/burn = 0, var/tox = 0, var/oxy = 0, var/clone = 0, var/halloss = 0, var/def_zone = null, var/damage_flags = 0)
-	if(brute)	apply_damage(brute, BRUTE, def_zone)
-	if(burn)	apply_damage(burn, BURN, def_zone)
-	if(tox)		apply_damage(tox, TOX, def_zone)
-	if(oxy)		apply_damage(oxy, OXY, def_zone)
-	if(clone)	apply_damage(clone, CLONE, def_zone)
-	if(halloss) apply_damage(halloss, PAIN, def_zone)
+	if(brute)	apply_damage(brute, DAMAGE_BRUTE, def_zone)
+	if(burn)	apply_damage(burn, DAMAGE_BURN, def_zone)
+	if(tox)		apply_damage(tox, DAMAGE_TOXIN, def_zone)
+	if(oxy)		apply_damage(oxy, DAMAGE_OXY, def_zone)
+	if(clone)	apply_damage(clone, DAMAGE_GENETIC, def_zone)
+	if(halloss) apply_damage(halloss, DAMAGE_PAIN, def_zone)
 	return TRUE
 
 

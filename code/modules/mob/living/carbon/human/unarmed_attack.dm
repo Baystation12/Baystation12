@@ -23,8 +23,8 @@ var/global/list/sparring_attack_cache = list()
 
 /datum/unarmed_attack/proc/get_damage_type()
 	if(deal_halloss)
-		return PAIN
-	return BRUTE
+		return DAMAGE_PAIN
+	return DAMAGE_BRUTE
 
 /datum/unarmed_attack/proc/get_sparring_variant()
 	if(sparring_variant_type)
@@ -56,7 +56,7 @@ var/global/list/sparring_attack_cache = list()
 		return
 
 	var/stun_chance = rand(0, 100)
-	var/armour = target.get_blocked_ratio(zone, BRUTE, damage = attack_damage)
+	var/armour = target.get_blocked_ratio(zone, DAMAGE_BRUTE, damage = attack_damage)
 
 	if(attack_damage >= 5 && armour < 1 && !(target == user) && stun_chance <= attack_damage * 5) // 25% standard chance
 		switch(zone) // strong punches can have effects depending on where they hit

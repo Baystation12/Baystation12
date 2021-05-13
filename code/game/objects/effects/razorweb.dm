@@ -139,7 +139,7 @@
 		visible_message(SPAN_DANGER("\The [L] blunders into \the [src]!"))
 
 	var/severed = FALSE
-	var/armour_prob = prob(100 * L.get_blocked_ratio(null, BRUTE, damage = ARMOR_MELEE_RESISTANT))
+	var/armour_prob = prob(100 * L.get_blocked_ratio(null, DAMAGE_BRUTE, damage = ARMOR_MELEE_RESISTANT))
 	if(H && prob(35))
 		var/obj/item/organ/external/E
 		for(var/thing in shuffle(H.organs_by_name))

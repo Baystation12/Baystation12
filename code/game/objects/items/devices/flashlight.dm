@@ -306,7 +306,7 @@
 /obj/item/device/flashlight/flare/proc/update_damage()
 	if(on)
 		force = on_damage
-		damtype = BURN
+		damtype = DAMAGE_BURN
 	else
 		force = initial(force)
 		damtype = initial(damtype)

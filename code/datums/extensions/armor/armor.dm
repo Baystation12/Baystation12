@@ -75,27 +75,27 @@
 /proc/get_armor_key(damage_type, damage_flags)
 	var/key
 	switch(damage_type)
-		if(BRUTE)
+		if(DAMAGE_BRUTE)
 			if(damage_flags & DAM_BULLET)
 				key = "bullet"
 			else if(damage_flags & DAM_EXPLODE)
 				key = "bomb"
 			else
 				key = "melee"
-		if(BURN)
+		if(DAMAGE_BURN)
 			if(damage_flags & DAM_LASER)
 				key = "laser"
 			else if(damage_flags & DAM_EXPLODE)
 				key = "bomb"
 			else
 				key = "energy"
-		if(TOX)
+		if(DAMAGE_TOXIN)
 			if(damage_flags & DAM_BIO)
 				key = "bio" // Otherwise just not blocked by default.
-		if(IRRADIATE)
+		if(DAMAGE_RADIATION)
 			key = "rad"
-		if(PSIONIC)
-			key = PSIONIC
+		if(DAMAGE_PSIONIC)
+			key = DAMAGE_PSIONIC
 	return key
 
 /datum/extension/armor/toggle

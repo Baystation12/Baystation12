@@ -83,7 +83,7 @@
 	var/obj/item/organ/external/E = tool
 	user.visible_message("<span class='warning'> [user]'s hand slips, damaging [target]'s [E.amputation_point]!</span>", \
 	"<span class='warning'> Your hand slips, damaging [target]'s [E.amputation_point]!</span>")
-	target.apply_damage(10, BRUTE, null, damage_flags=DAM_SHARP)
+	target.apply_damage(10, DAMAGE_BRUTE, null, damage_flags=DAM_SHARP)
 
 //////////////////////////////////////////////////////////////////
 //	 limb connecting surgery step
@@ -134,7 +134,7 @@
 	var/obj/item/organ/external/E = target.get_organ(target_zone)
 	user.visible_message("<span class='warning'> [user]'s hand slips, damaging [target]'s [E.amputation_point]!</span>", \
 	"<span class='warning'> Your hand slips, damaging [target]'s [E.amputation_point]!</span>")
-	target.apply_damage(10, BRUTE, null, damage_flags=DAM_SHARP)
+	target.apply_damage(10, DAMAGE_BRUTE, null, damage_flags=DAM_SHARP)
 
 //////////////////////////////////////////////////////////////////
 //	 robotic limb attachment surgery step
@@ -191,4 +191,4 @@
 /decl/surgery_step/limb/mechanize/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		user.visible_message("<span class='warning'> [user]'s hand slips, damaging [target]'s flesh!</span>", \
 		"<span class='warning'> Your hand slips, damaging [target]'s flesh!</span>")
-		target.apply_damage(10, BRUTE, null, damage_flags=DAM_SHARP)
+		target.apply_damage(10, DAMAGE_BRUTE, null, damage_flags=DAM_SHARP)

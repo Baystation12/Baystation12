@@ -163,7 +163,7 @@
 			to_chat(user, SPAN_NOTICE("You patch some damage in \the [src] with \the [W]!"))
 			take_damage(-3)
 			return TRUE
-	else if((W.damtype == BRUTE || W.damtype == BURN) && (W.can_puncture() || W.force > 10))
+	else if((W.damtype in list(DAMAGE_BRUTE, DAMAGE_BURN)) && (W.can_puncture() || W.force > 10))
 		..()
 		if(hit(W.force))
 			visible_message("<span class='danger'>[user] pierces [src] with [W]!</span>")

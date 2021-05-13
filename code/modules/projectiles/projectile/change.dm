@@ -2,7 +2,7 @@
 	name = "bolt of change"
 	icon_state = "ice_1"
 	damage = 0
-	damage_type = BURN
+	damage_type = DAMAGE_BURN
 	damage_flags = 0
 	nodamage = TRUE
 

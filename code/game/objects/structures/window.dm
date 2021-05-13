@@ -410,7 +410,7 @@
 
 	else if (user.a_intent != I_HELP && !istype(W, /obj/item/rcd) && !istype(W, /obj/item/device/paint_sprayer))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		if(!istype(W, /obj/item/natural_weapon) && (W.damtype == BRUTE || W.damtype == BURN))
+		if(!istype(W, /obj/item/natural_weapon) && (W.damtype in list(DAMAGE_BRUTE, DAMAGE_BURN)))
 			user.do_attack_animation(src)
 			hit(W.force, user, W)
 			return
@@ -428,12 +428,12 @@
 		G.affecting.visible_message("<span class='danger'>[G.assailant] bashes [G.affecting] against \the [src]!</span>")
 		if (prob(50))
 			G.affecting.Weaken(1)
-		G.affecting.apply_damage(10, BRUTE, def_zone, used_weapon = src)
+		G.affecting.apply_damage(10, DAMAGE_BRUTE, def_zone, used_weapon = src)
 		hit(25, G.assailant, G.affecting)
 	else
 		G.affecting.visible_message("<span class='danger'>[G.assailant] crushes [G.affecting] against \the [src]!</span>")
 		G.affecting.Weaken(5)
-		G.affecting.apply_damage(20, BRUTE, def_zone, used_weapon = src)
+		G.affecting.apply_damage(20, DAMAGE_BRUTE, def_zone, used_weapon = src)
 		hit(50, G.assailant, G.affecting)
 	return TRUE
 

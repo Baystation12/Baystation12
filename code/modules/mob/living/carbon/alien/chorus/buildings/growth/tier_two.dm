@@ -163,7 +163,7 @@
 	embed = TRUE
 	weaken = 1
 	icon_state = "sliver"
-	damage_type = BRUTE
+	damage_type = DAMAGE_BRUTE
 	damage_flags = 0
 	var/datum/chorus/ignore
 

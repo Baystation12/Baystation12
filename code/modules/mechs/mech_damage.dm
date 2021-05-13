@@ -26,7 +26,7 @@
 					return AR
 
 	return def_zone //Careful with effects, mechs shouldn't be stunned
-	
+
 /mob/living/exosuit/hitby(atom/movable/AM, var/datum/thrownthing/TT)
 	if(LAZYLEN(pilots) && (!hatch_closed || !prob(body.pilot_coverage)))
 		var/mob/living/pilot = pick(pilots)
@@ -74,29 +74,29 @@
 			return body
 
 
-/mob/living/exosuit/apply_damage(var/damage = 0,var/damagetype = BRUTE, var/def_zone = null, var/damage_flags = 0, var/used_weapon = null, var/armor_pen, var/silent = FALSE)
+/mob/living/exosuit/apply_damage(var/damage = 0,var/damagetype = DAMAGE_BRUTE, var/def_zone = null, var/damage_flags = 0, var/used_weapon = null, var/armor_pen, var/silent = FALSE)
 	if(!damage)
 		return 0
 
 	var/list/after_armor = modify_damage_by_armor(def_zone, damage, damagetype, damage_flags, src, armor_pen, TRUE)
 	damage = after_armor[1]
 	damagetype = after_armor[2]
-	
+
 	if(!damage)
 		return 0
 
 	var/target = zoneToComponent(def_zone)
 	//Only 3 types of damage concern mechs and vehicles
 	switch(damagetype)
-		if(BRUTE)
+		if(DAMAGE_BRUTE)
 			adjustBruteLoss(damage, target)
-		if(BURN)
+		if(DAMAGE_BURN)
 			adjustFireLoss(damage, target)
-		if(IRRADIATE)
+		if(DAMAGE_RADIATION)
 			for(var/mob/living/pilot in pilots)
-				pilot.apply_damage(damage, IRRADIATE, def_zone, damage_flags, used_weapon)
+				pilot.apply_damage(damage, DAMAGE_RADIATION, def_zone, damage_flags, used_weapon)
 
-	if((damagetype == BRUTE || damagetype == BURN) && prob(25+(damage*2)))
+	if((damagetype in list(DAMAGE_BRUTE, DAMAGE_BURN)) && prob(25+(damage*2)))
 		sparks.set_up(3,0,src)
 		sparks.start()
 	updatehealth()
@@ -111,7 +111,7 @@
 	if(!hatch_closed || (body.pilot_coverage < 100)) //Open, environment is the source
 		return .
 	var/list/after_armor = modify_damage_by_armor(null, ., IRRADIATE, DAM_DISPERSED, src, 0, TRUE)
-	return after_armor[1]	
+	return after_armor[1]
 
 /mob/living/exosuit/getFireLoss()
 	var/total = 0
@@ -129,7 +129,7 @@
 
 /mob/living/exosuit/emp_act(var/severity)
 
-	var/ratio = get_blocked_ratio(null, BURN, null, (4-severity) * 20)
+	var/ratio = get_blocked_ratio(null, DAMAGE_BURN, null, (4-severity) * 20)
 
 	if(ratio >= 0.5)
 		for(var/mob/living/m in pilots)
@@ -147,6 +147,6 @@
 			for(var/thing in pilots)
 				var/mob/pilot = thing
 				pilot.emp_act(severity)
-				
+
 /mob/living/exosuit/get_bullet_impact_effect_type(def_zone)
 	return BULLET_IMPACT_METAL

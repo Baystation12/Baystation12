@@ -33,7 +33,7 @@
 					return /datum/wound/puncture/small
 		if(BRUISE)
 			return /datum/wound/bruise
-		if(BURN, LASER)
+		if(DAMAGE_BURN, LASER)
 			switch(damage)
 				if(50 to INFINITY)
 					return /datum/wound/burn/carbonised
@@ -221,7 +221,7 @@ datum/wound/puncture/massive
 
 /** BURNS **/
 /datum/wound/burn
-	damage_type = BURN
+	damage_type = DAMAGE_BURN
 	max_bleeding_stage = 0
 
 /datum/wound/burn/bleeding()
@@ -293,7 +293,7 @@ datum/wound/puncture/massive
 					"scarred stump" = 0
 				)
 		if(DROPLIMB_BURN)
-			damage_type = BURN
+			damage_type = DAMAGE_BURN
 			stages = list(
 				"mangled charred stump" = damage_amt*1.3,
 				"charred stump" = damage_amt,
