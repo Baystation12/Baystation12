@@ -1,4 +1,0 @@
-author: GeneralCamo
-delete-after: true
-changes:
-  - tweak: Cleaned up access permissions and renamed a few to make them more clear.
