@@ -239,3 +239,12 @@
 	breathed_product = /datum/reagent/carbon_monoxide
 	symbol_html = "CO"
 	symbol = "CO"
+
+/decl/xgm_gas/boron
+	id = GAS_BORON
+	name = "Boron"
+	specific_heat = 21	// J/(mol*K)
+	molar_mass = 0.011	// kg/mol
+	breathed_product = /datum/reagent/toxin/boron
+	symbol_html = "B"
+	symbol = "B"
