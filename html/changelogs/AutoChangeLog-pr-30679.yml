@@ -1,0 +1,5 @@
+author: Mucker
+delete-after: true
+changes:
+  - tweak: Invisible hydroponics trays will no longer display their machine description
+      on examine.
