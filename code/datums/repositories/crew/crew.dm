@@ -60,7 +60,7 @@ var/global/datum/repository/crew/crew_repository = new()
 				var/list/crewmemberData = list("sensor_type"=C.sensor_mode, "stat"=H.stat, "area"="", "x"=-1, "y"=-1, "z"=-1, "ref"="\ref[H]")
 				if(!(run_queues(H, C, pos, crewmemberData) & MOD_SUIT_SENSORS_REJECTED))
 					crewmembers[++crewmembers.len] = crewmemberData
-					if (crewmemberData["alert"])
+					if (crewmemberData["alert"] && !istype(istype(H.loc, /obj/structure/closet/body_bag) ? H.loc.loc : H.loc, /obj/structure/morgue))
 						cache_data_alert[num2text(z_level)] = TRUE
 
 	crewmembers = sortByKey(crewmembers, "name")
