@@ -76,11 +76,12 @@
 	var/scrubber_icon = "scrubber"
 	if(welded)
 		scrubber_icon += "weld"
+	else if (!powered() || !use_power)
+		scrubber_icon += "off"
+	else if(scrubbing == SCRUBBER_SIPHON)
+		scrubber_icon += "in"
 	else
-		if(!powered())
-			scrubber_icon += "off"
-		else
-			scrubber_icon += "[use_power ? "[scrubbing ? "on" : "in"]" : "off"]"
+		scrubber_icon += "on"
 
 	overlays += icon_manager.get_atmos_icon("device", , , scrubber_icon)
 
