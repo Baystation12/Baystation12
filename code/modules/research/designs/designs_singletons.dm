@@ -23,7 +23,7 @@
 	materials = list(MATERIAL_STEEL = 500, MATERIAL_ALUMINIUM = 500, MATERIAL_PLASTIC = 500)
 	build_path = /obj/item/storage/backpack/chameleon/sydie_kit
 	sort_string = "VASBA"
-	
+
 /datum/design/item/weapon/storage/box/freezer
 	name = "Portable Freezer"
 	desc = "This nifty shock-resistant device will keep your 'groceries' nice and non-spoiled."
@@ -65,3 +65,11 @@
 	materials = list(MATERIAL_STEEL = 7500, MATERIAL_ALUMINIUM = 5000, MATERIAL_DIAMOND = 2000)
 	build_path = /obj/item/borg/upgrade/uncertified/party
 	category = "Cyborg Upgrade Modules"
+
+/datum/design/item/plant_scanner
+	name = "Plant Analyzer"
+	desc = "A hand-held botanical scanner used to analyze plants."
+	id = "plant_scanner"
+	req_tech = list(TECH_MAGNET = 2, TECH_BIO = 2)
+	materials = list(MATERIAL_STEEL = 200, MATERIAL_GLASS = 100, MATERIAL_PLASTIC = 150)
+	build_path = /obj/item/device/scanner/plant
