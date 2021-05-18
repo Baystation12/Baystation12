@@ -116,5 +116,9 @@
 	path = /obj/item/magnetic_ammo/skrell/slug
 
 /datum/fabricator_recipe/arms_ammo/hidden/stripperclip
-	name = "ammunition (stripper clip)"
+	name = "ammunition (rifle stripper clip)"
 	path = /obj/item/ammo_magazine/speedloader/clip
+
+/datum/fabricator_recipe/arms_ammo/hidden/pistolstripperclip
+	name = "ammunition (pistol stripper clip)"
+	path = /obj/item/ammo_magazine/speedloader/pclip
