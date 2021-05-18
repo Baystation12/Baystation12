@@ -147,7 +147,7 @@ Class Procs:
 /zone/proc/tick()
 
 	//Handle melting stuff
-	if (air.temperature >= PHORON_MINIMUM_BURN_TEMPERATURE)
+	if (air.temperature >= PHORON_MINIMUM_BURN_TEMPERATURE && contents.len < 10000)
 		melttemp = TRUE
 		for (var/turf/simulated/checkit in contents)
 			if (istype(checkit))
