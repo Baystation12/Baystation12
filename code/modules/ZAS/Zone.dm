@@ -52,6 +52,7 @@ Class Procs:
 	var/list/graphic_add = list()
 	var/list/graphic_remove = list()
 	var/last_air_temperature = TCMB
+	var/melttemp = FALSE
 
 /zone/New()
 	SSair.add_zone(src)
@@ -144,6 +145,18 @@ Class Procs:
 	air.group_multiplier = contents.len+1
 
 /zone/proc/tick()
+
+	//Handle melting stuff
+	if (air.temperature >= PHORON_MINIMUM_BURN_TEMPERATURE)
+		melttemp = TRUE
+		for (var/turf/simulated/checkit in contents)
+			if (istype(checkit))
+				checkit.check_meltables(FALSE)
+	else if (melttemp)
+		melttemp = FALSE
+		for (var/turf/simulated/checkit in contents)
+			if (!istype(checkit))
+				checkit.check_meltables(TRUE)
 
 	// Update fires.
 	if(air.temperature >= PHORON_FLASHPOINT && !(src in SSair.active_fire_zones) && air.check_combustability() && contents.len)

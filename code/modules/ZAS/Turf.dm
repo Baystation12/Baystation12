@@ -289,3 +289,152 @@
 	if(!air) air = new/datum/gas_mixture
 	air.copy_from(zone.air)
 	air.group_multiplier = 1
+
+//For meltables
+obj/proc/can_melt(temp)
+	return 0
+
+/obj/machinery/portable_atmospherics/canister/can_melt(temp)
+	if(temp > temperature_resistance)
+		return 1
+	return 0
+
+/obj/structure/grille/can_melt(temp)
+	if(temp > material.melting_point)
+		return 1
+	return 0
+
+/obj/structure/wall_frame/can_melt(temp)
+	if(temp > material.melting_point)
+		return 1
+	return 0
+
+/obj/structure/girder/can_melt(temp)
+	if(temp > SSmaterials.get_material_by_name(MATERIAL_STEEL).melting_point)
+		return 1
+	return 0
+
+/obj/machinery/door/firedoor/can_melt(temp)
+	if (temp > (SSmaterials.get_material_by_name(MATERIAL_STEEL).melting_point + 400))
+		return 1
+	return 0
+
+//HEAT DAMAGE PROCS*********************************************************************************************************************************************************
+
+atom/proc/heat_damage(temp)
+	return
+
+/turf/simulated/floor/heat_damage(temp)
+	var/material/default_material = SSmaterials.get_material_by_name(MATERIAL_STEEL)
+	if (temp > default_material.melting_point)
+		fire_act(null, temp, null)
+
+/obj/structure/window/heat_damage(temp)
+	for(var/obj/machinery/door/protector in loc.contents)
+		if (istype(protector, /obj/machinery/door/blast) || istype(protector, /obj/machinery/door/firedoor))
+			if (protector.density == 1)//YOU SAVED ME! OH, MY HERO!
+				return
+	var/melting_point = material.melting_point
+	if (reinf_material)
+		melting_point += 0.25*reinf_material.melting_point
+	if (temp > melting_point)
+		playsound(loc, 'sound/effects/Glasshit.ogg', 50, 1)
+		take_damage(temp)
+
+/obj/machinery/portable_atmospherics/canister/heat_damage(temp)
+	if(temp > temperature_resistance)
+		health -= 5
+		healthcheck()
+
+/turf/simulated/wall/heat_damage(temp)
+	burn(temp)
+	if (temp > material.melting_point)
+		playsound(src, 'sound/items/Welder.ogg', 50, 1)
+		take_damage(log(RAND_F(0.9, 1.1) * (temp - material.melting_point)))
+
+/obj/structure/wall_frame/heat_damage(temp)
+	if (temp > material.melting_point)
+		take_damage(log(RAND_F(0.9, 1.1) * (temp - material.melting_point)))
+
+/obj/structure/girder/heat_damage(temp)
+	var/material/default_material = SSmaterials.get_material_by_name(MATERIAL_STEEL)
+	if (temp > default_material.melting_point)
+		take_damage(log(RAND_F(0.9, 1.1) * (temp - default_material.melting_point)))
+
+/obj/structure/grille/heat_damage(temp)
+	var/material/default_material = SSmaterials.get_material_by_name(MATERIAL_STEEL)
+	if (temp > default_material.melting_point)
+		take_damage(log(RAND_F(0.9, 1.1) * (temp - default_material.melting_point)))
+
+/obj/machinery/door/firedoor/heat_damage(temp)
+	var/material/default_material = SSmaterials.get_material_by_name(MATERIAL_STEEL)
+	if (temp > (default_material.melting_point) + 400)
+		take_damage(log(RAND_F(0.9, 1.1) * (temp - default_material.melting_point)))
+
+/obj/machinery/door/firedoor/take_damage(damage)
+	health -= damage
+	if (health <= 0)
+		stat |= BROKEN
+		deconstruct()
+
+//HEAT DAMAGE PROCS NO MORE*********************************************************************************************************************************************************
+
+turf/simulated
+	var/list/meltable_turfs = list()
+	var/list/meltable_nonturfs = list()
+
+//called by the zone every time the air contents change AND the temperature is higher than usual, we check for turfs here and determine if we need to start processing
+turf/simulated/proc/check_meltables(stop)
+	meltable_turfs.Cut()
+	if (stop)
+		meltable_nonturfs.Cut()
+		STOP_PROCESSING(SSturf, src)
+		return
+
+	if (zone.air.temperature > SSmaterials.get_material_by_name(MATERIAL_STEEL).melting_point && !is_plating())
+		meltable_turfs |= src
+
+	var/turf/cardinal = CardinalTurfs(FALSE)
+	for(var/turf/simulated/meltable_turf in cardinal)
+		if (istype(meltable_turf, /turf/simulated/wall))
+			meltable_turfs |= meltable_turf
+	check_meltable_nonturfs()
+	if (!is_processing && (meltable_turfs.len != 0 || meltable_nonturfs.len != 0))
+		START_PROCESSING(SSturf, src)
+
+turf/simulated/proc/check_meltable_nonturfs()
+	meltable_nonturfs.Cut()
+	var/datum/gas_mixture/air_contents = return_air()
+	for(var/obj/meltable in contents)
+		if (meltable.can_melt(air_contents.temperature))
+			meltable_nonturfs |= meltable
+
+	var/turf/cardinal = CardinalTurfs(FALSE)
+	for(var/turf/T in cardinal)
+
+		for(var/obj/structure/window/meltable in T.contents)
+			meltable_nonturfs |= meltable
+		for(var/obj/machinery/door/firedoor/meltable in T.contents)
+			if (meltable.can_melt(air_contents.temperature) && meltable.density)
+				meltable_nonturfs |= meltable
+
+turf/simulated/Process()
+	if (!zone)// something went... uh... wrong
+		meltable_turfs.Cut()
+		meltable_nonturfs.Cut()
+		STOP_PROCESSING(SSturf, src)
+		return
+
+	var/datum/gas_mixture/air_contents = return_air()
+
+	check_meltable_nonturfs()//we need to keep track of nonturfs in case they moved, the zone isn't going to call check_meltables for them since they don't change anything
+
+	if (meltable_turfs.len == 0 && meltable_nonturfs.len == 0)
+		STOP_PROCESSING(SSturf, src)
+		return
+
+	for(var/turf/meltable in meltable_turfs)
+		meltable.heat_damage(air_contents.temperature)
+
+	for(var/obj/meltable in meltable_nonturfs)
+		meltable.heat_damage(air_contents.temperature)
