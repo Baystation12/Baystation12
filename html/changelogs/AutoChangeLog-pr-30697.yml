@@ -1,4 +1,0 @@
-author: GeneralCamo
-delete-after: true
-changes:
-  - bugfix: Scrubbers now use the correct sprites when siphoning.
