@@ -43,7 +43,11 @@ GLOBAL_DATUM_INIT(renegades, /datum/antagonist/renegade, new)
 		/obj/item/gun/projectile/shotgun/doublebarrel/sawn,
 		/obj/item/gun/projectile/pistol/magnum_pistol,
 		/obj/item/gun/projectile/revolver/holdout,
-		/obj/item/gun/projectile/pistol/throwback
+		/obj/item/gun/projectile/pistol/throwback,
+		/obj/item/gun/energy/xray/pistol,
+		/obj/item/gun/energy/toxgun,
+		/obj/item/gun/energy/incendiary_laser,
+		/obj/item/gun/projectile/pistol/magnum_pistol
 		)
 
 /datum/antagonist/renegade/create_objectives(var/datum/mind/player)
