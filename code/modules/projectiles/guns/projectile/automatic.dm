@@ -328,7 +328,7 @@
 
 /obj/item/gun/projectile/automatic/battlerifle
 	name = "battle rifle"
-	desc = "The battle rifle hasn't changed much since it's inception in the mid 20th century, it's built specifically to work. You can't tell if this one was even made this century."
+	desc = "The battle rifle hasn't changed much since its inception in the mid 20th century. Built to last in the toughest conditions, you can't tell if this one was even made this century."
 	icon = 'icons/obj/guns/battlerifle.dmi'
 	icon_state = "battlerifle"
 	item_state = null
