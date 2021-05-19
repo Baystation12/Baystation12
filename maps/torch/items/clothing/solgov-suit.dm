@@ -306,7 +306,6 @@
 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov
 	name = "expeditionary winter coat"
 	icon_state = "coatec"
-	item_state = "coatec"
 	icon = 'maps/torch/icons/obj/obj_suit_solgov.dmi'
 	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA,ACCESSORY_SLOT_RANK)
@@ -314,13 +313,11 @@
 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/army
 	name = "army winter coat"
 	icon_state = "coatar"
-	item_state = "coatar"
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA,ACCESSORY_SLOT_RANK)
 
 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet
 	name = "fleet winter coat"
 	icon_state = "coatfl"
-	item_state = "coatfl"
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
 
 /obj/item/clothing/suit/storage/jacket/solgov/fleet
