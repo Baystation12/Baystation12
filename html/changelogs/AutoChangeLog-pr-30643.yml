@@ -1,0 +1,8 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Ghosts will no longer break skillchecks for helm controls.
+  - tweak: Ship helm consoles now only allow a single person to use manual control
+      at a time, including viewing the overmap through the helm.
+  - rscadd: Messages are now displayed whenever another mob takes control of a helm
+      control, to make it outwardly obvious who's skills are used to calculate flight.
