@@ -710,29 +710,31 @@
 	. = ..()
 	camera = new(src)
 	camera.c_tag = "null"
-	camera.status = FALSE
+	camera.set_status(FALSE)
 	camera.is_helmet_cam = TRUE //Can transmit locally regardless of network
 
 /obj/item/mech_equipment/camera/installed(mob/living/exosuit/_owner)
 	. = ..()
 	if(owner)
 		camera.c_tag = "[owner.name] camera feed"
+		invalidateCameraCache()
 	
 /obj/item/mech_equipment/camera/uninstalled()
 	. = ..()
 	camera.c_tag = "null"
+	invalidateCameraCache()
 
 /obj/item/mech_equipment/camera/examine(mob/user)
 	. = ..()
 	to_chat(user, "Network: [english_list(camera.network)]; Feed is currently: [camera.status ? "Online" : "Offline"].")
 
 /obj/item/mech_equipment/camera/proc/activate()
-	camera.status = TRUE
+	camera.set_status(TRUE)
 	passive_power_use = 0.2 KILOWATTS
 	active = TRUE
 
 /obj/item/mech_equipment/camera/deactivate()
-	camera.status = FALSE
+	camera.set_status(FALSE)
 	passive_power_use = 0
 	. = ..()
 
@@ -753,6 +755,7 @@
 		var/delay = 20 * user.skill_delay_mult(SKILL_DEVICES)
 		if(do_after(user, delay, src) && network)
 			camera.network = list(network)
+			camera.update_coverage(TRUE)
 			to_chat(user, SPAN_NOTICE("You configure the camera for \the [network] network."))
 
 /obj/item/mech_equipment/camera/attack_self(mob/user)
