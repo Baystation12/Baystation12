@@ -365,11 +365,11 @@
 
 /obj/item/gun/projectile/automatic/semistrip
 	name = "Carbine Rifle"
-	desc = "An old semi-automatic carbine chambered in large pistol rounds, this thing looks older then the SCG."
+	desc = "An old semi-automatic carbine chambered in large pistol rounds, this thing looks older than the SCG."
 	icon = 'icons/obj/guns/semistrip.dmi'
 	icon_state = "semistrip"
 	item_state = "semistrip"
-	w_class = ITEM_SIZE_HUGE
+	w_class = ITEM_SIZE_LARGE
 	force = 10
 	origin_tech = list(TECH_COMBAT = 2)
 	slot_flags = SLOT_BACK
