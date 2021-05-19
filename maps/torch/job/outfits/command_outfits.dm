@@ -88,24 +88,6 @@
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/security
 	shoes = /obj/item/clothing/shoes/dutyboots
 
-/decl/hierarchy/outfit/job/torch/passenger/workplace_liaison
-	name = OUTFIT_JOB_NAME("Workplace Liaison")
-	l_ear = /obj/item/device/radio/headset/heads/torchntcommand
-	uniform = /obj/item/clothing/under/suit_jacket/corp
-	shoes = /obj/item/clothing/shoes/laceup
-	id_types = list(/obj/item/card/id/torch/passenger/corporate/liaison)
-	pda_type = /obj/item/modular_computer/pda/heads/paperpusher
-	backpack_contents = list(/obj/item/clothing/accessory/badge/nanotrasen = 1)
-
-/decl/hierarchy/outfit/job/torch/crew/representative
-	name = OUTFIT_JOB_NAME("SolGov Representative")
-	l_ear = /obj/item/device/radio/headset/headset_com
-	uniform = /obj/item/clothing/under/rank/internalaffairs/plain/solgov
-	suit = /obj/item/clothing/suit/storage/toggle/suit/black
-	shoes = /obj/item/clothing/shoes/laceup
-	id_types = list(/obj/item/card/id/torch/crew/representative)
-	pda_type = /obj/item/modular_computer/pda/heads/paperpusher
-
 /decl/hierarchy/outfit/job/torch/crew/command/sea/fleet
 	name = OUTFIT_JOB_NAME("Senior Enlisted Advisor - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/command

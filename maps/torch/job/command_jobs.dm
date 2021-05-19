@@ -307,35 +307,6 @@
 /datum/job/hos/get_description_blurb()
 	return "You are the Chief of Security. You manage ship security. The Masters at Arms and the Military Police, as well as the Brig Chief and the Forensic Technician. You keep the vessel safe. You handle both internal and external security matters. You are the law. You are subordinate to the CO and the XO. You are expected to know the SCMJ and Sol law and Alert Procedure to a very high degree along with general regulations."
 
-/datum/job/representative
-	title = "SolGov Representative"
-	department = "Support"
-	department_flag = SPT
-	total_positions = 1
-	spawn_positions = 1
-	supervisors = "the Sol Central Government and the SCG Charter"
-	selection_color = "#2f2f7f"
-	economic_power = 16
-	minimal_player_age = 0
-	outfit_type = /decl/hierarchy/outfit/job/torch/crew/representative
-	allowed_branches = list(/datum/mil_branch/solgov)
-	allowed_ranks = list(/datum/mil_rank/sol/gov)
-	min_skill = list(   SKILL_BUREAUCRACY = SKILL_EXPERT,
-	                    SKILL_FINANCE     = SKILL_BASIC)
-	skill_points = 20
-	minimum_character_age = list(SPECIES_HUMAN = 27)
-
-	access = list(
-		access_representative, access_security, access_medical,
-		access_bridge, access_cargo, access_solgov_crew,
-		access_hangar, access_torch_fax, access_radio_comm
-	)
-
-	software_on_spawn = list(/datum/computer_file/program/reports)
-
-/datum/job/representative/get_description_blurb()
-	return "You are the Sol Gov Representative. You are a civilian assigned as both a diplomatic liaison for first contact and foreign affair situations on board. You are also responsible for monitoring for any serious missteps of justice, sol law or other ethical or legal issues aboard and informing and advising the Commanding Officer of them. You are a mid-level bureaucrat. You liaise between the crew and corporate interests on board. Send faxes back to Sol on mission progress and important events."
-
 /datum/job/sea
 	title = "Senior Enlisted Advisor"
 	department = "Support"
@@ -433,3 +404,49 @@
 
 /datum/job/bridgeofficer/get_description_blurb()
 	return "You are a Bridge Officer. You are a very junior officer. You do not give orders of your own. You are subordinate to all of command. You handle matters on the bridge and report directly to the CO and XO. You take the Torch's helm and pilot the Aquila if needed. You monitor bridge computer programs and communications and report relevant information to command."
+
+/datum/job/executive
+	title = "EXO Executive"
+	department = "Support"
+	department_flag = SPT
+	total_positions = 2
+	spawn_positions = 2
+	supervisors = "Law and regulation, the vessel's captain, and your own superior's interests."
+	selection_color = "#2f2f7f"
+	economic_power = 16
+	minimal_player_age = 14
+	outfit_type = /decl/hierarchy/outfit/job/torch/executive
+	allowed_branches = list(
+		/datum/mil_branch/solgov
+	)
+	allowed_ranks = list(
+		/datum/mil_rank/sol/gov
+	)
+	min_skill = list(
+		SKILL_BUREAUCRACY = SKILL_EXPERT,
+		SKILL_FINANCE     = SKILL_BASIC
+	)
+	skill_points = 20
+	minimum_character_age = list(
+		SPECIES_HUMAN = 25
+	)
+	alt_titles = list(
+		"Corporate Liaison",
+		"Union Representative",
+		"SCG Representative"
+	)
+
+	access = list(
+		access_bridge,
+		access_solgov_crew,
+		access_torch_fax,
+		access_radio_comm,
+		access_radio_serv
+	)
+
+	software_on_spawn = list(
+		/datum/computer_file/program/reports
+	)
+
+/datum/job/executive/get_description_blurb(alt_title)
+	return "You are an executive, liaison, or representative for a given corporate or government entity. You are a civilian presence aboard the SEV Torch, acting in the best interested of your respective employer. You are not internal affairs. You advise command on corporate or government matters, and may also work with contractors and crew as your duties permit or require."

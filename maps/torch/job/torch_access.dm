@@ -49,13 +49,6 @@
 	desc = "Emergency Armory"
 	region = ACCESS_REGION_COMMAND
 
-/var/const/access_liaison = "ACCESS_TORCH_CORPORATE_LIAISON" //84
-/datum/access/liaison
-	id = access_liaison
-	desc = "Corporate Liaison"
-	region = ACCESS_REGION_COMMAND
-	access_type = ACCESS_TYPE_NONE //Ruler of their own domain, CO and RD cannot enter
-
 /var/const/access_representative = "ACCESS_TORCH_REPRESENTATIVE" //85
 /datum/access/representative
 	id = access_representative
@@ -152,22 +145,22 @@
 
 /datum/access/network
 	region = ACCESS_REGION_COMMAND
-	
+
 /datum/access/chapel_office
 	region = ACCESS_REGION_SERVICE
-	
+
 /datum/access/bar
 	region = ACCESS_REGION_SERVICE
-	
+
 /datum/access/kitchen
 	region = ACCESS_REGION_SERVICE
-	
+
 /datum/access/eva
 	region = ACCESS_REGION_GENERAL
-	
+
 /datum/access/crematorium
 	region = ACCESS_REGION_MEDBAY
-	
+
 /datum/access/janitor
 	region = ACCESS_REGION_SERVICE
 

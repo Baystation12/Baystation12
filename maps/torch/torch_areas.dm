@@ -670,20 +670,15 @@
 	name = "\improper Command - CoS' Office"
 	req_access = list(access_hos)
 
-/area/crew_quarters/heads/office/cl
+/area/crew_quarters/heads/office/starboard_exec
 	icon_state = "heads_cl"
-	name = "\improper Command - CL's Office"
-	req_access = list(access_liaison)
+	name = "\improper Command - Starboard Executive Office"
+	req_access = list(access_bridge)
 
-/area/crew_quarters/heads/office/cl/backroom
-	icon_state = "heads_cl"
-	name = "\improper Command - CL's Backroom"
-	req_access = list(access_liaison)
-
-/area/crew_quarters/heads/office/sgr
+/area/crew_quarters/heads/office/port_exec
 	icon_state = "heads_sr"
-	name = "\improper Command - SCGR's Office"
-	req_access = list(access_representative)
+	name = "\improper Command - Port Executive Office"
+	req_access = list(access_bridge)
 
 /area/crew_quarters/heads/office/sea
 	icon_state = "heads_sea"

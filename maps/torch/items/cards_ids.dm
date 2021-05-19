@@ -127,10 +127,8 @@
 /obj/item/card/id/torch/contractor/service/bartender
 	job_access_type = /datum/job/bartender
 
-
-/obj/item/card/id/torch/crew/representative
-	job_access_type = /datum/job/representative
-	detail_color = COLOR_COMMAND_BLUE
+/obj/item/card/id/torch/silver/executive
+	job_access_type = /datum/job/executive
 
 /obj/item/card/id/torch/crew/sea
 	job_access_type = /datum/job/sea
@@ -196,14 +194,6 @@
 
 /obj/item/card/id/torch/passenger/research/mining
 	job_access_type = /datum/job/mining
-
-/obj/item/card/id/torch/passenger/corporate
-	color = COLOR_BOTTLE_GREEN
-	detail_color = COLOR_OFF_WHITE
-
-/obj/item/card/id/torch/passenger/corporate/liaison
-	job_access_type = /datum/job/liaison
-	extra_details = list("onegoldstripe")
 
 //Merchant
 /obj/item/card/id/torch/merchant

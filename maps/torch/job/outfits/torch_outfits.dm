@@ -23,3 +23,11 @@
 	name = OUTFIT_JOB_NAME("Torch Passenger")
 	hierarchy_type = /decl/hierarchy/outfit/job/torch/passenger
 	uniform = /obj/item/clothing/under/solgov/utility
+
+/decl/hierarchy/outfit/job/torch/executive
+	name = OUTFIT_JOB_NAME("EXO Executive")
+	l_ear = /obj/item/device/radio/headset/headset_executive
+	uniform = /obj/item/clothing/under/suit_jacket/corp
+	shoes = /obj/item/clothing/shoes/laceup
+	id_types = list(/obj/item/card/id/torch/silver/executive)
+	pda_type = /obj/item/modular_computer/pda/heads/paperpusher

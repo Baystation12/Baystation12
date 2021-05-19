@@ -17,24 +17,10 @@
 	icon_state = "com_headset_alt"
 	item_state = "com_headset_alt"
 
-/obj/item/device/radio/headset/heads/torchcorp
-	name = "corporate headset"
-	desc = "Headset of the servants to the corporate overlords."
-	icon_state = "nt_headset"
-	item_state = "headset"
-	ks1type = /obj/item/device/encryptionkey/headset_torchcorp
-
 /obj/item/device/radio/headset/heads/torchcorp/alt
 	name = "corporate bowman headset"
 	icon_state = "nt_headset_alt"
 	item_state = "nt_headset_alt"
-
-/obj/item/device/radio/headset/heads/torchntcommand
-	name = "corporate command headset"
-	desc = "Headset of the corporate overlords."
-	icon_state = "nt_headset"
-	item_state = "headset"
-	ks1type = /obj/item/device/encryptionkey/headset_torchcl
 
 /obj/item/device/radio/headset/heads/torchntcommand/alt
 	name = "corporate command bowman headset"
@@ -82,6 +68,18 @@
 	item_state = "cargo_headset_alt"
 	icon_state = "cargo_headset_alt"
 	max_keys = 3
+
+/obj/item/device/radio/headset/headset_executive
+	name = "executive's headset"
+	desc = "A headset for various government and corporate executives."
+	icon_state = "com_headset"
+	item_state = "headset"
+	ks1type = /obj/item/device/encryptionkey/heads/executive
+
+/obj/item/device/radio/headset/headset_executive/alt
+	name = "executive's bowman headset"
+	icon_state = "com_headset_alt"
+	item_state = "com_headset_alt"
 
 /obj/item/device/radio/headset/sea
 	name = "senior enlisted advisor's headset"

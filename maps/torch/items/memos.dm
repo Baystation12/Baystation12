@@ -1,14 +1,14 @@
 //random memo spawners
 
-/obj/random/memo_scgr
-	name = "random scgr memo"
-	desc = "This may spawn one of the SCGR Memos."
+/obj/random/memo_exec
+	name = "random executive memo"
+	desc = "This may spawn one of the Executive Memos."
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "docs_generic"
 	spawn_nothing_percentage = 15
 
-/obj/random/memo_scgr/spawn_choices()
-	return subtypesof(/obj/item/paper/memo/scgr) + subtypesof(/obj/item/paper/memo/generic)
+/obj/random/memo_exec/spawn_choices()
+	return subtypesof(/obj/item/paper/memo/exec) + subtypesof(/obj/item/paper/memo/generic)
 
 /obj/random/memo_command
 	name = "random command memo"
@@ -70,16 +70,6 @@
 /obj/random/memo_research/spawn_choices()
 	return subtypesof(/obj/item/paper/memo/research) + subtypesof(/obj/item/paper/memo/generic)
 
-/obj/random/memo_corporate
-	name = "random corporate memo"
-	desc = "This may spawn one of the Corporate Memos."
-	icon = 'icons/obj/bureaucracy.dmi'
-	icon_state = "docs_generic"
-	spawn_nothing_percentage = 15
-
-/obj/random/memo_corporate/spawn_choices()
-	return subtypesof(/obj/item/paper/memo/corporate) + subtypesof(/obj/item/paper/memo/generic)
-
 /obj/random/memo_security
 	name = "random security memo"
 	desc = "This may spawn one of the Security Memos."
@@ -92,10 +82,10 @@
 
 
 
-/obj/random_multi/single_item/memo_scgr
-	name = "Multi Point - SCGR Memos"
-	id = "SCGR Memos"
-	item_path = /obj/random/memo_scgr
+/obj/random_multi/single_item/memo_exec
+	name = "Multi Point - Executive Memos"
+	id = "Executive Memos"
+	item_path = /obj/random/memo_exec
 
 /obj/random_multi/single_item/memo_command
 	name = "Multi Point - Command Memos"
@@ -126,11 +116,6 @@
 	name = "Multi Point - Research Memos"
 	id = "Research Memos"
 	item_path = /obj/random/memo_research
-
-/obj/random_multi/single_item/memo_corporate
-	name = "Multi Point - Corporate Memos"
-	id = "Corporate Memos"
-	item_path = /obj/random/memo_corporate
 
 /obj/random_multi/single_item/memo_security
 	name = "Multi Point - Security Memos"
@@ -168,39 +153,75 @@
 
 
 
-// scgr memos
+// executive memos
 
-/obj/item/paper/memo/scgr/skrelljokes
+/obj/item/paper/memo/exec/skrelljokes
 	name = "internal conversation record"
 	info = {"A "confidential" discussion between several Sol Government Representatives, including some crass jokes on if Skrell being squished would burst like a water balloon or squish like a jam sandwich."}
 
-/obj/item/paper/memo/scgr/spicypolitics
+/obj/item/paper/memo/exec/spicypolitics
 	name = "internal conversation record"
 	info = {"A "confidential" discussion between several Sol Government Representatives, including some interesting political tidbits. Seems like most of them are going to be supporting more conservative, Sol-centric parties next election, voicing annoyance at having to deal with hissing lizards and warbling frogs."}
 
-/obj/item/paper/memo/scgr/deskfires
+/obj/item/paper/memo/exec/deskfires
 	name = "important notice"
 	info = {"A "confidential" notice issued to Sol Government Representatives, informing them of an office fire caused by improper cigarette ash management."}
 
-/obj/item/paper/memo/scgr/boringreports
+/obj/item/paper/memo/exec/boringreports
 	name = "\improper Torch project status update #132"
 	info = {"A "confidential" report containing nothing you'd like to read, featuring updates that you knew about three weeks ago."}
 
-/obj/item/paper/memo/scgr/documentdamage
+/obj/item/paper/memo/exec/documentdamage
 	name = "important notice"
 	info = {"A "confidential" notice issued to Sol Government Representatives, informing them that many documents were damaged last week due to "inappropriate sleep management". It urges all diplomatic staff to self-monitor their sleeping schedule and to regulate their caffeine intake."}
 
-/obj/item/paper/memo/scgr/documentdisposal
+/obj/item/paper/memo/exec/documentdisposal
 	name = "proper document disposal"
 	info = {"Some "internal use only" documents, showing several pictures of reconstructed shredded documents. It highlights that shredding is not acceptable for any documents that are above Confidental, going on to recommend incineration as a primary method."}
 
-/obj/item/paper/memo/scgr/yourjob
+/obj/item/paper/memo/exec/yourjob
 	name = "\improper SCG and you"
 	info = {"Some "confidential" briefing documents, detailing the job of the SCGR in brief. It highlights they are a civilian, first and foremost, who functions as a general-purpose civil servant aboard the SEV Torch. They also should advise the Commanding Officer, assisting with bureaucratic affairs where required, and spearheading diplomatic negotations."}
 
-/obj/item/paper/memo/scgr/perdiemdeny
+/obj/item/paper/memo/exec/perdiemdeny
 	name = "per diem denials"
 	info = {"An "internal use only" document, explaining what not to file per diem reimbursement requests on. It lists examples of many per diem requests SCG representatives have filed in the past that have been denied. Some of the more interesting ones include casino debts, a request for per diem to cover the increased tax on alcohol on a station, and one odd case involving a possum, engineering PPE, and two injuries."}
+
+/obj/item/paper/memo/exec/stipendcut
+	name = "corporate spending records"
+	info = {"A "confidential" memo on the current usage of funds provided to SEV Torch corporate executives; apparently there's threats of a strike over a cut to the cost-of-living stipends by the head office."}
+
+/obj/item/paper/memo/exec/uniondues
+	name = "union dues reminder"
+	info = {"A "confidential" memo sent from the Union Representative to all members of the Union reminding them that their mandated union fee pay period is approaching, and they should ensure their 250 thaler is deposited with them before the end of the month."}
+
+/obj/item/paper/memo/exec/glueandtape
+	name = "proper document disposal"
+	info = {"Some "internal use only" corporate documents detailing the proper ways to dispose of top secret and classified documents. It highlights that burning is most applicable, and shows pictures of shredded documents reconstructed with glue and sticky tape with a red "Fail" written below."}
+
+/obj/item/paper/memo/exec/exointerest
+	name = "\improper EXO and you"
+	info = {"Some "confidential" corporate documents directed to the corporate liasion, informing them that their job is to represent EXO and its immediate interests, which are to ensure the SEV Torch is able to maintain the currently defined direction that is within the interests of EXO as a whole."}
+
+/obj/item/paper/memo/exec/thequarterly
+	name = "quarterly budget report"
+	info = {"A "confidential" yet uninteresting report from the head office regarding budget plans announced two weeks ago."}
+
+/obj/item/paper/memo/exec/kiareport
+	name = "deceased and missing staff reports"
+	info = {"A "confidential" memo reminding corporate executives to report the details pertaining to the death, or missing status, of on-shift employees. It explains that doing this ensures formal procedures are followed, and the situation pertaining to the deceased/missing status will be referenced for ongoing and future employee training programs and payrolls."}
+
+/obj/item/paper/memo/exec/spellchecker
+	name = "spellchecking and you"
+	info = {"Some "internal use only" corporate memos reminding corporate executives to proofread reports. It details various reasons behind why correct spelling and punctuation help in making EXO and Expeditionary Command take your report seriously."}
+
+/obj/item/paper/memo/exec/assistants
+	name = "misuse of delegated personnel"
+	info = {"An "internal use only" corporate memo reminding corporate executives that just because the executive assistant is issued a firearm does not mean that they are expected to fulfill the same role as a loss prevention associate. It suggests using loss prevention associates to assist in tactical or physical affairs and executive assistants in bureaucratic or menial tasks."}
+
+/obj/item/paper/memo/exec/safetyfirst
+	name = "contractor safety and you"
+	info = {"An "internal use only" corporate document reminding corporate executives to report any unsafe behavior from contractors that they either see directly or is reported to them. It goes on to explain that ensuring the health and safety compliance of those under contract not only helps to keep up an image of security but ensures that the reputation of EXO as a whole is not tarnished due to a workplace accident."}
 
 
 
@@ -473,43 +494,6 @@
 /obj/item/paper/memo/research/fuckingdoors
 	name = "windoor guide"
 	info = {"An "internal use only" visual guide for the proper operation of xenobiology containment doors. It features a hand-written note saying "PAY ATTENTION TO THIS!" in large letters."}
-
-
-
-// corporate memos
-
-/obj/item/paper/memo/corporate/stipendcut
-	name = "corporate spending records"
-	info = {"A "confidential" memo on the current usage of funds provided to SEV Torch corporate liaisons; apparently there's threats of a strike over a cut to the cost-of-living stipends by the head office."}
-
-/obj/item/paper/memo/corporate/uniondues
-	name = "union dues reminder"
-	info = {"A "confidential" memo sent from the Union Representative to all members of the Union reminding them that their mandated union fee pay period is approaching, and they should ensure their 250 thaler is deposited with them before the end of the month."}
-
-/obj/item/paper/memo/corporate/glueandtape
-	name = "proper document disposal"
-	info = {"Some "internal use only" corporate documents detailing the proper ways to dispose of top secret and classified documents. It highlights that burning is most applicable, and shows pictures of shredded documents reconstructed with glue and sticky tape with a red "Fail" written below."}
-
-/obj/item/paper/memo/corporate/exointerest
-	name = "\improper EXO and you"
-	info = {"Some "confidential" corporate documents directed to the corporate liasion, informing them that their job is to represent EXO and its immediate interests, which are to ensure the SEV Torch is able to maintain the currently defined direction that is within the interests of EXO as a whole."}
-
-/obj/item/paper/memo/corporate/thequarterly
-	name = "quarterly budget report"
-	info = {"A "confidential" yet uninteresting report from the head office regarding budget plans announced two weeks ago."}
-
-/obj/item/paper/memo/corporate/kiareport
-	name = "deceased and missing staff reports"
-	info = {"A "confidential" memo reminding corporate liaisons to report the details pertaining to the death, or missing status, of on-shift employees. It explains that doing this ensures formal procedures are followed, and the situation pertaining to the deceased/missing status will be referenced for ongoing and future employee training programs and payrolls."}
-
-/obj/item/paper/memo/corporate/spellchecker
-	name = "spellchecking and you"
-	info = {"Some "internal use only" corporate memos reminding corporate liaisons to proofread reports. It details various reasons behind why correct spelling and punctuation help in making EXO and Expeditionary Command take your report seriously."}
-
-/obj/item/paper/memo/corporate/safetyfirst
-	name = "contractor safety and you"
-	info = {"An "internal use only" corporate document reminding corporate liaisons to report any unsafe behavior from contractors that they either see directly or is reported to them. It goes on to explain that ensuring the health and safety compliance of those under contract not only helps to keep up an image of security but ensures that the reputation of EXO as a whole is not tarnished due to a workplace accident."}
-
 
 
 // security memos
