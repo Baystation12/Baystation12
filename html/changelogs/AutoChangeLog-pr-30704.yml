@@ -1,5 +1,0 @@
-author: Tennessee116
-delete-after: true
-changes:
-  - admin: Admin-paralyzed mobs will now be reported as such in the roundstart logout
-      report.
