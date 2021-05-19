@@ -80,7 +80,7 @@
 /obj/item/organ/internal/stomach/attack_self(mob/user)
 	. = ..()
 	if(. && action_button_name == PUKE_ACTION_NAME && owner && !owner.incapacitated())
-		owner.vomit(deliberate = TRUE)
+		owner.empty_stomach()
 		refresh_action_button()
 
 /obj/item/organ/internal/stomach/return_air()
