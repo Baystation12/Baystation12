@@ -41,7 +41,7 @@
 
 /obj/item/ammo_magazine/speedloader/clip
 	name = "rifle stripper clip"
-	desc = "A stripper clip for bolt action rifles."
+	desc = "A stripper clip for rifle caliber weapons."
 	icon_state = "clip"
 	caliber = CALIBER_RIFLE
 	ammo_type = /obj/item/ammo_casing/rifle
