@@ -15,6 +15,8 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 	var/dy		//coordinates
 	var/speedlimit = 1/(20 SECONDS) //top speed for autopilot, 5
 	var/accellimit = 0.001 //manual limiter for acceleration
+	/// The mob currently operating the helm - The last one to click one of the movement buttons and be on the overmap screen. Set to `null` for autopilot or when the mob isn't in range.
+	var/mob/current_operator
 
 /obj/machinery/computer/ship/helm/Initialize()
 	. = ..()
@@ -38,6 +40,14 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 
 /obj/machinery/computer/ship/helm/Process()
 	..()
+
+	if (current_operator)
+		if (!linked)
+			to_chat(current_operator, SPAN_DANGER("\The [src]'s controls lock up with an error flashing across the screen: Connection to vessel lost!"))
+			set_operator(null, TRUE)
+		if (!Adjacent(current_operator) || CanUseTopic(current_operator) != STATUS_INTERACTIVE || !viewing_overmap(current_operator))
+			set_operator(null)
+
 	if (autopilot && dx && dy)
 		var/turf/T = locate(dx,dy,GLOB.using_map.overmap_z)
 		if(linked.loc == T)
@@ -61,7 +71,11 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 			// All other cases, move toward direction
 			else if (speed + acceleration <= speedlimit)
 				linked.accelerate(direction, accellimit)
-		linked.operator_skill = null//if this is on you can't dodge meteors
+
+		if (current_operator)
+			to_chat(current_operator, SPAN_DANGER("\The [src]'s autopilot is active and wrests control from you!"))
+			set_operator(null, TRUE, TRUE)
+
 		return
 
 /obj/machinery/computer/ship/helm/relaymove(var/mob/user, direction)
@@ -69,6 +83,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		if(prob(user.skill_fail_chance(SKILL_PILOT, 50, linked.skill_needed, factor = 1)))
 			direction = turn(direction,pick(90,-90))
 		linked.relaymove(user, direction, accellimit)
+		set_operator(user)
 		return 1
 
 /obj/machinery/computer/ship/helm/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
@@ -212,12 +227,78 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 
 	if (href_list["apilot"])
 		autopilot = !autopilot
+		if (autopilot)
+			set_operator(null, autopilot = TRUE)
+		else if (viewing_overmap(user))
+			set_operator(user)
 
 	if (href_list["manual"])
 		viewing_overmap(user) ? unlook(user) : look(user)
 
 	add_fingerprint(user)
 	updateUsrDialog()
+
+
+/obj/machinery/computer/ship/helm/unlook(mob/user)
+	. = ..()
+	if (current_operator == user)
+		set_operator(null)
+
+
+/obj/machinery/computer/ship/helm/look(mob/user)
+	. = ..()
+	if (!autopilot)
+		set_operator(user)
+
+
+/**
+ * Updates `current_operator` to the new user, or `null` and ejects the old operator from the overmap view - Only one person on a helm at a time!
+ * Will call `display_operator_change_message()` if `silent` is `FALSE`.
+ * `autopilot` will prevent ejection from the overmap (You want to monitor your autopilot right?) and by passed on to `display_operator_change_message()`.
+ * Skips ghosts and observers to prevent accidental external influencing of flight.
+ */
+/obj/machinery/computer/ship/helm/proc/set_operator(mob/user, silent, autopilot)
+	if (isobserver(user) || user == current_operator)
+		return
+
+	var/mob/old_operator = current_operator
+	current_operator = user
+	linked.update_operator_skill(current_operator)
+	if (!autopilot && old_operator && viewing_overmap(old_operator))
+		unlook(old_operator)
+
+	log_debug("HELM CONTROL: [current_operator ? current_operator : "NO PILOT"] taking control of [src] from [old_operator ? old_operator : "NO PILOT"] in [get_area(src)]. [autopilot ? "(AUTOPILOT MODE)" : null]")
+
+	if (!silent)
+		display_operator_change_message(old_operator, current_operator, autopilot)
+
+
+/**
+ * Displays visible messages indicating a change in operator.
+ * `autopilot` will affect the displayed message.
+ */
+/obj/machinery/computer/ship/helm/proc/display_operator_change_message(mob/old_operator, mob/new_operator, autopilot)
+	if (!old_operator)
+		new_operator.visible_message(
+			SPAN_NOTICE("\The [new_operator] takes \the [src]'s controls."),
+			SPAN_NOTICE("You take \the [src]'s controls.")
+		)
+	else if (!new_operator)
+		if (autopilot)
+			old_operator.visible_message(
+				SPAN_NOTICE("\The [old_operator] engages \the [src]'s autopilot and releases the controls."),
+				SPAN_NOTICE("You engage \the [src]'s autopilot and release the controls.")
+			)
+		else
+			old_operator.visible_message(
+				SPAN_WARNING("\The [old_operator] releases \the [src]'s controls."),
+				SPAN_WARNING("You release \the [src]'s controls.")
+			)
+	else
+		old_operator.visible_message(
+			SPAN_WARNING("\The [new_operator] takes \the [src]'s controls from \the [old_operator]."),
+			SPAN_DANGER("\The [new_operator] takes \the [src]'s controls from you!")
+		)
 
 
 /obj/machinery/computer/ship/navigation

@@ -48,7 +48,18 @@
 
 /obj/effect/overmap/visitable/ship/relaymove(mob/user, direction, accel_limit)
 	accelerate(direction, accel_limit)
-	operator_skill = user.get_skill_value(SKILL_PILOT)
+	update_operator_skill(user)
+
+
+/**
+ * Updates `operator_skill` to match the current user's skill level, or to null if no user is provided.
+ * Will skip observers to avoid allowing unintended external influences on flight.
+ */
+/obj/effect/overmap/visitable/ship/proc/update_operator_skill(mob/user)
+	if (isobserver(user))
+		return
+	operator_skill = user?.get_skill_value(SKILL_PILOT)
+
 
 /obj/effect/overmap/visitable/ship/proc/is_still()
 	return !MOVING(speed[1]) && !MOVING(speed[2])
