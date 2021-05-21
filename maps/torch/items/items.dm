@@ -96,10 +96,6 @@ Unique items
 Weapons
 ******/
 
-/obj/item/gun/energy/gun/small/secure/corporate
-	desc = "An access-locked EXO-branded LAEP90-CS. It's designed to please paranoid corporate liaisons. Body cam not included."
-	req_access = list(access_liaison)
-
 /obj/item/gun/projectile/revolver/medium/captain
 	name = "\improper Final Argument"
 	icon = 'maps/torch/icons/obj/uniques.dmi'
