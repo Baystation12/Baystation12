@@ -198,7 +198,8 @@
 	icon_state = "nav_computer"
 	var/health
 	var/maxhealth = 30
-	light_range = 1
+	light_power = 1
+	light_range = 2
 	light_color = "#ebf7fe"
 	density = 1
 	anchored = 1
@@ -419,11 +420,11 @@
 	var/time_to_splash = 0 //this is a timer to play a sound byte
 	//var/list/splash_sound = list() //sounds to play when the timer runs out
 	var/uses = 0
+	invisibility = 101
 
 /obj/structure/splish_splash/Initialize()
 	. = ..()
 	GLOB.processing_objects.Add(src)
-	icon_state = "spawntrigger" //changes from a pink X for ease of mapping to completely invisible in game
 	time_to_splash+= rand(0,20)
 	uses+= pick(0,1) //decides to either delete itself or spawn with one use
 	if(uses == 0)	 //this is so noisemakers are in different places

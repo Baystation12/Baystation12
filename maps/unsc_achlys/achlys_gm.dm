@@ -159,11 +159,40 @@ All 3 of these cannot spawn on open space
 					typepath_to_spawn = /obj/item/flood_spore_growing
 				new typepath_to_spawn (pick(valid_spawns))
 
+/datum/game_mode/achlys/proc/announce_win()
+	if(MajorWin)
+		to_world("<span class='info'>Cole Protocol has been enacted by the surviving marines and all ONI Operatives were neutralized.</span>")
+		return 1
+	if(MinorWin)
+		to_world("<span class='notice'>The UNSC Achlys has been destroyed, but there are rogue elements still remaining within the Marine detachment.</span>")
+		return 1
+	if(ONIVictory)
+		to_world("<span class='warning'>The ONI Operatives have managed to retrieve their sensitive data and neutralize the marines.</span>")
+		return 1
+	if(TotalLoss)
+		to_world("<span class='danger'>The UNSC Achlys has claimed the entire detachment sent to enact Cole Protocol and must be destroyed via MAC blast.</span>")
+		return 1
+	if(CovenantVictory)
+		to_world("<span class='notice'>The kidnapped Sangheili prisoners have... stolen the UNSC Dante? Anyone left on the UNSC Achlys has been effectively abandoned to their doomed fate.</span>")
+		return 1
+	return 0
+
+/datum/game_mode/achlys/proc/check_players_live(var/faction)
+	var/list/live_players = list()
+	var/list/allowed_roles = get_roles_from_faction(faction)
+	for(var/mob/living/carbon/human/player in GLOB.player_list)
+		if(player.z in GLOB.using_map.admin_levels)
+			continue
+		if(player.mind.assigned_role in allowed_roles)
+			if(player.stat == CONSCIOUS)
+				live_players += player
+	return live_players
+
 /datum/game_mode/achlys/declare_completion()
 	..()
-	to_world("<span class='warning'>Cole Protocol has been enacted. Marine victory.</span>")
+	announce_win()
 
-/datum/game_mode/achlys/handle_mob_death(var/mob/victim, var/list/args = list())
+/datum/game_mode/achlys/handle_mob_death(var/mob/living/carbon/human/M, var/list/args = list())
 	..()
 
 #undef COMMS_CUTIN_EVENT_CHANCE
