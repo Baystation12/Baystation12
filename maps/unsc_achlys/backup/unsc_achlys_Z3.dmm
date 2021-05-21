@@ -394,7 +394,7 @@
 "hD" = (/obj/effect/floor_decal/corner/mauve{icon_state = "corner_white"; dir = 10},/turf/simulated/floor/tiled/dark,/area/achlys/six/z3armory)
 "hE" = (/obj/effect/floor_decal/corner/mauve{icon_state = "corner_white"; dir = 9},/mob/living/simple_animal/hostile/flood/combat_form/prisoner/mutated/guard{inventory = "/obj/item/weapon/card/id/the_silver";},/turf/simulated/floor/tiled/dark,/area/achlys/six/z3armory)
 "hF" = (/turf/simulated/floor/tiled/dark,/area/achlys/six/z3engineeringstorage)
-"hG" = (/obj/structure/bed,/obj/item/weapon/bedsheet/captain,/obj/item/device/flashlight/glowstick/random,/obj/item/weapon/gun/projectile/m6d_magnum/civilian,/turf/simulated/floor/carpet/blue,/area/achlys/nine/z3carpetdorms2)
+"hG" = (/obj/structure/bed,/obj/item/weapon/bedsheet/captain,/obj/item/device/flashlight/glowstick/random,/obj/item/weapon/gun/projectile/m6d_magnum/m6b,/turf/simulated/floor/carpet/blue,/area/achlys/nine/z3carpetdorms2)
 "hH" = (/obj/effect/floor_decal/corner/mauve{icon_state = "corner_white"; dir = 10},/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled/dark,/area/achlys/six/z3armory)
 "hI" = (/obj/random/achlock,/turf/simulated/floor/plating,/area/achlys/one/z3prisonupper3)
 "hJ" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/four/z3engineeringmain)

@@ -58,7 +58,7 @@
 "bf" = (/obj/structure/bed/chair,/turf/simulated/floor/tiled,/area/dante/deck2)
 "bg" = (/turf/simulated/floor/stairs/west,/area/dante/deck2)
 "bh" = (/obj/machinery/shower{icon_state = "shower"; dir = 4},/turf/simulated/floor/tiled,/area/dante/deck2)
-"bi" = (/obj/structure/table/rack,/obj/item/ammo_magazine/m6d/m225,/obj/item/weapon/gun/projectile/m6d_magnum,/turf/simulated/floor/tiled,/area/dante/deck2)
+"bi" = (/obj/structure/table/rack,/obj/item/ammo_magazine/m127_saphe,/obj/item/weapon/gun/projectile/m6d_magnum,/turf/simulated/floor/tiled,/area/dante/deck2)
 "bj" = (/obj/structure/closet,/obj/item/clothing/head/helmet/pilot,/obj/item/clothing/suit/armor/bulletproof/vest,/obj/item/clothing/shoes/dutyboots,/obj/item/clothing/under/unsc/pilot,/obj/item/clothing/accessory/holster/thigh,/turf/simulated/floor/tiled,/area/dante/deck2)
 "bk" = (/obj/structure/table/glass,/obj/item/weapon/flame/lighter/zippo,/obj/item/weapon/storage/fancy/cigarettes/jerichos,/obj/item/clothing/glasses/sunglasses/big,/turf/simulated/floor/tiled,/area/dante/deck2)
 "bl" = (/obj/structure/table/standard,/turf/simulated/floor/tiled,/area/dante/deck2)

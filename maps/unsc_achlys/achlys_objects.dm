@@ -49,9 +49,9 @@
 	return list(
 	/obj/item/weapon/storage/box/MRE/Chicken = 1,
 	/obj/item/weapon/material/knife/combat_knife = 1,
-	/obj/item/ammo_magazine/m127_saphp = 2,
+	/obj/item/ammo_magazine/m6d/m225 = 2,
 	/obj/item/weapon/gun/projectile/m6d_magnum = 1,
-	/obj/item/ammo_magazine/m5 = 2,
+	/obj/item/ammo_magazine/m7/m443 = 2,
 	/obj/item/weapon/gun/projectile/m7_smg = 1,
 	/obj/item/clothing/head/helmet/achlys_marine = 1,
 	/obj/item/clothing/mask/marine = 1,
@@ -75,7 +75,7 @@
 	/obj/item/weapon/storage/box/MRE/Pizza = 1,
 	/obj/item/weapon/storage/box/flares = 1,
 	/obj/item/weapon/material/knife/combat_knife = 1,
-	/obj/item/ammo_magazine/m5 = 2,
+	/obj/item/ammo_magazine/m7/m443 = 2,
 	/obj/item/weapon/gun/projectile/m7_smg = 1,
 	/obj/item/weapon/grenade/frag/m9_hedp = 1,
 	/obj/item/ammo_box/shotgun/slug = 1,
@@ -108,9 +108,9 @@
 	/obj/item/weapon/storage/box/MRE/Chicken = 1,
 	/obj/item/weapon/material/knife/combat_knife = 1,
 	/obj/item/weapon/armor_patch = 2,
-	/obj/item/ammo_magazine/m127_saphe = 2,
+	/obj/item/ammo_magazine/m6d/m225 = 2,
 	/obj/item/weapon/gun/projectile/m6d_magnum = 1,
-	/obj/item/ammo_magazine/m762_ap/MA5B = 2,
+	/obj/item/ammo_magazine/ma5b/m118 = 2,
 	/obj/item/weapon/gun/projectile/ma5b_ar = 1,
 	/obj/item/weapon/storage/box/flares = 1)
 
@@ -126,9 +126,9 @@
 	/obj/item/weapon/storage/box/MRE/Spaghetti = 1,
 	/obj/item/weapon/storage/box/flares = 2,
 	/obj/item/weapon/material/knife/combat_knife = 1,
-	/obj/item/ammo_magazine/m127_saphe = 2,
+	/obj/item/ammo_magazine/m6d/m225 = 2,
 	/obj/item/weapon/gun/projectile/m6d_magnum = 1,
-	/obj/item/ammo_magazine/m762_ap/MA5B = 3,
+	/obj/item/ammo_magazine/ma5b/m118 = 3,
 	/obj/item/weapon/gun/projectile/ma5b_ar = 1,
 	/obj/item/weapon/grenade/frag/m9_hedp = 1,
 	/obj/item/clothing/head/helmet/achlys_marine = 1,
@@ -152,9 +152,9 @@
 	/obj/item/weapon/storage/box/MRE/Spaghetti = 1,
 	/obj/item/weapon/storage/box/flares = 1,
 	/obj/item/weapon/material/knife/combat_knife = 1,
-	/obj/item/ammo_magazine/m127_saphe = 2,
+	/obj/item/ammo_magazine/m6d/m225 = 2,
 	/obj/item/weapon/gun/projectile/m6d_magnum = 1,
-	/obj/item/ammo_magazine/m762_ap/MA5B = 2,
+	/obj/item/ammo_magazine/ma5b/m118 = 2,
 	/obj/item/weapon/gun/projectile/ma5b_ar = 1,
 	/obj/item/device/taperecorder = 1,
 	/obj/item/squad_manager = 1,
@@ -264,7 +264,7 @@
 	desc = "This autolathe was dragged here and hacked together from other machine parts."
 	stored_material =  list(DEFAULT_WALL_MATERIAL = 3000, "glass" = 0)
 	storage_capacity = list(DEFAULT_WALL_MATERIAL = 0, "glass" = 0)
-	machine_recipes = newlist(/datum/autolathe/recipe/m118_ma5b,/datum/autolathe/recipe/m255_sap_hp,/datum/autolathe/recipe/m443_fmj)
+	machine_recipes = newlist(/datum/autolathe/recipe/ma5b_m118,/datum/autolathe/recipe/m6d_m224,/datum/autolathe/recipe/m443_fmj)
 
 /obj/item/weapon/paper/crumpled/orders
 	info = "Office of Naval Intelligence Section 3<BR><BR>Any person that steps foot on the Achlys cannot leave the ship alive. Exterminate with extreme prejudice.<BR><BR>Do not allow your identity to be compromised by any means. Failure to obey these orders will result in subject termination.<BR><BR>Operatives that expose themselves or their orders must be terminated. <BR><BR>You know what must be done."
