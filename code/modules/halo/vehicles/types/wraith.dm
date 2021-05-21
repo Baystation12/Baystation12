@@ -8,7 +8,8 @@
 	anchored = 1
 
 	bound_height = 64
-	bound_width = 96
+	bound_width = 64
+	pixel_x = -16
 
 	comp_prof = /datum/component_profile/wraith
 
@@ -32,13 +33,6 @@
 	max_speed = 4
 	acceleration = 4
 	drag = 5
-
-/obj/vehicles/wraith/update_object_sprites()
-	. = ..()
-	if(dir == EAST || dir == WEST)
-		bounds = "64,64"
-	else
-		bounds = "96,64"
 
 /obj/item/vehicle_component/health_manager/wraith
 	integrity = 750

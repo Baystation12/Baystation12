@@ -1,7 +1,7 @@
 
 /obj/item/clothing/accessory/storage/IFAK
 	name = "Infantry First Aid Kit"
-	desc = "A tailor made pouch with partitions for specific medical supplies."
+	desc = "A tailor made pouch with partitions for specific medical supplies. Attach this to your uniform."
 	icon = 'code/modules/halo/icons/objs/ifak.dmi'
 	icon_state = "ifak"
 	slots = 7
@@ -12,7 +12,7 @@
 	/obj/item/weapon/reagent_containers/syringe/biofoam,
 	/obj/item/weapon/reagent_containers/pill/bicaridine,
 	/obj/item/weapon/reagent_containers/pill/dermaline,
-	/obj/item/weapon/storage/pill_bottle/polypseudomorphine,
+	/obj/item/weapon/reagent_containers/pill/polypseudomorphine,
 	/obj/item/weapon/reagent_containers/pill/iron,
 	)
 

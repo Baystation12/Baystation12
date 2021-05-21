@@ -1,5 +1,5 @@
 
-#define YANMEE_FLIGHT_TICKS 70
+#define YANMEE_FLIGHT_TICKS 80
 
 /mob/living
 	var/flight_ticks_remain = 0 //Movement and life() ticks degrade this. Set by Yanme'e flight and jump-packs
@@ -22,13 +22,13 @@
 		decrement_flight_ticks()
 
 /mob/living/proc/take_flight(var/ticks_flight_apply,var/message_flight,var/message_land,var/flight_elevation = 2)
-	Stun(2)
 	if(elevation <= 0)
 		flight_ticks_remain = ticks_flight_apply
 		change_elevation(flight_elevation)
 		if(message_flight)
 			visible_message("[message_flight]")
 	else
+		Stun(2)
 		flight_ticks_remain = 0
 		change_elevation(-flight_elevation)
 		if(message_land)

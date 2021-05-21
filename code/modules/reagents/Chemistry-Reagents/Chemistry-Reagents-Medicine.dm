@@ -664,7 +664,7 @@
 	reagent_state = LIQUID
 	color = "#C8A5DC"
 	scannable = 1
-	overdose = 10
+	overdose = 100
 
 /datum/reagent/adrenaline/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -686,4 +686,4 @@
 		remove_self(M.species.adrenal_break_threshold) //And your body consumes the adrenaline for that last final push
 
 /datum/reagent/adrenaline/overdose(var/mob/living/carbon/M, var/alien)
-	M.adjustToxLoss(REM)
+	return

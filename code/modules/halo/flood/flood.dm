@@ -11,8 +11,18 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 #define PLAYER_TRANSFORM_SFX 'code/modules/halo/sounds/flood_join_chorus.ogg'
 
-#define ODST_FLOOD_GUN_LIST list(/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6c_magnum_s,\
-/obj/item/weapon/gun/projectile/ma5b_ar,/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/gun/projectile/m7_smg/silenced)
+#define MARINE_FLOOD_GUN_LIST list(/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/ma5b_ar,\
+/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/gun/projectile/m392_dmr)
+
+#define ODST_FLOOD_GUN_LIST list(/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/ma5b_ar,\
+/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/gun/projectile/m392_dmr,\
+/obj/item/weapon/gun/projectile/m6c_magnum_s,/obj/item/weapon/gun/projectile/m7_smg/silenced)
+
+#define COV_MEDIUM_FLOOD_GUN_LIST list(/obj/item/weapon/gun/energy/plasmapistol,/obj/item/weapon/gun/projectile/type31needlerifle,\
+/obj/item/weapon/gun/projectile/needler)
+
+#define COV_STRONG_FLOOD_GUN_LIST list(/obj/item/weapon/gun/projectile/type31needlerifle,/obj/item/weapon/gun/energy/plasmarifle,\
+/obj/item/weapon/gun/projectile/type51carbine,)
 
 #define FLOOD_BURNDAM_MULTIPLIER 1.5
 

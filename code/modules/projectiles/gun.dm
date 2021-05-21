@@ -5,7 +5,7 @@
 	If the fire mode value for a setting is null, it will be replaced with the initial value of that gun's variable when the firemode is created.
 	Obviously not compatible with variables that take a null value. If a setting is not present, then the corresponding var will not be modified.
 */
-#define BASE_MOVEDELAY_MOD_APPLYFOR_TIME 1 SECOND
+#define BASE_MOVEDELAY_MOD_APPLYFOR_TIME 1.5 SECONDS
 
 /datum/firemode
 	var/name = "default"
@@ -52,14 +52,13 @@
 	attack_verb = list("struck", "hit", "bashed")
 	zoomdevicename = "scope"
 
-	slowdown_general = 0.25 //Guns R heavy.
+	slowdown_general = 0.3 //Guns R heavy.
 
 	var/unique_name
 	var/burst = 1
 	var/fire_delay = 6 	//delay after shooting before the gun can be used again
 	var/burst_delay = 2	//delay between shots, if firing in bursts
-	var/move_delay = 0
-	var/move_delay_malus = 0.5
+	var/move_delay_malus = 1
 	var/fire_sound = 'sound/weapons/gunshot/gunshot.ogg'
 	var/fire_sound_text = "gunshot"
 	var/screen_shake = 0 //shouldn't be greater than 2 unless zoomed
@@ -254,10 +253,10 @@
 
 	if(!user.aiming)
 		user.aiming = new(user)
-
-	var/obj/screen/weapondisplay/display = locate(/obj/screen/weapondisplay) in user.client.screen
-	if(display)
-		display.update_gun_ref(src)
+	if(user.client)
+		var/obj/screen/weapondisplay/display = locate(/obj/screen/weapondisplay) in user.client.screen
+		if(display)
+			display.update_gun_ref(src)
 
 	if(user && user.client && user.aiming && user.aiming.active && user.aiming.aiming_at != A)
 		PreFire(A,user,params) //They're using the new gun system, locate what they're aiming at.

@@ -184,7 +184,6 @@
 
 /obj/item/weapon/shockpaddles/linked/combat
 	combat = 1
-	safety = 0
 	chargetime = (1 SECONDS)
 
 

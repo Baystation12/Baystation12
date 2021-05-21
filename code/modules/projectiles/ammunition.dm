@@ -130,14 +130,20 @@
 	if(box.contents.len == 0 || isnull(box.contents.len))
 		to_chat(user,"<span class ='notice'>The [box.name] is empty!</span>")
 		return
+	if(box.loading)
+		to_chat(user,"<span class = 'notice'>You are already reloading something with [box]</span>")
+		return
 	to_chat(user,"<span class ='notice'>You start loading the [name] from the [box.name]</span>")
+	box.loading = 1
 	for(var/ammo in box.contents)
-		if(do_after(user,box.load_time SECONDS,box, same_direction = 1))
+		if(do_after(user,box.load_time,box, 1, 1, INCAPACITATION_DEFAULT, 0, 0, 0))
 			attackby(ammo,user)
 			continue
 		break
+	box.loading = 0
 
 	box.update_icon()
+	update_icon()
 
 /obj/item/ammo_magazine/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/ammo_box))

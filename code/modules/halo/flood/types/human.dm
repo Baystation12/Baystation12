@@ -12,6 +12,8 @@
 	melee_damage_lower = 25
 	melee_damage_upper = 35
 	attacktext = "bashed"
+	spawn_with_gun = MARINE_FLOOD_GUN_LIST
+	gun_spawn_chance = 25
 
 /mob/living/simple_animal/hostile/flood/combat_form/ODST
 	name = "Flood infested ODST"
@@ -27,11 +29,7 @@
 	melee_damage_lower = 30
 	melee_damage_upper = 35
 	attacktext = "bashed"
-
-/mob/living/simple_animal/hostile/flood/combat_form/ODST/New()
-	. = ..()
-	var/gun_type_spawn = pick(ODST_FLOOD_GUN_LIST)
-	pickup_gun(new gun_type_spawn (loc))
+	spawn_with_gun = ODST_FLOOD_GUN_LIST
 
 /mob/living/simple_animal/hostile/flood/combat_form/guard
 	name = "Flood infested human"
@@ -60,3 +58,5 @@
 	melee_damage_lower = 30
 	melee_damage_upper = 35
 	attacktext = "bashed"
+	spawn_with_gun = ODST_FLOOD_GUN_LIST
+	gun_spawn_chance = 25

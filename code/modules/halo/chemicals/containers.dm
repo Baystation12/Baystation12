@@ -62,12 +62,12 @@
 	startswith = list(/obj/item/weapon/reagent_containers/pill/iron = 7)
 
 /obj/item/weapon/reagent_containers/pill/hyronalin
-	name = "Hyronalin pill (5u)"
+	name = "Hyronalin pill (10u)"
 	desc = "Used to remove radiation poisoning."
 	icon_state = "pill17"
 	New()
 		..()
-		reagents.add_reagent(/datum/reagent/hyronalin, 5)
+		reagents.add_reagent(/datum/reagent/hyronalin, 10)
 
 /obj/item/weapon/storage/pill_bottle/hyronalin
 	name = "bottle of Hyronalin pills"

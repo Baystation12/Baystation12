@@ -64,12 +64,14 @@
 	icon_state = "helm_chieftain_red"
 	armor = list(melee = 40, bullet = 30, laser = 10,energy = 10, bomb = 10, bio = 0, rad = 0)
 	armor_thickness = 25
+	armor_thickness_max = 25
 
 /obj/item/clothing/head/helmet/jiralhanae/chieftain_ram
 	name = "Ram Chieftain Helm"
 	icon_state = "helm_chieftain_blue"
 	armor = list(melee = 40, bullet = 30, laser = 10,energy = 10, bomb = 10, bio = 0, rad = 0)
 	armor_thickness = 25
+	armor_thickness_max = 25
 
 /obj/item/clothing/head/helmet/jiralhanae/covenant
 	icon_state = "helm_covenant"
@@ -77,6 +79,7 @@
 	armor = list(melee = 55, bullet = 35, laser = 25,energy = 25, bomb = 20, bio = 25, rad = 25)
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical/covenant
 	armor_thickness = 22
+	armor_thickness_max = 22
 
 /obj/item/clothing/head/helmet/jiralhanae/covenant/minor
 	name = "Jiralhanae Helm (Minor)"
@@ -88,6 +91,7 @@
 	icon = JIRALHANAE_ICON_PATH_OBJ
 	icon_state = "majorhelm"
 	armor_thickness = 24
+	armor_thickness_max = 24
 
 /obj/item/clothing/head/helmet/jiralhanae/covenant/captain
 	name = "Jiralhanae Helm (Captain)"
@@ -95,6 +99,7 @@
 	icon = JIRALHANAE_ICON_PATH_OBJ
 	icon_state = "captainhelm"
 	armor_thickness = 26
+	armor_thickness_max = 26
 
 /obj/item/clothing/head/helmet/jiralhanae/covenant/EVA
 	name = "Jiralhanae Softsuit Helmet"
@@ -154,6 +159,7 @@
 	armor = list(melee = 40, bullet = 30, laser = 10, energy = 10, bomb = 10, bio = 0, rad = 0)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|HANDS
 	armor_thickness = 25
+	armor_thickness_max = 25
 
 /obj/item/clothing/suit/armor/jiralhanae/blue
 	name = "Jiralhanae Ram Chest Armour"
@@ -173,6 +179,7 @@
 	armor = list(melee = 40, bullet = 30, laser = 10, energy = 10, bomb = 10, bio = 0, rad = 0)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|HANDS
 	armor_thickness = 25
+	armor_thickness_max = 25
 
 /obj/item/clothing/suit/armor/jiralhanae/covenant
 	icon_state = "armour_covenant"
@@ -180,6 +187,7 @@
 	armor = list(melee = 50, bullet = 45, laser = 50, energy = 40, bomb = 35, bio = 20, rad = 20)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|HANDS
 	armor_thickness = 24
+	armor_thickness_max = 24
 
 /obj/item/clothing/suit/armor/jiralhanae/covenant/EVA
 	name = "Jiralhanae Softsuit"
@@ -206,6 +214,7 @@
 	icon = JIRALHANAE_ICON_PATH_OBJ
 	icon_state = "majorchest"
 	armor_thickness = 27
+	armor_thickness_max = 27
 
 /obj/item/clothing/suit/armor/jiralhanae/covenant/captain
 	name = "Jiralhanae Armor (Captain)"
@@ -213,7 +222,7 @@
 	icon = JIRALHANAE_ICON_PATH_OBJ
 	icon_state = "captainchest"
 	armor_thickness = 30
-
+	armor_thickness_max = 30
 /* SHOES */
 
 

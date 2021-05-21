@@ -30,8 +30,8 @@
 	var/allowed_magazines	    	//magazine types that may be loaded. Can be a list or single path
 	var/auto_eject = 0		    	//if the magazine should automatically eject itself when empty.
 	var/auto_eject_sound = null
-	var/speed_reload_time = 1		//How long it takes to speed reload this gun in seconds. Set to -1 to disable.  
-	var/tactical_reload_time = 1.5	//How long it takes to tactically reload this gun in seconds. Set to -1 to disable.
+	var/speed_reload_time = 0.4		//How long it takes to speed reload this gun in seconds. Set to -1 to disable.
+	var/tactical_reload_time = 0.5	//How long it takes to tactically reload this gun in seconds. Set to -1 to disable.
 
 	var/is_jammed = 0           	//Whether this gun is jammed
 	var/jam_chance = 0          	//Chance it jams on fire
@@ -53,19 +53,19 @@
 	update_icon()
 
 /obj/item/weapon/gun/projectile/proc/load_from_box(var/obj/item/ammo_box/box,var/mob/user)
-	if(box.loading)
-		to_chat(user,"<span class = 'notice'>[box] is already being used to load a gun!</span>")
-		return
 	if(box.contents.len == 0 || isnull(box.contents.len))
 		to_chat(user,"<span class ='notice'>The [box.name] is empty!</span>")
 		return
 	if(!(loaded.len <= max_shells))
 		to_chat(user,"<span class = 'notice'>The [name] is full!</span>")
 		return
+	if(box.loading)
+		to_chat(user,"<span class = 'notice'>[box] is already being used to load a gun!</span>")
+		return
 	to_chat(user,"<span class ='notice'>You start loading the [name] from the [box.name]</span>")
 	box.loading = 1
 	for(var/ammo in box.contents)
-		if(do_after(user,box.load_time SECONDS,box, same_direction = 1))
+		if(do_after(user,box.load_time,box, 1, 1, INCAPACITATION_DEFAULT, 0, 0, 0))
 			load_ammo(ammo,user)
 			continue
 		break
@@ -170,7 +170,7 @@
 								return
 							user.remove_from_mob(AM)
 							AM.loc = src.loc
-							ammo_magazine.update_icon()	
+							ammo_magazine.update_icon()
 							ammo_magazine.dropInto(user.loc)
 							reloadmessage = "speed reload"
 				if(reloadmessage == "insert") //this is done to make speed reloading drop the mag on the floor like it should

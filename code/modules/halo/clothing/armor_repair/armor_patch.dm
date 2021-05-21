@@ -36,7 +36,7 @@
 		. = ..()
 
 /obj/item/weapon/armor_patch/proc/repair_clothing(var/obj/item/clothing/c,var/mob/user)
-	var/armor_damage_taken = initial(c.armor_thickness) - c.armor_thickness
+	var/armor_damage_taken = c.armor_thickness_max - c.armor_thickness
 	if(armor_damage_taken == 0)
 		to_chat(user,"<span class = 'notice'>[c] isn't damaged or has no armor to repair</span>")
 		return

@@ -29,7 +29,6 @@ Huragok Engineers. Their flight makes them hard to hit during combat and their n
 	darksight = 4
 	brute_mod = 1.1
 	burn_mod = 1.1
-	slowdown = -0.05
 	gluttonous = GLUT_ANYTHING
 	pixel_offset_x = -1
 	default_faction = "Covenant"
@@ -40,8 +39,8 @@ Huragok Engineers. Their flight makes them hard to hit during combat and their n
 
 	item_icon_offsets = list(list(1,0),list(1,0),null,list(1,0),null,null,null,list(-1,0),null)
 
-	roll_distance = 3
-	dodge_roll_delay = DODGE_ROLL_BASE_COOLDOWN - 1.5 SECOND
+	roll_distance = 2
+	dodge_roll_delay = DODGE_ROLL_BASE_COOLDOWN - 1 SECOND
 	gibbed_anim = null
 	dusted_anim = null
 	equipment_slowdown_multiplier = 1.1 //Disincentives multiple weapon carry
@@ -71,7 +70,7 @@ Huragok Engineers. Their flight makes them hard to hit during combat and their n
 	return "Yanme\'e [rand(1,999)] \"[to_format_name]\""
 
 /datum/species/yanmee/handle_flight_failure(var/mob/living/carbon/human/H)
-	H.visible_message("<span class = 'warning'>[name] is unable to support their flight and falls to the ground, reflexively slowing their fall with their wings!</span>")
+	H.visible_message("<span class = 'warning'>[H.name] is unable to support their flight and falls to the ground, reflexively slowing their fall with their wings!</span>")
 	if(H.flight_item)
 		H.flight_item.deactivate(H,0)
 	else

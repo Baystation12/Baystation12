@@ -4,7 +4,7 @@
 	if(active)
 		return "Vote '[name]' already running."
 
-	if(world.time < (GLOB.last_player_vote + config.vote_delay))
+	if(world.time > config.vote_delay && world.time < (GLOB.last_player_vote + config.vote_delay))
 		if(!check_rights(R_ADMIN) && !automatic)
 			return "Too soon to call vote '[name]'"
 

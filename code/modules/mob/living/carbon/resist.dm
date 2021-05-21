@@ -3,7 +3,7 @@
 	//drop && roll
 	if(on_fire && !buckled)
 		fire_stacks -= 1.2
-		Weaken(3)
+		Weaken(1)
 		spin(32,2)
 		visible_message(
 			"<span class='danger'>[src] rolls on the floor, trying to put themselves out!</span>",

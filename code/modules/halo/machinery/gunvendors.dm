@@ -22,7 +22,7 @@
 					/obj/item/weapon/gun/projectile/ma5b_ar = 0,
 					/obj/item/weapon/gun/projectile/br55 = 0,
 					"Ammunition" = -1,
-					/obj/item/ammo_magazine/m6d/m224 = 0,
+					/obj/item/ammo_magazine/m6d/m225 = 0,
 					/obj/item/ammo_magazine/ma5b/m118 = 0,
 					/obj/item/ammo_magazine/m392/m120 = 0,
 					/obj/item/ammo_magazine/br55/m634 = 0,
@@ -166,6 +166,7 @@
 					/obj/item/weapon/storage/pocketstore/hardcase/tools = 0,
 					"Miscellaneous" = -1,
 					/obj/item/flight_item/bullfrog_pack = 0,
+					/obj/item/stack/barbedwire/fifteen = 0,
 					/obj/item/weapon/armor_patch = 0,
 					/obj/item/weapon/storage/firstaid/unsc = 0,
 					/obj/item/device/binoculars = 0,
@@ -177,6 +178,7 @@
 		/obj/item/weapon/storage/box/large/armorset/eva = 3,
 		/obj/item/clothing/accessory/storage/IFAK = 20,
 		/obj/item/weapon/storage/firstaid/unsc = 6,
+		/obj/item/stack/barbedwire/fifteen = 15,
 		/obj/item/flight_item/bullfrog_pack = 1
 		)
 
@@ -323,6 +325,7 @@
 					"Miscellaneous" = -1,
 					/obj/item/weapon/storage/firstaid/unsc = 0,
 					/obj/item/device/binoculars = 0,
+					/obj/item/stack/barbedwire/fifteen = 0,
 					/obj/item/weapon/armor_patch = 0,
 					/obj/item/weapon/armor_patch/mini = 0,
 					/obj/item/drop_pod_beacon = 0
@@ -334,6 +337,7 @@
 					/obj/item/weapon/storage/box/large/armorset/odst/medic = 2,
 					/obj/item/weapon/storage/box/large/armorset/odst/engineer = 2,
 					/obj/item/weapon/storage/box/large/armorset/odst/squadleader = 2,
+					/obj/item/stack/barbedwire/fifteen = 5,
 					/obj/item/clothing/accessory/storage/IFAK = 20,
 					/obj/item/weapon/storage/firstaid/unsc = 6,
 					)
@@ -370,13 +374,13 @@
 					/obj/item/weapon/plastique = 9,
 					/obj/item/weapon/storage/firstaid/unsc = 6,
 					/obj/item/device/binoculars = 4,
-					/obj/item/ammo_magazine/m6d/m224 =20,
+					/obj/item/ammo_magazine/m6d/m225 =20,
 					/obj/item/ammo_magazine/ma5b/m118 = 40,
 					/obj/item/ammo_box/shotgun = 10,
 					/obj/item/ammo_box/shotgun/slug = 10,
 					/obj/item/ammo_magazine/m739/m118 = 16,
 					/obj/item/ammo_magazine/spnkr = 10,
-					/obj/item/ammo_magazine/m6d/m224 = 16,
+					/obj/item/ammo_magazine/m6d/m225 = 16,
 					/obj/item/ammo_magazine/m7/m443 = 16,
 					/obj/item/ammo_magazine/m392/m120 = 16,
 					/obj/item/ammo_magazine/srs99/m232 = 16,
@@ -413,7 +417,7 @@
 					/obj/item/ammo_box/shotgun = 0,
 					/obj/item/ammo_box/shotgun/slug = 0,
 					/obj/item/ammo_magazine/m545/m118 = 0,
-					/obj/item/ammo_magazine/m6d/m224 = 0,
+					/obj/item/ammo_magazine/m6d/m225 = 0,
 					"Storage" = -1,
 					/obj/item/weapon/storage/belt/marine_ammo = 2,
 					/obj/item/weapon/storage/belt/marine_medic = 1,
@@ -524,10 +528,12 @@
 					"Miscellaneous" = -1,
 					/obj/item/flight_item/bullfrog_pack = 0,
 					/obj/item/weapon/armor_patch = 0,
-					/obj/item/weapon/armor_patch/mini = 0
+					/obj/item/weapon/armor_patch/mini = 0,
+					/obj/item/stack/barbedwire/fifteen = 0,
 					)
 	amounts = list(\
 		/obj/item/clothing/accessory/storage/IFAK = 20,
+		/obj/item/stack/barbedwire/fifteen = 15,
 		/obj/item/flight_item/bullfrog_pack = 1,
 		)
 

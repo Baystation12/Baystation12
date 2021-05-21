@@ -46,7 +46,8 @@
 /obj/vehicles/drop_pod/overmap/boarding_pod/get_overmap_targets()
 	var/list/potential_om_targ = list()
 	for(var/obj/effect/overmap/ship/o in (range(pod_range,map_sectors["[z]"]) - map_sectors["[z]"]))
-		potential_om_targ["[o.name]"] = o
+		if(o.is_boardable)
+			potential_om_targ["[o.name]"] = o
 	return potential_om_targ
 
 /obj/vehicles/drop_pod/overmap/boarding_pod

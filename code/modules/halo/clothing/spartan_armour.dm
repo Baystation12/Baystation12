@@ -18,7 +18,7 @@
 	flash_protection = FLASH_PROTECTION_MAJOR
 	armor = list(melee = 60, bullet = 40, laser = 30,energy = 30, bomb = 25, bio = 30, rad = 30)
 	species_restricted = list("Spartan")
-	armor_thickness = 25
+	armor_thickness = 20
 
 	action_button_name = "Toggle Helmet Light"
 	light_overlay = "helmet_light_dual"
@@ -40,7 +40,7 @@
 	icon_override = 'code/modules/halo/clothing/spartan_armour.dmi'
 
 	blood_overlay_type = "armor"
-	armor = list(melee = 55, bullet = 50, laser = 55, energy = 55, bomb = 40, bio = 25, rad = 25) //Two extra grace shots.
+	armor = list(melee = 55, bullet = 50, laser = 55, energy = 45, bomb = 40, bio = 25, rad = 25) //Shields and fullstrength armour? oh my
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL | AIRTIGHT
 	flags_inv = HIDETAIL
@@ -48,7 +48,7 @@
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
-	armor_thickness = 22 //gives 7 grace shots to this armour.
+	armor_thickness = 20
 	species_restricted = list("Spartan")
 	max_suitstore_w_class = ITEM_SIZE_HUGE
 	unacidable = 1

@@ -20,7 +20,7 @@
 		slot_l_hand_str = null,
 		slot_r_hand_str = null,
 		)
-	armor_thickness = 15
+	armor_thickness = 20
 	matter = list("nanolaminate" = 1)
 	allowed = list(
 		/obj/item/weapon/tank,\
@@ -44,7 +44,7 @@
 	heat_protection = LEGS|FEET
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
-	armor_thickness = 15
+	armor_thickness = 20
 	matter = list("nanolaminate" = 1)
 
 /obj/item/clothing/head/helmet/ranger_kigyar

@@ -23,6 +23,7 @@
 	desc = "A heavy vest designed for dangerous operations that features full upper and lower torso coverage. For room clearing and armed civilians."
 	armor = list(melee = 35, bullet = 30, laser = 15, energy = 15, bomb = 30, bio = 10, rad = 15)
 	armor_thickness = 15
+	armor_thickness_max = 15
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO//in case the parent ever gets touched, this will stay like this
 	icon = 'code/modules/halo/clothing/gcpd.dmi'

@@ -28,6 +28,18 @@
 
 /turf/simulated/floor/pavement/corner_invert
 	icon_state = "pave_invert_corner"
+//
+/turf/simulated/floor/pavement/dark
+	color = "#c9c9c9"
+
+/turf/simulated/floor/pavement/empty/dark
+	color = "#c9c9c9"
+
+/turf/simulated/floor/pavement/corner/dark
+	color = "#c9c9c9"
+
+/turf/simulated/floor/pavement/corner_invert/dark
+	color = "#c9c9c9"
 
 /turf/simulated/floor/asteroid/planet
 	initial_gas = list("oxygen" = MOLES_O2STANDARD, "nitrogen" = MOLES_N2STANDARD)

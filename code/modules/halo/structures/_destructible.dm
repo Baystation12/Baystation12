@@ -117,7 +117,7 @@
 
 /obj/structure/destructible/Bumped(var/mob/living/bumper)
 	. = ..()
-	if(bump_climb)
+	if(bump_climb && bumper.is_preference_enabled(/datum/client_preference/toggle_obstacle_autoclimb))
 		structure_climb(bumper)
 
 /obj/structure/destructible/CanPass(atom/movable/mover, turf/start, height=0, air_group=0)//So bullets will fly over and stuff.
@@ -287,7 +287,7 @@
 */
 /obj/structure/destructible/ex_act(severity)
 	//explosions do extra damage
-	take_damage(((4-severity))* 75)
+	take_damage(((4-severity))* 100 * explosion_damage_mult)
 
 /obj/structure/destructible/proc/take_damage(var/amount)
 	health -= amount

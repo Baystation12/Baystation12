@@ -103,7 +103,7 @@ var/global/datum/controller/occupations/job_master
 				return 0
 			if(!job.player_old_enough(player.client))
 				return 0
-			if(job.is_restricted(player.client.prefs))
+			if(job.is_restricted(player.client.prefs,player))
 				return 0
 
 			var/position_limit = job.total_positions
@@ -121,7 +121,7 @@ var/global/datum/controller/occupations/job_master
 					var/player_pop_nonfaction = 0
 					var/player_pop_faction = 0
 					for(var/client/C in GLOB.clients)
-						if(!C.mob || !istype(C.mob,/mob/living) || isnull(poplocked.spawn_faction))
+						if(!C.mob || C.mob.faction == null || istype(C.mob,/mob/observer) || isnull(poplocked.spawn_faction))
 							continue
 						if(C.mob.faction == poplocked.spawn_faction)
 							player_pop_faction++
@@ -130,7 +130,11 @@ var/global/datum/controller/occupations/job_master
 					var/hostilefaction_multiplier = 1
 					if(player_pop_nonfaction > 0 && player_pop_faction > 0)
 						hostilefaction_multiplier = min(round(player_pop_nonfaction / player_pop_faction),1)
-					var/amt_job = max(round((player_pop_nonfaction * hostilefaction_multiplier)/poplocked.poplock_divisor),0)
+
+					var/initialpos = initial(poplocked.total_positions)
+					var/max_job_amt = poplocked.poplock_max + initialpos
+					var/amt_job_pre = initialpos + round((player_pop_nonfaction * hostilefaction_multiplier)/poplocked.poplock_divisor)
+					var/amt_job = max(min(max_job_amt,amt_job_pre),0)
 
 					if(amt_job > 0)
 						if(poplocked.total_positions == 0)
@@ -184,7 +188,7 @@ var/global/datum/controller/occupations/job_master
 			if(istype(job, GetJob("Assistant"))) // We don't want to give him assistant, that's boring!
 				continue
 
-			if(job.is_restricted(player.client.prefs))
+			if(job.is_restricted(player.client.prefs,player))
 				continue
 
 			if(job.title in command_positions) //If you want a command position, select it!
@@ -337,6 +341,9 @@ var/global/datum/controller/occupations/job_master
 
 					if(jobban_isbanned(player, job.title,job.is_whitelisted))
 						Debug("DO isbanned failed, Player: [player], Job:[job.title]")
+						continue
+
+					if(job.is_restricted(player.client.prefs,player))
 						continue
 
 					if(!job.player_old_enough(player.client))

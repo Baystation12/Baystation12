@@ -83,13 +83,16 @@
 	. = ..()
 	if (.)
 		playsound(src.loc, 'sound/effects/explosion1.ogg', 30, 1, -3)
-		src.fragmentate(get_turf(loc), 50, 7, list(/obj/item/projectile/bullet/pellet/fragment = 1)) //Loc not target, we don't explode *in* them we explode *on* them
+		src.fragmentate(get_turf(loc), 100, 7, list(/obj/item/projectile/bullet/pellet/fragment = 1)) //Loc not target, we don't explode *in* them we explode *on* them
 		qdel(src)
 
 /obj/item/projectile/bullet/g40mm/smoke
 	damage = 30
-	armor_penetration = 5
 	arming_range = 1
+
+/obj/item/projectile/bullet/g40mm/smoke/launch(atom/target, var/target_zone, var/x_offset=0, var/y_offset=0, var/angle_offset=0)
+	. = ..()
+	kill_count = get_dist(get_turf(loc),get_turf(target))
 
 /obj/item/projectile/bullet/g40mm/smoke/on_impact(var/atom/target)
 	var/datum/effect/effect/system/smoke_spread/bad/smoke
@@ -105,11 +108,19 @@
 
 /obj/item/projectile/bullet/g40mm/illumination
 	damage = 30
-	armor_penetration = 5
+
+/obj/item/projectile/bullet/g40mm/illumination/launch(atom/target, var/target_zone, var/x_offset=0, var/y_offset=0, var/angle_offset=0)
+	. = ..()
+	kill_count = get_dist(get_turf(loc),get_turf(target))
 
 /obj/item/projectile/bullet/g40mm/illumination/on_impact(var/atom/target)
 	. = ..()
-	new /obj/item/device/flashlight/flare/g40mm(get_turf(loc))
+	var/mob/living/m = target
+	if(istype(m))
+		m.adjust_fire_stacks(1)
+		if(!m.on_fire)
+			m.IgniteMob()
+	new /obj/item/device/flashlight/flare/g40mm(get_turf(target))
 
 //Boxes of 40mm ammo for supplypacks
 

@@ -39,6 +39,7 @@
 	icon_state = "boolet"
 	fire_sound = 'code/modules/halo/sounds/boltshot_fire.ogg'
 	damage = 40
+	armor_penetration = 30
 
 /obj/item/projectile/bullet/pellet/shotgun/boltshot
 	name = "hardlight shrapnel"
@@ -73,7 +74,7 @@
 	damage = 55
 	armor_penetration = 60
 	step_delay = 0
-	penetrating = 5
+	penetrating = 1
 	shield_damage = 210
 	tracer_type = /obj/effect/projectile/binaryrifle
 	tracer_delay_time = 2 SECONDS
@@ -104,7 +105,7 @@
 	name = "hardlight round"
 	icon = 'code/modules/halo/weapons/icons/forerunner_sprites.dmi'
 	icon_state = "suppressor_ammo"
-	damage = 20
-	armor_penetration = 10
+	damage = 25
+	armor_penetration = 20
 	penetrating = 1
 	shield_damage = 15

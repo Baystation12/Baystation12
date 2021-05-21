@@ -49,7 +49,7 @@
 	var/fallback_spawnpoint //If set, this will, on failure to find any spawnpoints, permemnantly switch the spawn_override to this.
 
 	var/poplock_divisor = 1
-	var/poplock_max = 1
+	var/poplock_max = 1 //The max amount of jobslots we can gain from poplock
 
 	//Seperate from the pop-lock system, this controls how many players this role counts as when present in-game to
 	//stop one faction from being heavily overpopulated

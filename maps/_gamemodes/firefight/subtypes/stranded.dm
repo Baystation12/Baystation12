@@ -16,6 +16,12 @@
 		/datum/game_mode/firefight/proc/spawn_resupply,\
 		/datum/game_mode/firefight/proc/spawn_ship_debris)
 
+	max_spawns_tick_perf = 30
+	max_spawns_tick_base = 15
+	max_spawns_tick = 15
+	enemy_numbers_base = 25
+	enemy_numbers_left = 25
+
 	wave_spawns = list()
 
 /datum/game_mode/firefight/stranded/pre_setup()
@@ -24,3 +30,15 @@
 
 	//flood dont use radio to communicate with each other
 	overmind.comms_channel = null
+
+//An important override for the ghost role flood
+/datum/ghost_role/flood_combat_form
+	objects_spawn_on = list(/obj/effect/landmark/flood_spawn,/obj/effect/landmark/spawn_medium,/obj/structure/biomass)
+
+/datum/ghost_role/flood_combat_form/unique_role_checks(var/mob/observer/ghost/ghost,var/list/possible_spawns)//Used to check some special circumstances, like welded vents for mice.
+	var/datum/game_mode/firefight/gm = ticker.mode
+	if(!istype(gm))
+		return 1
+	if(gm.is_spawning)
+		return 1
+	return 0

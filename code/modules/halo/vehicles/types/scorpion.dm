@@ -8,8 +8,8 @@
 	anchored = 1
 
 	bound_height = 64
-	bound_width = 96
-
+	bound_width = 64
+	pixel_x = -16
 	comp_prof = /datum/component_profile/scorpion
 
 	ammo_containers = newlist(/obj/item/ammo_magazine/scorp_coax,/obj/item/ammo_magazine/scorp_shell)
@@ -22,7 +22,7 @@
 
 	move_sound = 'code/modules/halo/sounds/scorp_move.ogg'
 
-	vehicle_view_modifier = 1.3
+	vehicle_view_modifier = 1.65
 
 	light_color = "#E1FDFF"
 

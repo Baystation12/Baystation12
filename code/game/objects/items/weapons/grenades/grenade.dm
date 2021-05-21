@@ -50,7 +50,10 @@
 
 
 /obj/item/weapon/grenade/examine(mob/user)
-	if(..(user, 0))
+	. = ..(user, 0)
+	if(starttimer_on_hit)
+		to_chat(user,"The timer starts when [src] impacts a surface.")
+	if(.)
 		if(det_time > 1)
 			to_chat(user, "The timer is set to [det_time/10] seconds.")
 			return

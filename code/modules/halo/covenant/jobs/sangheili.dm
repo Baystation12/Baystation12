@@ -2,8 +2,10 @@
 /datum/job/covenant/sangheili_shipmaster
 	title = "Sangheili Shipmaster"
 	department_flag = COM
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 0
+	spawn_positions = 0
+	poplock_max = 1
+	poplock_divisor = 9
 	track_players = TRUE
 	outfit_type = /decl/hierarchy/outfit/sangheili/shipmaster
 	is_whitelisted = 1
@@ -15,8 +17,10 @@
 /datum/job/covenant/sangheili_ultra
 	title = "Sangheili Ultra"
 	department_flag = COM
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 0
+	spawn_positions = 0
+	poplock_max = 1
+	poplock_divisor = 7
 	outfit_type = /decl/hierarchy/outfit/sangheili/ultra
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/sangheili)
@@ -36,9 +40,10 @@
 
 /datum/job/covenant/sangheili_major
 	title = "Sangheili Major"
-	total_positions = 2
-	spawn_positions = 2
-	open_slot_on_death = TRUE
+	total_positions = 0
+	spawn_positions = 0
+	poplock_max = 2
+	poplock_divisor = 5
 	department_flag = COM
 	outfit_type = /decl/hierarchy/outfit/sangheili/major
 	faction_whitelist = "Covenant"

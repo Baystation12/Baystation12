@@ -10,6 +10,7 @@
 	suit = /obj/item/clothing/suit/armor/special/combatharness/minor
 	back = null
 	belt = null
+	l_hand = /obj/item/language_learner/unggoy_to_common
 	gloves = /obj/item/clothing/gloves/thick/sangheili/minor
 	shoes = /obj/item/clothing/shoes/sangheili/minor
 	head = /obj/item/clothing/head/helmet/sangheili/minor
@@ -27,6 +28,7 @@
 	suit_store = null
 	back = null
 	belt = null
+	l_hand = /obj/item/language_learner/unggoy_to_common
 	gloves = /obj/item/clothing/gloves/thick/sangheili/major
 	shoes = /obj/item/clothing/shoes/sangheili/major
 	head = /obj/item/clothing/head/helmet/sangheili/major

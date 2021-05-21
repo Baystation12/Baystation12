@@ -26,7 +26,7 @@
 	var/list/decals
 
 	var/movement_delay = 0
-	var/can_build_wall = FALSE
+	var/can_build_wall = TRUE
 	var/list/elevation_impacters = list() //A list of items that impact elevation, present on this tile.
 
 /turf/New()

@@ -12,7 +12,7 @@
 	amount_per_transfer_from_this = 5
 	unacidable = 1
 	volume = 30
-	possible_transfer_amounts = null
+	possible_transfer_amounts = "5;10"
 	flags = OPENCONTAINER
 	slot_flags = SLOT_BELT
 	var/list/starts_with = list()
@@ -81,6 +81,7 @@
 	icon_state = "autoinjector"
 	item_state = "autoinjector"
 	amount_per_transfer_from_this = 5
+	possible_transfer_amounts = null
 	volume = 5
 
 	var/band_color = COLOR_ORANGE

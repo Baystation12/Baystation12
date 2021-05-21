@@ -46,9 +46,8 @@
 								o.take_damage(WATCHER_IDLE_ROBOHEAL,1)
 							did_something = 1
 					for(var/obj/item/clothing/c in h.contents)
-						var/max_thickness = initial(c.armor_thickness)
-						if(c.armor_thickness < max_thickness)
-							c.armor_thickness = min(c.armor_thickness + WATCHER_IDLE_ARMOURREPAIR,max_thickness)
+						if(c.armor_thickness < c.armor_thickness_max)
+							c.armor_thickness = min(c.armor_thickness + WATCHER_IDLE_ARMOURREPAIR,c.armor_thickness_max)
 							did_something = 1
 				if(did_something)
 					visible_message("<span class = 'warning'>[src] pulses, repairing nearby electronics and armour</span>")

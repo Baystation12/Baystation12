@@ -33,7 +33,9 @@
 
 			//more players means stronger enemies
 			var/players_alive = max(player_faction.players_alive() - 1, 0)
-			var/player_bonus = player_bonus_enemies[GLOB.difficulty_level] * players_alive
+			var/playercount_bonus = player_bonus_enemies[GLOB.difficulty_level]
+			var/player_bonus = playercount_bonus * players_alive
+			max_spawns_tick = min(max_spawns_tick_perf,max_spawns_tick_base + playercount_bonus)
 
 			//calculate the enemy strength for this wave
 			enemy_numbers_left = enemy_numbers_base + wave_bonus + player_bonus

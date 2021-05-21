@@ -7,7 +7,15 @@
 	var/obj/item/weapon/gun/our_gun
 
 	var/corpse_pulped = 0 //1 = cannot be revived, -1 = can be revived infinitely.
+	var/list/spawn_with_gun = null //If this is set, we'll spawn with a gun (or try to)
+	var/gun_spawn_chance = 100
 	var/list/inventory //list of objects to select from for drop on death
+
+/mob/living/simple_animal/hostile/flood/combat_form/Initialize()
+	. = ..()
+	if(!isnull(spawn_with_gun) && (gun_spawn_chance == 100 || prob(gun_spawn_chance)))
+		var/gun_type_spawn = pick(spawn_with_gun)
+		pickup_gun(new gun_type_spawn (loc))
 
 /mob/living/simple_animal/hostile/flood/combat_form/examine(var/examiner)
 	. = ..()
@@ -120,9 +128,10 @@
 		return
 	/*if(human_in_sight() && isnull(our_infestor))
 		spawn_infestor()*/
-	if(locate(/obj/machinery/door/airlock) in view(1,src))
+	var/list/viewlist = view(1,src)
+	if(locate(/obj/machinery/door/airlock) in viewlist)
 		smash_airlock()
 	if(!our_gun)
-		for(var/obj/item/weapon/gun/G in view(1,src))
+		for(var/obj/item/weapon/gun/G in viewlist)
 			pickup_gun(G)
 			return

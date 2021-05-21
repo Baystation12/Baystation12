@@ -23,8 +23,8 @@
 	one_hand_penalty = 2
 	hud_bullet_usebar = 1
 
-	overheat_capacity = 48
-	overheat_fullclear_delay = 30
+	overheat_capacity = 32
+	overheat_fullclear_delay = 3 SECONDS
 	overheat_sfx = 'code/modules/halo/sounds/plasrifle_overheat.ogg'
 
 	item_icons = list(
@@ -35,7 +35,7 @@
 		slot_s_belt_str = 'code/modules/halo/weapons/icons/Belt_Weapons.dmi',
 		)
 
-	irradiate_non_cov = 10
+	irradiate_non_cov = 2 //this is per shot, so 12 rads from one burst
 	alt_charge_method = 1
 
 /obj/item/weapon/gun/energy/plasmarifle/can_use_when_prone()
@@ -59,7 +59,7 @@
 	projectile_type = /obj/item/projectile/bullet/covenant/plasmarifle/brute
 	fire_delay = 6
 	burst_delay = 1.8
-	irradiate_non_cov = 8
+	irradiate_non_cov = 3
 
 /obj/item/weapon/gun/projectile/concussion_rifle
 	name = "Type-50 Directed Energy Rifle / Heavy"
