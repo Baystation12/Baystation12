@@ -317,7 +317,7 @@
 "ge" = (/obj/structure/stairs_decorative{icon_state = "stairs"; dir = 4},/turf/simulated/floor/tech/white,/area/achlys/five/z3lounge)
 "gf" = (/obj/structure/closet{icon_state = "open"; opened = 1},/obj/random/maintenance/clean,/turf/simulated/floor/carpet,/area/achlys/nine/z3carpetdorms1)
 "gg" = (/obj/structure/device/piano,/turf/simulated/floor/lino,/area/achlys/five/z3lounge)
-"gh" = (/obj/item/weapon/stool/bar/padded,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/lino,/area/achlys/five/z3lounge)
+"gh" = (/obj/item/weapon/stool/bar/padded,/obj/effect/decal/cleanable/blood/splatter,/mob/living/simple_animal/hostile/flood/combat_form/prisoner/abomination/captain,/turf/simulated/floor/lino,/area/achlys/five/z3lounge)
 "gi" = (/obj/structure/vent,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/structure/floodspawner{spawn_spot_x = 71; spawn_spot_y = 75},/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled/dark,/area/achlys/three/z3dormhalls)
 "gj" = (/obj/effect/floor_decal/corner/red/diagonal,/obj/machinery/vending/coffee,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/achlys/two/z3escape1)
 "gk" = (/turf/simulated/open,/area/achlys/two/z3escape1)
