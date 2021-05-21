@@ -66,6 +66,3 @@
 	icon_state = "nudist"
 	icon_living = "nudist"
 	icon_dead = "nudist_dead"
-
-/mob/living/simple_animal/hostile/flood/combat_form/prisoner/crew/XO
-	inventory = list(/obj/item/weapon/card/id/the_silver)

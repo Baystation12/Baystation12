@@ -461,3 +461,6 @@
 	inventory = pick(list(/obj/item/ammo_magazine/ma37/m118),list(/obj/item/ammo_magazine/m6d/m224),list(/obj/item/ammo_box/shotgun),\
 				list(/obj/item/weapon/melee/baton/humbler),list(/obj/item/ammo_box/shotgun/beanbag),list(/obj/item/weapon/melee/telebaton))
 
+/mob/living/simple_animal/hostile/flood/combat_form/prisoner/crew/XO
+	inventory = list(/obj/item/weapon/card/id/the_silver)
+
