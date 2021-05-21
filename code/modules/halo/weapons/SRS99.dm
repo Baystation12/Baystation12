@@ -17,7 +17,7 @@
 	screen_shake = 0
 	fire_delay = 12
 	accuracy = -12 //Honestly stop hipfiring snipers damn it
-	dispersion = list(0.26)
+	dispersion = list(0)
 	scope_zoom_amount = 8
 	min_zoom_amount = 3
 	is_scope_variable = 1

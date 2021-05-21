@@ -90,8 +90,6 @@ var/list/points_of_interest = list()
 	setup_object()
 	generate_targetable_areas()
 
-	if(flagship)
-		GLOB.overmap_tiles_uncontrolled -= trange(28,src)
 	if(occupy_range)
 		GLOB.overmap_tiles_uncontrolled -= trange(occupy_range,src)
 

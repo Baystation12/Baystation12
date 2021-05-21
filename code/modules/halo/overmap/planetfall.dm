@@ -5,20 +5,21 @@
 	var/obj/effect/overmap/old_om_type
 	var/obj/effect/overmap/landed_on = null
 
-/obj/effect/overmap/ship/proc/do_crash_landing(var/obj/effect/overmap/planet)
-	do_landing(planet)
+/obj/effect/overmap/ship/proc/do_crash_landing(var/obj/effect/overmap/planet,var/keep_umbilicals_active = 0)
+	do_landing(planet,keep_umbilicals_active)
 	if(old_om_type)
 		qdel(old_om_type)
 
-/obj/effect/overmap/ship/proc/do_landing(var/obj/effect/overmap/planet)
+/obj/effect/overmap/ship/proc/do_landing(var/obj/effect/overmap/planet,var/keep_umbilicals_active = 0)
 	var/obj/effect/landmark/map_data/our_last = map_z_data[map_z_data.len]
 	var/obj/effect/landmark/map_data/their_first = planet.map_z_data[1]
 	if(!our_last || !their_first)
 		return
 
 	landed_on = planet
+	/*
 	our_last.below = their_first
-	their_first.above = our_last
+	their_first.above = our_last*/
 
 	//DO FLOORTURF GEN//
 	//Now we pad the bounds a bit
@@ -38,6 +39,10 @@
 
 	old_om_type.slipspace_status = 1 //Yes it's not in slipspace, but this is good enough to stop roundends
 	old_om_type.loc = null
+	if(keep_umbilicals_active)
+		for(var/obj/docking_umbilical/u in world)
+			if(u.our_ship == old_om_type)
+				u.our_ship = landed_on
 
 	//We should have screen shake happen on these.
 	for(var/mob/m in GLOB.mobs_in_sectors[src])
@@ -45,7 +50,6 @@
 
 	for(var/mob/m in GLOB.mobs_in_sectors[planet])
 		to_chat(m,"<span class = 'danger'>The sky is filled with the shape of [src]'s hull as it lands groundside...</span>")
-
 
 /*
 /obj/effect/overmap/ship/proc/exit_landing_state()

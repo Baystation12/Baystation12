@@ -12,6 +12,8 @@
 	melee_damage_lower = 35
 	melee_damage_upper = 40
 	attacktext = "slash"
+	spawn_with_gun = COV_MEDIUM_FLOOD_GUN_LIST
+	gun_spawn_chance = 33
 
 /mob/living/simple_animal/hostile/flood/combat_form/minor2
 	name = "Flood infested Minor"
@@ -26,6 +28,8 @@
 	melee_damage_lower = 35
 	melee_damage_upper = 40
 	attacktext = "slash"
+	spawn_with_gun = COV_MEDIUM_FLOOD_GUN_LIST
+	gun_spawn_chance = 33
 
 /mob/living/simple_animal/hostile/flood/combat_form/major
 	name = "Flood infested Major"
@@ -37,10 +41,12 @@
 	move_to_delay = 4
 	health = 125 //Combat forms need to be hardier.
 	maxHealth = 125
-	resistance = 2
+	resistance = 5
 	melee_damage_lower = 35
 	melee_damage_upper = 40
 	attacktext = "slash"
+	spawn_with_gun = COV_MEDIUM_FLOOD_GUN_LIST
+	gun_spawn_chance = 45
 
 /mob/living/simple_animal/hostile/flood/combat_form/zealot
 	name = "Flood infested Zealot"
@@ -55,6 +61,8 @@
 	melee_damage_lower = 35
 	melee_damage_upper = 40
 	attacktext = "slash"
+	spawn_with_gun = COV_STRONG_FLOOD_GUN_LIST
+	gun_spawn_chance = 65
 
 /mob/living/simple_animal/hostile/flood/combat_form/ultra
 	name = "Flood infested Ultra"
@@ -69,6 +77,8 @@
 	melee_damage_lower = 35
 	melee_damage_upper = 40
 	attacktext = "slash"
+	spawn_with_gun = COV_STRONG_FLOOD_GUN_LIST
+	gun_spawn_chance = 65
 
 /mob/living/simple_animal/hostile/flood/combat_form/specops
 	name = "Flood infested Spec Ops"
@@ -97,3 +107,5 @@
 	melee_damage_lower = 35
 	melee_damage_upper = 40
 	attacktext = "slash"
+	spawn_with_gun = COV_MEDIUM_FLOOD_GUN_LIST
+	gun_spawn_chance = 65

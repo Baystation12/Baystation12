@@ -1,5 +1,5 @@
-#define FLIGHT_DODGE_DIVISOR 6
-#define FLIGHT_DODGE_MESSAGE_CHANCE 33
+#define FLIGHT_DODGE_DIVISOR 5
+#define FLIGHT_DODGE_MESSAGE_CHANCE 40
 
 /mob/living/CanPass(atom/movable/mover, turf/start, height=0, air_group=0)
 	. = ..()
@@ -14,7 +14,7 @@
 				dam_to_remove = round(dam_to_remove / FLIGHT_DODGE_DIVISOR)
 				decrement_flight_ticks(dam_to_remove)
 				if(prob(FLIGHT_DODGE_MESSAGE_CHANCE))
-					to_chat(src,"<span class = 'danger'>You use energy dodging [mover]</span>")
+					visible_message(src,"<span class = 'danger'>[src] dodges [p], making them hover lower!</span>")
 
 #undef FLIGHT_DODGE_DIVISOR
 #undef FLIGHT_DODGE_MESSAGE_CHANCE

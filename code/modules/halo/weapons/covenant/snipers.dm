@@ -16,7 +16,7 @@
 	fire_delay = 3 //Doesn't have the 3rnd burst of the counterpart BR
 	dispersion = list(0.26)
 	one_hand_penalty = -1
-	irradiate_non_cov = 12
+	irradiate_non_cov = 8
 	scope_zoom_amount = 2
 	accuracy = 1
 	wielded_item_state = "carbine-wielded"
@@ -74,11 +74,11 @@
 	max_shots = 16
 	projectile_type = /obj/item/projectile/bullet/covenant/beamrifle
 	one_hand_penalty = -1
-	irradiate_non_cov = 17
+	irradiate_non_cov = 12
 	wielded_item_state = "beamrifle-wielded"
 	fire_delay = 10
 	accuracy = -12 //Honestly stop hipfiring snipers damn it
-	dispersion = list(0.26)
+	dispersion = list(0)
 	scope_zoom_amount = 8
 	min_zoom_amount = 3
 	is_scope_variable = 1
@@ -86,7 +86,7 @@
 	advanced_covenant = 1
 	overheat_sfx = 'code/modules/halo/sounds/beam_rifle_overheat.ogg'
 	overheat_capacity = 4 //SRS mag equiv, but overheats on 4th click
-	overheat_fullclear_delay = 40
+	overheat_fullclear_delay = 4 SECONDS
 	hud_bullet_usebar = 1
 
 	alt_charge_method = 1
@@ -132,7 +132,7 @@
 	load_method = MAGAZINE
 	reload_sound = 'code/modules/halo/sounds/cov_needlerifle_reload.ogg'
 	one_hand_penalty = -1
-	dispersion = list(0.26)
+	dispersion = list(0)
 	scope_zoom_amount = 3
 	is_scope_variable = 1
 	hud_bullet_row_num = 7

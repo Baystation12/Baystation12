@@ -12,6 +12,8 @@
 	var/last_burn = 0					//worldtime when ship last acceleated
 	var/list/last_movement = list(0,0)	//worldtime when ship last moved in x,y direction
 	var/fore_dir = NORTH				//what dir ship flies towards for purpose of moving stars effect procs
+	var/is_boardable = 1 //Can boarding pods attack us?
+	var/has_external_dropship_points = 1
 
 	var/obj/machinery/computer/helm/nav_control
 	var/obj/machinery/nav_computer/nav_comp
@@ -70,6 +72,8 @@
 
 //Creates dropship markers for each z-level, for each cardinal direction.
 /obj/effect/overmap/ship/proc/create_dropship_markers()
+	if(!has_external_dropship_points)
+		return
 	for(var/i = 1 to map_z.len)
 		for(var/n in list("North","East","South","West"))//1 for each cardinal direction
 			var/using_axis_x = 0 //if this is ticked, the y axis becomes static

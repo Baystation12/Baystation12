@@ -22,9 +22,9 @@
 	appearance_flags = HAS_SKIN_TONE | HAS_HAIR_COLOR | HAS_EYE_COLOR
 
 	pain_mod = 0.9
-	brute_mod = 1.1
-	burn_mod = 1.1
-	slowdown = -0.3
+	brute_mod = 1.2
+	burn_mod = 1.2
+	slowdown = -0.4
 
 	equipment_slowdown_multiplier = 1.1 //Disincentives multiple weapon carry
 	gibbed_anim = null

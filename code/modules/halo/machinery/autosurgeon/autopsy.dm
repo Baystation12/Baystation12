@@ -16,6 +16,9 @@
 	var/obj/item/organ/external/external = locate() in buckled_mob:organs
 	if(external)
 		src.visible_message("<span class='info'>[src] starts dissecting [buckled_mob]'s [external.amputation_point]...</span>")
+		spawn(rand(3,8))
+			if(external)
+				external.droplimb()
 	else
 		src.visible_message("<span class='info'>[src] starts dissecting [buckled_mob]'s core...</span>")
 
@@ -36,7 +39,7 @@
 		A.write_report(buckled_mob)
 
 		//finish off the last of the mob
-		buckled_mob.gib()
+		buckled_mob.death()
 		playsound(get_turf(src), 'sound/effects/squelch2.ogg', 100, TRUE)
 
 /obj/item/weapon/paper/autopsy_report

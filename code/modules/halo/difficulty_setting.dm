@@ -24,7 +24,7 @@ mob/living/simple_animal/hostile/apply_difficulty_setting()
 			//make enemies stronger
 			health += 50
 			maxHealth += 50
-			resistance = max(resistance + 5, 25)
+			resistance = min(resistance + 5, 25)
 			melee_damage_lower += 10
 			melee_damage_upper += 10
 			if(burst_size > 1)

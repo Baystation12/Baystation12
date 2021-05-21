@@ -335,7 +335,7 @@
 	name = "Sangheili Combat Harness (Shipmaster)"
 	icon_state = "zealot_chest_obj"
 	item_state = "zealot_chest"
-	totalshields = 300
+	totalshields = 270
 
 /obj/item/clothing/shoes/sangheili/shipmaster
 	name = "Sanghelli Leg Armour (Shipmaster)"

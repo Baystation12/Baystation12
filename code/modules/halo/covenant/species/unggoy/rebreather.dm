@@ -13,7 +13,7 @@
 	body_parts_covered = HEAD|FACE
 	item_flags = BLOCK_GAS_SMOKE_EFFECT | AIRTIGHT | FLEXIBLEMATERIAL
 	armor = list(melee = 40, bullet = 20, laser = 35,energy = 35, bomb = 20, bio = 0, rad = 0)
-	armor_thickness = 10
+	armor_thickness = 20
 	unacidable = 1
 
 	var/rebreath_efficiency = 50 //Rebreather efficiency: Percentile
@@ -26,7 +26,8 @@
 	body_parts_covered = FACE
 	item_flags = AIRTIGHT|FLEXIBLEMATERIAL
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
-	armor_thickness = 0
+	armor_thickness = null
+	armor_thickness_max = null
 
 /obj/item/clothing/mask/rebreather/post_internals_breathe(var/datum/gas_mixture/removed_gas,var/obj/item/weapon/tank/tank_removed_from)
 	var/datum/gas_mixture/gas_rebreathed = new

@@ -109,9 +109,6 @@
 /obj/machinery/door/airlock/multi_tile/halo/blast_normal_triple/odp_general/umbilical_divider
 	name = "Umbilical Divider"
 
-/obj/machinery/door/window/odst_armory
-	req_access = list(access_unsc_odst)
-
 /obj/machinery/door/window/northleft/oni_entrance
 	req_access = list(access_unsc_oni)
 

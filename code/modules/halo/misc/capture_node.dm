@@ -1,5 +1,7 @@
 GLOBAL_LIST_EMPTY(capture_nodes)
-#define FALLBACK_MOBSPAWN_AMOUNT 4
+#define FALLBACK_MOBSPAWN_AMOUNT 6
+#define EXTRAPLAYER_CAP_AMT_INCREASE 0.25
+#define EXTRAPLAYER_CAP_AMT_MAX 2
 
 /obj/machinery/computer/capture_node
 	name = "Sovereignty Console"
@@ -7,12 +9,16 @@ GLOBAL_LIST_EMPTY(capture_nodes)
 	icon_screen = "comm_monitor"
 	desc = "Used to determine who controls this area."
 	var/control_faction
-	var/comms_from = "Geminus Sovereignty Update"//The origin of comms messages sent by this console.
+	var/comms_from = "Sovereignty Update"//The origin of comms messages sent by this console.
 	var/list/capturing_factions = list("UNSC","Insurrection","Covenant")
 	var/list/faction_frequencies = list()
 	var/list/faction_languages = list()
-	var/capture_time = 8 SECONDS
-	var/mob/living/interacting
+	var/capture_time = 180
+	var/last_cap_tick_time
+	var/faction_capturing
+	var/capture_ticks_remain = -1
+	var/datum/progressbar/cap_bar
+	var/next_cap_tick_at = 0
 	var/list/capture_npc_spawnlocs = list()
 	ai_access_level = 4
 
@@ -35,6 +41,8 @@ GLOBAL_LIST_EMPTY(capture_nodes)
 
 /obj/machinery/computer/capture_node/examine(mob/user, var/distance = -1, var/infix = "", var/suffix = "")
 	. = ..()
+	if(capture_ticks_remain > 0)
+		to_chat(user,"<span class = 'warning'>It is currently being captured by [faction_capturing]. [capture_ticks_remain] ticks remain until capture.</span>")
 
 	var/chat_text = "<span class='info'>Current score: "
 	for(var/datum/faction/F in GLOB.all_factions)
@@ -44,34 +52,83 @@ GLOBAL_LIST_EMPTY(capture_nodes)
 	chat_text += "</span>"
 	to_chat(user, chat_text)
 
+/obj/machinery/computer/capture_node/proc/check_faction_cap_active(var/get_amount = 0)
+	if(!faction_capturing)
+		return 0
+	var/area/a = get_area(loc)
+	var/amt = 0
+	for(var/mob/living/l in GLOB.player_list)
+		if(l.stat == CONSCIOUS && l.faction == faction_capturing && get_area(l.loc) == a)
+			if(get_amount)
+				amt++
+			else
+				return 1
+	if(amt > 0)
+		return amt
+
+	return 0
+
 /obj/machinery/computer/capture_node/attack_hand(var/mob/living/user)
-	if(interacting)
-		if(interacting == user)
-			to_chat(user,"<span class='warning'>You are already interacting with [src].</span>")
+	var/userfaction = user.faction
+	if(userfaction == control_faction)
+		to_chat(user,"<span class = 'notice'>Your faction is already in control of [src].</span>")
+		return
+	if(faction_capturing)
+		if(userfaction == faction_capturing)
+			to_chat(user,"<span class='warning'>Your faction is already capturing [src].</span>")
+			return
 		else
-			to_chat(user,"<span class='warning'>[interacting] is already interacting with [src].</span>")
+			to_chat(user,"<span class-'warning'>A faction is already capturing [src]. Eliminate their members and try again.</span>")
+			return
 	else
-		interacting = user
-		if(control_faction)
-			src.visible_message("\icon[user] <span class='warning'>[user] begins resetting [src] to neutral!</span>")
-			contest_markers(user.faction)
-			if(do_after(user, capture_time, src, same_direction = 1))
-				src.visible_message("\icon[user] <span class='info'>[user] has reset [src] to neutral.</span>")
-				control_markers(null, user.faction)
-			else
-				reset_markers()
+		if(userfaction in capturing_factions)
+			src.visible_message("\icon[user] <span class='warning'>[user] begins taking control of [src]! Stay in the area to keep gaining control! Have more faction members in the area to speed up the capture!</span>")
+			contest_markers(userfaction)
+			faction_capturing = userfaction
+			capture_ticks_remain = capture_time
+			next_cap_tick_at = world.time + 1 SECOND
+			last_cap_tick_time = world.time
 		else
-			if(user.faction in capturing_factions)
-				src.visible_message("\icon[user] <span class='warning'>[user] begins taking control of [src]!</span>")
-				contest_markers(user.faction)
-				if(do_after(user, capture_time, src, same_direction = 1))
-					src.visible_message("\icon[user] <span class='info'>[user] has taken control of [src] for the [user.faction].</span>")
-					control_markers(user.faction, user.faction)
-				else
-					reset_markers()
-			else
-				to_chat(user,"\icon[src] <span class='warning'>Your faction has no interest in controlling [src].</span>")
-		interacting = null
+			to_chat(user,"\icon[src] <span class='warning'>Your faction has no interest in controlling [src].</span>")
+			return
+
+/obj/machinery/computer/capture_node/process()
+	if(!faction_capturing)
+		return
+	if(world.time < next_cap_tick_at)
+		return
+	if(capture_ticks_remain == 0)
+		capture_ticks_remain = -1
+		if(control_faction)
+			control_markers(null,faction_capturing)
+		control_markers(faction_capturing,faction_capturing)
+		faction_capturing = null
+		overlays -= cap_bar
+		qdel(cap_bar)
+		cap_bar = null
+		return
+	var/amt_capping = check_faction_cap_active(1)
+	if(amt_capping == 0)
+		if(capture_ticks_remain >= capture_time)
+			faction_capturing = null
+			reset_markers()
+			overlays -= cap_bar
+			qdel(cap_bar)
+			cap_bar = null
+		else
+			capture_ticks_remain = min(capture_time,capture_ticks_remain+3)
+	else
+		var/deltaticks = (world.time - last_cap_tick_time)/10
+		var/ticks_remove = (1 + ((amt_capping-1)*EXTRAPLAYER_CAP_AMT_INCREASE)) * deltaticks
+		capture_ticks_remain = max(0,capture_ticks_remain-min(ticks_remove,EXTRAPLAYER_CAP_AMT_MAX))
+	if(!cap_bar)
+		cap_bar = new (null,capture_time, src)
+		cap_bar.process_without_user = 1
+	last_cap_tick_time = world.time
+	next_cap_tick_at = world.time + 1 SECOND
+	overlays -= cap_bar.bar
+	cap_bar.update(capture_time-capture_ticks_remain)
+	overlays += cap_bar.bar
 
 /obj/machinery/computer/capture_node/proc/contest_markers(var/trigger_faction)
 	var/area/A = get_area(src)
@@ -89,9 +146,13 @@ GLOBAL_LIST_EMPTY(capture_nodes)
 	if(defenders_spawn.len == 0)
 		return
 	if(capture_npc_spawnlocs.len == 0)
+		var/list/view_turfs = dview(7,src)
+		for(var/turf/t in view_turfs)
+			if(t.density == 1)
+				view_turfs -= t
 		for(var/i = 0,i < FALLBACK_MOBSPAWN_AMOUNT,i++)
 			var/to_spawn = pickweight(defenders_spawn)
-			new to_spawn (pick(view(7,src)))
+			new to_spawn (pick(view_turfs))
 		return
 	for(var/turf/t in capture_npc_spawnlocs)
 		var/to_spawn = pick(defenders_spawn)
@@ -133,14 +194,6 @@ GLOBAL_LIST_EMPTY(capture_nodes)
 
 /obj/machinery/computer/capture_node/attackby()
 	return
-
-
-
-
-
-
-
-
 
 /obj/structure/capture_marker
 	name = "Sovereignty Marker"
@@ -196,10 +249,6 @@ GLOBAL_LIST_EMPTY(capture_nodes)
 	overlays -= faction_logo
 	faction_logo.alpha = new_alpha
 	overlays += faction_logo
-
-
-
-
 
 /obj/effect/landmark/npc_capturespawn_marker
 	name = "Capture-Spawn marker"

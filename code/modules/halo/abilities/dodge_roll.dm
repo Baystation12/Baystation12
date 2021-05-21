@@ -69,6 +69,9 @@ mob/living/proc/getPerRollDelay()
 		tableroll = 0
 	if(tableroll)
 		pass_flags |= PASSTABLE
+	fire_stacks = max(0,fire_stacks - 0.8)
+	if(fire_stacks <= 0)
+		ExtinguishMob()
 	for(var/i = 0,i < roll_dist,i++)
 		var/turf/step_to = get_step(loc,dir_roll)
 		if(step_to.density == 1 || !step(src,dir_roll))

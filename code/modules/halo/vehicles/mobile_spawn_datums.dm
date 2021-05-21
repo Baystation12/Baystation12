@@ -60,8 +60,9 @@ GLOBAL_VAR_INIT(MOBILE_SPAWN_RESPAWN_TIME,8 MINUTES)
 	if(GLOB.MOBILE_SPAWN_RESPAWN_TIME == -1)
 		to_chat(user,"<span class = 'notice'>Mobile respawn is disabled.</span>")
 		return
-	if(world.time - user.timeofdeath < GLOB.MOBILE_SPAWN_RESPAWN_TIME)
-		to_chat(user,"<span class = 'notice'>You have not been dead long enough to respawn at a mobile spawn point.</span>")
+	var/deltaToD = world.time - user.timeofdeath
+	if(deltaToD < GLOB.MOBILE_SPAWN_RESPAWN_TIME)
+		to_chat(user,"<span class = 'notice'>You have not been dead long enough to respawn at a mobile spawn point. [-(deltaToD - GLOB.MOBILE_SPAWN_RESPAWN_TIME)/600] minutes remain.</span>")
 		return
 	var/species_choice = input(user,"Spawn as what species?","Species Spawn Choice","Cancel") in species_outfits + list("Cancel")
 	if(species_choice == "Cancel")

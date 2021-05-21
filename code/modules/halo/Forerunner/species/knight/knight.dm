@@ -148,7 +148,7 @@
 	icon = 'code/modules/halo/Forerunner/species/knight/knight.dmi'
 	icon_state = "knight_elegiast"
 	robotic = ORGAN_ROBOT
-	max_damage = 100
+	max_damage = 200
 
 /obj/item/organ/external/chest/knight
 	robotic = ORGAN_ROBOT

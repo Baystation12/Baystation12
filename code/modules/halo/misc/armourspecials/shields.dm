@@ -72,7 +72,7 @@
 	var/shieldstrength
 	var/totalshields
 	var/nextcharge
-	var/shield_recharge_delay = 10 SECONDS//The delay for the shields to start recharging from damage (Multiplied by 1.5 if shields downed entirely)
+	var/shield_recharge_delay = 9 SECONDS//The delay for the shields to start recharging from damage (Multiplied by 1.5 if shields downed entirely)
 	var/shield_recharge_ticktime = 1 SECOND //The delay between recharge ticks
 	var/obj/effect/overlay/shields/shieldoverlay = new /obj/effect/overlay/shields
 	var/image/mob_overlay
@@ -96,7 +96,9 @@
 	connectedarmour.verbs += /obj/item/clothing/suit/armor/special/proc/toggle_eva_mode
 
 /datum/armourspecials/shields/proc/toggle_eva_mode(var/mob/toggler)
-
+	if(toggler.incapacitated())
+		to_chat(toggler,"<span class = 'warning'>You can't do that in your current state!</span>")
+		return
 	src.eva_mode_active = !src.eva_mode_active
 	if(eva_mode_active)
 		connectedarmour.visible_message("[toggler] reroutes their shields, prioritising atmospheric and pressure containment.")
@@ -174,7 +176,7 @@
 			update_overlay("shield_overlay_damage")
 			armour_state = SHIELD_DAMAGE
 
-			var/oldstrength = shieldstrength 
+			var/oldstrength = shieldstrength
 
 			//apply the damage
 			shieldstrength -= damage
@@ -189,7 +191,7 @@
 				return
 			else
 				user.visible_message("<span class='warning'>[user]'s [connectedarmour] shields absorbs the force of the impact.</span>","<span class = 'notice'>Your [connectedarmour] shields absorbs the force of the impact.</span>")
-			
+
 			//If we jumped from at least 20% shields to below 20% shields and they haven't collapsed yet
 			if((oldstrength / totalshields) >= 0.2 && (shieldstrength / totalshields) < 0.2 && shieldstrength > 0)
 				playsound(user, shields_low_sound, 100, 0)

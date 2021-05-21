@@ -12,10 +12,10 @@
 	icon_template = 'code/modules/halo/unsc/r_Augmented_Human_template.dmi'
 	flags = NO_MINOR_CUT
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE | HAS_LIPS | HAS_EYE_COLOR
-	total_health = 250 //Same base health as sangheili
+	total_health = 230 //Same base health as sangheili
 	spawn_flags = SPECIES_CAN_JOIN
-	brute_mod = 0.8 //Lower amount of brute damage taken than sangheili
-	burn_mod = 0.8 //ditto for burn
+	brute_mod = 0.85 //Lower amount of brute damage taken than sangheili
+	burn_mod = 0.85 //ditto for burn
 	pain_mod = 0.8 //Lower pain damage taken than sangheili
 	item_icon_offsets = list(list(1,0),list(1,0),null,list(1,0),null,null,null,list(1,0),null)
 	inhand_icon_offsets = list(list(-2,0),list(2,0),null,list(0,0),null,null,null,list(0,0),null)
@@ -70,7 +70,7 @@
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/augmented)
 		)
 
-	equipment_slowdown_multiplier = 0.8
+	equipment_slowdown_multiplier = 0.85
 
 	roll_distance = 3
 	per_roll_delay = 1.5 //Slightly faster than a human's dodge roll

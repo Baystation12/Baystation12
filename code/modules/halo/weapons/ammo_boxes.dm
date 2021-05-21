@@ -10,7 +10,7 @@
 	var/capacity = 1
 	var/desc_ammo_name = "rounds"
 	var/list/ammo_spawnwith = list()
-	var/load_time = 0.5 //The time it takes to load one round from the box to the weapon, in seconds
+	var/load_time = 1 SECOND//The time it takes to load one round from the box to the weapon
 
 /obj/item/ammo_box/Initialize()
 	.=..()
@@ -59,7 +59,7 @@
 	name = "Shotgun Shell Box"
 	desc = "A box of shells to assist in loading pump-action shotguns"
 	ammo_spawnwith = list(/obj/item/ammo_casing/shotgun/pellet)
-	capacity = 24
+	capacity = 16
 
 /obj/item/ammo_box/shotgun/slug
 	name = "Shotgun Slug Box"

@@ -74,3 +74,6 @@ GLOBAL_LIST_EMPTY(unsc_base_fallback_spawns)
 /obj/effect/landmark/start/unsc_base_fallback/New()
 	..()
 	GLOB.unsc_base_fallback_spawns += loc
+
+/obj/machinery/door/window/odst_armory
+	req_access = list(access_unsc_odst)

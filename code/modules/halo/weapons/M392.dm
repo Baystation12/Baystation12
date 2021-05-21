@@ -15,7 +15,7 @@
 	reload_sound = 'code/modules/halo/sounds/DMR_Reload_New.wav'
 	one_hand_penalty = -1
 	w_class = ITEM_SIZE_LARGE
-	dispersion = list(0.26)
+	dispersion = list(0)
 	hud_bullet_row_num = 10
 	accuracy = -1
 	scoped_accuracy = 2
@@ -74,5 +74,5 @@
 	fire_delay = 7
 	burst_delay = 1
 	burst = 2
-	accuracy = -1
+	accuracy = -2
 	scoped_accuracy = 0

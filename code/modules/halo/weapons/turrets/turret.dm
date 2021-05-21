@@ -145,6 +145,11 @@
 	else
 		unman_turret(user)
 
+/obj/structure/turret/ex_act(var/severity)
+	if(mob_manning && severity <= 2)
+		to_chat(mob_manning,"<span class = 'danger'>The blast pushes you off \the [src], you'll have to grab it again to fire!</span>")
+		unman_turret()
+
 /obj/structure/turret/attackby(var/obj/item/W, var/mob/user)
 	if(W.type == turret_gun)
 		var/obj/item/weapon/gun/projectile/gun = W

@@ -13,8 +13,7 @@
 	//fire_sound = 'code/modules/halo/sounds/MagnumShotSoundEffect.ogg'
 	reload_sound = 'code/modules/halo/sounds/UNSC_Saw_Reload_Sound_Effect.ogg'
 	one_hand_penalty = -1
-	burst_accuracy = list(0, 0, -1, -1, -1, -2, -2, -2, -3, -3, 0, 0, -1, -1, -1, -2, -2, -2, -3, -3, 0, 0, -1, -1, -1, -2, -2, -2, -3, -3,0,0,-1)
-	dispersion = list(0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 1.0, 1.0, 1.0, 1.2, 1.2, 1.2, 1.4, 1.4, 1.4, 1.6, 1.6, 1.6, 1.8, 1.8, 1.8, 1.8, 1.8, 1.8, 1.8, 1.8, 1.8, 1.8)
+	dispersion = list(0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.6, 0.6, 0.6, 0.6, 0.6, 0.8, 0.8, 0.8, 1.0, 1.0, 1.0, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2)
 	w_class = ITEM_SIZE_HUGE
 	hud_bullet_row_num = 50
 	hud_bullet_reffile = 'code/modules/halo/icons/hud_display/hud_bullet_2x5.dmi'
@@ -27,7 +26,7 @@
 	move_delay_malus = 1.5
 	slowdown_general = 1
 
-	sustain_time = 4.5 SECONDS
+	sustain_time = 3.0 SECONDS
 	sustain_delay = 1.5
 
 /obj/item/weapon/gun/projectile/m545_lmg/update_icon()

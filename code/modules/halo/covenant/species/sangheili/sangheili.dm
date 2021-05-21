@@ -21,7 +21,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/covena
 	default_language = LANGUAGE_SANGHEILI
 	language = LANGUAGE_SANGHEILI
 	flags = NO_MINOR_CUT
-	total_health = 250 // Stronger than humans at base health.
+	total_health = 230 // Stronger than humans at base health.
 	radiation_mod = 0.6 //Covie weapons emit beta radiation. Resistant to 1/3 types of radiation.
 	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_SKIN_TONE | HAS_EYE_COLOR

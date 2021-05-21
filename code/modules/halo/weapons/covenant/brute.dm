@@ -1,5 +1,6 @@
 
-
+#define BRUTE_SHOT_GRENADE_MAX_THROW_DIST 6
+#define BRUTE_SHOT_GRENADE_MIN_THROW_DIST 2
 
 /* SPIKE GRENADE */
 
@@ -15,7 +16,7 @@
 	"Jiralhanae" = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_gear.dmi'
 	)
 
-	force = 35
+	force = 30
 	armor_penetration = 70
 
 	sharp = 1
@@ -64,7 +65,7 @@
 	burst = 3
 	edge = 1
 	sharp = 1
-	force = 40
+	force = 35
 	is_heavy = 1
 	armor_penetration = 70
 	accuracy = -1
@@ -141,7 +142,7 @@
 	fire_sound = 'code/modules/halo/sounds/mauler_firing.ogg'
 	edge = 1
 	sharp = 1
-	force = 40
+	force = 35
 	is_heavy = 1
 	armor_penetration = 70
 	accuracy = -1
@@ -205,7 +206,7 @@
 	item_state = "blank"
 	w_class = ITEM_SIZE_HUGE
 	slot_flags = SLOT_BACK
-	force = 50 //Less than sword due to afterattack ability
+	force = 45 //Less than sword due to afterattack ability
 	edge = 0
 	sharp = 0
 	armor_penetration = 70
@@ -272,7 +273,7 @@
 	fire_sound = 'code/modules/halo/sounds/bruteshotfire.ogg'
 	var/reload_sound = 'code/modules/halo/sounds/bruteshotreload.ogg'
 	var/reload_time = 30
-	force = 50
+	force = 40
 	edge = 1
 	armor_penetration = 70
 	item_state_slots = list(slot_l_hand_str = "bruteshot", slot_r_hand_str = "bruteshot", slot_back_str = "bruteshot back")
@@ -332,7 +333,7 @@
 	icon = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_obj.dmi'
 	icon_state = "bruteshot_belt"
 	var/fire_sound = null
-	det_time = 10
+	det_time = 5
 	starttimer_on_hit = 1
 	arm_sound = null
 	var/amount = 12
@@ -351,29 +352,12 @@
 	to_chat(user, "<span class='info'>It has [amount] grenade[amount != 1 ? "s" : ""] remaining on the belt.</span>")
 
 /obj/item/weapon/grenade/brute_shot/detonate()
-
-	explosion(get_turf(src), 0, 0, max(amount / 2, 2), max(amount / 2, 3), 0)
-
-	for(var/atom/movable/M in range(src,1))
-		if(M == src)
-			continue
-
-		if(!M.anchored)
-			var/atom/throw_target = get_edge_target_turf(M, get_dir(src, get_step_away(M, src)))
-			M.throw_at(throw_target, 1, 4, src)
+	explosion(get_turf(src), 0, max(round(amount/4),1), max(round(amount / 2), 2), max(amount, 4), guaranteed_damage = 40, guaranteed_damage_range = 2)
 	. = ..()
 	qdel(src)
 
 /obj/item/weapon/grenade/brute_shot/proc/modify_amount(var/transferred, var/delete_if_empty = 1)
 	amount += transferred
-
-	//update the throw range... more = heaver = shorter range
-	throw_range = 10
-	if(amount > 1)
-		if(amount > 3)
-			throw_range = 2
-		else
-			throw_range = 3
 
 	//delete if none
 	if(!amount && delete_if_empty)
@@ -426,6 +410,11 @@
 		src.overlays += gren
 
 		grensleft -= 1
+
+/obj/item/weapon/grenade/brute_shot/throw_at(atom/target, range, speed, thrower)
+	throw_range = max(BRUTE_SHOT_GRENADE_MAX_THROW_DIST * (1 - (amount/max_amount)),BRUTE_SHOT_GRENADE_MIN_THROW_DIST)
+	range = throw_range
+	. = ..()
 
 /obj/item/weapon/grenade/toxic_gas
 	name = "toxic gas grenade"

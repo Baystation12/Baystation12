@@ -3,7 +3,7 @@
 	title = "Orbital Drop Shock Trooper"
 	total_positions = 6
 	spawn_positions = 6
-	is_whitelisted = 1
+	faction_whitelist = "UNSC"
 	outfit_type = /decl/hierarchy/outfit/job/unsc/odst
 	alt_titles = list(\
 		"ODST Sharpshooter",\

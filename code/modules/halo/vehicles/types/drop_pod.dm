@@ -157,6 +157,9 @@
 	if(launched)
 		to_chat(usr,"<span class = 'notice'>[src] has already been launched once and cannot be launched again.</span>")
 		return
+	if(world.time < ticker.mode.ship_lockdown_until)
+		to_chat(usr,"<span class = 'notice'>[src] is still finalising deployment preparations!</span>")
+		return
 
 	var/list/potential_om_targ = get_overmap_targets()
 	if(isnull(potential_om_targ) || potential_om_targ.len == 0)

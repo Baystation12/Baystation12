@@ -136,6 +136,7 @@
 		/obj/item/weapon/pickaxe/plasma_drill = 0,
 		/obj/item/flight_item/covenant_pack = 0,
 		/obj/item/dumb_ai_chip/cov = 0,
+		/obj/item/stack/barbedwire/covenant/fifteen = 0,
 		/obj/item/weapon/plastique/covenant = 0,
 		/obj/item/weapon/plastique/breaching/covenant = 0,
 		/obj/item/weapon/plastique/breaching/longrange/covenant = 0,
@@ -150,6 +151,7 @@
 		/obj/item/weapon/pickaxe/plasma_drill = 1,
 		/obj/item/flight_item/covenant_pack = 1,
 		/obj/item/dumb_ai_chip/cov = 2,
+		/obj/item/stack/barbedwire/covenant/fifteen = 5,
 		/obj/item/weapon/plastique/covenant = 8,
 		/obj/item/weapon/plastique/breaching/covenant = 3,
 		/obj/item/weapon/plastique/breaching/longrange/covenant = 3,
@@ -167,6 +169,7 @@
 		"Guns" = -1,
 		/obj/item/weapon/gun/energy/plasmapistol = 0,
 		/obj/item/weapon/gun/projectile/mauler = 0,
+		/obj/item/weapon/gun/projectile/type51carbine = 0,
 		/obj/item/weapon/gun/projectile/spiker = 0,
 		/obj/item/weapon/gun/energy/plasmarifle/brute = 0,
 		/obj/item/weapon/gun/launcher/grenade/brute_shot = 0,
@@ -218,6 +221,7 @@
 		"Equipment" = -1,
 		/obj/item/flight_item/covenant_pack = 0,
 		/obj/item/dumb_ai_chip/cov = 0,
+		/obj/item/stack/barbedwire/covenant/fifteen = 0,
 		/obj/item/weapon/armor_patch/cov = 0,
 		/obj/item/weapon/armor_patch/mini/cov = 0,
 		/obj/item/weapon/pinpointer/artifact = 0,
@@ -227,6 +231,7 @@
 		/obj/item/weapon/tank/air/covenant = 7,
 		/obj/item/flight_item/covenant_pack = 2,
 		/obj/item/dumb_ai_chip/cov = 2,
+		/obj/item/stack/barbedwire/covenant/fifteen = 5,
 		/obj/item/clothing/accessory/storage/IFAK/cov = 20,
 		/obj/item/weapon/pinpointer/artifact = 2,
 	)
@@ -290,6 +295,7 @@
 		/obj/item/clothing/gloves/shield_gauntlet/kigyar = 0,
 		/obj/item/clothing/under/kigyar/armless = 0,
 		/obj/item/weapon/pickaxe/plasma_drill = 0,
+		/obj/item/stack/barbedwire/covenant/fifteen = 0,
 		/obj/item/weapon/plastique/covenant = 0,
 		/obj/item/weapon/plastique/breaching/covenant = 0,
 		/obj/item/weapon/plastique/breaching/longrange/covenant = 0,
@@ -301,6 +307,7 @@
 		/obj/item/flight_item/covenant_pack = 1,
 		/obj/item/clothing/gloves/shield_gauntlet/kigyar = 6,
 		/obj/item/clothing/under/kigyar/armless = 8,
+		/obj/item/stack/barbedwire/covenant/fifteen = 5,
 		/obj/item/weapon/pickaxe/plasma_drill = 1,
 		/obj/item/weapon/plastique/covenant = 6,
 		/obj/item/weapon/plastique/breaching/covenant = 2,
@@ -374,6 +381,7 @@
 		/obj/item/weapon/storage/pocketstore/hardcase/tools/cov = 0,
 		"Equipment" = -1,
 		/obj/item/weapon/pickaxe/plasma_drill = 0,
+		/obj/item/stack/barbedwire/covenant/fifteen = 0,
 		/obj/item/weapon/plastique/covenant = 0,
 		/obj/item/weapon/plastique/breaching/covenant = 0,
 		/obj/item/weapon/plastique/breaching/longrange/covenant = 0,
@@ -383,6 +391,7 @@
 	)
 	amounts = list(\
 		/obj/item/weapon/pickaxe/plasma_drill = 1,
+		/obj/item/stack/barbedwire/covenant/fifteen = 5,
 		/obj/item/weapon/plastique/covenant = 6,
 		/obj/item/weapon/plastique/breaching/covenant = 2,
 		/obj/item/weapon/plastique/breaching/longrange/covenant = 2,
@@ -416,6 +425,7 @@
 		/obj/item/weapon/storage/pocketstore/hardcase/hypos/cov = 0,
 		/obj/item/weapon/storage/pocketstore/hardcase/materials/cov = 0,
 		"Equipment" = -1,
+		/obj/item/stack/barbedwire/covenant/fifteen = 0,
 		/obj/item/weapon/plastique/covenant = 0,
 		/obj/item/weapon/plastique/breaching/covenant = 0,
 		/obj/item/weapon/plastique/breaching/longrange/covenant = 0,
@@ -424,6 +434,7 @@
 		/obj/item/weapon/pinpointer/artifact = 0
 	)
 	amounts = list(\
+		/obj/item/stack/barbedwire/covenant/fifteen = 5,
 		/obj/item/weapon/plastique/covenant = 6,
 		/obj/item/weapon/plastique/breaching/covenant = 2,
 		/obj/item/weapon/plastique/breaching/longrange/covenant = 2,

@@ -23,7 +23,7 @@
 
 	move_sound = 'code/modules/halo/sounds/scorp_move.ogg'
 
-	vehicle_view_modifier = 1.2
+	vehicle_view_modifier = 1.5
 
 	light_color = "#FEFFE1"
 
@@ -64,7 +64,7 @@
 	if(lockdown)
 		active = 0
 		icon_state = "cobra_deployed"
-		vehicle_view_modifier = 1.5
+		vehicle_view_modifier = 1.8
 		comp_prof.gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/cobra_sniper)
 	else
 		active = 1
@@ -103,7 +103,7 @@
 	if(zoomed)
 		vehicle_view_modifier = 2.5
 	else
-		vehicle_view_modifier = 1.5
+		vehicle_view_modifier = 1.8
 
 	spawn(5)
 		for(var/mob/occupant in occupants)

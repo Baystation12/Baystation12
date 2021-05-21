@@ -6,6 +6,7 @@
 	desc = "Used to designate specific areas for bombardment with main ship weapons."
 	icon = 'code/modules/halo/overmap/weapons/laser_designator.dmi'
 	icon_state = "designator"
+	slot_flags = SLOT_BELT
 	w_class = ITEM_SIZE_SMALL
 	var/obj/creator
 

@@ -13,6 +13,8 @@
 	caliber = "hardlightBoltshot"
 	wielded_item_state = "boltshot"
 
+	fire_delay = 4
+
 	one_hand_penalty = 1
 
 	magazine_type = /obj/item/ammo_magazine/boltshot
@@ -36,7 +38,7 @@
 	else
 		if(istype(ammo_magazine,/obj/item/ammo_magazine/boltshot_sg))
 			icon_state = "boltshot_shotgun"
-			fire_delay = initial(fire_delay) + 2
+			fire_delay = initial(fire_delay) + 4
 		else
 			icon_state = "boltshot"
 			fire_delay = initial(fire_delay)

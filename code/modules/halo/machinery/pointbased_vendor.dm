@@ -19,6 +19,7 @@ GLOBAL_LIST_INIT(mobs_to_reqdatum,list())
 	desc = "A vendor that somehow tracks your amount of requisition points, like magic."
 	icon = 'code/modules/halo/icons/machinery/gunvend.dmi'
 	icon_state ="ironhammer"
+	layer = BELOW_OBJ_LAYER
 	density = 1
 	anchored = 1
 	ai_access_level = 3

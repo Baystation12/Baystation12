@@ -121,6 +121,7 @@
 
 	//drop a light on the supply drop to make it a bit easier to find
 	var/obj/item/device/flashlight/F = new flare_type(epicentre)
+	F.brightness_on = 21
 	F.on = 1
 	F.update_icon()
 

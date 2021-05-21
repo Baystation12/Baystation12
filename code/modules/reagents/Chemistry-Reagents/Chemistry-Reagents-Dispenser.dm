@@ -194,6 +194,7 @@
 	description = "Pure iron is a metal."
 	taste_description = "metal"
 	reagent_state = SOLID
+	metabolism = REM * 2
 	color = "#353535"
 
 /datum/reagent/iron/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)

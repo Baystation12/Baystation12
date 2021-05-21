@@ -84,6 +84,8 @@
 
 /datum/game_mode/firefight/proc/spawn_attackers_tick()
 	set background = 1
+	if(world.time < next_subwave_at)
+		return
 	var/amount = min(max_spawns_tick, enemy_numbers_left)
 	enemy_numbers_left -= amount
 
@@ -103,6 +105,7 @@
 		var/spawn_type = pickweight(weighted_spawn_list)
 		spawn_attackers(spawn_type, 1)
 		amount -= 1
+	next_subwave_at = world.time + spawn_subwave_interval
 
 /datum/game_mode/firefight/proc/spawn_attackers(var/spawntype, var/amount)
 

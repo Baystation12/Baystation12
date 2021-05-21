@@ -291,12 +291,14 @@ var/global/datum/controller/gameticker/ticker
 						var/datum/antagonist/antag = all_antag_types_[antag_id]
 						if(antag.flags & ANTAG_OVERRIDE_MOB)
 							continue
+					var/datum/job/J = job_master.occupations_by_title[player.mind.assigned_role]
+					if(J.is_restricted(player.client.prefs,player))
+						continue
 
 					var/datum/spawnpoint/spawnpoint = job_master.get_spawnpoint_for(player.client, job_master.occupations_by_title[player.mind.assigned_role])
 
 					//sanity checking
 					if(!spawnpoint)
-						var/datum/job/J = job_master.occupations_by_title[player.mind.assigned_role]
 						var/error_msg = "SPAWN ERROR: was not able to find valid spawnpoint for \
 							player: \'[player.ckey]\' \
 							assigned_role: \'[player.mind.assigned_role]\' \

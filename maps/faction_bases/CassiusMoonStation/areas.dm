@@ -6,7 +6,7 @@
 	power_light = 1
 	poweralm = 1
 	requires_power = 0
-	base_turf = /turf/simulated/floor/asteroid
+	base_turf = /turf/simulated/floor/asteroid/planet
 
 /area/faction_base/unsc/moonbase/outside
 	name = "Orbital Facility Cassius External"
