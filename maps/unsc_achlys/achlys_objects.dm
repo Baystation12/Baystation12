@@ -47,7 +47,7 @@
 
 /obj/structure/closet/crate/marine/marine_medic/WillContain()
 	return list(
-	/obj/item/weapon/storage/box/MRE/Chicken = 1,
+	/obj/item/weapon/storage/box/MRE/Chicken/achlys = 1,
 	/obj/item/weapon/material/knife/combat_knife = 1,
 	/obj/item/ammo_magazine/m6d/m225 = 2,
 	/obj/item/weapon/gun/projectile/m6d_magnum = 1,
@@ -72,7 +72,7 @@
 
 /obj/structure/closet/crate/marine/cqc/WillContain()
 	return list(
-	/obj/item/weapon/storage/box/MRE/Pizza = 1,
+	/obj/item/weapon/storage/box/MRE/Pizza/achlys = 1,
 	/obj/item/weapon/storage/box/flares = 1,
 	/obj/item/weapon/material/knife/combat_knife = 1,
 	/obj/item/ammo_magazine/m7/m443 = 2,
@@ -105,7 +105,7 @@
 	/obj/item/clothing/gloves/thick/unsc = 1,
 	/obj/item/clothing/shoes/marine = 1,
 	/obj/item/weapon/storage/belt/utility/marine_engineer = 1,
-	/obj/item/weapon/storage/box/MRE/Chicken = 1,
+	/obj/item/weapon/storage/box/MRE/Chicken/achlys = 1,
 	/obj/item/weapon/material/knife/combat_knife = 1,
 	/obj/item/weapon/armor_patch = 2,
 	/obj/item/ammo_magazine/m6d/m225 = 2,
@@ -123,7 +123,7 @@
 
 /obj/structure/closet/crate/marine/rifleman/WillContain()
 	return list(
-	/obj/item/weapon/storage/box/MRE/Spaghetti = 1,
+	/obj/item/weapon/storage/box/MRE/Spaghetti/achlys = 1,
 	/obj/item/weapon/storage/box/flares = 2,
 	/obj/item/weapon/material/knife/combat_knife = 1,
 	/obj/item/ammo_magazine/m6d/m225 = 2,
@@ -149,7 +149,7 @@
 
 /obj/structure/closet/crate/secure/marine_squad_leader/WillContain()
 	return list(
-	/obj/item/weapon/storage/box/MRE/Spaghetti = 1,
+	/obj/item/weapon/storage/box/MRE/Spaghetti/achlys = 1,
 	/obj/item/weapon/storage/box/flares = 1,
 	/obj/item/weapon/material/knife/combat_knife = 1,
 	/obj/item/ammo_magazine/m6d/m225 = 2,
@@ -366,3 +366,12 @@
 		to_chat(user,"<span class = 'notice'>You can't enter [src]!</span>")
 		return
 	. = ..()
+
+/obj/item/weapon/storage/box/MRE/Chicken/achlys
+	w_class = 1
+
+/obj/item/weapon/storage/box/MRE/Pizza/achlys
+	w_class = 1
+
+/obj/item/weapon/storage/box/MRE/Spaghetti/achlys
+	w_class = 1
