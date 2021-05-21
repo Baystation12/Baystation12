@@ -247,7 +247,7 @@
 
 /obj/item/weapon/card/id/the_gold
 	name = "Gold Keycard"
-	desc = "This keycard appears to belong to a bridge crewman. How it got here and where it's owner is remains unknown."
+	desc = "This keycard appears to belong to a bridge crewman. It's covered in some kind of mucus that is stubborn to remove but the chip seems exposed enough to open a door."
 	access = list(777)
 	icon_state = "gold"
 	item_state = "gold_id"
@@ -404,3 +404,42 @@
 /obj/item/weapon/gun/projectile/m6d_magnum/police/achlys
 	name = "\improper looted M6B Magnum"
 	desc = "A looted handgun found somewhere on the ship. The sidearm of the security guards posted to the ship."
+
+/obj/item/weapon/scalpel/achlys
+	force = 20
+	name = "reinforced scalpel"
+	desc = "A heavy duty scalpel that seems designed to cut through flesh thicker than what a human has."
+
+/obj/structure/splish_splash //effectively a noisemaker
+	density = 0				 //tons of copypasta from floodspawner structure. it works.
+	mouse_opacity = 0
+	opacity = 0
+	icon = 'code/modules/halo/flood/flood_combat_human.dmi'
+	icon_state = "splish_splash"
+	var/time_to_splash = 0 //this is a timer to play a sound byte
+	//var/list/splash_sound = list() //sounds to play when the timer runs out
+	var/uses = 0
+
+/obj/structure/splish_splash/Initialize()
+	. = ..()
+	GLOB.processing_objects.Add(src)
+	icon_state = "spawntrigger" //changes from a pink X for ease of mapping to completely invisible in game
+	time_to_splash+= rand(0,20)
+	uses+= pick(0,1) //decides to either delete itself or spawn with one use
+	if(uses == 0)	 //this is so noisemakers are in different places
+		GLOB.processing_objects.Remove(src) //this is hacky and retarded. I'm a shitty coder.
+		return INITIALIZE_HINT_QDEL //deletes itself if there are no uses
+
+/obj/structure/splish_splash/process()
+	if(time_to_splash > 0)
+		time_to_splash--
+	if(time_to_splash <= 1)
+		timer_end()
+	return
+
+/obj/structure/splish_splash/proc/timer_end()
+	//playsound(src.loc, splash_sound, 80, 1, 0) //sound played at src.loc
+	src.loc.visible_message(pick("<span class='warning'>Something sloshes through the water in the darkness.</span>"),("<span class='warning'>A distant form splashes in the filthy water.</span>"),\
+			("<span class='warning'>Something distant falls into the water.</span>"))
+	for(var/i = 0 to 20)
+		time_to_splash += i
