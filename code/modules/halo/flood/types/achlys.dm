@@ -40,24 +40,11 @@
 	icon_living = "guard_infected1"
 	icon_dead = "guard_infected1_dead"
 
-/mob/living/simple_animal/hostile/flood/combat_form/prisoner/guard/New()
-	. = ..()
-	var/gun_type_spawn = pick(/obj/item/weapon/gun/projectile/shotgun/pump/m45_ts/achlys, /obj/item/weapon/gun/projectile/ma37_ar/achlys,\
-						/obj/item/weapon/gun/projectile/m6d_magnum/police/achlys, /obj/item/weapon/gun/projectile/shotgun/pump/m45_ts/police/achlys)
-	pickup_gun(new gun_type_spawn (loc))
-	inventory = pick(list(/obj/item/ammo_magazine/ma37/m118),list(/obj/item/ammo_magazine/m6d/m224),list(/obj/item/ammo_box/shotgun),\
-				list(/obj/item/weapon/melee/baton/humbler),list(/obj/item/ammo_box/shotgun/beanbag),list(/obj/item/weapon/melee/telebaton))
-
 /mob/living/simple_animal/hostile/flood/combat_form/prisoner/mutated/guard
 	desc = "Some kind of monster with shredded remains of a gray jumpsuit stuck to it's mishappen body."
 	icon_state = "guard_infected2"
 	icon_living = "guard_infected2"
 	icon_dead = "guard_infected2_dead"
-
-/mob/living/simple_animal/hostile/flood/combat_form/prisoner/mutated/guard/New()
-	. = ..()
-	inventory = pick(list(/obj/item/ammo_magazine/ma37/m118),list(/obj/item/ammo_magazine/m6d/m224),list(/obj/item/ammo_box/shotgun),\
-				list(/obj/item/weapon/melee/baton/humbler),list(/obj/item/ammo_box/shotgun/beanbag),list(/obj/item/weapon/melee/telebaton))
 
 /mob/living/simple_animal/hostile/flood/combat_form/prisoner/abomination
 	name = "abomination"
@@ -72,9 +59,6 @@
 	melee_damage_lower = 30
 	melee_damage_upper = 40
 	attacktext = "smashes"
-
-/mob/living/simple_animal/hostile/flood/combat_form/prisoner/abomination/captain
-	inventory = list(/obj/item/weapon/card/id/the_gold)
 
 /mob/living/simple_animal/hostile/flood/combat_form/prisoner/crew
 	name = "sickly creature"

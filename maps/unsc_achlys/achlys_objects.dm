@@ -443,3 +443,21 @@
 			("<span class='warning'>Something distant falls into the water.</span>"))
 	for(var/i = 0 to 20)
 		time_to_splash += i
+
+
+/mob/living/simple_animal/hostile/flood/combat_form/prisoner/abomination/captain
+	inventory = list(/obj/item/weapon/card/id/the_gold)
+
+/mob/living/simple_animal/hostile/flood/combat_form/prisoner/guard/New() //I truly do apologize bois
+	. = ..()															 //don't mix my mobs around though
+	var/gun_type_spawn = pick(/obj/item/weapon/gun/projectile/shotgun/pump/m45_ts/achlys, /obj/item/weapon/gun/projectile/ma37_ar/achlys,\
+						/obj/item/weapon/gun/projectile/m6d_magnum/police/achlys, /obj/item/weapon/gun/projectile/shotgun/pump/m45_ts/police/achlys)
+	pickup_gun(new gun_type_spawn (loc))
+	inventory = pick(list(/obj/item/ammo_magazine/ma37/m118),list(/obj/item/ammo_magazine/m6d/m224),list(/obj/item/ammo_box/shotgun),\
+				list(/obj/item/weapon/melee/baton/humbler),list(/obj/item/ammo_box/shotgun/beanbag),list(/obj/item/weapon/melee/telebaton))
+
+/mob/living/simple_animal/hostile/flood/combat_form/prisoner/mutated/guard/New()
+	. = ..()
+	inventory = pick(list(/obj/item/ammo_magazine/ma37/m118),list(/obj/item/ammo_magazine/m6d/m224),list(/obj/item/ammo_box/shotgun),\
+				list(/obj/item/weapon/melee/baton/humbler),list(/obj/item/ammo_box/shotgun/beanbag),list(/obj/item/weapon/melee/telebaton))
+
