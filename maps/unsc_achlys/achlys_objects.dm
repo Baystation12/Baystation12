@@ -375,3 +375,32 @@
 
 /obj/item/weapon/storage/box/MRE/Spaghetti/achlys
 	w_class = 1
+
+/obj/item/weapon/gun/projectile/shotgun/pump/m45_ts/achlys
+	name = "looted M45 TS tactical shotgun"
+	desc = "A shotgun dug up from somewhere on the ship. Good luck finding more shells."
+
+/obj/item/weapon/gun/projectile/shotgun/pump/m45_ts/police/achlys
+	name = "looted M45 TS tactical shotgun"
+	desc = "A shotgun dug up from somewhere on the ship. Good luck finding more shells."
+
+/obj/item/weapon/material/hatchet/achlys
+	name = "looted hatchet"
+	desc = "A hatchet looted from Hydroponics. Not the most preferable of weapons but better than bare hands."
+	force = 25
+
+/obj/item/weapon/material/twohanded/baseballbat/achlys
+	name = "cricket bat"
+	desc = "Found somewhere on the ship. Possibly near the rec rooms?"
+
+/obj/item/weapon/gun/projectile/ma37_ar/achlys
+	name = "\improper looted MA37 Assault Rifle"
+	desc = "Commonly found on infected flood wearing security outfits. Takes 7.62mm ammo."
+
+/obj/item/weapon/gun/projectile/m6d_magnum/civilian/achlys
+	desc = "A looted handgun found somewhere on the ship. The sidearm of the command staff on the ship."
+	name = "\improper looted M6B Magnum"
+
+/obj/item/weapon/gun/projectile/m6d_magnum/police/achlys
+	name = "\improper looted M6B Magnum"
+	desc = "A looted handgun found somewhere on the ship. The sidearm of the security guards posted to the ship."
