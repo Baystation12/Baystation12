@@ -2281,6 +2281,14 @@
 	dir = 1;
 	health = 1e+006
 	},
+/obj/item/disk/integrated_circuit/upgrade/advanced{
+	pixel_x = -5;
+	pixel_y = 3
+	},
+/obj/item/disk/integrated_circuit/upgrade/clone{
+	pixel_x = 4;
+	pixel_y = 4
+	},
 /turf/simulated/floor/tiled/skrell/orange,
 /area/ship/skrellscoutship/wings/starboard)
 "hk" = (
@@ -4822,7 +4830,9 @@
 /turf/simulated/floor/tiled/skrell/red,
 /area/ship/skrellscoutship/command/bridge)
 "GN" = (
-/obj/machinery/space_heater/skrell,
+/obj/machinery/space_heater/skrell{
+	set_temperature = 313.15
+	},
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutship/wings/starboard)
 "Hf" = (
