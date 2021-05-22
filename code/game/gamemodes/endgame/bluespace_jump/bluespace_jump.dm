@@ -74,7 +74,6 @@
 	desc = "It's not going to punch you, is it?"
 	var/mob/living/carbon/human/daddy
 	anchored = TRUE
-	var/reality = 0
 	simulated = FALSE
 
 /obj/effect/bluegoast/New(nloc, ndaddy)
@@ -103,33 +102,13 @@
 	if(nloc)
 		forceMove(nloc)
 	if(nloc == new_loc)
-		reality++
-		if(reality > 5)
-			to_chat(daddy, "<span class='notice'>Yep, it's certainly the other one. Your existance was a glitch, and it's finally being mended...</span>")
-			blueswitch()
-		else if(reality > 3)
-			to_chat(daddy, "<span class='danger'>Something is definitely wrong. Why do you think YOU are the original?</span>")
-		else
-			to_chat(daddy, "<span class='warning'>You feel a bit less real. Which one of you two was original again?..</span>")
+		to_chat(daddy, "<span class='warning'>You feel a bit less real. Which one of you two was the original again..?</span>")
 
 /obj/effect/bluegoast/proc/mirror_dir(var/atom/movable/am, var/old_dir, var/new_dir)
 	set_dir(GLOB.reverse_dir[new_dir])
 
 /obj/effect/bluegoast/examine()
 	return daddy.examine(arglist(args))
-
-/obj/effect/bluegoast/proc/blueswitch()
-	var/mob/living/carbon/human/H = new(get_turf(src), daddy.species.name)
-	H.real_name = daddy.real_name
-	H.dna = daddy.dna.Clone()
-	H.sync_organ_dna()
-	H.flavor_text = daddy.flavor_text
-	H.UpdateAppearance()
-	var/datum/job/job = SSjobs.get_by_title(daddy.job)
-	if(job)
-		job.equip(H)
-	daddy.dust()
-	qdel(src)
 
 /obj/screen/fullscreen/bluespace_overlay
 	icon = 'icons/effects/effects.dmi'
