@@ -22,7 +22,8 @@ Build Mode: Radiation - Visualizer for radiation sources & affected turfs.
 
 
 /datum/build_mode/radiation/Unselected()
-	overlay.Hide()
+	if (overlay)
+		overlay.Hide()
 
 
 /datum/build_mode/radiation/UpdateOverlay(atom/movable/M, turf/T)
