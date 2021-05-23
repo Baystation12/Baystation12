@@ -1,0 +1,6 @@
+author: BlueNexus
+delete-after: true
+changes:
+  - maptweak: Simplified the Nacelles slightly. As a side effect, the engines should
+      come up to pressure faster.
+  - maptweak: Pipes in the Nacelles should no longer explode with burn mode on
