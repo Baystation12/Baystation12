@@ -147,7 +147,7 @@
 				if(istype(W, /obj/item/implant))
 					qdel(W)
 
-		var/mob/living/new_mob = new /mob/living/simple_animal/corgi(A.loc)
+		var/mob/living/new_mob = new /mob/living/simple_animal/friendly/corgi(A.loc)
 		new_mob.a_intent = I_HURT
 		if(M.mind)
 			M.mind.transfer_to(new_mob)

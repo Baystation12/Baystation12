@@ -58,8 +58,8 @@
 
 /datum/goal/achievement/specific_object/pet
 	possible_objects = list(
-		/mob/living/simple_animal/corgi,
-		/mob/living/simple_animal/cat
+		/mob/living/simple_animal/friendly/corgi,
+		/mob/living/simple_animal/friendly/cat
 	)
 
 /datum/goal/achievement/specific_object/pet/update_strings()

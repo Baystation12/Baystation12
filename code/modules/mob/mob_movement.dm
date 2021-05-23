@@ -26,6 +26,11 @@
 	if(delay)
 		delay.AddDelay(timeout)
 
+/mob/proc/checkMoveCooldown()
+	if(world.time < next_move)
+		return FALSE // Need to wait more.
+	return TRUE
+
 /client/proc/client_dir(input, direction=-1)
 	return turn(input, direction*dir2angle(dir))
 

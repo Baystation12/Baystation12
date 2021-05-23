@@ -32,7 +32,7 @@
 		/obj/item/storage/secure/safe,
 		/obj/structure/iv_drip,
 		/obj/machinery/disposal,
-		/mob/living/simple_animal/cow,
+		/mob/living/simple_animal/friendly/cow,
 		/mob/living/simple_animal/hostile/retaliate/goat,
 		/obj/machinery/sleeper,
 		/obj/machinery/smartfridge/,

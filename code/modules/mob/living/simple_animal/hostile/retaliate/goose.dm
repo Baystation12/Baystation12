@@ -5,10 +5,7 @@
 	icon_state = "goose"
 	icon_living = "goose"
 	icon_dead = "goose_dead"
-	speak = list("Honk!")
 	speak_emote = list("honks")
-	emote_hear = list("honks","flaps its wings","clacks")
-	emote_see = list("flaps its wings", "scratches the ground")
 	response_help =  "pets"
 	response_disarm = "gently pushes aside"
 	response_harm = "strikes"
@@ -32,6 +29,16 @@
 	var/max_damage = 22
 	var/loose = FALSE //goose loose status
 
+	ai_holder_type = /datum/ai_holder/simple_animal/retaliate/goose
+	say_list_type = /datum/say_list/goose
+
+
+/datum/ai_holder/simple_animal/retaliate/goose/react_to_attack(atom/movable/attacker)
+	. = ..()
+	var/mob/living/simple_animal/hostile/retaliate/goose/G = holder
+	if(G.stat == CONSCIOUS)
+		G.enrage(G.enrage_potency)
+
 /obj/item/natural_weapon/goosefeet
 	name = "goose feet"
 	gender = PLURAL
@@ -39,11 +46,6 @@
 	force = 0
 	damtype = BRUTE
 	canremove = FALSE
-
-/mob/living/simple_animal/hostile/retaliate/goose/Retaliate()
-	..()
-	if(stat == CONSCIOUS)
-		enrage(enrage_potency)
 
 /mob/living/simple_animal/hostile/retaliate/goose/on_update_icon()
 	if(stat == DEAD)
@@ -87,3 +89,8 @@
 	icon_state = "goose_labcoat"
 	icon_living = "goose_labcoat"
 	icon_dead = "goose_labcoat_dead"
+
+/datum/say_list/goose
+	speak = list("Honk!")
+	emote_hear = list("honks","flaps its wings","clacks")
+	emote_see = list("flaps its wings", "scratches the ground")

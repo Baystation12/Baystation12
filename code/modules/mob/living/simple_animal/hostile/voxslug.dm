@@ -25,20 +25,32 @@ Small, little HP, poisonous.
 	natural_weapon = /obj/item/natural_weapon/bite
 	faction = SPECIES_VOX
 
-/mob/living/simple_animal/hostile/voxslug/ListTargets(var/dist = 7)
+	ai_holder_type = /datum/ai_holder/hostile/melee/voxslug
+
+/datum/ai_holder/hostile/melee/voxslug/list_targets()
+	. = ..()
+
 	var/list/L = list()
-	for(var/a in hearers(src, dist))
+	for(var/a in hearers(src, vision_range))
 		if(istype(a,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = a
 			if(H.species.get_bodytype() == SPECIES_VOX)
 				continue
 		if(isliving(a))
 			var/mob/living/M = a
-			if(M.faction == faction)
+			if(M.faction == holder.faction)
 				continue
 		L += a
 
 	return L
+
+/datum/ai_holder/hostile/melee/voxslug/engage_target()
+	. = ..()
+	var/mob/living/simple_animal/hostile/voxslug/V = holder
+	if(istype(., /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = .
+		if(prob(H.getBruteLoss()/2))
+			V.attach(H)
 
 /mob/living/simple_animal/hostile/voxslug/get_scooped(var/mob/living/carbon/grabber)
 	if(grabber.species.get_bodytype() != SPECIES_VOX)
@@ -57,13 +69,6 @@ Small, little HP, poisonous.
 	src.forceMove(holder)
 	chest.embed(holder,0,"\The [src] latches itself onto \the [H]!")
 	holder.sync(src)
-
-/mob/living/simple_animal/hostile/voxslug/AttackingTarget()
-	. = ..()
-	if(istype(., /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = .
-		if(prob(H.getBruteLoss()/2))
-			attach(H)
 
 /mob/living/simple_animal/hostile/voxslug/Life()
 	. = ..()

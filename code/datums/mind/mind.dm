@@ -575,7 +575,7 @@
 	..()
 	mind.assigned_role = "Animal"
 
-/mob/living/simple_animal/corgi/mind_initialize()
+/mob/living/simple_animal/friendly/corgi/mind_initialize()
 	..()
 	mind.assigned_role = "Corgi"
 

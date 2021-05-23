@@ -433,8 +433,8 @@ obj/random/closet //A couple of random closets to spice up maint
 	icon_state = "base"
 	var/vermin_chance = 5
 	var/list/locker_vermin = list(
-		/mob/living/simple_animal/mouse,
-		/mob/living/simple_animal/opossum,
+		/mob/living/simple_animal/friendly/mouse,
+		/mob/living/simple_animal/friendly/opossum,
 		/mob/living/carbon/alien/diona
 	)
 

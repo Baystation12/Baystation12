@@ -29,20 +29,18 @@
 	environment_smash = 1
 	faction = "lar_maria"
 	status_flags = CANPUSH
-	speak = list("Die!", "Fresh meat!", "Hurr!", "You said help will come!", "I did nothing!", "Eat my fist!", "One for the road!")
-	speak_chance = 50
-	emote_hear = list("roars", "giggles", "breathes loudly", "mumbles", "yells something unintelligible")
-	emote_see = list("cries", "grins insanely", "itches fiercly", "scratches his face", "shakes his fists above his head")
 	turns_per_move = 5
 	response_help = "pokes"
 	response_disarm = "shoves"
 	response_harm = "hits"
 	speed = 8
 	can_escape = TRUE
-	stop_automated_movement_when_pulled = 0
 	natural_weapon = /obj/item/natural_weapon/punch
 	var/obj/effect/landmark/corpse/lar_maria/corpse = null
 	var/weapon = null
+
+	ai_holder_type = /datum/ai_holder/simple_animal/lar_maria
+	say_list_type = /datum/say_list/lar_maria
 
 /mob/living/simple_animal/hostile/lar_maria/death(gibbed, deathmessage, show_dead_message)
 	..(gibbed, deathmessage, show_dead_message)
@@ -228,3 +226,11 @@
 /obj/item/paper/lar_maria/note_9
 	name = "paper note"
 	info = "<i><font color='blue'>can we get some fresh carp sometime? Or freshish? Or frozen? I just really want carp, ok? I'm willing to pay for it if so.</font></i>"
+
+/datum/ai_holder/simple_animal/lar_maria
+	speak_chance = 50
+
+/datum/say_list/lar_maria
+	speak = list("Die!", "Fresh meat!", "Hurr!", "You said help will come!", "I did nothing!", "Eat my fist!", "One for the road!")
+	emote_see = list("cries", "grins insanely", "itches fiercly", "scratches his face", "shakes his fists above his head")
+	emote_hear = list("roars", "giggles", "breathes loudly", "mumbles", "yells something unintelligible")

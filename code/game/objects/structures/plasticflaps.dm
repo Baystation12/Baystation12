@@ -13,7 +13,7 @@
 	var/list/mobs_can_pass = list(
 		/mob/living/bot,
 		/mob/living/carbon/slime,
-		/mob/living/simple_animal/mouse,
+		/mob/living/simple_animal/friendly/mouse,
 		/mob/living/silicon/robot/drone
 		)
 	var/airtight = 0
@@ -79,5 +79,5 @@
 			T.blocks_air = 0
 
 
-/obj/structure/plasticflaps/airtight // airtight defaults to on 
+/obj/structure/plasticflaps/airtight // airtight defaults to on
 	airtight = 1

@@ -122,7 +122,7 @@
 
 /mob/living/simple_animal/familiar/pet //basically variants of normal animals with spells.
 	icon = 'icons/mob/simple_animal/animal.dmi'
-	var/icon_rest //so that we can have resting little guys.
+	icon_rest //so that we can have resting little guys.
 
 /mob/living/simple_animal/familiar/pet/Life()
 	. = ..()

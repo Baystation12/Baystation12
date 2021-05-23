@@ -34,13 +34,13 @@ exactly 117 "to_world uses" '\sto_world\('
 exactly 65 "to_world_log uses" '\sto_world_log\('
 exactly 0 "world<< uses" 'world<<|world[[:space:]]<<'
 exactly 0 "world.log<< uses" 'world.log<<|world.log[[:space:]]<<'
-exactly 120 "<< uses" '(?<!<)<<(?!<)' -P
+exactly 122 "<< uses" '(?<!<)<<(?!<)' -P
 exactly 0 "incorrect indentations" '^( {4,})' -P
 exactly 24 "text2path uses" 'text2path'
 exactly 3 "update_icon() override" '/update_icon\((.*)\)'  -P
 exactly 1 "goto use" 'goto '
 exactly 1 "NOOP match" 'NOOP'
-exactly 443 "spawn uses" 'spawn\s*\(\s*(-\s*)?\d*\s*\)' -P
+exactly 437 "spawn uses" 'spawn\s*\(\s*(-\s*)?\d*\s*\)' -P
 exactly 0 "tag uses" '\stag = ' -P '**/*.dmm'
 exactly 4 ".Replace( matches" '\.Replace(_char)?\(' -P
 exactly 5 ".Find( matches" '\.Find(_char)?\(' -P

@@ -8,15 +8,11 @@
 	icon_dead = "drone_dead"
 	ranged = 1
 	rapid = 0
-	speak_chance = 5
 	turns_per_move = 3
 	response_help = "pokes"
 	response_disarm = "gently pushes aside"
 	response_harm = "hits"
-	speak = list("ALERT.","Hostile-ile-ile entities dee-twhoooo-wected.","Threat parameterszzzz- szzet.","Bring sub-sub-sub-systems uuuup to combat alert alpha-a-a.")
-	emote_see = list("beeps menacingly","whirrs threateningly","scans its immediate vicinity")
 	a_intent = I_HURT
-	stop_automated_movement_when_pulled = 0
 	health = 300
 	maxHealth = 300
 	speed = 8
@@ -31,6 +27,8 @@
 	bone_amount =   0
 	skin_material = null
 	skin_amount =   0
+
+	ai_holder_type = /datum/ai_holder/simple_animal/ranged/malf_drone
 
 	var/datum/effect/effect/system/trail/ion_trail
 
@@ -54,6 +52,23 @@
 	var/has_loot = 1
 	faction = "malf_drone"
 
+/datum/ai_holder/simple_animal/melee/malf_drone
+
+/datum/ai_holder/simple_animal/melee/malf_drone/list_targets()
+	. = ..()
+
+	var/mob/living/simple_animal/hostile/retaliate/malf_drone/D = holder
+	if(D.hostile_drone)
+		var/list/targets = list()
+		for (var/mob/M in view(src, D.hostile_range))
+			if (M == src || istype(M, /mob/living/simple_animal/hostile/retaliate/malf_drone))
+				continue
+			targets |= M
+
+		return targets
+	else
+		return ..()
+
 /mob/living/simple_animal/hostile/retaliate/malf_drone/Initialize()
 	. = ..()
 	if(prob(5))
@@ -75,18 +90,6 @@
 			src.visible_message("<span class='warning'>[icon2html(src, viewers(get_turf(src)))] [src] suddenly lights up, and additional targetting vanes slide into place.</span>")
 			hostile_drone = 1
 
-/mob/living/simple_animal/hostile/retaliate/malf_drone/ListTargets()
-	if(hostile_drone)
-		var/list/targets = list()
-		for (var/mob/M in view(src, hostile_range))
-			if (M == src || istype(M, /mob/living/simple_animal/hostile/retaliate/malf_drone))
-				continue
-			targets |= M
-
-		return targets
-	else
-		return ..()
-
 //self repair systems have a chance to bring the drone back to life
 /mob/living/simple_animal/hostile/retaliate/malf_drone/Life()
 
@@ -95,13 +98,13 @@
 		set_stat(UNCONSCIOUS)
 		icon_state = "[initial(icon_state)]_dead"
 		disabled--
-		wander = 0
-		speak_chance = 0
+		set_wander (FALSE)
+		ai_holder.speak_chance = 0
 		if(disabled <= 0)
 			set_stat(CONSCIOUS)
 			icon_state = "[initial(icon_state)]0"
-			wander = 1
-			speak_chance = 5
+			set_wander (TRUE)
+			ai_holder.speak_chance = 5
 
 	//repair a bit of damage
 	if(prob(1))
@@ -156,7 +159,7 @@
 	if(!exploding && !disabled && prob(explode_chance))
 		exploding = 1
 		set_stat(UNCONSCIOUS)
-		wander = 1
+		set_wander(TRUE)
 		walk(src,0)
 		spawn(rand(50,150))
 			if(!disabled && exploding)
@@ -286,6 +289,12 @@
 
 	..()
 
+/datum/ai_holder/simple_animal/ranged/malf_drone
+	speak_chance = 5
+
+/datum/say_list/malf_drone
+	speak = list("ALERT.","Hostile-ile-ile entities dee-twhoooo-wected.","Threat parameterszzzz- szzet.","Bring sub-sub-sub-systems uuuup to combat alert alpha-a-a.")
+	emote_see = list("beeps menacingly","whirrs threateningly","scans its immediate vicinity")
 /obj/item/projectile/beam/drone
 	damage = 15
 

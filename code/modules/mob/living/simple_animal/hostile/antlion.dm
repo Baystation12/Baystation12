@@ -3,12 +3,10 @@
 	desc = "A large insectoid creature."
 	icon = 'icons/mob/simple_animal/antlion.dmi'
 	icon_state = "antlion" // these are placeholders, as otherwise the mob is complete
-	icon_living = "antlion" 
-	icon_dead = "antlion_dead" 
+	icon_living = "antlion"
+	icon_dead = "antlion_dead"
 	mob_size = MOB_MEDIUM
-	speak_emote = list("clicks") 
-	emote_hear = list("clicks its mandibles")
-	emote_see = list("shakes the sand off itself")
+	speak_emote = list("clicks")
 	response_harm   = "strikes"
 	faction = "antlions"
 	bleed_colour = COLOR_SKY_BLUE
@@ -31,6 +29,9 @@
 	var/healing = FALSE
 	var/heal_amount = 6
 
+	ai_holder_type = /datum/ai_holder/simple_animal/retaliate
+	say_list = /datum/say_list/antlion
+
 /mob/living/simple_animal/hostile/antlion/Life()
 	. = ..()
 
@@ -38,16 +39,16 @@
 
 	if(!.)
 		return
-	
-	if(can_perform_ability())
-		vanish()
 
-/mob/living/simple_animal/hostile/antlion/can_perform_ability()
-	. = ..()
-	if(!.)
-		return FALSE
-	if(!target_mob)
-		return FALSE
+	// if(can_perform_ability())
+	// 	vanish()
+
+// /mob/living/simple_animal/hostile/antlion/can_perform_ability()
+// 	. = ..()
+// 	if(!.)
+// 		return FALSE
+// 	if(!target_mob)
+// 		return FALSE
 
 /mob/living/simple_animal/hostile/antlion/proc/vanish()
 	visible_message(SPAN_NOTICE("\The [src] burrows into \the [get_turf(src)]!"))
@@ -86,12 +87,12 @@
 	visible_message(SPAN_WARNING("\The [src] erupts from \the [T]!"))
 	set_invisibility(initial(invisibility))
 	prep_burrow(FALSE)
-	cooldown_ability(ability_cooldown)
+	// cooldown_ability(ability_cooldown)
 	for(var/mob/living/carbon/human/H in get_turf(src))
 		H.attackby(natural_weapon, src)
 		visible_message(SPAN_DANGER("\The [src] tears into \the [H] from below!"))
 		H.Weaken(1)
-	
+
 /mob/living/simple_animal/hostile/antlion/proc/process_healing()
 	if(!incapacitated() && healing)
 		var/old_health = health
@@ -99,8 +100,7 @@
 			health = old_health + heal_amount
 
 /mob/living/simple_animal/hostile/antlion/proc/prep_burrow(var/new_bool)
-	stop_automated_movement = new_bool
-	stop_automation = new_bool
+	set_AI_busy(new_bool)
 	healing = new_bool
 
 /mob/living/simple_animal/hostile/antlion/mega
@@ -136,3 +136,7 @@
 	M.Scale(1.5)
 	transform = M
 	update_icon()
+
+/datum/say_list/antlion
+	emote_hear = list("clicks its mandibles")
+	emote_see = list("shakes the sand off itself")

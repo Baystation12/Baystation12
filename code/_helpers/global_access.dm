@@ -31,6 +31,10 @@
 			return global.Master;
 		if("OOClog")
 			return global.OOClog;
+		if("SSai")
+			return global.SSai;
+		if("SSaifast")
+			return global.SSaifast;
 		if("SSair")
 			return global.SSair;
 		if("SSairflow")
@@ -906,6 +910,10 @@
 			global.Master=newval;
 		if("OOClog")
 			global.OOClog=newval;
+		if("SSai")
+			global.SSai=newval;
+		if("SSaifast")
+			global.SSaifast=newval;
 		if("SSair")
 			global.SSair=newval;
 		if("SSairflow")
@@ -1765,6 +1773,8 @@
 	"LIGHTING_CORNER_DIAGONAL",
 	"Master",
 	"OOClog",
+	"SSai",
+	"SSaifast",
 	"SSair",
 	"SSairflow",
 	"SSalarm",

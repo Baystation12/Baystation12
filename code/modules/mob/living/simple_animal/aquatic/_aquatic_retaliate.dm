@@ -5,12 +5,14 @@
 	natural_weapon = /obj/item/natural_weapon/bite
 	speed = 4
 	mob_size = MOB_MEDIUM
-	emote_see = list("gnashes")
 
 	// They only really care if there's water around them or not.
 	max_gas = list()
 	min_gas = list()
 	minbodytemp = 0
+
+	ai_holder_type = /datum/ai_holder/simple_animal/retaliate/aquatic
+
 
 /mob/living/simple_animal/hostile/retaliate/aquatic/Life()
 	if(!submerged())
@@ -23,5 +25,5 @@
 /mob/living/simple_animal/hostile/retaliate/aquatic/handle_atmos(var/atmos_suitable = 1)
 	. = ..(atmos_suitable = submerged())
 
-/mob/living/simple_animal/hostile/retaliate/aquatic/can_act()
-	. = ..() && submerged()
+/datum/ai_holder/simple_animal/retaliate/aquatic/can_act()
+	. = ..() && holder.submerged()

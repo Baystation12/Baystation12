@@ -67,6 +67,7 @@
 	return ..() + {"
 		<option value='?_src_=vars;addaura=\ref[src]'>Add Aura</option>
 		<option value='?_src_=vars;removeaura=\ref[src]'>Remove Aura</option>
+		<option value='?_src_=vars;debug_mob_ai=\ref[src]'>Toggle AI Debug Output</option>
 		"}
 
 /mob/living/carbon/human/get_view_variables_options()

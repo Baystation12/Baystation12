@@ -10,9 +10,10 @@
 	health = 75
 	speed = 1
 	natural_weapon = /obj/item/natural_weapon/tentacles
-	speak_chance = 1
-	emote_see = list("wobbles slightly","oozes something out of tentacles' ends")
 	var/gets_random_color = TRUE
+
+	ai_holder_type = /datum/ai_holder/simple_animal/retaliate/jelly
+	say_list = /datum/say_list/jelly
 
 /obj/item/natural_weapon/tentacles
 	name = "tentacles"
@@ -105,3 +106,9 @@
 	maxHealth = 20
 	jelly_scale = 0.1875
 	split_type = null
+
+/datum/ai_holder/simple_animal/retaliate/jelly
+	speak_chance = 1
+
+/datum/say_list/jelly
+	emote_see = list("wobbles slightly","oozes something out of tentacles' ends")

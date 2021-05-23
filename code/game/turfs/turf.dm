@@ -36,6 +36,9 @@
 
 	var/tmp/changing_turf
 
+	/// List of 'dangerous' objs that the turf holds that can cause something bad to happen when stepped on, used for AI mobs.
+	var/list/dangerous_objects
+
 /turf/Initialize(mapload, ...)
 	. = ..()
 	if(dynamic_lighting)
@@ -310,7 +313,7 @@ var/const/enterloopsanity = 100
 		var/intial_dir = TT.init_dir
 		spawn(2)
 			step(AM, turn(intial_dir, 180))
-				
+
 /turf/proc/can_engrave()
 	return FALSE
 
@@ -371,3 +374,31 @@ var/const/enterloopsanity = 100
 		var/atom/movable/AM = thing
 		if (AM.simulated && AM.blocks_airlock())
 			LAZYADD(., AM)
+
+/**
+ * Returns false if stepping into a tile would cause harm (e.g. open space while unable to fly, water tile while a slime, lava, etc).
+ */
+/turf/proc/is_safe_to_enter(mob/living/L)
+	if(LAZYLEN(dangerous_objects))
+		for(var/obj/O in dangerous_objects)
+			if(!O.is_safe_to_step(L))
+				return FALSE
+	return TRUE
+
+/**
+ * Tells the turf that it currently contains something that automated movement should consider if planning to enter the tile.
+ * This uses lazy list macros to reduce memory footprint since for 99% of turfs the list would've been empty anyway.
+ */
+/turf/proc/register_dangerous_object(obj/O)
+	if(!istype(O))
+		return FALSE
+	LAZYADD(dangerous_objects, O)
+
+/**
+ * Similar to `register_dangerous_object()`, for when the dangerous object stops being dangerous/gets deleted/moved/etc.
+ */
+/turf/proc/unregister_dangerous_object(obj/O)
+	if(!istype(O))
+		return FALSE
+	LAZYREMOVE(dangerous_objects, O)
+	UNSETEMPTY(dangerous_objects) // This nulls the list var if it's empty.

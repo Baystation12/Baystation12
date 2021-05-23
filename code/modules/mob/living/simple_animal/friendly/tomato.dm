@@ -1,10 +1,9 @@
-/mob/living/simple_animal/tomato
+/mob/living/simple_animal/friendly/tomato
 	name = "tomato"
 	desc = "It's a horrifyingly enormous beef tomato, and it's packing extra beef!"
 	icon_state = "tomato"
 	icon_living = "tomato"
 	icon_dead = "tomato_dead"
-	speak_chance = 0
 	turns_per_move = 5
 	maxHealth = 15
 	health = 15
@@ -19,5 +18,10 @@
 	meat_type = /obj/item/reagent_containers/food/snacks/tomatomeat
 	bone_material = null
 	bone_amount =   0
-	skin_material = null 
+	skin_material = null
 	skin_amount =   null
+
+	ai_holder_type = /datum/ai_holder/simple_animal/passive/tomato
+
+/datum/ai_holder/simple_animal/passive/tomato
+	speak_chance = 0
