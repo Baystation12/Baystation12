@@ -8,6 +8,7 @@ Thumbs.db
 *.backup
 *.before
 data/
+dmdoc/
 cfg/
 build_log.txt
 use_map
@@ -20,8 +21,10 @@ atupdate
 config/*
 sql/test_db
 
-# vscode
+# VisualStudioCode
 .vscode/*
+!.vscode/settings.json
+*.code-workspace
 .history
 
 # swap
@@ -39,7 +42,6 @@ Session.vim
 
 # auto-generated tag files
 tags
-baystation12.code-workspace
 
 # ignore built libs
 lib/*.dll
