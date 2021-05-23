@@ -21,4 +21,4 @@
 	allowed_roles = TECHNICAL_ROLES
 
 /datum/gear/eyes/material
-	allowed_roles = list(/datum/job/chief_engineer, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/mining, /datum/job/scientist_assistant)
+	allowed_roles = list(/datum/job/chief_engineer, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/engineer_trainee, /datum/job/mining, /datum/job/scientist_assistant)
