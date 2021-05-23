@@ -15,9 +15,7 @@
 
 /decl/hierarchy/outfit/job/torch/crew/command/CO/New()
 	..()
-	backpack_overrides[/decl/backpack_outfit/backpack] = /obj/item/storage/backpack/captain
-	backpack_overrides[/decl/backpack_outfit/satchel] = /obj/item/storage/backpack/satchel/cap
-	backpack_overrides[/decl/backpack_outfit/messenger_bag] = /obj/item/storage/backpack/messenger/com
+	BACKPACK_OVERRIDE_COMMAND
 
 /decl/hierarchy/outfit/job/torch/crew/command/XO
 	name = OUTFIT_JOB_NAME("Executive Officer")
@@ -26,6 +24,10 @@
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_types = list(/obj/item/card/id/torch/silver)
 	pda_type = /obj/item/modular_computer/pda/heads/hop
+	
+/decl/hierarchy/outfit/job/torch/crew/command/XO/New()
+	..()
+	BACKPACK_OVERRIDE_COMMAND
 
 /decl/hierarchy/outfit/job/torch/crew/command/XO/fleet
 	name = OUTFIT_JOB_NAME("Executive Officer - Fleet")

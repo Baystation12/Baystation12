@@ -34,3 +34,8 @@ backpack_overrides[/decl/backpack_outfit/messenger_bag] = /obj/item/storage/back
 backpack_overrides[/decl/backpack_outfit/backpack]      = /obj/item/storage/backpack/virology; \
 backpack_overrides[/decl/backpack_outfit/satchel]       = /obj/item/storage/backpack/satchel/vir; \
 backpack_overrides[/decl/backpack_outfit/messenger_bag] = /obj/item/storage/backpack/messenger/viro;
+
+#define BACKPACK_OVERRIDE_COMMAND \
+backpack_overrides[/decl/backpack_outfit/backpack]		= /obj/item/storage/backpack/command; \
+backpack_overrides[/decl/backpack_outfit/satchel]		= /obj/item/storage/backpack/satchel/com; \
+backpack_overrides[/decl/backpack_outfit/messenger_bag]	= /obj/item/storage/backpack/messenger/com;

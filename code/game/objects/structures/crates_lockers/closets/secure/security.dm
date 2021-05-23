@@ -5,8 +5,8 @@
 
 /obj/structure/closet/secure_closet/captains/WillContain()
 	return list(
-		new/datum/atom_creator/weighted(list(/obj/item/storage/backpack/captain, /obj/item/storage/backpack/satchel/cap)),
-		new/datum/atom_creator/simple(/obj/item/storage/backpack/dufflebag/captain, 50),
+		new/datum/atom_creator/weighted(list(/obj/item/storage/backpack/command, /obj/item/storage/backpack/satchel/com)),
+		new/datum/atom_creator/simple(/obj/item/storage/backpack/dufflebag/com, 50),
 		/obj/item/clothing/suit/captunic,
 		/obj/item/clothing/suit/captunic/capjacket,
 		/obj/item/clothing/head/caphat/cap,
