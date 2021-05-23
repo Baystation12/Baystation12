@@ -1,0 +1,5 @@
+author: The-Spanish-Inquisition
+delete-after: true
+changes:
+  - rscadd: Added two new projectile firearms; Added one ammo speed loader to support
+      new firearm.
