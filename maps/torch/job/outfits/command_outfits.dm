@@ -95,14 +95,6 @@
 	pda_type = /obj/item/modular_computer/pda/heads/paperpusher
 	backpack_contents = list(/obj/item/clothing/accessory/badge/nanotrasen = 1)
 
-/decl/hierarchy/outfit/job/torch/passenger/corporate_bodyguard
-	name = OUTFIT_JOB_NAME("Executive Assistant")
-	l_ear =    /obj/item/device/radio/headset/heads/torchcorp
-	uniform =  /obj/item/clothing/under/suit_jacket/corp
-	shoes =    /obj/item/clothing/shoes/laceup
-	id_types = list( /obj/item/card/id/torch/passenger/corporate)
-	pda_type = /obj/item/modular_computer/pda/heads/paperpusher
-
 /decl/hierarchy/outfit/job/torch/crew/representative
 	name = OUTFIT_JOB_NAME("SolGov Representative")
 	l_ear = /obj/item/device/radio/headset/headset_com

@@ -5879,10 +5879,6 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
-/obj/machinery/recharger/wallcharger{
-	dir = 1;
-	pixel_y = -24
-	},
 /turf/simulated/floor/carpet/green,
 /area/crew_quarters/heads/office/cl/backroom)
 "nE" = (
@@ -14248,10 +14244,6 @@
 /obj/item/book/manual/solgov_law,
 /turf/simulated/floor/carpet/blue2,
 /area/crew_quarters/heads/office/sgr)
-"QV" = (
-/obj/structure/closet/secure_closet/bodyguard,
-/turf/simulated/floor/carpet/green,
-/area/crew_quarters/heads/office/cl/backroom)
 "QW" = (
 /obj/machinery/computer/ship/engines{
 	dir = 4;
@@ -29363,7 +29355,7 @@ al
 bi
 dk
 Kx
-QV
+NC
 Pl
 Pn
 oE
