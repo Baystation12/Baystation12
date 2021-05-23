@@ -293,8 +293,6 @@
 			return global.basic_robolimb;
 		if("blocked")
 			return global.blocked;
-		if("bomb_set")
-			return global.bomb_set;
 		if("cable_list")
 			return global.cable_list;
 		if("cached_icons")
@@ -611,8 +609,6 @@
 			return global.ntnrc_uid;
 		if("nttransfer_uid")
 			return global.nttransfer_uid;
-		if("nuke_disks")
-			return global.nuke_disks;
 		if("num_financial_terminals")
 			return global.num_financial_terminals;
 		if("organ_cache")
@@ -801,12 +797,6 @@
 			return global.swapmaps_mode;
 		if("syndicate_access")
 			return global.syndicate_access;
-		if("syndicate_code_phrase")
-			return global.syndicate_code_phrase;
-		if("syndicate_code_response")
-			return global.syndicate_code_response;
-		if("syndicate_name")
-			return global.syndicate_name;
 		if("tail_icon_cache")
 			return global.tail_icon_cache;
 		if("tank_gauge_cache")
@@ -1172,8 +1162,6 @@
 			global.basic_robolimb=newval;
 		if("blocked")
 			global.blocked=newval;
-		if("bomb_set")
-			global.bomb_set=newval;
 		if("cable_list")
 			global.cable_list=newval;
 		if("cached_icons")
@@ -1490,8 +1478,6 @@
 			global.ntnrc_uid=newval;
 		if("nttransfer_uid")
 			global.nttransfer_uid=newval;
-		if("nuke_disks")
-			global.nuke_disks=newval;
 		if("num_financial_terminals")
 			global.num_financial_terminals=newval;
 		if("organ_cache")
@@ -1680,12 +1666,6 @@
 			global.swapmaps_mode=newval;
 		if("syndicate_access")
 			global.syndicate_access=newval;
-		if("syndicate_code_phrase")
-			global.syndicate_code_phrase=newval;
-		if("syndicate_code_response")
-			global.syndicate_code_response=newval;
-		if("syndicate_name")
-			global.syndicate_name=newval;
 		if("tail_icon_cache")
 			global.tail_icon_cache=newval;
 		if("tank_gauge_cache")
@@ -1904,7 +1884,6 @@
 	"base_miss_chance",
 	"basic_robolimb",
 	"blocked",
-	"bomb_set",
 	"cable_list",
 	"cached_icons",
 	"cached_space",
@@ -2063,7 +2042,6 @@
 	"ntnet_global",
 	"ntnrc_uid",
 	"nttransfer_uid",
-	"nuke_disks",
 	"num_financial_terminals",
 	"organ_cache",
 	"organ_rel_size",
@@ -2158,9 +2136,6 @@
 	"swapmaps_loaded",
 	"swapmaps_mode",
 	"syndicate_access",
-	"syndicate_code_phrase",
-	"syndicate_code_response",
-	"syndicate_name",
 	"tail_icon_cache",
 	"tank_gauge_cache",
 	"tape_roll_applications",

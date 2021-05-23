@@ -118,10 +118,10 @@
 
 /obj/item/pinpointer/nukeop/Process()
 	var/new_mode
-	if(!locate_shuttle && bomb_set)
+	if(!locate_shuttle && GLOB.nuke_set)
 		locate_shuttle = 1
 		new_mode = "Shuttle Locator"
-	else if (locate_shuttle && !bomb_set)
+	else if (locate_shuttle && !GLOB.nuke_set)
 		locate_shuttle = 0
 		new_mode = "Authentication Disk Locator"
 	if(new_mode)

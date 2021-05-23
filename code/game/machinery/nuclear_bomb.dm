@@ -1,4 +1,4 @@
-var/bomb_set
+GLOBAL_VAR_INIT(nuke_set, 0)
 
 /obj/machinery/nuclearbomb
 	name = "\improper Nuclear Fission Explosive"
@@ -310,7 +310,7 @@ var/bomb_set
 /obj/machinery/nuclearbomb/proc/start_bomb()
 	timing = 1
 	log_and_message_admins("activated the detonation countdown of \the [src]")
-	bomb_set++ //There can still be issues with this resetting when there are multiple bombs. Not a big deal though for Nuke/N
+	GLOB.nuke_set++ //There can still be issues with this resetting when there are multiple bombs. Not a big deal though for Nuke/N
 	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
 	original_level = security_state.current_security_level
 	security_state.set_security_level(security_state.severe_security_level, TRUE)
@@ -324,7 +324,7 @@ var/bomb_set
 		return
 	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
 	security_state.set_security_level(original_level, TRUE)
-	bomb_set--
+	GLOB.nuke_set--
 	safety = TRUE
 	timing = 0
 	timeleft = Clamp(timeleft, minTime, maxTime)
@@ -369,7 +369,7 @@ var/bomb_set
 
 /obj/item/disk/nuclear/Initialize()
 	. = ..()
-	nuke_disks |= src
+	GLOB.nuke_disks |= src
 	// Can never be quite sure that a game mode has been properly initiated or not at this point, so always register
 	GLOB.moved_event.register(src, src, /obj/item/disk/nuclear/proc/check_z_level)
 
@@ -383,8 +383,8 @@ var/bomb_set
 
 /obj/item/disk/nuclear/Destroy()
 	GLOB.moved_event.unregister(src, src, /obj/item/disk/nuclear/proc/check_z_level)
-	nuke_disks -= src
-	if(!nuke_disks.len)
+	GLOB.nuke_disks -= src
+	if(!GLOB.nuke_disks.len)
 		var/turf/T = pick_area_turf(/area/maintenance, list(/proc/is_station_turf, /proc/not_turf_contains_dense_objects))
 		if(T)
 			var/obj/D = new /obj/item/disk/nuclear(T)
