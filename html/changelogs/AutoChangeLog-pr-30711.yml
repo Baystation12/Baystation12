@@ -1,0 +1,6 @@
+author: Imienny
+delete-after: true
+changes:
+  - bugfix: Taking pills no longer stops you from eating.
+  - tweak: Races which can regurgitate content of their stomach no longer have to
+      stick finger in to their throat.
