@@ -38,6 +38,7 @@
 	edge = TRUE
 	slot_flags |= SLOT_DENYPOCKET
 	attack_verb = active_attack_verb
+	w_class = ITEM_SIZE_NORMAL
 	update_icon()
 	if(user)
 		playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
@@ -54,6 +55,7 @@
 	edge = initial(edge)
 	slot_flags = initial(slot_flags)
 	attack_verb = inactive_attack_verb
+	w_class = ITEM_SIZE_SMALL
 	update_icon()
 	if(user)
 		playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
@@ -127,7 +129,7 @@
 	throwforce = 5
 	throw_speed = 1
 	throw_range = 5
-	w_class = ITEM_SIZE_SMALL
+	w_class = ITEM_SIZE_NORMAL
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_BLOOD
 	origin_tech = list(TECH_MAGNET = 3, TECH_ESOTERIC = 4)
 	sharp = TRUE
@@ -260,12 +262,11 @@
 	desc = "A machete handle that extends out into a long, purple machete blade. It appears to be Skrellian in origin."
 	icon_state = "machete_skrell_x"
 	active_icon = "machete_skrell"
-	active_force = 16		//In line with standard machetes at time of creation.
+	active_force = 20		//In line with standard machetes at time of creation.(now updated again to current machetes)
 	active_throwforce = 17.25
 	lighting_color = COLOR_SABER_SKRELL
 	force = 3
 	throwforce = 1
-	w_class = ITEM_SIZE_SMALL
 	origin_tech = list(TECH_MAGNET = 3)
 	active_attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
 	hitsound = 'sound/weapons/blade1.ogg'
