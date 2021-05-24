@@ -307,3 +307,4 @@
 	name = "thermal induction generator"
 	desc = "Made by Krri'gli Corp using thermal induction technology, this heater is guaranteed not to set anything, or anyone, on fire."
 	target_temperature = T0C+40
+	
