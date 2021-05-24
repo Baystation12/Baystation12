@@ -1134,6 +1134,12 @@
 /obj/machinery/light/skrell{
 	dir = 8
 	},
+/obj/item/reagent_containers/hypospray{
+	pixel_x = -4
+	},
+/obj/item/reagent_containers/hypospray{
+	pixel_x = 4
+	},
 /turf/simulated/floor/tiled/skrell/white,
 /area/ship/skrellscoutship/crew/medbay)
 "dS" = (
@@ -4955,16 +4961,24 @@
 /obj/structure/table/standard,
 /obj/machinery/cell_charger,
 /obj/item/cell/hyper{
-	pixel_x = 6;
-	pixel_y = -5
+	pixel_x = -8;
+	pixel_y = -3
 	},
 /obj/item/cell/hyper{
-	pixel_x = 7;
+	pixel_x = -8;
 	pixel_y = 5
 	},
 /obj/structure/window/reinforced{
 	dir = 1;
 	health = 1e+006
+	},
+/obj/item/disk/integrated_circuit/upgrade/advanced{
+	pixel_x = 5;
+	pixel_y = -5
+	},
+/obj/item/disk/integrated_circuit/upgrade/clone{
+	pixel_x = 6;
+	pixel_y = 6
 	},
 /turf/simulated/floor/tiled/skrell/orange,
 /area/ship/skrellscoutship/wings/starboard)
