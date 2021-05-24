@@ -15,9 +15,7 @@
 
 /decl/hierarchy/outfit/job/torch/crew/command/CO/New()
 	..()
-	backpack_overrides[/decl/backpack_outfit/backpack] = /obj/item/storage/backpack/captain
-	backpack_overrides[/decl/backpack_outfit/satchel] = /obj/item/storage/backpack/satchel/cap
-	backpack_overrides[/decl/backpack_outfit/messenger_bag] = /obj/item/storage/backpack/messenger/com
+	BACKPACK_OVERRIDE_COMMAND
 
 /decl/hierarchy/outfit/job/torch/crew/command/XO
 	name = OUTFIT_JOB_NAME("Executive Officer")
@@ -26,6 +24,10 @@
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_types = list(/obj/item/card/id/torch/silver)
 	pda_type = /obj/item/modular_computer/pda/heads/hop
+	
+/decl/hierarchy/outfit/job/torch/crew/command/XO/New()
+	..()
+	BACKPACK_OVERRIDE_COMMAND
 
 /decl/hierarchy/outfit/job/torch/crew/command/XO/fleet
 	name = OUTFIT_JOB_NAME("Executive Officer - Fleet")
@@ -94,14 +96,6 @@
 	id_types = list(/obj/item/card/id/torch/passenger/corporate/liaison)
 	pda_type = /obj/item/modular_computer/pda/heads/paperpusher
 	backpack_contents = list(/obj/item/clothing/accessory/badge/nanotrasen = 1)
-
-/decl/hierarchy/outfit/job/torch/passenger/corporate_bodyguard
-	name = OUTFIT_JOB_NAME("Executive Assistant")
-	l_ear =    /obj/item/device/radio/headset/heads/torchcorp
-	uniform =  /obj/item/clothing/under/suit_jacket/corp
-	shoes =    /obj/item/clothing/shoes/laceup
-	id_types = list( /obj/item/card/id/torch/passenger/corporate)
-	pda_type = /obj/item/modular_computer/pda/heads/paperpusher
 
 /decl/hierarchy/outfit/job/torch/crew/representative
 	name = OUTFIT_JOB_NAME("SolGov Representative")

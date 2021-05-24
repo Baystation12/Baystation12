@@ -218,6 +218,7 @@
 var/list/mob/living/forced_ambiance_list = new
 
 /area/Entered(A)
+	..()
 	if(!istype(A,/mob/living))	return
 
 	var/mob/living/L = A

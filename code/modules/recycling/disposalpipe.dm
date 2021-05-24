@@ -12,7 +12,7 @@
 	dir = 0				// dir will contain dominant direction for junction pipes
 	var/health = 10 	// health points 0-10
 	alpha = 192 // Plane and alpha modified for mapping, reset to normal on spawn.
-	layer = DISPOSALS_PIPE_LAYER
+	layer = ABOVE_TILE_LAYER
 	var/base_icon_state	// initial icon state on map
 	var/sort_type = ""
 	var/turn = DISPOSAL_FLIP_NONE
@@ -22,7 +22,9 @@
 /obj/structure/disposalpipe/Initialize()
 	. = ..()
 	alpha = 255
+	layer = DISPOSALS_PIPE_LAYER
 	base_icon_state = icon_state
+	update_icon()
 
 // pipe is deleted
 // ensure if holder is present, it is expelled

@@ -84,7 +84,10 @@
 		return ..()
 	var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
 	if(stomach)
-		return nutrition + (stomach.ingested.total_volume * 10)
+		var/food_volume = 0
+		for(var/datum/reagent/nutriment/A in stomach.ingested.reagent_list)
+			food_volume += A.volume
+		return nutrition + food_volume * 15
 	return 0 //Always hungry, but you can't actually eat. :(
 
 /mob/living/carbon/human/Stat()
