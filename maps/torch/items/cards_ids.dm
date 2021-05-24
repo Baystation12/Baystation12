@@ -200,7 +200,6 @@
 /obj/item/card/id/torch/passenger/corporate
 	color = COLOR_BOTTLE_GREEN
 	detail_color = COLOR_OFF_WHITE
-	job_access_type = /datum/job/bodyguard
 
 /obj/item/card/id/torch/passenger/corporate/liaison
 	job_access_type = /datum/job/liaison

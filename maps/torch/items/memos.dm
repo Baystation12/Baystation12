@@ -478,17 +478,9 @@
 
 // corporate memos
 
-/obj/item/paper/memo/corporate/bodyarmourbad
-	name = "\improper LPA recommendations"
-	info = {"Some "internal use only" corporate documents, detailing that having loss prevention associates openly wear body armor and a smartgun is an extreme violation of trust between EXO and the SCG and will result in harsh penalties. It also notes that this issue will be brought up at every 3 months during contract renewal."}
-
 /obj/item/paper/memo/corporate/stipendcut
 	name = "corporate spending records"
 	info = {"A "confidential" memo on the current usage of funds provided to SEV Torch corporate liaisons; apparently there's threats of a strike over a cut to the cost-of-living stipends by the head office."}
-
-/obj/item/paper/memo/corporate/LPArenting
-	name = "\improper LPA usage notice"
-	info = {"A "confidential" notice to the corporate liaison aboard the SEV Torch that their security staff are for their use only, and renting them out as extra manpower to security is a gross violation of their contract."}
 
 /obj/item/paper/memo/corporate/uniondues
 	name = "union dues reminder"
@@ -497,10 +489,6 @@
 /obj/item/paper/memo/corporate/glueandtape
 	name = "proper document disposal"
 	info = {"Some "internal use only" corporate documents detailing the proper ways to dispose of top secret and classified documents. It highlights that burning is most applicable, and shows pictures of shredded documents reconstructed with glue and sticky tape with a red "Fail" written below."}
-
-/obj/item/paper/memo/corporate/lpainfo
-	name = "\improper LPA reminder"
-	info = {"An "internal use only" corporate document informing corporate liasions of the loss prevention associate's job aboard the ship. It cites concerns about the misuse of the LPA and general mistrust towards them from the rest of the crew, and warns how these tensions will damage EXO's image if they keep acting in this manner. It reminds them that LPAs are from an established industry and should have experience in many aspects other than carrying a firearm. It specifies good observation skills, solid restraint, an understanding of escalation rules in regards to their position, and that their experience as an industry professional can be useful as an advisor to their tasked liasion."}
 
 /obj/item/paper/memo/corporate/exointerest
 	name = "\improper EXO and you"
@@ -517,10 +505,6 @@
 /obj/item/paper/memo/corporate/spellchecker
 	name = "spellchecking and you"
 	info = {"Some "internal use only" corporate memos reminding corporate liaisons to proofread reports. It details various reasons behind why correct spelling and punctuation help in making EXO and Expeditionary Command take your report seriously."}
-
-/obj/item/paper/memo/corporate/assistants
-	name = "misuse of delegated personnel"
-	info = {"An "internal use only" corporate memo reminding corporate liaisons that just because the executive assistant is issued a firearm does not mean that they are expected to fulfill the same role as a loss prevention associate. It suggests using loss prevention associates to assist in tactical or physical affairs and executive assistants in bureaucratic or menial tasks."}
 
 /obj/item/paper/memo/corporate/safetyfirst
 	name = "contractor safety and you"

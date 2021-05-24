@@ -84,71 +84,72 @@
 
 /obj/item/storage/backpack/cultpack
 	name = "trophy rack"
-	desc = "It's useful for both carrying extra gear and proudly declaring your insanity."
+	desc = "It's useful for both carrying extra gear, and proudly declaring your dedication to your chosen malevolent deity."
 	icon_state = "cultpack"
 
 /obj/item/storage/backpack/clown
-	name = "Giggles von Honkerton"
-	desc = "It's a backpack made by Honk! Co."
+	name = "\improper Giggles von Honkerton"
+	desc = "It's a very vibrant backpack, made for a clown."
 	icon_state = "clownpack"
 	item_state_slots = null
 
 /obj/item/storage/backpack/medic
 	name = "medical backpack"
-	desc = "It's a backpack especially designed for use in a sterile environment."
+	desc = "It's a backpack, designed for use in the sterile confines of the infirmary."
 	icon_state = "medicalpack"
 	item_state_slots = null
 
 /obj/item/storage/backpack/security
 	name = "security backpack"
-	desc = "It's a very robust backpack."
+	desc = "It's a very robust backpack, for security-related needs."
 	icon_state = "securitypack"
 	item_state_slots = null
 
 /obj/item/storage/backpack/security/exo
 	name = "corporate security backpack"
+	desc = "It's a very robust backpack, for security-related needs. This one is in EXO colors."
 	icon_state = "securitypack_exo"
 
-/obj/item/storage/backpack/captain
-	name = "captain's backpack"
-	desc = "It's a special backpack made exclusively for officers."
+/obj/item/storage/backpack/command
+	name = "command backpack"
+	desc = "It's a special backpack, made exclusively for senior officers."
 	icon_state = "captainpack"
 	item_state_slots = null
 
 /obj/item/storage/backpack/industrial
 	name = "industrial backpack"
-	desc = "It's a tough backpack for the daily grind of industrial life."
+	desc = "It's a tough backpack, made for the daily grind of industrial life."
 	icon_state = "engiepack"
 	item_state_slots = null
 
 /obj/item/storage/backpack/toxins
 	name = "science backpack"
-	desc = "It's a stain-resistant light backpack modeled for use in laboratories and other scientific institutions."
+	desc = "It's a stain-resistant light backpack, modeled for use in laboratories and other scientific settings."
 	icon_state = "ntpack"
 
 /obj/item/storage/backpack/hydroponics
-	name = "herbalist's backpack"
-	desc = "It's a green backpack with many pockets to store plants and tools in."
+	name = "hydroponics backpack"
+	desc = "It's a green backpack, with many pockets to store plants and tools in."
 	icon_state = "hydpack"
 
 /obj/item/storage/backpack/genetics
-	name = "geneticist backpack"
-	desc = "It's a backpack fitted with slots for diskettes and other workplace tools."
+	name = "genetics backpack"
+	desc = "It's a backpack, fitted with slots for diskettes and other workplace tools."
 	icon_state = "genpack"
 
 /obj/item/storage/backpack/virology
 	name = "sterile backpack"
-	desc = "It's a sterile backpack able to withstand different pathogens from entering its fabric."
+	desc = "It's a sterile backpack, specially designed for work in areas with a biosafety classification level."
 	icon_state = "viropack"
 
 /obj/item/storage/backpack/chemistry
-	name = "pharmacist's backpack"
-	desc = "It's an orange backpack which was designed to hold beakers, pill bottles and bottles."
+	name = "pharmacy backpack"
+	desc = "It's a sterile orange backpack, which was designed to hold beakers, pill bottles, and other reagent containers."
 	icon_state = "chempack"
 
 /obj/item/storage/backpack/rucksack
 	name = "black rucksack"
-	desc = "A sturdy military-grade backpack with low-profile straps. Designed to work well with armor."
+	desc = "A sturdy, military-grade backpack with low-profile straps. Designed to work well with armor."
 	icon_state = "rucksack"
 	item_state_slots = list(slot_l_hand_str = "rucksack", slot_r_hand_str = "rucksack")
 
@@ -212,9 +213,9 @@
 	icon_state = "duffle_syndieammo"
 	item_state_slots = list(slot_l_hand_str = "duffle_syndieammo", slot_r_hand_str = "duffle_syndieammo")
 
-/obj/item/storage/backpack/dufflebag/captain
-	name = "captain's dufflebag"
-	desc = "A large dufflebag for holding extra captainly goods."
+/obj/item/storage/backpack/dufflebag/com
+	name = "command dufflebag"
+	desc = "A large dufflebag for holding extra goods for senior command."
 	icon_state = "duffle_captain"
 	item_state_slots = list(slot_l_hand_str = "duffle_captain", slot_r_hand_str = "duffle_captain")
 
@@ -237,6 +238,8 @@
 	item_state_slots = list(slot_l_hand_str = "duffle_eng", slot_r_hand_str = "duffle_eng")
 
 /obj/item/storage/backpack/dufflebag/firefighter
+	name = "firefighter's dufflebag"
+	desc = "A large dufflebag containing equipment to fight fires with."
 	startswith = list(
 		/obj/item/storage/belt/fire_belt/full,
 		/obj/item/clothing/suit/fire/firefighter,
@@ -253,7 +256,7 @@
 
 /obj/item/storage/backpack/satchel
 	name = "satchel"
-	desc = "A trendy looking satchel."
+	desc = "A trendy-looking satchel."
 	icon_state = "satchel-norm"
 
 /obj/item/storage/backpack/satchel/grey
@@ -317,7 +320,7 @@
 
 /obj/item/storage/backpack/satchel/med
 	name = "medical satchel"
-	desc = "A sterile satchel used in medical departments."
+	desc = "A sterile satchel designed for use in the sterile confines of the infirmary."
 	icon_state = "satchel-med"
 	item_state_slots = list(
 		slot_l_hand_str = "medicalpack",
@@ -325,28 +328,28 @@
 		)
 
 /obj/item/storage/backpack/satchel/vir
-	name = "virologist satchel"
-	desc = "A sterile satchel with virologist colours."
+	name = "sterile satchel"
+	desc = "It's a sterile satchel, rated for use in areas with a biosafety classification level."
 	icon_state = "satchel-vir"
 
 /obj/item/storage/backpack/satchel/chem
-	name = "pharmacist satchel"
-	desc = "A sterile satchel with pharmacist colours."
+	name = "pharmacy satchel"
+	desc = "It's a sterile orange satchel, designed to hold beakers, pill bottles, and other reagent containers."
 	icon_state = "satchel-chem"
 
 /obj/item/storage/backpack/satchel/gen
-	name = "geneticist satchel"
-	desc = "A sterile satchel with geneticist colours."
+	name = "genetics satchel"
+	desc = "A green satchel, filled with slots for diskettes and other workplace tools."
 	icon_state = "satchel-gen"
 
 /obj/item/storage/backpack/satchel/tox
-	name = "corporate satchel"
-	desc = "Useful for holding research materials. The colors on it denote it as a corporate bag."
+	name = "science satchel"
+	desc = "It's a stain-resistant satchel, modeled for use in laboratories and other scientific settings."
 	icon_state = "satchel-nt"
 
 /obj/item/storage/backpack/satchel/sec
 	name = "security satchel"
-	desc = "A robust satchel for security related needs."
+	desc = "A robust satchel for security-related needs."
 	icon_state = "satchel-sec"
 	item_state_slots = list(
 		slot_l_hand_str = "securitypack",
@@ -355,6 +358,7 @@
 
 /obj/item/storage/backpack/satchel/sec/exo
 	name = "corporate security satchel"
+	desc = "A robust satchel for corporate security-related needs. This one is in EXO colors."
 	icon_state = "satchel-sec_exo"
 
 /obj/item/storage/backpack/satchel/hyd
@@ -362,9 +366,9 @@
 	desc = "A green satchel for plant related work."
 	icon_state = "satchel_hyd"
 
-/obj/item/storage/backpack/satchel/cap
-	name = "captain's satchel"
-	desc = "An exclusive satchel for officers."
+/obj/item/storage/backpack/satchel/com
+	name = "command satchel"
+	desc = "An exclusive satchel for senior officers."
 	icon_state = "satchel-cap"
 	item_state_slots = list(
 		slot_l_hand_str = "satchel-cap",
@@ -374,7 +378,7 @@
 //Smuggler's satchel
 /obj/item/storage/backpack/satchel/flat
 	name = "\improper Smuggler's satchel"
-	desc = "A very slim satchel that can easily fit into tight spaces."
+	desc = "A very slim satchel, that can easily fit into tight spaces."
 	icon_state = "satchel-flat"
 	item_state = "satchel-norm"
 	level = 1
@@ -435,8 +439,8 @@
 
 //Medical
 /obj/item/storage/backpack/ert/medical
-	name = "emergency response team medical backpack"
-	desc = "A spacious backpack with lots of pockets, worn by medical members of an Emergency Response Team."
+	name = "emergency response team corpsman backpack"
+	desc = "A spacious backpack with lots of pockets, worn by the corpsmen of an Emergency Response Team."
 	icon_state = "ert_medical"
 
 /*
@@ -445,51 +449,51 @@
 
 /obj/item/storage/backpack/messenger
 	name = "messenger bag"
-	desc = "A sturdy backpack worn over one shoulder."
+	desc = "A small, sturdy backpack, worn over one shoulder."
 	icon_state = "courierbag"
 
 /obj/item/storage/backpack/messenger/chem
 	name = "pharmacy messenger bag"
-	desc = "A serile backpack worn over one shoulder.  This one is in Chemsitry colors."
+	desc = "A small, sterile backpack, worn over one shoulder. This one was designed to hold beakers, pill bottles, and other reagent containers."
 	icon_state = "courierbagchem"
 
 /obj/item/storage/backpack/messenger/med
 	name = "medical messenger bag"
-	desc = "A sterile backpack worn over one shoulder used in medical departments."
+	desc = "A small, sterile backpack worn over one shoulder. This one was designed for use in the sterile confines of the infirmary."
 	icon_state = "courierbagmed"
 
 /obj/item/storage/backpack/messenger/viro
 	name = "virology messenger bag"
-	desc = "A sterile backpack worn over one shoulder.  This one is in Virology colors."
+	desc = "A small, sterile backpack worn over one shoulder. This one was designed for work in areas with a biosafety classification level."
 	icon_state = "courierbagviro"
 
 /obj/item/storage/backpack/messenger/tox
-	name = "corporate messenger bag"
-	desc = "A backpack worn over one shoulder.  Useful for holding science materials. The colors on it denote it as a corporate bag."
+	name = "science messenger bag"
+	desc = "A small, stain-resistant backpack worn over one shoulder. This one was modeled for use in laboratories and other scientific settings."
 	icon_state = "courierbagnt"
 
 /obj/item/storage/backpack/messenger/com
-	name = "captain's messenger bag"
-	desc = "A special backpack worn over one shoulder.  This one is made specifically for officers."
+	name = "command messenger bag"
+	desc = "A small backpack worn over one shoulder. This one was made specifically for senior officers."
 	icon_state = "courierbagcom"
 
 /obj/item/storage/backpack/messenger/engi
-	name = "engineering messenger bag"
-	desc = "A strong backpack worn over one shoulder. This one is designed for Industrial work."
+	name = "industrial messenger bag"
+	desc = "A small, tough backpack worn over one shoulder. This one was designed for industrial work."
 	icon_state = "courierbagengi"
 
 /obj/item/storage/backpack/messenger/hyd
 	name = "hydroponics messenger bag"
-	desc = "A backpack worn over one shoulder.  This one is designed for plant-related work."
+	desc = "A small backpack worn over one shoulder. This one was designed for plant-related work."
 	icon_state = "courierbaghyd"
 
 /obj/item/storage/backpack/messenger/sec
 	name = "security messenger bag"
-	desc = "A tactical backpack worn over one shoulder. This one is in Security colors."
+	desc = "A small, tactical backpack worn over one shoulder."
 	icon_state = "courierbagsec"
 
 /obj/item/storage/backpack/messenger/sec/exo
 	name = "corporate security messenger bag"
-	desc = "A tactical backpack worn over one shoulder. This is black and bottle green."
+	desc = "A small, tactical backpack worn over one shoulder. This one is in EXO colors."
 	icon_state = "courierbagsec_exo"
 
