@@ -121,7 +121,7 @@
 	//Apply weapon damage
 	var/damage_flags = I.damage_flags()
 
-	return apply_damage(effective_force, I.damtype, hit_zone, damage_flags, used_weapon=I)
+	return apply_damage(effective_force, I.damtype, hit_zone, damage_flags, used_weapon=I, armor_pen=I.armor_penetration)
 
 //this proc handles being hit by a thrown atom
 /mob/living/hitby(var/atom/movable/AM, var/datum/thrownthing/TT)
