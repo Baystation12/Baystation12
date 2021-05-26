@@ -1,0 +1,9 @@
+author: Mucker
+delete-after: true
+changes:
+  - rscadd: Ported Polaris mob AI and integrated existing simple mobs into it.
+  - admin: Added a buildmode for controlling mobs with AI (sort of like an RTS).
+  - bugfix: Fixed ranged mobs rapid firing when being melee'd.
+  - bugfix: Fixed mobs being able to circumvent barriers via diagonal movement.
+  - rscdel: Nanomachines and Commanded have been disabled until they can be integrated
+      with the new mob AI.
