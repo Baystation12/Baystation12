@@ -104,10 +104,10 @@
 			familiar_type = /mob/living/simple_animal/hostile/carp/pike
 		if("Mouse")
 			H.verbs |= /mob/living/proc/ventcrawl
-			familiar_type = /mob/living/simple_animal/mouse
+			familiar_type = /mob/living/simple_animal/friendly/mouse
 		if("Cat")
 			H.mutations |= mRun
-			familiar_type = /mob/living/simple_animal/cat
+			familiar_type = /mob/living/simple_animal/friendly/cat
 		if("Bear")
 			var/obj/item/clothing/under/under = locate() in equipment
 			var/obj/item/clothing/head/head = locate() in equipment
@@ -115,17 +115,17 @@
 			var/datum/extension/armor/A = get_extension(under, /datum/extension/armor)
 			if(A)
 				A.armor_values = list(
-					melee = ARMOR_MELEE_VERY_HIGH, 
-					bullet = ARMOR_BALLISTIC_PISTOL, 
-					laser = ARMOR_LASER_SMALL, 
+					melee = ARMOR_MELEE_VERY_HIGH,
+					bullet = ARMOR_BALLISTIC_PISTOL,
+					laser = ARMOR_LASER_SMALL,
 					energy = ARMOR_ENERGY_SMALL
 					) //More armor
 			A = get_extension(head, /datum/extension/armor)
 			if(A)
 				A.armor_values = list(
-					melee = ARMOR_MELEE_RESISTANT, 
-					bullet = ARMOR_BALLISTIC_MINOR, 
-					laser = ARMOR_LASER_MINOR, 
+					melee = ARMOR_MELEE_RESISTANT,
+					bullet = ARMOR_BALLISTIC_MINOR,
+					laser = ARMOR_LASER_MINOR,
 					energy = ARMOR_ENERGY_MINOR
 					)
 			familiar_type = /mob/living/simple_animal/hostile/bear

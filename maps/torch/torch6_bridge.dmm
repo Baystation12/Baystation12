@@ -16333,7 +16333,7 @@
 	dir = 9
 	},
 /obj/random/plushie,
-/mob/living/simple_animal/corgi/Ian,
+/mob/living/simple_animal/friendly/corgi/Ian,
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/xo)
 "ZX" = (

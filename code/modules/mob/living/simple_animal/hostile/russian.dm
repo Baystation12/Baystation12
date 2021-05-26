@@ -5,13 +5,11 @@
 	icon_living = "russianmelee"
 	icon_dead = "russianmelee_dead"
 	icon_gib = "syndicate_gib"
-	speak_chance = 0
 	turns_per_move = 5
 	response_help = "pokes"
 	response_disarm = "shoves"
 	response_harm = "hits"
 	speed = 4
-	stop_automated_movement_when_pulled = 0
 	maxHealth = 100
 	health = 100
 	harm_intent_damage = 5
@@ -24,6 +22,7 @@
 	faction = "russian"
 	status_flags = CANPUSH
 
+	ai_holder_type = /datum/ai_holder/simple_animal/humanoid
 
 /mob/living/simple_animal/hostile/russian/ranged
 	icon_state = "russianranged"

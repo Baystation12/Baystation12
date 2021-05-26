@@ -2,16 +2,13 @@
 	name = "Construct"
 	real_name = "Construct"
 	desc = ""
-	speak = list("Hsssssssszsht.", "Hsssssssss...", "Tcshsssssssszht!")
 	speak_emote = list("hisses")
-	emote_hear = list("wails","screeches")
 	response_help  = "thinks better of touching"
 	response_disarm = "flailed at"
 	response_harm   = "punched"
 	icon_dead = "shade_dead"
 	speed = -1
 	a_intent = I_HURT
-	stop_automated_movement = 1
 	status_flags = CANPUSH
 	universal_speak = FALSE
 	universal_understand = TRUE
@@ -36,6 +33,9 @@
 
 	var/nullblock = 0
 	var/list/construct_spells = list()
+
+	ai_holder_type = /datum/ai_holder/simple_animal/melee
+	say_list = /datum/say_list/construct
 
 /mob/living/simple_animal/construct/cultify()
 	return
@@ -111,7 +111,7 @@
 /mob/living/simple_animal/construct/armoured/Life()
 	weakened = 0
 	if ((. = ..()))
-		return 
+		return
 
 /mob/living/simple_animal/construct/armoured/bullet_act(var/obj/item/projectile/P)
 	if(istype(P, /obj/item/projectile/energy) || istype(P, /obj/item/projectile/beam))
@@ -228,7 +228,7 @@
 	natural_weapon = /obj/item/natural_weapon/juggernaut/behemoth
 	speed = 5
 	environment_smash = 2
-	
+
 	resistance = 10
 	var/energy = 0
 	var/max_energy = 1000
@@ -363,3 +363,7 @@
 			if(25 to 49)			healths.icon_state = "harvester_health5"
 			if(1 to 24)				healths.icon_state = "harvester_health6"
 			else					healths.icon_state = "harvester_health7"
+
+/datum/say_list/construct
+	speak = list("Hsssssssszsht.", "Hsssssssss...", "Tcshsssssssszht!")
+	emote_hear = list("wails","screeches")

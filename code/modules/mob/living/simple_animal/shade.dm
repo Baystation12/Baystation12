@@ -10,7 +10,6 @@
 	health = 50
 	universal_speak = TRUE
 	speak_emote = list("hisses")
-	emote_hear = list("wails","screeches")
 	response_help  = "puts their hand through"
 	response_disarm = "flails at"
 	response_harm   = "punches"
@@ -20,7 +19,6 @@
 	min_gas = null
 	max_gas = null
 	speed = -1
-	stop_automated_movement = 1
 	status_flags = 0
 	faction = "cult"
 	supernatural = 1
@@ -34,6 +32,9 @@
 	bone_amount =   0
 	skin_material = null
 	skin_amount =   0
+
+	ai_holder_type = /datum/ai_holder/simple_animal/retaliate/shade
+	say_list_type = /datum/say_list/shade
 
 /obj/item/natural_weapon/shade
 	name = "foul touch"
@@ -57,3 +58,10 @@
 				ghostize()
 		qdel(src)
 		return
+
+
+/datum/ai_holder/simple_animal/retaliate/shade
+	hostile = FALSE
+
+/datum/say_list/shade
+	emote_hear = list("wails","screeches")

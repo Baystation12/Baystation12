@@ -34,6 +34,27 @@
 	break_stuff_probability = 35
 	faction = "shark"
 
+	ai_holder_type = /datum/ai_holder/simple_animal/melee/carp/shark
+
+/datum/ai_holder/simple_animal/melee/carp/shark/engage_target()
+	set waitfor = 0//to deal with sleep() possibly stalling other procs
+	. = ..()
+	var/mob/living/simple_animal/hostile/carp/shark/S = holder
+	var/mob/living/L = .
+	if(istype(L))
+		if(prob(25))//if one is unlucky enough, they get tackled few tiles away
+			L.visible_message("<span class='danger'>\The [src] tackles [L]!</span>")
+			var/tackle_length = rand(3,5)
+			for (var/i = 1 to tackle_length)
+				var/turf/T = get_step(L.loc, S.dir)//on a first step of tackling standing mob would block movement so let's check if there's something behind it. Works for consequent moves too
+				if (T.density || LinkBlocked(L.loc, T) || TurfBlockedNonWindow(T) || DirBlocked(T, GLOB.flip_dir[S.dir]))
+					break
+				sleep(2)
+				S.forceMove(T)//maybe there's better manner then just forceMove() them
+				L.forceMove(T)
+			S.visible_message("<span class='danger'>\The [S] releases [L].</span>")
+
+
 /mob/living/simple_animal/hostile/carp/shark/carp_randomify()
 	return
 
@@ -48,23 +69,6 @@
 		sharkmaw_phoron.adjust_gas(GAS_PHORON,  10)
 		environment.merge(sharkmaw_phoron)
 		visible_message("<span class='warning'>\The [src]'s body releases some gas from the gills with a quiet fizz!</span>")
-
-/mob/living/simple_animal/hostile/carp/shark/AttackingTarget()
-	set waitfor = 0//to deal with sleep() possibly stalling other procs
-	. =..()
-	var/mob/living/L = .
-	if(istype(L))
-		if(prob(25))//if one is unlucky enough, they get tackled few tiles away
-			L.visible_message("<span class='danger'>\The [src] tackles [L]!</span>")
-			var/tackle_length = rand(3,5)
-			for (var/i = 1 to tackle_length)
-				var/turf/T = get_step(L.loc, dir)//on a first step of tackling standing mob would block movement so let's check if there's something behind it. Works for consequent moves too
-				if (T.density || LinkBlocked(L.loc, T) || TurfBlockedNonWindow(T) || DirBlocked(T, GLOB.flip_dir[dir]))
-					break
-				sleep(2)
-				forceMove(T)//maybe there's better manner then just forceMove() them
-				L.forceMove(T)
-			visible_message("<span class='danger'>\The [src] releases [L].</span>")
 
 /obj/item/reagent_containers/food/snacks/sharkmeat
 	name = "cosmoshark fillet"

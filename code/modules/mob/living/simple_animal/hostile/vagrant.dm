@@ -10,7 +10,6 @@
 	maxHealth = 60
 	health = 20
 	speed = 5
-	speak_chance = 0
 	turns_per_move = 4
 	move_to_delay = 4
 	response_help = "pets the"
@@ -32,6 +31,31 @@
 
 	bleed_colour = "#aad9de"
 
+	ai_holder_type = /datum/ai_holder/hostile/melee/vagrant
+
+/datum/ai_holder/hostile/melee/vagrant
+
+/datum/ai_holder/hostile/melee/vagrant/engage_target()
+	. = ..()
+
+	if(ishuman(.))
+		var/mob/living/carbon/human/H = .
+		var/mob/living/simple_animal/hostile/vagrant/V = holder
+		if(V.gripping == H)
+			H.Weaken(1)
+			H.Stun(1)
+			return
+		//This line ensures there's always a reasonable chance of grabbing, while still
+		//Factoring in health
+		if(!V.gripping && (V.cloaked || prob(V.health + ((V.maxHealth - V.health) * 2))))
+			V.gripping = H
+			V.cloaked = 0
+			V.update_icon()
+			H.Weaken(1)
+			H.Stun(1)
+			H.visible_message("<span class='danger'>\the [src] latches onto \the [H], pulsating!</span>")
+			V.forceMove(V.gripping.loc)
+
 /mob/living/simple_animal/hostile/vagrant/Allow_Spacemove(var/check_drift = 0)
 	return 1
 
@@ -41,7 +65,7 @@
 	if((target_mob != Proj.firer) && health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT)) //Respond to being shot at
 		target_mob = Proj.firer
 		turns_per_move = 3
-		MoveToTarget()
+		ai_holder.walk_to_target()
 
 /mob/living/simple_animal/hostile/vagrant/death(gibbed)
 	. = ..()
@@ -69,7 +93,7 @@
 		if(turns_per_move != initial(turns_per_move))
 			turns_per_move = initial(turns_per_move)
 
-	if(stance == HOSTILE_STANCE_IDLE && !cloaked)
+	if(stance == STANCE_IDLE && !cloaked)
 		cloaked = 1
 		update_icon()
 	if(health == maxHealth)
@@ -89,25 +113,6 @@
 		icon_state = "vagrant_glowing"
 		set_light(0.2, 0.1, 3)
 		move_to_delay = 2
-
-/mob/living/simple_animal/hostile/vagrant/AttackingTarget()
-	. = ..()
-	if(ishuman(.))
-		var/mob/living/carbon/human/H = .
-		if(gripping == H)
-			H.Weaken(1)
-			H.Stun(1)
-			return
-		//This line ensures there's always a reasonable chance of grabbing, while still
-		//Factoring in health
-		if(!gripping && (cloaked || prob(health + ((maxHealth - health) * 2))))
-			gripping = H
-			cloaked = 0
-			update_icon()
-			H.Weaken(1)
-			H.Stun(1)
-			H.visible_message("<span class='danger'>\the [src] latches onto \the [H], pulsating!</span>")
-			src.forceMove(gripping.loc)
 
 /mob/living/simple_animal/hostile/vagrant/swarm/Initialize()
 	. = ..()

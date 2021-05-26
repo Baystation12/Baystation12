@@ -81,17 +81,17 @@
 	lightlevel = 0.5
 	has_trees = TRUE
 	flora_diversity = 8
-	fauna_types = list(/mob/living/simple_animal/cat, /mob/living/simple_animal/chicken, /mob/living/simple_animal/mouse, /mob/living/simple_animal/opossum, /mob/living/simple_animal/hostile/retaliate/goat, /mob/living/simple_animal/hostile/retaliate/goose, /mob/living/simple_animal/cow)
+	fauna_types = list(/mob/living/simple_animal/friendly/cat, /mob/living/simple_animal/friendly/chicken, /mob/living/simple_animal/friendly/mouse, /mob/living/simple_animal/friendly/opossum, /mob/living/simple_animal/hostile/retaliate/goat, /mob/living/simple_animal/hostile/retaliate/goose, /mob/living/simple_animal/friendly/cow)
 	megafauna_types = list(/mob/living/simple_animal/hostile/retaliate/parrot/space/megafauna, /mob/living/simple_animal/hostile/retaliate/goose/dire)
 
 	//Animals being named alien creature is a bit odd as these would just be earth transplants
-	species = list( /mob/living/simple_animal/cat 					  = "wild cat",
-					/mob/living/simple_animal/chicken 				  = "wild chicken",
-					/mob/living/simple_animal/mouse 				  = "mouse",
-					/mob/living/simple_animal/opossum 				  =	"opossum",
+	species = list( /mob/living/simple_animal/friendly/cat 					  = "wild cat",
+					/mob/living/simple_animal/friendly/chicken 				  = "wild chicken",
+					/mob/living/simple_animal/friendly/mouse 				  = "mouse",
+					/mob/living/simple_animal/friendly/opossum 				  =	"opossum",
 					/mob/living/simple_animal/hostile/retaliate/goat  = "wild goat",
 					/mob/living/simple_animal/hostile/retaliate/goose = "goose",
-					/mob/living/simple_animal/cow 					  = "wild cow")
+					/mob/living/simple_animal/friendly/cow 					  = "wild cow")
 
 /obj/effect/overmap/visitable/sector/exoplanet/grass/terraformed/generate_habitability()
 	habitability_class = HABITABILITY_IDEAL

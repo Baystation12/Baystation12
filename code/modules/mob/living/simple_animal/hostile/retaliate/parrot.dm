@@ -35,20 +35,15 @@
 	pass_flags = PASS_FLAG_TABLE
 	mob_size = MOB_SMALL
 
-	speak = list("Hi","Hello!","Cracker?")
 	speak_emote = list("squawks","says","yells")
-	emote_hear = list("squawks","bawks")
-	emote_see = list("flutters its wings")
 
 	natural_weapon = /obj/item/natural_weapon/beak
-	speak_chance = 1//1% (1 in 100) chance every tick; So about once per 150 seconds, assuming an average tick is 1.5s
 	turns_per_move = 5
 	meat_type = /obj/item/reagent_containers/food/snacks/cracker/
 
 	response_help  = "pets"
 	response_disarm = "gently moves aside"
 	response_harm   = "swats"
-	stop_automated_movement = 1
 	universal_speak = TRUE
 
 	meat_type = /obj/item/reagent_containers/food/snacks/meat/chicken/game
@@ -99,6 +94,8 @@
 	var/parrot_isize = ITEM_SIZE_SMALL
 	var/impatience = 5 //we lose this much from relax_chance each time we calm down
 	var/icon_set = "parrot"
+
+	ai_holder_type = /datum/ai_holder/simple_animal/retaliate/parrot
 
 
 /mob/living/simple_animal/hostile/retaliate/parrot/New()
@@ -172,7 +169,7 @@
 							src.say("BAWWWWWK LEAVE THE HEADSET BAWKKKKK!")
 						ears.dropInto(loc)
 						ears = null
-						for(var/possible_phrase in speak)
+						for(var/possible_phrase in say_list.speak)
 							if(copytext(possible_phrase,1,3) in department_radio_keys)
 								possible_phrase = copytext(possible_phrase,3,length(possible_phrase))
 					else
@@ -292,7 +289,7 @@
 	if(!.)
 		return FALSE
 
-	if(enemies.len && prob(relax_chance))
+	if(length(ai_holder.attackers) && prob(relax_chance))
 		give_up()
 
 	if(simple_parrot)
@@ -318,10 +315,10 @@
 	   Every once in a while, the parrot picks one of the lines from the buffer and replaces an element of the 'speech' list.
 	   Then it clears the buffer to make sure they don't magically remember something from hours ago. */
 	if(speech_buffer.len && prob(10))
-		if(speak.len)
-			speak.Remove(pick(speak))
+		if(say_list.speak.len)
+			say_list.speak.Remove(pick(say_list.speak))
 
-		speak.Add(pick(speech_buffer))
+		say_list.speak.Add(pick(speech_buffer))
 		speech_buffer.Cut()
 
 //-----SLEEPING
@@ -344,11 +341,11 @@
 			parrot_sleep_dur = parrot_sleep_max
 
 			//Cycle through message modes for the headset
-			if(speak.len)
+			if(say_list.speak.len)
 				var/list/newspeak = list()
 
 				if(available_channels.len && src.ears)
-					for(var/possible_phrase in speak)
+					for(var/possible_phrase in say_list.speak)
 
 						//50/50 chance to not use the radio at all
 						var/useradio = 0
@@ -363,11 +360,11 @@
 						newspeak.Add(possible_phrase)
 
 				else //If we have no headset or channels to use, don't try to use any!
-					for(var/possible_phrase in speak)
+					for(var/possible_phrase in say_list.speak)
 						if(copytext(possible_phrase,1,3) in department_radio_keys)
 							possible_phrase = "[copytext(possible_phrase,3,length(possible_phrase)+1)]" //crop out the channel prefix
 						newspeak.Add(possible_phrase)
-				speak = newspeak
+				say_list.speak = newspeak
 
 			//Search for item to steal
 			parrot_interest = search_for_item()
@@ -571,8 +568,8 @@
 	return null
 
 /mob/living/simple_animal/hostile/retaliate/parrot/proc/give_up()
-	enemies = list()
-	LoseTarget()
+	ai_holder.attackers = list()
+	ai_holder.lose_target()
 	visible_message("<span class='notice'>\The [src] seems to calm down.</span>")
 	relax_chance -= impatience
 
@@ -699,7 +696,6 @@
 /mob/living/simple_animal/hostile/retaliate/parrot/Poly
 	name = "Poly"
 	desc = "Poly the Parrot. An expert on quantum cracker theory."
-	speak = list("Poly wanna cracker!", ":e Check the singlo, you chucklefucks!",":e Wire the solars, you lazy bums!",":e WHO TOOK THE DAMN HARDSUITS?",":e OH GOD ITS FREE CALL THE SHUTTLE")
 
 /mob/living/simple_animal/hostile/retaliate/parrot/Poly/New()
 	ears = new /obj/item/device/radio/headset/headset_eng(src)
@@ -778,3 +774,6 @@
 
 /mob/living/simple_animal/hostile/retaliate/parrot/proc/can_pick_up(obj/item/I)
 	. = (Adjacent(I) && I.w_class <= parrot_isize && !I.anchored)
+
+/datum/ai_holder/simple_animal/retaliate/parrot
+	speak_chance = 1

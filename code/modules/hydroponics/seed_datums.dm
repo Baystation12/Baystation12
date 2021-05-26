@@ -203,7 +203,7 @@
 	display_name = "killer tomato plant"
 	mutants = null
 	can_self_harvest = TRUE
-	has_mob_product = /mob/living/simple_animal/tomato
+	has_mob_product = /mob/living/simple_animal/friendly/tomato
 
 /datum/seed/tomato/killer/New()
 	..()
@@ -403,7 +403,7 @@
 	display_name = "walking mushrooms"
 	mutants = null
 	can_self_harvest = TRUE
-	has_mob_product = /mob/living/simple_animal/mushroom
+	has_mob_product = /mob/living/simple_animal/friendly/mushroom
 
 /datum/seed/mushroom/plump/walking/New()
 	..()

@@ -66,7 +66,6 @@
 	response_harm = "stomps"
 	flash_vulnerability = 0 //eyeless
 	turns_per_move = 5
-	wander = 1
 	natural_weapon = /obj/item/natural_weapon/bite/weak
 	faction = "meat"
 	min_gas = null
@@ -75,22 +74,24 @@
 	meat_amount = 1
 	can_escape = TRUE
 
+	ai_holder_type = /datum/ai_holder/simple_animal/melee/meatstation
+
 /mob/living/simple_animal/hostile/meatstation/meatworm
 	name = "flesh worm"
 	desc = "A toothy little thing. It won't stop gnashing and thrashing!"
 	icon_state = "meatworm"
 	icon_living = "meatworm"
 	icon_dead = "meatworm_dead"
-	speak_chance = 2
 	turns_per_move = 3
 	speed = -2
 	maxHealth = 20
 	health = 20
 	natural_weapon = /obj/item/natural_weapon/bite/weak
-	emote_see = list("gnashes", "thrashes about", "chomps the air")
 	mob_size = MOB_SMALL
 	meat_amount = 2
 	can_escape = FALSE
+
+	say_list_type = /datum/say_list/meatstation/meatworm
 
 /mob/living/simple_animal/hostile/meatstation/meatball
 	name = "animated meat"
@@ -98,15 +99,14 @@
 	icon_state = "meatball"
 	icon_living = "meatball"
 	icon_dead = "meatball_dead"
-	speak_chance = 2
 	speed = 2
 	maxHealth = 50
 	health = 50
 	natural_weapon = /obj/item/natural_weapon/meatball
-	emote_hear = list("cackles","gibbers")
-	emote_see = list("gnashes", "writhes", "gurgles","clicks its teeth")
 	meat_amount = 2
 	can_escape = FALSE
+
+	say_list_type = /datum/say_list/meatstation/meatball
 
 /obj/item/natural_weapon/meatball
 	force = 12
@@ -118,14 +118,13 @@
 	icon_state = "wormscientist"
 	icon_living = "wormscientist"
 	icon_dead = "wormscientist_dead"
-	speak_chance = 2
 	speed = 7
 	maxHealth = 90
 	health = 90
 	natural_weapon = /obj/item/natural_weapon/wormscience
-	emote_hear = list("gurgles","moans")
-	emote_see = list("wobbles", "writhes", "twitches","shudders", "trembles")
 	meat_amount = 3
+
+	say_list_type = /datum/say_list/meatstation/meat_human
 
 /obj/item/natural_weapon/wormscience
 	force = 15
@@ -137,18 +136,16 @@
 	icon_state = "wormguard"
 	icon_living = "wormguard"
 	icon_dead = "wormguard_dead"
-	speak_chance = 2
 	speed = 7
 	maxHealth = 60
 	health = 60
 	natural_weapon = /obj/item/natural_weapon/wormguard
-	emote_hear = list("gurgles","moans")
-	emote_see = list("wobbles", "writhes", "twitches","shudders", "trembles")
 	meat_amount = 3
 	projectilesound = 'sound/weapons/laser.ogg'
 	ranged = 1
 	projectiletype = /obj/item/projectile/beam/meatstation
 
+	say_list_type = /datum/say_list/meatstation/meat_human
 /obj/item/natural_weapon/wormguard
 	force = 17
 	attack_verb = list("slammed")
@@ -160,15 +157,14 @@
 	icon_living = "meatmound"
 	icon_dead = "meatmound_dead"
 	flash_vulnerability = 1
-	speak_chance = 2
 	speed = 10
 	maxHealth = 160
 	health = 160
 	natural_weapon = /obj/item/natural_weapon/meatmound
-	emote_hear = list("roars","moans","growls")
-	emote_see = list("gnashes", "undulates", "gurgles","chomps")
 	meat_amount = 4
 	mob_size = MOB_LARGE
+
+	say_list_type = /datum/say_list/meatstation/meatmound
 
 /obj/item/natural_weapon/meatmound
 	force = 25
@@ -312,3 +308,20 @@ obj/item/paper/meatstation/weapon_note//and this one's here to give players some
 /obj/random/single/meatstation/low/wormscientist
 	icon_state = "wormscientist10"
 	spawn_object = /mob/living/simple_animal/hostile/meatstation/wormscientist
+
+/datum/ai_holder/simple_animal/melee/meatstation
+
+/datum/say_list/meatstation/meatworm
+	emote_see = list("gnashes", "thrashes about", "chomps the air")
+
+/datum/say_list/meatstation/meatball
+	emote_hear = list("cackles","gibbers")
+	emote_see = list("gnashes", "writhes", "gurgles","clicks its teeth")
+
+/datum/say_list/meatstation/meat_human
+	emote_hear = list("gurgles","moans")
+	emote_see = list("wobbles", "writhes", "twitches","shudders", "trembles")
+
+/datum/say_list/meatstation/meatmound
+	emote_hear = list("roars","moans","growls")
+	emote_see = list("gnashes", "undulates", "gurgles","chomps")

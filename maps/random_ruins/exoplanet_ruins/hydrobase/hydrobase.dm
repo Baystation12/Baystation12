@@ -97,8 +97,6 @@
 	name = "Farmbot"
 	desc = "The botanist's best friend. There's something slightly odd about the way it moves."
 	icon = 'maps/random_ruins/exoplanet_ruins/hydrobase/hydro.dmi'
-	speak = list("Initiating harvesting subrout-ine-ine.", "Connection timed out.", "Connection with master AI syst-tem-tem lost.", "Core systems override enab-...")
-	emote_see = list("beeps repeatedly", "whirrs violently", "flashes its indicator lights", "emits a ping sound")
 	icon_state = "farmbot"
 	icon_living = "farmbot"
 	icon_dead = "farmbot_dead"
@@ -106,6 +104,10 @@
 	health = 225
 	maxHealth = 225
 	malfunctioning = 0
+
+	ai_holder_type = /datum/ai_holder/simple_animal/passive
+
+	say_list_type = /datum/say_list/malf_drone/hydro
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/hydro/Initialize()
 	. = ..()
@@ -120,3 +122,7 @@
 	destroy_surroundings = 1
 	projectiletype = initial(projectiletype)
 	walk(src,0)
+
+/datum/say_list/malf_drone/hydro
+	speak = list("Initiating harvesting subrout-ine-ine.", "Connection timed out.", "Connection with master AI syst-tem-tem lost.", "Core systems override enab-...")
+	emote_see = list("beeps repeatedly", "whirrs violently", "flashes its indicator lights", "emits a ping sound")

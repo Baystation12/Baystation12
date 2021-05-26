@@ -5,6 +5,8 @@
 	else
 		add_to_living_mob_list()
 
+	selected_image = image(icon('icons/misc/buildmode.dmi'), loc = src, icon_state = "ai_sel")
+
 /mob/living/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if (admin_paralyzed)
@@ -812,6 +814,8 @@ default behaviour is:
 	if(auras)
 		for(var/a in auras)
 			remove_aura(a)
+
+	qdel(selected_image)
 	return ..()
 
 /mob/living/proc/melee_accuracy_mods()

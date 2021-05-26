@@ -6393,7 +6393,7 @@
 	dir = 8
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/mob/living/simple_animal/cow,
+/mob/living/simple_animal/friendly/cow,
 /turf/simulated/floor/grass,
 /area/map_template/colony/hydroponics)
 "lf" = (
@@ -6493,7 +6493,7 @@
 /turf/simulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
 "lo" = (
-/mob/living/simple_animal/cow,
+/mob/living/simple_animal/friendly/cow,
 /turf/simulated/floor/grass,
 /area/map_template/colony/hydroponics)
 "lp" = (
@@ -7685,7 +7685,7 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/mob/living/simple_animal/chicken,
+/mob/living/simple_animal/friendly/chicken,
 /turf/simulated/floor/grass,
 /area/map_template/colony/hydroponics)
 "nm" = (
@@ -8708,7 +8708,7 @@
 /turf/simulated/floor/exoplanet/concrete,
 /area/template_noop)
 "vt" = (
-/mob/living/simple_animal/chicken,
+/mob/living/simple_animal/friendly/chicken,
 /turf/simulated/floor/grass,
 /area/map_template/colony/hydroponics)
 "vJ" = (
