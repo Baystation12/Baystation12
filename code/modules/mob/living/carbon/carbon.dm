@@ -77,6 +77,8 @@
 
 /mob/living/carbon/gib()
 	for(var/mob/M in contents)
+		if(isspecies(src, SPECIES_DIONA) && istype(M, /mob/living/carbon/alien/diona) && (M.stat != DEAD))
+			continue
 		M.dropInto(loc)
 		visible_message(SPAN_DANGER("\The [M] bursts out of \the [src]!"))
 	..()
