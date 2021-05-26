@@ -1,5 +1,0 @@
-author: Hubblenaut
-delete-after: true
-changes:
-  - bugfix: Fixes melee weapons like the energy sword effectively not having armor
-      penetration.
