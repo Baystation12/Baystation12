@@ -428,7 +428,7 @@
 		H.visible_message("<span class='danger'>\The [H] collapses into parts, revealing a solitary diona nymph at the core.</span>")
 		return
 	else
-		split_into_nymphs(H)
+		split_into_nymphs(H, TRUE)
 
 /datum/species/diona/get_blood_name()
 	return "sap"

@@ -102,7 +102,7 @@
 	if(prob(emote_prob))
 		D.emote(pick("scratch","jump","chirp","tail"))
 
-/proc/split_into_nymphs(var/mob/living/carbon/human/donor)
+/proc/split_into_nymphs(var/mob/living/carbon/human/donor, dying)
 
 	if(!donor || donor.species.name != SPECIES_DIONA)
 		return
@@ -149,4 +149,5 @@
 		donor.drop_from_inventory(W)
 
 	donor.visible_message("<span class='warning'>\The [donor] quivers slightly, then splits apart with a wet slithering noise.</span>")
-	qdel(donor)
+	if (!dying)
+		qdel(donor)
