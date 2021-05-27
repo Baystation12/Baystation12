@@ -104,13 +104,21 @@
 		forceMove(nloc)
 	if(nloc == new_loc)
 		reality++
-		if(reality > 5)
-			to_chat(daddy, "<span class='notice'>Yep, it's certainly the other one. Your existance was a glitch, and it's finally being mended...</span>")
+		var/obj/item/organ/internal/brain/brain
+		if(ishuman(daddy))
+			brain = daddy.internal_organs_by_name[BP_BRAIN] || daddy.internal_organs_by_name[BP_POSIBRAIN]
+		if(reality > 6)
+			to_chat(daddy, SPAN_NOTICE("Yep, it's certainly the other one. Your existance was a glitch, and it's finally being mended..."))
 			blueswitch()
+		else if (reality > 5)
+			to_chat(daddy, SPAN_DANGER("Your body is disintegrating! You're not the original, are you?"))
+			daddy.take_overall_damage(reality * reality, reality * reality)
+			brain?.take_internal_damage(reality * 3)
 		else if(reality > 3)
-			to_chat(daddy, "<span class='danger'>Something is definitely wrong. Why do you think YOU are the original?</span>")
+			to_chat(daddy, SPAN_DANGER("Something is wrong. Why do you think YOU are the original?"))
+			brain?.take_internal_damage(round(reality * 1.5))
 		else
-			to_chat(daddy, "<span class='warning'>You feel a bit less real. Which one of you two was original again?..</span>")
+			to_chat(daddy, SPAN_DANGER("You feel a bit less real. Which one of you two was the original again..?"))
 
 /obj/effect/bluegoast/proc/mirror_dir(var/atom/movable/am, var/old_dir, var/new_dir)
 	set_dir(GLOB.reverse_dir[new_dir])
