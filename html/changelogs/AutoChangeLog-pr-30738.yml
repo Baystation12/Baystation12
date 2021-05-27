@@ -1,0 +1,5 @@
+author: CSCMe, ChaosAlpha
+delete-after: true
+changes:
+  - bugfix: Gibbed Dionaea couldn't jump between their nymphs.
+  - bugfix: Dusted non-humans didn't have ghost sprites
