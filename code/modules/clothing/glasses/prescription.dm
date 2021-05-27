@@ -24,3 +24,9 @@
 	icon_state = "gglasses"
 	item_state = "gglasses"
 	body_parts_covered = 0
+
+/obj/item/clothing/glasses/prescription/augment
+	name = "corrective lenses"
+	desc = "The most expensive prescription on this side of Sol."
+	item_flags = ITEM_FLAG_PHORONGUARD
+	unacidable = TRUE
