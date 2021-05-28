@@ -1,6 +1,0 @@
-author: GeneralCamo
-delete-after: true
-changes:
-  - tweak: Renamed Laboratory Technician to Pharmacist
-  - tweak: Pharmacists now get their job-specific packs and PDA
-  - rscadd: Re-added "Chemist" alt-title to the Pharmacist
