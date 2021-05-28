@@ -39,12 +39,28 @@
 	icon_state = "guard_infected1"
 	icon_living = "guard_infected1"
 	icon_dead = "guard_infected1_dead"
+	spawn_with_gun = pick(/obj/item/weapon/gun/projectile/shotgun/pump/m45_ts/achlys,
+						/obj/item/weapon/gun/projectile/ma37_ar/achlys,
+						/obj/item/weapon/gun/projectile/m6d_magnum/police/achlys,
+						/obj/item/weapon/gun/projectile/shotgun/pump/m45_ts/police/achlys)
+	inventory = pickweight(/obj/item/ammo_magazine/ma37/m118 = 2,
+					/obj/item/weapon/melee/baton/humbler = 4,
+					/obj/item/ammo_box/shotgun = 2,
+					/obj/item/ammo_magazine/m6d/m224 = 2,
+					/obj/item/ammo_box/shotgun/beanbag = 4,
+					/obj/item/weapon/melee/telebaton = 5)
 
 /mob/living/simple_animal/hostile/flood/combat_form/prisoner/mutated/guard
 	desc = "Some kind of monster with shredded remains of a gray jumpsuit stuck to it's mishappen body."
 	icon_state = "guard_infected2"
 	icon_living = "guard_infected2"
 	icon_dead = "guard_infected2_dead"
+	inventory = pick(/obj/item/ammo_magazine/ma37/m118,
+					/obj/item/weapon/melee/baton/humbler,
+					/obj/item/ammo_box/shotgun/beanbag,
+					/obj/item/ammo_magazine/m6d/m224,
+					/obj/item/ammo_box/shotgun,
+					/obj/item/weapon/melee/telebaton)
 
 /mob/living/simple_animal/hostile/flood/combat_form/prisoner/abomination
 	name = "abomination"
@@ -66,3 +82,20 @@
 	icon_state = "nudist"
 	icon_living = "nudist"
 	icon_dead = "nudist_dead"
+	inventory = pickweight(/obj/item/weapon/reagent_containers/food/snacks/liquidfood/floody = 2,
+							/obj/item/weapon/research = 2,
+							/obj/item/weapon/scalpel/achlys = 1,
+							/obj/item/device/flashlight/flare/unsc = 1,
+							/obj/item/device/flashlight/unsc = 1,
+							/obj/item/device/healthanalyzer = 1,
+							/obj/item/device/multitool = 1,
+							/obj/item/device/radio = 1,
+
+
+//These two are static spawns and should only have one each across all 5Z, possibility of 2 XO
+//If detachment marines have no engineers to hack doors or C4, these will access the necessary doors
+/mob/living/simple_animal/hostile/flood/combat_form/prisoner/abomination/captain
+	inventory = list(/obj/item/weapon/card/id/the_gold) //this is required to access the bridge, 2nd navconsole
+
+/mob/living/simple_animal/hostile/flood/combat_form/prisoner/crew/XO
+	inventory = list(/obj/item/weapon/card/id/the_silver) //this is required to access Z1 front, leads to bridge
