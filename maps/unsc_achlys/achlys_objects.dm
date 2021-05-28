@@ -445,23 +445,45 @@
 	for(var/i = 0 to 20)
 		time_to_splash += i
 
+/obj/item/weapon/reagent_containers/food/snacks/liquidfood/floody
+	desc = "A prepackaged grey slurry for all of the essential nutrients a soldier requires to survive. It is coated in some kind of mucus that seems to have gotten inside."
+	trash = /obj/item/trash/liquidfood/floody
+	var/clean = 0 //mucus overlay, this is dropped by flood forms
 
-/mob/living/simple_animal/hostile/flood/combat_form/prisoner/abomination/captain
-	inventory = list(/obj/item/weapon/card/id/the_gold)
+/obj/item/weapon/reagent_containers/food/snacks/liquidfood/floody/New()
+	reagents.add_reagent(/datum/reagent/floodinfectiontoxin, 10) //don't take candy from strange alien monsters
+	clean = pick(0,1)	//decide to be clean or have mucus
+	if(!clean)			//if not clean, apply overlay
+		update_icon()
+	..() //continue as normal, inheriting our bitesize and iron reagent from parent
 
-/mob/living/simple_animal/hostile/flood/combat_form/prisoner/guard/New() //I truly do apologize bois
-	. = ..()															 //don't mix my mobs around though
-	var/gun_type_spawn = pick(/obj/item/weapon/gun/projectile/shotgun/pump/m45_ts/achlys, /obj/item/weapon/gun/projectile/ma37_ar/achlys,\
-						/obj/item/weapon/gun/projectile/m6d_magnum/police/achlys, /obj/item/weapon/gun/projectile/shotgun/pump/m45_ts/police/achlys)
-	pickup_gun(new gun_type_spawn (loc))
-	inventory = pick(list(/obj/item/ammo_magazine/ma37/m118),list(/obj/item/ammo_magazine/m6d/m224),list(/obj/item/ammo_box/shotgun),\
-				list(/obj/item/weapon/melee/baton/humbler),list(/obj/item/ammo_box/shotgun/beanbag),list(/obj/item/weapon/melee/telebaton))
+/obj/item/weapon/reagent_containers/food/snacks/liquidfood/floody/update_icon()
+	if(!clean)  //if we're not clean, add a mucus overlay
+		overlays.Cut()
+		var/image/I = image('icons/effects/blood.dmi', icon_state="mucus")
+		overlays += I
+		return
+	else return //else if we are clean, do nothing, especially runtime //this is redundant, BYOND is not predictable
 
-/mob/living/simple_animal/hostile/flood/combat_form/prisoner/mutated/guard/New()
-	. = ..()
-	inventory = pick(list(/obj/item/ammo_magazine/ma37/m118),list(/obj/item/ammo_magazine/m6d/m224),list(/obj/item/ammo_box/shotgun),\
-				list(/obj/item/weapon/melee/baton/humbler),list(/obj/item/ammo_box/shotgun/beanbag),list(/obj/item/weapon/melee/telebaton))
+/obj/item/weapon/reagent_containers/food/snacks/liquidfood/floody/On_Consume(var/mob/M)
+	if(!clean)
+		var/obj/item/trash/liquidfood/floody/F = trash
+		(F.clean = 0) //if we're not clean, our trash shouldn't be either
+		..()  //carry on as normal
+	else ..() //don't runtime because we were clean
 
-/mob/living/simple_animal/hostile/flood/combat_form/prisoner/crew/XO
-	inventory = list(/obj/item/weapon/card/id/the_silver)
+/obj/item/trash/liquidfood/floody
+	var/clean = 0
 
+/obj/item/trash/liquidfood/floody/New()
+	if(!clean)
+		update_icon()
+	..()
+
+/obj/item/trash/liquidfood/floody/update_icon()
+	if(!clean)  //inherited from parent, copypasta
+		overlays.Cut()
+		var/image/I = image('icons/effects/blood.dmi', icon_state="mucus")
+		overlays += I
+		return
+	else return
