@@ -38,6 +38,7 @@
 	edge = TRUE
 	slot_flags |= SLOT_DENYPOCKET
 	attack_verb = active_attack_verb
+	w_class = ITEM_SIZE_NORMAL //anything below weight class normal can not cut off limbs,
 	update_icon()
 	if(user)
 		playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
@@ -54,6 +55,7 @@
 	edge = initial(edge)
 	slot_flags = initial(slot_flags)
 	attack_verb = inactive_attack_verb
+	w_class = ITEM_SIZE_SMALL
 	update_icon()
 	if(user)
 		playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
@@ -127,7 +129,6 @@
 	throwforce = 5
 	throw_speed = 1
 	throw_range = 5
-	w_class = ITEM_SIZE_SMALL
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_BLOOD
 	origin_tech = list(TECH_MAGNET = 3, TECH_ESOTERIC = 4)
 	sharp = TRUE
@@ -208,7 +209,7 @@
 	active_throwforce = 1  //Throwing or dropping the item deletes it.
 	throw_speed = 1
 	throw_range = 1
-	w_class = ITEM_SIZE_TINY //technically it's just energy or something, I dunno
+	w_class = ITEM_SIZE_NORMAL //Item size normal so it can cut off limbs
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_BLOOD
 	active_attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	hitsound = 'sound/weapons/blade1.ogg'
@@ -265,7 +266,6 @@
 	lighting_color = COLOR_SABER_SKRELL
 	force = 3
 	throwforce = 1
-	w_class = ITEM_SIZE_SMALL
 	origin_tech = list(TECH_MAGNET = 3)
 	active_attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
 	hitsound = 'sound/weapons/blade1.ogg'
