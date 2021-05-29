@@ -1,0 +1,5 @@
+author: 0sj/Jaydn
+delete-after: true
+changes:
+  - tweak: skrellian space heaters now have a default temp of 40
+  - maptweak: Added circuit printer upgrades and two hyposprays to skrellship
