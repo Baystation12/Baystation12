@@ -147,6 +147,7 @@
 
 /mob/living/carbon/human/handle_speech_problems(var/list/message_data)
 	if(silent || (sdisabilities & MUTED))
+		to_chat(src, SPAN_WARNING("You try to speak, but cannot."))
 		message_data[1] = ""
 		. = 1
 

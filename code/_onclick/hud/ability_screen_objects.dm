@@ -359,6 +359,8 @@
 /obj/screen/movable/ability_master/proc/update_spells(var/forced = 0)
 	for(var/obj/screen/ability/spell/spell in spell_objects)
 		spell.update_charge(forced)
+	for(var/obj/screen/ability/changeling/C in ability_objects) // this entire function is unbearably bad
+		C.update_icon()
 
 /obj/screen/ability/spell/proc/update_charge(var/forced_update = 0)
 	if(!spell)
@@ -410,3 +412,61 @@
 		spell.spell.silenced = amount
 		spell.spell.process()
 		spell.update_charge(1)
+
+// Changeling
+
+/obj/screen/ability/changeling
+	background_base_state = "changeling"
+	var/datum/power/changeling/ability
+	var/icon/last_charged_icon
+	var/icon/last_active_icon
+
+/obj/screen/ability/changeling/can_activate()
+	return ability?.can_activate(usr)
+
+/obj/screen/ability/changeling/activate()
+	if (can_activate())
+		ability.pre_activate(usr)
+	ability_master.update_spells(0) // Immediately update all icons to show the chem consumption
+
+/obj/screen/ability/changeling/on_update_icon()
+	// A lot of this function is taken from /obj/screen/ability/spell's update_charge
+	// The values used in calculation are different enough that it necessitates reuse, alas
+	overlays -= ability_icon_state
+	overlays -= "[background_base_state]_spell_active"
+	if (ability)
+		// We use a "+1" on the effective value here, because chem regen occurs after the icon update, making it otherwise out of sync
+		if (ability.required_chems > ability.mind?.changeling.chem_charges + 1)
+			icon_state = "[background_base_state]_spell_base"
+			if (ability.mind.changeling.chem_charges > 0)
+				var/icon/partial_charge = icon(src.icon, "[background_base_state]_spell_ready")
+				partial_charge.Crop(1, 1, partial_charge.Width(), round(partial_charge.Height() * ability.mind.changeling.chem_charges / ability.required_chems + 1))
+				overlays += partial_charge
+				if (last_charged_icon)
+					overlays -= last_charged_icon
+				last_charged_icon = partial_charge
+			else if (last_charged_icon)
+				overlays -= last_charged_icon
+				last_charged_icon = null
+		else
+			icon_state = "[background_base_state]_spell_ready"
+			if (last_charged_icon)
+				overlays -= last_charged_icon
+				last_charged_icon = null
+		if (ability.is_active())
+			overlays += "[background_base_state]_spell_active"
+	overlays += ability_icon_state
+
+/obj/screen/movable/ability_master/proc/add_changeling_power(datum/power/changeling/C)
+	if (!C)
+		return
+
+	var/obj/screen/ability/changeling/A = new()
+	A.ability_master = src
+	A.ability = C
+	A.ability_icon_state = C.button_icon_state
+	A.SetName("[C.name] ([C.required_chems])")
+
+	ability_objects.Add(A)
+	if(my_mob.client)
+		toggle_open(2)

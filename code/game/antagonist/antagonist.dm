@@ -12,6 +12,7 @@
 	var/loss_text                           // As above for loss.
 	var/victory_feedback_tag                // Used by the database for end of round loss.
 	var/loss_feedback_tag                   // Used by the database for end of round loss.
+	var/codex_key                           // Can be provided for a non-intrusive "click here for more info" bit.
 
 	// Role data.
 	var/id = "traitor"                      // Unique datum identifier. Also preferences option for this role.

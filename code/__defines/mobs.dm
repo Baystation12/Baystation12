@@ -11,7 +11,7 @@
 #define PASSEMOTES  0x10    // Mob has a cortical borer or holders inside of it that need to see emotes.
 #define LEAPING     0x16
 #define GODMODE     0x1000
-#define FAKEDEATH   0x2000  // Replaces stuff like changeling.changeling_fakedeath.
+#define FAKEDEATH   0x2000  // Player is in a deathlike state that fools medical scanners. They cannot move, act, or speak.
 #define NO_ANTAG    0x4000  // Players are restricted from gaining antag roles when occupying this mob
 #define NOTARGET    0x8000  // Player is invisible to all simple mobs
 

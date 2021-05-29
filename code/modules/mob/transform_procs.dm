@@ -16,7 +16,7 @@
 	animation.icon_state = "blank"
 	animation.icon = 'icons/mob/mob.dmi'
 	flick("h2monkey", animation)
-	sleep(48)
+	sleep(25)
 	//animation = null
 
 	DEL_TRANSFORMATION_MOVEMENT_HANDLER(src)
