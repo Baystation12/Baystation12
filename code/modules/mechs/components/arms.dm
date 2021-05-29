@@ -8,6 +8,7 @@
 	var/action_delay = 15
 	var/obj/item/robot_parts/robot_component/actuator/motivator
 	power_use = 10
+	w_class = ITEM_SIZE_LARGE
 
 /obj/item/mech_component/manipulators/Destroy()
 	QDEL_NULL(motivator)
