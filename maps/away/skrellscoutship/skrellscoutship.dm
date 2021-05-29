@@ -306,3 +306,4 @@
 	color = "#40e0d0"
 	name = "thermal induction generator"
 	desc = "Made by Krri'gli Corp using thermal induction technology, this heater is guaranteed not to set anything, or anyone, on fire."
+	set_temperature = T0C+40
