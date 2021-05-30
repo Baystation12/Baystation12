@@ -1,5 +1,0 @@
-author: CrimsonShrike
-delete-after: true
-changes:
-  - tweak: Rigs with unlocked panels require no access to use. Sharing rigs with department
-      members no longer requires cutting wires.

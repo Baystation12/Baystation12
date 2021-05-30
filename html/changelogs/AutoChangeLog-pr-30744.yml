@@ -1,6 +1,0 @@
-author: GeneralCamo
-delete-after: true
-changes:
-  - maptweak: The crashed survival pod now spawns with plastic.
-  - bugfix: The crashed survival pod now spawns the correct engineering tape roll
-      (rather than pre-placed engineering tape)
