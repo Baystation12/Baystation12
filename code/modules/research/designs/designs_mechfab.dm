@@ -633,6 +633,13 @@
 	req_tech = list(TECH_BIO = 1, TECH_MAGNET = 3)
 	id= "augment_jani_hud"
 
+/datum/design/item/mechfab/augment/hud/science
+	name = "Implantable science HUD"
+	build_path = /obj/item/organ/internal/augment/active/hud/science
+	materials = list(DEFAULT_WALL_MATERIAL = 250, "glass" = 250)
+	req_tech = list(TECH_BIO = 1, TECH_MAGNET = 3)
+	id= "augment_sci_hud"
+
 /datum/design/item/mechfab/augment/nanounit
 	name = "Nanite MCU"
 	build_path = /obj/item/organ/internal/augment/active/nanounit
