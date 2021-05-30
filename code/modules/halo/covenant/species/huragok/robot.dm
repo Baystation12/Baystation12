@@ -2,7 +2,7 @@
 //Dependencies located in robot.dm and robot_modules.dm, they are vital for this to work//
 //////////////////////////////////////////////////////////////////////////////////////////
 
-#define HURAGOK_REGEN 1
+#define HURAGOK_REGEN 0.5
 
 /mob/living/silicon/robot/huragok
 	name = "Huragok"
@@ -41,12 +41,22 @@
 	. = ..()
 	if(stat)
 		return
+	if(health < maxHealth)
+		health = min(health + HURAGOK_REGEN,maxHealth)
 	for(var/V in components)
 		var/datum/robot_component/C = components[V]
+		if(C.installed != 1)
+			var/init_ex_type = initial(C.external_type)
+			if(isnull(init_ex_type) || !C.wrapped)
+				C.repair()
+		var/heal_brute = 0
+		var/heal_burn = 0
 		if(C.brute_damage > 0)
-			C.brute_damage = max(0,C.brute_damage - HURAGOK_REGEN)
+			heal_brute = HURAGOK_REGEN
 		if(C.electronics_damage > 0)
-			C.electronics_damage = max(0,C.electronics_damage - HURAGOK_REGEN)
+			heal_burn = HURAGOK_REGEN
+		if(heal_brute || heal_burn)
+			C.heal_damage(heal_brute,heal_burn)
 
 /mob/living/silicon/robot/huragok/New()
 	. =.. ()
