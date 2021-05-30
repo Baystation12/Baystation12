@@ -280,7 +280,12 @@
 								C.set_internals(tankcheck[best], "\the [tankcheck[best]] [from] your [nicename[best]]")
 
 							if(!C.internal)
-								to_chat(C, "<span class='notice'>You don't have \a [breathes] tank.</span>")
+								// Finally, check for an internal air system.
+								// We use this as an absolute last resort, so we don't include it in the above logic
+								// There's no need to check that the gas contents are safe, because its internal logic always make sure it is
+								var/obj/item/organ/internal/augment/active/internal_air_system/IAS = locate() in C.internal_organs
+								if (!IAS?.activate())
+									to_chat(C, SPAN_WARNING("You don't have \a [breathes] tank."))
 		if("act_intent")
 			usr.a_intent_change("right")
 

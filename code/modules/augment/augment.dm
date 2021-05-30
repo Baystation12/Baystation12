@@ -8,7 +8,8 @@
 	var/list/allowed_organs = list(BP_AUGMENT_R_ARM, BP_AUGMENT_L_ARM)
 	default_action_type = /datum/action/item_action/organ/augment
 	var/descriptor = ""
-	var/known = TRUE
+	var/known = TRUE // Whether or not this augment displays on body scanners
+	var/discoverable = FALSE // Whether or not this augment will be discovered when checking a body part for wounds
 
 /obj/item/organ/internal/augment/Initialize()
 	. = ..()
@@ -21,6 +22,9 @@
 		onInstall()
 
 /obj/item/organ/internal/augment/proc/onInstall()
+	return
+
+/obj/item/organ/internal/augment/proc/onRoundstart()
 	return
 
 /obj/item/organ/internal/augment/removed(var/mob/living/user, var/drop_organ=1)
@@ -46,28 +50,28 @@
 
 	if(organ_tag == BP_AUGMENT_L_LEG)
 		parent_organ = BP_L_LEG
-		descriptor = "left leg."
+		descriptor = "left leg"
 	else if(organ_tag == BP_AUGMENT_R_LEG)
 		parent_organ = BP_R_LEG
-		descriptor = "right leg."
+		descriptor = "right leg"
 	else if(organ_tag == BP_AUGMENT_L_HAND)
 		parent_organ = BP_L_HAND
-		descriptor = "left hand."
+		descriptor = "left hand"
 	else if(organ_tag == BP_AUGMENT_R_HAND)
 		parent_organ = BP_R_HAND
-		descriptor = "right hand."
+		descriptor = "right hand"
 	else if(organ_tag == BP_AUGMENT_L_ARM)
 		parent_organ = BP_L_ARM
-		descriptor = "left arm."
+		descriptor = "left arm"
 	else if(organ_tag == BP_AUGMENT_R_ARM)
 		parent_organ = BP_R_ARM
-		descriptor = "right arm."
+		descriptor = "right arm"
 	else if(organ_tag == BP_AUGMENT_HEAD)
 		parent_organ = BP_HEAD
-		descriptor = "head."
+		descriptor = "head"
 	else if(organ_tag == BP_AUGMENT_CHEST_ACTIVE || organ_tag == BP_AUGMENT_CHEST_ARMOUR)
 		parent_organ = BP_CHEST
-		descriptor = "chest."
+		descriptor = "chest"
 
 
 /obj/item/organ/internal/augment/examine(mob/user, distance)

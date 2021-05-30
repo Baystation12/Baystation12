@@ -133,6 +133,14 @@
 	gauge_icon = "indicator_emergency_double"
 	volume = 60
 
+/obj/item/tank/emergency/air_sac
+	name = "air sac"
+	desc = "A small, compressed air sac that fills with breathable air, to be used in emergencies."
+	icon_state = "air_sac"
+	gauge_icon = "indicator_emergency"
+	volume = 20
+	unacidable = TRUE
+
 /*
  * Nitrogen
  */
