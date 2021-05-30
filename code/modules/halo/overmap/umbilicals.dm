@@ -101,6 +101,10 @@
 	if(!isturf(current_connected.loc))
 		return
 	to_move.forceMove(current_connected.loc)
+	var/mob/living/l = to_move
+	if(istype(l))
+		l.update_sector = 1
+		l.update_occupied_sector(current_connected.z)
 
 /obj/docking_umbilical/MouseDrop(var/obj/over_object)
 	var/mob/user = usr

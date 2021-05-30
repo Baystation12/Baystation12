@@ -101,8 +101,11 @@
 	if(isnull(move_to_obj))
 		return
 
-	move_to_obj.visible_message("<span class = 'notice'>[src] flies in from the distance.</span>")
 	forceMove(get_turf(move_to_obj))
+	visible_message("<span class = 'notice'>[src] flies in from the distance.</span>")
+	for(var/mob/living/l in occupants)
+		l.update_sector = 1
+		l.update_occupied_sector(z)
 
 /obj/vehicles/air/verb/fly_to_waypoint()
 	set name = "Fly to waypoint"

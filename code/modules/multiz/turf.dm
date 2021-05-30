@@ -1,16 +1,25 @@
+/turf/proc/UpdateMobSector(var/mob/living/l)
+	if(istype(l))
+		l.update_occupied_sector(z)
+
 /turf/proc/CanZPass(atom/A, direction)
 	if(z == A.z) //moving FROM this turf
-		return direction == UP //can't go below
+		. = direction == UP //can't go below
 	else
 		if(direction == UP) //on a turf below, trying to enter
-			return 0
-		if(direction == DOWN) //on a turf above, trying to enter
-			return !density
+			. = 0
+		else if(direction == DOWN) //on a turf above, trying to enter
+			. = !density
+
+	if(.)
+		UpdateMobSector(A)
 
 /turf/simulated/open/CanZPass(atom, direction)
+	UpdateMobSector(atom)
 	return 1
 
 /turf/space/CanZPass(atom, direction)
+	UpdateMobSector(atom)
 	return 1
 
 /turf/simulated/open
