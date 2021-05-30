@@ -1,0 +1,4 @@
+author: Ilysen
+delete-after: true
+changes:
+  - bugfix: You can now properly change the appearance of the modified gas mask.
