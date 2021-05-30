@@ -65,7 +65,7 @@
 	var/new_sentence = 0
 	for(var/w in words)
 		var/nword = "[w] "
-		var/input_ending = copytext(w, length(w))
+		var/input_ending = copytext(w, -1)
 		var/ends_sentence = findtext(".?!",input_ending)
 		if(!prob(understand_chance))
 			nword = scramble_word(w)
@@ -131,7 +131,7 @@
 
 /datum/language/proc/get_talkinto_msg_range(message)
 	// if you yell, you'll be heard from two tiles over instead of one
-	return (copytext(message, length(message)) == "!") ? 2 : 1
+	return (copytext(message, -1) == "!") ? 2 : 1
 
 /datum/language/proc/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
 	log_say("[key_name(speaker)] : ([name]) [message]")
