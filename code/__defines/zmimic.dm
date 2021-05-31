@@ -8,7 +8,7 @@
 #define ZM_ALLOW_LIGHTING  4	// If this turf should permit passage of lighting.
 #define ZM_ALLOW_ATMOS     8	// If this turf permits passage of air.
 #define ZM_MIMIC_NO_AO    16	// If the turf shouldn't apply regular turf AO and only do Z-mimic AO.
-#define ZM_FIX_BIGTURF    32	// Fix bigturf (greater than world.icon_size) rendering at the cost of breaking object layering a bit. This flag is infectious, so all Z-turfs above this one will also get this flag. Valid on non-zturfs.
+#define ZM_NO_OCCLUDE     32	// Don't occlude below atoms if we're a non-mimic z-turf.
 
 // Convenience flag.
 #define ZM_MIMIC_DEFAULTS (ZM_MIMIC_BELOW|ZM_ALLOW_LIGHTING)
@@ -20,5 +20,5 @@ var/list/mimic_defines = list(
 	"ZM_ALLOW_LIGHTING",
 	"ZM_ALLOW_ATMOS",
 	"ZM_MIMIC_NO_AO",
-	"ZM_FIX_BIGTURF"
+	"ZM_NO_OCCLUDE"
 )
