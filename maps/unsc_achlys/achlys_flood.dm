@@ -39,16 +39,20 @@
 	icon_state = "guard_infected1"
 	icon_living = "guard_infected1"
 	icon_dead = "guard_infected1_dead"
+
+/mob/living/simple_animal/hostile/flood/combat_form/prisoner/guard/New()
+	inventory = pick(list(/obj/item/ammo_magazine/ma37/m118),list(/obj/item/ammo_magazine/m6d/m224),list(/obj/item/ammo_box/shotgun),\
+				list(/obj/item/weapon/melee/baton/humbler),list(/obj/item/ammo_box/shotgun/beanbag),list(/obj/item/weapon/melee/telebaton))
 	spawn_with_gun = pick(list(/obj/item/weapon/gun/projectile/shotgun/pump/m45_ts/achlys),list(/obj/item/weapon/gun/projectile/m6d_magnum/police/achlys),
 						list(/obj/item/weapon/gun/projectile/ma37_ar/achlys),list(/obj/item/weapon/gun/projectile/shotgun/pump/m45_ts/police/achlys))
-	inventory = pickweight(list(/obj/item/ammo_magazine/ma37/m118 = 2),list(/obj/item/ammo_box/shotgun = 2),list(/obj/item/weapon/melee/baton/humbler = 4),\
-					list(/obj/item/ammo_magazine/m6d/m224 = 2),list(/obj/item/ammo_box/shotgun/beanbag = 4),list(/obj/item/weapon/melee/telebaton = 5))
 
 /mob/living/simple_animal/hostile/flood/combat_form/prisoner/mutated/guard
 	desc = "Some kind of monster with shredded remains of a gray jumpsuit stuck to it's mishappen body."
 	icon_state = "guard_infected2"
 	icon_living = "guard_infected2"
 	icon_dead = "guard_infected2_dead"
+
+/mob/living/simple_animal/hostile/flood/combat_form/prisoner/mutated/guard/New()
 	inventory = pick(list(/obj/item/ammo_magazine/ma37/m118),list(/obj/item/weapon/melee/baton/humbler),list(/obj/item/ammo_box/shotgun/beanbag),\
 					list(/obj/item/ammo_magazine/m6d/m224),list(/obj/item/ammo_box/shotgun),list(/obj/item/weapon/melee/telebaton))
 
@@ -72,6 +76,8 @@
 	icon_state = "nudist"
 	icon_living = "nudist"
 	icon_dead = "nudist_dead"
+
+/mob/living/simple_animal/hostile/flood/combat_form/prisoner/crew/New()
 	inventory = pickweight(list(/obj/item/weapon/reagent_containers/food/snacks/liquidfood/floody = 2),list(/obj/item/weapon/research = 2),list(/obj/item/weapon/scalpel/achlys = 1),\
 							list(/obj/item/device/flashlight/flare/unsc = 1),list(/obj/item/device/flashlight/unsc = 1),list(/obj/item/device/healthanalyzer = 1),\
 							list(/obj/item/device/multitool = 1),list(/obj/item/device/radio = 1))
