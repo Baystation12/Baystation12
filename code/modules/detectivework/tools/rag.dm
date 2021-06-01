@@ -46,14 +46,15 @@
 		remove_contents(user)
 
 /obj/item/reagent_containers/glass/rag/attackby(obj/item/W, mob/user)
-	if(!on_fire && istype(W, /obj/item/flame))
-		var/obj/item/flame/F = W
-		if(F.lit)
-			ignite()
-			if(on_fire)
-				visible_message("<span class='warning'>\The [user] lights [src] with [W].</span>")
-			else
-				to_chat(user, "<span class='warning'>You manage to singe [src], but fail to light it.</span>")
+	if(!on_fire && isflamesource(W))
+		ignite()
+		if(on_fire)
+			user.visible_message(
+				SPAN_WARNING("\The [user] lights \the [src] with \the [W]!"),
+				SPAN_DANGER("You light \the [src]!")
+			)
+		else
+			to_chat(user, SPAN_WARNING("You manage to singe \the [src], but it won't burn on its own.")) // Give a hint about needing fuel
 
 	. = ..()
 	update_name()
