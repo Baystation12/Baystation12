@@ -13,5 +13,5 @@
 /datum/goal/ambition/get_success_string()
 	return ""
 
-/datum/goal/ambition/summarize(var/show_success = FALSE, var/allow_modification = FALSE, var/mob/caller ,var/position = 1)
+/datum/goal/ambition/summarize(var/show_success = FALSE, var/allow_modification = FALSE, var/mob/caller)
 	. = SPAN_DANGER(..(show_success))
