@@ -33,8 +33,10 @@
 
 	if(on)
 		icon_state = "[initial(icon_state)]-on"
+		item_state = "[initial(item_state)]on"
 	else
 		icon_state = "[initial(icon_state)]"
+		item_state = "[initial(item_state)]"
 
 /obj/item/device/flashlight/attack_self(mob/user)
 	if (flashlight_flags & FLASHLIGHT_ALWAYS_ON)
