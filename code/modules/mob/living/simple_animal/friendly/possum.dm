@@ -29,7 +29,7 @@
 	can_pull_mobs = MOB_PULL_SMALLER
 	var/is_angry = FALSE
 
-	ai_holder_type = /datum/ai_holder/simple_animal/opossum
+	ai_holder_type = /datum/ai_holder/simple_animal/passive/opossum
 	say_list_type = /datum/say_list/opossum
 
 /mob/living/simple_animal/friendly/opossum/Life()
@@ -115,7 +115,7 @@
 				respond_to_damage()
 				return
 
-/datum/ai_holder/simple_animal/opossum
+/datum/ai_holder/simple_animal/passive/opossum
 	speak_chance = 1
 
 /datum/say_list/opossum
