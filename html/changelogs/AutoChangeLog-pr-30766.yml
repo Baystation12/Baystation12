@@ -1,5 +1,0 @@
-author: Ilysen
-delete-after: true
-changes:
-  - bugfix: You can now properly light molotov cocktails with any open flame source
-      like welding tools, not just lighters.
