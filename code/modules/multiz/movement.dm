@@ -236,7 +236,7 @@
 	if(w_class == ITEM_SIZE_TINY)
 		return 0
 	if(w_class == ITEM_SIZE_NO_CONTAINER)
-		return 100
+		return 150
 	return BASE_STORAGE_COST(w_class)
 
 /mob/living/carbon/human/handle_fall_effect(var/turf/landing)
