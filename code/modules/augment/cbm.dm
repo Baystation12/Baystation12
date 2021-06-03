@@ -78,9 +78,12 @@
 		var/obj/item/organ/external/affected = H.get_organ(loaded_augment.parent_organ)
 		var/beep_boop = BP_IS_ROBOTIC(affected)
 		if (!affected)
-			to_chat (user, SPAN_WARNING("\The [src] detects no valid operation spot."))
+			to_chat(user, SPAN_WARNING("\The [src] detects no valid operation spot."))
 			return
-		else if(beep_boop && !(loaded_augment.augment_flags != AUGMENTATION_MECHANIC))
+		else if (H.species.spawn_flags & SPECIES_NO_ROBOTIC_INTERNAL_ORGANS)
+			to_chat(user, SPAN_WARNING("Your species is incapable of supporting robotic parts."))
+			return
+		else if (beep_boop && !(loaded_augment.augment_flags != AUGMENTATION_MECHANIC))
 			to_chat(user, SPAN_WARNING("The [loaded_augment.name] cannot function within a mechanical part."))
 			return
 		else if (!beep_boop && !(loaded_augment.augment_flags & AUGMENTATION_ORGANIC))

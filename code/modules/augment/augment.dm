@@ -66,7 +66,7 @@
 	else if(organ_tag == BP_AUGMENT_R_ARM)
 		parent_organ = BP_R_ARM
 		descriptor = "right arm"
-	else if(organ_tag == BP_AUGMENT_HEAD)
+	else if(organ_tag == BP_AUGMENT_HEAD_ACTIVE || organ_tag == BP_AUGMENT_HEAD_PASSIVE)
 		parent_organ = BP_HEAD
 		descriptor = "head"
 	else if(organ_tag == BP_AUGMENT_CHEST_ACTIVE || organ_tag == BP_AUGMENT_CHEST_ARMOUR)

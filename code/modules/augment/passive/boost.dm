@@ -9,7 +9,7 @@
 	var/debuffing = 0 //if we applied a debuff
 	var/id //Unique Id assigned on new
 	icon_state = "booster"
-	allowed_organs = list(BP_AUGMENT_HEAD)
+	allowed_organs = list(BP_AUGMENT_HEAD_ACTIVE)
 
 /obj/item/organ/internal/augment/boost/Initialize()
 	. = ..()
@@ -63,5 +63,3 @@
 		debuff()
 	else if(!is_broken() && debuffing)
 		buff()
-
-

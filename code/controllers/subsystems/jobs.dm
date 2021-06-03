@@ -397,6 +397,9 @@ SUBSYSTEM_DEF(jobs)
 				if(G.whitelisted && (!(H.species.name in G.whitelisted)))
 					permitted = 0
 
+				if(G.species_blacklist && list_find(G.species_blacklist, H.species.name))
+					permitted = 0
+
 				if(!permitted)
 					to_chat(H, "<span class='warning'>Your current species, job, branch, skills or whitelist status does not permit you to spawn with [thing]!</span>")
 					continue

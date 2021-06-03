@@ -67,6 +67,13 @@ var/list/gear_datums = list()
 				if(is_species_whitelisted(preference_mob, species))
 					okay = 1
 					break
+
+		if(G.species_blacklist && ishuman(preference_mob))
+			okay = 0
+			var/mob/living/carbon/human/H = preference_mob
+			if (!list_find(G.species_blacklist, H.species.name))
+				okay = 1
+				break
 		if(!okay)
 			continue
 		if(max_cost && G.cost > max_cost)
@@ -180,6 +187,15 @@ var/list/gear_datums = list()
 		entry += "<td width = 10% style='vertical-align:top'>[G.cost]</td>"
 		entry += "<td><font size=2>[G.get_description(get_gear_metadata(G,1))]</font>"
 		var/allowed = 1
+
+		if(allowed && G.species_blacklist)
+			var/is_blacklisted = list_find(G.species_blacklist, pref.species)
+			allowed = !is_blacklisted
+			var/species_title = pref.species
+			if (!allowed)
+				species_title = "<font color=cc5555>[species_title]</font>"
+				entry += "<br><i>[species_title]</i>"
+
 		if(allowed && G.allowed_roles)
 			var/good_job = 0
 			var/bad_job = 0
@@ -326,6 +342,7 @@ var/list/gear_datums = list()
 	var/list/allowed_branches //Service branches that can spawn with it.
 	var/list/allowed_skills //Skills required to spawn with this item.
 	var/whitelisted        //Term to check the whitelist for..
+	var/list/species_blacklist // Any species in this list will be unable to spawn with this gear item.
 	var/sort_category = "General"
 	var/flags              //Special tweaks in New
 	var/custom_setup_proc  //Special tweak in New
@@ -395,8 +412,11 @@ var/list/gear_datums = list()
 			else if (!(A.augment_flags & AUGMENTATION_ORGANIC) && !beep_boop)
 				to_chat(H, SPAN_WARNING("\The [A] cannot be installed in an organic part!"))
 				QDEL_NULL(A)
-			else if(I && (I.parent_organ == A.parent_organ))
+			else if (I && (I.parent_organ == A.parent_organ))
 				to_chat(H, SPAN_WARNING("\The [A] could not be installed because you can only have one [A.organ_tag] at a time."))
+				QDEL_NULL(A)
+			else if (H.species.spawn_flags & SPECIES_NO_ROBOTIC_INTERNAL_ORGANS)
+				to_chat(H, SPAN_WARNING("Your species cannot support \the [A], as it violently rejects robotic parts."))
 				QDEL_NULL(A)
 			else
 				to_chat(H, SPAN_NOTICE("Installing \the [A] in your [affected.name]!"))

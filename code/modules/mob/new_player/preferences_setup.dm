@@ -85,6 +85,8 @@
 
 				if(G.whitelisted && !(mannequin.species.name in G.whitelisted))
 					permitted = 0
+				if(G.species_blacklist && list_find(G.species_blacklist, mannequin.species.name))
+					permitted = 0
 
 				if(!permitted)
 					continue

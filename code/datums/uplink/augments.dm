@@ -5,6 +5,15 @@
 /datum/uplink_item/item/augment
 	category = /datum/uplink_category/augments
 
+/datum/uplink_item/item/augment/can_view(obj/item/device/uplink/U)
+	. = ..(U)
+	if (.)
+		var/mob/living/carbon/human/H = U.uplink_owner.current
+		if (!istype(H))
+			return FALSE
+		else if (H.species.spawn_flags & SPECIES_NO_ROBOTIC_INTERNAL_ORGANS)
+			return FALSE
+
 /datum/uplink_item/item/augment/aug_internal_air_system
 	name = "Internal Air System CBM (chest, active)"
 	desc = "This flexible air sack housed in your torso slowly fills with safe air as you breathe, and can be used as a low-capacity internals source if nothing else is available. \
