@@ -45,3 +45,8 @@
 	display_name = "integrated filth HUD (head)"
 	cost = 4
 	path = /obj/item/organ/internal/augment/active/hud/janitor
+
+/datum/gear/augment/integrated_science_hud
+	display_name = "integrated sciHUD (head)"
+	cost = 4
+	path = /obj/item/organ/internal/augment/active/hud/science
