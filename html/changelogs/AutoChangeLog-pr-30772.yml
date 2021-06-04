@@ -1,5 +1,0 @@
-author: Ilysen
-delete-after: true
-changes:
-  - rscadd: You can now browse through hairstyles with arrows in addition to selecting
-      a style from a list. Useful for looking around more without having to pick randomly!

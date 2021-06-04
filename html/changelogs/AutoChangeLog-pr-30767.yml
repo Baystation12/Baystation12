@@ -1,5 +1,0 @@
-author: SealCure
-delete-after: true
-changes:
-  - rscadd: Adds scienceHUD implants, buildable from the robotics fabricator and selectable
-      at the loadout screen.
