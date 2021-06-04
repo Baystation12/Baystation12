@@ -15,7 +15,7 @@
 		chameleon_choices = LAZYACCESS(chameleon_choices_by_type, chameleon_type)
 		if(!chameleon_choices)
 			chameleon_choices = generate_chameleon_choices(chameleon_type)
-			LAZYSET(chameleon_choices_by_type, chameleon_type, chameleon_choices)	
+			LAZYSET(chameleon_choices_by_type, chameleon_type, chameleon_choices)
 	else
 		var/list/choices = list()
 		for(var/path in chameleon_choices)
@@ -103,6 +103,12 @@
 	if (!CanPhysicallyInteract(usr))
 		return
 	if (has_extension(src,/datum/extension/chameleon))
+		var/obj/item/I = src
+		if(I.holographic == TRUE)
+			if(istype(I, /obj/item/storage))
+				set_extension(I,/datum/extension/chameleon/backpack)
+			else
+				set_extension(I,/datum/extension/chameleon/clothing)
 		var/datum/extension/chameleon/C = get_extension(src, /datum/extension/chameleon)
 		C.change(usr)
 	else
