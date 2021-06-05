@@ -59,9 +59,8 @@ jobs:
           - base_assault
           - base_assault_unsc_defend_vs_urf
           - base_assault_neutral_base
+          - geminus_city         
           #- example
-          #- first_contact
-          #- geminus_city
           #- overmap_example
     
     timeout-minutes: 20

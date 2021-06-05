@@ -1,3 +1,5 @@
+//To ensure no type-errors from overmap_hide
+/obj/effect/overmap/ship/urf_flagship
 
 /datum/game_mode/outer_colonies/reclamation
 	name = "Reclamation"
