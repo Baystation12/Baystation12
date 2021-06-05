@@ -9,8 +9,9 @@
 
 /obj/item/projectile/bullet/m224
 	damage = 45
+	armor_penetration = 15
 	accuracy = 1
-	shield_damage = -5
+	shield_damage = 5
 
 /* M224 TTR Rounds */
 

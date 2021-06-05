@@ -263,6 +263,7 @@
 					/obj/item/weapon/gun/projectile/br55 = 0,
 					"Ammunition" = -1,
 					/obj/item/ammo_magazine/m6s/m224 = 0,
+					/obj/item/ammo_magazine/m6s/m225 = 0,
 					/obj/item/ammo_magazine/ma5b/m118 = 0,
 					/obj/item/ammo_magazine/m392/m120 = 0,
 					/obj/item/ammo_magazine/br55/m634 = 0,
