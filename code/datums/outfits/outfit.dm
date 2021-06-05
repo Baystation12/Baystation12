@@ -135,10 +135,11 @@ var/list/outfits_decls_by_type_
 	if(uniform)
 		H.equip_to_slot_or_del(new uniform(H),slot_w_uniform)
 	if(holster && H.w_uniform)
-		var/obj/item/clothing/accessory/equip_holster = new holster
-		H.w_uniform.attackby(H, equip_holster)
-		if(equip_holster.loc != H.w_uniform)
-			qdel(equip_holster)
+		var/obj/item/clothing/w_uniform = H.w_uniform
+		if (istype(w_uniform))
+			var/obj/item/clothing/accessory/equip_holster = new holster
+			if (!w_uniform.attempt_attach_accessory(equip_holster, H))
+				qdel(equip_holster)
 	if(suit)
 		H.equip_to_slot_or_del(new suit(H),slot_wear_suit)
 	if(back)

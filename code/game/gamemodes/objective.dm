@@ -333,7 +333,8 @@ var/global/list/all_objectives = list()
 	for(var/datum/mind/possible_target in SSticker.minds)
 		if(possible_target != owner && ishuman(possible_target.current) && (possible_target.current.stat != DEAD) && (!possible_target.special_role))
 			possible_targets += possible_target
-			for(var/datum/job/role in SSjobs.get_by_path(roles))
+			for (var/path in roles)
+				var/datum/job/role = SSjobs.get_by_path(roles)
 				if(possible_target.assigned_role == role.title)
 					priority_targets += possible_target
 					continue

@@ -93,7 +93,7 @@ obj/item/paper/admin/proc/updateDisplay()
 
 		//t = html_encode(t)
 		t = replacetext(t, "\n", "<BR>")
-		t = parsepencode(t,,, isCrayon) // Encode everything from pencode to html
+		t = parsepencode(t, null, null, isCrayon, null, TRUE) // Encode everything from pencode to html
 
 
 		if(fields > 50)//large amount of fields creates a heavy load on the server, see updateinfolinks() and addtofield()
@@ -163,6 +163,3 @@ obj/item/paper/admin/proc/updateDisplay()
 		choose_language(usr, TRUE)
 		updateDisplay()
 		return
-
-/obj/item/paper/admin/get_signature()
-	return input(usr, "Enter the name you wish to sign the paper with (will prompt for multiple entries, in order of entry)", "Signature") as text|null
