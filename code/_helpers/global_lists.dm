@@ -5,9 +5,9 @@ GLOBAL_LIST_EMPTY(landmarks_list) //list of all landmarks created
 GLOBAL_LIST_EMPTY(side_effects) //list of all medical sideeffects types by their names
 
 
+GLOBAL_LIST_EMPTY(all_species)
 
 //Languages/species/whitelist.
-var/global/list/all_species[0]
 var/global/list/datum/language/all_languages = list()
 var/global/list/language_keys[0]					// Table of say codes for all languages
 var/global/list/playable_species = list(SPECIES_HUMAN)    // A list of ALL playable species, whitelisted, latejoin or otherwise.
@@ -137,7 +137,7 @@ var/global/list/string_slot_flags = list(
 
 		S = new T
 		S.race_key = rkey //Used in mob icon caching.
-		all_species[S.name] = S
+		GLOB.all_species[S.name] = S
 		if(!(S.spawn_flags & SPECIES_IS_RESTRICTED))
 			playable_species += S.name
 

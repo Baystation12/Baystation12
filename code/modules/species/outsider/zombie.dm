@@ -420,7 +420,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 		skillset.skill_list[SKILL_COMBAT] = SKILL_ADEPT
 		skillset.on_levels_change()
 
-	species = all_species[SPECIES_ZOMBIE]
+	species = GLOB.all_species[SPECIES_ZOMBIE]
 	species.handle_post_spawn(src)
 
 	var/turf/T = get_turf(src)

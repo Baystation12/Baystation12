@@ -1145,7 +1145,7 @@
 			new_species = dna.species
 
 	// No more invisible screaming wheelchairs because of set_species() typos.
-	if(!all_species[new_species])
+	if(!GLOB.all_species[new_species])
 		new_species = SPECIES_HUMAN
 	if(dna)
 		dna.species = new_species
@@ -1160,7 +1160,7 @@
 		species.remove_inherent_verbs(src)
 		holder_type = null
 
-	species = all_species[new_species]
+	species = GLOB.all_species[new_species]
 	species.handle_pre_spawn(src)
 
 	if(species.grab_type)

@@ -168,7 +168,7 @@
 		if(!SSjobs.check_general_join_blockers(src, job))
 			return FALSE
 
-		var/datum/species/S = all_species[client.prefs.species]
+		var/datum/species/S = GLOB.all_species[client.prefs.species]
 		if(!check_species_allowed(S))
 			return 0
 
@@ -344,7 +344,7 @@
 
 	var/datum/species/chosen_species
 	if(client.prefs.species)
-		chosen_species = all_species[client.prefs.species]
+		chosen_species = GLOB.all_species[client.prefs.species]
 
 	if(!spawn_turf)
 		var/datum/job/job = SSjobs.get_by_title(mind.assigned_role)
@@ -423,7 +423,7 @@
 /mob/new_player/get_species()
 	var/datum/species/chosen_species
 	if(client.prefs.species)
-		chosen_species = all_species[client.prefs.species]
+		chosen_species = GLOB.all_species[client.prefs.species]
 
 	if(!chosen_species || !check_species_allowed(chosen_species, 0))
 		return SPECIES_HUMAN

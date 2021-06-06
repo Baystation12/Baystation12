@@ -4,7 +4,7 @@
 	set category = "IC"
 	set src = usr.loc
 
-	if(!is_alien_whitelisted(usr, all_species[SPECIES_DIONA]))
+	if(!is_alien_whitelisted(usr, GLOB.all_species[SPECIES_DIONA]))
 		to_chat(usr, "<span class='warning'>You are not whitelisted for control of more complex forms of gestalt.</span>")
 		return
 

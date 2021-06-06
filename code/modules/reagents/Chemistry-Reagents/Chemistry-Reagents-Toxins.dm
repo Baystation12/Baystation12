@@ -781,7 +781,7 @@
 		wrapped_species_by_ref["\ref[H]"] = H.species.name
 	meatchunks = list(O) | O.children
 	for(var/obj/item/organ/external/E in meatchunks)
-		E.species = all_species[SPECIES_PROMETHEAN]
+		E.species = GLOB.all_species[SPECIES_PROMETHEAN]
 		E.s_tone = null
 		E.s_col = ReadRGB("#05ff9b")
 		E.s_col_blend = ICON_ADD

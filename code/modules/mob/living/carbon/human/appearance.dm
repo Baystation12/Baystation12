@@ -9,7 +9,7 @@
 	if(species == new_species)
 		return
 
-	if(!(new_species in all_species))
+	if(!(new_species in GLOB.all_species))
 		return
 
 	set_species(new_species)
@@ -163,8 +163,8 @@
 
 /mob/living/carbon/human/proc/generate_valid_species(var/check_whitelist = 1, var/list/whitelist = list(), var/list/blacklist = list())
 	var/list/valid_species = new()
-	for(var/current_species_name in all_species)
-		var/datum/species/current_species = all_species[current_species_name]
+	for(var/current_species_name in GLOB.all_species)
+		var/datum/species/current_species = GLOB.all_species[current_species_name]
 
 		if(check_whitelist) //If we're using the whitelist, make sure to check it!
 			if((current_species.spawn_flags & SPECIES_IS_RESTRICTED) && !check_rights(R_ADMIN, 0, src))

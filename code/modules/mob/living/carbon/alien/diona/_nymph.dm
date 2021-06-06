@@ -66,7 +66,7 @@
 
 /mob/living/carbon/alien/diona/Initialize(var/mapload, var/flower_chance = 15)
 
-	species = all_species[SPECIES_DIONA]
+	species = GLOB.all_species[SPECIES_DIONA]
 	add_language(LANGUAGE_ROOTGLOBAL)
 	add_language(LANGUAGE_HUMAN_EURO, 0)
 

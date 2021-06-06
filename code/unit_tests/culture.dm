@@ -3,8 +3,8 @@
 
 /datum/unit_test/culture/start_test()
 	var/fails = 0
-	for(var/species_name in all_species)
-		var/datum/species/species = all_species[species_name]
+	for(var/species_name in GLOB.all_species)
+		var/datum/species/species = GLOB.all_species[species_name]
 		if(!islist(species.default_cultural_info))
 			fails++
 			log_bad("Default cultural info for [species_name] is not a list.")

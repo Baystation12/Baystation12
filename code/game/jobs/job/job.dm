@@ -199,7 +199,7 @@
 	var/datum/species/S
 
 	if (!is_species_whitelist_allowed(prefs.client, use_species_whitelist))
-		S = all_species[use_species_whitelist]
+		S = GLOB.all_species[use_species_whitelist]
 		to_chat(feedback, "<span class='boldannounce'>\An [S] species whitelist is required for [title].</span>")
 		return TRUE
 
@@ -211,7 +211,7 @@
 		to_chat(feedback, "<span class='boldannounce'>Wrong rank for [title]. Valid ranks in [prefs.branches[title]] are: [get_ranks(prefs.branches[title])].</span>")
 		return TRUE
 
-	S = all_species[prefs.species]
+	S = GLOB.all_species[prefs.species]
 	if(!is_species_allowed(S))
 		to_chat(feedback, "<span class='boldannounce'>Restricted species, [S], for [title].</span>")
 		return TRUE
@@ -381,7 +381,7 @@
 		reasons["Your rank choice does not allow it."] = TRUE
 	if (!is_species_whitelist_allowed(caller))
 		reasons["You do not have the required [use_species_whitelist] species whitelist."] = TRUE
-	var/datum/species/S = all_species[caller.prefs.species]
+	var/datum/species/S = GLOB.all_species[caller.prefs.species]
 	if(S)
 		if(!is_species_allowed(S))
 			reasons["Your species choice does not allow it."] = TRUE
