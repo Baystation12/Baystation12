@@ -109,16 +109,13 @@
 	SetName("[O.name] - [initial(name)] ([x],[y])")
 
 //Subtype that calls explosion on init to clear space for shuttles
-/obj/effect/shuttle_landmark/automatic/clearing
-	var/radius = LANDING_ZONE_RADIUS
-
 /obj/effect/shuttle_landmark/automatic/clearing/Initialize()
 	..()
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/effect/shuttle_landmark/automatic/clearing/LateInitialize()
 	..()
-	for(var/turf/T in range(radius, src))
+	for(var/turf/T in range(LANDING_ZONE_RADIUS, src))
 		if(T.density)
 			T.ChangeTurf(get_base_turf_by_area(T))
 
