@@ -88,7 +88,7 @@ if(current_step == this_step || (check_resumed && !resumed)) {\
 	for(var/datum/powernet/PN in powernets)
 		qdel(PN)
 	powernets.Cut()
-	setup_powernets_for_cables(cable_list)
+	setup_powernets_for_cables(GLOB.cable_list)
 
 /datum/controller/subsystem/machines/proc/setup_powernets_for_cables(list/cables)
 	for(var/obj/structure/cable/PC in cables)
