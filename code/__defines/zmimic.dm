@@ -14,11 +14,11 @@
 #define ZM_MIMIC_DEFAULTS (ZM_MIMIC_BELOW|ZM_ALLOW_LIGHTING)
 
 // For debug purposes, should contain the above defines in ascending order.
-var/list/mimic_defines = list(
+GLOBAL_LIST_INIT(mimic_defines, list(
 	"ZM_MIMIC_BELOW",
 	"ZM_MIMIC_OVERWRITE",
 	"ZM_ALLOW_LIGHTING",
 	"ZM_ALLOW_ATMOS",
 	"ZM_MIMIC_NO_AO",
 	"ZM_NO_OCCLUDE"
-)
+))

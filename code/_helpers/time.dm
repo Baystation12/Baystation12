@@ -83,28 +83,28 @@
 
 	return wtime + (time_offset + wusage) * world.tick_lag
 
-var/roundstart_hour
-var/station_date = ""
-var/next_station_date_change = 1 DAY
+GLOBAL_VAR(roundstart_hour)
+GLOBAL_VAR_INIT(station_date, "")
+GLOBAL_VAR_INIT(next_station_date_change, 1 DAY)
 
 #define duration2stationtime(time) time2text(station_time_in_ticks + time, "hh:mm")
-#define worldtime2stationtime(time) time2text(roundstart_hour HOURS + time, "hh:mm")
-#define round_duration_in_ticks (round_start_time ? world.time - round_start_time : 0)
-#define station_time_in_ticks (roundstart_hour HOURS + round_duration_in_ticks)
+#define worldtime2stationtime(time) time2text(GLOB.roundstart_hour HOURS + time, "hh:mm")
+#define round_duration_in_ticks (GLOB.round_start_time ? world.time - GLOB.round_start_time : 0)
+#define station_time_in_ticks (GLOB.roundstart_hour HOURS + round_duration_in_ticks)
 
 /proc/stationtime2text()
 	return time2text(station_time_in_ticks, "hh:mm")
 
 /proc/stationdate2text()
 	var/update_time = FALSE
-	if(station_time_in_ticks > next_station_date_change)
-		next_station_date_change += 1 DAY
+	if(station_time_in_ticks > GLOB.next_station_date_change)
+		GLOB.next_station_date_change += 1 DAY
 		update_time = TRUE
-	if(!station_date || update_time)
+	if(!GLOB.station_date || update_time)
 		var/extra_days = round(station_time_in_ticks / (1 DAY)) DAYS
 		var/timeofday = world.timeofday + extra_days
-		station_date = "[GLOB.using_map.game_year]-[time2text(timeofday, "MM-DD")]"
-	return station_date
+		GLOB.station_date = "[GLOB.using_map.game_year]-[time2text(timeofday, "MM-DD")]"
+	return GLOB.station_date
 
 /proc/time_stamp()
 	return time2text(station_time_in_ticks, "hh:mm:ss")
@@ -121,19 +121,19 @@ proc/isDay(var/month, var/day)
 		//else
 			//return 1
 
-var/next_duration_update = 0
-var/last_round_duration = 0
-var/round_start_time = 0
+GLOBAL_VAR_INIT(next_duration_update, 0)
+GLOBAL_VAR_INIT(last_round_duration, 0)
+GLOBAL_VAR_INIT(round_start_time, 0)
 
 /hook/roundstart/proc/start_timer()
-	round_start_time = world.time
+	GLOB.round_start_time = world.time
 	return 1
 
 /proc/roundduration2text()
-	if(!round_start_time)
+	if(!GLOB.round_start_time)
 		return "00:00"
-	if(last_round_duration && world.time < next_duration_update)
-		return last_round_duration
+	if(GLOB.last_round_duration && world.time < GLOB.next_duration_update)
+		return GLOB.last_round_duration
 
 	var/mills = round_duration_in_ticks // 1/10 of a second, not real milliseconds but whatever
 	//var/secs = ((mills % 36000) % 600) / 10 //Not really needed, but I'll leave it here for refrence.. or something
@@ -143,12 +143,12 @@ var/round_start_time = 0
 	mins = mins < 10 ? add_zero(mins, 1) : mins
 	hours = hours < 10 ? add_zero(hours, 1) : hours
 
-	last_round_duration = "[hours]:[mins]"
-	next_duration_update = world.time + 1 MINUTES
-	return last_round_duration
+	GLOB.last_round_duration = "[hours]:[mins]"
+	GLOB.next_duration_update = world.time + 1 MINUTES
+	return GLOB.last_round_duration
 
 /hook/startup/proc/set_roundstart_hour()
-	roundstart_hour = rand(0, 23)
+	GLOB.roundstart_hour = rand(0, 23)
 	return 1
 
 GLOBAL_VAR_INIT(midnight_rollovers, 0)

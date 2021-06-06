@@ -61,6 +61,8 @@ GLOBAL_LIST_INIT(string_slot_flags, list(
 	"holster" = SLOT_HOLSTER
 ))
 
+GLOBAL_DATUM_INIT(gear_tweak_free_color_choice, /datum/gear_tweak/color, new())
+
 //////////////////////////
 /////Initial Building/////
 //////////////////////////
