@@ -7,7 +7,8 @@
 			fromIndex += L.len
 		if(toIndex <= 0)
 			toIndex += L.len + 1
-
+		if (!GLOB.sortInstance)
+			GLOB.sortInstance = new
 		GLOB.sortInstance.L = L
 		GLOB.sortInstance.cmp = cmp
 		GLOB.sortInstance.associative = associative

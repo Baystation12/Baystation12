@@ -10,7 +10,7 @@
 
 	//This is a global instance to allow much of this code to be reused. The interfaces are kept separately
 
-GLOBAL_DATUM_INIT(sortInstance, /datum/sortInstance, new())
+GLOBAL_DATUM(sortInstance, /datum/sortInstance)
 
 /datum/sortInstance
 	//The array being sorted.
