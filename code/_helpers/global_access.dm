@@ -1,24 +1,14 @@
 // THIS FILE IS AUTOMATICALLY CREATED BY tools/gen_globals.py
 /proc/readglobal(which)
 	switch(which)
-		if("ANTAG_FREQS")
-			return global.ANTAG_FREQS;
-		if("AWAY_FREQS_ASSIGNED")
-			return global.AWAY_FREQS_ASSIGNED;
-		if("AWAY_FREQS_UNASSIGNED")
-			return global.AWAY_FREQS_UNASSIGNED;
 		if("BSACooldown")
 			return global.BSACooldown;
 		if("BUMP_TELEPORTERS")
 			return global.BUMP_TELEPORTERS;
 		if("Banlist")
 			return global.Banlist;
-		if("CENT_FREQS")
-			return global.CENT_FREQS;
 		if("CMinutes")
 			return global.CMinutes;
-		if("DEPT_FREQS")
-			return global.DEPT_FREQS;
 		if("Failsafe")
 			return global.Failsafe;
 		if("GLOB")
@@ -157,14 +147,6 @@
 			return global.SSxenoarch;
 		if("SSzcopy")
 			return global.SSzcopy;
-		if("Tier1Runes")
-			return global.Tier1Runes;
-		if("Tier2Runes")
-			return global.Tier2Runes;
-		if("Tier3Runes")
-			return global.Tier3Runes;
-		if("Tier4Runes")
-			return global.Tier4Runes;
 		if("_all_globals")
 			return global._all_globals;
 		if("_client_preferences")
@@ -297,8 +279,6 @@
 			return global.can_call_ert;
 		if("captain_announcement")
 			return global.captain_announcement;
-		if("channel_color_presets")
-			return global.channel_color_presets;
 		if("channel_to_radio_key")
 			return global.channel_to_radio_key;
 		if("chargen_robolimbs")
@@ -413,8 +393,6 @@
 			return global.fusion_reactions;
 		if("game_id")
 			return global.game_id;
-		if("gamemode_cache")
-			return global.gamemode_cache;
 		if("gas_data")
 			return global.gas_data;
 		if("gear_datums")
@@ -583,8 +561,6 @@
 			return global.pai_emotions;
 		if("pai_software_by_key")
 			return global.pai_software_by_key;
-		if("photo_count")
-			return global.photo_count;
 		if("pipe_colors")
 			return global.pipe_colors;
 		if("plant_seed_sprites")
@@ -623,10 +599,6 @@
 			return global.protected_objects;
 		if("rad_collectors")
 			return global.rad_collectors;
-		if("radio_controller")
-			return global.radio_controller;
-		if("radiochannels")
-			return global.radiochannels;
 		if("random_junk_")
 			return global.random_junk_;
 		if("random_maps")
@@ -673,8 +645,6 @@
 			return global.solar_gen_rate;
 		if("solars_list")
 			return global.solars_list;
-		if("sortInstance")
-			return global.sortInstance;
 		if("sounds_cache")
 			return global.sounds_cache;
 		if("spacevines_spawned")
@@ -711,8 +681,6 @@
 			return global.stored_shock_by_ref;
 		if("supply_drop")
 			return global.supply_drop;
-		if("supply_methods_")
-			return global.supply_methods_;
 		if("swapmaps_byname")
 			return global.swapmaps_byname;
 		if("swapmaps_compiled_maxx")
@@ -796,24 +764,14 @@
 		
 /proc/writeglobal(which, newval)
 	switch(which)
-		if("ANTAG_FREQS")
-			global.ANTAG_FREQS=newval;
-		if("AWAY_FREQS_ASSIGNED")
-			global.AWAY_FREQS_ASSIGNED=newval;
-		if("AWAY_FREQS_UNASSIGNED")
-			global.AWAY_FREQS_UNASSIGNED=newval;
 		if("BSACooldown")
 			global.BSACooldown=newval;
 		if("BUMP_TELEPORTERS")
 			global.BUMP_TELEPORTERS=newval;
 		if("Banlist")
 			global.Banlist=newval;
-		if("CENT_FREQS")
-			global.CENT_FREQS=newval;
 		if("CMinutes")
 			global.CMinutes=newval;
-		if("DEPT_FREQS")
-			global.DEPT_FREQS=newval;
 		if("Failsafe")
 			global.Failsafe=newval;
 		if("GLOB")
@@ -952,14 +910,6 @@
 			global.SSxenoarch=newval;
 		if("SSzcopy")
 			global.SSzcopy=newval;
-		if("Tier1Runes")
-			global.Tier1Runes=newval;
-		if("Tier2Runes")
-			global.Tier2Runes=newval;
-		if("Tier3Runes")
-			global.Tier3Runes=newval;
-		if("Tier4Runes")
-			global.Tier4Runes=newval;
 		if("_all_globals")
 			global._all_globals=newval;
 		if("_client_preferences")
@@ -1092,8 +1042,6 @@
 			global.can_call_ert=newval;
 		if("captain_announcement")
 			global.captain_announcement=newval;
-		if("channel_color_presets")
-			global.channel_color_presets=newval;
 		if("channel_to_radio_key")
 			global.channel_to_radio_key=newval;
 		if("chargen_robolimbs")
@@ -1208,8 +1156,6 @@
 			global.fusion_reactions=newval;
 		if("game_id")
 			global.game_id=newval;
-		if("gamemode_cache")
-			global.gamemode_cache=newval;
 		if("gas_data")
 			global.gas_data=newval;
 		if("gear_datums")
@@ -1378,8 +1324,6 @@
 			global.pai_emotions=newval;
 		if("pai_software_by_key")
 			global.pai_software_by_key=newval;
-		if("photo_count")
-			global.photo_count=newval;
 		if("pipe_colors")
 			global.pipe_colors=newval;
 		if("plant_seed_sprites")
@@ -1418,10 +1362,6 @@
 			global.protected_objects=newval;
 		if("rad_collectors")
 			global.rad_collectors=newval;
-		if("radio_controller")
-			global.radio_controller=newval;
-		if("radiochannels")
-			global.radiochannels=newval;
 		if("random_junk_")
 			global.random_junk_=newval;
 		if("random_maps")
@@ -1468,8 +1408,6 @@
 			global.solar_gen_rate=newval;
 		if("solars_list")
 			global.solars_list=newval;
-		if("sortInstance")
-			global.sortInstance=newval;
 		if("sounds_cache")
 			global.sounds_cache=newval;
 		if("spacevines_spawned")
@@ -1506,8 +1444,6 @@
 			global.stored_shock_by_ref=newval;
 		if("supply_drop")
 			global.supply_drop=newval;
-		if("supply_methods_")
-			global.supply_methods_=newval;
 		if("swapmaps_byname")
 			global.swapmaps_byname=newval;
 		if("swapmaps_compiled_maxx")
@@ -1590,15 +1526,10 @@
 			global.zone_blocked=newval;
 		
 /var/list/_all_globals=list(
-	"ANTAG_FREQS",
-	"AWAY_FREQS_ASSIGNED",
-	"AWAY_FREQS_UNASSIGNED",
 	"BSACooldown",
 	"BUMP_TELEPORTERS",
 	"Banlist",
-	"CENT_FREQS",
 	"CMinutes",
-	"DEPT_FREQS",
 	"Failsafe",
 	"GLOB",
 	"IClog",
@@ -1668,10 +1599,6 @@
 	"SSwebhooks",
 	"SSxenoarch",
 	"SSzcopy",
-	"Tier1Runes",
-	"Tier2Runes",
-	"Tier3Runes",
-	"Tier4Runes",
 	"_all_globals",
 	"_client_preferences",
 	"_client_preferences_by_key",
@@ -1738,7 +1665,6 @@
 	"camera_repository",
 	"can_call_ert",
 	"captain_announcement",
-	"channel_color_presets",
 	"channel_to_radio_key",
 	"chargen_robolimbs",
 	"chemical_reaction_logs",
@@ -1796,7 +1722,6 @@
 	"fruit_icon_cache",
 	"fusion_reactions",
 	"game_id",
-	"gamemode_cache",
 	"gas_data",
 	"gear_datums",
 	"gender_datums",
@@ -1881,7 +1806,6 @@
 	"paiController",
 	"pai_emotions",
 	"pai_software_by_key",
-	"photo_count",
 	"pipe_colors",
 	"plant_seed_sprites",
 	"possible_changeling_IDs",
@@ -1901,8 +1825,6 @@
 	"prometheans",
 	"protected_objects",
 	"rad_collectors",
-	"radio_controller",
-	"radiochannels",
 	"random_junk_",
 	"random_maps",
 	"random_useful_",
@@ -1926,7 +1848,6 @@
 	"slot_flags_enumeration",
 	"solar_gen_rate",
 	"solars_list",
-	"sortInstance",
 	"sounds_cache",
 	"spacevines_spawned",
 	"sparring_attack_cache",
@@ -1945,7 +1866,6 @@
 	"stool_cache",
 	"stored_shock_by_ref",
 	"supply_drop",
-	"supply_methods_",
 	"swapmaps_byname",
 	"swapmaps_compiled_maxx",
 	"swapmaps_compiled_maxy",
