@@ -64,7 +64,7 @@
 		default_frequency = frequency
 
 	for (var/ch_name in channels)
-		secure_radio_connections[ch_name] = radio_controller.add_object(src, radiochannels[ch_name],  RADIO_CHAT)
+		secure_radio_connections[ch_name] = radio_controller.add_object(src, GLOB.radiochannels[ch_name],  RADIO_CHAT)
 
 /obj/item/device/radio/Process()
 	if(power_usage && on) //radio will use power and is on
@@ -87,7 +87,7 @@
 	if(radio_controller)
 		radio_controller.remove_object(src, frequency)
 		for (var/ch_name in channels)
-			radio_controller.remove_object(src, radiochannels[ch_name])
+			radio_controller.remove_object(src, GLOB.radiochannels[ch_name])
 	if(get_cell())
 		STOP_PROCESSING(SSobj, src)
 	return ..()
@@ -145,7 +145,7 @@
 		var/chan_stat = channels[ch_name]
 		var/listening = !!(chan_stat & FREQ_LISTENING) != 0
 
-		dat.Add(list(list("chan" = ch_name, "display_name" = ch_name, "secure_channel" = 1, "sec_channel_listen" = !listening, "chan_span" = frequency_span_class(radiochannels[ch_name]))))
+		dat.Add(list(list("chan" = ch_name, "display_name" = ch_name, "secure_channel" = 1, "sec_channel_listen" = !listening, "chan_span" = frequency_span_class(GLOB.radiochannels[ch_name]))))
 
 	return dat
 
@@ -446,7 +446,7 @@
 			"reject" = 0,	// if nonzero, the signal will not be accepted by any broadcasting machinery
 			"level" = position.z, // The source's z level
 			"channel_tag" = "[connection.frequency]", // channel tag for the message
-			"channel_color" = channel_color_presets["Menacing Maroon"], // radio message color
+			"channel_color" = GLOB.channel_color_presets["Menacing Maroon"], // radio message color
 			"language" = speaking,
 			"verb" = verb
 		)
@@ -509,7 +509,7 @@
 		"reject" = 0,
 		"level" = position.z,
 		"channel_tag" = "#unkn",
-		"channel_color" = channel_color_presets["Menacing Maroon"],
+		"channel_color" = GLOB.channel_color_presets["Menacing Maroon"],
 		"language" = speaking,
 		"verb" = verb
 	)
@@ -534,7 +534,7 @@
 	return Broadcast_Message(connection, M, voicemask, pick(M.speak_emote),
 					  src, message, displayname, jobname, real_name, M.voice_name,
 					  filter_type, signal.data["compression"], GetConnectedZlevels(position.z), connection.frequency, verb, speaking,
-					  "[connection.frequency]", channel_color_presets["Menacing Maroon"])
+					  "[connection.frequency]", GLOB.channel_color_presets["Menacing Maroon"])
 
 
 /obj/item/device/radio/hear_talk(mob/M as mob, msg, var/verb = "says", var/datum/language/speaking = null)
@@ -558,7 +558,7 @@
 		var/turf/position = get_turf(src)
 		if(!position || !(position.z in level))
 			return -1
-	if(freq in ANTAG_FREQS)
+	if(freq in GLOB.ANTAG_FREQS)
 		if(!(src.syndie))//Checks to see if it's allowed on that frequency, based on the encryption keys
 			return -1
 	if (!on)
@@ -686,7 +686,7 @@
 	if(isScrewdriver(W))
 		if(keyslot)
 			for(var/ch_name in channels)
-				radio_controller.remove_object(src, radiochannels[ch_name])
+				radio_controller.remove_object(src, GLOB.radiochannels[ch_name])
 				secure_radio_connections[ch_name] = null
 
 			if(keyslot)
@@ -736,7 +736,7 @@
 			src.SetName("broken radio")
 			return
 
-		secure_radio_connections[ch_name] = radio_controller.add_object(src, radiochannels[ch_name],  RADIO_CHAT)
+		secure_radio_connections[ch_name] = radio_controller.add_object(src, GLOB.radiochannels[ch_name],  RADIO_CHAT)
 
 /obj/item/device/radio/borg/Topic(href, href_list)
 	if(..())
@@ -806,12 +806,12 @@
 /obj/item/device/radio/proc/config(op)
 	if(radio_controller)
 		for (var/ch_name in channels)
-			radio_controller.remove_object(src, radiochannels[ch_name])
+			radio_controller.remove_object(src, GLOB.radiochannels[ch_name])
 	secure_radio_connections = new
 	channels = op
 	if(radio_controller)
 		for (var/ch_name in op)
-			secure_radio_connections[ch_name] = radio_controller.add_object(src, radiochannels[ch_name],  RADIO_CHAT)
+			secure_radio_connections[ch_name] = radio_controller.add_object(src, GLOB.radiochannels[ch_name],  RADIO_CHAT)
 	return
 
 /obj/item/device/radio/map_preset

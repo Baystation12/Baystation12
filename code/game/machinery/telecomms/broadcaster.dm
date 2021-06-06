@@ -135,7 +135,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 
 /obj/machinery/telecomms/allinone/Initialize()
 	if(!listening_freqs)
-		listening_freqs = ANTAG_FREQS	//Covers any updates to ANTAG_FREQS
+		listening_freqs = GLOB.ANTAG_FREQS.Copy()	//Covers any updates to ANTAG_FREQS
 	return ..()
 
 /obj/machinery/telecomms/allinone/receive_signal(datum/signal/signal)
@@ -309,7 +309,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	// --- Broadcast to antag radios! ---
 
 	else if(data == 3)
-		for(var/antag_freq in ANTAG_FREQS)
+		for(var/antag_freq in GLOB.ANTAG_FREQS)
 			var/datum/radio_frequency/antag_connection = radio_controller.return_frequency(antag_freq)
 			for (var/obj/item/device/radio/R in antag_connection.devices["[RADIO_CHAT]"])
 				if(R.intercept && R.receive_range(antag_freq, level) > -1)
@@ -390,7 +390,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 
 		// Default to commons channel green
 		if(!channel_color)
-			channel_color = channel_color_presets["Global Green"]
+			channel_color = GLOB.channel_color_presets["Global Green"]
 
 		var/part_b_extra = ""
 		if(data == 3) // intercepted radio message
@@ -477,7 +477,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	// --- Broadcast to antag radios! ---
 
 	else if(data == 3)
-		for(var/freq in ANTAG_FREQS)
+		for(var/freq in GLOB.ANTAG_FREQS)
 			var/datum/radio_frequency/antag_connection = radio_controller.return_frequency(freq)
 			for (var/obj/item/device/radio/R in antag_connection.devices["[RADIO_CHAT]"])
 				var/turf/position = get_turf(R)
@@ -535,7 +535,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 			freq_text = channel_tag
 
 		if(!channel_color)
-			channel_color = channel_color_presets["Global Green"]
+			channel_color = GLOB.channel_color_presets["Global Green"]
 
 		var/part_a = "<span style='color: [channel_color]'><span class='name'>" // goes in the actual output
 

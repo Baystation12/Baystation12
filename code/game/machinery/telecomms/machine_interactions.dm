@@ -284,12 +284,12 @@
 							return
 
 					var/tag = input(usr, "Specify tag.", src, "") as null|text
-					var/color = input(usr, "Select color.", src, "") as null|anything in (channel_color_presets + "Custom color")
+					var/color = input(usr, "Select color.", src, "") as null|anything in (GLOB.channel_color_presets + "Custom color")
 
 					if(color == "Custom color")
 						color = input("Select color.", src, rgb(0, 128, 0)) as null|color
 					else
-						color = channel_color_presets[color]
+						color = GLOB.channel_color_presets[color]
 
 					if(freq < 10000)
 						channel_tags.Add(list(list(freq, tag, color)))

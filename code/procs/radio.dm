@@ -12,11 +12,11 @@
 	var/freq_text
 
 	// the name of the channel
-	if(display_freq in ANTAG_FREQS)
+	if(display_freq in GLOB.ANTAG_FREQS)
 		freq_text = "#unkn"
 	else
-		for(var/channel in radiochannels)
-			if(radiochannels[channel] == display_freq)
+		for(var/channel in GLOB.radiochannels)
+			if(GLOB.radiochannels[channel] == display_freq)
 				freq_text = channel
 				break
 

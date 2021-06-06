@@ -332,7 +332,7 @@
 	if(isScrewdriver(W))
 		if(encryption_keys.len)
 			for(var/ch_name in channels)
-				radio_controller.remove_object(src, radiochannels[ch_name])
+				radio_controller.remove_object(src, GLOB.radiochannels[ch_name])
 				secure_radio_connections[ch_name] = null
 			for(var/obj/ekey in encryption_keys)
 				ekey.dropInto(user.loc)
@@ -369,7 +369,7 @@
 		if(!radio_controller)
 			src.SetName("broken radio headset")
 			return
-		secure_radio_connections[ch_name] = radio_controller.add_object(src, radiochannels[ch_name],  RADIO_CHAT)
+		secure_radio_connections[ch_name] = radio_controller.add_object(src, GLOB.radiochannels[ch_name],  RADIO_CHAT)
 
 	if(setDescription)
 		setupRadioDescription()
