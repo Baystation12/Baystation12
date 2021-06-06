@@ -249,8 +249,6 @@
 			return global.all_objectives;
 		if("all_robolimbs")
 			return global.all_robolimbs;
-		if("all_species")
-			return global.all_species;
 		if("all_ui_styles")
 			return global.all_ui_styles;
 		if("all_unit_tests_passed")
@@ -293,8 +291,6 @@
 			return global.basic_robolimb;
 		if("blocked")
 			return global.blocked;
-		if("cable_list")
-			return global.cable_list;
 		if("cached_icons")
 			return global.cached_icons;
 		if("cached_space")
@@ -347,8 +343,6 @@
 			return global.created;
 		if("crew_repository")
 			return global.crew_repository;
-		if("csrfz_check")
-			return global.csrfz_check;
 		if("damage_icon_parts")
 			return global.damage_icon_parts;
 		if("dbcon")
@@ -457,8 +451,6 @@
 			return global.global_message_listener;
 		if("global_vars_")
 			return global.global_vars_;
-		if("gzn_check")
-			return global.gzn_check;
 		if("hadevent")
 			return global.hadevent;
 		if("hivemind_bank")
@@ -485,8 +477,6 @@
 			return global.jobban_keylist;
 		if("jobban_runonce")
 			return global.jobban_runonce;
-		if("landmarks_list")
-			return global.landmarks_list;
 		if("language_keys")
 			return global.language_keys;
 		if("last_chew")
@@ -533,8 +523,6 @@
 			return global.mark;
 		if("maze_cell_count")
 			return global.maze_cell_count;
-		if("mechas_list")
-			return global.mechas_list;
 		if("merged")
 			return global.merged;
 		if("message_delay")
@@ -599,8 +587,6 @@
 			return global.next_duration_update;
 		if("next_station_date_change")
 			return global.next_station_date_change;
-		if("ninjastart")
-			return global.ninjastart;
 		if("ntnet_card_uid")
 			return global.ntnet_card_uid;
 		if("ntnet_global")
@@ -719,8 +705,6 @@
 			return global.severity_to_string;
 		if("ship_engines")
 			return global.ship_engines;
-		if("side_effects")
-			return global.side_effects;
 		if("skin_styles_female_list")
 			return global.skin_styles_female_list;
 		if("skipped_unit_tests")
@@ -1118,8 +1102,6 @@
 			global.all_objectives=newval;
 		if("all_robolimbs")
 			global.all_robolimbs=newval;
-		if("all_species")
-			global.all_species=newval;
 		if("all_ui_styles")
 			global.all_ui_styles=newval;
 		if("all_unit_tests_passed")
@@ -1162,8 +1144,6 @@
 			global.basic_robolimb=newval;
 		if("blocked")
 			global.blocked=newval;
-		if("cable_list")
-			global.cable_list=newval;
 		if("cached_icons")
 			global.cached_icons=newval;
 		if("cached_space")
@@ -1216,8 +1196,6 @@
 			global.created=newval;
 		if("crew_repository")
 			global.crew_repository=newval;
-		if("csrfz_check")
-			global.csrfz_check=newval;
 		if("damage_icon_parts")
 			global.damage_icon_parts=newval;
 		if("dbcon")
@@ -1326,8 +1304,6 @@
 			global.global_message_listener=newval;
 		if("global_vars_")
 			global.global_vars_=newval;
-		if("gzn_check")
-			global.gzn_check=newval;
 		if("hadevent")
 			global.hadevent=newval;
 		if("hivemind_bank")
@@ -1354,8 +1330,6 @@
 			global.jobban_keylist=newval;
 		if("jobban_runonce")
 			global.jobban_runonce=newval;
-		if("landmarks_list")
-			global.landmarks_list=newval;
 		if("language_keys")
 			global.language_keys=newval;
 		if("last_chew")
@@ -1402,8 +1376,6 @@
 			global.mark=newval;
 		if("maze_cell_count")
 			global.maze_cell_count=newval;
-		if("mechas_list")
-			global.mechas_list=newval;
 		if("merged")
 			global.merged=newval;
 		if("message_delay")
@@ -1468,8 +1440,6 @@
 			global.next_duration_update=newval;
 		if("next_station_date_change")
 			global.next_station_date_change=newval;
-		if("ninjastart")
-			global.ninjastart=newval;
 		if("ntnet_card_uid")
 			global.ntnet_card_uid=newval;
 		if("ntnet_global")
@@ -1588,8 +1558,6 @@
 			global.severity_to_string=newval;
 		if("ship_engines")
 			global.ship_engines=newval;
-		if("side_effects")
-			global.side_effects=newval;
 		if("skin_styles_female_list")
 			global.skin_styles_female_list=newval;
 		if("skipped_unit_tests")
@@ -1862,7 +1830,6 @@
 	"all_money_accounts",
 	"all_objectives",
 	"all_robolimbs",
-	"all_species",
 	"all_ui_styles",
 	"all_unit_tests_passed",
 	"all_virtual_listeners",
@@ -1884,7 +1851,6 @@
 	"base_miss_chance",
 	"basic_robolimb",
 	"blocked",
-	"cable_list",
 	"cached_icons",
 	"cached_space",
 	"camera_alarm",
@@ -1911,7 +1877,6 @@
 	"create_turf_html",
 	"created",
 	"crew_repository",
-	"csrfz_check",
 	"damage_icon_parts",
 	"dbcon",
 	"dbcon_old",
@@ -1966,7 +1931,6 @@
 	"ghost_traps",
 	"global_message_listener",
 	"global_vars_",
-	"gzn_check",
 	"hadevent",
 	"hivemind_bank",
 	"holder_mob_icon_cache",
@@ -1980,7 +1944,6 @@
 	"jobMax",
 	"jobban_keylist",
 	"jobban_runonce",
-	"landmarks_list",
 	"language_keys",
 	"last_chew",
 	"last_message_id",
@@ -2004,7 +1967,6 @@
 	"maploader",
 	"mark",
 	"maze_cell_count",
-	"mechas_list",
 	"merged",
 	"message_delay",
 	"message_servers",
@@ -2037,7 +1999,6 @@
 	"next_account_number",
 	"next_duration_update",
 	"next_station_date_change",
-	"ninjastart",
 	"ntnet_card_uid",
 	"ntnet_global",
 	"ntnrc_uid",
@@ -2097,7 +2058,6 @@
 	"server_name",
 	"severity_to_string",
 	"ship_engines",
-	"side_effects",
 	"skin_styles_female_list",
 	"skipped_unit_tests",
 	"slot_equipment_priority",
