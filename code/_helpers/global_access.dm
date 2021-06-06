@@ -237,12 +237,6 @@
 			return global.allCasters;
 		if("allConsoles")
 			return global.allConsoles;
-		if("all_grabobjects")
-			return global.all_grabobjects;
-		if("all_grabstates")
-			return global.all_grabstates;
-		if("all_languages")
-			return global.all_languages;
 		if("all_money_accounts")
 			return global.all_money_accounts;
 		if("all_objectives")
@@ -301,8 +295,6 @@
 			return global.camera_range_display_status;
 		if("camera_repository")
 			return global.camera_repository;
-		if("cameranet")
-			return global.cameranet;
 		if("can_call_ert")
 			return global.can_call_ert;
 		if("captain_announcement")
@@ -477,8 +469,6 @@
 			return global.jobban_keylist;
 		if("jobban_runonce")
 			return global.jobban_runonce;
-		if("language_keys")
-			return global.language_keys;
 		if("last_chew")
 			return global.last_chew;
 		if("last_message_id")
@@ -511,8 +501,6 @@
 			return global.magazine_icondata_states;
 		if("maint_all_access")
 			return global.maint_all_access;
-		if("mannequins_")
-			return global.mannequins_;
 		if("map_count")
 			return global.map_count;
 		if("map_sectors")
@@ -623,8 +611,6 @@
 			return global.pipe_colors;
 		if("plant_seed_sprites")
 			return global.plant_seed_sprites;
-		if("playable_species")
-			return global.playable_species;
 		if("possible_changeling_IDs")
 			return global.possible_changeling_IDs;
 		if("power_alarm")
@@ -705,8 +691,6 @@
 			return global.severity_to_string;
 		if("ship_engines")
 			return global.ship_engines;
-		if("skin_styles_female_list")
-			return global.skin_styles_female_list;
 		if("skipped_unit_tests")
 			return global.skipped_unit_tests;
 		if("slot_equipment_priority")
@@ -827,8 +811,6 @@
 			return global.view_variables_dont_expand;
 		if("view_variables_no_assoc")
 			return global.view_variables_no_assoc;
-		if("visual_nets")
-			return global.visual_nets;
 		if("vsc")
 			return global.vsc;
 		if("wax_recipes")
@@ -841,8 +823,6 @@
 			return global.whitelist;
 		if("wireColours")
 			return global.wireColours;
-		if("world_uplinks")
-			return global.world_uplinks;
 		if("worths")
 			return global.worths;
 		if("wrapped_species_by_ref")
@@ -1090,12 +1070,6 @@
 			global.allCasters=newval;
 		if("allConsoles")
 			global.allConsoles=newval;
-		if("all_grabobjects")
-			global.all_grabobjects=newval;
-		if("all_grabstates")
-			global.all_grabstates=newval;
-		if("all_languages")
-			global.all_languages=newval;
 		if("all_money_accounts")
 			global.all_money_accounts=newval;
 		if("all_objectives")
@@ -1154,8 +1128,6 @@
 			global.camera_range_display_status=newval;
 		if("camera_repository")
 			global.camera_repository=newval;
-		if("cameranet")
-			global.cameranet=newval;
 		if("can_call_ert")
 			global.can_call_ert=newval;
 		if("captain_announcement")
@@ -1330,8 +1302,6 @@
 			global.jobban_keylist=newval;
 		if("jobban_runonce")
 			global.jobban_runonce=newval;
-		if("language_keys")
-			global.language_keys=newval;
 		if("last_chew")
 			global.last_chew=newval;
 		if("last_message_id")
@@ -1364,8 +1334,6 @@
 			global.magazine_icondata_states=newval;
 		if("maint_all_access")
 			global.maint_all_access=newval;
-		if("mannequins_")
-			global.mannequins_=newval;
 		if("map_count")
 			global.map_count=newval;
 		if("map_sectors")
@@ -1476,8 +1444,6 @@
 			global.pipe_colors=newval;
 		if("plant_seed_sprites")
 			global.plant_seed_sprites=newval;
-		if("playable_species")
-			global.playable_species=newval;
 		if("possible_changeling_IDs")
 			global.possible_changeling_IDs=newval;
 		if("power_alarm")
@@ -1558,8 +1524,6 @@
 			global.severity_to_string=newval;
 		if("ship_engines")
 			global.ship_engines=newval;
-		if("skin_styles_female_list")
-			global.skin_styles_female_list=newval;
 		if("skipped_unit_tests")
 			global.skipped_unit_tests=newval;
 		if("slot_equipment_priority")
@@ -1680,8 +1644,6 @@
 			global.view_variables_dont_expand=newval;
 		if("view_variables_no_assoc")
 			global.view_variables_no_assoc=newval;
-		if("visual_nets")
-			global.visual_nets=newval;
 		if("vsc")
 			global.vsc=newval;
 		if("wax_recipes")
@@ -1694,8 +1656,6 @@
 			global.whitelist=newval;
 		if("wireColours")
 			global.wireColours=newval;
-		if("world_uplinks")
-			global.world_uplinks=newval;
 		if("worths")
 			global.worths=newval;
 		if("wrapped_species_by_ref")
@@ -1824,9 +1784,6 @@
 	"alien_whitelist",
 	"allCasters",
 	"allConsoles",
-	"all_grabobjects",
-	"all_grabstates",
-	"all_languages",
 	"all_money_accounts",
 	"all_objectives",
 	"all_robolimbs",
@@ -1856,7 +1813,6 @@
 	"camera_alarm",
 	"camera_range_display_status",
 	"camera_repository",
-	"cameranet",
 	"can_call_ert",
 	"captain_announcement",
 	"channel_color_presets",
@@ -1944,7 +1900,6 @@
 	"jobMax",
 	"jobban_keylist",
 	"jobban_runonce",
-	"language_keys",
 	"last_chew",
 	"last_message_id",
 	"last_round_duration",
@@ -1961,7 +1916,6 @@
 	"magazine_icondata_keys",
 	"magazine_icondata_states",
 	"maint_all_access",
-	"mannequins_",
 	"map_count",
 	"map_sectors",
 	"maploader",
@@ -2017,7 +1971,6 @@
 	"photo_count",
 	"pipe_colors",
 	"plant_seed_sprites",
-	"playable_species",
 	"possible_changeling_IDs",
 	"power_alarm",
 	"powerinstances",
@@ -2058,7 +2011,6 @@
 	"server_name",
 	"severity_to_string",
 	"ship_engines",
-	"skin_styles_female_list",
 	"skipped_unit_tests",
 	"slot_equipment_priority",
 	"slot_flags_enumeration",
@@ -2119,14 +2071,12 @@
 	"ventcrawl_machinery",
 	"view_variables_dont_expand",
 	"view_variables_no_assoc",
-	"visual_nets",
 	"vsc",
 	"wax_recipes",
 	"weighted_mundaneevent_locations",
 	"weighted_randomevent_locations",
 	"whitelist",
 	"wireColours",
-	"world_uplinks",
 	"worths",
 	"wrapped_species_by_ref",
 	"z_levels",
