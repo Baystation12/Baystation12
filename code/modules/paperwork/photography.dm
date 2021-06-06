@@ -21,7 +21,8 @@
 /********
 * photo *
 ********/
-var/global/photo_count = 0
+
+GLOBAL_VAR_INIT(photo_count, 0)
 
 /obj/item/photo
 	name = "photo"
@@ -37,7 +38,7 @@ var/global/photo_count = 0
 	var/photo_size = 3
 
 /obj/item/photo/New()
-	id = photo_count++
+	id = GLOB.photo_count++
 
 /obj/item/photo/attack_self(mob/user as mob)
 	user.examinate(src)

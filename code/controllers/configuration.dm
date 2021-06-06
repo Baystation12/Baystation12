@@ -1,4 +1,4 @@
-var/list/gamemode_cache = list()
+GLOBAL_LIST_EMPTY(gamemode_cache)
 
 /datum/configuration
 	var/server_name = null				// server name (for world name / status)
@@ -222,7 +222,7 @@ var/list/gamemode_cache = list()
 		// their information, but it is the only way (at least that I know of).
 		var/datum/game_mode/M = new T()
 		if (M.config_tag)
-			gamemode_cache[M.config_tag] = M // So we don't instantiate them repeatedly.
+			GLOB.gamemode_cache[M.config_tag] = M // So we don't instantiate them repeatedly.
 			if(!(M.config_tag in modes))		// ensure each mode is added only once
 				log_misc("Adding game mode [M.name] ([M.config_tag]) to configuration.")
 				src.modes += M.config_tag
@@ -857,15 +857,15 @@ var/list/gamemode_cache = list()
 /datum/configuration/proc/pick_mode(mode_name)
 	// I wish I didn't have to instance the game modes in order to look up
 	// their information, but it is the only way (at least that I know of).
-	for (var/game_mode in gamemode_cache)
-		var/datum/game_mode/M = gamemode_cache[game_mode]
+	for (var/game_mode in GLOB.gamemode_cache)
+		var/datum/game_mode/M = GLOB.gamemode_cache[game_mode]
 		if (M.config_tag && M.config_tag == mode_name)
 			return M
 
 /datum/configuration/proc/get_runnable_modes()
 	var/list/runnable_modes = list()
-	for(var/game_mode in gamemode_cache)
-		var/datum/game_mode/M = gamemode_cache[game_mode]
+	for(var/game_mode in GLOB.gamemode_cache)
+		var/datum/game_mode/M = GLOB.gamemode_cache[game_mode]
 		if(M && !M.startRequirements() && !isnull(config.probabilities[M.config_tag]) && config.probabilities[M.config_tag] > 0)
 			runnable_modes[M.config_tag] = config.probabilities[M.config_tag]
 	return runnable_modes

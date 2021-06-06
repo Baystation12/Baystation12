@@ -265,7 +265,7 @@ Helpers
 		to_world("<B>The current game mode is Secret!</B>")
 		var/list/mode_names = list()
 		for (var/mode_tag in base_runnable_modes)
-			var/datum/game_mode/M = gamemode_cache[mode_tag]
+			var/datum/game_mode/M = GLOB.gamemode_cache[mode_tag]
 			if(M)
 				mode_names += M.name
 		if (config.secret_hide_possibilities)
