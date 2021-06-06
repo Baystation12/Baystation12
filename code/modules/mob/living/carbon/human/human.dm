@@ -1164,7 +1164,7 @@
 	species.handle_pre_spawn(src)
 
 	if(species.grab_type)
-		current_grab_type = all_grabobjects[species.grab_type]
+		current_grab_type = GLOB.all_grabobjects[species.grab_type]
 
 	if(species.base_color && default_colour)
 		//Apply colour.

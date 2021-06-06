@@ -1,39 +1,30 @@
-//Since it didn't really belong in any other category, I'm putting this here
-//This is for procs to replace all the goddamn 'in world's that are chilling around the code
+
 GLOBAL_LIST_EMPTY(cable_list) //Index for all cables, so that powernets don't have to look through the entire world all the time
 GLOBAL_LIST_EMPTY(landmarks_list) //list of all landmarks created
 GLOBAL_LIST_EMPTY(side_effects) //list of all medical sideeffects types by their names
 
-
 GLOBAL_LIST_EMPTY(all_species)
-
 GLOBAL_LIST_EMPTY(all_languages)
-//Languages/species/whitelist.
-var/global/list/language_keys[0]					// Table of say codes for all languages
-var/global/list/playable_species = list(SPECIES_HUMAN)    // A list of ALL playable species, whitelisted, latejoin or otherwise.
+GLOBAL_LIST_EMPTY(language_keys) // Table of say codes for all languages
+GLOBAL_LIST_INIT(playable_species, list(SPECIES_HUMAN)) // A list of ALL playable species, whitelisted, latejoin or otherwise.
 
-var/list/mannequins_
-
-// Grabs
-var/global/list/all_grabstates[0]
-var/global/list/all_grabobjects[0]
-
-// Uplinks
-var/list/obj/item/device/uplink/world_uplinks = list()
+GLOBAL_LIST_EMPTY(all_mannequins)
+GLOBAL_LIST_EMPTY(all_grabstates)
+GLOBAL_LIST_EMPTY(all_grabobjects)
+GLOBAL_LIST_EMPTY(all_uplinks)
 
 //Preferences stuff
 //Hairstyles
 GLOBAL_LIST_EMPTY(hair_styles_list)        //stores /datum/sprite_accessory/hair indexed by name
 GLOBAL_LIST_EMPTY(facial_hair_styles_list) //stores /datum/sprite_accessory/facial_hair indexed by name
 
-var/global/list/skin_styles_female_list = list()		//unused
 GLOBAL_LIST_EMPTY(body_marking_styles_list)		//stores /datum/sprite_accessory/marking indexed by name
 
 GLOBAL_DATUM_INIT(underwear, /datum/category_collection/underwear, new())
 
 // Visual nets
-var/list/datum/visualnet/visual_nets = list()
 var/datum/visualnet/camera/cameranet = new()
+GLOBAL_LIST_EMPTY(visual_nets)
 
 // Runes
 var/global/list/rune_list = new()
@@ -77,12 +68,12 @@ var/global/list/string_slot_flags = list(
 //////////////////////////
 
 /proc/get_mannequin(var/ckey)
-	if(!mannequins_)
-		mannequins_ = new()
-	. = mannequins_[ckey]
+	if(!GLOB.all_mannequins)
+		GLOB.all_mannequins = new()
+	. = GLOB.all_mannequins[ckey]
 	if(!.)
 		. = new/mob/living/carbon/human/dummy/mannequin()
-		mannequins_[ckey] = .
+		GLOB.all_mannequins[ckey] = .
 
 /hook/global_init/proc/makeDatumRefLists()
 	var/list/paths
@@ -123,7 +114,7 @@ var/global/list/string_slot_flags = list(
 	for (var/language_name in GLOB.all_languages)
 		var/datum/language/L = GLOB.all_languages[language_name]
 		if(!(L.flags & NONGLOBAL))
-			language_keys[lowertext(L.key)] = L
+			GLOB.language_keys[lowertext(L.key)] = L
 
 	var/rkey = 0
 	paths = typesof(/datum/species)
@@ -139,22 +130,22 @@ var/global/list/string_slot_flags = list(
 		S.race_key = rkey //Used in mob icon caching.
 		GLOB.all_species[S.name] = S
 		if(!(S.spawn_flags & SPECIES_IS_RESTRICTED))
-			playable_species += S.name
+			GLOB.playable_species += S.name
 
 	//Grabs
 	paths = typesof(/datum/grab) - /datum/grab
 	for(var/T in paths)
 		var/datum/grab/G = new T
 		if(G.state_name)
-			all_grabstates[G.state_name] = G
+			GLOB.all_grabstates[G.state_name] = G
 
 	paths = typesof(/obj/item/grab) - /obj/item/grab
 	for(var/T in paths)
 		var/obj/item/grab/G = T
-		all_grabobjects[initial(G.type_name)] = T
+		GLOB.all_grabobjects[initial(G.type_name)] = T
 
-	for(var/grabstate_name in all_grabstates)
-		var/datum/grab/G = all_grabstates[grabstate_name]
+	for(var/grabstate_name in GLOB.all_grabstates)
+		var/datum/grab/G = GLOB.all_grabstates[grabstate_name]
 		G.refresh_updown()
 
 	return 1

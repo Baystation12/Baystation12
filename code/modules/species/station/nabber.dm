@@ -391,7 +391,7 @@
 	var/datum/gender/T = gender_datums[H.get_gender()]
 	H.pulling_punches = !H.pulling_punches
 	if(H.pulling_punches)
-		H.current_grab_type = all_grabobjects[GRAB_NORMAL]
+		H.current_grab_type = GLOB.all_grabobjects[GRAB_NORMAL]
 		if(forced)
 			to_chat(H, "<span class='notice'>You can't keep your hunting arms prepared and they drop, forcing you to use your manipulation arms.</span>")
 			if(!hidden)
@@ -403,7 +403,7 @@
 				H.visible_message("<span class='notice'>[H] seems to relax as [T.he] folds [T.his] massive curved arms to [T.his] thorax and reaches out \
 				with [T.his] small handlike limbs.</span>")
 	else
-		H.current_grab_type = all_grabobjects[GRAB_NAB]
+		H.current_grab_type = GLOB.all_grabobjects[GRAB_NAB]
 		to_chat(H, "<span class='notice'>You pull in your manipulation arms, dropping any items and unfolding your massive hunting arms in preparation of grabbing prey.</span>")
 		if(!hidden)
 			H.visible_message("<span class='warning'>[H] tenses as [T.he] brings [T.his] smaller arms in close to [T.his] body. [T.His] two massive spiked arms reach \

@@ -110,7 +110,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	pref.b_eyes			= sanitize_integer(pref.b_eyes, 0, 255, initial(pref.b_eyes))
 	pref.b_type			= sanitize_text(pref.b_type, initial(pref.b_type))
 
-	if(!pref.species || !(pref.species in playable_species))
+	if(!pref.species || !(pref.species in GLOB.playable_species))
 		pref.species = SPECIES_HUMAN
 
 	var/datum/species/mob_species = GLOB.all_species[pref.species]
@@ -332,7 +332,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			return TOPIC_REFRESH
 
 	else if(href_list["show_species"])
-		var/choice = input("Which species would you like to look at?") as null|anything in playable_species
+		var/choice = input("Which species would you like to look at?") as null | anything in GLOB.playable_species
 		if(choice)
 			var/datum/species/current_species = GLOB.all_species[choice]
 			show_browser(user, current_species.get_description(), "window=species;size=700x400")
@@ -341,7 +341,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	else if(href_list["set_species"])
 
 		var/list/species_to_pick = list()
-		for(var/species in playable_species)
+		for(var/species in GLOB.playable_species)
 			if(!check_rights(R_ADMIN, 0) && config.usealienwhitelist)
 				var/datum/species/current_species = GLOB.all_species[species]
 				if(!(current_species.spawn_flags & SPECIES_CAN_JOIN))

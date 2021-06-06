@@ -272,7 +272,7 @@
 	if(!grab_tag)
 		G = new attacker.current_grab_type(attacker, victim)
 	else
-		var/obj/item/grab/given_grab_type = all_grabobjects[grab_tag]
+		var/obj/item/grab/given_grab_type = GLOB.all_grabobjects[grab_tag]
 		G = new given_grab_type(attacker, victim)
 	if(QDELETED(G))
 		return 0

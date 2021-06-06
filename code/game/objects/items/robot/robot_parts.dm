@@ -176,7 +176,7 @@
 
 /obj/item/robot_parts/chest/proc/GetCyborgSpecies()
 	. = list()
-	for(var/N in playable_species)
+	for(var/N in GLOB.playable_species)
 		var/datum/species/S = GLOB.all_species[N]
 		if(S.spawn_flags & SPECIES_NO_FBP_CONSTRUCTION)
 			continue

@@ -11,12 +11,12 @@
 
 /datum/visualnet/New()
 	..()
-	visual_nets += src
+	GLOB.visual_nets += src
 	if(!valid_source_types)
 		valid_source_types = list()
 
 /datum/visualnet/Destroy()
-	visual_nets -= src
+	GLOB.visual_nets -= src
 	for(var/source in sources)
 		remove_source(source, FALSE)
 	sources.Cut()
