@@ -10,7 +10,7 @@
 	var/list/language_datums = list()
 	if(LAZYLEN(assists_languages))
 		for(var/L in assists_languages)
-			var/lang = all_languages[L]
+			var/lang = GLOB.all_languages[L]
 			if(lang) language_datums[lang] = TRUE
 	assists_languages = language_datums
 

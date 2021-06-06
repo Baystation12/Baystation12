@@ -16,7 +16,7 @@
 	var/datum/antagonist/antag = mind && player_is_antag(mind)
 	if (antag && antag.required_language)
 		add_language(antag.required_language)
-		set_default_language(all_languages[antag.required_language])
+		set_default_language(GLOB.all_languages[antag.required_language])
 	reset_hair()
 	return 1
 
@@ -150,15 +150,15 @@
 		if (!istype(culture))
 			continue
 		if (culture.language)
-			result[culture.language] = all_languages[culture.language]
+			result[culture.language] = GLOB.all_languages[culture.language]
 		if (culture.name_language)
-			result[culture.name_language] = all_languages[culture.name_language]
+			result[culture.name_language] = GLOB.all_languages[culture.name_language]
 		if (culture.default_language)
-			result[culture.default_language] = all_languages[culture.default_language]
+			result[culture.default_language] = GLOB.all_languages[culture.default_language]
 		for (var/lang_key in culture.secondary_langs)
-			result[lang_key] = all_languages[lang_key]
+			result[lang_key] = GLOB.all_languages[lang_key]
 		for (var/lang_key in culture.additional_langs)
-			result[lang_key] = all_languages[lang_key]
+			result[lang_key] = GLOB.all_languages[lang_key]
 	return result
 
 /mob/living/carbon/human/proc/generate_valid_species(var/check_whitelist = 1, var/list/whitelist = list(), var/list/blacklist = list())

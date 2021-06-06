@@ -49,7 +49,7 @@
 /obj/item/device/radio/headset/handle_message_mode(mob/living/M as mob, message, channel)
 	if (channel == "special")
 		if (translate_binary)
-			var/datum/language/binary = all_languages[LANGUAGE_ROBOT_GLOBAL]
+			var/datum/language/binary = GLOB.all_languages[LANGUAGE_ROBOT_GLOBAL]
 			binary.broadcast(M, message)
 		return null
 

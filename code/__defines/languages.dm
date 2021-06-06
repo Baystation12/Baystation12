@@ -28,6 +28,7 @@
 #define LANGUAGE_ALIUM             "Alium"
 
 //Other
+#define LANGUAGE_AUDIBLE_EMOTE     "Noise"
 #define LANGUAGE_PRIMITIVE         "Primitive"
 #define LANGUAGE_SIGN              "Sign Language"
 #define LANGUAGE_ROBOT_GLOBAL      "Robot Talk"

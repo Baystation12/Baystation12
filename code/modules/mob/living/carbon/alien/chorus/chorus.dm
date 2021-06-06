@@ -33,7 +33,7 @@
 				chorus = ct
 	set_chorus(chorus)
 	add_language(LANGUAGE_CULT)
-	var/datum/language/l = all_languages[LANGUAGE_CULT]
+	var/datum/language/l = GLOB.all_languages[LANGUAGE_CULT]
 	name = l.get_random_name()
 	verbs += /mob/living/proc/ventcrawl
 

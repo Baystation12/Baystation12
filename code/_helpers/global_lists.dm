@@ -7,8 +7,8 @@ GLOBAL_LIST_EMPTY(side_effects) //list of all medical sideeffects types by their
 
 GLOBAL_LIST_EMPTY(all_species)
 
+GLOBAL_LIST_EMPTY(all_languages)
 //Languages/species/whitelist.
-var/global/list/datum/language/all_languages = list()
 var/global/list/language_keys[0]					// Table of say codes for all languages
 var/global/list/playable_species = list(SPECIES_HUMAN)    // A list of ALL playable species, whitelisted, latejoin or otherwise.
 
@@ -118,10 +118,10 @@ var/global/list/string_slot_flags = list(
 	paths = typesof(/datum/language)-/datum/language
 	for(var/T in paths)
 		var/datum/language/L = new T
-		all_languages[L.name] = L
+		GLOB.all_languages[L.name] = L
 
-	for (var/language_name in all_languages)
-		var/datum/language/L = all_languages[language_name]
+	for (var/language_name in GLOB.all_languages)
+		var/datum/language/L = GLOB.all_languages[language_name]
 		if(!(L.flags & NONGLOBAL))
 			language_keys[lowertext(L.key)] = L
 

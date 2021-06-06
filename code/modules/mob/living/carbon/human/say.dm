@@ -233,7 +233,7 @@
 /mob/living/carbon/human/parse_language(var/message)
 	var/prefix = copytext(message,1,2)
 	if(length(message) >= 1 && prefix == get_prefix_key(/decl/prefix/audible_emote))
-		return all_languages["Noise"]
+		return GLOB.all_languages[LANGUAGE_AUDIBLE_EMOTE]
 
 	if(length(message) >= 2 && is_language_prefix(prefix))
 		var/language_prefix = lowertext(copytext(message, 2 ,3))

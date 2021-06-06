@@ -1277,16 +1277,16 @@
 		var/decl/cultural_info/check = cultural_info[thing]
 		if(istype(check))
 			if(check.default_language)
-				free_languages    |= all_languages[check.default_language]
-				default_languages |= all_languages[check.default_language]
+				free_languages    |= GLOB.all_languages[check.default_language]
+				default_languages |= GLOB.all_languages[check.default_language]
 			if(check.language)
-				free_languages    |= all_languages[check.language]
+				free_languages    |= GLOB.all_languages[check.language]
 			if(check.name_language)
-				free_languages    |= all_languages[check.name_language]
+				free_languages    |= GLOB.all_languages[check.name_language]
 			for(var/lang in check.additional_langs)
-				free_languages    |= all_languages[lang]
+				free_languages    |= GLOB.all_languages[lang]
 			for(var/lang in check.get_spoken_languages())
-				permitted_languages |= all_languages[lang]
+				permitted_languages |= GLOB.all_languages[lang]
 
 	for(var/thing in languages)
 		var/datum/language/lang = thing

@@ -78,7 +78,7 @@
 		return FALSE
 
 	if (!istype(new_language))
-		new_language = global.all_languages[new_language]
+		new_language = GLOB.all_languages[new_language]
 	if (!istype(new_language))
 		return FALSE
 
@@ -123,8 +123,8 @@
 
 	var/list/selectable_languages = list()
 	if (admin_force)
-		for (var/key in global.all_languages)
-			var/datum/language/L = global.all_languages[key]
+		for (var/key in GLOB.all_languages)
+			var/datum/language/L = GLOB.all_languages[key]
 			if (L.has_written_form)
 				selectable_languages += L
 	else

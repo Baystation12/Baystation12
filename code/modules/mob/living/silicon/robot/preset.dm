@@ -54,7 +54,7 @@
 	remove_language(LANGUAGE_HUMAN_EURO)
 	remove_language(LANGUAGE_EAL)
 	remove_language(LANGUAGE_ROBOT_GLOBAL)
-	default_language = all_languages[LANGUAGE_MANTID_NONVOCAL]
+	default_language = GLOB.all_languages[LANGUAGE_MANTID_NONVOCAL]
 
 /mob/living/silicon/robot/flying/ascent/examine(mob/user)
 	. = ..()

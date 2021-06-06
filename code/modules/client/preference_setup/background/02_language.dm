@@ -73,8 +73,8 @@
 				for(var/checklang in culture.secondary_langs)
 					allowed_languages[checklang] = TRUE
 
-	for(var/thing in all_languages)
-		var/datum/language/lang = all_languages[thing]
+	for(var/thing in GLOB.all_languages)
+		var/datum/language/lang = GLOB.all_languages[thing]
 		if(user.has_admin_rights() || (!(lang.flags & RESTRICTED) && (lang.flags & WHITELISTED) && is_alien_whitelisted(user, lang)))
 			allowed_languages[thing] = TRUE
 
@@ -91,7 +91,7 @@
 	var/preference_mob = preference_mob()
 	rebuild_language_cache(preference_mob)
 	for(var/L in pref.alternate_languages)
-		var/datum/language/lang = all_languages[L]
+		var/datum/language/lang = GLOB.all_languages[L]
 		if(!lang || !is_allowed_language(preference_mob, lang))
 			pref.alternate_languages -= L
 	if(LAZYLEN(free_languages))
@@ -111,7 +111,7 @@
 			if(free_languages[lang])
 				LAZYADD(., "- [lang] (required).<br>")
 			else
-				LAZYADD(., "- [lang] <a href='?src=\ref[src];remove_language=[i]'>Remove.</a> <span style='color:#ff0000;font-style:italic;'>[all_languages[lang].warning]</span><br>")
+				LAZYADD(., "- [lang] <a href='?src=\ref[src];remove_language=[i]'>Remove.</a> <span style='color:#ff0000;font-style:italic;'>[GLOB.all_languages[lang].warning]</span><br>")
 	if(pref.alternate_languages.len < MAX_LANGUAGES)
 		var/remaining_langs = MAX_LANGUAGES - pref.alternate_languages.len
 		LAZYADD(., "- <a href='?src=\ref[src];add_language=1'>add</a> ([remaining_langs] remaining)<br>")

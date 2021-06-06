@@ -75,11 +75,11 @@
 
 	if (required_language)
 		H.add_language(required_language)
-		H.set_default_language(all_languages[required_language])
+		H.set_default_language(GLOB.all_languages[required_language])
 
 	if (!H.languages.len)
 		H.add_language(LANGUAGE_SPACER)
-		H.set_default_language(all_languages[LANGUAGE_SPACER])
+		H.set_default_language(GLOB.all_languages[LANGUAGE_SPACER])
 
 	if(psi_latency_chance && prob(psi_latency_chance))
 		H.set_psi_rank(pick(PSI_COERCION, PSI_REDACTION, PSI_ENERGISTICS, PSI_PSYCHOKINESIS), 1, defer_update = TRUE)
