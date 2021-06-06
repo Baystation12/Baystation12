@@ -26,15 +26,13 @@ GLOBAL_DATUM_INIT(underwear, /datum/category_collection/underwear, new())
 GLOBAL_LIST_EMPTY(visual_nets)
 GLOBAL_DATUM_INIT(cameranet, /datum/visualnet/camera, new())
 
-// Runes
-var/global/list/rune_list = new()
-var/global/list/endgame_exits = list()
-var/global/list/endgame_safespawns = list()
+GLOBAL_LIST_EMPTY(endgame_exits)
+GLOBAL_LIST_EMPTY(endgame_safespawns)
 
-var/global/list/syndicate_access = list(access_maint_tunnels, access_syndicate, access_external_airlocks)
+GLOBAL_LIST_INIT(syndicate_access, list(access_maint_tunnels, access_syndicate, access_external_airlocks))
 
 // Strings which corraspond to bodypart covering flags, useful for outputting what something covers.
-var/global/list/string_part_flags = list(
+GLOBAL_LIST_INIT(string_part_flags, list(
 	"head" = HEAD,
 	"face" = FACE,
 	"eyes" = EYES,
@@ -44,10 +42,10 @@ var/global/list/string_part_flags = list(
 	"feet" = FEET,
 	"arms" = ARMS,
 	"hands" = HANDS
-)
+))
 
 // Strings which corraspond to slot flags, useful for outputting what slot something is.
-var/global/list/string_slot_flags = list(
+GLOBAL_LIST_INIT(string_slot_flags, list(
 	"back" = SLOT_BACK,
 	"face" = SLOT_MASK,
 	"waist" = SLOT_BELT,
@@ -61,7 +59,7 @@ var/global/list/string_slot_flags = list(
 	"body" = SLOT_ICLOTHING,
 	"uniform" = SLOT_TIE,
 	"holster" = SLOT_HOLSTER
-)
+))
 
 //////////////////////////
 /////Initial Building/////
@@ -151,16 +149,16 @@ var/global/list/string_slot_flags = list(
 	return 1
 
 //*** params cache
-var/global/list/paramslist_cache = list()
+GLOBAL_LIST_EMPTY(paramslist_cache)
 
 #define cached_key_number_decode(key_number_data) cached_params_decode(key_number_data, /proc/key_number_decode)
 #define cached_number_list_decode(number_list_data) cached_params_decode(number_list_data, /proc/number_list_decode)
 
 /proc/cached_params_decode(var/params_data, var/decode_proc)
-	. = paramslist_cache[params_data]
+	. = GLOB.paramslist_cache[params_data]
 	if(!.)
 		. = call(decode_proc)(params_data)
-		paramslist_cache[params_data] = .
+		GLOB.paramslist_cache[params_data] = .
 
 /proc/key_number_decode(var/key_number_data)
 	var/list/L = params2list(key_number_data)

@@ -55,11 +55,11 @@
 			delete_me = 1
 			return
 		if("endgame_exit")
-			endgame_safespawns += loc
+			GLOB.endgame_safespawns += loc
 			delete_me = 1
 			return
 		if("bluespacerift")
-			endgame_exits += loc
+			GLOB.endgame_exits += loc
 			delete_me = 1
 			return
 

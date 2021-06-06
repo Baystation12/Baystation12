@@ -38,10 +38,10 @@
 		var/mob/living/L = A
 		if(L.buckled && istype(L.buckled,/obj/structure/bed/))
 			var/turf/O = L.buckled
-			do_teleport(O, pick(endgame_safespawns))
+			do_teleport(O, pick(GLOB.endgame_safespawns))
 			L.forceMove(O.loc)
 		else
-			do_teleport(L, pick(endgame_safespawns)) //dead-on precision
+			do_teleport(L, pick(GLOB.endgame_safespawns)) //dead-on precision
 
 	else if (isturf(A))
 		var/turf/T = A
