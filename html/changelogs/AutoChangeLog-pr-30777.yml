@@ -1,0 +1,7 @@
+author: Ilysen
+delete-after: true
+changes:
+  - bugfix: Being deleted in build mode should no longer crash your game.
+  - tweak: 'For admins: build mode now has a confirmation prompt if you attempt to
+      delete a player with an active ckey, and gives them a unique message informing
+      them about what happened if you do.'
