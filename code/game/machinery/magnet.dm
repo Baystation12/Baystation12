@@ -35,8 +35,8 @@
 		center = T
 
 		spawn(10)	// must wait for map loading to finish
-			if(radio_controller)
-				radio_controller.add_object(src, freq, RADIO_MAGNETS)
+			if(GLOB.radio_controller)
+				GLOB.radio_controller.add_object(src, freq, RADIO_MAGNETS)
 
 		spawn()
 			magnetic_process()
@@ -190,8 +190,8 @@
 		pulling = 0
 
 /obj/machinery/magnetic_module/Destroy()
-	if(radio_controller)
-		radio_controller.remove_object(src, freq)
+	if(GLOB.radio_controller)
+		GLOB.radio_controller.remove_object(src, freq)
 	..()
 
 /obj/machinery/magnetic_controller
@@ -228,8 +228,8 @@
 
 
 		spawn(45)	// must wait for map loading to finish
-			if(radio_controller)
-				radio_connection = radio_controller.add_object(src, frequency, RADIO_MAGNETS)
+			if(GLOB.radio_controller)
+				radio_connection = GLOB.radio_controller.add_object(src, frequency, RADIO_MAGNETS)
 
 
 		if(path) // check for default path
@@ -401,6 +401,6 @@
 			// there doesn't HAVE to be separators but it makes paths syntatically visible
 
 /obj/machinery/magnetic_controller/Destroy()
-	if(radio_controller)
-		radio_controller.remove_object(src, frequency)
+	if(GLOB.radio_controller)
+		GLOB.radio_controller.remove_object(src, frequency)
 	..()

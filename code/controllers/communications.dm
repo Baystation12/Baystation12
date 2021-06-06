@@ -1,7 +1,7 @@
 /*
   HOW IT WORKS
 
-  The radio_controller is a global object maintaining all radio transmissions, think about it as about "ether".
+  The radio controller is a global object maintaining all radio transmissions, think about it as about "ether".
   Note that walkie-talkie, intercoms and headsets handle transmission using nonstandard way.
   procs:
 
@@ -122,7 +122,7 @@
 
 
 /hook/startup/proc/createRadioController()
-	radio_controller = new /datum/controller/radio()
+	GLOB.radio_controller = new /datum/controller/radio()
 	return 1
 
 //callback used by objects to react to incoming radio signals

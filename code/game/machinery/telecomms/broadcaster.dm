@@ -310,7 +310,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 
 	else if(data == 3)
 		for(var/antag_freq in GLOB.ANTAG_FREQS)
-			var/datum/radio_frequency/antag_connection = radio_controller.return_frequency(antag_freq)
+			var/datum/radio_frequency/antag_connection = GLOB.radio_controller.return_frequency(antag_freq)
 			for (var/obj/item/device/radio/R in antag_connection.devices["[RADIO_CHAT]"])
 				if(R.intercept && R.receive_range(antag_freq, level) > -1)
 					radios += R
@@ -446,7 +446,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		var/mob/living/carbon/human/H = new
 		M = H
 
-	var/datum/radio_frequency/connection = radio_controller.return_frequency(frequency)
+	var/datum/radio_frequency/connection = GLOB.radio_controller.return_frequency(frequency)
 
 	var/display_freq = connection.frequency
 
@@ -478,7 +478,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 
 	else if(data == 3)
 		for(var/freq in GLOB.ANTAG_FREQS)
-			var/datum/radio_frequency/antag_connection = radio_controller.return_frequency(freq)
+			var/datum/radio_frequency/antag_connection = GLOB.radio_controller.return_frequency(freq)
 			for (var/obj/item/device/radio/R in antag_connection.devices["[RADIO_CHAT]"])
 				var/turf/position = get_turf(R)
 				if(position && position.z == level)

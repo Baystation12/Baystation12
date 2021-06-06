@@ -75,4 +75,4 @@ GLOBAL_LIST_INIT(all_selectable_radio_filters, list(
 	RADIO_MAGNETS
 ))
 
-var/global/datum/controller/radio/radio_controller
+GLOBAL_DATUM(radio_controller, /datum/controller/radio)

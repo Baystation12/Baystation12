@@ -35,8 +35,8 @@
 	set_frequency(frequency)
 
 obj/machinery/computer/air_control/Destroy()
-	if(radio_controller)
-		radio_controller.remove_object(src, frequency)
+	if(GLOB.radio_controller)
+		GLOB.radio_controller.remove_object(src, frequency)
 	..()
 
 /obj/machinery/computer/air_control/interface_interact(mob/user)
@@ -129,9 +129,9 @@ obj/machinery/computer/air_control/Destroy()
 		..(signal)
 
 /obj/machinery/computer/air_control/proc/set_frequency(new_frequency)
-	radio_controller.remove_object(src, frequency)
+	GLOB.radio_controller.remove_object(src, frequency)
 	frequency = new_frequency
-	radio_connection = radio_controller.add_object(src, frequency, RADIO_ATMOSIA)
+	radio_connection = GLOB.radio_controller.add_object(src, frequency, RADIO_ATMOSIA)
 
 /obj/machinery/computer/air_control/OnTopic(mob/user, href_list, datum/topic_state/state)
 	if(..())

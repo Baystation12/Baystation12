@@ -50,15 +50,15 @@
 	var/status_display_show_alert_border = FALSE
 
 /obj/machinery/status_display/Destroy()
-	if(radio_controller)
-		radio_controller.remove_object(src,frequency)
+	if(GLOB.radio_controller)
+		GLOB.radio_controller.remove_object(src,frequency)
 	return ..()
 
 // register for radio system
 /obj/machinery/status_display/Initialize()
 	. = ..()
-	if(radio_controller)
-		radio_controller.add_object(src, frequency)
+	if(GLOB.radio_controller)
+		GLOB.radio_controller.add_object(src, frequency)
 
 // timed process
 /obj/machinery/status_display/Process()

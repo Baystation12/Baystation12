@@ -27,7 +27,7 @@
 			debug_variables(GLOB.sun)
 			SSstatistics.add_field_details("admin_verb","DSun")
 		if("Radio")
-			debug_variables(radio_controller)
+			debug_variables(GLOB.radio_controller)
 			SSstatistics.add_field_details("admin_verb","DRadio")
 		if("Evacuation")
 			debug_variables(GLOB.evacuation_controller)

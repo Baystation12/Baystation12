@@ -117,10 +117,10 @@
 	if(!surpress_send) send_status()
 
 /obj/machinery/door/airlock/proc/set_frequency(new_frequency)
-	radio_controller.remove_object(src, frequency)
+	GLOB.radio_controller.remove_object(src, frequency)
 	if(new_frequency)
 		frequency = new_frequency
-		radio_connection = radio_controller.add_object(src, frequency, RADIO_AIRLOCK)
+		radio_connection = GLOB.radio_controller.add_object(src, frequency, RADIO_AIRLOCK)
 
 
 /obj/machinery/door/airlock/Initialize()
@@ -133,12 +133,12 @@
 /obj/machinery/door/airlock/New()
 	..()
 
-	if(radio_controller)
+	if(GLOB.radio_controller)
 		set_frequency(frequency)
 
 /obj/machinery/door/airlock/Destroy()
-	if(frequency && radio_controller)
-		radio_controller.remove_object(src,frequency)
+	if(frequency && GLOB.radio_controller)
+		GLOB.radio_controller.remove_object(src,frequency)
 	return ..()
 
 /obj/machinery/airlock_sensor
@@ -201,9 +201,9 @@
 			update_icon()
 
 /obj/machinery/airlock_sensor/proc/set_frequency(new_frequency)
-	radio_controller.remove_object(src, frequency)
+	GLOB.radio_controller.remove_object(src, frequency)
 	frequency = new_frequency
-	radio_connection = radio_controller.add_object(src, frequency, RADIO_AIRLOCK)
+	radio_connection = GLOB.radio_controller.add_object(src, frequency, RADIO_AIRLOCK)
 
 /obj/machinery/airlock_sensor/Initialize()
 	set_frequency(frequency)
@@ -211,12 +211,12 @@
 
 /obj/machinery/airlock_sensor/New()
 	..()
-	if(radio_controller)
+	if(GLOB.radio_controller)
 		set_frequency(frequency)
 
 /obj/machinery/airlock_sensor/Destroy()
-	if(radio_controller)
-		radio_controller.remove_object(src,frequency)
+	if(GLOB.radio_controller)
+		GLOB.radio_controller.remove_object(src,frequency)
 	return ..()
 
 /obj/machinery/airlock_sensor/airlock_interior
@@ -270,9 +270,9 @@
 	return TRUE
 
 /obj/machinery/access_button/proc/set_frequency(new_frequency)
-	radio_controller.remove_object(src, frequency)
+	GLOB.radio_controller.remove_object(src, frequency)
 	frequency = new_frequency
-	radio_connection = radio_controller.add_object(src, frequency, RADIO_AIRLOCK)
+	radio_connection = GLOB.radio_controller.add_object(src, frequency, RADIO_AIRLOCK)
 
 
 /obj/machinery/access_button/Initialize()
@@ -283,12 +283,12 @@
 /obj/machinery/access_button/New()
 	..()
 
-	if(radio_controller)
+	if(GLOB.radio_controller)
 		set_frequency(frequency)
 
 /obj/machinery/access_button/Destroy()
-	if(radio_controller)
-		radio_controller.remove_object(src, frequency)
+	if(GLOB.radio_controller)
+		GLOB.radio_controller.remove_object(src, frequency)
 	return ..()
 
 /obj/machinery/access_button/airlock_interior

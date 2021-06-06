@@ -44,9 +44,9 @@
 	frequency = HAIL_FREQ
 
 /obj/item/device/radio/proc/set_frequency(new_frequency)
-	radio_controller.remove_object(src, frequency)
+	GLOB.radio_controller.remove_object(src, frequency)
 	frequency = new_frequency
-	radio_connection = radio_controller.add_object(src, frequency, RADIO_CHAT)
+	radio_connection = GLOB.radio_controller.add_object(src, frequency, RADIO_CHAT)
 
 /obj/item/device/radio/Initialize()
 	. = ..()
@@ -64,7 +64,7 @@
 		default_frequency = frequency
 
 	for (var/ch_name in channels)
-		secure_radio_connections[ch_name] = radio_controller.add_object(src, GLOB.radiochannels[ch_name],  RADIO_CHAT)
+		secure_radio_connections[ch_name] = GLOB.radio_controller.add_object(src, GLOB.radiochannels[ch_name],  RADIO_CHAT)
 
 /obj/item/device/radio/Process()
 	if(power_usage && on) //radio will use power and is on
@@ -84,10 +84,10 @@
 /obj/item/device/radio/Destroy()
 	QDEL_NULL(wires)
 	GLOB.listening_objects -= src
-	if(radio_controller)
-		radio_controller.remove_object(src, frequency)
+	if(GLOB.radio_controller)
+		GLOB.radio_controller.remove_object(src, frequency)
 		for (var/ch_name in channels)
-			radio_controller.remove_object(src, GLOB.radiochannels[ch_name])
+			GLOB.radio_controller.remove_object(src, GLOB.radiochannels[ch_name])
 	if(get_cell())
 		STOP_PROCESSING(SSobj, src)
 	return ..()
@@ -686,7 +686,7 @@
 	if(isScrewdriver(W))
 		if(keyslot)
 			for(var/ch_name in channels)
-				radio_controller.remove_object(src, GLOB.radiochannels[ch_name])
+				GLOB.radio_controller.remove_object(src, GLOB.radiochannels[ch_name])
 				secure_radio_connections[ch_name] = null
 
 			if(keyslot)
@@ -732,11 +732,11 @@
 			src.syndie = 1
 
 	for (var/ch_name in src.channels)
-		if(!radio_controller)
+		if(!GLOB.radio_controller)
 			src.SetName("broken radio")
 			return
 
-		secure_radio_connections[ch_name] = radio_controller.add_object(src, GLOB.radiochannels[ch_name],  RADIO_CHAT)
+		secure_radio_connections[ch_name] = GLOB.radio_controller.add_object(src, GLOB.radiochannels[ch_name],  RADIO_CHAT)
 
 /obj/item/device/radio/borg/Topic(href, href_list)
 	if(..())
@@ -804,14 +804,14 @@
 		ui.open()
 
 /obj/item/device/radio/proc/config(op)
-	if(radio_controller)
+	if(GLOB.radio_controller)
 		for (var/ch_name in channels)
-			radio_controller.remove_object(src, GLOB.radiochannels[ch_name])
+			GLOB.radio_controller.remove_object(src, GLOB.radiochannels[ch_name])
 	secure_radio_connections = new
 	channels = op
-	if(radio_controller)
+	if(GLOB.radio_controller)
 		for (var/ch_name in op)
-			secure_radio_connections[ch_name] = radio_controller.add_object(src, GLOB.radiochannels[ch_name],  RADIO_CHAT)
+			secure_radio_connections[ch_name] = GLOB.radio_controller.add_object(src, GLOB.radiochannels[ch_name],  RADIO_CHAT)
 	return
 
 /obj/item/device/radio/map_preset
