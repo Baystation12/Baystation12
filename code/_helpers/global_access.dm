@@ -165,8 +165,6 @@
 			return global.Tier3Runes;
 		if("Tier4Runes")
 			return global.Tier4Runes;
-		if("WALLITEMS")
-			return global.WALLITEMS;
 		if("_all_globals")
 			return global._all_globals;
 		if("_client_preferences")
@@ -319,8 +317,6 @@
 			return global.comm_message_listeners;
 		if("command_announcement")
 			return global.command_announcement;
-		if("common_tools")
-			return global.common_tools;
 		if("config")
 			return global.config;
 		if("contamination_overlay")
@@ -369,18 +365,12 @@
 			return global.dummy_lighting_corner;
 		if("empty_playable_ai_cores")
 			return global.empty_playable_ai_cores;
-		if("endgame_exits")
-			return global.endgame_exits;
-		if("endgame_safespawns")
-			return global.endgame_safespawns;
 		if("ert_base_chance")
 			return global.ert_base_chance;
 		if("escape_pods")
 			return global.escape_pods;
 		if("escape_pods_by_name")
 			return global.escape_pods_by_name;
-		if("evacuation_controller")
-			return global.evacuation_controller;
 		if("event_last_fired")
 			return global.event_last_fired;
 		if("eventchance")
@@ -429,8 +419,6 @@
 			return global.gas_data;
 		if("gear_datums")
 			return global.gear_datums;
-		if("gear_tweak_free_color_choice_")
-			return global.gear_tweak_free_color_choice_;
 		if("gender_datums")
 			return global.gender_datums;
 		if("ghost_darkness_images")
@@ -473,8 +461,6 @@
 			return global.last_chew;
 		if("last_message_id")
 			return global.last_message_id;
-		if("last_round_duration")
-			return global.last_round_duration;
 		if("light_overlay_cache")
 			return global.light_overlay_cache;
 		if("lighting_overlays_initialised")
@@ -537,8 +523,6 @@
 			return global.meteors_threatening;
 		if("mil_branches")
 			return global.mil_branches;
-		if("mimic_defines")
-			return global.mimic_defines;
 		if("mining_floors")
 			return global.mining_floors;
 		if("mining_walls")
@@ -571,10 +555,6 @@
 			return global.newscaster_standard_feeds;
 		if("next_account_number")
 			return global.next_account_number;
-		if("next_duration_update")
-			return global.next_duration_update;
-		if("next_station_date_change")
-			return global.next_station_date_change;
 		if("ntnet_card_uid")
 			return global.ntnet_card_uid;
 		if("ntnet_global")
@@ -603,8 +583,6 @@
 			return global.pai_emotions;
 		if("pai_software_by_key")
 			return global.pai_software_by_key;
-		if("paramslist_cache")
-			return global.paramslist_cache;
 		if("photo_count")
 			return global.photo_count;
 		if("pipe_colors")
@@ -673,12 +651,6 @@
 			return global.robot_hud_colours;
 		if("robot_inventory")
 			return global.robot_inventory;
-		if("round_start_time")
-			return global.round_start_time;
-		if("roundstart_hour")
-			return global.roundstart_hour;
-		if("rune_list")
-			return global.rune_list;
 		if("same_wires")
 			return global.same_wires;
 		if("send_emergency_team")
@@ -733,16 +705,10 @@
 			return global.sqlport;
 		if("station_account")
 			return global.station_account;
-		if("station_date")
-			return global.station_date;
 		if("stool_cache")
 			return global.stool_cache;
 		if("stored_shock_by_ref")
 			return global.stored_shock_by_ref;
-		if("string_part_flags")
-			return global.string_part_flags;
-		if("string_slot_flags")
-			return global.string_slot_flags;
 		if("supply_drop")
 			return global.supply_drop;
 		if("supply_methods_")
@@ -763,8 +729,6 @@
 			return global.swapmaps_loaded;
 		if("swapmaps_mode")
 			return global.swapmaps_mode;
-		if("syndicate_access")
-			return global.syndicate_access;
 		if("tail_icon_cache")
 			return global.tail_icon_cache;
 		if("tank_gauge_cache")
@@ -785,8 +749,6 @@
 			return global.total_lighting_sources;
 		if("total_unit_tests")
 			return global.total_unit_tests;
-		if("transfer_controller")
-			return global.transfer_controller;
 		if("turbolifts")
 			return global.turbolifts;
 		if("turret_icons")
@@ -998,8 +960,6 @@
 			global.Tier3Runes=newval;
 		if("Tier4Runes")
 			global.Tier4Runes=newval;
-		if("WALLITEMS")
-			global.WALLITEMS=newval;
 		if("_all_globals")
 			global._all_globals=newval;
 		if("_client_preferences")
@@ -1152,8 +1112,6 @@
 			global.comm_message_listeners=newval;
 		if("command_announcement")
 			global.command_announcement=newval;
-		if("common_tools")
-			global.common_tools=newval;
 		if("config")
 			global.config=newval;
 		if("contamination_overlay")
@@ -1202,18 +1160,12 @@
 			global.dummy_lighting_corner=newval;
 		if("empty_playable_ai_cores")
 			global.empty_playable_ai_cores=newval;
-		if("endgame_exits")
-			global.endgame_exits=newval;
-		if("endgame_safespawns")
-			global.endgame_safespawns=newval;
 		if("ert_base_chance")
 			global.ert_base_chance=newval;
 		if("escape_pods")
 			global.escape_pods=newval;
 		if("escape_pods_by_name")
 			global.escape_pods_by_name=newval;
-		if("evacuation_controller")
-			global.evacuation_controller=newval;
 		if("event_last_fired")
 			global.event_last_fired=newval;
 		if("eventchance")
@@ -1262,8 +1214,6 @@
 			global.gas_data=newval;
 		if("gear_datums")
 			global.gear_datums=newval;
-		if("gear_tweak_free_color_choice_")
-			global.gear_tweak_free_color_choice_=newval;
 		if("gender_datums")
 			global.gender_datums=newval;
 		if("ghost_darkness_images")
@@ -1306,8 +1256,6 @@
 			global.last_chew=newval;
 		if("last_message_id")
 			global.last_message_id=newval;
-		if("last_round_duration")
-			global.last_round_duration=newval;
 		if("light_overlay_cache")
 			global.light_overlay_cache=newval;
 		if("lighting_overlays_initialised")
@@ -1370,8 +1318,6 @@
 			global.meteors_threatening=newval;
 		if("mil_branches")
 			global.mil_branches=newval;
-		if("mimic_defines")
-			global.mimic_defines=newval;
 		if("mining_floors")
 			global.mining_floors=newval;
 		if("mining_walls")
@@ -1404,10 +1350,6 @@
 			global.newscaster_standard_feeds=newval;
 		if("next_account_number")
 			global.next_account_number=newval;
-		if("next_duration_update")
-			global.next_duration_update=newval;
-		if("next_station_date_change")
-			global.next_station_date_change=newval;
 		if("ntnet_card_uid")
 			global.ntnet_card_uid=newval;
 		if("ntnet_global")
@@ -1436,8 +1378,6 @@
 			global.pai_emotions=newval;
 		if("pai_software_by_key")
 			global.pai_software_by_key=newval;
-		if("paramslist_cache")
-			global.paramslist_cache=newval;
 		if("photo_count")
 			global.photo_count=newval;
 		if("pipe_colors")
@@ -1506,12 +1446,6 @@
 			global.robot_hud_colours=newval;
 		if("robot_inventory")
 			global.robot_inventory=newval;
-		if("round_start_time")
-			global.round_start_time=newval;
-		if("roundstart_hour")
-			global.roundstart_hour=newval;
-		if("rune_list")
-			global.rune_list=newval;
 		if("same_wires")
 			global.same_wires=newval;
 		if("send_emergency_team")
@@ -1566,16 +1500,10 @@
 			global.sqlport=newval;
 		if("station_account")
 			global.station_account=newval;
-		if("station_date")
-			global.station_date=newval;
 		if("stool_cache")
 			global.stool_cache=newval;
 		if("stored_shock_by_ref")
 			global.stored_shock_by_ref=newval;
-		if("string_part_flags")
-			global.string_part_flags=newval;
-		if("string_slot_flags")
-			global.string_slot_flags=newval;
 		if("supply_drop")
 			global.supply_drop=newval;
 		if("supply_methods_")
@@ -1596,8 +1524,6 @@
 			global.swapmaps_loaded=newval;
 		if("swapmaps_mode")
 			global.swapmaps_mode=newval;
-		if("syndicate_access")
-			global.syndicate_access=newval;
 		if("tail_icon_cache")
 			global.tail_icon_cache=newval;
 		if("tank_gauge_cache")
@@ -1618,8 +1544,6 @@
 			global.total_lighting_sources=newval;
 		if("total_unit_tests")
 			global.total_unit_tests=newval;
-		if("transfer_controller")
-			global.transfer_controller=newval;
 		if("turbolifts")
 			global.turbolifts=newval;
 		if("turret_icons")
@@ -1748,7 +1672,6 @@
 	"Tier2Runes",
 	"Tier3Runes",
 	"Tier4Runes",
-	"WALLITEMS",
 	"_all_globals",
 	"_client_preferences",
 	"_client_preferences_by_key",
@@ -1825,7 +1748,6 @@
 	"combatlog",
 	"comm_message_listeners",
 	"command_announcement",
-	"common_tools",
 	"config",
 	"contamination_overlay",
 	"create_mob_html",
@@ -1850,12 +1772,9 @@
 	"doppler_arrays",
 	"dummy_lighting_corner",
 	"empty_playable_ai_cores",
-	"endgame_exits",
-	"endgame_safespawns",
 	"ert_base_chance",
 	"escape_pods",
 	"escape_pods_by_name",
-	"evacuation_controller",
 	"event_last_fired",
 	"eventchance",
 	"explosion_in_progress",
@@ -1880,7 +1799,6 @@
 	"gamemode_cache",
 	"gas_data",
 	"gear_datums",
-	"gear_tweak_free_color_choice_",
 	"gender_datums",
 	"ghost_darkness_images",
 	"ghost_sightless_images",
@@ -1902,7 +1820,6 @@
 	"jobban_runonce",
 	"last_chew",
 	"last_message_id",
-	"last_round_duration",
 	"light_overlay_cache",
 	"lighting_overlays_initialised",
 	"limb_icon_cache",
@@ -1934,7 +1851,6 @@
 	"meteors_normal",
 	"meteors_threatening",
 	"mil_branches",
-	"mimic_defines",
 	"mining_floors",
 	"mining_walls",
 	"minor_air_alarms",
@@ -1951,8 +1867,6 @@
 	"news_network",
 	"newscaster_standard_feeds",
 	"next_account_number",
-	"next_duration_update",
-	"next_station_date_change",
 	"ntnet_card_uid",
 	"ntnet_global",
 	"ntnrc_uid",
@@ -1967,7 +1881,6 @@
 	"paiController",
 	"pai_emotions",
 	"pai_software_by_key",
-	"paramslist_cache",
 	"photo_count",
 	"pipe_colors",
 	"plant_seed_sprites",
@@ -2002,9 +1915,6 @@
 	"robot_custom_icons",
 	"robot_hud_colours",
 	"robot_inventory",
-	"round_start_time",
-	"roundstart_hour",
-	"rune_list",
 	"same_wires",
 	"send_emergency_team",
 	"sent_spiders_to_station",
@@ -2032,11 +1942,8 @@
 	"sqlpass",
 	"sqlport",
 	"station_account",
-	"station_date",
 	"stool_cache",
 	"stored_shock_by_ref",
-	"string_part_flags",
-	"string_slot_flags",
 	"supply_drop",
 	"supply_methods_",
 	"swapmaps_byname",
@@ -2047,7 +1954,6 @@
 	"swapmaps_initialized",
 	"swapmaps_loaded",
 	"swapmaps_mode",
-	"syndicate_access",
 	"tail_icon_cache",
 	"tank_gauge_cache",
 	"tape_roll_applications",
@@ -2058,7 +1964,6 @@
 	"total_lighting_overlays",
 	"total_lighting_sources",
 	"total_unit_tests",
-	"transfer_controller",
 	"turbolifts",
 	"turret_icons",
 	"uniqueness_repository",
