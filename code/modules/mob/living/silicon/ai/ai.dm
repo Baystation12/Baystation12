@@ -410,7 +410,7 @@ var/list/ai_verbs_default = list(
 			return ..() // Does further work on this key
 
 		if (href_list["switchcamera"])
-			switchCamera(locate(href_list["switchcamera"])) in cameranet.cameras
+			switchCamera(locate(href_list["switchcamera"])) in GLOB.cameranet.cameras
 			return TOPIC_HANDLED
 
 		if (href_list["showalerts"])
@@ -478,7 +478,7 @@ var/list/ai_verbs_default = list(
 		return
 
 	var/list/cameralist = new()
-	for (var/obj/machinery/camera/C in cameranet.cameras)
+	for (var/obj/machinery/camera/C in GLOB.cameranet.cameras)
 		if(!C.can_use())
 			continue
 		var/list/tempnetwork = difflist(C.network, GLOB.restricted_camera_networks, 1)
@@ -502,7 +502,7 @@ var/list/ai_verbs_default = list(
 
 	src.network = network
 
-	for(var/obj/machinery/camera/C in cameranet.cameras)
+	for(var/obj/machinery/camera/C in GLOB.cameranet.cameras)
 		if(!C.can_use())
 			continue
 		if(network in C.network)

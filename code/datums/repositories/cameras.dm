@@ -24,7 +24,7 @@ var/repository/cameras/camera_repository = new()
 		return
 	invalidated = 0
 
-	for(var/sc in cameranet.cameras)
+	for(var/sc in GLOB.cameranet.cameras)
 		var/obj/machinery/camera/C = sc
 		var/cam = C.nano_structure()
 		for(var/network in C.network)

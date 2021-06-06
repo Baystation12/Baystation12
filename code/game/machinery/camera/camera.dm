@@ -156,7 +156,7 @@
 
 /obj/machinery/camera/proc/setViewRange(var/num = 7)
 	src.view_range = num
-	cameranet.update_visibility(src, 0)
+	GLOB.cameranet.update_visibility(src, 0)
 
 /obj/machinery/camera/physical_attack_hand(mob/living/carbon/human/user)
 	if(!istype(user))

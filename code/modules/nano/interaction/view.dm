@@ -20,7 +20,7 @@ GLOBAL_DATUM_INIT(view_state, /datum/topic_state/view, new)
 
 /mob/living/silicon/ai/view_can_use_topic(src_object)
 	if(is_in_chassis())
-		if(cameranet && !cameranet.is_turf_visible(get_turf(src_object)))
+		if(GLOB.cameranet && !GLOB.cameranet.is_turf_visible(get_turf(src_object)))
 			return STATUS_CLOSE
 		return shared_nano_interaction(src_object)
 	return ..()

@@ -23,8 +23,8 @@ GLOBAL_LIST_EMPTY(body_marking_styles_list)		//stores /datum/sprite_accessory/ma
 GLOBAL_DATUM_INIT(underwear, /datum/category_collection/underwear, new())
 
 // Visual nets
-var/datum/visualnet/camera/cameranet = new()
 GLOBAL_LIST_EMPTY(visual_nets)
+GLOBAL_DATUM_INIT(cameranet, /datum/visualnet/camera, new())
 
 // Runes
 var/global/list/rune_list = new()

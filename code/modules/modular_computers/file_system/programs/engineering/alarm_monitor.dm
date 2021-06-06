@@ -96,7 +96,7 @@
 	if(..())
 		return 1
 	if(href_list["switchTo"])
-		var/obj/machinery/camera/C = locate(href_list["switchTo"]) in cameranet.cameras
+		var/obj/machinery/camera/C = locate(href_list["switchTo"]) in GLOB.cameranet.cameras
 		if(!C)
 			return
 

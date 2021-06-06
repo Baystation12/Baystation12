@@ -92,7 +92,7 @@
 		return 1
 
 	if(href_list["switch_camera"])
-		var/obj/machinery/camera/C = locate(href_list["switch_camera"]) in cameranet.cameras
+		var/obj/machinery/camera/C = locate(href_list["switch_camera"]) in GLOB.cameranet.cameras
 		var/datum/extension/interactive/ntos/os = get_extension(nano_host(), /datum/extension/interactive/ntos)
 		if(!C)
 			return

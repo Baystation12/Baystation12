@@ -241,7 +241,7 @@
 
 /mob/observer/eye/wizard_eye/New() //we dont use the Ai one because it has AI specific procs imbedded in it.
 	..()
-	visualnet = cameranet
+	visualnet = GLOB.cameranet
 
 /mob/living/proc/release_eye()
 	set name = "Release Vision"
