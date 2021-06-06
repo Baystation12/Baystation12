@@ -80,7 +80,7 @@ GLOBAL_LIST_EMPTY(nuke_disks)
 		if(!is_type_in_list(disk_area, GLOB.using_map.post_round_safe_areas))
 			disk_rescued = FALSE
 			break
-	var/crew_evacuated = (evacuation_controller.has_evacuated())
+	var/crew_evacuated = GLOB.evacuation_controller.has_evacuated()
 
 	if(!disk_rescued &&  station_was_nuked && !syndies_didnt_escape)
 		SSstatistics.set_field_details("round_end_result","win - syndicate nuke")

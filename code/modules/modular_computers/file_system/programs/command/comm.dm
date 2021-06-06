@@ -88,8 +88,8 @@
 		data["message_current"] = current_viewing_message
 
 	var/list/processed_evac_options = list()
-	if(!isnull(evacuation_controller))
-		for (var/datum/evacuation_option/EO in evacuation_controller.available_evac_options())
+	if(!isnull(GLOB.evacuation_controller))
+		for (var/datum/evacuation_option/EO in GLOB.evacuation_controller.available_evac_options())
 			if(EO.abandon_ship)
 				continue
 			var/list/option = list()
@@ -187,7 +187,7 @@
 		if("evac")
 			. = TRUE
 			if(is_autenthicated(user))
-				var/datum/evacuation_option/selected_evac_option = evacuation_controller.evacuation_options[href_list["target"]]
+				var/datum/evacuation_option/selected_evac_option = GLOB.evacuation_controller.evacuation_options[href_list["target"]]
 				if (isnull(selected_evac_option) || !istype(selected_evac_option))
 					return
 				if (!selected_evac_option.silicon_allowed && issilicon(user))
@@ -196,7 +196,7 @@
 					return
 				var/confirm = alert("Are you sure you want to [selected_evac_option.option_desc]?", name, "No", "Yes")
 				if (confirm == "Yes" && can_still_topic())
-					evacuation_controller.handle_evac_option(selected_evac_option.option_target, user)
+					GLOB.evacuation_controller.handle_evac_option(selected_evac_option.option_target, user)
 		if("setstatus")
 			. = TRUE
 			if(is_autenthicated(user) && ntn_cont)
@@ -320,10 +320,10 @@ var/last_message_id = 0
 	frequency.post_signal(signal = status_signal)
 
 /proc/cancel_call_proc(var/mob/user)
-	if (!evacuation_controller)
+	if (!GLOB.evacuation_controller)
 		return
 
-	if(evacuation_controller.cancel_evacuation())
+	if(GLOB.evacuation_controller.cancel_evacuation())
 		log_and_message_admins("has cancelled the evacuation.", user)
 
 	return
@@ -336,7 +336,7 @@ var/last_message_id = 0
 	return 0
 
 /proc/call_shuttle_proc(var/mob/user, var/emergency)
-	if (!evacuation_controller)
+	if (!GLOB.evacuation_controller)
 		return
 
 	if(isnull(emergency))
@@ -350,28 +350,28 @@ var/last_message_id = 0
 		to_chat(user, "[GLOB.using_map.boss_short] will not allow an evacuation to take place. Consider all contracts terminated.")
 		return
 
-	if(evacuation_controller.deny)
+	if(GLOB.evacuation_controller.deny)
 		to_chat(user, "An evacuation cannot be called at this time. Please try again later.")
 		return
 
-	if(evacuation_controller.is_on_cooldown()) // Ten minute grace period to let the game get going without lolmetagaming. -- TLE
-		to_chat(user, evacuation_controller.get_cooldown_message())
+	if(GLOB.evacuation_controller.is_on_cooldown()) // Ten minute grace period to let the game get going without lolmetagaming. -- TLE
+		to_chat(user, GLOB.evacuation_controller.get_cooldown_message())
 
-	if(evacuation_controller.is_evacuating())
+	if(GLOB.evacuation_controller.is_evacuating())
 		to_chat(user, "An evacuation is already underway.")
 		return
 
-	if(evacuation_controller.call_evacuation(user, _emergency_evac = emergency))
+	if(GLOB.evacuation_controller.call_evacuation(user, _emergency_evac = emergency))
 		log_and_message_admins("[user? key_name(user) : "Autotransfer"] has called the shuttle.")
 
 /proc/init_autotransfer()
 
-	if (!evacuation_controller)
+	if (!GLOB.evacuation_controller)
 		return
 
-	. = evacuation_controller.call_evacuation(null, _emergency_evac = FALSE, autotransfer = TRUE)
+	. = GLOB.evacuation_controller.call_evacuation(null, _emergency_evac = FALSE, autotransfer = TRUE)
 	if(.)
 		//delay events in case of an autotransfer
-		var/delay = evacuation_controller.evac_arrival_time - world.time + (2 MINUTES)
+		var/delay = GLOB.evacuation_controller.evac_arrival_time - world.time + (2 MINUTES)
 		SSevent.delay_events(EVENT_LEVEL_MODERATE, delay)
 		SSevent.delay_events(EVENT_LEVEL_MAJOR, delay)

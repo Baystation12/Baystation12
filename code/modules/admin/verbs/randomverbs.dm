@@ -738,7 +738,7 @@ Ccomp's first proc.
 	set category = "Admin"
 	set name = "Call Evacuation"
 
-	if(!SSticker.mode || !evacuation_controller)
+	if(!SSticker.mode || !GLOB.evacuation_controller)
 		return
 
 	if(!check_rights(R_ADMIN))	return
@@ -750,7 +750,7 @@ Ccomp's first proc.
 			return
 
 	var/choice = input("Is this an emergency evacuation or a crew transfer?") in list("Emergency", "Crew Transfer")
-	evacuation_controller.call_evacuation(usr, (choice == "Emergency"))
+	GLOB.evacuation_controller.call_evacuation(usr, (choice == "Emergency"))
 
 	SSstatistics.add_field_details("admin_verb","CSHUT") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	log_and_message_admins("admin-called an evacuation.")
@@ -764,10 +764,10 @@ Ccomp's first proc.
 
 	if(alert(src, "You sure?", "Confirm", "Yes", "No") != "Yes") return
 
-	if(!evacuation_controller)
+	if(!GLOB.evacuation_controller)
 		return
 
-	evacuation_controller.cancel_evacuation()
+	GLOB.evacuation_controller.cancel_evacuation()
 
 	SSstatistics.add_field_details("admin_verb","CCSHUT") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	log_and_message_admins("admin-cancelled the evacuation.")
@@ -776,15 +776,15 @@ Ccomp's first proc.
 	set category = "Admin"
 	set name = "Toggle Deny Evac"
 
-	if (!evacuation_controller)
+	if (!GLOB.evacuation_controller)
 		return
 
 	if(!check_rights(R_ADMIN))	return
 
-	evacuation_controller.deny = !evacuation_controller.deny
+	GLOB.evacuation_controller.deny = !GLOB.evacuation_controller.deny
 
-	log_admin("[key_name(src)] has [evacuation_controller.deny ? "denied" : "allowed"] evacuation to be called.")
-	message_admins("[key_name_admin(usr)] has [evacuation_controller.deny ? "denied" : "allowed"] evacuation to be called.")
+	log_admin("[key_name(src)] has [GLOB.evacuation_controller.deny ? "denied" : "allowed"] evacuation to be called.")
+	message_admins("[key_name_admin(usr)] has [GLOB.evacuation_controller.deny ? "denied" : "allowed"] evacuation to be called.")
 
 /client/proc/cmd_admin_attack_log(mob/M as mob in SSmobs.mob_list)
 	set category = "Special Verbs"

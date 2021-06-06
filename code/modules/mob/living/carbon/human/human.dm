@@ -96,8 +96,8 @@
 		stat("Intent:", "[a_intent]")
 		stat("Move Mode:", "[move_intent.name]")
 
-		if(evacuation_controller)
-			var/eta_status = evacuation_controller.get_status_panel_eta()
+		if(GLOB.evacuation_controller)
+			var/eta_status = GLOB.evacuation_controller.get_status_panel_eta()
 			if(eta_status)
 				stat(null, eta_status)
 

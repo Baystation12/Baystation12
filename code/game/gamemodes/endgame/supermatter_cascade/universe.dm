@@ -43,7 +43,7 @@ var/global/universe_has_ended = 0
 	for(var/mob/M in GLOB.player_list)
 		M.flash_eyes()
 
-	if(evacuation_controller.cancel_evacuation())
+	if(GLOB.evacuation_controller.cancel_evacuation())
 		priority_announcement.Announce("The evacuation has been aborted due to bluespace distortion.")
 
 	AreaSet()

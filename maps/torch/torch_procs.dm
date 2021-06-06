@@ -35,7 +35,7 @@
 		if(Player.mind && !isnewplayer(Player))
 			if(Player.stat != DEAD)
 				var/turf/playerTurf = get_turf(Player)
-				if(evacuation_controller.round_over() && evacuation_controller.emergency_evacuation)
+				if(GLOB.evacuation_controller.round_over() && GLOB.evacuation_controller.emergency_evacuation)
 					if(isStationLevel(playerTurf.z))
 						to_chat(Player, "<span class='info'><b>You managed to survive, but were marooned on [station_name()] as [Player.real_name]...</b></span>")
 					else if (isEscapeLevel(playerTurf.z))

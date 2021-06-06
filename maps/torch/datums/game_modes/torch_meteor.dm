@@ -58,6 +58,6 @@
 	option_desc = "initiate automated emergency bluespace jump"
 
 /datum/evacuation_option/meteor_bluespace_jump/execute(mob/user)
-	if (!evacuation_controller)
+	if (!GLOB.evacuation_controller)
 		return
-	evacuation_controller.call_evacuation(user, 0, forced = TRUE)
+	GLOB.evacuation_controller.call_evacuation(user, 0, forced = TRUE)

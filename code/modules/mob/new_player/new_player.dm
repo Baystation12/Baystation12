@@ -82,7 +82,7 @@
 				totalPlayers++
 				if(player.ready)totalPlayersReady++
 		else
-			stat("Next Continue Vote:", "[max(round(transfer_controller.time_till_transfer_vote() / 600, 1), 0)] minutes")
+			stat("Next Continue Vote:", "[max(round(GLOB.transfer_controller.time_till_transfer_vote() / 600, 1), 0)] minutes")
 
 /mob/new_player/Topic(href, href_list) // This is a full override; does not call parent.
 	if(usr != src)
@@ -274,10 +274,10 @@
 	header += "<b>Welcome, [name].<br></b>"
 	header += "Round Duration: [roundduration2text()]<br>"
 
-	if(evacuation_controller.has_evacuated())
+	if(GLOB.evacuation_controller.has_evacuated())
 		header += "<font color='red'><b>\The [station_name()] has been evacuated.</b></font><br>"
-	else if(evacuation_controller.is_evacuating())
-		if(evacuation_controller.emergency_evacuation) // Emergency shuttle is past the point of no recall
+	else if(GLOB.evacuation_controller.is_evacuating())
+		if(GLOB.evacuation_controller.emergency_evacuation) // Emergency shuttle is past the point of no recall
 			header += "<font color='red'>\The [station_name()] is currently undergoing evacuation procedures.</font><br>"
 		else                                           // Crew transfer initiated
 			header += "<font color='red'>\The [station_name()] is currently undergoing crew transfer procedures.</font><br>"

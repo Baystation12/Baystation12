@@ -190,7 +190,7 @@
 
 		if(!check_rights(R_ADMIN))	return
 
-		if(!SSticker.mode || !evacuation_controller)
+		if(!SSticker.mode || !GLOB.evacuation_controller)
 			return
 
 		if(SSticker.mode.name == "blob")
@@ -199,10 +199,10 @@
 
 		switch(href_list["call_shuttle"])
 			if("1")
-				if (evacuation_controller.call_evacuation(usr, TRUE))
+				if (GLOB.evacuation_controller.call_evacuation(usr, TRUE))
 					log_and_message_admins("called an evacuation.")
 			if("2")
-				if (evacuation_controller.cancel_evacuation())
+				if (GLOB.evacuation_controller.cancel_evacuation())
 					log_and_message_admins("cancelled an evacuation.")
 
 		href_list["secretsadmin"] = "check_antagonist"

@@ -89,16 +89,16 @@
 				add_alert_border_to_display()
 			return 1
 		if(STATUS_DISPLAY_TRANSFER_SHUTTLE_TIME)				//emergency shuttle timer
-			if(evacuation_controller.is_prepared())
+			if(GLOB.evacuation_controller.is_prepared())
 				message1 = "-ETD-"
-				if (evacuation_controller.waiting_to_leave())
+				if (GLOB.evacuation_controller.waiting_to_leave())
 					message2 = "Launch"
 				else
 					message2 = get_shuttle_timer()
 					if(length(message2) > CHARS_PER_LINE)
 						message2 = "Error"
 				update_display(message1, message2)
-			else if(evacuation_controller.has_eta())
+			else if(GLOB.evacuation_controller.has_eta())
 				message1 = "-ETA-"
 				message2 = get_shuttle_timer()
 				if(length(message2) > CHARS_PER_LINE)
@@ -209,7 +209,7 @@
 	set_light(0.5, 0.1, 1, 2, COLOR_WHITE)
 
 /obj/machinery/status_display/proc/get_shuttle_timer()
-	var/timeleft = evacuation_controller.get_eta()
+	var/timeleft = GLOB.evacuation_controller.get_eta()
 	if(timeleft < 0)
 		return ""
 	return "[add_zero(num2text((timeleft / 60) % 60),2)]:[add_zero(num2text(timeleft % 60), 2)]"
