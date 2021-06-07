@@ -30,7 +30,7 @@
 /obj/proc/buckle_mob(mob/living/M)
 	if(buckled_mob) //unless buckled_mob becomes a list this can cause problems
 		return 0
-	if(!istype(M) || (M.loc != loc) || M.buckled || M.pinned.len || (buckle_require_restraints && !M.restrained()))
+	if(!istype(M) || (M.loc != loc) || !M.can_be_buckled || M.buckled || M.pinned.len || (buckle_require_restraints && !M.restrained()))
 		return 0
 	if(ismob(src))
 		var/mob/living/carbon/C = src //Don't wanna forget the xenos.
@@ -74,9 +74,9 @@
 	if (M.grabbed_by.len)
 		to_chat(user, SPAN_WARNING("\The [M] is being grabbed and cannot be buckled."))
 		return FALSE
-	if(istype(M, /mob/living/carbon/slime))
-		to_chat(user, "<span class='warning'>\The [M] is too squishy to buckle in.</span>")
-		return 0
+	if (!M.can_be_buckled)
+		to_chat(user, SPAN_WARNING("\The [M] cannot be buckled."))
+		return FALSE
 
 	add_fingerprint(user)
 	unbuckle_mob()
