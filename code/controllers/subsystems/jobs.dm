@@ -373,32 +373,32 @@ SUBSYSTEM_DEF(jobs)
 		for(var/thing in H.client.prefs.Gear())
 			var/datum/gear/G = gear_datums[thing]
 			if(G)
-				var/permitted = 0
+				var/permitted = FALSE
 				if(G.allowed_branches)
 					if(H.char_branch && (H.char_branch.type in G.allowed_branches))
-						permitted = 1
+						permitted = TRUE
 				else
-					permitted = 1
+					permitted = TRUE
 
 				if(permitted)
 					if(G.allowed_roles)
 						if(job.type in G.allowed_roles)
-							permitted = 1
+							permitted = TRUE
 						else
-							permitted = 0
+							permitted = FALSE
 					else
-						permitted = 1
+						permitted = TRUE
 
 				if(permitted && G.allowed_skills)
 					for(var/required in G.allowed_skills)
 						if(!H.skill_check(required,G.allowed_skills[required]))
-							permitted = 0
+							permitted = FALSE
 
 				if(G.whitelisted && (!(H.species.name in G.whitelisted)))
-					permitted = 0
+					permitted = FALSE
 
 				if(G.species_blacklist && list_find(G.species_blacklist, H.species.name))
-					permitted = 0
+					permitted = FALSE
 
 				if(!permitted)
 					to_chat(H, "<span class='warning'>Your current species, job, branch, skills or whitelist status does not permit you to spawn with [thing]!</span>")

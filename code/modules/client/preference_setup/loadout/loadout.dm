@@ -60,19 +60,19 @@ var/list/gear_datums = list()
 	var/mob/preference_mob = preference_mob()
 	for(var/gear_name in gear_datums)
 		var/datum/gear/G = gear_datums[gear_name]
-		var/okay = 1
+		var/okay = TRUE
 		if(G.whitelisted && preference_mob)
-			okay = 0
+			okay = FALSE
 			for(var/species in G.whitelisted)
 				if(is_species_whitelisted(preference_mob, species))
-					okay = 1
+					okay = TRUE
 					break
 
 		if(G.species_blacklist && ishuman(preference_mob))
-			okay = 0
+			okay = FALSE
 			var/mob/living/carbon/human/H = preference_mob
 			if (!list_find(G.species_blacklist, H.species.name))
-				okay = 1
+				okay = TRUE
 				break
 		if(!okay)
 			continue
@@ -193,7 +193,7 @@ var/list/gear_datums = list()
 			allowed = !is_blacklisted
 			var/species_title = pref.species
 			if (!allowed)
-				species_title = "<font color=cc5555>[species_title]</font>"
+				species_title = FONT_COLORED("#cc5555", "[species_title]")
 				entry += "<br><i>[species_title]</i>"
 
 		if(allowed && G.allowed_roles)
@@ -341,8 +341,9 @@ var/list/gear_datums = list()
 	var/list/allowed_roles //Roles that can spawn with this item.
 	var/list/allowed_branches //Service branches that can spawn with it.
 	var/list/allowed_skills //Skills required to spawn with this item.
-	var/whitelisted        //Term to check the whitelist for..
-	var/list/species_blacklist // Any species in this list will be unable to spawn with this gear item.
+	var/whitelisted        //Term to check the whitelist for.
+	/// Any species in this list will be unable to spawn with this gear item.
+	var/list/species_blacklist
 	var/sort_category = "General"
 	var/flags              //Special tweaks in New
 	var/custom_setup_proc  //Special tweak in New
