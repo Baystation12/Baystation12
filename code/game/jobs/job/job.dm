@@ -44,8 +44,8 @@
 	var/available_by_default = TRUE
 
 	var/list/possible_goals
-	var/min_goals = 1
-	var/max_goals = 3
+	var/min_goals = 0
+	var/max_goals = 5
 
 	var/defer_roundstart_spawn = FALSE // If true, the job will be put off until all other jobs have been populated.
 	var/list/species_branch_rank_cache_ = list()
