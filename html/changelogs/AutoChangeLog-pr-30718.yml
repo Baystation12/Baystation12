@@ -1,0 +1,10 @@
+author: CSCMe
+delete-after: true
+changes:
+  - tweak: Clicking "Show Goals" tells you that they are disabled in preferences if
+      they are.
+  - tweak: Jobs allow 0 to 5 personal goals by default, instead of 1 to 3.
+  - bugfix: Removing/re-rolling goals acts on the correct goals if used more than
+      once.
+  - bugfix: You cannot roll the same goal twice in the same set, or no goal if re-rolling
+      one.
