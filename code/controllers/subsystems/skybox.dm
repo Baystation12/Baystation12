@@ -12,6 +12,23 @@ SUBSYSTEM_DEF(skybox)
 	var/star_path = 'icons/skybox/skybox.dmi'
 	var/star_state = "stars"
 	var/list/skybox_cache = list()
+	var/list/space_appearance_cache
+
+/datum/controller/subsystem/skybox/PreInit()
+	build_space_appearances()
+
+/datum/controller/subsystem/skybox/proc/build_space_appearances()
+	space_appearance_cache = new(26)
+	for (var/i in 0 to 25)
+		var/mutable_appearance/dust = mutable_appearance('icons/turf/space_dust.dmi', "[i]")
+		dust.plane = DUST_PLANE
+		dust.alpha = 80
+		dust.blend_mode = BLEND_ADD
+
+		var/mutable_appearance/space = new /mutable_appearance(/turf/space)
+		space.icon_state = "white"
+		space.overlays += dust
+		space_appearance_cache[i + 1] = space.appearance
 
 /datum/controller/subsystem/skybox/Initialize()
 	. = ..()
