@@ -1,0 +1,4 @@
+author: Mucker
+delete-after: true
+changes:
+  - bugfix: Fixed character menu preview icon not updating on character swaps.
