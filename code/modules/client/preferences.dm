@@ -151,6 +151,7 @@ datum/preferences
 /datum/preferences/proc/open_setup_window(mob/user)
 	if (!SScharacter_setup.initialized)
 		return
+
 	var/datum/browser/popup = new(user, "preferences_browser", "Character Setup", 1200, 800, src)
 	var/content = {"
 	<script type='text/javascript'>
@@ -199,6 +200,9 @@ datum/preferences
 		load_character(text2num(href_list["changeslot"]))
 		sanitize_preferences()
 		close_load_dialog(usr)
+
+		if (winget(usr, "preferences_browser", "is-visible") == "true")
+			open_setup_window(usr)
 
 		if (istype(client.mob, /mob/new_player))
 			var/mob/new_player/M = client.mob
