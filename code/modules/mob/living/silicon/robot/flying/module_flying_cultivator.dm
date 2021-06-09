@@ -27,3 +27,10 @@
 		SKILL_CHEMISTRY = SKILL_EXPERT,
 		SKILL_SCIENCE   = SKILL_EXPERT,
 	)
+	access = list(
+		access_hydroponics,
+		access_kitchen,
+		access_research,
+		access_radio_sci,
+		access_radio_serv
+	)

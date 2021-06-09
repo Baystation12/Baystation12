@@ -6,14 +6,14 @@
 	sprites = list(
 		"Drone" = "drone-ascent"
 	)
-	// The duplicate clustertools in this list are so that they can set up to 
+	// The duplicate clustertools in this list are so that they can set up to
 	// hack doors, windows etc. without having to constantly cycle through tools.
 	equipment = list(
 		/obj/item/device/flash,
 		/obj/item/gun/energy/particle/small,
 		/obj/item/device/multitool/mantid,
 		/obj/item/clustertool,
-		/obj/item/clustertool, 
+		/obj/item/clustertool,
 		/obj/item/clustertool,
 		/obj/item/soap,
 		/obj/item/mop/advanced,
@@ -57,7 +57,7 @@
 		LANGUAGE_SKRELLIAN        = TRUE,
 		LANGUAGE_NABBER           = TRUE
 	)
-	
+
 	skills = list(
 		SKILL_BUREAUCRACY	= SKILL_ADEPT,
 		SKILL_FINANCE		= SKILL_EXPERT,
@@ -81,6 +81,10 @@
 		SKILL_ANATOMY		= SKILL_EXPERT,
 		SKILL_CHEMISTRY		= SKILL_EXPERT
 	)
+	access = list(
+		access_ascent
+	)
+	use_map_synth_access = FALSE
 
 // Copypasted from repair bot - todo generalize this step.
 /obj/item/robot_module/flying/ascent/finalize_synths()

@@ -19,6 +19,15 @@
 		SKILL_FORENSICS   = SKILL_EXPERT,
 		SKILL_BUREAUCRACY = SKILL_ADEPT
 	)
+	access = list(
+		access_brig,
+		access_emergency_storage,
+		access_eva,
+		access_external_airlocks,
+		access_sec_doors,
+		access_security,
+		access_radio_sec
+	)
 
 /obj/item/robot_module/security/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	..()
@@ -58,6 +67,8 @@
 		/obj/item/device/hailer
 	)
 	emag = /obj/item/gun/energy/laser/mounted
+	use_map_synth_access = FALSE
+	use_all_station_access = TRUE
 
 /obj/item/robot_module/security/combat
 	name = "combat robot module"

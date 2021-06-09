@@ -22,6 +22,11 @@
 		/obj/item/weldingtool
 	)
 	emag = /obj/item/reagent_containers/spray
+	access = list(
+		access_emergency_storage,
+		access_janitor,
+		access_radio_serv
+	)
 
 /obj/item/robot_module/janitor/finalize_emag()
 	. = ..()

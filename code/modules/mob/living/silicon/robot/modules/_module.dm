@@ -49,6 +49,13 @@
 	var/list/synths = list()
 	var/list/skills = list() // Skills that this module grants. Other skills will remain at minimum levels.
 
+	/// Access flags that this module grants. Overwrites all existing access flags.
+	var/list/access = list()
+	/// Whether or not to include the map's defined `synth_access` list.
+	var/use_map_synth_access = TRUE
+	/// Whether or not to apply get_all_station_access() to the access flags.
+	var/use_all_station_access = FALSE
+
 /obj/item/robot_module/Initialize()
 
 	. = ..()
@@ -63,6 +70,7 @@
 	add_camera_networks(R)
 	add_languages(R)
 	add_subsystems(R)
+	set_access(R)
 	apply_status_flags(R)
 
 	if(R.silicon_radio)
@@ -230,3 +238,12 @@
 /obj/item/robot_module/proc/reset_skills(var/mob/living/silicon/robot/R)
 	for(var/datum/skill_buff/buff in R.fetch_buffs_of_type(/datum/skill_buff/robot))
 		buff.remove()
+
+/// Updates the robot's access flags with the module's access
+/obj/item/robot_module/proc/set_access(mob/living/silicon/robot/R)
+	R.idcard.access.Cut()
+	R.idcard.access = access.Copy()
+	if (use_map_synth_access)
+		R.idcard.access |= GLOB.using_map.synth_access.Copy()
+	if (use_all_station_access)
+		R.idcard.access |= get_all_station_access()

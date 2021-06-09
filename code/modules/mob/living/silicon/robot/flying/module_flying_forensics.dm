@@ -37,6 +37,15 @@
 		SKILL_CONSTRUCTION        = SKILL_ADEPT,
 		SKILL_ANATOMY             = SKILL_ADEPT
 	)
+	access = list(
+		access_brig,
+		access_emergency_storage,
+		access_forensics_lockers,
+		access_morgue,
+		access_sec_doors,
+		access_security,
+		access_radio_sec
+	)
 
 /obj/item/robot_module/flying/forensics/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	var/obj/item/reagent_containers/spray/luminol/luminol = locate() in equipment

@@ -10,6 +10,21 @@
 		/datum/nano_module/crew_monitor
 	)
 	can_be_pushed = 0
+	access = list(
+		access_chemistry,
+		access_crematorium,
+		access_emergency_storage,
+		access_eva,
+		access_external_airlocks,
+		access_hangar,
+		access_medical,
+		access_medical_equip,
+		access_morgue,
+		access_senmed,
+		access_surgery,
+		access_virology,
+		access_radio_med
+	)
 
 /obj/item/robot_module/medical/build_equipment()
 	. = ..()

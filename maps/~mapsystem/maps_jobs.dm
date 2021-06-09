@@ -7,6 +7,13 @@
 
 	var/default_assistant_title = "Assistant"
 
+	/// List of default access flags provided to all robots on top of their module's flags
+	var/list/synth_access = list(
+		access_synth,
+		access_maint_tunnels,
+		access_teleporter
+	)
+
 // The white, and blacklist are type specific, any subtypes (of both species and jobs) have to be added explicitly
 /datum/map/proc/is_species_job_restricted(var/datum/species/S, var/datum/job/J)
 	if(!istype(S) || !istype(J))

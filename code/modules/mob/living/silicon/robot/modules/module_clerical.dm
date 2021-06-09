@@ -47,6 +47,13 @@
 		SKILL_MEDICAL             = SKILL_BASIC,
 		SKILL_CHEMISTRY           = SKILL_ADEPT
 	)
+	access = list(
+		access_bar,
+		access_commissary,
+		access_hydroponics,
+		access_kitchen,
+		access_radio_serv
+	)
 
 /obj/item/robot_module/clerical/butler/finalize_equipment()
 	. = ..()
@@ -99,6 +106,16 @@
 	emag = /obj/item/stamp/chameleon
 	synths = list(
 		/datum/matter_synth/package_wrap
+	)
+	access = list(
+		access_emergency_storage,
+		access_cargo,
+		access_cargo_bot,
+		access_commissary,
+		access_hangar,
+		access_mailsorting,
+		access_radio_serv,
+		access_radio_sup
 	)
 
 /obj/item/robot_module/clerical/general/finalize_synths()

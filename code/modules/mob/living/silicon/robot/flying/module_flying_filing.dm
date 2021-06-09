@@ -28,6 +28,16 @@
 		SKILL_SCIENCE             = SKILL_EXPERT,
 		SKILL_DEVICES             = SKILL_EXPERT
 	)
+	access = list(
+		access_emergency_storage,
+		access_cargo,
+		access_cargo_bot,
+		access_commissary,
+		access_hangar,
+		access_mailsorting,
+		access_radio_serv,
+		access_radio_sup
+	)
 
 /obj/item/robot_module/flying/filing/finalize_synths()
 	. = ..()

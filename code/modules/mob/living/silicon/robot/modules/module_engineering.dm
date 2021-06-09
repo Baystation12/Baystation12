@@ -72,6 +72,22 @@
 		SKILL_ELECTRICAL   = SKILL_PROF,
 		SKILL_COMPUTER     = SKILL_EXPERT
 	)
+	access = list(
+		access_atmospherics,
+		access_construction,
+		access_emergency_storage,
+		access_engine,
+		access_engine_equip,
+		access_eva,
+		access_external_airlocks,
+		access_hangar,
+		access_network,
+		access_robotics,
+		access_seneng,
+		access_tcomsat,
+		access_tech_storage,
+		access_radio_eng
+	)
 
 /obj/item/robot_module/engineering/finalize_synths()
 

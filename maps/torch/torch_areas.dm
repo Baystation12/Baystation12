@@ -1456,7 +1456,10 @@
 	name = "\improper Engineering Drone Fabrication"
 	icon_state = "drone_fab"
 	sound_env = SMALL_ENCLOSED
-	req_access = list(access_robotics)
+	req_access = list(
+		access_robotics,
+		access_synth
+	)
 
 /area/engineering/engine_monitoring
 	name = "\improper Engine Monitoring Room"

@@ -44,6 +44,26 @@
 		SKILL_BOTANY              = SKILL_EXPERT,
 		SKILL_ELECTRICAL          = SKILL_EXPERT
 	)
+	access = list(
+		access_expedition_shuttle,
+		access_hangar,
+		access_mining_office,
+		access_mining_station,
+		access_petrov,
+		access_petrov_analysis,
+		access_petrov_chemistry,
+		access_petrov_maint,
+		access_petrov_phoron,
+		access_petrov_toxins,
+		access_research,
+		access_tox,
+		access_tox_storage,
+		access_xenoarch,
+		access_xenobiology,
+		access_radio_exp,
+		access_radio_sci
+	)
+
 /obj/item/robot_module/research/finalize_equipment()
 	. = ..()
 	var/obj/item/stack/nanopaste/N = locate() in equipment

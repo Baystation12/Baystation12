@@ -38,6 +38,17 @@
 		SKILL_CONSTRUCTION = SKILL_EXPERT
 	)
 	no_slip = 1
+	access = list(
+		access_eva,
+		access_expedition_shuttle,
+		access_guppy,
+		access_hangar,
+		access_mining,
+		access_mining_office,
+		access_mining_station,
+		access_radio_exp,
+		access_radio_sup
+	)
 
 /obj/item/robot_module/miner/handle_emagged()
 	var/obj/item/pickaxe/D = locate(/obj/item/pickaxe/borgdrill) in equipment
