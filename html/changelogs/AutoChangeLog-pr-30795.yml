@@ -1,6 +1,0 @@
-author: Ryan180602
-delete-after: true
-changes:
-  - maptweak: Re-adds IV cabinet to its original position + decal.
-  - maptweak: Adds shutter to lock Exam-Room external access, button now only opens
-      that door.
