@@ -77,6 +77,7 @@
 	max_force = 60	//for wielded
 	force_multiplier = 0.6
 	unwielded_force_divisor = 0.3
+	attack_cooldown_modifier = 6
 	sharp = TRUE
 	edge = TRUE
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")

@@ -156,6 +156,8 @@
 	break_stuff_probability = 40
 	stun_chance = 7
 
+	ai_holder_type = /datum/ai_holder/simple_animal/goat/king/phase2
+
 	var/spellscast = 0
 	var/phase3 = FALSE
 	var/datum/sound_token/boss_theme

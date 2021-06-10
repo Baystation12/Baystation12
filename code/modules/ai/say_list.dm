@@ -123,3 +123,7 @@
 	speak = list("Hi","Hello!","Cracker?")
 	emote_hear = list("squawks","bawks")
 	emote_see = list("flutters its wings")
+
+/* For Meatbag */
+/datum/say_list/parrot/heist
+ speak = list("Yaaar!","Squaaak!","Fight me Matey!","BAWWWWK Vox trying to eat me!")

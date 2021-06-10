@@ -214,7 +214,7 @@
 // This is legacy code that should be revisited, probably by moving the bulk of the logic into here.
 /obj/machinery/door/interface_interact(user)
 	if(CanInteract(user, DefaultTopicState()))
-		return attackby(user, user)
+		return attackby(user = user)
 
 /obj/machinery/door/attackby(obj/item/I as obj, mob/user as mob)
 	src.add_fingerprint(user, 0, I)
@@ -243,7 +243,7 @@
 		else
 			repairing = stack.split(amount_needed)
 			if (repairing)
-				repairing.dropInto(src)
+				repairing.forceMove(src)
 				transfer = repairing.amount
 
 		if (transfer)
@@ -307,6 +307,8 @@
 		return 1
 
 /obj/machinery/door/proc/check_force(obj/item/I, mob/user)
+	if (!istype(I))
+		return FALSE
 	if (!density || user.a_intent != I_HURT)
 		return FALSE
 	if (I.damtype != BRUTE && I.damtype != BURN)

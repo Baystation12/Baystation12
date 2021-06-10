@@ -81,7 +81,7 @@
 
 /obj/item/clothing/mask/chameleon/Initialize()
 	. = ..()
-	set_extension(src,/datum/extension/chameleon/clothing)
+	set_extension(src,/datum/extension/chameleon/clothing,/obj/item/clothing/mask)
 
 /obj/item/clothing/glasses/chameleon
 	name = "goggles"

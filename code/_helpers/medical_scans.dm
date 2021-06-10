@@ -76,6 +76,10 @@
 	scan["internal_organs"] = list()
 
 	for(var/obj/item/organ/internal/I in H.internal_organs)
+		if (istype(I, /obj/item/organ/internal/augment))
+			var/obj/item/organ/internal/augment/A = I
+			if (!A.known) // Hidden augments don't appear on scans
+				continue
 		var/list/O = list()
 		O["name"] = I.name
 		O["is_broken"] = I.is_broken()

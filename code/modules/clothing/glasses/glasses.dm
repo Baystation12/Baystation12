@@ -252,3 +252,29 @@
 	icon_state = "rwelding-g"
 	item_state = "rwelding-g"
 	tint = TINT_MODERATE
+
+/obj/item/clothing/glasses/glare_dampeners
+	name = "glare dampeners"
+	desc = "Synthetic lenses over the eyes, protecting from bright lights."
+	icon_state = "welding-g"
+	item_state = "welding-g"
+	use_alt_layer = TRUE
+	flash_protection = FLASH_PROTECTION_MAJOR
+	tint = TINT_HEAVY
+
+/obj/item/clothing/glasses/augment_binoculars
+	name = "adaptive binoculars"
+	desc = "Digital lenses covering the eyes, capable of zooming in on distant targets."
+	gender = PLURAL
+	icon_state = "thermal"
+	item_state = "glasses"
+	action_button_name = "Toggle zoom"
+	zoomdevicename = "lenses"
+	electric = TRUE
+	unacidable = TRUE
+
+/obj/item/clothing/glasses/augment_binoculars/attack_self(mob/user)
+	if(zoom)
+		unzoom(user)
+	else
+		zoom(user)

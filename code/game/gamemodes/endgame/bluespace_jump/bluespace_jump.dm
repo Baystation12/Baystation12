@@ -119,15 +119,21 @@
 	return daddy.examine(arglist(args))
 
 /obj/effect/bluegoast/proc/blueswitch()
-	var/mob/living/carbon/human/H = new(get_turf(src), daddy.species.name)
+	var/mob/living/carbon/human/H
+	if(ishuman(daddy))
+		H = new(get_turf(src), daddy.species.name)
+		H.dna = daddy.dna.Clone()
+		H.sync_organ_dna()
+		H.UpdateAppearance()
+		for(var/obj/item/entry in daddy.get_equipped_items(TRUE))
+			daddy.remove_from_mob(entry) //steals instead of copies so we don't end up with duplicates
+			H.equip_to_appropriate_slot(entry)
+	else
+		H = new daddy.type(get_turf(src))
+		H.appearance = daddy.appearance
+
 	H.real_name = daddy.real_name
-	H.dna = daddy.dna.Clone()
-	H.sync_organ_dna()
 	H.flavor_text = daddy.flavor_text
-	H.UpdateAppearance()
-	var/datum/job/job = SSjobs.get_by_title(daddy.job)
-	if(job)
-		job.equip(H)
 	daddy.dust()
 	qdel(src)
 

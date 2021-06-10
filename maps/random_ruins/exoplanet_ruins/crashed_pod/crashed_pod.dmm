@@ -482,7 +482,7 @@
 	dir = 1;
 	icon_state = "railing0-1"
 	},
-/obj/item/tape/engineering,
+/obj/item/taperoll/engineering,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
 "fj" = (
@@ -665,6 +665,7 @@
 /obj/item/stack/material/glass/fifty,
 /obj/item/stack/material/glass/fifty,
 /obj/item/stack/material/plasteel/fifty,
+/obj/item/stack/material/plastic/fifty,
 /obj/item/device/flashlight/lantern,
 /obj/item/device/flashlight/lantern,
 /obj/item/storage/box/glowsticks,
