@@ -157,6 +157,39 @@
 	damage_flags = 0
 	muzzle_type = /obj/effect/projectile/bullet/muzzle
 
+// /obj/item/projectile/bola
+// 	name = "bola"
+// 	icon_state = "bola"
+// 	damage = 5
+// 	embed = FALSE //Nada.
+// 	damage_type = HALLOSS
+// 	muzzle_type = null
+
+// /obj/item/projectile/bola/on_hit(var/atom/target, var/blocked = 0)
+// 	if(ishuman(target))
+// 		var/mob/living/carbon/human/M = target
+// 		var/obj/item/weapon/handcuffs/legcuffs/bola/B = new(src.loc)
+// 		if(!B.place_legcuffs(M,firer))
+// 			if(B)
+// 				qdel(B)
+// 	..()
+
+/obj/item/projectile/webball
+	name = "ball of web"
+	icon_state = "bola"
+	damage = 10
+	embed = FALSE //Nada.
+	damage_type = BRUTE
+	muzzle_type = null
+
+/obj/item/projectile/webball/on_hit(var/atom/target, var/blocked = 0)
+	if(isturf(target.loc))
+		var/obj/effect/spider/stickyweb/W = locate() in get_turf(target)
+		if(!W && prob(75))
+			visible_message(SPAN_DANGER("\The [src] splatters a layer of web on \the [target]!"))
+			new /obj/effect/spider/stickyweb(target.loc)
+	..()
+
 /obj/item/projectile/venom
 	name = "venom bolt"
 	icon_state = "venom"

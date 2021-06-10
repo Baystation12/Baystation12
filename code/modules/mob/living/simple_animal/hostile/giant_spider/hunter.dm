@@ -18,7 +18,7 @@
 
 	movement_cooldown = 0 // Hunters are FAST.
 
-	ai_holder_type = /datum/ai_holder/simple_animal/melee
+	ai_holder_type = /datum/ai_holder/simple_animal/melee/hit_and_run/hunter_spider
 
 	// Leaping is a special attack, so these values determine when leap can happen.
 	// Leaping won't occur if its on cooldown.
@@ -83,3 +83,6 @@
 		. = TRUE
 
 	set_AI_busy(FALSE)
+
+/datum/ai_holder/simple_animal/melee/hit_and_run/hunter_spider
+	can_flee = TRUE

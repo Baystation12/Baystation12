@@ -82,35 +82,49 @@
 	desc = "They seem to pulse slightly with an inner life."
 	icon_state = "eggs"
 	var/amount_grown = 0
+	var/spiders_min = 6
+	var/spiders_max = 24
+	var/spider_type = /obj/effect/spider/spiderling
 
-/obj/effect/spider/eggcluster/Initialize(mapload, atom/parent)
-	. = ..()
-	get_light_and_color(parent)
+/obj/effect/spider/eggcluster/Initialize()
 	pixel_x = rand(3,-3)
 	pixel_y = rand(3,-3)
 	START_PROCESSING(SSobj, src)
+	return ..()
+
+/obj/effect/spider/eggcluster/New(var/location, var/atom/parent)
+	get_light_and_color(parent)
+	..()
 
 /obj/effect/spider/eggcluster/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	if(istype(loc, /obj/item/organ/external))
 		var/obj/item/organ/external/O = loc
 		O.implants -= src
-	. = ..()
+
+	return ..()
 
 /obj/effect/spider/eggcluster/Process()
 	if(prob(70))
 		amount_grown += rand(0,2)
 	if(amount_grown >= 100)
-		var/num = rand(3,9)
+		var/num = rand(spiders_min, spiders_max)
 		var/obj/item/organ/external/O = null
 		if(istype(loc, /obj/item/organ/external))
 			O = loc
 
 		for(var/i=0, i<num, i++)
-			var/spiderling = new /obj/effect/spider/spiderling(loc, src)
+			var/spiderling = new spider_type(src.loc, src)
 			if(O)
 				O.implants += spiderling
 		qdel(src)
+
+/obj/effect/spider/eggcluster/small
+	spiders_min = 1
+	spiders_max = 3
+
+/obj/effect/spider/eggcluster/small/frost
+	spider_type = /obj/effect/spider/spiderling/frost
 
 /obj/effect/spider/spiderling
 	name = "spiderling"
@@ -133,6 +147,19 @@
 						/mob/living/simple_animal/hostile/giant_spider/nurse = 2,
 						/mob/living/simple_animal/hostile/giant_spider/spitter = 2,
 						/mob/living/simple_animal/hostile/giant_spider/hunter = 1)
+
+/obj/effect/spider/spiderling/frost
+	castes = list(/mob/living/simple_animal/hostile/giant_spider/frost = 1)
+
+/obj/effect/spider/spiderling/New(var/location, var/atom/parent)
+	pixel_x = rand(6,-6)
+	pixel_y = rand(6,-6)
+	START_PROCESSING(SSobj, src)
+	//50% chance to grow up
+	if(prob(50))
+		amount_grown = 1
+	get_light_and_color(parent)
+	..()
 
 /obj/effect/spider/spiderling/Initialize(var/mapload, var/atom/parent)
 	greater_form = pickweight(castes)
