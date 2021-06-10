@@ -30,7 +30,7 @@ SUBSYSTEM_DEF(aifast)
 	while(currentrun.len)
 		var/datum/ai_holder/A = currentrun[currentrun.len]
 		--currentrun.len
-		if(!A || QDELETED(A) || A.busy) // Doesn't exist or won't exist soon or not doing it this tick
+		if(!A || QDELETED(A) || A.busy || !A.holder) // Doesn't exist or won't exist soon or not doing it this tick
 			continue
 		A.handle_tactics()
 
