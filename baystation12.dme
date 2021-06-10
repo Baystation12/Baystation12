@@ -248,6 +248,7 @@
 #include "code\datums\local_network.dm"
 #include "code\datums\mil_ranks.dm"
 #include "code\datums\mutable_appearance.dm"
+#include "code\datums\powers.dm"
 #include "code\datums\progressbar.dm"
 #include "code\datums\recipe.dm"
 #include "code\datums\ruins.dm"
