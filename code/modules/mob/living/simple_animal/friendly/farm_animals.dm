@@ -5,7 +5,6 @@
 	icon_state = "goat"
 	icon_living = "goat"
 	icon_dead = "goat_dead"
-	speak_emote = list("brays")
 	turns_per_move = 5
 	see_in_dark = 6
 	response_help  = "pets"
@@ -44,7 +43,7 @@
 	. = ..()
 	if(.)
 		//chance to go crazy and start wacking stuff
-		if(!length(ai_holder.attackers) && prob(1))
+		if(!length(ai_holder?.attackers) && prob(1))
 			var/list/nearby_stuff = hearers(src, ai_holder.vision_range)
 			if (length(nearby_stuff))
 				ai_holder.react_to_attack(pick(nearby_stuff))

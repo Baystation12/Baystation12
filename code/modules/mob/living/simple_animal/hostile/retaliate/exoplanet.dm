@@ -2,7 +2,7 @@
 /mob/living/simple_animal/hostile/retaliate/beast
 	var/hunger = 0
 	var/list/prey = list()
-	// ai_holder_type = /datum/ai_holder/simple_animal/retaliate/beast
+	ai_holder_type = /datum/ai_holder/simple_animal/beast
 
 /mob/living/simple_animal/hostile/retaliate/beast/Life()
 	. = ..()
@@ -218,27 +218,11 @@
 
 	say_list_type = /datum/say_list/shantak/lava
 
-//Mob AI's
-
-// /datum/ai_holder/simple_animal/retaliate/beast/list_targets()
-// 	. = ..()
-
-// 	var/mob/living/simple_animal/hostile/retaliate/beast/B = holder
-// 	var/list/see = ..()
-// 	if(see.len)
-// 		return see
-// 	if(B.prey.len)
-// 		. = list()
-// 		for(var/weakref/W in B.prey)
-// 			var/mob/M = W.resolve()
-// 			if(M)
-// 				. += M
-// 		return
-// 	if(B.hunger > 500) //time to look for some food
-// 		hostile = TRUE
-
 
 /* AI */
+
+/datum/ai_holder/simple_animal/beast
+	speak_chance = 5
 
 /datum/ai_holder/simple_animal/diyaab/post_melee_attack(atom/A)
 	. = ..()

@@ -20,6 +20,8 @@
 	bone_material = null
 	bone_amount = 0
 
+	can_be_buckled = FALSE
+
 	var/emp_damage = 0
 
 	var/obj/item/device/radio/exosuit/radio
@@ -230,5 +232,3 @@
 		hud_power_control?.queue_icon_update()
 	else
 		to_chat(user, SPAN_WARNING("Error: No power cell was detected."))
-
-

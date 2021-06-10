@@ -517,6 +517,63 @@
 	req_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 4, TECH_MATERIAL = 4, TECH_BIO = 3)
 	id = "augment_wolverine"
 
+/datum/design/item/mechfab/augment/armblade/wrist_blade
+	name = "Wrist blade"
+	build_path = /obj/item/organ/internal/augment/active/simple/wrist_blade
+	materials = list(MATERIAL_TITANIUM = 4000, MATERIAL_DIAMOND = 250)
+	req_tech = list(TECH_ESOTERIC = 4, TECH_COMBAT = 5, TECH_BIO = 3)
+	id = "augment_wristblade"
+
+/datum/design/item/mechfab/augment/armblade/popout_shotgun
+	name = "Pop-out shotgun"
+	build_path = /obj/item/organ/internal/augment/active/simple/popout_shotgun
+	materials = list(DEFAULT_WALL_MATERIAL = 5000, MATERIAL_SILVER = 500)
+	req_tech = list(TECH_ESOTERIC = 5, TECH_COMBAT = 6, TECH_BIO = 4)
+	id = "augment_popout_shotgun"
+
+/datum/design/item/mechfab/augment/corrective_lenses
+	name = "Corrective lenses"
+	build_path = /obj/item/organ/internal/augment/active/simple/equip/corrective_lenses
+	materials = list(DEFAULT_WALL_MATERIAL = 500, MATERIAL_GLASS = 1000)
+	req_tech = list(TECH_MATERIAL = 2)
+	id = "augment_corrective_lenses"
+
+/datum/design/item/mechfab/augment/glare_dampeners
+	name = "Glare dampeners"
+	build_path = /obj/item/organ/internal/augment/active/simple/equip/glare_dampeners
+	materials = list(DEFAULT_WALL_MATERIAL = 100, MATERIAL_GLASS = 2000)
+	req_tech = list(TECH_MATERIAL = 3, TECH_ENGINEERING = 3)
+	id = "augment_glare_dampeners"
+
+/datum/design/item/mechfab/augment/adaptive_binoculars
+	name = "Adaptive binoculars"
+	build_path = /obj/item/organ/internal/augment/active/simple/equip/adaptive_binoculars
+	materials = list(MATERIAL_DIAMOND = 100, MATERIAL_GOLD = 100, MATERIAL_GLASS = 2000)
+	// We use decent requirements for this, because it allows someone to zoom in and grab ammo from an open container at the same time
+	req_tech = list(TECH_MATERIAL = 4, TECH_ENGINEERING = 4, TECH_COMBAT = 4)
+	id = "augment_adaptive_binoculars"
+
+/datum/design/item/mechfab/augment/iatric_monitor
+	name = "Iatric monitor"
+	build_path = /obj/item/organ/internal/augment/active/iatric_monitor
+	materials = list(DEFAULT_WALL_MATERIAL = 100, MATERIAL_GLASS = 2000)
+	req_tech = list(TECH_BIO = 3)
+	id = "augment_iatric_monitor"
+
+/datum/design/item/mechfab/augment/internal_air_system
+	name = "Internal air system"
+	build_path = /obj/item/organ/internal/augment/active/internal_air_system
+	materials = list(DEFAULT_WALL_MATERIAL = 500, MATERIAL_GLASS = 2000, MATERIAL_DIAMOND = 100)
+	req_tech = list(TECH_MATERIAL = 5, TECH_BIO = 5)
+	id = "augment_internal_air_system"
+
+/datum/design/item/mechfab/augment/leukocyte_breeder
+	name = "Leukocyte breeder"
+	build_path = /obj/item/organ/internal/augment/active/leukocyte_breeder
+	materials = list(DEFAULT_WALL_MATERIAL = 2000, MATERIAL_GLASS = 1000)
+	req_tech = list(TECH_MAGNET = 4, TECH_DATA = 4, TECH_BIO = 6)
+	id = "augment_leukocyte_breeder"
+
 /datum/design/item/mechfab/augment/engineering
 	name = "Engineering toolset"
 	build_path = /obj/item/organ/internal/augment/active/polytool/engineer
@@ -575,6 +632,13 @@
 	materials = list(DEFAULT_WALL_MATERIAL = 250, "glass" = 250)
 	req_tech = list(TECH_BIO = 1, TECH_MAGNET = 3)
 	id= "augment_jani_hud"
+
+/datum/design/item/mechfab/augment/hud/science
+	name = "Implantable science HUD"
+	build_path = /obj/item/organ/internal/augment/active/hud/science
+	materials = list(DEFAULT_WALL_MATERIAL = 250, "glass" = 250)
+	req_tech = list(TECH_BIO = 1, TECH_MAGNET = 3)
+	id= "augment_sci_hud"
 
 /datum/design/item/mechfab/augment/nanounit
 	name = "Nanite MCU"

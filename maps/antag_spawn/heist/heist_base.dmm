@@ -960,7 +960,7 @@
 	available_channels = list();
 	ears = list();
 	name = "\proper Meatbag";
-	speak = list("Yaaar!","Squaaak!","Fight me Matey!","BAWWWWK Vox trying to eat me!")
+	say_list_type = /datum/say_list/parrot/heist
 	},
 /turf/unsimulated/floor{
 	icon_state = "asteroid"

@@ -45,7 +45,8 @@
 	desc = "These Odysseus series legs are built from lightweight flexible polymers, making them capable of handling falls from up to 120 meters in 1g environments. Provided that the exosuit lands on its feet."
 	max_fall_damage = 0
 
-/obj/item/mech_component/propulsion/handle_vehicle_fall()
+/obj/item/mech_component/propulsion/light/handle_vehicle_fall()
+	..()
 	visible_message(SPAN_NOTICE("\The [src] creak as they absorb the impact."))
 
 /obj/item/mech_component/sensors/light

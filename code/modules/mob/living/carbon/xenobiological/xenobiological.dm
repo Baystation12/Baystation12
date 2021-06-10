@@ -26,6 +26,8 @@
 	bone_material = null
 	bone_amount = 0
 
+	can_be_buckled = FALSE
+
 	var/toxloss = 0
 	var/is_adult = 0
 	var/number = 0 // Used to understand when someone is talking to it

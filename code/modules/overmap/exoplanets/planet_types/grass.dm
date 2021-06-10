@@ -96,6 +96,12 @@
 /obj/effect/overmap/visitable/sector/exoplanet/grass/terraformed/generate_habitability()
 	habitability_class = HABITABILITY_IDEAL
 
+/obj/effect/overmap/visitable/sector/exoplanet/grass/terraformed/generate_atmosphere()
+	..()
+	if(atmosphere)
+		atmosphere.temperature = T0C + rand(0, 50)
+		atmosphere.update_values()
+
 /obj/effect/overmap/visitable/sector/exoplanet/grass/generate_map()
 	lightlevel = rand(0.7,0.9)/10
 	..()

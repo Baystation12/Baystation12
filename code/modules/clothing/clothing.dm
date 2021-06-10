@@ -279,7 +279,6 @@ BLIND     // can't see anything
 	var/clipped = 0
 	var/obj/item/clothing/ring/ring = null		//Covered ring
 	var/mob/living/carbon/human/wearer = null	//Used for covered rings when dropping
-	var/pickpocket = FALSE  //Indicates these gloves are pickpocketing gloves.
 	body_parts_covered = HANDS
 	slot_flags = SLOT_GLOVES
 	attack_verb = list("challenged")

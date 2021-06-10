@@ -151,6 +151,11 @@
 	else
 		to_chat(user, "<span class='notice'>The [encased ? encased : "bones in the [name]"] seem to be fine.</span>")
 
+	for (var/obj/item/organ/internal/augment/A in internal_organs) // Locate any non-concealed augments
+		if (A.discoverable)
+			to_chat(user, SPAN_WARNING("You feel a foreign object inside of \the [owner]'s [name]!"))
+			owner.custom_pain("Your [name] hurts as your [A.name] is jostled inside it.", 20, affecting = src)
+			break
 	if(status & ORGAN_TENDON_CUT)
 		to_chat(user, "<span class='warning'>The tendons in [name] are severed!</span>")
 	if(dislocated == 2)

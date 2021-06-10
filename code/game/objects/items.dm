@@ -706,8 +706,14 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	else if(!zoom && istype(H) && H.equipment_tint_total >= TINT_MODERATE)
 		to_chat(user, "<span class='warning'>Your visor gets in the way of looking through the [devicename].</span>")
 		return
-	else if(!zoom && user.get_active_hand() != src)
-		to_chat(user, "<span class='warning'>You are too distracted to look through the [devicename], perhaps if it was in your active hand this might work better.</span>")
+	var/is_distracted
+	if (H) // Humans can zoom through items they wear on their eyes
+		is_distracted = !zoom && H.get_active_hand() != src && H.get_equipped_item(slot_glasses) != src
+	else
+		is_distracted = !zoom && user.get_active_hand() != src
+
+	if(is_distracted)
+		to_chat(user, SPAN_WARNING("You are too distracted to look through the [devicename]. Perhaps if it was in your active hand this might work better."))
 		return
 
 	if(user.hud_used.hud_shown)

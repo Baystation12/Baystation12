@@ -57,3 +57,9 @@
 	desc = "An implantable HUD based on the wearable janitorial version, designed to interface with the user's optic nerve and display information about nearby messes."
 	icon_state = "eye_janitor"
 	hud_type = HUD_JANITOR
+
+/obj/item/organ/internal/augment/active/hud/science
+	name = "integrated sciHUD"
+	desc = "An implantable HUD fitted with a portable analyzer capable of determining the research potential of a visible item or the components of a machine."
+	icon_state = "eye_science"
+	hud_type = HUD_SCIENCE

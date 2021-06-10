@@ -2,6 +2,8 @@
 	see_in_dark = 2
 	see_invisible = SEE_INVISIBLE_LIVING
 	waterproof = FALSE
+	/// Whether or not the mob can be buckled to things.
+	var/can_be_buckled = TRUE
 
 	//Health and life related vars
 	var/maxHealth = 100 //Maximum health that should be possible.

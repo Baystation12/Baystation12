@@ -57,9 +57,7 @@
 	service_hat = /obj/item/clothing/head/solgov/dress/fleet
 	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet
 
-	dress_over = list(
-		/obj/item/clothing/suit/storage/solgov/dress/fleet
-	)
+	dress_over = /obj/item/clothing/suit/storage/solgov/dress/fleet
 
 /decl/hierarchy/mil_uniform/fleet/eng/snco
 	name = "Fleet engineering SNCO"

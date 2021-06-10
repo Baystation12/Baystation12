@@ -130,11 +130,6 @@
 	out += "<b>Ambitions:</b> [ambition ? ambition.description : "None"] <a href='?src=\ref[src];amb_edit=\ref[src]'>\[edit\]</a></br>"
 	show_browser(usr, out, "window=edit_memory[src]")
 
-/datum/mind/proc/get_goal_from_href(var/href)
-	var/ind = isnum(href) ? href : text2num(href)
-	if(ind > 0 && ind <= LAZYLEN(goals))
-		return goals[ind]
-
 /datum/mind/Topic(href, href_list)
 
 	var/is_admin =   FALSE
@@ -145,14 +140,16 @@
 	if(href_list["add_goal"])
 
 		var/mob/caller = locate(href_list["add_goal_caller"])
-		if(caller && caller == current) can_modify = TRUE
+		if(!isghost(usr) && caller && caller == current) can_modify = TRUE
 
 		if(can_modify)
-			if(is_admin)
-				log_admin("[key_name_admin(usr)] added a random goal to [key_name(current)].")
-			var/did_generate_goal = generate_goals(assigned_job, TRUE, 1)
-			if(did_generate_goal)
-				to_chat(current, SPAN_NOTICE("You have received a new goal. Use <b>Show Goals</b> to view it."))
+			var/did_generate_goal = generate_goals(assigned_job, TRUE, 1, bypass_goal_checks = is_admin)
+			if(did_generate_goal && goals)
+				var/datum/goal/goal = goals[LAZYLEN(goals)]
+				to_chat(current, SPAN_NOTICE("<b>You have received a new goal:</b> '[goal.summarize(FALSE, FALSE)]'."))
+				if(usr != current)
+					to_chat(usr, SPAN_NOTICE("<b>You have added a new goal to \the [current]:</b> '[goal.summarize(FALSE, FALSE)]'."))
+					log_admin("[key_name_admin(usr)] added a random goal to [key_name(current)].")
 		return TRUE // To avoid 'you are not an admin' spam.
 
 	if(href_list["remove_memory"])
@@ -161,36 +158,38 @@
 		return TRUE
 
 	if(href_list["abandon_goal"])
-		var/datum/goal/goal = get_goal_from_href(href_list["abandon_goal"])
+		var/datum/goal/goal = locate(href_list["abandon_goal"])
 
 		var/mob/caller = locate(href_list["abandon_goal_caller"])
-		if(caller && caller == current) can_modify = TRUE
+		if(!isghost(usr) && caller && caller == current) can_modify = TRUE
 
-		if(goal && can_modify)
-			if(usr == current)
-				to_chat(current, SPAN_NOTICE("<b>You have abandoned your goal:</b> '[goal.summarize(FALSE, FALSE)]'."))
-			else
-				to_chat(usr, SPAN_NOTICE("<b>You have removed a goal from \the [current]:</b> '[goal.summarize(FALSE, FALSE)]'."))
-				to_chat(current, SPAN_NOTICE("<b>A goal has been removed:</b> '[goal.summarize(FALSE, FALSE)]'."))
-			qdel(goal)
+		if(can_modify && goal && (goal in goals))
+			if(delete_goal(assigned_job, goal, is_admin))
+				if(usr == current)
+					to_chat(current, SPAN_NOTICE("<b>You have abandoned your goal:</b> '[goal.summarize(FALSE, FALSE)]'."))
+				else
+					to_chat(usr, SPAN_NOTICE("<b>You have removed a goal from \the [current]:</b> '[goal.summarize(FALSE, FALSE)]'."))
+					to_chat(current, SPAN_NOTICE("<b>A goal has been removed:</b> '[goal.summarize(FALSE, FALSE)]'."))
+					log_admin("[key_name_admin(usr)] removed a goal from [key_name(current)].")
 		return TRUE
 
 	if(href_list["reroll_goal"])
-		var/datum/goal/goal = get_goal_from_href(href_list["reroll_goal"])
+		var/datum/goal/goal = locate(href_list["reroll_goal"])
 
 		var/mob/caller = locate(href_list["reroll_goal_caller"])
-		if(caller && caller == current) can_modify = TRUE
+		if(!isghost(usr) && caller && caller == current) can_modify = TRUE
 
-		if(goal && (goal in goals) && can_modify)
-			qdel(goal)
-			generate_goals(assigned_job, TRUE, 1)
-			if(goals)
-				goal = goals[LAZYLEN(goals)]
-				if(usr == current)
-					to_chat(usr, SPAN_NOTICE("<b>You have re-rolled a goal. Your new goal is:</b> '[goal.summarize(FALSE, FALSE)]'."))
-				else
-					to_chat(usr, SPAN_NOTICE("<b>You have re-rolled a goal for \the [current]. Their new goal is:</b> '[goal.summarize(FALSE, FALSE)]'."))
-					to_chat(current, SPAN_NOTICE("<b>A goal has been re-rolled. Your new goal is:</b> '[goal.summarize(FALSE, FALSE)]'."))
+		if(can_modify && goal && (goal in goals))
+			if(generate_goals(assigned_job, TRUE, 1, bypass_goal_checks = TRUE))
+				delete_goal(assigned_job, goal, TRUE)
+				if(goals)
+					goal = goals[LAZYLEN(goals)]
+					if(usr == current)
+						to_chat(usr, SPAN_NOTICE("<b>You have re-rolled a goal. Your new goal is:</b> '[goal.summarize(FALSE, FALSE)]'."))
+					else
+						to_chat(usr, SPAN_NOTICE("<b>You have re-rolled a goal for \the [current]. Their new goal is:</b> '[goal.summarize(FALSE, FALSE)]'."))
+						to_chat(current, SPAN_NOTICE("<b>A goal has been re-rolled. Your new goal is:</b> '[goal.summarize(FALSE, FALSE)]'."))
+						log_admin("[key_name_admin(usr)] rerolled a goal for [key_name(current)].")
 		return TRUE
 
 	if(!is_admin) return
