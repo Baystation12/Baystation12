@@ -21,6 +21,10 @@
 	var/item_state = null // Used to specify the item state for the on-mob overlays.
 	var/does_spin = TRUE // Does the atom spin when thrown (of course it does :P)
 
+	var/icon_scale_x = 1 // Used to scale icons up or down horizonally in update_transform().
+	var/icon_scale_y = 1 // Used to scale icons up or down vertically in update_transform().
+	var/icon_rotation = 0 // Used to rotate icons in update_transform()
+
 /atom/movable/Destroy()
 	if(!(atom_flags & ATOM_FLAG_INITIALIZED))
 		crash_with("Was deleted before initalization")
@@ -239,3 +243,29 @@
 
 /atom/movable/proc/get_bullet_impact_effect_type()
 	return BULLET_IMPACT_NONE
+
+/atom/movable/proc/get_icon_scale_x()
+	return icon_scale_x
+
+/atom/movable/proc/get_icon_scale_y()
+	return icon_scale_y
+
+/atom/movable/proc/update_transform()
+	var/matrix/M = matrix()
+	M.Scale(icon_scale_x, icon_scale_y)
+	M.Turn(icon_rotation)
+	src.transform = M
+
+// Use this to set the object's scale.
+/atom/movable/proc/adjust_scale(new_scale_x, new_scale_y)
+	if(isnull(new_scale_y))
+		new_scale_y = new_scale_x
+	if(new_scale_x != 0)
+		icon_scale_x = new_scale_x
+	if(new_scale_y != 0)
+		icon_scale_y = new_scale_y
+	update_transform()
+
+/atom/movable/proc/adjust_rotation(new_rotation)
+	icon_rotation = new_rotation
+	update_transform()

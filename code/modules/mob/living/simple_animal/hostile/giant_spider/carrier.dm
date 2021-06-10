@@ -24,7 +24,7 @@
 
 /mob/living/simple_animal/hostile/giant_spider/carrier/Initialize()
 	spiderling_count = rand(5, 10)
-	// adjust_scale(1.2)
+	adjust_scale(1.2)
 	return ..()
 
 /mob/living/simple_animal/hostile/giant_spider/carrier/death()
@@ -43,7 +43,7 @@
 				// swarmling.melee_damage_lower = swarm_dam_lower
 				// swarmling.melee_damage_upper = swarm_dam_upper
 				swarmling.faction = swarmling_faction
-				// swarmling.adjust_scale(0.75)
+				swarmling.adjust_scale(0.75)
 				new_spiders += swarmling
 			else if(src)
 				var/obj/effect/spider/spiderling/child = new spiderling_type(src.loc)

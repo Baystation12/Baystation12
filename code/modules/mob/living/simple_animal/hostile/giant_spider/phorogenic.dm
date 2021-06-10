@@ -37,7 +37,7 @@
 	var/explosion_delay_upper	= 2 SECONDS	// Upper bound.
 
 /mob/living/simple_animal/hostile/giant_spider/phorogenic/Initialize()
-	// adjust_scale(1.25)
+	adjust_scale(1.25)
 	return ..()
 
 /mob/living/simple_animal/hostile/giant_spider/phorogenic/death()

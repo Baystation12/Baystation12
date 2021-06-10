@@ -15,5 +15,5 @@
 	poison_type = /datum/reagent/capsaicin/condensed
 
 /mob/living/simple_animal/hostile/giant_spider/pepper/Initialize()
-	// adjust_scale(1.1)
+	adjust_scale(1.1)
 	return ..()
