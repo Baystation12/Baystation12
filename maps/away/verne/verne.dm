@@ -77,11 +77,6 @@
 	icon_state = "darkmatter_shard"
 	base_icon_state = "darkmatter_shard"
 
-/obj/machinery/power/supermatter/randomsample
-	name = "experimental supermatter sample"
-	icon_state = "darkmatter_shard"
-	base_icon_state = "darkmatter_shard"
-
 /obj/machinery/power/supermatter/randomsample/Initialize()
 	. = ..()
 	nitrogen_retardation_factor = rand(0.01, 1)	//Higher == N2 slows reaction more
