@@ -283,9 +283,9 @@
 		holo_obj.holographic = TRUE
 		if(istype(holo_obj,/obj/item/storage))
 			set_extension(holo_obj,/datum/extension/chameleon/backpack,/obj/item/storage/backpack)
-		if(istype(holo_obj,/obj/item/clothing/mask/))
+		if(istype(holo_obj,/obj/item/clothing/mask))
 			set_extension(holo_obj,/datum/extension/chameleon/clothing,/obj/item/clothing/mask)
-		else if(istype(holo_obj,/obj/item/clothing/))
+		else if(istype(holo_obj,/obj/item/clothing))
 			set_extension(holo_obj,/datum/extension/chameleon/clothing)
 
 	if(HP.ambience)
