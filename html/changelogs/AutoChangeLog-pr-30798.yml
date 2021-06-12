@@ -1,0 +1,11 @@
+author: Mucker
+delete-after: true
+changes:
+  - tweak: Hivebots now have a 2 second wait period before they attack targets.
+  - tweak: Ranged hivebots now fire significantly slower, same with megabots and malf
+      drones.
+  - tweak: Abominations attack speed has been reduced.
+  - bugfix: Rogue drones no longer attack synthetics (or people in full cardborg clothing).
+  - bugfix: Fix spiders not being able to inject venom.
+  - bugfix: Fix faithless and space bats not being able to stun/weaken enemies.
+  - bugfix: Fix Pike being invisible.
