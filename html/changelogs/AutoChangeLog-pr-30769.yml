@@ -1,0 +1,4 @@
+author: MistakeNot4892
+delete-after: true
+changes:
+  - rscadd: Port Nebula's Pixel-based Overmap Movement
