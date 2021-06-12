@@ -116,7 +116,7 @@
 	set_dir(GLOB.reverse_dir[new_dir])
 
 /obj/effect/bluegoast/examine()
-	return daddy.examine(arglist(args))
+	return daddy?.examine(arglist(args))
 
 /obj/effect/bluegoast/proc/blueswitch()
 	var/mob/living/carbon/human/H
