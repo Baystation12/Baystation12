@@ -47,7 +47,7 @@
 	say_list_type = /datum/say_list/spider
 	ai_holder_type = /datum/ai_holder/simple_animal/melee
 
-	var/poison_type = "spidertoxin"	// The reagent that gets injected when it attacks.
+	var/poison_type = /datum/reagent/toxin/venom	// The reagent that gets injected when it attacks.
 	var/poison_chance = 10			// Chance for injection to occur.
 	var/poison_per_bite = 5			// Amount added per injection.
 

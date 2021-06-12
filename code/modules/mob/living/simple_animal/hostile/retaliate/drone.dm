@@ -16,6 +16,7 @@
 	health = 300
 	maxHealth = 300
 	speed = 8
+	base_attack_cooldown = 2 SECONDS
 	move_to_delay = 6
 	projectiletype = /obj/item/projectile/beam/drone
 	projectilesound = 'sound/weapons/laser3.ogg'

@@ -38,6 +38,7 @@
 	force = 30
 	sharp = TRUE
 	edge = TRUE
+	attack_cooldown = 1.5 SECONDS
 	attack_verb = list("mauled", "slashed")
 
 /mob/living/simple_animal/hostile/meat/abomination

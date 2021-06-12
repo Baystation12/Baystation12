@@ -15,7 +15,7 @@
 	movement_cooldown = 5	// A bit faster so that they can inject the eggs easier.
 
 	poison_per_bite = 5
-	poison_type = "stoxin"
+	poison_type = /datum/reagent/soporific
 
 	natural_weapon = /obj/item/natural_weapon/bite/spider/nurse
 
