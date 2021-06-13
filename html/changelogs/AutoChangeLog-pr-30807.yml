@@ -1,4 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Service borg consumables should now properly recharge/refill.

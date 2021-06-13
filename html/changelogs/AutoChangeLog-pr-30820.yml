@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Fixes a rare case of double messages appearing when a helm auto-disconnects
-      you.

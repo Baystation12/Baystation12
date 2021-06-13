@@ -1,8 +1,0 @@
-author: Domic
-delete-after: true
-changes:
-  - tweak: Suicide now accounts for damage, what you're wearing, where your brain
-      actually is, utilizes aim mode, and is now triggered manually instead of being
-      on a timer.
-  - bugfix: People who suicide are no longer save-able via MMI.
-  - bugfix: Suicide via less-than-lethal weapons is no longer easy to to.
