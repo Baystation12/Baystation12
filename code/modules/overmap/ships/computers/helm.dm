@@ -45,7 +45,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		if (!linked)
 			to_chat(current_operator, SPAN_DANGER("\The [src]'s controls lock up with an error flashing across the screen: Connection to vessel lost!"))
 			set_operator(null, TRUE)
-		if (!Adjacent(current_operator) || CanUseTopic(current_operator) != STATUS_INTERACTIVE || !viewing_overmap(current_operator))
+		else if (!Adjacent(current_operator) || CanUseTopic(current_operator) != STATUS_INTERACTIVE || !viewing_overmap(current_operator))
 			set_operator(null)
 
 	if (autopilot && dx && dy)
