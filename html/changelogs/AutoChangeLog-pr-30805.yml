@@ -1,7 +1,0 @@
-author: Spookerton
-delete-after: true
-changes:
-  - tweak: Old Fade Up / Fade Down / Split in setup have been deprecated - pick again
-      from the new options.
-  - tweak: Up/Down/Split hair fades were renamed to Fade (Up, Short), Fade (Down,
-      Short), and Split (High) because they have (Long) and (Low) versions now.
