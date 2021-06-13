@@ -99,13 +99,9 @@ meteor_act
 
 /mob/living/carbon/human/proc/check_head_coverage()
 
-	var/list/body_parts = list(head, wear_mask, wear_suit, w_uniform)
-	for(var/bp in body_parts)
-		if(!bp)	continue
-		if(bp && istype(bp ,/obj/item/clothing))
-			var/obj/item/clothing/C = bp
-			if(C.body_parts_covered & HEAD)
-				return 1
+	for(var/obj/item/clothing/bp in list(head, wear_mask, wear_suit, w_uniform))
+		if(bp.body_parts_covered & HEAD)
+			return 1
 	return 0
 
 //Used to check if they can be fed food/drinks/pills
@@ -114,6 +110,32 @@ meteor_act
 	for(var/obj/item/gear in protective_gear)
 		if(istype(gear) && (gear.body_parts_covered & FACE) && !(gear.item_flags & ITEM_FLAG_FLEXIBLEMATERIAL))
 			return gear
+
+///Returns null or the first equipped item covering the bodypart
+/mob/living/carbon/human/proc/get_clothing_coverage(bodypart)
+	switch(bodypart)
+		if (BP_HEAD)
+			bodypart = HEAD
+		if (BP_EYES)
+			bodypart = EYES
+		if (BP_MOUTH)
+			bodypart = FACE
+		if (BP_CHEST)
+			bodypart = UPPER_TORSO
+		if (BP_GROIN)
+			bodypart = LOWER_TORSO
+		if (BP_L_ARM, BP_R_ARM)
+			bodypart =  ARMS
+		if (BP_L_HAND,  BP_R_HAND)
+			bodypart =  HANDS
+		if (BP_L_LEG, BP_R_LEG)
+			bodypart = LEGS
+		if (BP_L_FOOT, BP_R_FOOT)
+			bodypart = FEET
+
+	for(var/obj/item/clothing/C in list(head, wear_mask, wear_suit, w_uniform, gloves, shoes, glasses))
+		if (C.body_parts_covered & bodypart)
+			return C
 	return null
 
 /mob/living/carbon/human/proc/check_shields(var/damage = 0, var/atom/damage_source = null, var/mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")

@@ -149,7 +149,11 @@
 /obj/screen/zone_sel/proc/set_selected_zone(bodypart)
 	var/old_selecting = selecting
 	selecting = bodypart
-	if(old_selecting != selecting)
+	var/mob/living/carbon/human/user = usr
+	if (istype(user) && (old_selecting == BP_MOUTH || selecting == BP_MOUTH) && user.aiming && user.aiming.active && user.aiming.aiming_at == user)
+		var/obj/aiming_overlay/AO = user.aiming
+		AO.aim_at(user, user.aiming.aiming_with, TRUE)
+	if (old_selecting != selecting)
 		update_icon()
 		return TRUE
 
