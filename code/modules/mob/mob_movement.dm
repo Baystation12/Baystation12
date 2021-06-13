@@ -69,7 +69,7 @@
 	if(!hand)
 		to_chat(src, "<span class='warning'>You have nothing to drop in your hand.</span>")
 	else if(hand.can_be_dropped_by_client(src))
-		drop_item(force = TRUE)
+		drop_item()
 
 //This gets called when you press the delete button.
 /client/verb/delete_key_pressed()
@@ -113,7 +113,7 @@
 	if(!isrobot(mob) && mob.stat == CONSCIOUS && isturf(mob.loc))
 		var/obj/item/I = mob.get_active_hand()
 		if(I && I.can_be_dropped_by_client(mob))
-			mob.drop_item(force = TRUE)
+			mob.drop_item()
 
 //This proc should never be overridden elsewhere at /atom/movable to keep directions sane.
 /atom/movable/Move(newloc, direct)
