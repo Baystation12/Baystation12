@@ -45,7 +45,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		if (!linked)
 			to_chat(current_operator, SPAN_DANGER("\The [src]'s controls lock up with an error flashing across the screen: Connection to vessel lost!"))
 			set_operator(null, TRUE)
-		if (!Adjacent(current_operator) || CanUseTopic(current_operator) != STATUS_INTERACTIVE || !viewing_overmap(current_operator))
+		else if (!Adjacent(current_operator) || CanUseTopic(current_operator) != STATUS_INTERACTIVE || !viewing_overmap(current_operator))
 			set_operator(null)
 
 	if (autopilot && dx && dy)
@@ -266,8 +266,6 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 	linked.update_operator_skill(current_operator)
 	if (!autopilot && old_operator && viewing_overmap(old_operator))
 		unlook(old_operator)
-
-	log_debug("HELM CONTROL: [current_operator ? current_operator : "NO PILOT"] taking control of [src] from [old_operator ? old_operator : "NO PILOT"] in [get_area(src)]. [autopilot ? "(AUTOPILOT MODE)" : null]")
 
 	if (!silent)
 		display_operator_change_message(old_operator, current_operator, autopilot)

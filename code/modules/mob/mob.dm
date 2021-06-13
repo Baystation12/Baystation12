@@ -291,6 +291,8 @@
 
 /mob/proc/reset_view(atom/A)
 	if (client)
+		client.pixel_x = initial(client.pixel_x)
+		client.pixel_y = initial(client.pixel_y)
 		A = A ? A : eyeobj
 		if (istype(A, /atom/movable))
 			client.perspective = EYE_PERSPECTIVE
@@ -584,11 +586,11 @@
 			else if(H.has_organ(BP_L_ARM) || H.has_organ(BP_R_ARM)) //If they only have one arm
 				grabtype = "arm"
 			else //If they have no arms
-				grabtype = "torso"	
+				grabtype = "torso"
 
 			visible_message(SPAN_WARNING("\The [src] leans down and grips \the [H]'s [grabtype]."), SPAN_NOTICE("You lean down and grip \the [H]'s [grabtype]."), exclude_mobs = list(H))
 			if(!H.stat)
-				to_chat(H, SPAN_WARNING("\The [src] leans down and grips your [grabtype]."))	
+				to_chat(H, SPAN_WARNING("\The [src] leans down and grips your [grabtype]."))
 
 		else //Otherwise we're probably just holding their arm to lead them somewhere
 			var/grabtype

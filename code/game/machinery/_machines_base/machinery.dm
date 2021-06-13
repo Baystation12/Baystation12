@@ -461,3 +461,6 @@ Class Procs:
 	var/obj/item/stock_parts/power/battery/battery = get_component_of_type(/obj/item/stock_parts/power/battery)
 	if(battery)
 		return battery.get_cell()
+
+/obj/machinery/proc/on_user_login(mob/M)
+	return

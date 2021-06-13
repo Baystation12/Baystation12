@@ -62,7 +62,7 @@
 		R.add_reagent(/datum/reagent/chloralhydrate/beer2, 50)
 		emag.SetName("Mickey Finn's Special Brew")
 
-/obj/item/robot_module/general/butler/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
+/obj/item/robot_module/clerical/butler/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	..()
 	var/obj/item/reagent_containers/food/condiment/enzyme/E = locate() in equipment
 	E.reagents.add_reagent(/datum/reagent/enzyme, 2 * amount)

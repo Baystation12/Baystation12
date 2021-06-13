@@ -296,7 +296,7 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 
 		else if(agony_amount > 0.5 * max_damage)
 			owner.visible_message("<span class='warning'>[owner] reels in pain!</span>")
-			if(has_genitals() || agony_amount > max_damage)
+			if(agony_amount > max_damage)
 				owner.Weaken(4)
 			else
 				owner.Stun(4)

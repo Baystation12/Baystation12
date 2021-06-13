@@ -30,6 +30,7 @@ var/list/mob_hat_cache = list()
 	universal_understand = TRUE
 	gender = NEUTER
 	pass_flags = PASS_FLAG_TABLE
+	faction = "silicon"
 	braintype = "Drone"
 	lawupdate = FALSE
 	density = TRUE

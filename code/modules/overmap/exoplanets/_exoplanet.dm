@@ -241,12 +241,12 @@ GLOBAL_VAR(planet_repopulation_disabled)
 	var/new_type = landmark_type
 	while(num)
 		attempts--
-		var/turf/T = locate(rand(20, maxx - 30), rand(20, maxy - 30),map_z[map_z.len])
+		var/turf/T = locate(rand(TRANSITIONEDGE + LANDING_ZONE_RADIUS, maxx - TRANSITIONEDGE - LANDING_ZONE_RADIUS), rand(TRANSITIONEDGE + LANDING_ZONE_RADIUS, maxy - TRANSITIONEDGE - LANDING_ZONE_RADIUS),map_z[map_z.len])
 		if (!T || (T in places)) // Two landmarks on one turf is forbidden as the landmark code doesn't work with it.
 			continue
 		if (attempts >= 0) // While we have the patience, try to find better spawn points. If out of patience, put them down wherever, so long as there are no repeats.
 			var/valid = TRUE
-			var/list/block_to_check = block(locate(T.x - 15, T.y - 15, T.z), locate(T.x + 15, T.y + 15, T.z))
+			var/list/block_to_check = block(locate(T.x - LANDING_ZONE_RADIUS, T.y - LANDING_ZONE_RADIUS, T.z), locate(T.x + LANDING_ZONE_RADIUS, T.y + LANDING_ZONE_RADIUS, T.z))
 			for (var/turf/check in block_to_check)
 				if (!istype(get_area(check), /area/exoplanet) || check.turf_flags & TURF_FLAG_NORUINS)
 					valid = FALSE

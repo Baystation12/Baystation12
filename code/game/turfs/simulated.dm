@@ -124,13 +124,16 @@
 				slip_stun = 10
 
 			if(M.slip("the [floor_type] floor", slip_stun))
-				for(var/i = 1 to slip_dist)
-					step(M, M.dir)
-					sleep(1)
+				addtimer(CALLBACK(M, /mob/proc/slip_handler, M.dir, slip_dist - 1, 1), 1)
 			else
 				M.inertia_dir = 0
 		else
 			M.inertia_dir = 0
+
+/mob/proc/slip_handler(dir, dist, delay)
+	if (dist > 0)
+		addtimer(CALLBACK(src, .proc/slip_handler, dir, dist - 1, delay), delay)
+	step(src, dir)
 
 //returns 1 if made bloody, returns 0 otherwise
 /turf/simulated/add_blood(mob/living/carbon/human/M as mob)

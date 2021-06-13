@@ -33,14 +33,11 @@
 						return FALSE
 	return TRUE
 
+
 /obj/item/clothing/attackby(obj/item/I, mob/user)
-	if (istype(I, /obj/item/clothing/accessory))
-		if (can_attach_accessory(I, user) && user.unEquip(I))
-			attach_accessory(user, I)
+	if (attempt_attach_accessory(I, user))
 		return
-	if (length(accessories))
-		for (var/obj/item/clothing/accessory/A in accessories)
-			A.attackby(I, user)
+	if (attempt_store_item(I, user))
 		return
 	..()
 
@@ -116,6 +113,44 @@
 	accessories -= A
 	update_accessory_slowdown()
 	update_clothing_icon()
+
+
+/obj/item/clothing/proc/attempt_attach_accessory(obj/item/I, mob/user)
+	if (!istype(I, /obj/item/clothing/accessory))
+		return FALSE
+	if (can_attach_accessory(I, user) && user.unEquip(I))
+		attach_accessory(user, I)
+		return TRUE
+	if (length(accessories))
+		for (var/obj/item/clothing/accessory/A in accessories)
+			if (A.attempt_attach_accessory(I, user))
+				return TRUE
+	return FALSE
+
+
+/obj/item/clothing/accessory/storage/proc/can_be_inserted(obj/item/I, mob/user, silent)
+	return container?.can_be_inserted(I, user, silent)
+
+
+/obj/item/clothing/accessory/storage/proc/handle_item_insertion(obj/item/I, silent, partial)
+	return container?.handle_item_insertion(I, silent, partial)
+
+
+/obj/item/clothing/proc/attempt_store_item(obj/item/I, mob/user, silent)
+	for (var/obj/item/clothing/accessory/storage/S in accessories)
+		if (S.can_be_inserted(I, user, TRUE) && S.handle_item_insertion(I, user))
+			if (!silent)
+				to_chat(user, SPAN_ITALIC("You store \the [I] in \the [S]."))
+			return TRUE
+	return FALSE
+
+
+/obj/item/clothing/suit/storage/attempt_store_item(obj/item/I, mob/user, silent = TRUE)
+	if (pockets?.can_be_inserted(I, user, TRUE) && pockets.handle_item_insertion(I, user))
+		if (!silent)
+			to_chat(user, SPAN_ITALIC("You store \the [I] in \the [src]."))
+		return TRUE
+	return ..()
 
 /obj/item/clothing/proc/removetie_verb()
 	set name = "Remove Accessory"
