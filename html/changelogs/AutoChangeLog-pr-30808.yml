@@ -1,0 +1,5 @@
+author: Mucker
+delete-after: true
+changes:
+  - admin: Added the 'End Round' button to the 'Server' tab that immediately ends
+      the current round.
