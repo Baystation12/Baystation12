@@ -203,7 +203,7 @@
 	if(ismob(target) && !user.skill_check(SKILL_MEDICAL, SKILL_BASIC))
 		syringestab(target, user)
 
-	if(!reagents.total_volume)
+	if(!reagents?.total_volume)
 		to_chat(user, "<span class='notice'>The syringe is empty.</span>")
 		mode = SYRINGE_DRAW
 		return
