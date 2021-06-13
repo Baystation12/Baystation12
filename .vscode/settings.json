@@ -5,5 +5,6 @@
 	"files.eol": "\r\n",
 	"files.insertFinalNewline": true,
 	"files.trimFinalNewlines": true,
-	"files.trimTrailingWhitespace": true
+	"files.trimTrailingWhitespace": true,
+	"gitblame.commitUrl": "https://github.com/baystation12/baystation12/commit/${hash}"
 }
