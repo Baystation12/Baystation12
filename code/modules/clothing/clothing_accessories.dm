@@ -37,6 +37,8 @@
 /obj/item/clothing/attackby(obj/item/I, mob/user)
 	if (attempt_attach_accessory(I, user))
 		return
+	if (attempt_store_item(I, user))
+		return
 	..()
 
 /obj/item/clothing/attack_hand(var/mob/user)
@@ -125,6 +127,30 @@
 				return TRUE
 	return FALSE
 
+
+/obj/item/clothing/accessory/storage/proc/can_be_inserted(obj/item/I, mob/user, silent)
+	return container?.can_be_inserted(I, user, silent)
+
+
+/obj/item/clothing/accessory/storage/proc/handle_item_insertion(obj/item/I, silent, partial)
+	return container?.handle_item_insertion(I, silent, partial)
+
+
+/obj/item/clothing/proc/attempt_store_item(obj/item/I, mob/user, silent)
+	for (var/obj/item/clothing/accessory/storage/S in accessories)
+		if (S.can_be_inserted(I, user, TRUE) && S.handle_item_insertion(I, user))
+			if (!silent)
+				to_chat(user, SPAN_ITALIC("You store \the [I] in \the [S]."))
+			return TRUE
+	return FALSE
+
+
+/obj/item/clothing/suit/storage/attempt_store_item(obj/item/I, mob/user, silent = TRUE)
+	if (pockets?.can_be_inserted(I, user, TRUE) && pockets.handle_item_insertion(I, user))
+		if (!silent)
+			to_chat(user, SPAN_ITALIC("You store \the [I] in \the [src]."))
+		return TRUE
+	return ..()
 
 /obj/item/clothing/proc/removetie_verb()
 	set name = "Remove Accessory"
