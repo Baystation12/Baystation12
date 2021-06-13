@@ -22,6 +22,9 @@
 	var/collection_mode = 1;  //0 = pick one at a time, 1 = pick all on tile
 	var/use_sound = "rustle"	//sound played when used. null for no sound.
 
+	///If true, will not permit use of the storage UI
+	var/virtual
+
 	//initializes the contents of the storage with some items based on an assoc list. The assoc key must be an item path,
 	//the assoc value can either be the quantity, or a list whose first value is the quantity and the rest are args.
 	var/list/startswith
@@ -91,6 +94,8 @@
 		storage_ui.hide_from(user)
 
 /obj/item/storage/proc/open(mob/user as mob)
+	if (virtual)
+		return
 	if(!opened)
 		playsound(src.loc, src.open_sound, 50, 0, -5)
 		opened = 1
@@ -155,7 +160,7 @@
 	//Bypassing storage procedures when not using help intent for labeler/forensic tools.
 	if((istype(W, /obj/item/hand_labeler) || istype(W, /obj/item/forensics)) && user.a_intent != I_HELP)
 		return FALSE
-	
+
 	// Don't allow insertion of unsafed compressed matter implants
 	// Since they are sucking something up now, their afterattack will delete the storage
 	if(istype(W, /obj/item/implanter/compressed))
