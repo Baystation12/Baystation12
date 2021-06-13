@@ -68,8 +68,8 @@ var/global/list/sparring_attack_cache = list()
 				if (target.l_hand)
 					// Disarm left hand
 					//Urist McAssistant dropped the macguffin with a scream just sounds odd.
-					target.visible_message("<span class='danger'>\The [target.l_hand] was knocked right out of [target]'s grasp!</span>")
-					target.drop_l_hand()
+					if(target.drop_l_hand())
+						target.visible_message("<span class='danger'>\The [target.l_hand] was knocked right out of [target]'s grasp!</span>")
 			if(BP_R_ARM, BP_R_HAND)
 				if (target.r_hand)
 					// Disarm right hand
