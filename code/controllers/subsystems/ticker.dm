@@ -29,6 +29,9 @@ SUBSYSTEM_DEF(ticker)
 
 	var/secret_force_mode = "secret"
 
+	///Set to TRUE when an admin forcefully ends the round.
+	var/forced_end = FALSE
+
 /datum/controller/subsystem/ticker/Initialize()
 	to_world("<span class='info'><B>Welcome to the pre-game lobby!</B></span>")
 	to_world("Please, setup your character and select ready. Game will start in [round(pregame_timeleft/10)] seconds")
@@ -347,6 +350,9 @@ Helpers
 	return 0
 
 /datum/controller/subsystem/ticker/proc/game_finished()
+	if (forced_end)
+		return TRUE
+
 	if(mode.explosion_in_progress)
 		return 0
 	if(config.continous_rounds)
@@ -355,6 +361,9 @@ Helpers
 		return mode.check_finished() || (evacuation_controller.round_over() && evacuation_controller.emergency_evacuation) || universe_has_ended
 
 /datum/controller/subsystem/ticker/proc/mode_finished()
+	if (forced_end)
+		return TRUE
+
 	if(config.continous_rounds)
 		return mode.check_finished()
 	else
