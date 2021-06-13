@@ -1,0 +1,5 @@
+author: Spookerton
+delete-after: true
+changes:
+  - bugfix: Storing items in attached storage accessories by clicking on the holder
+      clothing with the item to store works again.
