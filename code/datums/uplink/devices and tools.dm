@@ -107,6 +107,7 @@
 	desc = "A pair of meson goggles that have been modified to instead show synthetics or living creatures, through thermal imaging."
 	item_cost = 24
 	path = /obj/item/clothing/glasses/thermal/syndi
+	antag_roles = list(MODE_TRAITOR)
 
 /datum/uplink_item/item/tools/flashdark
 	name = "Flashdark"

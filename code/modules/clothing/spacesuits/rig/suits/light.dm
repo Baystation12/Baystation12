@@ -65,7 +65,7 @@
 		/obj/item/rig_module/datajack,
 		/obj/item/rig_module/electrowarfare_suite,
 		/obj/item/rig_module/voice,
-		/obj/item/rig_module/vision,
+		/obj/item/rig_module/vision/nvg,
 		/obj/item/rig_module/cooling_unit
 		)
 
