@@ -88,7 +88,7 @@
 		last_comms = "ERROR: POSITIVE NUMBER UP TO 50 EXPECTED"
 		return
 	if(pad)
-		for(var/BulkCounter = 0, BulkCounter < BulkAmount, BulkCounter++)
+		for(var/i = 0 to BulkAmount))
 			get_response(T.offer_money_for_trade(num, bank, get_turf(pad), skill))
 		return
 	last_comms = "PAD NOT CONNECTED"
