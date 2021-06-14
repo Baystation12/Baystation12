@@ -81,7 +81,7 @@
 
 /datum/computer_file/program/merchant/proc/bulk_offer(var/datum/trader/T, var/num, skill)
 	var/BulkAmount = input("How many items? (Buy 1-50 items. 0 to cancel.)") as num
-	if(istext(BulkAmount))
+	if(!isnum(BulkAmount))
 		last_comms = "ERROR: NUMBER EXPECTED"
 		return
 	if(BulkAmount < 0 || BulkAmount > 50)
