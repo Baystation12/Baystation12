@@ -282,7 +282,7 @@
 		holo_obj.alpha *= 0.8 //give holodeck objs a slight transparency
 		holo_obj.holographic = TRUE
 		if(istype(holo_obj,/obj/item/storage))
-			set_extension(holo_obj,/datum/extension/chameleon/backpack,/obj/item/storage/backpack)
+			set_extension(holo_obj,/datum/extension/chameleon/backpack)
 		if(istype(holo_obj,/obj/item/clothing/mask))
 			set_extension(holo_obj,/datum/extension/chameleon/clothing,/obj/item/clothing/mask)
 		else if(istype(holo_obj,/obj/item/clothing))
