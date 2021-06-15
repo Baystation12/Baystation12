@@ -38,3 +38,16 @@
 			M.adjustFireLoss(-10)
 			M.updatehealth()
 		return 1
+
+/datum/artifact_effect/roboheal/destroyed_effect()
+	. = ..()
+
+	if(holder)
+		var/turf/T = get_turf(holder)
+		for (var/mob/living/silicon/robot/M in range(src.effectrange,T))
+			if(world.time - last_message > 200)
+				to_chat(M, SPAN_NOTICE("SYSTEM ALERT: All structural damage has been repaired by an energy pulse!"))
+				last_message = world.time
+			M.adjustBruteLoss(-50)
+			M.adjustFireLoss(-50)
+			M.updatehealth()

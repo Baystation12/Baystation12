@@ -164,3 +164,17 @@
 		protected += 0.1
 
 	return 1 - protected
+
+//Destruction/Damaged procs
+
+/**
+ * When an artifact is destroyed, this will be run before it is
+ */
+/datum/artifact_effect/proc/destroyed_effect()
+	return
+
+/**
+ * Called by the artifact the effect is attached too whenever it takes damage
+ */
+/datum/artifact_effect/proc/holder_damaged()
+	return

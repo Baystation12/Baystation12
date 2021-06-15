@@ -40,3 +40,17 @@
 				C.stuttering = 4 * susceptibility
 				if(prob(10))
 					C.SetStunned(1 * susceptibility)
+
+/datum/artifact_effect/stun/destroyed_effect()
+	. = ..()
+
+	if(holder)
+		var/turf/T = get_turf(holder)
+		for (var/mob/living/carbon/C in range(effectrange * 2,T))
+			var/susceptibility = GetAnomalySusceptibility(C)
+			if(prob(100 * susceptibility))
+				to_chat(C, SPAN_WARNING("A wave of energy overwhelms your senses!"))
+				C.SetWeakened(4 * susceptibility)
+				C.stuttering = 4 * susceptibility
+				if(prob(10))
+					C.SetStunned(1 * susceptibility)

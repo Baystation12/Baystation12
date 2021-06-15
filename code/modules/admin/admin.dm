@@ -1136,6 +1136,8 @@ var/global/floorIsLava = 0
 	var/datum/artifact_effect/secondary_effect
 	var/datum/artifact_trigger/secondary_trigger
 
+	var/damage_type
+
 	if (ispath(effect))
 		primary_trigger = input(usr, "Choose a trigger", "Choose a trigger") as null | anything in subtypesof(/datum/artifact_trigger)
 
@@ -1155,16 +1157,29 @@ var/global/floorIsLava = 0
 			if (!ispath(secondary_trigger))
 				return
 
+		var/damage_types = list("Sharp" = DAM_SHARP, "Bullet" = DAM_BULLET, "Edge" = DAM_EDGE, "Laser" = DAM_LASER)
+		choice = input(usr, "Choose a damage effect", "Choose Damage Effect") as null | anything in damage_types | "Invincible"
+
+		if (!choice)
+			return
+
+		if (choice != "Invincible")
+			damage_type = damage_types[choice]
+
 
 		A = new(usr.loc)
 		A.my_effect = new effect(A)
 		A.my_effect.trigger = new primary_trigger(A.my_effect)
+		A.damage_type = damage_type
+		A.set_damage_description(damage_type)
 
 		if (secondary_effect)
 			A.secondary_effect = new secondary_effect
 			A.secondary_effect.trigger = new secondary_trigger
 		else
 			QDEL_NULL(A.secondary_effect)
+
+		log_and_message_admins("spawned an artifact with effects [english_list(A.my_effect, A.secondary_effect)].")
 
 /datum/admins/proc/show_traitor_panel(var/mob/M in SSmobs.mob_list)
 	set category = "Admin"
