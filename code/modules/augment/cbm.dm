@@ -35,7 +35,7 @@
 		'[SPAN_NOTICE(uppertext(loaded_augment.name))] - [loaded_augment.known ? "N" : "Y"][loaded_augment.discoverable ? "N" : "Y"]'.")
 	else
 		to_chat(user, "It seems to be empty.")
-	if (is_admin(user) && !user.is_stealthed())
+	if (isadmin(user) && !user.is_stealthed())
 		to_chat(user, SPAN_NOTICE("<b>ADMIN NOTICE:</b> If you'd like to make installation instant, varedit the <b>cbm_debug</b> variable to anything but 0."))
 
 /obj/item/device/compact_bionic_module/attackby(obj/item/W, mob/living/user)

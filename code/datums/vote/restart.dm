@@ -6,7 +6,7 @@
 	choices = list(CHOICE_RESTART, CHOICE_CONTINUE)
 
 /datum/vote/restart/can_run(mob/creator, automatic)
-	if(!automatic && !config.allow_vote_restart && !is_admin(creator))
+	if(!automatic && !config.allow_vote_restart && !isadmin(creator))
 		return FALSE // Admins and autovotes bypass the config setting.
 	return ..()
 

@@ -13,8 +13,14 @@
 		return FALSE //M is too small to wield this
 	return TRUE
 
-/mob/living/proc/isSynthetic()
-	return 0
+
+/mob/proc/isSynthetic()
+	return FALSE
+
+
+/mob/living/silicon/isSynthetic()
+	return TRUE
+
 
 /mob/living/carbon/human/isSynthetic()
 	if(isnull(full_prosthetic))
@@ -30,14 +36,16 @@
 	return istype(internal_organs_by_name[BP_BRAIN], /obj/item/organ/internal/mmi_holder)
 
 
-/mob/living/silicon/isSynthetic()
-	return 1
+/// Determine if the mob is the supplied species by text name, species path, or species instance name
+/mob/proc/is_species(datum/species/S)
+	return FALSE
 
-/mob/proc/isMonkey()
-	return 0
 
-/mob/living/carbon/human/isMonkey()
-	return istype(species, /datum/species/monkey)
+/mob/living/carbon/is_species(datum/species/S)
+	if (!S) return FALSE
+	if (istext(S)) return species.name == S
+	if (ispath(S)) return species.name == initial(S.name)
+	return species.name == S.name
 
 
 /**
@@ -52,43 +60,23 @@
 			return TRUE
 
 
-proc/isdeaf(A)
-	if(isliving(A))
-		var/mob/living/M = A
-		return (M.sdisabilities & DEAFENED) || M.ear_deaf
-	return 0
+/proc/isdeaf(mob/living/M)
+	return istype(M) && (M.ear_deaf || M.sdisabilities & DEAFENED)
 
-proc/hasorgans(A) // Fucking really??
-	return ishuman(A)
-
-proc/iscuffed(A)
-	if(istype(A, /mob/living/carbon))
-		var/mob/living/carbon/C = A
-		if(C.handcuffed)
-			return 1
-	return 0
-
-proc/hassensorlevel(A, var/level)
-	var/mob/living/carbon/human/H = A
-	if(istype(H) && istype(H.w_uniform, /obj/item/clothing/under))
-		var/obj/item/clothing/under/U = H.w_uniform
-		return U.sensor_mode >= level
-	return 0
-
-proc/getsensorlevel(A)
-	var/mob/living/carbon/human/H = A
-	if(istype(H) && istype(H.w_uniform, /obj/item/clothing/under))
-		var/obj/item/clothing/under/U = H.w_uniform
-		return U.sensor_mode
-	return SUIT_SENSOR_OFF
+/proc/iscuffed(mob/living/carbon/C)
+	return istype(C) && C.handcuffed
 
 
-/proc/is_admin(var/mob/user)
-	return check_rights(R_ADMIN, 0, user) != 0
+/proc/getsensorlevel(mob/living/carbon/human/H)
+	if (!istype(H) || !istype(H.w_uniform, /obj/item/clothing/under))
+		return SUIT_SENSOR_OFF
+	var/obj/item/clothing/under/U = H.w_uniform
+	return U.sensor_mode
 
 
-/proc/hsl2rgb(h, s, l)
-	return //TODO: Implement
+/proc/hassensorlevel(mob/living/carbon/human/H, level)
+	return getsensorlevel(H) >= level
+
 
 /*
 	Miss Chance
@@ -556,7 +544,7 @@ var/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 			perpname = id.registered_name
 
 		var/datum/computer_file/report/crew_record/CR = get_crewmember_record(perpname)
-		if(check_records && !CR && !isMonkey())
+		if(check_records && !CR && !is_species(SPECIES_MONKEY))
 			threatcount += 4
 
 		if(check_arrest && CR && (CR.get_criminalStatus() == GLOB.arrest_security_status))

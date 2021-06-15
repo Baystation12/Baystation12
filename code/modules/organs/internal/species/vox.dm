@@ -185,7 +185,7 @@
 /obj/item/organ/internal/voxstack/examine(mob/user)
 	. = ..()
 
-	var/user_vox = isspecies(user, SPECIES_VOX) || isspecies(user, SPECIES_VOX_ARMALIS)
+	var/user_vox = user.is_species(SPECIES_VOX) || user.is_species(SPECIES_VOX_ARMALIS)
 	if (istype(backup))
 		var/owner_viable = find_dead_player(ownerckey, TRUE)
 		if (user_vox)
