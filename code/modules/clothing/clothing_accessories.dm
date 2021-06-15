@@ -84,7 +84,7 @@
 			to_chat(user, "<span class='notice'>It smells clean!</span>")
 		if(SMELL_STINKY)
 			to_chat(user, "<span class='bad'>It's quite stinky!</span>")
-	
+
 
 /obj/item/clothing/proc/update_accessory_slowdown()
 	slowdown_accessory = 0
@@ -132,25 +132,32 @@
 	return container?.can_be_inserted(I, user, silent)
 
 
-/obj/item/clothing/accessory/storage/proc/handle_item_insertion(obj/item/I, silent, partial)
-	return container?.handle_item_insertion(I, silent, partial)
+/obj/item/clothing/accessory/storage/proc/handle_item_insertion(obj/item/I, silent, no_update)
+	return container?.handle_item_insertion(I, silent, no_update)
 
 
 /obj/item/clothing/proc/attempt_store_item(obj/item/I, mob/user, silent)
 	for (var/obj/item/clothing/accessory/storage/S in accessories)
-		if (S.can_be_inserted(I, user, TRUE) && S.handle_item_insertion(I, user))
-			if (!silent)
-				to_chat(user, SPAN_ITALIC("You store \the [I] in \the [S]."))
+		if (S.can_be_inserted(I, user, TRUE) && S.handle_item_insertion(I, silent))
 			return TRUE
 	return FALSE
 
 
-/obj/item/clothing/suit/storage/attempt_store_item(obj/item/I, mob/user, silent = TRUE)
-	if (pockets?.can_be_inserted(I, user, TRUE) && pockets.handle_item_insertion(I, user))
-		if (!silent)
-			to_chat(user, SPAN_ITALIC("You store \the [I] in \the [src]."))
+/obj/item/clothing/suit/storage/attempt_store_item(obj/item/I, mob/user, silent)
+	if (pockets?.can_be_inserted(I, user, TRUE) && pockets.handle_item_insertion(I, silent))
 		return TRUE
 	return ..()
+
+
+/obj/item/clothing/accessory/storage/holster/can_be_inserted(obj/item/I, mob/user, silent)
+	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)
+	return H?.can_holster(I)
+
+
+/obj/item/clothing/accessory/storage/holster/handle_item_insertion(obj/item/I, silent, no_update)
+	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)
+	return H.holster(I, usr)
+
 
 /obj/item/clothing/proc/removetie_verb()
 	set name = "Remove Accessory"
