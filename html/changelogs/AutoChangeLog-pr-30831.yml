@@ -1,5 +1,0 @@
-author: Spookerton
-delete-after: true
-changes:
-  - bugfix: Holsters behave correctly again.
-  - tweak: You can no longer open holsters like storage.
