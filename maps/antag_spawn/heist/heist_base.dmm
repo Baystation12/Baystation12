@@ -876,7 +876,7 @@
 /obj/item/clothing/head/helmet/space/vox/stealth,
 /obj/item/clothing/shoes/magboots/vox,
 /obj/item/clothing/gloves/vox,
-/obj/item/clothing/glasses/thermal/plain/monocle,
+/obj/random/glasses,
 /obj/item/clothing/under/vox/vox_robes,
 /obj/item/gun/projectile/dartgun/vox/medical,
 /turf/unsimulated/floor{
@@ -1279,9 +1279,10 @@
 "cT" = (
 /obj/structure/table/rack,
 /obj/random/raider/hardsuit,
-/obj/item/clothing/glasses/thermal/plain/monocle,
+/obj/random/glasses,
 /obj/item/device/suit_cooling_unit,
 /obj/item/device/suit_cooling_unit,
+/obj/random/glasses,
 /turf/simulated/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
 "cU" = (
@@ -1634,6 +1635,7 @@
 "dN" = (
 /obj/structure/table/steel,
 /obj/random/maintenance,
+/obj/item/clothing/glasses/thermal,
 /turf/simulated/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
 "dO" = (

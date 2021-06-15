@@ -1077,6 +1077,7 @@
 /obj/structure/cable{
 	icon_state = "2-8"
 	},
+/obj/item/clothing/glasses/thermal,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_shuttle)
 "lz" = (
