@@ -147,6 +147,12 @@
 	req_amount = 2
 	difficulty = 2
 
+/datum/stack_recipe/intercom
+	title = "intercom frame"
+	result_type = /obj/item/frame/intercom
+	req_amount = 2
+	difficulty = 2
+
 /datum/stack_recipe/computer/telescreen
 	title = "modular telescreen frame"
 	result_type = /obj/item/modular_computer/telescreen
