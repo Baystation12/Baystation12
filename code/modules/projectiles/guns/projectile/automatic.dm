@@ -342,7 +342,7 @@
 	allowed_magazines = /obj/item/ammo_magazine/mil_rifle
 	one_hand_penalty = 10
 	accuracy_power = 9
-	accuracy = 4
+	accuracy = 1
 	bulk = GUN_BULK_RIFLE + 1
 	wielded_item_state = "battlerifle-wielded"
 	mag_insert_sound = 'sound/weapons/guns/interaction/ltrifle_magin.ogg'
@@ -377,7 +377,7 @@
 	ammo_type = /obj/item/ammo_casing/pistol/magnum
 	load_method = SINGLE_CASING|SPEEDLOADER
 	max_shells = 10
-	accuracy = 5
+	accuracy = 1
 	scope_zoom = 0
 	scoped_accuracy = 0
 	wielded_item_state = "semistrip-wielded"

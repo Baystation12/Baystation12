@@ -39,3 +39,15 @@
 	desc = "Contains most medicines you need to recover from injuries and illnesses, all in a convenient pill form. Splints for broken bones also included!"
 	item_cost = 48
 	path = /obj/item/storage/firstaid/combat
+
+/datum/uplink_item/item/medical/scanner
+	name = "Health Scanner"
+	desc = "A hand-held body scanner able to distinguish vital signs of the subject."
+	item_cost = 18
+	path = /obj/item/device/scanner/health
+
+/datum/uplink_item/item/medical/scanner
+	name = "Health HUD"
+	desc = "A heads-up display that scans the humans in view and provides accurate data about their health status."
+	item_cost = 18
+	path = /obj/item/clothing/glasses/hud/health
