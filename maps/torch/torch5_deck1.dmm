@@ -960,7 +960,7 @@
 	input_tag = "d1so2_in";
 	name = "Oxygen Supply Control";
 	output_tag = "d1so2_out";
-	sensor_name = "Oxygem Supply Tank";
+	sensor_name = "Oxygen Supply Tank";
 	sensor_tag = "d1so2_sensor"
 	},
 /obj/effect/floor_decal/industrial/outline/blue,
