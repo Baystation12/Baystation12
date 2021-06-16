@@ -439,22 +439,21 @@
 	helmet = /obj/item/clothing/head/helmet/space/void/medical/alt/sol
 	boots = /obj/item/clothing/shoes/magboots
 
-/obj/item/clothing/head/helmet/space/void/command
-	icon = 'maps/torch/icons/obj/obj_head_solgov.dmi'
-	item_icons = list(slot_head_str = 'maps/torch/icons/mob/onmob_head_solgov.dmi')
-	name = "command voidsuit helmet"
-	desc = "A light, radiation resistant voidsuit helmet commonly used among SCG uniformed services."
-	icon_state = "void_command"
-	item_state = "void_command"
-	light_overlay = "helmet_light_dual_green"
-
 /obj/item/clothing/suit/space/void/command
-	icon = 'maps/torch/icons/obj/obj_suit_solgov.dmi'
-	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
-	icon_state = "void_command"
-	item_state = "void_command"
 	name = "command voidsuit"
 	desc = "A light, radiation resistant voidsuit commonly used among SCG uniformed services. This one has an EC seal on its chest plate and command department markings."
+	icon = 'maps/torch/icons/obj/obj_suit_solgov.dmi'
+	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
+	icon_state = "rig_command"
+	item_state = "rig_command"
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'maps/torch/icons/mob/unathi/onmob_suit_solgov_unathi.dmi',
+		SPECIES_SKRELL = 'maps/torch/icons/mob/skrell/onmob_suit_solgov_skrell.dmi',
+		)
+	sprite_sheets_obj = list(
+		SPECIES_UNATHI = 'maps/torch/icons/obj/unathi/obj_suit_solgov_unathi.dmi',
+		SPECIES_SKRELL = 'maps/torch/icons/obj/skrell/obj_suit_solgov_skrell.dmi',
+		)
 	allowed = list(/obj/item/device/flashlight,/obj/item/tank,/obj/item/device/suit_cooling_unit,/obj/item/storage/briefcase/inflatable)
 
 /obj/item/clothing/suit/space/void/command/New()
@@ -465,41 +464,21 @@
 	helmet = /obj/item/clothing/head/helmet/space/void/command
 	boots = /obj/item/clothing/shoes/magboots
 
-//Exploration
-/obj/item/clothing/head/helmet/space/void/exploration
-	name = "exploration voidsuit helmet"
-	desc = "A helmet of Exoplanet Exploration Unit, standard issue for Expeditionary Corps away missions. It has an armored glass dome for superiour visibility and extra anti-radiation lining."
-	icon = 'maps/torch/icons/obj/obj_head_solgov.dmi'
-	item_icons = list(slot_head_str = 'maps/torch/icons/mob/onmob_head_solgov.dmi')
-	icon_state = "helm_explorer"
-	item_state = "helm_explorer"
-	sprite_sheets = list(
-		SPECIES_SKRELL = 'maps/torch/icons/mob/skrell/onmob_head_solgov_skrell.dmi'
-		)
-	sprite_sheets_obj = list()
-	armor = list(
-		melee = ARMOR_MELEE_RESISTANT,
-		bullet = ARMOR_BALLISTIC_MINOR,
-		laser = ARMOR_LASER_MINOR,
-		energy = ARMOR_ENERGY_RESISTANT,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = ARMOR_RAD_RESISTANT
-		)
-	light_overlay = "yellow_light"
-	tinted = FALSE
-
 /obj/item/clothing/suit/space/void/exploration
 	name = "exploration voidsuit"
 	icon = 'maps/torch/icons/obj/obj_suit_solgov.dmi'
 	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
 	desc = "The bulky Exoplanet Exploration Unit is a standard voidsuit for Expeditionary Corps field operations. It features extra padding and respectable radiation-resistant lining."
-	icon_state = "void_explorer"
-	item_state = "void_explorer"
+	icon_state = "rig_explorer"
+	item_state = "rig_explorer"
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'maps/torch/icons/mob/unathi/onmob_suit_solgov_unathi.dmi'
+		SPECIES_UNATHI = 'maps/torch/icons/mob/unathi/onmob_suit_solgov_unathi.dmi',
+		SPECIES_SKRELL = 'maps/torch/icons/mob/skrell/onmob_suit_solgov_skrell.dmi',
 		)
-	sprite_sheets_obj = list()
+	sprite_sheets_obj = list(
+		SPECIES_UNATHI = 'maps/torch/icons/obj/unathi/obj_suit_solgov_unathi.dmi',
+		SPECIES_SKRELL = 'maps/torch/icons/obj/skrell/obj_suit_solgov_skrell.dmi',
+		)
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT,
 		bullet = ARMOR_BALLISTIC_MINOR,

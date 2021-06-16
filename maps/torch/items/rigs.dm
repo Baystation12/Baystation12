@@ -303,6 +303,7 @@
 /obj/item/rig/exploration
 	name = "heavy exploration HCM"
 	suit_type = "heavy exploration hardsuit"
+	icon = 'maps/torch/icons/obj/uniques.dmi'
 	desc = "Expeditionary Corps' Exoplanet Exploration Armored Unit, A-Unit for short. Built for more hostile (and hungry) environments, it features additional armor and powered exoskeleton."
 	icon_state = "command_exp_rig"
 	armor = list(
@@ -348,7 +349,7 @@
 /obj/item/clothing/head/helmet/space/rig/command/exploration
 	camera = /obj/machinery/camera/network/exploration
 	icon_state = "command_exp_rig"
-	light_overlay = "yellow_double_light"
+	light_overlay = "helmet_light_wide"
 	brightness_on = 0.8
 
 /obj/item/rig/exploration/equipped
