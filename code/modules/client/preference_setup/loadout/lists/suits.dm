@@ -109,6 +109,7 @@
 	jackets += /obj/item/clothing/suit/storage/leather_jacket
 	jackets += /obj/item/clothing/suit/storage/toggle/brown_jacket
 	jackets += /obj/item/clothing/suit/storage/mbill
+	jackets += /obj/item/clothing/suit/storage/toggle/zipper
 	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(jackets)
 
 /datum/gear/suit/wintercoat
@@ -154,3 +155,11 @@
 	trenchcoats += /obj/item/clothing/suit/storage/det_trench/grey
 	trenchcoats += /obj/item/clothing/suit/leathercoat
 	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(trenchcoats)
+
+/datum/gear/suit/pullover
+    display_name = "sweater, pullover"
+    path = /obj/item/clothing/suit/storage/pullover
+
+/datum/gear/suit/pullover
+    display_name = "sweater, zip up"
+    path = /obj/item/clothing/suit/storage/toggle/zipper
