@@ -145,7 +145,6 @@
 		/obj/item/clothing/suit/armor/pcarrier/medium/security,
 		/obj/item/gun/energy/gun/small/secure,
 		/obj/item/device/flash,
-		/obj/item/melee/baton/loaded,
 		/obj/item/reagent_containers/spray/pepper,
 		/obj/item/taperoll/police,
 		/obj/item/clothing/accessory/storage/black_vest,
