@@ -10,11 +10,9 @@
 			possible_spawns.Add(C)
 
 	//25% chance for this to be a false alarm
-	var/num
-	if(prob(25))
-		num = 0
-	else
-		num = rand(2,6)
+	var/num = 0
+	if (length(possible_spawns) && prob(75))
+		num = rand(2, 6)
 	for(var/i=0, i<num, i++)
 		var/mob/living/simple_animal/hostile/retaliate/malf_drone/D = new(get_turf(pick(possible_spawns)))
 		drones_list.Add(D)
@@ -22,14 +20,7 @@
 			D.disabled = rand(15, 60)
 
 /datum/event/rogue_drone/announce()
-	var/msg
-	if(prob(33))
-		msg = "Attention: unidentified patrol drones detected within proximity to the [station_name()]"
-	else if(prob(50))
-		msg = "Unidentified Unmanned Drones approaching the [station_name()]. All hands take notice."
-	else
-		msg = "Class II Laser Fire detected nearby the [station_name()]."
-	command_announcement.Announce(msg, "[station_name()] Sensor Array")
+	command_announcement.Announce("Attention: unidentified patrol drones detected within proximity to the [location_name()]", "[location_name()] Sensor Array", zlevels = affecting_z)
 
 /datum/event/rogue_drone/end()
 	var/num_recovered = 0
@@ -37,13 +28,13 @@
 		var/datum/effect/effect/system/spark_spread/sparks = new /datum/effect/effect/system/spark_spread()
 		sparks.set_up(3, 0, D.loc)
 		sparks.start()
-		D.z = using_map.admin_levels[1]
+		D.z = GLOB.using_map.admin_levels[1]
 		D.has_loot = 0
 
 		qdel(D)
 		num_recovered++
 
 	if(num_recovered > drones_list.len * 0.75)
-		command_announcement.Announce("Be advised: sensors indicate the unidentified drone swarm has left the immediate proximity of the [station_name()].", "[station_name()] Sensor Array")
+		command_announcement.Announce("Be advised: sensors indicate the unidentified drone swarm has left the immediate proximity of the [location_name()].", "[location_name()] Sensor Array", zlevels = affecting_z)
 	else
-		command_announcement.Announce("Be advised: sensors indicate the unidentified drone swarm has left the immediate proximity of the [station_name()].", "[station_name()] Sensor Array")
+		command_announcement.Announce("Be advised: sensors indicate the unidentified drone swarm has left the immediate proximity of the [location_name()].", "[location_name()] Sensor Array", zlevels = affecting_z)

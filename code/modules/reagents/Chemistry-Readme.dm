@@ -5,7 +5,7 @@ Structure: ///////////////////          //////////////////////////
 		   // Mob or object // -------> // Reagents var (datum) // 	    Is a reference to the datum that holds the reagents.
 		   ///////////////////          //////////////////////////
 		   			|				    			 |
-    The object that holds everything.   			 V
+	The object that holds everything.   			 V
 		   							      reagent_list var (list)   	A List of datums, each datum is a reagent.
 
 		   							      |          |          |
@@ -54,11 +54,8 @@ About the Holder:
 		update_total()
 			Updates total volume, called automatically.
 
-		handle_reactions()
-			Checks reagents and triggers any reactions that happen. Usually called automatically.
-
 		add_reagent(var/id, var/amount, var/data = null, var/safety = 0)
-			Adds [amount] units of [id] reagent. [data] will be passed to reagent's mix_data() or initialize_data(). If [safety] is 0, handle_reactions() will be called. Returns 1 if successful, 0 otherwise.
+			Adds [amount] units of [id] reagent. [data] will be passed to reagent's mix_data() or initialize_data(). If [safety] is 0, HANDLE_REACTIONS() will be called. Returns 1 if successful, 0 otherwise.
 
 		remove_reagent(var/id, var/amount, var/safety = 0)
 			Ditto, but removes reagent. Returns 1 if successful, 0 otherwise.
@@ -105,10 +102,10 @@ About the Holder:
 			Calls each reagent's touch_obj(target).
 
 		trans_to(var/atom/target, var/amount = 1, var/multiplier = 1, var/copy = 0)
-			The general proc for applying reagents to things externally (as opposed to directly injected into the contents). 
+			The general proc for applying reagents to things externally (as opposed to directly injected into the contents).
 			It first calls touch, then the appropriate trans_to_*() or splash_mob().
 			If for some reason you want touch effects to be bypassed (e.g. injecting stuff directly into a reagent container or person), call the appropriate trans_to_*() proc.
-			
+
 			Calls touch() before checking the type of [target], calling splash_mob(target, amount), trans_to_turf(target, amount, multiplier, copy), or trans_to_obj(target, amount, multiplier, copy).
 
 		trans_id_to(var/atom/target, var/id, var/amount = 1)
@@ -153,7 +150,7 @@ About Reagents:
 			Could be GAS, LIQUID, or SOLID. Affects nothing. Reserved for future use.
 
 		list/data
-			Use varies by reagent. Custom variable. For example, blood stores blood group and viruses.
+			Use varies by reagent. Custom variable. For example, blood stores blood group.
 
 		volume
 			Current volume.
@@ -292,7 +289,7 @@ About the Tools:
 			'pouring' our reagents into something else.
 
 		atom/proc/is_open_container()
-			Checks atom/var/flags & OPENCONTAINER.
+			Checks atom/var/obj_flags & OBJ_FLAG_OPEN_CONTAINER.
 			If this returns 1 , you can use syringes, beakers etc
 			to manipulate the contents of this object.
 			If it's 0, you'll need to write your own custom reagent

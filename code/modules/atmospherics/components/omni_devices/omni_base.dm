@@ -5,12 +5,11 @@
 	name = "omni device"
 	icon = 'icons/atmos/omni_devices.dmi'
 	icon_state = "base"
-	use_power = 1
 	initialize_directions = 0
 	level = 1
+	layer = ABOVE_CATWALK_LAYER
 
 	var/configuring = 0
-	//var/target_pressure = ONE_ATMOSPHERE	//a base type as abstract as this should NOT be making these kinds of assumptions
 
 	var/tag_north = ATM_NONE
 	var/tag_south = ATM_NONE
@@ -24,12 +23,17 @@
 
 	var/list/ports = new()
 
-/obj/machinery/atmospherics/omni/New()
-	..()
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
+
+	pipe_class = PIPE_CLASS_OMNI
+	connect_dir_type = SOUTH | NORTH | EAST | WEST
+
+/obj/machinery/atmospherics/omni/Initialize()
+	. = ..()
 	icon_state = "base"
 
 	ports = new()
-	for(var/d in cardinal)
+	for(var/d in GLOB.cardinal)
 		var/datum/omni_port/new_port = new(src, d)
 		switch(d)
 			if(NORTH)
@@ -46,7 +50,7 @@
 
 	build_icons()
 
-/obj/machinery/atmospherics/omni/update_icon()
+/obj/machinery/atmospherics/omni/on_update_icon()
 	if(stat & NOPOWER)
 		overlays = overlays_off
 	else if(error_check())
@@ -61,19 +65,19 @@
 /obj/machinery/atmospherics/omni/proc/error_check()
 	return
 
-/obj/machinery/atmospherics/omni/process()
+/obj/machinery/atmospherics/omni/Process()
 	last_power_draw = 0
 	last_flow_rate = 0
 
 	if(error_check())
-		use_power = 0
+		update_use_power(POWER_USE_OFF)
 
 	if((stat & (NOPOWER|BROKEN)) || !use_power)
 		return 0
 	return 1
 
-/obj/machinery/atmospherics/omni/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if(!istype(W, /obj/item/weapon/wrench))
+/obj/machinery/atmospherics/omni/attackby(var/obj/item/W as obj, var/mob/user as mob)
+	if(!isWrench(W))
 		return ..()
 
 	var/int_pressure = 0
@@ -91,16 +95,12 @@
 			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
 			"<span class='notice'>You have unfastened \the [src].</span>", \
 			"You hear a ratchet.")
-		new /obj/item/pipe(loc, make_from=src)
+		new /obj/item/pipe(loc, src)
 		qdel(src)
 
-/obj/machinery/atmospherics/omni/attack_hand(user as mob)
-	if(..())
-		return
-
-	src.add_fingerprint(usr)
+/obj/machinery/atmospherics/omni/interface_interact(mob/user)
 	ui_interact(user)
-	return
+	return TRUE
 
 /obj/machinery/atmospherics/omni/proc/build_icons()
 	if(!check_icon_cache())
@@ -172,7 +172,7 @@
 			if(ATM_OUTPUT)
 				ic_on += "_out_glow"
 				ic_off += "_out"
-			if(ATM_O2 to ATM_N2O)
+			if(ATM_GAS_MIN to ATM_GAS_MAX)
 				ic_on += "_filter"
 				ic_off += "_out"
 
@@ -218,7 +218,7 @@
 			P.network = new_network
 			break
 
-	if(new_network.normal_members.Find(src))
+	if(list_find(new_network.normal_members, src))
 		return 0
 
 	new_network.normal_members += src
@@ -226,17 +226,16 @@
 	return null
 
 /obj/machinery/atmospherics/omni/Destroy()
-	loc = null
-
 	for(var/datum/omni_port/P in ports)
 		if(P.node)
 			P.node.disconnect(src)
 			qdel(P.network)
 			P.node = null
 
-	..()
+	return ..()
 
-/obj/machinery/atmospherics/omni/initialize()
+/obj/machinery/atmospherics/omni/atmos_init()
+	..()
 	for(var/datum/omni_port/P in ports)
 		if(P.node || P.mode == 0)
 			continue

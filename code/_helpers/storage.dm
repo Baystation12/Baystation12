@@ -19,25 +19,36 @@
 
 /datum/atom_creator/simple
 	var/path
-	var/probability // prob is a reserved keyword and won't compile
+	var/probability
+	var/prob_method = /proc/prob_call
 
 /datum/atom_creator/simple/New(var/path, var/probability)
-	..()
+	if(args.len != 2)
+		CRASH("Invalid number of arguments. Expected 2, was [args.len]")
 	if(!isnum(probability) || probability < 1 || probability > 99)
-		CRASH("The given probability must be between 1 and 99") // A probability of 0 or 100 is pretty meaningless.
-	src.path = path
+		CRASH("Invalid probability. Expected a number between 1 and 99, was [log_info_line(probability)]") // A probability of 0 or 100 is pretty meaningless.
 	src.probability = probability
+	src.path = path
 
 /datum/atom_creator/simple/create(var/loc)
-	if(prob(probability))
+	if(call(prob_method)(probability))
 		create_objects_in_loc(loc, path)
 
 /datum/atom_creator/weighted
 	var/list/paths
+	var/selection_method = /proc/pickweight
 
-/datum/atom_creator/weighted/New(var/paths)
-	..()
+/datum/atom_creator/weighted/New(var/list/paths)
+	if(args.len != 1)
+		CRASH("Invalid number of arguments. Expected 1, was [args.len]")
+	if(!istype(paths))
+		CRASH("Invalid argument type. Expected /list, was [log_info_line(paths)]")
+	for(var/path in paths)
+		var/probability = paths[path]
+		if(!(isnull(probability) || (isnum(probability) && probability > 0)))
+			CRASH("Invalid probability. Expected null or a number greater than 0, was [log_info_line(probability)]")
 	src.paths = paths
 
 /datum/atom_creator/weighted/create(var/loc)
-	create_objects_in_loc(loc, pickweight(paths))
+	var/path = call(selection_method)(paths)
+	create_objects_in_loc(loc, path)

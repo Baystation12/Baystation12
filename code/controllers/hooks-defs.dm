@@ -12,13 +12,13 @@
 
 /**
  * Roundstart hook.
- * Called in gameticker.dm when a round starts.
+ * Called in ticker.dm when a round starts.
  */
 /hook/roundstart
 
 /**
  * Roundend hook.
- * Called in gameticker.dm when a round ends.
+ * Called in ticker.dm when a round ends.
  */
 /hook/roundend
 
@@ -80,14 +80,14 @@
 /**
  * Employee reassignment hook.
  * Called in card.dm when someone's card is reassigned at the HoP's desk.
- * Parameters: var/obj/item/weapon/card/id
+ * Parameters: var/obj/item/card/id
  */
 /hook/reassign_employee
 
 /**
  * Employee terminated hook.
  * Called in card.dm when someone's card is terminated at the HoP's desk.
- * Parameters: var/obj/item/weapon/card/id
+ * Parameters: var/obj/item/card/id
  */
 /hook/terminate_employee
 

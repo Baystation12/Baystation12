@@ -2,7 +2,7 @@
 	announceWhen		= 5
 
 /datum/event/grid_check/start()
-	power_failure(0, severity, using_map.contact_levels)
+	power_failure(0, severity, affecting_z)
 
 /datum/event/grid_check/announce()
-	command_announcement.Announce("Abnormal activity detected in the [station_name()]'s powernet. As a precautionary measure, the [station_name()]'s power will be shut off for an indeterminate duration.", "Automated Grid Check", new_sound = 'sound/AI/poweroff.ogg')
+	command_announcement.Announce(replacetext(GLOB.using_map.grid_check_message, "%STATION_NAME%", station_name()), "Automated Grid Check", new_sound = GLOB.using_map.grid_check_sound, zlevels = affecting_z)

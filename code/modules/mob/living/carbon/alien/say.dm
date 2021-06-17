@@ -12,7 +12,7 @@
 	if(stat == 2)
 		return say_dead(message)
 
-	if(copytext(message,1,2) == "*")
+	if(copytext(message,1,2) == get_prefix_key(/decl/prefix/custom_emote))
 		return emote(copytext(message,2))
 
 	var/datum/language/speaking = parse_language(message)

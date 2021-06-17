@@ -3,18 +3,17 @@
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "extinguish"
 	mouse_opacity = 0
-	pass_flags = PASSTABLE | PASSGRILLE
+	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GRILLE
 
 /obj/effect/effect/water/New(loc)
 	..()
-	spawn(150) // In case whatever made it forgets to delete it
-		if(src)
-			qdel(src)
+	QDEL_IN(src, 15 SECONDS) // In case whatever made it forgets to delete it
 
-/obj/effect/effect/water/proc/set_color() // Call it after you move reagents to it
+/obj/effect/effect/water/set_color() // Call it after you move reagents to it
 	icon += reagents.get_color()
 
 /obj/effect/effect/water/proc/set_up(var/turf/target, var/step_count = 5, var/delay = 5)
+	set waitfor = FALSE
 	if(!target)
 		return
 	for(var/i = 1 to step_count)

@@ -11,26 +11,26 @@
 /*
  * Retractor
  */
-/obj/item/weapon/retractor
+/obj/item/retractor
 	name = "retractor"
-	desc = "Retracts stuff."
+	desc = "Used to separate the edges of a surgical incision to get to the juicy organs inside."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "retractor"
-	matter = list(DEFAULT_WALL_MATERIAL = 10000, "glass" = 5000)
-	flags = CONDUCT
+	matter = list(MATERIAL_STEEL = 10000, MATERIAL_GLASS = 5000)
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 1)
 
 /*
  * Hemostat
  */
-/obj/item/weapon/hemostat
+/obj/item/hemostat
 	name = "hemostat"
-	desc = "You think you have seen this before."
+	desc = "A type of forceps used to prevent an incision from bleeding, or to extract objects from the inside of the body."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "hemostat"
-	matter = list(DEFAULT_WALL_MATERIAL = 5000, "glass" = 2500)
-	flags = CONDUCT
+	matter = list(MATERIAL_STEEL = 5000, MATERIAL_GLASS = 2500)
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 1)
 	attack_verb = list("attacked", "pinched")
@@ -38,13 +38,13 @@
 /*
  * Cautery
  */
-/obj/item/weapon/cautery
+/obj/item/cautery
 	name = "cautery"
-	desc = "This stops bleeding."
+	desc = "Uses chemicals to quickly cauterize incisions and other small cuts without causing further damage."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "cautery"
-	matter = list(DEFAULT_WALL_MATERIAL = 5000, "glass" = 2500)
-	flags = CONDUCT
+	matter = list(MATERIAL_STEEL = 5000, MATERIAL_GLASS = 2500, MATERIAL_ALUMINIUM = 1000)
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 1)
 	attack_verb = list("burnt")
@@ -52,14 +52,14 @@
 /*
  * Surgical Drill
  */
-/obj/item/weapon/surgicaldrill
+/obj/item/surgicaldrill
 	name = "surgical drill"
-	desc = "You can drill using this item. You dig?"
+	desc = "Effectively a very precise hand drill, used to bore holes through bone."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "drill"
 	hitsound = 'sound/weapons/circsawhit.ogg'
-	matter = list(DEFAULT_WALL_MATERIAL = 15000, "glass" = 10000)
-	flags = CONDUCT
+	matter = list(MATERIAL_STEEL = 15000, MATERIAL_GLASS = 10000)
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = 15.0
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 1)
@@ -68,48 +68,48 @@
 /*
  * Scalpel
  */
-/obj/item/weapon/scalpel
+/obj/item/scalpel
 	name = "scalpel"
-	desc = "Cut, cut, and once more cut."
+	desc = "A tiny and extremely sharp steel cutting tool used for surgery, dissection, autopsy, and very precise cuts. The cornerstone of any surgical procedure."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "scalpel"
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = 10.0
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
 	throwforce = 5.0
 	throw_speed = 3
 	throw_range = 5
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 1)
-	matter = list(DEFAULT_WALL_MATERIAL = 10000, "glass" = 5000)
+	matter = list(MATERIAL_STEEL = 10000, MATERIAL_GLASS = 5000)
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 
 /*
  * Researchable Scalpels
  */
-/obj/item/weapon/scalpel/laser1
+/obj/item/scalpel/laser1
 	name = "laser scalpel"
 	desc = "A scalpel augmented with a directed laser, for more precise cutting without blood entering the field.  This one looks basic and could be improved."
 	icon_state = "scalpel_laser1_on"
 	damtype = "fire"
 
-/obj/item/weapon/scalpel/laser2
+/obj/item/scalpel/laser2
 	name = "laser scalpel"
 	desc = "A scalpel augmented with a directed laser, for more precise cutting without blood entering the field.  This one looks somewhat advanced."
 	icon_state = "scalpel_laser2_on"
 	damtype = "fire"
 	force = 12.0
 
-/obj/item/weapon/scalpel/laser3
+/obj/item/scalpel/laser3
 	name = "laser scalpel"
 	desc = "A scalpel augmented with a directed laser, for more precise cutting without blood entering the field.  This one looks to be the pinnacle of precision energy cutlery!"
 	icon_state = "scalpel_laser3_on"
 	damtype = "fire"
 	force = 15.0
 
-/obj/item/weapon/scalpel/manager
+/obj/item/scalpel/manager
 	name = "incision management system"
 	desc = "A true extension of the surgeon's body, this marvel instantly and completely prepares an incision allowing for the immediate commencement of therapeutic steps."
 	icon_state = "scalpel_manager_on"
@@ -118,35 +118,37 @@
 /*
  * Circular Saw
  */
-/obj/item/weapon/circular_saw
+/obj/item/circular_saw
 	name = "circular saw"
-	desc = "For heavy duty cutting."
+	desc = "A small and nasty-looking hand saw used to cut through bone, or in an emergency, pizza."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "saw3"
 	hitsound = 'sound/weapons/circsawhit.ogg'
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = 15.0
 	w_class = ITEM_SIZE_NORMAL
 	throwforce = 9.0
 	throw_speed = 3
 	throw_range = 5
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 1)
-	matter = list(DEFAULT_WALL_MATERIAL = 20000,"glass" = 10000)
+	matter = list(MATERIAL_STEEL = 20000,MATERIAL_GLASS = 10000)
 	attack_verb = list("attacked", "slashed", "sawed", "cut")
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 
 //misc, formerly from code/defines/weapons.dm
-/obj/item/weapon/bonegel
+/obj/item/bonegel
 	name = "bone gel"
+	desc = "Sophisticated chemical gel used to mend fractures and broken bones before setting."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "bone-gel"
 	force = 0
 	w_class = ITEM_SIZE_SMALL
 	throwforce = 1.0
 
-/obj/item/weapon/FixOVein
+/obj/item/FixOVein
 	name = "FixOVein"
+	desc = "Derived from a Vey-Med design, this is a very precise surgical tool used to mend cut tendons and severed arteries."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "fixovein"
 	force = 0
@@ -155,8 +157,9 @@
 	w_class = ITEM_SIZE_SMALL
 	var/usage_amount = 10
 
-/obj/item/weapon/bonesetter
+/obj/item/bonesetter
 	name = "bone setter"
+	desc = "A large, heavy clamp for setting dislocated or fractured bones back in place."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "bone setter"
 	force = 8.0

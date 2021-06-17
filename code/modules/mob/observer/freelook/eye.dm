@@ -31,7 +31,7 @@
 
 /mob/observer/eye/Move(n, direct)
 	if(owner == src)
-		return EyeMove(n, direct)
+		return EyeMove(direct)
 	return 0
 
 /mob/observer/eye/facedir(var/ndir)
@@ -51,7 +51,7 @@
 	return 0
 
 /mob/observer/eye/examine(mob/user)
-	return
+	return TRUE
 
 /mob/observer/eye/proc/possess(var/mob/user)
 	if(owner && owner != user)
@@ -60,7 +60,7 @@
 		return
 	owner = user
 	owner.eyeobj = src
-	name = "[owner.name] ([name_sufix])" // Update its name
+	SetName("[owner.name] ([name_sufix])") // Update its name
 	if(owner.client)
 		owner.client.eye = src
 	setLoc(owner)
@@ -74,7 +74,7 @@
 	visualnet.remove_eye(src)
 	owner.eyeobj = null
 	owner = null
-	name = initial(name)
+	SetName(initial(name))
 
 // Use this when setting the eye's location.
 // It will also stream the chunk that the new loc is in.
@@ -111,21 +111,26 @@
 
 	return eyeobj.EyeMove(n, direct)
 
-/mob/observer/eye/EyeMove(n, direct)
+/mob/observer/eye/EyeMove(direct)
 	var/initial = initial(sprint)
 	var/max_sprint = 50
 
-	if(cooldown && cooldown < world.timeofday)
+	if(cooldown && cooldown < world.time)
 		sprint = initial
 
 	for(var/i = 0; i < max(sprint, initial); i += 20)
 		var/turf/step = get_turf(get_step(src, direct))
 		if(step)
+			//We do this specifically as they have special conditions
+			if(direct == UP && !HasAbove(z))
+				return FALSE
+			if(direct == DOWN && !HasBelow(z))
+				return FALSE
 			setLoc(step)
 
-	cooldown = world.timeofday + 5
+	cooldown = world.time + 5
 	if(acceleration)
 		sprint = min(sprint + 0.5, max_sprint)
 	else
 		sprint = initial
-	return 1
+	return TRUE

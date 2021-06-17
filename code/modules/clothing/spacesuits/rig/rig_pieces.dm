@@ -4,23 +4,21 @@
 
 /obj/item/clothing/head/helmet/space/rig
 	name = "helmet"
-	item_flags = THICKMATERIAL
+	item_flags = ITEM_FLAG_THICKMATERIAL
 	flags_inv = 		 HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
 	body_parts_covered = HEAD|FACE|EYES
 	heat_protection =    HEAD|FACE|EYES
 	cold_protection =    HEAD|FACE|EYES
-	brightness_on = 4
+	brightness_on = 0.5
 	sprite_sheets = list(
-		SPECIES_TAJARA = 'icons/mob/species/tajaran/helmet.dmi',
-		SPECIES_SKRELL = 'icons/mob/species/skrell/helmet.dmi',
-		SPECIES_UNATHI = 'icons/mob/species/unathi/helmet.dmi',
-		SPECIES_RESOMI = 'icons/mob/species/resomi/helmet.dmi'
+		SPECIES_SKRELL = 'icons/mob/species/skrell/onmob_head_skrell.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_head_helmet_unathi.dmi',
 		)
 	species_restricted = null
 
 /obj/item/clothing/gloves/rig
 	name = "gauntlets"
-	item_flags = THICKMATERIAL
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_AIRTIGHT
 	body_parts_covered = HANDS
 	heat_protection =    HANDS
 	cold_protection =    HANDS
@@ -29,6 +27,7 @@
 
 /obj/item/clothing/shoes/magboots/rig
 	name = "boots"
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_AIRTIGHT
 	body_parts_covered = FEET
 	cold_protection = FEET
 	heat_protection = FEET
@@ -38,21 +37,19 @@
 
 /obj/item/clothing/suit/space/rig
 	name = "chestpiece"
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit)
+	allowed = list(/obj/item/device/flashlight,/obj/item/tank,/obj/item/device/suit_cooling_unit)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	heat_protection =    UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	cold_protection =    UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	// HIDEJUMPSUIT no longer needed, see "hides_uniform" and "update_component_sealed()" in rig.dm
-	flags_inv =          HIDETAIL
-	item_flags =              STOPPRESSUREDAMAGE | THICKMATERIAL | AIRTIGHT
+	flags_inv =          HIDETAIL | CLOTHING_BULKY
+	item_flags =         ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_AIRTIGHT
 	//will reach 10 breach damage after 25 laser carbine blasts, 3 revolver hits, or ~1 PTR hit. Completely immune to smg or sts hits.
 	breach_threshold = 38
 	resilience = 0.2
 	can_breach = 1
 	sprite_sheets = list(
-		SPECIES_TAJARA = 'icons/mob/species/tajaran/suit.dmi',
-		SPECIES_UNATHI = 'icons/mob/species/unathi/suit.dmi',
-		SPECIES_RESOMI = 'icons/mob/species/resomi/suit.dmi'
+		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_suit_unathi.dmi',
 		)
 	var/list/supporting_limbs = list() //If not-null, automatically splints breaks. Checked when removing the suit.
 
@@ -68,7 +65,7 @@
 /obj/item/clothing/suit/space/rig/proc/can_support(var/mob/living/carbon/human/user)
 	if(user.wear_suit != src)
 		return 0 //not wearing the suit
-	var/obj/item/weapon/rig/rig = user.back
+	var/obj/item/rig/rig = user.back
 	if(!istype(rig) || rig.offline || rig.canremove)
 		return 0 //not wearing a rig control unit or it's offline or unsealed
 	return 1
@@ -108,7 +105,7 @@
 	if(!istype(H) || !H.back)
 		return 0
 
-	var/obj/item/weapon/rig/suit = H.back
+	var/obj/item/rig/suit = H.back
 	if(!suit || !istype(suit) || !suit.installed_modules.len)
 		return 0
 
@@ -125,7 +122,7 @@
 	body_parts_covered = HEAD|FACE|EYES
 	heat_protection =    HEAD|FACE|EYES
 	cold_protection =    HEAD|FACE|EYES
-	flags =              THICKMATERIAL|AIRTIGHT
+	item_flags =         ITEM_FLAG_THICKMATERIAL|ITEM_FLAG_AIRTIGHT
 
 /obj/item/clothing/suit/lightrig
 	name = "suit"
@@ -134,7 +131,7 @@
 	heat_protection =    UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	cold_protection =    UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	flags_inv =          HIDEJUMPSUIT
-	flags =              THICKMATERIAL
+	item_flags =         ITEM_FLAG_THICKMATERIAL
 
 /obj/item/clothing/shoes/lightrig
 	name = "boots"
@@ -146,7 +143,7 @@
 
 /obj/item/clothing/gloves/lightrig
 	name = "gloves"
-	flags = THICKMATERIAL
+	item_flags = ITEM_FLAG_THICKMATERIAL
 	body_parts_covered = HANDS
 	heat_protection =    HANDS
 	cold_protection =    HANDS

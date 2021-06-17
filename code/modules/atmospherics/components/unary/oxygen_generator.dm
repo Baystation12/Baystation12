@@ -1,7 +1,7 @@
 obj/machinery/atmospherics/unary/oxygen_generator
 	icon = 'icons/obj/atmospherics/oxygen_generator.dmi'
 	icon_state = "intact_off"
-	density = 1
+	density = TRUE
 
 	name = "Oxygen Generator"
 	desc = ""
@@ -28,7 +28,7 @@ obj/machinery/atmospherics/unary/oxygen_generator
 
 		air_contents.volume = 50
 
-	process()
+	Process()
 		..()
 		if(!on)
 			return 0
@@ -41,7 +41,7 @@ obj/machinery/atmospherics/unary/oxygen_generator
 			var/added_oxygen = oxygen_content - total_moles
 
 			air_contents.temperature = (current_heat_capacity*air_contents.temperature + 20*added_oxygen*T0C)/(current_heat_capacity+20*added_oxygen)
-			air_contents.adjust_gas("oxygen", added_oxygen)
+			air_contents.adjust_gas(GAS_OXYGEN, added_oxygen)
 
 			if(network)
 				network.update = 1

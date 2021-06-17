@@ -32,6 +32,10 @@
 						{{:helper.link('', 'power', { 'smes_in_toggle' : value.RCON_tag})}}
 						{{:helper.link('', 'pencil', { 'smes_in_set' : value.RCON_tag})}}
 						<tr><td>
+						Input Load: 
+						<td>
+						{{:value.input_load}} kW
+						<tr><td>
 						Output: {{:value.output_val}} kW - {{:value.output_set ? "ONLINE" : "OFFLINE"}}
 						<td>
 						{{:helper.link('', 'power', { 'smes_out_toggle' : value.RCON_tag})}}

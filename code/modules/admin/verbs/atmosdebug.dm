@@ -5,7 +5,7 @@
 	if(!src.holder)
 		to_chat(src, "Only administrators may use this command.")
 		return
-	feedback_add_details("admin_verb","CP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	SSstatistics.add_field_details("admin_verb","CP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 	if(alert("WARNING: This command should not be run on a live server. Do you want to continue?", "Check Piping", "No", "Yes") == "No")
 		return
@@ -28,8 +28,8 @@
 
 	to_chat(usr, "Checking for overlapping pipes...")
 	next_turf:
-		for(var/turf/T in world)
-			for(var/dir in cardinal)
+		for(var/turf/T)
+			for(var/dir in GLOB.cardinal)
 				var/list/connect_types = list(1 = 0, 2 = 0, 3 = 0)
 				for(var/obj/machinery/atmospherics/pipe in T)
 					if(dir & pipe.initialize_directions)
@@ -46,9 +46,9 @@
 	if(!src.holder)
 		to_chat(src, "Only administrators may use this command.")
 		return
-	feedback_add_details("admin_verb","CPOW") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	SSstatistics.add_field_details("admin_verb","CPOW") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-	for (var/datum/powernet/PN in powernets)
+	for (var/datum/powernet/PN in SSmachines.powernets)
 		if (!PN.nodes || !PN.nodes.len)
 			if(PN.cables && (PN.cables.len > 1))
 				var/obj/structure/cable/C = PN.cables[1]

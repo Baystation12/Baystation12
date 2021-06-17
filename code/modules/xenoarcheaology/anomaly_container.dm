@@ -3,12 +3,12 @@
 	desc = "Used to safely contain and move anomalies."
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "anomaly_container"
-	density = 1
+	density = TRUE
 
 	var/obj/machinery/artifact/contained
 
-/obj/structure/anomaly_container/initialize()
-	..()
+/obj/structure/anomaly_container/Initialize()
+	. = ..()
 
 	var/obj/machinery/artifact/A = locate() in loc
 	if(A)

@@ -14,11 +14,12 @@
 	if(!preserve_appearance && (flags & ANTAG_SET_APPEARANCE))
 		spawn(3)
 			var/mob/living/carbon/human/H = player.current
-			if(istype(H)) H.change_appearance(APPEARANCE_ALL, H.loc, H, valid_species, state = z_state)
+			if(istype(H))
+				H.change_appearance(APPEARANCE_COMMON, TRUE, state = GLOB.z_state)
 	return player.current
 
 /datum/antagonist/proc/update_access(var/mob/living/player)
-	for(var/obj/item/weapon/card/id/id in player.contents)
+	for(var/obj/item/card/id/id in player.contents)
 		player.set_id_info(id)
 
 /datum/antagonist/proc/clear_indicators(var/datum/mind/recipient)
@@ -32,7 +33,12 @@
 	if(!antag_indicator || !other.current || !recipient.current)
 		return
 	var/indicator = (faction_indicator && (other in faction_members)) ? faction_indicator : antag_indicator
-	return image('icons/mob/hud.dmi', loc = other.current, icon_state = indicator, layer = LIGHTING_LAYER+0.1)
+	var/image/I = image('icons/mob/hud.dmi', loc = other.current, icon_state = indicator, layer = ABOVE_HUMAN_LAYER)
+	if(ishuman(other.current))
+		var/mob/living/carbon/human/H = other.current
+		I.pixel_x = H.species.antaghud_offset_x
+		I.pixel_y = H.species.antaghud_offset_y
+	return I
 
 /datum/antagonist/proc/update_all_icons()
 	if(!antag_indicator)
@@ -73,19 +79,18 @@
 						if(I.loc == player.current)
 							qdel(I)
 
-/datum/antagonist/proc/update_current_antag_max()
+/datum/antagonist/proc/update_current_antag_max(datum/game_mode/mode)
 	cur_max = hard_cap
-	if(ticker && ticker.mode)
-		if(ticker.mode.antag_tags && (id in ticker.mode.antag_tags))
-			cur_max = hard_cap_round
+	if(mode.antag_tags && (mode.antag_tags))
+		cur_max = hard_cap_round
 
-	if(ticker.mode.antag_scaling_coeff)
+	if(mode.antag_scaling_coeff)
 
 		var/count = 0
-		for(var/mob/living/M in player_list)
+		for(var/mob/living/M in GLOB.player_list)
 			if(M.client)
 				count++
 
 		// Minimum: initial_spawn_target
 		// Maximum: hard_cap or hard_cap_round
-		cur_max = max(initial_spawn_target,min(round(count/ticker.mode.antag_scaling_coeff),cur_max))
+		cur_max = max(initial_spawn_target,min(round(count/mode.antag_scaling_coeff),cur_max))

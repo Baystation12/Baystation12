@@ -9,9 +9,7 @@
 /mob/verb/say_verb(message as text)
 	set name = "Say"
 	set category = "IC"
-	
-	if(typing_indicator)
-		qdel(typing_indicator)
+	remove_typing_indicator()
 	usr.say(message)
 
 /mob/verb/me_verb(message as text)
@@ -20,8 +18,7 @@
 
 	message = sanitize(message)
 
-	if(typing_indicator)
-		qdel(typing_indicator)
+	remove_typing_indicator()
 	if(use_me)
 		usr.emote("me",usr.emote_type,message)
 	else
@@ -94,7 +91,7 @@
 //returns the message mode string or null for no message mode.
 //standard mode is the mode returned for the special ';' radio code.
 /mob/proc/parse_message_mode(var/message, var/standard_mode="headset")
-	if(length(message) >= 1 && copytext(message,1,2) == ";")
+	if(length(message) >= 1 && copytext(message,1,2) == get_prefix_key(/decl/prefix/radio_main_channel))
 		return standard_mode
 
 	if(length(message) >= 2)
@@ -107,7 +104,7 @@
 //returns the language object only if the code corresponds to a language that src can speak, otherwise null.
 /mob/proc/parse_language(var/message)
 	var/prefix = copytext(message,1,2)
-	if(length(message) >= 1 && prefix == "!")
+	if(length(message) >= 1 && prefix == get_prefix_key(/decl/prefix/audible_emote))
 		return all_languages["Noise"]
 
 	if(length(message) >= 2 && is_language_prefix(prefix))

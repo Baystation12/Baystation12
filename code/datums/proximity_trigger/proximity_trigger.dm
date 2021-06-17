@@ -75,30 +75,30 @@ var/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to monitor, 
 
 /datum/proximity_trigger/proc/register_turfs()
 	if(ismovable(holder))
-		moved_event.register(holder, src, /datum/proximity_trigger/proc/on_holder_moved)
-	dir_set_event.register(holder, src, /datum/proximity_trigger/proc/register_turfs) // Changing direction might alter the relevant turfs
+		GLOB.moved_event.register(holder, src, /datum/proximity_trigger/proc/on_holder_moved)
+	GLOB.dir_set_event.register(holder, src, /datum/proximity_trigger/proc/register_turfs) // Changing direction might alter the relevant turfs
 
 	var/list/new_turfs = acquire_relevant_turfs()
 	if(listequal(turfs_in_range, new_turfs))
 		return
 
 	for(var/t in (turfs_in_range - new_turfs))
-		opacity_set_event.unregister(t, src, /datum/proximity_trigger/proc/on_turf_visibility_changed)
+		GLOB.opacity_set_event.unregister(t, src, /datum/proximity_trigger/proc/on_turf_visibility_changed)
 	for(var/t in (new_turfs - turfs_in_range))
-		opacity_set_event.register(t, src, /datum/proximity_trigger/proc/on_turf_visibility_changed)
+		GLOB.opacity_set_event.register(t, src, /datum/proximity_trigger/proc/on_turf_visibility_changed)
 
 	turfs_in_range = new_turfs
 	on_turf_visibility_changed()
 
 /datum/proximity_trigger/proc/unregister_turfs()
 	if(ismovable(holder))
-		moved_event.unregister(holder, src, /datum/proximity_trigger/proc/on_holder_moved)
-	dir_set_event.unregister(holder, src, /datum/proximity_trigger/proc/register_turfs)
+		GLOB.moved_event.unregister(holder, src, /datum/proximity_trigger/proc/on_holder_moved)
+	GLOB.dir_set_event.unregister(holder, src, /datum/proximity_trigger/proc/register_turfs)
 
 	for(var/t in turfs_in_range)
-		opacity_set_event.unregister(t, src, /datum/proximity_trigger/proc/on_turf_visibility_changed)
+		GLOB.opacity_set_event.unregister(t, src, /datum/proximity_trigger/proc/on_turf_visibility_changed)
 	for(var/t in seen_turfs_)
-		entered_event.unregister(t, src, /datum/proximity_trigger/proc/on_turf_entered)
+		GLOB.entered_event.unregister(t, src, /datum/proximity_trigger/proc/on_turf_entered)
 
 	call(proc_owner, on_turfs_changed)(seen_turfs_.Copy(), list())
 
@@ -113,9 +113,9 @@ var/const/PROXIMITY_EXCLUDE_HOLDER_TURF = 1 // When acquiring turfs to monitor, 
 	call(proc_owner, on_turfs_changed)(seen_turfs_.Copy(), new_seen_turfs_.Copy())
 
 	for(var/t in (seen_turfs_ - new_seen_turfs_))
-		entered_event.unregister(t, src, /datum/proximity_trigger/proc/on_turf_entered)
+		GLOB.entered_event.unregister(t, src, /datum/proximity_trigger/proc/on_turf_entered)
 	for(var/t in (new_seen_turfs_ - seen_turfs_))
-		entered_event.register(t, src, /datum/proximity_trigger/proc/on_turf_entered)
+		GLOB.entered_event.register(t, src, /datum/proximity_trigger/proc/on_turf_entered)
 
 	seen_turfs_ = new_seen_turfs_
 

@@ -1,11 +1,11 @@
 /obj/machinery/power/generator
 	name = "thermoelectric generator"
 	desc = "It's a high efficiency thermoelectric generator."
-	icon_state = "teg"
-	density = 1
-	anchored = 0
+	icon_state = "teg-unassembled"
+	density = TRUE
+	anchored = FALSE
 
-	use_power = 1
+	use_power = POWER_USE_IDLE
 	idle_power_usage = 100 //Watts, I hope.  Just enough to do the computer and display things.
 
 	var/max_power = 500000
@@ -35,6 +35,10 @@
 //and a circulator to the WEST of the generator connects first to the NORTH, then to the SOUTH
 //note that the circulator's outlet dir is it's always facing dir, and it's inlet is always the reverse
 /obj/machinery/power/generator/proc/reconnect()
+	if(circ1)
+		circ1.temperature_overlay = null
+	if(circ2)
+		circ2.temperature_overlay = null
 	circ1 = null
 	circ2 = null
 	if(src.loc && anchored)
@@ -54,17 +58,31 @@
 			if(circ1 && circ2 && (circ1.dir != EAST || circ2.dir != WEST))
 				circ1 = null
 				circ2 = null
+	update_icon()
 
-/obj/machinery/power/generator/proc/updateicon()
-	if(stat & (NOPOWER|BROKEN))
-		overlays.Cut()
+/obj/machinery/power/generator/on_update_icon()
+	icon_state = anchored ? "teg-assembled" : "teg-unassembled"
+	overlays.Cut()
+	if (circ1)
+		circ1.temperature_overlay = null
+	if (circ2)
+		circ2.temperature_overlay = null
+	if (stat & (NOPOWER|BROKEN))
+		return 1
 	else
-		overlays.Cut()
-
-		if(lastgenlev != 0)
+		if (lastgenlev != 0)
 			overlays += image('icons/obj/power.dmi', "teg-op[lastgenlev]")
+			if (circ1 && circ2)
+				var/extreme = (lastgenlev > 9) ? "ex" : ""
+				if (circ1.last_temperature < circ2.last_temperature)
+					circ1.temperature_overlay = "circ-[extreme]cold"
+					circ2.temperature_overlay = "circ-[extreme]hot"
+				else
+					circ1.temperature_overlay = "circ-[extreme]hot"
+					circ2.temperature_overlay = "circ-[extreme]cold"
+		return 1
 
-/obj/machinery/power/generator/process()
+/obj/machinery/power/generator/Process()
 	if(!circ1 || !circ2 || !anchored || stat & (BROKEN|NOPOWER))
 		stored_energy = 0
 		return
@@ -96,7 +114,7 @@
 			else
 				air2.temperature = air2.temperature + heat/air2_heat_capacity
 				air1.temperature = air1.temperature - energy_transfer/air1_heat_capacity
-		playsound(src.loc, 'sound/effects/beam.ogg', 25, 0, 10)
+		playsound(src.loc, 'sound/effects/beam.ogg', 25, 0, 10,  is_ambiance = 1)
 
 	//Transfer the air
 	if (air1)
@@ -116,6 +134,8 @@
 		s.set_up(3, 1, src)
 		s.start()
 		stored_energy *= 0.5
+		if (powernet)
+			powernet.apcs_overload(0, 2, 5)
 
 	//Power
 	last_circ1_gen = circ1.return_stored_energy()
@@ -125,26 +145,23 @@
 	stored_energy -= lastgen1
 	effective_gen = (lastgen1 + lastgen2) / 2
 
-	// update icon overlays and power usage only if displayed level has changed
+	// update icon overlays and power usage only when necessary
 	var/genlev = max(0, min( round(11*effective_gen / max_power), 11))
 	if(effective_gen > 100 && genlev == 0)
 		genlev = 1
 	if(genlev != lastgenlev)
 		lastgenlev = genlev
-		updateicon()
+		update_icon()
 	add_avail(effective_gen)
 
-/obj/machinery/power/generator/attack_ai(mob/user)
-	attack_hand(user)
-
-/obj/machinery/power/generator/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/wrench))
+/obj/machinery/power/generator/attackby(obj/item/W as obj, mob/user as mob)
+	if(isWrench(W))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 		anchored = !anchored
 		user.visible_message("[user.name] [anchored ? "secures" : "unsecures"] the bolts holding [src.name] to the floor.", \
 					"You [anchored ? "secure" : "unsecure"] the bolts holding [src] to the floor.", \
 					"You hear a ratchet")
-		use_power = anchored
+		update_use_power(anchored)
 		if(anchored) // Powernet connection stuff.
 			connect_to_network()
 		else
@@ -153,12 +170,16 @@
 	else
 		..()
 
-/obj/machinery/power/generator/attack_hand(mob/user)
-	add_fingerprint(user)
-	if(stat & (BROKEN|NOPOWER) || !anchored) return
+/obj/machinery/power/generator/CanUseTopic(mob/user)
+	if(!anchored)
+		return STATUS_CLOSE
+	return ..()
+
+/obj/machinery/power/generator/interface_interact(mob/user)
 	if(!circ1 || !circ2) //Just incase the middle part of the TEG was not wrenched last.
 		reconnect()
 	ui_interact(user)
+	return TRUE
 
 /obj/machinery/power/generator/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	// this is the data which will be sent to the ui
@@ -199,10 +220,10 @@
 
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		// the ui does not exist, so we'll create a new() one
-        // for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
+		// for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
 		ui = new(user, src, ui_key, "generator.tmpl", "Thermoelectric Generator", 450, 500)
 		// when the ui is first opened this is the data it will use
 		ui.set_initial_data(data)

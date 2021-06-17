@@ -8,12 +8,17 @@
 	. = ..()
 	if(!.)
 		return
-	if(!get_turf(C.mob))
+	var/mob/M = C.mob ? C.mob.get_looc_mob() : null
+	if(!M)
+		to_chat(C, "<span class='danger'>You cannot use [name] without a mob.</span>")
+		return FALSE
+	if(!get_turf(M))
 		to_chat(C, "<span class='danger'>You cannot use [name] while in nullspace.</span>")
 		return FALSE
 
 /decl/communication_channel/ooc/looc/do_communicate(var/client/C, var/message)
-	var/list/listening_hosts = hosts_in_view_range(C.mob)
+	var/mob/M = C.mob ? C.mob.get_looc_mob() : null
+	var/list/listening_hosts = hosts_in_view_range(M)
 	var/list/listening_clients = list()
 
 	var/key = C.key
@@ -27,8 +32,8 @@
 		var/received_message = t.receive_looc(C, key, message, listening_mob.looc_prefix())
 		receive_communication(C, t, received_message)
 
-	for(var/client/adm in admins)	//Now send to all admins that weren't in range.
-		if(!(adm in listening_clients) && adm.is_preference_enabled(/datum/client_preference/holder/show_rlooc))
+	for(var/client/adm in GLOB.admins)	//Now send to all admins that weren't in range.
+		if(!(adm in listening_clients) && adm.get_preference_value(/datum/client_preference/staff/show_rlooc) == GLOB.PREF_SHOW)
 			var/received_message = adm.receive_looc(C, key, message, "R")
 			receive_communication(C, adm, received_message)
 
@@ -45,3 +50,12 @@
 
 /mob/observer/eye/looc_prefix()
 	return "Eye"
+
+/mob/proc/get_looc_mob()
+	return src
+
+/mob/living/silicon/ai/get_looc_mob()
+	if(!eyeobj)
+		return src
+	return eyeobj
+

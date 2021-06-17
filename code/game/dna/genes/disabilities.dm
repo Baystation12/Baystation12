@@ -33,7 +33,7 @@
 	if(disability)
 		M.disabilities|=disability
 	if(sdisability)
-		M.sdisabilities|=sdisability
+		M.set_sdisability(sdisability)
 	if(activation_message)
 		to_chat(M, "<span class='warning'>[activation_message]</span>")
 	else
@@ -45,7 +45,7 @@
 	if(disability)
 		M.disabilities &= (~disability)
 	if(sdisability)
-		M.sdisabilities &= (~sdisability)
+		M.unset_sdisability(sdisability)
 	if(deactivation_message)
 		to_chat(M, "<span class='warning'>[deactivation_message]</span>")
 	else
@@ -57,73 +57,73 @@
 	activation_message="Your mind says 'Hello'."
 	mutation=mHallucination
 
-	New()
-		block=HALLUCINATIONBLOCK
+/datum/dna/gene/disability/hallucinate/New()
+	block=GLOB.HALLUCINATIONBLOCK
 
 /datum/dna/gene/disability/epilepsy
 	name="Epilepsy"
 	activation_message="You get a headache."
 	disability=EPILEPSY
 
-	New()
-		block=HEADACHEBLOCK
+/datum/dna/gene/disability/epilepsy/New()
+	block=GLOB.HEADACHEBLOCK
 
 /datum/dna/gene/disability/cough
 	name="Coughing"
 	activation_message="You start coughing."
 	disability=COUGHING
 
-	New()
-		block=COUGHBLOCK
+/datum/dna/gene/disability/cough/New()
+	block=GLOB.COUGHBLOCK
 
 /datum/dna/gene/disability/clumsy
 	name="Clumsiness"
 	activation_message="You feel lightheaded."
-	mutation=CLUMSY
+	mutation=MUTATION_CLUMSY
 
-	New()
-		block=CLUMSYBLOCK
+/datum/dna/gene/disability/clumsy/New()
+	block=GLOB.CLUMSYBLOCK
 
 /datum/dna/gene/disability/tourettes
 	name="Tourettes"
 	activation_message="You twitch."
 	disability=TOURETTES
 
-	New()
-		block=TWITCHBLOCK
+/datum/dna/gene/disability/tourettes/New()
+	block=GLOB.TWITCHBLOCK
 
 /datum/dna/gene/disability/nervousness
 	name="Nervousness"
 	activation_message="You feel nervous."
 	disability=NERVOUS
 
-	New()
-		block=NERVOUSBLOCK
+/datum/dna/gene/disability/nervousness/New()
+	block=GLOB.NERVOUSBLOCK
 
 /datum/dna/gene/disability/blindness
 	name="Blindness"
 	activation_message="You can't seem to see anything."
-	sdisability=BLIND
+	sdisability=BLINDED
 
-	New()
-		block=BLINDBLOCK
+/datum/dna/gene/disability/blindness/New()
+	block=GLOB.BLINDBLOCK
 
 /datum/dna/gene/disability/deaf
 	name="Deafness"
 	activation_message="It's kinda quiet."
-	sdisability=DEAF
+	sdisability=DEAFENED
 
-	New()
-		block=DEAFBLOCK
+/datum/dna/gene/disability/deaf/New()
+	block=GLOB.DEAFBLOCK
 
-	activate(var/mob/M, var/connected, var/flags)
-		..(M,connected,flags)
-		M.ear_deaf = 1
+/datum/dna/gene/disability/deaf/activate(var/mob/M, var/connected, var/flags)
+	..(M,connected,flags)
+	M.ear_deaf = 1
 
 /datum/dna/gene/disability/nearsighted
 	name="Nearsightedness"
 	activation_message="Your eyes feel weird..."
 	disability=NEARSIGHTED
 
-	New()
-		block=GLASSESBLOCK
+/datum/dna/gene/disability/nearsighted/New()
+	block=GLOB.GLASSESBLOCK

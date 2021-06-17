@@ -1,0 +1,282 @@
+<div class='notice'>
+	You 
+	{{if !data.default_access}}
+		do not 
+	{{/if}}
+	have program access.
+</div>
+{{if data.default_access}}<!--Suppressed indentation.-->
+{{if data.prog_state == 1}}<!--DECK_HOME-->
+	<h2>Shuttles:</h2>
+	{{for data.shuttles}}
+		<h3>{{:value.name}}</h3>
+		{{if value.mission}}
+			<div class='item'>		
+				<div class='itemLabel'>
+					Current Mission:
+				</div>
+				<div class='itemContent'>
+					{{:value.mission_name}}
+				</div>
+			</div>
+			<div class='item'>		
+				<div class='itemLabel'>
+					Mission Status:
+				</div>
+				<div class='itemContent'>
+					{{:value.status}}
+				</div>
+			</div>
+			<div class='item'>		
+				<div class='itemLabel'>
+					Departure Time:
+				</div>
+				<div class='itemContent'>
+					{{:value.departure}}
+				</div>
+			</div>
+		{{else}}
+			<div class='item'>		
+				<div class='itemLabel'>
+					Current Mission:
+				</div>
+				<div class='itemContent'>
+					None Planned.
+				</div>
+			</div>
+		{{/if}}
+		<div class='item'>
+			<div class='itemLabel'>
+				Actions:
+			</div>
+			<div class='itemContent'>
+				{{:helper.link('Create Mission', null, {'new_mission' : value.name}, value.access ? null : 'disabled')}}
+				{{:helper.link('View Mission Details', null, {'details' : 1, 'shuttle' : value.name, 'mission' : value.mission_ID}, value.mission ? null : 'disabled')}}
+				{{:helper.link('View All Missions', null, {'history' : value.name}, null)}}
+			</div>
+		</div>
+		<div class='item'>
+			<div class='itemLabel'>
+				Flight Plan:
+			</div>
+			<div class='itemContent'>
+				{{:helper.link('Create Flight Plan', null, {'report' : 1, 'flight_plan' : 1, 'shuttle' : value.name, 'mission' : value.mission_ID}, (value.access && !value.flight_plan && value.mission) ? null : 'disabled')}}
+				{{:helper.link('Edit Flight Plan', null, {'report' : 1, 'flight_plan' : 1, 'shuttle' : value.name, 'mission' : value.mission_ID}, (value.access && value.flight_plan && value.mission) ? null : 'disabled')}}
+			</div>
+		</div>
+	{{empty}}
+		<h2>There are no shuttles in the system.</h2>
+	{{/for}}
+{{else data.prog_state == 2}}<!--DECK_ALL_MISSIONS-->
+	<div class='item'>
+		{{:helper.link('Home', null, {'home' : 1}, null)}}
+		{{:helper.link('Create Mission', null, {'new_mission' : data.shuttle_name}, data.shuttle_access ? null : 'disabled')}}
+	</div>
+	<h2>Shuttle: {{:data.shuttle_name}}<br><center>Mission History</center></h2>
+	{{for data.mission_data}}
+		<h3>{{:value.name}}{{if value.is_current}} (ACTIVE MISSION){{/if}}</h3>
+		<div class='item'>		
+			<div class='itemLabel'>
+				Mission Status:
+			</div>
+			<div class='itemContent'>
+				{{:value.status}}
+			</div>
+		</div>
+		<div class='item'>		
+			<div class='itemLabel'>
+				Departure Time:
+			</div>
+			<div class='itemContent'>
+				{{:value.departure}}
+			</div>
+		</div>
+		<div class='item'>		
+			<div class='itemLabel'>
+				Return Time:
+			</div>
+			<div class='itemContent'>
+				{{:value.return_time}}
+			</div>
+		</div>
+		<div class='item'>
+			{{:helper.link('View Mission Details', null, {'details' : 1, 'shuttle' : data.shuttle_name, 'mission' : value.ID}, null)}}
+		</div>
+	{{empty}}
+		<h3>No past missions logged.</h3>
+	{{/for}}
+	<h2><center>Scheduled Missions</center></h2>
+	{{for data.queued_data}}
+		<h3>{{:value.name}}{{if value.is_current}} (ACTIVE MISSION){{/if}}</h3>
+		<div class='item'>		
+			<div class='itemLabel'>
+				Mission Status:
+			</div>
+			<div class='itemContent'>
+				{{:value.status}}
+			</div>
+		</div>
+		<div class='item'>		
+			<div class='itemLabel'>
+				Departure Time:
+			</div>
+			<div class='itemContent'>
+				{{:value.departure}}
+			</div>
+		</div>
+		<div class='item'>		
+			<div class='itemLabel'>
+				Return Time:
+			</div>
+			<div class='itemContent'>
+				{{:value.return_time}}
+			</div>
+		</div>
+		<div class='item'>
+			{{:helper.link('View Mission Details', null, {'details' : 1, 'shuttle' : data.shuttle_name, 'mission' : value.ID}, null)}}
+			{{:helper.link('','triangle-1-n', {'modify' : 'move_up', 'shuttle' : data.shuttle_name, 'mission' : value.ID}, data.shuttle_access ? null : 'disabled')}}
+			{{:helper.link('','triangle-1-s', {'modify' : 'move_down', 'shuttle' : data.shuttle_name, 'mission' : value.ID}, data.shuttle_access ? null : 'disabled')}}
+		</div>
+	{{empty}}
+		<h3>No missions scheduled.</h3>
+	{{/for}}
+{{else data.prog_state == 3}}<!--DECK_MISSION_DETAILS-->
+	<div class='item'>
+		{{:helper.link('Home', null, {'home' : 1}, null)}}
+		{{:helper.link('All Missions', null, {'history' : data.shuttle_name}, null)}}
+	</div>
+	<h2>Shuttle: {{:data.shuttle_name}}<br><center>Mission: {{:data.mission_data.name}}{{if data.mission_data.is_current}} (ACTIVE MISSION){{/if}}</center></h2>
+	<div class='item'>		
+		<div class='itemLabel'>
+			Mission Status:
+		</div>
+		<div class='itemContent'>
+			{{:data.mission_data.status}}
+		</div>
+	</div>
+	<div class='item'>		
+		<div class='itemLabel'>
+			Departure Time:
+		</div>
+		<div class='itemContent'>
+			{{:data.mission_data.departure}}
+		</div>
+	</div>
+	<div class='item'>		
+		<div class='itemLabel'>
+			Return Time:
+		</div>
+		<div class='itemContent'>
+			{{:data.mission_data.return_time}}
+		</div>
+	</div>
+	<div class='item'>
+		<div class='itemLabel'>
+			Flight Plan:
+		</div>
+		{{if data.flight_plan}}
+			<div class='itemContent'>
+				Submitted by {{:data.flight_plan.creator}}.
+			</div>
+	</div>
+			{{for data.flight_plan.fields}}
+				{{if !value.ignore_value}}
+					<div class='item'>
+						<div class='itemLabel'>
+							{{:value.name}}: 
+						</div>
+						<div class="itemContent">
+							{{if value.needs_big_box}}
+							<div class='block'>
+								{{:value.value}}
+							</div>
+							{{else}}
+							<div class='statusDisplayComm' style="width:100%;min-height:1.7em;padding-bottom: 0;">
+								{{:value.value}}
+							</div>
+							{{/if}}
+						</div>
+					</div>
+				{{/if}}
+			{{/for}}
+		{{else}}
+			<div class="itemContent">
+				None submitted.
+			</div>
+	</div>
+		{{/if}}
+		<div class='item'>
+			<div class='itemContent'>
+				{{:helper.link('Rename Mission', null, {'modify' : 'rename', 'shuttle' : data.shuttle_name, 'mission' : data.mission_data.ID}, data.shuttle_access ? null : 'disabled')}}
+				{{:helper.link('Delete Mission', null, {'modify' : 'delete', 'shuttle' : data.shuttle_name, 'mission' : data.mission_data.ID, 'warning' : 1}, (data.shuttle_access && data.mission_data.queued) ? null : 'disabled')}}
+			</div>
+		</div>
+		<div class='item'>
+			<div class='itemContent'>
+				{{:helper.link('Create Flight Plan', null, {'report' : 1, 'flight_plan' : 1, 'shuttle' : data.shuttle_name, 'mission' : data.mission_data.ID}, (data.shuttle_access && !data.flight_plan) ? null : 'disabled')}}
+				{{:helper.link('Edit Flight Plan', null, {'report' : 1, 'flight_plan' : 1, 'shuttle' : data.shuttle_name, 'mission' : data.mission_data.ID}, (data.shuttle_access && data.flight_plan) ? null : 'disabled')}}
+				{{:helper.link('Summon Crew', null, {'summon_crew' : 1, 'shuttle' : data.shuttle_name, 'mission' : data.mission_data.ID}, (data.shuttle_access && data.crew) ? null : 'disabled')}}
+				{{:helper.link('Email Crew', null, {'email_crew' : 1, 'shuttle' : data.shuttle_name, 'mission' : data.mission_data.ID}, data.crew ? null : 'disabled')}}
+			</div>
+		</div>
+		{{for data.other_reports}}
+		<div class='item'>
+			<div class='itemLabel'>
+				{{:value.name}}:
+			</div>
+			<div class='itemContent'>
+				{{:helper.link('View Report', null, {'report' : 1, 'view' : 1, 'index' : value.index, 'shuttle' : data.shuttle_name, 'mission' : data.mission_data.ID}, value.exists ? null : 'disabled')}}
+				{{:helper.link('Create Report', null, {'report' : 1, 'index' : value.index, 'shuttle' : data.shuttle_name, 'mission' : data.mission_data.ID}, (value.access_edit && !value.exists) ? null : 'disabled')}}
+				{{:helper.link('Edit Report', null, {'report' : 1, 'index' : value.index, 'shuttle' : data.shuttle_name, 'mission' : data.mission_data.ID}, (value.access_edit && value.exists) ? null : 'disabled')}}
+			</div>
+		</div>
+		{{/for}}
+{{else data.prog_state == 4}}<!--DECK_REPORT_EDIT-->
+	<div class='item'>
+		{{:helper.link('Home', null, {'home' : 1, 'warning' : data.report_data.access_edit && !data.view_only}, null)}}
+		{{:helper.link('All Missions', null, {'history' : data.shuttle_name, 'warning' : data.report_data.access_edit && !data.view_only}, null)}}
+		{{:helper.link('Mission Details', null, {'details' : 1, 'shuttle' : data.shuttle_name, 'mission' : data.mission_data.ID, 'warning' : data.report_data.access_edit && !data.view_only}, null)}}
+	</div>
+	<center><h2>Report Editor</h2></center>
+	<h3>Shuttle: {{:data.shuttle_name}}<br>Mission: {{:data.mission_data.name}}<br>{{:data.report_data.name}}</h3>
+	{{for data.report_data.fields}}
+		<div class='item'>
+			{{if value.ignore_value}}
+				<h3>{{:value.name}}</h3>
+			{{else}}
+				<div class='itemLabel'>
+					{{if (value.can_edit && value.access_edit && !data.view_only)}}
+						{{:helper.link('','pencil' , {'edit' : 1, 'ID' : value.ID}, null)}}
+					{{/if}}
+					{{:value.name}}: 
+				</div>
+				{{if value.access}}
+					<div class="itemContent">
+						{{if value.needs_big_box}}
+						<div class='block'>
+							{{:value.value}}
+						</div>
+						{{else}}
+						<div class='statusDisplayComm' style="width:100%;min-height:1.7em;padding-bottom: 0;">
+							{{:value.value}}
+						</div>
+						{{/if}}
+					</div>
+				{{else}}
+					<div class="itemContent">Access Denied.</div>
+				{{/if}}
+			{{/if}}
+		</div>
+	{{/for}}
+	{{if data.view_only}}
+		{{:helper.link('Back', null, {'details' : 1, 'shuttle' : data.shuttle_name, 'mission' : data.mission_data.ID}, null)}}
+	{{else}}
+		<div class='item'>
+			<div class='itemContent'>
+				{{:helper.link('Submit Report', null, {'submit' : 1}, data.report_data.access_edit ? null : 'disabled')}}
+				{{:helper.link('Discard Changes', null, {'discard' : 1, 'warning' : 1}, data.report_data.access_edit ? null : 'disabled')}}
+			</div>
+		</div>
+	{{/if}}
+{{/if}}
+{{/if}}

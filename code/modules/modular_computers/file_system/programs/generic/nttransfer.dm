@@ -5,12 +5,15 @@ var/global/nttransfer_uid = 0
 	filedesc = "NTNet P2P Transfer Client"
 	extended_desc = "This program allows for simple file transfer via direct peer to peer connection."
 	program_icon_state = "comm_logs"
+	program_key_state = "generic_key"
+	program_menu_icon = "transferthick-e-w"
 	size = 7
-	requires_ntnet = 1
+	requires_ntnet = TRUE
 	requires_ntnet_feature = NTNET_PEERTOPEER
 	network_destination = "other device via P2P tunnel"
-	available_on_ntnet = 1
+	available_on_ntnet = TRUE
 	nanomodule_path = /datum/nano_module/program/computer_nttransfer/
+	category = PROG_UTIL
 
 	var/error = ""										// Error screen
 	var/server_password = ""							// Optional password to download the file.
@@ -19,7 +22,6 @@ var/global/nttransfer_uid = 0
 	var/list/connected_clients = list()					// List of connected clients.
 	var/datum/computer_file/program/nttransfer/remote	// Client var, specifies who are we downloading from.
 	var/download_completion = 0							// Download progress in GQ
-	var/download_netspeed = 0							// Our connectivity speed in GQ/s
 	var/actual_netspeed = 0								// Displayed in the UI, this is the actual transfer speed.
 	var/unique_token 									// UID of this program
 	var/upload_menu = 0									// Whether we show the program list and upload menu
@@ -30,14 +32,14 @@ var/global/nttransfer_uid = 0
 	..()
 
 /datum/computer_file/program/nttransfer/process_tick()
+	..()
 	// Server mode
-	update_netspeed()
 	if(provided_file)
 		for(var/datum/computer_file/program/nttransfer/C in connected_clients)
 			// Transfer speed is limited by device which uses slower connectivity.
 			// We can have multiple clients downloading at same time, but let's assume we use some sort of multicast transfer
 			// so they can all run on same speed.
-			C.actual_netspeed = min(C.download_netspeed, download_netspeed)
+			C.actual_netspeed = min(C.ntnet_speed, ntnet_speed)
 			C.download_completion += C.actual_netspeed
 			if(C.download_completion >= provided_file.size)
 				C.finish_download()
@@ -45,7 +47,7 @@ var/global/nttransfer_uid = 0
 		if(!remote)
 			crash_download("Connection to remote server lost")
 
-/datum/computer_file/program/nttransfer/kill_program(var/forced = 0)
+/datum/computer_file/program/nttransfer/on_shutdown(var/forced = 0)
 	if(downloaded_file) // Client mode, clean up variables for next use
 		finalize_download()
 
@@ -55,21 +57,9 @@ var/global/nttransfer_uid = 0
 		downloaded_file = null
 	..(forced)
 
-
-
-/datum/computer_file/program/nttransfer/proc/update_netspeed()
-	download_netspeed = 0
-	switch(ntnet_status)
-		if(1)
-			download_netspeed = NTNETSPEED_LOWSIGNAL
-		if(2)
-			download_netspeed = NTNETSPEED_HIGHSIGNAL
-		if(3)
-			download_netspeed = NTNETSPEED_ETHERNET
-
 // Finishes download and attempts to store the file on HDD
 /datum/computer_file/program/nttransfer/proc/finish_download()
-	if(!computer || !computer.hard_drive || !computer.hard_drive.store_file(downloaded_file))
+	if(!computer || !computer.store_file(downloaded_file))
 		error = "I/O Error:  Unable to save file. Check your hard drive and try again."
 	finalize_download()
 
@@ -90,7 +80,7 @@ var/global/nttransfer_uid = 0
 /datum/nano_module/program/computer_nttransfer
 	name = "NTNet P2P Transfer Client"
 
-/datum/nano_module/program/computer_nttransfer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
+/datum/nano_module/program/computer_nttransfer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
 	if(!program)
 		return
 	var/datum/computer_file/program/nttransfer/PRG = program
@@ -115,7 +105,7 @@ var/global/nttransfer_uid = 0
 		data["upload_filename"] = "[PRG.provided_file.filename].[PRG.provided_file.filetype]"
 	else if (PRG.upload_menu)
 		var/list/all_files[0]
-		for(var/datum/computer_file/F in PRG.computer.hard_drive.stored_files)
+		for(var/datum/computer_file/F in PRG.computer.get_all_files())
 			all_files.Add(list(list(
 			"uid" = F.uid,
 			"filename" = "[F.filename].[F.filetype]",
@@ -135,7 +125,7 @@ var/global/nttransfer_uid = 0
 			)))
 		data["servers"] = all_servers
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "ntnet_transfer.tmpl", "NTNet P2P Transfer Client", 575, 700, state = state)
 		ui.auto_update_layout = 1
@@ -181,7 +171,7 @@ var/global/nttransfer_uid = 0
 		server_password = pass
 		return 1
 	if(href_list["PRG_uploadfile"])
-		for(var/datum/computer_file/F in computer.hard_drive.stored_files)
+		for(var/datum/computer_file/F in computer.get_all_files())
 			if("[F.uid]" == href_list["PRG_uploadfile"])
 				if(F.unsendable)
 					error = "I/O Error: File locked."

@@ -1,18 +1,23 @@
-#define TOPIC_NOACTION 0
-#define TOPIC_HANDLED 1
-#define TOPIC_REFRESH 2
 #define TOPIC_UPDATE_PREVIEW 4
-#define TOPIC_REFRESH_UPDATE_PREVIEW (TOPIC_REFRESH|TOPIC_UPDATE_PREVIEW)
+#define TOPIC_HARD_REFRESH   8 // use to force a browse() call, unblocking some rsc operations
+#define TOPIC_REFRESH_UPDATE_PREVIEW (TOPIC_HARD_REFRESH|TOPIC_UPDATE_PREVIEW)
 
-/datum/category_group/player_setup_category/general_preferences
-	name = "General"
+var/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
+
+/datum/category_group/player_setup_category/physical_preferences
+	name = "Physical"
 	sort_order = 1
-	category_item_type = /datum/category_item/player_setup_item/general
+	category_item_type = /datum/category_item/player_setup_item/physical
 
-/datum/category_group/player_setup_category/skill_preferences
-	name = "Skills"
+/datum/category_group/player_setup_category/background_preferences
+	name = "Background"
 	sort_order = 2
-	category_item_type = /datum/category_item/player_setup_item/skills
+	category_item_type = /datum/category_item/player_setup_item/background
+
+/datum/category_group/player_setup_category/background_preferences/content(var/mob/user)
+	. = ""
+	for(var/datum/category_item/player_setup_item/PI in items)
+		. += "[PI.content(user)]<br>"
 
 /datum/category_group/player_setup_category/occupation_preferences
 	name = "Occupation"
@@ -24,11 +29,6 @@
 	sort_order = 4
 	category_item_type = /datum/category_item/player_setup_item/antagonism
 
-/datum/category_group/player_setup_category/relations_preferences
-	name = "Matchmaking"
-	sort_order = 5
-	category_item_type = /datum/category_item/player_setup_item/relations
-
 /datum/category_group/player_setup_category/loadout_preferences
 	name = "Loadout"
 	sort_order = 6
@@ -38,6 +38,12 @@
 	name = "Global"
 	sort_order = 7
 	category_item_type = /datum/category_item/player_setup_item/player_global
+
+/datum/category_group/player_setup_category/law_pref
+	name = "Laws"
+	sort_order = 8
+	category_item_type = /datum/category_item/player_setup_item/law_pref
+
 
 /****************************
 * Category Collection Setup *
@@ -61,25 +67,21 @@
 	for(var/datum/category_group/player_setup_category/PS in categories)
 		PS.sanitize_setup()
 
-/datum/category_collection/player_setup_collection/proc/load_character(var/savefile/S)
+/datum/category_collection/player_setup_collection/proc/load_character(datum/pref_record_reader/R)
 	for(var/datum/category_group/player_setup_category/PS in categories)
-		PS.load_character(S)
+		PS.load_character(R)
 
-/datum/category_collection/player_setup_collection/proc/save_character(var/savefile/S)
+/datum/category_collection/player_setup_collection/proc/save_character(datum/pref_record_writer/W)
 	for(var/datum/category_group/player_setup_category/PS in categories)
-		PS.save_character(S)
+		PS.save_character(W)
 
-/datum/category_collection/player_setup_collection/proc/load_preferences(var/savefile/S)
+/datum/category_collection/player_setup_collection/proc/load_preferences(datum/pref_record_reader/R)
 	for(var/datum/category_group/player_setup_category/PS in categories)
-		PS.load_preferences(S)
+		PS.load_preferences(R)
 
-/datum/category_collection/player_setup_collection/proc/save_preferences(var/savefile/S)
+/datum/category_collection/player_setup_collection/proc/save_preferences(datum/pref_record_writer/W)
 	for(var/datum/category_group/player_setup_category/PS in categories)
-		PS.save_preferences(S)
-
-/datum/category_collection/player_setup_collection/proc/update_setup(var/savefile/preferences, var/savefile/character)
-	for(var/datum/category_group/player_setup_category/PS in categories)
-		. = . && PS.update_setup(preferences, character)
+		PS.save_preferences(W)
 
 /datum/category_collection/player_setup_collection/proc/header()
 	var/dat = ""
@@ -103,12 +105,12 @@
 
 	if(href_list["category"])
 		var/category = locate(href_list["category"])
-		if(category && category in categories)
+		if(category && (category in categories))
 			selected_category = category
 		. = 1
 
 	if(.)
-		user.client.prefs.ShowChoices(user)
+		user.client.prefs.update_setup_window(user)
 
 /**************************
 * Category Category Setup *
@@ -126,8 +128,6 @@
 		PI.sanitize_character()
 
 /datum/category_group/player_setup_category/proc/load_character(var/savefile/S)
-	// Load all data, then sanitize it.
-	// Need due to, for example, the 01_basic module relying on species having been loaded to sanitize correctly but that isn't loaded until module 03_body.
 	for(var/datum/category_item/player_setup_item/PI in items)
 		PI.load_character(S)
 
@@ -147,10 +147,6 @@
 		PI.sanitize_preferences()
 	for(var/datum/category_item/player_setup_item/PI in items)
 		PI.save_preferences(S)
-
-/datum/category_group/player_setup_category/proc/update_setup(var/savefile/preferences, var/savefile/character)
-	for(var/datum/category_item/player_setup_item/PI in items)
-		. = . && PI.update_setup(preferences, character)
 
 /datum/category_group/player_setup_category/proc/content(var/mob/user)
 	. = "<table style='width:100%'><tr style='vertical-align:top'><td style='width:50%'>"
@@ -189,32 +185,26 @@
 /*
 * Called when the item is asked to load per character settings
 */
-/datum/category_item/player_setup_item/proc/load_character(var/savefile/S)
+/datum/category_item/player_setup_item/proc/load_character(datum/pref_record_reader/R)
 	return
 
 /*
 * Called when the item is asked to save per character settings
 */
-/datum/category_item/player_setup_item/proc/save_character(var/savefile/S)
+/datum/category_item/player_setup_item/proc/save_character(datum/pref_record_writer/W)
 	return
 
 /*
 * Called when the item is asked to load user/global settings
 */
-/datum/category_item/player_setup_item/proc/load_preferences(var/savefile/S)
+/datum/category_item/player_setup_item/proc/load_preferences(datum/pref_record_reader/R)
 	return
 
 /*
 * Called when the item is asked to save user/global settings
 */
-/datum/category_item/player_setup_item/proc/save_preferences(var/savefile/S)
+/datum/category_item/player_setup_item/proc/save_preferences(datum/pref_record_writer/W)
 	return
-
-/*
-* Called when the item is asked to update user/global settings
-*/
-/datum/category_item/player_setup_item/proc/update_setup(var/savefile/preferences, var/savefile/character)
-	return 0
 
 /datum/category_item/player_setup_item/proc/content()
 	return
@@ -231,12 +221,23 @@
 	var/mob/pref_mob = preference_mob()
 	if(!pref_mob || !pref_mob.client)
 		return 1
+	// If the usr isn't trying to alter their own mob then they must instead be an admin
+	if(usr != pref_mob && !check_rights(R_ADMIN, 0, usr))
+		return 1
 
 	. = OnTopic(href, href_list, usr)
-	if(. & TOPIC_UPDATE_PREVIEW)
+
+	// The user might have joined the game or otherwise had a change of mob while tweaking their preferences.
+	pref_mob = preference_mob()
+	if(!pref_mob || !pref_mob.client)
+		return 1
+
+	if (. & TOPIC_UPDATE_PREVIEW)
 		pref_mob.client.prefs.preview_icon = null
-	if(. & TOPIC_REFRESH)
-		pref_mob.client.prefs.ShowChoices(usr)
+	if (. & TOPIC_HARD_REFRESH)
+		pref_mob.client.prefs.open_setup_window(usr)
+	else if (. & TOPIC_REFRESH)
+		pref_mob.client.prefs.update_setup_window(usr)
 
 /datum/category_item/player_setup_item/CanUseTopic(var/mob/user)
 	return 1
@@ -253,3 +254,6 @@
 
 	if(pref.client)
 		return pref.client.mob
+
+/datum/category_item/player_setup_item/proc/preference_species()
+	return all_species[pref.species] || all_species[SPECIES_HUMAN]

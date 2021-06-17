@@ -4,7 +4,7 @@
 	set desc = "Tag yourself for delivery through the disposals system."
 	set category = "Silicon Commands"
 
-	var/new_tag = input("Select the desired destination.", "Set Mail Tag", null) as null|anything in tagger_locations
+	var/new_tag = input("Select the desired destination.", "Set Mail Tag", null) as null|anything in GLOB.tagger_locations
 
 	if(!new_tag)
 		mail_destination = ""
@@ -25,7 +25,6 @@
 	var/mob/living/carbon/H = over_object
 
 	if(istype(H) && Adjacent(H) && (usr == H) && (H.a_intent == "grab") && hat && !(H.l_hand && H.r_hand))
-		hat.forceMove(get_turf(src))
 		H.put_in_hands(hat)
 		H.visible_message("<span class='danger'>\The [H] removes \the [src]'s [hat].</span>")
 		hat = null

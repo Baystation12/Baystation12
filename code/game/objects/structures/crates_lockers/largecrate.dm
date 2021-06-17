@@ -1,13 +1,13 @@
 /obj/structure/largecrate
 	name = "large crate"
 	desc = "A hefty wooden crate."
-	icon = 'icons/obj/storage.dmi'
+	icon = 'icons/obj/shipping_crates.dmi'
 	icon_state = "densecrate"
-	density = 1
-	flags = OBJ_CLIMBABLE
+	density = TRUE
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 
-/obj/structure/largecrate/initialize()
-	..()
+/obj/structure/largecrate/Initialize()
+	. = ..()
 	for(var/obj/I in src.loc)
 		if(I.density || I.anchored || I == src || !I.simulated)
 			continue
@@ -17,8 +17,8 @@
 	to_chat(user, "<span class='notice'>You need a crowbar to pry this open!</span>")
 	return
 
-/obj/structure/largecrate/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/crowbar))
+/obj/structure/largecrate/attackby(obj/item/W as obj, mob/user as mob)
+	if(isCrowbar(W))
 		new /obj/item/stack/material/wood(src)
 		var/turf/T = get_turf(src)
 		for(var/atom/movable/AM in contents)
@@ -33,22 +33,6 @@
 /obj/structure/largecrate/mule
 	name = "MULE crate"
 
-/obj/structure/largecrate/hoverpod
-	name = "\improper Hoverpod assembly crate"
-	desc = "It comes in a box for the fabricator's sake. Where does the wood come from? ... And why is it lighter?"
-	icon_state = "mulecrate"
-
-/obj/structure/largecrate/hoverpod/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/crowbar))
-		var/obj/item/mecha_parts/mecha_equipment/ME
-		var/obj/mecha/working/hoverpod/H = new (loc)
-
-		ME = new /obj/item/mecha_parts/mecha_equipment/tool/hydraulic_clamp
-		ME.attach(H)
-		ME = new /obj/item/mecha_parts/mecha_equipment/tool/passenger
-		ME.attach(H)
-	..()
-
 /obj/structure/largecrate/animal
 	icon_state = "mulecrate"
 	var/held_count = 1
@@ -56,8 +40,9 @@
 
 /obj/structure/largecrate/animal/New()
 	..()
-	for(var/i = 1;i<=held_count;i++)
-		new held_type(src)
+	if(held_type)
+		for(var/i = 1;i<=held_count;i++)
+			new held_type(src)
 
 /obj/structure/largecrate/animal/mulebot
 	name = "Mulebot crate"
@@ -65,24 +50,28 @@
 
 /obj/structure/largecrate/animal/corgi
 	name = "corgi carrier"
-	held_type = /mob/living/simple_animal/corgi
+	held_type = /mob/living/simple_animal/friendly/corgi
 
 /obj/structure/largecrate/animal/cow
 	name = "cow crate"
-	held_type = /mob/living/simple_animal/cow
+	held_type = /mob/living/simple_animal/friendly/cow
 
 /obj/structure/largecrate/animal/goat
 	name = "goat crate"
 	held_type = /mob/living/simple_animal/hostile/retaliate/goat
 
+/obj/structure/largecrate/animal/goose
+	name = "goose containment unit"
+	held_type = /mob/living/simple_animal/hostile/retaliate/goose
+
 /obj/structure/largecrate/animal/cat
 	name = "cat carrier"
-	held_type = /mob/living/simple_animal/cat
+	held_type = /mob/living/simple_animal/friendly/cat
 
 /obj/structure/largecrate/animal/cat/bones
-	held_type = /mob/living/simple_animal/cat/fluff/bones
+	held_type = /mob/living/simple_animal/friendly/cat/fluff/bones
 
 /obj/structure/largecrate/animal/chick
 	name = "chicken crate"
 	held_count = 5
-	held_type = /mob/living/simple_animal/chick
+	held_type = /mob/living/simple_animal/friendly/chick

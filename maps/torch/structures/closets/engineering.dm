@@ -2,151 +2,143 @@
  * Torch Engineering
  */
 
+/decl/closet_appearance/secure_closet/torch/engineering
+	extra_decals = list(
+		"stripe_vertical_mid_full" = COLOR_WARM_YELLOW,
+		"exped" = COLOR_WARM_YELLOW
+	)
+
+/decl/closet_appearance/secure_closet/torch/engineering/atmos
+	extra_decals = list(
+		"stripe_vertical_right_full" = COLOR_WARM_YELLOW,
+		"stripe_vertical_mid_full" = COLOR_CYAN_BLUE,
+		"atmos_upper" = COLOR_WARM_YELLOW
+	)
+
+/decl/closet_appearance/secure_closet/torch/engineering/se
+	extra_decals = list(
+		"stripe_vertical_left_full" = COLOR_WARM_YELLOW,
+		"stripe_vertical_right_full" = COLOR_WARM_YELLOW,
+		"exped" = COLOR_WARM_YELLOW
+	)
+
+/decl/closet_appearance/secure_closet/torch/engineering/ce
+	extra_decals = list(
+		"stripe_vertical_left_full" = COLOR_WARM_YELLOW,
+		"stripe_vertical_mid_full" = COLOR_CLOSET_GOLD,
+		"stripe_vertical_right_full" = COLOR_WARM_YELLOW,
+		"exped" = COLOR_CLOSET_GOLD
+	)
+
 /obj/structure/closet/secure_closet/engineering_chief_torch
 	name = "chief engineer's locker"
 	req_access = list(access_ce)
-	icon_state = "securece1"
-	icon_closed = "securece"
-	icon_locked = "securece1"
-	icon_opened = "secureceopen"
-	icon_broken = "securecebroken"
-	icon_off = "secureceoff"
+	closet_appearance = /decl/closet_appearance/secure_closet/torch/engineering/ce
 
-	will_contain = list(
+/obj/structure/closet/secure_closet/engineering_chief_torch/WillContain()
+	return list(
 		/obj/item/clothing/accessory/storage/brown_vest,
 		/obj/item/blueprints,
 		/obj/item/clothing/head/hardhat/white,
 		/obj/item/clothing/head/welding,
 		/obj/item/clothing/gloves/insulated,
-		/obj/item/weapon/cartridge/ce,
 		/obj/item/device/radio/headset/heads/ce,
-		/obj/item/weapon/storage/toolbox/mechanical,
-		/obj/item/weapon/storage/belt/utility,
+		/obj/item/device/radio/headset/heads/ce/alt,
+		/obj/item/storage/belt/utility/full,
+		/obj/item/storage/belt/general,
 		/obj/item/clothing/suit/storage/hazardvest,
 		/obj/item/clothing/mask/gas,
 		/obj/item/device/multitool,
 		/obj/item/device/flash,
+		/obj/item/gun/energy/confuseray,
 		/obj/item/taperoll/engineering,
 		/obj/item/device/megaphone,
-		/obj/item/weapon/crowbar/brace_jack,
+		/obj/item/crowbar/brace_jack,
 		/obj/item/clothing/glasses/meson,
 		/obj/item/clothing/glasses/welding/superior,
-		/obj/item/weapon/gun/energy/gun,
-		/obj/item/clothing/accessory/holster/thigh,
-		/obj/item/clothing/suit/storage/vest/solgov/command,
+		/obj/item/clothing/suit/armor/pcarrier/medium/command,
 		/obj/item/clothing/head/helmet/solgov/command,
-		/obj/item/weapon/clipboard,
-		/obj/item/device/flashlight,
+		/obj/item/material/clipboard,
 		/obj/item/device/holowarrant,
-		/obj/item/weapon/folder/yellow,
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/industrial, /obj/item/weapon/storage/backpack/satchel_eng)),
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/eng, /obj/item/weapon/storage/backpack/messenger/engi))
+		/obj/item/storage/box/armband/engine,
+		/obj/item/storage/box/secret_project_disks,
+		/obj/item/material/knife/folding/swiss/officer,
+		/obj/item/clothing/head/hardhat/damage_control/White,
+		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/industrial, /obj/item/storage/backpack/satchel/eng)),
+		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/dufflebag/eng, /obj/item/storage/backpack/messenger/engi))
 	)
 
 /obj/structure/closet/secure_closet/engineering_torch
 	name = "engineer's locker"
 	req_access = list(access_engine_equip)
-	icon_state = "secureeng1"
-	icon_closed = "secureeng"
-	icon_locked = "secureeng1"
-	icon_opened = "secureengopen"
-	icon_broken = "secureengbroken"
-	icon_off = "secureengoff"
+	closet_appearance = /decl/closet_appearance/secure_closet/torch/engineering
 
-	will_contain = list(
+/obj/structure/closet/secure_closet/engineering_torch/WillContain()
+	return list(
 		/obj/item/clothing/under/hazard,
 		/obj/item/clothing/accessory/storage/brown_vest,
-		/obj/item/weapon/storage/toolbox/mechanical,
-		/obj/item/weapon/storage/belt/utility,
+		/obj/item/storage/belt/utility/full,
 		/obj/item/device/radio/headset/headset_eng,
+		/obj/item/device/radio/headset/headset_eng/alt,
 		/obj/item/clothing/suit/storage/hazardvest,
 		/obj/item/clothing/mask/gas,
 		/obj/item/clothing/glasses/meson,
-		/obj/item/weapon/cartridge/engineering,
 		/obj/item/taperoll/engineering,
-		/obj/item/weapon/cartridge/atmos,
 		/obj/item/device/flashlight,
 		/obj/item/taperoll/atmos,
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/industrial, /obj/item/weapon/storage/backpack/satchel_eng)),
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/eng, /obj/item/weapon/storage/backpack/messenger/engi))
-	)
-
-/obj/structure/closet/secure_closet/engineering_contractor
-	name = "engineering contractor's locker"
-	req_access = list(access_engine)
-	icon_state = "secureeng1"
-	icon_closed = "secureeng"
-	icon_locked = "secureeng1"
-	icon_opened = "secureengopen"
-	icon_broken = "secureengbroken"
-	icon_off = "secureengoff"
-
-	will_contain = list(
-		/obj/item/clothing/under/rank/engineer,
-		/obj/item/clothing/accessory/storage/webbing,
-		/obj/item/weapon/storage/toolbox/mechanical,
-		/obj/item/device/radio/headset/headset_eng,
-		/obj/item/clothing/suit/storage/hazardvest,
-		/obj/item/clothing/mask/gas/half,
-		/obj/item/weapon/cartridge/engineering,
-		/obj/item/device/flashlight,
-		/obj/item/taperoll/engineering,
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/industrial, /obj/item/weapon/storage/backpack/satchel_eng)),
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/eng, /obj/item/weapon/storage/backpack/messenger/engi))
+		/obj/item/clothing/gloves/insulated,
+		/obj/item/material/knife/folding/swiss/engineer,
+		/obj/item/clothing/head/hardhat/damage_control,
+		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/industrial, /obj/item/storage/backpack/satchel/eng)),
+		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/dufflebag/eng, /obj/item/storage/backpack/messenger/engi))
 	)
 
 /obj/structure/closet/secure_closet/engineering_senior
 	name = "senior engineer's locker"
 	req_access = list(access_seneng)
-	icon_state = "secureseneng1"
-	icon_closed = "secureseneng"
-	icon_locked = "secureseneng1"
-	icon_opened = "securesenengopen"
-	icon_broken = "securesenengbroken"
-	icon_off = "securesenengoff"
+	closet_appearance = /decl/closet_appearance/secure_closet/torch/engineering/se
 
-	will_contain = list(
+/obj/structure/closet/secure_closet/engineering_senior/WillContain()
+	return list(
 		/obj/item/clothing/under/hazard,
 		/obj/item/clothing/accessory/storage/brown_vest,
-		/obj/item/weapon/storage/toolbox/mechanical,
-		/obj/item/weapon/storage/belt/utility,
 		/obj/item/device/radio/headset/headset_eng,
+		/obj/item/device/radio/headset/headset_eng/alt,
 		/obj/item/clothing/suit/storage/hazardvest,
 		/obj/item/clothing/mask/gas,
+		/obj/item/storage/belt/utility/full,
 		/obj/item/clothing/glasses/meson,
-		/obj/item/weapon/cartridge/engineering,
 		/obj/item/taperoll/engineering,
-		/obj/item/weapon/cartridge/atmos,
 		/obj/item/taperoll/atmos,
 		/obj/item/clothing/glasses/welding/superior,
 		/obj/item/device/flash,
-		/obj/item/weapon/cartridge/ce,
 		/obj/item/device/flashlight,
 		/obj/item/device/megaphone,
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/industrial, /obj/item/weapon/storage/backpack/satchel_eng)),
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/eng, /obj/item/weapon/storage/backpack/messenger/engi))
+		/obj/item/clothing/gloves/insulated,
+		/obj/item/material/knife/folding/swiss/engineer,
+		/obj/item/clothing/head/hardhat/damage_control/Yellow,
+		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/industrial, /obj/item/storage/backpack/satchel/eng)),
+		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/dufflebag/eng, /obj/item/storage/backpack/messenger/engi))
 	)
 
 /obj/structure/closet/secure_closet/atmos_torch
 	name = "atmospherics equipment locker"
 	req_access = list(access_atmospherics)
-	icon_state = "secureatm1"
-	icon_closed = "secureatm"
-	icon_locked = "secureatm1"
-	icon_opened = "secureatmopen"
-	icon_broken = "secureatmbroken"
-	icon_off = "secureatmoff"
+	closet_appearance = /decl/closet_appearance/secure_closet/torch/engineering/atmos
 
-	will_contain = list(
+/obj/structure/closet/secure_closet/atmos_torch/WillContain()
+	return list(
 		/obj/item/clothing/under/hazard,
-		/obj/item/clothing/suit/fire/firefighter,
+		/obj/item/storage/backpack/dufflebag/firefighter,
 		/obj/item/clothing/head/hardhat/red,
 		/obj/item/device/flashlight,
-		/obj/item/weapon/extinguisher,
+		/obj/item/storage/belt/utility/full,
 		/obj/item/device/radio/headset/headset_eng,
-		/obj/item/weapon/tank/emergency/oxygen/double,
+		/obj/item/device/radio/headset/headset_eng/alt,
+		/obj/item/tank/emergency/oxygen/double,
 		/obj/item/clothing/mask/gas,
-		/obj/item/weapon/cartridge/atmos,
 		/obj/item/taperoll/atmos,
-		/obj/item/device/analyzer
+		/obj/item/device/scanner/gas,
+		/obj/item/scrubpack/standard = 2,
+		/obj/item/tank/scrubber = 4
 	)

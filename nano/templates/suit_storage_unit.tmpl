@@ -1,0 +1,116 @@
+{{if data.panelopen}}
+    <h3>Maintenance Pannel</h3>
+    <hr></hr>
+    <div class="item">
+        A dial with a small lambda symbol. There are two options.
+        <div class="itemContent">
+        {{if data.superuv}}
+            {{:helper.link('Turn towards 185nm', null, {'toggleUV' : 1})}}
+        {{else}}
+            {{:helper.link('Turn towards 15nm', null, {'toggleUV' : 1})}}
+        {{/if}}
+        </div>
+    </div>
+    <br><br>
+    <div class="item">
+        A thick old-style button, with two grimy LED lights next to it. The {{:data.safeties ? "green" : "red"}} LED is lit.
+        <div class="itemContent">
+            {{:helper.link('Press Button', null, {'togglesafeties' : 1})}}
+        </div>
+    </div>
+{{else data.uv}}
+    <h2>Sterilization In Progress<h2>
+    <h3><i>Unit is sterilizing contents with selected UV ray intensity. Please wait.</i><h3>
+{{else}}
+    <h2>Control Panel</h2>
+    <div class="item">
+        <div class="itemLabel">
+            Hatch:
+        </div>
+        <div class="itemContent">
+        {{if data.open}}
+            {{:helper.link('Close Hatch', null, {'toggle_open' : 1})}}
+        {{else}}
+            {{:helper.link('Open Hatch', null, {'toggle_open' : 1})}}
+        {{/if}}
+        </div>
+    </div>
+    <div class="item">
+        <div class="itemLabel">
+            Locks:
+        </div>
+        <div class="itemContent">
+        {{if data.locked}}
+            {{:helper.link('Unlock', null, {'toggle_lock' : 1})}}
+        {{else}}
+            {{:helper.link('Lock', null, {'toggle_lock' : 1})}}
+        {{/if}}
+        </div>
+    </div>
+    <div class="item">
+        <div class="itemLabel">
+            Sterilization:
+        </div>
+        <div class="itemContent">
+            {{:helper.link('Initiate Sterilization', null, {'start_UV' : 1})}}
+        </div>
+    </div>
+    <hr></hr>
+    <h2>Equipment Panel</h2>
+    <div class="item">
+        <div class="itemLabel">
+            Helmet:
+        </div>
+        <div class="itemContent">
+            {{:data.helmet ? data.helmet : "Empty"}}
+        </div>
+        <div class="itemContent">
+            {{:helper.link('Eject', null, {'dispense_helmet' : 1})}}
+        </div>
+    </div>
+    <div class="item">
+        <div class="itemLabel">
+            Suit: 
+        </div>
+        <div class="itemContent">
+            {{:data.suit ? data.suit : "Empty"}}
+        </div>
+        <div class="itemContent">
+            {{:helper.link('Eject', null, {'dispense_suit' : 1})}}
+        </div>
+    </div>
+    <div class="item">
+        <div class="itemLabel">
+            Boots: 
+        </div>
+        <div class="itemContent">
+            {{:data.boots ? data.boots : "Empty"}}
+        </div>
+        <div class="itemContent">
+            {{:helper.link('Eject', null, {'dispense_boots' : 1})}}
+        </div>
+    </div>
+    <div class="item">
+        <div class="itemLabel">
+            Tank: 
+        </div>
+        <div class="itemContent">
+            {{:data.tank ? data.tank : "Empty"}}
+        </div>
+        <div class="itemContent">
+            {{:helper.link('Eject', null, {'dispense_tank' : 1})}}
+        </div>
+    </div>
+    <div class="item">
+        <div class="itemLabel">
+            Mask: 
+        </div>
+        <div class="itemContent">
+             {{:data.mask ? data.mask : "Empty"}}
+        </div>
+        <div class="itemContent">
+           {{:helper.link('Eject', null, {'dispense_mask' : 1})}}
+        </div>
+    </div>
+{{/if}}
+    

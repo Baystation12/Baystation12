@@ -2,7 +2,7 @@
 	name = "Magic Missile"
 	desc = "This spell fires several, slow moving, magic projectiles at nearby targets."
 	feedback = "MM"
-	school = "evocation"
+	school = "conjuration"
 	charge_max = 150
 	spell_flags = NEEDSCLOTHES
 	invocation = "Forti Gy-Ama!"
@@ -18,15 +18,15 @@
 	proj_step_delay = 5
 
 	hud_state = "wiz_mm"
-
+	cast_sound = 'sound/magic/magic_missile.ogg'
 	amt_paralysis = 3
 	amt_stunned = 3
 
 	amt_dam_fire = 10
-	cast_prox_range = 0
 
 /spell/targeted/projectile/magic_missile/prox_cast(var/list/targets, atom/spell_holder)
 	spell_holder.visible_message("<span class='danger'>\The [spell_holder] pops with a flash!</span>")
+	playsound(src, 'sound/magic/mm_hit.ogg', 40)
 	for(var/mob/living/M in targets)
 		apply_spell_damage(M)
 	return

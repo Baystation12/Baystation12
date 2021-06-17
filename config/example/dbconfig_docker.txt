@@ -1,0 +1,27 @@
+# For running on the included Dockerized database + gameserver
+# MySQL Connection Configuration
+
+# Server the MySQL database can be found at
+# Examples: localhost, 200.135.5.43, www.mysqldb.com, etc.
+ADDRESS db
+
+# MySQL server port (default is 3306)
+PORT 3306
+
+# Database the population, death, karma, etc. tables may be found in
+DATABASE bs12
+
+# Username/Login used to access the database
+LOGIN gamelord
+
+# Password used to access the database
+PASSWORD gamelord
+
+# The following information is for feedback tracking via the blackbox server
+FEEDBACK_DATABASE gamelord
+FEEDBACK_LOGIN gamelord
+FEEDBACK_PASSWORD gamelord
+
+# Track population and death statistics
+# Comment this out to disable
+ENABLE_STAT_TRACKING

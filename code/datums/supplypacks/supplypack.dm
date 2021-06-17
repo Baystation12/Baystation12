@@ -1,8 +1,6 @@
-var/decl/hierarchy/supply_pack/cargo_supply_pack_root = new()
-var/decl/hierarchy/supply_pack/cargo_supply_packs	// Non-category supply packs
-
 /decl/hierarchy/supply_pack
 	name = "Supply Packs"
+	hierarchy_type = /decl/hierarchy/supply_pack
 	var/list/contains = list()
 	var/manifest = ""
 	var/cost = null
@@ -13,21 +11,32 @@ var/decl/hierarchy/supply_pack/cargo_supply_packs	// Non-category supply packs
 	var/contraband = 0
 	var/num_contained = 0 //number of items picked to be contained in a randomised crate
 	var/supply_method = /decl/supply_method
+	var/decl/security_level/security_level
 
-/decl/hierarchy/supply_pack/New()
-	..()
-	if(is_hidden_category())
-		return	// Don't init the manifest for category entries
-
-	if(!cargo_supply_packs) cargo_supply_packs = list()
-	dd_insertObjectList(cargo_supply_packs, src)	// Add all non-category supply packs to the list
-
+//Is run once on init for non-base-category supplypacks.
+/decl/hierarchy/supply_pack/proc/setup()
 	if(!num_contained)
 		for(var/entry in contains)
 			num_contained += max(1, contains[entry])
 
 	var/decl/supply_method/sm = get_supply_method(supply_method)
 	manifest = sm.setup_manifest(src)
+
+/decl/hierarchy/supply_pack/proc/sec_available()
+	if(isnull(security_level))
+		return TRUE
+	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+	switch(security_level)
+		if(SUPPLY_SECURITY_ELEVATED)
+			if(security_state.all_security_levels.len > 1)
+				security_level = security_state.all_security_levels[2] 
+			else
+				security_level = security_state.high_security_level 
+		if(SUPPLY_SECURITY_HIGH)
+			security_level = security_state.high_security_level
+	if(!istype(security_level))
+		return TRUE
+	return security_state.current_security_level_is_same_or_higher_than(security_level)
 
 /decl/hierarchy/supply_pack/proc/spawn_contents(var/location)
 	var/decl/supply_method/sm = get_supply_method(supply_method)

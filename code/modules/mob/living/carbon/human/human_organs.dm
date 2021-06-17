@@ -4,11 +4,6 @@
 		eyes.update_colour()
 		regenerate_icons()
 
-/mob/living/carbon/var/list/internal_organs = list()
-/mob/living/carbon/human/var/list/organs = list()
-/mob/living/carbon/human/var/list/organs_by_name = list() // map organ names to organs
-/mob/living/carbon/human/var/list/internal_organs_by_name = list() // so internal organs have less ickiness too
-
 /mob/living/carbon/human/proc/get_bodypart_name(var/zone)
 	var/obj/item/organ/external/E = get_organ(zone)
 	if(E) . = E.name
@@ -34,7 +29,7 @@
 
 	//processing internal organs is pretty cheap, do that first.
 	for(var/obj/item/organ/I in internal_organs)
-		I.process()
+		I.Process()
 
 	handle_stance()
 	handle_grasp()
@@ -49,20 +44,30 @@
 			bad_external_organs -= E
 			continue
 		else
-			E.process()
+			E.Process()
 
 			if (!lying && !buckled && world.time - l_move_time < 15)
 			//Moving around with fractured ribs won't do you any good
 				if (prob(10) && !stat && can_feel_pain() && chem_effects[CE_PAINKILLER] < 50 && E.is_broken() && E.internal_organs.len)
 					custom_pain("Pain jolts through your broken [E.encased ? E.encased : E.name], staggering you!", 50, affecting = E)
-					drop_item(loc)
+					unequip_item(loc)
 					Stun(2)
 
 				//Moving makes open wounds get infected much faster
-				if (E.wounds.len)
-					for(var/datum/wound/W in E.wounds)
-						if (W.infection_check())
-							W.germ_level += 1
+				for(var/datum/wound/W in E.wounds)
+					if (W.infection_check())
+						W.germ_level += 1
+
+/mob/living/carbon/human/proc/Check_Proppable_Object()
+	for(var/turf/simulated/T in trange(1,src)) //we only care for non-space turfs
+		if(T.density)	//walls work
+			return 1
+
+	for(var/obj/O in orange(1, src))
+		if(O && O.density && O.anchored)
+			return 1
+
+	return 0
 
 /mob/living/carbon/human/proc/handle_stance()
 	// Don't need to process any of this if they aren't standing anyways
@@ -74,6 +79,11 @@
 
 	// Buckled to a bed/chair. Stance damage is forced to 0 since they're sitting on something solid
 	if (istype(buckled, /obj/structure/bed))
+		return
+
+	// Can't fall if nothing pulls you down
+	var/area/area = get_area(src)
+	if (!area || !area.has_gravity())
 		return
 
 	var/limb_pain
@@ -102,18 +112,42 @@
 	// Canes and crutches help you stand (if the latter is ever added)
 	// One cane mitigates a broken leg+foot, or a missing foot.
 	// Two canes are needed for a lost leg. If you are missing both legs, canes aren't gonna help you.
-	if (l_hand && istype(l_hand, /obj/item/weapon/cane))
+	if (l_hand && istype(l_hand, /obj/item/cane))
 		stance_damage -= 2
-	if (r_hand && istype(r_hand, /obj/item/weapon/cane))
+	if (r_hand && istype(r_hand, /obj/item/cane))
 		stance_damage -= 2
 
+	if(MOVING_DELIBERATELY(src)) //you don't suffer as much if you aren't trying to run
+		var/working_pair = 2
+		if(!organs_by_name[BP_L_LEG] || !organs_by_name[BP_L_FOOT]) //are we down a limb?
+			working_pair -= 1
+		else if((!organs_by_name[BP_L_LEG].is_usable()) || (!organs_by_name[BP_L_FOOT].is_usable())) //if not, is it usable?
+			working_pair -= 1
+		if(!organs_by_name[BP_R_LEG] || !organs_by_name[BP_R_FOOT])
+			working_pair -= 1
+		else if((!organs_by_name[BP_R_LEG].is_usable()) || (!organs_by_name[BP_R_FOOT].is_usable()))
+			working_pair -= 1
+		if(working_pair >= 1)
+			stance_damage -= 1
+			if(Check_Proppable_Object()) //it helps to lean on something if you've got another leg to stand on
+				stance_damage -= 1
+
+	var/list/objects_to_sit_on = list(
+			/obj/item/stool,
+			/obj/structure/bed,
+		)
+
+	for(var/type in objects_to_sit_on) //things that can't be climbed but can be propped-up-on
+		if(locate(type) in src.loc)
+			return
+
 	// standing is poor
-	if(stance_damage >= 4 || (stance_damage >= 2 && prob(5)))
+	if(stance_damage >= 4 || (stance_damage >= 2 && prob(2)) || (stance_damage >= 3 && prob(8)))
 		if(!(lying || resting))
 			if(limb_pain)
 				emote("scream")
 			custom_emote(VISIBLE_MESSAGE, "collapses!")
-		Weaken(5) //can't emote while weakened, apparently.
+		Weaken(3) //can't emote while weakened, apparently.
 
 /mob/living/carbon/human/proc/handle_grasp()
 	if(!l_hand && !r_hand)
@@ -141,11 +175,28 @@
 		return
 
 	for (var/obj/item/organ/external/E in organs)
-		if(!E || !E.can_grasp)
+		if(!E || !(E.limb_flags & ORGAN_FLAG_CAN_GRASP))
 			continue
 		if(((E.is_broken() || E.is_dislocated()) && !E.splinted) || E.is_malfunctioning())
 			grasp_damage_disarm(E)
 
+/mob/living/carbon/human/proc/stance_damage_prone(var/obj/item/organ/external/affected)
+
+	if(affected)
+		switch(affected.body_part)
+			if(FOOT_LEFT, FOOT_RIGHT)
+				if(!BP_IS_ROBOTIC(affected))
+					to_chat(src, SPAN_WARNING("You lose your footing as your [affected.name] spasms!"))
+				else
+					to_chat(src, SPAN_WARNING("You lose your footing as your [affected.name] [pick("twitches", "shudders")]!"))
+			if(LEG_LEFT, LEG_RIGHT)
+				if(!BP_IS_ROBOTIC(affected))
+					to_chat(src, SPAN_WARNING("Your [affected.name] buckles from the shock!"))
+				else
+					to_chat(src, SPAN_WARNING("You lose your balance as [affected.name] [pick("malfunctions", "freezes","shudders")]!"))
+			else
+				return
+	Weaken(4)
 
 /mob/living/carbon/human/proc/grasp_damage_disarm(var/obj/item/organ/external/affected)
 	var/disarm_slot
@@ -159,13 +210,14 @@
 		return
 
 	var/obj/item/thing = get_equipped_item(disarm_slot)
-	
+
 	if(!thing)
 		return
-	
-	drop_from_inventory(thing)
 
-	if(affected.robotic >= ORGAN_ROBOT)
+	if(!unEquip(thing))
+		return
+
+	if(BP_IS_ROBOTIC(affected))
 		visible_message("<B>\The [src]</B> drops what they were holding, \his [affected.name] malfunctioning!")
 
 		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
@@ -175,7 +227,7 @@
 		spawn(10)
 			qdel(spark_system)
 
-	else 
+	else
 		var/grasp_name = affected.name
 		if((affected.body_part in list(ARM_LEFT, ARM_RIGHT)) && affected.children.len)
 			var/obj/item/organ/external/hand = pick(affected.children)
@@ -193,15 +245,22 @@
 		else
 			visible_message("<B>\The [src]</B> drops what they were holding in their [grasp_name]!")
 
-
-//Handles chem traces
-/mob/living/carbon/human/proc/handle_trace_chems()
-	//New are added for reagents to random organs.
-	for(var/datum/reagent/A in reagents.reagent_list)
-		var/obj/item/organ/O = pick(organs)
-		O.trace_chemicals[A.name] = 100
-
 /mob/living/carbon/human/proc/sync_organ_dna()
 	var/list/all_bits = internal_organs|organs
 	for(var/obj/item/organ/O in all_bits)
 		O.set_dna(dna)
+
+/mob/living/proc/is_asystole()
+	return FALSE
+
+/mob/living/carbon/human/is_asystole()
+	if(isSynthetic())
+		var/obj/item/organ/internal/cell/C = internal_organs_by_name[BP_CELL]
+		if(istype(C))
+			if(!C.is_usable() || !C.percent())
+				return TRUE
+	else if(should_have_organ(BP_HEART))
+		var/obj/item/organ/internal/heart/heart = internal_organs_by_name[BP_HEART]
+		if(!istype(heart) || !heart.is_working())
+			return TRUE
+	return FALSE

@@ -2,14 +2,14 @@
 	name = "fire axe cabinet"
 	desc = "There is small label that reads \"For Emergency use only\" along with details for safe use of the axe. As if."
 	icon_state = "fireaxe"
-	anchored = 1
-	density = 0
+	anchored = TRUE
+	density = FALSE
 
 	var/damage_threshold = 15
 	var/open
 	var/unlocked
 	var/shattered
-	var/obj/item/weapon/material/twohanded/fireaxe/fireaxe
+	var/obj/item/material/twohanded/fireaxe/fireaxe
 
 /obj/structure/fireaxecabinet/attack_generic(var/mob/user, var/damage, var/attack_verb, var/wallbreaker)
 	attack_animation(user)
@@ -26,7 +26,7 @@
 	playsound(user, 'sound/effects/Glassbr3.ogg', 100, 1)
 	update_icon()
 
-/obj/structure/fireaxecabinet/update_icon()
+/obj/structure/fireaxecabinet/on_update_icon()
 	overlays.Cut()
 	if(fireaxe)
 		overlays += image(icon, "fireaxe_item")
@@ -63,7 +63,6 @@
 			to_chat(user, "<span class='warning'>\The [src] is empty.</span>")
 			return
 
-		fireaxe.forceMove(get_turf(user))
 		user.put_in_hands(fireaxe)
 		fireaxe = null
 		update_icon()
@@ -72,17 +71,17 @@
 
 /obj/structure/fireaxecabinet/Destroy()
 	if(fireaxe)
-		fireaxe.forceMove(get_turf(src))
+		fireaxe.dropInto(loc)
 		fireaxe = null
 	return ..()
 
 /obj/structure/fireaxecabinet/attackby(var/obj/item/O, var/mob/user)
 
-	if(istype(O, /obj/item/device/multitool))
+	if(isMultitool(O))
 		toggle_lock(user)
 		return
 
-	if(istype(O, /obj/item/weapon/material/twohanded/fireaxe))
+	if(istype(O, /obj/item/material/twohanded/fireaxe))
 		if(open)
 			if(fireaxe)
 				to_chat(user, "<span class='warning'>There is already \a [fireaxe] inside \the [src].</span>")

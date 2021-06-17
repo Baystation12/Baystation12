@@ -1,4 +1,4 @@
-/obj/item/modular_computer/examine(var/mob/user)
+/obj/item/modular_computer/examine(mob/user)
 	. = ..()
 	if(damage > broken_damage)
 		to_chat(user, "<span class='danger'>It is heavily damaged!</span>")
@@ -9,14 +9,17 @@
 	visible_message("\The [src] breaks apart!")
 	var/turf/newloc = get_turf(src)
 	new /obj/item/stack/material/steel(newloc, round(steel_sheet_cost/2))
-	for(var/obj/item/weapon/computer_hardware/H in get_all_components())
+	for(var/obj/item/stock_parts/computer/H in get_all_components())
 		uninstall_component(null, H)
 		H.forceMove(newloc)
 		if(prob(25))
 			H.take_damage(rand(10,30))
-	qdel()
+	qdel(src)
 
 /obj/item/modular_computer/proc/take_damage(var/amount, var/component_probability, var/damage_casing = 1, var/randomize = 1)
+	if(!modifiable)
+		return
+
 	if(randomize)
 		// 75%-125%, rand() works with integers, apparently.
 		amount *= (rand(75, 125) / 100.0)
@@ -26,7 +29,7 @@
 		damage = between(0, damage, max_damage)
 
 	if(component_probability)
-		for(var/obj/item/weapon/computer_hardware/H in get_all_components())
+		for(var/obj/item/stock_parts/computer/H in get_all_components())
 			if(prob(component_probability))
 				H.take_damage(round(amount / 2))
 

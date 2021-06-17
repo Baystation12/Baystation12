@@ -1,12 +1,14 @@
-/obj/item/weapon/implant/death_alarm
+/obj/item/implant/death_alarm
 	name = "death alarm implant"
 	desc = "An alarm which monitors host vital signs and transmits a radio message upon death."
-	var/mobname = "Will Robinson"
+	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 2, TECH_DATA = 1)
+	known = 1
+	var/mobname = "John Doe"
 
-/obj/item/weapon/implant/death_alarm/get_data()
+/obj/item/implant/death_alarm/get_data()
 	return {"
 	<b>Implant Specifications:</b><BR>
-	<b>Name:</b> [using_map.company_name] \"Profit Margin\" Class Employee Lifesign Sensor<BR>
+	<b>Name:</b> [GLOB.using_map.company_name] \"Profit Margin\" Class Employee Lifesign Sensor<BR>
 	<b>Life:</b> Activates upon death.<BR>
 	<b>Important Notes:</b> Alerts crew to crewmember death.<BR>
 	<HR>
@@ -15,19 +17,20 @@
 	<b>Special Features:</b> Alerts crew to crewmember death.<BR>
 	<b>Integrity:</b> Implant will occasionally be degraded by the body's immune system and thus will occasionally malfunction."}
 
-/obj/item/weapon/implant/death_alarm/islegal()
+/obj/item/implant/death_alarm/islegal()
 	return TRUE
 
-/obj/item/weapon/implant/death_alarm/process()
+/obj/item/implant/death_alarm/Process()
 	if (!implanted) return
 	var/mob/M = imp_in
 
 	if(isnull(M)) // If the mob got gibbed
-		activate()
+		activate(null)
 	else if(M.stat == DEAD)
 		activate("death")
 
-/obj/item/weapon/implant/death_alarm/activate(var/cause)
+/obj/item/implant/death_alarm/activate(var/cause = "emp")
+	if(malfunction) return
 	var/mob/M = imp_in
 	var/area/t = get_area(M)
 	var/location = t.name
@@ -39,37 +42,34 @@
 	var/death_message = "[mobname] has died in [location]!"
 	if(!cause)
 		death_message = "[mobname] has died-zzzzt in-in-in..."
-	processing_objects.Remove(src)
+	STOP_PROCESSING(SSobj, src)
 
 	for(var/channel in list("Security", "Medical", "Command"))
-		global_headset.autosay(death_message, "[mobname]'s Death Alarm", channel)
+		GLOB.global_headset.autosay(death_message, "[mobname]'s Death Alarm", channel)
 
-/obj/item/weapon/implant/death_alarm/emp_act(severity)			//for some reason alarms stop going off in case they are emp'd, even without this
-	if (malfunction)		//so I'm just going to add a meltdown chance here
-		return
-	malfunction = MALFUNCTION_TEMPORARY
+/obj/item/implant/death_alarm/disable()
+	. = ..()
+	if(.)
+		STOP_PROCESSING(SSobj, src)
 
-	if(prob(20))
-		activate("emp")	//let's shout that this dude is dead
-	if(severity == 1)
-		if(prob(40))	//small chance of obvious meltdown
-			meltdown()
-		else if (prob(60))	//but more likely it will just quietly die
-			malfunction = MALFUNCTION_PERMANENT
-		processing_objects.Remove(src)
+/obj/item/implant/death_alarm/restore()
+	. = ..()
+	if(.)
+		START_PROCESSING(SSobj, src)
 
-	spawn(20)
-		malfunction = 0
+/obj/item/implant/death_alarm/meltdown()
+	. = ..()
+	STOP_PROCESSING(SSobj, src)
 
-/obj/item/weapon/implant/death_alarm/implanted(mob/source as mob)
+/obj/item/implant/death_alarm/implanted(mob/source as mob)
 	mobname = source.real_name
-	processing_objects.Add(src)
+	START_PROCESSING(SSobj, src)
 	return TRUE
 
-/obj/item/weapon/implant/death_alarm/removed()
+/obj/item/implant/death_alarm/removed()
 	..()
-	processing_objects.Remove(src)
+	STOP_PROCESSING(SSobj, src)
 
-/obj/item/weapon/implantcase/death_alarm
+/obj/item/implantcase/death_alarm
 	name = "glass case - 'death alarm'"
-	imp = /obj/item/weapon/implant/death_alarm
+	imp = /obj/item/implant/death_alarm

@@ -22,12 +22,12 @@
 		return
 	aiming.cancel_aiming(no_message)
 
-/mob/living/death(gibbed,deathmessage="seizes up and falls limp...")
-	. = ..()
+/mob/living/death(gibbed, deathmessage="seizes up and falls limp...", show_dead_message)
+	. = ..(gibbed, deathmessage, show_dead_message)
 	if(.)
 		stop_aiming(no_message=1)
 
-/mob/living/update_canmove()
+/mob/living/UpdateLyingBuckledAndVerbStatus()
 	..()
 	if(lying)
 		stop_aiming(no_message=1)

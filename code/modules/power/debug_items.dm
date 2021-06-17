@@ -1,11 +1,11 @@
 /obj/machinery/power/debug_items/
 	icon = 'icons/obj/power.dmi'
 	icon_state = "tracker"
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 	var/show_extended_information = 1	// Set to 0 to disable extra information on examining (for example, when used on admin events)
 
-/obj/machinery/power/debug_items/examine(var/mob/user)
+/obj/machinery/power/debug_items/examine(mob/user)
 	. = ..()
 	if(show_extended_information)
 		show_info(user)
@@ -26,10 +26,10 @@
 // An infinite power generator. Adds energy to connected cable.
 /obj/machinery/power/debug_items/infinite_generator
 	name = "Fractal Energy Reactor"
-	desc = "An experimental power generator"
+	desc = "An experimental power generator."
 	var/power_generation_rate = 1000000
 
-/obj/machinery/power/debug_items/infinite_generator/process()
+/obj/machinery/power/debug_items/infinite_generator/Process()
 	add_avail(power_generation_rate)
 
 /obj/machinery/power/debug_items/infinite_generator/show_info(var/mob/user)
@@ -44,7 +44,7 @@
 	var/power_usage_rate = 0
 	var/last_used = 0
 
-/obj/machinery/power/debug_items/infinite_cable_powersink/process()
+/obj/machinery/power/debug_items/infinite_cable_powersink/Process()
 	last_used = draw_power(power_usage_rate)
 
 /obj/machinery/power/debug_items/infinite_cable_powersink/show_info(var/mob/user)
@@ -56,7 +56,7 @@
 /obj/machinery/power/debug_items/infinite_apc_powersink
 	name = "APC Dummy Load"
 	desc = "A dummy load that connects to an APC, used for load testing purposes."
-	use_power = 2
+	use_power = POWER_USE_ACTIVE
 	active_power_usage = 0
 
 /obj/machinery/power/debug_items/infinite_apc_powersink/show_info(var/mob/user)

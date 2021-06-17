@@ -4,23 +4,21 @@ var/global/list/plant_seed_sprites = list()
 /obj/item/seeds
 	name = "packet of seeds"
 	icon = 'icons/obj/seeds.dmi'
-	icon_state = "blank"
+	icon_state = "seedy"
 	w_class = ITEM_SIZE_SMALL
 
 	var/seed_type
 	var/datum/seed/seed
 	var/modified = 0
 
-/obj/item/seeds/New()
-	while(!plant_controller)
-		sleep(30)
+/obj/item/seeds/Initialize()
 	update_seed()
-	..()
+	. = ..()
 
 //Grabs the appropriate seed datum from the global list.
 /obj/item/seeds/proc/update_seed()
-	if(!seed && seed_type && !isnull(plant_controller.seeds) && plant_controller.seeds[seed_type])
-		seed = plant_controller.seeds[seed_type]
+	if(!seed && seed_type && !isnull(SSplants.seeds) && SSplants.seeds[seed_type])
+		seed = SSplants.seeds[seed_type]
 	update_appearance()
 
 //Updates strings and icon appropriately based on seed datum.
@@ -29,7 +27,7 @@ var/global/list/plant_seed_sprites = list()
 
 	// Update icon.
 	overlays.Cut()
-	var/is_seeds = ((seed.seed_noun in list("seeds","pits","nodes")) ? 1 : 0)
+	var/is_seeds = ((seed.seed_noun in list(SEED_NOUN_SEEDS, SEED_NOUN_PITS, SEED_NOUN_NODES)) ? 1 : 0)
 	var/image/seed_mask
 	var/seed_base_key = "base-[is_seeds ? seed.get_trait(TRAIT_PLANT_COLOUR) : "spores"]"
 	if(plant_seed_sprites[seed_base_key])
@@ -53,14 +51,14 @@ var/global/list/plant_seed_sprites = list()
 	overlays |= seed_overlay
 
 	if(is_seeds)
-		src.name = "packet of [seed.seed_name] [seed.seed_noun]"
+		src.SetName("packet of [seed.seed_name] [seed.seed_noun]")
 		src.desc = "It has a picture of [seed.display_name] on the front."
 	else
-		src.name = "sample of [seed.seed_name] [seed.seed_noun]"
+		src.SetName("sample of [seed.seed_name] [seed.seed_noun]")
 		src.desc = "It's labelled as coming from [seed.display_name]."
 
 /obj/item/seeds/examine(mob/user)
-	. = ..(user)
+	. = ..()
 	if(seed && !seed.roundstart)
 		to_chat(user, "It's tagged as variety #[seed.uid].")
 
@@ -70,15 +68,15 @@ var/global/list/plant_seed_sprites = list()
 
 /obj/item/seeds/cutting/update_appearance()
 	..()
-	src.name = "packet of [seed.seed_name] cuttings"
+	src.SetName("packet of [seed.seed_name] cuttings")
 
 /obj/item/seeds/random
 	seed_type = null
 
-/obj/item/seeds/random/New()
-	seed = plant_controller.create_random_seed()
+/obj/item/seeds/random/Initialize()
+	seed = SSplants.create_random_seed()
 	seed_type = seed.name
-	update_seed()
+	. = ..()
 
 /obj/item/seeds/replicapod
 	seed_type = "diona"
@@ -109,6 +107,9 @@ var/global/list/plant_seed_sprites = list()
 
 /obj/item/seeds/berryseed
 	seed_type = "berries"
+
+/obj/item/seeds/blueberryseed
+	seed_type = "blueberries"
 
 /obj/item/seeds/glowberryseed
 	seed_type = "glowberries"
@@ -260,5 +261,82 @@ var/global/list/plant_seed_sprites = list()
 /obj/item/seeds/tobaccoseed
 	seed_type = "tobacco"
 
+/obj/item/seeds/finetobaccoseed
+	seed_type = "finetobacco"
+
+/obj/item/seeds/puretobaccoseed
+	seed_type = "puretobacco"
+
 /obj/item/seeds/kudzuseed
 	seed_type = "kudzu"
+
+/obj/item/seeds/peppercornseed
+	seed_type = "peppercorn"
+
+/obj/item/seeds/garlicseed
+	seed_type = "garlic"
+
+/obj/item/seeds/onionseed
+	seed_type = "onion"
+
+/obj/item/seeds/algaeseed
+	seed_type = "algae"
+
+/obj/item/seeds/bamboo
+	seed_type = "bamboo"
+
+// fruit expansion
+
+/obj/item/seeds/melonseed
+	seed_type = "melon"
+
+/obj/item/seeds/coffeeseed
+	seed_type = "coffee"
+
+/obj/item/seeds/whitegrapeseed
+	seed_type = "whitegrapes"
+
+/obj/item/seeds/vanillaseed
+	seed_type = "vanilla"
+
+/obj/item/seeds/pineappleseed
+	seed_type = "pineapples"
+
+/obj/item/seeds/gukhe
+	seed_type = "gukhe"
+
+/obj/item/seeds/hrukhza
+	seed_type = "hrukhza"
+
+/obj/item/seeds/okrri
+	seed_type = "okrri"
+
+/obj/item/seeds/ximikoa
+	seed_type = "ximikoa"
+
+/obj/item/seeds/pearseed
+	seed_type = "pears"
+
+/obj/item/seeds/coconutseed
+	seed_type = "coconuts"
+
+/obj/item/seeds/qokkloa
+	seed_type = "qokkloa"
+
+/obj/item/seeds/aghrassh
+	seed_type = "aghrassh"
+
+/obj/item/seeds/cinnamon
+	seed_type = "cinnamon"
+
+/obj/item/seeds/olives
+	seed_type = "olives"
+
+/obj/item/seeds/gummen
+	seed_type = "gummen"
+
+/obj/item/seeds/iridast
+	seed_type = "iridast"
+
+/obj/item/seeds/affelerin
+	seed_type = "affelerin"

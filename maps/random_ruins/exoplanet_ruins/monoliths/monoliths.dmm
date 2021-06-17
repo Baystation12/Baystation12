@@ -1,0 +1,154 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/template_noop,
+/area/template_noop)
+"b" = (
+/obj/structure/monolith,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"c" = (
+/turf/simulated/floor/fixed/alium/ruin,
+/area/template_noop)
+"d" = (
+/obj/machinery/artifact,
+/obj/structure/window/phoronreinforced{
+	dir = 4;
+	icon_state = "phoronrwindow"
+	},
+/obj/structure/window/phoronreinforced{
+	dir = 1;
+	icon_state = "phoronrwindow"
+	},
+/obj/structure/window/phoronreinforced{
+	dir = 8;
+	icon_state = "phoronrwindow"
+	},
+/obj/structure/window/phoronreinforced,
+/turf/simulated/floor/fixed/alium/ruin,
+/area/template_noop)
+"e" = (
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+
+(1,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(2,1,1) = {"
+a
+a
+a
+e
+b
+e
+a
+a
+a
+a
+"}
+(3,1,1) = {"
+a
+a
+e
+e
+e
+e
+e
+a
+a
+a
+"}
+(4,1,1) = {"
+a
+b
+e
+e
+e
+e
+e
+b
+a
+a
+"}
+(5,1,1) = {"
+a
+e
+e
+e
+c
+e
+e
+e
+a
+a
+"}
+(6,1,1) = {"
+a
+e
+e
+c
+d
+c
+e
+e
+a
+a
+"}
+(7,1,1) = {"
+a
+e
+e
+e
+c
+e
+e
+e
+a
+a
+"}
+(8,1,1) = {"
+a
+b
+e
+e
+e
+e
+e
+b
+a
+a
+"}
+(9,1,1) = {"
+a
+a
+e
+e
+e
+e
+e
+a
+a
+a
+"}
+(10,1,1) = {"
+a
+a
+a
+e
+b
+e
+a
+a
+a
+a
+"}

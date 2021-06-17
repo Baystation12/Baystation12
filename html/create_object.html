@@ -26,6 +26,7 @@
 <body>
 	<form name="spawner" action="byond://?src=/* ref src */" method="get">
 		<input type="hidden" name="src" value="/* ref src */">
+		<input type="hidden" name="action" value="object_list">
 		
 		Type <input type="text" name="filter" value="" onkeypress="submitFirst(event)" style="width:280px;height:25"> <input type = "button" value = "Search" onclick = "updateSearch()" /><br>
 		Offset: <input type="text" name="offset" value="x,y,z" style="width:250px">
@@ -35,7 +36,7 @@
 		
 		Number: <input type="text" name="object_count" value="1" style="width:30px">
 		Dir: <input type="text" name="object_dir" value="2" style="width:30px">
-		Name: <input type="text" name="object_name" value="" style="width:180px"><br>
+		Name: <input type="text" name="object_name" value="" style="width:180px"><br>		
 		Where: 
 			<select name='object_where' style="width:320px">
 				<option value='onfloor'>On floor below own mob</option>
@@ -43,13 +44,22 @@
 				<option value='inmarked'>In marked object</option>
 			</select>
 		<br><br>
-		<select name="object_list" id="object_list" size="18" multiple style="width:98%"></select><br>
+		Number of matches: <input id="number" value="0" style="width:180px"><br>
+		<br><br>
+		
+		<div id="selector_hs"> 
+			<select name="object_list" id="object_list" multiple size="20">
+			</select>
+		</div>
+		
+		<br>
 		<input type="submit" value="spawn">
 	</form>
 	
 	<script language="JavaScript">
 		var old_search = "";
 		var object_list = document.spawner.object_list;
+		var object_list_container = document.getElementById('selector_hs');
 		var object_paths = null /* object types */;
 		var objects = object_paths == null ? new Array() : object_paths.split(";");
 		
@@ -58,23 +68,23 @@
 		
 		function populateList(from_list)
 		{
-			object_list.options.length = 0;
-			
+			var newOpts = '';
 			var i;
 			for (i in from_list)
 			{
-				var new_option = document.createElement("option");
-				new_option.value = from_list[i];
-				new_option.text = from_list[i];
-				object_list.options.add(new_option);
+				newOpts += '<option value="' + from_list[i] + '">'
+					+ from_list[i] + '</option>';
 			}
+			object_list_container.innerHTML = '<select name="object_list" id="object_list" multiple size="20">' + 
+			newOpts + '</select>';
+			document.getElementById("number").value = from_list.length;
 		}
 		
 		function updateSearch()
 		{
 			if (old_search == document.spawner.filter.value)
 			{
-				return;
+				return false;
 			}
 			
 			old_search = document.spawner.filter.value;
@@ -93,6 +103,11 @@
 			}
 			
 			populateList(filtered);
+			
+			if (object_list.options.length)
+				object_list.options[0].selected = 'true';
+			
+			return true;
 		}
 		
 		function submitFirst(event)

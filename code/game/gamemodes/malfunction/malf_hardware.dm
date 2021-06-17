@@ -51,17 +51,11 @@
 /datum/malf_hardware/core_bomb/get_examine_desc()
 	return "<span class='warning'>It seems to have grey blocks of unknown substance and some circuitry connected to it's core. [owner.bombing_core ? "A red light is blinking on the circuit." : ""]</span>"
 
-/datum/malf_hardware/strong_turrets
-	name = "Turrets Focus Enhancer"
-	desc = "Turrets are upgraded to have larger rate of fire and much larger damage. This however massively increases power usage when firing."
+/datum/malf_hardware/instant_research
+	name = "Quantum Knowledge Databank"
+	desc = "A highly advanced self-learning supercomputer that is capable of rapidly performing predefined research tasks. Once activated advances your research in all trees by one tier, but burns out in the process."
+	driver = /datum/game_mode/malfunction/verb/boost_research
+	var/spent = FALSE
 
-/datum/malf_hardware/strong_turrets/get_examine_desc()
-	return "It seems to have extra wiring running from it's core to nearby turrets."
-
-/datum/malf_hardware/strong_turrets/install()
-	..()
-	for(var/obj/machinery/porta_turret/T in machines)
-		T.maxhealth = round(initial(T.maxhealth) * 1.4)
-		T.shot_delay = round(initial(T.shot_delay) / 2)
-		T.auto_repair = 1
-		T.active_power_usage = round(initial(T.active_power_usage) * 5)
+/datum/malf_hardware/instant_research/get_examine_desc()
+	return "It seems to have an unidentified circuit board connected to it's core.[spent ? "It is not powered and seems to be burned out." : "It is emitting a faint pulsating light."]"

@@ -1,4 +1,4 @@
-/obj/item/weapon/implanter
+/obj/item/implanter
 	name = "implanter"
 	icon = 'icons/obj/items.dmi'
 	icon_state = "implanter0"
@@ -6,43 +6,22 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = ITEM_SIZE_SMALL
-	var/obj/item/weapon/implant/imp = null
+	matter = list(MATERIAL_ALUMINIUM = 1000, MATERIAL_GLASS = 1000)
+	var/obj/item/implant/imp = null
 
-/obj/item/weapon/implanter/New()
+/obj/item/implanter/New()
 	if(ispath(imp))
 		imp = new imp(src)
 	..()
 	update_icon()
 
-/obj/item/weapon/implanter/update_icon()
+/obj/item/implanter/on_update_icon()
 	if (imp)
 		icon_state = "implanter1"
 	else
 		icon_state = "implanter0"
 
-/obj/item/weapon/implanter/verb/remove_implant()
-	set category = "Object"
-	set name = "Remove implant"
-	set src in usr
-
-	if(issilicon(usr))
-		return
-
-	if(can_use(usr))
-		if(!imp)
-			to_chat(usr, "<span class='notice'>There is no implant to remove.</span>")
-			return
-		imp.forceMove(get_turf(src))
-		usr.put_in_hands(imp)
-		to_chat(usr, "<span class='notice'>You remove \the [imp] from \the [src].</span>")
-		name = "implanter"
-		imp = null
-		update_icon()
-		return
-	else
-		to_chat(usr, "<span class='notice'>You cannot do this in your current condition.</span>")
-
-/obj/item/weapon/implanter/proc/can_use()
+/obj/item/implanter/proc/can_use()
 
 	if(!ismob(loc))
 		return 0
@@ -55,16 +34,15 @@
 		return 1
 	return 0
 
-/obj/item/weapon/implanter/attackby(obj/item/weapon/I, mob/user)
-	if(!imp && istype(I, /obj/item/weapon/implant))
+/obj/item/implanter/attackby(obj/item/I, mob/user)
+	if(!imp && istype(I, /obj/item/implant) && user.unEquip(I,src))
 		to_chat(usr, "<span class='notice'>You slide \the [I] into \the [src].</span>")
-		user.drop_from_inventory(I,src)
 		imp = I
 		update_icon()
 	else
 		..()
 
-/obj/item/weapon/implanter/attack(mob/M as mob, mob/user as mob)
+/obj/item/implanter/attack(mob/M as mob, mob/user as mob)
 	if (!istype(M, /mob/living/carbon))
 		return
 	if (user && src.imp)
@@ -77,7 +55,7 @@
 		if(src.imp.can_implant(M, user, target_zone))
 			var/imp_name = imp.name
 
-			if(do_after(user, 50, M) && src.imp.implant_in_mob(M, target_zone))
+			if(do_after(user, 50, M) && src.imp?.implant_in_mob(M, target_zone))
 				M.visible_message("<span class='warning'>[M] has been implanted by [user].</span>")
 				admin_attack_log(user, M, "Implanted using \the [src] ([imp_name])", "Implanted with \the [src] ([imp_name])", "used an implanter, \the [src] ([imp_name]), on")
 

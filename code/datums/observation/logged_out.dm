@@ -7,7 +7,7 @@
 //			/mob/leaver:    The mob that has logged out
 //			/client/client: The mob's client
 
-var/decl/observ/logged_out/logged_out_event = new()
+GLOBAL_DATUM_INIT(logged_out_event, /decl/observ/logged_out, new)
 
 /decl/observ/logged_out
 	name = "Logged Out"
@@ -18,5 +18,5 @@ var/decl/observ/logged_out/logged_out_event = new()
 ******************/
 
 /mob/Logout()
-	logged_out_event.raise_event(src, my_client)
+	GLOB.logged_out_event.raise_event(src, my_client)
 	..()

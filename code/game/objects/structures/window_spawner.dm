@@ -7,8 +7,8 @@
 	name = "window grille spawner"
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "wingrille"
-	density = 1
-	anchored = 1.0
+	density = TRUE
+	anchored = TRUE
 	var/win_path = /obj/structure/window/basic
 	var/activated = FALSE
 	var/fulltile = FALSE
@@ -26,12 +26,20 @@
 /obj/effect/wingrille_spawn/attack_generic()
 	activate()
 
-/obj/effect/wingrille_spawn/initialize()
-	..()
+/obj/effect/wingrille_spawn/Initialize(mapload)
+	. = ..()
 	if(!win_path)
 		return
-	if(ticker && ticker.current_state < GAME_STATE_PLAYING)
+
+	// sometimes it's useful to plonk these down and activate them all manually,
+	// once all your ducks are in a row. So if we're already playing, only
+	// auto-activate if this has been put down by a maploader, not a creative admin
+	// see https://github.com/Baystation12/Baystation12/pull/9907#issuecomment-114896669
+	var/auto_activate = mapload || (GAME_STATE < RUNLEVEL_GAME)
+
+	if(auto_activate)
 		activate()
+		return INITIALIZE_HINT_QDEL
 
 /obj/effect/wingrille_spawn/proc/activate()
 	if(activated) return
@@ -39,18 +47,12 @@
 	if(locate(/obj/structure/window) in loc)
 		warning("Window Spawner: A window structure already exists at [loc.x]-[loc.y]-[loc.z]")
 
-	if(locate(/obj/structure/grille) in loc)
-		warning("Window Spawner: A grille already exists at [loc.x]-[loc.y]-[loc.z]")
-	else
-		var/obj/structure/grille/G = new /obj/structure/grille(loc)
-		handle_grille_spawn(G)
-
 	var/list/neighbours = list()
 	if(fulltile)
 		var/obj/structure/window/new_win = new win_path(loc)
 		handle_window_spawn(new_win)
 	else
-		for (var/dir in cardinal)
+		for (var/dir in GLOB.cardinal)
 			var/turf/T = get_step(src, dir)
 			var/obj/effect/wingrille_spawn/other = locate(type) in T
 			if(!other)
@@ -66,10 +68,16 @@
 					handle_window_spawn(new_win)
 			else
 				neighbours |= other
+
+	if(locate(/obj/structure/grille) in loc)
+		warning("Window Spawner: A grille already exists at [loc.x]-[loc.y]-[loc.z]")
+	else
+		var/obj/structure/grille/G = new /obj/structure/grille(loc)
+		handle_grille_spawn(G)
+
 	activated = 1
 	for(var/obj/effect/wingrille_spawn/other in neighbours)
 		if(!other.activated) other.activate()
-	qdel(src)
 
 /obj/effect/wingrille_spawn/proc/handle_window_spawn(var/obj/structure/window/W)
 	return
@@ -85,6 +93,7 @@
 
 /obj/effect/wingrille_spawn/reinforced/full
 	name = "reinforced window grille spawner - full tile"
+	icon_state = "rf-wingrille"
 	fulltile = TRUE
 	win_path = /obj/structure/window/reinforced/full
 

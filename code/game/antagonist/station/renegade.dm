@@ -1,13 +1,15 @@
-var/datum/antagonist/renegade/renegades
+GLOBAL_DATUM_INIT(renegades, /datum/antagonist/renegade, new)
 
 /datum/antagonist/renegade
 	role_text = "Renegade"
 	role_text_plural = "Renegades"
+	blacklisted_jobs = list(/datum/job/ai, /datum/job/submap)
+	restricted_jobs = list(/datum/job/officer, /datum/job/warden, /datum/job/captain, /datum/job/hop, /datum/job/hos, /datum/job/chief_engineer, /datum/job/rd, /datum/job/cmo)
 	welcome_text = "Something's going to go wrong today, you can just feel it. You're paranoid, you've got a gun, and you're going to survive."
 	antag_text = "You are a <b>minor</b> antagonist! Within the rules, \
-		try to protect yourself and what's important to you. You aren't here to cause trouble, \
-		you're just more willing (and equipped) to go to extremes to stop it than others are. \
-		Your job is to somewhat oppose the other antagonists, should they threaten you, in ways that aren't quite legal themselves. \
+		try to protect yourself and what's important to you. You aren't here to <i>cause</i> trouble, \
+		you're just willing (and equipped) to go to extremes to <b>stop</b> it. \
+		Your job is to oppose the other antagonists, should they threaten you, in ways that aren't quite legal. \
 		Try to make sure other players have <i>fun</i>! If you are confused or at a loss, always adminhelp, \
 		and before taking extreme actions, please try to also contact the administration! \
 		Think through your actions and make the roleplay immersive! <b>Please remember all \
@@ -15,36 +17,38 @@ var/datum/antagonist/renegade/renegades
 
 	id = MODE_RENEGADE
 	flags = ANTAG_SUSPICIOUS | ANTAG_IMPLANT_IMMUNE | ANTAG_RANDSPAWN | ANTAG_VOTABLE
-	hard_cap = 5
-	hard_cap_round = 7
+	hard_cap = 3
+	hard_cap_round = 5
 
-	hard_cap = 8
-	hard_cap_round = 12
-	initial_spawn_req = 3
-	initial_spawn_target = 6
+	initial_spawn_req = 1
+	initial_spawn_target = 3
+	antaghud_indicator = "hud_renegade"
+	skill_setter = /datum/antag_skill_setter/station
 
 	var/list/spawn_guns = list(
-		/obj/item/weapon/gun/energy/laser,
-		/obj/item/weapon/gun/energy/gun,
-		/obj/item/weapon/gun/energy/crossbow,
-		/obj/item/weapon/gun/energy/crossbow/largecrossbow,
-		/obj/item/weapon/gun/projectile/automatic,
-		/obj/item/weapon/gun/projectile/automatic/mini_uzi,
-		/obj/item/weapon/gun/projectile/automatic/c20r,
-		/obj/item/weapon/gun/projectile/automatic/wt550,
-		/obj/item/weapon/gun/projectile/colt/detective,
-		/obj/item/weapon/gun/projectile/sec/wood,
-		/obj/item/weapon/gun/projectile/silenced,
-		/obj/item/weapon/gun/projectile/pistol,
-		/obj/item/weapon/gun/projectile/revolver,
-		/obj/item/weapon/gun/projectile/shotgun/doublebarrel/sawn,
-		/obj/item/weapon/gun/projectile/magnum_pistol,
-		list(/obj/item/weapon/gun/projectile/revolver/detective, /obj/item/weapon/gun/projectile/revolver/deckard)
+		/obj/item/gun/energy/retro,
+		/obj/item/gun/energy/gun,
+		/obj/item/gun/energy/crossbow,
+		/obj/item/gun/energy/pulse_rifle/pistol,
+		/obj/item/gun/projectile/automatic,
+		/obj/item/gun/projectile/automatic/machine_pistol,
+		/obj/item/gun/projectile/automatic/sec_smg,
+		/obj/item/gun/projectile/pistol/magnum_pistol,
+		/obj/item/gun/projectile/pistol/military,
+		/obj/item/gun/projectile/pistol/military/alt,
+		/obj/item/gun/projectile/pistol/sec/lethal,
+		/obj/item/gun/projectile/pistol/holdout,
+		/obj/item/gun/projectile/revolver,
+		/obj/item/gun/projectile/revolver/medium,
+		/obj/item/gun/projectile/shotgun/doublebarrel/sawn,
+		/obj/item/gun/projectile/pistol/magnum_pistol,
+		/obj/item/gun/projectile/revolver/holdout,
+		/obj/item/gun/projectile/pistol/throwback,
+		/obj/item/gun/energy/xray/pistol,
+		/obj/item/gun/energy/toxgun,
+		/obj/item/gun/energy/incendiary_laser,
+		/obj/item/gun/projectile/pistol/magnum_pistol
 		)
-
-/datum/antagonist/renegade/New()
-	..()
-	renegades = src
 
 /datum/antagonist/renegade/create_objectives(var/datum/mind/player)
 
@@ -80,7 +84,7 @@ var/datum/antagonist/renegade/renegades
 /proc/rightandwrong()
 	to_chat(usr, "<B>You summoned guns!</B>")
 	message_admins("[key_name_admin(usr, 1)] summoned guns!")
-	for(var/mob/living/carbon/human/H in player_list)
+	for(var/mob/living/carbon/human/H in GLOB.player_list)
 		if(H.stat == 2 || !(H.client)) continue
 		if(is_special_character(H)) continue
-		renegades.add_antagonist(H.mind)
+		GLOB.renegades.add_antagonist(H.mind)

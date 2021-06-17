@@ -1,0 +1,24 @@
+{{:helper.syndicateMode()}}
+{{if data.message}}
+	##INFO: {{:data.message}}<br><br>{{:helper.link('RESET', null, { 'PRG_reset' : 1 })}}
+{{else data.running}}
+	##Attempting to decrypt network access codes. Please wait. Rate: {{:data.rate}} PHash/s<br>
+	{{for data.dos_strings}}
+		{{:value}}<br>
+	{{/for}}
+	{{:helper.link('ABORT', null, { 'PRG_reset' : 1 })}}
+{{else}}
+	##System ready. Select an access code to decrypt.
+	<div class='item' style='width: 100%'>
+		{{for data.regions}}
+			<div style='float: left; width: 175px; min-height: 250px'>
+				<div class='average'><b>{{:value.name}}</b></div>
+				{{for value.accesses :accessValue:accessKey}}
+					<div class='itemContentWide'>
+						{{:helper.link(accessValue.desc, '', {'PRG_execute' : accessValue.ref}, accessValue.blocked ? 'disabled' : null, accessValue.allowed ? 'selected' : null)}}
+					</div>
+				{{/for}}
+			</div>
+		{{/for}}
+	</div>
+{{/if}}

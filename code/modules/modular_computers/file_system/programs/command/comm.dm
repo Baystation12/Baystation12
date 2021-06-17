@@ -5,15 +5,18 @@
 #define STATE_ALERT_LEVEL	5
 /datum/computer_file/program/comm
 	filename = "comm"
-	filedesc = "Command and communications program."
+	filedesc = "Command and Communications Program"
 	program_icon_state = "comm"
+	program_key_state = "med_key"
+	program_menu_icon = "flag"
 	nanomodule_path = /datum/nano_module/program/comm
-	extended_desc = "Used to effect command and control. Can relay long-range communications. This program can not be run on tablet computers."
-	required_access = access_heads
-	requires_ntnet = 1
+	extended_desc = "Used to command and control. Can relay long-range communications. This program can not be run on tablet computers."
+	required_access = access_bridge
+	requires_ntnet = TRUE
 	size = 12
 	usage_flags = PROGRAM_CONSOLE | PROGRAM_LAPTOP
 	network_destination = "long-range communication array"
+	category = PROG_COMMAND
 	var/datum/comm_message_listener/message_core = new
 
 /datum/computer_file/program/comm/clone()
@@ -23,7 +26,7 @@
 	return temp
 
 /datum/nano_module/program/comm
-	name = "Command and communications program"
+	name = "Command and Communications Program"
 	available_to_ai = TRUE
 	var/current_status = STATE_DEFAULT
 	var/msg_line1 = ""
@@ -38,16 +41,16 @@
 	..()
 	crew_announcement.newscast = 1
 
-/datum/nano_module/program/comm/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
+/datum/nano_module/program/comm/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
 
 	var/list/data = host.initial_data()
 
 	if(program)
-		data["emagged"] = program.computer_emagged
 		data["net_comms"] = !!program.get_signal(NTNET_COMMUNICATION) //Double !! is needed to get 1 or 0 answer
 		data["net_syscont"] = !!program.get_signal(NTNET_SYSTEMCONTROL)
 		if(program.computer)
-			data["have_printer"] = !!program.computer.nano_printer
+			data["emagged"] = program.computer.emagged()
+			data["have_printer"] =  program.computer.has_component(PART_PRINTER)
 		else
 			data["have_printer"] = 0
 	else
@@ -61,13 +64,21 @@
 	data["state"] = current_status
 	data["isAI"] = issilicon(usr)
 	data["authenticated"] = is_autenthicated(user)
-	data["boss_short"] = using_map.boss_short
-	data["current_security_level"] = security_level
-	data["current_security_level_title"] = num2seclevel(security_level)
+	data["boss_short"] = GLOB.using_map.boss_short
 
-	data["def_SEC_LEVEL_DELTA"] = SEC_LEVEL_DELTA
-	data["def_SEC_LEVEL_BLUE"] = SEC_LEVEL_BLUE
-	data["def_SEC_LEVEL_GREEN"] = SEC_LEVEL_GREEN
+	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+	data["current_security_level_ref"] = any2ref(security_state.current_security_level)
+	data["current_security_level_title"] = security_state.current_security_level.name
+
+	data["cannot_change_security_level"] = !security_state.can_change_security_level()
+	data["current_security_level_is_high_security_level"] = security_state.current_security_level == security_state.high_security_level
+	var/list/security_levels = list()
+	for(var/decl/security_level/security_level in security_state.comm_console_security_levels)
+		var/list/security_setup = list()
+		security_setup["title"] = security_level.name
+		security_setup["ref"] = any2ref(security_level)
+		security_levels[++security_levels.len] = security_setup
+	data["security_levels"] = security_levels
 
 	var/datum/comm_message_listener/l = obtain_message_listener()
 	data["messages"] = l.messages
@@ -79,6 +90,8 @@
 	var/list/processed_evac_options = list()
 	if(!isnull(evacuation_controller))
 		for (var/datum/evacuation_option/EO in evacuation_controller.available_evac_options())
+			if(EO.abandon_ship)
+				continue
 			var/list/option = list()
 			option["option_text"] = EO.option_text
 			option["option_target"] = EO.option_target
@@ -87,7 +100,7 @@
 			processed_evac_options[++processed_evac_options.len] = option
 	data["evac_options"] = processed_evac_options
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "communication.tmpl", name, 550, 420, state = state)
 		ui.auto_update_layout = 1
@@ -114,34 +127,35 @@
 	var/datum/comm_message_listener/l = obtain_message_listener()
 	switch(href_list["action"])
 		if("sw_menu")
-			. = 1
+			. = TRUE
 			current_status = text2num(href_list["target"])
 		if("announce")
-			. = 1
+			. = TRUE
 			if(is_autenthicated(user) && !issilicon(usr) && ntn_comm)
 				if(user)
-					var/obj/item/weapon/card/id/id_card = user.GetIdCard()
+					var/obj/item/card/id/id_card = user.GetIdCard()
 					crew_announcement.announcer = GetNameAndAssignmentFromId(id_card)
 				else
 					crew_announcement.announcer = "Unknown"
 				if(announcment_cooldown)
 					to_chat(usr, "Please allow at least one minute to pass between announcements")
 					return TRUE
-				var/input = input(usr, "Please write a message to announce to the [station_name()].", "Priority Announcement") as null|text
+				var/input = input(usr, "Please write a message to announce to the [station_name()].", "Priority Announcement") as null|message
 				if(!input || !can_still_topic())
 					return 1
-				crew_announcement.Announce(input)
+				var/affected_zlevels = GetConnectedZlevels(get_host_z())
+				crew_announcement.Announce(input, zlevels = affected_zlevels)
 				announcment_cooldown = 1
 				spawn(600)//One minute cooldown
 					announcment_cooldown = 0
 		if("message")
-			. = 1
+			. = TRUE
 			if(href_list["target"] == "emagged")
 				if(program)
-					if(is_autenthicated(user) && program.computer_emagged && !issilicon(usr) && ntn_comm)
+					if(is_autenthicated(user) && program.computer.emagged() && !issilicon(usr) && ntn_comm)
 						if(centcomm_message_cooldown)
 							to_chat(usr, "<span class='warning'>Arrays recycling. Please stand by.</span>")
-							nanomanager.update_uis(src)
+							SSnano.update_uis(src)
 							return
 						var/input = sanitize(input(usr, "Please choose a message to transmit to \[ABNORMAL ROUTING CORDINATES\] via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination. Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", "") as null|text)
 						if(!input || !can_still_topic())
@@ -156,22 +170,22 @@
 				if(is_autenthicated(user) && !issilicon(usr) && ntn_comm)
 					if(centcomm_message_cooldown)
 						to_chat(usr, "<span class='warning'>Arrays recycling. Please stand by.</span>")
-						nanomanager.update_uis(src)
+						SSnano.update_uis(src)
 						return
 					if(!is_relay_online())//Contact Centcom has a check, Syndie doesn't to allow for Traitor funs.
 						to_chat(usr, "<span class='warning'>No Emergency Bluespace Relay detected. Unable to transmit message.</span>")
 						return 1
-					var/input = sanitize(input("Please choose a message to transmit to [using_map.boss_short] via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination.  Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", "") as null|text)
+					var/input = sanitize(input("Please choose a message to transmit to [GLOB.using_map.boss_short] via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination.  Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", "") as null|text)
 					if(!input || !can_still_topic())
 						return 1
 					Centcomm_announce(input, usr)
 					to_chat(usr, "<span class='notice'>Message transmitted.</span>")
-					log_say("[key_name(usr)] has made an IA [using_map.boss_short] announcement: [input]")
+					log_say("[key_name(usr)] has made an IA [GLOB.using_map.boss_short] announcement: [input]")
 					centcomm_message_cooldown = 1
 					spawn(300) //30 second cooldown
 						centcomm_message_cooldown = 0
 		if("evac")
-			. = 1
+			. = TRUE
 			if(is_autenthicated(user))
 				var/datum/evacuation_option/selected_evac_option = evacuation_controller.evacuation_options[href_list["target"]]
 				if (isnull(selected_evac_option) || !istype(selected_evac_option))
@@ -184,7 +198,7 @@
 				if (confirm == "Yes" && can_still_topic())
 					evacuation_controller.handle_evac_option(selected_evac_option.option_target, user)
 		if("setstatus")
-			. = 1
+			. = TRUE
 			if(is_autenthicated(user) && ntn_cont)
 				switch(href_list["target"])
 					if("line1")
@@ -197,35 +211,26 @@
 							msg_line2 = linput
 					if("message")
 						post_status("message", msg_line1, msg_line2)
-					if("alert")
-						post_status("alert", href_list["alert"])
+					if("image")
+						post_status("image", href_list["image"])
 					else
 						post_status(href_list["target"])
 		if("setalert")
-			. = 1
+			. = TRUE
 			if(is_autenthicated(user) && !issilicon(usr) && ntn_cont && ntn_comm)
-				var/current_level = text2num(href_list["target"])
-				var/confirm = alert("Are you sure you want to change alert level to [num2seclevel(current_level)]?", name, "No", "Yes")
-				if(confirm == "Yes" && can_still_topic())
-					var/old_level = security_level
-					if(!current_level) current_level = SEC_LEVEL_GREEN
-					if(current_level < SEC_LEVEL_GREEN) current_level = SEC_LEVEL_GREEN
-					if(current_level > SEC_LEVEL_BLUE) current_level = SEC_LEVEL_BLUE //Cannot engage delta with this
-					set_security_level(current_level)
-					if(security_level != old_level)
-						log_game("[key_name(usr)] has changed the security level to [get_security_level()].")
-						message_admins("[key_name_admin(usr)] has changed the security level to [get_security_level()].")
-						switch(security_level)
-							if(SEC_LEVEL_GREEN)
-								feedback_inc("alert_comms_green",1)
-							if(SEC_LEVEL_BLUE)
-								feedback_inc("alert_comms_blue",1)
+				var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+				var/decl/security_level/target_level = locate(href_list["target"]) in security_state.comm_console_security_levels
+				if(target_level && security_state.can_switch_to(target_level))
+					var/confirm = alert("Are you sure you want to change the alert level to [target_level.name]?", name, "No", "Yes")
+					if(confirm == "Yes" && can_still_topic())
+						if(security_state.set_security_level(target_level))
+							SSstatistics.add_field(target_level.type,1)
 			else
-				to_chat(usr, "You press button, but red light flashes and nothing happens.")//This should never happen
+				to_chat(usr, "You press the button, but a red light flashes and nothing happens.") //This should never happen
 
 			current_status = STATE_DEFAULT
 		if("viewmessage")
-			. = 1
+			. = TRUE
 			if(is_autenthicated(user) && ntn_comm)
 				current_viewing_message_id = text2num(href_list["target"])
 				for(var/list/m in l.messages)
@@ -233,18 +238,25 @@
 						current_viewing_message = m
 				current_status = STATE_VIEWMESSAGE
 		if("delmessage")
-			. = 1
+			. = TRUE
 			if(is_autenthicated(user) && ntn_comm && l != global_message_listener)
 				l.Remove(current_viewing_message)
 			current_status = STATE_MESSAGELIST
 		if("printmessage")
-			. = 1
+			. = TRUE
 			if(is_autenthicated(user) && ntn_comm)
-				if(program && program.computer && program.computer.nano_printer)
-					if(!program.computer.nano_printer.print_text(current_viewing_message["contents"],current_viewing_message["title"]))
-						to_chat(usr, "<span class='notice'>Hardware error: Printer was unable to print the file. It may be out of paper.</span>")
-					else
-						program.computer.visible_message("<span class='notice'>\The [program.computer] prints out paper.</span>")
+				if(!program.computer.print_paper(current_viewing_message["contents"],current_viewing_message["title"]))
+					to_chat(usr, "<span class='notice'>Hardware Error: Printer was unable to print the selected file.</span>")
+		if("unbolt_doors")
+			GLOB.using_map.unbolt_saferooms()
+			to_chat(usr, "<span class='notice'>The console beeps, confirming the signal was sent to have the saferooms unbolted.</span>")
+		if("bolt_doors")
+			GLOB.using_map.bolt_saferooms()
+			to_chat(usr, "<span class='notice'>The console beeps, confirming the signal was sent to have the saferooms bolted.</span>")
+		if("toggle_alert_border")
+			. = TRUE
+			if(is_autenthicated(user) && ntn_comm)
+				post_status("toggle_alert_border")
 
 #undef STATE_DEFAULT
 #undef STATE_MESSAGELIST
@@ -293,7 +305,6 @@ var/last_message_id = 0
 	if(!frequency) return
 
 	var/datum/signal/status_signal = new
-	status_signal.source = src
 	status_signal.transmission_method = 1
 	status_signal.data["command"] = command
 
@@ -301,42 +312,42 @@ var/last_message_id = 0
 		if("message")
 			status_signal.data["msg1"] = data1
 			status_signal.data["msg2"] = data2
-			log_admin("STATUS: [key_name(usr)] set status screen message with [src]: [data1] [data2]")
-		if("alert")
+			log_admin("STATUS: [key_name(usr)] set status screen message with: [data1] [data2]")
+		if("image")
 			status_signal.data["picture_state"] = data1
-
-	frequency.post_signal(src, status_signal)
+		if("toggle_alert_border")
+			status_signal.data["toggle_alert_border"] = TRUE
+	frequency.post_signal(signal = status_signal)
 
 /proc/cancel_call_proc(var/mob/user)
-	if (!ticker || !evacuation_controller)
+	if (!evacuation_controller)
 		return
 
 	if(evacuation_controller.cancel_evacuation())
-		log_game("[key_name(user)] has cancelled the evacuation.")
-		message_admins("[key_name_admin(user)] has cancelled the evacuation.", 1)
+		log_and_message_admins("has cancelled the evacuation.", user)
 
 	return
 
 
 /proc/is_relay_online()
-    for(var/obj/machinery/bluespacerelay/M in machines)
-        if(M.stat == 0)
-            return 1
-    return 0
+	for(var/obj/machinery/bluespacerelay/M in SSmachines.machinery)
+		if(M.stat == 0)
+			return 1
+	return 0
 
 /proc/call_shuttle_proc(var/mob/user, var/emergency)
-	if (!ticker || !evacuation_controller)
+	if (!evacuation_controller)
 		return
 
 	if(isnull(emergency))
 		emergency = 1
 
-	if(!universe.OnShuttleCall(usr))
+	if(!GLOB.universe.OnShuttleCall(usr))
 		to_chat(user, "<span class='notice'>Cannot establish a bluespace connection.</span>")
 		return
 
-	if(deathsquad.deployed)
-		to_chat(user, "[using_map.boss_short] will not allow an evacuation to take place. Consider all contracts terminated.")
+	if(GLOB.deathsquad.deployed)
+		to_chat(user, "[GLOB.using_map.boss_short] will not allow an evacuation to take place. Consider all contracts terminated.")
 		return
 
 	if(evacuation_controller.deny)
@@ -354,12 +365,13 @@ var/last_message_id = 0
 		log_and_message_admins("[user? key_name(user) : "Autotransfer"] has called the shuttle.")
 
 /proc/init_autotransfer()
-	if (!ticker || !evacuation_controller)
+
+	if (!evacuation_controller)
 		return
 
 	. = evacuation_controller.call_evacuation(null, _emergency_evac = FALSE, autotransfer = TRUE)
 	if(.)
 		//delay events in case of an autotransfer
 		var/delay = evacuation_controller.evac_arrival_time - world.time + (2 MINUTES)
-		event_manager.delay_events(EVENT_LEVEL_MODERATE, delay)
-		event_manager.delay_events(EVENT_LEVEL_MAJOR, delay)
+		SSevent.delay_events(EVENT_LEVEL_MODERATE, delay)
+		SSevent.delay_events(EVENT_LEVEL_MAJOR, delay)

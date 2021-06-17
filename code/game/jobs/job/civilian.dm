@@ -3,24 +3,21 @@
 	title = "Bartender"
 	department = "Service"
 	department_flag = SRV
-	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of personnel"
-	selection_color = "#515151"
 	access = list(access_hydroponics, access_bar, access_kitchen)
 	minimal_access = list(access_bar)
+	alt_titles = list("Barista")
 	outfit_type = /decl/hierarchy/outfit/job/service/bartender
 
 /datum/job/chef
 	title = "Chef"
 	department = "Service"
 	department_flag = SRV
-	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the head of personnel"
-	selection_color = "#515151"
 	access = list(access_hydroponics, access_bar, access_kitchen)
 	minimal_access = list(access_kitchen)
 	alt_titles = list("Cook")
@@ -30,11 +27,9 @@
 	title = "Gardener"
 	department = "Service"
 	department_flag = SRV
-	faction = "Station"
 	total_positions = 2
 	spawn_positions = 1
 	supervisors = "the head of personnel"
-	selection_color = "#515151"
 	access = list(access_hydroponics, access_bar, access_kitchen)
 	minimal_access = list(access_hydroponics)
 	alt_titles = list("Hydroponicist")
@@ -45,12 +40,10 @@
 	title = "Quartermaster"
 	department = "Supply"
 	department_flag = SUP
-	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of personnel"
-	selection_color = "#515151"
-	economic_modifier = 5
+	economic_power = 5
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
 	minimal_access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
 	minimal_player_age = 3
@@ -61,11 +54,9 @@
 	title = "Cargo Technician"
 	department = "Supply"
 	department_flag = SUP
-	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the quartermaster and the head of personnel"
-	selection_color = "#515151"
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
 	minimal_access = list(access_maint_tunnels, access_cargo, access_cargo_bot, access_mailsorting)
 	outfit_type = /decl/hierarchy/outfit/job/cargo/cargo_tech
@@ -74,12 +65,10 @@
 	title = "Shaft Miner"
 	department = "Supply"
 	department_flag = SUP
-	faction = "Station"
 	total_positions = 3
 	spawn_positions = 3
 	supervisors = "the quartermaster and the head of personnel"
-	selection_color = "#515151"
-	economic_modifier = 5
+	economic_power = 5
 	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
 	minimal_access = list(access_mining, access_mining_station, access_mailsorting)
 	alt_titles = list("Drill Technician","Prospector")
@@ -89,11 +78,9 @@
 	title = "Janitor"
 	department = "Service"
 	department_flag = SRV
-	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of personnel"
-	selection_color = "#515151"
 	access = list(access_janitor, access_maint_tunnels, access_engine, access_research, access_sec_doors, access_medical)
 	minimal_access = list(access_janitor, access_maint_tunnels, access_engine, access_research, access_sec_doors, access_medical)
 	alt_titles = list("Custodian","Sanitation Technician")
@@ -104,11 +91,9 @@
 	title = "Librarian"
 	department = "Civilian"
 	department_flag = CIV
-	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of personnel"
-	selection_color = "#515151"
 	access = list(access_library, access_maint_tunnels)
 	minimal_access = list(access_library)
 	alt_titles = list("Journalist")
@@ -118,17 +103,14 @@
 	title = "Internal Affairs Agent"
 	department = "Support"
 	department_flag = SPT
-	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "company officials and Corporate Regulations"
-	selection_color = "#515151"
-	economic_modifier = 7
-	access = list(access_lawyer, access_sec_doors, access_maint_tunnels, access_heads)
-	minimal_access = list(access_lawyer, access_sec_doors, access_heads)
+	economic_power = 7
+	access = list(access_lawyer, access_sec_doors, access_maint_tunnels, access_bridge)
+	minimal_access = list(access_lawyer, access_sec_doors, access_bridge)
 	minimal_player_age = 10
 	outfit_type = /decl/hierarchy/outfit/job/internal_affairs_agent
-	announced = 1
 
 /datum/job/lawyer/equip(var/mob/living/carbon/human/H)
 	. = ..()

@@ -13,7 +13,7 @@
 /obj/item/device/paicard/relaymove(var/mob/user, var/direction)
 	if(user.stat || user.stunned)
 		return
-	var/obj/item/weapon/rig/rig = src.get_rig()
+	var/obj/item/rig/rig = src.get_rig()
 	if(istype(rig))
 		rig.forced_move(direction, user)
 
@@ -25,7 +25,8 @@
 	//Will stop people throwing friend pAIs into the singularity so they can respawn
 	if(!isnull(pai))
 		pai.death(0)
-	..()
+	QDEL_NULL(radio)
+	return ..()
 
 /obj/item/device/paicard/attack_self(mob/user)
 	if (!in_range(src, user))
@@ -74,7 +75,7 @@
 					    color: white;
 					}
 					tr.d2 td {
-					    background-color: #00FF00;
+					    background-color: #00ff00;
 					    color: white;
 					    text-align:center;
 					}
@@ -89,7 +90,7 @@
 					}
 					td.button_red {
 					    border: 1px solid #161616;
-					    background-color: #B04040;
+					    background-color: #b04040;
 					    text-align: center;
 					}
 					td.download {
@@ -113,7 +114,7 @@
 					    vertical-align:top;
 					}
 					a {
-					    color:#4477E0;
+					    color:#4477e0;
 					}
 					a.button {
 					    color:white;
@@ -168,13 +169,13 @@
 				<table class="request">
 					<tr>
 						<td class="radio">Transmit:</td>
-						<td><a href='byond://?src=\ref[src];wires=4'>[radio.broadcasting ? "<font color=#55FF55>En" : "<font color=#FF5555>Dis" ]abled</font></a>
+						<td><a href='byond://?src=\ref[src];wires=4'>[radio.broadcasting ? "<font color=#55ff55>En" : "<font color=#ff5555>Dis" ]abled</font></a>
 
 						</td>
 					</tr>
 					<tr>
 						<td class="radio">Receive:</td>
-						<td><a href='byond://?src=\ref[src];wires=2'>[radio.listening ? "<font color=#55FF55>En" : "<font color=#FF5555>Dis" ]abled</font></a>
+						<td><a href='byond://?src=\ref[src];wires=2'>[radio.listening ? "<font color=#55ff55>En" : "<font color=#ff5555>Dis" ]abled</font></a>
 
 						</td>
 					</tr>
@@ -219,13 +220,18 @@
 				<br>
 				<p>Each time this button is pressed, a request will be sent out to any available personalities. Check back often give plenty of time for personalities to respond. This process could take anywhere from 15 seconds to several minutes, depending on the available personalities' timeliness.</p>
 			"}
-	user << browse(dat, "window=paicard")
+	show_browser(user, dat, "window=paicard")
 	onclose(user, "paicard")
 	return
 
-/obj/item/device/paicard/Topic(href, href_list)
+/obj/item/device/paicard/CanUseTopic(mob/user, datum/topic_state/state, href_list)
+	. = ..()
+	// possible NRE in Topic
+	if(href_list && (href_list["setdna"] || href_list["setlaws"] || href_list["wires"]) && !istype(pai))
+		return FALSE
 
-	if(!usr || usr.stat)
+/obj/item/device/paicard/Topic(href, href_list)
+	if ((. = ..()))
 		return
 
 	if(href_list["setdna"])
@@ -320,7 +326,7 @@
 		qdel(src)
 
 /obj/item/device/paicard/see_emote(mob/living/M, text)
-	if(pai && pai.client && !pai.canmove)
+	if(pai && pai.client && pai.stat == CONSCIOUS)
 		var/rendered = "<span class='message'>[text]</span>"
 		pai.show_message(rendered, 2)
 	..()

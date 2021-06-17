@@ -1,9 +1,10 @@
 /obj/structure/closet/athletic_mixed
 	name = "athletic wardrobe"
 	desc = "It's a storage unit for athletic wear."
-	icon_state = "mixed"
-	icon_closed = "mixed"
-	will_contain = list(
+	closet_appearance = /decl/closet_appearance/wardrobe/mixed
+
+/obj/structure/closet/athletic_mixed/WillContain()
+	return list(
 		/obj/item/clothing/under/shorts/grey,
 		/obj/item/clothing/under/shorts/black,
 		/obj/item/clothing/under/shorts/red,
@@ -16,12 +17,14 @@
 		/obj/item/clothing/under/swimsuit/purple,
 		/obj/item/clothing/mask/snorkel = 2,
 		/obj/item/clothing/shoes/swimmingfins = 2,
-		/obj/item/weapon/towel = 2)
+		/obj/item/towel = 2)
 
 /obj/structure/closet/boxinggloves
 	name = "boxing gloves"
 	desc = "It's a storage unit for gloves for use in the boxing ring."
-	will_contain = list(
+
+/obj/structure/closet/boxinggloves/WillContain()
+	return list(
 		/obj/item/clothing/gloves/boxing/blue,
 		/obj/item/clothing/gloves/boxing/green,
 		/obj/item/clothing/gloves/boxing/yellow,
@@ -30,7 +33,9 @@
 /obj/structure/closet/masks
 	name = "mask closet"
 	desc = "IT'S A STORAGE UNIT FOR FIGHTER MASKS OLE!"
-	will_contain = list(
+
+/obj/structure/closet/masks/WillContain()
+	return list(
 		/obj/item/clothing/mask/luchador,
 		/obj/item/clothing/mask/luchador/rudos,
 		/obj/item/clothing/mask/luchador/tecnicos)
@@ -38,17 +43,19 @@
 /obj/structure/closet/lasertag/red
 	name = "red laser tag equipment"
 	desc = "It's a storage unit for laser tag equipment."
-	icon_state = "red"
-	icon_closed = "red"
-	will_contain = list(
-		/obj/item/weapon/gun/energy/lasertag/red = 3,
+	closet_appearance = /decl/closet_appearance/wardrobe/red
+
+/obj/structure/closet/lasertag/red/WillContain()
+	return list(
+		/obj/item/gun/energy/lasertag/red = 3,
 		/obj/item/clothing/suit/redtag = 3)
 
 /obj/structure/closet/lasertag/blue
 	name = "blue laser tag equipment"
 	desc = "It's a storage unit for laser tag equipment."
-	icon_state = "blue"
-	icon_closed = "blue"
-	will_contain = list(
-		/obj/item/weapon/gun/energy/lasertag/blue = 3,
+	closet_appearance = /decl/closet_appearance/wardrobe
+
+/obj/structure/closet/lasertag/blue/WillContain()
+	return list(
+		/obj/item/gun/energy/lasertag/blue = 3,
 		/obj/item/clothing/suit/bluetag = 3)

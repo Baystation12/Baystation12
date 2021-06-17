@@ -9,7 +9,7 @@
 //        Mining Satchel
 // -----------------------------
 
-/obj/item/weapon/storage/ore
+/obj/item/storage/ore
 	name = "mining satchel"
 	desc = "This sturdy bag can be used to store and transport ores."
 	icon = 'icons/obj/mining.dmi'
@@ -18,26 +18,49 @@
 	max_storage_space = 200
 	max_w_class = ITEM_SIZE_NORMAL
 	w_class = ITEM_SIZE_LARGE
-	can_hold = list(/obj/item/weapon/ore)
+	can_hold = list(/obj/item/ore)
 	allow_quick_gather = 1
 	allow_quick_empty = 1
 	use_to_pickup = 1
 
 
 // -----------------------------
+//          Evidence bag
+// -----------------------------
+/obj/item/storage/evidence
+	name = "evidence case"
+	desc = "A heavy steel case for storing evidence."
+	icon = 'icons/obj/forensics.dmi'
+	icon_state = "case"
+	max_storage_space = 100
+	max_w_class = ITEM_SIZE_SMALL
+	w_class = ITEM_SIZE_NORMAL
+	can_hold = list(
+		/obj/item/sample,
+		/obj/item/evidencebag,
+		/obj/item/forensics,
+		/obj/item/photo,
+		/obj/item/paper,
+		/obj/item/paper_bundle
+	)
+	allow_quick_gather = 1
+	allow_quick_empty = 1
+	use_to_pickup = 1
+
+// -----------------------------
 //          Plant bag
 // -----------------------------
 
-/obj/item/weapon/storage/plants
+/obj/item/storage/plants
 	name = "botanical satchel"
 	desc = "This bag can be used to store all kinds of plant products and botanical specimen."
 	icon = 'icons/obj/hydroponics_machines.dmi'
 	icon_state = "plantbag"
 	slot_flags = SLOT_BELT
 	max_storage_space = 100
-	max_w_class = ITEM_SIZE_SMALL
+	max_w_class = ITEM_SIZE_NORMAL
 	w_class = ITEM_SIZE_NORMAL
-	can_hold = list(/obj/item/weapon/reagent_containers/food/snacks/grown,/obj/item/seeds,/obj/item/weapon/grown)
+	can_hold = list(/obj/item/reagent_containers/food/snacks/grown,/obj/item/seeds)
 	allow_quick_gather = 1
 	allow_quick_empty = 1
 	use_to_pickup = 1
@@ -50,7 +73,7 @@
 // However, making it a storage/bag allows us to reuse existing code in some places. -Sayu
 // This is old and terrible
 
-/obj/item/weapon/storage/sheetsnatcher
+/obj/item/storage/sheetsnatcher
 	name = "sheet snatcher"
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "sheetsnatcher"
@@ -66,8 +89,8 @@
 	use_to_pickup = 1
 	New()
 		..()
-		//verbs -= /obj/item/weapon/storage/verb/quick_empty
-		//verbs += /obj/item/weapon/storage/sheetsnatcher/quick_empty
+		//verbs -= /obj/item/storage/verb/quick_empty
+		//verbs += /obj/item/storage/sheetsnatcher/quick_empty
 
 	can_be_inserted(obj/item/W, mob/user, stop_messages = 0)
 		if(!istype(W,/obj/item/stack/material))
@@ -110,7 +133,6 @@
 			usr.drop_from_inventory(S, src)
 			if(!S.amount)
 				qdel(S)
-			usr.update_icons()	//update our overlays
 
 		prepare_ui(usr)
 		update_icon()
@@ -138,7 +160,7 @@
 		if(!istype(S)) return 0
 
 		//I would prefer to drop a new stack, but the item/attack_hand code
-		// that calls this can't recieve a different object than you clicked on.
+		// that calls this can't receive a different object than you clicked on.
 		//Therefore, make a new stack internally that has the remainder.
 		// -Sayu
 
@@ -153,7 +175,7 @@
 //    Sheet Snatcher (Cyborg)
 // -----------------------------
 
-/obj/item/weapon/storage/sheetsnatcher/borg
+/obj/item/storage/sheetsnatcher/borg
 	name = "sheet snatcher 9000"
 	desc = ""
 	capacity = 500//Borgs get more because >specialization

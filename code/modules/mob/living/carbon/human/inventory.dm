@@ -13,7 +13,10 @@ This saves us from having to call add_fingerprint() any time something is put in
 		if(!I)
 			to_chat(H, "<span class='notice'>You are not holding anything to equip.</span>")
 			return
-		if(H.equip_to_appropriate_slot(I))
+		if(istype (I, /obj/item/underwear))
+			var/obj/item/underwear/U = I
+			U.EquipUnderwear(H, H)
+		else if(H.equip_to_appropriate_slot(I))
 			if(hand)
 				update_inv_l_hand(0)
 			else
@@ -149,6 +152,10 @@ This saves us from having to call add_fingerprint() any time something is put in
 				update_hair(0)	//rebuild hair
 				update_inv_ears(0)
 				update_inv_wear_mask(0)
+		if(src)
+			var/obj/item/clothing/mask/wear_mask = src.get_equipped_item(slot_wear_mask)
+			if(!(wear_mask && (wear_mask.item_flags & ITEM_FLAG_AIRTIGHT)))
+				set_internals(null)
 		update_inv_head()
 	else if (W == l_ear)
 		l_ear = null
@@ -173,10 +180,9 @@ This saves us from having to call add_fingerprint() any time something is put in
 			if(I.flags_inv & (BLOCKHAIR|BLOCKHEADHAIR))
 				update_hair(0)	//rebuild hair
 				update_inv_ears(0)
-		if(internal)
-			if(internals)
-				internals.icon_state = "internal0"
-			internal = null
+		var/obj/item/clothing/mask/head = src.get_equipped_item(slot_head)
+		if(!(head && (head.item_flags & ITEM_FLAG_AIRTIGHT)))
+			set_internals(null)
 		update_inv_wear_mask()
 	else if (W == wear_id)
 		wear_id = null
@@ -227,6 +233,9 @@ This saves us from having to call add_fingerprint() any time something is put in
 	if(!has_organ_for_slot(slot)) return
 	if(!species || !species.hud || !(slot in species.hud.equip_slots)) return
 	W.forceMove(src)
+
+	var/obj/item/old_item = get_equipped_item(slot)
+
 	switch(slot)
 		if(slot_back)
 			src.back = W
@@ -250,11 +259,15 @@ This saves us from having to call add_fingerprint() any time something is put in
 			W.equipped(src, slot)
 			W.screen_loc = ui_lhand
 			update_inv_l_hand(redraw_mob)
+			if(hand)
+				W.on_active_hand(src)
 		if(slot_r_hand)
 			src.r_hand = W
 			W.equipped(src, slot)
 			W.screen_loc = ui_rhand
 			update_inv_r_hand(redraw_mob)
+			if(!hand)
+				W.on_active_hand(src)
 		if(slot_belt)
 			src.belt = W
 			W.equipped(src, slot)
@@ -309,6 +322,8 @@ This saves us from having to call add_fingerprint() any time something is put in
 			update_inv_wear_suit(redraw_mob)
 		if(slot_w_uniform)
 			src.w_uniform = W
+			if(w_uniform.flags_inv & HIDESHOES)
+				update_inv_shoes(0)
 			W.equipped(src, slot)
 			update_inv_w_uniform(redraw_mob)
 		if(slot_l_store)
@@ -328,8 +343,9 @@ This saves us from having to call add_fingerprint() any time something is put in
 				src.remove_from_mob(W)
 			W.forceMove(src.back)
 		if(slot_tie)
-			var/obj/item/clothing/under/uniform = src.w_uniform
-			uniform.attackby(W,src)
+			var/obj/item/clothing/under/uniform = w_uniform
+			if (uniform)
+				uniform.attempt_attach_accessory(W, src)
 		else
 			to_chat(src, "<span class='danger'>You are trying to eqip this item to an unsupported inventory slot. If possible, please write a ticket with steps to reproduce. Slot was: [slot]</span>")
 			return
@@ -337,9 +353,13 @@ This saves us from having to call add_fingerprint() any time something is put in
 	if((W == src.l_hand) && (slot != slot_l_hand))
 		src.l_hand = null
 		update_inv_l_hand() //So items actually disappear from hands.
+		if(r_hand)
+			r_hand.update_twohanding()
 	else if((W == src.r_hand) && (slot != slot_r_hand))
 		src.r_hand = null
 		update_inv_r_hand()
+		if(l_hand)
+			l_hand.update_twohanding()
 
 	W.hud_layerise()
 	for(var/s in species.hud.gear)
@@ -348,6 +368,10 @@ This saves us from having to call add_fingerprint() any time something is put in
 			W.screen_loc = gear["loc"]
 	if(W.action_button_name)
 		update_action_buttons()
+
+	// if we replaced an item, delete the old item. do this at the end to make the replacement seamless
+	if(old_item)
+		qdel(old_item)
 
 	return 1
 
@@ -395,19 +419,25 @@ This saves us from having to call add_fingerprint() any time something is put in
 
 /mob/living/carbon/human/get_equipped_items(var/include_carried = 0)
 	. = ..()
-	if(belt) . += belt
-	if(l_ear) . += l_ear
-	if(r_ear) . += r_ear
-	if(glasses) . += glasses
-	if(gloves) . += gloves
-	if(head) . += head
-	if(shoes) . += shoes
-	if(wear_id) . += wear_id
+	if(belt)      . += belt
+	if(l_ear)     . += l_ear
+	if(r_ear)     . += r_ear
+	if(glasses)   . += glasses
+	if(gloves)    . += gloves
+	if(head)      . += head
+	if(shoes)     . += shoes
+	if(wear_id)   . += wear_id
 	if(wear_suit) . += wear_suit
 	if(w_uniform) . += w_uniform
 
 	if(include_carried)
-		if(slot_l_store)    . += l_store
-		if(slot_r_store)    . += r_store
-		if(slot_handcuffed) . += handcuffed
-		if(slot_s_store)    . += s_store
+		if(l_store)    . += l_store
+		if(r_store)    . += r_store
+		if(handcuffed) . += handcuffed
+		if(s_store)    . += s_store
+
+//Same as get_covering_equipped_items, but using target zone instead of bodyparts flags
+/mob/living/carbon/human/proc/get_covering_equipped_item_by_zone(var/zone)
+	var/obj/item/organ/external/O = get_organ(zone)
+	if(O)
+		return get_covering_equipped_item(O.body_part)

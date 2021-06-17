@@ -1,61 +1,55 @@
 //The following is a list of defs to be used for the Torch loadout.
 
-//For all SolGov personnel, representative included
-#define SOLGOV_ROLES list("Commanding Officer", "Executive Officer", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Bridge Officer", "Senior Enlisted Advisor", "Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Physician", "Corpsman", "Deck Officer", "Deck Technician", "Sanitation Technician", "Cook", "Crewman", "SolGov Representative", "SolGov Pilot")
-
-//For EC/Fleet/Marines
-#define MILITARY_ROLES list("Commanding Officer", "Executive Officer", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Bridge Officer", "Senior Enlisted Advisor", "Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Physician", "Corpsman", "Deck Officer", "Deck Technician", "Sanitation Technician", "Cook", "Crewman", "SolGov Pilot")
-
-//For EC/Fleet/Marine Officers
-#define MILITARY_OFFICER_ROLES list("Commanding Officer", "Executive Officer", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Bridge Officer", "Physician", "Deck Officer", "SolGov Pilot")
-
-//For EC/Fleet/Marine Enlisted
-#define MILITARY_ENLISTED_ROLES list("Senior Enlisted Advisor", "Senior Engineer", "Engineer", "Brig Officer", "Forensic Technician", "Master at Arms", "Physician", "Corpsman", "Deck Officer", "Deck Technician", "Sanitation Technician", "Cook", "Crewman")
-
-//For all civilians or off-duty personnel, regardless of formality of dress or job.
-#define NON_MILITARY_ROLES list("Research Director", "NanoTrasen Liaison", "Senior Researcher", "NanoTrasen Pilot", "Scientist", "Prospector", "Security Guard", "Research Assistant", "SolGov Representative", "Passenger", "Maintenance Assistant", "Roboticist", "Medical Contractor", "Chemist", "Counselor", "Supply Assistant", "Bartender", "Merchant", "Off-Duty")
-
 //For jobs that allow for decorative or ceremonial clothing
-#define FORMAL_ROLES list("NanoTrasen Liaison", "Research Director", "Senior Researcher", "Scientist", "Research Assistant", "SolGov Representative", "Passenger", "Bartender", "Merchant", "Off-Duty")
+#define FORMAL_ROLES list(/datum/job/liaison, /datum/job/rd, /datum/job/senior_scientist, /datum/job/scientist, /datum/job/scientist_assistant, /datum/job/psychiatrist, /datum/job/representative, /datum/job/assistant, /datum/job/bartender, /datum/job/merchant, /datum/job/detective, /datum/job/chaplain, /datum/job/submap/bearcat_captain, /datum/job/submap/bearcat_crewman, /datum/job/submap/CTI_pilot, /datum/job/submap/CTI_engineer, /datum/job/submap/CTI_Undergraduate_Xenoscience_Researcher, /datum/job/submap/colonist, /datum/job/submap/pod, /datum/job/chef, /datum/job/submap/scavver_pilot, /datum/job/submap/scavver_doctor, /datum/job/submap/scavver_engineer)
 
 //For civilian jobs that may have a uniform, but not a strict one
-#define SEMIFORMAL_ROLES list("Passenger", "Prospector", "Research Assistant", "Counselor", "Bartender", "Merchant", "NanoTrasen Pilot", "Off-Duty")
+#define SEMIFORMAL_ROLES list(/datum/job/assistant, /datum/job/mining, /datum/job/scientist_assistant, /datum/job/psychiatrist, /datum/job/bartender, /datum/job/merchant, /datum/job/nt_pilot, /datum/job/scientist, /datum/job/senior_scientist, /datum/job/detective, /datum/job/chaplain, /datum/job/roboticist, /datum/job/submap/bearcat_captain, /datum/job/submap/bearcat_crewman, /datum/job/submap/colonist, /datum/job/submap/pod, /datum/job/chef, /datum/job/submap/scavver_pilot, /datum/job/submap/scavver_doctor, /datum/job/submap/scavver_engineer, /datum/job/senior_doctor, /datum/job/junior_doctor, /datum/job/doctor, /datum/job/submap/CTI_pilot, /datum/job/submap/CTI_engineer, /datum/job/submap/CTI_Undergraduate_Xenoscience_Researcher)
 
-//For NanoTrasen employees
-#define NANOTRASEN_ROLES list("Research Director", "NanoTrasen Liaison", "Senior Researcher", "NanoTrasen Pilot", "Scientist", "Prospector", "Security Guard", "Research Assistant")
+//For civilian jobs that may have a strict uniform.
+#define SEMIANDFORMAL_ROLES list(/datum/job/assistant, /datum/job/mining, /datum/job/scientist_assistant, /datum/job/psychiatrist, /datum/job/bartender, /datum/job/merchant, /datum/job/nt_pilot, /datum/job/liaison, /datum/job/rd, /datum/job/senior_scientist, /datum/job/scientist, /datum/job/representative, /datum/job/detective, /datum/job/chaplain, /datum/job/submap/bearcat_captain, /datum/job/submap/bearcat_crewman, /datum/job/submap/colonist, /datum/job/submap/pod, /datum/job/chef, /datum/job/submap/scavver_pilot, /datum/job/submap/scavver_doctor, /datum/job/submap/scavver_engineer, /datum/job/senior_doctor, /datum/job/junior_doctor, /datum/job/doctor, /datum/job/submap/CTI_pilot, /datum/job/submap/CTI_engineer, /datum/job/submap/CTI_Undergraduate_Xenoscience_Researcher)
 
-//For contractors
-#define CONTRACTOR_ROLES list("Maintenance Assistant", "Roboticist", "Medical Contractor", "Chemist", "Counselor", "Supply Assistant", "Bartender", "Cook", "Sanitation Technician")
+//For civilian jobs with no uniform or formal clothing requirements.
+#define CASUAL_ROLES list(/datum/job/assistant, /datum/job/janitor, /datum/job/chef, /datum/job/bartender, /datum/job/cargo_tech, /datum/job/roboticist, /datum/job/mining, /datum/job/chaplain, /datum/job/merchant, /datum/job/submap/bearcat_captain, /datum/job/submap/bearcat_crewman, /datum/job/submap/colonist, /datum/job/submap/pod, /datum/job/submap/scavver_pilot, /datum/job/submap/scavver_doctor, /datum/job/submap/scavver_engineer, /datum/job/senior_doctor, /datum/job/junior_doctor, /datum/job/doctor, /datum/job/scientist, /datum/job/senior_scientist, /datum/job/scientist_assistant, /datum/job/submap/CTI_pilot, /datum/job/submap/CTI_engineer, /datum/job/submap/CTI_Undergraduate_Xenoscience_Researcher)
 
-//For corporate or government representatives
-#define REPRESENTATIVE_ROLES list("SolGov Representative", "NanoTrasen Liaison")
-
-//For roles with no uniform or formal clothing requirements
-#define RESTRICTED_ROLES list("Passenger", "Bartender", "Merchant", "Off-Duty")
-
-//For members of the command department
-#define COMMAND_ROLES list("Commanding Officer", "Executive Officer", "Research Director", "Chief Medical Officer", "Chief Engineer", "Chief of Security", "Bridge Officer", "Senior Enlisted Advisor")
+//For roles that would have a higher level of education, typically doctors and other scientists
+#define DOCTOR_ROLES list(/datum/job/cmo, /datum/job/senior_doctor, /datum/job/junior_doctor, /datum/job/chemist, /datum/job/psychiatrist, /datum/job/roboticist, /datum/job/rd, /datum/job/senior_scientist, /datum/job/submap/CTI_Undergraduate_Xenoscience_Researcher, /datum/job/scientist)
 
 //For members of the medical department
-#define MEDICAL_ROLES list("Chief Medical Officer", "Physician", "Corpsman", "Medical Contractor", "Chemist", "Counselor")
+#define MEDICAL_ROLES list(/datum/job/cmo, /datum/job/senior_doctor, /datum/job/junior_doctor, /datum/job/doctor, /datum/job/psychiatrist, /datum/job/chemist, /datum/job/medical_trainee)
 
 //For members of the medical department, roboticists, and some Research
-#define STERILE_ROLES list("Chief Medical Officer", "Physician", "Corpsman", "Medical Contractor", "Chemist", "Counselor", "Roboticist", "Research Director", "Senior Researcher", "Scientist", "Research Assistant")
+#define STERILE_ROLES list(/datum/job/cmo, /datum/job/senior_doctor, /datum/job/junior_doctor, /datum/job/doctor, /datum/job/chemist, /datum/job/psychiatrist, /datum/job/roboticist, /datum/job/rd, /datum/job/senior_scientist, /datum/job/scientist, /datum/job/scientist_assistant, /datum/job/medical_trainee)
 
 //For members of the engineering department
-#define ENGINEERING_ROLES list("Chief Engineer", "Senior Engineer", "Engineer", "Maintenance Assistant", "Roboticist")
+#define ENGINEERING_ROLES list(/datum/job/chief_engineer, /datum/job/senior_engineer, /datum/job/engineer, /datum/job/roboticist, /datum/job/engineer_trainee)
 
 //For members of Engineering, Cargo, and Research
-#define TECHNICAL_ROLES list("Senior Engineer", "Engineer", "Maintenance Assistant", "Roboticist", "Deck Officer", "Deck Technician", "Supply Assistant", "Prospector", "Research Assistant", "Merchant", "Research Director", "Senior Researcher", "Scientist", "Chief Engineer", "Sanitation Technician")
+#define TECHNICAL_ROLES list(/datum/job/senior_engineer, /datum/job/engineer, /datum/job/roboticist, /datum/job/qm, /datum/job/cargo_tech, /datum/job/mining, /datum/job/scientist_assistant, /datum/job/merchant, /datum/job/rd, /datum/job/senior_scientist, /datum/job/scientist, /datum/job/chief_engineer, /datum/job/janitor, /datum/job/engineer_trainee, /datum/job/nt_pilot)
 
 //For members of the security department
-#define SECURITY_ROLES list("Chief of Security", "Brig Officer", "Forensic Technician", "Master at Arms")
+#define SECURITY_ROLES list(/datum/job/hos, /datum/job/warden, /datum/job/detective, /datum/job/officer)
 
 //For members of the supply department
-#define SUPPLY_ROLES list("Deck Officer", "Deck Technician", "Supply Assistant")
+#define SUPPLY_ROLES list(/datum/job/qm, /datum/job/cargo_tech)
 
 //For members of the service department
-#define SERVICE_ROLES list("Sanitation Technician", "Cook", "Crewman", "Bartender")
+#define SERVICE_ROLES list(/datum/job/janitor, /datum/job/chef, /datum/job/crew, /datum/job/bartender, /datum/job/chaplain)
+
+//For members of the exploration department
+#define EXPLORATION_ROLES list(/datum/job/pathfinder, /datum/job/nt_pilot, /datum/job/explorer)
 
 //For members of the research department and jobs that are scientific
-#define RESEARCH_ROLES list("Research Director", "NanoTrasen Liaison", "Scientist", "Prospector", "Security Guard", "Research Assistant", "Passenger", "NanoTrasen Pilot", "Senior Researcher", "Chemist", "Roboticist", "Virologist")
+#define RESEARCH_ROLES list(/datum/job/rd, /datum/job/scientist, /datum/job/mining, /datum/job/scientist_assistant, /datum/job/assistant, /datum/job/nt_pilot, /datum/job/senior_scientist, /datum/job/roboticist)
+
+//For jobs that spawn with weapons in their lockers
+#define ARMED_ROLES list(/datum/job/captain, /datum/job/hop, /datum/job/rd, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/sea, /datum/job/officer, /datum/job/warden, /datum/job/detective, /datum/job/merchant, /datum/job/submap/CTI_pilot, /datum/job/submap/CTI_engineer, /datum/job/submap/scavver_pilot, /datum/job/submap/scavver_doctor, /datum/job/submap/scavver_engineer)
+
+//For jobs that spawn with armor in their lockers
+#define ARMORED_ROLES list(/datum/job/captain, /datum/job/hop, /datum/job/rd, /datum/job/cmo, /datum/job/chief_engineer, /datum/job/hos, /datum/job/qm, /datum/job/sea, /datum/job/officer, /datum/job/warden, /datum/job/detective, /datum/job/merchant, /datum/job/submap/skrellscoutship_crew, /datum/job/submap/skrellscoutship_crew/leader, /datum/job/submap/scavver_pilot, /datum/job/submap/scavver_doctor, /datum/job/submap/scavver_engineer)
+
+#define UNIFORMED_BRANCHES list(/datum/mil_branch/expeditionary_corps, /datum/mil_branch/fleet)
+
+#define CIVILIAN_BRANCHES list(/datum/mil_branch/civilian, /datum/mil_branch/solgov)
+
+#define SOLGOV_BRANCHES list(/datum/mil_branch/expeditionary_corps, /datum/mil_branch/fleet, /datum/mil_branch/solgov)

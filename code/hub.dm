@@ -1,12 +1,15 @@
 /world
-/* This is for any host that would like their server to appear on the main SS13 hub.
- * uncomment the define below to enable the HUB entry for your server
+/* This page contains info for the hub. To allow your server to be visible on the hub, update the entry in the config.
+ * You can also toggle visibility from in-game with toggle-hub-visibility; be aware that it takes a few minutes for the hub go
  */
-//#define HUB_ENABLED 1
 	hub = "Exadv1.spacestation13"
 	name = "Space Station 13 - Baystation 12"
-#ifdef HUB_ENABLED
-	hub_password = "kMZy3U5jJHSiBQjr"
-#else
-	hub_password = "SORRYNOPASSWORD"
-#endif
+
+/world/proc/update_hub_visibility(new_status)
+	if (isnull(new_status))
+		new_status = !config.hub_visible
+	config.hub_visible = new_status
+	if (config.hub_visible)
+		hub_password = "kMZy3U5jJHSiBQjr"
+	else
+		hub_password = "SORRYNOPASSWORD"

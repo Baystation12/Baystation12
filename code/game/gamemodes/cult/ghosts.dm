@@ -50,7 +50,7 @@
 	if(!ghost_ability_check())
 		return
 
-	var/doodle_color = "#A10808"
+	var/doodle_color = COLOR_BLOOD_HUMAN
 
 	var/turf/simulated/T = get_turf(src)
 	if(!istype(T))
@@ -280,10 +280,10 @@
 		ghost_magic_cd = world.time + 60 SECONDS
 		to_chat(src, "<span class='info'>You are now invisible.</span>")
 		visible_message("<span class='emote'>It fades from sight...</span>")
-		invisibility = INVISIBILITY_OBSERVER
+		set_invisibility(INVISIBILITY_OBSERVER)
 		mouse_opacity = 1
 	else
 		ghost_magic_cd = world.time + 60 SECONDS
 		to_chat(src, "<span class='info'>You are now visible.</span>")
-		invisibility = 0
+		set_invisibility(0)
 		mouse_opacity = 0 // This is so they don't make people invincible to melee attacks by hovering over them

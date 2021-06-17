@@ -10,8 +10,8 @@
 	if(icon_state != "ghost-narsie")
 		icon = 'icons/mob/mob.dmi'
 		icon_state = "ghost-narsie"
-		overlays = 0
-		invisibility = 0
+		overlays.Cut()
+		set_invisibility(0)
 		to_chat(src, "<span class='sinister'>Even as a non-corporal being, you can feel Nar-Sie's presence altering you. You are now visible to everyone.</span>")
 
 /mob/living/cultify()
@@ -24,8 +24,8 @@
 		var/mob/observer/ghost/G = (ghostize())
 		G.icon = 'icons/mob/mob.dmi'
 		G.icon_state = "ghost-narsie"
-		G.overlays = 0
-		G.invisibility = 0
+		G.overlays.Cut()
+		G.set_invisibility(0)
 		to_chat(G, "<span class='sinister'>You feel relieved as what's left of your soul finally escapes its prison of flesh.</span>")
 	else
 		dust()
@@ -53,10 +53,10 @@
 		narsimage.loc = src.loc
 		narglow.loc = src.loc
 		//Display the new narsimage to the player
-		src << narsimage
-		src << narglow
+		image_to(src, narsimage)
+		image_to(src, narglow)
 
 	else
 		if(narsimage)
-			qdel_null(narsimage)
-			qdel_null(narglow)
+			QDEL_NULL(narsimage)
+			QDEL_NULL(narglow)

@@ -1,12 +1,10 @@
-#define ZONE_BLOCKED 2
-#define AIR_BLOCKED 1
 //Interactions
 /turf/simulated/wall/proc/toggle_open(var/mob/user)
 
 	if(can_open == WALL_OPENING)
 		return
 
-	calc_rad_resistance()
+	SSradiation.resistance_cache.Remove(src)
 
 	if(density)
 		can_open = WALL_OPENING
@@ -18,6 +16,10 @@
 		update_icon()
 		update_air()
 		set_light(0)
+		src.blocks_air = 0
+		set_opacity(0)
+		for(var/turf/simulated/turf in loc)
+			SSair.mark_for_update(turf)
 	else
 		can_open = WALL_OPENING
 		//flick("[material.icon_base]fwall_closing", src)
@@ -27,21 +29,22 @@
 		update_icon()
 		update_air()
 		sleep(15)
-		set_light(1)
+		set_light(0.4, 0.1, 1)
+		src.blocks_air = 1
+		set_opacity(1)
+		for(var/turf/simulated/turf in loc)
+			SSair.mark_for_update(turf)
 
 	can_open = WALL_CAN_OPEN
 	update_icon()
 
-#undef ZONE_BLOCKED
-#undef AIR_BLOCKED
-
 /turf/simulated/wall/proc/update_air()
-	if(!air_master)
+	if(!SSair)
 		return
 
 	for(var/turf/simulated/turf in loc)
 		update_thermal(turf)
-		air_master.mark_for_update(turf)
+		SSair.mark_for_update(turf)
 
 
 /turf/simulated/wall/proc/update_thermal(var/turf/simulated/source)
@@ -54,11 +57,11 @@
 
 
 /turf/simulated/wall/proc/fail_smash(var/mob/user)
-	to_chat(user, "<span class='danger'>You smash against the wall!</span>")
+	to_chat(user, "<span class='danger'>You smash against \the [src]!</span>")
 	take_damage(rand(25,75))
 
 /turf/simulated/wall/proc/success_smash(var/mob/user)
-	to_chat(user, "<span class='danger'>You smash through the wall!</span>")
+	to_chat(user, "<span class='danger'>You smash through \the [src]!</span>")
 	user.do_attack_animation(src)
 	spawn(1)
 		dismantle_wall(1)
@@ -70,13 +73,11 @@
 			to_chat(user, "<span class='danger'>\The [reinf_material.display_name] feels porous and crumbly.</span>")
 		else
 			to_chat(user, "<span class='danger'>\The [material.display_name] crumbles under your touch!</span>")
-			dismantle_wall()
+			dismantle_wall(TRUE)
 			return 1
 
-	if(..()) return 1
-
 	if(!can_open)
-		to_chat(user, "<span class='notice'>You push the wall, but nothing happens.</span>")
+		to_chat(user, "<span class='notice'>You push \the [src], but nothing happens.</span>")
 		playsound(src, hitsound, 25, 1)
 	else
 		toggle_open(user)
@@ -89,14 +90,41 @@
 	add_fingerprint(user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	var/rotting = (locate(/obj/effect/overlay/wallrot) in src)
-	if (HULK in user.mutations)
+	if (MUTATION_HULK in user.mutations)
 		if (rotting || !prob(material.hardness))
 			success_smash(user)
 		else
 			fail_smash(user)
 			return 1
 
-	try_touch(user, rotting)
+	if(iscarbon(user))
+		var/mob/living/carbon/M = user
+		switch(M.a_intent)
+			if(I_HELP)
+				return
+			if(I_DISARM, I_GRAB)
+				try_touch(M, rotting)
+			if(I_HURT)
+				if (!(M.organs_by_name[M.hand ? BP_L_HAND : BP_R_HAND].is_usable()))
+					to_chat(user, SPAN_WARNING("You can't use that hand."))
+					return
+				if(rotting && !reinf_material)
+					M.visible_message(SPAN_DANGER("[M.name] punches \the [src] and it crumbles!"), SPAN_DANGER("You punch \the [src] and it crumbles!"))
+					dismantle_wall(TRUE)
+					playsound(src, pick(GLOB.punch_sound), 20)
+				if (MUTATION_FERAL in user.mutations)
+					M.visible_message(SPAN_DANGER("[M.name] slams into \the [src]!"), SPAN_DANGER("You slam into \the [src]!"))
+					playsound(src, pick(GLOB.punch_sound), 45)
+					take_damage(5)
+					user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN*2) //Additional cooldown
+					attack_animation(user)
+				else
+					M.visible_message(SPAN_DANGER("[M.name] punches \the [src]!"), SPAN_DANGER("You punch \the [src]!"))
+					M.apply_damage(3, BRUTE, M.hand ? BP_L_HAND : BP_R_HAND)
+					playsound(src, pick(GLOB.punch_sound), 40)
+
+	else
+		try_touch(user, rotting)
 
 /turf/simulated/wall/attack_generic(var/mob/user, var/damage, var/attack_message, var/wallbreaker)
 
@@ -120,10 +148,19 @@
 		return success_smash(user)
 	return fail_smash(user)
 
-/turf/simulated/wall/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/turf/simulated/wall/attackby(var/obj/item/W, var/mob/user)
+
+	var/area/A = get_area(src)
+	if (!A.can_modify_area())
+		to_chat(user, SPAN_NOTICE("\The [src] deflects all attempts to interact with it!"))
+		return
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	if (!user.)
+
+	if(!construction_stage && try_graffiti(user, W))
+		return
+
+	if (!user.IsAdvancedToolUser())
 		to_chat(user, "<span class='warning'>You don't have the dexterity to do this!</span>")
 		return
 
@@ -136,8 +173,8 @@
 			burn(is_hot(W))
 
 	if(locate(/obj/effect/overlay/wallrot) in src)
-		if(istype(W, /obj/item/weapon/weldingtool) )
-			var/obj/item/weapon/weldingtool/WT = W
+		if(isWelder(W))
+			var/obj/item/weldingtool/WT = W
 			if( WT.remove_fuel(0,user) )
 				to_chat(user, "<span class='notice'>You burn away the fungi with \the [WT].</span>")
 				playsound(src, 'sound/items/Welder.ogg', 10, 1)
@@ -151,18 +188,18 @@
 
 	//THERMITE related stuff. Calls src.thermitemelt() which handles melting simulated walls and the relevant effects
 	if(thermite)
-		if( istype(W, /obj/item/weapon/weldingtool) )
-			var/obj/item/weapon/weldingtool/WT = W
+		if(isWelder(W))
+			var/obj/item/weldingtool/WT = W
 			if( WT.remove_fuel(0,user) )
 				thermitemelt(user)
 				return
 
-		else if(istype(W, /obj/item/weapon/pickaxe/plasmacutter))
+		else if(istype(W, /obj/item/gun/energy/plasmacutter))
 			thermitemelt(user)
 			return
 
-		else if( istype(W, /obj/item/weapon/melee/energy/blade) )
-			var/obj/item/weapon/melee/energy/blade/EB = W
+		else if( istype(W, /obj/item/melee/energy/blade) )
+			var/obj/item/melee/energy/blade/EB = W
 
 			EB.spark_system.start()
 			to_chat(user, "<span class='notice'>You slash \the [src] with \the [EB]; the thermite ignites!</span>")
@@ -174,12 +211,9 @@
 
 	var/turf/T = user.loc	//get user's location for delay checks
 
-	if(damage && istype(W, /obj/item/weapon/weldingtool))
+	if(damage && istype(W, /obj/item/weldingtool))
 
-		var/obj/item/weapon/weldingtool/WT = W
-
-		if(!WT.isOn())
-			return
+		var/obj/item/weldingtool/WT = W
 
 		if(WT.remove_fuel(0,user))
 			to_chat(user, "<span class='notice'>You start repairing the damage to [src].</span>")
@@ -187,9 +221,6 @@
 			if(do_after(user, max(5, damage / 5), src) && WT && WT.isOn())
 				to_chat(user, "<span class='notice'>You finish repairing the damage to [src].</span>")
 				take_damage(-damage)
-		else
-			to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
-			return
 		return
 
 	// Basic dismantling.
@@ -199,33 +230,35 @@
 		var/dismantle_verb
 		var/dismantle_sound
 
-		if(istype(W,/obj/item/weapon/weldingtool))
-			var/obj/item/weapon/weldingtool/WT = W
-			if(!WT.isOn())
-				return
+		if(istype(W,/obj/item/weldingtool))
+			var/obj/item/weldingtool/WT = W
 			if(!WT.remove_fuel(0,user))
-				to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
 				return
 			dismantle_verb = "cutting"
 			dismantle_sound = 'sound/items/Welder.ogg'
 			cut_delay *= 0.7
-		else if(istype(W,/obj/item/weapon/melee/energy/blade))
+		else if(istype(W,/obj/item/melee/energy/blade) || istype(W,/obj/item/psychic_power/psiblade/master) || istype(W, /obj/item/gun/energy/plasmacutter))
+			if(istype(W, /obj/item/gun/energy/plasmacutter))
+				var/obj/item/gun/energy/plasmacutter/cutter = W
+				if(!cutter.slice(user))
+					return
 			dismantle_sound = "sparks"
 			dismantle_verb = "slicing"
 			cut_delay *= 0.5
-		else if(istype(W,/obj/item/weapon/pickaxe))
-			var/obj/item/weapon/pickaxe/P = W
+		else if(istype(W,/obj/item/pickaxe))
+			var/obj/item/pickaxe/P = W
 			dismantle_verb = P.drill_verb
 			dismantle_sound = P.drill_sound
 			cut_delay -= P.digspeed
 
-		if(dismantle_verb)
+		if(dismantle_verb && !dismantling)
 
+			dismantling = TRUE
 			to_chat(user, "<span class='notice'>You begin [dismantle_verb] through the outer plating.</span>")
 			if(dismantle_sound)
 				playsound(src, dismantle_sound, 100, 1)
 
-			if(cut_delay<0)
+			if(cut_delay < 0)
 				cut_delay = 0
 
 			if(!do_after(user,cut_delay,src))
@@ -233,22 +266,37 @@
 
 			to_chat(user, "<span class='notice'>You remove the outer plating.</span>")
 			dismantle_wall()
-			user.visible_message("<span class='warning'>The wall was torn open by [user]!</span>")
+			user.visible_message("<span class='warning'>\The [src] was torn open by [user]!</span>")
 			return
 
 	//Reinforced dismantling.
 	else
 		switch(construction_stage)
 			if(6)
-				if (istype(W, /obj/item/weapon/wirecutters))
+
+				if(istype(W, /obj/item/psychic_power/psiblade/master/grand/paramount))
+
+					to_chat(user, "<span class='notice'>You sink \the [W] into the wall and begin trying to rip out the support frame...</span>")
+					playsound(src, 'sound/items/Welder.ogg', 100, 1)
+
+					if(!do_after(user, 60, src))
+						return
+
+					to_chat(user, "<span class='notice'>You tear through the wall's support system and plating!</span>")
+					dismantle_wall(TRUE)
+					user.visible_message("<span class='warning'>The wall was torn open by [user]!</span>")
+					playsound(src, 'sound/items/Welder.ogg', 100, 1)
+
+				else if(isWirecutter(W))
+
 					playsound(src, 'sound/items/Wirecutter.ogg', 100, 1)
 					construction_stage = 5
-					new /obj/item/stack/rods( src )
+					new /obj/item/stack/material/rods( src )
 					to_chat(user, "<span class='notice'>You cut the outer grille.</span>")
 					update_icon()
 					return
 			if(5)
-				if (istype(W, /obj/item/weapon/screwdriver))
+				if(isScrewdriver(W))
 					to_chat(user, "<span class='notice'>You begin removing the support lines.</span>")
 					playsound(src, 'sound/items/Screwdriver.ogg', 100, 1)
 					if(!do_after(user,40,src) || !istype(src, /turf/simulated/wall) || construction_stage != 5)
@@ -257,26 +305,26 @@
 					update_icon()
 					to_chat(user, "<span class='notice'>You remove the support lines.</span>")
 					return
-				else if( istype(W, /obj/item/stack/rods) )
+				else if( istype(W, /obj/item/stack/material/rods) )
 					var/obj/item/stack/O = W
-					if(O.get_amount()>0)
-						O.use(1)
+					if(O.use(1))
 						construction_stage = 6
 						update_icon()
 						to_chat(user, "<span class='notice'>You replace the outer grille.</span>")
 						return
 			if(4)
 				var/cut_cover
-				if(istype(W,/obj/item/weapon/weldingtool))
-					var/obj/item/weapon/weldingtool/WT = W
-					if(!WT.isOn())
-						return
+				if(istype(W,/obj/item/weldingtool))
+					var/obj/item/weldingtool/WT = W
 					if(WT.remove_fuel(0,user))
 						cut_cover=1
 					else
-						to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
 						return
-				else if (istype(W, /obj/item/weapon/pickaxe/plasmacutter))
+				else if (istype(W, /obj/item/gun/energy/plasmacutter) || istype(W, /obj/item/psychic_power/psiblade/master))
+					if(istype(W, /obj/item/gun/energy/plasmacutter))
+						var/obj/item/gun/energy/plasmacutter/cutter = W
+						if(!cutter.slice(user))
+							return
 					cut_cover = 1
 				if(cut_cover)
 					to_chat(user, "<span class='notice'>You begin slicing through the metal cover.</span>")
@@ -288,7 +336,7 @@
 					to_chat(user, "<span class='notice'>You press firmly on the cover, dislodging it.</span>")
 					return
 			if(3)
-				if (istype(W, /obj/item/weapon/crowbar))
+				if(isCrowbar(W))
 					to_chat(user, "<span class='notice'>You struggle to pry off the cover.</span>")
 					playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
 					if(!do_after(user,100,src) || !istype(src, /turf/simulated/wall) || construction_stage != 3)
@@ -298,7 +346,7 @@
 					to_chat(user, "<span class='notice'>You pry off the cover.</span>")
 					return
 			if(2)
-				if (istype(W, /obj/item/weapon/wrench))
+				if(isWrench(W))
 					to_chat(user, "<span class='notice'>You start loosening the anchoring bolts which secure the support rods to their frame.</span>")
 					playsound(src, 'sound/items/Ratchet.ogg', 100, 1)
 					if(!do_after(user,40,src) || !istype(src, /turf/simulated/wall) || construction_stage != 2)
@@ -309,14 +357,17 @@
 					return
 			if(1)
 				var/cut_cover
-				if(istype(W, /obj/item/weapon/weldingtool))
-					var/obj/item/weapon/weldingtool/WT = W
+				if(istype(W, /obj/item/weldingtool))
+					var/obj/item/weldingtool/WT = W
 					if( WT.remove_fuel(0,user) )
 						cut_cover=1
 					else
-						to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
 						return
-				else if(istype(W, /obj/item/weapon/pickaxe/plasmacutter))
+				else if(istype(W, /obj/item/gun/energy/plasmacutter) || istype(W,/obj/item/psychic_power/psiblade/master))
+					if(istype(W, /obj/item/gun/energy/plasmacutter))
+						var/obj/item/gun/energy/plasmacutter/cutter = W
+						if(!cutter.slice(user))
+							return
 					cut_cover = 1
 				if(cut_cover)
 					to_chat(user, "<span class='notice'>You begin slicing through the support rods.</span>")
@@ -325,11 +376,11 @@
 						return
 					construction_stage = 0
 					update_icon()
-					new /obj/item/stack/rods(src)
+					new /obj/item/stack/material/rods(src)
 					to_chat(user, "<span class='notice'>The support rods drop out as you cut them loose from the frame.</span>")
 					return
 			if(0)
-				if(istype(W, /obj/item/weapon/crowbar))
+				if(isCrowbar(W))
 					to_chat(user, "<span class='notice'>You struggle to pry off the outer sheath.</span>")
 					playsound(src, 'sound/items/Crowbar.ogg', 100, 1)
 					if(!do_after(user,100,src) || !istype(src, /turf/simulated/wall) || !user || !W || !T )	return
@@ -343,20 +394,30 @@
 		F.try_build(src)
 		return
 
-	else if(!istype(W,/obj/item/weapon/rcd) && !istype(W, /obj/item/weapon/reagent_containers))
+	else if(!istype(W,/obj/item/rcd) && !istype(W, /obj/item/reagent_containers))
 		if(!W.force)
 			return attack_hand(user)
-		var/dam_threshhold = material.integrity
-		if(reinf_material)
-			dam_threshhold = ceil(max(dam_threshhold,reinf_material.integrity)/2)
-		var/dam_prob = min(100,material.hardness*1.5)
-		if(dam_prob < 100 && W.force > (dam_threshhold/10))
-			playsound(src, hitsound, 80, 1)
-			if(!prob(dam_prob))
-				visible_message("<span class='danger'>\The [user] attacks \the [src] with \the [W] and it [material.destruction_desc]!</span>")
-				dismantle_wall(1)
-			else
-				visible_message("<span class='danger'>\The [user] attacks \the [src] with \the [W]!</span>")
+
+		var/received_damage = W.force
+		if (W.damtype == BRUTE && brute_armor)
+			received_damage /= brute_armor
+		else if (W.damtype == BURN && burn_armor)
+			received_damage /= burn_armor
+		received_damage = round(received_damage)
+
+		if (W.force > force_damage_threshhold && received_damage > 0)
+			playsound(src, hitsound, 50, 1)
+			user.visible_message(
+				SPAN_DANGER("\The [user] attacks \the [src] with \the [W]!"),
+				SPAN_WARNING("You attack \the [src] with \the [W]!"),
+				SPAN_WARNING("You hear the sound of something hitting a wall.")
+			)
+			take_damage(received_damage)
 		else
-			visible_message("<span class='danger'>\The [user] attacks \the [src] with \the [W], but it bounces off!</span>")
+			playsound(src, hitsound, 25, 1)
+			user.visible_message(
+				SPAN_WARNING("\The [user] attacks \the [src] with \the [W], but it bounces off!"),
+				SPAN_WARNING("You attack \the [src] with \the [W], but it bounces off! You need something stronger."),
+				SPAN_WARNING("You hear the sound of something hitting a wall.")
+			)
 		return

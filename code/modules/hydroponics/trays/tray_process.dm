@@ -1,4 +1,4 @@
-/obj/machinery/portable_atmospherics/hydroponics/process()
+/obj/machinery/portable_atmospherics/hydroponics/Process()
 
 	// Handle nearby smoke if any.
 	for(var/obj/effect/effect/smoke/chem/smoke in view(1, src))
@@ -7,6 +7,7 @@
 
 	//Do this even if we're not ready for a plant cycle.
 	process_reagents()
+	var/needs_icon_update = 0
 
 	// Update values every cycle rather than every process() tick.
 	if(force_update)
@@ -28,15 +29,22 @@
 	if (weedlevel >= 10 && prob(10))
 		if(!seed || weedlevel >= seed.get_trait(TRAIT_WEED_TOLERANCE))
 			weed_invasion()
+			if(mechanical)
+				needs_icon_update |= 1
 
 	// If there is no seed data (and hence nothing planted),
 	// or the plant is dead, process nothing further.
 	if(!seed || dead)
-		if(mechanical) update_icon() //Harvesting would fail to set alert icons properly.
+		if(mechanical) 
+			update_icon() //Harvesting would fail to set alert icons properly.
 		return
 
 	// Advance plant age.
-	if(prob(30)) age += 1 * HYDRO_SPEED_MULTIPLIER
+	var/cur_stage = get_overlay_stage()
+	if(prob(30)) 
+		age += 1 * HYDRO_SPEED_MULTIPLIER
+		if(get_overlay_stage() != cur_stage)
+			needs_icon_update |= 1
 
 	//Highly mutable plants have a chance of mutating every tick.
 	if(seed.get_trait(TRAIT_IMMUTABLE) == -1)
@@ -111,7 +119,7 @@
 
 	// Handle life and death.
 	// When the plant dies, weeds thrive and pests die off.
-	check_health()
+	check_health(0)
 
 	// If enough time (in cycles, not ticks) has passed since the plant was harvested, we're ready to harvest again.
 	if((age > seed.get_trait(TRAIT_MATURATION)) && \
@@ -119,14 +127,15 @@
 	 (!harvest && !dead))
 		harvest = 1
 		lastproduce = age
+		needs_icon_update |= 1
 
 	// If we're a vine which is not in a closed tray and is at least half mature, and there's no vine currently on our turf: make one (maybe)
 	if(!closed_system && \
 	 seed.get_trait(TRAIT_SPREAD) == 2 && \
 	 2 * age >= seed.get_trait(TRAIT_MATURATION) && \
-	 !(locate(/obj/effect/plant) in get_turf(src)) && \
+	 !(locate(/obj/effect/vine) in get_turf(src)) && \
 	 prob(2 * seed.get_trait(TRAIT_POTENCY)))
-		new /obj/effect/plant(get_turf(src), seed)
+		new /obj/effect/vine(get_turf(src), seed)
 
 	if(prob(3))  // On each tick, there's a chance the pest population will increase
 		pestlevel += 0.1 * HYDRO_SPEED_MULTIPLIER
@@ -135,5 +144,5 @@
 	if(seed && seed.can_self_harvest && harvest && !closed_system && prob(5))
 		harvest()
 
-	check_health()
+	check_health(needs_icon_update)
 	return

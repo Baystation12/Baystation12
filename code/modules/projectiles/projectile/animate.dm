@@ -3,10 +3,10 @@
 	icon_state = "ice_1"
 	damage = 0
 	damage_type = BURN
-	nodamage = 1
-	check_armour = "energy"
+	nodamage = TRUE
+	damage_flags = 0
 
-/obj/item/projectile/animate/Bump(var/atom/change)
+/obj/item/projectile/animate/Bump(var/atom/change, forced=0)
 	if((istype(change, /obj/item) || istype(change, /obj/structure)) && !is_type_in_list(change, protected_objects))
 		var/obj/O = change
 		new /mob/living/simple_animal/hostile/mimic/(O.loc, O, firer)

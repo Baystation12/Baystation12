@@ -1,12 +1,12 @@
-var/datum/antagonist/wizard/wizards
+GLOBAL_DATUM_INIT(wizards, /datum/antagonist/wizard, new)
 
 /datum/antagonist/wizard
 	id = MODE_WIZARD
-	role_text = "Space Wizard"
-	role_text_plural = "Space Wizards"
+	role_text = ANTAG_WIZARD
+	role_text_plural = ANTAG_WIZARD + "s"
 	landmark_id = "wizard"
 	welcome_text = "You will find a list of available spells in your spell book. Choose your magic arsenal carefully.<br>In your pockets you will find a teleport scroll. Use it as needed."
-	flags = ANTAG_OVERRIDE_JOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_VOTABLE | ANTAG_SET_APPEARANCE
+	flags = ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_VOTABLE | ANTAG_SET_APPEARANCE
 	antaghud_indicator = "hudwizard"
 
 	hard_cap = 1
@@ -16,11 +16,7 @@ var/datum/antagonist/wizard/wizards
 	min_player_age = 18
 
 	faction = "wizard"
-
-
-/datum/antagonist/wizard/New()
-	..()
-	wizards = src
+	base_to_load = /datum/map_template/ruin/antag_spawn/wizard
 
 /datum/antagonist/wizard/create_objectives(var/datum/mind/wizard)
 
@@ -67,41 +63,20 @@ var/datum/antagonist/wizard/wizards
 
 /datum/antagonist/wizard/update_antag_mob(var/datum/mind/wizard)
 	..()
-	wizard.store_memory("<B>Remember:</B> do not forget to prepare your spells.")
-	wizard.current.real_name = "[pick(wizard_first)] [pick(wizard_second)]"
-	wizard.current.name = wizard.current.real_name
+	wizard.StoreMemory("<B>Remember:</B> do not forget to prepare your spells.", /decl/memory_options/system)
+	wizard.current.real_name = "[pick(GLOB.wizard_first)] [pick(GLOB.wizard_second)]"
+	wizard.current.SetName(wizard.current.real_name)
 
 /datum/antagonist/wizard/equip(var/mob/living/carbon/human/wizard_mob)
 
 	if(!..())
 		return 0
 
-	wizard_mob.equip_to_slot_or_del(new /obj/item/device/radio/headset(wizard_mob), slot_l_ear)
-	wizard_mob.equip_to_slot_or_del(new /obj/item/clothing/under/color/lightpurple(wizard_mob), slot_w_uniform)
-	wizard_mob.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(wizard_mob), slot_shoes)
-	wizard_mob.equip_to_slot_or_del(new /obj/item/clothing/suit/wizrobe(wizard_mob), slot_wear_suit)
-	wizard_mob.equip_to_slot_or_del(new /obj/item/clothing/head/wizard(wizard_mob), slot_head)
-	if(wizard_mob.backbag == 2) wizard_mob.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack(wizard_mob), slot_back)
-	if(wizard_mob.backbag == 3) wizard_mob.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel_norm(wizard_mob), slot_back)
-	if(wizard_mob.backbag == 4) wizard_mob.equip_to_slot_or_del(new /obj/item/weapon/storage/backpack/satchel(wizard_mob), slot_back)
-	wizard_mob.equip_to_slot_or_del(new /obj/item/weapon/storage/box(wizard_mob), slot_in_backpack)
-	wizard_mob.equip_to_slot_or_del(new /obj/item/weapon/teleportation_scroll(wizard_mob), slot_r_store)
-	var/obj/item/I = new /obj/item/weapon/spellbook(get_turf(wizard_mob))
-	wizard_mob.put_in_hands(I) //makes sure to at least have it on the ground for the wizard, considering how important it is.
-	wizard_mob.update_icons()
+	var/outfit_type = pick(subtypesof(/decl/hierarchy/outfit/wizard))
+	var/decl/hierarchy/outfit/wizard_outfit = outfit_by_type(outfit_type)
+	wizard_outfit.equip(wizard_mob)
+
 	return 1
-
-/datum/antagonist/wizard/check_victory()
-	var/survivor
-	for(var/datum/mind/player in current_antagonists)
-		if(!player.current || player.current.stat)
-			continue
-		survivor = 1
-		break
-	if(!survivor)
-		feedback_set_details("round_end_result","loss - wizard killed")
-		to_world("<span class='danger'><font size = 3>The [(current_antagonists.len>1)?"[role_text_plural] have":"[role_text] has"] been killed by the crew! The Space Wizards Federation has been taught a lesson they will not soon forget!</font></span>")
-
 
 /datum/antagonist/wizard/print_player_summary()
 	..()
@@ -127,11 +102,11 @@ var/datum/antagonist/wizard/wizards
 		remove_spell(spell_to_remove)
 
 obj/item/clothing
-	var/wizard_garb = 0
+	var/wizard_garb = FALSE
 
 // Does this clothing slot count as wizard garb? (Combines a few checks)
 /proc/is_wiz_garb(var/obj/item/clothing/C)
-	return C && C.wizard_garb
+	return istype(C) && C.wizard_garb
 
 /*Checks if the wizard is wearing the proper attire.
 Made a proc so this is not repeated 14 (or more) times.*/

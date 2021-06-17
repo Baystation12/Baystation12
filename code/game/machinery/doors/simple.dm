@@ -8,7 +8,8 @@
 	hitsound = 'sound/weapons/genhit.ogg'
 	var/datum/lock/lock
 	var/initial_lock_value //for mapping purposes. Basically if this value is set, it sets the lock to this value.
-
+	autoset_access = FALSE // Doesn't even use access
+	pry_mod = 0.1
 
 /obj/machinery/door/unpowered/simple/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	TemperatureAct(exposed_temperature)
@@ -19,12 +20,11 @@
 /obj/machinery/door/unpowered/simple/New(var/newloc, var/material_name, var/locked)
 	..()
 	if(!material_name)
-		material_name = DEFAULT_WALL_MATERIAL
-	material = get_material_by_name(material_name)
+		material_name = MATERIAL_STEEL
+	material = SSmaterials.get_material_by_name(material_name)
 	if(!material)
-		qdel(src)
-		return
-	maxhealth = max(100, material.integrity*10)
+		return INITIALIZE_HINT_QDEL
+	maxhealth = max(100, material.integrity*2)
 	health = maxhealth
 	if(!icon_base)
 		icon_base = material.door_icon_base
@@ -35,13 +35,20 @@
 		locked = initial_lock_value
 	if(locked)
 		lock = new(src,locked)
+	if(material.luminescence)
+		set_light(0.5, 1, material.luminescence, l_color = material.icon_colour)
 
 	if(material.opacity < 0.5)
 		glass = 1
+		alpha = 180
 		set_opacity(0)
-	else
-		set_opacity(1)
+	
+	if(!density)
+		set_opacity(0)
 	update_icon()
+
+/obj/machinery/door/unpowered/simple/c_airblock(turf/other)
+	return FALSE
 
 /obj/machinery/door/unpowered/simple/requiresID()
 	return 0
@@ -58,7 +65,8 @@
 		//cap projectile damage so that there's still a minimum number of hits required to break the door
 		take_damage(min(damage, 100))
 
-/obj/machinery/door/unpowered/simple/update_icon()
+/obj/machinery/door/unpowered/simple/on_update_icon()
+	update_dir()
 	if(density)
 		icon_state = "[icon_base]"
 	else
@@ -79,6 +87,14 @@
 /obj/machinery/door/unpowered/simple/close(var/forced = 0)
 	if(!can_close(forced))
 		return
+	
+	// If the door is blocked, don't close
+	for(var/turf/A in locs)
+		var/turf/T = A
+		var/obstruction = T.get_obstruction()
+		if (obstruction)
+			return
+	
 	playsound(src.loc, material.dooropen_noise, 100, 1)
 	..()
 
@@ -88,9 +104,10 @@
 	playsound(src.loc, material.dooropen_noise, 100, 1)
 	..()
 
-/obj/machinery/door/unpowered/simple/set_broken()
+/obj/machinery/door/unpowered/simple/set_broken(var/new_state, var/cause = MACHINE_BROKEN_GENERIC)
 	..()
-	deconstruct(null)
+	if(new_state)
+		deconstruct(null)
 
 /obj/machinery/door/unpowered/simple/deconstruct(mob/user, moved = FALSE)
 	material.place_dismantled_product(get_turf(src))
@@ -106,10 +123,10 @@
 /obj/machinery/door/unpowered/simple/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			set_broken()
+			set_broken(TRUE)
 		if(2.0)
 			if(prob(25))
-				set_broken()
+				set_broken(TRUE)
 			else
 				take_damage(300)
 		if(3.0)
@@ -118,20 +135,20 @@
 
 
 /obj/machinery/door/unpowered/simple/attackby(obj/item/I as obj, mob/user as mob)
-	src.add_fingerprint(user)
-	if(istype(I, /obj/item/weapon/key) && lock)
-		var/obj/item/weapon/key/K = I
+	src.add_fingerprint(user, 0, I)
+	if(istype(I, /obj/item/key) && lock)
+		var/obj/item/key/K = I
 		if(!lock.toggle(I))
 			to_chat(user, "<span class='warning'>\The [K] does not fit in the lock!</span>")
 		return
 	if(lock && lock.pick_lock(I,user))
 		return
 
-	if(istype(I,/obj/item/weapon/material/lock_construct))
+	if(istype(I,/obj/item/material/lock_construct))
 		if(lock)
 			to_chat(user, "<span class='warning'>\The [src] already has a lock.</span>")
 		else
-			var/obj/item/weapon/material/lock_construct/L = I
+			var/obj/item/material/lock_construct/L = I
 			lock = L.create_lock(src,user)
 		return
 
@@ -156,18 +173,7 @@
 			health = between(health, health + used*DOOR_REPAIR_AMOUNT, maxhealth)
 		return
 
-	//psa to whoever coded this, there are plenty of objects that need to call attack() on doors without bludgeoning them.
-	if(src.density && istype(I, /obj/item/weapon) && user.a_intent == I_HURT && !istype(I, /obj/item/weapon/card))
-		var/obj/item/weapon/W = I
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		if(W.damtype == BRUTE || W.damtype == BURN)
-			user.do_attack_animation(src)
-			if(W.force < min_force)
-				user.visible_message("<span class='danger'>\The [user] hits \the [src] with \the [W] with no visible effect.</span>")
-			else
-				user.visible_message("<span class='danger'>\The [user] forcefully strikes \the [src] with \the [W]!</span>")
-				playsound(src.loc, hitsound, 100, 1)
-				take_damage(W.force)
+	if (check_force(I, user))
 		return
 
 	if(src.operating) return
@@ -184,8 +190,9 @@
 
 	return
 
-/obj/machinery/door/unpowered/simple/examine(mob/user)
-	if(..(user,1) && lock)
+/obj/machinery/door/unpowered/simple/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 1 && lock)
 		to_chat(user, "<span class='notice'>It appears to have a lock.</span>")
 
 /obj/machinery/door/unpowered/simple/can_open()
@@ -194,47 +201,53 @@
 	return 1
 
 /obj/machinery/door/unpowered/simple/Destroy()
-	qdel(lock)
-	lock = null
-	..()
+	QDEL_NULL(lock)
+	return ..()
 
 /obj/machinery/door/unpowered/simple/iron/New(var/newloc,var/material_name,var/complexity)
-	..(newloc, "iron", complexity)
+	..(newloc, MATERIAL_IRON, complexity)
 
 /obj/machinery/door/unpowered/simple/silver/New(var/newloc,var/material_name,var/complexity)
-	..(newloc, "silver", complexity)
+	..(newloc, MATERIAL_SILVER, complexity)
 
 /obj/machinery/door/unpowered/simple/gold/New(var/newloc,var/material_name,var/complexity)
-	..(newloc, "gold", complexity)
+	..(newloc, MATERIAL_GOLD, complexity)
 
 /obj/machinery/door/unpowered/simple/uranium/New(var/newloc,var/material_name,var/complexity)
-	..(newloc, "uranium", complexity)
+	..(newloc, MATERIAL_URANIUM, complexity)
 
 /obj/machinery/door/unpowered/simple/sandstone/New(var/newloc,var/material_name,var/complexity)
-	..(newloc, "sandstone", complexity)
+	..(newloc, MATERIAL_SANDSTONE, complexity)
 
 /obj/machinery/door/unpowered/simple/diamond/New(var/newloc,var/material_name,var/complexity)
-	..(newloc, "diamond", complexity)
-
-/obj/machinery/door/unpowered/simple/wood
-	icon_state = "wood"
-	color = "#824B28"
+	..(newloc, MATERIAL_DIAMOND, complexity)
 
 /obj/machinery/door/unpowered/simple/wood/New(var/newloc,var/material_name,var/complexity)
-	..(newloc, "wood", complexity)
+	..(newloc, MATERIAL_WOOD, complexity)
 
-/obj/machinery/door/unpowered/simple/wood/saloon
-	icon_base = "saloon"
-	autoclose = 1
-	normalspeed = 0
+/obj/machinery/door/unpowered/simple/mahogany/New(var/newloc,var/material_name,var/complexity)
+	..(newloc, MATERIAL_MAHOGANY, complexity)
 
-/obj/machinery/door/unpowered/simple/wood/saloon/New(var/newloc,var/material_name,var/complexity)
-	..(newloc, "wood", complexity)
-	glass = 1
-	set_opacity(0)
+/obj/machinery/door/unpowered/simple/maple/New(var/newloc,var/material_name,var/complexity)
+	..(newloc, MATERIAL_MAPLE, complexity)
 
-/obj/machinery/door/unpowered/simple/resin/New(var/newloc,var/material_name,var/complexity)
-	..(newloc, "resin", complexity)
+/obj/machinery/door/unpowered/simple/ebony/New(var/newloc,var/material_name,var/complexity)
+	..(newloc, MATERIAL_EBONY, complexity)
+
+/obj/machinery/door/unpowered/simple/walnut/New(var/newloc,var/material_name,var/complexity)
+	..(newloc, MATERIAL_WALNUT, complexity)
+
+/obj/machinery/door/unpowered/simple/plastic/New(var/newloc,var/material_name,var/complexity)
+	..(newloc, MATERIAL_PLASTIC, complexity)
+
+/obj/machinery/door/unpowered/simple/plastic/open
+	density = FALSE
+
+/obj/machinery/door/unpowered/simple/glass/New(var/newloc,var/material_name,var/complexity)
+	..(newloc, MATERIAL_GLASS, complexity)
 
 /obj/machinery/door/unpowered/simple/cult/New(var/newloc,var/material_name,var/complexity)
-	..(newloc, "cult", complexity)
+	..(newloc, MATERIAL_CULT, complexity)
+
+/obj/machinery/door/unpowered/simple/supermatter/New(var/newloc,var/material_name,var/complexity)
+	..(newloc, MATERIAL_SUPERMATTER, complexity)

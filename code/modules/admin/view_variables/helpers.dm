@@ -8,16 +8,16 @@
 	return {"
 		<a href='?_src_=vars;datumedit=\ref[src];varnameedit=name'><b>[src]</b></a>
 		<br><font size='1'>
-		<a href='?_src_=vars;rotatedatum=\ref[src];rotatedir=left'><<</a>
+		<a href='?_src_=vars;rotatedatum=\ref[src];rotatedir=left'><=</a>
 		<a href='?_src_=vars;datumedit=\ref[src];varnameedit=dir'>[dir2text(dir)]</a>
-		<a href='?_src_=vars;rotatedatum=\ref[src];rotatedir=right'>>></a>
+		<a href='?_src_=vars;rotatedatum=\ref[src];rotatedir=right'>=></a>
 		</font>
 		"}
 
 /mob/living/get_view_variables_header()
 	return {"
 		<a href='?_src_=vars;rename=\ref[src]'><b>[src]</b></a><font size='1'>
-		<br><a href='?_src_=vars;rotatedatum=\ref[src];rotatedir=left'><<</a> <a href='?_src_=vars;datumedit=\ref[src];varnameedit=dir'>[dir2text(dir)]</a> <a href='?_src_=vars;rotatedatum=\ref[src];rotatedir=right'>>></a>
+		<br><a href='?_src_=vars;rotatedatum=\ref[src];rotatedir=left'><=</a> <a href='?_src_=vars;datumedit=\ref[src];varnameedit=dir'>[dir2text(dir)]</a> <a href='?_src_=vars;rotatedatum=\ref[src];rotatedir=right'>=></a>
 		<br><a href='?_src_=vars;datumedit=\ref[src];varnameedit=ckey'>[ckey ? ckey : "No ckey"]</a> / <a href='?_src_=vars;datumedit=\ref[src];varnameedit=real_name'>[real_name ? real_name : "No real name"]</a>
 		<br>
 		BRUTE:<a href='?_src_=vars;mobToDamage=\ref[src];adjustDamage=brute'>[getBruteLoss()]</a>
@@ -38,8 +38,6 @@
 		<option value='?_src_=vars;mob_player_panel=\ref[src]'>Show player panel</option>
 		<option>---</option>
 		<option value='?_src_=vars;give_spell=\ref[src]'>Give Spell</option>
-		<option value='?_src_=vars;give_disease2=\ref[src]'>Give Disease</option>
-		<option value='?_src_=vars;give_disease=\ref[src]'>Give TG-style Disease</option>
 		<option value='?_src_=vars;godmode=\ref[src]'>Toggle Godmode</option>
 		<option value='?_src_=vars;build_mode=\ref[src]'>Toggle Build Mode</option>
 
@@ -63,6 +61,13 @@
 		<option value='?_src_=vars;gib=\ref[src]'>Gib</option>
 		<option value='?_src_=vars;explode=\ref[src]'>Trigger explosion</option>
 		<option value='?_src_=vars;emp=\ref[src]'>Trigger EM pulse</option>
+		"}
+
+/mob/living/get_view_variables_options()
+	return ..() + {"
+		<option value='?_src_=vars;addaura=\ref[src]'>Add Aura</option>
+		<option value='?_src_=vars;removeaura=\ref[src]'>Remove Aura</option>
+		<option value='?_src_=vars;debug_mob_ai=\ref[src]'>Toggle AI Debug Output</option>
 		"}
 
 /mob/living/carbon/human/get_view_variables_options()
@@ -104,18 +109,20 @@
 /datum/proc/get_initial_variable_value(varname)
 	return initial(vars[varname])
 
-/datum/proc/make_view_variables_variable_entry(varname, value)
+/datum/proc/make_view_variables_variable_entry(var/varname, var/value, var/hide_watch = 0)
 	return {"
 			(<a href='?_src_=vars;datumedit=\ref[src];varnameedit=[varname]'>E</a>)
 			(<a href='?_src_=vars;datumchange=\ref[src];varnamechange=[varname]'>C</a>)
 			(<a href='?_src_=vars;datummass=\ref[src];varnamemass=[varname]'>M</a>)
+			[hide_watch ? "" : "(<a href='?_src_=vars;datumwatch=\ref[src];varnamewatch=[varname]'>W</a>)"]
 			"}
 
 // No mass editing of clients
-/client/make_view_variables_variable_entry(varname, value)
+/client/make_view_variables_variable_entry(var/varname, var/value, var/hide_watch = 0)
 	return {"
 			(<a href='?_src_=vars;datumedit=\ref[src];varnameedit=[varname]'>E</a>)
 			(<a href='?_src_=vars;datumchange=\ref[src];varnamechange=[varname]'>C</a>)
+			[hide_watch ? "" : "(<a href='?_src_=vars;datumwatch=\ref[src];varnamewatch=[varname]'>W</a>)"]
 			"}
 
 // These methods are all procs and don't use stored lists to avoid VV exploits
@@ -139,14 +146,14 @@
 	return ..() + list("bound_x", "bound_y", "bound_height", "bound_width", "bounds", "step_x", "step_y", "step_size")
 
 /client/VV_static()
-	return ..() + list("holder")
+	return ..() + list("holder", "prefs")
 
 /datum/admins/VV_static()
 	return vars
 
 // The following vars require R_DEBUG to edit
 /datum/proc/VV_locked()
-	return list("vars", "virus", "viruses", "cuffed")
+	return list("vars", "cuffed")
 
 /client/VV_locked()
 	return list("vars", "mob")
@@ -191,7 +198,5 @@
 
 /proc/forbidden_varedit_object_types()
  	return list(
-		/datum/admins,						//Admins editing their own admin-power object? Yup, sounds like a good idea.,
-		/obj/machinery/blackbox_recorder,	//Prevents people messing with feedback gathering,
-		/datum/feedback_variable			//Prevents people messing with feedback gathering
+		/datum/admins						//Admins editing their own admin-power object? Yup, sounds like a good idea.
 	)

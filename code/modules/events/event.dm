@@ -43,8 +43,10 @@
 	var/penalty = 100 // A simple penalty gives admins the ability to increase the weight to again be part of the random event selection
 
 /datum/event_meta/extended_penalty/get_weight()
-	return ..() - (ticker && istype(ticker.mode, /datum/game_mode/extended) ? penalty : 0)
+	return ..() - (istype(SSticker.mode, /datum/game_mode/extended) ? penalty : 0)
 
+/datum/event_meta/no_overmap/get_weight() //these events have overmap equivalents, and shouldn't fire randomly if overmap is used
+	return GLOB.using_map.use_overmap ? 0 : ..()
 
 /datum/event	//NOTE: Times are measured in master controller ticks!
 	var/startWhen		= 0	//When in the lifetime to call start().
@@ -57,6 +59,8 @@
 	var/startedAt		= 0 //When this event started.
 	var/endedAt			= 0 //When this event ended.
 	var/datum/event_meta/event_meta = null
+	var/list/affecting_z
+	var/has_skybox_image
 
 /datum/event/nothing
 
@@ -71,6 +75,8 @@
 //Allows you to start before announcing or vice versa.
 //Only called once.
 /datum/event/proc/start()
+	if(has_skybox_image)
+		SSskybox.rebuild_skyboxes(affecting_z)
 	return
 
 //Called when the tick is equal to the announceWhen variable.
@@ -93,6 +99,8 @@
 //For example: if(activeFor == myOwnVariable + 30) doStuff()
 //Only called once.
 /datum/event/proc/end()
+	if(has_skybox_image)
+		SSskybox.rebuild_skyboxes(affecting_z)
 	return
 
 //Returns the latest point of event processing.
@@ -123,19 +131,21 @@
 	activeFor++
 
 //Called when start(), announce() and end() has all been called.
-/datum/event/proc/kill()
+/datum/event/proc/kill(reroll = FALSE)
 	// If this event was forcefully killed run end() for individual cleanup
 	if(isRunning)
 		isRunning = 0
 		end()
 
 	endedAt = world.time
-	event_manager.active_events -= src
-	event_manager.event_complete(src)
+	SSevent.event_complete(src)
+
+//Called during building of skybox to get overlays
+/datum/event/proc/get_skybox_image()
 
 /datum/event/New(var/datum/event_meta/EM)
 	// event needs to be responsible for this, as stuff like APLUs currently make their own events for curious reasons
-	event_manager.active_events += src
+	SSevent.active_events += src
 
 	event_meta = EM
 	severity = event_meta.severity
@@ -144,5 +154,15 @@
 
 	startedAt = world.time
 
+	if(!affecting_z)
+		affecting_z = GLOB.using_map.station_levels
+
 	setup()
 	..()
+
+/datum/event/proc/location_name()
+	if(!GLOB.using_map.use_overmap)
+		return station_name()
+
+	var/obj/effect/overmap/visitable/O = map_sectors["[pick(affecting_z)]"]
+	return O ? O.name : "Unknown Location"

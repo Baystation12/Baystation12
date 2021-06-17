@@ -3,7 +3,7 @@
 
 	// see login.dm
 	if(my_client)
-		my_client.screen -= lobby_image
+		GLOB.using_map.hide_titlescreen(my_client)
 		my_client = null
 
 	..()

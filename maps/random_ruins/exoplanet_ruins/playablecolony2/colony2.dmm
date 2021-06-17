@@ -1,0 +1,3607 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/obj/effect/landmark/clear,
+/obj/effect/submap_landmark/joinable_submap/colony2,
+/turf/template_noop,
+/area/template_noop)
+"ab" = (
+/obj/machinery/atmospherics/pipe/simple/visible/red{
+	dir = 4;
+	icon_state = "intact"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/plating,
+/area/map_template/colony2/engineering)
+"an" = (
+/obj/machinery/light/spot{
+	dir = 1
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"aB" = (
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"aK" = (
+/obj/machinery/atmospherics/unary/vent_pump/on,
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/effect/floor_decal/corner_steel_grid/diagonal,
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/colony2/ship)
+"aL" = (
+/obj/effect/paint/ocean,
+/obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/blast/regular{
+	id_tag = "colony2";
+	name = "Window Blast Shutter"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/colony2/ship)
+"aN" = (
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 6
+	},
+/obj/item/device/radio/intercom/map_preset/playablecolony2{
+	dir = 8;
+	pixel_x = 21
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/colony2/Hallway)
+"aZ" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/civilian,
+/turf/simulated/floor/tiled/freezer,
+/area/map_template/colony2/ship)
+"bh" = (
+/obj/effect/paint/ocean,
+/obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/blast/regular{
+	dir = 4;
+	id_tag = "colony2";
+	name = "Window Blast Shutter"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/colony2/ship)
+"bt" = (
+/obj/machinery/atmospherics/pipe/manifold4w/visible/red,
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/airless,
+/area/map_template/colony2/external)
+"bE" = (
+/obj/effect/paint/ocean,
+/obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/blast/regular{
+	dir = 4;
+	id_tag = "colony2";
+	name = "Window Blast Shutter"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/colony2/storage)
+"bV" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/manifold/visible/scrubbers{
+	dir = 8
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/plating,
+/area/map_template/colony2/Hallway)
+"ci" = (
+/obj/effect/floor_decal/corner_steel_grid/diagonal{
+	dir = 4
+	},
+/obj/machinery/firealarm{
+	dir = 4;
+	pixel_x = 25
+	},
+/obj/machinery/recharge_station,
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/colony2/ship)
+"cq" = (
+/obj/structure/closet/secure_closet/freezer/fridge,
+/obj/item/storage/box/snack/tastybread,
+/obj/item/storage/box/glasses,
+/obj/effect/floor_decal/corner/paleblue/mono,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/commons)
+"cr" = (
+/obj/effect/paint/ocean,
+/turf/simulated/wall/r_wall,
+/area/map_template/colony2/commons)
+"cw" = (
+/obj/machinery/atmospherics/unary/tank/carbon_dioxide{
+	dir = 4;
+	start_pressure = 120
+	},
+/obj/machinery/light/spot{
+	dir = 8
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"cz" = (
+/obj/machinery/portable_atmospherics/hydroponics,
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/item/device/radio/intercom/map_preset/playablecolony2{
+	pixel_y = 21
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/commons)
+"cD" = (
+/obj/effect/wallframe_spawn/reinforced,
+/obj/effect/paint/ocean,
+/obj/machinery/door/blast/regular{
+	id_tag = "colony2";
+	name = "Window Blast Shutter"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/colony2/atmospherics)
+"cQ" = (
+/obj/effect/catwalk_plated/dark,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/colony2/storage)
+"cX" = (
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/structure/table/steel_reinforced,
+/obj/item/storage/box/donkpockets,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/commons)
+"de" = (
+/obj/machinery/computer/ship/helm{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner_steel_grid/diagonal,
+/obj/machinery/button/blast_door{
+	id_tag = "colony2";
+	name = "Window Lockdown Blast Door Control";
+	pixel_y = 31
+	},
+/obj/machinery/button/blast_door{
+	id_tag = "colony2atmos";
+	name = "Exterior Lockdown Blast Door Control";
+	pixel_y = 22
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/colony2/ship)
+"dh" = (
+/obj/structure/bed/chair/shuttle/white{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner_steel_grid/diagonal{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/colony2/ship)
+"dj" = (
+/obj/effect/floor_decal/corner_steel_grid/diagonal{
+	dir = 4
+	},
+/obj/machinery/computer/ship/engines{
+	dir = 8
+	},
+/obj/item/device/radio/intercom/map_preset/playablecolony2{
+	pixel_y = 21
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/colony2/ship)
+"dn" = (
+/obj/machinery/atmospherics/portables_connector,
+/obj/machinery/portable_atmospherics/canister/air,
+/obj/effect/floor_decal/corner/paleblue/mono,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/atmospherics)
+"dD" = (
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/machinery/portable_atmospherics/canister/air/airlock,
+/obj/machinery/atmospherics/portables_connector{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/atmospherics)
+"dM" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/colony2/ship)
+"dY" = (
+/obj/machinery/atmospherics/pipe/simple/visible/red{
+	dir = 6;
+	icon_state = "intact"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/plating,
+/area/map_template/colony2/atmospherics)
+"eg" = (
+/obj/structure/bed/padded,
+/obj/item/bedsheet/green,
+/obj/structure/curtain/open/bed,
+/obj/effect/submap_landmark/spawnpoint/colonist_spawn2,
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/colony2/ship)
+"er" = (
+/obj/machinery/atmospherics/pipe/simple/visible/red{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/dark,
+/obj/effect/floor_decal/industrial/warning,
+/turf/simulated/floor/plating,
+/area/map_template/colony2/Hallway)
+"eA" = (
+/obj/structure/cable{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/machinery/power/apc{
+	dir = 1;
+	locked = 0;
+	name = "north bump";
+	pixel_y = 24;
+	req_access = newlist()
+	},
+/obj/structure/closet/crate/med_crate/oxyloss,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/storage)
+"eJ" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/structure/hygiene/sink{
+	dir = 1;
+	pixel_y = 16
+	},
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/colony2/commons)
+"eR" = (
+/obj/effect/floor_decal/corner_steel_grid/diagonal{
+	dir = 4
+	},
+/obj/structure/closet/cabinet,
+/obj/machinery/recharger/wallcharger{
+	pixel_y = 28
+	},
+/obj/random/clothing,
+/obj/random/clothing,
+/obj/random/clothing,
+/obj/random/clothing,
+/obj/random/glasses,
+/obj/random/glasses,
+/obj/random/hat,
+/obj/random/hat,
+/obj/random/masks,
+/obj/random/masks,
+/obj/random/gloves,
+/obj/random/gloves,
+/obj/random/shoes,
+/obj/random/shoes,
+/obj/random/accessory,
+/obj/random/accessory,
+/obj/item/crowbar/prybar,
+/obj/item/crowbar/prybar,
+/obj/item/device/radio/map_preset/playablecolony2,
+/obj/item/device/radio/map_preset/playablecolony2,
+/obj/machinery/atmospherics/unary/vent_pump/on,
+/obj/item/device/radio/headset/map_preset/playablecolony2,
+/obj/item/device/radio/headset/map_preset/playablecolony2,
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/colony2/ship)
+"eY" = (
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 9
+	},
+/obj/machinery/alarm/server{
+	dir = 4;
+	locked = 0;
+	pixel_x = -21;
+	req_access = newlist()
+	},
+/obj/item/device/encryptionkey/map_preset/playablecolony2,
+/obj/item/device/encryptionkey/map_preset/playablecolony2,
+/obj/item/device/encryptionkey/map_preset/playablecolony2,
+/obj/item/device/encryptionkey/map_preset/playablecolony2,
+/obj/structure/table/rack,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/colony2/tcomms)
+"fp" = (
+/obj/effect/paint/ocean,
+/obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/blast/regular{
+	dir = 4;
+	id_tag = "colony2";
+	name = "Window Blast Shutter"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/colony2/engineering)
+"fs" = (
+/obj/machinery/atmospherics/pipe/simple/visible/red{
+	dir = 4;
+	icon_state = "intact"
+	},
+/obj/effect/wallframe_spawn/reinforced,
+/obj/effect/paint/ocean,
+/turf/simulated/floor/plating,
+/area/map_template/colony2/atmospherics)
+"fu" = (
+/obj/structure/closet/crate,
+/obj/item/stock_parts/capacitor,
+/obj/item/stock_parts/capacitor,
+/obj/item/stock_parts/capacitor/adv,
+/obj/item/stock_parts/console_screen,
+/obj/item/stock_parts/console_screen,
+/obj/item/stock_parts/matter_bin/super,
+/obj/item/stock_parts/matter_bin,
+/obj/item/stock_parts/micro_laser,
+/obj/item/stock_parts/micro_laser/high,
+/obj/item/stock_parts/scanning_module,
+/obj/item/stock_parts/scanning_module,
+/obj/item/stock_parts/scanning_module/adv,
+/obj/item/stock_parts/smes_coil/weak,
+/obj/item/stock_parts/smes_coil/super_capacity,
+/obj/item/stock_parts/smes_coil/super_capacity,
+/obj/item/stock_parts/smes_coil/super_io,
+/obj/item/stock_parts/smes_coil/super_io,
+/obj/item/stock_parts/smes_coil/weak,
+/obj/item/stock_parts/smes_coil/weak,
+/obj/item/stack/material/tritium/fifty,
+/obj/item/stack/material/tritium/fifty,
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/item/stock_parts/circuitboard/pacman/super,
+/obj/item/stock_parts/circuitboard/pacman/mrs,
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/item/stock_parts/circuitboard/unary_atmos/cooler,
+/obj/item/stock_parts/circuitboard/unary_atmos/heater,
+/obj/item/stock_parts/circuitboard/oxyregenerator,
+/obj/item/stock_parts/circuitboard/biogenerator,
+/obj/machinery/atmospherics/pipe/simple/hidden/red{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/atmospherics)
+"fF" = (
+/obj/structure/bed/padded,
+/obj/item/bedsheet/green,
+/obj/structure/curtain/open/bed,
+/obj/effect/submap_landmark/spawnpoint/colonist_spawn2,
+/obj/item/device/radio/intercom/map_preset/playablecolony2{
+	pixel_y = 21
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/colony2/ship)
+"fQ" = (
+/obj/machinery/sleeper{
+	dir = 2
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/colony2/ship)
+"fT" = (
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/structure/closet/secure_closet/freezer/meat,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/commons)
+"fU" = (
+/obj/structure/closet/crate/freezer,
+/obj/item/storage/firstaid/regular,
+/obj/item/storage/firstaid/stab,
+/obj/item/storage/firstaid/stab,
+/obj/item/storage/firstaid/adv,
+/obj/item/storage/firstaid/adv,
+/obj/item/reagent_containers/ivbag/nanoblood,
+/obj/item/reagent_containers/ivbag/nanoblood,
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/turf/simulated/floor/tiled/white,
+/area/map_template/colony2/ship)
+"gb" = (
+/obj/item/reagent_containers/glass/bucket,
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/structure/closet/crate/hydroponics/prespawned,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/commons)
+"ge" = (
+/obj/structure/hygiene/sink{
+	dir = 1;
+	pixel_y = 16
+	},
+/obj/structure/iv_drip,
+/turf/simulated/floor/tiled/white,
+/area/map_template/colony2/ship)
+"gi" = (
+/obj/effect/catwalk_plated/dark,
+/obj/structure/largecrate/animal/chick,
+/turf/simulated/floor/plating,
+/area/map_template/colony2/storage)
+"gj" = (
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/machinery/seed_extractor,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/commons)
+"gm" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/colony2/ship)
+"gr" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/storage/firstaid/surgery,
+/obj/item/clothing/accessory/stethoscope,
+/obj/item/device/radio/intercom/map_preset/playablecolony2{
+	pixel_y = 21
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/colony2/ship)
+"gw" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/storage/firstaid/adv,
+/obj/item/storage/box/gloves,
+/turf/simulated/floor/tiled/white,
+/area/map_template/colony2/ship)
+"gD" = (
+/obj/machinery/atmospherics/pipe/simple/visible/red{
+	dir = 9;
+	icon_state = "intact"
+	},
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/plating,
+/area/map_template/colony2/atmospherics)
+"gV" = (
+/obj/effect/floor_decal/industrial/loading{
+	dir = 8;
+	icon_state = "loadingarea"
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/computer/mining{
+	pixel_y = 32
+	},
+/turf/simulated/floor/reinforced,
+/area/map_template/colony2/external)
+"hj" = (
+/obj/machinery/atmospherics/pipe/simple/visible/red{
+	dir = 4;
+	icon_state = "intact"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/manifold/visible/scrubbers,
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/plating,
+/area/map_template/colony2/engineering)
+"hN" = (
+/obj/structure/ore_box,
+/obj/item/device/radio/intercom/map_preset/playablecolony2{
+	pixel_y = 21
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"hT" = (
+/obj/effect/catwalk_plated/dark,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/colony2/storage)
+"ib" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner_steel_grid/diagonal,
+/obj/item/device/radio/intercom/map_preset/playablecolony2{
+	default_hailing = 1;
+	dir = 1;
+	pixel_y = -32
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/colony2/ship)
+"io" = (
+/obj/effect/wallframe_spawn/reinforced,
+/obj/effect/paint/ocean,
+/turf/simulated/floor/plating,
+/area/map_template/colony2/commons)
+"iq" = (
+/obj/effect/wallframe_spawn/reinforced,
+/obj/effect/paint/ocean,
+/turf/simulated/floor/plating,
+/area/map_template/colony2/ship)
+"is" = (
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/colony2/commons)
+"iv" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/visible{
+	dir = 6
+	},
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/plating,
+/area/map_template/colony2/atmospherics)
+"iT" = (
+/obj/machinery/light,
+/obj/effect/floor_decal/corner_steel_grid/diagonal{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/colony2/ship)
+"jo" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 1
+	},
+/obj/structure/hygiene/sink{
+	dir = 8;
+	pixel_x = -12
+	},
+/obj/item/storage/mirror{
+	pixel_x = -24
+	},
+/turf/simulated/floor/tiled/freezer,
+/area/map_template/colony2/ship)
+"jq" = (
+/obj/effect/paint/ocean,
+/obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/blast/regular{
+	dir = 4;
+	id_tag = "colony2";
+	name = "Window Blast Shutter"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/colony2/atmospherics)
+"jy" = (
+/obj/machinery/atmospherics/pipe/simple/visible/fuel,
+/obj/item/device/radio/intercom/map_preset/playablecolony2{
+	dir = 8;
+	pixel_x = 21
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"kb" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner_steel_grid/diagonal{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/colony2/ship)
+"ke" = (
+/obj/machinery/door/airlock/external{
+	frequency = 1380;
+	id_tag = "playablecolonymain2_interior_door"
+	},
+/obj/machinery/atmospherics/pipe/manifold/visible{
+	dir = 8
+	},
+/obj/machinery/meter,
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/colony2/external)
+"kf" = (
+/obj/machinery/light/spot{
+	dir = 4
+	},
+/turf/simulated/floor/reinforced,
+/area/map_template/colony2/external)
+"kn" = (
+/obj/machinery/atmospherics/unary/tank/nitrogen{
+	dir = 4
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"lj" = (
+/obj/machinery/fabricator/hacked,
+/obj/machinery/firealarm{
+	dir = 2;
+	pixel_y = 24
+	},
+/obj/effect/floor_decal/corner/paleblue/mono,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/engineering)
+"lm" = (
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 6
+	},
+/obj/effect/paint/ocean,
+/turf/simulated/wall/r_wall,
+/area/map_template/colony2/external)
+"lU" = (
+/obj/effect/paint/ocean,
+/turf/simulated/wall,
+/area/map_template/colony2/atmospherics)
+"lW" = (
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner_steel_grid/diagonal{
+	dir = 4
+	},
+/obj/structure/bed/chair/shuttle/white{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/colony2/ship)
+"lZ" = (
+/obj/machinery/atmospherics/omni/mixer{
+	tag_east = 1;
+	tag_east_con = 0.79;
+	tag_north = 2;
+	tag_south = 1;
+	tag_south_con = 0.21;
+	tag_west = 0;
+	tag_west_con = null
+	},
+/obj/effect/floor_decal/corner/paleblue/mono,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/atmospherics)
+"ni" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1;
+	icon_state = "warning"
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	dir = 1;
+	id_tag = "playablecolonymain2_pump_out_external"
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"nE" = (
+/obj/machinery/atmospherics/pipe/simple/visible/fuel,
+/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{
+	dir = 6
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"nU" = (
+/obj/machinery/atmospherics/pipe/manifold/visible/scrubbers,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/access_button/airlock_interior{
+	frequency = 1380;
+	master_tag = "playablecolonymain2";
+	pixel_x = -22;
+	pixel_y = -20
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
+/obj/effect/catwalk_plated/dark,
+/obj/effect/floor_decal/industrial/warning,
+/obj/machinery/atmospherics/pipe/simple/visible{
+	dir = 10;
+	icon_state = "intact"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/colony2/Hallway)
+"ob" = (
+/obj/effect/paint/ocean,
+/turf/simulated/wall,
+/area/map_template/colony2/engineering)
+"or" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/machinery/telecomms/broadcaster/map_preset/playablecolony2,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/tcomms)
+"oC" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/machinery/telecomms/receiver/map_preset/playablecolony2,
+/obj/item/device/radio/intercom/map_preset/playablecolony2{
+	dir = 8;
+	pixel_x = 21
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/tcomms)
+"oK" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/machinery/vending/engineering{
+	req_access = list()
+	},
+/obj/effect/floor_decal/corner/paleblue/mono,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/engineering)
+"oQ" = (
+/obj/machinery/seed_storage/garden,
+/obj/machinery/firealarm{
+	dir = 2;
+	pixel_y = 24
+	},
+/obj/effect/floor_decal/corner/paleblue/mono,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/commons)
+"oU" = (
+/obj/effect/floor_decal/corner/paleblue,
+/obj/machinery/atmospherics/pipe/simple/visible{
+	dir = 6
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/colony2/atmospherics)
+"pe" = (
+/obj/effect/floor_decal/corner_steel_grid/diagonal{
+	dir = 4
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/colony2/ship)
+"qb" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/civilian,
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/colony2/ship)
+"qf" = (
+/obj/effect/paint/ocean,
+/turf/simulated/wall/r_wall,
+/area/map_template/colony2/storage)
+"qj" = (
+/obj/effect/paint/ocean,
+/turf/simulated/wall,
+/area/map_template/colony2/tcomms)
+"qo" = (
+/obj/structure/closet/crate,
+/obj/item/stack/tile/grass{
+	amount = 25
+	},
+/obj/item/stack/material/steel/fifty,
+/obj/item/stack/material/steel/fifty,
+/obj/item/stack/material/plasteel/ten,
+/obj/item/stack/material/plastic/ten,
+/obj/item/stack/material/ocp/ten,
+/obj/item/stack/material/glass/fifty,
+/obj/item/stack/material/glass/reinforced/fifty,
+/obj/item/stack/material/steel/fifty,
+/obj/item/stack/material/plastic/ten,
+/obj/item/stack/material/glass/fifty,
+/obj/effect/floor_decal/corner/paleblue/mono,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/colony2/engineering)
+"qI" = (
+/obj/machinery/portable_atmospherics/hydroponics,
+/obj/machinery/alarm{
+	dir = 1;
+	locked = 0;
+	pixel_y = -22;
+	req_access = newlist()
+	},
+/obj/effect/floor_decal/corner/paleblue/mono,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/commons)
+"rm" = (
+/obj/structure/bed/chair/shuttle/white{
+	dir = 8
+	},
+/obj/effect/floor_decal/corner_steel_grid/diagonal,
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/colony2/ship)
+"ro" = (
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
+/obj/machinery/atmospherics/pipe/manifold/visible/scrubbers{
+	dir = 1
+	},
+/obj/effect/catwalk_plated/dark,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/colony2/ship)
+"rp" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/firealarm{
+	dir = 8;
+	pixel_x = -24;
+	pixel_y = 0
+	},
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/plating,
+/area/map_template/colony2/Hallway)
+"rr" = (
+/obj/machinery/atmospherics/pipe/simple/visible/scrubbers,
+/obj/machinery/meter,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"rL" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/mineral/processing_unit{
+	input_turf = 8;
+	output_turf = 1
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"rM" = (
+/obj/machinery/conveyor{
+	dir = 1;
+	id = "colonymine2"
+	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/computer/mining{
+	pixel_x = 32
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"rO" = (
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 5
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"so" = (
+/obj/machinery/door/airlock/civilian,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/colony2/ship)
+"sG" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/colony2/engineering)
+"sK" = (
+/obj/machinery/conveyor{
+	dir = 1;
+	id = "colonymine2"
+	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/light/spot{
+	dir = 4
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"sO" = (
+/obj/machinery/atmospherics/pipe/simple/visible/scrubbers,
+/obj/machinery/door/blast/regular{
+	dir = 2;
+	id_tag = "colony2atmos";
+	name = "Atmospheric Pod Blast Shutter"
+	},
+/obj/effect/floor_decal/industrial/hatch,
+/turf/simulated/floor/reinforced,
+/area/map_template/colony2/external)
+"sZ" = (
+/obj/machinery/atmospherics/pipe/simple/visible/red{
+	dir = 4;
+	icon_state = "intact"
+	},
+/obj/machinery/meter,
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/plating,
+/area/map_template/colony2/atmospherics)
+"tb" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8
+	},
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/colony2/Hallway)
+"tu" = (
+/obj/machinery/cryopod{
+	dir = 2
+	},
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/item/device/radio/intercom/map_preset/playablecolony2{
+	pixel_y = 21
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/commons)
+"tT" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/catwalk_plated/dark,
+/obj/machinery/alarm{
+	dir = 4;
+	locked = 0;
+	pixel_x = -21;
+	req_access = newlist()
+	},
+/turf/simulated/floor/plating,
+/area/map_template/colony2/Hallway)
+"tZ" = (
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 6
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"uq" = (
+/obj/machinery/atmospherics/valve,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"ux" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/mineral/unloading_machine{
+	input_turf = 1;
+	output_turf = 4
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"uT" = (
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/colony2/Hallway)
+"vf" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1
+	},
+/obj/machinery/alarm{
+	dir = 8;
+	locked = 0;
+	pixel_x = 25;
+	req_access = newlist()
+	},
+/turf/simulated/floor/tiled/freezer,
+/area/map_template/colony2/ship)
+"vh" = (
+/obj/machinery/door/airlock/external{
+	frequency = 1380;
+	id_tag = "playablecolonymain2_exterior_door";
+	locked = 1
+	},
+/obj/machinery/atmospherics/pipe/manifold/visible{
+	dir = 4
+	},
+/turf/simulated/floor/reinforced,
+/area/map_template/colony2/external)
+"vj" = (
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 4
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"vn" = (
+/obj/effect/paint/ocean,
+/turf/simulated/wall/r_wall,
+/area/map_template/colony2/atmospherics)
+"vO" = (
+/obj/machinery/computer/cryopod{
+	pixel_y = 25
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/colony2/commons)
+"wm" = (
+/obj/structure/cable{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/machinery/power/apc{
+	dir = 1;
+	locked = 0;
+	name = "north bump";
+	pixel_y = 24;
+	req_access = newlist()
+	},
+/obj/item/clamp,
+/obj/item/clamp,
+/obj/item/clamp,
+/obj/structure/closet/crate,
+/obj/item/device/scanner/gas,
+/obj/item/device/scanner/gas,
+/obj/item/device/scanner/gas,
+/obj/item/grenade/chem_grenade/metalfoam,
+/obj/item/grenade/chem_grenade/metalfoam,
+/obj/item/tape_roll,
+/obj/item/tape_roll,
+/obj/item/rpd,
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/machinery/atmospherics/pipe/simple/hidden/red{
+	dir = 4
+	},
+/obj/item/device/paint_sprayer,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/atmospherics)
+"wp" = (
+/obj/structure/cable{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/machinery/power/apc{
+	dir = 4;
+	locked = 0;
+	name = "east bump";
+	pixel_x = 24;
+	req_access = newlist()
+	},
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/red{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/colony2/Hallway)
+"wx" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner_steel_grid/diagonal{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/colony2/ship)
+"xv" = (
+/obj/effect/paint/ocean,
+/turf/simulated/wall,
+/area/map_template/colony2/commons)
+"xx" = (
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/structure/closet/crate/med_crate/trauma,
+/obj/structure/railing/mapped{
+	dir = 8
+	},
+/obj/item/device/radio/intercom/map_preset/playablecolony2{
+	pixel_y = 21
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/storage)
+"xB" = (
+/obj/structure/closet/walllocker{
+	name = "Washing Machine Supplies";
+	pixel_x = 0;
+	pixel_y = 28;
+	pixel_z = 3
+	},
+/obj/item/ironingiron,
+/obj/item/roller/ironingboard,
+/obj/item/soap,
+/obj/item/storage/box/detergent,
+/obj/item/storage/box/detergent,
+/obj/machinery/washing_machine,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/freezer,
+/area/map_template/colony2/ship)
+"yu" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/effect/catwalk_plated/dark,
+/obj/machinery/atmospherics/pipe/simple/visible/red{
+	dir = 4;
+	icon_state = "intact"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/colony2/Hallway)
+"yJ" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/visible/scrubbers,
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/plating,
+/area/map_template/colony2/ship)
+"yO" = (
+/obj/machinery/light/small{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/tiled/freezer,
+/area/map_template/colony2/ship)
+"zd" = (
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 4
+	},
+/obj/machinery/meter,
+/turf/simulated/floor/reinforced,
+/area/map_template/colony2/external)
+"zk" = (
+/obj/structure/railing/mapped,
+/obj/structure/railing/mapped{
+	dir = 4
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"zv" = (
+/obj/effect/catwalk_plated/dark,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/colony2/commons)
+"zZ" = (
+/obj/machinery/atmospherics/pipe/manifold/visible/red,
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/airless,
+/area/map_template/colony2/external)
+"Af" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/structure/closet/crate/med_crate/burn,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/storage)
+"Ak" = (
+/obj/machinery/atmospherics/unary/engine{
+	dir = 1
+	},
+/turf/simulated/floor/reinforced,
+/area/map_template/colony2/external)
+"Ap" = (
+/obj/machinery/cryopod{
+	dir = 2
+	},
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/paleblue/mono,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/commons)
+"AE" = (
+/obj/effect/paint/ocean,
+/turf/simulated/wall/r_wall,
+/area/map_template/colony2/engineering)
+"AK" = (
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/structure/table/steel_reinforced,
+/obj/machinery/microwave,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/commons)
+"AS" = (
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/plating,
+/area/map_template/colony2/Hallway)
+"AU" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/catwalk_plated/dark,
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/machinery/atmospherics/pipe/manifold/visible/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/map_template/colony2/Hallway)
+"Bc" = (
+/obj/structure/closet/crate/freezer/rations,
+/obj/item/storage/mre/random,
+/obj/item/storage/mre/random,
+/obj/item/storage/mre/random,
+/obj/item/storage/mre/random,
+/obj/item/storage/mre/random,
+/obj/effect/floor_decal/corner/paleblue/mono,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/commons)
+"Bf" = (
+/obj/machinery/atmospherics/pipe/simple/visible/red{
+	dir = 10;
+	icon_state = "intact"
+	},
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/plating,
+/area/map_template/colony2/engineering)
+"Bk" = (
+/obj/effect/floor_decal/corner_steel_grid/diagonal{
+	dir = 4
+	},
+/obj/structure/closet/cabinet,
+/obj/machinery/recharger/wallcharger{
+	pixel_y = 28
+	},
+/obj/random/clothing,
+/obj/random/clothing,
+/obj/random/clothing,
+/obj/random/clothing,
+/obj/random/glasses,
+/obj/random/glasses,
+/obj/random/hat,
+/obj/random/hat,
+/obj/random/masks,
+/obj/random/masks,
+/obj/random/gloves,
+/obj/random/gloves,
+/obj/random/shoes,
+/obj/random/shoes,
+/obj/random/accessory,
+/obj/random/accessory,
+/obj/item/crowbar/prybar,
+/obj/item/crowbar/prybar,
+/obj/item/device/radio/map_preset/playablecolony2,
+/obj/item/device/radio/map_preset/playablecolony2,
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/item/device/radio/headset/map_preset/playablecolony2,
+/obj/item/device/radio/headset/map_preset/playablecolony2,
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/colony2/ship)
+"BI" = (
+/obj/machinery/atmospherics/binary/pump,
+/obj/effect/floor_decal/corner/paleblue/mono,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/engineering)
+"BR" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/mining/brace{
+	dir = 8
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"BU" = (
+/obj/effect/catwalk_plated/dark,
+/obj/structure/railing/mapped{
+	dir = 8
+	},
+/turf/simulated/floor/plating,
+/area/map_template/colony2/storage)
+"BZ" = (
+/turf/simulated/floor/reinforced,
+/area/map_template/colony2/external)
+"Ch" = (
+/obj/machinery/portable_atmospherics/powered/scrubber,
+/obj/machinery/atmospherics/portables_connector,
+/obj/structure/cable{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/machinery/power/apc{
+	dir = 1;
+	locked = 0;
+	name = "north bump";
+	pixel_y = 24;
+	req_access = newlist()
+	},
+/obj/effect/floor_decal/corner/paleblue/mono,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/engineering)
+"Ci" = (
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 10
+	},
+/obj/machinery/meter,
+/obj/machinery/light_switch{
+	pixel_x = 22
+	},
+/obj/machinery/atmospherics/pipe/manifold/visible{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/colony2/atmospherics)
+"Cr" = (
+/obj/machinery/door/airlock/civilian,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/colony2/storage)
+"Cu" = (
+/obj/machinery/conveyor_switch{
+	id = "colonymine2"
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/railing/mapped{
+	dir = 4
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"CA" = (
+/obj/machinery/alarm{
+	dir = 8;
+	locked = 0;
+	pixel_x = 25;
+	req_access = newlist()
+	},
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/machinery/atmospherics/valve/open,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/engineering)
+"CJ" = (
+/obj/machinery/door/airlock/civilian,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/colony2/commons)
+"CQ" = (
+/turf/simulated/floor/tiled/white,
+/area/map_template/colony2/ship)
+"Dd" = (
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/effect/floor_decal/corner_steel_grid/diagonal,
+/obj/machinery/computer/air_control{
+	dir = 4;
+	name = "Atmospheric Sensors";
+	sensor_tag = "Halifax_out"
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/colony2/ship)
+"Dv" = (
+/obj/machinery/alarm{
+	dir = 4;
+	locked = 0;
+	pixel_x = -21;
+	req_access = newlist()
+	},
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/structure/largecrate/animal/cow,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/storage)
+"Dw" = (
+/obj/machinery/atmospherics/unary/tank/carbon_dioxide{
+	dir = 4;
+	start_pressure = 120
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"DD" = (
+/obj/machinery/light,
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/structure/largecrate/animal/cow,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/storage)
+"DG" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/machinery/suit_cycler{
+	name = "Colonial suit cycler";
+	req_access = list()
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/engineering)
+"DH" = (
+/obj/machinery/atmospherics/binary/pump{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"DJ" = (
+/obj/machinery/atmospherics/pipe/manifold4w/visible/blue,
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/airless,
+/area/map_template/colony2/external)
+"DQ" = (
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/structure/largecrate/animal/goose,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/storage)
+"DR" = (
+/obj/structure/closet/crate,
+/obj/item/gun/projectile/shotgun/pump{
+	desc = "The mass-produced W-T Remmington 29x shotgun is a favourite of police and security forces on many worlds. Useful for sweeping alleys. Someone has marked it as property of 'Vel-Rana', with one kill mark next to it."
+	},
+/obj/item/storage/box/ammo/shotgunammo,
+/obj/item/storage/box/ammo/shotgunshells,
+/obj/item/gun/energy/gun/small,
+/obj/item/gun/energy/gun/small,
+/obj/item/gun/energy/gun/small,
+/obj/item/gun/energy/gun/small,
+/obj/item/storage/box/ammo/flashshells,
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/item/gun/energy/gun,
+/obj/structure/railing/mapped{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/storage)
+"En" = (
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/structure/closet/crate/solar,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/storage)
+"Eo" = (
+/obj/effect/catwalk_plated/dark,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/colony2/commons)
+"Et" = (
+/obj/structure/table/steel_reinforced,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/recharger,
+/obj/item/device/flashlight/lamp/floodlamp,
+/obj/machinery/firealarm{
+	dir = 2;
+	pixel_y = 24
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"ED" = (
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/structure/closet/crate/solar_assembly,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/storage)
+"EN" = (
+/obj/machinery/optable,
+/obj/machinery/alarm{
+	dir = 8;
+	locked = 0;
+	pixel_x = 25;
+	req_access = newlist()
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/colony2/ship)
+"EP" = (
+/obj/machinery/atmospherics/pipe/simple/visible/universal,
+/obj/machinery/door/blast/regular{
+	dir = 2;
+	id_tag = "colony2atmos";
+	name = "Atmospheric Pod Blast Shutter"
+	},
+/obj/effect/floor_decal/industrial/hatch,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"Fm" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1
+	},
+/obj/machinery/light_switch{
+	pixel_x = 22
+	},
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/structure/closet/firecloset,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/storage)
+"Fn" = (
+/obj/machinery/alarm{
+	dir = 4;
+	locked = 0;
+	pixel_x = -21;
+	req_access = newlist()
+	},
+/obj/structure/reagent_dispensers/fueltank,
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/machinery/atmospherics/valve/open,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/atmospherics)
+"Fq" = (
+/obj/item/stool/bar/padded,
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1
+	},
+/obj/machinery/light_switch{
+	pixel_x = -22
+	},
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/colony2/commons)
+"FI" = (
+/obj/structure/reagent_dispensers/watertank,
+/obj/effect/floor_decal/corner/paleblue/mono,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/commons)
+"Gh" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/conveyor{
+	dir = 4;
+	id = "colonymine2"
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"Gq" = (
+/obj/machinery/door/blast/regular{
+	dir = 4;
+	id_tag = "colony2atmos";
+	name = "Atmospheric Pod Blast Shutter"
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/effect/floor_decal/industrial/loading{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/hatch,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"Gt" = (
+/obj/effect/floor_decal/industrial/loading,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/ore_box,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"GS" = (
+/obj/structure/table/steel_reinforced,
+/obj/structure/cable,
+/obj/machinery/power/apc{
+	dir = 2;
+	locked = 0;
+	name = "south bump";
+	operating = 1;
+	pixel_y = -28;
+	req_access = list()
+	},
+/obj/effect/floor_decal/corner/paleblue/mono,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/commons)
+"Hb" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/visible{
+	dir = 10;
+	icon_state = "intact"
+	},
+/obj/machinery/door/airlock/external{
+	frequency = 1380;
+	id_tag = "playablecolonymain2_interior_door"
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/colony2/external)
+"Hq" = (
+/obj/machinery/atmospherics/pipe/simple/visible/supply,
+/obj/machinery/atmospherics/pipe/manifold/visible/fuel,
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/airless,
+/area/map_template/colony2/external)
+"Hw" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 1
+	},
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/plating,
+/area/map_template/colony2/atmospherics)
+"HD" = (
+/obj/machinery/atmospherics/unary/tank/carbon_dioxide{
+	dir = 8;
+	start_pressure = 120
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"HK" = (
+/obj/machinery/atmospherics/pipe/simple/visible/supply,
+/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
+	dir = 1
+	},
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/airless,
+/area/map_template/colony2/external)
+"HQ" = (
+/obj/structure/table/rack,
+/obj/item/stack/material/rods/fifty,
+/obj/item/stack/material/rods/fifty,
+/obj/item/pickaxe,
+/obj/item/pickaxe,
+/obj/item/shovel,
+/obj/item/shovel,
+/obj/item/storage/ore,
+/obj/item/storage/ore,
+/obj/item/cell/super,
+/obj/item/cell/super,
+/obj/item/cell/super,
+/obj/item/device/scanner/mining,
+/obj/item/storage/box/greenglowsticks,
+/obj/item/storage/box/greenglowsticks,
+/obj/item/storage/box/greenglowsticks,
+/obj/item/stack/flag/yellow,
+/obj/item/stack/flag/yellow,
+/obj/item/stack/flag/yellow,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/item/wrench,
+/obj/item/wrench,
+/obj/item/device/spaceflare,
+/obj/item/device/spaceflare,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"HS" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/plating,
+/area/map_template/colony2/Hallway)
+"HU" = (
+/obj/effect/catwalk_plated/dark,
+/obj/machinery/atmospherics/pipe/simple/visible/supply,
+/obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
+/turf/simulated/floor/airless,
+/area/map_template/colony2/external)
+"Is" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/mining/brace{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 4
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"Iz" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/plating,
+/area/map_template/colony2/Hallway)
+"ID" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/plating,
+/area/map_template/colony2/tcomms)
+"IN" = (
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/machinery/firealarm{
+	dir = 2;
+	pixel_y = 24
+	},
+/obj/machinery/telecomms/bus/map_preset/playablecolony2,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/tcomms)
+"Jg" = (
+/obj/machinery/atmospherics/unary/tank/oxygen{
+	dir = 8
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"Jq" = (
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 4
+	},
+/obj/machinery/door/blast/regular{
+	dir = 4;
+	id_tag = "colony2atmos";
+	name = "Atmospheric Pod Blast Shutter"
+	},
+/obj/effect/floor_decal/industrial/hatch,
+/turf/simulated/floor/reinforced,
+/area/map_template/colony2/external)
+"Jr" = (
+/obj/item/stool/bar/padded,
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/colony2/commons)
+"Jv" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/visible/red{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/plating,
+/area/map_template/colony2/atmospherics)
+"JN" = (
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/structure/table/steel_reinforced,
+/obj/machinery/fabricator/micro,
+/obj/item/stack/material/aluminium/ten,
+/obj/item/stack/material/glass/ten,
+/obj/item/stack/material/steel/ten,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/commons)
+"Kg" = (
+/obj/machinery/atmospherics/unary/vent_pump/on,
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/obj/machinery/firealarm{
+	dir = 2;
+	pixel_y = 24
+	},
+/obj/effect/floor_decal/corner/paleblue/mono,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/atmospherics)
+"Kr" = (
+/obj/machinery/atmospherics/binary/pump{
+	dir = 8
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"Kz" = (
+/obj/structure/table/steel_reinforced,
+/obj/machinery/light,
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/machinery/reagent_temperature/cooler,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/commons)
+"KA" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/universal,
+/obj/effect/wallframe_spawn/reinforced,
+/obj/effect/paint/ocean,
+/obj/machinery/door/blast/regular{
+	id_tag = "colony2";
+	name = "Window Blast Shutter"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/colony2/engineering)
+"KP" = (
+/obj/machinery/atmospherics/pipe/simple/visible/blue,
+/obj/machinery/door/blast/regular{
+	dir = 2;
+	id_tag = "colony2atmos";
+	name = "Atmospheric Pod Blast Shutter"
+	},
+/obj/effect/floor_decal/industrial/hatch,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"KU" = (
+/obj/machinery/atmospherics/pipe/simple/visible/universal{
+	dir = 4
+	},
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/plating,
+/area/map_template/colony2/atmospherics)
+"KV" = (
+/obj/machinery/light/spot{
+	dir = 8
+	},
+/turf/simulated/floor/reinforced,
+/area/map_template/colony2/external)
+"Ls" = (
+/obj/effect/paint/ocean,
+/turf/simulated/wall/r_wall,
+/area/map_template/colony2/external)
+"LP" = (
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/plating,
+/area/map_template/colony2/storage)
+"Mb" = (
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/machinery/telecomms/hub/map_preset/playablecolony2,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/tcomms)
+"Mc" = (
+/obj/effect/paint/ocean,
+/obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/blast/regular{
+	dir = 4;
+	id_tag = "colony2";
+	name = "Window Blast Shutter"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/colony2/commons)
+"Mh" = (
+/obj/structure/cable{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/machinery/power/apc{
+	dir = 8;
+	locked = 0;
+	name = "west bump";
+	pixel_x = -24
+	},
+/obj/effect/floor_decal/corner_steel_grid/diagonal,
+/obj/structure/bed/chair/shuttle/white{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/colony2/ship)
+"Mv" = (
+/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
+	dir = 8
+	},
+/obj/machinery/meter,
+/obj/machinery/light/spot{
+	dir = 8
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"MN" = (
+/obj/structure/closet/crate/freezer/rations,
+/obj/item/reagent_containers/food/snacks/liquidfood,
+/obj/item/reagent_containers/food/snacks/liquidfood,
+/obj/item/reagent_containers/food/snacks/liquidfood,
+/obj/item/reagent_containers/food/snacks/liquidfood,
+/obj/item/reagent_containers/food/snacks/liquidfood,
+/obj/item/reagent_containers/food/snacks/liquidfood,
+/obj/item/reagent_containers/food/snacks/liquidfood,
+/obj/item/reagent_containers/food/snacks/liquidfood,
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/item/reagent_containers/food/condiment/enzyme,
+/obj/item/reagent_containers/food/condiment/enzyme,
+/obj/item/reagent_containers/food/condiment/enzyme,
+/obj/item/reagent_containers/food/condiment/enzyme,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/commons)
+"Nb" = (
+/obj/machinery/light,
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/colony2/ship)
+"Nf" = (
+/obj/structure/table/steel_reinforced,
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/machinery/alarm{
+	dir = 8;
+	locked = 0;
+	pixel_x = 25;
+	req_access = newlist()
+	},
+/obj/machinery/reagent_temperature,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/commons)
+"Nl" = (
+/obj/machinery/atmospherics/pipe/manifold/visible/blue{
+	dir = 8
+	},
+/obj/machinery/meter,
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/plating,
+/area/map_template/colony2/atmospherics)
+"Nm" = (
+/obj/machinery/vending/engivend{
+	req_access = list()
+	},
+/obj/effect/floor_decal/corner/paleblue/mono,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/engineering)
+"NX" = (
+/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
+	dir = 1
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"Oc" = (
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 9
+	},
+/obj/structure/largecrate/animal/chick,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/colony2/storage)
+"Og" = (
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"Oy" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/plating,
+/area/map_template/colony2/tcomms)
+"Oz" = (
+/obj/machinery/vending/tool,
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/item/device/radio/intercom/map_preset/playablecolony2{
+	pixel_y = 21
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/engineering)
+"OB" = (
+/obj/machinery/firealarm{
+	dir = 2;
+	pixel_y = 24
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/structure/closet/crate/med_crate/toxin,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/storage)
+"OK" = (
+/obj/machinery/door/firedoor,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/door/airlock/civilian,
+/obj/machinery/atmospherics/pipe/simple/visible{
+	dir = 4;
+	icon_state = "intact"
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/colony2/atmospherics)
+"OT" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/door/firedoor,
+/obj/machinery/atmospherics/pipe/simple/visible/red{
+	dir = 4;
+	icon_state = "intact"
+	},
+/obj/machinery/door/airlock/civilian,
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/colony2/engineering)
+"OZ" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 10
+	},
+/obj/machinery/light_switch{
+	pixel_x = -22
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/colony2/engineering)
+"Pa" = (
+/obj/effect/paint/ocean,
+/turf/simulated/wall,
+/area/map_template/colony2/storage)
+"Pp" = (
+/obj/machinery/atmospherics/portables_connector{
+	dir = 8
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/portable_atmospherics/canister/carbon_dioxide/engine_setup,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"PF" = (
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/machinery/suit_storage_unit/engineering/salvage{
+	name = "Colonial Suit Storage Unit";
+	req_access = newlist()
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/atmospherics)
+"PS" = (
+/obj/machinery/mining/drill,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/light/spot{
+	dir = 4
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"PU" = (
+/obj/effect/paint/ocean,
+/turf/simulated/wall/r_wall,
+/area/map_template/colony2/ship)
+"Qi" = (
+/obj/machinery/atmospherics/pipe/simple/visible/fuel,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"Qq" = (
+/obj/effect/floor_decal/corner_steel_grid/diagonal{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/colony2/ship)
+"Qt" = (
+/obj/machinery/power/apc{
+	dir = 1;
+	locked = 0;
+	name = "north bump";
+	pixel_y = 24;
+	req_access = newlist()
+	},
+/obj/structure/cable{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/machinery/light_switch{
+	pixel_x = 22
+	},
+/obj/machinery/telecomms/processor/map_preset/playablecolony2,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/tcomms)
+"Qw" = (
+/obj/structure/hygiene/shower{
+	dir = 8;
+	pixel_x = 8
+	},
+/obj/structure/curtain/open/shower,
+/turf/simulated/floor/tiled/freezer,
+/area/map_template/colony2/ship)
+"QH" = (
+/obj/machinery/light,
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/machinery/suit_storage_unit/engineering/salvage{
+	name = "Colonial Suit Storage Unit";
+	req_access = newlist()
+	},
+/obj/machinery/atmospherics/pipe/simple/visible{
+	dir = 5;
+	icon_state = "intact"
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/atmospherics)
+"QK" = (
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/machinery/atmospherics/binary/pump/on{
+	dir = 4;
+	target_pressure = 100
+	},
+/obj/machinery/suit_storage_unit/engineering/salvage{
+	name = "Colonial Suit Storage Unit";
+	req_access = newlist()
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/atmospherics)
+"QW" = (
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/machinery/suit_storage_unit/engineering/salvage{
+	name = "Colonial Suit Storage Unit";
+	req_access = newlist()
+	},
+/obj/machinery/atmospherics/pipe/simple/visible{
+	dir = 9;
+	icon_state = "intact"
+	},
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/atmospherics)
+"QY" = (
+/obj/machinery/firealarm{
+	dir = 8;
+	pixel_x = -24;
+	pixel_y = 0
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	dir = 1;
+	id_tag = "playablecolonymain2_pump";
+	power_rating = 25000
+	},
+/turf/simulated/floor/reinforced,
+/area/map_template/colony2/external)
+"Rp" = (
+/obj/machinery/door/blast/regular{
+	dir = 4;
+	id_tag = "colony2atmos";
+	name = "Atmospheric Pod Blast Shutter"
+	},
+/obj/effect/floor_decal/industrial/hatch,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"Rs" = (
+/obj/structure/cable,
+/obj/machinery/power/smes/buildable/max_cap_in_out,
+/obj/effect/floor_decal/corner/paleblue/mono,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/engineering)
+"Rw" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	id_tag = "playablecolonymain2_pump_out_internal";
+	power_rating = 25000
+	},
+/obj/machinery/embedded_controller/radio/airlock/airlock_controller{
+	cycle_to_external_air = 1;
+	dir = 4;
+	frequency = 1380;
+	id_tag = "playablecolonymain2";
+	pixel_x = -22;
+	tag_airpump = "playablecolonymain2_pump";
+	tag_chamber_sensor = "playablecolonymain2_sensor_chamber";
+	tag_exterior_door = "playablecolonymain2_exterior_door";
+	tag_interior_door = "playablecolonymain2_interior_door"
+	},
+/obj/machinery/airlock_sensor{
+	frequency = 1380;
+	id_tag = "playablecolonymain2_sensor_chamber";
+	pixel_x = -22;
+	pixel_y = 12
+	},
+/turf/simulated/floor/reinforced,
+/area/map_template/colony2/external)
+"Rz" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/colony2/Hallway)
+"RB" = (
+/obj/machinery/atmospherics/pipe/simple/visible/scrubbers,
+/obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/airless,
+/area/map_template/colony2/external)
+"RE" = (
+/obj/machinery/atmospherics/pipe/manifold/visible/blue,
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/airless,
+/area/map_template/colony2/external)
+"RL" = (
+/obj/machinery/atmospherics/pipe/simple/visible/fuel,
+/obj/machinery/meter,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"Sl" = (
+/obj/machinery/power/terminal{
+	dir = 8
+	},
+/obj/structure/cable{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/machinery/pipedispenser,
+/obj/effect/floor_decal/corner/paleblue/mono,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/engineering)
+"Sp" = (
+/obj/machinery/atmospherics/pipe/simple/visible/supply,
+/obj/machinery/door/blast/regular{
+	dir = 2;
+	id_tag = "colony2atmos";
+	name = "Atmospheric Pod Blast Shutter"
+	},
+/obj/effect/floor_decal/industrial/hatch,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"SA" = (
+/obj/machinery/power/port_gen/pacman{
+	anchored = 1;
+	sheets = 25
+	},
+/obj/structure/cable{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/machinery/light,
+/obj/effect/floor_decal/corner/paleblue/mono,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/engineering)
+"SJ" = (
+/obj/structure/table/steel_reinforced,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/cell_charger,
+/obj/machinery/light/spot{
+	dir = 4
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"SO" = (
+/obj/machinery/atmospherics/pipe/simple/visible/supply{
+	dir = 10
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"SP" = (
+/obj/machinery/portable_atmospherics/hydroponics,
+/obj/effect/floor_decal/corner/paleblue/mono,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/commons)
+"SQ" = (
+/obj/item/storage/backpack/dufflebag/eng,
+/obj/item/storage/backpack/dufflebag/eng,
+/obj/item/storage/backpack/dufflebag/med,
+/obj/structure/closet/crate,
+/obj/item/device/suit_cooling_unit,
+/obj/item/clothing/gloves/insulated,
+/obj/item/clothing/gloves/insulated,
+/obj/item/storage/belt/utility/full,
+/obj/item/storage/belt/utility/full,
+/obj/item/storage/belt/medical,
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/item/storage/belt/holster/security,
+/obj/item/crowbar/prybar,
+/obj/item/crowbar/prybar,
+/obj/item/device/radio/map_preset/playablecolony2,
+/obj/item/device/radio/map_preset/playablecolony2,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/atmospherics)
+"SR" = (
+/obj/machinery/power/apc{
+	dir = 4;
+	locked = 0;
+	name = "east bump";
+	pixel_x = 24;
+	req_access = newlist()
+	},
+/obj/structure/cable,
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	id_tag = "playablecolonymain2_pump_out_internal";
+	power_rating = 25000
+	},
+/turf/simulated/floor/reinforced,
+/area/map_template/colony2/external)
+"ST" = (
+/obj/machinery/atmospherics/pipe/simple/visible/fuel,
+/obj/effect/wallframe_spawn/reinforced,
+/obj/effect/paint/ocean,
+/obj/machinery/door/blast/regular{
+	id_tag = "colony2";
+	name = "Window Blast Shutter"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/colony2/engineering)
+"SU" = (
+/obj/machinery/atmospherics/pipe/simple/visible/scrubbers,
+/obj/machinery/atmospherics/pipe/manifold/visible/fuel,
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/airless,
+/area/map_template/colony2/external)
+"Tr" = (
+/obj/effect/catwalk_plated/dark,
+/obj/machinery/atmospherics/pipe/simple/visible/red{
+	dir = 4;
+	icon_state = "intact"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/map_template/colony2/engineering)
+"Tu" = (
+/obj/machinery/atmospherics/pipe/simple/visible/fuel,
+/obj/machinery/atmospherics/pipe/simple/visible/scrubbers,
+/obj/machinery/door/blast/regular{
+	dir = 2;
+	id_tag = "colony2atmos";
+	name = "Atmospheric Pod Blast Shutter"
+	},
+/obj/effect/floor_decal/industrial/hatch,
+/turf/simulated/floor/reinforced,
+/area/map_template/colony2/external)
+"Tw" = (
+/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
+	dir = 1
+	},
+/obj/effect/paint/ocean,
+/turf/simulated/wall/r_wall,
+/area/map_template/colony2/external)
+"Ul" = (
+/obj/machinery/hologram/holopad/longrange,
+/obj/effect/floor_decal/corner_steel_grid/diagonal{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/colony2/ship)
+"UE" = (
+/obj/machinery/atmospherics/pipe/simple/visible/universal,
+/obj/effect/wallframe_spawn/reinforced,
+/obj/effect/paint/ocean,
+/obj/machinery/door/blast/regular{
+	id_tag = "colony2";
+	name = "Window Blast Shutter"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/colony2/atmospherics)
+"UM" = (
+/obj/machinery/atmospherics/pipe/simple/visible/red{
+	dir = 4;
+	icon_state = "intact"
+	},
+/obj/effect/catwalk_plated/dark,
+/obj/machinery/atmospherics/pipe/simple/visible/universal,
+/turf/simulated/floor/plating,
+/area/map_template/colony2/atmospherics)
+"UN" = (
+/obj/effect/paint/ocean,
+/turf/simulated/wall,
+/area/map_template/colony2/ship)
+"UW" = (
+/obj/machinery/atmospherics/unary/tank/oxygen{
+	dir = 4
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"UX" = (
+/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
+	dir = 4
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"Vb" = (
+/obj/machinery/atmospherics/pipe/simple/visible/red{
+	dir = 4;
+	icon_state = "intact"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/visible/scrubbers,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/plating,
+/area/map_template/colony2/engineering)
+"Vc" = (
+/obj/machinery/meter,
+/obj/machinery/atmospherics/pipe/simple/visible/supply{
+	dir = 5
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"Vp" = (
+/obj/machinery/meter,
+/obj/machinery/atmospherics/pipe/simple/visible/scrubbers{
+	dir = 9
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"Vt" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	dir = 1;
+	id_tag = "playablecolonymain2_pump";
+	power_rating = 25000
+	},
+/obj/machinery/light/spot{
+	dir = 4
+	},
+/turf/simulated/floor/reinforced,
+/area/map_template/colony2/external)
+"Vv" = (
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/plating,
+/area/map_template/colony2/commons)
+"VA" = (
+/obj/structure/bed/padded,
+/obj/item/bedsheet/green,
+/obj/structure/curtain/open/bed,
+/obj/effect/submap_landmark/spawnpoint/colonist_spawn2,
+/obj/machinery/alarm{
+	dir = 4;
+	locked = 0;
+	pixel_x = -21;
+	req_access = newlist()
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/colony2/ship)
+"VC" = (
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 4
+	},
+/obj/machinery/door/blast/regular{
+	dir = 4;
+	id_tag = "colony2atmos";
+	name = "Atmospheric Pod Blast Shutter"
+	},
+/obj/effect/floor_decal/industrial/hatch,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"VD" = (
+/obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
+/obj/effect/paint/ocean,
+/turf/simulated/wall/r_wall,
+/area/map_template/colony2/external)
+"VF" = (
+/obj/machinery/light/spot{
+	dir = 1
+	},
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 4
+	},
+/obj/machinery/air_sensor{
+	id_tag = "Halifax_out"
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"VL" = (
+/obj/machinery/access_button/airlock_exterior{
+	frequency = 1380;
+	master_tag = "playablecolonymain2";
+	pixel_y = 22
+	},
+/obj/machinery/light/spot{
+	dir = 1
+	},
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 1
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"VM" = (
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 10
+	},
+/obj/effect/paint/ocean,
+/turf/simulated/wall/r_wall,
+/area/map_template/colony2/external)
+"Wd" = (
+/obj/machinery/door/airlock/civilian,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/door/firedoor,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/colony2/tcomms)
+"Wi" = (
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/machinery/telecomms/server/map_preset/playablecolony2,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/tcomms)
+"Wk" = (
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/structure/largecrate/animal/goat,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/storage)
+"Wm" = (
+/obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
+/obj/machinery/atmospherics/pipe/simple/visible/scrubbers,
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/airless,
+/area/map_template/colony2/external)
+"Wn" = (
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/plating,
+/area/map_template/colony2/engineering)
+"Wo" = (
+/obj/machinery/atmospherics/pipe/simple/visible/supply,
+/obj/machinery/meter,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"Wu" = (
+/obj/machinery/portable_atmospherics/hydroponics,
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/paleblue/mono,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/commons)
+"WM" = (
+/obj/machinery/atmospherics/valve{
+	dir = 4
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"Xc" = (
+/obj/structure/hygiene/toilet{
+	dir = 4
+	},
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/freezer,
+/area/map_template/colony2/ship)
+"Xf" = (
+/obj/effect/landmark/clear,
+/obj/effect/landmark/scorcher,
+/turf/template_noop,
+/area/template_noop)
+"Xi" = (
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/machinery/vending/hydronutrients,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/commons)
+"Xl" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/mineral/stacking_machine{
+	input_turf = 2;
+	output_turf = 8
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"Xm" = (
+/obj/machinery/atmospherics/pipe/simple/visible/supply,
+/obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/airless,
+/area/map_template/colony2/external)
+"Xt" = (
+/obj/machinery/atmospherics/unary/tank/carbon_dioxide{
+	dir = 8;
+	start_pressure = 120
+	},
+/obj/machinery/light/spot{
+	dir = 4
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"XB" = (
+/obj/machinery/door/blast/regular{
+	dir = 2;
+	id_tag = "colony2atmos";
+	name = "Atmospheric Pod Blast Shutter"
+	},
+/obj/effect/floor_decal/industrial/hatch,
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"XO" = (
+/obj/machinery/light/spot{
+	dir = 1
+	},
+/turf/simulated/floor/reinforced,
+/area/map_template/colony2/external)
+"XU" = (
+/obj/machinery/atmospherics/unary/tank/nitrogen{
+	dir = 8
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"XX" = (
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/dark,
+/area/map_template/colony2/Hallway)
+"Yv" = (
+/obj/machinery/atmospherics/pipe/simple/visible/red,
+/obj/effect/catwalk_plated/dark,
+/obj/machinery/meter,
+/turf/simulated/floor/plating,
+/area/map_template/colony2/engineering)
+"YI" = (
+/obj/machinery/mining/drill,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/light/spot{
+	dir = 8
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"YQ" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/machinery/portable_atmospherics/powered/pump/filled,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/atmospherics)
+"YV" = (
+/obj/machinery/meter,
+/obj/machinery/door/airlock/external{
+	frequency = 1380;
+	id_tag = "playablecolonymain2_exterior_door";
+	locked = 1
+	},
+/obj/machinery/atmospherics/pipe/manifold/visible{
+	dir = 8
+	},
+/turf/simulated/floor/reinforced,
+/area/map_template/colony2/external)
+"Za" = (
+/obj/effect/floor_decal/corner_steel_grid/diagonal,
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/colony2/ship)
+"Zo" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/universal,
+/obj/machinery/meter,
+/obj/effect/catwalk_plated/dark,
+/turf/simulated/floor/plating,
+/area/map_template/colony2/engineering)
+"ZJ" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner_steel_grid/diagonal{
+	dir = 4
+	},
+/obj/machinery/alarm{
+	dir = 1;
+	locked = 0;
+	pixel_y = -22;
+	req_access = newlist()
+	},
+/turf/simulated/floor/tiled/techmaint,
+/area/map_template/colony2/ship)
+"ZY" = (
+/obj/effect/floor_decal/corner/paleblue/mono,
+/obj/structure/table/steel_reinforced,
+/obj/machinery/reagentgrinder/juicer,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/colony2/commons)
+
+(1,1,1) = {"
+aa
+Og
+PU
+PU
+PU
+PU
+PU
+PU
+PU
+qf
+bE
+bE
+qf
+vn
+vn
+jq
+jq
+vn
+vn
+Og
+Ls
+Ls
+Ls
+Ls
+Ls
+Ls
+Ls
+Og
+Ls
+Ls
+Ls
+Ls
+Ls
+Ls
+Og
+Ls
+Ls
+Ls
+Ls
+Ls
+Ls
+"}
+(2,1,1) = {"
+Og
+Og
+PU
+eg
+VA
+UN
+xB
+jo
+Xc
+Pa
+DQ
+Oc
+Dv
+lU
+dn
+Nl
+lZ
+Fn
+UE
+Vc
+Ls
+Dw
+Dw
+Dw
+Dw
+Dw
+Ls
+an
+Ls
+UW
+UW
+UW
+UW
+Ls
+aB
+Ls
+UW
+UW
+UW
+UW
+Ls
+"}
+(3,1,1) = {"
+Og
+Og
+PU
+eR
+Qq
+aZ
+yO
+vf
+Qw
+Pa
+Wk
+gi
+DD
+lU
+YQ
+KU
+sZ
+PF
+cD
+SO
+Sp
+HK
+Xm
+HU
+HU
+Hq
+Sp
+Wo
+EP
+DJ
+DJ
+DJ
+DJ
+KP
+uq
+KP
+DJ
+DJ
+DJ
+RE
+Ls
+"}
+(4,1,1) = {"
+Og
+Og
+PU
+Bk
+iT
+UN
+UN
+UN
+UN
+Pa
+xx
+BU
+DR
+lU
+SQ
+Hw
+UM
+QH
+vn
+an
+Ls
+HD
+HD
+Xt
+HD
+WM
+Ls
+aB
+Ls
+Jg
+Jg
+Jg
+Jg
+Ls
+an
+Ls
+Jg
+Jg
+Jg
+Jg
+Ls
+"}
+(5,1,1) = {"
+Og
+Og
+PU
+fF
+wx
+UN
+IN
+eY
+Wi
+Pa
+Af
+LP
+En
+lU
+Kg
+dY
+gD
+QK
+vn
+Og
+Ls
+Ls
+Ls
+Ls
+Ls
+VC
+Ls
+Og
+Ls
+Ls
+Ls
+Ls
+Ls
+Ls
+Og
+Ls
+Ls
+Ls
+Ls
+Ls
+Ls
+"}
+(6,1,1) = {"
+Og
+Og
+PU
+eg
+kb
+UN
+Mb
+ID
+or
+Pa
+eA
+hT
+ED
+lU
+fu
+Jv
+oU
+QW
+vn
+Og
+Og
+Og
+Og
+Og
+kf
+zd
+BZ
+Og
+Og
+Og
+Og
+Og
+Og
+Og
+Og
+Og
+Xf
+Xf
+Og
+Og
+Og
+"}
+(7,1,1) = {"
+PU
+bh
+PU
+UN
+so
+UN
+Qt
+Oy
+oC
+Pa
+OB
+cQ
+Fm
+lU
+wm
+iv
+Ci
+dD
+vn
+Og
+Og
+Og
+Ls
+Ls
+Ls
+Jq
+Ls
+XO
+Ls
+Ls
+Ls
+Ls
+Ls
+Ls
+Xf
+Xf
+Xf
+Xf
+Xf
+Og
+Og
+"}
+(8,1,1) = {"
+PU
+de
+Dd
+Mh
+ib
+UN
+qj
+Wd
+qj
+Pa
+Pa
+Cr
+Pa
+lU
+fs
+OK
+vn
+vn
+Ls
+Ls
+VF
+aB
+Ls
+YI
+BR
+Is
+Ls
+Rp
+Ls
+tZ
+Mv
+rO
+lm
+Ak
+Xf
+Xf
+Xf
+Xf
+Xf
+Xf
+Og
+"}
+(9,1,1) = {"
+aL
+rm
+Za
+aK
+ro
+qb
+HS
+AU
+HS
+tT
+HS
+AS
+bV
+rp
+yu
+nU
+ke
+QY
+Rw
+YV
+ni
+aB
+XB
+aB
+aB
+vj
+aB
+aB
+aB
+DH
+Pp
+Kr
+Tw
+Ak
+Xf
+Xf
+Xf
+Xf
+Xf
+Xf
+Og
+"}
+(10,1,1) = {"
+aL
+dh
+Ul
+pe
+yJ
+iq
+XX
+XX
+aN
+uT
+XX
+Iz
+Rz
+tb
+wp
+er
+Hb
+Vt
+SR
+vh
+ni
+aB
+XB
+aB
+aB
+NX
+jy
+Qi
+Qi
+UX
+RL
+UX
+VD
+Ak
+Xf
+Xf
+Xf
+Xf
+Xf
+Xf
+Og
+"}
+(11,1,1) = {"
+PU
+dj
+lW
+ci
+ZJ
+UN
+xv
+io
+xv
+xv
+xv
+CJ
+xv
+ob
+ob
+OT
+AE
+AE
+Ls
+Ls
+VL
+aB
+Ls
+PS
+BR
+Is
+Ls
+Rp
+Ls
+Et
+SJ
+HQ
+VM
+Ak
+Xf
+Xf
+Xf
+Xf
+Xf
+Xf
+Og
+"}
+(12,1,1) = {"
+PU
+bh
+PU
+UN
+so
+UN
+cz
+is
+SP
+xv
+tu
+Eo
+Fq
+ob
+Ch
+Vb
+OZ
+qo
+AE
+Og
+Og
+Og
+Ls
+Ls
+Ls
+Jq
+Ls
+XO
+Ls
+Ls
+Ls
+Ls
+Ls
+Ls
+Xf
+Xf
+Xf
+Xf
+Xf
+Og
+Og
+"}
+(13,1,1) = {"
+Og
+Og
+PU
+fQ
+dM
+UN
+Wu
+Vv
+qI
+xv
+vO
+zv
+GS
+ob
+DG
+hj
+sG
+Rs
+AE
+Og
+Og
+Og
+Og
+Og
+KV
+zd
+BZ
+Og
+Og
+Og
+Og
+Og
+Og
+Og
+Og
+kf
+BZ
+BZ
+BZ
+BZ
+kf
+"}
+(14,1,1) = {"
+Og
+Og
+PU
+fU
+gm
+UN
+Xi
+Vv
+gb
+xv
+Ap
+Vv
+Jr
+ob
+lj
+Tr
+Wn
+Sl
+AE
+Og
+Ls
+Ls
+Ls
+Ls
+Ls
+Jq
+Ls
+Og
+Ls
+Ls
+Ls
+Ls
+Ls
+Ls
+Og
+Ls
+Rp
+Rp
+Rp
+Gq
+Ls
+"}
+(15,1,1) = {"
+Og
+Og
+PU
+ge
+Nb
+UN
+oQ
+Vv
+ZY
+cX
+AK
+Vv
+JN
+ob
+Oz
+Tr
+Wn
+SA
+AE
+an
+Ls
+Dw
+Dw
+cw
+Dw
+WM
+Ls
+aB
+Ls
+kn
+kn
+kn
+kn
+Ls
+an
+Ls
+hN
+aB
+Gt
+ux
+Ls
+"}
+(16,1,1) = {"
+Og
+Og
+PU
+gr
+CQ
+UN
+eJ
+Vv
+Vv
+Vv
+Vv
+Vv
+Kz
+ob
+oK
+ab
+Zo
+BI
+ST
+nE
+Tu
+Wm
+RB
+RB
+RB
+SU
+sO
+rr
+EP
+bt
+bt
+bt
+zZ
+Ls
+aB
+Ls
+gV
+Cu
+zk
+Gh
+Ls
+"}
+(17,1,1) = {"
+Og
+Og
+PU
+gw
+EN
+UN
+gj
+FI
+Bc
+MN
+cq
+fT
+Nf
+ob
+Nm
+Bf
+Yv
+CA
+KA
+Vp
+Ls
+HD
+HD
+HD
+HD
+HD
+Ls
+an
+Ls
+XU
+XU
+XU
+XU
+Ls
+aB
+Ls
+Xl
+sK
+rM
+rL
+Ls
+"}
+(18,1,1) = {"
+Og
+Og
+PU
+PU
+PU
+PU
+cr
+cr
+cr
+cr
+Mc
+Mc
+cr
+AE
+AE
+fp
+fp
+AE
+AE
+Og
+Ls
+Ls
+Ls
+Ls
+Ls
+Ls
+Ls
+Og
+Ls
+Ls
+Ls
+Ls
+Ls
+Ls
+Og
+Ls
+Ls
+Ls
+Ls
+Ls
+Ls
+"}

@@ -1,5 +1,4 @@
-/obj/effect/plant/HasProximity(var/atom/movable/AM)
-
+/obj/effect/vine/HasProximity(var/atom/movable/AM)
 	if(!is_mature() || seed.get_trait(TRAIT_SPREAD) != 2)
 		return
 
@@ -7,96 +6,100 @@
 	if(!istype(M))
 		return
 
-	if(!buckled_mob && !M.buckled && !M.anchored && (issmall(M) || prob(round(seed.get_trait(TRAIT_POTENCY)/6))))
+	if(issmall(M) || prob(round(seed.get_trait(TRAIT_POTENCY)/6)))
 		//wait a tick for the Entered() proc that called HasProximity() to finish (and thus the moving animation),
 		//so we don't appear to teleport from two tiles away when moving into a turf adjacent to vines.
 		spawn(1)
-			entangle(M)
+			if(prob(seed.get_trait(((TRAIT_POTENCY)/2)*3)))
+				entangle(M)
 
-/obj/effect/plant/attack_hand(var/mob/user)
+/obj/effect/vine/attack_hand(var/mob/user)
 	manual_unbuckle(user)
 
-/obj/effect/plant/attack_generic(var/mob/user)
-	if(istype(user))
-		manual_unbuckle(user)
+/obj/effect/vine/attack_generic(var/mob/user)
+	manual_unbuckle(user)
 
-/obj/effect/plant/Crossed(atom/movable/O)
+/obj/effect/vine/Crossed(atom/movable/O)
 	if(isliving(O))
 		trodden_on(O)
 
-/obj/effect/plant/proc/trodden_on(var/mob/living/victim)
+/obj/effect/vine/proc/trodden_on(var/mob/living/victim)
+	wake_neighbors()
 	if(!is_mature())
 		return
-	var/mob/living/carbon/human/H = victim
-	if(prob(round(seed.get_trait(TRAIT_POTENCY)/4)))
+	if(prob(seed.get_trait(((TRAIT_POTENCY)/2)*3)))
 		entangle(victim)
+	var/mob/living/carbon/human/H = victim
 	if(istype(H) && H.shoes)
 		return
 	seed.do_thorns(victim,src)
 	seed.do_sting(victim,src,pick(BP_R_FOOT,BP_L_FOOT,BP_R_LEG,BP_L_LEG))
 
-/obj/effect/plant/proc/unbuckle()
-	if(buckled_mob)
-		if(buckled_mob.buckled == src)
-			buckled_mob.buckled = null
-			buckled_mob.anchored = initial(buckled_mob.anchored)
-			buckled_mob.update_canmove()
-		buckled_mob = null
-	return
-
-/obj/effect/plant/proc/manual_unbuckle(mob/user as mob)
-	if(buckled_mob)
-		var/chance = 20
-		if(seed)
-			chance = round(100/(20*seed.get_trait(TRAIT_POTENCY)/100))
+/obj/effect/vine/proc/manual_unbuckle(mob/user)
+	if(!buckled_mob)
+		return
+	if(buckled_mob != user)
+		to_chat(user, SPAN_NOTICE("You try to free \the [buckled_mob] from \the [src]."))
+		var/chance = round(100/(20*seed.get_trait(TRAIT_POTENCY)/100))
 		if(prob(chance))
-			if(buckled_mob != user)
-				buckled_mob.visible_message(\
-					"<span class='notice'>\The [user] frees \the [buckled_mob] from \the [src].</span>",\
-					"<span class='notice'>\The [user] frees you from \the [src].</span>",\
-					"<span class='warning'>You hear shredding and ripping.</span>")
-			else
-				buckled_mob.visible_message(\
-					"<span class='notice'>\The [buckled_mob] struggles free of \the [src].</span>",\
-					"<span class='notice'>You untangle \the [src] from around yourself.</span>",\
-					"<span class='warning'>You hear shredding and ripping.</span>")
-			unbuckle()
-		else
-			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-			health -= rand(1,5)
-			var/text = pick("rip","tear","pull", "bite", "tug")
-			user.visible_message(\
-				"<span class='warning'>\The [user] [text]s at \the [src].</span>",\
-				"<span class='warning'>You [text] at \the [src].</span>",\
-				"<span class='warning'>You hear shredding and ripping.</span>")
-			check_health()
-	return
+			buckled_mob.visible_message(
+				"\The [user] frees \the [buckled_mob] from \the [src].",
+				SPAN_NOTICE("\The [user] frees you from \the [src]."),
+				SPAN_WARNING("You hear shredding and ripping.")
+			)
+			unbuckle_mob()
+	else
+		user.setClickCooldown(100)
+		var/breakouttime = rand(600, 1200) //1 to 2 minutes.
 
-/obj/effect/plant/proc/entangle(var/mob/living/victim)
+		user.visible_message(
+			"\The [user] attempts to get free from [src]!",
+			SPAN_NOTICE("You attempt to get free from [src].")
+		)
 
+		if(do_after(user, breakouttime, incapacitation_flags = INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED))
+			if(unbuckle_mob())
+				user.visible_message(
+					"\The [user] manages to escape [src]!",
+					SPAN_NOTICE("You successfully escape [src]!")
+				)
+
+/obj/effect/vine/proc/entangle(mob/living/victim)
 	if(buckled_mob)
 		return
 
-	if(victim.buckled || victim.anchored)
+	if(victim.anchored)
 		return
 
-	//grabbing people
-	if(!victim.anchored && Adjacent(victim) && victim.loc != src.loc)
-		var/can_grab = 1
-		if(istype(victim, /mob/living/carbon/human))
-			var/mob/living/carbon/human/H = victim
-			if((istype(H.shoes, /obj/item/clothing/shoes/magboots) && (H.shoes.item_flags & NOSLIP)) || (H.species.flags & NO_SLIP))
-				can_grab = 0
-		if(can_grab)
-			src.visible_message("<span class='danger'>Tendrils lash out from \the [src] and drag \the [victim] in!</span>")
-			victim.forceMove(src.loc)
-			sleep(1)
-			//entangling people
-			if(victim.loc == src.loc)
-				buckle_mob(victim)
-				victim.set_dir(pick(cardinal))
-				to_chat(victim, "<span class='danger'>Tendrils [pick("wind", "tangle", "tighten")] around you!</span>")
+	if(!Adjacent(victim))
+		return
 
-/obj/effect/plant/buckle_mob()
+	if(victim.is_floating)
+		victim.visible_message(
+			SPAN_WARNING("Tendrils lash out towards \the [victim] but \the [src] can't quite reach them as they float above!"),
+			SPAN_WARNING("Tendrils lash out from \the [src] below but can't quite reach you!")
+		)
+		return
+
+	if(ishuman(victim))
+		var/mob/living/carbon/human/H = victim
+		if(H.species.species_flags & SPECIES_FLAG_NO_TANGLE)
+			return
+		if(victim.loc != loc && istype(H.shoes, /obj/item/clothing/shoes/magboots) && (H.shoes.item_flags & ITEM_FLAG_NOSLIP) || H.species.check_no_slip(H))
+			visible_message(
+				SPAN_WARNING("Tendrils lash to drag \the [victim] but \the [src] can't pull them across the ground!"),
+				SPAN_WARNING("Tendrils lash to drag you but \the [src] can't pull you across the ground!")
+			)
+			return
+	
+	victim.visible_message(
+		SPAN_DANGER("Tendrils lash out from \the [src] and drag \the [victim] in!"),
+		SPAN_DANGER("Tendrils lash out from \the [src] and drag you in!"))
+	victim.forceMove(loc)
+	if(buckle_mob(victim))
+		victim.set_dir(pick(GLOB.cardinal))
+		to_chat(victim, SPAN_DANGER("The tendrils [pick("wind", "tangle", "tighten", "coil", "knot", "snag", "twist", "constrict", "squeeze", "clench", "tense")] around you!"))
+
+/obj/effect/vine/buckle_mob()
 	. = ..()
-	if(.) plant_controller.add_plant(src)
+	if(.) START_PROCESSING(SSvines, src)

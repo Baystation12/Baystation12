@@ -6,25 +6,25 @@
 	condition ? overlay_fullscreen(screen_name, screen_type, arg) : clear_fullscreen(screen_name)
 
 /mob/proc/overlay_fullscreen(category, type, severity)
-    var/obj/screen/fullscreen/screen = screens[category]
+	var/obj/screen/fullscreen/screen = screens[category]
 
-    if(screen)
-        if(screen.type != type)
-            clear_fullscreen(category, FALSE)
-            screen = null
-        else if(!severity || severity == screen.severity)
-            return null
+	if(screen)
+		if(screen.type != type)
+			clear_fullscreen(category, FALSE)
+			screen = null
+		else if(!severity || severity == screen.severity)
+			return null
 
-    if(!screen)
-        screen = new type()
+	if(!screen)
+		screen = new type()
 
-    screen.icon_state = "[initial(screen.icon_state)][severity]"
-    screen.severity = severity
+	screen.icon_state = "[initial(screen.icon_state)][severity]"
+	screen.severity = severity
 
-    screens[category] = screen
-    if(client && stat != DEAD)
-        client.screen += screen
-    return screen
+	screens[category] = screen
+	if(client && (stat != DEAD || screen.allstate))
+		client.screen += screen
+	return screen
 
 /mob/proc/clear_fullscreen(category, animated = 10)
 	var/obj/screen/fullscreen/screen = screens[category]
@@ -66,6 +66,7 @@
 	plane = FULLSCREEN_PLANE
 	mouse_opacity = 0
 	var/severity = 0
+	var/allstate = 0 //shows if it should show up for dead people too
 
 /obj/screen/fullscreen/Destroy()
 	severity = 0
@@ -87,6 +88,12 @@
 	icon_state = "blackimageoverlay"
 	layer = BLIND_LAYER
 
+/obj/screen/fullscreen/blackout
+	icon = 'icons/mob/screen1.dmi'
+	icon_state = "black"
+	screen_loc = "WEST,SOUTH to EAST,NORTH"
+	layer = BLIND_LAYER
+
 /obj/screen/fullscreen/impaired
 	icon_state = "impairedoverlay"
 	layer = IMPAIRED_LAYER
@@ -95,6 +102,7 @@
 	icon = 'icons/mob/screen1.dmi'
 	screen_loc = "WEST,SOUTH to EAST,NORTH"
 	icon_state = "blurry"
+	alpha = 100
 
 /obj/screen/fullscreen/flash
 	icon = 'icons/mob/screen1.dmi'
@@ -116,6 +124,18 @@
 	layer = FULLSCREEN_LAYER
 	alpha = 127
 
+/obj/screen/fullscreen/fadeout
+	icon = 'icons/mob/screen1.dmi'
+	icon_state = "black"
+	screen_loc = ui_entire_screen
+	layer = FULLSCREEN_LAYER
+	alpha = 0
+	allstate = 1
+
+/obj/screen/fullscreen/fadeout/Initialize()
+	. = ..()
+	animate(src, alpha = 255, time = 10)
+
 /obj/screen/fullscreen/scanline
 	icon = 'icons/effects/static.dmi'
 	icon_state = "scanlines"
@@ -125,3 +145,8 @@
 
 /obj/screen/fullscreen/fishbed
 	icon_state = "fishbed"
+	allstate = 1
+
+/obj/screen/fullscreen/pain
+	icon_state = "brutedamageoverlay6"
+	alpha = 0

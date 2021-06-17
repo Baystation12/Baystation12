@@ -2,56 +2,91 @@
 	icon = 'icons/turf/floors.dmi'
 	level = 1
 
-	plane = TURF_PLANE
-	layer = BASE_TURF_LAYER
+	layer = TURF_LAYER
+
+	var/turf_flags
 
 	var/holy = 0
 
 	// Initial air contents (in moles)
-	var/oxygen = 0
-	var/carbon_dioxide = 0
-	var/nitrogen = 0
-	var/phoron = 0
+	var/list/initial_gas
 
 	//Properties for airtight tiles (/wall)
 	var/thermal_conductivity = 0.05
 	var/heat_capacity = 1
 
 	//Properties for both
-	var/temperature = T20C      // Initial turf temperature.
 	var/blocks_air = 0          // Does this turf contain air/let air through?
 
 	// General properties.
 	var/icon_old = null
 	var/pathweight = 1          // How much does it cost to pathfind over this turf?
 	var/blessed = 0             // Has the turf been blessed?
-	var/dynamic_lighting = 1    // Does the turf use dynamic lighting?
 
 	var/list/decals
 
-/turf/New()
-	..()
-	for(var/atom/movable/AM as mob|obj in src)
-		spawn( 0 )
-			src.Entered(AM)
-			return
-	turfs |= src
+	var/movement_delay
 
+	var/fluid_can_pass
+	var/obj/effect/flood/flood_object
+	var/fluid_blocked_dirs = 0
+	var/flooded // Whether or not this turf is absolutely flooded ie. a water source.
+	var/height = 0 // Determines if fluids can overflow onto next turf
+	var/footstep_type
+
+	var/tmp/changing_turf
+
+	/// List of 'dangerous' objs that the turf holds that can cause something bad to happen when stepped on, used for AI mobs.
+	var/list/dangerous_objects
+
+/turf/Initialize(mapload, ...)
+	. = ..()
 	if(dynamic_lighting)
 		luminosity = 0
 	else
 		luminosity = 1
 
-/turf/proc/initialize()
-	return
+	RecalculateOpacity()
 
-/turf/proc/update_icon()
-	return
+	if (mapload && permit_ao)
+		queue_ao()
+
+	if (z_flags & ZM_MIMIC_BELOW)
+		setup_zmimic(mapload)
+
+/turf/on_update_icon()
+	update_flood_overlay()
+	queue_ao(FALSE)
+
+/turf/proc/update_flood_overlay()
+	if(is_flooded(absolute = TRUE))
+		if(!flood_object)
+			flood_object = new(src)
+	else if(flood_object)
+		QDEL_NULL(flood_object)
 
 /turf/Destroy()
-	turfs -= src
+	if (!changing_turf)
+		crash_with("Improper turf qdel. Do not qdel turfs directly.")
+
+	changing_turf = FALSE
+
 	remove_cleanables()
+	fluid_update()
+	REMOVE_ACTIVE_FLUID_SOURCE(src)
+
+	if (ao_queued)
+		SSao.queue -= src
+		ao_queued = 0
+
+	if (z_flags & ZM_MIMIC_BELOW)
+		cleanup_zmimic()
+
+	if (mimic_proxy)
+		QDEL_NULL(mimic_proxy)
+
 	..()
+	return QDEL_HINT_IWILLGC
 
 /turf/ex_act(severity)
 	return 0
@@ -60,27 +95,38 @@
 	return 1
 
 /turf/attack_hand(mob/user)
-	if(!(user.canmove) || user.restrained() || !(user.pulling))
-		return 0
-	if(user.pulling.anchored || !isturf(user.pulling.loc))
-		return 0
-	if(user.pulling.loc != user.loc && get_dist(user, user.pulling) > 1)
-		return 0
-
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
-	if(ismob(user.pulling))
-		var/mob/M = user.pulling
-		var/atom/movable/t = M.pulling
-		M.stop_pulling()
-		step(user.pulling, get_dir(user.pulling.loc, src))
-		M.start_pulling(t)
-	else
-		step(user.pulling, get_dir(user.pulling.loc, src))
-	return 1
 
-turf/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/storage))
-		var/obj/item/weapon/storage/S = W
+	if(user.restrained())
+		return 0
+	if (user.pulling)
+		if(user.pulling.anchored || !isturf(user.pulling.loc))
+			return 0
+		if(user.pulling.loc != user.loc && get_dist(user, user.pulling) > 1)
+			return 0
+		do_pull_click(user, src)
+
+	.=handle_hand_interception(user)
+	if (!.)
+		return 1
+
+/turf/proc/handle_hand_interception(var/mob/user)
+	var/datum/extension/turf_hand/THE
+	for (var/A in src)
+		var/datum/extension/turf_hand/TH = get_extension(A, /datum/extension/turf_hand)
+		if (istype(TH) && TH.priority > THE?.priority) //Only overwrite if the new one is higher. For matching values, its first come first served
+			THE = TH
+
+	if (THE)
+		return THE.OnHandInterception(user)
+
+/turf/attack_robot(var/mob/user)
+	if(Adjacent(user))
+		attack_hand(user)
+
+turf/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/storage))
+		var/obj/item/storage/S = W
 		if(S.use_to_pickup && S.collection_mode)
 			S.gather_all(src, user)
 	return ..()
@@ -94,21 +140,21 @@ turf/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
 	//First, check objects to block exit that are not on the border
 	for(var/obj/obstacle in mover.loc)
-		if(!(obstacle.flags & ON_BORDER) && (mover != obstacle) && (forget != obstacle))
+		if(!(obstacle.atom_flags & ATOM_FLAG_CHECKS_BORDER) && (mover != obstacle) && (forget != obstacle))
 			if(!obstacle.CheckExit(mover, src))
 				mover.Bump(obstacle, 1)
 				return 0
 
 	//Now, check objects to block exit that are on the border
 	for(var/obj/border_obstacle in mover.loc)
-		if((border_obstacle.flags & ON_BORDER) && (mover != border_obstacle) && (forget != border_obstacle))
+		if((border_obstacle.atom_flags & ATOM_FLAG_CHECKS_BORDER) && (mover != border_obstacle) && (forget != border_obstacle))
 			if(!border_obstacle.CheckExit(mover, src))
 				mover.Bump(border_obstacle, 1)
 				return 0
 
 	//Next, check objects to block entry that are on the border
 	for(var/obj/border_obstacle in src)
-		if(border_obstacle.flags & ON_BORDER)
+		if(border_obstacle.atom_flags & ATOM_FLAG_CHECKS_BORDER)
 			if(!border_obstacle.CanPass(mover, mover.loc, 1, 0) && (forget != border_obstacle))
 				mover.Bump(border_obstacle, 1)
 				return 0
@@ -120,16 +166,18 @@ turf/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
 	//Finally, check objects/mobs to block entry that are not on the border
 	for(var/atom/movable/obstacle in src)
-		if(!(obstacle.flags & ON_BORDER))
+		if(!(obstacle.atom_flags & ATOM_FLAG_CHECKS_BORDER))
 			if(!obstacle.CanPass(mover, mover.loc, 1, 0) && (forget != obstacle))
 				mover.Bump(obstacle, 1)
 				return 0
 	return 1 //Nothing found to block so return success!
 
 var/const/enterloopsanity = 100
-/turf/Entered(atom/atom as mob|obj)
+/turf/Entered(var/atom/atom, var/atom/old_loc)
 
 	..()
+
+	QUEUE_TEMPERATURE_ATOMS(atom)
 
 	if(!istype(atom, /atom/movable))
 		return
@@ -138,11 +186,6 @@ var/const/enterloopsanity = 100
 
 	if(ismob(A))
 		var/mob/M = A
-		var/mob/living/L = A
-		if(istype(L))
-			if(!(L in radiation_repository.irradiated_mobs))
-				if(src in radiation_repository.irradiated_turfs)
-					radiation_repository.irradiated_mobs.Add(L)
 		if(!M.check_solid_ground())
 			inertial_drift(M)
 			//we'll end up checking solid ground again but we still need to check the other things.
@@ -153,22 +196,25 @@ var/const/enterloopsanity = 100
 			M.make_floating(0) //we know we're not on solid ground so skip the checks to save a bit of processing
 
 	var/objects = 0
-	if(A && (A.flags & PROXMOVE))
+	if(A && (A.movable_flags & MOVABLE_FLAG_PROXMOVE))
 		for(var/atom/movable/thing in range(1))
 			if(objects > enterloopsanity) break
 			objects++
 			spawn(0)
 				if(A)
 					A.HasProximity(thing, 1)
-					if ((thing && A) && (thing.flags & PROXMOVE))
+					if ((thing && A) && (thing.movable_flags & MOVABLE_FLAG_PROXMOVE))
 						thing.HasProximity(A, 1)
 	return
 
-/turf/proc/adjacent_fire_act(turf/simulated/floor/source, temperature, volume)
+/turf/proc/adjacent_fire_act(turf/simulated/floor/source, exposed_temperature, exposed_volume)
 	return
 
 /turf/proc/is_plating()
 	return 0
+
+/turf/proc/protects_atom(var/atom/A)
+	return FALSE
 
 /turf/proc/inertial_drift(atom/movable/A)
 	if(!(A.last_move))	return
@@ -190,7 +236,7 @@ var/const/enterloopsanity = 100
 
 /turf/proc/AdjacentTurfs(var/check_blockage = TRUE)
 	. = list()
-	for(var/turf/t in oview(src,1))
+	for(var/turf/t in (trange(1,src) - src))
 		if(check_blockage)
 			if(!t.density)
 				if(!LinkBlocked(src, t) && !TurfBlockedNonWindow(t))
@@ -221,29 +267,30 @@ var/const/enterloopsanity = 100
 				L.Add(t)
 	return L
 
-/turf/proc/process()
-	return PROCESS_KILL
-
 /turf/proc/contains_dense_objects()
 	if(density)
 		return 1
 	for(var/atom/A in src)
-		if(A.density && !(A.flags & ON_BORDER))
+		if(A.density && !(A.atom_flags & ATOM_FLAG_CHECKS_BORDER))
 			return 1
 	return 0
 
 //expects an atom containing the reagents used to clean the turf
-/turf/proc/clean(atom/source, mob/user = null)
-	if(source.reagents.has_reagent("water", 1) || source.reagents.has_reagent("cleaner", 1))
+/turf/proc/clean(atom/source, mob/user = null, var/time = null, var/message = null)
+	if(source.reagents.has_reagent(/datum/reagent/water, 1) || source.reagents.has_reagent(/datum/reagent/space_cleaner, 1))
+		if(user && time && !do_after(user, time, src))
+			return
 		clean_blood()
 		remove_cleanables()
+		if(message)
+			to_chat(user, message)
 	else
 		to_chat(user, "<span class='warning'>\The [source] is too dry to wash that.</span>")
 	source.reagents.trans_to_turf(src, 1, 10)	//10 is the multiplier for the reaction effect. probably needed to wet the floor properly.
 
 /turf/proc/remove_cleanables()
 	for(var/obj/effect/O in src)
-		if(istype(O,/obj/effect/rune) || istype(O,/obj/effect/decal/cleanable) || istype(O,/obj/effect/overlay))
+		if(istype(O,/obj/effect/rune) || istype(O,/obj/effect/decal/cleanable))
 			qdel(O)
 
 /turf/proc/update_blood_overlays()
@@ -255,10 +302,103 @@ var/const/enterloopsanity = 100
 		decals = null
 
 // Called when turf is hit by a thrown object
-/turf/hitby(atom/movable/AM as mob|obj, var/speed)
+/turf/hitby(atom/movable/AM as mob|obj, var/datum/thrownthing/TT)
 	if(src.density)
-		spawn(2)
-			step(AM, turn(AM.last_move, 180))
 		if(isliving(AM))
 			var/mob/living/M = AM
-			M.turf_collision(src, speed)
+			M.turf_collision(src, TT.speed)
+			if(M.pinned.len)
+				return
+
+		var/intial_dir = TT.init_dir
+		spawn(2)
+			step(AM, turn(intial_dir, 180))
+
+/turf/proc/can_engrave()
+	return FALSE
+
+/turf/proc/try_graffiti(var/mob/vandal, var/obj/item/tool)
+
+	if(!tool.sharp || !can_engrave() || vandal.a_intent != I_HELP)
+		return FALSE
+
+	if(jobban_isbanned(vandal, "Graffiti"))
+		to_chat(vandal, SPAN_WARNING("You are banned from leaving persistent information across rounds."))
+		return
+
+	var/too_much_graffiti = 0
+	for(var/obj/effect/decal/writing/W in src)
+		too_much_graffiti++
+	if(too_much_graffiti >= 5)
+		to_chat(vandal, "<span class='warning'>There's too much graffiti here to add more.</span>")
+		return FALSE
+
+	var/message = sanitize(input("Enter a message to engrave.", "Graffiti") as null|text, trim = TRUE)
+	if(!message)
+		return FALSE
+
+	if(!vandal || vandal.incapacitated() || !Adjacent(vandal) || !tool.loc == vandal)
+		return FALSE
+
+	vandal.visible_message("<span class='warning'>\The [vandal] begins carving something into \the [src].</span>")
+
+	if(!do_after(vandal, max(20, length(message)), src))
+		return FALSE
+
+	vandal.visible_message("<span class='danger'>\The [vandal] carves some graffiti into \the [src].</span>")
+	var/obj/effect/decal/writing/graffiti = new(src)
+	graffiti.message = message
+	graffiti.author = vandal.ckey
+	vandal.update_personal_goal(/datum/goal/achievement/graffiti, TRUE)
+
+	if(lowertext(message) == "elbereth")
+		to_chat(vandal, "<span class='notice'>You feel much safer.</span>")
+
+	return TRUE
+
+/turf/proc/is_wall()
+	return FALSE
+
+/turf/proc/is_open()
+	return FALSE
+
+/turf/proc/is_floor()
+	return FALSE
+
+/turf/proc/get_obstruction()
+	if (density)
+		LAZYADD(., src)
+	if (contents.len > 100 || contents.len <= !!lighting_overlay)
+		return    // fuck it, too/not-enough much shit here
+	for (var/thing in src)
+		var/atom/movable/AM = thing
+		if (AM.simulated && AM.blocks_airlock())
+			LAZYADD(., AM)
+
+/**
+ * Returns false if stepping into a tile would cause harm (e.g. open space while unable to fly, water tile while a slime, lava, etc).
+ */
+/turf/proc/is_safe_to_enter(mob/living/L)
+	if(LAZYLEN(dangerous_objects))
+		for(var/obj/O in dangerous_objects)
+			if(!O.is_safe_to_step(L))
+				return FALSE
+	return TRUE
+
+/**
+ * Tells the turf that it currently contains something that automated movement should consider if planning to enter the tile.
+ * This uses lazy list macros to reduce memory footprint since for 99% of turfs the list would've been empty anyway.
+ */
+/turf/proc/register_dangerous_object(obj/O)
+	if(!istype(O))
+		return FALSE
+	LAZYADD(dangerous_objects, O)
+
+/**
+ * Similar to `register_dangerous_object()`, for when the dangerous object stops being dangerous/gets deleted/moved/etc.
+ */
+/turf/proc/unregister_dangerous_object(obj/O)
+	if(!istype(O))
+		return FALSE
+	LAZYREMOVE(dangerous_objects, O)
+	UNSETEMPTY(dangerous_objects) // This nulls the list var if it's empty.

@@ -1,0 +1,16 @@
+name: Cancel
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  cancel:
+    name: 'Cancel Redundant Builds'
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: styfle/cancel-workflow-action@89f242ee29e10c53a841bfe71cc0ce7b2f065abc
+        with:
+          workflow_id: 27212, 3545321
+          access_token: ${{ github.token }}

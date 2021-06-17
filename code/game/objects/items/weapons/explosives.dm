@@ -1,55 +1,56 @@
-/obj/item/weapon/plastique
+/obj/item/plastique
 	name = "plastic explosives"
 	desc = "Used to put holes in specific areas without too much extra hole."
 	gender = PLURAL
 	icon = 'icons/obj/assemblies.dmi'
 	icon_state = "plastic-explosive0"
 	item_state = "plasticx"
-	flags = NOBLUDGEON
+	item_flags = ITEM_FLAG_NO_BLUDGEON
 	w_class = ITEM_SIZE_SMALL
-	origin_tech = list(TECH_ILLEGAL = 2)
+	origin_tech = list(TECH_ESOTERIC = 2)
 	var/datum/wires/explosive/c4/wires = null
 	var/timer = 10
 	var/atom/target = null
 	var/open_panel = 0
 	var/image_overlay = null
 
-/obj/item/weapon/plastique/New()
+/obj/item/plastique/New()
 	wires = new(src)
 	image_overlay = image('icons/obj/assemblies.dmi', "plastic-explosive2")
 	..()
 
-/obj/item/weapon/plastique/Destroy()
+/obj/item/plastique/Destroy()
 	qdel(wires)
 	wires = null
 	return ..()
 
-/obj/item/weapon/plastique/attackby(var/obj/item/I, var/mob/user)
-	if(istype(I, /obj/item/weapon/screwdriver))
+/obj/item/plastique/attackby(var/obj/item/I, var/mob/user)
+	if(isScrewdriver(I))
 		open_panel = !open_panel
 		to_chat(user, "<span class='notice'>You [open_panel ? "open" : "close"] the wire panel.</span>")
-	else if(istype(I, /obj/item/weapon/wirecutters) || istype(I, /obj/item/device/multitool) || istype(I, /obj/item/device/assembly/signaler ))
+	else if(isWirecutter(I) || isMultitool(I) || istype(I, /obj/item/device/assembly/signaler ))
 		wires.Interact(user)
 	else
 		..()
 
-/obj/item/weapon/plastique/attack_self(mob/user as mob)
+/obj/item/plastique/attack_self(mob/user as mob)
 	var/newtime = input(usr, "Please set the timer.", "Timer", 10) as num
 	if(user.get_active_hand() == src)
 		newtime = Clamp(newtime, 10, 60000)
 		timer = newtime
 		to_chat(user, "Timer set for [timer] seconds.")
 
-/obj/item/weapon/plastique/afterattack(atom/movable/target, mob/user, flag)
+/obj/item/plastique/afterattack(atom/movable/target, mob/user, flag)
 	if (!flag)
 		return
-	if (ismob(target) || istype(target, /turf/unsimulated) || istype(target, /turf/simulated/shuttle) || istype(target, /obj/item/weapon/storage/) || istype(target, /obj/item/clothing/accessory/storage/) || istype(target, /obj/item/clothing/under))
+	if (ismob(target) || istype(target, /turf/unsimulated) || istype(target, /turf/simulated/shuttle) || istype(target, /obj/item/storage/) || istype(target, /obj/item/clothing/accessory/storage/) || istype(target, /obj/item/clothing/under))
 		return
 	to_chat(user, "Planting explosives...")
 	user.do_attack_animation(target)
 
 	if(do_after(user, 50, target) && in_range(user, target))
-		user.drop_item()
+		if(!user.unequip_item())
+			return
 		src.target = target
 		forceMove(null)
 
@@ -63,10 +64,9 @@
 
 		target.overlays += image_overlay
 		to_chat(user, "Bomb has been planted. Timer counting down from [timer].")
-		spawn(timer*10)
-			explode(get_turf(target))
+		run_timer()
 
-/obj/item/weapon/plastique/proc/explode(var/location)
+/obj/item/plastique/proc/explode(var/location)
 	if(!target)
 		target = get_atom_on_turf(src)
 	if(!target)
@@ -86,5 +86,17 @@
 		target.overlays -= image_overlay
 	qdel(src)
 
-/obj/item/weapon/plastique/attack(mob/M as mob, mob/user as mob, def_zone)
+/obj/item/plastique/proc/run_timer() //Basically exists so the C4 will beep when running. Better idea than putting sleeps in attackby.
+	set waitfor = 0
+	var/T = timer
+	while(T > 0)
+		sleep(1 SECOND)
+		if(target)
+			playsound(target, 'sound/items/timer.ogg', 50)
+		else
+			playsound(loc, 'sound/items/timer.ogg', 50)
+		T--
+	explode(get_turf(target))
+
+/obj/item/plastique/attack(mob/M as mob, mob/user as mob, def_zone)
 	return

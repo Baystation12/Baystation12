@@ -1,0 +1,168 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/template_noop,
+/area/template_noop)
+"b" = (
+/obj/structure/flora/ausbushes/genericbush,
+/turf/simulated/floor/exoplanet/grass,
+/area/template_noop)
+"c" = (
+/turf/simulated/floor/exoplanet/grass,
+/area/template_noop)
+"d" = (
+/obj/structure/flora/ausbushes/brflowers,
+/obj/structure/flora/ausbushes/ywflowers,
+/turf/simulated/floor/exoplanet/grass,
+/area/template_noop)
+"e" = (
+/obj/structure/flora/ausbushes/ppflowers,
+/turf/simulated/floor/exoplanet/grass,
+/area/template_noop)
+"f" = (
+/obj/structure/flora/ausbushes/fullgrass,
+/turf/simulated/floor/exoplanet/grass,
+/area/template_noop)
+"g" = (
+/obj/structure/flora/ausbushes/leafybush,
+/turf/simulated/floor/exoplanet/grass,
+/area/template_noop)
+"h" = (
+/obj/structure/flora/ausbushes/ppflowers,
+/obj/structure/flora/ausbushes/fernybush,
+/turf/simulated/floor/exoplanet/grass,
+/area/template_noop)
+"i" = (
+/obj/structure/flora/grass/both,
+/turf/simulated/floor/exoplanet/grass,
+/area/template_noop)
+"j" = (
+/turf/simulated/floor/exoplanet/water/shallow,
+/area/template_noop)
+"k" = (
+/obj/structure/flora/grass/both,
+/obj/structure/flora/ausbushes/ywflowers,
+/turf/simulated/floor/exoplanet/grass,
+/area/template_noop)
+"l" = (
+/obj/structure/flora/ausbushes/reedbush,
+/turf/simulated/floor/exoplanet/water/shallow,
+/area/template_noop)
+"m" = (
+/obj/structure/flora/grass/both,
+/obj/structure/flora/ausbushes/fullgrass,
+/turf/simulated/floor/exoplanet/grass,
+/area/template_noop)
+"n" = (
+/obj/structure/flora/ausbushes/ywflowers,
+/obj/structure/flora/ausbushes/ppflowers,
+/turf/simulated/floor/exoplanet/grass,
+/area/template_noop)
+
+(1,1,1) = {"
+a
+a
+a
+c
+c
+c
+c
+"}
+(2,1,1) = {"
+a
+a
+g
+k
+j
+l
+c
+"}
+(3,1,1) = {"
+a
+e
+c
+c
+j
+c
+c
+"}
+(4,1,1) = {"
+b
+c
+j
+j
+j
+f
+a
+"}
+(5,1,1) = {"
+a
+f
+j
+j
+j
+i
+n
+"}
+(6,1,1) = {"
+a
+g
+j
+j
+j
+j
+c
+"}
+(7,1,1) = {"
+a
+c
+j
+j
+j
+c
+c
+"}
+(8,1,1) = {"
+a
+h
+j
+j
+j
+m
+g
+"}
+(9,1,1) = {"
+a
+c
+j
+j
+j
+c
+a
+"}
+(10,1,1) = {"
+c
+i
+j
+j
+g
+c
+a
+"}
+(11,1,1) = {"
+d
+j
+j
+f
+c
+a
+a
+"}
+(12,1,1) = {"
+c
+c
+c
+c
+a
+a
+a
+"}

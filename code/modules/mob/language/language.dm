@@ -5,27 +5,39 @@
 */
 
 /datum/language
-	var/name = "an unknown language"  // Fluff name of language if any.
-	var/desc = "A language."          // Short description for 'Check Languages'.
+	var/name = "base language"  // Fluff name of language if any.
+	var/desc = "You should not have this language." // Short description for 'Check Languages'.
 	var/speech_verb = "says"          // 'says', 'hisses', 'farts'.
 	var/ask_verb = "asks"             // Used when sentence ends in a ?
 	var/exclaim_verb = "exclaims"     // Used when sentence ends in a !
 	var/whisper_verb                  // Optional. When not specified speech_verb + quietly/softly is used instead.
 	var/signlang_verb = list("signs", "gestures") // list of emotes that might be displayed if this language has NONVERBAL or SIGNLANG flags
 	var/colour = "body"               // CSS style to use for strings in this language.
-	var/key = "x"                     // Character used to speak in language eg. :o for Unathi.
+	var/key = ""                     // Character used to speak in language eg. :o for Unathi.
 	var/flags = 0                     // Various language flags.
 	var/native                        // If set, non-native speakers will have trouble speaking.
 	var/list/syllables                // Used when scrambling text for a non-speaker.
 	var/list/space_chance = 55        // Likelihood of getting a space in the random scramble string
 	var/machine_understands = 1       // Whether machines can parse and understand this language
+	var/shorthand = "???"			  // Shorthand that shows up in chat for this language.
+	var/list/partial_understanding				  // List of languages that can /somehwat/ understand it, format is: name = chance of understanding a word
+	var/warning = ""
+	var/hidden_from_codex			  // If it should not show up in Codex
+	var/category = /datum/language    // Used to point at root language types that shouldn't be visible
+	var/has_written_form = FALSE
+
+/datum/language/proc/can_be_spoken_properly_by(var/mob/speaker)
+	return TRUE
+
+/datum/language/proc/muddle(var/message)
+	return message
 
 /datum/language/proc/get_random_name(var/gender, name_count=2, syllable_count=4, syllable_divisor=2)
 	if(!syllables || !syllables.len)
 		if(gender==FEMALE)
-			return capitalize(pick(first_names_female)) + " " + capitalize(pick(last_names))
+			return capitalize(pick(GLOB.first_names_female)) + " " + capitalize(pick(GLOB.last_names))
 		else
-			return capitalize(pick(first_names_male)) + " " + capitalize(pick(last_names))
+			return capitalize(pick(GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
 
 	var/full_name = ""
 	var/new_name = ""
@@ -41,8 +53,39 @@
 /datum/language
 	var/list/scramble_cache = list()
 
-/datum/language/proc/scramble(var/input)
+/datum/language/proc/scramble(var/input, var/list/known_languages)
 
+	var/understand_chance = 0
+	for(var/datum/language/L in known_languages)
+		if(LAZYACCESS(partial_understanding, L.name))
+			understand_chance += partial_understanding[L.name]
+
+	var/list/words = splittext(input, " ")
+	var/list/scrambled_text = list()
+	var/new_sentence = 0
+	for(var/w in words)
+		var/nword = "[w] "
+		var/input_ending = copytext(w, length(w))
+		var/ends_sentence = findtext(".?!",input_ending)
+		if(!prob(understand_chance))
+			nword = scramble_word(w)
+			if(new_sentence)
+				nword = capitalize(nword)
+				new_sentence = FALSE
+			if(ends_sentence)
+				nword = trim(nword)
+				nword = "[nword][input_ending] "
+
+		if(ends_sentence)
+			new_sentence = TRUE
+
+		scrambled_text += nword
+
+	. = jointext(scrambled_text, null)
+	. = capitalize(.)
+	. = trim(.)
+
+/datum/language/proc/scramble_word(var/input)
 	if(!syllables || !syllables.len)
 		return stars(input)
 
@@ -55,7 +98,7 @@
 
 	var/input_size = length(input)
 	var/scrambled_text = ""
-	var/capitalize = 1
+	var/capitalize = 0
 
 	while(length(scrambled_text) < input_size)
 		var/next = pick(syllables)
@@ -69,14 +112,6 @@
 			capitalize = 1
 		else if(chance > 5 && chance <= space_chance)
 			scrambled_text += " "
-
-	scrambled_text = trim(scrambled_text)
-	var/ending = copytext(scrambled_text, length(scrambled_text))
-	if(ending == ".")
-		scrambled_text = copytext(scrambled_text,1,length(scrambled_text)-1)
-	var/input_ending = copytext(input, input_size)
-	if(input_ending in list("!","?","."))
-		scrambled_text += input_ending
 
 	// Add it to cache, cutting old entries if the list is too long
 	scramble_cache[input] = scrambled_text
@@ -104,7 +139,7 @@
 	if(!speaker_mask) speaker_mask = speaker.name
 	message = format_message(message, get_spoken_verb(message))
 
-	for(var/mob/player in player_list)
+	for(var/mob/player in GLOB.player_list)
 		player.hear_broadcast(src, speaker, speaker_mask, message)
 
 /mob/proc/hear_broadcast(var/datum/language/language, var/mob/speaker, var/speaker_name, var/message)
@@ -165,19 +200,13 @@
 	if (only_species_language && speaking != all_languages[species_language])
 		return 0
 
-	return (speaking.can_speak_special(src) && (universal_speak || (speaking && speaking.flags & INNATE) || speaking in src.languages))
+	return (speaking.can_speak_special(src) && (universal_speak || (speaking && speaking.flags & INNATE) || (speaking in src.languages)))
 
 /mob/proc/get_language_prefix()
-	if(client && client.prefs.language_prefixes && client.prefs.language_prefixes.len)
-		return client.prefs.language_prefixes[1]
-
-	return config.language_prefixes[1]
+	return get_prefix_key(/decl/prefix/language)
 
 /mob/proc/is_language_prefix(var/prefix)
-	if(client && client.prefs.language_prefixes && client.prefs.language_prefixes.len)
-		return prefix in client.prefs.language_prefixes
-
-	return prefix in config.language_prefixes
+	return prefix == get_prefix_key(/decl/prefix/language)
 
 //TBD
 /mob/verb/check_languages()
@@ -189,9 +218,9 @@
 
 	for(var/datum/language/L in languages)
 		if(!(L.flags & NONGLOBAL))
-			dat += "<b>[L.name] ([get_language_prefix()][L.key])</b><br/>[L.desc]<br/><br/>"
+			dat += "<b>[L.name]([L.shorthand]) ([get_language_prefix()][L.key])</b><br/>[L.desc]<br/><br/>"
 
-	src << browse(dat, "window=checklanguage")
+	show_browser(src, dat, "window=checklanguage")
 	return
 
 /mob/living/check_languages()
@@ -203,15 +232,15 @@
 	for(var/datum/language/L in languages)
 		if(!(L.flags & NONGLOBAL))
 			if(L == default_language)
-				dat += "<b>[L.name] ([get_language_prefix()][L.key])</b> - default - <a href='byond://?src=\ref[src];default_lang=reset'>reset</a><br/>[L.desc]<br/><br/>"
+				dat += "<b>[L.name]([L.shorthand]) ([get_language_prefix()][L.key])</b> - default - <a href='byond://?src=\ref[src];default_lang=reset'>reset</a><br/>[L.desc]<br/><br/>"
 			else if (can_speak(L))
-				dat += "<b>[L.name] ([get_language_prefix()][L.key])</b> - <a href='byond://?src=\ref[src];default_lang=\ref[L]'>set default</a><br/>[L.desc]<br/><br/>"
+				dat += "<b>[L.name]([L.shorthand]) ([get_language_prefix()][L.key])</b> - <a href='byond://?src=\ref[src];default_lang=\ref[L]'>set default</a><br/>[L.desc]<br/><br/>"
 			else
-				dat += "<b>[L.name] ([get_language_prefix()][L.key])</b> - cannot speak!<br/>[L.desc]<br/><br/>"
+				dat += "<b>[L.name]([L.shorthand]) ([get_language_prefix()][L.key])</b> - cannot speak!<br/>[L.desc]<br/><br/>"
 
-	src << browse(dat, "window=checklanguage")
+	show_browser(src, dat, "window=checklanguage")
 
-/mob/living/Topic(href, href_list)
+/mob/living/OnSelfTopic(href_list, topic_status)
 	if(href_list["default_lang"])
 		if(href_list["default_lang"] == "reset")
 
@@ -225,9 +254,8 @@
 			if(L && (L in languages))
 				set_default_language(L)
 		check_languages()
-		return 1
-	else
-		return ..()
+		return TOPIC_HANDLED
+	return ..()
 
 /proc/transfer_languages(var/mob/source, var/mob/target, var/except_flags)
 	for(var/datum/language/L in source.languages)

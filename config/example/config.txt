@@ -1,13 +1,11 @@
 ## Server name: This appears at the top of the screen in-game. In this case it will read "tgstation: station_name" where station_name is the randomly generated name of the station for the round. Remove the # infront of SERVERNAME and replace 'tgstation' with the name of your choice
 # SERVERNAME spacestation13
 
-## Alert levels
-ALERT_GREEN All threats to the station have passed. Security may not have weapons visible, privacy laws are once again fully enforced.
-ALERT_BLUE_UPTO The station has received reliable information about possible hostile activity on the station. Security staff may have weapons visible, random searches are permitted.
-ALERT_BLUE_DOWNTO The immediate threat has passed. Security may no longer have weapons drawn at all times, but may continue to have them visible. Random searches are still allowed.
-ALERT_RED_UPTO There is an immediate serious threat to the station. Security may have weapons unholstered at all times. Random searches are allowed and advised.
-ALERT_RED_DOWNTO The self-destruct mechanism has been deactivated, there is still however an immediate serious threat to the station. Security may have weapons unholstered at all times, random searches are allowed and advised.
-ALERT_DELTA The station's self-destruct mechanism has been engaged. All crew are instructed to obey all instructions given by heads of staff. Any violations of these orders can be punished by death. This is not a drill.
+## Game Version: The archetype of the server for topic status requests. Unless significantly deviated, avoid changing this. Default Baystation12
+# GAME_VERSION Baystation12
+
+## Hub visibility: If you want to be visible on the hub, uncomment the below line and be sure that Dream Daemon is set to "Visible." This can be changed in-round as well with toggle-hub-visibility if Dream Daemon is set correctly.
+# HUB_VISIBLE
 
 ## Add a # infront of this if you want to use the SQL based admin system, the legacy system uses admins.txt. You need to set up your database to use the SQL based system.
 ADMIN_LEGACY_SYSTEM
@@ -25,12 +23,19 @@ JOBS_HAVE_MINIMAL_ACCESS
 ## you have noone older than 0 days, since noone has been logged yet. Only turn this on once you have had the database up for 30 days.
 #USE_AGE_RESTRICTION_FOR_JOBS
 
+## Unhash this entry to set a number of days since first connection below which a new or returning player will not be allowed to successfully connect to the server.
+#MINIMUM_PLAYER_AGE 7
+
+
 ## Unhash this entry to have certain antag roles require your account to be at least a certain number of days old for round start and auto-spawn selection.
 ## Non-automatic antagonist recruitment, such as being converted to cultism is not affected. Has the same database requirements and notes as USE_AGE_RESTRICTION_FOR_JOBS.
 #USE_AGE_RESTRICTION_FOR_ANTAGS
 
 ## Unhash this to use recursive explosions, keep it hashed to use circle explosions. Recursive explosions react to walls, airlocks and blast doors, making them look a lot cooler than the boring old circular explosions. They require more CPU and are (as of january 2013) experimental
 #USE_RECURSIVE_EXPLOSIONS
+
+## Radiation weakens with distance from the source; stop calculating when the strength falls below this value.   Lower values mean radiation reaches smaller (with increasingly trivial damage) at the cost of more CPU usage.  Max range =  DISTANCE^2 * POWER / RADIATION_LOWER_LIMIT
+# RADIATION_LOWER_LIMIT	0.35
 
 ## log OOC channel
 LOG_OOC
@@ -59,9 +64,6 @@ LOG_EMOTE
 ## log attack messages
 LOG_ATTACK
 
-## log pda messages
-LOG_PDA
-
 ## log world.log messages
 # LOG_WORLD_OUTPUT
 
@@ -74,24 +76,8 @@ LOG_PDA
 ## log admin warning messages
 ##LOG_ADMINWARN  ## Also duplicates a bunch of other messages.
 
-## sql switching
-# SQL_ENABLED
-
 ## disconnect players who did nothing during the set amount of minutes
 # KICK_INACTIVE 10
-
-## Chooses whether mods have the ability to tempban or not
-MODS_CAN_TEMPBAN
-
-## Chooses whether mods have the ability to issue tempbans for jobs or not
-MODS_CAN_JOB_TEMPBAN
-
-## Maximum mod tempban duration (in minutes)
-MOD_TEMPBAN_MAX 1440
-
-## Maximum mod job tempban duration (in minutes)
-MOD_JOB_TEMPBAN_MAX 1440
-
 
 ## probablities for game modes chosen in "secret" and "random" modes
 ##
@@ -104,6 +90,9 @@ PROBABILITY WIZARD 1
 PROBABILITY CHANGELING 1
 PROBABILITY CULT 1
 PROBABILITY EXTEND-A-TRAITORMONGOUS 6
+
+## if possible round types will be hidden from players for secret rounds
+#SECRET_HIDE_POSSIBILITIES
 
 ## Hash out to disable random events during the round.
 ALLOW_RANDOM_EVENTS
@@ -123,17 +112,14 @@ TRAITOR_SCALING
 ## If security is prohibited from being most antagonists
 #PROTECT_ROLES_FROM_ANTAGONIST
 
-## If cortical stacks are to be used instead of standard cloning.
-USE_CORTICAL_STACKS
-
 ## Comment this out to stop admins being able to choose their personal ooccolor
 ALLOW_ADMIN_OOCCOLOR
 
-## If metadata is supported
-# ALLOW_METADATA
-
 ## allow players to initiate a restart vote
 ALLOW_VOTE_RESTART
+
+## Allow chat markup ingame.
+ALLOW_CHAT_MARKUP
 
 ## allow players to initate a mode-change start
 ALLOW_VOTE_MODE
@@ -144,17 +130,22 @@ VOTE_DELAY 6000
 ## time period (deciseconds) which voting session will last (default 1 minute)
 VOTE_PERIOD 600
 
-## autovote initial delay (deciseconds) before first automatic transfer vote call (default 180 minutes)
-VOTE_AUTOTRANSFER_INITIAL 108000
+## autovote initial delay in minutes before first automatic transfer vote call (default 120)
+# using seven semicolon (;) separated values allows for different weekday-based values
+VOTE_AUTOTRANSFER_INITIAL 120
 
-##autovote delay (deciseconds) before sequential automatic transfer votes are called (default 60 minutes)
-VOTE_AUTOTRANSFER_INTERVAL 36000
+##autovote delay in minutes before sequential automatic transfer votes are called (default 30)
+# using seven semicolon (;) separated values allows for different weekday-based values
+VOTE_AUTOTRANSFER_INTERVAL 30
 
-## Time left (seconds) before round start when automatic gamemote vote is called (default 100).
-VOTE_AUTOGAMEMODE_TIMELEFT 100
+## Time left (seconds) before round start when automatic gamemote vote is called (default 160).
+VOTE_AUTOGAMEMODE_TIMELEFT 160
 
 ## prevents dead players from voting or starting votes
 #NO_DEAD_VOTE
+
+## Prevents players not in-round from voting on crew transfer votes.
+#NO_DEAD_VOTE_CREW_TRANSFER
 
 ## players' votes default to "No vote" (otherwise,  default to "No change")
 DEFAULT_NO_VOTE
@@ -165,15 +156,8 @@ ALLOW_ANTAG_HUD
 ## If ghosts use antagHUD they are no longer allowed to join the round.
 ANTAG_HUD_RESTRICTED
 
-## allow AI job
-ALLOW_AI
-
-
 ## disable abandon mob
 # NORESPAWN
-
-## disables calling del(src) on newmobs if they logout before spawnin in
-# DONT_DEL_NEWMOB
 
 ## set a hosted by name for unix platforms
 HOSTEDBY yournamehere
@@ -204,45 +188,23 @@ GUEST_BAN
 ## GitHub address
 # GITHUBURL https://github.com/example-user/example-repository
 
+## GitHub new issue address
+# ISSUEREPORTURL https://github.com/example-user/example-repository/issues/new
+
 ## Ban appeals URL - usually for a forum or wherever people should go to contact your admins.
 # BANAPPEALS http://example.com
 
-## In-game features
-## spawns a spellbook which gives object-type spells instead of verb-type spells for the wizard
-# FEATURE_OBJECT_SPELL_SYSTEM
+##Defines the ticklag for the world. 0.5 is smooth, 0.7 is less smooth.
+TICKLAG 0.5
 
-##Toggle for having jobs load up from the .txt
-# LOAD_JOBS_FROM_TXT
-
-##Remove the # mark infront of this to forbid admins from posssessing the singularity.
-#FORBID_SINGULO_POSSESSION
-
-## Remove the # to show a popup 'reply to' window to every non-admin that recieves an adminPM.
-## The intention is to make adminPMs more visible. (although I fnd popups annoying so this defaults to off)
-#POPUP_ADMIN_PM
-
-## Remove the # to allow special 'Easter-egg' events on special holidays such as seasonal holidays and stuff like 'Talk Like a Pirate Day' :3 YAARRR
-ALLOW_HOLIDAYS
-##Defines the ticklag for the world.  0.9 is the normal one, 0.5 is smoother.
-TICKLAG 0.7
-
-## Defines if Tick Compensation is used.  It results in a minor slowdown of movement of all mobs, but attempts to result in a level movement speed across all ticks.  Recommended if tickrate is lowered.
-TICKCOMP 0
+##Defines world FPS. Defaults to 20.
+# FPS 20
 
 ## Whether the server will talk to other processes through socket_talk
 SOCKET_TALK 0
 
-## Uncomment this to ban use of ToR
-#TOR_BAN
-
 ## Comment this out to disable automuting
 #AUTOMUTE_ON
-
-## How long the delay is before the Away Mission gate opens. Default is half an hour.
-GATEWAY_DELAY 18000
-
-## Remove the # to give assistants maint access.
-#ASSISTANT_MAINT
 
 ## Remove the # to make rounds which end instantly (Rev, Wizard, Malf) to continue until the shuttle is called or the station is nuked.
 ## Malf and Rev will let the shuttle be called when the antags/protags are dead.
@@ -253,19 +215,20 @@ USEALIENWHITELIST
 ## Uncomment to use the alien whitelist system with SQL instead. (requires the above uncommented aswell)
 #USEALIENWHITELIST_SQL
 
-## Comment this to unrestrict the number of alien players allowed in the round. The number represents the number of alien players for every human player.
-#ALIEN_PLAYER_RATIO 0.2
-##Remove the # to let ghosts spin chairs
-#GHOST_INTERACTION
-
 ## Password used for authorizing ircbot and other external tools.
 #COMMS_PASSWORD
 
+## Password used for authorizing external tools that can apply bans
+#BAN_COMMS_PASSWORD
+
+## BYOND builds that will result the client using them to be banned.
+#FORBIDDEN_VERSIONS 512.0001;512.0002
+
+## Export address where external tools that monitor logins are located
+#LOGIN_EXPORT_ADDR
+
 ## Uncomment to enable sending data to the IRC bot.
 #USE_IRC_BOT
-
-## Uncomment if the IRC bot requires using world.Export() instead of nudge.py/libnudge
-#IRC_BOT_EXPORT
 
 ## Host where the IRC bot is hosted.  Port 45678 needs to be open.
 #IRC_BOT_HOST localhost
@@ -276,14 +239,6 @@ USEALIENWHITELIST
 ## IRC channel to send adminhelps to.  Leave blank to disable adminhelps-to-irc.
 #ADMIN_IRC #admin
 
-## Path to the python2 executable on the system.  Leave blank for default.
-## Default is "python" on Windows, "/usr/bin/env python2" on UNIX.
-#PYTHON_PATH
-
-## Uncomment to use the C library nudge instead of the python script.
-## This helps security and stability on Linux, but you need to compile the library first.
-#USE_LIB_NUDGE
-
 ## Uncommen to allow ghosts to write in blood during Cult rounds.
 ALLOW_CULT_GHOSTWRITER
 
@@ -292,6 +247,9 @@ REQ_CULT_GHOSTWRITER 6
 
 ## Sets the number of available character slots
 CHARACTER_SLOTS 10
+
+## Sets the number of loadout slots per character
+LOADOUT_SLOTS 3
 
 ## Expected round length in minutes
 EXPECTED_ROUND_LENGTH 180
@@ -315,15 +273,6 @@ EVENT_CUSTOM_START_MAJOR 80;100
 ## able to use the more powerful debug options.
 #DEBUG_PARANOID
 
-## Uncomment to allow aliens to spawn.
-#ALIENS_ALLOWED
-
-## Uncomment to allow alien xenomorph queens to lay eggs.
-#ALIEN_EGGS_ALLOWED
-
-## Uncomment to allow xenos to spawn.
-#NINJAS_ALLOWED
-
 ## Uncomment to disable the restrictive weldervision overlay.
 #DISABLE_WELDER_VISION
 
@@ -332,6 +281,9 @@ EVENT_CUSTOM_START_MAJOR 80;100
 
 ## Uncomment to disable the OOC channel by default.
 #DISABLE_OOC
+
+## Uncomment to disable the LOOC channel by default.
+#DISABLE_LOOC
 
 ## Uncomment to disable the dead OOC channel by default.
 #DISABLE_DEAD_OOC
@@ -345,8 +297,11 @@ EVENT_CUSTOM_START_MAJOR 80;100
 ## Uncomment to disable respawning by default.
 #DISABLE_RESPAWN
 
-## Respawn delay in minutes before one may respawn as a crew member.
+## The delay in minutes before an observer may return to the main menu.
 #RESPAWN_DELAY 30
+
+## The delay in minutes before an observer that has returned to the main menu may rejoin the game.
+#RESPAWN_MENU_DELAY 0
 
 ## Strength of ambient star light. Set to 0 or less to turn off. A value of 1 is unlikely to have a noticeable effect in most lighting systems.
 STARLIGHT 0
@@ -362,7 +317,8 @@ STARLIGHT 0
 ## Enable asteroid tunnel/cave generation. Will behave strangely if turned off with a map that expects it on.
 # GENERATE_ASTEROID
 
-
+## Set a value for the maximum range in tiles of an explosion from its center. Default 14
+# MAX_EXPLOSION_RANGE 14
 
 ## Uncomment to enable organ decay outside of a body or storage item.
 #ORGANS_CAN_DECAY
@@ -373,11 +329,8 @@ STARLIGHT 0
 ## Uncomment to override default brain health.
 #DEFAULT_BRAIN_HEALTH 400
 
-## Default language prefix keys, separated with spaces. Only single character keys are supported. If unset, defaults to , # and -
-# DEFAULT_LANGUAGE_PREFIXES , # -
-
 ## Uncomment this line to announce shuttle dock announcements to the main IRC channel, if MAIN_IRC has also been setup.
-# ANNOUNCE_SHUTTLE_DOCK_TO_IRC
+# ANNOUNCE_EVAC_TO_IRC
 
 ## Uncomment to enable map voting; you'll need to use the script at tools/server.sh or an equivalent for it to take effect
 ## You'll also likely need to enable WAIT_FOR_SIGUSR1 below
@@ -391,3 +344,75 @@ STARLIGHT 0
 
 ## Uncomment to enable auto-stealthing staff who are AFK for more than specified minutes
 # AUTOSTEALTH 30
+
+## How many loadout points are available. Use 0 to disable loadout, and any negative number to indicate infinite points.
+MAX_GEAR_COST 10
+
+## How much radiation levels self-reduce by each tick.
+RADIATION_DECAY_RATE 1
+
+## The amount of radiation resistance on a turf is multiplied by this value
+RADIATION_RESISTANCE_MULTIPLIER 1.25
+
+## General material radiation resistance is divided by this value
+RADIATION_MATERIAL_RESISTANCE_DIVISOR 2
+
+## Below this point, radiation is ignored
+RADIATION_LOWER_LIMIT 0.15
+
+## Uncomment this to prevent players from printing copy/pasted circuits
+#DISABLE_CIRCUIT_PRINTING
+
+## Uncomment this to allow admins to narrate using HTML tags
+#ALLOW_UNSAFE_NARRATES
+
+## Uncomment this to DISABLE action spam kicking. Not recommended; this helps protect from spam attacks.
+#DO_NOT_PREVENT_SPAM
+
+## Uncomment this to modify the length of the spam kicking interval in seconds.
+#ACT_INTERVAL 0.1
+
+## Uncomment this to modify the number of actions permitted per interval before being kicked for spam.
+#MAX_ACTS_PER_INTERVAL 140
+
+##Clients will be unable to connect unless their version is equal to or higher than this (a number, e.g. 511)
+#MINIMUM_BYOND_VERSION 512
+
+## Clients will be unable to connect unless their build is equal to or higher than this (a number, e.g. 1000)
+#MINIMUM_BYOND_BUILD 1488
+
+## Uncomment or create lines to add user-accessible chat markup
+## A chat markup line is in the form regex;replacer. The regular expression should be in the common
+# /matcher/flags format. The replacer is a common regex replacer string, using $n ($1, $2, etc) to
+# reference capture groups. The provided examples allow for /italics/, *bold*, and _underline_
+# respectively. Using multiple or complex markup options can get strange - do it at your own risk.
+#CHAT_MARKUP /(^|\s)\/([^\/]+)\//g;$1<i>$2</i>
+#CHAT_MARKUP /(^|\s)\*([^\*]+)\*/g;$1<b>$2</b>
+#CHAT_MARKUP /(^|\s)_([^_]+)_/g;$1<u>$2</u>
+
+## Prevents matching messages from being sent on any communication channel
+## The provided example forbids byond:// and http/https:// unless followed by a permitted domain.
+#FORBIDDEN_MESSAGE_REGEX /((https?)|(byond)):\/\/(?!(.*\.)?baystation12\.net)/i
+
+## The text to send to a user when their message matches FORBIDDEN_MESSAGE_REGEX
+## Defaults to <B>Your message matched a filter and has not been sent.</B>
+## Can be disabled by setting an empty message here
+#FORBIDDEN_MESSAGE_WARNING <B>Your message matched a filter and has not been sent.</B>
+
+## Uncomment this to prevent admins from being notified of of FORBIDDEN_MESSAGE_REGEX matches
+#FORBIDDEN_MESSAGE_NO_NOTIFICATIONS
+
+## Uncomment this to not show the content of forbidden messages in admin notifications
+## Only used when FORBIDDEN_MESSAGE_NO_NOTIFICATIONS is not active
+#FORBIDDEN_MESSAGE_HIDE_DETAILS
+
+## Direct clients to preload the server resource file from a URL pointing to a .rsc file. NOTE: At this time (byond 512),
+## the client/resource_rsc var does not function as one would expect. See client_defines.dm, the "preload_rsc" var's
+## comments on how to use it properly. If you use a resource URL, you must set preload_rsc to 0 at compile time or
+## clients will still download from the server *too*. This will randomly select one URL if more than one is provided.
+## Spaces are prohibited in each URL by spec, you must use encoded spaces.
+#RESOURCE_URLS URL URL2 URL3
+
+## Add lines of 'DISALLOW_VOTABLE_MODE config_tag' to prevent a normally votable mode from being votable, eg:
+## DISALLOW_VOTABLE_MODE changeling
+## DISALLOW_VOTABLE_MODE malfunction

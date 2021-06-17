@@ -1,8 +1,8 @@
 /spell/contract/return_master
 	name = "Return to Master"
-	desc = "Teleport back to your master"
+	desc = "Teleport back to your master."
 
-	school = "abjuration"
+	school = "conjuration"
 	charge_max = 600
 	spell_flags = 0
 	invocation = "none"

@@ -1,8 +1,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 /// Droppers.
 ////////////////////////////////////////////////////////////////////////////////
-/obj/item/weapon/reagent_containers/dropper
-	name = "Dropper"
+/obj/item/reagent_containers/dropper
+	name = "dropper"
 	desc = "A dropper. Transfers 5 units."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "dropper0"
@@ -11,12 +11,6 @@
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
 	volume = 5
-
-	do_surgery(mob/living/carbon/M, mob/living/user)
-		if(user.a_intent != I_HELP) //in case it is ever used as a surgery tool
-			return ..()
-		afterattack(M, user, 1)
-		return 1
 
 	afterattack(var/obj/target, var/mob/user, var/proximity)
 		if(!target.reagents || !proximity) return
@@ -27,18 +21,20 @@
 				to_chat(user, "<span class='notice'>[target] is full.</span>")
 				return
 
-			if(!target.is_open_container() && !ismob(target) && !istype(target, /obj/item/weapon/reagent_containers/food) && !istype(target, /obj/item/clothing/mask/smokable/cigarette)) //You can inject humans and food but you cant remove the shit.
+			if(!target.is_open_container() && !ismob(target) && !istype(target, /obj/item/reagent_containers/food) && !istype(target, /obj/item/clothing/mask/smokable/cigarette)) //You can inject humans and food but you can't remove the shit.
 				to_chat(user, "<span class='notice'>You cannot directly fill this object.</span>")
 				return
 
 			var/trans = 0
 
 			if(ismob(target))
+				if(user.a_intent == I_HELP)
+					return
 
 				var/time = 20 //2/3rds the time of a syringe
 				user.visible_message("<span class='warning'>[user] is trying to squirt something into [target]'s eyes!</span>")
 
-				if(!do_mob(user, target, time))
+				if(!do_after(user, time, target))
 					return
 
 				if(istype(target, /mob/living/carbon/human))
@@ -52,7 +48,7 @@
 						if (victim.head.body_parts_covered & EYES)
 							safe_thing = victim.head
 					if(victim.glasses)
-						if (!safe_thing)
+						if (victim.glasses.body_parts_covered & EYES)
 							safe_thing = victim.glasses
 
 					if(safe_thing)
@@ -101,7 +97,7 @@
 		else
 			icon_state = "dropper0"
 
-/obj/item/weapon/reagent_containers/dropper/industrial
+/obj/item/reagent_containers/dropper/industrial
 	name = "Industrial Dropper"
 	desc = "A larger dropper. Transfers 10 units."
 	amount_per_transfer_from_this = 10

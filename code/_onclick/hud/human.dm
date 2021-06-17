@@ -1,7 +1,8 @@
-/mob/living/carbon/human/instantiate_hud(var/datum/hud/HUD, var/ui_style, var/ui_color, var/ui_alpha)
-	HUD.human_hud(ui_style, ui_color, ui_alpha, src)
+/mob/living/carbon/human
+	hud_type = /datum/hud/human
 
-/datum/hud/proc/human_hud(var/ui_style='icons/mob/screen1_White.dmi', var/ui_color = "#ffffff", var/ui_alpha = 255, var/mob/living/carbon/human/target)
+/datum/hud/human/FinalizeInstantiation(var/ui_style='icons/mob/screen1_White.dmi', var/ui_color = "#ffffff", var/ui_alpha = 255)
+	var/mob/living/carbon/human/target = mymob
 	var/datum/hud_data/hud_data
 	if(!istype(target))
 		hud_data = new()
@@ -11,13 +12,16 @@
 	if(hud_data.icon)
 		ui_style = hud_data.icon
 
-	src.adding = list()
-	src.other = list()
+	adding = list()
+	other = list()
 	src.hotkeybuttons = list() //These can be disabled for hotkey usersx
 
 	var/list/hud_elements = list()
 	var/obj/screen/using
 	var/obj/screen/inventory/inv_box
+
+	stamina_bar = new
+	adding += stamina_bar
 
 	// Draw the various inventory equipment slots.
 	var/has_hidden_gear
@@ -29,7 +33,7 @@
 		inv_box.alpha = ui_alpha
 
 		var/list/slot_data =  hud_data.gear[gear_slot]
-		inv_box.name =        gear_slot
+		inv_box.SetName(gear_slot)
 		inv_box.screen_loc =  slot_data["loc"]
 		inv_box.slot_id =     slot_data["slot"]
 		inv_box.icon_state =  slot_data["state"]
@@ -45,7 +49,7 @@
 
 	if(has_hidden_gear)
 		using = new /obj/screen()
-		using.name = "toggle"
+		using.SetName("toggle")
 		using.icon = ui_style
 		using.icon_state = "other"
 		using.screen_loc = ui_inventory
@@ -56,71 +60,17 @@
 	// Draw the attack intent dialogue.
 	if(hud_data.has_a_intent)
 
-		using = new /obj/screen()
-		using.name = "act_intent"
-		using.icon = ui_style
-		using.icon_state = "intent_"+mymob.a_intent
-		using.screen_loc = ui_acti
-		using.color = ui_color
-		using.alpha = ui_alpha
+		using = new /obj/screen/intent()
 		src.adding += using
 		action_intent = using
 
 		hud_elements |= using
 
-		//intent small hud objects
-		var/icon/ico
-
-		ico = new(ui_style, "black")
-		ico.MapColors(0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, -1,-1,-1,-1)
-		ico.DrawBox(rgb(255,255,255,1),1,ico.Height()/2,ico.Width()/2,ico.Height())
-		using = new /obj/screen( src )
-		using.name = I_HELP
-		using.icon = ico
-		using.screen_loc = ui_acti
-		using.alpha = ui_alpha
-		src.adding += using
-		help_intent = using
-
-		ico = new(ui_style, "black")
-		ico.MapColors(0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, -1,-1,-1,-1)
-		ico.DrawBox(rgb(255,255,255,1),ico.Width()/2,ico.Height()/2,ico.Width(),ico.Height())
-		using = new /obj/screen( src )
-		using.name = I_DISARM
-		using.icon = ico
-		using.screen_loc = ui_acti
-		using.alpha = ui_alpha
-		src.adding += using
-		disarm_intent = using
-
-		ico = new(ui_style, "black")
-		ico.MapColors(0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, -1,-1,-1,-1)
-		ico.DrawBox(rgb(255,255,255,1),ico.Width()/2,1,ico.Width(),ico.Height()/2)
-		using = new /obj/screen( src )
-		using.name = I_GRAB
-		using.icon = ico
-		using.screen_loc = ui_acti
-		using.alpha = ui_alpha
-		src.adding += using
-		grab_intent = using
-
-		ico = new(ui_style, "black")
-		ico.MapColors(0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0, -1,-1,-1,-1)
-		ico.DrawBox(rgb(255,255,255,1),1,1,ico.Width()/2,ico.Height()/2)
-		using = new /obj/screen( src )
-		using.name = I_HURT
-		using.icon = ico
-		using.screen_loc = ui_acti
-		using.alpha = ui_alpha
-		src.adding += using
-		hurt_intent = using
-		//end intent small hud objects
-
 	if(hud_data.has_m_intent)
-		using = new /obj/screen()
-		using.name = "mov_intent"
+		using = new /obj/screen/movement()
+		using.SetName("movement method")
 		using.icon = ui_style
-		using.icon_state = (mymob.m_intent == "run" ? "running" : "walking")
+		using.icon_state = mymob.move_intent.hud_icon_state
 		using.screen_loc = ui_movi
 		using.color = ui_color
 		using.alpha = ui_alpha
@@ -129,7 +79,7 @@
 
 	if(hud_data.has_drop)
 		using = new /obj/screen()
-		using.name = "drop"
+		using.SetName("drop")
 		using.icon = ui_style
 		using.icon_state = "act_drop"
 		using.screen_loc = ui_drop_throw
@@ -140,7 +90,7 @@
 	if(hud_data.has_hands)
 
 		using = new /obj/screen()
-		using.name = "equip"
+		using.SetName("equip")
 		using.icon = ui_style
 		using.icon_state = "act_equip"
 		using.screen_loc = ui_equip
@@ -149,7 +99,7 @@
 		src.adding += using
 
 		inv_box = new /obj/screen/inventory()
-		inv_box.name = "r_hand"
+		inv_box.SetName("r_hand")
 		inv_box.icon = ui_style
 		inv_box.icon_state = "r_hand_inactive"
 		if(mymob && !mymob.hand)	//This being 0 or null means the right hand is in use
@@ -163,7 +113,7 @@
 		src.adding += inv_box
 
 		inv_box = new /obj/screen/inventory()
-		inv_box.name = "l_hand"
+		inv_box.SetName("l_hand")
 		inv_box.icon = ui_style
 		inv_box.icon_state = "l_hand_inactive"
 		if(mymob && mymob.hand)	//This being 1 means the left hand is in use
@@ -176,7 +126,7 @@
 		src.adding += inv_box
 
 		using = new /obj/screen/inventory()
-		using.name = "hand"
+		using.SetName("hand")
 		using.icon = ui_style
 		using.icon_state = "hand1"
 		using.screen_loc = ui_swaphand1
@@ -185,7 +135,7 @@
 		src.adding += using
 
 		using = new /obj/screen/inventory()
-		using.name = "hand"
+		using.SetName("hand")
 		using.icon = ui_style
 		using.icon_state = "hand2"
 		using.screen_loc = ui_swaphand2
@@ -195,7 +145,7 @@
 
 	if(hud_data.has_resist)
 		using = new /obj/screen()
-		using.name = "resist"
+		using.SetName("resist")
 		using.icon = ui_style
 		using.icon_state = "act_resist"
 		using.screen_loc = ui_pull_resist
@@ -207,7 +157,7 @@
 		mymob.throw_icon = new /obj/screen()
 		mymob.throw_icon.icon = ui_style
 		mymob.throw_icon.icon_state = "act_throw_off"
-		mymob.throw_icon.name = "throw"
+		mymob.throw_icon.SetName("throw")
 		mymob.throw_icon.screen_loc = ui_drop_throw
 		mymob.throw_icon.color = ui_color
 		mymob.throw_icon.alpha = ui_alpha
@@ -217,7 +167,7 @@
 		mymob.pullin = new /obj/screen()
 		mymob.pullin.icon = ui_style
 		mymob.pullin.icon_state = "pull0"
-		mymob.pullin.name = "pull"
+		mymob.pullin.SetName("pull")
 		mymob.pullin.screen_loc = ui_pull_resist
 		src.hotkeybuttons += mymob.pullin
 		hud_elements |= mymob.pullin
@@ -226,64 +176,81 @@
 		mymob.internals = new /obj/screen()
 		mymob.internals.icon = ui_style
 		mymob.internals.icon_state = "internal0"
-		mymob.internals.name = "internal"
+		mymob.internals.SetName("internal")
 		mymob.internals.screen_loc = ui_internal
 		hud_elements |= mymob.internals
 
 	if(hud_data.has_warnings)
-		mymob.oxygen = new /obj/screen()
-		mymob.oxygen.icon = ui_style
+		mymob.healths = new /obj/screen()
+		mymob.healths.icon = ui_style
+		mymob.healths.icon_state = "health0"
+		mymob.healths.SetName("health")
+		mymob.healths.screen_loc = ui_health
+		hud_elements |= mymob.healths
+		
+		mymob.oxygen = new /obj/screen/oxygen()
+		mymob.oxygen.icon = 'icons/mob/status_indicators.dmi'
 		mymob.oxygen.icon_state = "oxy0"
-		mymob.oxygen.name = "oxygen"
-		mymob.oxygen.screen_loc = ui_oxygen
+		mymob.oxygen.SetName("oxygen")
+		mymob.oxygen.screen_loc = ui_temp
 		hud_elements |= mymob.oxygen
 
-		mymob.toxin = new /obj/screen()
-		mymob.toxin.icon = ui_style
+		mymob.toxin = new /obj/screen/toxins()
+		mymob.toxin.icon = 'icons/mob/status_indicators.dmi'
 		mymob.toxin.icon_state = "tox0"
-		mymob.toxin.name = "toxin"
-		mymob.toxin.screen_loc = ui_toxin
+		mymob.toxin.SetName("toxin")
+		mymob.toxin.screen_loc = ui_temp
 		hud_elements |= mymob.toxin
 
 		mymob.fire = new /obj/screen()
 		mymob.fire.icon = ui_style
 		mymob.fire.icon_state = "fire0"
-		mymob.fire.name = "fire"
+		mymob.fire.SetName("fire")
 		mymob.fire.screen_loc = ui_fire
 		hud_elements |= mymob.fire
 
-		mymob.healths = new /obj/screen()
-		mymob.healths.icon = ui_style
-		mymob.healths.icon_state = "health0"
-		mymob.healths.name = "health"
-		mymob.healths.screen_loc = ui_health
-		hud_elements |= mymob.healths
-
 	if(hud_data.has_pressure)
-		mymob.pressure = new /obj/screen()
-		mymob.pressure.icon = ui_style
+		mymob.pressure = new /obj/screen/pressure()
+		mymob.pressure.icon = 'icons/mob/status_indicators.dmi'
 		mymob.pressure.icon_state = "pressure0"
-		mymob.pressure.name = "pressure"
-		mymob.pressure.screen_loc = ui_pressure
+		mymob.pressure.SetName("pressure")
+		mymob.pressure.screen_loc = ui_temp
 		hud_elements |= mymob.pressure
 
 	if(hud_data.has_bodytemp)
-		mymob.bodytemp = new /obj/screen()
-		mymob.bodytemp.icon = ui_style
+		mymob.bodytemp = new /obj/screen/bodytemp()
+		mymob.bodytemp.icon = 'icons/mob/status_indicators.dmi'
 		mymob.bodytemp.icon_state = "temp1"
-		mymob.bodytemp.name = "body temperature"
+		mymob.bodytemp.SetName("body temperature")
 		mymob.bodytemp.screen_loc = ui_temp
 		hud_elements |= mymob.bodytemp
 
-	if(hud_data.has_nutrition)
-		mymob.nutrition_icon = new /obj/screen()
-		mymob.nutrition_icon.icon = ui_style
-		mymob.nutrition_icon.icon_state = "nutrition0"
-		mymob.nutrition_icon.name = "nutrition"
-		mymob.nutrition_icon.screen_loc = ui_nutrition
+	if(target.isSynthetic())
+		target.cells = new /obj/screen()
+		target.cells.icon = 'icons/mob/screen1_robot.dmi'
+		target.cells.icon_state = "charge-empty"
+		target.cells.SetName("cell")
+		target.cells.screen_loc = ui_nutrition
+		hud_elements |= target.cells
+
+	else if(hud_data.has_nutrition)
+		mymob.nutrition_icon = new /obj/screen/food()
+		mymob.nutrition_icon.icon = 'icons/mob/status_hunger.dmi'
+		mymob.nutrition_icon.pixel_w = 8
+		mymob.nutrition_icon.icon_state = "nutrition1"
+		mymob.nutrition_icon.SetName("nutrition")
+		mymob.nutrition_icon.screen_loc = ui_nutrition_small
 		hud_elements |= mymob.nutrition_icon
 
-	mymob.pain = new /obj/screen( null )
+		mymob.hydration_icon = new /obj/screen/drink()
+		mymob.hydration_icon.icon = 'icons/mob/status_hunger.dmi'
+		mymob.hydration_icon.icon_state = "hydration1"
+		mymob.hydration_icon.SetName("hydration")
+		mymob.hydration_icon.screen_loc = ui_nutrition_small
+		hud_elements |= mymob.hydration_icon
+
+	mymob.pain = new /obj/screen/fullscreen/pain( null )
+	hud_elements |= mymob.pain
 
 	mymob.zone_sel = new /obj/screen/zone_sel( null )
 	mymob.zone_sel.icon = ui_style
@@ -333,10 +300,87 @@
 		client.screen -= hud_used.hotkeybuttons
 		hud_used.hotkey_ui_hidden = 1
 
-//Used for new human mobs created by cloning/goleming/etc.
-/mob/living/carbon/human/proc/set_cloned_appearance()
-	f_style = "Shaved"
-	if(dna.species == SPECIES_HUMAN) //no more xenos losing ears/tentacles
-		h_style = pick("Bedhead", "Bedhead 2", "Bedhead 3")
-	all_underwear.Cut()
-	regenerate_icons()
+// Yes, these use icon state. Yes, these are terrible. The alternative is duplicating 
+// a bunch of fairly blobby logic for every click override on these objects.
+
+/obj/screen/food/Click(var/location, var/control, var/params)
+	if(istype(usr) && usr.nutrition_icon == src)
+		switch(icon_state)
+			if("nutrition0")
+				to_chat(usr, SPAN_WARNING("You are completely stuffed."))
+			if("nutrition1")
+				to_chat(usr, SPAN_NOTICE("You are not hungry."))
+			if("nutrition2")
+				to_chat(usr, SPAN_NOTICE("You are a bit peckish."))
+			if("nutrition3")
+				to_chat(usr, SPAN_WARNING("You are quite hungry."))
+			if("nutrition4")
+				to_chat(usr, SPAN_DANGER("You are starving!"))
+
+/obj/screen/drink/Click(var/location, var/control, var/params)
+	if(istype(usr) && usr.hydration_icon == src)
+		switch(icon_state)
+			if("hydration0")
+				to_chat(usr, SPAN_WARNING("You are overhydrated."))
+			if("hydration1")
+				to_chat(usr, SPAN_NOTICE("You are not thirsty."))
+			if("hydration2")
+				to_chat(usr, SPAN_NOTICE("You are a bit thirsty."))
+			if("hydration3")
+				to_chat(usr, SPAN_WARNING("You are quite thirsty."))
+			if("hydration4")
+				to_chat(usr, SPAN_DANGER("You are dying of thirst!"))
+
+/obj/screen/bodytemp/Click(var/location, var/control, var/params)
+	if(istype(usr) && usr.bodytemp == src)
+		switch(icon_state)
+			if("temp4")
+				to_chat(usr, SPAN_DANGER("You are being cooked alive!"))
+			if("temp3")
+				to_chat(usr, SPAN_DANGER("Your body is burning up!"))
+			if("temp2")
+				to_chat(usr, SPAN_DANGER("You are overheating."))
+			if("temp1")
+				to_chat(usr, SPAN_WARNING("You are uncomfortably hot."))
+			if("temp-4")
+				to_chat(usr, SPAN_DANGER("You are being frozen solid!"))
+			if("temp-3")
+				to_chat(usr, SPAN_DANGER("You are freezing cold!"))
+			if("temp-2")
+				to_chat(usr, SPAN_WARNING("You are dangerously chilled"))
+			if("temp-1")
+				to_chat(usr, SPAN_NOTICE("You are uncomfortably cold."))
+			else
+				to_chat(usr, SPAN_NOTICE("Your body is at a comfortable temperature."))
+
+/obj/screen/pressure/Click(var/location, var/control, var/params)
+	if(istype(usr) && usr.pressure == src)
+		switch(icon_state)
+			if("pressure2")
+				to_chat(usr, SPAN_DANGER("The air pressure here is crushing!"))
+			if("pressure1")
+				to_chat(usr, SPAN_WARNING("The air pressure here is dangerously high."))
+			if("pressure-1")
+				to_chat(usr, SPAN_WARNING("The air pressure here is dangerously low."))
+			if("pressure-2")
+				to_chat(usr, SPAN_DANGER("There is nearly no air pressure here!"))
+			else
+				to_chat(usr, SPAN_NOTICE("The local air pressure is comfortable."))
+
+/obj/screen/toxins/Click(var/location, var/control, var/params)
+	if(istype(usr) && usr.toxin == src)
+		if(icon_state == "tox0")
+			to_chat(usr, SPAN_NOTICE("The air is clear of toxins."))
+		else
+			to_chat(usr, SPAN_DANGER("The air is eating away at your skin!"))
+
+/obj/screen/oxygen/Click(var/location, var/control, var/params)
+	if(istype(usr) && usr.oxygen == src)
+		if(icon_state == "oxy0")
+			to_chat(usr, SPAN_NOTICE("You are breathing easy."))
+		else
+			to_chat(usr, SPAN_DANGER("You cannot breathe!"))
+
+/obj/screen/movement/Click(var/location, var/control, var/params)
+	if(istype(usr))
+		usr.set_next_usable_move_intent()

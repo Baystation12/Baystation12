@@ -8,7 +8,7 @@
 //			/old_stat: Status before the change.
 //			/new_stat: Status after the change.
 
-var/decl/observ/stat_set/stat_set_event = new()
+GLOBAL_DATUM_INIT(stat_set_event, /decl/observ/stat_set, new)
 
 /decl/observ/stat_set
 	name = "Stat Set"
@@ -21,4 +21,4 @@ var/decl/observ/stat_set/stat_set_event = new()
 	var/old_stat = stat
 	. = ..()
 	if(stat != old_stat)
-		stat_set_event.raise_event(src, old_stat, new_stat)
+		GLOB.stat_set_event.raise_event(src, old_stat, new_stat)

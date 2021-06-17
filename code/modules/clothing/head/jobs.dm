@@ -49,36 +49,44 @@
 	flags_inv = BLOCKHAIR
 	body_parts_covered = HEAD
 
-
-
 //Medical
 /obj/item/clothing/head/surgery
 	name = "surgical cap"
 	desc = "A cap surgeons wear during operations. Keeps their hair from tickling your internal organs."
-	icon_state = "surgcap_blue"
+	icon_state = "surgcap"
 	flags_inv = BLOCKHEADHAIR
 
 /obj/item/clothing/head/surgery/purple
-	desc = "A cap surgeons wear during operations. Keeps their hair from tickling your internal organs. This one is deep purple."
-	icon_state = "surgcap_purple"
+	name = "purple surgical cap"
+	color = "#7a1b3f"
 
 /obj/item/clothing/head/surgery/blue
-	desc = "A cap surgeons wear during operations. Keeps their hair from tickling your internal organs. This one is baby blue."
-	icon_state = "surgcap_blue"
+	name = "blue surgical cap"
+	color = "#4891e1"
 
 /obj/item/clothing/head/surgery/green
-	desc = "A cap surgeons wear during operations. Keeps their hair from tickling your internal organs. This one is dark green."
-	icon_state = "surgcap_green"
+	name = "green surgical cap"
+	color = "#255a3e"
 
 /obj/item/clothing/head/surgery/black
-	desc = "A cap surgeons wear during operations. Keeps their hair from tickling your internal organs. This one is black."
-	icon_state = "surgcap_black"
+	name = "black surgical cap"
+	color = "#242424"
 
 /obj/item/clothing/head/surgery/navyblue
-	desc = "A cap surgeons wear during operations. Keeps their hair from tickling your internal organs. This one is navy blue."
-	icon_state = "surgcap_navyblue"
+	name = "navy blue surgical cap"
+	color = "#1f3a69"
 
+/obj/item/clothing/head/surgery/lilac
+	name = "lilac surgical cap"
+	color = "#c8a2c8"
 
+/obj/item/clothing/head/surgery/teal
+	name = "teal surgical cap"
+	color = "#008080"
+
+/obj/item/clothing/head/surgery/heliodor
+	name = "heliodor surgical cap"
+	color = "#aad539"
 
 //Berets
 /obj/item/clothing/head/beret
@@ -146,11 +154,23 @@
 	name = "heavy asset protection beret"
 	desc = "An armored red beret adorned with the crest of corporate asset protection. Doesn't sacrifice style or safety."
 	icon_state = "beret_red"
-	armor = list(melee = 65, bullet = 55, laser = 35,energy = 20, bomb = 30, bio = 30, rad = 30)
+	armor = list(
+		melee = ARMOR_MELEE_VERY_HIGH, 
+		bullet = ARMOR_BALLISTIC_RIFLE, 
+		laser = ARMOR_LASER_HANDGUNS,
+		energy = ARMOR_ENERGY_SMALL, 
+		bomb = ARMOR_BOMB_PADDED, 
+		bio = ARMOR_BIO_RESISTANT, 
+		rad = ARMOR_RAD_MINOR
+	)
 	siemens_coefficient = 0.9
 
 /obj/item/clothing/head/beret/guard
 	name = "corporate security beret"
-	desc = "A white beret adorned with the crest of NanoTrasen. For security guards that are more inclined towards style than safety."
-	icon_state = "beret_corporate_whitered"
+	desc = "A white beret adorned with a corporate logo. For security guards that are more inclined towards style than safety."
+	icon_state = "corpsec_beret"
 
+/obj/item/clothing/head/beret/plaincolor
+	name = "beret"
+	desc = "A simple, solid color beret. This one has no emblems or insignia on it."
+	icon_state = "beret_white"

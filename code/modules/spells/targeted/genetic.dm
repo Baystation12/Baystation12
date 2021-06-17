@@ -32,6 +32,7 @@ code\game\dna\genes\goon_powers.dm
 	desc = "This spell inflicts a target with temporary blindness. Does not require wizard garb."
 	feedback = "BD"
 	disabilities = 1
+	school = "illusion"
 	duration = 300
 
 	charge_max = 300
@@ -50,6 +51,7 @@ code\game\dna\genes\goon_powers.dm
 	amt_eye_blurry = 20
 
 	hud_state = "wiz_blind"
+	cast_sound = 'sound/magic/blind.ogg'
 
 /spell/targeted/genetic/blind/empower_spell()
 	if(!..())
@@ -71,10 +73,46 @@ code\game\dna\genes\goon_powers.dm
 	range = 0
 	max_targets = 1
 
-	mutations = list(LASER, HULK)
+	mutations = list(MUTATION_LASER, MUTATION_HULK)
 	duration = 300
 
 	level_max = list(Sp_TOTAL = 1, Sp_SPEED = 1, Sp_POWER = 0)
 	cooldown_min = 300
 
 	hud_state = "wiz_hulk"
+	cast_sound = 'sound/magic/mutate.ogg'
+	effect_state = "electricity_constant"
+	effect_duration = 5
+	effect_color = "#ff0000"
+
+/spell/targeted/genetic/blind/hysteria
+	name = "Hysteria"
+	desc = "A spell used to make someone look like a blind fool, and also makes them a blind fool."
+	feedback = "HY"
+	school = "illusion"
+	spell_flags = SELECTABLE
+	charge_max = 600
+	invocation_type = SpI_SHOUT
+	invocation = "Sty Di Kaly!"
+	amt_dizziness = 10
+	hud_state = "hysteria"
+
+/spell/targeted/genetic/blind/starburst
+	name = "Starburst"
+	desc = "Send a jolt of electricity through everyone's nerve center, blinding and stunning them."
+	feedback = "SB"
+	school = "transmutation"
+	invocation = "Tid Caeh Yor!"
+	spell_flags = NOFACTION
+	invocation_type = SpI_SHOUT
+	charge_max = 60 SECONDS
+	spell_flags = 0
+
+	amt_dizziness = 0
+	amt_eye_blurry = 5
+	amt_stunned = 1
+
+	effect_state = "electricity_constant"
+	effect_duration = 5
+
+	hud_state = "wiz_starburst"

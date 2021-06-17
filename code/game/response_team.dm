@@ -2,7 +2,7 @@
 //Thanks to Kilakk for the admin-button portion of this code.
 
 var/global/send_emergency_team = 0 // Used for automagic response teams
-                                   // 'admin_emergency_team' for admin-spawned response teams
+								   // 'admin_emergency_team' for admin-spawned response teams
 var/ert_base_chance = 10 // Default base chance. Will be incremented by increment ERT chance.
 var/can_call_ert
 
@@ -14,28 +14,37 @@ var/can_call_ert
 	if(!holder)
 		to_chat(usr, "<span class='danger'>Only administrators may use this command.</span>")
 		return
-	if(!ticker)
+	if(GAME_STATE < RUNLEVEL_GAME)
 		to_chat(usr, "<span class='danger'>The game hasn't started yet!</span>")
 		return
-	if(ticker.current_state == 1)
-		to_chat(usr, "<span class='danger'>The round hasn't started yet!</span>")
-		return
 	if(send_emergency_team)
-		to_chat(usr, "<span class='danger'>[using_map.boss_name] has already dispatched an emergency response team!</span>")
+		to_chat(usr, "<span class='danger'>[GLOB.using_map.boss_name] has already dispatched an emergency response team!</span>")
 		return
 	if(alert("Do you want to dispatch an Emergency Response Team?",,"Yes","No") != "Yes")
 		return
-	if(get_security_level() != "red") // Allow admins to reconsider if the alert level isn't Red
-		switch(alert("Red alert is not set. Do you still want to dispatch a response team?",,"Yes","No"))
+
+	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+	if(security_state.current_security_level_is_lower_than(security_state.high_security_level)) // Allow admins to reconsider if the alert level is below High
+		switch(alert("Current security level lower than [security_state.high_security_level.name]. Do you still want to dispatch a response team?",,"Yes","No"))
 			if("No")
 				return
-	if(send_emergency_team)
-		to_chat(usr, "<span class='danger'>Looks like somebody beat you to it!</span>")
-		return
 
-	message_admins("[key_name_admin(usr)] is dispatching an Emergency Response Team.", 1)
+	var/reason = input("What is the reason for dispatching this Emergency Response Team?", "Dispatching Emergency Response Team")
+		
+	if(!reason && alert("You did not input a reason. Continue anyway?",,"Yes", "No") != "Yes")
+		return
+	
+	if(send_emergency_team)
+		to_chat(usr, SPAN_DANGER("Looks like someone beat you to it!"))
+		return
+	
+	if(reason)
+		message_admins("[key_name_admin(usr)] is dispatching an Emergency Response Team for the reason: [reason]", 1)
+	else
+		message_admins("[key_name_admin(usr)] is dispatching an Emergency Response Team.", 1)
+		
 	log_admin("[key_name(usr)] used Dispatch Response Team.")
-	trigger_armed_response_team(1)
+	trigger_armed_response_team(1, reason)
 
 client/verb/JoinResponseTeam()
 
@@ -53,10 +62,10 @@ client/verb/JoinResponseTeam()
 		if(jobban_isbanned(usr, MODE_ERT) || jobban_isbanned(usr, "Security Officer"))
 			to_chat(usr, "<span class='danger'>You are jobbanned from the emergency reponse team!</span>")
 			return
-		if(ert.current_antagonists.len >= ert.hard_cap)
+		if(GLOB.ert.current_antagonists.len >= GLOB.ert.hard_cap)
 			to_chat(usr, "The emergency response team is already full!")
 			return
-		ert.create_default(usr)
+		GLOB.ert.create_default(usr)
 	else
 		to_chat(usr, "You need to be an observer or new player to use this.")
 
@@ -64,7 +73,7 @@ client/verb/JoinResponseTeam()
 proc/percentage_dead()
 	var/total = 0
 	var/deadcount = 0
-	for(var/mob/living/carbon/human/H in mob_list)
+	for(var/mob/living/carbon/human/H in SSmobs.mob_list)
 		if(H.client) // Monkeys and mice don't have a client, amirite?
 			if(H.stat == 2) deadcount++
 			total++
@@ -76,7 +85,7 @@ proc/percentage_dead()
 proc/percentage_antagonists()
 	var/total = 0
 	var/antagonists = 0
-	for(var/mob/living/carbon/human/H in mob_list)
+	for(var/mob/living/carbon/human/H in SSmobs.mob_list)
 		if(is_special_character(H) >= 1)
 			antagonists++
 		total++
@@ -88,18 +97,13 @@ proc/percentage_antagonists()
 // the more likely an ERT is to be able to be called.
 proc/increment_ert_chance()
 	while(send_emergency_team == 0) // There is no ERT at the time.
-		if(get_security_level() == "green")
-			ert_base_chance += 1
-		if(get_security_level() == "blue")
-			ert_base_chance += 2
-		if(get_security_level() == "red")
-			ert_base_chance += 3
-		if(get_security_level() == "delta")
-			ert_base_chance += 10           // Need those big guns
+		var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+		var/index = list_find(security_state.all_security_levels, security_state.current_security_level)
+		ert_base_chance += 2**index
 		sleep(600 * 3) // Minute * Number of Minutes
 
 
-proc/trigger_armed_response_team(var/force = 0)
+proc/trigger_armed_response_team(var/force = 0, var/reason = "")
 	if(!can_call_ert && !force)
 		return
 	if(send_emergency_team)
@@ -114,12 +118,14 @@ proc/trigger_armed_response_team(var/force = 0)
 
 	// there's only a certain chance a team will be sent
 	if(!prob(send_team_chance))
-		command_announcement.Announce("It would appear that an emergency response team was requested for [station_name()]. Unfortunately, we were unable to send one at this time.", "[using_map.boss_name]")
+		command_announcement.Announce("It would appear that an emergency response team was requested for [station_name()]. Unfortunately, we were unable to send one at this time.", "[GLOB.using_map.boss_name]")
 		can_call_ert = 0 // Only one call per round, ladies.
 		return
 
-	command_announcement.Announce("It would appear that an emergency response team was requested for [station_name()]. We will prepare and send one as soon as possible.", "[using_map.boss_name]")
+	command_announcement.Announce("It would appear that an emergency response team was requested for [station_name()]. We will prepare and send one as soon as possible.", "[GLOB.using_map.boss_name]")
 	evacuation_controller.add_can_call_predicate(new/datum/evacuation_predicate/ert())
+
+	GLOB.ert.reason = reason //Set it even if it's blank to clear a reason from a previous ERT
 
 	can_call_ert = 0 // Only one call per round, gentleman.
 	send_emergency_team = 1

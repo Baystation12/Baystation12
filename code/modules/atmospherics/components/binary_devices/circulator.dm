@@ -1,14 +1,12 @@
 //node1, air1, network1 correspond to input
 //node2, air2, network2 correspond to output
 
-#define ADIABATIC_EXPONENT 0.667 //Actually adiabatic exponent - 1.
-
 /obj/machinery/atmospherics/binary/circulator
 	name = "circulator"
 	desc = "A gas circulator turbine and heat exchanger."
-	icon = 'icons/obj/pipes.dmi'
-	icon_state = "circ-off"
-	anchored = 0
+	icon = 'icons/obj/power.dmi'
+	icon_state = "circ-unassembled"
+	anchored = FALSE
 
 	var/kinetic_efficiency = 0.04 //combined kinetic and kinetic-to-electric efficiency
 	var/volume_ratio = 0.2
@@ -21,11 +19,12 @@
 	var/last_stored_energy_transferred = 0
 	var/volume_capacity_used = 0
 	var/stored_energy = 0
+	var/temperature_overlay
 
-	density = 1
+	density = TRUE
 
-/obj/machinery/atmospherics/binary/circulator/New()
-	..()
+/obj/machinery/atmospherics/binary/circulator/Initialize()
+	. = ..()
 	desc = initial(desc) + " Its outlet port is to the [dir2text(dir)]."
 	air1.volume = 400
 
@@ -67,28 +66,32 @@
 	stored_energy = 0
 	return last_stored_energy_transferred
 
-/obj/machinery/atmospherics/binary/circulator/process()
+/obj/machinery/atmospherics/binary/circulator/Process()
 	..()
 
 	if(last_worldtime_transfer < world.time - 50)
 		recent_moles_transferred = 0
 		update_icon()
 
-/obj/machinery/atmospherics/binary/circulator/update_icon()
-	if(stat & (BROKEN|NOPOWER) || !anchored)
-		icon_state = "circ-p"
-	else if(last_pressure_delta > 0 && recent_moles_transferred > 0)
-		if(last_pressure_delta > 5*ONE_ATMOSPHERE)
-			icon_state = "circ-run"
+/obj/machinery/atmospherics/binary/circulator/on_update_icon()
+	icon_state = anchored ? "circ-assembled" : "circ-unassembled"
+	overlays.Cut()
+	if (stat & (BROKEN|NOPOWER) || !anchored)
+		return 1
+	if (last_pressure_delta > 0 && recent_moles_transferred > 0)
+		if (temperature_overlay)
+			overlays += image('icons/obj/power.dmi', temperature_overlay)
+		if (last_pressure_delta > 5*ONE_ATMOSPHERE)
+			overlays += image('icons/obj/power.dmi', "circ-run")
 		else
-			icon_state = "circ-slow"
+			overlays += image('icons/obj/power.dmi', "circ-slow")
 	else
-		icon_state = "circ-off"
+		overlays += image('icons/obj/power.dmi', "circ-off")
 
 	return 1
 
-/obj/machinery/atmospherics/binary/circulator/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/wrench))
+/obj/machinery/atmospherics/binary/circulator/attackby(obj/item/W as obj, mob/user as mob)
+	if(isWrench(W))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 		anchored = !anchored
 		user.visible_message("[user.name] [anchored ? "secures" : "unsecures"] the bolts holding [src.name] to the floor.", \
@@ -96,18 +99,19 @@
 					"You hear a ratchet")
 
 		if(anchored)
+			temperature_overlay = null
 			if(dir & (NORTH|SOUTH))
 				initialize_directions = NORTH|SOUTH
 			else if(dir & (EAST|WEST))
 				initialize_directions = EAST|WEST
 
-			initialize()
+			atmos_init()
 			build_network()
 			if (node1)
-				node1.initialize()
+				node1.atmos_init()
 				node1.build_network()
 			if (node2)
-				node2.initialize()
+				node2.atmos_init()
 				node2.build_network()
 		else
 			if(node1)
@@ -119,6 +123,7 @@
 
 			node1 = null
 			node2 = null
+		update_icon()
 
 	else
 		..()

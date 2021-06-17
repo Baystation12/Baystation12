@@ -65,6 +65,27 @@
 
 		cmd_mass_modify_object_variables(A, href_list["varnamemass"])
 
+	else if(href_list["datumwatch"] && href_list["varnamewatch"])
+		var/datum/D = locate(href_list["datumwatch"])
+		if(D)
+			if(!watched_variables[D])
+				watched_variables[D] = list()
+			watched_variables[D] |= href_list["varnamewatch"]
+			watched_variables()
+
+			if(!watched_variables_window.is_processing)
+				START_PROCESSING(SSprocessing, watched_variables_window)
+
+	else if(href_list["datumunwatch"] && href_list["varnameunwatch"])
+		var/datum/D = locate(href_list["datumunwatch"])
+		if(D && watched_variables[D])
+			watched_variables[D] -= href_list["varnameunwatch"]
+			var/list/datums_watched_vars = watched_variables[D]
+			if(!datums_watched_vars.len)
+				watched_variables -= D
+		if(!watched_variables.len && watched_variables_window.is_processing)
+			STOP_PROCESSING(SSprocessing, watched_variables_window)
+
 	else if(href_list["mob_player_panel"])
 		if(!check_rights(0))	return
 
@@ -85,17 +106,6 @@
 			return
 
 		src.give_spell(M)
-		href_list["datumrefresh"] = href_list["give_spell"]
-
-	else if(href_list["give_disease2"])
-		if(!check_rights(R_ADMIN|R_FUN))	return
-
-		var/mob/M = locate(href_list["give_disease2"])
-		if(!istype(M))
-			to_chat(usr, "This can only be used on instances of type /mob")
-			return
-
-		src.give_disease2(M)
 		href_list["datumrefresh"] = href_list["give_spell"]
 
 	else if(href_list["godmode"])
@@ -462,7 +472,8 @@
 
 		to_chat(usr, "Removed [rem_organ] from [M].")
 		rem_organ.removed()
-		qdel(rem_organ)
+		if(!QDELETED(rem_organ))
+			qdel(rem_organ)
 
 	else if(href_list["fix_nano"])
 		if(!check_rights(R_DEBUG)) return
@@ -473,7 +484,7 @@
 			to_chat(usr, "This can only be done on mobs with clients")
 			return
 
-		nanomanager.close_uis(H)
+		SSnano.close_uis(H)
 		H.client.cache.Cut()
 		var/datum/asset/assets = get_asset_datum(/datum/asset/nanoui)
 		assets.send(H)
@@ -526,6 +537,32 @@
 		var/datum/D = locate(href_list["call_proc"])
 		if(istype(D) || istype(D, /client)) // can call on clients too, not just datums
 			callproc_targetpicked(1, D)
+	else if(href_list["addaura"])
+		if(!check_rights(R_DEBUG|R_ADMIN|R_FUN))	return
+		var/mob/living/L = locate(href_list["addaura"])
+		if(!istype(L))
+			return
+		var/choice = input("Please choose an aura to add", "Auras", null) as null|anything in typesof(/obj/aura)
+		if(!choice || !L)
+			return
+		var/obj/o = new choice(L)
+		log_and_message_admins("added \the [o] to \the [L]")
+	else if(href_list["removeaura"])
+		if(!check_rights(R_DEBUG|R_ADMIN|R_FUN))	return
+		var/mob/living/L = locate(href_list["removeaura"])
+		if(!istype(L))
+			return
+		var/choice = input("Please choose an aura to remove", "Auras", null) as null|anything in L.auras
+		if(!choice || !L)
+			return
+		log_and_message_admins("removed \the [choice] to \the [L]")
+		qdel(choice)
+
+	else if (href_list["debug_mob_ai"])
+		if (!check_rights(R_DEBUG))
+			return
+		var/mob/living/L = locate(href_list["debug_mob_ai"])
+		log_debug("AI Debugging toggled [L.ai_holder.debug() ? "ON" : "OFF"] for \the [L]")
 
 	if(href_list["datumrefresh"])
 		var/datum/DAT = locate(href_list["datumrefresh"])

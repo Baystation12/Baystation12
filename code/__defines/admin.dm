@@ -1,6 +1,4 @@
 // A set of constants used to determine which type of mute an admin wishes to apply.
-// Please read and understand the muting/automuting stuff before changing these. MUTE_IC_AUTO, etc. = (MUTE_IC << 1)
-// Therefore there needs to be a gap between the flags for the automute flags.
 #define MUTE_IC        0x1
 #define MUTE_OOC       0x2
 #define MUTE_PRAY      0x4
@@ -33,7 +31,6 @@
 #define R_SOUNDS        0x800
 #define R_SPAWN         0x1000
 #define R_MOD           0x2000
-#define R_MENTOR        0x4000
 #define R_HOST          0x8000 //higher than this will overflow
 #define R_INVESTIGATE   (R_ADMIN|R_MOD)
 
@@ -42,3 +39,10 @@
 #define ADDANTAG_PLAYER 1	// Any player may call the add antagonist vote.
 #define ADDANTAG_ADMIN 2	// Any player with admin privilegies may call the add antagonist vote.
 #define ADDANTAG_AUTO 4		// The add antagonist vote is available as an alternative for transfer vote.
+
+#define TICKET_CLOSED 0   // Ticket has been resolved or declined
+#define TICKET_OPEN     1 // Ticket has been created, but not responded to
+#define TICKET_ASSIGNED 2 // An admin has assigned themself to the ticket and will respond
+
+#define LAST_CKEY(M) (M.ckey || M.last_ckey)
+#define LAST_KEY(M)  (M.key || M.last_ckey)

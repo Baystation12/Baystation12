@@ -6,12 +6,6 @@
 		mloc = mloc.loc
 	return mloc
 
-/proc/iswall(turf/T)
-	return (istype(T, /turf/simulated/wall) || istype(T, /turf/unsimulated/wall) || istype(T, /turf/simulated/shuttle/wall))
-
-/proc/isfloor(turf/T)
-	return (istype(T, /turf/simulated/floor) || istype(T, /turf/unsimulated/floor))
-
 /proc/turf_clear(turf/T)
 	for(var/atom/A in T)
 		if(A.simulated)
@@ -39,7 +33,7 @@
 		return
 	var/list/turfs = list()
 	for(var/turf/T in orange(origin, outer_range))
-		if(!(T.z in using_map.sealed_levels)) // Picking a turf outside the map edge isn't recommended
+		if(!(T.z in GLOB.using_map.sealed_levels)) // Picking a turf outside the map edge isn't recommended
 			if(T.x >= world.maxx-TRANSITIONEDGE || T.x <= TRANSITIONEDGE)	continue
 			if(T.y >= world.maxy-TRANSITIONEDGE || T.y <= TRANSITIONEDGE)	continue
 		if(!inner_range || get_dist(origin, T) >= inner_range)
@@ -64,6 +58,18 @@
 	Predicate helpers
 */
 
+/proc/is_space_turf(var/turf/T)
+	return istype(T, /turf/space)
+
+/proc/is_not_space_turf(var/turf/T)
+	return !is_space_turf(T)
+
+/proc/is_open_space(turf/T)
+	return isopenspace(T)
+
+/proc/is_not_open_space(turf/T)
+	return !isopenspace(T)
+
 /proc/is_holy_turf(var/turf/T)
 	return T && T.holy
 
@@ -79,7 +85,13 @@
 /proc/is_station_turf(var/turf/T)
 	return T && isStationLevel(T.z)
 
+/proc/has_air(var/turf/T)
+	return !!T.return_air()
+
 /proc/IsTurfAtmosUnsafe(var/turf/T)
+	if (!T)
+		return "The spawn location doesn't seem to exist. Please contact an admin via adminhelp if this error persists."
+
 	if(istype(T, /turf/space)) // Space tiles
 		return "Spawn location is open to space."
 	var/datum/gas_mixture/air = T.return_air()
@@ -96,3 +108,90 @@
 	if(pressure < SOUND_MINIMUM_PRESSURE)
 		return TRUE
 	return FALSE
+
+/*
+	Turf manipulation
+*/
+
+//Returns an assoc list that describes how turfs would be changed if the
+//turfs in turfs_src were translated by shifting the src_origin to the dst_origin
+/proc/get_turf_translation(turf/src_origin, turf/dst_origin, list/turfs_src)
+	var/list/turf_map = list()
+	for(var/turf/source in turfs_src)
+		var/x_pos = (source.x - src_origin.x)
+		var/y_pos = (source.y - src_origin.y)
+		var/z_pos = (source.z - src_origin.z)
+
+		var/turf/target = locate(dst_origin.x + x_pos, dst_origin.y + y_pos, dst_origin.z + z_pos)
+		if(!target)
+			error("Null turf in translation @ ([dst_origin.x + x_pos], [dst_origin.y + y_pos], [dst_origin.z + z_pos])")
+		turf_map[source] = target //if target is null, preserve that information in the turf map
+
+	return turf_map
+
+
+/proc/translate_turfs(var/list/translation, var/area/base_area = null, var/turf/base_turf)
+	for(var/turf/source in translation)
+
+		var/turf/target = translation[source]
+
+		if(target)
+			if(base_area)
+				ChangeArea(target, get_area(source))
+				ChangeArea(source, base_area)
+			transport_turf_contents(source, target)
+
+	//change the old turfs
+	for(var/turf/source in translation)
+		source.ChangeTurf(base_turf ? base_turf : get_base_turf_by_area(source), 1, 1)
+
+//Transports a turf from a source turf to a target turf, moving all of the turf's contents and making the target a copy of the source.
+/proc/transport_turf_contents(turf/source, turf/target)
+
+	var/turf/new_turf = target.ChangeTurf(source.type, 1, 1)
+	new_turf.transport_properties_from(source)
+
+	for(var/obj/O in source)
+		if(O.simulated)
+			O.forceMove(new_turf)
+		else if(istype(O,/obj/effect))
+			var/obj/effect/E = O
+			if(E.movable_flags & MOVABLE_FLAG_EFFECTMOVE)
+				E.forceMove(new_turf)
+
+	for(var/mob/M in source)
+		if(isEye(M)) continue // If we need to check for more mobs, I'll add a variable
+		M.forceMove(new_turf)
+
+	if (GLOB.mob_spawners[source])
+		var/datum/mob_spawner/source_spawner = GLOB.mob_spawners[source]
+		source_spawner.area = get_area(new_turf)
+		source_spawner.center = new_turf
+		GLOB.mob_spawners[new_turf] = source_spawner
+
+		GLOB.mob_spawners[source] = null
+
+	return new_turf
+
+/*
+	List generation helpers
+*/
+
+/proc/get_turfs_in_range(turf/center, range, list/predicates)
+	. = list()
+
+	if (!istype(center))
+		return
+
+	for (var/turf/T in trange(range, center))
+		if (!predicates || all_predicates_true(list(T), predicates))
+			. += T
+
+/*
+	Pick helpers
+*/
+
+/proc/pick_turf_in_range(turf/center, range, list/turf_predicates)
+	var/list/turfs = get_turfs_in_range(center, range, turf_predicates)
+	if (length(turfs))
+		return pick(turfs)

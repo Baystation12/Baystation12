@@ -1,0 +1,49 @@
+<h2>Fire Assist Mainframe: {{:data.id}}</h2>
+{{for data.turrets}}
+	<h3>{{:value.id}}</h3>
+	<div class="item">
+		<div class="itemLabel">
+			Battery status
+		</div>
+		<div class="itemContent">
+            {{if value.active}}
+				Online.<br/>{{:helper.link('Shut down.', null, {'toggle_active': value.ref})}}
+			 {{else}}
+				Offline.<br/>{{:helper.link('Start up.', null, {'toggle_active': value.ref})}}
+			{{/if}}
+		</div>
+	</div>
+	<div class="item">
+		<div class="itemLabel">
+			Effective range
+		</div>
+		<div class="itemContent">
+			{{:value.effective_range}}
+		</div>
+	</div>
+	<div class="item">
+		<div class="itemLabel">
+			Reaction wheel delay
+		</div>
+		<div class="itemContent">
+			{{:value.reaction_wheel_delay}}
+		</div>
+	</div>
+	<div class="item">
+		<div class="itemLabel">
+			Recharge time
+		</div>
+		<div class="itemContent">
+			{{:value.recharge_time}}
+		</div>
+{{empty}}
+	<div class="item">
+		<div class="itemLabel">
+			Error:
+		</div>
+		<div class="itemContent">
+			No weapon systems detected. Please check network connection.
+		</div>
+	</div>
+    <hr/>
+{{/for}}

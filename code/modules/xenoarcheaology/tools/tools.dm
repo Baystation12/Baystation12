@@ -5,12 +5,33 @@
 	icon_state = "locator"
 	item_state = "locator"
 	origin_tech = list(TECH_MATERIAL = 2, TECH_DATA = 2, TECH_BLUESPACE = 2)
-	matter = list(DEFAULT_WALL_MATERIAL = 500)
+	matter = list(MATERIAL_ALUMINIUM = 250, MATERIAL_STEEL = 250, MATERIAL_GLASS = 50)
 	w_class = ITEM_SIZE_SMALL
 
 /obj/item/device/gps/attack_self(var/mob/user as mob)
+	to_chat(user, "<span class='notice'>[icon2html(src, user)] \The [src] flashes <i>[get_coordinates()]</i>.</span>")
+
+/obj/item/device/gps/examine(mob/user)
+	. = ..()
+	to_chat(user, "<span class='notice'>\The [src]'s screen shows: <i>[get_coordinates()]</i>.</span>")
+
+/obj/item/device/gps/proc/get_coordinates()
 	var/turf/T = get_turf(src)
-	to_chat(user, "<span class='notice'>\icon[src] \The [src] flashes <i>[T.x]:[T.y]:[T.z]</i>.</span>")
+	return T ? "[T.x]:[T.y]:[T.z]" : "N/A"
+
+/mob/living/carbon/human/Stat()
+	. = ..()
+	if(statpanel("Status"))
+		var/obj/item/device/gps/L = locate() in src
+		if(L)
+			stat("Coordinates:", "[L.get_coordinates()]")
+
+/mob/living/silicon/robot/Stat()
+	. = ..()
+	if(statpanel("Status") && (istype(module_state_1, /obj/item/device/gps) || istype(module_state_2, /obj/item/device/gps) || istype(module_state_3, /obj/item/device/gps)))
+		var/obj/item/device/gps/L = locate() in src
+		if(L)
+			stat("Coordinates:", "[L.get_coordinates()]")
 
 /obj/item/device/measuring_tape
 	name = "measuring tape"
@@ -18,11 +39,11 @@
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "measuring"
 	origin_tech = list(TECH_MATERIAL = 1)
-	matter = list(DEFAULT_WALL_MATERIAL = 100)
+	matter = list(MATERIAL_STEEL = 100)
 	w_class = ITEM_SIZE_SMALL
 
-/obj/item/weapon/storage/bag/fossils
-	name = "Fossil Satchel"
+/obj/item/storage/bag/fossils
+	name = "fossil satchel"
 	desc = "Transports delicate fossils in suspension so they don't break during transit."
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "satchel"
@@ -31,27 +52,27 @@
 	storage_slots = 50
 	max_storage_space = 200
 	max_w_class = ITEM_SIZE_NORMAL
-	can_hold = list(/obj/item/weapon/fossil)
+	can_hold = list(/obj/item/fossil)
 
-/obj/item/weapon/storage/box/samplebags
+/obj/item/storage/box/samplebags
 	name = "sample bag box"
 	desc = "A box claiming to contain sample bags."
 
-/obj/item/weapon/storage/box/samplebags/New()
+/obj/item/storage/box/samplebags/New()
 	..()
 	for(var/i = 1 to 7)
-		var/obj/item/weapon/evidencebag/S = new(src)
-		S.name = "sample bag"
+		var/obj/item/evidencebag/S = new(src)
+		S.SetName("sample bag")
 		S.desc = "a bag for holding research samples."
 
 /obj/item/device/ano_scanner
-	name = "Alden-Saraspova counter"
-	desc = "Aids in triangulation of exotic particles."
+	name = "\improper Alden-Saraspova counter"
+	desc = "A device which aids in triangulation of exotic particles."
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "flashgun"
 	item_state = "lampgreen"
 	origin_tech = list(TECH_BLUESPACE = 3, TECH_MAGNET = 3)
-	matter = list(DEFAULT_WALL_MATERIAL = 10000,"glass" = 5000)
+	matter = list(MATERIAL_STEEL = 5000, MATERIAL_ALUMINIUM = 5000, MATERIAL_GLASS = 5000)
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_BELT
 
@@ -71,27 +92,26 @@
 		var/nearestSimpleTargetDist = -1
 		var/turf/cur_turf = get_turf(src)
 
-		if(master_controller) //Sanity check due to runtimes ~Z
-			for(var/A in master_controller.artifact_spawning_turfs)
-				var/turf/simulated/mineral/T = A
-				if(T.density && T.artifact_find)
-					if(T.z == cur_turf.z)
-						var/cur_dist = get_dist(cur_turf, T) * 2
-						if(nearestTargetDist < 0 || cur_dist < nearestTargetDist)
-							nearestTargetDist = cur_dist + rand() * 2 - 1
-							nearestTargetId = T.artifact_find.artifact_id
-				else
-					master_controller.artifact_spawning_turfs.Remove(T)
+		for(var/A in SSxenoarch.artifact_spawning_turfs)
+			var/turf/simulated/mineral/T = A
+			if(T.density && T.artifact_find)
+				if(T.z == cur_turf.z)
+					var/cur_dist = get_dist(cur_turf, T) * 2
+					if(nearestTargetDist < 0 || cur_dist < nearestTargetDist)
+						nearestTargetDist = cur_dist + rand() * 2 - 1
+						nearestTargetId = T.artifact_find.artifact_id
+			else
+				SSxenoarch.artifact_spawning_turfs.Remove(T)
 
-			for(var/A in master_controller.digsite_spawning_turfs)
-				var/turf/simulated/mineral/T = A
-				if(T.density && T.finds && T.finds.len)
-					if(T.z == cur_turf.z)
-						var/cur_dist = get_dist(cur_turf, T) * 2
-						if(nearestSimpleTargetDist < 0 || cur_dist < nearestSimpleTargetDist)
-							nearestSimpleTargetDist = cur_dist + rand() * 2 - 1
-				else
-					master_controller.digsite_spawning_turfs.Remove(T)
+		for(var/A in SSxenoarch.digsite_spawning_turfs)
+			var/turf/simulated/mineral/T = A
+			if(T.density && T.finds && T.finds.len)
+				if(T.z == cur_turf.z)
+					var/cur_dist = get_dist(cur_turf, T) * 2
+					if(nearestSimpleTargetDist < 0 || cur_dist < nearestSimpleTargetDist)
+						nearestSimpleTargetDist = cur_dist + rand() * 2 - 1
+			else
+				SSxenoarch.digsite_spawning_turfs.Remove(T)
 
 		if(nearestTargetDist >= 0)
 			to_chat(user, "Exotic energy detected on wavelength '[nearestTargetId]' in a radius of [nearestTargetDist]m[nearestSimpleTargetDist > 0 ? "; small anomaly detected in a radius of [nearestSimpleTargetDist]m" : ""]")
@@ -104,12 +124,12 @@
 
 /obj/item/device/depth_scanner
 	name = "depth analysis scanner"
-	desc = "Used to check spatial depth and density of rock outcroppings."
+	desc = "A device used to check spatial depth and density of rock outcroppings."
 	icon = 'icons/obj/pda.dmi'
 	icon_state = "crap"
 	item_state = "analyzer"
 	origin_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 2, TECH_BLUESPACE = 2)
-	matter = list(DEFAULT_WALL_MATERIAL = 1000,"glass" = 1000)
+	matter = list(MATERIAL_STEEL = 1000, MATERIAL_GLASS = 500, MATERIAL_ALUMINIUM = 150)
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_BELT
 	var/list/positive_locations = list()
@@ -136,7 +156,7 @@
 			D.coords = "[M.x]:[M.y]:[M.z]"
 			D.time = stationtime2text()
 			D.record_index = positive_locations.len + 1
-			D.material = M.mineral ? M.mineral.display_name : "Rock"
+			D.material = M.mineral ? M.mineral.ore_name : "Rock"
 
 			//find the first artifact and store it
 			if(M.finds.len)
@@ -147,7 +167,7 @@
 
 			positive_locations.Add(D)
 
-			to_chat(user, "<span class='notice'>\icon[src] [src] pings.</span>")
+			to_chat(user, "<span class='notice'>[icon2html(src, user)] [src] pings.</span>")
 
 	else if(istype(A, /obj/structure/boulder))
 		var/obj/structure/boulder/B = A
@@ -165,12 +185,15 @@
 
 			positive_locations.Add(D)
 
-			to_chat(user, "<span class='notice'>\icon[src] [src] pings [pick("madly","wildly","excitedly","crazily")]!</span>")
+			to_chat(user, "<span class='notice'>[icon2html(src, user)] [src] pings [pick("madly","wildly","excitedly","crazily")]!</span>")
+
+	updateSelfDialog()
 
 /obj/item/device/depth_scanner/attack_self(var/mob/living/user)
 	interact(user)
 
 /obj/item/device/depth_scanner/interact(var/mob/user as mob)
+	user.set_machine(src)
 	var/dat = "<b>Coordinates with positive matches</b><br>"
 
 	dat += "<A href='?src=\ref[src];clear=0'>== Clear all ==</a><br>"
@@ -181,7 +204,7 @@
 		dat += "Anomaly depth: [current.depth] cm<br>"
 		dat += "Anomaly size: [current.clearance] cm<br>"
 		dat += "Dissonance spread: [current.dissonance_spread]<br>"
-		var/index = responsive_carriers.Find(current.material)
+		var/index = list_find(responsive_carriers, current.material)
 		if(index > 0 && index <= finds_as_strings.len)
 			dat += "Anomaly material: [finds_as_strings[index]]<br>"
 		else
@@ -199,20 +222,19 @@
 		dat += "No entries recorded."
 
 	dat += "<hr>"
-	dat += "<A href='?src=\ref[src];refresh=1'>Refresh</a><br>"
-	dat += "<A href='?src=\ref[src];close=1'>Close</a><br>"
-	user << browse(dat,"window=depth_scanner;size=300x500")
+	dat += "<a href='?src=\ref[src];close=1'>Close</a>"
+
+	var/datum/browser/popup = new(user, "depth_scanner", "Results", 300, 500)
+	popup.set_content(dat)
+	popup.open()
 	onclose(user, "depth_scanner")
 
-/obj/item/device/depth_scanner/Topic(href, href_list)
-	if(..())
-		return 1
-	usr.set_machine(src)
-
+/obj/item/device/depth_scanner/OnTopic(user, href_list)
 	if(href_list["select"])
 		var/index = text2num(href_list["select"])
 		if(index && index <= positive_locations.len)
 			current = positive_locations[index]
+		. = TOPIC_REFRESH
 	else if(href_list["clear"])
 		var/index = text2num(href_list["clear"])
 		if(index)
@@ -223,106 +245,68 @@
 		else
 			//GC will hopefully pick them up before too long
 			positive_locations = list()
-			qdel(current)
+			QDEL_NULL(current)
+		. = TOPIC_REFRESH
 	else if(href_list["close"])
-		usr.unset_machine()
-		usr << browse(null, "window=depth_scanner")
+		close_browser(user, "window=depth_scanner")
+		return TOPIC_HANDLED
 
-	updateSelfDialog()
+	if (. == TOPIC_REFRESH)
+		interact(user)
 
-/obj/item/device/beacon_locator
-	name = "locater device"
+//Radio beacon locator
+/obj/item/pinpointer/radio
+	name = "locator device"
 	desc = "Used to scan and locate signals on a particular frequency."
-	icon = 'icons/obj/device.dmi'
-	icon_state = "pinoff"	//pinonfar, pinonmedium, pinonclose, pinondirect, pinonnull
-	item_state = "electronic"
-	origin_tech = list(TECH_MAGNET = 3, TECH_ENGINEERING = 2, TECH_BLUESPACE = 3)
-	matter = list(DEFAULT_WALL_MATERIAL = 1000,"glass" = 500)
-	var/frequency = PUB_FREQ
-	var/scan_ticks = 0
-	var/obj/item/device/radio/target_radio
+	var/tracking_freq = PUB_FREQ
+	matter = list(MATERIAL_ALUMINIUM = 1000, MATERIAL_GLASS = 500)
 
-/obj/item/device/beacon_locator/New()
-	..()
-	processing_objects.Add(src)
+/obj/item/pinpointer/radio/acquire_target()
+	var/turf/T = get_turf(src)
+	var/zlevels = GetConnectedZlevels(T.z)
+	var/cur_dist = world.maxx+world.maxy
+	for(var/obj/item/device/radio/beacon/R in world)
+		if(!R.functioning)
+			continue
+		if((R.z in zlevels) && R.frequency == tracking_freq)
+			var/check_dist = get_dist(src,R)
+			if(check_dist < cur_dist)
+				cur_dist = check_dist
+				. = weakref(R)
 
-/obj/item/device/beacon_locator/Destroy()
-	processing_objects.Remove(src)
-	return ..()
+/obj/item/pinpointer/radio/attack_self(var/mob/user as mob)
+	interact(user)
 
-/obj/item/device/beacon_locator/process()
-	if(target_radio)
-		set_dir(get_dir(src,target_radio))
-		switch(get_dist(src,target_radio))
-			if(0 to 3)
-				icon_state = "pinondirect"
-			if(4 to 10)
-				icon_state = "pinonclose"
-			if(11 to 30)
-				icon_state = "pinonmedium"
-			if(31 to INFINITY)
-				icon_state = "pinonfar"
-	else
-		if(scan_ticks)
-			icon_state = "pinonnull"
-			scan_ticks++
-			if(prob(scan_ticks * 10))
-				spawn(0)
-					set background = 1
-					if(processing_objects.Find(src))
-						//scan radios in the world to try and find one
-						var/cur_dist = 999
-						for(var/obj/item/device/radio/beacon/R in world)
-							if(R.z == src.z && R.frequency == src.frequency)
-								var/check_dist = get_dist(src,R)
-								if(check_dist < cur_dist)
-									cur_dist = check_dist
-									target_radio = R
-
-						scan_ticks = 0
-						var/turf/T = get_turf(src)
-						if(target_radio)
-							T.visible_message("\icon[src] [src] [pick("chirps","chirrups","cheeps")] happily.")
-						else
-							T.visible_message("\icon[src] [src] [pick("chirps","chirrups","cheeps")] sadly.")
-		else
-			icon_state = "pinoff"
-
-/obj/item/device/beacon_locator/attack_self(var/mob/user as mob)
-	return src.interact(user)
-
-/obj/item/device/beacon_locator/interact(var/mob/user as mob)
+/obj/item/pinpointer/radio/interact(var/mob/user)
 	var/dat = "<b>Radio frequency tracker</b><br>"
 	dat += {"
+				Tracking: <A href='byond://?src=\ref[src];toggle=1'>[active ? "Enabled" : "Disabled"]</A><BR>
 				<A href='byond://?src=\ref[src];reset_tracking=1'>Reset tracker</A><BR>
 				Frequency:
 				<A href='byond://?src=\ref[src];freq=-10'>-</A>
 				<A href='byond://?src=\ref[src];freq=-2'>-</A>
-				[format_frequency(frequency)]
+				[format_frequency(tracking_freq)]
 				<A href='byond://?src=\ref[src];freq=2'>+</A>
 				<A href='byond://?src=\ref[src];freq=10'>+</A><BR>
 				"}
-
-	dat += "<A href='?src=\ref[src];close=1'>Close</a><br>"
-	user << browse(dat,"window=locater;size=300x150")
+	show_browser(user, dat,"window=locater;size=300x150")
 	onclose(user, "locater")
 
-/obj/item/device/beacon_locator/Topic(href, href_list)
-	if(..())
-		return 1
-	usr.set_machine(src)
+/obj/item/pinpointer/radio/OnTopic(user, href_list)
+	if(href_list["toggle"])
+		toggle(user)
+		. = TOPIC_REFRESH
 
 	if(href_list["reset_tracking"])
-		scan_ticks = 1
-		target_radio = null
+		target = acquire_target()
+		. = TOPIC_REFRESH
+
 	else if(href_list["freq"])
-		var/new_frequency = (frequency + text2num(href_list["freq"]))
-		if (frequency < 1200 || frequency > 1600)
+		var/new_frequency = (tracking_freq + text2num(href_list["freq"]))
+		if (new_frequency < 1200 || new_frequency > 1600)
 			new_frequency = sanitize_frequency(new_frequency, 1499)
-		frequency = new_frequency
+		tracking_freq = new_frequency
+		. = TOPIC_REFRESH
 
-	else if(href_list["close"])
-		usr.unset_machine()
-		usr << browse(null, "window=locater")
-
-	updateSelfDialog()
+	if(. == TOPIC_REFRESH)
+		interact(user)

@@ -1,0 +1,77 @@
+{{if !data.giver || data.mode === 1}}
+
+	<b><h3>Activity Log</h3></b>
+
+	{{for data.internal_log}}
+		<div class="item">
+			{{value}}
+		</div>
+	{{/for}}
+
+	<div class="item">
+		{{:helper.link('Print', null, {'print': 1}, null, null)}}
+	</div>
+
+	<div class="item">
+		{{:helper.link('Back', null, {'mode': 0}, null, null)}}
+	</div>
+
+{{else}}
+
+	<b><h3>Guest Pass Terminal</h3></b>
+
+	<div class="item">
+		{{:helper.link('Activity Log', null, {'mode': 1}, null, null)}}
+	</div>
+
+	<div class="item">
+		<div class="itemLabel">
+			Issuing ID:
+		</div>
+		<div class="itemContent">
+			{{:data.giver_name ? data.giver_name : 'No ID Inserted!'}}
+		</div>
+	</div>
+
+	<div class="item">
+		<div class="itemLabel">
+			Issued to:
+		</div>
+		<div class="itemContent">
+			{{:helper.link(data.giv_name ? data.giv_name : 'NOT SPECIFIED', null, {'giv_name': 1}, null, null)}}
+		</div>
+	</div>
+
+	<div class="item">
+		<div class="itemLabel">
+			Reason:
+		</div>
+		<div class="itemContent">
+			{{:helper.link(data.reason ? data.reason : 'NOT SPECIFIED', null, {'reason': 1}, null, null)}}
+		</div>
+	</div>
+
+	<div class="item">
+		<div class="itemLabel">
+			Duration (minutes):
+		</div>
+		<div class="itemContent">
+			{{:helper.link(data.duration, null, {'duration': 1}, null, null)}}
+		</div>
+	</div>
+
+	<h3>Access List</h3>
+
+	{{for data.giver_access}}
+		{{:helper.link(value.desc ? value.desc : 'Unknown Access', null, {'access' : value.access}, null, value.selected ? 'selected' : null)}}
+	{{/for}}
+
+	<center>
+	<table class='block' style="width=60%; float: none; clear: both">
+	    <tr>
+	    <td>{{:helper.link('Issue Pass', null, {'issue' : 1}, null, null)}}</td>
+	    <td>{{:helper.link('Eject ID', 'circle-arrow-e', {'id' : 1}, null, null)}}</td>
+	    </tr>
+	</table>
+	</center>
+{{/if}}

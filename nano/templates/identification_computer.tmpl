@@ -51,6 +51,24 @@
 		{{:helper.link(data.id_account_number, 'pencil', {'action' : 'edit', 'account' : 1})}}
 	  </div>
 	</div>
+
+	<div class='item'>
+	  <div class='itemLabel'>
+		Email login:
+	  </div>
+	  <div class='itemContent'>
+		{{:helper.link(data.id_email_login, 'pencil', {'action' : 'edit', 'elogin' : 1})}}
+	  </div>
+	</div>
+
+	<div class='item'>
+	  <div class='itemLabel'>
+		Email password:
+	  </div>
+	  <div class='itemContent'>
+		{{:helper.link(data.id_email_password, 'pencil', {'action' : 'edit', 'epswd' : 1})}}
+	  </div>
+	</div>
 	
 
 	<div class='item'>
@@ -117,7 +135,7 @@
 			</td>
 		  </tr>
 		  <tr>
-			<th style="color: '#800080';">Science</th>
+			<th style="color: '#a65ba6';">Science</th>
 			<td>
 			  {{for data.science_jobs}}
 				{{:helper.link(value.display_name, '', {'action' : 'assign', 'assign_target' : value.job}, data.id_rank == value.job ? 'disabled' : null)}}
@@ -133,7 +151,7 @@
 			</td>
 		  </tr>
 		  <tr>
-			<th style="color: '#800080';">Supply</th>
+			<th style="color: '#bb9040';">Supply</th>
 			<td>
 			  {{for data.supply_jobs}}
 				{{:helper.link(value.display_name, '', {'action' : 'assign', 'assign_target' : value.job}, data.id_rank == value.job ? 'disabled' : null)}}
@@ -141,7 +159,16 @@
 			</td>
 		  </tr>
 		  <tr>
-			<th style="color: '#800080';">Service</th>
+			<th style="color: '#68099e';">Exploration</th>
+			<td>
+			  {{for data.exploration_jobs}}
+				{{:helper.link(value.display_name, '', {'action' : 'assign', 'assign_target' : value.job}, data.id_rank == value.job ? 'disabled' : null)}}
+			  {{/for}}
+			</td>
+		  </tr>
+		  
+		  <tr>
+			<th style="color: '#88b764';">Service</th>
 			<td>
 			  {{for data.service_jobs}}
 				{{:helper.link(value.display_name, '', {'action' : 'assign', 'assign_target' : value.job}, data.id_rank == value.job ? 'disabled' : null)}}

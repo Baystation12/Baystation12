@@ -1,9 +1,3 @@
-#define NITROGEN_RETARDATION_FACTOR 0.15	//Higher == N2 slows reaction more
-#define THERMAL_RELEASE_MODIFIER 10000		//Higher == more heat released during reaction
-#define PHORON_RELEASE_MODIFIER 1500		//Higher == less phoron released by reaction
-#define OXYGEN_RELEASE_MODIFIER 15000		//Higher == less oxygen released at high temperature/power
-#define REACTION_POWER_MODIFIER 1.1			//Higher == more overall power
-
 /*
 	How to tweak the SM
 
@@ -14,17 +8,9 @@
 	DAMAGE_RATE_LIMIT	Controls the maximum rate at which the SM will take damage due to high temperatures.
 */
 
-//Controls how much power is produced by each collector in range - this is the main parameter for tweaking SM balance, as it basically controls how the power variable relates to the rest of the game.
-#define POWER_FACTOR 1.0
-#define DECAY_FACTOR 700			//Affects how fast the supermatter power decays
-#define CRITICAL_TEMPERATURE 5000	//K
-#define CHARGING_FACTOR 0.05
-#define DAMAGE_RATE_LIMIT 4.5		//damage rate cap at power = 300, scales linearly with power
-
-
 // Base variants are applied to everyone on the same Z level
 // Range variants are applied on per-range basis: numbers here are on point blank, it scales with the map size (assumes square shaped Z levels)
-#define DETONATION_RADS 20
+#define DETONATION_RADS 40
 #define DETONATION_MOB_CONCUSSION 4			// Value that will be used for Weaken() for mobs.
 
 // Base amount of ticks for which a specific type of machine will be offline for. +- 20% added by RNG.
@@ -39,20 +25,33 @@
 #define WARNING_DELAY 20			//seconds between warnings.
 
 /obj/machinery/power/supermatter
-	name = "Supermatter"
+	name = "supermatter core"
 	desc = "A strangely translucent and iridescent crystal. <span class='danger'>You get headaches just from looking at it.</span>"
-	icon = 'icons/obj/engine.dmi'
-	icon_state = "darkmatter"
-	density = 1
-	anchored = 0
-	light_range = 4
+	icon = 'icons/obj/supermatter.dmi'
+	icon_state = "supermatter"
+	density = TRUE
+	anchored = FALSE
+	light_outer_range = 4
 
-	layer = ABOVE_OBJ_LAYER
+	layer = ABOVE_HUMAN_LAYER
 
-	rad_power = 1 //So it gets added to the repository
+	var/nitrogen_retardation_factor = 0.15	//Higher == N2 slows reaction more
+	var/thermal_release_modifier = 10000		//Higher == more heat released during reaction
+	var/phoron_release_modifier = 1500		//Higher == less phoron released by reaction
+	var/oxygen_release_modifier = 15000		//Higher == less oxygen released at high temperature/power
+	var/radiation_release_modifier = 2      //Higher == more radiation released with more power.
+	var/reaction_power_modifier =  1.1			//Higher == more overall power
+
+	//Controls how much power is produced by each collector in range - this is the main parameter for tweaking SM balance, as it basically controls how the power variable relates to the rest of the game.
+	var/power_factor = 1.0
+	var/decay_factor = 700			//Affects how fast the supermatter power decays
+	var/critical_temperature = 5000	//K
+	var/charging_factor = 0.05
+	var/damage_rate_limit = 4.5		//damage rate cap at power = 300, scales linearly with power
+
 	var/gasefficency = 0.25
 
-	var/base_icon_state = "darkmatter"
+	var/base_icon_state = "supermatter"
 
 	var/damage = 0
 	var/damage_archived = 0
@@ -65,9 +64,9 @@
 	var/emergency_alert = "CRYSTAL DELAMINATION IMMINENT."
 	var/explosion_point = 1000
 
-	light_color = "#8A8A00"
-	var/warning_color = "#B8B800"
-	var/emergency_color = "#D9D900"
+	light_color = "#8a8a00"
+	var/warning_color = "#b8b800"
+	var/emergency_color = "#d9d900"
 
 	var/grav_pulling = 0
 	// Time in ticks between delamination ('exploding') and exploding (as in the actual boom)
@@ -79,7 +78,7 @@
 	// Time in 1/10th of seconds since the last sent warning
 	var/lastwarning = 0
 
-	// This stops spawning redundand explosions. Also incidentally makes supermatter unexplodable if set to 1.
+	// This stops spawning redundant explosions. Also incidentally makes supermatter unexplodable if set to 1.
 	var/exploded = 0
 
 	var/power = 0
@@ -95,9 +94,69 @@
 
 	var/debug = 0
 
+	var/disable_adminwarn = FALSE
+
+	var/aw_normal = FALSE
+	var/aw_notify = FALSE
+	var/aw_warning = FALSE
+	var/aw_danger = FALSE
+	var/aw_emerg = FALSE
+	var/aw_delam = FALSE
+	var/aw_EPR = FALSE
+
+	var/list/threshholds = list( // List of lists defining the amber/red labeling threshholds in readouts. Numbers are minminum red and amber and maximum amber and red, in that order
+		list("name" = SUPERMATTER_DATA_EER,         "min_h" = -1, "min_l" = -1,  "max_l" = 150,  "max_h" = 300),
+		list("name" = SUPERMATTER_DATA_TEMPERATURE, "min_h" = -1, "min_l" = -1,  "max_l" = 4000, "max_h" = 5000),
+		list("name" = SUPERMATTER_DATA_PRESSURE,    "min_h" = -1, "min_l" = -1,  "max_l" = 5000, "max_h" = 10000),
+		list("name" = SUPERMATTER_DATA_EPR,         "min_h" = -1, "min_l" = 1.0, "max_l" = 2.5,  "max_h" = 4.0)
+	)
+
 /obj/machinery/power/supermatter/New()
 	..()
 	uid = gl_uid++
+
+/obj/machinery/power/supermatter/proc/handle_admin_warnings()
+	if(disable_adminwarn)
+		return
+
+	// Generic checks, similar to checks done by supermatter monitor program.
+	aw_normal = status_adminwarn_check(SUPERMATTER_NORMAL, aw_normal, "INFO: Supermatter crystal has been energised", FALSE)
+	aw_notify = status_adminwarn_check(SUPERMATTER_NOTIFY, aw_notify, "INFO: Supermatter crystal is approaching unsafe operating temperature", FALSE)
+	aw_warning = status_adminwarn_check(SUPERMATTER_WARNING, aw_warning, "WARN: Supermatter crystal is taking integrity damage", FALSE)
+	aw_danger = status_adminwarn_check(SUPERMATTER_DANGER, aw_danger, "WARN: Supermatter integrity is below 50%", TRUE)
+	aw_emerg = status_adminwarn_check(SUPERMATTER_EMERGENCY, aw_emerg, "CRIT: Supermatter integrity is below 25%", FALSE)
+	aw_delam = status_adminwarn_check(SUPERMATTER_DELAMINATING, aw_delam, "CRIT: Supermatter is delaminating", TRUE)
+
+	// EPR check. Only runs when supermatter is energised. Triggers when there is very low amount of coolant in the core (less than one standard canister).
+	// This usually means a core breach or deliberate venting.
+	if(get_status() && (get_epr() < 0.5))
+		if(!aw_EPR)
+			var/area/A = get_area(src)
+			log_and_message_admins("WARN: Supermatter EPR value low. Possible core breach detected in [A.name]", null, src)
+		aw_EPR = TRUE
+	else
+		aw_EPR = FALSE
+
+/obj/machinery/power/supermatter/proc/status_adminwarn_check(var/min_status, var/current_state, var/message, var/send_to_irc = FALSE)
+	var/status = get_status()
+	if(status >= min_status)
+		if(!current_state)
+			var/area/A = get_area(src)
+			log_and_message_admins(message + " in [A.name]", null, src)
+			if(send_to_irc)
+				send2adminirc(message + " in [A.name]")
+		return TRUE
+	else
+		return FALSE
+
+/obj/machinery/power/supermatter/proc/get_epr()
+	var/turf/T = get_turf(src)
+	if(!istype(T))
+		return
+	var/datum/gas_mixture/air = T.return_air()
+	if(!air)
+		return 0
+	return round((air.total_moles / air.group_multiplier) / 23.1, 0.01)
 
 /obj/machinery/power/supermatter/proc/get_status()
 	var/turf/T = get_turf(src)
@@ -116,10 +175,10 @@
 	if(get_integrity() < 50)
 		return SUPERMATTER_DANGER
 
-	if((get_integrity() < 100) || (air.temperature > CRITICAL_TEMPERATURE))
+	if((get_integrity() < 100) || (air.temperature > critical_temperature))
 		return SUPERMATTER_WARNING
 
-	if(air.temperature > (CRITICAL_TEMPERATURE * 0.8))
+	if(air.temperature > (critical_temperature * 0.8))
 		return SUPERMATTER_NOTIFY
 
 	if(power > 5)
@@ -134,11 +193,11 @@
 		return
 
 	log_and_message_admins("Supermatter delaminating at [x] [y] [z]")
-	anchored = 1
+	anchored = TRUE
 	grav_pulling = 1
 	exploded = 1
 	sleep(pull_time)
-	var/turf/TS = get_turf(src)		// The turf supermatter is on. SM being in a locker, mecha, or other container shouldn't block it's effects that way.
+	var/turf/TS = get_turf(src)		// The turf supermatter is on. SM being in a locker, exosuit, or other container shouldn't block it's effects that way.
 	if(!istype(TS))
 		return
 
@@ -146,9 +205,9 @@
 
 	// Effect 1: Radiation, weakening to all mobs on Z level
 	for(var/z in affected_z)
-		radiation_repository.z_radiate(locate(1, 1, z), DETONATION_RADS, 1)
+		SSradiation.z_radiate(locate(1, 1, z), DETONATION_RADS, 1)
 
-	for(var/mob/living/mob in living_mob_list_)
+	for(var/mob/living/mob in GLOB.living_mob_list_)
 		var/turf/TM = get_turf(mob)
 		if(!TM)
 			continue
@@ -156,10 +215,10 @@
 			continue
 
 		mob.Weaken(DETONATION_MOB_CONCUSSION)
-		to_chat(mob, "<span class='danger'>An invisible force slams you against the ground!</span>")
+		to_chat(mob, SPAN_DANGER("An invisible force slams you against the ground!"))
 
 	// Effect 2: Z-level wide electrical pulse
-	for(var/obj/machinery/power/apc/A in machines)
+	for(var/obj/machinery/power/apc/A in SSmachines.machinery)
 		if(!(A.z in affected_z))
 			continue
 
@@ -173,7 +232,7 @@
 		else
 			A.energy_fail(round(DETONATION_SHUTDOWN_APC * random_change))
 
-	for(var/obj/machinery/power/smes/buildable/S in machines)
+	for(var/obj/machinery/power/smes/buildable/S in SSmachines.machinery)
 		if(!(S.z in affected_z))
 			continue
 		// Causes SMESes to shut down for a bit
@@ -182,11 +241,11 @@
 
 	// Effect 3: Break solar arrays
 
-	for(var/obj/machinery/power/solar/S in machines)
+	for(var/obj/machinery/power/solar/S in SSmachines.machinery)
 		if(!(S.z in affected_z))
 			continue
 		if(prob(DETONATION_SOLAR_BREAK_CHANCE))
-			S.broken()
+			S.set_broken(TRUE)
 
 
 
@@ -195,10 +254,28 @@
 		explosion(TS, explosion_power/2, explosion_power, explosion_power * 2, explosion_power * 4, 1)
 		qdel(src)
 
+/obj/machinery/power/supermatter/examine(mob/user)
+	. = ..()
+	if(user.skill_check(SKILL_ENGINES, SKILL_EXPERT))
+		var/integrity_message
+		switch(get_integrity())
+			if(0 to 30)
+				integrity_message = SPAN_DANGER("It looks highly unstable!")
+			if(31 to 70)
+				integrity_message = "It appears to be losing cohesion!"
+			else
+				integrity_message = "At a glance, it seems to be in sound shape."
+		to_chat(user, integrity_message)
+		if(user.skill_check(SKILL_ENGINES, SKILL_PROF))
+			var/display_power = power
+			display_power *= (0.85 + 0.3 * rand())
+			display_power = round(display_power, 20)
+			to_chat(user, "Eyeballing it, you place the relative EER at around [display_power] MeV/cm3.")
+
 //Changes color and luminosity of the light to these values if they were not already set
 /obj/machinery/power/supermatter/proc/shift_light(var/lum, var/clr)
-	if(lum != light_range || clr != light_color)
-		set_light(lum, l_color = clr)
+	if(lum != light_outer_range || clr != light_color)
+		set_light(1, 0.1, lum, l_color = clr)
 
 /obj/machinery/power/supermatter/proc/get_integrity()
 	var/integrity = damage / explosion_point
@@ -225,25 +302,22 @@
 	else
 		alert_msg = null
 	if(alert_msg)
-		if(!global_announcer)
-			global_announcer = new
-			log_debug("The Global Announcer was deleted, or missing.")
-		global_announcer.autosay(alert_msg, "Supermatter Monitor", "Engineering")
+		GLOB.global_announcer.autosay(alert_msg, "Supermatter Monitor", "Engineering")
 		//Public alerts
 		if((damage > emergency_point) && !public_alert)
-			global_announcer.autosay("WARNING: SUPERMATTER CRYSTAL DELAMINATION IMMINENT!", "Supermatter Monitor")
+			GLOB.global_announcer.autosay("WARNING: SUPERMATTER CRYSTAL DELAMINATION IMMINENT! SAFEROOMS UNBOLTED.", "Supermatter Monitor")
 			public_alert = 1
-			for(var/mob/M in player_list)
+			GLOB.using_map.unbolt_saferooms() // torch
+			for(var/mob/M in GLOB.player_list)
 				var/turf/T = get_turf(M)
-				if(T && (T.z in using_map.station_levels) && !istype(M,/mob/new_player) && !isdeaf(M))
+				if(T && (T.z in GLOB.using_map.station_levels) && !istype(M,/mob/new_player) && !isdeaf(M))
 					sound_to(M, 'sound/ambience/matteralarm.ogg')
 		else if(safe_warned && public_alert)
-			global_announcer.autosay(alert_msg, "Supermatter Monitor")
+			GLOB.global_announcer.autosay(alert_msg, "Supermatter Monitor")
 			public_alert = 0
 
 
-/obj/machinery/power/supermatter/process()
-
+/obj/machinery/power/supermatter/Process()
 	var/turf/L = loc
 
 	if(isnull(L))		// We have a null turf...something is wrong, stop processing this entity.
@@ -254,14 +328,14 @@
 
 	if(damage > explosion_point)
 		if(!exploded)
-			if(!istype(L, /turf/space))
+			if(!istype(L, /turf/space) && (L.z in GLOB.using_map.station_levels))
 				announce_warning()
 			explode()
 	else if(damage > warning_point) // while the core is still damaged and it's still worth noting its status
 		shift_light(5, warning_color)
 		if(damage > emergency_point)
 			shift_light(7, emergency_color)
-		if(!istype(L, /turf/space) && (world.timeofday - lastwarning) >= WARNING_DELAY * 10)
+		if(!istype(L, /turf/space) && ((world.timeofday - lastwarning) >= WARNING_DELAY * 10) && (L.z in GLOB.using_map.station_levels))
 			announce_warning()
 	else
 		shift_light(4,initial(light_color))
@@ -272,26 +346,26 @@
 	var/datum/gas_mixture/removed = null
 	var/datum/gas_mixture/env = null
 
-	//ensure that damage doesn't increase too quickly due to super high temperatures resulting from no coolant, for example. We dont want the SM exploding before anyone can react.
+	//ensure that damage doesn't increase too quickly due to super high temperatures resulting from no coolant, for example. We don't want the SM exploding before anyone can react.
 	//We want the cap to scale linearly with power (and explosion_point). Let's aim for a cap of 5 at power = 300 (based on testing, equals roughly 5% per SM alert announcement).
-	var/damage_inc_limit = (power/300)*(explosion_point/1000)*DAMAGE_RATE_LIMIT
+	var/damage_inc_limit = (power/300)*(explosion_point/1000)*damage_rate_limit
 
 	if(!istype(L, /turf/space))
 		env = L.return_air()
 		removed = env.remove(gasefficency * env.total_moles)	//Remove gas from surrounding area
 
 	if(!env || !removed || !removed.total_moles)
-		damage += max((power - 15*POWER_FACTOR)/10, 0)
+		damage += max((power - 15*power_factor)/10, 0)
 	else if (grav_pulling) //If supermatter is detonating, remove all air from the zone
 		env.remove(env.total_moles)
 	else
 		damage_archived = damage
 
-		damage = max(0, damage + between(-DAMAGE_RATE_LIMIT, (removed.temperature - CRITICAL_TEMPERATURE) / 150, damage_inc_limit))
+		damage = max(0, damage + between(-damage_rate_limit, (removed.temperature - critical_temperature) / 150, damage_inc_limit))
 
 		//Ok, 100% oxygen atmosphere = best reaction
 		//Maxes out at 100% oxygen pressure
-		oxygen = Clamp((removed.get_by_flag(XGM_GAS_OXIDIZER) - (removed.gas["nitrogen"] * NITROGEN_RETARDATION_FACTOR)) / removed.total_moles, 0, 1)
+		oxygen = Clamp((removed.get_by_flag(XGM_GAS_OXIDIZER) - (removed.gas[GAS_NITROGEN] * nitrogen_retardation_factor)) / removed.total_moles, 0, 1)
 
 		//calculate power gain for oxygen reaction
 		var/temp_factor
@@ -305,17 +379,17 @@
 			equilibrium_power = 250
 			icon_state = base_icon_state
 
-		temp_factor = ( (equilibrium_power/DECAY_FACTOR)**3 )/800
+		temp_factor = ( (equilibrium_power/decay_factor)**3 )/800
 		power = max( (removed.temperature * temp_factor) * oxygen + power, 0)
 
-		var/device_energy = power * REACTION_POWER_MODIFIER
+		var/device_energy = power * reaction_power_modifier
 
 		//Release reaction gasses
 		var/heat_capacity = removed.heat_capacity()
-		removed.adjust_multi("phoron", max(device_energy / PHORON_RELEASE_MODIFIER, 0), \
-		                     "oxygen", max((device_energy + removed.temperature - T0C) / OXYGEN_RELEASE_MODIFIER, 0))
+		removed.adjust_multi(GAS_PHORON, max(device_energy / phoron_release_modifier, 0), \
+		                     GAS_OXYGEN, max((device_energy + removed.temperature - T0C) / oxygen_release_modifier, 0))
 
-		var/thermal_power = THERMAL_RELEASE_MODIFIER * device_energy
+		var/thermal_power = thermal_release_modifier * device_energy
 		if (debug)
 			var/heat_capacity_new = removed.heat_capacity()
 			visible_message("[src]: Releasing [round(thermal_power)] W.")
@@ -326,20 +400,21 @@
 
 		env.merge(removed)
 
-	for(var/mob/living/carbon/human/l in view(src, min(7, round(sqrt(power/6))))) // If they can see it without mesons on.  Bad on them.
-		if(!istype(l.glasses, /obj/item/clothing/glasses/meson))
-			l.hallucination = max(0, min(200, l.hallucination + power * config_hallucination_power * sqrt( 1 / max(1,get_dist(l, src)) ) ) )
+	for(var/mob/living/carbon/human/subject in view(src, min(7, round(sqrt(power/6)))))
+		var/obj/item/organ/internal/eyes/eyes = subject.internal_organs_by_name[BP_EYES]
+		if (!eyes)
+			continue
+		if (BP_IS_ROBOTIC(eyes))
+			continue
+		if(subject.has_meson_effect())
+			continue
+		var/effect = max(0, min(200, power * config_hallucination_power * sqrt( 1 / max(1,get_dist(subject, src)))) )
+		subject.adjust_hallucination(effect, 0.25 * effect)
 
-/*
-	//adjusted range so that a power of 170 (pretty high) results in 9 tiles, roughly the distance from the core to the engine monitoring room.
-	//note that the rads given at the maximum range is a constant 0.2 - as power increases the maximum range merely increases.
-	for(var/mob/living/l in range(src, round(sqrt(power / 2))))
-		var/radius = max(get_dist(l, src), 1)
-		var/rads = (power / 10) * ( 1 / (radius**2) )
-		l.apply_effect(rads, IRRADIATE, blocked = l.getarmor(null, "rad"))
-*/
-	rad_power = power * 1.5 //Better close those shutters!
-	power -= (power/DECAY_FACTOR)**3		//energy losses due to radiation
+
+	SSradiation.radiate(src, power * radiation_release_modifier) //Better close those shutters!
+	power -= (power/decay_factor)**3		//energy losses due to radiation
+	handle_admin_warnings()
 
 	return 1
 
@@ -353,7 +428,7 @@
 
 	var/proj_damage = Proj.get_structure_damage()
 	if(istype(Proj, /obj/item/projectile/beam))
-		power += proj_damage * config_bullet_energy	* CHARGING_FACTOR / POWER_FACTOR
+		power += proj_damage * config_bullet_energy	* charging_factor / power_factor
 	else
 		damage += proj_damage * config_bullet_energy
 	return 0
@@ -365,14 +440,18 @@
 		ui_interact(user)
 	return
 
-/obj/machinery/power/supermatter/attack_ai(mob/user as mob)
+/obj/machinery/power/supermatter/attack_ai(mob/user)
+	ui_interact(user)
+
+/obj/machinery/power/supermatter/attack_ghost(mob/user)
 	ui_interact(user)
 
 /obj/machinery/power/supermatter/attack_hand(mob/user as mob)
-	user.visible_message("<span class=\"warning\">\The [user] reaches out and touches \the [src], inducing a resonance... \his body starts to glow and bursts into flames before flashing into ash.</span>",\
-		"<span class=\"danger\">You reach out and touch \the [src]. Everything starts burning and all you can hear is ringing. Your last thought is \"That was not a wise decision.\"</span>",\
-		"<span class=\"warning\">You hear an uneartly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.</span>")
-
+	user.visible_message(
+		SPAN_WARNING("\The [user] reaches out and touches \the [src], inducing a resonance. For a brief instant, \his body glows brilliantly, then flashes into ash."),
+		SPAN_DANGER(FONT_LARGE("You reach out and touch \the [src]. Instantly, you feel a curious sensation as your body turns into new and exciting forms of plasma. That was not a wise decision.")),
+		SPAN_WARNING("You hear an unearthly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.")
+	)
 	Consume(user)
 
 // This is purely informational UI that may be accessed by AIs or robots
@@ -395,7 +474,7 @@
 	data["detonating"] = grav_pulling
 	data["energy"] = power
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "supermatter_crystal.tmpl", "Supermatter Crystal", 500, 300)
 		ui.set_initial_data(data)
@@ -403,31 +482,38 @@
 		ui.set_auto_update(1)
 
 
-/obj/machinery/power/supermatter/attackby(obj/item/weapon/W as obj, mob/living/user as mob)
-	if(istype(W, /obj/item/weapon/tape_roll))
-		to_chat(user, "You repair some of the damage to \the [src] with \the [W].")
-		damage = max(damage -10, 0)
+/obj/machinery/power/supermatter/attackby(obj/item/W as obj, mob/living/user as mob)
+	if(istype(W, /obj/item/tape_roll))
+		to_chat(user, SPAN_NOTICE("You repair some of the damage to \the [src] with \the [W]."))
+		damage = max(damage - 10, 0)
+		playsound(src, 'sound/effects/tape.ogg', 25)
 
-	user.visible_message("<span class=\"warning\">\The [user] touches \a [W] to \the [src] as a silence fills the room...</span>",\
-		"<span class=\"danger\">You touch \the [W] to \the [src] when everything suddenly goes silent.\"</span>\n<span class=\"notice\">\The [W] flashes into dust as you flinch away from \the [src].</span>",\
-		"<span class=\"warning\">Everything suddenly goes silent.</span>")
+	user.visible_message(
+		SPAN_WARNING("\The [user] touches \a [W] to \the [src], then flinches away as it flashes instantly into dust. Silence blankets the air."),
+		SPAN_DANGER("You touch \the [W] to \the [src]. Everything suddenly goes silent as it flashes into dust, and you flinch away."),
+		SPAN_WARNING("For a brief moment, you hear an oppressive, unnatural silence.")
+	)
 
 	user.drop_from_inventory(W)
 	Consume(W)
 
-	user.apply_effect(150, IRRADIATE, blocked = user.getarmor(null, "rad"))
+	user.apply_damage(150, IRRADIATE, damage_flags = DAM_DISPERSED)
 
 
 /obj/machinery/power/supermatter/Bumped(atom/AM as mob|obj)
 	if(istype(AM, /obj/effect))
 		return
 	if(istype(AM, /mob/living))
-		AM.visible_message("<span class=\"warning\">\The [AM] slams into \the [src] inducing a resonance... \his body starts to glow and catch flame before flashing into ash.</span>",\
-		"<span class=\"danger\">You slam into \the [src] as your ears are filled with unearthly ringing. Your last thought is \"Oh, fuck.\"</span>",\
-		"<span class=\"warning\">You hear an uneartly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.</span>")
+		AM.visible_message(
+			SPAN_WARNING("\The [AM] slams into \the [src], inducing a resonance. For a brief instant, \his body glows brilliantly, then flashes into ash."),
+			SPAN_DANGER(FONT_LARGE("You slam into \the [src], and your mind fills with unearthly shrieking. Your vision floods with light as your body instantly dissolves into dust.")),
+			SPAN_WARNING("You hear an unearthly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.")
+		)
 	else if(!grav_pulling) //To prevent spam, detonating supermatter does not indicate non-mobs being destroyed
-		AM.visible_message("<span class=\"warning\">\The [AM] smacks into \the [src] and rapidly flashes to ash.</span>",\
-		"<span class=\"warning\">You hear a loud crack as you are washed with a wave of heat.</span>")
+		AM.visible_message(
+			SPAN_WARNING("\The [AM] smacks into \the [src] and rapidly flashes to ash."),
+			SPAN_WARNING("You hear a loud crack as you are washed with a wave of heat.")
+		)
 
 	Consume(AM)
 
@@ -444,12 +530,11 @@
 	//Some poor sod got eaten, go ahead and irradiate people nearby.
 	for(var/mob/living/l in range(10))
 		if(l in view())
-			l.show_message("<span class=\"warning\">As \the [src] slowly stops resonating, you find your skin covered in new radiation burns.</span>", 1,\
-				"<span class=\"warning\">The unearthly ringing subsides and you notice you have new radiation burns.</span>", 2)
+			to_chat(l, SPAN_WARNING("As \the [src] slowly stops resonating, you feel an intense wave of heat wash over you."))
 		else
-			l.show_message("<span class=\"warning\">You hear an uneartly ringing and notice your skin is covered in fresh radiation burns.</span>", 2)
+			to_chat(l, SPAN_WARNING("You hear a muffled, shrill ringing as an intense wave of heat washes over you."))
 	var/rads = 500
-	radiation_repository.radiate(src, rads)
+	SSradiation.radiate(src, rads)
 
 
 /proc/supermatter_pull(var/atom/target, var/pull_range = 255, var/pull_power = STAGE_FIVE)
@@ -462,8 +547,19 @@
 /obj/machinery/power/supermatter/RepelAirflowDest(n)
 	return
 
+/obj/machinery/power/supermatter/ex_act(var/severity)
+	..()
+	switch(severity)
+		if(1.0)
+			power *= 4
+		if(2.0)
+			power *= 3
+		if(3.0)
+			power *= 2
+	log_and_message_admins("WARN: Explosion near the Supermatter! New EER: [power].")
+
 /obj/machinery/power/supermatter/shard //Small subtype, less efficient and more sensitive, but less boom.
-	name = "Supermatter Shard"
+	name = "supermatter shard"
 	desc = "A strangely translucent and iridescent crystal that looks like it used to be part of a larger structure. <span class='danger'>You get headaches just from looking at it.</span>"
 	icon_state = "darkmatter_shard"
 	base_icon_state = "darkmatter_shard"
@@ -480,19 +576,6 @@
 /obj/machinery/power/supermatter/shard/announce_warning() //Shards don't get announcements
 	return
 
-
-#undef NITROGEN_RETARDATION_FACTOR
-#undef THERMAL_RELEASE_MODIFIER
-#undef PHORON_RELEASE_MODIFIER
-#undef OXYGEN_RELEASE_MODIFIER
-#undef REACTION_POWER_MODIFIER
-#undef POWER_FACTOR
-#undef DECAY_FACTOR
-#undef CRITICAL_TEMPERATURE
-#undef CHARGING_FACTOR
-#undef DAMAGE_RATE_LIMIT
-#undef DETONATION_RADS_RANGE
-#undef DETONATION_RADS_BASE
 #undef DETONATION_MOB_CONCUSSION
 #undef DETONATION_APC_OVERLOAD_PROB
 #undef DETONATION_SHUTDOWN_APC

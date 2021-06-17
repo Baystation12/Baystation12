@@ -5,7 +5,7 @@
 /obj/item/clothing/ears/skrell
 	name = "skrell headtail wear"
 	desc = "Some stuff worn by skrell to adorn their headtails."
-	icon = 'icons/obj/clothing/ears.dmi'
+	icon = 'icons/obj/clothing/obj_ears.dmi'
 	gender = PLURAL
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS

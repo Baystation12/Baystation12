@@ -22,7 +22,7 @@
 			if(RESEARCH_BREAKTHROUGH)
 				body = "A major breakthough in the field of [pick("phoron research","super-compressed materials","nano-augmentation","bluespace research","volatile power manipulation")] \
 				was announced [pick("yesterday","a few days ago","last week","earlier this month")] by a private firm on [affected_dest.name]. \
-				[using_map.company_name] declined to comment as to whether this could impinge on profits."
+				[GLOB.using_map.company_name] declined to comment as to whether this could impinge on profits."
 
 			if(ELECTION)
 				body = "The pre-selection of an additional candidates was announced for the upcoming [pick("supervisors council","advisory board","governership","board of inquisitors")] \
@@ -32,7 +32,7 @@
 				"I will maintain my company's record profits","I believe in our future","We must return to our moral core","Just like... chill out dudes")]'."
 
 			if(RESIGNATION)
-				body = "[using_map.company_name] regretfully announces the resignation of [pick("Sector Admiral","Division Admiral","Ship Admiral","Vice Admiral")] [random_name(pick(MALE,FEMALE))]."
+				body = "[GLOB.using_map.company_name] regretfully announces the resignation of [pick("Sector Admiral","Division Admiral","Ship Admiral","Vice Admiral")] [random_name(pick(MALE,FEMALE))]."
 				if(prob(25))
 					var/locstring = pick("Segunda","Salusa","Cepheus","Andromeda","Gruis","Corona","Aquila","Asellus") + " " + pick("I","II","III","IV","V","VI","VII","VIII")
 					body += " In a ceremony on [affected_dest.name] this afternoon, they will be awarded the \
@@ -82,7 +82,7 @@
 			if(MOVIE_RELEASE)
 				body += "From the [pick("desk","home town","homeworld","mind")] of [pick("acclaimed","award-winning","popular","stellar")] \
 				[pick("playwright","author","director","actor","TV star")] [random_name(pick(MALE,FEMALE))] comes the latest sensation: '\
-				[pick("Deadly","The last","Lost","Dead")] [pick("Starships","Warriors","outcasts","Tajarans",SPECIES_UNATHI,SPECIES_SKRELL)] \
+				[pick("Deadly","The last","Lost","Dead")] [pick("Starships","Warriors","outcasts",SPECIES_UNATHI,SPECIES_SKRELL)] \
 				[pick("of","from","raid","go hunting on","visit","ravage","pillage","destroy")] \
 				[pick("Moghes","Earth","Biesel","Ahdomai","S'randarr","the Void","the Edge of Space")]'.\
 				. Own it on webcast today, or visit the galactic premier on [affected_dest.name]!"
@@ -106,9 +106,9 @@
 					body += "and their partner announced the birth of their [pick("first","second","third")] child on [affected_dest.name] early this morning. \
 					Doctors say the child is well, and the parents are considering "
 					if(prob(50))
-						body += capitalize(pick(first_names_female))
+						body += capitalize(pick(GLOB.first_names_female))
 					else
-						body += capitalize(pick(first_names_male))
+						body += capitalize(pick(GLOB.first_names_male))
 					body += " for the name."
 				else if(prob(50))
 					body += "announced their [pick("split","break up","marriage","engagement")] with [pick("TV host","webcast personality","superstar","model","actor","singer")] \
@@ -122,7 +122,8 @@
 				"a huge new ARG by a popular entertainment company","a secret tour by popular artiste [random_name(pick(MALE,FEMALE))]")]. \
 				Nyx Daily is offering discount tickets for two to see [random_name(pick(MALE,FEMALE))] live in return for eyewitness reports and up to the minute coverage."
 
-	news_network.SubmitArticle(body, author, channel, null, 1)
+	for (var/datum/feed_network/N in news_network)
+		N.SubmitArticle(body, author, channel, null, 1)
 
 /datum/event/trivial_news
 	endWhen = 10
@@ -133,14 +134,13 @@
 
 	var/datum/trade_destination/affected_dest = pick(weighted_mundaneevent_locations)
 	var/body = pick(
-	"Tree stuck in tajaran; firefighters baffled.",\
 	"Armadillos want aardvarks removed from dictionary claims 'here first'.",\
 	"Angel found dancing on pinhead ordered to stop; cited for public nuisance.",\
 	"Letters claim they are better than number; 'Always have been'.",\
 	"Pens proclaim pencils obsolete, 'lead is dead'.",\
 	"Rock and paper sues scissors for discrimination.",\
 	"Steak tell-all book reveals he never liked sitting by potato.",\
-	"Woodchuck stops counting how many times he’s chucked 'Never again'.",\
+	"Woodchuck stops counting how many times he's chucked 'Never again'.",\
 	"[affected_dest.name] clerk first person able to pronounce '@*$%!'.",\
 	"[affected_dest.name] delis serving boiled paperback dictionaries, 'Adjectives chewy' customers declare.",\
 	"[affected_dest.name] weather deemed 'boring'; meteors and rad storms to be imported.",\
@@ -149,15 +149,14 @@
 	"Question mark worshipped as deity by ancient [affected_dest.name] dwellers.",\
 	"Spilled milk causes whole [affected_dest.name] populace to cry.",\
 	"World largest carp patty at display on [affected_dest.name].",\
-	"'Here kitty kitty' no longer preferred tajaran retrieval technique.",\
 	"Man travels 7000 light years to retrieve lost hankie, 'It was my favourite'.",\
 	"New bowling lane that shoots mini-meteors at bowlers very popular.",\
-	"[pick(SPECIES_UNATHI,"Spacer")] gets tattoo of Nyx on chest '[pick("[using_map.boss_short]","star","starship","asteroid")] tickles most'.",\
+	"[pick(SPECIES_UNATHI,"Spacer")] gets tattoo of Nyx on chest '[pick("[GLOB.using_map.boss_short]","star","starship","asteroid")] tickles most'.",\
 	"Skrell marries computer; wedding attended by 100 modems.",\
 	"Chef reports successfully using harmonica as cheese grater.",\
-	"[using_map.company_name] invents handkerchief that says 'Bless you' after sneeze.",\
-	"Clone accused of posing for other clones’s school photo.",\
-	"Clone accused of stealing other clones’s employee of the month award.",\
+	"[GLOB.using_map.company_name] invents handkerchief that says 'Bless you' after sneeze.",\
+	"Clone accused of posing for other clones's school photo.",\
+	"Clone accused of stealing other clones's employee of the month award.",\
 	"Woman robs [station_name()] with hair dryer; crewmen love new style.",\
 	"This space for rent.",\
 	"[affected_dest.name] Baker Wins Pickled Crumpet Toss Three Years Running",\
@@ -173,16 +172,12 @@
 	"Survey: 80% Of People on [affected_dest.name] Love Clog-Dancing",\
 	"Giant Hairball Has Perfect Grammar But Rolls rr's Too Much, Linguists Say",\
 	"[affected_dest.name] Phonebooks Print All Wrong Numbers; Results In 15 New Marriages",\
-	"Tajaran Burglar Spotted on [affected_dest.name], Mistaken For Dalmatian",\
 	"Gibson Gazette Updates Frequently Absurd, Poll Indicates",\
 	"Esoteric Verbosity Culminates In Communicative Ennui, [affected_dest.name] Academics Note",\
-	"Taj Demand Longer Breaks, Cleaner Litter, Slower Mice",\
 	"Survey: 3 Out Of 5 Skrell Loathe Modern Art",\
 	"Skrell Scientist Discovers Gravity While Falling Down Stairs",\
-	"Boy Saves Tajaran From Tree on [affected_dest.name], Thousands Cheer",\
 	"Shipment Of Apples Overturns, [affected_dest.name] Diner Offers Applesauce Special",\
 	"Spotted Owl Spotted on [affected_dest.name]",\
-	"Humans Everywhere Agree: Purring Tajarans Are Happy Tajarans",\
 	"From The Desk Of Wise Guy Sammy: One Word In This Gazette Is Sdrawkcab",\
 	"From The Desk Of Wise Guy Sammy: It's Hard To Have Too Much Shelf Space",\
 	"From The Desk Of Wise Guy Sammy: Wine And Friendships Get Better With Age",\
@@ -216,5 +211,5 @@
 	"If Tin Whistles Are Made Of Tin, What Do They Make Foghorns Out Of?",\
 	"Broccoli discovered to be colonies of tiny aliens with murder on their minds"\
 	)
-
-	news_network.SubmitArticle(body, author, channel, null, 1)
+	for (var/datum/feed_network/N in news_network)
+		N.SubmitArticle(body, author, channel, null, 1)

@@ -3,7 +3,7 @@
 	gender = PLURAL
 	icon = 'icons/effects/blood.dmi'
 	icon_state = "remains"
-	anchored = 0
+	anchored = FALSE
 
 /obj/item/remains/human
 	desc = "They look like human remains. They have a strange aura about them."
@@ -19,7 +19,7 @@
 
 /obj/item/remains/robot
 	desc = "They look like the remains of something mechanical. They have a strange aura about them."
-	icon = 'icons/mob/robots.dmi'
+	icon = 'icons/mob/robots_gibs.dmi'
 	icon_state = "remainsrobot"
 
 /obj/item/remains/mouse

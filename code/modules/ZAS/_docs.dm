@@ -15,7 +15,7 @@ Every air tick:
 
 Important Functions:
 
-air_master.mark_for_update(turf)
+SSair.mark_for_update(turf)
 	When stuff happens, call this. It works on everything. You basically don't need to worry about any other
 	functions besides CanPass().
 
@@ -26,12 +26,3 @@ Notes for people who used ZAS before:
 		var/zone/connected_zone = edge.get_connected_zone(zone)
 
 */
-
-//#define ZASDBG
-#define MULTIZAS
-
-#define AIR_BLOCKED 1
-#define ZONE_BLOCKED 2
-#define BLOCKED 3
-
-#define ZONE_MIN_SIZE 14 //zones with less than this many turfs will always merge, even if the connection is not direct

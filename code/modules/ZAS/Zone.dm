@@ -40,23 +40,21 @@ Class Procs:
 */
 
 
-/zone/var/name
-/zone/var/invalid = 0
-/zone/var/list/contents = list()
-/zone/var/list/fire_tiles = list()
-/zone/var/list/fuel_objs = list()
-
-/zone/var/needs_update = 0
-
-/zone/var/list/edges = list()
-
-/zone/var/datum/gas_mixture/air = new
-
-/zone/var/list/graphic_add = list()
-/zone/var/list/graphic_remove = list()
+/zone
+	var/name
+	var/invalid = 0
+	var/list/contents = list()
+	var/list/fire_tiles = list()
+	var/list/fuel_objs = list()
+	var/needs_update = 0
+	var/list/edges = list()
+	var/datum/gas_mixture/air = new
+	var/list/graphic_add = list()
+	var/list/graphic_remove = list()
+	var/last_air_temperature = TCMB
 
 /zone/New()
-	air_master.add_zone(src)
+	SSair.add_zone(src)
 	air.temperature = TCMB
 	air.group_multiplier = 1
 	air.volume = CELL_VOLUME
@@ -65,7 +63,7 @@ Class Procs:
 #ifdef ZASDBG
 	ASSERT(!invalid)
 	ASSERT(istype(T))
-	ASSERT(!air_master.has_valid_zone(T))
+	ASSERT(!SSair.has_valid_zone(T))
 #endif
 
 	var/datum/gas_mixture/turf_air = T.return_air()
@@ -75,7 +73,7 @@ Class Procs:
 	if(T.fire)
 		var/obj/effect/decal/cleanable/liquid_fuel/fuel = locate() in T
 		fire_tiles.Add(T)
-		air_master.active_fire_zones |= src
+		SSair.active_fire_zones |= src
 		if(fuel) fuel_objs += fuel
 	T.update_graphic(air.graphic)
 
@@ -118,11 +116,11 @@ Class Procs:
 		if(E.contains_zone(into))
 			continue //don't need to rebuild this edge
 		for(var/turf/T in E.connecting_turfs)
-			air_master.mark_for_update(T)
+			SSair.mark_for_update(T)
 
 /zone/proc/c_invalidate()
 	invalid = 1
-	air_master.remove_zone(src)
+	SSair.remove_zone(src)
 	#ifdef ZASDBG
 	for(var/turf/simulated/T in contents)
 		T.dbg(invalid_zone)
@@ -135,7 +133,7 @@ Class Procs:
 		T.update_graphic(graphic_remove = air.graphic) //we need to remove the overlays so they're not doubled when the zone is rebuilt
 		//T.dbg(invalid_zone)
 		T.needs_air_update = 0 //Reset the marker so that it will be added to the list.
-		air_master.mark_for_update(T)
+		SSair.mark_for_update(T)
 
 /zone/proc/add_tile_air(datum/gas_mixture/tile_air)
 	//air.volume += CELL_VOLUME
@@ -146,27 +144,55 @@ Class Procs:
 	air.group_multiplier = contents.len+1
 
 /zone/proc/tick()
-	if(air.temperature >= PHORON_FLASHPOINT && !(src in air_master.active_fire_zones) && air.check_combustability() && contents.len)
+
+	// Update fires.
+	if(air.temperature >= PHORON_FLASHPOINT && !(src in SSair.active_fire_zones) && air.check_combustability() && contents.len)
 		var/turf/T = pick(contents)
 		if(istype(T))
 			T.create_fire(vsc.fire_firelevel_multiplier)
 
+	// Update gas overlays.
 	if(air.check_tile_graphic(graphic_add, graphic_remove))
 		for(var/turf/simulated/T in contents)
 			T.update_graphic(graphic_add, graphic_remove)
 		graphic_add.len = 0
 		graphic_remove.len = 0
 
+	// Update connected edges.
 	for(var/connection_edge/E in edges)
 		if(E.sleeping)
 			E.recheck()
+
+	// Handle condensation from the air.
+	for(var/g in air.gas)
+		var/product = gas_data.condensation_products[g]
+		if(product && air.temperature <= gas_data.condensation_points[g])
+			var/condensation_area = air.group_multiplier
+			while(condensation_area > 0)
+				condensation_area--
+				var/turf/flooding = pick(contents)
+				var/condense_amt = min(air.gas[g], rand(3,5))
+				if(condense_amt < 1)
+					break
+				air.adjust_gas(g, -condense_amt)
+				flooding.add_fluid(condense_amt, product)
+
+	// Update atom temperature.
+	if(abs(air.temperature - last_air_temperature) >= ATOM_TEMPERATURE_EQUILIBRIUM_THRESHOLD)
+		last_air_temperature = air.temperature
+		for(var/turf/simulated/T in contents)
+			for(var/check_atom in T.contents)
+				var/atom/checking = check_atom
+				if(checking.simulated)
+					QUEUE_TEMPERATURE_ATOMS(checking)
+			CHECK_TICK
 
 /zone/proc/dbg_data(mob/M)
 	to_chat(M, name)
 	for(var/g in air.gas)
 		to_chat(M, "[gas_data.name[g]]: [air.gas[g]]")
 	to_chat(M, "P: [air.return_pressure()] kPa V: [air.volume]L T: [air.temperature]°K ([air.temperature - T0C]°C)")
-	to_chat(M, "O2 per N2: [(air.gas["nitrogen"] ? air.gas["oxygen"]/air.gas["nitrogen"] : "N/A")] Moles: [air.total_moles]")
+	to_chat(M, "O2 per N2: [(air.gas[GAS_NITROGEN] ? air.gas[GAS_OXYGEN]/air.gas[GAS_NITROGEN] : "N/A")] Moles: [air.total_moles]")
 	to_chat(M, "Simulated: [contents.len] ([air.group_multiplier])")
 //	to_chat(M, "Unsimulated: [unsimulated_contents.len]")
 //	to_chat(M, "Edges: [edges.len]")

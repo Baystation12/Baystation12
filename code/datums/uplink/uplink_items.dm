@@ -30,17 +30,12 @@ var/datum/uplink/uplink = new()
 	var/name
 	var/desc
 	var/item_cost = 0
-	var/list/antag_costs					// Allows specific antag roles to purchase at a different cost
+	var/list/antag_costs = list()			// Allows specific antag roles to purchase at a different cost
 	var/datum/uplink_category/category		// Item category
-	var/list/datum/antagonist/antag_roles	// Antag roles this item is displayed to. If empty, display to all.
+	var/list/datum/antagonist/antag_roles = list("Exclude", MODE_DEITY)	// Antag roles this item is displayed to. If empty, display to all. If it includes 'Exclude", anybody except this role can view it
 
 /datum/uplink_item/item
 	var/path = null
-
-/datum/uplink_item/New()
-	..()
-	antag_roles = list()
-	antag_costs = list()
 
 /datum/uplink_item/proc/buy(var/obj/item/device/uplink/U, var/mob/user)
 	var/extra_args = extra_args(user)
@@ -81,19 +76,24 @@ var/datum/uplink/uplink = new()
 		return 0
 
 	for(var/antag_role in antag_roles)
-		var/datum/antagonist/antag = all_antag_types()[antag_role]
+		if(antag_role == "Exclude")
+			continue
+		var/datum/antagonist/antag = GLOB.all_antag_types_[antag_role]
 		if(antag.is_antagonist(U.uplink_owner))
-			return 1
-	return 0
+			return !("Exclude" in antag_roles)
+	return ("Exclude" in antag_roles)
 
 /datum/uplink_item/proc/cost(var/telecrystals, obj/item/device/uplink/U)
 	. = item_cost
 	if(U && U.uplink_owner)
 		for(var/antag_role in antag_costs)
-			var/datum/antagonist/antag = all_antag_types()[antag_role]
+			var/datum/antagonist/antag = GLOB.all_antag_types_[antag_role]
 			if(antag.is_antagonist(U.uplink_owner))
 				. = min(antag_costs[antag_role], .)
 	return max(1, U ?  U.get_item_cost(src, .) : .)
+
+/datum/uplink_item/proc/name()
+	return name
 
 /datum/uplink_item/proc/description()
 	return desc
@@ -106,7 +106,7 @@ var/datum/uplink/uplink = new()
 	return
 
 /datum/uplink_item/proc/purchase_log(obj/item/device/uplink/U, var/mob/user, var/cost)
-	feedback_add_details("traitor_uplink_items_bought", "[src]")
+	SSstatistics.add_field_details("traitor_uplink_items_bought", "[src]")
 	log_and_message_admins("used \the [U.loc] to buy \a [src]")
 	if(user)
 		uplink_purchase_repository.add_entry(user.mind, src, cost)

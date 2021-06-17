@@ -1,6 +1,9 @@
 // Macro functions.
 #define RAND_F(LOW, HIGH) (rand()*(HIGH-LOW) + LOW)
 #define ceil(x) (-round(-(x)))
+#define CEILING(x, y) ( -round(-(x) / (y)) * (y) )
+#define MULT_BY_RANDOM_COEF(VAR,LO,HI) VAR =  round((VAR * rand(LO * 100, HI * 100))/100, 0.1)
+#define PERCENT(val, max, places) round((val) / (max) * 100, !(places) || 10 ** -(places))
 
 // min is inclusive, max is exclusive
 /proc/Wrap(val, min, max)
@@ -125,7 +128,10 @@
 	return sqrt(squaredNorm(x, y))
 
 /proc/IsPowerOfTwo(var/val)
-    return (val & (val-1)) == 0
+	return (val & (val-1)) == 0
 
 /proc/RoundUpToPowerOfTwo(var/val)
-    return 2 ** -round(-log(2,val))
+	return 2 ** -round(-log(2,val))
+
+/matrix/proc/get_angle()
+	return Atan2(b,a)

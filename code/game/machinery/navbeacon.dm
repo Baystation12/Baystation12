@@ -6,9 +6,8 @@ var/global/list/navbeacons = list()
 	name = "navigation beacon"
 	desc = "A radio beacon used for bot navigation."
 	level = 1
-	plane = ABOVE_PLATING_PLANE
 	layer = ABOVE_WIRE_LAYER
-	anchored = 1
+	anchored = TRUE
 
 	var/open = 0		// true if cover is open
 	var/locked = 1		// true if controls are locked
@@ -26,10 +25,10 @@ var/global/list/navbeacons = list()
 	navbeacons += src
 
 /obj/machinery/navbeacon/hide(var/intact)
-	invisibility = intact ? 101 : 0
-	updateicon()
+	set_invisibility(intact ? 101 : 0)
+	update_icon()
 
-/obj/machinery/navbeacon/proc/updateicon()
+/obj/machinery/navbeacon/on_update_icon()
 	var/state="navbeacon[open]"
 
 	if(invisibility)
@@ -43,12 +42,12 @@ var/global/list/navbeacons = list()
 	if(!T.is_plating())
 		return		// prevent intraction when T-scanner revealed
 
-	if(istype(I, /obj/item/weapon/screwdriver))
+	if(isScrewdriver(I))
 		open = !open
 
 		user.visible_message("\The [user] [open ? "opens" : "closes"] cover of \the [src].", "You [open ? "open" : "close"] cover of \the [src].")
 
-		updateicon()
+		update_icon()
 
 	else if(I.GetIdCard())
 		if(open)
@@ -62,17 +61,12 @@ var/global/list/navbeacons = list()
 			to_chat(user, "You must open the cover first!")
 	return
 
-/obj/machinery/navbeacon/attack_ai(var/mob/user)
-	interact(user, 1)
+/obj/machinery/navbeacon/interface_interact(var/mob/user)
+	interact(user)
+	return TRUE
 
-/obj/machinery/navbeacon/attack_hand(var/mob/user)
-
-	if(!user.IsAdvancedToolUser())
-		return 0
-
-	interact(user, 0)
-
-/obj/machinery/navbeacon/interact(var/mob/user, var/ai = 0)
+/obj/machinery/navbeacon/interact(var/mob/user)
+	var/ai = isAI(user)
 	var/turf/T = loc
 	if(!T.is_plating())
 		return		// prevent intraction when T-scanner revealed
@@ -107,7 +101,7 @@ Transponder Codes:<UL>"}
 		t += "<small><A href='byond://?src=\ref[src];add=1;'>(add new)</A></small><BR>"
 		t+= "<UL></TT>"
 
-	user << browse(t, "window=navbeacon")
+	show_browser(user, t, "window=navbeacon")
 	onclose(user, "navbeacon")
 	return
 

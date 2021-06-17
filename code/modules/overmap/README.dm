@@ -8,18 +8,18 @@ Unless stated otherwise, you just need to place any of things below somewhere on
 # How to make new sector
 *************************************************************
 0. Map whatever.
-1. Make /obj/effect/overmap/sector/[whatever]
-	If you want explorations shuttles be able to dock here, remember to set *landing_area*
-2. Put /obj/effect/overmap/sector/[whatever] on the map. Even if it's multiz, only one is needed, on any z.
+1. Make /obj/effect/overmap/visitable/sector/[whatever]
+	If you want explorations shuttles be able to dock here, remember to set waypoints lists
+2. Put /obj/effect/overmap/visitable/sector/[whatever] on the map. Even if it's multiz, only one is needed, on any z.
 3. Done.
 
 *************************************************************
 # How to make new ship
 *************************************************************
 0. Map whatever.
-1. Make /obj/effect/overmap/ship/[whatever]
-	If you want explorations shuttles be able to dock here, remember to set *landing_areas*
-2. Put /obj/effect/overmap/ship/[whatever] on the map. If it's multiz, only one is needed, on any z.
+1. Make /obj/effect/overmap/visitable/ship/[whatever]
+	If you want explorations shuttles be able to dock here, remember to set waypoints lists
+2. Put /obj/effect/overmap/visitable/ship/[whatever] on the map. If it's multiz, only one is needed, on any z.
 3. Put Helm Console anywhere on the map.
 4. Put Engines Control Console anywhere on the map.
 5. Put some engines hooked up to gas supply anywhere on the map.
@@ -28,7 +28,7 @@ Unless stated otherwise, you just need to place any of things below somewhere on
 *************************************************************
 # Overmap object
 *************************************************************
-/obj/effect/overmap
+/obj/effect/overmap/visitable
 ### WHAT IT DOES
 Lets overmap know this place should be represented on the map as a sector/ship.
 If this zlevel (or any of connected ones for multiz) doesn't have this object, you won't be able to travel there by ovemap means.
@@ -39,13 +39,14 @@ If your thing is multiz, only one is needed per multiz sector/ship.
 
 If it's player's main base (e.g Exodus), set 'base' var to 1, so it adds itself to station_levels list.
 If this place cannot be reached or left with EVA, set 'in_space' var to 0
-If you want exploration shuttles (look below) to be able to dock here, set *landing_areas* var to the list of of area they should use
-e.g. *landing_areas* = list(/area/sector/shuttle/butts_inbound,/area/sector/shuttle/syndicat_approach)
+If you want exploration shuttles (look below) to be able to dock here, set up waypoints lists.
+generic_waypoints is list of landmark_tags of waypoints any shttle should be able to visit.
+restricted_waypoints is list of 'shuttle name = list(landmark_tags)' pairs for waypoints only those shuttles can visit
 
 *************************************************************
 # Helm console
 *************************************************************
-/obj/machinery/computer/helm
+/obj/machinery/computer/ship/helm
 ### WHAT IT DOES
 Lets you steer ship around on overmap.
 Lets you use autopilot.
@@ -55,7 +56,7 @@ Just place it anywhere on the ship.
 *************************************************************
 # Engines control console
 *************************************************************
-/obj/machinery/computer/engines
+/obj/machinery/computer/ship/engines
 ### WHAT IT DOES
 Lets use set thrust limits for engines of your ship.
 Lets you shutdown/restart the engines.
@@ -79,8 +80,8 @@ Put them on map, hook up to pipes with any gas. Heavier gas (CO2/plasma) + More 
 ### WHAT IT DOES
 Lets you control shuttles that can change destinations and visit other sectors/ships.
 ### HOW TO USE
-1. Map a shuttle area.
-2. Set landing_type var to the type of that area.
-3. Place console anywhere on the ship/sector.
-4. Use. You can select destinations if you're in range (on same tile by defualt) on the map and sector has *landing_area* defined
+1. Define starting shuttle landmark.
+2. Define a /datum/shuttle/autodock/overmap for your shuttle. Same as normal shuttle, aside from 'range' var - how many squares on overmap it can travel on its own.
+3. Place console anywhere on the ship/sector. Set shuttle_tag to shuttle's name.
+4. Use. You can select destinations if you're in range (on same tile by defualt) on the map and sector has waypoints lists defined
 */

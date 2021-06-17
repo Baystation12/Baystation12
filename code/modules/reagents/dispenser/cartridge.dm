@@ -1,4 +1,4 @@
-/obj/item/weapon/reagent_containers/chem_disp_cartridge
+/obj/item/reagent_containers/chem_disp_cartridge
 	name = "chemical dispenser cartridge"
 	desc = "This goes in a chemical dispenser."
 	icon_state = "cartridge"
@@ -9,19 +9,19 @@
 	amount_per_transfer_from_this = 50
 	// Large, but inaccurate. Use a chem dispenser or beaker for accuracy.
 	possible_transfer_amounts = "50;100"
-	unacidable = 1
+	unacidable = TRUE
 
 	var/spawn_reagent = null
 	var/label = ""
 
-/obj/item/weapon/reagent_containers/chem_disp_cartridge/New()
-	..()
+/obj/item/reagent_containers/chem_disp_cartridge/New()
+	. = ..()
 	if(spawn_reagent)
 		reagents.add_reagent(spawn_reagent, volume)
-		var/datum/reagent/R = chemical_reagents_list[spawn_reagent]
-		setLabel(R.name)
+		var/datum/reagent/R = spawn_reagent
+		setLabel(initial(R.name))
 
-/obj/item/weapon/reagent_containers/chem_disp_cartridge/examine(mob/user)
+/obj/item/reagent_containers/chem_disp_cartridge/examine(mob/user)
 	. = ..()
 	to_chat(user, "It has a capacity of [volume] units.")
 	if(reagents.total_volume <= 0)
@@ -31,36 +31,36 @@
 	if(!is_open_container())
 		to_chat(user, "The cap is sealed.")
 
-/obj/item/weapon/reagent_containers/chem_disp_cartridge/verb/verb_set_label(L as text)
+/obj/item/reagent_containers/chem_disp_cartridge/verb/verb_set_label(L as text)
 	set name = "Set Cartridge Label"
 	set category = "Object"
 	set src in view(usr, 1)
 
 	setLabel(L, usr)
 
-/obj/item/weapon/reagent_containers/chem_disp_cartridge/proc/setLabel(L, mob/user = null)
+/obj/item/reagent_containers/chem_disp_cartridge/proc/setLabel(L, mob/user = null)
 	if(L)
 		if(user)
 			to_chat(user, "<span class='notice'>You set the label on \the [src] to '[L]'.</span>")
 
 		label = L
-		name = "[initial(name)] - '[L]'"
+		SetName("[initial(name)] - '[L]'")
 	else
 		if(user)
 			to_chat(user, "<span class='notice'>You clear the label on \the [src].</span>")
 		label = ""
-		name = initial(name)
+		SetName(initial(name))
 
-/obj/item/weapon/reagent_containers/chem_disp_cartridge/attack_self()
+/obj/item/reagent_containers/chem_disp_cartridge/attack_self()
 	..()
 	if (is_open_container())
 		to_chat(usr, "<span class = 'notice'>You put the cap on \the [src].</span>")
-		flags ^= OPENCONTAINER
+		atom_flags ^= ATOM_FLAG_OPEN_CONTAINER
 	else
 		to_chat(usr, "<span class = 'notice'>You take the cap off \the [src].</span>")
-		flags |= OPENCONTAINER
+		atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 
-/obj/item/weapon/reagent_containers/chem_disp_cartridge/afterattack(obj/target, mob/user , flag)
+/obj/item/reagent_containers/chem_disp_cartridge/afterattack(obj/target, mob/user , flag)
 	if (!is_open_container() || !flag)
 		return
 

@@ -71,10 +71,10 @@
 
 /proc/SetUniversalState(var/newstate,var/on_exit=1, var/on_enter=1, list/arguments=null)
 	if(on_exit)
-		universe.OnExit()
+		GLOB.universe.OnExit()
 	if(arguments)
-		universe = new newstate(arglist(arguments))
+		GLOB.universe = new newstate(arglist(arguments))
 	else
-		universe = new newstate
+		GLOB.universe = new newstate
 	if(on_enter)
-		universe.OnEnter()
+		GLOB.universe.OnEnter()

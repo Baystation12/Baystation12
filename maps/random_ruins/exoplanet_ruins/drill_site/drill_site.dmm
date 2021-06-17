@@ -1,0 +1,150 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/template_noop,
+/area/template_noop)
+"b" = (
+/obj/random/trash,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"d" = (
+/obj/random/loot,
+/obj/random/junk,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"e" = (
+/obj/machinery/floodlight,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"f" = (
+/obj/machinery/mining/brace,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"g" = (
+/obj/structure/ore_box,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"h" = (
+/obj/random/tool,
+/obj/effect/landmark/clear,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"j" = (
+/obj/random/tool,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"k" = (
+/obj/machinery/mining/drill,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"l" = (
+/obj/structure/pit,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"n" = (
+/obj/random/drinkbottle,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"s" = (
+/obj/random/loot,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"u" = (
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"y" = (
+/obj/random/hat,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"C" = (
+/obj/random/trash,
+/obj/effect/landmark/clear,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"H" = (
+/obj/random/powercell,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"O" = (
+/obj/random/toolbox,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+
+(1,1,1) = {"
+a
+b
+u
+u
+j
+a
+a
+"}
+(2,1,1) = {"
+u
+u
+f
+u
+b
+n
+a
+"}
+(3,1,1) = {"
+b
+d
+g
+u
+k
+u
+O
+"}
+(4,1,1) = {"
+u
+u
+u
+s
+l
+u
+u
+"}
+(5,1,1) = {"
+a
+e
+b
+u
+u
+b
+u
+"}
+(6,1,1) = {"
+a
+H
+b
+u
+h
+C
+y
+"}
+(7,1,1) = {"
+a
+a
+a
+b
+u
+u
+a
+"}

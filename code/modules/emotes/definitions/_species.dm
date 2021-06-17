@@ -27,10 +27,11 @@
 		/decl/emote/human/qwag,
 		/decl/emote/human/fastsway,
 		/decl/emote/human/swag,
-		/decl/emote/human/stopsway
+		/decl/emote/human/stopsway,
+		/decl/emote/audible/lizard_bellow
 		)
 
-/datum/species/tajaran
+/datum/species/unathi/yeosa
 	default_emotes = list(
 		/decl/emote/human/swish,
 		/decl/emote/human/wag,
@@ -38,9 +39,57 @@
 		/decl/emote/human/qwag,
 		/decl/emote/human/fastsway,
 		/decl/emote/human/swag,
-		/decl/emote/human/stopsway
+		/decl/emote/human/stopsway,
+		/decl/emote/audible/lizard_bellow,
+		/decl/emote/audible/lizard_squeal
 		)
 
-/mob/living/carbon/human/set_species(var/new_species, var/default_colour)
-	. = ..()
+/datum/species/nabber
+	default_emotes = list(
+		/decl/emote/audible/bug_hiss,
+		/decl/emote/audible/bug_buzz,
+		/decl/emote/audible/bug_chitter
+		)
+
+
+/datum/species/nabber/monarch_queen
+	default_emotes = list(
+		/decl/emote/audible/bug_hiss,
+		/decl/emote/audible/bug_buzz,
+		/decl/emote/audible/bug_chitter,
+		/decl/emote/audible/ascent_purr,
+	)
+
+/datum/species/adherent
+	default_emotes = list(
+		/decl/emote/audible/adherent_chime,
+		/decl/emote/audible/adherent_ding
+	)
+
+/datum/species/vox
+	default_emotes = list(
+		/decl/emote/audible/vox_shriek
+	)
+
+/datum/species/mantid
+	default_emotes = list(
+		/decl/emote/audible/ascent_purr,
+		/decl/emote/audible/ascent_hiss,
+		/decl/emote/audible/ascent_snarl,
+		/decl/emote/visible/ascent_flicker,
+		/decl/emote/visible/ascent_glint,
+		/decl/emote/visible/ascent_glimmer,
+		/decl/emote/visible/ascent_pulse,
+		/decl/emote/visible/ascent_shine,
+		/decl/emote/visible/ascent_dazzle
+	)
+
+/datum/species/diona
+	default_emotes = list(
+		/decl/emote/audible/chirp,
+		/decl/emote/audible/multichirp
+	)
+
+/mob/living/carbon/human/set_species(var/new_species, var/default_colour = 1)
+	UNLINT(. = ..())
 	update_emotes()

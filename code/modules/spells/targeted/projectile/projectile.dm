@@ -16,10 +16,6 @@ If the spell_projectile is seeking, it will update its target every process and 
 	var/cast_prox_range = 1
 
 /spell/targeted/projectile/cast(list/targets, mob/user = usr)
-
-	if(istext(proj_type))
-		proj_type = text2path(proj_type) // sanity filters
-
 	for(var/atom/target in targets)
 		var/obj/item/projectile/projectile = new proj_type(user.loc, user.dir)
 
@@ -35,7 +31,7 @@ If the spell_projectile is seeking, it will update its target every process and 
 		projectile.current = projectile.original
 		projectile.yo = target.y - user.y
 		projectile.xo = target.x - user.x
-		projectile.kill_count = src.duration
+		projectile.life_span = src.duration
 		projectile.hitscan = !proj_step_delay
 		projectile.step_delay = proj_step_delay
 		projectile.launch(target)

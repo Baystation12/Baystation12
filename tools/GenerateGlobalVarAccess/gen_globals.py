@@ -52,7 +52,7 @@ def main():
 
 	else:
 		tree = CompileFile(namespace.projectfile)
-		with open("dump.txt", "wt") as f:
+		with open("dump.txt", "wt", encoding='latin-1') as f:
 			f.write(tree)
 
 
@@ -67,7 +67,7 @@ def main():
 	code = GenCode(variables)
 	
 	with open(namespace.outfile, 'wb') as outfile:
-		outfile.write(code)
+		outfile.write(code.encode('utf-8'))
 	
 	hash = GenerateMD5(namespace.outfile)
 	print("Global var generation complete. MD5 is: " + hash)
@@ -83,7 +83,7 @@ def GenerateMD5(fname):
 def CompileFile(filename):
 	compiler_path = FindCompiler()
 
-	return subprocess.check_output([compiler_path, "-code_tree", filename], universal_newlines=True)
+	return subprocess.check_output([compiler_path, "-code_tree", filename]).decode(encoding='latin-1')
 
 def FindCompiler():
 	compiler_path = None;
@@ -99,7 +99,7 @@ def FindCompiler():
 	if compiler_path == None and sys.platform == 'win32':
 		# Attempt to look in %ProgramFiles% and %ProgramFiles(x86)% for BYOND.
 		for path in (os.environ['ProgramFiles'], os.environ['ProgramFiles(x86)']):
-			path = os.path.join(path, "BYOND", "bin", "dm.ex")
+			path = os.path.join(path, "BYOND", "bin", "dm.exe")
 
 			if os.access(path, os.F_OK):
 				compiler_path = path

@@ -1,0 +1,37 @@
+{{if data.antag_buff}}
+	{{:helper.link('Allow antag skill reselection', null, {'reset_antag' : 1})}}
+{{/if}}
+{{:helper.link('Remove all buffs', null, {'reset_buffs' : 1})}}
+{{:helper.link('Hard reset', null, {'reset_hard' : 1})}}
+{{:helper.link('Obtain data from prefs', null, {'prefs' : 1})}}
+{{if data.antag}}
+	{{:helper.link('Reset antag skills', null, {'antag' : 1})}}
+{{/if}}
+{{:helper.link('Refresh', null, {'refresh' : 1})}}
+<center><h2>Skills for {{:data.name}}</h2></center>
+<h3>Current assignment: {{:data.job}}</h3>
+<table style="width:100%">
+{{for data.skills_by_cat}}
+	<tr>
+	<th>
+		{{:value.name}}
+	</th>
+	</tr>
+	{{for value.skills :skill_value:skill_key}}
+		<tr>
+		<td>
+		<div class="itemLabel">
+			{{:skill_value.name}}:
+		</div>
+		</td>
+		{{for skill_value.levels :level_value:level_key}}
+			{{if !level_value.blank}}
+			<td>
+				{{:helper.link(level_value.name, null, {'value_hit' : level_value.val, 'skill' : skill_value.ref}, null, level_value.selected ? 'selected' : null)}}
+			</td>
+			{{/if}}
+		{{/for}}
+		</tr>
+	{{/for}}
+{{/for}}
+</table>

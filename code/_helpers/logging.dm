@@ -1,5 +1,3 @@
-//print an error message to world.log
-
 
 // On Linux/Unix systems the line endings are LF, on windows it's CRLF, admins that don't use notepad++
 // will get logs that are one big line if the system is Linux and they are using notepad.  This solves it by adding CR to every line ending
@@ -9,22 +7,33 @@
 
 
 /proc/error(msg)
-	world.log << "## ERROR: [msg][log_end]"
+	to_world_log("## ERROR: [msg][log_end]")
+
+/proc/log_ss(subsystem, text, log_world = TRUE)
+	if (!subsystem)
+		subsystem = "UNKNOWN"
+	var/msg = "[subsystem]: [text]"
+	game_log("SS", msg)
+	if (log_world)
+		to_world_log("SS[subsystem]: [text]")
+
+/proc/log_ss_init(text)
+	game_log("SS", "[text]")
 
 #define WARNING(MSG) warning("[MSG] in [__FILE__] at line [__LINE__] src: [src] usr: [usr].")
 //print a warning message to world.log
 /proc/warning(msg)
-	world.log << "## WARNING: [msg][log_end]"
+	to_world_log("## WARNING: [msg][log_end]")
 
 //print a testing-mode debug message to world.log
 /proc/testing(msg)
-	world.log << "## TESTING: [msg][log_end]"
+	to_world_log("## TESTING: [msg][log_end]")
 
 /proc/game_log(category, text)
-	diary << "\[[time_stamp()]] [game_id] [category]: [text][log_end]"
+	to_file(diary, "\[[time_stamp()]] [game_id] [category]: [text][log_end]")
 
 /proc/log_admin(text)
-	admin_log.Add(text)
+	GLOB.admin_log.Add(text)
 	if (config.log_admin)
 		game_log("ADMIN", text)
 
@@ -42,9 +51,9 @@
 	to_debug_listeners(text, "WARNING")
 
 /proc/to_debug_listeners(text, prefix = "DEBUG")
-	for(var/client/C in admins)
-		if(C.is_preference_enabled(/datum/client_preference/debug/show_debug_logs))
-			to_chat(C, "[prefix]: [text]")
+	for(var/client/C in GLOB.admins)
+		if(C.get_preference_value(/datum/client_preference/staff/show_debug_logs) == GLOB.PREF_SHOW)
+			to_chat(C, SPAN_DEBUG("<b>[prefix]</b>: [text]"))
 
 /proc/log_game(text)
 	if (config.log_game)
@@ -86,21 +95,21 @@
 	if (config.log_adminwarn)
 		game_log("ADMINWARN", text)
 
-/proc/log_pda(text)
-	if (config.log_pda)
-		game_log("PDA", text)
-
-/proc/log_to_dd(text)
-	world.log << text //this comes before the config check because it can't possibly runtime
-	if(config.log_world_output)
-		game_log("DD_OUTPUT", text)
-
 /proc/log_misc(text)
 	game_log("MISC", text)
 
 /proc/log_unit_test(text)
-	world.log << "## UNIT_TEST ##: [text]"
+	to_world_log("## UNIT_TEST ##: [text]")
 	log_debug(text)
+
+/proc/log_qdel(text)
+	to_file(GLOB.world_qdel_log, "\[[time_stamp()]]QDEL: [text]")
+
+//This replaces world.log so it displays both in DD and the file
+/proc/log_world(text)
+	to_world_log(text) //this comes before the config check because it can't possibly runtime
+	if(config.log_world_output)
+		game_log("DD_OUTPUT", text)
 
 //pretty print a direction bitflag, can be useful for debugging.
 /proc/dir_text(var/dir)
@@ -115,7 +124,7 @@
 	return english_list(comps, nothing_text="0", and_text="|", comma_text="|")
 
 //more or less a logging utility
-/proc/key_name(var/whom, var/include_link = null, var/include_name = 1, var/highlight_special_characters = 1)
+/proc/key_name(var/whom, var/include_link = null, var/include_name = 1, var/highlight_special_characters = 1, var/datum/ticket/ticket = null)
 	var/mob/M
 	var/client/C
 	var/key
@@ -128,7 +137,7 @@
 	else if(ismob(whom))
 		M = whom
 		C = M.client
-		key = M.key
+		key = LAST_KEY(M)
 	else if(istype(whom, /datum/mind))
 		var/datum/mind/D = whom
 		key = D.key
@@ -145,7 +154,7 @@
 
 	if(key)
 		if(include_link && C)
-			. += "<a href='?priv_msg=\ref[C]'>"
+			. += "<a href='?priv_msg=\ref[C];ticket=\ref[ticket]'>"
 
 		. += key
 
@@ -164,8 +173,8 @@
 			name = M.name
 
 
-		if(include_link && is_special_character(M) && highlight_special_characters)
-			. += "/(<font color='#FFA500'>[name]</font>)" //Orange
+		if(is_special_character(M) && highlight_special_characters)
+			. += "/(<font color='#ffa500'>[name]</font>)" //Orange
 		else
 			. += "/([name])"
 
@@ -192,8 +201,19 @@
 	return ckey ? "[..()] ([ckey])" : ..()
 
 /proc/log_info_line(var/datum/d)
-	if(!d)
+	if(isnull(d))
 		return "*null*"
+	if(islist(d))
+		var/list/L = list()
+		for(var/e in d)
+			// Indexing on numbers just gives us the same number again in the best case and causes an index out of bounds runtime in the worst
+			var/v = isnum(e) ? null : d[e]
+			L += "[log_info_line(e)][v ? " - [log_info_line(v)]" : ""]"
+		return "\[[jointext(L, ", ")]\]" // We format the string ourselves, rather than use json_encode(), because it becomes difficult to read recursively escaped "
 	if(!istype(d))
 		return json_encode(d)
 	return d.get_log_info_line()
+
+/proc/report_progress(var/progress_message)
+	admin_notice("<span class='boldannounce'>[progress_message]</span>", R_DEBUG)
+	to_world_log(progress_message)

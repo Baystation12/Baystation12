@@ -1,0 +1,51 @@
+version: "3"
+services:
+  db:
+    build: ../sql
+    image: bs12-db:latest
+    networks:
+      - internal
+    volumes:
+      - "../sql/test_db:/var/lib/mysql"
+  game:
+    build:
+      context: ..
+    image: bs12:latest
+    environment:
+      - RUNAS=1000
+    networks:
+      - internal
+    volumes:
+      - "../config:/bs12/config:ro"
+    ports:
+      - "127.0.0.1:8000:8000"
+  exporter:
+    image: bs12/byond-exporter:latest
+    networks:
+      - internal
+    ports:
+      - "127.0.0.1:9070:9070"
+    volumes:
+      - "../config/config.txt:/exporter/config.txt:ro"
+    command: ["-bind", ":9070", "-host", "game:8000", "-config_file", "/exporter/config.txt"]
+  prometheus:
+    image: prom/prometheus:latest
+    networks:
+      - internal
+    ports:
+      - "127.0.0.1:9090:9090"
+    volumes:
+      - "./conf/prometheus:/etc/prometheus:ro"
+  grafana:
+    image: grafana/grafana:latest
+    networks:
+      - internal
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=development
+    ports:
+      - "127.0.0.1:3000:3000"
+    volumes:
+      - "./conf/grafana/provisioning:/etc/grafana/provisioning:ro"
+      - "./conf/grafana/dashboards:/var/lib/grafana/dashboards:ro"
+networks:
+  internal:

@@ -3,12 +3,6 @@
 #define FONT_STYLE "Arial Black"
 #define SCROLL_SPEED 2
 
-var/list/status_icons_to_colour = list(
-	"redalert" = COLOR_RED,
-	"greenalert" = COLOR_GREEN,
-	"bluealert" = COLOR_BLUE
-	)
-
 // Status display
 // (formerly Countdown timer display)
 
@@ -20,9 +14,8 @@ var/list/status_icons_to_colour = list(
 	icon_state = "frame"
 	name = "status display"
 	layer = ABOVE_WINDOW_LAYER
-	anchored = 1
-	density = 0
-	use_power = 1
+	anchored = TRUE
+	density = FALSE
 	idle_power_usage = 10
 	var/mode = 1	// 0 = Blank
 					// 1 = Shuttle timer
@@ -51,7 +44,10 @@ var/list/status_icons_to_colour = list(
 	var/const/STATUS_DISPLAY_MESSAGE = 2
 	var/const/STATUS_DISPLAY_ALERT = 3
 	var/const/STATUS_DISPLAY_TIME = 4
+	var/const/STATUS_DISPLAY_IMAGE = 5
 	var/const/STATUS_DISPLAY_CUSTOM = 99
+	
+	var/status_display_show_alert_border = FALSE
 
 /obj/machinery/status_display/Destroy()
 	if(radio_controller)
@@ -59,13 +55,13 @@ var/list/status_icons_to_colour = list(
 	return ..()
 
 // register for radio system
-/obj/machinery/status_display/initialize()
-	..()
+/obj/machinery/status_display/Initialize()
+	. = ..()
 	if(radio_controller)
 		radio_controller.add_object(src, frequency)
 
 // timed process
-/obj/machinery/status_display/process()
+/obj/machinery/status_display/Process()
 	if(stat & NOPOWER)
 		remove_display()
 		return
@@ -82,11 +78,15 @@ var/list/status_icons_to_colour = list(
 /obj/machinery/status_display/proc/update()
 	remove_display()
 	if(friendc && !ignore_friendc)
-		set_picture("ai_friend")
+		set_picture("ai_friend")		
+		if(status_display_show_alert_border)
+			add_alert_border_to_display()
 		return 1
 
 	switch(mode)
 		if(STATUS_DISPLAY_BLANK)	//blank
+			if(status_display_show_alert_border)
+				add_alert_border_to_display()
 			return 1
 		if(STATUS_DISPLAY_TRANSFER_SHUTTLE_TIME)				//emergency shuttle timer
 			if(evacuation_controller.is_prepared())
@@ -104,6 +104,8 @@ var/list/status_icons_to_colour = list(
 				if(length(message2) > CHARS_PER_LINE)
 					message2 = "Error"
 				update_display(message1, message2)
+			if(status_display_show_alert_border)
+				add_alert_border_to_display()
 			return 1
 		if(STATUS_DISPLAY_MESSAGE)	//custom messages
 			var/line1
@@ -127,21 +129,33 @@ var/list/status_icons_to_colour = list(
 				if(index2 > message2_len)
 					index2 -= message2_len
 			update_display(line1, line2)
+			if(status_display_show_alert_border)
+				add_alert_border_to_display()
 			return 1
 		if(STATUS_DISPLAY_ALERT)
-			set_picture(picture_state)
+			display_alert()
 			return 1
 		if(STATUS_DISPLAY_TIME)
 			message1 = "TIME"
 			message2 = stationtime2text()
 			update_display(message1, message2)
+			if(status_display_show_alert_border)
+				add_alert_border_to_display()
+			return 1
+		if(STATUS_DISPLAY_IMAGE)
+			set_picture(picture_state)
+			if(status_display_show_alert_border)
+				add_alert_border_to_display()
 			return 1
 	return 0
 
 /obj/machinery/status_display/examine(mob/user)
-	. = ..(user)
+	. = ..()
 	if(mode != STATUS_DISPLAY_BLANK && mode != STATUS_DISPLAY_ALERT)
 		to_chat(user, "The display says:<br>\t[sanitize(message1)]<br>\t[sanitize(message2)]")
+	if(mode == STATUS_DISPLAY_ALERT || status_display_show_alert_border)
+		var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+		to_chat(user, "The current alert level is [security_state.current_security_level.name].")
 
 /obj/machinery/status_display/proc/set_message(m1, m2)
 	if(m1)
@@ -158,19 +172,41 @@ var/list/status_icons_to_colour = list(
 		message2 = ""
 		index2 = 0
 
+/obj/machinery/status_display/proc/toggle_alert_border()
+	status_display_show_alert_border = !status_display_show_alert_border
+
+/obj/machinery/status_display/proc/add_alert_border_to_display()
+	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+	var/decl/security_level/sl = security_state.current_security_level	
+
+	var/border = image(sl.icon,sl.alert_border)
+
+	overlays |= border
+
+/obj/machinery/status_display/proc/display_alert()	
+	remove_display()
+
+	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
+	var/decl/security_level/sl = security_state.current_security_level
+
+	var/image/alert = image(sl.icon, sl.overlay_status_display)
+
+	set_light(sl.light_max_bright, sl.light_inner_range, sl.light_outer_range, 2, sl.light_color_alarm)
+	overlays |= alert
+
 /obj/machinery/status_display/proc/set_picture(state)
 	remove_display()
 	if(!picture || picture_state != state)
 		picture_state = state
 		picture = image('icons/obj/status_display.dmi', icon_state=picture_state)
-	if(picture_state && status_icons_to_colour[picture_state])
-		set_light(l_range = 2, l_power = 2, l_color = status_icons_to_colour[picture_state])
 	overlays |= picture
+	set_light(0.5, 0.1, 1, 2, COLOR_WHITE)
 
 /obj/machinery/status_display/proc/update_display(line1, line2)
 	var/new_text = {"<div style="font-size:[FONT_SIZE];color:[FONT_COLOR];font:'[FONT_STYLE]';text-align:center;" valign="top">[line1]<br>[line2]</div>"}
 	if(maptext != new_text)
 		maptext = new_text
+	set_light(0.5, 0.1, 1, 2, COLOR_WHITE)
 
 /obj/machinery/status_display/proc/get_shuttle_timer()
 	var/timeleft = evacuation_controller.get_eta()
@@ -179,7 +215,7 @@ var/list/status_icons_to_colour = list(
 	return "[add_zero(num2text((timeleft / 60) % 60),2)]:[add_zero(num2text(timeleft % 60), 2)]"
 
 /obj/machinery/status_display/proc/get_supply_shuttle_timer()
-	var/datum/shuttle/ferry/supply/shuttle = supply_controller.shuttle
+	var/datum/shuttle/autodock/ferry/supply/shuttle = SSsupply.shuttle
 	if (!shuttle)
 		return "Error"
 
@@ -191,11 +227,11 @@ var/list/status_icons_to_colour = list(
 	return ""
 
 /obj/machinery/status_display/proc/remove_display()
-	set_light(0)
 	if(overlays.len)
 		overlays.Cut()
 	if(maptext)
 		maptext = ""
+	set_light(0)
 
 /obj/machinery/status_display/receive_signal(datum/signal/signal)
 	switch(signal.data["command"])
@@ -211,14 +247,18 @@ var/list/status_icons_to_colour = list(
 
 		if("alert")
 			mode = STATUS_DISPLAY_ALERT
-			set_picture(signal.data["picture_state"])
 
 		if("time")
 			mode = STATUS_DISPLAY_TIME
+
+		if("image")
+			mode = STATUS_DISPLAY_IMAGE
+			set_picture(signal.data["picture_state"])
+		if("toggle_alert_border")
+			toggle_alert_border()
 	update()
 
-#undef CHARS_PER_LINE
-#undef FOND_SIZE
+#undef FONT_SIZE
 #undef FONT_COLOR
 #undef FONT_STYLE
 #undef SCROLL_SPEED

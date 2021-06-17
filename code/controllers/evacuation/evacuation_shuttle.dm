@@ -17,7 +17,7 @@
 
 	var/departed = 0
 	var/autopilot = 1
-	var/datum/shuttle/ferry/emergency/shuttle // Set in shuttle_emergency.dm
+	var/datum/shuttle/autodock/ferry/emergency/shuttle // Set in shuttle_emergency.dm
 	var/shuttle_launch_time
 
 /datum/evacuation_controller/shuttle/has_evacuated()
@@ -31,7 +31,7 @@
 	if(waiting_to_leave())
 		return
 
-	for (var/datum/shuttle/ferry/escape_pod/pod in escape_pods)
+	for (var/datum/shuttle/autodock/ferry/escape_pod/pod in escape_pods)
 		if (!pod.arming_controller || pod.arming_controller.armed)
 			pod.move_time = evac_transit_delay
 			pod.launch(src)
@@ -48,7 +48,7 @@
 	. = ..()
 	// Arm the escape pods.
 	if (emergency_evacuation)
-		for (var/datum/shuttle/ferry/escape_pod/pod in escape_pods)
+		for (var/datum/shuttle/autodock/ferry/escape_pod/pod in escape_pods)
 			if (pod.arming_controller)
 				pod.arming_controller.arm()
 

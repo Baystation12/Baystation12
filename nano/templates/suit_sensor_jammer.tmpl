@@ -1,0 +1,55 @@
+
+<div class="block">
+		<h3>Status</h3>
+		<div class="item">
+				<span class='average'>{{:data.active ? "Enabled" : "Disabled"}}</span>
+		</div>
+		<div class="item">
+			{{:helper.link('Enable' , null, {'enable_jammer' : 1}, data.active ? "selected" : null, null)}}
+			{{:helper.link('Disable' , null, {'disable_jammer' : 1}, data.active ? null : "selected", null)}}
+		</div>
+	</div>
+	
+	<div class="block">
+		<h3>Range</h3>
+		
+		<div class="item">
+				<span class='average'>{{:data.range}}</span> meter(s)
+		</div>
+	
+		<div class="item">
+			{{:helper.link('Decrease' , 'minusthick', {'decrease_range' : 1}, data.range <= 0 ? "disabled" : null, null)}}
+			{{:helper.link('Increase' , 'plusthick', {'increase_range' : 1}, data.active >= data.max_range ? "disabled" : null, null)}}
+		</div>
+	</div>
+	
+	<div class="block">
+	<table>
+		<tr><th>Mode</th><th>Cost</th></tr>
+		{{for data.methods}}
+			<tr><td>{{:helper.link(value.name , null, {'select_method' : value.ref}, data.current_method == value.ref ? "selected" : null, null)}}</td><td>{{:value.cost}} W</td></tr>
+		{{/for}}
+	</table>
+	</div>
+	
+	<div class="block">
+	<div class="item">
+		<div class="itemLabel">
+			Charge
+		</div>
+		<div class="itemContent">
+			{{:data.current_charge}}/{{:data.max_charge}} W
+		</div>
+	</div>
+	<div class="item">
+		{{:helper.displayBar(data.current_charge/data.max_charge, 0, 1, 'average')}}
+	</div>
+	<div class="item">
+		<div class="itemLabel">
+			Energy Consumption
+		</div>
+		<div class="itemContent">
+			~{{:data.total_cost}} W
+		</div>
+	</div>
+	</div>

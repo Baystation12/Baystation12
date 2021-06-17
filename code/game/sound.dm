@@ -36,42 +36,48 @@
 #define ASTEROID CAVE
 #define SPACE UNDERWATER
 
-var/list/shatter_sound = list('sound/effects/Glassbr1.ogg','sound/effects/Glassbr2.ogg','sound/effects/Glassbr3.ogg')
-var/list/explosion_sound = list('sound/effects/Explosion1.ogg','sound/effects/Explosion2.ogg')
-var/list/spark_sound = list('sound/effects/sparks1.ogg','sound/effects/sparks2.ogg','sound/effects/sparks3.ogg','sound/effects/sparks4.ogg')
-var/list/rustle_sound = list('sound/effects/rustle1.ogg','sound/effects/rustle2.ogg','sound/effects/rustle3.ogg','sound/effects/rustle4.ogg','sound/effects/rustle5.ogg')
-var/list/punch_sound = list('sound/weapons/punch1.ogg','sound/weapons/punch2.ogg','sound/weapons/punch3.ogg','sound/weapons/punch4.ogg')
-var/list/clown_sound = list('sound/effects/clownstep1.ogg','sound/effects/clownstep2.ogg')
-var/list/swing_hit_sound = list('sound/weapons/genhit1.ogg', 'sound/weapons/genhit2.ogg', 'sound/weapons/genhit3.ogg')
-var/list/hiss_sound = list('sound/voice/hiss1.ogg','sound/voice/hiss2.ogg','sound/voice/hiss3.ogg','sound/voice/hiss4.ogg')
-var/list/page_sound = list('sound/effects/pageturn1.ogg', 'sound/effects/pageturn2.ogg','sound/effects/pageturn3.ogg')
-var/list/fracture_sound = list('sound/effects/bonebreak1.ogg','sound/effects/bonebreak2.ogg','sound/effects/bonebreak3.ogg','sound/effects/bonebreak4.ogg')
-var/list/lighter_sound = list('sound/items/lighter1.ogg','sound/items/lighter2.ogg','sound/items/lighter3.ogg')
+GLOBAL_LIST_INIT(shatter_sound,list('sound/effects/Glassbr1.ogg','sound/effects/Glassbr2.ogg','sound/effects/Glassbr3.ogg'))
+GLOBAL_LIST_INIT(explosion_sound,list('sound/effects/Explosion1.ogg','sound/effects/Explosion2.ogg'))
+GLOBAL_LIST_INIT(spark_sound,list('sound/effects/sparks1.ogg','sound/effects/sparks2.ogg','sound/effects/sparks3.ogg','sound/effects/sparks4.ogg'))
+GLOBAL_LIST_INIT(rustle_sound,list('sound/effects/rustle1.ogg','sound/effects/rustle2.ogg','sound/effects/rustle3.ogg','sound/effects/rustle4.ogg','sound/effects/rustle5.ogg'))
+GLOBAL_LIST_INIT(punch_sound,list('sound/weapons/punch1.ogg','sound/weapons/punch2.ogg','sound/weapons/punch3.ogg','sound/weapons/punch4.ogg'))
+GLOBAL_LIST_INIT(clown_sound,list('sound/effects/clownstep1.ogg','sound/effects/clownstep2.ogg'))
+GLOBAL_LIST_INIT(swing_hit_sound,list('sound/weapons/genhit1.ogg', 'sound/weapons/genhit2.ogg', 'sound/weapons/genhit3.ogg'))
+GLOBAL_LIST_INIT(hiss_sound,list('sound/voice/hiss1.ogg','sound/voice/hiss2.ogg','sound/voice/hiss3.ogg','sound/voice/hiss4.ogg'))
+GLOBAL_LIST_INIT(page_sound,list('sound/effects/pageturn1.ogg', 'sound/effects/pageturn2.ogg','sound/effects/pageturn3.ogg'))
+GLOBAL_LIST_INIT(fracture_sound,list('sound/effects/bonebreak1.ogg','sound/effects/bonebreak2.ogg','sound/effects/bonebreak3.ogg','sound/effects/bonebreak4.ogg'))
+GLOBAL_LIST_INIT(lighter_sound,list('sound/items/lighter1.ogg','sound/items/lighter2.ogg','sound/items/lighter3.ogg'))
+GLOBAL_LIST_INIT(keyboard_sound,list('sound/machines/keyboard/keypress1.ogg','sound/machines/keyboard/keypress2.ogg','sound/machines/keyboard/keypress3.ogg','sound/machines/keyboard/keypress4.ogg'))
+GLOBAL_LIST_INIT(keystroke_sound,list('sound/machines/keyboard/keystroke1.ogg','sound/machines/keyboard/keystroke2.ogg','sound/machines/keyboard/keystroke3.ogg','sound/machines/keyboard/keystroke4.ogg'))
+GLOBAL_LIST_INIT(switch_sound,list('sound/machines/switch1.ogg','sound/machines/switch2.ogg','sound/machines/switch3.ogg','sound/machines/switch4.ogg'))
+GLOBAL_LIST_INIT(button_sound,list('sound/machines/button1.ogg','sound/machines/button2.ogg','sound/machines/button3.ogg','sound/machines/button4.ogg'))
+GLOBAL_LIST_INIT(chop_sound,list('sound/weapons/chop1.ogg','sound/weapons/chop2.ogg','sound/weapons/chop3.ogg'))
+GLOBAL_LIST_INIT(glasscrack_sound,list('sound/effects/glass_crack1.ogg','sound/effects/glass_crack2.ogg','sound/effects/glass_crack3.ogg','sound/effects/glass_crack4.ogg'))
+GLOBAL_LIST_INIT(tray_hit_sound,list('sound/items/trayhit1.ogg', 'sound/items/trayhit2.ogg'))
 
-/proc/playsound(var/atom/source, soundin, vol as num, vary, extrarange as num, falloff, var/is_global, var/frequency)
+/proc/playsound(var/atom/source, soundin, vol as num, vary, extrarange as num, falloff, var/is_global, var/frequency, var/is_ambiance = 0)
 
 	soundin = get_sfx(soundin) // same sound for everyone
 
 	if(isarea(source))
 		error("[source] is an area and is trying to make the sound: [soundin]")
 		return
-
-	frequency = isnull(frequency) ? get_rand_frequency() : frequency // Same frequency for everybody
+	frequency = vary && isnull(frequency) ? get_rand_frequency() : frequency // Same frequency for everybody
 	var/turf/turf_source = get_turf(source)
 
  	// Looping through the player list has the added bonus of working for mobs inside containers
-	for (var/P in player_list)
+	for (var/P in GLOB.player_list)
 		var/mob/M = P
 		if(!M || !M.client)
 			continue
 		if(get_dist(M, turf_source) <= (world.view + extrarange) * 2)
 			var/turf/T = get_turf(M)
-			if(T && T.z == turf_source.z)
-				M.playsound_local(turf_source, soundin, vol, vary, frequency, falloff, is_global)
+			if(T && T.z == turf_source.z && (!is_ambiance || M.get_preference_value(/datum/client_preference/play_ambiance) == GLOB.PREF_YES))
+				M.playsound_local(turf_source, soundin, vol, vary, frequency, falloff, is_global, extrarange)
 
 var/const/FALLOFF_SOUNDS = 0.5
 
-/mob/proc/playsound_local(var/turf/turf_source, soundin, vol as num, vary, frequency, falloff, is_global)
+/mob/proc/playsound_local(var/turf/turf_source, soundin, vol as num, vary, frequency, falloff, is_global, extrarange)
 	if(!src.client || ear_deaf > 0)	return
 	var/sound/S = soundin
 	if(!istype(S))
@@ -81,23 +87,23 @@ var/const/FALLOFF_SOUNDS = 0.5
 		S.channel = 0 //Any channel
 		S.volume = vol
 		S.environment = -1
-		if (vary)
-			if(frequency)
-				S.frequency = frequency
-			else
-				S.frequency = get_rand_frequency()
+		if(frequency)
+			S.frequency = frequency
+		else if (vary)
+			S.frequency = get_rand_frequency()
 
 	//sound volume falloff with pressure
 	var/pressure_factor = 1.0
+	
+	S.volume *= get_sound_volume_multiplier()
 
+	var/turf/T = get_turf(src)
+	// 3D sounds, the technology is here!
 	if(isturf(turf_source))
-		// 3D sounds, the technology is here!
-		var/turf/T = get_turf(src)
-
 		//sound volume falloff with distance
 		var/distance = get_dist(T, turf_source)
 
-		S.volume -= max(distance - world.view, 0) * 2 //multiplicative falloff to add on top of natural audio falloff.
+		S.volume -= max(distance - (world.view + extrarange), 0) * 2 //multiplicative falloff to add on top of natural audio falloff.
 
 		var/datum/gas_mixture/hearer_env = T.return_air()
 		var/datum/gas_mixture/source_env = turf_source.return_air()
@@ -129,8 +135,8 @@ var/const/FALLOFF_SOUNDS = 0.5
 	if(!is_global)
 
 		if(istype(src,/mob/living/))
-			var/mob/living/M = src
-			if (M.hallucination)
+			var/mob/living/carbon/M = src
+			if (istype(M) && M.hallucination_power > 50 && M.chem_effects[CE_MIND] < 1)
 				S.environment = PSYCHOTIC
 			else if (M.druggy)
 				S.environment = DRUGGED
@@ -138,7 +144,9 @@ var/const/FALLOFF_SOUNDS = 0.5
 				S.environment = DIZZY
 			else if (M.confused)
 				S.environment = DIZZY
-			else if (M.sleeping)
+			else if (M.stat == UNCONSCIOUS)
+				S.environment = UNDERWATER
+			else if (T?.is_flooded(M.lying))
 				S.environment = UNDERWATER
 			else if (pressure_factor < 0.5)
 				S.environment = SPACE
@@ -152,11 +160,12 @@ var/const/FALLOFF_SOUNDS = 0.5
 			var/area/A = get_area(src)
 			S.environment = A.sound_env
 
-	src << S
+	sound_to(src, S)
 
 /client/proc/playtitlemusic()
-	if(is_preference_enabled(/datum/client_preference/play_lobby_music))
-		using_map.lobby_music.play_to(src)
+	if (get_preference_value(/datum/client_preference/play_lobby_music) == GLOB.PREF_YES)
+		sound_to(src, GLOB.using_map.lobby_track.get_sound())
+		to_chat(src, GLOB.using_map.lobby_track.get_info())
 
 /proc/get_rand_frequency()
 	return rand(32000, 55000) //Frequency stuff only works with 45kbps oggs.
@@ -164,16 +173,29 @@ var/const/FALLOFF_SOUNDS = 0.5
 /proc/get_sfx(soundin)
 	if(istext(soundin))
 		switch(soundin)
-			if ("shatter") soundin = pick(shatter_sound)
-			if ("explosion") soundin = pick(explosion_sound)
-			if ("sparks") soundin = pick(spark_sound)
-			if ("rustle") soundin = pick(rustle_sound)
-			if ("punch") soundin = pick(punch_sound)
-			if ("clownstep") soundin = pick(clown_sound)
-			if ("swing_hit") soundin = pick(swing_hit_sound)
-			if ("hiss") soundin = pick(hiss_sound)
-			if ("pageturn") soundin = pick(page_sound)
-			if ("fracture") soundin = pick(fracture_sound)
-			if ("light_bic") soundin = pick(lighter_sound)
-			//if ("gunshot") soundin = pick(gun_sound)
+			if ("shatter") soundin = pick(GLOB.shatter_sound)
+			if ("explosion") soundin = pick(GLOB.explosion_sound)
+			if ("sparks") soundin = pick(GLOB.spark_sound)
+			if ("rustle") soundin = pick(GLOB.rustle_sound)
+			if ("punch") soundin = pick(GLOB.punch_sound)
+			if ("clownstep") soundin = pick(GLOB.clown_sound)
+			if ("swing_hit") soundin = pick(GLOB.swing_hit_sound)
+			if ("hiss") soundin = pick(GLOB.hiss_sound)
+			if ("pageturn") soundin = pick(GLOB.page_sound)
+			if ("fracture") soundin = pick(GLOB.fracture_sound)
+			if ("light_bic") soundin = pick(GLOB.lighter_sound)
+			if ("keyboard") soundin = pick(GLOB.keyboard_sound)
+			if ("keystroke") soundin = pick(GLOB.keystroke_sound)
+			if ("switch") soundin = pick(GLOB.switch_sound)
+			if ("button") soundin = pick(GLOB.button_sound)
+			if ("chop") soundin = pick(GLOB.chop_sound)
+			if ("glasscrack") soundin = pick(GLOB.glasscrack_sound)
+			if ("tray_hit") soundin = pick(GLOB.tray_hit_sound)
 	return soundin
+	
+/client/verb/stop_sounds()
+	set name = "Stop All Sounds"
+	set desc = "Stop all sounds that are currently playing on your client."
+	set category = "OOC"
+
+	sound_to(usr, sound(null))

@@ -2,41 +2,32 @@
 
 /obj/machinery/computer/operating
 	name = "patient monitoring console"
-	density = 1
-	anchored = 1.0
+	density = TRUE
+	anchored = TRUE
 	icon_keyboard = "med_key"
 	icon_screen = "crew"
-	circuit = /obj/item/weapon/circuitboard/operating
+	machine_name = "patient monitoring console"
+	machine_desc = "Displays a realtime health readout of a patient laid onto an adjacent operating table."
 	var/mob/living/carbon/human/victim = null
 	var/obj/machinery/optable/table = null
 
 /obj/machinery/computer/operating/New()
 	..()
-	for(dir in list(NORTH,EAST,SOUTH,WEST))
-		table = locate(/obj/machinery/optable, get_step(src, dir))
+	for(var/D in list(NORTH,EAST,SOUTH,WEST))
+		table = locate(/obj/machinery/optable, get_step(src, D))
 		if (table)
 			table.computer = src
 			break
 
-/obj/machinery/computer/operating/attack_ai(mob/user)
-	add_fingerprint(user)
-	if(stat & (BROKEN|NOPOWER))
-		return
+/obj/machinery/computer/operating/interface_interact(user)
 	interact(user)
-
-
-/obj/machinery/computer/operating/attack_hand(mob/user)
-	add_fingerprint(user)
-	if(stat & (BROKEN|NOPOWER))
-		return
-	interact(user)
-
+	return TRUE
 
 /obj/machinery/computer/operating/interact(mob/user)
 	if ( (get_dist(src, user) > 1 ) || (stat & (BROKEN|NOPOWER)) )
 		if (!istype(user, /mob/living/silicon))
 			user.unset_machine()
-			user << browse(null, "window=op")
+			close_browser(user, "window=op")
 			return
 
 	user.set_machine(src)
@@ -47,17 +38,7 @@
 		dat += {"
 <B>Patient Information:</B><BR>
 <BR>
-<B>Name:</B> [src.victim.real_name]<BR>
-<B>Age:</B> [src.victim.age]<BR>
-<B>Blood Type:</B> [src.victim.b_type]<BR>
-<BR>
-<B>Health:</B> [src.victim.health]<BR>
-<B>Brute Damage:</B> [src.victim.getBruteLoss()]<BR>
-<B>Toxins Damage:</B> [src.victim.getToxLoss()]<BR>
-<B>Fire Damage:</B> [src.victim.getFireLoss()]<BR>
-<B>Suffocation Damage:</B> [src.victim.getOxyLoss()]<BR>
-<B>Patient Status:</B> [src.victim.stat ? "Non-Responsive" : "Stable"]<BR>
-<B>Heartbeat rate:</B> [victim.get_pulse(GETPULSE_TOOL)]<BR>
+[medical_scan_results(victim, 1)]
 "}
 	else
 		src.victim = null
@@ -66,18 +47,9 @@
 <BR>
 <B>No Patient Detected</B>
 "}
-	user << browse(dat, "window=op")
+	show_browser(user, dat, "window=op")
 	onclose(user, "op")
 
-
-/obj/machinery/computer/operating/Topic(href, href_list)
-	if(..())
-		return 1
-	if ((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon)))
-		usr.set_machine(src)
-	return
-
-
-/obj/machinery/computer/operating/process()
-	if(..())
-		src.updateDialog()
+/obj/machinery/computer/operating/Process()
+	if(!inoperable())
+		updateDialog()

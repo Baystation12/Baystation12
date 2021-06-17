@@ -2,15 +2,15 @@
 
 
 //endless reagents!
-/obj/item/weapon/reagent_containers/glass/replenishing
+/obj/item/reagent_containers/glass/replenishing
 	var/spawning_id
 
-/obj/item/weapon/reagent_containers/glass/replenishing/New()
-	..()
-	processing_objects.Add(src)
-	spawning_id = pick("blood","holywater","lube","stoxin","ethanol","ice","glycerol","fuel","cleaner")
+/obj/item/reagent_containers/glass/replenishing/Initialize()
+	. = ..()
+	spawning_id = pick(/datum/reagent/blood,/datum/reagent/water/holywater,/datum/reagent/soporific,/datum/reagent/ethanol,/datum/reagent/drink/ice,/datum/reagent/glycerol,/datum/reagent/fuel,/datum/reagent/space_cleaner)
+	START_PROCESSING(SSobj, src)
 
-/obj/item/weapon/reagent_containers/glass/replenishing/process()
+/obj/item/reagent_containers/glass/replenishing/Process()
 	reagents.add_reagent(spawning_id, 0.3)
 
 
@@ -21,17 +21,17 @@
 	var/last_twitch = 0
 	var/max_stored_messages = 100
 
-/obj/item/clothing/mask/gas/poltergeist/New()
-	processing_objects.Add(src)
-	listening_objects += src
-	..()
+/obj/item/clothing/mask/gas/poltergeist/Initialize()
+	START_PROCESSING(SSobj, src)
+	GLOB.listening_objects += src
+	. = ..()
 
 /obj/item/clothing/mask/gas/poltergeist/Destroy()
-	processing_objects.Remove(src)
-	listening_objects -= src
+	STOP_PROCESSING(SSobj, src)
+	GLOB.listening_objects -= src
 	return ..()
 
-/obj/item/clothing/mask/gas/poltergeist/process()
+/obj/item/clothing/mask/gas/poltergeist/Process()
 	if(heard_talk.len && istype(src.loc, /mob/living) && prob(10))
 		var/mob/living/M = src.loc
 		M.say(pick(heard_talk))
@@ -48,7 +48,7 @@
 
 //a vampiric statuette
 //todo: cult integration
-/obj/item/weapon/vampiric
+/obj/item/vampiric
 	name = "statuette"
 	icon_state = "statuette"
 	icon = 'icons/obj/xenoarchaeology.dmi'
@@ -61,17 +61,17 @@
 	var/wight_check_index = 1
 	var/list/shadow_wights = list()
 
-/obj/item/weapon/vampiric/New()
-	..()
-	processing_objects.Add(src)
-	listening_objects += src
+/obj/item/vampiric/Initialize()
+	. = ..()
+	START_PROCESSING(SSobj, src)
+	GLOB.listening_objects += src
 
-/obj/item/weapon/vampiric/Destroy()
-	processing_objects.Remove(src)
-	listening_objects -= src
+/obj/item/vampiric/Destroy()
+	STOP_PROCESSING(SSobj, src)
+	GLOB.listening_objects -= src
 	return ..()
 
-/obj/item/weapon/vampiric/process()
+/obj/item/vampiric/Process()
 	//see if we've identified anyone nearby
 	if(world.time - last_bloodcall > bloodcall_interval && nearby_mobs.len)
 		var/mob/living/carbon/human/M = pop(nearby_mobs)
@@ -85,12 +85,12 @@
 		var/obj/effect/decal/cleanable/blood/B = locate() in range(2,src)
 		if(B)
 			last_eat = world.time
-			B.loc = null
 			if(istype(B, /obj/effect/decal/cleanable/blood/drip))
 				charges += 0.25
 			else
 				charges += 1
 				playsound(src.loc, 'sound/effects/splat.ogg', 50, 1, -3)
+			qdel(B)
 
 	//use up stored charges
 	if(charges >= 10)
@@ -112,7 +112,7 @@
 
 	if(charges >= 0.1)
 		if(prob(5))
-			src.visible_message("<span class='warning'>\icon[src] [src]'s eyes glow ruby red for a moment!</span>")
+			src.visible_message("<span class='warning'>[icon2html(src, viewers(get_turf(src)))] [src]'s eyes glow ruby red for a moment!</span>")
 			charges -= 0.1
 
 	//check on our shadow wights
@@ -129,12 +129,12 @@
 		else if(get_dist(W, src) > 10)
 			shadow_wights.Remove(wight_check_index)
 
-/obj/item/weapon/vampiric/hear_talk(mob/M as mob, text)
+/obj/item/vampiric/hear_talk(mob/M as mob, text)
 	..()
-	if(world.time - last_bloodcall >= bloodcall_interval && M in view(7, src))
+	if(world.time - last_bloodcall >= bloodcall_interval && (M in view(7, src)))
 		bloodcall(M)
 
-/obj/item/weapon/vampiric/proc/bloodcall(var/mob/living/carbon/human/M)
+/obj/item/vampiric/proc/bloodcall(var/mob/living/carbon/human/M)
 	last_bloodcall = world.time
 	if(istype(M))
 		playsound(src.loc, pick('sound/hallucinations/wail.ogg','sound/hallucinations/veryfar_noise.ogg','sound/hallucinations/far_noise.ogg'), 50, 1, -3)
@@ -147,23 +147,23 @@
 		B.target_turf = pick(range(1, src))
 		B.blood_DNA = list()
 		B.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
-		M.vessel.remove_reagent("blood",rand(25,50))
+		M.vessel.remove_reagent(/datum/reagent/blood,rand(25,50))
 
 //animated blood 2 SPOOKY
 /obj/effect/decal/cleanable/blood/splatter/animated
 	var/turf/target_turf
 	var/loc_last_process
 
-/obj/effect/decal/cleanable/blood/splatter/animated/New()
-	..()
-	processing_objects.Add(src)
+/obj/effect/decal/cleanable/blood/splatter/animated/Initialize()
+	. = ..()
 	loc_last_process = src.loc
+	START_PROCESSING(SSobj, src)
 
 /obj/effect/decal/cleanable/blood/splatter/animated/Destroy()
-	processing_objects.Remove(src)
+	STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/obj/effect/decal/cleanable/blood/splatter/animated/process()
+/obj/effect/decal/cleanable/blood/splatter/animated/Process()
 	if(target_turf && src.loc != target_turf)
 		step_towards(src,target_turf)
 		if(src.loc == loc_last_process)
@@ -187,18 +187,19 @@
 	name = "shadow wight"
 	icon = 'icons/mob/mob.dmi'
 	icon_state = "shade"
-	density = 1
+	density = TRUE
 
-/obj/effect/shadow_wight/New()
-	processing_objects.Add(src)
+/obj/effect/shadow_wight/Initialize()
+	. = ..()
+	START_PROCESSING(SSobj, src)
 
 /obj/effect/shadow_wight/Destroy()
-	processing_objects.Remove(src)
+	STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/obj/effect/shadow_wight/process()
-	if(src.loc)
-		src.loc = get_turf(pick(orange(1,src)))
+/obj/effect/shadow_wight/Process()
+	if(loc)
+		step_rand(src)
 		var/mob/living/carbon/M = locate() in src.loc
 		if(M)
 			playsound(src.loc, pick('sound/hallucinations/behind_you1.ogg',\
@@ -216,9 +217,9 @@
 			'sound/hallucinations/turn_around2.ogg',\
 			), 50, 1, -3)
 			M.sleeping = max(M.sleeping,rand(5,10))
-			src.loc = null
+			qdel(src)
 	else
-		processing_objects.Remove(src)
+		STOP_PROCESSING(SSobj, src)
 
 /obj/effect/shadow_wight/Bump(var/atom/obstacle)
 	to_chat(obstacle, "<span class='warning'>You feel a chill run down your spine!</span>")

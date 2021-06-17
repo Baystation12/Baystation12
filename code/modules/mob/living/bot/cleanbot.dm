@@ -1,8 +1,9 @@
 /mob/living/bot/cleanbot
 	name = "Cleanbot"
 	desc = "A little cleaning robot, he looks so excited!"
+	icon = 'icons/mob/bot/cleanbot.dmi'
 	icon_state = "cleanbot0"
-	req_one_access = list(access_janitor, access_robotics)
+	req_access = list(list(access_janitor, access_robotics))
 	botcard_access = list(access_janitor, access_maint_tunnels)
 
 	wait_if_pulled = 1
@@ -36,9 +37,10 @@
 			ignore_list -= g
 
 /mob/living/bot/cleanbot/lookForTargets()
-	for(var/obj/effect/decal/cleanable/D in view(world.view, src)) // There was some odd code to make it start with nearest decals, it's unnecessary, this works
+	for(var/obj/effect/decal/cleanable/D in view(world.view + 1, src))
 		if(confirmTarget(D))
 			target = D
+			playsound(src, 'sound/machines/boop1.ogg', 30)
 			return
 
 /mob/living/bot/cleanbot/confirmTarget(var/obj/effect/decal/cleanable/D)
@@ -67,7 +69,7 @@
 	visible_message("\The [src] begins to clean up \the [D]")
 	update_icons()
 	var/cleantime = istype(D, /obj/effect/decal/cleanable/dirt) ? 10 : 50
-	if(do_after(src, cleantime, progress = 0))
+	if(do_after(src, cleantime, do_flags = DO_DEFAULT & ~DO_SHOW_PROGRESS))
 		if(istype(loc, /turf/simulated))
 			var/turf/simulated/f = loc
 			f.dirt = 0
@@ -76,6 +78,7 @@
 		qdel(D)
 		if(D == target)
 			target = null
+	playsound(src, 'sound/machines/boop2.ogg', 30)
 	busy = 0
 	update_icons()
 
@@ -84,7 +87,7 @@
 	visible_message("<span class='danger'>[src] blows apart!</span>")
 	var/turf/Tsec = get_turf(src)
 
-	new /obj/item/weapon/reagent_containers/glass/bucket(Tsec)
+	new /obj/item/reagent_containers/glass/bucket(Tsec)
 	new /obj/item/device/assembly/prox_sensor(Tsec)
 	if(prob(50))
 		new /obj/item/robot_parts/l_arm(Tsec)
@@ -149,40 +152,8 @@
 	target_types += /obj/effect/decal/cleanable/liquid_fuel
 	target_types += /obj/effect/decal/cleanable/mucus
 	target_types += /obj/effect/decal/cleanable/dirt
+	target_types += /obj/effect/decal/cleanable/filth
+	target_types += /obj/effect/decal/cleanable/spiderling_remains
 
 	if(blood)
 		target_types += /obj/effect/decal/cleanable/blood
-
-/* Assembly */
-
-/obj/item/weapon/bucket_sensor
-	desc = "It's a bucket. With a sensor attached."
-	name = "proxy bucket"
-	icon = 'icons/obj/aibots.dmi'
-	icon_state = "bucket_proxy"
-	force = 3.0
-	throwforce = 10.0
-	throw_speed = 2
-	throw_range = 5
-	w_class = ITEM_SIZE_NORMAL
-	var/created_name = "Cleanbot"
-
-/obj/item/weapon/bucket_sensor/attackby(var/obj/item/O, var/mob/user)
-	..()
-	if(istype(O, /obj/item/robot_parts/l_arm) || istype(O, /obj/item/robot_parts/r_arm))
-		user.drop_item()
-		qdel(O)
-		var/turf/T = get_turf(loc)
-		var/mob/living/bot/cleanbot/A = new /mob/living/bot/cleanbot(T)
-		A.name = created_name
-		to_chat(user, "<span class='notice'>You add the robot arm to the bucket and sensor assembly. Beep boop!</span>")
-		user.drop_from_inventory(src)
-		qdel(src)
-
-	else if(istype(O, /obj/item/weapon/pen))
-		var/t = sanitizeSafe(input(user, "Enter new robot name", name, created_name), MAX_NAME_LEN)
-		if(!t)
-			return
-		if(!in_range(src, usr) && src.loc != usr)
-			return
-		created_name = t

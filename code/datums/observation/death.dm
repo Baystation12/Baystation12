@@ -6,7 +6,7 @@
 //		Arguments that the called proc should expect:
 //			/mob/dead: The mob that was added to the dead_mob_list
 
-var/decl/observ/death/death_event = new()
+GLOBAL_DATUM_INIT(death_event, /decl/observ/death, new)
 
 /decl/observ/death
 	name = "Death"
@@ -19,4 +19,4 @@ var/decl/observ/death/death_event = new()
 /mob/living/add_to_dead_mob_list()
 	. = ..()
 	if(.)
-		death_event.raise_event(src)
+		GLOB.death_event.raise_event(src)

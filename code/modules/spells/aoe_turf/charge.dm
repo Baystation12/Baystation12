@@ -11,6 +11,7 @@
 	cooldown_min = 400 //50 deciseconds reduction per rank
 
 	hud_state = "wiz_charge"
+	cast_sound = 'sound/magic/charge.ogg'
 
 /spell/aoe_turf/charge/cast(var/list/targets, mob/user)
 	for(var/turf/T in targets)
@@ -40,14 +41,14 @@
 	if(istype(target, /mob/living))
 		charged_item = mob_charge(target)
 
-	if(istype(target, /obj/item/weapon/grab))
-		var/obj/item/weapon/grab/G = target
+	if(istype(target, /obj/item/grab))
+		var/obj/item/grab/G = target
 		if(G.affecting)
 			var/mob/M = G.affecting
 			charged_item = mob_charge(M)
 
-	if(istype(target, /obj/item/weapon/cell/))
-		var/obj/item/weapon/cell/C = target
+	if(istype(target, /obj/item/cell/))
+		var/obj/item/cell/C = target
 		if(prob(80) && C.maxcharge)
 			C.maxcharge -= 200
 			if(C.maxcharge <= 0) //maxcharge of 0! Madness!

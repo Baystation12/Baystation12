@@ -3,15 +3,15 @@
 	icon_state = "ice_1"
 	damage = 0
 	damage_type = BURN
-	nodamage = 1
-	check_armour = "energy"
+	damage_flags = 0
+	nodamage = TRUE
 
 /obj/item/projectile/change/on_hit(var/atom/change)
 	wabbajack(change)
 
 /obj/item/projectile/change/proc/wabbajack(var/mob/M)
 	if(istype(M, /mob/living) && M.stat != DEAD)
-		if(M.transforming)
+		if(HAS_TRANSFORMATION_MOVEMENT_HANDLER(M))
 			return
 		if(M.has_brain_worms())
 			return //Borer stuff - RR
@@ -22,7 +22,7 @@
 				qdel(Robot.mmi)
 		else
 			for(var/obj/item/W in M)
-				if(istype(W, /obj/item/weapon/implant))	//TODO: Carn. give implants a dropped() or something
+				if(istype(W, /obj/item/implant))	//TODO: Carn. give implants a dropped() or something
 					qdel(W)
 					continue
 				M.drop_from_inventory(W)
@@ -32,8 +32,6 @@
 		var/options = list("robot", "slime")
 		for(var/t in all_species)
 			options += t
-		options -= "Xenomorph Queen"
-		options -= "Xenomorph"
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 			if(H.species)
@@ -48,14 +46,14 @@
 			if("robot")
 				new_mob = new /mob/living/silicon/robot(M.loc)
 				new_mob.gender = M.gender
-				new_mob.invisibility = 0
-				new_mob.job = "Cyborg"
+				new_mob.set_invisibility(0)
+				new_mob.job = "Robot"
 				var/mob/living/silicon/robot/Robot = new_mob
 				Robot.mmi = new /obj/item/device/mmi(new_mob)
 				Robot.mmi.transfer_identity(M)	//Does not transfer key/client.
 			if("slime")
 				new_mob = new /mob/living/carbon/slime(M.loc)
-				new_mob.universal_speak = 1
+				new_mob.universal_speak = TRUE
 			else
 				var/mob/living/carbon/human/H
 				if(ishuman(M))
@@ -66,19 +64,19 @@
 
 				if(M.gender == MALE)
 					H.gender = MALE
-					H.name = pick(first_names_male)
+					H.SetName(pick(GLOB.first_names_male))
 				else if(M.gender == FEMALE)
 					H.gender = FEMALE
-					H.name = pick(first_names_female)
+					H.SetName(pick(GLOB.first_names_female))
 				else
 					H.gender = NEUTER
-					H.name = pick(first_names_female|first_names_male)
+					H.SetName(pick(GLOB.first_names_female|GLOB.first_names_male))
 
-				H.name += " [pick(last_names)]"
+				H.name += " [pick(GLOB.last_names)]"
 				H.real_name = H.name
 
 				H.set_species(randomize)
-				H.universal_speak = 1
+				H.universal_speak = TRUE
 				var/datum/preferences/A = new() //Randomize appearance for the human
 				A.randomize_appearance_and_body_for(H)
 

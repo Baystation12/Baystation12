@@ -5,15 +5,13 @@
 	desc = "Emits a visible or invisible beam and is triggered when the beam is interrupted."
 	icon_state = "infrared"
 	origin_tech = list(TECH_MAGNET = 2)
-	matter = list(DEFAULT_WALL_MATERIAL = 1000, "glass" = 500, "waste" = 100)
-
+	matter = list(MATERIAL_STEEL = 1000, MATERIAL_GLASS = 500, MATERIAL_WASTE = 100)
 	wires = WIRE_PULSE
-
 	secured = 0
+	obj_flags = OBJ_FLAG_CONDUCTIBLE | OBJ_FLAG_ROTATABLE
 
 	var/on = 0
 	var/visible = 0
-
 	var/list/beams
 	var/list/seen_turfs
 	var/datum/proximity_trigger/line/proximity_trigger
@@ -51,7 +49,7 @@
 	set_active(secured ? FALSE : on)
 	return secured
 
-/obj/item/device/assembly/infra/update_icon()
+/obj/item/device/assembly/infra/on_update_icon()
 	overlays.Cut()
 	if(on)
 		overlays += "infrared_on"
@@ -62,7 +60,7 @@
 /obj/item/device/assembly/infra/interact(mob/user as mob)//TODO: change this this to the wire control panel
 	if(!secured)
 		return
-	if(!CanInteract(user, physical_state))
+	if(!CanInteract(user, GLOB.physical_state))
 		return
 
 	user.set_machine(src)
@@ -70,12 +68,12 @@
 	dat += text("<TT><B>Infrared Laser</B>\n<B>Status</B>: []<BR>\n<B>Visibility</B>: []<BR>\n</TT>", (on ? text("<A href='?src=\ref[];state=0'>On</A>", src) : text("<A href='?src=\ref[];state=1'>Off</A>", src)), (src.visible ? text("<A href='?src=\ref[];visible=0'>Visible</A>", src) : text("<A href='?src=\ref[];visible=1'>Invisible</A>", src)))
 	dat += "<BR><BR><A href='?src=\ref[src];refresh=1'>Refresh</A>"
 	dat += "<BR><BR><A href='?src=\ref[src];close=1'>Close</A>"
-	user << browse(jointext(dat,null), "window=infra")
+	show_browser(user, jointext(dat,null), "window=infra")
 	onclose(user, "infra")
 
-/obj/item/device/assembly/infra/Topic(href, href_list, state = physical_state)
+/obj/item/device/assembly/infra/Topic(href, href_list, state = GLOB.physical_state)
 	if(..())
-		usr << browse(null, "window=infra")
+		close_browser(usr, "window=infra")
 		onclose(usr, "infra")
 		return 1
 
@@ -87,18 +85,11 @@
 		update_icon()
 
 	if(href_list["close"])
-		usr << browse(null, "window=infra")
+		close_browser(usr, "window=infra")
 		return
 
 	if(usr)
 		attack_self(usr)
-
-/obj/item/device/assembly/infra/verb/rotate()//This could likely be better
-	set name = "Rotate Infrared Laser"
-	set category = "Object"
-	set src in usr
-
-	set_dir(turn(dir, 90))
 
 /obj/item/device/assembly/infra/proc/on_beam_entered(var/atom/enterer)
 	if(enterer == src)
@@ -112,7 +103,7 @@
 
 	pulse(0)
 	if(!holder)
-		visible_message("\icon[src] *beep* *beep*")
+		visible_message("[icon2html(src, viewers(get_turf(src)))] *beep* *beep*")
 	cooldown = 2
 	spawn(10)
 		process_cooldown()
@@ -137,7 +128,7 @@
 		var/obj/effect/beam/ir_beam/beam = b
 		if(beam.loc in turfs_that_need_beams)
 			turfs_that_need_beams -= beam.loc
-			beam.invisibility = visible ? 0 : INVISIBILITY_MAXIMUM
+			beam.set_invisibility(visible ? 0 : INVISIBILITY_MAXIMUM)
 		else
 			existing_beams -= beam
 			qdel(beam)
@@ -154,5 +145,5 @@
 	name = "ir beam"
 	icon = 'icons/obj/projectiles.dmi'
 	icon_state = "ibeam"
-	anchored = 1
-	simulated = 0
+	anchored = TRUE
+	simulated = FALSE

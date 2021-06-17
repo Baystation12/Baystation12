@@ -1,23 +1,25 @@
 // Glass shards
 
-/obj/item/weapon/material/shard
+/obj/item/material/shard
 	name = "shard"
 	icon = 'icons/obj/shards.dmi'
 	desc = "Made of nothing. How does this even exist?" // set based on material, if this desc is visible it's a bug (shards default to being made of glass)
 	icon_state = "large"
 	randpixel = 8
-	sharp = 1
-	edge = 1
+	sharp = TRUE
+	edge = TRUE
 	w_class = ITEM_SIZE_SMALL
-	force_divisor = 0.2 // 6 with hardness 30 (glass)
-	thrown_force_divisor = 0.4 // 4 with weight 15 (glass)
+	max_force = 8
+	force_multiplier = 0.12 // 6 with hardness 30 (glass)
+	thrown_force_multiplier = 0.4 // 4 with weight 15 (glass)
 	item_state = "shard-glass"
 	attack_verb = list("stabbed", "slashed", "sliced", "cut")
-	default_material = "glass"
+	default_material = MATERIAL_GLASS
 	unbreakable = 1 //It's already broken.
 	drops_debris = 0
+	item_flags = ITEM_FLAG_CAN_HIDE_IN_SHOES
 
-/obj/item/weapon/material/shard/set_material(var/new_material)
+/obj/item/material/shard/set_material(var/new_material)
 	..(new_material)
 	if(!istype(material))
 		return
@@ -26,7 +28,7 @@
 	update_icon()
 
 	if(material.shard_type)
-		name = "[material.display_name] [material.shard_type]"
+		SetName("[material.display_name] [material.shard_type]")
 		desc = "A small piece of [material.display_name]. It looks sharp, you wouldn't want to step on it barefoot. Could probably be used as ... a throwing weapon?"
 		switch(material.shard_type)
 			if(SHARD_SPLINTER, SHARD_SHRAPNEL)
@@ -36,7 +38,7 @@
 	else
 		qdel(src)
 
-/obj/item/weapon/material/shard/update_icon()
+/obj/item/material/shard/on_update_icon()
 	if(material)
 		color = material.icon_colour
 		// 1-(1-x)^2, so that glass shards with 0.3 opacity end up somewhat visible at 0.51 opacity
@@ -45,16 +47,16 @@
 		color = "#ffffff"
 		alpha = 255
 
-/obj/item/weapon/material/shard/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/weldingtool) && material.shard_can_repair)
-		var/obj/item/weapon/weldingtool/WT = W
+/obj/item/material/shard/attackby(obj/item/W as obj, mob/user as mob)
+	if(isWelder(W) && material.shard_can_repair)
+		var/obj/item/weldingtool/WT = W
 		if(WT.remove_fuel(0, user))
 			material.place_sheet(loc)
 			qdel(src)
 			return
 	return ..()
 
-/obj/item/weapon/material/shard/Crossed(AM as mob|obj)
+/obj/item/material/shard/Crossed(AM as mob|obj)
 	..()
 	if(isliving(AM))
 		var/mob/M = AM
@@ -66,7 +68,7 @@
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 
-			if(H.species.siemens_coefficient<0.5 || (H.species.flags & NO_EMBED)) //Thick skin.
+			if(H.species.siemens_coefficient<0.5 || (H.species.species_flags & (SPECIES_FLAG_NO_EMBED|SPECIES_FLAG_NO_MINOR_CUT))) //Thick skin.
 				return
 
 			if( H.shoes || ( H.wear_suit && (H.wear_suit.body_parts_covered & FEET) ) )
@@ -79,9 +81,9 @@
 				var/picked = pick(check)
 				var/obj/item/organ/external/affecting = H.get_organ(picked)
 				if(affecting)
-					if(affecting.robotic >= ORGAN_ROBOT)
+					if(BP_IS_ROBOTIC(affecting))
 						return
-					affecting.take_damage(5, 0)
+					affecting.take_external_damage(5, 0)
 					H.updatehealth()
 					if(affecting.can_feel_pain())
 						H.Weaken(3)
@@ -90,8 +92,10 @@
 			return
 
 // Preset types - left here for the code that uses them
-/obj/item/weapon/material/shard/shrapnel/New(loc)
-	..(loc, "steel")
+/obj/item/material/shard/phoron/New(loc)
+	..(loc, MATERIAL_PHORON_GLASS)
 
-/obj/item/weapon/material/shard/phoron/New(loc)
-	..(loc, "phglass")
+/obj/item/material/shard/shrapnel
+	name = "shrapnel"
+	default_material = MATERIAL_STEEL
+	w_class = ITEM_SIZE_TINY	//it's real small

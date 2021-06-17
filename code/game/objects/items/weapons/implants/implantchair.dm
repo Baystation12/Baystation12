@@ -5,13 +5,13 @@
 	desc = "Used to implant occupants with loyalty implants."
 	icon = 'icons/obj/machines/implantchair.dmi'
 	icon_state = "implantchair"
-	density = 1
+	density = TRUE
 	opacity = 0
-	anchored = 1
+	anchored = TRUE
 
 	var/ready = 1
 	var/malfunction = 0
-	var/list/obj/item/weapon/implant/loyalty/implant_list = list()
+	var/list/obj/item/implant/loyalty/implant_list = list()
 	var/max_implants = 5
 	var/injection_cooldown = 600
 	var/replenish_cooldown = 6000
@@ -49,7 +49,7 @@
 		if(src.occupant)
 			dat += "[src.ready ? "<A href='?src=\ref[src];implant=1'>Implant</A>" : "Recharging"]<BR>"
 		user.set_machine(src)
-		user << browse(dat, "window=implant")
+		show_browser(user, dat, "window=implant")
 		onclose(user, "implant")
 
 
@@ -74,16 +74,16 @@
 			return
 
 
-	attackby(var/obj/item/weapon/G as obj, var/mob/user as mob)
-		if(istype(G, /obj/item/weapon/grab))
-			var/obj/item/weapon/grab/grab = G
+	attackby(var/obj/item/G as obj, var/mob/user as mob)
+		if(istype(G, /obj/item/grab))
+			var/obj/item/grab/grab = G
 			if(!ismob(grab.affecting))
 				return
-			for(var/mob/living/carbon/slime/M in range(1,G:affecting))
+			for(var/mob/living/carbon/slime/M in range(1, grab.affecting))
 				if(M.Victim == grab.affecting)
-					to_chat(usr, "[grab.affecting:name] will not fit into the [src.name] because they have a slime latched onto their head.")
+					to_chat(usr, "[grab.affecting.name] will not fit into the [src.name] because they have a slime latched onto their head.")
 					return
-			var/mob/M = G:affecting
+			var/mob/M = grab.affecting
 			if(put_mob(M))
 				qdel(G)
 		src.updateUsrDialog()
@@ -98,7 +98,7 @@
 		if (src.occupant.client)
 			src.occupant.client.eye = src.occupant.client.mob
 			src.occupant.client.perspective = MOB_PERSPECTIVE
-		src.occupant.loc = src.loc
+		occupant.dropInto(loc)
 		if(injecting)
 			implant(src.occupant)
 			injecting = 0
@@ -118,7 +118,7 @@
 			M.client.perspective = EYE_PERSPECTIVE
 			M.client.eye = src
 		M.stop_pulling()
-		M.loc = src
+		M.forceMove(src)
 		src.occupant = M
 		src.add_fingerprint(usr)
 		icon_state = "implantchair_on"
@@ -129,14 +129,14 @@
 		if (!istype(M, /mob/living/carbon))
 			return
 		if(!implant_list.len)	return
-		for(var/obj/item/weapon/implant/loyalty/imp in implant_list)
+		for(var/obj/item/implant/loyalty/imp in implant_list)
 			if(!imp)	continue
-			if(istype(imp, /obj/item/weapon/implant/loyalty))
+			if(istype(imp, /obj/item/implant/loyalty))
 				for (var/mob/O in viewers(M, null))
 					O.show_message("<span class='warning'>\The [M] has been implanted by \the [src].</span>", 1)
 
 				if(imp.implanted(M))
-					imp.loc = M
+					imp.forceMove(M)
 					imp.imp_in = M
 					imp.implanted = 1
 				implant_list -= imp
@@ -146,7 +146,7 @@
 
 	add_implants()
 		for(var/i=0, i<src.max_implants, i++)
-			var/obj/item/weapon/implant/loyalty/I = new /obj/item/weapon/implant/loyalty(src)
+			var/obj/item/implant/loyalty/I = new /obj/item/implant/loyalty(src)
 			implant_list += I
 		return
 

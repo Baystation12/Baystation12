@@ -2,6 +2,10 @@
 	name = "R&D Server"
 	icon = 'icons/obj/machines/research.dmi'
 	icon_state = "server"
+	base_type = /obj/machinery/r_n_d/server
+	construct_state = /decl/machine_construction/default/panel_closed
+	machine_name = "\improper R&D server"
+	machine_desc = "A powerful piece of hardware used as the hub of a research matrix, containing every byte of data gleaned from an experiment."
 	var/datum/research/files
 	var/health = 100
 	var/list/id_with_upload = list()	//List of R&D consoles with upload to server access.
@@ -14,27 +18,14 @@
 	var/delay = 10
 	req_access = list(access_rd) //Only the R&D can change server settings.
 
-/obj/machinery/r_n_d/server/New()
-	..()
-	component_parts = list()
-	component_parts += new /obj/item/weapon/circuitboard/rdserver(src)
-	component_parts += new /obj/item/weapon/stock_parts/scanning_module(src)
-	component_parts += new /obj/item/stack/cable_coil(src)
-	component_parts += new /obj/item/stack/cable_coil(src)
-	RefreshParts()
-	initialize();
-
-/obj/machinery/r_n_d/server/Destroy()
-	griefProtection()
-	..()
-
 /obj/machinery/r_n_d/server/RefreshParts()
 	var/tot_rating = 0
-	for(var/obj/item/weapon/stock_parts/SP in src)
+	for(var/obj/item/stock_parts/SP in src)
 		tot_rating += SP.rating
-	idle_power_usage /= max(1, tot_rating)
+	change_power_consumption(initial(idle_power_usage)/max(1, tot_rating), POWER_USE_IDLE)
 
-/obj/machinery/r_n_d/server/initialize()
+/obj/machinery/r_n_d/server/Initialize()
+	. = ..()
 	if(!files)
 		files = new /datum/research(src)
 	var/list/temp_list
@@ -49,7 +40,8 @@
 		for(var/N in temp_list)
 			id_with_download += text2num(N)
 
-/obj/machinery/r_n_d/server/process()
+/obj/machinery/r_n_d/server/Process()
+	..()
 	var/datum/gas_mixture/environment = loc.return_air()
 	switch(environment.temperature)
 		if(0 to T0C)
@@ -59,7 +51,6 @@
 		if((T20C + 20) to (T0C + 70))
 			health = max(0, health - 1)
 	if(health <= 0)
-		griefProtection() //I dont like putting this in process() but it's the best I can do without re-writing a chunk of rd servers.
 		files.known_designs = list()
 		for(var/datum/tech/T in files.known_tech)
 			if(prob(1))
@@ -70,23 +61,6 @@
 	else
 		produce_heat()
 		delay = initial(delay)
-
-/obj/machinery/r_n_d/server/emp_act(severity)
-	griefProtection()
-	..()
-
-/obj/machinery/r_n_d/server/ex_act(severity)
-	griefProtection()
-	..()
-
-//Backup files to centcomm to help admins recover data after greifer attacks
-/obj/machinery/r_n_d/server/proc/griefProtection()
-	for(var/obj/machinery/r_n_d/server/centcom/C in machines)
-		for(var/datum/tech/T in files.known_tech)
-			C.files.AddTech2Known(T)
-		for(var/datum/design/D in files.known_designs)
-			C.files.AddDesign2Known(D)
-		C.files.RefreshResearch()
 
 /obj/machinery/r_n_d/server/proc/produce_heat()
 	if(!produces_heat)
@@ -111,23 +85,14 @@
 
 			env.merge(removed)
 
-/obj/machinery/r_n_d/server/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if(default_deconstruction_screwdriver(user, O))
-		return
-	if(default_deconstruction_crowbar(user, O))
-		return
-	if(default_part_replacement(user, O))
-		return
-
 /obj/machinery/r_n_d/server/centcom
 	name = "Central R&D Database"
 	server_id = -1
 
-/obj/machinery/r_n_d/server/centcom/initialize()
-	..()
+/obj/machinery/r_n_d/server/centcom/proc/update_connections()
 	var/list/no_id_servers = list()
 	var/list/server_ids = list()
-	for(var/obj/machinery/r_n_d/server/S in machines)
+	for(var/obj/machinery/r_n_d/server/S in SSmachines.machinery)
 		switch(S.server_id)
 			if(-1)
 				continue
@@ -146,7 +111,7 @@
 				server_ids += num
 		no_id_servers -= S
 
-/obj/machinery/r_n_d/server/centcom/process()
+/obj/machinery/r_n_d/server/centcom/Process()
 	return PROCESS_KILL //don't need process()
 
 /obj/machinery/computer/rdservercontrol
@@ -154,47 +119,47 @@
 	icon_keyboard = "rd_key"
 	icon_screen = "rdcomp"
 	light_color = "#a97faa"
-	circuit = /obj/item/weapon/circuitboard/rdservercontrol
+	machine_name = "\improper R&D server control console"
+	machine_desc = "If an R&D server is the heart of a research setup, this is the brain. Any kind of data manipulation on the server happens from this console."
 	var/screen = 0
 	var/obj/machinery/r_n_d/server/temp_server
 	var/list/servers = list()
 	var/list/consoles = list()
 	var/badmin = 0
 
-/obj/machinery/computer/rdservercontrol/Topic(href, href_list)
-	if(..())
-		return 1
+/obj/machinery/computer/rdservercontrol/CanUseTopic(user)
+	if(!allowed(user) && !emagged)
+		to_chat(user, "<span class='warning'>You do not have the required access level</span>")
+		return STATUS_CLOSE
+	return ..()
 
-	add_fingerprint(usr)
-	usr.set_machine(src)
-	if(!allowed(usr) && !emagged)
-		to_chat(usr, "<span class='warning'>You do not have the required access level</span>")
-		return
-
+/obj/machinery/computer/rdservercontrol/OnTopic(user, href_list, state)
 	if(href_list["main"])
 		screen = 0
+		. = TOPIC_REFRESH
 
 	else if(href_list["access"] || href_list["data"] || href_list["transfer"])
 		temp_server = null
 		consoles = list()
 		servers = list()
-		for(var/obj/machinery/r_n_d/server/S in machines)
+		for(var/obj/machinery/r_n_d/server/S in SSmachines.machinery)
 			if(S.server_id == text2num(href_list["access"]) || S.server_id == text2num(href_list["data"]) || S.server_id == text2num(href_list["transfer"]))
 				temp_server = S
 				break
 		if(href_list["access"])
 			screen = 1
-			for(var/obj/machinery/computer/rdconsole/C in machines)
+			for(var/obj/machinery/computer/rdconsole/C in SSmachines.machinery)
 				if(C.sync)
 					consoles += C
 		else if(href_list["data"])
 			screen = 2
 		else if(href_list["transfer"])
 			screen = 3
-			for(var/obj/machinery/r_n_d/server/S in machines)
+			for(var/obj/machinery/r_n_d/server/S in SSmachines.machinery)
 				if(S == src)
 					continue
 				servers += S
+		. = TOPIC_REFRESH
 
 	else if(href_list["upload_toggle"])
 		var/num = text2num(href_list["upload_toggle"])
@@ -202,6 +167,7 @@
 			temp_server.id_with_upload -= num
 		else
 			temp_server.id_with_upload += num
+		. = TOPIC_REFRESH
 
 	else if(href_list["download_toggle"])
 		var/num = text2num(href_list["download_toggle"])
@@ -209,40 +175,43 @@
 			temp_server.id_with_download -= num
 		else
 			temp_server.id_with_download += num
+		. = TOPIC_REFRESH
 
 	else if(href_list["reset_tech"])
-		var/choice = alert("Technology Data Rest", "Are you sure you want to reset this technology to its default data? Data lost cannot be recovered.", "Continue", "Cancel")
-		if(choice == "Continue")
+		var/choice = alert(user, "Technology Data Reset", "Are you sure you want to reset this technology to its default data? Data lost cannot be recovered.", "Continue", "Cancel")
+		if(choice == "Continue" && CanUseTopic(user, state))
 			for(var/datum/tech/T in temp_server.files.known_tech)
-				if(T.id == href_list["reset_tech"])
+				if(T.level > 0 && T.id == href_list["reset_tech"])
 					T.level = 1
 					break
 		temp_server.files.RefreshResearch()
+		. = TOPIC_REFRESH
 
 	else if(href_list["reset_design"])
-		var/choice = alert("Design Data Deletion", "Are you sure you want to delete this design? If you still have the prerequisites for the design, it'll reset to its base reliability. Data lost cannot be recovered.", "Continue", "Cancel")
-		if(choice == "Continue")
+		var/choice = alert(user, "Design Data Deletion", "Are you sure you want to delete this design? If you still have the prerequisites for the design, it'll reset to its base reliability. Data lost cannot be recovered.", "Continue", "Cancel")
+		if(choice == "Continue" && CanUseTopic(user, state))
 			for(var/datum/design/D in temp_server.files.known_designs)
 				if(D.id == href_list["reset_design"])
 					temp_server.files.known_designs -= D
 					break
 		temp_server.files.RefreshResearch()
+		. = TOPIC_REFRESH
 
-	updateUsrDialog()
-	return
+/obj/machinery/computer/rdservercontrol/interface_interact(mob/user)
+	interact(user)
+	return TRUE
 
-/obj/machinery/computer/rdservercontrol/attack_hand(mob/user as mob)
-	if(stat & (BROKEN|NOPOWER))
-		return
+/obj/machinery/computer/rdservercontrol/interact(mob/user)
 	user.set_machine(src)
 	var/dat = ""
 
 	switch(screen)
 		if(0) //Main Menu
 			dat += "Connected Servers:<BR><BR>"
-
-			for(var/obj/machinery/r_n_d/server/S in machines)
-				if(istype(S, /obj/machinery/r_n_d/server/centcom) && !badmin)
+			var/turf/T = get_turf(src)
+			for(var/obj/machinery/r_n_d/server/S in SSmachines.machinery)
+				var/turf/ST = get_turf(S)
+				if((istype(S, /obj/machinery/r_n_d/server/centcom) && !badmin) || (ST && !AreConnectedZLevels(ST.z, T.z)))
 					continue
 				dat += "[S.name] || "
 				dat += "<A href='?src=\ref[src];access=[S.server_id]'> Access Rights</A> | "
@@ -288,14 +257,15 @@
 			for(var/obj/machinery/r_n_d/server/S in servers)
 				dat += "[S.name] <A href='?src=\ref[src];send_to=[S.server_id]'> (Transfer)</A><BR>"
 			dat += "<HR><A href='?src=\ref[src];main=1'>Main Menu</A>"
-	user << browse("<TITLE>R&D Server Control</TITLE><HR>[dat]", "window=server_control;size=575x400")
+	show_browser(user, "<TITLE>R&D Server Control</TITLE><HR>[dat]", "window=server_control;size=575x400")
 	onclose(user, "server_control")
 	return
 
 /obj/machinery/computer/rdservercontrol/emag_act(var/remaining_charges, var/mob/user)
 	if(!emagged)
 		playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
-		emagged = 1
+		emagged = TRUE
+		req_access.Cut()
 		to_chat(user, "<span class='notice'>You you disable the security protocols.</span>")
 		src.updateUsrDialog()
 		return 1
@@ -308,6 +278,6 @@
 
 /obj/machinery/r_n_d/server/core
 	name = "Core R&D Server"
-	id_with_upload_string = "1"
-	id_with_download_string = "1"
+	id_with_upload_string = "1;3"
+	id_with_download_string = "1;3"
 	server_id = 1

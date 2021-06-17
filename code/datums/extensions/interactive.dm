@@ -1,5 +1,6 @@
 //Extensions that can be interacted with via Topic
 /datum/extension/interactive
+	base_type = /datum/extension/interactive
 	var/list/host_predicates
 	var/list/user_predicates
 
@@ -21,7 +22,7 @@
 		return STATUS_CLOSE
 	if(!all_predicates_true(list(user), user_predicates))
 		return STATUS_CLOSE
-	if(holder.CanUseTopic(user, default_state) != STATUS_INTERACTIVE)
+	if(holder.CanUseTopic(user, GLOB.default_state) != STATUS_INTERACTIVE)
 		return STATUS_CLOSE
 
 	return STATUS_INTERACTIVE

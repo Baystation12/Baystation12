@@ -13,12 +13,12 @@
 /mob/observer/ghost/DblClickOn(var/atom/A, var/params)
 	if(can_reenter_corpse && mind && mind.current)
 		if(A == mind.current || (mind.current in A)) // double click your corpse or whatever holds it
-			reenter_corpse()						// (cloning scanner, body bag, closet, mech, etc)
+			reenter_corpse()						// (cloning scanner, body bag, closet, exosuit, etc)
 			return
 
 	// Things you might plausibly want to follow
 	if(istype(A,/atom/movable))
-		ManualFollow(A)
+		start_following(A)
 	// Otherwise jump
 	else
 		stop_following()
@@ -27,8 +27,21 @@
 /mob/observer/ghost/ClickOn(var/atom/A, var/params)
 	if(!canClick()) return
 	setClickCooldown(DEFAULT_QUICK_COOLDOWN)
-	// You are responsible for checking config.ghost_interaction when you override this function
+
 	// Not all of them require checking, see below
+	var/list/modifiers = params2list(params)
+	if(modifiers["alt"])
+		// I'd rather call ..() but who knows what will break if we do that
+		var/datum/extension/on_click/alt = get_extension(A, /datum/extension/on_click/alt)
+		if(alt && alt.on_click(src))
+			return
+		var/target_turf = get_turf(A)
+		if(target_turf)
+			AltClickOn(target_turf)
+		return
+	if(modifiers["shift"])
+		examinate(A)
+		return
 	A.attack_ghost(src)
 
 // Oh by the way this didn't work with old click code which is why clicking shit didn't spam you
@@ -42,12 +55,6 @@
 // ---------------------------------------
 // And here are some good things for free:
 // Now you can click through portals, wormholes, gateways, and teleporters while observing. -Sayu
-
-/obj/machinery/teleport/hub/attack_ghost(mob/user as mob)
-	var/atom/l = loc
-	var/obj/machinery/computer/teleporter/com = locate(/obj/machinery/computer/teleporter, locate(l.x - 2, l.y, l.z))
-	if(com.locked)
-		user.forceMove(get_turf(com.locked))
 
 /obj/effect/portal/attack_ghost(mob/user as mob)
 	if(target)

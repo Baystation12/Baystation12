@@ -3,7 +3,7 @@
 
  1. All obj/item 's have a hidden_uplink var. By default it's null. Give the item one with "new(src)", it must be in it's contents. Feel free to add "uses".
 
- 2. Code in the triggers. Use check_trigger for this, I recommend closing the item's menu with "usr << browse(null, "window=windowname") if it returns true.
+ 2. Code in the triggers. Use check_trigger for this, I recommend closing the item's menu with "close_browser(usr, "window=windowname") if it returns true.
  The var/value is the value that will be compared with the var/target. If they are equal it will activate the menu.
 
  3. If you want the menu to stay until the users locks his uplink, add an active_uplink_check(mob/user as mob) in your interact/attack_hand proc.
@@ -36,8 +36,8 @@
 	return loc
 
 /obj/item/device/uplink/New(var/atom/location, var/datum/mind/owner, var/telecrystals = DEFAULT_TELECRYSTAL_AMOUNT)
-	if(!istype(location, /obj/item))
-		CRASH("Invalid spawn location. Expected /obj/item, was [location ? location.type : "NULL"]")
+	if(!istype(location, /atom))
+		CRASH("Invalid spawn location. Expected /atom, was [location ? location.type : "NULL"]")
 
 	..()
 	nanoui_data = list()
@@ -46,15 +46,15 @@
 	src.uplink_owner = owner
 	world_uplinks += src
 	uses = telecrystals
-	processing_objects += src
+	START_PROCESSING(SSobj, src)
 
 /obj/item/device/uplink/Destroy()
 	uplink_owner = null
 	world_uplinks -= src
-	processing_objects -= src
+	STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/obj/item/device/uplink/process()
+/obj/item/device/uplink/Process()
 	if(world.time > next_offer_time)
 		next_offer_time = world.time + offer_time
 		discount_amount = pick(90;0.9, 80;0.8, 70;0.7, 60;0.6, 50;0.5, 40;0.4, 30;0.3, 20;0.2, 10;0.1)
@@ -70,7 +70,7 @@
 
 		discount_item = new_discount_item
 		update_nano_data()
-		nanomanager.update_uis(src)
+		SSnano.update_uis(src)
 
 /obj/item/device/uplink/proc/is_improper_item(var/datum/uplink_item/new_discount_item, discount_amount)
 	if(!new_discount_item)
@@ -113,7 +113,7 @@
 /*
 	NANO UI FOR UPLINK WOOP WOOP
 */
-/obj/item/device/uplink/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/item/device/uplink/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/uistate = GLOB.inventory_state)
 	var/title = "Remote Uplink"
 	var/data[0]
 
@@ -128,9 +128,9 @@
 	data += nanoui_data
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)	// No auto-refresh
-		ui = new(user, src, ui_key, "uplink.tmpl", title, 450, 600, state = inventory_state)
+		ui = new(user, src, ui_key, "uplink.tmpl", title, 450, 600, state = uistate)
 		ui.set_initial_data(data)
 		ui.open()
 
@@ -145,29 +145,28 @@
 	return ..()
 
 // The purchasing code.
-/obj/item/device/uplink/Topic(href, href_list)
-	if(..())
-		return 1
-
-	var/mob/user = usr
+/obj/item/device/uplink/OnTopic(user, href_list)
 	if(href_list["buy_item"])
 		var/datum/uplink_item/UI = (locate(href_list["buy_item"]) in uplink.items)
 		UI.buy(src, usr)
+		. = TOPIC_REFRESH
 	else if(href_list["lock"])
 		toggle()
-		var/datum/nanoui/ui = nanomanager.get_open_ui(user, src, "main")
-		ui.close()
+		SSnano.close_user_uis(user, src, "main")
+		. = TOPIC_HANDLED
 	else if(href_list["return"])
 		nanoui_menu = round(nanoui_menu/10)
+		. = TOPIC_REFRESH
 	else if(href_list["menu"])
 		nanoui_menu = text2num(href_list["menu"])
 		if(href_list["id"])
-			exploit_id = href_list["id"]
+			exploit_id = text2num(href_list["id"])
 		if(href_list["category"])
 			category = locate(href_list["category"]) in uplink.categories
+		. = TOPIC_REFRESH
 
-	update_nano_data()
-	return 1
+	if(. == TOPIC_REFRESH)
+		update_nano_data()
 
 /obj/item/device/uplink/proc/update_nano_data()
 	if(nanoui_menu == 0)
@@ -182,41 +181,26 @@
 			if(item.can_view(src))
 				var/cost = item.cost(uses, src)
 				if(!cost) cost = "???"
-				items[++items.len] = list("name" = item.name, "description" = replacetext(item.description(), "\n", "<br>"), "can_buy" = item.can_buy(src), "cost" = cost, "ref" = "\ref[item]")
+				items[++items.len] = list("name" = item.name(), "description" = replacetext(item.description(), "\n", "<br>"), "can_buy" = item.can_buy(src), "cost" = cost, "ref" = "\ref[item]")
 		nanoui_data["items"] = items
 	else if(nanoui_menu == 2)
 		var/permanentData[0]
-		for(var/datum/data/record/L in sortRecord(data_core.locked))
-			permanentData[++permanentData.len] = list(Name = L.fields["name"],"id" = L.fields["id"])
+		for(var/datum/computer_file/report/crew_record/L in GLOB.all_crew_records)
+			permanentData[++permanentData.len] = list(Name = L.get_name(),"id" = L.uid, "exploit" = length(L.get_antagRecord()))
 		nanoui_data["exploit_records"] = permanentData
 	else if(nanoui_menu == 21)
 		nanoui_data["exploit_exists"] = 0
 
-		for(var/datum/data/record/L in data_core.locked)
-			if(L.fields["id"] == exploit_id)
-				nanoui_data["exploit"] = list()  // Setting this to equal L.fields passes it's variables that are lists as reference instead of value.
-								 // We trade off being able to automatically add shit for more control over what gets passed to json
-								 // and if it's sanitized for html.
-				nanoui_data["exploit"]["nanoui_exploit_record"] = html_encode(L.fields["exploit_record"])                         		// Change stuff into html
-				nanoui_data["exploit"]["nanoui_exploit_record"] = replacetext(nanoui_data["exploit"]["nanoui_exploit_record"], "\n", "<br>")    // change line breaks into <br>
-				nanoui_data["exploit"]["name"] =  html_encode(L.fields["name"])
-				nanoui_data["exploit"]["sex"] =  html_encode(L.fields["sex"])
-				nanoui_data["exploit"]["age"] =  html_encode(L.fields["age"])
-				nanoui_data["exploit"]["species"] =  html_encode(L.fields["species"])
-				nanoui_data["exploit"]["rank"] =  html_encode(L.fields["rank"])
-				nanoui_data["exploit"]["home_system"] =  html_encode(L.fields["home_system"])
-				nanoui_data["exploit"]["citizenship"] =  html_encode(L.fields["citizenship"])
-				nanoui_data["exploit"]["faction"] =  html_encode(L.fields["faction"])
-				nanoui_data["exploit"]["religion"] =  html_encode(L.fields["religion"])
-				nanoui_data["exploit"]["fingerprint"] =  html_encode(L.fields["fingerprint"])
-
+		for(var/datum/computer_file/report/crew_record/L in GLOB.all_crew_records)
+			if(L.uid == exploit_id)
+				nanoui_data["exploit"] = L.generate_nano_data()
 				nanoui_data["exploit_exists"] = 1
 				break
 
 // I placed this here because of how relevant it is.
 // You place this in your uplinkable item to check if an uplink is active or not.
 // If it is, it will display the uplink menu and return 1, else it'll return false.
-// If it returns true, I recommend closing the item's normal menu with "user << browse(null, "window=name")"
+// If it returns true, I recommend closing the item's normal menu with "close_browser(user, "window=name")"
 /obj/item/proc/active_uplink_check(mob/user as mob)
 	// Activates the uplink if it's active
 	if(src.hidden_uplink)
@@ -231,9 +215,9 @@
 // Includes normal radio uplink, multitool uplink,
 // implant uplink (not the implant tool) and a preset headset uplink.
 
-/obj/item/device/radio/uplink/New(var/loc, var/owner)
+/obj/item/device/radio/uplink/New(var/loc, var/owner, var/amount)
 	..()
-	hidden_uplink = new(src, owner)
+	hidden_uplink = new(src, owner, amount)
 	icon_state = "radio"
 
 /obj/item/device/radio/uplink/attack_self(mob/user as mob)
@@ -254,3 +238,6 @@
 /obj/item/device/radio/headset/uplink/New()
 	..()
 	hidden_uplink = new(src)
+
+/obj/item/device/uplink/contained/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/uistate = GLOB.contained_state)
+	return ..()

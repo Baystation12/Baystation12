@@ -13,30 +13,29 @@
 	var/mode
 	var/obj/item/clothing/glasses/glasses
 
+/datum/rig_vision/New()
+	if(ispath(glasses))
+		glasses = new glasses
+
 /datum/rig_vision/nvg
 	mode = "night vision"
-/datum/rig_vision/nvg/New()
-	glasses = new /obj/item/clothing/glasses/night
+	glasses = /obj/item/clothing/glasses/night
 
 /datum/rig_vision/thermal
 	mode = "thermal scanner"
-/datum/rig_vision/thermal/New()
-	glasses = new /obj/item/clothing/glasses/thermal
+	glasses = /obj/item/clothing/glasses/thermal
 
 /datum/rig_vision/meson
 	mode = "meson scanner"
-/datum/rig_vision/meson/New()
-	glasses = new /obj/item/clothing/glasses/meson
+	glasses = /obj/item/clothing/glasses/meson
 
 /datum/rig_vision/sechud
 	mode = "security HUD"
-/datum/rig_vision/sechud/New()
-	glasses = new /obj/item/clothing/glasses/hud/security
+	glasses = /obj/item/clothing/glasses/hud/security
 
 /datum/rig_vision/medhud
 	mode = "medical HUD"
-/datum/rig_vision/medhud/New()
-	glasses = new /obj/item/clothing/glasses/hud/health
+	glasses = /obj/item/clothing/glasses/hud/health
 
 /obj/item/rig_module/vision
 
@@ -162,7 +161,7 @@
 
 	// Don't cycle if this engage() is being called by activate().
 	if(starting_up)
-		to_chat(holder.wearer, "<font color='blue'>You activate your visual sensors.</font>")
+		to_chat(holder.wearer, "<span class='info'>You activate your visual sensors.</span>")
 		return 1
 
 	if(vision_modes.len > 1)
@@ -171,13 +170,13 @@
 			vision_index = 1
 		vision = vision_modes[vision_index]
 
-		to_chat(holder.wearer, "<font color='blue'>You cycle your sensors to <b>[vision.mode]</b> mode.</font>")
+		to_chat(holder.wearer, "<span class='info'>You cycle your sensors to <b>[vision.mode]</b> mode.</span>")
 	else
-		to_chat(holder.wearer, "<font color='blue'>Your sensors only have one mode.</font>")
+		to_chat(holder.wearer, "<span class='info'>Your sensors only have one mode.</span>")
 	return 1
 
-/obj/item/rig_module/vision/New()
-	..()
+/obj/item/rig_module/vision/Initialize()
+	. = ..()
 
 	if(!vision_modes)
 		return

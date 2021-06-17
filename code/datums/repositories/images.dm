@@ -19,7 +19,7 @@
 	if(!atom_cache_list)
 		atom_cache_list = list()
 		image_cache_for_atoms[holder] = atom_cache_list
-		destroyed_event.register(holder, src, /repository/images/proc/atom_destroyed)
+		GLOB.destroyed_event.register(holder, src, /repository/images/proc/atom_destroyed)
 
 	var/cache_key = "[icon]-[icon_state]-[plane]-[layer]"
 	. = atom_cache_list[cache_key]
@@ -37,17 +37,23 @@
 	atom_cache_list.Cut()
 	image_cache_for_atoms -= destroyed
 
-	destroyed_event.unregister(destroyed, src, /repository/images/proc/atom_destroyed)
+	GLOB.destroyed_event.unregister(destroyed, src, /repository/images/proc/atom_destroyed)
 
 // Returns an image not bound to anything and which is typically applied as an overlay/underlay.
 /repository/images/proc/overlay_image(var/icon, var/icon_state, var/alpha, var/appearance_flags, var/color, var/dir, var/plane = FLOAT_PLANE, var/layer = FLOAT_LAYER)
 	var/cache_key = "[icon]-[icon_state]-[alpha]-[appearance_flags]-[color]-[dir]-[plane]-[layer]"
 	. = image_cache_for_overlays[cache_key]
 	if(!.)
-		var/image/I = image(icon = icon, icon_state = icon_state, dir = dir)
-		I.alpha = alpha
-		I.appearance_flags = appearance_flags
-		I.plane = plane
-		I.layer = layer
+		var/image/I = image(icon = icon, icon_state = icon_state)
+		if(!isnull(dir))
+			I.dir = dir
+		if(!isnull(alpha))
+			I.alpha = alpha
+		if(!isnull(appearance_flags))
+			I.appearance_flags = appearance_flags
+		if(!isnull(plane))
+			I.plane = plane
+		if(!isnull(layer))
+			I.layer = layer
 		image_cache_for_overlays[cache_key] = I
 		return I

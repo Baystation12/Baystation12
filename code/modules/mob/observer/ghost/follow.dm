@@ -29,7 +29,7 @@
 	return mob.get_ghost_follow_link(target, delimiter, prefix, sufix)
 
 /mob/observer/ghost/get_ghost_follow_link(var/atom/target, var/delimiter, var/prefix, var/sufix)
-	var/short_links = is_preference_enabled(/datum/client_preference/ghost_follow_link_length)
+	var/short_links = get_preference_value(/datum/client_preference/ghost_follow_link_length) == GLOB.PREF_SHORT
 	return ghost_follow_link(target, src, delimiter, prefix, sufix, short_links)
 
 /proc/ghost_follow_link(var/atom/target, var/atom/ghost, var/delimiter = "|", var/prefix = "", var/sufix = "", var/short_links = TRUE)

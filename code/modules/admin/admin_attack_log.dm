@@ -4,11 +4,18 @@
 	var/mob/attack_logs_ = list()
 
 /proc/log_and_message_admins(var/message as text, var/mob/user = usr, var/turf/location)
-	var/turf/T = location ? location : (user ? get_turf(user) : null)
+	var/turf/T = location ? get_turf(location) : (user ? get_turf(user) : null)
 	message = append_admin_tools(message, user, T)
 
 	log_admin(user ? "[key_name(user)] [message]" : "EVENT [message]")
 	message_admins(user ? "[key_name_admin(user)] [message]" : "EVENT [message]")
+
+/proc/log_and_message_staff(var/message as text, var/mob/user = usr, var/turf/location)
+	var/turf/T = location ? location : (user ? get_turf(user) : null)
+	message = append_admin_tools(message, user, T)
+
+	log_admin(user ? "[key_name(user)] [message]" : "EVENT [message]")
+	message_staff(user ? "[key_name_admin(user)] [message]" : "EVENT [message]")
 
 /proc/log_and_message_admins_many(var/list/mob/users, var/message)
 	if(!users || !users.len)
@@ -34,22 +41,27 @@
 /proc/admin_attack_log(var/mob/attacker, var/mob/victim, var/attacker_message, var/victim_message, var/admin_message)
 	if(!(attacker || victim))
 		EXCEPTION("Neither attacker or victim was supplied.")
+	if ((attacker && !istype(attacker)) || (victim && !istype(victim)))
+		return
 	if(!store_admin_attack_log(attacker, victim))
 		return
 
 	var/turf/attack_location
 	var/intent = "(INTENT: N/A)"
+	var/zone_sel = "(ZONE_SEL: N/A)"
 	if(attacker)
 		intent = "(INTENT: [uppertext(attacker.a_intent)])"
+		if (attacker.zone_sel?.selecting)
+			zone_sel = "(ZONE_SEL: [uppertext(attacker.zone_sel.selecting)])"
 		if(victim)
-			attacker.attack_logs_ += text("\[[time_stamp()]\] <font color='red'>[key_name(victim)] - [attacker_message] [intent]</font>")
+			attacker.attack_logs_ += text("\[[time_stamp()]\] <font color='red'>[key_name(victim)] - [attacker_message] [intent] [zone_sel]</font>")
 		else
-			attacker.attack_logs_ += text("\[[time_stamp()]\] <font color='red'>[attacker_message] [intent]</font>")
+			attacker.attack_logs_ += text("\[[time_stamp()]\] <font color='red'>[attacker_message] [intent] [zone_sel]</font>")
 		attacker.last_attacked_ = mob_repository.get_lite_mob(victim)
 		attack_location = get_turf(attacker)
 	if(victim)
 		if(attacker)
-			victim.attack_logs_ += text("\[[time_stamp()]\] <font color='orange'>[key_name(attacker)] - [victim_message] [intent]</font>")
+			victim.attack_logs_ += text("\[[time_stamp()]\] <font color='orange'>[key_name(attacker)] - [victim_message] [intent] [zone_sel]</font>")
 		else
 			victim.attack_logs_ += text("\[[time_stamp()]\] <font color='orange'>[victim_message]</font>")
 		victim.last_attacker_ = mob_repository.get_lite_mob(attacker)
@@ -63,9 +75,9 @@
 
 	var/full_admin_message
 	if(attacker && victim)
-		full_admin_message = "[key_name(attacker)] [admin_message] [key_name(victim)] (INTENT: [attacker? uppertext(attacker.a_intent) : "N/A"])"
+		full_admin_message = "[key_name(attacker)] [admin_message] [key_name(victim)] [intent] [zone_sel]"
 	else if(attacker)
-		full_admin_message = "[key_name(attacker)] [admin_message] (INTENT: [attacker? uppertext(attacker.a_intent) : "N/A"])"
+		full_admin_message = "[key_name(attacker)] [admin_message] [intent] [zone_sel]"
 	else
 		full_admin_message = "[key_name(victim)] [admin_message]"
 	full_admin_message = append_admin_tools(full_admin_message, attacker||victim, attack_location)
@@ -103,9 +115,9 @@
 		violent = ""
 	admin_attack_log(attacker,
 	                 victim,
-	                 "used \the [weapon] to [violent]inject - [reagents] - [amount_transferred]u transferred",
+	                 "used \the [weapon] - [reagents] - to [violent]inject [amount_transferred]u transferred",
 	                 "was [violent]injected with \the [weapon] - [reagents] - [amount_transferred]u transferred",
-	                 "used \the [weapon] to [violent]inject [reagents] ([amount_transferred]u transferred) into")
+	                 "used \the [weapon] - [reagents] - to [violent]inject [amount_transferred]u into")
 
 /proc/append_admin_tools(var/message, var/mob, var/turf/location)
 	if(location)

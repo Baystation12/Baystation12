@@ -1,24 +1,25 @@
 
 /proc/power_failure(var/announce = 1, var/severity = 2, var/list/affected_z_levels)
 	if(announce)
-		command_announcement.Announce("Abnormal activity detected in the [station_name()]'s powernet. As a precautionary measure, power will be shut off for an indeterminate duration.", "Critical Power Failure", new_sound = 'sound/AI/poweroff.ogg')
+		GLOB.using_map.grid_check_announcement()
 
-	for(var/obj/machinery/power/smes/buildable/S in machines)
+	for(var/obj/machinery/power/smes/buildable/S in SSmachines.machinery)
 		S.energy_fail(rand(15 * severity,30 * severity))
 
 
-	for(var/obj/machinery/power/apc/C in machines)
+	for(var/obj/machinery/power/apc/C in SSmachines.machinery)
 		if(!C.is_critical && (!affected_z_levels || (C.z in affected_z_levels)))
 			C.energy_fail(rand(30 * severity,60 * severity))
 
 /proc/power_restore(var/announce = 1)
 	if(announce)
-		command_announcement.Announce("Power has been restored to the [station_name()]. We apologize for the inconvenience.", "Power Systems Nominal", new_sound = 'sound/AI/poweron.ogg')
-	for(var/obj/machinery/power/apc/C in machines)
+		GLOB.using_map.grid_restored_announcement()
+	for(var/obj/machinery/power/apc/C in SSmachines.machinery)
 		C.failure_timer = 0
-		if(C.cell)
-			C.cell.charge = C.cell.maxcharge
-	for(var/obj/machinery/power/smes/S in machines)
+		var/obj/item/cell/cell = C.get_cell()
+		if(cell)
+			cell.charge = cell.maxcharge
+	for(var/obj/machinery/power/smes/S in SSmachines.machinery)
 		S.failure_timer = 0
 		S.charge = S.capacity
 		S.update_icon()
@@ -27,8 +28,8 @@
 /proc/power_restore_quick(var/announce = 1)
 
 	if(announce)
-		command_announcement.Announce("All SMESs on the [station_name()] have been recharged. We apologize for the inconvenience.", "Power Systems Nominal", new_sound = 'sound/AI/poweron.ogg')
-	for(var/obj/machinery/power/smes/S in machines)
+		command_announcement.Announce("All SMESs on the [station_name()] have been recharged. We apologize for the inconvenience.", "Power Systems Nominal", new_sound = GLOB.using_map.grid_restored_sound)
+	for(var/obj/machinery/power/smes/S in SSmachines.machinery)
 		S.failure_timer = 0
 		S.charge = S.capacity
 		S.output_level = S.output_level_max

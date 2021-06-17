@@ -24,10 +24,10 @@ var/global/datum/getrev/revdata = new()
 					date = unix2date(unix_time)
 			break
 
-	world.log << "Running revision:"
-	world.log << branch
-	world.log << date
-	world.log << revision
+	to_world_log("Running revision:")
+	to_world_log(branch)
+	to_world_log(date)
+	to_world_log(revision)
 
 /client/verb/showrevinfo()
 	set category = "OOC"
@@ -43,4 +43,4 @@ var/global/datum/getrev/revdata = new()
 	else
 		to_chat(src, "<b>Server Revision:</b> Revision Unknown")
 	to_chat(src, "Game ID: <b>[game_id]</b>")
-	to_chat(src, "Current map: [using_map.full_name]")
+	to_chat(src, "Current map: [GLOB.using_map.full_name]")

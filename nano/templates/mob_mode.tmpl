@@ -1,0 +1,94 @@
+<div style="min-width: 480px">
+
+	{{if data.paused}}
+		<h3>{{:data.area_name}} (PAUSED)</h3>
+	{{else}}
+		<h3>{{:data.area_name}}</h3>
+	{{/if}}
+
+	<div class="item" style="padding-top: 10px">
+
+		<div class="itemLabel">
+			Left to spawn:
+		</div>
+
+		<div class="itemContent">
+			{{:helper.link(data.spawn_count, null, {'set_spawn_count' : '1'}, null, null)}}
+		</div>
+
+		<div class="itemLabel">
+			Spawn Interval:
+		</div>
+
+		<div class="itemContent">
+			{{:helper.link(data.interval / 10, null, {'set_spawn_interval' : '1'}, null, null)}}
+		</div>
+
+		<div class="itemLabel">
+			Variation:
+		</div>
+
+		<div class="itemContent">
+			{{:helper.link(data.variation / 10, null, {'set_spawn_time_variation' : '1'}, null, null)}}
+		</div>
+
+		<div class="itemLabel">
+			Radius:
+		</div>
+
+		<div class="itemContent">
+			{{:helper.link(data.radius, null, {'set_radius' : '1'}, null, null)}}
+		</div>
+
+		<div class="itemLabel">
+			Atmos Immunity:
+		</div>
+
+		<div class="itemContent">
+			{{:helper.link(data.atmos_immune ? 'ON' : 'OFF', null, {'atmos_immune' : 1}, null, null)}}
+		</div>
+
+		<div class="itemLabel">
+			Faction:
+		</div>
+
+		<div class="itemContent">
+			{{:helper.link(data.faction, null, {'set_faction' : 1}, null, null)}}
+			{{:helper.link('X', null, {'set_faction' : 'reset'}, null, null)}}
+		</div>
+
+		<div class="itemLabel">
+			Mobs:
+		</div>
+		<div class="item">
+			{{:helper.link('Add Mob', null, {'pick' : '1'}, null, null)}}
+			{{:helper.link('Remove Mob', null, {'remove' : '1'}, null, null)}}
+		</div>
+		<div class="block">
+			{{for data.mobs}}
+				{{:value}}<br>
+			{{/for}}
+		</div>
+		<div class="itemLabel">
+			Spawn Messages:
+		</div>
+		<div class="item">
+			{{:helper.link('Add Message', null, {'add_message' : '1'}, null, null)}}
+			{{:helper.link('Remove Message', null, {'remove_message' : '1'}, null, null)}}
+			{{:helper.link(data.message_class, null, {'set_span_class' : '1'}, null, null)}}
+		</div>
+		<div class="block">
+			{{for data.messages}}
+				"{{:value}}"<br>
+			{{/for}}
+		</div>
+
+		<div class="item">
+			{{:helper.link(data.paused ? 'START' : 'STOP', null, {'pause' : 1}, null, null)}}
+		</div>
+
+		<div class="item">
+			{{:helper.link('Delete Spawner', 'alert', {'delete' : '1'}, null)}}
+		</div>
+	</div>
+</div>

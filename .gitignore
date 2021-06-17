@@ -1,4 +1,4 @@
-#ignore misc BYOND files
+# ignore misc BYOND files
 Thumbs.db
 *.log
 *.int
@@ -8,14 +8,48 @@ Thumbs.db
 *.backup
 *.before
 data/
+dmdoc/
 cfg/
 build_log.txt
 use_map
 stopserver
 reboot_called
 atupdate
-__pycache__
 
 # ignore config, but not subdirs
-config/*
 !config/*/
+config/*
+sql/test_db
+
+# VisualStudioCode
+.vscode/*
+!.vscode/settings.json
+*.code-workspace
+.history
+
+# swap
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-v][a-z]
+[._]sw[a-p]
+
+# session
+Session.vim
+
+# temporary
+.netrwhist
+*~
+
+# auto-generated tag files
+tags
+
+# ignore built libs
+lib/*.dll
+lib/*.so
+
+# python
+*.pyc
+__pycache__
+
+# flyway config
+flyway.conf

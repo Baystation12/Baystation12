@@ -1,4 +1,3 @@
-//There has to be a better way to define this shit. ~ Z
 //can't equip anything
 /mob/living/carbon/alien/attack_ui(slot_id)
 	return
@@ -12,28 +11,10 @@
 		if (I_HELP)
 			help_shake_act(M)
 
-		if (I_GRAB)
-			if (M == src)
-				return
-			var/obj/item/weapon/grab/G = new /obj/item/weapon/grab( M, M, src )
-
-			M.put_in_active_hand(G)
-
-			grabbed_by += G
-			G.affecting = src
-			G.synch()
-
-			LAssailant = M
-
-			playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-			for(var/mob/O in viewers(src, null))
-				if ((O.client && !( O.blinded )))
-					O.show_message("<span class='warning'>\The [M] has grabbed \the [src] passively!</span>", 1)
-
 		else
 			var/damage = rand(1, 9)
 			if (prob(90))
-				if (HULK in M.mutations)
+				if (MUTATION_HULK in M.mutations)
 					damage += 5
 					spawn(0)
 						Paralyse(1)

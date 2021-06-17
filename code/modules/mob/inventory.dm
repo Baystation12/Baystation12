@@ -21,16 +21,20 @@
 //set del_on_fail to have it delete W if it fails to equip
 //set disable_warning to disable the 'you are unable to equip that' warning.
 //unset redraw_mob to prevent the mob from being redrawn at the end.
-/mob/proc/equip_to_slot_if_possible(obj/item/W as obj, slot, del_on_fail = 0, disable_warning = 0, redraw_mob = 1)
+//set force to replace items in the slot and ignore blocking overwear
+/mob/proc/equip_to_slot_if_possible(obj/item/W as obj, slot, del_on_fail = 0, disable_warning = 0, redraw_mob = 1, force = 0)
 	if(!istype(W)) return 0
 
-	if(!W.mob_can_equip(src, slot, disable_warning))
+	if(!W.mob_can_equip(src, slot, disable_warning, force))
 		if(del_on_fail)
 			qdel(W)
 		else
 			if(!disable_warning)
 				to_chat(src, "<span class='warning'>You are unable to equip that.</span>")//Only print if del_on_fail is false
 
+		return 0
+
+	if(!canUnEquip(W))
 		return 0
 
 	equip_to_slot(W, slot, redraw_mob) //This proc should not ever fail.
@@ -44,6 +48,12 @@
 //This is just a commonly used configuration for the equip_to_slot_if_possible() proc, used to equip people when the rounds tarts and when events happen and such.
 /mob/proc/equip_to_slot_or_del(obj/item/W as obj, slot)
 	return equip_to_slot_if_possible(W, slot, 1, 1, 0)
+
+/mob/proc/equip_to_slot_or_store_or_drop(obj/item/W as obj, slot)
+	var/store = equip_to_slot_if_possible(W, slot, 0, 1, 0)
+	if(!store)
+		return equip_to_storage_or_drop(W)
+	return store
 
 //The list of slots by priority. equip_to_appropriate_slot() uses this list. Doesn't matter if a mob type doesn't have a slot.
 var/list/slot_equipment_priority = list( \
@@ -71,10 +81,13 @@ var/list/slot_equipment_priority = list( \
 
 //puts the item "W" into an appropriate slot in a human's inventory
 //returns 0 if it cannot, 1 if successful
-/mob/proc/equip_to_appropriate_slot(obj/item/W)
+/mob/proc/equip_to_appropriate_slot(obj/item/W, var/skip_store = 0)
 	if(!istype(W)) return 0
 
 	for(var/slot in slot_equipment_priority)
+		if(skip_store)
+			if(slot == slot_s_store || slot == slot_l_store || slot == slot_r_store)
+				continue
 		if(equip_to_slot_if_possible(W, slot, del_on_fail=0, disable_warning=1, redraw_mob=1))
 			return 1
 
@@ -82,23 +95,30 @@ var/list/slot_equipment_priority = list( \
 
 /mob/proc/equip_to_storage(obj/item/newitem)
 	// Try put it in their backpack
-	if(istype(src.back,/obj/item/weapon/storage))
-		var/obj/item/weapon/storage/backpack = src.back
+	if(istype(src.back,/obj/item/storage))
+		var/obj/item/storage/backpack = src.back
 		if(backpack.can_be_inserted(newitem, null, 1))
 			newitem.forceMove(src.back)
 			return backpack
 
 	// Try to place it in any item that can store stuff, on the mob.
-	for(var/obj/item/weapon/storage/S in src.contents)
+	for(var/obj/item/storage/S in src.contents)
 		if(S.can_be_inserted(newitem, null, 1))
 			newitem.forceMove(S)
 			return S
+
+/mob/proc/equip_to_storage_or_drop(obj/item/newitem)
+	var/stored = equip_to_storage(newitem)
+	if(!stored && newitem)
+		newitem.dropInto(loc)
+	return stored
 
 //These procs handle putting s tuff in your hand. It's probably best to use these rather than setting l_hand = ...etc
 //as they handle all relevant stuff like adding it to the player's screen and updating their overlays.
 
 //Returns the thing in our active hand
 /mob/proc/get_active_hand()
+	RETURN_TYPE(/obj/item)
 	if(hand)	return l_hand
 	else		return r_hand
 
@@ -163,7 +183,7 @@ var/list/slot_equipment_priority = list( \
 	Removes the object from any slots the mob might have, calling the appropriate icon update proc.
 	Does nothing else.
 
-	>>>> *** DO NOT CALL THIS PROC DIRECTLY *** <<<<
+	*** DO NOT CALL THIS PROC DIRECTLY ***
 
 	It is meant to be called only by other inventory procs.
 	It's probably okay to use it if you are transferring the item between slots on the same mob,
@@ -196,7 +216,7 @@ var/list/slot_equipment_priority = list( \
 	if(!I) //If there's nothing to drop, the drop is automatically successful.
 		return 1
 	var/slot = get_inventory_slot(I)
-	if(!slot)
+	if(!slot && !istype(I.loc, /obj/item/rig_module))
 		return 1 //already unequipped, so success
 	return I.mob_can_unequip(src, slot)
 
@@ -208,11 +228,17 @@ var/list/slot_equipment_priority = list( \
 			break
 	return slot
 
-//This differs from remove_from_mob() in that it checks if the item can be unequipped first.
-/mob/proc/unEquip(obj/item/I, force = 0, var/atom/target = null) //Force overrides NODROP for things like wizarditis and admin undress.
-	if(!(force || canUnEquip(I)))
+//This differs from remove_from_mob() in that it checks if the item can be unequipped first. Use drop_from_inventory if you don't want to check.
+/mob/proc/unEquip(obj/item/I, var/atom/target)
+	if(!canUnEquip(I))
 		return
 	drop_from_inventory(I, target)
+	return 1
+
+/mob/proc/unequip_item(atom/target)
+	if(!canUnEquip(get_active_hand()))
+		return
+	drop_item(target)
 	return 1
 
 //Attemps to remove an object on a mob.
@@ -245,14 +271,36 @@ var/list/slot_equipment_priority = list( \
 
 /mob/proc/get_equipped_items(var/include_carried = 0)
 	. = list()
-	if(slot_back) . += back
-	if(slot_wear_mask) . += wear_mask
+	if(back)      . += back
+	if(wear_mask) . += wear_mask
 
 	if(include_carried)
-		if(slot_l_hand) . += l_hand
-		if(slot_r_hand) . += r_hand
+		if(l_hand) . += l_hand
+		if(r_hand) . += r_hand
 
 /mob/proc/delete_inventory(var/include_carried = FALSE)
 	for(var/entry in get_equipped_items(include_carried))
 		drop_from_inventory(entry)
 		qdel(entry)
+
+// Returns all currently covered body parts
+/mob/proc/get_covered_body_parts()
+	. = 0
+	for(var/entry in get_equipped_items())
+		var/obj/item/I = entry
+		. |= I.body_parts_covered
+
+// Returns the first item which covers any given body part
+/mob/proc/get_covering_equipped_item(var/body_parts)
+	for(var/entry in get_equipped_items())
+		var/obj/item/I = entry
+		if(I.body_parts_covered & body_parts)
+			return I
+
+// Returns all items which covers any given body part
+/mob/proc/get_covering_equipped_items(var/body_parts)
+	. = list()
+	for(var/entry in get_equipped_items())
+		var/obj/item/I = entry
+		if(I.body_parts_covered & body_parts)
+			. += I

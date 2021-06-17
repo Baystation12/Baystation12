@@ -33,8 +33,8 @@
 	to_chat(src, "You drop words into [host]'s mind: \"[message]\"")
 	to_chat(host, "Your own thoughts speak: \"[message]\"")
 
-	for (var/mob/M in player_list)
+	for (var/mob/M in GLOB.player_list)
 		if (istype(M, /mob/new_player))
 			continue
-		else if(M.stat == DEAD && M.is_preference_enabled(/datum/client_preference/ghost_ears))
+		else if(M.stat == DEAD && M.get_preference_value(/datum/client_preference/ghost_ears) == GLOB.PREF_ALL_SPEECH)
 			to_chat(M, "[src.truename] whispers to [host], \"[message]\"")

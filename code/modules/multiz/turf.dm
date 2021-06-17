@@ -7,111 +7,101 @@
 		if(direction == DOWN) //on a turf above, trying to enter
 			return !density
 
-/turf/simulated/open/CanZPass(atom, direction)
+/turf/simulated/open/CanZPass(atom/A, direction)
+	if(locate(/obj/structure/catwalk, src))
+		if(z == A.z)
+			if(direction == DOWN)
+				return 0
+		else if(direction == UP)
+			return 0
 	return 1
 
-/turf/space/CanZPass(atom, direction)
+/turf/space/CanZPass(atom/A, direction)
+	if(locate(/obj/structure/catwalk, src))
+		if(z == A.z)
+			if(direction == DOWN)
+				return 0
+		else if(direction == UP)
+			return 0
 	return 1
 
 /turf/simulated/open
 	name = "open space"
 	icon = 'icons/turf/space.dmi'
 	icon_state = ""
-	plane = SPACE_PLANE
-	density = 0
-	pathweight = 100000 //Seriously, don't try and path over this one numbnuts
+	density = FALSE
+	pathweight = INFINITY //Seriously, don't try and path over this one numbnuts
 
-	var/turf/below
-
-/turf/simulated/open/post_change()
-	..()
-	update()
-
-/turf/simulated/open/initialize()
-	..()
-	update()
-
-/turf/simulated/open/proc/update()
-	below = GetBelow(src)
-	turf_changed_event.register(below, src, /turf/simulated/open/update_icon)
-	var/turf/simulated/T = get_step(src,NORTH)
-	if(T)
-		turf_changed_event.register(T, src, /turf/simulated/open/update_icon)
-	levelupdate()
-	for(var/atom/movable/A in src)
-		A.fall()
-	update_icon()
+	z_flags = ZM_MIMIC_DEFAULTS | ZM_MIMIC_OVERWRITE | ZM_MIMIC_NO_AO | ZM_ALLOW_ATMOS
 
 /turf/simulated/open/update_dirt()
 	return 0
 
-/turf/simulated/open/Entered(var/atom/movable/mover)
+/turf/simulated/open/Entered(var/atom/movable/mover, var/atom/oldloc)
 	..()
-	mover.fall()
+	mover.fall(oldloc)
 
 // Called when thrown object lands on this turf.
-/turf/simulated/open/hitby(var/atom/movable/AM, var/speed)
+/turf/simulated/open/hitby(var/atom/movable/AM)
 	. = ..()
 	AM.fall()
+
 
 // override to make sure nothing is hidden
 /turf/simulated/open/levelupdate()
 	for(var/obj/O in src)
 		O.hide(0)
 
-/turf/simulated/open/update_icon()
-	if(below)
-		underlays = list(image(icon = below.icon, icon_state = below.icon_state))
+/turf/simulated/open/examine(mob/user, distance, infix, suffix)
+	. = ..()
+	if(distance <= 2)
+		var/depth = 1
+		for(var/T = GetBelow(src); isopenspace(T); T = GetBelow(T))
+			depth += 1
+		to_chat(user, "It is about [depth] level\s deep.")
 
-	var/list/noverlays = list()
-	if(!istype(below,/turf/space))
-		noverlays += image(icon =icon, icon_state = "empty", layer = ABOVE_WIRE_LAYER)
+/turf/simulated/open/is_open()
+	return TRUE
 
-	var/turf/simulated/T = get_step(src,NORTH)
-	if(istype(T) && !istype(T,/turf/simulated/open))
-		noverlays += image(icon ='icons/turf/cliff.dmi', icon_state = "metal", layer = ABOVE_WIRE_LAYER)
-
-	var/obj/structure/stairs/S = locate() in below
-	if(S && S.loc == below)
-		var/image/I = image(icon = S.icon, icon_state = "below", dir = S.dir, layer = ABOVE_WIRE_LAYER)
-		I.pixel_x = S.pixel_x
-		I.pixel_y = S.pixel_y
-		noverlays += I
-
-	overlays = noverlays
-
-/turf/simulated/open/attackby(obj/item/C as obj, mob/user as mob)
-	if (istype(C, /obj/item/stack/rods))
+/turf/simulated/open/attackby(obj/item/C, mob/user)
+	if (istype(C, /obj/item/stack/material/rods))
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
 		if(L)
-			return
-		var/obj/item/stack/rods/R = C
+			return L.attackby(C, user)
+		var/obj/item/stack/material/rods/R = C
 		if (R.use(1))
 			to_chat(user, "<span class='notice'>You lay down the support lattice.</span>")
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-			new /obj/structure/lattice(locate(src.x, src.y, src.z))
+			new /obj/structure/lattice(locate(src.x, src.y, src.z), R.material.name)
 		return
 
 	if (istype(C, /obj/item/stack/tile))
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
 		if(L)
 			var/obj/item/stack/tile/floor/S = C
-			if (S.get_amount() < 1)
+			if (!S.use(1))
 				return
 			qdel(L)
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-			S.use(1)
 			ChangeTurf(/turf/simulated/floor/airless)
 			return
 		else
 			to_chat(user, "<span class='warning'>The plating is going to need some support.</span>")
 
 	//To lay cable.
-	if(istype(C, /obj/item/stack/cable_coil))
+	if(isCoil(C))
 		var/obj/item/stack/cable_coil/coil = C
 		coil.turf_place(src, user)
 		return
-	return
+
+	for(var/atom/movable/M in below)
+		if(M.movable_flags & MOVABLE_FLAG_Z_INTERACT)
+			return M.attackby(C, user)
+
+/turf/simulated/open/attack_hand(mob/user)
+	for(var/atom/movable/M in below)
+		if(M.movable_flags & MOVABLE_FLAG_Z_INTERACT)
+			return M.attack_hand(user)
 
 //Most things use is_plating to test if there is a cover tile on top (like regular floors)
 /turf/simulated/open/is_plating()

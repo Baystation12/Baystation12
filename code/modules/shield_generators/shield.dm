@@ -1,48 +1,33 @@
-/obj/effect/shield_impact
-	name = "shield impact"
-	icon = 'icons/obj/machines/shielding.dmi'
-	icon_state = "shield_impact"
-	anchored = 1
-	plane = ABOVE_HUMAN_PLANE
-	layer = ABOVE_HUMAN_LAYER
-	density = 0
-
-
-/obj/effect/shield_impact/New()
-	spawn(2 SECONDS)
-		qdel(src)
-
-
 /obj/effect/shield
 	name = "energy shield"
 	desc = "An impenetrable field of energy, capable of blocking anything as long as it's active."
 	icon = 'icons/obj/machines/shielding.dmi'
 	icon_state = "shield_normal"
-	anchored = 1
-	plane = ABOVE_HUMAN_PLANE
+	anchored = TRUE
 	layer = ABOVE_HUMAN_LAYER
-	density = 1
+	density = TRUE
 	invisibility = 0
 	var/obj/machinery/power/shield_generator/gen = null
 	var/disabled_for = 0
 	var/diffused_for = 0
+	atmos_canpass = CANPASS_PROC
 
 
-/obj/effect/shield/update_icon()
+/obj/effect/shield/on_update_icon()
 	if(gen && gen.check_flag(MODEFLAG_PHOTONIC) && !disabled_for && !diffused_for)
 		set_opacity(1)
 	else
 		set_opacity(0)
 
 	if(gen && gen.check_flag(MODEFLAG_OVERCHARGE))
-		icon_state = "shield_overcharged"
+		color = COLOR_VIOLET
 	else
-		icon_state = "shield_normal"
+		color = COLOR_DEEP_SKY_BLUE
 
 // Prevents shuttles, singularities and pretty much everything else from moving the field segments away.
 // The only thing that is allowed to move us is the Destroy() proc.
-/obj/effect/shield/forceMove(var/newloc, var/qdeled = 0)
-	if(qdeled)
+/obj/effect/shield/forceMove()
+	if(QDELING(src))
 		return ..()
 	return 0
 
@@ -73,7 +58,7 @@
 		gen.damaged_segments |= src
 	disabled_for += duration
 	set_density(0)
-	invisibility = INVISIBILITY_MAXIMUM
+	set_invisibility(INVISIBILITY_MAXIMUM)
 	update_nearby_tiles()
 	update_icon()
 	update_explosion_resistance()
@@ -89,7 +74,7 @@
 
 	if(!disabled_for && !diffused_for)
 		set_density(1)
-		invisibility = 0
+		set_invisibility(0)
 		update_nearby_tiles()
 		update_icon()
 		update_explosion_resistance()
@@ -97,15 +82,18 @@
 
 
 /obj/effect/shield/proc/diffuse(var/duration)
+	if (!gen)
+		return
+
 	// The shield is trying to counter diffusers. Cause lasting stress on the shield.
-	if(gen.check_flag(MODEFLAG_BYPASS) && !diffused_for && !disabled_for)
+	if(gen.check_flag(MODEFLAG_BYPASS) && !disabled_for)
 		take_damage(duration * rand(8, 12), SHIELD_DAMTYPE_EM)
 		return
 
 	diffused_for = max(duration, 0)
 	gen.damaged_segments |= src
 	set_density(0)
-	invisibility = INVISIBILITY_MAXIMUM
+	set_invisibility(INVISIBILITY_MAXIMUM)
 	update_nearby_tiles()
 	update_icon()
 	update_explosion_resistance()
@@ -142,7 +130,8 @@
 
 	damage = round(damage)
 
-	new/obj/effect/shield_impact(get_turf(src))
+	new /obj/effect/temporary(get_turf(src), 2 SECONDS,'icons/obj/machines/shielding.dmi',"shield_impact")
+	impact_effect(round(abs(damage * 2)))
 
 	var/list/field_segments = gen.field_segments
 	switch(gen.take_damage(damage, damtype))
@@ -184,7 +173,7 @@
 
 
 /obj/effect/shield/c_airblock(turf/other)
-	return gen.check_flag(MODEFLAG_ATMOSPHERIC)
+	return gen.check_flag(MODEFLAG_ATMOSPHERIC) ? BLOCKED : 0
 
 
 // EMP. It may seem weak but keep in mind that multiple shield segments are likely to be affected.
@@ -200,7 +189,7 @@
 
 
 // Fire
-/obj/effect/shield/fire_act()
+/obj/effect/shield/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(!disabled_for)
 		take_damage(rand(5,10), SHIELD_DAMTYPE_HEAT)
 
@@ -216,7 +205,7 @@
 
 
 // Attacks with hand tools. Blocked by Hyperkinetic flag.
-/obj/effect/shield/attackby(var/obj/item/weapon/I as obj, var/mob/user as mob)
+/obj/effect/shield/attackby(var/obj/item/I as obj, var/mob/user as mob)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(src)
 
@@ -237,6 +226,7 @@
 	if(!gen)
 		qdel(src)
 		return 0
+	impact_effect(2)
 	mover.shield_impact(src)
 	return ..()
 
@@ -264,6 +254,8 @@
 	else
 		explosion_resistance = 0
 
+/obj/effect/shield/get_explosion_resistance()
+	return explosion_resistance
 
 // Shield collision checks below
 
@@ -311,3 +303,29 @@
 	visible_message("<span class='danger'>\The [src] breaks into dust!</span>")
 	make_debris()
 	qdel(src)
+
+// Small visual effect, makes the shield tiles brighten up by changing color for a moment, and spreads to nearby shields.
+/obj/effect/shield/proc/impact_effect(var/i, var/list/affected_shields = list())
+	i = between(1, i, 10)
+	var/backcolor = color
+	if(gen && gen.check_flag(MODEFLAG_OVERCHARGE))
+		color = COLOR_PINK
+	else
+		color = COLOR_CYAN_BLUE
+	animate(src, color = backcolor, time = 1 SECOND)
+	affected_shields |= src
+	i--
+	if(i)
+		addtimer(CALLBACK(src, .proc/spread_impact_effect, i, affected_shields), 2)
+
+/obj/effect/shield/proc/spread_impact_effect(var/i, var/list/affected_shields = list())
+	for(var/direction in GLOB.cardinal)
+		var/turf/T = get_step(src, direction)
+		if(T) // Incase we somehow stepped off the map.
+			for(var/obj/effect/shield/F in T)
+				if(!(F in affected_shields))
+					F.impact_effect(i, affected_shields) // Spread the effect to them
+
+/obj/effect/shield/attack_hand(var/mob/living/user)
+	impact_effect(3) // Harmless, but still produces the 'impact' effect.
+	..()

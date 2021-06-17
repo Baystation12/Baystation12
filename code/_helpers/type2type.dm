@@ -1,55 +1,12 @@
 /*
  * Holds procs designed to change one type of value, into another.
  * Contains:
- *			hex2num & num2hex
  *			text2list & list2text
  *			file2list
  *			angle2dir
  *			angle2text
  *			worldtime2text
  */
-
-// Returns an integer given a hexadecimal number string as input.
-/proc/hex2num(hex)
-	if (!istext(hex))
-		return
-
-	var/num   = 0
-	var/power = 1
-	var/i     = length(hex)
-
-	while (i)
-		var/char = text2ascii(hex, i)
-		switch(char)
-			if(48)                                  // 0 -- do nothing
-			if(49 to 57) num += (char - 48) * power // 1-9
-			if(97,  65)  num += power * 10          // A
-			if(98,  66)  num += power * 11          // B
-			if(99,  67)  num += power * 12          // C
-			if(100, 68)  num += power * 13          // D
-			if(101, 69)  num += power * 14          // E
-			if(102, 70)  num += power * 15          // F
-			else
-				return
-		power *= 16
-		i--
-	return num
-
-// Returns the hex value of a number given a value assumed to be a base-ten value
-/proc/num2hex(num, padlength)
-	var/global/list/hexdigits = list("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F")
-
-	. = ""
-	while(num > 0)
-		var/hexdigit = hexdigits[(num & 0xF) + 1]
-		. = "[hexdigit][.]"
-		num >>= 4 //go to the next half-byte
-
-	//pad with zeroes
-	var/left = padlength - length(.)
-	while (left-- > 0)
-		. = "0[.]"
-
 
 /proc/text2numlist(text, delimiter="\n")
 	var/list/num_list = list()
@@ -59,7 +16,7 @@
 
 // Splits the text of a file at seperator and returns them in a list.
 /proc/file2list(filename, seperator="\n")
-	return splittext(return_file_text(filename),seperator)
+	return splittext(file2text(filename) || "", seperator)
 
 // Turns a direction into text
 /proc/num2dir(direction)
@@ -69,7 +26,7 @@
 		if (4.0) return EAST
 		if (8.0) return WEST
 		else
-			world.log << "UNKNOWN DIRECTION: [direction]"
+			to_world_log("UNKNOWN DIRECTION: [direction]")
 
 // Turns a direction into text
 /proc/dir2text(direction)
@@ -82,6 +39,9 @@
 		if (SOUTHEAST) return "southeast"
 		if (NORTHWEST) return "northwest"
 		if (SOUTHWEST) return "southwest"
+		if (UP)        return "up"
+		if (DOWN)      return "down"
+	return "unknown ([direction])"
 
 // Turns text into proper directions
 /proc/text2dir(direction)
@@ -147,7 +107,6 @@
 	if (rights & R_SOUNDS)      . += "[seperator]+SOUND"
 	if (rights & R_SPAWN)       . += "[seperator]+SPAWN"
 	if (rights & R_MOD)         . += "[seperator]+MODERATOR"
-	if (rights & R_MENTOR)      . += "[seperator]+MENTOR"
 	return .
 
 // heat2color functions. Adapted from: http://www.tannerhelland.com/4435/convert-temperature-rgb-algorithm-code/
@@ -222,9 +181,16 @@
 /proc/isLeap(y)
 	return ((y) % 4 == 0 && ((y) % 100 != 0 || (y) % 400 == 0))
 
-/proc/atomtype2nameassoclist(var/atom_type)
+/proc/atomtypes2nameassoclist(var/list/atom_types)
 	. = list()
-	for(var/sub_atom_type in typesof(atom_type))
-		var/atom/A = sub_atom_type
-		.[initial(A.name)] = sub_atom_type
+	for(var/atom_type in atom_types)
+		var/atom/A = atom_type
+		.[initial(A.name)] = atom_type
 	. = sortAssoc(.)
+
+/proc/atomtype2nameassoclist(var/atom_type)
+	return atomtypes2nameassoclist(typesof(atom_type))
+
+//Splits the text of a file at seperator and returns them in a list.
+/world/proc/file2list(filename, seperator="\n")
+	return splittext(file2text(filename), seperator)

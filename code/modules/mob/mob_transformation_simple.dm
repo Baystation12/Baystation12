@@ -11,9 +11,6 @@
 	if(!new_type)
 		new_type = input("Mob type path:", "Mob type") as text|null
 
-	if(istext(new_type))
-		new_type = text2path(new_type)
-
 	if( !ispath(new_type) )
 		to_chat(usr, "Invalid type path (new_type = [new_type]) in change_mob_type(). Contact a coder.")
 		return
@@ -34,10 +31,10 @@
 		return
 
 	if( istext(new_name) )
-		M.name = new_name
+		M.SetName(new_name)
 		M.real_name = new_name
 	else
-		M.name = src.name
+		M.SetName(src.name)
 		M.real_name = src.real_name
 
 	if(src.dna)
@@ -53,6 +50,5 @@
 		H.set_species(subspecies)
 
 	if(delete_old_mob)
-		spawn(1)
-			qdel(src)
+		QDEL_IN(src, 1)
 	return M

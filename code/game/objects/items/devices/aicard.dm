@@ -1,4 +1,4 @@
-/obj/item/weapon/aicard
+/obj/item/aicard
 	name = "inteliCard"
 	icon = 'icons/obj/pda.dmi'
 	icon_state = "aicard" // aicard-full
@@ -10,25 +10,18 @@
 
 	var/mob/living/silicon/ai/carded_ai
 
-/obj/item/weapon/aicard/attack(mob/living/silicon/decoy/M as mob, mob/user as mob)
-	if (!istype (M, /mob/living/silicon/decoy))
-		return ..()
-	else
-		M.death()
-		to_chat(user, "<b>ERROR ERROR ERROR</b>")
-
-/obj/item/weapon/aicard/attack_self(mob/user)
+/obj/item/aicard/attack_self(mob/user)
 
 	ui_interact(user)
 
-/obj/item/weapon/aicard/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = inventory_state)
+/obj/item/aicard/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.inventory_state)
 	var/data[0]
 	data["has_ai"] = carded_ai != null
 	if(carded_ai)
 		data["name"] = carded_ai.name
 		data["hardware_integrity"] = carded_ai.hardware_integrity()
 		data["backup_capacitor"] = carded_ai.backup_capacitor()
-		data["radio"] = !carded_ai.aiRadio.disabledAi
+		data["radio"] = !carded_ai.ai_radio.disabledAi
 		data["wireless"] = !carded_ai.control_disabled
 		data["operational"] = carded_ai.stat != DEAD
 		data["flushing"] = flush
@@ -39,14 +32,14 @@
 		data["laws"] = laws
 		data["has_laws"] = laws.len
 
-	ui = nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "aicard.tmpl", "[name]", 600, 400, state = state)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/item/weapon/aicard/Topic(href, href_list, state)
+/obj/item/aicard/Topic(href, href_list, state)
 	if(..())
 		return 1
 
@@ -66,9 +59,9 @@
 				sleep(10)
 			flush = 0
 	if (href_list["radio"])
-		carded_ai.aiRadio.disabledAi = text2num(href_list["radio"])
-		to_chat(carded_ai, "<span class='warning'>Your Subspace Transceiver has been [carded_ai.aiRadio.disabledAi ? "disabled" : "enabled"]!</span>")
-		to_chat(user, "<span class='notice'>You [carded_ai.aiRadio.disabledAi ? "disable" : "enable"] the AI's Subspace Transceiver.</span>")
+		carded_ai.ai_radio.disabledAi = text2num(href_list["radio"])
+		to_chat(carded_ai, "<span class='warning'>Your Subspace Transceiver has been [carded_ai.ai_radio.disabledAi ? "disabled" : "enabled"]!</span>")
+		to_chat(user, "<span class='notice'>You [carded_ai.ai_radio.disabledAi ? "disable" : "enable"] the AI's Subspace Transceiver.</span>")
 	if (href_list["wireless"])
 		carded_ai.control_disabled = text2num(href_list["wireless"])
 		to_chat(carded_ai, "<span class='warning'>Your wireless interface has been [carded_ai.control_disabled ? "disabled" : "enabled"]!</span>")
@@ -76,7 +69,7 @@
 		update_icon()
 	return 1
 
-/obj/item/weapon/aicard/update_icon()
+/obj/item/aicard/on_update_icon()
 	overlays.Cut()
 	if(carded_ai)
 		if (!carded_ai.control_disabled)
@@ -88,7 +81,7 @@
 	else
 		icon_state = "aicard"
 
-/obj/item/weapon/aicard/proc/grab_ai(var/mob/living/silicon/ai/ai, var/mob/living/user)
+/obj/item/aicard/proc/grab_ai(var/mob/living/silicon/ai/ai, var/mob/living/user)
 	if(!ai.client)
 		to_chat(user, "<span class='danger'>ERROR:</span> AI [ai.name] is offline. Unable to download.")
 		return 0
@@ -97,7 +90,7 @@
 		to_chat(user, "<span class='danger'>Transfer failed:</span> Existing AI found on remote terminal. Remove existing AI to install a new one.")
 		return 0
 
-	if(ai.malfunctioning)
+	if(ai.malfunctioning && ai.uncardable)
 		to_chat(user, "<span class='danger'>ERROR:</span> Remote transfer interface disabled.")
 		return 0
 
@@ -106,7 +99,7 @@
 
 	ai.carded = 1
 	admin_attack_log(user, ai, "Carded with [src.name]", "Was carded with [src.name]", "used the [src.name] to card")
-	src.name = "[initial(name)] - [ai.name]"
+	src.SetName("[initial(name)] - [ai.name]")
 
 	ai.forceMove(src)
 	ai.destroy_eyeobj(src)
@@ -121,34 +114,32 @@
 	if(user.client)
 		to_chat(user, "<span class='notice'><b>Transfer successful:</b></span> [ai.name] ([rand(1000,9999)].exe) removed from host terminal and stored within local memory.")
 
-	ai.canmove = 1
 	update_icon()
 	return 1
 
-/obj/item/weapon/aicard/proc/clear()
+/obj/item/aicard/proc/clear()
 	if(carded_ai && istype(carded_ai.loc, /turf))
-		carded_ai.canmove = 0
 		carded_ai.carded = 0
-	name = initial(name)
+	SetName(initial(name))
 	carded_ai.calculate_power_usage()
 	carded_ai = null
 	update_icon()
 
-/obj/item/weapon/aicard/see_emote(mob/living/M, text)
+/obj/item/aicard/see_emote(mob/living/M, text)
 	if(carded_ai && carded_ai.client)
 		var/rendered = "<span class='message'>[text]</span>"
 		carded_ai.show_message(rendered, 2)
 	..()
 
-/obj/item/weapon/aicard/show_message(msg, type, alt, alt_type)
+/obj/item/aicard/show_message(msg, type, alt, alt_type)
 	if(carded_ai && carded_ai.client)
 		var/rendered = "<span class='message'>[msg]</span>"
 		carded_ai.show_message(rendered, type)
 	..()
 
-/obj/item/weapon/aicard/relaymove(var/mob/user, var/direction)
+/obj/item/aicard/relaymove(var/mob/user, var/direction)
 	if(user.stat || user.stunned)
 		return
-	var/obj/item/weapon/rig/rig = src.get_rig()
+	var/obj/item/rig/rig = src.get_rig()
 	if(istype(rig))
 		rig.forced_move(direction, user)

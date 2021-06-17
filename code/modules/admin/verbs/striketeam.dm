@@ -10,7 +10,7 @@ var/const/commandos_possible = 6 //if more Commandos are needed in the future
 		to_chat(src, "Only administrators may use this command.")
 		return
 
-	if(!ticker)
+	if(GAME_STATE < RUNLEVEL_GAME)
 		to_chat(usr, "<font color='red'>The game hasn't started yet!</font>")
 		return
 
@@ -18,17 +18,16 @@ var/const/commandos_possible = 6 //if more Commandos are needed in the future
 		to_chat(usr, "<font color='red'>There are [(6000-world.time)/10] seconds remaining before it may be called.</font>")
 		return
 
-	var/datum/antagonist/deathsquad/team
-
 	var/choice = input(usr, "Select type of strike team:") as null|anything in list("Heavy Asset Protection", "Mercenaries")
 	if(!choice)
 		return
 
+	var/datum/antagonist/deathsquad/team
 	switch(choice)
 		if("Heavy Asset Protection")
-			team = deathsquad
+			team = GLOB.deathsquad
 		if("Mercenaries")
-			team = commandos
+			team = GLOB.commandos
 		else
 			return
 

@@ -5,11 +5,16 @@ var/list/ventcrawl_machinery = list(
 
 // Vent crawling whitelisted items, whoo
 /mob/living/var/list/can_enter_vent_with = list(
-	/obj/item/weapon/implant,
+	/obj/item/implant,
 	/obj/item/device/radio/borg,
-	/obj/item/weapon/holder,
+	/obj/item/holder,
 	/obj/machinery/camera,
-	/mob/living/simple_animal/borer
+	/mob/living/simple_animal/borer,
+	/obj/item/clothing/head/culthood,
+	/obj/item/clothing/suit/cultrobes,
+	/obj/item/book/tome,
+	/obj/item/paper/,
+	/obj/item/melee/cultblade
 	)
 
 /mob/living/var/list/icon/pipes_shown = list()
@@ -37,7 +42,7 @@ var/list/ventcrawl_machinery = list(
 
 /mob/living/carbon/slime/can_ventcrawl()
 	if(Victim)
-		to_chat(src, "<span class='warning'>You cannot ventcrawl while feeding.</span>")
+		to_chat(src, SPAN_WARNING("You cannot ventcrawl while feeding."))
 		return FALSE
 	. = ..()
 
@@ -46,18 +51,18 @@ var/list/ventcrawl_machinery = list(
 		return !get_inventory_slot(carried_item)
 
 /mob/living/carbon/is_allowed_vent_crawl_item(var/obj/item/carried_item)
-	if((carried_item in internal_organs) || (carried_item in stomach_contents))
-		return 1
-	return ..()
+	return (carried_item in internal_organs) || ..()
 
 /mob/living/carbon/human/is_allowed_vent_crawl_item(var/obj/item/carried_item)
+	var/obj/item/organ/internal/stomach/stomach = internal_organs_by_name[BP_STOMACH]
+	if(stomach && (carried_item in stomach.contents))
+		return TRUE
 	if(carried_item in organs)
-		return 1
-	return ..()
-
-/mob/living/simple_animal/spiderbot/is_allowed_vent_crawl_item(var/obj/item/carried_item)
-	if(carried_item in list(held_item, radio, connected_ai, cell, camera, mmi))
-		return 1
+		return TRUE
+	if(carried_item in list(w_uniform, gloves, glasses, wear_mask, l_ear, r_ear, belt, l_store, r_store))
+		return TRUE
+	if(carried_item in list(l_hand,r_hand))
+		return carried_item.w_class <= ITEM_SIZE_NORMAL
 	return ..()
 
 /mob/living/proc/ventcrawl_carry()
@@ -86,7 +91,7 @@ var/list/ventcrawl_machinery = list(
 		pipe = pipes[1]
 	else
 		pipe = input("Crawl Through Vent", "Pick a pipe") as null|anything in pipes
-	if(canmove && pipe)
+	if(!is_physically_disabled() && pipe)
 		return pipe
 
 /mob/living/carbon/alien/ventcrawl_carry()
@@ -137,7 +142,7 @@ var/list/ventcrawl_machinery = list(
 						to_chat(src, "<span class='warning'>You feel a strong current pushing you away from the vent.</span>")
 					if(HAZARD_HIGH_PRESSURE to INFINITY)
 						to_chat(src, "<span class='danger'>You feel a roaring wind pushing you away from the vent!</span>")
-			if(!do_after(src, 45, vent_found, 1, 1))
+			if(!do_after(src, 45, vent_found))
 				return
 			if(!can_ventcrawl())
 				return
@@ -162,7 +167,7 @@ var/list/ventcrawl_machinery = list(
 			if(!A.pipe_image)
 				A.pipe_image = image(A, A.loc, dir = A.dir)
 			A.pipe_image.layer = ABOVE_LIGHTING_LAYER
-			A.pipe_image.plane = LIGHTING_PLANE
+			A.pipe_image.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 			pipes_shown += A.pipe_image
 			client.images += A.pipe_image
 

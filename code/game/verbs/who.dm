@@ -8,8 +8,13 @@
 	var/list/Lines = list()
 
 	if(check_rights(R_INVESTIGATE, 0))
-		for(var/client/C in clients)
+		for(var/client/C in GLOB.clients)
 			var/entry = "\t[C.key]"
+			if(!C.mob) //If mob is null, print error and skip rest of info for client.
+				entry += " - <font color='red'><i>HAS NO MOB</i></font>"
+				Lines += entry
+				continue
+
 			entry += " - Playing as [C.mob.real_name]"
 			switch(C.mob.stat)
 				if(UNCONSCIOUS)
@@ -44,14 +49,16 @@
 			entry += " (<A HREF='?_src_=holder;adminmoreinfo=\ref[C.mob]'>?</A>)"
 			Lines += entry
 	else
-		for(var/client/C in clients)
-			Lines += C.key
+		for(var/client/C in GLOB.clients)
+			if(!C.is_stealthed())
+				Lines += C.key
 
 	for(var/line in sortList(Lines))
 		msg += "[line]\n"
 
 	msg += "<b>Total Players: [length(Lines)]</b>"
 	to_chat(src, msg)
+
 /client/verb/staffwho()
 	set category = "Admin"
 	set name = "Staffwho"
@@ -61,7 +68,7 @@
 	var/total_staff = 0
 	var/can_investigate = check_rights(R_INVESTIGATE, 0)
 
-	for(var/client/C in admins)
+	for(var/client/C in GLOB.admins)
 		var/line = list()
 		if(!can_investigate && C.is_stealthed())
 			continue
@@ -70,11 +77,11 @@
 			line += "\t[C] is \an <b>["\improper[C.holder.rank]"]</b>"
 		else
 			line += "\t[C] is \an ["\improper[C.holder.rank]"]"
-		if(C.is_afk())
-			line += can_investigate ? " (AFK - [C.inactivity2text()])" : "(AFK)"
-		else
+		if(!C.is_afk())
 			active_staff++
 		if(can_investigate)
+			if(C.is_afk())
+				line += " (AFK - [C.inactivity2text()])"
 			if(isghost(C.mob))
 				line += " - Observing"
 			else if(istype(C.mob,/mob/new_player))
@@ -83,6 +90,14 @@
 				line += " - Playing"
 			if(C.is_stealthed())
 				line += " (Stealthed)"
+			if(C.get_preference_value(/datum/client_preference/show_ooc) == GLOB.PREF_HIDE)
+				line += " <font color='#002eb8'><b><s>(OOC)</s></b></font>"
+			if(C.get_preference_value(/datum/client_preference/show_looc) == GLOB.PREF_HIDE)
+				line += " <font color='#3a7496'><b><s>(LOOC)</s></b></font>"
+			if(C.get_preference_value(/datum/client_preference/show_aooc) == GLOB.PREF_HIDE)
+				line += " <font color='#960018'><b><s>(AOOC)</s></b></font>"
+			if(C.get_preference_value(/datum/client_preference/show_dsay) == GLOB.PREF_HIDE)
+				line += " <font color='#530fad'><b><s>(DSAY)</s></b></font>"
 		line = jointext(line,null)
 		if(check_rights(R_ADMIN,0,C))
 			msg.Insert(1, line)

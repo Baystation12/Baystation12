@@ -1,167 +1,153 @@
 /* Types of tanks!
  * Contains:
+ *		Scrubber
  *		Oxygen
  *		Anesthetic
  *		Air
  *		Phoron
+ *		Hydrogen
  *		Emergency Oxygen
  */
+
+
+/obj/item/tank/scrubber
+	name = "high capacity gas tank"
+	desc = "An unwieldy tank for lots of gas, although not lots of GAS."
+	icon_state = "scrubber"
+	w_class = ITEM_SIZE_HUGE
+	slot_flags = 0
+	volume = 450
 
 /*
  * Oxygen
  */
-/obj/item/weapon/tank/oxygen
+/obj/item/tank/oxygen
 	name = "oxygen tank"
 	desc = "A tank of oxygen."
-	icon_state = "oxygen"
+	icon_state = GAS_OXYGEN
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
+	starting_pressure = list(GAS_OXYGEN = 6*ONE_ATMOSPHERE)
+	volume = 180
 
-
-/obj/item/weapon/tank/oxygen/New()
-	..()
-	air_contents.adjust_gas("oxygen", (6*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
-
-
-/obj/item/weapon/tank/oxygen/yellow
+/obj/item/tank/oxygen/yellow
 	desc = "A tank of oxygen. This one is yellow."
 	icon_state = "oxygen_f"
-
-/obj/item/weapon/tank/oxygen/red
-	desc = "A tank of oxygen. This one is red."
-	icon_state = "oxygen_fr"
-
 
 /*
  * Anesthetic
  */
-/obj/item/weapon/tank/anesthetic
+/obj/item/tank/anesthetic
 	name = "anesthetic tank"
 	desc = "A tank with an N2O/O2 gas mix."
 	icon_state = "anesthetic"
 	item_state = "an_tank"
-
-/obj/item/weapon/tank/anesthetic/New()
-	..()
-
-	air_contents.gas["oxygen"] = (3*ONE_ATMOSPHERE)*70/(R_IDEAL_GAS_EQUATION*T20C) * O2STANDARD
-	air_contents.gas["sleeping_agent"] = (3*ONE_ATMOSPHERE)*70/(R_IDEAL_GAS_EQUATION*T20C) * N2STANDARD
-	air_contents.update_values()
-
-	return
+	starting_pressure = list(GAS_OXYGEN = 6*ONE_ATMOSPHERE*O2STANDARD, GAS_N2O = 6*ONE_ATMOSPHERE*N2STANDARD)
+	volume = 270
 
 /*
  * Air
  */
-/obj/item/weapon/tank/air
+/obj/item/tank/air
 	name = "air tank"
 	desc = "Mixed anyone?"
-	icon_state = "oxygen"
-
-/obj/item/weapon/tank/air/New()
-	..()
-
-	src.air_contents.adjust_multi("oxygen", (6*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C) * O2STANDARD, "nitrogen", (6*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C) * N2STANDARD)
-
-	return
-
+	icon_state = GAS_OXYGEN
+	starting_pressure = list(GAS_OXYGEN = 6*ONE_ATMOSPHERE*O2STANDARD, GAS_NITROGEN = 6*ONE_ATMOSPHERE*N2STANDARD)
+	volume = 180
 
 /*
  * Phoron
  */
-/obj/item/weapon/tank/phoron
+/obj/item/tank/phoron
 	name = "phoron tank"
 	desc = "Contains dangerous phoron. Do not inhale. Warning: extremely flammable."
 	icon_state = "phoron"
 	gauge_icon = null
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = null	//they have no straps!
+	starting_pressure = list(GAS_PHORON = 3*ONE_ATMOSPHERE)
 
-
-/obj/item/weapon/tank/phoron/New()
-	..()
-
-	src.air_contents.adjust_gas("phoron", (3*ONE_ATMOSPHERE)*70/(R_IDEAL_GAS_EQUATION*T20C))
-	return
-
-/obj/item/weapon/tank/phoron/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	..()
-
-	if (istype(W, /obj/item/weapon/flamethrower))
-		var/obj/item/weapon/flamethrower/F = W
-		if ((!F.status)||(F.ptank))	return
-		src.master = F
-		F.ptank = src
-		user.remove_from_mob(src)
-		src.loc = F
-	return
+/*
+ * Hydrogen
+ */
+/obj/item/tank/hydrogen
+	name = "hydrogen tank"
+	desc = "Contains hydrogen. Warning: flammable."
+	icon_state = "hydrogen"
+	gauge_icon = null
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
+	slot_flags = null
+	starting_pressure = list(GAS_HYDROGEN = 3*ONE_ATMOSPHERE)
 
 /*
  * Emergency Oxygen
  */
-/obj/item/weapon/tank/emergency
+/obj/item/tank/emergency
 	name = "emergency tank"
 	icon_state = "emergency"
 	gauge_icon = "indicator_emergency"
 	gauge_cap = 4
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	w_class = ITEM_SIZE_SMALL
-	force = 4
+	force = 5
+	attack_cooldown = DEFAULT_WEAPON_COOLDOWN
+	melee_accuracy_bonus = -10
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
-	volume = 2 //Tiny. Real life equivalents only have 21 breaths of oxygen in them. They're EMERGENCY tanks anyway -errorage (dangercon 2011)
+	volume = 40 //Tiny. Real life equivalents only have 21 breaths of oxygen in them. They're EMERGENCY tanks anyway -errorage (dangercon 2011)
 
-/obj/item/weapon/tank/emergency/oxygen
+/obj/item/tank/emergency/oxygen
 	name = "emergency oxygen tank"
 	desc = "Used for emergencies. Contains very little oxygen, so try to conserve it until you actually need it."
 	icon_state = "emergency"
 	gauge_icon = "indicator_emergency"
+	starting_pressure = list(GAS_OXYGEN = 10*ONE_ATMOSPHERE)
 
-/obj/item/weapon/tank/emergency/oxygen/New()
-	..()
-	src.air_contents.adjust_gas("oxygen", (3*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
-
-/obj/item/weapon/tank/emergency/oxygen/engi
+/obj/item/tank/emergency/oxygen/engi
 	name = "extended-capacity emergency oxygen tank"
 	icon_state = "emergency_engi"
-	volume = 6
+	volume = 60
 
-/obj/item/weapon/tank/emergency/oxygen/double
+/obj/item/tank/emergency/oxygen/double
 	name = "double emergency oxygen tank"
 	icon_state = "emergency_double"
 	gauge_icon = "indicator_emergency_double"
-	volume = 10
+	volume = 90
+	w_class = ITEM_SIZE_NORMAL
 
+/obj/item/tank/emergency/oxygen/double/red	//firefighting tank, fits on belt, back or suitslot
+	name = "self contained breathing apparatus"
+	desc = "A self contained breathing apparatus, well known as SCBA. Generally filled with oxygen."
+	icon_state = "oxygen_fr"
+	slot_flags = SLOT_BELT | SLOT_BACK
 
-/obj/item/weapon/tank/emergency/nitrogen
+/obj/item/tank/emergency/nitrogen
 	name = "emergency nitrogen tank"
 	desc = "An emergency air tank hastily painted red and issued to Vox crewmembers."
 	icon_state = "emergency_nitro"
 	gauge_icon = "indicator_emergency"
+	starting_pressure = list(GAS_NITROGEN = 10*ONE_ATMOSPHERE)
 
-/obj/item/weapon/tank/emergency/nitrogen/New()
-	..()
-	src.air_contents.adjust_gas("nitrogen", (3*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
-
-
-/obj/item/weapon/tank/emergency/nitrogen/double
+/obj/item/tank/emergency/nitrogen/double
 	name = "double emergency nitrogen tank"
 	icon_state = "emergency_double_nitrogen"
 	gauge_icon = "indicator_emergency_double"
-	volume = 10
+	volume = 60
 
+/obj/item/tank/emergency/air_sac
+	name = "air sac"
+	desc = "A small, compressed air sac that fills with breathable air, to be used in emergencies."
+	icon_state = "air_sac"
+	gauge_icon = "indicator_emergency"
+	volume = 20
+	unacidable = TRUE
 
 /*
  * Nitrogen
  */
-/obj/item/weapon/tank/nitrogen
+/obj/item/tank/nitrogen
 	name = "nitrogen tank"
 	desc = "A tank of nitrogen."
-	icon_state = "oxygen_fr"
+	icon_state = "nitrogen"
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
-
-
-/obj/item/weapon/tank/nitrogen/New()
-	..()
-
-	src.air_contents.adjust_gas("nitrogen", (3*ONE_ATMOSPHERE)*70/(R_IDEAL_GAS_EQUATION*T20C))
-	return
+	starting_pressure = list(GAS_NITROGEN = 10*ONE_ATMOSPHERE)
+	volume = 180

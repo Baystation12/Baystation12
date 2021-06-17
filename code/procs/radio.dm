@@ -8,7 +8,7 @@
 	if(radio_controller)
 		radio_controller.remove_object(source, frequency)
 
-/proc/get_frequency_name(var/display_freq)
+/proc/get_frequency_default_name(var/display_freq)
 	var/freq_text
 
 	// the name of the channel
@@ -38,7 +38,7 @@
 
 /proc/get_message_server(z)
 	if(message_servers)
-		var/list/zlevels = using_map.contact_levels
+		var/list/zlevels = GLOB.using_map.contact_levels
 		if(z)
 			zlevels = GetConnectedZlevels(z)
 		for (var/obj/machinery/message_server/MS in message_servers)

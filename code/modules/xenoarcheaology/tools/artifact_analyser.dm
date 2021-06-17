@@ -1,10 +1,10 @@
 /obj/machinery/artifact_analyser
 	name = "Anomaly Analyser"
 	desc = "Studies the emissions of anomalous materials to discover their uses."
-	icon = 'icons/obj/virology.dmi'
-	icon_state = "isolator"
-	anchored = 1
-	density = 1
+	icon = 'icons/obj/xenoarchaeology.dmi'
+	icon_state = "xenoarch_console"
+	anchored = TRUE
+	density = TRUE
 	var/scan_in_progress = 0
 	var/scan_num = 0
 	var/obj/scanned_obj
@@ -14,8 +14,8 @@
 	var/obj/scanned_object
 	var/report_num = 0
 
-/obj/machinery/artifact_analyser/initialize()
-	..()
+/obj/machinery/artifact_analyser/Initialize()
+	. = ..()
 	reconnect_scanner()
 
 /obj/machinery/artifact_analyser/proc/reconnect_scanner()
@@ -24,15 +24,14 @@
 	if(!owned_scanner)
 		owned_scanner = locate(/obj/machinery/artifact_scanpad) in orange(1, src)
 
-/obj/machinery/artifact_analyser/attack_hand(var/mob/user as mob)
-	src.add_fingerprint(user)
+/obj/machinery/artifact_analyser/DefaultTopicState()
+	return GLOB.physical_state
+
+/obj/machinery/artifact_analyser/interface_interact(var/mob/user)
 	interact(user)
+	return TRUE
 
 /obj/machinery/artifact_analyser/interact(mob/user)
-	if(stat & (NOPOWER|BROKEN) || get_dist(src, user) > 1)
-		user.unset_machine(src)
-		return
-
 	var/dat = "<B>Anomalous material analyser</B><BR>"
 	dat += "<HR>"
 	if(!owned_scanner)
@@ -49,12 +48,14 @@
 
 	dat += "<br>"
 	dat += "<hr>"
-	dat += "<a href='?src=\ref[src]'>Refresh</a> <a href='?src=\ref[src];close=1'>Close</a>"
-	user << browse(dat, "window=artanalyser;size=450x500")
+	dat += "<a href='?src=\ref[src];close=1'>Close</a>"
+	var/datum/browser/popup = new(user, "artanalyser", "Artifact Analyzer", 450, 500)
+	popup.set_content(dat)
+	popup.open()
 	user.set_machine(src)
 	onclose(user, "artanalyser")
 
-/obj/machinery/artifact_analyser/process()
+/obj/machinery/artifact_analyser/Process()
 	if(scan_in_progress && world.time > scan_completion_time)
 		scan_in_progress = 0
 		updateDialog()
@@ -70,23 +71,21 @@
 			results = get_scan_info(scanned_object)
 
 		src.visible_message("<b>[name]</b> states, \"Scanning complete.\"")
-		var/obj/item/weapon/paper/P = new(src.loc)
-		P.name = "[src] report #[++report_num]"
+		var/obj/item/paper/P = new(src.loc)
+		P.SetName("[src] report #[++report_num]")
 		P.info = "<b>[src] analysis report #[report_num]</b><br>"
 		P.info += "<br>"
 		P.info += "\icon[scanned_object] [results]"
-		P.stamped = list(/obj/item/weapon/stamp)
-		P.overlays = list("paper_stamped")
+		P.stamped = list(/obj/item/stamp)
+		P.queue_icon_update()
 
 		if(scanned_object && istype(scanned_object, /obj/machinery/artifact))
 			var/obj/machinery/artifact/A = scanned_object
-			A.anchored = 0
+			A.anchored = FALSE
 			A.being_used = 0
 			scanned_object = null
 
-/obj/machinery/artifact_analyser/Topic(href, href_list)
-	if(..())
-		return 1
+/obj/machinery/artifact_analyser/OnTopic(user, href_list)
 	if(href_list["begin_scan"])
 		if(!owned_scanner)
 			reconnect_scanner()
@@ -102,7 +101,7 @@
 					if(A.being_used)
 						artifact_in_use = 1
 					else
-						A.anchored = 1
+						A.anchored = TRUE
 						A.being_used = 1
 
 				if(artifact_in_use)
@@ -115,15 +114,18 @@
 				break
 			if(!scanned_object)
 				src.visible_message("<b>[name]</b> states, \"Unable to isolate scan target.\"")
-	if(href_list["halt_scan"])
+		. = TOPIC_REFRESH
+	else if(href_list["halt_scan"])
 		scan_in_progress = 0
 		src.visible_message("<b>[name]</b> states, \"Scanning halted.\"")
+		. = TOPIC_REFRESH
 
-	if(href_list["close"])
-		usr.unset_machine(src)
-		usr << browse(null, "window=artanalyser")
+	else if(href_list["close"])
+		close_browser(user, "window=artanalyser")
+		return TOPIC_HANDLED
 
-	updateDialog()
+	if(. == TOPIC_REFRESH)
+		interact(user)
 
 //hardcoded responses, oh well
 /obj/machinery/artifact_analyser/proc/get_scan_info(var/obj/scanned_obj)
@@ -149,7 +151,7 @@
 			if(A.my_effect)
 				out += A.my_effect.getDescription()
 
-			if(A.secondary_effect && A.secondary_effect.activated)
+			if(A.secondary_effect)
 				out += "<br><br>Internal scans indicate ongoing secondary activity operating independently from primary systems.<br><br>"
 				out += A.secondary_effect.getDescription()
 

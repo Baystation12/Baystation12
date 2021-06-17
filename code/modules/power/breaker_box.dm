@@ -11,8 +11,8 @@
 	//directwired = 0
 	var/icon_state_on = "bbox_on"
 	var/icon_state_off = "bbox_off"
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	var/on = 0
 	var/busy = 0
 	var/directions = list(1,2,4,8,5,6,9,10)
@@ -28,8 +28,9 @@
 	icon_state = "bbox_on"
 
 	// Enabled on server startup. Used in substations to keep them in bypass mode.
-/obj/machinery/power/breakerbox/activated/initialize()
+/obj/machinery/power/breakerbox/activated/Initialize()
 	set_state(1)
+	. = ..()
 
 /obj/machinery/power/breakerbox/examine(mob/user)
 	. = ..()
@@ -59,14 +60,14 @@
 	busy = 0
 
 
-/obj/machinery/power/breakerbox/attack_hand(mob/user)
+/obj/machinery/power/breakerbox/physical_attack_hand(mob/user)
 	if(update_locked)
 		to_chat(user, "<span class='warning'>System locked. Please try again later.</span>")
-		return
+		return TRUE
 
 	if(busy)
 		to_chat(user, "<span class='warning'>System is busy. Please wait until current operation is finished before changing power settings.</span>")
-		return
+		return TRUE
 
 	busy = 1
 	for(var/mob/O in viewers(user))
@@ -81,9 +82,10 @@
 		spawn(600)
 			update_locked = 0
 	busy = 0
+	return TRUE
 
-/obj/machinery/power/breakerbox/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if(istype(W, /obj/item/device/multitool))
+/obj/machinery/power/breakerbox/attackby(var/obj/item/W as obj, var/mob/user as mob)
+	if(isMultitool(W))
 		var/newtag = input(user, "Enter new RCON tag. Use \"NO_TAG\" to disable RCON or leave empty to cancel.", "SMES RCON system") as text
 		if(newtag)
 			RCon_tag = newtag
@@ -132,6 +134,3 @@
 		update_locked = 1
 		spawn(600)
 			update_locked = 0
-
-/obj/machinery/power/breakerbox/process()
-	return 1

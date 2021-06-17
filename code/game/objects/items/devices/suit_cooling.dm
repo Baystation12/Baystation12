@@ -1,10 +1,6 @@
 /obj/item/device/suit_cooling_unit
 	name = "portable cooling unit"
 	desc = "A large portable heat sink with liquid cooled radiator packaged into a modified backpack."
-	description_info = "You may wear this instead of your packpack to cool yourself down. It is commonly used by IPCs, \
-	as it allows them to go into low pressure environments for more than few seconds without overhating. It runs off energy provided by internal power cell. \
-	Remember to turn it on by clicking it when it's your in your hand before you put it on."
-
 	w_class = ITEM_SIZE_LARGE
 	icon = 'icons/obj/suitcooler.dmi'
 	icon_state = "suitcooler0"
@@ -12,19 +8,19 @@
 	slot_flags = SLOT_BACK
 
 	//copied from tank.dm
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = 5.0
 	throwforce = 10.0
 	throw_speed = 1
 	throw_range = 4
 	action_button_name = "Toggle Heatsink"
 
-	matter = list("steel" = 15000, "glass" = 3500)
+	matter = list(MATERIAL_ALUMINIUM = 15000, MATERIAL_GLASS = 3500)
 	origin_tech = list(TECH_MAGNET = 2, TECH_MATERIAL = 2)
 
 	var/on = 0								//is it turned on?
 	var/cover_open = 0						//is the cover open?
-	var/obj/item/weapon/cell/cell
+	var/obj/item/cell/cell
 	var/max_cooling = 12					// in degrees per second - probably don't need to mess with heat capacity here
 	var/charge_consumption = 2 KILOWATTS	// energy usage at full power
 	var/thermostat = T20C
@@ -32,12 +28,17 @@
 /obj/item/device/suit_cooling_unit/ui_action_click()
 	toggle(usr)
 
-/obj/item/device/suit_cooling_unit/New()
-	processing_objects |= src
-	cell = new/obj/item/weapon/cell/high()		// 10K rated cell.
+/obj/item/device/suit_cooling_unit/Initialize()
+	. = ..()
+	START_PROCESSING(SSobj, src)
+	cell = new/obj/item/cell/high()		// 10K rated cell.
 	cell.forceMove(src)
 
-/obj/item/device/suit_cooling_unit/process()
+/obj/item/device/suit_cooling_unit/Destroy()
+	. = ..()
+	STOP_PROCESSING(SSobj, src)
+
+/obj/item/device/suit_cooling_unit/Process()
 	if (!on || !cell)
 		return
 
@@ -89,7 +90,7 @@
 		if(ishuman(user))
 			user.put_in_hands(cell)
 		else
-			cell.forceMove(get_turf(src))
+			cell.dropInto(loc)
 
 		cell.add_fingerprint(user)
 		cell.update_icon()
@@ -108,8 +109,8 @@
 		turn_on()
 	to_chat(user, "<span class='notice'>You switch \the [src] [on ? "on" : "off"].</span>")
 
-/obj/item/device/suit_cooling_unit/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/weapon/screwdriver))
+/obj/item/device/suit_cooling_unit/attackby(obj/item/W as obj, mob/user as mob)
+	if(isScrewdriver(W))
 		if(cover_open)
 			cover_open = 0
 			to_chat(user, "You screw the panel into place.")
@@ -119,13 +120,13 @@
 		update_icon()
 		return
 
-	if (istype(W, /obj/item/weapon/cell))
+	if (istype(W, /obj/item/cell))
 		if(cover_open)
 			if(cell)
 				to_chat(user, "There is a [cell] already installed here.")
 			else
-				user.drop_item()
-				W.forceMove(src)
+				if(!user.unEquip(W, src))
+					return
 				cell = W
 				to_chat(user, "You insert the [cell].")
 		update_icon()
@@ -133,7 +134,7 @@
 
 	return ..()
 
-/obj/item/device/suit_cooling_unit/update_icon()
+/obj/item/device/suit_cooling_unit/on_update_icon()
 	overlays.Cut()
 	if (cover_open)
 		if (cell)
@@ -162,8 +163,9 @@
 			overlays.Add("battery-5")
 
 
-/obj/item/device/suit_cooling_unit/examine(mob/user)
-	if(!..(user, 1))
+/obj/item/device/suit_cooling_unit/examine(mob/user, distance)
+	. = ..()
+	if(distance >= 1)
 		return
 
 	if (on)

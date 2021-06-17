@@ -3,8 +3,8 @@
 	name = "web"
 	desc = "It's stringy and sticky."
 	icon = 'icons/effects/effects.dmi'
-	anchored = 1
-	density = 0
+	anchored = TRUE
+	density = FALSE
 	var/health = 15
 
 //similar to weeds, but only barfed out by nurses manually
@@ -20,7 +20,7 @@
 				qdel(src)
 	return
 
-/obj/effect/spider/attackby(var/obj/item/weapon/W, var/mob/user)
+/obj/effect/spider/attackby(var/obj/item/W, var/mob/user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 
 	if(W.attack_verb.len)
@@ -30,8 +30,11 @@
 
 	var/damage = W.force / 4.0
 
-	if(istype(W, /obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/WT = W
+	if(W.edge)
+		damage += 5
+
+	if(isWelder(W))
+		var/obj/item/weldingtool/WT = W
 
 		if(WT.remove_fuel(0, user))
 			damage = 15
@@ -56,9 +59,11 @@
 
 /obj/effect/spider/stickyweb
 	icon_state = "stickyweb1"
-	New()
-		if(prob(50))
-			icon_state = "stickyweb2"
+
+/obj/effect/spider/stickyweb/Initialize()
+	. = ..()
+	if(prob(50))
+		icon_state = "stickyweb2"
 
 /obj/effect/spider/stickyweb/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1
@@ -77,26 +82,26 @@
 	desc = "They seem to pulse slightly with an inner life."
 	icon_state = "eggs"
 	var/amount_grown = 0
-	New()
-		pixel_x = rand(3,-3)
-		pixel_y = rand(3,-3)
-		processing_objects |= src
 
-/obj/effect/spider/eggcluster/New(var/location, var/atom/parent)
+/obj/effect/spider/eggcluster/Initialize(mapload, atom/parent)
+	. = ..()
 	get_light_and_color(parent)
-	..()
+	pixel_x = rand(3,-3)
+	pixel_y = rand(3,-3)
+	START_PROCESSING(SSobj, src)
 
 /obj/effect/spider/eggcluster/Destroy()
-	processing_objects -= src
+	STOP_PROCESSING(SSobj, src)
 	if(istype(loc, /obj/item/organ/external))
 		var/obj/item/organ/external/O = loc
 		O.implants -= src
 	. = ..()
 
-/obj/effect/spider/eggcluster/process()
-	amount_grown += rand(0,2)
+/obj/effect/spider/eggcluster/Process()
+	if(prob(70))
+		amount_grown += rand(0,2)
 	if(amount_grown >= 100)
-		var/num = rand(6,24)
+		var/num = rand(3,9)
 		var/obj/item/organ/external/O = null
 		if(istype(loc, /obj/item/organ/external))
 			O = loc
@@ -111,8 +116,7 @@
 	name = "spiderling"
 	desc = "It never stays still for long."
 	icon_state = "guard"
-	anchored = 0
-	plane = OBJ_PLANE
+	anchored = FALSE
 	layer = BELOW_OBJ_LAYER
 	health = 3
 	var/mob/living/simple_animal/hostile/giant_spider/greater_form
@@ -124,9 +128,14 @@
 	var/growth_chance = 50 // % chance of beginning growth, and eventually become a beautiful death machine
 
 	var/shift_range = 6
+	var/castes = list(/mob/living/simple_animal/hostile/giant_spider = 2,
+						/mob/living/simple_animal/hostile/giant_spider/guard = 2,
+						/mob/living/simple_animal/hostile/giant_spider/nurse = 2,
+						/mob/living/simple_animal/hostile/giant_spider/spitter = 2,
+						/mob/living/simple_animal/hostile/giant_spider/hunter = 1)
 
-/obj/effect/spider/spiderling/New(var/location, var/atom/parent)
-	greater_form = pick(typesof(/mob/living/simple_animal/hostile/giant_spider))
+/obj/effect/spider/spiderling/Initialize(var/mapload, var/atom/parent)
+	greater_form = pickweight(castes)
 	icon_state = initial(greater_form.icon_state)
 	pixel_x = rand(-shift_range, shift_range)
 	pixel_y = rand(-shift_range, shift_range)
@@ -136,12 +145,12 @@
 		dormant = FALSE
 
 	if(dormant)
-		moved_event.register(src, src, /obj/effect/spider/spiderling/proc/disturbed)
+		GLOB.moved_event.register(src, src, /obj/effect/spider/spiderling/proc/disturbed)
 	else
-		processing_objects |= src
+		START_PROCESSING(SSobj, src)
 
 	get_light_and_color(parent)
-	..()
+	. = ..()
 
 /obj/effect/spider/spiderling/mundane
 	growth_chance = 0 // Just a simple, non-mutant spider
@@ -151,11 +160,12 @@
 
 /obj/effect/spider/spiderling/Destroy()
 	if(dormant)
-		moved_event.unregister(src, src, /obj/effect/spider/spiderling/proc/disturbed)
-	processing_objects -= src
+		GLOB.moved_event.unregister(src, src, /obj/effect/spider/spiderling/proc/disturbed)
+	STOP_PROCESSING(SSobj, src)
+	walk(src, 0) // Because we might have called walk_to, we must stop the walk loop or BYOND keeps an internal reference to us forever.
 	. = ..()
 
-/obj/effect/spider/spiderling/attackby(var/obj/item/weapon/W, var/mob/user)
+/obj/effect/spider/spiderling/attackby(var/obj/item/W, var/mob/user)
 	..()
 	if(health > 0)
 		disturbed()
@@ -169,12 +179,12 @@
 		return
 	dormant = FALSE
 
-	moved_event.unregister(src, src, /obj/effect/spider/spiderling/proc/disturbed)
-	processing_objects |= src
+	GLOB.moved_event.unregister(src, src, /obj/effect/spider/spiderling/proc/disturbed)
+	START_PROCESSING(SSobj, src)
 
 /obj/effect/spider/spiderling/Bump(atom/user)
 	if(istype(user, /obj/structure/table))
-		src.loc = user.loc
+		forceMove(user.loc)
 	else
 		..()
 
@@ -187,7 +197,35 @@
 	if(health <= 0)
 		die()
 
-/obj/effect/spider/spiderling/process()
+/obj/effect/spider/spiderling/proc/check_vent(obj/machinery/atmospherics/unary/vent_pump/exit_vent)
+	if(QDELETED(exit_vent) || exit_vent.welded) // If it's qdeleted we probably were too, but in that case we won't be making this call due to timer cleanup.
+		forceMove(get_turf(entry_vent))
+		entry_vent = null
+		return TRUE
+
+/obj/effect/spider/spiderling/proc/start_vent_moving(obj/machinery/atmospherics/unary/vent_pump/exit_vent, var/travel_time)
+	if(check_vent(exit_vent))
+		return
+	if(prob(50))
+		src.visible_message("<span class='notice'>You hear something squeezing through the ventilation ducts.</span>",2)
+	forceMove(exit_vent)
+	addtimer(CALLBACK(src, .proc/end_vent_moving, exit_vent), travel_time)
+
+/obj/effect/spider/spiderling/proc/end_vent_moving(obj/machinery/atmospherics/unary/vent_pump/exit_vent)
+	if(check_vent(exit_vent))
+		return
+	forceMove(get_turf(exit_vent))
+	travelling_in_vent = FALSE
+	entry_vent = null
+
+/obj/effect/spider/spiderling/Process()
+
+	if(loc)
+		var/datum/gas_mixture/environment = loc.return_air()
+		if(environment && environment.gas[GAS_METHYL_BROMIDE] > 0)
+			die()
+			return
+
 	if(travelling_in_vent)
 		if(istype(src.loc, /turf))
 			travelling_in_vent = 0
@@ -202,32 +240,12 @@
 					entry_vent = null
 					return
 				var/obj/machinery/atmospherics/unary/vent_pump/exit_vent = pick(vents)
-				/*if(prob(50))
-					src.visible_message("<B>[src] scrambles into the ventillation ducts!</B>")*/
 
-				spawn(rand(20,60))
-					loc = exit_vent
-					var/travel_time = round(get_dist(loc, exit_vent.loc) / 2)
-					spawn(travel_time)
-
-						if(!exit_vent || exit_vent.welded)
-							loc = entry_vent
-							entry_vent = null
-							return
-
-						if(prob(50))
-							src.visible_message("<span class='notice'>You hear something squeezing through the ventilation ducts.</span>",2)
-						sleep(travel_time)
-
-						if(!exit_vent || exit_vent.welded)
-							loc = entry_vent
-							entry_vent = null
-							return
-						loc = exit_vent.loc
-						entry_vent = null
-						var/area/new_area = get_area(loc)
-						if(new_area)
-							new_area.Entered(src)
+				forceMove(entry_vent)
+				var/travel_time = round(get_dist(loc, exit_vent.loc) / 2)
+				addtimer(CALLBACK(src, .proc/start_vent_moving, exit_vent, travel_time), travel_time + rand(20,60))
+				travelling_in_vent = TRUE
+				return
 			else
 				entry_vent = null
 	//=================
@@ -238,7 +256,7 @@
 			if(nearby.len)
 				var/target_atom = pick(nearby)
 				walk_to(src, target_atom, 5)
-				if(prob(25))
+				if(prob(10))
 					src.visible_message("<span class='notice'>\The [src] skitters[pick(" away"," around","")].</span>")
 					// Reduces the risk of spiderlings hanging out at the extreme ranges of the shift range.
 					var/min_x = pixel_x <= -shift_range ? 0 : -2
@@ -265,10 +283,11 @@
 		if(!O.owner || O.owner.stat == DEAD || amount_grown > 80)
 			amount_grown = 20 //reset amount_grown so that people have some time to react to spiderlings before they grow big
 			O.implants -= src
-			src.loc = O.owner ? O.owner.loc : O.loc
+			forceMove(O.owner ? O.owner.loc : O.loc)
 			src.visible_message("<span class='warning'>\A [src] emerges from inside [O.owner ? "[O.owner]'s [O.name]" : "\the [O]"]!</span>")
 			if(O.owner)
-				O.owner.apply_damage(1, BRUTE, O.organ_tag)
+				O.owner.apply_damage(5, BRUTE, O.organ_tag)
+				O.owner.apply_damage(3, TOX, O.organ_tag)
 		else if(prob(1))
 			O.owner.apply_damage(1, TOX, O.organ_tag)
 			if(world.time > last_itch + 30 SECONDS)
@@ -285,8 +304,7 @@
 	desc = "Green squishy mess."
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "greenshatter"
-	anchored = 1
-	plane = ABOVE_TURF_PLANE
+	anchored = TRUE
 	layer = BLOOD_LAYER
 
 /obj/effect/spider/cocoon
@@ -295,8 +313,9 @@
 	icon_state = "cocoon1"
 	health = 60
 
-	New()
-		icon_state = pick("cocoon1","cocoon2","cocoon3")
+/obj/effect/spider/cocoon/Initialize()
+	. = ..()
+	icon_state = pick("cocoon1","cocoon2","cocoon3")
 
 /obj/effect/spider/cocoon/Destroy()
 	src.visible_message("<span class='warning'>\The [src] splits open.</span>")

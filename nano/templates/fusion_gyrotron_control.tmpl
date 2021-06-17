@@ -1,0 +1,42 @@
+<h2>Fusion plant: {{:data.id}}</h2>
+{{for data.gyrotrons}}
+	<h3>{{:value.id}}</h3>
+	<div class="item">
+		<div class="itemLabel">
+			Status
+		</div>
+		<div class="itemContent">
+			 {{if value.active}}
+				Online.<br/>{{:helper.link('Shut down.', null, {'machine': value.ref, 'toggle': 1})}}
+			 {{else}}
+				Offline.<br/>{{:helper.link('Start up.', null, {'machine': value.ref, 'toggle': 1})}}
+			 {{/if}}
+		</div>
+	</div>
+	<div class="item">
+		<div class="itemLabel">
+			Fire delay
+		</div>
+		<div class="itemContent">
+			{{:helper.link(value.firedelay, null, {'machine': value.ref, 'modifyrate': 1})}}
+		</div>
+	</div>
+	<div class="item">
+		<div class="itemLabel">
+			Power output
+		</div>
+		<div class="itemContent">
+			{{:helper.link(value.energy, null, {'machine': value.ref, 'modifypower': 1})}}
+		</div>
+	</div>
+{{empty}}
+	<div class="item">
+		<div class="itemLabel">
+			Error:
+		</div>
+		<div class="itemContent">
+			No gyrotrons connected.
+		</div>
+	</div>
+{{/for}}
+

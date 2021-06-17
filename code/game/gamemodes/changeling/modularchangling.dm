@@ -93,19 +93,6 @@ var/list/datum/power/changeling/powerinstances = list()
 	allowduringlesserform = 1
 	verbpath = /mob/proc/changeling_extract_dna_sting
 
-/datum/power/changeling/transformation_sting
-	name = "Transformation Sting"
-	desc = "We silently sting a human, injecting a retrovirus that forces them to transform into another."
-	helptext = "Does not provide a warning to others. The victim will transform much like a changeling would."
-	genomecost = 3
-	verbpath = /mob/proc/changeling_transformation_sting
-
-/datum/power/changeling/paralysis_sting
-	name = "Paralysis Sting"
-	desc = "We silently sting a human, paralyzing them for a short time."
-	genomecost = 8
-	verbpath = /mob/proc/changeling_paralysis_sting
-
 /datum/power/changeling/LSDSting
 	name = "Hallucination Sting"
 	desc = "We evolve the ability to sting a target with a powerful hallunicationary chemical."
@@ -441,7 +428,7 @@ var/list/datum/power/changeling/powerinstances = list()
 	</body></html>
 	"}
 
-	usr << browse(dat, "window=powers;size=900x480")
+	show_browser(usr, dat, "window=powers;size=900x480")
 
 
 /datum/changeling/Topic(href, href_list)

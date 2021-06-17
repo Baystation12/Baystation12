@@ -17,10 +17,10 @@
 	disruptive = 0
 
 	use_power_cost = 250 KILOWATTS
-	active_power_cost = 6 KILOWATTS		// 30 min battery life /w best (3kWh) cell
+	active_power_cost = 30 KILOWATTS
 	passive_power_cost = 0
 	module_cooldown = 10 SECONDS
-	origin_tech = list(TECH_MATERIAL = 5, TECH_POWER = 6, TECH_MAGNET = 6, TECH_ILLEGAL = 6, TECH_ENGINEERING = 7)
+	origin_tech = list(TECH_MATERIAL = 5, TECH_POWER = 6, TECH_MAGNET = 6, TECH_ESOTERIC = 6, TECH_ENGINEERING = 7)
 	activate_string = "Enable Cloak"
 	deactivate_string = "Disable Cloak"
 
@@ -37,13 +37,8 @@
 
 	var/mob/living/carbon/human/H = holder.wearer
 
-	to_chat(H, "<font color='blue'><b>You are now invisible to normal detection.</b></font>")
-	H.cloaked = TRUE
-	H.update_icons()
-
-	anim(get_turf(H), H, 'icons/effects/effects.dmi', "electricity",null,20,null)
-
-	H.visible_message("[H.name] vanishes into thin air!",1)
+	if(H.add_cloaking_source(src))
+		anim(H, 'icons/effects/effects.dmi', "electricity",null,20,null)
 
 /obj/item/rig_module/stealth_field/deactivate()
 
@@ -52,15 +47,11 @@
 
 	var/mob/living/carbon/human/H = holder.wearer
 
-	to_chat(H, "<span class='danger'>You are now visible.</span>")
-	H.cloaked = FALSE
-	H.update_icons()
+	if(H.remove_cloaking_source(src))
+		anim(H,'icons/mob/mob.dmi',,"uncloak",,H.dir)
+		anim(H, 'icons/effects/effects.dmi', "electricity",null,20,null)
 
-	anim(get_turf(H), H,'icons/mob/mob.dmi',,"uncloak",,H.dir)
-	anim(get_turf(H), H, 'icons/effects/effects.dmi', "electricity",null,20,null)
-
-	for(var/mob/O in oviewers(H))
-		O.show_message("[H.name] appears from thin air!",1)
+	// We still play the sound, even if not visibly uncloaking. Ninjas are not that stealthy.
 	playsound(get_turf(H), 'sound/effects/stealthoff.ogg', 75, 1)
 
 
@@ -69,7 +60,7 @@
 	name = "teleportation module"
 	desc = "A complex, sleek-looking, hardsuit-integrated teleportation module."
 	icon_state = "teleporter"
-	use_power_cost = 25 KILOWATTS
+	use_power_cost = 400 KILOWATTS
 	redundant = 1
 	usable = 1
 	selectable = 1
@@ -112,7 +103,7 @@
 		to_chat(H, "<span class='warning'>You cannot teleport into solid walls.</span>")
 		return 0
 
-	if(T.z in using_map.admin_levels)
+	if(T.z in GLOB.using_map.admin_levels)
 		to_chat(H, "<span class='warning'>You cannot use your teleporter on this Z-level.</span>")
 		return 0
 
@@ -130,7 +121,7 @@
 	H.forceMove(T)
 	phase_in(H,get_turf(H))
 
-	for(var/obj/item/weapon/grab/G in H.contents)
+	for(var/obj/item/grab/G in H.contents)
 		if(G.affecting)
 			phase_out(G.affecting,get_turf(G.affecting))
 			G.affecting.forceMove(locate(T.x+rand(-1,1),T.y+rand(-1,1),T.z))
@@ -151,9 +142,9 @@
 
 	engage_string = "Fabricate Net"
 
-	fabrication_type = /obj/item/weapon/energy_net
-	use_power_cost = 20 KILOWATTS
-	origin_tech = list(TECH_MATERIAL = 5, TECH_POWER = 6, TECH_MAGNET = 5, TECH_ILLEGAL = 4, TECH_ENGINEERING = 6)
+	fabrication_type = /obj/item/energy_net
+	use_power_cost = 50 KILOWATTS
+	origin_tech = list(TECH_MATERIAL = 5, TECH_POWER = 6, TECH_MAGNET = 5, TECH_ESOTERIC = 4, TECH_ENGINEERING = 6)
 
 /obj/item/rig_module/fabricator/energy_net/engage(atom/target)
 
@@ -227,15 +218,15 @@
 	holder.visible_message("<span class='danger'>\The [src.holder] emits a shrill tone!</span>","<span class='danger'> You hear a shrill tone!</span>")
 	sleep(blink_solid_time)
 	src.blink_mode = 0
-	src.holder.set_light(0, 0, "#000000")
+	src.holder.set_light(0, 0, 0, 2, "#000000")
 
 	explosion(get_turf(src), explosion_values[1], explosion_values[2], explosion_values[3], explosion_values[4])
 	if(holder && holder.wearer)
-		holder.wearer.drop_from_inventory(src)
+		holder.wearer.gib()
 		qdel(holder)
 	qdel(src)
 
-/obj/item/rig_module/self_destruct/process()
+/obj/item/rig_module/self_destruct/Process()
 	// Not being worn, leave it alone.
 	if(!holder || !holder.wearer || !holder.wearer.wear_suit == holder)
 		return 0
@@ -251,14 +242,17 @@
 		if(0)
 			return
 		if(1)
-			src.holder.set_light(1.5, 8.5, "#FF0A00")
+			src.holder.set_light(1, 1, 8.5, 2, "#ff0a00")
 			sleep(6)
-			src.holder.set_light(0, 0, "#000000")
+			src.holder.set_light(0, 0, 0, 2, "#000000")
 			spawn(6) .()
 		if(2)
-			src.holder.set_light(1.5, 8.5, "#FF0A00")
+			src.holder.set_light(1, 1, 8.5, 2, "#ff0a00")
 			sleep(2)
-			src.holder.set_light(0, 0, "#000000")
+			src.holder.set_light(0, 0, 0, 2, "#000000")
 			spawn(2) .()
 		if(3)
-			src.holder.set_light(1.5, 8.5, "#FF0A00")
+			src.holder.set_light(1, 1, 8.5, 2, "#ff0a00")
+
+/obj/item/rig_module/grenade_launcher/ninja
+	suit_overlay = null

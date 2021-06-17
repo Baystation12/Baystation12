@@ -21,7 +21,8 @@
 		remove_source(source, FALSE)
 	sources.Cut()
 	for(var/chunk in chunks)
-		qdel(chunk)
+		var/chunk_datum = chunks[chunk]
+		qdel(chunk_datum)
 	chunks.Cut()
 	. = ..()
 
@@ -81,7 +82,7 @@
 // Updates the chunks that the turf is located in. Use this when obstacles are destroyed or	when doors open.
 
 /datum/visualnet/proc/update_visibility(atom/A, var/opacity_check = TRUE)
-	if(!ticker || (opacity_check && !A.opacity))
+	if((GAME_STATE < RUNLEVEL_GAME) || (opacity_check && !A.opacity))
 		return
 	major_chunk_change(A)
 
@@ -117,8 +118,8 @@
 	if(source in sources)
 		return FALSE
 	sources += source
-	moved_event.register(source, src, /datum/visualnet/proc/source_moved)
-	destroyed_event.register(source, src, /datum/visualnet/proc/remove_source)
+	GLOB.moved_event.register(source, src, /datum/visualnet/proc/source_moved)
+	GLOB.destroyed_event.register(source, src, /datum/visualnet/proc/remove_source)
 	for_all_chunks_in_range(source, /datum/chunk/proc/add_source, list(source))
 	if(update_visibility)
 		update_visibility(source, opacity_check)
@@ -128,8 +129,8 @@
 	if(!sources.Remove(source))
 		return FALSE
 
-	moved_event.unregister(source, src, /datum/visualnet/proc/source_moved)
-	destroyed_event.unregister(source, src, /datum/visualnet/proc/remove_source)
+	GLOB.moved_event.unregister(source, src, /datum/visualnet/proc/source_moved)
+	GLOB.destroyed_event.unregister(source, src, /datum/visualnet/proc/remove_source)
 	for_all_chunks_in_range(source, /datum/chunk/proc/remove_source, list(source))
 	if(update_visibility)
 		update_visibility(source, opacity_check)

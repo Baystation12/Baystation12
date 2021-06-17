@@ -18,7 +18,7 @@
 		my_mob = owner
 		update_abilities(0, owner)
 	else
-		message_admins("ERROR: ability_master's New() was not given an owner argument.  This is a bug.")
+		CRASH("ERROR: ability_master's New() was not given an owner argument.  This is a bug.")
 	..()
 
 /obj/screen/movable/ability_master/Destroy()
@@ -67,19 +67,19 @@
 
 	//Create list of X offsets
 	var/list/screen_loc_X = splittext(screen_loc_xy[1],":")
-	var/x_position = decode_screen_X(screen_loc_X[1])
+	var/x_position = decode_screen_X(screen_loc_X[1], my_mob)
 	var/x_pix = screen_loc_X[2]
 
 	//Create list of Y offsets
 	var/list/screen_loc_Y = splittext(screen_loc_xy[2],":")
-	var/y_position = decode_screen_Y(screen_loc_Y[1])
+	var/y_position = decode_screen_Y(screen_loc_Y[1], my_mob)
 	var/y_pix = screen_loc_Y[2]
 
 	for(var/i = 1; i <= ability_objects.len; i++)
 		var/obj/screen/ability/A = ability_objects[i]
 		var/xpos = x_position + (x_position < 8 ? 1 : -1)*(i%7)
 		var/ypos = y_position + (y_position < 8 ? round(i/7) : -round(i/7))
-		A.screen_loc = "[encode_screen_X(xpos)]:[x_pix],[encode_screen_Y(ypos)]:[y_pix]"
+		A.screen_loc = "[encode_screen_X(xpos, my_mob)]:[x_pix],[encode_screen_Y(ypos, my_mob)]:[y_pix]"
 		if(my_mob && my_mob.client)
 			my_mob.client.screen += A
 //			A.handle_icon_updates = 1
@@ -95,17 +95,17 @@
 		ability.maptext = "[i]" // Slot number
 		i++
 
-/obj/screen/movable/ability_master/update_icon()
+/obj/screen/movable/ability_master/on_update_icon()
 	if(ability_objects.len)
-		invisibility = 0
+		set_invisibility(0)
 	else
-		invisibility = 101
+		set_invisibility(101)
 
 /obj/screen/movable/ability_master/proc/add_ability(var/name_given)
 	if(!name) return
 	var/obj/screen/ability/new_button = new /obj/screen/ability
 	new_button.ability_master = src
-	new_button.name = name_given
+	new_button.SetName(name_given)
 	new_button.ability_icon_state = name_given
 	new_button.update_icon(1)
 	ability_objects.Add(new_button)
@@ -162,8 +162,8 @@
 		ability_master.update_abilities(1, src)
 		ability_master.toggle_open(1)
 
-/mob/New()
-	..()
+/mob/Initialize()
+	. = ..()
 	ability_master = new /obj/screen/movable/ability_master(null,src)
 
 ///////////ACTUAL ABILITIES////////////
@@ -186,9 +186,9 @@
 		ability_master.update_icon()
 //		qdel(ability_master)
 	ability_master = null
-	..()
+	return ..()
 
-/obj/screen/ability/update_icon()
+/obj/screen/ability/on_update_icon()
 	overlays.Cut()
 	icon_state = "[background_base_state]_spell_base"
 
@@ -249,7 +249,7 @@
 	A.object_used = object_given
 	A.verb_to_call = verb_given
 	A.ability_icon_state = ability_icon_given
-	A.name = name_given
+	A.SetName(name_given)
 	if(arguments)
 		A.arguments_to_use = arguments
 	ability_objects.Add(A)
@@ -273,7 +273,7 @@
 	A.object_used = object_given
 	A.verb_to_call = verb_given
 	A.ability_icon_state = ability_icon_given
-	A.name = name_given
+	A.SetName(name_given)
 	if(arguments)
 		A.arguments_to_use = arguments
 	ability_objects.Add(A)
@@ -306,7 +306,7 @@
 	A.ability_master = src
 	A.object = object_given
 	A.ability_icon_state = ability_icon_given
-	A.name = object_given.name
+	A.SetName(object_given.name)
 	ability_objects.Add(A)
 	if(my_mob.client)
 		toggle_open(2) //forces the icons to refresh on screen
@@ -336,7 +336,7 @@
 	var/obj/screen/ability/spell/A = new()
 	A.ability_master = src
 	A.spell = spell
-	A.name = spell.name
+	A.SetName(spell.name)
 
 	if(!spell.override_base) //if it's not set, we do basic checks
 		if(spell.spell_flags & CONSTRUCT_CHECK)
@@ -352,7 +352,7 @@
 		toggle_open(2) //forces the icons to refresh on screen
 
 /mob/Life()
-	..()
+	UNLINT(..())
 	if(ability_master)
 		ability_master.update_spells(0)
 
@@ -398,7 +398,7 @@
 	if(spell.silenced)
 		overlays += "silence"
 
-/obj/screen/ability/spell/update_icon(var/forced = 0)
+/obj/screen/ability/spell/on_update_icon(var/forced = 0)
 	update_charge(forced)
 	return
 

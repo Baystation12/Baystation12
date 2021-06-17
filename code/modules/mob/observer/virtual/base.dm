@@ -8,6 +8,7 @@ var/list/all_virtual_listeners = list()
 	sight = SEE_SELF
 
 	virtual_mob = null
+	no_z_overlay = TRUE
 
 	var/atom/movable/host
 	var/host_type = /atom/movable
@@ -21,20 +22,23 @@ var/list/all_virtual_listeners = list()
 	if(!istype(host, host_type))
 		CRASH("Received an unexpected host type. Expected [host_type], was [log_info_line(host)].")
 	src.host = host
-	moved_event.register(host, src, /atom/movable/proc/move_to_turf_or_null)
+	GLOB.moved_event.register(host, src, /atom/movable/proc/move_to_turf_or_null)
 
-	mob_list -= src
 	all_virtual_listeners += src
 
-	updateicon()
+	update_icon()
+
+/mob/observer/virtual/Initialize()
+	. = ..()
+	STOP_PROCESSING(SSmobs, src)
 
 /mob/observer/virtual/Destroy()
-	moved_event.unregister(host, src, /atom/movable/proc/move_to_turf_or_null)
+	GLOB.moved_event.unregister(host, src, /atom/movable/proc/move_to_turf_or_null)
 	all_virtual_listeners -= src
 	host = null
 	return ..()
 
-/mob/observer/virtual/updateicon()
+/mob/observer/virtual/on_update_icon()
 	if(!overlay_icons)
 		overlay_icons = list()
 		for(var/i_state in icon_states(icon))
@@ -52,22 +56,10 @@ var/list/all_virtual_listeners = list()
 /atom/movable
 	var/mob/observer/virtual/virtual_mob
 
-/atom/movable/initialize()
-	..()
-	if(ispath(virtual_mob))
-		if(shall_have_virtual_mob())
-			virtual_mob = new virtual_mob(get_turf(src), src)
-		else
-			virtual_mob = null
-
-/atom/movable/Destroy()
-	if(virtual_mob && !ispath(virtual_mob))
-		qdel(virtual_mob)
-	virtual_mob = null
-	return ..()
+/atom/movable/Initialize()
+	. = ..()
+	if(shall_have_virtual_mob())
+		virtual_mob = new virtual_mob(get_turf(src), src)
 
 /atom/movable/proc/shall_have_virtual_mob()
-	return TRUE
-
-/mob/shall_have_virtual_mob()
-	return (src in mob_list)
+	return ispath(initial(virtual_mob))

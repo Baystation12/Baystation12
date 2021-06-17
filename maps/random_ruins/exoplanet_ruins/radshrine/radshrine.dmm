@@ -1,0 +1,94 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"b" = (
+/obj/machinery/artifact,
+/turf/simulated/floor/fixed/alium,
+/area/template_noop)
+"d" = (
+/turf/simulated/wall/uranium,
+/area/template_noop)
+"o" = (
+/obj/effect/decal/cleanable/cobweb,
+/obj/item/remains/xeno,
+/turf/simulated/floor/fixed/alium,
+/area/template_noop)
+"y" = (
+/turf/simulated/floor/exoplanet/water/shallow,
+/area/template_noop)
+"E" = (
+/obj/item/remains/xeno,
+/turf/simulated/floor/fixed/alium,
+/area/template_noop)
+"G" = (
+/obj/machinery/door/unpowered/simple/uranium,
+/turf/simulated/floor/fixed/alium,
+/area/template_noop)
+"U" = (
+/turf/simulated/wall/alium,
+/area/template_noop)
+"V" = (
+/turf/simulated/floor/fixed/alium,
+/area/template_noop)
+
+(1,1,1) = {"
+d
+U
+U
+G
+U
+U
+d
+"}
+(2,1,1) = {"
+U
+o
+V
+V
+V
+V
+U
+"}
+(3,1,1) = {"
+U
+V
+y
+y
+y
+V
+U
+"}
+(4,1,1) = {"
+G
+V
+y
+b
+y
+V
+G
+"}
+(5,1,1) = {"
+U
+V
+y
+y
+y
+V
+U
+"}
+(6,1,1) = {"
+U
+V
+V
+V
+E
+V
+U
+"}
+(7,1,1) = {"
+d
+U
+U
+G
+U
+U
+d
+"}

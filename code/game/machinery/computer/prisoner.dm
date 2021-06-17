@@ -7,7 +7,8 @@
 	icon_screen = "explosive"
 	light_color = "#a91515"
 	req_access = list(access_armory)
-	circuit = /obj/item/weapon/circuitboard/prisoner
+	machine_name = "prison management console"
+	machine_desc = "Prison management consoles display a readout of active tracking and chemical implants, and allows for remote activation of them."
 	var/id = 0.0
 	var/temp = null
 	var/status = 0
@@ -30,9 +31,9 @@
 		else if(screen == 1)
 			dat += "<HR>Chemical Implants<BR>"
 			var/turf/Tr = null
-			for(var/obj/item/weapon/implant/chem/C in world)
+			for(var/obj/item/implant/chem/C in world)
 				Tr = get_turf(C)
-				if((Tr) && (Tr.z != src.z))	continue//Out of range
+				if((Tr) && !AreConnectedZLevels(Tr.z, src.z))	continue // Out of range
 				if(!C.implanted) continue
 				dat += "[C.imp_in.name] | Remaining Units: [C.reagents.total_volume] | Inject: "
 				dat += "<A href='?src=\ref[src];inject1=\ref[C]'>(<font color=red>(1)</font>)</A>"
@@ -40,13 +41,13 @@
 				dat += "<A href='?src=\ref[src];inject10=\ref[C]'>(<font color=red>(10)</font>)</A><BR>"
 				dat += "********************************<BR>"
 			dat += "<HR>Tracking Implants<BR>"
-			for(var/obj/item/weapon/implant/tracking/T in world)
+			for(var/obj/item/implant/tracking/T in world)
 				Tr = get_turf(T)
-				if((Tr) && (Tr.z != src.z))	continue//Out of range
+				if((Tr) && !AreConnectedZLevels(Tr.z, src.z))	continue // Out of range
 				if(!T.implanted) continue
-				var/loc_display = "Unknown"
+				var/loc_display = "Space"
 				var/mob/living/carbon/M = T.imp_in
-				if((M.z in using_map.station_levels) && !istype(M.loc, /turf/space))
+				if(!istype(M.loc, /turf/space))
 					var/turf/mob_loc = get_turf(M)
 					loc_display = mob_loc.loc
 				if(T.malfunction)
@@ -56,12 +57,12 @@
 				dat += "********************************<BR>"
 			dat += "<HR><A href='?src=\ref[src];lock=1'>Lock Console</A>"
 
-		user << browse(dat, "window=computer;size=400x500")
+		show_browser(user, dat, "window=computer;size=400x500")
 		onclose(user, "computer")
 		return
 
 
-	process()
+	Process()
 		if(!..())
 			src.updateDialog()
 		return
@@ -70,19 +71,19 @@
 	Topic(href, href_list)
 		if(..())
 			return
-		if((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon)))
+		if((list_find(usr.contents, src) || (in_range(src, usr) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon)))
 			usr.set_machine(src)
 
 			if(href_list["inject1"])
-				var/obj/item/weapon/implant/I = locate(href_list["inject1"])
+				var/obj/item/implant/I = locate(href_list["inject1"])
 				if(I)	I.activate(1)
 
 			else if(href_list["inject5"])
-				var/obj/item/weapon/implant/I = locate(href_list["inject5"])
+				var/obj/item/implant/I = locate(href_list["inject5"])
 				if(I)	I.activate(5)
 
 			else if(href_list["inject10"])
-				var/obj/item/weapon/implant/I = locate(href_list["inject10"])
+				var/obj/item/implant/I = locate(href_list["inject10"])
 				if(I)	I.activate(10)
 
 			else if(href_list["lock"])
@@ -94,11 +95,10 @@
 			else if(href_list["warn"])
 				var/warning = sanitize(input(usr,"Message:","Enter your message here!",""))
 				if(!warning) return
-				var/obj/item/weapon/implant/I = locate(href_list["warn"])
+				var/obj/item/implant/I = locate(href_list["warn"])
 				if((I)&&(I.imp_in))
 					var/mob/living/carbon/R = I.imp_in
 					to_chat(R, "<span class='notice'>You hear a voice in your head saying: '[warning]'</span>")
 
-			src.add_fingerprint(usr)
 		src.updateUsrDialog()
 		return

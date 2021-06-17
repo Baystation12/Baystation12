@@ -29,7 +29,7 @@
 	if (nref)
 		ref = nref
 	// If a client exists, but they have disabled fancy windowing, disable it!
-	if(user && user.client && !user.client.is_preference_enabled(/datum/client_preference/browser_style))
+	if(user && user.client && user.client.get_preference_value(/datum/client_preference/browser_style) == GLOB.PREF_PLAIN)
 		return
 	add_stylesheet("common", 'html/browser/common.css') // this CSS sheet is common to all UIs
 
@@ -65,12 +65,12 @@
 	var/filename
 	for (key in stylesheets)
 		filename = "[ckey(key)].css"
-		user << browse_rsc(stylesheets[key], filename)
+		send_rsc(user, stylesheets[key], filename)
 		head_content += "<link rel='stylesheet' type='text/css' href='[filename]'>"
 
 	for (key in scripts)
 		filename = "[ckey(key)].js"
-		user << browse_rsc(scripts[key], filename)
+		send_rsc(user, scripts[key], filename)
 		head_content += "<script type='text/javascript' src='[filename]'></script>"
 
 	var/title_attributes = "class='uiTitle'"
@@ -108,12 +108,18 @@
 	var/window_size = ""
 	if (width && height)
 		window_size = "size=[width]x[height];"
-	user << browse(get_content(), "window=[window_id];[window_size][window_options]")
+	show_browser(user, get_content(), "window=[window_id];[window_size][window_options]")
 	if (use_onclose)
 		onclose(user, window_id, ref)
 
+/datum/browser/proc/update(var/force_open = 0, var/use_onclose = 1)
+	if(force_open)
+		open(use_onclose)
+	else
+		send_output(user, get_content(), "[window_id].browser")
+
 /datum/browser/proc/close()
-	user << browse(null, "window=[window_id]")
+	close_browser(user, "window=[window_id]")
 
 // This will allow you to show an icon in the browse window
 // This is added to mob so that it can be used without a reference to the browser object
@@ -128,7 +134,7 @@
 		dir = "default"
 
 	var/filename = "[ckey("[icon]_[icon_state]_[dir]")].png"
-	src << browse_rsc(I, filename)
+	send_rsc(src, I, filename)
 	return filename
 	*/
 
@@ -140,7 +146,7 @@
 // e.g. canisters, timers, etc.
 //
 // windowid should be the specified window name
-// e.g. code is	: user << browse(text, "window=fred")
+// e.g. code is	: show_browser(user, text, "window=fred")
 // then use 	: onclose(user, "fred")
 //
 // Optionally, specify the "ref" parameter as the controlled atom (usually src)
@@ -154,6 +160,7 @@
 		param = "\ref[ref]"
 
 	spawn(2)
+		if(!user.client) return
 		winset(user, windowid, "on-close=\".windowclose [param]\"")
 
 //	log_debug("OnClose [user]: [windowid] : ["on-close=\".windowclose [param]\""]")

@@ -4,16 +4,16 @@
 /mob/observer/virtual/mob/New(var/location, var/mob/host)
 	..()
 
-	sight_set_event.register(host, src, /mob/observer/virtual/mob/proc/sync_sight)
-	see_invisible_set_event.register(host, src, /mob/observer/virtual/mob/proc/sync_sight)
-	see_in_dark_set_event.register(host, src, /mob/observer/virtual/mob/proc/sync_sight)
+	GLOB.sight_set_event.register(host, src, /mob/observer/virtual/mob/proc/sync_sight)
+	GLOB.see_invisible_set_event.register(host, src, /mob/observer/virtual/mob/proc/sync_sight)
+	GLOB.see_in_dark_set_event.register(host, src, /mob/observer/virtual/mob/proc/sync_sight)
 
 	sync_sight(host)
 
 /mob/observer/virtual/mob/Destroy()
-	sight_set_event.unregister(host, src, /mob/observer/virtual/mob/proc/sync_sight)
-	see_invisible_set_event.unregister(host, src, /mob/observer/virtual/mob/proc/sync_sight)
-	see_in_dark_set_event.unregister(host, src, /mob/observer/virtual/mob/proc/sync_sight)
+	GLOB.sight_set_event.unregister(host, src, /mob/observer/virtual/mob/proc/sync_sight)
+	GLOB.see_invisible_set_event.unregister(host, src, /mob/observer/virtual/mob/proc/sync_sight)
+	GLOB.see_in_dark_set_event.unregister(host, src, /mob/observer/virtual/mob/proc/sync_sight)
 	. = ..()
 
 /mob/observer/virtual/mob/proc/sync_sight(var/mob/mob_host)

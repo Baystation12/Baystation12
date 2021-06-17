@@ -2,21 +2,28 @@
 	name = "Bot"
 	health = 20
 	maxHealth = 20
-	icon = 'icons/obj/aibots.dmi'
-	universal_speak = 1
-	density = 0
-	var/obj/item/weapon/card/id/botcard = null
+	icon = 'icons/mob/bot/placeholder.dmi'
+	universal_speak = TRUE
+	density = FALSE
+
+	meat_type = null
+	meat_amount = 0
+	skin_material = null
+	skin_amount = 0
+	bone_material = null
+	bone_amount = 0
+
+	var/obj/item/card/id/botcard = null
 	var/list/botcard_access = list()
 	var/on = 1
 	var/open = 0
 	var/locked = 1
-	var/emagged = 0
+	var/emagged = FALSE
 	var/light_strength = 3
 	var/busy = 0
 
 	var/obj/access_scanner = null
 	var/list/req_access = list()
-	var/list/req_one_access = list()
 
 	var/atom/target = null
 	var/list/ignore_list = list()
@@ -37,19 +44,20 @@
 	var/frustration = 0
 	var/max_frustration = 0
 
+	layer = HIDING_MOB_LAYER
+
 /mob/living/bot/New()
 	..()
 	update_icons()
 
-	botcard = new /obj/item/weapon/card/id(src)
+	botcard = new /obj/item/card/id(src)
 	botcard.access = botcard_access.Copy()
 
 	access_scanner = new /obj(src)
 	access_scanner.req_access = req_access.Copy()
-	access_scanner.req_one_access = req_one_access.Copy()
 
-/mob/living/bot/initialize()
-	..()
+/mob/living/bot/Initialize()
+	. = ..()
 	if(on)
 		turn_on() // Update lights and other stuff
 	else
@@ -74,8 +82,8 @@
 		set_stat(CONSCIOUS)
 	else
 		health = maxHealth - getFireLoss() - getBruteLoss()
-	oxyloss = 0
-	toxloss = 0
+	setOxyLoss(0)
+	setToxLoss(0)
 
 /mob/living/bot/death()
 	explode()
@@ -91,7 +99,7 @@
 		else
 			to_chat(user, "<span class='warning'>Access denied.</span>")
 		return
-	else if(istype(O, /obj/item/weapon/screwdriver))
+	else if(isScrewdriver(O))
 		if(!locked)
 			open = !open
 			to_chat(user, "<span class='notice'>Maintenance panel is now [open ? "opened" : "closed"].</span>")
@@ -99,7 +107,7 @@
 		else
 			to_chat(user, "<span class='notice'>You need to unlock the controls first.</span>")
 		return
-	else if(istype(O, /obj/item/weapon/weldingtool))
+	else if(isWelder(O))
 		if(health < maxHealth)
 			if(open)
 				health = min(maxHealth, health + 10)
@@ -145,20 +153,13 @@
 	popup.set_content(dat)
 	popup.open()
 
-/mob/living/bot/Topic(var/href, var/href_list)
-	if(..())
-		return 1
+/mob/living/bot/DefaultTopicState()
+	return GLOB.default_state
 
-	if(!issilicon(usr) && !Adjacent(usr))
-		return
-
-	if(usr.incapacitated())
-		return
-
+/mob/living/bot/OnTopic(mob/user, href_list)
 	if(href_list["command"])
-		ProcessCommand(usr, href_list["command"], href_list)
-
-	Interact(usr)
+		ProcessCommand(user, href_list["command"], href_list)
+	Interact(user)
 
 /mob/living/bot/proc/GetInteractTitle()
 	return
@@ -347,7 +348,7 @@
 	if(stat)
 		return 0
 	on = 1
-	set_light(light_strength)
+	set_light(0.5, 0.1, light_strength)
 	update_icons()
 	resetTarget()
 	patrol_path = list()
@@ -369,12 +370,12 @@
 
 // Returns the surrounding cardinal turfs with open links
 // Including through doors openable with the ID
-/turf/proc/CardinalTurfsWithAccess(var/obj/item/weapon/card/id/ID)
+/turf/proc/CardinalTurfsWithAccess(var/obj/item/card/id/ID)
 	var/L[] = new()
 
 	//	for(var/turf/simulated/t in oview(src,1))
 
-	for(var/d in cardinal)
+	for(var/d in GLOB.cardinal)
 		var/turf/simulated/T = get_step(src, d)
 		if(istype(T) && !T.density)
 			if(!LinkBlockedWithAccess(src, T, ID))
@@ -384,7 +385,7 @@
 
 // Returns true if a link between A and B is blocked
 // Movement through doors allowed if ID has access
-/proc/LinkBlockedWithAccess(turf/A, turf/B, obj/item/weapon/card/id/ID)
+/proc/LinkBlockedWithAccess(turf/A, turf/B, obj/item/card/id/ID)
 
 	if(A == null || B == null) return 1
 	var/adir = get_dir(A,B)
@@ -406,14 +407,14 @@
 		return 1
 
 	for(var/obj/O in B)
-		if(O.density && !istype(O, /obj/machinery/door) && !(O.flags & ON_BORDER))
+		if(O.density && !istype(O, /obj/machinery/door) && !(O.atom_flags & ATOM_FLAG_CHECKS_BORDER))
 			return 1
 
 	return 0
 
 // Returns true if direction is blocked from loc
 // Checks doors against access with given ID
-/proc/DirBlockedWithAccess(turf/loc,var/dir,var/obj/item/weapon/card/id/ID)
+/proc/DirBlockedWithAccess(turf/loc,var/dir,var/obj/item/card/id/ID)
 	for(var/obj/structure/window/D in loc)
 		if(!D.density)			continue
 		if(D.dir == SOUTHWEST)	return 1

@@ -8,7 +8,7 @@
 
 	src.updatehealth()
 
-	if (!hardware_integrity() || !backup_capacitor())
+	if ((hardware_integrity() <= 0) || (backup_capacitor() <= 0))
 		death()
 		return
 
@@ -17,6 +17,7 @@
 		create_powersupply()
 
 	handle_stunned()	// Handle EMP-stun
+	handle_paralysed()	// Just in case something snuck in a Paralyse() call.
 	lying = 0			// Handle lying down
 
 	malf_process()
@@ -33,8 +34,10 @@
 			spawn(0)
 				handle_power_failure()
 
+	handle_impaired_vision()
 	update_power_usage()
 	handle_power_oxyloss()
+	handle_confused()
 	update_sight()
 
 	process_queued_alarms()
@@ -45,22 +48,9 @@
 		if (MED_HUD)
 			process_med_hud(src,0,src.eyeobj)
 
-
-/mob/living/silicon/ai/updatehealth()
-	if(status_flags & GODMODE)
-		health = 100
-		set_stat(CONSCIOUS)
-		setOxyLoss(0)
-	else
-		health = 100 - getFireLoss() - getBruteLoss() // Oxyloss is not part of health as it represents AIs backup power. AI is immune against ToxLoss as it is machine.
-
-/mob/living/silicon/ai/rejuvenate()
-	..()
-	add_ai_verbs(src)
-
 /mob/living/silicon/ai/update_living_sight()
 	if(!has_power() || self_shutdown)
-		updateicon()
+		update_icon()
 		overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
 		set_sight(sight&(~SEE_TURFS)&(~SEE_MOBS)&(~SEE_OBJS))
 		set_see_in_dark(0)

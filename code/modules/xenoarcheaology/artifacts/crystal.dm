@@ -2,7 +2,7 @@
 	name = "large crystal"
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "crystal"
-	density = 1
+	density = TRUE
 
 /obj/structure/crystal/New()
 	..()
@@ -19,17 +19,17 @@
 /obj/structure/crystal/Destroy()
 	src.visible_message("<span class='warning'>[src] shatters!</span>")
 	if(prob(75))
-		new /obj/item/weapon/material/shard/phoron(src.loc)
+		new /obj/item/material/shard/phoron(src.loc)
 	if(prob(50))
-		new /obj/item/weapon/material/shard/phoron(src.loc)
+		new /obj/item/material/shard/phoron(src.loc)
 	if(prob(25))
-		new /obj/item/weapon/material/shard/phoron(src.loc)
+		new /obj/item/material/shard/phoron(src.loc)
 	if(prob(75))
-		new /obj/item/weapon/material/shard(src.loc)
+		new /obj/item/material/shard(src.loc)
 	if(prob(50))
-		new /obj/item/weapon/material/shard(src.loc)
+		new /obj/item/material/shard(src.loc)
 	if(prob(25))
-		new /obj/item/weapon/material/shard(src.loc)
+		new /obj/item/material/shard(src.loc)
 	return ..()
 
 //todo: laser_act

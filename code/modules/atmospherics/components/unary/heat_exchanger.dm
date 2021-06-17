@@ -2,13 +2,16 @@
 
 	icon = 'icons/obj/atmospherics/heat_exchanger.dmi'
 	icon_state = "intact"
-	density = 1
+	density = TRUE
 
 	name = "Heat Exchanger"
 	desc = "Exchanges heat between two input gases. Setup for fast heat transfer."
 
 	var/obj/machinery/atmospherics/unary/heat_exchanger/partner = null
 	var/update_cycle
+
+	connect_types = CONNECT_TYPE_REGULAR
+	build_icon_state = "heunary"
 
 	update_icon()
 		if(node)
@@ -18,7 +21,8 @@
 
 		return
 
-	initialize()
+	atmos_init()
+		..()
 		if(!partner)
 			var/partner_connect = turn(dir,180)
 
@@ -30,16 +34,16 @@
 
 		..()
 
-	process()
+	Process()
 		..()
 		if(!partner)
 			return 0
 
-		if(!air_master || air_master.current_cycle <= update_cycle)
+		if(SSair.times_fired <= update_cycle)
 			return 0
 
-		update_cycle = air_master.current_cycle
-		partner.update_cycle = air_master.current_cycle
+		update_cycle = SSair.times_fired
+		partner.update_cycle = SSair.times_fired
 
 		var/air_heat_capacity = air_contents.heat_capacity()
 		var/other_air_heat_capacity = partner.air_contents.heat_capacity()
@@ -65,8 +69,8 @@
 
 		return 1
 
-	attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-		if (!istype(W, /obj/item/weapon/wrench))
+	attackby(var/obj/item/W as obj, var/mob/user as mob)
+		if(!isWrench(W))
 			return ..()
 		var/turf/T = src.loc
 		if (level==1 && isturf(T) && !T.is_plating())
@@ -85,5 +89,5 @@
 				"<span class='notice'>\The [user] unfastens \the [src].</span>", \
 				"<span class='notice'>You have unfastened \the [src].</span>", \
 				"You hear a ratchet.")
-			new /obj/item/pipe(loc, make_from=src)
+			new /obj/item/pipe(loc, src)
 			qdel(src)

@@ -1,12 +1,10 @@
-#define ADIABATIC_EXPONENT 0.667 //Actually adiabatic exponent - 1.
-
 /obj/machinery/atmospherics/pipeturbine
 	name = "turbine"
 	desc = "A gas turbine. Converting pressure into energy since 1884."
 	icon = 'icons/obj/pipeturbine.dmi'
 	icon_state = "turbine"
-	anchored = 0
-	density = 1
+	anchored = FALSE
+	density = TRUE
 
 	var/efficiency = 0.4
 	var/kin_energy = 0
@@ -36,21 +34,19 @@
 				initialize_directions = NORTH|SOUTH
 
 	Destroy()
-		loc = null
-
 		if(node1)
 			node1.disconnect(src)
-			qdel(network1)
+			QDEL_NULL(network1)
 		if(node2)
 			node2.disconnect(src)
-			qdel(network2)
+			QDEL_NULL(network2)
 
 		node1 = null
 		node2 = null
 
-		..()
+		. = ..()
 
-	process()
+	Process()
 		..()
 		if(anchored && !(stat&BROKEN))
 			kin_energy *= 1 - kin_loss
@@ -85,8 +81,8 @@
 		if (kin_energy > 1000000)
 			overlays += image('icons/obj/pipeturbine.dmi', "hi-turb")
 
-	attackby(obj/item/weapon/W as obj, mob/user as mob)
-		if(istype(W, /obj/item/weapon/wrench))
+	attackby(obj/item/W as obj, mob/user as mob)
+		if(isWrench(W))
 			anchored = !anchored
 			to_chat(user, "<span class='notice'>You [anchored ? "secure" : "unsecure"] the bolts holding \the [src] to the floor.</span>")
 
@@ -96,13 +92,13 @@
 				else if(dir & (EAST|WEST))
 					initialize_directions = NORTH|SOUTH
 
-				initialize()
+				atmos_init()
 				build_network()
 				if (node1)
-					node1.initialize()
+					node1.atmos_init()
 					node1.build_network()
 				if (node2)
-					node2.initialize()
+					node2.atmos_init()
 					node2.build_network()
 			else
 				if(node1)
@@ -147,14 +143,15 @@
 		else if(reference == node2)
 			network2 = new_network
 
-		if(new_network.normal_members.Find(src))
+		if(list_find(new_network.normal_members, src))
 			return 0
 
 		new_network.normal_members += src
 
 		return null
 
-	initialize()
+	atmos_init()
+		..()
 		if(node1 && node2) return
 
 		var/node2_connect = turn(dir, -90)
@@ -228,8 +225,8 @@
 	desc = "Electrogenerator. Converts rotation into power."
 	icon = 'icons/obj/pipeturbine.dmi'
 	icon_state = "motor"
-	anchored = 0
-	density = 1
+	anchored = FALSE
+	density = TRUE
 
 	var/kin_to_el_ratio = 0.1	//How much kinetic energy will be taken from turbine and converted into electricity
 	var/obj/machinery/atmospherics/pipeturbine/turbine
@@ -246,18 +243,8 @@
 			if (turbine.stat & (BROKEN) || !turbine.anchored || turn(turbine.dir,180) != dir)
 				turbine = null
 
-	process()
-		updateConnection()
-		if(!turbine || !anchored || stat & (BROKEN))
-			return
-
-		var/power_generated = kin_to_el_ratio * turbine.kin_energy
-		turbine.kin_energy -= power_generated
-		add_avail(power_generated)
-
-
-	attackby(obj/item/weapon/W as obj, mob/user as mob)
-		if(istype(W, /obj/item/weapon/wrench))
+	attackby(obj/item/W as obj, mob/user as mob)
+		if(istype(W, /obj/item/wrench))
 			anchored = !anchored
 			turbine = null
 			to_chat(user, "<span class='notice'>You [anchored ? "secure" : "unsecure"] the bolts holding \the [src] to the floor.</span>")
@@ -284,3 +271,12 @@
 			return
 
 		src.set_dir(turn(src.dir, 90))
+
+/obj/machinery/power/turbinemotor/Process()
+	updateConnection()
+	if(!turbine || !anchored || stat & (BROKEN))
+		return
+
+	var/power_generated = kin_to_el_ratio * turbine.kin_energy
+	turbine.kin_energy -= power_generated
+	add_avail(power_generated)

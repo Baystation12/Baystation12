@@ -2,41 +2,55 @@
 
 /obj/item/device/t_scanner
 	name = "\improper T-ray scanner"
-	desc = "A terahertz-ray emitter and scanner used to detect underfloor objects such as cables and pipes."
+	desc = "A terahertz-ray emitter and scanner, capable of penetrating conventional hull materials."
 	icon_state = "t-ray0"
 	slot_flags = SLOT_BELT
 	w_class = ITEM_SIZE_SMALL
 	item_state = "electronic"
-	matter = list(DEFAULT_WALL_MATERIAL = 150)
+	matter = list(MATERIAL_ALUMINIUM = 150)
 	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINEERING = 1)
+	action_button_name = "Toggle T-Ray scanner"
 
-	var/scan_range = 1
+	var/scan_range = 3
 
 	var/on = 0
 	var/list/active_scanned = list() //assoc list of objects being scanned, mapped to their overlay
 	var/client/user_client //since making sure overlays are properly added and removed is pretty important, so we track the current user explicitly
-	var/flicker = 0
 
 	var/global/list/overlay_cache = list() //cache recent overlays
 
-/obj/item/device/t_scanner/update_icon()
+/obj/item/device/t_scanner/Destroy()
+	. = ..()
+	if(on)
+		set_active(FALSE)
+
+/obj/item/device/t_scanner/on_update_icon()
 	icon_state = "t-ray[on]"
+
+/obj/item/device/t_scanner/emp_act()
+	audible_message("<span class = 'notice'> \The [src] buzzes oddly.</span>")
+	set_active(FALSE)
 
 /obj/item/device/t_scanner/attack_self(mob/user)
 	set_active(!on)
+	user.update_action_buttons()
+
+/obj/item/device/t_scanner/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
+	var/obj/structure/disposalpipe/D = target
+	if(D && istype(D))
+		to_chat(user, "<span class='info'>Pipe segment integrity: [(D.health / 10) * 100]%</span>")
 
 /obj/item/device/t_scanner/proc/set_active(var/active)
 	on = active
 	if(on)
-		processing_objects.Add(src)
-		flicker = 0
+		START_PROCESSING(SSfastprocess, src)
 	else
-		processing_objects.Remove(src)
+		STOP_PROCESSING(SSfastprocess, src)
 		set_user_client(null)
 	update_icon()
 
 //If reset is set, then assume the client has none of our overlays, otherwise we only send new overlays.
-/obj/item/device/t_scanner/process()
+/obj/item/device/t_scanner/Process()
 	if(!on) return
 
 	//handle clients changing
@@ -65,17 +79,8 @@
 		user_client.images -= active_scanned[O]
 		active_scanned -= O
 
-	//Flicker effect
-	for(var/obj/O in active_scanned)
-		var/image/overlay = active_scanned[O]
-		if(flicker)
-			overlay.alpha = 0
-		else
-			overlay.alpha = 128
-	flicker = !flicker
-
 //creates a new overlay for a scanned object
-/obj/item/device/t_scanner/proc/get_overlay(obj/scanned)
+/obj/item/device/t_scanner/proc/get_overlay(var/atom/movable/scanned)
 	//Use a cache so we don't create a whole bunch of new images just because someone's walking back and forth in a room.
 	//Also means that images are reused if multiple people are using t-rays to look at the same objects.
 	if(scanned in overlay_cache)
@@ -84,12 +89,26 @@
 		var/image/I = image(loc = scanned, icon = scanned.icon, icon_state = scanned.icon_state)
 		I.plane = HUD_PLANE
 		I.layer = UNDER_HUD_LAYER
+		I.appearance_flags = RESET_ALPHA
 
 		//Pipes are special
 		if(istype(scanned, /obj/machinery/atmospherics/pipe))
 			var/obj/machinery/atmospherics/pipe/P = scanned
 			I.color = P.pipe_color
 			I.overlays += P.overlays
+			I.underlays += P.underlays
+
+		if(ismob(scanned))
+			if(ishuman(scanned))
+				var/mob/living/carbon/human/H = scanned
+				if(H.species.appearance_flags & HAS_SKIN_COLOR)
+					I.color = rgb(H.r_skin, H.g_skin, H.b_skin)
+					I.icon = 'icons/mob/mob.dmi'
+					I.icon_state = "phaseout"
+			var/mob/M = scanned
+			I.color = M.color
+			I.overlays += M.overlays
+			I.underlays += M.underlays
 
 		I.alpha = 128
 		I.mouse_opacity = 0
@@ -107,6 +126,16 @@
 	if(!center) return
 
 	for(var/turf/T in range(scan_range, center))
+		for(var/mob/M in T.contents)
+			if(ishuman(M))
+				var/mob/living/carbon/human/H = M
+				if(H.is_cloaked())
+					. += M
+			else if(M.alpha < 255)
+				. += M
+			else if(round_is_spooky() && isobserver(M))
+				. += M
+
 		if(!!T.is_plating())
 			continue
 
@@ -116,6 +145,8 @@
 			if(!O.invisibility)
 				continue //if it's already visible don't need an overlay for it
 			. += O
+
+
 
 /obj/item/device/t_scanner/proc/set_user_client(var/client/new_client)
 	if(new_client == user_client)

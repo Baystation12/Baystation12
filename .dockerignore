@@ -1,0 +1,17 @@
+.git
+!.git/HEAD
+!.git/logs/HEAD
+baystation12.dmb
+baystation12.rsc
+baystation12.dyn.rsc
+baystation12.dyn.rsc.lk
+baystation12.int
+libmysql.dll
+.dockerignore
+Dockerfile
+.editorconfig
+.gitattributes
+.gitignore
+.travis.yml
+.github
+sql

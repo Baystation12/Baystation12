@@ -43,8 +43,8 @@ obj/var/contaminated = 0
 
 /obj/item/proc/can_contaminate()
 	//Clothing and backpacks can be contaminated.
-	if(flags & PHORONGUARD) return 0
-	else if(istype(src,/obj/item/weapon/storage/backpack)) return 0 //Cannot be washed :(
+	if(obj_flags & ITEM_FLAG_PHORONGUARD) return 0
+	else if(istype(src,/obj/item/storage/backpack)) return 0 //Cannot be washed :(
 	else if(istype(src,/obj/item/clothing)) return 1
 
 /obj/item/proc/contaminate()
@@ -69,7 +69,7 @@ obj/var/contaminated = 0
 		if(prob(1)) suit_contamination() //Phoron can sometimes get through such an open suit.
 
 //Cannot wash backpacks currently.
-//	if(istype(back,/obj/item/weapon/storage/backpack))
+//	if(istype(back,/obj/item/storage/backpack))
 //		back.contaminate()
 
 /mob/proc/pl_effects()
@@ -117,7 +117,7 @@ obj/var/contaminated = 0
 
 /mob/living/carbon/human/proc/burn_eyes()
 	var/obj/item/organ/internal/eyes/E = internal_organs_by_name[BP_EYES]
-	if(E)
+	if(E && !E.phoron_guard)
 		if(prob(20)) to_chat(src, "<span class='danger'>Your eyes burn!</span>")
 		E.damage += 2.5
 		eye_blurry = min(eye_blurry+1.5,50)
@@ -129,7 +129,7 @@ obj/var/contaminated = 0
 	//Checks if the head is adequately sealed.
 	if(head)
 		if(vsc.plc.PHORONGUARD_ONLY)
-			if(head.flags & PHORONGUARD)
+			if(head.item_flags & ITEM_FLAG_PHORONGUARD)
 				return 1
 		else if(head.body_parts_covered & EYES)
 			return 1
@@ -141,7 +141,7 @@ obj/var/contaminated = 0
 	for(var/obj/item/protection in list(wear_suit, gloves, shoes))
 		if(!protection)
 			continue
-		if(vsc.plc.PHORONGUARD_ONLY && !(protection.flags & PHORONGUARD))
+		if(vsc.plc.PHORONGUARD_ONLY && !(protection.item_flags & ITEM_FLAG_PHORONGUARD))
 			return 0
 		coverage |= protection.body_parts_covered
 

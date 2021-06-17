@@ -3,9 +3,9 @@
 	desc = "A small electronic device that should never exist."
 	icon = 'icons/obj/assemblies/new_assemblies.dmi'
 	icon_state = ""
-	flags = CONDUCT
+	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_SMALL
-	matter = list(DEFAULT_WALL_MATERIAL = 100)
+	matter = list(MATERIAL_STEEL = 100)
 	throwforce = 2
 	throw_speed = 3
 	throw_range = 10
@@ -96,13 +96,13 @@
 	return 0
 
 
-/obj/item/device/assembly/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/device/assembly/attackby(obj/item/W as obj, mob/user as mob)
 	if(isassembly(W))
 		var/obj/item/device/assembly/A = W
 		if((!A.secured) && (!secured))
 			attach_assembly(A,user)
 			return
-	if(isscrewdriver(W))
+	if(isScrewdriver(W))
 		if(toggle_secure())
 			to_chat(user, "<span class='notice'>\The [src] is ready!</span>")
 		else
@@ -112,19 +112,17 @@
 	return
 
 
-/obj/item/device/assembly/process()
-	processing_objects.Remove(src)
-	return
+/obj/item/device/assembly/Process()
+	return PROCESS_KILL
 
 
-/obj/item/device/assembly/examine(mob/user)
-	. = ..(user)
-	if((in_range(src, user) || loc == user))
+/obj/item/device/assembly/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 1 || loc == user)
 		if(secured)
 			to_chat(user, "\The [src] is ready!")
 		else
 			to_chat(user, "\The [src] can be attached!")
-	return
 
 
 /obj/item/device/assembly/attack_self(mob/user as mob)
@@ -137,9 +135,9 @@
 	return //HTML MENU FOR WIRES GOES HERE
 
 /obj/item/device/assembly/nano_host()
-    if(istype(loc, /obj/item/device/assembly_holder))
-        return loc.nano_host()
-    return ..()
+	if(istype(loc, /obj/item/device/assembly_holder))
+		return loc.nano_host()
+	return ..()
 
 /*
 	var/small_icon_state = null//If this obj will go inside the assembly use this for icons

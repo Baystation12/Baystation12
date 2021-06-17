@@ -17,14 +17,14 @@
 /obj/item/device/multitool/hacktool/Destroy()
 	for(var/T in known_targets)
 		var/atom/target = T
-		destroyed_event.unregister(target, src)
+		GLOB.destroyed_event.unregister(target, src)
 	known_targets.Cut()
 	qdel(hack_state)
 	hack_state = null
 	return ..()
 
 /obj/item/device/multitool/hacktool/attackby(var/obj/W, var/mob/user)
-	if(isscrewdriver(W))
+	if(isScrewdriver(W))
 		in_hack_mode = !in_hack_mode
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 	else
@@ -44,24 +44,24 @@
 		to_chat(user, "<span class='warning'>You are already hacking!</span>")
 		return 1
 	if(!is_type_in_list(target, supported_types))
-		to_chat(user, "\icon[src] <span class='warning'>Unable to hack this target.</span>")
+		to_chat(user, "[icon2html(src, user)] <span class='warning'>Unable to hack this target.</span>")
 		return 0
-	var/found = known_targets.Find(target)
+	var/found = list_find(known_targets, target)
 	if(found)
 		known_targets.Swap(1, found)	// Move the last hacked item first
 		return 1
 
 	to_chat(user, "<span class='notice'>You begin hacking \the [target]...</span>")
 	is_hacking = 1
-	// On average hackin takes ~30 seconds. Fairly small random span to avoid people simply aborting and trying again
-	var/hack_result = do_after(user, (20 SECONDS + rand(0, 10 SECONDS) + rand(0, 10 SECONDS)), progress = 0)
+	// Hackin takes roughly 15-25 seconds. Fairly small random span to avoid people simply aborting and trying again.
+	var/hack_result = do_after(user, (15 SECONDS + rand(0, 5 SECONDS) + rand(0, 5 SECONDS)), do_flags = DO_DEFAULT & ~DO_SHOW_PROGRESS)
 	is_hacking = 0
 
 	if(hack_result && in_hack_mode)
 		to_chat(user, "<span class='notice'>Your hacking attempt was succesful!</span>")
 		user.playsound_local(get_turf(src), 'sound/piano/A#6.ogg', 50)
 		known_targets.Insert(1, target)	// Insert the newly hacked target first,
-		destroyed_event.register(target, src, /obj/item/device/multitool/hacktool/proc/on_target_destroy)
+		GLOB.destroyed_event.register(target, src, /obj/item/device/multitool/hacktool/proc/on_target_destroy)
 	else
 		to_chat(user, "<span class='warning'>Your hacking attempt failed!</span>")
 	return 1
@@ -72,7 +72,7 @@
 	if(known_targets.len > max_known_targets)
 		for(var/i = (max_known_targets + 1) to known_targets.len)
 			var/atom/A = known_targets[i]
-			destroyed_event.unregister(A, src)
+			GLOB.destroyed_event.unregister(A, src)
 		known_targets.Cut(max_known_targets + 1)
 
 /obj/item/device/multitool/hacktool/proc/on_target_destroy(var/target)
@@ -80,6 +80,7 @@
 
 /datum/topic_state/default/must_hack
 	var/obj/item/device/multitool/hacktool/hacktool
+	check_access = FALSE
 
 /datum/topic_state/default/must_hack/New(var/hacktool)
 	src.hacktool = hacktool

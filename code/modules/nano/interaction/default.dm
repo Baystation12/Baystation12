@@ -1,4 +1,4 @@
-/var/global/datum/topic_state/default/default_state = new()
+GLOBAL_DATUM_INIT(default_state, /datum/topic_state/default, new)
 
 /datum/topic_state/default/href_list(var/mob/user)
 	return list()
@@ -17,7 +17,7 @@
 	return STATUS_UPDATE									// Ghosts can view updates
 
 /mob/living/silicon/pai/default_can_use_topic(var/src_object)
-	if((src_object == src || src_object == radio) && !stat)
+	if((src_object == src || src_object == silicon_radio) && !stat)
 		return STATUS_INTERACTIVE
 	else
 		return ..()
@@ -40,7 +40,8 @@
 	// Prevents the AI from using Topic on admin levels (by for example viewing through the court/thunderdome cameras)
 	// unless it's on the same level as the object it's interacting with.
 	var/turf/T = get_turf(src_object)
-	if(!T || !(z == T.z || (T.z in using_map.player_levels)))
+	var/turf/A = get_turf(src)
+	if(!A || !T || !AreConnectedZLevels(A.z, T.z))
 		return STATUS_CLOSE
 
 	// If an object is in view then we can interact with it
@@ -82,12 +83,15 @@
 	if(. != STATUS_CLOSE)
 		if(loc)
 			. = min(., loc.contents_nano_distance(src_object, src))
-	if(STATUS_INTERACTIVE)
+	if(. == STATUS_INTERACTIVE)
 		return STATUS_UPDATE
 
 /mob/living/carbon/human/default_can_use_topic(var/src_object)
 	. = shared_nano_interaction(src_object)
 	if(. != STATUS_CLOSE)
-		. = min(., shared_living_nano_distance(src_object))
-		if(. == STATUS_UPDATE && (TK in mutations))	// If we have telekinesis and remain close enough, allow interaction.
+		if(loc)
+			. = min(., loc.contents_nano_distance(src_object, src))
+		else
+			. = min(., shared_living_nano_distance(src_object))
+		if(. == STATUS_UPDATE && (psi && !psi.suppressed && psi.get_rank(PSI_PSYCHOKINESIS) >= PSI_RANK_OPERANT))
 			return STATUS_INTERACTIVE

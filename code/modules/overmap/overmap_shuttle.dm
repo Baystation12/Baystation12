@@ -1,76 +1,166 @@
-var/list/sector_shuttles = list()
+#define waypoint_sector(waypoint) map_sectors["[waypoint.z]"]
 
-/datum/shuttle/ferry/overmap
+/datum/shuttle/autodock/overmap
 	warmup_time = 10
-	category = /datum/shuttle/ferry/overmap
-	var/list/shuttle_size   // x y dimensions for shuttle
-	var/obj/effect/overmap/current_location
-	var/obj/effect/overmap/destination //current destination sector
+
 	var/range = 0	//how many overmap tiles can shuttle go, for picking destinations and returning.
+	var/fuel_consumption = 0 //Amount of moles of gas consumed per trip; If zero, then shuttle is magic and does not need fuel
+	var/list/obj/structure/fuel_port/fuel_ports //the fuel ports of the shuttle (but usually just one)
 
-/datum/shuttle/ferry/overmap/New(_name, shuttle_area)
-	..(_name)
-	area_station = shuttle_area
-	set_destination_area(shuttle_area)
-	update_location()
-	shuttle_size = area_station.get_dimensions()
-	sector_shuttles += src
+	category = /datum/shuttle/autodock/overmap
+	var/skill_needed = SKILL_BASIC
+	var/operator_skill = SKILL_MIN
 
-/datum/shuttle/ferry/overmap/move(var/area/origin,var/area/destination)
+/datum/shuttle/autodock/overmap/New(var/_name, var/obj/effect/shuttle_landmark/start_waypoint)
+	..(_name, start_waypoint)
+	refresh_fuel_ports_list()
+
+/datum/shuttle/autodock/overmap/proc/refresh_fuel_ports_list() //loop through all
+	fuel_ports = list()
+	for(var/area/A in shuttle_area)
+		for(var/obj/structure/fuel_port/fuel_port_in_area in A)
+			fuel_port_in_area.parent_shuttle = src
+			fuel_ports += fuel_port_in_area
+
+/datum/shuttle/autodock/overmap/fuel_check()
+	if(!src.try_consume_fuel()) //insufficient fuel
+		for(var/area/A in shuttle_area)
+			for(var/mob/living/M in A)
+				M.show_message("<spawn class='warning'>You hear the shuttle engines sputter... perhaps it doesn't have enough fuel?", AUDIBLE_MESSAGE,
+				"<spawn class='warning'>The shuttle shakes but fails to take off.", VISIBLE_MESSAGE)
+				return 0 //failure!
+	return 1 //success, continue with launch
+
+/datum/shuttle/autodock/overmap/proc/can_go()
+	if(!next_location)
+		return FALSE
+	if(moving_status == SHUTTLE_INTRANSIT)
+		return FALSE //already going somewhere, current_location may be an intransit location instead of in a sector
+	return get_dist(waypoint_sector(current_location), waypoint_sector(next_location)) <= range
+
+/datum/shuttle/autodock/overmap/can_launch()
+	return ..() && can_go()
+
+/datum/shuttle/autodock/overmap/can_force()
+	return ..() && can_go()
+
+/datum/shuttle/autodock/overmap/get_travel_time()
+	var/distance_mod = get_dist(waypoint_sector(current_location),waypoint_sector(next_location))
+	var/skill_mod = 0.2*(skill_needed - operator_skill)
+	return move_time * (1 + distance_mod + skill_mod)
+
+/datum/shuttle/autodock/overmap/process_launch()
+	if(prob(10*max(0, skill_needed - operator_skill)))
+		var/places = get_possible_destinations()
+		var/place = pick(places)
+		set_destination(places[place])
 	..()
-	update_location()
 
-/datum/shuttle/ferry/overmap/proc/is_valid_landing(area/A)
-	if(!istype(A))
-		return 0
-	if(!A.free())
-		return 0
-	var/locked = A.is_shuttle_locked()
-	if(locked)
-		if(locked != name)
-			return 0
-	var/lz_size = A.get_dimensions()
-	if(lz_size["x"] >= shuttle_size["x"] && lz_size["y"] >= shuttle_size["y"])
-		return 1
+/datum/shuttle/autodock/overmap/proc/set_destination(var/obj/effect/shuttle_landmark/A)
+	if(A != current_location)
+		next_location = A
 
-/datum/shuttle/ferry/overmap/proc/can_go()
-	if(!destination)
-		return
-	update_location()
-	if(!current_location)
-		log_error("[name] is not on overmap-friendly zlevel.")
-		return
-	return get_dist(current_location, destination) <= range
-
-/datum/shuttle/ferry/overmap/proc/update_location()
-	current_location = map_sectors["[location ? area_offsite.z : area_station.z]"]
-
-/datum/shuttle/ferry/overmap/proc/set_destination_area(area/A)
-	if(!A)
-		return
-	destination = map_sectors["[A.z]"]
-	if(location)
-		area_offsite = get_location_area(location)
-		area_station = A
-	else
-		area_station = get_location_area(location)
-		area_offsite = A
-
-/datum/shuttle/ferry/overmap/proc/get_possible_destinations()
+/datum/shuttle/autodock/overmap/proc/get_possible_destinations()
 	var/list/res = list()
-	update_location()
-	for (var/obj/effect/overmap/S in range(current_location, range))
-		for(var/A in S.landing_areas)
-			var/area/LZ = locate(A)
-			if(is_valid_landing(LZ))
-				res["[S.name] - [LZ.name]"] = LZ
+	for (var/obj/effect/overmap/visitable/S in range(get_turf(waypoint_sector(current_location)), range))
+		var/list/waypoints = S.get_waypoints(name)
+		for(var/obj/effect/shuttle_landmark/LZ in waypoints)
+			if(LZ.is_valid(src))
+				res["[waypoints[LZ]] - [LZ.name]"] = LZ
 	return res
 
-/datum/shuttle/ferry/overmap/proc/get_location_name()
-	update_location()
-	var/area/A = get_location_area(location)
-	return "[location] - [A.name]"
+/datum/shuttle/autodock/overmap/get_location_name()
+	if(moving_status == SHUTTLE_INTRANSIT)
+		return "In transit"
+	return "[waypoint_sector(current_location)] - [current_location]"
 
-/datum/shuttle/ferry/overmap/proc/get_destination_name()
-	var/area/A = get_location_area(!location)
-	return destination ? "[destination] - [A.name]": "None"
+/datum/shuttle/autodock/overmap/get_destination_name()
+	if(!next_location)
+		return "None"
+	return "[waypoint_sector(next_location)] - [next_location]"
+
+/datum/shuttle/autodock/overmap/proc/try_consume_fuel() //returns 1 if successful, returns 0 if error (like insufficient fuel)
+	if(!fuel_consumption)
+		return 1 //shuttles with zero fuel consumption are magic and can always launch
+	if(!fuel_ports.len)
+		return 0 //Nowhere to get fuel from
+	var/list/obj/item/tank/fuel_tanks = list()
+	for(var/obj/structure/FP in fuel_ports) //loop through fuel ports and assemble list of all fuel tanks
+		var/obj/item/tank/FT = locate() in FP
+		if(FT)
+			fuel_tanks += FT
+	if(!fuel_tanks.len)
+		return 0 //can't launch if you have no fuel TANKS in the ports
+	var/total_flammable_gas_moles = 0
+	for(var/obj/item/tank/FT in fuel_tanks)
+		total_flammable_gas_moles += FT.air_contents.get_by_flag(XGM_GAS_FUEL)
+	if(total_flammable_gas_moles < fuel_consumption) //not enough fuel
+		return 0
+	// We are going to succeed if we got to here, so start consuming that fuel
+	var/fuel_to_consume = fuel_consumption
+	for(var/obj/item/tank/FT in fuel_tanks) //loop through tanks, consume their fuel one by one
+		var/fuel_available = FT.air_contents.get_by_flag(XGM_GAS_FUEL)
+		if(!fuel_available) // Didn't even have fuel.
+			continue
+		if(fuel_available >= fuel_to_consume)
+			FT.remove_air_by_flag(XGM_GAS_FUEL, fuel_to_consume)
+			return 1 //ALL REQUIRED FUEL HAS BEEN CONSUMED, GO FOR LAUNCH!
+		else //this tank doesn't have enough to launch shuttle by itself, so remove all its fuel, then continue loop
+			fuel_to_consume -= fuel_available
+			FT.remove_air_by_flag(XGM_GAS_FUEL, fuel_available)
+
+/obj/structure/fuel_port
+	name = "fuel port"
+	desc = "The fuel input port of the shuttle. Holds one fuel tank. Use a crowbar to open and close it."
+	icon = 'icons/turf/shuttle.dmi'
+	icon_state = "fuel_port"
+	density = FALSE
+	anchored = TRUE
+	var/icon_closed = "fuel_port"
+	var/icon_empty = "fuel_port_empty"
+	var/icon_full = "fuel_port_full"
+	var/opened = 0
+	var/parent_shuttle
+
+/obj/structure/fuel_port/Initialize()
+	. = ..()
+	new /obj/item/tank/hydrogen(src)
+
+/obj/structure/fuel_port/attack_hand(mob/user as mob)
+	if(!opened)
+		to_chat(user, "<spawn class='notice'>The door is secured tightly. You'll need a crowbar to open it.")
+		return
+	else if(contents.len > 0)
+		user.put_in_hands(contents[1])
+	update_icon()
+
+/obj/structure/fuel_port/on_update_icon()
+	if(opened)
+		if(contents.len > 0)
+			icon_state = icon_full
+		else
+			icon_state = icon_empty
+	else
+		icon_state = icon_closed
+
+/obj/structure/fuel_port/attackby(obj/item/W as obj, mob/user as mob)
+	if(isCrowbar(W))
+		if(opened)
+			to_chat(user, "<spawn class='notice'>You tightly shut \the [src] door.")
+			playsound(src.loc, 'sound/effects/locker_close.ogg', 25, 0, -3)
+			opened = 0
+		else
+			to_chat(user, "<spawn class='notice'>You open up \the [src] door.")
+			playsound(src.loc, 'sound/effects/locker_open.ogg', 15, 1, -3)
+			opened = 1
+	else if(istype(W,/obj/item/tank))
+		if(!opened)
+			to_chat(user, "<spawn class='warning'>\The [src] door is still closed!")
+			return
+		if(contents.len == 0)
+			user.unEquip(W, src)
+	update_icon()
+
+// Walls hide stuff inside them, but we want to be visible.
+/obj/structure/fuel_port/hide()
+	return

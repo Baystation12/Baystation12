@@ -61,7 +61,7 @@
 		net_block
 			author = "Assistant Editor Carl Ritz"
 			channel_name = "The Gibson Gazette"
-			message = {"Several corporations banding together to block access to 'wetskrell.nt', site administrators
+			message = {"Several corporations banding together to block access to 'wetskrell.net', site administrators
 			claiming violation of net laws."}
 			round_time = 60 * 50
 
@@ -118,7 +118,7 @@
 var/global/list/newscaster_standard_feeds = list(/datum/news_announcement/bluespace_research, /datum/news_announcement/lotus_tree, /datum/news_announcement/random_junk,  /datum/news_announcement/food_riots)
 
 proc/process_newscaster()
-	check_for_newscaster_updates(ticker.mode.newscaster_announcements)
+	check_for_newscaster_updates(SSticker.mode.newscaster_announcements)
 
 var/global/tmp/announced_news_types = list()
 proc/check_for_newscaster_updates(type)
@@ -128,9 +128,19 @@ proc/check_for_newscaster_updates(type)
 			announced_news_types += subtype
 			announce_newscaster_news(news)
 
-proc/announce_newscaster_news(datum/news_announcement/news)
+proc/announce_newscaster_news(datum/news_announcement/news, list/zlevels)
+	var/datum/feed_network/network
+	for(var/datum/feed_network/G in news_network)
+		if (zlevels[1] in G.z_levels)
+			network = G
+
+			break
+
+	if (!network) //if no networks exist, no newscasters exist either
+		return
+
 	var/datum/feed_channel/sendto
-	for(var/datum/feed_channel/FC in news_network.network_channels)
+	for(var/datum/feed_channel/FC in network.network_channels)
 		if(FC.channel_name == news.channel_name)
 			sendto = FC
 			break
@@ -141,7 +151,7 @@ proc/announce_newscaster_news(datum/news_announcement/news)
 		sendto.author = news.author
 		sendto.locked = 1
 		sendto.is_admin_channel = 1
-		news_network.network_channels += sendto
+		network.network_channels += sendto
 
 	var/author = news.author ? news.author : sendto.author
-	news_network.SubmitArticle(news.message, author, news.channel_name, null, !news.can_be_redacted, news.message_type)
+	network.SubmitArticle(news.message, author, news.channel_name, null, !news.can_be_redacted, news.message_type)

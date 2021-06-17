@@ -20,6 +20,12 @@
 	mode_flag = MODEFLAG_PHOTONIC
 	multiplier = 1.3
 
+/datum/shield_mode/em
+	mode_name = "Electro-Magnetic Shielding"
+	mode_desc = "This mode blocks various high-power emissions like electrical storms."
+	mode_flag = MODEFLAG_EM
+	multiplier = 1.3
+
 /datum/shield_mode/humanoids
 	mode_name = "Humanoid Lifeforms"
 	mode_desc = "This mode blocks various humanoid lifeforms. Does not affect fully synthetic humanoids."

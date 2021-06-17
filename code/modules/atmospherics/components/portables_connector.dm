@@ -15,15 +15,16 @@
 	var/datum/pipe_network/network
 
 	var/on = 0
-	use_power = 0
+	use_power = POWER_USE_OFF
+	uncreated_component_parts = null
 	level = 1
 
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
+	build_icon_state = "connector"
 
-/obj/machinery/atmospherics/portables_connector/New()
-	initialize_directions = dir
-	..()
+	pipe_class = PIPE_CLASS_UNARY
 
-/obj/machinery/atmospherics/portables_connector/update_icon()
+/obj/machinery/atmospherics/portables_connector/on_update_icon()
 	icon_state = "connector"
 
 /obj/machinery/atmospherics/portables_connector/update_underlays()
@@ -37,7 +38,7 @@
 /obj/machinery/atmospherics/portables_connector/hide(var/i)
 	update_underlays()
 
-/obj/machinery/atmospherics/portables_connector/process()
+/obj/machinery/atmospherics/portables_connector/Process()
 	..()
 	if(!on)
 		return
@@ -53,7 +54,7 @@
 	if(reference == node)
 		network = new_network
 
-	if(new_network.normal_members.Find(src))
+	if(list_find(new_network.normal_members, src))
 		return 0
 
 	new_network.normal_members += src
@@ -61,8 +62,6 @@
 	return null
 
 /obj/machinery/atmospherics/portables_connector/Destroy()
-	loc = null
-
 	if(connected_device)
 		connected_device.disconnect()
 
@@ -72,9 +71,10 @@
 
 	node = null
 
-	..()
+	. = ..()
 
-/obj/machinery/atmospherics/portables_connector/initialize()
+/obj/machinery/atmospherics/portables_connector/atmos_init()
+	..()
 	if(node) return
 
 	var/node_connect = dir
@@ -130,8 +130,8 @@
 	return null
 
 
-/obj/machinery/atmospherics/portables_connector/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if (!istype(W, /obj/item/weapon/wrench))
+/obj/machinery/atmospherics/portables_connector/attackby(var/obj/item/W as obj, var/mob/user as mob)
+	if(!isWrench(W))
 		return ..()
 	if (connected_device)
 		to_chat(user, "<span class='warning'>You cannot unwrench \the [src], dettach \the [connected_device] first.</span>")
@@ -151,5 +151,5 @@
 			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
 			"<span class='notice'>You have unfastened \the [src].</span>", \
 			"You hear a ratchet.")
-		new /obj/item/pipe(loc, make_from=src)
+		new /obj/item/pipe(loc, src)
 		qdel(src)

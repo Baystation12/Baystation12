@@ -27,7 +27,7 @@
 	. = ..()
 	// Arm the escape pods.
 	if (emergency_evacuation)
-		for (var/datum/shuttle/ferry/escape_pod/pod in escape_pods)
+		for (var/datum/shuttle/autodock/ferry/escape_pod/pod in escape_pods)
 			if (pod.arming_controller)
 				pod.arming_controller.arm()
 
@@ -37,16 +37,16 @@
 
 	if (emergency_evacuation)
 		// Abondon Ship
-		for (var/datum/shuttle/ferry/escape_pod/pod in escape_pods) // Launch the pods!
+		for (var/datum/shuttle/autodock/ferry/escape_pod/pod in escape_pods) // Launch the pods!
 			if (!pod.arming_controller || pod.arming_controller.armed)
 				pod.move_time = (evac_transit_delay/10)
 				pod.launch(src)
 
-		priority_announcement.Announce(replacetext(replacetext(using_map.emergency_shuttle_leaving_dock, "%dock_name%", "[using_map.dock_name]"),  "%ETA%", "[round(get_eta()/60,1)] minute\s"))
+		priority_announcement.Announce(replacetext(replacetext(GLOB.using_map.emergency_shuttle_leaving_dock, "%dock_name%", "[GLOB.using_map.dock_name]"),  "%ETA%", "[round(get_eta()/60,1)] minute\s"))
 	else
 		// Bluespace Jump
-		priority_announcement.Announce(replacetext(replacetext(using_map.shuttle_leaving_dock, "%dock_name%", "[using_map.dock_name]"),  "%ETA%", "[round(get_eta()/60,1)] minute\s"))
-		SetUniversalState(/datum/universal_state/bluespace_jump, arguments=list(using_map.station_levels))
+		priority_announcement.Announce(replacetext(replacetext(GLOB.using_map.shuttle_leaving_dock, "%dock_name%", "[GLOB.using_map.dock_name]"),  "%ETA%", "[round(get_eta()/60,1)] minute\s"))
+		SetUniversalState(/datum/universal_state/bluespace_jump, arguments=list(GLOB.using_map.station_levels))
 
 /datum/evacuation_controller/starship/finish_evacuation()
 	..()
@@ -70,9 +70,10 @@
 	option_target = EVAC_OPT_ABANDON_SHIP
 	needs_syscontrol = TRUE
 	silicon_allowed = TRUE
+	abandon_ship = TRUE
 
 /datum/evacuation_option/abandon_ship/execute(mob/user)
-	if (!ticker || !evacuation_controller)
+	if (!evacuation_controller)
 		return
 	if (evacuation_controller.deny)
 		to_chat(user, "Unable to initiate escape procedures.")
@@ -94,7 +95,7 @@
 	silicon_allowed = TRUE
 
 /datum/evacuation_option/bluespace_jump/execute(mob/user)
-	if (!ticker || !evacuation_controller)
+	if (!evacuation_controller)
 		return
 	if (evacuation_controller.deny)
 		to_chat(user, "Unable to initiate jump preparation.")
@@ -116,7 +117,7 @@
 	silicon_allowed = FALSE
 
 /datum/evacuation_option/cancel_abandon_ship/execute(mob/user)
-	if (ticker && evacuation_controller && evacuation_controller.cancel_evacuation())
+	if (evacuation_controller && evacuation_controller.cancel_evacuation())
 		log_and_message_admins("[key_name(user)] has cancelled abandonment of the spacecraft.")
 
 /datum/evacuation_option/cancel_bluespace_jump
@@ -127,14 +128,14 @@
 	silicon_allowed = FALSE
 
 /datum/evacuation_option/cancel_bluespace_jump/execute(mob/user)
-	if (ticker && evacuation_controller && evacuation_controller.cancel_evacuation())
+	if (evacuation_controller && evacuation_controller.cancel_evacuation())
 		log_and_message_admins("[key_name(user)] has cancelled the bluespace jump.")
 
 /obj/screen/fullscreen/bluespace_overlay
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "mfoam"
 	screen_loc = "WEST,SOUTH to EAST,NORTH"
-	color = "#FF9900"
+	color = "#ff9900"
 	blend_mode = BLEND_SUBTRACT
 	layer = FULLSCREEN_LAYER
 

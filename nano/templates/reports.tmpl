@@ -1,0 +1,74 @@
+{{if data.prog_state == 1}} <!--REPORT_VIEW-->
+	<div class='item'>
+		{{:helper.link('Load Report', null, {'load' : 1, 'warning' : (data.report_data && !data.view_only) ? 1 : 0}, null)}}
+		{{:helper.link('Save Report', null, {'save' : 1, 'save_as' : 0}, (data.report_data && !data.view_only) ? null : 'disabled')}}
+		{{:helper.link('Save Copy', null, {'save' : 1, 'save_as' : 1}, (data.report_data && !data.view_only) ? null : 'disabled')}}		
+		{{:helper.link('New Report', null, {'download' : 1, 'warning' : (data.report_data && !data.view_only) ? 1 : 0}, null)}}
+	</div>
+	<center><h2>Report Editor</h2></center>
+	{{if data.report_data}}
+		<h3>{{:data.report_data.name}}</h3>
+		{{for data.report_data.fields}}
+			<div class='item'>
+				{{if value.ignore_value}}
+					{{:value.name}}
+				{{else}}
+					<div class='itemLabel'>
+						{{if (value.can_edit && value.access_edit && !data.view_only)}}
+							{{:helper.link('','pencil' , {'edit' : 1, 'ID' : value.ID}, null)}}
+						{{/if}}
+						{{:value.name}}: 
+					</div>
+					{{if value.access}}
+						<div class="itemContent">
+							{{if value.needs_big_box}}
+							<div class='block'>
+								{{:value.value}}
+							</div>
+							{{else}}
+							<div class='statusDisplayComm'>
+								{{:value.value}}
+							</div>
+							{{/if}}
+						</div>
+					{{else}}
+						<div class="itemContent">Access Denied.</div>
+					{{/if}}
+				{{/if}}
+			</div>
+		{{/for}}
+			<div class='item'>
+				<div class='itemContent'>
+					{{:helper.link('Print Copy', null, {'print' : 1, 'print_mode' : 0}, data.printer ? null : 'disabled')}}
+					{{:helper.link('Print With Fields', null, {'print' : 1, 'print_mode' : 1}, data.printer ? null : 'disabled')}}
+					{{:helper.link('Export to Text', null, {'export' : 1}, null)}}
+				</div>
+			</div>
+		{{if !data.view_only}}
+			<div class='item'>
+				<div class='itemContent'>
+					{{:helper.link('Submit Report', null, {'submit' : 1}, data.report_data.access_edit ? null : 'disabled')}}
+					{{:helper.link('Discard Changes', null, {'discard' : 1, 'warning' : 1}, data.report_data.access_edit ? null : 'disabled')}}
+				</div>
+			</div>
+		{{else}}
+			<div class='item'>
+				<div class='itemContent'>
+					{{:helper.link('Close Report', null, {'discard' : 1}, null)}}
+				</div>
+			</div>
+		{{/if}}
+	{{/if}}
+{{else data.prog_state == 2}} <!--REPORT_DOWNLOAD-->
+	{{:helper.link('Back', null, {'home' : 1}, null)}}
+	<center><h2>Report Download</h2></center>
+	{{for data.reports}}
+		<div class='item'>
+			<div class='itemLabel'>
+				{{:helper.link(value.name, null, {'get_report' : 1, 'report' : value.uid}, null)}}
+			</div>
+		</div>
+	{{empty}}
+		There are no reports available for downloading.
+	{{/for}}
+{{/if}}

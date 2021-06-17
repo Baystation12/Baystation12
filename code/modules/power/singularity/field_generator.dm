@@ -18,9 +18,9 @@ field_generator power level display
 	desc = "A large thermal battery that projects a high amount of energy when powered."
 	icon = 'icons/obj/machines/field_generator.dmi'
 	icon_state = "Field_Gen"
-	anchored = 0
-	density = 1
-	use_power = 0
+	anchored = FALSE
+	density = TRUE
+	use_power = POWER_USE_OFF
 	var/const/num_power_levels = 6	// Total number of power level icon has
 	var/Varedit_start = 0
 	var/Varpower = 0
@@ -37,7 +37,7 @@ field_generator power level display
 	var/field_power_draw = 2000	//power needed per field object
 
 
-/obj/machinery/field_generator/update_icon()
+/obj/machinery/field_generator/on_update_icon()
 	overlays.Cut()
 	if(!active)
 		if(warming_up)
@@ -59,15 +59,14 @@ field_generator power level display
 	..()
 	fields = list()
 	connected_gens = list()
-	return
 
-/obj/machinery/field_generator/process()
+/obj/machinery/field_generator/Process()
 	if(Varedit_start == 1)
 		if(active == 0)
 			active = 1
 			state = 2
 			power = field_generator_max_power
-			anchored = 1
+			anchored = TRUE
 			warming_up = 3
 			start_fields()
 			update_icon()
@@ -76,15 +75,14 @@ field_generator power level display
 	if(src.active == 2)
 		calc_power()
 		update_icon()
-	return
 
 
-/obj/machinery/field_generator/attack_hand(mob/user as mob)
+/obj/machinery/field_generator/physical_attack_hand(mob/user)
 	if(state == 2)
 		if(get_dist(src, user) <= 1)//Need to actually touch the thing to turn it on
 			if(src.active >= 1)
 				to_chat(user, "You are unable to turn off the [src.name] once it is online.")
-				return 1
+				return TRUE
 			else
 				user.visible_message("[user.name] turns on the [src.name]", \
 					"You turn on the [src.name].", \
@@ -93,16 +91,16 @@ field_generator power level display
 				investigate_log("<font color='green'>activated</font> by [user.key].","singulo")
 
 				src.add_fingerprint(user)
+				return TRUE
 	else
 		to_chat(user, "The [src] needs to be firmly secured to the floor first.")
-		return
-
+		return TRUE
 
 /obj/machinery/field_generator/attackby(obj/item/W, mob/user)
 	if(active)
 		to_chat(user, "The [src] needs to be off.")
 		return
-	else if(istype(W, /obj/item/weapon/wrench))
+	else if(isWrench(W))
 		switch(state)
 			if(0)
 				state = 1
@@ -110,19 +108,19 @@ field_generator power level display
 				user.visible_message("[user.name] secures [src.name] to the floor.", \
 					"You secure the external reinforcing bolts to the floor.", \
 					"You hear ratchet")
-				src.anchored = 1
+				src.anchored = TRUE
 			if(1)
 				state = 0
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 				user.visible_message("[user.name] unsecures [src.name] reinforcing bolts from the floor.", \
 					"You undo the external reinforcing bolts.", \
 					"You hear ratchet")
-				src.anchored = 0
+				src.anchored = FALSE
 			if(2)
 				to_chat(user, "<span class='warning'> The [src.name] needs to be unwelded from the floor.</span>")
 				return
-	else if(istype(W, /obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/WT = W
+	else if(isWelder(W))
+		var/obj/item/weldingtool/WT = W
 		switch(state)
 			if(0)
 				to_chat(user, "<span class='warning'>The [src.name] needs to be wrenched to the floor.</span>")
@@ -168,7 +166,7 @@ field_generator power level display
 
 /obj/machinery/field_generator/Destroy()
 	src.cleanup()
-	..()
+	. = ..()
 
 
 
@@ -261,7 +259,7 @@ field_generator power level display
 		return
 	for(var/dist = 0, dist <= 9, dist += 1) // checks out to 8 tiles away for another generator
 		T = get_step(T, NSEW)
-		if(T.density)//We cant shoot a field though this
+		if(T.density)//We can't shoot a field though this
 			return 0
 		for(var/atom/A in T.contents)
 			if(ismob(A))
@@ -278,7 +276,7 @@ field_generator power level display
 			break
 	if(isnull(G))
 		return
-	T = src.loc
+	T = get_turf(src)
 	for(var/dist = 0, dist < steps, dist += 1) // creates each field tile
 		var/field_dir = get_dir(T,get_step(G.loc, NSEW))
 		T = get_step(T, NSEW)
@@ -287,7 +285,7 @@ field_generator power level display
 			CF.set_master(src,G)
 			fields += CF
 			G.fields += CF
-			CF.loc = T
+			CF.forceMove(T)
 			CF.set_dir(field_dir)
 	var/listcheck = 0
 	for(var/obj/machinery/field_generator/FG in connected_gens)
@@ -312,12 +310,12 @@ field_generator power level display
 /obj/machinery/field_generator/proc/cleanup()
 	clean_up = 1
 	for (var/obj/machinery/containment_field/F in fields)
-		if (isnull(F))
+		if (QDELETED(F))
 			continue
 		qdel(F)
 	fields = list()
 	for(var/obj/machinery/field_generator/FG in connected_gens)
-		if (isnull(FG))
+		if (QDELETED(FG))
 			continue
 		FG.connected_gens.Remove(src)
 		if(!FG.clean_up)//Makes the other gens clean up as well
@@ -332,7 +330,7 @@ field_generator power level display
 	//I want to avoid using global variables.
 	spawn(1)
 		var/temp = 1 //stops spam
-		for(var/obj/singularity/O in machines)
+		for(var/obj/singularity/O in SSmachines.machinery)
 			if(O.last_warning && temp)
 				if((world.time - O.last_warning) > 50) //to stop message-spam
 					temp = 0

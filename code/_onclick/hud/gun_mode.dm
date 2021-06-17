@@ -11,7 +11,7 @@
 
 /obj/screen/gun/move
 	name = "Allow Movement"
-	icon_state = "no_walk0"
+	icon_state = "no_walk1"
 	screen_loc = ui_gun2
 
 /obj/screen/gun/move/Click(location, control, params)
@@ -25,7 +25,7 @@
 
 /obj/screen/gun/item
 	name = "Allow Item Use"
-	icon_state = "no_item0"
+	icon_state = "no_item1"
 	screen_loc = ui_gun1
 
 /obj/screen/gun/item/Click(location, control, params)

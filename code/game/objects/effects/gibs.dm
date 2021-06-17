@@ -3,21 +3,26 @@
 
 /obj/effect/gibspawner
 	var/sparks = 0 //whether sparks spread on Gib()
-	var/virusProb = 20 //the chance for viruses to spread on the gibs
 	var/list/gibtypes = list()
 	var/list/gibamounts = list()
 	var/list/gibdirections = list() //of lists
 	var/fleshcolor //Used for gibbed humans.
 	var/bloodcolor //Used for gibbed humans.
+	var/datum/dna/MobDNA
 
 	New(location, var/datum/dna/MobDNA, var/fleshcolor, var/bloodcolor)
 		..()
 
 		if(fleshcolor) src.fleshcolor = fleshcolor
 		if(bloodcolor) src.bloodcolor = bloodcolor
-		Gib(loc,MobDNA)
+		if(MobDNA)     src.MobDNA = MobDNA
 
-	proc/Gib(atom/location, var/datum/dna/MobDNA = null)
+	Initialize()
+		..()
+		Gib(loc)
+		return INITIALIZE_HINT_QDEL
+
+	proc/Gib(atom/location)
 		if(gibtypes.len != gibamounts.len || gibamounts.len != gibdirections.len)
 			log_error("<span class='warning'>Gib list length mismatch!</span>")
 			return
@@ -50,6 +55,6 @@
 					if(istype(location,/turf/))
 						var/list/directions = gibdirections[i]
 						if(directions.len)
-							gib.streak(directions)
+							addtimer(CALLBACK(gib, /obj/effect/decal/cleanable/blood/gibs/proc/streak, directions), 0)
 
 		qdel(src)

@@ -5,23 +5,22 @@
 	var/on = 0
 	var/obj/item/assembly/shock_kit/part = null
 	var/last_time = 1.0
-
+	buckle_movable = FALSE
+	
 /obj/structure/bed/chair/e_chair/New()
 	..()
 	overlays += image('icons/obj/objects.dmi', src, "echair_over", MOB_LAYER + 1, dir)
 	return
 
-/obj/structure/bed/chair/e_chair/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/wrench))
+/obj/structure/bed/chair/e_chair/attackby(obj/item/W as obj, mob/user as mob)
+	if(isWrench(W))
 		var/obj/structure/bed/chair/C = new /obj/structure/bed/chair(loc)
 		playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
 		C.set_dir(dir)
-		part.loc = loc
+		part.dropInto(loc)
 		part.master = null
 		part = null
 		qdel(src)
-		return
-	return
 
 /obj/structure/bed/chair/e_chair/verb/toggle()
 	set name = "Toggle Electric Chair"
@@ -56,9 +55,9 @@
 		return
 	if(!A.powered(EQUIP))
 		return
-	A.use_power(EQUIP, 5000)
+	A.use_power_oneoff(5000, EQUIP)
 	var/light = A.power_light
-	A.updateicon()
+	A.update_icon()
 
 	flick("echair1", src)
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
@@ -73,5 +72,5 @@
 	visible_message("<span class='danger'>The electric chair went off!</span>", "<span class='danger'>You hear a deep sharp shock!</span>")
 
 	A.power_light = light
-	A.updateicon()
+	A.update_icon()
 	return

@@ -3,7 +3,7 @@
 /repository/follow
 	var/datum/cache_entry/valid_until/cache
 
-	var/PriorityQueue/followed_objects
+	var/list/followed_objects
 	var/list/followed_objects_assoc
 	var/list/followed_subtypes
 
@@ -14,7 +14,7 @@
 
 /repository/follow/New()
 	..()
-	followed_objects = new/PriorityQueue(/proc/cmp_follow_holder)
+	followed_objects = list()
 	followed_objects_assoc = list()
 	followed_subtypes = list()
 
@@ -29,9 +29,9 @@
 	var/follow_holder = new follow_holder_type(AM)
 
 	followed_objects_assoc[AM] = follow_holder
-	followed_objects.Enqueue(follow_holder)
+	followed_objects.Add(follow_holder)
 
-	destroyed_event.register(AM, src, /repository/follow/proc/remove_subject)
+	GLOB.destroyed_event.register(AM, src, /repository/follow/proc/remove_subject)
 
 /repository/follow/proc/remove_subject(var/atom/movable/AM)
 	cache = null
@@ -41,7 +41,7 @@
 	followed_objects_assoc -= AM
 	followed_objects.Remove(follow_holder)
 
-	destroyed_event.unregister(AM, src, /repository/follow/proc/remove_subject)
+	GLOB.destroyed_event.unregister(AM, src, /repository/follow/proc/remove_subject)
 
 	qdel(follow_holder)
 
@@ -58,26 +58,29 @@
 	cache = new(5 SECONDS)
 
 	var/list/followed_by_name = list()
-	for(var/followed_object in followed_objects.L)
+	for(var/followed_object in followed_objects)
 		var/datum/follow_holder/fh = followed_object
 		if(fh.show_entry())
 			group_by(followed_by_name, fh.get_name(TRUE), fh)
 
-	. = list()
+	var/list/L = list()
+
 	for(var/followed_name in followed_by_name)
 		var/list/followed_things = followed_by_name[followed_name]
 		if(followed_things.len == 1)
-			var/datum/follow_holder/followed_thing = followed_things[1]
-			.[followed_thing.get_name()] = followed_thing.followed_instance
+			ADD_SORTED(L, followed_things[1], /proc/cmp_follow_holder)
 		else
 			for(var/i = 1 to followed_things.len)
 				var/datum/follow_holder/followed_thing = followed_things[i]
-				.["[followed_thing.get_name()] ([i])"] = followed_thing.followed_instance
+				followed_thing.instance = i
+				followed_thing.get_name(TRUE)
+				ADD_SORTED(L, followed_thing, /proc/cmp_follow_holder)
 
-	cache.data = .
+	cache.data = L
+	return L
 
-/atom/movable/initialize()
-	..()
+/atom/movable/Initialize()
+	. = ..()
 	if(!is_type_in_list(src, follow_repository.excluded_subtypes) && is_type_in_list(src, follow_repository.followed_subtypes))
 		follow_repository.add_subject(src)
 
@@ -88,6 +91,7 @@
 /datum/follow_holder
 	var/name
 	var/suffix = ""
+	var/instance
 	var/followed_type
 	var/sort_order
 	var/atom/movable/followed_instance
@@ -104,11 +108,17 @@
 /datum/follow_holder/proc/get_name(var/recalc = FALSE)
 	if(!name || recalc)
 		var/suffix = get_suffix(followed_instance)
-		name = "[followed_instance.name][suffix ? " [suffix]" : ""]"
+		name = "[followed_instance.follow_name()][instance ? " ([instance])" : ""][suffix ? " [suffix]" : ""]"
 	return name
 
+/atom/movable/proc/follow_name()
+	return name
+
+/mob/follow_name()
+	return real_name || name
+
 /datum/follow_holder/proc/show_entry()
-	return TRUE
+	return !!followed_instance
 
 /datum/follow_holder/proc/get_suffix()
 	var/extra_suffix = followed_instance.follow_suffix()
@@ -206,15 +216,6 @@
 	followed_type = /mob/living // List all other (living) mobs we haven't given a special suffix
 	suffix = "Mob"
 
-/datum/follow_holder/mech
-	sort_order = 8
-	followed_type = /obj/mecha
-	suffix = "Mech"
-
-/datum/follow_holder/mech/get_suffix(var/obj/mecha/M)
-	suffix = M.occupant ? "\[[M.occupant]\] \[[initial(suffix)]\]" : "\[[initial(suffix)]\]"
-	return ..()
-
 /datum/follow_holder/blob
 	sort_order = 9
 	followed_type = /obj/effect/blob/core
@@ -230,7 +231,7 @@
 
 /datum/follow_holder/nuke_disc
 	sort_order = 11
-	followed_type = /obj/item/weapon/disk/nuclear
+	followed_type = /obj/item/disk/nuclear
 
 /datum/follow_holder/nuclear_bomb
 	sort_order = 12
@@ -238,12 +239,12 @@
 
 /datum/follow_holder/captains_spare
 	sort_order = 13
-	followed_type = /obj/item/weapon/card/id/captains_spare
+	followed_type = /obj/item/card/id/captains_spare
 
-/datum/follow_holder/stack
+/datum/follow_holder/voxstack
 	sort_order = 14
-	followed_type = /obj/item/organ/internal/stack
+	followed_type = /obj/item/organ/internal/voxstack
 
-/datum/follow_holder/stack/show_entry()
-	var/obj/item/organ/internal/stack/S = followed_instance
+/datum/follow_holder/voxstack/show_entry()
+	var/obj/item/organ/internal/voxstack/S = followed_instance
 	return ..() && !S.owner

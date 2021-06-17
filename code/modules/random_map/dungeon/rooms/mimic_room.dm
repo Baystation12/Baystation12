@@ -18,6 +18,6 @@
 //put loot inside said mimic
 
 
-//dont want to keep references to said mimic or closet. Would cause qdel issues.
+//don't want to keep references to said mimic or closet. Would cause qdel issues.
 //so since we know nothing should get moved since we placed it we just find it again.
 //inefficient yes but will not cause issues with qdel

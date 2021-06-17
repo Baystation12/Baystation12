@@ -1,7 +1,5 @@
 #define HUMAN_STRIP_DELAY        40   // Takes 40ds = 4s to strip someone.
 
-#define SHOES_SLOWDOWN          -1.0  // How much shoes slow you down by default. Negative values speed you up.
-
 #define CANDLE_LUM 3 // For how bright candles are.
 
 // Item inventory slot bitmasks.
@@ -22,28 +20,20 @@
 #define SLOT_TIE        0x4000
 #define SLOT_HOLSTER	0x8000 //16th bit - higher than this will overflow
 
-// Flags bitmasks.
-#define NOBLUDGEON         0x1    // When an item has this it produces no "X has been hit by Y with Z" message with the default handler.
-#define CONDUCT            0x2   // Conducts electricity. (metal etc.)
-#define ON_BORDER          0x4   // Item has priority to check when entering or leaving.
-#define NOBLOODY           0x8   // Used for items if they don't want to get a blood overlay.
-#define OPENCONTAINER      0x10 // Is an open container for chemistry purposes.
-#define PHORONGUARD        0x20 // Does not get contaminated by phoron.
-#define	NOREACT            0x40 // Reagents don't react inside this container.
-#define PROXMOVE           0x80  // Does this object require proximity checking in Enter()?
-
-//Flags for items (equipment)
-#define THICKMATERIAL          0x1  // Prevents syringes, parapens and hyposprays if equiped to slot_suit or slot_head.
-#define STOPPRESSUREDAMAGE     0x2  // Counts towards pressure protection. Note that like temperature protection, body_parts_covered is considered here as well.
-#define AIRTIGHT               0x4  // Functions with internals.
-#define NOSLIP                 0x8  // Prevents from slipping on wet floors, in space, etc.
-#define BLOCK_GAS_SMOKE_EFFECT 0x10 // Blocks the effect that chemical clouds would have on a mob -- glasses, mask and helmets ONLY! (NOTE: flag shared with ONESIZEFITSALL)
-#define FLEXIBLEMATERIAL       0x20 // At the moment, masks with this flag will not prevent eating even if they are covering your face.
-
-// Flags for pass_flags.
-#define PASSTABLE  0x1
-#define PASSGLASS  0x2
-#define PASSGRILLE 0x4
+#define ACCESSORY_SLOT_UTILITY  "Utility"
+#define ACCESSORY_SLOT_HOLSTER	"Holster"
+#define ACCESSORY_SLOT_ARMBAND  "Armband"
+#define ACCESSORY_SLOT_RANK     "Rank"
+#define ACCESSORY_SLOT_DEPT		"Department"
+#define ACCESSORY_SLOT_DECOR    "Decor"
+#define ACCESSORY_SLOT_MEDAL    "Medal"
+#define ACCESSORY_SLOT_INSIGNIA "Insignia"
+#define ACCESSORY_SLOT_ARMOR_C  "Chest armor"
+#define ACCESSORY_SLOT_ARMOR_A  "Arm armor"
+#define ACCESSORY_SLOT_ARMOR_L  "Leg armor"
+#define ACCESSORY_SLOT_ARMOR_S  "Armor storage"
+#define ACCESSORY_SLOT_ARMOR_M  "Misc armor"
+#define ACCESSORY_SLOT_HELM_C	"Helmet cover"
 
 // Bitmasks for the flags_inv variable. These determine when a piece of clothing hides another, i.e. a helmet hiding glasses.
 // WARNING: The following flags apply only to the external suit!
@@ -58,6 +48,7 @@
 #define HIDEEARS 0x2 // Headsets and such.
 #define HIDEEYES 0x4 // Glasses.
 #define HIDEFACE 0x8 // Dictates whether we appear as "Unknown".
+#define CLOTHING_BULKY 0x800 //You cannot wear bulky clothing over bulky clothing.
 
 #define BLOCKHEADHAIR   0x20    // Hides the user's hair overlay. Leaves facial hair.
 #define BLOCKHAIR       0x40    // Hides the user's hair, facial and otherwise.
@@ -101,11 +92,9 @@
 #define slot_r_ear_str      "slot_r_ear"
 #define slot_belt_str       "slot_belt"
 #define slot_shoes_str      "slot_shoes"
-#define slot_head_str      	"slot_head"
 #define slot_wear_mask_str 	"slot_wear_mask"
 #define slot_handcuffed_str "slot_handcuffed"
 #define slot_legcuffed_str "slot_legcuffed"
-#define slot_wear_mask_str 	"slot_wear_mask"
 #define slot_wear_id_str  	"slot_wear_id"
 #define slot_gloves_str  	"slot_gloves"
 #define slot_glasses_str  	"slot_glasses"
@@ -116,20 +105,24 @@
 #define HEAD        0x1
 #define FACE        0x2
 #define EYES        0x4
+#define FULL_HEAD   (HEAD | FACE | EYES)
 #define UPPER_TORSO 0x8
 #define LOWER_TORSO 0x10
+#define FULL_TORSO  (UPPER_TORSO | LOWER_TORSO)
 #define LEG_LEFT    0x20
 #define LEG_RIGHT   0x40
-#define LEGS        0x60   //  LEG_LEFT | LEG_RIGHT
+#define LEGS        (LEG_LEFT | LEG_RIGHT)
 #define FOOT_LEFT   0x80
 #define FOOT_RIGHT  0x100
-#define FEET        0x180  // FOOT_LEFT | FOOT_RIGHT
+#define FEET        (FOOT_LEFT | FOOT_RIGHT)
+#define FULL_LEGS   (LEG_LEFT | LEG_RIGHT | FOOT_LEFT | FOOT_RIGHT)
 #define ARM_LEFT    0x200
 #define ARM_RIGHT   0x400
-#define ARMS        0x600 //  ARM_LEFT | ARM_RIGHT
+#define ARMS        (ARM_LEFT | ARM_RIGHT)
 #define HAND_LEFT   0x800
 #define HAND_RIGHT  0x1000
-#define HANDS       0x1800 // HAND_LEFT | HAND_RIGHT
+#define HANDS       (HAND_LEFT | HAND_RIGHT)
+#define FULL_ARMS   (ARM_LEFT | ARM_RIGHT | HAND_LEFT | HAND_RIGHT)
 #define FULL_BODY   0xFFFF
 
 // Bitflags for the percentual amount of protection a piece of clothing which covers the body part offers.
@@ -179,6 +172,13 @@
 #define      GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE 1500  // For some gloves.
 #define        SHOE_MAX_HEAT_PROTECTION_TEMPERATURE 1500  // For shoes.
 
+#define  FIRESUIT_MAX_PRESSURE 		100 * ONE_ATMOSPHERE   // Firesuis and atmos voidsuits
+#define  RIG_MAX_PRESSURE 			50 * ONE_ATMOSPHERE   // Rigs
+#define  LIGHT_RIG_MAX_PRESSURE 	25 * ONE_ATMOSPHERE   // Rigs
+#define  ENG_VOIDSUIT_MAX_PRESSURE 	50 * ONE_ATMOSPHERE 
+#define  VOIDSUIT_MAX_PRESSURE 		25 * ONE_ATMOSPHERE 
+#define  SPACE_SUIT_MAX_PRESSURE 	5 * ONE_ATMOSPHERE
+
 // Fire.
 #define FIRE_MIN_STACKS          -20
 #define FIRE_MAX_STACKS           25
@@ -194,9 +194,22 @@
 #define SUIT_SENSOR_VITAL    2
 #define SUIT_SENSOR_TRACKING 3
 
+#define SUIT_SENSOR_MODES list("Off" = SUIT_SENSOR_OFF, "Binary sensors" = SUIT_SENSOR_BINARY, "Vitals tracker" = SUIT_SENSOR_VITAL, "Tracking beacon" = SUIT_SENSOR_TRACKING)
+
 #define SUIT_NO_SENSORS 0
 #define SUIT_HAS_SENSORS 1
 #define SUIT_LOCKED_SENSORS 2
+
+// Hair Flags
+#define VERY_SHORT 0x1
+#define HAIR_TIEABLE 0x2
+#define HAIR_BALD 0x4
+
+//flags to determine if an eyepiece is a hud.
+#define HUD_SCIENCE 0x1
+#define HUD_SECURITY 0x2
+#define HUD_MEDICAL 0x4
+#define HUD_JANITOR 0x8
 
 // Storage
 
@@ -214,23 +227,23 @@
 	8 - things that take up an entire turf, like wall girders or door assemblies
 */
 
-var/list/default_onmob_icons = list(
-		slot_l_hand_str = 'icons/mob/items/lefthand.dmi',
-		slot_r_hand_str = 'icons/mob/items/righthand.dmi',
-		slot_belt_str = 'icons/mob/belt.dmi',
-		slot_back_str = 'icons/mob/back.dmi',
-		slot_l_ear_str = 'icons/mob/ears.dmi',
-		slot_r_ear_str = 'icons/mob/ears.dmi',
-		slot_glasses_str = 'icons/mob/eyes.dmi',
-		slot_wear_id_str = 'icons/mob/mob.dmi',
-		slot_w_uniform_str = 'icons/mob/uniform.dmi',
-		slot_wear_suit_str = 'icons/mob/suit.dmi',
-		slot_head_str = 'icons/mob/head.dmi',
-		slot_shoes_str = 'icons/mob/feet.dmi',
-		slot_wear_mask_str = 'icons/mob/mask.dmi',
-		slot_handcuffed_str = 'icons/mob/mob.dmi',
-		slot_legcuffed_str = 'icons/mob/mob.dmi',
-		slot_gloves_str = 'icons/mob/hands.dmi',
-		slot_s_store_str = 'icons/mob/belt_mirror.dmi',
-		slot_tie_str = 'icons/mob/ties.dmi'
-		)
+GLOBAL_LIST_INIT(default_onmob_icons, list(
+	slot_l_hand_str = 'icons/mob/onmob/items/lefthand.dmi',\
+	slot_r_hand_str = 'icons/mob/onmob/items/righthand.dmi',\
+	slot_belt_str = 'icons/mob/onmob/onmob_belt.dmi',\
+	slot_back_str = 'icons/mob/onmob/onmob_back.dmi',\
+	slot_l_ear_str = 'icons/mob/onmob/onmob_ears.dmi',\
+	slot_r_ear_str = 'icons/mob/onmob/onmob_ears.dmi',\
+	slot_glasses_str = 'icons/mob/onmob/onmob_eyes.dmi',\
+	slot_wear_id_str = 'icons/mob/onmob/onmob_id.dmi',\
+	slot_w_uniform_str = 'icons/mob/onmob/onmob_under.dmi',\
+	slot_wear_suit_str = 'icons/mob/onmob/onmob_suit.dmi',\
+	slot_head_str = 'icons/mob/onmob/onmob_head.dmi',\
+	slot_shoes_str = 'icons/mob/onmob/onmob_feet.dmi',\
+	slot_wear_mask_str = 'icons/mob/onmob/onmob_mask.dmi',\
+	slot_handcuffed_str = 'icons/mob/onmob/onmob_cuff.dmi',\
+	slot_legcuffed_str = 'icons/mob/onmob/onmob_cuff.dmi',\
+	slot_gloves_str = 'icons/mob/onmob/onmob_hands.dmi',\
+	slot_s_store_str = 'icons/mob/onmob/onmob_belt_mirror.dmi',\
+	slot_tie_str = 'icons/mob/onmob/onmob_accessories.dmi'\
+))
