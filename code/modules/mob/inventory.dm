@@ -167,17 +167,25 @@ var/list/slot_equipment_priority = list( \
 	return 0
 
 //Drops the item in our left hand
-/mob/proc/drop_l_hand(var/atom/Target)
-	return drop_from_inventory(l_hand, Target)
+/mob/proc/drop_l_hand(atom/Target, force)
+	if(force)
+		return drop_from_inventory(l_hand, Target)
+	return unEquip(l_hand, Target)
 
 //Drops the item in our right hand
-/mob/proc/drop_r_hand(var/atom/Target)
-	return drop_from_inventory(r_hand, Target)
+/mob/proc/drop_r_hand(atom/Target, force)
+	if(force)
+		return drop_from_inventory(r_hand, Target)
+	return unEquip(r_hand, Target)
 
-//Drops the item in our active hand. TODO: rename this to drop_active_hand or something
-/mob/proc/drop_item(var/atom/Target)
-	if(hand)	return drop_l_hand(Target)
-	else		return drop_r_hand(Target)
+/**
+ * Drops the item in our active hand. TODO: rename this to drop_active_hand or something
+ * Make sure you are ABSOLUTELY CERTAIN you need to drop this and ignore unequip checks (For example, grabs can be "dropped" but only willingly)
+ * Else use unequip_item
+ */
+/mob/proc/drop_item(atom/Target)
+	if(hand)	return drop_l_hand(Target, TRUE)
+	else		return drop_r_hand(Target, TRUE)
 
 /*
 	Removes the object from any slots the mob might have, calling the appropriate icon update proc.
