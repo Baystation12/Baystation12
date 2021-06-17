@@ -1,0 +1,4 @@
+author: Boznar
+delete-after: true
+changes:
+  - tweak: plasma cutter doesn't use charge when slicing constructions
