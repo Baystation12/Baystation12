@@ -95,6 +95,21 @@
 	path = /obj/item/gun/projectile/automatic/assault_rifle
 	antag_roles = list(MODE_MERCENARY)
 
+/datum/uplink_item/item/visible_weapons/battlerifle
+	name = "Battle Rifle"
+	desc = "Predecessor to the Assault Rifle, works just as well as the new guns."
+	item_cost = 65
+	path = /obj/item/gun/projectile/automatic/battlerifle
+	antag_roles = list(MODE_MERCENARY)
+
+/datum/uplink_item/item/visible_weapons/semistrip
+	name = "Carbine Rifle"
+	desc = "For arming your comrades on the (not so) cheap!"
+	item_cost = 55
+	path = /obj/item/gun/projectile/automatic/semistrip
+	antag_roles = list(MODE_REVOLUTIONARY, MODE_MERCENARY)
+
+
 /datum/uplink_item/item/visible_weapons/advanced_energy_gun
 	name = "Advanced Energy Gun"
 	desc = "A highly experimental heavy energy weapon, with three different lethality settings."
