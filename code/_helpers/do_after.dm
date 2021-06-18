@@ -1,7 +1,19 @@
-/proc/do_after(mob/user, delay, atom/target, do_flags = DO_DEFAULT, incapacitation_flags = INCAPACITATION_DEFAULT)
-	return !do_after_detailed(user, delay, target, do_flags, incapacitation_flags)
+/**
+ * Simplified alias of `do_after_detailed()` that provides a timed delay for user interactions. See that proc for specifics.
+ * Returns `TRUE` if the timer completed, or `FALSE` if it was interrupted for any reason.
+ */
+/proc/do_after(mob/user, delay, atom/target, do_flags = DO_DEFAULT, incapacitation_flags = INCAPACITATION_DEFAULT, decl/hierarchy/skill/do_skill = null, delay_flags = 0)
+	return !do_after_detailed(user, delay, target, do_flags, incapacitation_flags, do_skill, delay_flags)
 
-/proc/do_after_detailed(mob/user, delay, atom/target, do_flags = DO_DEFAULT, incapacitation_flags = INCAPACITATION_DEFAULT)
+/**
+ * Provides a timed delay for user interactions with various applications.
+ * Pauses processing for the duration of the timer, until the timer hits zero or a condition matched one of the provided `do_flags` forces the timer to halt.
+ *
+ * If any `delay_flags` are provided, the `delay` time will be modified using `do_after_delay()`.
+ *
+ * Returns `FALSE` if the timer completed successfully, otherwise one of the `DO_*` flags indicating the reason the timer was halted early.
+ */
+/proc/do_after_detailed(mob/user, delay, atom/target, do_flags = DO_DEFAULT, incapacitation_flags = INCAPACITATION_DEFAULT, decl/hierarchy/skill/do_skill = null, delay_flags = 0)
 	if (!delay)
 		return FALSE
 
@@ -22,6 +34,11 @@
 
 	if ((do_flags & DO_TARGET_UNIQUE_ACT) && target)
 		target.do_unique_target_user = user
+
+	if (do_skill)
+		delay_flags |= DO_TIME_FLAG_USER_SKILL
+	if (delay_flags)
+		delay = do_after_delay(user, delay, target, do_skill, delay_flags)
 
 	var/atom/user_loc = do_flags & DO_USER_CAN_MOVE ? null : user.loc
 	var/user_dir = do_flags & DO_USER_CAN_TURN ? null : user.dir
@@ -113,3 +130,53 @@
 		user.do_unique_user_handle = 0
 	if ((do_flags & DO_TARGET_UNIQUE_ACT) && target)
 		target.do_unique_target_user = null
+
+/// Modifes a `do_after()` delay's time based on flags. Returns the new delay time.
+/proc/do_after_delay(mob/user, delay, atom/target, decl/hierarchy/skill/do_skill = null, delay_flags = 0)
+	var/original_delay = delay
+	var/silent = !!((delay_flags & DO_TIME_FLAG_SILENT) && user)
+	var/list/shorter_text = list()
+	var/list/longer_text = list()
+
+	if (istype(user, /mob/living))
+		var/mob/living/L = user
+		if (delay_flags & DO_TIME_FLAG_USER_SIZE_SMALL)
+			if (L.mob_size < MOB_MEDIUM)
+				delay -= DO_TIME_MULT_STEP(original_delay)
+				shorter_text += "smaller size"
+			else if (L.mob_size > MOB_MEDIUM)
+				delay += DO_TIME_MULT_STEP(original_delay)
+				longer_text += "larger size"
+
+		if (delay_flags & DO_TIME_FLAG_USER_SIZE_LARGE)
+			if (L.mob_size < MOB_MEDIUM)
+				delay += DO_TIME_MULT_STEP(original_delay)
+				longer_text += "smaller size"
+			else if (L.mob_size > MOB_MEDIUM)
+				delay -= DO_TIME_MULT_STEP(original_delay)
+				shorter_text += "larger size"
+
+	if ((delay_flags & DO_TIME_FLAG_USER_SKILL) && user && do_skill)
+		var/skill_value = user.get_skill_value(do_skill)
+		var/skill_name = initial(do_skill.name)
+		switch (skill_value)
+			if (SKILL_NONE)
+				delay += DO_TIME_MULT_STEP(original_delay) * 2
+				longer_text += "lack of [skill_name] training"
+			if (SKILL_BASIC)
+				delay += DO_TIME_MULT_STEP(original_delay)
+				longer_text += "[skill_name] inexperience"
+			if (SKILL_EXPERT)
+				delay -= DO_TIME_MULT_STEP(original_delay)
+				shorter_text += "[skill_name] experience"
+			if (SKILL_PROF)
+				delay -= DO_TIME_MULT_STEP(original_delay) * 2
+				shorter_text += "[skill_name] mastery"
+
+	if (!silent)
+		if (shorter_text.len)
+			user.show_message(SPAN_NOTICE("Your [english_list(shorter_text)] makes the process faster."))
+		if (longer_text.len)
+			user.show_message(SPAN_WARNING("Your [english_list(longer_text)] makes the process longer."))
+
+	return max(delay, DO_TIME_MIN)

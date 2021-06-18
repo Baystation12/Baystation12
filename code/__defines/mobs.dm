@@ -397,12 +397,6 @@
 #define MARKING_TARGET_HAIR 1 // Draw a datum/sprite_accessory/marking to the mob's hair, eg. color fades
 #define MARKING_TARGET_HEAD 2 // Draw a datum/sprite_accessory/marking to the mob's head after their hair, eg. ears, horns
 
-// used in /mob/living/carbon/human/can_inject, and by various callers of that proc
-#define CAN_INJECT 1
-#define INJECTION_PORT 2
-#define INJECTION_PORT_DELAY 3 SECONDS // used by injectors to apply delay due to searching for a port on the injectee's suit
-
-
 //used by /proc/do_after
 #define DO_USER_CAN_MOVE     0x1
 #define DO_USER_CAN_TURN     0x2
@@ -421,9 +415,37 @@
 #define DO_BOTH_CAN_TURN     (DO_USER_CAN_TURN | DO_TARGET_CAN_TURN)
 #define DO_BOTH_UNIQUE_ACT   (DO_USER_UNIQUE_ACT | DO_TARGET_UNIQUE_ACT)
 #define DO_DEFAULT           (DO_SHOW_PROGRESS | DO_USER_SAME_HAND | DO_BOTH_CAN_TURN | DO_FAIL_FEEDBACK)
+#define DO_PUBLIC_UNIQUE     (DO_DEFAULT | DO_BOTH_UNIQUE_ACT | DO_PUBLIC_PROGRESS)
 
 #define DO_MISSING_USER      (-1)
 #define DO_MISSING_TARGET    (-2)
 #define DO_INCAPACITATED     (-3)
+
+// do_after time multiplier defines
+#define DO_TIME_MULT         0.3 // Multiplier for timer adjustments
+#define DO_TIME_MULT_STEP(X) (X * DO_TIME_MULT)
+
+// Standardized do_after times
+#define DO_TIME_MIN     1 SECOND // Minimum timer time, enforced when modified. Also for actions that should be really fast but not right-as-you-click.
+#define DO_TIME_STEP    3 SECONDS // Distance between each standardized time set
+#define DO_TIME_QUICK   (DO_TIME_STEP)
+#define DO_TIME_SHORT   (DO_TIME_STEP * 2)
+#define DO_TIME_MEDIUM  (DO_TIME_STEP * 3)
+#define DO_TIME_LONG    (DO_TIME_STEP * 4)
+#define DO_TIME_EXTREME (DO_TIME_STEP * 5)
+
+// Special case do_after times
+#define DO_TIME_ESCAPE 2 MINUTES
+
+// do_after delay_flags
+#define DO_TIME_FLAG_SILENT            0x1 // Don't output any messages to user
+#define DO_TIME_FLAG_USER_SIZE_SMALL   0x2 // Adjusts timer based on size. Smaller is faster.
+#define DO_TIME_FLAG_USER_SIZE_LARGE   0x4 // Adjusts timer based on size. Larger is faster.
+#define DO_TIME_FLAG_USER_SKILL        0x8 // Adjusts timer based on user skill. Higher is faster.
+
+// used in /mob/living/carbon/human/can_inject, and by various callers of that proc
+#define CAN_INJECT 1
+#define INJECTION_PORT 2
+#define INJECTION_PORT_DELAY (DO_TIME_QUICK) // used by injectors to apply delay due to searching for a port on the injectee's suit
 
 #define FAKE_INVIS_ALPHA_THRESHOLD 127 // If something's alpha var is at or below this number, certain things will pretend it is invisible.
