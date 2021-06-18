@@ -66,6 +66,12 @@
 	item_cost = 8
 	path = /obj/item/storage/box/ammo/shotgunshells
 
+/datum/uplink_item/item/ammo/flechette_shells
+	name = "Ammobox of Flechette Shells"
+	desc = "An ammobox with 2 sets of shell holders. Contains 8 extra accurate flechette shells."
+	item_cost = 8
+	path = /obj/item/storage/box/ammo/flechetteshells
+
 /datum/uplink_item/item/ammo/shotgun_slugs
 	name = "Ammobox of Shotgun Slugs"
 	desc = "An ammobox with 2 sets of shell holders. Contains 8 slugs total."
