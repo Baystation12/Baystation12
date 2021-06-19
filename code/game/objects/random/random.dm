@@ -308,6 +308,18 @@
 				/obj/item/gun/energy/retro = 1,
 				/obj/item/gun/projectile/pistol/throwback = 1)
 
+/obj/random/smallhandgun
+	name = "Random Small Handgun"
+	desc = "This is a random small sidearm."
+	icon = 'icons/obj/guns/holdout_pistol.dmi'
+	icon_state = "pistol"
+
+/obj/random/smallhandgun/spawn_choices()
+	return list(/obj/item/gun/projectile/pistol/holdout = 2,
+				/obj/item/gun/energy/gun/small = 2,
+				/obj/item/gun/projectile/revolver/holdout = 2,
+				/obj/item/storage/box/syndie_kit/silenced = 1)
+
 /obj/random/ammo
 	name = "Random Ammunition"
 	desc = "This is random ammunition."
@@ -704,7 +716,7 @@ obj/random/obstruction/spawn_choices()
 	return list(/obj/item/storage/secure/briefcase = 2,
 				/obj/item/storage/briefcase = 4,
 				/obj/item/storage/briefcase/inflatable = 3,
-				/obj/item/storage/backpack = 5,
+				/obj/random/backpack = 5,
 				/obj/item/storage/backpack/satchel = 5,
 				/obj/item/storage/backpack/dufflebag = 2,
 				/obj/item/storage/box = 5,
@@ -727,6 +739,26 @@ obj/random/obstruction/spawn_choices()
 				/obj/item/storage/belt/medical = 2,
 				/obj/item/storage/belt/holster/security = 2,
 				/obj/item/storage/belt/holster/security/tactical = 1)
+
+/obj/random/backpack
+	name = "random backpack"
+	desc = "This is a random backpack."
+	icon = 'icons/obj/storage.dmi'
+	icon_state = "backpack"
+
+/obj/random/backpack/spawn_choices()
+	return list(/obj/item/storage/backpack/cultpack,
+				/obj/item/storage/backpack/clown,
+				/obj/item/storage/backpack/medic,
+				/obj/item/storage/backpack/security,
+				/obj/item/storage/backpack/security/exo,
+				/obj/item/storage/backpack/command,
+				/obj/item/storage/backpack/industrial,
+				/obj/item/storage/backpack/toxins,
+				/obj/item/storage/backpack/hydroponics,
+				/obj/item/storage/backpack/genetics,
+				/obj/item/storage/backpack/virology,
+				/obj/item/storage/backpack/chemistry)
 
 /obj/random/shoes
 	name = "random footwear"
@@ -839,6 +871,88 @@ obj/random/obstruction/spawn_choices()
 				/obj/item/clothing/suit/storage/toggle/brown_jacket = 3,
 				/obj/item/clothing/suit/storage/leather_jacket = 3,
 				/obj/item/clothing/suit/apron = 4)
+
+/obj/random/pcarrier
+	name = "random plate carrier"
+	desc = "This is a random plate carrier."
+	icon = 'icons/obj/clothing/obj_suit_modular_armor.dmi'
+	icon_state = "pcarrier"
+
+/obj/random/pcarrier/spawn_choices()
+	return list(/obj/item/clothing/suit/armor/pcarrier/blue,
+				/obj/item/clothing/suit/armor/pcarrier/green,
+				/obj/item/clothing/suit/armor/pcarrier/navy,
+				/obj/item/clothing/suit/armor/pcarrier/tan,
+				/obj/item/clothing/suit/armor/pcarrier)
+
+/obj/random/pcarrierplate
+	name = "random plate carrier plate"
+	desc = "This is a random armored plate for plate carrier."
+	icon = 'icons/obj/clothing/obj_suit_modular_armor.dmi'
+	icon_state = "armor_light"
+
+/obj/random/pcarrierplate/spawn_choices()
+	return list(/obj/item/clothing/accessory/armorplate,
+				/obj/item/clothing/accessory/armorplate/medium,
+				/obj/item/clothing/accessory/armorplate/tactical)
+
+/obj/random/pcarrieraccessory
+	name = "random plate carrier accessory"
+	desc = "This is a random accessory for plate carrier."
+	icon = 'icons/obj/clothing/obj_suit_modular_armor.dmi'
+	icon_state = "pouches"
+
+/obj/random/pcarrieraccessory/spawn_choices()
+	return list(/obj/item/clothing/accessory/armguards,
+				/obj/item/clothing/accessory/armguards/blue,
+				/obj/item/clothing/accessory/armguards/navy,
+				/obj/item/clothing/accessory/armguards/green,
+				/obj/item/clothing/accessory/armguards/tan,
+				/obj/item/clothing/accessory/armguards/merc,
+				/obj/item/clothing/accessory/legguards,
+				/obj/item/clothing/accessory/legguards/blue,
+				/obj/item/clothing/accessory/legguards/navy,
+				/obj/item/clothing/accessory/legguards/green,
+				/obj/item/clothing/accessory/legguards/tan,
+				/obj/item/clothing/accessory/legguards/merc,
+				/obj/item/clothing/accessory/storage/pouches,
+				/obj/item/clothing/accessory/storage/pouches/blue,
+				/obj/item/clothing/accessory/storage/pouches/navy,
+				/obj/item/clothing/accessory/storage/pouches/green,
+				/obj/item/clothing/accessory/storage/pouches/tan)
+
+/obj/random/pcarriertag
+	name = "random plate carrier tag"
+	desc = "This is a random tag for plate carrier."
+	icon = 'icons/obj/clothing/obj_suit_modular_armor.dmi'
+	icon_state = "nanotag"
+
+/obj/random/pcarriertag/spawn_choices()
+	return list(/obj/item/clothing/accessory/armor/tag/nt,
+				/obj/item/clothing/accessory/armor/tag/pcrc,
+				/obj/item/clothing/accessory/armor/tag/saare,
+				/obj/item/clothing/accessory/armor/tag/press,
+				/obj/item/clothing/accessory/armor/tag/opos,
+				/obj/item/clothing/accessory/armor/tag/oneg,
+				/obj/item/clothing/accessory/armor/tag/apos,
+				/obj/item/clothing/accessory/armor/tag/aneg,
+				/obj/item/clothing/accessory/armor/tag/bpos,
+				/obj/item/clothing/accessory/armor/tag/bneg,
+				/obj/item/clothing/accessory/armor/tag/abpos,
+				/obj/item/clothing/accessory/armor/tag/abneg)
+
+/obj/random/badge
+	name = "random badge"
+	desc = "This is badge."
+	icon = 'icons/obj/items.dmi'
+	icon_state = "gift1"
+
+/obj/random/badge/spawn_choices()
+	return list(/obj/item/clothing/accessory/badge/old,
+				/obj/item/clothing/accessory/badge/tracker,
+				/obj/item/clothing/accessory/badge/press,
+				/obj/item/clothing/accessory/badge/holo,
+				/obj/item/clothing/accessory/badge/holo/cord)
 
 /obj/random/clothing
 	name = "random clothes"
