@@ -1,0 +1,5 @@
+author: PurplePineapple
+delete-after: true
+changes:
+  - rscadd: New sprite for concealed armor vests. Replaces the reused plate carrier
+      sprite it currently has.
