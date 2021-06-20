@@ -1,5 +1,0 @@
-author: Spookerton
-delete-after: true
-changes:
-  - admin: Staff with investigate but not host are no longer unable to set meaningful
-      channel preferences.
