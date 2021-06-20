@@ -73,8 +73,8 @@ DM version compatibility macros & procs
 
 #if DM_VERSION < 514
 
-
-/proc/rgb2num(T) //Take "#RGB" or "#RGBA" or "#RRGGBB" or "#RRGGBBAA" and turn it into list(R, G, B[, A]). Ignores color space.
+/// Create the list(R, G, B[, A]) for inputs "#RGB", "#RGBA", "#RRGGBB", or "#RRGGBBAA". IGNORES color space.
+/proc/rgb2num(T)
 	var/static/regex/allowed = new(@"^#[0-9a-fA-F]{3,8}$")
 	if (findtext(T, allowed))
 		switch (length(T))
@@ -85,4 +85,20 @@ DM version compatibility macros & procs
 	crash_with("bad color '[T]'")
 
 
+#endif
+
+
+/**
+	FOR_BLIND provides a common pattern for a typed for..in that SKIPS type checking.
+	This kind of loop provides a decent performance improvement but is best reserved
+	for hotspot code where the type of the members of the collection is never in doubt.
+	"as anything" became valid syntax in build 513.1540: <http://byond.com/docs/notes/513.html>
+	eg:
+	FOR_BLIND(client/C, GLOB.clients)
+		to_chat(C, "Hello [C].")
+*/
+#if DM_BUILD < 1540
+#define FOR_BLIND(V, C) for (var/V as() in C)
+#else
+#define FOR_BLIND(V, C) for (var/V as anything in C)
 #endif
