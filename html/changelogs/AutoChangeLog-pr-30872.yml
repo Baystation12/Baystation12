@@ -1,4 +1,0 @@
-author: Naelynn
-delete-after: true
-changes:
-  - bugfix: Vox merchant now correctly sells and wants items.
