@@ -153,7 +153,7 @@
 	if (length(visible))
 		var/list/display = list()
 		for (var/obj/item/clothing/accessory/A in visible)
-			if (A.high_visibility)
+			if (!A.hidden && A.high_visibility)
 				display += "\icon[A] \a [A]"
 		if (length(display))
 			. += " with [english_list(display)] attached"
@@ -195,7 +195,8 @@
 		if (length(visible))
 			var/list/display = list()
 			for (var/obj/item/clothing/accessory/A in visible)
-				display += "[icon2html(A, user)] \a [A]"
+				if (!A.hidden)
+					display += "[icon2html(A, user)] \a [A]"
 			to_chat(user, "Attached to \the [src] are [english_list(display)].")
 		return TOPIC_HANDLED
 	if(href_list["list_armor_damage"])
