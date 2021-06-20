@@ -61,6 +61,7 @@
 	allowed = list(/obj/item/device/flashlight,/obj/item/tank,/obj/item/device/suit_cooling_unit,/obj/item/stack/flag,/obj/item/storage/ore,/obj/item/device/t_scanner,/obj/item/pickaxe, /obj/item/rcd,/obj/item/rpd)
 
 /obj/item/clothing/head/helmet/space/rig/industrial
+	light_overlay = "helmet_light_wide"
 	camera = /obj/machinery/camera/network/mining
 	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_IPC)
 
@@ -275,6 +276,7 @@
 	req_access = list(access_medical_equip)
 
 /obj/item/clothing/head/helmet/space/rig/medical
+	light_overlay = "helmet_light_wide"
 	camera = /obj/machinery/camera/network/medbay
 	species_restricted = list(SPECIES_HUMAN, SPECIES_UNATHI, SPECIES_SKRELL, SPECIES_IPC)
 	sprite_sheets = list(
