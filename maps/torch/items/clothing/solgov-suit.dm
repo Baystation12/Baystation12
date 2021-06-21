@@ -32,45 +32,45 @@
 	)
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/medical
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/medical/service)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/medical/service)
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/medical/command
 	icon_state = "ecservice_officer"
 	item_state = "ecservice_officer"
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/engineering
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/engineering/service)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/engineering/service)
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/engineering/command
 	icon_state = "ecservice_officer"
 	item_state = "ecservice_officer"
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/supply
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/supply/service)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/supply/service)
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/security
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/security/service)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/security/service)
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/security/command
 	icon_state = "ecservice_officer"
 	item_state = "ecservice_officer"
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/service
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/service/service)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/service/service)
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/service/command
 	icon_state = "ecservice_officer"
 	item_state = "ecservice_officer"
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/exploration
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/exploration/service)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/exploration/service)
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/exploration/command
 	icon_state = "ecservice_officer"
 	item_state = "ecservice_officer"
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/research
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/research/service)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/research/service)
 
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/research/command
 	icon_state = "ecservice_officer"
@@ -79,7 +79,7 @@
 /obj/item/clothing/suit/storage/solgov/service/expeditionary/command
 	icon_state = "ecservice_officer"
 	item_state = "ecservice_officer"
-	starting_accessories = list(/obj/item/clothing/accessory/solgov/department/command/service)
+	accessories = list(/obj/item/clothing/accessory/solgov/department/command/service)
 
 /obj/item/clothing/suit/storage/solgov/service/fleet
 	name = "fleet service jacket"
