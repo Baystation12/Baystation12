@@ -385,7 +385,6 @@ SUBSYSTEM_DEF(zcopy)
 
 	var/is_above_space = T.is_above_space()
 	var/list/out = list(
-		"<head><meta charset='utf-8'/></head><body>",
 		"<h1>Analysis of [T] at [T.x],[T.y],[T.z]</h1>",
 		"<b>Queue occurrences:</b> [T.z_queued]",
 		"<b>Above space:</b> Apparent [T.z_eventually_space ? "Yes" : "No"], Actual [is_above_space ? "Yes" : "No"] - [T.z_eventually_space == is_above_space ? "<font color='green'>OK</font>" : "<font color='red'>MISMATCH</font>"]",
@@ -404,13 +403,12 @@ SUBSYSTEM_DEF(zcopy)
 	for (var/atom/movable/openspace/O in T)
 		found_oo += O
 
-	if (T.shadower.overlays.len)
-		for (var/overlay in T.shadower.overlays)
-			var/atom/movable/openspace/debug/D = new
-			D.appearance = overlay
-			if (D.plane < -10000)	// FLOAT_PLANE
-				D.plane = T.shadower.plane
-			found_oo += D
+	for (var/overlay in T.shadower?.overlays)
+		var/atom/movable/openspace/debug/D = new
+		D.appearance = overlay
+		if (D.plane < -10000)	// FLOAT_PLANE
+			D.plane = T.shadower.plane
+		found_oo += D
 
 	sortTim(found_oo, /proc/cmp_planelayer)
 
@@ -450,9 +448,7 @@ SUBSYSTEM_DEF(zcopy)
 
 		out += "<hr/>"
 
-	out += "</body>"
-
-	show_browser(usr, out.Join("<br>"), "size=980x580;window=openturfanalysis-\ref[T]")
+	show_browser(usr, HTML_PAGE(out.Join("<br>")), "size=980x580;window=openturfanalysis-\ref[T]")
 
 // Yes, I know this proc is a bit of a mess. Feel free to clean it up.
 /datum/controller/subsystem/zcopy/proc/debug_fmt_thing(atom/A, list/out, turf/original)

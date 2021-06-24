@@ -39,23 +39,6 @@ GLOBAL_DATUM(error_cache, /datum/error_viewer/error_cache)
 /datum/error_viewer/proc/browse_to(client/user, html)
 	var/browser/browser = new(user.mob, "error_viewer", null, 600, 400)
 	browser.set_content(html)
-	browser.add_head_content({"
-	<style>
-	.runtime
-	{
-		background-color: #171717;
-		border: solid 1px #202020;
-		font-family: "Courier New";
-		padding-left: 10px;
-		color: #cccccc;
-	}
-	.runtime_line
-	{
-		margin-bottom: 10px;
-		display: inline-block;
-	}
-	</style>
-	"})
 	browser.open()
 
 /datum/error_viewer/proc/build_header(datum/error_viewer/back_to, linear)
