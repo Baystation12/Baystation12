@@ -55,6 +55,6 @@ SUBSYSTEM_DEF(persistence)
 		if(P.has_admin_data)
 			dat += P.GetAdminSummary(user, can_modify)
 	dat += "</table>"
-	var/datum/browser/popup = new(user, "admin_persistence", "Persistence Data")
+	var/browser/popup = new(user, "admin_persistence", "Persistence Data")
 	popup.set_content(jointext(dat, null))
 	popup.open()

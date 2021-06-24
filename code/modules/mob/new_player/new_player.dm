@@ -6,7 +6,7 @@
 	var/spawning = 0//Referenced when you want to delete the new_player later on in the code.
 	var/totalPlayers = 0		 //Player counts for the Lobby tab
 	var/totalPlayersReady = 0
-	var/datum/browser/panel
+	var/browser/panel
 	var/show_invalid_jobs = 0
 	universal_speak = TRUE
 
@@ -421,7 +421,7 @@
 	var/dat = "<div align='center'>"
 	dat += html_crew_manifest(OOC = 1)
 	//show_browser(src, dat, "window=manifest;size=370x420;can_close=1")
-	var/datum/browser/popup = new(src, "Crew Manifest", "Crew Manifest", 370, 420, src)
+	var/browser/popup = new(src, "Crew Manifest", "Crew Manifest", 370, 420, src)
 	popup.set_content(dat)
 	popup.open()
 

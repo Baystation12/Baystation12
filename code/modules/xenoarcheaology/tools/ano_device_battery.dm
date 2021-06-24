@@ -72,7 +72,7 @@
 	dat += "<hr>"
 	dat += "<a href='?src=\ref[src];close=1'>Close</a>"
 
-	var/datum/browser/popup = new(user, "anodevice", "Anomaly Power Utilizer", 400, 500)
+	var/browser/popup = new(user, "anodevice", "Anomaly Power Utilizer", 400, 500)
 	popup.set_content(dat)
 	popup.open()
 	user.set_machine(src)

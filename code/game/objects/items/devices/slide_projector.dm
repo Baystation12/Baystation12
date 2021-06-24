@@ -118,7 +118,7 @@
 		i++
 	table += "</table>"
 	data += jointext(table,null)
-	var/datum/browser/popup = new(user, "slides\ref[src]", "Slide Projector")
+	var/browser/popup = new(user, "slides\ref[src]", "Slide Projector")
 	popup.set_content(jointext(data, "<br>"))
 	popup.open()
 

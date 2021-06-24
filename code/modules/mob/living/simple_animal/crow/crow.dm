@@ -60,7 +60,7 @@
 		dat += "<b>Back:</b> [messenger_bag] (<a href='?src=\ref[src];remove_inv=back'>Remove</a>)"
 	else
 		dat += "<b>Back:</b> <a href='?src=\ref[src];add_inv=back'>Nothing</a>"
-	var/datum/browser/popup = new(user, "[name]", "Inventory of \the [name]", 350, 150, src)
+	var/browser/popup = new(user, "[name]", "Inventory of \the [name]", 350, 150, src)
 	popup.set_content(jointext(dat, "<br>"))
 	popup.open()
 

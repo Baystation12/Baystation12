@@ -104,7 +104,7 @@ SUBSYSTEM_DEF(event)
 
 	var/html = GetInteractWindow()
 
-	var/datum/browser/popup = new(user, "event_manager", "Event Manager", window_x, window_y)
+	var/browser/popup = new(user, "event_manager", "Event Manager", window_x, window_y)
 	popup.set_content(html)
 	popup.open()
 

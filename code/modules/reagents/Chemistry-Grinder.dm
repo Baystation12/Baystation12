@@ -210,7 +210,7 @@
 				window += "<br>[R.volume] - [R.name]"
 
 	window = strip_improper("<head><title>[name]</title></head><tt>[JOINTEXT(window)]</tt>")
-	var/datum/browser/popup = new(user, "reagentgrinder", "Reagent Grinder")
+	var/browser/popup = new(user, "reagentgrinder", "Reagent Grinder")
 	popup.set_content(window)
 	popup.open()
 	onclose(user, "reagentgrinder")

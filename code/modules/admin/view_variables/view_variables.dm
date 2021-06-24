@@ -109,7 +109,7 @@ var/global/list/view_variables_no_assoc = list("verbs", "contents","screen","ima
 
 /client
 	var/list/watched_variables = list()
-	var/datum/browser/watched_variables/watched_variables_window
+	var/browser/watched_variables/watched_variables_window
 
 /client/proc/watched_variables()
 	set category = "Debug"
@@ -120,7 +120,7 @@ var/global/list/view_variables_no_assoc = list("verbs", "contents","screen","ima
 	watched_variables_window.set_content()
 	watched_variables_window.open()
 
-/datum/browser/watched_variables/set_content()
+/browser/watched_variables/set_content()
 	var/list/dat = list()
 
 	if(!user || !user.client)
@@ -137,14 +137,14 @@ var/global/list/view_variables_no_assoc = list("verbs", "contents","screen","ima
 
 	..(jointext(dat, null))
 
-/datum/browser/watched_variables/update()
+/browser/watched_variables/update()
 	set_content()
 	..()
 
-/datum/browser/watched_variables/Process()
+/browser/watched_variables/Process()
 	update()
 
-/datum/browser/watched_variables/Destroy()
+/browser/watched_variables/Destroy()
 	STOP_PROCESSING(SSprocessing, src)
 
 	. = ..()

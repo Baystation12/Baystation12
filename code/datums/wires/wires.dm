@@ -91,7 +91,7 @@ var/global/list/wireColours = list("red", "blue", "green", "darkred", "orange", 
 		close_browser(user, "window=wires")
 		return
 
-	var/datum/browser/popup = new(user, "wires", holder.name, window_x, window_y)
+	var/browser/popup = new(user, "wires", holder.name, window_x, window_y)
 	popup.set_content(html)
 	popup.set_title_image(user.browse_rsc_icon(holder.icon, holder.icon_state))
 	popup.open()

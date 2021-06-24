@@ -1,7 +1,7 @@
 /// System for a shitty terminal emulator.
 /datum/terminal
 	var/name = "Terminal"
-	var/datum/browser/panel
+	var/browser/panel
 	var/list/history = list()
 	var/list/history_max_length = 50
 	var/datum/extension/interactive/ntos/computer

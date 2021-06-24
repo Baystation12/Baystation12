@@ -475,7 +475,7 @@
 		output += "[time]<br><a href='?src=\ref[src];cut_after=[i]'>-----CUT------</a><br>"
 	output += "</center>"
 
-	var/datum/browser/popup = new(user, "tape_cutting", "Cutting tape", 170, 600)
+	var/browser/popup = new(user, "tape_cutting", "Cutting tape", 170, 600)
 	popup.set_content(jointext(output,null))
 	popup.open()
 

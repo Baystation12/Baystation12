@@ -22,8 +22,8 @@
 	show_menu(user)
 
 /obj/item/device/scanner/proc/show_menu(mob/user)
-	var/datum/browser/popup = new(user, "scanner", scan_title, window_width, window_height)
 	popup.set_content("[get_header()]<hr>[scan_data]")
+	var/browser/popup = new(user, "scanner", scan_title, window_width, window_height)
 	popup.open()
 
 /obj/item/device/scanner/proc/get_header()

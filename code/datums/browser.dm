@@ -1,4 +1,4 @@
-/datum/browser
+/browser
 	var/mob/user
 	var/title
 	var/window_id // window_id is used as the window name for browse and onclose

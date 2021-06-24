@@ -253,6 +253,7 @@ var/global/floorIsLava = 0
 	"}
 
 	show_browser(usr, body, "window=adminplayeropts;size=550x515")
+	SSstatistics.add_field_details("admin_verb","SPP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
 /datum/player_info/var/author // admin who authored the information
@@ -295,7 +296,7 @@ var/global/floorIsLava = 0
 			dat += "<tr><td><a href='?src=\ref[src];notes=show;ckey=[t]'>[t]</a></td></tr>"
 		dat += "</table><br>"
 
-	var/datum/browser/popup = new(usr, "player_notes", "Player Notes", 400, 400)
+	var/browser/popup = new(usr, "player_notes", "Player Notes", 400, 400)
 	popup.set_content(jointext(dat, null))
 	popup.open()
 
@@ -310,85 +311,81 @@ var/global/floorIsLava = 0
 	return TRUE
 
 
-/// Page matter from #30904, to be replaced by that behavior later
-/proc/html_page(title, list/body, head = "")
-	if (islist(body))
-		body = body.Join()
-	return {"\
-		<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" \
-			"http://www.w3.org/TR/html4/strict.dtd">\n\
-		<html lang="en">\
-		<head>\
-			<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">\
-			<meta http-equiv="X-UA-Compatible" content="IE=IE8">\
-			<meta name="viewport" content="width=device-width,initial-scale=1">\
-			<link rel="stylesheet" type="text/css" href="common.css">\
-			<style type="text/css">\
-				html, body {\
-					padding: 8px;\
-					font-family: Verdana, Geneva, sans-serif;\
-				}\
-			</style>\
-			<title>[title]</title>\
-			[head]\
-		<head>\
-		<body scroll="auto">\
-			[body]\
-		</body>\
-		</html>\
-	"}
+/datum/admins/proc/show_player_info(var/key as text)
 
-
-/datum/admins/proc/show_player_info(target as text)
 	set category = "Admin"
 	set name = "Show Player Info"
-	if (!target)
+	if (!istype(src,/datum/admins))
+		src = usr.client.holder
+	if (!istype(src,/datum/admins))
+		to_chat(usr, "Error: you are not an admin!")
 		return
-	if (!istext(target))
-		return
-	target = ckey(target)
-	var/client/user = resolve_client(usr)
-	if (!check_rights(R_INVESTIGATE, TRUE, user))
-		return
-	var/datum/admins/handler = user.holder
-	var/client/subject
-	for (var/client/client as anything in GLOB.clients)
-		if (client.ckey == target)
-			subject = client
-			break
-	var/list/body = list()
-	body += {"\
-		<div style="text-align: center;">\
-			<b>Player Age</b>: [subject ? subject.player_age : "Not Connected"]\
-			<hr>\
-			<a href="?src=\ref[handler];add_player_info=[target]">Add Comment</a>\
-		</div>\
-		<hr>\
-	"}
-	var/list/infos
-	var/savefile = new /savefile ("data/player_saves/[copytext_char(target, 1, 2)]/[target]/info.sav")
-	from_save(savefile, infos)
-	if (!infos)
-		body += {"<div style="text-align: center; font-style: italic;">No comments saved.</div>"}
-	for (var/i = length(infos) to 1 step -1)
-		var/datum/player_info/comment = infos[i]
-		var/remove_button = ""
-		if (comment.author == user.key || check_rights(R_HOST, FALSE, user))
-			remove_button = {"<a href="?src=\ref[handler];remove_player_info=[target];remove_index=[i]">Remove</a>"}
-		body += {"\
-			<div style="text-align: right; margin-bottom: 8px;">\
-				<div style="text-align: left; border: 1px dashed #808080; padding: 2px;">[comment.content]</div>\
-				<div style="text-align: right;">\
-					<b>[comment.author || "(not recorded)"]</b>, \
-					<b>[comment.rank || "(not recorded)"]</b>, \
-					on <b>[comment.timestamp || "(not recorded)"]</b>\
-				</div>\
-				[remove_button]\
-			</div>\
-		"}
-	send_rsc(user, 'html/browser/common.css', "common.css")
-	show_browser(user, html_page("Player Info: [target]", body), "window=showplayernotes;size=480x480;")
 
+	var/list/dat = list()
+
+	var/p_age = "unknown"
+	for(var/client/C in GLOB.clients)
+		if(C.ckey == key)
+			p_age = C.player_age
+			break
+	dat += "<b>Player age: [p_age]</b><br><ul id='notes'>"
+
+	var/savefile/info = new("data/player_saves/[copytext(key, 1, 2)]/[key]/info.sav")
+	var/list/infos
+	from_save(info, infos)
+	if(!infos)
+		dat += "No information found on the given key.<br>"
+	else
+		var/update_file = 0
+		var/i = 0
+		for(var/datum/player_info/I in infos)
+			i += 1
+			if(!I.timestamp)
+				I.timestamp = "Pre-4/3/2012"
+				update_file = 1
+			if(!I.rank)
+				I.rank = "N/A"
+				update_file = 1
+			dat += "<li><font color=#7d9177>[I.content]</font> <i>by [I.author] ([I.rank])</i> on <i><font color='#8a94a3'>[I.timestamp]</i></font> "
+			if(I.author == usr.key || I.author == "Adminbot" || ishost(usr))
+				dat += "<A href='?src=\ref[src];remove_player_info=[key];remove_index=[i]'>Remove</A>"
+			dat += "<hr></li>"
+		if(update_file) to_save(info, infos)
+
+	dat += "</ul><br><A href='?src=\ref[src];add_player_info=[key]'>Add Comment</A><br>"
+
+	var/html = {"
+		<html>
+		<head>
+			<title>Info on [key]</title>
+			<script src='player_info.js'></script>
+		</head>
+		<body onload='selectTextField(); updateSearch()'; onkeyup='updateSearch()'>
+			<div align='center'>
+			<table width='100%'><tr>
+				<td width='20%'>
+					<div align='center'>
+						<b>Search:</b>
+					</div>
+				</td>
+				<td width='80%'>
+					<input type='text'
+					       id='filter'
+					       name='filter_text'
+					       value=''
+					       style='width:100%;' />
+				</td>
+			</tr></table>
+			<hr/>
+			[jointext(dat, null)]
+		</body>
+		</html>
+		"}
+
+	send_rsc(usr,'code/js/player_info.js', "player_info.js")
+	var/browser/popup = new(usr, "adminplayerinfo", "Player Info", 480, 480)
+	popup.set_content(html)
+	popup.open()
 
 /datum/admins/proc/access_news_network() //MARKER
 	set category = "Fun"
@@ -699,7 +696,7 @@ var/global/floorIsLava = 0
 			dat += "<A href='?src=\ref[src];admin_secrets=\ref[item]'>[item.name()]</A><BR>"
 		dat += "<BR>"
 
-	var/datum/browser/popup = new(usr, "secrets", "Secrets", 550, 500)
+	var/browser/popup = new(usr, "secrets", "Secrets", 550, 500)
 	popup.set_content(dat)
 	popup.open()
 	return
@@ -721,6 +718,9 @@ var/global/floorIsLava = 0
 		to_world("<span class='danger'>Restarting world!</span> <span class='notice'>Initiated by [usr.key]!</span>")
 		log_admin("[key_name(usr)] initiated a reboot.")
 
+		SSstatistics.set_field_details("end_error","admin reboot - by [usr.key]")
+		SSstatistics.add_field_details("admin_verb","R") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
 		sleep(50)
 		world.Reboot()
 
@@ -737,19 +737,7 @@ var/global/floorIsLava = 0
 		message = replacetext(message, "\n", "<br>") // required since we're putting it in a <p> tag
 		to_world("<span class=notice><b>[usr.key] Announces:</b><p style='text-indent: 50px'>[message]</p></span>")
 		log_admin("Announce: [key_name(usr)] : [message]")
-
-
-GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
-
-/datum/admins/proc/toggle_allowlists()
-	set category = "Server"
-	set name = "Toggle Allow Lists"
-	if(!check_rights(R_ADMIN))
-		return
-	GLOB.skip_allow_lists = !GLOB.skip_allow_lists
-	var/outcome = GLOB.skip_allow_lists ? "disabled" : "enabled"
-	log_and_message_admins("[key_name(usr)] [outcome] allow lists.")
-
+	SSstatistics.add_field_details("admin_verb","A") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/toggleooc()
 	set category = "Server"
@@ -765,6 +753,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 	else
 		to_world("<B>The OOC channel has been globally disabled!</B>")
 	log_and_message_admins("toggled OOC.")
+	SSstatistics.add_field_details("admin_verb","TOOC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/toggleaooc()
 	set category = "Server"
@@ -780,6 +769,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 	else
 		communicate_broadcast(/decl/communication_channel/aooc, "The AOOC channel has been globally disabled!", TRUE)
 	log_and_message_admins("toggled AOOC.")
+	SSstatistics.add_field_details("admin_verb","TAOOC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/togglelooc()
 	set category = "Server"
@@ -795,6 +785,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 	else
 		to_world("<B>The LOOC channel has been globally disabled!</B>")
 	log_and_message_admins("toggled LOOC.")
+	SSstatistics.add_field_details("admin_verb","TLOOC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
 /datum/admins/proc/toggledsay()
@@ -811,6 +802,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 	else
 		to_world("<B>Deadchat has been globally disabled!</B>")
 	log_and_message_admins("toggled deadchat.")
+	SSstatistics.add_field_details("admin_verb","TDSAY") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc
 
 /datum/admins/proc/toggleoocdead()
 	set category = "Server"
@@ -823,6 +815,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 	config.dooc_allowed = !( config.dooc_allowed )
 	log_admin("[key_name(usr)] toggled Dead OOC.")
 	message_admins("[key_name_admin(usr)] toggled Dead OOC.", 1)
+	SSstatistics.add_field_details("admin_verb","TDOOC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/togglehubvisibility()
 	set category = "Server"
@@ -839,6 +832,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 
 	send2adminirc("[key_name(src)]" + long_message)
 	log_and_message_admins(long_message)
+	SSstatistics.add_field_details("admin_verb","THUB") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc
 
 /datum/admins/proc/toggletraitorscaling()
 	set category = "Server"
@@ -847,6 +841,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 	config.traitor_scaling = !config.traitor_scaling
 	log_admin("[key_name(usr)] toggled Traitor Scaling to [config.traitor_scaling].")
 	message_admins("[key_name_admin(usr)] toggled Traitor Scaling [config.traitor_scaling ? "on" : "off"].", 1)
+	SSstatistics.add_field_details("admin_verb","TTS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/startnow()
 	set category = "Server"
@@ -864,6 +859,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 		return 0
 	if(SSticker.start_now())
 		log_and_message_admins("has started the game.")
+		SSstatistics.add_field_details("admin_verb","SN") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 		return 1
 	else
 		to_chat(usr, "<span class='bigwarning'>Error: Start Now: Game has already started.</span>")
@@ -896,6 +892,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 		to_world("<B>New players may now enter the game.</B>")
 	log_and_message_admins("[key_name_admin(usr)] toggled new player game entering.")
 	world.update_status()
+	SSstatistics.add_field_details("admin_verb","TE") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/toggleaban()
 	set category = "Server"
@@ -908,6 +905,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 		to_world("<B>You may no longer respawn :(</B>")
 	log_and_message_admins("toggled respawn to [config.abandon_allowed ? "On" : "Off"].")
 	world.update_status()
+	SSstatistics.add_field_details("admin_verb","TR") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/delay()
 	set category = "Server"
@@ -926,6 +924,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 	else
 		to_world("<b>The game will start soon.</b>")
 		log_admin("[key_name(usr)] removed the delay.")
+	SSstatistics.add_field_details("admin_verb","DELAY") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/adjump()
 	set category = "Server"
@@ -933,6 +932,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 	set name="Toggle Jump"
 	config.allow_admin_jump = !(config.allow_admin_jump)
 	log_and_message_admins("Toggled admin jumping to [config.allow_admin_jump].")
+	SSstatistics.add_field_details("admin_verb","TJ") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/adspawn()
 	set category = "Server"
@@ -940,6 +940,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 	set name="Toggle Spawn"
 	config.allow_admin_spawning = !(config.allow_admin_spawning)
 	log_and_message_admins("toggled admin item spawning to [config.allow_admin_spawning].")
+	SSstatistics.add_field_details("admin_verb","TAS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/adrev()
 	set category = "Server"
@@ -947,6 +948,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 	set name="Toggle Revive"
 	config.allow_admin_rev = !(config.allow_admin_rev)
 	log_and_message_admins("toggled reviving to [config.allow_admin_rev].")
+	SSstatistics.add_field_details("admin_verb","TAR") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/immreboot()
 	set category = "Server"
@@ -957,6 +959,9 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 		return
 	to_world("<span class='danger'>Rebooting world!</span> <span class='notice'>Initiated by [usr.key]!</span>")
 	log_admin("[key_name(usr)] initiated an immediate reboot.")
+
+	SSstatistics.set_field_details("end_error","immediate admin reboot - by [usr.key]")
+	SSstatistics.add_field_details("admin_verb","IR") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 	world.Reboot()
 
@@ -972,6 +977,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 			alert("Admin jumping disabled")
 	else
 		alert("[M.name] is not prisoned.")
+	SSstatistics.add_field_details("admin_verb","UP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 ////////////////////////////////////////////////////////////////////////////////////////////////ADMIN HELPER PROCS
 
@@ -1120,6 +1126,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 		new chosen(usr.loc)
 
 	log_and_message_admins("spawned [chosen] at ([usr.x],[usr.y],[usr.z])")
+	SSstatistics.add_field_details("admin_verb","SA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/spawn_artifact(effect in subtypesof(/datum/artifact_effect))
 	set category = "Debug"
@@ -1193,6 +1200,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 		return
 
 	M.mind.edit_memory()
+	SSstatistics.add_field_details("admin_verb","STP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/show_game_mode()
 	set category = "Admin"
@@ -1265,6 +1273,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 	out += " <a href='?src=\ref[SSticker.mode];add_antag_type=1'>\[+\]</a><br/>"
 
 	show_browser(usr, out, "window=edit_mode[src]")
+	SSstatistics.add_field_details("admin_verb","SGM")
 
 
 /datum/admins/proc/toggletintedweldhelmets()
@@ -1277,6 +1286,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 	else
 		to_world("<B>Reduced welder vision has been disabled!</B>")
 	log_and_message_admins("toggled welder vision.")
+	SSstatistics.add_field_details("admin_verb","TTWH") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/toggleguests()
 	set category = "Server"
@@ -1289,6 +1299,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 		to_world("<B>Guests may now enter the game.</B>")
 	log_admin("[key_name(usr)] toggled guests game entering [config.guests_allowed?"":"dis"]allowed.")
 	log_and_message_admins("toggled guests game entering [config.guests_allowed?"":"dis"]allowed.")
+	SSstatistics.add_field_details("admin_verb","TGU") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/output_ai_laws()
 	var/ai_number = 0
@@ -1408,6 +1419,7 @@ GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
 		tomob.ghostize(0)
 	message_admins("<span class='adminnotice'>[key_name_admin(usr)] has put [frommob.ckey] in control of [tomob.name].</span>")
 	log_admin("[key_name(usr)] stuffed [frommob.ckey] into [tomob.name].")
+	SSstatistics.add_field_details("admin_verb","CGD")
 	tomob.ckey = frommob.ckey
 	qdel(frommob)
 	return 1

@@ -84,7 +84,7 @@
 	return "No information available"
 
 /obj/item/implant/interact(user)
-	var/datum/browser/popup = new(user, capitalize(name), capitalize(name), 300, 700, src)
+	var/browser/popup = new(user, capitalize(name), capitalize(name), 300, 700, src)
 	var/dat = get_data()
 	if(malfunction)
 		popup.title = "??? implant"

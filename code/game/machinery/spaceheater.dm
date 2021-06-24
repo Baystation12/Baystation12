@@ -106,7 +106,7 @@
 		dat += " [set_temperature]K ([set_temperature-T0C]&deg;C)"
 		dat += "<A href='?src=\ref[src];op=temp;val=5'>+</A><BR>"
 
-		var/datum/browser/popup = new(usr, "spaceheater", "Space Heater Control Panel")
+		var/browser/popup = new(usr, "spaceheater", "Space Heater Control Panel")
 		popup.set_content(jointext(dat, null))
 		popup.set_title_image(usr.browse_rsc_icon(src.icon, "sheater-standby"))
 		popup.open()

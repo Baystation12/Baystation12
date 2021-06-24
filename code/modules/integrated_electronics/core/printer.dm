@@ -138,7 +138,7 @@
 		current_category = SScircuit.circuit_fabricator_recipe_list[1]
 
 	//Preparing the browser
-	var/datum/browser/popup = new(user, "printernew", "Integrated Circuit Printer", 800, 630) // Set up the popup browser window
+	var/browser/popup = new(user, "printernew", "Integrated Circuit Printer", 800, 630) // Set up the popup browser window
 
 	var/list/HTML = list()
 	HTML += "<center><h2>Integrated Circuit Printer</h2></center><br>"

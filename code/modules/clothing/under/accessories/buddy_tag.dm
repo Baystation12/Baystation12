@@ -18,7 +18,7 @@
 		return
 	var/dat = "<A href='?src=\ref[src];toggle=1;'>[on ? "Disable" : "Enable"]</a><br>"
 	dat += "ID: <A href='?src=\ref[src];setcode=1;'>[id]</a>"
-	var/datum/browser/popup = new(user, "buddytag", "Buddy Tag", 290, 200)
+	var/browser/popup = new(user, "buddytag", "Buddy Tag", 290, 200)
 	popup.set_content(dat)
 	popup.open()
 

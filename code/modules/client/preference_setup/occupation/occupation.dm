@@ -20,7 +20,7 @@
 /datum/category_item/player_setup_item/occupation
 	name = "Occupation"
 	sort_order = 1
-	var/datum/browser/panel
+	var/browser/panel
 
 /datum/category_item/player_setup_item/occupation/load_character(datum/pref_record_reader/R)
 	pref.alternate_option = R.read("alternate_option")
@@ -421,7 +421,7 @@
 		var/description = job.get_description_blurb()
 		if(description)
 			dat += html_encode(description)
-		var/datum/browser/popup = new(user, "Job Info", "[capitalize(rank)]", 430, 520, src)
+		var/browser/popup = new(user, "Job Info", "[capitalize(rank)]", 430, 520, src)
 		popup.set_content(jointext(dat,"<br>"))
 		popup.open()
 

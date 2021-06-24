@@ -222,7 +222,7 @@
 	dat += "<hr>"
 	dat += "<a href='?src=\ref[src];close=1'>Close</a>"
 
-	var/datum/browser/popup = new(user, "depth_scanner", "Results", 300, 500)
+	var/browser/popup = new(user, "depth_scanner", "Results", 300, 500)
 	popup.set_content(dat)
 	popup.open()
 	onclose(user, "depth_scanner")

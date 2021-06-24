@@ -11,7 +11,7 @@
 	return TRUE
 
 /obj/machinery/computer/mining/interact(var/mob/user)
-	var/datum/browser/popup = new(user, "mining-[name]", "[src] Control Panel")
+	var/browser/popup = new(user, "mining-[name]", "[src] Control Panel")
 	popup.set_content(jointext(connected.get_console_data(), "<br>"))
 	popup.open()
 
