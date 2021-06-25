@@ -3,6 +3,8 @@
 	var/list/scan = list()
 
 	scan["name"] = H.name
+	if(H.fake_name)
+		scan["name"] = H.real_name
 	scan["time"] = stationtime2text()
 	var/brain_result
 	if(H.should_have_organ(BP_BRAIN))

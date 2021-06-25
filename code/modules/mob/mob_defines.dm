@@ -82,6 +82,7 @@
 	var/next_move = null
 	var/hand = null
 	var/real_name = null
+	var/fake_name = null
 
 	var/bhunger = 0			//Carbon
 
