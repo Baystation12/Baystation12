@@ -197,6 +197,25 @@
 	desc = "For the gentleman of distinction."
 	body_parts_covered = 0
 
+/obj/item/clothing/head/bowlerhat/razor
+	name = "bowler-hat"
+	desc = "The brim of this hat is covered in thin razors."
+	sharp = TRUE
+	edge = TRUE
+	force = 10
+	throwforce = 60
+	throw_range = 9
+	throw_speed = 4
+	does_spin = FALSE
+	attack_verb = list("sliced", "torn", "cut")
+	armor = list(
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_RESISTANT,
+		laser = ARMOR_LASER_HANDGUNS,
+		energy = ARMOR_ENERGY_SMALL,
+		bomb = ARMOR_BOMB_PADDED
+		)
+
 /obj/item/clothing/head/beaverhat
 	name = "beaver hat"
 	icon_state = "beaver_hat"
