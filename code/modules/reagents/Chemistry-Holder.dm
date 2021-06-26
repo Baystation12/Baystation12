@@ -481,10 +481,20 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 
 /* Atom reagent creation - use it all the time */
 
-/atom/proc/create_reagents(var/max_vol)
+/atom/proc/create_reagents(max_vol, list/with_reagents)
+	if (with_reagents?.len)
+		var/sum_vol = 0
+		for (var/T in with_reagents)
+			sum_vol += with_reagents[T]
+		max_vol = max(sum_vol, max_vol)
 	if(reagents)
 		log_debug("Attempted to create a new reagents holder when already referencing one: [log_info_line(src)]")
 		reagents.maximum_volume = max(reagents.maximum_volume, max_vol)
 	else
 		reagents = new/datum/reagents(max_vol, src)
+	if (with_reagents?.len)
+		reagents.clear_reagents()
+		for (var/T in with_reagents)
+			reagents.add_reagent(T, with_reagents[T], safety = TRUE)
+		HANDLE_REACTIONS(reagents)
 	return reagents
