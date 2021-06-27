@@ -1,4 +1,0 @@
-author: anconfuzedrock
-delete-after: true
-changes:
-  - bugfix: cycled explo suits are now actually visible.

@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - tweak: Hivebot beacons now only spawn 1 bot per beacon, instead of a stack of
-      10.
