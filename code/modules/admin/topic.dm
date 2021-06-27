@@ -1073,6 +1073,25 @@
 			return
 		P.copy_to(H)
 
+	else if (href_list["cloneother"])
+		if (!check_rights(R_DEBUG))
+			return
+		var/mob/living/carbon/human/H = locate(href_list["cloneother"])
+		if (!istype(H))
+			to_chat(usr, SPAN_WARNING("\The [H] is not a valid type to apply preferences to."))
+			return
+		var/client/C = select_client()
+		var/datum/preferences/P = C?.prefs
+		if (!P)
+			return
+		var/confirm = alert(usr, "This will replace \the [H] with the design of \"[P.real_name]\"!", "Clone Other", "Okay", "Cancel")
+		if (confirm != "Okay")
+			return
+		if (QDELETED(P) || QDELETED(H))
+			to_chat(usr, SPAN_WARNING("\The [H] or the preferences of [C] are no longer valid."))
+			return
+		P.copy_to(H)
+
 	else if(href_list["sendtoprison"])
 		if(!check_rights(R_ADMIN))	return
 

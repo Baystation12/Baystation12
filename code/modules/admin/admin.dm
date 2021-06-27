@@ -222,7 +222,8 @@ var/global/floorIsLava = 0
 	body += {"<br><br>
 			<b>Other actions:</b>
 			<br>
-			<A href='?src=\ref[src];forcespeech=\ref[M]'>Forcesay</A>
+			<A href='?src=\ref[src];forcespeech=\ref[M]'>Forcesay</A> |
+			<a href='?src=\ref[src];cloneother=\ref[M]'>Clone Other</a>
 			"}
 	if (M.client)
 		body += {" |
