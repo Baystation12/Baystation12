@@ -220,21 +220,24 @@
 	//DISCONNECT//
 	//////////////
 /client/Del()
-	ticket_panels -= src
-	if(src && watched_variables_window)
-		STOP_PROCESSING(SSprocessing, watched_variables_window)
-	if(holder)
-		holder.owner = null
-		GLOB.admins -= src
-	GLOB.ckey_directory -= ckey
-	GLOB.clients -= src
+	if (!QDELETED(src))
+		Destroy()
 	return ..()
 
+
 /client/Destroy()
+	if (holder)
+		holder.owner = null
+		GLOB.admins -= src
+	if (watched_variables_window)
+		STOP_PROCESSING(SSprocessing, watched_variables_window)
+	QDEL_NULL(chatOutput)
+	GLOB.ckey_directory -= ckey
+	ticket_panels -= src
+	GLOB.clients -= src
 	..()
 	return QDEL_HINT_HARDDEL_NOW
 
-// here because it's similar to below
 
 // Returns null if no DB connection can be established, or -1 if the requested key was not found in the database
 

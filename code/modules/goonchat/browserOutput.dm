@@ -22,7 +22,13 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/tmp/iconCache.sav")) //Cache o
 	var/broken       = FALSE
 	var/list/connectionHistory //Contains the connection history passed from chat cookie
 
+/datum/chatOutput/Destroy(force)
+	SSping.chats -= src
+	return ..()
+
+
 /datum/chatOutput/New(client/C)
+	SSping.chats += src
 	owner = C
 	messageQueue = list()
 	connectionHistory = list()
@@ -124,12 +130,12 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/tmp/iconCache.sav")) //Cache o
 	winset(owner, "output", "is-visible=false")
 	winset(owner, "browseroutput", "is-disabled=false;is-visible=true")
 
-/datum/chatOutput/proc/pingLoop()
-	set waitfor = FALSE
 
-	while (owner)
-		ehjax_send(data = owner.is_afk(29) ? "softPang" : "pang") // SoftPang isn't handled anywhere but it'll always reset the opts.lastPang.
-		sleep(30)
+/datum/chatOutput/proc/updatePing()
+	if (!owner)
+		qdel(src)
+		return
+	ehjax_send(data = owner.is_afk(29 SECONDS) ? "softPang" : "pang")
 
 /proc/syncChatRegexes()
 	for (var/user in GLOB.clients)

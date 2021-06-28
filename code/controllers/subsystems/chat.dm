@@ -76,3 +76,18 @@ SUBSYSTEM_DEF(chat)
 			return
 
 		payload[C] += twiceEncoded
+
+SUBSYSTEM_DEF(ping)
+	name = "Ping"
+	flags = SS_NO_INIT
+	runlevels = RUNLEVELS_ALL
+	wait = 30 SECONDS
+	var/static/list/chats = list()
+
+
+/datum/controller/subsystem/ping/fire(resumed)
+	FOR_BLIND(datum/chatOutput/O, chats)
+		if (O.loaded && !O.broken)
+			O.updatePing()
+		if (MC_TICK_CHECK)
+			return
