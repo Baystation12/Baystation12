@@ -151,7 +151,7 @@ var/list/tape_roll_applications = list()
 /obj/item/taperoll/on_update_icon()
 	overlays.Cut()
 	var/image/overlay = image(icon = src.icon)
-	overlay.appearance_flags = RESET_COLOR
+	overlay.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
 	if(ismob(loc))
 		if(!start)
 			overlay.icon_state = "start"

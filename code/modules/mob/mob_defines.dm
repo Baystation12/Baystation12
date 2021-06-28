@@ -3,7 +3,7 @@
 	plane = DEFAULT_PLANE
 	layer = MOB_LAYER
 
-	appearance_flags = PIXEL_SCALE
+	appearance_flags = DEFAULT_APPEARANCE_FLAGS | PIXEL_SCALE
 	animate_movement = 2
 	movable_flags = MOVABLE_FLAG_PROXMOVE
 

@@ -13,7 +13,7 @@ GLOBAL_LIST_EMPTY(species_icon_template_cache)
 /proc/overlay_image(icon,icon_state,color,flags)
 	var/image/ret = image(icon,icon_state)
 	ret.color = color
-	ret.appearance_flags = flags
+	ret.appearance_flags = DEFAULT_APPEARANCE_FLAGS | flags
 	return ret
 
 	///////////////////////
@@ -430,7 +430,7 @@ var/global/list/damage_icon_parts = list()
 			continue
 
 		var/image/I = image(icon = UW.icon, icon_state = UW.icon_state)
-		I.appearance_flags = RESET_COLOR
+		I.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
 		I.color = UW.color
 
 		overlays_standing[HO_UNDERWEAR_LAYER] += I
@@ -856,7 +856,7 @@ var/global/list/damage_icon_parts = list()
 			LAZYADD(overlays_to_add, image(icon = surgery_icon, icon_state = overlay_state, layer = -HO_SURGERY_LAYER))
 		total.overlays |= overlays_to_add
 
-	total.appearance_flags = RESET_COLOR
+	total.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
 	overlays_standing[HO_SURGERY_LAYER] = total
 	if(update_icons)
 		queue_icon_update()

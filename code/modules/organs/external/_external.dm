@@ -7,7 +7,7 @@
 	min_broken_damage = 30
 	dir = SOUTH
 	organ_tag = "limb"
-	appearance_flags = PIXEL_SCALE
+	appearance_flags = DEFAULT_APPEARANCE_FLAGS | PIXEL_SCALE
 
 	var/slowdown = 0
 

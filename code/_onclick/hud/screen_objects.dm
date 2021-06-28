@@ -11,7 +11,7 @@
 	icon = 'icons/mob/screen1.dmi'
 	plane = HUD_PLANE
 	layer = HUD_BASE_LAYER
-	appearance_flags = NO_CLIENT_COLOR
+	appearance_flags = DEFAULT_APPEARANCE_FLAGS | NO_CLIENT_COLOR
 	unacidable = TRUE
 	var/obj/master = null    //A reference to the object in the slot. Grabs or items, generally.
 	var/globalscreen = FALSE //Global screens are not qdeled when the holding mob is destroyed.

@@ -3,7 +3,7 @@
 	plane = LIGHTING_PLANE
 
 	blend_mode = BLEND_MULTIPLY
-	appearance_flags = PLANE_MASTER | NO_CLIENT_COLOR
+	appearance_flags = DEFAULT_APPEARANCE_FLAGS | PLANE_MASTER | NO_CLIENT_COLOR
 	// use 20% ambient lighting; be sure to add full alpha
 
 	color = list(
