@@ -10,5 +10,6 @@
 /datum/gear/augment/integrated_janitor_hud
 	allowed_roles = list(/datum/job/janitor)
 
-/datum/gear/augment/integrated_science_hud
-	allowed_roles = list(RESEARCH_ROLES, EXPLORATION_ROLES)
+/datum/gear/augment/integrated_science_hud/New()
+	allowed_roles = RESEARCH_ROLES | EXPLORATION_ROLES
+	..()
