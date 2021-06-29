@@ -29,7 +29,9 @@
 				{{for data.trades}}
 					<tr><td>{{:value}}</td>
 					<td>{{:helper.link('Trade', null, {'PRG_offer_item' : index})}}</td>
-					<td>{{:helper.link('Offer Money', null, {'PRG_offer_money_for_item' : index})}}</td>
+					<td>{{:helper.link('Bulk Trade', null, {'PRG_offer_item_for_bulk' : index})}}</td>
+					<td>{{:helper.link('Buy', null, {'PRG_offer_money_for_item' : index})}}</td>
+					<td>{{:helper.link('Bulk Buy', null, {'PRG_offer_money_for_bulk' : index})}}</td>
 					<td>{{:helper.link('Ask Cost', null, {'PRG_how_much_do_you_want' : index})}}</td>
 				{{/for}}
 				</table>

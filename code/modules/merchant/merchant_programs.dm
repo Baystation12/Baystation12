@@ -74,8 +74,22 @@
 	return tr.success
 
 /datum/computer_file/program/merchant/proc/offer_money(var/datum/trader/T, var/num, skill)
+	var/quantity = 1
 	if(pad)
-		get_response(T.offer_money_for_trade(num, bank, get_turf(pad), skill))
+		get_response(T.offer_money_for_bulk(quantity, num, bank, get_turf(pad), skill))
+	else
+		last_comms = "PAD NOT CONNECTED"
+
+/datum/computer_file/program/merchant/proc/offer_bulk(datum/trader/T, num, skill)
+	var/quantity = input("How many do you wish to buy? (1-30)") as num | null //limiting to max 30 per purchase to reduce flooding of the server with spawned items.
+	if(!isnum(quantity))
+		last_comms = "ERROR #417 - NUMBER EXPECTED"
+		return
+	if(quantity < 1 || quantity > 30)
+		last_comms = "ERROR #415 - BLUESPACE ALIGNMENT TERMINATED DUE TO UNEXPECTED VALUE."
+		return
+	if(pad)
+		get_response(T.offer_money_for_bulk(quantity, num, bank, get_turf(pad), skill))
 	else
 		last_comms = "PAD NOT CONNECTED"
 
@@ -86,13 +100,32 @@
 	get_response(T.bribe_to_stay_longer(amt))
 
 /datum/computer_file/program/merchant/proc/offer_item(var/datum/trader/T, var/num, skill)
+	var/quantity = 1
 	if(pad)
 		var/list/targets = pad.get_targets()
 		for(var/target in targets)
 			if(!computer_emagged && istype(target,/mob/living/carbon/human))
 				last_comms = "SAFETY LOCK ENABLED: SENTIENT MATTER UNTRANSMITTABLE"
 				return
-		get_response(T.offer_items_for_trade(targets,num, get_turf(pad), skill))
+		get_response(T.offer_items_for_bulk(quantity, targets, num, get_turf(pad), skill))
+	else
+		last_comms = "PAD NOT CONNECTED"
+
+/datum/computer_file/program/merchant/proc/offer_item_bulk(datum/trader/T, num, skill)
+	var/quantity = input("How many do you wish to buy? (1-30)") as num //limiting to max 30 per purchase to reduce flooding of the server with spawned items
+	if(!isnum(quantity))
+		last_comms = "ERROR #417 - NUMBER EXPECTED"
+		return
+	if(quantity < 1 || quantity > 30)
+		last_comms = "ERROR #415 - TELEPAD OVERFLOW OVERRIDE ACTIVATED"
+		return
+	if(pad)
+		var/list/targets = pad.get_targets()
+		for(var/target in targets)
+			if(!computer_emagged && istype(target,/mob/living/carbon/human))
+				last_comms = "SAFETY LOCK ENABLED: SENTIENT MATTER UNTRANSMITTABLE"
+				return
+		get_response(T.offer_items_for_bulk(quantity, targets, num, get_turf(pad), skill))
 	else
 		last_comms = "PAD NOT CONNECTED"
 
@@ -193,12 +226,18 @@
 			if(href_list["PRG_offer_item"])
 				. = 1
 				offer_item(T,text2num(href_list["PRG_offer_item"]) + 1, user.get_skill_value(SKILL_FINANCE))
+			if(href_list["PRG_offer_item_for_bulk"])
+				. = 1
+				offer_item_bulk(T,text2num(href_list["PRG_offer_item_for_bulk"]) + 1, user.get_skill_value(SKILL_FINANCE))
 			if(href_list["PRG_how_much_do_you_want"])
 				. = 1
 				get_response(T.how_much_do_you_want(text2num(href_list["PRG_how_much_do_you_want"]) + 1, user.get_skill_value(SKILL_FINANCE)))
 			if(href_list["PRG_offer_money_for_item"])
 				. = 1
 				offer_money(T, text2num(href_list["PRG_offer_money_for_item"])+1, user.get_skill_value(SKILL_FINANCE))
+			if(href_list["PRG_offer_money_for_bulk"])
+				. = 1
+				offer_bulk(T, text2num(href_list["PRG_offer_money_for_bulk"])+1, user.get_skill_value(SKILL_FINANCE))
 			if(href_list["PRG_what_do_you_want"])
 				. = 1
 				get_response(T.what_do_you_want())
