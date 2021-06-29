@@ -1,0 +1,4 @@
+author: SealCure
+delete-after: true
+changes:
+  - bugfix: The CSO and Senior Researcher can now spawn with scihud implants as intended.
