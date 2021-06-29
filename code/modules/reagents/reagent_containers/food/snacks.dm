@@ -1457,6 +1457,14 @@
 	name = "spider cube"
 	monkey_type = /obj/effect/spider/spiderling
 
+/obj/item/reagent_containers/food/snacks/monkeycube/pikecube
+	name = "strange-looking monkey cube"
+	monkey_type = /mob/living/simple_animal/hostile/carp/pike
+
+/obj/item/reagent_containers/food/snacks/monkeycube/wrapped/pikecube
+	name = "strange-looking monkey cube"
+	monkey_type = /mob/living/simple_animal/hostile/carp/pike
+
 /obj/item/reagent_containers/food/snacks/spellburger
 	name = "spell burger"
 	desc = "This is absolutely Ei Nath."
