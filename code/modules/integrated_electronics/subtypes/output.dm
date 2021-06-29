@@ -212,7 +212,7 @@
 			log_say("[name] ([type]) : [sanitized_text]")
 
 /obj/item/integrated_circuit/output/video_camera
-	name = "video camera circuit"
+	name = "research video camera circuit"
 	desc = "Takes a string as a name and a boolean to determine whether it is on, and uses this to be a camera linked to the research network."
 	extended_desc = "The camera is linked to the Research camera network."
 	icon_state = "video_camera"
@@ -222,7 +222,7 @@
 		"camera name" = IC_PINTYPE_STRING,
 		"camera active" = IC_PINTYPE_BOOLEAN
 		)
-	inputs_default = list("1" = "video camera circuit")
+	inputs_default = list("1" = "research video camera circuit")
 	outputs = list()
 	activators = list()
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
@@ -234,7 +234,7 @@
 /obj/item/integrated_circuit/output/video_camera/Initialize()
 	. = ..()
 	camera = new(src)
-	camera.replace_networks(list(NETWORK_THUNDER))
+	camera.replace_networks(list(NETWORK_RESEARCH))
 	on_data_written()
 
 /obj/item/integrated_circuit/output/video_camera/Destroy()
@@ -261,6 +261,58 @@
 	if(camera)
 		set_camera_status(0)
 		set_pin_data(IC_INPUT, 2, FALSE)
+		
+/obj/item/integrated_circuit/output/video_camera_civ
+	name = "public video camera circuit"
+	desc = "Takes a string as a name and a boolean to determine whether it is on, and uses this to be a camera linked to the thunderdome network."
+	extended_desc = "The camera is linked to the Thunderdome camera network."
+	icon_state = "video_camera"
+	w_class = ITEM_SIZE_SMALL
+	complexity = 10
+	inputs = list(
+		"camera name" = IC_PINTYPE_STRING,
+		"camera active" = IC_PINTYPE_BOOLEAN
+		)
+	inputs_default = list("1" = "public video camera circuit")
+	outputs = list()
+	activators = list()
+	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
+	action_flags = IC_ACTION_LONG_RANGE
+	power_draw_idle = 0 // Raises to 20 when on.
+	var/obj/machinery/camera/network/research/camera
+	var/updating = FALSE
+
+/obj/item/integrated_circuit/output/video_camera_civ/Initialize()
+	. = ..()
+	camera = new(src)
+	camera.replace_networks(list(NETWORK_THUNDER))
+	on_data_written()
+
+/obj/item/integrated_circuit/output/video_camera_civ/Destroy()
+	QDEL_NULL(camera)
+	return ..()
+
+/obj/item/integrated_circuit/output/video_camera_civ/proc/set_camera_status(var/status)
+	if(camera)
+		camera.set_status(status)
+		power_draw_idle = camera.status ? 20 : 0
+		if(camera.status) // Ensure that there's actually power.
+			if(!draw_idle_power())
+				power_fail()
+
+/obj/item/integrated_circuit/output/video_camera_civ/on_data_written()
+	if(camera)
+		var/cam_name = get_pin_data(IC_INPUT, 1)
+		var/cam_active = get_pin_data(IC_INPUT, 2)
+		if(!isnull(cam_name))
+			camera.c_tag = cam_name
+		set_camera_status(cam_active)
+
+/obj/item/integrated_circuit/output/video_camera_civ/power_fail()
+	if(camera)
+		set_camera_status(0)
+		set_pin_data(IC_INPUT, 2, FALSE)
+		
 
 /obj/item/integrated_circuit/output/led
 	name = "light-emitting diode"
