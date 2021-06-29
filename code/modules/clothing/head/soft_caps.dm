@@ -9,6 +9,11 @@
 	var/flipped = 0
 	siemens_coefficient = 0.9
 	body_parts_covered = 0
+	species_restricted = list("exclude",SPECIES_MONARCH_QUEEN, SPECIES_UNATHI, SPECIES_VOX, SPECIES_VOX_ARMALIS)
+	sprite_sheets = list(
+		SPECIES_NABBER = 'icons/mob/species/nabber/onmob_head_gas.dmi'
+		)
+
 
 /obj/item/clothing/head/soft/New()
 	..()
