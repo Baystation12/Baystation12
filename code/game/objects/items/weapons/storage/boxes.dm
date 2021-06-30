@@ -176,6 +176,10 @@
 	name = "box of shotgun shells"
 	startswith = list(/obj/item/ammo_magazine/shotholder/shell = 2)
 
+/obj/item/storage/box/ammo/flechetteshells
+	name = "box of flechette shells"
+	startswith = list(/obj/item/ammo_magazine/shotholder/flechette = 2)
+
 /obj/item/storage/box/ammo/flashshells
 	name = "box of illumination shells"
 	startswith = list(/obj/item/ammo_magazine/shotholder/flash = 2)

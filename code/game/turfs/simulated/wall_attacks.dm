@@ -251,23 +251,21 @@
 			dismantle_sound = P.drill_sound
 			cut_delay -= P.digspeed
 
-		if(dismantle_verb && !dismantling)
+		if(dismantle_verb)
 
-			dismantling = TRUE
-			to_chat(user, "<span class='notice'>You begin [dismantle_verb] through the outer plating.</span>")
+			to_chat(user, SPAN_NOTICE("You begin [dismantle_verb] through the outer plating."))
 			if(dismantle_sound)
 				playsound(src, dismantle_sound, 100, 1)
 
 			if(cut_delay < 0)
 				cut_delay = 0
 
-			if(!do_after(user,cut_delay,src))
+			if (do_after(user, cut_delay, src, DO_DEFAULT | DO_TARGET_UNIQUE_ACT))
+				dismantle_wall()
+				user.visible_message(SPAN_WARNING("\The [src] was torn open by [user]!"), SPAN_NOTICE("You remove the outer plating."))
 				return
-
-			to_chat(user, "<span class='notice'>You remove the outer plating.</span>")
-			dismantle_wall()
-			user.visible_message("<span class='warning'>\The [src] was torn open by [user]!</span>")
-			return
+			else
+				return
 
 	//Reinforced dismantling.
 	else
