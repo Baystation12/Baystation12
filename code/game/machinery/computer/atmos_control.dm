@@ -15,12 +15,12 @@
 	var/datum/nano_module/atmos_control/atmos_control
 	base_type = /obj/machinery/computer/atmoscontrol
 
-/obj/machinery/computer/atmoscontrol/laptop
-	name = "Atmospherics Laptop"
-	desc = "A cheap laptop."
-	icon_state = "laptop"
-	icon_keyboard = "laptop_key"
-	icon_screen = "atmoslaptop"
+/obj/machinery/computer/atmoscontrol/pcu
+	name = "\improper Atmospherics PCU"
+	desc = "A personal computer unit. It seems to have only the Atmosphereics Control program installed."
+	icon_screen = "pcu_atmo"
+	icon_state = "pcu"
+	icon_keyboard = "pcu_key"
 	density = FALSE
 
 /obj/machinery/computer/atmoscontrol/interface_interact(user)

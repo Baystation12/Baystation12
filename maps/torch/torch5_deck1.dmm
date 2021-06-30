@@ -14076,7 +14076,7 @@
 	dir = 2;
 	pixel_y = 24
 	},
-/obj/machinery/computer/atmoscontrol/laptop{
+/obj/machinery/computer/atmoscontrol/pcu{
 	monitored_alarm_ids = list("xenobio1_alarm","xenobio2_alarm","xenobio3_alarm","xenobio4_alarm");
 	req_access = list("ACCESS_RESEARCH")
 	},

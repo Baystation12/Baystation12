@@ -16086,13 +16086,15 @@
 "Sg" = (
 /obj/structure/table/standard,
 /obj/machinery/atmospherics/pipe/simple/visible/red,
-/obj/machinery/computer/atmoscontrol/laptop{
-	monitored_alarm_ids = list("petrov1","petrov2","petrov3");
-	req_access = list("ACCESS_TORCH_PETROV")
-	},
 /obj/item/device/radio/intercom{
 	dir = 4;
 	pixel_x = -21
+	},
+/obj/machinery/computer/atmoscontrol/pcu{
+	dir = 4;
+	monitored_alarm_ids = list("petrov1","petrov2","petrov3");
+	pixel_y = 5;
+	req_access = list("ACCESS_TORCH_PETROV")
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/isolation)
