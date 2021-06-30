@@ -189,15 +189,36 @@ Please contact me on #coderbus IRC. ~Carn x
 
 	overlays = overlays_to_apply
 
-	var/matrix/M = matrix()
-	if(lying)
+	var/matrix/M = new
+	var/list/scale = get_scale()
+	M.Scale(scale[1], scale[2])
+	if (lying)
 		M.Turn(90)
-		M.Scale(size_multiplier)
-		M.Translate(1, -6-default_pixel_z)
+		M.Translate(1, -6 - default_pixel_z)
 	else
-		M.Scale(size_multiplier)
-		M.Translate(0, 16*(size_multiplier-1))
+		M.Translate(0, 16 * (scale[2] - 1))
 	animate(src, transform = M, time = ANIM_LYING_TIME)
+
+
+/mob/living/carbon/human/proc/get_scale()
+	var/h_mul = LAZYACCESS(descriptors, "height")
+	if (h_mul)
+		var/datum/mob_descriptor/height/H = species.descriptors["height"]
+		if (H)
+			var/list/scale_effect = H.scale_effect[species.name]
+			if (scale_effect)
+				h_mul = 0.01 * scale_effect[h_mul]
+	var/b_mul = LAZYACCESS(descriptors, "build")
+	if (b_mul)
+		var/datum/mob_descriptor/build/B = species.descriptors["build"]
+		if (B)
+			var/list/scale_effect = B.scale_effect[species.name]
+			if (scale_effect)
+				b_mul = 0.01 * scale_effect[b_mul]
+	return list(
+		(1 + b_mul) * size_multiplier,
+		(1 + h_mul) * size_multiplier
+	)
 
 var/global/list/damage_icon_parts = list()
 

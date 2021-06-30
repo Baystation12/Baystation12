@@ -20,6 +20,9 @@
 		"much taller than you",
 		"towering over you"
 		)
+	var/list/scale_effect = list(
+		SPECIES_HUMAN = list(-7, -4, 0, 4, 7)
+	)
 
 /datum/mob_descriptor/build
 	name = "build"
@@ -43,3 +46,6 @@
 		"built much larger than you",
 		"dwarfing you"
 		)
+	var/list/scale_effect = list(
+		SPECIES_HUMAN = list(-7.5, 0, 0, 0, 7.5)
+	)
