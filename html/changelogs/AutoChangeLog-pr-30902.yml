@@ -1,0 +1,4 @@
+author: GeneralCamo
+delete-after: true
+changes:
+  - bugfix: Players can now correctly add service permissions
