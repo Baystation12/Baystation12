@@ -281,6 +281,10 @@
 	for(var/obj/holo_obj in holographic_objs)
 		holo_obj.alpha *= 0.8 //give holodeck objs a slight transparency
 		holo_obj.holographic = TRUE
+		if(istype(holo_obj,/obj/item/storage))
+			set_extension(holo_obj,/datum/extension/chameleon/backpack)
+		if(istype(holo_obj,/obj/item/clothing))
+			set_extension(holo_obj,/datum/extension/chameleon/clothing)
 
 	if(HP.ambience)
 		linkedholodeck.forced_ambience = HP.ambience
