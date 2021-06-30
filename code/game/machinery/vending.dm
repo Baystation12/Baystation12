@@ -16,7 +16,7 @@
 	base_type = /obj/machinery/vending/assist
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
-	
+
 	machine_name = "vending machine"
 	machine_desc = "Holds an internal stock of items that can be dispensed on-demand or when a charged ID card is swiped, depending on the brand."
 
@@ -680,12 +680,13 @@
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 	vend_power_usage = 85000 //85 kJ to heat a 250 mL cup of coffee
 	products = list(/obj/item/reagent_containers/food/drinks/coffee = 15,
-					/obj/item/reagent_containers/food/drinks/decafcoffee = 15,
+					/obj/item/reagent_containers/food/drinks/coffee/decaf = 15,
+					/obj/item/reagent_containers/food/drinks/coffee/latte = 15,
 					/obj/item/reagent_containers/food/drinks/tea/black = 15,
 					/obj/item/reagent_containers/food/drinks/tea/green = 15,
 					/obj/item/reagent_containers/food/drinks/tea/chai = 15,
 					/obj/item/reagent_containers/food/drinks/tea/decaf = 15,
-					/obj/item/reagent_containers/food/drinks/h_chocolate = 15,
+					/obj/item/reagent_containers/food/drinks/hot_choc = 15,
 					/obj/item/reagent_containers/food/condiment/small/packet/sugar = 25,
 					/obj/item/reagent_containers/pill/pod/cream = 25,
 					/obj/item/reagent_containers/pill/pod/cream_soy = 25,
@@ -694,12 +695,13 @@
 					/obj/item/reagent_containers/food/drinks/ice = 10)
 
 	prices = list(/obj/item/reagent_containers/food/drinks/coffee = 10,
-				  /obj/item/reagent_containers/food/drinks/decafcoffee = 10,
+				  /obj/item/reagent_containers/food/drinks/coffee/decaf = 10,
+				  /obj/item/reagent_containers/food/drinks/coffee/latte = 10,
 				  /obj/item/reagent_containers/food/drinks/tea/black = 10,
 				  /obj/item/reagent_containers/food/drinks/tea/green = 10,
 				  /obj/item/reagent_containers/food/drinks/tea/chai = 10,
 				  /obj/item/reagent_containers/food/drinks/tea/decaf = 10,
-				  /obj/item/reagent_containers/food/drinks/h_chocolate = 10,
+				  /obj/item/reagent_containers/food/drinks/hot_choc = 10,
 				  /obj/item/reagent_containers/food/condiment/small/packet/sugar = 5,
 				  /obj/item/reagent_containers/pill/pod/cream = 5,
 				  /obj/item/reagent_containers/pill/pod/cream_soy = 5,

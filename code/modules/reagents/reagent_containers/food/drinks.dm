@@ -166,30 +166,19 @@
 
 /obj/item/reagent_containers/food/drinks/small_milk/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/drink/milk, 30)
+	reagents.add_reagent(/datum/reagent/drink/milk, 25)
 
 /obj/item/reagent_containers/food/drinks/small_milk_choc
 	name = "small chocolate milk carton"
 	desc = "It's milk! This one is in delicious chocolate flavour."
-	icon_state = "mini-milk"
+	icon_state = "mini-milk_choco"
 	item_state = "carton"
 	center_of_mass = "x=16;y=9"
 	volume = 30
 
 /obj/item/reagent_containers/food/drinks/small_milk_choc/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/drink/milk/chocolate, 30)
-
-
-/obj/item/reagent_containers/food/drinks/coffee
-	name = "\improper Robust Coffee"
-	desc = "Careful, the beverage you're about to enjoy is extremely hot."
-	icon_state = "coffee"
-	center_of_mass = "x=15;y=10"
-
-/obj/item/reagent_containers/food/drinks/coffee/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/drink/coffee, 30)
+	reagents.add_reagent(/datum/reagent/drink/milk/chocolate, 25)
 
 /obj/item/reagent_containers/food/drinks/ice
 	name = "cup of ice"
@@ -200,17 +189,6 @@
 /obj/item/reagent_containers/food/drinks/ice/Initialize()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/drink/ice, 30)
-
-/obj/item/reagent_containers/food/drinks/h_chocolate
-	name = "cup of hot cocoa"
-	desc = "A tall plastic cup of creamy hot chocolate."
-	icon_state = "coffee"
-	item_state = "coffee"
-	center_of_mass = "x=15;y=13"
-
-/obj/item/reagent_containers/food/drinks/h_chocolate/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/drink/hot_coco, 30)
 
 /obj/item/reagent_containers/food/drinks/dry_ramen
 	name = "cup ramen"
@@ -301,59 +279,121 @@
 	volume = 60
 	center_of_mass = "x=15;y=4"
 
-//tea and tea accessories
+//////////////////////////////////////////////////////
+////////////////////Tea and Coffee////////////////////
+//////////////////////////////////////////////////////
+
+//////////Tea Drinks//////////
+
+//Tea Baseline
 /obj/item/reagent_containers/food/drinks/tea
 	name = "cup of tea master item"
 	desc = "A tall plastic cup full of the concept and ideal of tea."
 	icon_state = "coffee"
 	item_state = "coffee"
+	trash = /obj/item/trash/coffee
 	center_of_mass = "x=16;y=14"
 	filling_states = "100"
 	base_name = "cup"
 	base_icon = "cup"
 
+//Black Tea
 /obj/item/reagent_containers/food/drinks/tea/black
 	name = "cup of black tea"
 	desc = "A tall plastic cup of hot black tea."
+	icon_state = "coffee"
+	item_state = "coffee"
 
 /obj/item/reagent_containers/food/drinks/tea/black/Initialize()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/drink/tea, 30)
 
+//Decaf Tea
+/obj/item/reagent_containers/food/drinks/tea/decaf
+	name = "cup of decaf tea"
+	desc = "A tall plastic cup of hot decaffeinated tea."
+	icon_state = "coffee"
+	item_state = "coffee"
+
+/obj/item/reagent_containers/food/drinks/tea/decaf/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/tea/decaf, 30)
+
+//Green Tea
 /obj/item/reagent_containers/food/drinks/tea/green
 	name = "cup of green tea"
 	desc = "A tall plastic cup of hot green tea."
+	icon_state = "greentea_vended"
+	item_state = "coffee"
 
 /obj/item/reagent_containers/food/drinks/tea/green/Initialize()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/drink/tea/green, 30)
 
+//Chai Tea
 /obj/item/reagent_containers/food/drinks/tea/chai
 	name = "cup of chai tea"
 	desc = "A tall plastic cup of hot chai tea."
+	icon_state = "chai_vended"
+	item_state = "coffee"
 
 /obj/item/reagent_containers/food/drinks/tea/chai/Initialize()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/drink/tea/chai, 30)
 
-/obj/item/reagent_containers/food/drinks/decafcoffee
-	name = "cup of decaf coffee"
-	desc = "A tall plastic cup of hot decaffeinated coffee."
+//////////Coffee Drinks//////////
+
+//Coffee
+/obj/item/reagent_containers/food/drinks/coffee
+	name = "\improper Robust Coffee"
+	desc = "Careful, the beverage you're about to enjoy is extremely hot."
 	icon_state = "coffee"
 	item_state = "coffee"
+	trash = /obj/item/trash/coffee
 	center_of_mass = "x=16;y=14"
 	filling_states = "100"
 	base_name = "cup"
 	base_icon = "cup"
 
-/obj/item/reagent_containers/food/drinks/decafcoffee/Initialize()
+/obj/item/reagent_containers/food/drinks/coffee/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/coffee, 30)
+
+//Decaf Coffee
+/obj/item/reagent_containers/food/drinks/coffee/decaf
+	name = "\improper Decaf Robust Coffee"
+	desc = "A tall plastic cup of hot decaffeinated coffee."
+	icon_state = "coffee"
+	item_state = "coffee"
+
+/obj/item/reagent_containers/food/drinks/coffee/decaf/Initialize()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/drink/decafcoffee, 30)
 
-/obj/item/reagent_containers/food/drinks/tea/decaf
-	name = "cup of decaf tea"
-	desc = "A tall plastic cup of hot decaffeinated tea."
+//Cafe Latte
+/obj/item/reagent_containers/food/drinks/coffee/latte
+	name = "\improper Robust Latte"
+	desc = "A tall plastic cup of hot taste coffee with added steamed milk."
+	icon_state = "cafe_latte"
+	item_state = "coffee"
 
-/obj/item/reagent_containers/food/drinks/tea/decaf/Initialize()
+/obj/item/reagent_containers/food/drinks/coffee/latte/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/drink/tea/decaf, 30)
+	reagents.add_reagent(/datum/reagent/drink/coffee/cafe_latte, 30)
+
+//////////Misc//////////
+
+/obj/item/reagent_containers/food/drinks/hot_choc
+	name = "cup of hot cocoa"
+	desc = "A tall plastic cup of creamy hot chocolate."
+	icon_state = "hot_choc"
+	item_state = "coffee"
+	trash = /obj/item/trash/coffee
+	center_of_mass = "x=16;y=14"
+	filling_states = "100"
+	base_name = "cup"
+	base_icon = "cup"
+
+/obj/item/reagent_containers/food/drinks/h_chocolate/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/hot_coco, 30)
