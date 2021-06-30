@@ -42,7 +42,7 @@
 		ACCESS_REGION_COMMAND = list(access_change_ids),
 		ACCESS_REGION_GENERAL = list(access_change_ids),
 		ACCESS_REGION_SUPPLY = list(access_change_ids),
-		ACCESS_REGION_NT = list(access_change_ids)
+		ACCESS_REGION_SERVICE = list(access_change_ids)
 	)
 
 /datum/map/torch/setup_job_lists()
