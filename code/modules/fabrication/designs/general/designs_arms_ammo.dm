@@ -96,6 +96,10 @@
 	name = "ammunition (shell, shotgun)"
 	path = /obj/item/ammo_casing/shotgun/pellet
 
+/datum/fabricator_recipe/arms_ammo/hidden/shotgun_flechette
+	name = "ammunition (flechette, shotgun)"
+	path = /obj/item/ammo_casing/shotgun/flechette
+
 /datum/fabricator_recipe/arms_ammo/hidden/tacknife
 	path = /obj/item/material/knife/combat
 

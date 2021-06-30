@@ -318,6 +318,7 @@
 	return list(/obj/item/storage/box/ammo/beanbags = 6,
 				/obj/item/storage/box/ammo/shotgunammo = 2,
 				/obj/item/storage/box/ammo/shotgunshells = 4,
+				/obj/item/storage/box/ammo/flechetteshells = 2,
 				/obj/item/storage/box/ammo/stunshells = 1,
 				/obj/item/ammo_magazine/pistol = 2,
 				/obj/item/ammo_magazine/smg_top = 2,
