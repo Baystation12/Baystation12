@@ -1,0 +1,9 @@
+author: Imienny
+delete-after: true
+changes:
+  - tweak: Shotgun shells are now more likely to hit random limbs
+  - tweak: Added new shotgun ammo, Flechette shell, slightly weaker than slug but
+      more accurate
+  - bugfix: Buckshot shells can no longer create extra pellets when fired at point
+      blank range
+  - imageadd: Replaced buckshot pellets sprite
