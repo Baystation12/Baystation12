@@ -231,11 +231,6 @@
 	icon_state = "fedora"
 	desc = "A sharp, stylish hat."
 
-/obj/item/clothing/head/panama
-	name = "panama hat"
-	icon_state = "panama"
-	desc = "A hat that makes you want to smuggle drugs."
-
 /obj/item/clothing/head/feathertrilby
 	name = "feather trilby"
 	icon_state = "feather_trilby"
