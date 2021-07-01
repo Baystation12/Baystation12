@@ -9244,9 +9244,11 @@
 /obj/machinery/newscaster{
 	pixel_x = 32
 	},
-/obj/machinery/computer/arcade,
 /obj/machinery/light/spot{
 	dir = 4
+	},
+/obj/machinery/computer/arcade{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/crew_quarters/sleep/cryo/aux)

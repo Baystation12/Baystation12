@@ -7367,7 +7367,9 @@
 	c_tag = "Mess Hall - Port";
 	dir = 1
 	},
-/obj/machinery/computer/arcade,
+/obj/machinery/computer/arcade{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
 "pj" = (
@@ -9448,16 +9450,17 @@
 /turf/simulated/floor/airless,
 /area/command/disperser)
 "uB" = (
-/obj/machinery/computer/arcade,
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 1;
 	icon_state = "spline_fancy"
 	},
 /obj/machinery/light,
+/obj/machinery/computer/arcade{
+	dir = 1
+	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/recreation)
 "uC" = (
-/obj/machinery/computer/arcade,
 /obj/structure/window/reinforced{
 	dir = 8;
 	health = 1e+006
@@ -9465,6 +9468,9 @@
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 1;
 	icon_state = "spline_fancy"
+	},
+/obj/machinery/computer/arcade{
+	dir = 1
 	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/recreation)
