@@ -1966,11 +1966,13 @@
 /area/command/captainmess)
 "gw" = (
 /obj/structure/table/marble,
-/obj/machinery/chemical_dispenser/bar_soft/full,
 /obj/item/device/radio/intercom{
 	dir = 8;
 	pixel_x = 22;
 	pixel_y = 4
+	},
+/obj/machinery/chemical_dispenser/bar_soft/full{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/command/captainmess)
@@ -13326,12 +13328,12 @@
 /area/hallway/primary/fourthdeck/aft)
 "RV" = (
 /obj/structure/table/woodentable,
-/obj/machinery/chemical_dispenser/bar_coffee/full{
-	pixel_y = 3
-	},
 /obj/machinery/light/small{
 	dir = 4;
 	pixel_y = 0
+	},
+/obj/machinery/chemical_dispenser/bar_coffee/full{
+	dir = 8
 	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/lounge)
@@ -15684,10 +15686,12 @@
 /area/hallway/primary/fourthdeck/center)
 "XW" = (
 /obj/structure/table/woodentable,
-/obj/machinery/chemical_dispenser/bar_soft/full,
 /obj/item/modular_computer/telescreen/preset/generic{
 	pixel_x = 32;
 	pixel_y = 0
+	},
+/obj/machinery/chemical_dispenser/bar_soft/full{
+	dir = 8
 	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/lounge)

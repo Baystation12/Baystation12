@@ -132,68 +132,6 @@
 	. = . = ..()
 	reagents.add_reagent(/datum/reagent/drink/beastenergy, 30)
 
-//Items exclusive to the BODA machine on deck 4 and wherever else it pops up. First two are a bit jokey. Second two are genuine article.
-
-/obj/item/reagent_containers/food/drinks/cans/syndicolax
-	name = "red army twist"
-	desc = "A taste of what keeps our glorious nation running! Served as Space Commissariat Stahlin prefers it! Luke warm."
-	icon_state = "syndi_cola_x"
-	center_of_mass = "x=16;y=10"
-
-/obj/item/reagent_containers/food/drinks/cans/syndicolax/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/drink/juice/potato, 30)
-
-/obj/item/reagent_containers/food/drinks/cans/artbru
-	name = "arstotzka bru"
-	desc = "Just what any bureaucrat needs to get through the day. Keep stamping those papers!"
-	icon_state = "art_bru"
-	center_of_mass = "x=16;y=10"
-
-/obj/item/reagent_containers/food/drinks/cans/artbru/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/drink/juice/turnip, 30)
-
-/obj/item/reagent_containers/food/drinks/cans/syndicola
-	name = "terra-cola"
-	desc = "A can of the only soft drink state approved for the benefit of the people. Served at room temperature regardless of ambient temperatures thanks to innovative Terran insulation technology."
-	icon_state = "syndi_cola"
-	center_of_mass = "x=16;y=10"
-
-/obj/item/reagent_containers/food/drinks/cans/syndicola/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/water, 25)
-	reagents.add_reagent(/datum/reagent/iron, 5)
-
-/obj/item/reagent_containers/food/drinks/glass2/square/boda
-	name = "boda"
-	desc = "A tall glass of refreshing Boda!"
-	center_of_mass = "x=16;y=10"
-
-/obj/item/reagent_containers/food/drinks/glass2/square/boda/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/drink/sodawater, 30)
-
-/obj/item/reagent_containers/food/drinks/glass2/square/bodaplus
-	name = "tri kopeiki sirop boda"
-	desc = "A tall glass of even more refreshing Boda! Now with Sok!"
-	center_of_mass = "x=16;y=10"
-
-/obj/item/reagent_containers/food/drinks/glass2/square/bodaplus/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/drink/sodawater, 15)
-	reagents.add_reagent(pick(list(
-				/datum/reagent/drink/kiraspecial,
-				/datum/reagent/drink/juice/grape,
-				/datum/reagent/drink/juice/orange,
-				/datum/reagent/drink/juice/lemon,
-				/datum/reagent/drink/juice/lime,
-				/datum/reagent/drink/juice/apple,
-				/datum/reagent/drink/juice/pear,
-				/datum/reagent/drink/juice/banana,
-				/datum/reagent/drink/juice/berry,
-				/datum/reagent/drink/juice/watermelon)), 15)
-
 //Canned alcohols.
 
 /obj/item/reagent_containers/food/drinks/cans/speer
@@ -216,125 +154,6 @@
 	. = ..()
 	reagents.add_reagent(/datum/reagent/ethanol/ale, 30)
 
-
-//Fox's Sodas from Legacy Bay: NSV Luna
-
-
-
-/obj/item/reagent_containers/food/drinks/cans/cola_diet
-	name = "diet space cola"
-	desc = "Cola... in space! Now with extra self-confidence."
-	icon_state = "cola-blue"
-
-/obj/item/reagent_containers/food/drinks/cans/cola_diet/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/drink/diet_cola, 30)
-
-/obj/item/reagent_containers/food/drinks/cans/rootbeer
-	name = "rocket root beer"
-	desc = "Blast away with Rocket Root Beer!"
-	icon_state = "cola-brown"
-
-/obj/item/reagent_containers/food/drinks/cans/rootbeer/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/drink/rootbeer, 30)
-
-/obj/item/reagent_containers/food/drinks/cans/cola_apple
-	name = "andromeda apple"
-	desc = "Look to the stars with Andromeda Apple!"
-	icon_state = "cola-green"
-
-/obj/item/reagent_containers/food/drinks/cans/cola_apple/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/drink/apple_soda, 30)
-
-/obj/item/reagent_containers/food/drinks/cans/cola_orange
-	name = "orbital orange"
-	desc = "Feel out-of-this-world with Orbital Orange!"
-	icon_state = "cola-orange"
-
-/obj/item/reagent_containers/food/drinks/cans/cola_orange/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/drink/orange_soda, 30)
-
-/obj/item/reagent_containers/food/drinks/cans/cola_grape
-	name = "gravity grape"
-	desc = "Feel the planetfall with Gravity Grape!"
-	icon_state = "cola-purple"
-
-/obj/item/reagent_containers/food/drinks/cans/cola_grape/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/drink/grapesoda, 30)
-
-/obj/item/reagent_containers/food/drinks/cans/cola_lemonlime
-	name = "citrus star"
-	desc = "Shoot to space with Citrus Star!"
-	icon_state = "cola-yellow"
-
-/obj/item/reagent_containers/food/drinks/cans/cola_lemonlime/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/drink/lemon_lime, 30)
-
-/obj/item/reagent_containers/food/drinks/cans/cola_strawberry
-	name = "sirius strawberry"
-	desc = "See stars with Sirius Strawberry!"
-	icon_state = "cola-pink"
-
-/obj/item/reagent_containers/food/drinks/cans/cola_strawberry/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/drink/strawberry_soda, 30)
-
-/obj/item/reagent_containers/food/drinks/cans/cola_pork
-	name = "pork soda"
-	desc = "Primus sucks!"
-	icon_state = "cola-pork"
-
-/obj/item/reagent_containers/food/drinks/cans/cola_pork/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/drink/porksoda, 30)
-
-// Cola
-
-/obj/item/reagent_containers/food/drinks/cans/vanillacola
-	name = "vanilla cola"
-	desc = "Delicious vanilla cola in a can."
-	icon_state = "vcola"
-	center_of_mass = "x=16;y=6"
-
-/obj/item/reagent_containers/food/drinks/cans/vanillacola/Initialize()
-	. = . = ..()
-	reagents.add_reagent(/datum/reagent/drink/vanilla_cola, 30)
-
-/obj/item/reagent_containers/food/drinks/cans/cherrycola
-	name = "cherry cola"
-	desc = "Delicious cherry cola in a can."
-	icon_state = "ccola"
-	center_of_mass = "x=16;y=6"
-
-/obj/item/reagent_containers/food/drinks/cans/cherrycola/Initialize()
-	. = . = ..()
-	reagents.add_reagent(/datum/reagent/drink/cherry_cola, 30)
-
-/obj/item/reagent_containers/food/drinks/cans/orangecola
-	name = "orange cola"
-	desc = "Delicious orange cola in a can."
-	icon_state = "ocola"
-	center_of_mass = "x=16;y=6"
-
-/obj/item/reagent_containers/food/drinks/cans/orangecola/Initialize()
-	. = . = ..()
-	reagents.add_reagent(/datum/reagent/drink/orange_cola, 30)
-
-/obj/item/reagent_containers/food/drinks/cans/coffeecola
-	name = "coffee cola"
-	desc = "Delicious coffee cola in a can."
-	icon_state = "ccola"
-	center_of_mass = "x=16;y=6"
-
-/obj/item/reagent_containers/food/drinks/cans/coffeecola/Initialize()
-	. = . = ..()
-	reagents.add_reagent(/datum/reagent/drink/coffee/coffee_cola, 30)
-
 /obj/item/reagent_containers/food/drinks/cans/ionbru
 	name = "ion-bru"
 	desc = "Ion-Bru, the drink of all true scotsmen."
@@ -344,3 +163,223 @@
 /obj/item/reagent_containers/food/drinks/cans/ionbru/Initialize()
 	. = . = ..()
 	reagents.add_reagent(/datum/reagent/drink/ionbru, 30)
+
+
+/////////////////////////////////////////////////////////
+//////////Fox's Sodas from Legacy Bay: NSV Luna//////////
+/////////////////////////////////////////////////////////
+
+/obj/item/reagent_containers/food/drinks/cans/rootbeer
+	name = "rocket root beer"
+	desc = "Blast away with Rocket Root Beer!"
+	icon_state = "rootbeer"
+
+/obj/item/reagent_containers/food/drinks/cans/rootbeer/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/rootbeer, 30)
+
+/obj/item/reagent_containers/food/drinks/cans/cola_apple
+	name = "andromeda apple"
+	desc = "Look to the stars with Andromeda Apple!"
+	icon_state = "applecoke"
+
+/obj/item/reagent_containers/food/drinks/cans/cola_apple/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/apple_soda, 30)
+
+/obj/item/reagent_containers/food/drinks/cans/cola_orange
+	name = "orbital orange"
+	desc = "Feel out-of-this-world with Orbital Orange!"
+	icon_state = "orangesoda"
+
+/obj/item/reagent_containers/food/drinks/cans/cola_orange/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/orange_soda, 30)
+
+/obj/item/reagent_containers/food/drinks/cans/cola_grape
+	name = "gravity grape"
+	desc = "Feel the planetfall with Gravity Grape!"
+	icon_state = "grapesoda"
+
+/obj/item/reagent_containers/food/drinks/cans/cola_grape/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/grapesoda, 30)
+
+/obj/item/reagent_containers/food/drinks/cans/cola_lemonlime
+	name = "citrus star"
+	desc = "Shoot to space with Citrus Star!"
+	icon_state = "lemoncoke"
+
+/obj/item/reagent_containers/food/drinks/cans/cola_lemonlime/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/lemon_lime, 30)
+
+/obj/item/reagent_containers/food/drinks/cans/cola_strawberry
+	name = "sirius strawberry"
+	desc = "See stars with Sirius Strawberry!"
+	icon_state = "strawcoke"
+
+/obj/item/reagent_containers/food/drinks/cans/cola_strawberry/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/strawberry_soda, 30)
+
+/obj/item/reagent_containers/food/drinks/cans/cola_pork
+	name = "pork soda"
+	desc = "Primus sucks!"
+	icon_state = "porkcoke"
+
+/obj/item/reagent_containers/food/drinks/cans/cola_pork/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/porksoda, 30)
+
+//////////////////////////////
+//////////Cola Types//////////
+//////////////////////////////
+
+//Diet Cola
+/obj/item/reagent_containers/food/drinks/cans/cola_diet
+	name = "diet space cola"
+	desc = "Cola... in space! Now with extra self-confidence."
+	icon_state = "diet_cola"
+
+/obj/item/reagent_containers/food/drinks/cans/cola_diet/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/diet_cola, 30)
+
+//Vanilla
+/obj/item/reagent_containers/food/drinks/cans/vanillacola
+	name = "vanilla cola"
+	desc = "Delicious vanilla cola in a can."
+	icon_state = "vanillacola"
+	center_of_mass = "x=16;y=6"
+
+/obj/item/reagent_containers/food/drinks/cans/vanillacola/Initialize()
+	. = . = ..()
+	reagents.add_reagent(/datum/reagent/drink/vanilla_cola, 30)
+
+//Cherry
+/obj/item/reagent_containers/food/drinks/cans/cherrycola
+	name = "cherry cola"
+	desc = "Delicious cherry cola in a can."
+	icon_state = "cherrycola"
+	center_of_mass = "x=16;y=6"
+
+/obj/item/reagent_containers/food/drinks/cans/cherrycola/Initialize()
+	. = . = ..()
+	reagents.add_reagent(/datum/reagent/drink/cherry_cola, 30)
+
+//Orange
+/obj/item/reagent_containers/food/drinks/cans/orangecola
+	name = "orange cola"
+	desc = "Delicious orange cola in a can."
+	icon_state = "orangecola"
+	center_of_mass = "x=16;y=6"
+
+/obj/item/reagent_containers/food/drinks/cans/orangecola/Initialize()
+	. = . = ..()
+	reagents.add_reagent(/datum/reagent/drink/orange_cola, 30)
+
+//Coffee
+/obj/item/reagent_containers/food/drinks/cans/coffeecola
+	name = "coffee cola"
+	desc = "Delicious coffee cola in a can."
+	icon_state = "coffeecola"
+	center_of_mass = "x=16;y=6"
+
+/obj/item/reagent_containers/food/drinks/cans/coffeecola/Initialize()
+	. = . = ..()
+	reagents.add_reagent(/datum/reagent/drink/coffee/coffee_cola, 30)
+
+//////////////////////////////////////
+//////////Boda Vendor Drinks//////////
+//////////////////////////////////////
+
+//Kvass
+/obj/item/weapon/reagent_containers/food/drinks/cans/kvass
+	name = "kvass"
+	desc = "A true Slavic soda."
+	icon_state = "kvass"
+	center_of_mass = list("x"=16, "y"=10)
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/kvass/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/ethanol/kvass, 30)
+
+//Kompot
+/obj/item/weapon/reagent_containers/food/drinks/cans/kompot
+	name = "kompot"
+	desc = "A taste of russia in the summertime - canned for you consumption."
+	icon_state = "kompot"
+	center_of_mass = list("x"=16, "y"=10)
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/kompot/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/soda/kompot, 30)
+
+//Boda
+/obj/item/weapon/reagent_containers/food/drinks/cans/boda
+	name = "boda"
+	desc = "State regulated soda beverage. Enjoy comrades."
+	icon_state = "boda"
+	center_of_mass = list("x"=16, "y"=8)
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/boda/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/sodawater, 30)
+
+//BodaPlus
+/obj/item/weapon/reagent_containers/food/drinks/cans/bodaplus
+	name = "boda-plyus"
+	desc = "State regulated soda beverage, now with added surplus flavoring. Enjoy comrades."
+	icon_state = "bodaplus"
+	center_of_mass = list("x"=16, "y"=8)
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/bodaplus/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/sodawater, 15)
+	reagents.add_reagent(pick(list(
+				/datum/reagent/drink/kiraspecial,
+				/datum/reagent/drink/juice/grape,
+				/datum/reagent/drink/juice/orange,
+				/datum/reagent/drink/juice/lemon,
+				/datum/reagent/drink/juice/lime,
+				/datum/reagent/drink/juice/apple,
+				/datum/reagent/drink/juice/pear,
+				/datum/reagent/drink/juice/banana,
+				/datum/reagent/drink/juice/berry,
+				/datum/reagent/drink/juice/watermelon)), 15)
+
+//Red Army Twist
+/obj/item/reagent_containers/food/drinks/cans/redarmy
+	name = "red army twist"
+	desc = "A taste of what keeps our glorious nation running! Served as Space Commissariat Stahlin prefers it! Luke warm."
+	icon_state = "red_army"
+	center_of_mass = "x=16;y=10"
+
+/obj/item/reagent_containers/food/drinks/cans/syndicolax/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/juice/potato, 15)
+	reagents.add_reagent(/datum/reagent/drink/sodawater, 15)
+
+//Arstotzka Brü
+/obj/item/reagent_containers/food/drinks/cans/arstbru
+	name = "arstotzka brü"
+	desc = "Just what any bureaucrat needs to get through the day. Keep stamping those papers!"
+	icon_state = "arst_bru"
+	center_of_mass = "x=16;y=10"
+
+/obj/item/reagent_containers/food/drinks/cans/artbru/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/juice/turnip, 30)
+
+//Terra-Cola
+/obj/item/reagent_containers/food/drinks/cans/terra_cola
+	name = "terra-cola"
+	desc = "A can of the only soft drink state approved for the benefit of the people. Served at room temperature regardless of ambient temperatures thanks to innovative Terran insulation technology."
+	icon_state = "terra_cola"
+	center_of_mass = "x=16;y=10"
+
+/obj/item/reagent_containers/food/drinks/cans/syndicola/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/water, 25)
+	reagents.add_reagent(/datum/reagent/iron, 5)

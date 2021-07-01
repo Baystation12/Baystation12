@@ -304,7 +304,7 @@
 /obj/item/reagent_containers/food/drinks/bottle/melonliquor
 	name = "Emeraldine Melon Liquor"
 	desc = "A bottle of 46 proof Emeraldine Melon Liquor. Sweet and light."
-	icon_state = "alco-green" //Placeholder.
+	icon_state = "melon_liqueur"
 	center_of_mass = "x=16;y=6"
 	New()
 		..()
@@ -313,7 +313,7 @@
 /obj/item/reagent_containers/food/drinks/bottle/bluecuracao
 	name = "Miss Blue Curacao"
 	desc = "A fruity, exceptionally azure drink. Does not allow the imbiber to use the fifth magic."
-	icon_state = "alco-blue" //Placeholder.
+	icon_state = "blue_curacao"
 	center_of_mass = "x=16;y=6"
 	New()
 		..()
@@ -340,7 +340,7 @@
 /obj/item/reagent_containers/food/drinks/bottle/cola
 	name = "\improper Space Cola"
 	desc = "Cola. in space."
-	icon_state = "colabottle"
+	icon_state = "liter_cola_bottle"
 	center_of_mass = "x=16;y=6"
 	New()
 		..()
@@ -349,7 +349,7 @@
 /obj/item/reagent_containers/food/drinks/bottle/space_up
 	name = "\improper Space-Up"
 	desc = "Tastes like a hull breach in your mouth."
-	icon_state = "space-up_bottle"
+	icon_state = "liter_spaceup_bottle"
 	center_of_mass = "x=16;y=6"
 	New()
 		..()
@@ -358,7 +358,7 @@
 /obj/item/reagent_containers/food/drinks/bottle/space_mountain_wind
 	name = "\improper Space Mountain Wind"
 	desc = "Blows right through you like a space wind."
-	icon_state = "space_mountain_wind_bottle"
+	icon_state = "liter_mountain_bottle"
 	center_of_mass = "x=16;y=6"
 	New()
 		..()

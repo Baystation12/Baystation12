@@ -183,24 +183,13 @@
 /obj/item/reagent_containers/food/drinks/ice
 	name = "cup of ice"
 	desc = "Careful, cold ice, do not chew."
-	icon_state = "coffee"
+	icon_state = "ice"
+	trash = /obj/item/trash/coffee
 	center_of_mass = "x=15;y=10"
 
 /obj/item/reagent_containers/food/drinks/ice/Initialize()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/drink/ice, 30)
-
-/obj/item/reagent_containers/food/drinks/dry_ramen
-	name = "cup ramen"
-	gender = PLURAL
-	desc = "Just add 10ml water, self heats! A taste that reminds you of your school years."
-	icon_state = "ramen"
-	center_of_mass = "x=16;y=11"
-
-/obj/item/reagent_containers/food/drinks/dry_ramen/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/drink/dry_ramen, 30)
-
 
 /obj/item/reagent_containers/food/drinks/sillycup
 	name = "paper cup"
@@ -218,9 +207,9 @@
 
 
 //////////////////////////pitchers, pots, flasks and cups //
-//Note by Darem: This code handles the mixing of drinks. New drinks go in three places: In Chemistry-Reagents.dm (for the drink
+//  Note by Darem: This code handles the mixing of drinks. New drinks go in three places: In Chemistry-Reagents.dm (for the drink
 //	itself), in Chemistry-Recipes.dm (for the reaction that changes the components into the drink), and here (for the drinking glass
-//	icon states.
+//	icon states.)
 
 /obj/item/reagent_containers/food/drinks/teapot
 	name = "teapot"
@@ -280,7 +269,7 @@
 	center_of_mass = "x=15;y=4"
 
 //////////////////////////////////////////////////////
-////////////////////Tea and Coffee////////////////////
+////////////////////Hot Stuff Below///////////////////
 //////////////////////////////////////////////////////
 
 //////////Tea Drinks//////////
@@ -381,8 +370,9 @@
 	. = ..()
 	reagents.add_reagent(/datum/reagent/drink/coffee/cafe_latte, 30)
 
-//////////Misc//////////
+//////////Misc Stuff//////////
 
+//Hot Choccy
 /obj/item/reagent_containers/food/drinks/hot_choc
 	name = "cup of hot cocoa"
 	desc = "A tall plastic cup of creamy hot chocolate."
@@ -397,3 +387,16 @@
 /obj/item/reagent_containers/food/drinks/h_chocolate/Initialize()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/drink/hot_coco, 30)
+
+//Ramen
+/obj/item/reagent_containers/food/drinks/dry_ramen
+	name = "cup ramen"
+	gender = PLURAL
+	desc = "Just add 10ml water, self heats! A taste that reminds you of your school years."
+	icon_state = "ramen"
+	trash = /obj/item/trash/ramen
+	center_of_mass = "x=16;y=11"
+
+/obj/item/reagent_containers/food/drinks/dry_ramen/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/dry_ramen, 30)

@@ -4309,11 +4309,13 @@
 /area/quartermaster/exploration)
 "jG" = (
 /obj/structure/table/steel,
-/obj/machinery/chemical_dispenser/bar_soft/full,
 /obj/machinery/camera/network/exploration{
 	c_tag = "Pilot's Lounge";
 	dir = 4;
 	icon_state = "camera"
+	},
+/obj/machinery/chemical_dispenser/bar_soft/full{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/command/pilot)
@@ -11361,7 +11363,9 @@
 /area/shuttle/petrov/rd)
 "AT" = (
 /obj/structure/table/steel,
-/obj/machinery/chemical_dispenser/bar_soft/full,
+/obj/machinery/chemical_dispenser/bar_soft/full{
+	dir = 8
+	},
 /turf/simulated/floor/wood/walnut,
 /area/vacant/bar)
 "AU" = (
@@ -12009,12 +12013,14 @@
 /area/shuttle/petrov/cell3)
 "Dl" = (
 /obj/structure/table/steel,
-/obj/machinery/chemical_dispenser/bar_alc/full,
 /obj/machinery/button/blast_door{
 	id_tag = "auxbar";
 	name = "Blast Shutter Control";
 	pixel_x = 26;
 	pixel_y = 0
+	},
+/obj/machinery/chemical_dispenser/bar_alc/full{
+	dir = 8
 	},
 /turf/simulated/floor/plating,
 /area/vacant/bar)

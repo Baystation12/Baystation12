@@ -1563,3 +1563,16 @@
 
 	glass_name = "horchata"
 	glass_desc = "A lovely looking horchata del chufa."
+
+//Soviet Drink
+
+/datum/reagent/ethanol/kvass
+	name = "Kvass"
+	description = "A traditional fermented Slavic and Baltic beverage commonly made from rye bread."
+	taste_description = "a warm summer day at babushka's cabin"
+	color = "#b78315" // rgb: 183, 131, 21
+	strength = 95 //It's just soda to Russians
+	nutriment_factor = 2
+
+	glass_name = "kvass"
+	glass_desc = "A hearty glass of Slavic brew."

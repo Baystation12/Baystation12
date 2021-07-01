@@ -634,6 +634,7 @@
 	M.dizziness += 5
 	M.drowsyness = 0
 
+
 /datum/reagent/drink/grenadine
 	name = "Grenadine Syrup"
 	description = "Made in the modern day with proper pomegranate substitute. Who uses real fruit, anyways?"
@@ -1375,6 +1376,20 @@
 
 	glass_name = "decaf tea"
 	glass_desc = "Tasty black tea, it has antioxidants, it's good for you!"
+
+//Soviet Drink
+
+/datum/reagent/drink/soda/kompot
+	name = "Kompot"
+	description = "A traditional Eastern European beverage once used to preserve fruit in the 1980s"
+	taste_description = "refreshuingly sweet and fruity"
+	color = "#ed9415" // rgb: 237, 148, 21
+	adj_drowsy = -1
+	adj_temp = -6
+
+	glass_name = "kompot"
+	glass_desc = "A glass of refreshing kompot."
+	glass_special = list(DRINK_FIZZ)
 
 // Alien Drinks
 
