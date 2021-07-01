@@ -1,5 +1,0 @@
-author: Fre3bie
-delete-after: true
-changes:
-  - bugfix: Fixed SMES coil installation bug
-  - bugfix: Fixed being interrupted while dismantling wall permanently disabling dismantling

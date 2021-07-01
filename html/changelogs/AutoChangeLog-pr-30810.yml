@@ -1,5 +1,0 @@
-author: RaveRadbury
-delete-after: true
-changes:
-  - tweak: All holodeck clothing have the chameleon extension
-  - bugfix: Chameleon items in the Holodeck Theatre work again
