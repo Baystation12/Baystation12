@@ -439,8 +439,6 @@
 			return global.fusion_reactions;
 		if("game_id")
 			return global.game_id;
-		if("gamemode_cache")
-			return global.gamemode_cache;
 		if("gas_data")
 			return global.gas_data;
 		if("gear_datums")
@@ -1318,8 +1316,6 @@
 			global.fusion_reactions=newval;
 		if("game_id")
 			global.game_id=newval;
-		if("gamemode_cache")
-			global.gamemode_cache=newval;
 		if("gas_data")
 			global.gas_data=newval;
 		if("gear_datums")
@@ -1977,7 +1973,6 @@
 	"fruit_icon_cache",
 	"fusion_reactions",
 	"game_id",
-	"gamemode_cache",
 	"gas_data",
 	"gear_datums",
 	"gear_tweak_free_color_choice_",
