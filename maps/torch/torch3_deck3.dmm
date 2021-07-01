@@ -4676,10 +4676,11 @@
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
 	},
-/obj/machinery/vending/coffee{
-	dir = 1;
-	icon_state = "coffee"
-	},
+/obj/structure/bookcase,
+/obj/item/book/manual/sol_sop,
+/obj/item/book/manual/solgov_law,
+/obj/item/book/manual/military_law,
+/obj/item/book/manual/nt_regs,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
 "jk" = (
@@ -7367,7 +7368,7 @@
 	c_tag = "Mess Hall - Port";
 	dir = 1
 	},
-/obj/machinery/computer/arcade{
+/obj/machinery/vending/cigarette{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
@@ -9455,7 +9456,7 @@
 	icon_state = "spline_fancy"
 	},
 /obj/machinery/light,
-/obj/machinery/computer/arcade{
+/obj/machinery/computer/arcade/orion_trail{
 	dir = 1
 	},
 /turf/simulated/floor/wood/walnut,
@@ -9469,7 +9470,7 @@
 	dir = 1;
 	icon_state = "spline_fancy"
 	},
-/obj/machinery/computer/arcade{
+/obj/machinery/computer/arcade/battle{
 	dir = 1
 	},
 /turf/simulated/floor/wood/walnut,
@@ -11408,7 +11409,7 @@
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
 	},
-/obj/machinery/vending/cigarette,
+/obj/machinery/computer/arcade,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
 "AD" = (
@@ -16807,11 +16808,10 @@
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
 	},
-/obj/structure/bookcase,
-/obj/item/book/manual/sol_sop,
-/obj/item/book/manual/solgov_law,
-/obj/item/book/manual/military_law,
-/obj/item/book/manual/nt_regs,
+/obj/machinery/vending/coffee{
+	dir = 1;
+	icon_state = "coffee"
+	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
 "OC" = (
@@ -19894,7 +19894,6 @@
 /obj/structure/table/standard{
 	name = "plastic table frame"
 	},
-/obj/item/board,
 /obj/item/device/radio/intercom/entertainment{
 	dir = 8;
 	pixel_x = 22

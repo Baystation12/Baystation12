@@ -9247,7 +9247,7 @@
 /obj/machinery/light/spot{
 	dir = 4
 	},
-/obj/machinery/computer/arcade{
+/obj/machinery/computer/arcade/battle{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white/monotile,
