@@ -538,3 +538,17 @@
 
 /obj/item/clothing/suit/hospital/pink
 	color = "#ffb7db"
+
+
+/obj/item/clothing/suit/storage/toggle/zipper
+	name = "zip up sweater"
+	desc = "A black sweater that zips up in the front."
+	icon_state = "zipperjacket"
+	icon_open = "zipperjacket_open"
+	icon_closed = "zipperjacket"
+
+
+/obj/item/clothing/suit/storage/pullover
+	name = "pullover sweater"
+	desc = "A sweater made of a soft material with a short zipper on the collar."
+	icon_state = "pullover"
