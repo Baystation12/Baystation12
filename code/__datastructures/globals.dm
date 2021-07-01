@@ -19,7 +19,7 @@
 #define GLOBAL_REAL_VAR(X) var/global/##X
 #define GLOBAL_REAL(X, Typepath) var/global##Typepath/##X
 
-#define GLOBAL_RAW(X) /datum/controller/global_vars/var/global##X
+#define GLOBAL_RAW(X) /datum/controller/global_vars/var/static/global##X
 
 #define GLOBAL_VAR_INIT(X, InitValue) GLOBAL_RAW(/##X); GLOBAL_MANAGED(X, InitValue)
 
