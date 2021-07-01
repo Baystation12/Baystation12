@@ -389,9 +389,16 @@ BLIND     // can't see anything
 		slot_l_hand_str = 'icons/mob/onmob/items/lefthand_hats.dmi',
 		slot_r_hand_str = 'icons/mob/onmob/items/righthand_hats.dmi',
 		)
+	sprite_sheets = list(
+		SPECIES_VOX = 'icons/mob/species/vox/onmob_head_vox.dmi',
+		SPECIES_VOX_ARMALIS = 'icons/mob/species/vox/onmob_head_vox_armalis.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_head_unathi.dmi',
+		SPECIES_NABBER = 'icons/mob/species/nabber/onmob_head_gas.dmi'
+	)
 	body_parts_covered = HEAD
 	slot_flags = SLOT_HEAD
 	w_class = ITEM_SIZE_SMALL
+	blood_overlay_type = "helmetblood"
 
 	var/image/light_overlay_image
 	var/light_overlay = "helmet_light"
@@ -399,12 +406,6 @@ BLIND     // can't see anything
 	var/brightness_on
 	var/on = 0
 
-	sprite_sheets = list(
-		SPECIES_VOX = 'icons/mob/species/vox/onmob_head_vox.dmi',
-		SPECIES_VOX_ARMALIS = 'icons/mob/species/vox/onmob_head_vox_armalis.dmi',
-		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_head_unathi.dmi',
-		)
-	blood_overlay_type = "helmetblood"
 
 /obj/item/clothing/head/equipped(var/mob/user, var/slot)
 	light_overlay_image = null
