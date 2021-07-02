@@ -109,6 +109,14 @@
 
 #define APPEARANCE_COMMON (APPEARANCE_DNA2|APPEARANCE_RACE|APPEARANCE_GENDER|APPEARANCE_SKIN|APPEARANCE_ALL_HAIR|APPEARANCE_EYES|APPEARANCE_LANG)
 
+
+// /sprite_accessory flags
+#define DO_COLORATION_USER 1 //! Allow a user to set their own sprite_accessory color; tattoos, etc
+#define DO_COLORATION_SKIN 2 //! Take a coloration cue from skin tone
+#define DO_COLORATION_HAIR 4 //! Take a coloration cue from hair color
+#define DO_COLORATION_AUTO 6 //! Use hair if available, otherwise skin
+
+
 // Click cooldown
 #define DEFAULT_ATTACK_COOLDOWN 8 //Default timeout for aggressive actions
 #define DEFAULT_QUICK_COOLDOWN  4

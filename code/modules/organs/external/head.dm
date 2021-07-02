@@ -127,7 +127,7 @@
 			if(!facial_hair_style.species_allowed || (species.get_bodytype(owner) in facial_hair_style.species_allowed))
 				if(!facial_hair_style.subspecies_allowed || (species.name in facial_hair_style.subspecies_allowed))
 					var/icon/facial_s = new/icon("icon" = facial_hair_style.icon, "icon_state" = "[facial_hair_style.icon_state]_s")
-					if(facial_hair_style.do_coloration)
+					if(facial_hair_style.do_coloration & DO_COLORATION_USER)
 						facial_s.Blend(rgb(owner.r_facial, owner.g_facial, owner.b_facial), facial_hair_style.blend)
 					res.overlays |= facial_s
 
@@ -140,7 +140,7 @@
 			if (!length(H.species_allowed) || (species.get_bodytype(owner) in H.species_allowed))
 				if (!length(H.subspecies_allowed) || (species.name in H.subspecies_allowed))
 					HI = icon(H.icon, "[H.icon_state]_s")
-					if (H.do_coloration && length(h_col) >= 3)
+					if ((H.do_coloration & DO_COLORATION_USER) && length(h_col) >= 3)
 						HI.Blend(rgb(h_col[1], h_col[2], h_col[3]), H.blend)
 		if (HI)
 			var/list/sorted_hair_markings = list()
@@ -162,14 +162,33 @@
 		if (M.draw_target == MARKING_TARGET_HEAD)
 			var/color = markings[E]
 			var/icon/I = icon(M.icon, M.icon_state)
-			if (!M.do_coloration && owner.h_style)
+			if ((M.do_coloration & DO_COLORATION_AUTO) && owner.h_style)
 				var/datum/sprite_accessory/hair/H = GLOB.hair_styles_list[owner.h_style]
-				if ((~H.flags & HAIR_BALD) && length(h_col) >= 3)
-					I.Blend(rgb(h_col[1], h_col[2], h_col[3]), ICON_ADD)
-				else
-					I.Blend(rgb(200 + s_tone, 150 + s_tone, 123 + s_tone), ICON_ADD)
+				if ((~H.flags & HAIR_BALD) && (M.do_coloration & DO_COLORATION_HAIR) && length(h_col) >= 3)
+					I.MapColors(
+						1,0,0,0,
+						0,1,0,0,
+						0,0,1,0,
+						0,0,0,1,
+						h_col[1] / 255, h_col[2] / 255, h_col[3] / 255, 0
+					)
+				else if (M.do_coloration & DO_COLORATION_SKIN)
+					I.MapColors(
+						1,0,0,0,
+						0,1,0,0,
+						0,0,1,0,
+						0,0,0,1,
+						(200 + s_tone) / 255, (150 + s_tone) / 255, (123 + s_tone) / 255, 0
+					)
 			else
-				I.Blend(color, ICON_ADD)
+				var/list/rgb = rgb2num(color)
+				I.MapColors(
+					1,0,0,0,
+					0,1,0,0,
+					0,0,1,0,
+					0,0,0,1,
+					rgb[1] / 255, rgb[2] / 255, rgb[3] / 255, 0
+				)
 			icon_cache_key += "[M.name][color]"
 			ADD_SORTED(sorted_head_markings, list(list(M.draw_order, I)), /proc/cmp_marking_order)
 	for (var/entry in sorted_head_markings)
