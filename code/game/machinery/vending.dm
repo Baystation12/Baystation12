@@ -1383,7 +1383,8 @@
 					/obj/item/reagent_containers/food/snacks/mars = 8,
 					/obj/item/reagent_containers/food/snacks/venus = 8,
 					/obj/item/reagent_containers/food/snacks/sun_snax = 8,
-					/obj/item/reagent_containers/food/snacks/oort = 8
+					/obj/item/reagent_containers/food/snacks/oort = 8,
+					/obj/item/reagent_containers/food/snacks/canned/maps = 4
 					)
 
 	prices = list(/obj/item/reagent_containers/food/snacks/lunacake = 12,
@@ -1396,8 +1397,9 @@
 					/obj/item/reagent_containers/food/snacks/mars = 12,
 					/obj/item/reagent_containers/food/snacks/venus = 12,
 					/obj/item/reagent_containers/food/snacks/sun_snax = 12,
-					/obj/item/reagent_containers/food/snacks/oort = 12
-	)
+					/obj/item/reagent_containers/food/snacks/oort = 12,
+					/obj/item/reagent_containers/food/snacks/canned/maps = 25
+					)
 
 /obj/machinery/vending/weeb
 	name = "\improper Nippon-tan!"

@@ -4037,6 +4037,7 @@ obj/item/reagent_containers/food/snacks/chocobanana
 //////////Packaged Foods - Proof of concept.////////
 ////////////////////////////////////////////////////
 
+//Space Twinkie
 /obj/item/reagent_containers/food/snacks/packaged/spacetwinkie
 	name = "spacer snack cake"
 	icon = 'icons/obj/food_canned.dmi'
