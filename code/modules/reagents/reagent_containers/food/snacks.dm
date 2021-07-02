@@ -4025,7 +4025,7 @@ obj/item/reagent_containers/food/snacks/chocobanana
 
 /obj/item/reagent_containers/food/snacks/packaged/attack_self(var/mob/user)
 	if(sealed)
-		playsound(loc,'sound/effects/tincanopen.ogg', rand(10,50), 1)
+		playsound(loc,'sound/effects/packagedfoodopen.ogg', rand(10,50), 1)
 		to_chat(user, "<span class='notice'>You unseal \the [src] with a tear of plastic.</span>")
 		unseal()
 
