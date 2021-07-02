@@ -308,7 +308,7 @@
 //Kompot
 /obj/item/weapon/reagent_containers/food/drinks/cans/kompot
 	name = "kompot"
-	desc = "A taste of russia in the summertime - canned for you consumption."
+	desc = "A taste of Russia in the summertime - canned for your consumption."
 	icon_state = "kompot"
 	center_of_mass = list("x"=16, "y"=10)
 
