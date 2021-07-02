@@ -362,7 +362,7 @@
 //Cafe Latte
 /obj/item/reagent_containers/food/drinks/coffee/latte
 	name = "\improper Robust Latte"
-	desc = "A tall plastic cup of hot taste coffee with added steamed milk."
+	desc = "A tall plastic cup of hot coffee with added steamed milk."
 	icon_state = "cafe_latte"
 	item_state = "coffee"
 
