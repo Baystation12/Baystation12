@@ -1,0 +1,5 @@
+author: Semoro and azizonkg
+delete-after: true
+changes:
+  - bugfix: ported major fixes of SStimer subsystem from RU SS220 Paradise based on
+      SStimer from TGstation
