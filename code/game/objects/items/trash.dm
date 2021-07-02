@@ -183,5 +183,29 @@
 	desc = "a stick from some snack food item or a lollipop, not even useful as crafting material."
 	icon_state = "stick"
 
+/obj/item/trash/appleberry
+	name = "appleberry can"
+	icon_state = "appleberry"
+
+/obj/item/trash/maps
+	name = "MAPS can"
+	icon_state = "maps"
+
+/obj/item/trash/spacer_cake_wrap
+	name = "spacer cake wrapper"
+	icon_state = "spacer_cake_wrap"
+
+/obj/item/trash/wasabi_peas
+	name = "wasabi peas bag"
+	icon_state = "wasabi_peas"
+
+/obj/item/trash/namagashi
+	name = "namagashi bag"
+	icon_state = "namagashi"
+
+/obj/item/trash/sun_snax
+	name = "sun snax bag"
+	icon_state = "sun_snax"
+
 /obj/item/trash/attack(mob/M as mob, mob/living/user as mob)
 	return

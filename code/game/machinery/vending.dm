@@ -16,7 +16,7 @@
 	base_type = /obj/machinery/vending/assist
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
-	
+
 	machine_name = "vending machine"
 	machine_desc = "Holds an internal stock of items that can be dispensed on-demand or when a charged ID card is swiped, depending on the brand."
 
@@ -729,14 +729,14 @@
 					/obj/item/storage/chewables/candy/gum = 4,
 					/obj/item/storage/chewables/candy/cookies = 4,
 					/obj/item/reagent_containers/food/snacks/candy = 6,/obj/item/reagent_containers/food/drinks/dry_ramen = 6,/obj/item/reagent_containers/food/snacks/chips =6,
-					/obj/item/reagent_containers/food/snacks/sosjerky = 6,/obj/item/reagent_containers/food/snacks/no_raisin = 6,/obj/item/reagent_containers/food/snacks/spacetwinkie = 6,
+					/obj/item/reagent_containers/food/snacks/sosjerky = 6,/obj/item/reagent_containers/food/snacks/no_raisin = 6,/obj/item/reagent_containers/food/snacks/packaged/spacetwinkie = 6,
 					/obj/item/reagent_containers/food/snacks/cheesiehonkers = 6, /obj/item/reagent_containers/food/snacks/tastybread = 6)
 	contraband = list(/obj/item/reagent_containers/food/snacks/syndicake = 6, /obj/item/reagent_containers/food/snacks/skrellsnacks = 3)
 	prices = list(/obj/item/clothing/mask/chewable/candy/lolli = 2,
 					/obj/item/storage/chewables/candy/gum = 4,
 					/obj/item/storage/chewables/candy/cookies = 4,
 					/obj/item/reagent_containers/food/snacks/candy = 1,/obj/item/reagent_containers/food/drinks/dry_ramen = 5,/obj/item/reagent_containers/food/snacks/chips = 1,
-					/obj/item/reagent_containers/food/snacks/sosjerky = 2,/obj/item/reagent_containers/food/snacks/no_raisin = 1,/obj/item/reagent_containers/food/snacks/spacetwinkie = 1,
+					/obj/item/reagent_containers/food/snacks/sosjerky = 2,/obj/item/reagent_containers/food/snacks/no_raisin = 1,/obj/item/reagent_containers/food/snacks/packaged/spacetwinkie = 1,
 					/obj/item/reagent_containers/food/snacks/cheesiehonkers = 1, /obj/item/reagent_containers/food/snacks/tastybread = 2)
 
 /obj/machinery/vending/cola
@@ -1382,6 +1382,7 @@
 					/obj/item/reagent_containers/food/snacks/jupiter = 8,
 					/obj/item/reagent_containers/food/snacks/mars = 8,
 					/obj/item/reagent_containers/food/snacks/venus = 8,
+					/obj/item/reagent_containers/food/snacks/sun_snax = 8,
 					/obj/item/reagent_containers/food/snacks/oort = 8
 					)
 
@@ -1394,6 +1395,7 @@
 					/obj/item/reagent_containers/food/snacks/jupiter = 12,
 					/obj/item/reagent_containers/food/snacks/mars = 12,
 					/obj/item/reagent_containers/food/snacks/venus = 12,
+					/obj/item/reagent_containers/food/snacks/sun_snax = 12,
 					/obj/item/reagent_containers/food/snacks/oort = 12
 	)
 
@@ -1406,18 +1408,26 @@
 	icon_vend = "weeb-vend"
 	icon_deny = "weeb-deny"
 	products = list(/obj/item/reagent_containers/food/snacks/weebonuts = 8,
+					/obj/item/reagent_containers/food/snacks/wasabi_peas = 8,
 					/obj/item/reagent_containers/food/snacks/ricecake = 8,
-					/obj/item/reagent_containers/food/snacks/dango = 8,
-					/obj/item/reagent_containers/food/snacks/pokey = 8,
-					/obj/item/reagent_containers/food/snacks/chocobanana = 8
+					/obj/item/storage/pocky = 8,
+					/obj/item/reagent_containers/food/snacks/chocobanana = 8,
+					/obj/item/reagent_containers/food/snacks/dorayaki = 8,
+					/obj/item/reagent_containers/food/snacks/daifuku = 8,
+					/obj/item/reagent_containers/food/snacks/goma_dango = 8,
+					/obj/item/reagent_containers/food/snacks/hanami_dango = 8
 					)
 
 	prices = list(/obj/item/reagent_containers/food/snacks/weebonuts = 80,
-					/obj/item/reagent_containers/food/snacks/ricecake = 80,
-					/obj/item/reagent_containers/food/snacks/dango = 80,
-					/obj/item/reagent_containers/food/snacks/pokey = 80,
-					/obj/item/reagent_containers/food/snacks/chocobanana = 80
-	)
+					/obj/item/reagent_containers/food/snacks/wasabi_peas = 80,
+					/obj/item/reagent_containers/food/snacks/ricecake = 40,
+					/obj/item/storage/pocky = 80,
+					/obj/item/reagent_containers/food/snacks/chocobanana = 60,
+					/obj/item/reagent_containers/food/snacks/dorayaki = 40,
+					/obj/item/reagent_containers/food/snacks/daifuku = 40,
+					/obj/item/reagent_containers/food/snacks/goma_dango = 50,
+					/obj/item/reagent_containers/food/snacks/hanami_dango = 50
+					)
 
 /obj/machinery/vending/weeb/on_update_icon()
 	..()

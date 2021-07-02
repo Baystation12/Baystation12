@@ -169,3 +169,20 @@
 		icon_state = "lollijar"
 	else
 		icon_state = "lollijar_empty"
+
+//Pokey Sticks
+/obj/item/storage/pocky
+	name = "\improper Totemo yoi Pocky"
+	desc = "A bundle of chocolate-coated bisquit sticks."
+	icon = 'icons/obj/food.dmi'
+	icon_state = "pockys"
+	max_storage_space = 10
+	startswith = list(/obj/item/clothing/mask/chewable/candy/pocky = 8)
+	make_exact_fit()
+
+/obj/item/storage/pocky/on_update_icon()
+	. = ..()
+	if(contents.len)
+		icon_state = "pocky_sticks"
+	else
+		icon_state = "pocky_sticks_empty"

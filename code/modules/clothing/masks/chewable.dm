@@ -201,3 +201,14 @@ obj/item/clothing/mask/chewable/Destroy()
 	reagents.add_reagent(payload, 15)
 	color = reagents.get_color()
 	desc = "[desc]. This one is labeled '[initial(payload.name)]'"
+
+//Pokey Sticks
+/obj/item/clothing/mask/chewable/candy/pocky
+	name = "chocolate pocky"
+	desc = "A chocolate-coated biscuit stick."
+	icon_state = "pocky"
+	item_state = "pocky"
+
+/obj/item/clothing/mask/chewable/candy/pocky/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/syrup_chocolate, 10)

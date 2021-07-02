@@ -22,7 +22,7 @@ var/list/lunchables_snacks_ = list(
 									/obj/item/reagent_containers/food/snacks/popcorn,
 									/obj/item/reagent_containers/food/snacks/sosjerky,
 									/obj/item/reagent_containers/food/snacks/no_raisin,
-									/obj/item/reagent_containers/food/snacks/spacetwinkie,
+									/obj/item/reagent_containers/food/snacks/packaged/spacetwinkie,
 									/obj/item/reagent_containers/food/snacks/cheesiehonkers,
 									/obj/item/reagent_containers/food/snacks/poppypretzel,
 									/obj/item/reagent_containers/food/snacks/carrotfries,

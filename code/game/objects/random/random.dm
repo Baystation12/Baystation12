@@ -679,7 +679,7 @@ obj/random/obstruction/spawn_choices()
 				/obj/item/reagent_containers/food/snacks/chips,
 				/obj/item/reagent_containers/food/snacks/sosjerky,
 				/obj/item/reagent_containers/food/snacks/no_raisin,
-				/obj/item/reagent_containers/food/snacks/spacetwinkie,
+				/obj/item/reagent_containers/food/snacks/packaged/spacetwinkie,
 				/obj/item/reagent_containers/food/snacks/cheesiehonkers,
 				/obj/item/reagent_containers/food/snacks/tastybread,
 				/obj/item/reagent_containers/food/snacks/proteinbar,

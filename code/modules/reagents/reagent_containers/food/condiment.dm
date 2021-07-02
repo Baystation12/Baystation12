@@ -23,6 +23,7 @@
 		/datum/reagent/nutriment/soysauce = /obj/item/reagent_containers/food/condiment/soysauce,
 		/datum/reagent/frostoil = /obj/item/reagent_containers/food/condiment/frostoil,
 		/datum/reagent/sodiumchloride = /obj/item/reagent_containers/food/condiment/small/saltshaker,
+		/datum/reagent/blackpepper =/obj/item/reagent_containers/food/condiment/small/peppershaker,
 		/datum/reagent/blackpepper = /obj/item/reagent_containers/food/condiment/small/peppermill,
 		/datum/reagent/nutriment/cornoil = /obj/item/reagent_containers/food/condiment/cornoil,
 		/datum/reagent/sugar = /obj/item/reagent_containers/food/condiment/sugar,
@@ -179,12 +180,20 @@
 	center_of_mass = "x=16;y=9"
 	starting_reagents = list(/datum/reagent/sodiumchloride = 20)
 
+/obj/item/reagent_containers/food/condiment/small/peppershaker
+	name = "pepper shaker"
+	desc = "Often used to flavor food or make people sneeze."
+	icon_state = "peppershakersmall"
+	center_of_mass = "x=16;y=9"
+	starting_reagents = list(/datum/reagent/blackpepper = 20)
+
+
 /obj/item/reagent_containers/food/condiment/small/peppermill
 	name = "pepper mill"
 	desc = "Often used to flavor food or make people sneeze."
 	icon_state = "peppermillsmall"
 	center_of_mass = "x=16;y=8"
-	starting_reagents = list(/datum/reagent/blackpepper = 20)
+	starting_reagents = list(/datum/reagent/blackpepper = 30)
 
 /obj/item/reagent_containers/food/condiment/small/sugar
 	name = "sugar"
