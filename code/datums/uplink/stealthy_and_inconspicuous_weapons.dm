@@ -44,3 +44,9 @@
 	desc = "This dapper hat hides several microrazors in its brim, and also provides some head protection. Land a trickshot for maximum damage."
 	item_cost = 15
 	path = /obj/item/clothing/head/bowlerhat/razor
+
+/datum/uplink_item/item/stealthy_weapons/carp_plush
+	name = "Dehydrated Space Carp"
+	desc = "An innocuous-looking space carp plushie. Add water and step back for a nasty surprise!"
+	item_cost = 10
+	path = /obj/item/dehydrated_carp
