@@ -54,7 +54,7 @@
 	dat += "<hr>"
 	dat += "<font style='color: cyan;'><b>Always wear safety gear and consult a field manual before operation.</b></font><br>"
 	dat += "<A href='?src=\ref[src];close=1'>Close console</A>"
-	var/datum/browser/popup = new(user, "suspension", "Suspension Generator", 500, 400)
+	var/browser/popup = new(user, "suspension", "Suspension Generator", 500, 400)
 	popup.set_content(dat)
 	popup.open()
 	onclose(user, "suspension")

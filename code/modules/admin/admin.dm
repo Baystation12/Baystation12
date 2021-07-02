@@ -292,7 +292,7 @@ var/global/floorIsLava = 0
 			dat += "<tr><td><a href='?src=\ref[src];notes=show;ckey=[t]'>[t]</a></td></tr>"
 		dat += "</table><br>"
 
-	var/datum/browser/popup = new(usr, "player_notes", "Player Notes", 400, 400)
+	var/browser/popup = new(usr, "player_notes", "Player Notes", 400, 400)
 	popup.set_content(jointext(dat, null))
 	popup.open()
 
@@ -377,7 +377,7 @@ var/global/floorIsLava = 0
 		"}
 
 	send_rsc(usr,'code/js/player_info.js', "player_info.js")
-	var/datum/browser/popup = new(usr, "adminplayerinfo", "Player Info", 480, 480)
+	var/browser/popup = new(usr, "adminplayerinfo", "Player Info", 480, 480)
 	popup.set_content(html)
 	popup.open()
 
@@ -690,7 +690,7 @@ var/global/floorIsLava = 0
 			dat += "<A href='?src=\ref[src];admin_secrets=\ref[item]'>[item.name()]</A><BR>"
 		dat += "<BR>"
 
-	var/datum/browser/popup = new(usr, "secrets", "Secrets", 550, 500)
+	var/browser/popup = new(usr, "secrets", "Secrets", 550, 500)
 	popup.set_content(dat)
 	popup.open()
 	return

@@ -200,3 +200,19 @@ var/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 #define FONT_GIANT(X) "<font size='5'>[X]</font>"
 
 #define crash_with(X) crash_at(X, __FILE__, __LINE__)
+
+#define HTML_PAGE_FULL(HEAD, BODY) "\
+<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\"\
+\"http://www.w3.org/TR/html4/strict.dtd\">\
+<html lang='en'>\
+<head>\
+<meta http-equiv='Content-Type' content='text/html;charset=windows-1252'>\
+<meta http-equiv='X-UA-Compatible' content='IE=IE8'>\
+<meta name='viewport' content='width=device-width, initial-scale=1'>\
+[HEAD]\
+</head>\
+<body scroll='auto'>[BODY]</body>\
+</html>\
+"
+
+#define HTML_PAGE(BODY) HTML_PAGE_FULL("", BODY)

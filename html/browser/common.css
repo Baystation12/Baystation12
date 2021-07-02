@@ -1,3 +1,5 @@
+html, body { overflow: auto; }
+
 body
 {
 	padding: 0;
@@ -330,4 +332,16 @@ div.notice
 	border: 1px solid #40628a;
 	padding: 4px;
 	margin: 3px 0;
+}
+
+.runtime {
+	background-color: #171717;
+	border: solid 1px #202020;
+	font-family: "Courier New";
+	padding-left: 10px;
+	color: #cccccc;
+}
+.runtime_line {
+	margin-bottom: 10px;
+	display: inline-block;
 }

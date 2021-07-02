@@ -406,7 +406,7 @@ var/list/solars_list = list()
 
 	t += "<A href='?src=\ref[src];close=1'>Close</A>"
 
-	var/datum/browser/popup = new(user, "solar", name)
+	var/browser/popup = new(user, "solar", name)
 	popup.set_content(t)
 	popup.open()
 

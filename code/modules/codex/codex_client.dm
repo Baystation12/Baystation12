@@ -52,7 +52,7 @@
 				var/datum/codex_entry/entry = all_entries[i]
 				codex_data += "<tr><td>[entry.display_name]</td><td><a href='?src=\ref[SScodex];show_examined_info=\ref[entry];show_to=\ref[mob]'>View</a></td></tr>"
 			codex_data += "</table>"
-			var/datum/browser/popup = new(mob, "codex-search", "Codex Search")
+			var/browser/popup = new(mob, "codex-search", "Codex Search")
 			popup.set_content(jointext(codex_data, null))
 			popup.open()
 		else
@@ -75,7 +75,7 @@
 
 	to_chat(mob, SPAN_NOTICE("The codex forwards you an index file."))
 
-	var/datum/browser/popup = new(mob, "codex-index", "Codex Index")
+	var/browser/popup = new(mob, "codex-index", "Codex Index")
 	var/list/codex_data = list("<h2>Codex Entries</h2>")
 	codex_data += "<table width = 100%>"
 

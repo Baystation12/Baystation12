@@ -108,7 +108,7 @@
 			dat += "</ol>"
 
 
-	var/datum/browser/popup = new(user, "comm_monitor", "Telecommunications Monitor", 575, 400)
+	var/browser/popup = new(user, "comm_monitor", "Telecommunications Monitor", 575, 400)
 	popup.set_content(JOINTEXT(dat))
 	popup.open()
 

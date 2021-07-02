@@ -54,7 +54,7 @@
 			dat += "<hr>"
 		dat += "<a href='byond://?src=\ref[src];vend=[1]'>Dispense</a>"
 	dat = jointext(dat,"<br>")
-	var/datum/browser/popup = new(user, "Uniform Dispenser","Uniform Dispenser", 300, 700, src)
+	var/browser/popup = new(user, "Uniform Dispenser","Uniform Dispenser", 300, 700, src)
 	popup.set_content(dat)
 	popup.open()
 

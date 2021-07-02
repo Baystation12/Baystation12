@@ -112,7 +112,7 @@ proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 
 /datum/ticket_panel
 	var/datum/ticket/open_ticket = null
-	var/datum/browser/ticket_panel_window
+	var/browser/ticket_panel_window
 
 /datum/ticket_panel/proc/get_dat()
 	var/client/C = ticket_panel_window.user.client

@@ -46,7 +46,7 @@
 		dat += "</td></tr>"
 	dat += "</table>"
 
-	var/datum/browser/popup = new(user, "admin_attack_logs", "Attack Logs", 800, 400)
+	var/browser/popup = new(user, "admin_attack_logs", "Attack Logs", 800, 400)
 	popup.set_content(jointext(dat, null))
 	popup.open()
 

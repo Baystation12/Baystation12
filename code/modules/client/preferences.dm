@@ -36,7 +36,7 @@ datum/preferences
 	var/client_ckey = null
 
 	var/datum/category_collection/player_setup_collection/player_setup
-	var/datum/browser/panel
+	var/browser/panel
 
 /datum/preferences/New(client/C)
 	if(istype(C))
@@ -152,7 +152,7 @@ datum/preferences
 	if (!SScharacter_setup.initialized)
 		return
 
-	var/datum/browser/popup = new(user, "preferences_browser", "Character Setup", 1200, 800, src)
+	var/browser/popup = new(user, "preferences_browser", "Character Setup", 1200, 800, src)
 	var/content = {"
 	<script type='text/javascript'>
 		function update_content(data){

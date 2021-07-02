@@ -78,7 +78,7 @@ GLOBAL_LIST_INIT(rpd_pipe_selection_skilled, list(
 	var/datum/effect/effect/system/spark_spread/spark_system
 	var/datum/pipe/P
 	var/pipe_color = "white"
-	var/datum/browser/popup
+	var/browser/popup
 
 /obj/item/rpd/Initialize()
 	. = ..()

@@ -69,7 +69,7 @@
 				dat += "You <a href='?src=\ref[src];action=delete_area'>erase a part of it</a>.</p>"
 		else
 			dat += "This place isn't noted on \the [src]."
-	var/datum/browser/popup = new(usr, "blueprints", name, 290, 300)
+	var/browser/popup = new(usr, "blueprints", name, 290, 300)
 	popup.set_content(jointext(dat, "<br>"))
 	popup.open()
 
