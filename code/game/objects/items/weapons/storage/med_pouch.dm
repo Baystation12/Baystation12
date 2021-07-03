@@ -40,7 +40,7 @@ Single Use Emergency Pouches
 	overlays.Cut()
 	if(!cross_overlay)
 		cross_overlay = image(icon, "cross")
-		cross_overlay.appearance_flags = RESET_COLOR
+		cross_overlay.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
 	overlays += cross_overlay
 	icon_state = "pack[opened]"
 

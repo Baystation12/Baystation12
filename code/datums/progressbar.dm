@@ -29,7 +29,7 @@
 	if (!visible)
 		return
 	bar = image('icons/effects/progessbar.dmi', actee, "prog_bar_0", HUD_ABOVE_ITEM_LAYER)
-	bar.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
+	bar.appearance_flags = DEFAULT_APPEARANCE_FLAGS | APPEARANCE_UI_IGNORE_ALPHA
 	bar.pixel_y = WORLD_ICON_SIZE
 	bar.plane = HUD_PLANE
 

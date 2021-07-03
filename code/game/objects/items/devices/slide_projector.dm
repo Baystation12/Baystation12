@@ -170,7 +170,7 @@
 	var/mutable_appearance/MA = new(I)
 	MA.plane = FLOAT_PLANE
 	MA.layer = FLOAT_LAYER
-	MA.appearance_flags = RESET_ALPHA
+	MA.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_ALPHA
 	MA.alpha = 170
 	MA.pixel_x = 0
 	MA.pixel_y = 0

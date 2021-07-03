@@ -33,7 +33,7 @@
 	overlays.Cut()
 	if(active)
 		var/image/I = image(icon,"[icon_state]decor")
-		I.appearance_flags = RESET_COLOR
+		I.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
 		I.color = get_random_colour(0, 150, 255)
 		I.layer = ABOVE_LIGHTING_LAYER
 		I.plane = EFFECTS_ABOVE_LIGHTING_PLANE

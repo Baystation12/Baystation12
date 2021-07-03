@@ -16,7 +16,7 @@ var/global/list/image/splatter_cache=list()
 	blood_DNA = list()
 	generic_filth = TRUE
 	persistent = TRUE
-	appearance_flags = NO_CLIENT_COLOR
+	appearance_flags = DEFAULT_APPEARANCE_FLAGS | NO_CLIENT_COLOR
 	cleanable_scent = "blood"
 	scent_descriptor = SCENT_DESC_ODOR
 

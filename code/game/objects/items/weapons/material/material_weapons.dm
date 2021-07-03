@@ -86,7 +86,7 @@
 		alpha = 100 + material.opacity * 255
 	if(furniture_icon)
 		var/image/I = image(icon, icon_state = furniture_icon)
-		I.appearance_flags = RESET_COLOR
+		I.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
 		overlays += I
 
 /obj/item/material/Destroy()

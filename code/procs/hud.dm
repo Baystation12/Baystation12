@@ -4,7 +4,7 @@ the HUD updates properly! */
 
 // hud overlay image type, used for clearing client.images precisely
 /image/hud_overlay
-	appearance_flags = RESET_COLOR|RESET_TRANSFORM|KEEP_APART
+	appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR|RESET_TRANSFORM|KEEP_APART
 	layer = ABOVE_HUMAN_LAYER
 	plane = DEFAULT_PLANE
 
