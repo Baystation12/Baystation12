@@ -1,5 +1,0 @@
-author: Spookerton
-delete-after: true
-changes:
-  - tweak: Nearly everything uses point sampling. No more fuzzy scaling.
-  - tweak: Humans resize based on their chosen height and build.
