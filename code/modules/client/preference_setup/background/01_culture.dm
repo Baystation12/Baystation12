@@ -1,5 +1,5 @@
 #define GET_ALLOWED_VALUES(write_to, check_key) \
-	var/datum/species/S = all_species[pref.species]; \
+	var/datum/species/S = GLOB.all_species[pref.species]; \
 	if(!S) { \
 		write_to = list(); \
 	} else if(S.force_cultural_info[check_key]) { \

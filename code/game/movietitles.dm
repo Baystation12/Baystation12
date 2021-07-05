@@ -167,7 +167,7 @@ client
 		else if(H.real_name)
 			corpses += H.real_name
 	for(var/spec in monkies)
-		var/datum/species/S = all_species[spec]
+		var/datum/species/S = GLOB.all_species[spec]
 		corpses += "[monkies[spec]] [lowertext(monkies[spec] > 1 ? S.name_plural : S.name)]"
 	if(corpses.len)
 		titles += "<center>BASED ON REAL EVENTS<br>In memory of [english_list(corpses)].</center>"

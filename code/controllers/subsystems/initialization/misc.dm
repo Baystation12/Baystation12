@@ -18,5 +18,5 @@ SUBSYSTEM_DEF(misc)
 	populate_robolimb_list()
 	setupgenetics()
 
-	transfer_controller = new
+	GLOB.transfer_controller = new
 	. = ..()

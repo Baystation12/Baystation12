@@ -43,7 +43,7 @@ var/global/universe_has_ended = 0
 	for(var/mob/M in GLOB.player_list)
 		M.flash_eyes()
 
-	if(evacuation_controller.cancel_evacuation())
+	if(GLOB.evacuation_controller.cancel_evacuation())
 		priority_announcement.Announce("The evacuation has been aborted due to bluespace distortion.")
 
 	AreaSet()
@@ -57,7 +57,7 @@ var/global/universe_has_ended = 0
 	PlayerSet()
 	SSskybox.change_skybox("cascade", new_use_stars = FALSE, new_use_overmap_details = FALSE)
 
-	new /obj/singularity/narsie/large/exit(pick(endgame_exits))
+	new /obj/singularity/narsie/large/exit(pick(GLOB.endgame_exits))
 	spawn(rand(30,60) SECONDS)
 		var/txt = {"
 A galaxy-wide electromagnetic pulse has been detected. All systems across space are heavily damaged and many personnel have died or are dying. We are currently detecting increasing indications that the universe itself is beginning to unravel.

@@ -31,25 +31,27 @@
 
 // MOB HELPERS
 // ===========
-/mob/living/carbon/human/var/list/datum/medical_effect/side_effects = list()
+
+
 /mob/proc/add_side_effect(name, strength = 0)
+	return
+
+/mob/living/carbon/human/var/list/side_effects = list()
+
 /mob/living/carbon/human/add_side_effect(name, strength = 0)
-	for(var/datum/medical_effect/M in src.side_effects)
-		if(M.name == name)
-			M.strength = max(M.strength, 10)
-			M.start = life_tick
+	for (var/datum/medical_effect/effect in side_effects)
+		if (effect.name == name)
+			effect.strength = max(effect.strength, strength)
+			effect.start = life_tick
 			return
-
-
-	var/T = side_effects[name]
-	if (!T)
+	var/effect_type = GLOB.side_effects[name]
+	if (!effect_type)
 		return
-
-	var/datum/medical_effect/M = new T
-	if(M.name == name)
-		M.strength = strength
-		M.start = life_tick
-		side_effects += M
+	var/datum/medical_effect/effect = new effect_type
+	if (effect.name == name)
+		effect.strength = strength
+		effect.start = life_tick
+		side_effects += effect
 
 /mob/living/carbon/human/proc/handle_medical_side_effects()
 	//Going to handle those things only every few ticks.

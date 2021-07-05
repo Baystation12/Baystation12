@@ -25,7 +25,7 @@
 /datum/category_item/player_setup_item/law_pref/sanitize_character()
 	if(!istype(pref.laws))	pref.laws = list()
 
-	var/datum/species/species = all_species[pref.species]
+	var/datum/species/species = GLOB.all_species[pref.species]
 	if(!(species && species.has_organ[BP_POSIBRAIN]))
 		pref.is_shackled = initial(pref.is_shackled)
 	else
@@ -33,7 +33,7 @@
 
 /datum/category_item/player_setup_item/law_pref/content()
 	. = list()
-	var/datum/species/species = all_species[pref.species]
+	var/datum/species/species = GLOB.all_species[pref.species]
 
 	if(!(species && species.has_organ[BP_POSIBRAIN]))
 		. += "<b>Your Species Has No Laws</b><br>"

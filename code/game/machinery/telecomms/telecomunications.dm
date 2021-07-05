@@ -577,7 +577,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	for(var/list/rule in channel_tags)
 		if(rule[1] == freq)
 			return list(rule[2], rule[3])
-	return list(format_frequency(freq), channel_color_presets["Global Green"])
+	return list(format_frequency(freq), GLOB.channel_color_presets["Global Green"])
 
 
 // Simple log entry datum

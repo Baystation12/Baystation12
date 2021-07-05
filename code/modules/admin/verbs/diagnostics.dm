@@ -77,9 +77,9 @@
 	set name = "Radio report"
 
 	var/output = "<b>Radio Report</b><hr>"
-	for (var/fq in radio_controller.frequencies)
+	for (var/fq in GLOB.radio_controller.frequencies)
 		output += "<b>Freq: [fq]</b><br>"
-		var/datum/radio_frequency/fqs = radio_controller.frequencies[fq]
+		var/datum/radio_frequency/fqs = GLOB.radio_controller.frequencies[fq]
 		if (!fqs)
 			output += "&nbsp;&nbsp;<b>ERROR</b><br>"
 			continue

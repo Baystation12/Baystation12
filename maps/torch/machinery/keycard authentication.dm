@@ -74,10 +74,10 @@
 			GLOB.using_map.unbolt_saferooms()
 			SSstatistics.add_field("unbolted_saferoom",1)
 		if("Evacuate")
-			if(!evacuation_controller)
+			if(!GLOB.evacuation_controller)
 				to_chat(usr, "<span class='danger'>Unable to initiate evacuation!</span>")
 				return
-			for (var/datum/evacuation_option/EO in evacuation_controller.available_evac_options())
+			for (var/datum/evacuation_option/EO in GLOB.evacuation_controller.available_evac_options())
 				if(EO.abandon_ship)
-					evacuation_controller.handle_evac_option(EO.option_target, usr)
+					GLOB.evacuation_controller.handle_evac_option(EO.option_target, usr)
 					return

@@ -8,7 +8,7 @@
 
 /obj/item/card/id/syndicate/New(mob/user as mob)
 	..()
-	access = syndicate_access.Copy()
+	access = GLOB.syndicate_access.Copy()
 
 /obj/item/card/id/syndicate/station_access/New()
 	..() // Same as the normal Syndicate id, only already has all station access
@@ -192,7 +192,7 @@
 					age = initial(age)
 					formal_name_prefix = initial(formal_name_prefix)
 					formal_name_suffix = initial(formal_name_suffix)
-					access = syndicate_access.Copy()
+					access = GLOB.syndicate_access.Copy()
 					assignment = initial(assignment)
 					blood_type = initial(blood_type)
 					dna_hash = initial(dna_hash)

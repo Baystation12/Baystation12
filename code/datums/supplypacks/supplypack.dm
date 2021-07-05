@@ -29,9 +29,9 @@
 	switch(security_level)
 		if(SUPPLY_SECURITY_ELEVATED)
 			if(security_state.all_security_levels.len > 1)
-				security_level = security_state.all_security_levels[2] 
+				security_level = security_state.all_security_levels[2]
 			else
-				security_level = security_state.high_security_level 
+				security_level = security_state.high_security_level
 		if(SUPPLY_SECURITY_HIGH)
 			security_level = security_state.high_security_level
 	if(!istype(security_level))
@@ -51,14 +51,14 @@
 //NEW NOTE: Do NOT set the price of any crates below 7 points. Doing so allows infinite points.
 */
 
-var/list/supply_methods_
+GLOBAL_LIST_EMPTY(supply_methods)
 /proc/get_supply_method(var/method_type)
-	if(!supply_methods_)
-		supply_methods_ = list()
-	. = supply_methods_[method_type]
+	if(!GLOB.supply_methods)
+		GLOB.supply_methods = list()
+	. = GLOB.supply_methods[method_type]
 	if(!.)
 		. = new method_type()
-		supply_methods_[method_type] = .
+		GLOB.supply_methods[method_type] = .
 
 /decl/supply_method/proc/spawn_contents(var/decl/hierarchy/supply_pack/sp, var/location)
 	if(!sp || !location)

@@ -329,11 +329,11 @@
 		dat += "Current Game Mode: <B>[SSticker.mode.name]</B><BR>"
 		dat += "Round Duration: <B>[roundduration2text()]</B><BR>"
 		dat += "<B>Evacuation</B><BR>"
-		if (evacuation_controller.is_idle())
+		if (GLOB.evacuation_controller.is_idle())
 			dat += "<a href='?src=\ref[src];call_shuttle=1'>Call Evacuation</a><br>"
 		else
-			var/timeleft = evacuation_controller.get_eta()
-			if (evacuation_controller.waiting_to_leave())
+			var/timeleft = GLOB.evacuation_controller.get_eta()
+			if (GLOB.evacuation_controller.waiting_to_leave())
 				dat += "ETA: [(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]<BR>"
 				dat += "<a href='?src=\ref[src];call_shuttle=2'>Send Back</a><br>"
 

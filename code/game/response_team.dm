@@ -123,7 +123,7 @@ proc/trigger_armed_response_team(var/force = 0, var/reason = "")
 		return
 
 	command_announcement.Announce("It would appear that an emergency response team was requested for [station_name()]. We will prepare and send one as soon as possible.", "[GLOB.using_map.boss_name]")
-	evacuation_controller.add_can_call_predicate(new/datum/evacuation_predicate/ert())
+	GLOB.evacuation_controller.add_can_call_predicate(new/datum/evacuation_predicate/ert())
 
 	GLOB.ert.reason = reason //Set it even if it's blank to clear a reason from a previous ERT
 

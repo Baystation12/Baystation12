@@ -265,7 +265,7 @@ Helpers
 		to_world("<B>The current game mode is Secret!</B>")
 		var/list/mode_names = list()
 		for (var/mode_tag in base_runnable_modes)
-			var/datum/game_mode/M = gamemode_cache[mode_tag]
+			var/datum/game_mode/M = GLOB.gamemode_cache[mode_tag]
 			if(M)
 				mode_names += M.name
 		if (config.secret_hide_possibilities)
@@ -356,9 +356,9 @@ Helpers
 	if(mode.explosion_in_progress)
 		return 0
 	if(config.continous_rounds)
-		return evacuation_controller.round_over() || mode.station_was_nuked
+		return GLOB.evacuation_controller.round_over() || mode.station_was_nuked
 	else
-		return mode.check_finished() || (evacuation_controller.round_over() && evacuation_controller.emergency_evacuation) || universe_has_ended
+		return mode.check_finished() || (GLOB.evacuation_controller.round_over() && GLOB.evacuation_controller.emergency_evacuation) || universe_has_ended
 
 /datum/controller/subsystem/ticker/proc/mode_finished()
 	if (forced_end)

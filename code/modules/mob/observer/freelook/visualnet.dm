@@ -11,12 +11,12 @@
 
 /datum/visualnet/New()
 	..()
-	visual_nets += src
+	GLOB.visual_nets += src
 	if(!valid_source_types)
 		valid_source_types = list()
 
 /datum/visualnet/Destroy()
-	visual_nets -= src
+	GLOB.visual_nets -= src
 	for(var/source in sources)
 		remove_source(source, FALSE)
 	sources.Cut()
@@ -172,8 +172,8 @@
 	set category = "Debug"
 	set src in world
 
-	if(cameranet.is_chunk_generated(x, y, z))
-		var/datum/chunk/chunk = cameranet.get_chunk(x, y, z)
+	if(GLOB.cameranet.is_chunk_generated(x, y, z))
+		var/datum/chunk/chunk = GLOB.cameranet.get_chunk(x, y, z)
 		usr.client.debug_variables(chunk)
 
 /turf/proc/update_chunk()
@@ -181,6 +181,6 @@
 	set category = "Debug"
 	set src in world
 
-	if(cameranet.is_chunk_generated(x, y, z))
-		var/datum/chunk/chunk = cameranet.get_chunk(x, y, z)
+	if(GLOB.cameranet.is_chunk_generated(x, y, z))
+		var/datum/chunk/chunk = GLOB.cameranet.get_chunk(x, y, z)
 		chunk.visibility_changed(TRUE)

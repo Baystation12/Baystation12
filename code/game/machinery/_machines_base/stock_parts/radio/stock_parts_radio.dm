@@ -20,13 +20,13 @@
 		id_tag = machine.id_tag
 
 /obj/item/stock_parts/radio/proc/set_frequency(new_frequency, new_filter)
-	radio_controller.remove_object(src, frequency)
+	GLOB.radio_controller.remove_object(src, frequency)
 	frequency = new_frequency
 	filter = new_filter
-	radio = radio_controller.add_object(src, frequency, filter)
+	radio = GLOB.radio_controller.add_object(src, frequency, filter)
 
 /obj/item/stock_parts/radio/Destroy()
-	radio_controller.remove_object(src, frequency)
+	GLOB.radio_controller.remove_object(src, frequency)
 	. = ..()
 
 /obj/item/stock_parts/radio/proc/sanitize_events(obj/machinery/machine, list/events)

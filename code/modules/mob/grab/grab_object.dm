@@ -26,7 +26,7 @@
 */
 /obj/item/grab/Initialize(mapload, mob/living/carbon/human/victim)
 	. = ..()
-	current_grab = all_grabstates[start_grab_name]
+	current_grab = GLOB.all_grabstates[start_grab_name]
 
 	assailant = loc
 	if(!istype(assailant))

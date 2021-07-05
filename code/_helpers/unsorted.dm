@@ -866,17 +866,18 @@ proc/get_mob_with_client_list()
 
 
 //Quick type checks for some tools
-var/global/list/common_tools = list(
-/obj/item/stack/cable_coil,
-/obj/item/wrench,
-/obj/item/weldingtool,
-/obj/item/screwdriver,
-/obj/item/wirecutters,
-/obj/item/device/multitool,
-/obj/item/crowbar)
+GLOBAL_LIST_INIT(common_tools, list(
+	/obj/item/stack/cable_coil,
+	/obj/item/wrench,
+	/obj/item/weldingtool,
+	/obj/item/screwdriver,
+	/obj/item/wirecutters,
+	/obj/item/device/multitool,
+	/obj/item/crowbar
+))
 
 /proc/istool(O)
-	if(O && is_type_in_list(O, common_tools))
+	if(O && is_type_in_list(O, GLOB.common_tools))
 		return 1
 	return 0
 
@@ -1001,17 +1002,32 @@ var/global/list/common_tools = list(
 /*
 Checks if that loc and dir has a item on the wall
 */
-var/list/WALLITEMS = list(
-	/obj/machinery/power/apc, /obj/machinery/alarm, /obj/item/device/radio/intercom,
-	/obj/structure/extinguisher_cabinet, /obj/structure/reagent_dispensers/peppertank,
-	/obj/machinery/status_display, /obj/machinery/requests_console, /obj/machinery/light_switch, /obj/structure/sign,
-	/obj/machinery/newscaster, /obj/machinery/firealarm, /obj/structure/noticeboard,
-	/obj/item/storage/secure/safe, /obj/machinery/door_timer, /obj/machinery/flasher, /obj/machinery/keycard_auth,
-	/obj/item/storage/mirror, /obj/structure/fireaxecabinet, /obj/structure/filingcabinet/wallcabinet
-	)
+
+GLOBAL_LIST_INIT(wall_items, list(
+	/obj/machinery/power/apc,
+	/obj/machinery/alarm,
+	/obj/item/device/radio/intercom,
+	/obj/structure/extinguisher_cabinet,
+	/obj/structure/reagent_dispensers/peppertank,
+	/obj/machinery/status_display,
+	/obj/machinery/requests_console,
+	/obj/machinery/light_switch,
+	/obj/structure/sign,
+	/obj/machinery/newscaster,
+	/obj/machinery/firealarm,
+	/obj/structure/noticeboard,
+	/obj/item/storage/secure/safe,
+	/obj/machinery/door_timer,
+	/obj/machinery/flasher,
+	/obj/machinery/keycard_auth,
+	/obj/item/storage/mirror,
+	/obj/structure/fireaxecabinet,
+	/obj/structure/filingcabinet/wallcabinet
+))
+
 /proc/gotwallitem(loc, dir)
 	for(var/obj/O in loc)
-		for(var/item in WALLITEMS)
+		for(var/item in GLOB.wall_items)
 			if(istype(O, item))
 				//Direction works sometimes
 				if(O.dir == dir)
@@ -1035,7 +1051,7 @@ var/list/WALLITEMS = list(
 
 	//Some stuff is placed directly on the wallturf (signs)
 	for(var/obj/O in get_step(loc, dir))
-		for(var/item in WALLITEMS)
+		for(var/item in GLOB.wall_items)
 			if(istype(O, item))
 				if(O.pixel_x == 0 && O.pixel_y == 0)
 					return 1

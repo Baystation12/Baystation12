@@ -7,9 +7,9 @@ SUBSYSTEM_DEF(evac)
 
 /datum/controller/subsystem/evac/Initialize()
 	. = ..()
-	if(!evacuation_controller)
-		evacuation_controller = new GLOB.using_map.evac_controller_type ()
-		evacuation_controller.set_up()
+	if(!GLOB.evacuation_controller)
+		GLOB.evacuation_controller = new GLOB.using_map.evac_controller_type ()
+		GLOB.evacuation_controller.set_up()
 
 /datum/controller/subsystem/evac/fire()
-	evacuation_controller.process()
+	GLOB.evacuation_controller.process()

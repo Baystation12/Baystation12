@@ -4,7 +4,7 @@
 
 /proc/updateVisibility(atom/A, var/opacity_check = 1)
 	if(GAME_STATE >= RUNLEVEL_GAME)
-		for(var/datum/visualnet/VN in visual_nets)
+		for(var/datum/visualnet/VN in GLOB.visual_nets)
 			VN.update_visibility(A, opacity_check)
 
 /turf/drain_power()

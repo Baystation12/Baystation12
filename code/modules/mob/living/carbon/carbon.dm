@@ -5,7 +5,7 @@
 	reagents = bloodstr
 
 	if (!default_language && species_language)
-		default_language = all_languages[species_language]
+		default_language = GLOB.all_languages[species_language]
 	..()
 
 /mob/living/carbon/Destroy()

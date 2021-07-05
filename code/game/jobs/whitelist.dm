@@ -50,7 +50,7 @@ var/list/whitelist = list()
 	return 1
 
 /proc/is_species_whitelisted(mob/M, var/species_name)
-	var/datum/species/S = all_species[species_name]
+	var/datum/species/S = GLOB.all_species[species_name]
 	return is_alien_whitelisted(M, S)
 
 //todo: admin aliens

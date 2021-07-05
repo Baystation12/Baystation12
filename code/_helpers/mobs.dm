@@ -27,7 +27,7 @@
 proc/random_hair_style(gender, species = SPECIES_HUMAN)
 	var/h_style = "Bald"
 
-	var/datum/species/mob_species = all_species[species]
+	var/datum/species/mob_species = GLOB.all_species[species]
 	var/list/valid_hairstyles = mob_species.get_hair_styles()
 	if(valid_hairstyles.len)
 		h_style = pick(valid_hairstyles)
@@ -36,7 +36,7 @@ proc/random_hair_style(gender, species = SPECIES_HUMAN)
 
 proc/random_facial_hair_style(gender, var/species = SPECIES_HUMAN)
 	var/f_style = "Shaved"
-	var/datum/species/mob_species = all_species[species]
+	var/datum/species/mob_species = GLOB.all_species[species]
 	var/list/valid_facialhairstyles = mob_species.get_facial_hair_styles(gender)
 	if(valid_facialhairstyles.len)
 		f_style = pick(valid_facialhairstyles)
@@ -44,7 +44,7 @@ proc/random_facial_hair_style(gender, var/species = SPECIES_HUMAN)
 
 proc/random_name(gender, species = SPECIES_HUMAN)
 	if(species)
-		var/datum/species/current_species = all_species[species]
+		var/datum/species/current_species = GLOB.all_species[species]
 		if(current_species)
 			var/decl/cultural_info/current_culture = SSculture.get_culture(current_species.default_cultural_info[TAG_CULTURE])
 			if(current_culture)

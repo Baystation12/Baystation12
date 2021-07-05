@@ -96,8 +96,8 @@
 		stat("Intent:", "[a_intent]")
 		stat("Move Mode:", "[move_intent.name]")
 
-		if(evacuation_controller)
-			var/eta_status = evacuation_controller.get_status_panel_eta()
+		if(GLOB.evacuation_controller)
+			var/eta_status = GLOB.evacuation_controller.get_status_panel_eta()
 			if(eta_status)
 				stat(null, eta_status)
 
@@ -1145,7 +1145,7 @@
 			new_species = dna.species
 
 	// No more invisible screaming wheelchairs because of set_species() typos.
-	if(!all_species[new_species])
+	if(!GLOB.all_species[new_species])
 		new_species = SPECIES_HUMAN
 	if(dna)
 		dna.species = new_species
@@ -1160,11 +1160,11 @@
 		species.remove_inherent_verbs(src)
 		holder_type = null
 
-	species = all_species[new_species]
+	species = GLOB.all_species[new_species]
 	species.handle_pre_spawn(src)
 
 	if(species.grab_type)
-		current_grab_type = all_grabobjects[species.grab_type]
+		current_grab_type = GLOB.all_grabobjects[species.grab_type]
 
 	if(species.base_color && default_colour)
 		//Apply colour.
@@ -1277,16 +1277,16 @@
 		var/decl/cultural_info/check = cultural_info[thing]
 		if(istype(check))
 			if(check.default_language)
-				free_languages    |= all_languages[check.default_language]
-				default_languages |= all_languages[check.default_language]
+				free_languages    |= GLOB.all_languages[check.default_language]
+				default_languages |= GLOB.all_languages[check.default_language]
 			if(check.language)
-				free_languages    |= all_languages[check.language]
+				free_languages    |= GLOB.all_languages[check.language]
 			if(check.name_language)
-				free_languages    |= all_languages[check.name_language]
+				free_languages    |= GLOB.all_languages[check.name_language]
 			for(var/lang in check.additional_langs)
-				free_languages    |= all_languages[lang]
+				free_languages    |= GLOB.all_languages[lang]
 			for(var/lang in check.get_spoken_languages())
-				permitted_languages |= all_languages[lang]
+				permitted_languages |= GLOB.all_languages[lang]
 
 	for(var/thing in languages)
 		var/datum/language/lang = thing

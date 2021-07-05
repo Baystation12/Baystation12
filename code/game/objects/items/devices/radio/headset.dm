@@ -49,7 +49,7 @@
 /obj/item/device/radio/headset/handle_message_mode(mob/living/M as mob, message, channel)
 	if (channel == "special")
 		if (translate_binary)
-			var/datum/language/binary = all_languages[LANGUAGE_ROBOT_GLOBAL]
+			var/datum/language/binary = GLOB.all_languages[LANGUAGE_ROBOT_GLOBAL]
 			binary.broadcast(M, message)
 		return null
 
@@ -332,7 +332,7 @@
 	if(isScrewdriver(W))
 		if(encryption_keys.len)
 			for(var/ch_name in channels)
-				radio_controller.remove_object(src, radiochannels[ch_name])
+				GLOB.radio_controller.remove_object(src, GLOB.radiochannels[ch_name])
 				secure_radio_connections[ch_name] = null
 			for(var/obj/ekey in encryption_keys)
 				ekey.dropInto(user.loc)
@@ -366,10 +366,10 @@
 	for(var/obj/ekey in encryption_keys)
 		import_key_data(ekey)
 	for (var/ch_name in channels)
-		if(!radio_controller)
+		if(!GLOB.radio_controller)
 			src.SetName("broken radio headset")
 			return
-		secure_radio_connections[ch_name] = radio_controller.add_object(src, radiochannels[ch_name],  RADIO_CHAT)
+		secure_radio_connections[ch_name] = GLOB.radio_controller.add_object(src, GLOB.radiochannels[ch_name],  RADIO_CHAT)
 
 	if(setDescription)
 		setupRadioDescription()

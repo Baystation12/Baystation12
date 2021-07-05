@@ -1,52 +1,38 @@
-//Since it didn't really belong in any other category, I'm putting this here
-//This is for procs to replace all the goddamn 'in world's that are chilling around the code
 
-var/global/list/cable_list = list()					//Index for all cables, so that powernets don't have to look through the entire world all the time
-var/global/list/landmarks_list = list()				//list of all landmarks created
-var/global/list/side_effects = list()				//list of all medical sideeffects types by thier names |BS12
-var/global/list/mechas_list = list()				//list of all mechs. Used by hostile mobs target tracking.
+GLOBAL_LIST_EMPTY(cable_list) //Index for all cables, so that powernets don't have to look through the entire world all the time
+GLOBAL_LIST_EMPTY(landmarks_list) //list of all landmarks created
+GLOBAL_LIST_EMPTY(side_effects) //list of all medical sideeffects types by their names
 
-#define all_genders_define_list list(MALE,FEMALE,PLURAL,NEUTER)
-#define all_genders_text_list list("Male","Female","Plural","Neuter")
+GLOBAL_LIST_EMPTY(all_species)
+GLOBAL_LIST_EMPTY(all_languages)
+GLOBAL_LIST_EMPTY(language_keys) // Table of say codes for all languages
+GLOBAL_LIST_INIT(playable_species, list(SPECIES_HUMAN)) // A list of ALL playable species, whitelisted, latejoin or otherwise.
 
-//Languages/species/whitelist.
-var/global/list/all_species[0]
-var/global/list/datum/language/all_languages = list()
-var/global/list/language_keys[0]					// Table of say codes for all languages
-var/global/list/playable_species = list(SPECIES_HUMAN)    // A list of ALL playable species, whitelisted, latejoin or otherwise.
-
-var/list/mannequins_
-
-// Grabs
-var/global/list/all_grabstates[0]
-var/global/list/all_grabobjects[0]
-
-// Uplinks
-var/list/obj/item/device/uplink/world_uplinks = list()
+GLOBAL_LIST_EMPTY(all_mannequins)
+GLOBAL_LIST_EMPTY(all_grabstates)
+GLOBAL_LIST_EMPTY(all_grabobjects)
+GLOBAL_LIST_EMPTY(all_uplinks)
 
 //Preferences stuff
 //Hairstyles
 GLOBAL_LIST_EMPTY(hair_styles_list)        //stores /datum/sprite_accessory/hair indexed by name
 GLOBAL_LIST_EMPTY(facial_hair_styles_list) //stores /datum/sprite_accessory/facial_hair indexed by name
 
-var/global/list/skin_styles_female_list = list()		//unused
 GLOBAL_LIST_EMPTY(body_marking_styles_list)		//stores /datum/sprite_accessory/marking indexed by name
 
 GLOBAL_DATUM_INIT(underwear, /datum/category_collection/underwear, new())
 
 // Visual nets
-var/list/datum/visualnet/visual_nets = list()
-var/datum/visualnet/camera/cameranet = new()
+GLOBAL_LIST_EMPTY(visual_nets)
+GLOBAL_DATUM_INIT(cameranet, /datum/visualnet/camera, new())
 
-// Runes
-var/global/list/rune_list = new()
-var/global/list/endgame_exits = list()
-var/global/list/endgame_safespawns = list()
+GLOBAL_LIST_EMPTY(endgame_exits)
+GLOBAL_LIST_EMPTY(endgame_safespawns)
 
-var/global/list/syndicate_access = list(access_maint_tunnels, access_syndicate, access_external_airlocks)
+GLOBAL_LIST_INIT(syndicate_access, list(access_maint_tunnels, access_syndicate, access_external_airlocks))
 
 // Strings which corraspond to bodypart covering flags, useful for outputting what something covers.
-var/global/list/string_part_flags = list(
+GLOBAL_LIST_INIT(string_part_flags, list(
 	"head" = HEAD,
 	"face" = FACE,
 	"eyes" = EYES,
@@ -56,10 +42,10 @@ var/global/list/string_part_flags = list(
 	"feet" = FEET,
 	"arms" = ARMS,
 	"hands" = HANDS
-)
+))
 
 // Strings which corraspond to slot flags, useful for outputting what slot something is.
-var/global/list/string_slot_flags = list(
+GLOBAL_LIST_INIT(string_slot_flags, list(
 	"back" = SLOT_BACK,
 	"face" = SLOT_MASK,
 	"waist" = SLOT_BELT,
@@ -73,19 +59,21 @@ var/global/list/string_slot_flags = list(
 	"body" = SLOT_ICLOTHING,
 	"uniform" = SLOT_TIE,
 	"holster" = SLOT_HOLSTER
-)
+))
+
+GLOBAL_DATUM_INIT(gear_tweak_free_color_choice, /datum/gear_tweak/color, new())
 
 //////////////////////////
 /////Initial Building/////
 //////////////////////////
 
 /proc/get_mannequin(var/ckey)
-	if(!mannequins_)
-		mannequins_ = new()
-	. = mannequins_[ckey]
+	if(!GLOB.all_mannequins)
+		GLOB.all_mannequins = new()
+	. = GLOB.all_mannequins[ckey]
 	if(!.)
 		. = new/mob/living/carbon/human/dummy/mannequin()
-		mannequins_[ckey] = .
+		GLOB.all_mannequins[ckey] = .
 
 /hook/global_init/proc/makeDatumRefLists()
 	var/list/paths
@@ -121,12 +109,12 @@ var/global/list/string_slot_flags = list(
 	paths = typesof(/datum/language)-/datum/language
 	for(var/T in paths)
 		var/datum/language/L = new T
-		all_languages[L.name] = L
+		GLOB.all_languages[L.name] = L
 
-	for (var/language_name in all_languages)
-		var/datum/language/L = all_languages[language_name]
+	for (var/language_name in GLOB.all_languages)
+		var/datum/language/L = GLOB.all_languages[language_name]
 		if(!(L.flags & NONGLOBAL))
-			language_keys[lowertext(L.key)] = L
+			GLOB.language_keys[lowertext(L.key)] = L
 
 	var/rkey = 0
 	paths = typesof(/datum/species)
@@ -140,39 +128,39 @@ var/global/list/string_slot_flags = list(
 
 		S = new T
 		S.race_key = rkey //Used in mob icon caching.
-		all_species[S.name] = S
+		GLOB.all_species[S.name] = S
 		if(!(S.spawn_flags & SPECIES_IS_RESTRICTED))
-			playable_species += S.name
+			GLOB.playable_species += S.name
 
 	//Grabs
 	paths = typesof(/datum/grab) - /datum/grab
 	for(var/T in paths)
 		var/datum/grab/G = new T
 		if(G.state_name)
-			all_grabstates[G.state_name] = G
+			GLOB.all_grabstates[G.state_name] = G
 
 	paths = typesof(/obj/item/grab) - /obj/item/grab
 	for(var/T in paths)
 		var/obj/item/grab/G = T
-		all_grabobjects[initial(G.type_name)] = T
+		GLOB.all_grabobjects[initial(G.type_name)] = T
 
-	for(var/grabstate_name in all_grabstates)
-		var/datum/grab/G = all_grabstates[grabstate_name]
+	for(var/grabstate_name in GLOB.all_grabstates)
+		var/datum/grab/G = GLOB.all_grabstates[grabstate_name]
 		G.refresh_updown()
 
 	return 1
 
 //*** params cache
-var/global/list/paramslist_cache = list()
+GLOBAL_LIST_EMPTY(paramslist_cache)
 
 #define cached_key_number_decode(key_number_data) cached_params_decode(key_number_data, /proc/key_number_decode)
 #define cached_number_list_decode(number_list_data) cached_params_decode(number_list_data, /proc/number_list_decode)
 
 /proc/cached_params_decode(var/params_data, var/decode_proc)
-	. = paramslist_cache[params_data]
+	. = GLOB.paramslist_cache[params_data]
 	if(!.)
 		. = call(decode_proc)(params_data)
-		paramslist_cache[params_data] = .
+		GLOB.paramslist_cache[params_data] = .
 
 /proc/key_number_decode(var/key_number_data)
 	var/list/L = params2list(key_number_data)

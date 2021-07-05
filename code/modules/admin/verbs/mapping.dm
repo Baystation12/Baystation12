@@ -56,7 +56,7 @@ var/intercom_range_display_status = 0
 		qdel(C)
 
 	if(camera_range_display_status)
-		for(var/obj/machinery/camera/C in cameranet.cameras)
+		for(var/obj/machinery/camera/C in GLOB.cameranet.cameras)
 			new/obj/effect/debugging/camera_range(C.loc)
 	SSstatistics.add_field_details("admin_verb","mCRD") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -68,7 +68,7 @@ var/intercom_range_display_status = 0
 
 	var/list/obj/machinery/camera/CL = list()
 
-	for(var/obj/machinery/camera/C in cameranet.cameras)
+	for(var/obj/machinery/camera/C in GLOB.cameranet.cameras)
 		CL += C
 
 	var/output = {"<B>CAMERA ANNOMALITIES REPORT</B><HR>

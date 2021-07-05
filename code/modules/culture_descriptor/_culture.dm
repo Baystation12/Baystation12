@@ -42,11 +42,11 @@
 /decl/cultural_info/proc/get_random_name(var/gender)
 	var/datum/language/_language
 	if(name_language)
-		_language = all_languages[name_language]
+		_language = GLOB.all_languages[name_language]
 	else if(default_language)
-		_language = all_languages[default_language]
+		_language = GLOB.all_languages[default_language]
 	else if(language)
-		_language = all_languages[language]
+		_language = GLOB.all_languages[language]
 	if(_language)
 		return _language.get_random_name(gender)
 	return capitalize(pick(gender==FEMALE ? GLOB.first_names_female : GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))

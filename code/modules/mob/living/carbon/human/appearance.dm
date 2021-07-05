@@ -9,14 +9,14 @@
 	if(species == new_species)
 		return
 
-	if(!(new_species in all_species))
+	if(!(new_species in GLOB.all_species))
 		return
 
 	set_species(new_species)
 	var/datum/antagonist/antag = mind && player_is_antag(mind)
 	if (antag && antag.required_language)
 		add_language(antag.required_language)
-		set_default_language(all_languages[antag.required_language])
+		set_default_language(GLOB.all_languages[antag.required_language])
 	reset_hair()
 	return 1
 
@@ -150,21 +150,21 @@
 		if (!istype(culture))
 			continue
 		if (culture.language)
-			result[culture.language] = all_languages[culture.language]
+			result[culture.language] = GLOB.all_languages[culture.language]
 		if (culture.name_language)
-			result[culture.name_language] = all_languages[culture.name_language]
+			result[culture.name_language] = GLOB.all_languages[culture.name_language]
 		if (culture.default_language)
-			result[culture.default_language] = all_languages[culture.default_language]
+			result[culture.default_language] = GLOB.all_languages[culture.default_language]
 		for (var/lang_key in culture.secondary_langs)
-			result[lang_key] = all_languages[lang_key]
+			result[lang_key] = GLOB.all_languages[lang_key]
 		for (var/lang_key in culture.additional_langs)
-			result[lang_key] = all_languages[lang_key]
+			result[lang_key] = GLOB.all_languages[lang_key]
 	return result
 
 /mob/living/carbon/human/proc/generate_valid_species(var/check_whitelist = 1, var/list/whitelist = list(), var/list/blacklist = list())
 	var/list/valid_species = new()
-	for(var/current_species_name in all_species)
-		var/datum/species/current_species = all_species[current_species_name]
+	for(var/current_species_name in GLOB.all_species)
+		var/datum/species/current_species = GLOB.all_species[current_species_name]
 
 		if(check_whitelist) //If we're using the whitelist, make sure to check it!
 			if((current_species.spawn_flags & SPECIES_IS_RESTRICTED) && !check_rights(R_ADMIN, 0, src))

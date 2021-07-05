@@ -27,8 +27,8 @@ datum/preferences
 	W.write("name_is_always_random", pref.be_random_name)
 
 /datum/category_item/player_setup_item/physical/basic/sanitize_character()
-	var/datum/species/S = all_species[pref.species ? pref.species : SPECIES_HUMAN]
-	if(!S) S = all_species[SPECIES_HUMAN]
+	var/datum/species/S = GLOB.all_species[pref.species ? pref.species : SPECIES_HUMAN]
+	if(!S) S = GLOB.all_species[SPECIES_HUMAN]
 	pref.age                = sanitize_integer(pref.age, S.min_age, S.max_age, initial(pref.age))
 	pref.gender             = sanitize_inlist(pref.gender, S.genders, pick(S.genders))
 	pref.spawnpoint         = sanitize_inlist(pref.spawnpoint, spawntypes(), initial(pref.spawnpoint))
@@ -55,7 +55,7 @@ datum/preferences
 	. = jointext(.,null)
 
 /datum/category_item/player_setup_item/physical/basic/OnTopic(var/href,var/list/href_list, var/mob/user)
-	var/datum/species/S = all_species[pref.species]
+	var/datum/species/S = GLOB.all_species[pref.species]
 
 	if(href_list["rename"])
 		var/raw_name = input(user, "Choose your character's name:", "Character Name")  as text|null
@@ -80,7 +80,7 @@ datum/preferences
 
 	else if(href_list["gender"])
 		var/new_gender = input(user, "Choose your character's gender:", CHARACTER_PREFERENCE_INPUT_TITLE, pref.gender) as null|anything in S.genders
-		S = all_species[pref.species]
+		S = GLOB.all_species[pref.species]
 		if(new_gender && CanUseTopic(user) && (new_gender in S.genders))
 			pref.gender = new_gender
 			if(!(pref.f_style in S.get_facial_hair_styles(pref.gender)))

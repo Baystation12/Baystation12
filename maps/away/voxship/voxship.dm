@@ -108,7 +108,7 @@
 	req_access = list(access_voxship)
 
 /obj/effect/submap_landmark/joinable_submap/voxship/scavship/New()
-	var/datum/language/vox/pidgin = all_languages[LANGUAGE_VOX]
+	var/datum/language/vox/pidgin = GLOB.all_languages[LANGUAGE_VOX]
 	name = "[pidgin.get_random_name()]-[pidgin.get_random_name()]"
 	..()
 

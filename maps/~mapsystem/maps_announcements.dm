@@ -29,7 +29,7 @@
 	var/lifesign_spawn_sound = 'sound/AI/aliens.ogg'
 
 /datum/map/proc/emergency_shuttle_called_announcement()
-	evacuation_controller.evac_called.Announce(replacetext(emergency_shuttle_called_message, "%ETA%", "[round(evacuation_controller.get_eta()/60)] minute\s."), new_sound = emergency_shuttle_called_sound)
+	GLOB.evacuation_controller.evac_called.Announce(replacetext(emergency_shuttle_called_message, "%ETA%", "[round(GLOB.evacuation_controller.get_eta()/60)] minute\s."), new_sound = emergency_shuttle_called_sound)
 
 /datum/map/proc/grid_check_announcement()
 	command_announcement.Announce(replacetext(grid_check_message, "%STATION_NAME%", station_name()), "Automated Grid Check", new_sound = grid_check_sound)

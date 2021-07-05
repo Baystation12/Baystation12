@@ -58,8 +58,8 @@
 	. = ..()
 
 obj/machinery/embedded_controller/radio/Destroy()
-	if(radio_controller)
-		radio_controller.remove_object(src,frequency)
+	if(GLOB.radio_controller)
+		GLOB.radio_controller.remove_object(src,frequency)
 	..()
 
 /obj/machinery/embedded_controller/radio/on_update_icon()
@@ -92,6 +92,6 @@ obj/machinery/embedded_controller/radio/Destroy()
 		qdel(signal)
 
 /obj/machinery/embedded_controller/radio/proc/set_frequency(new_frequency)
-	radio_controller.remove_object(src, frequency)
+	GLOB.radio_controller.remove_object(src, frequency)
 	frequency = new_frequency
-	radio_connection = radio_controller.add_object(src, frequency, radio_filter)
+	radio_connection = GLOB.radio_controller.add_object(src, frequency, radio_filter)

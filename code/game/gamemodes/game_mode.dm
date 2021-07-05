@@ -235,8 +235,8 @@ var/global/list/additional_antag_types = list()
 		mind.generate_goals(mind.assigned_job, is_spawning=TRUE)
 		mind.current.show_goals()
 
-	if(evacuation_controller && auto_recall_shuttle)
-		evacuation_controller.recall = 1
+	if(GLOB.evacuation_controller && auto_recall_shuttle)
+		GLOB.evacuation_controller.recall = 1
 
 	SSstatistics.set_field_details("round_start","[time2text(world.realtime)]")
 	if(SSticker.mode)
@@ -287,7 +287,7 @@ var/global/list/additional_antag_types = list()
 	command_announcement.Announce("The presence of [pick(reasons)] in the region is tying up all available local emergency resources; emergency response teams cannot be called at this time, and post-evacuation recovery efforts will be substantially delayed.","Emergency Transmission")
 
 /datum/game_mode/proc/check_finished()
-	if(evacuation_controller.round_over() || station_was_nuked)
+	if(GLOB.evacuation_controller.round_over() || station_was_nuked)
 		return 1
 	if(end_on_antag_death && antag_templates && antag_templates.len)
 		var/has_antags = 0
@@ -296,7 +296,7 @@ var/global/list/additional_antag_types = list()
 				has_antags = 1
 				break
 		if(!has_antags)
-			evacuation_controller.recall = 0
+			GLOB.evacuation_controller.recall = 0
 			return 1
 	return 0
 

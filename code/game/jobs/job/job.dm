@@ -75,11 +75,11 @@
 
 	if (required_language)
 		H.add_language(required_language)
-		H.set_default_language(all_languages[required_language])
+		H.set_default_language(GLOB.all_languages[required_language])
 
 	if (!H.languages.len)
 		H.add_language(LANGUAGE_SPACER)
-		H.set_default_language(all_languages[LANGUAGE_SPACER])
+		H.set_default_language(GLOB.all_languages[LANGUAGE_SPACER])
 
 	if(psi_latency_chance && prob(psi_latency_chance))
 		H.set_psi_rank(pick(PSI_COERCION, PSI_REDACTION, PSI_ENERGISTICS, PSI_PSYCHOKINESIS), 1, defer_update = TRUE)
@@ -199,7 +199,7 @@
 	var/datum/species/S
 
 	if (!is_species_whitelist_allowed(prefs.client, use_species_whitelist))
-		S = all_species[use_species_whitelist]
+		S = GLOB.all_species[use_species_whitelist]
 		to_chat(feedback, "<span class='boldannounce'>\An [S] species whitelist is required for [title].</span>")
 		return TRUE
 
@@ -211,7 +211,7 @@
 		to_chat(feedback, "<span class='boldannounce'>Wrong rank for [title]. Valid ranks in [prefs.branches[title]] are: [get_ranks(prefs.branches[title])].</span>")
 		return TRUE
 
-	S = all_species[prefs.species]
+	S = GLOB.all_species[prefs.species]
 	if(!is_species_allowed(S))
 		to_chat(feedback, "<span class='boldannounce'>Restricted species, [S], for [title].</span>")
 		return TRUE
@@ -381,7 +381,7 @@
 		reasons["Your rank choice does not allow it."] = TRUE
 	if (!is_species_whitelist_allowed(caller))
 		reasons["You do not have the required [use_species_whitelist] species whitelist."] = TRUE
-	var/datum/species/S = all_species[caller.prefs.species]
+	var/datum/species/S = GLOB.all_species[caller.prefs.species]
 	if(S)
 		if(!is_species_allowed(S))
 			reasons["Your species choice does not allow it."] = TRUE
@@ -410,7 +410,7 @@
 
 /datum/job/proc/get_roundstart_spawnpoint()
 	var/list/loc_list = list()
-	for(var/obj/effect/landmark/start/sloc in landmarks_list)
+	for(var/obj/effect/landmark/start/sloc in GLOB.landmarks_list)
 		if(sloc.name != title)	continue
 		if(locate(/mob/living) in sloc.loc)	continue
 		loc_list += sloc

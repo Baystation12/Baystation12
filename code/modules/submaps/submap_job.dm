@@ -62,7 +62,7 @@
 	return TRUE
 
 /datum/job/submap/is_restricted(var/datum/preferences/prefs, var/feedback)
-	var/datum/species/S = all_species[prefs.species]
+	var/datum/species/S = GLOB.all_species[prefs.species]
 	if(LAZYACCESS(minimum_character_age, S.get_bodytype()) && (prefs.age < minimum_character_age[S.get_bodytype()]))
 		to_chat(feedback, "<span class='boldannounce'>Not old enough. Minimum character age is [minimum_character_age[S.get_bodytype()]].</span>")
 		return TRUE

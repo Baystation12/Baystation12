@@ -63,10 +63,10 @@
 
 /datum/grab/proc/refresh_updown()
 	if(upgrab_name)
-		upgrab = all_grabstates[upgrab_name]
+		upgrab = GLOB.all_grabstates[upgrab_name]
 
 	if(downgrab_name)
-		downgrab = all_grabstates[downgrab_name]
+		downgrab = GLOB.all_grabstates[downgrab_name]
 
 // This is for the strings defined as datum variables. It takes them and swaps out keywords for relevent ones from the grab
 // object involved.

@@ -277,7 +277,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	changeling.geneticdamage = 30
 
 	var/S_name = chosen_dna.speciesName
-	var/datum/species/S_dat = all_species[S_name]
+	var/datum/species/S_dat = GLOB.all_species[S_name]
 	var/changeTime = 2 SECONDS
 	if(mob_size != S_dat.mob_size)
 		src.visible_message("<span class='warning'>[src]'s body begins to twist, their mass changing rapidly!</span>")
@@ -606,7 +606,7 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	if(!chosen_dna)
 		return
 
-	var/datum/species/spec = all_species[chosen_dna.speciesName]
+	var/datum/species/spec = GLOB.all_species[chosen_dna.speciesName]
 
 	if(spec && spec.species_flags & SPECIES_FLAG_NEED_DIRECT_ABSORB)
 		to_chat(src, "<span class='notice'>That species must be absorbed directly.</span>")

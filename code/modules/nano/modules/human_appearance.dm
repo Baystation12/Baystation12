@@ -182,7 +182,7 @@
 	data["change_languages"] = !!(flags & APPEARANCE_LANG)
 	if (data["change_languages"])
 		var/list/entries = (data["languages"] = list())
-		var/lang_list = (flags & APPEARANCE_LANG_ANY_ORIGIN) ? all_languages : langs
+		var/lang_list = (flags & APPEARANCE_LANG_ANY_ORIGIN) ? GLOB.all_languages : langs
 		for (var/lang_key in lang_list)
 			entries += list(list("language" = lang_key, "selected" = (lang_list[lang_key] in owner.languages)))
 
