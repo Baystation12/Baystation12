@@ -186,11 +186,14 @@
 		new /obj/effect/decal/cleanable/ash(get_turf(src))
 		qdel(src)
 
-//rag must have a minimum of 2 units welder fuel and at least 80% of the reagents must be welder fuel.
-//maybe generalize flammable reagents someday
+
 /obj/item/reagent_containers/glass/rag/proc/can_ignite()
-	var/fuel = reagents.get_reagent_amount(/datum/reagent/fuel)
-	return (fuel >= 2 && fuel >= reagents.total_volume*0.8)
+	var/fuel = 0
+	FOR_BLIND(datum/reagent/R, reagents?.reagent_list)
+		if (R.gas_flags & XGM_GAS_FUEL)
+			fuel += R.volume
+	return (fuel >= 2 && fuel >= reagents?.total_volume * 0.8)
+
 
 /obj/item/reagent_containers/glass/rag/proc/ignite()
 	if(on_fire)

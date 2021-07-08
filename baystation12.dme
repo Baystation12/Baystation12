@@ -2766,6 +2766,7 @@
 #include "code\modules\reagents\Chemistry-Reagents\Chemistry-Reagents-Medicine.dm"
 #include "code\modules\reagents\Chemistry-Reagents\Chemistry-Reagents-Other.dm"
 #include "code\modules\reagents\Chemistry-Reagents\Chemistry-Reagents-Toxins.dm"
+#include "code\modules\reagents\Chemistry-Reagents\gas_properties.dm"
 #include "code\modules\reagents\Chemistry-Reagents\Random\Chemistry-Reagents-Random.dm"
 #include "code\modules\reagents\Chemistry-Reagents\Random\random_effects.dm"
 #include "code\modules\reagents\dispenser\_defines.dm"
