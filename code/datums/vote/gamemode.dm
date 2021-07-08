@@ -22,7 +22,7 @@
 	..()
 	choices += config.votable_modes
 	for (var/F in choices)
-		var/datum/game_mode/M = gamemode_cache[F]
+		var/datum/game_mode/M = config.gamemode_cache[F]
 		if(!M)
 			continue
 		display_choices[F] = capitalize(M.name)
