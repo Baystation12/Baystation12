@@ -247,3 +247,14 @@ obj/item/clothing/shoes/heels/red
 	name = "red high heels"
 	desc = "A pair of red high heels."
 	color = COLOR_RED
+
+/obj/item/clothing/shoes/foamclog
+	name = "foam clog"
+	desc = "Made from durable foam resin that retains its spongy feel."
+	icon_state = "foamclog"
+	can_add_hidden_item = FALSE
+	can_add_cuffs = FALSE
+
+/obj/item/clothing/shoes/foamclog/random/New()
+	..()
+	color = get_random_colour()
