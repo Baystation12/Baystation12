@@ -11,10 +11,9 @@
 		SPECIES_MONARCH_QUEEN
 	) //everyone except for these species can wear this kit.
 
-	var/list/accessories = list()
+	var/list/accessories
 	var/list/valid_accessory_slots
 	var/list/restricted_accessory_slots
-	var/list/starting_accessories
 	var/blood_overlay_type = "uniformblood"
 	var/visible_name = "Unknown"
 	var/ironed_state = WRINKLES_DEFAULT
@@ -71,12 +70,14 @@
 	if(prob(10))
 		ironed_state = WRINKLES_WRINKLY
 
-/obj/item/clothing/New()
-	..()
-	if(starting_accessories)
-		for(var/T in starting_accessories)
-			var/obj/item/clothing/accessory/tie = new T(src)
-			src.attach_accessory(null, tie)
+/obj/item/clothing/Initialize()
+	. = ..()
+	INIT_SKIP_QDELETED
+
+	var/list/init_accessories = accessories
+	accessories = list()
+	for (var/path in init_accessories)
+		attach_accessory(null, new path (src))
 
 //BS12: Species-restricted clothing check.
 /obj/item/clothing/mob_can_equip(M as mob, slot, disable_warning = 0)
