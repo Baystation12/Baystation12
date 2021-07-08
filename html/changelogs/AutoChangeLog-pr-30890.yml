@@ -1,0 +1,6 @@
+author: Spookerton
+delete-after: true
+changes:
+  - tweak: Thrown bottles splash mobs around the impact atom if they break.
+  - tweak: Rags burn with more than just fuel in them, allowing high proof alcohol,
+      acetone, hydrazine, etc molotovs.
