@@ -7,7 +7,6 @@
 		"exclude",
 		SPECIES_NABBER
 	) //everyone except for these species can wear this kit.
-
 	var/list/accessories
 	var/list/valid_accessory_slots
 	var/list/restricted_accessory_slots
@@ -18,9 +17,20 @@
 
 	var/move_trail = /obj/effect/decal/cleanable/blood/tracks/footprints // if this item covers the feet, the footprints it should leave
 
+
+/obj/item/clothing/Initialize()
+	. = ..()
+	INIT_SKIP_QDELETED
+	var/list/init_accessories = accessories
+	accessories = list()
+	for (var/path in init_accessories)
+		attach_accessory(null, new path (src))
+
+
 // Updates the icons of the mob wearing the clothing item, if any.
 /obj/item/clothing/proc/update_clothing_icon()
 	return
+
 
 // Updates the vision of the mob wearing the clothing item, if any
 /obj/item/clothing/proc/update_vision()
@@ -28,9 +38,11 @@
 		var/mob/living/L = src.loc
 		L.handle_vision()
 
+
 // Checked when equipped, returns true when the wearing mob's vision should be updated
 /obj/item/clothing/proc/needs_vision_update()
 	return flash_protection || tint
+
 
 /obj/item/clothing/get_mob_overlay(mob/user_mob, slot)
 	var/image/ret = ..()
@@ -50,31 +62,11 @@
 			ret.overlays |= A.get_mob_overlay(user_mob, slot)
 	return ret
 
+
 /obj/item/clothing/proc/change_smell(smell = SMELL_DEFAULT)
 	smell_state = smell
 
-/obj/item/clothing/proc/get_fibers()
-	. = "material from \a [name]"
-	var/list/acc = list()
-	for(var/obj/item/clothing/accessory/A in accessories)
-		if(prob(40) && A.get_fibers())
-			acc += A.get_fibers()
-	if(acc.len)
-		. += " with traces of [english_list(acc)]"
 
-/obj/item/clothing/proc/leave_evidence(mob/source)
-	add_fingerprint(source)
-	if(prob(10))
-		ironed_state = WRINKLES_WRINKLY
-
-/obj/item/clothing/Initialize()
-	. = ..()
-	INIT_SKIP_QDELETED
-
-	var/list/init_accessories = accessories
-	accessories = list()
-	for (var/path in init_accessories)
-		attach_accessory(null, new path (src))
 
 //BS12: Species-restricted clothing check.
 /obj/item/clothing/mob_can_equip(M as mob, slot, disable_warning = 0)
@@ -312,8 +304,6 @@ BLIND     // can't see anything
 			cell.charge = 0
 	..()
 
-/obj/item/clothing/gloves/get_fibers()
-	return "material from a pair of [name]."
 
 // Called just before an attack_hand(), in mob/UnarmedAttack()
 /obj/item/clothing/gloves/proc/Touch(var/atom/A, var/proximity)
