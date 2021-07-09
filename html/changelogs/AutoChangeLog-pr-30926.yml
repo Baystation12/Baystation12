@@ -1,0 +1,4 @@
+author: Pawn
+delete-after: true
+changes:
+  - rscadd: Adds (colorable) foam clogs to loadout
