@@ -47,5 +47,5 @@
 		"dwarfing you"
 		)
 	var/list/scale_effect = list(
-		SPECIES_HUMAN = list(-7.5, 0, 0, 0, 7.5)
+		//SPECIES_TAG_DEFINE = list(lowest, low, middle, high, highest)<,>
 	)
