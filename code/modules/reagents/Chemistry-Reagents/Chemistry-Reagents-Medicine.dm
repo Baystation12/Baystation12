@@ -6,7 +6,7 @@
 	taste_description = "bitterness"
 	reagent_state = LIQUID
 	color = "#00bfff"
-	overdose = REAGENTS_OVERDOSE * 2
+	overdose = REAGENTS_OVERDOSE
 	metabolism = REM * 0.5
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
@@ -15,7 +15,6 @@
 /datum/reagent/inaprovaline/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
 		M.add_chemical_effect(CE_STABLE)
-		M.add_chemical_effect(CE_PAINKILLER, 10)
 
 /datum/reagent/inaprovaline/overdose(var/mob/living/carbon/M, var/alien)
 	M.add_chemical_effect(CE_SLOWDOWN, 1)
@@ -31,7 +30,7 @@
 	taste_mult = 3
 	reagent_state = LIQUID
 	color = "#bf0000"
-	overdose = REAGENTS_OVERDOSE
+	overdose = REAGENTS_OVERDOSE * 0.75
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 	value = 4.9
@@ -56,7 +55,7 @@
 	taste_description = "bitterness"
 	reagent_state = LIQUID
 	color = "#ffa800"
-	overdose = REAGENTS_OVERDOSE
+	overdose = REAGENTS_OVERDOSE * 0.75
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 	value = 2.9
@@ -72,7 +71,7 @@
 	taste_mult = 1.5
 	reagent_state = LIQUID
 	color = "#ff8000"
-	overdose = REAGENTS_OVERDOSE * 0.5
+	overdose = REAGENTS_OVERDOSE  * 0.5
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 	value = 3.9
@@ -121,7 +120,7 @@
 	taste_description = "bitterness"
 	reagent_state = LIQUID
 	color = "#0080ff"
-	overdose = REAGENTS_OVERDOSE
+	overdose = REAGENTS_OVERDOSE  * 0.75
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 	value = 2.4
@@ -139,7 +138,7 @@
 	taste_description = "bitterness"
 	reagent_state = LIQUID
 	color = "#0040ff"
-	overdose = REAGENTS_OVERDOSE * 0.5
+	overdose = REAGENTS_OVERDOSE  * 0.5
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 	value = 3.7
@@ -244,7 +243,7 @@
 	taste_description = "sickness"
 	reagent_state = LIQUID
 	color = "#c8a5dc"
-	overdose = 60
+	overdose = 40
 	reagent_state = LIQUID
 	scannable = 1
 	metabolism = 0.02
@@ -265,7 +264,7 @@
 	taste_description = "sourness"
 	reagent_state = LIQUID
 	color = "#cb68fc"
-	overdose = 30
+	overdose = 20
 	scannable = 1
 	metabolism = 0.05
 	ingest_met = 0.02
@@ -327,7 +326,7 @@
 	taste_description = "bitterness"
 	color = "#800080"
 	scannable = 1
-	overdose = 20
+	overdose = 15
 	pain_power = 200
 	effective_dose = 2
 
@@ -403,7 +402,7 @@
 	reagent_state = LIQUID
 	color = "#ffff66"
 	metabolism = REM * 0.25
-	overdose = REAGENTS_OVERDOSE
+	overdose = REAGENTS_OVERDOSE  * 0.5
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 	value = 5.9
@@ -445,7 +444,7 @@
 	taste_description = "bitterness"
 	reagent_state = LIQUID
 	color = "#561ec3"
-	overdose = 10
+	overdose = 5
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 	value = 6
@@ -533,7 +532,7 @@
 	reagent_state = LIQUID
 	color = "#408000"
 	metabolism = REM * 0.25
-	overdose = REAGENTS_OVERDOSE
+	overdose = REAGENTS_OVERDOSE  * 0.75
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 	value = 2.3
@@ -547,7 +546,7 @@
 	reagent_state = LIQUID
 	color = "#008000"
 	metabolism = REM * 0.25
-	overdose = REAGENTS_OVERDOSE
+	overdose = REAGENTS_OVERDOSE  * 0.5
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 	value = 2.7
@@ -951,13 +950,13 @@
 	reagent_state = LIQUID
 	color = "#c10158"
 	scannable = 1
-	overdose = 5
+	overdose = 3
 	metabolism = 1
 
 /datum/reagent/nanoblood/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
 	if(!M.should_have_organ(BP_HEART)) //We want the var for safety but we can do without the actual blood.
 		return
-	if(M.regenerate_blood(4 * removed))
+	if(M.regenerate_blood(2 * removed))
 		M.immunity = max(M.immunity - 0.75, 0)
 		if(M.chem_doses[type] > M.species.blood_volume/8) //half of blood was replaced with us, rip white bodies
 			M.immunity = max(M.immunity - 3, 0)
