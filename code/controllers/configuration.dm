@@ -443,7 +443,12 @@
 		if (!name)
 			continue
 		var/value = index ? copytext(line, index + 1) : TRUE
-		result[name] = value
+		if (!result[name])
+			result[name] = value
+			continue
+		if (!islist(result[name]))
+			result[name] = list(result[name])
+		result[name] += value
 	return result
 
 
@@ -773,15 +778,16 @@
 			if ("act_interval")
 				act_interval = text2num(value) SECONDS
 			if ("chat_markup")
-				var/list/line = splittext(value, ";")
-				if (length(line) != 2)
-					log_error("Invalid chat_markup entry length: [value]")
-				else
-					var/matcher = text2regex(line[1])
-					if (!matcher)
-						log_error("Invalid chat_markup regex: [value]")
+				for (var/entry in value)
+					var/list/line = splittext(entry, ";")
+					if (length(line) != 2)
+						log_error("Invalid chat_markup entry length: [value]")
 					else
-						LAZYADD(chat_markup, list(list(matcher, line[2])))
+						var/matcher = text2regex(line[1])
+						if (!matcher)
+							log_error("Invalid chat_markup regex: [value]")
+						else
+							LAZYADD(chat_markup, list(list(matcher, line[2])))
 			if ("forbidden_message_regex")
 				forbidden_message_regex = text2regex(value)
 				if (!forbidden_message_regex)
