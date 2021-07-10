@@ -61,3 +61,17 @@
 			return T
 		else
 			return step
+
+/datum/artifact_effect/pushback/destroyed_effect()
+	. = ..()
+
+	if (holder)
+		var/turf/T = get_turf(holder)
+		damage = damage * 2
+		for (var/mob/living/M in range(effectrange, T))
+			var/weakness = GetAnomalySusceptibility(M)
+			M.apply_damage(damage * weakness, BRUTE, damage_flags = DAM_DISPERSED)
+			M.throw_at(get_target_turf(M), throw_range, speed)
+			to_chat(M, SPAN_DANGER("A violent force explodes outward from \the [holder] and sends you flying!"))
+
+		playsound(get_turf(holder), "sound/magic/repulse.ogg", 100)

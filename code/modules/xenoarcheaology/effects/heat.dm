@@ -22,3 +22,11 @@
 		var/datum/gas_mixture/env = holder.loc.return_air()
 		if(env && env.temperature < target_temp)
 			env.temperature += pick(0, 0, 1)
+
+/datum/artifact_effect/heat/destroyed_effect()
+	. = ..()
+
+	for (var/turf/T in trange(5, get_turf(holder)))
+		var/datum/gas_mixture/env = T.return_air()
+		if (env)
+			env.temperature += 10

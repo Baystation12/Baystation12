@@ -60,8 +60,5 @@
 				else
 					to_chat(H, "<span class='info'>[pick(messages)]</span>")
 
-			if(prob(50))
-				H.dizziness += rand(3,5)
-			else if(prob(25))
-				H.dizziness += rand(5,15)
+			H.dizziness += rand(5,15)
 		return 1

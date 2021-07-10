@@ -25,7 +25,9 @@
 		/mob/living/simple_animal/hostile/meat/strippedhuman = 60,
 		/mob/living/simple_animal/hostile/meat/horrorminer = 60,
 		/mob/living/simple_animal/hostile/meat/horrorsmall = 80,
-		/mob/living/simple_animal/hostile/meat = 5
+		/mob/living/simple_animal/hostile/meat = 5,
+		/mob/living/simple_animal/hostile/scarybat = 70,
+		/mob/living/simple_animal/hostile/creature = 40
 	)
 	var/list/portals = list()
 	var/list/mobs = list()
@@ -49,17 +51,19 @@
 
 	..()
 
-/datum/artifact_effect/hellportal/DoEffectPulse()
+/datum/artifact_effect/hellportal/DoEffectPulse(send_message = TRUE)
 	if (holder)
 		convert_turfs()
 		spawn_monsters()
-		hurt_players()
+		hurt_players(FALSE)
 		playsound(holder, activation_sound, 100)
 		var/datum/gas_mixture/env = holder.loc.return_air()
 		if(env && env.temperature < target_temp)
 			env.temperature += rand(2, 10)
+		if (send_message)
+			holder.visible_message(SPAN_DANGER("\The [holder] [pick(activation_messages)]"))
 
-		holder.visible_message(SPAN_DANGER("\The [holder] [pick(activation_messages)]"))
+//Helper procs
 
 /datum/artifact_effect/hellportal/proc/convert_turfs()
 	for (var/i = 0 to convert_count)
@@ -83,7 +87,7 @@
 
 /datum/artifact_effect/hellportal/proc/spawn_monsters()
 	if (length(mobs) < maximum_mob_count)
-		for (var/i = 0 to rand(1, active_portals_max))
+		for (var/i = 0 to (active_portals_max - length(portals)))
 			if (length(portals) >= active_portals_max)
 				return
 
@@ -92,24 +96,25 @@
 			if (!T)
 				return
 
-			var/obj/effect/gateway/active/artifact/gate = new(T)
+			var/obj/effect/gateway/artifact/small/gate = new(T)
 			gate.spawnable = monsters
 			gate.parent = src
 			portals += gate
 
 			GLOB.destroyed_event.register(gate, src, /datum/artifact_effect/hellportal/proc/reduce_portal_count)
 
-/datum/artifact_effect/hellportal/proc/hurt_players()
-	for (var/mob/living/carbon/human/H in range(src.effectrange,get_turf(holder)))
+/datum/artifact_effect/hellportal/proc/hurt_players(send_message = TRUE)
+	for (var/mob/living/carbon/human/H in range(effectrange, get_turf(holder)))
 		var/weakness = GetAnomalySusceptibility(H)
 		H.apply_damage(damage * weakness, BRUTE, damage_flags = DAM_DISPERSED)
 		H.apply_damage(damage * weakness, BURN, damage_flags = DAM_DISPERSED)
-		if (weakness == 0)
-			to_chat(H, SPAN_WARNING("Some unseen force tries to tear into your suit, but fails!"))
-		else
-			to_chat(H, SPAN_DANGER("Searing pain strikes your body as you briefly find yourself in a burning hellscape!"))
+		if (send_message)
+			if (weakness == 0)
+				to_chat(H, SPAN_WARNING("Some unseen force tries to tear into your suit, but fails!"))
+			else
+				to_chat(H, SPAN_DANGER("Searing pain strikes your body as you briefly find yourself in a burning hellscape!"))
 
-/datum/artifact_effect/hellportal/proc/reduce_portal_count(obj/effect/gateway/active/artifact/P)
+/datum/artifact_effect/hellportal/proc/reduce_portal_count(obj/effect/gateway/artifact/P)
 	GLOB.destroyed_event.unregister(P, src)
 	portals -= P
 
@@ -125,23 +130,21 @@
 
 	playsound(M, pick(mob_spawn_sounds), 100)
 
-/obj/effect/gateway/active/artifact
-	name = "reality tear"
-	desc = "A piercing pain strikes your mind as you peer into the tear, witnessing horrors and suffering beyond comprehension."
-	var/datum/artifact_effect/hellportal/parent
+/datum/artifact_effect/hellportal/destroyed_effect()
+	convert_count = rand(40, 60)
+	active_portals_max = rand(15, 30)
+	maximum_mob_count = 1000 //set obscenly high so we can spawn a bunch at once before deletion
+	damage = rand(50, 100)
+	effectrange = 30 //create lots of bads in a large area
 
-/obj/effect/gateway/active/artifact/New()
-	..()
-	addtimer(CALLBACK(src, .proc/create_and_delete), rand(15,30) SECONDS)
+	DoEffectPulse(FALSE)
+	for(var/mob/M in GLOB.player_list)
+		if((M.z == holder.z) && !istype(M,/mob/new_player))
+			to_chat(M, SPAN_DANGER(FONT_LARGE("Agonized screams fill your ears as the world around you briefly burns in hellfire!")))
+			if (istype(M, /mob/living/carbon/human))
+				var/mob/living/carbon/human/H = M
+				H.apply_damage((damage / 4), BRUTE, damage_flags = DAM_DISPERSED)
 
-/obj/effect/gateway/active/artifact/create_and_delete()
-	var/mob/living/simple_animal/T = pickweight(spawnable)
-	T = new T(src.loc)
-	T.min_gas = null
-	T.max_gas = null
-	T.minbodytemp = 0
-	T.maxbodytemp = 5000
-
-	parent.register_mob(T)
-	visible_message(SPAN_WARNING("\The [src] widens for a moment as a horrific monster forces its way through, before it blinks out of existence."))
-	qdel(src)
+	var/obj/effect/gateway/artifact/big/G = new (get_turf(holder))
+	G.spawnable = monsters
+	GLOB.sound_player.PlayLoopingSound(G, "\ref[src]", 'sound/effects/Heart Beat.ogg', 70, 6)

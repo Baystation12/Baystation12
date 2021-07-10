@@ -48,3 +48,17 @@
 		for (var/mob/living/silicon/robot/R in range(src.effectrange,holder))
 			to_chat(R, "<span class='warning'>SYSTEM ALERT: CPU cycles slowing down.</span>")
 		return 1
+
+/datum/artifact_effect/sleepy/destroyed_effect()
+	. = ..()
+
+	if(holder)
+		var/turf/T = get_turf(holder)
+		for(var/mob/living/carbon/human/H in range(src.effectrange, T))
+			var/weakness = GetAnomalySusceptibility(H)
+			if(prob(weakness * 100))
+				to_chat(H, (SPAN_NOTICE("Some sort of energy hits you, and you black out!")))
+				H.drowsyness = min(H.drowsyness + rand(20, 30) * weakness, 50 * weakness)
+				H.eye_blurry = min(H.eye_blurry + rand(20, 30) * weakness, 50 * weakness)
+		for (var/mob/living/silicon/robot/R in range(src.effectrange,holder))
+			to_chat(R, SPAN_WARNING("SYSTEM ALERT: CPU cycles shutting down."))

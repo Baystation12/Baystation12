@@ -155,6 +155,9 @@
 				out += "<br><br>Internal scans indicate ongoing secondary activity operating independently from primary systems.<br><br>"
 				out += A.secondary_effect.getDescription()
 
+			if (A.damage_desc)
+				out += "<br><br>[A.damage_desc]"
+
 			return out
 		else
 			return "[scanned_obj.name] - mundane application."
