@@ -10,7 +10,7 @@
 	uncreated_component_parts = null
 	stat_immune = 0
 	construct_state = /decl/machine_construction/default/panel_closed
-	
+
 	machine_name = "cyborg recharging station"
 	machine_desc = "A station for recharging robots, cyborgs, and silicon-based humanoids such as IPCs and full-body prosthetics."
 
@@ -190,7 +190,7 @@
 		var/mob/living/silicon/robot/R = M
 		return (R.cell)
 	if(ishuman(M))
-		var/mob/living/carbon/human/H = M		
+		var/mob/living/carbon/human/H = M
 		if(H.isSynthetic()) // FBPs and IPCs
 			return 1
 		if(istype(H.back,/obj/item/rig))
@@ -224,5 +224,7 @@
 	set category = "Object"
 	set name = "Enter Recharger"
 	set src in oview(1)
+	if (usr.buckled())
+		return
 
 	go_in(usr)
