@@ -1,7 +1,0 @@
-author: Mucker, Azlan
-delete-after: true
-changes:
-  - rscadd: Artifacts are now destroyable, and can have terribly consequences if destroyed.
-      Sprites by Azlan.
-  - admin: Added a prompt to select damage type for artifacts to the 'Spawn Artifact'
-      verb, as well as an admin log.
