@@ -193,6 +193,7 @@ var/list/worths = list(
 					/obj/item/pinpointer/advpinpointer = 330,
 					/obj/item/airalarm_electronics = 90,
 					/obj/item/firealarm_electronics = 80,
+					/obj/item/intercom_electronics = 80,
 					/obj/item/disk/nuclear = 10000,
 					/obj/item/disk = -90,
 					/obj/item/camera_assembly = 35,

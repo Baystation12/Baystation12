@@ -16,7 +16,7 @@
 	base_type = /obj/machinery/vending/assist
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
-	
+
 	machine_name = "vending machine"
 	machine_desc = "Holds an internal stock of items that can be dispensed on-demand or when a charged ID card is swiped, depending on the brand."
 
@@ -1201,7 +1201,7 @@
 	vend_delay = 21
 	base_type = /obj/machinery/vending/engivend
 	req_access = list(list(access_atmospherics,access_engine_equip))
-	products = list(/obj/item/clothing/glasses/meson = 2,/obj/item/device/multitool = 4,/obj/item/device/geiger = 4,/obj/item/airlock_electronics = 10,/obj/item/module/power_control = 10,/obj/item/airalarm_electronics = 10,/obj/item/cell/standard = 10,/obj/item/clamp = 10)
+	products = list(/obj/item/clothing/glasses/meson = 2,/obj/item/device/multitool = 4,/obj/item/device/geiger = 4,/obj/item/airlock_electronics = 10,/obj/item/intercom_electronics = 10,/obj/item/module/power_control = 10,/obj/item/airalarm_electronics = 10,/obj/item/cell/standard = 10,/obj/item/clamp = 10)
 	contraband = list(/obj/item/cell/high = 3)
 	premium = list(/obj/item/storage/belt/utility = 3)
 
