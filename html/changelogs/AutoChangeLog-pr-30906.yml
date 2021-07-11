@@ -1,0 +1,5 @@
+author: Taza
+delete-after: true
+changes:
+  - tweak: integrated circuits  - the video camera circuit now has a new camera network
+      pin which can be configured to any listed camera monitoring network.
