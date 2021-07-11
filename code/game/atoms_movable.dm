@@ -21,6 +21,12 @@
 	var/item_state = null // Used to specify the item state for the on-mob overlays.
 	var/does_spin = TRUE // Does the atom spin when thrown (of course it does :P)
 
+
+/atom/movable/Initialize()
+	if (!isnull(config.glide_size))
+		glide_size = config.glide_size
+	. = ..()
+
 /atom/movable/Destroy()
 	if(!(atom_flags & ATOM_FLAG_INITIALIZED))
 		crash_with("Was deleted before initalization")
