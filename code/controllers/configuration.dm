@@ -482,7 +482,7 @@
 			if ("log_admin")
 				log_admin = TRUE
 			if ("log_debug")
-				log_debug = text2num(value)
+				log_debug = TRUE
 			if ("log_game")
 				log_game = TRUE
 			if ("log_vote")
@@ -578,7 +578,7 @@
 			if ("issuereporturl")
 				issuereporturl = value
 			if ("ghosts_can_possess_animals")
-				ghosts_can_possess_animals = value
+				ghosts_can_possess_animals = TRUE
 			if ("guest_jobban")
 				guest_jobban = TRUE
 			if ("guest_ban")
@@ -619,18 +619,22 @@
 			if ("protect_roles_from_antagonist")
 				protect_roles_from_antagonist = TRUE
 			if ("probability")
-				var/prob_pos = findtext(value, " ")
-				var/prob_name = null
-				var/prob_value = null
-				if (prob_pos)
-					prob_name = lowertext(copytext(value, 1, prob_pos))
-					prob_value = copytext(value, prob_pos + 1)
-					if (prob_name in modes)
-						probabilities[prob_name] = text2num(prob_value)
+				var/regex/flatten = new (@"\s+", "g")
+				for (var/entry in value)
+					var/list/parts = splittext(replacetext(entry, flatten, " "), " ")
+					var/mode = lowertext(parts[1])
+					var/chance = text2num(parts[2])
+					var/reason
+					if (!mode)
+						reason = "Missing a tag/chance pair."
+					else if (isnull(chance) || chance < 0)
+						reason = "Not a valid probability."
+					else if (!(mode in modes))
+						reason = "Not a valid mode tag."
+					if (reason)
+						log_misc("Invalid probability config: '[value]' - [reason]")
 					else
-						log_misc("Unknown game mode probability configuration definition: [prob_name]")
-				else
-					log_misc("Incorrect probability configuration definition: [prob_name] [prob_value]")
+						probabilities[mode] = chance
 			if ("allow_random_events")
 				allow_random_events = TRUE
 			if ("kick_inactive")
