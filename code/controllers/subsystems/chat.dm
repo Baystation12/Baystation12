@@ -33,27 +33,22 @@ SUBSYSTEM_DEF(chat)
 	var/twiceEncoded = url_encode(url_encode(message)) // Double encode so that JS can consume utf-8
 	if (islist(target))
 		for(var/I in target)
-			var/client/C = resolve_client(I)
-			if (!C)
-				return
-			legacy_chat(C, original_message) //Send it to the old style output window.
-			if (!C?.chatOutput || C.chatOutput.broken) //A player who hasn't updated his skin file.
-				continue
-			if (!C.chatOutput.loaded) //Client still loading, put their messages in a queue
-				C.chatOutput.messageQueue += message
-				continue
-			payload[C] += twiceEncoded
+			queuePartTwo(I, message, original_message, twiceEncoded)
 	else
-		var/client/C = resolve_client(target)
-		if (!C)
-			return
-		legacy_chat(C, original_message) //Send it to the old style output window.
-		if (!C?.chatOutput || C.chatOutput.broken) //A player who hasn't updated his skin file.
-			return
-		if (!C.chatOutput.loaded) //Client still loading, put their messages in a queue
-			C.chatOutput.messageQueue += message
-			return
-		payload[C] += twiceEncoded
+		queuePartTwo(target, message, original_message, twiceEncoded)
+
+
+/datum/controller/subsystem/chat/proc/queuePartTwo(client/C, message, original, encoded)
+	C = resolve_client(C)
+	if (!C)
+		return
+	legacy_chat(C, original)
+	if (!C?.chatOutput || C.chatOutput.broken)
+		return
+	if (!C.chatOutput.loaded)
+		C.chatOutput.messageQueue += message
+		return
+	payload[C] += encoded
 
 
 SUBSYSTEM_DEF(ping)
@@ -65,7 +60,7 @@ SUBSYSTEM_DEF(ping)
 
 
 /datum/controller/subsystem/ping/fire(resumed)
-	FOR_BLIND(datum/chatOutput/O, chats)
+	FOR_BLIND(chatOutput/O, chats)
 		if (O.loaded && !O.broken)
 			O.updatePing()
 		if (MC_TICK_CHECK)

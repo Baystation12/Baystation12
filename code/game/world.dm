@@ -476,7 +476,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 
 	Master.Shutdown()
 
-	var/datum/chatOutput/co
+	var/chatOutput/co
 	for(var/client/C in GLOB.clients)
 		co = C.chatOutput
 		if(co)

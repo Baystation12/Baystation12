@@ -2,36 +2,57 @@
 For the main html chat area
 *********************************/
 
-GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/tmp/iconCache.sav")) //! Cache of icons for the browser output
+/// Cache of icons for the browser output
+GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/tmp/iconCache.sav"))
 
 
-#define MAX_COOKIE_LENGTH 5 //! Should match the value set in the browser js
+/// Should match the value set in the browser js
+#define MAX_COOKIE_LENGTH 5
 #define SPAM_TRIGGER_AUTOMUTE 10
 
+/client/var/chatOutput/chatOutput
 
-/// On client, created on login
-/datum/chatOutput
-	var/client/owner //! client ref
-	var/total_checks = 0 //! How many times client data has been checked
-	var/next_time_to_clear = 0 //! When to next clear the client data checks counter
-	var/loaded = FALSE //! Has the client loaded the browser output area?
-	var/list/messageQueue = list() //! If they haven't loaded chat, this is where messages will go until they do
-	var/cookieSent = FALSE //!  Has the client sent a cookie for analysis
-	var/broken = FALSE //! The client's skin prevented loading
-	var/list/connectionHistory = list() //! Contains the connection history passed from chat cookie
+/client/New()
+	chatOutput = new (src)
+	return ..()
+
+/// Member of /client that manages caching and sending messages to its holder
+/chatOutput
+	var/client/owner
+
+	/// How many times client data has been checked
+	var/total_checks = 0
+
+	/// When to next clear the client data checks counter
+	var/next_time_to_clear = 0
+
+	/// Has the client loaded the browser output area?
+	var/loaded = FALSE
+
+	/// If they haven't loaded chat, this is where messages will go until they do
+	var/list/messageQueue = list()
+
+	/// Has the client sent a cookie for analysis
+	var/cookieSent = FALSE
+
+	/// The client's skin prevented loading
+	var/broken = FALSE
+
+	/// Contains the connection history passed from chat cookie
+	var/list/connectionHistory = list()
 
 
-/datum/chatOutput/Destroy(force)
+/chatOutput/Destroy(force)
 	SSping.chats -= src
 	return ..()
 
 
-/datum/chatOutput/New(client/C)
+/chatOutput/New(client/C)
 	SSping.chats += src
 	owner = C
 
 
-/datum/chatOutput/proc/start()
+/chatOutput/proc/start()
 	if (!owner)
 		return FALSE
 	if (!winexists(owner, "browseroutput"))
@@ -48,7 +69,7 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/tmp/iconCache.sav")) //! Cache
 	return TRUE
 
 
-/datum/chatOutput/proc/load()
+/chatOutput/proc/load()
 	set waitfor = FALSE
 	if(!owner)
 		return
@@ -57,10 +78,10 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/tmp/iconCache.sav")) //! Cache
 	show_browser(owner, file('code/modules/goonchat/browserassets/html/browserOutput.html'), "window=browseroutput")
 
 
-/datum/chatOutput/Topic(href, list/href_list)
+/chatOutput/Topic(href, list/href_list)
 	if(usr.client != owner)
 		return TRUE
-	var/list/params = list() //! Build proc parameters from the form "param[paramname]=thing"
+	var/list/params = list() // Build proc parameters from the form "param[paramname]=thing"
 	for(var/key in href_list)
 		if(length(key) > 7 && findtext(key, "param")) // 7 is the amount of characters in the basic param key template.
 			params[copytext(key, 7, -1)] = href_list[key]
@@ -83,7 +104,7 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/tmp/iconCache.sav")) //! Cache
 
 
 //Called on chat output done-loading by JS.
-/datum/chatOutput/proc/doneLoading()
+/chatOutput/proc/doneLoading()
 	if(loaded)
 		return
 	loaded = TRUE
@@ -96,12 +117,12 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/tmp/iconCache.sav")) //! Cache
 	legacy_chat(owner, SPAN_DANGER("Failed to load fancy chat. Some features won't work.")) // do NOT convert to to_chat()
 
 
-/datum/chatOutput/proc/showChat()
+/chatOutput/proc/showChat()
 	winset(owner, "output", "is-visible=false")
 	winset(owner, "browseroutput", "is-disabled=false;is-visible=true")
 
 
-/datum/chatOutput/proc/updatePing()
+/chatOutput/proc/updatePing()
 	if (!owner)
 		qdel(src)
 		return
@@ -111,25 +132,25 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/tmp/iconCache.sav")) //! Cache
 /proc/syncChatRegexes()
 	for (var/user in GLOB.clients)
 		var/client/C = user
-		var/datum/chatOutput/Cchat = C.chatOutput
+		var/chatOutput/Cchat = C.chatOutput
 		if (Cchat && !Cchat.broken && Cchat.loaded)
 			Cchat.syncRegex()
 
 
-/datum/chatOutput/proc/syncRegex()
+/chatOutput/proc/syncRegex()
 	var/list/regexes = list()
 	if (regexes.len)
 		ehjax_send(data = list("syncRegex" = regexes))
 
 
-/datum/chatOutput/proc/ehjax_send(client/C = owner, window = "browseroutput", data)
+/chatOutput/proc/ehjax_send(client/C = owner, window = "browseroutput", data)
 	if(islist(data))
 		data = json_encode(data)
 	send_output(C, "[data]", "[window]:ehjaxCallback")
 
 
 //Sends client connection details to the chat to handle and save
-/datum/chatOutput/proc/sendClientData()
+/chatOutput/proc/sendClientData()
 	var/list/deets = list("clientData" = list())
 	deets["clientData"]["ckey"] = owner.ckey
 	deets["clientData"]["ip"] = owner.address
@@ -139,7 +160,7 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/tmp/iconCache.sav")) //! Cache
 
 
 //Called by client, sent data to investigate (cookie history so far)
-/datum/chatOutput/proc/analyzeClientData(cookie = "")
+/chatOutput/proc/analyzeClientData(cookie = "")
 	if(world.time  >  next_time_to_clear)
 		next_time_to_clear = world.time + (3 SECONDS)
 		total_checks = 0
@@ -177,12 +198,12 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/tmp/iconCache.sav")) //! Cache
 
 
 //Called by js client every 60 seconds
-/datum/chatOutput/proc/ping()
+/chatOutput/proc/ping()
 	return "pong"
 
 
 //Called by js client on js error
-/datum/chatOutput/proc/debug(error)
+/chatOutput/proc/debug(error)
 	log_world("\[[time2text(world.realtime, "YYYY-MM-DD hh:mm:ss")]\] Client: [(src.owner.key ? src.owner.key : src.owner)] triggered JS error: [error]")
 
 
@@ -249,11 +270,11 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/tmp/iconCache.sav")) //! Cache
 	SSchat.queue(target, message, handle_whitespace, trailing_newline)
 
 
-/datum/chatOutput/proc/swaptolightmode() //Dark mode light mode stuff. Yell at KMC if this breaks! (See darkmode.dm for documentation)
+/chatOutput/proc/swaptolightmode() //Dark mode light mode stuff. Yell at KMC if this breaks! (See darkmode.dm for documentation)
 	owner.force_white_theme()
 
 
-/datum/chatOutput/proc/swaptodarkmode()
+/chatOutput/proc/swaptodarkmode()
 	owner.force_dark_theme()
 
 
