@@ -65,6 +65,7 @@ SUBSYSTEM_DEF(ticker)
 /datum/controller/subsystem/ticker/proc/setup_tick()
 	switch(choose_gamemode())
 		if(CHOOSE_GAMEMODE_SILENT_REDO)
+			log_debug("Silently re-rolling game mode...")
 			return
 		if(CHOOSE_GAMEMODE_RETRY)
 			pregame_timeleft = 60 SECONDS
@@ -222,8 +223,10 @@ Helpers
 			mode_to_try = "extended"
 
 	if(!mode_to_try)
+		log_debug("Could not find a valid game mode from config or vote results.")
 		return
 	if(mode_to_try in bad_modes)
+		log_debug("Could not start game mode [mode_to_try] - Mode is listed in bad_modes.")
 		return
 
 	//Find the relevant datum, resolving secret in the process.
@@ -234,6 +237,7 @@ Helpers
 			mode_datum = config.pick_mode(secret_force_mode)
 		else if(!length(runnable_modes))  // Indicates major issues; will be handled on return.
 			bad_modes += mode_to_try
+			log_debug("Could not start game mode [mode_to_try] - No runnable modes available to start, or all options listed under bad modes.")
 			return
 		else
 			mode_datum = config.pick_mode(pickweight(runnable_modes))
@@ -243,6 +247,7 @@ Helpers
 		mode_datum = config.pick_mode(mode_to_try)
 	if(!istype(mode_datum))
 		bad_modes += mode_to_try
+		log_debug("Could not find a valid game mode for [mode_to_try].")
 		return
 
 	//Deal with jobs and antags, check that we can actually run the mode.
@@ -255,6 +260,7 @@ Helpers
 		mode_datum.fail_setup()
 		SSjobs.reset_occupations()
 		bad_modes += mode_datum.config_tag
+		log_debug("Could not start game mode [mode_to_try] ([mode_datum.name]) - Failed to meet requirements.")
 		return
 
 	//Declare victory, make an announcement.
