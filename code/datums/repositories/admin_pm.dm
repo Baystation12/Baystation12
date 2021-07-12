@@ -13,7 +13,7 @@ var/repository/admin_pm/admin_pm_repository = new()
 	if(receiver)
 		if(istype(receiver))
 			receiver = client_repository.get_lite_client(receiver)
-		else if(starts_with(receiver, "IRC-"))
+		else if(text_starts_with(receiver, "IRC-"))
 			receiver = get_irc_client(receiver)
 		else
 			CRASH("Invalid receiver: [log_info_line(receiver)]")
@@ -41,4 +41,3 @@ var/repository/admin_pm/admin_pm_repository = new()
 	src.message = message
 	src.sender = sender
 	src.receiver = receiver
-
