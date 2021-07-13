@@ -1,4 +1,0 @@
-author: Spookerton
-delete-after: true
-changes:
-  - tweak: Human sprites no longer width scale when rail thin or heavily built

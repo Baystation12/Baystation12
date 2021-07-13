@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - admin: Debug logs are now generated whenever a round fails to start, to aid in
-      debugging why a round is failing to start.
