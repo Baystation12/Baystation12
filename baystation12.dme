@@ -363,6 +363,7 @@
 #include "code\datums\observation\shuttle_moved.dm"
 #include "code\datums\observation\sight_set.dm"
 #include "code\datums\observation\stat_set.dm"
+#include "code\datums\observation\supermatter_status.dm"
 #include "code\datums\observation\turf_changed.dm"
 #include "code\datums\observation\unequipped.dm"
 #include "code\datums\observation\zone_selected.dm"

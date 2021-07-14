@@ -119,3 +119,21 @@
 #undef LUMR
 #undef LUMG
 #undef LUMB
+
+//Matrix math
+//Given 2 matrices mxn and nxp (row major) it multiplies their members and return an mxp matrix
+//Do make sure your lists actually have this many elements
+/proc/multiply_matrices(list/A, list/B, m, n, p)
+	var/list/result = list()
+	result.len = m * p
+
+	if(A.len == m*n && B.len == n*p)
+		for(var/row = 1; row <= m; row += 1) //For each row on left matrix
+			for(var/col = 1; col <= p; col += 1) //go over each column of the second matrix
+				var/sum = 0
+				for(var/i = 1; i <= n; i += 1) //multiply each pair
+					sum += A[(row-1)*n + i] * B[(i-1)*p + col]
+
+				result[(row-1)*p + col] = sum
+
+	return result
