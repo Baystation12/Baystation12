@@ -25,10 +25,10 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 		/obj/item/clothing/under/soviet,
 		/obj/item/clothing/under/pirate,
 		/obj/item/clothing/under/redcoat,
-		/obj/item/clothing/under/serviceoveralls,
 		/obj/item/clothing/under/captain_fly,
 		/obj/item/clothing/under/det,
 		/obj/item/clothing/under/color/brown,
+		/obj/item/clothing/under/rank/security2
 		)
 
 	var/list/raider_shoes = list(
@@ -44,6 +44,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 		/obj/item/clothing/head/pirate,
 		/obj/item/clothing/mask/bandana/red,
 		/obj/item/clothing/head/hgpiratecap,
+		/obj/item/clothing/head/soft/sec/corp/guard
 		)
 
 	var/list/raider_suits = list(
@@ -61,10 +62,9 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	var/list/raider_guns = list(
 		/obj/item/gun/energy/laser,
 		/obj/item/gun/energy/retro,
+		/obj/item/gun/energy/gun,
 		/obj/item/gun/energy/xray,
 		/obj/item/gun/energy/xray/pistol,
-		/obj/item/gun/energy/mindflayer,
-		/obj/item/gun/energy/toxgun,
 		/obj/item/gun/energy/stunrevolver,
 		/obj/item/gun/energy/ionrifle,
 		/obj/item/gun/energy/taser,
@@ -74,7 +74,6 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 		/obj/item/gun/launcher/pneumatic,
 		/obj/item/gun/projectile/automatic/machine_pistol,
 		/obj/item/gun/projectile/automatic/merc_smg,
-		/obj/item/gun/projectile/automatic/sec_smg,
 		/obj/item/gun/projectile/automatic/assault_rifle,
 		/obj/item/gun/projectile/shotgun/pump,
 		/obj/item/gun/projectile/shotgun/pump/combat,
@@ -84,7 +83,6 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 		/obj/item/gun/projectile/pistol/sec,
 		/obj/item/gun/projectile/pistol/holdout,
 		/obj/item/gun/projectile/revolver,
-		/obj/item/gun/projectile/pirate,
 		/obj/item/gun/projectile/revolver/medium,
 		/obj/item/gun/projectile/pistol/throwback
 		)
@@ -257,11 +255,12 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	icon_state = "generic"
 
 /obj/random/raider/hardsuit/spawn_choices()
-	return list(/obj/item/rig/industrial,
-				/obj/item/rig/eva,
-				/obj/item/rig/light/hacker,
+	return list(/obj/item/rig/industrial/equipped,
+				/obj/item/rig/eva/equipped,
+				/obj/item/rig/light/hacker/nvg,
 				/obj/item/rig/light,
-				/obj/item/rig/unathi
+				/obj/item/rig/unathi,
+				/obj/item/rig/hazard/equipped
 	)
 
 /obj/random/raider/lilgun
@@ -276,16 +275,16 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 				/obj/item/gun/energy/stunrevolver,
 				/obj/item/gun/projectile/shotgun/doublebarrel/sawn,
 				/obj/item/gun/energy/xray/pistol,
-				/obj/item/gun/energy/pulse_rifle/pistol,
 				/obj/item/gun/energy/plasmacutter,
 				/obj/item/gun/energy/incendiary_laser,
 				/obj/item/gun/projectile/automatic/machine_pistol,
+				/obj/item/gun/projectile/automatic/sec_smg,
 				/obj/item/gun/projectile/pistol/military/alt,
-				/obj/item/gun/projectile/pistol/holdout,
 				/obj/item/gun/projectile/revolver,
 				/obj/item/gun/projectile/revolver/medium,
 				/obj/item/gun/energy/retro,
 				/obj/item/gun/projectile/pistol/throwback,
+				/obj/item/gun/energy/captain,
 				/obj/item/gun/energy/ionrifle/small
 	)
 
@@ -298,21 +297,69 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 /obj/random/raider/biggun/spawn_choices()
 	return list(/obj/item/gun/energy/lasercannon,
 				/obj/item/gun/energy/laser,
-				/obj/item/gun/energy/captain,
 				/obj/item/gun/energy/pulse_rifle,
-				/obj/item/gun/energy/pulse_rifle/carbine,
 				/obj/item/gun/energy/sniperrifle,
 				/obj/item/gun/projectile/shotgun/doublebarrel,
 				/obj/item/gun/energy/xray,
 				/obj/item/gun/projectile/automatic/battlerifle,
 				/obj/item/gun/projectile/automatic/semistrip,
 				/obj/item/gun/projectile/automatic/assault_rifle,
-				/obj/item/gun/projectile/automatic/sec_smg,
 				/obj/item/gun/energy/crossbow/largecrossbow,
 				/obj/item/gun/projectile/shotgun/pump/combat,
 				/obj/item/gun/energy/ionrifle,
 				/obj/item/gun/projectile/shotgun/pump
 	)
+
+/obj/random/loot/raider/spawn_choices()
+	return list(/obj/random/energy = 10,
+				/obj/random/projectile = 10,
+				/obj/random/voidhelmet = 10,
+				/obj/random/voidsuit = 10,
+				/obj/item/clothing/mask/muzzle = 7,
+				/obj/item/clothing/mask/gas/vox = 8,
+				/obj/item/clothing/mask/gas/syndicate = 10,
+				/obj/item/clothing/glasses/night = 3,
+				/obj/item/clothing/glasses/welding/superior = 7,
+				/obj/item/clothing/head/collectable/petehat = 4,
+				/obj/item/clothing/suit/storage/vest/merc = 3,
+				/obj/item/clothing/suit/straight_jacket = 6,
+				/obj/item/clothing/head/helmet/merc = 3,
+				/obj/item/stack/material/diamond/ten = 7,
+				/obj/item/stack/material/glass/phoronrglass/ten = 7,
+				/obj/item/stack/material/marble/ten = 8,
+				/obj/item/stack/material/phoron/ten = 7,
+				/obj/item/stack/material/gold/ten = 7,
+				/obj/item/stack/material/silver/ten = 7,
+				/obj/item/stack/material/osmium/ten = 7,
+				/obj/item/stack/material/platinum/ten = 8,
+				/obj/item/stack/material/tritium/ten = 7,
+				/obj/item/stack/material/mhydrogen/ten = 6,
+				/obj/item/stack/material/plasteel/ten = 9,
+				/obj/item/storage/box/monkeycubes = 5,
+				/obj/item/storage/box/monkeycubes/neaeracubes = 4,
+				/obj/item/storage/box/monkeycubes/stokcubes = 4,
+				/obj/item/storage/box/monkeycubes/farwacubes = 4,
+				/obj/item/storage/firstaid/surgery = 4,
+				/obj/item/cell/infinite = 1,
+				/obj/item/archaeological_find = 2,
+				/obj/machinery/artifact = 1,
+				/obj/item/device/multitool/hacktool = 2,
+				/obj/item/surgicaldrill = 7,
+				/obj/item/FixOVein = 7,
+				/obj/item/retractor = 7,
+				/obj/item/hemostat = 7,
+				/obj/item/cautery = 7,
+				/obj/item/bonesetter = 7,
+				/obj/item/bonegel = 7,
+				/obj/item/circular_saw = 7,
+				/obj/item/scalpel = 7,
+				/obj/item/melee/baton/loaded = 9,
+				/obj/item/device/radio/headset/syndicate = 6)
+
+/obj/item/paper/detergentpods
+	name = "Detergent pods IMPORTANT ! ! !"
+	info = "What are you guys doing with those damn detergent pods, eating them?<BR>our washing mashine is still broken and despite that we used 3 bags in last week!<BR><BR>and someone tell vox to cut use of lavender perfumes, it smells like if it escaped from detergent factory."
+	language = LANGUAGE_SPACER
 
 /obj/item/vox_changer/raider
 	allowed_role = "Raider"

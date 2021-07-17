@@ -114,6 +114,22 @@
 	icon_state = "white"
 	},
 /area/map_template/syndicate_mothership/raider_base)
+"au" = (
+/obj/structure/closet{
+	name = "Clothing Storage"
+	},
+/obj/effect/floor_decal/carpet,
+/obj/item/clothing/under/lawyer/black,
+/obj/item/clothing/under/lawyer/bluesuit,
+/obj/item/clothing/under/rank/mailman,
+/obj/item/clothing/accessory/storage/webbing_large,
+/obj/item/clothing/under/rank/dispatch,
+/obj/random/pcarrieraccessory,
+/turf/unsimulated/floor{
+	icon_state = "carpet";
+	name = "carpet"
+	},
+/area/map_template/syndicate_mothership/raider_base)
 "av" = (
 /obj/vehicle/bike/thermal,
 /turf/unsimulated/floor{
@@ -306,7 +322,7 @@
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "aR" = (
-/obj/random/ammo,
+/obj/random/loot/raider,
 /turf/unsimulated/floor{
 	icon_state = "asteroid"
 	},
@@ -691,20 +707,11 @@
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "bF" = (
-/obj/structure/closet{
-	name = "Clothing Storage"
-	},
-/obj/effect/floor_decal/carpet,
-/obj/item/clothing/under/lawyer/black,
-/obj/item/clothing/under/lawyer/bluesuit,
-/obj/item/clothing/under/rank/mailman,
-/obj/item/clothing/accessory/storage/webbing_large,
-/obj/item/clothing/under/rank/dispatch,
-/turf/unsimulated/floor{
-	icon_state = "carpet";
-	name = "carpet"
-	},
-/area/map_template/syndicate_mothership/raider_base)
+/obj/structure/table/steel,
+/obj/random/plushie,
+/obj/random/smallhandgun,
+/turf/simulated/floor/shuttle/red,
+/area/map_template/skipjack_station/start)
 "bG" = (
 /obj/structure/undies_wardrobe,
 /obj/effect/floor_decal/carpet,
@@ -750,7 +757,7 @@
 /obj/item/tray{
 	pixel_y = 5
 	},
-/obj/item/storage/backpack,
+/obj/random/backpack,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -907,7 +914,7 @@
 "cc" = (
 /obj/structure/table/woodentable,
 /obj/item/reagent_containers/glass/rag,
-/obj/random/ammo,
+/obj/random/loot/raider,
 /turf/unsimulated/floor{
 	icon_state = "wood"
 	},
@@ -929,7 +936,7 @@
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "cf" = (
-/obj/item/storage/backpack,
+/obj/random/backpack,
 /turf/unsimulated/floor{
 	icon_state = "asteroid"
 	},
@@ -1137,8 +1144,22 @@
 /turf/simulated/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
 "cF" = (
-/obj/structure/table/steel,
-/obj/random/plushie,
+/obj/structure/table/rack,
+/obj/item/melee/energy/sword/pirate,
+/obj/item/tank/oxygen,
+/obj/item/clothing/shoes/magboots,
+/obj/random/voidsuit,
+/obj/random/voidhelmet,
+/obj/random/maintenance,
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/random/pcarrier,
+/obj/random/pcarrier,
+/obj/random/pcarrierplate,
+/obj/random/pcarrierplate,
+/obj/random/pcarrieraccessory,
+/obj/random/pcarrieraccessory,
 /turf/simulated/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
 "cG" = (
@@ -1356,25 +1377,12 @@
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
 "de" = (
-/obj/structure/table/rack,
-/obj/item/melee/energy/sword/pirate,
-/obj/item/clothing/suit/pirate,
-/obj/item/clothing/suit/pirate,
-/obj/item/tank/oxygen,
-/obj/item/clothing/shoes/magboots,
-/obj/random/voidsuit,
-/obj/random/voidhelmet,
-/obj/random/maintenance,
-/obj/machinery/light/small{
-	dir = 8
-	},
+/obj/random/pcarriertag,
 /turf/simulated/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
 "df" = (
 /obj/structure/table/rack,
 /obj/item/melee/energy/sword/pirate,
-/obj/item/clothing/suit/pirate,
-/obj/item/clothing/suit/pirate,
 /obj/item/tank/oxygen,
 /obj/item/clothing/shoes/magboots,
 /obj/random/voidsuit,
@@ -1384,6 +1392,12 @@
 	dir = 4;
 	icon_state = "bulb1"
 	},
+/obj/random/pcarrier,
+/obj/random/pcarrier,
+/obj/random/pcarrierplate,
+/obj/random/pcarrierplate,
+/obj/random/pcarrieraccessory,
+/obj/random/pcarrieraccessory,
 /turf/simulated/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
 "dg" = (
@@ -1398,6 +1412,7 @@
 /obj/random/voidsuit,
 /obj/random/voidhelmet,
 /obj/random/maintenance,
+/obj/random/pcarriertag,
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
 "dh" = (
@@ -1426,6 +1441,7 @@
 /obj/random/voidsuit,
 /obj/random/voidhelmet,
 /obj/random/raider/biggun,
+/obj/random/pcarriertag,
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
 "dk" = (
@@ -1478,7 +1494,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
 "dr" = (
-/obj/random/ammo,
+/obj/random/loot/raider,
 /turf/unsimulated/floor{
 	icon_state = "carpet";
 	name = "carpet"
@@ -1605,6 +1621,13 @@
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
+"dJ" = (
+/obj/structure/table/steel,
+/obj/random/maintenance,
+/obj/item/clothing/glasses/thermal,
+/obj/random/smallhandgun,
+/turf/simulated/floor/shuttle/red,
+/area/map_template/skipjack_station/start)
 "dK" = (
 /obj/structure/closet/crate/freezer/rations,
 /obj/item/clothing/mask/gas/cyborg,
@@ -1633,10 +1656,9 @@
 /turf/simulated/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
 "dN" = (
-/obj/structure/table/steel,
-/obj/random/maintenance,
-/obj/item/clothing/glasses/thermal,
-/turf/simulated/floor/shuttle/red,
+/obj/item/paper/detergentpods,
+/obj/item/storage/box/detergent,
+/turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
 "dO" = (
 /obj/structure/bed/chair{
@@ -1716,6 +1738,7 @@
 /obj/item/deck/cards,
 /obj/structure/table/steel,
 /obj/random/raider/lilgun,
+/obj/random/pcarriertag,
 /turf/simulated/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
 "dZ" = (
@@ -1863,6 +1886,7 @@
 /area/map_template/skipjack_station/start)
 "ew" = (
 /obj/structure/bed,
+/obj/random/badge,
 /turf/simulated/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
 "ex" = (
@@ -1891,6 +1915,8 @@
 /obj/structure/closet/crate,
 /obj/item/clothing/suit/pirate,
 /obj/item/clothing/under/rank/medical/scrubs/black,
+/obj/random/badge,
+/obj/random/pcarriertag,
 /turf/simulated/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
 "eB" = (
@@ -4019,7 +4045,7 @@ dm
 du
 dm
 dm
-dm
+dN
 eg
 el
 aa
@@ -4073,7 +4099,7 @@ aM
 aY
 aY
 aY
-bF
+au
 bq
 an
 cg
@@ -4374,7 +4400,7 @@ cw
 cw
 cw
 cT
-de
+cF
 do
 cU
 dB
@@ -4587,20 +4613,20 @@ aa
 aa
 aa
 cz
-cF
+bF
 cM
 cV
 cU
 dp
 cU
 cU
-dN
+dJ
 dY
 ei
 cU
 dp
 cU
-cU
+de
 eG
 eg
 el
@@ -4662,7 +4688,7 @@ cz
 cD
 cN
 cU
-cU
+de
 do
 dw
 cU
