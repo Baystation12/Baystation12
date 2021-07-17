@@ -54,11 +54,6 @@
 		overlays += overlay_image(icon, "pick_handle", flags=RESET_COLOR)
 	. = ..()
 
-/obj/item/pickaxe/hammer
-	name = "sledgehammer"
-	desc = "A mining hammer made of reinforced metal. You feel like smashing your boss in the face with this."
-	icon = 'icons/obj/weapons/melee_physical.dmi'
-
 /obj/item/pickaxe/drill
 	name = "advanced mining drill" // Can dig sand as well!
 	icon_state = "handdrill"

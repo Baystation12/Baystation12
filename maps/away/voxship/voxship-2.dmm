@@ -1652,7 +1652,7 @@
 /obj/item/storage/ore,
 /obj/item/storage/ore,
 /obj/item/pickaxe/jackhammer,
-/obj/item/pickaxe/hammer,
+/obj/item/material/twohanded/sledgehammer,
 /obj/item/pickaxe/drill,
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/scavship)
