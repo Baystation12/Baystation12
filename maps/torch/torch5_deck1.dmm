@@ -845,6 +845,11 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
+/obj/structure/table/standard,
+/obj/item/reagent_containers/glass/beaker{
+	pixel_x = 4;
+	pixel_y = 9
+	},
 /turf/simulated/floor/tiled/dark,
 /area/rnd/development)
 "abK" = (
@@ -22095,7 +22100,6 @@
 /area/rnd/development)
 "lnb" = (
 /obj/machinery/r_n_d/circuit_imprinter,
-/obj/item/reagent_containers/glass/beaker/sulphuric,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/reagent_dispensers/acid{
 	density = 0;
@@ -24869,6 +24873,7 @@
 	pixel_x = 26;
 	pixel_y = 0
 	},
+/obj/machinery/light,
 /turf/simulated/floor/tiled/white,
 /area/rnd/development)
 "oPD" = (
