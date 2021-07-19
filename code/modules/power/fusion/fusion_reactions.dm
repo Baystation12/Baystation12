@@ -11,6 +11,7 @@ var/list/fusion_reactions
 	var/list/products = list()
 	var/minimum_reaction_temperature = 100
 	var/priority = 100
+	var/maximum_reaction_temperature = 0 // Do not raise the temperature if exceeds this
 
 /decl/fusion_reaction/proc/handle_reaction_special(var/obj/effect/fusion_em_field/holder)
 	return 0
@@ -165,3 +166,63 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 	energy_production = 12
 	radiation = 3
 	instability = 2.5
+
+// In-Dev
+/decl/fusion_reaction/test
+	p_react = GAS_HELIUM
+	s_react = GAS_HELIUM
+	minimum_energy_level = 0
+	minimum_reaction_temperature = 0
+	energy_consumption = 0
+	energy_production = 1
+	radiation = 0
+	instability = 0
+	products = list("positron" = 1, GAS_HELIUM = 1)
+	priority = 100
+
+/decl/fusion_reaction/debug
+	products = null
+	minimum_energy_level = 0
+	minimum_reaction_temperature = 0
+	energy_consumption = 0
+	energy_production = 0
+	radiation = 0
+	instability = 0
+	priority = 0
+
+// Reaction: carbon-12-6 + hydrogen-1-1 --> nitrogen-13-7 + gamma + 1.95 MeV
+/decl/fusion_reaction/debug/cno_one
+	p_react = "carbon"
+	s_react = GAS_HYDROGEN
+	products = list("iso-nitrogen" = 1, "gamma particle" = 1)
+
+// Reaction: nitrogen-13-7 --> carbon-13-6 + positron + neutrino + 1.20 MeV
+decl/fusion_reaction/debug/cno_two
+	p_react = "iso-nitrogen"
+	s_react = null
+	products = list("iso-carbon" = 1, "positron" = 1, "neutrino" = 1)
+
+// Reaction: carbon-13-6 + hydrogen-1-1 --> nitrogen-14-7 + gamma + 7.54 MeV
+decl/fusion_reaction/debug/cno_three
+	p_react = "iso-carbon"
+	s_react = GAS_HYDROGEN
+	products = list(GAS_NITROGEN = 1, "gamma particle" = 1)
+
+// Reaction: nitrogen-14-7 + hydrogen-1-1 --> oxygen-15-8 + gamma + 7.35 MeV
+decl/fusion_reaction/debug/cno_four
+	p_react = GAS_NITROGEN
+	s_react = GAS_HYDROGEN
+	products = list("iso-oxygen" = 1, "gamma particle" = 1)
+
+// Reaction: oxygen-15-8 --> nitrogen-15-7 + positron + neutrino + 1.73 MeV
+decl/fusion_reaction/debug/cno_five
+	p_react = "iso-oxygen"
+	s_react = null
+	products = list("iso-nitrogen-15" = 1, "positron" = 1, "neutrino" = 1)
+
+// Reaction: nitrogen-15-7 + hydrogen-1-1 --> carbon-12-6 + helium-4-2 + 4.96 MeV
+decl/fusion_reaction/debug/cno_six
+	p_react = "iso-nitrogen-15"
+	s_react = GAS_HYDROGEN
+	products = list("carbon" = 1, GAS_HELIUM)
+
