@@ -59,13 +59,55 @@
 	heating_point = null
 	heating_products = null
 
-/datum/reagent/toxin/amatoxin
+/datum/reagent/toxin/amatoxin // Delayed action poison, very dangerous but takes a while before doing anything.
 	name = "Amatoxin"
 	description = "A powerful poison derived from certain species of mushroom."
 	taste_description = "mushroom"
 	reagent_state = LIQUID
+	metabolism = REM * 0.5
 	color = "#792300"
 	strength = 10
+
+/datum/reagent/toxin/amatoxin/affect_blood(mob/living/carbon/M, alien, removed)
+	if(alien == IS_DIONA)
+		return
+	M.reagents.add_reagent(/datum/reagent/toxin/amaspores, 2 * removed)
+
+/datum/reagent/toxin/amaspores
+	name = "Amaspores"
+	description = "The secondary component to amatoxin poisoning, remaining dormant for a time before causing rapid organ and tissue decay."
+	taste_description = "dusty dirt"
+	reagent_state = LIQUID
+	metabolism = REM * 4 // Extremely quick to act once the amatoxin has left the body
+	color = "#330e00"
+	strength = 30
+
+/datum/reagent/toxin/amaspores/affect_blood(mob/living/carbon/M, alien, removed)
+	if(alien == IS_DIONA)
+		return
+
+	if(M.chem_doses[/datum/reagent/toxin/amatoxin] > 0)
+		M.reagents.add_reagent(/datum/reagent/toxin/amaspores, metabolism) // The spores lay dormant for as long as any traces of amatoxin remain
+		if (prob(5))
+			to_chat(M, SPAN_DANGER("Everything itches, how uncomfortable!"))
+		if (prob(10))
+			to_chat(M, SPAN_WARNING("Your eyes are watering, it's hard to see!"))
+			M.eye_blurry = max(M.eye_blurry, 10)
+		if (prob(10))
+			to_chat(M, SPAN_DANGER("Your throat itches uncomfortably!"))
+			M.custom_emote(2, "coughs!")
+		return
+
+	M.add_chemical_effect(CE_SLOWDOWN, 1)
+
+	if (prob(15))
+		M.Weaken(5)
+		M.add_chemical_effect(CE_VOICELOSS, 5)
+	if (prob(30))
+		M.eye_blurry = max(M.eye_blurry, 10)
+
+	M.take_organ_damage(3 * removed, 0, ORGAN_DAMAGE_FLESH_ONLY)
+	M.adjustToxLoss(5 * removed, 0, ORGAN_DAMAGE_FLESH_ONLY)
 
 /datum/reagent/toxin/carpotoxin
 	name = "Carpotoxin"
@@ -73,8 +115,22 @@
 	taste_description = "fish"
 	reagent_state = LIQUID
 	color = "#003333"
+
 	target_organ = BP_BRAIN
 	strength = 10
+
+/datum/reagent/toxin/carpotoxin/affect_blood(mob/living/carbon/M, alien, removed)
+	if(alien == IS_DIONA)
+		return
+
+	var/effectiveness = 1
+	var/effective_dose = 2
+
+	if(M.chem_doses[type] < effective_dose)
+		effectiveness = M.chem_doses[type]/effective_dose
+	else if(volume < effective_dose)
+		effectiveness = volume/effective_dose
+	M.add_chemical_effect(CE_BLOCKAGE, (80 * effectiveness)/100)
 
 /datum/reagent/toxin/venom
 	name = "Spider Venom"
@@ -334,20 +390,51 @@
 	taste_description = "acid"
 	reagent_state = LIQUID
 	color = "#c8a5dc"
+	metabolism = REM * 0.5
 	overdose = REAGENTS_OVERDOSE
 	value = 2.4
 
-/datum/reagent/lexorin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
+/datum/reagent/lexorin/affect_blood(mob/living/carbon/M, alien, removed)
+	if(alien == IS_DIONA || alien == IS_VOX) // Lexorin now focuses on removing oxygen from the blood, it wouldn't make sense that these two races are affected
 		return
 	if(alien == IS_SKRELL)
-		M.take_organ_damage(2.4 * removed, 0, ORGAN_DAMAGE_FLESH_ONLY)
-		if(M.losebreath < 22.5)
+		M.take_organ_damage(8 * removed, 0, ORGAN_DAMAGE_FLESH_ONLY)
+		if (prob(10))
+			M.visible_message(
+				SPAN_WARNING("\The [M]'s skin fizzles and flakes away!"),
+				SPAN_DANGER("Your skin fizzles and flakes away!")
+			)
+		if(M.losebreath < 45)
 			M.losebreath++
 	else
-		M.take_organ_damage(3 * removed, 0, ORGAN_DAMAGE_FLESH_ONLY)
-		if(M.losebreath < 15)
+		M.take_organ_damage(10 * removed, 0, ORGAN_DAMAGE_FLESH_ONLY)
+		if (prob(10))
+			M.visible_message(
+				SPAN_WARNING("\The [M]'s skin fizzles and flakes away!"),
+				SPAN_DANGER("Your skin fizzles and flakes away!")
+			)
+		if(M.losebreath < 30)
 			M.losebreath++
+	M.adjustOxyLoss(15 * removed)
+
+/datum/reagent/lexorin/affect_touch(mob/living/carbon/M, alien, removed)
+	if (alien == IS_VOX || alien == IS_DIONA) // Vox & Diona shouldn't be effected by skin permeable chemicals
+		return
+
+	touch_met = volume // immediately permiates the skin, also avoids bugs with chemical duplication.
+
+	// The warning messages should only display once per splash, all of the chemicals upon the skin should be absorbed in one tick.
+	M.visible_message(
+		SPAN_WARNING("\The [M]'s skin fizzles and flakes on contact with the liquid!"),
+		SPAN_DANGER("You feel a painful fizzling and your skin begins to flake!.")
+	)
+
+	if(alien == IS_SKRELL) // Skrell breathe through their skin, seems logical that this would be more effective
+		M.reagents.add_reagent(/datum/reagent/lexorin, 0.75 * removed)
+	else
+		M.reagents.add_reagent(/datum/reagent/lexorin, 0.5 * removed)
+
+
 
 /datum/reagent/mutagen
 	name = "Unstable mutagen"
@@ -586,7 +673,7 @@
 	M.make_dizzy(drug_strength)
 	M.confused = max(M.confused, drug_strength * 5)
 
-/datum/reagent/impedrezene
+/datum/reagent/impedrezene // Impairs mental function correctly, takes an overwhelming dose to kill.
 	name = "Impedrezene"
 	description = "Impedrezene is a narcotic that impedes one's ability by slowing down the higher brain cell functions."
 	taste_description = "numbness"
@@ -595,16 +682,25 @@
 	overdose = REAGENTS_OVERDOSE
 	value = 1.8
 
-/datum/reagent/impedrezene/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/impedrezene/affect_blood(mob/living/carbon/M, alien, removed)
 	if(alien == IS_DIONA)
 		return
+
 	M.jitteriness = max(M.jitteriness - 5, 0)
+	M.add_chemical_effect(M.add_chemical_effect(CE_SLOWDOWN, 1))
+
 	if(prob(80))
-		M.adjustBrainLoss(5.25 * removed)
+		M.confused = max(M.confused, 10)
 	if(prob(50))
 		M.drowsyness = max(M.drowsyness, 3)
 	if(prob(10))
 		M.emote("drool")
+		M.apply_effect(STUTTER, 3)
+
+	if (M.getBrainLoss() < 60)
+		M.adjustBrainLoss(14 * removed)
+	else
+		M.adjustBrainLoss(7 * removed)
 
 /datum/reagent/mindbreaker
 	name = "Mindbreaker Toxin"
