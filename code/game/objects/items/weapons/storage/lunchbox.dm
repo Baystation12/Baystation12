@@ -8,6 +8,7 @@
 	max_w_class = ITEM_SIZE_SMALL
 	var/filled = FALSE
 	attack_verb = list("lunched")
+	allow_slow_dump = TRUE
 
 /obj/item/storage/lunchbox/New()
 	..()
