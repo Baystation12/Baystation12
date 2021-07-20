@@ -66,8 +66,6 @@
 	slot = ACCESSORY_SLOT_ARMOR_C
 	flags_inv = CLOTHING_BULKY
 
-/obj/item/clothing/accessory/armorplate/get_fibers()
-	return null	//plates do not shed
 
 /obj/item/clothing/accessory/armorplate/sneaky
 	name = "low-profile armor vest"
