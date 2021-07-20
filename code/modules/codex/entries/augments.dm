@@ -1,7 +1,7 @@
 /datum/codex_entry/cbm
 	associated_paths = list(/obj/item/device/compact_bionic_module)
 	display_name = "Compact Bionic Module/CBM"
-	antag_text = "<p>Compact bionic modules are one-use installers pre-loaded with medical software and an augment. Due to safety concerns and their lack of licensing or registration, they are outlawed in most Sol Central Government territories, and are considered contraband. Activating it in-hand can be used to install an augment in the configured location by first tearing open an incision, then installing the augment, and finally sealing the wound.</p>\
+	antag_text = "<p>Compact bionic modules are one-use installers pre-loaded with medical software and an augment. Activating it in-hand can be used to install an augment in the configured location by first tearing open an incision, then installing the augment, and finally sealing the wound.</p>\
 \
 	<p>To use:</p>\
 	<ol>\
