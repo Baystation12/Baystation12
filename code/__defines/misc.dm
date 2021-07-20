@@ -279,7 +279,6 @@
 
 //Misc text define. Does 4 spaces. Used as a makeshift tabulator.
 #define FOURSPACES "&nbsp;&nbsp;&nbsp;&nbsp;"
-#define CLIENT_FROM_VAR(I) (ismob(I) ? I:client : (isclient(I) ? I : (istype(I, /datum/mind) ? I:current?:client : null)))
 
 #define INCREMENT_WORLD_Z_SIZE world.maxz++; if (SSzcopy.zlev_maximums.len) { SSzcopy.calculate_zstack_limits() }
 
@@ -292,4 +291,3 @@
 #define INIT_MACHINERY_PROCESS_COMPONENTS 0x2
 #define INIT_MACHINERY_PROCESS_ALL 0x3
 //--
-
