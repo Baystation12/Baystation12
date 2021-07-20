@@ -211,12 +211,16 @@ var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown"
 // Overridable Procs
 //
 
-// Called when wires cut/mended.
-/datum/wires/proc/UpdateCut(var/index, var/mended)
+/// Called when wires cut/mended.
+/datum/wires/proc/UpdateCut(index, mended)
 	return
 
-// Called when wire pulsed. Add code here.
-/datum/wires/proc/UpdatePulsed(var/index)
+/// Called when wire pulsed. Add code here.
+/datum/wires/proc/UpdatePulsed(index)
+	return
+
+/// Intended to be called when a pulsed wire 'resets'. You'll have to call this yourself in an `addtimer()` call in `UpdatePulsed()`.
+/datum/wires/proc/ResetPulsed(index)
 	return
 
 /datum/wires/proc/examine(index, mob/user)
