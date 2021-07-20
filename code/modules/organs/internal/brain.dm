@@ -259,8 +259,8 @@
 
 /obj/item/organ/internal/brain/surgical_fix(mob/user)
 	var/blood_volume = owner.get_blood_oxygenation()
-	if(blood_volume < BLOOD_VOLUME_SURVIVE)
-		to_chat(user, "<span class='danger'>Parts of [src] didn't survive the procedure due to lack of air supply!</span>")
+	if(blood_volume < BLOOD_VOLUME_BAD)
+		to_chat(user, SPAN_DANGER("Parts of [src] didn't survive the procedure due to lack of air supply!"))
 		set_max_damage(Floor(max_damage - 0.25*damage))
 	heal_damage(damage)
 
