@@ -50,3 +50,14 @@
 	desc = "An innocuous-looking space carp plushie. Add water and step back for a nasty surprise!"
 	item_cost = 10
 	path = /obj/item/dehydrated_carp
+
+/datum/uplink_item/item/stealthy_weapons/plush_bomb
+	name = "Plushie Bomb"
+	desc = "A cuddly plushie implanted with a voice-activated bomb. Set the trigger phrase and run for an explosive ending!"
+	item_cost = 20
+	path = /obj/item/plushbomb
+
+/datum/uplink_item/item/stealthy_weapons/plush_bomb/get_goods(obj/item/device/uplink/U, loc)
+	var/plushtype = pick(typesof(path))
+	var/obj/item/I = new plushtype(loc)
+	return I
