@@ -5,6 +5,7 @@
 	origin_tech = list(TECH_COMBAT = 1)
 	matter = list(MATERIAL_STEEL = 100, MATERIAL_WASTE = 10)
 	var/armed = 0
+	var/strong = 0
 
 /obj/item/device/assembly/mousetrap/examine(mob/user)
 	. = ..()
@@ -28,11 +29,15 @@
 		switch(type)
 			if("feet")
 				if(!H.shoes)
-					affecting = H.get_organ(pick(BP_L_LEG, BP_R_LEG))
+					affecting = H.get_organ(pick(BP_L_FOOT, BP_R_FOOT))
+					if(strong==1)
+						affecting.fracture()
 					H.Weaken(3)
 			if(BP_L_HAND, BP_R_HAND)
 				if(!H.gloves)
 					affecting = H.get_organ(type)
+					if(strong==1)
+						affecting.fracture()
 					H.Stun(3)
 		if(affecting)
 			affecting.take_external_damage(1, 0)
@@ -123,3 +128,15 @@
 
 	layer = MOUSETRAP_LAYER
 	to_chat(usr, "<span class='notice'>You hide [src].</span>")
+
+/obj/item/device/assembly/mousetrap/attackby(obj/item/W as obj, mob/user as mob)
+	if (isWrench(W))
+		if (strong == 0)
+			strong = 1
+			to_chat(user, "You ratchet the spring to full strength!")
+		else
+			strong = 0
+			to_chat(user, "You loosen the spring back to normal.")
+		playsound(W.loc, 'sound/items/Ratchet.ogg', 50, 1)
+	..()
+	return
