@@ -27,6 +27,7 @@
 	max_storage_space = DEFAULT_BOX_STORAGE
 	use_sound = 'sound/effects/storage/box.ogg'
 	var/foldable = /obj/item/stack/material/cardboard	// BubbleWrap - if set, can be folded (when empty) into a sheet of cardboard
+	allow_slow_dump = TRUE
 
 /obj/item/storage/box/large
 	name = "large box"
