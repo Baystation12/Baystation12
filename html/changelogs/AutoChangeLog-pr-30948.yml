@@ -1,0 +1,5 @@
+author: Fre3bie
+delete-after: true
+changes:
+  - rscadd: Added verb to dump contents from held bags, boxes, etc. Similar to mining/botany
+      bags, however requires a short warm-up.
