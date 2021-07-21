@@ -1,0 +1,4 @@
+author: Taza
+delete-after: true
+changes:
+  - rscadd: integrated circuits - there is now a new string filter circuit
