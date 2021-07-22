@@ -475,16 +475,18 @@ default behaviour is:
 	return
 
 /mob/living/proc/update_occupied_sector(var/new_z)
-	var/obj/om_obj_old = map_sectors["[last_z]"]
-	var/obj/om_obj_new = map_sectors["[new_z]"]
-	if(om_obj_old == om_obj_new) //Some overmap objects span multiple z's.
+	update_sector = 0
+	if(last_z == new_z)
 		return
+	var/obj/effect/overmap/om_obj_old = map_sectors["[last_z]"]
+	last_z = new_z
+	if(last_z == new_z || new_z in om_obj_old.map_z) //Some overmap objects span multiple z's.
+		return
+	var/obj/om_obj_new = map_sectors["[new_z]"]
 	if(om_obj_old)
 		GLOB.mobs_in_sectors[om_obj_old] -= src
 	if(om_obj_new)
 		GLOB.mobs_in_sectors[om_obj_new] |= list(src) // |= is used instead of += to avoid duplication
-
-	last_z = z
 
 /mob/living/Move(a, b, flag)
 	if (buckled)
@@ -587,7 +589,7 @@ default behaviour is:
 		for(var/mob/living/carbon/slime/M in view(1,src))
 			M.UpdateFeed()
 
-	if(z != last_z)
+	if(update_sector)
 		update_occupied_sector(z)
 
 /mob/living/verb/resist()

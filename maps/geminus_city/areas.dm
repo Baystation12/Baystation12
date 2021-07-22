@@ -11,11 +11,9 @@
 	name = "\improper Geminus City - North"
 	icon_state = "yellow"
 
-
 /area/planets/Geminus/outdoor/south
 	name = "\improper Geminus City - South"
 	icon_state = "blue"
-
 
 /area/planets/Geminus/outdoor/west
 	name = "\improper Geminus City - West"
@@ -84,34 +82,35 @@
 /area/planets/Geminus/indoor/courtroom
 	name = "\improper Courtroom"
 	icon_state = "courtroom"
-
+/*
 /area/planets/Geminus/indoor/living1nw
 	name = "\improper Northwest Appartment Level 1"
 	icon_state = "courtroom"
 
 /area/planets/Geminus/indoor/living1ne
-	name = "\improper Northeast Appartment Level 1"
+	name = "\improper Northeast Apartment Level 1"
 	icon_state = "courtroom"
 
 /area/planets/Geminus/indoor/living1sw
-	name = "\improper Southwest Appartment Level 1"
+	name = "\improper Southwest Apartment Level 1"
 	icon_state = "courtroom"
 
-/*/area/planets/Geminus/indoor/living2nw
+/area/planets/Geminus/indoor/living2nw
 	name = "\improper Northwest Appartment Level 2"
-	icon_state = "courtroom"*/
+	icon_state = "courtroom"
 
-/*/area/planets/Geminus/indoor/living2ne
+/area/planets/Geminus/indoor/living2ne
 	name = "\improper Northeast Appartment Level 2"
-	icon_state = "courtroom"*/
+	icon_state = "courtroom"
 
-/*/area/planets/Geminus/indoor/living2sw
+/area/planets/Geminus/indoor/living2sw
 	name = "\improper Southwest Appartment Level 2"
-	icon_state = "courtroom"*/
+	icon_state = "courtroom"
 
-/*/area/planets/Geminus/indoor/labs1
+/area/planets/Geminus/indoor/labs1
 	name = "\improper Research and development level 1"
-	icon_state = "courtroom"*/
+	icon_state = "courtroom"
+*/
 
 
 /area/planets/Geminus/indoor/chapel
@@ -157,11 +156,11 @@
 /area/planets/Geminus/indoor/cargo
 	name = "\improper Cargo"
 	icon_state = "quart"
-
+/*
 /area/planets/Geminus/indoor/disposal_bay
 	name = "\improper Disposal Bay"
 	icon_state = "blue"
-
+*/
 /*
 /area/planets/Geminus/indoor/museum
 	name = "\improper Geminus Museum"
@@ -189,10 +188,11 @@
 /area/planets/Geminus/indoor/tech_storage
 	name = "\improper Tech Shop"
 	icon_state = "green"
-
+/*
 /area/planets/Geminus/indoor/mining
 	name = "\improper Mine"
 	icon_state = "mining"
+*/
 
 /area/planets/Geminus/indoor/armory
 	name = "\improper City Police Armory"
@@ -213,12 +213,14 @@
 /area/planets/Geminus/outdoor/space_elevator
 	name = "\improper Space Elevator"
 	icon_state = "observatory"
-
+/*
 /area/planets/Geminus/outdoor/spaceport
 	name = "\improper Spaceport"
 	icon_state = "hangar"
+*/
 
 //COLONY MAC//
+/*
 /area/planets/Geminus/outdoor/MAC
 	name = "\improper Geminus MAC"
 	icon_state = "firingrange"
@@ -226,7 +228,7 @@
 /area/planets/Geminus/outdoor/MAC/upper
 	name = "\improper Geminus MAC - Upper Level"
 	icon_state = "firingrange"
-
+*/
 //UNDERGROUND//
 /area/geminus_underground
 	name = "\improper Geminus Underground Northeast"
