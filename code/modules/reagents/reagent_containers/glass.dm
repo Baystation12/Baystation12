@@ -91,6 +91,9 @@
 /obj/item/reagent_containers/glass/throw_impact(atom/hit_atom)
 	if (QDELETED(src))
 		return
+	if (!LAZYISIN(matter, MATERIAL_GLASS))
+		return
+
 	if (prob(80))
 		if (reagents.reagent_list.len > 0)
 			visible_message(
