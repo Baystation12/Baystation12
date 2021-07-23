@@ -178,7 +178,7 @@
 	if((get_integrity() < 100) || (air.temperature > critical_temperature))
 		return SUPERMATTER_WARNING
 
-	if(air.temperature > (critical_temperature * 0.8))
+	if(air.temperature > (critical_temperature * 0.9))
 		return SUPERMATTER_NOTIFY
 
 	if(power > 5)
