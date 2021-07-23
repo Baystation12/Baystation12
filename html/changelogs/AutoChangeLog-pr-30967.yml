@@ -1,5 +1,0 @@
-author: Fre3bie
-delete-after: true
-changes:
-  - bugfix: Fixes being unable to crush boxes into cardboard due to trying to dump
-      contents. Content dumping now requires harm intent.

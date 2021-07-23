@@ -1,5 +1,0 @@
-author: ''
-delete-after: true
-changes:
-  - admin: Slightly increases the threshold for the initial SM temperature admin warning
-      to account for current meta spamming staff with logs.
