@@ -426,7 +426,7 @@
 			<p>To dump out \the [src]:</p>\
 			<ol>\
 				<li>Equip \the [src] in one of your hands, while having your other hand remain empty.</li>\
-				<li>Activate \the [src] by clicking it or using the hotkey in your active hand, or selecting the verb from \the [src]'s right-click menu or Object tab.</li>\
+				<li>Activate \the [src] by clicking it or using the hotkey in your active hand on HARM intent, or selecting the verb from \the [src]'s right-click menu or Object tab.</li>\
 				<li>Remain still for a short warm-up, which scales with the amount of items within \the [src].</li>\
 			</ol>"
 
@@ -443,7 +443,7 @@
 			src.quick_empty()
 			return 1
 
-		if (list_find(verbs, /obj/item/storage/verb/dump_contents))
+		if (list_find(verbs, /obj/item/storage/verb/dump_contents) && user.a_intent == I_HURT)
 			dump_contents()
 			return 1
 
