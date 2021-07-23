@@ -1,0 +1,4 @@
+author: Yvesza
+delete-after: true
+changes:
+  - balance: Reduces the amount of lexorin injected by death sting from 40u to 10u.
