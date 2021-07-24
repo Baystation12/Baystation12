@@ -24,6 +24,7 @@
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		slot_belt_str = 'code/modules/halo/weapons/icons/Belt_Weapons.dmi',
 		)
+	crosshair_file = 'code/modules/halo/weapons/icons/dragaim_icon.dmi'
 
 	dispersion = list(0)
 	hud_bullet_row_num = 6

@@ -33,6 +33,11 @@
 
 	slowdown_general = 0
 
+	firemodes = list(\
+	list(mode_name="short bursts",  burst=4,dispersion=list(0.2, 0.4, 0.7, 1.0)),
+	list(mode_name="extended bursts",  burst=12, dispersion=list(0.3, 0.3, 0.5, 0.5, 0.9, 0.9, 1.2, 1.2))
+	)
+
 /obj/item/weapon/gun/projectile/m7_smg/update_icon()
 	if(ammo_magazine)
 		icon_state = "m7smg"
@@ -54,6 +59,11 @@
 	one_hand_penalty = 2
 	scope_zoom_amount = 2.0
 	allowed_magazines = list(/obj/item/ammo_magazine/m7, /obj/item/ammo_magazine/m7)
+
+	firemodes = list(\
+	list(mode_name="short bursts",  burst=4, dispersion=list(0.1, 0.3, 0.6, 1.0)),
+	list(mode_name="extended bursts",  burst=12, dispersion=list(0.3, 0.3, 0.4, 0.5, 0.6, 0.8, 1.1))
+	)
 
 /obj/item/weapon/gun/projectile/m7_smg/silenced/verb/scope()
 	set category = "Weapon"

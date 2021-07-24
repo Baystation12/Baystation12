@@ -16,7 +16,7 @@
 	scoped_accuracy = 7
 	screen_shake = 0
 	fire_delay = 12
-	accuracy = -12 //Honestly stop hipfiring snipers damn it
+	accuracy = -6 //Honestly stop hipfiring snipers damn it
 	dispersion = list(0)
 	scope_zoom_amount = 8
 	min_zoom_amount = 3
@@ -32,6 +32,7 @@
 		slot_back_str = 'code/modules/halo/weapons/icons/Back_Weapons.dmi',
 		slot_s_store_str = 'code/modules/halo/weapons/icons/Armor_Weapons.dmi',
 		)
+	crosshair_file = 'code/modules/halo/weapons/icons/dragaim_icon.dmi'
 
 /obj/item/weapon/gun/projectile/srs99_sniper/can_use_when_prone()
 	return 1

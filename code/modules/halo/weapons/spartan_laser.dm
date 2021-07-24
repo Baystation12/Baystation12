@@ -36,8 +36,8 @@
 
 	hud_bullet_usebar = 1
 
-	sustain_time = 0.5 SECONDS
-	sustain_delay = 2.5
+	burst = 2
+	burst_delay = 2.5
 
 /obj/item/weapon/gun/energy/spartanlaser/verb/scope()
 	set category = "Weapon"

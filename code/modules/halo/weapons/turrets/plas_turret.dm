@@ -35,8 +35,8 @@
 
 	load_time = 5
 
-	sustain_time = 4 SECONDS
-	sustain_delay = 1.33
+	burst = 30
+	burst_delay = 1.3
 
 /obj/item/weapon/gun/projectile/turret/plas/detached
 	removed_from_turret = 1
@@ -48,4 +48,4 @@
 
 	move_delay_malus = 2
 	fire_delay = 8
-	sustain_time = 2 SECONDS
+	burst = 15

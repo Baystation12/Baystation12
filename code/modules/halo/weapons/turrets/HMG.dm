@@ -26,8 +26,8 @@
 
 	load_time = 7
 
-	sustain_time = 6 SECONDS
-	sustain_delay = 3
+	burst = 30
+	burst_delay = 3
 
 /obj/item/weapon/gun/projectile/turret/HMG/detached
 	removed_from_turret = 1
@@ -38,4 +38,4 @@
 
 	move_delay_malus = 2
 	fire_delay = 8
-	sustain_time = 3 SECONDS
+	burst = 15

@@ -33,6 +33,7 @@
 		slot_back_str = 'code/modules/halo/weapons/icons/Back_Weapons.dmi',
 		slot_s_store_str = 'code/modules/halo/weapons/icons/Armor_Weapons.dmi',
 		)
+	crosshair_file = 'code/modules/halo/weapons/icons/dragaim_icon.dmi'
 
 /obj/item/weapon/gun/projectile/type51carbine/can_use_when_prone()
 	return 1
@@ -99,6 +100,7 @@
 		slot_back_str = 'code/modules/halo/weapons/icons/Back_Weapons.dmi',
 		slot_s_store_str = 'code/modules/halo/weapons/icons/Armor_Weapons.dmi',
 		)
+	crosshair_file = 'code/modules/halo/weapons/icons/dragaim_icon.dmi'
 
 /obj/item/weapon/gun/energy/beam_rifle/can_use_when_prone()
 	return 1
@@ -149,6 +151,7 @@
 		slot_back_str = 'code/modules/halo/weapons/icons/Back_Weapons.dmi',
 		slot_s_store_str = 'code/modules/halo/weapons/icons/Armor_Weapons.dmi',
 		)
+	crosshair_file = 'code/modules/halo/weapons/icons/dragaim_icon.dmi'
 
 /obj/item/weapon/gun/projectile/type31needlerifle/can_use_when_prone()
 	return 1

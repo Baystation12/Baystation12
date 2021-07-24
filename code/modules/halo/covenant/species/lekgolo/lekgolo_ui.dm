@@ -1,4 +1,6 @@
 
+#define MGALEKGOLO_TURN_DELAY 1 SECOND
+
 /obj/item/hunter_action
 	icon = 'code/modules/halo/covenant/species/lekgolo/hunter_actions.dmi'
 	var/mob/living/simple_animal/mgalekgolo/owner
@@ -59,7 +61,7 @@
 	set name = "Turn Clockwise"
 
 	visible_message("\icon[src] <span class='notice'>[src] shuffles to face the right.</span>")
-	if(do_after(src, 4))
+	if(do_after(src, MGALEKGOLO_TURN_DELAY))
 		facedir(GLOB.cw_dir[dir], 1)
 
 /obj/item/hunter_action/turn_ccw
@@ -75,7 +77,7 @@
 	set name = "Turn Counterclockwise"
 
 	visible_message("\icon[src] <span class='notice'>[src] shuffles to face the left.</span>")
-	if(do_after(src, 4))
+	if(do_after(src, MGALEKGOLO_TURN_DELAY))
 		facedir(GLOB.cww_dir[dir], 1)
 
 //see code\modules\mob\mob.dm
@@ -83,3 +85,5 @@
 	if(mgalekgolo_allowed)
 		return ..()
 	return 0
+
+#undef MGALEKGOLO_TURN_DELAY

@@ -150,3 +150,8 @@
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		slot_back_str = 'code/modules/halo/weapons/icons/Back_Weapons.dmi',
 		)
+
+	firemodes = list(\
+	list(mode_name="short bursts",  burst=4, dispersion=list(0.2, 0.4, 0.7, 1.0)),
+	list(mode_name="extended bursts",  burst=12, dispersion=list(0.3, 0.3, 0.5, 0.5, 0.9, 0.9, 1.2, 1.2))
+	)

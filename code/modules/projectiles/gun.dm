@@ -101,8 +101,6 @@
 
 	//"Channeled" weapons, aka longfire beam sustained types (sentinel beam)//
 
-	var/sustain_delay = -1 //Set this to the delay between "firing" whilst channeled.Set the weapon tracer to match this value.
-	var/sustain_time = -1 //How long does this sustain fire for.
 	var/atom/stored_targ
 
 /obj/item/weapon/gun/New()
@@ -352,7 +350,6 @@
 
 	if(stored_targ)
 		stored_targ = target
-		visible_message("<span class = 'notice'>[user] refocuses their aim on [target]</span>")
 		return
 
 	if(world.time < next_fire_time)
@@ -379,12 +376,8 @@
 
 	//actually attempt to shoot
 	var/turf/targloc = get_turf(target) //cache this in case target gets deleted during shooting, e.g. if it was a securitron that got destroyed.
-	var/atom/use_targ = target
-	if(sustain_time > 0)
-		burst = sustain_time/sustain_delay
-		burst_delay = sustain_delay
-		stored_targ = target
-		use_targ = stored_targ
+	stored_targ = target
+	var/atom/use_targ = stored_targ
 	. = 1
 	/*
 	user.visible_message(
@@ -401,8 +394,8 @@
 				stored_targ = null
 				visible_message("<span class = 'notice'>[user] stops firing [src].</span>")
 				break
-			targloc = get_turf(stored_targ)
 			use_targ = stored_targ
+			targloc = get_turf(stored_targ)
 		var/mob/living/carbon/human/h = user
 		if(!istype(loc,/obj/item/weapon/gun/dual_wield_placeholder))
 			if(isnull(user) || user.stat == DEAD || (istype(h) && (h.l_hand != src && h.r_hand != src)))

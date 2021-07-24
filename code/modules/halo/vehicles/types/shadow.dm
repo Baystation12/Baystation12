@@ -60,8 +60,8 @@
 	dispersion = list(0,0,0,0,0,1)
 	burst_accuracy = list(0,0,0,0,0.-1)
 
-	sustain_time = 6 SECONDS
-	sustain_delay = 2
+	burst = 30
+	burst_delay = 2
 
 	irradiate_non_cov = 10
 	magazine_type = /obj/item/ammo_magazine/shadow_cannon

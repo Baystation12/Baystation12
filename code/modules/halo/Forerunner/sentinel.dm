@@ -37,9 +37,9 @@
 	recharge_time = 0
 	max_shots = 500
 	fire_delay = 20
+	burst_delay = 2.5
+	burst = 8
 	charge_meter = 0
-	sustain_time = 2 SECONDS
-	sustain_delay = 2.5 //Make sure this aligns with the tracer delay time
 
 	fire_sound = 'code/modules/halo/sounds/forerunner/sentFire.ogg'
 
@@ -52,7 +52,7 @@
 
 //Found as random loot in forerunner areas (Utilise loot distributor system)//
 /obj/item/weapon/gun/energy/laser/sentinel_beam/detached
-	sustain_time = 3 SECONDS
+	burst = 10
 	recharge_time = 1
 	max_shots = 75
 

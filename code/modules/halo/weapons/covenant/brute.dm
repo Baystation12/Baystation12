@@ -217,10 +217,14 @@
 	)
 	item_state_slots = list(slot_l_hand_str = "gravhammer", slot_r_hand_str = "gravhammer", slot_back_str = "back_hammer")
 	matter = list("nanolaminate" = 2, "duridium" = 3)
+	var/unique_afterattack = 1
 
 /obj/item/weapon/grav_hammer/afterattack(atom/A as mob|obj|turf|area, mob/user, proximity)
 	if(lunge_dist > 0)
 		. = ..()
+
+	if(!unique_afterattack)
+		return
 
 	if(get_dist(A,user) > 1)
 		return
@@ -253,10 +257,7 @@
 	lunge_dist = 4
 	hitsound = "swing_hit"
 	item_state_slots = list(slot_l_hand_str = "gravlesshammer", slot_r_hand_str = "gravlesshammer", slot_back_str = "back_hammer")
-
-
-/obj/item/weapon/grav_hammer/gravless/afterattack(atom/A as mob|obj|turf|area, mob/user, proximity)
-	return
+	unique_afterattack = 0
 
 /* BRUTE SHOT */
 
@@ -268,6 +269,7 @@
 	icon_state = "bruteshot"
 	item_state = "blank"
 	pump_sound = null
+	fire_delay = 10
 	max_grenades = 6
 	one_hand_penalty = -1
 	fire_sound = 'code/modules/halo/sounds/bruteshotfire.ogg'

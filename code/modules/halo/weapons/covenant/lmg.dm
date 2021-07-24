@@ -12,7 +12,7 @@
 	one_hand_penalty = -1
 	max_shots = 500
 	charge_meter = 0
-	dispersion = list(0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.6, 0.6, 0.6, 0.6, 0.6, 0.8, 0.8, 0.8, 1.0, 1.0, 1.0, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2)
+	dispersion = list(0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.6, 0.6, 0.6, 0.6)
 	w_class = ITEM_SIZE_HUGE
 	irradiate_non_cov = 1
 	move_delay_malus = 1.5
@@ -30,11 +30,12 @@
 	overheat_fullclear_delay = 3.5 SECONDS
 	overheat_sfx = 'code/modules/halo/sounds/plasrifle_overheat.ogg'
 
-	sustain_time = 3.0 SECONDS
-	sustain_delay = 1.5
+	burst = 12
 
-	alt_charge_method = 1
-
+	firemodes = list(\
+	list(mode_name="short bursts",  burst=12, accuracy=0, dispersion=list(0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.6, 0.6, 0.6, 0.6)),
+	list(mode_name="extended bursts", burst=32, accuracy=-1,dispersion=list(0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.7, 0.7, 0.7, 0.7))
+	)
 
 /obj/item/weapon/gun/energy/plasmarepeater/proc/cov_plasma_recharge_tick()
 	if(max_shots > 0)

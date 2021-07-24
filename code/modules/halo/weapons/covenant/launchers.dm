@@ -25,6 +25,7 @@
 		slot_back_str = 'code/modules/halo/weapons/icons/Back_Weapons.dmi',
 		slot_s_store_str = 'code/modules/halo/weapons/icons/Armor_Weapons.dmi',
 		)
+	crosshair_file = 'code/modules/halo/weapons/icons/dragaim_missile.dmi'
 	slowdown_general = 1
 	wielded_item_state = "fuelrod-wielded"
 	salvage_components = list(/obj/item/plasma_core)

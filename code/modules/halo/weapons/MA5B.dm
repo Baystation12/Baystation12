@@ -34,6 +34,11 @@
 		slot_s_store_str = 'code/modules/halo/weapons/icons/Armor_Weapons.dmi',
 		)
 
+	firemodes = list(\
+	list(mode_name="short bursts",  burst=5, dispersion=list(0.0,0.2,0.4,0.6,0.73)),
+	list(mode_name="extended bursts",  burst=15, dispersion=list(0.2,0.2,0.3,0.4, 0.5, 0.6, 0.7, 0.7, 0.8, 1.0))
+	)
+
 	attachment_slots = list("barrel","underbarrel rail","upper rail","upper stock", "stock")
 	attachments_on_spawn = list(/obj/item/weapon_attachment/ma5_stock_cheekrest,/obj/item/weapon_attachment/ma5_stock_butt,/obj/item/weapon_attachment/ma5_upper,/obj/item/weapon_attachment/light/flashlight)
 

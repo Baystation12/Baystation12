@@ -26,8 +26,8 @@
 
 	load_time = 5
 
-	sustain_time = 5 SECONDS
-	sustain_delay = 1
+	burst = 50
+	burst_delay = 1
 
 /obj/item/weapon/gun/projectile/turret/chaingun/detached
 	removed_from_turret = 1
@@ -38,4 +38,4 @@
 
 	move_delay_malus = 2
 	fire_delay = 8
-	sustain_time = 3 SECONDS
+	burst = 30

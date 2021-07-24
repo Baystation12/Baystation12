@@ -57,8 +57,8 @@
 	dispersion = list(0,0,0,0,0,1)
 	burst_accuracy = list(0,0,0,0,0.-1)
 
-	sustain_time = 5 SECONDS
-	sustain_delay = 1.75
+	burst = 15
+	burst_delay = 1.75
 
 	magazine_type = /obj/item/ammo_magazine/warthog_mag
 

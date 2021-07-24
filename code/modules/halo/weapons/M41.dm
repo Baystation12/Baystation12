@@ -22,6 +22,7 @@
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
+	crosshair_file = 'code/modules/halo/weapons/icons/dragaim_missile.dmi'
 	charge_sound = null
 	slowdown_general = 1
 

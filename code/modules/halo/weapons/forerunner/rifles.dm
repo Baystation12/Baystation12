@@ -28,6 +28,11 @@
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/forerunner_sprites_inhand_r.dmi',
 		)
 
+	firemodes = list(\
+	list(mode_name="short bursts", burst=5, dispersion=list(0.0,0.2,0.3,0.5,0.73,0.8)),
+	list(mode_name="extended bursts", burst=18, dispersion=list(0.1,0.2,0.3,0.3, 0.5, 0.5, 0.6, 0.7, 0.8, 1.0))
+	)
+
 /obj/item/weapon/gun/projectile/suppressor/can_use_when_prone()
 	return 1
 

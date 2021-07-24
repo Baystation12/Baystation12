@@ -2172,6 +2172,7 @@
 #include "code\modules\halo\vehicles\~undefs\~undefs.dm"
 #include "code\modules\halo\weapons\_defines.dm"
 #include "code\modules\halo\weapons\_guns.dm"
+#include "code\modules\halo\weapons\_gunsautofire.dm"
 #include "code\modules\halo\weapons\_lunging.dm"
 #include "code\modules\halo\weapons\ACL55.dm"
 #include "code\modules\halo\weapons\ammo_12-7mm.dm"

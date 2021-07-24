@@ -14,12 +14,11 @@
 	salvage_components = list(/obj/item/plasma_core)
 	matter = list("nanolaminate" = 1)
 
-	//MA5 Counterpart. One less in burst, with overheat tracking, with an accuracy boon.
 	fire_delay = 6
-	burst = 4
+	burst = 5
 	burst_delay = 1.8
-	dispersion = list(0.2,0.3,0.5,0.73)
-	accuracy = 1
+	dispersion= list(0.0,0.2,0.4,0.6,0.73)
+	accuracy = 0
 	one_hand_penalty = 2
 	hud_bullet_usebar = 1
 
@@ -37,6 +36,11 @@
 
 	irradiate_non_cov = 2 //this is per shot, so 12 rads from one burst
 	alt_charge_method = 1
+
+	firemodes = list(\
+	list(mode_name="short bursts",  burst=5, dispersion=list(0.0,0.2,0.4,0.6,0.73)),
+	list(mode_name="extended bursts",  burst=15, dispersion=list(0.2,0.2,0.3,0.4, 0.5, 0.6, 0.7, 0.7, 0.8, 1.0))
+	)
 
 /obj/item/weapon/gun/energy/plasmarifle/can_use_when_prone()
 	return 1
