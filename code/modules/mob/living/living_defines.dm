@@ -52,5 +52,5 @@
 	var/job = null//Living
 
 	var/obj/screen/cells = null
-	var/next_scream_at = 0 //For painscreams, used for both simplemobs and humanmobs
+	var/next_scream_at = 0 //For painscream sfx and text output, as well as gasp text output. used for both simplemobs and humanmobs
 	var/next_roll_at = 0
