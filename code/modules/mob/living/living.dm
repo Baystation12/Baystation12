@@ -486,7 +486,7 @@ default behaviour is:
 	if(om_obj_old)
 		GLOB.mobs_in_sectors[om_obj_old] -= src
 	if(om_obj_new)
-		GLOB.mobs_in_sectors[om_obj_new] |= list(src) // |= is used instead of += to avoid duplication
+		GLOB.mobs_in_sectors[om_obj_new] |= src // |= is used instead of += to avoid duplication
 
 /mob/living/Move(a, b, flag)
 	if (buckled)
