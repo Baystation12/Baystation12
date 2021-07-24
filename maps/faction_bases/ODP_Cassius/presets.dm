@@ -3,6 +3,10 @@
 	name = "Maintenance Access"
 	req_access = list(access_unsc)
 
+/obj/machinery/door/airlock/halo/maint/odp_maint/public
+	name = "Maintenance Access"
+	req_access = list()
+
 /obj/machinery/door/airlock/halo/odp_general
 	req_access = list(access_unsc)
 
