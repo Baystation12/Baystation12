@@ -1,0 +1,5 @@
+author: Fre3bie
+delete-after: true
+changes:
+  - bugfix: Checks if reagent containers are made of glass before shattering, so buckets
+      and rags won't shatter comically.
