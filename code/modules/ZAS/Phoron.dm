@@ -42,10 +42,17 @@ obj/var/contaminated = 0
 
 
 /obj/item/proc/can_contaminate()
-	//Clothing and backpacks can be contaminated.
-	if(obj_flags & ITEM_FLAG_PHORONGUARD) return 0
-	else if(istype(src,/obj/item/storage/backpack)) return 0 //Cannot be washed :(
-	else if(istype(src,/obj/item/clothing)) return 1
+	//Clothing can be contaminated, with exceptions for certain items which cannot be washed in washing_machine.dm
+	if (obj_flags & ITEM_FLAG_PHORONGUARD) return 0
+
+	else if (istype(src, /obj/item/clothing/mask/gas)	|| \
+			istype(src, /obj/item/clothing/accessory)	|| \
+			istype(src, /obj/item/clothing/ring)		|| \
+			istype(src, /obj/item/clothing/ears)		|| \
+			istype(src, /obj/item/clothing/glasses))
+		return 0
+
+	else if (istype(src,/obj/item/clothing)) return 1
 
 /obj/item/proc/contaminate()
 	//Do a contamination overlay? Temporary measure to keep contamination less deadly than it was.
@@ -152,9 +159,9 @@ obj/var/contaminated = 0
 
 /mob/living/carbon/human/proc/suit_contamination()
 	//Runs over the things that can be contaminated and does so.
-	if(w_uniform) w_uniform.contaminate()
-	if(shoes) shoes.contaminate()
-	if(gloves) gloves.contaminate()
+	if (w_uniform && w_uniform.can_contaminate()) w_uniform.contaminate()
+	if (shoes && shoes.can_contaminate()) shoes.contaminate()
+	if (gloves && gloves.can_contaminate()) gloves.contaminate()
 
 
 turf/Entered(obj/item/I)
