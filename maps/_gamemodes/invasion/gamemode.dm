@@ -54,7 +54,8 @@
 	shipmap_handler.spawn_ship(GLOB.HUMAN_CIV, 3)
 
 	//setup the endgame fleet spawning
-	GLOB.UNSC.set_endless_fleets()
+	GLOB.UNSC.fleets_max = 1
+	GLOB.UNSC.fleet_spawn_at = 75 MINUTES
 
 	//setup faction handling
 	for(var/faction_type in factions)
