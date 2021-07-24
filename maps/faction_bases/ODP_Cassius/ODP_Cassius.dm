@@ -45,3 +45,8 @@
 		ai_job.total_positions = 0
 
 	. = ..()
+
+/obj/effect/overmap/ship/unsc_odp_cassius/nuked_effects(var/nuke_at_loc)
+	. = ..()
+	superstructure_failing = 0
+	pre_superstructure_failing()
