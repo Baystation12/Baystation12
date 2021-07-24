@@ -471,6 +471,8 @@
 
 		trajectory.increment()	// increment the current location
 		location = trajectory.return_location(location)		// update the locally stored location data
+		if (!location)
+			return FALSE
 
 		Move(location.return_turf())
 

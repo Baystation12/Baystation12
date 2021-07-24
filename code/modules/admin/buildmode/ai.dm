@@ -131,6 +131,8 @@
 			var/j = 0 // Following mobs.
 			for(var/mob/living/unit in selected_mobs)
 				var/datum/ai_holder/AI = unit.ai_holder
+				if (!AI)
+					return
 				if(L.IIsAlly(unit) || !AI.hostile || pa["shift"])
 					AI.set_follow(L)
 					j++
