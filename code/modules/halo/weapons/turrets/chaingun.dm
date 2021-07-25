@@ -17,14 +17,16 @@
 	caliber = "a762"
 	magazine_type = /obj/item/ammo_magazine/chaingun_boxmag
 
-	//Burst Settings irrelevant in the face of sustain fire settings//
-	//burst = 15
-	//burst_delay = 1
 	fire_delay = 5 //1 lower than normal
-	burst_accuracy = list(0,0,0,0,0,0,-1)
-	dispersion = list(0.0,0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0)
+	accuracy = -1
+	dispersion = list(0.2,0.2,0.2,0.3,0.3,0.4,0.4,0.5,0.5,0.5,0.5,0.55)
 
 	load_time = 5
+
+	firemodes = list(\
+	list(mode_name="long bursts",  burst=50,burst_delay = 1,fire_delay = 5, accuracy = -1,dispersion=list(0.2,0.2,0.2,0.3,0.3,0.4,0.4,0.5,0.5,0.5,0.5,0.55)),
+	list(mode_name="paced shots",  burst=25,burst_delay = 4,fire_delay = 7, accuracy = 0,dispersion=list(0.1,0.1,0.1,0.2,0.2,0.3,0.3,0.4,0.4,0.4,0.4,0.45))
+	)
 
 	burst = 50
 	burst_delay = 1
@@ -38,4 +40,11 @@
 
 	move_delay_malus = 2
 	fire_delay = 8
+	accuracy = -2
+	//Accuracy drops by -1 on both modes.
+	firemodes = list(\
+	list(mode_name="long bursts",  burst=30,burst_delay = 1,fire_delay = 8, accuracy = -2,dispersion=list(0.2,0.2,0.2,0.3,0.3,0.4,0.4,0.5,0.5,0.5,0.5,0.55)),
+	list(mode_name="paced shots",  burst=12,burst_delay = 4,fire_delay = 10, accuracy = -1,dispersion=list(0.0,0.0,0.1,0.1,0.1,0.2,0.2,0.3,0.3,0.3,0.3,0.35))
+	)
+
 	burst = 30

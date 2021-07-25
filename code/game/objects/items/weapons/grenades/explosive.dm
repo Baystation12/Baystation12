@@ -82,7 +82,6 @@
 	desc = "Larger and heavier than a standard fragmentation grenade, this device is extremely dangerous. It cannot be thrown as far because of its weight."
 	icon_state = "frag"
 
-	w_class = ITEM_SIZE_NORMAL
 	throw_speed = 3
 	throw_range = 5 //heavy, can't be thrown as far
 

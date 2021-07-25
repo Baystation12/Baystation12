@@ -1,4 +1,6 @@
 
+#define EXPLOSION_DISMOUNT_FLING_DIST 3
+
 /obj/structure/turret
 	name = "Turret"
 	desc = "A turret"
@@ -19,9 +21,13 @@
 	var/obj/kit_undeploy = null
 	var/obj/item/weapon/gun/projectile/turret_gun = /obj/item/weapon/gun/projectile/turret //The "gun" the turret uses to fire.
 	var/obj/stand = /obj/structure/bipod //The object reference to the object to replace with when the gun is removed.
-	var/remove_time = 5 //The time it takes to rip the gun off the stand, in seconds. Half this is pack-up time.
-	var/bullet_deflect_chance = 40 //The chance the gun has to reflect projectiles, from the sides
-	var/bullet_facing_deflect_chance = 75 //the chance the gun has to reflect projectiles from the "front" + the two angles.
+	var/remove_time = 5 //The time it takes to rip the gun off the stand, in seconds. Quarter this is pack-up time.
+	var/bullet_deflect_chance = 75
+	var/bullet_deflect_chance_max = 75 //The chance the gun has to reflect projectiles, from the sides
+	var/bullet_deflect_chance_min = 30
+	var/armor_pen_divisor = 2 //Used when calculating how much armor pen is converted into extra damage to the deflect chance.
+	var/bullet_deflect_chance_reset_time = 4 SECONDS //How long it takes until the game fully resets the deflect chance.
+	var/bullet_deflect_reset_at = 0
 
 /obj/structure/turret/New()
 	. = ..()
@@ -45,15 +51,24 @@
 	unman_turret()
 	qdel(src)
 
+/obj/structure/turret/proc/check_reset_deflect()
+	if(bullet_deflect_reset_at != 0 && world.time >= bullet_deflect_reset_at)
+		bullet_deflect_chance = bullet_deflect_chance_max
+
 /obj/structure/turret/bullet_act(var/obj/item/projectile/P, var/def_zone)
+	check_reset_deflect()
 	var/prob_use = bullet_deflect_chance - P.armor_penetration
-	if(get_dir(src, P.starting) in list(dir,turn(dir,-45),turn(dir,45)))
-		prob_use = bullet_facing_deflect_chance
-	if(dir == turn(dir,180) || !prob(prob_use))
+	if(!prob(prob_use))
 		if(mob_manning)
 			mob_manning.bullet_act(P,def_zone)
 			return
 	else
+		var/dam_to_deflect = P.damage/10
+		if(P.armor_penetration)
+			dam_to_deflect += P.armor_penetration / armor_pen_divisor
+		if(dam_to_deflect)
+			bullet_deflect_chance = max(bullet_deflect_chance - dam_to_deflect,bullet_deflect_chance_min)
+			bullet_deflect_reset_at = world.time + bullet_deflect_chance_reset_time
 		if(P.damtype == BRUTE)
 			visible_message("<span class = 'danger'>The [P.name] pings off the [name]</span>","<span class = 'notice'>You hear something ricochet</span>")
 		else if(P.damtype == BURN)
@@ -147,8 +162,13 @@
 
 /obj/structure/turret/ex_act(var/severity)
 	if(mob_manning && severity <= 2)
-		to_chat(mob_manning,"<span class = 'danger'>The blast pushes you off \the [src], you'll have to grab it again to fire!</span>")
+		var/mob/mm = mob_manning
 		unman_turret()
+		to_chat(mm,"<span class = 'danger'>The blast pushes you off \the [src], you'll have to grab it again to fire!</span>")
+		var/move_in = get_dir(get_step(src,dir),src)
+		for(var/i = 0 to EXPLOSION_DISMOUNT_FLING_DIST)
+			if(!mob_manning.Move(get_step(mob_manning,move_in)))
+				break
 
 /obj/structure/turret/attackby(var/obj/item/W, var/mob/user)
 	if(W.type == turret_gun)

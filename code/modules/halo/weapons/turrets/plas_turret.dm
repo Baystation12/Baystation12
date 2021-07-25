@@ -30,10 +30,14 @@
 	//burst = 10
 	//burst_delay = 2
 	fire_delay = 5
-	burst_accuracy = list(0,0,0,0,0,0,0,0,0,0,-1)
-	dispersion = list(0,0,0,0,0,0.3,0.6,0.9,1.0)
+	dispersion = list(0.2,0.2,0.2,0.3,0.3,0.4,0.4,0.5,0.5,0.5,0.5,0.55)
 
 	load_time = 5
+	//No acc penalty on long bursts for this, but it's still using chaingun dispersion for both modes.
+	firemodes = list(\
+	list(mode_name="long bursts",  burst=50,burst_delay = 1,fire_delay = 5, accuracy = 0,dispersion=list(0.2,0.2,0.2,0.3,0.3,0.4,0.4,0.5,0.5,0.5,0.5,0.55)),
+	list(mode_name="paced shots",  burst=25,burst_delay = 4,fire_delay = 7, accuracy = 0,dispersion=list(0.0,0.0,0.1,0.1,0.1,0.2,0.2,0.3,0.3,0.3,0.3,0.35))
+	)
 
 	burst = 30
 	burst_delay = 1.3
@@ -44,8 +48,15 @@
 		slot_l_hand_str = 'code/modules/halo/weapons/turrets/mob_turret.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/turrets/mob_turret.dmi',
 		)
-	burst_accuracy = list(0,0,0,0,0,0,0,0,0,0,-1)
 
 	move_delay_malus = 2
 	fire_delay = 8
+	accuracy = -2
+
+	firemodes = list(\
+	list(mode_name="long bursts",  burst=15,burst_delay = 1,fire_delay = 8, accuracy = -1,dispersion=list(0.2,0.2,0.2,0.3,0.3,0.4,0.4,0.5,0.5,0.5,0.5,0.55)),
+	list(mode_name="paced shots",  burst=12,burst_delay = 4,fire_delay = 10, accuracy = -1,dispersion=list(0.0,0.0,0.1,0.1,0.1,0.2,0.2,0.3,0.3,0.3,0.3,0.35))
+	)
+
+
 	burst = 15
