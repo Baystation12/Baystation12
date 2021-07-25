@@ -53,16 +53,26 @@
 
 		P.launch(O)
 
+		// Handle damaging whatever the grenade's inside. Currently only checks for mobs.
+		if (loc != get_turf(src))
+			var/recursion_limit = 3 // Prevent infinite loops
+			var/atom/current_check = src
+			while (recursion_limit)
+				current_check = current_check.loc
+				if (isturf(current_check))
+					break
+				if (ismob(current_check))
+					P.attack_mob(current_check, 0, 25)
+				recursion_limit--
+
 		//Make sure to hit any mobs in the source turf
 		for(var/mob/living/M in T)
 			//lying on a frag grenade while the grenade is on the ground causes you to absorb most of the shrapnel.
 			//you will most likely be dead, but others nearby will be spared the fragments that hit you instead.
 			if(M.lying && isturf(src.loc))
 				P.attack_mob(M, 0, 5)
-			else if(!M.lying && src.loc != get_turf(src)) //if it's not on the turf, it must be in the mob!
-				P.attack_mob(M, 0, 25) //you're holding a grenade, dude!
 			else
-				P.attack_mob(M, 0, 100) //otherwise, allow a decent amount of fragments to pass
+				P.attack_mob(M, 0, 50)
 
 
 
