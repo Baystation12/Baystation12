@@ -19,7 +19,9 @@
 	else
 		set_opacity(0)
 
-	if(gen && gen.check_flag(MODEFLAG_OVERCHARGE))
+	if (!gen)
+		color = COLOR_RED_LIGHT
+	else if (gen.check_flag(MODEFLAG_OVERCHARGE))
 		color = COLOR_VIOLET
 	else
 		color = COLOR_DEEP_SKY_BLUE
@@ -35,6 +37,15 @@
 /obj/effect/shield/New()
 	..()
 	update_nearby_tiles()
+
+
+/obj/effect/shield/Initialize(mapload, obj/machinery/power/shield_generator/new_gen)
+	. = ..(mapload)
+
+	if (QDELETED(new_gen))
+		log_debug(append_admin_tools("Shield effect ([name]) was created without a valid generator in [get_area(src)].", location = get_turf(src)))
+		return INITIALIZE_HINT_QDEL
+	gen = new_gen
 
 
 /obj/effect/shield/Destroy()
@@ -100,7 +111,7 @@
 
 /obj/effect/shield/attack_generic(var/source, var/damage, var/emote)
 	take_damage(damage, SHIELD_DAMTYPE_PHYSICAL)
-	if(gen.check_flag(MODEFLAG_OVERCHARGE) && istype(source, /mob/living/))
+	if(gen?.check_flag(MODEFLAG_OVERCHARGE) && istype(source, /mob/living/))
 		overcharge_shock(source)
 	..(source, damage, emote)
 
@@ -173,7 +184,7 @@
 
 
 /obj/effect/shield/c_airblock(turf/other)
-	return gen.check_flag(MODEFLAG_ATMOSPHERIC) ? BLOCKED : 0
+	return gen?.check_flag(MODEFLAG_ATMOSPHERIC) ? BLOCKED : 0
 
 
 // EMP. It may seem weak but keep in mind that multiple shield segments are likely to be affected.

@@ -123,8 +123,7 @@
 			vessel_reverse_dir = GLOB.reverse_dir[sector.fore_dir]
 
 	for(var/turf/T in shielded_turfs)
-		var/obj/effect/shield/S = new(T)
-		S.gen = src
+		var/obj/effect/shield/S = new(T, src)
 		S.flags_updated()
 		field_segments |= S
 		S.set_dir(vessel_reverse_dir)
