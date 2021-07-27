@@ -98,7 +98,7 @@ var/list/whitelist = list()
 
 	if(config.usealienwhitelistSQL)
 		//SQL Whitelist
-		if(!(ckey in alien_whitelist))
+		if(!(lowercase(ckey) in alien_whitelist))
 			return 0;
 		var/list/whitelisted = alien_whitelist[ckey]
 		if(lowertext(item) in whitelisted)
