@@ -117,7 +117,7 @@
 
 	src.opened = 1
 	playsound(src.loc, open_sound, 50, 1, -3)
-	density = FALSE
+	set_density(FALSE)
 	update_icon()
 	return 1
 
@@ -132,7 +132,7 @@
 
 	playsound(src.loc, close_sound, 50, 0, -3)
 	if(!wall_mounted)
-		density = TRUE
+		set_density(TRUE)
 
 	update_icon()
 

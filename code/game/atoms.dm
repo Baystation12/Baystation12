@@ -141,6 +141,12 @@
 /atom/proc/set_density(var/new_density)
 	if(density != new_density)
 		density = !!new_density
+		if (isturf(loc))
+			var/turf/T = loc
+			if (density)
+				T.has_dense_atom = TRUE
+			else
+				T.has_dense_atom = null
 
 /atom/proc/bullet_act(obj/item/projectile/P, def_zone)
 	P.on_hit(src, 0, def_zone)
