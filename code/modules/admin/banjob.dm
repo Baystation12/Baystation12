@@ -28,7 +28,7 @@ var/jobban_keylist[0]		//to store the keys & ranks
 			if(config.guest_jobban && IsGuestKey(M.key))
 				return "Guest Job-ban"
 
-		if(job && job.faction_whitelist && !whitelist_lookup(job.faction_whitelist, M))
+		if(job && job.faction_whitelist && !whitelist_lookup(job.faction_whitelist, M.ckey))
 			return "[job.faction_whitelist] ONLY"
 
 		if(whitelist_check && !check_whitelist(M,rank))
