@@ -50,9 +50,9 @@ var/list/whitelist = list()
 		alien_whitelist = splittext(text, "\n")
 		return 1
 /proc/load_alienwhitelistSQL()
-	var/DBQuery/query = dbcon_old.NewQuery("SELECT * FROM whitelist")
+	var/DBQuery/query = dbcon.NewQuery("SELECT * FROM whitelist")
 	if(!query.Execute())
-		world.log << dbcon_old.ErrorMsg()
+		world.log << dbcon.ErrorMsg()
 		return 0
 	else
 		alien_whitelist = list()
