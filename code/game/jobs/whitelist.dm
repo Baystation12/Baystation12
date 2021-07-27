@@ -58,11 +58,11 @@ var/list/whitelist = list()
 		alien_whitelist = list()
 		while(query.NextRow())
 			var/list/row = query.GetRowData()
-			if(alien_whitelist[lowercase(row["ckey"])])
-				var/list/A = alien_whitelist[lowercase(row["ckey"])]
-				A.Add(lowercase(row["race"]))
+			if(alien_whitelist[lowertext(row["ckey"])])
+				var/list/A = alien_whitelist[lowertext(row["ckey"])]
+				A.Add(lowertext(row["race"]))
 			else
-				alien_whitelist[lowercase(row["ckey"])] = list(lowercase(row["race"]))
+				alien_whitelist[lowertext(row["ckey"])] = list(lowertext(row["race"]))
 	return 1
 
 /proc/is_species_whitelisted(mob/M, var/species_name)
