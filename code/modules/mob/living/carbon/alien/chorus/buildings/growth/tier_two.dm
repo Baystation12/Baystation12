@@ -96,11 +96,11 @@
 
 /obj/structure/chorus/maw/activate()
 	if(density)
-		density = FALSE
+		set_density(FALSE)
 		icon_state = "growth_maw_opened"
 		flick("growth_maw_open", src)
 	else
-		density = TRUE
+		set_density(TRUE)
 		icon_state = "growth_maw_closed"
 		flick("growth_maw_close", src)
 
