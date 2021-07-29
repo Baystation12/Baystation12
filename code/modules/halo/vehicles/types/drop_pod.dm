@@ -66,7 +66,7 @@
 		visible_message("<span class = 'warning'>[src] blurts a warning: ERROR: NO AVAILABLE DROP-TARGETS.</span>")
 		return
 	var/list/valid_points = list()
-	for(var/turf/l in dview(drop_point,drop_accuracy))
+	for(var/turf/l in range(drop_point,drop_accuracy))
 		if(istype(l,/turf/simulated/floor))
 			valid_points += l
 		if(istype(l,/turf/unsimulated/floor))
@@ -171,9 +171,14 @@
 		return
 	om_targ = potential_om_targ[om_user_choice]
 
-	var/turf/drop_turf = get_drop_turf(get_drop_point(usr,om_targ))
+	var/drop_point = get_drop_point(usr,om_targ)
+	if(isnull(drop_point))
+		to_chat(usr,"<span class = 'notice'>Error acquiring drop-point information from system.</span>")
+		return
+
+	var/turf/drop_turf = get_drop_turf(drop_point)
 	if(isnull(drop_turf))
-		to_chat(usr,"<span class = 'notice'>No valid drop-turfs available.</span>")
+		to_chat(usr,"<span class = 'notice'>No valid drop-turfs available at selected point.</span>")
 		return
 
 	proc_launch_pod(usr,drop_turf)
