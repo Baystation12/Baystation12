@@ -1,4 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - bugfix: Fixed simple mobs being able to open doors they shouldn't be able to.
