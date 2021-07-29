@@ -102,20 +102,35 @@
 	path = /obj/item/clothing/glasses/material
 	allowed_roles = list(/datum/job/chief_engineer, /datum/job/engineer, /datum/job/mining)
 
-/datum/gear/eyes/shades/
-	display_name = "sunglasses"
-	path = /obj/item/clothing/glasses/sunglasses
-	cost = 3
 
-/datum/gear/eyes/shades/sunglasses
-	display_name = "sunglasses, fat"
-	path = /obj/item/clothing/glasses/sunglasses/big
-	cost = 3
+/datum/gear/eyes/shades
+	display_name = "sunglasses selection"
+	path = /obj/item/clothing/glasses
 
-/datum/gear/eyes/shades/prescriptionsun
-	display_name = "sunglasses, presciption"
-	path = /obj/item/clothing/glasses/sunglasses/prescription
-	cost = 3
+
+/datum/gear/eyes/shades/New()
+	..()
+	var/list/sunglasses = list()
+	sunglasses["sunglasses"] = /obj/item/clothing/glasses/sunglasses
+	sunglasses["sunglasses, corrective"] = /obj/item/clothing/glasses/sunglasses/prescription
+	sunglasses["big sunglasses"] = /obj/item/clothing/glasses/sunglasses/big
+	sunglasses["big sunglasses, corrective"] = /obj/item/clothing/glasses/sunglasses/big/prescription
+	sunglasses["black aviators"] = /obj/item/clothing/glasses/aviators_black
+	sunglasses["black aviators, corrective"] = /obj/item/clothing/glasses/aviators_black/prescription
+	sunglasses["silver aviators"] = /obj/item/clothing/glasses/aviators_silver
+	sunglasses["silver aviators, corrective"] = /obj/item/clothing/glasses/aviators_silver/prescription
+	sunglasses["gold aviators"] = /obj/item/clothing/glasses/aviators_gold
+	sunglasses["gold aviators, corrective"] = /obj/item/clothing/glasses/aviators_gold/prescription
+	sunglasses["rose aviators"] = /obj/item/clothing/glasses/aviators_rose
+	sunglasses["rose aviators, corrective"] = /obj/item/clothing/glasses/aviators_rose/prescription
+	gear_tweaks += new/datum/gear_tweak/path(sunglasses)
+
+
+/datum/gear/eyes/aviators_shutter
+	display_name = "shutter shades"
+	path = /obj/item/clothing/glasses/aviators_shutter
+	flags = GEAR_HAS_COLOR_SELECTION
+
 
 /datum/gear/eyes/hudpatch
 	display_name = "iPatch"
