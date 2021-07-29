@@ -1,7 +1,0 @@
-author: Taza, gy1ta23
-delete-after: true
-changes:
-  - tweak: integrated circuits - destroying circuit assemblies now features sparks,
-      on-hit effects, and debris
-  - tweak: integrated circuits - assemblies have had their descriptions, chat notices,
-      and health values updated
