@@ -1758,7 +1758,6 @@
 #include "code\modules\halo\insurrection\x52_spawns.dm"
 #include "code\modules\halo\leader_support\job_overrides.dm"
 #include "code\modules\halo\leader_support\supply_drop.dm"
-#include "code\modules\halo\leader_support\supply_drop_evac.dm"
 #include "code\modules\halo\leader_support\supply_drop_tachud.dm"
 #include "code\modules\halo\leader_support\supply_drop_variants.dm"
 #include "code\modules\halo\leader_support\support_item.dm"

@@ -1,4 +1,7 @@
 
+/datum/effect/effect/system/smoke_spread/vehicle_smokescreen
+	spread_steps_on_spawn = 2
+
 /obj/vehicles/proc/deploy_smoke()
 	set name = "Deploy Smoke"
 	set category = "Vehicle"
@@ -32,7 +35,7 @@
 			origin = get_step(origin,dir)
 	playsound(loc, 'sound/effects/smoke.ogg', 50, 1, -3)
 	playsound(origin, 'sound/effects/smoke.ogg', 50, 1, -3)
-	var/datum/effect/effect/system/smoke_spread/smoke = new /datum/effect/effect/system/smoke_spread()
+	var/datum/effect/effect/system/smoke_spread/smoke = new smoke_type()
 	smoke.attach(origin)
 	next_smoke_min = world.time + smoke_delay
 	smoke_ammo--

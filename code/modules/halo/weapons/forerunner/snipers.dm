@@ -15,7 +15,7 @@
 	reload_sound = 'code/modules/halo/sounds/binaryrifle_reload.ogg'
 	one_hand_penalty = -1
 	scoped_accuracy = 7
-	accuracy = -10
+	accuracy = -9
 	screen_shake = 0
 	dispersion = list(0.1)
 	fire_delay = 12

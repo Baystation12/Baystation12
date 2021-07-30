@@ -303,6 +303,8 @@ steam.start() -- spawns the effect
 	var/total_smoke = 0 // To stop it being spammed and lagging!
 	var/direction
 	var/smoke_type = /obj/effect/effect/smoke
+	var/list/smokemove_picklist = list(0,1,1,1,2,2,2,3) //This is used to determine how many times a spawned smoke tile moves.
+	var/spread_steps_on_spawn = 0 //How many steps should our smoke take on spawning, with no delay. (this doesn't detract from the picklist)
 
 /datum/effect/effect/system/smoke_spread/set_up(n = 5, c = 0, loca, direct)
 	if(n > 10)
@@ -332,8 +334,12 @@ steam.start() -- spawns the effect
 					direction = pick(GLOB.cardinal)
 				else
 					direction = pick(GLOB.alldirs)
-			for(i=0, i<pick(0,1,1,1,2,2,2,3), i++)
-				sleep(10)
+			var/amt_smoke_move = pick(smokemove_picklist)
+			for(i=0, i<amt_smoke_move + spread_steps_on_spawn, i++)
+				if(spread_steps_on_spawn > 0)
+					spread_steps_on_spawn--
+				else
+					sleep(10)
 				step(smoke,direction)
 			spawn(smoke.time_to_live*0.75+rand(10,30))
 				if (smoke) qdel(smoke)

@@ -1,6 +1,7 @@
 
 #if !defined(using_map_DATUM)
 
+	#include "slayer_itemspawn_markers.dm"
 	#include "death_asteroid_areas.dm"
 	#include "death_asteroid_spawns.dm"
 	#include "death_asteroid_map.dm"

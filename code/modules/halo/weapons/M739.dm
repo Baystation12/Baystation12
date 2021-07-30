@@ -1,5 +1,5 @@
 
-//M739 Light Machine Gun
+//M739 Light Machine Gun.
 
 /obj/item/weapon/gun/projectile/m739_lmg
 	name = "\improper M739 Light Machine Gun"
