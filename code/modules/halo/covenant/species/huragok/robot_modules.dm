@@ -101,6 +101,7 @@
 	src.modules += new /obj/item/weapon/gripper/no_use/loader(src)
 	src.modules += new /obj/item/device/lightreplacer(src)
 	src.modules += new /obj/item/device/pipe_painter(src)
+	src.modules += new /obj/item/weapon/armor_patch/huragok(src)
 //	src.modules += new /obj/item/weapon/inflatable_dispenser/robot(src)	//Might as well make a new version of this that deploys weak energy barriers that act as a temporaru fix for breaches.
 
 	var/datum/matter_synth/metal = new /datum/matter_synth/metal(600000000)	//When an alternative is coded in for the huragoks to regenerate matter outside a cyborg recharge station, let's get rid of this infinite resource.

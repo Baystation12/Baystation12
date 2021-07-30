@@ -22,9 +22,9 @@
 	to_chat(examiner,"<span class = 'notice'>[name] has [message] left.</span>")
 
 /obj/item/weapon/armor_patch/attack(mob/living/M, mob/living/user, var/target_zone)
-	var/mob/living/carbon/human/h = user
-	if(istype(h) && user.a_intent == "help" && !isnull(h.wear_suit))
-		repair_clothing(h.wear_suit)
+	var/mob/living/carbon/human/h = M
+	if(istype(h) && !isnull(h.wear_suit) && user.a_intent == "help")
+		repair_clothing(h.wear_suit,user,1)
 	else
 		. = ..()
 
@@ -35,26 +35,32 @@
 	else
 		. = ..()
 
-/obj/item/weapon/armor_patch/proc/repair_clothing(var/obj/item/clothing/c,var/mob/user)
+/obj/item/weapon/armor_patch/proc/reduce_supplies(var/amt)
+	repair_supplies = max(0,repair_supplies - amt)
+
+/obj/item/weapon/armor_patch/proc/repair_clothing(var/obj/item/clothing/c,var/mob/user,var/repair_by_other = 0)
 	var/armor_damage_taken = c.armor_thickness_max - c.armor_thickness
 	if(armor_damage_taken == 0)
 		to_chat(user,"<span class = 'notice'>[c] isn't damaged or has no armor to repair</span>")
 		return
 
 	user.visible_message("<span class = 'notice'>[user] starts to patch up damage to [c].</span>")
-	if(!do_after(user,ITEM_REPAIR_DELAY,c,1,1,,1))
+	var/repairtime = ITEM_REPAIR_DELAY
+	if(repair_by_other)
+		repairtime /= 2
+	if(!do_after(user,repairtime,c,1,1,,1))
 		return
 
 	user.visible_message("<span class = 'notice'>[user] patches up damage on [c]</span>")
 	if(armor_damage_taken > repair_supplies)
 		to_chat(user,"<span class = 'notice'>You can't repair all the damage on [c] due to a lack of repair supplies in [name]</span>")
 		c.armor_thickness += repair_supplies
-		repair_supplies = 0
+		reduce_supplies(repair_supplies)
 
 	else
 		to_chat(user,"<span class = 'notice'>You fully repair [c].</span>")
 		c.armor_thickness = c.armor_thickness_max
-		repair_supplies -= armor_damage_taken
+		reduce_supplies(armor_damage_taken)
 
 	c.update_damage_description()
 	if(repair_supplies == 0)

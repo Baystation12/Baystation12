@@ -34,3 +34,12 @@
 	can_hold = list(
 		/obj/item
 		)
+
+/obj/item/weapon/armor_patch/huragok
+	name = "Huragok Repair Supplies"
+	desc = "A set of infinite use materials and tools that will replenish armour plating. May need multiple appllcations."
+	icon_state = "armor_patch_cov"
+	repair_supplies = 15 //This is just setting the per click max repair amount. Lower than normal because they have infinite supplies.
+
+/obj/item/weapon/armor_patch/huragok/reduce_supplies(var/amt)
+	return
