@@ -129,12 +129,13 @@
 	var/mob/living/user = loc
 	if(!istype(user))
 		return
-	if(action_name == ACTION_USE_SCOPE)
-		toggle_scope(user,scope_zoom_amount)
-	else if(action_name == ACTION_ADJUST_ZOOM_PLUS)
-		increase_decrease_zoom_amt(1,user)
-	else if(action_name == ACTION_ADJUST_ZOOM_MINUS)
-		increase_decrease_zoom_amt(0,user)
+	switch(action_name)
+		if(ACTION_USE_SCOPE)
+			toggle_scope(user,scope_zoom_amount)
+		if(ACTION_ADJUST_ZOOM_PLUS)
+			increase_decrease_zoom_amt(1,user)
+		if(ACTION_ADJUST_ZOOM_MINUS)
+			increase_decrease_zoom_amt(0,user)
 
 #undef ACTION_USE_SCOPE
 #undef ACTION_ADJUST_ZOOM_PLUS

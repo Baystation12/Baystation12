@@ -26,6 +26,11 @@
 
 	light_color = "#E1FDFF"
 
+	can_smoke = 1
+	smoke_ammo = 5
+	smoke_ammo_max = 5
+	smoke_step_dist = 1
+
 	can_overrun_cover = 1
 
 	min_speed = 13
@@ -68,10 +73,10 @@
 /datum/vehicle_gun/scorp_machinegun
 	name = "Scorpion Machinegun"
 	desc = "A short burst machinegun, used for anti-infantry purposes."
-	burst_size = 3
+	burst_size = 10
 	burst_delay = 1
-	dispersion = list(0.73)
-	fire_delay = 10
+	dispersion = list(0.55)
+	fire_delay = 8
 	fire_sound = 'code/modules/halo/sounds/scorp_machinegun_fire.ogg'
 	mag_used = /obj/item/ammo_magazine/scorp_coax
 

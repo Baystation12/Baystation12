@@ -1,5 +1,5 @@
 
-#define MGALEKGOLO_TURN_DELAY 1 SECOND
+#define MGALEKGOLO_TURN_DELAY 0.7 SECONDS
 
 /obj/item/hunter_action
 	icon = 'code/modules/halo/covenant/species/lekgolo/hunter_actions.dmi'

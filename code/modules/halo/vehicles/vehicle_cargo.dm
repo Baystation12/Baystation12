@@ -70,6 +70,9 @@
 	set name = "Detach vehicle"
 	set src in view(1)
 
+	if(!carried_vehicle)
+		to_chat(usr,"<span class = 'notice'>You're not carrying a vehicle to detach!</span>")
+		return
 	verbs -= /obj/vehicles/proc/detach_vehicle
 	carried_vehicle.loc = pick_valid_exit_loc()
 	carried_vehicle = null

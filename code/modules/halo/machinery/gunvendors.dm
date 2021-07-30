@@ -36,6 +36,9 @@
 					"Explosives" = -1,
 					/obj/item/weapon/grenade/frag/m9_hedp = 0,
 					/obj/item/weapon/grenade/smokebomb = 0,
+					/obj/item/weapon/plastique = 0,
+					/obj/item/weapon/plastique/breaching = 0,
+					/obj/item/weapon/plastique/breaching/longrange = 0,
 					"Miscellaneous" = -1,
 					/obj/item/weapon/armor_patch = 0,
 					/obj/item/weapon/armor_patch/mini = 0,
@@ -43,7 +46,10 @@
 					)
 	amounts = list(\
 		/obj/item/weapon/grenade/frag/m9_hedp = 15,
-		/obj/item/weapon/grenade/smokebomb = 15
+		/obj/item/weapon/grenade/smokebomb = 15,
+		/obj/item/weapon/plastique = 2,
+		/obj/item/weapon/plastique/breaching = 2,
+		/obj/item/weapon/plastique/breaching/longrange = 2,
 	)
 
 /obj/machinery/pointbased_vending/armory/hybrid/innie
@@ -76,9 +82,9 @@
 		/obj/item/weapon/gun/projectile/srs99_sniper = 3,
 		/obj/item/weapon/gun/projectile/m41 = 3,
 		/obj/item/turret_deploy_kit/HMG = 2,
-		/obj/item/weapon/plastique = 8,
-		/obj/item/weapon/plastique/breaching = 4,
-		/obj/item/weapon/plastique/breaching/longrange = 4,
+		/obj/item/weapon/plastique = 2,
+		/obj/item/weapon/plastique/breaching = 2,
+		/obj/item/weapon/plastique/breaching/longrange = 2,
 	)
 
 /obj/machinery/pointbased_vending/armory/heavy/innie // HEAVY WEAPONS
@@ -107,8 +113,8 @@
 		/obj/item/weapon/gun/projectile/m41 = 1,
 		/obj/item/turret_deploy_kit/HMG = 2,
 		/obj/item/weapon/plastique = 8,
-		/obj/item/weapon/plastique/breaching = 4,
-		/obj/item/weapon/plastique/breaching/longrange = 4,
+		/obj/item/weapon/plastique/breaching = 2,
+		/obj/item/weapon/plastique/breaching/longrange = 2,
 	)
 
 /obj/machinery/vending/armory/police
@@ -281,9 +287,9 @@
 	amounts = list(\
 	/obj/item/weapon/grenade/frag/m9_hedp = 15,
 	/obj/item/weapon/grenade/smokebomb = 15,
-	/obj/item/weapon/plastique = 8,
-	/obj/item/weapon/plastique/breaching = 5,
-	/obj/item/weapon/plastique/breaching/longrange= 5,
+	/obj/item/weapon/plastique = 4,
+	/obj/item/weapon/plastique/breaching = 2,
+	/obj/item/weapon/plastique/breaching/longrange= 2,
 	)
 
 /obj/machinery/pointbased_vending/armory/odstvend/armour

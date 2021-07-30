@@ -22,6 +22,7 @@
 	. = ..()
 
 /obj/item/weapon/gun/vehicle_turret/dropped(var/mob/user)
+	. = ..()
 	loc = null
 	qdel(src)
 

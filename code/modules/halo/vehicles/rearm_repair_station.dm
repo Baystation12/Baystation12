@@ -70,6 +70,10 @@
 			GLOB.processing_objects -= src
 			return
 		var/did_something = 0
+		if(target_vic.can_smoke && target_vic.smoke_ammo < target_vic.smoke_ammo_max)
+			if(consume_material(REARM_RESOURCE_DRAIN))
+				target_vic.smoke_ammo = target_vic.smoke_ammo_max
+				did_something = 1
 		for(var/m in target_vic.ammo_containers)
 			var/obj/item/ammo_magazine/mag = m
 			if(mag.stored_ammo.len >= mag.max_ammo)

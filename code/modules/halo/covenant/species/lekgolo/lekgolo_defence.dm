@@ -22,13 +22,13 @@
 	var/damage
 	switch (severity)
 		if (1.0)
-			damage = 100
+			damage = 110
 
 		if (2.0)
 			damage = 50
 
 		if(3.0)
-			damage = 20
+			damage = 30
 
 	adjustBruteLoss(damage)
 

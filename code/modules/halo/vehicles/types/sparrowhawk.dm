@@ -48,7 +48,7 @@
 	desc = "A set of twin linked, high calibre autocannons used for anti infantry and light anti-vehicle"
 
 	fire_delay = 8
-	burst = 5
+	burst = 10
 	dispersion = list(0.15,0.3,0.45,0.6,0.73)
 	fire_sound = 'code/modules/halo/sounds/Assault_Rifle_Fire_New.wav'
 

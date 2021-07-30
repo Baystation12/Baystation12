@@ -10,8 +10,8 @@
 
 	layer = ABOVE_HUMAN_LAYER
 
-	maxHealth = 600
-	health = 600
+	maxHealth = 550
+	health = 550
 	unsuitable_atmos_damage = 0
 	var/crouched = 0
 
@@ -46,7 +46,7 @@
 
 	var/datum/mgalekgolo_weapon/active_weapon = /datum/mgalekgolo_weapon/fuel_rod_cannon
 	var/atom/current_target
-	var/regeneration = 1
+	var/regeneration = 0.5
 
 	var/hud_setup = 0
 
@@ -90,6 +90,7 @@
 	//heal a little
 	if(stat != DEAD && health < maxHealth)
 		health += regeneration
+	confused = 0 //Reset our confusion counter.
 
 	//regain charge
 	if(active_weapon.charge_amount <= active_weapon.charge_max)

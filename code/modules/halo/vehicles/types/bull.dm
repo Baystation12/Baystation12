@@ -16,7 +16,7 @@
 
 
 	occupants = list(4,1)
-	exposed_positions = list("driver" = 0,"gunner" = 0)
+	exposed_positions = list()
 
 	vehicle_carry_size = ITEM_SIZE_VEHICLE_SMALL
 	capacity_flag = ITEM_SIZE_VEHICLE
@@ -24,6 +24,10 @@
 	move_sound = 'code/modules/halo/sounds/warthog_move.ogg'
 
 	light_color = "#FEFFE1"
+
+	can_smoke = 1
+	smoke_ammo = 5
+	smoke_ammo_max = 5
 
 	acceleration = 2
 	min_speed = 8.75

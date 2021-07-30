@@ -22,6 +22,7 @@
 	user.forceMove(loc_moveto)
 	update_object_sprites()
 	update_user_view(user,1)
+	add_remove_vehicle_actions(user,1)
 	return
 
 /obj/vehicles/verb/enter_vehicle()
@@ -120,6 +121,8 @@
 	update_user_view(user)
 	visible_message("<span class = 'notice'>[user] enters the [position] position of [src].</span>")
 	to_chat(user,"<span class = 'info'>You are now in the [position] position of [src].</span>")
+	if(position == "driver")
+		add_remove_vehicle_actions(user)
 	return 1
 
 /obj/vehicles/proc/do_seat_switch(var/mob/user,var/position)

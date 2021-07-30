@@ -8,9 +8,9 @@
 	fire_sound = 'code/modules/halo/sounds/Fuelrodfire.ogg'
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/fuel_rod
-	fire_delay = 14 //disencourage spamming even though we have a higher mag size
+	fire_delay = 24 //disencourage spamming even though we have a higher mag size
 	one_hand_penalty = -1
-	dispersion = list(0.26)
+	dispersion = list(0)
 	charge_sound = null
 	hud_bullet_row_num = 5
 	hud_bullet_reffile = 'code/modules/halo/icons/hud_display/hud_bullet_12x8.dmi'

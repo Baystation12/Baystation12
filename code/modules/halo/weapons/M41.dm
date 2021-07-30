@@ -8,9 +8,9 @@
 	fire_sound = 'code/modules/halo/sounds/Rocket_Launcher_Fire_New.wav'
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/spnkr
-	fire_delay = 10
+	fire_delay = 20
 	one_hand_penalty = -1
-	dispersion = list(0.26)
+	dispersion = list(0)
 	hud_bullet_row_num = 2
 	hud_bullet_reffile = 'code/modules/halo/icons/hud_display/hud_bullet_32x16.dmi'
 	hud_bullet_iconstate = "rocket"
@@ -56,6 +56,7 @@
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	check_armour = "bomb"
 	step_delay = 1.2
+	kill_count = 15
 	shield_damage = 180
 	damage = 100
 	armor_penetration = 50

@@ -25,6 +25,9 @@
 	var/braking_mode = 0 //1 = brakes active, -1 = purposefully reducing drag to slide.
 	var/can_space_move = 0
 
+	//Action Button Handling
+	var/list/driver_actions = list()
+
 	//Advanced Damage Handling
 	var/datum/component_profile/comp_prof = /datum/component_profile
 
@@ -41,6 +44,16 @@
 	var/capacity_flag = ITEM_SIZE_SMALL
 	var/list/cargo_contents = list()
 	var/list/ammo_containers = list() //Ammunition containers in the form of ammo magazines.
+
+	//Smoke Countermeasures
+	var/can_smoke = 0
+	var/smoke_amt = 12 //The number of smoke entities created when the smoke button is hit. Smokebombs give off 10. Max 20.
+	var/smoke_ammo = 0 //How many smoke charges do we have.
+	var/smoke_ammo_max = 0
+	var/next_smoke_min = 0 //How long do we need to wait until we can use our next smoke charge?
+	var/smoke_delay = 3 SECONDS //Delay between smoke charges.
+	var/smoke_step_dist = 0 //How far should the smoke origin be shifted forward of our vehicle?
+	var/smoke_start_amt = 3 //How many times should we pop the smoke effect's start() proc? Smokebombs do it 4 times.
 
 	//Vehicle ferrying//
 	var/vehicle_size = ITEM_SIZE_VEHICLE//The size of the vehicle, used by vehicle cargo ferrying to determine allowed amount and allowed size.
@@ -128,6 +141,9 @@
 		verbs += /obj/vehicles/verb/toggle_headlights
 		set_light(0) //Switch off at spawn.
 	cargo_capacity = base_storage_capacity(capacity_flag)
+	if(can_smoke)
+		verbs += /obj/vehicles/proc/deploy_smoke
+	init_vehicle_actions()
 
 /obj/vehicles/Initialize()
 	. = ..()
@@ -172,19 +188,25 @@
 		attacker.UnarmedAttack(mob_to_hit)
 	comp_prof.take_component_damage(damage,"brute")
 
+/obj/vehicles/proc/get_display_filled_amt(var/amt,var/amt_initial)
+	. = "is empty!"
+	if(amt == amt_initial)
+		. = "is full!"
+	else if(amt >= amt_initial * 0.75)
+		. = "is about 3 quarters full."
+	else if(amt > amt_initial * 0.5)
+		. = "is about half full."
+	else if(amt > amt_initial * 0.25)
+		. = "is about a quarter full."
+
 /obj/vehicles/proc/display_ammo_status(var/mob/user)
 	for(var/m in ammo_containers)
 		var/obj/item/ammo_magazine/mag = m
-		var/msg = "is empty!"
-		if(mag.stored_ammo.len == mag.initial_ammo)
-			msg = "is full!"
-		if(mag.stored_ammo.len >= mag.initial_ammo * 0.75)
-			msg = "is about 3 quarters full."
-		else if(mag.stored_ammo.len > mag.initial_ammo * 0.5)
-			msg = "is about half full."
-		else if(mag.stored_ammo.len > mag.initial_ammo * 0.25)
-			msg = "is about a quarter full."
+		var/msg = get_display_filled_amt(mag.stored_ammo.len,mag.initial_ammo)
 		to_chat(user,"<span class = 'notice'>[src]'s [mag] [msg]</span>")
+
+	if(can_smoke)
+		to_chat(user,"<span class = 'notice'>[src]'s smoke dispenser has [smoke_ammo]/[smoke_ammo_max] charges remaining.</span>")
 
 /obj/vehicles/examine(var/mob/user)
 	. = ..()
@@ -712,12 +734,6 @@
 		var/new_time = world.time + 2 * severity MINUTES
 		if(new_time > spawn_datum.emp_toggle_time)
 			spawn_datum.emp_toggle_time = new_time
-
-	//25% lower chance to crash if we are flying
-	if(base_chance && prob(max(base_chance - 25, 5)))
-		//lose control of the vehicle
-		inactive_pilot_effects()
-		affected = TRUE
 
 	if(affected)
 		src.visible_message("\icon[src] <span class='notice'>[src] is affected by the EMP!</span>")

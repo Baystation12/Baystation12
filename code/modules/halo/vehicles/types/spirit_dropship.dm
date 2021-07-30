@@ -20,15 +20,21 @@
 
 	comp_prof = /datum/component_profile/spirit
 
-	occupants = list(14,1)
+	occupants = list(14,0)
 
-	exposed_positions = list()//No-one can get hit when inside this.
+	exposed_positions = list()
 
 	vehicle_size = ITEM_SIZE_VEHICLE_LARGE
 	vehicle_carry_size = ITEM_SIZE_VEHICLE
 	capacity_flag = ITEM_SIZE_VEHICLE_LARGE
 
 	light_color = "#C1CEFF"
+
+	can_smoke = 1
+	smoke_ammo = 10
+	smoke_ammo_max = 10
+	smoke_step_dist = 0
+
 	spawn_datum = /datum/mobile_spawn/covenant
 	ammo_containers = newlist(/obj/item/ammo_magazine/spirit_cannon)
 
@@ -53,7 +59,7 @@
 	repair_materials = list("nanolaminate")
 
 /datum/component_profile/spirit
-	pos_to_check = "gunner"
+	pos_to_check = "driver"
 	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/spirit_main)
 	vital_components = newlist(/obj/item/vehicle_component/health_manager/spirit)
 
@@ -63,9 +69,11 @@
 
 	fire_sound = 'code/modules/halo/sounds/spirit_firesound.ogg'
 
-	fire_delay = 2 SECONDS
+	fire_delay = 8
 
-	burst = 3
+	burst = 10
+
+	dispersion = list(0.15,0.3,0.45,0.5,0.55)
 
 	irradiate_non_cov = 12
 
@@ -82,9 +90,6 @@
 	projectile_type = /obj/item/projectile/bullet/covenant/spirit_cannon
 
 /obj/item/projectile/bullet/covenant/spirit_cannon
-	damage = 50
+	damage = 40
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "heavy_plas_cannon"
-
-/obj/item/projectile/bullet/covenant/spirit_cannon/on_impact(var/atom/impacted)
-	explosion(get_turf(impacted),-1,-1,0,1,guaranteed_damage = 25,guaranteed_damage_range = 1,adminwarn = 0)

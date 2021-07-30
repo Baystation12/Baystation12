@@ -27,6 +27,11 @@
 
 	light_color = "#FEFFE1"
 
+	can_smoke = 1
+	smoke_ammo = 5 //Technically the urf tank but it's also light armored so let's use same amount as 'hog and shadow.
+	smoke_ammo_max = 5
+	smoke_step_dist = 1
+
 	can_overrun_cover = 1
 
 	min_speed = 12.5

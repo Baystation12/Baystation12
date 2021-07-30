@@ -20,6 +20,11 @@
 
 	exposed_positions = list()
 
+	can_smoke = 1
+	smoke_ammo = 1
+	smoke_ammo_max = 1
+	smoke_step_dist = 1
+
 	var/faction_tag = "UNSC"
 
 	var/list/species_offsets = list("Human" = "0,7")
