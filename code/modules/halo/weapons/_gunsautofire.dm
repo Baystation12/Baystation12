@@ -18,11 +18,18 @@
 
 //Basic crosshair replacement for guns.
 
+/datum/client_preference/toggle_crosshair
+	description = "Toggle Crosshair"
+	key = "CROSSHAIR_TOGGLE"
+	enabled_description = "Enabled"
+	disabled_description = "Disabled"
+	enabled_by_default = TRUE
+
 /obj/item/weapon/gun
 	var/crosshair_file = 'code/modules/halo/weapons/icons/dragaim_icon2.dmi'
 
 /obj/item/weapon/gun/proc/check_should_have_crosshair(var/mob/living/user,var/slot = null)
-	if(!user.client)
+	if(!user.client || !user.is_preference_enabled(/datum/client_preference/toggle_crosshair))
 		return
 	if(istype(user,/mob/living/carbon/human))
 		var/eval = null
