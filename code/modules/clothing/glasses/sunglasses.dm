@@ -109,10 +109,20 @@
 	req_access = list(access_security)
 
 
+/obj/item/clothing/glasses/sunglasses/sechud/prescription
+	prescription = 5
+	desc = "Sunglasses with a HUD. These ones have eyesight-correcting lenses."
+
+
 /obj/item/clothing/glasses/sunglasses/sechud/goggles
 	name = "HUD goggles"
 	desc = "A pair of goggles with an inbuilt heads up display. The lenses provide some flash protection."
 	icon_state = "goggles"
+
+
+/obj/item/clothing/glasses/sunglasses/sechud/goggles/prescription
+	prescription = 5
+	desc = "A pair of goggles with an inbuilt heads up display. These ones have eyesight-correcting lenses."
 
 
 /obj/item/clothing/glasses/sunglasses/sechud/toggle
@@ -125,6 +135,11 @@
 	activation_sound = 'sound/effects/pop.ogg'
 	var/on = TRUE
 	var/hud_holder
+
+
+/obj/item/clothing/glasses/sunglasses/sechud/toggle/prescription
+	prescription = 5
+	desc = "Modified aviator glasses that can be switched between HUD and darkened modes. These ones have eyesight-correcting lenses."
 
 
 /obj/item/clothing/glasses/sunglasses/sechud/toggle/Initialize()
