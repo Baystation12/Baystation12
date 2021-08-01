@@ -26,9 +26,7 @@
 
 /datum/trader/pizzaria/trade_quantity(quantity, list/offers, num, turf/location)
 	. = ..()
-	quantity = 1
-	if(.)
-		var/atom/movable/M = .
+	for (var/atom/movable/M in .)
 		var/obj/item/pizzabox/box = new(location)
 		M.forceMove(box)
 		box.pizza = M
