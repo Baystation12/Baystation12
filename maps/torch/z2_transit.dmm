@@ -11,10 +11,6 @@
 /obj/effect/shuttle_landmark/escape_pod/transit/pod16,
 /turf/space/transit/north,
 /area/space)
-"dj" = (
-/obj/effect/shuttle_landmark/transit/scavver_gantry/two,
-/turf/space,
-/area/space)
 "dK" = (
 /turf/space/transit/north,
 /area/space)
@@ -29,10 +25,6 @@
 	nostop = 0;
 	tiles = 0
 	},
-/turf/space,
-/area/space)
-"ft" = (
-/obj/effect/shuttle_landmark/transit/scavver_gantry,
 /turf/space,
 /area/space)
 "gm" = (
@@ -145,10 +137,6 @@
 	tiles = 0
 	},
 /turf/space/bluespace,
-/area/space)
-"xw" = (
-/obj/effect/shuttle_landmark/transit/scavver_gantry/three,
-/turf/space,
 /area/space)
 "yk" = (
 /obj/effect/shuttle_landmark/transit/torch/aquila,
@@ -30062,7 +30050,7 @@ Vj
 Vj
 Vj
 Vj
-ft
+Vj
 Vj
 Vj
 Vj
@@ -34304,7 +34292,7 @@ Vj
 Vj
 Vj
 Vj
-dj
+Vj
 Vj
 Vj
 Vj
@@ -38546,7 +38534,7 @@ Vj
 Vj
 Vj
 Vj
-xw
+Vj
 Vj
 Vj
 Vj

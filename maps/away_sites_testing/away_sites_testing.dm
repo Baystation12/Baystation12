@@ -20,7 +20,6 @@
 	#include "../away/verne/verne.dm"
 	#include "../away/meatstation/meatstation.dm"
 	#include "../away/miningstation/miningstation.dm"
-	#include "../away/scavver/scavver_gantry.dm"
 	#include "../away/voxship/voxship.dm"
 
 	#define using_map_DATUM /datum/map/away_sites_testing

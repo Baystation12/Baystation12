@@ -32,10 +32,6 @@
 "ah" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/maintenance/fourthdeck/aft)
-"ai" = (
-/obj/effect/shuttle_landmark/scavver_gantry/torch/three,
-/turf/space,
-/area/space)
 "aj" = (
 /obj/structure/sign/warning/docking_area,
 /turf/simulated/wall/r_wall/hull,
@@ -4760,7 +4756,6 @@
 	locked = 1;
 	name = "EVA External Access"
 	},
-/obj/effect/shuttle_landmark/scavver_gantry/torch/two,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/eva)
 "qR" = (
@@ -9482,10 +9477,6 @@
 	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/lounge)
-"Gt" = (
-/obj/effect/shuttle_landmark/scavver_gantry/torch,
-/turf/space,
-/area/space)
 "Gu" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4;
@@ -21929,7 +21920,7 @@ aa
 aa
 aa
 aa
-Gt
+aa
 aa
 aa
 aa
@@ -40280,7 +40271,7 @@ aa
 aa
 aa
 aa
-ai
+aa
 aa
 aa
 aa
