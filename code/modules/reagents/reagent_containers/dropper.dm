@@ -57,8 +57,9 @@
 						return
 
 				var/mob/living/M = target
-				var/contained = reagentlist()
-				admin_attack_log(user, M, "Squirted their victim with \a [src] (Reagents: [contained])", "Were squirted with \a [src] (Reagents: [contained])", "used \a [src] (Reagents: [contained]) to squirt at")
+				if (reagents.should_admin_log())
+					var/contained = reagentlist()
+					admin_attack_log(user, M, "Squirted their victim with \a [src] (Reagents: [contained])", "Were squirted with \a [src] (Reagents: [contained])", "used \a [src] (Reagents: [contained]) to squirt at")
 
 				var/spill_amt = M.incapacitated()? 0 : 30
 				trans += reagents.splash(target, reagents.total_volume/2, max_spill = spill_amt)
