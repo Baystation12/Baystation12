@@ -1,6 +1,0 @@
-author: 'Yvesza '
-delete-after: true
-changes:
-  - balance: Dislocations via disarm intent are significantly less likely to occur
-      with low force weapons initially, chance to dislocate rises as damage is dealt
-      to limbs.
