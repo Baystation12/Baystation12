@@ -1,0 +1,6 @@
+author: Yvesza
+delete-after: true
+changes:
+  - balance: Flashes no longer stun simple mobs / animals, instead they'll be confused
+      and stumble around.
+  - tweak: Flashes no longer stack their confusion / stun effects infinitely.
