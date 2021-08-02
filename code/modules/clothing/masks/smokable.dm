@@ -3,6 +3,7 @@
 	desc = "You're not sure what this is. You should probably ahelp it."
 	body_parts_covered = 0
 	waterproof = FALSE
+	item_flags = null
 
 	var/lit = 0
 	var/icon_on

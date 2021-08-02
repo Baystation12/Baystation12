@@ -45,14 +45,7 @@ obj/var/contaminated = 0
 	//Clothing can be contaminated, with exceptions for certain items which cannot be washed in washing_machine.dm
 	if (obj_flags & ITEM_FLAG_PHORONGUARD) return 0
 
-	else if (istype(src, /obj/item/clothing/mask/gas)	|| \
-			istype(src, /obj/item/clothing/accessory)	|| \
-			istype(src, /obj/item/clothing/ring)		|| \
-			istype(src, /obj/item/clothing/ears)		|| \
-			istype(src, /obj/item/clothing/glasses))
-		return 0
-
-	else if (istype(src,/obj/item/clothing)) return 1
+	else if (item_flags & ITEM_FLAG_WASHER_ALLOWED) return 1
 
 /obj/item/proc/contaminate()
 	//Do a contamination overlay? Temporary measure to keep contamination less deadly than it was.

@@ -50,7 +50,7 @@
 	item_state = "bgloves"
 	siemens_coefficient = 0.50
 	permeability_coefficient = 0.05
-	item_flags = ITEM_FLAG_THICKMATERIAL
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_WASHER_ALLOWED
 
 	cold_protection = HANDS
 	min_cold_protection_temperature = GLOVES_MIN_COLD_PROTECTION_TEMPERATURE
@@ -58,7 +58,7 @@
 	max_heat_protection_temperature = GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE
 
 /obj/item/clothing/gloves/thick/modified
-	item_flags = ITEM_FLAG_PREMODIFIED
+	item_flags = ITEM_FLAG_PREMODIFIED | ITEM_FLAG_WASHER_ALLOWED
 
 /obj/item/clothing/gloves/thick/swat
 	desc = "These tactical gloves are somewhat fire and impact-resistant."
@@ -100,7 +100,7 @@
 	item_state = "ggloves"
 
 /obj/item/clothing/gloves/thick/botany/modified
-	item_flags = ITEM_FLAG_PREMODIFIED
+	item_flags = ITEM_FLAG_PREMODIFIED | ITEM_FLAG_WASHER_ALLOWED
 
 /obj/item/clothing/gloves/latex
 	name = "latex gloves"
@@ -113,7 +113,7 @@
 	germ_level = 0
 
 /obj/item/clothing/gloves/latex/modified
-	item_flags = ITEM_FLAG_PREMODIFIED
+	item_flags = ITEM_FLAG_PREMODIFIED | ITEM_FLAG_WASHER_ALLOWED
 
 /obj/item/clothing/gloves/latex/nitrile
 	name = "nitrile gloves"
@@ -122,7 +122,7 @@
 	item_state = "ngloves"
 
 /obj/item/clothing/gloves/latex/nitrile/modified
-	item_flags = ITEM_FLAG_PREMODIFIED
+	item_flags = ITEM_FLAG_PREMODIFIED | ITEM_FLAG_WASHER_ALLOWED
 
 /obj/item/clothing/gloves/thick/duty
 	desc = "These brown duty gloves are made from a durable synthetic."
@@ -136,7 +136,7 @@
 		)
 
 /obj/item/clothing/gloves/thick/duty/modified
-	item_flags = ITEM_FLAG_PREMODIFIED
+	item_flags = ITEM_FLAG_PREMODIFIED | ITEM_FLAG_WASHER_ALLOWED
 
 /obj/item/clothing/gloves/tactical
 	desc = "These brown tactical gloves are made from a durable synthetic, and have hardened knuckles."
@@ -177,7 +177,7 @@
 	siemens_coefficient = 0.50
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.50
-	item_flags = ITEM_FLAG_THICKMATERIAL
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_WASHER_ALLOWED
 	body_parts_covered = HANDS
 	cold_protection = HANDS
 	heat_protection = HANDS

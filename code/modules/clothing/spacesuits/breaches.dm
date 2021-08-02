@@ -33,6 +33,7 @@
 	var/damage = 0                          // Current total damage. Does not count patched breaches.
 	var/brute_damage = 0                    // Specifically brute damage. Includes patched punctures.
 	var/burn_damage = 0                     // Specifically burn damage. Includes patched burns.
+	item_flags = null
 
 /datum/breach/proc/update_descriptor()
 
