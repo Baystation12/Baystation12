@@ -52,6 +52,10 @@
 	item_state = "medhud_visor"
 	body_parts_covered = EYES
 
+/obj/item/clothing/glasses/hud/health/visor/prescription
+	prescription = 5
+	desc = "A medical HUD integrated with a wide visor. This one has a corrective lense."
+
 /obj/item/clothing/glasses/hud/security
 	name = "security HUD"
 	desc = "A heads-up display that scans the humans in view and provides accurate data about their ID status and security records."

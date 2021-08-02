@@ -184,6 +184,7 @@
 	icon_state = "monocle"
 	item_state = "headset" // lol
 	body_parts_covered = 0
+	prescription = 5
 
 /obj/item/clothing/glasses/material
 	name = "optical material scanner"
