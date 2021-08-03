@@ -6,7 +6,8 @@
 
 
 /datum/gear/eyes/glasses
-	display_name = "Corrective Eyewear Selection"
+	display_name = "Corrective Eyewear"
+	description = "Simply corrects eyesight."
 	path = /obj/item/clothing/glasses
 
 
@@ -14,14 +15,15 @@
 	..()
 	var/list/options = list()
 	options["Basic Glasses"] = /obj/item/clothing/glasses/prescription
-	options["Green Glasses"] = /obj/item/clothing/glasses/prescription/gglasses
-	options["Hipster Glasses"] = /obj/item/clothing/glasses/prescription/hipster
-	options["Scanning Goggles"] = /obj/item/clothing/glasses/prescription/scanners
+	options["Green Glasses"] = /obj/item/clothing/glasses/green
+	options["Hipster Glasses"] = /obj/item/clothing/glasses/hipster
+	options["Scanning Goggles"] = /obj/item/clothing/glasses/scanners
 	gear_tweaks += new /datum/gear_tweak/path (options)
 
 
 /datum/gear/eyes/science
-	display_name = "Science Eyewear Selection"
+	display_name = "Science Eyewear"
+	description = "Provides research and chemical assessments."
 	path = /obj/item/clothing/glasses
 
 
@@ -36,7 +38,8 @@
 
 
 /datum/gear/eyes/security
-	display_name = "Security Eyewear Selection"
+	display_name = "Security Eyewear"
+	description = "Provides security vision overlays."
 	path = /obj/item/clothing/glasses
 
 
@@ -56,7 +59,8 @@
 
 
 /datum/gear/eyes/medical
-	display_name = "Medical Eyewear Selection"
+	display_name = "Medical Eyewear"
+	description = "Provides medical vision overlays."
 	path = /obj/item/clothing/glasses
 
 
@@ -72,7 +76,8 @@
 
 
 /datum/gear/eyes/meson
-	display_name = "Meson Eyewear Selection"
+	display_name = "Meson Eyewear"
+	description = "Provides meson-vision."
 	path = /obj/item/clothing/glasses
 
 
@@ -80,13 +85,14 @@
 	..()
 	var/list/options = list()
 	options["Goggles"] = /obj/item/clothing/glasses/meson
-	options["Goggles, prescription"] = /obj/item/clothing/glasses/meson/prescription
+	options["Goggles, corrective"] = /obj/item/clothing/glasses/meson/prescription
 	options["Eyepatch"] = /obj/item/clothing/glasses/eyepatch/hud/meson
 	gear_tweaks += new /datum/gear_tweak/path (options)
 
 
 /datum/gear/eyes/janitor
-	display_name = "Sanitation Eyewear Selection"
+	display_name = "Sanitation Eyewear"
+	description = "Provides filth-vision."
 	path = /obj/item/clothing/glasses
 
 
@@ -99,7 +105,8 @@
 
 
 /datum/gear/eyes/sunglasses
-	display_name = "Sunglasses Selection"
+	display_name = "Anti-Glare Eyewear"
+	description = "Provides basic bright light and flash protection."
 	path = /obj/item/clothing/glasses
 
 
@@ -118,6 +125,20 @@
 	options["Gold Aviators, corrective"] = /obj/item/clothing/glasses/aviators_gold/prescription
 	options["Rose Aviators"] = /obj/item/clothing/glasses/aviators_rose
 	options["Rose Aviators, corrective"] = /obj/item/clothing/glasses/aviators_rose/prescription
+	gear_tweaks += new /datum/gear_tweak/path (options)
+
+
+/datum/gear/eyes/eyepatch
+	display_name = "Eyepatch Selection"
+	description = "Conceals a single eye."
+	path = /obj/item/clothing/glasses
+
+
+/datum/gear/eyes/eyepatch/New()
+	..()
+	var/list/options = list()
+	options["Eyepatch"] = /obj/item/clothing/glasses/eyepatch
+	options["iPatch"] = /obj/item/clothing/glasses/eyepatch/hud
 	gear_tweaks += new /datum/gear_tweak/path (options)
 
 
@@ -140,16 +161,6 @@
 /datum/gear/eyes/monocle
 	display_name = "Monocle"
 	path = /obj/item/clothing/glasses/monocle
-
-
-/datum/gear/eyes/eyepatch
-	display_name = "Eyepatch"
-	path = /obj/item/clothing/glasses/eyepatch
-
-
-/datum/gear/eyes/hudpatch
-	display_name = "iPatch"
-	path = /obj/item/clothing/glasses/eyepatch/hud
 
 
 /datum/gear/eyes/blindfold
