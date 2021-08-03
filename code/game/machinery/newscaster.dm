@@ -617,6 +617,9 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 			src.updateUsrDialog()
 
 		else if(href_list["cancel_wanted"])
+			if (!connected_group.wanted_issue)
+				alert("There is no wanted issue to cancel.", "Ok")
+				return
 			if(connected_group.wanted_issue.is_admin_message)
 				alert("The wanted issue has been distributed by a [GLOB.using_map.company_name] higherup. You cannot take it down.","Ok")
 				return
