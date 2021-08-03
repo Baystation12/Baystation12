@@ -36,7 +36,7 @@
 	layer = ABOVE_HUMAN_LAYER
 
 	var/nitrogen_retardation_factor = 0.15	//Higher == N2 slows reaction more
-	var/thermal_release_modifier = 10000		//Higher == more heat released during reaction
+	var/thermal_release_modifier = 15000		//Higher == more heat released during reaction
 	var/phoron_release_modifier = 1500		//Higher == less phoron released by reaction
 	var/oxygen_release_modifier = 15000		//Higher == less oxygen released at high temperature/power
 	var/radiation_release_modifier = 2      //Higher == more radiation released with more power.
@@ -70,7 +70,7 @@
 
 	var/grav_pulling = 0
 	// Time in ticks between delamination ('exploding') and exploding (as in the actual boom)
-	var/pull_time = 300
+	var/pull_time = 30 SECONDS
 	var/explosion_power = 9
 
 	var/emergency_issued = 0
