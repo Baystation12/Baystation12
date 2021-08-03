@@ -206,10 +206,20 @@
 	if(href_list["add_antagonist"])
 		var/datum/antagonist/antag = GLOB.all_antag_types_[href_list["add_antagonist"]]
 		if(antag)
+			if(!current)
+				to_chat(usr, SPAN_WARNING("\The [src] could not be made into a [antag.role_text]! They do not have a mob."))
+				return
+			if(src in antag.current_antagonists)
+				to_chat(usr, SPAN_WARNING("\The [src] is already a [antag.role_text]!"))
+				return
+			var/result = antag.can_become_antag_detailed(src, TRUE)
+			if(result)
+				to_chat(usr, SPAN_WARNING("\The [src] could not be made into a [antag.role_text]! [result]."))
+				return
 			if(antag.add_antagonist(src, 1, 1, 0, 1, 1)) // Ignore equipment and role type for this.
 				log_admin("[key_name_admin(usr)] made [key_name(src)] into a [antag.role_text].")
 			else
-				to_chat(usr, "<span class='warning'>[src] could not be made into a [antag.role_text]!</span>")
+				to_chat(usr, SPAN_WARNING("\The [src] could not be made into a [antag.role_text]!"))
 
 	else if(href_list["remove_antagonist"])
 		var/datum/antagonist/antag = GLOB.all_antag_types_[href_list["remove_antagonist"]]
