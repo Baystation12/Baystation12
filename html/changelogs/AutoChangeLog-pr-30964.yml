@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - admin: Parried and blocked attacks now generate attack logs, matching the handling
+      of successful hits and misses.
