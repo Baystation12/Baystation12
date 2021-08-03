@@ -39,7 +39,7 @@ proc/process_sec_hud(var/mob/M, var/advanced_mode, var/mob/Alt)
 			continue
 
 		P.Client.images += perp.hud_list[ID_HUD]
-		if(advanced_mode)
+		if(advanced_mode && !perp.fake_name)
 			P.Client.images += perp.hud_list[WANTED_HUD]
 			P.Client.images += perp.hud_list[IMPTRACK_HUD]
 			P.Client.images += perp.hud_list[IMPLOYAL_HUD]
