@@ -150,9 +150,9 @@
 			admin_attack_log(src, A, "Has attacked its victim.", "Has been attacked by its attacker.")
 	if(a_intent == I_HELP)
 		A.attack_animal(src)
-	else
+	else if (get_natural_weapon())
 		A.attackby(get_natural_weapon(), src)
 
 // Attack hand but for simple animals
 /atom/proc/attack_animal(mob/user)
-	return attack_hand(user) 
+	return attack_hand(user)
