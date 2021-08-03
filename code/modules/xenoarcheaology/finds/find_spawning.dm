@@ -329,17 +329,6 @@
 /obj/item/archaeological_find/blade/spawn_item()
 	return new /obj/item/melee/cultblade(loc)
 
-/obj/item/archaeological_find/beacon
-	item_type = "device"
-	find_type = ARCHAEO_TELEBEACON
-
-/obj/item/archaeological_find/beacon/spawn_item()
-	var/obj/item/device/radio/beacon/new_item = new(loc)
-	new_item.icon = 'icons/obj/xenoarchaeology.dmi'
-	new_item.icon_state = "unknown[rand(1,4)]"
-	new_item.desc = ""
-	return new_item
-
 /obj/item/archaeological_find/sword
 	item_type = "sword"
 	find_type = ARCHAEO_CLAYMORE

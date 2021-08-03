@@ -816,3 +816,12 @@
 	req_tech = list(TECH_POWER = 1, TECH_ENGINEERING = 1)
 	build_path = /obj/item/stock_parts/circuitboard/modular_computer
 	sort_string = "XAAAD"
+
+/datum/design/circuit/tele_beacon
+	name = "teleporter beacon"
+	id = "tele_beacon"
+	req_tech = list(
+		TECH_BLUESPACE = 1
+	)
+	build_path = /obj/item/stock_parts/circuitboard/tele_beacon
+	sort_string = "XAAAF"
