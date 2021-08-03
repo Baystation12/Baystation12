@@ -25,17 +25,11 @@
 		/obj/item/implanter,
 		/obj/item/flame,
 		/obj/item/paper,
-		/obj/item/paper_bundle,
 		/obj/item/pen,
 		/obj/item/photo,
-		/obj/item/reagent_containers/dropper,
-		/obj/item/reagent_containers/syringe,
 		/obj/item/reagent_containers/pill,
-		/obj/item/reagent_containers/hypospray/autoinjector,
-		/obj/item/reagent_containers/glass/beaker/vial,
 		/obj/item/device/radio/headset,
-		/obj/item/device/paicard,
-		/obj/item/stamp,
+		/obj/item/device/encryptionkey,
 		/obj/item/key,
 		/obj/item/clothing/accessory/badge,
 		/obj/item/clothing/accessory/medal,
@@ -43,6 +37,7 @@
 		/obj/item/clothing/ring,
 		/obj/item/passport
 	)
+
 	slot_flags = SLOT_ID
 
 	var/obj/item/card/id/front_id = null
