@@ -1,7 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - maptweak: Rearranged the bar area to provide two open table spaces closer to the
-      bar itself for bartenders to do whatever with.
-  - maptweak: Added an ashtray and entertainment intercom to the bar itself.
-  - tweak: The dinnerware dispenser now includes 4 vacuum flasks.

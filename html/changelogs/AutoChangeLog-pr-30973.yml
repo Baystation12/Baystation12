@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: You can no longer abuse voting restrictions by re-entering your dead body
-      to vote.

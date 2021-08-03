@@ -1,5 +1,0 @@
-author: gy1ta23
-delete-after: true
-changes:
-  - tweak: Wallets can hold less things they shouldn't be able to, and can hold more
-      things they should.

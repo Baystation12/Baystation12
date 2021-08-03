@@ -1,5 +1,0 @@
-author: ''
-delete-after: true
-changes:
-  - rscadd: Adds a new random event; the Supermatter Power Surge. Increases emitted
-      heat, radiation and power for a short duration.

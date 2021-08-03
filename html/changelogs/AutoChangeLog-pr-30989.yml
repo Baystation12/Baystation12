@@ -1,7 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - tweak: Standing on the same tile as a fragmentation grenade will now deal far
-      more damage and not allow you to avoid a majority of the fragments. Fragmentation
-      grenades now also properly handle checking for if a mob is carrying them or
-      not for extra damage.

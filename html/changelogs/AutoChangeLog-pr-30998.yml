@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - tweak: Shield effects without a valid generator now appear red. If you see a red
-      shield, ahelp it for a dev.

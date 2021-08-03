@@ -1,7 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - tweak: The supermatter's thermal output has been bumped, which should result in
-      higher EER (1,000+) setups being more dangerous and require more monitoring/micromanagement
-      to maintain stability. These are the same settings that have been used in the
-      test rounds.
