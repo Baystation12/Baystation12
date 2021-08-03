@@ -45,7 +45,7 @@
 	allowed = list(/obj/item/weapon/gun/energy, /obj/item/weapon/gun/projectile, /obj/item/ammo_magazine,
 				   /obj/item/ammo_casing, /obj/item/weapon/melee/baton, /obj/item/weapon/melee/energy/elite_sword)
 	specials = list(/datum/armourspecials/shields/elite,/datum/armourspecials/shieldmonitor/sangheili)
-	armor = list(melee = 55, bullet = 40, laser = 55, energy = 50, bomb = 40, bio = 25, rad = 25)//ODST tier, but 5 lower bullet due to having shields.
+	armor = list(melee = 55, bullet = 50, laser = 55, energy = 45, bomb = 40, bio = 25, rad = 25)
 	armor_thickness_modifiers = list()
 	unacidable = 1
 	max_suitstore_w_class = ITEM_SIZE_HUGE

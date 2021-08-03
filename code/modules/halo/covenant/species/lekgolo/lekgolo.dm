@@ -32,9 +32,9 @@
 	var/custom_name
 
 	languages = list(LANGUAGE_SANGHEILI, LANGUAGE_LEKGOLO)
-	melee_damage_lower = 30
-	melee_damage_upper = 50
-	attacktext = "swiped"
+	melee_damage_lower = 50
+	melee_damage_upper = 60
+	attacktext = "crushed"
 	a_intent = I_HURT
 	resistance = 20
 	attack_sound = 'sound/weapons/heavysmash.ogg'

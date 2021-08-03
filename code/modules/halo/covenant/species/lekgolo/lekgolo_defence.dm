@@ -7,12 +7,13 @@
 
 /mob/living/simple_animal/mgalekgolo/hit_with_weapon(obj/item/O, mob/living/user, var/effective_force, var/hit_zone)
 	if(crouched && !(get_dir(src,user) in get_allowed_attack_dirs()))
-		if(prob(25) && O.force >= resistance)//40 is force of active energysword.
+		if(effective_force >= resistance)//40 is force of active energysword.
+			effective_force -= resistance
 			visible_message("<span class = 'danger'>[user] attacks [src.name] with \the [O.name], bypassing the armor plating!</span>")
 			.=..()
 		else
 			visible_message("<span class = 'danger'>The [O.name] bounces off the armor of \the [name]</span>")
-		return
+			return
 	. = ..()
 
 /mob/living/simple_animal/mgalekgolo/ex_act(severity)
@@ -22,10 +23,10 @@
 	var/damage
 	switch (severity)
 		if (1.0)
-			damage = 110
+			damage = 80
 
 		if (2.0)
-			damage = 50
+			damage = 55
 
 		if(3.0)
 			damage = 30

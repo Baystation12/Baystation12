@@ -57,7 +57,6 @@
 	cached_user = user
 	active = TRUE
 	user.flight_ticks_remain = flight_ticks_curr
-	slowdown_general = -0.1
 	user.flight_item = src
 	user.take_flight(flight_ticks_curr,"<span class = 'warning'>[user.name][takeoff_msg]</span>","<span class = 'warning'>[user.name][land_msg]</span>")
 	GLOB.processing_objects -= src
@@ -73,7 +72,6 @@
 	cached_user = null
 	flight_ticks_curr = user.flight_ticks_remain
 	user.flight_item = null
-	slowdown_general = initial(slowdown_general)
 	if(user.elevation > 0)
 		user.take_flight(0,(output_msg ? "<span class = 'warning'>[user.name][takeoff_msg]</span>" : null),(output_msg ? "<span class = 'warning'>[user.name][land_msg]</span>" : null))
 	GLOB.processing_objects += src

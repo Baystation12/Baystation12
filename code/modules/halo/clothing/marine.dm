@@ -194,14 +194,16 @@
 	w_class = ITEM_SIZE_HUGE
 	max_w_class = ITEM_SIZE_LARGE
 	item_state = "UNSC Marine Ammo Belt"
-	storage_slots = 6
+	storage_slots = 7
 
 	can_hold = list(\
+	/obj/item/weapon/material/knife/combat_knife,
 	/obj/item/ammo_magazine,
 	/obj/item/ammo_box,
 	/obj/item/weapon/armor_patch,
 	/obj/item/ammo_casing,
 	/obj/item/weapon/plastique,
+	/obj/item/weapon/tank/emergency/oxygen
 	)
 
 /obj/item/weapon/storage/belt/marine_medic

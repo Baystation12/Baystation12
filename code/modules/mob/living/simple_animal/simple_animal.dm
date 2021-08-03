@@ -56,7 +56,7 @@
 	var/attack_sound = null
 	var/friendly = "nuzzles"
 	var/environment_smash = 0
-	var/resistance		  = 0	// Damage reduction
+	var/resistance		  = 0	// Damage reduction. Ranged attacks subract their AP from this, melee does not.
 	var/can_ignite = 0
 	var/ignite_overlay = "Generic_mob_burning"
 	var/image/fire_overlay_image
@@ -331,11 +331,15 @@
 		else
 			O.attack(src, user, user.zone_sel.selecting)
 			return 1
+
 /mob/living/simple_animal/hit_with_weapon(obj/item/O, mob/living/user, var/effective_force, var/hit_zone)
 
 	visible_message("<span class='danger'>\The [src] has been attacked with \the [O] by [user].</span>")
 
-	if(O.force <= resistance-O.armor_penetration)
+	//This used to subtract a melee weapon's AP from the value but melee weapons are currently using
+	//very high AP values to allow them to be effective with the armour system. Removed AP reduction for melee weapons.
+
+	if(O.force <= resistance)
 		to_chat(user, "<span class='danger'>This weapon is ineffective, it does no damage.</span>")
 		return 2
 

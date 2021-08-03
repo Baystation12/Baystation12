@@ -72,7 +72,7 @@
 	slot_flags = SLOT_BACK
 	fire_sound = 'code/modules/halo/sounds/beam_rifle_fire.ogg'
 	charge_meter = 0
-	max_shots = 16
+	max_shots = 24
 	projectile_type = /obj/item/projectile/bullet/covenant/beamrifle
 	one_hand_penalty = -1
 	irradiate_non_cov = 12
@@ -87,7 +87,7 @@
 	advanced_covenant = 1
 	overheat_sfx = 'code/modules/halo/sounds/beam_rifle_overheat.ogg'
 	overheat_capacity = 4 //SRS mag equiv, but overheats on 4th click
-	overheat_fullclear_delay = 4 SECONDS
+	overheat_fullclear_delay = 2 SECONDS
 	hud_bullet_usebar = 1
 
 	alt_charge_method = 1

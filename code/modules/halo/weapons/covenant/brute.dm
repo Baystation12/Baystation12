@@ -68,7 +68,7 @@
 	force = 35
 	is_heavy = 1
 	armor_penetration = 70
-	accuracy = -1
+	accuracy = 0
 	dispersion = list(0.2,0.3,0.5)
 	hud_bullet_reffile = 'code/modules/halo/icons/hud_display/hud_bullet_5x6.dmi'
 	hud_bullet_iconstate = "spike"
@@ -110,8 +110,9 @@
 
 /obj/item/projectile/bullet/spiker
 	name = "Spike"
-	armor_penetration = 20
 	damage = 20
+	shield_damage = 15
+	armor_penetration = 20
 
 /obj/item/projectile/bullet/spiker/on_hit(var/mob/living/carbon/human/L, var/blocked, var/def_zone )
 	if(blocked >= 100 || !istype(L))
@@ -145,7 +146,7 @@
 	force = 35
 	is_heavy = 1
 	armor_penetration = 70
-	accuracy = -1
+	accuracy = 0
 	dispersion = list(0.45)
 	hud_bullet_reffile = 'code/modules/halo/icons/hud_display/hud_bullet_7x8.dmi'
 	hud_bullet_iconstate = "mauler"

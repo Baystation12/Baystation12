@@ -5,7 +5,9 @@
 	icon = 'tools.dmi'
 	item_state = "securitybelt"
 	color = "#ff99ff"
+	w_class = ITEM_SIZE_HUGE
 	max_w_class = ITEM_SIZE_LARGE
+	storage_slots = 7
 	sprite_sheets = list(
 		"Tvaoan Kig-Yar" = null,\
 		"Sangheili" = null\
@@ -19,7 +21,7 @@
 		/obj/item/clothing/gloves/shield_gauntlet,\
 		/obj/item/weapon/armor_patch,\
 		/obj/item/weapon/plastique,\
-		/obj/item/weapon/tank/emergency/oxygen/covenant)
+		/obj/item/weapon/tank/emergency/oxygen)
 
 /obj/item/weapon/storage/belt/covenant_medic
 	name = "Covenant Medical Belt"

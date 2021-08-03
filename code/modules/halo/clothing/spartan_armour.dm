@@ -40,7 +40,7 @@
 	icon_override = 'code/modules/halo/clothing/spartan_armour.dmi'
 
 	blood_overlay_type = "armor"
-	armor = list(melee = 55, bullet = 50, laser = 55, energy = 45, bomb = 40, bio = 25, rad = 25) //Shields and fullstrength armour? oh my
+	armor = list(melee = 55, bullet = 50, laser = 55, energy = 45, bomb = 40, bio = 25, rad = 25)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL | AIRTIGHT
 	flags_inv = HIDETAIL

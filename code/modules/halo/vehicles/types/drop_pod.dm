@@ -1,4 +1,3 @@
-#define POD_FAIL_CHANCE 1 //This is the chance a drop-pod will fail on impact and auto-eject the user + exploding.
 
 /obj/vehicles/drop_pod
 	name = "SOEIV Drop Pod"
@@ -138,10 +137,6 @@
 			post_drop_effects(drop_turf)
 
 /obj/vehicles/drop_pod/proc/post_drop_effects(var/turf/drop_turf)
-
-	if(prob(POD_FAIL_CHANCE))
-		on_death()//do death effects
-		return
 	//explosion(drop_turf,-1,0,2,5)
 	playsound(src, 'sound/effects/bamf.ogg', 100, 1)
 
@@ -235,15 +230,6 @@
 		target_turf = locate(rand(chosen_area[1],chosen_area[3]),rand(chosen_area[2],chosen_area[4]),pick(om_targ.map_z))
 
 	return target_turf
-
-/obj/vehicles/drop_pod/overmap/post_drop_effects(var/turf/drop_turf)
-	var/obj/effect/overmap/our_om_obj = map_sectors["[drop_turf.z]"]
-	if(!isnull(our_om_obj))
-		var/landing_depth = our_om_obj.map_z.Find(drop_turf.z)
-		if(prob(POD_FAIL_CHANCE * landing_depth))
-			on_death()//do death effects
-			return
-	. = ..()
 
 /datum/component_profile/drop_pod
 	gunner_weapons = list()

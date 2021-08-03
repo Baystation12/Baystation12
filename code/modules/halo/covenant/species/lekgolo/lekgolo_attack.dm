@@ -18,7 +18,6 @@
 
 	var/next_shot
 	var/shot_delay = 6 //Delay between each shot, in ticks.
-	var/shot_charge_delay = 1 SECOND
 
 /datum/mgalekgolo_weapon/fuel_rod_cannon
 	name = "Fuel Rod Cannon"
@@ -29,10 +28,9 @@
 
 	charge_max = 50
 	charge_amount = 50
+	charge_drain = 15
 
 	shot_delay = 2 SECONDS
-	shot_charge_delay = 1 SECOND
-
 
 
 // Helper procs //
@@ -96,15 +94,14 @@
 
 	current_target = A
 	active_weapon.next_shot = world.time + active_weapon.shot_delay
-	if(do_after(src, active_weapon.shot_charge_delay))
-		var/obj/item/projectile/new_proj = new active_weapon.proj (loc)
-		new_proj.permutated += src //A workaround for the projectile colliding with the 64x64 bounds of the sprite.
-		new_proj.launch(current_target)
-		if(active_weapon.fire_sound)
-			playsound_local(loc,active_weapon.fire_sound,110,1,,5)
-		current_target = null
-		active_weapon.charge_amount -= active_weapon.charge_drain
-		active_weapon.next_shot = world.time + active_weapon.shot_delay
+	var/obj/item/projectile/new_proj = new active_weapon.proj (loc)
+	new_proj.permutated += src //A workaround for the projectile colliding with the 64x64 bounds of the sprite.
+	new_proj.launch(current_target)
+	if(active_weapon.fire_sound)
+		playsound_local(loc,active_weapon.fire_sound,110,1,,5)
+	current_target = null
+	active_weapon.charge_amount -= active_weapon.charge_drain
+	active_weapon.next_shot = world.time + active_weapon.shot_delay
 
 
 // Mgalekgolo melee attacks //

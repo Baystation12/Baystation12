@@ -1,4 +1,6 @@
 
+#define OBJECTS_UNGLASSABLE list(/obj/machinery/computer/capture_node)
+
 /turf/unsimulated/floor/lava/glassed_turf
 	var/cool_at = 0
 	var/cooling_delay = 2.5 MINUTES
@@ -91,6 +93,8 @@
 				else
 					F.ChangeTurf(glassed_turf_use)
 				for(var/atom/a in F.contents)
+					if(a.type in OBJECTS_UNGLASSABLE)
+						continue
 					F.Entered(a,F) //Make the lava do it's thing, then just delete it.
 					if(a)
 						qdel(a)
@@ -153,3 +157,5 @@
 #undef CAPACITOR_DAMAGE_AMOUNT
 #undef CAPACITOR_MAX_STORED_CHARGE
 #undef CAPACITOR_RECHARGE_TIME
+
+#undef OBJECTS_UNGLASSABLE

@@ -32,6 +32,10 @@
 		return 0
 	return 1
 
+/obj/item/weapon/gun/vehicle_turret/examine(var/mob/examiner)
+	. = ..()
+	linked_vehicle.display_ammo_status(examiner)
+
 /obj/item/weapon/gun/vehicle_turret/afterattack(atom/attacked, mob/user, proximity)
 	if(attacked == linked_vehicle)
 		to_chat(user,"<span class = 'notice'>You can't fire at yourself.</span>")

@@ -9,8 +9,8 @@
 	real_name = "Huragok"
 	icon = 'code/modules/halo/covenant/species/huragok/huragok.dmi'
 	icon_state = "engineer"
-	maxHealth = 200
-	health = 200
+	maxHealth = 400
+	health = 400
 	faction = "Covenant"
 	spawn_sound = null
 	speak_statement = "chirps"
@@ -66,5 +66,9 @@
 	add_language(LANGUAGE_SANGHEILI, 0)
 	default_language = all_languages[LANGUAGE_SIGN]
 	radio.create_channel_dongle(RADIO_COV)
+
+/mob/living/silicon/robot/huragok/death()
+	. = ..()
+	gib()
 
 #undef HURAGOK_REGEN

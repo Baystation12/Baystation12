@@ -335,9 +335,10 @@ steam.start() -- spawns the effect
 				else
 					direction = pick(GLOB.alldirs)
 			var/amt_smoke_move = pick(smokemove_picklist)
+			var/spreadsteps = spread_steps_on_spawn
 			for(i=0, i<amt_smoke_move + spread_steps_on_spawn, i++)
-				if(spread_steps_on_spawn > 0)
-					spread_steps_on_spawn--
+				if(spreadsteps > 0)
+					spreadsteps--
 				else
 					sleep(10)
 				step(smoke,direction)
