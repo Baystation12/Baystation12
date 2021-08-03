@@ -13,6 +13,7 @@
 	desc = "Blue Pride, Galaxy Wide."
 	icon_state = "bluetag"
 	blood_overlay_type = "armor"
+	item_flags = null
 	body_parts_covered = UPPER_TORSO
 	allowed = list (/obj/item/gun/energy/lasertag/blue)
 	siemens_coefficient = 3.0
@@ -22,6 +23,7 @@
 	desc = "Reputed to go faster."
 	icon_state = "redtag"
 	blood_overlay_type = "armor"
+	item_flags = null
 	body_parts_covered = UPPER_TORSO
 	allowed = list (/obj/item/gun/energy/lasertag/red)
 	siemens_coefficient = 3.0
@@ -108,6 +110,7 @@
 	icon_state = "syndicate"
 	desc = "A plastic replica of the syndicate space suit, you'll look just like a real murderous syndicate agent in this! This is a toy, it is not made for use in space!"
 	w_class = ITEM_SIZE_NORMAL
+	item_flags = null
 	allowed = list(/obj/item/device/flashlight,/obj/item/tank/emergency,/obj/item/toy)
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|HANDS|LEGS|FEET
@@ -158,6 +161,7 @@
 	name = "cardborg suit"
 	desc = "An ordinary cardboard box with holes cut in the sides."
 	icon_state = "cardborg"
+	item_flags = null
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 	flags_inv = HIDEJUMPSUIT
 
@@ -261,6 +265,7 @@
 	name = "xenos suit"
 	desc = "A suit made out of chitinous alien hide."
 	icon_state = "xenos"
+	item_flags = null
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	siemens_coefficient = 2.0

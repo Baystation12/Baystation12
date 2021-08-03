@@ -53,6 +53,7 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define ITEM_FLAG_SILENT                 0x1000 // sneaky shoes
 #define ITEM_FLAG_NOCUFFS                0x2000 // Gloves that have this flag prevent cuffs being applied
 #define ITEM_FLAG_CAN_HIDE_IN_SHOES      0x4000 // Items that can be hidden in shoes that permit it
+#define ITEM_FLAG_WASHER_ALLOWED         0x8000 // Items that can be washed in washing machines
 
 // Flags for pass_flags.
 #define PASS_FLAG_TABLE  0x1

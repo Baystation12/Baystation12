@@ -4,6 +4,7 @@
 	icon_state = "eyepatch"
 	item_state = "eyepatch"
 	body_parts_covered = 0
+	item_flags = ITEM_FLAG_WASHER_ALLOWED
 	var/flipped = FALSE // Indicates left or right eye; 0 = on the right
 
 /obj/item/clothing/glasses/eyepatch/verb/flip_patch()
@@ -31,6 +32,7 @@
 	item_state = "hudpatch"
 	off_state = "hudpatch"
 	action_button_name = "Toggle iPatch"
+	item_flags = null
 	toggleable = TRUE
 	var/eye_color = COLOR_WHITE
 	electric = TRUE

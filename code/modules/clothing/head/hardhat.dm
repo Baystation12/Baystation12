@@ -6,6 +6,7 @@
 	brightness_on = 0.5 //luminosity when on
 	light_overlay = "hardhat_light"
 	w_class = ITEM_SIZE_NORMAL
+	item_flags = null
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT,
 		bullet = ARMOR_BALLISTIC_MINOR,

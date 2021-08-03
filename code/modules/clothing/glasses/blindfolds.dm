@@ -7,6 +7,7 @@
 	off_state = "blindfoldup"
 	tint = TINT_BLIND
 	flash_protection = FLASH_PROTECTION_MAJOR
+	item_flags = ITEM_FLAG_WASHER_ALLOWED
 	darkness_view = -1
 	toggleable = TRUE
 	activation_sound = null
@@ -23,7 +24,7 @@
 	if(active)
 		flags_inv &= ~HIDEEYES
 		body_parts_covered &= ~EYES
-	else 
+	else
 		flags_inv |= HIDEEYES
 		body_parts_covered |= EYES
 
@@ -34,5 +35,6 @@
 	action_button_name = null
 	icon_state = "tape_cross"
 	item_state = null
+	item_flags = null
 	w_class = ITEM_SIZE_TINY
 	toggleable = FALSE
