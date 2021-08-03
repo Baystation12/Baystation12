@@ -119,7 +119,7 @@
 	new /obj/item/clothing/under/gimmick/rank/captain/suit(src.loc)
 	new /obj/item/clothing/head/flatcap(src.loc)
 	new /obj/item/clothing/suit/storage/toggle/labcoat/mad(src.loc)
-	new /obj/item/clothing/glasses/prescription/gglasses(src.loc)
+	new /obj/item/clothing/glasses/green(src.loc)
 	delete_me = 1
 
 /obj/effect/landmark/costume/elpresidente/New()

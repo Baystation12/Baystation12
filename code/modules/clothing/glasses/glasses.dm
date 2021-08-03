@@ -109,7 +109,7 @@
 			off_state = citem.additional_data["icon_off"]
 
 /obj/item/clothing/glasses/meson
-	name = "optical meson scanner"
+	name = "meson goggles"
 	desc = "Used for seeing walls, floors, and stuff through anything."
 	gender = NEUTER
 	icon_state = "meson"
@@ -126,9 +126,9 @@
 	overlay = GLOB.global_hud.meson
 
 /obj/item/clothing/glasses/meson/prescription
-	name = "prescription mesons"
-	desc = "Optical meson scanner with prescription lenses."
-	prescription = 6
+	name = "meson goggles"
+	desc = "Used for seeing walls, floors, and stuff through anything. This set has corrective lenses."
+	prescription = 5
 
 /obj/item/clothing/glasses/science
 	name = "science goggles"
@@ -143,7 +143,7 @@
 /obj/item/clothing/glasses/science/prescription
 	name = "prescription science goggles"
 	desc = "Science goggles with prescription lenses."
-	prescription = 6
+	prescription = 5
 
 /obj/item/clothing/glasses/science/Initialize()
 	. = ..()
