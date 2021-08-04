@@ -72,6 +72,7 @@
 /obj/item/clothing/accessory/armorplate/sneaky
 	name = "low-profile armor vest"
 	desc = "An armor vest made of layered polymer fibers. Can attach to your slacks and office shirt."
+	siemens_coefficient = 0.6
 	item_icons = list(slot_wear_suit_str = 'icons/mob/onmob/onmob_accessories.dmi')
 	item_flags = ITEM_FLAG_THICKMATERIAL
 	slot_flags = SLOT_OCLOTHING //can wear in suit slot as well
@@ -83,7 +84,6 @@
 /obj/item/clothing/accessory/armorplate/sneaky/tactical
 	name = "low-profile tactical armor vest"
 	desc = "An armor vest made of layered smart polymers. Can attach to your slacks and office shirt."
-	slowdown = 0.5
 	armor = list(
 		melee = ARMOR_MELEE_KNIVES,
 		bullet = ARMOR_BALLISTIC_PISTOL,
