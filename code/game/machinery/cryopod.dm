@@ -450,7 +450,7 @@
 		to_chat(user, SPAN_WARNING("\The [target] isn't close enough."))
 		return
 	add_fingerprint(user)
-	if (!do_after(user, 2 SECONDS, src, do_flags = DO_DEFAULT | DO_TARGET_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
+	if (!do_after(user, 2 SECONDS, src, additional_atoms = list(target)))
 		return
 	if (QDELETED(target))
 		return

@@ -149,7 +149,7 @@
 	. = ..()
 	if(secures_occupant)
 		escapee.visible_message(SPAN_WARNING("\The [escapee] begins writhing free of \the [src]!"))
-		if(!do_after(escapee, 5 SECONDS, src))
+		if(!do_after(escapee, 5 SECONDS, src, DO_DEFAULT & ~DO_TARGET_UNIQUE_ACT))
 			return FALSE
 	escapee.visible_message(SPAN_DANGER("\The [escapee] escapes from \the [src]!"))
 	escapee.dropInto(loc)

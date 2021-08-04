@@ -10,7 +10,7 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
-	
+
 	machine_name = "meat grinder"
 	machine_desc = "Messily turns animals - living or dead - into edible meat. Installed safety mechanisms prevent use on humans."
 
@@ -67,12 +67,12 @@
 	return 1
 
 /obj/machinery/gibber/components_are_accessible(path)
-	return !operating && ..()	
+	return !operating && ..()
 
 /obj/machinery/gibber/cannot_transition_to(state_path, mob/user)
 	if(operating)
 		return SPAN_NOTICE("You must wait for \the [src] to finish operating first!")
-	return ..()	
+	return ..()
 
 /obj/machinery/gibber/attackby(var/obj/item/W, var/mob/user)
 	if(!operating)
@@ -122,7 +122,7 @@
 
 	user.visible_message("<span class='danger'>\The [user] starts to put \the [victim] into \the [src]!</span>")
 	src.add_fingerprint(user)
-	if(do_after(user, 30, src) && victim.Adjacent(src) && user.Adjacent(src) && victim.Adjacent(user) && !occupant)
+	if(do_after(user, 30, src, additional_atoms = list(victim)) && victim.Adjacent(src) && user.Adjacent(src) && victim.Adjacent(user) && !occupant)
 		user.visible_message("<span class='danger'>\The [user] stuffs \the [victim] into \the [src]!</span>")
 		if(victim.client)
 			victim.client.perspective = EYE_PERSPECTIVE
