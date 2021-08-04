@@ -1,6 +1,0 @@
-author: Spookerton
-delete-after: true
-changes:
-  - tweak: Optical meson scanners are now just called meson goggles.
-  - tweak: Eyepatches with overlays have more descriptive names.
-  - bugfix: Meson eyewear selection works. Whoops.
