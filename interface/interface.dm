@@ -73,6 +73,7 @@ Admin:
 \tF6 = player-panel-new
 \tF7 = admin-pm
 \tF8 = Invisimin
+\tF9 = View-Tickets
 </font>"}
 
 	var/hotkey_mode = {"<font color='purple'>
