@@ -113,10 +113,10 @@ proc/age2agedescription(age)
 /mob/var/do_unique_user_handle = 0
 /atom/var/do_unique_target_user
 
-/proc/do_after(mob/user, delay, atom/target, do_flags = DO_DEFAULT, incapacitation_flags = INCAPACITATION_DEFAULT)
-	return !do_after_detailed(user, delay, target, do_flags, incapacitation_flags)
+/proc/do_after(mob/user, delay, atom/target, do_flags = DO_DEFAULT, incapacitation_flags = INCAPACITATION_DEFAULT, list/additional_atoms)
+	return !do_after_detailed(user, delay, target, do_flags, incapacitation_flags, additional_atoms)
 
-/proc/do_after_detailed(mob/user, delay, atom/target, do_flags = DO_DEFAULT, incapacitation_flags = INCAPACITATION_DEFAULT)
+/proc/do_after_detailed(mob/user, delay, atom/target, do_flags = DO_DEFAULT, incapacitation_flags = INCAPACITATION_DEFAULT, list/additional_atoms)
 	if (!delay)
 		return FALSE
 
@@ -135,8 +135,14 @@ proc/age2agedescription(age)
 			to_chat(user, SPAN_WARNING("\The [target.do_unique_target_user] is already interacting with \the [target]!"))
 		return DO_TARGET_UNIQUE_ACT
 
-	if ((do_flags & DO_TARGET_UNIQUE_ACT) && target)
-		target.do_unique_target_user = user
+	if (!do_after_check_additional_atoms(user, additional_atoms, do_feedback))
+		return DO_TARGET_UNIQUE_ACT
+
+	if (do_flags & DO_TARGET_UNIQUE_ACT)
+		if (target)
+			target.do_unique_target_user = user
+		if (additional_atoms)
+			do_after_flag_additional_atoms(user, additional_atoms)
 
 	var/atom/user_loc = do_flags & DO_USER_CAN_MOVE ? null : user.loc
 	var/user_dir = do_flags & DO_USER_CAN_TURN ? null : user.dir
@@ -226,8 +232,27 @@ proc/age2agedescription(age)
 		qdel(bar)
 	if ((do_flags & DO_USER_UNIQUE_ACT) && user.do_unique_user_handle == initial_handle)
 		user.do_unique_user_handle = 0
-	if ((do_flags & DO_TARGET_UNIQUE_ACT) && target)
-		target.do_unique_target_user = null
+	if (do_flags & DO_TARGET_UNIQUE_ACT)
+		if (target)
+			target.do_unique_target_user = null
+		if (additional_atoms)
+			do_after_flag_additional_atoms(user, additional_atoms, FALSE)
+
+/// Checks if any of the provided additional atoms have a do_unique_target_user set. Returns FALSE if a target is busy, TRUE otherwise.
+/proc/do_after_check_additional_atoms(mob/user, list/additional_atoms, do_feedback)
+	for (var/atom/target as anything in additional_atoms)
+		if (do_feedback)
+			to_chat(user, SPAN_WARNING("\The [target.do_unique_target_user] is already interacting with \the [target]!"))
+		return FALSE
+	return TRUE
+
+/// Updates do_unique_target_user for each atom in additional atoms, either setting the var to user, or clearing the var based on `set_flag`.
+/proc/do_after_flag_additional_atoms(mob/user, list/additional_atoms, set_flag = TRUE)
+	for (var/atom/target as anything in additional_atoms)
+		if (set_flag)
+			target.do_unique_target_user = user
+		else
+			target.do_unique_target_user = null
 
 /proc/able_mobs_in_oview(var/origin)
 	var/list/mobs = list()
