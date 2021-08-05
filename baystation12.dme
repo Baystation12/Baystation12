@@ -1558,6 +1558,7 @@
 #include "code\modules\halo\covenant\simple_mobs\yanmee.dm"
 #include "code\modules\halo\covenant\species\huragok\outfit.dm"
 #include "code\modules\halo\covenant\species\huragok\robot.dm"
+#include "code\modules\halo\covenant\species\huragok\robot_damage.dm"
 #include "code\modules\halo\covenant\species\huragok\robot_drone.dm"
 #include "code\modules\halo\covenant\species\huragok\robot_items.dm"
 #include "code\modules\halo\covenant\species\huragok\robot_modules.dm"
