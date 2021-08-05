@@ -24,7 +24,6 @@
 		return
 	casing.expend() //ammo expended
 	if(eject == 1) //auto-ejecting
-		atom_despawner.mark_for_despawn(casing)
 		casing.eject(get_turf(src), angle2dir(dir2angle(loc.loc.dir)+90)) //loc = gun, loc.loc = the man firing
 
 

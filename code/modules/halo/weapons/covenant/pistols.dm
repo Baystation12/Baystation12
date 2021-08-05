@@ -135,15 +135,17 @@
 	caliber = "needler"
 	load_method = MAGAZINE
 	one_hand_penalty = 1
-	burst = 4
+	burst = 3
 	burst_delay = 1.5
-	dispersion = list(0.2, 0.4, 0.7, 1.0)
+	dispersion = list(0.2, 0.4, 0.7)
 	hud_bullet_reffile = 'code/modules/halo/icons/hud_display/hud_bullet_5x6.dmi'
 	hud_bullet_iconstate = "needle"
 	is_heavy = 1
 	irradiate_non_cov = 2
 	slowdown_general = 0
 	matter = list("nanolaminate" = 1)
+	auto_eject = 1
+	auto_eject_sound = null
 
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
@@ -152,6 +154,6 @@
 		)
 
 	firemodes = list(\
-	list(mode_name="short bursts",  burst=4, dispersion=list(0.2, 0.4, 0.7, 1.0)),
-	list(mode_name="extended bursts",  burst=12, dispersion=list(0.3, 0.3, 0.5, 0.5, 0.9, 0.9, 1.2, 1.2))
+	list(mode_name="short bursts",  burst=3, dispersion=list(0.2, 0.4, 0.7)),
+	list(mode_name="extended bursts",  burst=10, dispersion=list(0.3, 0.3, 0.5, 0.5, 0.7, 0.7, 0.9, 0.9))
 	)

@@ -38,7 +38,7 @@
 	icon = 'code/modules/halo/weapons/icons/forerunner_sprites.dmi'
 	icon_state = "boolet"
 	fire_sound = 'code/modules/halo/sounds/boltshot_fire.ogg'
-	damage = 40
+	damage = 30
 	armor_penetration = 30
 
 /obj/item/projectile/bullet/pellet/shotgun/boltshot

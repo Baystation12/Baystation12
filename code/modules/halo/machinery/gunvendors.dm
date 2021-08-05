@@ -5,6 +5,10 @@
 	icon_deny = "ironhammer-deny"
 	ai_access_level = 3
 	nohack = 1
+	vend_delay = 1
+
+/obj/machinery/pointbased_vending/armory
+	vend_delay = 1
 
 /obj/machinery/pointbased_vending/armory/hybrid // Both ammo, and guns!
 	name = "UNSC Equipment Rack"
