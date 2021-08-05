@@ -20,7 +20,7 @@
 
 	icon_state = "reinforce1"
 
-	break_chance_table = list(5, 20, 40, 80, 100)
+	break_chance_table = list(30, 35, 40, 45, 50)
 /datum/grab/normal/aggressive/process_effect(var/obj/item/grab/G)
 	var/mob/living/carbon/human/affecting = G.affecting
 

@@ -21,7 +21,7 @@
 
 	icon_state = "reinforce"
 
-	break_chance_table = list(5, 20, 30, 80, 100)
+	break_chance_table = list(40, 45, 50, 55, 60)
 
 
 /datum/grab/normal/struggle/process_effect(var/obj/item/grab/G)
