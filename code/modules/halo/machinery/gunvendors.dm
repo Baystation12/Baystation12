@@ -150,7 +150,7 @@
 					/obj/item/weapon/storage/belt/marine_ammo = 2,
 					/obj/item/weapon/storage/belt/marine_medic = 1,
 					/obj/item/weapon/storage/belt/utility/full = 0,
-					/obj/item/clothing/accessory/storage/IFAK = 1,
+					/obj/item/clothing/accessory/storage/IFAK/UNSC = 1,
 					/obj/item/clothing/accessory/storage/bandolier = 2,
 					/obj/item/weapon/storage/backpack/marine = 3,
 					/obj/item/weapon/storage/backpack/marine/brown = 3,
@@ -182,7 +182,7 @@
 					)
 	amounts = list(\
 		/obj/item/weapon/storage/box/large/armorset/eva = 3,
-		/obj/item/clothing/accessory/storage/IFAK = 20,
+		/obj/item/clothing/accessory/storage/IFAK/UNSC = 20,
 		/obj/item/weapon/storage/firstaid/unsc = 6,
 		/obj/item/stack/barbedwire/fifteen = 15,
 		/obj/item/flight_item/bullfrog_pack = 1
@@ -306,7 +306,7 @@
 					/obj/item/weapon/storage/belt/marine_ammo = 2,
 					/obj/item/weapon/storage/belt/marine_medic = 1,
 					/obj/item/weapon/storage/belt/utility/full = 0,
-					/obj/item/clothing/accessory/storage/IFAK = 1,
+					/obj/item/clothing/accessory/storage/IFAK/UNSC = 1,
 					/obj/item/clothing/accessory/storage/bandolier = 2,
 					/obj/item/weapon/storage/backpack/odst/regular = 3,
 					/obj/item/weapon/storage/backpack/odst/cqb = 3,
@@ -345,7 +345,7 @@
 					/obj/item/weapon/storage/box/large/armorset/odst/engineer = 2,
 					/obj/item/weapon/storage/box/large/armorset/odst/squadleader = 2,
 					/obj/item/stack/barbedwire/fifteen = 5,
-					/obj/item/clothing/accessory/storage/IFAK = 20,
+					/obj/item/clothing/accessory/storage/IFAK/UNSC = 20,
 					/obj/item/weapon/storage/firstaid/unsc = 6,
 					)
 
@@ -429,7 +429,7 @@
 					/obj/item/weapon/storage/belt/marine_ammo = 2,
 					/obj/item/weapon/storage/belt/marine_medic = 1,
 					/obj/item/weapon/storage/belt/utility/full = 0,
-					/obj/item/clothing/accessory/storage/IFAK = 1,
+					/obj/item/clothing/accessory/storage/IFAK/UNSC = 1,
 					/obj/item/clothing/accessory/storage/bandolier = 2,
 					/obj/item/weapon/storage/backpack/marine = 3,
 					"Storage - Holsters" = -1,
@@ -513,7 +513,7 @@
 					/obj/item/weapon/storage/belt/marine_ammo = 2,
 					/obj/item/weapon/storage/belt/marine_medic = 1,
 					/obj/item/weapon/storage/belt/utility/full = 0,
-					/obj/item/clothing/accessory/storage/IFAK = 1,
+					/obj/item/clothing/accessory/storage/IFAK/UNSC = 1,
 					/obj/item/clothing/accessory/storage/bandolier = 2,
 					/obj/item/weapon/storage/backpack/marine = 3,
 					/obj/item/weapon/storage/backpack/marine/brown = 3,
@@ -539,7 +539,7 @@
 					/obj/item/stack/barbedwire/fifteen = 0,
 					)
 	amounts = list(\
-		/obj/item/clothing/accessory/storage/IFAK = 20,
+		/obj/item/clothing/accessory/storage/IFAK/UNSC = 20,
 		/obj/item/stack/barbedwire/fifteen = 15,
 		/obj/item/flight_item/bullfrog_pack = 1,
 		)

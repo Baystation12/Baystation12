@@ -82,7 +82,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	var/bone = affected.encased ? "[target]'s [affected.encased]" : "bones in [target]'s [affected.name]"
 	if (affected.status & ORGAN_BROKEN)
-		user.visible_message("<span class='notice'>[user] sets the [bone] n place with \the [tool].</span>", \
+		user.visible_message("<span class='notice'>[user] sets the [bone] in place with \the [tool].</span>", \
 			"<span class='notice'>You set the [bone] in place with \the [tool].</span>")
 		affected.stage = 2
 	else

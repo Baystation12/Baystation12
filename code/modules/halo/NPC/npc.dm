@@ -85,6 +85,7 @@
 		"Help!")
 	var/say_time = 0
 	var/say_next = 0
+	var/say_last = 0	// This is used to stop NPCs from repeating the same line
 
 	var/last_afraid = 0
 	var/duration_afraid = 30 SECONDS
@@ -125,4 +126,7 @@
 
 		else if(say_time && world.time >= say_time)
 			say_time = 0
-			say(say_next)
+			if (say_last != say_next)	// Did I hear somebody say guns
+				say(say_next)
+				say_last = say_next
+			say_next = 0	// This allows them to actually finish answering something

@@ -32,13 +32,13 @@
 				else
 					color = "#ff0000"
 
-				if(ismob(loc))	//update icons so guns flash in-hand
-					var/mob/living/M = loc
-					M.update_inv_belt(0)
-					M.update_inv_s_store(0)
-					M.update_inv_back(0)
-					M.update_inv_l_hand(0)
-					M.update_inv_r_hand(1)
+			if(ismob(loc))	//update icons so guns flash in-hand
+				var/mob/living/M = loc
+				M.update_inv_belt(0)
+				M.update_inv_s_store(0)
+				M.update_inv_back(0)
+				M.update_inv_l_hand(0)
+				M.update_inv_r_hand(1)
 
 		//continue processing
 		return 1
