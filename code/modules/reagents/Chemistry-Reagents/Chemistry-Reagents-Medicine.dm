@@ -310,7 +310,11 @@
 	flags = IGNORE_MOB_SIZE
 
 /datum/reagent/otomax/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.adjustEarDamage(-1, -1)
+	if(M.ear_damage == 0)
+		//Heal deafness more effectively if the ears are undamaged
+		M.adjustEarDamage(0, -5 * removed)
+	else
+		M.adjustEarDamage(-1, -1)
 
 /datum/reagent/otomax/overdose(var/mob/living/carbon/M, var/alien)
 	..()
