@@ -152,22 +152,25 @@
 
 /datum/access/network
 	region = ACCESS_REGION_COMMAND
-	
+
+/datum/access/network_admin
+	region = ACCESS_REGION_COMMAND
+
 /datum/access/chapel_office
 	region = ACCESS_REGION_SERVICE
-	
+
 /datum/access/bar
 	region = ACCESS_REGION_SERVICE
-	
+
 /datum/access/kitchen
 	region = ACCESS_REGION_SERVICE
-	
+
 /datum/access/eva
 	region = ACCESS_REGION_GENERAL
-	
+
 /datum/access/crematorium
 	region = ACCESS_REGION_MEDBAY
-	
+
 /datum/access/janitor
 	region = ACCESS_REGION_SERVICE
 
