@@ -13,6 +13,7 @@
 	icon = 'icons/obj/weapons/melee_physical.dmi'
 	icon_state = "baton"
 	item_state = "classic_baton"
+	base_parry_chance = 30
 	slot_flags = SLOT_BELT
 	force = 10
 
@@ -35,6 +36,7 @@
 	icon = 'icons/obj/weapons/melee_physical.dmi'
 	icon_state = "telebaton_0"
 	item_state = "telebaton_0"
+	base_parry_chance = 30
 	slot_flags = SLOT_BELT
 	w_class = ITEM_SIZE_SMALL
 	force = 3

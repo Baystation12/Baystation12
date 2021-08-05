@@ -166,6 +166,7 @@
 	icon_state = "maglight"
 	item_state = "maglight"
 	force = 10
+	base_parry_chance = 15
 	attack_verb = list ("smacked", "thwacked", "thunked")
 	matter = list(MATERIAL_ALUMINIUM = 200, MATERIAL_GLASS = 50)
 	hitsound = "swing_hit"

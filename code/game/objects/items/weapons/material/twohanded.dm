@@ -27,7 +27,7 @@
 	var/base_icon
 	var/base_name
 	var/unwielded_force_divisor = 0.25
-	var/wielded_parry_bonus = 15
+	var/wielded_parry_bonus = 20
 
 /obj/item/material/twohanded/update_twohanding()
 	var/mob/living/M = loc
@@ -83,6 +83,7 @@
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
 	applies_material_colour = 0
 	worth_multiplier = 31
+	base_parry_chance = 15
 
 /obj/item/material/twohanded/fireaxe/afterattack(atom/A as mob|obj|turf|area, mob/user as mob, proximity)
 	if(!proximity) return
@@ -119,6 +120,7 @@
 	default_material = MATERIAL_GLASS
 	does_spin = FALSE
 	worth_multiplier = 7
+	base_parry_chance = 30
 
 /obj/item/material/twohanded/spear/shatter(var/consumed)
 	if(!consumed)
@@ -143,6 +145,7 @@
 	unwielded_force_divisor = 0.7 // 15 when unwielded based on above.
 	attack_cooldown_modifier = 1
 	melee_accuracy_bonus = -10
+	base_parry_chance = 30
 
 //Predefined materials go here.
 /obj/item/material/twohanded/baseballbat/metal/New(var/newloc)

@@ -53,6 +53,7 @@
 		w_class = ITEM_SIZE_NORMAL
 		attack_verb = list("slashed", "stabbed")
 		attack_cooldown_modifier = -1
+		base_parry_chance = 15
 		..()
 	else
 		force = initial(force)
@@ -62,6 +63,7 @@
 		w_class = initial(w_class)
 		attack_verb = closed_attack_verbs
 		attack_cooldown_modifier = initial(attack_cooldown_modifier)
+		base_parry_chance = initial(base_parry_chance)
 
 /obj/item/material/knife/folding/on_update_icon()
 	if(open)
@@ -100,6 +102,7 @@
 	thrown_force_multiplier = 0.25
 	takes_colour = FALSE
 	worth_multiplier = 8
+	base_parry_chance = 30
 
 /obj/item/material/knife/folding/combat/balisong
 	name = "butterfly knife"
