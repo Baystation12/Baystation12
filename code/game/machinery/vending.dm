@@ -926,7 +926,6 @@
 	products = list(
 		/obj/item/reagent_containers/glass/bottle/antitoxin = 4,
 		/obj/item/reagent_containers/glass/bottle/inaprovaline = 4,
-		/obj/item/reagent_containers/glass/bottle/stoxin = 4,
 		/obj/item/reagent_containers/syringe/antiviral = 4,
 		/obj/item/reagent_containers/pill/antitox = 6,
 		/obj/item/reagent_containers/syringe = 12,
@@ -941,6 +940,7 @@
 
 	contraband = list(
 		/obj/item/clothing/mask/chewable/candy/lolli/meds = 8,
+		/obj/item/reagent_containers/glass/bottle/stoxin = 4,
 		/obj/item/reagent_containers/pill/tox = 3,
 		/obj/item/reagent_containers/pill/stox = 4,
 		/obj/item/reagent_containers/glass/bottle/toxin = 4,
