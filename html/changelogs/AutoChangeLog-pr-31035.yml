@@ -1,5 +1,0 @@
-author: Yvesza
-delete-after: true
-changes:
-  - balance: Set the base parry of most common weapons to a baseline of 15 / 30
-  - balance: improved the wielded bonus of two-handed weapons to 20, from 15.
