@@ -64,12 +64,10 @@
 	. = null // Huragok hover, therefore make no sound when they move
 
 /mob/living/silicon/robot/huragok/handle_regular_status_updates()	// Override the proc, so we kill huragok at 0 hp
-	updatehealth()
-
+	. = ..()
 	if (health <= 0)
 		death()
 
-	return 1
 
 /mob/living/silicon/robot/huragok/CtrlShiftClickOn(var/atom/A)	// Special Bonk
 	face_atom(A)
@@ -82,7 +80,7 @@
 			playsound(get_turf(src),'sound/effects/pop.ogg',25,1)
 		do_attack_animation(A)
 	return
-  
+
 /mob/living/silicon/robot/huragok/death()
 	. = ..()
 	gib()
