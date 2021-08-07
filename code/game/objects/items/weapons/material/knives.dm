@@ -7,6 +7,7 @@
 	item_state = "knife"
 	max_force = 15
 	force_multiplier = 0.3
+	base_parry_chance = 15
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	matter = list(MATERIAL_STEEL = 12000)
 	origin_tech = list(TECH_MATERIAL = 1)
@@ -79,6 +80,7 @@
 	desc = "A blade with a saw-like pattern on the reverse edge and a heavy handle."
 	icon_state = "tacknife"
 	force_multiplier = 0.2
+	base_parry_chance = 30
 	w_class = ITEM_SIZE_SMALL
 
 //random stuff
@@ -94,6 +96,7 @@
 	desc = "The unearthly energies that once powered this blade are now dormant."
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "render"
+	base_parry_chance = 30
 	applies_material_colour = FALSE
 	applies_material_name = FALSE
 
