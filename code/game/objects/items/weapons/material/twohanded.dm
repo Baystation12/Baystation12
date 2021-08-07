@@ -113,7 +113,7 @@
 	force_multiplier = 0.33 // 12/19 with hardness 60 (steel) or 10/16 with hardness 50 (glass)
 	unwielded_force_divisor = 0.20
 	thrown_force_multiplier = 1.5 // 20 when thrown with weight 15 (glass)
-	throw_speed = 3
+	throw_speed = 6
 	sharp = TRUE
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("attacked", "poked", "jabbed", "torn", "gored")

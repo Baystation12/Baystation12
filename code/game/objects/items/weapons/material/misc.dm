@@ -11,6 +11,8 @@
 	thrown_force_multiplier = 1.8
 	attack_verb = list("jabbed","stabbed","ripped")
 	does_spin = FALSE
+	w_class = 5
+	throw_speed = 6
 	var/spent
 	worth_multiplier = 15
 
