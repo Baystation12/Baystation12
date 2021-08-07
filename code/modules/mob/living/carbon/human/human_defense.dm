@@ -162,7 +162,7 @@ meteor_act
 		return target_zone
 
 	var/accuracy_penalty = user.melee_accuracy_mods()
-	accuracy_penalty += 10*get_skill_difference(SKILL_COMBAT, user)
+	accuracy_penalty += 5*get_skill_difference(SKILL_COMBAT, user)
 	accuracy_penalty += 10*(I.w_class - ITEM_SIZE_NORMAL)
 	accuracy_penalty -= I.melee_accuracy_bonus
 
