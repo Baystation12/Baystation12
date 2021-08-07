@@ -76,19 +76,43 @@
 
 /client/proc/cmd_admin_world_narrate() // Allows administrators to fluff events a little easier -- TLE
 	set category = "Special Verbs"
-	set name = "Global Narrate"
-	set desc = "Narrate to everyone."
+	set name = "Narrate"
+	set desc = "Narrate to players."
 
 	if(!check_rights(R_ADMIN))
 		return
 
-	var/result = cmd_admin_narrate_helper(src)
-	if (!result)
+	var/target_zone = input(usr, "Narrate target zone", "Narrate target zone", null) as null|anything in TARGET_ZONES
+	if (isnull(target_zone))
 		return
+	var/message = input(usr, "Narrate message", "Narrate message", null) as null|text
+	if (isnull(message))
+		return
+	var/target_origin = null
+	var/target_range = null
+	switch (target_zone)
+		if (TARGET_ZONE_ZLEVEL)
+			target_origin = input(usr, "Target z-level", "Target z-level", get_z(usr)) as null|num
+			if (isnull(target_origin))
+				return
 
-	to_world(result[1])
+		if (TARGET_ZONE_RANGE || TARGET_ZONE_VIEW)
+			target_origin = get_turf(usr)
+			target_range = input(usr, "Range", "Range", 7) as null|num
+			if (isnull(target_range))
+				return
 
-	log_and_message_staff(" - GlobalNarrate [result[2]]/[result[3]]: [result[4]]")
+	narrate(message, target_zone, target_origin, target_range)
+
+	var/log_message_appendix = ""
+	if (target_origin && target_range)
+		log_message_appendix = " ([target_origin]/[target_range])"
+	else if (target_origin)
+		log_message_appendix = " ([target_origin])"
+	else if (target_range)
+		log_message_appendix = " ([target_range])"
+
+	log_and_message_staff(" - [target_zone] NARRATE[log_message_appendix] - \"[message]\"")
 	SSstatistics.add_field_details("admin_verb","GLN") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
