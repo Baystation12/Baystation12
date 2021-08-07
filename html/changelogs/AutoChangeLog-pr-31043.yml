@@ -1,0 +1,7 @@
+author: Yvesza
+delete-after: true
+changes:
+  - balance: Spears & Harpoons will cause their targets to stagger backwards and potentially
+      be impaled to walls.
+  - balance: Spears & Harpoons hurt more when they collide with their victims.
+  - balance: Harpoons will no longer fit into bags
