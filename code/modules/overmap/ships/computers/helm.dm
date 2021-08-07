@@ -22,6 +22,32 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 	. = ..()
 	get_known_sectors()
 
+/obj/machinery/computer/ship/helm/attackby(obj/item/I, mob/user)
+	if (panel_open && ismultitool(I) && user.a_intent != I_HURT)
+		if (user.skill_check(SKILL_ELECTRICAL, SKILL_ADEPT))
+			user.visible_message(
+				SPAN_NOTICE("\The [user] starts reconfiguring \the [src]'s circuitry with \the [I]."),
+				SPAN_NOTICE("You start toggling \the [src]'s speed limiters [linked.speedlimit_hacked ? "on" : "off"] with \the [I].")
+			)
+			if (!do_after(user, 3 SECONDS, src, DO_DEFAULT | DO_PUBLIC_PROGRESS | DO_BOTH_UNIQUE_ACT))
+				return
+			user.visible_message(
+				SPAN_NOTICE("\The [user] reconfigures \the [src]'s circuitry with \the [I]."),
+				SPAN_NOTICE("You [linked.speedlimit_hacked ? "reset" : "increase"] \the [src]'s acceleration and speed limiters.")
+			)
+			linked.hack_speedlimit()
+		else
+			to_chat(user, SPAN_WARNING("You don't know what to do with \the [src] using \the [I]."))
+		return
+
+	..()
+
+
+/obj/machinery/computer/ship/helm/get_mechanics_info()
+	. = ..()
+	. += "You can increase or reset the helm's acceleration limiter and autopilot speed limiter's maximum values by using a multitool on the console while the panel is open. This requires TRAINED electrical engineering skill."
+
+
 /obj/machinery/computer/ship/helm/proc/get_known_sectors()
 	var/area/overmap/map = locate() in world
 	for(var/obj/effect/overmap/visitable/sector/S in map)
