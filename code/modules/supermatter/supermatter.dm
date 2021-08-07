@@ -97,7 +97,6 @@
 	var/disable_adminwarn = FALSE
 
 	var/aw_normal = FALSE
-	var/aw_notify = FALSE
 	var/aw_warning = FALSE
 	var/aw_danger = FALSE
 	var/aw_emerg = FALSE
@@ -121,7 +120,6 @@
 
 	// Generic checks, similar to checks done by supermatter monitor program.
 	aw_normal = status_adminwarn_check(SUPERMATTER_NORMAL, aw_normal, "INFO: Supermatter crystal has been energised", FALSE)
-	aw_notify = status_adminwarn_check(SUPERMATTER_NOTIFY, aw_notify, "INFO: Supermatter crystal is approaching unsafe operating temperature", FALSE)
 	aw_warning = status_adminwarn_check(SUPERMATTER_WARNING, aw_warning, "WARN: Supermatter crystal is taking integrity damage", FALSE)
 	aw_danger = status_adminwarn_check(SUPERMATTER_DANGER, aw_danger, "WARN: Supermatter integrity is below 50%", TRUE)
 	aw_emerg = status_adminwarn_check(SUPERMATTER_EMERGENCY, aw_emerg, "CRIT: Supermatter integrity is below 25%", FALSE)
@@ -177,9 +175,6 @@
 
 	if((get_integrity() < 100) || (air.temperature > critical_temperature))
 		return SUPERMATTER_WARNING
-
-	if(air.temperature > (critical_temperature * 0.9))
-		return SUPERMATTER_NOTIFY
 
 	if(power > 5)
 		return SUPERMATTER_NORMAL

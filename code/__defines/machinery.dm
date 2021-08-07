@@ -103,11 +103,10 @@
 #define SUPERMATTER_ERROR -1		// Unknown status, shouldn't happen but just in case.
 #define SUPERMATTER_INACTIVE 0		// No or minimal energy
 #define SUPERMATTER_NORMAL 1		// Normal operation
-#define SUPERMATTER_NOTIFY 2		// Ambient temp > 80% of CRITICAL_TEMPERATURE
-#define SUPERMATTER_WARNING 3		// Ambient temp > CRITICAL_TEMPERATURE OR integrity damaged
-#define SUPERMATTER_DANGER 4		// Integrity < 50%
-#define SUPERMATTER_EMERGENCY 5		// Integrity < 25%
-#define SUPERMATTER_DELAMINATING 6	// Pretty obvious.
+#define SUPERMATTER_WARNING 2		// Ambient temp > CRITICAL_TEMPERATURE OR integrity damaged
+#define SUPERMATTER_DANGER 3		// Integrity < 50%
+#define SUPERMATTER_EMERGENCY 4		// Integrity < 25%
+#define SUPERMATTER_DELAMINATING 5	// Pretty obvious.
 
 #define SUPERMATTER_DATA_EER         "Relative EER"
 #define SUPERMATTER_DATA_TEMPERATURE "Temperature"
