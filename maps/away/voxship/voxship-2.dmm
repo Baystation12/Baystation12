@@ -488,7 +488,8 @@
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/scavship)
 "bm" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/effect/decal/cleanable/filth,
+/obj/item/seeds/breather,
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/scavship)
 "bn" = (
@@ -503,9 +504,8 @@
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/scavship)
 "bo" = (
-/obj/structure/closet/crate/hydroponics/prespawned,
-/obj/item/material/hatchet,
-/obj/item/material/minihoe,
+/obj/item/seeds/breather,
+/obj/item/seeds/breather,
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/scavship)
 "bp" = (
@@ -699,16 +699,11 @@
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/fore)
 "bN" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/effect/decal/cleanable/filth,
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/machinery/light/small{
-	dir = 8
-	},
+/obj/item/seeds/breather,
+/obj/item/seeds/breather,
+/obj/item/seeds/resin,
+/obj/item/seeds/resin,
+/obj/item/seeds/resin,
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/scavship)
 "bO" = (
@@ -2609,6 +2604,11 @@
 	initial_gas = list("nitrogen" = 101.383)
 	},
 /area/voxship/fore)
+"fN" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/structure/closet/crate/hydroponics/prespawned,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
 "fO" = (
 /obj/item/material/shard,
 /turf/simulated/floor/airless,
@@ -2829,6 +2829,10 @@
 /obj/machinery/atmospherics/pipe/vent/high_volume,
 /turf/simulated/floor/airless,
 /area/voxship/engineering)
+"gr" = (
+/obj/machinery/seed_extractor,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
 "gs" = (
 /obj/random/loot,
 /turf/simulated/floor/airless,
@@ -2838,6 +2842,20 @@
 /obj/random/loot,
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/fore)
+"gu" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/effect/decal/cleanable/filth,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/item/seeds/resin,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
 "gx" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
 	dir = 4;
@@ -7725,7 +7743,7 @@ ak
 au
 aL
 bl
-bN
+gu
 cb
 cz
 de
@@ -7825,8 +7843,8 @@ fX
 fX
 al
 av
-aM
 bm
+fN
 bO
 cc
 cA
@@ -7927,7 +7945,7 @@ fX
 fX
 al
 aw
-aN
+bo
 bn
 as
 as
@@ -8029,8 +8047,8 @@ fX
 fX
 am
 ax
-aN
-bo
+bN
+gr
 as
 cd
 cC

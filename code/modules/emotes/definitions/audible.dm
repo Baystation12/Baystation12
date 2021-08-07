@@ -172,11 +172,6 @@
 	emote_message_3p = "USER chitters."
 	emote_sound = 'sound/voice/Bug.ogg'
 
-/decl/emote/audible/vox_shriek
-	key ="shriek"
-	emote_message_3p = "USER SHRIEKS!"
-	emote_sound = 'sound/voice/shriek1.ogg'
-
 /decl/emote/audible/roar
 	key = "roar"
 	emote_message_3p = "USER roars!"
