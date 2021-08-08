@@ -635,7 +635,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	var/state_mod = attacker.melee_accuracy_mods() - target.melee_accuracy_mods()
 	var/stim_mod = target.chem_effects[CE_STIMULANT]
 	var/push_threshold = 12 + (skill_mod - stim_mod)
-	var/disarm_threshold = 36 + ((skill_mod - stim_mod) * 3)
+	var/disarm_threshold = 24 + ((skill_mod - stim_mod) * 2)
 
 	if(target.a_intent == I_HELP)
 		state_mod -= 30

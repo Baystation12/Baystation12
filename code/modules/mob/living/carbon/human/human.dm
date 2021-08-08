@@ -1750,6 +1750,14 @@
 		. += 15
 	if(shock_stage > 30)
 		. += 15
+	if(confused)
+		. += 15
+	if(weakened)
+		. += 15
+	if(eye_blurry)
+		. += 15
+	if(eye_blind)
+		. += 60
 
 /mob/living/carbon/human/ranged_accuracy_mods()
 	. = ..()
