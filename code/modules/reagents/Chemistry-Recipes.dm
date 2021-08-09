@@ -540,21 +540,27 @@
 	s.start()
 	for(var/mob/living/carbon/M in viewers(world.view, location))
 		switch(get_dist(M, location))
-			if(0 to 3)
-				if(hasvar(M, "glasses"))
-					if(istype(M:glasses, /obj/item/clothing/glasses/sunglasses))
-						continue
+			if(0 to 1)
+				if (M.eyecheck() < FLASH_PROTECTION_MODERATE)
+					M.flash_eyes(2)
+					M.weakened = max(10, created_volume / 20)
+					M.confused = max(20, (created_volume / 5))
+					M.eye_blurry = max(40, (created_volume / 5))
+				else
+					M.stunned = max(10, (created_volume / 30))
+					M.confused = max(20, (created_volume / 10))
+					M.eye_blurry = max(40, (created_volume / 10))
 
-				M.flash_eyes()
-				M.Weaken(15)
-
-			if(4 to 5)
-				if(hasvar(M, "glasses"))
-					if(istype(M:glasses, /obj/item/clothing/glasses/sunglasses))
-						continue
-
-				M.flash_eyes()
-				M.Stun(5)
+			if(2 to 4)
+				if (M.eyecheck() < FLASH_PROTECTION_MODERATE)
+					M.flash_eyes(2)
+					M.stunned = max(5, (created_volume / 30))
+					M.confused = max(10, (created_volume / 10))
+					M.eye_blurry = max(20, (created_volume / 10))
+				else
+					M.stunned = max(5, (created_volume / 60))
+					M.confused = max(10, (created_volume / 10))
+					M.eye_blurry = max(20, (created_volume / 10))
 
 /datum/chemical_reaction/emp_pulse
 	name = "EMP Pulse"
