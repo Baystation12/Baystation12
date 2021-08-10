@@ -48,7 +48,7 @@
 	var/const/deffont = "Verdana"
 	var/const/signfont = "Times New Roman"
 	var/const/crayonfont = "Comic Sans MS"
-	var/const/fancyfont = "Segoe Script"
+	var/const/fancyfont = "Segoe Print"
 
 	var/scan_file_type = /datum/computer_file/data/text
 
