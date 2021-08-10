@@ -77,14 +77,14 @@
 
 /// Attempts to copy the specified file. Returns file on success, otherwise null.
 /datum/extension/interactive/ntos/proc/clone_file(filename, obj/item/stock_parts/computer/hard_drive/disk = get_component(PART_HDD))
-	return move_file(filename, "[filename]_copy", disk, disk, 1)
+	return move_file(filename, "[filename]_copy", disk, disk, TRUE)
 
 /// Attempts to copy the specified file to another disk. Returns file on success, otherwise null.
 /datum/extension/interactive/ntos/proc/copy_between_disks(filename, obj/item/stock_parts/computer/hard_drive/disk_from, obj/item/stock_parts/computer/hard_drive/disk_to)
-	return move_file(filename, filename, disk_from, disk_to, 1)
+	return move_file(filename, filename, disk_from, disk_to, TRUE)
 
 /// Attempts to move or copy the specified file, potentially between disks, and renaming it in the process if necessary
-/datum/extension/interactive/ntos/proc/move_file(filename, filename_new, obj/item/stock_parts/computer/hard_drive/disk_from, obj/item/stock_parts/computer/hard_drive/disk_to, copy = 0)
+/datum/extension/interactive/ntos/proc/move_file(filename, filename_new, obj/item/stock_parts/computer/hard_drive/disk_from, obj/item/stock_parts/computer/hard_drive/disk_to, copy = FALSE)
 	if(!istype(disk_from) || !istype(disk_to))
 		return
 

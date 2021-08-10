@@ -25,5 +25,6 @@
 		if(!ch)
 			return "[name]: No such hardware found."
 		. = list("[name]: Running diagnostic protocols...")
+		. += "Device type: [ch.name]"
 		. += ch.diagnostics()
 		return

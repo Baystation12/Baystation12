@@ -59,7 +59,7 @@
 				return "[name]: Error; could not move the file '[source["name"]]'."
 			return "[name]: File moved."
 		else if(arguments[1] == "-c")
-			if(!terminal.computer.move_file(source["name"], destination["name"], source["drive"], destination["drive"]))
+			if(!terminal.computer.move_file(source["name"], destination["name"], source["drive"], destination["drive"], TRUE))
 				return "[name]: Error; could not copy the file '[source["name"]]'."
 			return "[name]: File copied."
 
