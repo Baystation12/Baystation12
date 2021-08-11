@@ -23,7 +23,7 @@
 	min_rank = 15
 
 	service_hat = /obj/item/clothing/head/solgov/service/expedition/senior_command
-	
+
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/command/cdr
 	dress_hat = /obj/item/clothing/head/solgov/service/expedition/senior_command
 
@@ -32,6 +32,8 @@
 	min_rank = 16
 
 	utility_hat = /obj/item/clothing/head/soft/solgov/expedition/co
+
+	service_hat = /obj/item/clothing/head/solgov/service/expedition/captain
 
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/expedition/command/capt
 	dress_hat = /obj/item/clothing/head/solgov/service/expedition/captain
