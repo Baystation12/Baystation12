@@ -96,7 +96,7 @@
 
 /obj/machinery/portable_atmospherics/reagent_sublimator/physical_attack_hand(var/mob/user)
 	update_use_power(use_power == POWER_USE_ACTIVE ? POWER_USE_IDLE : POWER_USE_ACTIVE)
-	user.visible_message("<span class='notice'>\The [user] switches \the [src] [use_power == 2 ? "on" : "off"].</span>")
+	user.visible_message("<span class='notice'>\The [user] switches \the [src] [use_power == POWER_USE_ACTIVE ? "on" : "off"].</span>")
 	update_icon()
 	return TRUE
 
