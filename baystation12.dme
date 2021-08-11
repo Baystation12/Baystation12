@@ -1711,6 +1711,7 @@
 #include "code\modules\emotes\definitions\slime.dm"
 #include "code\modules\emotes\definitions\synthetics.dm"
 #include "code\modules\emotes\definitions\visible.dm"
+#include "code\modules\emotes\definitions\vox.dm"
 #include "code\modules\error_handler\error_handler.dm"
 #include "code\modules\error_handler\error_reporting.dm"
 #include "code\modules\error_handler\error_viewer.dm"
