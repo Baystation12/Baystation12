@@ -21,6 +21,7 @@
 	var/high_visibility	//if it should appear on examine without detailed view
 	var/slowdown //used when an accessory is meant to slow the wearer down when attached to clothing
 	var/removable = TRUE
+	var/hidden = FALSE
 
 /obj/item/clothing/accessory/Destroy()
 	on_removed()
