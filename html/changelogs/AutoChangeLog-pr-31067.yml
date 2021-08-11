@@ -1,5 +1,0 @@
-author: BlueNexus
-delete-after: true
-changes:
-  - maptweak: The deck one and deck three nacelles now match, as intended. As such,
-      it should be safe to use burn mode.
