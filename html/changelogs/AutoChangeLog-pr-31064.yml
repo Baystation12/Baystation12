@@ -1,0 +1,5 @@
+author: Tennessee116
+delete-after: true
+changes:
+  - tweak: Captain's can now only select the captain's dress cover from the uniform
+      vendor.
