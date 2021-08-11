@@ -1,0 +1,10 @@
+author: Imienny, RustingWithYou
+delete-after: true
+changes:
+  - rscadd: Adds new emote to Vox Armalis *ashriek, *shriek but cooler.
+  - rscadd: Adds two new Vox plants - the resin plant and the breather. The breather
+      produces nitrogen gas, and the resin produces a new material, Vox bioresin.
+      Adds seeds for both of them to the Vox offship.
+  - rscadd: Adds seed extractor to Vox ship
+  - rscadd: Vox Armalis can now use *shriek emote
+  - imageadd: Adds sprites for Vox Armalis wearing the two types of Vox clothing
