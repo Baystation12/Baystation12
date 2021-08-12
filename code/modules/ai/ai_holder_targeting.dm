@@ -201,7 +201,7 @@
 		ai_log("can_see_target() : Target ([the_target]) was too far from holder. Exiting.", AI_LOG_TRACE)
 		return FALSE
 
-	if (!(the_target in oview(view_range, holder)))
+	if (!can_see(holder, the_target, view_range))
 		ai_log("can_see_target() : Target ([the_target]) failed can_see(). Exiting.", AI_LOG_TRACE)
 		return FALSE
 
