@@ -12114,6 +12114,9 @@
 	dir = 10;
 	icon_state = "spline_fancy"
 	},
+/obj/structure/banner{
+	pixel_y = -32
+	},
 /turf/simulated/floor/wood/maple,
 /area/chapel/main)
 "CJ" = (
@@ -18282,6 +18285,9 @@
 /obj/effect/floor_decal/spline/fancy/black{
 	dir = 6;
 	icon_state = "spline_fancy"
+	},
+/obj/structure/banner{
+	pixel_y = -32
 	},
 /turf/simulated/floor/wood/maple,
 /area/chapel/main)
