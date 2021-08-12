@@ -496,6 +496,53 @@ Class Procs:
 	if (user.skill_check(SKILL_CONSTRUCTION, SKILL_BASIC) || isobserver(user))
 		to_chat(user, SPAN_NOTICE(machine_desc))
 
+/obj/machinery/get_mechanics_info()
+	. = ..()
+	if (maximum_component_parts)
+		var/component_parts_list
+		for (var/atom/item as anything in maximum_component_parts)
+			var/count = maximum_component_parts[item]
+			if (isnull(count))
+				component_parts_list += "<li>Infinite [initial(item.name)]</li>"
+			else
+				component_parts_list += "<li>[count] [initial(item.name)]\s</li>"
+		. += {"
+			<p>It can hold the following component types:</p>
+			<ul>
+				[component_parts_list]
+			</ul>
+		"}
+
+	if (silicon_restriction)
+		switch (silicon_restriction)
+			if (STATUS_UPDATE)
+				. += "<p>Silicons are blocked from controlling it.</p>"
+			if (STATUS_DISABLED || STATUS_CLOSE)
+				. += "<p>Silicons are blocked from viewing or controlling it.</p>"
+
+	var/power_channel_name
+	switch (initial(power_channel))
+		if (EQUIP)
+			power_channel_name = "Equipment"
+		if (LIGHT)
+			power_channel_name = "Lighting"
+		if (ENVIRON)
+			power_channel_name = "Environment"
+		if (LOCAL)
+			power_channel_name = "Local"
+	. += "<p>By default, it draws power from the [power_channel_name] channel.</p>"
+
+	if (idle_power_usage && active_power_usage)
+		. += "<p>It draws [idle_power_usage] watts while idle, and [active_power_usage] watts while active."
+	else if (idle_power_usage)
+		. += "<p>It draws [idle_power_usage] watts while idle.</p>"
+	else if (active_power_usage)
+		. += "<p>It draws [active_power_usage] watts while active.</p>"
+
+	if (core_skill)
+		var/decl/hierarchy/skill/core_skill_decl = core_skill
+		. += "<p>It utilizes the [initial(core_skill_decl.name)] skill.</p>"
+
 // This is really pretty crap and should be overridden for specific machines.
 /obj/machinery/water_act(depth)
 	..()
