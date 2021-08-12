@@ -9,7 +9,7 @@ GLOBAL_LIST_INIT(terminal_fails, init_subtypes(/datum/terminal_skill_fail))
 /datum/terminal_skill_fail/proc/can_run(mob/user, datum/terminal/terminal)
 	if (require_ntnet)
 		return !!terminal.computer.get_ntnet_status()
-	return FALSE
+	return TRUE
 
 /datum/terminal_skill_fail/proc/execute(datum/terminal/terminal)
 	return message
@@ -43,7 +43,7 @@ GLOBAL_LIST_INIT(terminal_fails, init_subtypes(/datum/terminal_skill_fail))
 		"Voice Recognition Interface unavailable to process commands. Please enter input instead of speaking to device.",
 		"Cannot access personal folder 'XXXAdult' in NTNet Nebula Storage; service unreachable.",
 		"Unable to send new friend request to user 'SsswoleUnathi99' while a request is already pending.",
-		"Hi! It looks like you are attempting to activate a <STRING_MK87_NUCLEARSELFDESTRUCT_SYSTEM_DESCRIPTION_INFORMAL>. Would you like help?"
+		"Hi! It looks like you are attempting to activate a \<STRING_MK87_NUCLEARSELFDESTRUCT_SYSTEM_DESCRIPTION_INFORMAL\>. Would you like help?"
 	))
 	terminal.computer.audible_notification("sound/machines/ping.ogg")
 	terminal.computer.visible_notification(message)
