@@ -94,4 +94,5 @@
 		if(scf.can_run(user, src))
 			candidates[scf] = scf.weight
 	var/datum/terminal_skill_fail/chosen = pickweight(candidates)
-	return chosen.execute(src)
+	if(istype(chosen))
+		return chosen.execute(src)
