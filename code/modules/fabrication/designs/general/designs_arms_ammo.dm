@@ -124,5 +124,13 @@
 	path = /obj/item/ammo_magazine/speedloader/clip
 
 /datum/fabricator_recipe/arms_ammo/hidden/pistolstripperclip
-	name = "ammunition (pistol stripper clip)"
+	name = "ammunition (magnum pistol stripper clip)"
 	path = /obj/item/ammo_magazine/speedloader/pclip
+
+/datum/fabricator_recipe/arms_ammo/hidden/broomstickstripperclip
+	name = "ammunition (holdout pistol stripper clip)"
+	path = /obj/item/ammo_magazine/speedloader/hpclip
+
+/datum/fabricator_recipe/arms_ammo/hidden/rifleinternalclip
+	name = "ammunition (rifle internal clip)"
+	path = /obj/item/ammo_magazine/iclipr

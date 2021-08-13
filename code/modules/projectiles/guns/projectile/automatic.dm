@@ -363,25 +363,4 @@
 		icon_state = "battlerifle-empty"
 		wielded_item_state = "battlerifle-wielded-empty"
 
-/obj/item/gun/projectile/automatic/semistrip
-	name = "Carbine Rifle"
-	desc = "An old semi-automatic carbine chambered in large pistol rounds, this thing looks older than the SCG."
-	icon = 'icons/obj/guns/semistrip.dmi'
-	icon_state = "semistrip"
-	item_state = "semistrip"
-	w_class = ITEM_SIZE_LARGE
-	force = 10
-	origin_tech = list(TECH_COMBAT = 2)
-	slot_flags = SLOT_BACK
-	caliber = CALIBER_PISTOL_MAGNUM
-	ammo_type = /obj/item/ammo_casing/pistol/magnum
-	load_method = SINGLE_CASING|SPEEDLOADER
-	max_shells = 10
-	accuracy = 1
-	scope_zoom = 0
-	scoped_accuracy = 0
-	wielded_item_state = "semistrip-wielded"
 
-	firemodes = list(
-		list(mode_name="semi auto",       burst=1, fire_delay=2,    move_delay=null, one_hand_penalty=8, burst_accuracy=null, dispersion=null)
-		)

@@ -55,6 +55,12 @@
 	item_cost = 32
 	path = /obj/item/storage/box/syndie_kit/silenced
 
+/datum/uplink_item/item/visible_weapons/broomstick
+	name = "Broomstick Pistol"
+	desc = "An antique pistol stolen from a museum. Be warned, it may be faulty and comes unloaded."
+	item_cost = 40
+	path = /obj/item/gun/projectile/pistol/broomstick
+
 /datum/uplink_item/item/badassery/money_cannon
 	name = "Modified Money Cannon"
 	item_cost = 48
@@ -112,7 +118,7 @@
 	name = "Carbine Rifle"
 	desc = "For arming your comrades on the (not so) cheap!"
 	item_cost = 55
-	path = /obj/item/gun/projectile/automatic/semistrip
+	path = /obj/item/gun/projectile/sniper/semistrip
 	antag_roles = list(MODE_REVOLUTIONARY, MODE_MERCENARY)
 
 

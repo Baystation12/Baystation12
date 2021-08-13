@@ -94,3 +94,64 @@
 	scope_zoom = 0
 	scoped_accuracy = 0
 	wielded_item_state = "boltaction-wielded"
+
+/obj/item/gun/projectile/sniper/garand
+	name = "garand rifle"
+	desc = "The rugged garand is a old semi-automatic weapon popular on the frontier worlds."
+	icon = 'icons/obj/guns/garand.dmi'
+	icon_state = "garand"
+	item_state = null
+	w_class = ITEM_SIZE_HUGE
+	force = 10
+	caliber = CALIBER_RIFLE
+	origin_tech = list(TECH_COMBAT = 2)
+	slot_flags = SLOT_BACK
+	load_method = MAGAZINE
+	magazine_type = /obj/item/ammo_magazine/iclipr
+	allowed_magazines = /obj/item/ammo_magazine/iclipr
+	auto_eject = TRUE
+	auto_eject_sound = 'sound/weapons/guns/interaction/garand_magout.ogg'
+	one_hand_penalty = 9
+	accuracy_power = 5
+	accuracy = 1
+	bulk = GUN_BULK_RIFLE + 1
+	wielded_item_state = "garand-wielded"
+	mag_insert_sound = 'sound/weapons/guns/interaction/ltrifle_magin.ogg'
+	mag_remove_sound = 'sound/weapons/guns/interaction/garand_magout.ogg'
+
+	firemodes = list(
+		list(mode_name="semi auto",       burst=1, fire_delay=6,    move_delay=null, one_hand_penalty=8, burst_accuracy=null, dispersion=null)
+		)
+
+/obj/item/gun/projectile/sniper/garand/on_update_icon()
+	..()
+	if (ammo_magazine)
+		icon_state = "garand"
+		wielded_item_state = "garand-wielded"
+	else
+		icon_state = "garand-empty"
+		wielded_item_state = "garand-wielded-empty"
+
+/obj/item/gun/projectile/sniper/semistrip
+	name = "Carbine Rifle"
+	desc = "An old semi-automatic carbine chambered in large pistol rounds, this thing looks older than the SCG."
+	icon = 'icons/obj/guns/semistrip.dmi'
+	icon_state = "semistrip"
+	item_state = "semistrip"
+	w_class = ITEM_SIZE_LARGE
+	force = 10
+	origin_tech = list(TECH_COMBAT = 2)
+	slot_flags = SLOT_BACK
+	caliber = CALIBER_PISTOL_MAGNUM
+	ammo_type = /obj/item/ammo_casing/pistol/magnum
+	load_method = SINGLE_CASING|SPEEDLOADER
+	max_shells = 10
+	accuracy = 1
+	scope_zoom = 0
+	scoped_accuracy = 0
+	wielded_item_state = "semistrip-wielded"
+
+	firemodes = list(
+		list(mode_name="semi auto",       burst=1, fire_delay=2,    move_delay=null, one_hand_penalty=8, burst_accuracy=null, dispersion=null)
+		)
+
