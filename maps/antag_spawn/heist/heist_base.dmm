@@ -1558,8 +1558,8 @@
 /area/map_template/skipjack_station/start)
 "dC" = (
 /obj/structure/table/rack,
-/obj/item/grenade/empgrenade,
-/obj/item/grenade/flashbang,
+/obj/item/grenade/chem_grenade/empgrenade,
+/obj/item/grenade/chem_grenade/flashbang,
 /obj/item/grenade/spawnergrenade/manhacks,
 /obj/random/raider/biggun,
 /turf/simulated/floor/shuttle/red,

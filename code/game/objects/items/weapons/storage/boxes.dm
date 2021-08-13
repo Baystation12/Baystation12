@@ -201,19 +201,19 @@
 	name = "box of flashbangs"
 	desc = "A box containing 7 antipersonnel flashbang grenades.<br> WARNING: These devices are extremely dangerous and can cause blindness or deafness from repeated use."
 	icon_state = "flashbang"
-	startswith = list(/obj/item/grenade/flashbang = 7)
+	startswith = list(/obj/item/grenade/chem_grenade/flashbang = 7)
 
 /obj/item/storage/box/teargas
 	name = "box of pepperspray grenades"
 	desc = "A box containing 7 tear gas grenades. A gas mask is printed on the label.<br> WARNING: Exposure carries risk of serious injury or death. Keep away from persons with lung conditions."
 	icon_state = "flashbang"
-	startswith = list(/obj/item/grenade/chem_grenade/teargas = 7)
+	startswith = list(/obj/item/grenade/chem_grenade/large/teargas = 7)
 
 /obj/item/storage/box/emps
 	name = "box of emp grenades"
 	desc = "A box containing 5 military grade EMP grenades.<br> WARNING: Do not use near unshielded electronics or biomechanical augmentations, death or permanent paralysis may occur."
 	icon_state = "flashbang"
-	startswith = list(/obj/item/grenade/empgrenade = 5)
+	startswith = list(/obj/item/grenade/chem_grenade/empgrenade = 5)
 
 /obj/item/storage/box/frags
 	name = "box of frag grenades"
@@ -231,7 +231,7 @@
 	name = "box of smoke bombs"
 	desc = "A box containing 5 smoke bombs."
 	icon_state = "flashbang"
-	startswith = list(/obj/item/grenade/smokebomb = 5)
+	startswith = list(/obj/item/grenade/chem_grenade/smokegrenade = 5)
 
 /obj/item/storage/box/anti_photons
 	name = "box of anti-photon grenades"

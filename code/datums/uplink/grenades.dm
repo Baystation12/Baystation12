@@ -19,7 +19,7 @@
 	name = "1x Smoke Grenade"
 	desc = "A grenade that will erupt into a vision obscuring cloud of smoke. Makes for great getaways!"
 	item_cost = 4
-	path = /obj/item/grenade/smokebomb
+	path = /obj/item/grenade/chem_grenade/smokegrenade
 
 /datum/uplink_item/item/grenades/smokes
 	name = "5x Smoke Grenades"
@@ -28,9 +28,9 @@
 
 /datum/uplink_item/item/grenades/emp
 	name = "1x EMP Grenade"
-	desc = "A grenade that will send electronics into a frenzy, or possibly fry them altogether. The timer is adjustable with a screwdriver."
+	desc = "A grenade that will send electronics into a frenzy, or possibly fry them altogether."
 	item_cost = 8
-	path = /obj/item/grenade/empgrenade
+	path = /obj/item/grenade/chem_grenade/empgrenade
 
 /datum/uplink_item/item/grenades/emps
 	name = "5x EMP Grenades"

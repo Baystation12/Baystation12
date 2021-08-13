@@ -4,7 +4,7 @@
 /decl/hierarchy/supply_pack/security/specialops
 	name = "Grenades - Special Ops supplies"
 	contains = list(/obj/item/storage/box/emps,
-					/obj/item/grenade/smokebomb = 3,
+					/obj/item/grenade/chem_grenade/smokegrenade = 3,
 					/obj/item/grenade/chem_grenade/incendiary)
 	cost = 20
 	containername = "special ops crate"

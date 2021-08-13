@@ -60,7 +60,7 @@
 		/obj/item/pickaxe/silver,
 		/obj/item/pen/invisible,
 		/obj/item/lipstick/random,
-		/obj/item/grenade/smokebomb,
+		/obj/item/grenade/chem_grenade/smokegrenade,
 		/obj/item/carvable/corncob,
 		/obj/item/contraband/poster,
 		/obj/item/book/manual/barman_recipes,

@@ -82,8 +82,8 @@
 /obj/machinery/vending/security
 	products = list(
 		/obj/item/handcuffs = 14,
-		/obj/item/grenade/flashbang = 4,
-		/obj/item/grenade/chem_grenade/teargas = 4,
+		/obj/item/grenade/chem_grenade/flashbang = 4,
+		/obj/item/grenade/chem_grenade/large/teargas = 4,
 		/obj/item/device/flash = 7,
 		/obj/item/reagent_containers/spray/pepper = 4,
 		/obj/item/device/holowarrant = 4,

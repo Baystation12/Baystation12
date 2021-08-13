@@ -1011,8 +1011,8 @@
 	req_access = list(access_security)
 	products = list(
 		/obj/item/handcuffs = 8,
-		/obj/item/grenade/flashbang = 4,
-		/obj/item/grenade/chem_grenade/teargas = 4,
+		/obj/item/grenade/chem_grenade/flashbang = 4,
+		/obj/item/grenade/chem_grenade/large/teargas = 4,
 		/obj/item/device/flash = 5,
 		/obj/item/reagent_containers/food/snacks/donut/normal = 12,
 		/obj/item/storage/box/evidence = 6)

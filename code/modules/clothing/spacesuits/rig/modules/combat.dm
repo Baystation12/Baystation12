@@ -96,9 +96,9 @@
 	var/fire_distance = 10
 
 	charges = list(
-		list("flashbang",   "flashbang",   /obj/item/grenade/flashbang,  3),
-		list("smoke bomb",  "smoke bomb",  /obj/item/grenade/smokebomb,  3),
-		list("EMP grenade", "EMP grenade", /obj/item/grenade/empgrenade, 3),
+		list("flashbang",   "flashbang",   /obj/item/grenade/chem_grenade/flashbang,  3),
+		list("smoke bomb",  "smoke bomb",  /obj/item/grenade/chem_grenade/smokegrenade,  3),
+		list("EMP grenade", "EMP grenade", /obj/item/grenade/chem_grenade/empgrenade, 3),
 		)
 
 /obj/item/rig_module/grenade_launcher/accepts_item(var/obj/item/input_device, var/mob/living/user)
@@ -170,7 +170,7 @@
 	desc = "A shoulder-mounted micro-explosive dispenser designed only to accept standard smoke grenades."
 
 	charges = list(
-		list("smoke bomb",   "smoke bomb",   /obj/item/grenade/smokebomb,  6),
+		list("smoke bomb",   "smoke bomb",   /obj/item/grenade/chem_grenade/smokegrenade,  6),
 		)
 
 /obj/item/rig_module/grenade_launcher/mfoam

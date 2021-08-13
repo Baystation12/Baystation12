@@ -112,10 +112,10 @@
 
 	var/list/grenade_types = list(
 		/obj/item/grenade/anti_photon = 2,
-		/obj/item/grenade/smokebomb = 2,
-		/obj/item/grenade/chem_grenade/teargas = 2,
-		/obj/item/grenade/flashbang = 3,
-		/obj/item/grenade/empgrenade = 3,
+		/obj/item/grenade/chem_grenade/smokegrenade = 2,
+		/obj/item/grenade/chem_grenade/large/teargas = 2,
+		/obj/item/grenade/chem_grenade/flashbang = 3,
+		/obj/item/grenade/chem_grenade/empgrenade = 3,
 		/obj/item/grenade/frag/shell = 1,
 		)
 

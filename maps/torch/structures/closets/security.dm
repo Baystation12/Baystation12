@@ -43,7 +43,7 @@
 		/obj/item/storage/belt/holster/security,
 		/obj/item/device/flash,
 		/obj/item/reagent_containers/spray/pepper,
-		/obj/item/grenade/chem_grenade/teargas,
+		/obj/item/grenade/chem_grenade/large/teargas,
 		/obj/item/melee/baton/loaded,
 		/obj/item/clothing/glasses/sunglasses/sechud/goggles,
 		/obj/item/taperoll/police,

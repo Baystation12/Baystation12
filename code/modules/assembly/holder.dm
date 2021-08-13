@@ -239,7 +239,7 @@
 		ign.secured = 1
 		ign.holder = src
 		var/obj/item/device/assembly/timer/tmr = new(src)
-		tmr.time=5
+		tmr.time=3
 		tmr.secured = 1
 		tmr.holder = src
 		START_PROCESSING(SSobj, tmr)
