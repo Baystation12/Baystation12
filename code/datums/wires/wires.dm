@@ -54,6 +54,9 @@ var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown"
 	holder = null
 	return ..()
 
+/datum/wires/proc/get_mechanics_info()
+	return
+
 /datum/wires/proc/GenerateWires()
 	var/list/colours_to_pick = wireColours.Copy() // Get a copy, not a reference.
 	var/list/indexes_to_pick = list()

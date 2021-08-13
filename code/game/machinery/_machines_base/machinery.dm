@@ -543,6 +543,10 @@ Class Procs:
 		var/decl/hierarchy/skill/core_skill_decl = core_skill
 		. += "<p>It utilizes the [initial(core_skill_decl.name)] skill.</p>"
 
+	var/wire_mechanics = wires?.get_mechanics_info()
+	if (wire_mechanics)
+		. += "<hr><h5>Wiring</h5>[wire_mechanics]"
+
 // This is really pretty crap and should be overridden for specific machines.
 /obj/machinery/water_act(depth)
 	..()
