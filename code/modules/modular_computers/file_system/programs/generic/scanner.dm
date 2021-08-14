@@ -43,7 +43,7 @@
 /datum/computer_file/program/scanner/proc/save_scan(name)
 	if(!data_buffer)
 		return FALSE
-	if(!computer.create_file(name, data_buffer, scan_file_type, metadata_buffer.Copy()))
+	if(!computer.create_data_file(name, data_buffer, scan_file_type, metadata_buffer.Copy()))
 		return FALSE
 	return TRUE
 
