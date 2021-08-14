@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - tweak: The font used for fancy pens is now a more readable font, for people like
-      me that may or may not be dyslexic.
