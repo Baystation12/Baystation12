@@ -1490,6 +1490,7 @@
 #include "code\modules\client\preference_setup\loadout\lists\xenowear.dm"
 #include "code\modules\client\preference_setup\occupation\occupation.dm"
 #include "code\modules\client\preference_setup\occupation\skill_selection.dm"
+#include "code\modules\clothing\buttons.dm"
 #include "code\modules\clothing\chameleon.dm"
 #include "code\modules\clothing\clothing.dm"
 #include "code\modules\clothing\clothing_accessories.dm"
