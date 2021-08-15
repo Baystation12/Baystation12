@@ -20,11 +20,11 @@
 
 /datum/artifact_trigger/gas/o2
 	name = "concentration of oxygen"
-	gas_needed = list(GAS_O2 = 5)
+	gas_needed = list(GAS_OXYGEN = 5)
 
 /datum/artifact_trigger/gas/n2
 	name = "concentration of nitrogen"
-	gas_needed = list(GAS_N2 = 5)
+	gas_needed = list(GAS_NITROGEN = 5)
 
 /datum/artifact_trigger/gas/phoron
 	name = "concentration of phoron"
