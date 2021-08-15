@@ -1625,11 +1625,9 @@
 	return (species && species.has_organ[organ_check])
 
 /mob/living/carbon/human/can_feel_pain(var/obj/item/organ/check_organ)
-	if(isSynthetic())
-		return 0
 	if(check_organ)
 		if(!istype(check_organ))
-			return 0
+			return 0 
 		return check_organ.can_feel_pain()
 	return !(species.species_flags & SPECIES_FLAG_NO_PAIN)
 
@@ -1744,23 +1742,29 @@
 
 /mob/living/carbon/human/melee_accuracy_mods()
 	. = ..()
-	if(get_shock() > 50)
-		. += 15
-	if(shock_stage > 10)
-		. += 15
-	if(shock_stage > 30)
-		. += 15
+	if(isSynthetic())
+		. +=(getBruteLoss(FALSE) + getFireLoss(FALSE))
+	else
+		if(get_shock() > 50)
+			. += 15
+		if(shock_stage > 10)
+			. += 15
+		if(shock_stage > 30)
+			. += 15
 
 /mob/living/carbon/human/ranged_accuracy_mods()
 	. = ..()
-	if(get_shock() > 10 && !skill_check(SKILL_WEAPONS, SKILL_ADEPT))
-		. -= 1
-	if(get_shock() > 50)
-		. -= 1
-	if(shock_stage > 10)
-		. -= 1
-	if(shock_stage > 30)
-		. -= 1
+	if(isSynthetic())
+		. -= round((getBruteLoss(FALSE) + getFireLoss(FALSE))*0.1)
+	else
+		if(get_shock() > 10 && !skill_check(SKILL_WEAPONS, SKILL_ADEPT))
+			. -= 1
+		if(get_shock() > 50)
+			. -= 1
+		if(shock_stage > 10)
+			. -= 1
+		if(shock_stage > 30)
+			. -= 1
 	if(skill_check(SKILL_WEAPONS, SKILL_ADEPT))
 		. += 1
 	if(skill_check(SKILL_WEAPONS, SKILL_EXPERT))

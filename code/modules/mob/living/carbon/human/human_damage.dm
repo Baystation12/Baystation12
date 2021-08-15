@@ -68,18 +68,18 @@
 	BITSET(hud_updateflag, HEALTH_HUD)
 
 //These procs fetch a cumulative total damage from all organs
-/mob/living/carbon/human/getBruteLoss()
+/mob/living/carbon/human/getBruteLoss(var/ignore_robotic=TRUE)
 	var/amount = 0
 	for(var/obj/item/organ/external/O in organs)
-		if(BP_IS_ROBOTIC(O) && !O.vital)
+		if((BP_IS_ROBOTIC(O) && !O.vital) && ignore_robotic)
 			continue //robot limbs don't count towards shock and crit
 		amount += O.brute_dam
 	return amount
 
-/mob/living/carbon/human/getFireLoss()
+/mob/living/carbon/human/getFireLoss(var/ignore_robotic=TRUE)
 	var/amount = 0
 	for(var/obj/item/organ/external/O in organs)
-		if(BP_IS_ROBOTIC(O) && !O.vital)
+		if((BP_IS_ROBOTIC(O) && !O.vital) && ignore_robotic)
 			continue //robot limbs don't count towards shock and crit
 		amount += O.burn_dam
 	return amount

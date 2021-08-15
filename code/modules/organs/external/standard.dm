@@ -24,6 +24,36 @@
 	limb_flags = ORGAN_FLAG_GENDERED_ICON | ORGAN_FLAG_HEALS_OVERKILL | ORGAN_FLAG_CAN_BREAK
 	can_be_printed = FALSE
 
+/obj/item/organ/external/chest/Process()
+	if(owner)
+		check_condition()
+	..()
+
+/obj/item/organ/external/chest/proc/check_condition()
+	if((get_damage() >= max_damage*0.7) && BP_IS_ROBOTIC(src))
+		if(owner.weakened <= 1)
+			owner.Weaken(1)
+
+/obj/item/organ/external/chest/update_damages()
+	..()
+	check_condition()
+
+/obj/item/organ/external/chest/need_process() 
+	if(get_pain())
+		return 1
+	if(status & (ORGAN_CUT_AWAY|ORGAN_BLEEDING|ORGAN_BROKEN|ORGAN_DEAD|ORGAN_MUTATED))
+		return 1
+	if(brute_dam || burn_dam)
+		return 1
+	if(last_dam != brute_dam + burn_dam)
+		last_dam = brute_dam + burn_dam
+		return 1
+	else
+		last_dam = brute_dam + burn_dam
+	if(germ_level)
+		return 1
+	return 0
+
 /obj/item/organ/external/chest/proc/get_current_skin()
 	return
 

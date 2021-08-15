@@ -25,6 +25,7 @@ var/list/organ_cache = list()
 	var/min_broken_damage = 30        // Damage before becoming broken
 	var/max_damage = 30               // Damage cap
 	var/rejecting                     // Is this organ already being rejected?
+	var/feels_pain = TRUE
 
 	var/death_time
 
@@ -215,6 +216,7 @@ var/list/organ_cache = list()
 	qdel(src)
 
 /obj/item/organ/proc/rejuvenate(var/ignore_prosthetic_prefs)
+	feels_pain = TRUE
 	damage = 0
 	status = initial(status)
 	if(!ignore_prosthetic_prefs && owner && owner.client && owner.client.prefs && owner.client.prefs.real_name == owner.real_name)
@@ -254,6 +256,7 @@ var/list/organ_cache = list()
 
 
 /obj/item/organ/proc/robotize() //Being used to make robutt hearts, etc
+	feels_pain = FALSE
 	status = ORGAN_ROBOTIC
 
 /obj/item/organ/proc/mechassist() //Used to add things like pacemakers, etc
@@ -320,7 +323,7 @@ var/list/organ_cache = list()
 	target.attackby(O, user)
 
 /obj/item/organ/proc/can_feel_pain()
-	return (!BP_IS_ROBOTIC(src) && (!species || !(species.species_flags & SPECIES_FLAG_NO_PAIN)))
+	return (feels_pain && (!species || !(species.species_flags & SPECIES_FLAG_NO_PAIN)))
 
 /obj/item/organ/proc/is_usable()
 	return !(status & (ORGAN_CUT_AWAY|ORGAN_MUTATED|ORGAN_DEAD))

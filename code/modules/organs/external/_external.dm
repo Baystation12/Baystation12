@@ -1083,7 +1083,6 @@ obj/item/organ/external/proc/remove_clamps()
 	return 0
 
 /obj/item/organ/external/robotize(var/company, var/skip_prosthetics = 0, var/keep_organs = 0)
-
 	if(BP_IS_ROBOTIC(src))
 		return
 
@@ -1097,6 +1096,7 @@ obj/item/organ/external/proc/remove_clamps()
 		 (R.applies_to_part.len && !(organ_tag in R.applies_to_part)))
 			R = basic_robolimb
 		else
+			feels_pain = R.can_feel_pain
 			model = company
 			force_icon = R.icon
 			name = "robotic [initial(name)]"
