@@ -150,8 +150,6 @@
 	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/clothing/scarf
-	allowed_roles = SEMIANDFORMAL_ROLES
-	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/clothing/flannel
 	allowed_roles = SEMIFORMAL_ROLES

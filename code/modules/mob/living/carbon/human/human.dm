@@ -1751,6 +1751,8 @@
 			. += 15
 		if(shock_stage > 30)
 			. += 15
+		if(weakened)
+			. += 15
 
 /mob/living/carbon/human/ranged_accuracy_mods()
 	. = ..()

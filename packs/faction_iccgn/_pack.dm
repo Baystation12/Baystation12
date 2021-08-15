@@ -1,0 +1,8 @@
+#include "badges.dm"
+#include "patches.dm"
+#include "ranks.dm"
+#include "clothing.dm"
+#include "faction.dm"
+#include "misc.dm"
+#include "outfits.dm"
+#include "tweaks.dm"

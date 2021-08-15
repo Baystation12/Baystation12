@@ -529,7 +529,7 @@
 	name = "Flash powder"
 	result = null
 	required_reagents = list(/datum/reagent/aluminium = 1, /datum/reagent/potassium = 1, /datum/reagent/sulfur = 1 )
-	result_amount = null
+	result_amount = 3
 	mix_message = "The solution bubbles vigorously!"
 
 /datum/chemical_reaction/flash_powder/on_reaction(var/datum/reagents/holder, var/created_volume, var/reaction_flags)
@@ -540,21 +540,28 @@
 	s.start()
 	for(var/mob/living/carbon/M in viewers(world.view, location))
 		switch(get_dist(M, location))
-			if(0 to 3)
-				if(hasvar(M, "glasses"))
-					if(istype(M:glasses, /obj/item/clothing/glasses/sunglasses))
-						continue
+			if(0 to 1)
+				if (M.eyecheck() < FLASH_PROTECTION_MODERATE)
+					M.flash_eyes(2)
+					M.weakened = min(10, (created_volume / 20))
+					M.confused = min(20, (created_volume / 5))
+					M.eye_blurry = min(40, (created_volume / 5))
+				else
+					M.stunned = min(10, (created_volume / 30))
+					M.confused = min(20, (created_volume / 10))
+					M.eye_blurry = min(40, (created_volume / 10))
 
-				M.flash_eyes()
-				M.Weaken(15)
-
-			if(4 to 5)
-				if(hasvar(M, "glasses"))
-					if(istype(M:glasses, /obj/item/clothing/glasses/sunglasses))
-						continue
-
-				M.flash_eyes()
-				M.Stun(5)
+			if(2 to 4)
+				if (M.eyecheck() < FLASH_PROTECTION_MODERATE)
+					M.flash_eyes(2)
+					M.stunned = min(5, (created_volume / 30))
+					M.confused = min(10, (created_volume / 10))
+					M.eye_blurry = min(20, (created_volume / 10))
+				else
+					M.stunned = min(5, (created_volume / 60))
+					M.confused = min(10, (created_volume / 20))
+					M.eye_blurry = min(20, (created_volume / 20))
+		playsound(location, 'sound/effects/bang.ogg', 50, 1, 30)
 
 /datum/chemical_reaction/emp_pulse
 	name = "EMP Pulse"

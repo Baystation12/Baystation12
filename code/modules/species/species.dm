@@ -631,22 +631,24 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 
 	var/list/holding = list(target.get_active_hand() = 60, target.get_inactive_hand() = 30)
 
-	var/skill_mod = 10 * attacker.get_skill_difference(SKILL_COMBAT, target)
+	var/skill_mod = attacker.get_skill_difference(SKILL_COMBAT, target)
 	var/state_mod = attacker.melee_accuracy_mods() - target.melee_accuracy_mods()
 	var/stim_mod = target.chem_effects[CE_STIMULANT]
-	var/push_mod = min(max(1 + attacker.get_skill_difference(SKILL_COMBAT, target), 1), 3)
+	var/push_threshold = 12 + (skill_mod - stim_mod)
+	var/disarm_threshold = 24 + ((skill_mod - stim_mod) * 2)
+
 	if(target.a_intent == I_HELP)
 		state_mod -= 30
 	//Handle unintended consequences
 	for(var/obj/item/I in holding)
-		var/hurt_prob = max(holding[I] - 2*skill_mod + state_mod, 0)
+		var/hurt_prob = max(holding[I] - 3*skill_mod, 0)
 		if(prob(hurt_prob) && I.on_disarm_attempt(target, attacker))
 			return
 
-	var/randn = rand(1, 100) - skill_mod + state_mod - stim_mod
-	if(!(check_no_slip(target)) && randn <= 20)
+	var/randn = rand(1, 100) + state_mod
+	if(!(check_no_slip(target)) && randn <= push_threshold)
 		var/armor_check = 100 * target.get_blocked_ratio(affecting, BRUTE, damage = 20)
-		target.apply_effect(push_mod, WEAKEN, armor_check)
+		target.apply_effect(2, WEAKEN, armor_check)
 		playsound(target.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 		if(armor_check < 100)
 			target.visible_message("<span class='danger'>[attacker] has pushed [target]!</span>")
@@ -654,7 +656,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 			target.visible_message("<span class='warning'>[attacker] attempted to push [target]!</span>")
 		return
 
-	if(randn <= 50)
+	if(randn <= disarm_threshold)
 		//See about breaking grips or pulls
 		if(target.break_all_grabs(attacker))
 			playsound(target.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)

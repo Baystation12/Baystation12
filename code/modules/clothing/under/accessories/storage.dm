@@ -58,6 +58,17 @@
 	container.finish_bulk_removal()
 	visible_message("\The [user] empties \the [src].", range = 5)
 
+
+/obj/item/clothing/accessory/storage/pockets
+	name = "pockets"
+	desc = "A bag-like receptacle fastened to an article of clothing to hold small items."
+	icon_state = ""
+	slots = 2 STORAGE_FREEFORM
+	high_visibility = FALSE
+	removable = FALSE
+	hidden = TRUE
+
+
 /obj/item/clothing/accessory/storage/webbing
 	name = "webbing"
 	desc = "A sturdy mess of straps and buckles you can clip things to."
