@@ -50,7 +50,7 @@
 		to_chat(M, "It is fizzing slightly.")
 
 /obj/item/reagent_containers/food/drinks/glass2/proc/has_ice()
-	if(reagents.reagent_list.len > 0)
+	if(length(reagents?.reagent_list))
 		var/datum/reagent/R = reagents.get_master_reagent()
 		if(!((R.type == /datum/reagent/drink/ice) || ("ice" in R.glass_special))) // if it's not a cup of ice, and it's not already supposed to have ice in, see if the bartender's put ice in it
 			if(reagents.has_reagent(/datum/reagent/drink/ice, reagents.total_volume / 10)) // 10% ice by volume
@@ -59,7 +59,7 @@
 	return 0
 
 /obj/item/reagent_containers/food/drinks/glass2/proc/has_fizz()
-	if(reagents.reagent_list.len > 0)
+	if(length(reagents?.reagent_list))
 		var/datum/reagent/R = reagents.get_master_reagent()
 		if(("fizz" in R.glass_special))
 			return 1
@@ -72,7 +72,7 @@
 	return 0
 
 /obj/item/reagent_containers/food/drinks/glass2/proc/has_vapor()
-	if(reagents.reagent_list.len > 0)
+	if(length(reagents?.reagent_list))
 		if(temperature > T0C + 40)
 			return 1
 		var/datum/reagent/R = reagents.get_master_reagent()
@@ -98,7 +98,7 @@
 	if(QDELETED(src))
 		return
 	if(prob(80))
-		if(reagents.reagent_list.len > 0)
+		if(length(reagents?.reagent_list))
 			visible_message(
 				SPAN_DANGER("\The [src] shatters from the impact and spills all its contents!"),
 				SPAN_DANGER("You hear the sound of glass shattering!")
@@ -113,7 +113,7 @@
 		new /obj/item/material/shard(src.loc)
 		qdel(src)
 	else
-		if (reagents.reagent_list.len > 0)
+		if (length(reagents?.reagent_list))
 			visible_message(
 				SPAN_DANGER("\The [src] bounces and spills all its contents!"),
 				SPAN_WARNING("You hear the sound of glass hitting something.")
