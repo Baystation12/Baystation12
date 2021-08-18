@@ -1,0 +1,4 @@
+author: Ithalan
+delete-after: true
+changes:
+  - bugfix: PDA scanners can now save their results again
