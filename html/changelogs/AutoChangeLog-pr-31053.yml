@@ -1,0 +1,4 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - tweak: Shuttle pilots now have maintenance access, just like explorers.
