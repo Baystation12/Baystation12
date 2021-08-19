@@ -1,5 +1,0 @@
-author: MeetSimmio
-delete-after: true
-changes:
-  - rscadd: Adds religious banner that can have their symbol switched by the Chaplain.
-  - maptweak: Adds two banners to the deck 3 Chapel.

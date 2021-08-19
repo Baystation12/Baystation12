@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - admin: Removed the 'Supermatter is approaching unsafe temperatures' warning because
-      it's basically useless and spam-floods chat.

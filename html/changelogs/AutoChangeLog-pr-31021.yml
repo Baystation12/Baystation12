@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - admin: Eyedroppers now only show attack logs for dangerous chemicals, matching
-      the logging behavior of syringes.
