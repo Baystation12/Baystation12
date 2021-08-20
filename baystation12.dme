@@ -2426,6 +2426,7 @@
 #include "code\modules\modular_computers\terminal\commands\locate.dm"
 #include "code\modules\modular_computers\terminal\commands\lock.dm"
 #include "code\modules\modular_computers\terminal\commands\log.dm"
+#include "code\modules\modular_computers\terminal\commands\netscan.dm"
 #include "code\modules\modular_computers\terminal\commands\ping.dm"
 #include "code\modules\modular_computers\terminal\commands\prog.dm"
 #include "code\modules\modular_computers\terminal\commands\proxy.dm"
