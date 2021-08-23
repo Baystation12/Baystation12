@@ -206,9 +206,9 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 
 // attempt to move while inside
 /obj/machinery/disposal/relaymove(mob/user as mob)
-	if(user.stat || src.flushing)
+	if (user.incapacitated() || src.flushing)
 		return
-	if(user.loc == src)
+	if (user.loc == src)
 		src.go_out(user)
 	return
 
@@ -479,6 +479,12 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		return 0
 	else
 		return ..(mover, target, height, air_group)
+
+/obj/machinery/disposal/slam_into(mob/living/L)
+	L.forceMove(src)
+	L.Weaken(5)
+	L.visible_message(SPAN_WARNING("\The [L] falls into \the [src]!"))
+	playsound(L, "punch", 25, 1, FALSE)
 
 /obj/machinery/disposal_switch
 	name = "disposal switch"
