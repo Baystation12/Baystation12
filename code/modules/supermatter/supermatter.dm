@@ -68,6 +68,7 @@
 	var/base_color = "#927a10"
 	var/warning_color = "#c78c20"
 	var/emergency_color = "#ffd04f"
+	var/rotation_angle = 0
 
 	var/grav_pulling = 0
 	// Time in ticks between delamination ('exploding') and exploding (as in the actual boom)
@@ -419,11 +420,19 @@
 		var/effect = max(0, min(200, power * config_hallucination_power * sqrt( 1 / max(1,get_dist(subject, src)))) )
 		subject.adjust_hallucination(effect, 0.25 * effect)
 
+	var/level = Interpolate(0, 50, Clamp( (damage - emergency_point) / (explosion_point - emergency_point),0,1))
+	var/list/new_color = color_contrast(level )
 	//Apply visual effects based on damage
-	color = color_contrast(Interpolate(0, 50, Clamp( (damage - emergency_point) / (explosion_point - emergency_point),0,1)))
+	if(rotation_angle != 0)
+		if(level != 0)
+			new_color = multiply_matrices(new_color, color_rotation(rotation_angle), 4, 3,3)
+		else
+			new_color = color_rotation(rotation_angle)
+
+	color = new_color
 
 	if (damage >= emergency_point && !filters.len)
-		filters = filter(type="rays", size = 64, color = emergency_color, factor = 0.6, density = 12)
+		filters = filter(type="rays", size = 64, color = "#ffd04f", factor = 0.6, density = 12)
 		animate(filters[1], time = 10 SECONDS, offset = 10, loop=-1)
 		animate(time = 10 SECONDS, offset = 0, loop=-1)
 
@@ -617,6 +626,25 @@
 	charging_factor = rand(0, 1)
 	damage_rate_limit = rand( 1, 10)		//damage rate cap at power = 300, scales linearly with power
 
+	//Change fune colours
+	var/angle = rand(-180, 180)
+	var/list/color_matrix = color_rotation(angle)
+	rotation_angle = angle
+
+	color = color_matrix
+
+	var/HSV = RGBtoHSV(base_color)
+	var/RGB = HSVtoRGB(RotateHue(HSV, angle))
+	base_color = RGB
+
+	HSV = RGBtoHSV(warning_color)
+	RGB = HSVtoRGB(RotateHue(HSV, angle))
+	warning_color = RGB
+
+	HSV = RGBtoHSV(emergency_color)
+	RGB = HSVtoRGB(RotateHue(HSV, angle))
+	emergency_color = RGB
+
 /obj/machinery/power/supermatter/inert
 	name = "experimental supermatter sample"
 	icon_state = "darkmatter_shard"
@@ -679,13 +707,14 @@
 	idle_power_usage = 0
 	active_power_usage = 0
 
-	var/on = 0					// 1 if on, 0 if off
+	var/on = FALSE
 	var/construct_type = /obj/machinery/light_construct
 
 	var/static/obj/effect/spinning_light/spin_effect = null
 
 	var/alarm_light_color = COLOR_ORANGE
-	var/angle = 0 //This is an angle to rotate the colour of alarm and its light. Default is orange, so, a 45 degree angle clockwise will make it green
+	/// This is an angle to rotate the colour of alarm and its light. Default is orange, so, a 45 degree angle clockwise will make it green
+	var/angle = 0
 
 /obj/machinery/rotating_alarm/Initialize()
 	. = ..()
