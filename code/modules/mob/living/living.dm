@@ -822,12 +822,14 @@ default behaviour is:
 	. = 0
 	if(incapacitated(INCAPACITATION_UNRESISTING))
 		. += 100
-	if(eye_blind)
-		. += 75
+	if(confused)
+		. += 15
+	if(weakened)
+		. += 15
 	if(eye_blurry)
 		. += 15
-	if(confused)
-		. += 30
+	if(eye_blind)
+		. += 60
 	if(MUTATION_CLUMSY in mutations)
 		. += 40
 
