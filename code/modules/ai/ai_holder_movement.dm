@@ -125,7 +125,7 @@
 		var/turf/T = src.path[1]
 		T.overlays -= path_overlay
 
-	if (holder.IMove(get_dir(holder, src.path[1])) != MOVEMENT_ON_COOLDOWN)
+	if (holder.IMove(get_step_towards(holder, src.path[1])) != MOVEMENT_ON_COOLDOWN)
 		if (holder.loc != src.path[1])
 			ai_log("move_once() : Failed step. Exiting.", AI_LOG_TRACE)
 			return MOVEMENT_FAILED
@@ -152,7 +152,7 @@
 			var/moving_to = 0 // Apparently this is required or it always picks 4, according to the previous developer for simplemob AI.
 			moving_to = pick(GLOB.cardinal)
 			holder.set_dir(moving_to)
-			holder.IMove(moving_to)
+			holder.IMove(get_step(holder, moving_to))
 			wander_delay = base_wander_delay
 	ai_log("handle_wander_movement() : Exited.", AI_LOG_TRACE)
 

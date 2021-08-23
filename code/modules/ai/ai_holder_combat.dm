@@ -63,7 +63,7 @@
 			// Nudge them a bit, maybe they can shoot next time.
 			var/turf/T = get_step(holder, pick(GLOB.cardinal))
 			if (T)
-				holder.IMove(get_dir(holder, T)) // IMove() will respect movement cooldown.
+				holder.IMove(get_step_towards(holder, T)) // IMove() will respect movement cooldown.
 				holder.face_atom(target)
 			ai_log("engage_target() : Could not safely fire at target. Exiting.", AI_LOG_DEBUG)
 			return
