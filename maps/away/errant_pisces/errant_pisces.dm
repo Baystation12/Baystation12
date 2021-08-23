@@ -184,7 +184,6 @@ obj/structure/net/Initialize(var/mapload)
 	throw_range = 10
 	matter = list("cloth" = 1875, "plasteel" = 350)
 	max_amount = 30
-	center_of_mass = null
 	attack_verb = list("hit", "bludgeoned", "whacked")
 	lock_picking_level = 3
 
