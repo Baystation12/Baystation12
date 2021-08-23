@@ -1,0 +1,233 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/template_noop,
+/area/template_noop)
+"b" = (
+/obj/item/trash/cigbutt/jerichos,
+/turf/template_noop,
+/area/template_noop)
+"c" = (
+/obj/random/junk,
+/obj/random/junk,
+/turf/template_noop,
+/area/template_noop)
+"j" = (
+/obj/random/junk,
+/turf/template_noop,
+/area/template_noop)
+"l" = (
+/obj/random/junk,
+/turf/template_noop,
+/area/template_noop)
+"n" = (
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/junk,
+/turf/template_noop,
+/area/template_noop)
+"o" = (
+/obj/random/handgun,
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/junk,
+/turf/template_noop,
+/area/template_noop)
+"u" = (
+/obj/random/tech_supply,
+/obj/random/junk,
+/turf/template_noop,
+/area/template_noop)
+"x" = (
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/junk,
+/turf/template_noop,
+/area/template_noop)
+"y" = (
+/obj/random/shoes,
+/obj/random/junk,
+/obj/random/mre,
+/turf/template_noop,
+/area/template_noop)
+"A" = (
+/obj/random/gloves,
+/turf/template_noop,
+/area/template_noop)
+"D" = (
+/obj/random/junk,
+/obj/random/hat,
+/turf/template_noop,
+/area/template_noop)
+"E" = (
+/obj/random/tool,
+/obj/random/junk,
+/turf/template_noop,
+/area/template_noop)
+"G" = (
+/obj/random/drinkbottle,
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/junk,
+/turf/template_noop,
+/area/template_noop)
+"H" = (
+/obj/structure/closet/crate/trashcart,
+/turf/template_noop,
+/area/template_noop)
+"J" = (
+/obj/item/trash/cigbutt/jerichos,
+/obj/item/trash/cigbutt/jerichos,
+/turf/template_noop,
+/area/template_noop)
+"Q" = (
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/junk,
+/turf/template_noop,
+/area/template_noop)
+"S" = (
+/obj/random/smokes,
+/obj/random/junk,
+/turf/template_noop,
+/area/template_noop)
+"U" = (
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/medical/lite,
+/turf/template_noop,
+/area/template_noop)
+"X" = (
+/obj/random/junk,
+/obj/random/mre,
+/turf/template_noop,
+/area/template_noop)
+
+(1,1,1) = {"
+a
+a
+a
+a
+a
+j
+a
+a
+a
+a
+"}
+(2,1,1) = {"
+j
+a
+j
+a
+a
+a
+j
+A
+j
+a
+"}
+(3,1,1) = {"
+a
+j
+D
+j
+j
+j
+j
+l
+a
+a
+"}
+(4,1,1) = {"
+a
+u
+j
+G
+n
+x
+n
+X
+a
+j
+"}
+(5,1,1) = {"
+a
+a
+j
+Q
+o
+U
+n
+c
+a
+a
+"}
+(6,1,1) = {"
+a
+a
+j
+Q
+n
+Q
+c
+c
+j
+a
+"}
+(7,1,1) = {"
+a
+a
+j
+c
+n
+c
+Q
+S
+j
+a
+"}
+(8,1,1) = {"
+a
+a
+y
+j
+a
+c
+j
+j
+a
+b
+"}
+(9,1,1) = {"
+a
+a
+a
+a
+j
+a
+E
+a
+b
+J
+"}
+(10,1,1) = {"
+j
+a
+a
+j
+a
+a
+a
+a
+b
+H
+"}
