@@ -1,7 +1,0 @@
-author: Hubblenaut
-delete-after: true
-changes:
-  - bugfix: After a certain number of modified seeds created, every newly modified
-      seed would overwrite all seeds created afterward, effectively limiting xenobotany
-      in the number of seeds that can be modified before the entire system breaks.
-      This is now fixed.
