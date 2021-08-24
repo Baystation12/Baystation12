@@ -1,0 +1,4 @@
+author: Mucker
+delete-after: true
+changes:
+  - bugfix: Fixed mobs not trying to break through solid turfs when attacking a target.
