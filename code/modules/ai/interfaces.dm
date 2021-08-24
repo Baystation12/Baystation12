@@ -72,14 +72,12 @@
 
 // Respects move cooldowns as if it had a client.
 // Also tries to avoid being superdumb with moving into certain tiles (unless that's desired).
-/mob/living/proc/IMove(dir, safety = TRUE)
+/mob/living/proc/IMove(turf/newloc, safety = TRUE)
 
-	var/turf/newloc
-	if (istype(dir, /turf))
-		newloc = dir
-		dir = get_dir(src, dir)
-	else
-		newloc = get_step(src, dir)
+	if (!newloc)
+		return MOVEMENT_FAILED
+
+	var/dir = get_dir(src, newloc)
 
 	if (!checkMoveCooldown())
 		return MOVEMENT_ON_COOLDOWN
