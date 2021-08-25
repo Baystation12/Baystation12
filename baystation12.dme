@@ -3091,7 +3091,6 @@
 #include "code\modules\xenoarcheaology\artifacts\artifact.dm"
 #include "code\modules\xenoarcheaology\artifacts\artifact_find.dm"
 #include "code\modules\xenoarcheaology\artifacts\autocloner.dm"
-#include "code\modules\xenoarcheaology\artifacts\crystal.dm"
 #include "code\modules\xenoarcheaology\artifacts\gigadrill.dm"
 #include "code\modules\xenoarcheaology\artifacts\replicator.dm"
 #include "code\modules\xenoarcheaology\effects\badfeeling.dm"
