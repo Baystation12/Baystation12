@@ -1,0 +1,6 @@
+author: Hubblenaut
+delete-after: true
+changes:
+  - bugfix: Tape recoder printouts will now have the correct sprite.
+  - tweak: Tape recorder printouts now spawn in your free hand if possible.
+  - soundadd: Tape recorders now have a printing sound.
