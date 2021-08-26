@@ -1,5 +1,0 @@
-author: Hubblenaut
-delete-after: true
-changes:
-  - soundadd: Installing airlock braces now has sound.
-  - tweak: Installing airlock braces takes one second longer.

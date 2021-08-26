@@ -1,5 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - tweak: Tweaked some artifact effect triggers to ensure they are always usable
-      and not ambiguous.
