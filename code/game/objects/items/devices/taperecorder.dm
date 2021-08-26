@@ -348,8 +348,9 @@
 		if (findtextEx(printedmessage,"*",1,2)) //replace action sounds
 			printedmessage = "\[[time2text(mytape.timestamp[i]*10,"mm:ss")]\] (Unrecognized sound)"
 		t1 += "[printedmessage]<BR>"
-	P.info = t1
-	P.SetName("Transcript")
+	P.set_content(t1, "Transcript", FALSE)
+	usr.put_in_hands(P)
+	playsound(src, "sound/machines/dotprinter.ogg", 30)
 	canprint = 0
 	sleep(300)
 	canprint = 1
@@ -496,7 +497,7 @@
 		var/index = text2num(href_list["cut_after"])
 		if(index >= timestamp.len)
 			return
-		
+
 		to_chat(user, "<span class='notice'>You remove part of the tape off.</span>")
 		get_loose_tape(user, index)
 		cut(user)
