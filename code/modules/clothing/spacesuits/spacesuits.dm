@@ -24,7 +24,6 @@
 	min_pressure_protection = 0
 	max_pressure_protection = SPACE_SUIT_MAX_PRESSURE
 	siemens_coefficient = 0.9
-	center_of_mass = null
 	randpixel = 0
 	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_DIONA)
 	flash_protection = FLASH_PROTECTION_MAJOR
@@ -131,7 +130,6 @@
 	min_pressure_protection = 0
 	max_pressure_protection = SPACE_SUIT_MAX_PRESSURE
 	siemens_coefficient = 0.9
-	center_of_mass = null
 	randpixel = 0
 	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_DIONA)
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)

@@ -13,7 +13,6 @@
 	desc = "A back-mounted hardsuit deployment and control mechanism."
 	slot_flags = SLOT_BACK
 	w_class = ITEM_SIZE_HUGE
-	center_of_mass = null
 
 	// These values are passed on to all component pieces.
 	armor_type = /datum/extension/armor/rig

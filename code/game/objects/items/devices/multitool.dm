@@ -55,14 +55,14 @@
 		GLOB.destroyed_event.unregister(buffer_object, src)
 		buffer_object = null
 
-/obj/item/device/multitool/resolve_attackby(atom/A, mob/user)
+/obj/item/device/multitool/resolve_attackby(atom/A, mob/user, params)
 	if(!isobj(A))
-		return ..(A, user)
+		return ..()
 
 	var/obj/O = A
 	var/datum/extension/interactive/multitool/MT = get_extension(O, /datum/extension/interactive/multitool)
 	if(!MT)
-		return ..(A, user)
+		return ..()
 
 	user.AddTopicPrint(src)
 	MT.interact(src, user)
