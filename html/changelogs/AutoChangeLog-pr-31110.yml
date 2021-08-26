@@ -1,7 +1,0 @@
-author: Hubblenaut
-delete-after: true
-changes:
-  - tweak: When confused or being clumsy, you will now fall over railings, into disposal
-      bins, mineral baths or slam into objects and walls when sprinting.
-  - tweak: You can't get out of disposal bins or mineral baths when you're incapacitated.
-  - bugfix: No longer phasing through walls using railings.

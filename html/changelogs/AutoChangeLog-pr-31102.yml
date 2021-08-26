@@ -1,5 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - bugfix: Fix mobs not properly reacting to attacks
-  - bugfix: The clown and crab are no longer default hostile

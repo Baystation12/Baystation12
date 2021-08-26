@@ -1,5 +1,0 @@
-author: Hubblenaut
-delete-after: true
-changes:
-  - rscadd: Adds a new terminal command which lets the user scan the network for connected
-      devices.
