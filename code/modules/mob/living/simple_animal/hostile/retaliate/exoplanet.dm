@@ -164,7 +164,7 @@
 		melee = ARMOR_MELEE_RESISTANT
 		)
 
-	ai_holder_type = /datum/ai_holder/simple_animal/royalcrab
+	ai_holder_type = /datum/ai_holder/simple_animal/retaliate/royalcrab
 	say_list = /datum/say_list/royalcrab
 
 /mob/living/simple_animal/hostile/retaliate/beast/charbaby
@@ -242,7 +242,7 @@
 /datum/ai_holder/simple_animal/passive/thinbug
 	speak_chance = 1
 
-/datum/ai_holder/simple_animal/royalcrab
+/datum/ai_holder/simple_animal/retaliate/royalcrab
 	speak_chance = 1
 
 /* Say Lists */
