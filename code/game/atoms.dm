@@ -625,3 +625,8 @@ its easier to just keep the beam vertical.
 
 /atom/proc/get_cell()
 	return
+
+/atom/proc/slam_into(mob/living/L)
+	L.Weaken(2)
+	L.visible_message(SPAN_WARNING("\The [L] [pick("ran", "slammed")] into \the [src]!"))
+	playsound(L, "punch", 25, 1, FALSE)
