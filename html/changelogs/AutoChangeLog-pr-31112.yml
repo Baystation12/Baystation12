@@ -1,0 +1,4 @@
+author: Hubblenaut
+delete-after: true
+changes:
+  - tweak: Placement on tables is now twice as accurate.
