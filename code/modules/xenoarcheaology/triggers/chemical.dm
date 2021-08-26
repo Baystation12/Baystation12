@@ -4,6 +4,7 @@
 
 /datum/artifact_trigger/chemical/New()
 	if(isnull(required_chemicals))
+		name = "presence of either an acid, toxin, or water"
 		required_chemicals = list(pick(/datum/reagent/acid, /datum/reagent/toxin, /datum/reagent/water))
 
 /datum/artifact_trigger/chemical/on_hit(obj/O, mob/user)

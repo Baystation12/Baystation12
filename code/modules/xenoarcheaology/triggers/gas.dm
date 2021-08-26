@@ -5,7 +5,10 @@
 
 /datum/artifact_trigger/gas/New()
 	if(!gas_needed)
-		gas_needed = list(pick(gas_data.gases) = rand(1,10))
+		//pick from the subtypes traits if we don't spawn as one
+		var/gas = pick(GAS_CO2, GAS_OXYGEN, GAS_NITROGEN, GAS_PHORON)
+		name = "concentration of [gas]"
+		gas_needed = list("[gas]" = 5)
 
 /datum/artifact_trigger/gas/on_gas_exposure(datum/gas_mixture/gas)
 	. = TRUE
