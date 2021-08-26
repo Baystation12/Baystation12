@@ -1042,7 +1042,8 @@ About the new airlock wires panel:
 		if(!length(A.req_access) && (alert("\the [A]'s 'Access Not Set' light is flashing. Install it anyway?", "Access not set", "Yes", "No") == "No"))
 			return
 
-		if(do_after(user, 50, src) && density && A && user.unEquip(A, src))
+		playsound(user, 'sound/machines/lockreset.ogg', 50, 1)
+		if(do_after(user, 6 SECONDS, src) && density && A && user.unEquip(A, src))
 			to_chat(user, "<span class='notice'>You successfully install \the [A].</span>")
 			brace = A
 			brace.airlock = src
