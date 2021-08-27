@@ -18,10 +18,6 @@
 	if (pockets.handle_mousedrop(usr, over_object))
 		..(over_object)
 
-/obj/item/clothing/suit/storage/attackby(obj/item/W as obj, mob/user as mob)
-	..()
-	if(!(W in accessories))		//Make sure that an accessory wasn't successfully attached to suit.
-		pockets.attackby(W, user)
 
 /obj/item/clothing/suit/storage/emp_act(severity)
 	pockets.emp_act(severity)
