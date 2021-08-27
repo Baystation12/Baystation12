@@ -9,9 +9,11 @@
 #define CANPARALYSE 0x4
 #define CANPUSH     0x8
 #define PASSEMOTES  0x10    // Mob has a cortical borer or holders inside of it that need to see emotes.
+#define LEAPING     0x16
 #define GODMODE     0x1000
 #define FAKEDEATH   0x2000  // Replaces stuff like changeling.changeling_fakedeath.
 #define NO_ANTAG    0x4000  // Players are restricted from gaining antag roles when occupying this mob
+#define NOTARGET    0x8000  // Player is invisible to all simple mobs
 
 // Grab Types
 #define GRAB_NORMAL			"normal"
@@ -34,12 +36,23 @@
 #define BORGXRAY  0x4
 #define BORGMATERIAL  8
 
-#define HOSTILE_STANCE_IDLE      1
-#define HOSTILE_STANCE_ALERT     2
-#define HOSTILE_STANCE_ATTACK    3
-#define HOSTILE_STANCE_ATTACKING 4
-#define HOSTILE_STANCE_TIRED     5
-#define HOSTILE_STANCE_INSIDE    6
+
+#define STANCE_SLEEP        0	// Doing (almost) nothing, to save on CPU because nobody is around to notice or the mob died.
+#define STANCE_IDLE         1	// The more or less default state. Wanders around, looks for baddies, and spouts one-liners.
+#define STANCE_ALERT        2	// A baddie is visible but not too close, and essentially we tell them to go away or die.
+#define STANCE_APPROACH     3	// Attempting to get into range to attack them.
+#define STANCE_FIGHT	    4	// Actually fighting, with melee or ranged.
+#define STANCE_BLINDFIGHT   5	// Fighting something that cannot be seen by the mob, from invisibility or out of sight.
+#define STANCE_REPOSITION   6	// Relocating to a better position while in combat. Also used when moving away from a danger like grenades.
+#define STANCE_MOVE         7	// Similar to above but for out of combat. If a baddie is seen, they'll cancel and fight them.
+#define STANCE_FOLLOW       8	// Following somone, without trying to murder them.
+#define STANCE_FLEE         9	// Run away from the target because they're too spooky/we're dying/some other reason.
+#define STANCE_DISABLED     10	// Used when the holder is afflicted with certain status effects, such as stuns or confusion.
+
+#define STANCE_ATTACK       11 // Backwards compatability
+#define STANCE_ATTACKING    12 // Ditto
+
+#define STANCES_COMBAT      list(STANCE_ALERT, STANCE_APPROACH, STANCE_FIGHT, STANCE_BLINDFIGHT, STANCE_REPOSITION)
 
 #define LEFT  0x1
 #define RIGHT 0x2
@@ -79,17 +92,30 @@
 #define ROBOT_NOTIFICATION_MODULE_RESET 4
 
 // Appearance change flags
-#define APPEARANCE_UPDATE_DNA  0x1
-#define APPEARANCE_RACE       (0x2|APPEARANCE_UPDATE_DNA)
-#define APPEARANCE_GENDER     (0x4|APPEARANCE_UPDATE_DNA)
-#define APPEARANCE_SKIN        0x8
-#define APPEARANCE_HAIR        0x10
-#define APPEARANCE_HAIR_COLOR  0x20
-#define APPEARANCE_FACIAL_HAIR 0x40
-#define APPEARANCE_FACIAL_HAIR_COLOR 0x80
-#define APPEARANCE_EYE_COLOR 0x100
-#define APPEARANCE_ALL_HAIR (APPEARANCE_HAIR|APPEARANCE_HAIR_COLOR|APPEARANCE_FACIAL_HAIR|APPEARANCE_FACIAL_HAIR_COLOR)
-#define APPEARANCE_ALL       0xFFFF
+#define APPEARANCE_ALL 0xffffff
+#define APPEARANCE_DNA2 (1 << 0)
+#define APPEARANCE_RACE (1 << 1)
+#define APPEARANCE_GENDER (1 << 2)
+#define APPEARANCE_SKIN (1 << 3)
+#define APPEARANCE_HEAD (1 << 4)
+#define APPEARANCE_HEAD_COLOR (1 << 5)
+#define APPEARANCE_FACE (1 << 6)
+#define APPEARANCE_FACE_COLOR (1 << 7)
+#define APPEARANCE_ALL_HAIR (APPEARANCE_HEAD | APPEARANCE_HEAD_COLOR | APPEARANCE_FACE | APPEARANCE_FACE_COLOR)
+#define APPEARANCE_EYES (1 << 8)
+#define APPEARANCE_LANG (1 << 9)
+#define APPEARANCE_LANG_ANY_NUMBER (1 << 10)
+#define APPEARANCE_LANG_ANY_ORIGIN (1 << 11)
+
+#define APPEARANCE_COMMON (APPEARANCE_DNA2|APPEARANCE_RACE|APPEARANCE_GENDER|APPEARANCE_SKIN|APPEARANCE_ALL_HAIR|APPEARANCE_EYES|APPEARANCE_LANG)
+
+
+// /sprite_accessory flags
+#define DO_COLORATION_USER 1 //! Allow a user to set their own sprite_accessory color; tattoos, etc
+#define DO_COLORATION_SKIN 2 //! Take a coloration cue from skin tone
+#define DO_COLORATION_HAIR 4 //! Take a coloration cue from hair color
+#define DO_COLORATION_AUTO 6 //! Use hair if available, otherwise skin
+
 
 // Click cooldown
 #define DEFAULT_ATTACK_COOLDOWN 8 //Default timeout for aggressive actions
@@ -306,7 +332,7 @@
 #define SPECIES_MULE        "Mule"
 #define SPECIES_MONKEY      "Monkey"
 
-#define UNRESTRICTED_SPECIES list(SPECIES_HUMAN, SPECIES_DIONA, SPECIES_IPC, SPECIES_UNATHI, SPECIES_SKRELL, SPECIES_TRITONIAN, SPECIES_SPACER, SPECIES_VATGROWN, SPECIES_GRAVWORLDER, SPECIES_MULE)
+#define UNRESTRICTED_SPECIES list(SPECIES_HUMAN, SPECIES_DIONA, SPECIES_IPC, SPECIES_UNATHI, SPECIES_YEOSA, SPECIES_SKRELL, SPECIES_TRITONIAN, SPECIES_SPACER, SPECIES_VATGROWN, SPECIES_GRAVWORLDER, SPECIES_MULE)
 #define RESTRICTED_SPECIES   list(SPECIES_VOX, SPECIES_ALIEN, SPECIES_GOLEM, SPECIES_MANTID_GYNE, SPECIES_MANTID_ALATE, SPECIES_MONARCH_WORKER, SPECIES_MONARCH_QUEEN)
 #define HUMAN_SPECIES        list(SPECIES_HUMAN, SPECIES_VATGROWN, SPECIES_SPACER, SPECIES_GRAVWORLDER, SPECIES_MULE)
 
@@ -353,8 +379,31 @@
 
 #define MOB_FLAG_HOLY_BAD                0x001  // If this mob is allergic to holiness
 
+// More refined version of SA_* ""intelligence"" seperators.
+// Now includes bitflags, so to target two classes you just do 'MOB_CLASS_ANIMAL|MOB_CLASS_HUMANOID'
+#define MOB_CLASS_NONE 			0	// Default value, and used to invert for _ALL.
+
+#define MOB_CLASS_PLANT			1	// Unused at the moment.
+#define MOB_CLASS_ANIMAL		2	// Animals and beasts like spiders, saviks, and bears.
+#define MOB_CLASS_HUMANOID		4	// Non-robotic humanoids, including /simple_mob and /carbon/humans and their alien variants.
+#define MOB_CLASS_SYNTHETIC		8	// Silicons, mechanical simple mobs, FBPs, and anything else that would pass is_synthetic()
+#define MOB_CLASS_SLIME			16	// Everyone's favorite xenobiology specimen (and maybe prometheans?).
+#define MOB_CLASS_ABERRATION	32	// Weird shit.
+#define MOB_CLASS_DEMONIC		64	// Cult stuff.
+#define MOB_CLASS_BOSS			128	// Future megafauna hopefully someday.
+#define MOB_CLASS_ILLUSION		256	// Fake mobs, e.g. Technomancer illusions.
+#define MOB_CLASS_PHOTONIC		512	// Holographic mobs like holocarp, similar to _ILLUSION, but that make no attempt to hide their true nature.
+
+#define MOB_CLASS_ALL (~MOB_CLASS_NONE)
+
+// For slime commanding.  Higher numbers allow for more actions.
+#define SLIME_COMMAND_OBEY		1 // When disciplined.
+#define SLIME_COMMAND_FACTION	2 // When in the same 'faction'.
+#define SLIME_COMMAND_FRIEND	3 // When befriended with a slime friendship agent.
+
 #define MARKING_TARGET_SKIN 0 // Draw a datum/sprite_accessory/marking to the mob's body, eg. tattoos
-#define MARKING_TARGET_HAIR 1 // Draw a datum/sprite_accessory/marking to the mob's hair, eg. ears & horns
+#define MARKING_TARGET_HAIR 1 // Draw a datum/sprite_accessory/marking to the mob's hair, eg. color fades
+#define MARKING_TARGET_HEAD 2 // Draw a datum/sprite_accessory/marking to the mob's head after their hair, eg. ears, horns
 
 // used in /mob/living/carbon/human/can_inject, and by various callers of that proc
 #define CAN_INJECT 1
@@ -373,12 +422,16 @@
 #define DO_TARGET_UNIQUE_ACT 0x80
 #define DO_SHOW_PROGRESS     0x100
 #define DO_PUBLIC_PROGRESS   0x200
+#define DO_MOVE_CHECKS_TURFS 0x400
+#define DO_FAIL_FEEDBACK     0x800
 
 #define DO_BOTH_CAN_MOVE     (DO_USER_CAN_MOVE | DO_TARGET_CAN_MOVE)
 #define DO_BOTH_CAN_TURN     (DO_USER_CAN_TURN | DO_TARGET_CAN_TURN)
 #define DO_BOTH_UNIQUE_ACT   (DO_USER_UNIQUE_ACT | DO_TARGET_UNIQUE_ACT)
-#define DO_DEFAULT           (DO_SHOW_PROGRESS | DO_USER_SAME_HAND | DO_BOTH_CAN_TURN)
+#define DO_DEFAULT           (DO_SHOW_PROGRESS | DO_USER_SAME_HAND | DO_BOTH_CAN_TURN | DO_FAIL_FEEDBACK)
 
 #define DO_MISSING_USER      (-1)
 #define DO_MISSING_TARGET    (-2)
 #define DO_INCAPACITATED     (-3)
+
+#define FAKE_INVIS_ALPHA_THRESHOLD 127 // If something's alpha var is at or below this number, certain things will pretend it is invisible.

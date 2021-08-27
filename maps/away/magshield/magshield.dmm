@@ -11,7 +11,7 @@
 /turf/space,
 /area/space)
 "ad" = (
-/obj/item/weapon/ore,
+/obj/item/ore,
 /turf/space,
 /area/space)
 "ae" = (
@@ -337,7 +337,7 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/obj/item/weapon/ore,
+/obj/item/ore,
 /turf/simulated/floor/airless,
 /area/magshield/smes_storage)
 "aQ" = (
@@ -505,7 +505,7 @@
 /turf/simulated/floor/airless,
 /area/magshield/smes_storage)
 "bo" = (
-/obj/item/weapon/ore,
+/obj/item/ore,
 /turf/simulated/floor/airless,
 /area/magshield/smes_storage)
 "bp" = (
@@ -615,7 +615,7 @@
 /turf/simulated/floor/airless,
 /area/magshield/engine)
 "bE" = (
-/obj/item/weapon/ore,
+/obj/item/ore,
 /turf/space,
 /area/magshield/smes_storage)
 "bF" = (
@@ -675,7 +675,7 @@
 /area/space)
 "bO" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging,
-/obj/item/weapon/ore,
+/obj/item/ore,
 /turf/space,
 /area/space)
 "bP" = (
@@ -1032,7 +1032,7 @@
 	dir = 4;
 	icon_state = "intact"
 	},
-/obj/item/weapon/ore,
+/obj/item/ore,
 /turf/space,
 /area/space)
 "cF" = (
@@ -1048,7 +1048,7 @@
 	icon_state = "1-2";
 	pixel_y = 0
 	},
-/obj/item/weapon/ore,
+/obj/item/ore,
 /turf/simulated/floor/airless,
 /area/magshield/smes_storage)
 "cG" = (
@@ -1091,7 +1091,7 @@
 "cK" = (
 /obj/structure/table/steel,
 /obj/item/clothing/head/radiation,
-/obj/item/weapon/wrench,
+/obj/item/wrench,
 /obj/machinery/light/small{
 	dir = 1
 	},
@@ -1351,7 +1351,7 @@
 /turf/simulated/floor/airless,
 /area/magshield/north)
 "di" = (
-/obj/item/weapon/ore,
+/obj/item/ore,
 /turf/simulated/floor/airless,
 /area/magshield/north)
 "dj" = (
@@ -1373,7 +1373,7 @@
 /turf/simulated/floor/airless,
 /area/magshield/north)
 "dn" = (
-/obj/item/weapon/storage/wallet/random,
+/obj/item/storage/wallet/random,
 /turf/simulated/floor/airless,
 /area/magshield/north)
 "do" = (
@@ -1548,7 +1548,7 @@
 /area/magshield/north)
 "dV" = (
 /obj/effect/floor_decal/industrial/warning,
-/obj/item/weapon/flame/lighter/random,
+/obj/item/flame/lighter/random,
 /turf/simulated/floor/airless,
 /area/magshield/north)
 "dW" = (
@@ -1997,7 +1997,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/item/weapon/newspaper,
+/obj/item/newspaper,
 /turf/simulated/floor/airless,
 /area/magshield/north)
 "eN" = (
@@ -2016,7 +2016,7 @@
 /area/magshield/north)
 "eQ" = (
 /obj/structure/table/steel,
-/obj/item/weapon/storage/toolbox/mechanical,
+/obj/item/storage/toolbox/mechanical,
 /turf/simulated/floor/airless,
 /area/magshield/north)
 "eR" = (
@@ -2025,7 +2025,7 @@
 /area/magshield/north)
 "eS" = (
 /obj/structure/table/steel,
-/obj/item/weapon/storage/box/lights,
+/obj/item/storage/box/lights,
 /turf/simulated/floor/airless,
 /area/magshield/north)
 "eT" = (
@@ -2146,7 +2146,7 @@
 /turf/simulated/wall/r_wall,
 /area/magshield/north)
 "fm" = (
-/obj/item/weapon/mop,
+/obj/item/mop,
 /turf/simulated/floor/airless,
 /area/magshield/north)
 "fn" = (
@@ -2331,7 +2331,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/magshield/west)
 "fP" = (
-/obj/item/weapon/newspaper,
+/obj/item/newspaper,
 /turf/simulated/floor/tiled,
 /area/magshield/west)
 "fQ" = (
@@ -2424,7 +2424,7 @@
 /area/magshield/west)
 "gb" = (
 /obj/structure/table/steel,
-/obj/item/weapon/material/ashtray/plastic,
+/obj/item/material/ashtray/plastic,
 /obj/random/smokes,
 /turf/simulated/floor/tiled,
 /area/magshield/west)
@@ -2503,7 +2503,7 @@
 /area/magshield/west)
 "gn" = (
 /obj/structure/table/steel,
-/obj/item/weapon/reagent_containers/food/drinks/coffee,
+/obj/item/reagent_containers/food/drinks/coffee,
 /turf/simulated/floor/tiled,
 /area/magshield/west)
 "go" = (
@@ -2538,7 +2538,7 @@
 /area/magshield/west)
 "gt" = (
 /obj/structure/closet,
-/obj/item/weapon/storage/wallet/leather,
+/obj/item/storage/wallet/leather,
 /obj/random/clothing,
 /obj/random/smokes,
 /turf/simulated/floor/carpet/blue,
@@ -2624,7 +2624,7 @@
 /obj/structure/table/woodentable{
 	dir = 10
 	},
-/obj/item/weapon/storage/box/checkers,
+/obj/item/storage/box/checkers,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
@@ -2634,7 +2634,7 @@
 /obj/structure/table/woodentable{
 	dir = 10
 	},
-/obj/item/weapon/storage/belt/champion,
+/obj/item/storage/belt/champion,
 /turf/simulated/floor/carpet/blue,
 /area/magshield/west)
 "gJ" = (
@@ -2647,7 +2647,7 @@
 /obj/structure/table/woodentable{
 	dir = 10
 	},
-/obj/item/weapon/storage/bible/booze,
+/obj/item/storage/bible/booze,
 /turf/simulated/floor/carpet/blue,
 /area/magshield/west)
 "gL" = (
@@ -2755,7 +2755,7 @@
 /area/magshield/west)
 "gZ" = (
 /obj/structure/table/steel,
-/obj/item/weapon/reagent_containers/food/drinks/coffee,
+/obj/item/reagent_containers/food/drinks/coffee,
 /obj/random/smokes,
 /turf/simulated/floor/tiled/white,
 /area/magshield/west)
@@ -2855,7 +2855,7 @@
 /area/magshield/west)
 "hn" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/material/sword/replica,
+/obj/item/material/sword/replica,
 /turf/simulated/floor/tiled,
 /area/magshield/west)
 "ho" = (
@@ -2869,7 +2869,7 @@
 /turf/simulated/floor/tiled/white,
 /area/magshield/west)
 "hq" = (
-/obj/item/weapon/paper/magshield/log,
+/obj/item/paper/magshield/log,
 /obj/machinery/computer/modular{
 	dir = 8
 	},
@@ -2892,7 +2892,7 @@
 /turf/space,
 /area/magshield/east)
 "hv" = (
-/obj/item/weapon/ore/slag,
+/obj/item/ore/slag,
 /turf/simulated/floor/airless,
 /area/space)
 "hw" = (
@@ -2902,7 +2902,7 @@
 /area/magshield/west)
 "hx" = (
 /obj/structure/table/steel,
-/obj/item/weapon/material/ashtray/bronze,
+/obj/item/material/ashtray/bronze,
 /turf/simulated/floor/tiled/white,
 /area/magshield/west)
 "hy" = (
@@ -2929,7 +2929,7 @@
 /obj/random/coin,
 /obj/random/contraband,
 /obj/random/energy,
-/obj/item/weapon/grenade/fake,
+/obj/item/grenade/fake,
 /obj/random/cash,
 /obj/random/cash,
 /obj/random/cash,
@@ -2943,7 +2943,7 @@
 /turf/simulated/floor/tiled,
 /area/magshield/west)
 "hD" = (
-/obj/item/weapon/book/manual/magshield_manual,
+/obj/item/book/manual/magshield_manual,
 /turf/simulated/floor/tiled/white,
 /area/magshield/west)
 "hE" = (
@@ -2951,7 +2951,7 @@
 /turf/space,
 /area/magshield/west)
 "hF" = (
-/obj/item/weapon/ore,
+/obj/item/ore,
 /turf/simulated/floor/tiled,
 /area/magshield/west)
 "hG" = (
@@ -2991,18 +2991,18 @@
 /area/magshield/west)
 "hK" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/book/manual/supermatter_engine,
+/obj/item/book/manual/supermatter_engine,
 /turf/simulated/floor/carpet/blue,
 /area/magshield/west)
 "hL" = (
-/obj/item/weapon/ore,
+/obj/item/ore,
 /turf/simulated/floor/tiled/dark,
 /area/magshield/west)
 "hM" = (
 /turf/space,
 /area/magshield/west)
 "hN" = (
-/obj/item/weapon/reagent_containers/glass/bucket,
+/obj/item/reagent_containers/glass/bucket,
 /turf/simulated/floor/tiled,
 /area/magshield/east)
 "hO" = (
@@ -3046,7 +3046,7 @@
 /area/magshield/west)
 "hT" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/book/manual/evaguide,
+/obj/item/book/manual/evaguide,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -3091,12 +3091,12 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/item/weapon/paper/magshield/tornpage,
+/obj/item/paper/magshield/tornpage,
 /turf/simulated/floor/tiled/dark,
 /area/magshield/west)
 "hY" = (
 /obj/structure/table/steel,
-/obj/item/weapon/material/ashtray/plastic,
+/obj/item/material/ashtray/plastic,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -3115,7 +3115,7 @@
 /area/magshield/west)
 "ia" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/flame/lighter/zippo/random,
+/obj/item/flame/lighter/zippo/random,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
@@ -3123,7 +3123,7 @@
 /area/magshield/west)
 "ib" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/material/ashtray/bronze,
+/obj/item/material/ashtray/bronze,
 /obj/random/smokes,
 /obj/machinery/light,
 /turf/simulated/floor/carpet/blue,
@@ -3142,7 +3142,7 @@
 /area/magshield/east)
 "if" = (
 /obj/structure/reagent_dispensers/watertank,
-/obj/item/weapon/reagent_containers/glass/bucket,
+/obj/item/reagent_containers/glass/bucket,
 /turf/simulated/floor/airless,
 /area/magshield/east)
 "ig" = (
@@ -3159,7 +3159,7 @@
 /turf/simulated/floor/tiled,
 /area/magshield/east)
 "ii" = (
-/obj/item/weapon/material/minihoe,
+/obj/item/material/minihoe,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -3239,7 +3239,7 @@
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "is" = (
-/obj/item/weapon/ore/slag,
+/obj/item/ore/slag,
 /turf/space,
 /area/space)
 "it" = (
@@ -3304,16 +3304,16 @@
 /area/magshield/west)
 "iD" = (
 /obj/structure/table/steel,
-/obj/item/weapon/reagent_containers/food/drinks/cans/space_up,
-/obj/item/weapon/reagent_containers/food/drinks/cans/space_up{
+/obj/item/reagent_containers/food/drinks/cans/space_up,
+/obj/item/reagent_containers/food/drinks/cans/space_up{
 	pixel_x = 5;
 	pixel_y = 4
 	},
-/obj/item/weapon/reagent_containers/food/drinks/cans/space_up{
+/obj/item/reagent_containers/food/drinks/cans/space_up{
 	pixel_x = -8;
 	pixel_y = 5
 	},
-/obj/item/weapon/reagent_containers/food/drinks/cans/space_up{
+/obj/item/reagent_containers/food/drinks/cans/space_up{
 	pixel_x = -2;
 	pixel_y = -4
 	},
@@ -3351,7 +3351,7 @@
 /turf/simulated/floor/tiled/white,
 /area/magshield/south)
 "iJ" = (
-/obj/item/weapon/bedsheet,
+/obj/item/bedsheet,
 /turf/simulated/floor/tiled/white,
 /area/magshield/south)
 "iK" = (
@@ -3441,7 +3441,7 @@
 /turf/simulated/floor/tiled/white,
 /area/magshield/south)
 "iX" = (
-/obj/item/weapon/ore/slag,
+/obj/item/ore/slag,
 /turf/simulated/floor/tiled/white,
 /area/magshield/south)
 "iY" = (
@@ -3551,7 +3551,7 @@
 /area/magshield/south)
 "jp" = (
 /obj/structure/bed,
-/obj/item/weapon/bedsheet,
+/obj/item/bedsheet,
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "jq" = (
@@ -3591,7 +3591,7 @@
 	name = "plastic table frame"
 	},
 /obj/item/trash/plate,
-/obj/item/weapon/reagent_containers/food/snacks/flatbread,
+/obj/item/reagent_containers/food/snacks/flatbread,
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "jw" = (
@@ -3609,7 +3609,7 @@
 /area/magshield/south)
 "jy" = (
 /obj/structure/table/marble,
-/obj/item/weapon/material/knife/kitchen/cleaver,
+/obj/item/material/knife/kitchen/cleaver,
 /turf/simulated/floor/tiled/white,
 /area/magshield/south)
 "jz" = (
@@ -3761,7 +3761,7 @@
 /obj/structure/table/standard{
 	name = "plastic table frame"
 	},
-/obj/item/weapon/material/knife/table,
+/obj/item/material/knife/table,
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "jU" = (
@@ -3776,7 +3776,7 @@
 /turf/simulated/floor/tiled/white,
 /area/magshield/south)
 "jW" = (
-/obj/item/weapon/material/knife/hook,
+/obj/item/material/knife/hook,
 /turf/simulated/floor/tiled/freezer,
 /area/magshield/south)
 "jX" = (
@@ -3795,7 +3795,7 @@
 	pixel_x = 11;
 	pixel_y = 0
 	},
-/obj/item/weapon/soap,
+/obj/item/soap,
 /turf/simulated/floor/tiled/white,
 /area/magshield/south)
 "jZ" = (
@@ -3896,7 +3896,7 @@
 /area/magshield/south)
 "kp" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
-/obj/item/weapon/reagent_containers/food/snacks/hotdog,
+/obj/item/reagent_containers/food/snacks/hotdog,
 /turf/simulated/floor/tiled/freezer,
 /area/magshield/south)
 "kq" = (
@@ -3935,7 +3935,7 @@
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "ku" = (
-/obj/item/weapon/ore,
+/obj/item/ore,
 /turf/space,
 /area/magshield/south)
 "kv" = (
@@ -3995,7 +3995,7 @@
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "kB" = (
-/obj/item/weapon/flame/match,
+/obj/item/flame/match,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -4015,7 +4015,7 @@
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "kD" = (
-/obj/item/weapon/material/kitchen/utensil/fork/plastic,
+/obj/item/material/kitchen/utensil/fork/plastic,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -4059,12 +4059,12 @@
 /area/magshield/south)
 "kI" = (
 /obj/structure/table/marble,
-/obj/item/weapon/reagent_containers/food/snacks/chips,
+/obj/item/reagent_containers/food/snacks/chips,
 /turf/simulated/floor/tiled/white,
 /area/magshield/south)
 "kJ" = (
 /obj/structure/table/marble,
-/obj/item/weapon/material/knife/table,
+/obj/item/material/knife/table,
 /turf/simulated/floor/tiled/white,
 /area/magshield/south)
 "kK" = (
@@ -4073,11 +4073,11 @@
 /area/magshield/south)
 "kL" = (
 /obj/structure/closet/secure_closet/freezer/meat,
-/obj/item/weapon/reagent_containers/food/snacks/meat,
-/obj/item/weapon/reagent_containers/food/snacks/meat,
-/obj/item/weapon/reagent_containers/food/snacks/meat,
-/obj/item/weapon/reagent_containers/food/snacks/meat,
-/obj/item/weapon/reagent_containers/food/snacks/meat,
+/obj/item/reagent_containers/food/snacks/meat,
+/obj/item/reagent_containers/food/snacks/meat,
+/obj/item/reagent_containers/food/snacks/meat,
+/obj/item/reagent_containers/food/snacks/meat,
+/obj/item/reagent_containers/food/snacks/meat,
 /turf/simulated/floor/tiled/freezer,
 /area/magshield/south)
 "kM" = (
@@ -4103,7 +4103,7 @@
 /obj/structure/window/basic{
 	dir = 1
 	},
-/obj/item/weapon/towel/random,
+/obj/item/towel/random,
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "kQ" = (
@@ -4131,7 +4131,7 @@
 /area/magshield/south)
 "kT" = (
 /obj/structure/curtain/open/bed,
-/obj/item/weapon/material/knife/table,
+/obj/item/material/knife/table,
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "kU" = (
@@ -4144,7 +4144,7 @@
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "kV" = (
-/obj/item/weapon/towel/random,
+/obj/item/towel/random,
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "kW" = (
@@ -4184,14 +4184,14 @@
 /obj/structure/table/standard{
 	name = "plastic table frame"
 	},
-/obj/item/weapon/deck/cards,
+/obj/item/deck/cards,
 /turf/simulated/floor/tiled,
 /area/magshield/south)
 "ld" = (
 /obj/structure/table/standard{
 	name = "plastic table frame"
 	},
-/obj/item/weapon/material/kitchen/utensil/fork/plastic,
+/obj/item/material/kitchen/utensil/fork/plastic,
 /obj/item/trash/plate,
 /turf/simulated/floor/tiled,
 /area/magshield/south)

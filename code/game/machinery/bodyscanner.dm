@@ -2,25 +2,33 @@
 /obj/machinery/bodyscanner
 	var/mob/living/carbon/human/occupant
 	var/locked
-	name = "Body Scanner"
+	name = "body scanner"
+	desc = "A large full-body scanning machine that provides a complete physical assessment of a patient placed inside. Operated using an adjacent console."
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "body_scanner_0"
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	idle_power_usage = 60
 	active_power_usage = 10000	//10 kW. It's a big all-body scanner.
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	
+	machine_name = "body scanner"
+	machine_desc = "A full-body scanning suite that provides a complete health assessment of a patient placed inside. Requires an adjacent console to operate."
 
 /obj/machinery/bodyscanner/examine(mob/user)
 	. = ..()
 	if (occupant && user.Adjacent(src))
 		occupant.examine(arglist(args))
 
-/obj/machinery/bodyscanner/relaymove(mob/user as mob)
+/obj/machinery/bodyscanner/relaymove(mob/user)
 	..()
-	src.go_out()
+	go_out()
+	user.visible_message(
+		SPAN_NOTICE("\The [user] climbs out of \the [initial(name)]."), 
+		SPAN_NOTICE("You climb out of \the [initial(name)].")
+	)
 
 /obj/machinery/bodyscanner/verb/eject()
 	set src in oview(1)
@@ -29,6 +37,11 @@
 
 	if (usr.incapacitated())
 		return
+	usr.visible_message(
+		SPAN_NOTICE("\The [usr] opens \the [src]."),
+		SPAN_NOTICE("You eject \the [initial(name)]'s occupant."),
+		SPAN_ITALIC("You hear a pressurized hiss, then a sound like glass creaking.")
+	)
 	go_out()
 	add_fingerprint(usr)
 
@@ -45,6 +58,11 @@
 
 	if(!user_can_move_target_inside(usr,usr))
 		return
+	usr.visible_message(
+		SPAN_NOTICE("\The [usr] climbs into \the [src]."),
+		SPAN_NOTICE("You climb into \the [src]."), 
+		SPAN_ITALIC("You hear footsteps on metal, cloth rustling, and then a pressurized hiss.")
+	)
 	move_target_inside(usr,usr)
 	usr.pulling = null
 	usr.client.perspective = EYE_PERSPECTIVE
@@ -55,14 +73,14 @@
 		O.dropInto(loc)
 
 /obj/machinery/bodyscanner/proc/go_out()
-	if ((!( src.occupant ) || src.locked))
+	if ((!( occupant ) || locked))
 		return
 	drop_contents()
-	if (src.occupant.client)
-		src.occupant.client.eye = src.occupant.client.mob
-		src.occupant.client.perspective = MOB_PERSPECTIVE
-	src.occupant.dropInto(loc)
-	src.occupant = null
+	if (occupant.client)
+		occupant.client.eye = occupant.client.mob
+		occupant.client.perspective = MOB_PERSPECTIVE
+	occupant.dropInto(loc)
+	occupant = null
 	update_use_power(POWER_USE_IDLE)
 	update_icon()
 	SetName(initial(name))
@@ -72,7 +90,7 @@
 	if(istype(new_state))
 		updateUsrDialog()
 
-/obj/machinery/bodyscanner/attackby(obj/item/grab/normal/G, user as mob)
+/obj/machinery/bodyscanner/attackby(obj/item/grab/normal/G, mob/user)
 	if(istype(G))
 		var/mob/M = G.affecting
 		if(!user_can_move_target_inside(M, user))
@@ -82,7 +100,7 @@
 		return TRUE
 	return ..()
 
-/obj/machinery/bodyscanner/proc/user_can_move_target_inside(var/mob/target, var/mob/user)
+/obj/machinery/bodyscanner/proc/user_can_move_target_inside(mob/target, mob/user)
 	if(!istype(user) || !istype(target))
 		return FALSE
 	if(user.incapacitated())
@@ -90,26 +108,26 @@
 	if(!target.simulated)
 		return FALSE
 	if(occupant)
-		to_chat(user, "<span class='warning'>The scanner is already occupied!</span>")
+		to_chat(user, SPAN_WARNING("\The [src] is already occupied!"))
 		return FALSE
 	if(target.abiotic())
-		to_chat(user, "<span class='warning'>The subject cannot have abiotic items on.</span>")
+		to_chat(user, SPAN_WARNING("[user == target ? "You" : "[target]"] can't enter \the [src] while wearing abiotic items."))
 		return FALSE
 	if(target.buckled)
-		to_chat(user, "<span class='warning'>Unbuckle the subject before attempting to move them.</span>")
+		to_chat(user, SPAN_WARNING("Unbuckle [user == target ? "yourself" : "\the [target]"] before attempting to [user == target ? "enter \the [src]" : "move them"]."))
 		return FALSE
 	return TRUE
 
-/obj/machinery/bodyscanner/proc/move_target_inside(var/mob/target, var/mob/user)
+/obj/machinery/bodyscanner/proc/move_target_inside(mob/target, mob/user)
 	target.forceMove(src)
-	src.occupant = target
+	occupant = target
 
 	update_use_power(POWER_USE_ACTIVE)
 	update_icon()
 	drop_contents()
 	SetName("[name] ([occupant])")
 
-	src.add_fingerprint(user)
+	add_fingerprint(user)
 
 /obj/machinery/bodyscanner/on_update_icon()
 	if(!occupant)
@@ -120,12 +138,23 @@
 		icon_state = "body_scanner_2"
 
 //Like grap-put, but for mouse-drop.
-/obj/machinery/bodyscanner/MouseDrop_T(var/mob/target, var/mob/user)
+/obj/machinery/bodyscanner/MouseDrop_T(mob/target, mob/user)
 	if(!CanMouseDrop(target, user) || !istype(target))
 		return FALSE
 	if(!user_can_move_target_inside(target, user))
 		return
-	user.visible_message("<span class='notice'>\The [user] begins placing \the [target] into \the [src].</span>", "<span class='notice'>You start placing \the [target] into \the [src].</span>")
+	if (user == target)
+		user.visible_message(
+			SPAN_NOTICE("\The [usr] climbs into \the [src]."),
+			SPAN_NOTICE("You climb into \the [src]."),
+			SPAN_ITALIC("You hear metal clanking, then a pressurized hiss.")
+		)
+		move_target_inside(target, user)
+		return
+	user.visible_message(
+		SPAN_NOTICE("\The [user] begins placing \the [target] into \the [src]."),
+		SPAN_NOTICE("You start placing \the [target] into \the [src].")
+	)
 	if(!do_after(user, 30, src) || !user_can_move_target_inside(target, user))
 		return
 	move_target_inside(target,user)

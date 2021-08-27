@@ -920,7 +920,7 @@
 		remove_self(5)
 		if(M.resuscitate())
 			var/obj/item/organ/internal/heart = M.internal_organs_by_name[BP_HEART]
-			heart.take_internal_damage(heart.max_damage * 0.15)
+			heart.take_internal_damage(heart.max_damage * 0.075)
 
 /datum/reagent/lactate
 	name = "Lactate"
@@ -958,9 +958,9 @@
 	if(!M.should_have_organ(BP_HEART)) //We want the var for safety but we can do without the actual blood.
 		return
 	if(M.regenerate_blood(4 * removed))
-		M.immunity = max(M.immunity - 0.1, 0)
+		M.immunity = max(M.immunity - 0.75, 0)
 		if(M.chem_doses[type] > M.species.blood_volume/8) //half of blood was replaced with us, rip white bodies
-			M.immunity = max(M.immunity - 0.5, 0)
+			M.immunity = max(M.immunity - 3, 0)
 
 // Sleeping agent, produced by breathing N2O.
 /datum/reagent/nitrous_oxide

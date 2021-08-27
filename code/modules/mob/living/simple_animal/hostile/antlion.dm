@@ -3,27 +3,23 @@
 	desc = "A large insectoid creature."
 	icon = 'icons/mob/simple_animal/antlion.dmi'
 	icon_state = "antlion" // these are placeholders, as otherwise the mob is complete
-	icon_living = "antlion" 
-	icon_dead = "antlion_dead" 
+	icon_living = "antlion"
+	icon_dead = "antlion_dead"
 	mob_size = MOB_MEDIUM
-	speak_emote = list("clicks") 
-	emote_hear = list("clicks its mandibles")
-	emote_see = list("shakes the sand off itself")
+	speak_emote = list("clicks")
 	response_harm   = "strikes"
-	attacktext = "bit"
 	faction = "antlions"
 	bleed_colour = COLOR_SKY_BLUE
 
 	health = 65
 	maxHealth = 65
-	melee_damage_lower = 7
-	melee_damage_upper = 15
+	natural_weapon = /obj/item/natural_weapon/bite
 	natural_armor = list(
 		melee = ARMOR_MELEE_KNIVES
 		)
 	ability_cooldown = 30 SECONDS
 
-	meat_type =     /obj/item/weapon/reagent_containers/food/snacks/xenomeat
+	meat_type =     /obj/item/reagent_containers/food/snacks/xenomeat
 	meat_amount =   5
 	skin_material = MATERIAL_SKIN_CHITIN
 	skin_amount =   15
@@ -33,6 +29,9 @@
 	var/healing = FALSE
 	var/heal_amount = 6
 
+	ai_holder_type = /datum/ai_holder/simple_animal/retaliate
+	say_list = /datum/say_list/antlion
+
 /mob/living/simple_animal/hostile/antlion/Life()
 	. = ..()
 
@@ -40,16 +39,16 @@
 
 	if(!.)
 		return
-	
-	if(can_perform_ability())
-		vanish()
 
-/mob/living/simple_animal/hostile/antlion/can_perform_ability()
-	. = ..()
-	if(!.)
-		return FALSE
-	if(!target_mob)
-		return FALSE
+	// if(can_perform_ability())
+	// 	vanish()
+
+// /mob/living/simple_animal/hostile/antlion/can_perform_ability()
+// 	. = ..()
+// 	if(!.)
+// 		return FALSE
+// 	if(!target_mob)
+// 		return FALSE
 
 /mob/living/simple_animal/hostile/antlion/proc/vanish()
 	visible_message(SPAN_NOTICE("\The [src] burrows into \the [get_turf(src)]!"))
@@ -88,13 +87,12 @@
 	visible_message(SPAN_WARNING("\The [src] erupts from \the [T]!"))
 	set_invisibility(initial(invisibility))
 	prep_burrow(FALSE)
-	cooldown_ability(ability_cooldown)
+	// cooldown_ability(ability_cooldown)
 	for(var/mob/living/carbon/human/H in get_turf(src))
-		var/zone_to_hit = pick(BP_R_FOOT, BP_L_FOOT, BP_R_LEG, BP_L_LEG, BP_GROIN)
-		H.apply_damage(rand(melee_damage_lower, melee_damage_upper), BRUTE, zone_to_hit, DAM_EDGE, used_weapon = "antlion mandible")
+		H.attackby(natural_weapon, src)
 		visible_message(SPAN_DANGER("\The [src] tears into \the [H] from below!"))
 		H.Weaken(1)
-	
+
 /mob/living/simple_animal/hostile/antlion/proc/process_healing()
 	if(!incapacitated() && healing)
 		var/old_health = health
@@ -102,8 +100,7 @@
 			health = old_health + heal_amount
 
 /mob/living/simple_animal/hostile/antlion/proc/prep_burrow(var/new_bool)
-	stop_automated_movement = new_bool
-	stop_automation = new_bool
+	set_AI_busy(new_bool)
 	healing = new_bool
 
 /mob/living/simple_animal/hostile/antlion/mega
@@ -115,8 +112,7 @@
 	mob_size = MOB_LARGE
 	health = 275
 	maxHealth = 275
-	melee_damage_lower = 21
-	melee_damage_upper = 29
+	natural_weapon = /obj/item/natural_weapon/bite/megalion
 	natural_armor = list(
 		melee = ARMOR_MELEE_RESISTANT
 		)
@@ -130,9 +126,17 @@
 	skin_amount =   25
 	bone_amount =   15
 
+/obj/item/natural_weapon/bite/megalion
+	name = "mandibles"
+	force = 25
+
 /mob/living/simple_animal/hostile/antlion/mega/Initialize()
 	. = ..()
 	var/matrix/M = new
 	M.Scale(1.5)
 	transform = M
 	update_icon()
+
+/datum/say_list/antlion
+	emote_hear = list("clicks its mandibles")
+	emote_see = list("shakes the sand off itself")

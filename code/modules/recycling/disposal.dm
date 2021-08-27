@@ -16,8 +16,8 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	desc = "A pneumatic waste disposal unit."
 	icon = 'icons/obj/pipes/disposal.dmi'
 	icon_state = "disposal"
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 	var/datum/gas_mixture/air_contents	// internal reservoir
 	var/mode = 1	// item mode 0=off 1=charging 2=charged
 	var/flush = 0	// true if flush handle is pulled
@@ -81,7 +81,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 			if(contents.len > LAZYLEN(component_parts))
 				to_chat(user, "Eject the items first!")
 				return
-			var/obj/item/weapon/weldingtool/W = I
+			var/obj/item/weldingtool/W = I
 			if(W.remove_fuel(0,user))
 				playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
 				to_chat(user, "You start slicing the floorweld off the disposal unit.")
@@ -98,12 +98,12 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 				to_chat(user, "You need more welding fuel to complete this task.")
 				return
 
-	if(istype(I, /obj/item/weapon/melee/energy/blade))
+	if(istype(I, /obj/item/melee/energy/blade))
 		to_chat(user, "You can't place that item inside the disposal unit.")
 		return
 
-	if(istype(I, /obj/item/weapon/storage/bag/trash))
-		var/obj/item/weapon/storage/bag/trash/T = I
+	if(istype(I, /obj/item/storage/bag/trash))
+		var/obj/item/storage/bag/trash/T = I
 		to_chat(user, "<span class='notice'>You empty the bag.</span>")
 		for(var/obj/item/O in T.contents)
 			T.remove_from_storage(O,src, 1)
@@ -206,9 +206,9 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 
 // attempt to move while inside
 /obj/machinery/disposal/relaymove(mob/user as mob)
-	if(user.stat || src.flushing)
+	if (user.incapacitated() || src.flushing)
 		return
-	if(user.loc == src)
+	if (user.loc == src)
 		src.go_out(user)
 	return
 
@@ -480,6 +480,12 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	else
 		return ..(mover, target, height, air_group)
 
+/obj/machinery/disposal/slam_into(mob/living/L)
+	L.forceMove(src)
+	L.Weaken(5)
+	L.visible_message(SPAN_WARNING("\The [L] falls into \the [src]!"))
+	playsound(L, "punch", 25, 1, FALSE)
+
 /obj/machinery/disposal_switch
 	name = "disposal switch"
 	desc = "A disposal control switch."
@@ -561,8 +567,8 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	desc = "An outlet for the pneumatic disposal system."
 	icon = 'icons/obj/pipes/disposal.dmi'
 	icon_state = "outlet"
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	var/active = 0
 	var/turf/target	// this will be where the output objects are 'thrown' to.
 	var/mode = 0
@@ -621,8 +627,8 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 			playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 			to_chat(user, "You attach the screws around the power connection.")
 			return
-	else if(istype(I,/obj/item/weapon/weldingtool) && mode==1)
-		var/obj/item/weapon/weldingtool/W = I
+	else if(istype(I,/obj/item/weldingtool) && mode==1)
+		var/obj/item/weldingtool/W = I
 		if(W.remove_fuel(0,user))
 			playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
 			to_chat(user, "You start slicing the floorweld off the disposal outlet.")
@@ -631,7 +637,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 				to_chat(user, "You sliced the floorweld off the disposal outlet.")
 				var/obj/structure/disposalconstruct/machine/outlet/C = new (loc, src)
 				src.transfer_fingerprints_to(C)
-				C.anchored = 1
+				C.anchored = TRUE
 				C.set_density(1)
 				C.update()
 				qdel(src)
@@ -665,8 +671,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		dirs = list( direction, turn(direction, -45), turn(direction, 45))
 	else
 		dirs = GLOB.alldirs.Copy()
-
-	src.streak(dirs)
+	addtimer(CALLBACK(src, .proc/streak, dirs), 0)
 
 /obj/effect/decal/cleanable/blood/gibs/robot/pipe_eject(var/direction)
 	var/list/dirs
@@ -674,5 +679,4 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		dirs = list( direction, turn(direction, -45), turn(direction, 45))
 	else
 		dirs = GLOB.alldirs.Copy()
-
-	src.streak(dirs)
+	addtimer(CALLBACK(src, .proc/streak, dirs), 0)

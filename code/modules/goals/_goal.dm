@@ -2,6 +2,7 @@
 	var/description
 	var/owner
 	var/completion_message
+	var/failure_message
 	var/can_reroll = TRUE
 	var/can_abandon = TRUE
 
@@ -22,13 +23,13 @@
 		owner = null
 	. = ..()
 
-/datum/goal/proc/summarize(var/show_success = FALSE, var/allow_modification = FALSE, var/mob/caller ,var/position = 1)
+/datum/goal/proc/summarize(var/show_success = FALSE, var/allow_modification = FALSE, var/mob/caller)
 	. = "[description][get_summary_value()]"
 	if(show_success)
 		. += get_success_string()
 	if(allow_modification)
-		if(can_abandon) . += " (<a href='?src=\ref[owner];abandon_goal=[position];abandon_goal_caller=\ref[caller]'>Abandon</a>)"
-		if(can_reroll)  . += " (<a href='?src=\ref[owner];reroll_goal=[position];reroll_goal_caller=\ref[caller]'>Reroll</a>)"
+		if(can_abandon) . += " (<a href='?src=\ref[owner];abandon_goal=\ref[src];abandon_goal_caller=\ref[caller]'>Abandon</a>)"
+		if(can_reroll)  . += " (<a href='?src=\ref[owner];reroll_goal=\ref[src];reroll_goal_caller=\ref[caller]'>Reroll</a>)"
 
 /datum/goal/proc/get_success_string()
 	return check_success() ? " <b><font color='green'>Success!</font></b>" : " <b><font color='red'>Failure.</font></b>"
@@ -53,6 +54,11 @@
 		if(istype(owner, /datum/mind))
 			var/datum/mind/mind = owner
 			to_chat(mind.current, "<font color='green'><b>[completion_message]</b></font>")
+
+/datum/goal/proc/on_failure()
+	if(failure_message && !check_success() && istype(owner, /datum/mind))
+		var/datum/mind/mind = owner
+		to_chat(mind.current, SPAN_DANGER(failure_message))
 
 /datum/goal/proc/is_valid()
 	return TRUE

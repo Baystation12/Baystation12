@@ -4,14 +4,18 @@
 	icon = 'icons/turf/wall_masks.dmi'
 	icon_state = "generic"
 	opacity = 1
-	density = 1
+	density = TRUE
 	blocks_air = 1
 	thermal_conductivity = WALL_HEAT_TRANSFER_COEFFICIENT
 	heat_capacity = 312500 //a little over 5 cm thick , 312500 for 1 m by 2.5 m by 0.25 m plasteel wall
 	atom_flags = ATOM_FLAG_CAN_BE_PAINTED
 
 	var/damage = 0
+	var/max_damage = 0
 	var/damage_overlay = 0
+	var/force_damage_threshhold = 0 // Minimum amount of requried force to damage the wall
+	var/brute_armor = 0
+	var/burn_armor = 0
 	var/global/damage_overlays[16]
 	var/active
 	var/can_open = 0
@@ -28,8 +32,7 @@
 	var/global/list/wall_stripe_cache = list()
 	var/list/blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall/wood, /turf/simulated/wall/walnut, /turf/simulated/wall/maple, /turf/simulated/wall/mahogany, /turf/simulated/wall/ebony)
 	var/list/blend_objects = list(/obj/machinery/door, /obj/structure/wall_frame, /obj/structure/grille, /obj/structure/window/reinforced/full, /obj/structure/window/reinforced/polarized/full, /obj/structure/window/shuttle, ,/obj/structure/window/phoronbasic/full, /obj/structure/window/phoronreinforced/full) // Objects which to blend with
-	var/list/noblend_objects = list(/obj/machinery/door/window) //Objects to avoid blending with (such as children of listed blend objects.
-	var/dismantling = FALSE
+	var/list/noblend_objects = list(/obj/machinery/door/window) //Objects to avoid blending with (such as children of listed blend objects.)
 
 /turf/simulated/wall/New(var/newloc, var/materialtype, var/rmaterialtype)
 	..(newloc)
@@ -70,6 +73,27 @@
 /turf/simulated/wall/proc/get_material()
 	return material
 
+/turf/simulated/wall/proc/calculate_damage_data()
+	// Max damage (Health)
+	max_damage = material.integrity
+	if (reinf_material)
+		max_damage += round(reinf_material.integrity / 2)
+
+	// Minimum force required to damage the wall
+	force_damage_threshhold = material.hardness * 2.5
+	if (reinf_material)
+		force_damage_threshhold += round(reinf_material.hardness * 1.25)
+	force_damage_threshhold = round(force_damage_threshhold / 10)
+
+	// Brute and burn armor
+	brute_armor = material.brute_armor * 0.5
+	burn_armor = material.burn_armor * 0.5
+	if (reinf_material)
+		brute_armor += reinf_material.brute_armor * 0.5
+		burn_armor += reinf_material.burn_armor * 0.5
+	brute_armor = round(brute_armor)
+	burn_armor = round(burn_armor)
+
 /turf/simulated/wall/bullet_act(var/obj/item/projectile/Proj)
 	if(istype(Proj,/obj/item/projectile/beam))
 		burn(2500)
@@ -81,11 +105,11 @@
 	if(Proj.ricochet_sounds && prob(15))
 		playsound(src, pick(Proj.ricochet_sounds), 100, 1)
 
-	if(reinf_material)
-		if(Proj.damage_type == BURN)
-			proj_damage /= reinf_material.burn_armor
-		else if(Proj.damage_type == BRUTE)
-			proj_damage /= reinf_material.brute_armor
+	if(Proj.damage_type == BURN && burn_armor)
+		proj_damage /= burn_armor
+	else if(Proj.damage_type == BRUTE && brute_armor)
+		proj_damage /= brute_armor
+	proj_damage = round(proj_damage)
 
 	//cap the amount of damage, so that things like emitters can't destroy walls in one hit.
 	var/damage = min(proj_damage, 100)
@@ -98,7 +122,7 @@
 		var/obj/O = AM
 		var/tforce = O.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
 		playsound(src, hitsound, tforce >= 15? 60 : 25, TRUE)
-		if (tforce >= 15)
+		if (tforce >= force_damage_threshhold)
 			take_damage(tforce)
 	..()
 
@@ -129,7 +153,7 @@
 	if(!damage)
 		to_chat(user, "<span class='notice'>It looks fully intact.</span>")
 	else
-		var/dam = damage / material.integrity
+		var/dam = damage / max_damage
 		if(dam <= 0.3)
 			to_chat(user, "<span class='warning'>It looks slightly damaged.</span>")
 		else if(dam <= 0.6)
@@ -166,21 +190,18 @@
 	return
 
 /turf/simulated/wall/proc/update_damage()
-	var/cap = material.integrity
-	if(reinf_material)
-		cap += reinf_material.integrity
-
+	var/cap = max_damage
 	if(locate(/obj/effect/overlay/wallrot) in src)
 		cap = cap / 10
 
 	if(damage >= cap)
-		dismantle_wall()
+		dismantle_wall(TRUE)
 	else
 		update_icon()
 
 	return
 
-/turf/simulated/wall/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)//Doesn't fucking work because walls don't interact with air :(
+/turf/simulated/wall/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)//Doesn't fucking work because walls don't interact with air
 	burn(exposed_temperature)
 
 /turf/simulated/wall/adjacent_fire_act(turf/simulated/floor/adj_turf, datum/gas_mixture/adj_air, adj_temp, adj_volume)
@@ -250,7 +271,7 @@
 	O.desc = "Looks hot."
 	O.icon = 'icons/effects/fire.dmi'
 	O.icon_state = "2"
-	O.anchored = 1
+	O.anchored = TRUE
 	O.set_density(1)
 	O.plane = LIGHTING_PLANE
 	O.layer = FIRE_LAYER
@@ -294,7 +315,7 @@
 	update_icon()
 
 /turf/simulated/wall/proc/CheckPenetration(var/base_chance, var/damage)
-	return round(damage/material.integrity*180)
+	return round(damage / max_damage * 180)
 
 /turf/simulated/wall/can_engrave()
 	return (material && material.hardness >= 10 && material.hardness <= 100)

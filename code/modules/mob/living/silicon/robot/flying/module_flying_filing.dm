@@ -1,4 +1,4 @@
-/obj/item/weapon/robot_module/flying/filing
+/obj/item/robot_module/flying/filing
 	name = "filing drone module"
 	display_name = "Filing"
 	channels = list(
@@ -8,18 +8,18 @@
 	sprites = list("Drone" = "drone-service")
 	equipment = list(
 		/obj/item/device/flash,
-		/obj/item/weapon/pen/robopen,
-		/obj/item/weapon/form_printer,
-		/obj/item/weapon/gripper/clerical,
-		/obj/item/weapon/hand_labeler,
-		/obj/item/weapon/stamp,
-		/obj/item/weapon/stamp/denied,
+		/obj/item/pen/robopen,
+		/obj/item/form_printer,
+		/obj/item/gripper/clerical,
+		/obj/item/hand_labeler,
+		/obj/item/stamp,
+		/obj/item/stamp/denied,
 		/obj/item/device/destTagger,
-		/obj/item/weapon/crowbar,
+		/obj/item/crowbar,
 		/obj/item/device/megaphone,
 		/obj/item/stack/package_wrap/cyborg
 	)
-	emag = /obj/item/weapon/stamp/chameleon
+	emag = /obj/item/stamp/chameleon
 	synths = list(/datum/matter_synth/package_wrap)
 	skills = list(
 		SKILL_BUREAUCRACY         = SKILL_PROF,
@@ -29,7 +29,7 @@
 		SKILL_DEVICES             = SKILL_EXPERT
 	)
 
-/obj/item/weapon/robot_module/flying/filing/finalize_synths()
+/obj/item/robot_module/flying/filing/finalize_synths()
 	. = ..()
 	var/datum/matter_synth/package_wrap =       locate() in synths
 	var/obj/item/stack/package_wrap/cyborg/PW = locate() in equipment

@@ -6,6 +6,8 @@
 	light_color = "#315ab4"
 	idle_power_usage = 250
 	active_power_usage = 500
+	machine_name = "crew monitoring console"
+	machine_desc = "Vital for medical personnel, crew monitors display a list of all crew members, and a vital sign readout based on their suit sensors."
 	var/datum/nano_module/crew_monitor/crew_monitor
 
 /obj/machinery/computer/crew/New()

@@ -8,8 +8,8 @@
 	name = "power storage unit"
 	desc = "A high-capacity superconducting magnetic energy storage (SMES) unit."
 	icon_state = "smes"
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	clicksound = "switch"
 	core_skill = SKILL_ELECTRICAL
 	power_channel = LOCAL // Draws power from direct connections to powernets.
@@ -18,6 +18,9 @@
 	stat_immune = 0
 	stat = BROKEN         // Should be removed if the terminals initialize fully.
 	reason_broken = MACHINE_BROKEN_GENERIC
+	
+	machine_name = "superconductive magnetic energy storage"
+	machine_desc = "The SMES is effectively a giant battery. It stores vast quantities of power for later use, and can be remotely controlled using the RCON system."
 
 	var/capacity = 5e6 // maximum charge
 	var/charge = 1e6 // actual charge
@@ -78,7 +81,7 @@
 
 /obj/machinery/power/smes/populate_parts()
 	for(var/d in GLOB.cardinal)
-		var/obj/item/weapon/stock_parts/power/terminal/part = install_component(/obj/item/weapon/stock_parts/power/terminal, refresh_parts = FALSE)
+		var/obj/item/stock_parts/power/terminal/part = install_component(/obj/item/stock_parts/power/terminal, refresh_parts = FALSE)
 		part.terminal_dir = d
 		var/turf/T = get_step(src, d)
 		for(var/obj/machinery/power/terminal/term in T)
@@ -130,7 +133,7 @@
 		inputting = 1
 	// else inputting = 0, as set in process()
 
-	for(var/obj/item/weapon/stock_parts/power/terminal/term in power_components)
+	for(var/obj/item/stock_parts/power/terminal/term in power_components)
 		var/inputted = term.use_power_oneoff(src, to_input, power_channel)
 		add_charge(inputted)
 		input_available += inputted
@@ -142,7 +145,7 @@
 /obj/machinery/power/smes/proc/remove_charge(var/amount)
 	charge -= amount*CELLRATE
 
-/obj/machinery/power/smes/component_stat_change(var/obj/item/weapon/stock_parts/power/terminal/part, old_stat, flag)
+/obj/machinery/power/smes/component_stat_change(var/obj/item/stock_parts/power/terminal/part, old_stat, flag)
 	if(istype(part) && flag == PART_STAT_CONNECTED)
 		if(old_stat & flag)
 			num_terminals--
@@ -170,7 +173,7 @@
 	if(input_attempt && (!input_pulsed && !input_cut))
 		target_load = min((capacity-charge)/CELLRATE, input_level)	// Amount we will request from the powernet.
 		var/is_input_available = FALSE
-		for(var/obj/item/weapon/stock_parts/power/terminal/term in power_components)
+		for(var/obj/item/stock_parts/power/terminal/term in power_components)
 			if(!term.terminal || !term.terminal.powernet)
 				continue			
 			is_input_available = TRUE
@@ -226,7 +229,7 @@
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/power/smes/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
+/obj/machinery/power/smes/attackby(var/obj/item/W as obj, var/mob/user as mob)
 	if(component_attackby(W, user))
 		return TRUE
 
@@ -235,7 +238,7 @@
 		return TRUE
 
 	if(isWelder(W))
-		var/obj/item/weapon/weldingtool/WT = W
+		var/obj/item/weldingtool/WT = W
 		if(!WT.isOn())
 			to_chat(user, "Turn on \the [WT] first!")
 			return TRUE

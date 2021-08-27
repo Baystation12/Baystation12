@@ -3,7 +3,7 @@ var/list/IClog     = list()
 var/list/OOClog    = list()
 var/list/adminlog  = list()
 
-var/datum/configuration/config      = null
+var/configuration/config
 var/list/jobMax        = list()
 
 var/diary               = null

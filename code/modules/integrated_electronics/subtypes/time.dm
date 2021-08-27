@@ -143,7 +143,7 @@
 
 /obj/item/integrated_circuit/time/clock
 	name = "integrated clock (Sol Common Time)"
-	desc = "Tells you what the time is, in Sol Common Time."				//round time
+	desc = "Tells you what the time is, in Sol Common Time."				// Round Time
 	icon_state = "clock"
 	inputs = list()
 	outputs = list(
@@ -158,7 +158,7 @@
 	power_draw_per_use = 2
 
 /obj/item/integrated_circuit/time/clock/proc/get_time()
-	return world.time
+	return (round_duration_in_ticks + 4 HOURS)
 
 /obj/item/integrated_circuit/time/clock/do_work()
 	var/current_time = get_time()
@@ -172,14 +172,14 @@
 
 /obj/item/integrated_circuit/time/clock/station
 	name = "integrated clock (Station Time)"
-	desc = "Tells you what the time is, in terms and adjusted for your local station or planet."
+	desc = "Tells you what the time is, in terms and adjusted for your local station or planet."		// Station Time
 
 /obj/item/integrated_circuit/time/clock/station/get_time()
-	return stationtime2text()
+	return station_time_in_ticks
 
 /obj/item/integrated_circuit/time/clock/bluespace
 	name = "integrated clock (Bluespace Absolute Time)"
-	desc = "Tells you what the time is, in Bluespace Absolute Time, unaffected by local time dilation or other phenomenon."
+	desc = "Tells you what the time is, in Bluespace Absolute Time, unaffected by local time dilation or other phenomenon."		// Server Local Time
 
 /obj/item/integrated_circuit/time/clock/bluespace/get_time()
-	return REALTIMEOFDAY
+	return world.timeofday

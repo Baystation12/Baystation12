@@ -1,20 +1,20 @@
 
 //########################## CONTRABAND ;3333333333333333333 -Agouri ###################################################
 
-/obj/item/weapon/contraband
+/obj/item/contraband
 	name = "contraband item"
 	desc = "You probably shouldn't be holding this."
 	icon = 'icons/obj/contraband.dmi'
 	force = 0
 
 
-/obj/item/weapon/contraband/poster
+/obj/item/contraband/poster
 	name = "rolled-up poster"
 	desc = "The poster comes with its own automatic adhesive mechanism, for easy pinning to any vertical surface."
 	icon_state = "rolled_poster"
 	var/poster_type
 
-/obj/item/weapon/contraband/poster/New(var/maploading, var/given_poster_type)
+/obj/item/contraband/poster/New(var/maploading, var/given_poster_type)
 	if(given_poster_type && !ispath(given_poster_type, /decl/poster))
 		CRASH("Invalid poster type: [log_info_line(given_poster_type)]")
 
@@ -23,15 +23,15 @@
 		poster_type = pick(subtypesof(/decl/poster))
 	..()
 
-/obj/item/weapon/contraband/poster/Initialize()
+/obj/item/contraband/poster/Initialize()
 	var/list/posters = subtypesof(/decl/poster)
-	var/serial_number = posters.Find(poster_type)
+	var/serial_number = list_find(posters, poster_type)
 	name += " - No. [serial_number]"
 
 	return ..()
 
 //Places the poster on a wall
-/obj/item/weapon/contraband/poster/afterattack(var/atom/A, var/mob/user, var/adjacent, var/clickparams)
+/obj/item/contraband/poster/afterattack(var/atom/A, var/mob/user, var/adjacent, var/clickparams)
 	if (!adjacent)
 		return
 
@@ -65,7 +65,7 @@
 		// We cannot rely on user being on the appropriate turf when placement fails
 		P.roll_and_drop(get_step(W, turn(placement_dir, 180)))
 
-/obj/item/weapon/contraband/poster/proc/ArePostersOnWall(var/turf/W, var/placed_poster)
+/obj/item/contraband/poster/proc/ArePostersOnWall(var/turf/W, var/placed_poster)
 	//just check if there is a poster on or adjacent to the wall
 	if (locate(/obj/structure/sign/poster) in W)
 		return TRUE
@@ -85,7 +85,7 @@
 	name = "poster"
 	desc = "A large piece of space-resistant printed paper."
 	icon = 'icons/obj/contraband.dmi'
-	anchored = 1
+	anchored = TRUE
 	var/poster_type
 	var/ruined = 0
 
@@ -125,7 +125,7 @@
 	desc = "[initial(desc)] [design.desc]"
 	icon_state = design.icon_state
 
-/obj/structure/sign/poster/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/sign/poster/attackby(obj/item/W as obj, mob/user as mob)
 	if(isWirecutter(W))
 		playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
 		if(ruined)
@@ -156,7 +156,7 @@
 		add_fingerprint(user)
 
 /obj/structure/sign/poster/proc/roll_and_drop(turf/newloc)
-	new/obj/item/weapon/contraband/poster(newloc, poster_type)
+	new/obj/item/contraband/poster(newloc, poster_type)
 	qdel(src)
 
 /decl/poster

@@ -2,12 +2,12 @@
 	name = "Exotic Particle Harvester"
 	icon = 'icons/obj/virology.dmi'
 	icon_state = "incubator"	//incubator_on
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 	idle_power_usage = 50
 	active_power_usage = 750
 	var/harvesting = 0
-	var/obj/item/weapon/anobattery/inserted_battery
+	var/obj/item/anobattery/inserted_battery
 	var/obj/machinery/artifact/cur_artifact
 	var/obj/machinery/artifact_scanpad/owned_scanner = null
 	var/last_process = 0
@@ -20,7 +20,7 @@
 		owned_scanner = locate(/obj/machinery/artifact_scanpad) in orange(1, src)
 
 /obj/machinery/artifact_harvester/attackby(var/obj/I as obj, var/mob/user as mob)
-	if(istype(I,/obj/item/weapon/anobattery))
+	if(istype(I,/obj/item/anobattery))
 		if(!inserted_battery)
 			if(!user.unEquip(I, src))
 				return
@@ -62,16 +62,17 @@
 				dat += "No battery inserted.<BR>"
 	else
 		dat += "<B><font color=red>Unable to locate analysis pad.</font><BR></b>"
-	//
+	dat += "<A href='?src=\ref[src];close=1'>Close</a><BR>"
 	dat += "<HR>"
-	dat += "<A href='?src=\ref[src];refresh=1'>Refresh</A> <A href='?src=\ref[src];close=1'>Close<BR>"
-	show_browser(user, dat, "window=artharvester;size=450x500")
-	onclose(user, "artharvester")
+	var/datum/browser/popup = new(user, "artifact_harvester", "Artifact Power Harvester", 450, 500)
+	popup.set_content(dat)
+	popup.open()
 
 /obj/machinery/artifact_harvester/Process()
 	if(stat & (NOPOWER|BROKEN))
 		return
 
+	updateDialog()
 	if(harvesting > 0)
 		//charge at 33% consumption rate
 		inserted_battery.stored_charge += (world.time - last_process) / 3
@@ -81,7 +82,7 @@
 		if(inserted_battery.stored_charge >= inserted_battery.capacity)
 			update_use_power(POWER_USE_IDLE)
 			harvesting = 0
-			cur_artifact.anchored = 0
+			cur_artifact.anchored = FALSE
 			cur_artifact.being_used = 0
 			cur_artifact = null
 			src.visible_message("<b>[name]</b> states, \"Battery is full.\"")
@@ -190,7 +191,7 @@
 						if(source_effect)
 							harvesting = 1
 							update_use_power(POWER_USE_ACTIVE)
-							cur_artifact.anchored = 1
+							cur_artifact.anchored = TRUE
 							cur_artifact.being_used = 1
 							icon_state = "incubator_on"
 							var/message = "<b>[src]</b> states, \"Beginning energy harvesting.\""
@@ -216,7 +217,7 @@
 			if(harvesting < 0 && inserted_battery.battery_effect && inserted_battery.battery_effect.activated)
 				inserted_battery.battery_effect.ToggleActivate()
 			harvesting = 0
-			cur_artifact.anchored = 0
+			cur_artifact.anchored = FALSE
 			cur_artifact.being_used = 0
 			cur_artifact = null
 			src.visible_message("<b>[name]</b> states, \"Energy harvesting interrupted.\"")

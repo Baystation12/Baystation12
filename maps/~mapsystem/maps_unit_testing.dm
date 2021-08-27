@@ -56,3 +56,5 @@
 	)
 
 	var/list/area_purity_test_exempt_areas = list()
+
+/area/ship

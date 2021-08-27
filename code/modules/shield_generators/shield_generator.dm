@@ -3,12 +3,14 @@
 	desc = "A heavy-duty shield generator and capacitor, capable of generating energy shields at large distances."
 	icon = 'icons/obj/machines/shielding.dmi'
 	icon_state = "generator0"
-	density = 1
+	density = TRUE
 	base_type = /obj/machinery/power/shield_generator
 	construct_state = /decl/machine_construction/default/panel_closed
 	wires = /datum/wires/shield_generator
 	uncreated_component_parts = null
 	stat_immune = 0
+	machine_name = "advanced shield generator"
+	machine_desc = "A powerful energy projector that uses huge amounts of power to form a large sheath of shielding force around an area."
 	var/list/field_segments = list()    // List of all shield segments owned by this generator.
 	var/list/damaged_segments = list()  // List of shield segments that have failed and are currently regenerating.
 	var/shield_modes = 0                // Enabled shield mode flags
@@ -68,12 +70,12 @@
 /obj/machinery/power/shield_generator/RefreshParts()
 	max_energy = 0
 	full_shield_strength = 0
-	for(var/obj/item/weapon/stock_parts/smes_coil/S in component_parts)
+	for(var/obj/item/stock_parts/smes_coil/S in component_parts)
 		full_shield_strength += (S.ChargeCapacity / CELLRATE) * 5
 	max_energy = full_shield_strength * 20
 	current_energy = between(0, current_energy, max_energy)
 
-	mitigation_max = MAX_MITIGATION_BASE + MAX_MITIGATION_RESEARCH * total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor)
+	mitigation_max = MAX_MITIGATION_BASE + MAX_MITIGATION_RESEARCH * total_component_rating_of_type(/obj/item/stock_parts/capacitor)
 	mitigation_em = between(0, mitigation_em, mitigation_max)
 	mitigation_physical = between(0, mitigation_physical, mitigation_max)
 	mitigation_heat = between(0, mitigation_heat, mitigation_max)
@@ -121,8 +123,7 @@
 			vessel_reverse_dir = GLOB.reverse_dir[sector.fore_dir]
 
 	for(var/turf/T in shielded_turfs)
-		var/obj/effect/shield/S = new(T)
-		S.gen = src
+		var/obj/effect/shield/S = new(T, src)
 		S.flags_updated()
 		field_segments |= S
 		S.set_dir(vessel_reverse_dir)

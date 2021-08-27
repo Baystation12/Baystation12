@@ -9,6 +9,13 @@
 		min_temp = rand(T0C - 100, T0C + 200)
 		max_temp = min_temp + rand(10, 30)
 
+		if (max_temp < T20C)
+			name = "low temperature"
+		else if (min_temp > T20C)
+			name = "high temperature"
+		else
+			name = "room temperature"
+
 /datum/artifact_trigger/temperature/on_gas_exposure(datum/gas_mixture/gas)
 	return gas.temperature >= min_temp && gas.temperature <= max_temp
 

@@ -14,7 +14,13 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 		return
 	if(sector.check_ownership(src))
 		linked = sector
+		LAZYSET(linked.consoles, src, TRUE)
 		return 1
+
+/obj/machinery/computer/ship/Destroy()
+	if(linked)
+		LAZYREMOVE(linked.consoles, src)
+	. = ..()
 
 /obj/machinery/computer/ship/proc/sync_linked()
 	var/obj/effect/overmap/visitable/ship/sector = map_sectors["[z]"]
@@ -51,6 +57,9 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 	return TOPIC_NOACTION
 
 // Management of mob view displacement. look to shift view to the ship on the overmap; unlook to shift back.
+
+/obj/machinery/computer/ship/on_user_login(mob/M)
+	unlook(M)
 
 /obj/machinery/computer/ship/proc/look(var/mob/user)
 	if(linked)

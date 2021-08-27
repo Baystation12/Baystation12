@@ -50,7 +50,7 @@
 		if(!isnull(alpha))
 			I.alpha = alpha
 		if(!isnull(appearance_flags))
-			I.appearance_flags = appearance_flags
+			I.appearance_flags = DEFAULT_APPEARANCE_FLAGS | appearance_flags
 		if(!isnull(plane))
 			I.plane = plane
 		if(!isnull(layer))

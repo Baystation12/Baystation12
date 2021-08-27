@@ -1,7 +1,7 @@
 // SEE code/modules/materials/materials.dm FOR DETAILS ON INHERITED DATUM.
 // This class of weapons takes force and appearance data from a material datum.
 // They are also fragile based on material data and many can break/smash apart.
-/obj/item/weapon/material
+/obj/item/material
 	health = 10
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	gender = NEUTER
@@ -25,7 +25,7 @@
 	var/drops_debris = 1
 	var/worth_multiplier = 1
 
-/obj/item/weapon/material/New(var/newloc, var/material_key)
+/obj/item/material/New(var/newloc, var/material_key)
 	if(!material_key)
 		material_key = default_material
 	set_material(material_key)
@@ -41,10 +41,10 @@
 			if(!isnull(matter[material_type]))
 				matter[material_type] *= force_multiplier // May require a new var instead.
 
-/obj/item/weapon/material/get_material()
+/obj/item/material/get_material()
 	return material
 
-/obj/item/weapon/material/proc/update_force()
+/obj/item/material/proc/update_force()
 	var/new_force
 	if(edge || sharp)
 		new_force = material.get_edge_damage()
@@ -62,7 +62,7 @@
 	//spawn(1)
 //		log_debug("[src] has force [force] and throwforce [throwforce] when made from default material [material.name]")
 
-/obj/item/weapon/material/proc/set_material(var/new_material)
+/obj/item/material/proc/set_material(var/new_material)
 	material = SSmaterials.get_material_by_name(new_material)
 	if(!material)
 		qdel(src)
@@ -79,30 +79,30 @@
 			SetName("[material.display_name] [initial(name)]")
 		update_icon()
 
-/obj/item/weapon/material/on_update_icon()
+/obj/item/material/on_update_icon()
 	overlays.Cut()
 	if(applies_material_colour && istype(material))
 		color = material.icon_colour
 		alpha = 100 + material.opacity * 255
 	if(furniture_icon)
 		var/image/I = image(icon, icon_state = furniture_icon)
-		I.appearance_flags = RESET_COLOR
+		I.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
 		overlays += I
 
-/obj/item/weapon/material/Destroy()
+/obj/item/material/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-/obj/item/weapon/material/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
+/obj/item/material/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
 	. = ..()
 	if(material.is_brittle() || target.get_blocked_ratio(hit_zone, BRUTE, damage_flags(), armor_penetration, force) * 100 >= material.hardness/5)
 		check_shatter()
 
-/obj/item/weapon/material/on_parry(damage_source)
-	if(istype(damage_source, /obj/item/weapon/material))
+/obj/item/material/on_parry(damage_source)
+	if(istype(damage_source, /obj/item/material))
 		check_shatter()
 
-/obj/item/weapon/material/proc/check_shatter()
+/obj/item/material/proc/check_shatter()
 	if(!unbreakable && prob(material.hardness))
 		if(material.is_brittle())
 			health = 0
@@ -110,11 +110,11 @@
 			health--
 		check_health()
 
-/obj/item/weapon/material/proc/check_health(var/consumed)
+/obj/item/material/proc/check_health(var/consumed)
 	if(health<=0)
 		shatter(consumed)
 
-/obj/item/weapon/material/proc/shatter(var/consumed)
+/obj/item/material/proc/shatter(var/consumed)
 	var/turf/T = get_turf(src)
 	T.visible_message("<span class='danger'>\The [src] [material.destruction_desc]!</span>")
 	playsound(src, "shatter", 70, 1)

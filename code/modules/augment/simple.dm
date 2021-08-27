@@ -2,6 +2,8 @@
 /obj/item/organ/internal/augment/active/simple
 	var/obj/item/holding = null
 	var/holding_type = null
+	var/deploy_sound
+	var/retract_sound
 
 /obj/item/organ/internal/augment/active/simple/Initialize()
 	. = ..()
@@ -36,9 +38,12 @@
 	if(owner.equip_to_slot_if_possible(holding, slot))
 		GLOB.item_unequipped_event.register(holding, src, /obj/item/organ/internal/augment/active/simple/proc/holding_dropped )
 		owner.visible_message(
-			SPAN_WARNING("[owner] extends \his [holding.name] from [limb]."),
-			SPAN_NOTICE("You extend your [holding.name] from [limb].")
+			SPAN_WARNING("\The [owner] extends \his [holding.name] from \his [limb.name]."),
+			SPAN_NOTICE("You extend your [holding.name] from your [limb.name].")
 		)
+		if (deploy_sound)
+			playsound(owner, deploy_sound, 30)
+		return TRUE
 
 /obj/item/organ/internal/augment/active/simple/proc/retract()
 	if(holding.loc == src)
@@ -47,12 +52,15 @@
 	if(ismob(holding.loc) && holding.loc == owner)
 		var/mob/M = holding.loc
 		if(!M.drop_from_inventory(holding, src))
-			to_chat(owner, "\the [holding.name] fails to retract.")
+			to_chat(owner, "\The [holding.name] fails to retract.")
 			return
 		M.visible_message(
-			SPAN_WARNING("[M] retracts \his [holding.name] into [limb]."),
-			SPAN_NOTICE("You retract your [holding.name] into [limb].")
+			SPAN_WARNING("\The [M] retracts \his [holding.name] into \his [limb.name]."),
+			SPAN_NOTICE("You retract your [holding.name] into your [limb.name].")
 		)
+		if (retract_sound)
+			playsound(owner, retract_sound, 30)
+		return TRUE
 
 
 
@@ -64,6 +72,7 @@
 		deploy()
 	else //retract item
 		retract()
+	owner.update_action_buttons()
 
 /obj/item/organ/internal/augment/active/simple/can_activate()
 	if(..())

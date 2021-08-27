@@ -10,7 +10,7 @@
 // This is pretty nasty but is a damn sight easier than trying to make swabs a stack item.
 /obj/item/swabber/afterattack(var/atom/A, var/mob/user, var/proximity, var/params)
 	if(proximity)
-		var/obj/item/weapon/forensics/swab/swab = new(user)
+		var/obj/item/forensics/swab/swab = new(user)
 		var/resolved = swab.resolve_attackby(A, user, params)
 		if(!resolved && A && !QDELETED(A))
 			swab.afterattack(A, user, TRUE, params)
@@ -19,7 +19,7 @@
 		else
 			qdel(swab)
 
-/obj/item/weapon/forensics/swab
+/obj/item/forensics/swab
 	name = "swab"
 	desc = "A sterilized cotton swab and vial used to take forensic samples."
 	icon_state = "swab"
@@ -28,10 +28,10 @@
 	var/list/trace_dna
 	var/used
 
-/obj/item/weapon/forensics/swab/proc/is_used()
+/obj/item/forensics/swab/proc/is_used()
 	return used
 
-/obj/item/weapon/forensics/swab/attack(var/mob/living/M, var/mob/user)
+/obj/item/forensics/swab/attack(var/mob/living/M, var/mob/user)
 
 	if(!ishuman(M))
 		return ..()
@@ -86,7 +86,7 @@
 		return
 	return 1
 
-/obj/item/weapon/forensics/swab/afterattack(var/atom/A, var/mob/user, var/proximity)
+/obj/item/forensics/swab/afterattack(var/atom/A, var/mob/user, var/proximity)
 
 	if(!proximity || istype(A, /obj/machinery/dnaforensics))
 		return
@@ -145,7 +145,7 @@
 		user.visible_message("\The [user] swabs \the [A] for a sample.", "You swab \the [A] for a sample.")
 		set_used(sample_type, A)
 
-/obj/item/weapon/forensics/swab/proc/set_used(var/sample_str, var/atom/source)
+/obj/item/forensics/swab/proc/set_used(var/sample_str, var/atom/source)
 	SetName("[initial(name)] ([sample_str] - [source])")
 	desc = "[initial(desc)] The label on the vial reads 'Sample of [sample_str] from [source].'."
 	icon_state = "swab_used"

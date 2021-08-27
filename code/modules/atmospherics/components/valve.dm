@@ -55,7 +55,7 @@
 		if(open)
 			network_node1 = new_network
 
-	if(new_network.normal_members.Find(src))
+	if(list_find(new_network.normal_members, src))
 		return 0
 
 	new_network.normal_members += src
@@ -98,6 +98,9 @@
 	else if(network_node2)
 		network_node2.update = 1
 
+	if (usr)
+		visible_message(SPAN_WARNING("\The [usr] opens \the [src]."), range = 5)
+
 	return 1
 
 /obj/machinery/atmospherics/valve/proc/close()
@@ -113,6 +116,9 @@
 		qdel(network_node2)
 
 	build_network()
+
+	if (usr)
+		visible_message(SPAN_WARNING("\The [usr] closes \the [src]."), range = 5)
 
 	return 1
 
@@ -209,8 +215,8 @@
 
 	return null
 
-/obj/machinery/atmospherics/valve/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if (!istype(W, /obj/item/weapon/wrench))
+/obj/machinery/atmospherics/valve/attackby(var/obj/item/W as obj, var/mob/user as mob)
+	if (!istype(W, /obj/item/wrench))
 		return ..()
 	var/datum/gas_mixture/int_air = return_air()
 	var/datum/gas_mixture/env_air = loc.return_air()
@@ -262,8 +268,8 @@
 	desc = "A digitally controlled valve."
 	icon = 'icons/atmos/digital_valve.dmi'
 	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/radio/receiver,
-		/obj/item/weapon/stock_parts/power/apc
+		/obj/item/stock_parts/radio/receiver,
+		/obj/item/stock_parts/power/apc
 	)
 	public_variables = list(/decl/public_access/public_variable/valve_open)
 	public_methods = list(

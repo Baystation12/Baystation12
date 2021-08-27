@@ -61,6 +61,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 	weaken_mod = 0.05
 	paralysis_mod = 0.2
 	show_ssd = null //No SSD message so NPC logic can take over
+	show_coma = null
 	warning_low_pressure = 0
 	hazard_low_pressure = 0
 	body_temperature = null
@@ -157,9 +158,9 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 /datum/species/zombie/proc/handle_death_infection(mob/living/carbon/human/H)
 	var/list/victims = hearers(rand(1, 2), H)
 	for(var/mob/living/carbon/human/M in victims)
-		if (H == M || isspecies(M, SPECIES_ZOMBIE))
+		if (H == M || M.is_species(SPECIES_ZOMBIE))
 			continue
-		if (!(M.species.name in GLOB.zombie_species) || isspecies(M,SPECIES_DIONA) || M.isSynthetic())
+		if (M.isSynthetic() || M.is_species(SPECIES_DIONA) || !(M.species.name in GLOB.zombie_species))
 			continue
 		if (M.wear_mask && (M.wear_mask.item_flags & ITEM_FLAG_AIRTIGHT)) // If they're protected by a mask
 			continue
@@ -199,7 +200,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 /datum/species/zombie/proc/handle_action(mob/living/carbon/human/H)
 	var/dist = 128
 	for(var/mob/living/M in hearers(H, 15))
-		if ((ishuman(M) || istype(M, /mob/living/exosuit)) && !isspecies(M, SPECIES_ZOMBIE) && !isspecies(M, SPECIES_DIONA)) //Don't attack fellow zombies, or diona
+		if ((ishuman(M) || istype(M, /mob/living/exosuit)) && !M.is_species(SPECIES_ZOMBIE) && !M.is_species(SPECIES_DIONA)) //Don't attack fellow zombies, or diona
 			if (istype(M, /mob/living/exosuit))
 				var/mob/living/exosuit/MC = M
 				if (!LAZYLEN(MC.pilots))
@@ -213,7 +214,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 
 	H.setClickCooldown(DEFAULT_ATTACK_COOLDOWN*2)
 	if (target)
-		if (isspecies(target, SPECIES_ZOMBIE))
+		if (target.is_species(SPECIES_ZOMBIE))
 			target = null
 			return
 
@@ -278,7 +279,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 	. = ..()
 	if (!.)
 		return FALSE
-	if (isspecies(target, SPECIES_ZOMBIE))
+	if (target.is_species(SPECIES_ZOMBIE))
 		to_chat(usr, SPAN_WARNING("They don't look very appetizing!"))
 		return FALSE
 	return TRUE
@@ -286,7 +287,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 /datum/unarmed_attack/bite/sharp/zombie/apply_effects(mob/living/carbon/human/user, mob/living/carbon/human/target, attack_damage, zone)
 	..()
 	admin_attack_log(user, target, "Bit their victim.", "Was bitten.", "bit")
-	if (!(target.species.name in GLOB.zombie_species) || isspecies(target, SPECIES_DIONA) || target.isSynthetic()) //No need to check infection for FBPs
+	if (!(target.species.name in GLOB.zombie_species) || target.is_species(SPECIES_DIONA) || target.isSynthetic()) //No need to check infection for FBPs
 		return
 	target.adjustHalLoss(9) //To help bring down targets in voidsuits
 	var/vuln = 1 - target.get_blocked_ratio(zone, TOX, damage_flags = DAM_BIO) //Are they protected from bites?
@@ -314,7 +315,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 		return
 	var/mob/living/carbon/human/H = M
 
-	if (!(H.species.name in GLOB.zombie_species) || isspecies(H, SPECIES_DIONA) || H.isSynthetic())
+	if (!(H.species.name in GLOB.zombie_species) || H.is_species(SPECIES_DIONA) || H.isSynthetic())
 		remove_self(volume)
 		return
 	var/true_dose = H.chem_doses[type] + volume
@@ -364,7 +365,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 
 
 /mob/living/carbon/human/proc/zombify()
-	if (!(species.name in GLOB.zombie_species) || isspecies(src, SPECIES_DIONA) || isspecies(src, SPECIES_ZOMBIE) || isSynthetic())
+	if (!(species.name in GLOB.zombie_species) || is_species(SPECIES_DIONA) || is_species(SPECIES_ZOMBIE) || isSynthetic())
 		return
 
 	if (mind)
@@ -386,7 +387,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 	if (QDELETED(src))
 		return
 
-	if (isspecies(src, SPECIES_ZOMBIE)) //Check again otherwise Consume can run this twice at once
+	if (is_species(SPECIES_ZOMBIE)) //Check again otherwise Consume can run this twice at once
 		return
 
 	rejuvenate()
@@ -439,10 +440,10 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 	var/list/victims = list()
 	for (var/mob/living/carbon/human/L in get_turf(src))
 		if (L != src && (L.lying || L.stat == DEAD))
-			if (isspecies(L, SPECIES_ZOMBIE))
+			if (L.is_species(SPECIES_ZOMBIE))
 				to_chat(src, SPAN_WARNING("\The [L] isn't fresh anymore!"))
 				continue
-			if (!(L.species.name in GLOB.zombie_species) || isspecies(L, SPECIES_DIONA) || L.isSynthetic())
+			if (!(L.species.name in GLOB.zombie_species) || L.is_species(SPECIES_DIONA) || L.isSynthetic())
 				to_chat(src, SPAN_WARNING("You'd break your teeth on \the [L]!"))
 				continue
 			victims += L
@@ -493,7 +494,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 		to_chat(target,SPAN_DANGER("\The [src] scrapes your flesh from your bones!"))
 		to_chat(src,SPAN_DANGER("You feed hungrily off \the [target]'s flesh."))
 
-		if (isspecies(target, SPECIES_ZOMBIE)) //Just in case they turn whilst being eaten
+		if (target.is_species(SPECIES_ZOMBIE)) //Just in case they turn whilst being eaten
 			return
 
 		target.apply_damage(rand(50, 60), BRUTE, BP_CHEST)
@@ -519,11 +520,11 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 //// Zombie Atoms
 
 
-/obj/item/weapon/reagent_containers/syringe/zombie
+/obj/item/reagent_containers/syringe/zombie
 	name = "Syringe (unknown serum)"
 	desc = "Contains a strange, crimson substance."
 
-/obj/item/weapon/reagent_containers/syringe/zombie/Initialize()
+/obj/item/reagent_containers/syringe/zombie/Initialize()
 	..()
 	reagents.add_reagent(/datum/reagent/zombie, 15)
 	mode = SYRINGE_INJECT

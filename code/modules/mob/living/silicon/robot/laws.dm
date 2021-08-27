@@ -25,7 +25,7 @@
 					to_chat(src, "<b>Remember, your AI does NOT share or know about your law 0.</b>")
 		else
 			to_chat(src, "<b>No AI selected to sync laws with, disabling lawsync protocol.</b>")
-			lawupdate = 0
+			lawupdate = FALSE
 
 	to_chat(who, SPAN_BOLD("Obey the following laws."))
 	to_chat(who, SPAN_ITALIC("All laws have equal priority. Laws may override other laws if written specifically to do so. If laws conflict, break the least."))

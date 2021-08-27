@@ -4,12 +4,15 @@
 	desc = "The name isn't descriptive enough?"
 	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "grinder"
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	req_access = list(access_kitchen,access_morgue)
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	
+	machine_name = "meat grinder"
+	machine_desc = "Messily turns animals - living or dead - into edible meat. Installed safety mechanisms prevent use on humans."
 
 	var/operating = 0        //Is it on?
 	var/dirty = 0            // Does it need cleaning?
@@ -195,8 +198,8 @@
 			qdel(thing)
 		else
 			thing.forceMove(src)
-			if(istype(thing, /obj/item/weapon/reagent_containers/food/snacks/meat))
-				var/obj/item/weapon/reagent_containers/food/snacks/meat/slab = thing
+			if(istype(thing, /obj/item/reagent_containers/food/snacks/meat))
+				var/obj/item/reagent_containers/food/snacks/meat/slab = thing
 				slab.SetName("[slab_name] [slab.name]")
 				slab.reagents.add_reagent(/datum/reagent/nutriment,slab_nutrition)
 

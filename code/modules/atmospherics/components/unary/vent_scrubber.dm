@@ -24,9 +24,9 @@
 	build_icon_state = "scrubber"
 
 	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/power/apc,
-		/obj/item/weapon/stock_parts/radio/receiver,
-		/obj/item/weapon/stock_parts/radio/transmitter/on_event,
+		/obj/item/stock_parts/power/apc,
+		/obj/item/stock_parts/radio/receiver,
+		/obj/item/stock_parts/radio/transmitter/on_event,
 	)
 	public_variables = list(
 		/decl/public_access/public_variable/input_toggle,
@@ -76,11 +76,12 @@
 	var/scrubber_icon = "scrubber"
 	if(welded)
 		scrubber_icon += "weld"
+	else if (!powered() || !use_power)
+		scrubber_icon += "off"
+	else if(scrubbing == SCRUBBER_SIPHON)
+		scrubber_icon += "in"
 	else
-		if(!powered())
-			scrubber_icon += "off"
-		else
-			scrubber_icon += "[use_power ? "[scrubbing ? "on" : "in"]" : "off"]"
+		scrubber_icon += "on"
 
 	overlays += icon_manager.get_atmos_icon("device", , , scrubber_icon)
 
@@ -202,10 +203,10 @@
 			return SPAN_WARNING("You cannot take this [src] apart, it too exerted due to internal pressure.")
 	return ..()
 
-/obj/machinery/atmospherics/unary/vent_scrubber/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if(istype(W, /obj/item/weapon/weldingtool))
+/obj/machinery/atmospherics/unary/vent_scrubber/attackby(var/obj/item/W as obj, var/mob/user as mob)
+	if(istype(W, /obj/item/weldingtool))
 
-		var/obj/item/weapon/weldingtool/WT = W
+		var/obj/item/weldingtool/WT = W
 
 		if(!WT.isOn())
 			to_chat(user, "<span class='notice'>The welding tool needs to be on to start this task.</span>")

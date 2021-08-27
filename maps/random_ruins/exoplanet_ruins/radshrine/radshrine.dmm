@@ -1,99 +1,94 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "b" = (
-/turf/simulated/wall/iron,
-/area/template_noop)
-"c" = (
-/obj/machinery/door/unpowered/simple/uranium,
-/turf/simulated/floor/tiled,
+/obj/machinery/artifact,
+/turf/simulated/floor/fixed/alium,
 /area/template_noop)
 "d" = (
 /turf/simulated/wall/uranium,
 /area/template_noop)
-"e" = (
-/obj/structure/bed/chair/wood,
+"o" = (
 /obj/effect/decal/cleanable/cobweb,
-/turf/simulated/floor/carpet/red,
+/obj/item/remains/xeno,
+/turf/simulated/floor/fixed/alium,
 /area/template_noop)
-"f" = (
-/turf/simulated/floor/carpet/red,
+"y" = (
+/turf/simulated/floor/exoplanet/water/shallow,
 /area/template_noop)
-"g" = (
-/obj/item/trash/candle,
-/turf/simulated/floor/carpet/red,
+"E" = (
+/obj/item/remains/xeno,
+/turf/simulated/floor/fixed/alium,
 /area/template_noop)
-"h" = (
-/obj/effect/wallframe_spawn/reinforced,
-/turf/simulated/floor/plating,
+"G" = (
+/obj/machinery/door/unpowered/simple/uranium,
+/turf/simulated/floor/fixed/alium,
 /area/template_noop)
-"i" = (
-/obj/machinery/artifact,
-/turf/simulated/floor/reinforced,
+"U" = (
+/turf/simulated/wall/alium,
 /area/template_noop)
-"I" = (
-/obj/structure/bed/chair/wood,
-/turf/simulated/floor/carpet/red,
+"V" = (
+/turf/simulated/floor/fixed/alium,
 /area/template_noop)
 
 (1,1,1) = {"
 d
-b
-b
-d
-b
-b
+U
+U
+G
+U
+U
 d
 "}
 (2,1,1) = {"
-b
-e
-I
-f
-g
-g
-b
+U
+o
+V
+V
+V
+V
+U
 "}
 (3,1,1) = {"
-b
-I
-I
-f
-h
-h
-b
+U
+V
+y
+y
+y
+V
+U
 "}
 (4,1,1) = {"
-c
-f
-f
-f
-h
-i
-d
+G
+V
+y
+b
+y
+V
+G
 "}
 (5,1,1) = {"
-b
-I
-I
-f
-h
-h
-b
+U
+V
+y
+y
+y
+V
+U
 "}
 (6,1,1) = {"
-b
-I
-I
-f
-g
-g
-b
+U
+V
+V
+V
+E
+V
+U
 "}
 (7,1,1) = {"
 d
-b
-b
-d
-b
-b
+U
+U
+G
+U
+U
 d
 "}

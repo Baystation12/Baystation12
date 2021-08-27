@@ -1,4 +1,4 @@
-/obj/item/weapon/reagent_containers/chem_disp_cartridge
+/obj/item/reagent_containers/chem_disp_cartridge
 	small
 		volume = CARTRIDGE_VOLUME_SMALL
 
@@ -80,6 +80,9 @@
 	cream		spawn_reagent = /datum/reagent/drink/milk/cream
 	decaf_cof	spawn_reagent = /datum/reagent/drink/decafcoffee
 	espresso	spawn_reagent = /datum/reagent/drink/coffee/espresso
+
+// Engineering
+	boron		spawn_reagent = /datum/reagent/toxin/boron
 
 	// ERT
 	inaprov		spawn_reagent = /datum/reagent/inaprovaline

@@ -13,33 +13,44 @@
 		update_pilots()
 
 	if(radio)
-		radio.on = (head && head.radio && head.radio.is_functional())
+		radio.on = (head && head.radio && head.radio.is_functional() && get_cell())
 
 	body.update_air(hatch_closed && use_air)
 
-	if((client || LAZYLEN(pilots)) && get_cell())
-		get_cell().drain_power(0, 0, calc_power_draw())
+	var/powered = FALSE
+	if(get_cell())
+		powered = get_cell().drain_power(0, 0, calc_power_draw()) > 0
+
+	if(!powered)
+		//Shut down all systems
+		if(head)
+			head.active_sensors = FALSE
+			hud_camera.queue_icon_update()
+		for(var/hardpoint in hardpoints)
+			var/obj/item/mech_equipment/M = hardpoints[hardpoint]
+			if(istype(M) && M.active && M.passive_power_use)
+				M.deactivate()
+		
 
 	updatehealth()
 	if(health <= 0 && stat != DEAD)
 		death()
+
+	if(emp_damage > 0)
+		emp_damage -= min(1, emp_damage) //Reduce emp accumulation over time
 
 	..() //Handles stuff like environment
 
 	handle_hud_icons()
 
 	lying = FALSE // Fuck off, carp.
-	handle_vision()
+	handle_vision(powered)
 
-/mob/living/exosuit/handle_mutations_and_radiation()
-	radiation = Clamp(radiation,0,500) //Dont let exosuits accumulate radiation
-
-	if(radiation)
-		radiation--
-
-/mob/living/exosuit/get_cell()
-	RETURN_TYPE(/obj/item/weapon/cell)
-	return body ? body.cell : null
+/mob/living/exosuit/get_cell(force)
+	RETURN_TYPE(/obj/item/cell)
+	if(power == MECH_POWER_ON || force) //For most intents we can assume that a powered off exosuit acts as if it lacked a cell
+		return body ? body.cell : null
+	return null
 
 /mob/living/exosuit/proc/calc_power_draw()
 	//Passive power stuff here. You can also recharge cells or hardpoints if those make sense
@@ -125,12 +136,17 @@
 	qdel(src)
 	return
 
-/mob/living/exosuit/handle_vision()
+/mob/living/exosuit/handle_vision(powered)
+	var/was_blind = sight & BLIND
 	if(head)
-		sight = head.get_sight()
-		see_invisible = head.get_invisible()
+		sight = head.get_sight(powered)
+		see_invisible = head.get_invisible(powered)
 	if(body && (body.pilot_coverage < 100 || body.transparent_cabin) || !hatch_closed)
 		sight &= ~BLIND
+
+	if(sight & BLIND && !was_blind)
+		for(var/mob/pilot in pilots)
+			to_chat(pilot, SPAN_WARNING("The sensors are not operational and you cannot see a thing!"))
 
 /mob/living/exosuit/additional_sight_flags()
 	return sight

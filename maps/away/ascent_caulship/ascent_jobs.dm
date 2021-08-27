@@ -5,7 +5,7 @@
 	id = WEBHOOK_SUBMAP_LOADED_ASCENT
 
 /decl/submap_archetype/ascent_caulship
-	descriptor = "Ascent colony ship"
+	descriptor = "Ascent caulship"
 	map = "Ascent Caulship"
 	blacklisted_species = null
 	whitelisted_species = null
@@ -120,6 +120,7 @@
 		SKILL_SCIENCE = SKILL_ADEPT,
 		SKILL_MEDICAL = SKILL_BASIC
 	)
+	use_species_whitelist = SPECIES_MANTID_GYNE
 	var/requires_supervisor = FALSE
 	var/set_species_on_join = SPECIES_MANTID_GYNE
 
@@ -133,15 +134,6 @@
 			if(istype(ascent_job) && ascent_job.owner == owner)
 				return TRUE
 		return FALSE
-
-/datum/job/submap/ascent/is_available(client/caller)
-	. = ..()
-	if(.)
-		switch(set_species_on_join)
-			if(SPECIES_MANTID_GYNE)
-				. = is_species_whitelisted(caller.mob, SPECIES_MANTID_GYNE)
-			if(SPECIES_MONARCH_QUEEN)
-				. = is_species_whitelisted(caller.mob, SPECIES_NABBER)
 
 /datum/job/submap/ascent/handle_variant_join(var/mob/living/carbon/human/H, var/alt_title)
 
@@ -193,6 +185,7 @@
 		SKILL_WEAPONS = SKILL_ADEPT,
 		SKILL_MEDICAL = SKILL_BASIC
 	)
+	use_species_whitelist = null
 
 /datum/job/submap/ascent/drone
 	title = "Ascent Drone"
@@ -201,6 +194,7 @@
 	info = "You are a Machine Intelligence of an independent Ascent vessel. The Gyne you assist has fled her sisters, ending up in this sector full of primitive bioforms. Try to keep her alive, and assist where you can."
 	set_species_on_join = /mob/living/silicon/robot/flying/ascent
 	requires_supervisor = "Ascent Gyne"
+	use_species_whitelist = null
 
 // Spawn points.
 /obj/effect/submap_landmark/spawnpoint/ascent_caulship

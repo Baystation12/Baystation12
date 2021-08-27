@@ -1,7 +1,7 @@
 /obj/effect/rune
 	name = "rune"
 	desc = "A strange collection of symbols drawn in blood."
-	anchored = 1
+	anchored = TRUE
 	icon = 'icons/effects/uristrunes.dmi'
 	icon_state = "blank"
 	unacidable = TRUE
@@ -45,11 +45,11 @@
 		to_chat(user, "This is \a [cultname] rune.")
 
 /obj/effect/rune/attackby(var/obj/item/I, var/mob/living/user)
-	if(istype(I, /obj/item/weapon/book/tome) && iscultist(user))
+	if(istype(I, /obj/item/book/tome) && iscultist(user))
 		user.visible_message("<span class='notice'>[user] rubs \the [src] with \the [I], and \the [src] is absorbed by it.</span>", "You retrace your steps, carefully undoing the lines of \the [src].")
 		qdel(src)
 		return
-	else if(istype(I, /obj/item/weapon/nullrod))
+	else if(istype(I, /obj/item/nullrod))
 		user.visible_message("<span class='notice'>[user] hits \the [src] with \the [I], and it disappears, fizzling.</span>", "<span class='notice'>You disrupt the vile magic with the deadening field of \the [I].</span>", "You hear a fizzle.")
 		qdel(src)
 		return
@@ -69,9 +69,6 @@
 /obj/effect/rune/attack_ai(var/mob/living/user) // Cult borgs!
 	if(Adjacent(user))
 		attack_hand(user)
-
-/obj/effect/rune/attack_generic(var/mob/living/user) // Cult constructs/slimes/whatnot!
-	attack_hand(user)
 
 /obj/effect/rune/proc/cast(var/mob/living/user)
 	fizzle(user)
@@ -226,7 +223,7 @@
 	cultname = "summon tome"
 
 /obj/effect/rune/tome/cast(var/mob/living/user)
-	new /obj/item/weapon/book/tome(get_turf(src))
+	new /obj/item/book/tome(get_turf(src))
 	speak_incantation(user, "N[pick("'","`")]ath reth sh'yro eth d'raggathnor!")
 	visible_message("<span class='notice'>\The [src] disappears with a flash of red light, and in its place now a book lies.</span>", "You hear a pop.")
 	qdel(src)
@@ -243,15 +240,15 @@
 /obj/effect/rune/wall/cast(var/mob/living/user)
 	var/t
 	if(wall)
-		if(wall.health >= wall.max_health)
+		if(!wall.health_damaged())
 			to_chat(user, "<span class='notice'>The wall doesn't need mending.</span>")
 			return
-		t = wall.max_health - wall.health
-		wall.health += t
+		t = wall.get_damage_value()
+		wall.restore_health()
 	else
 		wall = new /obj/effect/cultwall(get_turf(src), bcolor)
 		wall.rune = src
-		t = wall.health
+		t = wall.get_current_health()
 	user.remove_blood_simple(t / 50)
 	speak_incantation(user, "Khari[pick("'","`")]d! Eske'te tannin!")
 	to_chat(user, "<span class='warning'>Your blood flows into the rune, and you feel that the very space over the rune thickens.</span>")
@@ -262,16 +259,19 @@
 	icon = 'icons/effects/effects.dmi'//TODO: better icon
 	icon_state = "smoke"
 	color = "#ff0000"
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 	unacidable = TRUE
+	use_health_handler = USE_HEALTH_SIMPLE
 	var/obj/effect/rune/wall/rune
-	var/health
-	var/max_health = 200
+
+/obj/effect/cultwall/get_initial_health_handler_config()
+	return list(
+		"max_health" = 200
+	)
 
 /obj/effect/cultwall/New(var/loc, var/bcolor)
 	..()
-	health = max_health
 	if(bcolor)
 		color = bcolor
 
@@ -281,15 +281,10 @@
 		rune = null
 	return ..()
 
-/obj/effect/cultwall/examine(mob/user)
-	. = ..()
-	if(iscultist(user))
-		if(health == max_health)
-			to_chat(user, "<span class='notice'>It is fully intact.</span>")
-		else if(health > max_health * 0.5)
-			to_chat(user, "<span class='warning'>It is damaged.</span>")
-		else
-			to_chat(user, "<span class='danger'>It is about to dissipate.</span>")
+/obj/effect/cultwall/examine_damage_state(mob/user)
+	if (!iscultist(user))
+		return
+	..()
 
 /obj/effect/cultwall/attack_hand(var/mob/living/user)
 	if(iscultist(user))
@@ -299,26 +294,24 @@
 		to_chat(user, "<span class='notice'>You touch \the [src]. It feels wet and becomes harder the further you push your arm.</span>")
 
 /obj/effect/cultwall/attackby(var/obj/item/I, var/mob/living/user)
-	if(istype(I, /obj/item/weapon/nullrod))
+	if(istype(I, /obj/item/nullrod))
 		user.visible_message("<span class='notice'>\The [user] touches \the [src] with \the [I], and it disappears.</span>", "<span class='notice'>You disrupt the vile magic with the deadening field of \the [I].</span>")
 		qdel(src)
 	else if(I.force)
 		user.visible_message("<span class='notice'>\The [user] hits \the [src] with \the [I].</span>", "<span class='notice'>You hit \the [src] with \the [I].</span>")
-		take_damage(I.force)
+		damage_health(I.force, I.damtype)
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		user.do_attack_animation(src)
 
 /obj/effect/cultwall/bullet_act(var/obj/item/projectile/Proj)
-	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
-		return
-	take_damage(Proj.damage)
-	..()
+	damage_health(Proj.get_structure_damage(), Proj.damage_type)
+	. = ..()
 
-/obj/effect/cultwall/proc/take_damage(var/amount)
-	health -= amount
-	if(health <= 0)
-		visible_message("<span class='warning'>\The [src] dissipates.</span>")
-		qdel(src)
+/obj/effect/cultwall/handle_death_change(new_death_state)
+	. = ..()
+	if (new_death_state)
+		visible_message(SPAN_WARNING("\The [src] dissipates."))
+		qdel (src)
 
 /obj/effect/rune/ajorney
 	cultname = "astral journey"
@@ -410,14 +403,14 @@
 		user.equip_to_slot_or_del(new /obj/item/clothing/shoes/cult(user), slot_shoes)
 
 	O = user.get_equipped_item(slot_back)
-	if(istype(O, /obj/item/weapon/storage) && !istype(O, /obj/item/weapon/storage/backpack/cultpack) && user.unEquip(O)) // We don't want to make the vox drop their nitrogen tank, though
-		var/obj/item/weapon/storage/backpack/cultpack/C = new /obj/item/weapon/storage/backpack/cultpack(user)
+	if(istype(O, /obj/item/storage) && !istype(O, /obj/item/storage/backpack/cultpack) && user.unEquip(O)) // We don't want to make the vox drop their nitrogen tank, though
+		var/obj/item/storage/backpack/cultpack/C = new /obj/item/storage/backpack/cultpack(user)
 		user.equip_to_slot_or_del(C, slot_back)
 		if(C)
 			for(var/obj/item/I in O)
 				I.forceMove(C)
 	else if(!O)
-		var/obj/item/weapon/storage/backpack/cultpack/C = new /obj/item/weapon/storage/backpack/cultpack(user)
+		var/obj/item/storage/backpack/cultpack/C = new /obj/item/storage/backpack/cultpack(user)
 		user.equip_to_slot_or_del(C, slot_back)
 
 	user.update_icons()
@@ -649,7 +642,7 @@
 		to_chat(user, "<span class='warning'>This rune needs to be placed on the defiled ground.</span>")
 		return fizzle(user)
 	speak_incantation(user, "N'ath reth sh'yro eth d[pick("'","`")]raggathnor!")
-	user.put_in_hands(new /obj/item/weapon/melee/cultblade(user))
+	user.put_in_hands(new /obj/item/melee/cultblade(user))
 	qdel(src)
 
 /obj/effect/rune/shell
@@ -689,7 +682,7 @@
 	for(var/mob/living/M in viewers(src))
 		if(iscultist(M))
 			continue
-		var/obj/item/weapon/nullrod/N = locate() in M
+		var/obj/item/nullrod/N = locate() in M
 		if(N)
 			continue
 		affected |= M
@@ -750,7 +743,7 @@
 			if(iscultist(M))
 				continue
 			current |= M
-			var/obj/item/weapon/nullrod/N = locate() in M
+			var/obj/item/nullrod/N = locate() in M
 			if(N)
 				continue
 			M.take_overall_damage(5, 5)
@@ -847,9 +840,9 @@
 	var/papertype
 
 /obj/effect/rune/imbue/cast(var/mob/living/user)
-	var/obj/item/weapon/paper/target
+	var/obj/item/paper/target
 	var/tainted = 0
-	for(var/obj/item/weapon/paper/P in get_turf(src))
+	for(var/obj/item/paper/P in get_turf(src))
 		if(!P.info)
 			target = P
 			break
@@ -867,8 +860,8 @@
 
 /obj/effect/rune/imbue/stun
 	cultname = "stun imbue"
-	papertype = /obj/item/weapon/paper/talisman/stun
+	papertype = /obj/item/paper/talisman/stun
 
 /obj/effect/rune/imbue/emp
 	cultname = "destroy technology imbue"
-	papertype = /obj/item/weapon/paper/talisman/emp
+	papertype = /obj/item/paper/talisman/emp

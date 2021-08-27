@@ -12,6 +12,7 @@
 	var/off_state = "degoggles"
 	var/active = TRUE
 	var/activation_sound = 'sound/items/goggles_charge.ogg'
+	var/deactivation_sound // set this if you want a sound on deactivation
 	var/obj/screen/overlay = null
 	var/obj/item/clothing/glasses/hud/hud = null	// Hud glasses, if any
 	var/electric = FALSE //if the glasses should be disrupted by EMP
@@ -34,51 +35,70 @@
 /obj/item/clothing/glasses/needs_vision_update()
 	return ..() || overlay || vision_flags || see_invisible || darkness_view
 
+/obj/item/clothing/glasses/proc/activate(mob/user)
+	if(toggleable && !active)
+		var/datum/extension/base_icon_state/BIS = get_extension(src, /datum/extension/base_icon_state)
+		active = TRUE
+		icon_state = BIS.base_icon_state
+		flash_protection = initial(flash_protection)
+		tint = initial(tint)
+		if(user)
+			user.update_inv_glasses()
+			user.update_action_buttons()
+			if(activation_sound)
+				sound_to(user, activation_sound)
+			if(toggle_on_message)
+				to_chat(user, toggle_on_message)
+			else
+				to_chat(user, "You activate the optical matrix on \the [src].")
+
+		update_clothing_icon()
+		update_vision()
+
+/obj/item/clothing/glasses/proc/deactivate(mob/user, manual = TRUE)
+	if(toggleable && active)
+		active = FALSE
+		icon_state = off_state
+		if(user)
+			if(manual)
+				if(toggle_off_message)
+					to_chat(user, toggle_off_message)
+				else
+					to_chat(user, "You deactivate the optical matrix on \the [src].")
+				if(deactivation_sound)
+					sound_to(user, deactivation_sound)
+			user.update_inv_glasses()
+			user.update_action_buttons()
+
+		flash_protection = FLASH_PROTECTION_NONE
+		tint = TINT_NONE
+		update_clothing_icon()
+		update_vision()
+
 /obj/item/clothing/glasses/emp_act(severity)
-	if(electric)
+	if(electric && active)
 		if(istype(src.loc, /mob/living/carbon/human))
 			var/mob/living/carbon/human/M = src.loc
-			to_chat(M, "<span class='danger'>Your [name] malfunction[gender != PLURAL ? "s":""], blinding you!</span>")
-			if(M.glasses == src)
+			if(M.glasses != src)
+				to_chat(M, SPAN_DANGER("\The [name] malfunction[gender != PLURAL ? "s":""], releasing a small spark."))
+			else
 				M.eye_blind = 2
 				M.eye_blurry = 4
+				to_chat(M, SPAN_DANGER("\The [name] malfunction[gender != PLURAL ? "s":""], blinding you!"))
 				// Don't cure being nearsighted
 				if(!(M.disabilities & NEARSIGHTED))
 					M.disabilities |= NEARSIGHTED
 					spawn(100)
 						M.disabilities &= ~NEARSIGHTED
-		if(toggleable)
-			if(active)
-				active = FALSE
+			if(toggleable)
+				deactivate(M, FALSE)
 
 /obj/item/clothing/glasses/attack_self(mob/user)
 	if(toggleable && !user.incapacitated())
-		var/datum/extension/base_icon_state/BIS = get_extension(src, /datum/extension/base_icon_state)
 		if(active)
-			active = FALSE
-			icon_state = off_state
-			user.update_inv_glasses()
-			flash_protection = FLASH_PROTECTION_NONE
-			tint = TINT_NONE
-			if(toggle_off_message)
-				to_chat(user, toggle_off_message)
-			else
-				to_chat(user, "You deactivate the optical matrix on \the [src].")
+			deactivate(user)
 		else
-			active = TRUE
-			icon_state = BIS.base_icon_state
-			user.update_inv_glasses()
-			if(activation_sound)
-				sound_to(user, activation_sound)
-			flash_protection = initial(flash_protection)
-			tint = initial(tint)
-			if(toggle_on_message)
-				to_chat(user, toggle_on_message)
-			else
-				to_chat(user, "You activate the optical matrix on \the [src].")
-		update_clothing_icon()
-		update_vision()
-		user.update_action_buttons()
+			activate(user)
 
 /obj/item/clothing/glasses/inherit_custom_item_data(datum/custom_item/citem)
 	. = ..()
@@ -89,7 +109,7 @@
 			off_state = citem.additional_data["icon_off"]
 
 /obj/item/clothing/glasses/meson
-	name = "optical meson scanner"
+	name = "meson goggles"
 	desc = "Used for seeing walls, floors, and stuff through anything."
 	gender = NEUTER
 	icon_state = "meson"
@@ -106,9 +126,9 @@
 	overlay = GLOB.global_hud.meson
 
 /obj/item/clothing/glasses/meson/prescription
-	name = "prescription mesons"
-	desc = "Optical meson scanner with prescription lenses."
-	prescription = 6
+	name = "meson goggles"
+	desc = "Used for seeing walls, floors, and stuff through anything. This set has corrective lenses."
+	prescription = 5
 
 /obj/item/clothing/glasses/science
 	name = "science goggles"
@@ -122,8 +142,8 @@
 
 /obj/item/clothing/glasses/science/prescription
 	name = "prescription science goggles"
-	desc = "Science hoggles with prescription lenses."
-	prescription = 6
+	desc = "Science goggles with prescription lenses."
+	prescription = 5
 
 /obj/item/clothing/glasses/science/Initialize()
 	. = ..()
@@ -164,6 +184,7 @@
 	icon_state = "monocle"
 	item_state = "headset" // lol
 	body_parts_covered = 0
+	prescription = 5
 
 /obj/item/clothing/glasses/material
 	name = "optical material scanner"
@@ -232,3 +253,29 @@
 	icon_state = "rwelding-g"
 	item_state = "rwelding-g"
 	tint = TINT_MODERATE
+
+/obj/item/clothing/glasses/glare_dampeners
+	name = "glare dampeners"
+	desc = "Synthetic lenses over the eyes, protecting from bright lights."
+	icon_state = "welding-g"
+	item_state = "welding-g"
+	use_alt_layer = TRUE
+	flash_protection = FLASH_PROTECTION_MAJOR
+	tint = TINT_HEAVY
+
+/obj/item/clothing/glasses/augment_binoculars
+	name = "adaptive binoculars"
+	desc = "Digital lenses covering the eyes, capable of zooming in on distant targets."
+	gender = PLURAL
+	icon_state = "thermal"
+	item_state = "glasses"
+	action_button_name = "Toggle zoom"
+	zoomdevicename = "lenses"
+	electric = TRUE
+	unacidable = TRUE
+
+/obj/item/clothing/glasses/augment_binoculars/attack_self(mob/user)
+	if(zoom)
+		unzoom(user)
+	else
+		zoom(user)

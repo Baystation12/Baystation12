@@ -44,14 +44,16 @@
 	var/available_by_default = TRUE
 
 	var/list/possible_goals
-	var/min_goals = 1
-	var/max_goals = 3
+	var/min_goals = 0
+	var/max_goals = 5
 
 	var/defer_roundstart_spawn = FALSE // If true, the job will be put off until all other jobs have been populated.
 	var/list/species_branch_rank_cache_ = list()
 	var/list/psi_faculties                // Starting psi faculties, if any.
 	var/psi_latency_chance = 0            // Chance of an additional psi latency, if any.
 	var/give_psionic_implant_on_join = TRUE // If psionic, will be implanted for control.
+
+	var/use_species_whitelist // If set, restricts the job to players with the given species whitelist. This does NOT restrict characters joining as the job to the species itself.
 
 	var/required_language
 
@@ -87,7 +89,7 @@
 	if(H.psi)
 		H.psi.update()
 		if(give_psionic_implant_on_join)
-			var/obj/item/weapon/implant/psi_control/imp = new
+			var/obj/item/implant/psi_control/imp = new
 			imp.implanted(H)
 			imp.forceMove(H)
 			imp.imp_in = H
@@ -194,7 +196,12 @@
 	return (supplied_title == desired_title) || (H.mind && H.mind.role_alt_title == desired_title)
 
 /datum/job/proc/is_restricted(var/datum/preferences/prefs, var/feedback)
+	var/datum/species/S
 
+	if (!is_species_whitelist_allowed(prefs.client, use_species_whitelist))
+		S = all_species[use_species_whitelist]
+		to_chat(feedback, "<span class='boldannounce'>\An [S] species whitelist is required for [title].</span>")
+		return TRUE
 
 	if(!isnull(allowed_branches) && (!prefs.branches[title] || !is_branch_allowed(prefs.branches[title])))
 		to_chat(feedback, "<span class='boldannounce'>Wrong branch of service for [title]. Valid branches are: [get_branches()].</span>")
@@ -204,7 +211,7 @@
 		to_chat(feedback, "<span class='boldannounce'>Wrong rank for [title]. Valid ranks in [prefs.branches[title]] are: [get_ranks(prefs.branches[title])].</span>")
 		return TRUE
 
-	var/datum/species/S = all_species[prefs.species]
+	S = all_species[prefs.species]
 	if(!is_species_allowed(S))
 		to_chat(feedback, "<span class='boldannounce'>Restricted species, [S], for [title].</span>")
 		return TRUE
@@ -246,6 +253,14 @@
 	if(!allowed_branches || !GLOB.using_map || !(GLOB.using_map.flags & MAP_HAS_BRANCH))
 		return TRUE
 	return LAZYLEN(get_branch_rank(S))
+
+/datum/job/proc/is_species_whitelist_allowed(client/C)
+	if (isnull(use_species_whitelist))
+		return TRUE
+	if (!C?.mob)
+		log_debug("Failed to find a valid client/mob for whitelist checking - Job `[src]` - Client `[C]` - Mob `[C?.mob]`")
+		return FALSE
+	return is_species_whitelisted(C.mob, use_species_whitelist)
 
 // Don't use if the map doesn't use branches but jobs do.
 /datum/job/proc/get_branch_rank(var/datum/species/S)
@@ -364,6 +379,8 @@
 		reasons["Your branch of service does not allow it."] = TRUE
 	else if(!isnull(allowed_ranks) && (!caller.prefs.ranks[title] || !is_rank_allowed(caller.prefs.branches[title], caller.prefs.ranks[title])))
 		reasons["Your rank choice does not allow it."] = TRUE
+	if (!is_species_whitelist_allowed(caller))
+		reasons["You do not have the required [use_species_whitelist] species whitelist."] = TRUE
 	var/datum/species/S = all_species[caller.prefs.species]
 	if(S)
 		if(!is_species_allowed(S))

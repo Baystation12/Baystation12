@@ -12,7 +12,7 @@
 	nanomodule_path = /datum/nano_module/program/comm
 	extended_desc = "Used to command and control. Can relay long-range communications. This program can not be run on tablet computers."
 	required_access = access_bridge
-	requires_ntnet = 1
+	requires_ntnet = TRUE
 	size = 12
 	usage_flags = PROGRAM_CONSOLE | PROGRAM_LAPTOP
 	network_destination = "long-range communication array"
@@ -45,9 +45,9 @@
 
 	var/list/data = host.initial_data()
 
-	if(program)
-		data["net_comms"] = !!program.get_signal(NTNET_COMMUNICATION) //Double !! is needed to get 1 or 0 answer
-		data["net_syscont"] = !!program.get_signal(NTNET_SYSTEMCONTROL)
+	if(program && program.computer)
+		data["net_comms"] = program.computer.get_ntnet_capability(NTNET_COMMUNICATION)
+		data["net_syscont"] = program.computer.get_ntnet_capability(NTNET_SYSTEMCONTROL)
 		if(program.computer)
 			data["emagged"] = program.computer.emagged()
 			data["have_printer"] =  program.computer.has_component(PART_PRINTER)
@@ -110,7 +110,7 @@
 /datum/nano_module/program/comm/proc/is_autenthicated(var/mob/user)
 	if(program)
 		return program.can_run(user)
-	return 1
+	return TRUE
 
 /datum/nano_module/program/comm/proc/obtain_message_listener()
 	if(program)
@@ -120,36 +120,36 @@
 
 /datum/nano_module/program/comm/Topic(href, href_list)
 	if(..())
-		return 1
+		return TOPIC_HANDLED
 	var/mob/user = usr
-	var/ntn_comm = program ? !!program.get_signal(NTNET_COMMUNICATION) : 1
-	var/ntn_cont = program ? !!program.get_signal(NTNET_SYSTEMCONTROL) : 1
+	var/ntn_comm = (program && program.computer) ? program.computer.get_ntnet_capability(NTNET_COMMUNICATION) : TRUE
+	var/ntn_cont = (program && program.computer) ? program.computer.get_ntnet_capability(NTNET_SYSTEMCONTROL) : TRUE
 	var/datum/comm_message_listener/l = obtain_message_listener()
 	switch(href_list["action"])
 		if("sw_menu")
-			. = TRUE
+			. = TOPIC_HANDLED
 			current_status = text2num(href_list["target"])
 		if("announce")
-			. = TRUE
+			. = TOPIC_HANDLED
 			if(is_autenthicated(user) && !issilicon(usr) && ntn_comm)
 				if(user)
-					var/obj/item/weapon/card/id/id_card = user.GetIdCard()
+					var/obj/item/card/id/id_card = user.GetIdCard()
 					crew_announcement.announcer = GetNameAndAssignmentFromId(id_card)
 				else
 					crew_announcement.announcer = "Unknown"
 				if(announcment_cooldown)
 					to_chat(usr, "Please allow at least one minute to pass between announcements")
-					return TRUE
+					return
 				var/input = input(usr, "Please write a message to announce to the [station_name()].", "Priority Announcement") as null|message
 				if(!input || !can_still_topic())
-					return 1
+					return
 				var/affected_zlevels = GetConnectedZlevels(get_host_z())
 				crew_announcement.Announce(input, zlevels = affected_zlevels)
 				announcment_cooldown = 1
 				spawn(600)//One minute cooldown
 					announcment_cooldown = 0
 		if("message")
-			. = TRUE
+			. = TOPIC_HANDLED
 			if(href_list["target"] == "emagged")
 				if(program)
 					if(is_autenthicated(user) && program.computer.emagged() && !issilicon(usr) && ntn_comm)
@@ -159,7 +159,7 @@
 							return
 						var/input = sanitize(input(usr, "Please choose a message to transmit to \[ABNORMAL ROUTING CORDINATES\] via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination. Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", "") as null|text)
 						if(!input || !can_still_topic())
-							return 1
+							return
 						Syndicate_announce(input, usr)
 						to_chat(usr, "<span class='notice'>Message transmitted.</span>")
 						log_say("[key_name(usr)] has made an illegal announcement: [input]")
@@ -174,10 +174,10 @@
 						return
 					if(!is_relay_online())//Contact Centcom has a check, Syndie doesn't to allow for Traitor funs.
 						to_chat(usr, "<span class='warning'>No Emergency Bluespace Relay detected. Unable to transmit message.</span>")
-						return 1
+						return
 					var/input = sanitize(input("Please choose a message to transmit to [GLOB.using_map.boss_short] via quantum entanglement.  Please be aware that this process is very expensive, and abuse will lead to... termination.  Transmission does not guarantee a response. There is a 30 second delay before you may send another message, be clear, full and concise.", "To abort, send an empty message.", "") as null|text)
 					if(!input || !can_still_topic())
-						return 1
+						return
 					Centcomm_announce(input, usr)
 					to_chat(usr, "<span class='notice'>Message transmitted.</span>")
 					log_say("[key_name(usr)] has made an IA [GLOB.using_map.boss_short] announcement: [input]")
@@ -185,7 +185,7 @@
 					spawn(300) //30 second cooldown
 						centcomm_message_cooldown = 0
 		if("evac")
-			. = TRUE
+			. = TOPIC_HANDLED
 			if(is_autenthicated(user))
 				var/datum/evacuation_option/selected_evac_option = evacuation_controller.evacuation_options[href_list["target"]]
 				if (isnull(selected_evac_option) || !istype(selected_evac_option))
@@ -198,7 +198,7 @@
 				if (confirm == "Yes" && can_still_topic())
 					evacuation_controller.handle_evac_option(selected_evac_option.option_target, user)
 		if("setstatus")
-			. = TRUE
+			. = TOPIC_HANDLED
 			if(is_autenthicated(user) && ntn_cont)
 				switch(href_list["target"])
 					if("line1")
@@ -216,7 +216,7 @@
 					else
 						post_status(href_list["target"])
 		if("setalert")
-			. = TRUE
+			. = TOPIC_HANDLED
 			if(is_autenthicated(user) && !issilicon(usr) && ntn_cont && ntn_comm)
 				var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
 				var/decl/security_level/target_level = locate(href_list["target"]) in security_state.comm_console_security_levels
@@ -230,7 +230,7 @@
 
 			current_status = STATE_DEFAULT
 		if("viewmessage")
-			. = TRUE
+			. = TOPIC_HANDLED
 			if(is_autenthicated(user) && ntn_comm)
 				current_viewing_message_id = text2num(href_list["target"])
 				for(var/list/m in l.messages)
@@ -238,12 +238,12 @@
 						current_viewing_message = m
 				current_status = STATE_VIEWMESSAGE
 		if("delmessage")
-			. = TRUE
+			. = TOPIC_HANDLED
 			if(is_autenthicated(user) && ntn_comm && l != global_message_listener)
 				l.Remove(current_viewing_message)
 			current_status = STATE_MESSAGELIST
 		if("printmessage")
-			. = TRUE
+			. = TOPIC_HANDLED
 			if(is_autenthicated(user) && ntn_comm)
 				if(!program.computer.print_paper(current_viewing_message["contents"],current_viewing_message["title"]))
 					to_chat(usr, "<span class='notice'>Hardware Error: Printer was unable to print the selected file.</span>")
@@ -254,7 +254,7 @@
 			GLOB.using_map.bolt_saferooms()
 			to_chat(usr, "<span class='notice'>The console beeps, confirming the signal was sent to have the saferooms bolted.</span>")
 		if("toggle_alert_border")
-			. = TRUE
+			. = TOPIC_HANDLED
 			if(is_autenthicated(user) && ntn_comm)
 				post_status("toggle_alert_border")
 

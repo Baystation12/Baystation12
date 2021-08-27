@@ -3,9 +3,9 @@
 	desc = "A hollow space used to insert nuclear cylinders for arming the self destruct."
 	icon = 'icons/obj/machines/self_destruct.dmi'
 	icon_state = "empty"
-	density = 0
-	anchored = 1
-	var/obj/item/weapon/nuclear_cylinder/cylinder
+	density = FALSE
+	anchored = TRUE
+	var/obj/item/nuclear_cylinder/cylinder
 	var/armed = 0
 	var/damaged = 0
 
@@ -14,14 +14,14 @@
 		if(damaged)
 			user.visible_message("[user] begins to repair [src].", "You begin repairing [src].")
 			if(do_after(usr, 100, src))
-				var/obj/item/weapon/weldingtool/w
+				var/obj/item/weldingtool/w
 				if(w.burn_fuel(10))
 					damaged = 0
 					user.visible_message("[user] repairs [src].", "You repair [src].")
 				else
 					to_chat(user, "<span class='warning'>There is not enough fuel to repair [src].</span>")
 				return
-	if(istype(W, /obj/item/weapon/nuclear_cylinder))
+	if(istype(W, /obj/item/nuclear_cylinder))
 		if(damaged)
 			to_chat(user, "<span class='warning'>[src] is damaged, you cannot place the cylinder.</span>")
 			return
@@ -31,7 +31,7 @@
 		user.visible_message("[user] begins to carefully place [W] onto the Inserter.", "You begin to carefully place [W] onto the Inserter.")
 		if(do_after(user, 80, src) && user.unEquip(W, src))
 			cylinder = W
-			density = 1
+			set_density(TRUE)
 			user.visible_message("[user] places [W] onto the Inserter.", "You place [W] onto the Inserter.")
 			update_icon()
 			return
@@ -55,13 +55,13 @@
 			if(do_after(user, 40, src))
 				user.visible_message("[user] extracts [cylinder].", "You extract [cylinder].")
 				armed = 0
-				density = 1
+				set_density(TRUE)
 				flick("unloading", src)
 		else if(!damaged)
 			user.visible_message("[user] begins to arm [cylinder].", "You begin to arm [cylinder].")
 			if(do_after(user, 40, src))
 				armed = 1
-				density = 0
+				set_density(FALSE)
 				user.visible_message("[user] arms [cylinder].", "You arm [cylinder].")
 				flick("loading", src)
 				playsound(src.loc,'sound/effects/caution.ogg',50,1,5)
@@ -79,7 +79,7 @@
 			if(do_after(usr, 70, src))
 				usr.put_in_hands(cylinder)
 				usr.visible_message("[usr] picks up [cylinder].", "You pick up [cylinder].")
-				density = 0
+				set_density(FALSE)
 				cylinder = null
 		update_icon()
 		src.add_fingerprint(usr)

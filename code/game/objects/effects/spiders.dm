@@ -3,8 +3,8 @@
 	name = "web"
 	desc = "It's stringy and sticky."
 	icon = 'icons/effects/effects.dmi'
-	anchored = 1
-	density = 0
+	anchored = TRUE
+	density = FALSE
 	var/health = 15
 
 //similar to weeds, but only barfed out by nurses manually
@@ -20,7 +20,7 @@
 				qdel(src)
 	return
 
-/obj/effect/spider/attackby(var/obj/item/weapon/W, var/mob/user)
+/obj/effect/spider/attackby(var/obj/item/W, var/mob/user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 
 	if(W.attack_verb.len)
@@ -34,7 +34,7 @@
 		damage += 5
 
 	if(isWelder(W))
-		var/obj/item/weapon/weldingtool/WT = W
+		var/obj/item/weldingtool/WT = W
 
 		if(WT.remove_fuel(0, user))
 			damage = 15
@@ -98,7 +98,7 @@
 	. = ..()
 
 /obj/effect/spider/eggcluster/Process()
-	if(prob(80))
+	if(prob(70))
 		amount_grown += rand(0,2)
 	if(amount_grown >= 100)
 		var/num = rand(3,9)
@@ -116,7 +116,7 @@
 	name = "spiderling"
 	desc = "It never stays still for long."
 	icon_state = "guard"
-	anchored = 0
+	anchored = FALSE
 	layer = BELOW_OBJ_LAYER
 	health = 3
 	var/mob/living/simple_animal/hostile/giant_spider/greater_form
@@ -129,10 +129,10 @@
 
 	var/shift_range = 6
 	var/castes = list(/mob/living/simple_animal/hostile/giant_spider = 2,
-					  /mob/living/simple_animal/hostile/giant_spider/guard = 2,
-					  /mob/living/simple_animal/hostile/giant_spider/nurse = 2,
-					  /mob/living/simple_animal/hostile/giant_spider/spitter = 2,
-					  /mob/living/simple_animal/hostile/giant_spider/hunter = 1)
+						/mob/living/simple_animal/hostile/giant_spider/guard = 2,
+						/mob/living/simple_animal/hostile/giant_spider/nurse = 2,
+						/mob/living/simple_animal/hostile/giant_spider/spitter = 2,
+						/mob/living/simple_animal/hostile/giant_spider/hunter = 1)
 
 /obj/effect/spider/spiderling/Initialize(var/mapload, var/atom/parent)
 	greater_form = pickweight(castes)
@@ -165,7 +165,7 @@
 	walk(src, 0) // Because we might have called walk_to, we must stop the walk loop or BYOND keeps an internal reference to us forever.
 	. = ..()
 
-/obj/effect/spider/spiderling/attackby(var/obj/item/weapon/W, var/mob/user)
+/obj/effect/spider/spiderling/attackby(var/obj/item/W, var/mob/user)
 	..()
 	if(health > 0)
 		disturbed()
@@ -304,7 +304,7 @@
 	desc = "Green squishy mess."
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "greenshatter"
-	anchored = 1
+	anchored = TRUE
 	layer = BLOOD_LAYER
 
 /obj/effect/spider/cocoon

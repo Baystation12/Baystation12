@@ -1095,10 +1095,10 @@
 	icon_state = "locker"
 	req_access = list(access_medical_equip)
 
-/area/medical/physicianoffice
-	name = "\improper Physician's Paperwork Office"
+/area/medical/medpaperworkoffice
+	name = "\improper Medical Paperwork Office"
 	icon_state = "locker"
-	req_access = list(access_senmed)
+	req_access = list(access_medical)
 
 /area/medical/washroom
 	name = "\improper Medical Washroom"
@@ -1615,6 +1615,11 @@ area/assembly/robotics/office
 /area/chapel/office
 	name = "\improper Chaplain's Office"
 	req_access = list(access_chapel_office)
+	color = COLOR_GRAY80
+	sound_env = SMALL_SOFTFLOOR
+
+/area/chapel/memorial
+	name = "\improper Memorial Room"
 	color = COLOR_GRAY80
 	sound_env = SMALL_SOFTFLOOR
 

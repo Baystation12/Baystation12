@@ -28,13 +28,12 @@
 	if(!input)
 		return
 
-	if(max_length)
-		//testing shows that just looking for > max_length alone will actually cut off the final character if message is precisely max_length, so >= instead
-		if(length(input) >= max_length)
-			var/overflow = ((length(input)+1) - max_length)
-			to_chat(usr, "<span class='warning'>Your message is too long by [overflow] character\s.</span>")
+	if (max_length)
+		var/len = length_char(input)
+		if (len > max_length)
+			to_chat(usr, SPAN_WARNING("Your message is too long by [len - max_length] char\s."))
 			return
-		input = copytext(input,1,max_length)
+		input = copytext_char(input, 1, max_length + 1)
 
 	if(extra)
 		input = replace_characters(input, list("\n"=" ","\t"=" "))
@@ -230,13 +229,13 @@
 // Adds the required amount of 'character' in front of 'text' to extend the lengh to 'desired_length', if it is shorter
 // No consideration are made for a multi-character 'character' input
 /proc/pad_left(text, desired_length, character)
-	var/padding = generate_padding(length(text), desired_length, character)
+	var/padding = generate_padding(length_char(text), desired_length, character)
 	return length(padding) ? "[padding][text]" : text
 
 // Adds the required amount of 'character' after 'text' to extend the lengh to 'desired_length', if it is shorter
 // No consideration are made for a multi-character 'character' input
 /proc/pad_right(text, desired_length, character)
-	var/padding = generate_padding(length(text), desired_length, character)
+	var/padding = generate_padding(length_char(text), desired_length, character)
 	return length(padding) ? "[text][padding]" : text
 
 /proc/generate_padding(current_length, desired_length, character)
@@ -256,7 +255,7 @@
 
 //Returns a string with reserved characters and spaces after the last letter removed
 /proc/trim_right(text)
-	for (var/i = length(text), i > 0, i--)
+	for (var/i = length(text) to 1 step -1)
 		if (text2ascii(text, i) > 32)
 			return copytext_char(text, 1, i + 1)
 	return ""
@@ -266,8 +265,8 @@
 	return trim_left(trim_right(text))
 
 //Returns a string with the first element of the string capitalized.
-/proc/capitalize(var/t as text)
-	return uppertext(copytext_char(t, 1, 2)) + copytext_char(t, 2)
+/proc/capitalize(text)
+	return uppertext(copytext_char(text, 1, 2)) + copytext_char(text, 2)
 
 //This proc strips html properly, remove < > and all text between
 //for complete text sanitizing should be used sanitize()
@@ -327,11 +326,10 @@
 			count++
 	return count
 
-/proc/reverse_text(var/text = "")
-	var/new_text = ""
-	for(var/i = length(text); i > 0; i--)
-		new_text += copytext(text, i, i+1)
-	return new_text
+/proc/reverse_text(text)
+	. = ""
+	for (var/i = length_char(text) to 1 step -1)
+		. += copytext_char(text, i, i + 1)
 
 //Used in preferences' SetFlavorText and human's set_flavor verb
 //Previews a string of len or less length
@@ -376,7 +374,8 @@ proc/TextPreview(var/string,var/len=40)
 		. += ascii2text(letter)
 	. = jointext(.,null)
 
-#define starts_with(string, substring) (copytext(string,1,1+length(substring)) == substring)
+#define text_starts_with(string, substring) !!findtext_char((string), (substring), 1, 1 + length_char(substring))
+#define text_ends_with(string, substring) !!findtext_char((string), (substring), -length_char(substring))
 
 #define gender2text(gender) capitalize(gender)
 
@@ -568,7 +567,7 @@ proc/TextPreview(var/string,var/len=40)
 // If char isn't part of the text the entire text is returned
 /proc/copytext_after_last(var/text, var/char)
 	var/regex/R = regex("(\[^[char]\]*)$")
-	R.Find(text)
+	regex_find(R, text)
 	return R.group[1]
 
 /proc/sql_sanitize_text(var/text)
@@ -582,10 +581,10 @@ proc/TextPreview(var/string,var/len=40)
 	return "[result]" == text ? result : default
 
 /proc/text2regex(text)
-	var/end = findlasttext(text, "/")
-	if (end > 2 && length(text) > 2 && text[1] == "/")
-		var/flags = end == length(text) ? FALSE : copytext(text, end + 1)
-		var/matcher = copytext(text, 2, end)
+	var/end = findlasttext_char(text, "/")
+	if (end > 2 && length_char(text) > 2 && copytext_char(text, 1, 2) == "/")
+		var/flags = end == length_char(text) ? FALSE : copytext_char(text, end + 1)
+		var/matcher = copytext_char(text, 2, end)
 		try
 			return flags ? regex(matcher, flags) : regex(matcher)
 		catch()
@@ -595,5 +594,5 @@ proc/TextPreview(var/string,var/len=40)
 	if (message && length(config.chat_markup))
 		for (var/list/entry in config.chat_markup)
 			var/regex/matcher = entry[1]
-			message = matcher.Replace(message, entry[2])
+			message = replacetext_char(message, matcher, entry[2])
 	return message

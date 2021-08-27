@@ -37,7 +37,8 @@
 	id = "awaysite_verne"
 	description = "Active CTI research ship"
 	suffixes = list("verne/verne-1.dmm", "verne/verne-2.dmm", "verne/verne-3.dmm")
-	cost = 2
+	spawn_cost = 2
+	player_cost = 4
 	spawn_weight = 0.33
 	area_usage_test_exempted_root_areas = list(/area/verne)
 	shuttles_to_initialise = list(
@@ -61,7 +62,7 @@
 	desc = "Verne Access"
 	region = ACCESS_REGION_NONE
 
-/obj/item/weapon/card/id/verne
+/obj/item/card/id/verne
 	access = list(access_verne)
 
 /obj/machinery/alarm/verne
@@ -69,12 +70,7 @@
 
 /obj/machinery/power/apc/verne
 	req_access = list(access_verne)
-	cell_type = /obj/item/weapon/cell/hyper
-
-/obj/machinery/power/supermatter/randomsample
-	name = "experimental supermatter sample"
-	icon_state = "darkmatter_shard"
-	base_icon_state = "darkmatter_shard"
+	cell_type = /obj/item/cell/hyper
 
 /obj/machinery/power/supermatter/randomsample
 	name = "experimental supermatter sample"
@@ -125,13 +121,13 @@
 	reagent_state = LIQUID
 	color = "#ffc4ff"
 
-/obj/item/weapon/reagent_containers/glass/bottle/tericadone
+/obj/item/reagent_containers/glass/bottle/tericadone
 	name = "tericadone bottle"
 	desc = "A small bottle."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-3"
 
-/obj/item/weapon/reagent_containers/glass/bottle/tericadone/New()
+/obj/item/reagent_containers/glass/bottle/tericadone/New()
 	..()
 	reagents.add_reagent(/datum/reagent/toxin/phoron/safe , 60)
 	update_icon()
@@ -184,8 +180,8 @@
 
 /obj/machinery/power/smes/buildable/preset/verne
 	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/smes_coil/super_io = 2,
-		/obj/item/weapon/stock_parts/smes_coil/super_capacity = 2,
+		/obj/item/stock_parts/smes_coil/super_io = 2,
+		/obj/item/stock_parts/smes_coil/super_capacity = 2,
 	)
 	_input_maxed = TRUE
 	_output_maxed = TRUE
@@ -195,8 +191,8 @@
 
 /obj/machinery/power/smes/buildable/preset/verne/shuttle
 	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/smes_coil/super_io = 1,
-		/obj/item/weapon/stock_parts/smes_coil/super_capacity = 1,
+		/obj/item/stock_parts/smes_coil/super_io = 1,
+		/obj/item/stock_parts/smes_coil/super_capacity = 1,
 	)
 	_input_maxed = TRUE
 	_output_maxed = TRUE
@@ -204,7 +200,7 @@
 	_output_on = TRUE
 	_fully_charged = TRUE
 
-/obj/item/weapon/paper/verne
+/obj/item/paper/verne
 	name = "power usage"
 	info = "Verne Pilots and Engineers, remember to turn off the thrusters when you're done with maneuvers.\
 	<BR>Power usage settles at 137 kW with them off, just under the ICRER-2 150 kW standard operating range.\
@@ -214,7 +210,7 @@
 	<BR>If it explodes, you'll totally destroy the aft Engineering Stack, stranding us. \
 	<BR><b>Your follow up to this matter is required and appreciated.</b>"
 
-/obj/item/weapon/paper/verne/manifest
+/obj/item/paper/verne/manifest
 	name = "crew manifest"
 	info = "<center>\<b>SRV Verne</b><br>\
 			Crew roster</center><br>\
@@ -254,7 +250,7 @@
 			\[*]Survey Team Cyrenica, B2 Shift: 2 Students, 2 Employees.\
 			\[/list]"
 
-/obj/item/weapon/paper/verne/briefing
+/obj/item/paper/verne/briefing
 	name = "Survey Team Cyrenica briefing"
 	info = "Good waking, Survey Team Cyrenica.<BR>\
 		Dr. Schoonhoven and I have been negotiating the routing we intended to take the SRV Verne for this expedition.<BR>\

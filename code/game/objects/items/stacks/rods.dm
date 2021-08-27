@@ -12,6 +12,7 @@
 	throw_speed = 5
 	throw_range = 20
 	max_amount = 100
+	base_parry_chance = 15
 	attack_verb = list("hit", "bludgeoned", "whacked")
 	lock_picking_level = 3
 	matter_multiplier = 0.5
@@ -41,7 +42,7 @@
 
 /obj/item/stack/material/rods/attackby(obj/item/W as obj, mob/user as mob)
 	if(isWelder(W))
-		var/obj/item/weapon/weldingtool/WT = W
+		var/obj/item/weldingtool/WT = W
 
 		if(!can_use(2))
 			to_chat(user, "<span class='warning'>You need at least two rods to do this.</span>")
@@ -60,7 +61,7 @@
 				user.put_in_hands(new_item)
 		return
 
-	if (istype(W, /obj/item/weapon/tape_roll))
+	if (istype(W, /obj/item/tape_roll))
 		var/obj/item/stack/medical/splint/ghetto/new_splint = new(user.loc)
 		new_splint.dropInto(loc)
 		new_splint.add_fingerprint(user)

@@ -14,7 +14,7 @@
 	maxHealth = 60
 	available_maneuvers = list(/decl/maneuver/leap)
 	status_flags = NO_ANTAG
-	density = 0
+	density = FALSE
 
 
 	language = LANGUAGE_ROOTLOCAL
@@ -28,7 +28,7 @@
 	can_pull_size = ITEM_SIZE_SMALL
 	can_pull_mobs = MOB_PULL_SMALLER
 
-	holder_type = /obj/item/weapon/holder/diona
+	holder_type = /obj/item/holder/diona
 	possession_candidate = 1
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT
 	hud_type = /datum/hud/diona_nymph
@@ -102,7 +102,7 @@
 	if(prob(emote_prob))
 		D.emote(pick("scratch","jump","chirp","tail"))
 
-/proc/split_into_nymphs(var/mob/living/carbon/human/donor)
+/proc/split_into_nymphs(var/mob/living/carbon/human/donor, dying)
 
 	if(!donor || donor.species.name != SPECIES_DIONA)
 		return
@@ -149,4 +149,5 @@
 		donor.drop_from_inventory(W)
 
 	donor.visible_message("<span class='warning'>\The [donor] quivers slightly, then splits apart with a wet slithering noise.</span>")
-	qdel(donor)
+	if (!dying)
+		qdel(donor)

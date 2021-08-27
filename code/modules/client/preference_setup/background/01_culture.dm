@@ -18,12 +18,15 @@
 	name = "Culture"
 	sort_order = 1
 	var/list/hidden
+	var/list/expanded
 	var/list/tokens = ALL_CULTURAL_TAGS
 
 /datum/category_item/player_setup_item/background/culture/New()
 	hidden = list()
+	expanded = list()
 	for(var/token in tokens)
 		hidden[token] = TRUE
+		expanded[token] = FALSE
 	..()
 
 /datum/category_item/player_setup_item/background/culture/sanitize_character()
@@ -53,9 +56,27 @@
 	. = list()
 	for(var/token in tokens)
 		var/decl/cultural_info/culture = SSculture.get_culture(pref.cultural_info[token])
-		var/title = "<b>[tokens[token]]<a href='?src=\ref[src];set_[token]=1'><small>?</small></a>:</b><a href='?src=\ref[src];set_[token]=2'>[pref.cultural_info[token]]</a>"
+		var/title = "<a href='?src=\ref[src];expand_options_[token]=1'>[tokens[token]]</a><b>- </b>[pref.cultural_info[token]]"
 		var/append_text = "<a href='?src=\ref[src];toggle_verbose_[token]=1'>[hidden[token] ? "Expand" : "Collapse"]</a>"
 		. += culture.get_description(title, append_text, verbose = !hidden[token])
+		if (expanded[token])
+			var/list/valid_values
+			GET_ALLOWED_VALUES(valid_values, token)
+			if (!hidden[token])
+				. += "<br>"
+			. += "<table width=100%><tr><td colspan=3>"
+			for (var/V in valid_values)
+				// this is yucky but we need to do it because, right now, the culture subsystem references decls by their string names
+				// html_encode() doesn't properly sanitize + symbols, otherwise we could just use that
+				// instead, we manually rip out the plus symbol and then replace it on OnTopic
+				var/sanitized_value = html_encode(replacetext(V, "+", "PLUS"))
+				
+				if (pref.cultural_info[token] == V)
+					. += "<span class='linkOn'>[V]</span> "
+				else
+					. += "<a href='?src=\ref[src];set_token_entry_[token]=[sanitized_value]'>[V]</a> "
+			. += "</table>"
+		. += "<hr>"
 	. = jointext(.,null)
 
 /datum/category_item/player_setup_item/background/culture/OnTopic(var/href,var/list/href_list, var/mob/user)
@@ -65,33 +86,16 @@
 		if(href_list["toggle_verbose_[token]"])
 			hidden[token] = !hidden[token]
 			return TOPIC_REFRESH
+		
+		if(href_list["expand_options_[token]"])
+			expanded[token] = !expanded[token]
+			return TOPIC_REFRESH
 
-		var/check_href = text2num(href_list["set_[token]"])
-		if(check_href > 0)
-
-			var/list/valid_values
-			if(check_href == 1)
-				valid_values = SSculture.get_all_entries_tagged_with(token)
-			else
-				GET_ALLOWED_VALUES(valid_values, token)
-
-			var/choice = input("Please select an entry.") as null|anything in valid_values
-			if(!choice)
-				return
-
-			// Check if anything changed between now and then.
-			if(check_href == 1)
-				valid_values = SSculture.get_all_entries_tagged_with(token)
-			else
-				GET_ALLOWED_VALUES(valid_values, token)
-
-			if(valid_values[choice])
-				var/decl/cultural_info/culture = SSculture.get_culture(choice)
-				if(check_href == 1)
-					show_browser(user, culture.get_description(), "window=[token];size=700x400")
-				else
-					pref.cultural_info[token] = choice
-				return TOPIC_REFRESH
+		var/new_token = href_list["set_token_entry_[token]"]
+		if (!isnull(new_token))
+			pref.cultural_info[token] = html_decode(replacetext(new_token, "PLUS", "+"))
+			return TOPIC_REFRESH
+			
 	. = ..()
 
 #undef GET_ALLOWED_VALUES

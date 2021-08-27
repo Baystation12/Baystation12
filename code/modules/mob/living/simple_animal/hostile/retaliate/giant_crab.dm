@@ -5,10 +5,6 @@
 	icon_living = "bluecrab"
 	icon_dead = "bluecrab_dead"
 	mob_size = MOB_LARGE
-	speak_emote = list("clicks")
-	emote_hear = list("clicks")
-	emote_see = list("clacks")
-	speak_chance = 1
 	turns_per_move = 5
 	response_help  = "pats"
 	response_disarm = "gently nudges"
@@ -16,19 +12,17 @@
 	meat_amount = 12
 	can_escape = TRUE //snip snip
 	break_stuff_probability = 15
-	attacktext = "crushed"
 	faction = "crabs"
 	pry_time = 2 SECONDS
 
 	health = 350
 	maxHealth = 350
-	melee_damage_lower = 15
-	melee_damage_upper = 18
+	natural_weapon = /obj/item/natural_weapon/pincers/giant
 	return_damage_min = 2
 	return_damage_max = 5
 	harm_intent_damage = 1
 	natural_armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
+		melee = ARMOR_MELEE_RESISTANT,
 		bullet = ARMOR_BALLISTIC_PISTOL
 		)
 	ability_cooldown = 2 MINUTES
@@ -38,6 +32,13 @@
 	var/grab_damage = 6 //brute damage before reductions, per crab's life tick
 	var/list/grab_desc = list("thrashes", "squeezes", "crushes")
 	var/continue_grab_prob = 35 //probability that a successful grab will be extended by one life tick
+
+	ai_holder_type = /datum/ai_holder/simple_animal/retaliate/crab
+	say_list_type = /datum/say_list/crab
+
+/obj/item/natural_weapon/pincers/giant
+	force = 15
+	attack_verb = list("snipped", "pinched", "crushed")
 
 /mob/living/simple_animal/hostile/retaliate/giant_crab/Initialize() //embiggen
 	. = ..()
@@ -60,38 +61,17 @@
 
 	if(!.)
 		return FALSE
-	
-	if((health > maxHealth / 1.5) && enemies.len && prob(10))
+
+	if((health > maxHealth / 1.5) && length(ai_holder.attackers) && prob(10))
 		if(victim)
 			release_grab()
-		enemies = list()
-		LoseTarget()
+		ai_holder.attackers = list() //TODO: does this still work?
+		ai_holder.lose_target()
 		visible_message("<span class='notice'>\The [src] lowers its pincer.</span>")
 
-/mob/living/simple_animal/hostile/retaliate/giant_crab/AttackingTarget()
+/mob/living/simple_animal/hostile/retaliate/giant_crab/can_special_attack(mob/living/carbon/human/H)
 	. = ..()
-	if(ishuman(.))
-		var/mob/living/carbon/human/H = .
-		if(victim == H)
-			if(!Adjacent(victim))
-				release_grab()
-			else if(prob(continue_grab_prob))
-				H.Weaken(1)
-				H.Stun(1)
-				grab_damage++
-				visible_message(SPAN_MFAUNA("\The [src] tightens its grip on \the [victim]!"))
-				return
 
-		if(!victim && can_perform_ability(H))
-			GLOB.destroyed_event.register(victim, src, .proc/release_grab)
-			victim = H
-			H.Weaken(grab_duration)
-			H.Stun(grab_duration)
-			visible_message(SPAN_MFAUNA("\The [src] catches \the [victim] in its powerful pincer!"))
-			stop_automation = TRUE
-
-/mob/living/simple_animal/hostile/retaliate/giant_crab/can_perform_ability(mob/living/carbon/human/H)
-	. = ..()
 	if(!.)
 		return FALSE
 	if(!Adjacent(H))
@@ -110,6 +90,32 @@
 		visible_message(SPAN_NOTICE("\The [src] releases its grip on \the [victim]!"))
 		GLOB.destroyed_event.unregister(victim)
 		victim = null
-	cooldown_ability(ability_cooldown)
-	stop_automation = FALSE
+	// cooldown_ability(ability_cooldown)
+	set_AI_busy(FALSE)
 	grab_damage = initial(grab_damage)
+
+
+/datum/ai_holder/simple_animal/retaliate/crab/engage_target()
+	. = ..()
+	var/mob/living/simple_animal/hostile/retaliate/giant_crab/C = holder
+	if(ishuman(.))
+		var/mob/living/carbon/human/H = .
+		if(C.victim == H)
+			if(!C.Adjacent(C.victim))
+				C.release_grab()
+			else if(prob(C.continue_grab_prob))
+				H.Weaken(1)
+				H.Stun(1)
+				C.grab_damage++
+				C.visible_message(SPAN_MFAUNA("\The [src] tightens its grip on \the [C.victim]!"))
+				return
+
+		if(!C.victim && C.can_special_attack(H))
+			GLOB.destroyed_event.register(C.victim, C, /mob/living/simple_animal/hostile/retaliate/giant_crab/proc/release_grab)
+			C.victim = H
+			H.Weaken(C.grab_duration)
+			H.Stun(C.grab_duration)
+			C.visible_message(SPAN_MFAUNA("\The [src] catches \the [C.victim] in its powerful pincer!"))
+			set_busy(TRUE)
+/datum/ai_holder/simple_animal/retaliate/crab
+	speak_chance = 1

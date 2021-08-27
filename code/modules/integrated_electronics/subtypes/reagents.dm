@@ -517,7 +517,7 @@
 
 /obj/item/integrated_circuit/input/funnel/attackby_react(obj/item/I, mob/living/user, intent)
 	var/atom/movable/target = get_pin_data_as_type(IC_INPUT, 1, /atom/movable)
-	var/obj/item/weapon/reagent_containers/container = I
+	var/obj/item/reagent_containers/container = I
 
 	if(!check_target(target))
 		return FALSE

@@ -1,4 +1,4 @@
-/obj/item/weapon/gun/energy/ionrifle
+/obj/item/gun/energy/ionrifle
 	name = "ion rifle"
 	desc = "The NT Mk60 EW Halicon is a man portable anti-armor weapon designed to disable mechanical threats, produced by NT. Not the best of its type."
 	icon = 'icons/obj/guns/ion_rifle.dmi'
@@ -17,10 +17,10 @@
 	wielded_item_state = "ionrifle-wielded"
 	combustion = 0
 
-/obj/item/weapon/gun/energy/ionrifle/emp_act(severity)
+/obj/item/gun/energy/ionrifle/emp_act(severity)
 	..(max(severity, 2)) //so it doesn't EMP itself, I guess
 
-/obj/item/weapon/gun/energy/ionrifle/small
+/obj/item/gun/energy/ionrifle/small
 	name = "ion pistol"
 	desc = "The NT Mk72 EW Preston is a personal defense weapon designed to disable mechanical threats."
 	icon = 'icons/obj/guns/ion_pistol.dmi'
@@ -35,7 +35,7 @@
 	max_shots = 4
 	projectile_type = /obj/item/projectile/ion/small
 
-/obj/item/weapon/gun/energy/decloner
+/obj/item/gun/energy/decloner
 	name = "biological demolecularisor"
 	desc = "A gun that discharges high amounts of controlled radiation to slowly break a target into component elements."
 	icon = 'icons/obj/guns/decloner.dmi'
@@ -46,7 +46,7 @@
 	projectile_type = /obj/item/projectile/energy/declone
 	combustion = 0
 
-/obj/item/weapon/gun/energy/floragun
+/obj/item/gun/energy/floragun
 	name = "floral somatoray"
 	desc = "A tool that discharges controlled radiation which induces mutation in plant cells."
 	icon = 'icons/obj/guns/floral.dmi'
@@ -67,12 +67,12 @@
 		list(mode_name="induce specific mutations", projectile_type=/obj/item/projectile/energy/floramut/gene, modifystate="floramut"),
 		)
 
-/obj/item/weapon/gun/energy/floragun/resolve_attackby(atom/A)
+/obj/item/gun/energy/floragun/resolve_attackby(atom/A)
 	if(istype(A,/obj/machinery/portable_atmospherics/hydroponics))
 		return FALSE // do afterattack, i.e. fire, at pointblank at trays.
 	return ..()
 
-/obj/item/weapon/gun/energy/floragun/afterattack(obj/target, mob/user, adjacent_flag)
+/obj/item/gun/energy/floragun/afterattack(obj/target, mob/user, adjacent_flag)
 	//allow shooting into adjacent hydrotrays regardless of intent
 	if(adjacent_flag && istype(target,/obj/machinery/portable_atmospherics/hydroponics))
 		user.visible_message("<span class='danger'>\The [user] fires \the [src] into \the [target]!</span>")
@@ -80,7 +80,7 @@
 		return
 	..()
 
-/obj/item/weapon/gun/energy/floragun/verb/select_gene()
+/obj/item/gun/energy/floragun/verb/select_gene()
 	set name = "Select Gene"
 	set category = "Object"
 	set src in view(1)
@@ -96,13 +96,13 @@
 
 	return
 
-/obj/item/weapon/gun/energy/floragun/consume_next_projectile()
+/obj/item/gun/energy/floragun/consume_next_projectile()
 	. = ..()
 	var/obj/item/projectile/energy/floramut/gene/G = .
 	if(istype(G))
 		G.gene = gene
 
-/obj/item/weapon/gun/energy/meteorgun
+/obj/item/gun/energy/meteorgun
 	name = "meteor gun"
 	desc = "For the love of god, make sure you're aiming this the right way!"
 	icon = 'icons/obj/guns/launchers.dmi'
@@ -111,13 +111,13 @@
 	slot_flags = SLOT_BELT|SLOT_BACK
 	w_class = ITEM_SIZE_HUGE
 	projectile_type = /obj/item/projectile/meteor
-	cell_type = /obj/item/weapon/cell/potato
+	cell_type = /obj/item/cell/potato
 	self_recharge = 1
 	recharge_time = 5 //Time it takes for shots to recharge (in ticks)
 	charge_meter = 0
 	combustion = 0
 
-/obj/item/weapon/gun/energy/meteorgun/pen
+/obj/item/gun/energy/meteorgun/pen
 	name = "meteor pen"
 	desc = "The pen is mightier than the sword."
 	icon = 'icons/obj/bureaucracy.dmi'
@@ -126,7 +126,7 @@
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_BELT
 
-/obj/item/weapon/gun/energy/mindflayer
+/obj/item/gun/energy/mindflayer
 	name = "mind flayer"
 	desc = "A custom-built weapon of some kind."
 	icon = 'icons/obj/guns/xray.dmi'
@@ -134,7 +134,7 @@
 	origin_tech = list(TECH_COMBAT = 5, TECH_MAGNET = 4)
 	projectile_type = /obj/item/projectile/beam/mindflayer
 
-/obj/item/weapon/gun/energy/toxgun
+/obj/item/gun/energy/toxgun
 	name = "phoron pistol"
 	desc = "A specialized firearm designed to fire lethal bolts of phoron."
 	icon = 'icons/obj/guns/toxgun.dmi'
@@ -143,7 +143,7 @@
 	origin_tech = list(TECH_COMBAT = 5, TECH_PHORON = 4)
 	projectile_type = /obj/item/projectile/energy/phoron
 
-/obj/item/weapon/gun/energy/plasmacutter
+/obj/item/gun/energy/plasmacutter
 	name = "plasma cutter"
 	desc = "A mining tool capable of expelling concentrated plasma bursts. You could use it to cut limbs off of xenos! Or, you know, mine stuff."
 	charge_meter = 0
@@ -161,24 +161,24 @@
 	self_recharge = 1
 	var/datum/effect/effect/system/spark_spread/spark_system
 
-/obj/item/weapon/gun/energy/plasmacutter/mounted
+/obj/item/gun/energy/plasmacutter/mounted
 	name = "mounted plasma cutter"
 	use_external_power = 1
 	max_shots = 4
 	has_safety = FALSE
 
-/obj/item/weapon/gun/energy/plasmacutter/Initialize()
+/obj/item/gun/energy/plasmacutter/Initialize()
 	. = ..()
 	spark_system = new /datum/effect/effect/system/spark_spread
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
 
-/obj/item/weapon/gun/energy/plasmacutter/Destroy()
+/obj/item/gun/energy/plasmacutter/Destroy()
 	QDEL_NULL(spark_system)
 	return ..()
 
-/obj/item/weapon/gun/energy/plasmacutter/proc/slice(var/mob/M = null)
-	if(!safety() && power_supply.checked_use(charge_cost)) //consumes a shot per use
+/obj/item/gun/energy/plasmacutter/proc/slice(var/mob/M = null)
+	if(!safety())
 		if(M)
 			M.welding_eyecheck()//Welding tool eye check
 			if(check_accidents(M, "[M] loses grip on [src] from its sudden recoil!",SKILL_CONSTRUCTION, 60, SKILL_ADEPT))
@@ -188,7 +188,7 @@
 	handle_click_empty(M)
 	return 0
 
-/obj/item/weapon/gun/energy/incendiary_laser
+/obj/item/gun/energy/incendiary_laser
 	name = "dispersive blaster"
 	desc = "The A&M 'Shayatin' was the first of a class of dispersive laser weapons which, instead of firing a focused beam, scan over a target rapidly with the goal of setting it ablaze."
 	icon = 'icons/obj/guns/incendiary_laser.dmi'

@@ -64,3 +64,8 @@
 	display_name = "high heels, colour select"
 	path = /obj/item/clothing/shoes/heels
 	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/shoes/foamclog
+	display_name = "foam clogs"
+	path = /obj/item/clothing/shoes/foamclog
+	flags = GEAR_HAS_COLOR_SELECTION

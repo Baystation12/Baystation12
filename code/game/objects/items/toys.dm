@@ -57,7 +57,7 @@
 	return
 
 /obj/item/toy/water_balloon/attackby(obj/O as obj, mob/user as mob)
-	if(istype(O, /obj/item/weapon/reagent_containers/glass))
+	if(istype(O, /obj/item/reagent_containers/glass))
 		if(O.reagents)
 			if(O.reagents.total_volume < 1)
 				to_chat(user, "The [O] is empty.")
@@ -232,7 +232,7 @@
 				if (O.client)	O.show_message(text("<span class='danger'>\The [] casually lines up a shot with []'s head, pulls the trigger, then realizes they are out of ammo and drops to the floor in search of some!</span>", user, M), 1, "<span class='warning'>You hear someone fall</span>", 2)
 			user.Weaken(5)
 		return
-		
+
 /obj/item/toy/crossbow/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 2 && bullets)
@@ -251,8 +251,8 @@
 	desc = ""
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "null"
-	anchored = 1
-	density = 0
+	anchored = TRUE
+	density = FALSE
 
 
 /*
@@ -472,7 +472,7 @@
 /obj/item/toy/figure/gardener
 	name = "Gardener action figure"
 	desc = "A \"Space Life\" brand Gardener action figure."
-	icon_state = "botanist"
+	icon_state = "gardener"
 
 /obj/item/toy/figure/captain
 	name = "Captain action figure"
@@ -686,8 +686,8 @@
 	desc = "A very generic plushie. It seems to not want to exist."
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "ianplushie"
-	anchored = 0
-	density = 1
+	anchored = FALSE
+	density = TRUE
 	var/phrase = "I don't want to exist anymore!"
 
 /obj/structure/plushie/attack_hand(mob/user)
@@ -783,7 +783,7 @@
 	w_class = ITEM_SIZE_HUGE
 	attack_verb = list("attacked", "slashed", "stabbed", "poked")
 
-/obj/item/weapon/inflatable_duck
+/obj/item/inflatable_duck
 	name = "inflatable duck"
 	desc = "No bother to sink or swim when you can just float!"
 	icon_state = "inflatable"
@@ -791,7 +791,7 @@
 	icon = 'icons/obj/clothing/obj_belt.dmi'
 	slot_flags = SLOT_BELT
 
-/obj/item/weapon/marshalling_wand
+/obj/item/marshalling_wand
 	name = "marshalling wand"
 	desc = "An illuminated, hand-held baton used by hangar personnel to visually signal shuttle pilots. The signal changes depending on your intent."
 	icon_state = "marshallingwand"
@@ -806,11 +806,11 @@
 	force = 1
 	attack_verb = list("attacked", "whacked", "jabbed", "poked", "marshalled")
 
-/obj/item/weapon/marshalling_wand/Initialize()
+/obj/item/marshalling_wand/Initialize()
 	set_light(0.6, 0.5, 2, 2, "#ff0000")
 	return ..()
 
-/obj/item/weapon/marshalling_wand/attack_self(mob/living/user as mob)
+/obj/item/marshalling_wand/attack_self(mob/living/user as mob)
 	playsound(src.loc, 'sound/effects/rustle1.ogg', 100, 1)
 	if (user.a_intent == I_HELP)
 		user.visible_message("<span class='notice'>[user] beckons with \the [src], signalling forward motion.</span>",
@@ -840,7 +840,7 @@
 	desc = "A bell used to signal the beginning and end of various ring sports."
 	icon = 'icons/obj/toy.dmi'
 	icon_state= "ringbell"
-	anchored = 1
+	anchored = TRUE
 
 /obj/item/toy/ringbell/attack_hand(mob/user as mob)
 	if (user.a_intent == I_HELP)

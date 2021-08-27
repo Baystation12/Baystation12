@@ -15,6 +15,19 @@
 
 	hud_state = "wiz_jaunt"
 
+	var/reappear_duration = 5
+	var/obj/effect/dummy/spell_jaunt/jaunt_holder
+	var/atom/movable/overlay/animation
+
+/spell/targeted/ethereal_jaunt/Destroy()
+	if (jaunt_holder) // eject our user in case something happens and we get deleted
+		var/turf/T = get_turf(jaunt_holder)
+		for(var/mob/living/L in jaunt_holder)
+			L.forceMove(T)
+	QDEL_NULL(jaunt_holder)
+	QDEL_NULL(animation)
+	return ..()
+
 /spell/targeted/ethereal_jaunt/cast(list/targets) //magnets, so mostly hardcoded
 	for(var/mob/living/target in targets)
 		if(HAS_TRANSFORMATION_MOVEMENT_HANDLER(target))
@@ -24,36 +37,38 @@
 			target.buckled.unbuckle_mob()
 		spawn(0)
 			var/mobloc = get_turf(target.loc)
-			var/obj/effect/dummy/spell_jaunt/holder = new /obj/effect/dummy/spell_jaunt( mobloc )
-			var/atom/movable/overlay/animation = new /atom/movable/overlay(holder)
-			animation.SetName("water")
-			animation.set_density(0)
-			animation.anchored = 1
+			jaunt_holder = new/obj/effect/dummy/spell_jaunt(mobloc)
+			animation = new/atom/movable/overlay(mobloc)
+			animation.SetName("residue")
+			animation.set_density(FALSE)
+			animation.anchored = TRUE
 			animation.icon = 'icons/mob/mob.dmi'
 			animation.layer = FLY_LAYER 
 			target.ExtinguishMob()
 			if(target.buckled)
 				target.buckled = null
 			jaunt_disappear(animation, target)
-			target.forceMove(holder)
 			jaunt_steam(mobloc)
-			sleep(duration)
-			mobloc = holder.last_valid_turf
-			animation.forceMove(mobloc)
-			jaunt_steam(mobloc)
-			holder.reappearing = 1
-			sleep(20)
-			jaunt_reappear(animation, target)
-			sleep(5)
-			if(!target.forceMove(mobloc))
-				for(var/direction in list(1,2,4,8,5,6,9,10))
-					var/turf/T = get_step(mobloc, direction)
-					if(T)
-						if(target.forceMove(T))
-							break
-			target.client.eye = target
-			qdel(animation)
-			qdel(holder)
+			target.forceMove(jaunt_holder)
+			addtimer(CALLBACK(src, .proc/start_reappear, target), duration)
+
+/spell/targeted/ethereal_jaunt/proc/start_reappear(mob/living/user)
+	var/mob_loc = jaunt_holder.last_valid_turf
+	jaunt_holder.reappearing = TRUE
+	jaunt_steam(mob_loc)
+	jaunt_reappear(animation, user)
+	animation.forceMove(mob_loc)
+	addtimer(CALLBACK(src, .proc/reappear, mob_loc, user), reappear_duration)
+
+/spell/targeted/ethereal_jaunt/proc/reappear(var/mob_loc, mob/living/user)
+	if(!user.forceMove(mob_loc))
+		for(var/direction in list(1,2,4,8,5,6,9,10))
+			var/turf/T = get_step(mob_loc, direction)
+			if(T && user.forceMove(T))
+				break
+	user.client.eye = user
+	QDEL_NULL(animation)
+	QDEL_NULL(jaunt_holder)
 
 /spell/targeted/ethereal_jaunt/empower_spell()
 	if(!..())
@@ -82,8 +97,8 @@
 	icon_state = "nothing"
 	var/canmove = 1
 	var/reappearing = 0
-	density = 0
-	anchored = 1
+	density = FALSE
+	anchored = TRUE
 	var/turf/last_valid_turf
 
 /obj/effect/dummy/spell_jaunt/New(var/location)

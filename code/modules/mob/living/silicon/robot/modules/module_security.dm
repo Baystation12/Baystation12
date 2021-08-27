@@ -1,4 +1,4 @@
-/obj/item/weapon/robot_module/security
+/obj/item/robot_module/security
 	channels = list(
 		"Security" = TRUE
 	)
@@ -6,7 +6,7 @@
 		NETWORK_SECURITY
 	)
 	subsystems = list(
-		/datum/nano_module/crew_monitor, 
+		/datum/nano_module/crew_monitor,
 		/datum/nano_module/program/digitalwarrant
 	)
 	can_be_pushed = FALSE
@@ -20,20 +20,20 @@
 		SKILL_BUREAUCRACY = SKILL_ADEPT
 	)
 
-/obj/item/weapon/robot_module/security/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
+/obj/item/robot_module/security/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	..()
-	for(var/obj/item/weapon/gun/energy/T in equipment)
+	for(var/obj/item/gun/energy/T in equipment)
 		if(T && T.power_supply)
 			if(T.power_supply.charge < T.power_supply.maxcharge)
 				T.power_supply.give(T.charge_cost * amount)
 				T.update_icon()
 			else
 				T.charge_tick = 0
-	var/obj/item/weapon/melee/baton/robot/B = locate() in equipment
+	var/obj/item/melee/baton/robot/B = locate() in equipment
 	if(B && B.bcell)
 		B.bcell.give(amount)
 
-/obj/item/weapon/robot_module/security/general
+/obj/item/robot_module/security/general
 	name = "security robot module"
 	display_name = "Security"
 	crisis_locked = TRUE
@@ -48,18 +48,18 @@
 	equipment = list(
 		/obj/item/device/flash,
 		/obj/item/borg/sight/hud/sec,
-		/obj/item/weapon/handcuffs/cyborg,
-		/obj/item/weapon/melee/baton/robot,
-		/obj/item/weapon/gun/energy/gun/secure/mounted,
+		/obj/item/handcuffs/cyborg,
+		/obj/item/melee/baton/robot,
+		/obj/item/gun/energy/gun/secure/mounted,
 		/obj/item/taperoll/police,
 		/obj/item/device/megaphone,
 		/obj/item/device/holowarrant,
-		/obj/item/weapon/crowbar,
+		/obj/item/crowbar,
 		/obj/item/device/hailer
 	)
-	emag = /obj/item/weapon/gun/energy/laser/mounted
+	emag = /obj/item/gun/energy/laser/mounted
 
-/obj/item/weapon/robot_module/security/combat
+/obj/item/robot_module/security/combat
 	name = "combat robot module"
 	display_name = "Combat"
 	crisis_locked = TRUE
@@ -70,10 +70,17 @@
 	equipment = list(
 		/obj/item/device/flash,
 		/obj/item/borg/sight/thermal,
-		/obj/item/weapon/gun/energy/laser/mounted,
-		/obj/item/weapon/gun/energy/plasmacutter,
+		/obj/item/gun/energy/laser/mounted,
+		/obj/item/gun/energy/plasmacutter,
 		/obj/item/borg/combat/shield,
 		/obj/item/borg/combat/mobility,
-		/obj/item/weapon/crowbar
+		/obj/item/crowbar
 	)
-	emag = /obj/item/weapon/gun/energy/lasercannon/mounted
+	emag = /obj/item/gun/energy/lasercannon/mounted
+
+/obj/item/robot_module/security/combat/Initialize()
+	. = ..()
+	var/mob/living/silicon/robot/R = loc
+	if (istype(R))
+		R.status_flags &= ~CANWEAKEN // Pre-install the optical matrix shielding
+		R.flash_protected = TRUE

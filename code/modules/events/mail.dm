@@ -9,7 +9,7 @@
 
 	var/list/possible_gifts = list(
 		/obj/item/device/flashlight/lamp/lava,
-		/obj/item/weapon/storage/fancy/crayons,
+		/obj/item/storage/fancy/crayons,
 		/obj/item/device/synthesized_instrument/guitar,
 		/obj/item/toy/torchmodel,
 		/obj/item/clothing/accessory/locket,
@@ -21,10 +21,10 @@
 	var/list/rare_gifts = list(
 		/obj/item/toy/bosunwhistle,
 		/obj/item/toy/cultsword,
-		/obj/item/weapon/bikehorn/airhorn,
-		/obj/item/weapon/gun/projectile/revolver/capgun,
-		/obj/item/weapon/grenade/fake,
-		/obj/item/weapon/storage/backpack/clown,
+		/obj/item/bikehorn/airhorn,
+		/obj/item/gun/projectile/revolver/capgun,
+		/obj/item/grenade/fake,
+		/obj/item/storage/backpack/clown,
 		/obj/item/organ/external/head,
 		/obj/item/clothing/glasses/night
 	)
@@ -42,7 +42,7 @@
 		kill(TRUE)
 
 /datum/event/mail/announce()
-	command_announcement.Announce("A batch of mail adressed to the crew of \the [location_name()] has arrived at the sorting office and will arrive on the next available supply shuttle.", pick("Major Bill's Shipping", "Flefingbridge Transport", "SolX Freight", "QuiCo. Mailing Services"), zlevels = affecting_z)
+	command_announcement.Announce("A batch of mail addressed to the crew of \the [location_name()] has arrived at the sorting office and will arrive on the next available supply shuttle.", pick("Major Bill's Shipping", "Flefingbridge Transport", "SolX Freight", "QuiCo. Mailing Services"), zlevels = affecting_z)
 
 /datum/event/mail/tick()
 	var/datum/shuttle/autodock/ferry/supply/shuttle = SSsupply.shuttle
@@ -66,7 +66,7 @@
 		var/obj/item/documents/letter = new()
 		letter.SetName("letter to [name]")
 		letter.desc = "A letter from home."
-		letter.description_antag = "It's a letter from someone back home. This one is adressed to [name]."
+		letter.description_antag = "It's a letter from someone back home. This one is addressed to [name]."
 		letter.icon_state = "paper_words"
 
 		var/gift_path = pick(possible_gifts)

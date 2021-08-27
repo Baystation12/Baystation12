@@ -5,9 +5,9 @@
 	name = "projectile"
 	icon = 'icons/obj/projectiles.dmi'
 	icon_state = "bullet"
-	density = 1
+	density = TRUE
 	unacidable = TRUE
-	anchored = 1 //There's a reason this is here, Mport. God fucking damn it -Agouri. Find&Fix by Pete. The reason this is here is to stop the curving of emitter shots.
+	anchored = TRUE //There's a reason this is here, Mport. God fucking damn it -Agouri. Find&Fix by Pete. The reason this is here is to stop the curving of emitter shots.
 	pass_flags = PASS_FLAG_TABLE
 	mouse_opacity = 0
 	var/bumped = 0		//Prevents it from hitting more than one guy at once
@@ -61,7 +61,7 @@
 	var/miss_sounds
 	var/ricochet_sounds
 	var/list/impact_sounds	//for different categories, IMPACT_MEAT etc
-	var/shrapnel_type = /obj/item/weapon/material/shard/shrapnel
+	var/shrapnel_type = /obj/item/material/shard/shrapnel
 
 	var/vacuum_traversal = 1 //Determines if the projectile can exist in vacuum, if false, the projectile will be deleted if it enters vacuum.
 
@@ -155,6 +155,16 @@
 	addtimer(CALLBACK(src, .proc/finalize_launch, curloc, targloc, x_offset, y_offset, angle_offset),0)
 	return 0
 
+/obj/item/projectile/proc/launch_from_mob(atom/target, mob/user, target_zone, x_offset = 0, y_offset = 0, angle_offset = 0)
+	if(user == target) //Shooting yourself
+		user.bullet_act(src, target_zone)
+		qdel(src)
+		return 0
+
+	firer = user
+
+	return launch(target, target_zone, x_offset, y_offset)
+
 /obj/item/projectile/proc/finalize_launch(var/turf/curloc, var/turf/targloc, var/x_offset, var/y_offset, var/angle_offset)
 	setup_trajectory(curloc, targloc, x_offset, y_offset, angle_offset) //plot the initial trajectory
 	Process()
@@ -162,7 +172,7 @@
 		QDEL_NULL_LIST(segments)
 
 //called to launch a projectile from a gun
-/obj/item/projectile/proc/launch_from_gun(atom/target, mob/user, obj/item/weapon/gun/launcher, var/target_zone, var/x_offset=0, var/y_offset=0)
+/obj/item/projectile/proc/launch_from_gun(atom/target, mob/user, obj/item/gun/launcher, var/target_zone, var/x_offset=0, var/y_offset=0)
 	if(user == target) //Shooting yourself
 		user.bullet_act(src, target_zone)
 		qdel(src)
@@ -423,6 +433,7 @@
 	yo = null
 	xo = null
 	var/result = 0 //To pass the message back to the gun.
+	var/atom/hit_thing
 
 /obj/item/projectile/test/Bump(atom/A as mob|obj|turf|area, forced=0)
 	if(A == firer)
@@ -432,6 +443,7 @@
 		return
 	if(istype(A, /mob/living) || istype(A, /obj/vehicle))
 		result = 2 //We hit someone, return 1!
+		hit_thing = A
 		return
 	result = 1
 	return
@@ -450,13 +462,17 @@
 
 /obj/item/projectile/test/Process(var/turf/targloc)
 	while(src) //Loop on through!
-		if(result)
+		if(result > 1)
+			return hit_thing
+		else if (result)
 			return (result - 1)
 		if((!( targloc ) || loc == targloc))
 			targloc = locate(min(max(x + xo, 1), world.maxx), min(max(y + yo, 1), world.maxy), z) //Finding the target turf at map edge
 
 		trajectory.increment()	// increment the current location
 		location = trajectory.return_location(location)		// update the locally stored location data
+		if (!location)
+			return FALSE
 
 		Move(location.return_turf())
 

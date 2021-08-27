@@ -19,11 +19,11 @@ var/global/list/protected_objects = list(/obj/machinery,
 /mob/living/simple_animal/hostile/mimic
 	name = "crate"
 	desc = "A rectangular steel crate."
-	icon = 'icons/obj/storage.dmi'
-	icon_state = "crate"
-	icon_living = "crate"
+	icon = 'icons/obj/closets/bases/crate.dmi'
+	icon_state = "base"
+	icon_living = "base"
 
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/fish
+	meat_type = /obj/item/reagent_containers/food/snacks/fish
 	response_help = "touches"
 	response_disarm = "pushes"
 	response_harm = "hits"
@@ -32,10 +32,7 @@ var/global/list/protected_objects = list(/obj/machinery,
 	health = 100
 
 	harm_intent_damage = 5
-	melee_damage_lower = 8
-	melee_damage_upper = 12
-	attacktext = "attacked"
-	attack_sound = 'sound/weapons/bite.ogg'
+	natural_weapon = /obj/item/natural_weapon/bite
 
 	min_gas = null
 	max_gas = null
@@ -50,23 +47,29 @@ var/global/list/protected_objects = list(/obj/machinery,
 	var/knockdown_people = 0
 	pass_flags = PASS_FLAG_TABLE
 
+/datum/ai_holder/simple_animal/melee/mimic
+
+/datum/ai_holder/simple_animal/melee/mimic/find_target(list/possible_targets, has_targets_list)
+	. = ..()
+
+	if(.)
+		var/mob/living/simple_animal/hostile/mimic/M = holder
+		M.audible_emote("growls at [.]")
+
+/datum/ai_holder/simple_animal/melee/mimic/list_targets()
+	// Return a list of targets that isn't the creator
+	. = ..()
+	var/mob/living/simple_animal/hostile/mimic/M = holder
+	if(M.creator)
+		return . - M.creator.resolve()
+
+
 /mob/living/simple_animal/hostile/mimic/New(newloc, var/obj/o, var/mob/living/creator)
 	..()
 	if(o)
 		if(ispath(o))
 			o = new o(newloc)
 		CopyObject(o,creator)
-
-/mob/living/simple_animal/hostile/mimic/FindTarget()
-	. = ..()
-	if(.)
-		audible_emote("growls at [.]")
-
-/mob/living/simple_animal/hostile/mimic/ListTargets()
-	// Return a list of targets that isn't the creator
-	. = ..()
-	if(creator)
-		return . - creator.resolve()
 
 /mob/living/simple_animal/hostile/mimic/proc/CopyObject(var/obj/O, var/mob/living/creator)
 
@@ -76,18 +79,17 @@ var/global/list/protected_objects = list(/obj/machinery,
 		appearance = O
 		icon_living = icon_state
 
+		var/obj/item/W = get_natural_weapon()
 		if(istype(O, /obj/structure))
 			health = (anchored * 50) + 50
 			destroy_objects = 1
 			if(O.density && O.anchored)
 				knockdown_people = 1
-				melee_damage_lower *= 2
-				melee_damage_upper *= 2
+				W.force = 2 * initial(W.force)
 		else if(istype(O, /obj/item))
 			var/obj/item/I = O
 			health = 15 * I.w_class
-			melee_damage_lower = 2 + I.force
-			melee_damage_upper = 2 + I.force
+			W.force = 2 + initial(I.force)
 			move_to_delay = 2 * I.w_class
 
 		maxHealth = health
@@ -109,8 +111,8 @@ var/global/list/protected_objects = list(/obj/machinery,
 			for(var/atom/movable/M in src)
 				M.forceMove(C)
 
-		if(istype(C,/obj/item/weapon/storage))
-			var/obj/item/weapon/storage/S = C
+		if(istype(C,/obj/item/storage))
+			var/obj/item/storage/S = C
 			for(var/atom/movable/M in src)
 				if(S.can_be_inserted(M,null,1))
 					S.handle_item_insertion(M)
@@ -121,14 +123,16 @@ var/global/list/protected_objects = list(/obj/machinery,
 			M.dropInto(loc)
 		qdel(src)
 
-
-/mob/living/simple_animal/hostile/mimic/DestroySurroundings()
-	if(destroy_objects)
+/datum/ai_holder/simple_animal/melee/mimic/destroy_surroundings(direction, violent)
+	. = ..()
+	var/mob/living/simple_animal/hostile/mimic/M = holder
+	if(M.destroy_objects)
 		..()
 
-/mob/living/simple_animal/hostile/mimic/AttackingTarget()
-	. =..()
-	if(knockdown_people)
+/datum/ai_holder/simple_animal/melee/mimic/engage_target()
+	. = ..()
+	var/mob/living/simple_animal/hostile/mimic/M = holder
+	if(M.knockdown_people)
 		var/mob/living/L = .
 		if(istype(L))
 			if(prob(15))
@@ -141,19 +145,23 @@ var/global/list/protected_objects = list(/obj/machinery,
 	..()
 
 /mob/living/simple_animal/hostile/mimic/sleeping
-	wander = 0
-	stop_automated_movement = 1
-
 	var/awake = 0
 
-/mob/living/simple_animal/hostile/mimic/sleeping/ListTargets()
-	if(!awake)
+/mob/living/simple_animal/hostile/mimic/sleeping/Initialize()
+	. = ..()
+	set_AI_busy(TRUE)
+
+/datum/ai_holder/simple_animal/melee/mimic/sleeping/list_targets()
+	. = ..()
+	var/mob/living/simple_animal/hostile/mimic/sleeping/M = holder
+	if(!M.awake)
 		return null
 	return ..()
 
 /mob/living/simple_animal/hostile/mimic/sleeping/proc/trigger()
 	if(!awake)
 		src.visible_message("<b>\The [src]</b> starts to move!")
+		set_AI_busy(FALSE)
 		awake = 1
 
 /mob/living/simple_animal/hostile/mimic/sleeping/adjustBruteLoss(var/damage)
@@ -164,6 +172,7 @@ var/global/list/protected_objects = list(/obj/machinery,
 	trigger()
 	..()
 
-/mob/living/simple_animal/hostile/mimic/sleeping/DestroySurroundings()
-	if(awake)
+/datum/ai_holder/simple_animal/melee/mimic/sleeping/destroy_surroundings(direction, violent)
+	var/mob/living/simple_animal/hostile/mimic/sleeping/M = holder
+	if(M.awake)
 		..()

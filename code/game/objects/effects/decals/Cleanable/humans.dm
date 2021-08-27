@@ -16,7 +16,7 @@ var/global/list/image/splatter_cache=list()
 	blood_DNA = list()
 	generic_filth = TRUE
 	persistent = TRUE
-	appearance_flags = NO_CLIENT_COLOR
+	appearance_flags = DEFAULT_APPEARANCE_FLAGS | NO_CLIENT_COLOR
 	cleanable_scent = "blood"
 	scent_descriptor = SCENT_DESC_ODOR
 
@@ -255,16 +255,15 @@ var/global/list/image/splatter_cache=list()
 
 
 /obj/effect/decal/cleanable/blood/gibs/proc/streak(var/list/directions)
-	spawn (0)
-		var/direction = pick(directions)
-		for (var/i = 0, i < pick(1, 200; 2, 150; 3, 50; 4), i++)
-			sleep(3)
-			if (i > 0)
-				var/obj/effect/decal/cleanable/blood/b = new /obj/effect/decal/cleanable/blood/splatter(loc)
-				b.basecolor = src.basecolor
-				b.update_icon()
-			if (step_to(src, get_step(src, direction), 0))
-				break
+	var/direction = pick(directions)
+	for (var/i = 0, i < pick(1, 200; 2, 150; 3, 50; 4), i++)
+		sleep(3)
+		if (i > 0)
+			var/obj/effect/decal/cleanable/blood/b = new /obj/effect/decal/cleanable/blood/splatter(loc)
+			b.basecolor = src.basecolor
+			b.update_icon()
+		if (step_to(src, get_step(src, direction), 0))
+			break
 
 /obj/effect/decal/cleanable/blood/gibs/start_drying()
 	return
@@ -280,12 +279,14 @@ var/global/list/image/splatter_cache=list()
 	icon_state = "mucus"
 	generic_filth = TRUE
 	persistent = TRUE
-	var/dry=0 // Keeps the lag down
+	var/dry = FALSE
 
-/obj/effect/decal/cleanable/mucus/New()
-	..()
-	spawn(DRYING_TIME * 2)
-		dry=1
+/obj/effect/decal/cleanable/mucus/Initialize()
+	. = ..()
+	addtimer(CALLBACK(src, .proc/set_dry), DRYING_TIME * 2)
+
+/obj/effect/decal/cleanable/mucus/proc/set_dry()
+	dry = TRUE
 
 #undef BLOOD_SIZE_SMALL
 #undef BLOOD_SIZE_MEDIUM

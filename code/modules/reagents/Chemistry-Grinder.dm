@@ -10,6 +10,8 @@
 	active_power_usage = 100
 	obj_flags = OBJ_FLAG_ANCHORABLE
 	construct_state = /decl/machine_construction/default/panel_closed
+	machine_name = "reagent grinder"
+	machine_desc = "An industrial grinder with durable blades that shreds objects into their component reagents."
 
 	var/skill = SKILL_CHEMISTRY
 	var/grind_sound = 'sound/machines/grinder.ogg'
@@ -18,19 +20,19 @@
 	var/max_item_size = ITEM_SIZE_HUGE
 	var/list/banned_items = list()
 	var/list/storage_types = list(
-		/obj/item/weapon/storage/pill_bottle,
-		/obj/item/weapon/storage/sheetsnatcher,
-		/obj/item/weapon/storage/plants
+		/obj/item/storage/pill_bottle,
+		/obj/item/storage/sheetsnatcher,
+		/obj/item/storage/plants
 	)
 	var/list/allowed_containers = list(
-		/obj/item/weapon/reagent_containers/glass/beaker
+		/obj/item/reagent_containers/glass/beaker
 	)
 	var/list/banned_containers = list(
-		/obj/item/weapon/reagent_containers/glass/beaker/bowl,
-		/obj/item/weapon/reagent_containers/glass/beaker/vial
+		/obj/item/reagent_containers/glass/beaker/bowl,
+		/obj/item/reagent_containers/glass/beaker/vial
 	)
 	var/grind_time = 6 SECONDS
-	var/obj/item/weapon/reagent_containers/container
+	var/obj/item/reagent_containers/container
 	var/grinding
 
 
@@ -128,10 +130,10 @@
 		else if (user.unEquip(I, src))
 			container = I
 			update_icon()
-			updateUsrDialog()
+			updateDialog()
 
 	else if (is_type_in_list(I, storage_types))
-		var/obj/item/weapon/storage/S = I
+		var/obj/item/storage/S = I
 		if (!S.contents.len)
 			to_chat(user, SPAN_WARNING("\The [S] is empty."))
 		else if (items.len >= max_items)
@@ -155,7 +157,7 @@
 					"\The [user] empties things from \the [S] into \the [src].",
 					"You empty [english_list(removed)] from \the [S] into \the [src][full ? ", filling it to capacity" : ""]."
 				)
-				updateUsrDialog()
+				updateDialog()
 			else
 				to_chat(user, SPAN_WARNING("Nothing more in \the [S] will go into \the [src]."))
 
@@ -208,7 +210,9 @@
 				window += "<br>[R.volume] - [R.name]"
 
 	window = strip_improper("<head><title>[name]</title></head><tt>[JOINTEXT(window)]</tt>")
-	show_browser(user, window, "window=reagentgrinder")
+	var/datum/browser/popup = new(user, "reagentgrinder", "Reagent Grinder")
+	popup.set_content(window)
+	popup.open()
 	onclose(user, "reagentgrinder")
 
 
@@ -257,16 +261,18 @@
 	density = FALSE
 	anchored = FALSE
 	grind_sound = 'sound/machines/juicer.ogg'
-	max_item_size = ITEM_SIZE_SMALL
+	max_item_size = ITEM_SIZE_NORMAL
 	skill = SKILL_COOKING
 	banned_items = list(
 		/obj/item/stack/material
 	)
 	storage_types = list(
-		/obj/item/weapon/storage/pill_bottle,
-		/obj/item/weapon/storage/plants
+		/obj/item/storage/pill_bottle,
+		/obj/item/storage/plants
 	)
 	allowed_containers = list(
-		/obj/item/weapon/reagent_containers/glass/beaker,
-		/obj/item/weapon/reagent_containers/food/drinks/shaker
+		/obj/item/reagent_containers/glass/beaker,
+		/obj/item/reagent_containers/food/drinks/shaker
 	)
+	machine_name = "blender"
+	machine_desc = "Blends or juices food placed inside it - useful for things like flour. Can't process raw material sheets."

@@ -139,9 +139,6 @@
 
 	endedAt = world.time
 	SSevent.event_complete(src)
-	if (reroll)
-		SSevent.event_containers[severity].start_event()
-
 
 //Called during building of skybox to get overlays
 /datum/event/proc/get_skybox_image()

@@ -296,7 +296,7 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 
 		else if(agony_amount > 0.5 * max_damage)
 			owner.visible_message("<span class='warning'>[owner] reels in pain!</span>")
-			if(has_genitals() || agony_amount > max_damage)
+			if(agony_amount > max_damage)
 				owner.Weaken(4)
 			else
 				owner.Stun(4)
@@ -305,7 +305,7 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 			return 1
 
 /obj/item/organ/external/proc/get_agony_multiplier()
-	return has_genitals() ? 2 : 1
+	return has_genitals() ? 1.5 : 1
 
 /obj/item/organ/external/proc/sever_artery()
 	if(species && species.has_organ[BP_HEART])

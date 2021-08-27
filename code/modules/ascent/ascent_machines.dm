@@ -143,7 +143,7 @@ MANTIDIFY(/obj/machinery/door/airlock/external/bolted, "mantid airlock", "door")
 
 /obj/machinery/light/ascent
 	name = "mantid light"
-	light_type = /obj/item/weapon/light/tube/ascent
+	light_type = /obj/item/light/tube/ascent
 	desc = "Some kind of strange alien lighting technology."
 
 /obj/machinery/computer/ship/helm/ascent
@@ -177,6 +177,7 @@ MANTIDIFY(/obj/machinery/door/airlock/external/bolted, "mantid airlock", "door")
 	req_access = list(access_ascent)
 	construct_state = /decl/machine_construction/default/panel_closed/computer/no_deconstruct
 	base_type = /obj/machinery/computer/ship/sensors
+	print_language = LANGUAGE_MANTID_VOCAL
 
 // This is an absolutely stupid machine. Basically the same as the debug one with some alterations.
 // It is a placeholder for a proper reactor setup (probably a RUST descendant)
@@ -243,7 +244,7 @@ MANTIDIFY(/obj/machinery/door/airlock/external/bolted, "mantid airlock", "door")
 	icon = 'icons/obj/machines/power/mantid_smes.dmi'
 	overlay_icon = 'icons/obj/machines/power/mantid_smes.dmi'
 	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/smes_coil/advanced = 2
+		/obj/item/stock_parts/smes_coil/advanced = 2
 	)
 	_input_maxed = TRUE
 	_output_maxed = TRUE

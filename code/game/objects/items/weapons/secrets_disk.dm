@@ -1,4 +1,4 @@
-/obj/item/weapon/disk/secret_project
+/obj/item/disk/secret_project
 	name = "'classified' project data disk"
 	desc = "A special disk for storing massive amounts of data. It is marked as classified, and has an ID card slot on top."
 	icon = 'icons/obj/cloning.dmi'
@@ -9,12 +9,12 @@
 	var/subject = "some strange, incomprehensible design"
 	var/locked = 1
 
-/obj/item/weapon/disk/secret_project/science
+/obj/item/disk/secret_project/science
 	desc = "A special disk for storing massive amounts of data. It is marked as classified, and has an ID card slot on top. \
 	This one has a lengthy legal label on it denoting it the private, copyrighted property of the Expeditionary Corps Organisation."
 	req_access = access_rd
 
-/obj/item/weapon/disk/secret_project/Initialize()
+/obj/item/disk/secret_project/Initialize()
 	. = ..()
 	var/codename = pick("gamma", "delta", "epsilon", "zeta", "theta", "lambda", "omicron", "sigma", "tau",\
 	"upsilon", "omega", "echelon", "prism", "calypso", "bernoulli", "harmony", "nyx", "fresnel")
@@ -28,7 +28,7 @@
 	subject += " " + pick("that is extremely powerful", "which is highly efficient", "which is incredibly compact",\
 	"that runs off of phoron", "that runs off of hydrogen gas", "created by the Skrell", "that just looks really cool")
 
-/obj/item/weapon/disk/secret_project/examine(mob/user)
+/obj/item/disk/secret_project/examine(mob/user)
 	..()
 	if(!locked)
 		to_chat(user, "With the disk's classified contents unlocked, \
@@ -36,14 +36,14 @@
 	else
 		to_chat(user, "The disk is locked, you cannot see its contents.")
 
-/obj/item/weapon/disk/secret_project/emag_act(var/remaining_charges, var/mob/user)
+/obj/item/disk/secret_project/emag_act(var/remaining_charges, var/mob/user)
 	to_chat(user, "<span class='warning'>The cryptographic lock on this disk is far too complex. \
 	Your sequencer can't break the code.</span>")
 	return 0
 
-/obj/item/weapon/disk/secret_project/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/weapon/card/id))
-		var/obj/item/weapon/card/id/ID = W
+/obj/item/disk/secret_project/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W,/obj/item/card/id))
+		var/obj/item/card/id/ID = W
 		if(check_access(ID))
 			locked = !locked
 			to_chat(user, "<span class='notice'>You swipe your card and [locked ? "lock":"unlock"] the disk.</span>")
@@ -52,7 +52,7 @@
 		return
 	. = ..()
 
-/obj/item/weapon/disk/secret_project/verb/change_codename()
+/obj/item/disk/secret_project/verb/change_codename()
 	set name = "Change project codename"
 	set category = "Object"
 	set src in view(0)
@@ -65,10 +65,10 @@
 	else
 		to_chat(usr, "<span class='warning'>The disk's screen flashes 'Access Denied'. It is locked.</span>")
 
-/obj/item/weapon/storage/box/secret_project_disks
+/obj/item/storage/box/secret_project_disks
 	name = "box of classified data disks"
 	desc = "A box full of disks. Marked with a red 'Top Secret' label. Looks rather ominous."
-	startswith = list(/obj/item/weapon/disk/secret_project = 5)
+	startswith = list(/obj/item/disk/secret_project = 5)
 
-/obj/item/weapon/storage/box/secret_project_disks/science
-	startswith = list(/obj/item/weapon/disk/secret_project/science = 5)
+/obj/item/storage/box/secret_project_disks/science
+	startswith = list(/obj/item/disk/secret_project/science = 5)

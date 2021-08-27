@@ -62,11 +62,14 @@
 	var/escaped_total = data["escaped_total"]
 	var/marooned_total = data["left_behind_total"]
 	var/ghosts = data["ghosts"]
+	var/offship_players = data["offship_players"]
 
 	if(survivors > 0)
-		desc += "There [survivors>1 ? "were <b>[survivors] survivors</b>" : "was <b>one survivor</b>"]"
-		desc += " (<b>[escaped_total>0 ? escaped_total : "none"] escaped, [marooned_total > 0 ? marooned_total : "none"] marooned</b>) and <b>[ghosts] ghosts</b>.<br>"
+		desc += "There [survivors > 1 ? "were <b>[survivors] survivors</b>" : "was <b>one survivor</b>"]"
+		desc += " (<b>[escaped_total > 0 ? escaped_total : "none"] escaped, [marooned_total] marooned</b>),"
+		data += " [offship_players > 1 ? "<b>[offship_players] off-ship players</b>" : "<b>one off-ship player</b>"]"
+		data += " and <b>[ghosts] ghosts</b>.<br>"
 	else
-		desc += "There were <b>no survivors</b>, (<b>[data["ghosts"]] ghosts</b>)."
+		desc += "There were <b>no survivors</b>, <b>[offship_players] off-ship players</b>, (<b>[ghosts] ghosts</b>)."
 
 	return desc

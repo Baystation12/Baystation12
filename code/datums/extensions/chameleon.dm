@@ -124,9 +124,9 @@
 		C.update_clothing_icon()
 
 /datum/extension/chameleon/backpack
-	expected_type = /obj/item/weapon/storage/backpack
+	expected_type = /obj/item/storage/backpack
 
-/datum/extension/chameleon/backpack/OnChange(mob/user, obj/item/weapon/storage/backpack/C)
+/datum/extension/chameleon/backpack/OnChange(mob/user, obj/item/storage/backpack/C)
 	if (ismob(C.loc))
 		var/mob/M = C.loc
 		M.update_inv_back()
@@ -140,16 +140,16 @@
 		M.update_inv_ears()
 
 /datum/extension/chameleon/gun
-	expected_type = /obj/item/weapon/gun
+	expected_type = /obj/item/gun
 
-/datum/extension/chameleon/gun/OnChange(mob/user, obj/item/weapon/gun/C)
+/datum/extension/chameleon/gun/OnChange(mob/user, obj/item/gun/C)
 	if (ismob(C.loc))
 		var/mob/M = C.loc
 		M.update_inv_r_hand()
 		M.update_inv_l_hand()
 
-/datum/extension/chameleon/gun/OnDisguise(obj/item/weapon/gun/copy)
-	var/obj/item/weapon/gun/G = atom_holder
+/datum/extension/chameleon/gun/OnDisguise(obj/item/gun/copy)
+	var/obj/item/gun/G = atom_holder
 
 	G.flags_inv = copy.flags_inv
 	G.fire_sound = copy.fire_sound
@@ -157,12 +157,12 @@
 	G.icon = copy.icon
 
 /datum/extension/chameleon/emag
-	expected_type = /obj/item/weapon/card
+	expected_type = /obj/item/card
 	chameleon_choices = list(
-		/obj/item/weapon/card/emag,
-		/obj/item/weapon/card/union,
-		/obj/item/weapon/card/data,
-		/obj/item/weapon/card/data/full_color,
-		/obj/item/weapon/card/data/disk,
-		/obj/item/weapon/card/id
+		/obj/item/card/emag,
+		/obj/item/card/union,
+		/obj/item/card/data,
+		/obj/item/card/data/full_color,
+		/obj/item/card/data/disk,
+		/obj/item/card/id
 	)

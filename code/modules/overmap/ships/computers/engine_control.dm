@@ -4,6 +4,8 @@
 	name = "engine control console"
 	icon_keyboard = "tech_key"
 	icon_screen = "engines"
+	machine_name = "engine control console"
+	machine_desc = "Allows remote control of a spacecraft's gas thrusters, and displays information about remaining fuel."
 	var/display_state = "status"
 
 /obj/machinery/computer/ship/engines/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)

@@ -149,39 +149,36 @@
 	cameraFollow.tracking_cancelled()
 	cameraFollow = null
 
-/mob/living/silicon/ai/proc/ai_actual_track(mob/living/target as mob)
-	if(!istype(target))	return
-	var/mob/living/silicon/ai/U = usr
-
-	if(target == U.cameraFollow)
+/mob/living/silicon/ai/proc/ai_actual_track(mob/living/target)
+	if (!istype(target))
 		return
+	if (target == cameraFollow)
+		return
+	if (cameraFollow)
+		ai_cancel_tracking()
+	cameraFollow = target
+	to_chat(src, SPAN_NOTICE("Tracking target ..."))
+	cameraFollow.tracking_initiated()
+	addtimer(CALLBACK(src, .proc/ai_actual_track_action), 0, TIMER_UNIQUE|TIMER_OVERRIDE|TIMER_NO_HASH_WAIT)
 
-	if(U.cameraFollow)
-		U.ai_cancel_tracking()
-	U.cameraFollow = target
-	to_chat(U, "Tracking target...")
-	target.tracking_initiated()
 
-	spawn (0)
-		while (U.cameraFollow == target)
-			if (U.cameraFollow == null)
-				return
+/mob/living/silicon/ai/proc/ai_actual_track_action()
+	if (!cameraFollow)
+		return
+	var/status = cameraFollow.tracking_status()
+	if (status == TRACKING_NO_COVERAGE)
+		to_chat(src, SPAN_WARNING("Target is not near any active cameras."))
+		addtimer(CALLBACK(src, .proc/ai_actual_track_action), 10 SECONDS, TIMER_UNIQUE|TIMER_OVERRIDE|TIMER_NO_HASH_WAIT)
+		return
+	else if (status == TRACKING_TERMINATE)
+		ai_cancel_tracking(TRUE)
+		return
+	if (eyeobj)
+		eyeobj.setLoc(get_turf(cameraFollow), FALSE)
+		addtimer(CALLBACK(src, .proc/ai_actual_track_action), 1 SECOND, TIMER_UNIQUE|TIMER_OVERRIDE|TIMER_NO_HASH_WAIT)
+		return
+	view_core()
 
-			switch(target.tracking_status())
-				if(TRACKING_NO_COVERAGE)
-					to_chat(U, "Target is not near any active cameras.")
-					sleep(100)
-					continue
-				if(TRACKING_TERMINATE)
-					U.ai_cancel_tracking(1)
-					return
-
-			if(U.eyeobj)
-				U.eyeobj.setLoc(get_turf(target), 0)
-			else
-				view_core()
-				return
-			sleep(10)
 
 /obj/machinery/camera/attack_ai(var/mob/living/silicon/ai/user as mob)
 	if (!istype(user))
@@ -220,7 +217,7 @@ mob/living/proc/near_camera()
 
 /mob/living/proc/tracking_status()
 	// Easy checks first.
-	var/obj/item/weapon/card/id/id = GetIdCard()
+	var/obj/item/card/id/id = GetIdCard()
 	if(id && id.prevent_tracking())
 		return TRACKING_TERMINATE
 	if(InvalidPlayerTurf(get_turf(src)))

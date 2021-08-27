@@ -203,7 +203,7 @@
 	antag_text = "With a tank of hot phoron and cold oxygen, this benign little atmospheric device becomes an incredibly deadly bomb. You don't want to be anywhere near it when it goes off."
 
 /datum/codex_entry/gas_tank
-	associated_paths = list(/obj/item/weapon/tank)
+	associated_paths = list(/obj/item/tank)
 	mechanics_text = "These tanks are utilised to store any of the various types of gaseous substances. \
 	They can be attached to various portable atmospheric devices to be filled or emptied. <br>\
 	<br>\

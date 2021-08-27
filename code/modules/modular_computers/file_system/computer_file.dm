@@ -1,17 +1,30 @@
 var/global/file_uid = 0
 
 /datum/computer_file/
-	var/filename = "NewFile" 								// Placeholder. No spacebars
-	var/filetype = "XXX" 									// File full names are [filename].[filetype] so like NewFile.XXX in this case
-	var/size = 1											// File size in GQ. Integers only!
-	var/obj/item/weapon/stock_parts/computer/hard_drive/holder	// Holder that contains this file.
-	var/unsendable = 0										// Whether the file may be sent to someone via NTNet transfer or other means.
-	var/undeletable = 0										// Whether the file may be deleted. Setting to 1 prevents deletion/renaming/etc.
-	var/uid													// UID of this file
-	var/list/metadata											// Any metadata the file uses.
-	var/papertype = /obj/item/weapon/paper
+	/// Placeholder. Whitespace and most special characters are not allowed.
+	var/filename = "NewFile"
+	/// File full names are [filename].[filetype] so like NewFile.XXX in this case
+	var/filetype = "XXX"
+	/// File size in GQ. Integers only!
+	var/size = 1
+	/// Holder that contains this file.
+	var/obj/item/stock_parts/computer/hard_drive/holder
+	/// Whether the file may be sent to someone via NTNet transfer, email or other means.
+	var/unsendable = FALSE
+	/// Whether the file may be deleted. Setting to TRUE prevents deletion/renaming/etc.
+	var/undeletable = FALSE
+	/// Whether the file is hidden from view in the OS
+	var/hidden = FALSE
+	/// Protects files that should never be edited by the user due to special properties.
+	var/read_only = FALSE
+	/// UID of this file
+	var/uid
+	/// Any metadata the file uses.
+	var/list/metadata
+	/// Paper type to use for printing
+	var/papertype = /obj/item/paper
 
-/datum/computer_file/New(var/list/md = null)
+/datum/computer_file/New(list/md = null)
 	..()
 	uid = file_uid
 	file_uid++
@@ -22,20 +35,17 @@ var/global/file_uid = 0
 	. = ..()
 	if(!holder)
 		return
-
 	holder.remove_file(src)
 
-// Returns independent copy of this file.
-/datum/computer_file/proc/clone(var/rename = 0)
+/// Returns independent copy of this file.
+/datum/computer_file/proc/clone()
 	var/datum/computer_file/temp = new type
 	temp.unsendable = unsendable
 	temp.undeletable = undeletable
+	temp.hidden = hidden
 	temp.size = size
 	if(metadata)
 		temp.metadata = metadata.Copy()
-	if(rename)
-		temp.filename = filename + "(Copy)"
-	else
-		temp.filename = filename
+	temp.filename = filename
 	temp.filetype = filetype
 	return temp

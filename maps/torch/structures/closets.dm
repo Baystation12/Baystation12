@@ -9,22 +9,21 @@
 
 /obj/structure/closet/toolcloset/excavation/WillContain()
 	return list(
-		/obj/item/weapon/storage/belt/archaeology,
-		/obj/item/weapon/storage/excavation,
+		/obj/item/storage/belt/archaeology,
+		/obj/item/storage/excavation,
 		/obj/item/device/flashlight/lantern,
 		/obj/item/device/ano_scanner,
 		/obj/item/device/depth_scanner,
 		/obj/item/device/core_sampler,
 		/obj/item/device/gps,
-		/obj/item/weapon/pinpointer/radio,
-		/obj/item/device/radio/beacon,
+		/obj/item/pinpointer/radio,
 		/obj/item/clothing/glasses/meson,
 		/obj/item/clothing/glasses/science,
-		/obj/item/weapon/pickaxe,
+		/obj/item/pickaxe,
 		/obj/item/device/measuring_tape,
-		/obj/item/weapon/pickaxe/xeno/hand,
-		/obj/item/weapon/storage/bag/fossils,
-		/obj/item/weapon/hand_labeler,
+		/obj/item/pickaxe/xeno/hand,
+		/obj/item/storage/bag/fossils,
+		/obj/item/hand_labeler,
 		/obj/item/taperoll/research,
 		/obj/item/device/spaceflare
 	)

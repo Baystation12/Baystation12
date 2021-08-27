@@ -6,7 +6,7 @@ GLOBAL_DATUM_INIT(deathsquad, /datum/antagonist/deathsquad, new)
 	role_text_plural = "Death Commandos"
 	welcome_text = "You work in the service of corporate Asset Protection, answering directly to the Board of Directors."
 	landmark_id = "Commando"
-	flags = ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB | ANTAG_HAS_NUKE | ANTAG_HAS_LEADER | ANTAG_RANDOM_EXCEPTED
+	flags = ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB | ANTAG_HAS_LEADER | ANTAG_RANDOM_EXCEPTED
 	default_access = list(access_cent_general, access_cent_specops, access_cent_living, access_cent_storage)
 	antaghud_indicator = "huddeathsquad"
 
@@ -36,17 +36,17 @@ GLOBAL_DATUM_INIT(deathsquad, /datum/antagonist/deathsquad, new)
 	player.equip_to_slot_or_del(new /obj/item/clothing/glasses/thermal(player), slot_glasses)
 	player.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/swat(player), slot_wear_mask)
 	if (player.mind == leader)
-		player.equip_to_slot_or_del(new /obj/item/weapon/pinpointer(player), slot_l_store)
-		player.equip_to_slot_or_del(new /obj/item/weapon/disk/nuclear(player), slot_r_store)
+		player.equip_to_slot_or_del(new /obj/item/pinpointer(player), slot_l_store)
+		player.equip_to_slot_or_del(new /obj/item/disk/nuclear(player), slot_r_store)
 	else
-		player.equip_to_slot_or_del(new /obj/item/weapon/plastique(player), slot_l_store)
-	player.equip_to_slot_or_del(new /obj/item/weapon/gun/projectile/revolver(player), slot_belt)
-	player.equip_to_slot_or_del(new /obj/item/weapon/gun/energy/pulse_rifle(player), slot_r_hand)
-	player.equip_to_slot_or_del(new /obj/item/weapon/rig/ert/assetprotection(player), slot_back)
-	player.equip_to_slot_or_del(new /obj/item/weapon/melee/energy/sword(player), slot_l_hand)
+		player.equip_to_slot_or_del(new /obj/item/plastique(player), slot_l_store)
+	player.equip_to_slot_or_del(new /obj/item/gun/projectile/revolver(player), slot_belt)
+	player.equip_to_slot_or_del(new /obj/item/gun/energy/pulse_rifle(player), slot_r_hand)
+	player.equip_to_slot_or_del(new /obj/item/rig/ert/assetprotection(player), slot_back)
+	player.equip_to_slot_or_del(new /obj/item/melee/energy/sword(player), slot_l_hand)
 	player.implant_loyalty(player)
 
-	var/obj/item/weapon/card/id/id = create_id("Asset Protection", player)
+	var/obj/item/card/id/id = create_id("Asset Protection", player)
 	if(id)
 		id.access |= get_all_station_access()
 		id.icon_state = "centcom"

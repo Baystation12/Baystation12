@@ -33,6 +33,7 @@
 	var/damage = 0                          // Current total damage. Does not count patched breaches.
 	var/brute_damage = 0                    // Specifically brute damage. Includes patched punctures.
 	var/burn_damage = 0                     // Specifically burn damage. Includes patched burns.
+	item_flags = null
 
 /datum/breach/proc/update_descriptor()
 
@@ -221,7 +222,7 @@
 			to_chat(user, "There is no structural damage on \the [src] to repair.")
 			return
 
-		var/obj/item/weapon/weldingtool/WT = W
+		var/obj/item/weldingtool/WT = W
 		if(!WT.remove_fuel(5))
 			to_chat(user, SPAN_WARNING("You need more welding fuel to repair this suit."))
 			return
@@ -229,7 +230,7 @@
 		repair_breaches(BRUTE, 3, user)
 		return
 
-	else if(istype(W, /obj/item/weapon/tape_roll))
+	else if(istype(W, /obj/item/tape_roll))
 		var/datum/breach/target_breach		//Target the largest unpatched breach.
 		for(var/datum/breach/B in breaches)
 			if(B.patched)

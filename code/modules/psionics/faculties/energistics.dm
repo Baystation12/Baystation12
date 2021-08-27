@@ -46,7 +46,7 @@
 			target.electrocute_act(rand(15,45), user, 1, user.zone_sel.selecting)
 			return TRUE
 		else if(isatom(target))
-			var/obj/item/weapon/cell/charging_cell = target.get_cell()
+			var/obj/item/cell/charging_cell = target.get_cell()
 			if(istype(charging_cell))
 				charging_cell.give(rand(15,45))
 			return TRUE

@@ -2,7 +2,7 @@
 	name = "Ascent - Gyne"
 	mask =     /obj/item/clothing/mask/gas/ascent
 	uniform =  /obj/item/clothing/under/ascent
-	id_types = list( /obj/item/weapon/card/id/ascent)
+	id_types = list( /obj/item/card/id/ascent)
 	shoes =    /obj/item/clothing/shoes/magboots/ascent
 	l_ear =    null
 	pda_type = null
@@ -11,7 +11,7 @@
 
 /decl/hierarchy/outfit/job/ascent/attendant
 	name = "Ascent - Attendant"
-	back = /obj/item/weapon/rig/mantid
+	back = /obj/item/rig/mantid
 
 /decl/hierarchy/outfit/job/ascent/tech
 	name = "Ascent - Technician"
@@ -91,24 +91,24 @@
 
 	allowed = list(
 		/obj/item/device/flashlight,
-		/obj/item/weapon/tank,
+		/obj/item/tank,
 		/obj/item/device/suit_cooling_unit,
-		/obj/item/weapon/inflatable_dispenser,
-		/obj/item/weapon/rcd
+		/obj/item/inflatable_dispenser,
+		/obj/item/rcd
 	)
 
 /obj/item/clothing/suit/storage/ascent/Initialize()
 	. = ..()
 	for(var/tool in list(
-		/obj/item/weapon/gun/energy/particle/small,
+		/obj/item/gun/energy/particle/small,
 		/obj/item/device/multitool/mantid,
 		/obj/item/clustertool,
 		/obj/item/clustertool,
-		/obj/item/weapon/weldingtool/electric/mantid,
+		/obj/item/weldingtool/electric/mantid,
 		/obj/item/stack/medical/resin
 	))
 		allowed |= tool
 		new tool(pockets)
 	pockets.make_exact_fit()
-	allowed |= /obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle/ascent
-	pockets.can_hold |= /obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle/ascent
+	allowed |= /obj/item/reagent_containers/food/drinks/cans/waterbottle/ascent
+	pockets.can_hold |= /obj/item/reagent_containers/food/drinks/cans/waterbottle/ascent

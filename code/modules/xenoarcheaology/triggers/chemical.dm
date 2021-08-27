@@ -4,11 +4,12 @@
 
 /datum/artifact_trigger/chemical/New()
 	if(isnull(required_chemicals))
+		name = "presence of either an acid, toxin, or water"
 		required_chemicals = list(pick(/datum/reagent/acid, /datum/reagent/toxin, /datum/reagent/water))
 
 /datum/artifact_trigger/chemical/on_hit(obj/O, mob/user)
 	. = ..()
-	if(istype(O, /obj/item/weapon/reagent_containers))
+	if(istype(O, /obj/item/reagent_containers))
 		if(O.reagents.has_any_reagent(required_chemicals))
 			return TRUE
 

@@ -10,7 +10,7 @@
 
 	if(over_object)
 		if(!incapacitated())
-			var/obj/item/weapon/gun/gun = get_active_hand()
+			var/obj/item/gun/gun = get_active_hand()
 			if(istype(gun) && gun.can_autofire())
 				set_dir(get_dir(src, over_object))
 				gun.Fire(get_turf(over_object), src, params, (get_dist(over_object, src) <= 1), FALSE)

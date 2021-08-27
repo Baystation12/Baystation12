@@ -9,6 +9,7 @@
 	var/chewtime = 0
 	var/brand
 	var/list/filling = list()
+	item_flags = null
 
 obj/item/clothing/mask/chewable/New()
 	..()

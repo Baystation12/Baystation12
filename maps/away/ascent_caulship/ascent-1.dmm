@@ -183,7 +183,7 @@
 /turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "aJ" = (
-/obj/item/weapon/storage/firstaid/surgery,
+/obj/item/storage/firstaid/surgery,
 /obj/structure/table/steel_reinforced,
 /turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
@@ -200,15 +200,17 @@
 	pixel_x = -24
 	},
 /obj/effect/catwalk_plated/ascent,
-/obj/machinery/atmospherics/binary/pump/high_power/on/distribution{
+/obj/machinery/atmospherics/binary/pump/high_power/on{
 	dir = 1;
-	icon_state = "map_on"
+	target_pressure = 5000
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
 "aM" = (
 /obj/effect/catwalk_plated/ascent,
-/obj/machinery/atmospherics/binary/pump/high_power/on/distribution,
+/obj/machinery/atmospherics/binary/pump/high_power/on{
+	target_pressure = 150
+	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
 "aN" = (
@@ -333,13 +335,13 @@
 /area/ship/ascent_caulship)
 "bd" = (
 /obj/structure/table/rack/dark,
-/obj/item/weapon/storage/bag/trash/purple/ascent,
+/obj/item/storage/bag/trash/purple/ascent,
 /obj/structure/cable/cyan{
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/item/weapon/pickaxe/diamonddrill/ascent,
-/obj/item/weapon/storage/ore{
+/obj/item/pickaxe/diamonddrill/ascent,
+/obj/item/storage/ore{
 	color = "PURPLE";
 	name = "mineral carrier"
 	},
@@ -452,7 +454,7 @@
 /area/ship/ascent_caulship)
 "bo" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/weapon/storage/box/botanydisk,
+/obj/item/storage/box/botanydisk,
 /turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "bp" = (
@@ -632,12 +634,12 @@
 /area/ship/ascent_caulship)
 "bH" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh,
+/obj/item/reagent_containers/food/snacks/meat/syntiflesh,
 /turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "bI" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/weapon/reagent_containers/food/snacks/meat/beef,
+/obj/item/reagent_containers/food/snacks/meat/beef,
 /turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "bJ" = (
@@ -878,8 +880,8 @@
 	req_access = list("ACCESS_ASCENT")
 	},
 /obj/structure/hygiene/shower/ascent{
-	icon_state = "shower";
-	dir = 4
+	dir = 4;
+	icon_state = "shower"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
@@ -895,8 +897,8 @@
 	id_tag = "ascent_caulship_pump"
 	},
 /obj/structure/hygiene/shower/ascent{
-	icon_state = "shower";
-	dir = 4
+	dir = 4;
+	icon_state = "shower"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
@@ -917,8 +919,8 @@
 	id_tag = "ascent_caulship_pump"
 	},
 /obj/structure/hygiene/shower/ascent{
-	icon_state = "shower";
-	dir = 8
+	dir = 8;
+	icon_state = "shower"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
@@ -1023,8 +1025,8 @@
 "cx" = (
 /obj/effect/catwalk_plated/ascent,
 /obj/machinery/atmospherics/pipe/manifold/visible/supply{
-	icon_state = "map-supply";
-	dir = 8
+	dir = 8;
+	icon_state = "map-supply"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
@@ -1070,14 +1072,14 @@
 	dir = 8
 	},
 /obj/structure/table/rack/dark,
-/obj/item/weapon/gun/energy/particle/small,
-/obj/item/weapon/gun/energy/particle/small,
+/obj/item/gun/energy/particle/small,
+/obj/item/gun/energy/particle/small,
 /obj/machinery/atmospherics/pipe/simple/visible/supply{
 	dir = 2;
 	icon_state = "intact-supply"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/scrubbers,
-/obj/item/weapon/tank/jetpack/ascent,
+/obj/item/tank/jetpack/ascent,
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
 "cC" = (
@@ -1111,8 +1113,8 @@
 /obj/item/clothing/suit/space/void/ascent,
 /obj/item/clothing/head/helmet/space/void/ascent,
 /obj/item/clothing/head/helmet/space/void/ascent,
-/obj/item/weapon/tank/mantid/methyl_bromide,
-/obj/item/weapon/tank/mantid/methyl_bromide,
+/obj/item/tank/mantid/methyl_bromide,
+/obj/item/tank/mantid/methyl_bromide,
 /obj/machinery/atmospherics/pipe/simple/visible/supply{
 	dir = 2;
 	icon_state = "intact-supply"
@@ -1203,8 +1205,8 @@
 	icon_state = "1-4"
 	},
 /obj/structure/table/rack/dark,
-/obj/item/weapon/rig/mantid/gyne/seed,
-/obj/item/weapon/rig/mantid/seed,
+/obj/item/rig/mantid/gyne/seed,
+/obj/item/rig/mantid/seed,
 /obj/machinery/atmospherics/pipe/simple/visible/supply{
 	dir = 5;
 	icon_state = "intact-supply"
@@ -1347,8 +1349,8 @@
 	},
 /obj/effect/catwalk_plated/ascent,
 /obj/structure/hygiene/sink/ascent{
-	icon_state = "sink";
-	dir = 4
+	dir = 4;
+	icon_state = "sink"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
@@ -1359,9 +1361,9 @@
 /area/ship/ascent_caulship)
 "cY" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/weapon/reagent_containers/glass/bucket/ascent,
-/obj/item/weapon/mop/advanced/ascent,
-/obj/item/weapon/material/knife/kitchen/cleaver/ascent,
+/obj/item/reagent_containers/glass/bucket/ascent,
+/obj/item/mop/advanced/ascent,
+/obj/item/material/knife/kitchen/cleaver/ascent,
 /turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "cZ" = (
@@ -1377,16 +1379,6 @@
 /area/space)
 "dc" = (
 /turf/simulated/floor/ascent,
-/area/space)
-"dd" = (
-/obj/structure/showcase{
-	desc = "A large, complex chunk of machinery similar to the bluespace drive found on some SCG ships. This one is definitely not Skrell design, and seems to have been destroyed in its last jump.";
-	icon = 'icons/obj/power.dmi';
-	icon_state = "tracker";
-	name = "burned-out bluespace drive"
-	},
-/obj/effect/overmap/visitable/sector/ascent_caulship_ring,
-/turf/simulated/floor/ascent/tiled,
 /area/space)
 "dF" = (
 /obj/effect/catwalk_plated/ascent,
@@ -1426,7 +1418,7 @@
 /turf/simulated/floor/ascent/tiled,
 /area/ship/ascent_caulship)
 "vq" = (
-/obj/item/weapon/reagent_containers/food/snacks/meat/beef,
+/obj/item/reagent_containers/food/snacks/meat/beef,
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
 "wE" = (
@@ -1452,11 +1444,22 @@
 	id_tag = "ascent_caulship_pump_out_internal"
 	},
 /obj/structure/hygiene/shower/ascent{
-	icon_state = "shower";
-	dir = 8
+	dir = 8;
+	icon_state = "shower"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
+"Fb" = (
+/obj/structure/showcase{
+	color = "#800080";
+	desc = "A large, complex chunk of machinery similar to the bluespace drive found on some SCG ships. This one is definitely not Skrell design, and seems to have been destroyed in its last jump.";
+	icon = 'icons/obj/power.dmi';
+	icon_state = "tracker";
+	name = "burned-out bluespace drive"
+	},
+/obj/effect/overmap/visitable/sector/ascent_caulship_ring,
+/turf/simulated/floor/ascent/tiled,
+/area/space)
 "Ri" = (
 /obj/structure/cable/cyan{
 	d1 = 1;
@@ -1467,6 +1470,10 @@
 	dir = 5;
 	icon_state = "intact-supply"
 	},
+/obj/effect/catwalk_plated/ascent,
+/turf/simulated/floor/ascent,
+/area/ship/ascent_caulship)
+"Xe" = (
 /obj/effect/catwalk_plated/ascent,
 /turf/simulated/floor/ascent,
 /area/ship/ascent_caulship)
@@ -21168,7 +21175,7 @@ bl
 cu
 bq
 bu
-az
+Xe
 cO
 ab
 ax
@@ -21370,7 +21377,7 @@ bO
 bm
 br
 bv
-az
+Xe
 cR
 cS
 cT
@@ -21384,7 +21391,7 @@ cr
 aa
 db
 da
-dd
+Fb
 da
 da
 da
@@ -21572,7 +21579,7 @@ bh
 bn
 bs
 bw
-az
+Xe
 cC
 ab
 ax

@@ -26,6 +26,10 @@
 //Dusting robots does not eject the MMI, so it's a bit more powerful than gib() /N
 /mob/proc/dust(anim="dust-m",remains=/obj/effect/decal/cleanable/ash)
 	death(1)
+
+	if(stat == DEAD)
+		ghostize(FALSE) //Ghosts the mob here so it keeps its sprite
+
 	var/atom/movable/overlay/animation = null
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(src)
 	icon = null

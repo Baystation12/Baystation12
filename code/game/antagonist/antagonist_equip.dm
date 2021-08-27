@@ -24,7 +24,7 @@
 /datum/antagonist/proc/equip_rig(var/rig_type, var/mob/living/carbon/human/player)
 	set waitfor = 0
 	if(istype(player) && ispath(rig_type))
-		var/obj/item/weapon/rig/rig = new rig_type(player)
+		var/obj/item/rig/rig = new rig_type(player)
 		rig.seal_delay = 0
 		player.put_in_hands(rig)
 		player.equip_to_slot_or_del(rig,slot_back)
@@ -35,3 +35,7 @@
 			if(rig.air_supply)
 				player.set_internals(rig.air_supply)
 		return rig 
+
+//Some modes allow swapping to a vox from their initial mobs. Equip them here.
+/datum/antagonist/proc/equip_vox(mob/living/carbon/human/vox, mob/living/carbon/human/old)
+	return

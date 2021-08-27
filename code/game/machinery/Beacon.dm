@@ -5,14 +5,14 @@
 	name = "Bluespace Gigabeacon"
 	desc = "A device that draws power from bluespace and creates a permanent tracking beacon."
 	level = 1		// underfloor
-	anchored = 1
+	anchored = TRUE
 	idle_power_usage = 0
-	var/obj/item/device/radio/beacon/Beacon
+	var/obj/machinery/tele_beacon/Beacon
 
 	New()
 		..()
 		var/turf/T = get_turf(src)
-		Beacon = new /obj/item/device/radio/beacon(T)
+		Beacon = new /obj/machinery/tele_beacon(T)
 		Beacon.invisibility = INVISIBILITY_MAXIMUM
 
 		hide(!T.is_plating())
@@ -38,12 +38,10 @@
 
 	Process()
 		if(!Beacon)
-			Beacon = new /obj/item/device/radio/beacon(get_turf(src))
+			Beacon = new /obj/machinery/tele_beacon(get_turf(src))
 			Beacon.set_invisibility(INVISIBILITY_MAXIMUM)
 		if(Beacon)
 			if(Beacon.loc != loc)
 				Beacon.forceMove(loc)
 
 		update_icon()
-
-

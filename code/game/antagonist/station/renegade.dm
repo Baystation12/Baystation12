@@ -6,14 +6,12 @@ GLOBAL_DATUM_INIT(renegades, /datum/antagonist/renegade, new)
 	blacklisted_jobs = list(/datum/job/ai, /datum/job/submap)
 	restricted_jobs = list(/datum/job/officer, /datum/job/warden, /datum/job/captain, /datum/job/hop, /datum/job/hos, /datum/job/chief_engineer, /datum/job/rd, /datum/job/cmo)
 	welcome_text = "Something's going to go wrong today, you can just feel it. You're paranoid, you've got a gun, and you're going to survive."
-	antag_text = "You are a <b>minor</b> antagonist! Within the rules, \
-		try to protect yourself and what's important to you. You aren't here to <i>cause</i> trouble, \
-		you're just willing (and equipped) to go to extremes to <b>stop</b> it. \
-		Your job is to oppose the other antagonists, should they threaten you, in ways that aren't quite legal. \
-		Try to make sure other players have <i>fun</i>! If you are confused or at a loss, always adminhelp, \
-		and before taking extreme actions, please try to also contact the administration! \
-		Think through your actions and make the roleplay immersive! <b>Please remember all \
-		rules aside from those without explicit exceptions apply to antagonists.</b>"
+	antag_text = {"\
+	<p>You are a <b>minor</b> antagonist! Make sure <b>you</b> survive the round at any cost.</p> \
+	<p>Betray friends, make deals with enemies, and keep your gun handy. \
+	You aren't here to go looking for trouble - but if <i>it</i> finds <i>you</i>, kill it.</p> \
+	<p>Remember that the rules still apply to antagonists - Chat with staff before taking extreme actions.</p>
+	"}
 
 	id = MODE_RENEGADE
 	flags = ANTAG_SUSPICIOUS | ANTAG_IMPLANT_IMMUNE | ANTAG_RANDSPAWN | ANTAG_VOTABLE
@@ -26,24 +24,28 @@ GLOBAL_DATUM_INIT(renegades, /datum/antagonist/renegade, new)
 	skill_setter = /datum/antag_skill_setter/station
 
 	var/list/spawn_guns = list(
-		/obj/item/weapon/gun/energy/retro,
-		/obj/item/weapon/gun/energy/gun,
-		/obj/item/weapon/gun/energy/crossbow,
-		/obj/item/weapon/gun/energy/pulse_rifle/pistol,
-		/obj/item/weapon/gun/projectile/automatic,
-		/obj/item/weapon/gun/projectile/automatic/machine_pistol,
-		/obj/item/weapon/gun/projectile/automatic/sec_smg,
-		/obj/item/weapon/gun/projectile/pistol/magnum_pistol,
-		/obj/item/weapon/gun/projectile/pistol/military,
-		/obj/item/weapon/gun/projectile/pistol/military/alt,
-		/obj/item/weapon/gun/projectile/pistol/sec/lethal,
-		/obj/item/weapon/gun/projectile/pistol/holdout,
-		/obj/item/weapon/gun/projectile/revolver,
-		/obj/item/weapon/gun/projectile/revolver/medium,
-		/obj/item/weapon/gun/projectile/shotgun/doublebarrel/sawn,
-		/obj/item/weapon/gun/projectile/pistol/magnum_pistol,
-		/obj/item/weapon/gun/projectile/revolver/holdout,
-		/obj/item/weapon/gun/projectile/pistol/throwback
+		/obj/item/gun/energy/retro,
+		/obj/item/gun/energy/gun,
+		/obj/item/gun/energy/crossbow,
+		/obj/item/gun/energy/pulse_rifle/pistol,
+		/obj/item/gun/projectile/automatic,
+		/obj/item/gun/projectile/automatic/machine_pistol,
+		/obj/item/gun/projectile/automatic/sec_smg,
+		/obj/item/gun/projectile/pistol/magnum_pistol,
+		/obj/item/gun/projectile/pistol/military,
+		/obj/item/gun/projectile/pistol/military/alt,
+		/obj/item/gun/projectile/pistol/sec/lethal,
+		/obj/item/gun/projectile/pistol/holdout,
+		/obj/item/gun/projectile/revolver,
+		/obj/item/gun/projectile/revolver/medium,
+		/obj/item/gun/projectile/shotgun/doublebarrel/sawn,
+		/obj/item/gun/projectile/pistol/magnum_pistol,
+		/obj/item/gun/projectile/revolver/holdout,
+		/obj/item/gun/projectile/pistol/throwback,
+		/obj/item/gun/energy/xray/pistol,
+		/obj/item/gun/energy/toxgun,
+		/obj/item/gun/energy/incendiary_laser,
+		/obj/item/gun/projectile/pistol/magnum_pistol
 		)
 
 /datum/antagonist/renegade/create_objectives(var/datum/mind/player)

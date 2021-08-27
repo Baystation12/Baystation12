@@ -11,19 +11,19 @@
 	name = OUTFIT_JOB_NAME("Brig Chief")
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/security
 	shoes = /obj/item/clothing/shoes/dutyboots
-	id_types = list(/obj/item/weapon/card/id/torch/crew/security/brigchief)
+	id_types = list(/obj/item/card/id/torch/crew/security/brigchief)
 	pda_type = /obj/item/modular_computer/pda/security
 
 /decl/hierarchy/outfit/job/torch/crew/security/brig_chief/fleet
 	name = OUTFIT_JOB_NAME("Brig Chief - Fleet")
-	uniform = /obj/item/clothing/under/solgov/utility/fleet/combat/security
+	uniform = /obj/item/clothing/under/solgov/utility/fleet/security
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech
 	name = OUTFIT_JOB_NAME("Forensic Technician - Torch")
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/security
 	shoes = /obj/item/clothing/shoes/dutyboots
-	id_types = list(/obj/item/weapon/card/id/torch/crew/security/forensic)
+	id_types = list(/obj/item/card/id/torch/crew/security/forensic)
 	pda_type = /obj/item/modular_computer/pda/forensics
 
 /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/contractor
@@ -34,7 +34,7 @@
 
 /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/fleet
 	name = OUTFIT_JOB_NAME("Forensic Technician - Fleet")
-	uniform = /obj/item/clothing/under/solgov/utility/fleet/combat/security
+	uniform = /obj/item/clothing/under/solgov/utility/fleet/security
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/agent
@@ -47,10 +47,10 @@
 	name = OUTFIT_JOB_NAME("Master at Arms")
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/security
 	shoes = /obj/item/clothing/shoes/dutyboots
-	id_types = list(/obj/item/weapon/card/id/torch/crew/security)
+	id_types = list(/obj/item/card/id/torch/crew/security)
 	pda_type = /obj/item/modular_computer/pda/security
 
 /decl/hierarchy/outfit/job/torch/crew/security/maa/fleet
 	name = OUTFIT_JOB_NAME("Master at Arms - Fleet")
-	uniform = /obj/item/clothing/under/solgov/utility/fleet/combat/security
+	uniform = /obj/item/clothing/under/solgov/utility/fleet/security
 	shoes = /obj/item/clothing/shoes/dutyboots

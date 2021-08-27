@@ -5,7 +5,7 @@
 	icon_state = "battereroff"
 	slot_flags = SLOT_BELT
 	var/open = FALSE
-	var/obj/item/weapon/cell/power_cell = /obj/item/weapon/cell/high
+	var/obj/item/cell/power_cell = /obj/item/cell/high
 	var/shield_type = /obj/aura/personal_shield/device
 	var/shield_power_cost = 1000
 	var/obj/aura/personal_shield/device/shield
@@ -47,7 +47,7 @@
 	to_chat(user, "The internal capacitor currently has [round(currently_stored_power/max_stored_power * 100)]% charge.")
 
 /obj/item/device/personal_shield/attackby(var/obj/item/W, var/mob/user)
-	if(istype(W, /obj/item/weapon/cell))
+	if(istype(W, /obj/item/cell))
 		if(!open)
 			to_chat(user, SPAN_WARNING("\The [src] needs to be open first."))
 		else if(power_cell)

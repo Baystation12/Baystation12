@@ -2,8 +2,8 @@
 	name = "Pipe Dispenser"
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "pipe_d"
-	density = 1
-	anchored = 0
+	density = TRUE
+	anchored = FALSE
 	stat_immune = NOSCREEN//Doesn't need screen, just input for the parts wanted
 
 	construct_state = /decl/machine_construction/default/panel_closed
@@ -12,6 +12,9 @@
 	idle_power_usage = 500
 	power_channel = EQUIP
 	use_power = POWER_USE_OFF
+
+	machine_name = "pipe dispenser"
+	machine_desc = "A semi-portable dispenser that uses compressed matter to create atmospherics pipes. Vital for repair or construction efforts."
 
 	var/pipe_color = "white"
 
@@ -86,7 +89,7 @@
 						"<span class='notice'>\The [user] unfastens \the [src].</span>", \
 						"<span class='notice'>You have unfastened \the [src]. Now it can be pulled somewhere else.</span>", \
 						"You hear ratchet.")
-					anchored = 0
+					anchored = FALSE
 					stat |= MAINT
 					update_use_power(POWER_USE_OFF)
 					if(user.machine==src)
@@ -99,7 +102,7 @@
 						"<span class='notice'>\The [user] fastens \the [src].</span>", \
 						"<span class='notice'>You have fastened \the [src]. Now it can dispense pipes.</span>", \
 						"You hear ratchet.")
-					anchored = 1
+					anchored = TRUE
 					stat &= ~MAINT
 					update_use_power(POWER_USE_IDLE)
 			return
@@ -109,6 +112,8 @@
 	name = "Disposal Pipe Dispenser"
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "pipe_d"
+	machine_name = "disposal pipe dispenser"
+	machine_desc = "Similar to a normal pipe dispenser, but calibrated for the heavy, dense metal tubes used in disposals networks."
 
 //Allow you to drag-drop disposal pipes into it
 /obj/machinery/pipedispenser/disposal/MouseDrop_T(var/obj/structure/disposalconstruct/pipe as obj, mob/user as mob)

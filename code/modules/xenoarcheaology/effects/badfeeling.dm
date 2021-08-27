@@ -67,3 +67,10 @@
 			else if(prob(25))
 				H.dizziness += rand(5,15)
 		return 1
+
+/datum/artifact_effect/badfeeling/destroyed_effect()
+	. = ..()
+
+	for (var/mob/living/carbon/human/H in range(effectrange, get_turf(holder)))
+		H.Paralyse(4)
+		H.hallucination(50, 100)

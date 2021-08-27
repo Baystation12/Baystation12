@@ -68,7 +68,7 @@ There is no known way to stop the formation of the rift, nor any way to escape i
 
 God help your s\[\[###!!!-
 
-AUTOMATED ALERT: Link to [command_name()] lost.
+AUTOMATED ALERT: Link to [GLOB.using_map.boss_name] lost.
 
 "}
 		priority_announcement.Announce(txt,"SUPERMATTER CASCADE DETECTED")
@@ -105,10 +105,10 @@ AUTOMATED ALERT: Link to [command_name()] lost.
 	for (var/obj/machinery/power/apc/APC in SSmachines.machinery)
 		if (!(APC.stat & BROKEN) && !APC.is_critical)
 			APC.chargemode = 0
-			var/obj/item/weapon/cell/cell = APC.get_cell()
+			var/obj/item/cell/cell = APC.get_cell()
 			if(cell)
 				cell.charge = 0
-			APC.emagged = 1
+			APC.emagged = TRUE
 			APC.queue_icon_update()
 
 /datum/universal_state/supermatter_cascade/proc/PlayerSet()

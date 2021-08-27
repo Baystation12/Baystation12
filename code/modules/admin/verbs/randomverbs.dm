@@ -287,6 +287,18 @@
 	message_admins("[key_name_admin(usr)] has toggled [key_name_admin(M)]'s nodamage to [(M.status_flags & GODMODE) ? "On" : "Off"]", 1)
 	SSstatistics.add_field_details("admin_verb","GOD") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+/client/proc/cmd_admin_notarget(mob/living/M as mob in SSmobs.mob_list)
+	set category = "Special Verbs"
+	set name = "Notarget"
+	set desc = "Makes the target mob become invisible to all simple mobs."
+
+	if (!check_rights(R_ADMIN))
+		return
+
+	M.status_flags ^= NOTARGET
+	log_and_message_admins("has toggled [key_name(M)]'s notarget to [(M.status_flags & NOTARGET) ? "On" : "Off"]")
+	SSstatistics.add_field_details("admin_verb","NOTARGET") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
 proc/cmd_admin_mute(mob/M as mob, mute_type)
 	if(!usr || !usr.client)
 		return
@@ -528,7 +540,7 @@ Ccomp's first proc.
 	if(!input)
 		return
 	if(!customname)
-		customname = "[command_name()] Update"
+		customname = "[GLOB.using_map.boss_name] Update"
 
 	//New message handling
 	post_comm_message(customname, replacetext_char(input, "\n", "<br/>"))

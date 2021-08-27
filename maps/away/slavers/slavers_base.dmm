@@ -56,7 +56,7 @@
 /area/slavers_base/mort)
 "ao" = (
 /obj/structure/table/standard,
-/obj/item/weapon/wirecutters,
+/obj/item/wirecutters,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/mort)
 "ap" = (
@@ -66,7 +66,7 @@
 /area/slavers_base/mort)
 "aq" = (
 /obj/structure/table/standard,
-/obj/item/weapon/paper{
+/obj/item/paper/spacer{
 	info = "If they'll keep having fun with cargo in such manner, we'll run out of freezers to keep what's left from it.";
 	name = "Note"
 	},
@@ -77,7 +77,7 @@
 /area/slavers_base/mort)
 "ar" = (
 /obj/structure/table/standard,
-/obj/item/weapon/material/knife/table,
+/obj/item/material/knife/table,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/mort)
 "as" = (
@@ -90,11 +90,11 @@
 /area/space)
 "au" = (
 /obj/structure/table/rack,
-/obj/item/weapon/wirecutters,
+/obj/item/wirecutters,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/mort)
 "av" = (
-/obj/item/weapon/shovel,
+/obj/item/shovel,
 /turf/simulated/floor/asteroid,
 /area/space)
 "aw" = (
@@ -110,12 +110,12 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/mort)
 "az" = (
-/obj/item/weapon/material/knife/table,
+/obj/item/material/knife/table,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/mort)
 "aA" = (
 /obj/structure/table/rack,
-/obj/item/weapon/material/hatchet,
+/obj/item/material/hatchet,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/mort)
 "aB" = (
@@ -221,7 +221,7 @@
 /area/slavers_base/cells)
 "aS" = (
 /obj/structure/mattress/dirty,
-/obj/item/weapon/reagent_containers/glass/rag,
+/obj/item/reagent_containers/glass/rag,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "aT" = (
@@ -245,7 +245,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "aW" = (
-/obj/item/weapon/reagent_containers/glass/rag,
+/obj/item/reagent_containers/glass/rag,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "aX" = (
@@ -258,13 +258,13 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "aY" = (
-/obj/item/weapon/reagent_containers/glass/rag,
+/obj/item/reagent_containers/glass/rag,
 /obj/random/trash,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "aZ" = (
 /obj/structure/mattress/dirty,
-/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
+/obj/item/reagent_containers/food/drinks/cans/waterbottle,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "ba" = (
@@ -288,7 +288,7 @@
 	name = "Floor mounted flash";
 	pixel_x = 0
 	},
-/obj/item/weapon/reagent_containers/glass/rag,
+/obj/item/reagent_containers/glass/rag,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "bd" = (
@@ -306,7 +306,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "bf" = (
-/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
+/obj/item/reagent_containers/food/drinks/cans/waterbottle,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "bg" = (
@@ -487,7 +487,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "bw" = (
-/obj/item/weapon/paper{
+/obj/item/paper/spacer{
 	info = "Tonight, when lights are out. Prepare shivs, pieces of glass, whatever you might find.";
 	name = "Note"
 	},
@@ -581,7 +581,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "bJ" = (
-/obj/item/weapon/storage/bag/trash,
+/obj/item/storage/bag/trash,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "bK" = (
@@ -836,7 +836,7 @@
 /obj/structure/hygiene/toilet{
 	dir = 4
 	},
-/obj/item/weapon/reagent_containers/food/snacks/liquidfood,
+/obj/item/reagent_containers/food/snacks/liquidfood,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "ce" = (
@@ -1072,7 +1072,7 @@
 /area/slavers_base/cells)
 "cB" = (
 /obj/machinery/door/window/brigdoor/northright,
-/obj/item/weapon/reagent_containers/glass/rag,
+/obj/item/reagent_containers/glass/rag,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "cC" = (
@@ -1097,7 +1097,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/hangar)
 "cF" = (
-/obj/item/weapon/paper,
+/obj/item/paper,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "cG" = (
@@ -1118,7 +1118,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/hangar)
 "cJ" = (
-/obj/item/weapon/paper{
+/obj/item/paper/spacer{
 	info = "Doc who checked us told implants won't explode our heads. Gotta make guys know. Seems I see a silver lining.";
 	name = "Note"
 	},
@@ -1135,7 +1135,7 @@
 /area/slavers_base/cells)
 "cM" = (
 /obj/structure/mattress/dirty,
-/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
+/obj/item/reagent_containers/food/drinks/cans/waterbottle,
 /obj/random/junk,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
@@ -1146,8 +1146,8 @@
 /area/slavers_base/cells)
 "cO" = (
 /obj/structure/mattress/dirty,
-/obj/item/weapon/reagent_containers/glass/rag,
-/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
+/obj/item/reagent_containers/glass/rag,
+/obj/item/reagent_containers/food/drinks/cans/waterbottle,
 /obj/effect/landmark/corpse/slavers_base/slave,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
@@ -1161,7 +1161,7 @@
 "cQ" = (
 /obj/machinery/light/small/red,
 /obj/structure/mattress/dirty,
-/obj/item/weapon/reagent_containers/glass/rag,
+/obj/item/reagent_containers/glass/rag,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "cR" = (
@@ -1270,14 +1270,14 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/item/weapon/storage/box/handcuffs,
+/obj/item/storage/box/handcuffs,
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
 "dk" = (
 /obj/structure/table/rack,
-/obj/item/weapon/melee/baton,
-/obj/item/weapon/melee/baton,
-/obj/item/weapon/melee/baton,
+/obj/item/melee/baton,
+/obj/item/melee/baton,
+/obj/item/melee/baton,
 /obj/random/tool,
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
@@ -1289,8 +1289,8 @@
 /area/slavers_base/secwing)
 "dm" = (
 /obj/structure/table/rack,
-/obj/item/weapon/storage/box/ammo/stunshells,
-/obj/item/weapon/gun/projectile/shotgun/pump,
+/obj/item/storage/box/ammo/stunshells,
+/obj/item/gun/projectile/shotgun/pump,
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
 "dn" = (
@@ -1459,7 +1459,7 @@
 /area/slavers_base/med)
 "dE" = (
 /obj/structure/closet/crate/freezer/rations,
-/obj/item/weapon/reagent_containers/food/snacks/liquidfood,
+/obj/item/reagent_containers/food/snacks/liquidfood,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/med)
 "dF" = (
@@ -1546,8 +1546,8 @@
 /area/slavers_base/secwing)
 "dR" = (
 /obj/structure/table/steel,
-/obj/item/weapon/storage/box/ammo/stunshells,
-/obj/item/weapon/melee/baton,
+/obj/item/storage/box/ammo/stunshells,
+/obj/item/melee/baton,
 /obj/machinery/power/terminal{
 	dir = 1;
 	icon_state = "term"
@@ -1619,7 +1619,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/med)
 "dZ" = (
-/obj/item/weapon/reagent_containers/food/snacks/liquidfood,
+/obj/item/reagent_containers/food/snacks/liquidfood,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/med)
 "ea" = (
@@ -1710,7 +1710,7 @@
 /obj/structure/table/steel,
 /obj/item/device/flash,
 /obj/item/device/radio,
-/obj/item/weapon/paper{
+/obj/item/paper/spacer{
 	info = "If this fuck from A-3 keeps thinking he's better then piece of meat, throw him to hangar and show how little pressure turns diamonds into shit.";
 	name = "Note"
 	},
@@ -1770,15 +1770,15 @@
 /area/slavers_base/med)
 "ez" = (
 /obj/structure/bed,
-/obj/item/weapon/handcuffs,
+/obj/item/handcuffs,
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/med)
 "eA" = (
-/obj/item/weapon/beartrap,
+/obj/item/beartrap,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/med)
 "eB" = (
-/obj/item/weapon/mop,
+/obj/item/mop,
 /obj/structure/mopbucket,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/med)
@@ -1922,17 +1922,17 @@
 /area/slavers_base/secwing)
 "eS" = (
 /obj/structure/table/steel,
-/obj/item/weapon/handcuffs,
+/obj/item/handcuffs,
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
 "eT" = (
-/obj/item/weapon/gun/projectile/shotgun/pump,
+/obj/item/gun/projectile/shotgun/pump,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/hallway)
 "eU" = (
 /obj/machinery/optable,
-/obj/item/weapon/scalpel,
+/obj/item/scalpel,
 /obj/effect/decal/cleanable/blood,
 /obj/machinery/light,
 /turf/simulated/floor/tiled/airless,
@@ -1942,16 +1942,16 @@
 	dir = 4
 	},
 /obj/structure/table/standard,
-/obj/item/weapon/implanter,
-/obj/item/weapon/implantcase/tracking,
-/obj/item/weapon/surgicaldrill,
+/obj/item/implanter,
+/obj/item/implantcase/tracking,
+/obj/item/surgicaldrill,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/med)
 "eW" = (
 /obj/machinery/optable,
 /obj/effect/decal/cleanable/blood,
-/obj/item/weapon/screwdriver,
+/obj/item/screwdriver,
 /obj/machinery/light,
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/med)
@@ -1960,32 +1960,32 @@
 	dir = 4
 	},
 /obj/structure/table/standard,
-/obj/item/weapon/implantpad,
-/obj/item/weapon/reagent_containers/pill/spaceacillin,
+/obj/item/implantpad,
+/obj/item/reagent_containers/pill/spaceacillin,
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/med)
 "eY" = (
 /obj/structure/table/standard,
-/obj/item/weapon/storage/firstaid/empty,
-/obj/item/weapon/handcuffs,
-/obj/item/weapon/melee/baton,
+/obj/item/storage/firstaid/empty,
+/obj/item/handcuffs,
+/obj/item/melee/baton,
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/med)
 "eZ" = (
 /obj/structure/table/standard,
-/obj/item/weapon/storage/firstaid/o2,
-/obj/item/weapon/folder/white,
-/obj/item/weapon/paper{
+/obj/item/storage/firstaid/o2,
+/obj/item/folder/white,
+/obj/item/paper/spacer{
 	info = "Seems they don't really look over my shoulder anymore. We have now maybe a dozen of them with inactive implants. Hope they will pick right moment to flip the lid. I'll kill few bastards myself soon as I have a chance.";
 	name = "Note"
 	},
-/obj/item/weapon/pen,
+/obj/item/pen,
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/med)
 "fa" = (
 /obj/structure/table/standard,
-/obj/item/weapon/storage/firstaid/regular,
-/obj/item/weapon/material/hatchet,
+/obj/item/storage/firstaid/regular,
+/obj/item/material/hatchet,
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/med)
 "fb" = (
@@ -1998,13 +1998,13 @@
 /area/slavers_base/med)
 "fd" = (
 /obj/structure/table/standard,
-/obj/item/weapon/storage/box/handcuffs,
-/obj/item/weapon/storage/box/handcuffs,
+/obj/item/storage/box/handcuffs,
+/obj/item/storage/box/handcuffs,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/med)
 "fe" = (
 /obj/structure/table/standard,
-/obj/item/weapon/storage/box/bodybags,
+/obj/item/storage/box/bodybags,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/med)
 "ff" = (
@@ -2377,7 +2377,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/hallway)
 "fT" = (
-/obj/item/weapon/wrench,
+/obj/item/wrench,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/hallway)
@@ -2552,7 +2552,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/powatm)
 "gp" = (
-/obj/item/weapon/crowbar,
+/obj/item/crowbar,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/powatm)
 "gq" = (
@@ -2570,8 +2570,8 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/item/weapon/stock_parts/circuitboard/broken,
-/obj/item/weapon/contraband/poster,
+/obj/item/stock_parts/circuitboard/broken,
+/obj/item/contraband/poster,
 /obj/item/device/radio,
 /obj/machinery/light/small{
 	dir = 4
@@ -2708,7 +2708,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/item/weapon/storage/toolbox/mechanical,
+/obj/item/storage/toolbox/mechanical,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/powatm)
 "gN" = (
@@ -2893,7 +2893,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/maint)
 "hg" = (
-/obj/item/weapon/coilgun_assembly,
+/obj/item/coilgun_assembly,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/powatm)
 "hh" = (
@@ -2968,12 +2968,12 @@
 	dir = 1
 	},
 /obj/structure/safe,
-/obj/item/weapon/storage/bag/cash,
+/obj/item/storage/bag/cash,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/demo)
 "ht" = (
 /obj/structure/safe,
-/obj/item/weapon/storage/bag/cash,
+/obj/item/storage/bag/cash,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/demo)
 "hu" = (
@@ -3011,7 +3011,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/powatm)
 "hA" = (
-/obj/item/weapon/stock_parts/computer/card_slot,
+/obj/item/stock_parts/computer/card_slot,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/powatm)
 "hB" = (
@@ -3138,7 +3138,7 @@
 /area/slavers_base/demo)
 "hP" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/storage/secure/briefcase/money,
+/obj/item/storage/secure/briefcase/money,
 /obj/random/cash,
 /obj/random/cash,
 /obj/random/cash,
@@ -3272,7 +3272,7 @@
 /area/slavers_base/demo)
 "ij" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/storage/bag/cash,
+/obj/item/storage/bag/cash,
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/demo)
 "ik" = (
@@ -3419,7 +3419,7 @@
 /area/slavers_base/dorms)
 "iy" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/paper{
+/obj/item/paper/spacer{
 	info = "<center><b> Contract </b></center> <br>This contract describes exchanging of monetary pieces for the right o? the ownership for following examples: <list><*> Human, age 17. Price - 1500 thalers. <*> Human, age 49. Price - 1100 thalers. <*> Unathi, age 28. Good fist fighter. Price - 2400 thalers. <*> Human, age 34. Expirienced medic. Price - 6800 thalers. </list> <b> Overall price: 11800 thalers</b><br><small>Place for signatures</small>";
 	name = "Contract"
 	},
@@ -3428,7 +3428,7 @@
 "iz" = (
 /obj/structure/table/woodentable,
 /obj/random/coin,
-/obj/item/weapon/pen,
+/obj/item/pen,
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/demo)
 "iA" = (
@@ -3549,8 +3549,8 @@
 	icon_state = "4-8";
 	pixel_x = 0
 	},
-/obj/item/weapon/reagent_containers/food/condiment/small/peppermill,
-/obj/item/weapon/reagent_containers/food/condiment/small/saltshaker{
+/obj/item/reagent_containers/food/condiment/small/peppermill,
+/obj/item/reagent_containers/food/condiment/small/saltshaker{
 	pixel_x = 3;
 	pixel_y = 10
 	},
@@ -3584,7 +3584,7 @@
 "iR" = (
 /obj/structure/table/standard,
 /obj/item/trash/plate,
-/obj/item/weapon/material/kitchen/utensil/fork,
+/obj/item/material/kitchen/utensil/fork,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
@@ -3617,7 +3617,7 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "iU" = (
-/obj/item/weapon/material/kitchen/utensil/fork,
+/obj/item/material/kitchen/utensil/fork,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
@@ -3752,7 +3752,7 @@
 /area/slavers_base/dorms)
 "jj" = (
 /obj/structure/table/standard,
-/obj/item/weapon/material/kitchen/utensil/fork,
+/obj/item/material/kitchen/utensil/fork,
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "jk" = (
@@ -3882,7 +3882,7 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "jC" = (
-/obj/item/weapon/paper{
+/obj/item/paper/spacer{
 	info = "We made over 200 grands for two last weeks. We should stay low-key for month or so, or we'll get our base discovered by fucking marshalls so shut your whining and relax, I'l l get you three crates of booze and some cargo to play with.";
 	name = "Note"
 	},
@@ -3965,7 +3965,7 @@
 /area/slavers_base/demo)
 "jO" = (
 /obj/structure/table/standard,
-/obj/item/weapon/pen,
+/obj/item/pen,
 /turf/simulated/floor/tiled,
 /area/slavers_base/demo)
 "jP" = (
@@ -4008,7 +4008,7 @@
 /obj/structure/bed/chair{
 	dir = 1
 	},
-/obj/item/weapon/storage/secure/briefcase/money,
+/obj/item/storage/secure/briefcase/money,
 /obj/random/cash,
 /obj/random/cash,
 /obj/random/cash,
@@ -4184,7 +4184,7 @@
 /area/slavers_base/demo)
 "kv" = (
 /obj/structure/table/standard,
-/obj/item/weapon/storage/box/glass_extras,
+/obj/item/storage/box/glass_extras,
 /turf/simulated/floor/tiled,
 /area/slavers_base/demo)
 "kw" = (
@@ -4323,7 +4323,7 @@
 /obj/structure/hygiene/sink{
 	pixel_y = -20
 	},
-/obj/item/weapon/storage/mirror{
+/obj/item/storage/mirror{
 	pixel_y = -35
 	},
 /obj/effect/landmark/corpse/slavers_base/slaver2,
@@ -4334,7 +4334,7 @@
 /obj/structure/hygiene/sink{
 	pixel_y = -20
 	},
-/obj/item/weapon/storage/mirror{
+/obj/item/storage/mirror{
 	pixel_y = -35
 	},
 /turf/simulated/floor/tiled/white,

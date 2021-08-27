@@ -12,7 +12,7 @@
 	level = 1
 	dir = 2
 	initialize_directions = 2
-	density = 1
+	density = TRUE
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
 	pipe_class = PIPE_CLASS_UNARY
 

@@ -33,6 +33,10 @@
 	ingested.my_atom = owner
 	ingested.parent = owner
 
+/obj/item/organ/internal/stomach/robotize()
+	. = ..()
+	icon_state = "stomach-prosthetic"
+
 /obj/item/organ/internal/stomach/proc/can_eat_atom(var/atom/movable/food)
 	return !isnull(get_devour_time(food))
 
@@ -60,7 +64,7 @@
 			return DEVOUR_SLOW
 		else if(species.gluttonous & GLUT_ANYTHING) // Eat anything ever
 			return DEVOUR_FAST
-	else if(istype(food, /obj/item) && !istype(food, /obj/item/weapon/holder)) //Don't eat holders. They are special.
+	else if(istype(food, /obj/item) && !istype(food, /obj/item/holder)) //Don't eat holders. They are special.
 		var/obj/item/I = food
 		var/cost = I.get_storage_cost()
 		if(cost != ITEM_SIZE_NO_CONTAINER)
@@ -80,7 +84,7 @@
 /obj/item/organ/internal/stomach/attack_self(mob/user)
 	. = ..()
 	if(. && action_button_name == PUKE_ACTION_NAME && owner && !owner.incapacitated())
-		owner.vomit(deliberate = TRUE)
+		owner.empty_stomach()
 		refresh_action_button()
 
 /obj/item/organ/internal/stomach/return_air()
@@ -91,9 +95,9 @@
 /obj/item/organ/internal/stomach/proc/metabolize()
 	if(is_usable())
 		ingested.metabolize()
-	
+
 #define STOMACH_VOLUME 65
-	
+
 /obj/item/organ/internal/stomach/Process()
 	..()
 
@@ -121,14 +125,14 @@
 			owner.custom_pain("Your stomach cramps agonizingly!",1)
 
 		var/alcohol_volume = ingested.get_reagent_amount(/datum/reagent/ethanol)
-		
+
 		var/alcohol_threshold_met = alcohol_volume > STOMACH_VOLUME / 2
 		if(alcohol_threshold_met && (owner.disabilities & EPILEPSY) && prob(20))
 			owner.seizure()
-		
+
 		// Alcohol counts as double volume for the purposes of vomit probability
 		var/effective_volume = ingested.total_volume + alcohol_volume
-		
+
 		// Just over the limit, the probability will be low. It rises a lot such that at double ingested it's 64% chance.
 		var/vomit_probability = (effective_volume / STOMACH_VOLUME) ** 6
 		if(prob(vomit_probability))

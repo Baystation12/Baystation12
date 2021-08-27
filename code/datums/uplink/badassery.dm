@@ -27,13 +27,19 @@
 	name = "Crayon MRE"
 	desc = "An exceptionally robust MRE."
 	item_cost = DEFAULT_TELECRYSTAL_AMOUNT
-	path = /obj/item/weapon/storage/mre/menu11/special
+	path = /obj/item/storage/mre/menu11/special
 
 /datum/uplink_item/item/badassery/modded_foam_gun
 	name = "Modded foam gun"
 	desc = "It's a Jorf revolver blaster and 14 weighted darts. Even after aftermarket modification to increase its range and launch velocity, it's not a very effective weapon."
 	item_cost = 32
-	path = /obj/item/weapon/storage/box/large/foam_gun/revolver/tampered
+	path = /obj/item/storage/box/large/foam_gun/revolver/tampered
+
+/datum/uplink_item/item/badassery/fortune
+	name = "A Fortune Cookie"
+	desc = "Why would you buy this?"
+	item_cost = DEFAULT_TELECRYSTAL_AMOUNT
+	path = /obj/item/reagent_containers/food/snacks/fortunecookie
 
 /**************
 * Random Item *

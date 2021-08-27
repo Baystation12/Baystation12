@@ -1,6 +1,5 @@
-
-// Operates NanoUI
-/datum/extension/interactive/ntos/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/// Operates NanoUI
+/datum/extension/interactive/ntos/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	if(!on || !host_status())
 		if(ui)
 			ui.close()
@@ -14,17 +13,16 @@
 
 	// We are still here, that means there is no program loaded. Load the BIOS/ROM/OS/whatever you want to call it.
 	// This screen simply lists available programs and user may select them.
-	var/obj/item/weapon/stock_parts/computer/hard_drive/hard_drive = get_component(PART_HDD)
-	if(!hard_drive || !length(hard_drive.stored_files))
+	var/obj/item/stock_parts/computer/hard_drive/hard_drive = get_component(PART_HDD)
+	if(!hard_drive)
 		show_error(user, "DISK ERROR")
-		return // No HDD, No HDD files list or no stored files. Something is very broken.
-
-	var/datum/computer_file/data/autorun = get_file("autorun")
+		return // No HDD, Something is very broken.
 
 	var/list/data = get_header_data()
 
+	var/datum/computer_file/data/autorun = get_file("autorun")
 	var/list/programs = list()
-	for(var/datum/computer_file/program/P in hard_drive.stored_files)
+	for(var/datum/computer_file/program/P in get_all_files())
 		var/list/program = list()
 		program["name"] = P.filename
 		program["desc"] = P.filedesc
@@ -48,7 +46,7 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/datum/extension/interactive/ntos/extension_status(var/mob/user)
+/datum/extension/interactive/ntos/extension_status(mob/user)
 	. = ..()
 	if(!on || !host_status())
 		return STATUS_CLOSE
@@ -60,21 +58,21 @@
 	. = holder.CanUseTopic(user, state)
 	. = min(., extension_status(user))
 
-// Handles user's GUI input
+/// Handles user's GUI input
 /datum/extension/interactive/ntos/extension_act(href, href_list, user)
 	if( href_list["PC_exit"] )
 		kill_program(active_program)
 		return TOPIC_HANDLED
 	if(href_list["PC_enable_component"] )
-		var/obj/item/weapon/stock_parts/computer/H = locate(href_list["PC_enable_component"]) in holder
+		var/obj/item/stock_parts/computer/H = locate(href_list["PC_enable_component"]) in holder
 		if(H && istype(H) && !H.enabled)
-			H.enabled = 1
+			H.enabled = TRUE
 			H.on_enable(src)
 		return TOPIC_REFRESH
 	if(href_list["PC_disable_component"] )
-		var/obj/item/weapon/stock_parts/computer/H = locate(href_list["PC_disable_component"]) in holder
+		var/obj/item/stock_parts/computer/H = locate(href_list["PC_disable_component"]) in holder
 		if(H && istype(H) && H.enabled)
-			H.enabled = 0
+			H.enabled = FALSE
 			H.on_disable()
 		return TOPIC_REFRESH
 	if( href_list["PC_enable_update"] )
@@ -106,7 +104,11 @@
 		return TOPIC_HANDLED
 
 	if( href_list["PC_setautorun"] )
-		set_autorun(href_list["PC_setautorun"])
+		var/datum/computer_file/data/autorun = get_file("autorun")
+		if(istype(autorun) && autorun.stored_data == href_list["PC_setautorun"])
+			set_autorun()
+		else
+			set_autorun(href_list["PC_setautorun"])
 		return TOPIC_REFRESH
 
 	if( href_list["PC_terminal"] )
@@ -114,17 +116,17 @@
 		return TOPIC_HANDLED
 
 /datum/extension/interactive/ntos/proc/regular_ui_update()
-	var/ui_update_needed = 0
-	var/obj/item/weapon/stock_parts/computer/battery_module/battery_module = get_component(PART_BATTERY)
+	var/ui_update_needed = FALSE
+	var/obj/item/stock_parts/computer/battery_module/battery_module = get_component(PART_BATTERY)
 	if(battery_module)
 		var/batery_percent = battery_module.battery.percent()
 		if(last_battery_percent != batery_percent) //Let's update UI on percent change
-			ui_update_needed = 1
+			ui_update_needed = TRUE
 			last_battery_percent = batery_percent
 
 	if(stationtime2text() != last_world_time)
 		last_world_time = stationtime2text()
-		ui_update_needed = 1
+		ui_update_needed = TRUE
 
 	var/list/current_header_icons = list()
 	for(var/datum/computer_file/program/P in running_programs)
@@ -137,12 +139,12 @@
 
 	else if(!listequal(last_header_icons, current_header_icons))
 		last_header_icons = current_header_icons
-		ui_update_needed = 1
+		ui_update_needed = TRUE
 	else
 		for(var/x in last_header_icons|current_header_icons)
 			if(last_header_icons[x]!=current_header_icons[x])
 				last_header_icons = current_header_icons
-				ui_update_needed = 1
+				ui_update_needed = TRUE
 				break
 
 	if(ui_update_needed)
@@ -154,11 +156,11 @@
 		if(active_program.NM)
 			SSnano.update_uis(active_program.NM)
 
-// Function used by NanoUI's to obtain data for header. All relevant entries begin with "PC_"
+/// Function used by NanoUI's to obtain data for header. All relevant entries begin with "PC_"
 /datum/extension/interactive/ntos/proc/get_header_data()
 	var/list/data = list()
 
-	var/obj/item/weapon/stock_parts/computer/battery_module/battery_module = get_component(PART_BATTERY)
+	var/obj/item/stock_parts/computer/battery_module/battery_module = get_component(PART_BATTERY)
 	if(battery_module)
 		switch(battery_module.battery.percent())
 			if(80 to 200) // 100 should be maximal but just in case..
@@ -174,17 +176,17 @@
 			else
 				data["PC_batteryicon"] = "batt_5.gif"
 		data["PC_batterypercent"] = "[round(battery_module.battery.percent())] %"
-		data["PC_showbatteryicon"] = 1
+		data["PC_showbatteryicon"] = TRUE
 	else
 		data["PC_batteryicon"] = "batt_5.gif"
 		data["PC_batterypercent"] = "N/C"
-		data["PC_showbatteryicon"] = battery_module ? 1 : 0
+		data["PC_showbatteryicon"] = battery_module ? TRUE : FALSE
 
-	var/obj/item/weapon/stock_parts/computer/tesla_link/tesla_link = get_component(PART_TESLA)
+	var/obj/item/stock_parts/computer/tesla_link/tesla_link = get_component(PART_TESLA)
 	if(tesla_link && tesla_link.enabled)
 		data["PC_apclinkicon"] = "charging.gif"
 
-	var/obj/item/weapon/stock_parts/computer/network_card/network_card = get_component(PART_NETWORK)
+	var/obj/item/stock_parts/computer/network_card/network_card = get_component(PART_NETWORK)
 	if(network_card && network_card.is_banned())
 		data["PC_ntneticon"] = "sig_warning.gif"
 	else
@@ -209,7 +211,7 @@
 
 	data["PC_stationtime"] = stationtime2text()
 	data["PC_hasheader"] = !updating
-	data["PC_showexitprogram"] = active_program ? 1 : 0 // Hides "Exit Program" button on mainscreen
+	data["PC_showexitprogram"] = active_program ? TRUE : FALSE // Hides "Exit Program" button on mainscreen
 	return data
 
 /datum/extension/interactive/ntos/initial_data()

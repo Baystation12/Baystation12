@@ -42,7 +42,7 @@
 		L.faction = null
 	if(istype(L,/mob/living/simple_animal/hostile))
 		var/mob/living/simple_animal/hostile/H = L
-		H.LoseTarget()
+		H.ai_holder.lose_target()
 		H.attack_same = 0
 		H.friends += weakref(user)
 	L.desc += "<br><span class='notice'>It looks especially docile.</span>"

@@ -7,7 +7,7 @@
 	layer = ABOVE_PROJECTILE_LAYER
 	time_to_live = 300
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GRILLE | PASS_FLAG_GLASS //PASS_FLAG_GLASS is fine here, it's just so the visual effect can "flow" around glass
-	var/splash_amount = 10 //atoms moving through a smoke cloud get splashed with up to 10 units of reagent
+	var/splash_amount = 5 //atoms moving through a smoke cloud get splashed with up to 10 units of reagent
 	var/turf/destination
 
 /obj/effect/effect/smoke/chem/New(var/newloc, smoke_duration, turf/dest_turf = null, icon/cached_icon = null)
@@ -84,6 +84,7 @@
 	var/list/targetTurfs
 	var/list/wallList
 	var/density
+	var/smokeVolume
 	var/show_log = 1
 
 /datum/effect/effect/system/smoke_spread/chem/spores
@@ -110,6 +111,7 @@
 	range = n * 0.3
 	cardinals = c
 	carry.trans_to_obj(chemholder, carry.total_volume, copy = 1)
+	smokeVolume = n
 
 	if(istype(loca, /turf/))
 		location = loca
@@ -179,7 +181,7 @@
 		I = icon('icons/effects/96x96.dmi', "smoke")
 
 	//Calculate smoke duration
-	var/smoke_duration = 150
+	var/smoke_duration = smokeVolume * 1.5 SECONDS
 
 	var/pressure = 0
 	var/datum/gas_mixture/environment = location.return_air()
@@ -192,7 +194,7 @@
 		var/radius = i * 1.5
 		if(!radius)
 			spawn(0)
-				spawnSmoke(location, I, 1, 1)
+				spawnSmoke(location, I, smoke_duration, 1)
 			continue
 
 		var/offset = 0
@@ -211,7 +213,7 @@
 				continue
 			if(T in targetTurfs)
 				spawn(0)
-					spawnSmoke(T, I, range)
+					spawnSmoke(T, I, smoke_duration, range)
 
 //------------------------------------------
 // Randomizes and spawns the smoke effect.
@@ -223,7 +225,7 @@
 	if(passed_smoke)
 		smoke = passed_smoke
 	else
-		smoke = new /obj/effect/effect/smoke/chem(location, smoke_duration + rand(0, 20), T, I)
+		smoke = new /obj/effect/effect/smoke/chem(location, smoke_duration + rand(1.5 SECONDS, 3 SECONDS), T, I)
 
 	if(chemholder.reagents.reagent_list.len)
 		chemholder.reagents.trans_to_obj(smoke, chemholder.reagents.total_volume / dist, copy = 1) //copy reagents to the smoke so mob/breathe() can handle inhaling the reagents

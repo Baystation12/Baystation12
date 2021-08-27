@@ -19,6 +19,7 @@ var/global/list/sparring_attack_cache = list()
 	var/eye_attack_text_victim
 
 	var/attack_name = "fist"
+	var/should_attack_log = TRUE
 
 /datum/unarmed_attack/proc/get_damage_type()
 	if(deal_halloss)
@@ -67,13 +68,13 @@ var/global/list/sparring_attack_cache = list()
 				if (target.l_hand)
 					// Disarm left hand
 					//Urist McAssistant dropped the macguffin with a scream just sounds odd.
-					target.visible_message("<span class='danger'>\The [target.l_hand] was knocked right out of [target]'s grasp!</span>")
-					target.drop_l_hand()
+					if(target.drop_l_hand())
+						target.visible_message(SPAN_DANGER("\The [target.l_hand] was knocked right out of \the [target]'s grasp!"))
 			if(BP_R_ARM, BP_R_HAND)
 				if (target.r_hand)
 					// Disarm right hand
-					target.visible_message("<span class='danger'>\The [target.r_hand] was knocked right out of [target]'s grasp!</span>")
-					target.drop_r_hand()
+					if(target.drop_r_hand())
+						target.visible_message(SPAN_DANGER("\The [target.r_hand] was knocked right out of \the [target]'s grasp!"))
 			if(BP_CHEST)
 				if(!target.lying)
 					var/turf/T = get_step(get_turf(target), get_dir(get_turf(user), get_turf(target)))
@@ -277,8 +278,8 @@ var/global/list/sparring_attack_cache = list()
 	deal_halloss = 3
 	attack_noun = list("tap","light strike")
 	attack_verb = list("tapped", "lightly struck")
-	damage = 2
 	damage = 0
 	sharp = TRUE
 	edge = TRUE
 	attack_name = "light hit"
+	should_attack_log = FALSE

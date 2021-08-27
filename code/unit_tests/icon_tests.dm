@@ -17,7 +17,7 @@
 	for(var/icon_state in valid_states)
 		if(icon_state in excepted_icon_states_)
 			continue
-		if(starts_with(icon_state, "eyes-"))
+		if(text_starts_with(icon_state, "eyes-"))
 			continue
 		if(findtext(icon_state, "openpanel"))
 			continue

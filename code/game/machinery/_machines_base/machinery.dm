@@ -81,11 +81,12 @@ Class Procs:
 	icon = 'icons/obj/stationobjs.dmi'
 	w_class = ITEM_SIZE_NO_CONTAINER
 	layer = STRUCTURE_LAYER // Layer under items
+	init_flags = INIT_MACHINERY_PROCESS_SELF
 
 	var/stat = 0
 	var/reason_broken = 0
 	var/stat_immune = NOSCREEN | NOINPUT // The machine will never set stat to these flags.
-	var/emagged = 0
+	var/emagged = FALSE
 	var/malf_upgraded = 0
 	var/datum/wires/wires //wire datum, if any. If you place a type path, it will be autoinitialized.
 	var/use_power = POWER_USE_IDLE
@@ -96,9 +97,9 @@ Class Procs:
 	var/active_power_usage = 0
 	var/power_channel = EQUIP //EQUIP, ENVIRON or LIGHT
 	var/power_init_complete = FALSE // Helps with bookkeeping when initializing atoms. Don't modify.
-	var/list/component_parts           //List of component instances. Expected type: /obj/item/weapon/stock_parts
-	var/list/uncreated_component_parts = list(/obj/item/weapon/stock_parts/power/apc) //List of component paths which have delayed init. Indeces = number of components.
-	var/list/maximum_component_parts = list(/obj/item/weapon/stock_parts = 10)         //null - no max. list(type part = number max).
+	var/list/component_parts           //List of component instances. Expected type: /obj/item/stock_parts
+	var/list/uncreated_component_parts = list(/obj/item/stock_parts/power/apc) //List of component paths which have delayed init. Indeces = number of components.
+	var/list/maximum_component_parts = list(/obj/item/stock_parts = 10)         //null - no max. list(type part = number max).
 	var/uid
 	var/panel_open = 0
 	var/global/gl_uid = 1
@@ -112,15 +113,19 @@ Class Procs:
 	var/id_tag              // This generic variable is to be used by mappers to give related machines a string key. In principle used by radio stock parts.
 	var/frame_type = /obj/machinery/constructable_frame/machine_frame/deconstruct // what is created when the machine is dismantled.
 
-	var/list/processing_parts // Component parts queued for processing by the machine. Expected type: /obj/item/weapon/stock_parts
+	var/list/processing_parts // Component parts queued for processing by the machine. Expected type: /obj/item/stock_parts
 	var/processing_flags         // What is being processed
 	var/silicon_restriction = FALSE // FALSE or one of the STATUS_* flags. If set, will force the given status flag if a silicon tries to access the machine.
+
+	var/machine_name = null // The human-readable name of this machine, shown when examining circuit boards.
+	var/machine_desc = null // A simple description of what this machine does, shown on examine for circuit boards.
 
 /obj/machinery/Initialize(mapload, d=0, populate_parts = TRUE)
 	. = ..()
 	if(d)
 		set_dir(d)
-	START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF) // It's safe to remove machines from here, but only if base machinery/Process returned PROCESS_KILL.
+	if (init_flags & INIT_MACHINERY_PROCESS_ALL)
+		START_PROCESSING_MACHINE(src, init_flags & INIT_MACHINERY_PROCESS_ALL)
 	SSmachines.machinery += src // All machines should remain in this list, always.
 	if(ispath(wires))
 		wires = new wires(src)
@@ -139,7 +144,7 @@ Class Procs:
 /obj/machinery/proc/ProcessAll(var/wait)
 	if(processing_flags & MACHINERY_PROCESS_COMPONENTS)
 		for(var/thing in processing_parts)
-			var/obj/item/weapon/stock_parts/part = thing
+			var/obj/item/stock_parts/part = thing
 			if(part.machine_process(src) == PROCESS_KILL)
 				part.stop_processing()
 
@@ -157,7 +162,7 @@ Class Procs:
 		pulse2.icon = 'icons/effects/effects.dmi'
 		pulse2.icon_state = "empdisable"
 		pulse2.SetName("emp sparks")
-		pulse2.anchored = 1
+		pulse2.anchored = TRUE
 		pulse2.set_dir(pick(GLOB.cardinal))
 
 		spawn(10)
@@ -335,7 +340,7 @@ Class Procs:
 	set_noinput(TRUE)
 	set_noscreen(TRUE)
 	for(var/thing in component_parts)
-		var/obj/item/weapon/stock_parts/part = thing
+		var/obj/item/stock_parts/part = thing
 		part.on_refresh(src)
 	var/list/missing = missing_parts()
 	set_broken(!!missing, MACHINE_BROKEN_NO_PARTS)
@@ -373,7 +378,7 @@ Class Procs:
 
 /obj/machinery/proc/dismantle()
 	playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
-	var/obj/item/weapon/stock_parts/circuitboard/circuit = get_component_of_type(/obj/item/weapon/stock_parts/circuitboard)
+	var/obj/item/stock_parts/circuitboard/circuit = get_component_of_type(/obj/item/stock_parts/circuitboard)
 	if(circuit)
 		circuit.deconstruct(src)
 	if(ispath(frame_type, /obj/item/pipe))
@@ -438,6 +443,8 @@ Class Procs:
 			var/obj/item/fake_thing = type
 			parts += "[num2text(missing[type])] [initial(fake_thing.name)]"
 		to_chat(user, "\The [src] is missing [english_list(parts)], rendering it inoperable.")
+	if (user.skill_check(SKILL_CONSTRUCTION, SKILL_BASIC) || isobserver(user))
+		to_chat(user, SPAN_NOTICE(machine_desc))
 
 // This is really pretty crap and should be overridden for specific machines.
 /obj/machinery/water_act(var/depth)
@@ -451,6 +458,9 @@ Class Procs:
 		fluid_update()
 
 /obj/machinery/get_cell()
-	var/obj/item/weapon/stock_parts/power/battery/battery = get_component_of_type(/obj/item/weapon/stock_parts/power/battery)
+	var/obj/item/stock_parts/power/battery/battery = get_component_of_type(/obj/item/stock_parts/power/battery)
 	if(battery)
 		return battery.get_cell()
+
+/obj/machinery/proc/on_user_login(mob/M)
+	return

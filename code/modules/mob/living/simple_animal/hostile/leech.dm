@@ -8,9 +8,7 @@
 	health = 15
 	maxHealth = 15
 	harm_intent_damage = 5
-	melee_damage_lower = 2
-	melee_damage_upper = 4
-	melee_damage_flags = DAM_SHARP
+	natural_weapon = /obj/item/natural_weapon/bite/weak
 	pass_flags = PASS_FLAG_TABLE
 	faction = "leeches"
 	can_pry = FALSE
@@ -18,8 +16,25 @@
 	flash_vulnerability = 0
 	bleed_colour = COLOR_VIOLET
 
+	ai_holder_type = /datum/ai_holder/simple_animal/melee/leech
+
 	var/suck_potency = 8
 	var/belly = 100
+
+/datum/ai_holder/simple_animal/melee/leech/engage_target()
+	. = ..()
+
+	var/mob/living/simple_animal/hostile/leech/L = holder
+	if(ishuman(.) && L.belly <= 75)
+		var/mob/living/carbon/human/H = .
+		var/obj/item/clothing/suit/space/S = H.get_covering_equipped_item_by_zone(BP_CHEST)
+		if(istype(S) && !length(S.breaches))
+			return
+		H.remove_blood_simple(L.suck_potency)
+		if(L.health < L.maxHealth)
+			L.health += L.suck_potency / 1.5
+		L.belly += Clamp(L.suck_potency, 0, 100)
+
 
 /mob/living/simple_animal/hostile/leech/Life()
 	. = ..()
@@ -30,18 +45,6 @@
 		belly -= 3
 	else
 		belly -= 1
-
-/mob/living/simple_animal/hostile/leech/AttackingTarget()
-	. = ..()
-	if(ishuman(.) && belly <= 75)
-		var/mob/living/carbon/human/H = .
-		var/obj/item/clothing/suit/space/S = H.get_covering_equipped_item_by_zone(BP_CHEST)
-		if(istype(S) && !length(S.breaches))
-			return
-		H.remove_blood_simple(suck_potency)
-		if(health < maxHealth)
-			health += suck_potency / 1.5
-		belly += Clamp(suck_potency, 0, 100)
 
 /obj/structure/leech_spawner
 	name = "reeds"

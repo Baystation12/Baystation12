@@ -41,6 +41,7 @@ var/list/event_last_fired = list()
 	possibleEvents[/datum/event/communications_blackout] = 50 + 25 * active_with_role["AI"] + active_with_role["Scientist"] * 25
 	possibleEvents[/datum/event/ionstorm] = active_with_role["AI"] * 25 + active_with_role["Robot"] * 25 + active_with_role["Engineer"] * 10 + active_with_role["Scientist"] * 5
 	possibleEvents[/datum/event/grid_check] = 25 + 10 * active_with_role["Engineer"]
+	possibleEvents[/datum/event/power_surge] = active_with_role["Engineer"] >= 2 ? 15 + 10 * active_with_role["Engineer"] : 0
 	possibleEvents[/datum/event/electrical_storm] = 15 * active_with_role["Janitor"] + 5 * active_with_role["Engineer"]
 	possibleEvents[/datum/event/wallrot] = 30 * active_with_role["Engineer"] + 50 * active_with_role["Gardener"]
 
@@ -111,13 +112,13 @@ var/list/event_last_fired = list()
 		if(istype(M, /mob/living/silicon/robot))
 			var/mob/living/silicon/robot/R = M
 			if(R.module)
-				if(istype(R.module, /obj/item/weapon/robot_module/engineering))
+				if(istype(R.module, /obj/item/robot_module/engineering))
 					active_with_role["Engineer"]++
-				else if(istype(R.module, /obj/item/weapon/robot_module/security))
+				else if(istype(R.module, /obj/item/robot_module/security))
 					active_with_role["Security"]++
-				else if(istype(R.module, /obj/item/weapon/robot_module/medical))
+				else if(istype(R.module, /obj/item/robot_module/medical))
 					active_with_role["Medical"]++
-				else if(istype(R.module, /obj/item/weapon/robot_module/research))
+				else if(istype(R.module, /obj/item/robot_module/research))
 					active_with_role["Scientist"]++
 
 		if(M.mind.assigned_role in SSjobs.titles_by_department(ENG))

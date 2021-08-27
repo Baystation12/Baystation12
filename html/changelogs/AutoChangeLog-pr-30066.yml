@@ -1,7 +1,0 @@
-author: "RustingWithYou"
-delete-after: True
-changes: 
-  - tweak: "banishing nar'sie now deletes all simplemobs in the cult faction - constructs, creatures, faithless, etc."
-  - tweak: "banishing nar'sie now resets the skybox to its normal state"
-  - tweak: "banishing nar'sie now properly checks for cultists when doing the global message"
-  - tweak: "cult walls and floors can now be deconverted through nullrod application. banishing nar'sie will also deconvert those turfs"

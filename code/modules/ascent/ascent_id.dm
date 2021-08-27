@@ -1,28 +1,28 @@
 // ID 'card'
-/obj/item/weapon/card/id/ascent
+/obj/item/card/id/ascent
 	name = "alien chip"
 	icon = 'icons/obj/ascent.dmi'
 	icon_state = "access_card"
 	desc = "A slender, complex chip of alien circuitry."
 	access = list(access_ascent)
 
-/obj/item/weapon/card/id/ascent/GetAccess()
+/obj/item/card/id/ascent/GetAccess()
 	var/mob/living/carbon/human/H = loc
 	if(istype(H) && !(H.species.name in ALL_ASCENT_SPECIES))
 		. = list()
 	else
 		. = ..()
 
-/obj/item/weapon/card/id/ascent/on_update_icon()
+/obj/item/card/id/ascent/on_update_icon()
 	return
 
-/obj/item/weapon/card/id/ascent/prevent_tracking()
+/obj/item/card/id/ascent/prevent_tracking()
 	return TRUE
 
-/obj/item/weapon/card/id/ascent/attack_self(mob/user)
+/obj/item/card/id/ascent/attack_self(mob/user)
 	return
 
-/obj/item/weapon/card/id/ascent/show()
+/obj/item/card/id/ascent/show()
 	return
 
 // ID implant/organ/interface device.
@@ -34,7 +34,7 @@
 	parent_organ = BP_CHEST
 	organ_tag = BP_SYSTEM_CONTROLLER
 	surface_accessible = TRUE
-	var/obj/item/weapon/card/id/id_card = /obj/item/weapon/card/id/ascent
+	var/obj/item/card/id/id_card = /obj/item/card/id/ascent
 
 /obj/item/organ/internal/controller/replaced(mob/living/carbon/human/target, obj/item/organ/external/affected)
 	. = ..()

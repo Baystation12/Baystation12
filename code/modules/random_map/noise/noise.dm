@@ -10,6 +10,7 @@
 	var/cell_base                   // Set in New()
 	var/initial_cell_range          // Set in New()
 	var/smoothing_iterations = 0
+	var/smooth_single_tiles			// Single turfs of different value are not allowed
 
 /datum/random_map/noise/New()
 	initial_cell_range = cell_range/5
@@ -51,6 +52,9 @@
 	var/val = min(9,max(0,round((value/cell_range)*10)))
 	if(isnull(val)) val = 0
 	return "[val]"
+
+/datum/random_map/noise/proc/noise2value(var/value)
+	return min(9,max(0,round((value/cell_range)*10)))
 
 /datum/random_map/noise/proc/subdivide(var/iteration,var/x,var/y,var/input_size)
 
@@ -104,7 +108,7 @@
 
  	// Recurse until size is too small to subdivide.
 	if(isize>3)
-		if(!priority_process) 
+		if(!priority_process)
 			CHECK_TICK
 		iteration++
 		subdivide(iteration, x,       y,       hsize)
@@ -165,3 +169,32 @@
 					map[current_cell]-=cell_smooth_amt
 				map[current_cell] = max(0,min(cell_range,map[current_cell]))
 		map = next_map
+
+	if(smooth_single_tiles)
+		var/list/buddies = list()
+		for(var/x in 1 to limit_x - 1)
+			for(var/y in 1 to limit_y - 1)
+				var/mapcell = get_map_cell(x,y)
+				var/list/neighbors = get_neighbors(x, y)
+				buddies.Cut()
+				for(var/cell in neighbors)
+					if(noise2value(map[cell]) == noise2value(map[mapcell]))
+						buddies |= cell
+				if(!length(buddies))
+					map[mapcell] = map[pick(neighbors)]
+
+/datum/random_map/noise/proc/get_neighbors(x, y, include_diagonals)
+	. = list()
+	if(!include_diagonals)
+		var/static/list/ortho_offsets = list(list(-1, 0), list(1, 0), list(0, 1), list(0,-1))
+		for(var/list/offset in ortho_offsets)
+			var/tmp_cell = get_map_cell(x+offset[1],y+offset[2])
+			if(tmp_cell)
+				. += tmp_cell
+	else
+		for(var/dx in -1 to 1)
+			for(var/dy in -1 to 1)
+				var/tmp_cell = get_map_cell(x+dx,y+dy)
+				if(tmp_cell)
+					. += tmp_cell
+		. -= get_map_cell(x,y)

@@ -76,6 +76,9 @@ LOG_ATTACK
 ## log admin warning messages
 ##LOG_ADMINWARN  ## Also duplicates a bunch of other messages.
 
+## Log all timers on timer auto reset
+# LOG_TIMERS_ON_BUCKET_RESET
+
 ## disconnect players who did nothing during the set amount of minutes
 # KICK_INACTIVE 10
 
@@ -376,10 +379,10 @@ RADIATION_LOWER_LIMIT 0.15
 #MAX_ACTS_PER_INTERVAL 140
 
 ##Clients will be unable to connect unless their version is equal to or higher than this (a number, e.g. 511)
-#MINIMUM_BYOND_VERSION
+#MINIMUM_BYOND_VERSION 512
 
 ## Clients will be unable to connect unless their build is equal to or higher than this (a number, e.g. 1000)
-#MINIMUM_BYOND_BUILD
+#MINIMUM_BYOND_BUILD 1488
 
 ## Uncomment or create lines to add user-accessible chat markup
 ## A chat markup line is in the form regex;replacer. The regular expression should be in the common

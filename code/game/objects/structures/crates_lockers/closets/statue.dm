@@ -3,8 +3,8 @@
 	desc = "An incredibly lifelike marble carving."
 	icon = 'icons/obj/statue.dmi'
 	icon_state = "human_male"
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	setup = 0
 	health = 0 //destroying the statue kills the mob within
 	var/intialTox = 0 	//these are here to keep the mob from taking damage from things that logically wouldn't affect a rock
@@ -14,10 +14,10 @@
 	var/timer = 240 //eventually the person will be freed
 
 /obj/structure/closet/statue/New(loc, var/mob/living/L)
-	if(L && (ishuman(L) || L.isMonkey() || iscorgi(L)))
+	if(L && (ishuman(L) || L.is_species(SPECIES_MONKEY) || iscorgi(L)))
 		if(L.buckled)
 			L.buckled = 0
-			L.anchored = 0
+			L.anchored = FALSE
 		if(L.client)
 			L.client.perspective = EYE_PERSPECTIVE
 			L.client.eye = src
@@ -32,7 +32,7 @@
 			name = "statue of [L.name]"
 			if(L.gender == "female")
 				icon_state = "human_female"
-		else if(L.isMonkey())
+		else if(L.is_species(SPECIES_MONKEY))
 			name = "statue of a monkey"
 			icon_state = "monkey"
 		else if(iscorgi(L))

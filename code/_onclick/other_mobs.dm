@@ -141,13 +141,18 @@
 
 	if(!..())
 		return
+	setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	if(istype(A,/mob/living))
-		if(melee_damage_upper == 0)
+		if(!get_natural_weapon() || a_intent == I_HELP)
 			custom_emote(1,"[friendly] [A]!")
 			return
 		if(ckey)
-			admin_attack_log(src, A, "Has [attacktext] its victim.", "Has been [attacktext] by its attacker.", attacktext)
-	setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	var/damage = rand(melee_damage_lower, melee_damage_upper)
-	if(A.attack_generic(src, damage, attacktext, environment_smash, damtype, defense) && loc && attack_sound)
-		playsound(loc, attack_sound, 50, 1, 1)
+			admin_attack_log(src, A, "Has attacked its victim.", "Has been attacked by its attacker.")
+	if(a_intent == I_HELP)
+		A.attack_animal(src)
+	else if (get_natural_weapon())
+		A.attackby(get_natural_weapon(), src)
+
+// Attack hand but for simple animals
+/atom/proc/attack_animal(mob/user)
+	return attack_hand(user)

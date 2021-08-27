@@ -184,8 +184,8 @@
 /obj/structure/closet/crate/radiation,
 /obj/item/stack/material/tritium/fifty,
 /obj/item/stack/cable_coil/orange,
-/obj/item/weapon/wrench,
-/obj/item/weapon/wirecutters,
+/obj/item/wrench,
+/obj/item/wirecutters,
 /turf/simulated/floor/plating,
 /area/lar_maria/solar_control)
 "az" = (
@@ -1013,12 +1013,12 @@
 /area/lar_maria/dorms)
 "cr" = (
 /obj/structure/bookcase,
-/obj/item/weapon/book/manual/engineering_guide,
+/obj/item/book/manual/engineering_guide,
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
 "cs" = (
 /obj/structure/bookcase,
-/obj/item/weapon/book/manual/stasis,
+/obj/item/book/manual/stasis,
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
 "ct" = (
@@ -1027,28 +1027,28 @@
 /area/lar_maria/library)
 "cu" = (
 /obj/structure/bookcase,
-/obj/item/weapon/book/manual/medical_diagnostics_manual,
+/obj/item/book/manual/medical_diagnostics_manual,
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
 "cv" = (
 /obj/structure/bookcase,
-/obj/item/weapon/book/manual/detective,
+/obj/item/book/manual/detective,
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
 "cw" = (
 /obj/structure/bookcase,
-/obj/item/weapon/book/manual/medical_cloning,
+/obj/item/book/manual/medical_cloning,
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
 "cx" = (
 /obj/structure/bookcase,
-/obj/item/weapon/book/manual/hydroponics_pod_people,
+/obj/item/book/manual/hydroponics_pod_people,
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
 "cy" = (
 /obj/structure/bookcase,
-/obj/item/weapon/book/manual/anomaly_spectroscopy,
-/obj/item/weapon/book/manual/anomaly_testing,
+/obj/item/book/manual/anomaly_spectroscopy,
+/obj/item/book/manual/anomaly_testing,
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
 "cz" = (
@@ -1086,7 +1086,7 @@
 /area/lar_maria/dorms)
 "cG" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/storage/box/glowsticks,
+/obj/item/storage/box/glowsticks,
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "cH" = (
@@ -1106,7 +1106,7 @@
 	dir = 1
 	},
 /obj/structure/table/standard,
-/obj/item/weapon/paper,
+/obj/item/paper,
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
 "cK" = (
@@ -1126,8 +1126,8 @@
 	dir = 1
 	},
 /obj/structure/table/standard,
-/obj/item/weapon/paper_bin,
-/obj/item/weapon/pen/red,
+/obj/item/paper_bin,
+/obj/item/pen/red,
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
 "cM" = (
@@ -1158,7 +1158,7 @@
 	dir = 8
 	},
 /obj/structure/table/standard,
-/obj/item/weapon/paper/lar_maria/note_2,
+/obj/item/paper/lar_maria/note_2,
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
 "cP" = (
@@ -1372,15 +1372,15 @@
 	dir = 8
 	},
 /obj/structure/table/standard,
-/obj/item/weapon/folder/blue,
+/obj/item/folder/blue,
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
 "dz" = (
 /obj/structure/window/basic,
 /obj/structure/table/standard,
-/obj/item/weapon/paper_bin,
-/obj/item/weapon/pen/blue,
-/obj/item/weapon/paper,
+/obj/item/paper_bin,
+/obj/item/pen/blue,
+/obj/item/paper,
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
 "dA" = (
@@ -1562,7 +1562,7 @@
 /area/lar_maria/dorms)
 "ea" = (
 /obj/structure/table/standard,
-/obj/item/weapon/paper_bin,
+/obj/item/paper_bin,
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
 "eb" = (
@@ -1576,13 +1576,13 @@
 /area/lar_maria/library)
 "ec" = (
 /obj/structure/table/standard,
-/obj/item/weapon/pen/blue,
+/obj/item/pen/blue,
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
 "ed" = (
 /obj/structure/table/standard,
-/obj/item/weapon/pen/crayon/orange,
-/obj/item/weapon/paper,
+/obj/item/pen/crayon/orange,
+/obj/item/paper,
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
 "ee" = (
@@ -1720,8 +1720,8 @@
 /area/lar_maria/office)
 "eC" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/paper_bin,
-/obj/item/weapon/pen/blue,
+/obj/item/paper_bin,
+/obj/item/pen/blue,
 /turf/simulated/floor/tiled,
 /area/lar_maria/office)
 "eD" = (
@@ -1736,7 +1736,7 @@
 /area/lar_maria/office)
 "eF" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/storage/box/handcuffs,
+/obj/item/storage/box/handcuffs,
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "eG" = (
@@ -1747,7 +1747,7 @@
 /area/lar_maria/dorms)
 "eH" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/storage/box/beakers,
+/obj/item/storage/box/beakers,
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "eI" = (
@@ -1804,7 +1804,7 @@
 	icon_state = "tube1"
 	},
 /obj/structure/table/standard,
-/obj/item/weapon/storage/firstaid/surgery,
+/obj/item/storage/firstaid/surgery,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/office)
 "eR" = (
@@ -1942,7 +1942,7 @@
 /area/lar_maria/office)
 "fp" = (
 /obj/structure/table/standard,
-/obj/item/weapon/folder/blue,
+/obj/item/folder/blue,
 /turf/simulated/floor/tiled,
 /area/lar_maria/office)
 "fq" = (
@@ -1951,7 +1951,7 @@
 /area/lar_maria/head_m)
 "fr" = (
 /obj/structure/table/standard,
-/obj/item/weapon/towel,
+/obj/item/towel,
 /obj/random/soap,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/head_m)
@@ -2057,7 +2057,7 @@
 /area/lar_maria/office)
 "fD" = (
 /obj/structure/table/standard,
-/obj/item/weapon/pen/blue,
+/obj/item/pen/blue,
 /turf/simulated/floor/tiled,
 /area/lar_maria/office)
 "fE" = (
@@ -2066,7 +2066,7 @@
 /area/lar_maria/office)
 "fF" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/staff/gentcane,
+/obj/item/staff/gentcane,
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "fG" = (
@@ -2083,7 +2083,7 @@
 "fI" = (
 /obj/structure/table/woodentable,
 /obj/random/toolbox,
-/obj/item/weapon/scalpel,
+/obj/item/scalpel,
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "fJ" = (
@@ -2150,13 +2150,13 @@
 /area/lar_maria/office)
 "fS" = (
 /obj/structure/table/standard,
-/obj/item/weapon/paper_bin,
-/obj/item/weapon/paper,
+/obj/item/paper_bin,
+/obj/item/paper,
 /turf/simulated/floor/tiled,
 /area/lar_maria/office)
 "fT" = (
 /obj/structure/table/standard,
-/obj/item/weapon/paper/lar_maria/note_9,
+/obj/item/paper/lar_maria/note_9,
 /turf/simulated/floor/tiled,
 /area/lar_maria/office)
 "fU" = (
@@ -2308,7 +2308,7 @@
 /area/lar_maria/head_m)
 "gq" = (
 /obj/structure/table/standard,
-/obj/item/weapon/towel,
+/obj/item/towel,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/head_m)
 "gr" = (
@@ -2385,7 +2385,7 @@
 /obj/structure/window/basic{
 	dir = 8
 	},
-/obj/item/weapon/stool,
+/obj/item/stool,
 /turf/simulated/floor/tiled,
 /area/lar_maria/hallway)
 "gF" = (
@@ -2417,7 +2417,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
-/obj/item/weapon/stool,
+/obj/item/stool,
 /turf/simulated/floor/tiled,
 /area/lar_maria/hallway)
 "gI" = (
@@ -2474,7 +2474,7 @@
 "gR" = (
 /obj/structure/table/standard,
 /obj/item/trash/plate,
-/obj/item/weapon/material/kitchen/utensil/fork,
+/obj/item/material/kitchen/utensil/fork,
 /turf/simulated/floor/tiled,
 /area/lar_maria/mess_hall)
 "gS" = (
@@ -2553,14 +2553,14 @@
 /obj/structure/window/basic{
 	dir = 8
 	},
-/obj/item/weapon/stool,
+/obj/item/stool,
 /turf/simulated/floor/tiled,
 /area/lar_maria/hallway)
 "hg" = (
 /obj/structure/window/basic{
 	dir = 4
 	},
-/obj/item/weapon/stool,
+/obj/item/stool,
 /turf/simulated/floor/tiled,
 /area/lar_maria/hallway)
 "hh" = (
@@ -2593,7 +2593,7 @@
 "hk" = (
 /obj/structure/table/marble,
 /obj/machinery/door/firedoor,
-/obj/item/weapon/material/kitchen/utensil/fork,
+/obj/item/material/kitchen/utensil/fork,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/mess_hall)
 "hl" = (
@@ -2638,13 +2638,13 @@
 /area/lar_maria/head_f)
 "hs" = (
 /obj/structure/table/standard,
-/obj/item/weapon/towel,
+/obj/item/towel,
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/head_f)
 "ht" = (
 /obj/structure/mopbucket,
-/obj/item/weapon/mop,
+/obj/item/mop,
 /turf/simulated/floor/plating,
 /area/lar_maria/hallway)
 "hu" = (
@@ -2814,7 +2814,7 @@
 "hI" = (
 /obj/structure/table/marble,
 /obj/machinery/door/firedoor,
-/obj/item/weapon/material/kitchen/rollingpin,
+/obj/item/material/kitchen/rollingpin,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/mess_hall)
 "hJ" = (
@@ -2832,7 +2832,7 @@
 /area/lar_maria/mess_hall)
 "hM" = (
 /obj/structure/table/marble,
-/obj/item/weapon/reagent_containers/glass/beaker,
+/obj/item/reagent_containers/glass/beaker,
 /obj/random/snack,
 /turf/simulated/floor/tiled/freezer,
 /area/lar_maria/mess_hall)
@@ -2848,7 +2848,7 @@
 /area/lar_maria/head_f)
 "hO" = (
 /obj/structure/table/standard,
-/obj/item/weapon/towel,
+/obj/item/towel,
 /obj/random/soap,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/head_f)
@@ -2934,14 +2934,14 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/mess_hall)
 "ic" = (
-/obj/item/weapon/material/kitchen/utensil/fork,
+/obj/item/material/kitchen/utensil/fork,
 /turf/simulated/floor/tiled,
 /area/lar_maria/mess_hall)
 "id" = (
 /obj/structure/table/marble,
 /obj/machinery/door/firedoor,
-/obj/item/weapon/reagent_containers/food/condiment/flour,
-/obj/item/weapon/storage/fancy/egg_box,
+/obj/item/reagent_containers/food/condiment/flour,
+/obj/item/storage/fancy/egg_box,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/mess_hall)
 "ie" = (
@@ -3108,7 +3108,7 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/hallway)
 "iw" = (
-/obj/item/weapon/paper/lar_maria/note_6,
+/obj/item/paper/lar_maria/note_6,
 /turf/simulated/floor/tiled,
 /area/lar_maria/hallway)
 "ix" = (
@@ -3136,7 +3136,7 @@
 /area/lar_maria/mess_hall)
 "iA" = (
 /obj/structure/table/standard,
-/obj/item/weapon/paper/lar_maria/note_3,
+/obj/item/paper/lar_maria/note_3,
 /turf/simulated/floor/tiled,
 /area/lar_maria/mess_hall)
 "iB" = (
@@ -3316,7 +3316,7 @@
 "iZ" = (
 /obj/structure/table/marble,
 /obj/item/trash/plate,
-/obj/item/weapon/material/kitchen/utensil/fork,
+/obj/item/material/kitchen/utensil/fork,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/mess_hall)
 "ja" = (
@@ -3586,7 +3586,7 @@
 	pixel_x = 11;
 	pixel_y = 0
 	},
-/obj/item/weapon/storage/mirror{
+/obj/item/storage/mirror{
 	pixel_x = 30
 	},
 /obj/machinery/alarm{
@@ -3607,7 +3607,7 @@
 	pixel_x = 11;
 	pixel_y = 0
 	},
-/obj/item/weapon/storage/mirror{
+/obj/item/storage/mirror{
 	pixel_x = 30
 	},
 /obj/random/trash,
@@ -3620,7 +3620,7 @@
 	pixel_x = -12;
 	pixel_y = 2
 	},
-/obj/item/weapon/storage/mirror{
+/obj/item/storage/mirror{
 	pixel_x = -30
 	},
 /turf/simulated/floor/tiled/white,
@@ -28754,11 +28754,11 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
 ab
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -30028,7 +30028,7 @@ aa
 aa
 aa
 aa
-aa
+ab
 aa
 aa
 aa
@@ -30831,7 +30831,7 @@ aa
 aa
 aa
 aa
-ab
+aa
 aa
 aa
 aa

@@ -6,15 +6,15 @@
 	program_menu_icon = "person"
 	extended_desc = "This program is capable of reconstructing damaged AI systems. It can also be used to upload basic laws to the AI. Requires direct AI connection via inteliCard slot."
 	size = 12
-	requires_ntnet = 0
+	requires_ntnet = FALSE
 	required_access = access_bridge
-	requires_access_to_run = 0
-	available_on_ntnet = 1
+	requires_access_to_run = FALSE
+	available_on_ntnet = TRUE
 	nanomodule_path = /datum/nano_module/program/computer_aidiag/
 	var/restoring = 0
 
 /datum/computer_file/program/aidiag/proc/get_ai()
-	var/obj/item/weapon/stock_parts/computer/ai_slot/ai_slot = computer.get_component(PART_AI)
+	var/obj/item/stock_parts/computer/ai_slot/ai_slot = computer.get_component(PART_AI)
 
 	if(ai_slot && ai_slot.check_functionality() && ai_slot.enabled && ai_slot.stored_card)
 		return ai_slot.stored_card.carded_ai
@@ -78,7 +78,7 @@
 		A.switch_from_dead_to_living_mob_list()
 		A.add_ai_verbs()
 		A.update_icon()
-		var/obj/item/weapon/aicard/AC = A.loc
+		var/obj/item/aicard/AC = A.loc
 		if(AC)
 			AC.update_icon()
 	// Finished restoring

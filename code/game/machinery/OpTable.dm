@@ -3,14 +3,17 @@
 	desc = "Used for advanced medical procedures."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "table2-idle"
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	throwpass = 1
 	idle_power_usage = 1
 	active_power_usage = 5
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	
+	machine_name = "operating table"
+	machine_desc = "A sterile and well-lit surface to conduct surgery. Operating tables are the only completely safe surfaces to perform operations. Comes with built-in neural suppressors to anesthetize a patient laying on top of it."
 
 	var/suppressing = FALSE
 	var/mob/living/carbon/human/victim = null
@@ -88,6 +91,8 @@
 
 	suppressing = !suppressing
 	user.visible_message("<span class='notice'>\The [user] switches [suppressing ? "on" : "off"] \the [src]'s neural suppressor.</span>")
+	if (victim.stat == UNCONSCIOUS)
+		to_chat(victim, SPAN_NOTICE(SPAN_BOLD("... [pick("good feeling", "white light", "pain fades away", "safe now")] ...")))
 	return TRUE
 
 /obj/machinery/optable/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)

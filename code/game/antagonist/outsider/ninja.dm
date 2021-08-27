@@ -15,7 +15,7 @@ GLOBAL_DATUM_INIT(ninjas, /datum/antagonist/ninja, new)
 	hard_cap_round = 3
 	min_player_age = 18
 
-	id_type = /obj/item/weapon/card/id/syndicate
+	id_type = /obj/item/card/id/syndicate
 
 	faction = "ninja"
 	base_to_load = /datum/map_template/ruin/antag_spawn/ninja
@@ -97,7 +97,7 @@ GLOBAL_DATUM_INIT(ninjas, /datum/antagonist/ninja, new)
 		player.equip_to_slot_or_del(new /obj/item/clothing/under/color/black(player), slot_w_uniform)
 		player.equip_to_slot_or_del(new /obj/item/device/flashlight(player), slot_belt)
 		create_id("Infiltrator", player)
-		equip_rig(/obj/item/weapon/rig/light/ninja, player)
+		equip_rig(/obj/item/rig/light/ninja, player)
 		var/obj/item/modular_computer/pda/syndicate/U = new
 		player.put_in_hands(U)
 		var/decl/uplink_source/pda/uplink_source = new

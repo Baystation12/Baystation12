@@ -34,7 +34,7 @@
 
 /turf/allow_click_through(var/atom/A, var/params, var/mob/user)
 	return TRUE
-	
+
 /*
 	Standard mob ClickOn()
 	Handles exceptions: middle click, modified clicks, exosuit actions

@@ -3,21 +3,23 @@
 	desc = "A fancy bed with built-in injectors, a dialysis machine, and a limited health scanner."
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "sleeper_0"
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	clicksound = 'sound/machines/buttonbeep.ogg'
 	clickvol = 30
 	base_type = /obj/machinery/sleeper
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	machine_name = "sleeper"
+	machine_desc = "Sleepers are high-powered, full-body beds that can synthesize and inject simple chemicals, as well as dialyze substances from a patient's blood and slow down their body functions."
 	var/mob/living/carbon/human/occupant = null
 	var/list/base_chemicals = list("Inaprovaline" = /datum/reagent/inaprovaline, "Paracetamol" = /datum/reagent/paracetamol, "Dylovene" = /datum/reagent/dylovene, "Dexalin" = /datum/reagent/dexalin)
 	var/list/available_chemicals = list()
 	var/list/upgrade_chemicals = list("Kelotane" = /datum/reagent/kelotane)
 	var/list/upgrade2_chemicals = list("Hyronalin" = /datum/reagent/hyronalin)
 	var/list/antag_chemicals = list("Hair Remover" = /datum/reagent/toxin/hair_remover, "Chloral Hydrate" = /datum/reagent/chloralhydrate)
-	var/obj/item/weapon/reagent_containers/glass/beaker = null
+	var/obj/item/reagent_containers/glass/beaker = null
 	var/filtering = 0
 	var/pump
 	var/list/stasis_settings = list(1, 2, 5, 10)
@@ -32,7 +34,7 @@
 /obj/machinery/sleeper/Initialize(mapload, d = 0, populate_parts = TRUE)
 	. = ..()
 	if(populate_parts)
-		beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large(src)
+		beaker = new /obj/item/reagent_containers/glass/beaker/large(src)
 	update_icon()
 
 /obj/machinery/sleeper/examine(mob/user, distance)
@@ -73,6 +75,8 @@
 
 	if(iscarbon(occupant) && stasis > 1)
 		occupant.SetStasis(stasis)
+		if (occupant.stat == UNCONSCIOUS && prob(2))
+			to_chat(occupant, SPAN_NOTICE(SPAN_BOLD("... [pick("comfy", "feels slow", "warm")] ...")))
 
 /obj/machinery/sleeper/on_update_icon()
 	if(!occupant)
@@ -167,7 +171,7 @@
 		go_out()
 
 /obj/machinery/sleeper/attackby(var/obj/item/I, var/mob/user)
-	if(istype(I, /obj/item/weapon/reagent_containers/glass))
+	if(istype(I, /obj/item/reagent_containers/glass))
 		add_fingerprint(user)
 		if(!beaker)
 			if(!user.unEquip(I, src))
@@ -304,12 +308,12 @@
 
 /obj/machinery/sleeper/RefreshParts()
 	..()
-	var/T = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/scanning_module), 1, 10)
+	var/T = Clamp(total_component_rating_of_type(/obj/item/stock_parts/scanning_module), 1, 10)
 	T = max(T,1)
 	synth_modifier = 1/T
 	pump_speed = 2 + T
 
-	T = total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator)
+	T = total_component_rating_of_type(/obj/item/stock_parts/manipulator)
 	available_chemicals = base_chemicals.Copy()
 	if (T >= 4)
 		available_chemicals |= upgrade_chemicals

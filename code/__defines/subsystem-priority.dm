@@ -24,6 +24,7 @@
 #define SS_PRIORITY_RADIATION      20  // Radiation processing and cache updates.
 #define SS_PRIORITY_OPEN_SPACE     20  // Open turf updates.
 #define SS_PRIORITY_AIRFLOW        15  // Object movement from ZAS airflow.
+#define SS_PRIORITY_AI             15  // Mob AI
 #define SS_PRIORITY_VOTE           10  // Vote management.
 #define SS_PRIORITY_INACTIVITY     10  // Idle kicking.
 #define SS_PRIORITY_SUPPLY         10  // Supply point accumulation.

@@ -412,7 +412,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/item/weapon/paper,
+/obj/item/paper,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
@@ -445,7 +445,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/office)
 "aW" = (
-/obj/item/weapon/paper,
+/obj/item/paper,
 /obj/structure/safe,
 /obj/random/drinkbottle,
 /obj/random/handgun,
@@ -727,7 +727,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base)
 "bE" = (
-/obj/item/weapon/pen/red,
+/obj/item/pen/red,
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/office)
 "bF" = (
@@ -1212,7 +1212,7 @@
 /area/lost_supply_base/common)
 "de" = (
 /obj/structure/table/standard,
-/obj/item/weapon/material/kitchen/utensil/fork,
+/obj/item/material/kitchen/utensil/fork,
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/common)
 "df" = (
@@ -1318,7 +1318,7 @@
 	dir = 6;
 	icon_state = "warning"
 	},
-/obj/item/weapon/storage/backpack/dufflebag,
+/obj/item/storage/backpack/dufflebag,
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "dv" = (
@@ -1331,7 +1331,7 @@
 /turf/simulated/wall,
 /area/lost_supply_base)
 "dx" = (
-/obj/item/weapon/material/kitchen/utensil/spoon,
+/obj/item/material/kitchen/utensil/spoon,
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/common)
 "dy" = (
@@ -1354,7 +1354,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/common)
 "dB" = (
-/obj/item/weapon/material/kitchen/utensil/fork,
+/obj/item/material/kitchen/utensil/fork,
 /obj/structure/bed/chair{
 	dir = 8;
 	icon_state = "chair_preview"
@@ -1487,14 +1487,14 @@
 /obj/structure/table/standard{
 	name = "plastic table frame"
 	},
-/obj/item/weapon/flame/lighter/random,
+/obj/item/flame/lighter/random,
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/common)
 "es" = (
 /obj/structure/table/standard{
 	name = "plastic table frame"
 	},
-/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
+/obj/item/reagent_containers/food/drinks/cans/waterbottle,
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/common)
 "et" = (
@@ -1508,7 +1508,7 @@
 /area/lost_supply_base/common)
 "ey" = (
 /obj/item/stack/material/cardboard,
-/obj/item/weapon/grenade/fake,
+/obj/item/grenade/fake,
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "ez" = (
@@ -1528,7 +1528,7 @@
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "eE" = (
-/obj/item/weapon/bedsheet,
+/obj/item/bedsheet,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
@@ -1557,7 +1557,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/common)
 "eJ" = (
-/obj/machinery/media/jukebox,
+/obj/machinery/jukebox,
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/common)
 "eQ" = (
@@ -1735,7 +1735,7 @@
 /turf/simulated/wall,
 /area/lost_supply_base/supply)
 "fq" = (
-/obj/item/weapon/bedsheet,
+/obj/item/bedsheet,
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/supply)
 "fr" = (
@@ -1779,7 +1779,7 @@
 /area/lost_supply_base/supply)
 "fA" = (
 /obj/structure/table/standard,
-/obj/item/weapon/storage/briefcase,
+/obj/item/storage/briefcase,
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/supply)
 "fB" = (
@@ -1826,7 +1826,7 @@
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "fJ" = (
-/obj/item/weapon/material/twohanded/fireaxe,
+/obj/item/material/twohanded/fireaxe,
 /obj/effect/decal/cleanable/blood,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/airless,
@@ -1944,7 +1944,7 @@
 	},
 /area/lost_supply_base/supply)
 "fX" = (
-/obj/item/weapon/gun/projectile/shotgun/pump,
+/obj/item/gun/projectile/shotgun/pump,
 /obj/effect/landmark/corpse/syndicate,
 /turf/simulated/floor/tiled/airless{
 	icon_state = "steel_broken4"
@@ -2069,8 +2069,8 @@
 /area/lost_supply_base)
 "gn" = (
 /obj/structure/closet/crate/trashcart,
-/obj/item/weapon/mop,
-/obj/item/weapon/storage/box/lights/bulbs,
+/obj/item/mop,
+/obj/item/storage/box/lights/bulbs,
 /obj/machinery/atmospherics/unary/vent_pump{
 	dir = 1;
 	external_pressure_bound = 0;
@@ -2123,7 +2123,7 @@
 	pixel_x = -12;
 	pixel_y = 2
 	},
-/obj/item/weapon/storage/mirror{
+/obj/item/storage/mirror{
 	pixel_x = -32
 	},
 /obj/machinery/light/small,
@@ -2150,12 +2150,12 @@
 	dir = 8;
 	health = 1e+006
 	},
-/obj/item/weapon/stock_parts/circuitboard/broken,
+/obj/item/stock_parts/circuitboard/broken,
 /obj/machinery/constructable_frame/machine_frame,
 /turf/simulated/floor/airless,
 /area/space)
 "sO" = (
-/obj/item/weapon/bikehorn/rubberducky,
+/obj/item/bikehorn/rubberducky,
 /turf/simulated/floor/airless,
 /area/space)
 "zC" = (

@@ -91,6 +91,7 @@
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
 	siemens_coefficient = 2.0
 	body_parts_covered = HEAD|FACE|EYES
+	item_flags = null
 
 /obj/item/clothing/head/cueball
 	name = "cueball helmet"
@@ -99,6 +100,7 @@
 	item_state = "cueball"
 	flags_inv = BLOCKHAIR
 	body_parts_covered = HEAD|FACE|EYES
+	item_flags = null
 
 /obj/item/clothing/head/cardborg
 	name = "cardborg helmet"
@@ -107,6 +109,7 @@
 	item_state = "cardborg_h"
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
 	body_parts_covered = HEAD|FACE|EYES
+	item_flags = null
 
 /obj/item/clothing/head/cardborg/Initialize()
 	. = ..()
@@ -197,6 +200,25 @@
 	desc = "For the gentleman of distinction."
 	body_parts_covered = 0
 
+/obj/item/clothing/head/bowlerhat/razor
+	name = "bowler-hat"
+	desc = "The brim of this hat is covered in thin razors."
+	sharp = TRUE
+	edge = TRUE
+	force = 10
+	throwforce = 60
+	throw_range = 9
+	throw_speed = 4
+	does_spin = FALSE
+	attack_verb = list("sliced", "torn", "cut")
+	armor = list(
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_RESISTANT,
+		laser = ARMOR_LASER_HANDGUNS,
+		energy = ARMOR_ENERGY_SMALL,
+		bomb = ARMOR_BOMB_PADDED
+		)
+
 /obj/item/clothing/head/beaverhat
 	name = "beaver hat"
 	icon_state = "beaver_hat"
@@ -211,6 +233,12 @@
 	name = "fedora"
 	icon_state = "fedora"
 	desc = "A sharp, stylish hat."
+
+/obj/item/clothing/head/panama
+	name = "panama hat"
+	icon_state = "panama"
+	desc = "A hat that makes you want to smuggle drugs."
+
 
 /obj/item/clothing/head/feathertrilby
 	name = "feather trilby"
@@ -262,6 +290,7 @@
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
 	siemens_coefficient = 2.0
 	body_parts_covered = HEAD|FACE|EYES
+	item_flags = null
 
 /obj/item/clothing/head/philosopher_wig
 	name = "natural philosopher's wig"

@@ -212,3 +212,15 @@
 	constructed_path = /obj/machinery/atmospherics/unary/tank
 	pipe_class = PIPE_CLASS_UNARY
 	colorable = TRUE
+
+/datum/pipe/pipe_dispenser/device/pipesparker
+	name = "pipe sparker"
+	desc = "A pipe sparker. Useful for starting pipe fires."
+	build_icon = 'icons/atmos/pipe-sparker.dmi'
+	build_icon_state = "pipe-igniter"
+	build_path = /obj/item/pipe
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
+	constructed_path = /obj/machinery/atmospherics/pipe/cap/sparker/visible
+	pipe_class = PIPE_CLASS_UNARY
+	pipe_color = null
+	colorable = FALSE

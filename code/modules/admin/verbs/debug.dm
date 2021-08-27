@@ -131,12 +131,12 @@
 		return
 	if (istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
-		var/obj/item/weapon/card/id/id = H.GetIdCard()
+		var/obj/item/card/id/id = H.GetIdCard()
 		if(id)
 			id.icon_state = "gold"
 			id.access = get_all_accesses()
 		else
-			id = new/obj/item/weapon/card/id(M);
+			id = new/obj/item/card/id(M);
 			id.icon_state = "gold"
 			id.access = get_all_accesses()
 			id.registered_name = H.real_name
@@ -328,7 +328,7 @@
 	for(var/obj/machinery/power/rad_collector/Rad in world)
 		if(Rad.anchored)
 			if(!Rad.P)
-				var/obj/item/weapon/tank/phoron/Phoron = new/obj/item/weapon/tank/phoron(Rad)
+				var/obj/item/tank/phoron/Phoron = new/obj/item/tank/phoron(Rad)
 				Phoron.air_contents.gas[GAS_PHORON] = 70
 				Rad.drainratio = 0
 				Rad.P = Phoron
@@ -460,3 +460,38 @@
 
 	GLOB.planet_repopulation_disabled = !GLOB.planet_repopulation_disabled
 	log_and_message_admins("toggled planet mob repopulating [GLOB.planet_repopulation_disabled ? "OFF" : "ON"].")
+
+/client/proc/spawn_exoplanet(exoplanet_type as anything in subtypesof(/obj/effect/overmap/visitable/sector/exoplanet))
+	set category = "Debug"
+	set name = "Create Exoplanet"
+
+	var/budget = input("Ruins budget. Default is 5, a budget of 0 will not spawn any ruins, 5 will spawn around 3-5 ruins:", "Ruins Budget", 5) as num | null
+
+	if (isnull(budget) || budget < 0)
+		budget = 5
+
+	var/theme = input("Choose a theme:", "Theme") as anything in typesof(/datum/exoplanet_theme/) | null
+
+	if (!theme)
+		theme = /datum/exoplanet_theme
+
+	var/daycycle = alert("Should the planet have a day-night cycle?","Day Night Cycle", "Yes", "No")
+
+	if (daycycle == "Yes")
+		daycycle = TRUE
+	else
+		daycycle = FALSE
+
+	var/last_chance = alert("Spawn exoplanet?", "Final Confirmation", "Yes", "Cancel")
+
+	if (last_chance == "Cancel")
+		return
+
+	var/obj/effect/overmap/visitable/sector/exoplanet/new_planet = new exoplanet_type(null, world.maxx, world.maxy)
+	new_planet.features_budget = budget
+	new_planet.themes = list(new theme)
+	new_planet.lightlevel = rand(5, 10)/10
+
+	log_and_message_admins("is spawning [new_planet] at [new_planet.start_x],[new_planet.start_y], containing Z [english_list(new_planet.map_z)]")
+	new_planet.build_level()
+	message_admins("[new_planet] has completed generation.")

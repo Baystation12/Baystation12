@@ -6,7 +6,7 @@
 	icon_state_unpowered = "telescreen"
 	hardware_flag = PROGRAM_TELESCREEN
 	anchored = TRUE
-	density = 0
+	density = FALSE
 	base_idle_power_usage = 75
 	base_active_power_usage = 300
 	max_hardware_size = 2
@@ -21,7 +21,7 @@
 	// Allows us to create "north bump" "south bump" etc. named objects, for more comfortable mapping.
 	name = "telescreen"
 
-/obj/item/modular_computer/telescreen/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
+/obj/item/modular_computer/telescreen/attackby(var/obj/item/W as obj, var/mob/user as mob)
 	if(isCrowbar(W))
 		if(anchored)
 			shutdown_computer()
@@ -50,7 +50,7 @@
 					valid = TRUE
 
 			if(valid)
-				anchored = 1
+				anchored = TRUE
 				screen_on = TRUE
 				to_chat(user, "You secure \the [src].")
 			return

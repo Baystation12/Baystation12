@@ -59,7 +59,7 @@
 /mob/Login()
 
 	// Add to player list if missing
-	if (!GLOB.player_list.Find(src))
+	if (!list_find(GLOB.player_list, src))
 		ADD_SORTED(GLOB.player_list, src, /proc/cmp_mob_key)
 
 	update_Login_details()
@@ -96,6 +96,9 @@
 	reload_fullscreen() // Reload any fullscreen overlays this mob has.
 	add_click_catcher()
 	update_action_buttons()
+
+	if(machine)
+		machine.on_user_login(src)
 
 	//set macro to normal incase it was overriden (like cyborg currently does)
 	winset(src, null, "mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true input.background-color=#d3b5b5")

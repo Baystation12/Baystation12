@@ -27,6 +27,7 @@
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "cig_paper"
 	w_class = ITEM_SIZE_TINY
+	is_memo = TRUE
 
 /obj/item/paper/cig/fancy
 	name = "\improper Trident rolling paper"
@@ -40,19 +41,19 @@
 	w_class = ITEM_SIZE_TINY
 
 //tobacco sold seperately if you're too snobby to grow it yourself.
-/obj/item/weapon/reagent_containers/food/snacks/grown/dried_tobacco
+/obj/item/reagent_containers/food/snacks/grown/dried_tobacco
 	plantname = "tobacco"
 	w_class = ITEM_SIZE_TINY
 
-/obj/item/weapon/reagent_containers/food/snacks/grown/dried_tobacco/Initialize()
+/obj/item/reagent_containers/food/snacks/grown/dried_tobacco/Initialize()
 	. = ..()
 	dry = TRUE
 	SetName("dried [name]")
 	color = "#a38463"
-/obj/item/weapon/reagent_containers/food/snacks/grown/dried_tobacco/bad
+/obj/item/reagent_containers/food/snacks/grown/dried_tobacco/bad
 	plantname = "badtobacco"
 
-/obj/item/weapon/reagent_containers/food/snacks/grown/dried_tobacco/fine
+/obj/item/reagent_containers/food/snacks/grown/dried_tobacco/fine
 	plantname = "finetobacco"
 
 /obj/item/clothing/mask/smokable/cigarette/rolled/attackby(obj/item/I, mob/user)
@@ -73,8 +74,8 @@
 			return
 	..()
 
-/obj/item/weapon/reagent_containers/food/snacks/grown/attackby(obj/item/I, mob/user)
-	if(is_type_in_list(I, list(/obj/item/paper/cig/, /obj/item/weapon/paper/, /obj/item/weapon/teleportation_scroll)))
+/obj/item/reagent_containers/food/snacks/grown/attackby(obj/item/I, mob/user)
+	if(is_type_in_list(I, list(/obj/item/paper/cig/, /obj/item/paper/, /obj/item/teleportation_scroll)))
 		if(!dry)
 			to_chat(user, "<span class='warning'>You need to dry [src] first!</span>")
 			return

@@ -34,7 +34,7 @@
 	icon_state = "larva"
 	icon_living = "larva"
 	icon_dead = "larva_dead"
-	holder_type = /obj/item/weapon/holder
+	holder_type = /obj/item/holder
 	destroy_surroundings = FALSE
 	health = 10
 	maxHealth = 10
@@ -45,20 +45,20 @@
 	mob_size = MOB_MINISCULE
 	can_escape = TRUE
 	pass_flags = PASS_FLAG_TABLE
-	melee_damage_lower = 2
-	melee_damage_upper = 5
-	melee_damage_flags = DAM_SHARP
+	natural_weapon = /obj/item/natural_weapon/bite
 	faction = "kharmaani"
 	var/global/list/friendly_species = list(SPECIES_MANTID_ALATE, SPECIES_MANTID_GYNE, SPECIES_MONARCH_QUEEN, SPECIES_MONARCH_WORKER)
+	ai_holder_type = /datum/ai_holder/simple_animal/retaliate/alate_nymph
 
-/mob/living/simple_animal/hostile/retaliate/alate_nymph/ListTargets(var/dist = 7)
+/datum/ai_holder/simple_animal/retaliate/alate_nymph/list_targets()
 	. = list()
-	for(var/mob/living/M in hearers(src, dist))
-		if(M.faction == faction)
+	var/mob/living/simple_animal/hostile/retaliate/alate_nymph/A = holder
+	for(var/mob/living/M in hearers(src, vision_range))
+		if(M.faction == A.faction)
 			continue
 		if(istype(M,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = M
-			if(H.species.get_bodytype() in friendly_species)
+			if(H.species.get_bodytype() in A.friendly_species)
 				continue
 		. += M
 

@@ -37,7 +37,6 @@ meteor_act
 	stun_amount *= siemens_coeff
 	agony_amount *= siemens_coeff
 	agony_amount *= affected.get_agony_multiplier()
-
 	affected.stun_act(stun_amount, agony_amount)
 
 	radio_interrupt_cooldown = world.time + RADIO_INTERRUPT_DEFAULT
@@ -92,6 +91,9 @@ meteor_act
 
 	var/list/clothing_items = list(head, wear_mask, wear_suit, w_uniform, gloves, shoes) // What all are we checking?
 	for(var/obj/item/clothing/C in clothing_items)
+		for(var/obj/item/clothing/accessories in C.accessories)
+			if (accessories.body_parts_covered & def_zone.body_part)
+				siemens_coefficient *= accessories.siemens_coefficient
 		if(istype(C) && (C.body_parts_covered & def_zone.body_part)) // Is that body part being targeted covered?
 			siemens_coefficient *= C.siemens_coefficient
 
@@ -99,13 +101,9 @@ meteor_act
 
 /mob/living/carbon/human/proc/check_head_coverage()
 
-	var/list/body_parts = list(head, wear_mask, wear_suit, w_uniform)
-	for(var/bp in body_parts)
-		if(!bp)	continue
-		if(bp && istype(bp ,/obj/item/clothing))
-			var/obj/item/clothing/C = bp
-			if(C.body_parts_covered & HEAD)
-				return 1
+	for(var/obj/item/clothing/bp in list(head, wear_mask, wear_suit, w_uniform))
+		if(bp.body_parts_covered & HEAD)
+			return 1
 	return 0
 
 //Used to check if they can be fed food/drinks/pills
@@ -114,6 +112,32 @@ meteor_act
 	for(var/obj/item/gear in protective_gear)
 		if(istype(gear) && (gear.body_parts_covered & FACE) && !(gear.item_flags & ITEM_FLAG_FLEXIBLEMATERIAL))
 			return gear
+
+///Returns null or the first equipped item covering the bodypart
+/mob/living/carbon/human/proc/get_clothing_coverage(bodypart)
+	switch(bodypart)
+		if (BP_HEAD)
+			bodypart = HEAD
+		if (BP_EYES)
+			bodypart = EYES
+		if (BP_MOUTH)
+			bodypart = FACE
+		if (BP_CHEST)
+			bodypart = UPPER_TORSO
+		if (BP_GROIN)
+			bodypart = LOWER_TORSO
+		if (BP_L_ARM, BP_R_ARM)
+			bodypart =  ARMS
+		if (BP_L_HAND,  BP_R_HAND)
+			bodypart =  HANDS
+		if (BP_L_LEG, BP_R_LEG)
+			bodypart = LEGS
+		if (BP_L_FOOT, BP_R_FOOT)
+			bodypart = FEET
+
+	for(var/obj/item/clothing/C in list(head, wear_mask, wear_suit, w_uniform, gloves, shoes, glasses))
+		if (C.body_parts_covered & bodypart)
+			return C
 	return null
 
 /mob/living/carbon/human/proc/check_shields(var/damage = 0, var/atom/damage_source = null, var/mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
@@ -140,7 +164,7 @@ meteor_act
 		return target_zone
 
 	var/accuracy_penalty = user.melee_accuracy_mods()
-	accuracy_penalty += 10*get_skill_difference(SKILL_COMBAT, user)
+	accuracy_penalty += 5*get_skill_difference(SKILL_COMBAT, user)
 	accuracy_penalty += 10*(I.w_class - ITEM_SIZE_NORMAL)
 	accuracy_penalty -= I.melee_accuracy_bonus
 
@@ -165,7 +189,10 @@ meteor_act
 	if(!affecting)
 		return //should be prevented by attacked_with_item() but for sanity.
 
-	visible_message("<span class='danger'>[src] has been [I.attack_verb.len? pick(I.attack_verb) : "attacked"] in the [affecting.name] with [I.name] by [user]!</span>")
+	var/weapon_mention
+	if(I.attack_message_name())
+		weapon_mention = " with [I.attack_message_name()]"
+	visible_message(SPAN_DANGER("\The [src] has been [I.attack_verb.len? pick(I.attack_verb) : "attacked"] in the [affecting.name][weapon_mention] by \the [user]!"))
 	return standard_weapon_hit_effects(I, user, effective_force, hit_zone)
 
 /mob/living/carbon/human/standard_weapon_hit_effects(obj/item/I, mob/living/user, var/effective_force, var/hit_zone)
@@ -173,10 +200,13 @@ meteor_act
 	if(!affecting)
 		return 0
 
-	var/blocked = get_blocked_ratio(hit_zone, I.damtype, I.damage_flags(), I.armor_penetration, I.force)
-	// Handle striking to cripple.
 	if(user.a_intent == I_DISARM)
 		effective_force *= 0.66 //reduced effective force...
+
+	var/blocked = get_blocked_ratio(hit_zone, I.damtype, I.damage_flags(), I.armor_penetration, effective_force)
+
+	// Handle striking to cripple.
+	if(user.a_intent == I_DISARM)
 		if(!..(I, user, effective_force, hit_zone))
 			return 0
 
@@ -186,21 +216,22 @@ meteor_act
 	else if(!..())
 		return 0
 
+	var/unimpeded_force = (1 - blocked) * effective_force
 	if(effective_force > 10 || effective_force >= 5 && prob(33))
 		forcesay(GLOB.hit_appends)	//forcesay checks stat already
 		radio_interrupt_cooldown = world.time + (RADIO_INTERRUPT_DEFAULT * 0.8) //getting beat on can briefly prevent radio use
-	if((I.damtype == BRUTE || I.damtype == PAIN) && prob(25 + (effective_force * 2)))
+	if((I.damtype == BRUTE || I.damtype == PAIN) && prob(25 + (unimpeded_force * 2)))
 		if(!stat)
 			if(headcheck(hit_zone))
 				//Harder to score a stun but if you do it lasts a bit longer
-				if(prob(effective_force))
-					apply_effect(20, PARALYZE, blocked)
+				if(prob(unimpeded_force))
+					apply_effect(20, PARALYZE, 100 * blocked)
 					if(lying)
 						visible_message("<span class='danger'>[src] [species.knockout_message]</span>")
 			else
 				//Easier to score a stun but lasts less time
-				if(prob(effective_force + 5))
-					apply_effect(3, WEAKEN, blocked)
+				if(prob(unimpeded_force + 5))
+					apply_effect(3, WEAKEN, 100 * blocked)
 					if(lying)
 						visible_message("<span class='danger'>[src] has been knocked down!</span>")
 
@@ -268,7 +299,7 @@ meteor_act
 		return 0
 
 	//want the dislocation chance to be such that the limb is expected to dislocate after dealing a fraction of the damage needed to break the limb
-	var/dislocate_chance = effective_force/(dislocate_mult * organ.min_broken_damage * config.organ_health_multiplier)*100
+	var/dislocate_chance = effective_force/(dislocate_mult * organ.min_broken_damage * config.organ_health_multiplier) * (organ.damage * 1.75)
 	if(prob(dislocate_chance * blocked_mult(blocked)))
 		visible_message("<span class='danger'>[src]'s [organ.joint] [pick("gives way","caves in","crumbles","collapses")]!</span>")
 		organ.dislocate(1)
@@ -382,7 +413,7 @@ meteor_act
 				if(T)
 					src.forceMove(T)
 					visible_message("<span class='warning'>[src] is pinned to the wall by [O]!</span>","<span class='warning'>You are pinned to the wall by [O]!</span>")
-					src.anchored = 1
+					src.anchored = TRUE
 					src.pinned += O
 	else
 		..()
@@ -420,8 +451,8 @@ meteor_act
 	if(damtype != BURN && damtype != BRUTE) return
 
 	// The rig might soak this hit, if we're wearing one.
-	if(back && istype(back,/obj/item/weapon/rig))
-		var/obj/item/weapon/rig/rig = back
+	if(back && istype(back,/obj/item/rig))
+		var/obj/item/rig/rig = back
 		rig.take_hit(damage)
 
 	// We may also be taking a suit breach.

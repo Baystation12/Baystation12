@@ -10,7 +10,7 @@
 	var/datum/computer_file/data/text/report_file
 	if(attach_report)
 		var/list/user_access = list()
-		var/obj/item/weapon/card/id/I = user.GetIdCard()
+		var/obj/item/card/id/I = user.GetIdCard()
 		if(I)
 			user_access |= I.access
 		report_file = new

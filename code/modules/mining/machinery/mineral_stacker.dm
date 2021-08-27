@@ -4,6 +4,8 @@
 	console = /obj/machinery/computer/mining
 	input_turf =  EAST
 	output_turf = WEST
+	machine_name = "stacking machine"
+	machine_desc = "A simple device that combines sheets that pass through it into single, larger stacks."
 	var/stack_amt = 50
 	var/list/stacks = list()
 

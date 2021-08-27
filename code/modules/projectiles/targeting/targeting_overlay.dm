@@ -3,11 +3,11 @@
 	desc = "Stick 'em up!"
 	icon = 'icons/effects/Targeted.dmi'
 	icon_state = "locking"
-	anchored = 1
-	density = 0
+	anchored = TRUE
+	density = FALSE
 	opacity = 0
 	layer = ABOVE_HUMAN_LAYER
-	simulated = 0
+	simulated = FALSE
 	mouse_opacity = 0
 
 	var/mob/living/aiming_at   // Who are we currently targeting, if anyone?
@@ -24,32 +24,35 @@
 	loc = null
 	verbs.Cut()
 
-/obj/aiming_overlay/proc/toggle_permission(var/perm)
+/obj/aiming_overlay/proc/toggle_permission(perm, silent)
 
-	if(target_permissions & perm)
+	if (target_permissions & perm)
 		target_permissions &= ~perm
 	else
 		target_permissions |= perm
 
+	if (silent)
+		return
+
 	// Update HUD icons.
-	if(owner.gun_move_icon)
-		if(!(target_permissions & TARGET_CAN_MOVE))
+	if (owner.gun_move_icon)
+		if (!(target_permissions & TARGET_CAN_MOVE))
 			owner.gun_move_icon.icon_state = "no_walk0"
 			owner.gun_move_icon.SetName("Allow Movement")
 		else
 			owner.gun_move_icon.icon_state = "no_walk1"
 			owner.gun_move_icon.SetName("Disallow Movement")
 
-	if(owner.item_use_icon)
-		if(!(target_permissions & TARGET_CAN_CLICK))
+	if (owner.item_use_icon)
+		if (!(target_permissions & TARGET_CAN_CLICK))
 			owner.item_use_icon.icon_state = "no_item0"
 			owner.item_use_icon.SetName("Allow Item Use")
 		else
 			owner.item_use_icon.icon_state = "no_item1"
 			owner.item_use_icon.SetName("Disallow Item Use")
 
-	if(owner.radio_use_icon)
-		if(!(target_permissions & TARGET_CAN_RADIO))
+	if (owner.radio_use_icon)
+		if (!(target_permissions & TARGET_CAN_RADIO))
 			owner.radio_use_icon.icon_state = "no_radio0"
 			owner.radio_use_icon.SetName("Allow Radio Use")
 		else
@@ -58,24 +61,26 @@
 
 	var/message = "no longer permitted to "
 	var/use_span = "warning"
-	if(target_permissions & perm)
+	if (target_permissions & perm)
 		message = "now permitted to "
 		use_span = "notice"
 
 	switch(perm)
-		if(TARGET_CAN_MOVE)
+		if (TARGET_CAN_MOVE)
 			message += "move"
-		if(TARGET_CAN_CLICK)
+		if (TARGET_CAN_CLICK)
 			message += "use items"
-		if(TARGET_CAN_RADIO)
+		if (TARGET_CAN_RADIO)
 			message += "use a radio"
 		else
 			return
 
-	var/aim_message = "<span class='[use_span]'>[aiming_at ? "\The [aiming_at] is" : "Your targets are"] [message].</span>"
-	to_chat(owner, aim_message)
-	if(aiming_at)
+	if (aiming_at && aiming_at != owner)
+		to_chat(owner, "<span class='[use_span]'>\The [aiming_at] is [message].</span>")
 		to_chat(aiming_at, "<span class='[use_span]'>You are [message].</span>")
+	else
+		to_chat(owner, "<span class='[use_span]'>Your targets are [message].</span>")
+
 /obj/aiming_overlay/Process()
 	if(!owner)
 		qdel(src)
@@ -134,37 +139,62 @@ obj/aiming_overlay/proc/update_aiming_deferred()
 		spawn(0)
 			owner.set_dir(get_dir(get_turf(owner), get_turf(src)))
 
-/obj/aiming_overlay/proc/aim_at(var/mob/target, var/obj/thing)
+/obj/aiming_overlay/proc/aim_at(var/mob/target, var/obj/thing, var/no_target_change)
 
-	if(!owner || !isliving(target))
-		return
-
-	if(owner.incapacitated())
-		to_chat(owner, "<span class='warning'>You cannot aim a gun in your current state.</span>")
-		return
-	if(owner.lying)
-		to_chat(owner, "<span class='warning'>You cannot aim a gun while prone.</span>")
-		return
-	if(owner.restrained())
-		to_chat(owner, "<span class='warning'>You cannot aim a gun while handcuffed.</span>")
+	if (!owner || !isliving(target))
 		return
 
-	if(aiming_at)
-		if(aiming_at == target)
-			return
-		cancel_aiming(1)
-		owner.visible_message("<span class='danger'>\The [owner] turns \the [thing] on \the [target]!</span>")
+	if (owner.incapacitated())
+		to_chat(owner, SPAN_WARNING("You cannot aim a gun in your current state."))
+		return
+	if (owner.lying)
+		to_chat(owner, SPAN_WARNING("You cannot aim a gun while prone."))
+		return
+	if (owner.restrained())
+		to_chat(owner, SPAN_WARNING("You cannot aim a gun while handcuffed."))
+		return
+
+	var/gunpointedtarget = SPAN_DANGER("You now have \a [thing] pointed at you. No sudden moves!")
+	var/gunpointedself = ""
+	var/mob/living/carbon/human/user = owner
+
+	if (istype(user))
+		if (user.zone_sel.selecting == BP_MOUTH)
+			admin_attacker_log(user, "is getting ready to suicide with \a [src]")
+			if (user.check_has_mouth() && !(user.check_mouth_coverage()))
+				gunpointedself = SPAN_DANGER("\The [owner] puts the barrel of \the [thing] in their mouth, ready to pull the trigger...")
+			else
+				gunpointedself = SPAN_DANGER("\The [owner] aims \the [thing] at themselves, ready to pull the trigger...")
+		else
+			gunpointedself = SPAN_DANGER("\The [owner] aims \the [thing] at themselves!")
+
+	if (aiming_at)
+		if (!no_target_change)
+			if(aiming_at == target)
+				return
+			cancel_aiming(1)
+		if (owner != target)
+			owner.visible_message(SPAN_DANGER("\The [owner] turns \the [thing] on \the [target]!"))
+			to_chat(target, "[gunpointedtarget]")
+		else
+			owner.visible_message("[gunpointedself]")
+	else if (owner != target)
+		owner.visible_message(SPAN_DANGER("\The [owner] aims \the [thing] at \the [target]!"))
+		to_chat(target, "[gunpointedtarget]")
 	else
-		owner.visible_message("<span class='danger'>\The [owner] aims \the [thing] at \the [target]!</span>")
+		owner.visible_message("[gunpointedself]")
 
-	if(owner.client)
-		owner.client.add_gun_icons()
-	to_chat(target, "<span class='danger'>You now have a gun pointed at you. No sudden moves!</span>")
 	aiming_with = thing
-	aiming_at = target
-	if(istype(aiming_with, /obj/item/weapon/gun))
+	if (istype(aiming_with, /obj/item/gun))
 		sound_to(aiming_at, sound('sound/weapons/TargetOn.ogg'))
 		sound_to(owner, sound('sound/weapons/TargetOn.ogg'))
+
+	if (no_target_change)
+		return
+
+	if (owner.client)
+		owner.client.add_gun_icons()
+	aiming_at = target
 
 	forceMove(get_turf(target))
 	START_PROCESSING(SSobj, src)
@@ -211,7 +241,7 @@ obj/aiming_overlay/proc/update_aiming_deferred()
 		return
 	if(!no_message)
 		owner.visible_message("<span class='notice'>\The [owner] lowers \the [aiming_with].</span>")
-		if(istype(aiming_with, /obj/item/weapon/gun))
+		if(istype(aiming_with, /obj/item/gun))
 			sound_to(aiming_at, sound('sound/weapons/TargetOff.ogg'))
 			sound_to(owner, sound('sound/weapons/TargetOff.ogg'))
 

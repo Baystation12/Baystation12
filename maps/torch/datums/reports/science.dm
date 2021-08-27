@@ -2,7 +2,7 @@
 	form_name = "SCG-SCI-1546"
 	title = "Anomalistic Object Report"
 	logo = "\[eclogo\]\[logo\]"
-	available_on_ntnet = 1
+	available_on_ntnet = TRUE
 
 /datum/computer_file/report/recipient/sci/anomaly/New()
 	..()

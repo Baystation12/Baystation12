@@ -8,11 +8,12 @@
 	var/pass_flags = 0
 	var/throwpass = 0
 	var/germ_level = GERM_LEVEL_AMBIENT // The higher the germ level, the more germ on the atom.
-	var/simulated = 1 //filter for actions - used by lighting overlays
+	var/simulated = TRUE //filter for actions - used by lighting overlays
 	var/fluorescent // Shows up under a UV light.
 	var/datum/reagents/reagents // chemical contents.
 	var/list/climbers
 	var/climb_speed_mult = 1
+	var/init_flags = EMPTY_BITFIELD
 
 /atom/New(loc, ...)
 	//atom creation method that preloads variables at creation
@@ -60,6 +61,9 @@
 		if(istype(T))
 			T.RecalculateOpacity()
 
+	if (use_health_handler)
+		initialize_health()
+
 	return INITIALIZE_HINT_NORMAL
 
 //called if Initialize returns INITIALIZE_HINT_LATELOAD
@@ -72,6 +76,9 @@
 
 /atom/proc/reveal_blood()
 	return
+
+/atom/proc/MayZoom()
+	return TRUE
 
 /atom/proc/assume_air(datum/gas_mixture/giver)
 	return null
@@ -137,6 +144,12 @@
 /atom/proc/set_density(var/new_density)
 	if(density != new_density)
 		density = !!new_density
+		if (isturf(loc))
+			var/turf/T = loc
+			if (density)
+				T.has_dense_atom = TRUE
+			else
+				T.has_dense_atom = null
 
 /atom/proc/bullet_act(obj/item/projectile/P, def_zone)
 	P.on_hit(src, 0, def_zone)
@@ -355,7 +368,7 @@ its easier to just keep the beam vertical.
 	var/list/y_arr = null
 	for(cur_x=1,cur_x<=GLOB.global_map.len,cur_x++)
 		y_arr = GLOB.global_map[cur_x]
-		cur_y = y_arr.Find(src.z)
+		cur_y = list_find(y_arr, src.z)
 		if(cur_y)
 			break
 //	log_debug("X = [cur_x]; Y = [cur_y]")
@@ -477,6 +490,25 @@ its easier to just keep the beam vertical.
 		return 0
 
 	var/obj/occupied = turf_is_crowded(user)
+	//because Adjacent() has exceptions for windows, those must be handled here
+	if(!occupied && istype(src, /obj/structure/wall_frame))
+		var/original_dir = get_dir(src, user.loc)
+		var/progress_dir = original_dir
+		for(var/atom/A in loc.contents)
+			if(A.atom_flags & ATOM_FLAG_CHECKS_BORDER)
+				var/obj/structure/window/W = A
+				if(istype(W))
+					//progressively check if a window matches the X or Y component of the dir, if collision, set the dir bit off
+					if(W.is_fulltile() || (progress_dir &= ~W.dir) == 0) //if dir components are 0, fully blocked on diagonal
+						occupied = A
+						break
+		//if true, means one dir was blocked and bit set off, so check the unblocked
+		if(progress_dir != original_dir && progress_dir != 0)
+			var/turf/here = get_turf(src)
+			if(!here.Adjacent_free_dir(user, progress_dir))
+				to_chat(user, SPAN_DANGER("You can't climb there, the way is blocked."))
+				return FALSE
+
 	if(occupied)
 		to_chat(user, "<span class='danger'>There's \a [occupied] in the way.</span>")
 		return 0
@@ -499,7 +531,7 @@ its easier to just keep the beam vertical.
 
 /atom/proc/turf_is_crowded(var/atom/ignore)
 	var/turf/T = get_turf(src)
-	if(!T || !istype(T))
+	if(!istype(T))
 		return 0
 	for(var/atom/A in T.contents)
 		if(ignore && ignore == A)
@@ -593,3 +625,8 @@ its easier to just keep the beam vertical.
 
 /atom/proc/get_cell()
 	return
+
+/atom/proc/slam_into(mob/living/L)
+	L.Weaken(2)
+	L.visible_message(SPAN_WARNING("\The [L] [pick("ran", "slammed")] into \the [src]!"))
+	playsound(L, "punch", 25, 1, FALSE)

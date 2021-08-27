@@ -21,6 +21,9 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 
 	idle_power_usage = 30
 	active_power_usage = 2500
+	
+	machine_name = "circuit imprinter"
+	machine_desc = "Creates circuit boards by etching raw sheets of material with sulphuric acid. Part of an R&D network."
 
 /obj/machinery/r_n_d/circuit_imprinter/New()
 	materials = default_material_composition.Copy()
@@ -55,18 +58,18 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 
 /obj/machinery/r_n_d/circuit_imprinter/RefreshParts()
 	var/T = 0
-	var/obj/item/weapon/stock_parts/building_material/mat = get_component_of_type(/obj/item/weapon/stock_parts/building_material)
+	var/obj/item/stock_parts/building_material/mat = get_component_of_type(/obj/item/stock_parts/building_material)
 	if(mat)
-		for(var/obj/item/weapon/reagent_containers/glass/G in mat.materials)
+		for(var/obj/item/reagent_containers/glass/G in mat.materials)
 			T += G.volume
 		if(!reagents)
 			create_reagents(T)
 		else
 			reagents.maximum_volume = T
 
-	max_material_storage = 75000 * Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin), 0, 10)
+	max_material_storage = 75000 * Clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 0, 10)
 
-	T = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator), 0, 3)
+	T = Clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator), 0, 3)
 	mat_efficiency = 1 - (T - 1) / 4
 	speed = T
 	..()

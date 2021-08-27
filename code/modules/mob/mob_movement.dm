@@ -26,6 +26,11 @@
 	if(delay)
 		delay.AddDelay(timeout)
 
+/mob/proc/checkMoveCooldown()
+	if(world.time < next_move)
+		return FALSE // Need to wait more.
+	return TRUE
+
 /client/proc/client_dir(input, direction=-1)
 	return turn(input, direction*dir2angle(dir))
 
@@ -199,11 +204,13 @@
 			return 1
 		else
 			var/area/A = T.loc
-			if(A.has_gravity || shoegrip)
+			if(A.has_gravity || (shoegrip && !isopenspace(T)))
 				return 1
 
 	for(var/obj/O in orange(1, src))
 		if(istype(O, /obj/structure/lattice))
+			return 1
+		if(istype(O, /obj/structure/catwalk))
 			return 1
 		if(O && O.density && O.anchored)
 			return 1

@@ -5,10 +5,13 @@
 
 /obj/machinery/mineral/processing_unit
 	name = "mineral processor"
-	icon_state = "furnace"
+	icon_state = "furnace_0"
 	console = /obj/machinery/computer/mining
 	input_turf =  NORTH
 	output_turf = SOUTH
+
+	machine_name = "ore processor"
+	machine_desc = "Essentially a glorified furnace, ore processors can smelt, compress, or alloy raw minerals into new forms. Improper processing will result in useless slag!"
 
 	var/sheets_per_tick = 10
 	var/list/ores_processing
@@ -25,6 +28,9 @@
 	. = ..()
 
 /obj/machinery/mineral/processing_unit/Process()
+	if(!active)
+		return
+
 	//Grab some more ore to process this tick.
 	if(input_turf)
 		for(var/obj/item/I in recursive_content_check(input_turf, sight_check = FALSE, include_mobs = FALSE))
@@ -34,10 +40,7 @@
 				for(var/o_material in I.matter)
 					if(!isnull(ores_stored[o_material]))
 						ores_stored[o_material] += I.matter[o_material]
-			qdel(I)
-
-	if(!active)
-		return
+						qdel(I)
 
 	//Process our stored ores and spit out sheets.
 	if(output_turf)
@@ -69,7 +72,7 @@
 
 			sheets += abs(result)
 			while(result < 0)
-				new /obj/item/weapon/ore(output_turf, MATERIAL_WASTE)
+				new /obj/item/ore(output_turf, MATERIAL_WASTE)
 				result++
 
 		// Try to make any available alloys.
@@ -162,12 +165,20 @@
 		. = TRUE
 	else if(href_list["toggle_power"])
 		active = !active
+		update_icon()
 		. = TRUE
 	else if(href_list["toggle_ores"])
 		report_all_ores = !report_all_ores
 		. = TRUE
 	if(. && console)
 		console.updateUsrDialog()
+
+/obj/machinery/mineral/processing_unit/on_update_icon()
+	overlays.Cut()
+	if(active)
+		icon_state = "furnace_1"
+	else
+		icon_state = "furnace_0"
 
 #undef ORE_DISABLED
 #undef ORE_SMELT

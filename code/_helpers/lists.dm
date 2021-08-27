@@ -141,6 +141,29 @@ Checks if a list has the same entries and values as an element of big.
 		return L[len]
 	return null
 
+/* pickweightindex
+	given an indexed list of (index = weight, index + 1 = weight, ...), returns a random index biased by weights. Higher weight = more chance
+	if the argument is not an indexed list of weights, returns pick(list)
+	if the argument is empty or not a list, returns null
+*/
+/proc/pickweightindex(list/L)
+	var/len = length(L)
+	if (len && islist(L))
+		for(var/index = 1, index <= len, index++)
+			if (isnull(L[index]))
+				return pick(L)
+			break
+		var/sum = 0
+		for(var/index = 1, index <= len, index++)
+			sum += L[index]
+		sum *= rand()
+		for(var/index = 1, index <= len, index++)
+			sum -= L[index]
+			if (sum <= 0)
+				return index
+		return len
+	return null
+
 //Pick a random element from the list and remove it from the list.
 /proc/pick_n_take(list/listfrom)
 	if (listfrom.len > 0)
@@ -676,3 +699,44 @@ proc/dd_sortedTextList(list/incoming)
 		var/atom/A = key
 		if(A.type == T)
 			return A
+
+/**
+ * Returns a new list with only atoms that are in typecache L
+ *
+ */
+/proc/typecache_filter_list(list/atoms, list/typecache)
+	. = list()
+	for(var/thing in atoms)
+		var/atom/A = thing
+		if(typecache[A.type])
+			. += A
+
+/**
+ * Like typesof() or subtypesof(), but returns a typecache instead of a list
+ */
+/proc/typecacheof(path, ignore_root_path, only_root_path = FALSE)
+	if(ispath(path))
+		var/list/types = list()
+		if(only_root_path)
+			types = list(path)
+		else
+			types = ignore_root_path ? subtypesof(path) : typesof(path)
+		var/list/L = list()
+		for(var/T in types)
+			L[T] = TRUE
+		return L
+	else if(islist(path))
+		var/list/pathlist = path
+		var/list/L = list()
+		if(ignore_root_path)
+			for(var/P in pathlist)
+				for(var/T in subtypesof(P))
+					L[T] = TRUE
+		else
+			for(var/P in pathlist)
+				if(only_root_path)
+					L[P] = TRUE
+				else
+					for(var/T in typesof(P))
+						L[T] = TRUE
+		return L

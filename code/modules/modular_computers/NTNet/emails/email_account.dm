@@ -6,8 +6,10 @@
 
 	var/login = ""
 	var/password = ""
-	var/can_login = TRUE	// Whether you can log in with this account. Set to false for system accounts
-	var/suspended = FALSE	// Whether the account is banned by the SA.
+	/// Whether you can log in with this account. Set to FALSE for system accounts.
+	var/can_login = TRUE
+	/// Whether the account is banned by the SA.
+	var/suspended = FALSE
 	var/connected_clients = list()
 
 	var/fullname	= "N/A"
@@ -23,7 +25,9 @@
 		size += stored_message.size
 
 /datum/computer_file/data/email_account/New(_login, _fullname, _assignment)
-	login = _login
+	password = GenerateKey()
+	if(_login)
+		login = _login
 	if(_fullname)
 		fullname = _fullname
 	if(_assignment)
@@ -38,7 +42,10 @@
 /datum/computer_file/data/email_account/proc/all_emails()
 	return (inbox | spam | deleted | outbox)
 
-/datum/computer_file/data/email_account/proc/send_mail(var/recipient_address, var/datum/computer_file/data/email_message/message, var/relayed = 0)
+/datum/computer_file/data/email_account/proc/send_mail(recipient_address, datum/computer_file/data/email_message/message, relayed = 0)
+	if(suspended)
+		return FALSE
+
 	var/datum/computer_file/data/email_account/recipient
 	for(var/datum/computer_file/data/email_account/account in ntnet_global.email_accounts)
 		if(account.login == recipient_address)
@@ -46,20 +53,20 @@
 			break
 
 	if(!istype(recipient))
-		return 0
+		return FALSE
 
 	if(!recipient.receive_mail(message, relayed))
-		return
+		return FALSE
 
 	outbox.Add(message)
-	ntnet_global.add_log_with_ids_check("EMAIL LOG: [login] -> [recipient.login] title: [message.title].")
-	return 1
+	ntnet_global.add_log_with_ids_check("EMAIL LOG: [login] -> [recipient.login] title: [message.title].", intrusion = FALSE)
+	return TRUE
 
 /datum/computer_file/data/email_account/proc/receive_mail(var/datum/computer_file/data/email_message/received_message, var/relayed)
 	received_message.set_timestamp()
 	if(!ntnet_global.intrusion_detection_enabled)
 		inbox.Add(received_message)
-		return 1
+		return TRUE
 	// Spam filters may occassionally let something through, or mark something as spam that isn't spam.
 	var/mark_spam = FALSE
 	if(received_message.spam)
@@ -75,8 +82,7 @@
 		inbox.Add(received_message)
 		for(var/datum/nano_module/email_client/ec in connected_clients)
 			ec.mail_received(received_message)
-
-	return 1
+	return TRUE
 
 // Address namespace (@internal-services.net) for email addresses with special purpose only!.
 /datum/computer_file/data/email_account/service/
@@ -86,8 +92,8 @@
 	login = EMAIL_BROADCAST
 
 /datum/computer_file/data/email_account/service/broadcaster/receive_mail(var/datum/computer_file/data/email_message/received_message, var/relayed)
-	if(!istype(received_message) || relayed)
-		return 0
+	if(suspended || !istype(received_message) || relayed)
+		return FALSE
 	// Possibly exploitable for user spamming so keep admins informed.
 	if(!received_message.spam)
 		log_and_message_admins("Broadcast email address used by [usr]. Message title: [received_message.title].")
@@ -98,7 +104,7 @@
 			send_mail(email_account.login, new_message, 1)
 			sleep(2)
 
-	return 1
+	return TRUE
 
 /datum/computer_file/data/email_account/service/document
 	login = EMAIL_DOCUMENTS

@@ -8,6 +8,11 @@
 	map_generators = list(/datum/random_map/noise/exoplanet/desert, /datum/random_map/noise/ore/rich)
 	surface_color = "#d6cca4"
 	water_color = null
+	habitability_distribution = list(HABITABILITY_IDEAL = 30, HABITABILITY_OKAY = 50, HABITABILITY_BAD = 10)
+	has_trees = FALSE
+	flora_diversity = 4
+	fauna_types = list(/mob/living/simple_animal/thinbug, /mob/living/simple_animal/tindalos, /mob/living/simple_animal/hostile/voxslug, /mob/living/simple_animal/hostile/antlion)
+	megafauna_types = list(/mob/living/simple_animal/hostile/antlion/mega)
 
 /obj/effect/overmap/visitable/sector/exoplanet/desert/generate_map()
 	if(prob(70))
@@ -44,109 +49,102 @@
 
 	flora_prob = 5
 	large_flora_prob = 0
-	flora_diversity = 4
-	fauna_types = list(/mob/living/simple_animal/thinbug, /mob/living/simple_animal/tindalos, /mob/living/simple_animal/hostile/voxslug, /mob/living/simple_animal/hostile/antlion)
-	megafauna_types = list(/mob/living/simple_animal/hostile/antlion/mega)
 
 /datum/random_map/noise/exoplanet/desert/get_additional_spawns(var/value, var/turf/T)
 	..()
-	if(is_edge_turf(T))
-		return
 	var/v = noise2value(value)
-	if(v > 6)
-		T.icon_state = "desert[v-1]"
-		if(prob(10))
-			new/obj/structure/quicksand(T)
+	if(v > 6 && prob(2))
+		new/obj/effect/quicksand(T)
 
 /area/exoplanet/desert
 	ambience = list('sound/effects/wind/desert0.ogg','sound/effects/wind/desert1.ogg','sound/effects/wind/desert2.ogg','sound/effects/wind/desert3.ogg','sound/effects/wind/desert4.ogg','sound/effects/wind/desert5.ogg')
 	base_turf = /turf/simulated/floor/exoplanet/desert
 
-/obj/structure/quicksand
-	name = "sand"
+/obj/effect/quicksand
+	name = "quicksand"
+	desc = "There is no candy at the bottom."
 	icon = 'icons/obj/quicksand.dmi'
 	icon_state = "intact0"
-	density = 0
-	anchored = 1
-	can_buckle = 1
+	density = FALSE
+	anchored = TRUE
+	can_buckle = TRUE
 	buckle_dir = SOUTH
-	var/exposed = 0
+	var/exposed = FALSE
 	var/busy
 
-/obj/structure/quicksand/New()
-	icon_state = "intact[rand(0,2)]"
-	..()
+/obj/effect/quicksand/Initialize()
+	. = ..()
+	var/turf/T = get_turf(src)
+	appearance = T.appearance
 
-/obj/structure/quicksand/user_unbuckle_mob(mob/user)
+/obj/effect/quicksand/user_unbuckle_mob(mob/user)
 	if(buckled_mob && !user.stat && !user.restrained())
 		if(busy)
-			to_chat(user, "<span class='wanoticerning'>[buckled_mob] is already getting out, be patient.</span>")
+			to_chat(user, SPAN_NOTICE("\The [buckled_mob] is already getting out, be patient."))
 			return
 		var/delay = 60
 		if(user == buckled_mob)
 			delay *=2
 			user.visible_message(
-				"<span class='notice'>\The [user] tries to climb out of \the [src].</span>",
-				"<span class='notice'>You begin to pull yourself out of \the [src].</span>",
-				"<span class='notice'>You hear water sloushing.</span>"
+				SPAN_NOTICE("\The [user] tries to climb out of \the [src]."),
+				SPAN_NOTICE("You begin to pull yourself out of \the [src]."),
+				SPAN_NOTICE("You hear water sloshing.")
 				)
 		else
 			user.visible_message(
-				"<span class='notice'>\The [user] begins pulling \the [buckled_mob] out of \the [src].</span>",
-				"<span class='notice'>You begin to pull \the [buckled_mob] out of \the [src].</span>",
-				"<span class='notice'>You hear water sloushing.</span>"
+				SPAN_NOTICE("\The [user] begins pulling \the [buckled_mob] out of \the [src]."),
+				SPAN_NOTICE("You begin to pull \the [buckled_mob] out of \the [src]."),
+				SPAN_NOTICE("You hear water sloshing.")
 				)
-		busy = 1
+		busy = TRUE
 		if(do_after(user, delay, src))
-			busy = 0
+			busy = FALSE
 			if(user == buckled_mob)
 				if(prob(80))
-					to_chat(user, "<span class='warning'>You slip and fail to get out!</span>")
+					to_chat(user, SPAN_WARNING("You slip and fail to get out!"))
 					return
-				user.visible_message("<span class='notice'>\The [buckled_mob] pulls himself out of \the [src].</span>")
+				user.visible_message(SPAN_NOTICE("\The [buckled_mob] pulls himself out of \the [src]."))
 			else
-				user.visible_message("<span class='notice'>\The [buckled_mob] has been freed from \the [src] by \the [user].</span>")
+				user.visible_message(SPAN_NOTICE("\The [buckled_mob] has been freed from \the [src] by \the [user]."))
 			unbuckle_mob()
 		else
-			busy = 0
-			to_chat(user, "<span class='warning'>You slip and fail to get out!</span>")
+			busy = FALSE
+			to_chat(user, SPAN_WARNING("You slip and fail to get out!"))
 			return
 
-/obj/structure/quicksand/unbuckle_mob()
+/obj/effect/quicksand/unbuckle_mob()
 	..()
 	update_icon()
 
-/obj/structure/quicksand/buckle_mob(var/mob/L)
+/obj/effect/quicksand/buckle_mob(var/mob/L)
 	..()
 	update_icon()
 
-/obj/structure/quicksand/on_update_icon()
+/obj/effect/quicksand/on_update_icon()
 	if(!exposed)
 		return
 	icon_state = "open"
 	overlays.Cut()
 	if(buckled_mob)
-		overlays += buckled_mob
-		var/image/I = image(icon,icon_state="overlay")
-		I.layer = ABOVE_HUMAN_LAYER
-		overlays += I
+		overlays += image(icon,icon_state="overlay",layer=ABOVE_HUMAN_LAYER)
 
-/obj/structure/quicksand/proc/expose()
+/obj/effect/quicksand/proc/expose()
 	if(exposed)
 		return
-	visible_message("<span class='warning'>The upper crust breaks, exposing treacherous quicksands underneath!</span>")
-	name = "quicksand"
-	desc = "There is no candy at the bottom."
+	visible_message(SPAN_WARNING("The upper crust breaks, exposing the treacherous quicksand underneath!"))
+	SetName(initial(name))
+	desc = initial(desc)
+	icon = initial(icon)
 	exposed = 1
 	update_icon()
 
-/obj/structure/quicksand/attackby(obj/item/weapon/W, mob/user)
+/obj/effect/quicksand/attackby(obj/item/W, mob/user)
 	if(!exposed && W.force)
 		expose()
 	else
 		..()
 
-/obj/structure/quicksand/Crossed(var/atom/movable/AM)
+/obj/effect/quicksand/Crossed(var/atom/movable/AM)
 	if(isliving(AM))
 		var/mob/living/L = AM
 		if(L.throwing || L.can_overcome_gravity())
