@@ -1,8 +1,13 @@
-//This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
-
 /*
  * A large number of misc global procs.
  */
+
+/proc/subtypesof(datum/thing)
+	if (ispath(thing))
+		return typesof(thing) - thing
+	if (istype(thing))
+		return typesof(thing) - thing.type
+	return list()
 
 //Checks if all high bits in req_mask are set in bitfield
 #define BIT_TEST_ALL(bitfield, req_mask) ((~(bitfield) & (req_mask)) == 0)
@@ -1118,4 +1123,3 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 		M.start_pulling(t)
 	else
 		step(user.pulling, get_dir(user.pulling.loc, A))
-
