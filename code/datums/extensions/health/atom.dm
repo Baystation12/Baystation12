@@ -262,11 +262,11 @@
 		to_chat(user, SPAN_DANGER("It looks broken."))
 		return
 
-	var/health_percentage = get_damage_percentage()
-	switch (health_percentage)
-		if (1)
+	var/damage_percentage = get_damage_percentage()
+	switch (damage_percentage)
+		if (0.00)
 			to_chat(user, SPAN_NOTICE("It looks fully intact."))
-		if (0.66 to 0.99)
+		if (0.01 to 0.32)
 			to_chat(user, SPAN_WARNING("It looks slightly damaged."))
 		if (0.33 to 0.65)
 			to_chat(user, SPAN_WARNING("It looks moderately damaged."))
@@ -280,11 +280,11 @@
 		to_chat(user, SPAN_DANGER("They look severely hurt and is not moving or responding to anything around them."))
 		return
 
-	var/health_percentage = get_damage_percentage()
-	switch (health_percentage)
-		if (1)
+	var/damage_percentage = get_damage_percentage()
+	switch (damage_percentage)
+		if (0.00)
 			to_chat(user, SPAN_NOTICE("They appear unhurt."))
-		if (0.66 to 0.99)
+		if (0.01 to 0.32)
 			to_chat(user, SPAN_WARNING("They look slightly hurt."))
 		if (0.33 to 0.65)
 			to_chat(user, SPAN_WARNING("They look moderately hurt."))
