@@ -98,5 +98,5 @@
 
 
 	var/auth_key = input("Enter the key, that bot gave you.") as text
-	if(auth_key):
+	if(auth_key)
 		SSwebhooks.send(WEBHOOK_REG, list("auth_key" = auth_key, "ckey" = src.key))

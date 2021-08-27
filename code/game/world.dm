@@ -153,7 +153,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 		return throttle[2] ? "Throttled ([throttle[2]])" : "Throttled"
 
 	var/base_throttle = max(throttle[1], world.timeofday)
-	SET_THROTTLE(3 SECONDS, null)
+	SET_THROTTLE(0.5 SECONDS, null)
 
 	/* * * * * * * *
 	* Public Topic Calls
@@ -166,8 +166,6 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 		input["message"] = ""
 		for(var/pos in mes_to_replace)
 			input["message"] += ascii2text(text2num(pos))
-	var/key_valid = config.comms_password && input["key"] == config.comms_password
-
 
 	if (T == "ping")
 		var/x = 1
@@ -294,13 +292,19 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 		notes_add(target,"[input["id"]] has permabanned [C.ckey]. - Reason: [input["reason"]] - This is a ban until appeal.",input["id"])
 		qdel(C)
 
+
+	/* * * * * * * *
+	* Secure Topic Calls
+	* The following topic calls are only available if a comms secret has been defined, supplied, and is correct.
+	* * * * * * * */
+
+	if (!config.comms_password)
+		SET_THROTTLE(10 SECONDS, "Comms Not Enabled")
+		return "Not enabled"
+
 	else if(input["type"]=="ooc")
-		if(!key_valid)
-			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
-				spawn(50)
-				world_topic_spam_protect_time = world.time
-				return "Bad Key (Throttled)"
-			world_topic_spam_protect_time = world.time
+		if(input["key"] != config.comms_password)
+			SET_THROTTLE(30 SECONDS, "Bad Comms Key")
 			return "Bad Key"
 		var/ckey = input["user"]
 		var/message = input["message"]
@@ -311,21 +315,10 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 		var/sent_message = "[create_text_tag("DISCORD OOC:")] <EM>[ckey]:</EM> <span class='message linkify'>[message]</span>"
 		SSwebhooks.send(WEBHOOK_OOC, list("key" = ckey, "message" = message, type="DOOC"))
 		for(var/client/target in GLOB.clients)
-			if(!target)
-				continue //sanity
 			if(target.is_key_ignored(ckey) || target.get_preference_value(/datum/client_preference/show_ooc) == GLOB.PREF_HIDE || target.get_preference_value(/datum/client_preference/show_discord_ooc) == GLOB.PREF_HIDE  && !input["isadmin"]) // If we're ignored by this person, then do nothing.
-				continue //if it shouldn't see then it doesn't
+				continue	//if it shouldn't see then it doesn't
+							//those checks are from actual ooc code and can be outdated
 			to_chat(target, "<span class='ooc'><span class='everyone'>[sent_message]</span></span>")
-
-
-	/* * * * * * * *
-	* Secure Topic Calls
-	* The following topic calls are only available if a comms secret has been defined, supplied, and is correct.
-	* * * * * * * */
-
-	if (!config.comms_password)
-		SET_THROTTLE(10 SECONDS, "Comms Not Enabled")
-		return "Not enabled"
 
 	else if(copytext(T,1,5) == "laws")
 		if(input["key"] != config.comms_password)
