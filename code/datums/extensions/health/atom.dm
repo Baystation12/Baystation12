@@ -1,5 +1,5 @@
 /atom
-	/// Whether or not the atom should use the health handler when initialized.
+	/// Whether or not the atom should use the health handler when initialized. If set to `USE_HEALTH_SIMPLE`, uses the simple health system.
 	var/use_health_handler = FALSE
 	/// Ease-of-use holder for the health extension.
 	var/datum/extension/health/health_handler
@@ -160,7 +160,7 @@
 	return FALSE
 
 /**
- * Restore's the atom's health by the given value.
+ * Restore's the atom's health by the given value. Returns `TRUE` if the restoration resulted in a death state change.
  * If using the `damage_sources` extension subtype, will only restore damage from the given damage type.
  * Override only for modifying damage. Do not override to apply additional effects - Use `post_restore_health()` instead.
  */
@@ -173,7 +173,7 @@
 	return health_handler.adjust_health(damage, damage_type)
 
 /**
- * Damage's the atom's health by the given value.
+ * Damage's the atom's health by the given value. Returns `TRUE` if the damage resulted in a death state change.
  * If using the `damage_sources` extension subtype, will apply damage to the given damage type.
  * Override only for modifying damage. Do not override to apply additional effects - Use `post_damage_health()` instead.
  */
