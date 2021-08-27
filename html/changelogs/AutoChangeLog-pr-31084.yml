@@ -1,0 +1,4 @@
+author: Spookerton
+delete-after: true
+changes:
+  - bugfix: Suits with storage no longer try to insert every item twice.
