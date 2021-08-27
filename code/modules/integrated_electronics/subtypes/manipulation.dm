@@ -645,13 +645,20 @@
 	controlling = null
 
 
-/obj/item/integrated_circuit/manipulation/ai/attackby(var/obj/item/I, var/mob/user)
+/obj/item/integrated_circuit/manipulation/ai/attackby(obj/item/I, mob/user)
 	if(is_type_in_list(I, list(/obj/item/aicard, /obj/item/device/paicard, /obj/item/device/mmi)))
 		load_ai(user, I)
 	else return ..()
 
 /obj/item/integrated_circuit/manipulation/ai/attack_self(user)
 	unload_ai()
+
+/obj/item/integrated_circuit/manipulation/ai/contents_nano_distance(src_object, mob/living/user)
+	if(istype(src_object, /obj/item/device/electronic_assembly))
+		var/obj/item/device/electronic_assembly/assembly = src_object
+		if(src in assembly.assembly_components)
+			return STATUS_INTERACTIVE
+	return ..()
 
 /obj/item/integrated_circuit/manipulation/ai/Destroy()
 	unload_ai()

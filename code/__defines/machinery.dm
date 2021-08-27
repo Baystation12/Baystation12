@@ -66,10 +66,10 @@
 #define STAGE_SUPER	11
 
 // NanoUI flags
-#define STATUS_INTERACTIVE 2 // GREEN Visability
-#define STATUS_UPDATE 1 // ORANGE Visability
-#define STATUS_DISABLED 0 // RED Visability
 #define STATUS_CLOSE -1 // Close the interface
+#define STATUS_DISABLED 0 // RED Visability
+#define STATUS_UPDATE 1 // ORANGE Visability
+#define STATUS_INTERACTIVE 2 // GREEN Visability
 
 /*
  *	Atmospherics Machinery.
