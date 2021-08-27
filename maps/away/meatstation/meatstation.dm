@@ -218,7 +218,6 @@
 	desc = "A disgusting slab of meat."
 	icon = 'maps/away/meatstation/meatstation_sprites.dmi'
 	icon_state = "meat"
-	health = 150
 	filling_color = "#f41d7e"
 	slice_path = /obj/item/reagent_containers/food/snacks/rawcutlet/meatstation
 

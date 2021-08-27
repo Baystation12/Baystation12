@@ -4,7 +4,7 @@
 	gender = PLURAL
 	icon = 'icons/obj/items.dmi'
 	icon_state = "handcuff"
-	health = 0
+	use_health_handler = USE_HEALTH_SIMPLE
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	throwforce = 5
@@ -18,14 +18,6 @@
 	var/breakouttime = 1200 //Deciseconds = 120s = 2 minutes
 	var/cuff_sound = 'sound/weapons/handcuffs.ogg'
 	var/cuff_type = "handcuffs"
-
-/obj/item/handcuffs/examine(mob/user)
-	. = ..()
-	if (health)
-		var display = health / initial(health) * 100
-		if (display > 66)
-			return
-		to_chat(user, SPAN_WARNING("They look [display < 33 ? "badly ": ""]damaged."))
 
 /obj/item/handcuffs/get_icon_state(mob/user_mob, slot)
 	if(slot == slot_handcuffed_str)
@@ -141,7 +133,12 @@ var/last_chew = 0
 	cuff_sound = 'sound/weapons/cablecuff.ogg'
 	cuff_type = "cable restraints"
 	elastic = 1
-	health = 75
+	use_health_handler = USE_HEALTH_SIMPLE
+
+/obj/item/handcuffs/cable/get_initial_health_handler_config()
+	return list(
+		"max_health" = 75
+	)
 
 /obj/item/handcuffs/cable/red
 	color = COLOR_MAROON
@@ -178,4 +175,8 @@ var/last_chew = 0
 	icon = 'icons/obj/bureaucracy.dmi'
 	breakouttime = 200
 	cuff_type = "duct tape"
-	health = 50
+
+/obj/item/handcuffs/cable/tape/get_initial_health_handler_config()
+	return list(
+		"max_health" = 50
+	)

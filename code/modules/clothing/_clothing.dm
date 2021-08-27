@@ -720,14 +720,11 @@ BLIND     // can't see anything
 	return TRUE
 
 /obj/item/clothing/shoes/proc/handle_movement(var/turf/walking, var/running)
-	if (attached_cuffs && running)
-		if (attached_cuffs.health)
-			attached_cuffs.health -= 1
-			if (attached_cuffs.health < 1)
-				visible_message(SPAN_WARNING("\The [attached_cuffs] attached to \the [src] snap and fall away!"), range = 1)
-				verbs -= /obj/item/clothing/shoes/proc/remove_cuffs
-				slowdown_per_slot[slot_shoes] -= attached_cuffs.elastic ? 10 : 15
-				QDEL_NULL(attached_cuffs)
+	if (running && attached_cuffs?.damage_health(1))
+		visible_message(SPAN_WARNING("\The [attached_cuffs] attached to \the [src] snap and fall away!"), range = 1)
+		verbs -= /obj/item/clothing/shoes/proc/remove_cuffs
+		slowdown_per_slot[slot_shoes] -= attached_cuffs.elastic ? 10 : 15
+		QDEL_NULL(attached_cuffs)
 	return
 
 /obj/item/clothing/shoes/update_clothing_icon()
