@@ -1,0 +1,6 @@
+author: Nirnael
+delete-after: true
+changes:
+  - bugfix: pAIs/MMIs/AIs inside IC drones can again access the drone's inputs through
+      the Control Inputs verb.
+  - tweak: Increased IC editor interface lines to 10 per page.
