@@ -5,9 +5,9 @@
 	icon_state = "basic"
 	icon_living = "basic"
 	icon_dead = "basic"
-	health = 55
-	maxHealth = 55
-	natural_weapon = /obj/item/natural_weapon/drone_slicer
+	health = 65
+	maxHealth = 65
+	natural_weapon = /obj/item/natural_weapon/hivebot
 	faction = "hivebot"
 	min_gas = null
 	max_gas = null
@@ -43,13 +43,16 @@
 
 /mob/living/simple_animal/hostile/hivebot/strong
 	desc = "A junky looking robot with four spiky legs - this one has thick armour plating."
-	health = 120
-	maxHealth = 120
+	health = 160
+	maxHealth = 160
+	melee_attack_delay = 6
 	ranged = 1
 	can_escape = 1
 	natural_armor = list(
 		melee = ARMOR_MELEE_RESISTANT
 		)
+
+	natural_weapon = /obj/item/natural_weapon/hivebot/strong
 
 /mob/living/simple_animal/hostile/hivebot/death()
 	..(null, "blows apart!")
@@ -289,3 +292,9 @@ The megabot
 
 #undef ATTACK_MODE_MELEE
 #undef ATTACK_MODE_LASER
+
+/obj/item/natural_weapon/hivebot
+	force = 15
+
+/obj/item/natural_weapon/hivebot/strong
+	force = 20
