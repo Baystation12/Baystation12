@@ -5,9 +5,9 @@
 /mob/living/simple_animal/hostile/giant_spider/nurse
 	desc = "Furry and beige, it makes you shudder to look at it. This one has brilliant green eyes."
 
-	icon_state = "beige"
-	icon_living = "beige"
-	icon_dead = "beige_dead"
+	icon_state = "nurse"
+	icon_living = "nurse"
+	icon_dead = "nurse_dead"
 
 	maxHealth = 40
 	health = 40
