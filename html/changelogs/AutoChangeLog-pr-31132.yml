@@ -1,5 +1,0 @@
-author: ''
-delete-after: true
-changes:
-  - bugfix: MMIs removed from FBPs by means other than surgical should now have the
-      correct icon.
