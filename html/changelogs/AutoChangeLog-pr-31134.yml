@@ -1,0 +1,5 @@
+author: Mucker
+delete-after: true
+changes:
+  - tweak: Buffed hivebot melee variants health and damage, ranged variants health
+      buffed as well.
