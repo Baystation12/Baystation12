@@ -1,0 +1,7 @@
+author: MeetSimmio
+delete-after: true
+changes:
+  - imageadd: Adds additional religious banner icons, including the red and black
+      star, pentacle, Awen, Ahimsa, yin and yang, torii, and the five main Unathi
+      faiths.
+  - tweak: Changes the Baha'i Chaplain's insignia to be more in line with the banner.
