@@ -6368,10 +6368,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/waterstore)
-"ve" = (
-/obj/effect/shuttle_landmark/nav_verne/torch,
-/turf/space,
-/area/space)
 "vh" = (
 /obj/structure/railing/mapped{
 	dir = 1;
@@ -40344,7 +40340,7 @@ aa
 aa
 aa
 aa
-ve
+aa
 aa
 aa
 aa

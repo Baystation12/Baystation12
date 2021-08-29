@@ -105,10 +105,6 @@
 	},
 /turf/space/transit/north,
 /area/space)
-"qI" = (
-/obj/effect/shuttle_landmark/transit/verne,
-/turf/space,
-/area/space)
 "rD" = (
 /obj/effect/shuttle_landmark/escape_pod/transit/pod17,
 /turf/space/transit/north,
@@ -29886,7 +29882,7 @@ Vj
 Vj
 Vj
 Vj
-qI
+Vj
 Vj
 Vj
 Vj
