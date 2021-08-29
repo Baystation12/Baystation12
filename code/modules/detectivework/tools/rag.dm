@@ -100,7 +100,7 @@
 		user.visible_message("\The [user] starts to wipe down [A] with [src]!")
 		reagents.splash(A, 1) //get a small amount of liquid on the thing we're wiping.
 		update_name()
-		if(do_after(user,30))
+		if(do_after(user,30, A))
 			user.visible_message("\The [user] finishes wiping off the [A]!")
 			if(isturf(A))
 				var/turf/T = A
@@ -156,7 +156,7 @@
 				if (user.skill_check(SKILL_COMBAT, SKILL_ADEPT))
 					grab_time = 3 SECONDS
 
-				if (do_after(user, grab_time, target, DO_DEFAULT | DO_USER_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
+				if (do_after(user, grab_time, target, DO_DEFAULT | DO_PUBLIC_PROGRESS))
 					user.visible_message(
 						SPAN_DANGER("\The [user] smothers \the [target] with \the [src]!"),
 						SPAN_DANGER("You smother \the [target] with \the [src]!")

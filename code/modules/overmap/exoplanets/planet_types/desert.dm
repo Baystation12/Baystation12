@@ -97,7 +97,7 @@
 				SPAN_NOTICE("You hear water sloshing.")
 				)
 		busy = TRUE
-		if(do_after(user, delay, src))
+		if(do_after(user, delay, src, user == buckled_mob ? DO_DEFAULT & ~DO_TARGET_UNIQUE_ACT : DO_DEFAULT))
 			busy = FALSE
 			if(user == buckled_mob)
 				if(prob(80))
