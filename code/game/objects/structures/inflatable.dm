@@ -26,7 +26,7 @@
 		SPAN_ITALIC("You can hear rushing air."),
 		range = 5
 	)
-	if (!do_after(user, 1 SECOND, target))
+	if (!do_after(user, 1 SECOND))
 		return
 	obstruction = T.get_obstruction()
 	if (obstruction)

@@ -144,7 +144,7 @@
 				var/turf/T = GetBelow(src)
 				if(T)
 					T.visible_message("<span class='warning'>The ceiling above looks as if it's being pried off.</span>")
-				if(do_after(user, 10 SECONDS, src))
+				if(do_after(user, 10 SECONDS))
 					if(!istype(src, /turf/simulated/floor))
 						return
 					if(!broken && !burnt || !(is_plating()))
@@ -173,7 +173,7 @@
 					if(welder.remove_fuel(0, user))
 						playsound(src, 'sound/items/Welder.ogg', 80, 1)
 						visible_message("<span class='notice'>[user] has started melting the plating's reinforcements!</span>")
-						if(do_after(user, 5 SECONDS, src) && welder.isOn() && welder_melt())
+						if(do_after(user, 5 SECONDS) && welder.isOn() && welder_melt())
 							visible_message("<span class='warning'>[user] has melted the plating's reinforcements! It should be possible to pry it off.</span>")
 							playsound(src, 'sound/items/Welder.ogg', 80, 1)
 					return
@@ -183,7 +183,7 @@
 				return ..()
 			playsound(src, 'sound/items/Welder.ogg', 80, 1)
 			visible_message("<span class='notice'>[user] has started slicing through the plating's reinforcements!</span>")
-			if(do_after(user, 3 SECONDS, src) && welder_melt())
+			if(do_after(user, 3 SECONDS) && welder_melt())
 				visible_message("<span class='warning'>[user] has sliced through the plating's reinforcements! It should be possible to pry it off.</span>")
 				playsound(src, 'sound/items/Welder.ogg', 80, 1)
 

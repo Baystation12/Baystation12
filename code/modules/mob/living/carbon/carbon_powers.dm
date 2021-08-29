@@ -79,7 +79,7 @@
 	var/mob/target = victim
 	if(isobj(victim))
 		target = src
-	if(!do_after(src, eat_speed, target, DO_DEFAULT & ~DO_TARGET_UNIQUE_ACT))
+	if(!do_after(src, eat_speed, target))
 		return FALSE
 	src.visible_message("<span class='danger'>\The [src] devours \the [victim] whole!</span>")
 	if(ismob(victim))
