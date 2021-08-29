@@ -73,7 +73,7 @@
 
 		usr.visible_message("[usr] begins stuffing \the [src] into \the [over_object].", "You begin stuffing \the [src] into \the [over_object].")
 		Bumped(usr)
-		if(do_after(usr, 20, over_object, additional_atoms = list(src)))
+		if(do_after(usr, 20, over_object))
 			usr.visible_message("[usr] has stuffed \the [src] into \the [over_object].", "You have stuffed \the [src] into \the [over_object].")
 			over_object.contain(src)
 	else

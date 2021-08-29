@@ -135,7 +135,7 @@
 			to_chat(user, SPAN_NOTICE("The unit's storage area is too cluttered."))
 			return
 		visible_message(SPAN_WARNING("[user] starts putting [G.affecting.name] into the Suit Storage Unit."))
-		if(do_after(user, 20, src, additional_atoms = list(G.affecting)) && G && G.affecting)
+		if(do_after(user, 20, src) && G && G.affecting)
 			var/mob/M = G.affecting
 			if(M.client)
 				M.client.perspective = EYE_PERSPECTIVE
@@ -171,7 +171,7 @@
 	data["superuv"] = issuperUV
 	data["safeties"] = safetieson
 	data["helmet"] = helmet
-	data["suit"] = suit
+	data["suit"] = suit 
 	data["boots"] = boots
 	data["tank"] = tank
 	data["mask"] = mask

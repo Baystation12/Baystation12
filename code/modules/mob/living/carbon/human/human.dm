@@ -1091,7 +1091,7 @@
 		to_chat(usr, "<span class='notice'>[self ? "You have a" : "[src] has a"] pulse! Counting...</span>")
 
 	to_chat(usr, "You must[self ? "" : " both"] remain still until counting is finished.")
-	if(do_after(usr, 6 SECONDS, src, DO_DEFAULT & ~DO_BOTH_UNIQUE_ACT))
+	if(do_after(usr, 6 SECONDS, src))
 		var/message = "<span class='notice'>[self ? "Your" : "[src]'s"] pulse is [src.get_pulse(GETPULSE_HAND)].</span>"
 		to_chat(usr, message)
 	else

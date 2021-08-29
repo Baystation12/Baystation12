@@ -157,7 +157,7 @@ var/bomb_set
 		extended = 1
 		if(!src.lighthack)
 			flick("lock", src)
-			update_icon()
+			update_icon()	
 
 /obj/machinery/nuclearbomb/interface_interact(mob/user as mob)
 	if(extended && !panel_open)
@@ -459,7 +459,7 @@ var/bomb_set
 	var/announced = 0
 	var/time_to_explosion = 0
 	var/self_destruct_cutoff = 60 //Seconds
-	timeleft = 300
+	timeleft = 300 
 	minTime = 300
 	maxTime = 900
 

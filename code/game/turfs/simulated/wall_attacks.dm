@@ -260,7 +260,7 @@
 			if(cut_delay < 0)
 				cut_delay = 0
 
-			if (do_after(user, cut_delay, src))
+			if (do_after(user, cut_delay, src, DO_DEFAULT | DO_TARGET_UNIQUE_ACT))
 				dismantle_wall()
 				user.visible_message(SPAN_WARNING("\The [src] was torn open by [user]!"), SPAN_NOTICE("You remove the outer plating."))
 				return
