@@ -124,7 +124,7 @@
 	desc = "A miniature speaker is attached to this component."
 	icon_state = "speaker"
 	complexity = 8
-	cooldown_per_use = 4 SECONDS
+	cooldown_per_use = 2 SECONDS
 	inputs = list(
 		"sound ID" = IC_PINTYPE_STRING,
 		"volume" = IC_PINTYPE_NUMBER,
@@ -183,7 +183,37 @@
 		"god"			= 'sound/voice/bgod.ogg',
 		"i am the law"	= 'sound/voice/biamthelaw.ogg',
 		"radio"			= 'sound/voice/bradio.ogg',
-		"secure day"	= 'sound/voice/bsecureday.ogg',
+		"secure day"	= 'sound/voice/bsecureday.ogg'
+		)
+	spawn_flags = IC_SPAWN_RESEARCH
+
+/obj/item/integrated_circuit/output/sound/mechanical
+	name = "mechanical sound circuit"
+	desc = "Takes a sound name as an input, and will play said sound when pulsed. This circuit has a variety of clicks and clacks for key press feedback."
+	sounds = list(
+		"keypress1"		= 'sound/machines/keyboard/keypress1.ogg',
+		"keypress2"		= 'sound/machines/keyboard/keypress2.ogg',
+		"keypress3"		= 'sound/machines/keyboard/keypress3.ogg',
+		"keypress4"		= 'sound/machines/keyboard/keypress4.ogg',
+		"keystroke1"	= 'sound/machines/keyboard/keystroke1.ogg',
+		"keystroke2"	= 'sound/machines/keyboard/keystroke2.ogg',
+		"keystroke3"	= 'sound/machines/keyboard/keystroke3.ogg',
+		"keystroke4"	= 'sound/machines/keyboard/keystroke4.ogg'
+		)
+	spawn_flags = IC_SPAWN_RESEARCH
+
+/obj/item/integrated_circuit/output/sound/electronic
+	name = "electronic sound circuit"
+	desc = "Takes a sound name as an input, and will play said sound when pulsed. This circuit has a variety of noises similar to radios and other electronic devices."
+	sounds = list(
+		"transmit"		= 'sound/effects/walkietalkie.ogg',
+		"turn on"		= 'sound/effects/walkieon.ogg',
+		"radio"			= 'sound/effects/radio_chatter.ogg',
+		"scan"			= 'sound/effects/scanbeep.ogg',
+		"sparks1"		= 'sound/effects/sparks1.ogg',
+		"sparks2"		= 'sound/effects/sparks2.ogg',
+		"sparks3"		= 'sound/effects/sparks3.ogg',
+		"sparks4"		= 'sound/effects/sparks4.ogg'
 		)
 	spawn_flags = IC_SPAWN_RESEARCH
 
