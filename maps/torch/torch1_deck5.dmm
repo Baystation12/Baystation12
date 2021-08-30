@@ -4123,6 +4123,7 @@
 	dir = 8
 	},
 /obj/item/stack/material/cardboard/fifty,
+/obj/item/stack/material/cardboard/ten,
 /obj/random/maintenance/solgov,
 /obj/random/maintenance/solgov,
 /obj/random/maintenance/solgov,
