@@ -1135,7 +1135,7 @@
 			reset_view(null)
 	else
 		var/isRemoteObserve = 0
-		if(z_eye && client.eye == z_eye && !is_physically_disabled())
+		if(z_eye && client?.eye == z_eye && !is_physically_disabled())
 			isRemoteObserve = 1
 		else if((mRemote in mutations) && remoteview_target)
 			if(remoteview_target.stat == CONSCIOUS)

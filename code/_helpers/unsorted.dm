@@ -358,7 +358,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 /proc/select_active_ai(mob/user, z)
 	var/list/ais = active_ais(z)
 	if(ais.len)
-		if(user)
+		if(user?.client)
 			. = input(user,"AI signals detected:", "AI selection") in ais
 		else
 			. = pick(ais)
@@ -671,7 +671,7 @@ proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
 	if(perfectcopy)
 		if((O) && (original))
 			for(var/V in original.vars)
-				if(!(V in list("type","loc","locs","vars", "parent", "parent_type","verbs","ckey","key")))
+				if(!(V in list("type","loc","locs","vars", "parent", "parent_type","verbs","ckey","key", "group", "ai_holder", "natural_weapon")))
 					O.vars[V] = original.vars[V]
 	return O
 
