@@ -8,12 +8,12 @@
 // The base spider, in the 'walking tank' family.
 /mob/living/simple_animal/hostile/giant_spider
 	name = "giant spider"
-	desc = "Furry and brown, it makes you shudder to look at it. This one has deep red eyes."
+	desc = "Furry and brown, it makes you shudder to look at it. This has light grey eyes."
 
 	icon = 'icons/mob/simple_animal/spider.dmi'
-	icon_state = "green"
-	icon_living = "green"
-	icon_dead = "green_dead"
+	icon_state = "generic"
+	icon_living = "generic"
+	icon_dead = "generic_dead"
 	// has_eye_glow = TRUE
 
 	faction = "spiders"
@@ -48,11 +48,10 @@
 	ai_holder_type = /datum/ai_holder/simple_animal/melee
 
 	var/poison_type = /datum/reagent/toxin/venom	// The reagent that gets injected when it attacks.
-	var/poison_chance = 10			// Chance for injection to occur.
+	var/poison_chance = 20			// Chance for injection to occur.
 	var/poison_per_bite = 5			// Amount added per injection.
 
-	var/eye_colour
-	var/allowed_eye_colours = list(COLOR_RED, COLOR_ORANGE, COLOR_YELLOW, COLOR_LIME, COLOR_DEEP_SKY_BLUE, COLOR_INDIGO, COLOR_VIOLET, COLOR_PINK)
+	var/image/eye_layer
 
 	var/use_ladder_chance = 25
 	var/climbing_ladder = FALSE
@@ -77,16 +76,19 @@
 	update_icon()
 	. = ..()
 
+/mob/living/simple_animal/hostile/giant_spider/death(gibbed, deathmessage, show_dead_message)
+	. = ..()
+
+	overlays -= eye_layer
+
 /mob/living/simple_animal/hostile/giant_spider/proc/spider_randomify() //random math nonsense to get their damage, health and venomness values
 	maxHealth = rand(initial(maxHealth), (1.4 * initial(maxHealth)))
 	health = maxHealth
-	eye_colour = pick(allowed_eye_colours)
-	if(eye_colour)
-		var/image/I = image(icon = icon, icon_state = "[icon_state]_eyes", layer = EYE_GLOW_LAYER)
-		I.color = eye_colour
-		I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
-		I.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
-		overlays += I
+	var/image/I = image(icon = icon, icon_state = "[icon_state]-eyes", layer = EYE_GLOW_LAYER)
+	I.plane = EFFECTS_ABOVE_LIGHTING_PLANE
+	I.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
+	eye_layer = I
+	overlays += I
 
 
 /mob/living/simple_animal/hostile/giant_spider/apply_melee_effects(atom/A)
@@ -100,5 +102,12 @@
 // Does actual poison injection, after all checks passed.
 /mob/living/simple_animal/hostile/giant_spider/proc/inject_poison(mob/living/L, target_zone)
 	if(prob(poison_chance))
-		to_chat(L, "<span class='warning'>You feel a tiny prick.</span>")
+		to_chat(L, SPAN_WARNING("You feel a tiny prick."))
 		L.reagents.add_reagent(poison_type, poison_per_bite)
+
+/// Scale the spiders icon up or down.
+/mob/living/simple_animal/hostile/giant_spider/proc/scale(factor)
+	if (factor)
+		var/matrix/M = matrix()
+		M.Scale(factor)
+		src.transform = M
