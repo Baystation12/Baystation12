@@ -1,6 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - rscadd: Adds the carrier, electric, lurker, nurse, pepper, phorogenic, thermic,
-      tunneler, and websling spider type from Polaris.
-  - bugfix: Blind persons can now properly 'hear' spiderlings enter vents.
