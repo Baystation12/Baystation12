@@ -12158,6 +12158,7 @@
 /area/storage/research)
 "Dh" = (
 /obj/structure/table/rack,
+/obj/item/stack/material/cardboard/fifty,
 /obj/item/storage/box/beakers,
 /obj/item/storage/box/bodybags,
 /obj/item/storage/box/masks,
