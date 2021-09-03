@@ -1,6 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - admin: Removed click-drag selecting from AI buildmode
-  - admin: Selecting multiple units is now down by holding ctrl + left-clicking desired
-      mobs
