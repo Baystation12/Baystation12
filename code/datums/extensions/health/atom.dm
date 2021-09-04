@@ -1,5 +1,5 @@
 /atom
-	/// Whether or not the atom should use the health handler when initialized.
+	/// Whether or not the atom should use the health handler when initialized. If set to `USE_HEALTH_SIMPLE`, uses the simple health system.
 	var/use_health_handler = FALSE
 	/// Ease-of-use holder for the health extension.
 	var/datum/extension/health/health_handler
@@ -160,7 +160,7 @@
 	return FALSE
 
 /**
- * Restore's the atom's health by the given value.
+ * Restore's the atom's health by the given value. Returns `TRUE` if the restoration resulted in a death state change.
  * If using the `damage_sources` extension subtype, will only restore damage from the given damage type.
  * Override only for modifying damage. Do not override to apply additional effects - Use `post_restore_health()` instead.
  */
@@ -173,7 +173,7 @@
 	return health_handler.adjust_health(damage, damage_type)
 
 /**
- * Damage's the atom's health by the given value.
+ * Damage's the atom's health by the given value. Returns `TRUE` if the damage resulted in a death state change.
  * If using the `damage_sources` extension subtype, will apply damage to the given damage type.
  * Override only for modifying damage. Do not override to apply additional effects - Use `post_damage_health()` instead.
  */
@@ -262,11 +262,11 @@
 		to_chat(user, SPAN_DANGER("It looks broken."))
 		return
 
-	var/health_percentage = get_damage_percentage()
-	switch (health_percentage)
-		if (1)
+	var/damage_percentage = get_damage_percentage()
+	switch (damage_percentage)
+		if (0.00)
 			to_chat(user, SPAN_NOTICE("It looks fully intact."))
-		if (0.66 to 0.99)
+		if (0.01 to 0.32)
 			to_chat(user, SPAN_WARNING("It looks slightly damaged."))
 		if (0.33 to 0.65)
 			to_chat(user, SPAN_WARNING("It looks moderately damaged."))
@@ -280,11 +280,11 @@
 		to_chat(user, SPAN_DANGER("They look severely hurt and is not moving or responding to anything around them."))
 		return
 
-	var/health_percentage = get_damage_percentage()
-	switch (health_percentage)
-		if (1)
+	var/damage_percentage = get_damage_percentage()
+	switch (damage_percentage)
+		if (0.00)
 			to_chat(user, SPAN_NOTICE("They appear unhurt."))
-		if (0.66 to 0.99)
+		if (0.01 to 0.32)
 			to_chat(user, SPAN_WARNING("They look slightly hurt."))
 		if (0.33 to 0.65)
 			to_chat(user, SPAN_WARNING("They look moderately hurt."))
