@@ -4,20 +4,20 @@
 	if(. != MCS_CHANGE) return (. == MCS_BLOCK);\
 	. = TRUE
 
-/obj/machinery
-	var/decl/machine_construction/construct_state
+/// The construction state decl associated with this machine
+/obj/machinery/var/decl/machine_construction/construct_state
 
 /obj/machinery/Initialize()
 	if(construct_state)
 		construct_state = decls_repository.get_decl(construct_state)
 	. = ..()
 
-// Called on state transition; can intercept, but must call parent.
-/obj/machinery/proc/state_transition(var/decl/machine_construction/new_state)
+/// Called on state transition; can intercept, but must call parent.
+/obj/machinery/proc/state_transition(decl/machine_construction/new_state)
 	construct_state = new_state
 
-// Return a change state define or a fail message to block transition.
-/obj/machinery/proc/cannot_transition_to(var/state_path, var/mob/user)
+/// Return a change state define or a fail message to block transition.
+/obj/machinery/proc/cannot_transition_to(state_path, mob/user)
 	return MCS_CHANGE
 
 /decl/machine_construction
