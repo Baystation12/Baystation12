@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - tweak: Machinery now has general codex mechanics information detailing power usage,
+      skill requirements, silicon restrictions, and capacity for components.
