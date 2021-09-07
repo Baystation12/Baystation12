@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - maptweak: Crashed EC ship ruin will no longer spawn catwalks inside planetary
+      walls.
