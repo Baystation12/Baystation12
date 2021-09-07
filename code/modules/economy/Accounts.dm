@@ -47,6 +47,7 @@
 	M.owner_name = (owner_name ? owner_name : account_name)
 	M.account_type = account_type
 	M.remote_access_pin = rand(1111, 111111)
+	M.security_level = 1
 
 	//create an entry in the account transaction log for when it was created
 	//note that using the deposit proc on the account isn't really feasible because we need to change the transaction data before performing it
