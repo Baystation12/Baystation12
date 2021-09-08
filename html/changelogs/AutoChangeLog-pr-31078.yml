@@ -1,7 +1,0 @@
-author: The_Spanish_1nqusition
-delete-after: true
-changes:
-  - rscadd: Adds two new ballistic weapons.
-  - tweak: Replace the Replica Pistol with the new Broomstick Pistol in the Raider
-      random spawn list.
-  - tweak: Renamed some magazines/speedloaders to accommodate new items
