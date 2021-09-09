@@ -83,7 +83,7 @@
 	icon_state = "eggs"
 	var/amount_grown = 0
 	var/spiders_min = 6
-	var/spiders_max = 24
+	var/spiders_max = 12
 	var/spider_type = /obj/effect/spider/spiderling
 
 /obj/effect/spider/eggcluster/Initialize(mapload, atom/parent)
