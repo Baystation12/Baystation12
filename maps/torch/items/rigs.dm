@@ -218,7 +218,8 @@
 	   			  /obj/item/device/flashlight,
 	    		  /obj/item/tank,
 				  /obj/item/device/suit_cooling_unit,
-				  /obj/item/melee/baton)
+				  /obj/item/melee/baton,
+				  /obj/item/device/personal_shield)
 
 	req_access = list(access_hos)
 
