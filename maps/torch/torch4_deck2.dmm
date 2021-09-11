@@ -1200,6 +1200,7 @@
 /area/maintenance/seconddeck/forestarboard)
 "ce" = (
 /obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/forestarboard)
 "cf" = (
@@ -3642,7 +3643,7 @@
 	id_tag = "";
 	name = "Engine Airlock Exterior"
 	},
-/obj/machinery/door/firedoor,
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/engine_room)
 "gX" = (
@@ -3669,6 +3670,7 @@
 	id_tag = "bsdwindow";
 	name = "Drive Containment"
 	},
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/plating,
 /area/engineering/bluespace)
 "hb" = (
@@ -4644,6 +4646,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/engine_smes)
 "jI" = (
@@ -4859,7 +4862,6 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/atmos)
 "kj" = (
-/obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/maintenance{
 	name = "Second Deck Teleporter"
 	},
@@ -4868,6 +4870,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/teleporter/seconddeck)
 "kk" = (
@@ -5600,7 +5603,7 @@
 	id_tag = "";
 	name = "Engine Airlock Interior"
 	},
-/obj/machinery/door/firedoor,
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/engine_room)
 "lQ" = (
@@ -6341,6 +6344,7 @@
 	opacity = 0
 	},
 /obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/plating,
 /area/engineering/engine_monitoring)
 "nF" = (
@@ -6390,12 +6394,10 @@
 	dir = 4;
 	icon_state = "warning"
 	},
-/obj/machinery/button/alternate/door/bolts{
-	desc = "A remote control-switch for the engine core airlock hatch bolts.";
-	id_tag = "engine_access_hatch";
-	name = "Engine Hatch Bolt Control";
+/obj/machinery/button/blast_door{
+	id_tag = "engine_access_bdoor";
+	name = "Engine Core Access Control";
 	pixel_x = 24;
-	pixel_y = 0;
 	req_access = list("ACCESS_ENGINEERING")
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -7180,6 +7182,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/plating,
 /area/engineering/engine_monitoring)
 "pV" = (
@@ -7189,7 +7192,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/structure/window/reinforced,
 /obj/effect/floor_decal/industrial/outline/blue,
 /obj/machinery/portable_atmospherics/canister/hydrogen,
 /obj/structure/cable/cyan{
@@ -7197,6 +7199,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/structure/railing/mapped,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/engine_room)
 "pX" = (
@@ -7263,7 +7266,7 @@
 	id_tag = "SupermatterPort";
 	name = "Reactor Blast Door"
 	},
-/obj/effect/wallframe_spawn/reinforced_phoron,
+/obj/effect/wallframe_spawn/reinforced_phoron/no_grille,
 /turf/simulated/floor/reinforced/airless,
 /area/engineering/engine_room)
 "qe" = (
@@ -7386,7 +7389,6 @@
 /turf/simulated/floor/plating,
 /area/engineering/shieldbay)
 "qA" = (
-/obj/machinery/door/firedoor,
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
@@ -7397,6 +7399,7 @@
 /obj/machinery/door/airlock/command{
 	name = "Second Deck Teleporter"
 	},
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/engineering/storage)
 "qB" = (
@@ -7790,10 +7793,10 @@
 /obj/machinery/atmospherics/pipe/simple/visible/yellow{
 	dir = 4
 	},
-/obj/machinery/door/airlock/hatch{
-	icon_state = "closed";
-	id_tag = "engine_access_hatch";
-	locked = 1
+/obj/machinery/door/blast/regular{
+	dir = 4;
+	id_tag = "engine_access_bdoor";
+	name = "Reactor Blast Door"
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/engineering/engine_room)
@@ -8446,17 +8449,16 @@
 /area/engineering/engineering_monitoring)
 "sW" = (
 /obj/effect/wallframe_spawn/reinforced,
-/obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/plating,
 /area/engineering/atmos)
 "sX" = (
-/obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/glass/atmos{
 	name = "Atmospherics"
 	},
@@ -8468,6 +8470,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/engineering/atmos)
 "sY" = (
@@ -8631,6 +8634,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/bluespace)
 "ts" = (
@@ -9077,9 +9081,9 @@
 /obj/machinery/atmospherics/pipe/simple/visible/yellow{
 	dir = 4
 	},
-/obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced_phoron,
 /obj/machinery/meter,
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/plating,
 /area/engineering/atmos)
 "uE" = (
@@ -9487,13 +9491,13 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/drone_fabrication)
 "vD" = (
-/obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced_phoron,
 /obj/machinery/meter,
 /obj/machinery/atmospherics/pipe/manifold/visible/yellow{
 	dir = 1;
 	icon_state = "map"
 	},
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/plating,
 /area/engineering/atmos)
 "vF" = (
@@ -11296,6 +11300,10 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/atmos)
+"Ba" = (
+/obj/structure/sign/warning/fire,
+/turf/simulated/wall/ocp_wall,
+/area/torchexterior)
 "Bb" = (
 /obj/structure/closet/crate/med_crate/trauma,
 /obj/effect/floor_decal/industrial/outline/grey,
@@ -11459,7 +11467,7 @@
 /obj/machinery/door/airlock/engineering{
 	name = "Auxilary Bays"
 	},
-/obj/machinery/door/firedoor,
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/atmos)
 "BD" = (
@@ -11543,17 +11551,17 @@
 	pixel_x = -8;
 	pixel_y = 24
 	},
-/obj/structure/sign/warning/fire{
-	dir = 8;
-	pixel_x = 32;
-	pixel_y = 0
-	},
 /obj/machinery/atmospherics/binary/pump{
 	dir = 1
 	},
 /obj/effect/floor_decal/techfloor{
 	dir = 4;
 	icon_state = "techfloor_edges"
+	},
+/obj/machinery/button/blast_door{
+	id_tag = "disacc";
+	name = "Incinerator Access Control";
+	pixel_x = 24
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/incinerator)
@@ -12007,23 +12015,6 @@
 /turf/simulated/open,
 /area/maintenance/seconddeck/aftport)
 "CP" = (
-/obj/machinery/atmospherics/unary/outlet_injector{
-	dir = 1;
-	frequency = 1443;
-	icon_state = "map_injector";
-	id = "air_in";
-	use_power = 1
-	},
-/obj/machinery/sparker{
-	id_tag = "Incinerator";
-	pixel_x = -20
-	},
-/turf/simulated/floor/reinforced,
-/area/maintenance/incinerator)
-"CQ" = (
-/turf/simulated/floor/reinforced,
-/area/maintenance/incinerator)
-"CR" = (
 /obj/machinery/atmospherics/unary/vent_pump{
 	dir = 1;
 	external_pressure_bound = 0;
@@ -12042,6 +12033,22 @@
 	},
 /turf/simulated/floor/reinforced,
 /area/maintenance/incinerator)
+"CQ" = (
+/obj/machinery/door/blast/regular{
+	id_tag = "disacc";
+	name = "Incinerator Access"
+	},
+/turf/simulated/floor/reinforced,
+/area/maintenance/incinerator)
+"CR" = (
+/obj/machinery/door/blast/regular{
+	dir = 1;
+	id_tag = "disvent";
+	name = "Incinerator Vent"
+	},
+/obj/machinery/shield_diffuser,
+/turf/simulated/floor/reinforced,
+/area/torchexterior)
 "CS" = (
 /obj/machinery/portable_atmospherics/powered/pump/filled,
 /turf/simulated/floor/tiled/techfloor,
@@ -12603,7 +12610,7 @@
 	id_tag = "SupermatterPort";
 	name = "Reactor Blast Door"
 	},
-/obj/effect/wallframe_spawn/reinforced_phoron,
+/obj/effect/wallframe_spawn/reinforced_phoron/no_grille,
 /turf/simulated/floor/reinforced/airless,
 /area/engineering/engine_room)
 "Eo" = (
@@ -12879,8 +12886,7 @@
 /turf/simulated/wall/ocp_wall,
 /area/maintenance/incinerator)
 "EV" = (
-/obj/structure/sign/warning/fire,
-/turf/simulated/wall/ocp_wall,
+/turf/simulated/floor/reinforced,
 /area/maintenance/incinerator)
 "EX" = (
 /obj/structure/cable{
@@ -13551,8 +13557,8 @@
 /obj/machinery/atmospherics/pipe/simple/visible/yellow{
 	dir = 4
 	},
-/obj/machinery/door/firedoor,
 /obj/machinery/meter,
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/plating,
 /area/engineering/atmos)
 "GW" = (
@@ -14062,7 +14068,6 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/aftport)
 "Io" = (
-/obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -14079,6 +14084,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/synth/borg_upload)
 "Ip" = (
@@ -14861,8 +14867,8 @@
 	id_tag = "SupermatterPort";
 	name = "Reactor Blast Door"
 	},
-/obj/effect/wallframe_spawn/reinforced_phoron,
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
+/obj/effect/wallframe_spawn/reinforced_phoron/no_grille,
 /turf/simulated/floor/reinforced/airless,
 /area/engineering/engine_room)
 "Lf" = (
@@ -15840,7 +15846,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/machinery/door/firedoor,
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/vacant/prototype/control)
 "Ok" = (
@@ -15849,6 +15855,7 @@
 	dir = 4;
 	id_tag = "fusion_observation"
 	},
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/plating,
 /area/vacant/prototype/control)
 "Ol" = (
@@ -16134,7 +16141,6 @@
 "Pj" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
-/obj/structure/window/reinforced,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/portable_atmospherics/canister/hydrogen,
 /obj/structure/cable/cyan{
@@ -16142,6 +16148,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/structure/railing/mapped,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/engine_room)
 "Pk" = (
@@ -16401,13 +16408,13 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/atmos)
 "Qb" = (
-/obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced_phoron,
 /obj/machinery/meter,
 /obj/machinery/atmospherics/pipe/simple/visible/green{
 	dir = 4;
 	icon_state = "intact"
 	},
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/plating,
 /area/engineering/atmos)
 "Qd" = (
@@ -16481,7 +16488,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/machinery/door/firedoor,
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/vacant/prototype/control)
 "Qn" = (
@@ -16833,6 +16840,7 @@
 	icon_state = "4-8";
 	pixel_x = 0
 	},
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/plating,
 /area/vacant/prototype/control)
 "Rl" = (
@@ -17826,8 +17834,8 @@
 	dir = 4;
 	icon_state = "intact"
 	},
-/obj/machinery/door/firedoor,
 /obj/machinery/meter,
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/plating,
 /area/engineering/atmos)
 "Vb" = (
@@ -18478,10 +18486,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/cyan,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/engineering{
 	name = "Atmospherics"
 	},
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/engineering/atmos)
 "WU" = (
@@ -18573,12 +18581,17 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/vacant/prototype/control)
 "Xk" = (
-/obj/machinery/door/blast/regular{
+/obj/machinery/atmospherics/unary/outlet_injector{
 	dir = 1;
-	id_tag = "disvent";
-	name = "Incinerator Vent"
+	frequency = 1443;
+	icon_state = "map_injector";
+	id = "air_in";
+	use_power = 1
 	},
-/obj/machinery/shield_diffuser,
+/obj/machinery/sparker{
+	id_tag = "Incinerator";
+	pixel_x = -20
+	},
 /turf/simulated/floor/reinforced,
 /area/maintenance/incinerator)
 "Xl" = (
@@ -18606,14 +18619,14 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/engine_room)
 "Xo" = (
-/obj/machinery/door/airlock/hatch{
-	icon_state = "closed";
-	id_tag = "engine_access_hatch";
-	locked = 1
-	},
 /obj/machinery/atmospherics/pipe/simple/visible/green{
 	dir = 4;
 	icon_state = "intact"
+	},
+/obj/machinery/door/blast/regular{
+	dir = 4;
+	id_tag = "engine_access_bdoor";
+	name = "Reactor Blast Door"
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/engineering/engine_room)
@@ -33355,9 +33368,9 @@ Ay
 Bh
 BK
 Cn
-CP
+Bh
 Xk
-lk
+CR
 ky
 aa
 aa
@@ -33559,7 +33572,7 @@ th
 Co
 CQ
 EV
-lk
+Ba
 ky
 aa
 aa
@@ -33759,9 +33772,9 @@ AA
 Bh
 BL
 Cn
+Bh
+CP
 CR
-Xk
-lk
 ky
 aa
 aa

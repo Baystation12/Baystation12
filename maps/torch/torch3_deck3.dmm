@@ -1690,6 +1690,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/habcheck)
 "dF" = (
@@ -2356,6 +2357,7 @@
 /area/tcommsat/chamber)
 "eX" = (
 /obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/tcommsat/computer)
 "eY" = (
@@ -3941,6 +3943,7 @@
 	icon_state = "0-2"
 	},
 /obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/tcommsat/computer)
 "hX" = (
@@ -4250,6 +4253,7 @@
 	},
 /obj/structure/disposalpipe/segment,
 /obj/effect/wallframe_spawn/no_grille,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/crew_quarters/mess)
 "iv" = (
@@ -4412,6 +4416,7 @@
 	icon_state = "0-2"
 	},
 /obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/tcommsat/computer)
 "iK" = (
@@ -4665,7 +4670,6 @@
 	id_tag = "civsafedoor";
 	name = "Third Deck Safe Room"
 	},
-/obj/machinery/door/firedoor,
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
@@ -4673,6 +4677,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/crew_quarters/safe_room/thirddeck)
 "ji" = (
@@ -4860,6 +4865,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/tcommsat/computer)
 "jC" = (
@@ -5350,6 +5356,7 @@
 "ky" = (
 /obj/structure/cable/green,
 /obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/tcommsat/computer)
 "kz" = (
@@ -5913,7 +5920,7 @@
 	id_tag = "civsafedoorport";
 	name = "Third Deck Safe Room"
 	},
-/obj/machinery/door/firedoor,
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/crew_quarters/safe_room/thirddeck)
 "lM" = (
@@ -6052,7 +6059,6 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/observation)
 "md" = (
-/obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/highsecurity{
 	name = "Telecommunications"
 	},
@@ -6064,6 +6070,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/tcommsat/computer)
 "me" = (
@@ -6552,6 +6559,7 @@
 /area/maintenance/thirddeck/starboard)
 "nn" = (
 /obj/effect/wallframe_spawn/no_grille,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/holocontrol)
 "no" = (
@@ -6962,6 +6970,7 @@
 /turf/simulated/floor/tiled,
 /area/holocontrol)
 "om" = (
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/holocontrol)
 "on" = (
@@ -7713,10 +7722,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
-"qb" = (
-/obj/effect/wallframe_spawn/no_grille,
-/turf/simulated/floor/plating,
-/area/crew_quarters/mess)
 "qc" = (
 /obj/machinery/door/airlock/multi_tile/glass/civilian{
 	name = "Holodeck"
@@ -7728,6 +7733,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/holocontrol)
 "qd" = (
@@ -8461,6 +8467,7 @@
 	dir = 4
 	},
 /obj/effect/wallframe_spawn/no_grille,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/hallway/primary/thirddeck/center)
 "si" = (
@@ -8742,6 +8749,7 @@
 	dir = 4
 	},
 /obj/effect/wallframe_spawn/no_grille,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/hallway/primary/thirddeck/aft)
 "sC" = (
@@ -9413,6 +9421,7 @@
 	opacity = 0
 	},
 /obj/structure/cable/green,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/security/habcheck)
 "uq" = (
@@ -9639,6 +9648,7 @@
 /area/command/disperser)
 "vg" = (
 /obj/effect/wallframe_spawn/no_grille,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/crew_quarters/office)
 "vh" = (
@@ -10297,6 +10307,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/security/habcheck)
 "xf" = (
@@ -10614,6 +10625,7 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/security/habcheck)
 "xV" = (
@@ -10907,7 +10919,6 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/teleporter/thirddeck)
 "yP" = (
-/obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/command{
 	name = "Third Deck Teleporter"
 	},
@@ -10918,6 +10929,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/teleporter/thirddeck)
 "yQ" = (
@@ -12819,6 +12831,7 @@
 	pixel_y = 3
 	},
 /obj/effect/wallframe_spawn/no_grille,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/hallway/primary/thirddeck/aft)
 "Ep" = (
@@ -13200,6 +13213,7 @@
 	dir = 8;
 	name = "Holodeck"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/holocontrol)
 "Fs" = (
@@ -13251,6 +13265,7 @@
 /area/crew_quarters/galley)
 "Fx" = (
 /obj/effect/wallframe_spawn/no_grille,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/crew_quarters/galley)
 "Fy" = (
@@ -14059,13 +14074,13 @@
 /turf/simulated/wall/r_wall/hull,
 /area/command/disperser)
 "HJ" = (
-/obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/door/airlock/highsecurity{
 	icon_state = "closed";
 	locked = 0;
 	name = "Fire Control"
 	},
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/command/disperser)
 "HK" = (
@@ -14074,13 +14089,13 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/door/airlock/highsecurity{
 	icon_state = "closed";
 	locked = 0;
 	name = "Fire Control"
 	},
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/command/disperser)
 "HL" = (
@@ -14147,13 +14162,13 @@
 /turf/simulated/floor/plating,
 /area/command/disperser)
 "HS" = (
-/obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/door/airlock/highsecurity{
 	icon_state = "closed";
 	locked = 0;
 	name = "Fire Control"
 	},
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/command/disperser)
 "HT" = (
@@ -16002,6 +16017,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/security/habcheck)
 "LW" = (
@@ -16977,6 +16993,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/effect/wallframe_spawn/no_grille,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/hallway/primary/thirddeck/aft)
 "OX" = (
@@ -17306,7 +17323,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/airlock/hatch/maintenance,
-/obj/machinery/door/firedoor,
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/thruster/d3starboard)
 "PX" = (
@@ -17619,7 +17636,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/door/airlock/hatch/maintenance,
-/obj/machinery/door/firedoor,
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/thruster/d3starboard)
 "QY" = (
@@ -17823,7 +17840,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/airlock/hatch/maintenance,
-/obj/machinery/door/firedoor,
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/thruster/d3port)
 "RI" = (
@@ -18576,6 +18593,7 @@
 /obj/effect/wallframe_spawn/reinforced/polarized/no_grille{
 	id = "chapel_windows"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/chapel/main)
 "TS" = (
@@ -18862,6 +18880,7 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/security/habcheck)
 "UC" = (
@@ -19249,7 +19268,7 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/door/airlock/hatch/maintenance,
-/obj/machinery/door/firedoor,
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/thruster/d3port)
 "VB" = (
@@ -20487,6 +20506,7 @@
 /area/storage/tools)
 "Zb" = (
 /obj/effect/wallframe_spawn/no_grille,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/crew_quarters/gym)
 "Zc" = (
@@ -38508,7 +38528,7 @@ Sw
 Tb
 VT
 rM
-qb
+Nw
 ly
 Tx
 XO

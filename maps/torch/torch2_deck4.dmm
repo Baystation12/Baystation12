@@ -2369,6 +2369,7 @@
 /area/maintenance/fourthdeck/starboard)
 "hE" = (
 /obj/effect/wallframe_spawn/no_grille,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/storage/primary)
 "hO" = (
@@ -3859,6 +3860,7 @@
 /area/maintenance/fourthdeck/aft)
 "ng" = (
 /obj/effect/wallframe_spawn/no_grille,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/eva)
 "ni" = (
@@ -4217,6 +4219,7 @@
 /area/teleporter/fourthdeck)
 "oB" = (
 /obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/storage/primary)
 "oC" = (
@@ -5962,6 +5965,7 @@
 	dir = 4
 	},
 /obj/effect/wallframe_spawn/no_grille,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/storage/primary)
 "ud" = (
@@ -6441,7 +6445,6 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/fore)
 "vo" = (
-/obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/command{
 	name = "Fourth Deck Teleporter"
 	},
@@ -6456,6 +6459,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/teleporter/fourthdeck)
 "vp" = (
@@ -6633,8 +6637,8 @@
 /turf/simulated/floor/shuttle_ceiling/torch/air,
 /area/quartermaster/hangar/top)
 "vJ" = (
-/obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced/no_grille,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/hallway/primary/fourthdeck/center)
 "vK" = (
@@ -9775,6 +9779,7 @@
 /area/crew_quarters/lounge)
 "HE" = (
 /obj/effect/wallframe_spawn/reinforced/no_grille,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/hallway/primary/fourthdeck/center)
 "HF" = (
@@ -10760,6 +10765,7 @@
 	icon_state = "0-4"
 	},
 /obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/security/hangcheck)
 "KI" = (
@@ -11672,6 +11678,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/security/hangcheck)
 "Nn" = (
@@ -11857,6 +11864,7 @@
 	},
 /obj/structure/cable/green,
 /obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/security/hangcheck)
 "NP" = (
@@ -12000,6 +12008,7 @@
 	icon_state = "0-2"
 	},
 /obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/security/hangcheck)
 "Ol" = (
@@ -12212,6 +12221,7 @@
 	pixel_y = -4
 	},
 /obj/effect/wallframe_spawn/no_grille,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/storage/primary)
 "OV" = (
@@ -13146,6 +13156,7 @@
 	pixel_z = 0
 	},
 /obj/effect/wallframe_spawn/no_grille,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/storage/primary)
 "RA" = (
@@ -13614,6 +13625,7 @@
 	},
 /obj/structure/cable/green,
 /obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/security/hangcheck)
 "SE" = (
@@ -15356,6 +15368,7 @@
 	pixel_z = 0
 	},
 /obj/effect/wallframe_spawn/no_grille,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/storage/primary)
 "Xl" = (
@@ -15639,6 +15652,7 @@
 	},
 /obj/structure/cable/green,
 /obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/security/hangcheck)
 "XS" = (
@@ -32432,7 +32446,7 @@ qe
 rg
 UY
 QC
-vJ
+HE
 aY
 aY
 aY
@@ -32634,7 +32648,7 @@ lf
 WC
 VJ
 QC
-vJ
+HE
 aY
 aY
 aY

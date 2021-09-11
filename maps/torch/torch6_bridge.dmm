@@ -7,6 +7,7 @@
 	id = "meeting_windows"
 	},
 /obj/structure/cable/green,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/bridge/meeting_room)
 "ac" = (
@@ -892,6 +893,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/bridge/meeting_room)
 "bQ" = (
@@ -910,6 +912,7 @@
 	name = "Bridge Starboard Lockdown Window Shutters";
 	opacity = 0
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/xo)
 "bR" = (
@@ -957,6 +960,7 @@
 	id = "cl_windows"
 	},
 /obj/structure/cable/green,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/cl)
 "bX" = (
@@ -979,6 +983,7 @@
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "meeting_windows"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/bridge/meeting_room)
 "bY" = (
@@ -1109,8 +1114,8 @@
 /turf/simulated/floor/tiled,
 /area/crew_quarters/heads/office/rd)
 "ck" = (
-/turf/simulated/wall/prepainted,
-/area/bridge)
+/turf/simulated/wall/r_wall/prepainted,
+/area/crew_quarters/heads/office/xo)
 "cl" = (
 /turf/simulated/floor/tiled/dark,
 /area/bridge/hallway/starboard)
@@ -1942,6 +1947,7 @@
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "ce_windows"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/ce)
 "dq" = (
@@ -2732,6 +2738,7 @@
 	name = "XO Queue Privacy Shutters";
 	opacity = 1
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/xo)
 "eT" = (
@@ -3093,6 +3100,7 @@
 /area/bridge/hallway/port)
 "fD" = (
 /obj/effect/wallframe_spawn/reinforced,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/hallway/primary/bridge/fore)
 "fE" = (
@@ -3353,6 +3361,7 @@
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "cmo_windows"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/cmo)
 "fX" = (
@@ -3836,6 +3845,7 @@
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "ce_windows"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/ce)
 "hC" = (
@@ -3958,7 +3968,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/sea)
 "hV" = (
-/obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/sol{
 	id_tag = "starboardbridgedoor";
 	name = "Bridge";
@@ -3978,6 +3987,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "hW" = (
@@ -4003,6 +4013,7 @@
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "meeting_windows"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/bridge/meeting_room)
 "ie" = (
@@ -4269,6 +4280,7 @@
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "bridge_starboard"
 	},
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/plating,
 /area/bridge)
 "iJ" = (
@@ -4279,6 +4291,7 @@
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "bridge_starboard"
 	},
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/plating,
 /area/bridge)
 "iP" = (
@@ -4599,6 +4612,7 @@
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "meeting_windows"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/bridge/meeting_room)
 "jR" = (
@@ -4853,6 +4867,7 @@
 	name = "XO Office Privacy Shutters";
 	opacity = 1
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/xo)
 "kE" = (
@@ -4963,6 +4978,7 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/hallway/primary/bridge/aft)
 "kU" = (
@@ -4989,6 +5005,7 @@
 	name = "XO Office Privacy Shutters";
 	opacity = 1
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/xo)
 "kW" = (
@@ -5182,6 +5199,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/hallway/primary/bridge/fore)
 "lE" = (
@@ -5239,6 +5257,7 @@
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/plating,
 /area/bridge)
 "lN" = (
@@ -5483,6 +5502,7 @@
 	name = "Bridge Deck Checkpoint Shutters";
 	opacity = 0
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/security/bridgecheck)
 "mE" = (
@@ -5566,6 +5586,7 @@
 	name = "Bridge Deck Checkpoint Shutters";
 	opacity = 0
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/security/bridgecheck)
 "mO" = (
@@ -5700,6 +5721,7 @@
 "nd" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/structure/cable/green,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/hallway/primary/bridge/aft)
 "ne" = (
@@ -6076,6 +6098,7 @@
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "cmo_windows"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/cmo)
 "of" = (
@@ -6090,6 +6113,7 @@
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "cmo_windows"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/cmo)
 "og" = (
@@ -6100,6 +6124,7 @@
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "cmo_windows"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/cmo)
 "oh" = (
@@ -6124,6 +6149,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/aux_eva)
 "on" = (
@@ -6138,6 +6164,7 @@
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "bridge_port"
 	},
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/plating,
 /area/bridge)
 "oy" = (
@@ -6148,6 +6175,7 @@
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "bridge_port"
 	},
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/plating,
 /area/bridge)
 "oz" = (
@@ -6220,6 +6248,7 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/bridge/meeting_room)
 "oK" = (
@@ -6236,6 +6265,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/security/bridgecheck)
 "oO" = (
@@ -6495,6 +6525,7 @@
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "cmo_windows"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/cmo)
 "pJ" = (
@@ -6837,6 +6868,7 @@
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "cos_windows"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/cos)
 "qq" = (
@@ -6847,6 +6879,7 @@
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "cos_windows"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/cos)
 "qs" = (
@@ -7401,12 +7434,12 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/crew_quarters/safe_room/bridge)
 "rR" = (
-/obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/vault/bolted{
 	frequency = null;
 	id_tag = "bridge_safe_exterior";
 	name = "Bridge Safe Room"
 	},
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/crew_quarters/safe_room/bridge)
 "rS" = (
@@ -7629,6 +7662,7 @@
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "sea_windows"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/sea)
 "sz" = (
@@ -7690,6 +7724,7 @@
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "sgr_windows"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/sgr)
 "sI" = (
@@ -7704,6 +7739,7 @@
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "sgr_windows"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/sgr)
 "sJ" = (
@@ -7947,6 +7983,7 @@
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "sgr_windows"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/sgr)
 "tt" = (
@@ -8180,6 +8217,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/sgr)
 "uh" = (
@@ -9426,7 +9464,6 @@
 /turf/simulated/wall/prepainted,
 /area/maintenance/bridge/foreport)
 "xe" = (
-/obj/machinery/door/firedoor,
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
@@ -9441,6 +9478,7 @@
 	req_access = list("ACCESS_BRIDGE")
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/universal,
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/bridge/foreport)
 "xg" = (
@@ -9869,6 +9907,7 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/bridge/meeting_room)
 "yf" = (
@@ -9880,6 +9919,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/plating,
 /area/bridge)
 "yg" = (
@@ -10100,6 +10140,7 @@
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "bridge_port"
 	},
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/plating,
 /area/bridge)
 "zo" = (
@@ -10259,6 +10300,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/security/bridgecheck)
 "zW" = (
@@ -10494,6 +10536,7 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/plating,
 /area/bridge)
 "AI" = (
@@ -10516,6 +10559,7 @@
 	icon_state = "0-8"
 	},
 /obj/structure/disposalpipe/segment,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/security/bridgecheck)
 "AJ" = (
@@ -10927,6 +10971,7 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/cmo)
 "Cx" = (
@@ -11154,6 +11199,7 @@
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "co_windows"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/co)
 "DE" = (
@@ -11702,6 +11748,7 @@
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "cl_windows"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/cl)
 "GA" = (
@@ -11857,6 +11904,7 @@
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "cl_windows"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/cl)
 "Hf" = (
@@ -11955,6 +12003,7 @@
 	name = "Bridge Starboard Lockdown Window Shutters";
 	opacity = 0
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/xo)
 "Hs" = (
@@ -12004,6 +12053,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/bridge/meeting_room)
 "Hw" = (
@@ -12111,10 +12161,10 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "HI" = (
-/obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/glass/command{
 	name = "Bridge Storage"
 	},
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "HJ" = (
@@ -12181,7 +12231,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "HX" = (
-/obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/sol{
 	id_tag = "portbridgedoor";
 	name = "Bridge";
@@ -12198,6 +12247,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "Ia" = (
@@ -12685,6 +12735,7 @@
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "cl_windows"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/cl)
 "Kb" = (
@@ -13334,6 +13385,7 @@
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "cl_windows"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/cl)
 "Ne" = (
@@ -13750,6 +13802,7 @@
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "cl_windows"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/cl)
 "OK" = (
@@ -13867,7 +13920,6 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/bridge)
 "Pg" = (
-/obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/vault/bolted{
 	autoset_access = 0;
 	id_tag = "bridgesafe_front";
@@ -13877,6 +13929,7 @@
 	req_access = list("ACCESS_BRIDGE")
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/hallway/primary/bridge/fore)
 "Pl" = (
@@ -14128,7 +14181,7 @@
 	name = "Commanding Officer";
 	secured_wires = 1
 	},
-/obj/machinery/door/firedoor,
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "Qv" = (
@@ -14547,6 +14600,7 @@
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "sea_windows"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/sea)
 "RU" = (
@@ -15382,6 +15436,7 @@
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "meeting_windows"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/bridge/meeting_room)
 "Vs" = (
@@ -15462,6 +15517,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/plating,
 /area/bridge)
 "VP" = (
@@ -15873,6 +15929,7 @@
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "co_windows"
 	},
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/plating,
 /area/bridge)
 "XW" = (
@@ -16122,7 +16179,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/aux_eva)
 "YX" = (
-/obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/door/airlock/vault/bolted{
 	autoset_access = 0;
@@ -16133,6 +16189,7 @@
 /obj/item/airlock_brace{
 	req_access = list("ACCESS_BRIDGE")
 	},
+/obj/machinery/door/firedoor/heavy,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/storage)
 "YY" = (
@@ -24121,7 +24178,7 @@ zN
 Qw
 TK
 cV
-Ie
+eP
 Ng
 Id
 th
@@ -24323,7 +24380,7 @@ hn
 hn
 SJ
 ev
-ck
+eP
 UY
 Fg
 Ig
@@ -24929,7 +24986,7 @@ Kt
 Lw
 fN
 HW
-ck
+eP
 qQ
 rJ
 Ii
@@ -25315,12 +25372,12 @@ al
 aO
 aO
 aO
-aO
-aO
-aO
-aO
-aO
-aO
+ck
+ck
+ck
+ck
+ck
+ck
 bM
 ci
 ct

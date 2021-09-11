@@ -456,8 +456,6 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/analysis)
 "aV" = (
-/obj/effect/wallframe_spawn/reinforced_phoron/titanium,
-/obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4;
 	icon_state = "intact"
@@ -472,6 +470,8 @@
 	name = "Mixing Chamber Blast Shutters";
 	opacity = 0
 	},
+/obj/machinery/door/firedoor/heavy,
+/obj/effect/wallframe_spawn/reinforced_phoron/no_grille,
 /turf/simulated/floor/reinforced/airless,
 /area/shuttle/petrov/toxins)
 "aW" = (
@@ -508,8 +508,6 @@
 /turf/simulated/floor/tiled/dark,
 /area/quartermaster/expedition/atmos)
 "be" = (
-/obj/effect/wallframe_spawn/reinforced_phoron/titanium,
-/obj/machinery/door/firedoor,
 /obj/effect/paint/silver,
 /obj/machinery/door/blast/regular{
 	density = 0;
@@ -519,6 +517,8 @@
 	name = "Mixing Chamber Blast Shutters";
 	opacity = 0
 	},
+/obj/machinery/door/firedoor/heavy,
+/obj/effect/wallframe_spawn/reinforced_phoron/no_grille,
 /turf/simulated/floor/reinforced/airless,
 /area/shuttle/petrov/toxins)
 "bf" = (
@@ -900,6 +900,7 @@
 	icon_state = "1-2"
 	},
 /obj/effect/wallframe_spawn/no_grille,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
 "bP" = (
@@ -3394,6 +3395,7 @@
 /area/quartermaster/expedition/storage)
 "hl" = (
 /obj/effect/wallframe_spawn/no_grille,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/quartermaster/exploration)
 "hm" = (
@@ -3719,6 +3721,7 @@
 /area/quartermaster/expedition/storage)
 "iy" = (
 /obj/effect/wallframe_spawn/no_grille,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/command/pilot)
 "iz" = (
@@ -6120,6 +6123,7 @@
 	},
 /obj/structure/disposalpipe/segment,
 /obj/effect/wallframe_spawn/no_grille,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/fore)
 "ny" = (
@@ -8289,6 +8293,7 @@
 	icon_state = "4-8"
 	},
 /obj/effect/wallframe_spawn/no_grille,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/fore)
 "rF" = (
@@ -9864,6 +9869,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/disposalpipe/segment,
 /obj/effect/wallframe_spawn/no_grille,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
 "vm" = (
@@ -13608,6 +13614,7 @@
 	pixel_x = 0
 	},
 /obj/effect/wallframe_spawn/no_grille,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
 "Jh" = (
