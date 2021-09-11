@@ -24,7 +24,7 @@
 	var/swarmling_prob = 10
 
 /mob/living/simple_animal/hostile/giant_spider/carrier/Initialize()
-	spiderling_count = rand(5, 10)
+	spiderling_count = rand(4, 8)
 	scale(1.2)
 	return ..()
 

@@ -26,18 +26,11 @@
 	var/egg_inject_chance = 25 // One in four chance to get eggs.
 	var/egg_type = /obj/effect/spider/eggcluster
 	var/web_type = /obj/effect/spider/stickyweb/dark
-	var/obj/effect/spider/spiderling/spiderling_target
-	var/left_to_feed = 2 //number of spiderlings we can make giant
 
 	var/mob/living/simple_animal/hostile/giant_spider/guard/paired_guard
 
 /obj/item/natural_weapon/bite/spider/nurse
 	force = 10
-
-/mob/living/simple_animal/hostile/giant_spider/nurse/Initialize(mapload, atom/parent)
-	. = ..()
-	if (prob(20))
-		fed = 1
 
 /datum/ai_holder/simple_animal/melee/nurse_spider
 	mauling = TRUE		// The nurse puts mobs into webs by attacking, so it needs to attack in crit
@@ -77,11 +70,6 @@
 	if(AM.anchored)
 		return ..()
 
-	if (istype(A, /obj/effect/spider/spiderling))
-		if (left_to_feed)
-			feed_spiderling(A)
-			handle_attack_delay(A, melee_attack_delay)
-		return
 
 	return spin_cocoon(AM)
 
@@ -129,12 +117,6 @@
 	ai_holder.target = null
 
 	return TRUE
-
-/mob/living/simple_animal/hostile/giant_spider/nurse/proc/feed_spiderling(obj/effect/spider/spiderling/S)
-	visible_message(SPAN_WARNING("\The [src] secretes a strange green substance over \the [S], causing it to grow rapidly!."))
-	S.amount_grown += 2
-	spiderling_target = null
-	left_to_feed--
 
 /mob/living/simple_animal/hostile/giant_spider/nurse/handle_special()
 	set waitfor = FALSE
@@ -227,11 +209,7 @@
 /datum/ai_holder/simple_animal/melee/nurse_spider/list_targets()
 	. = ..()
 
-	var/static/alternative_targets = typecacheof(list(/obj/structure, /obj/effect/spider/spiderling))
-
-	var/mob/living/simple_animal/hostile/giant_spider/nurse/N = holder
-	if (!N.left_to_feed)
-		alternative_targets -= /obj/effect/spider/spiderling
+	var/static/alternative_targets = typecacheof(list(/obj/structure))
 
 	for(var/AT in typecache_filter_list(range(vision_range, holder), alternative_targets))
 		var/obj/O = AT
@@ -246,12 +224,6 @@
 			if(!isliving(A))
 				targets -= A
 
-	var/mob/living/simple_animal/hostile/giant_spider/nurse/N = holder
-	if (!N.left_to_feed)
-		for (var/A in targets)
-			if (istype(A, /obj/effect/spider/spiderling))
-				targets -= A
-
 	return ..(targets)
 
 /datum/ai_holder/simple_animal/melee/nurse_spider/can_attack(atom/movable/the_target, vision_required = TRUE)
@@ -261,9 +233,3 @@
 			var/obj/O = the_target
 			if (!O.anchored)
 				return TRUE
-
-		if (istype(the_target, /obj/effect/spider/spiderling))
-			var/mob/living/simple_animal/hostile/giant_spider/nurse/N = holder
-			if (!N.left_to_feed)
-				lose_target()
-				return FALSE
