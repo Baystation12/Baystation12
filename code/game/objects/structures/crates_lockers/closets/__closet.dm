@@ -5,6 +5,7 @@
 	icon_state = "base"
 	density = TRUE
 	w_class = ITEM_SIZE_NO_CONTAINER
+	material = MATERIAL_STEEL
 
 	var/welded = 0
 	var/large = 1

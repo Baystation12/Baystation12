@@ -44,8 +44,6 @@
 /obj/structure/railing/Initialize()
 	. = ..()
 
-	if(!isnull(material) && !istype(material))
-		material = SSmaterials.get_material_by_name(material)
 	if(!istype(material))
 		return INITIALIZE_HINT_QDEL
 
@@ -65,7 +63,6 @@
 
 /obj/structure/railing/Destroy()
 	anchored = FALSE
-	atom_flags = 0
 	broken = TRUE
 	for(var/thing in trange(1, src))
 		var/turf/T = thing

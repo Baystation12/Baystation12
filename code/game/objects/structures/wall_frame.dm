@@ -20,14 +20,14 @@
 
 	blend_objects = list(/obj/machinery/door, /turf/simulated/wall) // Objects which to blend with
 	noblend_objects = list(/obj/machinery/door/window)
-	material = DEFAULT_WALL_MATERIAL
 
 /obj/structure/wall_frame/New(var/new_loc, var/materialtype)
 	..(new_loc)
 
-	if(!materialtype)
-		materialtype = DEFAULT_WALL_MATERIAL
-	material = SSmaterials.get_material_by_name(materialtype)
+	if (!material)
+		if (!materialtype)
+			materialtype = DEFAULT_WALL_MATERIAL
+		material = SSmaterials.get_material_by_name(materialtype)
 	health = material.integrity
 
 	update_connections(1)
@@ -198,3 +198,7 @@
 
 /obj/structure/wall_frame/hull/verne
 	paint_color = COLOR_GUNMETAL
+
+/obj/structure/wall_frame/plasteel
+	material = MATERIAL_PLASTEEL
+	paint_color = COLOR_WALL_GUNMETAL

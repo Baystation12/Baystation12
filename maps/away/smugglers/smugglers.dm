@@ -109,6 +109,7 @@
 	name = "dirty plastic crate"
 	desc = "Dirty and scrtached plastic crate."
 	closet_appearance = /decl/closet_appearance/crate/plastic
+	material = MATERIAL_PLASTIC
 
 /obj/structure/closet/crate/plastic_smug_ammo/WillContain()
 	return list(
@@ -122,6 +123,7 @@
 	name = "dirty plastic crate"
 	desc = "Dirty and scrtached plastic crate."
 	closet_appearance = /decl/closet_appearance/crate/plastic
+	material = MATERIAL_PLASTIC
 
 /obj/structure/closet/crate/plastic_smug_weapons/WillContain()
 	return list(

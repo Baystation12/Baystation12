@@ -45,6 +45,8 @@
 	flooring = newflooring
 	update_icon(1)
 	levelupdate()
+	if (is_meltable())
+		check_tracking_zones()
 
 //This proc will set floor_type to null and the update_icon() proc will then change the icon_state of the turf
 //This proc auto corrects the grass tiles' siding.
@@ -66,6 +68,7 @@
 		flooring.on_remove()
 		if(flooring.build_type && place_product)
 			new flooring.build_type(src)
+		DisableMelting()
 		flooring = null
 
 	set_light(0)

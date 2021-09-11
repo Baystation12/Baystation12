@@ -12,7 +12,9 @@
 	icon = 'icons/obj/doors/hazard/door.dmi'
 	var/panel_file = 'icons/obj/doors/hazard/panel.dmi'
 	var/welded_file = 'icons/obj/doors/hazard/welded.dmi'
-	icon_state = "open"
+	icon_state = "light_open"
+	var/icon_base = "light"
+	var/decon_result = /obj/structure/firedoor_assembly
 	req_access = list(list(access_atmospherics, access_engine_equip))
 	autoset_access = FALSE
 	opacity = FALSE
@@ -23,6 +25,7 @@
 	movable_flags = MOVABLE_FLAG_Z_INTERACT
 	pry_mod = 0.75
 	atom_flags = ATOM_FLAG_ADJACENT_EXCEPTION
+	material = MATERIAL_STEEL
 	var/locked = FALSE //If the door is forced open, it will not close again until the next atmosphere alert in the area
 
 	//These are frequently used with windows, so make sure zones can pass.
@@ -88,7 +91,7 @@
 	. = ..()
 
 /obj/machinery/door/firedoor/get_material()
-	return SSmaterials.get_material_by_name(MATERIAL_STEEL)
+	return material
 
 /obj/machinery/door/firedoor/examine(mob/user, distance)
 	. = ..()
@@ -317,7 +320,7 @@
 	else
 		new/obj/item/airalarm_electronics(loc)
 
-	var/obj/structure/firedoor_assembly/FA = new/obj/structure/firedoor_assembly(loc)
+	var/obj/structure/firedoor_assembly/FA = new decon_result (loc)
 	FA.anchored = !moved
 	FA.set_density(TRUE)
 	FA.wired = TRUE
@@ -484,9 +487,9 @@
 /obj/machinery/door/firedoor/do_animate(animation)
 	switch(animation)
 		if("opening")
-			flick("opening", src)
+			flick("[icon_base]_opening", src)
 		if("closing")
-			flick("closing", src)
+			flick("[icon_base]_closing", src)
 	return
 
 
@@ -508,7 +511,7 @@
 		set_dir(SOUTH)
 
 	if(density)
-		icon_state = "closed"
+		icon_state = "[icon_base]_closed"
 		if(hatch_open)
 			overlays = panel_overlay
 		if(pdiff_alert)
@@ -522,7 +525,7 @@
 						overlays += new/icon(icon, "alert_[ALERT_STATES[i]]", dir = cdir)
 						do_set_light = TRUE
 	else
-		icon_state = "open"
+		icon_state = "[icon_base]_open"
 
 	if(blocked)
 		weld_overlay = welded_file
@@ -533,3 +536,11 @@
 	overlays += panel_overlay
 	overlays += weld_overlay
 	overlays += lights_overlay
+
+/obj/machinery/door/firedoor/heavy
+	name = "heavy emergency shutter"
+	desc = "An emergency air-tight shutter capable of sealing off breached areas. These are made from osmium-carbide plasteel and could take on a sun."
+	icon_state = "heavy_open"
+	material = MATERIAL_OSMIUM_CARBIDE_PLASTEEL
+	icon_base = "heavy"
+	decon_result = /obj/structure/firedoor_assembly/heavy

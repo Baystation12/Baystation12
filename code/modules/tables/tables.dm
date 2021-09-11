@@ -12,6 +12,7 @@
 	var/flipped = 0
 	var/maxhealth = 10
 	var/health = 10
+	var/disabled = FALSE
 
 	// For racks.
 	var/can_reinforce = 1
@@ -27,8 +28,6 @@
 	connections = list("nw0", "ne0", "sw0", "se0")
 
 /obj/structure/table/New()
-	if(istext(material))
-		material = SSmaterials.get_material_by_name(material)
 	if(istext(reinforced))
 		reinforced = SSmaterials.get_material_by_name(reinforced)
 	..()
@@ -78,9 +77,9 @@
 	update_material()
 
 /obj/structure/table/Destroy()
-	material = null
 	reinforced = null
-	update_connections(1) // Update tables around us to ignore us (material=null forces no connections)
+	disabled = TRUE
+	update_connections(1) // Update tables around us to ignore us
 	for(var/obj/structure/table/T in oview(src, 1))
 		T.update_icon()
 	. = ..()
@@ -375,7 +374,7 @@
 
 // set propagate if you're updating a table that should update tables around it too, for example if it's a new table or something important has changed (like material).
 /obj/structure/table/update_connections(propagate=0)
-	if(!material)
+	if (!material || disabled)
 		connections = list("0", "0", "0", "0")
 
 		if(propagate)
@@ -420,7 +419,7 @@
 		if(!T.can_connect()) continue
 		var/T_dir = get_dir(src, T)
 		if(T_dir in blocked_dirs) continue
-		if(material && T.material && material.name == T.material.name && flipped == T.flipped)
+		if(material && T.material && !T.disabled && material.name == T.material.name && flipped == T.flipped)
 			connection_dirs |= T_dir
 		if(propagate)
 			spawn(0)

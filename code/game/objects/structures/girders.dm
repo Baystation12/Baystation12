@@ -4,6 +4,7 @@
 	density = TRUE
 	layer = BELOW_OBJ_LAYER
 	w_class = ITEM_SIZE_NO_CONTAINER
+	material = MATERIAL_STEEL
 	var/state = 0
 	var/health = 100
 	var/cover = 50 //how much cover the girder provides against projectiles.

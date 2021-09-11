@@ -42,7 +42,7 @@ var/list/airlock_overlays = list()
 	var/lockdownbyai = 0
 	autoclose = 1
 	var/assembly_type = /obj/structure/door_assembly
-	var/mineral = null
+	material = MATERIAL_STEEL
 	var/justzap = FALSE
 	var/safe = 1
 	normalspeed = 1
@@ -103,7 +103,7 @@ var/list/airlock_overlays = list()
 	stock_part_presets = list(/decl/stock_part_preset/radio/receiver/airlock = 1)
 
 /obj/machinery/door/airlock/get_material()
-	return SSmaterials.get_material_by_name(mineral ? mineral : MATERIAL_STEEL)
+	return material
 
 //regular airlock presets
 
@@ -292,41 +292,41 @@ var/list/airlock_overlays = list()
 /obj/machinery/door/airlock/gold
 	name = "Gold Airlock"
 	door_color = COLOR_SUN
-	mineral = MATERIAL_GOLD
+	material = MATERIAL_GOLD
 
 /obj/machinery/door/airlock/crystal
 	name = "Crystal Airlock"
 	door_color = COLOR_CRYSTAL
-	mineral = MATERIAL_CRYSTAL
+	material = MATERIAL_CRYSTAL
 
 /obj/machinery/door/airlock/silver
 	name = "Silver Airlock"
 	door_color = COLOR_SILVER
-	mineral = MATERIAL_SILVER
+	material = MATERIAL_SILVER
 
 /obj/machinery/door/airlock/diamond
 	name = "Diamond Airlock"
 	door_color = COLOR_CYAN_BLUE
-	mineral = MATERIAL_DIAMOND
+	material = MATERIAL_DIAMOND
 
 /obj/machinery/door/airlock/uranium
 	name = "Uranium Airlock"
 	desc = "And they said I was crazy."
 	door_color = COLOR_PAKISTAN_GREEN
-	mineral = MATERIAL_URANIUM
+	material = MATERIAL_URANIUM
 	var/last_event = 0
 	var/rad_power = 7.5
 
 /obj/machinery/door/airlock/sandstone
 	name = "\improper Sandstone Airlock"
 	door_color = COLOR_BEIGE
-	mineral = MATERIAL_SANDSTONE
+	material = MATERIAL_SANDSTONE
 
 /obj/machinery/door/airlock/phoron
 	name = "\improper Phoron Airlock"
 	desc = "No way this can end badly."
 	door_color = COLOR_PURPLE
-	mineral = MATERIAL_PHORON
+	material = MATERIAL_PHORON
 
 /obj/machinery/door/airlock/centcom
 	airlock_type = "centcomm"
@@ -1177,8 +1177,8 @@ About the new airlock wires panel:
 	var/obj/structure/door_assembly/da = new assembly_type(src.loc)
 	if (istype(da, /obj/structure/door_assembly/multi_tile))
 		da.set_dir(src.dir)
-	if(mineral)
-		da.glass = mineral
+	if(material)
+		da.glass = material
 	//else if(glass)
 	else if(glass && !da.glass)
 		da.glass = 1

@@ -159,6 +159,8 @@
 			return global.SSxenoarch;
 		if("SSzcopy")
 			return global.SSzcopy;
+		if("SSzone")
+			return global.SSzone;
 		if("Tier1Runes")
 			return global.Tier1Runes;
 		if("Tier2Runes")
@@ -1038,6 +1040,8 @@
 			global.SSxenoarch=newval;
 		if("SSzcopy")
 			global.SSzcopy=newval;
+		if("SSzone")
+			global.SSzone=newval;
 		if("Tier1Runes")
 			global.Tier1Runes=newval;
 		if("Tier2Runes")
@@ -1837,6 +1841,7 @@
 	"SSwebhooks",
 	"SSxenoarch",
 	"SSzcopy",
+	"SSzone",
 	"Tier1Runes",
 	"Tier2Runes",
 	"Tier3Runes",

@@ -1,17 +1,37 @@
-obj/structure/firedoor_assembly
-	name = "\improper emergency shutter assembly"
+/obj/structure/firedoor_assembly
+	name = "emergency shutter assembly"
 	desc = "It can save lives."
 	icon = 'icons/obj/doors/hazard/door.dmi'
 	icon_state = "construction"
 	anchored = FALSE
 	opacity = 0
 	density = TRUE
+	var/path = /obj/machinery/door/firedoor
+	material = MATERIAL_STEEL
 	var/wired = 0
+
+/obj/structure/firedoor_assembly/proc/build(obj/item/airalarm_electronics/C)
+	var/obj/machinery/door/firedoor/D = new path (loc)
+	D.hatch_open = TRUE
+	D.close()
+	qdel(C)
+	qdel(src)
+
+/obj/structure/firedoor_assembly/proc/deconstruct(mob/user)
+	if (user)
+		user.visible_message(
+			SPAN_WARNING("[user] has dissassembled \the [src]."),
+			SPAN_NOTICE("You have dissassembled \the [src].")
+		)
+	else
+		visible_message(SPAN_WARNING("\The [src] falls apart!"))
+	new material.stack_type (loc, 4)
+	qdel(src)
 
 //construction: wrenched > cables > electronics > screwdriver & open
 //deconstruction: closed & welded > screwdriver > crowbar > wire cutters > wrench > welder
 
-obj/structure/firedoor_assembly/attackby(var/obj/item/C, var/mob/user)
+/obj/structure/firedoor_assembly/attackby(var/obj/item/C, var/mob/user)
 	if(isCoil(C) && !wired && anchored)
 		var/obj/item/stack/cable_coil/cable = C
 		if (cable.get_amount() < 1)
@@ -38,11 +58,7 @@ obj/structure/firedoor_assembly/attackby(var/obj/item/C, var/mob/user)
 			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 			user.visible_message("<span class='warning'>[user] has inserted a circuit into \the [src]!</span>",
 								  "You have inserted the circuit into \the [src]!")
-			var/obj/machinery/door/firedoor/D = new(src.loc)
-			D.hatch_open = 1
-			D.close()
-			qdel(C)
-			qdel(src)
+			build(C)
 		else
 			to_chat(user, "<span class='warning'>You must secure \the [src] first!</span>")
 	else if(isWrench(C) && !wired)
@@ -58,11 +74,13 @@ obj/structure/firedoor_assembly/attackby(var/obj/item/C, var/mob/user)
 			"You start to dissassemble \the [src].")
 			if(do_after(user, 40, src))
 				if(!src || !WT.isOn()) return
-				user.visible_message("<span class='warning'>[user] has dissassembled \the [src].</span>",
-									"You have dissassembled \the [src].")
-				new /obj/item/stack/material/steel(src.loc, 4)
-				qdel(src)
+				deconstruct(user)
 		else
 			to_chat(user, "<span class='notice'>You need more welding fuel.</span>")
 	else
 		..(C, user)
+
+/obj/structure/firedoor_assembly/heavy
+	name = "heavy emergency shutter assembly"
+	path = /obj/machinery/door/firedoor/heavy
+	material = MATERIAL_OSMIUM_CARBIDE_PLASTEEL

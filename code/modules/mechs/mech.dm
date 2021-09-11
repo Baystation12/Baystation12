@@ -55,9 +55,6 @@
 	var/hardpoints_locked
 	var/maintenance_protocols
 
-	// Material
-	var/material/material
-
 	// Cockpit access vars.
 	var/hatch_closed = FALSE
 	var/hatch_locked = FALSE

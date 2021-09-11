@@ -10,7 +10,6 @@
 	w_class = ITEM_SIZE_NORMAL
 
 	var/default_material = MATERIAL_STEEL
-	var/material/material
 
 	var/applies_material_colour = 1
 	var/applies_material_name = 1 //if false, does not rename item to 'material item.name'

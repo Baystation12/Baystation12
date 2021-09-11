@@ -40,6 +40,11 @@ Class Procs:
 */
 
 
+/datum/melt_list
+	var/temperature
+	var/queued_damage = 0
+	var/list/list = list()
+
 /zone
 	var/name
 	var/invalid = 0
@@ -52,6 +57,7 @@ Class Procs:
 	var/list/graphic_add = list()
 	var/list/graphic_remove = list()
 	var/last_air_temperature = TCMB
+	var/list/meltables = list()
 
 /zone/New()
 	SSair.add_zone(src)
@@ -70,12 +76,41 @@ Class Procs:
 	add_tile_air(turf_air)
 	T.zone = src
 	contents.Add(T)
-	if(T.fire)
+	if (T.fire)
 		var/obj/effect/decal/cleanable/liquid_fuel/fuel = locate() in T
 		fire_tiles.Add(T)
 		SSair.active_fire_zones |= src
-		if(fuel) fuel_objs += fuel
+		if (fuel) fuel_objs += fuel
 	T.update_graphic(air.graphic)
+
+	if (T.is_meltable())
+		add_meltable(T)
+	for(var/atom/movable/A in T.contents)
+		if (A.is_meltable())
+			add_meltable(A)
+	for(var/turf/CTurf in T.CardinalTurfs(FALSE))
+		if (CTurf.is_meltable())
+			add_meltable(CTurf)
+		for(var/atom/movable/A in CTurf.contents)
+			if (A.is_meltable())
+				add_meltable(A)
+
+///Adds a meltable to a zone. Adds a melt list if none of them are using the meltable's temperature, or if there are no melt lists
+/zone/proc/add_meltable(atom/A)
+	var/melt_temp = A.get_melting_temperature()
+	if (isnull(melt_temp))
+		return
+	A.tracking_zones |= src
+
+	for(var/datum/melt_list/ML in meltables)
+		if (ML.temperature == melt_temp)
+			ML.list |= A
+			return
+
+	var/datum/melt_list/ML = new()
+	ML.temperature = melt_temp
+	ML.list += A
+	meltables += ML
 
 /zone/proc/remove(turf/simulated/T)
 #ifdef ZASDBG
@@ -95,6 +130,35 @@ Class Procs:
 		air.group_multiplier = contents.len
 	else
 		c_invalidate()
+
+	if (T.is_meltable())
+		T.check_tracking_zones()
+	for(var/atom/movable/A in T.contents)
+		if (A.is_meltable())
+			A.check_tracking_zones()
+	for(var/turf/CTurf in T.CardinalTurfs(FALSE))
+		if (CTurf.is_meltable())
+			CTurf.check_tracking_zones()
+		for(var/atom/movable/A in CTurf.contents)
+			if (A.is_meltable())
+				A.check_tracking_zones()
+
+///Removes a meltable from a zone. Removes a melt list if its len is 0
+/zone/proc/remove_meltable(atom/A)
+	var/melt_temp = A.get_melting_temperature()
+	if (isnull(melt_temp))
+		return
+
+	for(var/datum/melt_list/ML in meltables)
+		if (ML.temperature == melt_temp)
+			if (ML.list.Remove(A))
+				A.tracking_zones -= src
+				if (!ML.list.len)
+					meltables -= ML
+					qdel(ML)
+				return
+			break
+	log_debug(append_admin_tools("\The [A] failed to remove itself from a zone meltables list!", null, get_turf(A)))
 
 /zone/proc/c_merge(zone/into)
 #ifdef ZASDBG
@@ -120,6 +184,11 @@ Class Procs:
 
 /zone/proc/c_invalidate()
 	invalid = 1
+	for(var/datum/melt_list/ML in meltables)
+		for(var/atom/A in ML.list)
+			A.tracking_zones -= src
+		meltables -= ML
+		qdel(ML)
 	SSair.remove_zone(src)
 	#ifdef ZASDBG
 	for(var/turf/simulated/T in contents)
@@ -143,7 +212,26 @@ Class Procs:
 	air.divide(contents.len+1)
 	air.group_multiplier = contents.len+1
 
+/zone/Process()
+	var/check = TRUE
+	var/temperature = air.temperature
+	var/melt_temperature
+	for(var/datum/melt_list/ML in meltables)
+		melt_temperature = ML.temperature
+		if (temperature > melt_temperature)
+			check = FALSE
+			var/damage = log(temperature - melt_temperature + 1)
+			for(var/atom/A in ML.list)
+				A.do_melt(RAND_F(0.8, 1.2) * damage)
+	if (check)
+		STOP_PROCESSING(SSzone, src)
+
 /zone/proc/tick()
+
+	for(var/datum/melt_list/ML in meltables)
+		if (!is_processing && air.temperature > ML.temperature)
+			START_PROCESSING(SSzone, src)
+			break
 
 	// Update fires.
 	if(air.temperature >= PHORON_FLASHPOINT && !(src in SSair.active_fire_zones) && air.check_combustability() && contents.len)

@@ -36,10 +36,3 @@
 //should be a little bit lower than the temperature required to destroy the material
 /turf/simulated/floor/proc/get_damage_temperature()
 	return flooring ? flooring.damage_temperature : null
-
-/turf/simulated/floor/adjacent_fire_act(turf/simulated/floor/adj_turf, datum/gas_mixture/adj_air, adj_temp, adj_volume)
-	var/dir_to = get_dir(src, adj_turf)
-
-	for(var/obj/structure/window/W in src)
-		if(W.dir == dir_to || W.is_fulltile()) //Same direction or diagonal (full tile)
-			W.fire_act(adj_air, adj_temp, adj_volume)

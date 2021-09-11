@@ -19,7 +19,6 @@
 	var/global/damage_overlays[16]
 	var/active
 	var/can_open = 0
-	var/material/material
 	var/material/reinf_material
 	var/last_state
 	var/construction_stage
@@ -213,6 +212,7 @@
 
 /turf/simulated/wall/proc/dismantle_wall(var/devastated, var/explode, var/no_product)
 
+	DisableMelting()
 	playsound(src, 'sound/items/Welder.ogg', 100, 1)
 	if(!no_product)
 		if(reinf_material)

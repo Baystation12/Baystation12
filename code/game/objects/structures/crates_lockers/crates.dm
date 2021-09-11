@@ -73,6 +73,7 @@
 /obj/structure/closet/crate/plastic
 	name = "plastic crate"
 	desc = "A rectangular plastic crate."
+	material = MATERIAL_PLASTIC
 	points_per_crate = 1
 	closet_appearance = /decl/closet_appearance/crate/plastic
 

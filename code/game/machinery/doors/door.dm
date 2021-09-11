@@ -324,18 +324,17 @@
 	return TRUE
 
 /obj/machinery/door/proc/take_damage(var/damage)
-	var/initialhealth = src.health
-	src.health = max(0, src.health - damage)
-	if(src.health <= 0 && initialhealth > 0)
-		src.set_broken(TRUE)
-	else if(src.health < src.maxhealth / 4 && initialhealth >= src.maxhealth / 4)
+	var/initialhealth = health
+	health = max(0, health - damage)
+	if(health <= 0 && initialhealth > 0)
+		set_broken(TRUE)
+	else if(health < maxhealth / 4 && initialhealth >= maxhealth / 4)
 		visible_message("\The [src] looks like it's about to break!" )
-	else if(src.health < src.maxhealth / 2 && initialhealth >= src.maxhealth / 2)
+	else if(health < maxhealth / 2 && initialhealth >= maxhealth / 2)
 		visible_message("\The [src] looks seriously damaged!" )
-	else if(src.health < src.maxhealth * 3/4 && initialhealth >= src.maxhealth * 3/4)
+	else if(health < maxhealth * 3/4 && initialhealth >= maxhealth * 3/4)
 		visible_message("\The [src] shows signs of damage!" )
 	update_icon()
-	return
 
 
 /obj/machinery/door/examine(mob/user)

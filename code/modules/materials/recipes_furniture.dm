@@ -210,6 +210,13 @@ ARMCHAIR(yellow)
 	time = 25
 	send_material_data = 0
 
+/datum/stack_recipe/furniture/heavy_firedoor
+	title = "heavy emergency shutter"
+	req_amount = 4
+	time = 60
+	difficulty = 4
+	result_type = /obj/structure/firedoor_assembly/heavy
+
 /datum/stack_recipe/furniture/door_assembly
 	req_amount = 4
 	time = 50

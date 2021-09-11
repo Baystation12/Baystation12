@@ -3,7 +3,6 @@
 /obj/item/clothing/ring/material
 	icon = 'icons/obj/clothing/obj_hands_ring.dmi'
 	icon_state = "material"
-	var/material/material
 
 /obj/item/clothing/ring/material/New(var/newloc, var/new_material)
 	..(newloc)

@@ -368,12 +368,15 @@
 	lightbulb = L
 
 	on = powered()
+	if (is_meltable())
+		check_tracking_zones()
 	update_icon()
 
 /obj/machinery/light/proc/remove_bulb()
 	. = lightbulb
 	lightbulb.dropInto(loc)
 	lightbulb.update_icon()
+	DisableMelting()
 	lightbulb = null
 	update_icon()
 
@@ -521,6 +524,7 @@
 		if(on)
 			s.set_up(3, 1, src)
 			s.start()
+	DisableMelting()
 	lightbulb.status = LIGHT_BROKEN
 	update_icon()
 
@@ -529,6 +533,8 @@
 		return
 	lightbulb.status = LIGHT_OK
 	on = 1
+	if (is_meltable())
+		check_tracking_zones()
 	update_icon()
 
 // explosion effect
@@ -612,6 +618,7 @@
 	matter = list(MATERIAL_STEEL = 60)
 	var/broken_chance = 2
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CAN_BE_PAINTED
+	material = MATERIAL_GLASS
 
 	var/b_max_bright = 0.9
 	var/b_inner_range = 1
