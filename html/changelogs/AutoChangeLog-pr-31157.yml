@@ -1,0 +1,5 @@
+author: Mucker
+delete-after: true
+changes:
+  - tweak: Drastically nerfed spiderling spawn counts from egg clusters and carriers.
+  - tweak: Nurse spiders can no longer 'feed' spiderlings to make them grow.
