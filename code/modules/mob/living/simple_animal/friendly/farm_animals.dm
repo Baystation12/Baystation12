@@ -90,7 +90,7 @@
 		..()
 
 //cow
-/mob/living/simple_animal/friendly/cow
+/mob/living/simple_animal/passive/cow
 	name = "cow"
 	desc = "Known for their milk, just don't tip them over."
 	icon_state = "cow"
@@ -116,11 +116,11 @@
 	ai_holder_type = /datum/ai_holder/simple_animal/passive/cow
 	say_list_type = /datum/say_list/cow
 
-/mob/living/simple_animal/friendly/cow/New()
+/mob/living/simple_animal/passive/cow/New()
 	udder = new(50, src)
 	..()
 
-/mob/living/simple_animal/friendly/cow/attackby(var/obj/item/O as obj, var/mob/user as mob)
+/mob/living/simple_animal/passive/cow/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	var/obj/item/reagent_containers/glass/G = O
 	if(stat == CONSCIOUS && istype(G) && G.is_open_container())
 		user.visible_message("<span class='notice'>[user] milks [src] using \the [O].</span>")
@@ -132,14 +132,14 @@
 	else
 		..()
 
-/mob/living/simple_animal/friendly/cow/Life()
+/mob/living/simple_animal/passive/cow/Life()
 	. = ..()
 	if(!.)
 		return FALSE
 	if(udder && prob(5))
 		udder.add_reagent(/datum/reagent/drink/milk, rand(5, 10))
 
-/mob/living/simple_animal/friendly/cow/attack_hand(mob/living/carbon/M as mob)
+/mob/living/simple_animal/passive/cow/attack_hand(mob/living/carbon/M as mob)
 	if(!stat && M.a_intent == I_DISARM && icon_state != icon_dead)
 		M.visible_message("<span class='warning'>[M] tips over [src].</span>","<span class='notice'>You tip over [src].</span>")
 		Weaken(30)
@@ -155,7 +155,7 @@
 	else
 		..()
 
-/mob/living/simple_animal/friendly/chick
+/mob/living/simple_animal/passive/chick
 	name = "\improper chick"
 	desc = "Adorable! They make such a racket though."
 	icon_state = "chick"
@@ -183,24 +183,24 @@
 	ai_holder_type = /datum/ai_holder/simple_animal/passive/chick
 	say_list_type = /datum/say_list/chick
 
-/mob/living/simple_animal/friendly/chick/New()
+/mob/living/simple_animal/passive/chick/New()
 	..()
 	pixel_x = rand(-6, 6)
 	pixel_y = rand(0, 10)
 
-/mob/living/simple_animal/friendly/chick/Life()
+/mob/living/simple_animal/passive/chick/Life()
 	. = ..()
 	if(!.)
 		return FALSE
 	amount_grown += rand(1,2)
 	if(amount_grown >= 100)
-		new /mob/living/simple_animal/friendly/chicken(src.loc)
+		new /mob/living/simple_animal/passive/chicken(src.loc)
 		qdel(src)
 
 var/const/MAX_CHICKENS = 50
 var/global/chicken_count = 0
 
-/mob/living/simple_animal/friendly/chicken
+/mob/living/simple_animal/passive/chicken
 	name = "\improper chicken"
 	desc = "Hopefully the eggs are good this season."
 	icon_state = "chicken"
@@ -226,7 +226,7 @@ var/global/chicken_count = 0
 	ai_holder_type = /datum/ai_holder/simple_animal/passive/chicken
 	say_list_type = /datum/say_list/chicken
 
-/mob/living/simple_animal/friendly/chicken/New()
+/mob/living/simple_animal/passive/chicken/New()
 	..()
 	if(!body_color)
 		body_color = pick( list("brown","black","white") )
@@ -237,11 +237,11 @@ var/global/chicken_count = 0
 	pixel_y = rand(0, 10)
 	chicken_count += 1
 
-/mob/living/simple_animal/friendly/chicken/death(gibbed, deathmessage, show_dead_message)
+/mob/living/simple_animal/passive/chicken/death(gibbed, deathmessage, show_dead_message)
 	..(gibbed, deathmessage, show_dead_message)
 	chicken_count -= 1
 
-/mob/living/simple_animal/friendly/chicken/attackby(var/obj/item/O as obj, var/mob/user as mob)
+/mob/living/simple_animal/passive/chicken/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(istype(O, /obj/item/reagent_containers/food/snacks/grown)) //feedin' dem chickens
 		var/obj/item/reagent_containers/food/snacks/grown/G = O
 		if(G.seed && G.seed.kitchen_tag == "wheat")
@@ -256,7 +256,7 @@ var/global/chicken_count = 0
 	else
 		..()
 
-/mob/living/simple_animal/friendly/chicken/Life()
+/mob/living/simple_animal/passive/chicken/Life()
 	. = ..()
 	if(!.)
 		return FALSE
@@ -283,7 +283,7 @@ var/global/chicken_count = 0
 		amount_grown += rand(1,2)
 		if(amount_grown >= 100)
 			visible_message("[src] hatches with a quiet cracking sound.")
-			new /mob/living/simple_animal/friendly/chick(get_turf(src))
+			new /mob/living/simple_animal/passive/chick(get_turf(src))
 			STOP_PROCESSING(SSobj, src)
 			qdel(src)
 	else

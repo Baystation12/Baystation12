@@ -998,13 +998,13 @@
 	result_amount = 1
 	required = /obj/item/slime_extract/gold
 	var/list/possible_mobs = list(
-							/mob/living/simple_animal/friendly/cat,
-							/mob/living/simple_animal/friendly/cat/kitten,
-							/mob/living/simple_animal/friendly/corgi,
-							/mob/living/simple_animal/friendly/corgi/puppy,
-							/mob/living/simple_animal/friendly/cow,
-							/mob/living/simple_animal/friendly/chick,
-							/mob/living/simple_animal/friendly/chicken
+							/mob/living/simple_animal/passive/cat,
+							/mob/living/simple_animal/passive/cat/kitten,
+							/mob/living/simple_animal/passive/corgi,
+							/mob/living/simple_animal/passive/corgi/puppy,
+							/mob/living/simple_animal/passive/cow,
+							/mob/living/simple_animal/passive/chick,
+							/mob/living/simple_animal/passive/chicken
 							)
 
 /datum/chemical_reaction/slime/crit/on_reaction(var/datum/reagents/holder)

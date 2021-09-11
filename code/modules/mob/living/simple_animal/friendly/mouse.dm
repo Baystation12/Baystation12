@@ -1,4 +1,4 @@
-/mob/living/simple_animal/friendly/mouse
+/mob/living/simple_animal/passive/mouse
 	name = "mouse"
 	real_name = "mouse"
 	desc = "It's a small rodent."
@@ -37,7 +37,7 @@
 	ai_holder_type = /datum/ai_holder/simple_animal/passive/mouse
 	say_list_type = /datum/say_list/mouse
 
-/mob/living/simple_animal/friendly/mouse/Life()
+/mob/living/simple_animal/passive/mouse/Life()
 	. = ..()
 	if(!.)
 		return FALSE
@@ -59,18 +59,18 @@
 		else if(prob(5))
 			audible_emote("snuffles.")
 
-/mob/living/simple_animal/friendly/mouse/lay_down()
+/mob/living/simple_animal/passive/mouse/lay_down()
 	..()
 	icon_state = resting ? "mouse_[body_color]_sleep" : "mouse_[body_color]"
 
-/mob/living/simple_animal/friendly/mouse/New()
+/mob/living/simple_animal/passive/mouse/New()
 	..()
 
 	verbs += /mob/living/proc/ventcrawl
 	verbs += /mob/living/proc/hide
 
 	if(name == initial(name))
-		name = "[name] ([sequential_id(/mob/living/simple_animal/friendly/mouse)])"
+		name = "[name] ([sequential_id(/mob/living/simple_animal/passive/mouse)])"
 	real_name = name
 
 	if(!body_color)
@@ -82,7 +82,7 @@
 	icon_dead = "mouse_[body_color]_dead"
 	desc = "It's a small [body_color] rodent, often seen hiding in maintenance areas and making a nuisance of itself."
 
-/mob/living/simple_animal/friendly/mouse/Initialize()
+/mob/living/simple_animal/passive/mouse/Initialize()
 	. = ..()
 	switch(body_color)
 		if("gray")
@@ -90,12 +90,12 @@
 		if("white")
 			skin_material = MATERIAL_SKIN_FUR_WHITE
 
-/mob/living/simple_animal/friendly/mouse/proc/splat()
+/mob/living/simple_animal/passive/mouse/proc/splat()
 	icon_dead = "mouse_[body_color]_splat"
 	adjustBruteLoss(maxHealth)  // Enough damage to kill
 	src.death()
 
-/mob/living/simple_animal/friendly/mouse/Crossed(AM as mob|obj)
+/mob/living/simple_animal/passive/mouse/Crossed(AM as mob|obj)
 	if( ishuman(AM) )
 		if(!stat)
 			var/mob/M = AM
@@ -107,24 +107,24 @@
  * Mouse types
  */
 
-/mob/living/simple_animal/friendly/mouse/white
+/mob/living/simple_animal/passive/mouse/white
 	body_color = "white"
 	icon_state = "mouse_white"
 
-/mob/living/simple_animal/friendly/mouse/gray
+/mob/living/simple_animal/passive/mouse/gray
 	body_color = "gray"
 	icon_state = "mouse_gray"
 
-/mob/living/simple_animal/friendly/mouse/brown
+/mob/living/simple_animal/passive/mouse/brown
 	body_color = "brown"
 	icon_state = "mouse_brown"
 
 //TOM IS ALIVE! SQUEEEEEEEE~K :)
-/mob/living/simple_animal/friendly/mouse/brown/Tom
+/mob/living/simple_animal/passive/mouse/brown/Tom
 	name = "Tom"
 	desc = "Jerry the cat is not amused."
 
-/mob/living/simple_animal/friendly/mouse/brown/Tom/New()
+/mob/living/simple_animal/passive/mouse/brown/Tom/New()
 	..()
 	// Change my name back, don't want to be named Tom (666)
 	SetName(initial(name))
