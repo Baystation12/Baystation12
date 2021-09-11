@@ -44,6 +44,7 @@
 
 	message_staff("<span class='notice'>[P.author] has edited [key]'s notes.</span>")
 	log_admin("[P.author] has edited [key]'s notes.")
+	SSwebhooks.send(WEBHOOK_NOTES, list("admin" = P.author, "player" = key, "info" = note))
 
 	del(info) // savefile, so NOT qdel
 
