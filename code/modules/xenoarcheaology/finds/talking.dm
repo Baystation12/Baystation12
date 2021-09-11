@@ -108,15 +108,5 @@
 		else
 			msg+="!"
 
-	var/list/listening = viewers(holder_atom)
-	for(var/mob/M in SSmobs.mob_list)
-		if (!M.client)
-			continue //skip monkeys and leavers
-		if (istype(M, /mob/new_player))
-			continue
-		if(M.stat == DEAD && M.get_preference_value(/datum/client_preference/ghost_ears) == GLOB.PREF_ALL_SPEECH)
-			listening|=M
-
-	for(var/mob/M in listening)
-		to_chat(M, "[icon2html(holder_atom, M)] <b>[holder_atom]</b> reverberates, <span class='notice'>\"[msg]\"</span>")
+	holder_atom.audible_message(SPAN_BOLD(holder_atom.name) + " reverberates, \"[msg]\"", SPAN_ITALIC("\The [holder_atom] vibrates and lights up for a moment, but you hear no sound..."))
 	last_talk_time = world.time
