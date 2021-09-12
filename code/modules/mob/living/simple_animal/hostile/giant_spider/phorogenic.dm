@@ -29,9 +29,9 @@
 	var/explosion_flash_range	= 6
 
 	/// Lower bound for explosion delay.
-	var/explosion_delay_lower	= 1 SECOND
+	var/explosion_delay_lower	= 3 SECONDS
 	/// Upper bound for explosion delay.
-	var/explosion_delay_upper	= 2 SECONDS
+	var/explosion_delay_upper	= 5 SECONDS
 
 /mob/living/simple_animal/hostile/giant_spider/phorogenic/Initialize()
 	scale(1.25)
