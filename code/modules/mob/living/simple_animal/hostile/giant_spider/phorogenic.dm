@@ -61,6 +61,7 @@
 		visible_message(SPAN_DANGER("\The [src]'s body detonates!"))
 		exploded = TRUE
 		explosion(loc, explosion_dev_range, explosion_heavy_range, explosion_light_range, explosion_flash_range)
+		qdel(src)
 
 /obj/item/natural_weapon/bite/spider/phorogenic
 	force = 30
