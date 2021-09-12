@@ -1,6 +1,6 @@
 /obj/item/organ/internal/augment/active/nanounit
 	name = "Nanite MCU"
-	allowed_organs = list(BP_AUGMENT_CHEST_ACTIVE)
+	augment_slots = AUGMENT_CHEST
 	icon_state = "armor-chest"
 	desc = "Nanomachines, son."
 	action_button_name = "Toggle Nanomachines"

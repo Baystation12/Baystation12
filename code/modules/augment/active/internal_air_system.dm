@@ -1,6 +1,6 @@
 /obj/item/organ/internal/augment/active/internal_air_system
 	name = "internal air system"
-	allowed_organs = list(BP_AUGMENT_CHEST_ACTIVE)
+	augment_slots = AUGMENT_CHEST
 	icon_state = "internal_air_system"
 	desc = "A flexible air sac, made from a complex, bio-compatible polymer, is installed into the respiratory system. It gradually replenishes itself with breathable gas from the surrounding environment as you breathe, and you can later use it as a source of internals."
 	augment_flags = AUGMENT_BIOLOGICAL | AUGMENT_SCANNABLE

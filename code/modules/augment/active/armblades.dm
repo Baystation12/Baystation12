@@ -19,7 +19,7 @@
 	desc = "A sturdy housing for a steel utility blade."
 	action_button_name = "Deploy blade"
 	icon_state = "armblade"
-	allowed_organs = list(BP_AUGMENT_R_ARM, BP_AUGMENT_L_ARM)
+	augment_slots = AUGMENT_ARM
 	holding_type = /obj/item/material/armblade
 	augment_flags = AUGMENT_MECHANICAL
 
@@ -37,7 +37,7 @@
 	desc = "An unusual type of cybernetic weaponry, these sharp blades are bound to turn heads."
 	action_button_name = "Deploy claws"
 	icon_state = "wolverine"
-	allowed_organs = list(BP_AUGMENT_R_HAND, BP_AUGMENT_L_HAND)
+	augment_slots = AUGMENT_HAND
 	holding_type = /obj/item/material/armblade/claws
 	augment_flags = AUGMENT_MECHANICAL
 
@@ -48,7 +48,7 @@
 	desc = "A concealed sheath made from bio-compatible cloth, shaped for a thin blade."
 	action_button_name = "Deploy blade"
 	icon_state = "armblade"
-	allowed_organs = list(BP_AUGMENT_R_ARM, BP_AUGMENT_L_ARM)
+	augment_slots = AUGMENT_ARM
 	holding_type = /obj/item/material/armblade/wrist
 	origin_tech = list(TECH_COMBAT = 3, TECH_ESOTERIC = 4)
 	deploy_sound = 'sound/effects/holster/sheathout.ogg'

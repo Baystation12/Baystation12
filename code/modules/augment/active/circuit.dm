@@ -2,7 +2,7 @@
 	name = "integrated circuit frame"
 	action_button_name = "Activate Circuit"
 	icon_state = "circuit"
-	allowed_organs = list(BP_AUGMENT_R_ARM, BP_AUGMENT_L_ARM)
+	augment_slots = AUGMENT_ARM
 	augment_flags = AUGMENT_MECHANICAL
 	desc = "A DIY modular assembly, courtesy of Xion Industrial. Circuitry not included."
 

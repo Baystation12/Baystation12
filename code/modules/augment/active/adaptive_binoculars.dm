@@ -1,6 +1,6 @@
 /obj/item/organ/internal/augment/active/simple/equip/adaptive_binoculars
 	name = "adaptive binoculars"
-	allowed_organs = list(BP_AUGMENT_HEAD)
+	augment_slots = AUGMENT_HEAD
 	icon_state = "adaptive_binoculars"
 	desc = "Digital glass 'screens' can be deployed over the eyes. At the user's control, their image can be greatly enhanced, providing a view of distant areas."
 	action_button_name = "Deploy lenses"

@@ -1,6 +1,6 @@
 /obj/item/organ/internal/augment/boost
 	icon_state = "booster"
-	allowed_organs = list(BP_AUGMENT_HEAD)
+	augment_slots = AUGMENT_HEAD
 	var/list/buffs = list() /// Which abilities does this impact?
 	var/list/injury_debuffs = list() /// If organ is damaged, should we reduce anything?
 	var/buffpath = /datum/skill_buff/augment /// Only subtypes of /datum/skill_buff/augment

@@ -3,7 +3,7 @@
 	desc = "A galvanized steel mechanism that replaces most of the flesh below the elbow. Using the arm's natural range of motion as a hinge, it can be flicked open to reveal a 12-gauge shotgun with room for a single shell."
 	action_button_name = "Deploy shotgun"
 	icon_state = "circuit"
-	allowed_organs = list(BP_AUGMENT_R_ARM, BP_AUGMENT_L_ARM)
+	augment_slots = AUGMENT_ARM
 	holding_type = /obj/item/gun/projectile/shotgun/popout
 	origin_tech = list(TECH_MATERIAL = 3, TECH_COMBAT = 3, TECH_ESOTERIC = 4)
 	deploy_sound = 'sound/weapons/guns/interaction/rifle_boltback.ogg'

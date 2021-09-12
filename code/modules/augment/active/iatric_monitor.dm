@@ -1,6 +1,6 @@
 /obj/item/organ/internal/augment/active/iatric_monitor
 	name = "iatric monitor"
-	allowed_organs = list(BP_AUGMENT_HEAD)
+	augment_slots = AUGMENT_HEAD
 	icon_state = "iatric_monitor"
 	desc = "A small computer system constantly tracks your physiological state and vital signs. A muscle gesture can be used to receive a simple diagnostic report, not unlike that from a handheld scanner."
 	augment_flags = AUGMENT_BIOLOGICAL | AUGMENT_SCANNABLE

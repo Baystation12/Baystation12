@@ -2,7 +2,7 @@
 	buffs = list(SKILL_HAULING = 1)
 	buffpath = /datum/skill_buff/augment/muscle
 	name = "mechanical muscles"
-	allowed_organs = list(BP_AUGMENT_R_LEG, BP_AUGMENT_L_LEG)
+	augment_slots = AUGMENT_LEG
 	icon_state = "muscule"
 	desc = "Nanofiber tendons powered by an array of actuators increase the speed and agility of the user. You may want to install these in pairs to see a result."
 	augment_flags = AUGMENT_MECHANICAL | AUGMENT_BIOLOGICAL | AUGMENT_SCANNABLE | AUGMENT_INSPECTABLE
@@ -15,10 +15,10 @@
 
 
 /obj/item/organ/internal/augment/boost/muscle/onInstall()
-	if (organ_tag == BP_AUGMENT_L_LEG)
-		other = owner.internal_organs_by_name[BP_AUGMENT_R_LEG]
-	else if (organ_tag == BP_AUGMENT_R_LEG)
-		other = owner.internal_organs_by_name[BP_AUGMENT_L_LEG]
+	if (parent_organ == BP_L_LEG)
+		other = owner.internal_organs_by_name["[BP_R_LEG]_aug"]
+	else if (parent_organ == BP_R_LEG)
+		other = owner.internal_organs_by_name["[BP_L_LEG]_aug"]
 	if (other && istype(other)) //we must be second to activate buff
 		var/succesful = TRUE
 		if (owner.get_skill_value(SKILL_HAULING) < SKILL_PROF)

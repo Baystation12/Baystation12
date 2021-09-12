@@ -1,6 +1,6 @@
 /obj/item/organ/internal/augment/active/simple/equip/glare_dampeners
 	name = "glare dampeners"
-	allowed_organs = list(BP_AUGMENT_HEAD)
+	augment_slots = AUGMENT_HEAD
 	icon_state = "glare_dampeners"
 	desc = "Thick, tinted lenses installed in your head can deploy over your eyes, reducing visibility but providing protection from welding glare and bright lights."
 	action_button_name = "Deploy dampeners"

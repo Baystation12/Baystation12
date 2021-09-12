@@ -1,6 +1,6 @@
 /obj/item/organ/internal/augment/active/nerve_dampeners
 	name = "nerve dampeners"
-	allowed_organs = list(BP_AUGMENT_CHEST_ACTIVE)
+	augment_slots = AUGMENT_CHEST
 	icon_state = "muscule"
 	desc = "Each activation of this augment provides a strong painkilling effect for around thirty seconds, but will be followed by a powerful comedown. Excessive short-term use may cause brain damage."
 	augment_flags = AUGMENT_BIOLOGICAL

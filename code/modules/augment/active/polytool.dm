@@ -2,7 +2,7 @@
 	name = "Polytool embedded module"
 	action_button_name = "Deploy Tool"
 	icon_state = "multitool"
-	allowed_organs = list(BP_AUGMENT_R_HAND, BP_AUGMENT_L_HAND)
+	augment_slots = AUGMENT_HAND
 	var/list/items = list()
 	var/list/paths = list() //We may lose them
 	augment_flags = AUGMENT_MECHANICAL
