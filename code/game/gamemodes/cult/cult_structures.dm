@@ -147,7 +147,7 @@
 				if(istype(W, /obj/item/implant))
 					qdel(W)
 
-		var/mob/living/new_mob = new /mob/living/simple_animal/friendly/corgi(A.loc)
+		var/mob/living/new_mob = new /mob/living/simple_animal/passive/corgi(A.loc)
 		new_mob.a_intent = I_HURT
 		if(M.mind)
 			M.mind.transfer_to(new_mob)
@@ -155,4 +155,3 @@
 			new_mob.key = M.key
 
 		to_chat(new_mob, "<B>Your form morphs into that of a corgi.</B>")//Because we don't have cluwnes
-

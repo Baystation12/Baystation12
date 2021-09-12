@@ -35,7 +35,7 @@
 
 	var/chosen_color
 	var/species_colors = list(COLOR_COMMAND_BLUE, COLOR_PURPLE, COLOR_DARK_BLUE_GRAY, COLOR_PALE_PINK)
-	var/mob/living/simple_animal/friendly/juvenile_space_whale/baby
+	var/mob/living/simple_animal/passive/juvenile_space_whale/baby
 
 	ai_holder_type = /datum/ai_holder/simple_animal/retaliate
 	say_list_type = /datum/say_list/space_whale
@@ -70,7 +70,7 @@
 
 // /mob/living/simple_animal/hostile/retaliate/space_whale/ValidTarget(var/mob/M)
 // 	. = ..()
-// 	if(istype(M, /mob/living/simple_animal/friendly/juvenile_space_whale))
+// 	if(istype(M, /mob/living/simple_animal/passive/juvenile_space_whale))
 // 		return FALSE
 
 /mob/living/simple_animal/hostile/retaliate/space_whale/Allow_Spacemove()

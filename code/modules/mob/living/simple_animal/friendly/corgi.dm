@@ -1,5 +1,5 @@
 //Corgi
-/mob/living/simple_animal/friendly/corgi
+/mob/living/simple_animal/passive/corgi
 	name = "\improper corgi"
 	real_name = "corgi"
 	desc = "It's a corgi."
@@ -29,7 +29,7 @@
 	say_list_type = /datum/say_list/corgi
 
 //IAN! SQUEEEEEEEEE~
-/mob/living/simple_animal/friendly/corgi/Ian
+/mob/living/simple_animal/passive/corgi/Ian
 	name = "Ian"
 	real_name = "Ian"	//Intended to hold the name without altering it.
 	gender = MALE
@@ -40,7 +40,7 @@
 	response_disarm = "bops"
 	response_harm   = "kicks"
 
-/mob/living/simple_animal/friendly/corgi/Ian/Life()
+/mob/living/simple_animal/passive/corgi/Ian/Life()
 	. = ..()
 	if(!.)
 		return FALSE
@@ -96,7 +96,7 @@
 	name = "Corgi meat"
 	desc = "Tastes like... well you know..."
 
-/mob/living/simple_animal/friendly/corgi/attackby(var/obj/item/O as obj, var/mob/user as mob)  //Marker -Agouri
+/mob/living/simple_animal/passive/corgi/attackby(var/obj/item/O as obj, var/mob/user as mob)  //Marker -Agouri
 	if(istype(O, /obj/item/newspaper))
 		if(!stat)
 			for(var/mob/M in viewers(user, null))
@@ -109,7 +109,7 @@
 	else
 		..()
 
-/mob/living/simple_animal/friendly/corgi/regenerate_icons()
+/mob/living/simple_animal/passive/corgi/regenerate_icons()
 	overlays = list()
 
 	if(inventory_head)
@@ -130,7 +130,7 @@
 		if(back_icon)
 			overlays += back_icon
 
-/mob/living/simple_animal/friendly/corgi/puppy
+/mob/living/simple_animal/passive/corgi/puppy
 	name = "\improper corgi puppy"
 	real_name = "corgi"
 	desc = "It's a corgi puppy."
@@ -142,14 +142,14 @@
 	bone_amount = 3
 
 //pupplies cannot wear anything.
-/mob/living/simple_animal/friendly/corgi/puppy/OnTopic(mob/user, href_list)
+/mob/living/simple_animal/passive/corgi/puppy/OnTopic(mob/user, href_list)
 	if(href_list["remove_inv"] || href_list["add_inv"])
 		to_chat(user, "<span class='warning'>You can't fit this on [src]</span>")
 		return TOPIC_HANDLED
 	return ..()
 
 //LISA! SQUEEEEEEEEE~
-/mob/living/simple_animal/friendly/corgi/Lisa
+/mob/living/simple_animal/passive/corgi/Lisa
 	name = "Lisa"
 	real_name = "Lisa"
 	gender = FEMALE
@@ -164,13 +164,13 @@
 	var/puppies = 0
 
 //Lisa already has a cute bow!
-/mob/living/simple_animal/friendly/corgi/Lisa/OnTopic(mob/user, href_list)
+/mob/living/simple_animal/passive/corgi/Lisa/OnTopic(mob/user, href_list)
 	if(href_list["remove_inv"] || href_list["add_inv"])
 		to_chat(user, "<span class='warning'>[src] already has a cute bow!</span>")
 		return TOPIC_HANDLED
 	return ..()
 
-/mob/living/simple_animal/friendly/corgi/Lisa/Life()
+/mob/living/simple_animal/passive/corgi/Lisa/Life()
 	. = ..()
 	if(!.)
 		return FALSE
@@ -182,7 +182,7 @@
 			var/alone = 1
 			var/ian = 0
 			for(var/mob/M in oviewers(7, src))
-				if(istype(M, /mob/living/simple_animal/friendly/corgi/Ian))
+				if(istype(M, /mob/living/simple_animal/passive/corgi/Ian))
 					if(M.client)
 						alone = 0
 						break
@@ -194,7 +194,7 @@
 			if(alone && ian && puppies < 4)
 				if(near_camera(src) || near_camera(ian))
 					return
-				new /mob/living/simple_animal/friendly/corgi/puppy(loc)
+				new /mob/living/simple_animal/passive/corgi/puppy(loc)
 
 
 		if(prob(1))

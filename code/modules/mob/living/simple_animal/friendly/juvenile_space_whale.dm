@@ -1,4 +1,4 @@
-/mob/living/simple_animal/friendly/juvenile_space_whale
+/mob/living/simple_animal/passive/juvenile_space_whale
 	name = "juvenile space whale"
 	desc = "A majestic spaceborne cetacean. This one is a little baby."
 	icon = 'icons/mob/simple_animal/juvenile_space_whale.dmi'
@@ -35,7 +35,7 @@
 	ai_holder_type = /datum/ai_holder/simple_animal/passive
 	say_list_type = /datum/say_list/juvenile_space_whale
 
-/mob/living/simple_animal/friendly/juvenile_space_whale/New()
+/mob/living/simple_animal/passive/juvenile_space_whale/New()
 	..()
 	var/mob/living/simple_animal/hostile/retaliate/space_whale/W = locate() in viewers(src, 7)
 	if(W && !parent && !W.baby)
@@ -43,7 +43,7 @@
 		parent = W
 		color = parent.color
 
-/mob/living/simple_animal/friendly/juvenile_space_whale/Life()
+/mob/living/simple_animal/passive/juvenile_space_whale/Life()
 	. = ..()
 	if(!.)
 		return FALSE
@@ -58,7 +58,7 @@
 		else if(get_dist(src.loc, parent.loc) > 5)
 			walk_to(src, parent, 4, 3 SECONDS)
 
-/mob/living/simple_animal/friendly/juvenile_space_whale/set_dir()
+/mob/living/simple_animal/passive/juvenile_space_whale/set_dir()
 	..()
 	switch(dir)
 		if(NORTH, SOUTH)
@@ -68,7 +68,7 @@
 			bound_height = 32
 			bound_width = 64
 
-/mob/living/simple_animal/friendly/juvenile_space_whale/Allow_Spacemove()
+/mob/living/simple_animal/passive/juvenile_space_whale/Allow_Spacemove()
 	return TRUE
 
 /datum/say_list/juvenile_space_whale

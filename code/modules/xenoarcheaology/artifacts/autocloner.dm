@@ -26,15 +26,15 @@
 		/mob/living/simple_animal/hostile/creature)
 	else
 		spawn_type = pick(\
-		/mob/living/simple_animal/friendly/cat,
-		/mob/living/simple_animal/friendly/corgi,
-		/mob/living/simple_animal/friendly/corgi/puppy,
-		/mob/living/simple_animal/friendly/chicken,
-		/mob/living/simple_animal/friendly/cow,
+		/mob/living/simple_animal/passive/cat,
+		/mob/living/simple_animal/passive/corgi,
+		/mob/living/simple_animal/passive/corgi/puppy,
+		/mob/living/simple_animal/passive/chicken,
+		/mob/living/simple_animal/passive/cow,
 		/mob/living/simple_animal/hostile/retaliate/parrot,
 		/mob/living/simple_animal/slime,
 		/mob/living/simple_animal/crab,
-		/mob/living/simple_animal/friendly/mouse,
+		/mob/living/simple_animal/passive/mouse,
 		/mob/living/simple_animal/hostile/retaliate/goat,
 		/mob/living/simple_animal/hostile/retaliate/goose)
 

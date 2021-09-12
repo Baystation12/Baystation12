@@ -44,7 +44,7 @@ var/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 
 #define isclient(A) istype(A, /client)
 
-#define iscorgi(A) istype(A, /mob/living/simple_animal/friendly/corgi)
+#define iscorgi(A) istype(A, /mob/living/simple_animal/passive/corgi)
 
 #define is_drone(A) istype(A, /mob/living/silicon/robot/drone)
 
@@ -58,7 +58,7 @@ var/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 
 #define isliving(A) istype(A, /mob/living)
 
-#define ismouse(A) istype(A, /mob/living/simple_animal/friendly/mouse)
+#define ismouse(A) istype(A, /mob/living/simple_animal/passive/mouse)
 
 #define isnewplayer(A) istype(A, /mob/new_player)
 

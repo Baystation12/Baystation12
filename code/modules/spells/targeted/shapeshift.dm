@@ -99,7 +99,7 @@
 	name = "Baleful Polymorth"
 	desc = "This spell transforms its target into a small, furry animal."
 	feedback = "BP"
-	possible_transformations = list(/mob/living/simple_animal/friendly/lizard,/mob/living/simple_animal/friendly/mouse,/mob/living/simple_animal/friendly/corgi)
+	possible_transformations = list(/mob/living/simple_animal/passive/lizard,/mob/living/simple_animal/passive/mouse,/mob/living/simple_animal/passive/corgi)
 
 	share_damage = 0
 	invocation = "Yo'balada!"
