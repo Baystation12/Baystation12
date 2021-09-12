@@ -4,10 +4,14 @@
 	buffs = list(SKILL_WEAPONS = 1)
 	injury_debuffs = list(SKILL_WEAPONS = -1)
 
+
 /obj/item/organ/internal/augment/boost/reflex/buff()
-	if((. = ..()))
+	. = ..()
+	if (.)
 		to_chat(owner, SPAN_NOTICE("Notice: AIM-4 finished reboot."))
 
+
 /obj/item/organ/internal/augment/boost/reflex/debuff()
-	if((. = ..()))
+	. = ..()
+	if (.)
 		to_chat(owner, SPAN_WARNING("Catastrophic damage detected: AIM-4 shutting down."))

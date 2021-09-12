@@ -3,7 +3,7 @@
 	item_state = null
 	name = "armblade"
 	icon = 'icons/obj/augment.dmi'
-	applies_material_colour = 0
+	applies_material_colour = FALSE
 	desc = "A handy utility blade for the discerning augmentee. Warranty void if used for cutting."
 	base_parry_chance = 30
 	unbreakable = TRUE
@@ -12,7 +12,7 @@
 	sharp = TRUE
 	edge = TRUE
 	attack_verb = list("stabbed", "sliced", "cut")
-	applies_material_colour = 0
+
 
 /obj/item/organ/internal/augment/active/simple/armblade
 	name = "embedded blade"
@@ -21,8 +21,8 @@
 	icon_state = "armblade"
 	allowed_organs = list(BP_AUGMENT_R_ARM, BP_AUGMENT_L_ARM)
 	holding_type = /obj/item/material/armblade
-	//Limited to robolimbs
-	augment_flags = AUGMENTATION_MECHANIC
+	augment_flags = AUGMENT_MECHANICAL
+
 
 /obj/item/material/armblade/claws
 	icon_state = "wolverine"
@@ -31,7 +31,7 @@
 	base_parry_chance = 40
 	force_multiplier = 0.3
 
-//Alternate look
+
 /obj/item/organ/internal/augment/active/simple/wolverine
 	name = "cyberclaws"
 	desc = "An unusual type of cybernetic weaponry, these sharp blades are bound to turn heads."
@@ -39,8 +39,8 @@
 	icon_state = "wolverine"
 	allowed_organs = list(BP_AUGMENT_R_HAND, BP_AUGMENT_L_HAND)
 	holding_type = /obj/item/material/armblade/claws
-	//Limited to robolimbs
-	augment_flags = AUGMENTATION_MECHANIC
+	augment_flags = AUGMENT_MECHANICAL
+
 
 /// Traitor version - no parry chance but good damage, and compatible with organic limbs
 /obj/item/organ/internal/augment/active/simple/wrist_blade
@@ -50,10 +50,11 @@
 	icon_state = "armblade"
 	allowed_organs = list(BP_AUGMENT_R_ARM, BP_AUGMENT_L_ARM)
 	holding_type = /obj/item/material/armblade/wrist
-	known = FALSE // Specially designed for concealment
 	origin_tech = list(TECH_COMBAT = 3, TECH_ESOTERIC = 4)
 	deploy_sound = 'sound/effects/holster/sheathout.ogg'
 	retract_sound = 'sound/effects/holster/sheathin.ogg'
+	augment_flags = AUGMENT_MECHANICAL | AUGMENT_BIOLOGICAL
+
 
 /obj/item/material/armblade/wrist
 	name = "wrist blade"
@@ -63,8 +64,9 @@
 	base_parry_chance = 0
 	force_multiplier = 0.2
 	attack_cooldown_modifier = -1
-	default_material = MATERIAL_PLASTEEL // Steel is so unsophisticated
-	w_class = ITEM_SIZE_SMALL // Can't dismember limbs - only hands/feet
+	default_material = MATERIAL_PLASTEEL
+	w_class = ITEM_SIZE_SMALL /// SMALL prevents dismembering limbs - only hands & feet
+
 
 /obj/item/material/armblade/wrist/add_blood(mob/living/carbon/human/M)
 	return FALSE

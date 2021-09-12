@@ -336,7 +336,7 @@
 
 	if(istype(organ_to_replace, /obj/item/organ/internal/augment))
 		var/obj/item/organ/internal/augment/A = organ_to_replace
-		if(!(A.augment_flags & AUGMENTATION_ORGANIC))
+		if(!(A.augment_flags & AUGMENT_BIOLOGICAL))
 			to_chat(user, SPAN_WARNING("\The [A] cannot function within a non-robotic limb."))
 			return FALSE
 

@@ -4,7 +4,7 @@
 	icon_state = "booster"
 	desc = "These stimulators augment the immune system and promote the growth of hunter-killer cells in the presence of a foreign invader, effectively boosting the body's immunity to parasites and disease."
 	action_button_name = "Toggle leukocyte breeder"
-	augment_flags = AUGMENTATION_ORGANIC
+	augment_flags = AUGMENT_BIOLOGICAL
 	origin_tech = list(TECH_DATA = 2, TECH_BIO = 4)
 
 	var/active = FALSE
@@ -13,6 +13,7 @@
 	/// After this many ticks, the owner has "broken in" the augment, and will benefit more but suffer drawbacks if it's disabled
 	var/ticks_to_acclimate = 120
 
+
 /obj/item/organ/internal/augment/active/leukocyte_breeder/emp_act(severity)
 	. = ..()
 	if (owner && active)
@@ -20,14 +21,17 @@
 			to_chat(owner, SPAN_WARNING("You feel a wave of nausea as your [name] deactivates."))
 			active = FALSE
 
+
 /obj/item/organ/internal/augment/active/leukocyte_breeder/onRoundstart()
 	active = TRUE // We can safely assume that someone starting off with the breeder will have it active
 	ticks_active = ticks_to_acclimate
 	to_chat(owner, SPAN_INFO("Your [name] has started the shift active, granting you its full benefits without needing to break it in."))
 
+
 /obj/item/organ/internal/augment/active/leukocyte_breeder/onInstall()
 	if (prob(10))
 		ticks_active = ticks_to_acclimate // Some folks are just lucky and don't get any side effects
+
 
 /obj/item/organ/internal/augment/active/leukocyte_breeder/activate()
 	if (!can_activate())
@@ -46,19 +50,16 @@
 			owner.immunity -= 10
 		ticks_active = 0
 
+
 /obj/item/organ/internal/augment/active/leukocyte_breeder/Process()
 	if (!owner)
 		return
 	if (active)
 		ticks_active++
-		if (owner.immunity < owner.immunity_norm * 1.1) // Slightly boosts above baseline
-			owner.immunity += 0.05 // Not as effective as immune boosters, but constant
+		if (owner.immunity < owner.immunity_norm * 1.1)
+			owner.immunity += 0.05
 			ticks_active++
-
 		if (ticks_active < ticks_to_acclimate)
-			// The body needs time to break in the augment, and may have minor side effects until it does
-			// This is primarily for roleplay purposes, and not any actual gameplay impact - its benefits kick in immediately
-			// The immune system just plays a huge role in the body, even if it doesn't in-game, and reflecting that could help with immersion!
 			if (ticks_active < ticks_to_acclimate)
 				if (prob(5))
 					owner.emote(pick("cough", "sneeze"))

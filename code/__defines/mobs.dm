@@ -248,8 +248,11 @@
 #define BP_AUGMENT_HEAD           "head augment"
 
 //Augment flags
-#define AUGMENTATION_MECHANIC 1
-#define AUGMENTATION_ORGANIC  2
+#define AUGMENT_MECHANICAL 0x1 ///The augment can be installed in mechanical organs
+#define AUGMENT_BIOLOGICAL 0x2 ///The augment can be installed in biological organs
+#define AUGMENT_CRYSTALINE 0x4 ///The augment can be installed in crystaline organs
+#define AUGMENT_SCANNABLE 0x10 ///The augment is visible on body scanner results
+#define AUGMENT_INSPECTABLE 0x20 ///The augment is visible via grab inspection
 
 // Limbs.
 #define BP_L_FOOT "l_foot"

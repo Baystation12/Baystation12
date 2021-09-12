@@ -8,8 +8,10 @@
 	equip_slot = slot_glasses
 	holding_type = /obj/item/clothing/glasses/augment_binoculars
 
+
 /obj/item/organ/internal/augment/active/simple/equip/adaptive_binoculars/hidden
-	known = FALSE
+	augment_flags = AUGMENT_MECHANICAL | AUGMENT_BIOLOGICAL
+
 
 /obj/item/organ/internal/augment/active/simple/equip/adaptive_binoculars/emp_act(severity)
 	. = ..()

@@ -8,7 +8,8 @@
 	origin_tech = list(TECH_MATERIAL = 3, TECH_COMBAT = 3, TECH_ESOTERIC = 4)
 	deploy_sound = 'sound/weapons/guns/interaction/rifle_boltback.ogg'
 	retract_sound = 'sound/weapons/guns/interaction/rifle_boltforward.ogg'
-	discoverable = TRUE
+	augment_flags = AUGMENT_MECHANICAL | AUGMENT_BIOLOGICAL | AUGMENT_SCANNABLE | AUGMENT_INSPECTABLE
+
 
 /obj/item/gun/projectile/shotgun/popout
 	name = "pop-out shotgun"
@@ -28,6 +29,6 @@
 	has_safety = FALSE // No brakes on this train baby
 	unacidable = TRUE
 
+
 /obj/item/gun/projectile/shotgun/popout/check_accidents(mob/living/user, message, skill_path, fail_chance, no_more_fail, factor)
-	// The pop-out shotgun is a very unique type of gun and doesn't function like a normal one. We do this to prevent people blowing themselves away if they're not weapons-trained
-	return FALSE
+	return FALSE // Ignore the effects of weapons training for this, since it's special

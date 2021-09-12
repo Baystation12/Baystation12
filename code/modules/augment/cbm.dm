@@ -24,19 +24,17 @@
 /obj/item/device/compact_bionic_module/examine(mob/user)
 	. = ..()
 	if (isobserver(user) || (user.mind && user.mind.special_role != null) || user.skill_check(SKILL_DEVICES, SKILL_PROF))
-		to_chat(user, "This is a compact bionic module - an illicit, one-use augment installer. It can be used even by individuals with no medical knowledge.")
-		to_chat(user, SPAN_DANGER("This device does NOT come with its own painkillers or anesthetic. Installing without painkillers is theoretically possible, but dangerous and very traumatic."))
-	// Label is keyed based on "is it safe from detection?"
-	// Two Y's means it's fully hidden
-	// One N means that either it can be scanned or that it can be discovered via limb inspection
-	// Two N's means that it can be scanned as well as discovered through limb inspection
-	if (!isnull(loaded_augment))
-		to_chat(user, "A machine-printed label on the side reads \
-		'[SPAN_NOTICE(uppertext(loaded_augment.name))] - [loaded_augment.known ? "N" : "Y"][loaded_augment.discoverable ? "N" : "Y"]'.")
-	else
+		to_chat(user, "A single-use augment installer with no medical knowledge necessary! " + SPAN_DANGER("Painkillers not included!"))
+	if (isnull(loaded_augment))
 		to_chat(user, "It seems to be empty.")
-	if (isadmin(user) && !user.is_stealthed())
-		to_chat(user, SPAN_NOTICE("<b>ADMIN NOTICE:</b> If you'd like to make installation instant, varedit the <b>cbm_debug</b> variable to anything but 0."))
+		return
+	var/message = "A readout on the side displays: [uppertext(loaded_augment.name)]."
+	if (loaded_augment.augment_flags & AUGMENT_SCANNABLE)
+		message += SPAN_DANGER(" Can be discovered by scanners.")
+	if (loaded_augment.augment_flags & AUGMENT_INSPECTABLE)
+		message += SPAN_DANGER(" Can be discovered by manual inspection.")
+	to_chat(user, message)
+
 
 /obj/item/device/compact_bionic_module/attackby(obj/item/W, mob/living/user)
 	if (isScrewdriver(W) && loaded_augment)
@@ -80,10 +78,10 @@
 		if (!affected)
 			to_chat (user, SPAN_WARNING("\The [src] detects no valid operation spot."))
 			return
-		else if(beep_boop && !(loaded_augment.augment_flags != AUGMENTATION_MECHANIC))
+		else if(beep_boop && !(loaded_augment.augment_flags != AUGMENT_MECHANICAL))
 			to_chat(user, SPAN_WARNING("The [loaded_augment.name] cannot function within a mechanical part."))
 			return
-		else if (!beep_boop && !(loaded_augment.augment_flags & AUGMENTATION_ORGANIC))
+		else if (!beep_boop && !(loaded_augment.augment_flags & AUGMENT_BIOLOGICAL))
 			to_chat(user, SPAN_WARNING("The [loaded_augment.name] cannot function within an organic part."))
 			return
 		else if (affected.get_damage() >= affected.max_damage * 0.25 && !cbm_debug)
