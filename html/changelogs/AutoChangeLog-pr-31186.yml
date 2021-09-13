@@ -1,0 +1,4 @@
+author: Domic
+delete-after: true
+changes:
+  - bugfix: Wall frames now spawn with the right material.
