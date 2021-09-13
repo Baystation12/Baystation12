@@ -1,0 +1,8 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Cameras no longer permanently block blob expansion.
+  - tweak: Blobs will no longer spread onto tiles that have a dense object, which
+      blocked them from being shot by projectiles.
+  - tweak: Blobs will now damage any items or objects on a turf that use standardized
+      health.
