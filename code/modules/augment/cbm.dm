@@ -163,10 +163,10 @@
 	augment_type = /obj/item/organ/internal/augment/active/iatric_monitor/hidden
 
 /obj/item/device/compact_bionic_module/wrist_blade
-	augment_type = /obj/item/organ/internal/augment/active/simple/wrist_blade
+	augment_type = /obj/item/organ/internal/augment/active/item/wrist_blade
 
 /obj/item/device/compact_bionic_module/popout_shotgun
-	augment_type = /obj/item/organ/internal/augment/active/simple/popout_shotgun
+	augment_type = /obj/item/organ/internal/augment/active/item/popout_shotgun
 
 /obj/item/device/compact_bionic_module/nerve_dampeners
 	augment_type = /obj/item/organ/internal/augment/active/nerve_dampeners
@@ -175,7 +175,7 @@
 	augment_type = /obj/item/organ/internal/augment/active/internal_air_system/hidden
 
 /obj/item/device/compact_bionic_module/adaptive_binoculars
-	augment_type = /obj/item/organ/internal/augment/active/simple/equip/adaptive_binoculars/hidden
+	augment_type = /obj/item/organ/internal/augment/active/item/adaptive_binoculars/hidden
 
 /obj/item/device/compact_bionic_module/engineering_toolset
 	augment_type = /obj/item/organ/internal/augment/active/polytool/engineer

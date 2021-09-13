@@ -1,4 +1,4 @@
-/obj/item/organ/internal/augment/active/simple/equip/corrective_lenses
+/obj/item/organ/internal/augment/active/item/corrective_lenses
 	name = "corrective lenses"
 	augment_slots = AUGMENT_HEAD
 	icon_state = "corrective_lenses"
@@ -6,11 +6,10 @@
 	action_button_name = "Deploy lenses"
 	augment_flags = AUGMENT_BIOLOGICAL
 	origin_tech = list(TECH_DATA = 2, TECH_BIO = 2)
-	equip_slot = slot_glasses
-	holding_type = /obj/item/clothing/glasses/augment
+	item = /obj/item/clothing/glasses/augment
 
 
-/obj/item/organ/internal/augment/active/simple/equip/corrective_lenses/onRoundstart()
+/obj/item/organ/internal/augment/active/item/corrective_lenses/onRoundstart()
 	deploy()
 
 

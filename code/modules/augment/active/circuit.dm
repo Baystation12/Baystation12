@@ -1,4 +1,4 @@
-/obj/item/organ/internal/augment/active/simple/circuit
+/obj/item/organ/internal/augment/active/item/circuit
 	name = "integrated circuit frame"
 	action_button_name = "Activate Circuit"
 	icon_state = "circuit"
@@ -7,23 +7,23 @@
 	desc = "A DIY modular assembly, courtesy of Xion Industrial. Circuitry not included."
 
 
-/obj/item/organ/internal/augment/active/simple/circuit/attackby(obj/item/I, mob/user)
+/obj/item/organ/internal/augment/active/item/circuit/attackby(obj/item/I, mob/user)
 	if (isCrowbar(I))
-		if (holding)
-			holding.canremove = TRUE
-			holding.dropInto(loc)
-			to_chat(user, SPAN_NOTICE("You take out \the [holding]."))
-			holding = null
+		if (item)
+			item.canremove = TRUE
+			item.dropInto(loc)
+			to_chat(user, SPAN_NOTICE("You take out \the [item]."))
+			item = null
 			playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
 		else
 			to_chat(user, SPAN_WARNING("The augment is empty!"))
 		return
 	if (istype(I, /obj/item/device/electronic_assembly/augment))
-		if (holding)
+		if (item)
 			to_chat(user, SPAN_WARNING("There's already an assembly in there."))
 		else if (user.unEquip(I, src))
-			holding = I
-			holding.canremove = FALSE
+			item = I
+			item.canremove = FALSE
 			playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
 		return
 	..()

@@ -1,10 +1,10 @@
-/obj/item/organ/internal/augment/active/simple/popout_shotgun
+/obj/item/organ/internal/augment/active/item/popout_shotgun
 	name = "pop-out shotgun"
 	desc = "A galvanized steel mechanism that replaces most of the flesh below the elbow. Using the arm's natural range of motion as a hinge, it can be flicked open to reveal a 12-gauge shotgun with room for a single shell."
 	action_button_name = "Deploy shotgun"
 	icon_state = "circuit"
 	augment_slots = AUGMENT_ARM
-	holding_type = /obj/item/gun/projectile/shotgun/popout
+	item = /obj/item/gun/projectile/shotgun/popout
 	origin_tech = list(TECH_MATERIAL = 3, TECH_COMBAT = 3, TECH_ESOTERIC = 4)
 	deploy_sound = 'sound/weapons/guns/interaction/rifle_boltback.ogg'
 	retract_sound = 'sound/weapons/guns/interaction/rifle_boltforward.ogg'

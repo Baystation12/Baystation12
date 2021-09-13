@@ -14,13 +14,13 @@
 	attack_verb = list("stabbed", "sliced", "cut")
 
 
-/obj/item/organ/internal/augment/active/simple/armblade
+/obj/item/organ/internal/augment/active/item/armblade
 	name = "embedded blade"
 	desc = "A sturdy housing for a steel utility blade."
 	action_button_name = "Deploy blade"
 	icon_state = "armblade"
 	augment_slots = AUGMENT_ARM
-	holding_type = /obj/item/material/armblade
+	item = /obj/item/material/armblade
 	augment_flags = AUGMENT_MECHANICAL
 
 
@@ -32,24 +32,24 @@
 	force_multiplier = 0.3
 
 
-/obj/item/organ/internal/augment/active/simple/wolverine
+/obj/item/organ/internal/augment/active/item/wolverine
 	name = "cyberclaws"
 	desc = "An unusual type of cybernetic weaponry, these sharp blades are bound to turn heads."
 	action_button_name = "Deploy claws"
 	icon_state = "wolverine"
 	augment_slots = AUGMENT_HAND
-	holding_type = /obj/item/material/armblade/claws
+	item = /obj/item/material/armblade/claws
 	augment_flags = AUGMENT_MECHANICAL
 
 
 /// Traitor version - no parry chance but good damage, and compatible with organic limbs
-/obj/item/organ/internal/augment/active/simple/wrist_blade
+/obj/item/organ/internal/augment/active/item/wrist_blade
 	name = "concealed wrist blade"
 	desc = "A concealed sheath made from bio-compatible cloth, shaped for a thin blade."
 	action_button_name = "Deploy blade"
 	icon_state = "armblade"
 	augment_slots = AUGMENT_ARM
-	holding_type = /obj/item/material/armblade/wrist
+	item = /obj/item/material/armblade/wrist
 	origin_tech = list(TECH_COMBAT = 3, TECH_ESOTERIC = 4)
 	deploy_sound = 'sound/effects/holster/sheathout.ogg'
 	retract_sound = 'sound/effects/holster/sheathin.ogg'

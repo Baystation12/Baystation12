@@ -19,7 +19,7 @@
 /datum/gear/augment/corrective_lenses
 	display_name = "corrective lenses (head)"
 	cost = 2
-	path = /obj/item/organ/internal/augment/active/simple/equip/corrective_lenses
+	path = /obj/item/organ/internal/augment/active/item/corrective_lenses
 
 /datum/gear/augment/leukocyte_breeder
 	display_name = "leukocyte breeder (chest)"
@@ -29,7 +29,7 @@
 /datum/gear/augment/glare_dampeners
 	display_name = "glare dampeners (head)"
 	cost = 3
-	path = /obj/item/organ/internal/augment/active/simple/equip/glare_dampeners
+	path = /obj/item/organ/internal/augment/active/item/glare_dampeners
 
 /datum/gear/augment/integrated_health_hud
 	display_name = "integrated health HUD (head)"
