@@ -78,14 +78,19 @@
 /obj/effect/blob/proc/regen()
 	restore_health(regen_rate)
 
-/obj/effect/blob/proc/expand(var/turf/T)
+/obj/effect/blob/proc/expand(turf/T)
+	// Process damaging things
 	var/damage = rand(damage_min, damage_max)
+
+	// The turf itself
 	if(istype(T, /turf/unsimulated/) || istype(T, /turf/space) || (istype(T, /turf/simulated/mineral) && T.density))
 		return
 	if(istype(T, /turf/simulated/wall))
 		var/turf/simulated/wall/SW = T
 		SW.take_damage(damage)
 		return
+
+	// Objects in the turf
 	var/obj/structure/girder/G = locate() in T
 	if(G)
 		G.take_damage(damage)
@@ -119,7 +124,7 @@
 		V.adjust_health(-damage)
 		return
 	var/obj/machinery/camera/CA = locate() in T
-	if(CA)
+	if(CA && !CA.is_broken())
 		CA.take_damage(30)
 		return
 
@@ -128,6 +133,19 @@
 		if(L.stat == DEAD)
 			continue
 		attack_living(L)
+
+	for (var/atom/A in T)
+		// Catch any atoms that use health processing
+		if (A.has_health() && A.is_alive())
+			var/damage_type = pick(BRUTE, BURN)
+			visible_message(SPAN_DANGER("A tendril flies out from \the [src] and smashes into \the [A]!"))
+			playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
+			A.damage_health(damage, damage_type)
+			return
+
+		// Finally, block spreading into any tiles with a dense object
+		if (A.density)
+			return
 
 	if(!(locate(/obj/effect/blob/core) in range(T, 2)) && prob(secondary_core_growth_chance))
 		new/obj/effect/blob/core/secondary(T)
