@@ -8,7 +8,7 @@
 
 /datum/sprite_accessory/facial_hair
 	icon = 'icons/mob/human_races/species/human/facial.dmi'
-	gender = MALE // barf (unless you're a dorf, dorfs dig chix /w beards :P)
+	gender = MALE
 
 /datum/sprite_accessory/facial_hair/shaved
 	name = "Shaved"
