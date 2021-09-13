@@ -213,7 +213,7 @@
 	var/times_to_pulse = 0
 
 	/// Health state tracker to prevent redundant var updates in `process_core_health()
-	var/core_health_state = 4
+	var/core_health_state = null
 
 
 /obj/effect/blob/core/get_initial_health_handler_config()
