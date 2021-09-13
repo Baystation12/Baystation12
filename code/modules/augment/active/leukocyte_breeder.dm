@@ -6,10 +6,11 @@
 	action_button_name = "Toggle leukocyte breeder"
 	augment_flags = AUGMENT_BIOLOGICAL
 	origin_tech = list(TECH_DATA = 2, TECH_BIO = 4)
-
 	var/active = FALSE
+
 	/// How many processing ticks the augment has been enabled for
 	var/ticks_active = 0
+
 	/// After this many ticks, the owner has "broken in" the augment, and will benefit more but suffer drawbacks if it's disabled
 	var/ticks_to_acclimate = 120
 

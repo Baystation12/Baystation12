@@ -6,7 +6,11 @@
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = list(TECH_DATA = 3, TECH_ESOTERIC = 3)
 	var/obj/item/organ/internal/augment/augment
-	var/instant /// If not falsy, skip the messy installation and just install the augment
+
+	/// If not falsy, skip the messy installation and just install the augment
+	var/instant
+
+	/// Transient value to block multiple activations at the same time
 	var/working
 
 
@@ -25,10 +29,6 @@
 		return
 	to_chat(user, SPAN_BOLD("It contains:"))
 	augment.examine(user)
-	if (augment.augment_flags & AUGMENT_SCANNABLE)
-		to_chat(user, SPAN_WARNING("It can be discovered by scanners."))
-	if (augment.augment_flags & AUGMENT_INSPECTABLE)
-		to_chat(user, SPAN_WARNING("It can be discovered by manual inspection."))
 
 
 /obj/item/device/augment_implanter/attackby(obj/item/I, mob/living/user)

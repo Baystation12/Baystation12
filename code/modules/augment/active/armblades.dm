@@ -21,7 +21,7 @@
 	icon_state = "armblade"
 	augment_slots = AUGMENT_ARM
 	item = /obj/item/material/armblade
-	augment_flags = AUGMENT_MECHANICAL
+	augment_flags = AUGMENT_MECHANICAL | AUGMENT_SCANNABLE
 
 
 /obj/item/material/armblade/claws
@@ -39,7 +39,7 @@
 	icon_state = "wolverine"
 	augment_slots = AUGMENT_HAND
 	item = /obj/item/material/armblade/claws
-	augment_flags = AUGMENT_MECHANICAL
+	augment_flags = AUGMENT_MECHANICAL | AUGMENT_SCANNABLE
 
 
 /// Traitor version - no parry chance but good damage, and compatible with organic limbs
@@ -53,7 +53,7 @@
 	origin_tech = list(TECH_COMBAT = 3, TECH_ESOTERIC = 4)
 	deploy_sound = 'sound/effects/holster/sheathout.ogg'
 	retract_sound = 'sound/effects/holster/sheathin.ogg'
-	augment_flags = AUGMENT_MECHANICAL | AUGMENT_BIOLOGICAL
+	augment_flags = AUGMENT_MECHANICAL | AUGMENT_BIOLOGICAL| AUGMENT_SCANNABLE
 
 
 /obj/item/material/armblade/wrist
@@ -65,7 +65,9 @@
 	force_multiplier = 0.2
 	attack_cooldown_modifier = -1
 	default_material = MATERIAL_PLASTEEL
-	w_class = ITEM_SIZE_SMALL /// SMALL prevents dismembering limbs - only hands & feet
+
+	/// SMALL prevents dismembering limbs - only hands & feet
+	w_class = ITEM_SIZE_SMALL
 
 
 /obj/item/material/armblade/wrist/add_blood(mob/living/carbon/human/M)

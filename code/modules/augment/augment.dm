@@ -31,7 +31,7 @@
 		if (BP_HEAD)
 			found = augment_slots & AUGMENT_HEAD
 	if (!found)
-		to_chat(user, SPAN_WARNING("The augment can't be installed in \the [parent]."))
+		to_chat(user, SPAN_WARNING("\The [src] can't be installed in \the [parent]."))
 		parent_organ = null
 		organ_tag = null
 		return 1
@@ -69,27 +69,74 @@
 
 /obj/item/organ/internal/augment/examine(mob/user, distance)
 	. = ..()
-	if (distance <= 1)
-		var/list/attach_types = list()
-		if (augment_flags & AUGMENT_MECHANICAL)
-			attach_types += "mechanical"
-		if (augment_flags & AUGMENT_BIOLOGICAL)
-			attach_types += "biological"
-		if (augment_flags & AUGMENT_CRYSTALINE)
-			attach_types += "crystaline"
-		var/list/attach_parts = list()
-		if (augment_slots & (AUGMENT_CHEST|AUGMENT_ARMOR))
-			attach_parts += "chests"
-		if (augment_slots & AUGMENT_GROIN)
-			attach_parts += "lower bodies"
-		if (augment_slots & AUGMENT_HEAD)
-			attach_parts += "heads"
-		if (augment_slots & AUGMENT_ARM)
-			attach_parts += "arms"
-		if (augment_slots & AUGMENT_HAND)
-			attach_parts += "hands"
-		if (augment_slots & AUGMENT_LEG)
-			attach_parts += "legs"
-		if (augment_slots & AUGMENT_FOOT)
-			attach_parts += "feet"
-		to_chat(user, "It can be installed in [english_list(attach_parts)] that are [english_list(attach_types)].")
+	var/level
+	if (isobserver(user))
+		level = 2
+	else if (distance > 1)
+		return
+	else if (user.mind?.special_role)
+		level = 2
+	else if (user.skill_check(SKILL_DEVICES, SKILL_PROF))
+		level = 2
+	else if (user.skill_check(SKILL_DEVICES, SKILL_ADEPT))
+		level = 1
+	if (!level)
+		return
+	var/list/attach_types = list()
+	if (augment_flags & AUGMENT_MECHANICAL)
+		attach_types += "mechanical"
+	if (augment_flags & AUGMENT_BIOLOGICAL)
+		attach_types += "biological"
+	if (augment_flags & AUGMENT_CRYSTALINE)
+		attach_types += "crystaline"
+	var/list/attach_parts = list()
+	if (augment_slots & (AUGMENT_CHEST|AUGMENT_ARMOR))
+		attach_parts += "chests"
+	if (augment_slots & AUGMENT_GROIN)
+		attach_parts += "lower bodies"
+	if (augment_slots & AUGMENT_HEAD)
+		attach_parts += "heads"
+	if (augment_slots & AUGMENT_ARM)
+		attach_parts += "arms"
+	if (augment_slots & AUGMENT_HAND)
+		attach_parts += "hands"
+	if (augment_slots & AUGMENT_LEG)
+		attach_parts += "legs"
+	if (augment_slots & AUGMENT_FOOT)
+		attach_parts += "feet"
+	var/message = "It can be installed in [english_list(attach_parts)] that are [english_list(attach_types)]."
+	if (level > 1)
+		var/list/discovery = list()
+		if (augment_flags & AUGMENT_SCANNABLE)
+			discovery += "scanners"
+		if (augment_flags & AUGMENT_INSPECTABLE)
+			discovery += "manual inspection"
+		if (discovery.len)
+			message += " It can be discovered by [english_list(discovery)]."
+		else
+			message += " It is undetectable."
+	to_chat(user, message)
+
+
+/datum/codex_entry/augment
+	display_name = "Implantable Augmentation"
+	associated_paths = list(/obj/item/organ/internal/augment)
+	lore_text = {"\
+		<p>Augmentations are a broad category of devices that are added to the bodies of biological and \
+		mechanical individuals in order to provide some function or benefit to the user. The most common \
+		augmentations in humans are medical or otherwise corrective, but everything from weapons to reward \
+		stimulators can be wired into the body one way or another, making many modern humans classic cyborgs.</p>\
+		<p>In non-biological entities "augmentations" are often simply normal body components that are not \
+		already installed - but many of the same non-medical tools, utilities, and entertainment devices \
+		are available.</p>\
+	"}
+	mechanics_text = {"\
+		<p>Augmentations provide various (or no) functionality and are either <b>passive</b> or <b>active</b>. \
+		A passive augmentation, so long as it is not too damaged, Just Works. An active augmentation can be \
+		toggled on or off via its associated UI button, which appears on its owners screen once it has been \
+		implanted.</p>\
+		<p>Some active augmentations, like tools and weapons, will try to place an item into (or take it from) \
+		a hand or other inventory slot. You will need to <b>keep those slots free</b> in order to turn those \
+		active augmentations on.</p>\
+		<p>
+	"}

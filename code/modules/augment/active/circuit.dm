@@ -3,7 +3,7 @@
 	action_button_name = "Activate Circuit"
 	icon_state = "circuit"
 	augment_slots = AUGMENT_ARM
-	augment_flags = AUGMENT_MECHANICAL
+	augment_flags = AUGMENT_MECHANICAL | AUGMENT_SCANNABLE
 	desc = "A DIY modular assembly, courtesy of Xion Industrial. Circuitry not included."
 
 

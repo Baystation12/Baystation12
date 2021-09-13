@@ -237,23 +237,57 @@
 #define BP_SYSTEM_CONTROLLER "system controller"
 
 
-//Augment slots
-#define AUGMENT_ARM 0x1 ///The augment can be installed in arms
-#define AUGMENT_HAND 0x2 ///The augment can be installed in hands
-#define AUGMENT_LEG 0x4 ///The augment can be installed in legs
-#define AUGMENT_FOOT 0x8 ///The augment can be installed in legs
-#define AUGMENT_CHEST 0x10 ///The augment can be installed in the chest
-#define AUGMENT_GROIN 0x20 ///The augment can be installed in the lower body
-#define AUGMENT_HEAD 0x40 ///The augment can be installed in the head
-#define AUGMENT_ARMOR 0x80 ///The augment can be installed externally
+/**
+* Augment Slots
+* Flags used by /obj/item/organ/internal/augment/var/augment_slots
+* Augment slots is used to control which body parts an augment may be installed into
+*/
+
+/// The augment can be installed in arms
+#define AUGMENT_ARM 0x1
+
+/// The augment can be installed in hands
+#define AUGMENT_HAND 0x2
+
+/// The augment can be installed in legs
+#define AUGMENT_LEG 0x4
+
+/// The augment can be installed in feet
+#define AUGMENT_FOOT 0x8
+
+/// The augment can be installed in the chest
+#define AUGMENT_CHEST 0x10
+
+/// The augment can be installed in the lower body
+#define AUGMENT_GROIN 0x20
+
+/// The augment can be installed in the head
+#define AUGMENT_HEAD 0x40
+
+/// The augment can be installed on the chest separately to AUGMENT_CHEST
+#define AUGMENT_ARMOR 0x80
 
 
-//Augment flags
-#define AUGMENT_MECHANICAL 0x1 ///The augment can be installed in mechanical organs
-#define AUGMENT_BIOLOGICAL 0x2 ///The augment can be installed in biological organs
-#define AUGMENT_CRYSTALINE 0x4 ///The augment can be installed in crystaline organs
-#define AUGMENT_SCANNABLE 0x10 ///The augment is visible on body scanner results
-#define AUGMENT_INSPECTABLE 0x20 ///The augment is visible via grab inspection
+/**
+* Augment Flags
+* Flags used by /obj/item/organ/internal/augment/var/augment_flags
+* Augment flags provide mixed configuration information about their augment
+*/
+
+/// The augment can be installed in mechanical organs
+#define AUGMENT_MECHANICAL 0x1
+
+/// The augment can be installed in biological organs
+#define AUGMENT_BIOLOGICAL 0x2
+
+/// The augment can be installed in crystaline organs
+#define AUGMENT_CRYSTALINE 0x4
+
+/// The augment is visible on body scanner results
+#define AUGMENT_SCANNABLE 0x10
+
+/// The augment is visible via grab inspection
+#define AUGMENT_INSPECTABLE 0x20
 
 
 // Limbs.

@@ -1,12 +1,24 @@
 /obj/item/organ/internal/augment/boost
 	icon_state = "booster"
 	augment_slots = AUGMENT_HEAD
-	var/list/buffs = list() /// Which abilities does this impact?
-	var/list/injury_debuffs = list() /// If organ is damaged, should we reduce anything?
-	var/buffpath = /datum/skill_buff/augment /// Only subtypes of /datum/skill_buff/augment
-	var/active = FALSE /// Mostly to control if we should remove buffs when we go
-	var/debuffing = FALSE // If we applied a debuff
+
+	/// Unique ID for collecting the right effect in skill handling
 	var/id
+
+	/// Which abilities does this impact?
+	var/list/buffs = list()
+
+	/// If organ is damaged, should we reduce anything?
+	var/list/injury_debuffs = list()
+
+	/// Only subtypes of /datum/skill_buff/augment
+	var/buffpath = /datum/skill_buff/augment
+
+	/// Mostly to control if we should remove buffs when we go
+	var/active = FALSE
+
+	/// If we applied a debuff
+	var/debuffing = FALSE
 
 
 /obj/item/organ/internal/augment/boost/Initialize()
