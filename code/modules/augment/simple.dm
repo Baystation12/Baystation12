@@ -10,13 +10,18 @@
 	. = ..()
 	if (holding_type)
 		holding = new holding_type(src)
-		holding.canremove = 0
+		holding.canremove = FALSE
+
+
+/obj/item/organ/internal/augment/active/simple/onRemove()
+	retract(FALSE)
+	..()
 
 
 /obj/item/organ/internal/augment/active/simple/Destroy()
-	if(holding)
+	if (holding)
 		GLOB.item_unequipped_event.unregister(holding, src)
-		if(holding.loc == src)
+		if (holding.loc == src)
 			qdel(holding)
 		holding = null
 	return ..()
@@ -25,28 +30,31 @@
 /obj/item/organ/internal/augment/active/simple/proc/holding_dropped()
 	GLOB.item_unequipped_event.unregister(holding, src)
 	if (holding.loc != src) //something went wrong and is no longer attached/ it broke
-		holding.canremove = 1
+		holding.canremove = TRUE
 		holding = null //We no longer hold this, you will have to get a replacement module or fix it somehow
 
 
-/obj/item/organ/internal/augment/active/simple/proc/deploy()
+/obj/item/organ/internal/augment/active/simple/proc/deploy(as_owner = TRUE)
 	var/slot = null
 	if (limb.organ_tag in list(BP_L_ARM, BP_L_HAND))
 		slot = slot_l_hand
 	else if (limb.organ_tag in list(BP_R_ARM, BP_R_HAND))
 		slot = slot_r_hand
 	if (owner.equip_to_slot_if_possible(holding, slot))
-		GLOB.item_unequipped_event.register(holding, src, /obj/item/organ/internal/augment/active/simple/proc/holding_dropped )
-		owner.visible_message(
-			SPAN_WARNING("\The [owner] extends \his [holding.name] from \his [limb.name]."),
-			SPAN_NOTICE("You extend your [holding.name] from your [limb.name].")
-		)
+		GLOB.item_unequipped_event.register(holding, src, /obj/item/organ/internal/augment/active/simple/proc/holding_dropped)
+		if (as_owner)
+			owner.visible_message(
+				SPAN_WARNING("\The [owner] extends \his [holding.name] from \his [limb.name]."),
+				SPAN_NOTICE("You extend your [holding.name] from your [limb.name].")
+			)
+		else
+			visible_message(SPAN_WARNING("\The [holding.name] extend\s."))
 		if (deploy_sound)
 			playsound(owner, deploy_sound, 30)
 		return TRUE
 
 
-/obj/item/organ/internal/augment/active/simple/proc/retract()
+/obj/item/organ/internal/augment/active/simple/proc/retract(as_owner = TRUE)
 	if (holding.loc == src)
 		return
 	if (ismob(holding.loc) && holding.loc == owner)
@@ -54,10 +62,13 @@
 		if (!M.drop_from_inventory(holding, src))
 			to_chat(owner, "\The [holding.name] fails to retract.")
 			return
-		M.visible_message(
-			SPAN_WARNING("\The [M] retracts \his [holding.name] into \his [limb.name]."),
-			SPAN_NOTICE("You retract your [holding.name] into your [limb.name].")
-		)
+		if (as_owner)
+			M.visible_message(
+				SPAN_WARNING("\The [M] retracts \his [holding.name] into \his [limb.name]."),
+				SPAN_NOTICE("You retract your [holding.name] into your [limb.name].")
+			)
+		else
+			visible_message(SPAN_WARNING("\The [holding.name] retract\s."))
 		if (retract_sound)
 			playsound(owner, retract_sound, 30)
 		return TRUE
