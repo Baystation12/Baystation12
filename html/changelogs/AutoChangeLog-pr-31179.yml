@@ -1,7 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - tweak: Exploding spiders now have an additional 2 seconds before they explode,
-      to account for server lag.
-  - tweak: Exploding spiders are now deleted when they explode instead of leaving
-      behind a corpse. They did explode, after all.
