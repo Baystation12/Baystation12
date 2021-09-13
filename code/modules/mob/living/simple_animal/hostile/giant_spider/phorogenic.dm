@@ -29,9 +29,9 @@
 	var/explosion_flash_range	= 6
 
 	/// Lower bound for explosion delay.
-	var/explosion_delay_lower	= 1 SECOND
+	var/explosion_delay_lower	= 3 SECONDS
 	/// Upper bound for explosion delay.
-	var/explosion_delay_upper	= 2 SECONDS
+	var/explosion_delay_upper	= 5 SECONDS
 
 /mob/living/simple_animal/hostile/giant_spider/phorogenic/Initialize()
 	scale(1.25)
@@ -61,6 +61,7 @@
 		visible_message(SPAN_DANGER("\The [src]'s body detonates!"))
 		exploded = TRUE
 		explosion(loc, explosion_dev_range, explosion_heavy_range, explosion_light_range, explosion_flash_range)
+		qdel(src)
 
 /obj/item/natural_weapon/bite/spider/phorogenic
 	force = 30
