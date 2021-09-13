@@ -25,8 +25,12 @@
 /obj/structure/wall_frame/New(var/new_loc, var/materialtype)
 	..(new_loc)
 
-	if(!materialtype)
-		materialtype = DEFAULT_WALL_MATERIAL
+	if (!materialtype)
+		if (istext(material))
+			materialtype = material
+		else
+			materialtype = DEFAULT_WALL_MATERIAL
+
 	material = SSmaterials.get_material_by_name(materialtype)
 	health = material.integrity
 
