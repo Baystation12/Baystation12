@@ -1,0 +1,5 @@
+author: Jux
+delete-after: true
+changes:
+  - tweak: Human hairstyles are no longer half-gendered.
+  - tweak: Unathi can no longer select four random human hairstyles.
