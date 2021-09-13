@@ -1,4 +1,4 @@
-/obj/item/organ/internal/augment/fluff/head/circadian_conditioner
+/obj/item/organ/internal/augment/circadian_conditioner
 	name = "circadian conditioner"
 	augment_slots = AUGMENT_HEAD
 	icon_state = "booster"
@@ -7,15 +7,15 @@
 	origin_tech = list(TECH_DATA = 2, TECH_BIO = 2)
 
 
-/obj/item/organ/internal/augment/fluff/head/codex_access
-	name = "\improper Codex access chip"
+/obj/item/organ/internal/augment/codex_access
+	name = "codex access chip"
 	augment_slots = AUGMENT_HEAD
 	icon_state = "booster"
 	desc = "A neuro-memetic implant or retinal chip used to grant realtime access to the Codex - a distributed encyclopedia of sorts, with editorial offices based in Venusian orbit - either via a server connection or local backups of relevant information."
 	origin_tech = list(TECH_DATA = 2, TECH_DATA = 2)
 
 
-/obj/item/organ/internal/augment/fluff/head/neurostimulator_implant
+/obj/item/organ/internal/augment/neurostimulator_implant
 	name = "neurostimulator implant"
 	augment_slots = AUGMENT_HEAD
 	icon_state = "booster"
@@ -24,7 +24,7 @@
 	origin_tech = list(TECH_DATA = 2, TECH_BIO = 2)
 
 
-/obj/item/organ/internal/augment/fluff/head/pain_assistant
+/obj/item/organ/internal/augment/pain_assistant
 	name = "pain assistant"
 	augment_slots = AUGMENT_HEAD
 	icon_state = "booster"
@@ -33,7 +33,7 @@
 	origin_tech = list(TECH_DATA = 2, TECH_BIO = 2)
 
 
-/obj/item/organ/internal/augment/fluff/head/genetic_backup
+/obj/item/organ/internal/augment/genetic_backup
 	name = "genetic backup"
 	augment_slots = AUGMENT_HEAD
 	icon_state = "booster"
@@ -41,7 +41,7 @@
 	origin_tech = list(TECH_DATA = 2, TECH_BIO = 2)
 
 
-/obj/item/organ/internal/augment/fluff/head/data_chip
+/obj/item/organ/internal/augment/data_chip
 	name = "data chip"
 	augment_slots = AUGMENT_HEAD
 	icon = 'icons/obj/surgery.dmi'
@@ -50,8 +50,8 @@
 	origin_tech = list(TECH_DATA = 2, TECH_MAGNET = 2)
 
 
-/obj/item/organ/internal/augment/fluff/chest/ups_battery
-	name = "UPS battery"
+/obj/item/organ/internal/augment/emergency_battery
+	name = "emergency battery"
 	augment_slots = AUGMENT_CHEST
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "cell"
@@ -60,7 +60,7 @@
 	origin_tech = list(TECH_DATA = 2, TECH_POWER = 2)
 
 
-/obj/item/organ/internal/augment/fluff/chest/skeletal_bracing
+/obj/item/organ/internal/augment/skeletal_bracing
 	name = "skeletal bracing"
 	augment_slots = AUGMENT_ARMOR
 	icon_state = "armor-chest"
@@ -69,7 +69,7 @@
 	augment_flags = AUGMENT_MECHANICAL | AUGMENT_BIOLOGICAL | AUGMENT_SCANNABLE | AUGMENT_INSPECTABLE
 
 
-/obj/item/organ/internal/augment/fluff/chest/ultraviolet_shielding
+/obj/item/organ/internal/augment/ultraviolet_shielding
 	name = "ultraviolet shielding"
 	augment_slots = AUGMENT_ARMOR
 	icon_state = "armor-chest"
@@ -79,7 +79,7 @@
 	augment_flags = AUGMENT_BIOLOGICAL | AUGMENT_SCANNABLE | AUGMENT_INSPECTABLE
 
 
-/obj/item/organ/internal/augment/fluff/chest/recycler_suite
+/obj/item/organ/internal/augment/recycler_suite
 	name = "recycler suite"
 	augment_slots = AUGMENT_GROIN
 	icon_state = "armor-chest"

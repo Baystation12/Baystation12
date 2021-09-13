@@ -127,7 +127,6 @@
 
 	#include "loadout/_defines.dm"
 	#include "loadout/loadout_accessories.dm"
-	#include "loadout/loadout_augments.dm"
 	#include "loadout/loadout_ec_skillbadges.dm"
 	#include "loadout/loadout_eyes.dm"
 	#include "loadout/loadout_gloves.dm"
