@@ -1388,7 +1388,7 @@
 #include "code\modules\atmospherics\components\unary\vent_scrubber.dm"
 #include "code\modules\augment\active.dm"
 #include "code\modules\augment\augment.dm"
-#include "code\modules\augment\cbm.dm"
+#include "code\modules\augment\implanter.dm"
 #include "code\modules\augment\item.dm"
 #include "code\modules\augment\active\adaptive_binoculars.dm"
 #include "code\modules\augment\active\armblades.dm"

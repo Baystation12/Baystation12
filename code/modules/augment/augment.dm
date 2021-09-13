@@ -31,7 +31,7 @@
 		if (BP_HEAD)
 			found = augment_slots & AUGMENT_HEAD
 	if (!found)
-		to_chat(user, SPAN_WARNING("The augment can't be installed in \the [parent]!"))
+		to_chat(user, SPAN_WARNING("The augment can't be installed in \the [parent]."))
 		parent_organ = null
 		organ_tag = null
 		return 1
@@ -79,11 +79,11 @@
 			attach_types += "crystaline"
 		var/list/attach_parts = list()
 		if (augment_slots & (AUGMENT_CHEST|AUGMENT_ARMOR))
-			attach_parts += "chest"
+			attach_parts += "chests"
 		if (augment_slots & AUGMENT_GROIN)
-			attach_parts += "lower body"
+			attach_parts += "lower bodies"
 		if (augment_slots & AUGMENT_HEAD)
-			attach_parts += "head"
+			attach_parts += "heads"
 		if (augment_slots & AUGMENT_ARM)
 			attach_parts += "arms"
 		if (augment_slots & AUGMENT_HAND)
