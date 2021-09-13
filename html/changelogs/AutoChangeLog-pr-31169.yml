@@ -1,0 +1,6 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Talking artifacts now properly obey deafness.
+  - tweak: Talking artifacts are no longer visible with ghost ears. Goodbye pointless
+      spam.
