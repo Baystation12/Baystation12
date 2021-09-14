@@ -1,22 +1,18 @@
 #define MIN_TEMPERATURE_COEFFICIENT 1
 #define MAX_TEMPERATURE_COEFFICIENT 10
 
-/atom
-	var/temperature = T20C
-	var/temperature_coefficient = MAX_TEMPERATURE_COEFFICIENT
+/atom/var/temperature = T20C
+/atom/var/temperature_coefficient = MAX_TEMPERATURE_COEFFICIENT
 
 /atom/movable/Entered(var/atom/movable/atom, var/atom/old_loc)
 	. = ..()
 	QUEUE_TEMPERATURE_ATOMS(atom)
 
-/obj
-	temperature_coefficient = null
+/obj/temperature_coefficient = null
 
-/mob
-	temperature_coefficient = null
+/mob/temperature_coefficient = null
 
-/turf
-	temperature_coefficient = MIN_TEMPERATURE_COEFFICIENT
+/turf/temperature_coefficient = MIN_TEMPERATURE_COEFFICIENT
 
 /obj/Initialize()
 	. = ..()

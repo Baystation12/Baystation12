@@ -1,13 +1,13 @@
 #define AO_TURF_CHECK(T) (!T.density || !T.opacity || !T.permit_ao)
 #define AO_SELF_CHECK(T) (!T.density && !T.opacity)
 
-/turf
-	var/permit_ao = TRUE
-	var/tmp/list/ao_overlays	// Current ambient occlusion overlays. Tracked so we can reverse them without dropping all priority overlays.
-	var/tmp/ao_neighbors
-	var/tmp/list/ao_overlays_mimic
-	var/tmp/ao_neighbors_mimic
-	var/ao_queued = AO_UPDATE_NONE
+/turf/var/permit_ao = TRUE
+/// Current ambient occlusion overlays. Tracked so we can reverse them without dropping all priority overlays.
+/turf/var/tmp/list/ao_overlays
+/turf/var/tmp/ao_neighbors
+/turf/var/tmp/list/ao_overlays_mimic
+/turf/var/tmp/ao_neighbors_mimic
+/turf/var/ao_queued = AO_UPDATE_NONE
 
 /turf/proc/regenerate_ao()
 	for (var/thing in RANGE_TURFS(src, 1))

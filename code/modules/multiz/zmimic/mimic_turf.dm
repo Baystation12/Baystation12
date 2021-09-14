@@ -1,24 +1,23 @@
-/turf
-	// Reference to any open turf that might be above us to speed up atom Entered() updates.
-	var/tmp/turf/above
-	var/tmp/turf/below
-	/// If we're a non-overwrite z-turf, this holds the appearance of the bottom-most Z-turf in the z-stack.
-	var/tmp/atom/movable/openspace/turf_proxy/mimic_proxy
-	/// Overlay used to multiply color of all OO overlays at once.
-	var/tmp/atom/movable/openspace/multiplier/shadower
-	/// If this is a delegate (non-overwrite) Z-turf with a z-turf above, this is the delegate copy that's copying us.
-	var/tmp/atom/movable/openspace/turf_mimic/mimic_above_copy
-	/// If we're at the bottom of the stack, a proxy used to fake a below space turf.
-	var/tmp/atom/movable/openspace/turf_proxy/mimic_underlay
-	/// How many times this turf is currently queued - multiple queue occurrences are allowed to ensure update consistency.
-	var/tmp/z_queued = 0
-	/// If this Z-turf leads to space, uninterrupted.
-	var/tmp/z_eventually_space = FALSE
-	var/z_flags = 0
+/// Reference to any open turf that might be above us to speed up atom Entered() updates.
+/turf/var/tmp/turf/above
+/turf/var/tmp/turf/below
+/// If we're a non-overwrite z-turf, this holds the appearance of the bottom-most Z-turf in the z-stack.
+/turf/var/tmp/atom/movable/openspace/turf_proxy/mimic_proxy
+/// Overlay used to multiply color of all OO overlays at once.
+/turf/var/tmp/atom/movable/openspace/multiplier/shadower
+/// If this is a delegate (non-overwrite) Z-turf with a z-turf above, this is the delegate copy that's copying us.
+/turf/var/tmp/atom/movable/openspace/turf_mimic/mimic_above_copy
+/// If we're at the bottom of the stack, a proxy used to fake a below space turf.
+/turf/var/tmp/atom/movable/openspace/turf_proxy/mimic_underlay
+/// How many times this turf is currently queued - multiple queue occurrences are allowed to ensure update consistency.
+/turf/var/tmp/z_queued = 0
+/// If this Z-turf leads to space, uninterrupted.
+/turf/var/tmp/z_eventually_space = FALSE
+/turf/var/z_flags = 0
 
-	// debug
-	var/tmp/z_depth
-	var/tmp/z_generation = 0
+// debug
+/turf/var/tmp/z_depth
+/turf/var/tmp/z_generation = 0
 
 /turf/Entered(atom/movable/thing, turf/oldLoc)
 	. = ..()
