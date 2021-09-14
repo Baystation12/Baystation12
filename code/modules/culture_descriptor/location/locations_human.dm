@@ -12,7 +12,7 @@
 	distance = "1.5AU"
 	capital = "Olympus"
 	economic_power = 1.1
-	
+
 
 /decl/cultural_info/location/human/earth
 	name = HOME_SYSTEM_EARTH
@@ -245,3 +245,12 @@
 	capital = "Labortown"
 	economic_power = 0.8
 	ruling_body = "Magnitka"
+
+/decl/cultural_info/location/human/other
+	name = HOME_SYSTEM_OTHER
+	description = "From reclaimed Terran Commonwealth territory to up-and-coming colonies, not every SCG planet is as well known as others. \
+	Living in these outer territories can be dangerous, but rewarding for the hardworking."
+	distance = "Varies"
+	capital = "Varies"
+	economic_power = 1.0
+	secondary_langs = list(LANGUAGE_GUTTER)
