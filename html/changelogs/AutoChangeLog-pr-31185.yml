@@ -1,0 +1,13 @@
+author: Spookerton
+delete-after: true
+changes:
+  - bugfix: Removed deployed augments undeploy when removed - no more items stuck
+      in hands.
+  - tweak: Augment installation respects the target doll - no more weird screwdriver
+      shenanigans.
+  - tweak: Augment examine is more descriptive of what the augment can be installed
+      in.
+  - tweak: CBMs are now Augment Autodocs and also respect the target doll.
+  - tweak: Loadout augments are properly categorized. You will need to re-select them.
+  - tweak: You can take loadout augment HUDs you don't start with the access to actually
+      use.
