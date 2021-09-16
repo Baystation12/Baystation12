@@ -175,6 +175,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			CULTURE_OTHER
 		),
 		TAG_RELIGION = list(
+			RELIGION_UNSTATED,
 			RELIGION_OTHER,
 			RELIGION_JUDAISM,
 			RELIGION_HINDUISM,
