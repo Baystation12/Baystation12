@@ -1,0 +1,4 @@
+author: Jux
+delete-after: true
+changes:
+  - rscadd: Adds the option to set your religion to "Unstated" for humans and unathi.
