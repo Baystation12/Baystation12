@@ -505,49 +505,49 @@
 
 /datum/design/item/mechfab/augment/armblade
 	name = "Armblade"
-	build_path = /obj/item/organ/internal/augment/active/simple/armblade
+	build_path = /obj/item/organ/internal/augment/active/item/armblade
 	materials = list(DEFAULT_WALL_MATERIAL = 4000, "glass" = 750)
 	req_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 2, TECH_MATERIAL = 4, TECH_BIO = 3)
 	id = "augment_blade"
 
 /datum/design/item/mechfab/augment/armblade/wolverine
 	name = "Cyberclaws"
-	build_path = /obj/item/organ/internal/augment/active/simple/wolverine
+	build_path = /obj/item/organ/internal/augment/active/item/wolverine
 	materials = list(DEFAULT_WALL_MATERIAL = 6000, "diamond" = 250)
 	req_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 4, TECH_MATERIAL = 4, TECH_BIO = 3)
 	id = "augment_wolverine"
 
 /datum/design/item/mechfab/augment/armblade/wrist_blade
 	name = "Wrist blade"
-	build_path = /obj/item/organ/internal/augment/active/simple/wrist_blade
+	build_path = /obj/item/organ/internal/augment/active/item/wrist_blade
 	materials = list(MATERIAL_TITANIUM = 4000, MATERIAL_DIAMOND = 250)
 	req_tech = list(TECH_ESOTERIC = 4, TECH_COMBAT = 5, TECH_BIO = 3)
 	id = "augment_wristblade"
 
 /datum/design/item/mechfab/augment/armblade/popout_shotgun
 	name = "Pop-out shotgun"
-	build_path = /obj/item/organ/internal/augment/active/simple/popout_shotgun
+	build_path = /obj/item/organ/internal/augment/active/item/popout_shotgun
 	materials = list(DEFAULT_WALL_MATERIAL = 5000, MATERIAL_SILVER = 500)
 	req_tech = list(TECH_ESOTERIC = 5, TECH_COMBAT = 6, TECH_BIO = 4)
 	id = "augment_popout_shotgun"
 
 /datum/design/item/mechfab/augment/corrective_lenses
 	name = "Corrective lenses"
-	build_path = /obj/item/organ/internal/augment/active/simple/equip/corrective_lenses
+	build_path = /obj/item/organ/internal/augment/active/item/corrective_lenses
 	materials = list(DEFAULT_WALL_MATERIAL = 500, MATERIAL_GLASS = 1000)
 	req_tech = list(TECH_MATERIAL = 2)
 	id = "augment_corrective_lenses"
 
 /datum/design/item/mechfab/augment/glare_dampeners
 	name = "Glare dampeners"
-	build_path = /obj/item/organ/internal/augment/active/simple/equip/glare_dampeners
+	build_path = /obj/item/organ/internal/augment/active/item/glare_dampeners
 	materials = list(DEFAULT_WALL_MATERIAL = 100, MATERIAL_GLASS = 2000)
 	req_tech = list(TECH_MATERIAL = 3, TECH_ENGINEERING = 3)
 	id = "augment_glare_dampeners"
 
 /datum/design/item/mechfab/augment/adaptive_binoculars
 	name = "Adaptive binoculars"
-	build_path = /obj/item/organ/internal/augment/active/simple/equip/adaptive_binoculars
+	build_path = /obj/item/organ/internal/augment/active/item/adaptive_binoculars
 	materials = list(MATERIAL_DIAMOND = 100, MATERIAL_GOLD = 100, MATERIAL_GLASS = 2000)
 	// We use decent requirements for this, because it allows someone to zoom in and grab ammo from an open container at the same time
 	req_tech = list(TECH_MATERIAL = 4, TECH_ENGINEERING = 4, TECH_COMBAT = 4)
@@ -649,7 +649,7 @@
 
 /datum/design/item/mechfab/augment/circuit
 	name = "Integrated circuit frame"
-	build_path = /obj/item/organ/internal/augment/active/simple/circuit
+	build_path = /obj/item/organ/internal/augment/active/item/circuit
 	materials = list(DEFAULT_WALL_MATERIAL = 3000)
 	id = "augment_circuitry"
 

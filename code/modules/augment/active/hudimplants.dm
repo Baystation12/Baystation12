@@ -3,9 +3,10 @@
 	desc = "A small implantable heads-up display."
 	icon_state = "eye"
 	action_button_name = "Toggle HUD"
-	allowed_organs = list(BP_AUGMENT_HEAD)
+	augment_slots = AUGMENT_HEAD
 	var/list/hud_type = list(HUD_MEDICAL, HUD_SECURITY)
 	var/active = FALSE
+
 
 /obj/item/organ/internal/augment/active/hud/Process()
 	..()
@@ -25,6 +26,7 @@
 			if (HUD_JANITOR)
 				process_jani_hud(owner)
 
+
 /obj/item/organ/internal/augment/active/hud/emp_act(severity)
 	if (istype(src.loc, /mob/living/carbon/human))
 		var/mob/living/carbon/human/M = src.loc
@@ -35,11 +37,13 @@
 		if (active)
 			active = FALSE
 
+
 /obj/item/organ/internal/augment/active/hud/activate()
 	if (!can_activate())
 		return
 	active = !active
 	to_chat(owner, SPAN_NOTICE("You [active ? "enable" : "disable"] \the [src]."))
+
 
 /obj/item/organ/internal/augment/active/hud/health
 	name = "integrated health HUD"
@@ -47,16 +51,19 @@
 	icon_state = "eye_medical"
 	hud_type = HUD_MEDICAL
 
+
 /obj/item/organ/internal/augment/active/hud/security
 	name = "integrated security HUD"
 	desc = "The Hephaestus Industries C-VSR is an implantable HUD, designed to interface with the user's optic nerve and local databases to display security information."
 	hud_type = HUD_SECURITY
+
 
 /obj/item/organ/internal/augment/active/hud/janitor
 	name = "integrated filth HUD"
 	desc = "An implantable HUD based on the wearable janitorial version, designed to interface with the user's optic nerve and display information about nearby messes."
 	icon_state = "eye_janitor"
 	hud_type = HUD_JANITOR
+
 
 /obj/item/organ/internal/augment/active/hud/science
 	name = "integrated sciHUD"

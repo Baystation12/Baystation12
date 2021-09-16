@@ -11,14 +11,14 @@
 	It will automatically filter out the safest air for your species. It has been configured to be undetectable on body scanners. \
 	NOTE: This augment is incompatible with synthetic biologies."
 	item_cost = 24
-	path = /obj/item/device/compact_bionic_module/internal_air_system
+	path = /obj/item/device/augment_implanter/internal_air_system
 
 /datum/uplink_item/item/augment/aug_adaptive_binoculars
 	name = "Adaptive Binoculars CBM (head)"
 	desc = "A pair of ultrathin lenses can be deployed or retracted at will from your eye sockets. They have powerful zoom capabilities, allowing you to see into the distance. \
 	They have been configured to be undetectable on body scanners."
 	item_cost = 30
-	path = /obj/item/device/compact_bionic_module/adaptive_binoculars
+	path = /obj/item/device/augment_implanter/adaptive_binoculars
 
 /datum/uplink_item/item/augment/aug_iatric_monitor
 	name = "Iatric Monitor CBM (head)"
@@ -26,14 +26,14 @@
 	It can be activated to gain a simple readout of your current physical state that can be understood regardless of your medical skill. \
 	NOTE: This augment is incompatible with synthetic biologies."
 	item_cost = 20
-	path = /obj/item/device/compact_bionic_module/iatric_monitor
+	path = /obj/item/device/augment_implanter/iatric_monitor
 
 /datum/uplink_item/item/augment/aug_wrist_blade
 	name = "Wrist Blade CBM (arm)"
 	desc = "This concealed housing is mounted inside your lower arm, and can be activated to extend a vicious, lightweight blade. Useful for assassinations or self-defense. \
 	Developed especially for concealment, its presence will not be revealed by body scanners."
 	item_cost = 32 // Identical to an energy sword - much less damage, but it has its own benefits, so consider it a sidegrade
-	path = /obj/item/device/compact_bionic_module/wrist_blade
+	path = /obj/item/device/augment_implanter/wrist_blade
 
 /datum/uplink_item/item/augment/aug_popout_shotgun
 	name = "Pop-out Shotgun CBM (arm)"
@@ -41,4 +41,4 @@
 	The ultimate trump card when you're out of options. It comes pre-loaded with a single buckshot shell. \
 	Due to its bulk, it is impossible to conceal from body scanners, and will be discovered by anyone feeling your bones - install with caution!"
 	item_cost = 60
-	path = /obj/item/device/compact_bionic_module/popout_shotgun
+	path = /obj/item/device/augment_implanter/popout_shotgun
