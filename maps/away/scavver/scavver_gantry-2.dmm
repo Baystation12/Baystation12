@@ -3974,10 +3974,9 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/scavver/harvestpod)
 "FO" = (
-/obj/effect/paint/black,
 /obj/effect/overmap/visitable/ship/scavver_gantry,
-/turf/simulated/wall,
-/area/scavver/gantry/up1)
+/turf/space,
+/area/space)
 "FR" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/blue{
 	dir = 4
@@ -14037,7 +14036,7 @@ eN
 eN
 eN
 eN
-eN
+FO
 eN
 eN
 eN
@@ -17239,7 +17238,7 @@ Rm
 Rm
 vZ
 DK
-FO
+fr
 xQ
 IH
 fr
