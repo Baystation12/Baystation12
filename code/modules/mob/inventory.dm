@@ -37,6 +37,9 @@
 	if(!canUnEquip(W))
 		return 0
 
+	if(W.equip_delay && !do_after(src, W.equip_delay, W))
+		return 0
+
 	equip_to_slot(W, slot, redraw_mob) //This proc should not ever fail.
 	return 1
 

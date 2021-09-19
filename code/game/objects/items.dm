@@ -62,6 +62,8 @@
 
 	var/use_alt_layer = FALSE // Use the slot's alternative layer when rendering on a mob
 
+	var/equip_delay
+
 	//** These specify item/icon overrides for _slots_
 
 	var/list/item_state_slots = list(slot_wear_id_str = "id") //overrides the default item_state for particular slots.

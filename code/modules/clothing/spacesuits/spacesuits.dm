@@ -133,7 +133,9 @@
 	randpixel = 0
 	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_DIONA)
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
+	equip_delay = 5 SECONDS
 
 /obj/item/clothing/suit/space/New()
 	..()
 	slowdown_per_slot[slot_wear_suit] = 1
+
