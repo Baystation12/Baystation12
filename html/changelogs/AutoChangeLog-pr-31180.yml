@@ -1,0 +1,6 @@
+author: Mucker
+delete-after: true
+changes:
+  - tweak: Made it more difficult to dodge simple mobs melee attacks.
+  - tweak: Mobs calling for help will no longer cascade and bring the entire map toward
+      them.
