@@ -29,13 +29,12 @@
 /mob/living/simple_animal/proc/do_attack(atom/A, turf/T)
 	face_atom(A)
 	var/missed = FALSE
-	if(!isturf(A) && !(A in T) ) // Turfs don't contain themselves so checking contents is pointless if we're targeting a turf.
+	if (get_dir(src, A) == facing_dir && get_dist(src, A) <= 1) // Turfs don't contain themselves so checking contents is pointless if we're targeting a turf.
 		missed = TRUE
-	else if(!T.AdjacentQuick(src))
+	else if (!T.AdjacentQuick(src))
 		missed = TRUE
 
 	if(missed) // Most likely we have a slow attack and they dodged it or we somehow got moved.
-		// admin_attack_log(src, A, "Animal-attacked (dodged)", admin_notify = FALSE)
 		playsound(src, 'sound/weapons/punchmiss.ogg', 75, 1)
 		visible_message(SPAN_WARNING("\The [src] misses their attack."))
 		return FALSE

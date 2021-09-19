@@ -1,16 +1,19 @@
 // Involves cooperating with other ai_holders.
 /datum/ai_holder
-	var/cooperative = FALSE						// If true, asks allies to help when fighting something.
-	var/call_distance = 14						// How far away calls for help will go for.
-	var/last_helpask_time = 0					// world.time when a mob asked for help.
-	var/list/faction_friends = list()			// List of all mobs inside the faction with ai_holders that have cooperate on, to call for help without using range().
-												// Note that this is only used for sending calls out. Receiving calls doesn't care about this list, only if the mob is in the faction.
-												// This means the AI could respond to a player's call for help, if a way to do so was implemented.
+	/// If true, asks allies to help when fighting something.
+	var/cooperative = FALSE
 
-	// These vars don't do anything currently. They did before but an optimization made them nonfunctional.
-	// It was probably worth it.
-	var/call_players = FALSE					// (Currently nonfunctional) If true, players get notified of an allied mob calling for help.
-	var/called_player_message = "needs help!"	// (Currently nonfunctional) Part of a message used when above var is true. Full message is "\The [holder] [called_player_message]"
+	/// How far away calls for help will go for.
+	var/call_distance = 10
+
+	/// time when this mob is allowed to call for help
+	var/next_sent_help_request  = 0
+
+	/// time when the mob can receive a help request from another mob
+	var/next_received_help_request  = 0
+
+	/// List of all mobs inside the faction with ai_holders that have cooperate on, to call for help without using range(). Note that this is only used for sending calls out. Receiving calls doesn't care about this list, only if the mob is in the faction.
+	var/list/faction_friends = list()
 
 /datum/ai_holder/New(new_holder)
 	..()
@@ -22,8 +25,9 @@
 		faction_friends -= src
 	return ..()
 
-// Handles everything about that list.
-// Call on initialization or if something weird happened like the mob switched factions.
+/* Handles everything about that list.
+*  Call on initialization or if something weird happened like the mob switched factions.
+*/
 /datum/ai_holder/proc/build_faction_friends()
 	if (faction_friends.len) // Already have a list.
 		// Assume we're moving to a new faction.
@@ -43,14 +47,16 @@
 	else // We're the 'founder' (first and/or only member) of this faction.
 		faction_friends |= holder
 
-// Requests help in combat from other mobs possessing ai_holders.
+/// Requests help in combat from other mobs possessing ai_holders.
 /datum/ai_holder/proc/request_help()
 	ai_log("request_help() : Entering.", AI_LOG_DEBUG)
-	if (!cooperative || ((world.time - last_helpask_time) < 10 SECONDS))
+	if (!cooperative || world.time < next_sent_help_request  || world.time < next_received_help_request)
 		return
 
+
+
 	ai_log("request_help() : Asking for help.", AI_LOG_INFO)
-	last_helpask_time = world.time
+	next_sent_help_request  = world.time + 10 SECONDS
 
 	for (var/mob/living/L in faction_friends)
 		if (L == holder) // Lets not call ourselves.
@@ -60,20 +66,13 @@
 		if (get_dist(L, holder) > call_distance) // Too far to 'hear' the call for help.
 			continue
 
-		if (holder.IIsAlly(L))
-			// This will currently never run sadly, until faction_friends is made to accept players too.
-			// That might be for the best since I can imagine it getting spammy in a big fight.
-			if (L.client && call_players) // Dealing with a player.
-				ai_log("request_help() : Asking [L] (Player) for help.", AI_LOG_INFO)
-				to_chat(L, "<span class='critical'>\The [holder] [called_player_message]</span>")
-
-			else if (L.ai_holder) // Dealing with an AI.
-				ai_log("request_help() : Asking [L] (AI) for help.", AI_LOG_INFO)
-				L.ai_holder.help_requested(holder)
+		if (holder.IIsAlly(L) && L.ai_holder)
+			ai_log("request_help() : Asking [L] (AI) for help.", AI_LOG_INFO)
+			L.ai_holder.help_requested(holder)
 
 	ai_log("request_help() : Exiting.", AI_LOG_DEBUG)
 
-// What allies receive when someone else is calling for help.1
+/// What allies receive when someone else is calling for help.
 /datum/ai_holder/proc/help_requested(mob/living/friend)
 	ai_log("help_requested() : Entering.", AI_LOG_DEBUG)
 	if (stance == STANCE_SLEEP)
@@ -102,6 +101,7 @@
 		if (get_dist(holder, friend) <= vision_range) // Within our sight.
 			ai_log("help_requested() : Help requested by [friend], and within target sharing range.", AI_LOG_INFO)
 			last_conflict_time = world.time // So we attack immediately and not threaten.
+			next_received_help_request  = world.time + 15 SECONDS
 			give_target(their_target, urgent = TRUE) // This will set us to the appropiate stance.
 			ai_log("help_requested() : Given target [target] by [friend]. Exiting", AI_LOG_DEBUG)
 			return
@@ -113,4 +113,3 @@
 		add_attacker(their_target) // We won't wait and 'warn' them while they're stabbing our ally
 	set_follow(friend, 10 SECONDS)
 	ai_log("help_requested() : Exiting.", AI_LOG_DEBUG)
-
