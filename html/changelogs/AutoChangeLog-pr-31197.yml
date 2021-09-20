@@ -1,0 +1,4 @@
+author: Jux
+delete-after: true
+changes:
+  - tweak: The Fleet Uniform Vendor no longer tries to give fleeties EC gloves.
