@@ -1,0 +1,4 @@
+author: Domic
+delete-after: true
+changes:
+  - bugfix: The salvage gantry no longer uses the Vulcan's thrusters.
