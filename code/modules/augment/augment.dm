@@ -11,6 +11,81 @@
 	var/augment_slots = EMPTY_BITFIELD
 
 
+#define ORGAN_STYLE ( \
+  (organ.status & ORGAN_ROBOTIC) ? 1 \
+: (organ.status & ORGAN_CRYSTAL) ? 2 \
+: 0 \
+)
+
+#define ORGAN_STYLE_OK ( \
+   style == 0 && (augment_flags & AUGMENT_BIOLOGICAL) \
+|| style == 1 && (augment_flags & AUGMENT_MECHANICAL) \
+|| style == 2 && (augment_flags & AUGMENT_CRYSTALINE) \
+)
+
+/obj/item/organ/internal/augment/proc/get_valid_parent_organ(mob/living/carbon/subject)
+	if (!istype(subject))
+		return
+	var/style
+	var/obj/item/organ/external/organ
+	var/list/organs = subject.organs_by_name
+	if ((augment_slots & AUGMENT_CHEST) && !organs["[BP_CHEST]_aug"] && (organ = organs[BP_CHEST]))
+		style = ORGAN_STYLE
+		if (ORGAN_STYLE_OK)
+			return organ
+	if ((augment_slots & AUGMENT_ARMOR) && !organs["[BP_CHEST]_aug_armor"] && (organ = organs[BP_CHEST]))
+		style = ORGAN_STYLE
+		if (ORGAN_STYLE_OK)
+			return organ
+	if ((augment_slots & AUGMENT_GROIN) && !organs["[BP_GROIN]_aug"] && (organ = organs[BP_GROIN]))
+		style = ORGAN_STYLE
+		if (ORGAN_STYLE_OK)
+			return organ
+	if ((augment_slots & AUGMENT_HEAD) && !organs["[BP_HEAD]_aug"] && (organ = organs[BP_HEAD]))
+		style = ORGAN_STYLE
+		if (ORGAN_STYLE_OK)
+			return organ
+	if (augment_slots & AUGMENT_ARM)
+		if (!organs["[BP_L_ARM]_aug"] && (organ = organs[BP_L_ARM]))
+			style = ORGAN_STYLE
+		if (ORGAN_STYLE_OK)
+			return organ
+		if (!organs["[BP_R_ARM]_aug"] && (organ = organs[BP_R_ARM]))
+			style = ORGAN_STYLE
+			if (ORGAN_STYLE_OK)
+				return organ
+	if (augment_slots & AUGMENT_HAND)
+		if (!organs["[BP_L_HAND]_aug"] && (organ = organs[BP_L_HAND]))
+			style = ORGAN_STYLE
+			if (ORGAN_STYLE_OK)
+				return organ
+		if (!organs["[BP_R_HAND]_aug"] && (organ = organs[BP_R_HAND]))
+			style = ORGAN_STYLE
+			if (ORGAN_STYLE_OK)
+				return organ
+	if (augment_slots & AUGMENT_LEG)
+		if (!organs["[BP_L_LEG]_aug"] && (organ = organs[BP_L_LEG]))
+			style = ORGAN_STYLE
+			if (ORGAN_STYLE_OK)
+				return organ
+		if (!organs["[BP_R_LEG]_aug"] && (organ = organs[BP_R_LEG]))
+			style = ORGAN_STYLE
+			if (ORGAN_STYLE_OK)
+				return organ
+	if (augment_slots & AUGMENT_FOOT)
+		if (!organs["[BP_L_FOOT]_aug"] && (organ = organs[BP_L_FOOT]))
+			style = ORGAN_STYLE
+			if (ORGAN_STYLE_OK)
+				return organ
+		if (!organs["[BP_R_FOOT]_aug"] && (organ = organs[BP_R_FOOT]))
+			style = ORGAN_STYLE
+			if (ORGAN_STYLE_OK)
+				return organ
+
+#undef ORGAN_STYLE_OK
+#undef ORGAN_STYLE
+
+
 /obj/item/organ/internal/augment/surgery_configure(mob/living/user, mob/living/carbon/human/target, obj/item/organ/parent, obj/item/tool, decl/surgery_step/action)
 	var/found
 	switch (parent?.organ_tag)

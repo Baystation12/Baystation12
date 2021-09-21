@@ -53,7 +53,7 @@
 	origin_tech = list(TECH_COMBAT = 3, TECH_ESOTERIC = 4)
 	deploy_sound = 'sound/effects/holster/sheathout.ogg'
 	retract_sound = 'sound/effects/holster/sheathin.ogg'
-	augment_flags = AUGMENT_MECHANICAL | AUGMENT_BIOLOGICAL| AUGMENT_SCANNABLE
+	augment_flags = AUGMENT_MECHANICAL | AUGMENT_BIOLOGICAL
 
 
 /obj/item/material/armblade/wrist
