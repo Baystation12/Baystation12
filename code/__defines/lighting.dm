@@ -47,6 +47,12 @@
 #define CL_MATRIX_CB 19
 #define CL_MATRIX_CA 20
 
+// Lightbulb statuses
+#define LIGHT_OK 		0 // A light bulb is installed and functioning.
+#define LIGHT_EMPTY		1 // There is no light bulb installed.
+#define LIGHT_BROKEN	2 // The light bulb is broken/shattered.
+#define LIGHT_BURNED	3 // The light bulb is burned out.
+
 // Lighting color presets
 #define LIGHT_COLOUR_WHITE	"#fefefe" // Clinical white light bulbs
 #define LIGHT_COLOUR_WARM	"#fffee0" // Warm yellowish light bulbs
