@@ -617,15 +617,11 @@
 	var/b_inner_range = 1
 	var/b_outer_range = 5
 	var/b_curve = 2
-	var/b_colour = "#fffee0"
+	var/b_colour = LIGHT_COLOUR_WARM
 	var/list/lighting_modes = list()
 	var/sound_on
 	var/random_tone = TRUE
-	var/list/random_tone_options = list(
-		"#fffee0",
-		"#e0fefe",
-		"#fefefe",
-	)
+	var/list/random_tone_options = LIGHT_STANDARD_COLORS
 
 /obj/item/light/Initialize()
 	. = ..()
@@ -642,7 +638,7 @@
 	return b_colour
 
 /obj/item/light/set_color(color)
-	b_colour = isnull(color) ? COLOR_WHITE : color
+	b_colour = isnull(color) ? LIGHT_COLOUR_WHITE : color
 	update_icon()
 
 /obj/item/light/tube
@@ -654,10 +650,9 @@
 	matter = list(MATERIAL_GLASS = 100, MATERIAL_ALUMINIUM = 20)
 
 	b_outer_range = 5
-	b_colour = "#fffee0"
 	lighting_modes = list(
-		LIGHTMODE_EMERGENCY = list(l_outer_range = 4, l_max_bright = 1, l_color = "#da0205"),
-		)
+		LIGHTMODE_EMERGENCY = list(l_outer_range = 4, l_max_bright = 1, l_color = LIGHT_COLOUR_E_RED),
+	)
 	sound_on = 'sound/machines/lightson.ogg'
 
 /obj/item/light/tube/party/Initialize() //Randomly colored light tubes. Mostly for testing, but maybe someone will find a use for them.
@@ -689,20 +684,19 @@
 	b_inner_range = 0.1
 	b_outer_range = 4
 	b_curve = 3
-	b_colour = "#fcfcc7"
 	lighting_modes = list(
-		LIGHTMODE_EMERGENCY = list(l_outer_range = 3, l_max_bright = 1, l_color = "#da0205"),
-		)
+		LIGHTMODE_EMERGENCY = list(l_outer_range = 3, l_max_bright = 1, l_color = LIGHT_COLOUR_E_RED),
+	)
 
 /obj/item/light/bulb/red
-	color = "#da0205"
-	b_colour = "#da0205"
+	color = LIGHT_COLOUR_E_RED
+	b_colour = LIGHT_COLOUR_E_RED
 	random_tone = FALSE
 
 /obj/item/light/bulb/red/readylight
 	lighting_modes = list(
-		LIGHTMODE_READY = list(l_outer_range = 5, l_max_bright = 1, l_color = "#00ff00"),
-		)
+		LIGHTMODE_READY = list(l_outer_range = 5, l_max_bright = 1, l_color = LIGHT_COLOUR_READY),
+	)
 
 /obj/item/light/throw_impact(atom/hit_atom)
 	..()
