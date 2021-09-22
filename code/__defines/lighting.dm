@@ -62,3 +62,9 @@
 #define LIGHT_COLOUR_SKRELL	"#66ccff" // Skrellian cyan lighting
 
 #define LIGHT_STANDARD_COLORS list(LIGHT_COLOUR_WHITE, LIGHT_COLOUR_WARM, LIGHT_COLOUR_COOL) // List of standard light colors used for randomized lighting and selectable printed lights.
+
+// Area lighting modes
+#define AREA_LIGHTING_WHITE		"white"
+#define AREA_LIGHTING_WARM		"warm"
+#define AREA_LIGHTING_COOL		"cool"
+#define AREA_LIGHTING_DEFAULT	"default" // For light replacers, defaults to whatever the area is set to. For areas, uses the initial lighting value from the light bulb itself.

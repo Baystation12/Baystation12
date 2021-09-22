@@ -230,7 +230,16 @@
 		construct.transfer_fingerprints_to(src)
 		set_dir(construct.dir)
 	else
-		lightbulb = new light_type(src)
+		var/light_color = null
+		var/area/A = get_area(src)
+		switch (A.lighting_tone)
+			if (AREA_LIGHTING_WHITE)
+				light_color = LIGHT_COLOUR_WHITE
+			if (AREA_LIGHTING_WARM)
+				light_color = LIGHT_COLOUR_WARM
+			if (AREA_LIGHTING_COOL)
+				light_color = LIGHT_COLOUR_COOL
+		lightbulb = new light_type(src, light_color)
 		if(prob(lightbulb.broken_chance))
 			broken(TRUE)
 
@@ -676,11 +685,12 @@
 	/// List of colors to pick from on init if `random_tone` is set.
 	var/list/random_tone_options = LIGHT_STANDARD_COLORS
 
-/obj/item/light/Initialize()
+/obj/item/light/Initialize(mapload, light_color)
 	. = ..()
-	if (random_tone)
-		b_colour = pick(random_tone_options)
-		update_icon()
+	if (light_color)
+		set_color(light_color)
+	else if (random_tone)
+		set_color(pick(random_tone_options))
 
 /obj/item/light/examine(mob/user)
 	. = ..()
@@ -740,6 +750,10 @@
 	lighting_modes = list(
 		LIGHTMODE_EMERGENCY = list(l_outer_range = 3, l_max_bright = 1, l_color = LIGHT_COLOUR_E_RED)
 	)
+
+/obj/item/light/bulb/warm/b_colour = LIGHT_COLOUR_WARM
+/obj/item/light/bulb/cool/b_colour = LIGHT_COLOUR_COOL
+/obj/item/light/bulb/white/b_colour = LIGHT_COLOUR_WHITE
 
 /obj/item/light/bulb/red
 	color = LIGHT_COLOUR_E_RED
