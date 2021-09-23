@@ -901,7 +901,7 @@
 				else
 					to_chat(M, "<span class='warning'>No ban appeals URL has been set.</span>")
 				log_and_message_admins("has banned [mob_key].\nReason: [reason]\nThis will be removed in [mins_readable].")
-
+				SSwebhooks.send(WEBHOOK_BAN, list("admin" = usr.client.ckey, "player" = mob_key, "time" = mins_readable, "reason" = reason))
 				qdel(M.client)
 				//qdel(M)	// See no reason why to delete mob. Important stuff can be lost. And ban can be lifted before round ends.
 			if("No")
@@ -931,7 +931,7 @@
 				log_and_message_admins("has banned [mob_key].\nReason: [reason]\nThis is a ban until appeal.")
 				SSstatistics.add_field("ban_perma",1)
 				DB_ban_record(BANTYPE_PERMA, M, -1, reason)
-
+				SSwebhooks.send(WEBHOOK_BAN, list("admin" = usr.client.ckey, "player" = mob_key, "time" = "perma", "reason" = reason))
 				qdel(M.client)
 				//qdel(M)
 			if("Cancel")

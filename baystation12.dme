@@ -3065,6 +3065,7 @@
 #include "code\modules\ventcrawl\ventcrawl_multiz.dm"
 #include "code\modules\ventcrawl\ventcrawl_verb.dm"
 #include "code\modules\webhooks\_webhook.dm"
+#include "code\modules\webhooks\webhook_admin.dm"
 #include "code\modules\webhooks\webhook_custom_event.dm"
 #include "code\modules\webhooks\webhook_ooc.dm"
 #include "code\modules\webhooks\webhook_registration.dm"
