@@ -1,0 +1,6 @@
+author: AzlanOnPC, Pawn, Fre3bie
+delete-after: true
+changes:
+  - tweak: Mercenary EOD hardsuit is now spaceproof.
+  - tweak: Vox can now wear mercenary voidsuits and hardsuits, while Skrell and unathi
+      can now wear merc and EVA hardsuits.
