@@ -50,33 +50,6 @@ exactly 0 "emagged = 0/1" 'emagged\s*=\s*\d' -P
 exactly 0 "simulated = 0/1" 'simulated\s*=\s*\d' -P
 # With the potential exception of << if you increase any of these numbers you're probably doing it wrong
 
-broken_files=0
-while read -r file; do
-	ftype="$(uchardet "$file")"
-	case "$ftype" in
-		ASCII)
-			continue;;
-		UTF-8)
-			if diff -d "$file" <(<"$file" iconv -c -f utf8 -t iso8859-1 2>/dev/null | tr -d $'\x7F-\x9F' | iconv -c -f iso8859-1 -t utf8 2>/dev/null); then
-				continue
-			else
-				echo "$file contains Unicode characters outside the ISO 8859-1 character set"
-				(( broken_files = broken_files + 1 ))
-			fi;;
-		*)
-			if diff -d "$file" <(<"$file" tr -d $'\x7F-\x9F' | iconv -c -f iso8859-1 -t utf8 2>/dev/null | iconv -c -f utf8 -t iso8859-1 2>/dev/null); then
-				continue
-			else
-				echo "$file contains characters outside the ISO 8859-1 character set"
-				(( broken_files = broken_files + 1 ))
-			fi;;
-	esac
-done < <(find . -name '*.dm')
-echo "$broken_files files with invalid characters"
-if (( broken_files > 0 )); then
-	FAILED=1
-fi
-
 num=`find ./html/changelogs -not -name "*.yml" | wc -l`
 echo "$num non-yml files (expecting exactly 2)"
 [ $num -eq 2 ] || FAILED=1
