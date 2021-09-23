@@ -359,7 +359,7 @@
 		)
 		if (I)
 			var/obj/structure/inflatable/S = target
-			I.health = S.health
+			copy_health(S, I)
 		qdel(target)
 
 	else if (istype(target, /obj/item/inflatable))
@@ -517,7 +517,7 @@
 		if(istype(A, /obj/item/reagent_containers/food/snacks/grown))
 			generating_power = base_power_generation
 			using_item = A
-		else 
+		else
 			for(var/fuel_type in fuel_types)
 				if(istype(A, fuel_type))
 					generating_power = fuel_types[fuel_type] * base_power_generation
