@@ -136,6 +136,7 @@
 	..()
 	install_system(new /obj/item/mech_equipment/drill/steel(src), HARDPOINT_LEFT_HAND)
 	install_system(new /obj/item/mech_equipment/mounted_system/extinguisher(src), HARDPOINT_RIGHT_HAND)
+	install_system(new /obj/item/mech_equipment/atmos_shields(src), HARDPOINT_BACK)
 
 /obj/item/mech_component/sensors/firefighter/prebuild()
 	..()
