@@ -74,7 +74,7 @@
 	updateDisplay()
 
 obj/item/paper/admin/proc/updateDisplay()
-	show_browser(usr, "<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[headerOn ? header : ""][info_links][stamps][footerOn ? footer : ""][interactions]</BODY></HTML>", "window=[name];can_close=0")
+	show_browser(usr, "<html><head><meta charset='utf-8'/><title>[name]</title></head><body>[headerOn ? header : ""][info_links][stamps][footerOn ? footer : ""][interactions]</body></html>", "window=[name];can_close=0")
 
 
 
