@@ -81,6 +81,7 @@ PROCESSING_SUBSYSTEM_DEF(plants)
 /datum/controller/subsystem/processing/plants/proc/create_random_seed(var/survive_on_station)
 	var/datum/seed/seed = new()
 	seed.randomize()
+	seed.uid = seeds.len + 1
 	seed.name = "[seed.uid]"
 	seeds[seed.name] = seed
 

@@ -3,7 +3,7 @@
 
 /obj/item/device/electronic_assembly
 	name = "electronic assembly"
-	desc = "It's a case, for building small electronics with."
+	desc = "It's a case used for assembling small electronics."
 	w_class = ITEM_SIZE_SMALL
 	icon = 'icons/obj/assemblies/electronic_setups.dmi'
 	icon_state = "setup_small"
@@ -14,7 +14,7 @@
 	var/max_components = IC_MAX_SIZE_BASE
 	var/max_complexity = IC_COMPLEXITY_BASE
 	var/opened = TRUE
-	var/obj/item/weapon/cell/battery // Internal cell which most circuits need to work.
+	var/obj/item/cell/battery // Internal cell which most circuits need to work.
 	var/can_charge = TRUE //Can it be charged in a recharger?
 	var/circuit_flags = IC_FLAG_ANCHORABLE
 	var/charge_sections = 4
@@ -25,7 +25,10 @@
 	var/creator // circuit creator if any
 	var/static/next_assembly_id = 0
 	var/interact_page = 0
-	var/components_per_page = 5
+	var/components_per_page = 10
+	/// Spark system used for creating sparks while the assembly is damaged and destroyed.
+	var/datum/effect/effect/system/spark_spread/spark_system
+	var/adrone = FALSE
 	health = 30
 	pass_flags = 0
 	anchored = FALSE
@@ -52,14 +55,21 @@
 /obj/item/device/electronic_assembly/examine(mob/user)
 	. = ..()
 	if(IC_FLAG_ANCHORABLE & circuit_flags)
-		to_chat(user, "<span class='notice'>The anchoring bolts [anchored ? "are" : "can be"] <b>wrenched</b> in place and the maintenance panel [opened ? "can be" : "is"] <b>screwed</b> in place.</span>")
+		to_chat(user, SPAN_NOTICE("The anchoring bolts [anchored ? "are" : "can be"] <b>wrenched</b> in place and the maintenance panel [opened ? "can be" : "is"] <b>screwed</b> in place."))
 	else
-		to_chat(user, "<span class='notice'>The maintenance panel [opened ? "can be" : "is"] <b>screwed</b> in place.</span>")
-	if(health != initial(health))
-		if(health <= initial(health)/2)
-			to_chat(user,"<span class='warning'>It looks pretty beat up.</span>")
+		to_chat(user, SPAN_NOTICE("The maintenance panel [opened ? "can be" : "is"] <b>screwed</b> in place."))
+
+	switch (health / initial(health))
+		if(0.99 to INFINITY)
+			to_chat(user, SPAN_NOTICE("\The [src] is in good condition."))
+		if(0.75 to 0.99)
+			to_chat(user, SPAN_NOTICE("\The [src] has a few scuffs and scratches."))
+		if(0.5 to 0.75)
+			to_chat(user, SPAN_DANGER("\The [src] is covered in dents and punctured in several places."))
+		if(0.25 to 0.5)
+			to_chat(user, SPAN_DANGER("\The [src] looks seriously damaged!"))
 		else
-			to_chat(user, "<span class='warning'>Its got a few dents in it.</span>")
+			to_chat(user, SPAN_WARNING("\The [src] is barely holding together!"))
 
 	if((isobserver(user) && ckeys_allowed_to_scan[user.ckey]) || check_rights(R_ADMIN, 0, user))
 		to_chat(user, "You can <a href='?src=\ref[src];ghostscan=1'>scan</a> this circuit.");
@@ -67,12 +77,32 @@
 
 /obj/item/device/electronic_assembly/proc/take_damage(var/amnt)
 	health = health - amnt
-	if(health <= 0)
-		visible_message("<span class='danger'>\The [src] falls to pieces!</span>")
-		qdel(src)
-	else if(health < initial(health)*0.15 && prob(5))
-		visible_message("<span class='danger'>\The [src] starts to break apart!</span>")
 
+	if(health <= 0)
+		visible_message(SPAN_WARNING("\The [src] falls to pieces!"))
+		if(w_class == ITEM_SIZE_HUGE)
+			if(adrone)
+				new /obj/effect/decal/cleanable/blood/gibs/robot(loc)
+			new /obj/item/stack/material/steel(loc, rand(7, 10))
+		else if(w_class == ITEM_SIZE_LARGE)
+			if(adrone)
+				new /obj/effect/decal/cleanable/blood/gibs/robot(loc)
+			new /obj/item/stack/material/steel(loc, rand(3, 6))
+		else if(w_class == ITEM_SIZE_NORMAL)
+			new /obj/item/stack/material/steel(loc, rand(1, 3))
+		else
+			new /obj/item/stack/material/steel(loc)
+		if(battery && battery.charge > 0)
+			spark_system.start()
+		playsound(loc, 'sound/items/electronic_assembly_empty.ogg', 100, 1)
+		icon = 0
+		addtimer(CALLBACK(src, .proc/fall_apart), 5.1)
+	else if(health <= initial(health)*0.25)
+		if(battery && battery.charge > 0)
+			visible_message(SPAN_WARNING("\The [src] sputters and sparks!"))
+			spark_system.start()
+		opened = TRUE
+		on_update_icon()
 
 /obj/item/device/electronic_assembly/proc/check_interactivity(mob/user)
 	return (!user.incapacitated() && CanUseTopic(user))
@@ -95,13 +125,20 @@
 	.=..()
 	START_PROCESSING(SScircuit, src)
 	matter[MATERIAL_STEEL] = round((max_complexity + max_components) / 4) * SScircuit.cost_multiplier
+	spark_system = new /datum/effect/effect/system/spark_spread
+	spark_system.set_up(7, 0, src)
+	spark_system.attach(src)
 
 /obj/item/device/electronic_assembly/Destroy()
+	QDEL_NULL(spark_system)
 	STOP_PROCESSING(SScircuit, src)
 	for(var/circ in assembly_components)
 		remove_component(circ)
 		qdel(circ)
 	return ..()
+
+/obj/item/device/electronic_assembly/proc/fall_apart()
+	qdel(src)
 
 /obj/item/device/electronic_assembly/Process()
 	// First we generate power.
@@ -109,8 +146,10 @@
 		P.make_energy()
 
 	var/power_failure = FALSE
-	if(initial(health)/health < 0.5 && prob(5))
-		visible_message("<span class='warning'>\The [src] shudders and sparks</span>")
+	if(health <= initial(health)*0.25 && prob(1))
+		if(battery && battery.charge > 0)
+			visible_message(SPAN_WARNING("\The [src] sparks violently!"))
+			spark_system.start()
 		power_failure = TRUE
 	// Now spend it.
 	for(var/I in assembly_components)
@@ -211,7 +250,7 @@
 				var/saved = "On circuit printers with cloning enabled, you may use the code below to clone the circuit:<br><br><code>[SScircuit.save_electronic_assembly(src)]</code>"
 				show_browser(usr, saved, "window=circuit_scan;size=500x600;border=1;can_resize=1;can_close=1;can_minimize=1")
 			else
-				to_chat(usr, "<span class='warning'>The circuit is empty!</span>")
+				to_chat(usr, SPAN_DANGER("The circuit is empty!"))
 		return 0
 
 	if(isobserver(usr))
@@ -228,11 +267,11 @@
 
 	if(href_list["remove_cell"])
 		if(!battery)
-			to_chat(usr, "<span class='warning'>There's no power cell to remove from \the [src].</span>")
+			to_chat(usr, SPAN_DANGER("There's no power cell to remove from \the [src]."))
 		else
 			battery.dropInto(loc)
 			playsound(src, 'sound/items/Crowbar.ogg', 50, 1)
-			to_chat(usr, "<span class='notice'>You pull \the [battery] out of \the [src]'s power supplier.</span>")
+			to_chat(usr, SPAN_NOTICE("You pull \the [battery] out of \the [src]'s power supplier."))
 			battery = null
 
 	if(href_list["component"])
@@ -244,7 +283,7 @@
 
 			add_allowed_scanner(usr.ckey)
 
-			var/current_pos = assembly_components.Find(component)
+			var/current_pos = list_find(assembly_components, component)
 
 			if(href_list["remove"])
 				try_remove_component(component, usr)
@@ -273,7 +312,7 @@
 	if(!check_interactivity(M))
 		return
 	if(!QDELETED(src) && input)
-		to_chat(M, "<span class='notice'>The machine now has a label reading '[input]'.</span>")
+		to_chat(M, SPAN_NOTICE("The machine now has a label reading '[input]'."))
 		name = input
 
 /obj/item/device/electronic_assembly/proc/add_allowed_scanner(ckey)
@@ -327,30 +366,30 @@
 // Returns true if the circuit made it inside.
 /obj/item/device/electronic_assembly/proc/try_add_component(obj/item/integrated_circuit/IC, mob/user)
 	if(!opened)
-		to_chat(user, "<span class='warning'>\The [src]'s hatch is closed, you can't put anything inside.</span>")
+		to_chat(user, SPAN_DANGER("\The [src]'s hatch is closed, you can't put anything inside."))
 		return FALSE
 
 	if(IC.w_class > w_class)
-		to_chat(user, "<span class='warning'>\The [IC] is way too big to fit into \the [src].</span>")
+		to_chat(user, SPAN_DANGER("\The [IC] is way too big to fit into \the [src]."))
 		return FALSE
 
 	var/total_part_size = return_total_size()
 	var/total_complexity = return_total_complexity()
 
 	if((total_part_size + IC.size) > max_components)
-		to_chat(user, "<span class='warning'>You can't seem to add the '[IC]', as there's insufficient space.</span>")
+		to_chat(user, SPAN_DANGER("You can't seem to add the '[IC]', as there is insufficient space."))
 		return FALSE
 	if((total_complexity + IC.complexity) > max_complexity)
-		to_chat(user, "<span class='warning'>You can't seem to add the '[IC]', since this setup's too complicated for the case.</span>")
+		to_chat(user, SPAN_DANGER("You can't seem to add the '[IC]', since this setup is too complicated for the case."))
 		return FALSE
 	if((allowed_circuit_action_flags & IC.action_flags) != IC.action_flags)
-		to_chat(user, "<span class='warning'>You can't seem to add the '[IC]', since the case doesn't support the circuit type.</span>")
+		to_chat(user, SPAN_DANGER("You can't seem to add the '[IC]', since the case doesn't support the circuit type."))
 		return FALSE
 
 	if(!user.unEquip(IC,src))
 		return FALSE
 
-	to_chat(user, "<span class='notice'>You slide [IC] inside [src].</span>")
+	to_chat(user, SPAN_NOTICE("You slide [IC] inside [src]."))
 	playsound(src, 'sound/items/Deconstruct.ogg', 50, 1)
 	add_allowed_scanner(user.ckey)
 
@@ -368,17 +407,17 @@
 /obj/item/device/electronic_assembly/proc/try_remove_component(obj/item/integrated_circuit/IC, mob/user, silent)
 	if(!opened)
 		if(!silent)
-			to_chat(user, "<span class='warning'>[src]'s hatch is closed, so you can't fiddle with the internal components.</span>")
+			to_chat(user, SPAN_DANGER("\The [src]'s hatch is closed, so you can't fiddle with the internal components."))
 		return FALSE
 
 	if(!IC.removable)
 		if(!silent)
-			to_chat(user, "<span class='warning'>[src] is permanently attached to the case.</span>")
+			to_chat(user, SPAN_DANGER("\The [src] is permanently attached to the case."))
 		return FALSE
 
 	remove_component(IC)
 	if(!silent)
-		to_chat(user, "<span class='notice'>You pop \the [IC] out of the case, and slide it out.</span>")
+		to_chat(user, SPAN_NOTICE("You pop \the [IC] out of the case, and slide it out."))
 		playsound(src, 'sound/items/crowbar.ogg', 50, 1)
 		user.put_in_hands(IC)
 	add_allowed_scanner(user.ckey)
@@ -401,15 +440,16 @@
 	for(var/obj/item/integrated_circuit/input/S in assembly_components)
 		if(S.sense(target,user,proximity))
 			if(proximity)
-				visible_message("<span class='notice'>\The [user] waves \the [src] around \the [target].</span>")
+				visible_message(SPAN_NOTICE("\The [user] waves \the [src] around \the [target]."))
 			else
-				visible_message("<span class='notice'>\The [user] points \the [src] towards \the [target].</span>")
+				visible_message(SPAN_NOTICE("\The [user] points \the [src] towards \the [target]."))
 
 
 /obj/item/device/electronic_assembly/attackby(obj/item/I, mob/living/user)
-	if(istype(I, /obj/item/weapon/wrench))
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	if(istype(I, /obj/item/wrench))
 		if(istype(loc, /turf) && (IC_FLAG_ANCHORABLE & circuit_flags))
-			user.visible_message("\The [user] wrenches \the [src]'s anchoring bolts [anchored ? "back" : "into position"].")
+			user.visible_message(SPAN_NOTICE("\The [user] wrenches \the [src]'s anchoring bolts [anchored ? "back" : "into position"]."))
 			playsound(get_turf(user), 'sound/items/Ratchet.ogg',50)
 			if(user.do_skilled(5 SECONDS, SKILL_CONSTRUCTION, src))
 				anchored = !anchored
@@ -427,35 +467,35 @@
 			interact(user)
 			return TRUE
 		else
-			to_chat(user, "<span class='warning'>[src]'s hatch is closed, so you can't fiddle with the internal components.</span>")
+			to_chat(user, SPAN_DANGER("\The [src]'s hatch is closed, so you can't fiddle with the internal components."))
 			for(var/obj/item/integrated_circuit/input/S in assembly_components)
 				S.attackby_react(I,user,user.a_intent)
 			return ..()
-	else if(istype(I, /obj/item/weapon/cell))
+	else if(istype(I, /obj/item/cell))
 		if(!opened)
-			to_chat(user, "<span class='warning'>[src]'s hatch is closed, so you can't access \the [src]'s power supplier.</span>")
+			to_chat(user, SPAN_DANGER("\The [src]'s hatch is closed, so you can't access \the [src]'s power supply."))
 			for(var/obj/item/integrated_circuit/input/S in assembly_components)
 				S.attackby_react(I,user,user.a_intent)
 			return ..()
 		if(battery)
-			to_chat(user, "<span class='warning'>[src] already has \a [battery] installed. Remove it first if you want to replace it.</span>")
+			to_chat(user, SPAN_DANGER("\The [src] already has \a [battery] installed. Remove it first if you want to replace it."))
 			for(var/obj/item/integrated_circuit/input/S in assembly_components)
 				S.attackby_react(I,user,user.a_intent)
 			return ..()
-		var/obj/item/weapon/cell/cell = I
+		var/obj/item/cell/cell = I
 		if(user.unEquip(I,loc))
 			user.drop_from_inventory(I, loc)
 			cell.forceMove(src)
 			battery = cell
 			playsound(get_turf(src), 'sound/items/Deconstruct.ogg', 50, 1)
-			to_chat(user, "<span class='notice'>You slot \the [cell] inside \the [src]'s power supplier.</span>")
+			to_chat(user, SPAN_NOTICE("You slot \the [cell] inside \the [src]."))
 			return TRUE
 		return FALSE
 	else if(istype(I, /obj/item/device/integrated_electronics/detailer))
 		var/obj/item/device/integrated_electronics/detailer/D = I
 		detail_color = D.detail_color
 		update_icon()
-	else if(istype(I, /obj/item/weapon/screwdriver))
+	else if(istype(I, /obj/item/screwdriver))
 		var/hatch_locked = FALSE
 		for(var/obj/item/integrated_circuit/manipulation/hatchlock/H in assembly_components)
 			// If there's more than one hatch lock, only one needs to be enabled for the assembly to be locked
@@ -464,21 +504,23 @@
 				break
 
 		if(hatch_locked)
-			to_chat(user, "<span class='notice'>The screws are covered by a locking mechanism!</span>")
+			to_chat(user, SPAN_NOTICE("The screws are covered by a locking mechanism!"))
 			return FALSE
 
 		playsound(src, 'sound/items/Screwdriver.ogg', 25)
 		opened = !opened
-		to_chat(user, "<span class='notice'>You [opened ? "open" : "close"] the maintenance hatch of [src].</span>")
+		to_chat(user, SPAN_NOTICE("You [opened ? "open" : "close"] the maintenance hatch of \the [src]."))
 		update_icon()
 	else if(isCoil(I))
 		var/obj/item/stack/cable_coil/C = I
 		if(health != initial(health) && do_after(user, 10, src) && C.use(1))
-			user.visible_message("\The [user] patches up \the [src]")
+			user.visible_message(SPAN_NOTICE("\The [user] patches up \the [src]."))
 			health = min(initial(health), health + 5)
 	else
-		if(user.a_intent == I_HURT) // Kill it
-			to_chat(user, "<span class='danger'>\The [user] hits \the [src] with \the [I]</span>")
+		if(user.a_intent == I_HURT && (!(user.l_hand == src || user.r_hand == src))) // Kill it
+			user.do_attack_animation(src)
+			playsound(loc, 'sound/weapons/genhit1.ogg', 100, 1)
+			to_chat(user, SPAN_WARNING("\The [user] hits \the [src] with \the [I]!"))
 			take_damage(I.force)
 		else
 			for(var/obj/item/integrated_circuit/input/S in assembly_components)
@@ -489,6 +531,10 @@
 
 /obj/item/device/electronic_assembly/bullet_act(var/obj/item/projectile/P)
 	take_damage(P.damage)
+	if(istype(P,/obj/item/projectile/beam))
+		playsound(loc, SOUNDS_LASER_METAL, 100, 1)
+	else if(istype(P,/obj/item/projectile/bullet))
+		playsound(loc, SOUNDS_BULLET_METAL, 100, 1)
 
 /obj/item/device/electronic_assembly/attack_generic(mob/user, damage)
 	take_damage(damage)
@@ -531,44 +577,44 @@
 /obj/item/device/electronic_assembly/calc
 	name = "type-b electronic assembly"
 	icon_state = "setup_small_calc"
-	desc = "It's a case, for building small electronics with. This one resembles a pocket calculator."
+	desc = "It's a case used for assembling small electronics. This one resembles a pocket calculator."
 
 /obj/item/device/electronic_assembly/clam
 	name = "type-c electronic assembly"
 	icon_state = "setup_small_clam"
-	desc = "It's a case, for building small electronics with. This one has a clamshell design."
+	desc = "It's a case used for assembling small electronics. This one has a clamshell design."
 
 /obj/item/device/electronic_assembly/simple
 	name = "type-d electronic assembly"
 	icon_state = "setup_small_simple"
-	desc = "It's a case, for building small electronics with. This one has a simple design."
+	desc = "It's a case used for assembling small electronics. This one has a simple design."
 
 /obj/item/device/electronic_assembly/hook
 	name = "type-e electronic assembly"
 	icon_state = "setup_small_hook"
-	desc = "It's a case, for building small electronics with. This one looks like it has a belt clip."
+	desc = "It's a case used for assembling small electronics. This one looks like it has a belt clip."
 	slot_flags = SLOT_BELT
 
 /obj/item/device/electronic_assembly/pda
 	name = "type-f electronic assembly"
 	icon_state = "setup_small_pda"
-	desc = "It's a case, for building small electronics with. This one resembles a PDA."
+	desc = "It's a case used for assembling small electronics. This one resembles a PDA."
 	slot_flags = SLOT_BELT | SLOT_ID
 
 /obj/item/device/electronic_assembly/augment
 	name = "augment electronic assembly"
 	icon_state = "setup_augment"
-	desc = "It's a case, for building small electronics with. This one is designed to go inside a cybernetic augment."
+	desc = "It's a case used for assembling small electronics. This one is designed to go inside a cybernetic augment."
 	circuit_flags = IC_FLAG_CAN_FIRE
 
 /obj/item/device/electronic_assembly/medium
 	name = "electronic mechanism"
 	icon_state = "setup_medium"
-	desc = "It's a case, for building medium-sized electronics with."
+	desc = "It's a case used for assembling electronics."
 	w_class = ITEM_SIZE_NORMAL
 	max_components = IC_MAX_SIZE_BASE * 2
 	max_complexity = IC_COMPLEXITY_BASE * 2
-	health = 20
+	health = 45
 
 /obj/item/device/electronic_assembly/medium/default
 	name = "type-a electronic mechanism"
@@ -576,23 +622,23 @@
 /obj/item/device/electronic_assembly/medium/box
 	name = "type-b electronic mechanism"
 	icon_state = "setup_medium_box"
-	desc = "It's a case, for building medium-sized electronics with. This one has a boxy design."
+	desc = "It's a case used for assembling electronics. This one has a boxy design."
 
 /obj/item/device/electronic_assembly/medium/clam
 	name = "type-c electronic mechanism"
 	icon_state = "setup_medium_clam"
-	desc = "It's a case, for building medium-sized electronics with. This one has a clamshell design."
+	desc = "It's a case used for assembling electronics. This one has a clamshell design."
 
 /obj/item/device/electronic_assembly/medium/medical
 	name = "type-d electronic mechanism"
 	icon_state = "setup_medium_med"
-	desc = "It's a case, for building medium-sized electronics with. This one resembles some type of medical apparatus."
+	desc = "It's a case used for assembling electronics. This one resembles some type of medical apparatus."
 
 /obj/item/device/electronic_assembly/medium/gun
 	name = "type-e electronic mechanism"
 	icon_state = "setup_medium_gun"
 	item_state = "circuitgun"
-	desc = "It's a case, for building medium-sized electronics with. This one resembles a gun, or some type of tool, if you're feeling optimistic. It can fire guns and throw items while the user is holding it."
+	desc = "It's a case used for assembling electronics. This one resembles a gun, or some type of tool, if you're feeling optimistic. It can fire guns and throw items while the user is holding it."
 	item_icons = list(
 		icon_l_hand = 'icons/mob/onmob/items/lefthand_guns.dmi',
 		icon_r_hand = 'icons/mob/onmob/items/righthand_guns.dmi'
@@ -602,16 +648,17 @@
 /obj/item/device/electronic_assembly/medium/radio
 	name = "type-f electronic mechanism"
 	icon_state = "setup_medium_radio"
-	desc = "It's a case, for building medium-sized electronics with. This one resembles an old radio."
+	desc = "It's a case used for assembling electronics. This one resembles an old radio."
 
 /obj/item/device/electronic_assembly/large
 	name = "electronic machine"
 	icon_state = "setup_large"
-	desc = "It's a case, for building large electronics with."
+	desc = "It's a case used for assembling large electronics."
 	w_class = ITEM_SIZE_LARGE
 	max_components = IC_MAX_SIZE_BASE * 4
 	max_complexity = IC_COMPLEXITY_BASE * 4
-	health = 30
+	health = 50
+	randpixel = 0
 
 /obj/item/device/electronic_assembly/large/default
 	name = "type-a electronic machine"
@@ -619,38 +666,40 @@
 /obj/item/device/electronic_assembly/large/scope
 	name = "type-b electronic machine"
 	icon_state = "setup_large_scope"
-	desc = "It's a case, for building large electronics with. This one resembles an oscilloscope."
+	desc = "It's a case used for assembling large electronics. This one resembles an oscilloscope."
 
 /obj/item/device/electronic_assembly/large/terminal
 	name = "type-c electronic machine"
 	icon_state = "setup_large_terminal"
-	desc = "It's a case, for building large electronics with. This one resembles a computer terminal."
+	desc = "It's a case used for assembling large electronics. This one resembles a computer terminal."
 
 /obj/item/device/electronic_assembly/large/arm
 	name = "type-d electronic machine"
 	icon_state = "setup_large_arm"
-	desc = "It's a case, for building large electronics with. This one resembles a robotic arm."
+	desc = "It's a case used for assembling large electronics. This one resembles a robotic arm."
 
 /obj/item/device/electronic_assembly/large/tall
 	name = "type-e electronic machine"
 	icon_state = "setup_large_tall"
-	desc = "It's a case, for building large electronics with. This one has a tall design."
+	desc = "It's a case used for assembling large electronics. This one has a tall design."
 
 /obj/item/device/electronic_assembly/large/industrial
 	name = "type-f electronic machine"
 	icon_state = "setup_large_industrial"
-	desc = "It's a case, for building large electronics with. This one resembles some kind of industrial machinery."
+	desc = "It's a case used for assembling large electronics. This one resembles some kind of industrial machinery."
 
 /obj/item/device/electronic_assembly/drone
 	name = "electronic drone"
 	icon_state = "setup_drone"
-	desc = "It's a case, for building mobile electronics with."
+	desc = "It's a case used for assembling mobile electronics."
 	w_class = ITEM_SIZE_LARGE
 	max_components = IC_MAX_SIZE_BASE * 3
 	max_complexity = IC_COMPLEXITY_BASE * 3
 	allowed_circuit_action_flags = IC_ACTION_MOVEMENT | IC_ACTION_COMBAT | IC_ACTION_LONG_RANGE
 	circuit_flags = 0
-	health = 50
+	health = 60
+	randpixel = 0
+	adrone = TRUE
 
 /obj/item/device/electronic_assembly/drone/can_move()
 	return TRUE
@@ -661,36 +710,43 @@
 /obj/item/device/electronic_assembly/drone/arms
 	name = "type-b electronic drone"
 	icon_state = "setup_drone_arms"
-	desc = "It's a case, for building mobile electronics with. This one is armed and dangerous."
+	desc = "It's a case used for assembling mobile electronics. This one is armed and dangerous."
+	health = 70
 
 /obj/item/device/electronic_assembly/drone/secbot
 	name = "type-c electronic drone"
 	icon_state = "setup_drone_secbot"
-	desc = "It's a case, for building mobile electronics with. This one resembles a Securitron."
+	desc = "It's a case used for assembling mobile electronics. This one resembles a Securitron."
+	health = 70
 
 /obj/item/device/electronic_assembly/drone/medbot
 	name = "type-d electronic drone"
 	icon_state = "setup_drone_medbot"
-	desc = "It's a case, for building mobile electronics with. This one resembles a Medibot."
+	desc = "It's a case used for assembling mobile electronics. This one resembles a Medibot."
+	health = 50
 
 /obj/item/device/electronic_assembly/drone/genbot
 	name = "type-e electronic drone"
 	icon_state = "setup_drone_genbot"
-	desc = "It's a case, for building mobile electronics with. This one has a generic bot design."
+	desc = "It's a case used for assembling mobile electronics. This one has a generic bot design."
 
 /obj/item/device/electronic_assembly/drone/android
 	name = "type-f electronic drone"
 	icon_state = "setup_drone_android"
-	desc = "It's a case, for building mobile electronics with. This one has a hominoid design."
+	desc = "It's a huge, bipedal case used for assembling hominid-esque mobile electronics and effigies."
+	w_class = ITEM_SIZE_HUGE
+	max_components = IC_MAX_SIZE_BASE * 5
+	max_complexity = IC_COMPLEXITY_BASE * 5
+	health = 100
 
 /obj/item/device/electronic_assembly/wallmount
 	name = "wall-mounted electronic assembly"
 	icon_state = "setup_wallmount_medium"
-	desc = "It's a case, for building medium-sized electronics with. It has a magnetized backing to allow it to stick to walls, but you'll still need to wrench the anchoring bolts in place to keep it on."
+	desc = "It's a case used for assembling electronics. It has a magnetized backing to allow it to stick to walls, but you'll still need to wrench the anchoring bolts in place to keep it on."
 	w_class = ITEM_SIZE_NORMAL
 	max_components = IC_MAX_SIZE_BASE * 2
 	max_complexity = IC_COMPLEXITY_BASE * 2
-	health = 10
+	health = 40
 
 /obj/item/device/electronic_assembly/wallmount/afterattack(var/atom/a, var/mob/user, var/proximity)
 	if(proximity && istype(a ,/turf) && a.density)
@@ -699,15 +755,16 @@
 /obj/item/device/electronic_assembly/wallmount/heavy
 	name = "heavy wall-mounted electronic assembly"
 	icon_state = "setup_wallmount_large"
-	desc = "It's a case, for building large electronics with. It has a magnetized backing to allow it to stick to walls, but you'll still need to wrench the anchoring bolts in place to keep it on."
+	desc = "It's a case used for assembling large electronics. It has a magnetized backing to allow it to stick to walls, but you'll still need to wrench the anchoring bolts in place to keep it on."
 	w_class = ITEM_SIZE_LARGE
 	max_components = IC_MAX_SIZE_BASE * 4
 	max_complexity = IC_COMPLEXITY_BASE * 4
+	health = 80
 
 /obj/item/device/electronic_assembly/wallmount/light
 	name = "light wall-mounted electronic assembly"
 	icon_state = "setup_wallmount_small"
-	desc = "It's a case, for building small electronics with. It has a magnetized backing to allow it to stick to walls, but you'll still need to wrench the anchoring bolts in place to keep it on."
+	desc = "It's a case used for assembling small electronics. It has a magnetized backing to allow it to stick to walls, but you'll still need to wrench the anchoring bolts in place to keep it on."
 	w_class = ITEM_SIZE_SMALL
 	max_components = IC_MAX_SIZE_BASE
 	max_complexity = IC_COMPLEXITY_BASE
@@ -721,12 +778,12 @@
 		return
 	var/turf/T = get_turf(user)
 	if(T.density)
-		to_chat(user, "<span class='warning'>You cannot place [src] on this spot!</span>")
+		to_chat(user, SPAN_DANGER("You cannot place \the [src] on this spot!"))
 		return
 	if(gotwallitem(T, ndir))
-		to_chat(user, "<span class='warning'>There's already an item on this wall!</span>")
+		to_chat(user, SPAN_DANGER("There's already an item on this wall!"))
 		return
-	playsound(src.loc, 'sound/machines/click.ogg', 75, 1)
+	playsound(loc, 'sound/machines/click.ogg', 75, 1)
 	user.visible_message("[user.name] attaches [src] to the wall.",
 		"<span class='notice'>You attach [src] to the wall.</span>",
 		"<span class='italics'>You hear clicking.</span>")

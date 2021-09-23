@@ -237,10 +237,10 @@
 			if("slime")				M.change_mob_type( /mob/living/carbon/slime , null, null, delmob )
 			if("monkey")			M.change_mob_type( /mob/living/carbon/human/monkey , null, null, delmob )
 			if("robot")				M.change_mob_type( /mob/living/silicon/robot , null, null, delmob )
-			if("cat")				M.change_mob_type( /mob/living/simple_animal/cat , null, null, delmob )
-			if("runtime")			M.change_mob_type( /mob/living/simple_animal/cat/fluff/Runtime , null, null, delmob )
-			if("corgi")				M.change_mob_type( /mob/living/simple_animal/corgi , null, null, delmob )
-			if("ian")				M.change_mob_type( /mob/living/simple_animal/corgi/Ian , null, null, delmob )
+			if("cat")				M.change_mob_type( /mob/living/simple_animal/passive/cat , null, null, delmob )
+			if("runtime")			M.change_mob_type( /mob/living/simple_animal/passive/cat/fluff/Runtime , null, null, delmob )
+			if("corgi")				M.change_mob_type( /mob/living/simple_animal/passive/corgi , null, null, delmob )
+			if("ian")				M.change_mob_type( /mob/living/simple_animal/passive/corgi/Ian , null, null, delmob )
 			if("crab")				M.change_mob_type( /mob/living/simple_animal/crab , null, null, delmob )
 			if("coffee")			M.change_mob_type( /mob/living/simple_animal/crab/Coffee , null, null, delmob )
 			if("parrot")			M.change_mob_type( /mob/living/simple_animal/hostile/retaliate/parrot , null, null, delmob )
@@ -1054,6 +1054,44 @@
 		if (prefs)
 			usr.client.debug_variables(prefs)
 
+	else if (href_list["reloadchar"])
+		if (!check_rights(R_DEBUG))
+			return
+		var/mob/living/carbon/human/H = locate(href_list["reloadchar"])
+		if (!istype(H))
+			to_chat(usr, SPAN_WARNING("\The [H] is not a valid type to apply preferences to."))
+			return
+		var/datum/preferences/P = H.client?.prefs
+		if (!istype(P))
+			to_chat(usr, SPAN_WARNING("\The [H] has no client to apply preferences from."))
+			return
+		var/confirm = alert(usr, "This will erase the state of \the [H]!", "Reload Character", "Okay", "Cancel")
+		if (confirm != "Okay")
+			return
+		if (QDELETED(P) || QDELETED(H))
+			to_chat(usr, SPAN_WARNING("\The [H] or its preferences are no longer valid."))
+			return
+		P.copy_to(H)
+
+	else if (href_list["cloneother"])
+		if (!check_rights(R_DEBUG))
+			return
+		var/mob/living/carbon/human/H = locate(href_list["cloneother"])
+		if (!istype(H))
+			to_chat(usr, SPAN_WARNING("\The [H] is not a valid type to apply preferences to."))
+			return
+		var/client/C = select_client()
+		var/datum/preferences/P = C?.prefs
+		if (!P)
+			return
+		var/confirm = alert(usr, "This will replace \the [H] with the design of \"[P.real_name]\"!", "Clone Other", "Okay", "Cancel")
+		if (confirm != "Okay")
+			return
+		if (QDELETED(P) || QDELETED(H))
+			to_chat(usr, SPAN_WARNING("\The [H] or the preferences of [C] are no longer valid."))
+			return
+		P.copy_to(H)
+
 	else if(href_list["sendtoprison"])
 		if(!check_rights(R_ADMIN))	return
 
@@ -1205,7 +1243,7 @@
 
 		if(config.allow_admin_rev)
 			L.revive()
-			log_and_message_admins("healed / Rrvived [key_name(L)]")
+			log_and_message_admins("healed / Revived [key_name(L)]")
 		else
 			to_chat(usr, "Admin Rejuvinates have been disabled")
 
@@ -1403,10 +1441,10 @@
 			to_chat(usr, "This can only be used on instances of type /mob/living/carbon/human")
 			return
 
-		H.equip_to_slot_or_del( new /obj/item/weapon/reagent_containers/food/snacks/cookie(H), slot_l_hand )
-		if(!(istype(H.l_hand,/obj/item/weapon/reagent_containers/food/snacks/cookie)))
-			H.equip_to_slot_or_del( new /obj/item/weapon/reagent_containers/food/snacks/cookie(H), slot_r_hand )
-			if(!(istype(H.r_hand,/obj/item/weapon/reagent_containers/food/snacks/cookie)))
+		H.equip_to_slot_or_del( new /obj/item/reagent_containers/food/snacks/cookie(H), slot_l_hand )
+		if(!(istype(H.l_hand,/obj/item/reagent_containers/food/snacks/cookie)))
+			H.equip_to_slot_or_del( new /obj/item/reagent_containers/food/snacks/cookie(H), slot_r_hand )
+			if(!(istype(H.r_hand,/obj/item/reagent_containers/food/snacks/cookie)))
 				log_admin("[key_name(H)] has their hands full, so they did not receive their cookie, spawned by [key_name(src.owner)].")
 				message_admins("[key_name(H)] has their hands full, so they did not receive their cookie, spawned by [key_name(src.owner)].")
 				return
@@ -1502,17 +1540,17 @@
 
 	else if(href_list["AdminFaxView"])
 		var/obj/item/fax = locate(href_list["AdminFaxView"])
-		if (istype(fax, /obj/item/weapon/paper))
-			var/obj/item/weapon/paper/P = fax
-			P.show_content(usr,1)
-		else if (istype(fax, /obj/item/weapon/photo))
-			var/obj/item/weapon/photo/H = fax
+		if (istype(fax, /obj/item/paper))
+			var/obj/item/paper/P = fax
+			P.show_content(usr, TRUE)
+		else if (istype(fax, /obj/item/photo))
+			var/obj/item/photo/H = fax
 			H.show(usr)
-		else if (istype(fax, /obj/item/weapon/paper_bundle))
+		else if (istype(fax, /obj/item/paper_bundle))
 			//having multiple people turning pages on a paper_bundle can cause issues
 			//open a browse window listing the contents instead
 			var/data = ""
-			var/obj/item/weapon/paper_bundle/B = fax
+			var/obj/item/paper_bundle/B = fax
 
 			for (var/page = 1, page <= B.pages.len, page++)
 				var/obj/pageobj = B.pages[page]
@@ -1520,18 +1558,18 @@
 
 			show_browser(usr, data, "window=[B.name]")
 		else
-			to_chat(usr, "<span class='warning'>The faxed item is not viewable. This is probably a bug, and should be reported on the tracker: [fax.type]</span>")
+			to_chat(usr, "<span class='warning'>The faxed item is not viewable. This is probably a bug, and should be reported on the tracker. Fax type: [fax ? fax.type : "null"]</span>")
 	else if (href_list["AdminFaxViewPage"])
 		var/page = text2num(href_list["AdminFaxViewPage"])
-		var/obj/item/weapon/paper_bundle/bundle = locate(href_list["paper_bundle"])
+		var/obj/item/paper_bundle/bundle = locate(href_list["paper_bundle"])
 
 		if (!bundle) return
 
-		if (istype(bundle.pages[page], /obj/item/weapon/paper))
-			var/obj/item/weapon/paper/P = bundle.pages[page]
-			P.show_content(src.owner, 1)
-		else if (istype(bundle.pages[page], /obj/item/weapon/photo))
-			var/obj/item/weapon/photo/H = bundle.pages[page]
+		if (istype(bundle.pages[page], /obj/item/paper))
+			var/obj/item/paper/P = bundle.pages[page]
+			P.show_content(src.owner, TRUE)
+		else if (istype(bundle.pages[page], /obj/item/photo))
+			var/obj/item/photo/H = bundle.pages[page]
 			H.show(src.owner)
 		return
 
@@ -1541,7 +1579,7 @@
 		var/replyorigin = href_list["replyorigin"]
 
 
-		var/obj/item/weapon/paper/admin/P = new /obj/item/weapon/paper/admin( null ) //hopefully the null loc won't cause trouble for us
+		var/obj/item/paper/admin/P = new /obj/item/paper/admin( null ) //hopefully the null loc won't cause trouble for us
 		faxreply = P
 
 		P.admindatum = src
@@ -1638,11 +1676,11 @@
 			else if(!ispath(path, /obj) && !ispath(path, /turf) && !ispath(path, /mob))
 				removed_paths += dirty_path
 				continue
-			else if(ispath(path, /obj/item/weapon/gun/energy/pulse_rifle))
+			else if(ispath(path, /obj/item/gun/energy/pulse_rifle))
 				if(!check_rights(R_FUN,0))
 					removed_paths += dirty_path
 					continue
-			else if(ispath(path, /obj/item/weapon/melee/energy/blade))//Not an item one should be able to spawn./N
+			else if(ispath(path, /obj/item/melee/energy/blade))//Not an item one should be able to spawn./N
 				if(!check_rights(R_FUN,0))
 					removed_paths += dirty_path
 					continue

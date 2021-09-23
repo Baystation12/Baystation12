@@ -1,5 +1,5 @@
 //Look Sir, free crabs!
-/mob/living/simple_animal/crab
+/mob/living/simple_animal/passive/crab
 	name = "crab"
 	desc = "A hard-shelled crustacean. Seems quite content to lounge around all the time."
 	icon_state = "crab"
@@ -7,14 +7,10 @@
 	icon_dead = "crab_dead"
 	mob_size = MOB_SMALL
 	speak_emote = list("clicks")
-	emote_hear = list("clicks")
-	emote_see = list("clacks")
-	speak_chance = 1
 	turns_per_move = 5
 	response_help = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm = "stomps"
-	stop_automated_movement = 1
 	friendly = "pinches"
 	possession_candidate = 1
 	can_escape = TRUE //snip snip
@@ -22,7 +18,7 @@
 	natural_armor = list(
 		melee = ARMOR_MELEE_KNIVES
 	)
-	density = 0
+	density = FALSE
 
 	meat_amount =   3
 	skin_material = MATERIAL_SKIN_CHITIN
@@ -32,6 +28,9 @@
 
 	var/obj/item/inventory_head
 	var/obj/item/inventory_mask
+
+	ai_holder_type = /datum/ai_holder/simple_animal/passive/crab
+	say_list_type = /datum/say_list/crab
 
 /mob/living/simple_animal/crab/Life()
 	. = ..()
@@ -51,3 +50,12 @@
 	name = "Coffee"
 	real_name = "Coffee"
 	desc = "It's Coffee, the other pet!"
+
+
+/datum/ai_holder/simple_animal/passive/crab
+	speak_chance = 1
+
+
+/datum/say_list/crab
+	emote_hear = list("clicks")
+	emote_see = list("clacks")

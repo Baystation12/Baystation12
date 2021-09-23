@@ -1,9 +1,9 @@
-/obj/item/weapon/storage/mech
+/obj/item/storage/mech
 	w_class = ITEM_SIZE_NO_CONTAINER
 	max_w_class = ITEM_SIZE_LARGE
 	storage_slots = 4
 	use_sound = 'sound/effects/storage/toolbox.ogg'
-	anchored = 1
+	anchored = TRUE
 
 /obj/item/mech_component/chassis/Adjacent(var/atom/neighbor, var/recurse = 1) //For interaction purposes we consider body to be adjacent to whatever holder mob is adjacent
 	var/mob/living/exosuit/E = loc
@@ -11,7 +11,7 @@
 		. = E.Adjacent(neighbor, recurse)
 	return . || ..()
 
-/obj/item/weapon/storage/mech/Adjacent(var/atom/neighbor, var/recurse = 1) //in order to properly retrieve items
+/obj/item/storage/mech/Adjacent(var/atom/neighbor, var/recurse = 1) //in order to properly retrieve items
 	var/obj/item/mech_component/chassis/C = loc
 	if(istype(C))
 		. = C.Adjacent(neighbor, recurse-1)
@@ -23,11 +23,11 @@
 	gender = NEUTER
 
 	var/mech_health = 300
-	var/obj/item/weapon/cell/cell
+	var/obj/item/cell/cell
 	var/obj/item/robot_parts/robot_component/diagnosis_unit/diagnostics
 	var/obj/item/robot_parts/robot_component/armour/exosuit/m_armour
 	var/obj/machinery/portable_atmospherics/canister/air_supply
-	var/obj/item/weapon/storage/mech/storage_compartment
+	var/obj/item/storage/mech/storage_compartment
 	var/datum/gas_mixture/cockpit
 	var/transparent_cabin = FALSE
 	var/hide_pilot =        FALSE
@@ -76,26 +76,29 @@
 
 /obj/item/mech_component/chassis/Initialize()
 	. = ..()
-	cockpit = new
-	cockpit.volume = 200
-	if(loc)
-		var/datum/gas_mixture/air = loc.return_air()
-		if(air)
-			//Essentially at this point its like we created a vacuum, but realistically making a bottle doesnt actually increase volume of a room and neither should a mech
-			for(var/g in air.gas)
-				var/amount = air.gas[g]
-				amount/= air.volume
-				cockpit.gas[g] = amount * cockpit.volume
+	if(pilot_coverage >= 100) //Open cockpits dont get to have air
+		cockpit = new
+		cockpit.volume = 200
+		if(loc)
+			var/datum/gas_mixture/air = loc.return_air()
+			if(air)
+				//Essentially at this point its like we created a vacuum, but realistically making a bottle doesnt actually increase volume of a room and neither should a mech
+				for(var/g in air.gas)
+					var/amount = air.gas[g]
+					amount/= air.volume
+					cockpit.gas[g] = amount * cockpit.volume
 
-			cockpit.temperature = air.temperature
-			cockpit.update_values()
+				cockpit.temperature = air.temperature
+				cockpit.update_values()
 
-	air_supply = new /obj/machinery/portable_atmospherics/canister/air(src)
+		air_supply = new /obj/machinery/portable_atmospherics/canister/air(src)
 	storage_compartment = new(src)
 
 /obj/item/mech_component/chassis/proc/update_air(var/take_from_supply)
 
 	var/changed
+	if(!cockpit)
+		return
 	if(!take_from_supply || pilot_coverage < 100)
 		var/turf/T = get_turf(src)
 		if(!T)
@@ -137,7 +140,7 @@
 
 /obj/item/mech_component/chassis/prebuild()
 	diagnostics = new(src)
-	cell = new /obj/item/weapon/cell/high(src)
+	cell = new /obj/item/cell/high(src)
 	cell.charge = cell.maxcharge
 
 /obj/item/mech_component/chassis/attackby(var/obj/item/thing, var/mob/user)
@@ -146,7 +149,7 @@
 			to_chat(user, SPAN_WARNING("\The [src] already has a diagnostic system installed."))
 			return
 		if(install_component(thing, user)) diagnostics = thing
-	else if(istype(thing, /obj/item/weapon/cell))
+	else if(istype(thing, /obj/item/cell))
 		if(cell)
 			to_chat(user, SPAN_WARNING("\The [src] already has a cell installed."))
 			return
@@ -162,7 +165,11 @@
 
 /obj/item/mech_component/chassis/MouseDrop_T(atom/dropping, mob/user)
 	var/obj/machinery/portable_atmospherics/canister/C = dropping
-	if(istype(C) && !C.anchored && do_after(user, 5, src))
+	if(!istype(C))
+		return ..()
+	if(pilot_coverage < 100)
+		to_chat(user, SPAN_NOTICE("This type of chassis doesn't support internals."))	
+	if(!C.anchored && do_after(user, 5, src))
 		if(C.anchored)
 			return
 		to_chat(user, SPAN_NOTICE("You install the canister in the [src]."))

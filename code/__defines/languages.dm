@@ -34,9 +34,6 @@
 #define LANGUAGE_DRONE_GLOBAL      "Drone Talk"
 #define LANGUAGE_CHANGELING_GLOBAL "Changeling"
 #define LANGUAGE_BORER_GLOBAL      "Cortical Link"
-#define LANGUAGE_MANTID_NONVOCAL   "Ascent-Glow"
-#define LANGUAGE_MANTID_VOCAL      "Ascent-Voc"
-#define LANGUAGE_MANTID_BROADCAST  "Worldnet"
 
 // Language flags.
 #define WHITELISTED  1   // Language is available if the speaker is whitelisted.
@@ -49,3 +46,6 @@
 #define NO_TALK_MSG  128 // Do not show the "\The [speaker] talks into \the [radio]" message
 #define NO_STUTTER   256 // No stuttering, slurring, or other speech problems
 #define ALT_TRANSMIT 512 // Language is not based on vision or sound (Todo: add this into the say code and use it for the rootspeak languages)
+
+// Misc
+#define MAX_LANGUAGES 3

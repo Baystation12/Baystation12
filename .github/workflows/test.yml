@@ -8,17 +8,17 @@ on:
     branches:
       - dev
 env:
-  BYOND_MAJOR: "512"
-  BYOND_MINOR: "1485"
-  SPACEMAN_DMM_VERSION: suite-1.5
+  BYOND_MAJOR: "513"
+  BYOND_MINOR: "1542"
+  SPACEMAN_DMM_VERSION: suite-1.7
 
 jobs:
   DreamChecker:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
       - name: Setup Cache
-        uses: actions/cache@v2
+        uses: actions/cache@c64c572235d810460d0d6876e9c705ad5002b353
         with:
           path: $HOME/spaceman_dmm/$SPACEMAN_DMM_VERSION
           key: ${{ runner.os }}-spacemandmm-${{ env.SPACEMAN_DMM_VERSION }}
@@ -40,14 +40,12 @@ jobs:
   Code:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
       - name: Setup Cache
-        uses: actions/cache@v2
+        uses: actions/cache@c64c572235d810460d0d6876e9c705ad5002b353
         with:
           path: $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}
           key: ${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}-${{ env.BYOND_MINOR }}
-      - name: Install Dependencies
-        run: sudo apt-get install -y uchardet
       - name: Run Tests
         env:
           TEST: CODE
@@ -69,9 +67,9 @@ jobs:
       matrix:
         map_path: [example, torch, away_sites_testing]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
       - name: Setup Cache
-        uses: actions/cache@v2
+        uses: actions/cache@c64c572235d810460d0d6876e9c705ad5002b353
         with:
           path: $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}
           key: ${{ runner.os }}-byond-${{ env.BYOND_MAJOR }}-${{ env.BYOND_MINOR }}

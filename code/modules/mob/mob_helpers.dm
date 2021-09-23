@@ -13,8 +13,14 @@
 		return FALSE //M is too small to wield this
 	return TRUE
 
-/mob/living/proc/isSynthetic()
-	return 0
+
+/mob/proc/isSynthetic()
+	return FALSE
+
+
+/mob/living/silicon/isSynthetic()
+	return TRUE
+
 
 /mob/living/carbon/human/isSynthetic()
 	if(isnull(full_prosthetic))
@@ -30,14 +36,16 @@
 	return istype(internal_organs_by_name[BP_BRAIN], /obj/item/organ/internal/mmi_holder)
 
 
-/mob/living/silicon/isSynthetic()
-	return 1
+/// Determine if the mob is the supplied species by text name, species path, or species instance name
+/mob/proc/is_species(datum/species/S)
+	return FALSE
 
-/mob/proc/isMonkey()
-	return 0
 
-/mob/living/carbon/human/isMonkey()
-	return istype(species, /datum/species/monkey)
+/mob/living/carbon/is_species(datum/species/S)
+	if (!S) return FALSE
+	if (istext(S)) return species.name == S
+	if (ispath(S)) return species.name == initial(S.name)
+	return species.name == S.name
 
 
 /**
@@ -52,43 +60,23 @@
 			return TRUE
 
 
-proc/isdeaf(A)
-	if(isliving(A))
-		var/mob/living/M = A
-		return (M.sdisabilities & DEAFENED) || M.ear_deaf
-	return 0
+/proc/isdeaf(mob/living/M)
+	return istype(M) && (M.ear_deaf || M.sdisabilities & DEAFENED)
 
-proc/hasorgans(A) // Fucking really??
-	return ishuman(A)
-
-proc/iscuffed(A)
-	if(istype(A, /mob/living/carbon))
-		var/mob/living/carbon/C = A
-		if(C.handcuffed)
-			return 1
-	return 0
-
-proc/hassensorlevel(A, var/level)
-	var/mob/living/carbon/human/H = A
-	if(istype(H) && istype(H.w_uniform, /obj/item/clothing/under))
-		var/obj/item/clothing/under/U = H.w_uniform
-		return U.sensor_mode >= level
-	return 0
-
-proc/getsensorlevel(A)
-	var/mob/living/carbon/human/H = A
-	if(istype(H) && istype(H.w_uniform, /obj/item/clothing/under))
-		var/obj/item/clothing/under/U = H.w_uniform
-		return U.sensor_mode
-	return SUIT_SENSOR_OFF
+/proc/iscuffed(mob/living/carbon/C)
+	return istype(C) && C.handcuffed
 
 
-/proc/is_admin(var/mob/user)
-	return check_rights(R_ADMIN, 0, user) != 0
+/proc/getsensorlevel(mob/living/carbon/human/H)
+	if (!istype(H) || !istype(H.w_uniform, /obj/item/clothing/under))
+		return SUIT_SENSOR_OFF
+	var/obj/item/clothing/under/U = H.w_uniform
+	return U.sensor_mode
 
 
-/proc/hsl2rgb(h, s, l)
-	return //TODO: Implement
+/proc/hassensorlevel(mob/living/carbon/human/H, level)
+	return getsensorlevel(H) >= level
+
 
 /*
 	Miss Chance
@@ -206,8 +194,8 @@ var/list/global/organ_rel_size = list(
 	var/intag = 0
 	var/block = list()
 	. = list()
-	for(var/i = 1, i <= length(n), i++)
-		var/char = copytext(n, i, i+1)
+	for(var/i = 1, i <= length_char(n), i++)
+		var/char = copytext_char(n, i, i+1)
 		if(!intag && (char == "<"))
 			intag = 1
 			. += stars_no_html(JOINTEXT(block), pr, re_encode) //stars added here
@@ -224,8 +212,8 @@ var/list/global/organ_rel_size = list(
 /proc/stars_no_html(text, pr, re_encode)
 	text = html_decode(text) //We don't want to screw up escaped characters
 	. = list()
-	for(var/i = 1, i <= length(text), i++)
-		var/char = copytext(text, i, i+1)
+	for(var/i = 1, i <= length_char(text), i++)
+		var/char = copytext_char(text, i, i+1)
 		if(char == " " || prob(pr))
 			. += char
 		else
@@ -263,11 +251,11 @@ proc/slur(phrase)
 /proc/stutter(n)
 	var/te = html_decode(n)
 	var/t = ""//placed before the message. Not really sure what it's for.
-	n = length(n)//length of the entire word
+	n = length_char(n)//length of the entire word
 	var/p = null
 	p = 1//1 is the start of any word
 	while(p <= n)//while P, which starts at 1 is less or equal to N which is the length.
-		var/n_letter = copytext(te, p, p + 1)//copies text from a certain distance. In this case, only one letter at a time.
+		var/n_letter = copytext_char(te, p, p + 1)//copies text from a certain distance. In this case, only one letter at a time.
 		if (prob(80) && (ckey(n_letter) in list("b","c","d","f","g","h","j","k","l","m","n","p","q","r","s","t","v","w","x","y","z")))
 			if (prob(10))
 				n_letter = text("[n_letter]-[n_letter]-[n_letter]-[n_letter]")//replaces the current letter with this instead.
@@ -287,9 +275,9 @@ proc/slur(phrase)
 proc/Gibberish(t, p)//t is the inputted message, and any value higher than 70 for p will cause letters to be replaced instead of added
 	/* Turn text into complete gibberish! */
 	var/returntext = ""
-	for(var/i = 1, i <= length(t), i++)
+	for(var/i = 1, i <= length_char(t), i++)
 
-		var/letter = copytext(t, i, i+1)
+		var/letter = copytext_char(t, i, i+1)
 		if(prob(50))
 			if(p >= 70)
 				letter = ""
@@ -300,35 +288,6 @@ proc/Gibberish(t, p)//t is the inputted message, and any value higher than 70 fo
 		returntext += letter
 
 	return returntext
-
-
-/proc/ninjaspeak(n)
-/*
-The difference with stutter is that this proc can stutter more than 1 letter
-The issue here is that anything that does not have a space is treated as one word (in many instances). For instance, "LOOKING," is a word, including the comma.
-It's fairly easy to fix if dealing with single letters but not so much with compounds of letters./N
-*/
-	var/te = html_decode(n)
-	var/t = ""
-	n = length(n)
-	var/p = 1
-	while(p <= n)
-		var/n_letter
-		var/n_mod = rand(1,4)
-		if(p+n_mod>n+1)
-			n_letter = copytext(te, p, n+1)
-		else
-			n_letter = copytext(te, p, p+n_mod)
-		if (prob(50))
-			if (prob(30))
-				n_letter = text("[n_letter]-[n_letter]-[n_letter]")
-			else
-				n_letter = text("[n_letter]-[n_letter]")
-		else
-			n_letter = text("[n_letter]")
-		t = text("[t][n_letter]")
-		p=p+n_mod
-	return sanitize(t)
 
 
 /proc/shake_camera(mob/M, duration, strength=1)
@@ -356,13 +315,6 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 
 		M.client.eye=oldeye
 		M.shakecamera = 0
-
-
-/proc/findname(msg)
-	for(var/mob/M in SSmobs.mob_list)
-		if (M.real_name == text("[msg]"))
-			return 1
-	return 0
 
 
 /mob/proc/abiotic(var/full_body = FALSE)
@@ -530,24 +482,24 @@ var/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 		return SAFE_PERP
 
 	//Agent cards lower threatlevel.
-	var/obj/item/weapon/card/id/id = GetIdCard()
-	if(id && istype(id, /obj/item/weapon/card/id/syndicate))
+	var/obj/item/card/id/id = GetIdCard()
+	if(id && istype(id, /obj/item/card/id/syndicate))
 		threatcount -= 2
 	// A proper	CentCom id is hard currency.
-	else if(id && istype(id, /obj/item/weapon/card/id/centcom))
+	else if(id && istype(id, /obj/item/card/id/centcom))
 		return SAFE_PERP
 
 	if(check_access && !access_obj.allowed(src))
 		threatcount += 4
 
 	if(auth_weapons && !access_obj.allowed(src))
-		if(istype(l_hand, /obj/item/weapon/gun) || istype(l_hand, /obj/item/weapon/melee))
+		if(istype(l_hand, /obj/item/gun) || istype(l_hand, /obj/item/melee))
 			threatcount += 4
 
-		if(istype(r_hand, /obj/item/weapon/gun) || istype(r_hand, /obj/item/weapon/melee))
+		if(istype(r_hand, /obj/item/gun) || istype(r_hand, /obj/item/melee))
 			threatcount += 4
 
-		if(istype(belt, /obj/item/weapon/gun) || istype(belt, /obj/item/weapon/melee))
+		if(istype(belt, /obj/item/gun) || istype(belt, /obj/item/melee))
 			threatcount += 2
 
 		if(species.name != SPECIES_HUMAN)
@@ -559,7 +511,7 @@ var/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 			perpname = id.registered_name
 
 		var/datum/computer_file/report/crew_record/CR = get_crewmember_record(perpname)
-		if(check_records && !CR && !isMonkey())
+		if(check_records && !CR && !is_species(SPECIES_MONKEY))
 			threatcount += 4
 
 		if(check_arrest && CR && (CR.get_criminalStatus() == GLOB.arrest_security_status))

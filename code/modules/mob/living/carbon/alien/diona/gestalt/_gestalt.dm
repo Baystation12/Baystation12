@@ -7,7 +7,7 @@
 	opacity = FALSE
 	anchored = FALSE
 	movement_handlers = list(/datum/movement_handler/deny_multiz, /datum/movement_handler/delay = list(5))
-	appearance_flags = PIXEL_SCALE
+	appearance_flags = DEFAULT_APPEARANCE_FLAGS | PIXEL_SCALE
 
 	var/list/nymphs                  = list()
 	var/list/valid_things_to_roll_up = list(/mob/living/carbon/alien/diona = TRUE, /mob/living/carbon/alien/diona/sterile = TRUE)

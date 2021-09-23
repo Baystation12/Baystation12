@@ -72,6 +72,7 @@
 #define CULTURE_STOK           "Stok Business"
 #define CULTURE_ALIUM          "Mysterious Aliens"
 #define CULTURE_CULTIST        "Blood Cult"
+
 #define RELIGION_OTHER         "Other Religion"
 #define RELIGION_JUDAISM       "Judaism"
 #define RELIGION_HINDUISM      "Hinduism"
@@ -88,6 +89,7 @@
 #define RELIGION_SPIRITUALISM  "Spiritualism"
 #define RELIGION_SHINTO        "Shinto"
 #define RELIGION_TAOISM        "Taoism"
+#define RELIGION_UNSTATED        "Unstated"
 
 // Skrellian cultures.
 #define CULTURE_SKRELL_QERR     "Qerr-Katish"
@@ -160,12 +162,12 @@
 #define CULTURE_UNATHI_SALT_SWAMP     "Salt Swamp Clans"
 #define CULTURE_UNATHI_SPACE          "Space-Faring Clans"
 #define CULTURE_UNATHI_TERSTEN        "Tersten Clans"
- 
+
 #define HOME_SYSTEM_MOGHES          "Moghes"
 #define HOME_SYSTEM_OUERE           "Ouere"
 #define HOME_SYSTEM_UNATHI_TERSTEN  "Tersten - Unathi Clans"
 #define HOME_SYSTEM_OFFWORLD        "Off-world"
- 
+
 #define FACTION_UNATHI_HEGEMONY          "Moghes Hegemony"
 #define FACTION_UNATHI_TERSTEN_HEGEMONY  "Tersten Hegemony"
 #define FACTION_UNATHI_SSEN_UUMA         "Ssen-Uuma Convent"
@@ -174,7 +176,7 @@
 #define FACTION_UNATHI_GRESIS            "Gresis Krukzuz"
 #define FACTION_UNATHI_RAH_ZAKEH         "Rah'Zakeh League"
 #define FACTION_UNATHI_KHARZA            "Kharza Fleet"
- 
+
 #define RELIGION_UNATHI_STRATAGEM    "Grand Stratagem"
 #define RELIGION_UNATHI_PRECURSOR    "Precursor"
 #define RELIGION_UNATHI_VINE         "Hand of the Vine"
@@ -193,11 +195,3 @@
 #define CULTURE_NABBER_AMINUS "Grade A-"
 #define CULTURE_NABBER_A      "Grade A"
 #define CULTURE_NABBER_APLUS  "Grade A+"
-
-// Ascent culture.
-#define CULTURE_ASCENT           "The Ascent"
-#define HOME_SYSTEM_KHARMAANI    "Core"
-#define FACTION_ASCENT_GYNE      "Ascent Gyne"
-#define FACTION_ASCENT_ALATE     "Ascent Alate"
-#define FACTION_ASCENT_SERPENTID "Ascent Serpentid"
-#define RELIGION_KHARMAANI       "Nest-Lineage Veneration"

@@ -3,8 +3,8 @@
 	icon = 'icons/obj/tables.dmi'
 	icon_state = "frame"
 	desc = "It's a table, for putting things on. Or standing on, if you really want to."
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 	layer = TABLE_LAYER
 	throwpass = 1
@@ -96,7 +96,7 @@
 			if(0.5 to 1.0)
 				to_chat(user, "<span class='notice'>It has a few scrapes and dents.</span>")
 
-/obj/structure/table/attackby(obj/item/weapon/W, mob/user)
+/obj/structure/table/attackby(obj/item/W, mob/user)
 	if(reinforced && isScrewdriver(W))
 		remove_reinforced(W, user)
 		if(!reinforced)
@@ -139,7 +139,7 @@
 		return 1
 
 	if(health < maxhealth && isWelder(W))
-		var/obj/item/weapon/weldingtool/F = W
+		var/obj/item/weldingtool/F = W
 		if(F.welding)
 			to_chat(user, "<span class='notice'>You begin reparing damage to \the [src].</span>")
 			playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
@@ -158,8 +158,8 @@
 			update_desc()
 			update_material()
 		return 1
-	if(istype(W, /obj/item/weapon/hand)) //playing cards
-		var/obj/item/weapon/hand/H = W
+	if(istype(W, /obj/item/hand)) //playing cards
+		var/obj/item/hand/H = W
 		if(H.cards && H.cards.len == 1)
 			usr.visible_message("\The [user] plays \the [H.cards[1].name].")
 	return ..()
@@ -243,13 +243,13 @@
 	manipulating = 0
 	return null
 
-/obj/structure/table/proc/remove_reinforced(obj/item/weapon/screwdriver/S, mob/user)
+/obj/structure/table/proc/remove_reinforced(obj/item/screwdriver/S, mob/user)
 	reinforced = common_material_remove(user, reinforced, 40, "reinforcements", "screws", 'sound/items/Screwdriver.ogg')
 
-/obj/structure/table/proc/remove_material(obj/item/weapon/wrench/W, mob/user)
+/obj/structure/table/proc/remove_material(obj/item/wrench/W, mob/user)
 	material = common_material_remove(user, material, 20, "plating", "bolts", 'sound/items/Ratchet.ogg')
 
-/obj/structure/table/proc/dismantle(obj/item/weapon/wrench/W, mob/user)
+/obj/structure/table/proc/dismantle(obj/item/wrench/W, mob/user)
 	reset_mobs_offset()
 	if(manipulating) return
 	manipulating = 1
@@ -265,7 +265,7 @@
 	qdel(src)
 	return
 
-// Returns a list of /obj/item/weapon/material/shard objects that were created as a result of this table's breakage.
+// Returns a list of /obj/item/material/shard objects that were created as a result of this table's breakage.
 // Used for !fun! things such as embedding shards in the faces of tableslammed people.
 
 // The repeated
@@ -276,7 +276,7 @@
 /obj/structure/table/proc/break_to_parts(full_return = 0)
 	reset_mobs_offset()
 	var/list/shards = list()
-	var/obj/item/weapon/material/shard/S = null
+	var/obj/item/material/shard/S = null
 	if(reinforced)
 		if(reinforced.stack_type && (full_return || prob(20)))
 			reinforced.place_sheet(loc)

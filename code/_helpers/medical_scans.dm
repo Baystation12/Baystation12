@@ -3,6 +3,8 @@
 	var/list/scan = list()
 
 	scan["name"] = H.name
+	if(H.fake_name)
+		scan["name"] = H.real_name
 	scan["time"] = stationtime2text()
 	var/brain_result
 	if(H.should_have_organ(BP_BRAIN))
@@ -76,6 +78,10 @@
 	scan["internal_organs"] = list()
 
 	for(var/obj/item/organ/internal/I in H.internal_organs)
+		if (istype(I, /obj/item/organ/internal/augment))
+			var/obj/item/organ/internal/augment/A = I
+			if (~A.augment_flags & AUGMENT_SCANNABLE)
+				continue
 		var/list/O = list()
 		O["name"] = I.name
 		O["is_broken"] = I.is_broken()
@@ -147,7 +153,10 @@
 				else
 					dat += "<td>[scan["brain_activity"]]%</td></tr>"
 			else
-				dat += "<td>there's a squiggly line here</td></tr>"
+				if(scan["brain_activity"] > 0)
+					dat += "<td>there's a squiggly line here</td></tr>"
+				else
+					dat += "<td>there's a straight line here</td></tr>"
 
 	//Circulatory System
 	/*
@@ -184,7 +193,7 @@
 
 
 	var/ratio = scan["blood_volume"]/scan["blood_volume_max"]
-	dat += "<tr><td><strong>Blood pressure:</strong></td><td>[scan["blood_pressure"]]"
+	dat += "<tr><td><strong>Blood pressure:</strong></td><td>[scan["blood_pressure"]] "
 	if(scan["blood_o2"] <= 70)
 		dat += "(<span class='bad'>[scan["blood_o2"]]% blood oxygenation</span>)</td></tr>"
 	else if(scan["blood_o2"] <= 85)
@@ -198,7 +207,7 @@
 
 	if(skill_level >= SKILL_ADEPT)
 		if(ratio <= 0.70)
-			dat += "<tr><td colspan='2'><span class='bad'>Patient is in Hypovolemic Shock. Transfusion highly recommended.</span></td></tr>"
+			dat += "<tr><td colspan='2'><span class='bad'>Patient is in hypovolemic shock. Transfusion highly recommended.</span></td></tr>"
 
 	// Body temperature.
 	/*
@@ -264,7 +273,7 @@
 			<tr><td colspan='2'>You see a lot of numbers and abbreviations here, but you have no clue what any of this means.</td></tr>
 	*/
 	else
-		dat += "<tr><td colspan='2'>You see a lot of numbers and abbreviations here, but you have no clue what any of this means.</td></tr>"
+		dat += "<tr><td colspan='2'>You see a lot of numbers and abbreviations here, but you have no clue what any of it means.</td></tr>"
 
 	dat = JOINTEXT(dat)
 
@@ -368,7 +377,7 @@
 		if(organ_name != "appendix")
 			dat += "<tr><td colspan='3'><span class='bad'>No [organ_name] detected.</span></td></tr>"
 		else
-			dat += "<tr><td colspan='3'>No [organ_name] detected</td></tr>"
+			dat += "<tr><td colspan='3'>No [organ_name] detected.</td></tr>"
 
 	if(scan["blind"])
 		dat += "<tr><td colspan='3'><span class='bad'>Cataracts detected.</span></td></tr>"

@@ -10,6 +10,8 @@
 /obj/machinery/computer/telecomms/monitor
 	name = "Telecommunications Monitor"
 	icon_screen = "comm_monitor"
+	machine_name = "telecomms monitor console"
+	machine_desc = "Tracks the traffic of a telecommunications network, and maintains information about connected machines."
 
 	var/screen = 0				// the screen number:
 	var/list/machinelist = list()	// the machines located by the computer
@@ -125,7 +127,7 @@
 /obj/machinery/computer/telecomms/monitor/emag_act(var/remaining_charges, var/mob/user)
 	if(!emagged)
 		playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
-		emagged = 1
+		emagged = TRUE
 		req_access.Cut()
 		to_chat(user, "<span class='notice'>You you disable the security protocols</span>")
 		src.updateUsrDialog()

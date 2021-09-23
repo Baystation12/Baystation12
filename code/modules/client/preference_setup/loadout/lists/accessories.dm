@@ -127,6 +127,12 @@
 	cost = 1
 	flags = GEAR_HAS_COLOR_SELECTION
 
+/datum/gear/accessory/wristwatch
+	display_name = "wrist watch selection"
+	path = /obj/item/clothing/accessory/wristwatches
+	cost = 1
+	flags = GEAR_HAS_TYPE_SELECTION
+
 /datum/gear/accessory/pronouns
 	display_name = "pronoun badge selection"
 	path = /obj/item/clothing/accessory/pronouns

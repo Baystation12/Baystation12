@@ -40,7 +40,7 @@
 
 /obj/item/device/geiger/examine(mob/user)
 	. = ..()
-	var/msg = "[scanning ? "ambient" : "stored"] Radiation level: [radiation_count ? radiation_count : "0"] Roentgen."
+	var/msg = "[scanning ? "ambient" : "stored"] Radiation level: [radiation_count ? radiation_count : "0"] IU/s."
 	if(radiation_count > RAD_LEVEL_LOW)
 		to_chat(user, "<span class='warning'>[msg]</span>")
 	else

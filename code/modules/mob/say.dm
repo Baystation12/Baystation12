@@ -59,7 +59,7 @@
 	return 0
 
 /mob/proc/say_quote(var/message, var/datum/language/speaking = null)
-	var/ending = copytext_char(message, length(message))
+	var/ending = copytext(message, -1)
 	if(speaking)
 		return speaking.get_spoken_verb(ending)
 
@@ -80,7 +80,7 @@
 	return get_turf(src)
 
 /mob/proc/say_test(var/text)
-	var/ending = copytext(text, length(text))
+	var/ending = copytext(text, -1)
 	if (ending == "?")
 		return "1"
 	else if (ending == "!")
@@ -103,12 +103,12 @@
 //parses the language code (e.g. :j) from text, such as that supplied to say.
 //returns the language object only if the code corresponds to a language that src can speak, otherwise null.
 /mob/proc/parse_language(var/message)
-	var/prefix = copytext(message,1,2)
+	var/prefix = copytext_char(message,1,2)
 	if(length(message) >= 1 && prefix == get_prefix_key(/decl/prefix/audible_emote))
 		return all_languages["Noise"]
 
 	if(length(message) >= 2 && is_language_prefix(prefix))
-		var/language_prefix = lowertext(copytext(message, 2 ,3))
+		var/language_prefix = lowertext(copytext_char(message, 2 ,3))
 		var/datum/language/L = language_keys[language_prefix]
 		if (can_speak(L))
 			return L

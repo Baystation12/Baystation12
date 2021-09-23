@@ -35,24 +35,18 @@
 	pass_flags = PASS_FLAG_TABLE
 	mob_size = MOB_SMALL
 
-	speak = list("Hi","Hello!","Cracker?")
 	speak_emote = list("squawks","says","yells")
-	emote_hear = list("squawks","bawks")
-	emote_see = list("flutters its wings")
 
-	melee_damage_lower = 5 //pick
-	melee_damage_upper = 10 //peck
-	speak_chance = 1//1% (1 in 100) chance every tick; So about once per 150 seconds, assuming an average tick is 1.5s
+	natural_weapon = /obj/item/natural_weapon/beak
 	turns_per_move = 5
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/cracker/
+	meat_type = /obj/item/reagent_containers/food/snacks/cracker/
 
 	response_help  = "pets"
 	response_disarm = "gently moves aside"
 	response_harm   = "swats"
-	stop_automated_movement = 1
 	universal_speak = TRUE
 
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/chicken/game
+	meat_type = /obj/item/reagent_containers/food/snacks/meat/chicken/game
 	meat_amount = 3
 	skin_material = MATERIAL_SKIN_FEATHERS
 
@@ -77,13 +71,20 @@
 	//Parrots will generally sit on their perch unless something catches their eye.
 	//These vars store their preferred perch and if they don't have one, what they can use as a perch
 	var/obj/parrot_perch = null
-	var/obj/desired_perches = list(/obj/machinery/constructable_frame/computerframe, 		/obj/structure/displaycase, \
-									/obj/structure/filingcabinet,		/obj/machinery/teleport, \
-									/obj/machinery/computer,			/obj/machinery/telecomms, \
-									/obj/machinery/nuclearbomb,			/obj/machinery/particle_accelerator, \
-									/obj/machinery/recharge_station,	/obj/machinery/smartfridge, \
-									/obj/machinery/suit_storage_unit,	/obj/structure/showcase, \
-									/obj/structure/fountain)
+	var/list/desired_perches = list(
+		/obj/machinery/constructable_frame/computerframe,
+		/obj/structure/displaycase,
+		/obj/structure/filingcabinet,
+		/obj/machinery/computer,
+		/obj/machinery/telecomms,
+		/obj/machinery/nuclearbomb,
+		/obj/machinery/particle_accelerator,
+		/obj/machinery/recharge_station,
+		/obj/machinery/smartfridge,
+		/obj/machinery/suit_storage_unit,
+		/obj/structure/showcase,
+		/obj/structure/fountain
+	)
 
 	//Parrots are kleptomaniacs. This variable ... stores the item a parrot is holding.
 	var/obj/item/held_item = null
@@ -93,6 +94,8 @@
 	var/parrot_isize = ITEM_SIZE_SMALL
 	var/impatience = 5 //we lose this much from relax_chance each time we calm down
 	var/icon_set = "parrot"
+
+	ai_holder_type = /datum/ai_holder/simple_animal/retaliate/parrot
 
 
 /mob/living/simple_animal/hostile/retaliate/parrot/New()
@@ -166,7 +169,7 @@
 							src.say("BAWWWWWK LEAVE THE HEADSET BAWKKKKK!")
 						ears.dropInto(loc)
 						ears = null
-						for(var/possible_phrase in speak)
+						for(var/possible_phrase in say_list.speak)
 							if(copytext(possible_phrase,1,3) in department_radio_keys)
 								possible_phrase = copytext(possible_phrase,3,length(possible_phrase))
 					else
@@ -286,7 +289,7 @@
 	if(!.)
 		return FALSE
 
-	if(enemies.len && prob(relax_chance))
+	if(length(ai_holder.attackers) && prob(relax_chance))
 		give_up()
 
 	if(simple_parrot)
@@ -312,10 +315,10 @@
 	   Every once in a while, the parrot picks one of the lines from the buffer and replaces an element of the 'speech' list.
 	   Then it clears the buffer to make sure they don't magically remember something from hours ago. */
 	if(speech_buffer.len && prob(10))
-		if(speak.len)
-			speak.Remove(pick(speak))
+		if(say_list.speak.len)
+			say_list.speak.Remove(pick(say_list.speak))
 
-		speak.Add(pick(speech_buffer))
+		say_list.speak.Add(pick(speech_buffer))
 		speech_buffer.Cut()
 
 //-----SLEEPING
@@ -338,11 +341,11 @@
 			parrot_sleep_dur = parrot_sleep_max
 
 			//Cycle through message modes for the headset
-			if(speak.len)
+			if(say_list.speak.len)
 				var/list/newspeak = list()
 
 				if(available_channels.len && src.ears)
-					for(var/possible_phrase in speak)
+					for(var/possible_phrase in say_list.speak)
 
 						//50/50 chance to not use the radio at all
 						var/useradio = 0
@@ -357,11 +360,11 @@
 						newspeak.Add(possible_phrase)
 
 				else //If we have no headset or channels to use, don't try to use any!
-					for(var/possible_phrase in speak)
+					for(var/possible_phrase in say_list.speak)
 						if(copytext(possible_phrase,1,3) in department_radio_keys)
 							possible_phrase = "[copytext(possible_phrase,3,length(possible_phrase)+1)]" //crop out the channel prefix
 						newspeak.Add(possible_phrase)
-				speak = newspeak
+				say_list.speak = newspeak
 
 			//Search for item to steal
 			parrot_interest = search_for_item()
@@ -496,18 +499,7 @@
 				return
 
 			//Time for the hurt to begin!
-			var/damage = rand(melee_damage_lower, melee_damage_upper)
-
-			if(ishuman(parrot_interest))
-				var/mob/living/carbon/human/H = parrot_interest
-				var/obj/item/organ/external/affecting = H.get_organ(ran_zone(pick(parrot_dam_zone)))
-
-				H.apply_damage(damage, BRUTE, affecting, DAM_SHARP|DAM_EDGE)
-				visible_emote(pick("pecks [H]'s [affecting].", "cuts [H]'s [affecting] with its talons."))
-
-			else
-				L.adjustBruteLoss(damage)
-				visible_emote(pick("pecks at [L].", "claws [L]."))
+			L.attackby(get_natural_weapon(), src)
 			return
 
 		//Otherwise, fly towards the mob!
@@ -576,8 +568,8 @@
 	return null
 
 /mob/living/simple_animal/hostile/retaliate/parrot/proc/give_up()
-	enemies = list()
-	LoseTarget()
+	ai_holder.attackers = list()
+	ai_holder.lose_target()
 	visible_message("<span class='notice'>\The [src] seems to calm down.</span>")
 	relax_chance -= impatience
 
@@ -666,8 +658,8 @@
 		return 0
 
 	if(!drop_gently)
-		if(istype(held_item, /obj/item/weapon/grenade))
-			var/obj/item/weapon/grenade/G = held_item
+		if(istype(held_item, /obj/item/grenade))
+			var/obj/item/grenade/G = held_item
 			G.dropInto(loc)
 			G.detonate()
 			to_chat(src, "You let go of the [held_item]!")
@@ -704,7 +696,6 @@
 /mob/living/simple_animal/hostile/retaliate/parrot/Poly
 	name = "Poly"
 	desc = "Poly the Parrot. An expert on quantum cracker theory."
-	speak = list("Poly wanna cracker!", ":e Check the singlo, you chucklefucks!",":e Wire the solars, you lazy bums!",":e WHO TOOK THE DAMN HARDSUITS?",":e OH GOD ITS FREE CALL THE SHUTTLE")
 
 /mob/living/simple_animal/hostile/retaliate/parrot/Poly/New()
 	ears = new /obj/item/device/radio/headset/headset_eng(src)
@@ -722,7 +713,7 @@
 
 
 	var/message_mode=""
-	if(copytext(message,1,2) == get_prefix_key(/decl/prefix/radio_main_channel))
+	if(copytext_char(message,1,2) == get_prefix_key(/decl/prefix/radio_main_channel))
 		message_mode = "headset"
 		message = copytext(message,2)
 
@@ -730,7 +721,7 @@
 		var/channel_prefix = copytext(message, 1 ,3)
 		message_mode = department_radio_keys[channel_prefix]
 
-	if(copytext(message,1,2) == get_prefix_key(/decl/prefix/radio_channel_selection))
+	if(copytext_char(message,1,2) == get_prefix_key(/decl/prefix/radio_channel_selection))
 		var/positioncut = 3
 		message = trim(copytext(message,positioncut))
 
@@ -783,3 +774,6 @@
 
 /mob/living/simple_animal/hostile/retaliate/parrot/proc/can_pick_up(obj/item/I)
 	. = (Adjacent(I) && I.w_class <= parrot_isize && !I.anchored)
+
+/datum/ai_holder/simple_animal/retaliate/parrot
+	speak_chance = 1

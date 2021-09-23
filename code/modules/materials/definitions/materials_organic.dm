@@ -314,5 +314,5 @@
 
 /material/growth/place_dismantled_girder(var/turf/target)
 	for(var/i = 0; i < 4; i++)
-		var/obj/item/weapon/reagent_containers/food/snacks/meat/M = new(target)
+		var/obj/item/reagent_containers/food/snacks/meat/M = new(target)
 		M.reagents.add_reagent(/datum/reagent/toxin/fertilizer, 5)

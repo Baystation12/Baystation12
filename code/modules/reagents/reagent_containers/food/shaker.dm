@@ -1,4 +1,4 @@
-/obj/item/weapon/reagent_containers/food/drinks/shaker
+/obj/item/reagent_containers/food/drinks/shaker
 	name = "shaker"
 	desc = "A three piece Cobbler-style shaker. Used to mix, cool, and strain drinks."
 	icon_state = "shaker"
@@ -8,7 +8,7 @@
 	center_of_mass = "x=17;y=10"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER | ATOM_FLAG_NO_REACT
 
-/obj/item/weapon/reagent_containers/food/drinks/shaker/attack_self(mob/user as mob)
+/obj/item/reagent_containers/food/drinks/shaker/attack_self(mob/user as mob)
 	if(user.skill_check(SKILL_COOKING, SKILL_PROF))
 		user.visible_message("<span class='rose'>\The [user] shakes \the [src] briskly in one hand, with supreme confidence and competence.</span>", "<span class='rose'>You shake \the [src] briskly with one hand.</span>")
 		mix()
@@ -25,11 +25,11 @@
 		else
 			mix()
 
-/obj/item/weapon/reagent_containers/food/drinks/shaker/proc/mix()
+/obj/item/reagent_containers/food/drinks/shaker/proc/mix()
 	if(reagents && reagents.total_volume)
 		atom_flags &= ~ATOM_FLAG_NO_REACT
 		HANDLE_REACTIONS(reagents)
 		addtimer(CALLBACK(src, .proc/stop_react), SSchemistry.wait)
 
-/obj/item/weapon/reagent_containers/food/drinks/shaker/proc/stop_react()
+/obj/item/reagent_containers/food/drinks/shaker/proc/stop_react()
 	atom_flags |= ATOM_FLAG_NO_REACT

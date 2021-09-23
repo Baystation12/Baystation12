@@ -96,7 +96,6 @@
 				if(used == amount)
 					break
 				if(!do_after(user, W.damage / 5, M))
-					to_chat(user, SPAN_NOTICE("You must stand still to bandage wounds."))
 					break
 
 				if (W.current_stage <= W.max_bleeding_stage)
@@ -110,6 +109,8 @@
 					user.visible_message(SPAN_NOTICE("\The [user] places a bandaid over \a [W.desc] on [M]'s [affecting.name]."), \
 					                              SPAN_NOTICE("You place a bandaid over \a [W.desc] on [M]'s [affecting.name].") )
 				W.bandage()
+				if (M.stat == UNCONSCIOUS && prob(25))
+					to_chat(M, SPAN_NOTICE(SPAN_BOLD("... [pick("feels a little better", "hurts a little less")] ...")))
 				playsound(src, pick(apply_sounds), 25)
 				used++
 			affecting.update_damages()
@@ -148,7 +149,6 @@
 					             SPAN_NOTICE("You start salving the wounds on [M]'s [affecting.name].") )
 			playsound(src, pick(apply_sounds), 25)
 			if(!do_after(user, 1 SECOND, M))
-				to_chat(user, SPAN_NOTICE("You must stand still to salve wounds."))
 				return 1
 			user.visible_message(SPAN_NOTICE("[user] salved wounds on [M]'s [affecting.name]."), \
 			                         SPAN_NOTICE("You salved wounds on [M]'s [affecting.name].") )
@@ -159,7 +159,7 @@
 /obj/item/stack/medical/advanced/bruise_pack
 	name = "advanced trauma kit"
 	singular_name = "advanced trauma kit"
-	desc = "An advanced trauma kit for severe injuries."
+	desc = "A packet filled antibacterial bio-adhesive, used to quickly seal and disinfect cuts, bruises, and other physical trauma. Can be used to treat both limbs and internal organs."
 	icon_state = "traumakit"
 	heal_brute = 0
 	origin_tech = list(TECH_BIO = 1)
@@ -187,7 +187,6 @@
 				if(used == amount)
 					break
 				if(!do_after(user, W.damage / 5, M))
-					to_chat(user, SPAN_NOTICE("You must stand still to bandage wounds."))
 					break
 				if (W.current_stage <= W.max_bleeding_stage)
 					user.visible_message(SPAN_NOTICE("\The [user] cleans \a [W.desc] on [M]'s [affecting.name] and seals the edges with bioglue."), \
@@ -203,6 +202,8 @@
 				W.disinfect()
 				W.heal_damage(heal_brute)
 				used++
+				if (M.stat == UNCONSCIOUS && prob(25))
+					to_chat(M, SPAN_NOTICE(SPAN_BOLD("... [pick("feels better", "hurts less")] ...")))
 			affecting.update_damages()
 			if(used == amount)
 				if(affecting.is_bandaged())
@@ -215,7 +216,7 @@
 /obj/item/stack/medical/advanced/ointment
 	name = "advanced burn kit"
 	singular_name = "advanced burn kit"
-	desc = "An advanced treatment kit for severe burns."
+	desc = "A packet containing a delicate membrane used to salve and disinfect burn wounds. Can be used to treat both limbs and internal organs."
 	icon_state = "burnkit"
 	heal_burn = 5
 	origin_tech = list(TECH_BIO = 1)
@@ -239,7 +240,6 @@
 					             SPAN_NOTICE("You start salving the wounds on [M]'s [affecting.name].") )
 			playsound(src, pick(apply_sounds), 25)
 			if(!do_after(user, 1 SECOND, M))
-				to_chat(user, SPAN_NOTICE("You must stand still to salve wounds."))
 				return 1
 			user.visible_message( 	SPAN_NOTICE("[user] covers wounds on [M]'s [affecting.name] with regenerative membrane."), \
 									SPAN_NOTICE("You cover wounds on [M]'s [affecting.name] with regenerative membrane.") )
@@ -247,6 +247,8 @@
 			use(1)
 			affecting.salve()
 			affecting.disinfect()
+			if (M.stat == UNCONSCIOUS && prob(25))
+				to_chat(M, SPAN_NOTICE(SPAN_BOLD("... [pick("feels better", "hurts less")] ...")))
 
 /obj/item/stack/medical/splint
 	name = "medical splints"
@@ -312,7 +314,7 @@
 	amount = 1
 	splintable_organs = list(BP_L_ARM, BP_R_ARM, BP_L_LEG, BP_R_LEG)
 
-// For Kharmaani/adherent.
+// For adherent.
 /obj/item/stack/medical/resin
 	name = "resin patches"
 	singular_name = "resin patch"

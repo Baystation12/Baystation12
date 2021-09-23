@@ -3,8 +3,8 @@
 	id = "exoplanet_hydrobase"
 	description = "hydroponics base with random plants and a lot of enemies"
 	suffixes = list("hydrobase/hydrobase.dmm")
-	cost = 2
-	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS
+	spawn_cost = 2
+	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS | TEMPLATE_FLAG_RUIN_STARTS_DISALLOWED
 	ruin_tags = RUIN_ALIEN
 	apc_test_exempt_areas = list(
 		/area/map_template/hydrobase = NO_SCRUBBER|NO_VENT|NO_APC,
@@ -87,16 +87,16 @@
 	desc = "An impressive goat, in size and coat. His horns look pretty serious!"
 	health = 100
 	maxHealth = 100
-	melee_damage_lower = 10
-	melee_damage_upper = 15
+	natural_weapon = /obj/item/natural_weapon/hooves/strong
 	faction = "farmbots"
+
+/obj/item/natural_weapon/hooves/strong
+	force = 15
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/hydro
 	name = "Farmbot"
 	desc = "The botanist's best friend. There's something slightly odd about the way it moves."
 	icon = 'maps/random_ruins/exoplanet_ruins/hydrobase/hydro.dmi'
-	speak = list("Initiating harvesting subrout-ine-ine.", "Connection timed out.", "Connection with master AI syst-tem-tem lost.", "Core systems override enab-...")
-	emote_see = list("beeps repeatedly", "whirrs violently", "flashes its indicator lights", "emits a ping sound")
 	icon_state = "farmbot"
 	icon_living = "farmbot"
 	icon_dead = "farmbot_dead"
@@ -104,6 +104,10 @@
 	health = 225
 	maxHealth = 225
 	malfunctioning = 0
+
+	ai_holder_type = /datum/ai_holder/simple_animal/passive
+
+	say_list_type = /datum/say_list/malf_drone/hydro
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/hydro/Initialize()
 	. = ..()
@@ -118,3 +122,7 @@
 	destroy_surroundings = 1
 	projectiletype = initial(projectiletype)
 	walk(src,0)
+
+/datum/say_list/malf_drone/hydro
+	speak = list("Initiating harvesting subrout-ine-ine.", "Connection timed out.", "Connection with master AI syst-tem-tem lost.", "Core systems override enab-...")
+	emote_see = list("beeps repeatedly", "whirrs violently", "flashes its indicator lights", "emits a ping sound")

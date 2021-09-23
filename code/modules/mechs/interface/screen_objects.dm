@@ -29,7 +29,7 @@
 	owner = newowner
 
 /obj/screen/exosuit/Click()
-	return (!owner || !usr.incapacitated() && (usr == owner || usr.loc == owner))
+	return (!usr.incapacitated() && usr.canClick() && (usr == owner || usr.loc == owner))
 
 /obj/screen/exosuit/hardpoint
 	name = "hardpoint"
@@ -64,6 +64,7 @@
 	var/list/new_overlays = list()
 	if(!owner.get_cell() || (owner.get_cell().charge <= 0))
 		overlays.Cut()
+		maptext = ""
 		return
 
 	maptext =  SPAN_STYLE("font-family: 'Small Fonts'; -dm-text-outline: 1 black; font-size: 7px;", "[holding.get_hardpoint_maptext()]")
@@ -201,6 +202,22 @@
 	queue_icon_update()
 	return toggled
 
+/obj/screen/exosuit/toggle/power_control
+	name = "Power control"
+	icon_state = "small_important"
+	maptext = MECH_UI_STYLE("POWER")
+	maptext_x = 3
+	maptext_y = 13
+	height = 12
+
+/obj/screen/exosuit/toggle/power_control/toggled()
+	. = ..()
+	owner.toggle_power(usr)
+
+/obj/screen/exosuit/toggle/power_control/on_update_icon()
+	toggled = (owner.power == MECH_POWER_ON)
+	. = ..()
+
 /obj/screen/exosuit/toggle/air
 	name = "air"
 	icon_state = "small_important"
@@ -265,8 +282,9 @@
 	owner.update_icon()
 
 /obj/screen/exosuit/toggle/hatch_open/on_update_icon()
+	toggled = owner.hatch_closed
 	. = ..()
-	if(owner.hatch_closed)
+	if(toggled)
 		maptext = MECH_UI_STYLE("OPEN")
 		maptext_x = 5
 	else
@@ -280,8 +298,10 @@
 
 /obj/screen/exosuit/health/Click()
 	if(..())
-		if(owner && owner.body && owner.body.diagnostics?.is_functional())
+		if(owner && owner.body && owner.get_cell() && owner.body.diagnostics?.is_functional())
+			usr.setClickCooldown(0.2 SECONDS)
 			to_chat(usr, SPAN_NOTICE("The diagnostics panel blinks several times as it updates:"))
+			playsound(owner.loc,'sound/effects/scanbeep.ogg',30,0)
 			for(var/obj/item/mech_component/MC in list(owner.arms, owner.legs, owner.body, owner.head))
 				if(MC)
 					MC.return_diagnostics(usr)	
@@ -302,9 +322,15 @@
 	if(!owner.head.vision_flags)
 		to_chat(usr,  SPAN_WARNING("Alternative sensor configurations not found. Contact manufacturer for more details."))
 		return
+	if(!owner.get_cell())
+		to_chat(usr,  SPAN_WARNING("The augmented vision systems are offline."))
+		return
 	owner.head.active_sensors = ..()
 	to_chat(usr, SPAN_NOTICE("[owner.head.name] advanced sensor mode is [owner.head.active_sensors ? "now" : "no longer" ] active."))
 
+/obj/screen/exosuit/toggle/camera/on_update_icon()
+	toggled = owner.head.active_sensors
+	. = ..()
 
 #undef BAR_CAP
 #undef MECH_UI_STYLE

@@ -557,6 +557,13 @@
 			return
 		log_and_message_admins("removed \the [choice] to \the [L]")
 		qdel(choice)
+
+	else if (href_list["debug_mob_ai"])
+		if (!check_rights(R_DEBUG))
+			return
+		var/mob/living/L = locate(href_list["debug_mob_ai"])
+		log_debug("AI Debugging toggled [L.ai_holder.debug() ? "ON" : "OFF"] for \the [L]")
+
 	if(href_list["datumrefresh"])
 		var/datum/DAT = locate(href_list["datumrefresh"])
 		if(istype(DAT, /datum) || istype(DAT, /client))

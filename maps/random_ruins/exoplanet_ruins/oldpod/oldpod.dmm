@@ -19,7 +19,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/bed,
 /obj/structure/iv_drip,
-/obj/item/weapon/bedsheet/medical,
+/obj/item/bedsheet/medical,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/oldpod)
 "am" = (
@@ -96,8 +96,8 @@
 	},
 /obj/item/frame/apc,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/weapon/cell/crap/empty,
-/obj/item/weapon/module/power_control,
+/obj/item/cell/crap/empty,
+/obj/item/module/power_control,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)
 "aI" = (
@@ -127,8 +127,8 @@
 /area/map_template/oldpod)
 "aM" = (
 /obj/effect/landmark/corpse/scientist,
-/obj/item/weapon/melee/baton/cattleprod,
-/obj/item/weapon/material/shard,
+/obj/item/melee/baton/cattleprod,
+/obj/item/material/shard,
 /obj/effect/decal/cleanable/blood,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/monotile,
@@ -170,7 +170,7 @@
 /obj/structure/table/standard{
 	name = "plastic table frame"
 	},
-/obj/item/weapon/storage/firstaid/surgery,
+/obj/item/storage/firstaid/surgery,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/oldpod)
@@ -193,10 +193,10 @@
 	},
 /obj/structure/closet/crate/freezer/rations,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/weapon/gun/projectile/pirate,
-/obj/item/weapon/gun/projectile/pirate,
-/obj/item/weapon/gun/projectile/pirate,
-/obj/item/weapon/gun/projectile/pirate,
+/obj/item/gun/projectile/pirate,
+/obj/item/gun/projectile/pirate,
+/obj/item/gun/projectile/pirate,
+/obj/item/gun/projectile/pirate,
 /turf/simulated/floor/tiled/white/monotile,
 /area/map_template/oldpod)
 "aU" = (
@@ -228,7 +228,7 @@
 	dir = 4
 	},
 /obj/structure/closet/crate,
-/obj/item/weapon/tank/oxygen,
+/obj/item/tank/oxygen,
 /turf/simulated/floor/plating,
 /area/map_template/oldpod)
 "aX" = (
@@ -325,7 +325,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/landmark/corpse/engineer,
-/obj/item/weapon/gun/energy/retro,
+/obj/item/gun/energy/retro,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)
 "dj" = (
@@ -355,7 +355,7 @@
 /obj/structure/table/rack,
 /obj/item/clothing/suit/space/emergency,
 /obj/item/clothing/head/helmet/space/emergency,
-/obj/item/weapon/tank/emergency/oxygen/double,
+/obj/item/tank/emergency/oxygen/double,
 /turf/simulated/floor/plating,
 /area/map_template/oldpod)
 "mp" = (
@@ -367,21 +367,21 @@
 /obj/random/tech_supply,
 /obj/random/tech_supply,
 /obj/random/tech_supply,
-/obj/item/weapon/pickaxe,
+/obj/item/pickaxe,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)
 "od" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/weapon/disk/secret_project,
+/obj/item/disk/secret_project,
 /turf/simulated/floor/tiled/monotile,
 /area/map_template/oldpod)
 "qV" = (
 /obj/item/frame/air_alarm,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/weapon/airalarm_electronics,
+/obj/item/airalarm_electronics,
 /obj/structure/bed/chair/shuttle/black{
 	dir = 4
 	},
@@ -409,7 +409,7 @@
 "wl" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/table/rack,
-/obj/item/weapon/crowbar/brace_jack,
+/obj/item/crowbar/brace_jack,
 /turf/simulated/floor/plating,
 /area/map_template/oldpod)
 "wJ" = (
@@ -435,10 +435,10 @@
 /obj/item/stack/material/rods,
 /obj/item/stack/material/rods,
 /obj/item/stack/material/rods,
-/obj/item/weapon/material/shard,
-/obj/item/weapon/material/shard,
-/obj/item/weapon/material/shard,
-/obj/item/weapon/material/shard,
+/obj/item/material/shard,
+/obj/item/material/shard,
+/obj/item/material/shard,
+/obj/item/material/shard,
 /obj/structure/wall_frame/titanium,
 /turf/simulated/floor/plating,
 /area/map_template/oldpod)

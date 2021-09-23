@@ -183,7 +183,7 @@ GLOBAL_VAR_INIT(rollovercheck_last_timeofday, 0)
 
 /proc/get_weekday_index()
 	var/list/weekdays = list("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
-	return weekdays.Find(time2text(world.timeofday, "DDD"))
+	return list_find(weekdays, time2text(world.timeofday, "DDD"))
 
 /proc/current_month_and_day()
 	var/time_string = time2text(world.realtime, "MM-DD")

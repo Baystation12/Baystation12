@@ -128,7 +128,11 @@ proc/age2agedescription(age)
 		initial_handle = sequential_id("/proc/do_after")
 		user.do_unique_user_handle = initial_handle
 
+	var/do_feedback = do_flags & DO_FAIL_FEEDBACK
+
 	if (target?.do_unique_target_user)
+		if (do_feedback)
+			to_chat(user, SPAN_WARNING("\The [target.do_unique_target_user] is already interacting with \the [target]!"))
 		return DO_TARGET_UNIQUE_ACT
 
 	if ((do_flags & DO_TARGET_UNIQUE_ACT) && target)
@@ -143,6 +147,12 @@ proc/age2agedescription(age)
 	var/target_type = target?.type
 
 	var/target_zone = do_flags & DO_USER_SAME_ZONE ? user.zone_sel.selecting : null
+
+	if (do_flags & DO_MOVE_CHECKS_TURFS)
+		if (user_loc)
+			user_loc = get_turf(user)
+		if (target_loc)
+			target_loc = get_turf(target)
 
 	var/datum/progressbar/bar
 	if (do_flags & DO_SHOW_PROGRESS)
@@ -163,16 +173,16 @@ proc/age2agedescription(age)
 		if (QDELETED(user))
 			. = DO_MISSING_USER
 			break
-		if (target_type && QDELETED(target))
+		if (target_type && (QDELETED(target) || target_type != target.type))
 			. = DO_MISSING_TARGET
 			break
 		if (user.incapacitated(incapacitation_flags))
 			. = DO_INCAPACITATED
 			break
-		if (user_loc && user_loc != user.loc)
+		if (user_loc && user_loc != (do_flags & DO_MOVE_CHECKS_TURFS ? get_turf(user) : user.loc))
 			. = DO_USER_CAN_MOVE
 			break
-		if (target_loc && target_loc != target.loc)
+		if (target_loc && target_loc != (do_flags & DO_MOVE_CHECKS_TURFS ? get_turf(target) : target.loc))
 			. = DO_TARGET_CAN_MOVE
 			break
 		if (user_dir && user_dir != user.dir)
@@ -190,6 +200,27 @@ proc/age2agedescription(age)
 		if (target_zone && user.zone_sel.selecting != target_zone)
 			. = DO_USER_SAME_ZONE
 			break
+
+	if (. && do_feedback)
+		switch (.)
+			if (DO_MISSING_TARGET)
+				to_chat(user, SPAN_WARNING("\The [target] no longer exists!"))
+			if (DO_INCAPACITATED)
+				to_chat(user, SPAN_WARNING("You're no longer able to act!"))
+			if (DO_USER_CAN_MOVE)
+				to_chat(user, SPAN_WARNING("You must remain still to perform that action!"))
+			if (DO_TARGET_CAN_MOVE)
+				to_chat(user, SPAN_WARNING("\The [target] must remain still to perform that action!"))
+			if (DO_USER_CAN_TURN)
+				to_chat(user, SPAN_WARNING("You must face the same direction to perform that action!"))
+			if (DO_TARGET_CAN_TURN)
+				to_chat(user, SPAN_WARNING("\The [target] must face the same direction to perform that action!"))
+			if (DO_USER_SAME_HAND)
+				to_chat(user, SPAN_WARNING("You must remain on the same active hand to perform that action!"))
+			if (DO_USER_UNIQUE_ACT)
+				to_chat(user, SPAN_WARNING("You stop what you're doing with \the [user.do_unique_user_handle]."))
+			if (DO_USER_SAME_ZONE)
+				to_chat(user, SPAN_WARNING("You must remain targeting the same zone to perform that action!"))
 
 	if (bar)
 		qdel(bar)

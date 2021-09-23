@@ -9,13 +9,9 @@ Middle Click      - Copy Turf Area
 Right Click       - List/Create Area
 ************************************\
 "}
-	var/list/distinct_colors = list(
-		"#e6194b", "#3cb44b", "#ffe119", "#4363d8", "#f58231", "#42d4f4",
-		"#f032e6", "#fabebe", "#469990", "#e6beff", "#9a6324", "#fffac8",
-		"#800000", "#aaffc3", "#000075", "#a9a9a9", "#ffffff", "#000000"
-	)
-	var/list/area_colors = list()
+
 	var/area/selected_area
+	var/color_pool/colors
 
 /datum/build_mode/areas/Destroy()
 	UnselectArea()
@@ -28,27 +24,18 @@ Right Click       - List/Create Area
 /datum/build_mode/areas/Selected()
 	if (!overlay)
 		CreateOverlay("whiteOverlay")
-	distinct_colors = initial(distinct_colors)
-	area_colors = list()
+	colors = new
 	overlay.Show()
 
 /datum/build_mode/areas/Unselected()
 	if (overlay)
 		overlay.Hide()
+	QDEL_NULL(colors)
 
-/datum/build_mode/areas/UpdateOverlay(image/I, turf/T)
+/datum/build_mode/areas/UpdateOverlay(atom/movable/M, turf/T)
 	if (!overlay?.shown)
 		return
-	var/color = area_colors[T.loc]
-	if (!color)
-		var/len = length(distinct_colors)
-		if (len)
-			color = distinct_colors[len]
-			distinct_colors.Cut(len)
-		else
-			color = "#" + copytext(md5("\ref[T.loc]"), 1, 7)
-		area_colors[T.loc] = color
-	I.color = color
+	M.color = colors.get(T.loc)
 
 /datum/build_mode/areas/OnClick(var/atom/A, var/list/parameters)
 	if (parameters["right"])

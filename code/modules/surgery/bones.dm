@@ -18,8 +18,8 @@
 /decl/surgery_step/bone/glue
 	name = "Begin bone repair"
 	allowed_tools = list(
-		/obj/item/weapon/bonegel = 100,
-		/obj/item/weapon/tape_roll = 75
+		/obj/item/bonegel = 100,
+		/obj/item/tape_roll = 75
 	)
 	can_infect = 1
 	blood_level = 1
@@ -57,8 +57,8 @@
 /decl/surgery_step/bone/set_bone
 	name = "Set bone"
 	allowed_tools = list(
-		/obj/item/weapon/bonesetter = 100,
-		/obj/item/weapon/wrench = 75
+		/obj/item/bonesetter = 100,
+		/obj/item/wrench = 75
 	)
 	min_duration = 60
 	max_duration = 70
@@ -108,8 +108,8 @@
 /decl/surgery_step/bone/finish
 	name = "Finish bone repair"
 	allowed_tools = list(
-		/obj/item/weapon/bonegel = 100,
-		/obj/item/weapon/tape_roll = 75
+		/obj/item/bonegel = 100,
+		/obj/item/tape_roll = 75
 	)
 	can_infect = 1
 	blood_level = 1

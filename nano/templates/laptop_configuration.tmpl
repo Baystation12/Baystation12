@@ -1,20 +1,20 @@
 <i>Welcome to computer configuration utility. Please consult your system administrator if you have any questions about your device.</i><hr>
 <h2>Power Supply</h2>
 <div class="itemLabel">
-	Battery Status: 
+	Battery Status:
 </div>
 {{if data.battery_exists}}
 	<div class="itemContent">
 		Active
 	</div>
 	<div class="itemLabel">
-		Battery Rating: 
+		Battery Rating:
 	</div>
 	<div class="itemContent">
 		{{:data.battery_rating}}
 	</div>
 	<div class="itemLabel">
-		Battery Charge: 
+		Battery Charge:
 	</div>
 	<div class="itemContent">
 		{{:helper.displayBar(data.battery_percent, 0, 100, (data.battery_percent <= 25) ? 'bad' : (data.battery_percent <= 50) ? 'average' : 'good')}}
@@ -26,12 +26,12 @@
 	</div>
 {{/if}}
 <div class="itemLabel">
-	Power Usage: 
+	Power Usage:
 </div>
 <div class="itemContent">
 	{{:data.power_usage}}W
 </div>
-<h2>File System</h2>	
+<h2>File System</h2>
 <div class="itemLabel">
 	Used Capacity:
 </div>
@@ -39,43 +39,54 @@
 	{{:helper.displayBar(data.disk_used, 0, data.disk_size, 'good')}}
 	{{:data.disk_used}}GQ / {{:data.disk_size}}GQ
 </div>
+<h2>System Configuration</h2>
+<div class="itemLabel">
+	Print Language:
+</div>
+<div class="itemContent">
+	{{if data.print_language}}
+		{{:helper.link(data.print_language, null, {'edit_language' : 1}, null)}}
+	{{else}}
+		<span class="bad">No printer installed</span>
+	{{/if}}
+</div>
 <h2>Computer Components</h2>
 {{for data.hardware}}
 	<h3>{{:value.name}}</h3>
 	<i>{{:value.desc}}</i><br>
 	<div class="itemLabel">
-		State: 
+		State:
 	</div>
 	<div class="itemContent">
 		{{:value.enabled ? "Enabled" : "Disabled"}}
-	</div>	
+	</div>
 	<div class="itemLabel">
-		Power Usage: 
+		Power Usage:
 	</div>
 	<div class="itemContent">
 		{{:value.powerusage}}W
 	</div>
 	{{if !value.critical}}
 	<div class="itemLabel">
-		Toggle Component: 
+		Toggle Component:
 	</div>
 	<div class="itemContent">
 		{{:helper.link("ON", null, {'PC_enable_component' : value.ref}, value.enabled ? 'disabled' : null)}}
 		{{:helper.link("OFF", null, {'PC_disable_component' : value.ref}, value.enabled ? null : 'disabled')}}
-	</div>			
+	</div>
 	{{/if}}
 	<br><br>
 {{/for}}
 	<h3>Auto-Updater</h3>
 	<i>Automatically downloads and installs critical OS upgrades if NTNet is reachable. Disabling voids warranty.</i><br>
 	<div class="itemLabel">
-		State: 
+		State:
 	</div>
 	<div class="itemContent">
 		{{:data.receives_updates ? "Enabled" : "Disabled"}}
-	</div>	
+	</div>
 	<div class="itemLabel">
-		Toggle Updates: 
+		Toggle Updates:
 	</div>
 	<div class="itemContent">
 		{{:helper.link("ON", null, {'PC_enable_update' : 1}, data.receives_updates ? 'disabled' : null)}}

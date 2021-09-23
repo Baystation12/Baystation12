@@ -10,6 +10,8 @@ var/global/list/minor_air_alarms = list()
 	icon_keyboard = "atmos_key"
 	icon_screen = "alert:0"
 	light_color = "#e6ffff"
+	machine_name = "atmospheric alert console"
+	machine_desc = "A hub for local air sensor systems, displaying a list of atmospheric alarms in the region."
 
 /obj/machinery/computer/atmos_alert/Initialize()
 	. = ..()

@@ -21,16 +21,16 @@
 	id = "chameleon"
 	req_tech = list(TECH_ESOTERIC = 2)
 	materials = list(MATERIAL_STEEL = 500, MATERIAL_ALUMINIUM = 500, MATERIAL_PLASTIC = 500)
-	build_path = /obj/item/weapon/storage/backpack/chameleon/sydie_kit
+	build_path = /obj/item/storage/backpack/chameleon/sydie_kit
 	sort_string = "VASBA"
-	
+
 /datum/design/item/weapon/storage/box/freezer
 	name = "Portable Freezer"
 	desc = "This nifty shock-resistant device will keep your 'groceries' nice and non-spoiled."
 	id = "freezer"
 	req_tech = list(TECH_MATERIAL = 3, TECH_POWER = 2)
 	materials = list(MATERIAL_PLASTIC = 350)
-	build_path = /obj/item/weapon/storage/box/freezer
+	build_path = /obj/item/storage/box/freezer
 
 /datum/design/item/advmop
 	name = "Advanced Mop"
@@ -38,7 +38,7 @@
 	id = "advmop"
 	req_tech = list(TECH_ENGINEERING = 4, TECH_MATERIAL = 4, TECH_POWER = 3)
 	materials = list(MATERIAL_ALUMINIUM = 2500, MATERIAL_STEEL = 500, MATERIAL_PLASTIC = 200)
-	build_path = /obj/item/weapon/mop/advanced
+	build_path = /obj/item/mop/advanced
 
 /datum/design/blutrash
 	name = "Trashbag of Holding"
@@ -46,7 +46,7 @@
 	id = "blutrash"
 	req_tech = list(TECH_BLUESPACE = 5, TECH_MATERIALS = 6)
 	materials = list(MATERIAL_PLASTIC = 5000, MATERIAL_GOLD = 1500, MATERIAL_URANIUM = 250, MATERIAL_PHORON = 1500)
-	build_path = /obj/item/weapon/storage/bag/trash/bluespace
+	build_path = /obj/item/storage/bag/trash/bluespace
 
 /datum/design/item/holosign
 	name = "Holographic Sign Projector"
@@ -65,3 +65,11 @@
 	materials = list(MATERIAL_STEEL = 7500, MATERIAL_ALUMINIUM = 5000, MATERIAL_DIAMOND = 2000)
 	build_path = /obj/item/borg/upgrade/uncertified/party
 	category = "Cyborg Upgrade Modules"
+
+/datum/design/item/plant_scanner
+	name = "Plant Analyzer"
+	desc = "A hand-held botanical scanner used to analyze plants."
+	id = "plant_scanner"
+	req_tech = list(TECH_MAGNET = 2, TECH_BIO = 2)
+	materials = list(MATERIAL_STEEL = 200, MATERIAL_GLASS = 100, MATERIAL_PLASTIC = 150)
+	build_path = /obj/item/device/scanner/plant

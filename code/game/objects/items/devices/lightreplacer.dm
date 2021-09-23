@@ -51,7 +51,7 @@
 
 	var/max_uses = 32
 	var/uses = 32
-	var/emagged = 0
+	var/emagged = FALSE
 	var/charge = 0
 
 /obj/item/device/lightreplacer/examine(mob/user, distance)
@@ -62,11 +62,11 @@
 /obj/item/device/lightreplacer/resolve_attackby(var/atom/A, mob/user)
 
 	//Check for lights in a container, refilling our charges.
-	if(istype(A, /obj/item/weapon/storage/))
-		var/obj/item/weapon/storage/S = A
+	if(istype(A, /obj/item/storage/))
+		var/obj/item/storage/S = A
 		var/amt_inserted = 0
 		var/turf/T = get_turf(user)
-		for(var/obj/item/weapon/light/L in S.contents)
+		for(var/obj/item/light/L in S.contents)
 			if(!user.stat && src.uses < src.max_uses && L.status == 0)
 				src.AddUses(1)
 				amt_inserted++
@@ -101,8 +101,8 @@
 		else
 			to_chat(user, "<span class='warning'>You need one sheet of glass to replace lights.</span>")
 
-	if(istype(W, /obj/item/weapon/light))
-		var/obj/item/weapon/light/L = W
+	if(istype(W, /obj/item/light))
+		var/obj/item/light/L = W
 		if(L.status == 0) // LIGHT OKAY
 			if(uses < max_uses)
 				if(!user.unEquip(L))
@@ -161,7 +161,7 @@
 			if (isrobot(U))
 				qdel(bulb)
 
-		var/obj/item/weapon/light/L = new target.light_type()
+		var/obj/item/light/L = new target.light_type()
 		if (emagged)
 			log_and_message_admins("used an emagged light replacer.", U)
 			L.create_reagents(5)

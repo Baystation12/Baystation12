@@ -4,6 +4,8 @@
 	icon_keyboard = "atmos_key"
 	icon_screen = "area_atmos"
 	light_color = "#e6ffff"
+	machine_name = "area air control console"
+	machine_desc = "A larger and less complex form of air alarm that allows configuration of an area's vents and scrubbers."
 
 	var/list/connectedscrubbers = new()
 	var/status = ""

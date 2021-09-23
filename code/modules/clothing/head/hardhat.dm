@@ -6,6 +6,7 @@
 	brightness_on = 0.5 //luminosity when on
 	light_overlay = "hardhat_light"
 	w_class = ITEM_SIZE_NORMAL
+	item_flags = null
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT,
 		bullet = ARMOR_BALLISTIC_MINOR,
@@ -58,7 +59,6 @@
 	cold_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.9
-	center_of_mass = null
 	randpixel = 0
 	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_DIONA)
 	flash_protection = FLASH_PROTECTION_MAJOR

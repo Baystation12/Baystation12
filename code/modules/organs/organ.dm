@@ -144,7 +144,7 @@ var/list/organ_cache = list()
 		var/obj/item/organ/O = loc
 		return O.is_preserved()
 	else
-		return (istype(loc,/obj/item/device/mmi) || istype(loc,/obj/structure/closet/body_bag/cryobag) || istype(loc,/obj/structure/closet/crate/freezer) || istype(loc,/obj/item/weapon/storage/box/freezer))
+		return (istype(loc,/obj/item/device/mmi) || istype(loc,/obj/structure/closet/body_bag/cryobag) || istype(loc,/obj/structure/closet/crate/freezer) || istype(loc,/obj/item/storage/box/freezer))
 
 /obj/item/organ/examine(mob/user)
 	. = ..(user)
@@ -309,7 +309,7 @@ var/list/organ_cache = list()
 		return
 	if(!user.unEquip(src))
 		return
-	var/obj/item/weapon/reagent_containers/food/snacks/organ/O = new(get_turf(src))
+	var/obj/item/reagent_containers/food/snacks/organ/O = new(get_turf(src))
 	O.SetName(name)
 	O.appearance = src
 	if(reagents && reagents.total_volume)
@@ -387,3 +387,11 @@ var/list/organ_cache = list()
 
 /obj/item/organ/proc/get_mechanical_assisted_descriptor()
 	return "mechanically-assisted [name]"
+
+
+/**
+* Pre-surgery modification of the organ if it has status|ORGAN_CONFIGURE
+* Halts surgery if the return value is truthy
+*/
+/obj/item/organ/proc/surgery_configure(mob/living/user, mob/living/carbon/human/target, obj/item/organ/parent, obj/item/tool, decl/surgery_step/action)
+	return

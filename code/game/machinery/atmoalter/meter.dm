@@ -4,12 +4,12 @@
 	icon = 'icons/obj/meter.dmi'
 	icon_state = "meterX"
 	var/atom/target = null //A pipe for the base type
-	anchored = 1.0
+	anchored = TRUE
 	power_channel = ENVIRON
 	idle_power_usage = 15
 
 	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/power/apc
+		/obj/item/stock_parts/power/apc
 	)
 	public_variables = list(
 		/decl/public_access/public_variable/gas,
@@ -112,8 +112,8 @@
 
 /obj/machinery/meter/starts_with_radio
 	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/radio/transmitter/basic/buildable,
-		/obj/item/weapon/stock_parts/power/apc/buildable
+		/obj/item/stock_parts/radio/transmitter/basic/buildable,
+		/obj/item/stock_parts/power/apc/buildable
 	)
 
 /decl/stock_part_preset/radio/basic_transmitter/meter

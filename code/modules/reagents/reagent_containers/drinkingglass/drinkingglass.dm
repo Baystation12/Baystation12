@@ -4,7 +4,7 @@
 /var/const/DRINK_ICON_DEFAULT = ""
 /var/const/DRINK_ICON_NOISY = "noise"
 
-/obj/item/weapon/reagent_containers/food/drinks/glass2
+/obj/item/reagent_containers/food/drinks/glass2
 	name = "glass" // Name when empty
 	base_name = "glass"
 	desc = "A generic drinking glass." // Description when empty
@@ -14,6 +14,7 @@
 	filling_states = "20;40;60;80;100"
 	volume = 30
 	matter = list(MATERIAL_GLASS = 65)
+	trash = /obj/item/material/shard
 
 	var/list/extras = list() // List of extras. Two extras maximum
 
@@ -31,13 +32,13 @@
 	var/custom_name
 	var/custom_desc
 
-/obj/item/weapon/reagent_containers/food/drinks/glass2/examine(mob/M)
+/obj/item/reagent_containers/food/drinks/glass2/examine(mob/M)
 	. = ..()
 
 	for(var/I in extras)
-		if(istype(I, /obj/item/weapon/glass_extra))
+		if(istype(I, /obj/item/glass_extra))
 			to_chat(M, "There is \a [I] in \the [src].")
-		else if(istype(I, /obj/item/weapon/reagent_containers/food/snacks/fruit_slice))
+		else if(istype(I, /obj/item/reagent_containers/food/snacks/fruit_slice))
 			to_chat(M, "There is \a [I] on the rim.")
 		else
 			to_chat(M, "There is \a [I] somewhere on the glass. Somehow.")
@@ -48,8 +49,8 @@
 	if(has_fizz())
 		to_chat(M, "It is fizzing slightly.")
 
-/obj/item/weapon/reagent_containers/food/drinks/glass2/proc/has_ice()
-	if(reagents.reagent_list.len > 0)
+/obj/item/reagent_containers/food/drinks/glass2/proc/has_ice()
+	if(length(reagents?.reagent_list))
 		var/datum/reagent/R = reagents.get_master_reagent()
 		if(!((R.type == /datum/reagent/drink/ice) || ("ice" in R.glass_special))) // if it's not a cup of ice, and it's not already supposed to have ice in, see if the bartender's put ice in it
 			if(reagents.has_reagent(/datum/reagent/drink/ice, reagents.total_volume / 10)) // 10% ice by volume
@@ -57,8 +58,8 @@
 
 	return 0
 
-/obj/item/weapon/reagent_containers/food/drinks/glass2/proc/has_fizz()
-	if(reagents.reagent_list.len > 0)
+/obj/item/reagent_containers/food/drinks/glass2/proc/has_fizz()
+	if(length(reagents?.reagent_list))
 		var/datum/reagent/R = reagents.get_master_reagent()
 		if(("fizz" in R.glass_special))
 			return 1
@@ -70,8 +71,8 @@
 			return 1
 	return 0
 
-/obj/item/weapon/reagent_containers/food/drinks/glass2/proc/has_vapor()
-	if(reagents.reagent_list.len > 0)
+/obj/item/reagent_containers/food/drinks/glass2/proc/has_vapor()
+	if(length(reagents?.reagent_list))
 		if(temperature > T0C + 40)
 			return 1
 		var/datum/reagent/R = reagents.get_master_reagent()
@@ -84,36 +85,48 @@
 				return 1
 	return 0
 
-/obj/item/weapon/reagent_containers/food/drinks/glass2/Initialize()
+/obj/item/reagent_containers/food/drinks/glass2/Initialize()
 	. = ..()
 	if(!icon_state)
 		icon_state = base_icon
 
-/obj/item/weapon/reagent_containers/food/drinks/glass2/on_reagent_change()
+/obj/item/reagent_containers/food/drinks/glass2/on_reagent_change()
 	temperature_coefficient = 4 / max(1, reagents.total_volume)
 	update_icon()
 
-/obj/item/weapon/reagent_containers/food/drinks/glass2/throw_impact(atom/hit_atom)
+/obj/item/reagent_containers/food/drinks/glass2/throw_impact(atom/hit_atom)
 	if(QDELETED(src))
 		return
 	if(prob(80))
-		if(reagents.reagent_list.len > 0)
-			visible_message(SPAN_DANGER("\The [src] shatters from the impact and spills all its contents!"), SPAN_DANGER("You hear the sound of glass shattering!"))
-			reagents.splash(hit_atom, reagents.total_volume)
-		else 
-			visible_message(SPAN_DANGER("\The [src] shatters from the impact!"), SPAN_DANGER("You hear the sound of glass shattering!"))
-		playsound(src.loc, pick(GLOB.shatter_sound), 100)
-		new /obj/item/weapon/material/shard(src.loc)
-		qdel(src)
-	else
-		if (reagents.reagent_list.len > 0)
-			visible_message(SPAN_DANGER("\The [src] bounces and spills all its contents!"), SPAN_WARNING("You hear the sound of glass hitting something."))
+		if(length(reagents?.reagent_list))
+			visible_message(
+				SPAN_DANGER("\The [src] shatters from the impact and spills all its contents!"),
+				SPAN_DANGER("You hear the sound of glass shattering!")
+			)
 			reagents.splash(hit_atom, reagents.total_volume)
 		else
-			visible_message(SPAN_WARNING("\The [src] bounces dangerously. Luckily it didn't break."), SPAN_WARNING("You hear the sound of glass hitting something."))
+			visible_message(
+				SPAN_DANGER("\The [src] shatters from the impact!"),
+				SPAN_DANGER("You hear the sound of glass shattering!")
+			)
+		playsound(src.loc, pick(GLOB.shatter_sound), 100)
+		new /obj/item/material/shard(src.loc)
+		qdel(src)
+	else
+		if (length(reagents?.reagent_list))
+			visible_message(
+				SPAN_DANGER("\The [src] bounces and spills all its contents!"),
+				SPAN_WARNING("You hear the sound of glass hitting something.")
+			)
+			reagents.splash(hit_atom, reagents.total_volume)
+		else
+			visible_message(
+				SPAN_WARNING("\The [src] bounces dangerously. Luckily it didn't break."),
+				SPAN_WARNING("You hear the sound of glass hitting something.")
+			)
 		playsound(src.loc, "sound/effects/Glasshit.ogg", 50)
 
-/obj/item/weapon/reagent_containers/food/drinks/glass2/proc/can_add_extra(obj/item/weapon/glass_extra/GE)
+/obj/item/reagent_containers/food/drinks/glass2/proc/can_add_extra(obj/item/glass_extra/GE)
 	if(!("[base_icon]_[GE.glass_addition]left" in icon_states(icon)))
 		return 0
 	if(!("[base_icon]_[GE.glass_addition]right" in icon_states(icon)))
@@ -121,7 +134,7 @@
 
 	return 1
 
-/obj/item/weapon/reagent_containers/food/drinks/glass2/proc/get_filling_overlay(amount, overlay)
+/obj/item/reagent_containers/food/drinks/glass2/proc/get_filling_overlay(amount, overlay)
 	var/image/I = new()
 	if(!filling_icons_cache["[base_icon][amount][overlay]"])
 		var/icon/base = new/icon(icon, "[base_icon][amount]")
@@ -132,7 +145,7 @@
 	I.appearance = filling_icons_cache["[base_icon][amount][overlay]"]
 	return I
 
-/obj/item/weapon/reagent_containers/food/drinks/glass2/on_update_icon()
+/obj/item/reagent_containers/food/drinks/glass2/on_update_icon()
 	underlays.Cut()
 	overlays.Cut()
 
@@ -171,19 +184,19 @@
 			underlays += filling
 
 		overlays += over_liquid
-		
+
 	else
 		SetName(custom_name || initial(name))
 		desc = custom_desc || initial(desc)
 
 	var/side = "left"
 	for(var/item in extras)
-		if(istype(item, /obj/item/weapon/glass_extra))
-			var/obj/item/weapon/glass_extra/GE = item
+		if(istype(item, /obj/item/glass_extra))
+			var/obj/item/glass_extra/GE = item
 			var/image/I = image(icon, src, "[base_icon]_[GE.glass_addition][side]")
 			I.color = GE.color
 			underlays += I
-		else if(rim_pos && istype(item, /obj/item/weapon/reagent_containers/food/snacks/fruit_slice))
+		else if(rim_pos && istype(item, /obj/item/reagent_containers/food/snacks/fruit_slice))
 			var/obj/FS = item
 			var/image/I = image(FS)
 
@@ -199,8 +212,13 @@
 		else continue
 		side = "right"
 
-/obj/item/weapon/reagent_containers/food/drinks/glass2/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/weapon/material/kitchen/utensil/spoon))
+/obj/item/reagent_containers/food/drinks/glass2/afterattack(obj/target, mob/user, proximity)
+	if (!proximity || standard_dispenser_refill(user, target) || standard_pour_into(user, target))
+		return TRUE
+	splashtarget(target, user)
+
+/obj/item/reagent_containers/food/drinks/glass2/attackby(obj/item/W, mob/user)
+	if(istype(W, /obj/item/material/kitchen/utensil/spoon))
 		if(user.a_intent == I_HURT)
 			user.visible_message("<span class='warning'>[user] bashes \the [src] with a spoon, shattering it to pieces! What a rube.</span>")
 			playsound(src, "shatter", 30, 1)
@@ -213,7 +231,7 @@
 		playsound(src, "sound/items/wineglass.ogg", 65, 1)
 	else return ..()
 
-/obj/item/weapon/reagent_containers/food/drinks/glass2/ProcessAtomTemperature()
+/obj/item/reagent_containers/food/drinks/glass2/ProcessAtomTemperature()
 	var/old_temp = temperature
 	. = ..()
 	if(old_temp != temperature)

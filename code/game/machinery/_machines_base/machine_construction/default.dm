@@ -29,7 +29,7 @@
 		to_chat(user, SPAN_NOTICE("You open the maintenance hatch of \the [machine]."))
 		machine.update_icon()
 		return
-	if(istype(I, /obj/item/weapon/storage/part_replacer))
+	if(istype(I, /obj/item/storage/part_replacer))
 		machine.display_parts(user)
 		return TRUE
 
@@ -70,7 +70,7 @@
 		machine.update_icon()
 		return
 
-	if(istype(I, /obj/item/weapon/storage/part_replacer))
+	if(istype(I, /obj/item/storage/part_replacer))
 		return machine.part_replacement(user, I)
 
 	if(isWrench(I))

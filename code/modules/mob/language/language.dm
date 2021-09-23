@@ -24,6 +24,7 @@
 	var/warning = ""
 	var/hidden_from_codex			  // If it should not show up in Codex
 	var/category = /datum/language    // Used to point at root language types that shouldn't be visible
+	var/has_written_form = FALSE
 
 /datum/language/proc/can_be_spoken_properly_by(var/mob/speaker)
 	return TRUE
@@ -64,7 +65,7 @@
 	var/new_sentence = 0
 	for(var/w in words)
 		var/nword = "[w] "
-		var/input_ending = copytext(w, length(w))
+		var/input_ending = copytext(w, -1)
 		var/ends_sentence = findtext(".?!",input_ending)
 		if(!prob(understand_chance))
 			nword = scramble_word(w)
@@ -116,7 +117,7 @@
 	scramble_cache[input] = scrambled_text
 	if(scramble_cache.len > SCRAMBLE_CACHE_LEN)
 		scramble_cache.Cut(1, scramble_cache.len-SCRAMBLE_CACHE_LEN-1)
-	
+
 	return scrambled_text
 
 /datum/language/proc/format_message(message, verb)
@@ -130,7 +131,7 @@
 
 /datum/language/proc/get_talkinto_msg_range(message)
 	// if you yell, you'll be heard from two tiles over instead of one
-	return (copytext(message, length(message)) == "!") ? 2 : 1
+	return (copytext(message, -1) == "!") ? 2 : 1
 
 /datum/language/proc/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
 	log_say("[key_name(speaker)] : ([name]) [message]")

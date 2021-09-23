@@ -6,7 +6,8 @@
 	It is clearly a mystery."
 
 	var/spawn_weight = 1
-	var/cost = null
+	var/spawn_cost = 0
+	var/player_cost = 0
 
 	var/prefix = null
 	var/suffixes = null

@@ -58,15 +58,15 @@
 /turf/simulated/floor/wood/walnut,
 /area/yacht/bridge)
 "am" = (
-/obj/item/weapon/folder/blue,
-/obj/item/weapon/form_printer,
+/obj/item/folder/blue,
+/obj/item/form_printer,
 /obj/structure/table/woodentable,
-/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup,
-/obj/item/weapon/newspaper,
+/obj/item/reagent_containers/food/drinks/glass2/coffeecup,
+/obj/item/newspaper,
 /obj/effect/spider/stickyweb,
 /obj/effect/decal/cleanable/dirt,
 /obj/random/energy,
-/obj/item/weapon/paper{
+/obj/item/paper{
 	info = "I used up all of my energy. I am hopelessly lost. This ship has become my grave. They did it. The intelligence agency that no one ever talks about. Sol Gov wanted their revenge, and they got it. They easily could have killed me on my ship, or tortured me, but they knew that floating here through space would be the worst possible torture. "
 	},
 /turf/simulated/floor/wood/walnut,
@@ -94,9 +94,9 @@
 	dir = 8
 	},
 /obj/structure/safe,
-/obj/item/weapon/reagent_containers/pill/cyanide,
-/obj/item/weapon/rig/medical/equipped,
-/obj/item/weapon/gun/energy/captain,
+/obj/item/reagent_containers/pill/cyanide,
+/obj/item/rig/medical/equipped,
+/obj/item/gun/energy/captain,
 /obj/effect/spider/stickyweb,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/wood/walnut,
@@ -145,7 +145,7 @@
 /turf/simulated/floor/wood/walnut,
 /area/yacht/bridge)
 "av" = (
-/obj/item/weapon/storage/mirror,
+/obj/item/storage/mirror,
 /turf/simulated/wall/walnut,
 /area/yacht/living)
 "aw" = (
@@ -219,9 +219,9 @@
 /obj/structure/table/marble,
 /obj/item/trash/snack_bowl,
 /obj/machinery/reagentgrinder/juicer,
-/obj/item/weapon/reagent_containers/glass/beaker/large,
+/obj/item/reagent_containers/glass/beaker/large,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/weapon/paper{
+/obj/item/paper{
 	info = "Tonight I woke up to a sound I hoped to have never heard, a small explosion. I rushed to the bridge to diagnose the damage and saw the worst possible news. My solar tracker is gone, and so is the fucking computer. No way to override the settings now, because the assholes EMPd  the computer. No way to charge my SMES reliably, and no way to heat the fuel. I am stuck in the water! Unheated, this gas will not be enough to get absolutely anywhere near a port. This is bad. Real bad. The current charge on SMES is 20 percent, so I'll just try and orient the ship to hit the current star at maximum efficiency so we will charge at 100, and maybe make it to the next solar system. The next port is in the orbit of a Gas giant named Duma. Maybe I can dock there and repair my array. I freaking knew I needed to get a generator. I spent all of the money the Terrans gave me, and this piece of shit is all I could get.  "
 	},
 /turf/simulated/floor/wood/yew,
@@ -234,7 +234,7 @@
 /turf/simulated/floor/wood/yew,
 /area/yacht/living)
 "aI" = (
-/obj/item/weapon/towel/random,
+/obj/item/towel/random,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled/freezer,
 /area/yacht/living)
@@ -266,7 +266,7 @@
 "aM" = (
 /obj/structure/table/marble,
 /obj/item/pizzabox/vegetable,
-/obj/item/weapon/reagent_containers/glass/rag,
+/obj/item/reagent_containers/glass/rag,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/wood/yew,
 /area/yacht/living)
@@ -285,8 +285,8 @@
 /area/yacht/living)
 "aQ" = (
 /obj/structure/table/marble,
-/obj/item/weapon/deck/cards,
-/obj/item/weapon/dice,
+/obj/item/deck/cards,
+/obj/item/dice,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/wood/yew,
 /area/yacht/living)
@@ -367,8 +367,8 @@
 	dir = 4
 	},
 /obj/structure/table/marble,
-/obj/item/weapon/book/manual/chef_recipes,
-/obj/item/weapon/reagent_containers/food/drinks/pitcher,
+/obj/item/book/manual/chef_recipes,
+/obj/item/reagent_containers/food/drinks/pitcher,
 /obj/effect/decal/cleanable/dirt,
 /obj/random/drinkbottle,
 /turf/simulated/floor/wood/yew,
@@ -393,7 +393,7 @@
 /area/yacht/living)
 "bc" = (
 /obj/structure/bed/padded,
-/obj/item/weapon/bedsheet/blue,
+/obj/item/bedsheet/blue,
 /obj/effect/spider/stickyweb,
 /turf/simulated/floor/carpet/blue2,
 /area/yacht/living)
@@ -449,7 +449,7 @@
 /area/yacht/living)
 "bp" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/item/weapon/paper{
+/obj/item/paper{
 	info = "I have accepted my fate. I will go into EVA with one of the cyanide pills in my mouth, and I will float off. I want a military funeral, and I will arrange it myself. Good bye all. I have earned and sealed my fate. "
 	},
 /turf/simulated/floor/wood/yew,
@@ -466,7 +466,7 @@
 /turf/simulated/floor/carpet/purple,
 /area/yacht/living)
 "bs" = (
-/obj/item/weapon/inflatable_duck,
+/obj/item/inflatable_duck,
 /obj/effect/spider/stickyweb,
 /turf/simulated/floor/beach/water/ocean,
 /area/yacht/living)
@@ -561,10 +561,10 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
-/obj/item/weapon/storage/bible,
-/obj/item/weapon/pen/blue,
+/obj/item/storage/bible,
+/obj/item/pen/blue,
 /obj/structure/table/woodentable,
-/obj/item/weapon/paper{
+/obj/item/paper{
 	info = "Let me introduce myself. My name is Commander Archibald McKinley, although the Fleet fucks think that I do not deserve the title. Well, fuck them. They accused me of facilitating a destruction of the ship I was CO of. A small missile cruiser, with zero to fucking none point defenses was attacked, and they  first accuse me of escaping before any of my crew. What kind of person wouldn't expect someone to escape when their ship is on fire? It's lunacy. But it only got worse. Then they said that I helped the Terrans take the ship. Well fuck them, they are wrong. That's non sense. I have no connection to the Terrans. They said that I got a large sum of money from them in order to betray my ship's position, which is once again total nonsense. I've got about 20 years of life left here, and I know that I will be safe with my ship here. I need to resupply once every 5 years, given how much food and fuel I have, and I've got enough range to go to pretty much any known part of the galaxy, in complete silence, as we are totally solar powered. I wish I could afford ion thrusters to not have to rely on gas for propulsion, but, our gas heaters should provide us with enough pressure to get anywhere in relative decent speed. Also, I got a robot butler who cooks delicious food for me! No more crappy lance corporal food, eh"
 	},
 /obj/item/device/flashlight/lamp/green,
@@ -645,9 +645,9 @@
 /turf/simulated/floor/plating,
 /area/yacht/engine)
 "bT" = (
-/obj/item/weapon/cell/hyper,
-/obj/item/weapon/book/manual/engineering_guide,
-/obj/item/weapon/rcd,
+/obj/item/cell/hyper,
+/obj/item/book/manual/engineering_guide,
+/obj/item/rcd,
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/computer/ship/engines,
 /turf/simulated/floor/plating,
@@ -681,7 +681,7 @@
 /turf/simulated/floor/plating,
 /area/yacht/engine)
 "bW" = (
-/obj/item/weapon/extinguisher,
+/obj/item/extinguisher,
 /obj/machinery/portable_atmospherics/hydroponics,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/wood/yew,
@@ -733,7 +733,7 @@
 	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/item/weapon/stock_parts/circuitboard/broken,
+/obj/item/stock_parts/circuitboard/broken,
 /turf/simulated/floor/plating,
 /area/yacht/engine)
 "ch" = (
@@ -853,7 +853,7 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/obj/item/weapon/stock_parts/circuitboard/broken,
+/obj/item/stock_parts/circuitboard/broken,
 /turf/simulated/floor/airless{
 	icon_state = "dmg2"
 	},
@@ -874,7 +874,7 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/obj/item/weapon/storage/toolbox/syndicate,
+/obj/item/storage/toolbox/syndicate,
 /turf/simulated/floor/airless{
 	icon_state = "dmg2"
 	},
@@ -895,7 +895,7 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/obj/item/weapon/plastique,
+/obj/item/plastique,
 /turf/simulated/floor/airless,
 /area/yacht/engine)
 "ct" = (
@@ -1008,8 +1008,8 @@
 	dir = 1;
 	level = 2
 	},
-/obj/item/weapon/shovel/spade,
-/obj/item/weapon/reagent_containers/glass/bucket,
+/obj/item/shovel/spade,
+/obj/item/reagent_containers/glass/bucket,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/wood/yew,
 /area/yacht/living)
@@ -1044,7 +1044,7 @@
 /area/yacht/engine)
 "da" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/item/weapon/caution/cone,
+/obj/item/caution/cone,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/plating,
 /area/yacht/engine)
@@ -1244,7 +1244,7 @@
 	dir = 4;
 	icon_state = "tube1"
 	},
-/obj/item/weapon/cane,
+/obj/item/cane,
 /obj/item/clothing/suit/storage/det_trench/grey,
 /obj/item/clothing/ring/cti,
 /obj/item/clothing/under/lawyer/oldman,
@@ -1289,7 +1289,7 @@
 	icon_state = "0-2";
 	pixel_y = 0
 	},
-/obj/item/weapon/storage/toolbox/electrical,
+/obj/item/storage/toolbox/electrical,
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -1476,7 +1476,7 @@
 /obj/structure/hygiene/sink{
 	pixel_y = 20
 	},
-/obj/item/weapon/bikehorn/rubberducky,
+/obj/item/bikehorn/rubberducky,
 /obj/effect/decal/cleanable/dirt,
 /obj/random/soap,
 /turf/simulated/floor/tiled/freezer,

@@ -2,14 +2,6 @@
 	..()
 	name = "Bluespace device ([item_name])"
 
-/datum/design/item/bluespace/beacon
-	name = "tracking beacon"
-	id = "beacon"
-	req_tech = list(TECH_BLUESPACE = 1)
-	materials = list (MATERIAL_ALUMINIUM = 20, MATERIAL_GLASS = 10)
-	build_path = /obj/item/device/radio/beacon
-	sort_string = "VADAA"
-
 /datum/design/item/bluespace/gps
 	name = "triangulating device"
 	desc = "Triangulates approximate co-ordinates using a nearby satellite network."
@@ -25,7 +17,7 @@
 	id = "beacon_locator"
 	req_tech = list(TECH_MAGNET = 3, TECH_ENGINEERING = 2, TECH_BLUESPACE = 3)
 	materials = list(MATERIAL_ALUMINIUM = 1000, MATERIAL_GLASS = 500)
-	build_path = /obj/item/weapon/pinpointer/radio
+	build_path = /obj/item/pinpointer/radio
 	sort_string = "VADAC"
 
 /datum/design/item/bluespace/ano_scanner
@@ -43,7 +35,7 @@
 	id = "bag_holding"
 	req_tech = list(TECH_BLUESPACE = 4, TECH_MATERIAL = 6)
 	materials = list(MATERIAL_GOLD = 3000, MATERIAL_DIAMOND = 1500, MATERIAL_URANIUM = 250, MATERIAL_PLASTIC = 250)
-	build_path = /obj/item/weapon/storage/backpack/holding
+	build_path = /obj/item/storage/backpack/holding
 	sort_string = "VAFAA"
 
 /datum/design/item/dufflebag_holding
@@ -52,5 +44,5 @@
 	id = "dufflebag_holding"
 	req_tech = list(TECH_BLUESPACE = 4, TECH_MATERIAL = 6)
 	materials = list(MATERIAL_GOLD = 3000, MATERIAL_DIAMOND = 1500, MATERIAL_URANIUM = 250, MATERIAL_PLASTIC = 250)
-	build_path = /obj/item/weapon/storage/backpack/holding/duffle
+	build_path = /obj/item/storage/backpack/holding/duffle
 	sort_string = "VAFAB"

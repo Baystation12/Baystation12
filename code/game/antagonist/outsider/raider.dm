@@ -16,7 +16,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	initial_spawn_target = 4
 	min_player_age = 14
 
-	id_type = /obj/item/weapon/card/id/syndicate
+	id_type = /obj/item/card/id/syndicate
 
 	faction = "pirate"
 	base_to_load = /datum/map_template/ruin/antag_spawn/heist
@@ -36,10 +36,6 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 		/obj/item/clothing/shoes/workboots,
 		/obj/item/clothing/shoes/brown,
 		/obj/item/clothing/shoes/laceup
-		)
-
-	var/list/raider_glasses = list(
-		/obj/item/clothing/glasses/night
 		)
 
 	var/list/raider_helmets = list(
@@ -63,34 +59,34 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 		)
 
 	var/list/raider_guns = list(
-		/obj/item/weapon/gun/energy/laser,
-		/obj/item/weapon/gun/energy/retro,
-		/obj/item/weapon/gun/energy/xray,
-		/obj/item/weapon/gun/energy/xray/pistol,
-		/obj/item/weapon/gun/energy/mindflayer,
-		/obj/item/weapon/gun/energy/toxgun,
-		/obj/item/weapon/gun/energy/stunrevolver,
-		/obj/item/weapon/gun/energy/ionrifle,
-		/obj/item/weapon/gun/energy/taser,
-		/obj/item/weapon/gun/energy/crossbow/largecrossbow,
-		/obj/item/weapon/gun/launcher/crossbow,
-		/obj/item/weapon/gun/launcher/grenade/loaded,
-		/obj/item/weapon/gun/launcher/pneumatic,
-		/obj/item/weapon/gun/projectile/automatic/machine_pistol,
-		/obj/item/weapon/gun/projectile/automatic/merc_smg,
-		/obj/item/weapon/gun/projectile/automatic/sec_smg,
-		/obj/item/weapon/gun/projectile/automatic/assault_rifle,
-		/obj/item/weapon/gun/projectile/shotgun/pump,
-		/obj/item/weapon/gun/projectile/shotgun/pump/combat,
-		/obj/item/weapon/gun/projectile/shotgun/doublebarrel,
-		/obj/item/weapon/gun/projectile/shotgun/doublebarrel/pellet,
-		/obj/item/weapon/gun/projectile/shotgun/doublebarrel/sawn,
-		/obj/item/weapon/gun/projectile/pistol/sec,
-		/obj/item/weapon/gun/projectile/pistol/holdout,
-		/obj/item/weapon/gun/projectile/revolver,
-		/obj/item/weapon/gun/projectile/pirate,
-		/obj/item/weapon/gun/projectile/revolver/medium,
-		/obj/item/weapon/gun/projectile/pistol/throwback
+		/obj/item/gun/energy/laser,
+		/obj/item/gun/energy/retro,
+		/obj/item/gun/energy/xray,
+		/obj/item/gun/energy/xray/pistol,
+		/obj/item/gun/energy/mindflayer,
+		/obj/item/gun/energy/toxgun,
+		/obj/item/gun/energy/stunrevolver,
+		/obj/item/gun/energy/ionrifle,
+		/obj/item/gun/energy/taser,
+		/obj/item/gun/energy/crossbow/largecrossbow,
+		/obj/item/gun/launcher/crossbow,
+		/obj/item/gun/launcher/grenade/loaded,
+		/obj/item/gun/launcher/pneumatic,
+		/obj/item/gun/projectile/automatic/machine_pistol,
+		/obj/item/gun/projectile/automatic/merc_smg,
+		/obj/item/gun/projectile/automatic/sec_smg,
+		/obj/item/gun/projectile/automatic/assault_rifle,
+		/obj/item/gun/projectile/shotgun/pump,
+		/obj/item/gun/projectile/shotgun/pump/combat,
+		/obj/item/gun/projectile/shotgun/doublebarrel,
+		/obj/item/gun/projectile/shotgun/doublebarrel/pellet,
+		/obj/item/gun/projectile/shotgun/doublebarrel/sawn,
+		/obj/item/gun/projectile/pistol/sec,
+		/obj/item/gun/projectile/pistol/holdout,
+		/obj/item/gun/projectile/revolver,
+		/obj/item/gun/projectile/pirate,
+		/obj/item/gun/projectile/revolver/medium,
+		/obj/item/gun/projectile/pistol/broomstick
 		)
 
 	var/list/raider_holster = list(
@@ -100,8 +96,8 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 		)
 
 /datum/antagonist/raider/update_access(var/mob/living/player)
-	for(var/obj/item/weapon/storage/wallet/W in player.contents)
-		for(var/obj/item/weapon/card/id/id in W.contents)
+	for(var/obj/item/storage/wallet/W in player.contents)
+		for(var/obj/item/card/id/id in W.contents)
 			id.SetName("[player.real_name]'s Passport")
 			id.registered_name = player.real_name
 			W.SetName("[initial(W.name)] ([id.name])")
@@ -154,7 +150,6 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	else
 		var/new_shoes =   pick(raider_shoes)
 		var/new_uniform = pick(raider_uniforms)
-		var/new_glasses = pick(raider_glasses)
 		var/new_helmet =  pick(raider_helmets)
 		var/new_suit =    pick(raider_suits)
 
@@ -165,15 +160,14 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 			player.equip_to_slot_or_del(new fallback_type(player), slot_shoes)
 
 		player.equip_to_slot_or_del(new new_uniform(player),slot_w_uniform)
-		player.equip_to_slot_or_del(new new_glasses(player),slot_glasses)
 		player.equip_to_slot_or_del(new new_helmet(player),slot_head)
 		player.equip_to_slot_or_del(new new_suit(player),slot_wear_suit)
 		equip_weapons(player)
 
-	var/obj/item/weapon/card/id/id = create_id("Visitor", player, equip = 0)
+	var/obj/item/card/id/id = create_id("Visitor", player, equip = 0)
 	id.SetName("[player.real_name]'s Passport")
 	id.assignment = "Visitor"
-	var/obj/item/weapon/storage/wallet/W = new(player)
+	var/obj/item/storage/wallet/W = new(player)
 	W.handle_item_insertion(id)
 	if(player.equip_to_slot_or_del(W, slot_wear_id))
 		spawn_money(rand(50,150)*10,W)
@@ -191,7 +185,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 
 	//Give some of the raiders a pirate gun as a secondary
 	if(prob(60))
-		var/obj/item/secondary = new /obj/item/weapon/gun/projectile/pirate(T)
+		var/obj/item/secondary = new /obj/item/gun/projectile/pirate(T)
 		if(!(primary.slot_flags & SLOT_HOLSTER))
 			holster = new new_holster(T)
 			var/datum/extension/holster/H = get_extension(holster, /datum/extension/holster)
@@ -220,44 +214,41 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 		else
 			player.put_in_any_hand_if_possible(holster)
 
-/datum/antagonist/raider/proc/equip_ammo(var/mob/living/carbon/human/player, var/obj/item/weapon/gun/gun)
-	if(istype(gun, /obj/item/weapon/gun/projectile))
-		var/obj/item/weapon/gun/projectile/bullet_thrower = gun
+/datum/antagonist/raider/proc/equip_ammo(var/mob/living/carbon/human/player, var/obj/item/gun/gun)
+	if(istype(gun, /obj/item/gun/projectile))
+		var/obj/item/gun/projectile/bullet_thrower = gun
 		if(bullet_thrower.magazine_type)
 			player.equip_to_slot_or_del(new bullet_thrower.magazine_type(player), slot_l_store)
 			if(prob(20)) //don't want to give them too much
 				player.equip_to_slot_or_del(new bullet_thrower.magazine_type(player), slot_r_store)
 		else if(bullet_thrower.ammo_type)
-			var/obj/item/weapon/storage/box/ammobox = new(get_turf(player.loc))
+			var/obj/item/storage/box/ammobox = new(get_turf(player.loc))
 			for(var/i in 1 to rand(3,5) + rand(0,2))
 				new bullet_thrower.ammo_type(ammobox)
 			player.put_in_any_hand_if_possible(ammobox)
 		return
 
-/datum/antagonist/raider/proc/equip_vox(var/mob/living/carbon/human/player)
+/datum/antagonist/raider/equip_vox(mob/living/carbon/human/vox, mob/living/carbon/human/old)
 
 	var/uniform_type = pick(list(/obj/item/clothing/under/vox/vox_robes,/obj/item/clothing/under/vox/vox_casual))
-	var/new_glasses = pick(raider_glasses)
 	var/new_holster = pick(raider_holster)
 
-	player.equip_to_slot_or_del(new uniform_type(player), slot_w_uniform)
-	player.equip_to_slot_or_del(new /obj/item/clothing/shoes/magboots/vox(player), slot_shoes) // REPLACE THESE WITH CODED VOX ALTERNATIVES.
-	player.equip_to_slot_or_del(new /obj/item/clothing/gloves/vox(player), slot_gloves) // AS ABOVE.
-	player.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/swat/vox(player), slot_wear_mask)
-	player.equip_to_slot_or_del(new /obj/item/weapon/tank/nitrogen(player), slot_back)
-	player.equip_to_slot_or_del(new /obj/item/device/flashlight(player), slot_r_store)
-	player.equip_to_slot_or_del(new new_glasses(player),slot_glasses)
+	vox.equip_to_slot_or_del(new uniform_type(vox), slot_w_uniform)
+	vox.equip_to_slot_or_del(new /obj/item/clothing/shoes/magboots/vox(vox), slot_shoes) // REPLACE THESE WITH CODED VOX ALTERNATIVES.
+	vox.equip_to_slot_or_del(new /obj/item/clothing/gloves/vox(vox), slot_gloves) // AS ABOVE.
+	vox.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/swat/vox(vox), slot_wear_mask)
+	vox.equip_to_slot_or_del(new /obj/item/tank/nitrogen(vox), slot_back)
+	vox.equip_to_slot_or_del(new /obj/item/device/flashlight(vox), slot_r_store)
 
 	var/obj/item/clothing/accessory/storage/holster/holster = new new_holster
 	if(holster)
-		var/obj/item/clothing/under/uniform = player.w_uniform
+		var/obj/item/clothing/under/uniform = vox.w_uniform
 		if(istype(uniform) && uniform.can_attach_accessory(holster))
-			uniform.attackby(holster, player)
+			uniform.attackby(holster, vox)
 		else
-			player.put_in_any_hand_if_possible(holster)
+			vox.put_in_any_hand_if_possible(holster)
 
-	player.set_internals(locate(/obj/item/weapon/tank) in player.contents)
-	return 1
+	vox.set_internals(locate(/obj/item/tank) in vox.contents)
 
 /obj/random/raider/hardsuit
 	name = "Random Raider Hardsuit"
@@ -266,11 +257,11 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	icon_state = "generic"
 
 /obj/random/raider/hardsuit/spawn_choices()
-	return list(/obj/item/weapon/rig/industrial,
-				/obj/item/weapon/rig/eva,
-				/obj/item/weapon/rig/light/hacker,
-				/obj/item/weapon/rig/light,
-				/obj/item/weapon/rig/unathi
+	return list(/obj/item/rig/industrial,
+				/obj/item/rig/eva,
+				/obj/item/rig/light/hacker,
+				/obj/item/rig/light,
+				/obj/item/rig/unathi
 	)
 
 /obj/random/raider/lilgun
@@ -280,19 +271,22 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	icon_state = "secguncomp"
 
 /obj/random/raider/lilgun/spawn_choices()
-	return list(/obj/item/weapon/gun/projectile/pistol/sec,
-				/obj/item/weapon/gun/energy/gun,
-				/obj/item/weapon/gun/energy/stunrevolver,
-				/obj/item/weapon/gun/projectile/shotgun/doublebarrel/sawn,
-				/obj/item/weapon/gun/energy/xray/pistol,
-				/obj/item/weapon/gun/projectile/automatic/machine_pistol,
-				/obj/item/weapon/gun/projectile/pistol/military/alt,
-				/obj/item/weapon/gun/projectile/pistol/holdout,
-				/obj/item/weapon/gun/projectile/revolver,
-				/obj/item/weapon/gun/projectile/revolver/medium,
-				/obj/item/weapon/gun/energy/retro,
-				/obj/item/weapon/gun/projectile/pistol/throwback,
-				/obj/item/weapon/gun/energy/ionrifle/small
+	return list(/obj/item/gun/projectile/pistol/sec,
+				/obj/item/gun/energy/gun,
+				/obj/item/gun/energy/stunrevolver,
+				/obj/item/gun/projectile/shotgun/doublebarrel/sawn,
+				/obj/item/gun/energy/xray/pistol,
+				/obj/item/gun/energy/pulse_rifle/pistol,
+				/obj/item/gun/energy/plasmacutter,
+				/obj/item/gun/energy/incendiary_laser,
+				/obj/item/gun/projectile/automatic/machine_pistol,
+				/obj/item/gun/projectile/pistol/military/alt,
+				/obj/item/gun/projectile/pistol/holdout,
+				/obj/item/gun/projectile/revolver,
+				/obj/item/gun/projectile/revolver/medium,
+				/obj/item/gun/energy/retro,
+				/obj/item/gun/projectile/pistol/throwback,
+				/obj/item/gun/energy/ionrifle/small
 	)
 
 /obj/random/raider/biggun
@@ -302,16 +296,30 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	icon_state = "arifle"
 
 /obj/random/raider/biggun/spawn_choices()
-	return list(/obj/item/weapon/gun/energy/lasercannon,
-				/obj/item/weapon/gun/energy/laser,
-				/obj/item/weapon/gun/energy/sniperrifle,
-				/obj/item/weapon/gun/projectile/shotgun/doublebarrel,
-				/obj/item/weapon/gun/energy/xray,
-				/obj/item/weapon/gun/projectile/heavysniper/boltaction,
-				/obj/item/weapon/gun/projectile/automatic/assault_rifle,
-				/obj/item/weapon/gun/projectile/automatic/sec_smg,
-				/obj/item/weapon/gun/energy/crossbow/largecrossbow,
-				/obj/item/weapon/gun/projectile/shotgun/pump/combat,
-				/obj/item/weapon/gun/energy/ionrifle,
-				/obj/item/weapon/gun/projectile/shotgun/pump
+	return list(/obj/item/gun/energy/lasercannon,
+				/obj/item/gun/energy/laser,
+				/obj/item/gun/energy/captain,
+				/obj/item/gun/energy/pulse_rifle,
+				/obj/item/gun/energy/pulse_rifle/carbine,
+				/obj/item/gun/energy/sniperrifle,
+				/obj/item/gun/projectile/shotgun/doublebarrel,
+				/obj/item/gun/energy/xray,
+				/obj/item/gun/projectile/automatic/battlerifle,
+				/obj/item/gun/projectile/sniper/semistrip,
+				/obj/item/gun/projectile/sniper/garand,
+				/obj/item/gun/projectile/automatic/assault_rifle,
+				/obj/item/gun/projectile/automatic/sec_smg,
+				/obj/item/gun/energy/crossbow/largecrossbow,
+				/obj/item/gun/projectile/shotgun/pump/combat,
+				/obj/item/gun/energy/ionrifle,
+				/obj/item/gun/projectile/shotgun/pump
 	)
+
+/obj/item/vox_changer/raider
+	allowed_role = "Raider"
+
+/obj/item/vox_changer/raider/OnCreated(mob/living/carbon/human/vox, mob/living/carbon/human/old)
+	GLOB.raiders.equip_vox(vox, old)
+
+/obj/item/vox_changer/raider/OnReady(mob/living/carbon/human/vox, mob/living/carbon/human/old)
+	GLOB.raiders.update_access(vox)

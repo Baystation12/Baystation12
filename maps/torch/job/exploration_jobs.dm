@@ -69,7 +69,7 @@
 		access_mining_office, access_petrov, access_petrov_helm, access_petrov_maint, access_mining_station,
 		access_expedition_shuttle, access_expedition_shuttle_helm, access_guppy, access_hangar, access_guppy_helm,
 		access_mining, access_pilot, access_solgov_crew, access_eva, access_explorer, access_research,
-		access_radio_exp, access_radio_sci, access_radio_sup
+		access_radio_exp, access_radio_sci, access_radio_sup, access_maint_tunnels, access_emergency_storage
 	)
 	min_skill = list(	SKILL_EVA   = SKILL_BASIC,
 						SKILL_PILOT = SKILL_ADEPT)

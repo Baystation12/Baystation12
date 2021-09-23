@@ -249,15 +249,15 @@
 		read_alerts = !read_alerts
 		to_chat(user, SPAN_NOTICE("You turn the alert reader on \the [src] [read_alerts ? "on" : "off"]."))
 
-/obj/item/weapon/stock_parts/circuitboard/vitals_monitor
+/obj/item/stock_parts/circuitboard/vitals_monitor
 	name = "circuit board (Vitals Monitor)"
 	build_path = /obj/machinery/vitals_monitor
 	board_type = "machine"
 	req_components = list(
-		/obj/item/weapon/stock_parts/console_screen = 1)
+		/obj/item/stock_parts/console_screen = 1)
 	additional_spawn_components = list(
-		/obj/item/weapon/stock_parts/power/battery/buildable/stock = 1,
-		/obj/item/weapon/cell/high = 1
+		/obj/item/stock_parts/power/battery/buildable/stock = 1,
+		/obj/item/cell/high = 1
 	)
 
 #undef PULSE_ALERT

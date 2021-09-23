@@ -24,7 +24,7 @@
 	if(!istype(AM))
 		return
 	var/list/zlevels = GetConnectedZlevels(AM.z)
-	for(var/obj/item/weapon/gun/G in GLOB.secure_weapons)
+	for(var/obj/item/gun/G in GLOB.secure_weapons)
 		var/out_of_range = FALSE
 		var/area_name = "OUT OF RANGE"
 		var/turf/T = get_turf(G)
@@ -58,7 +58,7 @@
 		return TRUE
 
 	if(href_list["gun"] && ("authorize" in href_list) && href_list["mode"])
-		var/obj/item/weapon/gun/G = locate(href_list["gun"]) in GLOB.secure_weapons
+		var/obj/item/gun/G = locate(href_list["gun"]) in GLOB.secure_weapons
 		var/do_authorize = text2num(href_list["authorize"])
 		var/mode = text2num(href_list["mode"])
 		return isnum(do_authorize) && isnum(mode) && G && G.authorize(mode, do_authorize)

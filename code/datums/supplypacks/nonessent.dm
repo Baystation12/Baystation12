@@ -11,29 +11,29 @@
 
 /decl/hierarchy/supply_pack/nonessent/artscrafts
 	name = "Art - Arts and Crafts supplies"
-	contains = list(/obj/item/weapon/storage/fancy/crayons,
+	contains = list(/obj/item/storage/fancy/crayons,
 	/obj/item/device/camera,
 	/obj/item/device/camera_film = 2,
-	/obj/item/weapon/storage/photo_album,
+	/obj/item/storage/photo_album,
 	/obj/item/stack/package_wrap/twenty_five,
-	/obj/item/weapon/reagent_containers/glass/paint/red,
-	/obj/item/weapon/reagent_containers/glass/paint/green,
-	/obj/item/weapon/reagent_containers/glass/paint/blue,
-	/obj/item/weapon/reagent_containers/glass/paint/yellow,
-	/obj/item/weapon/reagent_containers/glass/paint/purple,
-	/obj/item/weapon/reagent_containers/glass/paint/black,
-	/obj/item/weapon/reagent_containers/glass/paint/white,
-	/obj/item/weapon/contraband/poster,
-	/obj/item/weapon/wrapping_paper = 3)
+	/obj/item/reagent_containers/glass/paint/red,
+	/obj/item/reagent_containers/glass/paint/green,
+	/obj/item/reagent_containers/glass/paint/blue,
+	/obj/item/reagent_containers/glass/paint/yellow,
+	/obj/item/reagent_containers/glass/paint/purple,
+	/obj/item/reagent_containers/glass/paint/black,
+	/obj/item/reagent_containers/glass/paint/white,
+	/obj/item/contraband/poster,
+	/obj/item/wrapping_paper = 3)
 	cost = 10
 	containername = "arts and Crafts crate"
 
 
 /decl/hierarchy/supply_pack/nonessent/card_packs
 	num_contained = 5
-	contains = list(/obj/item/weapon/pack/cardemon,
-					/obj/item/weapon/pack/spaceball,
-					/obj/item/weapon/deck/holder)
+	contains = list(/obj/item/pack/cardemon,
+					/obj/item/pack/spaceball,
+					/obj/item/deck/holder)
 	name = "Rec - Trading Cards"
 	cost = 20
 	containername = "trading cards crate"
@@ -41,9 +41,9 @@
 
 /decl/hierarchy/supply_pack/nonessent/lasertag
 	name = "Rec - Lasertag equipment"
-	contains = list(/obj/item/weapon/gun/energy/lasertag/red = 3,
+	contains = list(/obj/item/gun/energy/lasertag/red = 3,
 					/obj/item/clothing/suit/redtag = 3,
-					/obj/item/weapon/gun/energy/lasertag/blue = 3,
+					/obj/item/gun/energy/lasertag/blue = 3,
 					/obj/item/clothing/suit/bluetag = 3)
 	cost = 20
 	containertype = /obj/structure/closet
@@ -78,7 +78,7 @@
 
 /decl/hierarchy/supply_pack/nonessent/wizard
 	name = "Costume - Wizard"
-	contains = list(/obj/item/weapon/staff,
+	contains = list(/obj/item/staff,
 					/obj/item/clothing/suit/wizrobe/fake,
 					/obj/item/clothing/shoes/sandal,
 					/obj/item/clothing/head/wizard/fake)
@@ -175,7 +175,7 @@
 	contains = list(/obj/item/clothing/suit/wizrobe/marisa/fake,
 					/obj/item/clothing/shoes/sandal,
 					/obj/item/clothing/head/wizard/marisa/fake,
-					/obj/item/weapon/staff/broom)
+					/obj/item/staff/broom)
 	cost = 20
 	containername = "witch costume crate"
 	containertype = /obj/structure/closet
@@ -243,31 +243,37 @@
 					/obj/item/clothing/head/chaplain_hood,
 					/obj/item/clothing/suit/holidaypriest,
 					/obj/item/clothing/under/wedding/bride_white,
-//					/obj/item/weapon/storage/backpack/cultpack,
-					/obj/item/weapon/storage/candle_box = 3)
+//					/obj/item/storage/backpack/cultpack,
+					/obj/item/storage/candle_box = 3)
 	cost = 10
 	containername = "chaplain equipment crate"
 
-/decl/hierarchy/supply_pack/nonessent/exosuit_mod_ripl3
+/decl/hierarchy/supply_pack/nonessent/exosuit_mod
+	num_contained = 1
 	name = "Mod - \"Firestarter\" exosuit modkit"
-	contains = list(/obj/item/device/kit/paint/powerloader/flames_red)
+	contains = list(/obj/item/device/kit/paint/flames_red)
 	cost = 50
 	containername = "heavy exosuit modkit crate"
 
-/decl/hierarchy/supply_pack/nonessent/exosuit_mod_ripl4
-	num_contained = 1
+/decl/hierarchy/supply_pack/nonessent/exosuit_mod/chrome
 	name = "Mod - \"Burning Chrome\" exosuit modkit"
-	contains = list(/obj/item/device/kit/paint/powerloader/flames_blue)
-	cost = 50
-	containername = "heavy exosuit modkit crate"
+	contains = list(/obj/item/device/kit/paint/flames_blue)
+
+/decl/hierarchy/supply_pack/nonessent/exosuit_mod/military
+	name = "Mod - \"Guerilla\" exosuit modkit"
+	contains = list(/obj/item/device/kit/paint/camouflage)
+
+/decl/hierarchy/supply_pack/nonessent/exosuit_mod/alpine
+	name = "Mod - \"Alpine\" exosuit modkit"
+	contains = list(/obj/item/device/kit/paint/camouflage/forest)
 
 /decl/hierarchy/supply_pack/nonessent/aromatherapy
 	name = "Rec - Aromatherapy"
 	contains = list(
-		/obj/item/weapon/paper/aromatherapy_disclaimer,
-		/obj/item/weapon/storage/candle_box/scented = 3,
-		/obj/item/weapon/storage/candle_box/incense = 6,
-		/obj/item/weapon/flame/lighter/random)
+		/obj/item/paper/aromatherapy_disclaimer,
+		/obj/item/storage/candle_box/scented = 3,
+		/obj/item/storage/candle_box/incense = 6,
+		/obj/item/flame/lighter/random)
 	cost = 15
 	containername = "aromatherapy crate"
 

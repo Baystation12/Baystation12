@@ -1,4 +1,4 @@
-/obj/item/weapon/robot_module/flying/cultivator
+/obj/item/robot_module/flying/cultivator
 	name = "cultivator drone module"
 	display_name = "Cultivator"
 	channels = list(
@@ -8,19 +8,19 @@
 	sprites = list("Drone" = "drone-hydro")
 
 	equipment = list(
-		/obj/item/weapon/storage/plants,
-		/obj/item/weapon/wirecutters/clippers,
-		/obj/item/weapon/material/minihoe/unbreakable,
-		/obj/item/weapon/material/hatchet/unbreakable,
-		/obj/item/weapon/reagent_containers/glass/bucket,
-		/obj/item/weapon/scalpel/laser1,
-		/obj/item/weapon/circular_saw,
-		/obj/item/weapon/extinguisher,
-		/obj/item/weapon/gripper/cultivator,
+		/obj/item/storage/plants,
+		/obj/item/wirecutters/clippers,
+		/obj/item/material/minihoe/unbreakable,
+		/obj/item/material/hatchet/unbreakable,
+		/obj/item/reagent_containers/glass/bucket,
+		/obj/item/scalpel/laser1,
+		/obj/item/circular_saw,
+		/obj/item/extinguisher,
+		/obj/item/gripper/cultivator,
 		/obj/item/device/scanner/plant,
-		/obj/item/weapon/robot_harvester
+		/obj/item/robot_harvester
 	)
-	emag = /obj/item/weapon/melee/energy/machete
+	emag = /obj/item/melee/energy/machete
 	skills = list(
 		SKILL_BOTANY    = SKILL_MAX,
 		SKILL_COMBAT    = SKILL_EXPERT,

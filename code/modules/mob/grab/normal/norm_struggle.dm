@@ -12,7 +12,7 @@
 	can_absorb = 0
 	point_blank_mult = 1
 	same_tile = 0
-	breakability = 3
+	breakability = 4
 
 	grab_slowdown = 10
 	upgrade_cooldown = 20
@@ -21,7 +21,7 @@
 
 	icon_state = "reinforce"
 
-	break_chance_table = list(5, 20, 30, 80, 100)
+	break_chance_table = list(35, 40, 45, 50, 55, 60, 65)
 
 
 /datum/grab/normal/struggle/process_effect(var/obj/item/grab/G)

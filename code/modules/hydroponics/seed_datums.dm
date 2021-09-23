@@ -202,8 +202,8 @@
 	seed_name = "killer tomato"
 	display_name = "killer tomato plant"
 	mutants = null
-	can_self_harvest = 1
-	has_mob_product = /mob/living/simple_animal/tomato
+	can_self_harvest = TRUE
+	has_mob_product = /mob/living/simple_animal/passive/tomato
 
 /datum/seed/tomato/killer/New()
 	..()
@@ -402,8 +402,8 @@
 	seed_name = "walking mushroom"
 	display_name = "walking mushrooms"
 	mutants = null
-	can_self_harvest = 1
-	has_mob_product = /mob/living/simple_animal/mushroom
+	can_self_harvest = TRUE
+	has_mob_product = /mob/living/simple_animal/passive/mushroom
 
 /datum/seed/mushroom/plump/walking/New()
 	..()
@@ -707,7 +707,7 @@
 	seed_name = "banana"
 	display_name = "banana tree"
 	chems = list(/datum/reagent/drink/juice/banana = list(10,10), /datum/reagent/potassium = list(2,3))
-	trash_type = /obj/item/weapon/bananapeel
+	trash_type = /obj/item/bananapeel
 	kitchen_tag = "banana"
 
 /datum/seed/banana/New()
@@ -731,7 +731,7 @@
 	display_name = "ears of corn"
 	chems = list(/datum/reagent/nutriment = list(1,10), /datum/reagent/nutriment/cornoil = list(1,10))
 	kitchen_tag = "corn"
-	trash_type = /obj/item/weapon/carvable/corncob
+	trash_type = /obj/item/carvable/corncob
 
 /datum/seed/corn/New()
 	..()
@@ -1116,7 +1116,7 @@
 	seed_name = "diona"
 	seed_noun = SEED_NOUN_NODES
 	display_name = "replicant pods"
-	can_self_harvest = 1
+	can_self_harvest = TRUE
 	has_mob_product = /mob/living/carbon/alien/diona
 
 /datum/seed/diona/New()
@@ -1276,6 +1276,50 @@
 	set_trait(TRAIT_IDEAL_LIGHT, 6)
 	set_trait(TRAIT_WATER_CONSUMPTION, 6)
 
+/datum/seed/resin
+	name = "resinplant"
+	seed_name = "resin plant"
+	display_name = "resin plant"
+	chems = list(/datum/reagent/resinpulp = list(6,1))
+	mutants = null
+	exude_gasses = list(null)
+
+/datum/seed/resin/New()
+	..()
+	set_trait(TRAIT_HARVEST_REPEAT,1)
+	set_trait(TRAIT_MATURATION,5)
+	set_trait(TRAIT_PRODUCTION,1)
+	set_trait(TRAIT_YIELD,5)
+	set_trait(TRAIT_POTENCY,1)
+	set_trait(TRAIT_PRODUCT_COLOUR,"#3a4e1b")
+	set_trait(TRAIT_PLANT_COLOUR,"#5e41be")
+	set_trait(TRAIT_PRODUCT_ICON,"resin")
+	set_trait(TRAIT_PLANT_ICON,"resin")
+	set_trait(TRAIT_IDEAL_LIGHT, 6)
+	set_trait(TRAIT_WATER_CONSUMPTION, 6)
+
+/datum/seed/breather
+	name = "breather"
+	seed_name = "breather"
+	display_name = "breather"
+	chems = list(
+		/datum/reagent/nutriment = list(2,12),
+		/datum/reagent/ammonia = list(3,8)
+	)
+	exude_gasses = list(GAS_NITROGEN = 3)
+
+/datum/seed/breather/New()
+	..()
+	set_trait(TRAIT_MATURATION,6)
+	set_trait(TRAIT_PRODUCTION,5)
+	set_trait(TRAIT_YIELD,4)
+	set_trait(TRAIT_POTENCY,10)
+	set_trait(TRAIT_PRODUCT_ICON,"breather")
+	set_trait(TRAIT_PLANT_ICON,"breather")
+	set_trait(TRAIT_WATER_CONSUMPTION, 4)
+	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 1)
+	set_trait(TRAIT_LIGHT_TOLERANCE, 6)
+
 // Fruit Expansion
 
 /datum/seed/melon
@@ -1357,7 +1401,7 @@
 	seed_name = "pineapple"
 	display_name = "pineapple plant"
 	chems = list(/datum/reagent/drink/juice/pineapple = list(10,10), /datum/reagent/enzyme = list(1,5),/datum/reagent/nutriment = list(1,10))
-	trash_type = /obj/item/weapon/carvable/corncob/hollowpineapple
+	trash_type = /obj/item/carvable/corncob/hollowpineapple
 
 /datum/seed/pineapple/New()
 	..()
@@ -1400,7 +1444,7 @@
 	seed_name = "coconut"
 	display_name = "coconut trees"
 	chems = list(/datum/reagent/nutriment = list(1,20), /datum/reagent/drink/coconut = list(10,20))
-	trash_type = /obj/item/weapon/carvable/corncob/hollowcoconut
+	trash_type = /obj/item/carvable/corncob/hollowcoconut
 
 /datum/seed/coconut/New()
 	..()

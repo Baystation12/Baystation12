@@ -1,4 +1,4 @@
-/obj/item/weapon/weldpack
+/obj/item/weldpack
 	name = "welding kit"
 	desc = "An unwieldy, heavy backpack with two massive fuel tanks. Includes a connector for most models of portable welding tools."
 	slot_flags = SLOT_BACK
@@ -6,22 +6,22 @@
 	icon_state = "welderpack"
 	w_class = ITEM_SIZE_HUGE
 	var/max_fuel = 350
-	var/obj/item/weapon/weldingtool/welder
+	var/obj/item/weldingtool/welder
 
-/obj/item/weapon/weldpack/Initialize()
+/obj/item/weldpack/Initialize()
 	create_reagents(max_fuel)
 	reagents.add_reagent(/datum/reagent/fuel, max_fuel)
 
 	. = ..()
 
-/obj/item/weapon/weldpack/Destroy()
+/obj/item/weldpack/Destroy()
 	QDEL_NULL(welder)
 
 	. = ..()
 
-/obj/item/weapon/weldpack/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/weldpack/attackby(obj/item/W as obj, mob/user as mob)
 	if(isWelder(W))
-		var/obj/item/weapon/weldingtool/T = W
+		var/obj/item/weldingtool/T = W
 		if(T.welding & prob(50))
 			log_and_message_admins("triggered a fueltank explosion.", user)
 			to_chat(user, "<span class='danger'>That was stupid of you.</span>")
@@ -38,8 +38,8 @@
 			to_chat(user, "<span class='notice'>You refuel \the [W].</span>")
 			playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
 			return
-	else if(istype(W, /obj/item/weapon/welder_tank))
-		var/obj/item/weapon/welder_tank/tank = W
+	else if(istype(W, /obj/item/welder_tank))
+		var/obj/item/welder_tank/tank = W
 		src.reagents.trans_to_obj(tank, tank.max_fuel)
 		to_chat(user, "<span class='notice'>You refuel \the [W].</span>")
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
@@ -48,7 +48,7 @@
 	to_chat(user, "<span class='warning'>The tank will accept only a welding tool or cartridge.</span>")
 	return
 
-/obj/item/weapon/weldpack/afterattack(obj/O as obj, mob/user as mob, proximity)
+/obj/item/weldpack/afterattack(obj/O as obj, mob/user as mob, proximity)
 	if(!proximity) // this replaces and improves the get_dist(src,O) <= 1 checks used previously
 		return
 	if (istype(O, /obj/structure/reagent_dispensers/fueltank) && src.reagents.total_volume < max_fuel)
@@ -60,7 +60,7 @@
 		to_chat(user, "<span class='warning'>The pack is already full!</span>")
 		return
 
-/obj/item/weapon/weldpack/attack_hand(mob/user as mob)
+/obj/item/weldpack/attack_hand(mob/user as mob)
 	if(welder && user.get_inactive_hand() == src)
 		user.put_in_hands(welder)
 		user.visible_message("[user] removes \the [welder] from \the [src].", "You remove \the [welder] from \the [src].")
@@ -69,7 +69,7 @@
 	else
 		..()
 
-/obj/item/weapon/weldpack/on_update_icon()
+/obj/item/weldpack/on_update_icon()
 	..()
 
 	overlays.Cut()
@@ -78,14 +78,14 @@
 		welder_image.pixel_x = 16
 		overlays += welder_image
 
-/obj/item/weapon/weldpack/examine(mob/user)
+/obj/item/weldpack/examine(mob/user)
 	. = ..()
 	to_chat(user, text("[icon2html(src, user)] [] units of fuel left!", src.reagents.total_volume))
 
 	if(welder)
 		to_chat(user, "\The [welder] is attached.")
 
-/obj/item/weapon/scrubpack
+/obj/item/scrubpack
 	name = "scrubber pack"
 	desc = "A heavy, unwieldy machine that can filter atmosphere."
 	w_class = ITEM_SIZE_HUGE
@@ -94,8 +94,8 @@
 	icon_state = "scrubpack"
 	action_button_name = "Toggle Scrubber"
 
-	var/obj/item/weapon/tank/tank
-	var/obj/item/weapon/cell/cell
+	var/obj/item/tank/tank
+	var/obj/item/cell/cell
 	var/tank_permit
 	var/list/scrub_names
 	var/charge_cost
@@ -103,7 +103,7 @@
 	var/enabled = FALSE
 	var/sound_token
 
-/obj/item/weapon/scrubpack/Initialize()
+/obj/item/scrubpack/Initialize()
 	. = ..()
 	if (ispath(tank))
 		tank = new tank(src)
@@ -115,14 +115,14 @@
 			if (name != GAS_OXYGEN && name != GAS_NITROGEN)
 				scrub_names += name
 
-/obj/item/weapon/scrubpack/Destroy()
+/obj/item/scrubpack/Destroy()
 	. = ..()
 	STOP_PROCESSING(SSobj, src)
 	set_sound_state(FALSE)
 	QDEL_NULL(tank)
 	QDEL_NULL(cell)
 
-/obj/item/weapon/scrubpack/examine(mob/user, distance)
+/obj/item/scrubpack/examine(mob/user, distance)
 	. = ..()
 	if (distance < 5)
 		to_chat(user, "It [cell ? "has" : "is missing"] a cell and [tank ? "has" : "is missing"] a tank.")
@@ -156,12 +156,12 @@
 				display = "[display]%"
 			to_chat(user, "\The [cell] charge is [display]")
 
-/obj/item/weapon/scrubpack/attackby(obj/item/weapon/W, mob/user)
-	if (istype(W, /obj/item/weapon/cell))
+/obj/item/scrubpack/attackby(obj/item/W, mob/user)
+	if (istype(W, /obj/item/cell))
 		if (cell)
 			to_chat(user, SPAN_WARNING("\The [src] already has \an [cell]."))
 			return TRUE
-		if (istype(W, /obj/item/weapon/cell/device))
+		if (istype(W, /obj/item/cell/device))
 			to_chat(user, SPAN_WARNING("\The [W] is too small for \the [src]."))
 			return TRUE
 		if (!user.unEquip(W, src))
@@ -175,7 +175,7 @@
 		cell = W
 		return TRUE
 
-	if (istype(W, /obj/item/weapon/tank))
+	if (istype(W, /obj/item/tank))
 		if (tank)
 			to_chat(user, SPAN_WARNING("\The [src] already has \an [tank]."))
 			return TRUE
@@ -209,12 +209,7 @@
 		if (!selection)
 			return TRUE
 		var/time_cost = 5 - round(user.get_skill_value(SKILL_ATMOS) * 0.5) //0,1,1,2,2
-		var/failed = do_after_detailed(user, time_cost SECONDS, src, do_flags = DO_DEFAULT | DO_BOTH_UNIQUE_ACT)
-		if (failed)
-			if (failed == DO_USER_UNIQUE_ACT)
-				to_chat(user, SPAN_WARNING("You stop what you're doing with \the [src]."))
-			else if (failed == DO_TARGET_UNIQUE_ACT)
-				to_chat(user, SPAN_WARNING("\The [do_unique_target_user] is already busy with \the [src]."))
+		if (!do_after(user, time_cost SECONDS, src, do_flags = DO_DEFAULT | DO_BOTH_UNIQUE_ACT))
 			return TRUE
 		var/removed
 		if (selection == "cell")
@@ -236,19 +231,19 @@
 
 	. = ..()
 
-/obj/item/weapon/scrubpack/attack_self(mob/user)
+/obj/item/scrubpack/attack_self(mob/user)
 	toggle(user)
 
-/obj/item/weapon/scrubpack/ui_action_click()
+/obj/item/scrubpack/ui_action_click()
 	toggle(usr)
 
-/obj/item/weapon/scrubpack/proc/set_sound_state(on_off)
+/obj/item/scrubpack/proc/set_sound_state(on_off)
 	if (on_off)
 		sound_token = GLOB.sound_player.PlayLoopingSound(src, "\ref[src]", 'sound/machines/scrubber-active.ogg', 25, 3)
 	else
 		QDEL_NULL(sound_token)
 
-/obj/item/weapon/scrubpack/proc/toggle(mob/user)
+/obj/item/scrubpack/proc/toggle(mob/user)
 	enabled = !enabled
 	if (enabled)
 		var/list/mods = list()
@@ -272,7 +267,7 @@
 		icon_state = "scrubpack"
 		set_sound_state(FALSE)
 
-/obj/item/weapon/scrubpack/Process()
+/obj/item/scrubpack/Process()
 	var/datum/gas_mixture/tank_air = tank.return_air()
 	if (tank_air.return_pressure() > TANK_LEAK_PRESSURE * 0.8)
 		audible_message(SPAN_ITALIC("\The [src] beeps stridently and stops working."))
@@ -326,9 +321,9 @@
 	tank_air.update_values()
 	env_air.update_values()
 
-/obj/item/weapon/scrubpack/standard
-	cell = /obj/item/weapon/cell/standard
-	tank = /obj/item/weapon/tank/scrubber
-	tank_permit = /obj/item/weapon/tank/scrubber
+/obj/item/scrubpack/standard
+	cell = /obj/item/cell/standard
+	tank = /obj/item/tank/scrubber
+	tank_permit = /obj/item/tank/scrubber
 	charge_cost = 30
 	volume_rate = 150

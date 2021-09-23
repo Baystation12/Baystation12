@@ -8,6 +8,9 @@
 	active_power_usage = 5000
 	base_type = /obj/machinery/r_n_d/protolathe
 	construct_state = /decl/machine_construction/default/panel_closed
+	
+	machine_name = "protolathe"
+	machine_desc = "Uses raw materials to produce prototypes. Part of an R&D network."
 
 	var/max_material_storage = 250000
 
@@ -49,18 +52,18 @@
 
 /obj/machinery/r_n_d/protolathe/RefreshParts()
 	var/T = 0
-	var/obj/item/weapon/stock_parts/building_material/mat = get_component_of_type(/obj/item/weapon/stock_parts/building_material)
+	var/obj/item/stock_parts/building_material/mat = get_component_of_type(/obj/item/stock_parts/building_material)
 	if(mat)
-		for(var/obj/item/weapon/reagent_containers/glass/G in mat.materials)
+		for(var/obj/item/reagent_containers/glass/G in mat.materials)
 			T += G.volume
 		if(!reagents)
 			create_reagents(T)
 		else
 			reagents.maximum_volume = T
 
-	max_material_storage = 75000 * Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin), 0, 10)
+	max_material_storage = 75000 * Clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 0, 10)
 
-	T = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator), 0, 6)
+	T = Clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator), 0, 6)
 	mat_efficiency = 1 - (T - 2) / 8
 	speed = T / 2
 	..()

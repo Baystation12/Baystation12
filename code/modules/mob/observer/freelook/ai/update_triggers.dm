@@ -11,7 +11,7 @@
 
 /obj/machinery/camera/Initialize()
 	. = ..()
-	var/list/open_networks = difflist(network, restricted_camera_networks)
+	var/list/open_networks = difflist(network, GLOB.restricted_camera_networks)
 	on_open_network = open_networks.len
 	if(on_open_network)
 		cameranet.add_source(src)
@@ -23,7 +23,7 @@
 
 /obj/machinery/camera/proc/update_coverage(var/network_change = 0)
 	if(network_change)
-		var/list/open_networks = difflist(network, restricted_camera_networks)
+		var/list/open_networks = difflist(network, GLOB.restricted_camera_networks)
 		// Add or remove camera from the camera net as necessary
 		if(on_open_network && !open_networks.len)
 			on_open_network = FALSE

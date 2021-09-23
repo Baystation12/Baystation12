@@ -8,10 +8,10 @@
 /obj/machinery/drone_fabricator
 	name = "drone fabricator"
 	desc = "A large automated factory for producing maintenance drones."
-	appearance_flags = 0
+	appearance_flags = DEFAULT_APPEARANCE_FLAGS
 
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	idle_power_usage = 20
 	active_power_usage = 5000
 

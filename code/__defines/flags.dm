@@ -26,6 +26,7 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define ATOM_FLAG_INITIALIZED            0x0020 // Has this atom been initialized
 #define ATOM_FLAG_NO_TEMP_CHANGE         0x0040 // Reagents do not cool or heat to ambient temperature in this container.
 #define ATOM_FLAG_CAN_BE_PAINTED         0x0080 // Can be painted using a paint sprayer or similar.
+#define ATOM_FLAG_ADJACENT_EXCEPTION     0x0100 // Skips adjacent checks for atoms that should always be reachable in window tiles
 
 #define MOVABLE_FLAG_PROXMOVE            0x0001 // Does this object require proximity checking in Enter()?
 #define MOVABLE_FLAG_Z_INTERACT          0x0002 // Should attackby and attack_hand be relayed through ladders and open spaces?
@@ -52,6 +53,7 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define ITEM_FLAG_SILENT                 0x1000 // sneaky shoes
 #define ITEM_FLAG_NOCUFFS                0x2000 // Gloves that have this flag prevent cuffs being applied
 #define ITEM_FLAG_CAN_HIDE_IN_SHOES      0x4000 // Items that can be hidden in shoes that permit it
+#define ITEM_FLAG_WASHER_ALLOWED         0x8000 // Items that can be washed in washing machines
 
 // Flags for pass_flags.
 #define PASS_FLAG_TABLE  0x1

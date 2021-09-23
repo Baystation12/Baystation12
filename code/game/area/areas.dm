@@ -218,6 +218,7 @@
 var/list/mob/living/forced_ambiance_list = new
 
 /area/Entered(A)
+	..()
 	if(!istype(A,/mob/living))	return
 
 	var/mob/living/L = A
@@ -283,7 +284,7 @@ var/list/mob/living/forced_ambiance_list = new
 
 	if(istype(mob,/mob/living/carbon/human/))
 		var/mob/living/carbon/human/H = mob
-		if(prob(H.skill_fail_chance(SKILL_EVA, 100, SKILL_PROF)))
+		if(!H.buckled && prob(H.skill_fail_chance(SKILL_EVA, 100, SKILL_PROF)))
 			if(!MOVING_DELIBERATELY(H))
 				H.AdjustStunned(6)
 				H.AdjustWeakened(6)

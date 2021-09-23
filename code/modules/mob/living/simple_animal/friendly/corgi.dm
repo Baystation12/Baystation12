@@ -1,16 +1,12 @@
 //Corgi
-/mob/living/simple_animal/corgi
+/mob/living/simple_animal/passive/corgi
 	name = "\improper corgi"
 	real_name = "corgi"
 	desc = "It's a corgi."
 	icon_state = "corgi"
 	icon_living = "corgi"
 	icon_dead = "corgi_dead"
-	speak = list("YAP", "Woof!", "Bark!", "AUUUUUU")
 	speak_emote = list("barks", "woofs")
-	emote_hear = list("barks", "woofs", "yaps","pants")
-	emote_see = list("shakes its head", "shivers")
-	speak_chance = 1
 	turns_per_move = 10
 	response_help  = "pets"
 	response_disarm = "bops"
@@ -18,19 +14,22 @@
 	see_in_dark = 5
 	mob_size = 8
 	possession_candidate = 1
-	holder_type = /obj/item/weapon/holder/corgi
+	holder_type = /obj/item/holder/corgi
 	pass_flags = PASS_FLAG_TABLE
-	density = 0
+	density = FALSE
 
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/corgi
+	meat_type = /obj/item/reagent_containers/food/snacks/meat/corgi
 	meat_amount = 3
 	skin_material = MATERIAL_SKIN_FUR_ORANGE
 
 	var/obj/item/inventory_head
 	var/obj/item/inventory_back
 
+	ai_holder_type = /datum/ai_holder/simple_animal/passive/corgi
+	say_list_type = /datum/say_list/corgi
+
 //IAN! SQUEEEEEEEEE~
-/mob/living/simple_animal/corgi/Ian
+/mob/living/simple_animal/passive/corgi/Ian
 	name = "Ian"
 	real_name = "Ian"	//Intended to hold the name without altering it.
 	gender = MALE
@@ -41,7 +40,7 @@
 	response_disarm = "bops"
 	response_harm   = "kicks"
 
-/mob/living/simple_animal/corgi/Ian/Life()
+/mob/living/simple_animal/passive/corgi/Ian/Life()
 	. = ..()
 	if(!.)
 		return FALSE
@@ -53,16 +52,16 @@
 			turns_since_scan = 0
 			if((movement_target) && !(isturf(movement_target.loc) || ishuman(movement_target.loc) ))
 				movement_target = null
-				stop_automated_movement = 0
+				set_AI_busy(FALSE)
 			if( !movement_target || !(movement_target.loc in oview(src, 3)) )
 				movement_target = null
-				stop_automated_movement = 0
-				for(var/obj/item/weapon/reagent_containers/food/snacks/S in oview(src,3))
+				set_AI_busy(FALSE)
+				for(var/obj/item/reagent_containers/food/snacks/S in oview(src,3))
 					if(isturf(S.loc) || ishuman(S.loc))
 						movement_target = S
 						break
 			if(movement_target)
-				stop_automated_movement = 1
+				set_AI_busy(TRUE)
 				step_to(src,movement_target,1)
 				sleep(3)
 				step_to(src,movement_target,1)
@@ -93,12 +92,12 @@
 					set_dir(i)
 					sleep(1)
 
-/obj/item/weapon/reagent_containers/food/snacks/meat/corgi
+/obj/item/reagent_containers/food/snacks/meat/corgi
 	name = "Corgi meat"
 	desc = "Tastes like... well you know..."
 
-/mob/living/simple_animal/corgi/attackby(var/obj/item/O as obj, var/mob/user as mob)  //Marker -Agouri
-	if(istype(O, /obj/item/weapon/newspaper))
+/mob/living/simple_animal/passive/corgi/attackby(var/obj/item/O as obj, var/mob/user as mob)  //Marker -Agouri
+	if(istype(O, /obj/item/newspaper))
 		if(!stat)
 			for(var/mob/M in viewers(user, null))
 				if ((M.client && !( M.blinded )))
@@ -110,7 +109,7 @@
 	else
 		..()
 
-/mob/living/simple_animal/corgi/regenerate_icons()
+/mob/living/simple_animal/passive/corgi/regenerate_icons()
 	overlays = list()
 
 	if(inventory_head)
@@ -131,7 +130,7 @@
 		if(back_icon)
 			overlays += back_icon
 
-/mob/living/simple_animal/corgi/puppy
+/mob/living/simple_animal/passive/corgi/puppy
 	name = "\improper corgi puppy"
 	real_name = "corgi"
 	desc = "It's a corgi puppy."
@@ -143,14 +142,14 @@
 	bone_amount = 3
 
 //pupplies cannot wear anything.
-/mob/living/simple_animal/corgi/puppy/OnTopic(mob/user, href_list)
+/mob/living/simple_animal/passive/corgi/puppy/OnTopic(mob/user, href_list)
 	if(href_list["remove_inv"] || href_list["add_inv"])
 		to_chat(user, "<span class='warning'>You can't fit this on [src]</span>")
 		return TOPIC_HANDLED
 	return ..()
 
 //LISA! SQUEEEEEEEEE~
-/mob/living/simple_animal/corgi/Lisa
+/mob/living/simple_animal/passive/corgi/Lisa
 	name = "Lisa"
 	real_name = "Lisa"
 	gender = FEMALE
@@ -165,13 +164,13 @@
 	var/puppies = 0
 
 //Lisa already has a cute bow!
-/mob/living/simple_animal/corgi/Lisa/OnTopic(mob/user, href_list)
+/mob/living/simple_animal/passive/corgi/Lisa/OnTopic(mob/user, href_list)
 	if(href_list["remove_inv"] || href_list["add_inv"])
 		to_chat(user, "<span class='warning'>[src] already has a cute bow!</span>")
 		return TOPIC_HANDLED
 	return ..()
 
-/mob/living/simple_animal/corgi/Lisa/Life()
+/mob/living/simple_animal/passive/corgi/Lisa/Life()
 	. = ..()
 	if(!.)
 		return FALSE
@@ -183,7 +182,7 @@
 			var/alone = 1
 			var/ian = 0
 			for(var/mob/M in oviewers(7, src))
-				if(istype(M, /mob/living/simple_animal/corgi/Ian))
+				if(istype(M, /mob/living/simple_animal/passive/corgi/Ian))
 					if(M.client)
 						alone = 0
 						break
@@ -195,7 +194,7 @@
 			if(alone && ian && puppies < 4)
 				if(near_camera(src) || near_camera(ian))
 					return
-				new /mob/living/simple_animal/corgi/puppy(loc)
+				new /mob/living/simple_animal/passive/corgi/puppy(loc)
 
 
 		if(prob(1))
@@ -204,3 +203,11 @@
 				for(var/i in list(1,2,4,8,4,2,1,2,4,8,4,2,1,2,4,8,4,2))
 					set_dir(i)
 					sleep(1)
+
+/datum/ai_holder/simple_animal/passive/corgi
+	speak_chance = 1
+
+/datum/say_list/corgi
+	speak = list("YAP", "Woof!", "Bark!", "AUUUUUU")
+	emote_hear = list("barks", "woofs", "yaps","pants")
+	emote_see = list("shakes its head", "shivers")

@@ -1,8 +1,10 @@
 /obj/machinery/computer/modular
 	name = "console"
-	maximum_component_parts = list(/obj/item/weapon/stock_parts = 14)	//There's a lot of stuff that goes in these
+	maximum_component_parts = list(/obj/item/stock_parts = 14)	//There's a lot of stuff that goes in these
+	machine_name = "general-purpose computer motherboard"
+	machine_desc = "Used to build \"modular computers\" - stationary or portable devices that connect to NTNet and support a wide array of programs."
 	var/list/interact_sounds = list("keyboard", "keystroke")
-	var/obj/item/weapon/stock_parts/computer/hard_drive/portable/portable_drive
+	var/obj/item/stock_parts/computer/hard_drive/portable/portable_drive
 
 /obj/machinery/computer/modular/Initialize()
 	set_extension(src, /datum/extension/interactive/ntos/console)
@@ -61,20 +63,20 @@
 		return os.get_keyboard_overlay()
 
 /obj/machinery/computer/modular/emag_act(var/remaining_charges, var/mob/user)
-	var/obj/item/weapon/stock_parts/circuitboard/modular_computer/MB = get_component_of_type(/obj/item/weapon/stock_parts/circuitboard/modular_computer)
+	var/obj/item/stock_parts/circuitboard/modular_computer/MB = get_component_of_type(/obj/item/stock_parts/circuitboard/modular_computer)
 	return MB && MB.emag_act(remaining_charges, user)
 
 /obj/machinery/computer/modular/components_are_accessible(var/path)
 	. = ..()
 	if(.)
 		return
-	if(!ispath(path, /obj/item/weapon/stock_parts/computer))
+	if(!ispath(path, /obj/item/stock_parts/computer))
 		return FALSE
-	var/obj/item/weapon/stock_parts/computer/P = path
+	var/obj/item/stock_parts/computer/P = path
 	return initial(P.external_slot)
 
 /obj/machinery/computer/modular/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/weapon/stock_parts/computer/hard_drive/portable))
+	if(istype(I, /obj/item/stock_parts/computer/hard_drive/portable))
 		if(portable_drive)
 			to_chat(user, SPAN_WARNING("There's already \a [portable_drive] plugged in."))
 			return TRUE
@@ -111,7 +113,7 @@
 /obj/machinery/computer/modular/RefreshParts()
 	..()
 	var/extra_power = 0
-	for(var/obj/item/weapon/stock_parts/computer/part in component_parts)
+	for(var/obj/item/stock_parts/computer/part in component_parts)
 		if(part.enabled)
 			extra_power += part.power_usage
 	change_power_consumption(initial(active_power_usage) + extra_power, POWER_USE_ACTIVE)

@@ -6,7 +6,7 @@
 	desc = "A magnetic clamp which can halt the flow of gas in a pipe, via a localised stasis field."
 	icon = 'icons/atmos/clamp.dmi'
 	icon_state = "pclamp0"
-	anchored = 1.0
+	anchored = TRUE
 	var/obj/machinery/atmospherics/pipe/simple/target = null
 	var/open = 1
 

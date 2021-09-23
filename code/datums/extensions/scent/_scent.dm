@@ -5,26 +5,46 @@
 /*****
 Scent intensity
 *****/
+
 /decl/scent_intensity
-	var/cooldown = 5 MINUTES 
+	var/cooldown = 5 MINUTES
 	var/intensity = 1
 
-/decl/scent_intensity/proc/PrintMessage(var/mob/user, var/descriptor, var/scent)
-	to_chat(user, SPAN_SUBTLE("The subtle [descriptor] of [scent] tickles your nose..."))
+/decl/scent_intensity/proc/can_smell(mob/living/carbon/human/user)
+	return TRUE
+
+/decl/scent_intensity/proc/PrintMessage(mob/living/carbon/human/user, var/descriptor, scent)
+	if(!can_smell(user))
+		return
+	if(!user.isSynthetic())
+		to_chat(user, SPAN_SUBTLE("The subtle [descriptor] of [scent] tickles your nose..."))
+	else
+		to_chat(user, SPAN_NOTICE("Your sensors detect trace amounts of [scent] in the air."))
+
 
 /decl/scent_intensity/normal
 	cooldown = 4 MINUTES
 	intensity = 2
 
-/decl/scent_intensity/normal/PrintMessage(var/mob/user, var/descriptor, var/scent)
-	to_chat(user, SPAN_NOTICE("The [descriptor] of [scent] fills the air."))
+/decl/scent_intensity/normal/PrintMessage(mob/living/carbon/human/user, var/descriptor, scent)
+	if(!can_smell(user))
+		return
+	if(!user.isSynthetic())
+		to_chat(user, SPAN_NOTICE("The [descriptor] of [scent] fills the air."))
+	else
+		to_chat(user, SPAN_NOTICE("Your sensors pick up the presence of [scent] in the air."))
 
 /decl/scent_intensity/strong
 	cooldown = 3 MINUTES
 	intensity = 3
 
-/decl/scent_intensity/strong/PrintMessage(var/mob/user, var/descriptor, var/scent)
-	to_chat(user, SPAN_WARNING("The unmistakable [descriptor] of [scent] bombards your nostrils."))
+/decl/scent_intensity/strong/PrintMessage(mob/living/carbon/human/user, var/descriptor, scent)
+	if(!can_smell(user))
+		return
+	if(!user.isSynthetic())
+		to_chat(user, SPAN_WARNING("The unmistakable [descriptor] of [scent] bombards your nostrils."))
+	else
+		to_chat(user, SPAN_WARNING("Your sensors pick up an intense concentration of [scent]."))
 
 /*****
  Scent extensions
@@ -112,6 +132,6 @@ To add a scent extension to an atom using a reagent's info, where R. is the reag
 		var/r_scent_intensity = R.volume * SI.intensity
 		if(r_scent_intensity > scent_intensity)
 			smelliest = R
-			scent_intensity = r_scent_intensity 
+			scent_intensity = r_scent_intensity
 	if(smelliest)
 		set_extension(smelly_atom, /datum/extension/scent/custom, smelliest.scent, smelliest.scent_intensity, smelliest.scent_descriptor, smelliest.scent_range)

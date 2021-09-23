@@ -1,11 +1,11 @@
-/obj/item/weapon/material/kitchen
+/obj/item/material/kitchen
 	icon = 'icons/obj/kitchen.dmi'
 	worth_multiplier = 1.1
 
 /*
  * Utensils
  */
-/obj/item/weapon/material/kitchen/utensil
+/obj/item/material/kitchen/utensil
 	w_class = ITEM_SIZE_TINY
 	thrown_force_multiplier = 1
 	origin_tech = list(TECH_MATERIAL = 1)
@@ -18,14 +18,14 @@
 	var/loaded      //Descriptive string for currently loaded food object.
 	var/scoop_food = 1
 
-/obj/item/weapon/material/kitchen/utensil/New()
+/obj/item/material/kitchen/utensil/New()
 	..()
 	if (prob(60))
 		src.pixel_y = rand(0, 4)
 	create_reagents(5)
 	return
 
-/obj/item/weapon/material/kitchen/utensil/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+/obj/item/material/kitchen/utensil/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	if(!istype(M))
 		return ..()
 
@@ -70,45 +70,45 @@
 		to_chat(user, "<span class='warning'>You don't have anything on \the [src].</span>")//if we have help intent and no food scooped up DON'T STAB OURSELVES WITH THE FORK
 		return
 
-/obj/item/weapon/material/kitchen/utensil/fork
+/obj/item/material/kitchen/utensil/fork
 	name = "fork"
 	desc = "It's a fork. Sure is pointy."
 	icon_state = "fork"
 
-/obj/item/weapon/material/kitchen/utensil/fork/plastic
+/obj/item/material/kitchen/utensil/fork/plastic
 	default_material = MATERIAL_PLASTIC
 
-/obj/item/weapon/material/kitchen/utensil/spoon
+/obj/item/material/kitchen/utensil/spoon
 	name = "spoon"
 	desc = "It's a spoon. You can see your own upside-down face in it."
 	icon_state = "spoon"
 	attack_verb = list("attacked", "poked")
 	force_multiplier = 0.1 //2 when wielded with weight 20 (steel)
 
-/obj/item/weapon/material/kitchen/utensil/spoon/plastic
+/obj/item/material/kitchen/utensil/spoon/plastic
 	default_material = MATERIAL_PLASTIC
 
-/obj/item/weapon/material/kitchen/utensil/spork
+/obj/item/material/kitchen/utensil/spork
 	name = "spork"
 	desc = "It's a spork. It's much like a fork, but much blunter."
 	icon_state = "spork"
 
-/obj/item/weapon/material/kitchen/utensil/spork/plastic
+/obj/item/material/kitchen/utensil/spork/plastic
 	default_material = MATERIAL_PLASTIC
 
-/obj/item/weapon/material/kitchen/utensil/foon
+/obj/item/material/kitchen/utensil/foon
 	name = "foon"
 	desc = "It's a foon. It's much like a spoon, but much sharper."
 	icon_state = "foon"
 
-/obj/item/weapon/material/kitchen/utensil/foon/plastic
+/obj/item/material/kitchen/utensil/foon/plastic
 	default_material = MATERIAL_PLASTIC
 
  /*
  * Rolling Pins
  */
 
-/obj/item/weapon/material/kitchen/rollingpin
+/obj/item/material/kitchen/rollingpin
 	name = "rolling pin"
 	desc = "Used to knock out the Bartender."
 	icon_state = "rolling_pin"
@@ -118,7 +118,7 @@
 	force_multiplier = 0.7 // 10 when wielded with weight 15 (wood)
 	thrown_force_multiplier = 1 // as above
 
-/obj/item/weapon/material/kitchen/rollingpin/attack(mob/living/M as mob, mob/living/user as mob)
+/obj/item/material/kitchen/rollingpin/attack(mob/living/M as mob, mob/living/user as mob)
 	if ((MUTATION_CLUMSY in user.mutations) && prob(50) && user.unEquip(src))
 		to_chat(user, "<span class='warning'>\The [src] slips out of your hand and hits your head.</span>")
 		user.take_organ_damage(10, 0)

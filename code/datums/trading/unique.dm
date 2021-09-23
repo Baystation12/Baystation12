@@ -30,14 +30,14 @@
 	origin = "SGS Severance"
 
 	possible_wanted_items = list(
-							/obj/item/weapon/reagent_containers/food/snacks/human                      = TRADER_SUBTYPES_ONLY,
-							/obj/item/weapon/reagent_containers/food/snacks/meat/human                 = TRADER_THIS_TYPE,
+							/obj/item/reagent_containers/food/snacks/human                      = TRADER_SUBTYPES_ONLY,
+							/obj/item/reagent_containers/food/snacks/meat/human                 = TRADER_THIS_TYPE,
 							/mob/living/carbon/human                                                   = TRADER_ALL
 							)
 
-	possible_trading_items = list(/obj/item/weapon/gun/projectile/automatic                            = TRADER_SUBTYPES_ONLY,
-							/obj/item/weapon/gun/projectile/automatic/machine_pistol/usi                     = TRADER_BLACKLIST,
-							/obj/item/weapon/gun/projectile/automatic/l6_saw/mag                       = TRADER_BLACKLIST
+	possible_trading_items = list(/obj/item/gun/projectile/automatic                            = TRADER_SUBTYPES_ONLY,
+							/obj/item/gun/projectile/automatic/machine_pistol/usi                     = TRADER_BLACKLIST,
+							/obj/item/gun/projectile/automatic/l6_saw/mag                       = TRADER_BLACKLIST
 							)
 
 	blacklisted_trade_items = null
@@ -64,9 +64,9 @@
 	name = "Bobo"
 	origin = "Floating rock"
 
-	possible_wanted_items  = list(/obj/item/weapon/ore                        = TRADER_ALL)
+	possible_wanted_items  = list(/obj/item/ore                        = TRADER_ALL)
 	possible_trading_items = list(/obj/machinery/power/supermatter            = TRADER_ALL,
-								/obj/item/weapon/aiModule                     = TRADER_SUBTYPES_ONLY)
+								/obj/item/aiModule                     = TRADER_SUBTYPES_ONLY)
 	want_multiplier = 5000
 
 	speech = list(TRADER_HAIL_GENERIC     = "Blub am MERCHANT. Blub hunger for things. Boo bring them to blub, yes?",
@@ -93,7 +93,7 @@
 	name_language = TRADER_DEFAULT_NAME
 
 	possible_wanted_items = list(/mob/living/simple_animal/construct            = TRADER_SUBTYPES_ONLY,
-								/obj/item/weapon/melee/cultblade                = TRADER_THIS_TYPE,
+								/obj/item/melee/cultblade                = TRADER_THIS_TYPE,
 								/obj/item/clothing/head/culthood                = TRADER_ALL,
 								/obj/item/clothing/suit/space/cult              = TRADER_ALL,
 								/obj/item/clothing/suit/cultrobes               = TRADER_ALL,
@@ -109,7 +109,7 @@
 								/obj/item/clothing/head/wizard                   = TRADER_ALL,
 								/obj/item/clothing/suit/space/void/wizard        = TRADER_THIS_TYPE,
 								/obj/item/toy/figure/wizard                      = TRADER_THIS_TYPE,
-								/obj/item/weapon/staff                           = TRADER_ALL,
+								/obj/item/staff                           = TRADER_ALL,
 								) //Probably see about getting some more wizard based shit
 
 	speech = list(TRADER_HAIL_GENERIC     = "Hello! Are you here on pleasure or business?",

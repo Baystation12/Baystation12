@@ -25,7 +25,7 @@
 
 /obj/machinery/power/smes/buildable/preset/admin
 	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/smes_coil/advanced = 4
+		/obj/item/stock_parts/smes_coil/advanced = 4
 	)
 	_input_maxed = TRUE
 	_output_maxed = TRUE

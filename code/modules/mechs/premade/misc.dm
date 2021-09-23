@@ -32,6 +32,23 @@
 	has_hardpoints = list(HARDPOINT_BACK)
 	desc = "The NanoTrasen Katamari series cockpits have won a massive tender by SCG few years back. No one is sure why, but these terrible things keep popping up on every government facility."
 
+/obj/item/mech_component/chassis/pod/Initialize()
+	pilot_positions = list(
+		list(
+			"[NORTH]" = list("x" = 8,  "y" = 8),
+			"[SOUTH]" = list("x" = 8,  "y" = 8),
+			"[EAST]"  = list("x" = 8,  "y" = 8),
+			"[WEST]"  = list("x" = 8,  "y" = 8)
+		),
+		list(
+			"[NORTH]" = list("x" = 8,  "y" = 16),
+			"[SOUTH]" = list("x" = 8,  "y" = 16),
+			"[EAST]"  = list("x" = 0,  "y" = 16),
+			"[WEST]"  = list("x" = 16, "y" = 16)
+		)
+	)
+	. = ..()
+
 /obj/item/mech_component/chassis/pod/prebuild()
 	. = ..()
 	m_armour = new /obj/item/robot_parts/robot_component/armour/exosuit/radproof(src)

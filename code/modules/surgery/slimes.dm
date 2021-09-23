@@ -26,9 +26,9 @@
 /decl/surgery_step/slime/cut_flesh
 	name = "Make incision in slime"
 	allowed_tools = list(
-		/obj/item/weapon/scalpel = 100,
-		/obj/item/weapon/material/knife = 75,
-		/obj/item/weapon/material/shard = 50
+		/obj/item/scalpel = 100,
+		/obj/item/material/knife = 75,
+		/obj/item/material/shard = 50
 	)
 	min_duration = 5
 	max_duration = 2 SECONDS
@@ -55,9 +55,9 @@
 /decl/surgery_step/slime/cut_innards
 	name = "Dissect innards"
 	allowed_tools = list(
-		/obj/item/weapon/scalpel = 100,
-		/obj/item/weapon/material/knife = 75,
-		/obj/item/weapon/material/shard = 50
+		/obj/item/scalpel = 100,
+		/obj/item/material/knife = 75,
+		/obj/item/material/shard = 50
 	)
 	min_duration = 5
 	max_duration = 2 SECONDS
@@ -84,10 +84,10 @@
 /decl/surgery_step/slime/saw_core
 	name = "Remove slime core"
 	allowed_tools = list(
-		/obj/item/weapon/scalpel/manager = 100,
-		/obj/item/weapon/circular_saw = 100,
-		/obj/item/weapon/material/knife = 75,
-		/obj/item/weapon/material/hatchet = 75
+		/obj/item/scalpel/manager = 100,
+		/obj/item/circular_saw = 100,
+		/obj/item/material/knife = 75,
+		/obj/item/material/hatchet = 75
 	)
 	min_duration = 1 SECOND
 	max_duration = 3 SECONDS

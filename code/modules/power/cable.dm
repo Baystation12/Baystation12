@@ -24,7 +24,7 @@ By design, d1 is the smallest direction and d2 is the highest
 
 /obj/structure/cable
 	level = 1
-	anchored =1
+	anchored = TRUE
 	var/datum/powernet/powernet
 	name = "power cable"
 	desc = "A flexible superconducting cable for heavy-duty power transfer."
@@ -475,7 +475,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	amount = MAXCOIL
 	max_amount = MAXCOIL
 	color = COLOR_MAROON
-	desc = "A coil of wiring, for delicate electronics use aswell as the more basic cable laying."
+	desc = "A coil of wiring, used for delicate electronics and basic power transfer."
 	throwforce = 0
 	w_class = ITEM_SIZE_NORMAL
 	throw_speed = 2
@@ -486,6 +486,8 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	item_state = "coil"
 	attack_verb = list("whipped", "lashed", "disciplined", "flogged")
 	stacktype = /obj/item/stack/cable_coil
+	singular_name = "length"
+	plural_name = "lengths"
 
 /obj/item/stack/cable_coil/single
 	amount = 1
@@ -568,19 +570,6 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	else
 		w_class = ITEM_SIZE_SMALL
 
-/obj/item/stack/cable_coil/examine(mob/user, distance)
-	. = ..()
-	if(distance > 1)
-		return
-
-	if(get_amount() == 1)
-		to_chat(user, "A short piece of power cable.")
-	else if(get_amount() == 2)
-		to_chat(user, "A piece of power cable.")
-	else
-		to_chat(user, "A coil of power cable. There are [get_amount()] lengths of cable in the coil.")
-
-
 /obj/item/stack/cable_coil/verb/make_restraint()
 	set name = "Make Cable Restraints"
 	set category = "Object"
@@ -591,7 +580,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		if(!src.use(15))
 			to_chat(usr, "<span class='warning'>You need at least 15 lengths to make restraints!</span>")
 			return
-		var/obj/item/weapon/handcuffs/cable/B = new /obj/item/weapon/handcuffs/cable(usr.loc)
+		var/obj/item/handcuffs/cable/B = new /obj/item/handcuffs/cable(usr.loc)
 		B.color = color
 		to_chat(usr, "<span class='notice'>You wind some cable together to make some restraints.</span>")
 	else
@@ -840,13 +829,13 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		return R.get_cell()
 
 /obj/item/stack/cable_coil/fabricator/use(var/used)
-	var/obj/item/weapon/cell/cell = get_cell()
+	var/obj/item/cell/cell = get_cell()
 	if(cell) cell.use(used * cost_per_cable)
 
 /obj/item/stack/cable_coil/fabricator/get_amount()
-	var/obj/item/weapon/cell/cell = get_cell()
+	var/obj/item/cell/cell = get_cell()
 	. = (cell ? Floor(cell.charge / cost_per_cable) : 0)
 
 /obj/item/stack/cable_coil/fabricator/get_max_amount()
-	var/obj/item/weapon/cell/cell = get_cell()
+	var/obj/item/cell/cell = get_cell()
 	. = (cell ? Floor(cell.maxcharge / cost_per_cable) : 0)

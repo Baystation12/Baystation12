@@ -6,7 +6,8 @@ GLOBAL_LIST_INIT(possible_chassis, list(
 		"Rabbit" = "rabbit",
 		"Mushroom" = "mushroom",
 		"Corgi" = "corgi",
-		"Crow" = "crow"
+		"Crow" = "crow",
+		"Humanoid" = "humanoid"
 		))
 
 GLOBAL_LIST_INIT(possible_say_verbs, list(
@@ -31,8 +32,8 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 	can_pull_size = ITEM_SIZE_SMALL
 	can_pull_mobs = MOB_PULL_SMALLER
 	pullin = new /obj/screen/pai/pull
-	holder_type = /obj/item/weapon/holder
-	idcard = /obj/item/weapon/card/id
+	holder_type = /obj/item/holder
+	idcard = /obj/item/card/id
 	silicon_radio = null // pAIs get their radio from the card they belong to.
 
 	var/network = "SS13"
@@ -45,7 +46,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 
 	var/is_in_card = TRUE
 	var/chassis = "drone"
-	var/obj/item/weapon/pai_cable/cable		// The cable we produce and use when door or camera jacking
+	var/obj/item/pai_cable/cable		// The cable we produce and use when door or camera jacking
 
 	var/master				// Name of the one who commands us
 	var/master_dna			// DNA string for owner verification
@@ -224,7 +225,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 	resting = FALSE
 
 	// If we are being held, handle removing our holder from their inv.
-	var/obj/item/weapon/holder/H = loc
+	var/obj/item/holder/H = loc
 	if(istype(H))
 		var/mob/living/M = H.loc
 		if(istype(M))
@@ -247,7 +248,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 	// Pass lying down or getting up to our pet human, if we're in a rig.
 	if(istype(loc,/obj/item/device/paicard))
 		resting = FALSE
-		var/obj/item/weapon/rig/rig = get_rig()
+		var/obj/item/rig/rig = get_rig()
 		if(istype(rig))
 			rig.force_rest(src)
 	else
@@ -256,8 +257,8 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 		to_chat(src, SPAN_NOTICE("You are now [resting ? "resting" : "getting up"]"))
 
 //Overriding this will stop a number of headaches down the track.
-/mob/living/silicon/pai/attackby(obj/item/weapon/W, mob/user)
-	var/obj/item/weapon/card/id/card = W.GetIdCard()
+/mob/living/silicon/pai/attackby(obj/item/W, mob/user)
+	var/obj/item/card/id/card = W.GetIdCard()
 	if(card && user.a_intent == I_HELP)
 		var/list/new_access = card.GetAccess()
 		idcard.access = new_access
@@ -287,7 +288,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 /mob/living/silicon/pai/get_scooped(var/mob/living/carbon/grabber, var/self_drop)
 	. = ..()
 	if(.)
-		var/obj/item/weapon/holder/H = .
+		var/obj/item/holder/H = .
 		if(istype(H))
 			H.icon_state = "pai-[icon_state]"
 			grabber.update_inv_l_hand()

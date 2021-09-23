@@ -7,7 +7,7 @@
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
 	var/spamcheck = 0
-	var/emagged = 0
+	var/emagged = FALSE
 	var/insults = 0
 	var/list/insultmsg = list("FUCK EVERYONE!", "I'M A TATER!", "ALL SECURITY TO SHOOT ME ON SIGHT!", "I HAVE A BOMB!", "CAPTAIN IS A COMDOM!", "FOR THE SYNDICATE!")
 
@@ -46,6 +46,6 @@
 /obj/item/device/megaphone/emag_act(var/remaining_charges, var/mob/user)
 	if(!emagged)
 		to_chat(user, "<span class='warning'>You overload \the [src]'s voice synthesizer.</span>")
-		emagged = 1
+		emagged = TRUE
 		insults = rand(1, 3)//to prevent dickflooding
 		return 1

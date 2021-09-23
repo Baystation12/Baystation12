@@ -18,9 +18,9 @@
 		qdel(thing)
 	. = ..()
 
-/obj/item/crafting_holder/attackby(var/obj/item/weapon/W, var/mob/user)
+/obj/item/crafting_holder/attackby(var/obj/item/W, var/mob/user)
 
-	if(istype(W, /obj/item/weapon/pen))
+	if(istype(W, /obj/item/pen))
 		var/new_label = sanitizeSafe(input(user, "What do you wish to label this assembly?", "Assembly Labelling", label_name), MAX_NAME_LEN)
 		if(new_label && !user.incapacitated() && W.loc == user && user.Adjacent(src) && !QDELETED(src))
 			to_chat(user, SPAN_NOTICE("You label \the [src] with '[new_label]'."))

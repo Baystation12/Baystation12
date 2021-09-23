@@ -46,7 +46,7 @@
 	if(!is_type_in_list(target, supported_types))
 		to_chat(user, "[icon2html(src, user)] <span class='warning'>Unable to hack this target.</span>")
 		return 0
-	var/found = known_targets.Find(target)
+	var/found = list_find(known_targets, target)
 	if(found)
 		known_targets.Swap(1, found)	// Move the last hacked item first
 		return 1

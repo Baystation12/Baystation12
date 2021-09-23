@@ -296,7 +296,7 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 
 		else if(agony_amount > 0.5 * max_damage)
 			owner.visible_message("<span class='warning'>[owner] reels in pain!</span>")
-			if(has_genitals() || agony_amount > max_damage)
+			if(agony_amount > max_damage)
 				owner.Weaken(4)
 			else
 				owner.Stun(4)
@@ -305,7 +305,7 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 			return 1
 
 /obj/item/organ/external/proc/get_agony_multiplier()
-	return has_genitals() ? 2 : 1
+	return has_genitals() ? 1.5 : 1
 
 /obj/item/organ/external/proc/sever_artery()
 	if(species && species.has_organ[BP_HEART])
@@ -322,7 +322,7 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 	return FALSE
 
 /obj/item/organ/external/proc/get_brute_mod(var/damage_flags)
-	var/obj/item/organ/internal/augment/armor/A = owner && owner.internal_organs_by_name[BP_AUGMENT_CHEST_ARMOUR]
+	var/obj/item/organ/internal/augment/armor/A = owner && owner.internal_organs_by_name["[BP_CHEST]_aug_armor"]
 	var/B = 1
 	if(A && istype(A))
 		B = A.brute_mult
@@ -336,7 +336,7 @@ obj/item/organ/external/take_general_damage(var/amount, var/silent = FALSE)
 	return B + (0.2 * burn_dam/max_damage) //burns make you take more brute damage
 
 /obj/item/organ/external/proc/get_burn_mod(var/damage_flags)
-	var/obj/item/organ/internal/augment/armor/A = owner && owner.internal_organs_by_name[BP_AUGMENT_CHEST_ARMOUR]
+	var/obj/item/organ/internal/augment/armor/A = owner && owner.internal_organs_by_name["[BP_CHEST]_aug_armor"]
 	var/B = 1
 	if(A && istype(A))
 		B = A.burn_mult

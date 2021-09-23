@@ -77,6 +77,7 @@
 	name = "headtail cloth"
 	desc = "A cloth shawl worn by female skrell draped around their head tails."
 	icon_state = "skrell_cloth_female"
+	item_flags = ITEM_FLAG_WASHER_ALLOWED
 
 //spawnable presets
 /obj/item/clothing/ears/skrell/cloth_female/red
@@ -101,6 +102,7 @@
 	name = "headtail cloth"
 	desc = "A cloth band worn by male skrell around their head tails."
 	icon_state = "skrell_cloth_male"
+	item_flags = ITEM_FLAG_WASHER_ALLOWED
 
 //spawnable presets
 /obj/item/clothing/ears/skrell/cloth_male/red

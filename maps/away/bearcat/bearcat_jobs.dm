@@ -28,14 +28,14 @@
 
 /decl/hierarchy/outfit/job/bearcat/crew
 	name = BEARCAT_OUTFIT_JOB_NAME("Crew")
-	id_types = list(/obj/item/weapon/card/id/bearcat)
+	id_types = list(/obj/item/card/id/bearcat)
 
 /decl/hierarchy/outfit/job/bearcat/captain
 	name = BEARCAT_OUTFIT_JOB_NAME("Captain")
 	uniform = /obj/item/clothing/under/casual_pants/classicjeans
 	shoes = /obj/item/clothing/shoes/black
 	pda_type = /obj/item/modular_computer/pda/captain
-	id_types = list(/obj/item/weapon/card/id/bearcat_captain)
+	id_types = list(/obj/item/card/id/bearcat_captain)
 
 /decl/hierarchy/outfit/job/bearcat/captain/post_equip(var/mob/living/carbon/human/H)
 	..()

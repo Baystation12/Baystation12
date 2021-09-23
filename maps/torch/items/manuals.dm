@@ -1,11 +1,11 @@
-/obj/item/weapon/book/manual/solgov_law
+/obj/item/book/manual/solgov_law
 	name = "Sol Central Government Law"
 	desc = "A brief overview of SolGov Law."
 	icon_state = "bookSolGovLaw"
 	author = "The Sol Central Government"
 	title = "Sol Central Government Law"
 
-/obj/item/weapon/book/manual/solgov_law/Initialize()
+/obj/item/book/manual/solgov_law/Initialize()
 	. = ..()
 	dat = {"
 
@@ -21,14 +21,14 @@
 		"}
 
 
-/obj/item/weapon/book/manual/military_law
+/obj/item/book/manual/military_law
 	name = "The Sol Code of Military Justice"
 	desc = "A brief overview of military law."
 	icon_state = "bookSolGovLaw"
 	author = "The Sol Central Government"
 	title = "The Sol Code of Military Justice"
 
-/obj/item/weapon/book/manual/military_law/Initialize()
+/obj/item/book/manual/military_law/Initialize()
 	. = ..()
 	dat = {"
 
@@ -43,14 +43,14 @@
 
 		"}
 
-/obj/item/weapon/book/manual/sol_sop
+/obj/item/book/manual/sol_sop
 	name = "Standard Operating Procedure"
 	desc = "SOP aboard the SEV Torch."
 	icon_state = "booksolregs"
 	author = "The Sol Central Government"
 	title = "Standard Operating Procedure"
 
-/obj/item/weapon/book/manual/sol_sop/Initialize()
+/obj/item/book/manual/sol_sop/Initialize()
 	. = ..()
 	dat = {"
 
@@ -65,16 +65,16 @@
 
 		"}
 
-/obj/item/weapon/folder/nt/rd
+/obj/item/folder/nt/rd
 
-/obj/item/weapon/folder/envelope/captain
+/obj/item/folder/envelope/captain
 	desc = "A thick envelope. The SCG crest is stamped in the corner, along with 'TOP SECRET - TORCH UMBRA'."
 
-/obj/item/weapon/folder/envelope/captain/Initialize()
+/obj/item/folder/envelope/captain/Initialize()
 	..()
 	return INITIALIZE_HINT_LATELOAD
 
-/obj/item/weapon/folder/envelope/captain/LateInitialize()
+/obj/item/folder/envelope/captain/LateInitialize()
 	..()
 	var/obj/effect/overmap/visitable/torch = map_sectors["[z]"]
 	var/memo = {"
@@ -108,17 +108,17 @@
 	<i>ADM Lau.</i></tt>
 	<i>This paper has been stamped with the stamp of SCG Expeditionary Command.</i>
 	"}
-	new/obj/item/weapon/paper(src, memo, "Standing Orders")
-	new/obj/item/weapon/paper/umbra(src)
+	new/obj/item/paper(src, memo, "Standing Orders")
+	new/obj/item/paper/umbra(src)
 
-/obj/item/weapon/folder/envelope/rep
+/obj/item/folder/envelope/rep
 	desc = "A thick envelope. The SCG crest is stamped in the corner, along with 'TOP SECRET - TORCH UMBRA'."
 
-/obj/item/weapon/folder/envelope/rep/Initialize()
+/obj/item/folder/envelope/rep/Initialize()
 	. = ..()
-	new/obj/item/weapon/paper/umbra(src)
+	new/obj/item/paper/umbra(src)
 
-/obj/item/weapon/paper/umbra
+/obj/item/paper/umbra
 	name = "UMBRA Protocol"
 	info = {"
 	<tt><center><b><font color='red'>TOP SECRET - CODE WORDS: TORCH UMBRA</font></b>

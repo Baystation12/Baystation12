@@ -56,11 +56,6 @@
 // And here are some good things for free:
 // Now you can click through portals, wormholes, gateways, and teleporters while observing. -Sayu
 
-/obj/machinery/teleport/hub/attack_ghost(mob/user)
-	var/turf/target = get_turf(com?.locked)
-	if (target)
-		user.forceMove(target)
-
 /obj/effect/portal/attack_ghost(mob/user as mob)
 	if(target)
 		user.forceMove(get_turf(target))

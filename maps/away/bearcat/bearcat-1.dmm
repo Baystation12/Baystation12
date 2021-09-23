@@ -179,9 +179,9 @@
 "aw" = (
 /obj/structure/table/standard,
 /obj/item/device/flashlight/lamp,
-/obj/item/weapon/paper_bin,
-/obj/item/weapon/stamp/cargo,
-/obj/item/weapon/stamp/denied,
+/obj/item/paper_bin,
+/obj/item/stamp/cargo,
+/obj/item/stamp/denied,
 /obj/random/clipboard,
 /obj/item/device/radio/map_preset/bearcat,
 /obj/item/device/radio/intercom/map_preset/bearcat{
@@ -287,7 +287,7 @@
 /obj/structure/sign/deck/second{
 	pixel_x = 32
 	},
-/obj/item/weapon/stool/padded,
+/obj/item/stool/padded,
 /turf/simulated/floor/tiled,
 /area/ship/scrap/cargo/lower)
 "aH" = (
@@ -392,7 +392,7 @@
 /obj/structure/closet/crate/plastic,
 /obj/random/accessory,
 /obj/random/accessory,
-/obj/item/weapon/reagent_containers/glass/paint/random,
+/obj/item/reagent_containers/glass/paint/random,
 /turf/simulated/floor/tiled,
 /area/ship/scrap/cargo/lower)
 "aS" = (
@@ -421,7 +421,7 @@
 	dir = 1;
 	icon_state = "bulb1"
 	},
-/obj/item/weapon/hand/missing_card,
+/obj/item/hand/missing_card,
 /turf/simulated/floor,
 /area/ship/scrap/gambling)
 "aX" = (
@@ -554,7 +554,7 @@
 	},
 /obj/structure/curtain/open/bed,
 /obj/structure/bed/padded,
-/obj/item/weapon/bedsheet/green,
+/obj/item/bedsheet/green,
 /obj/effect/decal/cleanable/cobweb2,
 /turf/simulated/floor/tiled/dark,
 /area/ship/scrap/crew/dorms1)
@@ -572,7 +572,7 @@
 /area/ship/scrap/gambling)
 "bj" = (
 /obj/structure/holostool,
-/obj/item/weapon/hand/missing_card,
+/obj/item/hand/missing_card,
 /turf/simulated/floor,
 /area/ship/scrap/gambling)
 "bk" = (
@@ -583,8 +583,8 @@
 	dir = 5
 	},
 /obj/structure/table/gamblingtable,
-/obj/item/weapon/deck/cards,
-/obj/item/weapon/dice,
+/obj/item/deck/cards,
+/obj/item/dice,
 /turf/simulated/floor,
 /area/ship/scrap/gambling)
 "bl" = (
@@ -600,7 +600,7 @@
 	icon_state = "1-4"
 	},
 /obj/structure/holostool,
-/obj/item/weapon/hand/missing_card,
+/obj/item/hand/missing_card,
 /turf/simulated/floor,
 /area/ship/scrap/gambling)
 "bm" = (
@@ -793,7 +793,7 @@
 	level = 2
 	},
 /obj/structure/holostool,
-/obj/item/weapon/hand/missing_card,
+/obj/item/hand/missing_card,
 /turf/simulated/floor,
 /area/ship/scrap/gambling)
 "bD" = (
@@ -803,8 +803,8 @@
 	pixel_x = 24;
 	req_access = newlist()
 	},
-/obj/item/weapon/hand/missing_card,
-/obj/item/weapon/hand/missing_card,
+/obj/item/hand/missing_card,
+/obj/item/hand/missing_card,
 /turf/simulated/floor,
 /area/ship/scrap/gambling)
 "bE" = (
@@ -851,7 +851,7 @@
 	},
 /obj/structure/closet/coffin,
 /obj/random/drinkbottle,
-/obj/item/weapon/contraband/poster,
+/obj/item/contraband/poster,
 /obj/item/stack/material/phoron/ten,
 /turf/simulated/floor/tiled,
 /area/ship/scrap/cargo/lower)
@@ -913,12 +913,12 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/effect/floor_decal/industrial/warning,
 /obj/structure/closet/crate,
-/obj/item/weapon/fossil/skull,
-/obj/item/weapon/fossil/bone,
-/obj/item/weapon/fossil/bone,
-/obj/item/weapon/fossil/shell,
+/obj/item/fossil/skull,
+/obj/item/fossil/bone,
+/obj/item/fossil/bone,
+/obj/item/fossil/shell,
 /obj/item/xenos_claw,
-/obj/item/weapon/ore/strangerock,
+/obj/item/ore/strangerock,
 /turf/simulated/floor/tiled,
 /area/ship/scrap/cargo/lower)
 "bQ" = (
@@ -1139,7 +1139,7 @@
 	dir = 5;
 	icon_state = "corner_white"
 	},
-/obj/item/weapon/bedsheet/ce,
+/obj/item/bedsheet/ce,
 /turf/simulated/floor/tiled/dark,
 /area/ship/scrap/crew/dorms2)
 "cl" = (
@@ -1168,7 +1168,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
-/obj/item/weapon/cell/high/empty,
+/obj/item/cell/high/empty,
 /turf/simulated/floor,
 /area/ship/scrap/broken2)
 "cp" = (
@@ -1307,7 +1307,7 @@
 /area/ship/scrap/crew/dorms2)
 "cB" = (
 /obj/structure/table/standard,
-/obj/item/weapon/newspaper,
+/obj/item/newspaper,
 /turf/simulated/floor/tiled/dark,
 /area/ship/scrap/crew/dorms2)
 "cC" = (
@@ -1373,7 +1373,7 @@
 	dir = 1;
 	level = 2
 	},
-/obj/item/weapon/storage/briefcase,
+/obj/item/storage/briefcase,
 /obj/machinery/light_switch{
 	pixel_y = -25
 	},
@@ -1628,7 +1628,7 @@
 	},
 /obj/structure/curtain/open/bed,
 /obj/structure/bed/padded,
-/obj/item/weapon/bedsheet/green,
+/obj/item/bedsheet/green,
 /obj/effect/decal/cleanable/cobweb2,
 /obj/structure/sign/poster{
 	pixel_y = 32
@@ -1784,7 +1784,7 @@
 /obj/structure/table/rack{
 	dir = 8
 	},
-/obj/item/weapon/storage/toolbox/mechanical,
+/obj/item/storage/toolbox/mechanical,
 /obj/item/device/multitool{
 	pixel_x = 3
 	},
@@ -1874,7 +1874,7 @@
 	},
 /obj/structure/curtain/open/bed,
 /obj/structure/bed/padded,
-/obj/item/weapon/bedsheet/brown,
+/obj/item/bedsheet/brown,
 /turf/simulated/floor/tiled/dark,
 /area/ship/scrap/crew/dorms3)
 "dH" = (
@@ -1882,7 +1882,7 @@
 /turf/simulated/floor,
 /area/ship/scrap/broken1)
 "dI" = (
-/obj/item/weapon/stool/padded,
+/obj/item/stool/padded,
 /obj/machinery/power/apc/derelict,
 /obj/structure/cable/green,
 /turf/simulated/floor/tiled,
@@ -2099,9 +2099,9 @@
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/maintenance/techstorage)
 "eb" = (
-/obj/item/weapon/stock_parts/circuitboard/pacman,
-/obj/item/weapon/stock_parts/circuitboard/recharge_station,
-/obj/item/weapon/stock_parts/circuitboard/shield_generator,
+/obj/item/stock_parts/circuitboard/pacman,
+/obj/item/stock_parts/circuitboard/recharge_station,
+/obj/item/stock_parts/circuitboard/shield_generator,
 /obj/structure/table/rack,
 /obj/effect/floor_decal/corner/yellow{
 	dir = 5;
@@ -2111,8 +2111,8 @@
 /turf/simulated/floor/tiled,
 /area/ship/scrap/maintenance/techstorage)
 "ec" = (
-/obj/item/weapon/stock_parts/circuitboard/helm,
-/obj/item/weapon/stock_parts/circuitboard/unary_atmos/cooler,
+/obj/item/stock_parts/circuitboard/helm,
+/obj/item/stock_parts/circuitboard/unary_atmos/cooler,
 /obj/structure/table/rack,
 /obj/effect/floor_decal/corner/yellow{
 	dir = 5;
@@ -2126,8 +2126,8 @@
 /turf/simulated/floor/tiled,
 /area/ship/scrap/maintenance/techstorage)
 "ed" = (
-/obj/item/weapon/stock_parts/circuitboard/autolathe,
-/obj/item/weapon/stock_parts/circuitboard/unary_atmos/heater,
+/obj/item/stock_parts/circuitboard/autolathe,
+/obj/item/stock_parts/circuitboard/unary_atmos/heater,
 /obj/structure/table/rack,
 /obj/effect/floor_decal/corner/yellow{
 	dir = 5;
@@ -2136,18 +2136,18 @@
 /turf/simulated/floor/tiled,
 /area/ship/scrap/maintenance/techstorage)
 "ee" = (
-/obj/item/weapon/storage/toolbox/electrical,
-/obj/item/weapon/storage/toolbox/electrical{
+/obj/item/storage/toolbox/electrical,
+/obj/item/storage/toolbox/electrical{
 	pixel_x = 7;
 	pixel_y = 4
 	},
 /obj/item/device/t_scanner,
-/obj/item/weapon/cell/high,
+/obj/item/cell/high,
 /obj/machinery/alarm{
 	pixel_y = 32;
 	req_access = newlist()
 	},
-/obj/item/weapon/tape_roll,
+/obj/item/tape_roll,
 /obj/machinery/light_switch{
 	pixel_x = -24
 	},
@@ -2155,33 +2155,33 @@
 	dir = 9;
 	icon_state = "corner_white"
 	},
-/obj/item/weapon/airalarm_electronics,
-/obj/item/weapon/airlock_electronics,
-/obj/item/weapon/airlock_electronics,
+/obj/item/airalarm_electronics,
+/obj/item/airlock_electronics,
+/obj/item/airlock_electronics,
 /obj/structure/table/rack,
 /turf/simulated/floor/tiled,
 /area/ship/scrap/maintenance/storage)
 "ef" = (
 /obj/structure/closet/crate/plastic,
-/obj/item/weapon/storage/ore,
-/obj/item/weapon/pickaxe,
+/obj/item/storage/ore,
+/obj/item/pickaxe,
 /obj/item/stack/flag/yellow,
-/obj/item/weapon/storage/box/glowsticks,
+/obj/item/storage/box/glowsticks,
 /obj/item/device/scanner/mining,
 /turf/simulated/floor/tiled,
 /area/ship/scrap/maintenance/storage)
 "eg" = (
-/obj/item/weapon/caution,
-/obj/item/weapon/caution,
-/obj/item/weapon/FixOVein,
+/obj/item/caution,
+/obj/item/caution,
+/obj/item/FixOVein,
 /obj/structure/closet/crate,
-/obj/item/weapon/mop,
+/obj/item/mop,
 /obj/item/device/radio/map_preset/bearcat,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 2;
 	level = 2
 	},
-/obj/item/weapon/storage/bag/trash,
+/obj/item/storage/bag/trash,
 /obj/machinery/light/small{
 	dir = 1;
 	icon_state = "bulb1"
@@ -2222,12 +2222,14 @@
 	dir = 1
 	},
 /obj/structure/table/rack,
-/obj/item/weapon/tank/jetpack/oxygen,
-/obj/item/weapon/tank/jetpack/oxygen,
+/obj/item/tank/jetpack/oxygen,
+/obj/item/tank/jetpack/oxygen,
 /obj/structure/cable/green{
 	d2 = 2;
 	icon_state = "0-2"
 	},
+/obj/item/device/suit_cooling_unit,
+/obj/item/device/suit_cooling_unit,
 /turf/simulated/floor,
 /area/ship/scrap/maintenance/eva)
 "el" = (
@@ -2511,13 +2513,13 @@
 /turf/simulated/floor,
 /area/ship/scrap/maintenance/eva)
 "eE" = (
-/obj/item/weapon/stock_parts/capacitor,
-/obj/item/weapon/stock_parts/capacitor,
-/obj/item/weapon/stock_parts/capacitor/adv,
-/obj/item/weapon/stock_parts/scanning_module,
-/obj/item/weapon/stock_parts/scanning_module,
-/obj/item/weapon/stock_parts/scanning_module,
-/obj/item/weapon/stock_parts/scanning_module/adv,
+/obj/item/stock_parts/capacitor,
+/obj/item/stock_parts/capacitor,
+/obj/item/stock_parts/capacitor/adv,
+/obj/item/stock_parts/scanning_module,
+/obj/item/stock_parts/scanning_module,
+/obj/item/stock_parts/scanning_module,
+/obj/item/stock_parts/scanning_module/adv,
 /obj/structure/table/rack,
 /obj/effect/floor_decal/corner/yellow{
 	dir = 10;
@@ -2526,13 +2528,13 @@
 /turf/simulated/floor/tiled,
 /area/ship/scrap/maintenance/techstorage)
 "eF" = (
-/obj/item/weapon/stock_parts/console_screen,
-/obj/item/weapon/stock_parts/console_screen,
-/obj/item/weapon/stock_parts/console_screen,
-/obj/item/weapon/stock_parts/micro_laser,
-/obj/item/weapon/stock_parts/micro_laser,
-/obj/item/weapon/stock_parts/micro_laser,
-/obj/item/weapon/stock_parts/micro_laser/ultra,
+/obj/item/stock_parts/console_screen,
+/obj/item/stock_parts/console_screen,
+/obj/item/stock_parts/console_screen,
+/obj/item/stock_parts/micro_laser,
+/obj/item/stock_parts/micro_laser,
+/obj/item/stock_parts/micro_laser,
+/obj/item/stock_parts/micro_laser/ultra,
 /obj/structure/table/rack,
 /obj/machinery/power/apc/derelict{
 	dir = 2;
@@ -2548,20 +2550,20 @@
 /area/ship/scrap/maintenance/techstorage)
 "eG" = (
 /obj/structure/table/rack,
-/obj/item/weapon/stock_parts/circuitboard/pacman/super/potato,
+/obj/item/stock_parts/circuitboard/pacman/super/potato,
 /obj/item/stack/material/glass/phoronrglass/ten,
 /obj/item/stack/material/ocp/ten,
-/obj/item/weapon/stock_parts/circuitboard/unary_atmos/engine,
-/obj/item/weapon/stock_parts/circuitboard/unary_atmos/engine,
-/obj/item/weapon/stock_parts/circuitboard/unary_atmos/engine,
+/obj/item/stock_parts/circuitboard/unary_atmos/engine,
+/obj/item/stock_parts/circuitboard/unary_atmos/engine,
+/obj/item/stock_parts/circuitboard/unary_atmos/engine,
 /turf/simulated/floor,
 /area/ship/scrap/maintenance/techstorage)
 "eH" = (
-/obj/item/weapon/storage/toolbox/mechanical{
+/obj/item/storage/toolbox/mechanical{
 	pixel_x = 5;
 	pixel_y = -7
 	},
-/obj/item/weapon/storage/toolbox/mechanical,
+/obj/item/storage/toolbox/mechanical,
 /obj/item/clothing/head/welding,
 /obj/item/device/scanner/gas,
 /obj/effect/floor_decal/corner/yellow{
@@ -2627,8 +2629,8 @@
 /obj/structure/table/standard,
 /obj/item/device/flashlight,
 /obj/item/device/flashlight,
-/obj/item/weapon/storage/box/lights/bulbs,
-/obj/item/weapon/storage/box/lights/mixed,
+/obj/item/storage/box/lights/bulbs,
+/obj/item/storage/box/lights/mixed,
 /obj/structure/cable/green,
 /obj/machinery/power/apc/derelict{
 	name = "Tools Storage APC"
@@ -2642,7 +2644,7 @@
 /area/ship/scrap/maintenance/storage)
 "eR" = (
 /obj/structure/table/standard,
-/obj/item/weapon/inflatable_dispenser,
+/obj/item/inflatable_dispenser,
 /obj/item/device/radio/map_preset/bearcat,
 /obj/item/device/radio/map_preset/bearcat,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -2652,7 +2654,7 @@
 /turf/simulated/floor/tiled,
 /area/ship/scrap/maintenance/storage)
 "eS" = (
-/obj/item/weapon/tape_roll,
+/obj/item/tape_roll,
 /obj/item/stack/material/plasteel/fifty,
 /obj/item/stack/material/rods/fifty,
 /obj/item/stack/material/steel/fifty,
@@ -2667,7 +2669,7 @@
 "eT" = (
 /obj/item/clothing/head/welding,
 /obj/item/device/radio/map_preset/bearcat,
-/obj/item/weapon/tape_roll,
+/obj/item/tape_roll,
 /obj/structure/table/standard,
 /obj/item/device/radio/intercom/map_preset/bearcat{
 	pixel_y = -32
@@ -2679,8 +2681,8 @@
 /turf/simulated/floor,
 /area/ship/scrap/maintenance/storage)
 "eV" = (
-/obj/structure/dispenser/oxygen,
-/turf/simulated/floor,
+/obj/machinery/suit_cycler/salvage/bearcat,
+/turf/simulated/floor/tiled,
 /area/ship/scrap/maintenance/eva)
 "eW" = (
 /obj/machinery/suit_storage_unit/engineering/salvage/bearcat,
@@ -2717,7 +2719,7 @@
 	dir = 10;
 	icon_state = "corner_white"
 	},
-/obj/item/weapon/bedsheet/red,
+/obj/item/bedsheet/red,
 /turf/simulated/floor/tiled/dark,
 /area/ship/scrap/crew/dorms2)
 "gb" = (
@@ -2793,7 +2795,7 @@
 	},
 /obj/structure/curtain/open/bed,
 /obj/structure/bed/padded,
-/obj/item/weapon/bedsheet/brown,
+/obj/item/bedsheet/brown,
 /turf/simulated/floor/tiled/dark,
 /area/ship/scrap/crew/dorms1)
 "vY" = (

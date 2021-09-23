@@ -227,7 +227,7 @@
 /area/template_noop)
 "bX" = (
 /obj/machinery/atmospherics/pipe/simple/visible/blue,
-/obj/item/weapon/pen,
+/obj/item/pen,
 /obj/machinery/atmospherics/pipe/simple/visible/red{
 	dir = 4;
 	icon_state = "intact"
@@ -364,7 +364,7 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/red,
-/obj/item/weapon/wrench,
+/obj/item/wrench,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
 "eU" = (
@@ -414,7 +414,7 @@
 /obj/structure/closet/hydrant{
 	pixel_x = -27
 	},
-/obj/item/weapon/screwdriver,
+/obj/item/screwdriver,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
 "fh" = (
@@ -453,28 +453,28 @@
 /area/map_template/crashed_pod)
 "fi" = (
 /obj/item/device/multitool,
-/obj/item/weapon/screwdriver,
-/obj/item/weapon/cell/device/high,
-/obj/item/weapon/cell/device/high,
-/obj/item/weapon/cell/crap,
-/obj/item/weapon/storage/box/lights,
+/obj/item/screwdriver,
+/obj/item/cell/device/high,
+/obj/item/cell/device/high,
+/obj/item/cell/crap,
+/obj/item/storage/box/lights,
 /obj/item/device/scanner/gas,
-/obj/item/weapon/reagent_containers/food/drinks/cans/speer,
-/obj/item/weapon/reagent_containers/food/drinks/cans/speer,
-/obj/item/weapon/reagent_containers/food/drinks/cans/speer,
-/obj/item/weapon/storage/box/monkeycubes,
-/obj/item/weapon/reagent_containers/food/drinks/bottle/vodka,
-/obj/item/weapon/reagent_containers/food/drinks/bottle/specialwhiskey,
-/obj/item/weapon/tracker_electronics,
-/obj/item/weapon/pen/blue,
-/obj/item/weapon/pen/green,
-/obj/item/weapon/pen/red,
+/obj/item/reagent_containers/food/drinks/cans/speer,
+/obj/item/reagent_containers/food/drinks/cans/speer,
+/obj/item/reagent_containers/food/drinks/cans/speer,
+/obj/item/storage/box/monkeycubes,
+/obj/item/reagent_containers/food/drinks/bottle/vodka,
+/obj/item/reagent_containers/food/drinks/bottle/specialwhiskey,
+/obj/item/tracker_electronics,
+/obj/item/pen/blue,
+/obj/item/pen/green,
+/obj/item/pen/red,
 /obj/effect/floor_decal/industrial/hatch/orange,
 /obj/item/stack/cable_coil/random,
 /obj/item/stack/cable_coil/random,
 /obj/structure/closet/crate,
-/obj/item/weapon/flame/lighter/random,
-/obj/item/weapon/storage/box/lights/tubes,
+/obj/item/flame/lighter/random,
+/obj/item/storage/box/lights/tubes,
 /obj/random/powercell,
 /obj/random/powercell,
 /obj/random/powercell,
@@ -482,7 +482,7 @@
 	dir = 1;
 	icon_state = "railing0-1"
 	},
-/obj/item/tape/engineering,
+/obj/item/taperoll/engineering,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
 "fj" = (
@@ -527,15 +527,15 @@
 /obj/random/firstaid,
 /obj/random/firstaid,
 /obj/random/firstaid,
-/obj/item/weapon/storage/firstaid/surgery,
-/obj/item/weapon/storage/firstaid/stab,
-/obj/item/weapon/storage/pill_bottle/antidexafen,
-/obj/item/weapon/storage/pill_bottle/antidexafen,
-/obj/item/weapon/storage/med_pouch/radiation,
-/obj/item/weapon/storage/med_pouch/radiation,
-/obj/item/weapon/storage/med_pouch/radiation,
-/obj/item/weapon/storage/med_pouch/radiation,
-/obj/item/weapon/storage/pill_bottle/assorted,
+/obj/item/storage/firstaid/surgery,
+/obj/item/storage/firstaid/stab,
+/obj/item/storage/pill_bottle/antidexafen,
+/obj/item/storage/pill_bottle/antidexafen,
+/obj/item/storage/med_pouch/radiation,
+/obj/item/storage/med_pouch/radiation,
+/obj/item/storage/med_pouch/radiation,
+/obj/item/storage/med_pouch/radiation,
+/obj/item/storage/pill_bottle/assorted,
 /obj/machinery/atmospherics/pipe/simple/visible/red{
 	dir = 9;
 	icon_state = "intact"
@@ -545,7 +545,7 @@
 	dir = 1;
 	icon_state = "railing0-1"
 	},
-/mob/living/simple_animal/mouse/brown/Tom,
+/mob/living/simple_animal/passive/mouse/brown/Tom,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
 "fn" = (
@@ -553,7 +553,6 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/hatch/orange,
-/obj/structure/reagent_dispensers/fueltank,
 /obj/structure/railing/mapped{
 	dir = 1;
 	icon_state = "railing0-1"
@@ -562,6 +561,7 @@
 	dir = 4;
 	icon_state = "railing0-1"
 	},
+/obj/machinery/fabricator/hacked,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
 "fx" = (
@@ -597,11 +597,11 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/floor_decal/industrial/hatch/orange,
 /obj/structure/closet/crate,
-/obj/item/weapon/storage/briefcase/inflatable,
-/obj/item/weapon/storage/briefcase/inflatable,
-/obj/item/weapon/storage/briefcase/inflatable,
-/obj/item/weapon/storage/briefcase/inflatable,
-/obj/item/weapon/storage/briefcase/inflatable,
+/obj/item/storage/briefcase/inflatable,
+/obj/item/storage/briefcase/inflatable,
+/obj/item/storage/briefcase/inflatable,
+/obj/item/storage/briefcase/inflatable,
+/obj/item/storage/briefcase/inflatable,
 /obj/item/device/geiger,
 /obj/item/device/geiger,
 /obj/random/powercell,
@@ -634,14 +634,14 @@
 /obj/item/device/oxycandle,
 /obj/structure/closet/crate,
 /obj/effect/floor_decal/industrial/hatch/orange,
-/obj/item/weapon/reagent_containers/glass/paint/random,
+/obj/item/reagent_containers/glass/paint/random,
 /obj/random/powercell,
 /obj/random/powercell,
 /obj/structure/railing/mapped{
 	dir = 8;
 	icon_state = "railing0-1"
 	},
-/obj/item/weapon/book/manual/engineering_construction,
+/obj/item/book/manual/engineering_construction,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
 "fD" = (
@@ -659,17 +659,18 @@
 /obj/random/handgun,
 /obj/random/handgun,
 /obj/random/handgun,
-/obj/item/weapon/pickaxe,
-/obj/item/weapon/pickaxe,
-/obj/item/weapon/pickaxe,
+/obj/item/pickaxe,
+/obj/item/pickaxe,
+/obj/item/pickaxe,
 /obj/item/stack/material/glass/fifty,
 /obj/item/stack/material/glass/fifty,
 /obj/item/stack/material/plasteel/fifty,
+/obj/item/stack/material/plastic/fifty,
 /obj/item/device/flashlight/lantern,
 /obj/item/device/flashlight/lantern,
-/obj/item/weapon/storage/box/glowsticks,
-/obj/item/weapon/storage/box/glowsticks,
-/obj/item/weapon/storage/box/glowsticks,
+/obj/item/storage/box/glowsticks,
+/obj/item/storage/box/glowsticks,
+/obj/item/storage/box/glowsticks,
 /obj/item/stack/material/steel/fifty,
 /obj/item/stack/material/steel/fifty,
 /obj/item/stack/material/steel/fifty,
@@ -687,7 +688,7 @@
 	dir = 4;
 	icon_state = "railing0-1"
 	},
-/obj/item/weapon/stock_parts/circuitboard/solar_control,
+/obj/item/stock_parts/circuitboard/solar_control,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
 "fP" = (
@@ -732,14 +733,14 @@
 	dir = 4;
 	icon_state = "railing0-1"
 	},
-/obj/item/weapon/stock_parts/micro_laser/ultra,
-/obj/item/weapon/stock_parts/matter_bin/adv,
-/obj/item/weapon/stock_parts/circuitboard/biogenerator,
-/obj/item/weapon/stock_parts/matter_bin/super,
+/obj/item/stock_parts/micro_laser/ultra,
+/obj/item/stock_parts/matter_bin/adv,
+/obj/item/stock_parts/circuitboard/biogenerator,
+/obj/item/stock_parts/matter_bin/super,
 /obj/item/stack/material/uranium/ten,
-/obj/item/weapon/stock_parts/circuitboard/oxyregenerator,
-/obj/item/weapon/stock_parts/circuitboard/unary_atmos/heater,
-/obj/item/weapon/stock_parts/circuitboard/unary_atmos/cooler,
+/obj/item/stock_parts/circuitboard/oxyregenerator,
+/obj/item/stock_parts/circuitboard/unary_atmos/heater,
+/obj/item/stock_parts/circuitboard/unary_atmos/cooler,
 /obj/item/device/scanner/gas,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
@@ -799,7 +800,7 @@
 	dir = 8;
 	icon_state = "railing0-1"
 	},
-/obj/machinery/fabricator/hacked,
+/obj/structure/reagent_dispensers/fueltank,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
 "gi" = (
@@ -993,11 +994,11 @@
 /area/map_template/crashed_pod)
 "gW" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/item/weapon/reagent_containers/food/drinks/cans/speer,
+/obj/item/reagent_containers/food/drinks/cans/speer,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/crashed_pod)
 "gX" = (
-/obj/item/weapon/storage/backpack/dufflebag/eng,
+/obj/item/storage/backpack/dufflebag/eng,
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/crashed_pod)
 "gZ" = (
@@ -1009,11 +1010,11 @@
 "hh" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/closet/emcloset,
-/obj/item/weapon/crowbar,
-/obj/item/weapon/crowbar,
+/obj/item/crowbar,
+/obj/item/crowbar,
 /obj/effect/floor_decal/industrial/outline/blue,
 /obj/item/clothing/suit/space/emergency,
-/obj/item/weapon/tank/emergency/oxygen/double,
+/obj/item/tank/emergency/oxygen/double,
 /obj/item/clothing/head/helmet/space/emergency,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/crashed_pod)
@@ -1021,9 +1022,9 @@
 /obj/structure/closet/emcloset,
 /obj/effect/floor_decal/industrial/outline/blue,
 /obj/item/clothing/suit/space/emergency,
-/obj/item/weapon/tank/emergency/oxygen/double,
+/obj/item/tank/emergency/oxygen/double,
 /obj/item/clothing/head/helmet/space/emergency,
-/obj/item/weapon/storage/briefcase/inflatable,
+/obj/item/storage/briefcase/inflatable,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/crashed_pod)
 "hj" = (
@@ -1040,7 +1041,7 @@
 "hk" = (
 /obj/structure/table/steel_reinforced,
 /obj/machinery/recharger,
-/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/metal,
+/obj/item/reagent_containers/food/drinks/glass2/coffeecup/metal,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/crashed_pod)
 "hm" = (
@@ -1094,7 +1095,7 @@
 /obj/item/device/radio/hailing,
 /obj/item/device/radio/hailing,
 /obj/random/plushie,
-/obj/item/weapon/paper_bin,
+/obj/item/paper_bin,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/crashed_pod)
 "ZI" = (

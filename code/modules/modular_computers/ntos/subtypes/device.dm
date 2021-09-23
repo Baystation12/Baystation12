@@ -15,7 +15,7 @@
 
 /datum/extension/interactive/ntos/device/recalc_power_usage()
 	var/obj/item/modular_computer/C = holder
-	C.calculate_power_usage()
+	C.handle_power()
 	
 /datum/extension/interactive/ntos/device/emagged()
 	var/obj/item/modular_computer/C = holder

@@ -54,7 +54,7 @@ GLOBAL_DATUM_INIT(malf, /datum/antagonist/rogue_ai, new)
 			error("Non-AI mob designated malf AI! Report this.")
 			to_world("##ERROR: Non-AI mob designated malf AI! Report this.")
 
-			return 0
+			return
 
 		A.setup_for_malf()
 		A.laws = new /datum/ai_laws/nanotrasen/malfunction

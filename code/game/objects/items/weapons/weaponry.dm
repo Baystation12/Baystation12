@@ -1,4 +1,4 @@
-/obj/item/weapon/nullrod
+/obj/item/nullrod
 	name = "null sceptre"
 	desc = "A sceptre of pure black obsidian capped at both ends with silver ferrules. Some religious groups claim it disrupts and dampens the powers of paranormal phenomenae."
 	icon = 'icons/obj/weapons/melee_physical.dmi'
@@ -11,10 +11,10 @@
 	throwforce = 7
 	w_class = ITEM_SIZE_NORMAL
 
-/obj/item/weapon/nullrod/disrupts_psionics()
+/obj/item/nullrod/disrupts_psionics()
 	return src
 
-/obj/item/weapon/nullrod/attack(mob/M as mob, mob/living/user as mob) //Paste from old-code to decult with a null rod.
+/obj/item/nullrod/attack(mob/M as mob, mob/living/user as mob) //Paste from old-code to decult with a null rod.
 	if (user.a_intent == I_HELP)
 		return FALSE
 
@@ -45,7 +45,7 @@
 
 	..()
 
-/obj/item/weapon/energy_net
+/obj/item/energy_net
 	name = "energy net"
 	desc = "It's a net made of green energy."
 	icon = 'icons/effects/effects.dmi'
@@ -54,22 +54,22 @@
 	force = 0
 	var/net_type = /obj/effect/energy_net
 
-/obj/item/weapon/energy_net/safari
+/obj/item/energy_net/safari
 	name = "animal net"
 	desc = "An energized net meant to subdue animals."
 	net_type = /obj/effect/energy_net/safari
 
-/obj/item/weapon/energy_net/dropped()
+/obj/item/energy_net/dropped()
 	..()
 	spawn(10)
 		if(src) qdel(src)
 
-/obj/item/weapon/energy_net/throw_impact(atom/hit_atom)
+/obj/item/energy_net/throw_impact(atom/hit_atom)
 	..()
 	try_capture_mob(hit_atom)
 
 // This will validate the hit_atom, then spawn an energy_net effect and qdel itself
-/obj/item/weapon/energy_net/proc/try_capture_mob(mob/living/M)
+/obj/item/energy_net/proc/try_capture_mob(mob/living/M)
 
 	if(!istype(M) || locate(/obj/effect/energy_net) in M.loc)
 		qdel(src)
@@ -91,10 +91,10 @@
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "energynet"
 
-	density = 1
+	density = TRUE
 	opacity = 0
 	mouse_opacity = 1
-	anchored = 1
+	anchored = TRUE
 	can_buckle = 0 //no manual buckling or unbuckling
 
 	var/health = 25
@@ -108,7 +108,7 @@
 	name = "animal net"
 	desc = "An energized net meant to subdue animals."
 
-	anchored = 0
+	anchored = FALSE
 	health = 5
 	temporary = 0
 	min_free_time = 5
@@ -208,7 +208,7 @@
 	healthcheck()
 	return
 
-/obj/effect/energy_net/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/effect/energy_net/attackby(obj/item/W as obj, mob/user as mob)
 	health -= W.force
 	healthcheck()
 	..()

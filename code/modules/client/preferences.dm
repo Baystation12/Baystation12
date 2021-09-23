@@ -109,7 +109,7 @@ datum/preferences
 
 	S.cd = "/torch"
 	for(var/slot = 1 to 40)
-		if(!S.dir.Find("character[slot]"))
+		if(!list_find(S.dir, "character[slot]"))
 			continue
 		S.cd = "/torch/character[slot]"
 		default_slot = slot
@@ -123,18 +123,13 @@ datum/preferences
 
 	return 1
 
-/datum/preferences/proc/ShowChoices(mob/user)
+/datum/preferences/proc/get_content(mob/user)
 	if(!SScharacter_setup.initialized)
 		return
 	if(!user || !user.client)
 		return
 
-	if(!get_mob_by_key(client_ckey))
-		to_chat(user, "<span class='danger'>No mob exists for the given client!</span>")
-		close_load_dialog(user)
-		return
-
-	var/dat = "<html><body><center>"
+	var/dat = "<center>"
 
 	if(is_guest)
 		dat += "Please create an account to save your preferences. If you have an account and are seeing this, please adminhelp for assistance."
@@ -151,11 +146,26 @@ datum/preferences
 	dat += player_setup.header()
 	dat += "<br><HR></center>"
 	dat += player_setup.content(user)
+	return dat
 
-	dat += "</html></body>"
-	var/datum/browser/popup = new(user, "Character Setup","Character Setup", 1200, 800, src)
-	popup.set_content(dat)
+/datum/preferences/proc/open_setup_window(mob/user)
+	if (!SScharacter_setup.initialized)
+		return
+
+	var/datum/browser/popup = new(user, "preferences_browser", "Character Setup", 1200, 800, src)
+	var/content = {"
+	<script type='text/javascript'>
+		function update_content(data){
+			document.getElementById('content').innerHTML = data;
+		}
+	</script>
+	<div id='content'>[get_content(user)]</div>
+	"}
+	popup.set_content(content)
 	popup.open()
+
+/datum/preferences/proc/update_setup_window(mob/user)
+	send_output(user, url_encode(get_content(user)), "preferences_browser.browser:update_content")
 
 /datum/preferences/proc/process_link(mob/user, list/href_list)
 
@@ -168,7 +178,7 @@ datum/preferences
 		else
 			to_chat(user, "<span class='danger'>The forum URL is not set in the server configuration.</span>")
 			return
-	ShowChoices(usr)
+	update_setup_window(usr)
 	return 1
 
 /datum/preferences/Topic(href, list/href_list)
@@ -184,12 +194,22 @@ datum/preferences
 		sanitize_preferences()
 	else if(href_list["load"])
 		if(!IsGuestKey(usr.key))
-			open_load_dialog(usr)
+			open_load_dialog(usr, href_list["details"])
 			return 1
 	else if(href_list["changeslot"])
 		load_character(text2num(href_list["changeslot"]))
 		sanitize_preferences()
 		close_load_dialog(usr)
+
+		if (winget(usr, "preferences_browser", "is-visible") == "true")
+			open_setup_window(usr)
+
+		if (istype(client.mob, /mob/new_player))
+			var/mob/new_player/M = client.mob
+			M.new_player_panel()
+
+		if (href_list["details"])
+			return 1
 	else if(href_list["resetslot"])
 		if(real_name != input("This will reset the current slot. Enter the character's full name to confirm."))
 			return 0
@@ -198,7 +218,7 @@ datum/preferences
 	else
 		return 0
 
-	ShowChoices(usr)
+	update_setup_window(usr)
 	return 1
 
 /datum/preferences/proc/copy_to(mob/living/carbon/human/character, is_preview_copy = FALSE)
@@ -317,8 +337,8 @@ datum/preferences
 
 		for(var/BP in mark_datum.body_parts)
 			var/obj/item/organ/external/O = character.organs_by_name[BP]
-			if(O)
-				O.markings[M] = list("color" = mark_color, "datum" = mark_datum)
+			if (O)
+				O.markings[mark_datum] = mark_color
 
 	character.force_update_limbs()
 	character.update_mutations(0)
@@ -360,7 +380,7 @@ datum/preferences
 		character.set_nutrition(rand(140,360))
 		character.set_hydration(rand(140,360))
 
-/datum/preferences/proc/open_load_dialog(mob/user)
+/datum/preferences/proc/open_load_dialog(mob/user, details)
 	var/dat  = list()
 	dat += "<body>"
 	dat += "<tt><center>"
@@ -370,7 +390,7 @@ datum/preferences
 		var/name = (slot_names && slot_names[get_slot_key(i)]) || "Character[i]"
 		if(i==default_slot)
 			name = "<b>[name]</b>"
-		dat += "<a href='?src=\ref[src];changeslot=[i]'>[name]</a><br>"
+		dat += "<a href='?src=\ref[src];changeslot=[i];[details?"details=1":""]'>[name]</a><br>"
 
 	dat += "<hr>"
 	dat += "</center></tt>"

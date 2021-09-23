@@ -89,7 +89,7 @@
 	icon = 'icons/effects/tile_effects.dmi'
 	icon_state = "generic"
 	layer = FIRE_LAYER
-	appearance_flags = RESET_COLOR
+	appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
 	mouse_opacity = 0
 	var/gas_id
 

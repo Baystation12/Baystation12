@@ -2,12 +2,12 @@
 	display_name = "Cuchulain Foundation"
 	associated_strings = list("Cuchulain", "Foundation")
 	associated_paths = list(
-		/obj/item/weapon/storage/briefcase/foundation, 
-		/obj/item/weapon/gun/projectile/revolver/foundation,
-		/obj/item/weapon/card/id/foundation,
-		/obj/item/weapon/card/id/foundation_civilian,
+		/obj/item/storage/briefcase/foundation, 
+		/obj/item/gun/projectile/revolver/foundation,
+		/obj/item/card/id/foundation,
+		/obj/item/card/id/foundation_civilian,
 		/obj/item/clothing/suit/storage/toggle/labcoat/foundation,
-		/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/foundation
+		/obj/item/reagent_containers/food/drinks/glass2/coffeecup/foundation
 	)
 	lore_text = "The Cuchulain Foundation is a non-profit body based out of Neptune orbit. Their logo is \
 	an upward-facing radio telescope dish, usually printed in green. They perform niche research on behalf \
@@ -27,7 +27,7 @@
 	display_name = "Psionics"
 	associated_strings = list("Psychic", "Psychic Powers", "Psi")
 	associated_paths = list(
-		/obj/item/weapon/book/manual/psionics,
+		/obj/item/book/manual/psionics,
 		/obj/item/clothing/head/helmet/space/psi_amp,
 		/obj/item/clothing/head/helmet/space/psi_amp/lesser
 	)

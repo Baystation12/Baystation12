@@ -215,6 +215,10 @@
 /obj/effect/landmark/test/space_turf,
 /turf/space,
 /area/space)
+"K" = (
+/obj/machinery/tele_pad,
+/turf/simulated/floor/tiled,
+/area/constructionsite)
 "L" = (
 /obj/machinery/telecomms/server/map_preset/example,
 /turf/simulated/floor/tiled,
@@ -223,9 +227,21 @@
 /obj/machinery/telecomms/bus/map_preset/example,
 /turf/simulated/floor/tiled,
 /area/constructionsite)
+"N" = (
+/obj/machinery/tele_beacon,
+/turf/simulated/floor/tiled,
+/area/constructionsite)
 "P" = (
 /obj/machinery/light,
 /obj/machinery/telecomms/processor/map_preset/example,
+/turf/simulated/floor/tiled,
+/area/constructionsite)
+"R" = (
+/obj/machinery/computer/teleporter,
+/turf/simulated/floor/tiled,
+/area/constructionsite)
+"S" = (
+/obj/machinery/tele_projector,
 /turf/simulated/floor/tiled,
 /area/constructionsite)
 "U" = (
@@ -1204,7 +1220,7 @@ a
 a
 a
 b
-c
+R
 c
 c
 c
@@ -1238,10 +1254,10 @@ a
 a
 a
 b
+S
 c
 c
-c
-c
+N
 c
 o
 c
@@ -1272,7 +1288,7 @@ a
 a
 a
 b
-c
+K
 c
 v
 f

@@ -19,7 +19,7 @@
 			new /obj/item/device/soulstone(location)
 	else
 		for(var/i = 1, i <= created_volume*2, i++)
-			new /obj/item/weapon/material/shard(location, MATERIAL_CRYSTAL)
+			new /obj/item/material/shard(location, MATERIAL_CRYSTAL)
 
 /datum/reagent/crystal
 	name = "crystallizing agent"
@@ -51,7 +51,7 @@
 					H.emote("scream")
 				if(prob(25))
 					for(var/i = 1 to rand(3,5))
-						new /obj/item/weapon/material/shard(get_turf(E), result_mat)
+						new /obj/item/material/shard(get_turf(E), result_mat)
 					E.droplimb(0, DROPLIMB_BLUNT)
 				else
 					E.take_external_damage(rand(20,30), 0)
@@ -70,4 +70,4 @@
 		to_chat(M, SPAN_DANGER("Your flesh is being lacerated from within!"))
 		M.adjustBruteLoss(rand(3,6))
 		if(prob(10))
-			new /obj/item/weapon/material/shard(get_turf(M), result_mat)
+			new /obj/item/material/shard(get_turf(M), result_mat)

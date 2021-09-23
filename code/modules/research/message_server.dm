@@ -37,8 +37,8 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 	icon = 'icons/obj/machines/research.dmi'
 	icon_state = "server"
 	name = "Messaging Server"
-	density = 1
-	anchored = 1.0
+	density = TRUE
+	anchored = TRUE
 	idle_power_usage = 10
 	active_power_usage = 100
 
@@ -117,9 +117,9 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 	update_icon()
 	return TRUE
 
-/obj/machinery/message_server/attackby(obj/item/weapon/O as obj, mob/living/user as mob)
+/obj/machinery/message_server/attackby(obj/item/O as obj, mob/living/user as mob)
 	if (active && !(stat & (BROKEN|NOPOWER)) && (spamfilter_limit < MESSAGE_SERVER_DEFAULT_SPAM_LIMIT*2) && \
-		istype(O,/obj/item/weapon/stock_parts/circuitboard/message_monitor))
+		istype(O,/obj/item/stock_parts/circuitboard/message_monitor))
 		spamfilter_limit += round(MESSAGE_SERVER_DEFAULT_SPAM_LIMIT / 2)
 		qdel(O)
 		to_chat(user, "You install additional memory and processors into message server. Its filtering capabilities been enhanced.")
@@ -140,8 +140,8 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 	var/reached = 0
 
 	for(var/mob/living/carbon/human/H in GLOB.human_mob_list)
-		var/obj/item/modular_computer/pda/pda = locate() in H
-		if(!pda || !(get_z(pda) in GLOB.using_map.station_levels))
+		var/obj/item/modular_computer/device = locate() in H
+		if(!device || !(get_z(device) in GLOB.using_map.station_levels))
 			continue
 
 		var/datum/job/J = SSjobs.get_by_title(H.get_authentification_rank())
@@ -149,7 +149,7 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 			continue
 
 		if(J.department_flag & department)
-			to_chat(H, "<span class='notice'>Your [pda.name] alerts you to the fact that somebody is requesting your presence at your department.</span>")
+			to_chat(H, "<span class='notice'>Your [device.name] alerts you to the fact that somebody is requesting your presence at your department.</span>")
 			reached++
 
 	return reached

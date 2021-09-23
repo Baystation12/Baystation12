@@ -373,7 +373,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	C.dna = chosen_dna.Clone()
 
 	var/list/implants = list()
-	for (var/obj/item/weapon/implant/I in C) //Still preserving implants
+	for (var/obj/item/implant/I in C) //Still preserving implants
 		implants += I
 
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(C)
@@ -411,7 +411,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	O.setOxyLoss(C.getOxyLoss())
 	O.adjustFireLoss(C.getFireLoss())
 	O.set_stat(C.stat)
-	for (var/obj/item/weapon/implant/I in implants)
+	for (var/obj/item/implant/I in implants)
 		I.forceMove(O)
 		I.implanted = O
 
@@ -794,7 +794,7 @@ var/list/datum/absorbed_dna/hivemind_bank = list()
 	if(!T)	return 0
 	to_chat(T, "<span class='danger'>You feel a small prick and your chest becomes tight.</span>")
 	T.make_jittery(400)
-	if(T.reagents)	T.reagents.add_reagent(/datum/reagent/lexorin, 40)
+	if(T.reagents)	T.reagents.add_reagent(/datum/reagent/lexorin, 10)
 	SSstatistics.add_field_details("changeling_powers","DTHS")
 	return 1
 

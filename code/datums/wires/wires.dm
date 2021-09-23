@@ -54,6 +54,9 @@ var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown"
 	holder = null
 	return ..()
 
+/datum/wires/proc/get_mechanics_info()
+	return
+
 /datum/wires/proc/GenerateWires()
 	var/list/colours_to_pick = wireColours.Copy() // Get a copy, not a reference.
 	var/list/indexes_to_pick = list()
@@ -211,12 +214,16 @@ var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown"
 // Overridable Procs
 //
 
-// Called when wires cut/mended.
-/datum/wires/proc/UpdateCut(var/index, var/mended)
+/// Called when wires cut/mended.
+/datum/wires/proc/UpdateCut(index, mended)
 	return
 
-// Called when wire pulsed. Add code here.
-/datum/wires/proc/UpdatePulsed(var/index)
+/// Called when wire pulsed. Add code here.
+/datum/wires/proc/UpdatePulsed(index)
+	return
+
+/// Intended to be called when a pulsed wire 'resets'. You'll have to call this yourself in an `addtimer()` call in `UpdatePulsed()`.
+/datum/wires/proc/ResetPulsed(index)
 	return
 
 /datum/wires/proc/examine(index, mob/user)

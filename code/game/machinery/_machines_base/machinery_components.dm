@@ -4,8 +4,8 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 
 /proc/cache_circuits_by_build_path()
 	. = list()
-	for(var/board_path in subtypesof(/obj/item/weapon/stock_parts/circuitboard))
-		var/obj/item/weapon/stock_parts/circuitboard/board = board_path //fake type
+	for(var/board_path in subtypesof(/obj/item/stock_parts/circuitboard))
+		var/obj/item/stock_parts/circuitboard/board = board_path //fake type
 		if(initial(board.buildtype_select))
 			board = new board_path()
 			for(var/path in board.get_buildable_types())
@@ -14,13 +14,16 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 		.[initial(board.build_path)] = board_path
 
 // Code concerning machinery interaction with components/stock parts.
-
-/obj/machinery/proc/populate_parts(var/full_populate) // Full populate creates a circuitboard and all needed components automatically.
+/**
+ * Creates all components listed in `uncreated_component_parts`.
+ * `full_populate` also creates a circuitboard and all needed components.
+ */
+/obj/machinery/proc/populate_parts(full_populate = FALSE)
 	if(full_populate)
 		var/path_to_check = base_type || type
 		var/board_path = GLOB.machine_path_to_circuit_type[path_to_check]
 		if(board_path)
-			var/obj/item/weapon/stock_parts/circuitboard/board = install_component(board_path, refresh_parts = FALSE)
+			var/obj/item/stock_parts/circuitboard/board = install_component(board_path, refresh_parts = FALSE)
 			var/list/req_components = board.spawn_components || board.req_components
 			req_components = req_components.Copy()
 			if(board.additional_spawn_components)
@@ -49,7 +52,7 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 	for(var/path in stock_part_presets)
 		var/decl/stock_part_preset/preset = decls_repository.get_decl(path)
 		var/number = stock_part_presets[path] || 1
-		for(var/obj/item/weapon/stock_parts/part in component_parts)
+		for(var/obj/item/stock_parts/part in component_parts)
 			if(processed_parts[part])
 				continue // only apply one preset per part
 			if(istype(part, preset.expected_part_type))
@@ -59,8 +62,8 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 				if(number == 0)
 					break
 
-// Returns the first valid preset decl for a given part, or null
-/obj/machinery/proc/can_apply_preset_to(var/obj/item/weapon/stock_parts/part)
+/// Returns the first valid preset decl for a given part, or `null`
+/obj/machinery/proc/can_apply_preset_to(obj/item/stock_parts/part)
 	if(!stock_part_presets)
 		return
 	for(var/path in stock_part_presets)
@@ -69,14 +72,14 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 			return preset
 
 // Applies the first valid preset to the given part. Returns preset applied, or null.
-/obj/machinery/proc/apply_preset_to(var/obj/item/weapon/stock_parts/part)
+/obj/machinery/proc/apply_preset_to(obj/item/stock_parts/part)
 	var/decl/stock_part_preset/preset = can_apply_preset_to(part)
 	if(preset)
 		preset.apply(null, part)
 		return preset
 
-// Returns a list of subtypes of the given component type, with associated value = number of that component.
-/obj/machinery/proc/types_of_component(var/part_type)
+/// Returns a list of subtypes of the given component type, with associated value = number of that component.
+/obj/machinery/proc/types_of_component(part_type)
 	. = list()
 	for(var/obj/component in component_parts)
 		if(istype(component, part_type))
@@ -85,8 +88,8 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 		if(ispath(path, part_type))
 			.[path] += uncreated_component_parts[path]
 
-// Returns a component instance of the given type, or null if no such type is present.
-/obj/machinery/proc/get_component_of_type(var/part_type, var/strict = FALSE)
+/// Returns a component instance of the given `part_type`, or `null` if no such type is present. `strict` forces strict type comparisons and disallows subtypes.
+/obj/machinery/proc/get_component_of_type(part_type, strict = FALSE)
 	if(strict)
 		for(var/obj/component in component_parts)
 			if(component.type == part_type)
@@ -100,7 +103,11 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 		if(ispath(path, part_type))
 			return force_init_component(path)
 
-/obj/machinery/proc/force_init_component(var/path)
+/**
+ * Forces initialization of a component in the `uncreated_component_parts` list.
+ * Returns the result of `install_component()`, or `null` if the path does not exist in the list.
+ */
+/obj/machinery/proc/force_init_component(path)
 	if(!uncreated_component_parts[path])
 		return
 	uncreated_component_parts[path]-- //bookkeeping to make sure tally is correct.
@@ -110,9 +117,9 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 
 // Can be given a path or an instance. False will guarantee part creation.
 // If an instance is given or created, it is returned, otherwise null is returned.
-/obj/machinery/proc/install_component(var/obj/item/weapon/stock_parts/part, force = FALSE, refresh_parts = TRUE)
+/obj/machinery/proc/install_component(obj/item/stock_parts/part, force = FALSE, refresh_parts = TRUE)
 	if(ispath(part))
-		if(force || !(ispath(part, /obj/item/weapon/stock_parts) && initial(part.part_flags) & PART_FLAG_LAZY_INIT))
+		if(force || !(ispath(part, /obj/item/stock_parts) && initial(part.part_flags) & PART_FLAG_LAZY_INIT))
 			part = new part(src) // Forced to make, or we don't lazy-init, so create.
 
 			if(istype(part, /obj/item/stack)) // Compatibility with legacy construction code
@@ -132,16 +139,20 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 		LAZYINITLIST(uncreated_component_parts)
 		uncreated_component_parts[part] += 1
 	else // Wrong type
-		var/obj/item/weapon/stock_parts/building_material/material = get_component_of_type(/obj/item/weapon/stock_parts/building_material)
+		var/obj/item/stock_parts/building_material/material = get_component_of_type(/obj/item/stock_parts/building_material)
 		if(!material)
-			material = install_component(/obj/item/weapon/stock_parts/building_material, refresh_parts = FALSE)
+			material = install_component(/obj/item/stock_parts/building_material, refresh_parts = FALSE)
 		material.add_material(part)
 
 	if(refresh_parts)
 		RefreshParts()
 
-// This will force-init components.
-/obj/machinery/proc/uninstall_component(var/obj/item/weapon/stock_parts/part, refresh_parts = TRUE)
+/**
+ * Uninstalls the provided component, if it exists in `component_parts`.
+ * `refresh_parts` will call `RefreshParts()` after uninstallation.
+ * Returns the uninstalled part.
+ */
+/obj/machinery/proc/uninstall_component(obj/item/stock_parts/part, refresh_parts = TRUE)
 	if(ispath(part))
 		part = get_component_of_type(part)
 	else if(!(part in component_parts))
@@ -158,48 +169,52 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 		GLOB.destroyed_event.unregister(part, src)
 		return part
 
-/obj/machinery/proc/replace_part(mob/user, var/obj/item/weapon/storage/part_replacer/R, var/obj/item/weapon/stock_parts/old_part, var/obj/item/weapon/stock_parts/new_part)
+/// Replaces a single component in the machine.
+/obj/machinery/proc/replace_part(mob/user, obj/item/storage/part_replacer/part_replacer, obj/item/stock_parts/old_part, obj/item/stock_parts/new_part)
 	if(ispath(old_part))
 		old_part = get_component_of_type(old_part, TRUE)
 	old_part = uninstall_component(old_part)
-	if(R)
-		R.remove_from_storage(new_part, src)
-		R.handle_item_insertion(old_part, 1)
+	if(part_replacer)
+		part_replacer.remove_from_storage(new_part, src)
+		part_replacer.handle_item_insertion(old_part, TRUE)
 	install_component(new_part)
-	to_chat(user, "<span class='notice'>[old_part.name] replaced with [new_part.name].</span>")
+	to_chat(user, SPAN_NOTICE("[old_part.name] replaced with [new_part.name]."))
 
-/obj/machinery/proc/component_destroyed(var/obj/item/component)
+/// Handles destroying the provided component. `component` should be an item within the machine.
+/obj/machinery/proc/component_destroyed(obj/item/component)
 	GLOB.destroyed_event.unregister(component, src)
 	LAZYREMOVE(component_parts, component)
 	LAZYREMOVE(processing_parts, component)
 	power_components -= component
 
-/obj/machinery/proc/total_component_rating_of_type(var/part_type)
+/// Returns the total combined component ratings for the provided `part_type`.
+/obj/machinery/proc/total_component_rating_of_type(part_type)
 	. = 0
 	for(var/thing in component_parts)
 		if(istype(thing, part_type))
-			var/obj/item/weapon/stock_parts/part = thing
+			var/obj/item/stock_parts/part = thing
 			. += part.rating
 	for(var/path in uncreated_component_parts)
 		if(ispath(path, part_type))
-			var/obj/item/weapon/stock_parts/comp = path
+			var/obj/item/stock_parts/comp = path
 			. += initial(comp.rating) * uncreated_component_parts[path]
 
-/obj/machinery/proc/number_of_components(var/part_type)
-	if(!ispath(part_type, /obj/item/weapon/stock_parts))
-		var/obj/item/weapon/stock_parts/building_material/material = get_component_of_type(/obj/item/weapon/stock_parts/building_material)
+/// Returns the number of components of the given `part_type` currently installed in the machine.
+/obj/machinery/proc/number_of_components(part_type)
+	if(!ispath(part_type, /obj/item/stock_parts))
+		var/obj/item/stock_parts/building_material/material = get_component_of_type(/obj/item/stock_parts/building_material)
 		return material && material.number_of_type(part_type)
 	var/list/comps = types_of_component(part_type)
 	. = 0
 	for(var/path in comps)
 		. += comps[path]
 
-// Use to block interactivity if panel is not open, etc.
-/obj/machinery/proc/components_are_accessible(var/path)
+/// Use to block interactivity if panel is not open, etc. `path` is the type path to check accessibility for. Returns boolean.
+/obj/machinery/proc/components_are_accessible(path)
 	return panel_open
 
-// Installation. Returns number of such components which can be inserted, or 0.
-/obj/machinery/proc/can_add_component(var/obj/item/weapon/stock_parts/component, var/mob/user)
+/// Installation. Returns number of such components which can be inserted.
+/obj/machinery/proc/can_add_component(obj/item/stock_parts/component, mob/user)
 	if(!istype(component)) // Random items. Only insert if actually needed.
 		var/list/missing = missing_parts()
 		for(var/path in missing)
@@ -217,24 +232,26 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 			return 0
 	return 1
 
-// Hook to get updates.
-/obj/machinery/proc/component_stat_change(var/obj/item/weapon/stock_parts/part, old_stat, flag)
+/// Called whenever an attached component updates it's status. Override to handle updates to the machine.
+/obj/machinery/proc/component_stat_change(obj/item/stock_parts/part, old_stat, flag)
 
 /obj/machinery/attackby(obj/item/I, mob/user)
 	if(component_attackby(I, user))
 		return TRUE
 	return ..()
 
+/// Passes `attackby()` calls through to components within the machine, if they are accessible.
 /obj/machinery/proc/component_attackby(obj/item/I, mob/user)
-	for(var/obj/item/weapon/stock_parts/part in component_parts)
+	for(var/obj/item/stock_parts/part in component_parts)
 		if(!components_are_accessible(part.type))
 			continue
 		if((. = part.attackby(I, user)))
 			return
 	return construct_state && construct_state.attackby(I, user, src)
 
+/// Passes `attack_hand()` calls through to components within the machine, if they are accessible.
 /obj/machinery/proc/component_attack_hand(mob/user)
-	for(var/obj/item/weapon/stock_parts/part in component_parts)
+	for(var/obj/item/stock_parts/part in component_parts)
 		if(!components_are_accessible(part.type))
 			continue
 		if((. = part.attack_hand(user)))
@@ -245,28 +262,30 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 Standard helpers for users interacting with machinery parts.
 */
 
-/obj/machinery/proc/part_replacement(mob/user, obj/item/weapon/storage/part_replacer/R)
-	for(var/obj/item/weapon/stock_parts/A in component_parts)
-		if(!A.base_type)
+/// Handles replacement of components by a user using a part replacer. Returns boolean.
+/obj/machinery/proc/part_replacement(mob/user, obj/item/storage/part_replacer/part_replacer)
+	for(var/obj/item/stock_parts/component_part in component_parts)
+		if(!component_part.base_type)
 			continue
-		if(!(A.part_flags & PART_FLAG_HAND_REMOVE))
+		if(!(component_part.part_flags & PART_FLAG_HAND_REMOVE))
 			continue
-		for(var/obj/item/weapon/stock_parts/B in R.contents)
-			if(istype(B, A.base_type) && B.rating > A.rating)
-				replace_part(user, R, A, B)
+		for(var/obj/item/stock_parts/new_component_part in part_replacer.contents)
+			if(istype(new_component_part, component_part.base_type) && new_component_part.rating > component_part.rating)
+				replace_part(user, part_replacer, component_part, new_component_part)
 				return TRUE
 	for(var/path in uncreated_component_parts)
-		var/obj/item/weapon/stock_parts/A = path
-		if(!(initial(A.part_flags) & PART_FLAG_HAND_REMOVE))
+		var/obj/item/stock_parts/component_part = path
+		if(!(initial(component_part.part_flags) & PART_FLAG_HAND_REMOVE))
 			continue
-		var/base_type = initial(A.base_type)
+		var/base_type = initial(component_part.base_type)
 		if(base_type)
-			for(var/obj/item/weapon/stock_parts/B in R.contents)
-				if(istype(B, base_type) && B.rating > initial(A.rating))
-					replace_part(user, R, A, B)
+			for(var/obj/item/stock_parts/new_component_part in part_replacer.contents)
+				if(istype(new_component_part, base_type) && new_component_part.rating > initial(component_part.rating))
+					replace_part(user, part_replacer, component_part, new_component_part)
 					return TRUE
 
-/obj/machinery/proc/part_insertion(mob/user, obj/item/weapon/stock_parts/part) // Second argument may actually be an arbitrary item.
+/// Handles inserting a component or item into the machine by a user. Returns boolean. `TRUE` should halt further processing in `attack*()` procs.
+/obj/machinery/proc/part_insertion(mob/user, obj/item/stock_parts/part) // Second argument may actually be an arbitrary item.
 	if(!user.canUnEquip(part) && !isstack(part))
 		return FALSE
 	var/number = can_add_component(part, user)
@@ -278,13 +297,17 @@ Standard helpers for users interacting with machinery parts.
 	else
 		user.unEquip(part, src)
 		install_component(part)
-	user.visible_message(SPAN_NOTICE("\The [user] installs \the [part] in \the [src]!"), SPAN_NOTICE("You install \the [part] in \the [src]!"))
+	user.visible_message(
+		SPAN_NOTICE("\The [user] installs \the [part] in \the [src]!"),
+		SPAN_NOTICE("You install \the [part] in \the [src]!")
+	)
 	return TRUE
 
+/// Handles removal of a component by a user. Returns boolean.
 /obj/machinery/proc/part_removal(mob/user)
 	var/list/removable_parts = list()
-	for(var/path in types_of_component(/obj/item/weapon/stock_parts))
-		var/obj/item/weapon/stock_parts/part = path
+	for(var/path in types_of_component(/obj/item/stock_parts))
+		var/obj/item/stock_parts/part = path
 		if(!(initial(part.part_flags) & PART_FLAG_HAND_REMOVE))
 			continue
 		if(components_are_accessible(path))
@@ -299,12 +322,17 @@ Standard helpers for users interacting with machinery parts.
 		remove_part_and_give_to_user(path, user)
 		return TRUE
 
-/obj/machinery/proc/remove_part_and_give_to_user(var/path, mob/user)
-	var/obj/item/weapon/stock_parts/part = uninstall_component(get_component_of_type(path, TRUE))
+/// Removes a part of the given `path` and places it in the hands of `user`.
+/obj/machinery/proc/remove_part_and_give_to_user(path, mob/user)
+	var/obj/item/stock_parts/part = uninstall_component(get_component_of_type(path, TRUE))
 	if(part)
 		user.put_in_hands(part) // Already dropped at loc, so that's the fallback.
-		user.visible_message(SPAN_NOTICE("\The [user] removes \the [part] from \the [src]."), SPAN_NOTICE("You remove \the [part] from \the [src]."))
+		user.visible_message(
+			SPAN_NOTICE("\The [user] removes \the [part] from \the [src]."),
+			SPAN_NOTICE("You remove \the [part] from \the [src].")
+		)
 
+/// Returns a list of required components that are missing from the machine, or `null` if no components are missing or the machine lacks a `construct_state`.
 /obj/machinery/proc/missing_parts()
 	if(!construct_state)
 		return

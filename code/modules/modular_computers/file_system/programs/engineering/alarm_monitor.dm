@@ -7,7 +7,7 @@
 	program_key_state = "atmos_key"
 	program_menu_icon = "alert"
 	extended_desc = "This program provides visual interface for the alarm system."
-	requires_ntnet = 1
+	requires_ntnet = TRUE
 	network_destination = "alarm monitoring network"
 	size = 5
 	category = PROG_MONITOR

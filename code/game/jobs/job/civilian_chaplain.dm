@@ -18,7 +18,7 @@
 		if(!ask_questions)
 			return
 
-		var/obj/item/weapon/storage/bible/B = locate(/obj/item/weapon/storage/bible) in H
+		var/obj/item/storage/bible/B = locate(/obj/item/storage/bible) in H
 		if(!B)
 			return
 

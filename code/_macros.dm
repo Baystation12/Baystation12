@@ -1,17 +1,22 @@
 #define any2ref(x) "\ref[x]"
 
-#if DM_VERSION < 513
+//Do (almost) nothing - indev placeholder for switch case implementations etc
+#define NOOP (.=.);
 
-#define islist(A) istype(A, /list)
-
-#define ismovable(A) istype(A, /atom/movable)
-
-#endif
+#define list_find(L, needle, LIMITS...) L.Find(needle, LIMITS)
 
 #define PUBLIC_GAME_MODE SSticker.master_mode
 
 #define Clamp(value, low, high) (value <= low ? low : (value >= high ? high : value))
 #define CLAMP01(x) 		(Clamp(x, 0, 1))
+
+var/const/POSITIVE_INFINITY = 1#INF // win: 1.#INF, lin: inf
+var/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
+//var/const/POSITIVE_NAN = -(1#INF/1#INF) // win: 1.#QNAN, lin: nan -- demonstration of creation, but not useful
+//var/const/NEGATIVE_NAN = (1#INF/1#INF) //win: -1.#IND, lin: -nan -- demonstration of creation, but not useful
+#define isfinite(N) (isnum(N) && ((N) == (N)) && ((N) != POSITIVE_INFINITY) && ((N) != NEGATIVE_INFINITY))
+
+#define isnan(N) (isnum(N) && (N) != (N))
 
 #define get_turf(A) get_step(A,0)
 
@@ -39,7 +44,7 @@
 
 #define isclient(A) istype(A, /client)
 
-#define iscorgi(A) istype(A, /mob/living/simple_animal/corgi)
+#define iscorgi(A) istype(A, /mob/living/simple_animal/passive/corgi)
 
 #define is_drone(A) istype(A, /mob/living/silicon/robot/drone)
 
@@ -47,13 +52,13 @@
 
 #define ishuman(A) istype(A, /mob/living/carbon/human)
 
-#define isid(A) istype(A, /obj/item/weapon/card/id)
+#define isid(A) istype(A, /obj/item/card/id)
 
 #define isitem(A) istype(A, /obj/item)
 
 #define isliving(A) istype(A, /mob/living)
 
-#define ismouse(A) istype(A, /mob/living/simple_animal/mouse)
+#define ismouse(A) istype(A, /mob/living/simple_animal/passive/mouse)
 
 #define isnewplayer(A) istype(A, /mob/new_player)
 
@@ -95,11 +100,7 @@
 
 #define isPlunger(A) istype(A, /obj/item/clothing/mask/plunger) || istype(A, /obj/item/device/plunger/robot)
 
-/proc/isspecies(A, B)
-	if(!iscarbon(A))
-		return FALSE
-	var/mob/living/carbon/C = A
-	return C.species?.name == B
+#define isadmin(X) (check_rights(R_ADMIN, 0, (X)) != 0)
 
 #define sequential_id(key) uniqueness_repository.Generate(/datum/uniqueness_generator/id_sequential, key)
 
@@ -168,7 +169,9 @@
 
 #define SPAN_WARNING(X) "<span class='warning'>[X]</span>"
 
-#define SPAN_STYLE(style, X) "<span style=\"[style]\">[X]</span>"
+#define SPAN_GOOD(X) "<span class='good'>[X]</span>"
+
+#define SPAN_BAD(X) "<span class='bad'>[X]</span>"
 
 #define SPAN_DANGER(X) "<span class='danger'>[X]</span>"
 
@@ -181,6 +184,8 @@
 #define SPAN_INFO(X) "<span class='info'>[X]</span>"
 
 #define SPAN_DEBUG(X) "<span class='debug'>[X]</span>"
+
+#define SPAN_STYLE(style, X) "<span style=\"[style]\">[X]</span>"
 
 #define FONT_COLORED(color, text) "<font color='[color]'>[text]</font>"
 

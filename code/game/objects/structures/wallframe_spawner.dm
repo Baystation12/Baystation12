@@ -2,8 +2,8 @@
 	name = "wall frame window grille spawner"
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "wingrille"
-	density = 1
-	anchored = 1.0
+	density = TRUE
+	anchored = TRUE
 	var/win_path = /obj/structure/window/basic/full
 	var/frame_path = /obj/structure/wall_frame/standard
 	var/grille_path = /obj/structure/grille
@@ -120,10 +120,6 @@
 	name = "reinforced verne hull wall frame window spawner"
 	frame_path = /obj/structure/wall_frame/hull/verne
 
-/obj/effect/wallframe_spawn/reinforced/hull/ascent
-	name = "reinforced ascent hull wall frame window spawner"
-	frame_path = /obj/structure/wall_frame/hull/ascent
-
 /obj/effect/wallframe_spawn/reinforced/bare //standard type is used most often so its in the master type, this one is for away sites etc with unpainted walls
 	name = "bare metal reinforced wall frame window spawner"
 	icon_state = "r-wingrille"
@@ -140,10 +136,6 @@
 	name = "reinforced phoron wall frame window spawner"
 	icon_state = "pr-wingrille"
 	win_path = /obj/structure/window/phoronreinforced/full
-
-/obj/effect/wallframe_spawn/reinforced_phoron/ascent
-	name = "reinforced ascent reinforced phoron wall frame window spawner"
-	frame_path = /obj/structure/wall_frame/hull/ascent
 
 /obj/effect/wallframe_spawn/reinforced_phoron/titanium
 	frame_path = /obj/structure/wall_frame/titanium

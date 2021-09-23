@@ -10,7 +10,7 @@ Pipelines + Other Objects -> Pipe network
 
 */
 /obj/machinery/atmospherics
-	anchored = 1
+	anchored = TRUE
 	idle_power_usage = 0
 	active_power_usage = 0
 	power_channel = ENVIRON
@@ -69,7 +69,7 @@ Pipelines + Other Objects -> Pipe network
 
 /obj/machinery/atmospherics/proc/add_underlay(var/turf/T, var/obj/machinery/atmospherics/node, var/direction, var/icon_connect_type)
 	if(node)
-		if(!T.is_plating() && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))			
+		if(!T.is_plating() && node.level == 1 && istype(node, /obj/machinery/atmospherics/pipe))
 			underlays += icon_manager.get_atmos_icon("underlay", direction, color_cache_name(node), "down" + icon_connect_type)
 		else
 			underlays += icon_manager.get_atmos_icon("underlay", direction, color_cache_name(node), "intact" + icon_connect_type)
@@ -165,7 +165,7 @@ obj/machinery/atmospherics/proc/check_connect_types(obj/machinery/atmospherics/a
 	. = ..()
 	initialize_directions = get_initialze_directions()
 
-// Used by constructors. Shouldn't generally be called from elsewhere.
+/// Used by constructors. Shouldn't generally be called from elsewhere.
 /obj/machinery/proc/set_initial_level()
 	var/turf/T = get_turf(src)
 	if(T)

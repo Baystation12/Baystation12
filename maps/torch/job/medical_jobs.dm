@@ -53,7 +53,7 @@
 	ideal_character_age = 45
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "Physicians and the Chief Medical Officer"
+	supervisors = "physicians and the Chief Medical Officer"
 	selection_color = "#013d3b"
 	economic_power = 6
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/senior
@@ -91,7 +91,7 @@
 	title = "Medical Technician"
 	total_positions = 3
 	spawn_positions = 3
-	supervisors = "Physicians and the Chief Medical Officer"
+	supervisors = "physicians and the Chief Medical Officer"
 	economic_power = 7
 	minimum_character_age = list(SPECIES_HUMAN = 19)
 	ideal_character_age = 40
@@ -140,7 +140,7 @@
 	department_flag = MED
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "Medical personnel, and the Chief Medical Officer"
+	supervisors = "medical personnel and the Chief Medical Officer"
 	selection_color = "#013d3b"
 	minimum_character_age = list(SPECIES_HUMAN = 18)
 	ideal_character_age = 20
@@ -183,17 +183,20 @@
 	return "You are a Trainee Medical Technician. You are learning how to treat and recover wounded crew from the more experienced medical personnel aboard. You are subordinate to the rest of the medical team."
 
 /datum/job/chemist
-	title = "Laboratory Technician"
+	title = "Pharmacist"
 	department = "Medical"
 	department_flag = MED
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Chief Medical Officer, the Corporate Liaison and Medical Personnel"
+	supervisors = "medical personnel, the Corporate Liaison, and the Chief Medical Officer"
 	selection_color = "#013d3b"
 	economic_power = 4
 	minimum_character_age = list(SPECIES_HUMAN = 25)
 	ideal_character_age = 30
 	minimal_player_age = 7
+	alt_titles = list(
+		"Chemist"
+	)
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/chemist
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
@@ -214,7 +217,7 @@
 	minimal_access = list()
 
 /datum/job/chemist/get_description_blurb()
-	return "You are a Laboratory Technician. You make medicine. You are not a doctor or medic, but have surface level knowledge in those fields. You should not be treating patients, but rather providing the the medicine to do so. You are subordinate to Physicians and Medical Techncians."
+	return "You are the Pharmacist. You make medicine and other useful substances. You are not a doctor or medic; you should not be treating patients, but rather providing the medicine to do so. You are subordinate to Physicians and Medical Technicians."
 
 /datum/job/psychiatrist
 	title = "Counselor"
@@ -262,9 +265,9 @@
 	give_psionic_implant_on_join = FALSE
 
 /datum/job/psychiatrist/equip(var/mob/living/carbon/human/H)
-	if(H.mind.role_alt_title == "Psionic Counselor")
+	if(H.mind?.role_alt_title == "Psionic Counselor")
 		psi_faculties = list("[PSI_REDACTION]" = PSI_RANK_OPERANT)
-	if(H.mind.role_alt_title == "Mentalist")
+	if(H.mind?.role_alt_title == "Mentalist")
 		psi_faculties = list("[PSI_COERCION]" = PSI_RANK_OPERANT)
 	return ..()
 

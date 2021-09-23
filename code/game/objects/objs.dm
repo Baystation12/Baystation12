@@ -175,7 +175,13 @@
 		return
 
 	set_dir(turn(dir, 90))
-	update_icon() 
+	update_icon()
 
 //For things to apply special effects after damaging an organ, called by organ's take_damage
 /obj/proc/after_wounding(obj/item/organ/external/organ, datum/wound)
+
+/**
+ * Test for if stepping on a tile containing this obj is safe to do, used for things like landmines and cliffs.
+ */
+/obj/proc/is_safe_to_step(mob/living/L)
+	return TRUE

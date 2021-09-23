@@ -4,15 +4,15 @@
 	desc = "..."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "watertank"
-	density = 1
-	anchored = 0
+	density = TRUE
+	anchored = FALSE
 
 	var/initial_capacity = 1000
 	var/initial_reagent_types  // A list of reagents and their ratio relative the initial capacity. list(/datum/reagent/water = 0.5) would fill the dispenser halfway to capacity.
 	var/amount_per_transfer_from_this = 10
 	var/possible_transfer_amounts = "10;25;50;100;500"
 
-	attackby(obj/item/weapon/W as obj, mob/user as mob)
+	attackby(obj/item/W as obj, mob/user as mob)
 		return
 
 /obj/structure/reagent_dispensers/New()
@@ -119,14 +119,14 @@
 	if(modded)
 		to_chat(user, "<span class='warning'>Someone has wrenched open its tap - it's spilling everywhere!</span>")
 
-/obj/structure/reagent_dispensers/watertank/attackby(obj/item/weapon/W, mob/user)
+/obj/structure/reagent_dispensers/watertank/attackby(obj/item/W, mob/user)
 
 	src.add_fingerprint(user)
 
 	if((istype(W, /obj/item/robot_parts/l_arm) || istype(W, /obj/item/robot_parts/r_arm)) && user.unEquip(W))
 		to_chat(user, "You add \the [W] arm to \the [src].")
 		qdel(W)
-		new /obj/item/weapon/farmbot_arm_assembly(loc, src)
+		new /obj/item/farmbot_arm_assembly(loc, src)
 		return
 
 	if(isWrench(W))
@@ -180,9 +180,9 @@
 			rig = null
 			overlays.Cut()
 
-/obj/structure/reagent_dispensers/fueltank/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/reagent_dispensers/fueltank/attackby(obj/item/W as obj, mob/user as mob)
 	src.add_fingerprint(user)
-	if (istype(W,/obj/item/weapon/wrench))
+	if (istype(W,/obj/item/wrench))
 		user.visible_message("\The [user] wrenches \the [src]'s faucet [modded ? "closed" : "open"].", \
 			"You wrench [src]'s faucet [modded ? "closed" : "open"]")
 		modded = modded ? 0 : 1
@@ -266,8 +266,8 @@
 	desc = "Refills pepper spray canisters."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "peppertank"
-	anchored = 1
-	density = 0
+	anchored = TRUE
+	density = FALSE
 	amount_per_transfer_from_this = 45
 	initial_reagent_types = list(/datum/reagent/capsaicin/condensed = 1)
 
@@ -279,11 +279,11 @@
 	icon = 'icons/obj/vending.dmi'
 	icon_state = "water_cooler"
 	possible_transfer_amounts = null
-	anchored = 1
+	anchored = TRUE
 	initial_capacity = 500
 	initial_reagent_types = list(/datum/reagent/water = 1)
 	var/cups = 12
-	var/cup_type = /obj/item/weapon/reagent_containers/food/drinks/sillycup
+	var/cup_type = /obj/item/reagent_containers/food/drinks/sillycup
 
 /obj/structure/reagent_dispensers/water_cooler/attack_hand(var/mob/user)
 	if(cups > 0)
@@ -301,8 +301,8 @@
 /obj/structure/reagent_dispensers/water_cooler/proc/RejectionMessage(var/mob/user)
 	return "The [src]'s cup dispenser is empty."
 
-/obj/structure/reagent_dispensers/water_cooler/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (istype(W,/obj/item/weapon/wrench))
+/obj/structure/reagent_dispensers/water_cooler/attackby(obj/item/W as obj, mob/user as mob)
+	if (istype(W,/obj/item/wrench))
 		src.add_fingerprint(user)
 		if(anchored)
 			user.visible_message("\The [user] begins unsecuring \the [src] from the floor.", "You start unsecuring \the [src] from the floor.")
@@ -333,5 +333,5 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "acidtank"
 	amount_per_transfer_from_this = 10
-	anchored = 1
+	anchored = TRUE
 	initial_reagent_types = list(/datum/reagent/acid = 1)

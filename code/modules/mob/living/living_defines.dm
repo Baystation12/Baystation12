@@ -2,10 +2,14 @@
 	see_in_dark = 2
 	see_invisible = SEE_INVISIBLE_LIVING
 	waterproof = FALSE
+	/// Whether or not the mob can be buckled to things.
+	var/can_be_buckled = TRUE
 
 	//Health and life related vars
 	var/maxHealth = 100 //Maximum health that should be possible.
 	var/health = 100 	//A mob's health
+
+	var/mob_class =  null	// A mob's "class", e.g. human, mechanical, animal, etc. Used for certain projectile effects. See __defines/mob.dm for available classes.
 
 	var/hud_updateflag = 0
 
@@ -17,6 +21,7 @@
 	//var/halloss = 0   //Hallucination damage. 'Fake' damage obtained through hallucinating or the holodeck. Sleeping should cause it to wear off.
 
 	var/last_special = 0 //Used by the resist verb, likely used to prevent players from bypassing next_move by logging in/out.
+	var/base_attack_cooldown = DEFAULT_ATTACK_COOLDOWN
 
 	var/t_phoron = null
 	var/t_oxygen = null
@@ -50,5 +55,13 @@
 	var/list/obj/aura/auras = null //Basically a catch-all aura/force-field thing.
 
 	var/last_resist = 0
+	///For leaping and vaulting
+	var/jumping = FALSE
 
 	var/ghosted = 0 //For checks as to why a player has disconnected (can AI take over? etc.)
+	var/admin_paralyzed = FALSE
+
+	// var/nutrition = 400
+	// var/max_nutrition = MAX_NUTRITION
+
+	var/image/selected_image = null // Used for buildmode AI control stuff.

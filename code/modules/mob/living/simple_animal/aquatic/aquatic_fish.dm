@@ -8,7 +8,7 @@
 	maxHealth = 10
 	health = 10
 	mob_size = MOB_TINY
-	density = 0
+	density = FALSE
 
 	meat_amount = 1
 	bone_amount = 3

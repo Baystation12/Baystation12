@@ -3,12 +3,12 @@
 	desc = "It's a basic storage unit."
 	icon = 'icons/obj/closets/bases/closet.dmi'
 	icon_state = "base"
-	density = 1
+	density = TRUE
 	w_class = ITEM_SIZE_NO_CONTAINER
 
 	var/welded = 0
 	var/large = 1
-	var/wall_mounted = 0 //never solid (You can always pass over it)
+	var/wall_mounted = FALSE //equivalent to non-dense for air movement
 	var/health = 100
 	var/breakout = 0 //if someone is currently breaking out. mutex
 	var/storage_capacity = 2 * MOB_MEDIUM //This is so that someone can't pack hundreds of items in a locker/crate
@@ -117,7 +117,7 @@
 
 	src.opened = 1
 	playsound(src.loc, open_sound, 50, 1, -3)
-	density = 0
+	set_density(FALSE)
 	update_icon()
 	return 1
 
@@ -132,7 +132,7 @@
 
 	playsound(src.loc, close_sound, 50, 0, -3)
 	if(!wall_mounted)
-		density = 1
+		set_density(TRUE)
 
 	update_icon()
 
@@ -267,18 +267,18 @@
 			src.MouseDrop_T(G.affecting, user)      //act like they were dragged onto the closet
 			return 0
 		if(isWelder(W))
-			var/obj/item/weapon/weldingtool/WT = W
+			var/obj/item/weldingtool/WT = W
 			if(WT.remove_fuel(0,user))
 				slice_into_parts(WT, user)
 				return
-		if(istype(W, /obj/item/weapon/gun/energy/plasmacutter))
-			var/obj/item/weapon/gun/energy/plasmacutter/cutter = W
+		if(istype(W, /obj/item/gun/energy/plasmacutter))
+			var/obj/item/gun/energy/plasmacutter/cutter = W
 			if(!cutter.slice(user))
 				return
 			slice_into_parts(W, user)
 			return
-		if(istype(W, /obj/item/weapon/storage/laundry_basket) && W.contents.len)
-			var/obj/item/weapon/storage/laundry_basket/LB = W
+		if(istype(W, /obj/item/storage/laundry_basket) && W.contents.len)
+			var/obj/item/storage/laundry_basket/LB = W
 			var/turf/T = get_turf(src)
 			for(var/obj/item/I in LB.contents)
 				LB.remove_from_storage(I, T, 1)
@@ -294,7 +294,7 @@
 			W.pixel_z = 0
 			W.pixel_w = 0
 		return
-	else if(istype(W, /obj/item/weapon/melee/energy/blade))
+	else if(istype(W, /obj/item/melee/energy/blade))
 		if(emag_act(INFINITY, user, "<span class='danger'>The locker has been sliced open by [user] with \an [W]</span>!", "<span class='danger'>You hear metal being sliced and sparks flying.</span>"))
 			var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
 			spark_system.set_up(5, 0, src.loc)
@@ -305,7 +305,7 @@
 	else if(istype(W, /obj/item/stack/package_wrap))
 		return
 	else if(isWelder(W) && (setup & CLOSET_CAN_BE_WELDED))
-		var/obj/item/weapon/weldingtool/WT = W
+		var/obj/item/weldingtool/WT = W
 		if(!WT.remove_fuel(0,user))
 			if(!WT.isOn())
 				return
@@ -338,7 +338,7 @@
 		return
 	if(user.restrained() || user.stat || user.weakened || user.stunned || user.paralysis)
 		return
-	if((!( istype(O, /atom/movable) ) || O.anchored || !Adjacent(user) || !Adjacent(O) || !user.Adjacent(O) || user.contents.Find(src)))
+	if((!( istype(O, /atom/movable) ) || O.anchored || !Adjacent(user) || !Adjacent(O) || !user.Adjacent(O) || list_find(user.contents, src)))
 		return
 	if(!isturf(user.loc)) // are you in a container/closet/pod/etc?
 		return
@@ -474,7 +474,7 @@
 
 	return togglelock(usr)
 
-/obj/structure/closet/proc/togglelock(var/mob/user, var/obj/item/weapon/card/id/id_card)
+/obj/structure/closet/proc/togglelock(var/mob/user, var/obj/item/card/id/id_card)
 	if(!(setup & CLOSET_HAS_LOCK))
 		return FALSE
 	if(!CanPhysicallyInteract(user))
@@ -507,7 +507,7 @@
 		to_chat(user, "<span class='warning'>Access denied!</span>")
 		return FALSE
 
-/obj/structure/closet/proc/CanToggleLock(var/mob/user, var/obj/item/weapon/card/id/id_card)
+/obj/structure/closet/proc/CanToggleLock(var/mob/user, var/obj/item/card/id/id_card)
 	return allowed(user) || (istype(id_card) && check_access_list(id_card.GetAccess()))
 
 /obj/structure/closet/AltClick(var/mob/user)

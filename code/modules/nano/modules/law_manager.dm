@@ -48,7 +48,7 @@
 		return 1
 
 	if(href_list["add_zeroth_law"])
-		if(zeroth_law && is_admin(usr) && !owner.laws.zeroth_law)
+		if(zeroth_law && isadmin(usr) && !owner.laws.zeroth_law)
 			owner.set_zeroth_law(zeroth_law)
 		return 1
 
@@ -119,14 +119,14 @@
 		return 1
 
 	if(href_list["state_law_set"])
-		var/datum/ai_laws/ALs = locate(href_list["state_law_set"]) in (is_admin(usr) ? admin_laws : player_laws)
+		var/datum/ai_laws/ALs = locate(href_list["state_law_set"]) in (isadmin(usr) ? admin_laws : player_laws)
 		if(ALs)
 			owner.statelaws(ALs)
 		return 1
 
 	if(href_list["transfer_laws"])
 		if(is_malf(usr))
-			var/datum/ai_laws/ALs = locate(href_list["transfer_laws"]) in (is_admin(usr) ? admin_laws : player_laws)
+			var/datum/ai_laws/ALs = locate(href_list["transfer_laws"]) in (isadmin(usr) ? admin_laws : player_laws)
 			if(ALs)
 				log_and_message_admins("has transfered the [ALs.name] laws to [owner].")
 				ALs.sync(owner, 0)
@@ -166,7 +166,7 @@
 	data["isAI"] = isAI(owner)
 	data["isMalf"] = is_malf(user)
 	data["isSlaved"] = owner.is_slaved()
-	data["isAdmin"] = is_admin(user)
+	data["isAdmin"] = isadmin(user)
 	data["view"] = current_view
 
 	var/channels[0]
@@ -203,7 +203,7 @@
 	return law_sets
 
 /datum/nano_module/law_manager/proc/is_malf(var/mob/user)
-	return (is_admin(user) && !owner.is_slaved()) || owner.is_malf_or_traitor()
+	return (isadmin(user) && !owner.is_slaved()) || owner.is_malf_or_traitor()
 
 /mob/living/silicon/proc/is_slaved()
 	return 0

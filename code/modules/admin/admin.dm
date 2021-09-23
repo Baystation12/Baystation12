@@ -85,6 +85,7 @@ var/global/floorIsLava = 0
 	if(M.client)
 		body += "| <A HREF='?src=\ref[src];sendtoprison=\ref[M]'>Prison</A> | "
 		body += "<A HREF='?src=\ref[src];reloadsave=\ref[M]'>Reload Save</A> | "
+		body += "<A HREF='?src=\ref[src];reloadchar=\ref[M]'>Reload Character</A> | "
 		var/muted = M.client.prefs.muted
 		body += {"<br><b>Mute: </b>
 			\[<A href='?src=\ref[src];mute=\ref[M];mute_type=[MUTE_IC]'><font color='[(muted & MUTE_IC)?"red":"blue"]'>IC</font></a> |
@@ -221,7 +222,8 @@ var/global/floorIsLava = 0
 	body += {"<br><br>
 			<b>Other actions:</b>
 			<br>
-			<A href='?src=\ref[src];forcespeech=\ref[M]'>Forcesay</A>
+			<A href='?src=\ref[src];forcespeech=\ref[M]'>Forcesay</A> |
+			<a href='?src=\ref[src];cloneother=\ref[M]'>Clone Other</a>
 			"}
 	if (M.client)
 		body += {" |
@@ -858,6 +860,22 @@ var/global/floorIsLava = 0
 		to_chat(usr, "<span class='bigwarning'>Error: Start Now: Game has already started.</span>")
 		return 0
 
+/datum/admins/proc/endnow()
+	set category = "Server"
+	set desc = "End the round immediately."
+	set name = "End Round"
+
+	var/check = alert("This will immediately end the current round. Are you sure?", "End Game", "Yes", "No") == "Yes"
+
+	if (!check)
+		return
+
+	if (GAME_STATE > RUNLEVEL_LOBBY)
+		SSticker.forced_end = TRUE
+		log_and_message_admins("has ended the round.")
+	else
+		to_chat(usr, FONT_LARGE(SPAN_WARNING("You cannot end the round before it's begun!")))
+
 /datum/admins/proc/toggleenter()
 	set category = "Server"
 	set desc="People can't enter"
@@ -1105,6 +1123,64 @@ var/global/floorIsLava = 0
 	log_and_message_admins("spawned [chosen] at ([usr.x],[usr.y],[usr.z])")
 	SSstatistics.add_field_details("admin_verb","SA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+/datum/admins/proc/spawn_artifact(effect in subtypesof(/datum/artifact_effect))
+	set category = "Debug"
+	set desc = "(atom path) Spawn an artifact with a specified effect."
+	set name = "Spawn Artifact"
+
+	if (!check_rights(R_SPAWN))
+		return
+
+	var/obj/machinery/artifact/A
+	var/datum/artifact_trigger/primary_trigger
+
+	var/datum/artifact_effect/secondary_effect
+	var/datum/artifact_trigger/secondary_trigger
+
+	var/damage_type
+
+	if (ispath(effect))
+		primary_trigger = input(usr, "Choose a trigger", "Choose a trigger") as null | anything in subtypesof(/datum/artifact_trigger)
+
+		if (!ispath(primary_trigger))
+			return
+
+		var/choice = alert(usr, "Secondary effect?", "Secondary effect", "Yes", "No") == "Yes"
+
+		if (choice)
+			secondary_effect = input(usr, "Choose an effect", "Choose effect") as null | anything in subtypesof(/datum/artifact_effect)
+
+			if (!ispath(secondary_effect))
+				return
+
+			secondary_trigger = input(usr, "Choose a trigger", "Choose a trigger") as null | anything in subtypesof(/datum/artifact_trigger)
+
+			if (!ispath(secondary_trigger))
+				return
+
+		var/damage_types = list("Sharp" = DAM_SHARP, "Bullet" = DAM_BULLET, "Edge" = DAM_EDGE, "Laser" = DAM_LASER)
+		choice = input(usr, "Choose a damage effect", "Choose Damage Effect") as null | anything in damage_types | "Invincible"
+
+		if (!choice)
+			return
+
+		if (choice != "Invincible")
+			damage_type = damage_types[choice]
+
+
+		A = new(usr.loc)
+		A.my_effect = new effect(A)
+		A.my_effect.trigger = new primary_trigger(A.my_effect)
+		A.damage_type = damage_type
+		A.set_damage_description(damage_type)
+
+		if (secondary_effect)
+			A.secondary_effect = new secondary_effect
+			A.secondary_effect.trigger = new secondary_trigger
+		else
+			QDEL_NULL(A.secondary_effect)
+
+		log_and_message_admins("spawned an artifact with effects [english_list(A.my_effect, A.secondary_effect)].")
 
 /datum/admins/proc/show_traitor_panel(var/mob/M in SSmobs.mob_list)
 	set category = "Admin"
@@ -1256,7 +1332,7 @@ var/global/floorIsLava = 0
 	if(!istype(M))
 		return
 	var/datum/nano_module/skill_ui/NM = /datum/nano_module/skill_ui
-	if(is_admin(usr))
+	if(isadmin(usr))
 		NM = /datum/nano_module/skill_ui/admin //They get the fancy version that lets you change skills and debug stuff.
 	NM = new NM(usr, override = M.skillset)
 	NM.ui_interact(usr)
@@ -1386,7 +1462,7 @@ var/global/floorIsLava = 0
 	log_and_message_admins("attempting to force mode autospawn.")
 	SSticker.mode.process_autoantag()
 
-/datum/admins/proc/paralyze_mob(mob/H as mob in GLOB.player_list)
+/datum/admins/proc/paralyze_mob(mob/living/H as mob in GLOB.player_list)
 	set category = null
 	set name = "Toggle Paralyze"
 	set desc = "Toggles paralyze state, which stuns, blinds and mutes the victim."
@@ -1397,12 +1473,18 @@ var/global/floorIsLava = 0
 		return
 
 	if(check_rights(R_INVESTIGATE))
-		if (H.paralysis == 0)
+		if (!H.admin_paralyzed)
 			H.paralysis = 8000
+			H.admin_paralyzed = TRUE
 			msg = "has paralyzed [key_name(H)]."
+			H.visible_message(SPAN_DEBUG("OOC: \The [H] has been paralyzed by a staff member. Please hold all interactions with them until staff have finished with them."))
+			to_chat(H, SPAN_DEBUG("OOC: You have been paralyzed by a staff member. Please refer to your currently open admin help ticket or, if you don't have one, admin help for assistance."))
 		else
 			H.paralysis = 0
+			H.admin_paralyzed = FALSE
 			msg = "has unparalyzed [key_name(H)]."
+			H.visible_message(SPAN_DEBUG("OOC: \The [H] has been released from paralysis by staff. You may resume interactions with them."))
+			to_chat(H, SPAN_DEBUG("OOC: You have been released from paralysis by staff and can return to your game."))
 		log_and_message_staff(msg)
 
 
@@ -1422,7 +1504,7 @@ var/global/floorIsLava = 0
 
 			var/replyorigin = input(src.owner, "Please specify who the fax is coming from", "Origin") as text|null
 
-			var/obj/item/weapon/paper/admin/P = new /obj/item/weapon/paper/admin( null ) //hopefully the null loc won't cause trouble for us
+			var/obj/item/paper/admin/P = new /obj/item/paper/admin( null ) //hopefully the null loc won't cause trouble for us
 			faxreply = P
 
 			P.admindatum = src
@@ -1446,9 +1528,9 @@ var/global/floorIsLava = 0
 		data += "<center>No faxes yet.</center>"
 	show_browser(usr, "<HTML><HEAD><TITLE>Fax History</TITLE></HEAD><BODY>[data]</BODY></HTML>", "window=FaxHistory;size=450x400")
 
-datum/admins/var/obj/item/weapon/paper/admin/faxreply // var to hold fax replies in
+datum/admins/var/obj/item/paper/admin/faxreply // var to hold fax replies in
 
-/datum/admins/proc/faxCallback(var/obj/item/weapon/paper/admin/P, var/obj/machinery/photocopier/faxmachine/destination)
+/datum/admins/proc/faxCallback(var/obj/item/paper/admin/P, var/obj/machinery/photocopier/faxmachine/destination)
 	var/customname = input(src.owner, "Pick a title for the report", "Title") as text|null
 
 	P.SetName("[P.origin] - [customname]")
@@ -1480,7 +1562,7 @@ datum/admins/var/obj/item/weapon/paper/admin/faxreply // var to hold fax replies
 
 		if(!P.stamped)
 			P.stamped = new
-		P.stamped += /obj/item/weapon/stamp/boss
+		P.stamped += /obj/item/stamp/boss
 		P.overlays += stampoverlay
 
 	var/obj/item/rcvdcopy

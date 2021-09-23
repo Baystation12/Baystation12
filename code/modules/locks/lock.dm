@@ -48,8 +48,8 @@
 	return length(lock_data)
 
 /datum/lock/proc/get_key_data(var/key = "", var/mob/user)
-	if(istype(key,/obj/item/weapon/key))
-		var/obj/item/weapon/key/K = key
+	if(istype(key,/obj/item/key))
+		var/obj/item/key/K = key
 		return K.get_data(user)
 	if(istext(key))
 		return key

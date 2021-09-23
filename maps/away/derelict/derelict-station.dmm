@@ -72,7 +72,7 @@
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "ai" = (
-/obj/item/weapon/cell/standard,
+/obj/item/cell/standard,
 /turf/simulated/floor/plating,
 /area/derelict/ship)
 "aj" = (
@@ -133,7 +133,7 @@
 /turf/space,
 /area/derelict/ship)
 "as" = (
-/obj/item/weapon/scalpel,
+/obj/item/scalpel,
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "at" = (
@@ -199,7 +199,7 @@
 /area/derelict/ship)
 "aB" = (
 /obj/structure/table/standard,
-/obj/item/weapon/cell/standard,
+/obj/item/cell/standard,
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "aC" = (
@@ -207,7 +207,7 @@
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "aD" = (
-/obj/item/weapon/cell/hyper,
+/obj/item/cell/hyper,
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "aE" = (
@@ -320,7 +320,7 @@
 /area/derelict/ship)
 "aT" = (
 /obj/structure/bed,
-/obj/item/weapon/bedsheet,
+/obj/item/bedsheet,
 /obj/structure/window/reinforced{
 	dir = 8
 	},
@@ -378,7 +378,7 @@
 /area/derelict/ship)
 "bb" = (
 /obj/structure/table/standard,
-/obj/item/weapon/tank/oxygen,
+/obj/item/tank/oxygen,
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "bc" = (
@@ -467,7 +467,7 @@
 /area/derelict/ship)
 "bs" = (
 /obj/structure/bed,
-/obj/item/weapon/bedsheet,
+/obj/item/bedsheet,
 /obj/structure/window/reinforced{
 	dir = 4
 	},
@@ -580,7 +580,7 @@
 /area/constructionsite/bridge)
 "bP" = (
 /obj/structure/table/standard,
-/obj/item/weapon/paper{
+/obj/item/paper/spacer{
 	info = "\\\[center]\\\[b]ATTN: Regarding Meteor Storms\\\[/b]\[/center]\\\[br]\\\[br]We've recently heard mutterings from the Atmospheric Technicians that the meteor showers in this sector are becoming too much. However, this should be disregarded.\\\[br]\\\[br] High Command has assured us that our shields can easily keep pace with any meteor storm and then some. Any uneasiness the crew may feel should be disspelled swiftly. Thank you.";
 	name = "ATTN: Regarding Meteor Storms"
 	},
@@ -608,23 +608,23 @@
 /area/derelict/ship)
 "bU" = (
 /obj/structure/table/rack,
-/obj/item/weapon/tank/emergency/oxygen,
-/obj/item/weapon/tank/emergency/oxygen,
-/obj/item/weapon/tank/emergency/oxygen,
-/obj/item/weapon/tank/emergency/oxygen,
+/obj/item/tank/emergency/oxygen,
+/obj/item/tank/emergency/oxygen,
+/obj/item/tank/emergency/oxygen,
+/obj/item/tank/emergency/oxygen,
 /obj/random/tank,
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "bV" = (
 /obj/structure/table/rack,
 /obj/item/clothing/mask/breath,
-/obj/item/weapon/cell/standard,
+/obj/item/cell/standard,
 /obj/random/hardsuit,
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "bW" = (
 /obj/structure/table/rack,
-/obj/item/weapon/storage/toolbox/syndicate,
+/obj/item/storage/toolbox/syndicate,
 /obj/random/maintenance,
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
@@ -649,7 +649,7 @@
 /turf/simulated/floor/plating,
 /area/derelict/ship)
 "bZ" = (
-/obj/item/weapon/cell/hyper,
+/obj/item/cell/hyper,
 /turf/simulated/floor/plating,
 /area/derelict/ship)
 "ca" = (
@@ -845,7 +845,7 @@
 /area/constructionsite/hallway/fore)
 "cJ" = (
 /obj/structure/table/standard,
-/obj/item/weapon/screwdriver,
+/obj/item/screwdriver,
 /obj/machinery/light,
 /obj/random/maintenance,
 /turf/simulated/floor/tiled,
@@ -861,7 +861,7 @@
 /area/derelict/ship)
 "cM" = (
 /obj/structure/bookcase,
-/obj/item/weapon/book/manual/excavation,
+/obj/item/book/manual/excavation,
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/fore)
 "cN" = (
@@ -879,7 +879,7 @@
 /area/constructionsite/hallway/fore)
 "cQ" = (
 /obj/structure/bookcase,
-/obj/item/weapon/book/manual/ripley_build_and_repair,
+/obj/item/book/manual/ripley_build_and_repair,
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/fore)
 "cR" = (
@@ -966,7 +966,7 @@
 /area/constructionsite/hallway/fore)
 "dc" = (
 /obj/structure/table/marble,
-/obj/item/weapon/material/kitchen/rollingpin,
+/obj/item/material/kitchen/rollingpin,
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/fore)
 "dd" = (
@@ -986,7 +986,7 @@
 /area/constructionsite/hallway/fore)
 "dg" = (
 /obj/structure/bookcase/manuals/medical,
-/obj/item/weapon/book/manual/nuclear,
+/obj/item/book/manual/nuclear,
 /turf/simulated/floor/airless{
 	icon_state = "dmg2"
 	},
@@ -1423,7 +1423,7 @@
 /obj/structure/table/reinforced,
 /obj/item/clothing/shoes/magboots,
 /obj/item/clothing/glasses/meson,
-/obj/item/weapon/tank/oxygen,
+/obj/item/tank/oxygen,
 /obj/random/tech_supply,
 /obj/random/tech_supply,
 /obj/random/tech_supply,
@@ -1843,7 +1843,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "fI" = (
-/obj/machinery/teleport/station,
+/obj/machinery/tele_projector,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1;
 	icon_state = "warning"
@@ -1851,7 +1851,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "fJ" = (
-/obj/machinery/teleport/hub,
+/obj/machinery/tele_pad,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1;
 	icon_state = "warning"
@@ -2300,9 +2300,9 @@
 /turf/simulated/floor/tiled/white/airless,
 /area/constructionsite/medical)
 "hz" = (
-/obj/item/weapon/reagent_containers/ivbag,
-/obj/item/weapon/reagent_containers/ivbag,
-/obj/item/weapon/reagent_containers/ivbag/blood/OMinus,
+/obj/item/reagent_containers/ivbag,
+/obj/item/reagent_containers/ivbag,
+/obj/item/reagent_containers/ivbag/blood/OMinus,
 /obj/structure/closet/medical_wall{
 	name = "Blood Closet"
 	},
@@ -2478,7 +2478,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/medical)
 "il" = (
-/obj/item/weapon/storage/box/freezer,
+/obj/item/storage/box/freezer,
 /turf/simulated/floor/airless,
 /area/constructionsite/medical)
 "im" = (
@@ -2975,7 +2975,7 @@
 	},
 /area/constructionsite)
 "jO" = (
-/obj/item/weapon/bedsheet,
+/obj/item/bedsheet,
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite)
 "jP" = (
@@ -3444,7 +3444,7 @@
 /turf/simulated/floor/airless,
 /area/AIsattele)
 "lD" = (
-/obj/machinery/teleport/station,
+/obj/machinery/tele_projector,
 /obj/structure/cable{
 	d2 = 2;
 	icon_state = "0-2"
@@ -3452,7 +3452,7 @@
 /turf/simulated/floor/airless,
 /area/AIsattele)
 "lE" = (
-/obj/machinery/teleport/hub,
+/obj/machinery/tele_pad,
 /turf/simulated/floor/airless,
 /area/AIsattele)
 "lF" = (
@@ -3487,7 +3487,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
 "lI" = (
-/obj/item/weapon/material/shard{
+/obj/item/material/shard{
 	icon_state = "medium"
 	},
 /turf/simulated/floor/airless,
@@ -3518,7 +3518,7 @@
 /turf/simulated/floor/airless,
 /area/AIsattele)
 "lP" = (
-/obj/item/weapon/cell/standard,
+/obj/item/cell/standard,
 /turf/simulated/floor/airless,
 /area/AIsattele)
 "lQ" = (
@@ -3558,7 +3558,7 @@
 /turf/space,
 /area/AIsattele)
 "lY" = (
-/obj/item/weapon/storage/toolbox/electrical{
+/obj/item/storage/toolbox/electrical{
 	pixel_x = 1;
 	pixel_y = -1
 	},

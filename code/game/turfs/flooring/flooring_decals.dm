@@ -7,7 +7,7 @@ var/list/floor_decals = list()
 	name = "floor decal"
 	icon = 'icons/turf/flooring/decals.dmi'
 	layer = DECAL_LAYER
-	appearance_flags = RESET_COLOR
+	appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
 	var/supplied_dir
 	var/detail_overlay
 	var/detail_color
@@ -28,7 +28,7 @@ var/list/floor_decals = list()
 		if(!floor_decals[cache_key])
 			var/image/I = image(icon = src.icon, icon_state = src.icon_state, dir = src.dir)
 			I.layer = layer
-			I.appearance_flags = appearance_flags
+			I.appearance_flags = DEFAULT_APPEARANCE_FLAGS | appearance_flags
 			I.color = src.color
 			I.alpha = src.alpha
 			if(detail_overlay)
@@ -1149,7 +1149,7 @@ var/list/floor_decals = list()
 	layer = TURF_DETAIL_LAYER
 	color = COLOR_GUNMETAL
 	icon_state = "manydot"
-	appearance_flags = 0
+	appearance_flags = DEFAULT_APPEARANCE_FLAGS
 
 /obj/effect/floor_decal/floordetail/New(var/newloc, var/newdir, var/newcolour)
 	color = null //color is here just for map preview, if left it applies both our and tile colors.

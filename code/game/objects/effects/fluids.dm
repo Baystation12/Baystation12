@@ -1,8 +1,8 @@
 /obj/effect/fluid
 	name = ""
 	icon = 'icons/effects/liquids.dmi'
-	anchored = 1
-	simulated = 0
+	anchored = TRUE
+	simulated = FALSE
 	opacity = 0
 	mouse_opacity = 0
 	layer = FLY_LAYER
@@ -95,10 +95,10 @@
 	icon = 'icons/effects/liquids.dmi'
 	icon_state = "ocean"
 	alpha = FLUID_MAX_ALPHA
-	simulated = 0
-	density = 0
+	simulated = FALSE
+	density = FALSE
 	opacity = 0
-	anchored = 1
+	anchored = TRUE
 
 /obj/effect/flood/ex_act()
 	return

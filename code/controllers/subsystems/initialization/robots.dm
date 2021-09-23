@@ -32,8 +32,8 @@ SUBSYSTEM_DEF(robots)
 		robot_alt_titles |= capitalize(title)
 	sortTim(robot_alt_titles, /proc/cmp_text_asc)
 
-	for(var/module_type in subtypesof(/obj/item/weapon/robot_module))
-		var/obj/item/weapon/robot_module/module = module_type
+	for(var/module_type in subtypesof(/obj/item/robot_module))
+		var/obj/item/robot_module/module = module_type
 		var/module_category = initial(module.module_category)
 		var/module_name = initial(module.display_name)
 		if(module_name && module_category)

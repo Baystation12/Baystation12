@@ -1,10 +1,10 @@
-/obj/item/weapon/implant/loyalty
+/obj/item/implant/loyalty
 	name = "loyalty implant"
 	desc = "Makes you loyal or such."
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 2, TECH_ESOTERIC = 3)
 	known = 1
 
-/obj/item/weapon/implant/loyalty/get_data()
+/obj/item/implant/loyalty/get_data()
 	return {"
 	<b>Implant Specifications:</b><BR>
 	<b>Name:</b> [GLOB.using_map.company_name] Employee Management Implant<BR>
@@ -16,7 +16,7 @@
 	<b>Special Features:</b> Will prevent and cure most forms of brainwashing.<BR>
 	<b>Integrity:</b> Implant will last so long as the nanobots are inside the bloodstream."}
 
-/obj/item/weapon/implant/loyalty/implanted(mob/M)
+/obj/item/implant/loyalty/implanted(mob/M)
 	if(!M.mind || !istype(M, /mob/living/carbon/human))
 		return FALSE
 	var/mob/living/carbon/human/H = M
@@ -29,10 +29,10 @@
 		to_chat(H, "<span class='notice'>You feel a surge of loyalty towards [GLOB.using_map.company_name].</span>")
 	return TRUE
 
-/obj/item/weapon/implanter/loyalty
+/obj/item/implanter/loyalty
 	name = "implanter-loyalty"
-	imp = /obj/item/weapon/implant/loyalty
+	imp = /obj/item/implant/loyalty
 
-/obj/item/weapon/implantcase/loyalty
+/obj/item/implantcase/loyalty
 	name = "glass case - 'loyalty'"
-	imp = /obj/item/weapon/implant/loyalty
+	imp = /obj/item/implant/loyalty

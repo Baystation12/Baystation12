@@ -28,7 +28,7 @@
 	else if(reference == node2)
 		network2 = new_network
 
-	if(new_network.normal_members.Find(src))
+	if(list_find(new_network.normal_members, src))
 		return 0
 
 	new_network.normal_members += src

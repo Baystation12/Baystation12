@@ -161,7 +161,7 @@ SUBSYSTEM_DEF(jobs)
 	if(airstatus || radlevel > 0)
 		var/reply = alert(spawner, "Warning. Your selected spawn location seems to have unfavorable conditions. \
 		You may die shortly after spawning. \
-		Spawn anyway? More information: [airstatus] Radiation: [radlevel] Roentgen", "Atmosphere warning", "Abort", "Spawn anyway")
+		Spawn anyway? More information: [airstatus] Radiation: [radlevel] IU/s", "Atmosphere warning", "Abort", "Spawn anyway")
 		if(reply == "Abort")
 			return FALSE
 		else
@@ -316,7 +316,7 @@ SUBSYSTEM_DEF(jobs)
 		for(var/mob/new_player/player in unassigned_roundstart)
 			// Loop through all jobs
 			for(var/datum/job/job in shuffledoccupations) // SHUFFLE ME BABY
-				if(job && !mode.disabled_jobs.Find(job.title) )
+				if(job && !list_find(mode.disabled_jobs, job.title))
 					if(job.defer_roundstart_spawn)
 						deferred_jobs[job] = TRUE
 					else if(attempt_role_assignment(player, job, level, mode))
@@ -537,12 +537,8 @@ SUBSYSTEM_DEF(jobs)
 	if(job.req_admin_notify)
 		to_chat(H, "<b>You are playing a job that is important for Game Progression. If you have to disconnect, please notify the admins via adminhelp.</b>")
 
-	//Gives glasses to the vision impaired
-	if(H.disabilities & NEARSIGHTED)
-		var/equipped = H.equip_to_slot_or_del(new /obj/item/clothing/glasses/prescription(H), slot_glasses)
-		if(equipped)
-			var/obj/item/clothing/glasses/G = H.glasses
-			G.prescription = 7
+	if (H.disabilities & NEARSIGHTED) //Try to give glasses to the vision impaired
+		H.equip_to_slot_or_del(new /obj/item/clothing/glasses/prescription(H), slot_glasses)
 
 	BITSET(H.hud_updateflag, ID_HUD)
 	BITSET(H.hud_updateflag, IMPLOYAL_HUD)

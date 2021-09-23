@@ -34,42 +34,21 @@ exactly 117 "to_world uses" '\sto_world\('
 exactly 65 "to_world_log uses" '\sto_world_log\('
 exactly 0 "world<< uses" 'world<<|world[[:space:]]<<'
 exactly 0 "world.log<< uses" 'world.log<<|world.log[[:space:]]<<'
-exactly 108 "<< uses" '(?<!<)<<(?!<)' -P
+exactly 123 "<< uses" '(?<!<)<<(?!<)' -P
 exactly 0 "incorrect indentations" '^( {4,})' -P
 exactly 24 "text2path uses" 'text2path'
 exactly 3 "update_icon() override" '/update_icon\((.*)\)'  -P
-exactly 1 "goto use" 'goto '
-exactly 484 "spawn uses" 'spawn\s*\(\s*(-\s*)?\d*\s*\)' -P
+exactly 5 "goto use" 'goto '
+exactly 1 "NOOP match" 'NOOP'
+exactly 435 "spawn uses" 'spawn\s*\(\s*(-\s*)?\d*\s*\)' -P
 exactly 0 "tag uses" '\stag = ' -P '**/*.dmm'
-exactly 233 "/global/ or /static/ vars defined" '/(global|static)/' -P
+exactly 4 ".Replace( matches" '\.Replace(_char)?\(' -P
+exactly 5 ".Find( matches" '\.Find(_char)?\(' -P
+exactly 0 "anchored = 0/1" 'anchored\s*=\s*\d' -P
+exactly 0 "density = 0/1" 'density\s*=\s*\d' -P
+exactly 0 "emagged = 0/1" 'emagged\s*=\s*\d' -P
+exactly 0 "simulated = 0/1" 'simulated\s*=\s*\d' -P
 # With the potential exception of << if you increase any of these numbers you're probably doing it wrong
-
-broken_files=0
-while read -r file; do
-	ftype="$(uchardet "$file")"
-	case "$ftype" in
-		ASCII)
-			continue;;
-		UTF-8)
-			if diff -d "$file" <(<"$file" iconv -c -f utf8 -t iso8859-1 2>/dev/null | tr -d $'\x7F-\x9F' | iconv -c -f iso8859-1 -t utf8 2>/dev/null); then
-				continue
-			else
-				echo "$file contains Unicode characters outside the ISO 8859-1 character set"
-				(( broken_files = broken_files + 1 ))
-			fi;;
-		*)
-			if diff -d "$file" <(<"$file" tr -d $'\x7F-\x9F' | iconv -c -f iso8859-1 -t utf8 2>/dev/null | iconv -c -f utf8 -t iso8859-1 2>/dev/null); then
-				continue
-			else
-				echo "$file contains characters outside the ISO 8859-1 character set"
-				(( broken_files = broken_files + 1 ))
-			fi;;
-	esac
-done < <(find . -name '*.dm')
-echo "$broken_files files with invalid characters"
-if (( broken_files > 0 )); then
-	FAILED=1
-fi
 
 num=`find ./html/changelogs -not -name "*.yml" | wc -l`
 echo "$num non-yml files (expecting exactly 2)"

@@ -11,6 +11,7 @@
 	var/message_class = "none" //the span class applied to the chosen message
 	var/paused = TRUE
 	var/atmos_immune = FALSE //if the mobs are immune to all atmospheric conditions
+	var/faction = null //faction of the mob, null = default faction
 
 
 /datum/mob_spawner/proc/copy()
@@ -22,10 +23,11 @@
 	contents["message"] = messages
 	contents["message_class"] = message_class
 	contents["radius"] = radius
+	contents["atmos_immune"] = atmos_immune
+	contents["faction"] = faction
 	contents["spawn_count"] = spawn_count
 	contents["paused"] = paused
 	contents["next_spawn_time"] = next_spawn_time
-	contents["atmos_immune"] = atmos_immune
 
 	return contents
 
@@ -41,9 +43,10 @@
 	message_class = contents["message_class"]
 	radius = contents["radius"]
 	spawn_count = contents["spawn_count"]
+	atmos_immune = contents["atmos_immune"]
+	faction = contents["faction"]
 	paused = contents["paused"]
 	next_spawn_time = contents["next_spawn_time"]
-	atmos_immune = contents["atmos_immune"]
 
 	if (!paused)
 		START_PROCESSING(SSprocessing, src)
@@ -74,6 +77,10 @@
 			return
 
 		M = new M(T)
+
+		if (faction)
+			M.faction = faction
+
 		if(atmos_immune)
 			M.min_gas = null
 			M.max_gas = null

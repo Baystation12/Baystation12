@@ -19,6 +19,9 @@
 ## The number of away sites to pick for the overmap. Default 3
 #AWAY_SITE_BUDGET 3
 
+## The number of players subtracted from the player budget for away sites by the main map. Default 12
+#MIN_OFFMAP_PLAYERS 12
+
 ## The names of various entities to use for reports, listing, etc.
 #STATION_NAME Sev Torch
 #STATION_SHORT Torch

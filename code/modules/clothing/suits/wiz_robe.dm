@@ -66,7 +66,7 @@
 		bio = ARMOR_BIO_MINOR,
 		rad = ARMOR_RAD_MINOR
 		)
-	allowed = list(/obj/item/weapon/teleportation_scroll)
+	allowed = list(/obj/item/teleportation_scroll)
 	siemens_coefficient = 0.8
 	wizard_garb = TRUE
 

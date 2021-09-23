@@ -43,29 +43,29 @@
 
 	return "Your bats are now stronger."
 
-/spell/aoe_turf/conjure/summon/bear
-	name = "Summon Bear"
-	desc = "This spell summons a permanent bear companion that will follow your orders."
-	feedback = "BR"
-	charge_max = 3000 //5 minutes because this is a REALLY powerful spell. May tone it down/up.
-	spell_flags = NEEDSCLOTHES
-	invocation = "REA'YO GOR DAYA!"
-	invocation_type = SpI_SHOUT
-	level_max = list(Sp_TOTAL = 4, Sp_SPEED = 0, Sp_POWER = 4)
+// /spell/aoe_turf/conjure/summon/bear
+// 	name = "Summon Bear"
+// 	desc = "This spell summons a permanent bear companion that will follow your orders."
+// 	feedback = "BR"
+// 	charge_max = 3000 //5 minutes because this is a REALLY powerful spell. May tone it down/up.
+// 	spell_flags = NEEDSCLOTHES
+// 	invocation = "REA'YO GOR DAYA!"
+// 	invocation_type = SpI_SHOUT
+// 	level_max = list(Sp_TOTAL = 4, Sp_SPEED = 0, Sp_POWER = 4)
 
-	range = 0
+// 	range = 0
 
-	name_summon = 1
+// 	name_summon = 1
 
-	summon_amt = 1
-	summon_type = list(/mob/living/simple_animal/hostile/commanded/bear)
-	newVars = list("maxHealth" = 15,
-				"health" = 15,
-				"melee_damage_lower" = 10,
-				"melee_damage_upper" = 10,
-				)
+// 	summon_amt = 1
+// 	summon_type = list(/mob/living/simple_animal/hostile/commanded/bear)
+// 	newVars = list("maxHealth" = 15,
+// 				"health" = 15,
+// 				"melee_damage_lower" = 10,
+// 				"melee_damage_upper" = 10,
+// 				)
 
-	hud_state = "wiz_bear"
+// 	hud_state = "wiz_bear"
 
 /spell/aoe_turf/conjure/summon/bear/before_cast()
 	..()

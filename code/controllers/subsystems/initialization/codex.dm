@@ -45,7 +45,7 @@ SUBSYSTEM_DEF(codex)
 	. = ..()
 
 /datum/controller/subsystem/codex/proc/parse_links(string, viewer)
-	while(linkRegex.Find(string))
+	while(regex_find(linkRegex, string))
 		var/key = linkRegex.group[4]
 		if(linkRegex.group[2])
 			key = linkRegex.group[3]

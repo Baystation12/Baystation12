@@ -378,7 +378,7 @@
 //helmets and other such trash
 
 /obj/item/clothing/head/helmet/solgov
-	starting_accessories = list(/obj/item/clothing/accessory/armor/helmcover/blue/sol)
+	accessories = list(/obj/item/clothing/accessory/armor/helmcover/blue/sol)
 
 /obj/item/clothing/head/helmet/solgov/security
 	name = "security helmet"
@@ -386,7 +386,7 @@
 	icon_state = "helmet_security"
 	icon = 'maps/torch/icons/obj/obj_head_solgov.dmi'
 	item_icons = list(slot_head_str = 'maps/torch/icons/mob/onmob_head_solgov.dmi')
-	starting_accessories = null
+	accessories = null
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_head_helmet_unathi.dmi'
 		)
@@ -397,13 +397,13 @@
 	icon_state = "helmet_command"
 	icon = 'maps/torch/icons/obj/obj_head_solgov.dmi'
 	item_icons = list(slot_head_str = 'maps/torch/icons/mob/onmob_head_solgov.dmi')
-	starting_accessories = null
+	accessories = null
 
 /obj/item/clothing/head/helmet/solgov/pilot
 	name = "pilot's helmet"
 	desc = "A pilot's helmet for operating the cockpit in style. For when you want to protect your noggin AND look stylish."
 	icon_state = "pilotgov"
-	starting_accessories = null
+	accessories = null
 
 /obj/item/clothing/head/helmet/solgov/pilot/fleet
 	name = "fleet pilot's helmet"
@@ -411,7 +411,7 @@
 	icon_state = "pilotfleet"
 	icon = 'maps/torch/icons/obj/obj_head_solgov.dmi'
 	item_icons = list(slot_head_str = 'maps/torch/icons/mob/onmob_head_solgov.dmi')
-	starting_accessories = null
+	accessories = null
 
 /obj/item/clothing/head/helmet/space/void/exploration
 	camera = /obj/machinery/camera/network/exploration
@@ -419,6 +419,7 @@
 //SolGov Hardsuits
 
 /obj/item/clothing/head/helmet/space/void/engineering/alt/sol
+	light_overlay = "helmet_light_alt"
 	icon = 'maps/torch/icons/obj/obj_head_solgov.dmi'
 	item_icons = list(slot_head_str = 'maps/torch/icons/mob/onmob_head_solgov.dmi')
 	sprite_sheets = list(
@@ -431,6 +432,7 @@
 		)
 
 /obj/item/clothing/head/helmet/space/void/atmos/alt/sol
+	light_overlay = "helmet_light_alt"
 	icon = 'maps/torch/icons/obj/obj_head_solgov.dmi'
 	item_icons = list(slot_head_str = 'maps/torch/icons/mob/onmob_head_solgov.dmi')
 	sprite_sheets = list(
@@ -443,6 +445,7 @@
 		)
 
 /obj/item/clothing/head/helmet/space/void/pilot/sol
+	light_overlay = "helmet_light_alt"
 	icon = 'maps/torch/icons/obj/obj_head_solgov.dmi'
 	item_icons = list(slot_head_str = 'maps/torch/icons/mob/onmob_head_solgov.dmi')
 	sprite_sheets = list(
@@ -455,6 +458,7 @@
 		)
 
 /obj/item/clothing/head/helmet/space/void/medical/alt/sol
+	light_overlay = "helmet_light_green_alt"
 	icon = 'maps/torch/icons/obj/obj_head_solgov.dmi'
 	item_icons = list(slot_head_str = 'maps/torch/icons/mob/onmob_head_solgov.dmi')
 	sprite_sheets = list(
@@ -465,3 +469,47 @@
 		SPECIES_UNATHI = 'maps/torch/icons/obj/unathi/obj_head_solgov_unathi.dmi',
 		SPECIES_SKRELL = 'maps/torch/icons/obj/skrell/obj_head_solgov_skrell.dmi',
 		)
+
+/obj/item/clothing/head/helmet/space/void/command
+	name = "command voidsuit helmet"
+	desc = "A light, radiation resistant voidsuit helmet commonly used among SCG uniformed services."
+	icon_state = "rig0_command"
+	item_state = "command_helm"
+	light_overlay = "helmet_light_green_alt"
+	icon = 'maps/torch/icons/obj/obj_head_solgov.dmi'
+	item_icons = list(slot_head_str = 'maps/torch/icons/mob/onmob_head_solgov.dmi')
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'maps/torch/icons/mob/unathi/onmob_head_solgov_unathi.dmi',
+		SPECIES_SKRELL = 'maps/torch/icons/mob/skrell/onmob_head_solgov_skrell.dmi',
+		)
+	sprite_sheets_obj = list(
+		SPECIES_UNATHI = 'maps/torch/icons/obj/unathi/obj_head_solgov_unathi.dmi',
+		SPECIES_SKRELL = 'maps/torch/icons/obj/skrell/obj_head_solgov_skrell.dmi',
+		)
+
+/obj/item/clothing/head/helmet/space/void/exploration
+	name = "exploration voidsuit helmet"
+	desc = "A helmet of Exoplanet Exploration Unit, standard issue for Expeditionary Corps away missions. It has an armored glass dome for superiour visibility and extra anti-radiation lining."
+	icon = 'maps/torch/icons/obj/obj_head_solgov.dmi'
+	item_icons = list(slot_head_str = 'maps/torch/icons/mob/onmob_head_solgov.dmi')
+	icon_state = "rig0_explorer"
+	item_state = "explorer_helm"
+	sprite_sheets = list(
+		SPECIES_UNATHI = 'maps/torch/icons/mob/unathi/onmob_head_solgov_unathi.dmi',
+		SPECIES_SKRELL = 'maps/torch/icons/mob/skrell/onmob_head_solgov_skrell.dmi',
+		)
+	sprite_sheets_obj = list(
+		SPECIES_UNATHI = 'maps/torch/icons/obj/unathi/obj_head_solgov_unathi.dmi',
+		SPECIES_SKRELL = 'maps/torch/icons/obj/skrell/obj_head_solgov_skrell.dmi',
+		)
+	armor = list(
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_MINOR,
+		laser = ARMOR_LASER_MINOR,
+		energy = ARMOR_ENERGY_RESISTANT,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SHIELDED,
+		rad = ARMOR_RAD_RESISTANT
+		)
+	light_overlay = "helmet_light_dual_alt"
+	tinted = FALSE

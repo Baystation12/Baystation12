@@ -52,19 +52,19 @@
 /obj/item/device/encryptionkey/headset_mining
 	name = "prospector radio encryption key"
 	icon_state = "srv_cypherkey"
-	channels = list("Exploration" = 1, "Supply" = 1)
+	channels = list("Supply" = 1, "Exploration" = 1)
 
-/obj/item/weapon/storage/box/encryptionkey/exploration
+/obj/item/storage/box/encryptionkey/exploration
 	name = "box of spare exploration radio keys"
 	desc = "A box full of exploration department radio keys."
-	startswith = list(/obj/item/weapon/screwdriver, /obj/item/device/encryptionkey/exploration = 5)
+	startswith = list(/obj/item/screwdriver, /obj/item/device/encryptionkey/exploration = 5)
 
 /obj/item/device/encryptionkey/pathfinder
 	name = "pathfinder's encryption key"
 	icon_state = "com_cypherkey"
 	channels = list("Exploration" = 1, "Command" = 1, "Science" = 1, "Hailing" = 1)
 
-/obj/item/weapon/storage/box/radiokeys
+/obj/item/storage/box/radiokeys
 	name = "box of radio encryption keys"
 	desc = "A box full of assorted encryption keys."
 	startswith = list(/obj/item/device/encryptionkey/headset_sec = 3,
@@ -72,7 +72,7 @@
 					  /obj/item/device/encryptionkey/headset_cargo = 3,
 					  /obj/item/device/encryptionkey/headset_sci = 3)
 
-/obj/item/weapon/storage/box/radiokeys/Initialize()
+/obj/item/storage/box/radiokeys/Initialize()
 	. = ..()
 	make_exact_fit()
 

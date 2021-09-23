@@ -42,7 +42,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		return 0
 	if(can_operate(src,user) && I.do_surgery(src,user)) //Surgery
 		return 1
-	return I.attack(src, user, user.zone_sel.selecting)
+	return I.attack(src, user, user.zone_sel ? user.zone_sel.selecting : ran_zone())
 
 /mob/living/carbon/human/attackby(obj/item/I, mob/user)
 	if(user == src && zone_sel.selecting == BP_MOUTH && can_devour(I, silent = TRUE))
@@ -64,12 +64,12 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	var/mob/living/attackee = null
 
 //I would prefer to rename this attack_as_weapon(), but that would involve touching hundreds of files.
-/obj/item/proc/attack(mob/living/M, mob/living/user, var/target_zone)
+/obj/item/proc/attack(mob/living/M, mob/living/user, target_zone, animate = TRUE)
 	if(!force || (item_flags & ITEM_FLAG_NO_BLUDGEON))
 		return 0
 	if(M == user && user.a_intent != I_HURT)
 		return 0
-	if (user.a_intent == I_HELP)
+	if (user.a_intent == I_HELP && !attack_ignore_harm_check)
 		return FALSE
 
 	/////////////////////////
@@ -78,8 +78,9 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		admin_attack_log(user, M, "Attacked using \a [src] (DAMTYE: [uppertext(damtype)])", "Was attacked with \a [src] (DAMTYE: [uppertext(damtype)])", "used \a [src] (DAMTYE: [uppertext(damtype)]) to attack")
 	/////////////////////////
 	user.setClickCooldown(attack_cooldown + w_class)
-	user.do_attack_animation(M)
-	if(!user.aura_check(AURA_TYPE_WEAPON, src, user))
+	if(animate)
+		user.do_attack_animation(M)
+	if(!M.aura_check(AURA_TYPE_WEAPON, src, user))
 		return 0
 
 	var/hit_zone = M.resolve_item_attack(src, user, target_zone)
@@ -103,3 +104,20 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	if(MUTATION_HULK in user.mutations)
 		power *= 2
 	return target.hit_with_weapon(src, user, power, hit_zone)
+
+/**
+ * Used to get how fast a mob should attack, and influences click delay.
+ * This is just for inheritance.
+ */
+/mob/proc/get_attack_speed()
+	return DEFAULT_ATTACK_COOLDOWN
+
+/**
+ * W is the item being used in the attack, if any. modifier is if the attack should be longer or shorter than usual, for whatever reason.
+ */
+/mob/living/get_attack_speed(var/obj/item/W)
+	var/speed = base_attack_cooldown
+	if(istype(W))
+		speed = W.attack_cooldown
+
+	return speed

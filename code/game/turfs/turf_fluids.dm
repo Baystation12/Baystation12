@@ -74,9 +74,10 @@
 			if(T) T.fluid_update(1)
 
 	// Wake up ourself!
+	var/dry_run = TRUE
 	if(flooded)
 		var/flooded_a_neighbor = 0
-		FLOOD_TURF_NEIGHBORS(src, TRUE)
+		FLOOD_TURF_NEIGHBORS(src, dry_run)
 		if(flooded_a_neighbor)
 			ADD_ACTIVE_FLUID_SOURCE(src)
 	else

@@ -1,6 +1,3 @@
-// temperature of the core of the sun
-#define FUSION_HEAT_CAP 1.57e7
-
 #define SETUP_OK 1			// All good
 #define SETUP_WARNING 2		// Something that shouldn't happen happened, but it's not critical so we will continue
 #define SETUP_ERROR 3		// Something bad happened, and it's important so we won't continue setup.
@@ -32,7 +29,7 @@
 	log_and_message_admins("## FUSION CORE SETUP - Setup initiated by [usr].")
 
 	for(var/obj/machinery/fusion_fuel_injector/mapped/injector in SSmachines.machinery)
-		injector.cur_assembly = new /obj/item/weapon/fuel_assembly/deuterium(injector)
+		injector.cur_assembly = new /obj/item/fuel_assembly/deuterium(injector)
 		injector.BeginInjecting()
 
 	var/obj/machinery/power/fusion_core/mapped/core = locate() in SSmachines.machinery

@@ -18,7 +18,7 @@ proc/empulse(turf/epicenter, heavy_range, light_range, log=0)
 		pulse.icon = 'icons/effects/effects.dmi'
 		pulse.icon_state = "emppulse"
 		pulse.SetName("emp pulse")
-		pulse.anchored = 1
+		pulse.anchored = TRUE
 		spawn(20)
 			qdel(pulse)
 

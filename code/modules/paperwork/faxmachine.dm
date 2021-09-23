@@ -13,7 +13,7 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 	idle_power_usage = 30
 	active_power_usage = 200
 
-	var/obj/item/weapon/card/id/scan = null // identification
+	var/obj/item/card/id/scan = null // identification
 	var/authenticated = 0
 	var/sendcooldown = 0 // to avoid spamming fax messages
 	var/department = "Unknown" // our department
@@ -42,7 +42,12 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 			destination = pick(GLOB.alldepartments)
 
 /obj/machinery/photocopier/faxmachine/attackby(obj/item/O as obj, mob/user as mob)
-	if(istype(O, /obj/item/weapon/card/id))
+	if(istype(O, /obj/item/paper))
+		var/obj/item/paper/P = O
+		if(!P.readable)
+			to_chat(user, SPAN_NOTICE("\The [src] beeps. Error, invalid document detected."))
+			return
+	if(istype(O, /obj/item/card/id))
 		if(!user.unEquip(O, src))
 			return
 		scan = O
@@ -132,7 +137,7 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 			scan = null
 		else
 			var/obj/item/I = user.get_active_hand()
-			if (istype(I, /obj/item/weapon/card/id) && user.unEquip(I, src))
+			if (istype(I, /obj/item/card/id) && user.unEquip(I, src))
 				scan = I
 		authenticated = 0
 		return TOPIC_REFRESH
@@ -183,11 +188,11 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 	// give the sprite some time to flick
 	sleep(20)
 
-	if (istype(incoming, /obj/item/weapon/paper))
+	if (istype(incoming, /obj/item/paper))
 		copy(incoming)
-	else if (istype(incoming, /obj/item/weapon/photo))
+	else if (istype(incoming, /obj/item/photo))
 		photocopy(incoming)
-	else if (istype(incoming, /obj/item/weapon/paper_bundle))
+	else if (istype(incoming, /obj/item/paper_bundle))
 		bundlecopy(incoming)
 	else
 		return 0
@@ -203,11 +208,11 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 
 	//recieved copies should not use toner since it's being used by admins only.
 	var/obj/item/rcvdcopy
-	if (istype(copyitem, /obj/item/weapon/paper))
+	if (istype(copyitem, /obj/item/paper))
 		rcvdcopy = copy(copyitem, 0)
-	else if (istype(copyitem, /obj/item/weapon/photo))
+	else if (istype(copyitem, /obj/item/photo))
 		rcvdcopy = photocopy(copyitem, 0)
-	else if (istype(copyitem, /obj/item/weapon/paper_bundle))
+	else if (istype(copyitem, /obj/item/paper_bundle))
 		rcvdcopy = bundlecopy(copyitem, 0)
 	else
 		visible_message("[src] beeps, \"Error transmitting message.\"")

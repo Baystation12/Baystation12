@@ -95,7 +95,7 @@
 
 /stat_silicon_subsystem
 	parent_type = /atom/movable
-	simulated = 0
+	simulated = FALSE
 	var/ui_state
 	var/datum/nano_module/subsystem
 

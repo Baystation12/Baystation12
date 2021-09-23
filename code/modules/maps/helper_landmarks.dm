@@ -52,7 +52,7 @@
 /obj/effect/landmark/delete_on_shuttle
 	var/shuttle_name
 	var/shuttle_datum
-	var/list/typetodelete = list(/obj/machinery, /obj/item/weapon/gun, /mob/living/exosuit, /obj/item/device/transfer_valve)
+	var/list/typetodelete = list(/obj/machinery, /obj/item/gun, /mob/living/exosuit, /obj/item/device/transfer_valve)
 
 /obj/effect/landmark/delete_on_shuttle/Initialize()
 	. = ..()

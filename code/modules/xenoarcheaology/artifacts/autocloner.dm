@@ -7,7 +7,7 @@
 	var/time_spent_spawning = 0
 	var/time_per_spawn = 0
 	var/last_process= 0
-	density = 1
+	density = TRUE
 	var/previous_power_state = 0
 
 	active_power_usage = 2000
@@ -26,15 +26,15 @@
 		/mob/living/simple_animal/hostile/creature)
 	else
 		spawn_type = pick(\
-		/mob/living/simple_animal/cat,
-		/mob/living/simple_animal/corgi,
-		/mob/living/simple_animal/corgi/puppy,
-		/mob/living/simple_animal/chicken,
-		/mob/living/simple_animal/cow,
+		/mob/living/simple_animal/passive/cat,
+		/mob/living/simple_animal/passive/corgi,
+		/mob/living/simple_animal/passive/corgi/puppy,
+		/mob/living/simple_animal/passive/chicken,
+		/mob/living/simple_animal/passive/cow,
 		/mob/living/simple_animal/hostile/retaliate/parrot,
 		/mob/living/simple_animal/slime,
 		/mob/living/simple_animal/crab,
-		/mob/living/simple_animal/mouse,
+		/mob/living/simple_animal/passive/mouse,
 		/mob/living/simple_animal/hostile/retaliate/goat,
 		/mob/living/simple_animal/hostile/retaliate/goose)
 

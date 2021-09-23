@@ -76,7 +76,7 @@
 		return 0
 	return 1
 
-/obj/machinery/atmospherics/omni/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
+/obj/machinery/atmospherics/omni/attackby(var/obj/item/W as obj, var/mob/user as mob)
 	if(!isWrench(W))
 		return ..()
 
@@ -218,7 +218,7 @@
 			P.network = new_network
 			break
 
-	if(new_network.normal_members.Find(src))
+	if(list_find(new_network.normal_members, src))
 		return 0
 
 	new_network.normal_members += src

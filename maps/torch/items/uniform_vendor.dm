@@ -4,15 +4,15 @@
 	icon = 'icons/obj/vending.dmi'
 	icon_state = "uniform"
 	layer = BELOW_OBJ_LAYER
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 
 	// Power
 	use_power = 1
 	idle_power_usage = 10
 	var/vend_power_usage = 150 //actuators and stuff
 
-	var/obj/item/weapon/card/id/ID
+	var/obj/item/card/id/ID
 	var/list/uniforms = list()
 	var/list/selected_outfit = list()
 	var/global/list/issued_items = list()
@@ -68,7 +68,7 @@
 			ID = null
 			selected_outfit.Cut()
 		else
-			var/obj/item/weapon/card/id/I = user.get_active_hand()
+			var/obj/item/card/id/I = user.get_active_hand()
 			if(istype(I) && user.unEquip(I, src))
 				ID = I
 		. = TOPIC_REFRESH
@@ -98,14 +98,14 @@
 	if(.)
 		attack_hand(user)
 
-/obj/machinery/uniform_vendor/attackby(var/obj/item/weapon/W, var/mob/user)
-	if(istype(W, /obj/item/weapon/clothingbag))
+/obj/machinery/uniform_vendor/attackby(var/obj/item/W, var/mob/user)
+	if(istype(W, /obj/item/clothingbag))
 		if(W.contents.len)
 			to_chat(user, "<span class='notice'>You must empty \the [W] before you can put it in \the [src].</span>")
 			return
 		to_chat(user, "<span class='notice'>You put \the [W] into \the [src]'s recycling slot.</span>")
 		qdel(W)
-	else if(istype(W, /obj/item/weapon/card/id) && !ID && user.unEquip(W, src))
+	else if(istype(W, /obj/item/card/id) && !ID && user.unEquip(W, src))
 		to_chat(user, "<span class='notice'>You slide \the [W] into \the [src]!</span>")
 		ID = W
 		attack_hand(user)
@@ -203,7 +203,7 @@
 		issued_items[user_id()] = list()
 	var/list/checkedout = issued_items[user_id()]
 	if(selected_outfit.len > 1)
-		var/obj/item/weapon/clothingbag/bag = new /obj/item/weapon/clothingbag
+		var/obj/item/clothingbag/bag = new /obj/item/clothingbag
 		for(var/item in selected_outfit)
 			new item(bag)
 			checkedout += item

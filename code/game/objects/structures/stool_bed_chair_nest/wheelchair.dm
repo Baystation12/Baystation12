@@ -2,7 +2,7 @@
 	name = "wheelchair"
 	desc = "Now we're getting somewhere."
 	icon_state = "wheelchair"
-	anchored = 0
+	anchored = FALSE
 	movement_handlers = list(/datum/movement_handler/deny_multiz, /datum/movement_handler/delay = list(2), /datum/movement_handler/move_relay_self)
 	var/driving = 0
 	var/mob/living/pulling = null
@@ -20,7 +20,7 @@
 	if(buckled_mob)
 		buckled_mob.set_dir(dir)
 
-/obj/structure/bed/chair/wheelchair/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/bed/chair/wheelchair/attackby(obj/item/W as obj, mob/user as mob)
 	if(isWrench(W) || istype(W,/obj/item/stack) || isWirecutter(W))
 		return
 	..()

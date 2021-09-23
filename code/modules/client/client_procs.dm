@@ -117,13 +117,9 @@
 /client/New(TopicData)
 	TopicData = null							//Prevent calls to client.Topic from connect
 
-	// Load goonchat
-	chatOutput = new(src)
-
 	switch (connection)
 		if ("seeker", "web") // check for invalid connection type. do nothing if valid
 		else return null
-	#if DM_VERSION >= 512
 	var/bad_version = config.minimum_byond_version && byond_version < config.minimum_byond_version
 	var/bad_build = config.minimum_byond_build && byond_build < config.minimum_byond_build
 	if (bad_build || bad_version)
@@ -136,8 +132,6 @@
 		to_chat(src, "You are attempting to connect with a broken and possibly exploitable BYOND build. Please update to the latest version at http://www.byond.com/ before trying again.")
 		qdel(src)
 		return
-
-	#endif
 
 	if(!config.guests_allowed && IsGuestKey(key))
 		alert(src,"This server doesn't allow guest accounts to play. Please go to http://www.byond.com/ and register for a key.","Guest","OK")
@@ -181,7 +175,7 @@
 
 	GLOB.using_map.map_info(src)
 
-	if (!config.event)
+	if (config.event)
 		to_chat(src, "<h1 class='alert'>Event</h1>")
 		to_chat(src, "<h2 class='alert'>An event is taking place. OOC Info:</h2>")
 		to_chat(src, "<span class='alert'>[config.event]</span>")
@@ -223,21 +217,24 @@
 	//DISCONNECT//
 	//////////////
 /client/Del()
-	ticket_panels -= src
-	if(src && watched_variables_window)
-		STOP_PROCESSING(SSprocessing, watched_variables_window)
-	if(holder)
-		holder.owner = null
-		GLOB.admins -= src
-	GLOB.ckey_directory -= ckey
-	GLOB.clients -= src
+	if (!QDELETED(src))
+		Destroy()
 	return ..()
 
+
 /client/Destroy()
+	if (holder)
+		holder.owner = null
+		GLOB.admins -= src
+	if (watched_variables_window)
+		STOP_PROCESSING(SSprocessing, watched_variables_window)
+	QDEL_NULL(chatOutput)
+	GLOB.ckey_directory -= ckey
+	ticket_panels -= src
+	GLOB.clients -= src
 	..()
 	return QDEL_HINT_HARDDEL_NOW
 
-// here because it's similar to below
 
 // Returns null if no DB connection can be established, or -1 if the requested key was not found in the database
 
@@ -361,7 +358,6 @@
 
 //send resources to the client. It's here in its own proc so we can move it around easiliy if need be
 /client/proc/send_resources()
-
 	getFiles(
 		'html/search.js',
 		'html/panels.css',
@@ -379,11 +375,13 @@
 		'html/images/fleetlogo.png',
 		'html/images/sfplogo.png'
 		)
+	addtimer(CALLBACK(src, .proc/after_send_resources), 1 SECOND)
 
+
+/client/proc/after_send_resources()
 	var/decl/asset_cache/asset_cache = decls_repository.get_decl(/decl/asset_cache)
-	spawn (10) //removing this spawn causes all clients to not get verbs.
-		//Precache the client with all other assets slowly, so as to not block other browse() calls
-		getFilesSlow(src, asset_cache.cache, register_asset = FALSE)
+	getFilesSlow(src, asset_cache.cache, register_asset = FALSE)
+
 
 mob/proc/MayRespawn()
 	return 0
@@ -399,7 +397,7 @@ client/verb/character_setup()
 	set name = "Character Setup"
 	set category = "OOC"
 	if(prefs)
-		prefs.ShowChoices(usr)
+		prefs.open_setup_window(usr)
 
 /client/proc/apply_fps(var/client_fps)
 	if(world.byond_version >= 511 && byond_version >= 511 && client_fps >= CLIENT_MIN_FPS && client_fps <= CLIENT_MAX_FPS)

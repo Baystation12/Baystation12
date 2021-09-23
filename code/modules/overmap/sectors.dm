@@ -108,7 +108,7 @@
 	name = "generic sector"
 	desc = "Sector with some stuff in it."
 	icon_state = "sector"
-	anchored = 1
+	anchored = TRUE
 
 
 /obj/effect/overmap/visitable/sector/Initialize()
@@ -134,7 +134,7 @@
 		return 1
 
 	testing("Building overmap...")
-	world.maxz++
+	INCREMENT_WORLD_Z_SIZE
 	GLOB.using_map.overmap_z = world.maxz
 
 	testing("Putting overmap on [GLOB.using_map.overmap_z]")

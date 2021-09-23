@@ -16,6 +16,17 @@
 	}\
 }
 
+#define INIT_SKIP_QDELETED if (. == INITIALIZE_HINT_QDEL) {\
+return;\
+}
+
+#define INIT_DISALLOW_TYPE(path) if (type == path) {\
+. = INITIALIZE_HINT_QDEL;\
+crash_with("disallowed type [type] created");\
+return;\
+}
+
+
 // Subsystem init_order, from highest priority to lowest priority
 // Subsystems shutdown in the reverse of the order they initialize in
 // The numbers just define the ordering, they are meaningless otherwise.
@@ -50,6 +61,8 @@
 #define SS_INIT_XENOARCH        -10
 #define SS_INIT_BAY_LEGACY      -12
 #define SS_INIT_TICKER          -20
+#define SS_INIT_AI              -21
+#define SS_INIT_AIFAST          -22
 #define SS_INIT_CHAT            -90 // Should be lower to ensure chat remains smooth during init.
 #define SS_INIT_UNIT_TESTS      -100
 
@@ -61,4 +74,5 @@
 #define RUNLEVEL_GAME 4
 #define RUNLEVEL_POSTGAME 8
 
+#define RUNLEVELS_ALL 0xffffff
 #define RUNLEVELS_DEFAULT (RUNLEVEL_SETUP | RUNLEVEL_GAME | RUNLEVEL_POSTGAME)

@@ -1,4 +1,4 @@
-/obj/item/weapon/melee/energy
+/obj/item/melee/energy
 	var/active = 0
 	var/active_force
 	var/active_throwforce
@@ -9,10 +9,10 @@
 	armor_penetration = 50
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_BLOOD
 
-/obj/item/weapon/melee/energy/can_embed()
+/obj/item/melee/energy/can_embed()
 	return FALSE
 
-/obj/item/weapon/melee/energy/Initialize()
+/obj/item/melee/energy/Initialize()
 	. = ..()
 	if(active)
 		active = FALSE
@@ -21,14 +21,14 @@
 		active = TRUE
 		deactivate()
 
-/obj/item/weapon/melee/energy/on_update_icon()
+/obj/item/melee/energy/on_update_icon()
 	. = ..()
 	if(active)
 		icon_state = active_icon
 	else
 		icon_state = initial(icon_state)
 
-/obj/item/weapon/melee/energy/proc/activate(mob/living/user)
+/obj/item/melee/energy/proc/activate(mob/living/user)
 	if(active)
 		return
 	active = TRUE
@@ -44,7 +44,7 @@
 		to_chat(user, "<span class='notice'>\The [src] is now energised.</span>")
 	set_light(0.8, 1, 2, 4, lighting_color)
 
-/obj/item/weapon/melee/energy/proc/deactivate(mob/living/user)
+/obj/item/melee/energy/proc/deactivate(mob/living/user)
 	if(!active)
 		return
 	active = FALSE
@@ -60,7 +60,7 @@
 		to_chat(user, "<span class='notice'>\The [src] deactivates!</span>")
 	set_light(0)
 
-/obj/item/weapon/melee/energy/attack_self(mob/living/user as mob)
+/obj/item/melee/energy/attack_self(mob/living/user as mob)
 	if(active)
 		if((MUTATION_CLUMSY in user.mutations) && prob(50))
 			user.visible_message("<span class='danger'>\The [user] accidentally cuts \himself with \the [src].</span>",\
@@ -78,7 +78,7 @@
 	add_fingerprint(user)
 	return
 
-/obj/item/weapon/melee/energy/get_storage_cost()
+/obj/item/melee/energy/get_storage_cost()
 	if(active)
 		return ITEM_SIZE_NO_CONTAINER
 	return ..()
@@ -86,7 +86,7 @@
 /*
  * Energy Axe
  */
-/obj/item/weapon/melee/energy/axe
+/obj/item/melee/energy/axe
 	icon = 'icons/obj/weapons/melee_energy.dmi'
 	name = "energy axe"
 	desc = "An energised battle axe."
@@ -109,14 +109,14 @@
 	edge = TRUE
 	melee_accuracy_bonus = 15
 
-/obj/item/weapon/melee/energy/axe/deactivate(mob/living/user)
+/obj/item/melee/energy/axe/deactivate(mob/living/user)
 	. = ..()
 	to_chat(user, "<span class='notice'>\The [src] is de-energised. It's just a regular axe now.</span>")
 
 /*
  * Energy Sword
  */
-/obj/item/weapon/melee/energy/sword
+/obj/item/melee/energy/sword
 	icon = 'icons/obj/weapons/melee_energy.dmi'
 	name = "energy sword"
 	desc = "May the force be within you."
@@ -137,7 +137,7 @@
 	hitsound = 'sound/weapons/blade1.ogg'
 	var/blade_color
 
-/obj/item/weapon/melee/energy/sword/Initialize()
+/obj/item/melee/energy/sword/Initialize()
 	if(!blade_color)
 		blade_color = pick("red","blue","green","purple")
 
@@ -147,34 +147,38 @@
 
 	. = ..()
 
-/obj/item/weapon/melee/energy/sword/green
+/obj/item/melee/energy/sword/green
 	blade_color = "green"
 
-/obj/item/weapon/melee/energy/sword/red
+/obj/item/melee/energy/sword/red
 	blade_color = "red"
 
-/obj/item/weapon/melee/energy/sword/blue
+/obj/item/melee/energy/sword/red/activated
+	active = TRUE
+
+/obj/item/melee/energy/sword/blue
 	blade_color = "blue"
 
-/obj/item/weapon/melee/energy/sword/purple
+/obj/item/melee/energy/sword/purple
 	blade_color = "purple"
 
-/obj/item/weapon/melee/energy/sword/dropped(var/mob/user)
+/obj/item/melee/energy/sword/dropped(mob/user)
 	..()
 	if(!istype(loc,/mob))
 		deactivate(user)
 
-/obj/item/weapon/melee/energy/sword/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
+/obj/item/melee/energy/sword/handle_shield(mob/user, damage, atom/damage_source = null, mob/attacker = null, def_zone = null, attack_text = "the attack")
+	. = ..()
 	if(.)
 		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
 		spark_system.set_up(5, 0, user.loc)
 		spark_system.start()
 		playsound(user.loc, 'sound/weapons/blade1.ogg', 50, 1)
 
-/obj/item/weapon/melee/energy/sword/get_parry_chance(mob/user)
+/obj/item/melee/energy/sword/get_parry_chance(mob/user)
 	return active ? ..() : 0
 
-/obj/item/weapon/melee/energy/sword/pirate
+/obj/item/melee/energy/sword/pirate
 	icon = 'icons/obj/weapons/melee_energy.dmi'
 	name = "energy cutlass"
 	desc = "Arrrr matey."
@@ -182,11 +186,14 @@
 	active_icon = "cutlass1"
 	lighting_color = COLOR_SABER_CUTLASS
 
+/obj/item/melee/energy/sword/pirate/activated
+	active = TRUE
+
 /*
  *Energy Blade
  */
 
-/obj/item/weapon/melee/energy/blade
+/obj/item/melee/energy/blade
 	icon = 'icons/obj/weapons/melee_energy.dmi'
 	name = "energy blade"
 	desc = "A concentrated beam of energy in the shape of a blade. Very stylish... and lethal."
@@ -198,7 +205,7 @@
 	armor_penetration = 100
 	sharp = TRUE
 	edge = TRUE
-	anchored = 1    // Never spawned outside of inventory, should be fine.
+	anchored = TRUE    // Never spawned outside of inventory, should be fine.
 	active_throwforce = 1  //Throwing or dropping the item deletes it.
 	throw_speed = 1
 	throw_range = 1
@@ -209,31 +216,31 @@
 	var/mob/living/creator
 	var/datum/effect/effect/system/spark_spread/spark_system
 
-/obj/item/weapon/melee/energy/blade/New()
+/obj/item/melee/energy/blade/New()
 	..()
 	spark_system = new /datum/effect/effect/system/spark_spread()
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
 
-/obj/item/weapon/melee/energy/blade/Initialize()
+/obj/item/melee/energy/blade/Initialize()
 	. = ..()
 	START_PROCESSING(SSobj, src)
 
-/obj/item/weapon/melee/energy/blade/Destroy()
+/obj/item/melee/energy/blade/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-/obj/item/weapon/melee/energy/blade/get_storage_cost()
+/obj/item/melee/energy/blade/get_storage_cost()
 	return ITEM_SIZE_NO_CONTAINER
 
-/obj/item/weapon/melee/energy/blade/attack_self(mob/user as mob)
+/obj/item/melee/energy/blade/attack_self(mob/user as mob)
 	user.drop_from_inventory(src)
 
-/obj/item/weapon/melee/energy/blade/dropped()
+/obj/item/melee/energy/blade/dropped()
 	..()
 	QDEL_IN(src, 0)
 
-/obj/item/weapon/melee/energy/blade/Process()
+/obj/item/melee/energy/blade/Process()
 	if(!creator || loc != creator || (creator.l_hand != src && creator.r_hand != src))
 		// Tidy up a bit.
 		if(istype(loc,/mob/living))
@@ -248,7 +255,7 @@
 			host.drop_from_inventory(src)
 		QDEL_IN(src, 0)
 
-/obj/item/weapon/melee/energy/machete
+/obj/item/melee/energy/machete
 	icon = 'icons/obj/weapons/melee_energy.dmi'
 	name = "energy machete"
 	desc = "A machete handle that extends out into a long, purple machete blade. It appears to be Skrellian in origin."

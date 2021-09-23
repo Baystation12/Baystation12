@@ -64,14 +64,14 @@
 /datum/turbolift/proc/do_move()
 	next_process = null
 
-	var/current_floor_index = floors.Find(current_floor)
+	var/current_floor_index = list_find(floors, current_floor)
 
 	if(!target_floor)
 		if(!queued_floors || !queued_floors.len)
 			return 0
 		target_floor = queued_floors[1]
 		queued_floors -= target_floor
-		if(current_floor_index < floors.Find(target_floor))
+		if(current_floor_index < list_find(floors, target_floor))
 			moving_upwards = 1
 		else
 			moving_upwards = 0

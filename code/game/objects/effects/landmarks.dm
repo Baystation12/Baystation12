@@ -2,9 +2,9 @@
 	name = "landmark"
 	icon = 'icons/effects/landmarks.dmi'
 	icon_state = "x2"
-	anchored = 1.0
+	anchored = TRUE
 	unacidable = TRUE
-	simulated = 0
+	simulated = FALSE
 	invisibility = 101
 	var/delete_me = 0
 
@@ -82,7 +82,7 @@
 	name = "start"
 	icon = 'icons/mob/screen1.dmi'
 	icon_state = "x"
-	anchored = 1.0
+	anchored = TRUE
 	invisibility = 101
 
 /obj/effect/landmark/start/New()
@@ -107,7 +107,7 @@
 	new /obj/item/clothing/gloves/chameleon(src.loc)
 	new /obj/item/clothing/suit/chameleon(src.loc)
 	new /obj/item/clothing/head/chameleon(src.loc)
-	new /obj/item/weapon/storage/backpack/chameleon(src.loc)
+	new /obj/item/storage/backpack/chameleon(src.loc)
 	delete_me = 1
 
 /obj/effect/landmark/costume/gladiator/New()
@@ -119,7 +119,7 @@
 	new /obj/item/clothing/under/gimmick/rank/captain/suit(src.loc)
 	new /obj/item/clothing/head/flatcap(src.loc)
 	new /obj/item/clothing/suit/storage/toggle/labcoat/mad(src.loc)
-	new /obj/item/clothing/glasses/prescription/gglasses(src.loc)
+	new /obj/item/clothing/glasses/green(src.loc)
 	delete_me = 1
 
 /obj/effect/landmark/costume/elpresidente/New()
@@ -161,7 +161,7 @@
 	var/CHOICE= pick( /obj/item/clothing/head/bowler, /obj/item/clothing/head/that)
 	new CHOICE(src.loc)
 	new /obj/item/clothing/shoes/black(src.loc)
-	new /obj/item/weapon/cane(src.loc)
+	new /obj/item/cane(src.loc)
 	new /obj/item/clothing/under/sl_suit(src.loc)
 	new /obj/item/clothing/mask/fakemoustache(src.loc)
 	delete_me = 1
@@ -214,13 +214,13 @@
 /obj/effect/landmark/costume/cutewitch/New()
 	new /obj/item/clothing/under/sundress(src.loc)
 	new /obj/item/clothing/head/witchwig(src.loc)
-	new /obj/item/weapon/staff/broom(src.loc)
+	new /obj/item/staff/broom(src.loc)
 	delete_me = 1
 
 /obj/effect/landmark/costume/fakewizard/New()
 	new /obj/item/clothing/suit/wizrobe/fake(src.loc)
 	new /obj/item/clothing/head/wizard/fake(src.loc)
-	new /obj/item/weapon/staff/(src.loc)
+	new /obj/item/staff/(src.loc)
 	delete_me = 1
 
 /obj/effect/landmark/costume/sexyclown/New()

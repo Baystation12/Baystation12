@@ -1,4 +1,4 @@
-/obj/item/weapon/zipgunframe
+/obj/item/zipgunframe
 	name = "zip gun frame"
 	desc = "A half-finished zip gun."
 	icon = 'icons/obj/crafting_icons.dmi'
@@ -6,7 +6,7 @@
 	item_state = "zipgun-solid"
 
 /decl/crafting_stage/pipe/zipgun
-	begins_with_object_type = /obj/item/weapon/zipgunframe
+	begins_with_object_type = /obj/item/zipgunframe
 	item_desc = "A half-built zipgun with a barrel loosely fitted to the stock."
 	item_icon_state = "zipgun1"
 	progress_message = "You fit the pipe into the zipgun as a crude barrel."
@@ -27,4 +27,4 @@
 
 /decl/crafting_stage/screwdriver/zipgun
 	progress_message = "You secure the trigger assembly and finish off the zipgun."
-	product = /obj/item/weapon/gun/projectile/pirate/unloaded
+	product = /obj/item/gun/projectile/pirate/unloaded

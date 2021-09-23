@@ -12,7 +12,7 @@
 	var/roundstart                 // If set, seed will not display variety number.
 	var/mysterious                 // Only used for the random seed packets.
 	var/scanned                    // If it was scanned with a plant analyzer.
-	var/can_self_harvest = 0       // Mostly used for living mobs.
+	var/can_self_harvest = FALSE   // Mostly used for living mobs.
 	var/growth_stages = 0          // Number of stages the plant passes through before it is mature.
 	var/list/traits = list()       // Initialized in New()
 	var/list/mutants               // Possible predefined mutant varieties, if any.
@@ -111,10 +111,10 @@
 		return
 
 	if(!istype(target))
-		if(istype(target, /mob/living/simple_animal/mouse))
+		if(istype(target, /mob/living/simple_animal/passive/mouse))
 			new /obj/item/remains/mouse(get_turf(target))
 			qdel(target)
-		else if(istype(target, /mob/living/simple_animal/lizard))
+		else if(istype(target, /mob/living/simple_animal/passive/lizard))
 			new /obj/item/remains/lizard(get_turf(target))
 			qdel(target)
 		return
@@ -475,6 +475,7 @@
 			/datum/reagent/zombie
 			)
 		banned_chems += subtypesof(/datum/reagent/ethanol)
+		banned_chems += subtypesof(/datum/reagent/zombie)
 		banned_chems += subtypesof(/datum/reagent/tobacco)
 		banned_chems += typesof(/datum/reagent/drink)
 		banned_chems += typesof(/datum/reagent/nutriment)
@@ -758,15 +759,15 @@
 			if(has_mob_product)
 				product = new has_mob_product(get_turf(user),name)
 			else
-				product = new /obj/item/weapon/reagent_containers/food/snacks/grown(get_turf(user),name)
+				product = new /obj/item/reagent_containers/food/snacks/grown(get_turf(user),name)
 				product.w_class = fruit_size
 			. += product
 
 			if(get_trait(TRAIT_PRODUCT_COLOUR))
 				if(!istype(product, /mob))
 					product.color = get_trait(TRAIT_PRODUCT_COLOUR)
-					if(istype(product,/obj/item/weapon/reagent_containers/food))
-						var/obj/item/weapon/reagent_containers/food/food = product
+					if(istype(product,/obj/item/reagent_containers/food))
+						var/obj/item/reagent_containers/food/food = product
 						food.filling_color = get_trait(TRAIT_PRODUCT_COLOUR)
 
 			if(mysterious)
@@ -783,8 +784,8 @@
 			if(istype(product,/mob/living))
 				product.visible_message("<span class='notice'>The pod disgorges [product]!</span>")
 				handle_living_product(product)
-				if(istype(product,/mob/living/simple_animal/mushroom)) // Gross.
-					var/mob/living/simple_animal/mushroom/mush = product
+				if(istype(product,/mob/living/simple_animal/passive/mushroom)) // Gross.
+					var/mob/living/simple_animal/passive/mushroom/mush = product
 					mush.seed = src
 
 // When the seed in this machine mutates/is modified, the tray seed value
@@ -857,7 +858,7 @@
 	if(leaves)
 		var/image/I = image(res.icon, "[plant_icon]-[growth_stage]-leaves")
 		I.color = leaves
-		I.appearance_flags = RESET_COLOR
+		I.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_COLOR
 		res.overlays += I
 
 	return res

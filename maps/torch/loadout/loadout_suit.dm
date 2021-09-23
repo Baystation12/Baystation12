@@ -8,7 +8,7 @@
 	allowed_roles = MEDICAL_ROLES
 
 /datum/gear/suit/trenchcoat
-	allowed_roles = list(/datum/job/assistant, /datum/job/bartender, /datum/job/detective, /datum/job/merchant, /datum/job/submap/bearcat_captain, /datum/job/submap/bearcat_crewman, /datum/job/submap/CTI_pilot, /datum/job/submap/CTI_engineer, /datum/job/submap/CTI_Undergraduate_Xenoscience_Researcher,  /datum/job/submap/colonist, /datum/job/submap/pod)
+	allowed_roles = list(/datum/job/assistant, /datum/job/bartender, /datum/job/detective, /datum/job/merchant, /datum/job/submap/bearcat_captain, /datum/job/submap/bearcat_crewman, /datum/job/submap/colonist, /datum/job/submap/pod)
 	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/suit/poncho

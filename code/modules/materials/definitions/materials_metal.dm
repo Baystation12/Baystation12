@@ -48,7 +48,7 @@
 		)
 	ore_icon_overlay = "nugget"
 	sale_price = 3
-	value = 40	
+	value = 40
 
 /material/gold/bronze //placeholder for ashtrays
 	name = MATERIAL_BRONZE
@@ -110,8 +110,7 @@
 	lore_text = "A strong, flexible alloy of iron and carbon. Probably the single most fundamentally useful and ubiquitous substance in human space."
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/steel
-	integrity = 150
-	brute_armor = 5
+	brute_armor = 7
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
 	icon_colour = COLOR_STEEL
@@ -177,7 +176,7 @@
 	icon_reinf = "reinf_over"
 	icon_colour = "#a8a9b2"
 	explosion_resistance = 25
-	brute_armor = 6
+	brute_armor = 8
 	burn_armor = 10
 	hardness = MATERIAL_VERY_HARD
 	weight = 23

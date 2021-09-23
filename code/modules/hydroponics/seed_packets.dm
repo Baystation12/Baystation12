@@ -285,6 +285,10 @@ var/global/list/plant_seed_sprites = list()
 /obj/item/seeds/bamboo
 	seed_type = "bamboo"
 
+/obj/item/seeds/breather/seed_type = "breather"
+
+/obj/item/seeds/resin/seed_type = "resinplant"
+
 // fruit expansion
 
 /obj/item/seeds/melonseed

@@ -35,7 +35,7 @@
 		from the material deconstructor to the particle beam generator.\
 		<br>A sign on it reads: <i>EXPLOSIVE! DO NOT OVERHEAT!</i>"
 	icon_state = "middle"
-	maximum_component_parts = list(/obj/item/weapon/stock_parts = 15)
+	maximum_component_parts = list(/obj/item/stock_parts = 15)
 
 /obj/machinery/disperser/back
 	name = "obstruction field disperser material deconstructor"

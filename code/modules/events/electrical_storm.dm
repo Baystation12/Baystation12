@@ -60,7 +60,7 @@
 
 		// Relatively small chance to emag the apc as apc_damage event does.
 		if(prob(0.2 * severity))
-			T.emagged = 1
+			T.emagged = TRUE
 			T.update_icon()
 
 		if(T.is_critical)

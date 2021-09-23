@@ -142,7 +142,7 @@
 
 	engage_string = "Fabricate Net"
 
-	fabrication_type = /obj/item/weapon/energy_net
+	fabrication_type = /obj/item/energy_net
 	use_power_cost = 50 KILOWATTS
 	origin_tech = list(TECH_MATERIAL = 5, TECH_POWER = 6, TECH_MAGNET = 5, TECH_ESOTERIC = 4, TECH_ENGINEERING = 6)
 

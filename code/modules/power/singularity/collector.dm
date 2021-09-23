@@ -6,10 +6,10 @@ var/global/list/rad_collectors = list()
 	desc = "A device which uses radiation and phoron to produce power."
 	icon = 'icons/obj/machines/rad_collector.dmi'
 	icon_state = "ca"
-	anchored = 0
-	density = 1
+	anchored = FALSE
+	density = TRUE
 	req_access = list(access_engine_equip)
-	var/obj/item/weapon/tank/phoron/P = null
+	var/obj/item/tank/phoron/P = null
 
 	var/health = 100
 	var/max_safe_temp = 1000 + T0C
@@ -89,7 +89,7 @@ var/global/list/rad_collectors = list()
 		to_chat(user, "<span class='warning'>The controls are locked!</span>")
 
 /obj/machinery/power/rad_collector/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/weapon/tank/phoron))
+	if(istype(W, /obj/item/tank/phoron))
 		if(!src.anchored)
 			to_chat(user, "<span class='warning'>The [src] needs to be secured to the floor first.</span>")
 			return 1
@@ -123,7 +123,7 @@ var/global/list/rad_collectors = list()
 		else
 			disconnect_from_network()
 		return 1
-	else if(istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/modular_computer))
+	else if(istype(W, /obj/item/card/id)||istype(W, /obj/item/modular_computer))
 		if (src.allowed(user))
 			if(active)
 				src.locked = !src.locked
@@ -171,7 +171,7 @@ var/global/list/rad_collectors = list()
 
 /obj/machinery/power/rad_collector/proc/eject()
 	locked = 0
-	var/obj/item/weapon/tank/phoron/Z = src.P
+	var/obj/item/tank/phoron/Z = src.P
 	if (!Z)
 		return
 	Z.dropInto(loc)

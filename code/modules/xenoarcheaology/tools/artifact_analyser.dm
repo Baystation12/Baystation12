@@ -3,8 +3,8 @@
 	desc = "Studies the emissions of anomalous materials to discover their uses."
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "xenoarch_console"
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 	var/scan_in_progress = 0
 	var/scan_num = 0
 	var/obj/scanned_obj
@@ -48,8 +48,10 @@
 
 	dat += "<br>"
 	dat += "<hr>"
-	dat += "<a href='?src=\ref[src]'>Refresh</a> <a href='?src=\ref[src];close=1'>Close</a>"
-	show_browser(user, dat, "window=artanalyser;size=450x500")
+	dat += "<a href='?src=\ref[src];close=1'>Close</a>"
+	var/datum/browser/popup = new(user, "artanalyser", "Artifact Analyzer", 450, 500)
+	popup.set_content(dat)
+	popup.open()
 	user.set_machine(src)
 	onclose(user, "artanalyser")
 
@@ -69,17 +71,17 @@
 			results = get_scan_info(scanned_object)
 
 		src.visible_message("<b>[name]</b> states, \"Scanning complete.\"")
-		var/obj/item/weapon/paper/P = new(src.loc)
+		var/obj/item/paper/P = new(src.loc)
 		P.SetName("[src] report #[++report_num]")
 		P.info = "<b>[src] analysis report #[report_num]</b><br>"
 		P.info += "<br>"
 		P.info += "\icon[scanned_object] [results]"
-		P.stamped = list(/obj/item/weapon/stamp)
+		P.stamped = list(/obj/item/stamp)
 		P.queue_icon_update()
 
 		if(scanned_object && istype(scanned_object, /obj/machinery/artifact))
 			var/obj/machinery/artifact/A = scanned_object
-			A.anchored = 0
+			A.anchored = FALSE
 			A.being_used = 0
 			scanned_object = null
 
@@ -99,7 +101,7 @@
 					if(A.being_used)
 						artifact_in_use = 1
 					else
-						A.anchored = 1
+						A.anchored = TRUE
 						A.being_used = 1
 
 				if(artifact_in_use)
@@ -140,8 +142,6 @@
 			return "Tribal pylon - subject resembles statues/emblems built by cargo cult civilisations to honour energy systems from post-warp civilisations."
 		if(/obj/machinery/replicator)
 			return "Automated construction unit - subject appears to be able to synthesize various objects given a material, some with simple internal circuitry. Method unknown."
-		if(/obj/structure/crystal)
-			return "Crystal formation - pseudo-organic crystalline matrix, unlikely to have formed naturally. No known technology exists to synthesize this exact composition."
 		if(/obj/machinery/artifact)
 			var/obj/machinery/artifact/A = scanned_obj
 			var/out = "Anomalous alien device - composed of an unknown alloy.<br><br>"
@@ -149,9 +149,12 @@
 			if(A.my_effect)
 				out += A.my_effect.getDescription()
 
-			if(A.secondary_effect && A.secondary_effect.activated)
+			if(A.secondary_effect)
 				out += "<br><br>Internal scans indicate ongoing secondary activity operating independently from primary systems.<br><br>"
 				out += A.secondary_effect.getDescription()
+
+			if (A.damage_desc)
+				out += "<br><br>[A.damage_desc]"
 
 			return out
 		else

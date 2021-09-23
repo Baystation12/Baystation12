@@ -9,15 +9,17 @@
 	desc = ""
 	icon = 'icons/obj/biogenerator.dmi'
 	icon_state = "biogen-stand"
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	idle_power_usage = 40
 	base_type = /obj/machinery/biogenerator
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	machine_name = "biogenerator"
+	machine_desc = "Processes fruits, veggies, and other produce into raw biomatter that can be converted into food products and leather items."
 	var/processing = 0
-	var/obj/item/weapon/reagent_containers/glass/beaker = null
+	var/obj/item/reagent_containers/glass/beaker = null
 	var/points = 0
 	var/state = BG_READY
 	var/denied = 0
@@ -27,20 +29,20 @@
 	var/capacity = 10   //How many ingredients can we store?
 	var/list/products = list(
 		"Food" = list(
-			/obj/item/weapon/reagent_containers/food/drinks/milk/smallcarton = 30,
-			/obj/item/weapon/reagent_containers/food/drinks/milk = 50,
-			/obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh = 50,
-			/obj/item/weapon/storage/fancy/egg_box = 300),
+			/obj/item/reagent_containers/food/drinks/small_milk = 30,
+			/obj/item/reagent_containers/food/drinks/milk = 50,
+			/obj/item/reagent_containers/food/snacks/meat/syntiflesh = 50,
+			/obj/item/storage/fancy/egg_box = 300),
 		"Nutrients" = list(
-			/obj/item/weapon/reagent_containers/glass/bottle/eznutrient = 60,
-			/obj/item/weapon/reagent_containers/glass/bottle/left4zed = 120,
-			/obj/item/weapon/reagent_containers/glass/bottle/robustharvest = 120),
+			/obj/item/reagent_containers/glass/bottle/eznutrient = 60,
+			/obj/item/reagent_containers/glass/bottle/left4zed = 120,
+			/obj/item/reagent_containers/glass/bottle/robustharvest = 120),
 		"Leather" = list(
-			/obj/item/weapon/storage/wallet/leather = 100,
+			/obj/item/storage/wallet/leather = 100,
 			/obj/item/clothing/gloves/thick/botany = 250,
-			/obj/item/weapon/storage/belt/utility = 300,
-			/obj/item/weapon/storage/backpack/satchel = 400,
-			/obj/item/weapon/storage/bag/cash = 400,
+			/obj/item/storage/belt/utility = 300,
+			/obj/item/storage/backpack/satchel = 400,
+			/obj/item/storage/bag/cash = 400,
 			/obj/item/clothing/shoes/workboots = 400,
 			/obj/item/clothing/shoes/leather = 400,
 			/obj/item/clothing/shoes/dress = 400,
@@ -52,7 +54,7 @@
 /obj/machinery/biogenerator/New()
 	..()
 	create_reagents(1000)
-	beaker = new /obj/item/weapon/reagent_containers/glass/bottle(src)
+	beaker = new /obj/item/reagent_containers/glass/bottle(src)
 
 /obj/machinery/biogenerator/on_reagent_change()			//When the reagents change, change the icon as well.
 	update_icon()
@@ -79,7 +81,7 @@
 		return
 	if(processing)
 		to_chat(user, "<span class='notice'>\The [src] is currently processing.</span>")
-	if(istype(O, /obj/item/weapon/reagent_containers/glass))
+	if(istype(O, /obj/item/reagent_containers/glass))
 		if(beaker)
 			to_chat(user, "<span class='notice'>]The [src] is already loaded.</span>")
 			return TRUE
@@ -91,10 +93,10 @@
 
 	if(ingredients >= capacity)
 		to_chat(user, "<span class='notice'>\The [src] is already full! Activate it.</span>")
-	else if(istype(O, /obj/item/weapon/storage/plants))
-		var/obj/item/weapon/storage/plants/P = O
+	else if(istype(O, /obj/item/storage/plants))
+		var/obj/item/storage/plants/P = O
 		var/hadPlants = 0
-		for(var/obj/item/weapon/reagent_containers/food/snacks/grown/G in P.contents)
+		for(var/obj/item/reagent_containers/food/snacks/grown/G in P.contents)
 			hadPlants = 1
 			P.remove_from_storage(G, src, 1) //No UI updates until we are all done.
 			ingredients++
@@ -108,7 +110,7 @@
 			to_chat(user, "<span class='notice'>You empty \the [P] into \the [src].</span>")
 
 
-	else if(!istype(O, /obj/item/weapon/reagent_containers/food/snacks/grown))
+	else if(!istype(O, /obj/item/reagent_containers/food/snacks/grown))
 		to_chat(user, "<span class='notice'>You cannot put this in \the [src].</span>")
 	else if(user.unEquip(O, src))
 		ingredients++
@@ -190,7 +192,7 @@
 		return
 
 	var/S = 0
-	for(var/obj/item/weapon/reagent_containers/food/snacks/grown/I in contents)
+	for(var/obj/item/reagent_containers/food/snacks/grown/I in contents)
 		S += 5
 		ingredients--
 		if(I.reagents.get_reagent_amount(/datum/reagent/nutriment) < 0.1)
@@ -227,5 +229,5 @@
 
 /obj/machinery/biogenerator/RefreshParts()
 	..()
-	build_eff = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator), 1, 10)
-	eat_eff = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin), 1, 10)
+	build_eff = Clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator), 1, 10)
+	eat_eff = Clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 1, 10)

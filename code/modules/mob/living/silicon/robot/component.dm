@@ -113,7 +113,7 @@
 /datum/robot_component/cell
 	name = "power cell"
 	max_damage = 50
-	var/obj/item/weapon/cell/stored_cell = null
+	var/obj/item/cell/stored_cell = null
 
 /datum/robot_component/cell/destroy()
 	..()
@@ -235,7 +235,7 @@
 	burn += burn_amt
 	total_dam = brute+burn
 	if(total_dam >= max_dam)
-		var/obj/item/weapon/stock_parts/circuitboard/broken/broken_device = new (get_turf(src))
+		var/obj/item/stock_parts/circuitboard/broken/broken_device = new (get_turf(src))
 		if(icon_state_broken != "broken")
 			broken_device.icon = src.icon
 			broken_device.icon_state = icon_state_broken
@@ -248,33 +248,42 @@
 
 /obj/item/robot_parts/robot_component/binary_communication_device
 	name = "binary communication device"
+	desc = "A module used for binary communications over encrypted frequencies, commonly used by synthetic robots."
 	icon_state = "binradio"
 	icon_state_broken = "binradio_broken"
 
 /obj/item/robot_parts/robot_component/actuator
 	name = "actuator"
+	desc = "A modular, hydraulic actuator used by exosuits and robots alike for movement and manipulation."
 	icon_state = "motor"
 	icon_state_broken = "motor_broken"
 
 /obj/item/robot_parts/robot_component/armour
 	name = "armour plating"
+	desc = "A pair of flexible, adaptable armor plates, used to protect the internals of robots."
 	icon_state = "armor"
 	icon_state_broken = "armor_broken"
 
 /obj/item/robot_parts/robot_component/armour/light
 	name = "light-weight armour plating"
+	desc = "A pair of flexible, light armor plates, used to protect the internals of robots equipped with anti-gravity frames."
+	icon_state = "armor_l"
+	icon_state_broken = "armor_l_broken"
 
 /obj/item/robot_parts/robot_component/camera
 	name = "camera"
+	desc = "A modified camera module used as a visual receptor for robots and exosuits, also serving as a relay for wireless video feed."
 	icon_state = "camera"
 	icon_state_broken = "camera_broken"
 
 /obj/item/robot_parts/robot_component/diagnosis_unit
 	name = "diagnosis unit"
+	desc = "An internal computer and sensors used by robots and exosuits to accurately diagnose any system discrepancies on their components."
 	icon_state = "analyser"
 	icon_state_broken = "analyser_broken"
 
 /obj/item/robot_parts/robot_component/radio
 	name = "radio"
+	desc = "A modular, multi-frequency radio used by robots and exosuits to enable communication systems. Comes with built-in subspace receivers."
 	icon_state = "radio"
 	icon_state_broken = "radio_broken"

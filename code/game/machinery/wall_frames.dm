@@ -9,7 +9,7 @@
 	var/refund_type = /obj/item/stack/material/steel
 	var/reverse = 0 //if resulting object faces opposite its dir (like light fixtures)
 
-/obj/item/frame/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/frame/attackby(obj/item/W as obj, mob/user as mob)
 	if(isWrench(W))
 		new refund_type( get_turf(src.loc), refund_amt)
 		qdel(src)
@@ -63,6 +63,22 @@
 	desc = "Used for building air alarms."
 	build_machine_type = /obj/machinery/alarm
 
+/obj/item/frame/intercom
+	name = "intercom frame"
+	desc = "Used for building intercoms."
+	icon = 'icons/obj/radio.dmi'
+	icon_state = "intercom-f"
+	build_machine_type = /obj/item/device/radio/intercom
+
+/obj/item/frame/intercom/get_mechanics_info()
+	. = ..()
+	. += "<p>To construct:</p>\
+			<ol>\
+				<li>Attach the frame to the wall</li>\
+				<li>Install the circuitboard into the frame</li>\
+				<li>Use cables to wire the intercom</li>\
+				<li>Screwdriver to close the panel</li>\
+			</ol>"
 /obj/item/frame/light
 	name = "light fixture frame"
 	desc = "Used for building lights."

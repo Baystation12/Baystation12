@@ -38,7 +38,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 		else
 			return 0
 
-	if(check_cache && (client.cache.Find(asset_name) || client.sending.Find(asset_name)))
+	if(check_cache && (list_find(client.cache, asset_name) || list_find(client.sending, asset_name)))
 		return 0
 
 	var/decl/asset_cache/asset_cache = decls_repository.get_decl(/decl/asset_cache)
@@ -57,7 +57,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 
 	var/t = 0
 	var/timeout_time = (ASSET_CACHE_SEND_TIMEOUT * client.sending.len) + ASSET_CACHE_SEND_TIMEOUT
-	while(client && !client.completed_asset_jobs.Find(job) && t < timeout_time) // Reception is handled in Topic()
+	while(client && !list_find(client.completed_asset_jobs, job) && t < timeout_time) // Reception is handled in Topic()
 		sleep(1) // Lock up the caller until this is received.
 		t++
 
@@ -105,7 +105,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 
 	var/t = 0
 	var/timeout_time = ASSET_CACHE_SEND_TIMEOUT * client.sending.len
-	while(client && !client.completed_asset_jobs.Find(job) && t < timeout_time) // Reception is handled in Topic()
+	while(client && !list_find(client.completed_asset_jobs, job) && t < timeout_time) // Reception is handled in Topic()
 		sleep(1) // Lock up the caller until this is received.
 		t++
 
@@ -205,14 +205,14 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 	for (var/path in common_dirs)
 		var/list/filenames = flist(path)
 		for(var/filename in filenames)
-			if(copytext(filename, length(filename)) != "/") // Ignore directories.
+			if(copytext(filename, -1) != "/") // Ignore directories.
 				if(fexists(path + filename))
 					common[filename] = fcopy_rsc(path + filename)
 					register_asset(filename, common[filename])
 	for (var/path in uncommon_dirs)
 		var/list/filenames = flist(path)
 		for(var/filename in filenames)
-			if(copytext(filename, length(filename)) != "/") // Ignore directories.
+			if(copytext(filename, -1) != "/") // Ignore directories.
 				if(fexists(path + filename))
 					register_asset(filename, fcopy_rsc(path + filename))
 
@@ -222,7 +222,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 
 	var/list/filenames = flist(MAP_IMAGE_PATH)
 	for(var/filename in filenames)
-		if(copytext(filename, length(filename)) != "/") // Ignore directories.
+		if(copytext(filename, -1) != "/") // Ignore directories.
 			var/file_path = MAP_IMAGE_PATH + filename
 			if((filename in mapnames) && fexists(file_path))
 				common[filename] = fcopy_rsc(file_path)

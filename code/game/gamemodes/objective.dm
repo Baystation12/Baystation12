@@ -219,34 +219,34 @@ var/global/list/all_objectives = list()
 	var/target_name
 
 	var/global/possible_items[] = list(
-		"the captain's antique laser gun" = /obj/item/weapon/gun/energy/captain,
+		"the captain's antique laser gun" = /obj/item/gun/energy/captain,
 		"a bluespace rift generator" = /obj/item/integrated_circuit/manipulation/bluespace_rift,
-		"an RCD" = /obj/item/weapon/rcd,
-		"a jetpack" = /obj/item/weapon/tank/jetpack,
+		"an RCD" = /obj/item/rcd,
+		"a jetpack" = /obj/item/tank/jetpack,
 		"a captain's jumpsuit" = /obj/item/clothing/under/rank/captain,
-		"a functional AI" = /obj/item/weapon/aicard,
+		"a functional AI" = /obj/item/aicard,
 		"a pair of magboots" = /obj/item/clothing/shoes/magboots,
 		"the [station_name()] blueprints" = /obj/item/blueprints,
 		"a nasa voidsuit" = /obj/item/clothing/suit/space/void,
-		"28 moles of phoron (full tank)" = /obj/item/weapon/tank,
+		"28 moles of phoron (full tank)" = /obj/item/tank,
 		"a sample of slime extract" = /obj/item/slime_extract,
-		"a piece of corgi meat" = /obj/item/weapon/reagent_containers/food/snacks/meat/corgi,
+		"a piece of corgi meat" = /obj/item/reagent_containers/food/snacks/meat/corgi,
 		"a chief science officer's jumpsuit" = /obj/item/clothing/under/rank/research_director,
 		"a chief engineer's jumpsuit" = /obj/item/clothing/under/rank/chief_engineer,
 		"a chief medical officer's jumpsuit" = /obj/item/clothing/under/rank/chief_medical_officer,
 		"a head of security's jumpsuit" = /obj/item/clothing/under/rank/head_of_security,
 		"a head of personnel's jumpsuit" = /obj/item/clothing/under/rank/head_of_personnel,
-		"the hypospray" = /obj/item/weapon/reagent_containers/hypospray,
-		"the captain's pinpointer" = /obj/item/weapon/pinpointer,
+		"the hypospray" = /obj/item/reagent_containers/hypospray,
+		"the captain's pinpointer" = /obj/item/pinpointer,
 		"an ablative armor vest" = /obj/item/clothing/suit/armor/laserproof,
 	)
 
 	var/global/possible_items_special[] = list(
-		/*"nuclear authentication disk" = /obj/item/weapon/disk/nuclear,*///Broken with the change to nuke disk making it respawn on z level change.
-		"nuclear gun" = /obj/item/weapon/gun/energy/gun/nuclear,
-		"diamond drill" = /obj/item/weapon/pickaxe/diamonddrill,
-		"bag of holding" = /obj/item/weapon/storage/backpack/holding,
-		"hyper-capacity cell" = /obj/item/weapon/cell/hyper,
+		/*"nuclear authentication disk" = /obj/item/disk/nuclear,*///Broken with the change to nuke disk making it respawn on z level change.
+		"nuclear gun" = /obj/item/gun/energy/gun/nuclear,
+		"diamond drill" = /obj/item/pickaxe/diamonddrill,
+		"bag of holding" = /obj/item/storage/backpack/holding,
+		"hyper-capacity cell" = /obj/item/cell/hyper,
 		"10 diamonds" = /obj/item/stack/material/diamond,
 		"50 gold bars" = /obj/item/stack/material/gold,
 		"25 refined uranium bars" = /obj/item/stack/material/uranium,
@@ -333,7 +333,8 @@ var/global/list/all_objectives = list()
 	for(var/datum/mind/possible_target in SSticker.minds)
 		if(possible_target != owner && ishuman(possible_target.current) && (possible_target.current.stat != DEAD) && (!possible_target.special_role))
 			possible_targets += possible_target
-			for(var/datum/job/role in SSjobs.get_by_path(roles))
+			for (var/path in roles)
+				var/datum/job/role = SSjobs.get_by_path(path)
 				if(possible_target.assigned_role == role.title)
 					priority_targets += possible_target
 					continue
@@ -369,19 +370,19 @@ var/global/list/all_objectives = list()
 			target_amount = 1
 			loot = "a nuclear bomb"
 		if(5)
-			target = /obj/item/weapon/gun
+			target = /obj/item/gun
 			target_amount = 6
 			loot = "six guns"
 		if(6)
-			target = /obj/item/weapon/gun/energy
+			target = /obj/item/gun/energy
 			target_amount = 4
 			loot = "four energy guns"
 		if(7)
-			target = /obj/item/weapon/gun/energy/laser
+			target = /obj/item/gun/energy/laser
 			target_amount = 2
 			loot = "two laser guns"
 		if(8)
-			target = /obj/item/weapon/gun/energy/ionrifle
+			target = /obj/item/gun/energy/ionrifle
 			target_amount = 1
 			loot = "an ion gun"
 
@@ -425,7 +426,7 @@ var/global/list/all_objectives = list()
 
 /datum/objective/borer_reproduce
 	explanation_text = "Reproduce at least once."
-	
+
 /datum/objective/ninja_highlander
    explanation_text = "You aspire to be a Grand Master of the Spider Clan. Kill all of your fellow acolytes."
 

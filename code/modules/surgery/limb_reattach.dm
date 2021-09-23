@@ -34,6 +34,10 @@
 	var/obj/item/organ/external/E = tool
 	var/obj/item/organ/external/P = target.organs_by_name[E.parent_organ]
 	var/obj/item/organ/external/T = target.organs_by_name[E.organ_tag]
+
+	if ((E.status & ORGAN_CONFIGURE) && E.surgery_configure(user, target, P, tool, src))
+		return
+
 	if(!P || P.is_stump())
 		to_chat(user, SPAN_WARNING("The [E.amputation_point] is missing!"))
 	else if(T && T.is_stump())
@@ -91,7 +95,7 @@
 /decl/surgery_step/limb/connect
 	name = "Connect limb"
 	allowed_tools = list(
-		/obj/item/weapon/hemostat = 100,
+		/obj/item/hemostat = 100,
 		/obj/item/stack/cable_coil = 75,
 		/obj/item/device/assembly/mousetrap = 20
 	)

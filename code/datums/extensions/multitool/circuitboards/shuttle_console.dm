@@ -1,15 +1,15 @@
 /datum/extension/interactive/multitool/circuitboards/shuttle_console
-	expected_type = /obj/item/weapon/stock_parts/circuitboard/shuttle_console
+	expected_type = /obj/item/stock_parts/circuitboard/shuttle_console
 
 /datum/extension/interactive/multitool/circuitboards/shuttle_console/get_interact_window(var/obj/item/device/multitool/M, var/mob/user)
-	var/obj/item/weapon/stock_parts/circuitboard/shuttle_console/board = holder
+	var/obj/item/stock_parts/circuitboard/shuttle_console/board = holder
 	var/dat = list()
 	dat += "<b>Current Selected Shuttle:</b>  [board.shuttle_tag || "NONE"]<br>"
 	dat += "<a href='?src=\ref[src];sync=1'>Synchronize to current shuttle.</a>"
 	return JOINTEXT(dat)
 
 /datum/extension/interactive/multitool/circuitboards/shuttle_console/on_topic(href, href_list, user)
-	var/obj/item/weapon/stock_parts/circuitboard/shuttle_console/board = holder
+	var/obj/item/stock_parts/circuitboard/shuttle_console/board = holder
 	if(href_list["sync"])
 		var/new_name
 		for(var/shuttle_name in SSshuttle.shuttles)

@@ -3,11 +3,13 @@
 	var/effect = EFFECT_TOUCH
 	var/effectrange = 4
 	var/atom/holder
-	var/activated = 0
+	var/activated = FALSE
 	var/chargelevel = 0
 	var/chargelevelmax = 10
 	var/artifact_id = ""
 	var/effect_type = 0
+	var/toggled = FALSE
+	var/on_time //time artifact should stay on for when toggled
 
 	var/datum/artifact_trigger/trigger
 
@@ -16,7 +18,11 @@
 	holder = location
 	effect = rand(0, MAX_EFFECT)
 	var/triggertype = pick(subtypesof(/datum/artifact_trigger))
+	if (effect == EFFECT_TOUCH && !istype(triggertype, /datum/artifact_trigger/touch)) // touch effect and touch trigger only work when paired
+		triggertype = pick(typesof(/datum/artifact_trigger/touch))
 	trigger = new triggertype
+
+	on_time = rand(5, 20) SECONDS
 
 	//this will be replaced by the excavation code later, but it's here just in case
 	artifact_id = "[pick("kappa","sigma","antaeres","beta","omicron","iota","epsilon","omega","gamma","delta","tau","alpha")]-[rand(100,999)]"
@@ -39,29 +45,36 @@
 /datum/artifact_effect/Destroy()
 	QDEL_NULL(trigger)
 	. = ..()
-	
-/datum/artifact_effect/proc/ToggleActivate(var/reveal_toggle = 1)
-	//so that other stuff happens first
-	spawn(0)
+
+/datum/artifact_effect/proc/ToggleActivate(reveal_toggle = 1)
+	addtimer(CALLBACK(src, .proc/DoActivation, reveal_toggle), 0)
+
+/datum/artifact_effect/proc/DoActivation(reveal_toggle = 1)
+	if (toggled && activated)
+		return
+
+	if(activated)
+		activated = FALSE
+	else
+		addtimer(CALLBACK(src, /datum/artifact_effect/proc/toggle_off), on_time)
+		activated = TRUE
+		toggled = TRUE
+	if(reveal_toggle && holder)
+		if(istype(holder, /obj/machinery/artifact))
+			var/obj/machinery/artifact/A = holder
+			A.icon_state = "ano[A.icon_num][activated]"
+
+		var/display_msg
 		if(activated)
-			activated = 0
+			display_msg = pick("momentarily glows brightly!","distorts slightly for a moment!","flickers slightly!","vibrates!","shimmers slightly for a moment!")
 		else
-			activated = 1
-		if(reveal_toggle && holder)
-			if(istype(holder, /obj/machinery/artifact))
-				var/obj/machinery/artifact/A = holder
-				A.icon_state = "ano[A.icon_num][activated]"
-			
-			var/display_msg
-			if(activated)
-				display_msg = pick("momentarily glows brightly!","distorts slightly for a moment!","flickers slightly!","vibrates!","shimmers slightly for a moment!")
-			else
-				display_msg = pick("grows dull!","fades in intensity!","suddenly becomes very still!","suddenly becomes very quiet!")
-			
-			var/atom/toplevelholder = holder
-			while(!isnull(toplevelholder.loc) && !istype(toplevelholder.loc, /turf))
-				toplevelholder = toplevelholder.loc
-			toplevelholder.visible_message("<span class='warning'>[icon2html(toplevelholder, viewers(get_turf(toplevelholder)))] [toplevelholder] [display_msg]</span>")
+			display_msg = pick("grows dull!","fades in intensity!","suddenly becomes very still!","suddenly becomes very quiet!")
+
+		var/atom/toplevelholder = holder
+		while(!isnull(toplevelholder.loc) && !istype(toplevelholder.loc, /turf))
+			toplevelholder = toplevelholder.loc
+		toplevelholder.visible_message("<span class='warning'>[icon2html(toplevelholder, viewers(get_turf(toplevelholder)))] [toplevelholder] [display_msg]</span>")
+
 
 /datum/artifact_effect/proc/DoEffectTouch(var/mob/user)
 /datum/artifact_effect/proc/DoEffectAura(var/atom/holder)
@@ -78,6 +91,7 @@
 		else if(effect == EFFECT_PULSE && chargelevel >= chargelevelmax)
 			chargelevel = 0
 			DoEffectPulse()
+
 
 /datum/artifact_effect/proc/getDescription()
 	. = "<b>"
@@ -115,6 +129,10 @@
 
 	. += " Activation index involves [trigger]."
 
+/datum/artifact_effect/proc/toggle_off()
+	toggled = FALSE
+	ToggleActivate(TRUE)
+
 //returns 0..1, with 1 being no protection and 0 being fully protected
 /proc/GetAnomalySusceptibility(var/mob/living/carbon/human/H)
 	if(!istype(H))
@@ -123,8 +141,8 @@
 	var/protected = 0
 
 	//anomaly suits give best protection, but excavation suits are almost as good
-	if(istype(H.back,/obj/item/weapon/rig/hazmat) || istype(H.back, /obj/item/weapon/rig/hazard))
-		var/obj/item/weapon/rig/rig = H.back
+	if(istype(H.back,/obj/item/rig/hazmat) || istype(H.back, /obj/item/rig/hazard))
+		var/obj/item/rig/rig = H.back
 		if(rig.suit_is_deployed() && !rig.offline)
 			protected += 1
 
@@ -146,3 +164,17 @@
 		protected += 0.1
 
 	return 1 - protected
+
+//Destruction/Damaged procs
+
+/**
+ * When an artifact is destroyed, this will be run before it is
+ */
+/datum/artifact_effect/proc/destroyed_effect()
+	return
+
+/**
+ * Called by the artifact the effect is attached too whenever it takes damage
+ */
+/datum/artifact_effect/proc/holder_damaged()
+	return

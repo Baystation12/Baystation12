@@ -1,4 +1,4 @@
-/obj/item/weapon/rocksliver
+/obj/item/rocksliver
 	name = "rock sliver"
 	desc = "It looks extremely delicate."
 	icon = 'icons/obj/xenoarchaeology.dmi'
@@ -8,7 +8,7 @@
 	sharp = TRUE
 	var/datum/geosample/geological_data
 
-/obj/item/weapon/rocksliver/New()
+/obj/item/rocksliver/New()
 	icon_state = "sliver[rand(1, 3)]"
 
 /datum/geosample
@@ -88,7 +88,7 @@
 
 	var/sampled_turf = ""
 	var/num_stored_bags = 10
-	var/obj/item/weapon/evidencebag/filled_bag
+	var/obj/item/evidencebag/filled_bag
 
 /obj/item/device/core_sampler/examine(mob/user, distance)
 	. = ..(user)
@@ -96,7 +96,7 @@
 		to_chat(user, "<span class='notice'>Used to extract geological core samples - this one is [sampled_turf ? "full" : "empty"], and has [num_stored_bags] bag[num_stored_bags != 1 ? "s" : ""] remaining.</span>")
 
 /obj/item/device/core_sampler/attackby(var/obj/item/I, var/mob/living/user)
-	if(istype(I, /obj/item/weapon/evidencebag))
+	if(istype(I, /obj/item/evidencebag))
 		if(I.contents.len)
 			to_chat(user, "<span class='warning'>\The [I] is full.</span>")
 			return
@@ -116,8 +116,8 @@
 		var/turf/simulated/mineral/T = item_to_sample
 		T.geologic_data.UpdateNearbyArtifactInfo(T)
 		geo_data = T.geologic_data
-	else if(istype(item_to_sample, /obj/item/weapon/ore))
-		var/obj/item/weapon/ore/O = item_to_sample
+	else if(istype(item_to_sample, /obj/item/ore))
+		var/obj/item/ore/O = item_to_sample
 		geo_data = O.geologic_data
 
 	if(geo_data)
@@ -127,7 +127,7 @@
 			to_chat(user, "<span class='warning'>The core sampler is out of sample bags.</span>")
 		else
 			//create a new sample bag which we'll fill with rock samples
-			filled_bag = new /obj/item/weapon/evidencebag(src)
+			filled_bag = new /obj/item/evidencebag(src)
 			filled_bag.SetName("sample bag")
 			filled_bag.desc = "a bag for holding research samples."
 
@@ -135,7 +135,7 @@
 			--num_stored_bags
 
 			//put in a rock sliver
-			var/obj/item/weapon/rocksliver/R = new(filled_bag)
+			var/obj/item/rocksliver/R = new(filled_bag)
 			R.geological_data = geo_data
 
 			//update the sample bag

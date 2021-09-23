@@ -34,18 +34,18 @@
 		/obj/item/clothing/gloves/thick,
 		/obj/item/clothing/suit/storage/hazardvest,
 		/obj/item/clothing/accessory/storage/webbing_large,
-		/obj/item/weapon/storage/belt/utility/atmostech,
-		/obj/item/weapon/hand_labeler,
-		/obj/item/weapon/material/clipboard,
-		/obj/item/weapon/folder/yellow,
+		/obj/item/storage/belt/utility/atmostech,
+		/obj/item/hand_labeler,
+		/obj/item/material/clipboard,
+		/obj/item/folder/yellow,
 		/obj/item/stack/package_wrap/twenty_five,
-		/obj/item/weapon/marshalling_wand,
-		/obj/item/weapon/marshalling_wand,
-		/obj/item/weapon/storage/belt/general,
-		/obj/item/weapon/stamp/cargo,
-		/obj/item/weapon/stamp/denied,
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack = 75, /obj/item/weapon/storage/backpack/satchel/grey = 25)),
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/messenger = 75, /obj/item/weapon/storage/backpack/dufflebag = 25))
+		/obj/item/marshalling_wand,
+		/obj/item/marshalling_wand,
+		/obj/item/storage/belt/general,
+		/obj/item/stamp/cargo,
+		/obj/item/stamp/denied,
+		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack = 75, /obj/item/storage/backpack/satchel/grey = 25)),
+		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/messenger = 75, /obj/item/storage/backpack/dufflebag = 25))
 	)
 
 /obj/structure/closet/secure_closet/deckofficer
@@ -62,19 +62,19 @@
 		/obj/item/clothing/glasses/sunglasses,
 		/obj/item/clothing/suit/storage/hazardvest,
 		/obj/item/clothing/accessory/storage/brown_vest,
-		/obj/item/weapon/storage/belt/utility/full,
-		/obj/item/weapon/hand_labeler,
-		/obj/item/weapon/material/clipboard,
-		/obj/item/weapon/folder/yellow,
+		/obj/item/storage/belt/utility/full,
+		/obj/item/hand_labeler,
+		/obj/item/material/clipboard,
+		/obj/item/folder/yellow,
 		/obj/item/stack/package_wrap/twenty_five,
 		/obj/item/device/flash,
 		/obj/item/device/megaphone,
 		/obj/item/device/holowarrant,
 		/obj/item/clothing/suit/armor/pcarrier/light/sol,
 		/obj/item/device/binoculars,
-		/obj/item/weapon/storage/belt/general,
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack = 75, /obj/item/weapon/storage/backpack/satchel/grey = 25)),
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/messenger = 75, /obj/item/weapon/storage/backpack/dufflebag = 25))
+		/obj/item/storage/belt/general,
+		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack = 75, /obj/item/storage/backpack/satchel/grey = 25)),
+		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/messenger = 75, /obj/item/storage/backpack/dufflebag = 25))
 	)
 
 /obj/structure/closet/secure_closet/prospector
@@ -91,16 +91,16 @@
 		/obj/item/device/radio/headset/headset_mining,
 		/obj/item/device/radio/headset/headset_mining/alt,
 		/obj/item/device/flashlight/lantern,
-		/obj/item/weapon/shovel,
-		/obj/item/weapon/pickaxe,
-		/obj/item/weapon/crowbar,
-		/obj/item/weapon/wrench,
-		/obj/item/weapon/storage/ore,
+		/obj/item/shovel,
+		/obj/item/pickaxe,
+		/obj/item/crowbar,
+		/obj/item/wrench,
+		/obj/item/storage/ore,
 		/obj/item/device/scanner/mining,
 		/obj/item/device/gps,
 		/obj/item/device/radio,
 		/obj/item/clothing/glasses/material,
 		/obj/item/clothing/glasses/meson,
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/industrial, /obj/item/weapon/storage/backpack/satchel/eng, /obj/item/weapon/storage/backpack/messenger/engi)),
-		/obj/item/weapon/storage/backpack/dufflebag/eng
+		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/industrial, /obj/item/storage/backpack/satchel/eng, /obj/item/storage/backpack/messenger/engi)),
+		/obj/item/storage/backpack/dufflebag/eng
 	)

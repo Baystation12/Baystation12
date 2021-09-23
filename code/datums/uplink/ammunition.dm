@@ -50,27 +50,33 @@
 	name = "Ammobox of Sniper Rounds"
 	desc = "A container of rounds for the anti-materiel rifle. Contains 7 rounds."
 	item_cost = 8
-	path = /obj/item/weapon/storage/box/ammo/sniperammo
+	path = /obj/item/storage/box/ammo/sniperammo
 	antag_roles = list(MODE_MERCENARY)
 
 /datum/uplink_item/item/ammo/sniperammo/apds
 	name = "Ammobox of APDS Sniper Rounds"
 	desc = "A container of armor piercing rounds for the anti-materiel rifle. Contains 3 rounds."
 	item_cost = 12
-	path = /obj/item/weapon/storage/box/ammo/sniperammo/apds
+	path = /obj/item/storage/box/ammo/sniperammo/apds
 	antag_roles = list(MODE_MERCENARY)
 
 /datum/uplink_item/item/ammo/shotgun_shells
 	name = "Ammobox of Shotgun Shells"
 	desc = "An ammobox with 2 sets of shell holders. Contains 8 buckshot shells total."
 	item_cost = 8
-	path = /obj/item/weapon/storage/box/ammo/shotgunshells
+	path = /obj/item/storage/box/ammo/shotgunshells
+
+/datum/uplink_item/item/ammo/flechette_shells
+	name = "Ammobox of Flechette Shells"
+	desc = "An ammobox with 2 sets of shell holders. Contains 8 extra accurate flechette shells."
+	item_cost = 8
+	path = /obj/item/storage/box/ammo/flechetteshells
 
 /datum/uplink_item/item/ammo/shotgun_slugs
 	name = "Ammobox of Shotgun Slugs"
 	desc = "An ammobox with 2 sets of shell holders. Contains 8 slugs total."
 	item_cost = 8
-	path = /obj/item/weapon/storage/box/ammo/shotgunammo
+	path = /obj/item/storage/box/ammo/shotgunammo
 
 /datum/uplink_item/item/ammo/machine_pistol
 	name = "Standard Stick Magazine"
@@ -107,7 +113,7 @@
 	name = "Flechette Rifle Magazine"
 	desc = "A  rifle magazine loaded with flechette rounds. Contains 9 rounds."
 	item_cost = 8
-	path = /obj/item/weapon/magnetic_ammo
+	path = /obj/item/magnetic_ammo
 	antag_roles = list(MODE_MERCENARY)
 
 /datum/uplink_item/item/ammo/pistol_emp

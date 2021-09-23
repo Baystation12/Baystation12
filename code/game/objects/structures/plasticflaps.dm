@@ -3,8 +3,8 @@
 	desc = "Completely impassable - or are they?"
 	icon = 'icons/obj/stationobjs.dmi' //Change this.
 	icon_state = "plasticflaps"
-	density = 0
-	anchored = 1
+	density = FALSE
+	anchored = TRUE
 	layer = ABOVE_HUMAN_LAYER
 	explosion_resistance = 5
 
@@ -13,7 +13,7 @@
 	var/list/mobs_can_pass = list(
 		/mob/living/bot,
 		/mob/living/carbon/slime,
-		/mob/living/simple_animal/mouse,
+		/mob/living/simple_animal/passive/mouse,
 		/mob/living/silicon/robot/drone
 		)
 	var/airtight = 0
@@ -79,5 +79,5 @@
 			T.blocks_air = 0
 
 
-/obj/structure/plasticflaps/airtight // airtight defaults to on 
+/obj/structure/plasticflaps/airtight // airtight defaults to on
 	airtight = 1

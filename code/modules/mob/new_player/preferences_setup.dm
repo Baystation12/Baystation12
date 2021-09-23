@@ -104,16 +104,24 @@
 	preview_icon = icon('icons/effects/128x48.dmi', bgstate)
 	preview_icon.Scale(48+32, 16+32)
 
+	if(LAZYLEN(mannequin.descriptors))
+		for(var/entry in body_descriptors)
+			mannequin.descriptors[entry] = body_descriptors[entry]
+	var/list/scale = mannequin.get_scale()
+
 	mannequin.dir = NORTH
 	var/icon/stamp = getFlatIcon(mannequin, NORTH, always_use_defdir = 1)
+	stamp.Scale(scale[1] * stamp.Width(), scale[2] * stamp.Height())
 	preview_icon.Blend(stamp, ICON_OVERLAY, 25, 17)
 
 	mannequin.dir = WEST
 	stamp = getFlatIcon(mannequin, WEST, always_use_defdir = 1)
+	stamp.Scale(scale[1] * stamp.Width(), scale[2] * stamp.Height())
 	preview_icon.Blend(stamp, ICON_OVERLAY, 1, 9)
 
 	mannequin.dir = SOUTH
 	stamp = getFlatIcon(mannequin, SOUTH, always_use_defdir = 1)
+	stamp.Scale(scale[1] * stamp.Width(), scale[2] * stamp.Height())
 	preview_icon.Blend(stamp, ICON_OVERLAY, 49, 1)
 
 	preview_icon.Scale(preview_icon.Width() * 2, preview_icon.Height() * 2) // Scaling here to prevent blurring in the browser.

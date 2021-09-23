@@ -66,7 +66,7 @@
 		"Violet" =         COLOR_VIOLET,
 		"White" =          COLOR_WHITE,
 		"Yellow" =         COLOR_AMBER,
-		"Hull blue" =      COLOR_HULL,
+		"Sol blue" =       COLOR_SOL,
 		"Bulkhead black" = COLOR_WALL_GUNMETAL,
 		)
 

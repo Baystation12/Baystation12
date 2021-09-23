@@ -1,5 +1,5 @@
 /*
- *	Absorbs /obj/item/weapon/secstorage.
+ *	Absorbs /obj/item/secstorage.
  *	Reimplements it only slightly to use existing storage functionality.
  *
  *	Contains:
@@ -10,7 +10,7 @@
 // -----------------------------
 //         Generic Item
 // -----------------------------
-/obj/item/weapon/storage/secure
+/obj/item/storage/secure
 	name = "secstorage"
 	var/icon_locking = "secureb"
 	var/icon_sparking = "securespark"
@@ -21,15 +21,15 @@
 	var/l_set = 0
 	var/l_setshort = 0
 	var/l_hacking = 0
-	var/emagged = 0
+	var/emagged = FALSE
 	var/open = 0
 	w_class = ITEM_SIZE_NORMAL
 	max_w_class = ITEM_SIZE_SMALL
 	max_storage_space = DEFAULT_BOX_STORAGE
 
-	attackby(obj/item/weapon/W as obj, mob/user as mob)
+	attackby(obj/item/W as obj, mob/user as mob)
 		if(locked)
-			if (istype(W, /obj/item/weapon/melee/energy/blade) && emag_act(INFINITY, user, "You slice through the lock of \the [src]"))
+			if (istype(W, /obj/item/melee/energy/blade) && emag_act(INFINITY, user, "You slice through the lock of \the [src]"))
 				var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
 				spark_system.set_up(5, 0, src.loc)
 				spark_system.start()
@@ -98,7 +98,7 @@
 				if ((src.l_set == 0) && (length(src.code) == 5) && (!src.l_setshort) && (src.code != "ERROR"))
 					src.l_code = src.code
 					src.l_set = 1
-				else if ((src.code == src.l_code) && (src.emagged == 0) && (src.l_set == 1))
+				else if ((src.code == src.l_code) && (!src.emagged) && (src.l_set == 1))
 					src.locked = 0
 					overlays.Cut()
 					overlays += image('icons/obj/storage.dmi', icon_opened)
@@ -106,7 +106,7 @@
 				else
 					src.code = "ERROR"
 			else
-				if ((href_list["type"] == "R") && (src.emagged == 0) && (!src.l_setshort))
+				if ((href_list["type"] == "R") && (!src.emagged) && (!src.l_setshort))
 					src.locked = 1
 					overlays.Cut()
 					src.code = null
@@ -122,14 +122,14 @@
 		return
 
 
-/obj/item/weapon/storage/secure/examine(mob/user, distance)
+/obj/item/storage/secure/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1)
 		to_chat(user, text("The service panel is [src.open ? "open" : "closed"]."))
 
-/obj/item/weapon/storage/secure/emag_act(var/remaining_charges, var/mob/user, var/feedback)
+/obj/item/storage/secure/emag_act(var/remaining_charges, var/mob/user, var/feedback)
 	if(!emagged)
-		emagged = 1
+		emagged = TRUE
 		src.overlays += image('icons/obj/storage.dmi', icon_sparking)
 		sleep(6)
 		overlays.Cut()
@@ -141,13 +141,14 @@
 // -----------------------------
 //        Secure Briefcase
 // -----------------------------
-/obj/item/weapon/storage/secure/briefcase
+/obj/item/storage/secure/briefcase
 	name = "secure briefcase"
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "secure"
 	item_state = "sec-case"
 	desc = "A large briefcase with a digital locking system."
 	force = 8.0
+	base_parry_chance = 15
 	throw_speed = 1
 	throw_range = 4
 	w_class = ITEM_SIZE_HUGE
@@ -172,7 +173,7 @@
 //        Secure Safe
 // -----------------------------
 
-/obj/item/weapon/storage/secure/safe
+/obj/item/storage/secure/safe
 	name = "secure safe"
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "safe"
@@ -183,23 +184,23 @@
 	w_class = ITEM_SIZE_NO_CONTAINER
 	max_w_class = ITEM_SIZE_HUGE
 	max_storage_space = 56
-	anchored = 1.0
-	density = 0
-	cant_hold = list(/obj/item/weapon/storage/secure/briefcase)
+	anchored = TRUE
+	density = FALSE
+	cant_hold = list(/obj/item/storage/secure/briefcase)
 
 	New()
 		..()
-		new /obj/item/weapon/paper(src)
-		new /obj/item/weapon/pen(src)
+		new /obj/item/paper(src)
+		new /obj/item/pen(src)
 
 	attack_hand(mob/user as mob)
 		return attack_self(user)
 
-/obj/item/weapon/storage/secure/safe/HoS/New()
+/obj/item/storage/secure/safe/HoS/New()
 	..()
-	//new /obj/item/weapon/storage/lockbox/clusterbang(src) This item is currently broken... and probably shouldn't exist to begin with (even though it's cool)
+	//new /obj/item/storage/lockbox/clusterbang(src) This item is currently broken... and probably shouldn't exist to begin with (even though it's cool)
 
-/obj/item/weapon/storage/secure/AltClick(/mob/user)
+/obj/item/storage/secure/AltClick(/mob/user)
 	if (locked)
 		return
 	..()

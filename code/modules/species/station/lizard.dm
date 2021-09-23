@@ -83,10 +83,15 @@
 		/mob/living/carbon/human/proc/diona_heal_toggle
 		)
 
-	override_organ_types = list(
-		BP_EYES = /obj/item/organ/internal/eyes/unathi,
-		BP_BRAIN = /obj/item/organ/internal/brain/unathi
-	)
+	has_organ = list(
+		BP_HEART =    /obj/item/organ/internal/heart,
+		BP_STOMACH =  /obj/item/organ/internal/stomach,
+		BP_LUNGS =    /obj/item/organ/internal/lungs,
+		BP_LIVER =    /obj/item/organ/internal/liver,
+		BP_KIDNEYS =  /obj/item/organ/internal/kidneys,
+		BP_EYES =   /obj/item/organ/internal/eyes/unathi,
+		BP_BRAIN =  /obj/item/organ/internal/brain/unathi
+		)
 
 	descriptors = list(
 		/datum/mob_descriptor/height = 2,
@@ -124,7 +129,8 @@
 			RELIGION_UNATHI_LIGHTS,
 			RELIGION_UNATHI_MARKESHELI,
 			RELIGION_UNATHI_ANCESTOR,
-			RELIGION_OTHER
+			RELIGION_OTHER,
+			RELIGION_UNSTATED
 		)
 	)
 	default_cultural_info = list(

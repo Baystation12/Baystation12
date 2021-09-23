@@ -55,7 +55,7 @@ steam.start() -- spawns the effect
 	name = "steam"
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "extinguish"
-	density = 0
+	density = FALSE
 
 /datum/effect/effect/system/steam_spread
 
@@ -98,7 +98,7 @@ steam.start() -- spawns the effect
 	icon_state = "sparks"
 	icon = 'icons/effects/effects.dmi'
 	var/amount = 6.0
-	anchored = 1.0
+	anchored = TRUE
 	mouse_opacity = 0
 
 /obj/effect/sparks/New()
@@ -155,6 +155,13 @@ steam.start() -- spawns the effect
 		sleep(5)
 		step(sparks,direction)
 
+//and to shortcut all that
+/proc/sparks(n = 3, c = 0, loca)
+	var/datum/effect/effect/system/spark_spread/S = new
+	S.set_up(n, c, loca)
+	S.start()
+	return S
+
 /////////////////////////////////////////////
 //// SMOKE SYSTEMS
 // direct can be optinally added when set_up, to make the smoke always travel in one direction
@@ -166,7 +173,7 @@ steam.start() -- spawns the effect
 	name = "smoke"
 	icon_state = "smoke"
 	opacity = 1
-	anchored = 0.0
+	anchored = FALSE
 	mouse_opacity = 0
 	var/amount = 6.0
 	var/time_to_live = 100
@@ -187,6 +194,8 @@ steam.start() -- spawns the effect
 
 /obj/effect/effect/smoke/proc/affect(var/mob/living/carbon/M)
 	if (!istype(M))
+		return 0
+	if (M.isSynthetic())
 		return 0
 	if (M.internal != null)
 		if(M.wear_mask && (M.wear_mask.item_flags & ITEM_FLAG_AIRTIGHT))
@@ -233,8 +242,7 @@ steam.start() -- spawns the effect
 	if (M.coughedtime != 1)
 		M.coughedtime = 1
 		M.emote("cough")
-		spawn ( 20 )
-			M.coughedtime = 0
+		addtimer(CALLBACK(M, /mob/living/carbon/proc/clear_coughedtime), 2 SECONDS)
 
 /obj/effect/effect/smoke/bad/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1
@@ -262,8 +270,7 @@ steam.start() -- spawns the effect
 	if (M.coughedtime != 1)
 		M.coughedtime = 1
 		M.emote("cough")
-		spawn ( 20 )
-			M.coughedtime = 0
+		addtimer(CALLBACK(M, /mob/living/carbon/proc/clear_coughedtime), 2 SECONDS)
 /////////////////////////////////////////////
 // Mustard Gas
 /////////////////////////////////////////////
@@ -288,8 +295,7 @@ steam.start() -- spawns the effect
 	if (R.coughedtime != 1)
 		R.coughedtime = 1
 		R.emote("gasp")
-		spawn (20)
-			R.coughedtime = 0
+		addtimer(CALLBACK(R, /mob/living/carbon/proc/clear_coughedtime), 2 SECONDS)
 	R.updatehealth()
 	return
 
@@ -411,7 +417,7 @@ steam.start() -- spawns the effect
 /obj/effect/effect/ion_trails
 	name = "ion trails"
 	icon_state = "ion_trails"
-	anchored = 1.0
+	anchored = TRUE
 
 /datum/effect/effect/system/trail/ion
 	trail_type = /obj/effect/effect/ion_trails
@@ -426,7 +432,7 @@ steam.start() -- spawns the effect
 /obj/effect/effect/thermal_trail
 	name = "therman trail"
 	icon_state = "explosion_particle"
-	anchored = 1
+	anchored = TRUE
 
 /datum/effect/effect/system/trail/thermal
 	trail_type = /obj/effect/effect/thermal_trail

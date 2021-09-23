@@ -3,9 +3,9 @@
 
 /decl/hierarchy/supply_pack/security/specialops
 	name = "Grenades - Special Ops supplies"
-	contains = list(/obj/item/weapon/storage/box/emps,
-					/obj/item/weapon/grenade/smokebomb = 3,
-					/obj/item/weapon/grenade/chem_grenade/incendiary)
+	contains = list(/obj/item/storage/box/emps,
+					/obj/item/grenade/smokebomb = 3,
+					/obj/item/grenade/chem_grenade/incendiary)
 	cost = 20
 	containername = "special ops crate"
 	hidden = 1
@@ -35,7 +35,7 @@
 					/obj/item/clothing/head/helmet/tactical,
 					/obj/item/clothing/mask/balaclava/tactical,
 					/obj/item/clothing/glasses/tacgoggles,
-					/obj/item/weapon/storage/belt/holster/security/tactical,
+					/obj/item/storage/belt/holster/security/tactical,
 					/obj/item/clothing/shoes/tactical,
 					/obj/item/clothing/gloves/tactical)
 	cost = 45
@@ -90,11 +90,11 @@
 
 /decl/hierarchy/supply_pack/security/riotarmor
 	name = "Armor - Riot gear"
-	contains = list(/obj/item/weapon/shield/riot = 4,
+	contains = list(/obj/item/shield/riot = 4,
 					/obj/item/clothing/head/helmet/riot = 4,
 					/obj/item/clothing/suit/armor/riot = 4,
-					/obj/item/weapon/storage/box/flashbangs,
-					/obj/item/weapon/storage/box/teargas)
+					/obj/item/storage/box/flashbangs,
+					/obj/item/storage/box/teargas)
 	cost = 80
 	containertype = /obj/structure/closet/crate/secure
 	containername = "riot armor crate"
@@ -121,9 +121,9 @@
 /decl/hierarchy/supply_pack/security/weapons
 	name = "Weapons - Security basic"
 	contains = list(/obj/item/device/flash = 4,
-					/obj/item/weapon/reagent_containers/spray/pepper = 4,
-					/obj/item/weapon/melee/baton/loaded = 4,
-					/obj/item/weapon/gun/energy/taser = 4)
+					/obj/item/reagent_containers/spray/pepper = 4,
+					/obj/item/melee/baton/loaded = 4,
+					/obj/item/gun/energy/taser = 4)
 	cost = 50
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "weapons crate"
@@ -131,7 +131,7 @@
 
 /decl/hierarchy/supply_pack/security/egun
 	name = "Weapons - Energy sidearms"
-	contains = list(/obj/item/weapon/gun/energy/gun/secure = 4)
+	contains = list(/obj/item/gun/energy/gun/secure = 4)
 	cost = 40
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "energy sidearms crate"
@@ -140,15 +140,15 @@
 
 /decl/hierarchy/supply_pack/security/egun/shady
 	name = "Weapons - Energy sidearms (For disposal)"
-	contains = list(/obj/item/weapon/gun/energy/gun = 4)
+	contains = list(/obj/item/gun/energy/gun = 4)
 	cost = 60
 	contraband = 1
 	security_level = null
 
 /decl/hierarchy/supply_pack/security/ion
 	name = "Weapons - Electromagnetic"
-	contains = list(/obj/item/weapon/gun/energy/ionrifle = 2,
-					/obj/item/weapon/storage/box/emps)
+	contains = list(/obj/item/gun/energy/ionrifle = 2,
+					/obj/item/storage/box/emps)
 	cost = 50
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "electromagnetic weapons crate"
@@ -157,7 +157,7 @@
 
 /decl/hierarchy/supply_pack/security/shotgun
 	name = "Weapons - Shotgun"
-	contains = list(/obj/item/weapon/gun/projectile/shotgun/pump/combat = 2)
+	contains = list(/obj/item/gun/projectile/shotgun/pump/combat = 2)
 	cost = 60
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "shotgun crate"
@@ -166,7 +166,7 @@
 
 /decl/hierarchy/supply_pack/security/flashbang
 	name = "Weapons - Flashbangs"
-	contains = list(/obj/item/weapon/storage/box/flashbangs = 2)
+	contains = list(/obj/item/storage/box/flashbangs = 2)
 	cost = 30
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "flashbang crate"
@@ -174,7 +174,7 @@
 
 /decl/hierarchy/supply_pack/security/teargas
 	name = "Weapons - Tear gas grenades"
-	contains = list(/obj/item/weapon/storage/box/teargas = 2)
+	contains = list(/obj/item/storage/box/teargas = 2)
 	cost = 30
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "tear gas grenades crate"
@@ -182,8 +182,8 @@
 
 /decl/hierarchy/supply_pack/security/shotgunammo
 	name = "Ammunition - Lethal shells"
-	contains = list(/obj/item/weapon/storage/box/ammo/shotgunammo = 2,
-					/obj/item/weapon/storage/box/ammo/shotgunshells = 2)
+	contains = list(/obj/item/storage/box/ammo/shotgunammo = 2,
+					/obj/item/storage/box/ammo/shotgunshells = 2)
 	cost = 60
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "lethal shotgun shells crate"
@@ -192,7 +192,7 @@
 
 /decl/hierarchy/supply_pack/security/shotgunbeanbag
 	name = "Ammunition - Beanbag shells"
-	contains = list(/obj/item/weapon/storage/box/ammo/beanbags = 3)
+	contains = list(/obj/item/storage/box/ammo/beanbags = 3)
 	cost = 30
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "beanbag shotgun shells crate"
@@ -242,29 +242,29 @@
 
 /decl/hierarchy/supply_pack/security/forensics //Not access-restricted so PIs can use it.
 	name = "Forensics - Auxiliary tools"
-	contains = list(/obj/item/weapon/forensics/sample_kit,
-					/obj/item/weapon/forensics/sample_kit/powder,
-					/obj/item/weapon/storage/box/swabs = 3,
-					/obj/item/weapon/reagent_containers/spray/luminol)
+	contains = list(/obj/item/forensics/sample_kit,
+					/obj/item/forensics/sample_kit/powder,
+					/obj/item/storage/box/swabs = 3,
+					/obj/item/reagent_containers/spray/luminol)
 	cost = 30
 	containername = "auxiliary forensic tools crate"
 
 /decl/hierarchy/supply_pack/security/detectivegear
 	name = "Forensics - investigation equipment"
-	contains = list(/obj/item/weapon/storage/box/evidence = 2,
+	contains = list(/obj/item/storage/box/evidence = 2,
 					/obj/item/device/radio/headset/headset_sec,
 					/obj/item/taperoll/police,
 					/obj/item/clothing/glasses/sunglasses,
 					/obj/item/device/camera,
-					/obj/item/weapon/folder/red,
-					/obj/item/weapon/folder/blue,
+					/obj/item/folder/red,
+					/obj/item/folder/blue,
 					/obj/item/clothing/gloves/forensic,
 					/obj/item/device/taperecorder,
 					/obj/item/device/scanner/spectrometer,
 					/obj/item/device/camera_film = 2,
-					/obj/item/weapon/storage/photo_album,
+					/obj/item/storage/photo_album,
 					/obj/item/device/scanner/reagent,
-					/obj/item/weapon/storage/briefcase/crimekit = 2)
+					/obj/item/storage/briefcase/crimekit = 2)
 	cost = 50
 	containertype = /obj/structure/closet/crate/secure
 	containername = "forensic equipment crate"
@@ -272,7 +272,7 @@
 
 /decl/hierarchy/supply_pack/security/securitybarriers
 	name = "Equipment - Barrier crate"
-	contains = list(/obj/machinery/deployable/barrier = 4)
+	contains = list(/obj/machinery/barrier = 4)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure/large
 	containername = "security barrier crate"
@@ -291,7 +291,7 @@
 	contains = list(/obj/item/clothing/head/bio_hood/security,
 					/obj/item/clothing/suit/bio_suit/security,
 					/obj/item/clothing/mask/gas,
-					/obj/item/weapon/tank/oxygen,
+					/obj/item/tank/oxygen,
 					/obj/item/clothing/gloves/latex)
 	cost = 30
 	containertype = /obj/structure/closet/crate/secure

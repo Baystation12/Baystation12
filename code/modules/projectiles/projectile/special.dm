@@ -157,6 +157,45 @@
 	damage_flags = 0
 	muzzle_type = /obj/effect/projectile/bullet/muzzle
 
+/obj/item/projectile/bola
+	name = "bola"
+	icon_state = "bola"
+	damage = 5
+	embed = FALSE
+	damage_type = STUN
+	muzzle_type = null
+
+/obj/item/projectile/bola/on_hit(atom/target, blocked = 0)
+	if (isliving(target))
+		var/mob/living/M = target
+		M.Weaken(3)
+		M.visible_message(
+			SPAN_WARNING("\The [M] is hit with a glob of webbing!"),
+			SPAN_DANGER("You are hit with a glob of webbing, causing you to trip!"),
+			SPAN_DANGER("Some sort of sticky substance hits you and causes you to fall over!")
+		)
+	..()
+
+/obj/item/projectile/webball
+	name = "ball of web"
+	icon_state = "bola"
+	damage = 2
+	embed = FALSE
+	damage_type = BRUTE
+	muzzle_type = null
+
+/obj/item/projectile/webball/on_hit(atom/target, blocked = 0)
+	if (isturf(target.loc))
+		var/obj/effect/spider/stickyweb/W = locate() in get_turf(target)
+		if (!W && prob(75))
+			visible_message(SPAN_DANGER("\The [src] splatters a layer of web on \the [target]!"))
+			new /obj/effect/spider/stickyweb(target.loc)
+
+			if (isliving(target))
+				var/mob/living/M = target
+				M.Weaken(1)
+	..()
+
 /obj/item/projectile/venom
 	name = "venom bolt"
 	icon_state = "venom"

@@ -15,7 +15,7 @@
 	set_sight(sight|SEE_TURFS)
 
 	// Add to player list if missing
-	if (!GLOB.player_list.Find(src))
+	if (!list_find(GLOB.player_list, src))
 		ADD_SORTED(GLOB.player_list, src, /proc/cmp_mob_key)
 
 	new_player_panel()
@@ -30,7 +30,6 @@
 // It is safe to assume that any UI or sound related calls will fall into that category.
 /mob/new_player/proc/deferred_login()
 	if(client)
-		handle_privacy_poll()
 		client.playtitlemusic()
 		maybe_send_staffwarns("connected as new player")
 		if(client.get_preference_value(/datum/client_preference/goonchat) == GLOB.PREF_YES)

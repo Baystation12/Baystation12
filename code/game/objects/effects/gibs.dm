@@ -55,6 +55,6 @@
 					if(istype(location,/turf/))
 						var/list/directions = gibdirections[i]
 						if(directions.len)
-							gib.streak(directions)
+							addtimer(CALLBACK(gib, /obj/effect/decal/cleanable/blood/gibs/proc/streak, directions), 0)
 
 		qdel(src)

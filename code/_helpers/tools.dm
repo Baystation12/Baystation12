@@ -31,26 +31,26 @@
 /atom/proc/ishatchet()
 	return FALSE
 
-/obj/item/weapon/wrench/iswrench()
+/obj/item/wrench/iswrench()
 	return TRUE
 
-/obj/item/weapon/weldingtool/iswelder()
+/obj/item/weldingtool/iswelder()
 	return TRUE
 
 /obj/item/stack/cable_coil/iscoil()
 	return TRUE
 
-/obj/item/weapon/wirecutters/iswirecutter()
+/obj/item/wirecutters/iswirecutter()
 	return TRUE
 
-/obj/item/weapon/screwdriver/isscrewdriver()
+/obj/item/screwdriver/isscrewdriver()
 	return TRUE
 
 /obj/item/device/multitool/ismultitool()
 	return TRUE
 
-/obj/item/weapon/crowbar/iscrowbar()
+/obj/item/crowbar/iscrowbar()
 	return TRUE
 
-/obj/item/weapon/material/hatchet/ishatchet()
+/obj/item/material/hatchet/ishatchet()
 	return TRUE

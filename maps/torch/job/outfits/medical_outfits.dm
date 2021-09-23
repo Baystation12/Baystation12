@@ -12,7 +12,7 @@
 	name = OUTFIT_JOB_NAME("Physician")
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/medical
 	shoes = /obj/item/clothing/shoes/dutyboots
-	id_types = list(/obj/item/weapon/card/id/torch/crew/medical/senior)
+	id_types = list(/obj/item/card/id/torch/crew/medical/senior)
 
 /decl/hierarchy/outfit/job/torch/crew/medical/senior/fleet
 	name = OUTFIT_JOB_NAME("Physician - Fleet")
@@ -21,13 +21,13 @@
 
 /decl/hierarchy/outfit/job/torch/crew/medical/contractor/senior
 	name = OUTFIT_JOB_NAME("Physician - Contractor")
-	id_types = list(/obj/item/weapon/card/id/torch/contractor/medical/senior)
+	id_types = list(/obj/item/card/id/torch/contractor/medical/senior)
 
 /decl/hierarchy/outfit/job/torch/crew/medical/junior
 	name = OUTFIT_JOB_NAME("Medical Resident")
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/medical
 	shoes = /obj/item/clothing/shoes/dutyboots
-	id_types = list(/obj/item/weapon/card/id/torch/crew/medical/senior)
+	id_types = list(/obj/item/card/id/torch/crew/medical/senior)
 
 /decl/hierarchy/outfit/job/torch/crew/medical/junior/fleet
 	name = OUTFIT_JOB_NAME("Medical Resident - Fleet")
@@ -36,13 +36,13 @@
 
 /decl/hierarchy/outfit/job/torch/crew/medical/contractor/junior
 	name = OUTFIT_JOB_NAME("Medical Resident - Contractor")
-	id_types = list(/obj/item/weapon/card/id/torch/contractor/medical/senior)
+	id_types = list(/obj/item/card/id/torch/contractor/medical/senior)
 
 /decl/hierarchy/outfit/job/torch/crew/medical/doctor
 	name = OUTFIT_JOB_NAME("Medical Technician")
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/medical
 	shoes = /obj/item/clothing/shoes/dutyboots
-	id_types = list(/obj/item/weapon/card/id/torch/crew/medical)
+	id_types = list(/obj/item/card/id/torch/crew/medical)
 	l_ear = /obj/item/device/radio/headset/headset_corpsman
 
 /decl/hierarchy/outfit/job/torch/crew/medical/doctor/fleet
@@ -55,7 +55,7 @@
 	name = OUTFIT_JOB_NAME("Medical Technician - Contractor")
 	uniform = /obj/item/clothing/under/rank/medical
 	shoes = /obj/item/clothing/shoes/white
-	id_types = list(/obj/item/weapon/card/id/torch/contractor/medical)
+	id_types = list(/obj/item/card/id/torch/contractor/medical)
 
 /decl/hierarchy/outfit/job/torch/crew/medical/contractor/mortus
 	name = OUTFIT_JOB_NAME("Mortician")
@@ -70,18 +70,22 @@
 
 /decl/hierarchy/outfit/job/torch/crew/medical/contractor/chemist
 	name = OUTFIT_JOB_NAME("Chemist - Torch")
-	uniform = /obj/item/clothing/under/rank/medical
+	uniform = /obj/item/clothing/under/rank/chemist
 	shoes = /obj/item/clothing/shoes/white
-	pda_type = /obj/item/modular_computer/pda/medical
-	id_types = list(/obj/item/weapon/card/id/torch/contractor/chemist)
+	pda_type = /obj/item/modular_computer/pda/chemistry
+	id_types = list(/obj/item/card/id/torch/contractor/chemist)
+
+/decl/hierarchy/outfit/job/torch/crew/medical/contractor/chemist/New()
+	..()
+	BACKPACK_OVERRIDE_CHEMISTRY
 
 /decl/hierarchy/outfit/job/torch/crew/medical/counselor
 	name = OUTFIT_JOB_NAME("Counselor")
 	uniform = /obj/item/clothing/under/rank/psych/turtleneck
 	shoes = /obj/item/clothing/shoes/white
 	id_types = list(
-		/obj/item/weapon/card/id/torch/contractor/medical/counselor,
-		/obj/item/weapon/card/id/foundation_civilian)
+		/obj/item/card/id/torch/contractor/medical/counselor,
+		/obj/item/card/id/foundation_civilian)
 
 /decl/hierarchy/outfit/job/torch/crew/medical/counselor/ec
 	name = OUTFIT_JOB_NAME("Counselor - Expeditionary Corps")

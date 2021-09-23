@@ -1,4 +1,4 @@
-/obj/item/weapon/rig/combat
+/obj/item/rig/combat
 	name = "combat hardsuit control module"
 	desc = "A sleek and dangerous hardsuit for active combat."
 	icon_state = "security_rig"
@@ -15,10 +15,10 @@
 	online_slowdown = 1
 	offline_slowdown = 3
 	offline_vision_restriction = TINT_HEAVY
-	allowed = list(/obj/item/device/flashlight, /obj/item/weapon/tank,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/handcuffs,/obj/item/device/t_scanner, /obj/item/weapon/rcd, /obj/item/weapon/crowbar, \
-	/obj/item/weapon/screwdriver, /obj/item/weapon/weldingtool, /obj/item/weapon/wirecutters, /obj/item/weapon/wrench, /obj/item/device/multitool, \
-	/obj/item/device/radio, /obj/item/device/scanner/gas,/obj/item/weapon/storage/briefcase/inflatable, /obj/item/weapon/melee/baton, /obj/item/weapon/gun, \
-	/obj/item/weapon/storage/firstaid, /obj/item/weapon/reagent_containers/hypospray, /obj/item/roller, /obj/item/device/suit_cooling_unit)
+	allowed = list(/obj/item/device/flashlight, /obj/item/tank,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/handcuffs,/obj/item/device/t_scanner, /obj/item/rcd, /obj/item/rpd, /obj/item/crowbar, \
+	/obj/item/screwdriver, /obj/item/weldingtool, /obj/item/wirecutters, /obj/item/wrench, /obj/item/device/multitool, \
+	/obj/item/device/radio, /obj/item/device/scanner/gas,/obj/item/storage/briefcase/inflatable, /obj/item/melee/baton, /obj/item/gun, \
+	/obj/item/storage/firstaid, /obj/item/reagent_containers/hypospray, /obj/item/roller, /obj/item/device/suit_cooling_unit)
 
 	chest_type = /obj/item/clothing/suit/space/rig/combat
 	helm_type = /obj/item/clothing/head/helmet/space/rig/combat
@@ -51,7 +51,7 @@
 		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_hands_unathi.dmi'
 		)
 
-/obj/item/weapon/rig/combat/equipped
+/obj/item/rig/combat/equipped
 	initial_modules = list(
 		/obj/item/rig_module/mounted/egun,
 		/obj/item/rig_module/vision/thermal,
@@ -65,7 +65,7 @@
 
 //Extremely OP, hardly standard issue equipment
 //Now a little less OP
-/obj/item/weapon/rig/military
+/obj/item/rig/military
 	name = "military hardsuit control module"
 	desc = "An austere hardsuit used by paramilitary groups and real soldiers alike."
 	icon_state = "military_rig"
@@ -82,10 +82,10 @@
 	online_slowdown = 1
 	offline_slowdown = 3
 	offline_vision_restriction = TINT_HEAVY
-	allowed = list(/obj/item/device/flashlight, /obj/item/weapon/tank,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/handcuffs,/obj/item/device/t_scanner, /obj/item/weapon/rcd, /obj/item/weapon/crowbar, \
-	/obj/item/weapon/screwdriver, /obj/item/weapon/weldingtool, /obj/item/weapon/wirecutters, /obj/item/weapon/wrench, /obj/item/device/multitool, \
-	/obj/item/device/radio, /obj/item/device/scanner/gas,/obj/item/weapon/storage/briefcase/inflatable, /obj/item/weapon/melee/baton, /obj/item/weapon/gun, \
-	/obj/item/weapon/storage/firstaid, /obj/item/weapon/reagent_containers/hypospray, /obj/item/roller, /obj/item/device/suit_cooling_unit)
+	allowed = list(/obj/item/device/flashlight, /obj/item/tank,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/handcuffs,/obj/item/device/t_scanner, /obj/item/rcd, /obj/item/crowbar, \
+	/obj/item/screwdriver, /obj/item/weldingtool, /obj/item/wirecutters, /obj/item/wrench, /obj/item/device/multitool, \
+	/obj/item/device/radio, /obj/item/device/scanner/gas,/obj/item/storage/briefcase/inflatable, /obj/item/melee/baton, /obj/item/gun, \
+	/obj/item/storage/firstaid, /obj/item/reagent_containers/hypospray, /obj/item/roller, /obj/item/device/suit_cooling_unit)
 
 	chest_type = /obj/item/clothing/suit/space/rig/military
 	helm_type = /obj/item/clothing/head/helmet/space/rig/military
@@ -118,7 +118,7 @@
 		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_hands_unathi.dmi'
 		)
 
-/obj/item/weapon/rig/military/equipped
+/obj/item/rig/military/equipped
 	initial_modules = list(
 		/obj/item/rig_module/mounted/egun,
 		/obj/item/rig_module/vision/multi,

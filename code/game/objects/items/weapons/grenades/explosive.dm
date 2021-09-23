@@ -13,7 +13,7 @@
 /obj/item/projectile/bullet/pellet/fragment/strong
 	damage = 15
 
-/obj/item/weapon/grenade/frag
+/obj/item/grenade/frag
 	name = "fragmentation grenade"
 	desc = "A military fragmentation grenade, designed to explode in a deadly shower of fragments, while avoiding massive structural damage."
 	icon_state = "frggrenade"
@@ -25,7 +25,7 @@
 	//The radius of the circle used to launch projectiles. Lower values mean less projectiles are used but if set too low gaps may appear in the spread pattern
 	var/spread_range = 7 //leave as is, for some reason setting this higher makes the spread pattern have gaps close to the epicenter
 
-/obj/item/weapon/grenade/frag/detonate()
+/obj/item/grenade/frag/detonate()
 	..()
 
 	var/turf/O = get_turf(src)
@@ -53,31 +53,41 @@
 
 		P.launch(O)
 
+		// Handle damaging whatever the grenade's inside. Currently only checks for mobs.
+		if (loc != get_turf(src))
+			var/recursion_limit = 3 // Prevent infinite loops
+			var/atom/current_check = src
+			while (recursion_limit)
+				current_check = current_check.loc
+				if (isturf(current_check))
+					break
+				if (ismob(current_check))
+					P.attack_mob(current_check, 0, 25)
+				recursion_limit--
+
 		//Make sure to hit any mobs in the source turf
 		for(var/mob/living/M in T)
 			//lying on a frag grenade while the grenade is on the ground causes you to absorb most of the shrapnel.
 			//you will most likely be dead, but others nearby will be spared the fragments that hit you instead.
 			if(M.lying && isturf(src.loc))
 				P.attack_mob(M, 0, 5)
-			else if(!M.lying && src.loc != get_turf(src)) //if it's not on the turf, it must be in the mob!
-				P.attack_mob(M, 0, 25) //you're holding a grenade, dude!
 			else
-				P.attack_mob(M, 0, 100) //otherwise, allow a decent amount of fragments to pass
+				P.attack_mob(M, 0, 50)
 
 
 
-/obj/item/weapon/grenade/frag/proc/on_explosion(var/turf/O)
+/obj/item/grenade/frag/proc/on_explosion(var/turf/O)
 	if(explosion_size)
 		explosion(O, -1, -1, explosion_size, round(explosion_size/2), 0)
 
-/obj/item/weapon/grenade/frag/shell
+/obj/item/grenade/frag/shell
 	name = "fragmentation grenade"
 	desc = "A light fragmentation grenade, designed to be fired from a launcher. It can still be activated and thrown by hand if necessary."
 	icon_state = "fragshell"
 
 	num_fragments = 50 //less powerful than a regular frag grenade
 
-/obj/item/weapon/grenade/frag/high_yield
+/obj/item/grenade/frag/high_yield
 	name = "fragmentation bomb"
 	desc = "Larger and heavier than a standard fragmentation grenade, this device is extremely dangerous. It cannot be thrown as far because of its weight."
 	icon_state = "frag"
@@ -90,6 +100,6 @@
 	num_fragments = 200  //total number of fragments produced by the grenade
 	explosion_size = 3
 
-/obj/item/weapon/grenade/frag/high_yield/on_explosion(var/turf/O)
+/obj/item/grenade/frag/high_yield/on_explosion(var/turf/O)
 	if(explosion_size)
 		explosion(O, -1, round(explosion_size/2), explosion_size, round(explosion_size/2), 0) //has a chance to blow a hole in the floor

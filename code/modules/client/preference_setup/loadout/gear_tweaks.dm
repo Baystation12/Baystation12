@@ -203,13 +203,13 @@
 */
 
 /datum/gear_tweak/tablet
-	var/list/ValidProcessors = list(/obj/item/weapon/stock_parts/computer/processor_unit/small)
-	var/list/ValidBatteries = list(/obj/item/weapon/stock_parts/computer/battery_module/nano, /obj/item/weapon/stock_parts/computer/battery_module/micro, /obj/item/weapon/stock_parts/computer/battery_module)
-	var/list/ValidHardDrives = list(/obj/item/weapon/stock_parts/computer/hard_drive/micro, /obj/item/weapon/stock_parts/computer/hard_drive/small, /obj/item/weapon/stock_parts/computer/hard_drive)
-	var/list/ValidNetworkCards = list(/obj/item/weapon/stock_parts/computer/network_card, /obj/item/weapon/stock_parts/computer/network_card/advanced)
-	var/list/ValidNanoPrinters = list(null, /obj/item/weapon/stock_parts/computer/nano_printer)
-	var/list/ValidCardSlots = list(null, /obj/item/weapon/stock_parts/computer/card_slot)
-	var/list/ValidTeslaLinks = list(null, /obj/item/weapon/stock_parts/computer/tesla_link)
+	var/list/ValidProcessors = list(/obj/item/stock_parts/computer/processor_unit/small)
+	var/list/ValidBatteries = list(/obj/item/stock_parts/computer/battery_module/nano, /obj/item/stock_parts/computer/battery_module/micro, /obj/item/stock_parts/computer/battery_module)
+	var/list/ValidHardDrives = list(/obj/item/stock_parts/computer/hard_drive/micro, /obj/item/stock_parts/computer/hard_drive/small, /obj/item/stock_parts/computer/hard_drive)
+	var/list/ValidNetworkCards = list(/obj/item/stock_parts/computer/network_card, /obj/item/stock_parts/computer/network_card/advanced)
+	var/list/ValidNanoPrinters = list(null, /obj/item/stock_parts/computer/nano_printer)
+	var/list/ValidCardSlots = list(null, /obj/item/stock_parts/computer/card_slot)
+	var/list/ValidTeslaLinks = list(null, /obj/item/stock_parts/computer/tesla_link)
 
 /datum/gear_tweak/tablet/get_contents(var/list/metadata)
 	var/list/names = list()

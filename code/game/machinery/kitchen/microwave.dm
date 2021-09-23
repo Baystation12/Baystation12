@@ -5,14 +5,17 @@
 	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "mw"
 	layer = BELOW_OBJ_LAYER
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	idle_power_usage = 5
 	active_power_usage = 100
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT | ATOM_FLAG_OPEN_CONTAINER
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	
+	machine_name = "microwave"
+	machine_desc = "Required for preparing any dish more complicated than a slice of bread. In the future, <i>everything</i> is microwaved."
 
 	var/operating = FALSE // Is it on?
 	var/dirtiness = 0 // Ranges from 0 to 100, increasing a little with failed recipes and emptying reagents
@@ -41,11 +44,11 @@
 	// Micro lasers speed cooking up at higher tiers.
 	// Matter bins decrease the chance of breaking or getting dirty.
 	..()
-	var/laser_rating = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/micro_laser), 1, 5)
+	var/laser_rating = Clamp(total_component_rating_of_type(/obj/item/stock_parts/micro_laser), 1, 5)
 
 	speed_multiplier = (laser_rating * 0.5)
-	power_efficiency = total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator)
-	break_multiplier = 1 / Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin), 1, 3)
+	power_efficiency = total_component_rating_of_type(/obj/item/stock_parts/manipulator)
+	break_multiplier = 1 / Clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 1, 3)
 
 /*******************
 *   Item Adding
@@ -92,7 +95,7 @@
 		return
 
 	else if(dirtiness == 100) // The microwave is all dirty, so it can't be used!
-		var/has_rag = istype(O, /obj/item/weapon/reagent_containers/glass/rag)
+		var/has_rag = istype(O, /obj/item/reagent_containers/glass/rag)
 		var/has_cleaner = O.reagents != null && O.reagents.has_reagent(/datum/reagent/space_cleaner, 5)
 
 		// If they're trying to clean it, let them
@@ -150,9 +153,9 @@
 
 		return
 
-	else if(istype(O,/obj/item/weapon/reagent_containers/glass) || \
-	        istype(O,/obj/item/weapon/reagent_containers/food/drinks) || \
-	        istype(O,/obj/item/weapon/reagent_containers/food/condiment) \
+	else if(istype(O,/obj/item/reagent_containers/glass) || \
+	        istype(O,/obj/item/reagent_containers/food/drinks) || \
+	        istype(O,/obj/item/reagent_containers/food/condiment) \
 		)
 		if (!O.reagents)
 			return
@@ -161,12 +164,12 @@
 				to_chat(user, SPAN_WARNING("Your [O] contains components unsuitable for cookery."))
 		return
 
-	else if(istype(O, /obj/item/weapon/storage))
+	else if(istype(O, /obj/item/storage))
 		if (LAZYLEN(ingredients) >= SScuisine.microwave_maximum_item_storage)
 			to_chat(user, SPAN_WARNING("[src] is completely full!"))
 			return
 
-		var/obj/item/weapon/storage/bag/P = O
+		var/obj/item/storage/bag/P = O
 		var/objects_loaded = 0
 		for(var/obj/G in P.contents)
 			if(is_type_in_list(G, SScuisine.microwave_accepts_items) && LAZYLEN(ingredients) < SScuisine.microwave_maximum_item_storage && P.remove_from_storage(G, src, 1))
@@ -182,7 +185,7 @@
 				user.visible_message(SPAN_NOTICE("\The [user] empties \the [P] into \the [src]."),
 				SPAN_NOTICE("You empty what you can from \the [P] into \the [src]."))
 			return TRUE
-			
+
 		else
 			to_chat(user, SPAN_WARNING("\The [P] doesn't contain any compatible items to put into \the [src]!"))
 
@@ -207,7 +210,7 @@
 
 	else
 		to_chat(user, "<span class='warning'>You have no idea what you can cook with this [O].</span>")
-		
+
 	updateUsrDialog()
 
 /obj/machinery/microwave/components_are_accessible(path)
@@ -248,50 +251,50 @@
 		dat += "<TT><b><i>This microwave is covered in muck. You'll need to wipe it down or clean it out before you can use it again.</i></b></TT>"
 	else
 		playsound(loc, 'sound/machines/pda_click.ogg', 50, 1)
-		var/list/items_counts = new
-		var/list/items_measures = new
-		var/list/items_measures_p = new
-		for (var/obj/O in InsertedContents())
-			var/display_name = O.name
-			if (istype(O,/obj/item/weapon/reagent_containers/food/snacks/egg))
-				items_measures[display_name] = "egg"
-				items_measures_p[display_name] = "eggs"
-			if (istype(O,/obj/item/weapon/reagent_containers/food/snacks/tofu))
-				items_measures[display_name] = "tofu chunk"
-				items_measures_p[display_name] = "tofu chunks"
-			if (istype(O,/obj/item/weapon/reagent_containers/food/snacks/meat)) //any meat
-				items_measures[display_name] = "slab of meat"
-				items_measures_p[display_name] = "slabs of meat"
-			if (istype(O,/obj/item/weapon/reagent_containers/food/snacks/donkpocket))
-				display_name = "Turnovers"
-				items_measures[display_name] = "turnover"
-				items_measures_p[display_name] = "turnovers"
-			if (istype(O,/obj/item/weapon/reagent_containers/food/snacks/fish))
-				items_measures[display_name] = "fillet of fish"
-				items_measures_p[display_name] = "fillets of fish"
-			items_counts[display_name]++
-		for (var/O in items_counts)
-			var/N = items_counts[O]
-			if (!(O in items_measures))
-				dat += "<B>[capitalize(O)]:</B> [N] [lowertext(O)]\s"
-			else
-				if (N==1)
-					dat += "<B>[capitalize(O)]:</B> [N] [items_measures[O]]"
-				else
-					dat += "<B>[capitalize(O)]:</B> [N] [items_measures_p[O]]"
-
-		for (var/datum/reagent/R in reagents.reagent_list)
-			var/display_name = R.name
-			if (R.type == /datum/reagent/capsaicin)
-				display_name = "Hotsauce"
-			if (R.type == /datum/reagent/frostoil)
-				display_name = "Coldsauce"
-			dat += "<B>[display_name]:</B> [R.volume] unit\s"
-
-		if (items_counts.len==0 && reagents.reagent_list.len==0)
-			dat += "<B>The microwave is empty</B>"
+		if (!LAZYLEN(ingredients) && !reagents.reagent_list.len)
+			dat += "<B>The microwave is empty.</B>"
 		else
-			dat += "<b>Ingredients:</b><br>[dat]"
+			dat += "<b>Ingredients:</b><br>"
+			var/list/items_counts = new
+			var/list/items_measures = new
+			var/list/items_measures_p = new
+			for (var/obj/O in InsertedContents())
+				var/display_name = O.name
+				if (istype(O,/obj/item/reagent_containers/food/snacks/egg))
+					items_measures[display_name] = "egg"
+					items_measures_p[display_name] = "eggs"
+				if (istype(O,/obj/item/reagent_containers/food/snacks/tofu))
+					items_measures[display_name] = "tofu chunk"
+					items_measures_p[display_name] = "tofu chunks"
+				if (istype(O,/obj/item/reagent_containers/food/snacks/meat)) //any meat
+					items_measures[display_name] = "slab of meat"
+					items_measures_p[display_name] = "slabs of meat"
+				if (istype(O,/obj/item/reagent_containers/food/snacks/donkpocket))
+					display_name = "Turnovers"
+					items_measures[display_name] = "turnover"
+					items_measures_p[display_name] = "turnovers"
+				if (istype(O,/obj/item/reagent_containers/food/snacks/fish))
+					items_measures[display_name] = "fillet of fish"
+					items_measures_p[display_name] = "fillets of fish"
+				items_counts[display_name]++
+			for (var/O in items_counts)
+				var/N = items_counts[O]
+				if (!(O in items_measures))
+					dat += "<B>[capitalize(O)]:</B> [N] [lowertext(O)]\s"
+				else
+					if (N==1)
+						dat += "<B>[capitalize(O)]:</B> [N] [items_measures[O]]"
+					else
+						dat += "<B>[capitalize(O)]:</B> [N] [items_measures_p[O]]"
+
+			for (var/datum/reagent/R in reagents.reagent_list)
+				var/display_name = R.name
+				if (R.type == /datum/reagent/capsaicin)
+					display_name = "Hotsauce"
+				if (R.type == /datum/reagent/frostoil)
+					display_name = "Coldsauce"
+				dat += "<B>[display_name]:</B> [R.volume] unit\s"
+
 		dat += "<HR><BR><A href='?src=\ref[src];action=cook'>Turn on!<BR><A href='?src=\ref[src];action=dispose'>Eject ingredients!"
 
 	show_browser(user, "<HEAD><TITLE>Microwave Controls</TITLE></HEAD><TT>[jointext(dat,"<br>")]</TT>", "window=microwave")
@@ -308,7 +311,7 @@
 	if(stat & (NOPOWER|BROKEN))
 		return
 	start()
-	if (reagents.total_volume == 0 && !contents.len) //dry run
+	if (reagents.total_volume == 0 && !LAZYLEN(ingredients)) //dry run
 		if (!wzhzhzh(10))
 			abort()
 			return
@@ -373,7 +376,7 @@
 
 /obj/machinery/microwave/proc/has_extra_item()
 	for (var/obj/O in ingredients) // do not use src or contents unless you want to cook your own components
-		if (!istype(O, /obj/item/weapon/reagent_containers/food))
+		if (!istype(O, /obj/item/reagent_containers/food))
 			return TRUE
 	return FALSE
 
@@ -448,7 +451,7 @@
 	var/amount = 0
 
 	// Kill + delete mobs in mob holders
-	for (var/obj/item/weapon/holder/H in ingredients)
+	for (var/obj/item/holder/H in ingredients)
 		for (var/mob/living/M in H.contents)
 			M.death()
 			qdel(M)
@@ -463,7 +466,7 @@
 
 	LAZYCLEARLIST(ingredients)
 	reagents.clear_reagents()
-	var/obj/item/weapon/reagent_containers/food/snacks/badrecipe/ffuu = new(src)
+	var/obj/item/reagent_containers/food/snacks/badrecipe/ffuu = new(src)
 	ffuu.reagents.add_reagent(/datum/reagent/carbon, amount)
 	ffuu.reagents.add_reagent(/datum/reagent/toxin, amount / 10)
 	return ffuu

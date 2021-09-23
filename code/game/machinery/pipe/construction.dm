@@ -132,7 +132,7 @@ Buildable meters
 		P.node4.build_network()
 	return 0
 
-/obj/item/pipe/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
+/obj/item/pipe/attackby(var/obj/item/W as obj, var/mob/user as mob)
 	if(!isWrench(W))
 		return ..()
 	if (!isturf(loc))
@@ -213,7 +213,7 @@ Buildable meters
 /obj/item/machine_chassis
 	var/build_type
 
-/obj/item/machine_chassis/attackby(var/obj/item/weapon/W, var/mob/user)
+/obj/item/machine_chassis/attackby(var/obj/item/W, var/mob/user)
 	if(!isWrench(W))
 		return ..()
 	var/obj/machinery/machine = new build_type(get_turf(src), dir, FALSE)

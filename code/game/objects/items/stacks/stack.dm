@@ -38,6 +38,7 @@
 	if(!plural_name)
 		plural_name = "[singular_name]s"
 
+
 /obj/item/stack/Destroy()
 	if(uses_charge)
 		return 1

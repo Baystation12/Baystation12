@@ -6,8 +6,8 @@ var/list/default_material_composition = list(MATERIAL_STEEL = 0, MATERIAL_ALUMIN
 /obj/machinery/r_n_d
 	name = "R&D Device"
 	icon = 'icons/obj/machines/research.dmi'
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	uncreated_component_parts = null
 	stat_immune = 0
 	var/busy = 0
@@ -17,7 +17,7 @@ var/list/default_material_composition = list(MATERIAL_STEEL = 0, MATERIAL_ALUMIN
 
 /obj/machinery/r_n_d/dismantle()
 	for(var/obj/I in src)
-		if(istype(I, /obj/item/weapon/reagent_containers/glass/beaker))
+		if(istype(I, /obj/item/reagent_containers/glass/beaker))
 			reagents.trans_to_obj(I, reagents.total_volume)
 	for(var/f in materials)
 		if(materials[f] >= SHEET_MATERIAL_AMOUNT)

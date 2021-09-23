@@ -1,0 +1,54 @@
+{{if data.has_network}}
+	{{if data.prog_state == 1}} <!-- NEWSCAST_HOME - Display channels and date/time -->
+		<table style="width:100%">
+			<tr>
+			<td>Interface and networks operational.
+			<tr>
+			<td>{{:data.time_blurb}}
+			<tr>
+			<td>{{:data.notifs_blurb}}
+			<td>{{:helper.link(data.notifs_enabled ? "Disable" : "Enable", data.notifs_enabled ? 'volume-off' : 'volume-o', {'toggle_notifs' : 1})}}
+		</table>
+		<h3><u>Connected channels</u></h3>
+		<table style="width:100%">
+			{{for data.channels}}
+				<tr>
+				{{if value.censored}}
+					<td>{{:helper.link(value.name, null, {'view_channel' : value.ref})}} <font color='red'>***</font>
+				{{else}}
+					<td>{{:helper.link(value.name, null, {'view_channel' : value.ref})}}
+				{{/if}}
+			{{empty}}
+				<p><font color='red'><h2><b>NO CHANNELS FOUND</b></h2>Couldn't locate any channels on the local NTNet instance. Please try again in a few minutes.</font></p>
+			{{/for}}
+		</table>
+	{{else data.prog_state == 2}} <!-- NEWSCAST_VIEW_CHANNEL - Show the contents of the active channel -->
+		{{for data.active_channels}}
+			<h3><u>{{:value.name}}</u></h3>
+			<i><font size=1>Created by <font color="#cc9090">{{:value.author}}</font></font></i>
+			<hr>
+			{{if value.censored}}
+				{{:data.dnotice_blurb}}<br><br> <!-- no reading for you, pensive -->
+			{{else}}
+				{{for data.active_stories}}
+					<br>"{{:value.body}}"<br>
+					{{if value.has_photo}}
+						<br>
+						<table style="width:100%">
+							<tr>
+							<td>{{:value.photo_dat}}<br>
+							<!--<td>{{:helper.link("View photo", null, {'view_photo' : value.story_ref})}}-->
+						</table>
+					{{/if}}
+					<i><font size=1>Story by <font color="#cc9090">{{:value.author}}</font> at {{:value.timestamp}}</font></i>
+					<br><br><hr>
+				{{empty}}
+					<p><i>This network has submitted no stories during the current time slot. Please use network-specific sites, apps, and archives to access stories submitted outside of this time slot.</i></p>
+				{{/for}}
+			{{/if}}
+		{{/for}}
+		{{:helper.link("Return", 'arrowreturnthick-1-w', {'return_to_home' : 1})}}
+	{{/if}}
+{{else}}
+	<p><font color='red'><h2><b>NO NETWORK FOUND</b></h2>Couldn't fetch news data from a feed network. Ensure you have a connection to NTNet and there is a network broadcaster in your sector.</font></p>
+{{/if}}

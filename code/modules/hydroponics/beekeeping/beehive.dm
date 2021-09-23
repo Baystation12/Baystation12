@@ -3,8 +3,8 @@
 	icon = 'icons/obj/beekeeping.dmi'
 	icon_state = "beehive-0"
 	desc = "A wooden box designed specifically to house our buzzling buddies. Far more efficient than traditional hives. Just insert a frame and a queen, close it up, and you're good to go!"
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	layer = BELOW_OBJ_LAYER
 
 	var/closed = 0
@@ -168,11 +168,14 @@
 	desc = "A machine used to extract honey and wax from a beehive frame."
 	icon = 'icons/obj/virology.dmi'
 	icon_state = "centrifuge"
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	
+	machine_name = "honey extractor"
+	machine_desc = "Extracts liquid honey and solid blocks of wax from filled beehive frames. Requires an attached reagent container to operate."
 
 	var/processing = 0
 	var/honey = 0
@@ -206,11 +209,11 @@
 			honey += processing
 			processing = 0
 			icon_state = "centrifuge"
-	else if(istype(I, /obj/item/weapon/reagent_containers/glass))
+	else if(istype(I, /obj/item/reagent_containers/glass))
 		if(!honey)
 			to_chat(user, "<span class='notice'>There is no honey in \the [src].</span>")
 			return
-		var/obj/item/weapon/reagent_containers/glass/G = I
+		var/obj/item/reagent_containers/glass/G = I
 		var/transferred = min(G.reagents.maximum_volume - G.reagents.total_volume, honey)
 		G.reagents.add_reagent(/datum/reagent/nutriment/honey, transferred)
 		honey -= transferred
@@ -309,4 +312,4 @@ var/global/list/datum/stack_recipe/wax_recipes = list(
 	new /obj/item/honey_frame(src)
 	new /obj/item/honey_frame(src)
 	new /obj/item/bee_pack(src)
-	new /obj/item/weapon/crowbar(src)
+	new /obj/item/crowbar(src)

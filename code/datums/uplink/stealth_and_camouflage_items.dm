@@ -37,20 +37,20 @@
 	name = "Bug Kit"
 	desc = "For when you want to conduct voyeurism from afar. Comes with 6 bugs to plant, and a monitoring device to pair them with."
 	item_cost = 8
-	path = /obj/item/weapon/storage/box/syndie_kit/spy
+	path = /obj/item/storage/box/syndie_kit/spy
 
 /datum/uplink_item/item/stealth_items/id
 	name = "Agent ID card"
 	desc = "A unique ID card that is completely configurable. Scan another ID card with it to clone its access capabilities."
 	item_cost = 12
-	path = /obj/item/weapon/card/id/syndicate
+	path = /obj/item/card/id/syndicate
 
 /datum/uplink_item/item/stealth_items/chameleon_kit
 	name = "Chameleon Kit"
 	desc = "Comes with a full set of appearance changing clothing you need to impersonate most people.  \
 	Accessories, backpack, and gun included!"
 	item_cost = 20
-	path = /obj/item/weapon/storage/backpack/chameleon/sydie_kit
+	path = /obj/item/storage/backpack/chameleon/sydie_kit
 
 /datum/uplink_item/item/stealth_items/voice
 	name = "Modified Gas Mask"
@@ -77,4 +77,4 @@
 	desc = "This satchel is thin enough to be hidden in the gap between plating and tiling, \
 	great for stashing your stolen goods. Comes with a crowbar and a floor tile."
 	item_cost = 20
-	path = /obj/item/weapon/storage/backpack/satchel/flat
+	path = /obj/item/storage/backpack/satchel/flat

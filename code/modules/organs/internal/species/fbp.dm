@@ -8,7 +8,7 @@
 	status = ORGAN_ROBOTIC
 	vital = 1
 	var/open
-	var/obj/item/weapon/cell/cell = /obj/item/weapon/cell/hyper
+	var/obj/item/cell/cell = /obj/item/cell/hyper
 	//at 0.8 completely depleted after 60ish minutes of constant walking or 130 minutes of standing still
 	var/servo_cost = 0.8
 
@@ -40,7 +40,7 @@
 		return 0
 	return cell && cell.use(amount)
 
-/obj/item/organ/internal/cell/proc/get_power_drain()	
+/obj/item/organ/internal/cell/proc/get_power_drain()
 	var/damage_factor = 1 + 10 * damage/max_damage
 	return servo_cost * damage_factor
 
@@ -63,7 +63,7 @@
 	if(cell)
 		cell.emp_act(severity)
 
-/obj/item/organ/internal/cell/attackby(obj/item/weapon/W, mob/user)
+/obj/item/organ/internal/cell/attackby(obj/item/W, mob/user)
 	if(isScrewdriver(W))
 		if(open)
 			open = 0
@@ -79,7 +79,7 @@
 				to_chat(user, "<span class='notice'>You remove \the [cell] from \the [src].</span>")
 				cell = null
 
-	if (istype(W, /obj/item/weapon/cell))
+	if (istype(W, /obj/item/cell))
 		if(open)
 			if(cell)
 				to_chat(user, "<span class ='warning'>There is a power cell already installed.</span>")
@@ -138,7 +138,7 @@
 	desc = stored_mmi.desc
 	icon = stored_mmi.icon
 
-	stored_mmi.icon_state = "mmi-full"
+	stored_mmi.update_icon()
 	icon_state = stored_mmi.icon_state
 
 	if(owner && owner.stat == DEAD)

@@ -4,7 +4,7 @@
 	icon = 'icons/atmos/oxyregenerator.dmi'
 	icon_state = "off"
 	level = 1
-	density = 1
+	density = TRUE
 	use_power = POWER_USE_OFF
 	idle_power_usage = 200		//internal circuitry, friction losses and stuff
 	power_rating = 10000
@@ -12,6 +12,9 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	
+	machine_name = "oxygen regenerator"
+	machine_desc = "Catalyzes gaseous CO2 to convert it into gaseous oxygen. The excess carbon is condensed and ejected as graphite sheets."
 
 	var/target_pressure = 10*ONE_ATMOSPHERE
 	var/id = null
@@ -26,18 +29,18 @@
 
 /obj/machinery/atmospherics/binary/oxyregenerator/RefreshParts()
 	carbon_efficiency = initial(carbon_efficiency)
-	carbon_efficiency += 0.25 * total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin)
-	carbon_efficiency -= 0.25 * number_of_components(/obj/item/weapon/stock_parts/matter_bin)
+	carbon_efficiency += 0.25 * total_component_rating_of_type(/obj/item/stock_parts/matter_bin)
+	carbon_efficiency -= 0.25 * number_of_components(/obj/item/stock_parts/matter_bin)
 	carbon_efficiency = Clamp(carbon_efficiency, initial(carbon_efficiency), 5)
 
 	intake_power_efficiency = initial(intake_power_efficiency)
-	intake_power_efficiency -= 0.1 * total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator)
-	intake_power_efficiency += 0.1 * number_of_components(/obj/item/weapon/stock_parts/manipulator)
+	intake_power_efficiency -= 0.1 * total_component_rating_of_type(/obj/item/stock_parts/manipulator)
+	intake_power_efficiency += 0.1 * number_of_components(/obj/item/stock_parts/manipulator)
 	intake_power_efficiency = Clamp(intake_power_efficiency, 0.1, initial(intake_power_efficiency))
 
 	power_rating = 1
-	power_rating -= 0.05 * total_component_rating_of_type(/obj/item/weapon/stock_parts/micro_laser)
-	power_rating += 0.05 * number_of_components(/obj/item/weapon/stock_parts/micro_laser)
+	power_rating -= 0.05 * total_component_rating_of_type(/obj/item/stock_parts/micro_laser)
+	power_rating += 0.05 * number_of_components(/obj/item/stock_parts/micro_laser)
 	power_rating = Clamp(power_rating, 0.1, 1)
 	power_rating *= initial(power_rating)
 	..()

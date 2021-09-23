@@ -3,13 +3,16 @@
 	desc = "A mechanical basin designed to nurture plants. It has various useful sensors."
 	icon = 'icons/obj/hydroponics_machines.dmi'
 	icon_state = "hydrotray3"
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	volume = 100
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	
+	machine_name = "hydroponics tray"
+	machine_desc = "These are waist-high trays that can grow a vast variety of plants in a nutrient bath. Also comes with a sealable lid for plants that don't grow in a surrounding atmosphere. A cornerstone of self-sufficient spaceships across the galaxy."
 
 	var/mechanical = 1         // Set to 0 to stop it from drawing the alert lights.
 	var/base_name = "tray"
@@ -446,9 +449,9 @@
 
 		return
 
-	else if(istype(O, /obj/item/weapon/reagent_containers/syringe))
+	else if(istype(O, /obj/item/reagent_containers/syringe))
 
-		var/obj/item/weapon/reagent_containers/syringe/S = O
+		var/obj/item/reagent_containers/syringe/S = O
 
 		if (S.mode == 1)
 			if(seed)
@@ -468,7 +471,7 @@
 
 		plant_seed(user, O)
 
-	else if (istype(O, /obj/item/weapon/material/minihoe))  // The minihoe
+	else if (istype(O, /obj/item/material/minihoe))  // The minihoe
 
 		if(weedlevel > 0)
 			user.visible_message("<span class='notice'>[user] starts uprooting the weeds.</span>", "<span class='notice'>You remove the weeds from the [src].</span>")
@@ -481,19 +484,19 @@
 		else
 			to_chat(user, "<span class='notice'>This plot is completely devoid of weeds. It doesn't need uprooting.</span>")
 
-	else if (istype(O, /obj/item/weapon/storage/plants))
+	else if (istype(O, /obj/item/storage/plants))
 
 		attack_hand(user)
 
-		var/obj/item/weapon/storage/plants/S = O
-		for (var/obj/item/weapon/reagent_containers/food/snacks/grown/G in locate(user.x,user.y,user.z))
+		var/obj/item/storage/plants/S = O
+		for (var/obj/item/reagent_containers/food/snacks/grown/G in locate(user.x,user.y,user.z))
 			if(!S.can_be_inserted(G, user))
 				return
 			S.handle_item_insertion(G, 1)
 
-	else if ( istype(O, /obj/item/weapon/plantspray) )
+	else if ( istype(O, /obj/item/plantspray) )
 
-		var/obj/item/weapon/plantspray/spray = O
+		var/obj/item/plantspray/spray = O
 		toxins += spray.toxicity
 		pestlevel -= spray.pest_kill_str
 		weedlevel -= spray.weed_kill_str

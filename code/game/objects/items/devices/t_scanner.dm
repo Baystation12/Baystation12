@@ -89,7 +89,7 @@
 		var/image/I = image(loc = scanned, icon = scanned.icon, icon_state = scanned.icon_state)
 		I.plane = HUD_PLANE
 		I.layer = UNDER_HUD_LAYER
-		I.appearance_flags = RESET_ALPHA
+		I.appearance_flags = DEFAULT_APPEARANCE_FLAGS | RESET_ALPHA
 
 		//Pipes are special
 		if(istype(scanned, /obj/machinery/atmospherics/pipe))

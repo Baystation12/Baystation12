@@ -41,7 +41,7 @@
 	if(href_list["toggle_hide_unskilled"])
 		hide_unskilled = !hide_unskilled
 		return 1
-	
+
 /datum/nano_module/skill_ui/proc/get_data()
 	return list()
 
@@ -254,7 +254,7 @@ Admin version, with debugging options.
 	if(href_list["close"]) // This is called when the window is closed; we've signed up to get notified of it.
 		qdel(src)
 		return 1
-	if(!is_admin(usr))
+	if(!isadmin(usr))
 		return 1
 
 	if(href_list["reset_antag"])

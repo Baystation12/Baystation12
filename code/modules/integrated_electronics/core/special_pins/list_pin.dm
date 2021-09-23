@@ -68,7 +68,7 @@
 	if(holder.check_interactivity(user) && target_entry)
 		var/edited_entry = ask_for_data_type(user, target_entry)
 		if(edited_entry)
-			my_list[my_list.Find(target_entry)] = edited_entry
+			my_list[list_find(my_list, target_entry)] = edited_entry
 
 /datum/integrated_io/lists/proc/edit_in_list_by_position(mob/user, var/position)
 	var/list/my_list = data
@@ -96,8 +96,8 @@
 			second_target = input(user, "Which piece of data do you want to swap? (2)", "Swap") as null|anything in my_list - first_target
 
 		if(holder.check_interactivity(user) && second_target)
-			var/first_pos = my_list.Find(first_target)
-			var/second_pos = my_list.Find(second_target)
+			var/first_pos = list_find(my_list, first_target)
+			var/second_pos = list_find(my_list, second_target)
 			my_list.Swap(first_pos, second_pos)
 
 /datum/integrated_io/lists/proc/clear_list(mob/user)

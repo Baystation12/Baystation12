@@ -5,8 +5,8 @@
 	program_icon_state = "generic"
 	program_key_state = "generic_key"
 	size = 14
-	requires_ntnet = 1
-	available_on_ntnet = 1
+	requires_ntnet = TRUE
+	available_on_ntnet = TRUE
 	nanomodule_path = /datum/nano_module/records
 	usage_flags = PROGRAM_ALL
 	category = PROG_OFFICE
@@ -131,11 +131,11 @@
 		return 1
 
 /datum/nano_module/records/proc/get_photo(var/mob/user)
-	if(istype(user.get_active_hand(), /obj/item/weapon/photo))
-		var/obj/item/weapon/photo/photo = user.get_active_hand()
+	if(istype(user.get_active_hand(), /obj/item/photo))
+		var/obj/item/photo/photo = user.get_active_hand()
 		return photo.img
 	if(istype(user, /mob/living/silicon))
 		var/mob/living/silicon/tempAI = usr
-		var/obj/item/weapon/photo/selection = tempAI.GetPicture()
+		var/obj/item/photo/selection = tempAI.GetPicture()
 		if (selection)
 			return selection.img

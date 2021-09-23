@@ -43,8 +43,8 @@
 	item_cost = round(DEFAULT_TELECRYSTAL_AMOUNT / 2)
 
 	spawn(2)
-		name = "[command_name()] Update Announcement"
-		desc = "Causes a falsified [command_name()] Update."
+		name = "[GLOB.using_map.boss_name] Update Announcement"
+		desc = "Causes a falsified [GLOB.using_map.boss_name] Update."
 
 /***************
 * Service Item *
@@ -202,7 +202,7 @@
 /obj/item/device/uplink_service/fake_crew_announcement/enable(var/mob/user = usr)
 
 	var/datum/computer_file/report/crew_record/random_record
-	var/obj/item/weapon/card/id/I = user.GetIdCard()
+	var/obj/item/card/id/I = user.GetIdCard()
 	if(GLOB.all_crew_records.len)
 		random_record = pick(GLOB.all_crew_records)
 	var/datum/computer_file/report/crew_record/new_record = CreateModularRecord(user)

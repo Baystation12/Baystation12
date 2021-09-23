@@ -1,83 +1,142 @@
+/**
+* Augments
+* Extra organs that can be embedded to provide behaviors and flavor
+*/
 /obj/item/organ/internal/augment
 	name = "embedded augment"
-	desc = "Embedded augment."
 	icon = 'icons/obj/augment.dmi'
-	//By default these fit on both flesh and robotic organs and are robotic
-	status = ORGAN_ROBOTIC
-	var/augment_flags = AUGMENTATION_MECHANIC | AUGMENTATION_ORGANIC
-	var/list/allowed_organs = list(BP_AUGMENT_R_ARM, BP_AUGMENT_L_ARM)
+	status = ORGAN_ROBOTIC | ORGAN_CONFIGURE
 	default_action_type = /datum/action/item_action/organ/augment
-	var/descriptor = ""
-	var/known = TRUE
+	var/augment_flags = AUGMENT_MECHANICAL | AUGMENT_BIOLOGICAL | AUGMENT_SCANNABLE
+	var/augment_slots = EMPTY_BITFIELD
 
-/obj/item/organ/internal/augment/Initialize()
-	. = ..()
-	organ_tag = pick(allowed_organs)
-	update_parent_organ()
 
-//General expectation is onInstall and onRemoved are overwritten to add effects to augmentee
-/obj/item/organ/internal/augment/replaced(var/mob/living/carbon/human/target)
-	if(..() && istype(owner))
+/obj/item/organ/internal/augment/surgery_configure(mob/living/user, mob/living/carbon/human/target, obj/item/organ/parent, obj/item/tool, decl/surgery_step/action)
+	var/found
+	switch (parent?.organ_tag)
+		if (null)
+			found = FALSE
+		if (BP_L_ARM, BP_R_ARM)
+			found = augment_slots & AUGMENT_ARM
+		if (BP_L_HAND, BP_R_HAND)
+			found = augment_slots & AUGMENT_HAND
+		if (BP_L_LEG, BP_R_LEG)
+			found = augment_slots & AUGMENT_LEG
+		if (BP_L_FOOT, BP_R_FOOT)
+			found = augment_slots & AUGMENT_FOOT
+		if (BP_CHEST)
+			found = augment_slots & (AUGMENT_CHEST | AUGMENT_ARMOR)
+		if (BP_GROIN)
+			found = augment_slots & AUGMENT_GROIN
+		if (BP_HEAD)
+			found = augment_slots & AUGMENT_HEAD
+	if (!found)
+		to_chat(user, SPAN_WARNING("\The [src] can't be installed in \the [parent]."))
+		parent_organ = null
+		organ_tag = null
+		return 1
+	parent_organ = parent.organ_tag
+	if (found == AUGMENT_ARMOR)
+		organ_tag = "[parent_organ]_aug_armor"
+	else
+		organ_tag = "[parent_organ]_aug"
+
+
+/obj/item/organ/internal/augment/replaced(mob/living/carbon/human/target)
+	if (..() && istype(owner))
 		onInstall()
 
-/obj/item/organ/internal/augment/proc/onInstall()
-	return
 
-/obj/item/organ/internal/augment/removed(var/mob/living/user, var/drop_organ=1)
+/obj/item/organ/internal/augment/removed(mob/living/user, drop_organ = TRUE)
 	onRemove()
 	..()
 
+
+/// Virtual for removing augment effects from owner
 /obj/item/organ/internal/augment/proc/onRemove()
 	return
 
-/obj/item/organ/internal/augment/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(isScrewdriver(W) && allowed_organs.len > 1)
-		//Here we can adjust location for implants that allow multiple slots
-		organ_tag = input(user, "Adjust installation parameters") as null|anything in allowed_organs
-		update_parent_organ()
-		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-		return
-	..()
+
+/// Virtual for adding augment effects to owner when surgically added
+/obj/item/organ/internal/augment/proc/onInstall()
+	return
 
 
-/obj/item/organ/internal/augment/proc/update_parent_organ()
-	//This tries to match a parent organ to an augment slot
-	//This is intended to match the possible positions to a parent organ
-
-	if(organ_tag == BP_AUGMENT_L_LEG)
-		parent_organ = BP_L_LEG
-		descriptor = "left leg."
-	else if(organ_tag == BP_AUGMENT_R_LEG)
-		parent_organ = BP_R_LEG
-		descriptor = "right leg."
-	else if(organ_tag == BP_AUGMENT_L_HAND)
-		parent_organ = BP_L_HAND
-		descriptor = "left hand."
-	else if(organ_tag == BP_AUGMENT_R_HAND)
-		parent_organ = BP_R_HAND
-		descriptor = "right hand."
-	else if(organ_tag == BP_AUGMENT_L_ARM)
-		parent_organ = BP_L_ARM
-		descriptor = "left arm."
-	else if(organ_tag == BP_AUGMENT_R_ARM)
-		parent_organ = BP_R_ARM
-		descriptor = "right arm."
-	else if(organ_tag == BP_AUGMENT_HEAD)
-		parent_organ = BP_HEAD
-		descriptor = "head."
-	else if(organ_tag == BP_AUGMENT_CHEST_ACTIVE || organ_tag == BP_AUGMENT_CHEST_ARMOUR)
-		parent_organ = BP_CHEST
-		descriptor = "chest."
+/// Virtual for adding additional behavior when augment is already present at owner instantiation
+/obj/item/organ/internal/augment/proc/onRoundstart()
+	return
 
 
 /obj/item/organ/internal/augment/examine(mob/user, distance)
 	. = ..()
-	if(distance <= 1)
-		to_chat(user, "It is configured to be attached to the [descriptor].")
-		if(augment_flags & AUGMENTATION_MECHANIC && augment_flags & AUGMENTATION_ORGANIC)
-			to_chat(user, "It can interface with both prosthetic and fleshy organs.")
+	var/level
+	if (isobserver(user))
+		level = 2
+	else if (distance > 1)
+		return
+	else if (user.mind?.special_role)
+		level = 2
+	else if (user.skill_check(SKILL_DEVICES, SKILL_PROF))
+		level = 2
+	else if (user.skill_check(SKILL_DEVICES, SKILL_ADEPT))
+		level = 1
+	if (!level)
+		return
+	var/list/attach_types = list()
+	if (augment_flags & AUGMENT_MECHANICAL)
+		attach_types += "mechanical"
+	if (augment_flags & AUGMENT_BIOLOGICAL)
+		attach_types += "biological"
+	if (augment_flags & AUGMENT_CRYSTALINE)
+		attach_types += "crystaline"
+	var/list/attach_parts = list()
+	if (augment_slots & (AUGMENT_CHEST|AUGMENT_ARMOR))
+		attach_parts += "chests"
+	if (augment_slots & AUGMENT_GROIN)
+		attach_parts += "lower bodies"
+	if (augment_slots & AUGMENT_HEAD)
+		attach_parts += "heads"
+	if (augment_slots & AUGMENT_ARM)
+		attach_parts += "arms"
+	if (augment_slots & AUGMENT_HAND)
+		attach_parts += "hands"
+	if (augment_slots & AUGMENT_LEG)
+		attach_parts += "legs"
+	if (augment_slots & AUGMENT_FOOT)
+		attach_parts += "feet"
+	var/message = "It can be installed in [english_list(attach_parts)] that are [english_list(attach_types)]."
+	if (level > 1)
+		var/list/discovery = list()
+		if (augment_flags & AUGMENT_SCANNABLE)
+			discovery += "scanners"
+		if (augment_flags & AUGMENT_INSPECTABLE)
+			discovery += "manual inspection"
+		if (discovery.len)
+			message += " It can be discovered by [english_list(discovery)]."
 		else
-			if(augment_flags & AUGMENTATION_MECHANIC)
-				to_chat(user, "It can interface with prosthetic organs.")
-			else if(augment_flags & AUGMENTATION_ORGANIC)
-				to_chat(user, "It can interface with fleshy organs.")
+			message += " It is undetectable."
+	to_chat(user, message)
+
+
+/datum/codex_entry/augment
+	display_name = "Implantable Augmentation"
+	associated_paths = list(/obj/item/organ/internal/augment)
+	lore_text = {"\
+		<p>Augmentations are a broad category of devices that are added to the bodies of biological and \
+		mechanical individuals in order to provide some function or benefit to the user. The most common \
+		augmentations in humans are medical or otherwise corrective, but everything from weapons to reward \
+		stimulators can be wired into the body one way or another, making many modern humans classic cyborgs.</p>\
+		<p>In non-biological entities "augmentations" are often simply normal body components that are not \
+		already installed - but many of the same non-medical tools, utilities, and entertainment devices \
+		are available.</p>\
+	"}
+	mechanics_text = {"\
+		<p>Augmentations provide various (or no) functionality and are either <b>passive</b> or <b>active</b>. \
+		A passive augmentation, so long as it is not too damaged, Just Works. An active augmentation can be \
+		toggled on or off via its associated UI button, which appears on its owners screen once it has been \
+		implanted.</p>\
+		<p>Some active augmentations, like tools and weapons, will try to place an item into (or take it from) \
+		a hand or other inventory slot. You will need to <b>keep those slots free</b> in order to turn those \
+		active augmentations on.</p>\
+		<p>
+	"}

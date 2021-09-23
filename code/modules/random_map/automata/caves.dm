@@ -107,6 +107,7 @@ GLOBAL_LIST_INIT(weighted_minerals_rich, \
 	return 1
 
 /datum/random_map/automata/cave_system/apply_to_map()
+	..()
 	if(!origin_x) origin_x = 1
 	if(!origin_y) origin_y = 1
 	if(!origin_z) origin_z = 1

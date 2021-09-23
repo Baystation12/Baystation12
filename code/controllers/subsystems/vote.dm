@@ -67,11 +67,11 @@ SUBSYSTEM_DEF(vote)
 	if(!automatic && (!istype(creator) || !creator.client))
 		return FALSE
 
-	if(last_started_time != null && !(is_admin(creator) || automatic))
+	if(last_started_time != null && !(isadmin(creator) || automatic))
 		var/next_allowed_time = (last_started_time + config.vote_delay)
 		if(next_allowed_time > world.time)
 			return FALSE
-	
+
 	var/datum/vote/new_vote = new vote_type
 	if(!new_vote.setup(creator, automatic))
 		return FALSE
@@ -83,7 +83,7 @@ SUBSYSTEM_DEF(vote)
 /datum/controller/subsystem/vote/proc/interface(client/C)
 	if(!C)
 		return
-	var/admin = is_admin(C)
+	var/admin = isadmin(C)
 	voting |= C
 
 	. = list()
@@ -126,7 +126,7 @@ SUBSYSTEM_DEF(vote)
 		voting -= user.client
 
 /datum/controller/subsystem/vote/proc/cancel_vote(mob/user)
-	if(!is_admin(user))
+	if(!isadmin(user))
 		return
 	active_vote.report_result() // Will not make announcement, but do any override failure reporting tasks.
 	QDEL_NULL(active_vote)
@@ -180,7 +180,7 @@ SUBSYSTEM_DEF(vote)
 		return 0
 	if(automatic)
 		return (SSticker.mode.addantag_allowed & ADDANTAG_AUTO) && !antag_added
-	if(is_admin(creator))
+	if(isadmin(creator))
 		return SSticker.mode.addantag_allowed & (ADDANTAG_ADMIN|ADDANTAG_PLAYER)
 	else
 		return (SSticker.mode.addantag_allowed & ADDANTAG_PLAYER) && !antag_added

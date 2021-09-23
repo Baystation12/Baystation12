@@ -35,12 +35,13 @@
 
 	health = 200
 	maxHealth = 200
-	melee_damage_lower = 10
-	melee_damage_upper = 15
-	attacktext = "pinches"
+	natural_weapon = /obj/item/natural_weapon/pincers/strong
 	resistance = 9
 	can_escape = TRUE //snip snip
-	density = 0
+	density = FALSE
+
+/obj/item/natural_weapon/pincers/strong
+	force = 15
 
 /*familiar version of the Pike w/o all the other hostile/carp stuff getting in the way (namely life)
 */
@@ -59,8 +60,7 @@
 
 	health = 100
 	maxHealth = 100
-	melee_damage_lower = 10
-	melee_damage_upper = 10
+	natural_weapon = /obj/item/natural_weapon/bite
 	can_escape = TRUE
 
 	min_gas = null
@@ -83,11 +83,15 @@
 
 	health = 150
 	maxHealth = 150
-	melee_damage_lower = 5
-	melee_damage_upper = 8
-	attacktext = "touches"
+	natural_weapon = /obj/item/natural_weapon/horror
 
 	wizardy_spells = list(/spell/targeted/torment)
+
+/obj/item/natural_weapon/horror
+	name = "foul touch"
+	force = 10
+	damtype = BURN
+	attack_verb = list("touched")
 
 /mob/living/simple_animal/familiar/horror/death(gibbed, deathmessage, show_dead_message)
 	..(null,"rapidly deteriorates","The bonds tying you to this mortal plane have been severed.")
@@ -107,7 +111,7 @@
 
 	speak_emote = list("entones")
 	mob_size = MOB_SMALL
-	density = 0
+	density = FALSE
 	health = 25
 	maxHealth = 25
 
@@ -118,7 +122,7 @@
 
 /mob/living/simple_animal/familiar/pet //basically variants of normal animals with spells.
 	icon = 'icons/mob/simple_animal/animal.dmi'
-	var/icon_rest //so that we can have resting little guys.
+	icon_rest //so that we can have resting little guys.
 
 /mob/living/simple_animal/familiar/pet/Life()
 	. = ..()
@@ -138,7 +142,7 @@
 	icon_rest = "mouse_gray_sleep"
 
 	speak_emote = list("squeeks")
-	holder_type = /obj/item/weapon/holder/mouse
+	holder_type = /obj/item/holder/mouse
 	pass_flags = PASS_FLAG_TABLE
 	mob_size = MOB_MINISCULE
 
@@ -146,11 +150,9 @@
 
 	health = 15
 	maxHealth = 15
-	melee_damage_lower = 1
-	melee_damage_upper = 1
+	natural_weapon = /obj/item/natural_weapon/bite/mouse
 	can_escape = TRUE
-	attacktext = "nibbles"
-	density = 0
+	density = FALSE
 
 	wizardy_spells = list(/spell/aoe_turf/smoke)
 
@@ -170,14 +172,12 @@
 
 
 	speak_emote = list("meows", "purrs")
-	holder_type = /obj/item/weapon/holder/cat
+	holder_type = /obj/item/holder/cat
 	mob_size = MOB_SMALL
 
 	health = 25
 	maxHealth = 25
-	melee_damage_lower = 3
-	melee_damage_upper = 4
-	attacktext = "scratched"
-	density = 0
+	natural_weapon = /obj/item/natural_weapon/claws/weak
+	density = FALSE
 
 	wizardy_spells = list(/spell/targeted/subjugation)

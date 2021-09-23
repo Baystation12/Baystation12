@@ -1,2 +1,2 @@
 /datum/map/away_sites_testing
-	lobby_tracks = list(/music_track/absconditus)
+	lobby_tracks = list(/decl/audio/track/absconditus)

@@ -3,7 +3,7 @@
 	var/weakref/machine
 
 /datum/extension/interactive/multitool/radio/extension_status(mob/user)
-	var/obj/item/weapon/stock_parts/radio/radio = holder
+	var/obj/item/stock_parts/radio/radio = holder
 	if(radio.status & PART_STAT_INSTALLED)
 		return STATUS_CLOSE
 	return ..()	
@@ -31,7 +31,7 @@
 	return input
 
 /datum/extension/interactive/multitool/radio/get_interact_window(obj/item/device/multitool/M, mob/user)
-	var/obj/item/weapon/stock_parts/radio/radio = holder
+	var/obj/item/stock_parts/radio/radio = holder
 	var/list/dat = list()
 
 	dat += "<a href='?src=\ref[src];unlink=1'>Unlink Machine</a><br>"
@@ -46,7 +46,7 @@
 	return JOINTEXT(dat)
 
 /datum/extension/interactive/multitool/radio/on_topic(href, href_list, user)
-	var/obj/item/weapon/stock_parts/radio/radio = holder
+	var/obj/item/stock_parts/radio/radio = holder
 	if(href_list["unlink"])
 		machine = null
 		return MT_CLOSE
@@ -155,12 +155,12 @@
 	. = actual_machine
 	if(!actual_machine)
 		return
-	var/obj/item/weapon/stock_parts/radio/transmitter/basic/radio = holder
+	var/obj/item/stock_parts/radio/transmitter/basic/radio = holder
 	radio.sanitize_events(actual_machine, radio.transmit_on_change)
 	radio.sanitize_events(actual_machine, radio.transmit_on_tick)
 
 /datum/extension/interactive/multitool/radio/transmitter/get_interact_window(obj/item/device/multitool/M, mob/user)
-	var/obj/item/weapon/stock_parts/radio/transmitter/basic/radio = holder
+	var/obj/item/stock_parts/radio/transmitter/basic/radio = holder
 	var/list/dat = list()
 
 	dat += "<b>Transmit on change:</b><br>"
@@ -177,7 +177,7 @@
 	var/obj/machinery/actual_machine = machine.resolve()
 	if(!actual_machine)
 		return MT_CLOSE
-	var/obj/item/weapon/stock_parts/radio/transmitter/basic/radio = holder
+	var/obj/item/stock_parts/radio/transmitter/basic/radio = holder
 	if(href_list["on_change"])
 		return event_list_topic(radio.transmit_on_change, actual_machine.public_variables, user, href_list)
 	if(href_list["on_tick"])
@@ -188,13 +188,13 @@
 	. = actual_machine
 	if(!actual_machine)
 		return
-	var/obj/item/weapon/stock_parts/radio/transmitter/on_event/radio = holder
+	var/obj/item/stock_parts/radio/transmitter/on_event/radio = holder
 	if(!radio.is_valid_event(actual_machine, radio.event))
 		radio.event = null
 	radio.sanitize_events(actual_machine, radio.transmit_on_event)
 
 /datum/extension/interactive/multitool/radio/event_transmitter/get_interact_window(obj/item/device/multitool/M, mob/user)
-	var/obj/item/weapon/stock_parts/radio/transmitter/on_event/radio = holder
+	var/obj/item/stock_parts/radio/transmitter/on_event/radio = holder
 	var/list/dat = list()
 
 	dat += "<b>Choose event:</b><br>"
@@ -214,7 +214,7 @@
 	var/obj/machinery/actual_machine = machine.resolve()
 	if(!actual_machine)
 		return MT_CLOSE
-	var/obj/item/weapon/stock_parts/radio/transmitter/on_event/radio = holder
+	var/obj/item/stock_parts/radio/transmitter/on_event/radio = holder
 
 	if(href_list["on_event"])
 		return event_list_topic(radio.transmit_on_event, actual_machine.public_variables, user, href_list)
@@ -231,12 +231,12 @@
 	. = actual_machine
 	if(!actual_machine)
 		return
-	var/obj/item/weapon/stock_parts/radio/receiver/radio = holder
+	var/obj/item/stock_parts/radio/receiver/radio = holder
 	radio.sanitize_events(actual_machine, radio.receive_and_call)
 	radio.sanitize_events(actual_machine, radio.receive_and_write)
 
 /datum/extension/interactive/multitool/radio/receiver/get_interact_window(obj/item/device/multitool/M, mob/user)
-	var/obj/item/weapon/stock_parts/radio/receiver/radio = holder
+	var/obj/item/stock_parts/radio/receiver/radio = holder
 	var/list/dat = list()
 
 	dat += "<b>Transmit on change:</b><br>"
@@ -253,7 +253,7 @@
 	var/obj/machinery/actual_machine = machine.resolve()
 	if(!actual_machine)
 		return MT_CLOSE
-	var/obj/item/weapon/stock_parts/radio/receiver/radio = holder
+	var/obj/item/stock_parts/radio/receiver/radio = holder
 	if(href_list["call"])
 		return event_list_topic(radio.receive_and_call, actual_machine.public_methods, user, href_list)
 	if(href_list["write"])

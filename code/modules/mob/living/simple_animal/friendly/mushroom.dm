@@ -1,11 +1,10 @@
-/mob/living/simple_animal/mushroom
+/mob/living/simple_animal/passive/mushroom
 	name = "walking mushroom"
 	desc = "It's a massive mushroom... with legs?"
 	icon_state = "mushroom"
 	icon_living = "mushroom"
 	icon_dead = "mushroom_dead"
 	mob_size = MOB_SMALL
-	speak_chance = 0
 	turns_per_move = 1
 	maxHealth = 5
 	health = 5
@@ -15,24 +14,26 @@
 	harm_intent_damage = 5
 	pass_flags = PASS_FLAG_TABLE
 
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/hugemushroomslice
+	meat_type = /obj/item/reagent_containers/food/snacks/hugemushroomslice
 	bone_material = null
 	bone_amount =   0
-	skin_material = null 
+	skin_material = null
 	skin_amount =   null
-	density = 0
+	density = FALSE
 
 	var/datum/seed/seed
 	var/harvest_time
 	var/min_explode_time = 1200
 	var/global/total_mushrooms = 0
 
-/mob/living/simple_animal/mushroom/New()
+	ai_holder_type = /datum/ai_holder/simple_animal/passive/mushroom
+
+/mob/living/simple_animal/passive/mushroom/New()
 	..()
 	harvest_time = world.time
 	total_mushrooms++
 
-/mob/living/simple_animal/mushroom/verb/spawn_spores()
+/mob/living/simple_animal/passive/mushroom/verb/spawn_spores()
 
 	set name = "Explode"
 	set category = "Abilities"
@@ -53,14 +54,14 @@
 
 	spore_explode()
 
-/mob/living/simple_animal/mushroom/death(gibbed, deathmessage, show_dead_message)
+/mob/living/simple_animal/passive/mushroom/death(gibbed, deathmessage, show_dead_message)
 	. = ..(gibbed, deathmessage, show_dead_message)
 	if(.)
 		total_mushrooms--
 		if(total_mushrooms < config.maximum_mushrooms && prob(30))
 			spore_explode()
 
-/mob/living/simple_animal/mushroom/proc/spore_explode()
+/mob/living/simple_animal/passive/mushroom/proc/spore_explode()
 	if(!seed)
 		return
 	if(world.time < harvest_time + min_explode_time)
@@ -72,3 +73,6 @@
 	seed.thrown_at(src,get_turf(src),1)
 	if(src)
 		qdel(src)
+
+/datum/ai_holder/simple_animal/passive/mushroom
+	speak_chance = 0

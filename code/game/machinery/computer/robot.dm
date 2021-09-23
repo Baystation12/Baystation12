@@ -6,6 +6,8 @@
 	icon_screen = "robot"
 	light_color = "#a97faa"
 	req_access = list(access_robotics)
+	machine_name = "robotics control console"
+	machine_desc = "A control console that maintains a radio link with ship synthetics. Allows remote monitoring of them, as well as locking down their movement systems."
 
 /obj/machinery/computer/robotics/interface_interact(mob/user)
 	ui_interact(user)
@@ -84,7 +86,7 @@
 			return TOPIC_HANDLED
 
 		log_and_message_admins("emagged [target.name] using robotic console!")
-		target.emagged = 1
+		target.emagged = TRUE
 		to_chat(target, "<span class='notice'>Failsafe protocols overriden. New tools available.</span>")
 		. = TOPIC_REFRESH
 

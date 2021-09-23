@@ -25,7 +25,7 @@ GLOBAL_LIST_EMPTY(banned_ruin_ids)
 
 	while (remaining > 0 && length(available))
 		var/datum/map_template/ruin/ruin = pickweight(available)
-		if (ruin.cost > budget)
+		if (ruin.spawn_cost > remaining)
 			available -= ruin
 			continue
 
@@ -54,8 +54,8 @@ GLOBAL_LIST_EMPTY(banned_ruin_ids)
 
 			load_ruin(choice, ruin)
 			selected += ruin
-			if (ruin.cost > 0)
-				remaining -= ruin.cost
+			if (ruin.spawn_cost > 0)
+				remaining -= ruin.spawn_cost
 			if (!(ruin.template_flags & TEMPLATE_FLAG_ALLOW_DUPLICATES))
 				GLOB.banned_ruin_ids += ruin.id
 				available -= ruin

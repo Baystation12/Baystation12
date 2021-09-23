@@ -17,7 +17,7 @@
 	allowed_tools = list(
 		/obj/item/stack/medical/advanced/bruise_pack = 100,
 		/obj/item/stack/medical/bruise_pack = 40,
-		/obj/item/weapon/tape_roll = 20
+		/obj/item/tape_roll = 20
 	)
 	min_duration = 70
 	max_duration = 90
@@ -41,7 +41,7 @@
 	user.visible_message("[user] starts treating damage within \the [target]'s [affected.name] with [tool_name].", \
 	"You start treating damage within \the [target]'s [affected.name] with [tool_name]." )
 	for(var/obj/item/organ/internal/I in affected.internal_organs)
-		if(I && I.damage > 0 && !BP_IS_ROBOTIC(I) && (!I.status & ORGAN_DEAD || I.can_recover()) && (I.surface_accessible || affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)))
+		if(I && I.damage > 0 && !BP_IS_ROBOTIC(I) && (!(I.status & ORGAN_DEAD) || I.can_recover()) && (I.surface_accessible || affected.how_open() >= (affected.encased ? SURGERY_ENCASED : SURGERY_RETRACTED)))
 			user.visible_message("[user] starts treating damage to [target]'s [I.name] with [tool_name].", \
 			"You start treating damage to [target]'s [I.name] with [tool_name]." )
 	target.custom_pain("The pain in your [affected.name] is living hell!",100,affecting = affected)
@@ -87,8 +87,8 @@
 /decl/surgery_step/internal/detatch_organ
 	name = "Detach organ"
 	allowed_tools = list(
-		/obj/item/weapon/scalpel = 100,
-		/obj/item/weapon/material/shard = 50
+		/obj/item/scalpel = 100,
+		/obj/item/material/shard = 50
 	)
 	min_duration = 90
 	max_duration = 110
@@ -136,10 +136,10 @@
 /decl/surgery_step/internal/remove_organ
 	name = "Remove internal organ"
 	allowed_tools = list(
-		/obj/item/weapon/hemostat = 100,
-		/obj/item/weapon/wirecutters = 75,
-		/obj/item/weapon/material/knife = 75,
-		/obj/item/weapon/material/kitchen/utensil/fork = 20
+		/obj/item/hemostat = 100,
+		/obj/item/wirecutters = 75,
+		/obj/item/material/knife = 75,
+		/obj/item/material/kitchen/utensil/fork = 20
 	)
 	min_duration = 60
 	max_duration = 80
@@ -172,7 +172,7 @@
 			return SURGERY_SKILLS_ROBOTIC_ON_MEAT
 	else
 		return ..()
-	
+
 /decl/surgery_step/internal/remove_organ/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("\The [user] starts removing [target]'s [LAZYACCESS(target.surgeries_in_progress, target_zone)] with \the [tool].", \
@@ -236,6 +236,10 @@
 	. = FALSE
 	var/obj/item/organ/internal/O = tool
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
+
+	if ((O.status & ORGAN_CONFIGURE) && O.surgery_configure(user, target, affected, tool, src))
+		return
+
 	if(istype(O) && istype(affected))
 		if(BP_IS_CRYSTAL(O) && !BP_IS_CRYSTAL(affected))
 			to_chat(user, SPAN_WARNING("You cannot install a crystalline organ into a non-crystalline bodypart."))
@@ -254,7 +258,7 @@
 				to_chat(user, SPAN_WARNING("\The [O.name] [o_is] in no state to be transplanted."))
 			else if(O.w_class > affected.cavity_max_w_class)
 				to_chat(user, SPAN_WARNING("\The [O.name] [o_is] too big for [affected.cavity_name] cavity!"))
-			else 
+			else
 				var/obj/item/organ/internal/I = target.internal_organs_by_name[O.organ_tag]
 				if(I && (I.parent_organ == affected.organ_tag))
 					to_chat(user, SPAN_WARNING("\The [target] already has [o_a][O.name]."))
@@ -294,9 +298,9 @@
 /decl/surgery_step/internal/attach_organ
 	name = "Attach internal organ"
 	allowed_tools = list(
-		/obj/item/weapon/FixOVein = 100,
+		/obj/item/FixOVein = 100,
 		/obj/item/stack/cable_coil = 75,
-		/obj/item/weapon/tape_roll = 50
+		/obj/item/tape_roll = 50
 	)
 	min_duration = 100
 	max_duration = 120
@@ -336,7 +340,7 @@
 
 	if(istype(organ_to_replace, /obj/item/organ/internal/augment))
 		var/obj/item/organ/internal/augment/A = organ_to_replace
-		if(!(A.augment_flags & AUGMENTATION_ORGANIC))
+		if(!(A.augment_flags & AUGMENT_BIOLOGICAL))
 			to_chat(user, SPAN_WARNING("\The [A] cannot function within a non-robotic limb."))
 			return FALSE
 
@@ -380,11 +384,11 @@
 /decl/surgery_step/internal/treat_necrosis
 	name = "Treat necrosis"
 	allowed_tools = list(
-		/obj/item/weapon/reagent_containers/dropper = 100,
-		/obj/item/weapon/reagent_containers/glass/bottle = 75,
-		/obj/item/weapon/reagent_containers/glass/beaker = 75,
-		/obj/item/weapon/reagent_containers/spray = 50,
-		/obj/item/weapon/reagent_containers/glass/bucket = 50,
+		/obj/item/reagent_containers/dropper = 100,
+		/obj/item/reagent_containers/glass/bottle = 75,
+		/obj/item/reagent_containers/glass/beaker = 75,
+		/obj/item/reagent_containers/spray = 50,
+		/obj/item/reagent_containers/glass/bucket = 50,
 	)
 
 	can_infect = 0
@@ -394,7 +398,7 @@
 	max_duration = 60
 
 /decl/surgery_step/internal/treat_necrosis/pre_surgery_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	var/obj/item/weapon/reagent_containers/container = tool
+	var/obj/item/reagent_containers/container = tool
 	if(!istype(container) || !container.reagents.has_reagent(/datum/reagent/peridaxon) || !..())
 		return FALSE
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -425,7 +429,7 @@
 
 /decl/surgery_step/internal/treat_necrosis/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/internal/affected = LAZYACCESS(target.surgeries_in_progress, target_zone)
-	var/obj/item/weapon/reagent_containers/container = tool
+	var/obj/item/reagent_containers/container = tool
 
 	var/amount = container.amount_per_transfer_from_this
 	var/datum/reagents/temp_reagents = new(amount, GLOB.temp_reagents_holder)
@@ -447,10 +451,10 @@
 /decl/surgery_step/internal/treat_necrosis/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 
-	if (!istype(tool, /obj/item/weapon/reagent_containers))
+	if (!istype(tool, /obj/item/reagent_containers))
 		return
 
-	var/obj/item/weapon/reagent_containers/container = tool
+	var/obj/item/reagent_containers/container = tool
 
 	var/trans = container.reagents.trans_to_mob(target, container.amount_per_transfer_from_this, CHEM_BLOOD)
 

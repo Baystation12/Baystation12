@@ -97,8 +97,11 @@
 			new_coeff = round(min(max(new_coeff, GLOB.musical_config.gentlest_drop), GLOB.musical_config.steepest_drop), 0.001)
 			src.player.song.soft_coeff = new_coeff
 		if ("instrument")
+			if (!islist(instruments))
+				return
+			var/list/as_list = instruments
 			var/list/categories = list()
-			for (var/key in instruments)
+			for (var/key in as_list)
 				var/datum/instrument/instrument = instruments[key]
 				categories |= instrument.category
 
@@ -106,7 +109,7 @@
 			if(!CanInteractWith(usr, owner, GLOB.physical_state))
 				return
 			var/list/instruments_available = list()
-			for (var/key in instruments)
+			for (var/key in as_list)
 				var/datum/instrument/instrument = instruments[key]
 				if (instrument.category == category)
 					instruments_available += key
@@ -216,8 +219,10 @@
 
 /obj/structure/synthesized_instrument/Destroy()
 	QDEL_NULL(src.real_instrument)
-	for(var/key in instruments)
-		qdel(instruments[key])
+	if (islist(instruments))
+		var/list/as_list = instruments
+		for (var/key in as_list)
+			qdel(as_list[key])
 	instruments = null
 	. = ..()
 
@@ -268,8 +273,10 @@
 
 /obj/item/device/synthesized_instrument/Destroy()
 	QDEL_NULL(src.real_instrument)
-	for(var/key in instruments)
-		qdel(instruments[key])
+	if (islist(instruments))
+		var/list/as_list = instruments
+		for (var/key in as_list)
+			qdel(as_list[key])
 	instruments = null
 	. = ..()
 

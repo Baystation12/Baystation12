@@ -1,6 +1,6 @@
 //Simple borg hand.
 //Limited use.
-/obj/item/weapon/gripper
+/obj/item/gripper
 	name = "magnetic gripper"
 	desc = "A simple grasping tool specialized in construction and engineering work."
 	icon = 'icons/obj/device.dmi'
@@ -10,20 +10,20 @@
 
 	//Has a list of items that it can hold.
 	var/list/can_hold = list(
-		/obj/item/weapon/cell,
-		/obj/item/weapon/firealarm_electronics,
-		/obj/item/weapon/airalarm_electronics,
-		/obj/item/weapon/airlock_electronics,
-		/obj/item/weapon/tracker_electronics,
-		/obj/item/weapon/module/power_control,
-		/obj/item/weapon/stock_parts,
+		/obj/item/cell,
+		/obj/item/firealarm_electronics,
+		/obj/item/airalarm_electronics,
+		/obj/item/airlock_electronics,
+		/obj/item/tracker_electronics,
+		/obj/item/module/power_control,
+		/obj/item/stock_parts,
 		/obj/item/frame,
-		/obj/item/weapon/camera_assembly,
-		/obj/item/weapon/tank,
-		/obj/item/weapon/stock_parts/circuitboard,
-		/obj/item/weapon/stock_parts/smes_coil,
-		/obj/item/weapon/stock_parts/computer,
-		/obj/item/weapon/fuel_assembly,
+		/obj/item/camera_assembly,
+		/obj/item/tank,
+		/obj/item/stock_parts/circuitboard,
+		/obj/item/stock_parts/smes_coil,
+		/obj/item/stock_parts/computer,
+		/obj/item/fuel_assembly,
 		/obj/item/stack/material/deuterium,
 		/obj/item/stack/material/tritium,
 		/obj/item/stack/tile
@@ -32,52 +32,52 @@
 	var/obj/item/wrapped = null // Item currently being held.
 
 // VEEEEERY limited version for mining borgs. Basically only for swapping cells and upgrading the drills.
-/obj/item/weapon/gripper/miner
+/obj/item/gripper/miner
 	name = "drill maintenance gripper"
 	desc = "A simple grasping tool for the maintenance of heavy drilling machines."
 
 	icon_state = "gripper-mining"
 
 	can_hold = list(
-	/obj/item/weapon/cell,
-	/obj/item/weapon/stock_parts,
-	/obj/item/weapon/stock_parts/circuitboard/miningdrill
+	/obj/item/cell,
+	/obj/item/stock_parts,
+	/obj/item/stock_parts/circuitboard/miningdrill
 	)
 
-/obj/item/weapon/gripper/clerical
+/obj/item/gripper/clerical
 	name = "clerical gripper"
 	desc = "A simple grasping tool for clerical work."
 
 	can_hold = list(
-		/obj/item/weapon/material/clipboard,
-		/obj/item/weapon/paper,
-		/obj/item/weapon/paper_bundle,
-		/obj/item/weapon/card/id,
-		/obj/item/weapon/book,
-		/obj/item/weapon/newspaper,
+		/obj/item/material/clipboard,
+		/obj/item/paper,
+		/obj/item/paper_bundle,
+		/obj/item/card/id,
+		/obj/item/book,
+		/obj/item/newspaper,
 		/obj/item/smallDelivery
 		)
 
-/obj/item/weapon/gripper/chemistry
+/obj/item/gripper/chemistry
 	name = "chemistry gripper"
 	desc = "A simple grasping tool for chemical work."
 
 	can_hold = list(
-		/obj/item/weapon/reagent_containers/glass,
-		/obj/item/weapon/reagent_containers/pill,
-		/obj/item/weapon/reagent_containers/ivbag,
+		/obj/item/reagent_containers/glass,
+		/obj/item/reagent_containers/pill,
+		/obj/item/reagent_containers/ivbag,
 		/obj/item/stack/material/phoron,
-		/obj/item/weapon/storage/pill_bottle,
+		/obj/item/storage/pill_bottle,
 		)
 
-/obj/item/weapon/gripper/research //A general usage gripper, used for toxins/robotics/xenobio/etc
+/obj/item/gripper/research //A general usage gripper, used for toxins/robotics/xenobio/etc
 	name = "scientific gripper"
 	icon_state = "gripper-sci"
 	desc = "A simple grasping tool suited to assist in a wide array of research applications."
 
 	can_hold = list(
-		/obj/item/weapon/cell,
-		/obj/item/weapon/stock_parts,
+		/obj/item/cell,
+		/obj/item/stock_parts,
 		/obj/item/device/mmi,
 		/obj/item/robot_parts,
 		/obj/item/borg/upgrade,
@@ -85,42 +85,42 @@
 		/obj/item/organ/internal/brain,
 		/obj/item/organ/internal/posibrain,
 		/obj/item/stack/cable_coil,
-		/obj/item/weapon/stock_parts/circuitboard,
+		/obj/item/stock_parts/circuitboard,
 		/obj/item/slime_extract,
-		/obj/item/weapon/reagent_containers/glass,
-		/obj/item/weapon/reagent_containers/food/snacks/monkeycube,
-		/obj/item/weapon/stock_parts/computer,
+		/obj/item/reagent_containers/glass,
+		/obj/item/reagent_containers/food/snacks/monkeycube,
+		/obj/item/stock_parts/computer,
 		/obj/item/device/transfer_valve,
 		/obj/item/device/assembly/signaler,
 		/obj/item/device/assembly/timer,
 		/obj/item/device/assembly/igniter,
 		/obj/item/device/assembly/infra,
-		/obj/item/weapon/tank
+		/obj/item/tank
 		)
 
-/obj/item/weapon/gripper/cultivator
+/obj/item/gripper/cultivator
 	name = "cultivator gripper"
 	icon_state = "gripper"
 	desc = "A simple grasping tool used to perform tasks in the xenobiology division, such as handling plant samples and disks."
 	can_hold = list(
-		/obj/item/weapon/reagent_containers/glass,
+		/obj/item/reagent_containers/glass,
 		/obj/item/seeds,
 		/obj/item/slime_extract,
-		/obj/item/weapon/disk/botany
+		/obj/item/disk/botany
 	)
 
-/obj/item/weapon/gripper/service //Used to handle food, drinks, and seeds.
+/obj/item/gripper/service //Used to handle food, drinks, and seeds.
 	name = "service gripper"
 	icon_state = "gripper"
 	desc = "A simple grasping tool used to perform tasks in the service sector, such as handling food, drinks, and seeds."
 	can_hold = list(
-		/obj/item/weapon/reagent_containers/glass,
-		/obj/item/weapon/reagent_containers/food,
+		/obj/item/reagent_containers/glass,
+		/obj/item/reagent_containers/food,
 		/obj/item/seeds,
-		/obj/item/weapon/glass_extra
+		/obj/item/glass_extra
 	)
 
-/obj/item/weapon/gripper/organ //Used to handle organs.
+/obj/item/gripper/organ //Used to handle organs.
 	name = "organ gripper"
 	icon_state = "gripper"
 	desc = "A simple grasping tool for holding and manipulating organic and mechanical organs, both internal and external."
@@ -128,29 +128,29 @@
 	can_hold = list(
 		/obj/item/organ,
 		/obj/item/robot_parts,
-		/obj/item/weapon/reagent_containers/ivbag
+		/obj/item/reagent_containers/ivbag
 	)
 
-/obj/item/weapon/gripper/forensics// Used to handle forensics equipment.
+/obj/item/gripper/forensics// Used to handle forensics equipment.
 	name = "forensics gripper"
 	icon_state = "gripper"
 	desc = "A simple grasping tool for holding forensics evidence and paper."
 
 	can_hold = list(
-		/obj/item/weapon/sample,
-		/obj/item/weapon/evidencebag,
-		/obj/item/weapon/forensics,
-		/obj/item/weapon/photo,
-		/obj/item/weapon/paper,
-		/obj/item/weapon/paper_bundle
+		/obj/item/sample,
+		/obj/item/evidencebag,
+		/obj/item/forensics,
+		/obj/item/photo,
+		/obj/item/paper,
+		/obj/item/paper_bundle
 	)
 
-/obj/item/weapon/gripper/no_use //Used when you want to hold and put items in other things, but not able to 'use' the item
+/obj/item/gripper/no_use //Used when you want to hold and put items in other things, but not able to 'use' the item
 
-/obj/item/weapon/gripper/no_use/attack_self(mob/user as mob)
+/obj/item/gripper/no_use/attack_self(mob/user as mob)
 	return
 
-/obj/item/weapon/gripper/no_use/loader //This is used to disallow building with metal.
+/obj/item/gripper/no_use/loader //This is used to disallow building with metal.
 	name = "sheet loader"
 	desc = "A specialized loading device, designed to pick up and insert sheets of materials inside machines."
 	icon_state = "gripper-sheet"
@@ -159,17 +159,17 @@
 		/obj/item/stack/material
 		)
 
-/obj/item/weapon/gripper/examine(mob/user)
+/obj/item/gripper/examine(mob/user)
 	. = ..()
 	if(wrapped)
 		to_chat(user, "It is holding \a [wrapped].")
 
-/obj/item/weapon/gripper/attack_self(mob/user as mob)
+/obj/item/gripper/attack_self(mob/user as mob)
 	if(wrapped)
 		return wrapped.attack_self(user)
 	return ..()
 
-/obj/item/weapon/gripper/verb/drop_gripped_item()
+/obj/item/gripper/verb/drop_gripped_item()
 
 	set name = "Drop Gripped Item"
 	set desc = "Release an item from your magnetic gripper."
@@ -189,11 +189,11 @@
 	wrapped = null
 	//on_update_icon()
 
-/obj/item/weapon/gripper/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+/obj/item/gripper/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	// Don't fall through and smack people with gripper, instead just no-op
 	return 0
 
-/obj/item/weapon/gripper/resolve_attackby(var/atom/target, var/mob/living/user, params)
+/obj/item/gripper/resolve_attackby(var/atom/target, var/mob/living/user, params)
 
 	// Ensure fumbled items are accessible.
 	if(!wrapped)
@@ -225,13 +225,13 @@
 				grab = 1
 				break
 
-		//We can grab the item, finally.
-		if(grab)
+		//We can grab the item, finally. (prevent grabbing if the target's loc is in a robot frame)
+		if(grab && !istype(target.loc,/obj/item/robot_module))
 			if(I == user.s_active)
-				var/obj/item/weapon/storage/storage = I
+				var/obj/item/storage/storage = I
 				storage.close(user) //Closes the ui.
-			if(istype(I.loc, /obj/item/weapon/storage))
-				var/obj/item/weapon/storage/storage = I.loc
+			if(istype(I.loc, /obj/item/storage))
+				var/obj/item/storage/storage = I.loc
 				if(!storage.remove_from_storage(I, src))
 					return
 			else
@@ -244,9 +244,9 @@
 
 	else if(istype(target,/obj/machinery/power/apc))
 		var/obj/machinery/power/apc/A = target
-		if(A.components_are_accessible(/obj/item/weapon/stock_parts/power/battery))
-			var/obj/item/weapon/stock_parts/power/battery/bat = A.get_component_of_type(/obj/item/weapon/stock_parts/power/battery)
-			var/obj/item/weapon/cell/cell = bat.extract_cell(user)
+		if(A.components_are_accessible(/obj/item/stock_parts/power/battery))
+			var/obj/item/stock_parts/power/battery/bat = A.get_component_of_type(/obj/item/stock_parts/power/battery)
+			var/obj/item/cell/cell = bat.extract_cell(user)
 			if(cell)
 				wrapped = cell
 				cell.forceMove(src)
@@ -264,7 +264,7 @@
 				user.visible_message("<span class='danger'>[user] removes the power cell from [A]!</span>", "You remove the power cell.")
 				A.power_down()
 
-/obj/item/weapon/gripper/proc/finish_using(var/atom/target, var/mob/living/user, params, force_holder, resolved)
+/obj/item/gripper/proc/finish_using(var/atom/target, var/mob/living/user, params, force_holder, resolved)
 
 	if(QDELETED(wrapped))
 		if (wrapped)
@@ -285,7 +285,7 @@
 		wrapped = null
 
 //TODO: Matter decompiler.
-/obj/item/weapon/matter_decompiler
+/obj/item/matter_decompiler
 
 	name = "matter decompiler"
 	desc = "Eating trash, bits of glass, or other debris will replenish your stores."
@@ -298,10 +298,10 @@
 	var/datum/matter_synth/wood = null
 	var/datum/matter_synth/plastic = null
 
-/obj/item/weapon/matter_decompiler/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+/obj/item/matter_decompiler/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	return
 
-/obj/item/weapon/matter_decompiler/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, proximity, params)
+/obj/item/matter_decompiler/afterattack(atom/target as mob|obj|turf|area, mob/living/user as mob|obj, proximity, params)
 
 	if(!proximity) return //Not adjacent.
 
@@ -314,7 +314,7 @@
 	var/grabbed_something = 0
 
 	for(var/mob/M in T)
-		if(istype(M,/mob/living/simple_animal/lizard) || istype(M,/mob/living/simple_animal/mouse))
+		if(istype(M,/mob/living/simple_animal/passive/lizard) || istype(M,/mob/living/simple_animal/passive/mouse))
 			src.loc.visible_message("<span class='danger'>[src.loc] sucks [M] into its decompiler. There's a horrible crunching noise.</span>","<span class='danger'>It's a bit of a struggle, but you manage to suck [M] into your decompiler. It makes a series of visceral crunching noises.</span>")
 			new/obj/effect/decal/cleanable/blood/splatter(get_turf(src))
 			qdel(M)
@@ -334,7 +334,6 @@
 			to_chat(D, "<span class='danger'>You begin decompiling [M].</span>")
 
 			if(!do_after(D,50,M))
-				to_chat(D, "<span class='danger'>You need to remain still while decompiling such a large object.</span>")
 				return
 
 			if(!M || !D) return
@@ -365,8 +364,8 @@
 				wood.add_charge(2000)
 			if(plastic)
 				plastic.add_charge(2000)
-		else if(istype(W,/obj/item/weapon/light))
-			var/obj/item/weapon/light/L = W
+		else if(istype(W,/obj/item/light))
+			var/obj/item/light/L = W
 			if(L.status >= 2)
 				if(metal)
 					metal.add_charge(250)
@@ -394,7 +393,7 @@
 		else if(istype(W,/obj/item/ammo_casing))
 			if(metal)
 				metal.add_charge(1000)
-		else if(istype(W,/obj/item/weapon/material/shard/shrapnel))
+		else if(istype(W,/obj/item/material/shard/shrapnel))
 			if(metal)
 				metal.add_charge(1000)
 		else if(istype(W,/obj/item/stack/material/rods))
@@ -404,11 +403,11 @@
 				to_chat(user, SPAN_NOTICE("The amount of rods is too high to fit into your decompiler."))
 				continue
 			if(metal)
-				metal.add_charge(500*amt)				
-		else if(istype(W,/obj/item/weapon/material/shard))
+				metal.add_charge(500*amt)
+		else if(istype(W,/obj/item/material/shard))
 			if(glass)
 				glass.add_charge(1000)
-		else if(istype(W,/obj/item/weapon/reagent_containers/food/snacks/grown))
+		else if(istype(W,/obj/item/reagent_containers/food/snacks/grown))
 			if(wood)
 				wood.add_charge(4000)
 		else if(istype(W,/obj/item/pipe))
@@ -428,12 +427,8 @@
 //PRETTIER TOOL LIST.
 /mob/living/silicon/robot/drone/installed_modules()
 
-	if(weapon_lock)
-		to_chat(src, "<span class='danger'>Weapon lock active, unable to use modules! Count:[weaponlock_time]</span>")
-		return
-
 	if(!module)
-		module = new /obj/item/weapon/robot_module/drone(src)
+		module = new /obj/item/robot_module/drone(src)
 
 	var/window = {"
 	<b>Activated Modules</b><br>

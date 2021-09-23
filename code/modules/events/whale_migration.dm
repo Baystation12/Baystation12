@@ -24,7 +24,7 @@
 				T = get_random_edge_turf(dir, TRANSITIONEDGE + 5, station_level)
 			oppT = get_random_edge_turf(GLOB.reverse_dir[dir], TRANSITIONEDGE + 5, station_level)
 			var/mob/living/simple_animal/hostile/retaliate/space_whale/adult
-			var/mob/living/simple_animal/juvenile_space_whale/child
+			var/mob/living/simple_animal/passive/juvenile_space_whale/child
 			if(prob(75))
 				adult = new(T)
 				child = new(get_step(T, dir))

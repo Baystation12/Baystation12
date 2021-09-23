@@ -13,7 +13,7 @@
 	desc = "An interface between crew and the cryogenic storage oversight systems."
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "cellconsole"
-	density = 0
+	density = FALSE
 	interact_offline = 1
 	var/mode = null
 
@@ -111,12 +111,12 @@
 			frozen_items -= I
 		. = TOPIC_REFRESH
 
-/obj/item/weapon/stock_parts/circuitboard/cryopodcontrol
+/obj/item/stock_parts/circuitboard/cryopodcontrol
 	name = "Circuit board (Cryogenic Oversight Console)"
 	build_path = /obj/machinery/computer/cryopod
 	origin_tech = list(TECH_DATA = 3)
 
-/obj/item/weapon/stock_parts/circuitboard/robotstoragecontrol
+/obj/item/stock_parts/circuitboard/robotstoragecontrol
 	name = "Circuit board (Robotic Storage Console)"
 	build_path = /obj/machinery/computer/cryopod/robot
 	origin_tech = list(TECH_DATA = 3)
@@ -128,7 +128,7 @@
 	desc = "A bewildering tangle of machinery and pipes."
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "cryo_rear"
-	anchored = 1
+	anchored = TRUE
 	dir = WEST
 
 //Cryopods themselves.
@@ -137,8 +137,8 @@
 	desc = "A man-sized pod for entering suspended animation."
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "body_scanner_0"
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	dir = WEST
 
 	var/base_icon_state = "body_scanner_0"
@@ -164,17 +164,17 @@
 	var/list/preserve_items = list(
 		/obj/item/integrated_circuit/manipulation/bluespace_rift,
 		/obj/item/integrated_circuit/input/teleporter_locator,
-		/obj/item/weapon/card/id/captains_spare,
-		/obj/item/weapon/aicard,
+		/obj/item/card/id/captains_spare,
+		/obj/item/aicard,
 		/obj/item/device/mmi,
 		/obj/item/device/paicard,
-		/obj/item/weapon/gun,
-		/obj/item/weapon/pinpointer,
+		/obj/item/gun,
+		/obj/item/pinpointer,
 		/obj/item/clothing/suit,
 		/obj/item/clothing/shoes/magboots,
 		/obj/item/blueprints,
 		/obj/item/clothing/head/helmet/space,
-		/obj/item/weapon/storage/internal
+		/obj/item/storage/internal
 	)
 
 /obj/machinery/cryopod/robot
@@ -339,7 +339,7 @@
 
 		if(W.contents.len) //Make sure we catch anything not handled by qdel() on the items.
 			for(var/obj/item/O in W.contents)
-				if(istype(O,/obj/item/weapon/storage/internal)) //Stop eating pockets, you fuck!
+				if(istype(O,/obj/item/storage/internal)) //Stop eating pockets, you fuck!
 					continue
 				O.forceMove(src)
 
@@ -450,10 +450,7 @@
 		to_chat(user, SPAN_WARNING("\The [target] isn't close enough."))
 		return
 	add_fingerprint(user)
-	var/reason = do_after_detailed(user, 2 SECONDS, src, do_flags = DO_DEFAULT | DO_TARGET_UNIQUE_ACT | DO_PUBLIC_PROGRESS)
-	if (reason)
-		if (reason == DO_TARGET_UNIQUE_ACT)
-			to_chat(user, SPAN_WARNING("\The [do_unique_target_user] is already using \the [src]."))
+	if (!do_after(user, 2 SECONDS, src, do_flags = DO_DEFAULT | DO_TARGET_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
 		return
 	if (QDELETED(target))
 		return
@@ -476,7 +473,7 @@
 	user.visible_message("<span class='notice'>\The [user] begins placing \the [target] into \the [src].</span>", "<span class='notice'>You start placing \the [target] into \the [src].</span>")
 	attempt_enter(target, user)
 
-/obj/machinery/cryopod/attackby(var/obj/item/weapon/G as obj, var/mob/user as mob)
+/obj/machinery/cryopod/attackby(var/obj/item/G as obj, var/mob/user as mob)
 
 	if(istype(G, /obj/item/grab))
 		var/obj/item/grab/grab = G
@@ -594,8 +591,8 @@
 	desc = "Whoever was inside isn't going to wake up now. It looks like you could pry it open with a crowbar."
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "broken_cryo"
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 	var/closed = 1
 	var/busy = 0
 	var/remains_type = /obj/item/remains/human

@@ -3,13 +3,16 @@
 	desc = "A heavy duty rapid charging system, designed to quickly recharge cyborg power reserves."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "borgcharger0"
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	idle_power_usage = 50
 	base_type = /obj/machinery/recharge_station
 	uncreated_component_parts = null
 	stat_immune = 0
 	construct_state = /decl/machine_construction/default/panel_closed
+
+	machine_name = "cyborg recharging station"
+	machine_desc = "A station for recharging robots, cyborgs, and silicon-based humanoids such as IPCs and full-body prosthetics."
 
 	var/overlay_icon = 'icons/obj/objects.dmi'
 	var/mob/living/occupant = null
@@ -52,7 +55,7 @@
 		var/repair = wire_rate - use_power_oneoff(wire_power_use * wire_rate, LOCAL) / wire_power_use
 		occupant.adjustFireLoss(-repair)
 
-	var/obj/item/weapon/cell/target
+	var/obj/item/cell/target
 	if(isrobot(occupant))
 		var/mob/living/silicon/robot/R = occupant
 		target = R.cell
@@ -70,8 +73,8 @@
 		var/obj/item/organ/internal/cell/potato = H.internal_organs_by_name[BP_CELL]
 		if(potato)
 			target = potato.cell
-		if((!target || target.percent() > 95) && istype(H.back,/obj/item/weapon/rig))
-			var/obj/item/weapon/rig/R = H.back
+		if((!target || target.percent() > 95) && istype(H.back,/obj/item/rig))
+			var/obj/item/rig/R = H.back
 			if(R.cell && !R.cell.fully_charged())
 				target = R.cell
 
@@ -86,7 +89,7 @@
 
 /obj/machinery/recharge_station/examine(mob/user)
 	. = ..()
-	var/obj/item/weapon/cell/cell = get_cell()
+	var/obj/item/cell/cell = get_cell()
 	if(cell)
 		to_chat(user, "The charge meter reads: [cell.percent()]%")
 	else
@@ -101,7 +104,7 @@
 	if(occupant)
 		occupant.emp_act(severity)
 		go_out()
-	var/obj/item/weapon/cell/cell = get_cell()
+	var/obj/item/cell/cell = get_cell()
 	if(cell)
 		cell.emp_act(severity)
 	..(severity)
@@ -116,8 +119,8 @@
 
 /obj/machinery/recharge_station/RefreshParts()
 	..()
-	var/man_rating = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator), 0, 10)
-	var/cap_rating = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor), 0, 10)
+	var/man_rating = Clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator), 0, 10)
+	var/cap_rating = Clamp(total_component_rating_of_type(/obj/item/stock_parts/capacitor), 0, 10)
 
 	charging_power = 40000 + 40000 * cap_rating
 	weld_rate = max(0, man_rating - 3)
@@ -131,7 +134,7 @@
 		desc += "<br>It is capable of repairing burn damage."
 
 /obj/machinery/recharge_station/proc/overlay_state()
-	var/obj/item/weapon/cell/cell = get_cell()
+	var/obj/item/cell/cell = get_cell()
 	switch(cell && cell.percent() || 0)
 		if(0 to 20)
 			return "statn_c0"
@@ -187,11 +190,11 @@
 		var/mob/living/silicon/robot/R = M
 		return (R.cell)
 	if(ishuman(M))
-		var/mob/living/carbon/human/H = M		
+		var/mob/living/carbon/human/H = M
 		if(H.isSynthetic()) // FBPs and IPCs
 			return 1
-		if(istype(H.back,/obj/item/weapon/rig))
-			var/obj/item/weapon/rig/R = H.back
+		if(istype(H.back,/obj/item/rig))
+			var/obj/item/rig/R = H.back
 			return R.cell
 		return H.internal_organs_by_name["cell"]
 	return 0
@@ -221,5 +224,7 @@
 	set category = "Object"
 	set name = "Enter Recharger"
 	set src in oview(1)
+	if (usr.buckled())
+		return
 
 	go_in(usr)

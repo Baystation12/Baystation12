@@ -21,7 +21,7 @@
 
 	body_parts_covered = UPPER_TORSO | LOWER_TORSO| ARMS
 	armor = list(laser = ARMOR_LASER_MINOR, energy = ARMOR_ENERGY_MINOR, bomb = ARMOR_BOMB_MINOR)
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank/emergency,/obj/item/weapon/extinguisher,/obj/item/weapon/crowbar/emergency_forcing_tool,/obj/item/clothing/head)
+	allowed = list(/obj/item/device/flashlight,/obj/item/tank/emergency,/obj/item/extinguisher,/obj/item/crowbar/emergency_forcing_tool,/obj/item/clothing/head)
 
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.50
@@ -73,6 +73,7 @@
 		)
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR
 	body_parts_covered = HEAD|FACE|EYES
+	item_flags = null
 	siemens_coefficient = 0
 
 
@@ -92,6 +93,7 @@
 		)
 	flags_inv = HIDEJUMPSUIT|HIDETAIL
 	heat_protection = UPPER_TORSO|LOWER_TORSO
+	item_flags = null
 	max_heat_protection_temperature = ARMOR_MAX_HEAT_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0
 
@@ -105,14 +107,14 @@
 
 /obj/item/clothing/suit/bomb_suit/security
 	icon_state = "bombsuitsec"
-	allowed = list(/obj/item/weapon/gun/energy,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs)
+	allowed = list(/obj/item/gun/energy,/obj/item/melee/baton,/obj/item/handcuffs)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 
 /*
  * Radiation protection
  */
 /obj/item/clothing/head/radiation
-	name = "Radiation Hood"
+	name = "radiation hood"
 	icon_state = "rad"
 	desc = "A hood with radiation protective properties. Label: Made with lead, do not eat insulation."
 	flags_inv = BLOCKHAIR
@@ -124,7 +126,7 @@
 
 
 /obj/item/clothing/suit/radiation
-	name = "Radiation suit"
+	name = "radiation suit"
 	desc = "A suit that protects against radiation. Label: Made with lead, do not eat insulation."
 	icon_state = "rad"
 	item_state_slots = list(
@@ -135,7 +137,7 @@
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.50
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS|HANDS|FEET
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank/emergency,/obj/item/clothing/head/radiation,/obj/item/clothing/mask/gas,/obj/item/device/geiger)
+	allowed = list(/obj/item/device/flashlight,/obj/item/tank/emergency,/obj/item/clothing/head/radiation,/obj/item/clothing/mask/gas,/obj/item/device/geiger)
 	armor = list(
 		bio = ARMOR_BIO_RESISTANT,
 		rad = ARMOR_RAD_SHIELDED

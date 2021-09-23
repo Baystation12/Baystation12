@@ -68,7 +68,24 @@
 		{{/for}}
 	</div>
 </div>
-<div class='item'>
+<div style="float:right;width:50%">
+	<h3>Setup</h3>
+	<div class='block'>
+		<div class='itemLabelWidest'>
+			Strength
+		</div>
+		<div class='item'>
+			{{:helper.link(data.strength, 'lightbulb', { 'strength' : 1 }, null, null)}}
+		</div>
+		<div class='itemLabelWidest'>
+			Radius
+		</div>
+		<div class='item'>
+			{{:helper.link(data.range, 'arrow-4-diag', { 'range' : 1 }, null, null)}}
+		</div>
+	</div>
+</div>
+<div class='item'>	
 {{:helper.link("Fire", 'alert', { 'fire' : 1 }, null, null)}}
 </div>
 {{/if}}

@@ -51,7 +51,7 @@
 		bomb = ARMOR_BOMB_PADDED
 	)
 
-/obj/item/weapon/excalibur
+/obj/item/excalibur
 	name = "champion's blade"
 	desc = "<i>For at his belt hung Excalibur, the finest sword that there was, which sliced through iron as through wood.</i>"
 	icon = 'icons/obj/weapons/melee_physical.dmi'
@@ -72,13 +72,13 @@
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "cleaved", "sundered")
 
-/obj/item/weapon/excalibur/pickup(var/mob/living/user as mob)
+/obj/item/excalibur/pickup(var/mob/living/user as mob)
 	if(user.mind)
 		if(!GLOB.wizards.is_antagonist(user.mind) || user.mind.special_role != ANTAG_SERVANT)
 			START_PROCESSING(SSobj, src)
 			to_chat(user,"<span class='danger'>\The [src] heats up in your hands, burning you!</span>")
 
-/obj/item/weapon/excalibur/Process()
+/obj/item/excalibur/Process()
 	if(istype(loc, /mob/living))
 		if(istype(loc, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = loc
@@ -94,5 +94,5 @@
 			to_chat(loc,"<span class='danger'>\The [src] is burning you!</span>")
 	return 1
 
-/obj/item/weapon/excalibur/dropped()
+/obj/item/excalibur/dropped()
 	STOP_PROCESSING(SSobj, src)

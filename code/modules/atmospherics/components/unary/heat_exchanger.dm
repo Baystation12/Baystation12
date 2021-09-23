@@ -2,7 +2,7 @@
 
 	icon = 'icons/obj/atmospherics/heat_exchanger.dmi'
 	icon_state = "intact"
-	density = 1
+	density = TRUE
 
 	name = "Heat Exchanger"
 	desc = "Exchanges heat between two input gases. Setup for fast heat transfer."
@@ -69,7 +69,7 @@
 
 		return 1
 
-	attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
+	attackby(var/obj/item/W as obj, var/mob/user as mob)
 		if(!isWrench(W))
 			return ..()
 		var/turf/T = src.loc

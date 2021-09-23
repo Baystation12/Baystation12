@@ -6,6 +6,8 @@
 	icon_screen = "alert:0"
 	light_color = "#e6ffff"
 	base_type = /obj/machinery/computer/station_alert
+	machine_name = "alert console"
+	machine_desc = "A compact monitoring system that displays a readout of all active atmosphere, camera, and fire alarms on the network."
 	var/datum/nano_module/alarm_monitor/alarm_monitor
 	var/monitor_type = /datum/nano_module/alarm_monitor
 

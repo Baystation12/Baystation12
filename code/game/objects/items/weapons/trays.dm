@@ -2,7 +2,7 @@
  * Trays - initially by Agouri
  */
 
-/obj/item/weapon/tray
+/obj/item/tray
 	name = "tray"
 	icon = 'icons/obj/food.dmi'
 	icon_state = "tray"
@@ -20,7 +20,7 @@
 
 
 // Use the tray in-hand to dump out all its items.
-/obj/item/weapon/tray/attack_self(mob/living/user)
+/obj/item/tray/attack_self(mob/living/user)
 	if (LAZYLEN(carrying))
 		var/turf/T = get_turf(user)
 		overlays.Cut()
@@ -32,7 +32,7 @@
 	. = ..()
 
 // When hitting people with the tray, drop all its items everywhere. You jerk.
-/obj/item/weapon/tray/attack(mob/living/M, mob/living/user)
+/obj/item/tray/attack(mob/living/M, mob/living/user)
 	if (user.a_intent != I_HURT)
 		return FALSE
 	. = ..()
@@ -45,8 +45,8 @@
 
 
 // Bash a rolling pin against a tray like a true knight!
-/obj/item/weapon/tray/attackby(obj/item/W, mob/living/user)
-	if(istype(W, /obj/item/weapon/material/kitchen/rollingpin) && user.a_intent == I_HURT)
+/obj/item/tray/attackby(obj/item/W, mob/living/user)
+	if(istype(W, /obj/item/material/kitchen/rollingpin) && user.a_intent == I_HURT)
 		if(bash_cooldown < world.time)
 			user.visible_message("<span class='warning'>[user] bashes [src] with [W]!</span>")
 			playsound(user.loc, 'sound/effects/shieldbash.ogg', 50, 1)
@@ -67,37 +67,37 @@
 
 
 // Returns the space an object takes up on the tray. Non-food takes up double!
-/obj/item/weapon/tray/proc/storage_cost_for_item(obj/item/I)
+/obj/item/tray/proc/storage_cost_for_item(obj/item/I)
 	var/effective_cost = I.get_storage_cost()
-	return istype(I, /obj/item/weapon/reagent_containers/food) ? effective_cost : effective_cost * 2
+	return istype(I, /obj/item/reagent_containers/food) ? effective_cost : effective_cost * 2
 
 
 // Returns TRUE if the tray can hold an item, and FALSE otherwise.
-/obj/item/weapon/tray/proc/can_add_item(obj/item/I)
+/obj/item/tray/proc/can_add_item(obj/item/I)
 	var/cost = storage_cost_for_item(I)
 	return !I.anchored && I.canremove && \
-		!istype(I, /obj/item/projectile) && !istype(I, /obj/item/clothing/under) && !istype(I, /obj/item/clothing/suit) && !istype(I, /obj/item/weapon/storage) && \
+		!istype(I, /obj/item/projectile) && !istype(I, /obj/item/clothing/under) && !istype(I, /obj/item/clothing/suit) && !istype(I, /obj/item/storage) && \
 		calc_carry() + cost <= max_carry
 
 
 // Calculates the total storage cost being used by the tray.
-/obj/item/weapon/tray/proc/calc_carry()
+/obj/item/tray/proc/calc_carry()
 	. = 0
 	for(var/obj/item/I in carrying)
 		. += storage_cost_for_item(I)
 
 
 // Puts an item onto the tray and displays it visually.
-/obj/item/weapon/tray/proc/pickup_item(obj/item/I)
+/obj/item/tray/proc/pickup_item(obj/item/I)
 	I.forceMove(src)
 	LAZYADD(carrying, I)
 	add_item_overlay(I)
 
 
 // Intercepts hits against atoms in order to pick up items or dump stuff out as required.
-/obj/item/weapon/tray/resolve_attackby(atom/A, mob/user)
+/obj/item/tray/resolve_attackby(atom/A, mob/user)
 	var/grab_intent = ishuman(user) ? I_GRAB : I_HELP
-	if (user.a_intent != grab_intent || istype(A, /obj/item/weapon/storage) || istype(A, /obj/screen/storage))
+	if (user.a_intent != grab_intent || istype(A, /obj/item/storage) || istype(A, /obj/screen/storage))
 		return ..()
 	
 	var/turf/T = get_turf(A)
@@ -149,7 +149,7 @@
 
 
 // Adds a visible overlay on the tray with the item's icon, state, and overlays, to display them on the tray itself
-/obj/item/weapon/tray/proc/add_item_overlay(obj/item/I)
+/obj/item/tray/proc/add_item_overlay(obj/item/I)
 	if (isnull(I) || !istype(I))
 		return
 	var/image/item_image = image("icon" = I.icon, "icon_state" = I.icon_state, "layer" = 30 + I.layer, "pixel_x" = rand(-3, 3), "pixel_y" = rand(-3, 3)) // this line terrifies me

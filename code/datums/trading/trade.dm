@@ -152,31 +152,31 @@
 /datum/trader/proc/make_response(var/response_type, var/response_default, var/delta = 0, var/success = TRUE)
 	. = new /datum/trade_response(get_response(response_type, response_default), delta, success)
 
-/datum/trader/proc/offer_money_for_trade(var/trade_num, var/money_amount, var/turf/location, skill = SKILL_MAX)
+/datum/trader/proc/offer_money_for_bulk(quantity, trade_num, money_amount, turf/location, skill = SKILL_MAX)
 	if(!(trade_flags & TRADER_MONEY))
-		return make_response(TRADER_NO_MONEY, "I don't like money", 0, FALSE)
-	var/value = get_item_value(trade_num, skill)
+		return make_response(TRADER_NO_MONEY, "I don't like money.", 0, FALSE)
+	var/value = get_item_value(trade_num, skill) * quantity
 	if(money_amount < value)
 		return make_response(TRADER_NOT_ENOUGH, "I need more money!", 0, FALSE)
-	trade(list(), trade_num, location)
+	trade_quantity(quantity, list(), trade_num, location)
 	return make_response(TRADER_TRADE_COMPLETE, "Thank you for your patronage!", -value, TRUE)
 
-/datum/trader/proc/offer_items_for_trade(var/list/offers, var/num, var/turf/location, skill = SKILL_MAX)
-	if(!offers || !offers.len)
+/datum/trader/proc/offer_items_for_bulk(quantity, list/offers, num, turf/location, skill = SKILL_MAX)
+	if(!offers?.len)
 		return make_response(TRADER_NOT_ENOUGH, "That's not enough.", 0, FALSE)
 	num = Clamp(num, 1, trading_items.len)
 	var/offer_worth = 0
 	for(var/item in offers)
 		var/atom/movable/offer = item
 		var/is_wanted = 0
-		if((trade_flags & TRADER_WANTED_ONLY) && is_type_in_list(offer,wanted_items))
+		if((trade_flags & TRADER_WANTED_ONLY) && is_type_in_list(offer, wanted_items))
 			is_wanted = 2
-		if((trade_flags & TRADER_WANTED_ALL) && is_type_in_list(offer,possible_wanted_items))
+		if((trade_flags & TRADER_WANTED_ALL) && is_type_in_list(offer, possible_wanted_items))
 			is_wanted = 1
-		if(blacklisted_trade_items && blacklisted_trade_items.len && is_type_in_list(offer,blacklisted_trade_items))
+		if(blacklisted_trade_items?.len && is_type_in_list(offer ,blacklisted_trade_items))
 			return make_response(TRADER_NO_BLACKLISTED, "I refuse to take one of those items.", 0, FALSE)
 
-		if(istype(offer,/obj/item/weapon/spacecash))
+		if(istype(offer, /obj/item/spacecash))
 			if(!(trade_flags & TRADER_MONEY))
 				return make_response(TRADER_NO_MONEY, "I don't take money.", 0, FALSE)
 		else
@@ -185,15 +185,15 @@
 			else if((trade_flags & TRADER_WANTED_ONLY|TRADER_WANTED_ALL) && !is_wanted)
 				return make_response(TRADER_FOUND_UNWANTED, "I don't want one of those items", 0, FALSE)
 
-		offer_worth += get_buy_price(offer, is_wanted - 1, skill)
+		offer_worth += get_buy_price(offer, is_wanted - 1, skill) * quantity
 	if(!offer_worth)
-		return make_response(TRADER_NOT_ENOUGH, "Everything you've gave me is worthless!", 0, FALSE)
+		return make_response(TRADER_NOT_ENOUGH, "Everything you gave me is worthless!", 0, FALSE)
 	var/trading_worth = get_item_value(num, skill)
 	if(!trading_worth)
 		return make_response(TRADER_NOT_ENOUGH, "That's not enough.", 0, FALSE)
 	var/percent = offer_worth/trading_worth
-	if(percent > max(0.9,0.9-disposition/100))
-		trade(offers, num, location)
+	if(percent > max(0.9, 0.9-disposition / 100))
+		trade_quantity(quantity, offers, num, location)
 		return make_response(TRADER_TRADE_COMPLETE, "Thank you for your patronage!", 0, TRUE)
 	return make_response(TRADER_NOT_ENOUGH, "That's not enough.", 0, FALSE)
 
@@ -234,9 +234,9 @@
 		disposition += rand(compliment_increase, compliment_increase * 2)
 	return make_response(TRADER_COMPLEMENT_SUCCESS, "Thank you!", 0, TRUE)
 
-/datum/trader/proc/trade(var/list/offers, var/num, var/turf/location)
+/datum/trader/proc/trade_quantity(quantity, list/offers, num, turf/location)
 	for(var/offer in offers)
-		if(istype(offer,/mob))
+		if(istype(offer, /mob))
 			var/text = mob_transfer_message
 			to_chat(offer, replacetext_char(text, "ORIGIN", origin))
 		qdel(offer)
@@ -244,10 +244,12 @@
 	num = Clamp(num, 1, trading_items.len)
 	var/type = trading_items[num]
 
-	var/atom/movable/M = new type(location)
-	playsound(location, 'sound/effects/teleport.ogg', 50, 1)
+	var/list/M = list()
+	for (var/i = 1 to quantity)
+		M += new type(location)
 
-	disposition += rand(compliment_increase,compliment_increase*3) //Traders like it when you trade with them
+	playsound(location, 'sound/effects/teleport.ogg', 50, 1)
+	disposition += quantity * (rand(compliment_increase, compliment_increase * 3))
 
 	return M
 

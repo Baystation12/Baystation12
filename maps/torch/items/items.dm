@@ -50,22 +50,22 @@ Torch specific items
 	icon_state_unpowered = "pda-exp"
 
 /obj/item/modular_computer/pda/heads/hop
-	stored_pen = /obj/item/weapon/pen/multi/cmd/xo
+	stored_pen = /obj/item/pen/multi/cmd/xo
 
 /obj/item/modular_computer/pda/captain
-	stored_pen = /obj/item/weapon/pen/multi/cmd/co
+	stored_pen = /obj/item/pen/multi/cmd/co
 
-/obj/item/weapon/storage/backpack/explorer
+/obj/item/storage/backpack/explorer
 	name = "explorer backpack"
 	desc = "A rugged backpack."
 	icon_state = "exppack"
 
-/obj/item/weapon/storage/backpack/satchel/explorer
+/obj/item/storage/backpack/satchel/explorer
 	name = "explorer satchel"
 	desc = "A rugged satchel for field work."
 	icon_state = "satchel-exp"
 
-/obj/item/weapon/storage/backpack/messenger/explorer
+/obj/item/storage/backpack/messenger/explorer
 	name = "explorer messenger bag"
 	desc = "A rugged backpack worn over one shoulder."
 	icon_state = "courierbagexp"
@@ -74,19 +74,19 @@ Torch specific items
 Unique items
 ***********/
 
-/obj/item/weapon/pen/multi/cmd/xo
+/obj/item/pen/multi/cmd/xo
 	name = "executive officer's pen"
 	icon = 'maps/torch/icons/obj/uniques.dmi'
 	icon_state = "pen_xo"
 	desc = "A slightly bulky pen with a silvery case. Twisting the top allows you to switch the nib for different colors."
 
-/obj/item/weapon/pen/multi/cmd/co
+/obj/item/pen/multi/cmd/co
 	name = "commanding officer's pen"
 	icon = 'maps/torch/icons/obj/uniques.dmi'
 	icon_state = "pen_co"
 	desc = "A slightly bulky pen with a golden case. Twisting the top allows you to switch the nib for different colors."
 
-/obj/item/weapon/pen/multi/cmd/attack_self(mob/user)
+/obj/item/pen/multi/cmd/attack_self(mob/user)
 	if(++selectedColor > 3)
 		selectedColor = 1
 	colour = colors[selectedColor]
@@ -96,11 +96,7 @@ Unique items
 Weapons
 ******/
 
-/obj/item/weapon/gun/energy/gun/small/secure/corporate
-	desc = "An access-locked EXO-branded LAEP90-CS. It's designed to please paranoid corporate liaisons. Body cam not included."
-	req_access = list(access_liaison)
-
-/obj/item/weapon/gun/projectile/revolver/medium/captain
+/obj/item/gun/projectile/revolver/medium/captain
 	name = "\improper Final Argument"
 	icon = 'maps/torch/icons/obj/uniques.dmi'
 	icon_state = "mosley"
@@ -110,19 +106,19 @@ Weapons
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 2)
 	starts_loaded = 0 //Nobody keeps ballistic weapons loaded
 
-/obj/item/weapon/gun/energy/stunrevolver/secure/nanotrasen
+/obj/item/gun/energy/stunrevolver/secure/nanotrasen
 	name = "corporate stun revolver"
 	desc = "This A&M X6 is fitted with an NT1019 chip which allows remote authorization of weapon functionality. It has a NanoTrasen logo on the grip."
 	req_access = list(list(access_brig, access_heads, access_rd, access_sec_guard))
 
-/obj/item/weapon/gun/projectile/pistol/holdout/liaison
+/obj/item/gun/projectile/pistol/holdout/liaison
 	magazine_type = /obj/item/ammo_magazine/pistol/small/oneway
 
 /obj/item/ammo_magazine/pistol/small/oneway
 	initial_ammo = 1
 
 /obj/effect/paint/hull
-	color = COLOR_HULL
+	color = COLOR_SOL
 
 /obj/effect/paint/expeditionary
 	color = "#68099e"

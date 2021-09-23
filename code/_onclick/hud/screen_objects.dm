@@ -11,7 +11,7 @@
 	icon = 'icons/mob/screen1.dmi'
 	plane = HUD_PLANE
 	layer = HUD_BASE_LAYER
-	appearance_flags = NO_CLIENT_COLOR
+	appearance_flags = DEFAULT_APPEARANCE_FLAGS | NO_CLIENT_COLOR
 	unacidable = TRUE
 	var/obj/master = null    //A reference to the object in the slot. Grabs or items, generally.
 	var/globalscreen = FALSE //Global screens are not qdeled when the holding mob is destroyed.
@@ -38,8 +38,8 @@
 
 /obj/screen/close/Click()
 	if(master)
-		if(istype(master, /obj/item/weapon/storage))
-			var/obj/item/weapon/storage/S = master
+		if(istype(master, /obj/item/storage))
+			var/obj/item/storage/S = master
 			S.close(usr)
 	return 1
 
@@ -149,7 +149,11 @@
 /obj/screen/zone_sel/proc/set_selected_zone(bodypart)
 	var/old_selecting = selecting
 	selecting = bodypart
-	if(old_selecting != selecting)
+	var/mob/living/carbon/human/user = usr
+	if (istype(user) && (old_selecting == BP_MOUTH || selecting == BP_MOUTH) && user.aiming && user.aiming.active && user.aiming.aiming_at == user)
+		var/obj/aiming_overlay/AO = user.aiming
+		AO.aim_at(user, user.aiming.aiming_with, TRUE)
+	if (old_selecting != selecting)
 		update_icon()
 		return TRUE
 
@@ -241,16 +245,16 @@
 								tankcheck = list(C.r_hand, C.l_hand, C.back)
 
 							// Rigs are a fucking pain since they keep an air tank in nullspace.
-							if(istype(C.back,/obj/item/weapon/rig))
-								var/obj/item/weapon/rig/rig = C.back
+							if(istype(C.back,/obj/item/rig))
+								var/obj/item/rig/rig = C.back
 								if(rig.air_supply)
 									from = "in"
 									nicename |= "hardsuit"
 									tankcheck |= rig.air_supply
 
 							for(var/i=1, i<tankcheck.len+1, ++i)
-								if(istype(tankcheck[i], /obj/item/weapon/tank))
-									var/obj/item/weapon/tank/t = tankcheck[i]
+								if(istype(tankcheck[i], /obj/item/tank))
+									var/obj/item/tank/t = tankcheck[i]
 									if (!isnull(t.manipulated_by) && t.manipulated_by != C.real_name && findtext(t.desc,breathes))
 										contents.Add(t.air_contents.total_moles)	//Someone messed with the tank and put unknown gasses
 										continue					//in it, so we're going to believe the tank is what it says it is
@@ -280,7 +284,12 @@
 								C.set_internals(tankcheck[best], "\the [tankcheck[best]] [from] your [nicename[best]]")
 
 							if(!C.internal)
-								to_chat(C, "<span class='notice'>You don't have \a [breathes] tank.</span>")
+								// Finally, check for an internal air system.
+								// We use this as an absolute last resort, so we don't include it in the above logic
+								// There's no need to check that the gas contents are safe, because its internal logic always make sure it is
+								var/obj/item/organ/internal/augment/active/internal_air_system/IAS = locate() in C.internal_organs
+								if (!IAS?.activate())
+									to_chat(C, SPAN_WARNING("You don't have \a [breathes] tank."))
 		if("act_intent")
 			usr.a_intent_change("right")
 

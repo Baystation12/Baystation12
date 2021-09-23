@@ -37,7 +37,7 @@
 /obj/item/device/oxycandle,
 /obj/item/device/oxycandle,
 /obj/item/device/oxycandle,
-/obj/item/weapon/storage/box/glowsticks,
+/obj/item/storage/box/glowsticks,
 /turf/simulated/floor/airless,
 /area/scavver/gantry/down2)
 "bw" = (
@@ -264,7 +264,7 @@
 /obj/item/device/paint_sprayer,
 /obj/structure/table/rack,
 /obj/item/device/cable_painter,
-/obj/item/weapon/hand_labeler,
+/obj/item/hand_labeler,
 /turf/simulated/floor/airless,
 /area/scavver/gantry/down1)
 "eY" = (
@@ -489,10 +489,10 @@
 "it" = (
 /obj/structure/railing/mapped,
 /obj/structure/table/rack,
-/obj/item/weapon/storage/briefcase/inflatable,
-/obj/item/weapon/storage/briefcase/inflatable,
-/obj/item/weapon/storage/briefcase/inflatable,
-/obj/item/weapon/storage/briefcase/inflatable,
+/obj/item/storage/briefcase/inflatable,
+/obj/item/storage/briefcase/inflatable,
+/obj/item/storage/briefcase/inflatable,
+/obj/item/storage/briefcase/inflatable,
 /obj/item/device/spaceflare,
 /turf/simulated/floor/airless,
 /area/scavver/gantry/down1)
@@ -711,17 +711,17 @@
 "la" = (
 /obj/structure/railing/mapped,
 /obj/structure/table/rack,
-/obj/item/weapon/stock_parts/micro_laser/ultra,
-/obj/item/weapon/stock_parts/circuitboard/unary_atmos/cooler,
-/obj/item/weapon/stock_parts/circuitboard/unary_atmos/heater,
-/obj/item/weapon/stock_parts/circuitboard/oxyregenerator,
-/obj/item/weapon/stock_parts/matter_bin/super,
-/obj/item/weapon/stock_parts/circuitboard/biogenerator,
+/obj/item/stock_parts/micro_laser/ultra,
+/obj/item/stock_parts/circuitboard/unary_atmos/cooler,
+/obj/item/stock_parts/circuitboard/unary_atmos/heater,
+/obj/item/stock_parts/circuitboard/oxyregenerator,
+/obj/item/stock_parts/matter_bin/super,
+/obj/item/stock_parts/circuitboard/biogenerator,
 /obj/random/tech_supply,
 /obj/random/tech_supply,
 /obj/random/tech_supply,
 /obj/random/tech_supply,
-/obj/item/weapon/module/power_control,
+/obj/item/module/power_control,
 /turf/simulated/floor/airless,
 /area/scavver/gantry/down1)
 "lp" = (
@@ -748,11 +748,11 @@
 /obj/item/seeds/algaeseed,
 /obj/item/seeds/algaeseed,
 /obj/item/seeds/algaeseed,
-/obj/item/weapon/reagent_containers/glass/bottle/eznutrient,
-/obj/item/weapon/reagent_containers/glass/bottle/eznutrient,
-/obj/item/weapon/reagent_containers/glass/bottle/eznutrient,
-/obj/item/weapon/reagent_containers/glass/bottle/eznutrient,
-/obj/item/weapon/reagent_containers/glass/bottle/eznutrient,
+/obj/item/reagent_containers/glass/bottle/eznutrient,
+/obj/item/reagent_containers/glass/bottle/eznutrient,
+/obj/item/reagent_containers/glass/bottle/eznutrient,
+/obj/item/reagent_containers/glass/bottle/eznutrient,
+/obj/item/reagent_containers/glass/bottle/eznutrient,
 /turf/simulated/floor/airless,
 /area/scavver/yachtdown/thrusters)
 "lD" = (
@@ -805,9 +805,9 @@
 /area/scavver/yachtdown)
 "mV" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/weapon/storage/firstaid/adv,
+/obj/item/storage/firstaid/adv,
 /obj/item/roller,
-/obj/item/weapon/storage/backpack/satchel/med,
+/obj/item/storage/backpack/satchel/med,
 /obj/effect/floor_decal/corner/blue/mono,
 /obj/random/firstaid,
 /obj/random/firstaid,
@@ -832,13 +832,13 @@
 /area/scavver/yachtdown)
 "np" = (
 /obj/structure/closet/crate/freezer,
-/obj/item/weapon/reagent_containers/ivbag/blood/OMinus,
+/obj/item/reagent_containers/ivbag/blood/OMinus,
 /obj/effect/floor_decal/corner/blue/mono,
-/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
-/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
-/obj/item/weapon/reagent_containers/ivbag,
-/obj/item/weapon/reagent_containers/ivbag,
-/obj/item/weapon/storage/box/gloves,
+/obj/item/reagent_containers/food/drinks/cans/waterbottle,
+/obj/item/reagent_containers/food/drinks/cans/waterbottle,
+/obj/item/reagent_containers/ivbag,
+/obj/item/reagent_containers/ivbag,
+/obj/item/storage/box/gloves,
 /turf/simulated/floor/tiled/white/monotile,
 /area/scavver/calypso)
 "ny" = (
@@ -919,7 +919,7 @@
 /obj/item/stack/flag/teal,
 /obj/item/stack/flag/teal,
 /obj/item/device/binoculars,
-/obj/item/weapon/rpd,
+/obj/item/rpd,
 /obj/item/clamp,
 /obj/item/clamp,
 /obj/item/clamp,
@@ -1177,7 +1177,7 @@
 /area/scavver/calypso)
 "tL" = (
 /obj/structure/lattice,
-/obj/item/weapon/reagent_containers/food/snacks/donkpocket/sinpocket,
+/obj/item/reagent_containers/food/snacks/donkpocket/sinpocket,
 /turf/space,
 /area/scavver/calypso)
 "tO" = (
@@ -1213,7 +1213,7 @@
 /turf/simulated/floor/plating,
 /area/scavver/calypso)
 "uB" = (
-/obj/machinery/computer/ship/sensors,
+/obj/machinery/computer/ship/sensors/spacer,
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/monotile,
 /area/scavver/calypso)
@@ -1331,8 +1331,8 @@
 	icon_state = "railing0-1"
 	},
 /obj/structure/closet/crate/plastic,
-/obj/item/weapon/reagent_containers/glass/paint/random,
-/obj/item/weapon/crowbar/brace_jack,
+/obj/item/reagent_containers/glass/paint/random,
+/obj/item/crowbar/brace_jack,
 /obj/item/stack/material/phoron/fifty,
 /obj/item/stack/material/phoron/fifty,
 /obj/item/stack/material/phoron/fifty,
@@ -1500,7 +1500,7 @@
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 8
 	},
-/obj/item/weapon/stool,
+/obj/item/stool,
 /turf/simulated/floor/airless,
 /area/scavver/yachtdown/thrusters)
 "Aj" = (
@@ -1514,11 +1514,11 @@
 /turf/simulated/wall/walnut,
 /area/scavver/yachtdown/thrusters)
 "AE" = (
-/obj/item/weapon/storage/firstaid/surgery,
+/obj/item/storage/firstaid/surgery,
 /obj/item/clothing/head/surgery,
 /obj/structure/table/steel_reinforced,
-/obj/item/weapon/reagent_containers/spray/sterilizine,
-/obj/item/weapon/reagent_containers/spray/cleaner{
+/obj/item/reagent_containers/spray/sterilizine,
+/obj/item/reagent_containers/spray/cleaner{
 	pixel_x = -5
 	},
 /obj/item/device/robotanalyzer,
@@ -1815,7 +1815,7 @@
 /turf/simulated/floor/airless,
 /area/scavver/yachtdown)
 "Es" = (
-/obj/item/weapon/towel/random,
+/obj/item/towel/random,
 /obj/effect/decal/cleanable/dirt,
 /mob/living/simple_animal/hostile/rogue_drone{
 	desc = "A small robot. It looks angry. Someone has scratched 'See no Evil' onto the chassis. Odd."
@@ -2356,7 +2356,7 @@
 /area/scavver/yachtdown)
 "PT" = (
 /obj/structure/lattice,
-/obj/item/weapon/reagent_containers/food/snacks/donkpocket,
+/obj/item/reagent_containers/food/snacks/donkpocket,
 /turf/space,
 /area/scavver/yachtdown)
 "PY" = (
@@ -2457,8 +2457,8 @@
 /area/scavver/gantry/down2)
 "RT" = (
 /obj/structure/table/rack,
-/obj/item/weapon/storage/belt/utility/full,
-/obj/item/weapon/storage/belt/utility/full,
+/obj/item/storage/belt/utility/full,
+/obj/item/storage/belt/utility/full,
 /obj/item/device/radio/map_preset/scavver,
 /obj/item/device/radio/map_preset/scavver,
 /obj/item/clothing/gloves/insulated,
@@ -2795,7 +2795,7 @@
 /obj/structure/hygiene/sink{
 	pixel_y = 20
 	},
-/obj/item/weapon/bikehorn/rubberducky,
+/obj/item/bikehorn/rubberducky,
 /obj/effect/decal/cleanable/dirt,
 /obj/random/soap,
 /mob/living/simple_animal/hostile/rogue_drone{

@@ -3,7 +3,7 @@
 
 	icon = 'icons/obj/atmos.dmi'
 	icon_state = "pscrubber:0"
-	density = 1
+	density = TRUE
 	w_class = ITEM_SIZE_NORMAL
 	base_type = /obj/machinery/portable_atmospherics/powered/scrubber
 	var/volume_rate = 800
@@ -12,6 +12,9 @@
 
 	power_rating = 7500 //7500 W ~ 10 HP
 	power_losses = 150
+	
+	machine_name = "portable scrubber"
+	machine_desc = "Portable scrubbers can be freely moved from place to place in order to draw harmful gases out of the air. It runs on a battery backup and can be connected to atmospherics networks."
 
 	var/minrate = 0
 	var/maxrate = 10 * ONE_ATMOSPHERE
@@ -93,7 +96,7 @@
 
 /obj/machinery/portable_atmospherics/powered/scrubber/ui_interact(mob/user, ui_key = "rcon", datum/nanoui/ui=null, force_open=1)
 	var/list/data[0]
-	var/obj/item/weapon/cell/cell = get_cell()
+	var/obj/item/cell/cell = get_cell()
 	data["portConnected"] = connected_port ? 1 : 0
 	data["tankPressure"] = round(air_contents.return_pressure() > 0 ? air_contents.return_pressure() : 0)
 	data["rate"] = round(volume_rate)
@@ -141,7 +144,7 @@
 
 /obj/machinery/portable_atmospherics/powered/scrubber/broken/Initialize()
 	. = ..()
-	var/part = uninstall_component(/obj/item/weapon/stock_parts/power/battery/buildable/stock)
+	var/part = uninstall_component(/obj/item/stock_parts/power/battery/buildable/stock)
 	if(part)
 		qdel(part)
 
@@ -149,15 +152,18 @@
 /obj/machinery/portable_atmospherics/powered/scrubber/huge
 	name = "Huge Air Scrubber"
 	icon_state = "scrubber:0"
-	anchored = 1
+	anchored = TRUE
 	volume = 50000
 	volume_rate = 5000
 	base_type = /obj/machinery/portable_atmospherics/powered/scrubber/huge
 
-	uncreated_component_parts = list(/obj/item/weapon/stock_parts/power/apc)
-	maximum_component_parts = list(/obj/item/weapon/stock_parts = 15)
+	uncreated_component_parts = list(/obj/item/stock_parts/power/apc)
+	maximum_component_parts = list(/obj/item/stock_parts = 15)
 	idle_power_usage = 500		//internal circuitry, friction losses and stuff
 	power_rating = 100000 //100 kW ~ 135 HP
+	
+	machine_name = "large portable scrubber"
+	machine_desc = "A heavy-duty scrubbing machine with greatly enhanced filtration power. Typically used around areas where a gas breach could be disastrous."
 
 	var/global/gid = 1
 	var/id = 0
@@ -196,7 +202,7 @@
 
 		return
 	//doesn't hold tanks
-	if(istype(I, /obj/item/weapon/tank))
+	if(istype(I, /obj/item/tank))
 		return
 
 	return ..()
@@ -205,6 +211,8 @@
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary
 	name = "Stationary Air Scrubber"
 	base_type = /obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary
+	machine_name = "large stationary portable scrubber"
+	machine_desc = "This is simply a large portable scrubber that can't be moved once it's bolted into place, and is otherwise identical."
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary/attackby(var/obj/item/I as obj, var/mob/user as mob)
 	if(isWrench(I))

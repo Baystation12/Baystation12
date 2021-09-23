@@ -58,6 +58,7 @@
 #define MATERIAL_WALNUT                  "walnut"
 #define MATERIAL_BAMBOO                  "bamboo"
 #define MATERIAL_YEW                     "yew"
+#define MATERIAL_VOXRES                  "vox bioresin"
 
 // skins and bones
 #define MATERIAL_SKIN_GENERIC            "skin"

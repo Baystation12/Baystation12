@@ -156,6 +156,8 @@
 					bad_message = "<b>\[UNAVAILABLE]</b>"
 				else if(jobban_isbanned(user, title))
 					bad_message = "<b>\[BANNED]</b>"
+				else if (!job.is_species_whitelist_allowed(user.client))
+					bad_message = "\[WHITELIST RESTRICTED ([job.use_species_whitelist])]"
 				else if(!job.player_old_enough(user.client))
 					var/available_in_days = job.available_in_days(user.client)
 					bad_message = "\[IN [(available_in_days)] DAYS]"
@@ -371,10 +373,9 @@
 			return
 		var/value = text2num(href_list["newvalue"])
 		update_skill_value(J, S, value)
-		pref.ShowChoices(user) //Manual refresh to allow us to focus the panel, not the main window.
 		panel.set_content(generate_skill_content(J))
 		panel.open()
-		winset(user, panel.window_id, "focus=1") //Focuses the panel.
+		return TOPIC_REFRESH
 
 	else if(href_list["skillinfo"])
 		var/decl/hierarchy/skill/S = locate(href_list["skillinfo"])

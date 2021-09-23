@@ -18,7 +18,7 @@
 
 	hud_state = "purge1"
 
-	equipped_summons = list("active hand" = /obj/item/weapon/nullrod)
+	equipped_summons = list("active hand" = /obj/item/nullrod)
 
 /spell/targeted/equip_item/holy_relic/cast(list/targets, mob/user = usr)
 	..()

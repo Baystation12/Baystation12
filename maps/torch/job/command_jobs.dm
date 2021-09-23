@@ -66,7 +66,7 @@
 		access_ai_upload, access_teleporter, access_eva, access_bridge, access_all_personal_lockers, access_chapel_office, access_tech_storage,
 		access_atmospherics, access_bar, access_janitor, access_crematorium, access_kitchen, access_robotics, access_cargo, access_construction,
 		access_chemistry, access_cargo_bot, access_hydroponics, access_manufacturing, access_library, access_lawyer, access_virology, access_cmo,
-		access_qm, access_network, access_surgery, access_research, access_mining, access_mining_office, access_mailsorting, access_heads_vault,
+		access_qm, access_network, access_network_admin, access_surgery, access_research, access_mining, access_mining_office, access_mailsorting, access_heads_vault,
 		access_mining_station, access_xenobiology, access_ce, access_hop, access_hos, access_RC_announce, access_keycard_auth, access_tcomsat,
 		access_gateway, access_sec_doors, access_psychiatrist, access_xenoarch, access_medical_equip, access_heads, access_hangar, access_guppy_helm,
 		access_expedition_shuttle_helm, access_aquila, access_aquila_helm, access_solgov_crew, access_nanotrasen,
@@ -82,7 +82,7 @@
 		access_ai_upload, access_teleporter, access_eva, access_bridge, access_all_personal_lockers, access_chapel_office, access_tech_storage,
 		access_atmospherics, access_bar, access_janitor, access_crematorium, access_kitchen, access_robotics, access_cargo, access_construction,
 		access_chemistry, access_cargo_bot, access_hydroponics, access_manufacturing, access_library, access_lawyer, access_virology, access_cmo,
-		access_qm, access_network, access_surgery, access_research, access_mining, access_mining_office, access_mailsorting, access_heads_vault,
+		access_qm, access_network, access_network_admin, access_surgery, access_research, access_mining, access_mining_office, access_mailsorting, access_heads_vault,
 		access_mining_station, access_xenobiology, access_ce, access_hop, access_hos, access_RC_announce, access_keycard_auth, access_tcomsat,
 		access_gateway, access_sec_doors, access_psychiatrist, access_xenoarch, access_medical_equip, access_heads, access_hangar, access_guppy_helm,
 		access_expedition_shuttle_helm, access_aquila, access_aquila_helm, access_solgov_crew, access_nanotrasen,
@@ -231,7 +231,7 @@
 		access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 		access_ai_upload, access_teleporter, access_eva, access_bridge, access_heads,
 		access_tech_storage, access_robotics, access_atmospherics, access_janitor, access_construction,
-		access_network, access_ce, access_RC_announce, access_keycard_auth, access_tcomsat,
+		access_network, access_network_admin, access_ce, access_RC_announce, access_keycard_auth, access_tcomsat,
 		access_solgov_crew, access_aquila, access_seneng, access_hangar, access_torch_fax, access_torch_helm, access_radio_comm,
 		access_radio_eng
 		)
@@ -241,7 +241,7 @@
 		access_engine, access_engine_equip, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 		access_ai_upload, access_teleporter, access_eva, access_bridge, access_heads,
 		access_tech_storage, access_atmospherics, access_janitor, access_construction,
-		access_network, access_ce, access_RC_announce, access_keycard_auth, access_tcomsat,
+		access_network, access_network_admin, access_ce, access_RC_announce, access_keycard_auth, access_tcomsat,
 		access_solgov_crew, access_seneng, access_hangar, access_robotics, access_torch_fax, access_torch_helm, access_radio_comm,
 		access_radio_eng
 	)
@@ -359,7 +359,7 @@
 	)
 	min_skill = list(   SKILL_EVA        = SKILL_BASIC,
 	                    SKILL_COMBAT     = SKILL_BASIC,
-	                    SKILL_WEAPONS    = SKILL_ADEPT)
+	                    SKILL_WEAPONS    = SKILL_BASIC)
 
 	max_skill = list(	SKILL_PILOT        = SKILL_ADEPT,
 	                    SKILL_COMBAT       = SKILL_EXPERT,
@@ -368,7 +368,7 @@
 	                    SKILL_ELECTRICAL   = SKILL_MAX,
 	                    SKILL_ENGINES      = SKILL_MAX,
 	                    SKILL_ATMOS        = SKILL_MAX)
-	skill_points = 24
+	skill_points = 28
 
 
 	access = list(

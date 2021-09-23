@@ -4,9 +4,12 @@
 	desc = "A portable generator for emergency backup power."
 	icon = 'icons/obj/power.dmi'
 	icon_state = "portgen0"
-	density = 1
-	anchored = 0
+	density = TRUE
+	anchored = FALSE
 	interact_offline = TRUE
+
+	machine_name = "portable generator"
+	machine_desc = "A portable generator often used for backup power."
 
 	var/active = 0
 	var/power_gen = 5000
@@ -110,6 +113,9 @@
 /obj/machinery/power/port_gen/pacman
 	name = "\improper P.A.C.M.A.N.-type Portable Generator"
 	desc = "A power generator that runs on solid phoron sheets. Rated for 80 kW max safe output."
+	
+	machine_name = "\improper PACMAN-type generator"
+	machine_desc = "A portable generator often used for backup power or running small spacecraft. Runs on solid phoron sheets; rated for 80 kW max safe output."
 
 	var/sheet_name = "Phoron Sheets"
 	var/sheet_path = /obj/item/stack/material/phoron
@@ -148,10 +154,10 @@
 	return ..()
 
 /obj/machinery/power/port_gen/pacman/RefreshParts()
-	var/temp_rating = total_component_rating_of_type(/obj/item/weapon/stock_parts/micro_laser)
-	temp_rating += total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor)
+	var/temp_rating = total_component_rating_of_type(/obj/item/stock_parts/micro_laser)
+	temp_rating += total_component_rating_of_type(/obj/item/stock_parts/capacitor)
 
-	max_sheets = 50 * Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin), 0, 5) ** 2
+	max_sheets = 50 * Clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 0, 5) ** 2
 
 	power_gen = round(initial(power_gen) * Clamp(temp_rating, 0, 20) / 2)
 	..()
@@ -272,7 +278,7 @@
 		explode() //if they're foolish enough to emag while it's running
 
 	if (!emagged)
-		emagged = 1
+		emagged = TRUE
 		return 1
 
 /obj/machinery/power/port_gen/pacman/components_are_accessible(path)
@@ -416,6 +422,8 @@
 	sheet_path = /obj/item/stack/material/uranium
 	sheet_name = "Uranium Sheets"
 	time_per_sheet = 576 //same power output, but a 50 sheet stack will last 2 hours at max safe power
+	machine_name = "\improper SUPERPACMAN-type generator"
+	machine_desc = "A portable generator used for providing backup power for extended periods. Efficiently runs on uranium sheets; rated for 80 kW max safe output."
 	var/rad_power = 4
 
 //nuclear energy is green energy!
@@ -463,7 +471,9 @@
 	time_per_sheet = 400
 	rad_power = 12
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
-	anchored = 1
+	anchored = TRUE
+	machine_name = "\improper PTTO-3 nuclear generator"
+	machine_desc = "This nuclear generator uses a combination of uranium and, strangely, vodka. Rated for 150 kW max safe output."
 	var/coolant_volume = 120
 	var/coolant_use = 1
 	var/coolant_reagent = /datum/reagent/ethanol/vodka
@@ -495,8 +505,8 @@
 		icon_state = "potatodanger"
 
 /obj/machinery/power/port_gen/pacman/super/potato/attackby(var/obj/item/O, var/mob/user)
-	if(istype(O, /obj/item/weapon/reagent_containers/))
-		var/obj/item/weapon/reagent_containers/R = O
+	if(istype(O, /obj/item/reagent_containers/))
+		var/obj/item/reagent_containers/R = O
 		if(R.standard_pour_into(src,user))
 			if(reagents.has_reagent("vodka"))
 				audible_message("<span class='notice'>[src] blips happily</span>")
@@ -519,6 +529,8 @@
 	coolant_use = 0.2
 	coolant_volume = 360
 	coolant_reagent = /datum/reagent/coolant
+	machine_name = "\improper ICRER-2 nuclear generator"
+	machine_desc = "A standard nuclear generator that produces a respectable amount of power by processing uranium and industrial coolant. Rated for 180 kW max safe output."
 
 /obj/machinery/power/port_gen/pacman/mrs
 	name = "M.R.S.P.A.C.M.A.N.-type Portable Generator"
@@ -535,6 +547,8 @@
 	time_per_sheet = 576
 	max_temperature = 800
 	temperature_gain = 90
+	machine_name = "\improper MRSPACMAN-type generator"
+	machine_desc = "A powerful and reliable backup generator that provides a hefty amount of electricity from tritium sheets. Rated for 200 kW max safe output."
 
 /obj/machinery/power/port_gen/pacman/mrs/explode()
 	//no special effects, but the explosion is pretty big (same as a supermatter shard).

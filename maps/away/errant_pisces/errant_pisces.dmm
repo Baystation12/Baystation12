@@ -483,6 +483,11 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
+/obj/machinery/computer/modular/preset/filemanager{
+	desc = "A brightly-colored terminal built from stress-resistant materials. Used to read data from a connected flight recorder.";
+	name = "black box terminal"
+	},
+/obj/effect/computer_file_creator/ahabs_harpoon02,
 /turf/simulated/floor/plating,
 /area/errant_pisces/enginering)
 "bq" = (
@@ -663,7 +668,7 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/item/weapon/mop,
+/obj/item/mop,
 /turf/simulated/floor/plating,
 /area/errant_pisces/storage_port)
 "bQ" = (
@@ -1204,7 +1209,7 @@
 	pixel_y = 0
 	},
 /obj/structure/mopbucket,
-/obj/item/weapon/mop,
+/obj/item/mop,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
@@ -1752,7 +1757,7 @@
 /area/errant_pisces/bow_maint)
 "ek" = (
 /obj/structure/table/standard,
-/obj/item/weapon/towel/random,
+/obj/item/towel/random,
 /turf/simulated/floor/tiled/white,
 /area/errant_pisces/head_f)
 "el" = (
@@ -1874,9 +1879,9 @@
 /area/errant_pisces/head_m)
 "ez" = (
 /obj/structure/table/standard,
-/obj/item/weapon/towel/random,
-/obj/item/weapon/towel/random,
-/obj/item/weapon/towel/random,
+/obj/item/towel/random,
+/obj/item/towel/random,
+/obj/item/towel/random,
 /turf/simulated/floor/tiled/white,
 /area/errant_pisces/head_m)
 "eA" = (
@@ -2565,7 +2570,7 @@
 	pixel_y = -24
 	},
 /obj/structure/cable,
-/obj/item/weapon/stool,
+/obj/item/stool,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
@@ -2645,7 +2650,7 @@
 /turf/simulated/floor/tiled/white,
 /area/errant_pisces/head_m)
 "fR" = (
-/obj/item/weapon/stool,
+/obj/item/stool,
 /obj/machinery/alarm{
 	dir = 4;
 	icon_state = "alarm0";
@@ -2878,7 +2883,7 @@
 /area/errant_pisces/dorms)
 "gp" = (
 /obj/structure/bed/padded,
-/obj/item/weapon/bedsheet/rainbow,
+/obj/item/bedsheet/rainbow,
 /turf/simulated/floor/wood,
 /area/errant_pisces/rooms)
 "gq" = (
@@ -2892,7 +2897,7 @@
 /area/errant_pisces/rooms)
 "gs" = (
 /obj/structure/bed/padded,
-/obj/item/weapon/bedsheet/orange,
+/obj/item/bedsheet/orange,
 /turf/simulated/floor/wood,
 /area/errant_pisces/rooms)
 "gt" = (
@@ -2906,7 +2911,7 @@
 	dir = 1;
 	icon_state = "tube1"
 	},
-/obj/machinery/media/jukebox,
+/obj/machinery/jukebox,
 /turf/simulated/floor/wood,
 /area/errant_pisces/rooms)
 "gv" = (
@@ -2998,13 +3003,13 @@
 /area/errant_pisces/dorms)
 "gI" = (
 /obj/structure/bed/padded,
-/obj/item/weapon/bedsheet,
+/obj/item/bedsheet,
 /obj/random/plushie,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
 "gJ" = (
 /obj/structure/bed/padded,
-/obj/item/weapon/bedsheet,
+/obj/item/bedsheet,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
 "gK" = (
@@ -3052,7 +3057,7 @@
 /area/errant_pisces/rooms)
 "gQ" = (
 /obj/structure/table/gamblingtable,
-/obj/item/weapon/deck/cards,
+/obj/item/deck/cards,
 /turf/simulated/floor/wood,
 /area/errant_pisces/rooms)
 "gR" = (
@@ -3118,7 +3123,7 @@
 /area/errant_pisces/rooms)
 "hb" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/paper_bin,
+/obj/item/paper_bin,
 /obj/item/device/flashlight/lamp,
 /turf/simulated/floor/wood,
 /area/errant_pisces/rooms)
@@ -3135,7 +3140,7 @@
 /area/errant_pisces/rooms)
 "he" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/material/ashtray/bronze,
+/obj/item/material/ashtray/bronze,
 /obj/random/smokes,
 /turf/simulated/floor/wood,
 /area/errant_pisces/rooms)
@@ -3347,7 +3352,7 @@
 /area/errant_pisces/dorms)
 "hE" = (
 /obj/structure/bed/padded,
-/obj/item/weapon/bedsheet,
+/obj/item/bedsheet,
 /obj/random/plushie/large,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
@@ -3365,7 +3370,7 @@
 "hH" = (
 /obj/structure/table/standard,
 /obj/random/firstaid,
-/obj/item/weapon/storage/box/bodybags,
+/obj/item/storage/box/bodybags,
 /turf/simulated/floor/plating,
 /area/errant_pisces/infirmary)
 "hI" = (
@@ -3385,8 +3390,8 @@
 "hL" = (
 /obj/structure/table/steel,
 /obj/item/clothing/head/surgery,
-/obj/item/weapon/storage/firstaid/surgery,
-/obj/item/weapon/storage/firstaid/adv,
+/obj/item/storage/firstaid/surgery,
+/obj/item/storage/firstaid/adv,
 /obj/item/clothing/mask/breath/anesthetic,
 /turf/simulated/floor/tiled/white,
 /area/errant_pisces/infirmary)
@@ -3446,7 +3451,7 @@
 /area/errant_pisces/infirmary)
 "hW" = (
 /obj/structure/bed/padded,
-/obj/item/weapon/bedsheet,
+/obj/item/bedsheet,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/infirmary)
 "hX" = (
@@ -3504,11 +3509,11 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
 "ih" = (
-/obj/item/weapon/material/knife/table,
+/obj/item/material/knife/table,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
 "ii" = (
-/obj/item/weapon/stool,
+/obj/item/stool,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
 "ij" = (
@@ -3630,7 +3635,7 @@
 "iF" = (
 /obj/structure/table/standard,
 /obj/item/trash/plate,
-/obj/item/weapon/material/kitchen/utensil/fork,
+/obj/item/material/kitchen/utensil/fork,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
 "iG" = (
@@ -3798,7 +3803,7 @@
 /area/errant_pisces/infirmary)
 "jb" = (
 /obj/structure/table/standard,
-/obj/item/weapon/paper_bin,
+/obj/item/paper_bin,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/infirmary)
 "jc" = (
@@ -3918,7 +3923,7 @@
 /area/errant_pisces/hallway)
 "js" = (
 /obj/structure/table/standard,
-/obj/item/weapon/material/kitchen/utensil/fork/plastic,
+/obj/item/material/kitchen/utensil/fork/plastic,
 /obj/random/snack,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
@@ -3930,7 +3935,7 @@
 "ju" = (
 /obj/structure/table/marble,
 /obj/machinery/reagentgrinder/juicer,
-/obj/item/weapon/reagent_containers/glass/beaker/large,
+/obj/item/reagent_containers/glass/beaker/large,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
 "jv" = (
@@ -3975,7 +3980,7 @@
 /area/errant_pisces/infirmary)
 "jC" = (
 /obj/structure/table/standard,
-/obj/item/weapon/storage/box/freezer,
+/obj/item/storage/box/freezer,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/infirmary)
 "jD" = (
@@ -4025,7 +4030,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/infirmary)
 "jI" = (
-/obj/item/weapon/stool,
+/obj/item/stool,
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -25;
@@ -4042,7 +4047,7 @@
 	name = "south bump";
 	pixel_y = -24
 	},
-/obj/item/weapon/stool,
+/obj/item/stool,
 /obj/structure/cable/green,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
@@ -4051,7 +4056,7 @@
 /area/errant_pisces/infirmary)
 "jK" = (
 /obj/structure/table/standard,
-/obj/item/weapon/material/kitchen/utensil/fork,
+/obj/item/material/kitchen/utensil/fork,
 /obj/machinery/light,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
@@ -4118,7 +4123,7 @@
 /area/errant_pisces/science_wing)
 "jV" = (
 /obj/structure/table/standard,
-/obj/item/weapon/paper_bin,
+/obj/item/paper_bin,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "jW" = (
@@ -4378,21 +4383,21 @@
 	dir = 1
 	},
 /obj/structure/bookcase,
-/obj/item/weapon/book/manual/anomaly_testing,
-/obj/item/weapon/book/manual/anomaly_spectroscopy,
+/obj/item/book/manual/anomaly_testing,
+/obj/item/book/manual/anomaly_spectroscopy,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "kB" = (
 /obj/structure/bookcase,
-/obj/item/weapon/book/manual/mass_spectrometry,
-/obj/item/weapon/book/manual/research_and_development,
-/obj/item/weapon/book/manual/engineering_guide,
+/obj/item/book/manual/mass_spectrometry,
+/obj/item/book/manual/research_and_development,
+/obj/item/book/manual/engineering_guide,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "kC" = (
 /obj/structure/bookcase,
-/obj/item/weapon/book/manual/materials_chemistry_analysis,
-/obj/item/weapon/book/manual/hydroponics_pod_people,
+/obj/item/book/manual/materials_chemistry_analysis,
+/obj/item/book/manual/hydroponics_pod_people,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "kD" = (
@@ -4469,20 +4474,20 @@
 /area/errant_pisces/general_storage)
 "kQ" = (
 /obj/structure/table/rack,
-/obj/item/weapon/material/knife/combat,
+/obj/item/material/knife/combat,
 /turf/simulated/floor/plating,
 /area/errant_pisces/general_storage)
 "kR" = (
 /obj/structure/table/rack,
-/obj/item/weapon/material/harpoon,
+/obj/item/material/harpoon,
 /obj/random/tool,
 /turf/simulated/floor/plating,
 /area/errant_pisces/general_storage)
 "kS" = (
 /obj/structure/table/rack,
-/obj/item/weapon/storage/box/survival,
-/obj/item/weapon/storage/box/survival,
-/obj/item/weapon/storage/box/survival,
+/obj/item/storage/box/survival,
+/obj/item/storage/box/survival,
+/obj/item/storage/box/survival,
 /turf/simulated/floor/plating,
 /area/errant_pisces/general_storage)
 "kT" = (
@@ -4490,7 +4495,7 @@
 /area/errant_pisces/general_storage)
 "kU" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
-/obj/item/weapon/reagent_containers/food/snacks/fish/poison,
+/obj/item/reagent_containers/food/snacks/fish/poison,
 /turf/simulated/floor/tiled/freezer,
 /area/errant_pisces/prod_storage)
 "kV" = (
@@ -4516,7 +4521,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/errant_pisces/prod_storage)
 "kZ" = (
-/obj/item/weapon/reagent_containers/chem_disp_cartridge/synaptizine,
+/obj/item/reagent_containers/chem_disp_cartridge/synaptizine,
 /turf/simulated/floor/tiled/freezer,
 /area/errant_pisces/prod_storage)
 "la" = (
@@ -4543,7 +4548,7 @@
 "ld" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/table/rack,
-/obj/item/weapon/material/harpoon,
+/obj/item/material/harpoon,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "le" = (
@@ -4553,7 +4558,7 @@
 /area/errant_pisces/science_wing)
 "lf" = (
 /obj/structure/table/rack,
-/obj/item/weapon/gun/launcher/net,
+/obj/item/gun/launcher/net,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "lg" = (
@@ -4585,19 +4590,19 @@
 /area/errant_pisces/prod_storage)
 "lk" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
-/obj/item/weapon/reagent_containers/food/snacks/cubancarp,
+/obj/item/reagent_containers/food/snacks/cubancarp,
 /turf/simulated/floor/tiled/freezer,
 /area/errant_pisces/prod_storage)
 "ll" = (
 /obj/structure/window/basic{
 	dir = 8
 	},
-/obj/item/weapon/reagent_containers/chem_disp_cartridge/hyperzine,
+/obj/item/reagent_containers/chem_disp_cartridge/hyperzine,
 /turf/simulated/floor/tiled/freezer,
 /area/errant_pisces/prod_storage)
 "lm" = (
 /obj/structure/closet/crate,
-/obj/item/weapon/reagent_containers/food/snacks/fish/poison,
+/obj/item/reagent_containers/food/snacks/fish/poison,
 /turf/simulated/floor/tiled/freezer,
 /area/errant_pisces/prod_storage)
 "ln" = (
@@ -4639,27 +4644,27 @@
 /area/errant_pisces/science_wing)
 "lu" = (
 /obj/structure/table/standard,
-/obj/item/weapon/storage/box/freezer,
+/obj/item/storage/box/freezer,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "lv" = (
 /obj/structure/table/standard,
-/obj/item/weapon/storage/toolbox/mechanical,
+/obj/item/storage/toolbox/mechanical,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "lw" = (
 /obj/structure/table/standard,
-/obj/item/weapon/storage/toolbox/electrical,
+/obj/item/storage/toolbox/electrical,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "lx" = (
 /obj/structure/table/standard,
-/obj/item/weapon/tape_roll,
+/obj/item/tape_roll,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "ly" = (
 /obj/structure/table/standard,
-/obj/item/weapon/storage/box/gloves,
+/obj/item/storage/box/gloves,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "lz" = (
@@ -4695,22 +4700,22 @@
 /area/errant_pisces/cryo)
 "lD" = (
 /obj/structure/table/rack,
-/obj/item/weapon/storage/toolbox/mechanical,
+/obj/item/storage/toolbox/mechanical,
 /turf/simulated/floor/plating,
 /area/errant_pisces/general_storage)
 "lE" = (
 /obj/structure/table/rack,
-/obj/item/weapon/storage/ore,
+/obj/item/storage/ore,
 /obj/random/tool,
 /turf/simulated/floor/plating,
 /area/errant_pisces/general_storage)
 "lF" = (
 /obj/structure/table/rack,
-/obj/item/weapon/storage/firstaid/empty,
+/obj/item/storage/firstaid/empty,
 /turf/simulated/floor/plating,
 /area/errant_pisces/general_storage)
 "lG" = (
-/obj/item/weapon/reagent_containers/chem_disp_cartridge/mercury,
+/obj/item/reagent_containers/chem_disp_cartridge/mercury,
 /turf/simulated/floor/tiled/freezer,
 /area/errant_pisces/prod_storage)
 "lH" = (
@@ -4775,7 +4780,7 @@
 	dir = 1
 	},
 /obj/machinery/reagentgrinder,
-/obj/item/weapon/reagent_containers/glass/beaker/large,
+/obj/item/reagent_containers/glass/beaker/large,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "lR" = (
@@ -4786,7 +4791,7 @@
 	dir = 4
 	},
 /obj/structure/table/standard,
-/obj/item/weapon/book/manual/mass_spectrometry,
+/obj/item/book/manual/mass_spectrometry,
 /obj/item/device/scanner/spectrometer,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
@@ -4799,9 +4804,9 @@
 /area/errant_pisces/science_wing)
 "lT" = (
 /obj/structure/table/steel,
-/obj/item/weapon/storage/firstaid/surgery,
-/obj/item/weapon/material/knife/kitchen/cleaver,
-/obj/item/weapon/material/twohanded/fireaxe,
+/obj/item/storage/firstaid/surgery,
+/obj/item/material/knife/kitchen/cleaver,
+/obj/item/material/twohanded/fireaxe,
 /obj/structure/window/reinforced{
 	dir = 1
 	},
@@ -4817,8 +4822,8 @@
 /area/errant_pisces/general_storage)
 "lW" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
-/obj/item/weapon/reagent_containers/food/snacks/fish/poison,
-/obj/item/weapon/reagent_containers/food/snacks/fish/poison,
+/obj/item/reagent_containers/food/snacks/fish/poison,
+/obj/item/reagent_containers/food/snacks/fish/poison,
 /turf/simulated/floor/tiled/freezer,
 /area/errant_pisces/prod_storage)
 "lX" = (
@@ -4826,7 +4831,7 @@
 	dir = 8
 	},
 /obj/structure/closet/crate,
-/obj/item/weapon/reagent_containers/food/snacks/fish/poison,
+/obj/item/reagent_containers/food/snacks/fish/poison,
 /turf/simulated/floor/tiled/freezer,
 /area/errant_pisces/prod_storage)
 "lY" = (
@@ -5025,7 +5030,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
-/obj/item/weapon/material/harpoon,
+/obj/item/material/harpoon,
 /turf/simulated/floor/plating,
 /area/errant_pisces/live_storage)
 "my" = (
@@ -5083,8 +5088,8 @@
 	dir = 8
 	},
 /obj/structure/table/standard,
-/obj/item/weapon/storage/box/beakers,
-/obj/item/weapon/reagent_containers/dropper,
+/obj/item/storage/box/beakers,
+/obj/item/reagent_containers/dropper,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "mG" = (
@@ -5103,7 +5108,7 @@
 "mI" = (
 /obj/machinery/optable,
 /obj/item/clothing/glasses/welding,
-/obj/item/weapon/weldingtool,
+/obj/item/weldingtool,
 /turf/simulated/floor/tiled/white,
 /area/errant_pisces/science_wing)
 "mJ" = (
@@ -5206,7 +5211,7 @@
 	level = 2
 	},
 /obj/structure/table/rack,
-/obj/item/weapon/gun/launcher/net,
+/obj/item/gun/launcher/net,
 /turf/simulated/floor/plating,
 /area/errant_pisces/live_storage)
 "mV" = (
@@ -6017,9 +6022,9 @@
 /area/errant_pisces/aux_power)
 "or" = (
 /obj/structure/table/rack,
-/obj/item/weapon/wrench,
-/obj/item/weapon/screwdriver,
-/obj/item/weapon/wirecutters,
+/obj/item/wrench,
+/obj/item/screwdriver,
+/obj/item/wirecutters,
 /turf/simulated/floor/plating,
 /area/errant_pisces/aux_power)
 "os" = (
@@ -6044,7 +6049,7 @@
 /area/errant_pisces/fishing_wing)
 "ov" = (
 /obj/structure/table/marble,
-/obj/item/weapon/material/knife/kitchen/cleaver,
+/obj/item/material/knife/kitchen/cleaver,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
@@ -6059,9 +6064,9 @@
 /area/errant_pisces/fishing_wing)
 "ox" = (
 /obj/structure/table/marble,
-/obj/item/weapon/reagent_containers/food/snacks/fish/poison,
-/obj/item/weapon/reagent_containers/food/snacks/fish/poison,
-/obj/item/weapon/reagent_containers/food/snacks/fish/poison,
+/obj/item/reagent_containers/food/snacks/fish/poison,
+/obj/item/reagent_containers/food/snacks/fish/poison,
+/obj/item/reagent_containers/food/snacks/fish/poison,
 /turf/simulated/floor/tiled/freezer,
 /area/errant_pisces/fishing_wing)
 "oy" = (
@@ -6070,7 +6075,7 @@
 /area/errant_pisces/fishing_wing)
 "oz" = (
 /obj/structure/table/marble,
-/obj/item/weapon/gun/launcher/net,
+/obj/item/gun/launcher/net,
 /turf/simulated/floor/tiled/freezer,
 /area/errant_pisces/fishing_wing)
 "oA" = (
@@ -6234,17 +6239,20 @@
 	dir = 1
 	},
 /obj/structure/closet,
-/obj/item/weapon/gun/projectile/shotgun/pump/combat,
-/obj/item/weapon/lipstick/random,
+/obj/item/gun/projectile/shotgun/pump/combat,
+/obj/item/lipstick/random,
 /obj/random/ammo,
 /obj/random/cash,
 /obj/random/cash,
 /turf/simulated/floor/wood,
 /area/errant_pisces/bridge)
 "oY" = (
-/obj/machinery/computer/modular{
-	dir = 8
+/obj/machinery/computer/modular/preset/filemanager{
+	desc = "This console is stamped with the Xynergy logo and appears well-used. It sports an antenna on the back, poking above the screen.";
+	dir = 8;
+	name = "command terminal"
 	},
+/obj/effect/computer_file_creator/ahabs_harpoon01,
 /turf/simulated/floor/wood,
 /area/errant_pisces/bridge)
 "oZ" = (
@@ -6322,9 +6330,10 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/bridge)
 "pj" = (
-/obj/machinery/computer/modular{
+/obj/machinery/computer/modular/preset/filemanager{
 	dir = 1
 	},
+/obj/effect/computer_file_creator/ahabs_harpoon01,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/bridge)
 "pk" = (
@@ -6343,6 +6352,10 @@
 /area/errant_pisces/bridge)
 "pn" = (
 /obj/structure/table/woodentable,
+/obj/item/modular_computer/tablet/lease/preset/command{
+	desc = "A small, portable microcomputer. This one has a Xynergy logo in purple, and a serial number stamped into the case."
+	},
+/obj/effect/computer_file_creator/ahabs_harpoon03,
 /turf/simulated/floor/wood,
 /area/errant_pisces/bridge)
 "po" = (
@@ -6652,7 +6665,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/bridge)
 "qi" = (
-/obj/item/weapon/bedsheet/captain,
+/obj/item/bedsheet/captain,
 /obj/structure/bed/padded,
 /turf/simulated/floor/wood,
 /area/errant_pisces/bridge)
@@ -6661,7 +6674,7 @@
 	dir = 1
 	},
 /obj/structure/table/rack,
-/obj/item/weapon/gun/projectile/shotgun/pump,
+/obj/item/gun/projectile/shotgun/pump,
 /turf/simulated/floor/plating,
 /area/errant_pisces/fishing_wing)
 "qk" = (
@@ -6680,7 +6693,7 @@
 "qn" = (
 /obj/structure/table/rack,
 /obj/item/clothing/mask/breath,
-/obj/item/weapon/storage/box/survival,
+/obj/item/storage/box/survival,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
 	level = 2
@@ -6706,7 +6719,7 @@
 /area/errant_pisces/fishing_wing)
 "qq" = (
 /obj/structure/janitorialcart,
-/obj/item/weapon/mop,
+/obj/item/mop,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/fishing_wing)
 "qr" = (
@@ -6720,7 +6733,7 @@
 	dir = 8
 	},
 /obj/structure/table/rack,
-/obj/item/weapon/gun/launcher/net,
+/obj/item/gun/launcher/net,
 /turf/simulated/floor/plating,
 /area/errant_pisces/fishing_wing)
 "qt" = (
@@ -6734,7 +6747,7 @@
 /area/errant_pisces/fishing_wing)
 "qu" = (
 /obj/structure/table/rack,
-/obj/item/weapon/tank/oxygen,
+/obj/item/tank/oxygen,
 /turf/simulated/floor/plating,
 /area/errant_pisces/fishing_wing)
 "qv" = (
@@ -6759,7 +6772,7 @@
 /area/errant_pisces/fishing_wing)
 "qA" = (
 /obj/structure/table/rack,
-/obj/item/weapon/gun/launcher/net,
+/obj/item/gun/launcher/net,
 /turf/simulated/floor/plating,
 /area/errant_pisces/fishing_wing)
 "qB" = (
@@ -6774,8 +6787,8 @@
 /area/errant_pisces/bridge)
 "qD" = (
 /obj/structure/table/rack,
-/obj/item/weapon/material/knife/combat,
-/obj/item/weapon/material/knife/combat,
+/obj/item/material/knife/combat,
+/obj/item/material/knife/combat,
 /obj/item/stack/net/thirty,
 /obj/item/stack/net/thirty,
 /turf/simulated/floor/plating,
@@ -6789,7 +6802,7 @@
 /area/errant_pisces/fishing_wing)
 "qF" = (
 /obj/structure/table/rack,
-/obj/item/weapon/storage/box/survival,
+/obj/item/storage/box/survival,
 /obj/item/stack/net/thirty,
 /turf/simulated/floor/plating,
 /area/errant_pisces/fishing_wing)
@@ -6810,9 +6823,9 @@
 	dir = 8
 	},
 /obj/structure/table/rack,
-/obj/item/weapon/material/harpoon,
-/obj/item/weapon/material/harpoon,
-/obj/item/weapon/material/harpoon,
+/obj/item/material/harpoon,
+/obj/item/material/harpoon,
+/obj/item/material/harpoon,
 /turf/simulated/floor/plating,
 /area/errant_pisces/fishing_wing)
 "qJ" = (
@@ -6933,7 +6946,7 @@
 "qV" = (
 /obj/structure/table/steel,
 /obj/random/smokes,
-/obj/item/weapon/flame/lighter/random,
+/obj/item/flame/lighter/random,
 /turf/simulated/floor/plating,
 /area/errant_pisces/fishing_wing)
 "qW" = (
@@ -6945,7 +6958,7 @@
 /obj/structure/bed/chair{
 	dir = 8
 	},
-/obj/item/weapon/flame/match,
+/obj/item/flame/match,
 /turf/simulated/floor/plating,
 /area/errant_pisces/fishing_wing)
 "qY" = (
@@ -6958,12 +6971,12 @@
 /area/errant_pisces/fishing_wing)
 "ra" = (
 /obj/structure/net,
-/obj/item/weapon/material/knife/combat,
+/obj/item/material/knife/combat,
 /turf/space,
 /area/space)
 "rb" = (
 /obj/structure/net,
-/obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh,
+/obj/item/reagent_containers/food/snacks/meat/syntiflesh,
 /turf/space,
 /area/space)
 "rc" = (
@@ -6978,7 +6991,7 @@
 	pixel_x = -12;
 	pixel_y = 2
 	},
-/obj/item/weapon/storage/mirror{
+/obj/item/storage/mirror{
 	pixel_x = -30
 	},
 /turf/simulated/floor/tiled/white,
@@ -6990,7 +7003,7 @@
 	pixel_x = 11;
 	pixel_y = 0
 	},
-/obj/item/weapon/storage/mirror{
+/obj/item/storage/mirror{
 	pixel_x = 30
 	},
 /turf/simulated/floor/tiled/white,
@@ -7002,7 +7015,7 @@
 	pixel_x = 11;
 	pixel_y = 0
 	},
-/obj/item/weapon/storage/mirror{
+/obj/item/storage/mirror{
 	pixel_x = 30
 	},
 /obj/machinery/power/apc{
@@ -18223,7 +18236,7 @@ aa
 aa
 aa
 aa
-aa
+eb
 aa
 aa
 aa
@@ -19233,7 +19246,7 @@ aa
 aa
 aa
 aa
-eb
+aa
 aa
 aa
 aa
@@ -23333,23 +23346,23 @@ pw
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 eb
-aa
-aa
-aa
-eb
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
 aa
 aa
 aa
@@ -30207,17 +30220,17 @@ aa
 aa
 aa
 aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 eb
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
 aa
 aa
 aa
@@ -35191,7 +35204,7 @@ aa
 aa
 aa
 aa
-eb
+aa
 aa
 aa
 aa
@@ -36605,7 +36618,7 @@ aa
 aa
 aa
 aa
-aa
+eb
 aa
 aa
 aa

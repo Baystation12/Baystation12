@@ -3,9 +3,9 @@
 	desc = "An impenetrable field of energy, capable of blocking anything as long as it's active."
 	icon = 'icons/obj/machines/shielding.dmi'
 	icon_state = "shield_normal"
-	anchored = 1
+	anchored = TRUE
 	layer = ABOVE_HUMAN_LAYER
-	density = 1
+	density = TRUE
 	invisibility = 0
 	var/obj/machinery/power/shield_generator/gen = null
 	var/disabled_for = 0
@@ -19,7 +19,9 @@
 	else
 		set_opacity(0)
 
-	if(gen && gen.check_flag(MODEFLAG_OVERCHARGE))
+	if (!gen)
+		color = COLOR_RED_LIGHT
+	else if (gen.check_flag(MODEFLAG_OVERCHARGE))
 		color = COLOR_VIOLET
 	else
 		color = COLOR_DEEP_SKY_BLUE
@@ -35,6 +37,15 @@
 /obj/effect/shield/New()
 	..()
 	update_nearby_tiles()
+
+
+/obj/effect/shield/Initialize(mapload, obj/machinery/power/shield_generator/new_gen)
+	. = ..(mapload)
+
+	if (QDELETED(new_gen))
+		log_debug(append_admin_tools("Shield effect ([name]) was created without a valid generator in [get_area(src)].", location = get_turf(src)))
+		return INITIALIZE_HINT_QDEL
+	gen = new_gen
 
 
 /obj/effect/shield/Destroy()
@@ -82,6 +93,9 @@
 
 
 /obj/effect/shield/proc/diffuse(var/duration)
+	if (!gen)
+		return
+
 	// The shield is trying to counter diffusers. Cause lasting stress on the shield.
 	if(gen.check_flag(MODEFLAG_BYPASS) && !disabled_for)
 		take_damage(duration * rand(8, 12), SHIELD_DAMTYPE_EM)
@@ -97,7 +111,7 @@
 
 /obj/effect/shield/attack_generic(var/source, var/damage, var/emote)
 	take_damage(damage, SHIELD_DAMTYPE_PHYSICAL)
-	if(gen.check_flag(MODEFLAG_OVERCHARGE) && istype(source, /mob/living/))
+	if(gen?.check_flag(MODEFLAG_OVERCHARGE) && istype(source, /mob/living/))
 		overcharge_shock(source)
 	..(source, damage, emote)
 
@@ -170,7 +184,7 @@
 
 
 /obj/effect/shield/c_airblock(turf/other)
-	return gen.check_flag(MODEFLAG_ATMOSPHERIC) ? BLOCKED : 0
+	return gen?.check_flag(MODEFLAG_ATMOSPHERIC) ? BLOCKED : 0
 
 
 // EMP. It may seem weak but keep in mind that multiple shield segments are likely to be affected.
@@ -202,7 +216,7 @@
 
 
 // Attacks with hand tools. Blocked by Hyperkinetic flag.
-/obj/effect/shield/attackby(var/obj/item/weapon/I as obj, var/mob/user as mob)
+/obj/effect/shield/attackby(var/obj/item/I as obj, var/mob/user as mob)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(src)
 

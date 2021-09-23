@@ -5,8 +5,8 @@
 	desc = "The water from the spout is still as if frozen in time, yet the water in the base ripples perpetually."
 	icon = 'icons/obj/fountain.dmi'
 	icon_state = "fountain"
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	unacidable = TRUE
 	pixel_x = -16
 	var/used = FALSE

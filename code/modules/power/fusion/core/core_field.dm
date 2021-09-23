@@ -8,9 +8,10 @@
 	desc = "A coruscating, barely visible field of energy. It is shaped like a slightly flattened torus."
 	icon = 'icons/obj/machines/power/fusion.dmi'
 	icon_state = "emfield_s1"
-	alpha = 50
+	alpha = 30
 	layer = 4
-	light_color = COLOR_BLUE
+	light_color = COLOR_RED
+	color = COLOR_RED
 
 	var/size = 1
 	var/energy = 0
@@ -33,7 +34,7 @@
 
 	var/light_min_range = 2
 	var/light_min_power = 0.2
-	var/light_max_range = 12
+	var/light_max_range = 18
 	var/light_max_power = 1
 
 	var/last_range
@@ -81,9 +82,54 @@
 
 	START_PROCESSING(SSobj, src)
 
+/obj/effect/fusion_em_field/Initialize()
+	. = ..()
+	addtimer(CALLBACK(src, .proc/update_light_colors), 10 SECONDS, TIMER_LOOP)
+
+/obj/effect/fusion_em_field/proc/update_light_colors()
+	var/use_range
+	var/use_power
+	switch (plasma_temperature)
+		if (-INFINITY to 1000)
+			light_color = COLOR_RED
+			use_range = light_min_range
+			use_power = light_min_power
+			alpha = 30
+		if (100000 to INFINITY)
+			light_color = COLOR_VIOLET
+			use_range = light_max_range
+			use_power = light_max_power
+			alpha = 230
+		else
+			var/temp_mod = ((plasma_temperature-5000)/20000)
+			use_range = light_min_range + ceil((light_max_range-light_min_range)*temp_mod)
+			use_power = light_min_power + ceil((light_max_power-light_min_power)*temp_mod)
+			switch (plasma_temperature)
+				if (1000 to 6000)
+					light_color = COLOR_ORANGE
+					alpha = 50
+				if (6000 to 20000)
+					light_color = COLOR_YELLOW
+					alpha = 80
+				if (20000 to 50000)
+					light_color = COLOR_GREEN
+					alpha = 120
+				if (50000 to 70000)
+					light_color = COLOR_CYAN
+					alpha = 160
+				if (70000 to 100000)
+					light_color = COLOR_BLUE
+					alpha = 200
+
+	if (last_range != use_range || last_power != use_power || color != light_color)
+		color = light_color
+		set_light(min(use_power, 1), use_range / 6, use_range) //cap first arg at 1 to avoid breaking lighting stuff.
+		last_range = use_range
+		last_power = use_power
+
 /obj/effect/fusion_em_field/Process()
 	//make sure the field generator is still intact
-	if(!owned_core || QDELETED(owned_core))
+	if(QDELETED(owned_core))
 		qdel(src)
 		return
 
@@ -122,24 +168,6 @@
 			var/radiate = rand(3 * amount / 4, amount / 4)
 			reactants[reactant] -= radiate
 			radiation += radiate
-
-	var/use_range
-	var/use_power
-	if(plasma_temperature <= 6000)
-		use_range = light_min_range
-		use_power = light_min_power
-	else if(plasma_temperature >= 25000)
-		use_range = light_max_range
-		use_power = light_max_power
-	else
-		var/temp_mod = ((plasma_temperature-5000)/20000)
-		use_range = light_min_range + ceil((light_max_range-light_min_range)*temp_mod)
-		use_power = light_min_power + ceil((light_max_power-light_min_power)*temp_mod)
-
-	if(last_range != use_range || last_power != use_power)
-		set_light(min(use_power, 1), use_range / 6, use_range) //cap first arg at 1 to avoid breaking lighting stuff.
-		last_range = use_range
-		last_power = use_power
 
 	check_instability()
 	Radiate()
@@ -311,11 +339,11 @@
 /obj/effect/fusion_em_field/proc/change_size(var/newsize = 1)
 	var/changed = 0
 	var/static/list/size_to_icon = list(
-			"3" = 'icons/effects/96x96.dmi', 
-			"5" = 'icons/effects/160x160.dmi', 
-			"7" = 'icons/effects/224x224.dmi', 
-			"9" = 'icons/effects/288x288.dmi', 
-			"11" = 'icons/effects/352x352.dmi', 
+			"3" = 'icons/effects/96x96.dmi',
+			"5" = 'icons/effects/160x160.dmi',
+			"7" = 'icons/effects/224x224.dmi',
+			"9" = 'icons/effects/288x288.dmi',
+			"11" = 'icons/effects/352x352.dmi',
 			"13" = 'icons/effects/416x416.dmi'
 			)
 
@@ -451,8 +479,7 @@
 /obj/effect/fusion_em_field/Destroy()
 	set_light(0)
 	RadiateAll()
-	for(var/obj/effect/fusion_particle_catcher/catcher in particle_catchers)
-		qdel(catcher)
+	QDEL_NULL_LIST(particle_catchers)
 	if(owned_core)
 		owned_core.owned_field = null
 		owned_core = null
@@ -464,7 +491,6 @@
 	update_icon()
 	return 0
 
-#undef FUSION_HEAT_CAP
 #undef FUSION_INSTABILITY_DIVISOR
 #undef FUSION_RUPTURE_THRESHOLD
 #undef FUSION_REACTANT_CAP

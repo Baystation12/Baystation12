@@ -11,7 +11,7 @@
 	id = "awaysite_mobius_rift"
 	description = "Non-euclidian mess."
 	suffixes = list("mobius_rift/mobius_rift.dmm")
-	cost = 1
+	spawn_cost = 1
 	area_usage_test_exempted_root_areas = list(/area/mobius_rift)
 	apc_test_exempt_areas = list(
 		/area/mobius_rift = NO_SCRUBBER|NO_VENT|NO_APC
@@ -73,7 +73,7 @@
 		var/obj/effect/mobius_rift/chamber/chamber = rooms[chamber_tag]
 		for (var/dir_iter =1 to routes.len)
 			var/list/route = routes[routes[dir_iter]]
-			var/ch_pos = route.Find(chamber_tag) + 1
+			var/ch_pos = list_find(route, chamber_tag) + 1
 			if (ch_pos > (grid_number * grid_number))//if that's the last one
 				ch_pos = 1
 			var/obj/effect/mobius_rift/chamber/dest_chamber = route[route[ch_pos]]//getting destination chamber for direction

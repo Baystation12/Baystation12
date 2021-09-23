@@ -6,7 +6,7 @@
 	result_length = 3
 
 /datum/vote/gamemode/can_run(mob/creator, automatic)
-	if(!automatic && (!config.allow_vote_mode || !is_admin(creator)))
+	if(!automatic && (!config.allow_vote_mode || !isadmin(creator)))
 		return FALSE // Admins and autovotes bypass the config setting.
 	if(GAME_STATE >= RUNLEVEL_GAME)
 		return FALSE
@@ -22,7 +22,7 @@
 	..()
 	choices += config.votable_modes
 	for (var/F in choices)
-		var/datum/game_mode/M = gamemode_cache[F]
+		var/datum/game_mode/M = config.gamemode_cache[F]
 		if(!M)
 			continue
 		display_choices[F] = capitalize(M.name)
@@ -53,5 +53,5 @@
 	return config.allow_vote_mode ? "Allowed" : "Disallowed"
 
 /datum/vote/gamemode/toggle(mob/user)
-	if(is_admin(user))
+	if(isadmin(user))
 		config.allow_vote_mode = !config.allow_vote_mode

@@ -16,7 +16,7 @@ var/global/list/map_sectors = list()
 
 /turf/unsimulated/map/edge
 	opacity = 1
-	density = 1
+	density = TRUE
 
 /turf/unsimulated/map/New()
 	..()

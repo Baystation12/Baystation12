@@ -378,12 +378,39 @@ var/list/gear_datums = list()
 	var/obj/item/item = spawn_item(H, H, metadata)
 	item.add_fingerprint(H)
 
-	var/atom/placed_in = H.equip_to_storage(item)
-	if(placed_in)
-		to_chat(H, "<span class='notice'>Placing \the [item] in your [placed_in.name]!</span>")
-	else if(H.equip_to_appropriate_slot(item))
-		to_chat(H, "<span class='notice'>Placing \the [item] in your inventory!</span>")
-	else if(H.put_in_hands(item))
-		to_chat(H, "<span class='notice'>Placing \the [item] in your hands!</span>")
+	// Roundstart augments require special handling in order to properly install
+	// Putting this in "spawn_on_mob" requires overriding a bunch of logic, so we hook into here instead
+	if (istype(item, /obj/item/organ/internal/augment))
+		var/obj/item/organ/internal/augment/A = item
+		var/obj/item/organ/external/affected = H.get_organ(A.parent_organ)
+		if (!affected)
+			to_chat(H, SPAN_WARNING("Failed to install \the [A]!"))
+			QDEL_NULL(A)
+		else
+			var/beep_boop = BP_IS_ROBOTIC(affected)
+			var/obj/item/organ/internal/I = H.internal_organs_by_name[A.organ_tag]
+			if (!(A.augment_flags & AUGMENT_MECHANICAL) && beep_boop)
+				to_chat(H, SPAN_WARNING("\The [A] cannot be installed in a robotic part!"))
+				QDEL_NULL(A)
+			else if (!(A.augment_flags & AUGMENT_BIOLOGICAL) && !beep_boop)
+				to_chat(H, SPAN_WARNING("\The [A] cannot be installed in an organic part!"))
+				QDEL_NULL(A)
+			else if(I && (I.parent_organ == A.parent_organ))
+				to_chat(H, SPAN_WARNING("\The [A] could not be installed because you can only have one [A.organ_tag] at a time."))
+				QDEL_NULL(A)
+			else
+				to_chat(H, SPAN_NOTICE("Installing \the [A] in your [affected.name]!"))
+				A.forceMove(H)
+				A.replaced(H, affected)
+				A.onRoundstart()
+				. = A
 	else
-		to_chat(H, "<span class='danger'>Dropping \the [item] on the ground!</span>")
+		var/atom/placed_in = H.equip_to_storage(item)
+		if(placed_in)
+			to_chat(H, SPAN_NOTICE("Placing \the [item] in your [placed_in.name]!"))
+		else if(H.equip_to_appropriate_slot(item))
+			to_chat(H, SPAN_NOTICE("Placing \the [item] in your inventory!"))
+		else if(H.put_in_hands(item))
+			to_chat(H, SPAN_NOTICE("Placing \the [item] in your hands!"))
+		else
+			to_chat(H, SPAN_DANGER("Dropping \the [item] on the ground!"))

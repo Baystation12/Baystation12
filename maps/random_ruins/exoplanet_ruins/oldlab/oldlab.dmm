@@ -171,7 +171,7 @@
 /area/map_template/oldlab/station/northairlockatmos)
 "cY" = (
 /obj/machinery/reagentgrinder,
-/obj/item/weapon/reagent_containers/glass/beaker/large,
+/obj/item/reagent_containers/glass/beaker/large,
 /turf/simulated/floor/tiled/white,
 /area/map_template/oldlab/station/chem)
 "dc" = (
@@ -520,8 +520,8 @@
 /area/map_template/oldlab/solars)
 "ij" = (
 /obj/structure/table/rack,
-/obj/item/weapon/crowbar,
-/obj/item/weapon/shovel,
+/obj/item/crowbar,
+/obj/item/shovel,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/oldlab/station/southairlock)
 "it" = (
@@ -876,7 +876,7 @@
 /area/map_template/oldlab/solars)
 "ns" = (
 /obj/structure/table/steel,
-/obj/item/weapon/reagent_containers/glass/beaker/insulated,
+/obj/item/reagent_containers/glass/beaker/insulated,
 /turf/simulated/floor/tiled/white,
 /area/map_template/oldlab/station/chem)
 "nz" = (
@@ -994,7 +994,7 @@
 /area/map_template/oldlab/station/southairlock)
 "oM" = (
 /obj/structure/table/steel,
-/obj/item/weapon/reagent_containers/glass/beaker,
+/obj/item/reagent_containers/glass/beaker,
 /turf/simulated/floor/tiled/white,
 /area/map_template/oldlab/station/chem)
 "oU" = (
@@ -1296,7 +1296,7 @@
 	dir = 9
 	},
 /obj/structure/closet/toolcloset,
-/obj/item/weapon/storage/box/lights/mixed,
+/obj/item/storage/box/lights/mixed,
 /obj/random/handgun,
 /obj/random/accessory,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -1529,7 +1529,7 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/obj/item/weapon/stool,
+/obj/item/stool,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
 	},
@@ -1880,7 +1880,7 @@
 	name = "east bump";
 	pixel_x = 24
 	},
-/obj/item/weapon/bedsheet/blue,
+/obj/item/bedsheet/blue,
 /obj/structure/bed/padded,
 /obj/random/plushie,
 /turf/simulated/floor/tiled/steel_grid,
@@ -1971,7 +1971,7 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/item/weapon/bedsheet/brown,
+/obj/item/bedsheet/brown,
 /obj/structure/bed/padded,
 /obj/machinery/alarm{
 	dir = 8;
@@ -2124,7 +2124,7 @@
 /area/map_template/oldlab/solars)
 "JC" = (
 /obj/structure/table/steel,
-/obj/item/weapon/storage/firstaid/surgery,
+/obj/item/storage/firstaid/surgery,
 /obj/item/device/radio/intercom/entertainment{
 	pixel_y = 24
 	},
@@ -2194,7 +2194,7 @@
 	dir = 1;
 	pixel_y = -22
 	},
-/obj/item/weapon/reagent_containers/spray/cleaner,
+/obj/item/reagent_containers/spray/cleaner,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/oldlab/station/southairlock)
 "Ll" = (
@@ -2415,7 +2415,7 @@
 "NB" = (
 /obj/structure/table/rack,
 /obj/item/stack/cable_coil/random,
-/obj/item/weapon/crowbar/brace_jack,
+/obj/item/crowbar/brace_jack,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/oldlab/station/southairlock)
 "NO" = (
@@ -2866,15 +2866,15 @@
 /area/map_template/oldlab/station/chem)
 "VC" = (
 /obj/structure/table/steel,
-/obj/item/weapon/reagent_containers/glass/beaker/vial/random{
+/obj/item/reagent_containers/glass/beaker/vial/random{
 	pixel_x = 3;
 	pixel_y = 7
 	},
-/obj/item/weapon/reagent_containers/glass/beaker/vial/random{
+/obj/item/reagent_containers/glass/beaker/vial/random{
 	pixel_x = 9;
 	pixel_y = 6
 	},
-/obj/item/weapon/reagent_containers/glass/beaker/vial/random,
+/obj/item/reagent_containers/glass/beaker/vial/random,
 /turf/simulated/floor/tiled/white,
 /area/map_template/oldlab/station/chem)
 "VK" = (
@@ -2950,7 +2950,7 @@
 /obj/structure/table/rack,
 /obj/random/tool,
 /obj/random/tool,
-/obj/item/weapon/storage/belt/utility/full,
+/obj/item/storage/belt/utility/full,
 /obj/item/device/suit_cooling_unit,
 /obj/random/technology_scanner,
 /obj/random/tool,

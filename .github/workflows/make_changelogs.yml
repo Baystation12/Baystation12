@@ -1,0 +1,30 @@
+name: Make changelogs
+
+on:
+  push:
+    branches:
+    - dev
+
+jobs:
+  MakeCL:
+    runs-on: ubuntu-latest
+    if: github.repository == 'Baystation12/Baystation12' # to prevent this running on forks
+    steps:
+      - name: Checkout
+        uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
+        with:
+          fetch-depth: 25
+      - name: Python setup
+        uses: actions/setup-python@dc73133d4da04e56a135ae2246682783cc7c7cb6
+        with:
+          python-version: '3.x'
+      - name: Install depends
+        run: |
+          python -m pip install --upgrade pip
+          pip install ruamel.yaml PyGithub
+      - name: Make CL
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          GIT_EMAIL: "${{ secrets.BOT_EMAIL }}"
+          GIT_NAME: "${{ secrets.BOT_NAME }}"
+        run: python tools/changelog/generate_cl.py

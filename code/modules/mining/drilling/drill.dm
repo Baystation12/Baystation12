@@ -1,8 +1,8 @@
 /obj/machinery/mining
 	icon = 'icons/obj/mining_drill.dmi'
-	anchored = 0
+	anchored = FALSE
 	use_power = POWER_USE_OFF //The drill takes power directly from a cell.
-	density = 1
+	density = TRUE
 	layer = ABOVE_HUMAN_LAYER //So it draws over mobs in the tile north of it.
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
@@ -15,6 +15,8 @@
 	power_channel = LOCAL
 	active_power_usage = 10 KILOWATTS
 	base_type = /obj/machinery/mining/drill
+	machine_name = "mining drill"
+	machine_desc = "A cell-powered industrial drill, used to crack through dirt and rock to harvest minerals beneath the surface. Requires two adjacent braces to operate."
 	var/braces_needed = 2
 	var/list/supports = list()
 	var/supported = 0
@@ -22,18 +24,18 @@
 	var/list/resource_field = list()
 
 	var/ore_types = list(
-		MATERIAL_IRON     = /obj/item/weapon/ore/iron,
-		MATERIAL_URANIUM =  /obj/item/weapon/ore/uranium,
-		MATERIAL_GOLD =     /obj/item/weapon/ore/gold,
-		MATERIAL_SILVER =   /obj/item/weapon/ore/silver,
-		MATERIAL_DIAMOND =  /obj/item/weapon/ore/diamond,
-		MATERIAL_PHORON =   /obj/item/weapon/ore/phoron,
-		MATERIAL_OSMIUM =   /obj/item/weapon/ore/osmium,
-		MATERIAL_HYDROGEN = /obj/item/weapon/ore/hydrogen,
-		MATERIAL_SAND =     /obj/item/weapon/ore/glass,
-		MATERIAL_GRAPHITE = /obj/item/weapon/ore/coal,
-		MATERIAL_ALUMINIUM = /obj/item/weapon/ore/aluminium,
-		MATERIAL_RUTILE = /obj/item/weapon/ore/rutile
+		MATERIAL_IRON     = /obj/item/ore/iron,
+		MATERIAL_URANIUM =  /obj/item/ore/uranium,
+		MATERIAL_GOLD =     /obj/item/ore/gold,
+		MATERIAL_SILVER =   /obj/item/ore/silver,
+		MATERIAL_DIAMOND =  /obj/item/ore/diamond,
+		MATERIAL_PHORON =   /obj/item/ore/phoron,
+		MATERIAL_OSMIUM =   /obj/item/ore/osmium,
+		MATERIAL_HYDROGEN = /obj/item/ore/hydrogen,
+		MATERIAL_SAND =     /obj/item/ore/glass,
+		MATERIAL_GRAPHITE = /obj/item/ore/coal,
+		MATERIAL_ALUMINIUM = /obj/item/ore/aluminium,
+		MATERIAL_RUTILE = /obj/item/ore/rutile
 		)
 
 	//Upgrades
@@ -194,9 +196,9 @@
 
 /obj/machinery/mining/drill/RefreshParts()
 	..()
-	harvest_speed = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/micro_laser), 0, 10)
-	capacity = 200 * Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin), 0, 10)
-	var/charge_multiplier = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor), 0.1, 10)
+	harvest_speed = Clamp(total_component_rating_of_type(/obj/item/stock_parts/micro_laser), 0, 10)
+	capacity = 200 * Clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 0, 10)
+	var/charge_multiplier = Clamp(total_component_rating_of_type(/obj/item/stock_parts/capacitor), 0.1, 10)
 	change_power_consumption(initial(active_power_usage) / charge_multiplier, POWER_USE_ACTIVE)
 
 /obj/machinery/mining/drill/proc/check_supports()
@@ -204,10 +206,10 @@
 	supported = 0
 
 	if((!supports || !supports.len) && initial(anchored) == 0)
-		anchored = 0
+		anchored = FALSE
 		set_active(FALSE)
 	else
-		anchored = 1
+		anchored = TRUE
 
 	if(supports && supports.len >= braces_needed)
 		supported = 1
@@ -242,7 +244,7 @@
 
 	var/obj/structure/ore_box/B = locate() in orange(1)
 	if(B)
-		for(var/obj/item/weapon/ore/O in contents)
+		for(var/obj/item/ore/O in contents)
 			O.forceMove(B)
 		to_chat(usr, "<span class='notice'>You unload the drill's storage cache into the ore box.</span>")
 	else
@@ -255,6 +257,9 @@
 	icon_state = "mining_brace"
 	obj_flags = OBJ_FLAG_ROTATABLE
 	interact_offline = 1
+	
+	machine_name = "mining drill brace"
+	machine_desc = "A mobile support strut that provides support for the head of a mining drill when anchored. Placed on either side of the drill head."
 
 	var/obj/machinery/mining/drill/connected
 
@@ -263,7 +268,7 @@
 		return SPAN_NOTICE("You can't work with the brace of a running drill!")
 	return ..()
 
-/obj/machinery/mining/brace/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/machinery/mining/brace/attackby(obj/item/W as obj, mob/user as mob)
 	if(connected && connected.active)
 		to_chat(user, "<span class='notice'>You can't work with the brace of a running drill!</span>")
 		return TRUE

@@ -1,4 +1,4 @@
-/obj/item/weapon/pen/crayon
+/obj/item/pen/crayon
 	name = "crayon"
 	desc = "A colourful crayon. Please refrain from eating it or putting it in your nose."
 	icon = 'icons/obj/crayons.dmi'
@@ -15,7 +15,7 @@
 	var/colourName = "red" //for updateIcon purposes
 	var/crayon_reagent = /datum/reagent/crayon_dust
 
-/obj/item/weapon/pen/crayon/Initialize()
+/obj/item/pen/crayon/Initialize()
 	name = "[colourName] crayon"
 	. = ..()
 	create_reagents(10)

@@ -16,18 +16,18 @@
 	M.adjustToxLoss(removed * 3)
 
 /datum/reagent/acetone/touch_obj(var/obj/O)	//I copied this wholesale from ethanol and could likely be converted into a shared proc. ~Techhead
-	if(istype(O, /obj/item/weapon/paper))
-		var/obj/item/weapon/paper/paperaffected = O
+	if(istype(O, /obj/item/paper))
+		var/obj/item/paper/paperaffected = O
 		paperaffected.clearpaper()
 		to_chat(usr, "The solution dissolves the ink on the paper.")
 		return
-	if(istype(O, /obj/item/weapon/book))
+	if(istype(O, /obj/item/book))
 		if(volume < 5)
 			return
-		if(istype(O, /obj/item/weapon/book/tome))
+		if(istype(O, /obj/item/book/tome))
 			to_chat(usr, "<span class='notice'>The solution does nothing. Whatever this is, it isn't normal ink.</span>")
 			return
-		var/obj/item/weapon/book/affectedbook = O
+		var/obj/item/book/affectedbook = O
 		affectedbook.dat = null
 		to_chat(usr, "<span class='notice'>The solution dissolves the ink on the book.</span>")
 	return
@@ -173,18 +173,18 @@
 		M.adjust_hallucination(halluci, halluci)
 
 /datum/reagent/ethanol/touch_obj(var/obj/O)
-	if(istype(O, /obj/item/weapon/paper))
-		var/obj/item/weapon/paper/paperaffected = O
+	if(istype(O, /obj/item/paper))
+		var/obj/item/paper/paperaffected = O
 		paperaffected.clearpaper()
 		to_chat(usr, "The solution dissolves the ink on the paper.")
 		return
-	if(istype(O, /obj/item/weapon/book))
+	if(istype(O, /obj/item/book))
 		if(volume < 5)
 			return
-		if(istype(O, /obj/item/weapon/book/tome))
+		if(istype(O, /obj/item/book/tome))
 			to_chat(usr, "<span class='notice'>The solution does nothing. Whatever this is, it isn't normal ink.</span>")
 			return
-		var/obj/item/weapon/book/affectedbook = O
+		var/obj/item/book/affectedbook = O
 		affectedbook.dat = null
 		to_chat(usr, "<span class='notice'>The solution dissolves the ink on the book.</span>")
 	return
@@ -315,15 +315,21 @@
 	M.take_organ_damage(0, removed * power)
 
 /datum/reagent/acid/affect_touch(var/mob/living/carbon/M, var/alien, var/removed) // This is the most interesting
+
+	M.visible_message(
+		SPAN_WARNING("\The [M]'s skin sizzles and burns on contact with the liquid!"),
+		SPAN_DANGER("Your skin sizzles and burns!.")
+		)
+
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(H.head)
 			if(H.head.unacidable)
-				to_chat(H, "<span class='danger'>Your [H.head] protects you from the acid.</span>")
+				to_chat(H, SPAN_WARNING("Your [H.head] protects you from the liquid."))
 				remove_self(volume)
 				return
 			else if(removed > meltdose)
-				to_chat(H, "<span class='danger'>Your [H.head] melts away!</span>")
+				to_chat(H, SPAN_DANGER("Your [H.head] melts away!"))
 				qdel(H.head)
 				H.update_inv_head(1)
 				H.update_hair(1)
@@ -333,11 +339,11 @@
 
 		if(H.wear_mask)
 			if(H.wear_mask.unacidable)
-				to_chat(H, "<span class='danger'>Your [H.wear_mask] protects you from the acid.</span>")
+				to_chat(H, SPAN_WARNING("Your [H.wear_mask] protects you from the liquid."))
 				remove_self(volume)
 				return
 			else if(removed > meltdose)
-				to_chat(H, "<span class='danger'>Your [H.wear_mask] melts away!</span>")
+				to_chat(H, SPAN_DANGER("Your [H.wear_mask] melts away!"))
 				qdel(H.wear_mask)
 				H.update_inv_wear_mask(1)
 				H.update_hair(1)
@@ -347,10 +353,10 @@
 
 		if(H.glasses)
 			if(H.glasses.unacidable)
-				to_chat(H, "<span class='danger'>Your [H.glasses] partially protect you from the acid!</span>")
+				to_chat(H, SPAN_WARNING("Your [H.glasses] partially protect you from the liquid!"))
 				removed /= 2
 			else if(removed > meltdose)
-				to_chat(H, "<span class='danger'>Your [H.glasses] melt away!</span>")
+				to_chat(H, SPAN_DANGER("Your [H.glasses] melt away!"))
 				qdel(H.glasses)
 				H.update_inv_glasses(1)
 				removed -= meltdose / 2

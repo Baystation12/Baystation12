@@ -154,7 +154,7 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_bridge)
 "aw" = (
-/obj/item/weapon/wirecutters,
+/obj/item/wirecutters,
 /obj/item/stack/material/rods,
 /turf/space,
 /area/space)
@@ -220,7 +220,7 @@
 	pixel_y = -8
 	},
 /obj/item/device/multitool,
-/obj/item/weapon/plastique,
+/obj/item/plastique,
 /turf/simulated/floor/plating,
 /area/casino/casino_maintenance)
 "aI" = (
@@ -412,15 +412,15 @@
 /area/casino/casino_maintenance)
 "bj" = (
 /obj/structure/table/rack,
-/obj/item/weapon/gun/projectile/pistol/sec/MK{
+/obj/item/gun/projectile/pistol/sec/MK{
 	pixel_x = 4;
 	pixel_y = 4
 	},
-/obj/item/weapon/gun/projectile/pistol/sec/MK{
+/obj/item/gun/projectile/pistol/sec/MK{
 	pixel_x = 2;
 	pixel_y = 2
 	},
-/obj/item/weapon/gun/projectile/pistol/sec/MK,
+/obj/item/gun/projectile/pistol/sec/MK,
 /turf/simulated/floor/plating,
 /area/casino/casino_maintenance)
 "bk" = (
@@ -472,7 +472,7 @@
 /area/space)
 "bu" = (
 /obj/structure/table/rack,
-/obj/item/weapon/material/knife/combat,
+/obj/item/material/knife/combat,
 /turf/simulated/floor/plating,
 /area/casino/casino_maintenance)
 "bv" = (
@@ -559,7 +559,7 @@
 /turf/simulated/floor/plating,
 /area/casino/casino_maintenance)
 "bD" = (
-/obj/item/weapon/material/shard,
+/obj/item/material/shard,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
@@ -708,7 +708,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/item/weapon/gun/projectile/shotgun/pump,
+/obj/item/gun/projectile/shotgun/pump,
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8;
@@ -753,7 +753,7 @@
 /area/casino/casino_hangar)
 "bU" = (
 /obj/structure/table/rack,
-/obj/item/weapon/gun/projectile/shotgun/pump/combat,
+/obj/item/gun/projectile/shotgun/pump/combat,
 /turf/simulated/floor/plating,
 /area/casino/casino_maintenance)
 "bV" = (
@@ -813,7 +813,7 @@
 /area/casino/casino_security)
 "ci" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/weapon/wrench,
+/obj/item/wrench,
 /turf/simulated/floor/plating,
 /area/casino/casino_security)
 "cj" = (
@@ -838,9 +838,9 @@
 /area/casino/casino_hangar)
 "cn" = (
 /obj/structure/table/rack,
-/obj/item/weapon/tank/nitrogen,
-/obj/item/weapon/tank/nitrogen,
-/obj/item/weapon/tank/nitrogen,
+/obj/item/tank/nitrogen,
+/obj/item/tank/nitrogen,
+/obj/item/tank/nitrogen,
 /turf/simulated/floor/tiled,
 /area/casino/casino_hangar)
 "co" = (
@@ -1240,7 +1240,7 @@
 	icon_state = "tube1";
 	pixel_y = 0
 	},
-/obj/item/weapon/material/knife/folding,
+/obj/item/material/knife/folding,
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/simulated/floor/tiled/white,
 /area/casino/casino_crew_bathroom)
@@ -1262,16 +1262,16 @@
 /area/casino/casino_security)
 "dA" = (
 /obj/structure/table/rack,
-/obj/item/weapon/gun/projectile/shotgun/pump,
-/obj/item/weapon/gun/projectile/shotgun/pump,
-/obj/item/weapon/gun/projectile/shotgun/pump,
+/obj/item/gun/projectile/shotgun/pump,
+/obj/item/gun/projectile/shotgun/pump,
+/obj/item/gun/projectile/shotgun/pump,
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
 "dB" = (
 /obj/structure/table/rack,
-/obj/item/weapon/storage/box/ammo/shotgunammo,
-/obj/item/weapon/storage/box/ammo/shotgunammo,
-/obj/item/weapon/storage/box/ammo/shotgunammo,
+/obj/item/storage/box/ammo/shotgunammo,
+/obj/item/storage/box/ammo/shotgunammo,
+/obj/item/storage/box/ammo/shotgunammo,
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
 "dC" = (
@@ -1284,7 +1284,7 @@
 /obj/structure/table/rack,
 /obj/random/voidsuit,
 /obj/random/voidhelmet,
-/obj/item/weapon/tank/air,
+/obj/item/tank/air,
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
 "dE" = (
@@ -1326,19 +1326,19 @@
 /area/casino/casino_storage)
 "dQ" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/storage/fancy/cigar{
+/obj/item/storage/fancy/cigar{
 	pixel_y = 5
 	},
-/obj/item/weapon/storage/fancy/cigar{
+/obj/item/storage/fancy/cigar{
 	pixel_y = 5
 	},
-/obj/item/weapon/storage/fancy/cigar{
+/obj/item/storage/fancy/cigar{
 	pixel_y = 5
 	},
-/obj/item/weapon/storage/fancy/cigar{
+/obj/item/storage/fancy/cigar{
 	pixel_y = 5
 	},
-/obj/item/weapon/storage/fancy/cigar{
+/obj/item/storage/fancy/cigar{
 	pixel_y = 5
 	},
 /obj/random/tool,
@@ -1350,7 +1350,7 @@
 /area/casino/casino_storage)
 "dS" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/storage/toolbox/mechanical,
+/obj/item/storage/toolbox/mechanical,
 /obj/item/stack/cable_coil,
 /turf/simulated/floor/plating,
 /area/casino/casino_storage)
@@ -1427,7 +1427,7 @@
 /turf/simulated/floor/plating,
 /area/casino/casino_storage)
 "ej" = (
-/obj/item/weapon/stock_parts/circuitboard/broken,
+/obj/item/stock_parts/circuitboard/broken,
 /turf/simulated/floor/plating,
 /area/casino/casino_storage)
 "ek" = (
@@ -1559,7 +1559,7 @@
 /area/casino/casino_storage)
 "eA" = (
 /obj/item/device/multitool,
-/obj/item/weapon/wirecutters,
+/obj/item/wirecutters,
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
 "eB" = (
@@ -1583,7 +1583,7 @@
 "eE" = (
 /obj/random/coin,
 /obj/random/coin,
-/obj/item/weapon/storage/bag/cash,
+/obj/item/storage/bag/cash,
 /turf/simulated/floor/plating,
 /area/casino/casino_security)
 "eF" = (
@@ -1673,7 +1673,7 @@
 /area/casino/casino_storage)
 "eR" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/weapon/storage/toolbox/electrical,
+/obj/item/storage/toolbox/electrical,
 /turf/simulated/floor/plating,
 /area/casino/casino_storage)
 "eS" = (
@@ -1688,7 +1688,7 @@
 "eT" = (
 /obj/structure/table/steel_reinforced,
 /obj/random/tool,
-/obj/item/weapon/stock_parts/circuitboard/recharge_station,
+/obj/item/stock_parts/circuitboard/recharge_station,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
@@ -2051,7 +2051,7 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
 "fJ" = (
-/obj/item/weapon/material/shard,
+/obj/item/material/shard,
 /obj/structure/coatrack,
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
@@ -2080,11 +2080,11 @@
 /area/space)
 "fN" = (
 /obj/structure/mopbucket,
-/obj/item/weapon/mop,
+/obj/item/mop,
 /turf/simulated/floor/plating,
 /area/casino/casino_maintenance)
 "fO" = (
-/obj/item/weapon/reagent_containers/glass/bucket,
+/obj/item/reagent_containers/glass/bucket,
 /turf/simulated/floor/plating,
 /area/casino/casino_maintenance)
 "fP" = (
@@ -2108,7 +2108,7 @@
 /obj/structure/table/standard{
 	name = "plastic table frame"
 	},
-/obj/item/weapon/material/kitchen/utensil/fork,
+/obj/item/material/kitchen/utensil/fork,
 /turf/simulated/floor/tiled,
 /area/casino/casino_crew_cantina)
 "fT" = (
@@ -2132,7 +2132,7 @@
 /obj/structure/table/standard{
 	name = "plastic table frame"
 	},
-/obj/item/weapon/reagent_containers/food/drinks/milk/smallcarton,
+/obj/item/reagent_containers/food/drinks/small_milk,
 /turf/simulated/floor/tiled,
 /area/casino/casino_crew_cantina)
 "fW" = (
@@ -2250,7 +2250,7 @@
 /obj/structure/bed/chair{
 	dir = 1
 	},
-/obj/item/weapon/reagent_containers/food/drinks/flask/shiny,
+/obj/item/reagent_containers/food/drinks/flask/shiny,
 /turf/simulated/floor/tiled,
 /area/casino/casino_crew_cantina)
 "gn" = (
@@ -2318,13 +2318,13 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/item/weapon/material/ashtray/bronze,
+/obj/item/material/ashtray/bronze,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "gv" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/storage/fancy/cigar,
-/obj/item/weapon/storage/fancy/cigar{
+/obj/item/storage/fancy/cigar,
+/obj/item/storage/fancy/cigar{
 	pixel_y = 5
 	},
 /turf/simulated/floor/carpet,
@@ -2567,7 +2567,7 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_mainfloor)
 "hi" = (
-/obj/item/weapon/storage/secure/briefcase/money,
+/obj/item/storage/secure/briefcase/money,
 /obj/random/cash,
 /obj/random/cash,
 /obj/random/cash,
@@ -2670,7 +2670,7 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_kitchen)
 "hy" = (
-/obj/item/weapon/material/shard,
+/obj/item/material/shard,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "hz" = (
@@ -2833,7 +2833,7 @@
 "hX" = (
 /obj/structure/table/marble,
 /obj/machinery/reagentgrinder/juicer,
-/obj/item/weapon/reagent_containers/glass/beaker/large,
+/obj/item/reagent_containers/glass/beaker/large,
 /turf/simulated/floor/tiled,
 /area/casino/casino_kitchen)
 "hY" = (
@@ -2854,7 +2854,7 @@
 "ia" = (
 /obj/structure/table/woodentable,
 /obj/item/trash/plate,
-/obj/item/weapon/material/kitchen/utensil/fork,
+/obj/item/material/kitchen/utensil/fork,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "ib" = (
@@ -2950,11 +2950,11 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/item/weapon/storage/fancy/egg_box,
-/obj/item/weapon/storage/fancy/egg_box,
-/obj/item/weapon/storage/fancy/egg_box,
-/obj/item/weapon/reagent_containers/food/condiment/flour,
-/obj/item/weapon/reagent_containers/food/condiment/sugar,
+/obj/item/storage/fancy/egg_box,
+/obj/item/storage/fancy/egg_box,
+/obj/item/storage/fancy/egg_box,
+/obj/item/reagent_containers/food/condiment/flour,
+/obj/item/reagent_containers/food/condiment/sugar,
 /turf/simulated/floor/tiled,
 /area/casino/casino_kitchen)
 "im" = (
@@ -2962,13 +2962,13 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
-/obj/item/weapon/reagent_containers/food/condiment/sugar,
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/bread,
+/obj/item/reagent_containers/food/condiment/sugar,
+/obj/item/reagent_containers/food/snacks/sliceable/bread,
 /turf/simulated/floor/tiled,
 /area/casino/casino_kitchen)
 "in" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
-/obj/item/weapon/reagent_containers/food/condiment/flour,
+/obj/item/reagent_containers/food/condiment/flour,
 /turf/simulated/floor/tiled,
 /area/casino/casino_kitchen)
 "io" = (
@@ -2984,25 +2984,25 @@
 /obj/structure/bed/chair/comfy/red{
 	dir = 4
 	},
-/obj/item/weapon/material/knife/table,
+/obj/item/material/knife/table,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "iq" = (
 /obj/structure/table/woodentable,
 /obj/item/trash/plate,
-/obj/item/weapon/reagent_containers/food/snacks/applepie,
+/obj/item/reagent_containers/food/snacks/applepie,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "ir" = (
 /obj/structure/table/woodentable,
 /obj/item/trash/plate,
-/obj/item/weapon/reagent_containers/food/snacks/bigbiteburger,
+/obj/item/reagent_containers/food/snacks/bigbiteburger,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "is" = (
 /obj/structure/table/gamblingtable,
 /obj/structure/casino/craps/craps_down,
-/obj/item/weapon/dice,
+/obj/item/dice,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "iu" = (
@@ -3098,10 +3098,10 @@
 	dir = 8
 	},
 /obj/structure/closet/secure_closet/freezer/meat,
-/obj/item/weapon/reagent_containers/food/snacks/meat,
-/obj/item/weapon/reagent_containers/food/snacks/meat,
-/obj/item/weapon/reagent_containers/food/snacks/meat,
-/obj/item/weapon/reagent_containers/food/snacks/meat,
+/obj/item/reagent_containers/food/snacks/meat,
+/obj/item/reagent_containers/food/snacks/meat,
+/obj/item/reagent_containers/food/snacks/meat,
+/obj/item/reagent_containers/food/snacks/meat,
 /turf/simulated/floor/tiled/freezer,
 /area/casino/casino_kitchen)
 "iD" = (
@@ -3201,13 +3201,13 @@
 /obj/machinery/door/firedoor,
 /obj/structure/table/marble,
 /obj/item/trash/tray,
-/obj/item/weapon/reagent_containers/food/snacks/stew,
+/obj/item/reagent_containers/food/snacks/stew,
 /turf/simulated/floor/tiled,
 /area/casino/casino_kitchen)
 "iR" = (
 /obj/structure/table/woodentable,
 /obj/item/trash/plate,
-/obj/item/weapon/material/kitchen/utensil/spoon,
+/obj/item/material/kitchen/utensil/spoon,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "iS" = (
@@ -3505,7 +3505,7 @@
 /turf/simulated/floor/plating,
 /area/casino/casino_crew_atmos)
 "jC" = (
-/obj/item/weapon/broken_bottle,
+/obj/item/broken_bottle,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
@@ -3521,8 +3521,8 @@
 /area/casino/casino_kitchen)
 "jE" = (
 /obj/structure/table/marble,
-/obj/item/weapon/reagent_containers/food/drinks/bottle/absinthe,
-/obj/item/weapon/reagent_containers/food/drinks/shaker{
+/obj/item/reagent_containers/food/drinks/bottle/absinthe,
+/obj/item/reagent_containers/food/drinks/shaker{
 	pixel_x = 10;
 	pixel_y = 10
 	},
@@ -3548,22 +3548,22 @@
 /area/casino/casino_mainfloor)
 "jH" = (
 /obj/structure/table/marble,
-/obj/item/weapon/material/ashtray/bronze,
-/obj/item/weapon/flame/lighter/zippo/random,
+/obj/item/material/ashtray/bronze,
+/obj/item/flame/lighter/zippo/random,
 /turf/simulated/floor/tiled,
 /area/casino/casino_mainfloor)
 "jI" = (
-/obj/item/weapon/stool/bar,
+/obj/item/stool/bar,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "jJ" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/material/ashtray/bronze,
-/obj/item/weapon/reagent_containers/food/snacks/cubancarp,
+/obj/item/material/ashtray/bronze,
+/obj/item/reagent_containers/food/snacks/cubancarp,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "jK" = (
-/obj/item/weapon/material/ashtray/bronze,
+/obj/item/material/ashtray/bronze,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "jL" = (
@@ -3608,21 +3608,21 @@
 /area/casino/casino_crew_atmos)
 "jQ" = (
 /obj/structure/table/marble,
-/obj/item/weapon/storage/box/glass_extras/sticks,
-/obj/item/weapon/storage/box/glass_extras/straws,
-/obj/item/weapon/storage/box/glass_extras,
-/obj/item/weapon/storage/box/glasses/pint,
-/obj/item/weapon/storage/box/glasses/wine,
+/obj/item/storage/box/glass_extras/sticks,
+/obj/item/storage/box/glass_extras/straws,
+/obj/item/storage/box/glass_extras,
+/obj/item/storage/box/glasses/pint,
+/obj/item/storage/box/glasses/wine,
 /obj/item/device/radio,
 /turf/simulated/floor/tiled,
 /area/casino/casino_kitchen)
 "jR" = (
 /obj/structure/table/marble,
-/obj/item/weapon/reagent_containers/food/drinks/bottle/gin,
-/obj/item/weapon/reagent_containers/food/drinks/bottle/tequilla{
+/obj/item/reagent_containers/food/drinks/bottle/gin,
+/obj/item/reagent_containers/food/drinks/bottle/tequilla{
 	pixel_x = -10
 	},
-/obj/item/weapon/reagent_containers/food/drinks/bottle/vodka{
+/obj/item/reagent_containers/food/drinks/bottle/vodka{
 	pixel_x = 10
 	},
 /turf/simulated/floor/tiled,
@@ -3640,24 +3640,24 @@
 "jU" = (
 /obj/structure/table/woodentable,
 /obj/item/trash/plate,
-/obj/item/weapon/reagent_containers/food/snacks/waffles,
-/obj/item/weapon/reagent_containers/food/drinks/cans/iced_tea,
+/obj/item/reagent_containers/food/snacks/waffles,
+/obj/item/reagent_containers/food/drinks/cans/iced_tea,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "jV" = (
 /obj/structure/table/gamblingtable,
 /obj/structure/casino/craps,
-/obj/item/weapon/dice{
+/obj/item/dice{
 	pixel_x = 5;
 	pixel_y = -5
 	},
-/obj/item/weapon/dice,
+/obj/item/dice,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "jW" = (
 /obj/structure/table/gamblingtable,
 /obj/structure/casino/bj_table,
-/obj/item/weapon/deck/cards{
+/obj/item/deck/cards{
 	pixel_x = 5;
 	pixel_y = -5
 	},
@@ -3668,7 +3668,7 @@
 /obj/structure/table/gamblingtable,
 /obj/structure/casino/bj_table/bj_right,
 /obj/item/clothing/mask/smokable/cigarette/cigar/havana,
-/obj/item/weapon/material/ashtray/bronze,
+/obj/item/material/ashtray/bronze,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "jY" = (
@@ -3719,8 +3719,8 @@
 /area/casino/casino_kitchen)
 "kf" = (
 /obj/structure/table/marble,
-/obj/item/weapon/reagent_containers/food/drinks/bottle/rum,
-/obj/item/weapon/reagent_containers/glass/rag,
+/obj/item/reagent_containers/food/drinks/bottle/rum,
+/obj/item/reagent_containers/glass/rag,
 /obj/random/drinkbottle,
 /obj/random/drinkbottle,
 /obj/random/drinkbottle,
@@ -3733,16 +3733,16 @@
 /area/casino/casino_mainfloor)
 "kh" = (
 /obj/structure/table/marble,
-/obj/item/weapon/reagent_containers/food/drinks/bottle/cognac,
+/obj/item/reagent_containers/food/drinks/bottle/cognac,
 /turf/simulated/floor/tiled,
 /area/casino/casino_mainfloor)
 "ki" = (
-/obj/item/weapon/stool/bar,
+/obj/item/stool/bar,
 /obj/random/coin,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "kj" = (
-/obj/item/weapon/broken_bottle,
+/obj/item/broken_bottle,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "kk" = (
@@ -3764,9 +3764,9 @@
 	icon_state = "warning"
 	},
 /obj/structure/table/rack,
-/obj/item/weapon/wrench,
+/obj/item/wrench,
 /obj/item/clothing/head/welding,
-/obj/item/weapon/weldingtool,
+/obj/item/weldingtool,
 /turf/simulated/floor/plating,
 /area/casino/casino_crew_atmos)
 "kn" = (
@@ -3785,12 +3785,12 @@
 /area/casino/casino_mainfloor)
 "ko" = (
 /obj/structure/table/marble,
-/obj/item/weapon/reagent_containers/food/drinks/h_chocolate,
+/obj/item/reagent_containers/food/drinks/h_chocolate,
 /turf/simulated/floor/tiled,
 /area/casino/casino_mainfloor)
 "kp" = (
 /obj/structure/table/marble,
-/obj/item/weapon/storage/fancy/cigar{
+/obj/item/storage/fancy/cigar{
 	pixel_y = 5
 	},
 /turf/simulated/floor/tiled,
@@ -3862,7 +3862,7 @@
 "kB" = (
 /obj/structure/table/gamblingtable,
 /obj/structure/casino/bj_table/bj_right,
-/obj/item/weapon/deck/cards,
+/obj/item/deck/cards,
 /obj/random/coin{
 	pixel_x = -2;
 	pixel_y = 4
@@ -4136,7 +4136,7 @@
 /turf/simulated/floor/wood,
 /area/casino/casino_private_vip)
 "lj" = (
-/obj/machinery/media/jukebox,
+/obj/machinery/jukebox,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
@@ -4396,7 +4396,7 @@
 /turf/simulated/floor/wood,
 /area/casino/casino_private_vip)
 "lJ" = (
-/obj/item/weapon/storage/secure/safe{
+/obj/item/storage/secure/safe{
 	pixel_x = 30
 	},
 /turf/simulated/floor/wood,
@@ -4409,7 +4409,7 @@
 /turf/simulated/floor/wood,
 /area/casino/casino_private1)
 "lM" = (
-/obj/item/weapon/storage/secure/safe{
+/obj/item/storage/secure/safe{
 	pixel_x = 30
 	},
 /turf/simulated/floor/wood,
@@ -4422,7 +4422,7 @@
 /turf/simulated/floor/wood,
 /area/casino/casino_private2)
 "lP" = (
-/obj/item/weapon/storage/secure/safe{
+/obj/item/storage/secure/safe{
 	pixel_x = 25
 	},
 /turf/simulated/floor/wood,
@@ -4499,14 +4499,14 @@
 /area/casino/casino_private_vip)
 "lZ" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/storage/fancy/cigar{
+/obj/item/storage/fancy/cigar{
 	pixel_y = 5
 	},
 /turf/simulated/floor/wood,
 /area/casino/casino_private_vip)
 "ma" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/material/ashtray/bronze,
+/obj/item/material/ashtray/bronze,
 /obj/random/drinkbottle,
 /turf/simulated/floor/wood,
 /area/casino/casino_private_vip)
@@ -4537,7 +4537,7 @@
 /area/casino/casino_private1)
 "mf" = (
 /obj/structure/bed/chair/comfy/red,
-/obj/item/weapon/flame/lighter/zippo/random,
+/obj/item/flame/lighter/zippo/random,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/wood,
 /area/casino/casino_private2)
@@ -4562,10 +4562,10 @@
 /area/casino/casino_patron_bathroom)
 "mj" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/reagent_containers/food/drinks/bottle/specialwhiskey,
+/obj/item/reagent_containers/food/drinks/bottle/specialwhiskey,
 /obj/item/clothing/mask/smokable/cigarette/cigar/havana,
 /obj/item/clothing/mask/smokable/cigarette/cigar/havana,
-/obj/item/weapon/flame/lighter/zippo/random,
+/obj/item/flame/lighter/zippo/random,
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "mk" = (
@@ -4624,7 +4624,7 @@
 /obj/structure/bed/chair/comfy/red{
 	dir = 8
 	},
-/obj/item/weapon/storage/bag/cash,
+/obj/item/storage/bag/cash,
 /turf/simulated/floor/wood,
 /area/casino/casino_private_vip)
 "mt" = (
@@ -5196,7 +5196,7 @@
 /obj/structure/bed/chair/comfy/captain{
 	dir = 1
 	},
-/obj/item/weapon/storage/bag/cash,
+/obj/item/storage/bag/cash,
 /turf/simulated/floor/tiled/steel_grid,
 /area/casino/casino_cutter)
 "yb" = (
@@ -5249,7 +5249,7 @@
 /turf/simulated/floor/tiled/steel_grid,
 /area/casino/casino_cutter)
 "Ab" = (
-/obj/item/weapon/gun/projectile/pistol/sec/MK,
+/obj/item/gun/projectile/pistol/sec/MK,
 /obj/item/ammo_casing/pistol/magnum/used,
 /obj/item/ammo_casing/pistol/magnum/used,
 /turf/simulated/floor/tiled,
@@ -5275,7 +5275,7 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/casino/casino_cutter)
 "Bb" = (
-/obj/item/weapon/material/shard,
+/obj/item/material/shard,
 /obj/item/ammo_casing/pistol/magnum/used,
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
@@ -5337,7 +5337,7 @@
 /area/casino/casino_kitchen)
 "Eb" = (
 /obj/effect/decal/cleanable/blood,
-/obj/item/weapon/gun/projectile/pistol/magnum_pistol,
+/obj/item/gun/projectile/pistol/magnum_pistol,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
@@ -5389,7 +5389,7 @@
 /turf/simulated/wall/r_wall,
 /area/casino/casino_mainfloor)
 "FM" = (
-/obj/item/weapon/storage/backpack/dufflebag,
+/obj/item/storage/backpack/dufflebag,
 /obj/random/cash,
 /obj/random/cash,
 /obj/random/cash,
@@ -5814,7 +5814,7 @@
 	pixel_x = -12;
 	pixel_y = 2
 	},
-/obj/item/weapon/storage/mirror{
+/obj/item/storage/mirror{
 	pixel_x = -25
 	},
 /obj/random/soap,
@@ -5848,7 +5848,7 @@
 	pixel_x = -12;
 	pixel_y = 2
 	},
-/obj/item/weapon/storage/mirror{
+/obj/item/storage/mirror{
 	pixel_x = -25
 	},
 /obj/random/soap,
@@ -5895,7 +5895,7 @@
 	pixel_x = -12;
 	pixel_y = 2
 	},
-/obj/item/weapon/storage/mirror{
+/obj/item/storage/mirror{
 	pixel_x = -25
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{

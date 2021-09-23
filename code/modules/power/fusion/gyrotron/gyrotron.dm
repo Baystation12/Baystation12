@@ -3,7 +3,7 @@
 /obj/machinery/power/emitter/gyrotron
 	name = "gyrotron"
 	icon = 'icons/obj/machines/power/fusion.dmi'
-	desc = "It is a heavy duty industrial gyrotron suited for powering fusion reactors."
+	desc = "A heavy-duty, highly configurable industrial gyrotron suited for powering fusion reactors."
 	icon_state = "emitter-off"
 	req_access = list(access_engine)
 	use_power = POWER_USE_IDLE
@@ -15,14 +15,14 @@
 
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/radio/receiver,
+		/obj/item/stock_parts/radio/receiver,
 	)
 	stat_immune = 0
 	base_type = /obj/machinery/power/emitter/gyrotron
 
 /obj/machinery/power/emitter/gyrotron/anchored
-	anchored = 1
-	state = 2
+	anchored = TRUE
+	state = EMITTER_WELDED
 
 /obj/machinery/power/emitter/gyrotron/Initialize()
 	set_extension(src, /datum/extension/local_network_member)
@@ -37,10 +37,10 @@
 	. = ..()
 
 /obj/machinery/power/emitter/gyrotron/get_rand_burst_delay()
-	return rate*10
+	return rate * 10
 
 /obj/machinery/power/emitter/gyrotron/get_burst_delay()
-	return rate*10
+	return rate * 10
 
 /obj/machinery/power/emitter/gyrotron/get_emitter_beam()
 	var/obj/item/projectile/beam/emitter/E = ..()

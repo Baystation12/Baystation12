@@ -41,6 +41,7 @@
 	                    SKILL_DEVICES     = SKILL_MAX,
 	                    SKILL_SCIENCE     = SKILL_MAX)
 	skill_points = 20
+	possible_goals = list(/datum/goal/achievement/notslimefodder)
 
 /datum/job/scientist
 	title = "Scientist"
@@ -89,6 +90,7 @@
 
 	minimal_access = list()
 	skill_points = 20
+	possible_goals = list(/datum/goal/achievement/notslimefodder)
 
 /datum/job/scientist_assistant
 	title = "Research Assistant"
@@ -131,3 +133,4 @@
 		access_petrov_analysis, access_petrov_phoron, access_petrov_toxins, access_petrov_chemistry,
 		access_radio_sci, access_radio_exp
 	)
+	possible_goals = list(/datum/goal/achievement/notslimefodder)

@@ -65,6 +65,14 @@
 	START_PROCESSING(SSobj, src)
 	return TRUE
 
+/obj/structure/adherent_bath/slam_into(mob/living/L)
+	L.forceMove(src)
+	occupant = L
+	L.Weaken(2)
+	L.visible_message(SPAN_WARNING("\The [L] falls into \the [src]!"))
+	playsound(L, "punch", 25, 1, FALSE)
+	START_PROCESSING(SSobj, src)
+
 /obj/structure/adherent_bath/attack_hand(var/mob/user)
 	eject_occupant()
 
@@ -84,7 +92,7 @@
 	enter_bath(O, user)
 
 /obj/structure/adherent_bath/relaymove(var/mob/user)
-	if(user == occupant)
+	if (!user.incapacitated() && (user == occupant))
 		eject_occupant()
 
 /obj/structure/adherent_bath/Process()
@@ -137,7 +145,7 @@
 				var/obj/item/organ/external/E = thing
 				if(BP_IS_ROBOTIC(E))
 					for(var/obj/implanted_object in E.implants)
-						if(!istype(implanted_object,/obj/item/weapon/implant) && !istype(implanted_object,/obj/item/organ/internal/augment) && prob(25))	// We don't want to remove REAL implants. Just shrapnel etc.
+						if(!istype(implanted_object,/obj/item/implant) && !istype(implanted_object,/obj/item/organ/internal/augment) && prob(25))	// We don't want to remove REAL implants. Just shrapnel etc.
 							E.implants -= implanted_object
 							to_chat(H, "<span class='notice'>The mineral-rich bath dissolves the [implanted_object.name].</span>")
 							qdel(implanted_object)

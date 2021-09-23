@@ -691,7 +691,6 @@
 	. = ..()
 	set_pin_data(IC_INPUT, 1, frequency)
 	set_pin_data(IC_INPUT, 2, code)
-	addtimer(CALLBACK(src, .proc/set_frequency,frequency), 40)
 
 /obj/item/integrated_circuit/input/signaler/Destroy()
 	radio_controller.remove_object(src,frequency)
@@ -807,10 +806,9 @@
 	. = list()
 	. += "Current selection: [(current_console && current_console.id) || "None"]"
 	. += "Please select a teleporter to lock in on:"
-	for(var/obj/machinery/teleport/hub/R in SSmachines.machinery)
-		var/obj/machinery/computer/teleporter/com = R.com
-		if (istype(com, /obj/machinery/computer/teleporter) && com.locked && !com.one_time_use && com.operable() && AreConnectedZLevels(get_z(src), get_z(com)))
-			.["[com.id] ([R.icon_state == "tele1" ? "Active" : "Inactive"])"] = "tport=[any2ref(com)]"
+	for (var/obj/machinery/computer/teleporter/computer in SSmachines.machinery)
+		if (computer.target && computer.operable() && AreConnectedZLevels(get_z(src), get_z(computer)))
+			.["[computer.id] ([computer.active ? "Active" : "Inactive"])"] = "tport=[any2ref(computer)]"
 	.["None (Dangerous)"] = "tport=random"
 
 /obj/item/integrated_circuit/input/teleporter_locator/OnICTopic(href_list, user)
@@ -908,7 +906,7 @@
 	if(!check_then_do_work())
 		return FALSE
 	var/ignore_bags = get_pin_data(IC_INPUT, 1)
-	if(ignore_bags && istype(A, /obj/item/weapon/storage/))
+	if(ignore_bags && istype(A, /obj/item/storage/))
 		return FALSE
 	set_pin_data(IC_OUTPUT, 1, weakref(A))
 	push_data()
@@ -940,7 +938,7 @@
 	if(!check_then_do_work())
 		return FALSE
 	var/ignore_bags = get_pin_data(IC_INPUT, 1)
-	if(ignore_bags && istype(A, /obj/item/weapon/storage))
+	if(ignore_bags && istype(A, /obj/item/storage))
 		return FALSE
 	set_pin_data(IC_OUTPUT, 1, weakref(A))
 	push_data()
@@ -1034,7 +1032,7 @@
 	set_pin_data(IC_OUTPUT, 2, null)
 	set_pin_data(IC_OUTPUT, 3, null)
 	if(O)
-		var/obj/item/weapon/cell/C = O.get_cell()
+		var/obj/item/cell/C = O.get_cell()
 		if(C)
 			var/turf/A = get_turf(src)
 			if(get_turf(O) in view(A))
@@ -1178,7 +1176,7 @@
 	)
 
 /obj/item/integrated_circuit/input/data_card_reader/attackby_react(obj/item/I, mob/living/user, intent)
-	var/obj/item/weapon/card/data/card = I
+	var/obj/item/card/data/card = I
 	var/write_mode = get_pin_data(IC_INPUT, 3)
 	if(istype(card))
 		if(write_mode == TRUE)

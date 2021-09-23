@@ -11,7 +11,8 @@
 	..()
 	if(istype(H) && !LAZYLEN(H.organs))
 		H.death()
-	if(prob(50) && !skip_nymph && spawn_diona_nymph(get_turf(src)))
+	if(prob(25) && !skip_nymph)
+		spawn_diona_nymph(get_turf(src))
 		qdel(src)
 
 /obj/item/organ/internal/diona/Process()

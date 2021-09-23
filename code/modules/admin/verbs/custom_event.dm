@@ -9,8 +9,6 @@
 
 	var/input = sanitize(input(usr, "Enter the description of the event. Be descriptive. To cancel the event, make this blank or hit cancel.", "Event", config.event) as message|null, MAX_BOOK_MESSAGE_LEN, extra = 0)
 	if(isnull(input))
-		return
-	if(input == "")
 		config.event = ""
 		log_admin("[usr.key] has cleared the event text.")
 		message_admins("[key_name_admin(usr)] has cleared the event text.")

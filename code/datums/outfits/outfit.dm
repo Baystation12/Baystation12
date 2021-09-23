@@ -69,7 +69,7 @@ var/list/outfits_decls_by_type_
 
 /decl/hierarchy/outfit/proc/post_equip(mob/living/carbon/human/H)
 	if(flags & OUTFIT_HAS_JETPACK)
-		var/obj/item/weapon/tank/jetpack/J = locate(/obj/item/weapon/tank/jetpack) in H
+		var/obj/item/tank/jetpack/J = locate(/obj/item/tank/jetpack) in H
 		if(!J)
 			return
 		J.toggle()
@@ -109,7 +109,7 @@ var/list/outfits_decls_by_type_
 	assignment = id_pda_assignment || assignment || rank
 	var/list/id_cards = equip_ids(H, rank, assignment, equip_adjustments)
 	if(length(id_cards))
-		var/obj/item/weapon/card/id/W = id_cards[1]
+		var/obj/item/card/id/W = id_cards[1]
 		rank = W.rank
 		assignment = W.assignment
 	equip_pda(H, rank, assignment, equip_adjustments)
@@ -135,10 +135,11 @@ var/list/outfits_decls_by_type_
 	if(uniform)
 		H.equip_to_slot_or_del(new uniform(H),slot_w_uniform)
 	if(holster && H.w_uniform)
-		var/obj/item/clothing/accessory/equip_holster = new holster
-		H.w_uniform.attackby(H, equip_holster)
-		if(equip_holster.loc != H.w_uniform)
-			qdel(equip_holster)
+		var/obj/item/clothing/w_uniform = H.w_uniform
+		if (istype(w_uniform))
+			var/obj/item/clothing/accessory/equip_holster = new holster
+			if (!w_uniform.attempt_attach_accessory(equip_holster, H))
+				qdel(equip_holster)
 	if(suit)
 		H.equip_to_slot_or_del(new suit(H),slot_wear_suit)
 	if(back)
@@ -205,7 +206,7 @@ var/list/outfits_decls_by_type_
 		return
 	var/created_cards = list()
 	for(var/id_type in id_types)
-		var/obj/item/weapon/card/id/W = new id_type(H)
+		var/obj/item/card/id/W = new id_type(H)
 		if(id_desc)
 			W.desc = id_desc
 		if(rank)

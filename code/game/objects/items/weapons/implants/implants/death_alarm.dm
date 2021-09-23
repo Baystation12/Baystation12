@@ -1,11 +1,11 @@
-/obj/item/weapon/implant/death_alarm
+/obj/item/implant/death_alarm
 	name = "death alarm implant"
 	desc = "An alarm which monitors host vital signs and transmits a radio message upon death."
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 2, TECH_DATA = 1)
 	known = 1
 	var/mobname = "John Doe"
 
-/obj/item/weapon/implant/death_alarm/get_data()
+/obj/item/implant/death_alarm/get_data()
 	return {"
 	<b>Implant Specifications:</b><BR>
 	<b>Name:</b> [GLOB.using_map.company_name] \"Profit Margin\" Class Employee Lifesign Sensor<BR>
@@ -17,10 +17,10 @@
 	<b>Special Features:</b> Alerts crew to crewmember death.<BR>
 	<b>Integrity:</b> Implant will occasionally be degraded by the body's immune system and thus will occasionally malfunction."}
 
-/obj/item/weapon/implant/death_alarm/islegal()
+/obj/item/implant/death_alarm/islegal()
 	return TRUE
 
-/obj/item/weapon/implant/death_alarm/Process()
+/obj/item/implant/death_alarm/Process()
 	if (!implanted) return
 	var/mob/M = imp_in
 
@@ -29,7 +29,7 @@
 	else if(M.stat == DEAD)
 		activate("death")
 
-/obj/item/weapon/implant/death_alarm/activate(var/cause = "emp")
+/obj/item/implant/death_alarm/activate(var/cause = "emp")
 	if(malfunction) return
 	var/mob/M = imp_in
 	var/area/t = get_area(M)
@@ -47,29 +47,29 @@
 	for(var/channel in list("Security", "Medical", "Command"))
 		GLOB.global_headset.autosay(death_message, "[mobname]'s Death Alarm", channel)
 
-/obj/item/weapon/implant/death_alarm/disable()
+/obj/item/implant/death_alarm/disable()
 	. = ..()
 	if(.)
 		STOP_PROCESSING(SSobj, src)
 
-/obj/item/weapon/implant/death_alarm/restore()
+/obj/item/implant/death_alarm/restore()
 	. = ..()
 	if(.)
 		START_PROCESSING(SSobj, src)
 
-/obj/item/weapon/implant/death_alarm/meltdown()
+/obj/item/implant/death_alarm/meltdown()
 	. = ..()
 	STOP_PROCESSING(SSobj, src)
 
-/obj/item/weapon/implant/death_alarm/implanted(mob/source as mob)
+/obj/item/implant/death_alarm/implanted(mob/source as mob)
 	mobname = source.real_name
 	START_PROCESSING(SSobj, src)
 	return TRUE
 
-/obj/item/weapon/implant/death_alarm/removed()
+/obj/item/implant/death_alarm/removed()
 	..()
 	STOP_PROCESSING(SSobj, src)
 
-/obj/item/weapon/implantcase/death_alarm
+/obj/item/implantcase/death_alarm
 	name = "glass case - 'death alarm'"
-	imp = /obj/item/weapon/implant/death_alarm
+	imp = /obj/item/implant/death_alarm

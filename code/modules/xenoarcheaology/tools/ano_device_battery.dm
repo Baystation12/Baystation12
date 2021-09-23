@@ -1,4 +1,4 @@
-/obj/item/weapon/anobattery
+/obj/item/anobattery
 	name = "Anomaly power battery"
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "anobattery0"
@@ -7,15 +7,15 @@
 	var/stored_charge = 0
 	var/effect_id = ""
 
-/obj/item/weapon/anobattery/proc/UpdateSprite()
+/obj/item/anobattery/proc/UpdateSprite()
 	var/p = (stored_charge/capacity)*100
 	p = min(p, 100)
 	icon_state = "anobattery[round(p,25)]"
 
-/obj/item/weapon/anobattery/proc/use_power(var/amount)
+/obj/item/anobattery/proc/use_power(var/amount)
 	stored_charge = max(0, stored_charge - amount)
 
-/obj/item/weapon/anodevice
+/obj/item/anodevice
 	name = "Anomaly power utilizer"
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "anodev"
@@ -25,16 +25,16 @@
 	var/time_end = 0
 	var/last_activation = 0
 	var/last_process = 0
-	var/obj/item/weapon/anobattery/inserted_battery
+	var/obj/item/anobattery/inserted_battery
 	var/turf/archived_loc
 	var/energy_consumed_on_touch = 100
 
-/obj/item/weapon/anodevice/Initialize()
+/obj/item/anodevice/Initialize()
 	. = ..()
 	START_PROCESSING(SSobj, src)
 
-/obj/item/weapon/anodevice/attackby(var/obj/I as obj, var/mob/user as mob)
-	if(istype(I, /obj/item/weapon/anobattery))
+/obj/item/anodevice/attackby(var/obj/I as obj, var/mob/user as mob)
+	if(istype(I, /obj/item/anobattery))
 		if(!inserted_battery)
 			if(!user.unEquip(I, src))
 				return
@@ -44,10 +44,10 @@
 	else
 		return ..()
 
-/obj/item/weapon/anodevice/attack_self(var/mob/user as mob)
+/obj/item/anodevice/attack_self(var/mob/user as mob)
 	return src.interact(user)
 
-/obj/item/weapon/anodevice/interact(var/mob/user)
+/obj/item/anodevice/interact(var/mob/user)
 	var/dat = "<b>Anomalous Materials Energy Utiliser</b><br>"
 	if(inserted_battery)
 		if(activated)
@@ -70,12 +70,16 @@
 		dat += "Please insert battery<br>"
 
 	dat += "<hr>"
-	dat += "<a href='?src=\ref[src];refresh=1'>Refresh</a> <a href='?src=\ref[src];close=1'>Close</a>"
+	dat += "<a href='?src=\ref[src];close=1'>Close</a>"
 
-	show_browser(user, dat, "window=anodevice;size=400x500")
+	var/datum/browser/popup = new(user, "anodevice", "Anomaly Power Utilizer", 400, 500)
+	popup.set_content(dat)
+	popup.open()
+	user.set_machine(src)
 	onclose(user, "anodevice")
 
-/obj/item/weapon/anodevice/Process()
+/obj/item/anodevice/Process()
+	updateSelfDialog()
 	if(activated)
 		if(inserted_battery && inserted_battery.battery_effect && (inserted_battery.stored_charge > 0) )
 			//make sure the effect is active
@@ -137,7 +141,7 @@
 			shutdown_emission()
 		last_process = world.time
 
-/obj/item/weapon/anodevice/proc/shutdown_emission()
+/obj/item/anodevice/proc/shutdown_emission()
 	if(activated)
 		activated = 0
 		if(inserted_battery.battery_effect.activated)
@@ -145,10 +149,10 @@
 		if(inserted_battery.stored_charge <= 0)
 			inserted_battery.battery_effect = null
 
-/obj/item/weapon/anodevice/Topic(user, href_list, state = GLOB.inventory_state)
+/obj/item/anodevice/Topic(user, href_list, state = GLOB.inventory_state)
 	..()
 
-/obj/item/weapon/anodevice/OnTopic(user, href_list)
+/obj/item/anodevice/OnTopic(user, href_list)
 	if(href_list["changetime"])
 		var/timedif = text2num(href_list["changetime"])
 		if(href_list["duration"])
@@ -187,7 +191,7 @@
 	if(. == TOPIC_REFRESH)
 		interact(user)
 
-/obj/item/weapon/anodevice/proc/UpdateSprite()
+/obj/item/anodevice/proc/UpdateSprite()
 	if(!inserted_battery)
 		icon_state = "anodev"
 		return
@@ -195,11 +199,11 @@
 	p = min(p, 100)
 	icon_state = "anodev[round(p,25)]"
 
-/obj/item/weapon/anodevice/Destroy()
+/obj/item/anodevice/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	..()
 
-/obj/item/weapon/anodevice/attack(mob/living/M as mob, mob/living/user as mob, def_zone)
+/obj/item/anodevice/attack(mob/living/M as mob, mob/living/user as mob, def_zone)
 	if (!istype(M))
 		return
 

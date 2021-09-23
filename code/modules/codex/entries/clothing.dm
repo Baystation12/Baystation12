@@ -78,7 +78,3 @@
 /obj/item/clothing/suit/armor/pcarrier/get_mechanics_info()
 	. = ..()
 	. += "<br>Its protection is provided by the plate inside, examine it for details on armor.<br>"
-
-/datum/codex_entry/pickpocket_gloves
-	associated_paths = list(/obj/item/clothing/gloves/thick/duty/pickpocket)
-	antag_text = "Through the use of synthetic fiber muscles, these gloves allow their wearer to easily and silently take small items from others pockets, hands, ears, or suit storage, or adjust their suit sensors."

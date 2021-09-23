@@ -145,6 +145,7 @@
 		if(talker.stat)
 			continue
 		var/message
+		var/display_name = talker.fake_name ? talker.fake_name : talker.real_name
 		if(prob(80))
 			var/list/names = list()
 			var/lastname = copytext(holder.real_name, findtext(holder.real_name, " ")+1)
@@ -158,10 +159,10 @@
 			if(holder.hallucination_power > 50)
 				phrases += list("What did you come here for[add]?","Don't touch me[add].","You're not getting out of here[add].", "You are a failure, [pick(names)].","Just kill yourself already, [pick(names)]")
 			message = pick(phrases)
-			to_chat(holder,"<span class='game say'><span class='name'>[talker.name]</span> [holder.say_quote(message)], <span class='message'><span class='body'>\"[message]\"</span></span></span>")
+			to_chat(holder,"<span class='game say'><span class='name'>[display_name]</span> [holder.say_quote(message)], <span class='message'><span class='body'>\"[message]\"</span></span></span>")
 		else
-			to_chat(holder,"<B>[talker.name]</B> points at [holder.name]")
-			to_chat(holder,"<span class='game say'><span class='name'>[talker.name]</span> says something softly.</span>")
+			to_chat(holder,"<B>[display_name]</B> points at [holder.name]")
+			to_chat(holder,"<span class='game say'><span class='name'>[display_name]</span> says something softly.</span>")
 		var/image/speech_bubble = image('icons/mob/talk.dmi',talker,"h[holder.say_test(message)]")
 		spawn(30) qdel(speech_bubble)
 		image_to(holder,speech_bubble)

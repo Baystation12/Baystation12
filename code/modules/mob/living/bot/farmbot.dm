@@ -92,7 +92,7 @@
 		if(user)
 			to_chat(user, "<span class='notice'>You short out [src]'s plant identifier circuits.</span>")
 			ignore_list |= user
-		emagged = 2
+		emagged = TRUE
 		return 1
 
 /mob/living/bot/farmbot/update_icons()
@@ -228,8 +228,8 @@
 	visible_message("<span class='danger'>[src] blows apart!</span>")
 	var/turf/Tsec = get_turf(src)
 
-	new /obj/item/weapon/material/minihoe(Tsec)
-	new /obj/item/weapon/reagent_containers/glass/bucket(Tsec)
+	new /obj/item/material/minihoe(Tsec)
+	new /obj/item/reagent_containers/glass/bucket(Tsec)
 	new /obj/item/device/assembly/prox_sensor(Tsec)
 	new /obj/item/device/scanner/plant(Tsec)
 

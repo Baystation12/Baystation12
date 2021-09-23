@@ -4,7 +4,7 @@
 	desc = "A thin platform with negatively-magnetized wheels."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "target_stake"
-	density = 1
+	density = TRUE
 	w_class = ITEM_SIZE_NO_CONTAINER
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	var/obj/item/target/pinned_target

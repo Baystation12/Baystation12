@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 /// Food.
 ////////////////////////////////////////////////////////////////////////////////
-/obj/item/weapon/reagent_containers/food
+/obj/item/reagent_containers/food
 	randpixel = 6
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	possible_transfer_amounts = null
@@ -9,7 +9,7 @@
 	var/filling_color = "#ffffff" //Used by sandwiches.
 	var/trash = null
 
-/obj/item/weapon/reagent_containers/food/on_color_transfer_reagent_change()
+/obj/item/reagent_containers/food/on_color_transfer_reagent_change()
 	for(var/datum/reagent/R in reagents.reagent_list)
 		if (!R.color_foods)
 			continue

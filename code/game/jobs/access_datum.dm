@@ -253,7 +253,13 @@
 /var/const/access_network = "ACCESS_NETWORK" //42
 /datum/access/network
 	id = access_network
-	desc = "Primary Network"
+	desc = "Network Operations"
+	region = ACCESS_REGION_RESEARCH
+
+/var/const/access_network_admin = "ACCESS_NETWORK_ADMIN"
+/datum/access/network_admin
+	id = access_network_admin
+	desc = "Network Administration"
 	region = ACCESS_REGION_RESEARCH
 
 /var/const/access_surgery = "ACCESS_SURGERY" //45
@@ -461,11 +467,4 @@
 /datum/access/merchant
 	id = access_merchant
 	desc = "Merchant"
-	access_type = ACCESS_TYPE_NONE
-
-// Ascent access.
-/var/const/access_ascent = "ACCESS_ASCENT"
-/datum/access/ascent
-	id = access_ascent
-	desc = "Ascent Materiel"
 	access_type = ACCESS_TYPE_NONE

@@ -12,7 +12,7 @@
 		qdel(src)
 
 
-/obj/item/weapon/storage/box/bodybags
+/obj/item/storage/box/bodybags
 	name = "body bags"
 	desc = "This box contains body bags."
 	icon_state = "bodybags"
@@ -35,13 +35,13 @@
 	open_sound = 'sound/items/zip.ogg'
 	close_sound = 'sound/items/zip.ogg'
 	var/item_path = /obj/item/bodybag
-	density = 0
+	density = FALSE
 	storage_capacity = (MOB_MEDIUM * 2) - 1
 	var/contains_body = 0
 	var/has_label = FALSE
 
 /obj/structure/closet/body_bag/attackby(var/obj/item/W, mob/user as mob)
-	if (istype(W, /obj/item/weapon/pen))
+	if (istype(W, /obj/item/pen))
 		var/t = input(user, "What would you like the label to be?", text("[]", src.name), null)  as text
 		if (user.get_active_hand() != W)
 			return
@@ -102,7 +102,7 @@
 
 /obj/structure/closet/body_bag/MouseDrop(over_object, src_location, over_location)
 	..()
-	if((over_object == usr && (in_range(src, usr) || usr.contents.Find(src))))
+	if((over_object == usr && (in_range(src, usr) || list_find(usr.contents, src))))
 		fold(usr)
 
 /obj/item/robot_rack/body_bag

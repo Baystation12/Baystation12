@@ -72,7 +72,7 @@
 
 		var/obj/structure/disposalpipe/last
 
-		if(hasmob && prob(3))
+		if(hasmob && prob(10))
 			for(var/mob/living/H in check_mob(src))
 				H.apply_damage(30, BRUTE, null, DAM_DISPERSED, "Blunt Trauma", ARMOR_MELEE_MAJOR)//horribly maim any living creature jumping down disposals.  c'est la vie
 

@@ -1,4 +1,4 @@
-/obj/item/weapon/pickaxe/xeno
+/obj/item/pickaxe/xeno
 	name = "master xenoarch pickaxe"
 	desc = "A miniature excavation tool for precise digging."
 	icon = 'icons/obj/xenoarchaeology.dmi'
@@ -13,11 +13,11 @@
 	excavation_amount = 0
 	sharp = TRUE
 
-/obj/item/weapon/pickaxe/xeno/examine(mob/user)
+/obj/item/pickaxe/xeno/examine(mob/user)
 	. = ..()
 	to_chat(user, "This tool has a [excavation_amount] centimetre excavation depth.")
 
-/obj/item/weapon/pickaxe/xeno/brush
+/obj/item/pickaxe/xeno/brush
 	name = "wire brush"
 	icon_state = "pick_brush"
 	slot_flags = SLOT_EARS
@@ -29,42 +29,42 @@
 	drill_verb = "brushing"
 	sharp = FALSE
 
-/obj/item/weapon/pickaxe/xeno/one_pick
+/obj/item/pickaxe/xeno/one_pick
 	name = "2cm pick"
 	icon_state = "pick1"
 	excavation_amount = 2
 	drill_sound = 'sound/items/Screwdriver.ogg'
 
-/obj/item/weapon/pickaxe/xeno/two_pick
+/obj/item/pickaxe/xeno/two_pick
 	name = "4cm pick"
 	icon_state = "pick2"
 	excavation_amount = 4
 	drill_sound = 'sound/items/Screwdriver.ogg'
 
-/obj/item/weapon/pickaxe/xeno/three_pick
+/obj/item/pickaxe/xeno/three_pick
 	name = "6cm pick"
 	icon_state = "pick3"
 	excavation_amount = 6
 	drill_sound = 'sound/items/Screwdriver.ogg'
 
-/obj/item/weapon/pickaxe/xeno/four_pick
+/obj/item/pickaxe/xeno/four_pick
 	name = "8cm pick"
 	icon_state = "pick4"
 	excavation_amount = 8
 	drill_sound = 'sound/items/Screwdriver.ogg'
 
-/obj/item/weapon/pickaxe/xeno/five_pick
+/obj/item/pickaxe/xeno/five_pick
 	name = "10cm pick"
 	icon_state = "pick5"
 	excavation_amount = 10
 	drill_sound = 'sound/items/Screwdriver.ogg'
 
-/obj/item/weapon/pickaxe/xeno/six_pick
+/obj/item/pickaxe/xeno/six_pick
 	name = "12cm pick"
 	icon_state = "pick6"
 	excavation_amount = 12
 
-/obj/item/weapon/pickaxe/xeno/hand
+/obj/item/pickaxe/xeno/hand
 	name = "hand pickaxe"
 	icon_state = "pick_hand"
 	item_state = "sword0"
@@ -81,7 +81,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Pack for holding pickaxes
 
-/obj/item/weapon/storage/excavation
+/obj/item/storage/excavation
 	name = "excavation pick set"
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "excavation"
@@ -91,37 +91,37 @@
 	storage_slots = 7
 	slot_flags = SLOT_BELT
 	w_class = ITEM_SIZE_NORMAL
-	can_hold = list(/obj/item/weapon/pickaxe/xeno)
+	can_hold = list(/obj/item/pickaxe/xeno)
 	max_storage_space = 18
 	max_w_class = ITEM_SIZE_NORMAL
 	use_to_pickup = 1
 	startswith = list(
-		/obj/item/weapon/pickaxe/xeno/brush,
-		/obj/item/weapon/pickaxe/xeno/one_pick,
-		/obj/item/weapon/pickaxe/xeno/two_pick,
-		/obj/item/weapon/pickaxe/xeno/three_pick,
-		/obj/item/weapon/pickaxe/xeno/four_pick,
-		/obj/item/weapon/pickaxe/xeno/five_pick,
-		/obj/item/weapon/pickaxe/xeno/six_pick)
+		/obj/item/pickaxe/xeno/brush,
+		/obj/item/pickaxe/xeno/one_pick,
+		/obj/item/pickaxe/xeno/two_pick,
+		/obj/item/pickaxe/xeno/three_pick,
+		/obj/item/pickaxe/xeno/four_pick,
+		/obj/item/pickaxe/xeno/five_pick,
+		/obj/item/pickaxe/xeno/six_pick)
 
-/obj/item/weapon/storage/excavation/handle_item_insertion()
+/obj/item/storage/excavation/handle_item_insertion()
 	..()
 	sort_picks()
 
-/obj/item/weapon/storage/excavation/proc/sort_picks()
-	var/list/obj/item/weapon/pickaxe/xeno/picksToSort = list()
-	for(var/obj/item/weapon/pickaxe/xeno/P in src)
+/obj/item/storage/excavation/proc/sort_picks()
+	var/list/obj/item/pickaxe/xeno/picksToSort = list()
+	for(var/obj/item/pickaxe/xeno/P in src)
 		picksToSort += P
 		P.loc = null
 	while(picksToSort.len)
 		var/min = 200 // No pick is bigger than 200
 		var/selected = 0
 		for(var/i = 1 to picksToSort.len)
-			var/obj/item/weapon/pickaxe/xeno/current = picksToSort[i]
+			var/obj/item/pickaxe/xeno/current = picksToSort[i]
 			if(current.excavation_amount <= min)
 				selected = i
 				min = current.excavation_amount
-		var/obj/item/weapon/pickaxe/xeno/smallest = picksToSort[selected]
+		var/obj/item/pickaxe/xeno/smallest = picksToSort[selected]
 		smallest.loc = src
 		picksToSort -= smallest
 	prepare_ui()

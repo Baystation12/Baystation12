@@ -47,13 +47,13 @@
 /proc/create_aura_image(var/newloc)
 	var/image/aura_image = image(loc = newloc, icon = 'icons/effects/psi_aura_small.dmi', icon_state = "aura")
 	aura_image.blend_mode = BLEND_MULTIPLY
-	aura_image.appearance_flags = NO_CLIENT_COLOR | RESET_COLOR | RESET_ALPHA | RESET_TRANSFORM
+	aura_image.appearance_flags = DEFAULT_APPEARANCE_FLAGS | NO_CLIENT_COLOR | RESET_COLOR | RESET_ALPHA | RESET_TRANSFORM
 	aura_image.layer = TURF_LAYER + 0.5
 	aura_image.alpha = 0
 	aura_image.pixel_x = -64
 	aura_image.pixel_y = -64
 	aura_image.mouse_opacity = 0
-	aura_image.appearance_flags = 0
+	aura_image.appearance_flags = DEFAULT_APPEARANCE_FLAGS
 	for(var/thing in SSpsi.processing)
 		var/datum/psi_complexus/psychic = thing
 		if(psychic.owner.client && !psychic.suppressed)

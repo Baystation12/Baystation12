@@ -7,7 +7,7 @@
 	program_menu_icon = "radio-on"
 	extended_desc = "This program connects to shield generators and monitors their statuses."
 	ui_header = "shield.gif"
-	requires_ntnet = 1
+	requires_ntnet = TRUE
 	network_destination = "shields monitoring system"
 	size = 10
 	category = PROG_ENG

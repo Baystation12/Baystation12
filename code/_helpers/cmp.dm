@@ -59,7 +59,7 @@
 		. = B.qdels - A.qdels
 
 /proc/cmp_ruincost_priority(datum/map_template/ruin/A, datum/map_template/ruin/B)
-	return initial(A.cost) - initial(B.cost)
+	return initial(A.spawn_cost) - initial(B.spawn_cost)
 
 /proc/cmp_timer(datum/timedevent/a, datum/timedevent/b)
 	return a.timeToRun - b.timeToRun
@@ -67,7 +67,7 @@
 /proc/cmp_clientcolor_priority(datum/client_color/A, datum/client_color/B)
 	return B.priority - A.priority
 
-/proc/cmp_power_component_priority(obj/item/weapon/stock_parts/power/A, obj/item/weapon/stock_parts/power/B)
+/proc/cmp_power_component_priority(obj/item/stock_parts/power/A, obj/item/stock_parts/power/B)
 	return B.priority - A.priority
 
 /proc/cmp_fusion_reaction_asc(var/decl/fusion_reaction/A, var/decl/fusion_reaction/B)
@@ -96,3 +96,6 @@
 		return 1
 
 	return sorttext(B.key, A.key)
+
+/proc/cmp_marking_order(list/A, list/B)
+	return A[1] - B[1][1]

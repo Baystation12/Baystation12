@@ -22,7 +22,7 @@
 	id = "awaysite_slavers"
 	description = "Asteroid with slavers base inside."
 	suffixes = list("slavers/slavers_base.dmm")
-	cost = 1
+	spawn_cost = 1
 	generate_mining_by_z = 1
 	area_usage_test_exempted_root_areas = list(/area/slavers_base)
 	apc_test_exempt_areas = list(
@@ -139,26 +139,24 @@
 	icon_state = "extremist"
 	icon_living = "extremist"
 	icon_dead = "extremist_dead"
-	speak_chance = 0
 	turns_per_move = 5
 	response_help = "pushes"
 	response_disarm = "shoves"
 	response_harm = "hits"
 	speed = 4
-	stop_automated_movement_when_pulled = 0
 	maxHealth = 100
 	health = 100
-	harm_intent_damage = 5
-	melee_damage_lower = 10
-	melee_damage_upper = 30
+	natural_weapon = /obj/item/natural_weapon/punch
 	can_escape = TRUE
 	unsuitable_atmos_damage = 15
 	var/corpse = /obj/effect/landmark/corpse/abolitionist
-	var/weapon = /obj/item/weapon/gun/energy/laser
+	var/weapon = /obj/item/gun/energy/laser
 	projectilesound = 'sound/weapons/laser.ogg'
 	ranged = 1
 	projectiletype = /obj/item/projectile/beam
 	faction = "extremist abolitionists"
+
+	ai_holder_type = /datum/ai_holder/simple_animal/ranged
 
 /mob/living/simple_animal/hostile/abolition_extremist/death(gibbed, deathmessage, show_dead_message)
 	. = ..(gibbed, deathmessage, show_dead_message)

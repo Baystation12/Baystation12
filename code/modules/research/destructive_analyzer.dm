@@ -10,16 +10,19 @@ Note: Must be placed within 3 tiles of the R&D Console
 	name = "destructive analyzer"
 	desc = "Accessed by a connected core fabricator console, it destroys and analyzes items and materials, recycling materials to any connected protolathe, and progressing the learning matrix of the connected core fabricator console."
 	icon_state = "d_analyzer"
-	var/obj/item/weapon/loaded_item = null
+	var/obj/item/loaded_item = null
 	var/decon_mod = 0
 
 	idle_power_usage = 30
 	active_power_usage = 2500
 	construct_state = /decl/machine_construction/default/panel_closed
+	
+	machine_name = "destructive analyzer"
+	machine_desc = "Breaks down objects into their component parts, gaining new information in the process. Part of an R&D network."
 
 /obj/machinery/r_n_d/destructive_analyzer/RefreshParts()
 	var/T = 0
-	for(var/obj/item/weapon/stock_parts/S in src)
+	for(var/obj/item/stock_parts/S in src)
 		T += S.rating
 	decon_mod = min(T * 0.1, 3)
 	..()

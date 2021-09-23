@@ -212,7 +212,7 @@ function run_code_tests {
     run_test "check color hex" "python3 tools/ColorHexChecker/color-hex-checker.py ."
     run_test "check punctuation" "python3 tools/PunctuationChecker/punctuation-checker.py ."
     run_test "check icon state limit" "python3 tools/dmitool/check_icon_state_limit.py ."
-    run_test_ci "check changelog builds" "python3 tools/GenerateChangelog/ss13_genchangelog.py html/changelog.html html/changelogs"
+    run_test_ci "check changelog builds" "python3 tools/changelog/ss13_genchangelog.py html/changelog.html html/changelogs"
 }
 
 function run_byond_tests {
@@ -229,7 +229,7 @@ function run_byond_tests {
         source $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}/byond/bin/byondsetup
     fi
     run_test_ci "check globals build" "python3 tools/GenerateGlobalVarAccess/gen_globals.py baystation12.dme code/_helpers/global_access.dm"
-    run_test "check globals unchanged" "md5sum -c - <<< '65e4360adeca74a1bd871b9d2a378c8b *code/_helpers/global_access.dm'"
+    run_test "check globals unchanged" "md5sum -c - <<< '71a518e374f7d7f56aeb71ea7b302343 *code/_helpers/global_access.dm'"
     run_test "build map unit tests" "scripts/dm.sh -DUNIT_TEST -M$MAP_PATH baystation12.dme"
     run_test "check no warnings in build" "grep ', 0 warnings' build_log.txt"
     run_test "run unit tests" "DreamDaemon baystation12.dmb -invisible -trusted -core 2>&1 | tee log.txt"

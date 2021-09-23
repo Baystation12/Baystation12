@@ -23,7 +23,7 @@
 		"switch mode" = IC_PINTYPE_PULSE_IN
 
 	)
-	var/obj/item/weapon/gun/energy/installed_gun = null
+	var/obj/item/gun/energy/installed_gun = null
 	spawn_flags = IC_SPAWN_RESEARCH
 	action_flags = IC_ACTION_COMBAT
 	power_draw_per_use = 30
@@ -35,8 +35,8 @@
 	return ..()
 
 /obj/item/integrated_circuit/manipulation/weapon_firing/attackby(var/obj/O, var/mob/user)
-	if(istype(O, /obj/item/weapon/gun/energy))
-		var/obj/item/weapon/gun/energy/gun = O
+	if(istype(O, /obj/item/gun/energy))
+		var/obj/item/gun/energy/gun = O
 		if(installed_gun)
 			to_chat(user, "<span class='warning'>There's already a weapon installed.</span>")
 			return
@@ -165,7 +165,7 @@
 	activators = list("prime grenade" = IC_PINTYPE_PULSE_IN)
 	spawn_flags = IC_SPAWN_RESEARCH
 	action_flags = IC_ACTION_COMBAT
-	var/obj/item/weapon/grenade/attached_grenade
+	var/obj/item/grenade/attached_grenade
 	var/pre_attached_grenade_type
 
 /obj/item/integrated_circuit/manipulation/grenade/Initialize()
@@ -180,7 +180,7 @@
 	detach_grenade()
 	return ..()
 
-/obj/item/integrated_circuit/manipulation/grenade/attackby(var/obj/item/weapon/grenade/G, var/mob/user)
+/obj/item/integrated_circuit/manipulation/grenade/attackby(var/obj/item/grenade/G, var/mob/user)
 	if(istype(G))
 		if(attached_grenade)
 			to_chat(user, "<span class='warning'>There is already a grenade attached!</span>")
@@ -207,12 +207,12 @@
 			dt = Clamp(detonation_time.data, 1, 12)*10
 		else
 			dt = 15
-		addtimer(CALLBACK(attached_grenade, /obj/item/weapon/grenade.proc/activate), dt)
+		addtimer(CALLBACK(attached_grenade, /obj/item/grenade.proc/activate), dt)
 		var/atom/holder = loc
 		log_and_message_admins("activated a grenade assembly. Last touches: Assembly: [holder.fingerprintslast] Circuit: [fingerprintslast] Grenade: [attached_grenade.fingerprintslast]")
 
 // These procs do not relocate the grenade, that's the callers responsibility
-/obj/item/integrated_circuit/manipulation/grenade/proc/attach_grenade(var/obj/item/weapon/grenade/G)
+/obj/item/integrated_circuit/manipulation/grenade/proc/attach_grenade(var/obj/item/grenade/G)
 	attached_grenade = G
 	G.forceMove(src)
 	desc += " \An [attached_grenade] is attached to it!"
@@ -312,7 +312,7 @@
 
 /obj/item/integrated_circuit/manipulation/seed_extractor/do_work()
 	..()
-	var/obj/item/weapon/reagent_containers/food/snacks/grown/O = get_pin_data_as_type(IC_INPUT, 1, /obj/item/weapon/reagent_containers/food/snacks/grown)
+	var/obj/item/reagent_containers/food/snacks/grown/O = get_pin_data_as_type(IC_INPUT, 1, /obj/item/reagent_containers/food/snacks/grown)
 	if(!check_target(O))
 		push_data()
 		activate_pin(2)
@@ -351,7 +351,7 @@
 	var/atom/movable/acting_object = get_object()
 	var/turf/T = get_turf(acting_object)
 	var/obj/item/AM = get_pin_data_as_type(IC_INPUT, 1, /obj/item)
-	if(!QDELETED(AM) && !istype(AM, /obj/item/device/electronic_assembly) && !istype(AM, /obj/item/device/transfer_valve) && !istype(AM, /obj/item/weapon/material/twohanded) && !istype(assembly.loc, /obj/item/weapon/implant))
+	if(!QDELETED(AM) && !istype(AM, /obj/item/device/electronic_assembly) && !istype(AM, /obj/item/device/transfer_valve) && !istype(AM, /obj/item/material/twohanded) && !istype(assembly.loc, /obj/item/implant))
 		var/mode = get_pin_data(IC_INPUT, 2)
 		if(mode == 1)
 			if(check_target(AM))
@@ -495,10 +495,10 @@
 	var/target_y_rel = round(get_pin_data(IC_INPUT, 2))
 	var/obj/item/A = get_pin_data_as_type(IC_INPUT, 3, /obj/item)
 
-	if(!A || A.anchored || A.throwing || A == assembly || istype(A, /obj/item/weapon/material/twohanded) || istype(A, /obj/item/device/transfer_valve))
+	if(!A || A.anchored || A.throwing || A == assembly || istype(A, /obj/item/material/twohanded) || istype(A, /obj/item/device/transfer_valve))
 		return
 
-	if (istype(assembly.loc, /obj/item/weapon/implant/compressed)) //Prevents the more abusive form of chestgun.
+	if (istype(assembly.loc, /obj/item/implant/compressed)) //Prevents the more abusive form of chestgun.
 		return
 
 	if(A.w_class > assembly.w_class)
@@ -558,32 +558,32 @@
 	matter = list(MATERIAL_STEEL = 10000, MATERIAL_SILVER = 2000, MATERIAL_GOLD = 200)
 
 /obj/item/integrated_circuit/manipulation/bluespace_rift/do_work()
-	var/obj/machinery/computer/teleporter/tporter = get_pin_data_as_type(IC_INPUT, 1, /obj/machinery/computer/teleporter)
-	var/step_dir = get_pin_data(IC_INPUT, 2)
+	var/obj/machinery/computer/teleporter/computer = get_pin_data_as_type(IC_INPUT, 1, /obj/machinery/computer/teleporter)
+	if (computer && !AreConnectedZLevels(get_z(src), get_z(computer)))
+		computer = null
 
-	if(!AreConnectedZLevels(get_z(src), get_z(tporter)))
-		tporter = null
-
-	var/turf/rift_location = get_turf(src)
-	if(!rift_location || !isPlayerLevel(rift_location.z))
+	var/turf/depart = get_turf(src)
+	if (!depart || !isPlayerLevel(depart.z))
 		playsound(src, 'sound/effects/sparks2.ogg', 50, 1)
 		return
 
-	if(isnum(step_dir) && (!step_dir || (step_dir in GLOB.cardinal)))
-		rift_location = get_step(rift_location, step_dir) || rift_location
+	var/turf/arrive
+	if (computer?.target && computer.operable())
+		arrive = get_turf(computer.target)
 	else
-		var/obj/item/device/electronic_assembly/assembly = get_object()
-		if(assembly)
-			rift_location = get_step(rift_location, assembly.dir) || rift_location
+		arrive = get_random_turf_in_range(src, 10)
+	if (!arrive || !isPlayerLevel(arrive.z))
+		playsound(src, 'sound/effects/sparks2.ogg', 50, 1)
+		return
 
-	if(tporter && tporter.locked && !tporter.one_time_use && tporter.operable())
-		new /obj/effect/portal(rift_location, get_turf(tporter.locked))
-	else
-		var/turf/destination = get_random_turf_in_range(src, 10)
-		if(destination)
-			new /obj/effect/portal(rift_location, destination, 30 SECONDS, 33)
-		else
-			playsound(src, 'sound/effects/sparks2.ogg', 50, 1)
+	var/step_dir = get_pin_data(IC_INPUT, 2)
+	if (!isnum(step_dir) || !(step_dir in GLOB.cardinal))
+		var/obj/item/device/electronic_assembly/assembly = get_object()
+		step_dir = assembly.dir
+	depart = get_step(depart, step_dir) || depart
+
+	new /obj/effect/portal(depart, arrive, 30 SECONDS, 33)
+	playsound(src, 'sound/effects/sparks2.ogg', 50, 1)
 
 
 /obj/item/integrated_circuit/manipulation/ai
@@ -645,13 +645,20 @@
 	controlling = null
 
 
-/obj/item/integrated_circuit/manipulation/ai/attackby(var/obj/item/I, var/mob/user)
-	if(is_type_in_list(I, list(/obj/item/weapon/aicard, /obj/item/device/paicard, /obj/item/device/mmi)))
+/obj/item/integrated_circuit/manipulation/ai/attackby(obj/item/I, mob/user)
+	if(is_type_in_list(I, list(/obj/item/aicard, /obj/item/device/paicard, /obj/item/device/mmi)))
 		load_ai(user, I)
 	else return ..()
 
 /obj/item/integrated_circuit/manipulation/ai/attack_self(user)
 	unload_ai()
+
+/obj/item/integrated_circuit/manipulation/ai/contents_nano_distance(src_object, mob/living/user)
+	if(istype(src_object, /obj/item/device/electronic_assembly))
+		var/obj/item/device/electronic_assembly/assembly = src_object
+		if(src in assembly.assembly_components)
+			return STATUS_INTERACTIVE
+	return ..()
 
 /obj/item/integrated_circuit/manipulation/ai/Destroy()
 	unload_ai()

@@ -54,7 +54,7 @@
 	if(reference == node)
 		network = new_network
 
-	if(new_network.normal_members.Find(src))
+	if(list_find(new_network.normal_members, src))
 		return 0
 
 	new_network.normal_members += src
@@ -130,7 +130,7 @@
 	return null
 
 
-/obj/machinery/atmospherics/portables_connector/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
+/obj/machinery/atmospherics/portables_connector/attackby(var/obj/item/W as obj, var/mob/user as mob)
 	if(!isWrench(W))
 		return ..()
 	if (connected_device)

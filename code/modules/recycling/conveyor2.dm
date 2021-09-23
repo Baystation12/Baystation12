@@ -7,7 +7,7 @@
 	name = "conveyor belt"
 	desc = "A conveyor belt."
 	layer = BELOW_OBJ_LAYER	// so they appear under stuff
-	anchored = 1
+	anchored = TRUE
 
 	var/operating = 0	// 1 if running forward, -1 if backwards, 0 if off
 	var/operable = 1	// true if can operate (no broken segments in this belt run)
@@ -15,7 +15,6 @@
 	var/backwards		// hopefully self-explanatory
 	var/movedir			// the actual direction to move stuff in
 
-	var/list/affecting	// the list of all items that will be moved this ptick
 	var/id = ""			// the control ID	- must match controller ID
 
 /obj/machinery/conveyor/centcom_auto
@@ -68,16 +67,32 @@
 		return
 	use_power_oneoff(100)
 
-	affecting = loc.contents - src		// moved items will be all in loc
-	spawn(1)	// slight delay to prevent infinite propagation due to map order	//TODO: please no spawn() in process(). It's a very bad idea
-		var/items_moved = 0
-		for(var/atom/movable/A in affecting)
-			if(!A.anchored)
-				if(A.loc == src.loc) // prevents the object from being affected if it's not currently here.
-					step(A,movedir)
-					items_moved++
-			if(items_moved >= 10)
-				break
+	/**
+	 * the list of all items that will be moved this ptick
+	 * moved items will be all in loc
+	 */
+	var/list/affecting = list()
+
+	var/items_moved = 0
+	for(var/thing in loc)
+		if(thing == src)
+			continue
+		if(items_moved >= 10)
+			break
+		var/atom/movable/AM = thing
+		if(!AM.anchored && AM.simulated)
+			affecting += AM
+			items_moved++
+	if(affecting.len)
+		addtimer(CALLBACK(src, .proc/post_process, affecting), 1) // slight delay to prevent infinite propagation due to map order
+
+/obj/machinery/conveyor/proc/post_process(list/affecting)
+	for(var/A in affecting)
+		if(TICK_CHECK)
+			break
+		var/atom/movable/AM = A
+		if(AM.loc == src.loc) // prevents the object from being affected if it's not currently here.
+			step(A,movedir)
 
 // attack with item, place item on conveyor
 /obj/machinery/conveyor/attackby(var/obj/item/I, mob/user)
@@ -151,7 +166,7 @@
 	var/id = "" 				// must match conveyor IDs to control them
 
 	var/list/conveyors		// the list of converyors that are controlled by this switch
-	anchored = 1
+	anchored = TRUE
 
 
 

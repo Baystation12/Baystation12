@@ -17,6 +17,14 @@
 	name = "Long Unathi Frills"
 	icon_state = "soghun_longfrills"
 
+/datum/sprite_accessory/hair/una/frills_medium
+	name = "Unathi Frills"
+	icon_state = "frills"
+
+/datum/sprite_accessory/hair/una/frills_water
+	name = "Aquatic Frills"
+	icon_state = "aquatic_frills"
+
 /datum/sprite_accessory/hair/una/frills_short
 	name = "Short Unathi Frills"
 	icon_state = "soghun_shortfrills"
@@ -40,6 +48,35 @@
 /datum/sprite_accessory/hair/una/exotic
 	name = "Exotic Frills"
 	icon_state = "big_frills"
+
+/datum/sprite_accessory/hair/una/curvedown
+	name = "Downward Curved Horns"
+	icon_state = "curved_down"
+
+/datum/sprite_accessory/hair/una/curveup
+	name = "Upward Curved Horns"
+	icon_state = "curved_up"
+
+/datum/sprite_accessory/hair/una/sam
+	name = "Inwardly Curved Horns"
+	icon_state = "samurai"
+
+/datum/sprite_accessory/hair/una/imp
+	name = "Regal Horns"
+	icon_state = "imperial"
+
+/datum/sprite_accessory/hair/una/spikes_norm
+	name = "Head Spikes"
+	icon_state = "head_spikes"
+
+/datum/sprite_accessory/hair/una/spikes_thicc
+	name = "Thick Head Spikes"
+	icon_state = "overgrown_head_spikes"
+
+/datum/sprite_accessory/hair/una/quad
+	name = "Four Horns"
+	icon_state = "double_horns"
+
 
 /datum/sprite_accessory/skin/unathi
 	name = "Default Unathi skin"

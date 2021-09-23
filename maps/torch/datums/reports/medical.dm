@@ -6,7 +6,7 @@
 /datum/computer_file/report/recipient/medical/incidentreport
 	form_name = "SCG-MED-04"
 	title = "Medical Incident Report"
-	available_on_ntnet = 1
+	available_on_ntnet = TRUE
 
 /datum/computer_file/report/recipient/medical/incidentreport/generate_fields()
 	..()
@@ -25,7 +25,7 @@
 /datum/computer_file/report/recipient/medical/checkup
 	form_name = "SCG-MED-013b"
 	title = "Regular Health Checkup Checklist"
-	available_on_ntnet = 1
+	available_on_ntnet = TRUE
 
 /datum/computer_file/report/recipient/medical/checkup/generate_fields()
 	..()
@@ -49,7 +49,7 @@
 /datum/computer_file/report/recipient/medical/autopsy
 	form_name = "SCG-MED-015"
 	title = "Autopsy Report"
-	available_on_ntnet = 1
+	available_on_ntnet = TRUE
 
 /datum/computer_file/report/recipient/medical/autopsy/generate_fields()
 	..()

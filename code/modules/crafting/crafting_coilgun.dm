@@ -1,12 +1,12 @@
 // We really need some datums for this.
-/obj/item/weapon/coilgun_assembly
+/obj/item/coilgun_assembly
 	name = "coilgun stock"
 	desc = "It might be a coilgun, someday."
 	icon = 'icons/obj/crafting_icons.dmi'
 	icon_state = "coilgun_construction_1"
 
 /decl/crafting_stage/material/coilgun_body
-	begins_with_object_type = /obj/item/weapon/coilgun_assembly
+	begins_with_object_type = /obj/item/coilgun_assembly
 	item_desc = "It's a half-built coilgun with a metal frame loosely shaped around the stock."
 	progress_message = "You shape some steel sheets around the stock to form a body."
 	item_icon_state = "coilgun_construction_2"
@@ -38,7 +38,7 @@
 
 /decl/crafting_stage/coilgun_coil
 	progress_message = "You thread a superconducting coil over the barrel of the coilgun assembly."
-	completion_trigger_type = /obj/item/weapon/stock_parts/smes_coil
+	completion_trigger_type = /obj/item/stock_parts/smes_coil
 	item_desc = "It's a half-built coilgun with a single superconducting coil threaded onto the barrel."
 	item_icon_state = "coilgun_construction_7"
 	next_stages = list(/decl/crafting_stage/coilgun_coil/two)
@@ -57,4 +57,4 @@
 
 /decl/crafting_stage/screwdriver/coilgun
 	progress_message = "You secure the coilgun assembly together, finishing it off."
-	product = /obj/item/weapon/gun/magnetic
+	product = /obj/item/gun/magnetic

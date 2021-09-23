@@ -5,7 +5,7 @@
 	TARGET.airflow_time = 0;                \
 	TARGET.airflow_skip_speedcheck = FALSE; \
 	if (TARGET.airflow_od) {                \
-		TARGET.density = 0;                 \
+		TARGET.set_density(FALSE);                 \
 	}
 
 PROCESSING_SUBSYSTEM_DEF(airflow)
@@ -54,7 +54,7 @@ PROCESSING_SUBSYSTEM_DEF(airflow)
 			if (target.airflow_speed > 7)
 				if (target.airflow_time++ >= target.airflow_speed - 7)
 					if (target.airflow_od)
-						target.density = 0
+						target.set_density(FALSE)
 					target.airflow_skip_speedcheck = TRUE
 
 					if (MC_TICK_CHECK)
@@ -62,7 +62,7 @@ PROCESSING_SUBSYSTEM_DEF(airflow)
 					continue
 			else
 				if (target.airflow_od)
-					target.density = 0
+					target.set_density(FALSE)
 				target.airflow_process_delay = max(1, 10 - (target.airflow_speed + 3))
 				target.airflow_skip_speedcheck = TRUE
 
@@ -73,7 +73,7 @@ PROCESSING_SUBSYSTEM_DEF(airflow)
 		target.airflow_skip_speedcheck = FALSE
 
 		if (target.airflow_od)
-			target.density = 1
+			target.set_density(TRUE)
 
 		if (!target.airflow_dest || target.loc == target.airflow_dest)
 			target.airflow_dest = locate(min(max(target.x + target.airflow_xo, 1), world.maxx), min(max(target.y + target.airflow_yo, 1), world.maxy), target.z)
@@ -135,7 +135,7 @@ PROCESSING_SUBSYSTEM_DEF(airflow)
 	airflow_od = 0
 
 	if (!density)
-		density = 1
+		set_density(TRUE)
 		airflow_od = 1
 
 	return TRUE

@@ -14,7 +14,7 @@
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 
 	attackby(obj/item/O as obj, mob/user as mob)
-		if(istype(O, /obj/item/weapon/slimesteroid2))
+		if(istype(O, /obj/item/slimesteroid2))
 			if(enhanced == 1)
 				to_chat(user, "<span class='warning'> This extract has already been enhanced!</span>")
 				return ..()
@@ -126,7 +126,7 @@
 
 ////Pet Slime Creation///
 
-/obj/item/weapon/slimepotion
+/obj/item/slimepotion
 	name = "docility potion"
 	desc = "A potent chemical mix that will nullify a slime's powers, causing it to become docile and tame."
 	icon = 'icons/obj/chemical.dmi'
@@ -160,7 +160,7 @@
 		pet.real_name = newname
 		qdel(src)
 
-/obj/item/weapon/slimepotion2
+/obj/item/slimepotion2
 	name = "advanced docility potion"
 	desc = "A potent chemical mix that will nullify a slime's powers, causing it to become docile and tame. This one is meant for adult slimes."
 	icon = 'icons/obj/chemical.dmi'
@@ -192,7 +192,7 @@
 		qdel(src)
 
 
-/obj/item/weapon/slimesteroid
+/obj/item/slimesteroid
 	name = "slime steroid"
 	desc = "A potent chemical mix that will cause a slime to generate more extract."
 	icon = 'icons/obj/chemical.dmi'
@@ -216,13 +216,13 @@
 		M.cores = 3
 		qdel(src)
 
-/obj/item/weapon/slimesteroid2
+/obj/item/slimesteroid2
 	name = "extract enhancer"
 	desc = "A potent chemical mix that will give a slime extract three uses."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle17"
 
-/obj/item/weapon/slimesteroid2/afterattack(obj/target, mob/user , flag)
+/obj/item/slimesteroid2/afterattack(obj/target, mob/user , flag)
 	if(istype(target, /obj/item/slime_extract))
 		var/obj/item/slime_extract/extract = target
 		if(extract.enhanced == 1)
@@ -237,7 +237,7 @@
 		qdel(src)
 
 /obj/effect/golemrune
-	anchored = 1
+	anchored = TRUE
 	desc = "a strange rune used to create golems. It glows when it can be activated."
 	name = "rune"
 	icon = 'icons/obj/rune.dmi'
@@ -279,7 +279,7 @@
 	G.set_species("Golem")
 	G.key = ghost.key
 
-	var/obj/item/weapon/implant/translator/natural/I = new()
+	var/obj/item/implant/translator/natural/I = new()
 	I.implant_in_mob(G, BP_HEAD)
 	if (user.languages.len)
 		var/datum/language/lang = user.languages[1]

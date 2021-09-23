@@ -1,4 +1,4 @@
-/obj/item/weapon/spirit_board
+/obj/item/spirit_board
 	name = "spirit board"
 	desc = "A wooden board with letters etched into it, used in seances."
 	icon = 'icons/obj/objects.dmi'
@@ -8,11 +8,11 @@
 	var/planchette = "A"
 	var/lastuser = null
 
-/obj/item/weapon/spirit_board/examine(mob/user)
-	..()
+/obj/item/spirit_board/examine(mob/user)
+	. = ..()
 	to_chat(user, "The planchette is sitting at \"[planchette]\".")
 
-/obj/item/weapon/spirit_board/attack_hand(mob/user)
+/obj/item/spirit_board/attack_hand(mob/user)
 	if (user.a_intent == I_GRAB)
 		return ..()
 	else
@@ -20,12 +20,12 @@
 
 
 //ATTACK GHOST IGNORING PARENT RETURN VALUE
-/obj/item/weapon/spirit_board/attack_ghost(var/mob/observer/ghost/user)
+/obj/item/spirit_board/attack_ghost(var/mob/observer/ghost/user)
 	if(GLOB.cult.max_cult_rating >= CULT_GHOSTS_2)
 		spirit_board_pick_letter(user)
 	return ..()
 
-/obj/item/weapon/spirit_board/proc/spirit_board_pick_letter(mob/M)
+/obj/item/spirit_board/proc/spirit_board_pick_letter(mob/M)
 	if(!spirit_board_checks(M))
 		return 0
 	planchette = input("Choose the letter.", "Seance!") as null|anything in list(
@@ -38,7 +38,7 @@
 	//blind message is the same because not everyone brings night vision to seances
 	visible_message(SPAN_NOTICE("The planchette slowly moves... and stops at the letter \"[planchette]\"."))
 
-/obj/item/weapon/spirit_board/proc/spirit_board_checks(mob/M)
+/obj/item/spirit_board/proc/spirit_board_checks(mob/M)
 	//cooldown
 	if(!Adjacent(M))
 		return 0

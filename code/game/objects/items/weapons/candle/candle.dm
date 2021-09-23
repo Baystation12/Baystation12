@@ -1,4 +1,4 @@
-/obj/item/weapon/flame/candle
+/obj/item/flame/candle
 	name = "candle"
 	desc = "A small pillar candle. Its specially-formulated fuel-oxidizer wax mixture allows continued combustion in airless environments."
 	icon = 'icons/obj/candle.dmi'
@@ -16,13 +16,13 @@
 	var/candle_outer_range = 4
 	var/candle_falloff = 2
 
-/obj/item/weapon/flame/candle/Initialize()
+/obj/item/flame/candle/Initialize()
 	wax = rand(27 MINUTES, 33 MINUTES) / SSobj.wait // Enough for 27-33 minutes. 30 minutes on average, adjusted for subsystem tickrate.
 	if(available_colours)
 		color = pick(available_colours)
 	. = ..()
 
-/obj/item/weapon/flame/candle/on_update_icon()
+/obj/item/flame/candle/on_update_icon()
 	switch(wax)
 		if(1500 to INFINITY)
 			icon_state = "[icon_set]1"
@@ -37,25 +37,25 @@
 		if(lit)
 			overlays += overlay_image(icon, "[icon_state]_lit", flags=RESET_COLOR)
 
-/obj/item/weapon/flame/candle/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/flame/candle/attackby(obj/item/W as obj, mob/user as mob)
 	..()
 	if(isflamesource(W) || is_hot(W))
 		light(user)
 
-/obj/item/weapon/flame/candle/resolve_attackby(var/atom/A, mob/user)
+/obj/item/flame/candle/resolve_attackby(var/atom/A, mob/user)
 	. = ..()
-	if(istype(A, /obj/item/weapon/flame/candle/) && is_hot(src))
-		var/obj/item/weapon/flame/candle/other_candle = A
+	if(istype(A, /obj/item/flame/candle/) && is_hot(src))
+		var/obj/item/flame/candle/other_candle = A
 		other_candle.light()
 
-/obj/item/weapon/flame/candle/proc/light(mob/user)
+/obj/item/flame/candle/proc/light(mob/user)
 	if(!lit)
 		lit = 1
 		visible_message("<span class='notice'>\The [user] lights the [name].</span>")
 		set_light(candle_max_bright, candle_inner_range, candle_outer_range, candle_falloff)
 		START_PROCESSING(SSobj, src)
 
-/obj/item/weapon/flame/candle/Process()
+/obj/item/flame/candle/Process()
 	if(!lit)
 		return
 	wax--
@@ -69,14 +69,14 @@
 		var/turf/T = loc
 		T.hotspot_expose(700, 5)
 
-/obj/item/weapon/flame/candle/attack_self(mob/user as mob)
+/obj/item/flame/candle/attack_self(mob/user as mob)
 	if(lit)
 		lit = 0
 		update_icon()
 		set_light(0)
 		remove_extension(src, /datum/extension/scent)
 
-/obj/item/weapon/storage/candle_box
+/obj/item/storage/candle_box
 	name = "candle pack"
 	desc = "A pack of unscented candles in a variety of colours."
 	icon = 'icons/obj/candle.dmi'
@@ -87,4 +87,4 @@
 	max_storage_space = 7
 	slot_flags = SLOT_BELT
 
-	startswith = list(/obj/item/weapon/flame/candle = 7)
+	startswith = list(/obj/item/flame/candle = 7)

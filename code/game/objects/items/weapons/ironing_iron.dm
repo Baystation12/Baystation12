@@ -1,4 +1,4 @@
-/obj/item/weapon/ironingiron
+/obj/item/ironingiron
 	name = "iron"
 	desc = "An ironing iron for ironing your iro- err... clothes."
 	icon = 'icons/obj/ironing.dmi'
@@ -13,7 +13,7 @@
 
 	var/enabled = 0
 
-/obj/item/weapon/ironingiron/attack_self(var/mob/user)
+/obj/item/ironingiron/attack_self(var/mob/user)
 	enabled = !enabled
 	to_chat(user, "<span class='notice'>You turn \the [src.name] [enabled ? "on" : "off"].</span>")
 	..()

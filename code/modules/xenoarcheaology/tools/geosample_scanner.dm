@@ -1,8 +1,8 @@
 /obj/machinery/radiocarbon_spectrometer
 	name = "radiocarbon spectrometer"
 	desc = "A specialised, complex scanner for gleaning information on all manner of small things."
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	icon = 'icons/obj/virology.dmi'
 	icon_state = "analyser"
@@ -10,7 +10,7 @@
 	idle_power_usage = 20
 	active_power_usage = 300
 
-	//var/obj/item/weapon/reagent_containers/glass/coolant_container
+	//var/obj/item/reagent_containers/glass/coolant_container
 	var/scanning = 0
 	var/report_num = 0
 	//
@@ -75,17 +75,17 @@
 				N.use(amount_used)
 				scanner_seal_integrity = round(scanner_seal_integrity + amount_used * 10)
 				return
-		if(istype(I, /obj/item/weapon/reagent_containers/glass))
+		if(istype(I, /obj/item/reagent_containers/glass))
 			var/choice = alert("What do you want to do with the container?","Radiometric Scanner","Add coolant","Empty coolant","Scan container")
 			if(choice == "Add coolant")
-				var/obj/item/weapon/reagent_containers/glass/G = I
+				var/obj/item/reagent_containers/glass/G = I
 				var/amount_transferred = min(src.reagents.maximum_volume - src.reagents.total_volume, G.reagents.total_volume)
 				G.reagents.trans_to(src, amount_transferred)
 				to_chat(user, "<span class='info'>You empty [amount_transferred]u of coolant into [src].</span>")
 				update_coolant()
 				return
 			else if(choice == "Empty coolant")
-				var/obj/item/weapon/reagent_containers/glass/G = I
+				var/obj/item/reagent_containers/glass/G = I
 				var/amount_transferred = min(G.reagents.maximum_volume - G.reagents.total_volume, src.reagents.total_volume)
 				src.reagents.trans_to(G, amount_transferred)
 				to_chat(user, "<span class='info'>You remove [amount_transferred]u of coolant from [src].</span>")
@@ -265,35 +265,35 @@
 
 	if(scanned_item)
 		//create report
-		var/obj/item/weapon/paper/P = new(src)
+		var/obj/item/paper/P = new(src)
 		P.SetName("[src] report #[++report_num]: [scanned_item.name]")
-		P.stamped = list(/obj/item/weapon/stamp)
+		P.stamped = list(/obj/item/stamp)
 		P.queue_icon_update()
 
 		//work out data
 		var/data = " - Mundane object: [scanned_item.desc ? scanned_item.desc : "No information on record."]<br>"
 		var/datum/geosample/G
 		switch(scanned_item.type)
-			if(/obj/item/weapon/ore)
-				var/obj/item/weapon/ore/O = scanned_item
+			if(/obj/item/ore)
+				var/obj/item/ore/O = scanned_item
 				if(O.geologic_data)
 					G = O.geologic_data
 
-			if(/obj/item/weapon/rocksliver)
-				var/obj/item/weapon/rocksliver/O = scanned_item
+			if(/obj/item/rocksliver)
+				var/obj/item/rocksliver/O = scanned_item
 				if(O.geological_data)
 					G = O.geological_data
 
-			if(/obj/item/weapon/archaeological_find)
+			if(/obj/item/archaeological_find)
 				data = " - Mundane object (archaic xenos origins)<br>"
 
-				var/obj/item/weapon/archaeological_find/A = scanned_item
+				var/obj/item/archaeological_find/A = scanned_item
 				if(A.talking_atom)
 					data = " - Exhibits properties consistent with sonic reproduction and audio capture technologies.<br>"
 
 		var/anom_found = 0
 		if(G)
-			data = " - Spectometric analysis on mineral sample has determined type [finds_as_strings[responsive_carriers.Find(G.source_mineral)]]<br>"
+			data = " - Spectometric analysis on mineral sample has determined type [finds_as_strings[list_find(responsive_carriers, G.source_mineral)]]<br>"
 			if(G.age_billion > 0)
 				data += " - Radiometric dating shows age of [G.age_billion].[G.age_million] billion years<br>"
 			else if(G.age_million > 0)
@@ -303,7 +303,7 @@
 			data += " - Chromatographic analysis shows the following materials present:<br>"
 			for(var/carrier in G.find_presence)
 				if(G.find_presence[carrier])
-					var/index = responsive_carriers.Find(carrier)
+					var/index = list_find(responsive_carriers, carrier)
 					if(index > 0 && index <= finds_as_strings.len)
 						data += "	> [100 * G.find_presence[carrier]]% [finds_as_strings[index]]<br>"
 

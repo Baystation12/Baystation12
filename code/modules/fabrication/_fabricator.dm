@@ -3,8 +3,8 @@
 	desc = "It produces common day to day items from a variety of materials."
 	icon = 'icons/obj/machines/fabricators/autolathe.dmi'
 	icon_state = "autolathe"
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 	idle_power_usage = 10
 	active_power_usage = 2000
 	clicksound = "keyboard"
@@ -14,6 +14,9 @@
 	wires =           /datum/wires/fabricator
 	base_type =       /obj/machinery/fabricator
 	construct_state = /decl/machine_construction/default/panel_closed
+	
+	machine_name = "autolathe"
+	machine_desc = "Autolathes can produce a very wide array of useful objects from raw materials."
 
 	var/has_recycler = TRUE
 	var/list/material_overlays = list()
@@ -116,8 +119,8 @@
 //Updates overall lathe storage size.
 /obj/machinery/fabricator/RefreshParts()
 	..()
-	var/mb_rating = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin), 0, 10)
-	var/man_rating = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator), 0.5, 3.5)
+	var/mb_rating = Clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 0, 10)
+	var/man_rating = Clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator), 0.5, 3.5)
 	storage_capacity = list()
 	for(var/mat in base_storage_capacity)
 		storage_capacity[mat] = mb_rating * base_storage_capacity[mat]

@@ -3,12 +3,12 @@
 	desc = "One man's garbage is another man's treasure."
 	icon = 'icons/obj/rubble.dmi'
 	icon_state = "base"
-	appearance_flags = PIXEL_SCALE
+	appearance_flags = DEFAULT_APPEARANCE_FLAGS | PIXEL_SCALE
 	opacity = 1
-	density = 1
-	anchored = 1
+	density = TRUE
+	anchored = TRUE
 
-	var/list/loot = list(/obj/item/weapon/cell,/obj/item/stack/material/iron,/obj/item/stack/material/rods)
+	var/list/loot = list(/obj/item/cell,/obj/item/stack/material/iron,/obj/item/stack/material/rods)
 	var/lootleft = 1
 	var/emptyprob = 95
 	var/health = 40
@@ -36,7 +36,7 @@
 				I.color = initial(A.color)
 			if(!lootleft)
 				I.color = "#54362e"
-		I.appearance_flags = PIXEL_SCALE
+		I.appearance_flags = DEFAULT_APPEARANCE_FLAGS | PIXEL_SCALE
 		I.pixel_x = rand(-16,16)
 		I.pixel_y = rand(-16,16)
 		var/matrix/M = matrix()
@@ -65,8 +65,8 @@
 		to_chat(user, "<span class='warning'>Someone is already rummaging here!</span>")
 		
 /obj/structure/rubble/attackby(var/obj/item/I, var/mob/user)
-	if (istype(I, /obj/item/weapon/pickaxe))
-		var/obj/item/weapon/pickaxe/P = I
+	if (istype(I, /obj/item/pickaxe))
+		var/obj/item/pickaxe/P = I
 		visible_message("[user] starts clearing away \the [src].")
 		if(do_after(user,P.digspeed, src))
 			visible_message("[user] clears away \the [src].")
@@ -82,37 +82,37 @@
 			qdel(src)
 
 /obj/structure/rubble/house
-	loot = list(/obj/item/weapon/archaeological_find/bowl,
-	/obj/item/weapon/archaeological_find/remains,
-	/obj/item/weapon/archaeological_find/bowl/urn,
-	/obj/item/weapon/archaeological_find/cutlery,
-	/obj/item/weapon/archaeological_find/statuette,
-	/obj/item/weapon/archaeological_find/instrument,
-	/obj/item/weapon/archaeological_find/container,
-	/obj/item/weapon/archaeological_find/mask,
-	/obj/item/weapon/archaeological_find/coin,
-	/obj/item/weapon/archaeological_find,
-	/obj/item/weapon/archaeological_find/material = 5,
-	/obj/item/weapon/archaeological_find/material/exotic = 2,
-	/obj/item/weapon/archaeological_find/parts = 3
+	loot = list(/obj/item/archaeological_find/bowl,
+	/obj/item/archaeological_find/remains,
+	/obj/item/archaeological_find/bowl/urn,
+	/obj/item/archaeological_find/cutlery,
+	/obj/item/archaeological_find/statuette,
+	/obj/item/archaeological_find/instrument,
+	/obj/item/archaeological_find/container,
+	/obj/item/archaeological_find/mask,
+	/obj/item/archaeological_find/coin,
+	/obj/item/archaeological_find,
+	/obj/item/archaeological_find/material = 5,
+	/obj/item/archaeological_find/material/exotic = 2,
+	/obj/item/archaeological_find/parts = 3
 	)
 
 /obj/structure/rubble/lab
 	emptyprob = 30
 	loot = list(
-	/obj/item/weapon/archaeological_find/statuette,
-	/obj/item/weapon/archaeological_find/instrument,
-	/obj/item/weapon/archaeological_find/mask,
-	/obj/item/weapon/archaeological_find,
-	/obj/item/weapon/archaeological_find/material = 10,
-	/obj/item/weapon/archaeological_find/material/exotic = 10,
-	/obj/item/weapon/archaeological_find/parts = 10
+	/obj/item/archaeological_find/statuette,
+	/obj/item/archaeological_find/instrument,
+	/obj/item/archaeological_find/mask,
+	/obj/item/archaeological_find,
+	/obj/item/archaeological_find/material = 10,
+	/obj/item/archaeological_find/material/exotic = 10,
+	/obj/item/archaeological_find/parts = 10
 	)
 
 /obj/structure/rubble/war
 	emptyprob = 95 //can't have piles upon piles of guns
-	loot = list(/obj/item/weapon/archaeological_find/knife,
-	/obj/item/weapon/archaeological_find/gun,
-	/obj/item/weapon/archaeological_find/laser,
-	/obj/item/weapon/archaeological_find/sword,
-	/obj/item/weapon/archaeological_find/katana)
+	loot = list(/obj/item/archaeological_find/knife,
+	/obj/item/archaeological_find/gun,
+	/obj/item/archaeological_find/laser,
+	/obj/item/archaeological_find/sword,
+	/obj/item/archaeological_find/katana)

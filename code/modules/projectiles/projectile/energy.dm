@@ -50,6 +50,14 @@
 	flash_range = 2
 	brightness = 15
 
+/obj/item/projectile/energy/flash/flare/on_hit(atom/target, blocked = 0, def_zone = null)
+	. = ..()
+	if(.)
+		var/mob/living/M = target
+		if(istype(M) && prob(33))
+			M.fire_stacks = max(2, M.fire_stacks)
+			M.IgniteMob()
+
 /obj/item/projectile/energy/flash/flare/on_impact(var/atom/A)
 	light_colour = pick("#e58775", "#ffffff", "#faa159", "#e34e0e")
 	set_light(1, 1, 4, 2, light_colour)

@@ -1,11 +1,11 @@
-/obj/item/weapon/pen/multi
+/obj/item/pen/multi
 	name = "multicoloured pen"
 	desc = "It's a pen with multiple colors of ink!"
 	var/selectedColor = 1
 	var/colors = list("black","blue","red","green")
 	var/color_descriptions = list("black ink", "blue ink", "red ink", "green ink")
 
-/obj/item/weapon/pen/multi/attack_self(mob/user)
+/obj/item/pen/multi/attack_self(mob/user)
 	if(++selectedColor > length(colors))
 		selectedColor = 1
 

@@ -31,11 +31,11 @@
 /turf/simulated/floor/away/blueriver/alienfloor,
 /area/bluespaceriver/underground)
 "h" = (
-/obj/item/weapon/pickaxe/xeno/brush,
+/obj/item/pickaxe/xeno/brush,
 /turf/simulated/floor/away/blueriver/alienfloor,
 /area/bluespaceriver/underground)
 "i" = (
-/obj/item/weapon/pickaxe/xeno/six_pick,
+/obj/item/pickaxe/xeno/six_pick,
 /obj/item/device/measuring_tape,
 /turf/simulated/floor/away/blueriver/alienfloor,
 /area/bluespaceriver/underground)
@@ -47,7 +47,7 @@
 /turf/simulated/floor/asteroid,
 /area/bluespaceriver/underground)
 "l" = (
-/obj/item/weapon/gun/energy/plasmacutter,
+/obj/item/gun/energy/plasmacutter,
 /obj/item/device/depth_scanner,
 /turf/simulated/floor/asteroid,
 /area/bluespaceriver/underground)
@@ -68,7 +68,7 @@
 /turf/simulated/floor/plating,
 /area/bluespaceriver/underground)
 "q" = (
-/obj/item/weapon/crowbar,
+/obj/item/crowbar,
 /turf/simulated/floor/asteroid,
 /area/bluespaceriver/underground)
 "r" = (
@@ -76,7 +76,7 @@
 /turf/simulated/floor/asteroid,
 /area/bluespaceriver/underground)
 "s" = (
-/obj/item/weapon/cell/infinite{
+/obj/item/cell/infinite{
 	alpha = 130;
 	color = "BLUE";
 	desc = "This looks like an alien power cell. You can make out both of the connections relatively clearly though.";
@@ -91,7 +91,7 @@
 /turf/simulated/floor/asteroid,
 /area/bluespaceriver/underground)
 "u" = (
-/obj/item/weapon/pickaxe/drill,
+/obj/item/pickaxe/drill,
 /turf/simulated/floor/asteroid,
 /area/bluespaceriver/underground)
 "v" = (
@@ -100,7 +100,7 @@
 	color = "BLUE";
 	desc = "Looks like an eerie transparent table. It emits a soft glow. "
 	},
-/obj/item/weapon/gun/energy/decloner{
+/obj/item/gun/energy/decloner{
 	color = "BLUE";
 	desc = "A strange unerganomic pistol clearly not designed for a human hand. You are surprised that it actually has a trigger.";
 	name = "strange gun"

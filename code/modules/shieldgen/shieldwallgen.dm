@@ -4,8 +4,8 @@
 	desc = "A shield generator."
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "Shield_Gen"
-	anchored = 0
-	density = 1
+	anchored = FALSE
+	density = TRUE
 	req_access = list(list(access_engine_equip,access_research))
 	var/active = 0
 	var/power = 0
@@ -132,7 +132,7 @@
 		storedpower = 0
 
 	if(src.active == 1)
-		if(!src.anchored == 1)
+		if(!src.anchored)
 			src.active = 0
 			return
 		spawn(1)
@@ -203,19 +203,19 @@
 			to_chat(user, "Turn off the field generator first.")
 			return
 
-		else if(anchored == 0)
+		else if(!anchored)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 			to_chat(user, "You secure the external reinforcing bolts to the floor.")
-			src.anchored = 1
+			src.anchored = TRUE
 			return
 
-		else if(anchored == 1)
+		else if(anchored)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 			to_chat(user, "You undo the external reinforcing bolts.")
-			src.anchored = 0
+			src.anchored = FALSE
 			return
 
-	if(istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/modular_computer))
+	if(istype(W, /obj/item/card/id)||istype(W, /obj/item/modular_computer))
 		if (src.allowed(user))
 			src.locked = !src.locked
 			to_chat(user, "Controls are now [src.locked ? "locked." : "unlocked."]")
@@ -260,8 +260,8 @@
 	desc = "An energy shield."
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "shieldwall"
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 	unacidable = TRUE
 	light_outer_range = 3
 	var/needs_power = 0
@@ -349,7 +349,7 @@
 			return !src.density
 
 /obj/machinery/shieldwallgen/online
-	anchored = 1
+	anchored = TRUE
 	active = 1
 
 /obj/machinery/shieldwallgen/online/Initialize()

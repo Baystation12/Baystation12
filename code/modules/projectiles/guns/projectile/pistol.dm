@@ -1,5 +1,5 @@
 
-/obj/item/weapon/gun/projectile/pistol
+/obj/item/gun/projectile/pistol
 	load_method = MAGAZINE
 	caliber = CALIBER_PISTOL
 	magazine_type = /obj/item/ammo_magazine/pistol
@@ -8,7 +8,7 @@
 	var/empty_icon = TRUE  //If it should change icon when empty
 	var/ammo_indicator = FALSE
 
-/obj/item/weapon/gun/projectile/pistol/on_update_icon()
+/obj/item/gun/projectile/pistol/on_update_icon()
 	..()
 	if(empty_icon)
 		if(ammo_magazine && ammo_magazine.stored_ammo.len)
@@ -23,8 +23,8 @@
 			return
 		else
 			overlays += image(icon, "ammo_ok")
-	
-/obj/item/weapon/gun/projectile/pistol/military
+
+/obj/item/gun/projectile/pistol/military
 	name = "military pistol"
 	desc = "The Hephaestus Industries P20 - a mass produced kinetic sidearm in widespread service with the SCGDF."
 	magazine_type = /obj/item/ammo_magazine/pistol/double
@@ -37,7 +37,7 @@
 	fire_delay = 7
 	ammo_indicator = TRUE
 
-/obj/item/weapon/gun/projectile/pistol/military/alt
+/obj/item/gun/projectile/pistol/military/alt
 	desc = "The HelTek Optimus, best known as the standard-issue sidearm for the ICCG Navy."
 	icon = 'icons/obj/guns/military_pistol2.dmi'
 	icon_state = "military-alt"
@@ -45,7 +45,7 @@
 	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 2, TECH_ESOTERIC = 8)
 	fire_delay = 8
 
-/obj/item/weapon/gun/projectile/pistol/sec
+/obj/item/gun/projectile/pistol/sec
 	name = "pistol"
 	desc = "The NT Mk58 is a cheap, ubiquitous sidearm, produced by a NanoTrasen subsidiary. Found pretty much everywhere humans are."
 	icon = 'icons/obj/guns/pistol.dmi'
@@ -56,10 +56,10 @@
 	fire_delay = 6
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 
-/obj/item/weapon/gun/projectile/pistol/sec/lethal
+/obj/item/gun/projectile/pistol/sec/lethal
 	magazine_type = /obj/item/ammo_magazine/pistol
 
-/obj/item/weapon/gun/projectile/pistol/magnum_pistol
+/obj/item/gun/projectile/pistol/magnum_pistol
 	name = "magnum pistol"
 	desc = "The HelTek Magnus, a robust Terran handgun that uses high-caliber ammo."
 	icon = 'icons/obj/guns/magnum_pistol.dmi'
@@ -79,7 +79,7 @@
 	bulk = 3
 	ammo_indicator = TRUE
 
-/obj/item/weapon/gun/projectile/pistol/throwback
+/obj/item/gun/projectile/pistol/throwback
 	name = "pistol"
 	desc = "A product of one of thousands of illegal workshops from around the galaxy. Often replicas of ancient Earth handguns, these guns are usually found in hands of frontier colonists and pirates."
 	icon = 'icons/obj/guns/pistol_throwback.dmi'
@@ -92,19 +92,19 @@
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	var/base_icon = "pistol1"
 
-/obj/item/weapon/gun/projectile/pistol/throwback/Initialize()
+/obj/item/gun/projectile/pistol/throwback/Initialize()
 	. = ..()
 	base_icon = "pistol[rand(1,4)]"
 	update_icon()
 
-/obj/item/weapon/gun/projectile/pistol/throwback/on_update_icon()
+/obj/item/gun/projectile/pistol/throwback/on_update_icon()
 	..()
 	if(ammo_magazine && ammo_magazine.stored_ammo.len)
 		icon_state = base_icon
 	else
 		icon_state = "[base_icon]-e"
 
-/obj/item/weapon/gun/projectile/pistol/gyropistol
+/obj/item/gun/projectile/pistol/gyropistol
 	name = "gyrojet pistol"
 	desc = "A bulky pistol designed to fire self propelled rounds."
 	icon = 'icons/obj/guns/gyropistol.dmi'
@@ -122,14 +122,14 @@
 	mag_remove_sound = 'sound/weapons/guns/interaction/hpistol_magout.ogg'
 	empty_icon = FALSE
 
-/obj/item/weapon/gun/projectile/pistol/gyropistol/on_update_icon()
+/obj/item/gun/projectile/pistol/gyropistol/on_update_icon()
 	..()
 	if(ammo_magazine)
 		icon_state = "gyropistolloaded"
 	else
 		icon_state = "gyropistol"
 
-/obj/item/weapon/gun/projectile/pistol/holdout
+/obj/item/gun/projectile/pistol/holdout
 	name = "holdout pistol"
 	desc = "The Lumoco Arms P3 Whisper. A small, easily concealable gun."
 	icon = 'icons/obj/guns/holdout_pistol.dmi'
@@ -141,9 +141,9 @@
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2, TECH_ESOTERIC = 2)
 	magazine_type = /obj/item/ammo_magazine/pistol/small
 	allowed_magazines = /obj/item/ammo_magazine/pistol/small
-	var/obj/item/weapon/silencer/silencer
+	var/obj/item/silencer/silencer
 
-/obj/item/weapon/gun/projectile/pistol/holdout/attack_hand(mob/user)
+/obj/item/gun/projectile/pistol/holdout/attack_hand(mob/user)
 	if(user.get_inactive_hand() == src)
 		if(silenced)
 			if(user.l_hand != src && user.r_hand != src)
@@ -159,8 +159,8 @@
 			return
 	..()
 
-/obj/item/weapon/gun/projectile/pistol/holdout/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/weapon/silencer))
+/obj/item/gun/projectile/pistol/holdout/attackby(obj/item/I, mob/user)
+	if(istype(I, /obj/item/silencer))
 		if(user.l_hand != src && user.r_hand != src)	//if we're not in his hands
 			to_chat(user, SPAN_WARNING("You'll need \the [src] in your hands to do that."))
 			return
@@ -177,7 +177,7 @@
 		return
 	..()
 
-/obj/item/weapon/gun/projectile/pistol/holdout/on_update_icon()
+/obj/item/gun/projectile/pistol/holdout/on_update_icon()
 	..()
 	if(silenced)
 		icon_state = "pistol-silencer"
@@ -186,9 +186,45 @@
 	if(!(ammo_magazine && ammo_magazine.stored_ammo.len))
 		icon_state = "[icon_state]-e"
 
-/obj/item/weapon/silencer
+/obj/item/silencer
 	name = "silencer"
 	desc = "A silencer."
 	icon = 'icons/obj/guns/holdout_pistol.dmi'
 	icon_state = "silencer"
 	w_class = ITEM_SIZE_SMALL
+
+/obj/item/gun/projectile/pistol/broomstick
+	name = "broomstick"
+	desc = "An antique gun that makes you want to yell 'IT BELONGS IN A MUSEUM!'. There appears to be some thing scratched next to the fireselector, though you cant make it out."
+	icon = 'icons/obj/guns/broomstick.dmi'
+	icon_state = "broomstick"
+	accuracy_power = 6
+	one_hand_penalty = 3
+	fire_delay = 5
+	caliber = CALIBER_PISTOL_SMALL
+	origin_tech = list(
+						TECH_COMBAT = 2,
+						TECH_MATERIAL = 2
+						)
+	load_method = SINGLE_CASING|SPEEDLOADER
+	max_shells = 10
+
+	firemodes = list(
+		list(
+			mode_name="semi auto",
+			burst=1,
+			fire_delay=5,
+			move_delay=null,
+			one_hand_penalty=5,
+			burst_accuracy=null,
+			dispersion=null
+			),
+		list(
+			mode_name="scratched out option",
+			burst=10,
+			fire_delay=1,
+			one_hand_penalty=8,
+			burst_accuracy = list(0,-1,-2,-3,-4,-4,-4,-4,-4),
+			dispersion = list(1.0, 1.0, 1.0, 1.0, 1.2)
+			)
+		)

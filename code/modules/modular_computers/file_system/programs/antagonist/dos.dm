@@ -6,25 +6,17 @@
 	program_menu_icon = "arrow-4-diag"
 	extended_desc = "This advanced script can perform denial of service attacks against NTNet quantum relays. The system administrator will probably notice this. Multiple devices can run this program together against same relay for increased effect"
 	size = 20
-	requires_ntnet = 1
-	available_on_ntnet = 0
-	available_on_syndinet = 1
+	requires_ntnet = TRUE
+	available_on_ntnet = FALSE
+	available_on_syndinet = TRUE
 	nanomodule_path = /datum/nano_module/program/computer_dos/
 	var/obj/machinery/ntnet_relay/target = null
 	var/dos_speed = 0
 	var/error = ""
-	var/executed = 0
+	var/executed = FALSE
 
 /datum/computer_file/program/ntnet_dos/process_tick()
-	dos_speed = 0
-	switch(ntnet_status)
-		if(1)
-			dos_speed = NTNETSPEED_LOWSIGNAL
-		if(2)
-			dos_speed = NTNETSPEED_HIGHSIGNAL
-		if(3)
-			dos_speed = NTNETSPEED_ETHERNET
-	dos_speed *= NTNETSPEED_DOS_AMPLIFICATION + operator_skill - SKILL_BASIC
+	dos_speed = computer.get_ntnet_speed(computer.get_ntnet_status()) * (NTNETSPEED_DOS_AMPLIFICATION + operator_skill - SKILL_BASIC)
 	if(target && executed)
 		target.dos_overload += dos_speed
 		if(!target.operable())
@@ -32,18 +24,18 @@
 			target = null
 			error = "Connection to destination relay lost."
 
-/datum/computer_file/program/ntnet_dos/on_shutdown(var/forced)
+/datum/computer_file/program/ntnet_dos/on_shutdown(forced)
 	if(target)
 		target.dos_sources.Remove(src)
 		target = null
-	executed = 0
+	executed = FALSE
 
 	..(forced)
 
 /datum/nano_module/program/computer_dos
 	name = "DoS Traffic Generator"
 
-/datum/nano_module/program/computer_dos/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/program/computer_dos/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.default_state)
 	if(!ntnet_global)
 		return
 	var/datum/computer_file/program/ntnet_dos/PRG = program
@@ -86,35 +78,34 @@
 
 /datum/computer_file/program/ntnet_dos/Topic(href, href_list)
 	if(..())
-		return 1
+		return TOPIC_HANDLED
 	if(href_list["PRG_target_relay"])
 		for(var/obj/machinery/ntnet_relay/R in ntnet_global.relays)
 			if("[R.uid]" == href_list["PRG_target_relay"])
 				target = R
-		return 1
+		return TOPIC_HANDLED
 	if(href_list["PRG_reset"])
 		if(target)
 			target.dos_sources.Remove(src)
 			target = null
-		executed = 0
+		executed = FALSE
 		error = ""
-		return 1
+		return TOPIC_HANDLED
 	if(href_list["PRG_execute"])
 		if(!target)
-			return 1
-		executed = 1
+			return TOPIC_HANDLED
+		executed = TRUE
 		target.dos_sources.Add(src)
 		operator_skill = usr.get_skill_value(SKILL_COMPUTER)
-	
+
 		var/list/sources_to_show = list(computer.get_network_tag())
 		var/extra_to_show = 2 * max(operator_skill - SKILL_ADEPT, 0)
 		if(extra_to_show)
 			for(var/i = 1, i <= extra_to_show, i++)
 				var/nid = pick(ntnet_global.registered_nids)
 				var/datum/extension/interactive/ntos/os = ntnet_global.registered_nids[nid]
-				sources_to_show |= os.get_network_tag()
+				if(os.get_ntnet_status())
+					sources_to_show |= os.get_network_tag()
 
-		if(ntnet_global.intrusion_detection_enabled)
-			ntnet_global.add_log("IDS WARNING - Excess traffic flood targeting relay [target.uid] detected from [length(sources_to_show)] device\s: [english_list(sources_to_show)]")
-			ntnet_global.intrusion_detection_alarm = 1
-		return 1
+		ntnet_global.add_log_with_ids_check("Excess traffic flood targeting Quantum Relay ([target.uid]) detected from [length(sources_to_show)] device\s: [english_list(sources_to_show)]")
+		return TRUE

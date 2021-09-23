@@ -18,7 +18,7 @@
 			assembly.opened = FALSE
 			assembly.update_icon()
 			if(power_cell_type)
-				var/obj/item/weapon/cell/cell = new power_cell_type(assembly)
+				var/obj/item/cell/cell = new power_cell_type(assembly)
 				assembly.battery = cell
 
 			return assembly

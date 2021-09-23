@@ -67,7 +67,7 @@ var/datum/species/shapeshifter/promethean/prometheans
 		/mob/living/carbon/human/proc/shapeshifter_select_gender
 		)
 
-	valid_transform_species = list(SPECIES_HUMAN, SPECIES_UNATHI, SPECIES_SKRELL, SPECIES_DIONA, SPECIES_MANTID_ALATE, SPECIES_MONKEY)
+	valid_transform_species = list(SPECIES_HUMAN, SPECIES_UNATHI, SPECIES_SKRELL, SPECIES_DIONA, SPECIES_MONKEY)
 	monochromatic = 1
 
 	var/heal_rate = 5 // Temp. Regen per tick.

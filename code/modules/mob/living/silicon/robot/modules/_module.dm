@@ -1,4 +1,4 @@
-/obj/item/weapon/robot_module
+/obj/item/robot_module
 	name = "robot module"
 	icon = 'icons/obj/module.dmi'
 	icon_state = "std_module"
@@ -49,7 +49,7 @@
 	var/list/synths = list()
 	var/list/skills = list() // Skills that this module grants. Other skills will remain at minimum levels.
 
-/obj/item/weapon/robot_module/Initialize()
+/obj/item/robot_module/Initialize()
 
 	. = ..()
 
@@ -79,7 +79,7 @@
 	R.set_module_sprites(sprites)
 	R.choose_icon(R.module_sprites.len + 1, R.module_sprites)
 
-/obj/item/weapon/robot_module/proc/build_equipment()
+/obj/item/robot_module/proc/build_equipment()
 	var/list/created_equipment = list()
 	for(var/thing in equipment)
 		if(ispath(thing, /obj/item))
@@ -92,11 +92,11 @@
 			log_debug("Invalid var type in [type] equipment creation - [thing]")
 	equipment = created_equipment
 
-/obj/item/weapon/robot_module/proc/finalize_equipment()
+/obj/item/robot_module/proc/finalize_equipment()
 	for(var/obj/item/I in equipment)
 		I.canremove = FALSE
 
-/obj/item/weapon/robot_module/proc/build_synths()
+/obj/item/robot_module/proc/build_synths()
 	var/list/created_synths = list()
 	for(var/thing in synths)
 		if(ispath(thing, /datum/matter_synth))
@@ -110,21 +110,21 @@
 			log_debug("Invalid var type in [type] synth creation - [thing]")
 	synths = created_synths
 
-/obj/item/weapon/robot_module/proc/finalize_synths()
+/obj/item/robot_module/proc/finalize_synths()
 	return
 
-/obj/item/weapon/robot_module/proc/build_emag()
+/obj/item/robot_module/proc/build_emag()
 	if(ispath(emag))
 		emag = new emag(src)
 
-/obj/item/weapon/robot_module/proc/finalize_emag()
+/obj/item/robot_module/proc/finalize_emag()
 	if(istype(emag))
 		emag.canremove = FALSE
 	else
 		log_debug("Invalid var type in [type] emag creation - [emag]")
 		emag = null
 
-/obj/item/weapon/robot_module/proc/Reset(var/mob/living/silicon/robot/R)
+/obj/item/robot_module/proc/Reset(var/mob/living/silicon/robot/R)
 	remove_camera_networks(R)
 	remove_languages(R)
 	remove_subsystems(R)
@@ -135,7 +135,7 @@
 		R.silicon_radio.recalculateChannels()
 	R.choose_icon(0, R.set_module_sprites(list("Default" = initial(R.icon_state))))
 
-/obj/item/weapon/robot_module/Destroy()
+/obj/item/robot_module/Destroy()
 	QDEL_NULL_LIST(equipment)
 	QDEL_NULL_LIST(synths)
 	QDEL_NULL(emag)
@@ -145,7 +145,7 @@
 		R.module = null
 	. = ..()
 
-/obj/item/weapon/robot_module/emp_act(severity)
+/obj/item/robot_module/emp_act(severity)
 	if(equipment)
 		for(var/obj/O in equipment)
 			O.emp_act(severity)
@@ -156,7 +156,7 @@
 			S.emp_act(severity)
 	..()
 
-/obj/item/weapon/robot_module/proc/respawn_consumable(var/mob/living/silicon/robot/R, var/rate)
+/obj/item/robot_module/proc/respawn_consumable(var/mob/living/silicon/robot/R, var/rate)
 	var/obj/item/device/flash/F = locate() in equipment
 	if(F)
 		if(F.broken)
@@ -170,7 +170,7 @@
 	for(var/datum/matter_synth/T in synths)
 		T.add_charge(T.recharge_rate * rate)
 
-/obj/item/weapon/robot_module/proc/add_languages(var/mob/living/silicon/robot/R)
+/obj/item/robot_module/proc/add_languages(var/mob/living/silicon/robot/R)
 	// Stores the languages as they were before receiving the module, and whether they could be synthezized.
 	for(var/datum/language/language_datum in R.languages)
 		original_languages[language_datum] = (language_datum in R.speech_synthesizer_langs)
@@ -178,7 +178,7 @@
 	for(var/language in languages)
 		R.add_language(language, languages[language])
 
-/obj/item/weapon/robot_module/proc/remove_languages(var/mob/living/silicon/robot/R)
+/obj/item/robot_module/proc/remove_languages(var/mob/living/silicon/robot/R)
 	// Clear all added languages, whether or not we originally had them.
 	for(var/language in languages)
 		R.remove_language(language)
@@ -189,44 +189,44 @@
 		R.add_language(language_datum.name, original_languages[original_language])
 	original_languages.Cut()
 
-/obj/item/weapon/robot_module/proc/add_camera_networks(var/mob/living/silicon/robot/R)
+/obj/item/robot_module/proc/add_camera_networks(var/mob/living/silicon/robot/R)
 	if(R.camera && (NETWORK_ROBOTS in R.camera.network))
 		for(var/network in networks)
 			if(!(network in R.camera.network))
 				R.camera.add_network(network)
 				added_networks |= network
 
-/obj/item/weapon/robot_module/proc/remove_camera_networks(var/mob/living/silicon/robot/R)
+/obj/item/robot_module/proc/remove_camera_networks(var/mob/living/silicon/robot/R)
 	if(R.camera)
 		R.camera.remove_networks(added_networks)
 	added_networks.Cut()
 
-/obj/item/weapon/robot_module/proc/add_subsystems(var/mob/living/silicon/robot/R)
+/obj/item/robot_module/proc/add_subsystems(var/mob/living/silicon/robot/R)
 	for(var/subsystem_type in subsystems)
 		R.init_subsystem(subsystem_type)
 
-/obj/item/weapon/robot_module/proc/remove_subsystems(var/mob/living/silicon/robot/R)
+/obj/item/robot_module/proc/remove_subsystems(var/mob/living/silicon/robot/R)
 	for(var/subsystem_type in subsystems)
 		R.remove_subsystem(subsystem_type)
 
-/obj/item/weapon/robot_module/proc/apply_status_flags(var/mob/living/silicon/robot/R)
+/obj/item/robot_module/proc/apply_status_flags(var/mob/living/silicon/robot/R)
 	if(!can_be_pushed)
 		R.status_flags &= ~CANPUSH
 
-/obj/item/weapon/robot_module/proc/remove_status_flags(var/mob/living/silicon/robot/R)
+/obj/item/robot_module/proc/remove_status_flags(var/mob/living/silicon/robot/R)
 	if(!can_be_pushed)
 		R.status_flags |= CANPUSH
 
-/obj/item/weapon/robot_module/proc/handle_emagged()
+/obj/item/robot_module/proc/handle_emagged()
 	return
 
-/obj/item/weapon/robot_module/proc/grant_skills(var/mob/living/silicon/robot/R)
+/obj/item/robot_module/proc/grant_skills(var/mob/living/silicon/robot/R)
 	reset_skills(R) // for safety
 	var/list/skill_mod = list()
 	for(var/skill_type in skills)
 		skill_mod[skill_type] = skills[skill_type] - SKILL_MIN // the buff is additive, so normalize accordingly
 	R.buff_skill(skill_mod, buff_type = /datum/skill_buff/robot)
 
-/obj/item/weapon/robot_module/proc/reset_skills(var/mob/living/silicon/robot/R)
+/obj/item/robot_module/proc/reset_skills(var/mob/living/silicon/robot/R)
 	for(var/datum/skill_buff/buff in R.fetch_buffs_of_type(/datum/skill_buff/robot))
 		buff.remove()

@@ -93,17 +93,17 @@
 	item_state = "ba_suit"
 	worn_state = "internalaffairs"
 	gender_icons = 1
-	starting_accessories = list(/obj/item/clothing/accessory/black)
+	accessories = list(/obj/item/clothing/accessory/black)
 
 /obj/item/clothing/under/rank/internalaffairs/plain
 	desc = "A plain shirt and pair of pressed black pants."
 	name = "formal outfit"
-	starting_accessories = null
+	accessories = null
 
 /obj/item/clothing/under/rank/internalaffairs/plain/nt
 	desc = "A plain shirt and pair of pressed black pants."
 	name = "formal outfit"
-	starting_accessories = list(/obj/item/clothing/accessory/red_long)
+	accessories = list(/obj/item/clothing/accessory/red_long)
 
 
 /obj/item/clothing/under/rank/janitor
@@ -159,7 +159,7 @@
 	item_state = "ba_suit"
 	worn_state = "bluesuit"
 	gender_icons = 1
-	starting_accessories = list(/obj/item/clothing/accessory/red)
+	accessories = list(/obj/item/clothing/accessory/red)
 
 
 /obj/item/clothing/under/lawyer/purpsuit

@@ -17,8 +17,6 @@
 		update_items()
 	if (src.stat != DEAD) //still using power
 		use_power()
-		process_killswitch()
-		process_locks()
 		process_queued_alarms()
 	UpdateLyingBuckledAndVerbStatus()
 
@@ -53,17 +51,17 @@
 			else
 				cell_use_power(30) 	// 30W light. Normal lights would use ~15W, but increased for balance reasons.
 
-		src.has_power = 1
+		src.has_power = TRUE
 	else
 		power_down()
 
 /mob/living/silicon/robot/proc/power_down()
 	if (has_power)
 		visible_message("[src] beeps stridently as it begins to run on emergency backup power!", SPAN_WARNING("You beep stridently as you begin to run on emergency backup power!"))
-		has_power = 0
+		has_power = FALSE
 		set_stat(UNCONSCIOUS)
 	if(lights_on) // Light is on but there is no power!
-		lights_on = 0
+		lights_on = FALSE
 		set_light(0)
 
 /mob/living/silicon/robot/handle_regular_status_updates()
@@ -303,7 +301,7 @@
 	if (src.client)
 		src.client.screen -= src.contents
 		for(var/obj/I in src.contents)
-			if(I && !(istype(I,/obj/item/weapon/cell) || istype(I,/obj/item/device/radio)  || istype(I,/obj/machinery/camera) || istype(I,/obj/item/device/mmi)))
+			if(I && !(istype(I,/obj/item/cell) || istype(I,/obj/item/device/radio)  || istype(I,/obj/machinery/camera) || istype(I,/obj/item/device/mmi)))
 				src.client.screen += I
 	if(src.module_state_1)
 		src.module_state_1:screen_loc = ui_inv1
@@ -312,26 +310,6 @@
 	if(src.module_state_3)
 		src.module_state_3:screen_loc = ui_inv3
 	update_icon()
-
-/mob/living/silicon/robot/proc/process_killswitch()
-	if(killswitch)
-		killswitch_time --
-		if(killswitch_time <= 0)
-			if(src.client)
-				to_chat(src, "<span class='danger'>Killswitch Activated</span>")
-			killswitch = 0
-			spawn(5)
-				gib()
-
-/mob/living/silicon/robot/proc/process_locks()
-	if(weapon_lock)
-		uneq_all()
-		weaponlock_time --
-		if(weaponlock_time <= 0)
-			if(src.client)
-				to_chat(src, "<span class='danger'>Weapon Lock Timed Out!</span>")
-			weapon_lock = 0
-			weaponlock_time = 120
 
 /mob/living/silicon/robot/update_fire()
 	overlays -= image("icon"='icons/mob/OnFire.dmi', "icon_state"="Standing")

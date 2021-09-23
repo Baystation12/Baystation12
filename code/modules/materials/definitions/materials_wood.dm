@@ -102,3 +102,22 @@
 				/datum/reagent/water = 5,
 				/datum/reagent/toxin/taxine = 0.05
 				)
+
+/material/wood/vox
+	name = MATERIAL_VOXRES
+	ignition_point = T0C+300
+	melting_point = T0C+300
+	conductive = 0
+	stack_type = /obj/item/stack/material/wood/vox
+	icon_colour = "#3a4e1b"
+	chem_products = list(
+				/datum/reagent/resinpulp = 20
+				)
+	hidden_from_codex = TRUE
+	sheet_singular_name = "slab"
+	sheet_plural_name = "slabs"
+	construction_difficulty = MATERIAL_NORMAL_DIY
+	integrity = 60
+	hardness = MATERIAL_FLEXIBLE
+	weight = 12
+	brute_armor = 1 

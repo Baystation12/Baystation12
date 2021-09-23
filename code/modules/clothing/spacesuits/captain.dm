@@ -34,7 +34,7 @@
 	max_pressure_protection = VOIDSUIT_MAX_PRESSURE
 	min_pressure_protection = 0
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS
-	allowed = list(/obj/item/weapon/tank/emergency, /obj/item/device/flashlight,/obj/item/weapon/gun/energy, /obj/item/weapon/gun/projectile, /obj/item/ammo_magazine, /obj/item/ammo_casing, /obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs)
+	allowed = list(/obj/item/tank/emergency, /obj/item/device/flashlight,/obj/item/gun/energy, /obj/item/gun/projectile, /obj/item/ammo_magazine, /obj/item/ammo_casing, /obj/item/melee/baton,/obj/item/handcuffs)
 	armor = list(
 		melee = ARMOR_MELEE_MAJOR, 
 		bullet = ARMOR_BALLISTIC_RESISTANT, 

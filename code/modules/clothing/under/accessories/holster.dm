@@ -3,7 +3,7 @@
 	desc = "A handgun holster."
 	icon_state = "holster"
 	slot = ACCESSORY_SLOT_HOLSTER
-	slots = 1
+	slots = 1 STORAGE_SLOTS
 	max_w_class = ITEM_SIZE_NORMAL
 	var/list/can_holster = null
 	var/sound_in = 'sound/effects/holster/holsterin.ogg'
@@ -11,7 +11,9 @@
 
 /obj/item/clothing/accessory/storage/holster/Initialize()
 	. = ..()
-	set_extension(src, /datum/extension/holster, hold, sound_in, sound_out, can_holster)
+	INIT_SKIP_QDELETED
+	container.virtual = TRUE
+	set_extension(src, /datum/extension/holster, container, sound_in, sound_out, can_holster)
 
 /obj/item/clothing/accessory/storage/holster/attackby(obj/item/W as obj, mob/user as mob)
 	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)
@@ -24,8 +26,7 @@
 	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)
 	if(H.unholster(user))
 		return
-	else
-		. = ..(user)
+	. = ..(user)
 
 /obj/item/clothing/accessory/storage/holster/examine(mob/user)
 	. = ..(user)
@@ -56,12 +57,14 @@
 	name = "armpit holster"
 	desc = "A worn-out handgun holster. Perfect for concealed carry."
 	icon_state = "holster"
+	body_location = UPPER_TORSO
 
 /obj/item/clothing/accessory/storage/holster/waist
 	name = "waist holster"
 	desc = "A handgun holster. Made of expensive leather."
 	icon_state = "holster"
 	overlay_state = "holster_low"
+	body_location = UPPER_TORSO
 
 /obj/item/clothing/accessory/storage/holster/hip
 	name = "hip holster"
@@ -81,7 +84,7 @@
 	name = "machete sheath"
 	desc = "A handsome synthetic leather sheath with matching belt."
 	icon_state = "holster_machete"
-	can_holster = list(/obj/item/weapon/material/hatchet/machete)
+	can_holster = list(/obj/item/material/hatchet/machete)
 	sound_in = 'sound/effects/holster/sheathin.ogg'
 	sound_out = 'sound/effects/holster/sheathout.ogg'
 	body_location = LEGS
@@ -90,7 +93,7 @@
 	name = "leather knife sheath"
 	desc = "A synthetic leather knife sheath which you can strap on your leg."
 	icon_state = "sheath_leather"
-	can_holster = list(/obj/item/weapon/material/knife)
+	can_holster = list(/obj/item/material/knife)
 	sound_in = 'sound/effects/holster/sheathin.ogg'
 	sound_out = 'sound/effects/holster/sheathout.ogg'
 	body_location = LEGS

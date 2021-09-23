@@ -18,7 +18,7 @@
 		var/action = alert(src, "Invalid Chat Output data found!\nRecreate data?", "Wot?", "Recreate Chat Output data", "Cancel")
 		if (action != "Recreate Chat Output data")
 			return
-		chatOutput = new /datum/chatOutput(src)
+		chatOutput = new /chatOutput (src)
 		chatOutput.start()
 		action = alert(src, "Goon chat reloading, wait a bit and tell me if it's fixed", "", "Fixed", "Nope")
 		if (action == "Fixed")
@@ -98,5 +98,5 @@
 
 
 	var/auth_key = input("Enter the key, that bot gave you.") as text
-	if(auth_key):
+	if(auth_key)
 		SSwebhooks.send(WEBHOOK_REG, list("auth_key" = auth_key, "ckey" = src.key))

@@ -1,4 +1,4 @@
-/obj/item/weapon/hand_labeler
+/obj/item/hand_labeler
 	name = "hand labeler"
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "labeler0"
@@ -8,10 +8,10 @@
 	var/mode = 0	//off or on.
 	matter = list(MATERIAL_PLASTIC = 100)
 
-/obj/item/weapon/hand_labeler/attack()
+/obj/item/hand_labeler/attack()
 	return
 
-/obj/item/weapon/hand_labeler/afterattack(atom/A, mob/user as mob, proximity)
+/obj/item/hand_labeler/afterattack(atom/A, mob/user as mob, proximity)
 	if(!proximity)
 		return
 	if(!mode)	//if it's off, give up.
@@ -50,7 +50,7 @@
 	var/datum/extension/labels/L = get_or_create_extension(src, /datum/extension/labels)
 	L.AttachLabel(user, label_text)
 
-/obj/item/weapon/hand_labeler/attack_self(mob/user as mob)
+/obj/item/hand_labeler/attack_self(mob/user as mob)
 	mode = !mode
 	icon_state = "labeler[mode]"
 	if(mode)

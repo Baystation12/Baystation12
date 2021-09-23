@@ -5,6 +5,7 @@
 
 #define TRANSITIONEDGE 7 // Distance from edge to move to another z-level.
 #define RUIN_MAP_EDGE_PAD 15
+#define LANDING_ZONE_RADIUS 15 // Used for autoplacing landmarks on exoplanets
 
 // Invisibility constants.
 #define INVISIBILITY_LIGHTING    20
@@ -192,8 +193,8 @@
 #define AI_POWERUSAGE_OXYLOSS_TO_WATTS_MULTIPLIER 10000
 
 //Grid for Item Placement
-#define CELLS 8								//Amount of cells per row/column in grid
-#define CELLSIZE (world.icon_size/CELLS)	//Size of a cell in pixels
+#define CELLS 16                         //Amount of cells per row/column in grid
+#define CELLSIZE (world.icon_size/CELLS) //Size of a cell in pixels
 
 #define PIXEL_MULTIPLIER WORLD_ICON_SIZE/32
 
@@ -278,4 +279,15 @@
 
 //Misc text define. Does 4 spaces. Used as a makeshift tabulator.
 #define FOURSPACES "&nbsp;&nbsp;&nbsp;&nbsp;"
-#define CLIENT_FROM_VAR(I) (ismob(I) ? I:client : (isclient(I) ? I : (istype(I, /datum/mind) ? I:current?:client : null)))
+
+#define INCREMENT_WORLD_Z_SIZE world.maxz++; if (SSzcopy.zlev_maximums.len) { SSzcopy.calculate_zstack_limits() }
+
+//Semantic; usage intent of variable
+#define EMPTY_BITFIELD 0
+
+//-- Masks for /atom/var/init_flags --
+//- machinery
+#define INIT_MACHINERY_PROCESS_SELF 0x1
+#define INIT_MACHINERY_PROCESS_COMPONENTS 0x2
+#define INIT_MACHINERY_PROCESS_ALL 0x3
+//--

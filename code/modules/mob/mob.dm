@@ -188,11 +188,6 @@
 /atom/proc/drain_power(var/drain_check,var/surge, var/amount = 0)
 	return -1
 
-/mob/proc/findname(msg)
-	for(var/mob/M in SSmobs.mob_list)
-		if (M.real_name == msg)
-			return M
-	return 0
 
 /mob/proc/movement_delay()
 	. = 0
@@ -356,10 +351,6 @@
 
 	var/obj/P = new /obj/effect/decal/point(tile)
 	P.set_invisibility(invisibility)
-	spawn (20)
-		if(P)
-			qdel(P)	// qdel
-
 	face_atom(A)
 	return 1
 
@@ -482,7 +473,7 @@
 	. = OnSelfTopic(href_list, CanUseTopic(usr, GLOB.self_state, href_list))
 	if (.)
 		return
-	if (href_list["flavor_change"] && !is_admin(usr) && (usr != src))
+	if (href_list["flavor_change"] && !isadmin(usr) && (usr != src))
 		log_and_message_admins(usr, "is suspected of trying to change flavor text on [key_name_admin(src)] via Topic exploits.")
 	return ..()
 
@@ -588,11 +579,11 @@
 			else if(H.has_organ(BP_L_ARM) || H.has_organ(BP_R_ARM)) //If they only have one arm
 				grabtype = "arm"
 			else //If they have no arms
-				grabtype = "torso"	
+				grabtype = "torso"
 
 			visible_message(SPAN_WARNING("\The [src] leans down and grips \the [H]'s [grabtype]."), SPAN_NOTICE("You lean down and grip \the [H]'s [grabtype]."), exclude_mobs = list(H))
 			if(!H.stat)
-				to_chat(H, SPAN_WARNING("\The [src] leans down and grips your [grabtype]."))	
+				to_chat(H, SPAN_WARNING("\The [src] leans down and grips your [grabtype]."))
 
 		else //Otherwise we're probably just holding their arm to lead them somewhere
 			var/grabtype
@@ -711,14 +702,14 @@
 	if(!resting && cannot_stand() && can_stand_overridden())
 		lying = 0
 	else if(buckled)
-		anchored = 1
+		anchored = TRUE
 		if(istype(buckled))
 			if(buckled.buckle_lying == -1)
 				lying = incapacitated(INCAPACITATION_KNOCKDOWN)
 			else
 				lying = buckled.buckle_lying
 			if(buckled.buckle_movable)
-				anchored = 0
+				anchored = FALSE
 	else
 		lying = incapacitated(INCAPACITATION_KNOCKDOWN)
 
@@ -867,16 +858,16 @@
 /mob/proc/remove_implant(var/obj/item/implant, var/surgical_removal = FALSE)
 	if(!LAZYLEN(get_visible_implants(0))) //Yanking out last object - removing verb.
 		verbs -= /mob/proc/yank_out_object
-	for(var/obj/item/weapon/O in pinned)
+	for(var/obj/item/O in pinned)
 		if(O == implant)
 			pinned -= O
 		if(!pinned.len)
-			anchored = 0
+			anchored = FALSE
 	implant.dropInto(loc)
 	implant.add_blood(src)
 	implant.update_icon()
-	if(istype(implant,/obj/item/weapon/implant))
-		var/obj/item/weapon/implant/imp = implant
+	if(istype(implant,/obj/item/implant))
+		var/obj/item/implant/imp = implant
 		imp.removed()
 	. = TRUE
 
@@ -937,7 +928,7 @@
 		else
 			to_chat(U, "[src] has nothing stuck in their wounds that is large enough to remove.")
 		return
-	var/obj/item/weapon/selection = input("What do you want to yank out?", "Embedded objects") in valid_objects
+	var/obj/item/selection = input("What do you want to yank out?", "Embedded objects") in valid_objects
 	if(self)
 		to_chat(src, "<span class='warning'>You attempt to get a good grip on [selection] in your body.</span>")
 	else
