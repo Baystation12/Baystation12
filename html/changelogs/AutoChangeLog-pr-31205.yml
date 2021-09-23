@@ -1,0 +1,7 @@
+author: Jux
+delete-after: true
+changes:
+  - maptweak: Security processing's window tint also tints the interior hall windows.
+  - maptweak: The BC no longer needs to leave their desk to access the window to processing.
+  - maptweak: Moves the BC's hall-facing window so the BC no longer reaches through
+      a solid window to access their requests console.
