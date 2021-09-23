@@ -1,20 +1,20 @@
-/datum/codex_entry/cbm
-	associated_paths = list(/obj/item/device/compact_bionic_module)
-	display_name = "Compact Bionic Module/CBM"
-	antag_text = "<p>Compact bionic modules are one-use installers pre-loaded with medical software and an augment. Activating it in-hand can be used to install an augment in the configured location by first tearing open an incision, then installing the augment, and finally sealing the wound.</p>\
+/datum/codex_entry/augment_implanter
+	associated_paths = list(/obj/item/device/augment_implanter)
+	display_name = "Augment Autodoc"
+	antag_text = "<p>Augment Autodocs are one-use medical devices pre-loaded with medical software and an augment. Activating it in-hand can be used to install an augment in the configured location by first tearing open an incision, then installing the augment, and finally sealing the wound.</p>\
 \
 	<p>To use:</p>\
 	<ol>\
-	<li>Optional: Use a screwdriver on the CBM to configure the augment's installation location, if applicable.\
+	<li>Optional: Use a screwdriver on the Autodoc to configure the augment's installation location, if applicable.\
 	<li>Firmly buckle yourself to a solid object such as a bed or chair.\
-	<li>Ensure that you are firmly secured, then activate the CBM in your hand.\
-	<li>The CBM will perform a rapid surgical procedure on you. Be as still as possible during this time - it will deactivate if it is interrupted.\
-	<li>When the operation is complete, collect the spent CBM for disposal.\
+	<li>Ensure that you are firmly secured, then activate the Autodoc in your hand.\
+	<li>The Autodoc will perform a rapid surgical procedure on you. Be as still as possible during this time - it will deactivate if it is interrupted.\
+	<li>When the operation is complete, collect the spent Autodoc for disposal.\
 	</ol>\
 \
-	<p>CBMs don't come with their own painkillers, and like any surgery operation, it will be extremely painful without them. It will do its best to seal the wounds it creates, but in the event of an interruption, you will likely be left with an open surgical incision.</p>\
+	<p>Autodocs don't come with their own painkillers, and like any surgery operation, it will be extremely painful without them. It will do its best to seal the wounds it creates, but in the event of an interruption, you will likely be left with an open surgical incision.</p>\
 \
-	<p>You can use a crowbar to lever the augment out of the CBM, but doing so will render the CBM itself permanently useless. This might be useful if you have a collaborator that can safely install the augment in a more desirable way.</p>"
+	<p>You can use a crowbar to lever the augment out of the Autodoc, but doing so will render the Autodoc itself permanently useless. This might be useful if you have a collaborator that can safely install the augment in a more desirable way.</p>"
 
 /datum/codex_entry/leukocyte_breeder
 	associated_paths = list(/obj/item/organ/internal/augment/active/leukocyte_breeder)

@@ -1,8 +1,8 @@
 /mob/living/simple_animal/hostile/giant_spider/guard
-	desc = "A monstrously huge brown spider with shimmering eyes."
-	icon_state = "brown"
-	icon_living = "brown"
-	icon_dead = "brown_dead"
+	desc = "A monstrously huge brown spider. This one has terrible red eyes."
+	icon_state = "guard"
+	icon_living = "guard"
+	icon_dead = "guard_dead"
 	meat_amount = 4
 	maxHealth = 200
 	health = 200

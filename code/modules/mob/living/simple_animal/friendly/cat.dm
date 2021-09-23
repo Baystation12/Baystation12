@@ -1,5 +1,5 @@
 //Cat
-/mob/living/simple_animal/friendly/cat
+/mob/living/simple_animal/passive/cat
 	name = "cat"
 	desc = "A domesticated, feline pet. Has a tendency to adopt crewmembers."
 	icon_state = "cat2"
@@ -23,19 +23,19 @@
 	skin_material = MATERIAL_SKIN_FUR_ORANGE
 
 	var/turns_since_scan = 0
-	var/mob/living/simple_animal/friendly/mouse/movement_target
+	var/mob/living/simple_animal/passive/mouse/movement_target
 
 	ai_holder_type = /datum/ai_holder/simple_animal/passive/cat
 	say_list_type = /datum/say_list/cat
 
-/mob/living/simple_animal/friendly/cat/Life()
+/mob/living/simple_animal/passive/cat/Life()
 	. = ..()
 	if(!.)
 		return FALSE
 	//MICE!
 	if((src.loc) && isturf(src.loc))
 		if(!resting && !buckled)
-			for(var/mob/living/simple_animal/friendly/mouse/M in loc)
+			for(var/mob/living/simple_animal/passive/mouse/M in loc)
 				if(!M.stat)
 					M.splat()
 					visible_emote(pick("bites \the [M]!","toys with \the [M].","chomps on \the [M]!"))
@@ -45,7 +45,7 @@
 
 
 
-	for(var/mob/living/simple_animal/friendly/mouse/snack in oview(src,5))
+	for(var/mob/living/simple_animal/passive/mouse/snack in oview(src,5))
 		if(snack.stat < DEAD && prob(15))
 			audible_emote(pick("hisses and spits!","mrowls fiercely!","eyes [snack] hungrily."))
 		break
@@ -72,7 +72,7 @@
 				var/atom/A = pick(visible)
 				visible_emote("suddenly stops and stares at something unseen[istype(A) ? " near [A]":""].")
 
-/mob/living/simple_animal/friendly/cat/proc/handle_movement_target()
+/mob/living/simple_animal/passive/cat/proc/handle_movement_target()
 	//if our target is neither inside a turf or inside a human(???), stop
 	if((movement_target) && !(isturf(movement_target.loc) || ishuman(movement_target.loc) ))
 		movement_target = null
@@ -81,7 +81,7 @@
 	if( !movement_target || !(movement_target.loc in oview(src, 4)) )
 		movement_target = null
 		set_AI_busy(FALSE)
-		for(var/mob/living/simple_animal/friendly/mouse/snack in oview(src)) //search for a new target
+		for(var/mob/living/simple_animal/passive/mouse/snack in oview(src)) //search for a new target
 			if(isturf(snack.loc) && !snack.stat)
 				movement_target = snack
 				break
@@ -92,11 +92,11 @@
 
 
 //Basic friend AI
-/mob/living/simple_animal/friendly/cat/fluff
+/mob/living/simple_animal/passive/cat/fluff
 	var/mob/living/carbon/human/friend
 	var/befriend_job = null
 
-/mob/living/simple_animal/friendly/cat/fluff/handle_movement_target()
+/mob/living/simple_animal/passive/cat/fluff/handle_movement_target()
 	if (friend)
 		var/follow_dist = 4
 		if (friend.stat >= DEAD || friend.is_asystole()) //danger
@@ -107,7 +107,7 @@
 		var/current_dist = get_dist(src, friend)
 
 		if (movement_target != friend)
-			if (current_dist > follow_dist && !istype(movement_target, /mob/living/simple_animal/friendly/mouse) && (friend in oview(src)))
+			if (current_dist > follow_dist && !istype(movement_target, /mob/living/simple_animal/passive/mouse) && (friend in oview(src)))
 				//stop existing movement
 				walk_to(src,0)
 				turns_since_scan = 0
@@ -128,7 +128,7 @@
 	if (!friend || movement_target != friend)
 		..()
 
-/mob/living/simple_animal/friendly/cat/fluff/Life()
+/mob/living/simple_animal/passive/cat/fluff/Life()
 	. = ..()
 	if(!.)
 		return FALSE
@@ -150,7 +150,7 @@
 			var/verb = pick("meows", "mews", "mrowls")
 			audible_emote("[verb] anxiously.")
 
-/mob/living/simple_animal/friendly/cat/fluff/verb/become_friends()
+/mob/living/simple_animal/passive/cat/fluff/verb/become_friends()
 	set name = "Become Friends"
 	set category = "IC"
 	set src in view(1)
@@ -174,7 +174,7 @@
 	return
 
 //RUNTIME IS ALIVE! SQUEEEEEEEE~
-/mob/living/simple_animal/friendly/cat/fluff/Runtime
+/mob/living/simple_animal/passive/cat/fluff/Runtime
 	name = "Runtime"
 	desc = "Her fur has the look and feel of velvet, and her tail quivers occasionally."
 	gender = FEMALE
@@ -184,7 +184,7 @@
 	icon_dead = "cat_dead"
 	skin_material = MATERIAL_SKIN_FUR_BLACK
 
-/mob/living/simple_animal/friendly/cat/kitten
+/mob/living/simple_animal/passive/cat/kitten
 	name = "kitten"
 	desc = "D'aaawwww."
 	icon_state = "kitten"
@@ -203,7 +203,7 @@
 	gender = MALE
 	icon_state = "cat3"
 
-/mob/living/simple_animal/friendly/cat/fluff/bones
+/mob/living/simple_animal/passive/cat/fluff/bones
 	name = "Bones"
 	desc = "That's Bones the cat. He's a laid back, black cat. Meow."
 	gender = MALE
@@ -214,7 +214,7 @@
 	holder_type = /obj/item/holder/cat/fluff/bones
 	var/friend_name = "Erstatz Vryroxes"
 
-/mob/living/simple_animal/friendly/cat/kitten/New()
+/mob/living/simple_animal/passive/cat/kitten/New()
 	gender = pick(MALE, FEMALE)
 	..()
 

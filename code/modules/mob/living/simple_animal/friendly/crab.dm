@@ -1,5 +1,5 @@
 //Look Sir, free crabs!
-/mob/living/simple_animal/friendly/crab
+/mob/living/simple_animal/passive/crab
 	name = "crab"
 	desc = "A hard-shelled crustacean. Seems quite content to lounge around all the time."
 	icon_state = "crab"

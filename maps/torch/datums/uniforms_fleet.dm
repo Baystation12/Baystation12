@@ -9,7 +9,7 @@
 				/obj/item/clothing/head/ushanka/solgov/fleet,
 				/obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,
 				/obj/item/clothing/head/soft/solgov/fleet,
-				/obj/item/clothing/gloves/thick/duty/solgov/cmd
+				/obj/item/clothing/gloves/thick
 			)
 
 	service_hat = /obj/item/clothing/head/solgov/dress/fleet/command
@@ -47,7 +47,7 @@
 				/obj/item/clothing/head/ushanka/solgov/fleet,
 				/obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,
 				/obj/item/clothing/head/soft/solgov/fleet,
-				/obj/item/clothing/gloves/thick/duty/solgov/eng
+				/obj/item/clothing/gloves/thick
 			)
 
 /decl/hierarchy/mil_uniform/fleet/eng/noncom
@@ -84,7 +84,7 @@
 				/obj/item/clothing/head/ushanka/solgov/fleet,
 				/obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,
 				/obj/item/clothing/head/soft/solgov/fleet,
-				/obj/item/clothing/gloves/thick/duty/solgov/eng
+				/obj/item/clothing/gloves/thick
 			)
 
 	service_hat = /obj/item/clothing/head/solgov/dress/fleet/command
@@ -126,7 +126,7 @@
 				/obj/item/clothing/head/ushanka/solgov/fleet,
 				/obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,
 				/obj/item/clothing/head/soft/solgov/fleet,
-				/obj/item/clothing/gloves/thick/duty/solgov/sec
+				/obj/item/clothing/gloves/thick
 			)
 
 
@@ -168,7 +168,7 @@
 				/obj/item/clothing/head/ushanka/solgov/fleet,
 				/obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,
 				/obj/item/clothing/head/soft/solgov/fleet,
-				/obj/item/clothing/gloves/thick/duty/solgov/sec
+				/obj/item/clothing/gloves/thick
 			)
 
 	service_hat = /obj/item/clothing/head/solgov/dress/fleet/command
@@ -207,7 +207,7 @@
 				/obj/item/clothing/head/ushanka/solgov/fleet,
 				/obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,
 				/obj/item/clothing/head/soft/solgov/fleet,
-				/obj/item/clothing/gloves/thick/duty/solgov/med
+				/obj/item/clothing/gloves/thick
 			)
 
 /decl/hierarchy/mil_uniform/fleet/med/noncom
@@ -242,7 +242,7 @@
 				/obj/item/clothing/head/ushanka/solgov/fleet,
 				/obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,
 				/obj/item/clothing/head/soft/solgov/fleet,
-				/obj/item/clothing/gloves/thick/duty/solgov/med
+				/obj/item/clothing/gloves/thick
 			)
 
 	service_hat = /obj/item/clothing/head/solgov/dress/fleet/command
@@ -281,7 +281,7 @@
 				/obj/item/clothing/head/ushanka/solgov/fleet,
 				/obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,
 				/obj/item/clothing/head/soft/solgov/fleet,
-				/obj/item/clothing/gloves/thick/duty/solgov/sup
+				/obj/item/clothing/gloves/thick
 			)
 
 /decl/hierarchy/mil_uniform/fleet/sup/noncom
@@ -316,7 +316,7 @@
 				/obj/item/clothing/head/ushanka/solgov/fleet,
 				/obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,
 				/obj/item/clothing/head/soft/solgov/fleet,
-				/obj/item/clothing/gloves/thick/duty/solgov/sup
+				/obj/item/clothing/gloves/thick
 			)
 
 	service_hat = /obj/item/clothing/head/solgov/dress/fleet/command
@@ -359,7 +359,7 @@
 				/obj/item/clothing/head/ushanka/solgov/fleet,
 				/obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,
 				/obj/item/clothing/head/soft/solgov/fleet,
-				/obj/item/clothing/gloves/thick/duty/solgov/svc
+				/obj/item/clothing/gloves/thick
 			)
 
 /decl/hierarchy/mil_uniform/fleet/srv/noncom
@@ -395,7 +395,7 @@
 				/obj/item/clothing/head/ushanka/solgov/fleet,
 				/obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,
 				/obj/item/clothing/head/soft/solgov/fleet,
-				/obj/item/clothing/gloves/thick/duty/solgov/svc
+				/obj/item/clothing/gloves/thick
 			)
 
 	service_hat = /obj/item/clothing/head/solgov/dress/fleet/command
@@ -416,7 +416,7 @@
 				/obj/item/clothing/head/ushanka/solgov/fleet,
 				/obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,
 				/obj/item/clothing/head/soft/solgov/fleet,
-				/obj/item/clothing/gloves/thick/duty/solgov/exp
+				/obj/item/clothing/gloves/thick
 			)
 
 /decl/hierarchy/mil_uniform/fleet/exp/noncom
@@ -452,7 +452,7 @@
 				/obj/item/clothing/head/ushanka/solgov/fleet,
 				/obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,
 				/obj/item/clothing/head/soft/solgov/fleet,
-				/obj/item/clothing/gloves/thick/duty/solgov/exp
+				/obj/item/clothing/gloves/thick
 			)
 
 	service_hat = /obj/item/clothing/head/solgov/dress/fleet/command
@@ -473,7 +473,7 @@
 				/obj/item/clothing/head/ushanka/solgov/fleet,
 				/obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,
 				/obj/item/clothing/head/soft/solgov/fleet,
-				/obj/item/clothing/gloves/thick/duty/solgov/cmd
+				/obj/item/clothing/gloves/thick
 			)
 
 /decl/hierarchy/mil_uniform/fleet/spt/noncom
@@ -509,7 +509,7 @@
 				/obj/item/clothing/head/ushanka/solgov/fleet,
 				/obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,
 				/obj/item/clothing/head/soft/solgov/fleet,
-				/obj/item/clothing/gloves/thick/duty/solgov/cmd
+				/obj/item/clothing/gloves/thick
 			)
 
 	service_hat = /obj/item/clothing/head/solgov/dress/fleet/command

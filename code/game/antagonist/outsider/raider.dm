@@ -86,7 +86,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 		/obj/item/gun/projectile/revolver,
 		/obj/item/gun/projectile/pirate,
 		/obj/item/gun/projectile/revolver/medium,
-		/obj/item/gun/projectile/pistol/throwback
+		/obj/item/gun/projectile/pistol/broomstick
 		)
 
 	var/list/raider_holster = list(
@@ -305,7 +305,8 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 				/obj/item/gun/projectile/shotgun/doublebarrel,
 				/obj/item/gun/energy/xray,
 				/obj/item/gun/projectile/automatic/battlerifle,
-				/obj/item/gun/projectile/automatic/semistrip,
+				/obj/item/gun/projectile/sniper/semistrip,
+				/obj/item/gun/projectile/sniper/garand,
 				/obj/item/gun/projectile/automatic/assault_rifle,
 				/obj/item/gun/projectile/automatic/sec_smg,
 				/obj/item/gun/energy/crossbow/largecrossbow,

@@ -173,7 +173,7 @@ proc/age2agedescription(age)
 		if (QDELETED(user))
 			. = DO_MISSING_USER
 			break
-		if (target_type && QDELETED(target))
+		if (target_type && (QDELETED(target) || target_type != target.type))
 			. = DO_MISSING_TARGET
 			break
 		if (user.incapacitated(incapacitation_flags))

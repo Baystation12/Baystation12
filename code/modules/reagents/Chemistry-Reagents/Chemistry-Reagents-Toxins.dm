@@ -145,6 +145,115 @@
 		M.confused = max(M.confused, 3)
 	..()
 
+/datum/reagent/toxin/cryotoxin
+	name = "Cryotoxin"
+	description = "A biological agent that rapidly lowers a victims bodytemperature, and persists for quite some time."
+	taste_description = "mint"
+	taste_mult = 1.5
+	reagent_state = LIQUID
+	metabolism = REM * 0.5
+	color = "#b31008"
+
+/datum/reagent/toxin/cryotoxin/affect_blood(mob/living/carbon/M, alien, removed)
+	if (alien == IS_DIONA)
+		return
+	M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 215)
+	if (prob(20))
+		to_chat(M, SPAN_DANGER("Your insides feel freezing cold!"))
+	if (prob(1))
+		M.emote("shiver")
+	holder.remove_reagent("capsaicin", 5)
+
+/datum/reagent/toxin/irritanttoxin
+	name = "Irritant toxin"
+	description = "A biological agent that acts similarly to pepperspray. This compound seems to be particularly cruel, however, capable of permeating the barriers of blood vessels."
+	taste_description = "fire"
+	color = "#b31008"
+	target_organ = BP_KIDNEYS
+
+/datum/reagent/toxin/irritanttoxin/affect_blood(mob/living/carbon/M, alien, removed)
+	if (alien == IS_DIONA)
+		return
+	if (prob(50))
+		M.adjustToxLoss(0.5 * removed)
+	if (prob(50))
+		M.custom_pain("You are getting unbearably hot!", 30)
+		if (prob(10))
+			to_chat(M, SPAN_DANGER("You feel like your insides are burning!"))
+		else if (prob(20))
+			M.visible_message(SPAN_WARNING("[M] [pick("dry heaves!","coughs!","splutters!","rubs at their eyes!")]"))
+	else
+		M.eye_blurry = max(M.eye_blurry, 10)
+
+/datum/reagent/toxin/pyrotoxin
+	name = "Pyrotoxin"
+	description = "A biologically produced compound capable of melting steel or other metals, similarly to thermite."
+	taste_description = "sweet chalk"
+	reagent_state = SOLID
+	color = "#673910"
+	touch_met = 50
+
+/datum/reagent/toxin/pyrotoxin/affect_blood(mob/living/carbon/M, alien, removed)
+	M.adjustFireLoss(3 * removed)
+	if (M.fire_stacks <= 1.5)
+		M.adjust_fire_stacks(0.15)
+	if (alien == IS_DIONA)
+		return
+	if (prob(10))
+		to_chat(M, SPAN_WARNING("Your veins feel like they're on fire!"))
+		M.adjust_fire_stacks(0.1)
+	else if (prob(5))
+		M.IgniteMob()
+		M.visible_message(
+			SPAN_WARNING("Some of \the [M]'s veins rupture, the exposed blood igniting!"),
+			SPAN_DANGER("Some of your veins rupture, the exposed blood igniting!")
+		)
+
+/datum/reagent/toxin/serotrotium
+	name = "Serotropic venom"
+	description = "A chemical compound that promotes concentrated production of the serotonin neurotransmitter in humans. This appears to be a biologically produced form, resulting in a specifically toxic nature."
+	taste_description = "chalky bitterness"
+	target_organ = BP_KIDNEYS
+
+/datum/reagent/toxin/serotrotium/affect_blood(mob/living/carbon/M, alien, removed)
+	if(alien == IS_DIONA)
+		return
+	if(prob(30))
+		if(prob(25))
+			M.emote(pick("shiver", "blink_r"))
+		M.adjustBrainLoss(0.2 * removed)
+	return ..()
+
+/datum/reagent/toxin/stimm	//Homemade Hyperzine
+	name = "Stimm"
+	description = "A homemade stimulant with some serious side-effects."
+	taste_description = "sweetness"
+	taste_mult = 1.8
+	color = "#d0583a"
+	metabolism = REM * 3
+	overdose = 8
+	strength = 3
+
+/datum/reagent/toxin/stimm/affect_blood(mob/living/carbon/M, alien, removed)
+	..()
+	if (prob(15))
+		M.emote(pick("twitch", "blink_r", "shiver"))
+	if (prob(15))
+		M.visible_message(
+			SPAN_WARNING("\The [M] shudders violently."),
+			SPAN_WARNING("You shudder uncontrollably, it hurts.")
+		)
+		M.take_organ_damage(6 * removed, 0)
+	M.add_chemical_effect(CE_SPEEDBOOST, 1)
+
+/datum/reagent/toxin/stimm/overdose(mob/living/carbon/M, alien)
+	..()
+	if (prob(10)) // 1 in 10. This thing's made with welder fuel and fertilizer, what do you expect?
+		var/mob/living/carbon/human/H = M
+		var/obj/item/organ/internal/heart/O = H.internal_organs_by_name[BP_HEART]
+		O.take_internal_damage(1)
+		to_chat(M, SPAN_WARNING("You feel a stabbing pain in your heart as it beats out of control!"))
+
 /datum/reagent/toxin/chlorine
 	name = "Chlorine"
 	description = "A highly poisonous liquid. Smells strongly of bleach."
@@ -969,20 +1078,6 @@
 	heating_products = null
 	heating_point = null
 
-/datum/reagent/toxin/bromide/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien != IS_MANTID)
-		. = ..()
-
-/datum/reagent/toxin/bromide/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_MANTID)
-		M.add_chemical_effect(CE_OXYGENATED, 1)
-	else
-		..()
-
-/datum/reagent/toxin/bromide/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien != IS_MANTID)
-		. = ..()
-
 /datum/reagent/toxin/methyl_bromide
 	name = "Methyl Bromide"
 	description = "A fumigant derived from bromide."
@@ -994,10 +1089,10 @@
 	heating_point = null
 
 /datum/reagent/toxin/methyl_bromide/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
-	. = (alien != IS_MANTID && alien != IS_NABBER && ..())
+	. = (alien != IS_NABBER && ..())
 
 /datum/reagent/toxin/methyl_bromide/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	. = (alien != IS_MANTID && alien != IS_NABBER && ..())
+	. = (alien != IS_NABBER && ..())
 
 /datum/reagent/toxin/methyl_bromide/touch_turf(var/turf/simulated/T)
 	if(istype(T))
@@ -1005,7 +1100,7 @@
 		remove_self(volume)
 
 /datum/reagent/toxin/methyl_bromide/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	. = (alien != IS_MANTID && alien != IS_NABBER && ..())
+	. = (alien != IS_NABBER && ..())
 	if(istype(M))
 		for(var/obj/item/organ/external/E in M.organs)
 			if(LAZYLEN(E.implants))

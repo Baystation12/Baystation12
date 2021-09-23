@@ -162,3 +162,9 @@
 		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/security, /obj/item/storage/backpack/satchel/sec)),
 		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/dufflebag/sec, /obj/item/storage/backpack/messenger/sec))
 	)
+
+/obj/structure/closet/bombclosetsecurity/WillContain()
+	return list(
+		/obj/item/clothing/suit/bomb_suit/security,
+		/obj/item/clothing/head/bomb_hood/security
+	)

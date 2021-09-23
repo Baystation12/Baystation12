@@ -1,9 +1,9 @@
 //spitters - fast, comparatively weak, very venomous; projectile attacks but will resort to melee once out of ammo
 /mob/living/simple_animal/hostile/giant_spider/spitter
 	desc = "A monstrously huge iridescent spider with shimmering eyes."
-	icon_state = "purple"
-	icon_living = "purple"
-	icon_dead = "purple_dead"
+	icon_state = "spitter"
+	icon_living = "spitter"
+	icon_dead = "spitter_dead"
 	maxHealth = 90
 	health = 90
 	poison_per_bite = 15

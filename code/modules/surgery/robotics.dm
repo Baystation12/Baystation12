@@ -454,7 +454,7 @@ decl/surgery_step/robotics/get_skill_reqs(mob/living/user, mob/living/carbon/hum
 		return FALSE
 	var/obj/item/organ/internal/augment/A = organ_to_replace
 	if(istype(A))
-		if(!(A.augment_flags & AUGMENTATION_MECHANIC))
+		if(!(A.augment_flags & AUGMENT_MECHANICAL))
 			to_chat(user, SPAN_WARNING("\the [A] cannot function within a robotic limb"))
 			return FALSE
 	return organ_to_replace

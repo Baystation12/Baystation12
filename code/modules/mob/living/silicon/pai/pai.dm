@@ -6,7 +6,8 @@ GLOBAL_LIST_INIT(possible_chassis, list(
 		"Rabbit" = "rabbit",
 		"Mushroom" = "mushroom",
 		"Corgi" = "corgi",
-		"Crow" = "crow"
+		"Crow" = "crow",
+		"Humanoid" = "humanoid"
 		))
 
 GLOBAL_LIST_INIT(possible_say_verbs, list(

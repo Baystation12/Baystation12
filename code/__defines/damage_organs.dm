@@ -50,6 +50,7 @@
 #define ORGAN_ROBOTIC    (1<<11) // The organ is robotic. Changes numerous behaviors, search BP_IS_ROBOTIC for checks.
 #define ORGAN_BRITTLE    (1<<12) // The organ takes additional blunt damage. If robotic, cannot be repaired through normal means.
 #define ORGAN_CRYSTAL    (1<<13) // The organ does not suffer laser damage, but shatters on droplimb.
+#define ORGAN_CONFIGURE  (1<<14) // The organ has an extra configuration step for surgery that it handles itself.
 
 // Flags for proc/take_organ_damage
 #define ORGAN_DAMAGE_SHARP       (1 << 0) // Damage should be treated as sharp when applied

@@ -111,10 +111,10 @@
 		return
 
 	if(!istype(target))
-		if(istype(target, /mob/living/simple_animal/friendly/mouse))
+		if(istype(target, /mob/living/simple_animal/passive/mouse))
 			new /obj/item/remains/mouse(get_turf(target))
 			qdel(target)
-		else if(istype(target, /mob/living/simple_animal/friendly/lizard))
+		else if(istype(target, /mob/living/simple_animal/passive/lizard))
 			new /obj/item/remains/lizard(get_turf(target))
 			qdel(target)
 		return
@@ -784,8 +784,8 @@
 			if(istype(product,/mob/living))
 				product.visible_message("<span class='notice'>The pod disgorges [product]!</span>")
 				handle_living_product(product)
-				if(istype(product,/mob/living/simple_animal/friendly/mushroom)) // Gross.
-					var/mob/living/simple_animal/friendly/mushroom/mush = product
+				if(istype(product,/mob/living/simple_animal/passive/mushroom)) // Gross.
+					var/mob/living/simple_animal/passive/mushroom/mush = product
 					mush.seed = src
 
 // When the seed in this machine mutates/is modified, the tray seed value

@@ -122,7 +122,7 @@
 
 /obj/item/tank/emergency/nitrogen
 	name = "emergency nitrogen tank"
-	desc = "An emergency air tank hastily painted red and issued to Vox crewmembers."
+	desc = "An emergency air tank painted red and filled with nitrogen, for some reason."
 	icon_state = "emergency_nitro"
 	gauge_icon = "indicator_emergency"
 	starting_pressure = list(GAS_NITROGEN = 10*ONE_ATMOSPHERE)

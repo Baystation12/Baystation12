@@ -275,7 +275,8 @@
 
 /obj/random/projectile/spawn_choices()
 	return list(/obj/item/gun/projectile/automatic/battlerifle = 4,
-				/obj/item/gun/projectile/automatic/semistrip = 4,
+				/obj/item/gun/projectile/sniper/garand = 4,
+				/obj/item/gun/projectile/sniper/semistrip = 4,
 				/obj/item/gun/projectile/shotgun/pump = 3,
 				/obj/item/gun/projectile/automatic/merc_smg = 2,
 				/obj/item/gun/projectile/automatic/assault_rifle = 2,
@@ -292,7 +293,8 @@
 				/obj/item/gun/projectile/shotgun/doublebarrel/sawn = 3,
 				/obj/item/gun/projectile/heavysniper = 1,
 				/obj/item/gun/projectile/shotgun/pump/combat = 2,
-				/obj/item/gun/projectile/pistol/throwback = 1)
+				/obj/item/gun/projectile/pistol/throwback = 1,
+				/obj/item/gun/projectile/pistol/broomstick = 1)
 
 /obj/random/handgun
 	name = "Random Handgun"
@@ -306,7 +308,8 @@
 				/obj/item/gun/projectile/pistol/military/alt = 1,
 				/obj/item/gun/projectile/pistol/holdout = 2,
 				/obj/item/gun/energy/retro = 1,
-				/obj/item/gun/projectile/pistol/throwback = 1)
+				/obj/item/gun/projectile/pistol/throwback = 1,
+				/obj/item/gun/projectile/pistol/broomstick = 1)
 
 /obj/random/ammo
 	name = "Random Ammunition"
@@ -434,8 +437,8 @@ obj/random/closet //A couple of random closets to spice up maint
 	icon_state = "base"
 	var/vermin_chance = 5
 	var/list/locker_vermin = list(
-		/mob/living/simple_animal/friendly/mouse,
-		/mob/living/simple_animal/friendly/opossum,
+		/mob/living/simple_animal/passive/mouse,
+		/mob/living/simple_animal/passive/opossum,
 		/mob/living/carbon/alien/diona
 	)
 

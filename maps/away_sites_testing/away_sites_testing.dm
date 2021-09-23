@@ -17,7 +17,6 @@
 	#include "../away/errant_pisces/errant_pisces.dm"
 	#include "../away/lar_maria/lar_maria.dm"
 	#include "../away/skrellscoutship/skrellscoutship.dm"
-	#include "../away/verne/verne.dm"
 	#include "../away/meatstation/meatstation.dm"
 	#include "../away/miningstation/miningstation.dm"
 	#include "../away/scavver/scavver_gantry.dm"

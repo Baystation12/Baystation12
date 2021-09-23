@@ -1,15 +1,25 @@
-/datum/skill_buff/augment
+/obj/item/organ/internal/augment/boost
+	icon_state = "booster"
+	augment_slots = AUGMENT_HEAD
+
+	/// Unique ID for collecting the right effect in skill handling
 	var/id
 
-/obj/item/organ/internal/augment/boost
-	var/list/buffs = list()//Which abilities does this impact?
-	var/list/injury_debuffs = list()//If organ is damaged, should we reduce anything?
-	var/buffpath = /datum/skill_buff/augment //if you use something else it should be a subtype or it will runtime
-	var/active = 0 //mostly to control if we should remove buffs when we go
-	var/debuffing = 0 //if we applied a debuff
-	var/id //Unique Id assigned on new
-	icon_state = "booster"
-	allowed_organs = list(BP_AUGMENT_HEAD)
+	/// Which abilities does this impact?
+	var/list/buffs = list()
+
+	/// If organ is damaged, should we reduce anything?
+	var/list/injury_debuffs = list()
+
+	/// Only subtypes of /datum/skill_buff/augment
+	var/buffpath = /datum/skill_buff/augment
+
+	/// Mostly to control if we should remove buffs when we go
+	var/active = FALSE
+
+	/// If we applied a debuff
+	var/debuffing = FALSE
+
 
 /obj/item/organ/internal/augment/boost/Initialize()
 	. = ..()
@@ -17,51 +27,59 @@
 
 
 /obj/item/organ/internal/augment/boost/onInstall()
-	if(buffs.len)
+	if (buffs.len)
 		var/datum/skill_buff/augment/A
 		A = owner.buff_skill(buffs, 0, buffpath)
-		if(A && istype(A))
-			active = 1
+		if (A && istype(A))
+			active = TRUE
 			A.id = id
 
-/obj/item/organ/internal/augment/boost/onRemove()
-	debuffing = 0
-	if(!active)
-		return
-	var/list/B = owner.fetch_buffs_of_type(buffpath, 0)
-	for(var/datum/skill_buff/augment/D in B)
-		if(D.id == id)
-			D.remove()
-			return
 
-//Procs to set the negative skills and positive ones (This is once the initial setup has been done)
+/obj/item/organ/internal/augment/boost/onRemove()
+	debuffing = FALSE
+	if (!active)
+		return
+	FOR_BLIND(datum/skill_buff/augment/D, owner.fetch_buffs_of_type(buffpath, 0))
+		if (D.id != id)
+			continue
+		D.remove()
+		return
+
+
 /obj/item/organ/internal/augment/boost/proc/debuff()
-	if(!injury_debuffs ||!injury_debuffs.len)
-		return 0
-	var/list/B = owner.fetch_buffs_of_type(buffpath, 0)
-	for(var/datum/skill_buff/augment/D in B)
-		if(D.id == id)
-			D.recalculate(injury_debuffs)
-			debuffing = 1
-			return 1
+	if (!length(injury_debuffs))
+		return FALSE
+	FOR_BLIND(datum/skill_buff/augment/D, owner.fetch_buffs_of_type(buffpath, 0))
+		if (D.id != id)
+			continue
+		D.recalculate(injury_debuffs)
+		debuffing = TRUE
+		return TRUE
+	return FALSE
+
 
 /obj/item/organ/internal/augment/boost/proc/buff()
-	if(!buffs || !buffs.len)
-		return 0
-	var/list/B = owner.fetch_buffs_of_type(buffpath, 0)
-	for(var/datum/skill_buff/augment/D in B)
-		if(D.id == id)
-			D.recalculate(buffs)
-			debuffing = 0
-			return 1
+	if (!length(buffs))
+		return FALSE
+	FOR_BLIND(datum/skill_buff/augment/D, owner.fetch_buffs_of_type(buffpath, 0))
+		if (D.id != id)
+			continue
+		D.recalculate(buffs)
+		debuffing = FALSE
+		return TRUE
+	return FALSE
+
 
 /obj/item/organ/internal/augment/boost/Process()
 	..()
-	if(!owner)
+	if (!owner)
 		return
-	if(is_broken() && !debuffing)
-		debuff()
-	else if(!is_broken() && debuffing)
+	if (!debuffing)
+		if (is_broken())
+			debuff()
+	else if (!is_broken())
 		buff()
 
 
+/datum/skill_buff/augment
+	var/id

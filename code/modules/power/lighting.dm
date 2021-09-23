@@ -467,7 +467,7 @@
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		if(H.species.can_shred(H))
-			visible_message(SPAN_WARNING("[user] shreds the light!"), SPAN_WARNING("You shred the light!"), SPAN_WARNING("You hear glass shattering!"))
+			H.visible_message(SPAN_WARNING("[user] shreds the light!"), SPAN_WARNING("You shred the light!"), SPAN_WARNING("You hear glass shattering!"))
 			broken()
 			return TRUE
 

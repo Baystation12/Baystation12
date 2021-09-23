@@ -4,8 +4,8 @@ They are abstracted from machines to potentially share code and simplify inherit
 Do not work with lazy-initialized parts.
 */
 
-/obj/machinery
-	var/list/stock_part_presets  // Format: assotiative list of decl path -> number to apply.
+/// Associative list of decl path -> number to apply.
+/obj/machinery/var/list/stock_part_presets
 
 /decl/stock_part_preset
 	var/expected_part_type

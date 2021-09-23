@@ -387,3 +387,11 @@ var/list/organ_cache = list()
 
 /obj/item/organ/proc/get_mechanical_assisted_descriptor()
 	return "mechanically-assisted [name]"
+
+
+/**
+* Pre-surgery modification of the organ if it has status|ORGAN_CONFIGURE
+* Halts surgery if the return value is truthy
+*/
+/obj/item/organ/proc/surgery_configure(mob/living/user, mob/living/carbon/human/target, obj/item/organ/parent, obj/item/tool, decl/surgery_step/action)
+	return

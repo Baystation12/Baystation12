@@ -389,10 +389,10 @@ var/list/gear_datums = list()
 		else
 			var/beep_boop = BP_IS_ROBOTIC(affected)
 			var/obj/item/organ/internal/I = H.internal_organs_by_name[A.organ_tag]
-			if (!(A.augment_flags & AUGMENTATION_MECHANIC) && beep_boop)
+			if (!(A.augment_flags & AUGMENT_MECHANICAL) && beep_boop)
 				to_chat(H, SPAN_WARNING("\The [A] cannot be installed in a robotic part!"))
 				QDEL_NULL(A)
-			else if (!(A.augment_flags & AUGMENTATION_ORGANIC) && !beep_boop)
+			else if (!(A.augment_flags & AUGMENT_BIOLOGICAL) && !beep_boop)
 				to_chat(H, SPAN_WARNING("\The [A] cannot be installed in an organic part!"))
 				QDEL_NULL(A)
 			else if(I && (I.parent_organ == A.parent_organ))

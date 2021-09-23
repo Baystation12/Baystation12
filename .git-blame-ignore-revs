@@ -5,7 +5,7 @@
 # are unlikely to be what you are interested in when blaming.
 #
 # Requires git 2.23 or later (or equivalent)
-# To enable execute: git config blame.ignoreRevsFile .git-blame-ignore-revs
+# To enable, execute: git config blame.ignoreRevsFile .git-blame-ignore-revs
 #
 # Instructions:
 # - Only large (generally automated) reformatting or renaming CLs should be
@@ -22,4 +22,6 @@
 #   CL to the actual reformatting CL that you are trying to ignore.
 
 # Major whitespace changes but nothing else
+51e1a662317e4fc5f4048bbd19375e46187dd91b
+bf996203dfc4b09f8dc4dd73b532f9ee49691776
 bfa20cdc17d1794969331c4272c4a8d7ad523a44

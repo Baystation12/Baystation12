@@ -571,6 +571,43 @@
 /obj/machinery/power/supermatter/shard/announce_warning() //Shards don't get announcements
 	return
 
+
+/obj/machinery/power/supermatter/randomsample
+	name = "experimental supermatter sample"
+	icon_state = "darkmatter_shard"
+	base_icon_state = "darkmatter_shard"
+
+/obj/machinery/power/supermatter/randomsample/Initialize()
+	. = ..()
+	nitrogen_retardation_factor = rand(0.01, 1)	//Higher == N2 slows reaction more
+	thermal_release_modifier = rand(100, 1000000)		//Higher == more heat released during reaction
+	phoron_release_modifier = rand(0, 100000)		//Higher == less phoron released by reaction
+	oxygen_release_modifier = rand(0, 100000)		//Higher == less oxygen released at high temperature/power
+	radiation_release_modifier = rand(0, 100)    //Higher == more radiation released with more power.
+	reaction_power_modifier =  rand(0, 100)			//Higher == more overall power
+
+	power_factor = rand(0, 20)
+	decay_factor = rand(50, 70000)			//Affects how fast the supermatter power decays
+	critical_temperature = rand(3000, 5000)	//K
+	charging_factor = rand(0, 1)
+	damage_rate_limit = rand( 1, 10)		//damage rate cap at power = 300, scales linearly with power
+
+/obj/machinery/power/supermatter/inert
+	name = "experimental supermatter sample"
+	icon_state = "darkmatter_shard"
+	base_icon_state = "darkmatter_shard"
+	thermal_release_modifier = 0 //Basically inert
+	phoron_release_modifier = 100000000000
+	oxygen_release_modifier = 100000000000
+	radiation_release_modifier = 1
+
+/obj/structure/closet/crate/secure/large/phoron/experimentalsm
+	name = "experimental supermatter crate"
+	desc = "Are you sure you want to open this?"
+
+/obj/structure/closet/crate/secure/large/phoron/experimentalsm/WillContain()
+	return list(/obj/machinery/power/supermatter/randomsample)
+
 #undef DETONATION_MOB_CONCUSSION
 #undef DETONATION_APC_OVERLOAD_PROB
 #undef DETONATION_SHUTDOWN_APC
