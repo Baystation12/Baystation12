@@ -1,29 +1,29 @@
-name: Build Release
+# name: Build Release
 
-on:
-  push:
-    branches:
-    - dev
+# on:
+#   push:
+#     branches:
+#     - dev
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
-    - name: Clone custom items
-      uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
-      with:
-        repository: Baystation12/custom-items
-        path: custom-items
-    - name: Build and Publish Image to Registry
-      env:
-        BUILD_ARGS: -Icustom-items/inc.dm
-      uses: elgohr/Publish-Docker-Github-Action@191af57e15535d28b83589e3b5f0c31e76aa8733
-      with:
-        name: ${{ secrets.IMAGE_NAME }}
-        username: ${{ secrets.REG_USER }}
-        password: ${{ secrets.REG_PASS }}
-        tags: "latest"
-        buildargs: BUILD_ARGS
-        registry: ${{ secrets.REG_URL }}
-        cache: true
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#     - uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
+#     - name: Clone custom items
+#       uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
+#       with:
+#         repository: Baystation12/custom-items
+#         path: custom-items
+#     - name: Build and Publish Image to Registry
+#       env:
+#         BUILD_ARGS: -Icustom-items/inc.dm
+#       uses: elgohr/Publish-Docker-Github-Action@191af57e15535d28b83589e3b5f0c31e76aa8733
+#       with:
+#         name: ${{ secrets.IMAGE_NAME }}
+#         username: ${{ secrets.REG_USER }}
+#         password: ${{ secrets.REG_PASS }}
+#         tags: "latest"
+#         buildargs: BUILD_ARGS
+#         registry: ${{ secrets.REG_URL }}
+#         cache: true
