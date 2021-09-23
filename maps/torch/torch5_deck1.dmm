@@ -2386,16 +2386,6 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/obj/structure/cable/green{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
-	},
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
 /obj/effect/floor_decal/corner/red{
 	dir = 9;
 	icon_state = "corner_white"
@@ -7735,7 +7725,9 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/obj/effect/wallframe_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced/polarized{
+	id = "processwindow"
+	},
 /turf/simulated/floor/plating,
 /area/security/processing)
 "awZ" = (
@@ -9280,26 +9272,6 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/security/bo)
 "aDF" = (
-/obj/effect/wallframe_spawn/reinforced/polarized{
-	id = "bo_windows"
-	},
-/obj/structure/cable/green{
-	d2 = 2;
-	icon_state = "0-2"
-	},
-/turf/simulated/floor/plating,
-/area/security/bo)
-"aDG" = (
-/obj/effect/wallframe_spawn/reinforced/polarized{
-	id = "bo_windows"
-	},
-/obj/structure/cable/green{
-	d2 = 8;
-	icon_state = "0-8"
-	},
-/turf/simulated/floor/plating,
-/area/security/bo)
-"aDI" = (
 /obj/structure/table/steel_reinforced,
 /obj/machinery/door/firedoor,
 /obj/machinery/door/window/brigdoor/westright{
@@ -9312,6 +9284,24 @@
 	name = "Privacy Shutters"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
+/area/security/bo)
+"aDG" = (
+/obj/effect/wallframe_spawn/reinforced/polarized{
+	id = "bo_windows"
+	},
+/obj/structure/cable/green{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/turf/simulated/floor/plating,
+/area/security/bo)
+"aDI" = (
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/dark,
 /area/security/bo)
 "aDK" = (
 /obj/structure/cable/green{
@@ -9471,11 +9461,6 @@
 	dir = 2;
 	level = 2
 	},
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
 /obj/machinery/light{
 	dir = 1
 	},
@@ -9491,11 +9476,6 @@
 	departmentType = 5;
 	pixel_x = 32;
 	pixel_y = 32
-	},
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/bo)
@@ -9767,6 +9747,11 @@
 	icon_state = "1-2"
 	},
 /obj/random_multi/single_item/memo_security,
+/obj/structure/cable/green{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/security/bo)
 "aFS" = (
@@ -9780,6 +9765,11 @@
 /obj/item/pen,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/item/sticky_pad/random,
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/security/bo)
 "aFU" = (
@@ -10434,22 +10424,19 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/locker)
 "aJa" = (
-/obj/structure/cable/green{
-	d2 = 8;
-	icon_state = "0-8"
+/obj/structure/table/steel_reinforced,
+/obj/machinery/door/firedoor,
+/obj/machinery/door/window/brigdoor/westright{
+	dir = 8;
+	name = "Brig Chief Desk"
 	},
-/obj/effect/wallframe_spawn/reinforced/polarized{
-	id = "bo_windows"
+/obj/item/material/bell,
+/obj/machinery/door/blast/shutters/open{
+	dir = 2;
+	id_tag = "bo_pshutters";
+	name = "Privacy Shutters"
 	},
-/obj/machinery/door/blast/regular{
-	density = 0;
-	dir = 4;
-	icon_state = "pdoor0";
-	id_tag = "Prison Gate";
-	name = "Security Blast Door";
-	opacity = 0
-	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/tiled/dark/monotile,
 /area/security/bo)
 "aJi" = (
 /obj/structure/cable/green{
@@ -23420,7 +23407,9 @@
 	icon_state = "0-2"
 	},
 /obj/structure/cable/green,
-/obj/effect/wallframe_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced/polarized{
+	id = "processwindow"
+	},
 /turf/simulated/floor/plating,
 /area/security/processing)
 "nbl" = (
@@ -23667,7 +23656,9 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/effect/wallframe_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced/polarized{
+	id = "processwindow"
+	},
 /turf/simulated/floor/plating,
 /area/security/processing)
 "nnb" = (
@@ -26921,19 +26912,22 @@
 /turf/simulated/floor/tiled/freezer,
 /area/rnd/xenobiology/xenoflora)
 "riC" = (
-/obj/structure/table/steel_reinforced,
-/obj/machinery/door/firedoor,
-/obj/machinery/door/window/brigdoor/westright{
-	dir = 8;
-	name = "Brig Chief Desk"
+/obj/structure/cable/green{
+	d2 = 8;
+	icon_state = "0-8"
 	},
-/obj/item/material/bell,
-/obj/machinery/door/blast/shutters/open{
-	dir = 2;
-	id_tag = "bo_pshutters";
-	name = "Privacy Shutters"
+/obj/effect/wallframe_spawn/reinforced/polarized{
+	id = "bo_windows"
 	},
-/turf/simulated/floor/tiled/dark/monotile,
+/obj/machinery/door/blast/regular{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "Prison Gate";
+	name = "Security Blast Door";
+	opacity = 0
+	},
+/turf/simulated/floor/plating,
 /area/security/bo)
 "riD" = (
 /turf/simulated/floor/tiled/freezer,
@@ -41585,9 +41579,9 @@ grI
 aAe
 aBf
 pUr
-aDI
+cHj
 aEL
-asA
+aDI
 asA
 aIa
 lcS
