@@ -211,8 +211,28 @@
 #define HUD_MEDICAL 0x4
 #define HUD_JANITOR 0x8
 
-// Storage
 
+/**
+* flags for /mob/proc/equip_to_slot_if_possible
+*/
+
+/// Cause a mob icon update after equipping
+#define TRYEQUIP_REDRAW 0x1
+
+/// Skip any delays and equip instantly
+#define TRYEQUIP_INSTANT 0x2
+
+/// If the attempt fails, destroy the item
+#define TRYEQUIP_DESTROY 0x4
+
+/// Do not send output to the user about success or failure
+#define TRYEQUIP_SILENT 0x8
+
+/// Always succeed if existentially possible
+#define TRYEQUIP_FORCE 0x10
+
+
+// Storage
 /*
 	A note on w_classes - this is an attempt to describe the w_classes currently in use
 	with an attempt at providing examples of the kinds of things that fit each w_class

@@ -1,97 +1,87 @@
 //This proc is called whenever someone clicks an inventory ui slot.
 /mob/proc/attack_ui(slot)
-	var/obj/item/W = get_active_hand()
-	var/obj/item/E = get_equipped_item(slot)
-	if (istype(E))
-		if(istype(W))
-			E.attackby(W,src)
+	var/obj/item/in_hand = get_active_hand()
+	var/obj/item/in_slot = get_equipped_item(slot)
+	if (istype(in_slot))
+		if (istype(in_hand))
+			in_slot.attackby(in_hand, src)
 		else
-			E.attack_hand(src)
+			in_slot.attack_hand(src)
 	else
-		equip_to_slot_if_possible(W, slot)
+		equip_to_slot_if_possible(in_hand, slot)
 
-/mob/proc/put_in_any_hand_if_possible(obj/item/W as obj, del_on_fail = 0, disable_warning = 1, redraw_mob = 1)
-	if(equip_to_slot_if_possible(W, slot_l_hand, del_on_fail, disable_warning, redraw_mob))
-		return 1
-	else if(equip_to_slot_if_possible(W, slot_r_hand, del_on_fail, disable_warning, redraw_mob))
-		return 1
-	return 0
 
-//This is a SAFE proc. Use this instead of equip_to_slot()!
-//set del_on_fail to have it delete W if it fails to equip
-//set disable_warning to disable the 'you are unable to equip that' warning.
-//unset redraw_mob to prevent the mob from being redrawn at the end.
-//set force to replace items in the slot and ignore blocking overwear
-/mob/proc/equip_to_slot_if_possible(obj/item/W as obj, slot, del_on_fail = 0, disable_warning = 0, redraw_mob = 1, force = 0)
-	if(!istype(W)) return 0
-
-	if(!W.mob_can_equip(src, slot, disable_warning, force))
-		if(del_on_fail)
-			qdel(W)
-		else
-			if(!disable_warning)
-				to_chat(src, "<span class='warning'>You are unable to equip that.</span>")//Only print if del_on_fail is false
-
-		return 0
-
-	if(!canUnEquip(W))
-		return 0
-
-	equip_to_slot(W, slot, redraw_mob) //This proc should not ever fail.
-	return 1
-
-//This is an UNSAFE proc. It merely handles the actual job of equipping. All the checks on whether you can or can't eqip need to be done before! Use mob_can_equip() for that task.
-//In most cases you will want to use equip_to_slot_if_possible()
-/mob/proc/equip_to_slot(obj/item/W as obj, slot)
+/// UNSAFELY place I into this mob's inventory at slot if existentially possible. Generally, use the _if_possible version.
+/mob/proc/equip_to_slot(obj/item/I, slot)
 	return
 
-//This is just a commonly used configuration for the equip_to_slot_if_possible() proc, used to equip people when the rounds tarts and when events happen and such.
-/mob/proc/equip_to_slot_or_del(obj/item/W as obj, slot)
-	return equip_to_slot_if_possible(W, slot, 1, 1, 0)
 
-/mob/proc/equip_to_slot_or_store_or_drop(obj/item/W as obj, slot)
-	var/store = equip_to_slot_if_possible(W, slot, 0, 1, 0)
-	if(!store)
-		return equip_to_storage_or_drop(W)
-	return store
+/// Attempt to place I into this mob's inventory at slot. See TRYEQUIP_* flags for behavior modifiers.
+/mob/proc/equip_to_slot_if_possible(obj/item/I, slot, equip_flags = TRYEQUIP_REDRAW)
+	if (!slot)
+		return
+	if (!istype(I))
+		return
+	if (!I.mob_can_equip(src, slot, equip_flags & TRYEQUIP_SILENT, equip_flags & TRYEQUIP_FORCE))
+		if (!(equip_flags & TRYEQUIP_SILENT))
+			to_chat(src, SPAN_WARNING("You are unable to equip \the [I]."))
+		if (equip_flags & TRYEQUIP_DESTROY)
+			qdel(I)
+		return
+	if (!canUnEquip(I))
+		return
+	if (I.equip_delay > 0 && !(equip_flags & TRYEQUIP_INSTANT))
+		I.equip_delay_before(src, slot, equip_flags)
+		var/do_flags = I.equip_delay_flags
+		if (equip_flags & TRYEQUIP_SILENT)
+			do_flags &= ~DO_FAIL_FEEDBACK
+		if (!do_after(src, I.equip_delay, I, do_flags))
+			return
+		I.equip_delay_after(src, slot, equip_flags)
+	equip_to_slot(I, slot, equip_flags & TRYEQUIP_REDRAW)
+	return TRUE
 
-//The list of slots by priority. equip_to_appropriate_slot() uses this list. Doesn't matter if a mob type doesn't have a slot.
-var/list/slot_equipment_priority = list( \
-		slot_back,\
-		slot_wear_id,\
-		slot_w_uniform,\
-		slot_wear_suit,\
-		slot_wear_mask,\
-		slot_head,\
-		slot_shoes,\
-		slot_gloves,\
-		slot_l_ear,\
-		slot_r_ear,\
-		slot_glasses,\
-		slot_belt,\
-		slot_s_store,\
-		slot_tie,\
-		slot_l_store,\
-		slot_r_store\
+
+// Common pattern during roundstart, events, etc
+/mob/proc/equip_to_slot_or_del(obj/item/I, slot)
+	return equip_to_slot_if_possible(I, slot, TRYEQUIP_DESTROY | TRYEQUIP_SILENT | TRYEQUIP_INSTANT)
+
+
+/mob/proc/put_in_any_hand_if_possible(obj/item/I, equip_flags = TRYEQUIP_REDRAW | TRYEQUIP_SILENT)
+	if (equip_to_slot_if_possible(I, slot_l_hand, equip_flags))
+		return TRUE
+	if (equip_to_slot_if_possible(I, slot_r_hand, equip_flags))
+		return TRUE
+
+
+/mob/proc/equip_to_slot_or_store_or_drop(obj/item/I, slot)
+	if (equip_to_slot_if_possible(I, slot, TRYEQUIP_SILENT))
+		return TRUE
+	if (equip_to_storage_or_drop(I))
+		return TRUE
+
+
+/// Place I into the first slot it fits in the order of slots_by_priority, returning the slot or falsy.
+/mob/proc/equip_to_appropriate_slot(obj/item/I, skip_storage)
+	var/static/list/slots_by_priority = list(
+		slot_back, slot_wear_id, slot_w_uniform, slot_wear_suit,
+		slot_wear_mask, slot_head, slot_shoes, slot_gloves, slot_l_ear,
+		slot_r_ear, slot_glasses, slot_belt, slot_s_store, slot_tie,
+		slot_l_store, slot_r_store
 	)
+	if (!istype(I))
+		return
+	for (var/slot in slots_by_priority)
+		if (skip_storage && (slot == slot_s_store || slot == slot_l_store || slot == slot_r_store))
+			continue
+		if (equip_to_slot_if_possible(I, slot, TRYEQUIP_REDRAW | TRYEQUIP_SILENT))
+			return slot //slot is truthy; we can return it for info
+
 
 //Checks if a given slot can be accessed at this time, either to equip or unequip I
 /mob/proc/slot_is_accessible(var/slot, var/obj/item/I, mob/user=null)
 	return 1
 
-//puts the item "W" into an appropriate slot in a human's inventory
-//returns 0 if it cannot, 1 if successful
-/mob/proc/equip_to_appropriate_slot(obj/item/W, var/skip_store = 0)
-	if(!istype(W)) return 0
-
-	for(var/slot in slot_equipment_priority)
-		if(skip_store)
-			if(slot == slot_s_store || slot == slot_l_store || slot == slot_r_store)
-				continue
-		if(equip_to_slot_if_possible(W, slot, del_on_fail=0, disable_warning=1, redraw_mob=1))
-			return 1
-
-	return 0
 
 /mob/proc/equip_to_storage(obj/item/newitem)
 	// Try put it in their backpack

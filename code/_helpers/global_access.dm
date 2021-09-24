@@ -729,8 +729,6 @@
 			return global.skin_styles_female_list;
 		if("skipped_unit_tests")
 			return global.skipped_unit_tests;
-		if("slot_equipment_priority")
-			return global.slot_equipment_priority;
 		if("slot_flags_enumeration")
 			return global.slot_flags_enumeration;
 		if("solar_gen_rate")
@@ -1608,8 +1606,6 @@
 			global.skin_styles_female_list=newval;
 		if("skipped_unit_tests")
 			global.skipped_unit_tests=newval;
-		if("slot_equipment_priority")
-			global.slot_equipment_priority=newval;
 		if("slot_flags_enumeration")
 			global.slot_flags_enumeration=newval;
 		if("solar_gen_rate")
@@ -2122,7 +2118,6 @@
 	"side_effects",
 	"skin_styles_female_list",
 	"skipped_unit_tests",
-	"slot_equipment_priority",
 	"slot_flags_enumeration",
 	"solar_gen_rate",
 	"solars_list",

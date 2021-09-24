@@ -34,11 +34,25 @@
 	var/facial_styles_per_species = list() // Custom facial hair styles, per species -type-, if any. See above as to why
 	var/genders_per_species       = list() // For gender biases per species -type-
 
+
 /obj/effect/landmark/corpse/Initialize()
 	..()
-	var/species_choice = pickweight(species)
-	new/mob/living/carbon/human/corpse (loc, species_choice, src)
-	return INITIALIZE_HINT_QDEL
+	return INITIALIZE_HINT_LATELOAD
+
+
+/obj/effect/landmark/corpse/LateInitialize()
+	var/new_species = pickweight(species)
+	var/mob/living/carbon/human/corpse = new (loc, new_species)
+	corpse.adjustOxyLoss(corpse.maxHealth)
+	corpse.setBrainLoss(corpse.maxHealth)
+	var/obj/item/organ/internal/heart/heart = corpse.internal_organs_by_name[BP_HEART]
+	if (heart)
+		heart.pulse = PULSE_NONE
+	randomize_appearance(corpse, new_species)
+	equip_outfit(corpse)
+	corpse.update_icon()
+	qdel(src)
+
 
 #define HEX_COLOR_TO_RGB_ARGS(X) arglist(GetHexColors(X))
 /obj/effect/landmark/corpse/proc/randomize_appearance(var/mob/living/carbon/human/M, species_choice)
