@@ -1,8 +1,8 @@
-var/const/MOVEMENT_HANDLED = 0x0001 // If no further movement handling should occur after this
-var/const/MOVEMENT_REMOVE  = 0x0002
+var/const/MOVEMENT_HANDLED = FLAG(0) // If no further movement handling should occur after this
+var/const/MOVEMENT_REMOVE  = FLAG(1)
 
-var/const/MOVEMENT_PROCEED = 0x0004
-var/const/MOVEMENT_STOP    = 0x0008
+var/const/MOVEMENT_PROCEED = FLAG(2)
+var/const/MOVEMENT_STOP    = FLAG(3)
 
 #define INIT_MOVEMENT_HANDLERS \
 if(LAZYLEN(movement_handlers) && ispath(movement_handlers[1])) { \

@@ -4,10 +4,10 @@
 */
 
 /// Flag this clothing item as attachable; for collapsing accessories into clothing at some point
-#define CLOTHING_IS_COMPONENT 0x1
+#define CLOTHING_IS_COMPONENT FLAG(0)
 
 /// Flag this clothing item as being forensically identifiable
-#define CLOTHING_HAS_FIBERS 0x2
+#define CLOTHING_HAS_FIBERS FLAG(1)
 
 #define CLOTHING_FLAGS_DEFAULT (CLOTHING_HAS_FIBERS)
 #define CLOTHING_FLAGS_DEFAULT_FIBERLESS (EMPTY_BITFIELD)

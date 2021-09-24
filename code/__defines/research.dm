@@ -11,9 +11,9 @@
 #define TECH_DATA "programming"
 #define TECH_ESOTERIC "esoteric"
 
-#define IMPRINTER	0x1	//For circuits. Uses glass/chemicals.
-#define PROTOLATHE	0x2	//New stuff. Uses glass/metal/chemicals
-#define MECHFAB		0x4	//Mechfab
-#define CHASSIS		0x8	//For protolathe, but differently
+#define IMPRINTER     FLAG(0)  //For circuits. Uses glass/chemicals.
+#define PROTOLATHE    FLAG(1)  //New stuff. Uses glass/metal/chemicals
+#define MECHFAB       FLAG(2)  //Mechfab
+#define CHASSIS       FLAG(3)  //For protolathe, but differently
 
 #define T_BOARD(name)	"circuit board (" + (name) + ")"

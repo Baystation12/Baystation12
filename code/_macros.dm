@@ -206,6 +206,14 @@ var/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 #define EMPTY_BITFIELD 0
 
 
+/// Right-shift of INT by BITS
+#define SHIFTR(INT, BITS) ((INT) >> (BITS))
+
+
+/// Left-shift of INT by BITS
+#define SHIFTL(INT, BITS) ((INT) << (BITS))
+
+
 /// Convenience define for nth-bit flags, 0-indexed
 #define FLAG(BIT) SHIFTL(1, BIT)
 
