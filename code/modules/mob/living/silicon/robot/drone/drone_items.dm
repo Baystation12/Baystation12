@@ -366,7 +366,7 @@
 				plastic.add_charge(2000)
 		else if(istype(W,/obj/item/light))
 			var/obj/item/light/L = W
-			if(L.status >= 2)
+			if(L.status >= LIGHT_BROKEN)
 				if(metal)
 					metal.add_charge(250)
 				if(glass)

@@ -32,11 +32,6 @@
 //
 // The explosion cannot insta-kill anyone with 30% or more health.
 
-#define LIGHT_OK 0
-#define LIGHT_EMPTY 1
-#define LIGHT_BROKEN 2
-#define LIGHT_BURNED 3
-
 
 /obj/item/device/lightreplacer
 	name = "light replacer"
@@ -67,7 +62,7 @@
 		var/amt_inserted = 0
 		var/turf/T = get_turf(user)
 		for(var/obj/item/light/L in S.contents)
-			if(!user.stat && src.uses < src.max_uses && L.status == 0)
+			if(!user.stat && src.uses < src.max_uses && L.status == LIGHT_OK)
 				src.AddUses(1)
 				amt_inserted++
 				S.remove_from_storage(L, T, 1)
@@ -103,7 +98,7 @@
 
 	if(istype(W, /obj/item/light))
 		var/obj/item/light/L = W
-		if(L.status == 0) // LIGHT OKAY
+		if(L.status == LIGHT_OK)
 			if(uses < max_uses)
 				if(!user.unEquip(L))
 					return
@@ -184,8 +179,3 @@
 		return 1
 	else
 		return 0
-
-#undef LIGHT_OK
-#undef LIGHT_EMPTY
-#undef LIGHT_BROKEN
-#undef LIGHT_BURNED
