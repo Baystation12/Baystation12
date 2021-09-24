@@ -1,6 +1,0 @@
-author: Spookerton
-delete-after: true
-changes:
-  - bugfix: Augments from loadout now install in the correct organs if possible.
-  - bugfix: Concealed wrist blades no longer show up on body scans.
-  - bugfix: Augment implanters fail when dropped.

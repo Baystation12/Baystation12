@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - tweak: SSD examine messages now clarify SSD status in the text.
-  - tweak: SSD examine text is now bright pink, similar to staff paralysis text.
