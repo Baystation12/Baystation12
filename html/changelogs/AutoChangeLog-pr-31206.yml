@@ -1,0 +1,6 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - maptweak: Certain parts of the Torch now have specific lighting tones instead
+      of randomized lights. Examples include medical and R&D being a clinical white,
+      while relaxation areas like the lounge use warm yellowing light.
