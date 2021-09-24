@@ -581,14 +581,14 @@
 	var/img_dir
 	if(is_on_frame())
 		for(var/i = 1 to 4)
-			img_dir = 1<<(i-1)
+			img_dir = SHIFTL(1, i - 1)
 			if(other_connections[i] != "0")
 				process_icon(basestate, "_other_onframe", "_onframe", connections[i], img_dir, damage_alpha)
 			else
 				process_icon(basestate, "_onframe", "_onframe", connections[i], img_dir, damage_alpha)
 	else
 		for(var/i = 1 to 4)
-			img_dir = 1<<(i-1)
+			img_dir = SHIFTL(1, i - 1)
 			if(other_connections[i] != "0")
 				process_icon(basestate, "_other", "", connections[i], img_dir, damage_alpha)
 			else

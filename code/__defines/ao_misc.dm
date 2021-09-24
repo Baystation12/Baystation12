@@ -12,7 +12,7 @@ Define for getting a bitfield of adjacent turfs that meet a condition.
 	for (var/_tdir in GLOB.cardinal) {               \
 		TVAR = get_step(ORIGIN, _tdir);              \
 		if ((TVAR) && (FUNC)) {                      \
-			VAR |= 1 << _tdir;                       \
+			VAR |= SHIFTL(1, _tdir);                 \
 		}                                            \
 	}                                                \
 	if (VAR & N_NORTH) {                             \

@@ -344,26 +344,26 @@ proc/ReadRGB(rgb)
 		--digits
 		switch(which)
 			if(0)
-				r = (r << 4) | ch
+				r = SHIFTL(r, 4) | ch
 				if(single)
-					r |= r << 4
+					r |= SHIFTL(r, 4)
 					++which
 				else if(!(digits & 1)) ++which
 			if(1)
-				g = (g << 4) | ch
+				g = SHIFTL(g, 4) | ch
 				if(single)
-					g |= g << 4
+					g |= SHIFTL(g, 4)
 					++which
 				else if(!(digits & 1)) ++which
 			if(2)
-				b = (b << 4) | ch
+				b = SHIFTL(b, 4) | ch
 				if(single)
-					b |= b << 4
+					b |= SHIFTL(b, 4)
 					++which
 				else if(!(digits & 1)) ++which
 			if(3)
-				alpha = (alpha << 4) | ch
-				if(single) alpha |= alpha << 4
+				alpha = SHIFTL(alpha, 4) | ch
+				if(single) alpha |= SHIFTL(alpha, 4)
 
 	. = list(r, g, b)
 	if(usealpha) . += alpha
@@ -393,16 +393,16 @@ proc/ReadHSV(hsv)
 		--digits
 		switch(which)
 			if(0)
-				hue = (hue << 4) | ch
+				hue = SHIFTL(hue, 4) | ch
 				if(digits == (usealpha ? 6 : 4)) ++which
 			if(1)
-				sat = (sat << 4) | ch
+				sat = SHIFTL(sat, 4) | ch
 				if(digits == (usealpha ? 4 : 2)) ++which
 			if(2)
-				val = (val << 4) | ch
+				val = SHIFTL(val, 4) | ch
 				if(digits == (usealpha ? 2 : 0)) ++which
 			if(3)
-				alpha = (alpha << 4) | ch
+				alpha = SHIFTL(alpha, 4) | ch
 
 	. = list(hue, sat, val)
 	if(usealpha) . += alpha
@@ -417,7 +417,7 @@ proc/HSVtoRGB(hsv)
 	var/val = HSV[3]
 
 	// Compress hue into easier-to-manage range
-	hue -= hue >> 8
+	hue -= SHIFTR(hue, 8)
 	if(hue >= 0x5fa) hue -= 0x5fa
 
 	var/hi,mid,lo,r,g,b
@@ -477,17 +477,17 @@ proc/hsv(hue, sat, val, alpha)
 	if(val < 0) val = 0
 	if(val > 255) val = 255
 	. = "#"
-	. += TO_HEX_DIGIT(hue >> 8)
-	. += TO_HEX_DIGIT(hue >> 4)
+	. += TO_HEX_DIGIT(SHIFTR(hue, 8))
+	. += TO_HEX_DIGIT(SHIFTR(hue, 4))
 	. += TO_HEX_DIGIT(hue)
-	. += TO_HEX_DIGIT(sat >> 4)
+	. += TO_HEX_DIGIT(SHIFTR(sat, 4))
 	. += TO_HEX_DIGIT(sat)
-	. += TO_HEX_DIGIT(val >> 4)
+	. += TO_HEX_DIGIT(SHIFTR(val, 4))
 	. += TO_HEX_DIGIT(val)
 	if(!isnull(alpha))
 		if(alpha < 0) alpha = 0
 		if(alpha > 255) alpha = 255
-		. += TO_HEX_DIGIT(alpha >> 4)
+		. += TO_HEX_DIGIT(SHIFTR(alpha, 4))
 		. += TO_HEX_DIGIT(alpha)
 
 /*
@@ -524,8 +524,8 @@ proc/BlendHSV(hsv1, hsv2, amount)
 	if(!HSV2[2]) HSV2[1] = HSV1[1]
 
 	// Compress hues into easier-to-manage range
-	HSV1[1] -= HSV1[1] >> 8
-	HSV2[1] -= HSV2[1] >> 8
+	HSV1[1] -= SHIFTR(HSV1[1], 8)
+	HSV2[1] -= SHIFTR(HSV2[1], 8)
 
 	var/hue_diff = HSV2[1] - HSV1[1]
 	if(hue_diff > 765) hue_diff -= 1530
@@ -577,7 +577,7 @@ proc/HueToAngle(hue)
 	if(hue < 0 || hue >= 1536) hue %= 1536
 	if(hue < 0) hue += 1536
 	// Compress hue into easier-to-manage range
-	hue -= hue >> 8
+	hue -= SHIFTR(hue, 8)
 	return hue / (1530/360)
 
 proc/AngleToHue(angle)
@@ -598,7 +598,7 @@ proc/RotateHue(hsv, angle)
 	if(HSV[1] < 0) HSV[1] += 1536
 
 	// Compress hue into easier-to-manage range
-	HSV[1] -= HSV[1] >> 8
+	HSV[1] -= SHIFTR(HSV[1], 8)
 
 	if(angle < 0 || angle >= 360) angle -= 360 * round(angle / 360)
 	HSV[1] = round(HSV[1] + angle * (1530/360), 1)
