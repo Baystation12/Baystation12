@@ -16,11 +16,8 @@
 		/datum/game_mode/firefight/proc/spawn_resupply,\
 		/datum/game_mode/firefight/proc/spawn_ship_debris)
 
-	max_spawns_tick_perf = 30
-	max_spawns_tick_base = 15
-	max_spawns_tick = 15
-	enemy_numbers_base = 25
-	enemy_numbers_left = 25
+	enemy_numbers_base = 15
+	enemy_numbers_left = 15
 
 	wave_spawns = list()
 

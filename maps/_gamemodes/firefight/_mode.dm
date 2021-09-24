@@ -26,22 +26,22 @@
 	var/max_waves = 5
 
 	var/is_spawning = 0	//0 = rest, 1 = spawning
-	var/spawn_subwave_interval = 30 SECONDS
+	var/spawn_subwave_interval = 10 SECONDS
 	var/next_subwave_at = 0
 	var/max_spawns_tick_perf = 20		//keep this the same for performance reasons. acts as a max-cap
-	var/max_spawns_tick_base = 5
-	var/max_spawns_tick = 5 //But this one changes based on players-active
-	var/enemy_numbers_base = 5	//the total number of enemies
-	var/enemy_numbers_left = 5
+	var/max_spawns_tick_base = 1 //Keep this low so players don't get overwhelmed. Increases by player_bonus_enemies
+	var/max_spawns_tick = 1 //But this one changes based on players-active.
+	var/enemy_numbers_base = 10 //the total number of enemies
+	var/enemy_numbers_left = 10
 	var/wave_bonus_enemies = list(3, 4, 5, 6, 8)
-	var/player_bonus_enemies = list(1, 2, 3, 4)
+	var/player_bonus_enemies = list(0, 1, 1.5, 2.5)
 	var/list/wave_spawn_landmarks = list()
 
 	var/time_rest_end = 0
 	var/interval_resupply = 4 MINUTES
 	var/time_next_resupply = 0
 
-	var/rest_time = 2 MINUTES
+	var/rest_time = 4 MINUTES
 	var/safe_time = 999999
 
 	var/time_evac_leave = 0
