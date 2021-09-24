@@ -348,12 +348,6 @@ Checks if a list has the same entries and values as an element of big.
 		return (result + L.Copy(Li, 0))
 	return (result + R.Copy(Ri, 0))
 
-// Macros to test for bits in a bitfield. Note, that this is for use with indexes, not bit-masks!
-#define BITTEST(bitfield,index)  ((bitfield)  &   (1 << (index)))
-#define BITSET(bitfield,index)   (bitfield)  |=  (1 << (index))
-#define BITRESET(bitfield,index) (bitfield)  &= ~(1 << (index))
-#define BITFLIP(bitfield,index)  (bitfield)  ^=  (1 << (index))
-
 //Converts a bitfield to a list of numbers (or words if a wordlist is provided)
 /proc/bitfield2list(bitfield = 0, list/wordlist)
 	var/list/r = list()

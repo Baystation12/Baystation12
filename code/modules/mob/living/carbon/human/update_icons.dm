@@ -572,8 +572,8 @@ var/global/list/damage_icon_parts = list()
 
 	overlays_standing[HO_ID_LAYER]	= id_overlay
 
-	BITSET(hud_updateflag, ID_HUD)
-	BITSET(hud_updateflag, WANTED_HUD)
+	SET_BIT(hud_updateflag, ID_HUD)
+	SET_BIT(hud_updateflag, WANTED_HUD)
 
 	if(update_icons)
 		queue_icon_update()

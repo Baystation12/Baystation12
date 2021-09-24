@@ -540,9 +540,9 @@ SUBSYSTEM_DEF(jobs)
 	if (H.disabilities & NEARSIGHTED) //Try to give glasses to the vision impaired
 		H.equip_to_slot_or_del(new /obj/item/clothing/glasses/prescription(H), slot_glasses)
 
-	BITSET(H.hud_updateflag, ID_HUD)
-	BITSET(H.hud_updateflag, IMPLOYAL_HUD)
-	BITSET(H.hud_updateflag, SPECIALROLE_HUD)
+	SET_BIT(H.hud_updateflag, ID_HUD)
+	SET_BIT(H.hud_updateflag, IMPLOYAL_HUD)
+	SET_BIT(H.hud_updateflag, SPECIALROLE_HUD)
 
 	job.post_equip_rank(H, alt_title || rank)
 

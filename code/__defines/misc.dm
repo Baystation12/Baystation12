@@ -282,9 +282,6 @@
 
 #define INCREMENT_WORLD_Z_SIZE world.maxz++; if (SSzcopy.zlev_maximums.len) { SSzcopy.calculate_zstack_limits() }
 
-//Semantic; usage intent of variable
-#define EMPTY_BITFIELD 0
-
 //-- Masks for /atom/var/init_flags --
 //- machinery
 #define INIT_MACHINERY_PROCESS_SELF 0x1
