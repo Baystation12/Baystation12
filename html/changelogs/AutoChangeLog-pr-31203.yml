@@ -1,5 +1,0 @@
-author: CrimsonShrike and Azlan
-delete-after: true
-changes:
-  - rscadd: More sprites for exosuits.
-  - tweak: Exosuit modules will in most cases inherit colour from installed section.
