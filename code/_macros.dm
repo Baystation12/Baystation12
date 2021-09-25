@@ -7,7 +7,6 @@
 
 #define PUBLIC_GAME_MODE SSticker.master_mode
 
-#define Clamp(value, low, high) (value <= low ? low : (value >= high ? high : value))
 #define CLAMP01(x) 		(Clamp(x, 0, 1))
 
 var/const/POSITIVE_INFINITY = 1#INF // win: 1.#INF, lin: inf
