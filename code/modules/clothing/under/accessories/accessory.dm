@@ -6,6 +6,7 @@
 	item_state = ""	//no inhands
 	slot_flags = SLOT_TIE
 	w_class = ITEM_SIZE_SMALL
+	var/accessory_flags = ACCESSORY_DEFAULT_FLAGS
 	var/slot = ACCESSORY_SLOT_DECOR
 	var/body_location = UPPER_TORSO //most accessories are here
 	var/obj/item/clothing/parent //the suit the tie may be attached to
@@ -18,10 +19,8 @@
 		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_accessories_unathi.dmi'
 		)
 	var/list/on_rolled = list()	//used when jumpsuit sleevels are rolled ("rolled" entry) or it's rolled down ("down"). Set to "none" to hide in those states.
-	var/high_visibility	//if it should appear on examine without detailed view
 	var/slowdown //used when an accessory is meant to slow the wearer down when attached to clothing
-	var/removable = TRUE
-	var/hidden = FALSE
+
 
 /obj/item/clothing/accessory/Destroy()
 	on_removed()

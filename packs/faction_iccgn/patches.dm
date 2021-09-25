@@ -22,7 +22,7 @@
 	)
 	w_class = ITEM_SIZE_TINY
 	slot = ACCESSORY_SLOT_INSIGNIA
-	high_visibility = TRUE
+	accessory_flags = ACCESSORY_REMOVABLE | ACCESSORY_HIGH_VISIBILITY
 
 
 /obj/item/clothing/accessory/iccgn_patch/Initialize()

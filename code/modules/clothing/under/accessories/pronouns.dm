@@ -5,7 +5,7 @@
 	item_state = "pronouns"
 	on_rolled = list("down" = "none")
 	slot = ACCESSORY_SLOT_INSIGNIA
-	high_visibility = 1
+	accessory_flags = ACCESSORY_REMOVABLE | ACCESSORY_HIGH_VISIBILITY
 
 /obj/item/clothing/accessory/pronouns/hehimbadge
 	name = "he/him pronouns badge"

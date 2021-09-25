@@ -72,7 +72,7 @@
 	A.overlay_state = copy.overlay_state
 	A.accessory_icons = copy.accessory_icons
 	A.on_rolled = copy.on_rolled
-	A.high_visibility = copy.high_visibility
+	A.accessory_flags = copy.accessory_flags
 
 /datum/extension/chameleon/proc/add_chameleon_choice(list/target, path)
 	var/obj/item/I = path

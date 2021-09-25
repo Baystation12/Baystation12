@@ -10,7 +10,7 @@
 	icon_state = "detectivebadge"
 	slot_flags = SLOT_BELT | SLOT_TIE
 	slot = ACCESSORY_SLOT_INSIGNIA
-	high_visibility = 1
+	accessory_flags = ACCESSORY_REMOVABLE | ACCESSORY_HIGH_VISIBILITY
 	var/badge_string = "Detective"
 	var/stored_name
 

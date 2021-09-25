@@ -4,7 +4,7 @@
 	desc = "A tiny device, paired up with a counterpart set to same code. When devices are taken apart too far, they start beeping."
 	icon_state = "buddytag0"
 	slot_flags = SLOT_TIE
-	high_visibility = 1
+	accessory_flags = ACCESSORY_REMOVABLE | ACCESSORY_HIGH_VISIBILITY
 	var/next_search = 0
 	var/on = 0
 	var/id = 1

@@ -35,6 +35,13 @@
 #define ACCESSORY_SLOT_ARMOR_M  "Misc armor"
 #define ACCESSORY_SLOT_HELM_C	"Helmet cover"
 
+
+#define ACCESSORY_REMOVABLE 0x1
+#define ACCESSORY_HIDDEN 0x2
+#define ACCESSORY_HIGH_VISIBILITY 0x4
+#define ACCESSORY_DEFAULT_FLAGS ( ACCESSORY_REMOVABLE )
+
+
 // Bitmasks for the flags_inv variable. These determine when a piece of clothing hides another, i.e. a helmet hiding glasses.
 // WARNING: The following flags apply only to the external suit!
 #define HIDEGLOVES      FLAG(0)

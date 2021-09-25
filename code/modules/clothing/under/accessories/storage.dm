@@ -3,7 +3,7 @@
 	icon_state = "webbing"
 	slot = ACCESSORY_SLOT_UTILITY
 	w_class = ITEM_SIZE_NORMAL
-	high_visibility = 1
+	accessory_flags = ACCESSORY_REMOVABLE | ACCESSORY_HIGH_VISIBILITY
 	on_rolled = list("down" = "none")
 
 	var/obj/item/storage/internal/container
@@ -64,9 +64,7 @@
 	desc = "A bag-like receptacle fastened to an article of clothing to hold small items."
 	icon_state = ""
 	slots = 2 STORAGE_FREEFORM
-	high_visibility = FALSE
-	removable = FALSE
-	hidden = TRUE
+	accessory_flags = ACCESSORY_HIGH_VISIBILITY | ACCESSORY_HIDDEN
 
 
 /obj/item/clothing/accessory/storage/webbing

@@ -372,7 +372,7 @@ department tags
 	icon_state = "dept_exped"
 	on_rolled = list("down" = "none", "rolled" = "dept_exped_sleeves")
 	slot = ACCESSORY_SLOT_DEPT
-	removable = FALSE
+	accessory_flags = EMPTY_BITFIELD
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_accessories_sol_unathi.dmi'
 		)
@@ -523,7 +523,7 @@ ranks - ec
 	on_rolled = list("down" = "none")
 	slot = ACCESSORY_SLOT_RANK
 	gender = PLURAL
-	high_visibility = 1
+	accessory_flags = ACCESSORY_REMOVABLE | ACCESSORY_HIGH_VISIBILITY
 	sprite_sheets = list(
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_accessories_sol_unathi.dmi'
 		)

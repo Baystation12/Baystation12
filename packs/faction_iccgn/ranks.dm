@@ -12,7 +12,7 @@
 	)
 	w_class = ITEM_SIZE_TINY
 	slot = ACCESSORY_SLOT_RANK
-	high_visibility = TRUE
+	accessory_flags = ACCESSORY_REMOVABLE | ACCESSORY_HIGH_VISIBILITY
 	gender = PLURAL
 
 
