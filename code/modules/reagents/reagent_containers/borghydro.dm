@@ -84,29 +84,16 @@
 			to_chat(user, "<span class='notice'>[t] units injected. [reagent_volumes[reagent_ids[mode]]] units remaining.</span>")
 	return
 
-/obj/item/reagent_containers/borghypo/attack_self(mob/user as mob) //Change the mode
-	var/t = ""
-	for(var/i = 1 to reagent_ids.len)
-		if(t)
-			t += ", "
-		if(mode == i)
-			t += "<b>[reagent_names[i]]</b>"
-		else
-			t += "<a href='?src=\ref[src];reagent_index=[i]'>[reagent_names[i]]</a>"
-	t = "Available reagents: [t]."
-	to_chat(user, t)
+/obj/item/reagent_containers/borghypo/attack_self(mob/user as mob)
+	var/selection = input(user, "What reagent would you like to synthesize?", name, reagent_names[mode]) as null | anything in reagent_names
+	if (!selection || selection == reagent_names[mode])
+		return
 
-	return
-
-/obj/item/reagent_containers/borghypo/OnTopic(var/href, var/list/href_list)
-	if(href_list["reagent_index"])
-		var/index = text2num(href_list["reagent_index"])
-		if(index > 0 && index <= reagent_ids.len)
-			playsound(loc, 'sound/effects/pop.ogg', 50, 0)
-			mode = index
-			var/datum/reagent/R = reagent_ids[mode]
-			to_chat(usr, "<span class='notice'>Synthesizer is now producing '[initial(R.name)]'.</span>")
-		return TOPIC_REFRESH
+	for (var/i = 1 to reagent_ids.len)
+		if (reagent_names[i] == selection)
+			mode = i
+			to_chat(user, SPAN_NOTICE("Synthesizer is now producing [selection]."))
+			return
 
 /obj/item/reagent_containers/borghypo/examine(mob/user, distance)
 	. = ..()
