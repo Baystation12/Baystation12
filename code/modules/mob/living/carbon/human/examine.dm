@@ -54,6 +54,8 @@
 		var/species_name = "\improper "
 		if(is_synth && species.cyborg_noun)
 			species_name += "[species.cyborg_noun] [species.get_bodytype(src)]"
+		else if(species.name == SPECIES_SHELL)
+			species_name += "Cyborg Human"
 		else
 			species_name += "[species.name]"
 		msg += ", <b><font color='[species.get_flesh_colour(src)]'>\a [species_name]!</font></b>[(user.can_use_codex() && SScodex.get_codex_entry(get_codex_value())) ?  SPAN_NOTICE(" \[<a href='?src=\ref[SScodex];show_examined_info=\ref[src];show_to=\ref[user]'>?</a>\]") : ""]"
