@@ -106,7 +106,7 @@
 	item_state = "sl_suit"
 	gender_icons = 1
 	desc = "An immaculate white dress shirt, paired with a pair of dark grey dress pants, a red tie, and a charcoal vest."
-	accessories = list(/obj/item/clothing/accessory/red_long, /obj/item/clothing/accessory/toggleable/vest)
+	accessories = list(/obj/item/clothing/accessory/red_long, /obj/item/clothing/accessory/toggleable/suit_vest)
 
 /obj/item/clothing/head/det
 	name = "fedora"

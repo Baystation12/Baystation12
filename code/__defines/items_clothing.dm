@@ -1,4 +1,4 @@
-#define HUMAN_STRIP_DELAY        40   // Takes 40ds = 4s to strip someone.
+#define HUMAN_STRIP_DELAY (4 SECONDS)
 
 #define CANDLE_LUM 3 // For how bright candles are.
 
@@ -36,9 +36,9 @@
 #define ACCESSORY_SLOT_HELM_C	"Helmet cover"
 
 
-#define ACCESSORY_REMOVABLE 0x1
-#define ACCESSORY_HIDDEN 0x2
-#define ACCESSORY_HIGH_VISIBILITY 0x4
+#define ACCESSORY_REMOVABLE FLAG(0)
+#define ACCESSORY_HIDDEN FLAG(1)
+#define ACCESSORY_HIGH_VISIBILITY FLAG(2)
 #define ACCESSORY_DEFAULT_FLAGS ( ACCESSORY_REMOVABLE )
 
 

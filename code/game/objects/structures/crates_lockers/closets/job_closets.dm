@@ -24,7 +24,7 @@
 		/obj/item/clothing/under/sl_suit = 2,
 		/obj/item/clothing/under/rank/bartender = 2,
 		/obj/item/clothing/under/dress/dress_saloon,
-		/obj/item/clothing/accessory/wcoat/black = 2,
+		/obj/item/clothing/accessory/waistcoat/black = 2,
 		/obj/item/clothing/shoes/black = 2
 	)
 

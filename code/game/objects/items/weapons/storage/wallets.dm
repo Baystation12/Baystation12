@@ -36,7 +36,7 @@
 		/obj/item/key,
 		/obj/item/clothing/accessory/badge,
 		/obj/item/clothing/accessory/medal,
-		/obj/item/clothing/accessory/armor/tag,
+		/obj/item/clothing/accessory/armor_tag,
 		/obj/item/clothing/ring,
 		/obj/item/passport
 	)

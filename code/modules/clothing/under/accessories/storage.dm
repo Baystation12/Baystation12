@@ -10,6 +10,7 @@
 	var/max_w_class = ITEM_SIZE_SMALL
 	var/slots
 
+
 /obj/item/clothing/accessory/storage/Initialize()
 	. = ..()
 	INIT_SKIP_QDELETED
@@ -22,6 +23,7 @@
 	else
 		container = new /obj/item/storage/internal/pockets (src, slots, max_w_class)
 
+
 /obj/item/clothing/accessory/storage/attack_hand(mob/user)
 	if (container)
 		if (parent)
@@ -29,18 +31,22 @@
 		else if (container.handle_attack_hand(user))
 			..(user)
 
+
 /obj/item/clothing/accessory/storage/MouseDrop(obj/over_object)
 	if (!parent && container?.handle_mousedrop(usr, over_object))
 		..(over_object)
+
 
 /obj/item/clothing/accessory/storage/attackby(obj/item/I, mob/user)
 	if (container)
 		return container.attackby(I, user)
 
+
 /obj/item/clothing/accessory/storage/emp_act(severity)
 	if (container)
 		container.emp_act(severity)
 	..()
+
 
 /obj/item/clothing/accessory/storage/attack_self(mob/user)
 	add_fingerprint(user)
@@ -74,12 +80,14 @@
 	slots = 3 STORAGE_SLOTS
 	body_location = UPPER_TORSO
 
+
 /obj/item/clothing/accessory/storage/webbing_large
 	name = "large webbing"
 	desc = "A sturdy mess of straps and buckles with small pockets and pouches."
 	icon_state = "webbing_large"
 	slots = 4 STORAGE_FREEFORM
 	body_location = UPPER_TORSO
+
 
 /obj/item/clothing/accessory/storage/black_vest
 	name = "black webbing vest"
@@ -88,12 +96,14 @@
 	slots = 5 STORAGE_FREEFORM
 	body_location = UPPER_TORSO
 
+
 /obj/item/clothing/accessory/storage/brown_vest
 	name = "brown webbing vest"
 	desc = "A sturdy brown vest with lots of small pockets and pouches."
 	icon_state = "vest_brown"
 	slots = 5 STORAGE_FREEFORM
 	body_location = UPPER_TORSO
+
 
 /obj/item/clothing/accessory/storage/white_vest
 	name = "white webbing vest"
@@ -102,12 +112,14 @@
 	slots = 5 STORAGE_FREEFORM
 	body_location = UPPER_TORSO
 
+
 /obj/item/clothing/accessory/storage/black_drop
 	name = "black drop bag"
 	desc = "A robust black leg bag with plenty of room inside."
 	icon_state = "thigh_black"
 	slots = 5 STORAGE_FREEFORM
 	body_location = LEGS
+
 
 /obj/item/clothing/accessory/storage/brown_drop
 	name = "brown drop bag"
@@ -116,6 +128,7 @@
 	slots = 5 STORAGE_FREEFORM
 	body_location = LEGS
 
+
 /obj/item/clothing/accessory/storage/white_drop
 	name = "white drop bag"
 	desc = "A stoic white leg bag with plenty of room inside."
@@ -123,12 +136,14 @@
 	slots = 5 STORAGE_FREEFORM
 	body_location = LEGS
 
+
 /obj/item/clothing/accessory/storage/knifeharness
 	name = "decorated harness"
 	desc = "A heavily decorated harness of sinew and leather with two knife loops."
 	icon_state = "unathiharness2"
 	slots = 2 STORAGE_SLOTS
 	max_w_class = ITEM_SIZE_NORMAL
+
 
 /obj/item/clothing/accessory/storage/knifeharness/Initialize()
 	. = ..()
@@ -141,12 +156,14 @@
 		for (var/i = 1 to abs(slots))
 			new /obj/item/material/knife/table/unathi (container)
 
+
 /obj/item/clothing/accessory/storage/bandolier
 	name = "bandolier"
 	desc = "A lightweight bandolier with straps for holding ammunition or other small objects."
 	icon_state = "bandolier"
 	slots = 10 STORAGE_SLOTS
 	max_w_class = ITEM_SIZE_NORMAL
+
 
 /obj/item/clothing/accessory/storage/bandolier/Initialize()
 	. = ..()
@@ -177,6 +194,7 @@
 			/obj/item/reagent_containers/pill,
 			/obj/item/storage/pill_bottle
 		)
+
 
 /obj/item/clothing/accessory/storage/bandolier/safari/Initialize()
 	. = ..()

@@ -8776,8 +8776,8 @@
 "uI" = (
 /obj/structure/table/rack,
 /obj/random/trash,
-/obj/item/clothing/accessory/armguards/riot,
-/obj/item/clothing/accessory/legguards/riot,
+/obj/item/clothing/accessory/arm_guards/riot,
+/obj/item/clothing/accessory/leg_guards/riot,
 /obj/item/shield/riot,
 /obj/effect/floor_decal/corner/grey/border{
 	dir = 1;
