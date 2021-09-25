@@ -15904,7 +15904,6 @@
 "cDO" = (
 /obj/structure/table/steel,
 /obj/item/storage/box/evidence,
-/obj/item/hand_labeler,
 /obj/machinery/camera/network/security{
 	c_tag = "Security Wing - Processing";
 	dir = 4
@@ -15931,6 +15930,7 @@
 	dir = 9;
 	icon_state = "corner_white"
 	},
+/obj/item/screwdriver,
 /turf/simulated/floor/tiled/monotile,
 /area/security/processing)
 "cEb" = (
@@ -18764,7 +18764,6 @@
 /area/hallway/primary/firstdeck/aft)
 "hjk" = (
 /obj/structure/closet/secure_closet/brig,
-/obj/item/device/radio/headset,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/security/brig)
@@ -20315,7 +20314,6 @@
 "jft" = (
 /obj/structure/table/steel,
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/item/hand_labeler,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/storage)
 "jhb" = (
