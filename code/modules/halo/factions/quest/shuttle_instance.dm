@@ -35,11 +35,11 @@
 		quest.instance_loaded = 1
 
 //this is very naughty but im pulling my hair out trying to avoid changes to bs12 code so we stay compatible --Cael 26.8.19
-/*
+
 /obj/effect/shuttle_landmark
 	var/distance = 0
 	var/datum/npc_quest/instance_quest
-	*/
+
 
 /obj/effect/shuttle_instance
 	icon = 'icons/effects/effects.dmi'
@@ -51,13 +51,6 @@
 	var/offsite_shuttle_area_type
 
 //important! uncomment this when you need it
-/*
-/area/planets/Geminus/indoor/quest_instance
-	name = "Geminus Outskirts"
-
-/obj/effect/shuttle_instance/innie_quest
-	offsite_shuttle_area_type = /area/shuttle/offsite_berth_transport
-*/
 
 /obj/effect/landmark/instance_defender
 	icon = 'icons/mob/screen1.dmi'

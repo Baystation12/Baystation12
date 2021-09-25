@@ -62,10 +62,10 @@
 	overmap_spawn_in_me = list(/obj/effect/overmap/complex046)
 
 /datum/map/base_assault_unsc_vs_urf
-	allowed_jobs = list(\
+	allowed_jobs = list(
 	/datum/job/unsc/marine,
 	/datum/job/unsc/marine/specialist,
-	/datum/job/unsc/marine/hellbringer,\
+	/datum/job/unsc/marine/hellbringer,
 	/datum/job/unsc/marine/squad_leader,
 	/datum/job/unsc/odst,
 	/datum/job/unsc/odst/squad_leader,
@@ -74,6 +74,9 @@
 	/datum/job/geminus_innie,
 	/datum/job/geminus_innie/officer,
 	/datum/job/geminus_innie/commander,
+	/datum/job/soe_commando,
+	/datum/job/soe_commando_officer,
+	/datum/job/soe_commando_captain,
 	/datum/job/geminus_innie/orion_defector,
 	)
 

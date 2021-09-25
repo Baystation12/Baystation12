@@ -397,7 +397,7 @@
 "hG" = (/obj/structure/table/standard,/turf/simulated/floor/tiled,/area/planets/neutralcity/inside/medical)
 "hH" = (/obj/machinery/hologram/holopad,/turf/simulated/floor/tiled,/area/planets/neutralcity/inside/medical)
 "hI" = (/obj/machinery/light{dir = 4},/turf/simulated/floor/decor{tag = "icon-cafeteria"; icon_state = "cafeteria"; dir = 2},/area/planets/neutralcity/inside/salon)
-"hJ" = (/obj/structure/table/steel,/obj/item/weapon/scalpel,/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled/white,/area/planets/neutralcity/inside/medical)
+"hJ" = (/obj/structure/table/steel,/obj/item/weapon/scalpel,/obj/machinery/light{dir = 8},/obj/item/weapon/circular_saw,/turf/simulated/floor/tiled/white,/area/planets/neutralcity/inside/medical)
 "hK" = (/obj/machinery/optable,/turf/simulated/floor/tiled/white,/area/planets/neutralcity/inside/medical)
 "hL" = (/obj/item/weapon/reagent_containers/food/drinks/flask{pixel_x = 8},/obj/structure/table/steel,/obj/item/clothing/mask/surgical,/obj/item/clothing/head/surgery/blue,/turf/simulated/floor/tiled/white,/area/planets/neutralcity/inside/medical)
 "hM" = (/obj/structure/grille/smallfence{tag = "icon-fence2"; icon_state = "fence2"},/turf/simulated/floor/planet/dirt,/area/planets/neutralcity/inside/ruins_west)

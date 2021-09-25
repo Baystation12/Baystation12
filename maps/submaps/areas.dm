@@ -9,19 +9,19 @@
 
 /area/submaps/civilian/drugden
 	name = "Drug Den"
-	dynamic_lighting = 1
+	dynamic_lighting = 0
 	luminosity = 1
 	requires_power = 0
 
 /area/submaps/civilian/orbital_factory
 	name = "orbital Factory"
-	dynamic_lighting = 1
+	dynamic_lighting = 0
 	luminosity = 1
 	requires_power = 0
 
 /area/submaps/civilian/civilian_bank
 	name = "Bank"
-	dynamic_lighting = 1
+	dynamic_lighting = 0
 	luminosity = 1
 	requires_power = 0
 

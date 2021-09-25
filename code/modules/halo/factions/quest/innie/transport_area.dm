@@ -37,3 +37,9 @@
 /area/planets/Geminus/indoor/npc_factory
 	name = "\improper Geminus NPC Factory"
 	icon_state = "storage"
+
+/obj/effect/shuttle_instance/innie_quest
+	offsite_shuttle_area_type = /area/shuttle/offsite_berth_transport
+
+/area/planets/Geminus/indoor/quest_instance
+	name = "Geminus Outskirts"

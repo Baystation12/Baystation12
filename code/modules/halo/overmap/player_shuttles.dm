@@ -153,7 +153,7 @@
 	ship_to_spawn = /obj/effect/overmap/ship/npc_ship/shuttlecraft/unsc
 
 /obj/machinery/shuttle_spawner/innie
-	our_faction = "Insurrectionist"
+	our_faction = "Insurrection"
 	ship_to_spawn = /obj/effect/overmap/ship/npc_ship/shuttlecraft/innie
 
 /obj/machinery/shuttle_spawner/civ
@@ -255,7 +255,7 @@ allowing periodic long range transmission."
 )
 
 /obj/machinery/shuttle_spawner/multi_choice/urf
-	our_faction = "Insurrectionist"
+	our_faction = "Insurrection"
 	choices = newlist(\
 /datum/spawner_choice/cheap_urf_combat,\
 /datum/spawner_choice/heavyarmed_urf_combat,\

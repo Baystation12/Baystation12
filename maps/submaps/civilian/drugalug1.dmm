@@ -1,6 +1,5 @@
 "aa" = (/turf/unsimulated/wall,/area/submaps/civilian/drugden)
 "ab" = (/turf/simulated/wall,/area/submaps/civilian/drugden)
-"ac" = (/turf/simulated/floor/pavement/empty,/area/submaps/civilian/drugden)
 "ad" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/pavement/empty,/area/submaps/civilian/drugden)
 "ae" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/pavement/empty,/area/submaps/civilian/drugden)
 "af" = (/obj/effect/decal/cleanable/blood,/turf/simulated/floor/pavement/empty,/area/submaps/civilian/drugden)
@@ -25,7 +24,7 @@
 "ay" = (/obj/structure/closet/crate/trashcart,/obj/machinery/light/small{icon_state = "bulb1"; dir = 1},/obj/item/weapon/airlock_electronics,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/submaps/civilian/drugden)
 "az" = (/obj/structure/table/rack,/obj/effect/landmark/instance_loot,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/submaps/civilian/drugden)
 "aA" = (/obj/structure/table/rack,/obj/machinery/light/small{icon_state = "bulb1"; dir = 1},/obj/effect/landmark/instance_loot,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/submaps/civilian/drugden)
-"aB" = (/obj/effect/decal/cleanable/cobweb2,/obj/effect/decal/cleanable/dirt,/obj/item/metalscrap,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/submaps/civilian/drugden)
+"aB" = (/obj/effect/decal/cleanable/cobweb2,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/submaps/civilian/drugden)
 "aC" = (/obj/item/weapon/handcuffs,/turf/simulated/floor/pavement/empty,/area/submaps/civilian/drugden)
 "aD" = (/turf/simulated/floor/decor{icon_state = "grooved2"},/area/submaps/civilian/drugden)
 "aE" = (/obj/effect/decal/cleanable/greenglow,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/submaps/civilian/drugden)
@@ -46,7 +45,7 @@
 "aT" = (/obj/effect/decal/cleanable/ash,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/submaps/civilian/drugden)
 "aU" = (/obj/effect/decal/cleanable/dirt,/obj/effect/landmark/instance_loot,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/submaps/civilian/drugden)
 "aV" = (/obj/structure/reagent_dispensers/fueltank,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/submaps/civilian/drugden)
-"aW" = (/obj/item/metalscrap,/turf/simulated/floor/pavement/empty,/area/submaps/civilian/drugden)
+"aW" = (/turf/simulated/floor/pavement/empty,/area/submaps/civilian/drugden)
 "aX" = (/obj/effect/decal/cleanable/dirt,/obj/effect/landmark/instance_defender,/turf/simulated/floor/pavement/empty,/area/submaps/civilian/drugden)
 "aY" = (/obj/item/stack/material/glass/ten,/obj/item/weapon/airlock_electronics,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/submaps/civilian/drugden)
 "aZ" = (/obj/structure/table/rack,/obj/item/ammo_magazine/c38,/obj/machinery/light/small{icon_state = "bulb1"; dir = 4},/turf/simulated/floor/decor{icon_state = "grooved2"},/area/submaps/civilian/drugden)
@@ -76,7 +75,7 @@
 "bx" = (/obj/structure/dogbed,/mob/living/simple_animal/dog{stop_automated_movement = 1},/turf/simulated/floor/planet/dirt,/area/submaps/civilian/drugden)
 "by" = (/obj/machinery/light/small{icon_state = "bulb1"; dir = 1},/turf/simulated/floor/pavement/empty,/area/submaps/civilian/drugden)
 "bz" = (/obj/machinery/light/small{icon_state = "bulb1"; dir = 1},/turf/simulated/floor/planet/dirt,/area/submaps/civilian/drugden)
-"bA" = (/obj/effect/decal/cleanable/dirt,/obj/item/metalscraps,/obj/item/weapon/beartrap{alpha = 50; anchored = 1; deployed = 1; icon_state = "beartrap1"; name = "rusted mechanical trap"},/turf/simulated/floor/planet/dirt,/area/submaps/civilian/drugden)
+"bA" = (/obj/effect/decal/cleanable/dirt,/obj/item/weapon/beartrap{alpha = 50; anchored = 1; deployed = 1; icon_state = "beartrap1"; name = "rusted mechanical trap"},/turf/simulated/floor/planet/dirt,/area/submaps/civilian/drugden)
 "bB" = (/obj/effect/decal/cleanable/dirt,/obj/structure/electric_fence,/turf/simulated/floor/planet/dirt,/area/submaps/civilian/drugden)
 "bC" = (/obj/structure/closet/cabinet,/turf/simulated/floor/decor{icon_state = "wood14"},/area/submaps/civilian/drugden)
 "bD" = (/turf/simulated/floor/decor{icon_state = "wood14"},/area/submaps/civilian/drugden)
@@ -117,26 +116,26 @@
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaababababababababababababababababababababababababababababaa
-aaabacacacadadacacacacadaeadadafacagahagagadadagaiadaiajabaa
-aaabakaeafacacacaladacacaeaeadamadanaiaiaiaiaoaeaiadagapabaa
-aaabacaeababababababababacadababababacapabababababaqagaeabaa
+aaabaWaWaWadadaWaWaWaWadaeadadafaWagahagagadadagaiadaiajabaa
+aaabakaeafaWaWaWaladaWaWaeaeadamadanaiaiaiaiaoaeaiadagapabaa
+aaabaWaeababababababababaWadababababaWapabababababaqagaeabaa
 aaabafarabasatababauavabawadabaxayabapapabazaAaBababajadabaa
-aaabajaCabaDaEaFaGaHaDaIacadabaJaKabacacabaHaHaDaLabagadabaa
-aaabadafabaDaMaNaDaOaDabadaeacacagapapawabaDaPaQaPabaeaiabaa
-aaabadacaRaHaSaTaUaDaVabadadaWaXagadacapaYaDaSaNaZabbaadabaa
-aaabacacabaDbbbcaTaHaDabacadacaoadapacagabaPaNaDbdabagawabaa
-aaabacadabaHaTbebfbgaHaKacacacababbhapagabbiaDaHbjabajahabaa
-aaabacbkabblbmababbnboabacbpacapbqaeacbrabbsbtazababadagabaa
-aaabaeaeababababababababbubvaeagadbwadagabababababbxacadabaa
-aaabacacadbyacacacacbyacacacagadadawagadagbzadagadagapagabaa
+aaabajaCabaDaEaFaGaHaDaIaWadabaJaKabaWaWabaHaHaDaLabagadabaa
+aaabadafabaDaMaNaDaOaDabadaeaWaWagapapawabaDaPaQaPabaeaiabaa
+aaabadaWaRaHaSaTaUaDaVabadadaWaXagadaWapaYaDaSaNaZabbaadabaa
+aaabaWaWabaDbbbcaTaHaDabaWadaWaoadapaWagabaPaNaDbdabagawabaa
+aaabaWadabaHaTbebfbgaHaKaWaWaWababbhapagabbiaDaHbjabajahabaa
+aaabaWbkabblbmababbnboabaWbpaWapbqaeaWbrabbsbtazababadagabaa
+aaabaeaeababababababababbubvaeagadbwadagabababababbxaWadabaa
+aaabaWaWadbyaWaWaWaWbyaWaWaWagadadawagadagbzadagadagapagabaa
 aaabababababababababababababababababababababababababbAbBabaa
 aaababbCbDbDbEbDbDbDbFbGababbHbFbDbDbDbEbDbDbCabababagagabaa
 aabIabbJbKbDabbDbDbKbDbLababbLbDbKbDbDabbDbKbMabbIabagapabaa
 aabNbObDbDbPabbQbRbSbDbDbTbUbDbDbVbRbWabbPbDbDbObXabapagabaa
 aabYabbDbDbLabbVbRbSbDcaababcabDbVbRbSabbLbDbDabcbabagagabaa
 aaabababababababababbEababababbEababababababababababcccdabaa
-aaacacacacacacacacacacacacacacacacacacacacacacacacacacacacaa
-aaacacacacacacacacacacacacacacacacacacacacacacacacacacacacaa
+aaaWaWaWaWaWaWaWaWaWaWaWaWaWaWaWaWaWaWaWaWaWaWaWaWaWaWaWaWaa
+aaaWaWaWaWaWaWaWaWaWaWaWaWaWaWaWaWaWaWaWaWaWaWaWaWaWaWaWaWaa
 aacecececececfcececececececececececececfcececececececececeaa
 aacgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgaa
 aachchchchchchchchchchchchchchbZbZbZbZbZbZbZbZchcicicichchaa

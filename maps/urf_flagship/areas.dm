@@ -57,3 +57,7 @@
 /area/urf_flagship/questareamarker
 	name = "URF Flagship Quest Area"
 	icon_state = "bridge"
+	power_environ = 1
+	power_light = 1
+	requires_power = 0
+	dynamic_lighting = 1
