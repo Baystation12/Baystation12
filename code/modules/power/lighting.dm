@@ -718,6 +718,21 @@
 	)
 	sound_on = 'sound/machines/lightson.ogg'
 
+/obj/item/light/tube/warm
+	name = "light tube (warm)"
+	desc = "A replacement light tube. This one provides soft, warm lighting."
+	b_colour = LIGHT_COLOUR_WARM
+
+/obj/item/light/tube/cool
+	name = "light tube (cool)"
+	desc = "A replacement light tube. This one provides crisp, cool lighting."
+	b_colour = LIGHT_COLOUR_COOL
+
+/obj/item/light/tube/white
+	name = "light tube (white)"
+	desc = "A replacement light tube. This one provides clean, white lighting."
+	b_colour = LIGHT_COLOUR_WHITE
+
 /obj/item/light/tube/party/Initialize() //Randomly colored light tubes. Mostly for testing, but maybe someone will find a use for them.
 	. = ..()
 	b_colour = rgb(pick(0,255), pick(0,255), pick(0,255))
@@ -729,6 +744,21 @@
 	b_inner_range = 2
 	b_outer_range = 8
 	b_curve = 2.5
+
+/obj/item/light/tube/large/warm
+	name = "large light tube (warm)"
+	desc = "A replacement light tube. This one provides soft, warm lighting."
+	b_colour = LIGHT_COLOUR_WARM
+
+/obj/item/light/tube/large/cool
+	name = "large light tube (cool)"
+	desc = "A replacement light tube. This one provides crisp, cool lighting."
+	b_colour = LIGHT_COLOUR_COOL
+
+/obj/item/light/tube/large/white
+	name = "large light tube (white)"
+	desc = "A replacement light tube. This one provides clean, white lighting."
+	b_colour = LIGHT_COLOUR_WHITE
 
 /obj/item/light/tube/large/party/Initialize() //Randomly colored light tubes. Mostly for testing, but maybe someone will find a use for them.
 	. = ..()
@@ -751,9 +781,20 @@
 		LIGHTMODE_EMERGENCY = list(l_outer_range = 3, l_max_bright = 1, l_color = LIGHT_COLOUR_E_RED)
 	)
 
-/obj/item/light/bulb/warm/b_colour = LIGHT_COLOUR_WARM
-/obj/item/light/bulb/cool/b_colour = LIGHT_COLOUR_COOL
-/obj/item/light/bulb/white/b_colour = LIGHT_COLOUR_WHITE
+/obj/item/light/bulb/warm
+	name = "light bulb (warm)"
+	desc = "A replacement light bulb. This one provides soft, warm lighting."
+	b_colour = LIGHT_COLOUR_WARM
+
+/obj/item/light/bulb/cool
+	name = "light bulb (cool)"
+	desc = "A replacement light bulb. This one provides crisp, cool lighting."
+	b_colour = LIGHT_COLOUR_COOL
+
+/obj/item/light/bulb/white
+	name = "light bulb (white)"
+	desc = "A replacement light bulb. This one provides clean, white lighting."
+	b_colour = LIGHT_COLOUR_WHITE
 
 /obj/item/light/bulb/red
 	color = LIGHT_COLOUR_E_RED
