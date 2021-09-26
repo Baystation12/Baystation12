@@ -113,7 +113,7 @@ start	the index of the first element in the range that is	not already known to b
 		//[lo, left) elements <= pivot < [right, start) elements
 		//in other words, find where the pivot element should go using bisection search
 		while(left < right)
-			var/mid = (left + right) >> 1	//round((left+right)/2)
+			var/mid = SHIFTR(left + right, 1)	//round((left+right)/2)
 			if(call(cmp)(fetchElement(L,mid), pivot) > 0)
 				right = mid
 			else
@@ -169,7 +169,7 @@ reverse a descending sequence without violating stability.
 	var/r = 0	//becomes 1 if any bits are shifted off
 	while(n >= MIN_MERGE)
 		r |= (n & 1)
-		n >>= 1
+		n = SHIFTR(n, 1)
 	return n + r
 
 //Examines the stack of runs waiting to be merged and merges adjacent runs until the stack invariants are reestablished:
@@ -266,7 +266,7 @@ reverse a descending sequence without violating stability.
 		var/maxOffset = len - hint
 		while(offset < maxOffset && call(cmp)(key, fetchElement(L,base+hint+offset)) > 0)
 			lastOffset = offset
-			offset = (offset << 1) + 1
+			offset = SHIFTL(offset, 1) + 1
 
 		if(offset > maxOffset)
 			offset = maxOffset
@@ -278,7 +278,7 @@ reverse a descending sequence without violating stability.
 		var/maxOffset = hint + 1
 		while(offset < maxOffset && call(cmp)(key, fetchElement(L,base+hint-offset)) <= 0)
 			lastOffset = offset
-			offset = (offset << 1) + 1
+			offset = SHIFTL(offset, 1) + 1
 
 		if(offset > maxOffset)
 			offset = maxOffset
@@ -293,7 +293,7 @@ reverse a descending sequence without violating stability.
 	//offset. Do a binary search with invariant L[base+lastOffset-1] < key <= L[base+offset]
 	++lastOffset
 	while(lastOffset < offset)
-		var/m = lastOffset + ((offset - lastOffset) >> 1)
+		var/m = lastOffset + SHIFTR(offset - lastOffset, 1)
 
 		if(call(cmp)(key, fetchElement(L,base+m)) > 0)
 			lastOffset = m + 1
@@ -325,7 +325,7 @@ reverse a descending sequence without violating stability.
 		var/maxOffset = hint + 1	//therefore we want to insert somewhere in the range [base,base+hint] = [base+,base+(hint+1))
 		while(offset < maxOffset && call(cmp)(key, fetchElement(L,base+hint-offset)) < 0)	//we are iterating backwards
 			lastOffset = offset
-			offset = (offset << 1) + 1	//1 3 7 15
+			offset = SHIFTL(offset, 1) + 1	//1 3 7 15
 			//if(offset <= 0)	//int overflow, not an issue here since we are using floats
 			//	offset = maxOffset
 
@@ -340,7 +340,7 @@ reverse a descending sequence without violating stability.
 		var/maxOffset = len - hint	//therefore we want to insert somewhere in the range (base+hint,base+len) = [base+hint+1, base+hint+(len-hint))
 		while(offset < maxOffset && call(cmp)(key, fetchElement(L,base+hint+offset)) >= 0)
 			lastOffset = offset
-			offset = (offset << 1) + 1
+			offset = SHIFTL(offset, 1) + 1
 			//if(offset <= 0)	//int overflow, not an issue here since we are using floats
 			//	offset = maxOffset
 
@@ -354,7 +354,7 @@ reverse a descending sequence without violating stability.
 
 	++lastOffset
 	while(lastOffset < offset)
-		var/m = lastOffset + ((offset - lastOffset) >> 1)
+		var/m = lastOffset + SHIFTR(offset - lastOffset, 1)
 
 		if(call(cmp)(key, fetchElement(L,base+m)) < 0)	//key <= L[base+m]
 			offset = m

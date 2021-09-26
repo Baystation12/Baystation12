@@ -22,15 +22,15 @@
 #define TOTAL   5 // For total power used only.
 
 // Bitflags for machine stat variable.
-#define BROKEN   0x1
-#define NOPOWER  0x2
-#define MAINT    0x8  // Under maintenance.
-#define EMPED    0x10 // Temporary broken by EMP pulse.
-#define NOSCREEN 0x20 // No UI shown via direct interaction
-#define NOINPUT  0x40 // No input taken from direct interaction
+#define BROKEN      FLAG(0)
+#define NOPOWER     FLAG(1)
+#define MAINT       FLAG(2)  // Under maintenance.
+#define EMPED       FLAG(3)  // Temporary broken by EMP pulse.
+#define NOSCREEN    FLAG(4)  // No UI shown via direct interaction
+#define NOINPUT     FLAG(5)  // No input taken from direct interaction
 
-#define MACHINE_BROKEN_GENERIC  0x1 // Standard legacy brokenness, used on a case-by-case basis
-#define MACHINE_BROKEN_NO_PARTS 0x2 // Missing required parts
+#define MACHINE_BROKEN_GENERIC  FLAG(0)  // Standard legacy brokenness, used on a case-by-case basis
+#define MACHINE_BROKEN_NO_PARTS FLAG(1)  // Missing required parts
 
 // Used by firelocks
 #define FIREDOOR_OPEN 1
@@ -136,20 +136,20 @@
 #define MESSAGE_RESEND_TIME 5	//how long (in seconds) do we wait before resending a message
 
 // obj/item/stock_parts status flags
-#define PART_STAT_INSTALLED  1
-#define PART_STAT_PROCESSING 2
-#define PART_STAT_ACTIVE     4
-#define PART_STAT_CONNECTED  8
+#define PART_STAT_INSTALLED     FLAG(0)
+#define PART_STAT_PROCESSING    FLAG(1)
+#define PART_STAT_ACTIVE        FLAG(2)
+#define PART_STAT_CONNECTED     FLAG(3)
 
 // part_flags
-#define PART_FLAG_LAZY_INIT   1 // Will defer init on stock parts until machine is destroyed or parts are otherwise queried.
-#define PART_FLAG_QDEL        2 // Will delete on uninstall
-#define PART_FLAG_HAND_REMOVE 4 // Can be removed by hand
+#define PART_FLAG_LAZY_INIT      FLAG(0)  // Will defer init on stock parts until machine is destroyed or parts are otherwise queried.
+#define PART_FLAG_QDEL           FLAG(1)  // Will delete on uninstall
+#define PART_FLAG_HAND_REMOVE    FLAG(2)  // Can be removed by hand
 
 // Machinery process flags, for use with START_PROCESSING_MACHINE
-#define MACHINERY_PROCESS_SELF       1
-#define MACHINERY_PROCESS_COMPONENTS 2
-#define MACHINERY_PROCESS_ALL        (MACHINERY_PROCESS_SELF | MACHINERY_PROCESS_COMPONENTS)
+#define MACHINERY_PROCESS_SELF          FLAG(0)
+#define MACHINERY_PROCESS_COMPONENTS    FLAG(1)
+#define MACHINERY_PROCESS_ALL           (MACHINERY_PROCESS_SELF | MACHINERY_PROCESS_COMPONENTS)
 
 // Machine construction state return values, for use with cannot_transition_to
 #define MCS_CHANGE   0 // Success
@@ -157,10 +157,10 @@
 #define MCS_BLOCK    2 // Failed to change, but action was performed
 
 #define FABRICATOR_EXTRA_COST_FACTOR 1.25
-#define FAB_HACKED   1
-#define FAB_DISABLED 2
-#define FAB_SHOCKED  4
-#define FAB_BUSY     8
+#define FAB_HACKED      FLAG(0)
+#define FAB_DISABLED    FLAG(1)
+#define FAB_SHOCKED     FLAG(2)
+#define FAB_BUSY        FLAG(3)
 
 #define  PART_CPU  		/obj/item/stock_parts/computer/processor_unit				// CPU. Without it the computer won't run. Better CPUs can run more programs at once.
 #define  PART_NETWORK  	/obj/item/stock_parts/computer/network_card					// Network Card component of this computer. Allows connection to NTNet

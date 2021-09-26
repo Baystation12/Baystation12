@@ -61,16 +61,16 @@
 		if(on_frame)
 			for(var/i = 1 to 4)
 				if(other_connections[i] != "0")
-					I = image(icon, "grille_other_onframe[connections[i]]", dir = 1<<(i-1))
+					I = image(icon, "grille_other_onframe[connections[i]]", dir = SHIFTL(1, i - 1))
 				else
-					I = image(icon, "grille_onframe[connections[i]]", dir = 1<<(i-1))
+					I = image(icon, "grille_onframe[connections[i]]", dir = SHIFTL(1, i - 1))
 				overlays += I
 		else
 			for(var/i = 1 to 4)
 				if(other_connections[i] != "0")
-					I = image(icon, "grille_other[connections[i]]", dir = 1<<(i-1))
+					I = image(icon, "grille_other[connections[i]]", dir = SHIFTL(1, i - 1))
 				else
-					I = image(icon, "grille[connections[i]]", dir = 1<<(i-1))
+					I = image(icon, "grille[connections[i]]", dir = SHIFTL(1, i - 1))
 				overlays += I
 
 /obj/structure/grille/Bumped(atom/user)

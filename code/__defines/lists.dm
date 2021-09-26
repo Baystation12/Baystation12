@@ -40,7 +40,7 @@
 	} else {\
 		var/__BIN_LEFT = 1;\
 		var/__BIN_RIGHT = __BIN_CTTL;\
-		var/__BIN_MID = (__BIN_LEFT + __BIN_RIGHT) >> 1;\
+		var/__BIN_MID = SHIFTR(__BIN_LEFT + __BIN_RIGHT, 1);\
 		var/##TYPECONT/__BIN_ITEM;\
 		while(__BIN_LEFT < __BIN_RIGHT) {\
 			__BIN_ITEM = LIST[__BIN_MID];\
@@ -49,7 +49,7 @@
 			} else {\
 				__BIN_RIGHT = __BIN_MID;\
 			};\
-			__BIN_MID = (__BIN_LEFT + __BIN_RIGHT) >> 1;\
+			__BIN_MID = SHIFTR(__BIN_LEFT + __BIN_RIGHT, 1);\
 		};\
 		__BIN_ITEM = LIST[__BIN_MID];\
 		__BIN_MID = __BIN_ITEM.##COMPARE > IN.##COMPARE ? __BIN_MID : __BIN_MID + 1;\
@@ -79,7 +79,7 @@
 		} else {\
 			var/__BIN_LEFT = 1;\
 			var/__BIN_RIGHT = __BIN_CTTL;\
-			var/__BIN_MID = (__BIN_LEFT + __BIN_RIGHT) >> 1;\
+			var/__BIN_MID = SHIFTR(__BIN_LEFT + __BIN_RIGHT, 1);\
 			var ##TYPECONT/__BIN_ITEM;\
 			while(__BIN_LEFT < __BIN_RIGHT) {\
 				__BIN_ITEM = COMPTYPE;\
@@ -88,7 +88,7 @@
 				} else {\
 					__BIN_RIGHT = __BIN_MID;\
 				};\
-				__BIN_MID = (__BIN_LEFT + __BIN_RIGHT) >> 1;\
+				__BIN_MID = SHIFTR(__BIN_LEFT + __BIN_RIGHT, 1);\
 			};\
 			__BIN_ITEM = COMPTYPE;\
 			__BIN_MID = __BIN_ITEM.##COMPARISON > COMPARE.##COMPARISON ? __BIN_MID : __BIN_MID + 1;\

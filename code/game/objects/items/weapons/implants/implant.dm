@@ -60,7 +60,7 @@
 			affected.implants += src
 			part = affected
 
-		BITSET(H.hud_updateflag, IMPLOYAL_HUD)
+		SET_BIT(H.hud_updateflag, IMPLOYAL_HUD)
 
 	forceMove(M)
 	imp_in = M

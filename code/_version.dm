@@ -53,7 +53,7 @@ DM version compatibility macros & procs
 			if (0) . = "0[.]"
 			if (1 to 9) . = "[num & 0xf][.]"
 			else . = "[ascii2text((num & 0xf) + 87)][.]"
-		num >>= 4
+		num = SHIFTR(num, 4)
 
 
 #else //513+

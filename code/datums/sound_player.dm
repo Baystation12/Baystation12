@@ -69,6 +69,8 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 		sound_tokens_by_sound_id[sound_id] = sound_tokens
 	sound_tokens += sound_token
 
+#define SOUND_STOPPED FLAG(15)
+
 /*
 	Outwardly this is a merely a toke/little helper that a user utilize to adjust sounds as desired (and possible).
 	In reality this is where the heavy-lifting happens.
@@ -82,7 +84,6 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 	var/sound_id       // The associated sound id, used for cleanup
 	var/status = 0     // Paused, muted, running? Global for all listeners
 	var/listener_status// Paused, muted, running? Specific for the given listener.
-	var/const/SOUND_STOPPED = 0x8000
 
 	var/datum/proximity_trigger/square/proxy_listener
 	var/list/can_be_heard_from

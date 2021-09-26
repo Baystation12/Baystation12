@@ -457,7 +457,7 @@
 					modified = 1
 
 					spawn()
-						BITSET(hud_updateflag, WANTED_HUD)
+						SET_BIT(hud_updateflag, WANTED_HUD)
 						if(istype(user,/mob/living/carbon/human))
 							var/mob/living/carbon/human/U = user
 							U.handle_regular_hud_updates()
