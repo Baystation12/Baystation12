@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - tweak: Cyborg hyposprays now use an input box instead of links in the chat to
-      select a chemical to synthesize.
