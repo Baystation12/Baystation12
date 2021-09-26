@@ -178,7 +178,7 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 		for(var/mob/M in GLOB.player_list)
 			if(M.client)
 				n+=M.key
-				n+=" "
+				n+="&"
 		return n
 
 	else if(T == "players")
