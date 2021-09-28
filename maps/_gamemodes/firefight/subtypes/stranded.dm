@@ -19,7 +19,59 @@
 	enemy_numbers_base = 15
 	enemy_numbers_left = 15
 
-	wave_spawns = list()
+	wave_spawns = list(\
+		list(\
+			/mob/living/simple_animal/hostile/flood/carrier = 1,
+			/mob/living/simple_animal/hostile/flood/combat_form/human = 1,
+			/mob/living/simple_animal/hostile/flood/combat_form/guard = 1,
+		),
+		list(\
+			/mob/living/simple_animal/hostile/flood/carrier = 1,
+			/mob/living/simple_animal/hostile/flood/combat_form/human = 1,
+			/mob/living/simple_animal/hostile/flood/combat_form/ODST = 1,
+			/mob/living/simple_animal/hostile/flood/combat_form/guard = 1,
+			/mob/living/simple_animal/hostile/flood/combat_form/oni = 1,
+
+		),
+		list(\
+			/mob/living/simple_animal/hostile/flood/carrier = 1,
+			/mob/living/simple_animal/hostile/flood/combat_form/human = 1,
+			/mob/living/simple_animal/hostile/flood/combat_form/ODST = 1,
+			/mob/living/simple_animal/hostile/flood/combat_form/guard = 1,
+			/mob/living/simple_animal/hostile/flood/combat_form/oni = 1,
+			/mob/living/simple_animal/hostile/flood/combat_form/minor = 1,
+			/mob/living/simple_animal/hostile/flood/combat_form/minor2 = 1,
+
+		),
+		list(\
+			/mob/living/simple_animal/hostile/flood/carrier = 1,
+			/mob/living/simple_animal/hostile/flood/combat_form/human = 1,
+			/mob/living/simple_animal/hostile/flood/combat_form/ODST = 1,
+			/mob/living/simple_animal/hostile/flood/combat_form/guard = 1,
+			/mob/living/simple_animal/hostile/flood/combat_form/oni = 1,
+			/mob/living/simple_animal/hostile/flood/combat_form/minor = 1,
+			/mob/living/simple_animal/hostile/flood/combat_form/minor2 = 1,
+			/mob/living/simple_animal/hostile/flood/combat_form/major = 1,
+			/mob/living/simple_animal/hostile/flood/combat_form/zealot = 1,
+			/mob/living/simple_animal/hostile/flood/combat_form/ultra = 1,
+			/mob/living/simple_animal/hostile/flood/combat_form/ranger = 1,
+		),
+		list(\
+			/mob/living/simple_animal/hostile/flood/carrier = 1,
+			/mob/living/simple_animal/hostile/flood/combat_form/human = 1,
+			/mob/living/simple_animal/hostile/flood/combat_form/ODST = 1,
+			/mob/living/simple_animal/hostile/flood/combat_form/guard = 1,
+			/mob/living/simple_animal/hostile/flood/combat_form/oni = 1,
+			/mob/living/simple_animal/hostile/flood/combat_form/minor = 1,
+			/mob/living/simple_animal/hostile/flood/combat_form/minor2 = 1,
+			/mob/living/simple_animal/hostile/flood/combat_form/major = 1,
+			/mob/living/simple_animal/hostile/flood/combat_form/zealot = 1,
+			/mob/living/simple_animal/hostile/flood/combat_form/ultra = 1,
+			/mob/living/simple_animal/hostile/flood/combat_form/specops = 1,
+			/mob/living/simple_animal/hostile/flood/combat_form/ranger = 1,
+
+		)
+	)
 
 /datum/game_mode/firefight/stranded/pre_setup()
 	. = ..()

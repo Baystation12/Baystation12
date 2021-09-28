@@ -12,7 +12,7 @@
 	melee_damage_upper = 55
 	attacktext = "Whips"
 	mob_size = MOB_LARGE
-	resistance = 30 //MA5 Rounds literally can't damage this >:)
+	resistance = 20
 	bound_width = 96
 	bound_height = 96
 

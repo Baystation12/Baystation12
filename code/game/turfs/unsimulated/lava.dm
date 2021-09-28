@@ -45,12 +45,13 @@
 		loseme = 1
 
 	if(loseme)
-		for(var/obj/effect/decal/cleanable/ash/A in src)
-			qdel(A)
-		spawn(rand(25,75))
-			if(Obj && Obj.loc == src)
-				src.visible_message("\icon[Obj]<span class='danger'>[Obj] sinks under the surface of [src]!</span>")
-				qdel(Obj)
+		if(Obj.elevation == BASE_ELEVATION)
+			for(var/obj/effect/decal/cleanable/ash/A in src)
+				qdel(A)
+			spawn(rand(25,75))
+				if(Obj && Obj.loc == src)
+					src.visible_message("\icon[Obj]<span class='danger'>[Obj] sinks under the surface of [src]!</span>")
+					qdel(Obj)
 
 	light_range = 5
 	light_power = 2

@@ -1,4 +1,7 @@
 
+#define CARRIER_SPORES_MIN 6
+#define CARRIER_SPORES_MAX 12
+
 /mob/living/simple_animal/hostile/flood/carrier
 	name = "Flood carrier"
 	icon = 'code/modules/halo/flood/flood_carrier.dmi'
@@ -33,7 +36,7 @@
 
 	var/turf/spawn_turf = src.loc
 	spawn(0)
-		var/sporesleft = rand(3,9)
+		var/sporesleft = rand(CARRIER_SPORES_MIN,CARRIER_SPORES_MAX)
 		while(sporesleft > 0)
 			var/mob/living/simple_animal/hostile/flood/infestor/S = new(spawn_turf)
 			sporesleft -= 1
@@ -47,3 +50,6 @@
 	spawn(3)
 		qdel(src)
 	return ..(0,deathmessage)
+
+#undef CARRIER_SPORES_MIN
+#undef CARRIER_SPORES_MAX
