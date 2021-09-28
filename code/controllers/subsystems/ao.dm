@@ -4,29 +4,35 @@ SUBSYSTEM_DEF(ao)
 	wait = 1
 	runlevels = RUNLEVELS_DEFAULT | RUNLEVEL_LOBBY
 	flags = SS_NO_INIT
-	var/list/queue = list()
-	var/list/cache = list()
 
-/datum/controller/subsystem/ao/stat_entry()
-	..("P:[queue.len]")
+	var/static/list/queue = list()
+	var/static/list/cache = list()
 
-/datum/controller/subsystem/ao/fire(resumed = 0, no_mc_tick = FALSE)
-	var/list/curr = queue
-	while (curr.len)
-		var/turf/target = curr[curr.len]
-		curr.len--
 
-		if (!QDELETED(target))
-			if (target.ao_queued == AO_UPDATE_REBUILD)
-				var/old_n = target.ao_neighbors
-				target.calculate_ao_neighbors()
-				if (old_n != target.ao_neighbors)
-					target.update_ao()
-			else
-				target.update_ao()
-			target.ao_queued = AO_UPDATE_NONE
+/datum/controller/subsystem/ao/stat_entry(msg)
+	..("[msg] P: [queue.len]")
 
+
+/datum/controller/subsystem/ao/fire(resumed, no_mc_tick)
+	if (!queue.len)
+		return
+	var/turf/T
+	var/neighbors
+	for (var/i = queue.len to 1 step -1)
+		T = queue[i]
+		if (QDELETED(T))
+			continue
+		if (T.ao_queued == AO_UPDATE_REBUILD)
+			neighbors = T.ao_neighbors
+			T.calculate_ao_neighbors()
+			if (T.ao_neighbors != neighbors)
+				T.update_ao()
+		else
+			T.update_ao()
+		T.ao_queued = AO_UPDATE_NONE
 		if (no_mc_tick)
 			CHECK_TICK
 		else if (MC_TICK_CHECK)
+			queue.Cut(i)
 			return
+	queue.Cut()

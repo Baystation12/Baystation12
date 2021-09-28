@@ -3,35 +3,35 @@ SUBSYSTEM_DEF(ai)
 	init_order = SS_INIT_AI
 	priority = SS_PRIORITY_AI
 	wait = 2 SECONDS
-	//mobs can mess up unrelated tests, so we don't turn their AI on during them
-	#ifdef UNIT_TEST
-	flags = SS_NO_FIRE|SS_NO_INIT
-	#else
-	flags = SS_NO_INIT
-	#endif
 	runlevels = RUNLEVEL_GAME | RUNLEVEL_POSTGAME
+#ifdef UNIT_TEST
+	flags = SS_NO_INIT | SS_NO_FIRE
+#else
+	flags = SS_NO_INIT
+#endif
 
-	var/list/processing = list()
-	var/list/currentrun = list()
+	var/static/list/processing = list()
+	var/static/list/current = list()
 
-/datum/controller/subsystem/ai/stat_entry(msg_prefix)
-	var/list/msg = list(msg_prefix)
-	msg += "P:[processing.len]"
-	..(msg.Join())
 
-/datum/controller/subsystem/ai/fire(resumed = 0)
+/datum/controller/subsystem/ai/stat_entry(msg)
+	..("[msg] P: [processing.len]")
+
+
+/datum/controller/subsystem/ai/Recover()
+	current.Cut()
+
+
+/datum/controller/subsystem/ai/fire(resumed, no_mc_tick)
 	if (!resumed)
-		src.currentrun = processing.Copy()
-
-	//cache for sanic speed (lists are references anyways)
-	var/list/currentrun = src.currentrun
-
-	while(currentrun.len)
-		var/datum/ai_holder/A = currentrun[currentrun.len]
-		--currentrun.len
-		if(!A || QDELETED(A) || A.busy) // Doesn't exist or won't exist soon or not doing it this tick
+		current = processing.Copy()
+	var/datum/ai_holder/A
+	for (var/i = current.len to 1 step -1)
+		A = current[i]
+		if (QDELETED(A) || A.busy)
 			continue
 		A.handle_strategicals()
-
-		if(MC_TICK_CHECK)
+		if (MC_TICK_CHECK)
+			current.Cut(i)
 			return
+	current.Cut()

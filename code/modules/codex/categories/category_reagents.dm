@@ -15,7 +15,7 @@
 		 _lore_text = "[initial(reagent.description)] It apparently tastes of [initial(reagent.taste_description)].")
 
 		var/list/production_strings = list()
-		for(var/react in SSchemistry.chemical_reactions_by_result[thing])
+		for(var/react in SSchemistry.reactions_by_result[thing])
 
 			var/datum/chemical_reaction/reaction = react
 
