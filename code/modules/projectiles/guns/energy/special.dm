@@ -194,7 +194,6 @@
 	icon = 'icons/obj/guns/incendiary_laser.dmi'
 	icon_state = "incen"
 	item_state = "incen"
-	safety_icon = "safety"
 	origin_tech = list(TECH_COMBAT = 7, TECH_MAGNET = 4, TECH_ESOTERIC = 4)
 	matter = list(MATERIAL_ALUMINIUM = 1000, MATERIAL_PLASTIC = 500, MATERIAL_DIAMOND = 500)
 	projectile_type = /obj/item/projectile/beam/incendiary_laser
