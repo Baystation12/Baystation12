@@ -34,12 +34,3 @@
 #define DAMAGE_ELECTRICAL list(DAMAGE_SHOCK, DAMAGE_EMP)
 /// All damage flags
 #define DAMAGE_ALL        list(DAMAGE_BRUTE, DAMAGE_BURN, DAMAGE_STUN, DAMAGE_SHOCK, DAMAGE_EMP, DAMAGE_EXPLODE, DAMAGE_FIRE, DAMAGE_RADIATION, DAMAGE_BIO, DAMAGE_PAIN, DAMAGE_TOXIN, DAMAGE_GENETIC, DAMAGE_OXY, DAMAGE_BRAIN)
-
-
-// Flags for use health types
-/// Uses simple health vars, no extension
-#define USE_HEALTH_SIMPLE         "simple"
-/// Uses the standard health extension
-#define USE_HEALTH_EXTENSION      /datum/extension/health
-/// Uses the damage sources health extension
-#define USE_HEALTH_DAMAGE_SOURCES /datum/extension/health/damage_sources

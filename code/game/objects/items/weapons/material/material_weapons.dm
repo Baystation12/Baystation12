@@ -7,7 +7,7 @@
 	throw_speed = 3
 	throw_range = 7
 	w_class = ITEM_SIZE_NORMAL
-	use_health_handler = USE_HEALTH_SIMPLE
+	health_max = 10
 
 	var/default_material = MATERIAL_STEEL
 	var/material/material
@@ -24,11 +24,6 @@
 	var/unbreakable
 	var/drops_debris = 1
 	var/worth_multiplier = 1
-
-/obj/item/material/get_initial_health_handler_config()
-	return list(
-		"max_health" = 10
-	)
 
 
 /obj/item/material/New(var/newloc, var/material_key)

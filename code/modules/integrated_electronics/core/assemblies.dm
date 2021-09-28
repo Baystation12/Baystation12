@@ -29,9 +29,9 @@
 	/// Spark system used for creating sparks while the assembly is damaged and destroyed.
 	var/datum/effect/effect/system/spark_spread/spark_system
 	var/adrone = FALSE
-	use_health_handler = USE_HEALTH_SIMPLE
 	pass_flags = 0
 	anchored = FALSE
+	health_max = 30
 	var/detail_color = COLOR_ASSEMBLY_BLACK
 	var/list/color_whitelist = list( //This is just for checking that hacked colors aren't in the save data.
 		COLOR_ASSEMBLY_BLACK,
@@ -51,11 +51,6 @@
 		COLOR_ASSEMBLY_BLUE,
 		COLOR_ASSEMBLY_PURPLE
 		)
-
-/obj/item/device/electronic_assembly/get_initial_health_handler_config()
-	return list(
-		"max_health" = 30
-	)
 
 /obj/item/device/electronic_assembly/examine(mob/user)
 	. = ..()
@@ -89,7 +84,7 @@
 		icon = 0
 		addtimer(CALLBACK(src, .proc/fall_apart), 5.1)
 
-/obj/item/device/electronic_assembly/post_health_change(damage, damage_type)
+/obj/item/device/electronic_assembly/post_health_change(health_mod, damage_type)
 	..()
 	if (get_damage_percentage() >= 0.75)
 		if(battery && battery.charge > 0)
@@ -608,11 +603,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	max_components = IC_MAX_SIZE_BASE * 2
 	max_complexity = IC_COMPLEXITY_BASE * 2
-
-/obj/item/device/electronic_assembly/medium/get_initial_health_handler_config()
-	return list(
-		"max_health" = 45
-	)
+	health_max = 45
 
 /obj/item/device/electronic_assembly/medium/default
 	name = "type-a electronic mechanism"
@@ -656,11 +647,7 @@
 	max_components = IC_MAX_SIZE_BASE * 4
 	max_complexity = IC_COMPLEXITY_BASE * 4
 	randpixel = 0
-
-/obj/item/device/electronic_assembly/large/get_initial_health_handler_config()
-	return list(
-		"max_health" = 50
-	)
+	health_max = 50
 
 /obj/item/device/electronic_assembly/large/default
 	name = "type-a electronic machine"
@@ -701,11 +688,7 @@
 	circuit_flags = 0
 	randpixel = 0
 	adrone = TRUE
-
-/obj/item/device/electronic_assembly/drone/get_initial_health_handler_config()
-	return list(
-		"max_health" = 60
-	)
+	health_max = 60
 
 /obj/item/device/electronic_assembly/drone/can_move()
 	return TRUE
@@ -717,31 +700,19 @@
 	name = "type-b electronic drone"
 	icon_state = "setup_drone_arms"
 	desc = "It's a case used for assembling mobile electronics. This one is armed and dangerous."
-
-/obj/item/device/electronic_assembly/drone/arms/get_initial_health_handler_config()
-	return list(
-		"max_health" = 70
-	)
+	health_max = 70
 
 /obj/item/device/electronic_assembly/drone/secbot
 	name = "type-c electronic drone"
 	icon_state = "setup_drone_secbot"
 	desc = "It's a case used for assembling mobile electronics. This one resembles a Securitron."
-
-/obj/item/device/electronic_assembly/drone/secbot/get_initial_health_handler_config()
-	return list(
-		"max_health" = 70
-	)
+	health_max = 70
 
 /obj/item/device/electronic_assembly/drone/medbot
 	name = "type-d electronic drone"
 	icon_state = "setup_drone_medbot"
 	desc = "It's a case used for assembling mobile electronics. This one resembles a Medibot."
-
-/obj/item/device/electronic_assembly/drone/medbot/get_initial_health_handler_config()
-	return list(
-		"max_health" = 50
-	)
+	health_max = 50
 
 /obj/item/device/electronic_assembly/drone/genbot
 	name = "type-e electronic drone"
@@ -755,11 +726,7 @@
 	w_class = ITEM_SIZE_HUGE
 	max_components = IC_MAX_SIZE_BASE * 5
 	max_complexity = IC_COMPLEXITY_BASE * 5
-
-/obj/item/device/electronic_assembly/drone/android/get_initial_health_handler_config()
-	return list(
-		"max_health" = 100
-	)
+	health_max = 100
 
 /obj/item/device/electronic_assembly/wallmount
 	name = "wall-mounted electronic assembly"
@@ -768,11 +735,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	max_components = IC_MAX_SIZE_BASE * 2
 	max_complexity = IC_COMPLEXITY_BASE * 2
-
-/obj/item/device/electronic_assembly/wallmount/get_initial_health_handler_config()
-	return list(
-		"max_health" = 40
-	)
+	health_max = 40
 
 /obj/item/device/electronic_assembly/wallmount/afterattack(var/atom/a, var/mob/user, var/proximity)
 	if(proximity && istype(a ,/turf) && a.density)
@@ -785,11 +748,7 @@
 	w_class = ITEM_SIZE_LARGE
 	max_components = IC_MAX_SIZE_BASE * 4
 	max_complexity = IC_COMPLEXITY_BASE * 4
-
-/obj/item/device/electronic_assembly/wallmount/heavy/get_initial_health_handler_config()
-	return list(
-		"max_health" = 80
-	)
+	health_max = 80
 
 /obj/item/device/electronic_assembly/wallmount/light
 	name = "light wall-mounted electronic assembly"

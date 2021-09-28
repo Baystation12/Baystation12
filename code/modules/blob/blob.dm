@@ -12,7 +12,13 @@
 
 	layer = BLOB_SHIELD_LAYER
 
-	use_health_handler = USE_HEALTH_EXTENSION
+	health_max = 30
+	health_resistances = list(
+		DAMAGE_BRUTE   = 0.23,
+		DAMAGE_BURN    = 1.24,
+		DAMAGE_FIRE    = 1.24,
+		DAMAGE_EXPLODE = 0.23
+	)
 
 	var/regen_rate = 5
 	var/laser_resist = 2	// Special resist for laser based weapons - Emitters or handheld energy weaponry. Damage is divided by this and THEN by fire_resist.
@@ -23,15 +29,6 @@
 	var/pruned = FALSE
 	var/product = /obj/item/blob_tendril
 	var/attack_freq = 5 //see proc/attempt_attack; lower is more often, min 1
-
-/obj/effect/blob/get_initial_health_handler_config()
-	return list (
-		"max_health" = 30,
-		"resist_brute" = 0.23,
-		"resist_burn" = 1.25,
-		"resist_fire" = 1.24,
-		"resist_explode" = 0.23
-	)
 
 /obj/effect/blob/New(loc)
 	update_icon()
@@ -72,7 +69,7 @@
 		playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 		qdel(src)
 
-/obj/effect/blob/post_health_change(damage, damage_type)
+/obj/effect/blob/post_health_change(health_mod, damage_type)
 	update_icon()
 
 /obj/effect/blob/proc/regen()
@@ -221,6 +218,7 @@
 	damage_max = 40
 	expandType = /obj/effect/blob/shield
 	product = /obj/item/blob_tendril/core
+	health_max = 450
 
 	light_color = BLOB_COLOR_CORE
 	layer = BLOB_CORE_LAYER
@@ -232,11 +230,6 @@
 
 	/// Health state tracker to prevent redundant var updates in `process_core_health()
 	var/core_health_state = null
-
-
-/obj/effect/blob/core/get_initial_health_handler_config()
-	. = ..()
-	.["max_health"] = 450
 
 /*
 the master core becomes more vulnereable to damage as it weakens,
@@ -337,10 +330,7 @@ regen() will cover update_icon() for this proc
 	layer = BLOB_NODE_LAYER
 	product = /obj/item/blob_tendril/core/aux
 	times_to_pulse = 4
-
-/obj/effect/blob/core/secondary/get_initial_health_handler_config()
-	. = ..()
-	.["max_health"] = 125
+	health_max = 125
 
 /obj/effect/blob/core/secondary/process_core_health()
 	return
@@ -362,10 +352,7 @@ regen() will cover update_icon() for this proc
 	regen_rate = 4
 	expandType = /obj/effect/blob/ravaging
 	light_color = BLOB_COLOR_SHIELD
-
-/obj/effect/blob/shield/get_initial_health_handler_config()
-	. = ..()
-	.["max_health"] = 120
+	health_max = 120
 
 /obj/effect/blob/shield/New()
 	..()
@@ -396,10 +383,7 @@ regen() will cover update_icon() for this proc
 	attack_freq = 3
 	light_color = BLOB_COLOR_RAV
 	color = "#ffd400" //Temporary, for until they get a new sprite.
-
-/obj/effect/blob/ravaging/get_initial_health_handler_config()
-	. = ..()
-	.["max_health"] = 20
+	health_max = 20
 
 //produce
 /obj/item/blob_tendril

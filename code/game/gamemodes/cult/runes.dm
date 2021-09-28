@@ -240,7 +240,7 @@
 /obj/effect/rune/wall/cast(var/mob/living/user)
 	var/t
 	if(wall)
-		if(!wall.health_damaged())
+		if(!wall.get_damage_value())
 			to_chat(user, "<span class='notice'>The wall doesn't need mending.</span>")
 			return
 		t = wall.get_damage_value()
@@ -262,13 +262,8 @@
 	anchored = TRUE
 	density = TRUE
 	unacidable = TRUE
-	use_health_handler = USE_HEALTH_SIMPLE
 	var/obj/effect/rune/wall/rune
-
-/obj/effect/cultwall/get_initial_health_handler_config()
-	return list(
-		"max_health" = 200
-	)
+	health_max = 200
 
 /obj/effect/cultwall/New(var/loc, var/bcolor)
 	..()
