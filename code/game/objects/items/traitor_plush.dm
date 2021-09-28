@@ -1,11 +1,21 @@
-/obj/item/dehydrated_carp
+/obj/item/reagent_containers/food/snacks/dehydrated_carp
 	name = "carp plushie"
 	desc = "A plushie of an elated carp! Straight from the wilds of the Nyx frontier, now right here in your hands."
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "carpplushie"
+	filling_color = "#522666"
+
 	var/spawned_mob = /mob/living/simple_animal/hostile/carp
 
-/obj/item/dehydrated_carp/attack_self(mob/user)
+/obj/item/reagent_containers/food/snacks/dehydrated_carp/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 10)
+
+/obj/item/reagent_containers/food/snacks/dehydrated_carp/attack(mob/M, mob/user, def_zone)
+	return
+
+/obj/item/reagent_containers/food/snacks/dehydrated_carp/attack_self(mob/user)
 	if (user.a_intent == I_HELP)
 		user.visible_message(SPAN_NOTICE("\The [user] hugs [src]!"), SPAN_NOTICE("You hug [src]!"))
 	else if (user.a_intent == I_HURT)
@@ -15,22 +25,17 @@
 	else
 		user.visible_message(SPAN_NOTICE("\The [user] pokes [src]."), SPAN_NOTICE("You poke [src]."))
 
-/obj/item/dehydrated_carp/attackby(obj/O, mob/user)
-	if (istype(O, /obj/item/reagent_containers/glass) || istype(O, /obj/item/reagent_containers/food/drinks))
-		if (O.reagents)
-			if (O.reagents.total_volume < 1)
-				to_chat(user, "\The [O] is empty.")
-			else if (O.reagents.total_volume >= 1)
-				if (O.reagents.has_reagent(/datum/reagent/water, 1))
-					visible_message(SPAN_WARNING("\The [src] begins to shake as the liquid touches it."))
-					addtimer(CALLBACK(src, .proc/carpify), 5 SECONDS)
+/obj/item/reagent_containers/food/snacks/dehydrated_carp/on_reagent_change()
+	if (reagents.has_reagent(/datum/reagent/water))
+		visible_message(SPAN_WARNING("\The [src] begins to shake as the liquid touches it."))
+		addtimer(CALLBACK(src, .proc/expand), 5 SECONDS)
 
-/obj/item/dehydrated_carp/proc/carpify()
+/obj/item/reagent_containers/food/snacks/dehydrated_carp/proc/expand()
 	visible_message(SPAN_WARNING("\The [src] rapidly expands into a living space carp!"))
 	new spawned_mob(get_turf(src))
 	qdel(src)
 
-/obj/item/dehydrated_carp/get_antag_info()
+/obj/item/reagent_containers/food/snacks/dehydrated_carp/get_antag_info()
 	. = ..()
 	. += "You can add water to this plushie to hydrate it, transforming it into a living space carp after a short delay. Be careful, as the carp will be hostile to you too!"
 
