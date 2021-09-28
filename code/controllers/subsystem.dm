@@ -53,7 +53,7 @@
 	return
 
 //This is used so the mc knows when the subsystem sleeps. do not override.
-/datum/controller/subsystem/proc/ignite(resumed = 0)
+/datum/controller/subsystem/proc/ignite(resumed)
 	set waitfor = 0
 	. = SS_SLEEPING
 	fire(resumed)
@@ -66,10 +66,14 @@
 		state = SS_PAUSED
 		queued_time = QT
 
-//previously, this would have been named 'process()' but that name is used everywhere for different things!
-//fire() seems more suitable. This is the procedure that gets called every 'wait' deciseconds.
-//Sleeping in here prevents future fires until returned.
-/datum/controller/subsystem/proc/fire(resumed = 0)
+/**
+* Called every src.wait deciseconds. Override this behavior when the subsystem is supposed to do work.
+* Sleeping in proc/fire prevents future fires until returned.
+* When resumed is true, the previous fire did not finish its work in the time available.
+* When no_mc_tick is true, don't yield - run to the end using CHECK_TICK to not crash.
+* The MC does not ship no_mc_tick; use it in leaf types for implementing things like expensive first runs on init.
+*/
+/datum/controller/subsystem/proc/fire(resumed, no_mc_tick)
 	flags |= SS_NO_FIRE
 	throw EXCEPTION("Subsystem [src]([type]) does not fire() but did not set the SS_NO_FIRE flag. Please add the SS_NO_FIRE flag to any subsystem that doesn't fire so it doesn't get added to the processing list and waste cpu.")
 
