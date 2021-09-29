@@ -1,0 +1,5 @@
+author: Jux
+delete-after: true
+changes:
+  - imageadd: New Incendiary pistol sprites.
+  - tweak: Incendiary lasers have the same armor penetration as small smartgun lasers.
