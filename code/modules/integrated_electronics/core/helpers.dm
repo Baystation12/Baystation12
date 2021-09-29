@@ -131,8 +131,14 @@
 
 	return get_pin_ref(parameters[1], parameters[2], parameters[3], components)
 
-
 // this is for data validation of stuff like ref encodes and more importantly ID access lists
-#define compute_signature(DATA) md5(SScircuit.randomness + (DATA))
-#define add_data_signature(DATA) ("[compute_signature(DATA)]:[(DATA)]")
-#define check_data_signature(SIG, DATA) (compute_signature(DATA) == (SIG))
+
+/proc/compute_signature(data)
+	return md5(SScircuit.cipherkey + data)
+
+/proc/add_data_signature(data)
+	var/signature = compute_signature(data)
+	return "[signature]:[data]"
+
+/proc/check_data_signature(signature, data)
+	return (compute_signature(data) == signature)

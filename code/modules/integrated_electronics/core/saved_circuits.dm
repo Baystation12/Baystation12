@@ -161,3 +161,208 @@
 		detail_color = assembly_params["detail_color"]
 
 	update_icon()
+
+
+
+// Attempts to save an assembly into a save file format.
+// Returns null if assembly is not complete enough to be saved.
+/datum/controller/subsystem/processing/circuit/proc/save_electronic_assembly(obj/item/device/electronic_assembly/assembly)
+	// No components? Don't even try to save it.
+	if(!length(assembly.assembly_components))
+		return
+
+
+	var/list/blocks = list()
+
+	// Block 1. Assembly.
+	blocks["assembly"] = assembly.save()
+	// (implant assemblies are not yet supported)
+
+
+	// Block 2. Components.
+	var/list/components = list()
+	for(var/c in assembly.assembly_components)
+		var/obj/item/integrated_circuit/component = c
+		components.Add(list(component.save()))
+	blocks["components"] = components
+
+
+	// Block 3. Wires.
+	var/list/wires = list()
+	var/list/saved_wires = list()
+
+	for(var/c in assembly.assembly_components)
+		var/obj/item/integrated_circuit/component = c
+		var/list/all_pins = list()
+		for(var/l in list(component.inputs, component.outputs, component.activators))
+			if(l) //If it isn't null
+				all_pins += l
+
+		for(var/p in all_pins)
+			var/datum/integrated_io/pin = p
+			var/list/params = pin.get_pin_parameters()
+			var/text_params = params.Join()
+
+			for(var/p2 in pin.linked)
+				var/datum/integrated_io/pin2 = p2
+				var/list/params2 = pin2.get_pin_parameters()
+				var/text_params2 = params2.Join()
+
+				// Check if we already saved an opposite version of this wire
+				// (do not save the same wire twice)
+				if((text_params2 + "=" + text_params) in saved_wires)
+					continue
+
+				// If not, add a wire "hash" for future checks and save it
+				saved_wires.Add(text_params + "=" + text_params2)
+				wires.Add(list(list(params, params2)))
+
+	if(wires.len)
+		blocks["wires"] = wires
+
+	return json_encode(blocks)
+
+
+
+// Checks assembly save and calculates some of the parameters.
+// Returns assembly (type: list) if the save is valid.
+// Returns error code (type: text) if loading has failed.
+// The following parameters area calculated during validation and added to the returned save list:
+// "requires_upgrades", "unsupported_circuit", "cost", "complexity", "max_complexity", "used_space", "max_space"
+/datum/controller/subsystem/processing/circuit/proc/validate_electronic_assembly(program)
+	var/list/blocks = json_decode(program)
+	if(!blocks)
+		return
+
+	var/error
+
+
+	// Block 1. Assembly.
+	var/list/assembly_params = blocks["assembly"]
+
+	if(!islist(assembly_params) || !length(assembly_params))
+		return "Invalid assembly data."	// No assembly, damaged assembly or empty assembly
+
+	// Validate type, get a temporary component
+	var/assembly_path = all_assemblies[assembly_params["type"]]
+	var/obj/item/device/electronic_assembly/assembly = cached_assemblies[assembly_path]
+	if(!assembly)
+		return "Invalid assembly type."
+
+	// Check assembly save data for errors
+	error = assembly.verify_save(assembly_params)
+	if(error)
+		return error
+
+
+	// Read space & complexity limits and start keeping track of them
+	blocks["complexity"] = 0
+	blocks["max_complexity"] = assembly.max_complexity
+	blocks["used_space"] = 0
+	blocks["max_space"] = assembly.max_components
+
+	// Start keeping track of total metal cost
+	blocks["cost"] = assembly.matter.Copy()
+
+
+	// Block 2. Components.
+	if(!islist(blocks["components"]) || !length(blocks["components"]))
+		return "Invalid components list."	// No components or damaged components list
+
+	var/list/assembly_components = list()
+	for(var/C in blocks["components"])
+		var/list/component_params = C
+
+		if(!islist(component_params) || !length(component_params))
+			return "Invalid component data."
+
+		// Validate type, get a temporary component
+		var/component_path = all_components[component_params["type"]]
+		var/obj/item/integrated_circuit/component = cached_components[component_path]
+		if(!component)
+			return "Invalid component type."
+
+		// Add temporary component to assembly_components list, to be used later when verifying the wires
+		assembly_components.Add(component)
+
+		// Check component save data for errors
+		error = component.verify_save(component_params)
+		if(error)
+			return error
+
+		// Update estimated assembly complexity, taken space and material cost
+		blocks["complexity"] += component.complexity
+		blocks["used_space"] += component.size
+		for(var/material in component.matter)
+			blocks["cost"][material] += component.matter[material]
+
+		// Check if the assembly requires printer upgrades
+		if(!(component.spawn_flags & IC_SPAWN_DEFAULT))
+			blocks["requires_upgrades"] = TRUE
+
+		// Check if the assembly supports the circucit
+		if((component.action_flags & assembly.allowed_circuit_action_flags) != component.action_flags)
+			blocks["unsupported_circuit"] = TRUE
+
+
+	// Check complexity and space limitations
+	if(blocks["used_space"] > blocks["max_space"])
+		return "Used space overflow."
+	if(blocks["complexity"] > blocks["max_complexity"])
+		return "Complexity overflow."
+
+
+	// Block 3. Wires.
+	if(blocks["wires"])
+		if(!islist(blocks["wires"]))
+			return "Invalid wiring list."	// Damaged wires list
+
+		for(var/w in blocks["wires"])
+			var/list/wire = w
+
+			if(!islist(wire) || wire.len != 2)
+				return "Invalid wire data."
+
+			var/datum/integrated_io/IO = assembly.get_pin_ref_list(wire[1], assembly_components)
+			var/datum/integrated_io/IO2 = assembly.get_pin_ref_list(wire[2], assembly_components)
+			if(!IO || !IO2)
+				return "Invalid wire data."
+
+			if(initial(IO.io_type) != initial(IO2.io_type))
+				return "Wire type mismatch."
+
+	return blocks
+
+
+// Loads assembly (in form of list) into an object and returns it.
+// No sanity checks are performed, save file is expected to be validated by validate_electronic_assembly
+/datum/controller/subsystem/processing/circuit/proc/load_electronic_assembly(loc, list/blocks)
+
+	// Block 1. Assembly.
+	var/list/assembly_params = blocks["assembly"]
+	var/obj/item/device/electronic_assembly/assembly_path = all_assemblies[assembly_params["type"]]
+	var/obj/item/device/electronic_assembly/assembly = new assembly_path(null)
+	assembly.load(assembly_params)
+
+
+
+	// Block 2. Components.
+	for(var/component_params in blocks["components"])
+		var/obj/item/integrated_circuit/component_path = all_components[component_params["type"]]
+		var/obj/item/integrated_circuit/component = new component_path(assembly)
+		assembly.add_component(component)
+		component.load(component_params)
+
+
+	// Block 3. Wires.
+	if(blocks["wires"])
+		for(var/w in blocks["wires"])
+			var/list/wire = w
+			var/datum/integrated_io/IO = assembly.get_pin_ref_list(wire[1])
+			var/datum/integrated_io/IO2 = assembly.get_pin_ref_list(wire[2])
+			IO.connect_pin(IO2)
+
+	assembly.forceMove(loc)
+	assembly.post_load()
+	return assembly
+
