@@ -317,7 +317,7 @@
 	sharp = FALSE
 	damage_flags = 0
 	life_span = 8
-	penetration_modifier = 0.1
+	armor_penetration = 10
 
 	muzzle_type = /obj/effect/projectile/incen/muzzle
 	tracer_type = /obj/effect/projectile/incen/tracer
