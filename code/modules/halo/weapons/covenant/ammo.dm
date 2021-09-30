@@ -318,8 +318,8 @@
 	check_armour = "bomb"
 	damage_type = "bomb"
 	damtype = "bomb"
-	step_delay = 1.2
-	kill_count = 15
+	step_delay = 1.3
+	kill_count = 21
 	shield_damage = 100
 	damage = 50
 	armor_penetration = 50

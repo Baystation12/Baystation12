@@ -156,9 +156,9 @@
 	wielded_item_state = "z8carbine-wielded"
 	//would have one_hand_penalty=4,5 but the added weight of a grenade launcher makes one-handing even harder
 	firemodes = list(
-		list(mode_name="semiauto",       burst=1,    fire_delay=0, use_launcher=null, one_hand_penalty=5, burst_accuracy=null, dispersion=null),
-		list(mode_name="3-round bursts", burst=3,    fire_delay=null, use_launcher=null, one_hand_penalty=6, burst_accuracy=list(0,-1,-1), dispersion=list(0.0, 0.6, 1.0)),
-		list(mode_name="fire grenades",  burst=null, fire_delay=null, use_launcher=1,    one_hand_penalty=5, burst_accuracy=null, dispersion=null)
+		list(mode_name="semiauto",       burst=1,    fire_delay=5, use_launcher=null, one_hand_penalty=5, burst_accuracy=null, dispersion=null),
+		list(mode_name="3-round bursts", burst=3,    fire_delay=6, use_launcher=null, one_hand_penalty=6, burst_accuracy=list(0,-1,-1), dispersion=list(0.0, 0.6, 1.0)),
+		list(mode_name="fire grenades",  burst=null, fire_delay=6, use_launcher=1,    one_hand_penalty=5, burst_accuracy=null, dispersion=null)
 		)
 
 	var/use_launcher = 0

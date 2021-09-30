@@ -104,6 +104,7 @@
 	damtype = "bomb"
 	armor_penetration = 50
 	shield_damage = 240
+	steps_between_delays = 3
 
 /obj/item/projectile/bullet/scorp_cannon/on_impact(var/atom/impacted)
 	explosion(get_turf(impacted),0,1,3,5,guaranteed_damage = 50,guaranteed_damage_range = 2)

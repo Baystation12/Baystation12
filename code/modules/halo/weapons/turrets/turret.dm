@@ -240,7 +240,7 @@
 	item_state = "chaingun_obj"
 	one_hand_penalty = -1
 
-	slowdown_general = 7
+	slowdown_general = 3.5
 	w_class = ITEM_SIZE_HUGE
 	can_rename = 0
 	item_icons = list( //Null here due to this version being used only when manning the turret, Every turret requires a /detached define with the item_icons set.
@@ -302,6 +302,7 @@
 //Detached Turret Gun Define// Every detachable turret gun needs this.
 /obj/item/weapon/gun/projectile/turret/detached
 	removed_from_turret = 1
+	can_rename = 1
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/turrets/mob_turret.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/turrets/mob_turret.dmi',

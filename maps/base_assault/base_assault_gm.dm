@@ -21,6 +21,10 @@
 	stalemate_at = world.time + STALEMATE_TIMER
 	do_flank_poplock()
 
+/datum/game_mode/base_assault/proc/delete_bomblocations()
+	for(var/obj/effect/bomblocation/b in world)
+		qdel(b)
+
 /datum/game_mode/base_assault/proc/do_flank_poplock()
 	if(flank_tags.len == 0)
 		return

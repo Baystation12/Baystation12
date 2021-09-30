@@ -94,12 +94,12 @@
 		/obj/item/turret_deploy_kit/plasturret = 0
 	)
 	amounts = list(\
-		/obj/item/weapon/gun/projectile/fuel_rod = 3,
+		/obj/item/weapon/gun/projectile/fuel_rod = 1,
 		/obj/item/weapon/gun/energy/plasmarepeater = 3,
-		/obj/item/weapon/gun/energy/beam_rifle = 3,
+		/obj/item/weapon/gun/energy/beam_rifle = 2,
 		/obj/item/weapon/grenade/plasma = 15,
 		/obj/item/weapon/grenade/smokebomb/covenant = 15,
-		/obj/item/turret_deploy_kit/plasturret = 4
+		/obj/item/turret_deploy_kit/plasturret = 3
 	)
 
 /obj/machinery/pointbased_vending/armory/covenant/sangheili/equipment // Equipment for Sangheili
@@ -181,12 +181,15 @@
 		/obj/item/weapon/grenade/smokebomb/covenant = 0,
 		/obj/item/weapon/grenade/plasma = 0,
 		/obj/item/weapon/grenade/frag/spike = 0,
+		"Misc" = -1,
+		/obj/item/turret_deploy_kit/plasturret = 2,
 	)
 	amounts = list(
 		/obj/item/weapon/gun/launcher/grenade/brute_shot = 3,
 		/obj/item/weapon/grenade/smokebomb/covenant = 15,
 		/obj/item/weapon/grenade/plasma = 15,
 		/obj/item/weapon/grenade/frag/spike = 15,
+		/obj/item/turret_deploy_kit/plasturret = 2,
 	)
 
 /obj/machinery/pointbased_vending/armory/covenant/jiralhanae/equipment // Equipment for Jiralhanae
@@ -256,12 +259,15 @@
 		"Explosives" = -1,
 		/obj/item/weapon/gun/energy/beam_rifle = 0,
 		/obj/item/weapon/grenade/plasma = 0,
-		/obj/item/weapon/grenade/smokebomb/covenant = 0
+		/obj/item/weapon/grenade/smokebomb/covenant = 0,
+		"Misc" = -1,
+		/obj/item/turret_deploy_kit/plasturret = 0
 	)
 	amounts = list(\
-		/obj/item/weapon/gun/energy/beam_rifle = 3,
+		/obj/item/weapon/gun/energy/beam_rifle = 2,
 		/obj/item/weapon/grenade/plasma = 15,
-		/obj/item/weapon/grenade/smokebomb/covenant = 15
+		/obj/item/weapon/grenade/smokebomb/covenant = 15,
+		/obj/item/turret_deploy_kit/plasturret = 1
 	)
 
 /obj/machinery/pointbased_vending/armory/covenant/kigyar/equipment // Equipment for Kig-Yar
@@ -347,11 +353,11 @@
 		/obj/item/turret_deploy_kit/plasturret = 0
 	)
 	amounts = list(\
-		/obj/item/weapon/gun/projectile/fuel_rod = 3,
+		/obj/item/weapon/gun/projectile/fuel_rod = 2,
 		/obj/item/weapon/gun/energy/plasmarepeater = 3,
 		/obj/item/weapon/grenade/plasma = 15,
 		/obj/item/weapon/grenade/smokebomb/covenant = 12,
-		/obj/item/turret_deploy_kit/plasturret = 4
+		/obj/item/turret_deploy_kit/plasturret = 2
 	)
 
 /obj/machinery/pointbased_vending/armory/covenant/unggoy/equipment // Equipment for Unggoy

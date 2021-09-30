@@ -40,7 +40,7 @@
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "SPNKr"
 	mag_type = MAGAZINE
-	slot_flags = SLOT_BELT | SLOT_MASK //Shhh it's a joke
+	slot_flags = SLOT_BELT
 	ammo_type = /obj/item/ammo_casing/spnkr
 	caliber = "spnkr"
 	max_ammo = 2
@@ -55,10 +55,10 @@
 	icon_state = "ssr"
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	check_armour = "bomb"
-	step_delay = 1.2
-	kill_count = 15
-	shield_damage = 180
-	damage = 100
+	step_delay = 1.3
+	kill_count = 21
+	shield_damage = 100
+	damage = 70
 	armor_penetration = 50
 
 /obj/item/projectile/bullet/ssr/on_impact(var/atom/target)

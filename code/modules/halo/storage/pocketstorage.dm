@@ -108,7 +108,7 @@
 
 /obj/item/weapon/storage/pocketstore/hardcase/tools/cov
 	icon_state = "hardcase_cov_generic"
-
+/*
 /obj/item/weapon/storage/pocketstore/hardcase/rockets
 	name = "102mm HEAT SPNKr Hardcase"
 	desc = "A belt-clippable hardcase capable of holding up to 2 M41 rocket tubes."
@@ -117,7 +117,7 @@
 	storage_slots = 2
 	can_hold = list(/obj/item/ammo_magazine/spnkr)
 	max_w_class = ITEM_SIZE_LARGE
-
+*/ //This is now unused as it unbalances the carry capacities of ammo and the speed detriments.
 /obj/item/weapon/storage/pocketstore/hardcase/armorkits
 	name = "Tactical Hardcase (Armour Kits)"
 	desc = "A reinforced storage box, clipped near your pockets. Created to hold armour repair kits in a convenient location."

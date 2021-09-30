@@ -46,7 +46,9 @@
 					"Miscellaneous" = -1,
 					/obj/item/weapon/armor_patch = 0,
 					/obj/item/weapon/armor_patch/mini = 0,
-					/obj/item/drop_pod_beacon = 0
+					/obj/item/drop_pod_beacon = 0,
+					/obj/item/turret_deploy_kit/HMG = 0,
+					/obj/item/turret_deploy_kit/chaingun = 0,
 					)
 	amounts = list(\
 		/obj/item/weapon/grenade/frag/m9_hedp = 15,
@@ -54,6 +56,8 @@
 		/obj/item/weapon/plastique = 2,
 		/obj/item/weapon/plastique/breaching = 2,
 		/obj/item/weapon/plastique/breaching/longrange = 2,
+		/obj/item/turret_deploy_kit/HMG = 2,
+		/obj/item/turret_deploy_kit/chaingun = 2,
 	)
 
 /obj/machinery/pointbased_vending/armory/hybrid/innie
@@ -76,6 +80,7 @@
 					/obj/item/ammo_magazine/m739/m118 = 0,
 					"Turrets" = -1,
 					/obj/item/turret_deploy_kit/HMG = 0,
+					/obj/item/turret_deploy_kit/chaingun = 0,
 					"Explosives" = -1,
 					/obj/item/weapon/plastique = 0,
 					/obj/item/weapon/plastique/breaching = 0,
@@ -83,9 +88,10 @@
 					)
 	amounts = list(\
 		/obj/item/weapon/gun/projectile/m739_lmg = 3,
-		/obj/item/weapon/gun/projectile/srs99_sniper = 3,
-		/obj/item/weapon/gun/projectile/m41 = 3,
-		/obj/item/turret_deploy_kit/HMG = 2,
+		/obj/item/weapon/gun/projectile/srs99_sniper = 2,
+		/obj/item/weapon/gun/projectile/m41 = 1,
+		/obj/item/turret_deploy_kit/HMG = 3,
+		/obj/item/turret_deploy_kit/chaingun = 3,
 		/obj/item/weapon/plastique = 2,
 		/obj/item/weapon/plastique/breaching = 2,
 		/obj/item/weapon/plastique/breaching/longrange = 2,
@@ -113,7 +119,7 @@
 					)
 	amounts = list(\
 		/obj/item/weapon/gun/projectile/m545_lmg  = 1,
-		/obj/item/weapon/gun/projectile/heavysniper = 1,
+		/obj/item/weapon/gun/projectile/heavysniper = 2,
 		/obj/item/weapon/gun/projectile/m41 = 1,
 		/obj/item/turret_deploy_kit/HMG = 2,
 		/obj/item/weapon/plastique = 8,
@@ -169,7 +175,6 @@
 					/obj/item/weapon/storage/pocketstore/hardcase/bullets = 0,
 					/obj/item/weapon/storage/pocketstore/hardcase/grenade = 1,
 					/obj/item/weapon/storage/pocketstore/hardcase/armorkits = 0,
-					/obj/item/weapon/storage/pocketstore/hardcase/rockets = 1,
 					/obj/item/weapon/storage/pocketstore/hardcase/medbottles = 0,
 					/obj/item/weapon/storage/pocketstore/hardcase/hypos = 0,
 					/obj/item/weapon/storage/pocketstore/hardcase/materials = 0,
