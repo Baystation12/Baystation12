@@ -49,7 +49,7 @@
 	name = "Dehydrated Space Carp"
 	desc = "An innocuous-looking space carp plushie. Add water and step back for a nasty surprise!"
 	item_cost = 10
-	path = /obj/item/dehydrated_carp
+	path = /obj/item/reagent_containers/food/snacks/dehydrated_carp
 
 /datum/uplink_item/item/stealthy_weapons/plush_bomb
 	name = "Plushie Bomb"
