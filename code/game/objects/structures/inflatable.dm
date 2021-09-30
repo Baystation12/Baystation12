@@ -2,13 +2,8 @@
 	name = "inflatable"
 	w_class = ITEM_SIZE_NORMAL
 	icon = 'icons/obj/inflatable.dmi'
-	use_health_handler = USE_HEALTH_SIMPLE
+	health_max = 10
 	var/deploy_path = null
-
-/obj/item/inflatable/get_initial_health_handler_config()
-	return list(
-		"max_health" = 10
-	)
 
 /obj/item/inflatable/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	if(!deploy_path)
@@ -71,18 +66,13 @@
 	icon = 'icons/obj/inflatable.dmi'
 	icon_state = "wall"
 	atmos_canpass = CANPASS_DENSITY
-	use_health_handler = USE_HEALTH_SIMPLE
+	health_max = 10
 
 	var/undeploy_path = null
 	var/taped
 
 	var/max_pressure_diff = RIG_MAX_PRESSURE
 	var/max_temp = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
-
-/obj/structure/inflatable/get_initial_health_handler_config()
-	return list(
-		"max_health" = 10
-	)
 
 /obj/structure/inflatable/wall
 	name = "inflatable wall"

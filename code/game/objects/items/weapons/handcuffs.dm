@@ -4,7 +4,6 @@
 	gender = PLURAL
 	icon = 'icons/obj/items.dmi'
 	icon_state = "handcuff"
-	use_health_handler = USE_HEALTH_SIMPLE
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	throwforce = 5
@@ -133,12 +132,7 @@ var/last_chew = 0
 	cuff_sound = 'sound/weapons/cablecuff.ogg'
 	cuff_type = "cable restraints"
 	elastic = 1
-	use_health_handler = USE_HEALTH_SIMPLE
-
-/obj/item/handcuffs/cable/get_initial_health_handler_config()
-	return list(
-		"max_health" = 75
-	)
+	health_max = 75
 
 /obj/item/handcuffs/cable/red
 	color = COLOR_MAROON
@@ -175,8 +169,4 @@ var/last_chew = 0
 	icon = 'icons/obj/bureaucracy.dmi'
 	breakouttime = 200
 	cuff_type = "duct tape"
-
-/obj/item/handcuffs/cable/tape/get_initial_health_handler_config()
-	return list(
-		"max_health" = 50
-	)
+	health_max = 50

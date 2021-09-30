@@ -61,8 +61,9 @@
 		if(istype(T))
 			T.RecalculateOpacity()
 
-	if (use_health_handler)
-		initialize_health()
+	if (health_max)
+		health_current = health_max
+		update_icon()
 
 	return INITIALIZE_HINT_NORMAL
 
