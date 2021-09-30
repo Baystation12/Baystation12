@@ -1,5 +1,0 @@
-author: Jux
-delete-after: true
-changes:
-  - maptweak: Adds a cryo computer to the merc base, making the cryopods actually
-      work.
