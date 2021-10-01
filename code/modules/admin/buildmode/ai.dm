@@ -16,11 +16,11 @@
 		Right Mouse Button + ctrl on any mob          = Paste mob faction copied with Left Mouse Button + shift<br>\
 		Right Mouse Button on enemy mob               = Command selected mobs to attack mob<br>\
 		Right Mouse Button on allied mob              = Command selected mobs to follow mob<br>\
-		Right Mouse Button + shift on any mob         = Command selected mobs to follow mob regardless of faction<br>\
 		Note: The following also reset the mob's home position:<br>\
 		Right Mouse Button on tile                    = Command selected mobs to move to tile (will cancel if enemies are seen)<br>\
 		Right Mouse Button + shift on tile            = Command selected mobs to reposition to tile (will not be inturrupted by enemies)<br>\
 		Right Mouse Button + alt on obj/turfs         = Command selected mobs to attack obj/turf<br>\
+		Middle Mouse Button                           = Command selected mobs to follow mob regardless of faction<br>\
 		***********************************************************</span>
 "}
 
@@ -44,8 +44,8 @@
 			user.add_client_image(M.ai_status_image)
 
 /datum/build_mode/ai/OnClick(atom/A, list/pa)
-	if(pa["left"])
-		if(isliving(A))
+	if (pa["left"])
+		if (isliving(A))
 			var/mob/living/L = A
 			var/datum/ai_holder/AI = L.ai_holder
 
@@ -53,17 +53,17 @@
 				return
 
 			// Select multiple units
-			if(pa["ctrl"])
-				if(!isnull(L.get_AI_stance()))
+			if (pa["ctrl"])
+				if (!isnull(L.get_AI_stance()))
 					select_AI_mob(A)
 				return
 
 
 			// Pause/unpause AI
-			if(pa["shift"])
+			if (pa["shift"])
 				var/stance = L.get_AI_stance()
-				if(!isnull(stance)) // Null means there's no AI datum or it has one but is player controlled w/o autopilot on.
-					if(stance == STANCE_SLEEP)
+				if (!isnull(stance)) // Null means there's no AI datum or it has one but is player controlled w/o autopilot on.
+					if (stance == STANCE_SLEEP)
 						AI.go_wake()
 						to_chat(user, SPAN_NOTICE("\The [L]'s AI has been enabled."))
 					else
@@ -77,8 +77,8 @@
 				return
 
 			// Toggle hostility
-			if(pa["alt"])
-				if(!isnull(L.get_AI_stance()))
+			if (pa["alt"])
+				if (!isnull(L.get_AI_stance()))
 					AI.hostile = !AI.hostile
 					to_chat(user, SPAN_NOTICE("\The [L] is now [AI.hostile ? "hostile" : "passive"]."))
 				else
@@ -87,7 +87,7 @@
 
 
 			// Select/Deselect
-			if(!isnull(L.get_AI_stance()))
+			if (!isnull(L.get_AI_stance()))
 				deselect_all()
 				select_AI_mob(L)
 				to_chat(user, SPAN_NOTICE("Selected \the [L]."))
@@ -99,19 +99,19 @@
 			deselect_all()
 
 
-	if(pa["right"])
+	if (pa["right"])
 
 		if (isliving(A))
 			var/mob/living/L = A
 			// Copy faction
-			if(pa["shift"])
+			if (pa["shift"])
 				copied_faction = L.faction
 				to_chat(user, SPAN_NOTICE("Copied faction '[copied_faction]'."))
 				return
 
 			// Paste faction
-			if(pa["ctrl"])
-				if(!copied_faction)
+			if (pa["ctrl"])
+				if (!copied_faction)
 					to_chat(user, SPAN_WARNING("LMB+Shift a mob to copy their faction before pasting."))
 					return
 				else
@@ -119,8 +119,8 @@
 					to_chat(user, SPAN_NOTICE("Pasted faction '[copied_faction]'."))
 					return
 
-		if(istype(A, /atom)) // Force attack.
-			if(pa["alt"])
+		if (istype(A, /atom)) // Force attack.
+			if (pa["alt"])
 				var/i = 0
 				for(var/mob/living/unit in selected_mobs)
 					var/datum/ai_holder/AI = unit.ai_holder
@@ -132,6 +132,26 @@
 				flick_overlay(orderimage, list(user.client), 8, TRUE)
 				return
 
+
+		var/turf/T = get_turf(A)
+		if (isturf(T)) // Move or reposition.
+			var/forced = 0
+			var/told = 0
+			for(var/mob/living/unit in selected_mobs)
+				var/datum/ai_holder/AI = unit.ai_holder
+				AI.home_turf = T
+				if (unit.get_AI_stance() == STANCE_SLEEP)
+					unit.forceMove(T)
+					forced++
+				else
+					AI.give_destination(T, 0, pa["shift"]) // If shift is held, the mobs will not stop moving to attack a visible enemy.
+					told++
+			to_chat(user, SPAN_NOTICE("Commanded [told] mob\s to move to \the [T], and manually placed [forced] of them."))
+			var/image/orderimage = image(buildmode_hud,T,"ai_turforder")
+			flick_overlay(orderimage, list(user.client), 8, TRUE)
+			return
+
+	if (pa["middle"])
 		if(isliving(A)) // Follow or attack.
 			var/mob/living/L = A
 			var/i = 0 // Attacking mobs.
@@ -157,24 +177,6 @@
 				message += "[j] mob\s to follow \the [L]."
 			to_chat(user, SPAN_NOTICE(message))
 			var/image/orderimage = image(buildmode_hud,L,"ai_targetorder")
-			flick_overlay(orderimage, list(user.client), 8, TRUE)
-			return
-
-		var/turf/T = get_turf(A)
-		if(isturf(T)) // Move or reposition.
-			var/forced = 0
-			var/told = 0
-			for(var/mob/living/unit in selected_mobs)
-				var/datum/ai_holder/AI = unit.ai_holder
-				AI.home_turf = T
-				if(unit.get_AI_stance() == STANCE_SLEEP)
-					unit.forceMove(T)
-					forced++
-				else
-					AI.give_destination(T, 0, pa["shift"]) // If shift is held, the mobs will not stop moving to attack a visible enemy.
-					told++
-			to_chat(user, SPAN_NOTICE("Commanded [told] mob\s to move to \the [T], and manually placed [forced] of them."))
-			var/image/orderimage = image(buildmode_hud,T,"ai_turforder")
 			flick_overlay(orderimage, list(user.client), 8, TRUE)
 			return
 
