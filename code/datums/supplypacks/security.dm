@@ -45,8 +45,8 @@
 
 /decl/hierarchy/supply_pack/security/blackguards
 	name = "Armor - Arm and leg guards, black"
-	contains = list(/obj/item/clothing/accessory/armguards = 2,
-					/obj/item/clothing/accessory/legguards = 2)
+	contains = list(/obj/item/clothing/accessory/arm_guards = 2,
+					/obj/item/clothing/accessory/leg_guards = 2)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure
 	containername = "arm and leg guards crate"
@@ -54,8 +54,8 @@
 
 /decl/hierarchy/supply_pack/security/blueguards
 	name = "Armor - Arm and leg guards, blue"
-	contains = list(/obj/item/clothing/accessory/armguards/blue = 2,
-					/obj/item/clothing/accessory/legguards/blue = 2)
+	contains = list(/obj/item/clothing/accessory/arm_guards/blue = 2,
+					/obj/item/clothing/accessory/leg_guards/blue = 2)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure
 	containername = "arm and leg guards crate"
@@ -63,8 +63,8 @@
 
 /decl/hierarchy/supply_pack/security/greenguards
 	name = "Armor - Arm and leg guards, green"
-	contains = list(/obj/item/clothing/accessory/armguards/green = 2,
-					/obj/item/clothing/accessory/legguards/green = 2)
+	contains = list(/obj/item/clothing/accessory/arm_guards/green = 2,
+					/obj/item/clothing/accessory/leg_guards/green = 2)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure
 	containername = "arm and leg guards crate"
@@ -72,8 +72,8 @@
 
 /decl/hierarchy/supply_pack/security/navyguards
 	name = "Armor - Arm and leg guards, navy blue"
-	contains = list(/obj/item/clothing/accessory/armguards/navy = 2,
-					/obj/item/clothing/accessory/legguards/navy = 2)
+	contains = list(/obj/item/clothing/accessory/arm_guards/navy = 2,
+					/obj/item/clothing/accessory/leg_guards/navy = 2)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure
 	containername = "arm and leg guards crate"
@@ -81,8 +81,8 @@
 
 /decl/hierarchy/supply_pack/security/tanguards
 	name = "Armor - Arm and leg guards, tan"
-	contains = list(/obj/item/clothing/accessory/armguards/tan = 2,
-					/obj/item/clothing/accessory/legguards/tan = 2)
+	contains = list(/obj/item/clothing/accessory/arm_guards/tan = 2,
+					/obj/item/clothing/accessory/leg_guards/tan = 2)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure
 	containername = "arm and leg guards crate"

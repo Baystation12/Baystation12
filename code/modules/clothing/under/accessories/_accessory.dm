@@ -6,9 +6,10 @@
 	item_state = ""	//no inhands
 	slot_flags = SLOT_TIE
 	w_class = ITEM_SIZE_SMALL
+	var/accessory_flags = ACCESSORY_DEFAULT_FLAGS
 	var/slot = ACCESSORY_SLOT_DECOR
 	var/body_location = UPPER_TORSO //most accessories are here
-	var/obj/item/clothing/has_suit = null		//the suit the tie may be attached to
+	var/obj/item/clothing/parent //the suit the tie may be attached to
 	var/image/inv_overlay = null	//overlay used when attached to clothing.
 	var/list/mob_overlay = list()
 	var/overlay_state = null
@@ -18,18 +19,25 @@
 		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_accessories_unathi.dmi'
 		)
 	var/list/on_rolled = list()	//used when jumpsuit sleevels are rolled ("rolled" entry) or it's rolled down ("down"). Set to "none" to hide in those states.
-	var/high_visibility	//if it should appear on examine without detailed view
 	var/slowdown //used when an accessory is meant to slow the wearer down when attached to clothing
-	var/removable = TRUE
-	var/hidden = FALSE
+
 
 /obj/item/clothing/accessory/Destroy()
 	on_removed()
 	return ..()
 
+
+/obj/item/clothing/accessory/update_clothing_icon()
+	..()
+	if (parent)
+		parent.update_clothing_icon()
+
+
 /obj/item/clothing/accessory/proc/get_inv_overlay()
 	if(!inv_overlay)
-		var/tmp_icon_state = overlay_state? overlay_state : icon_state
+		var/tmp_icon_state = overlay_state
+		if (!tmp_icon_state)
+			tmp_icon_state = icon_state
 		if(icon_override && ("[tmp_icon_state]_tie" in icon_states(icon_override)))
 			inv_overlay = image(icon = icon_override, icon_state = "[tmp_icon_state]_tie", dir = SOUTH)
 		else if("[tmp_icon_state]_tie" in icon_states(GLOB.default_onmob_icons[slot_tie_str]))
@@ -38,6 +46,7 @@
 			inv_overlay = image(icon = GLOB.default_onmob_icons[slot_tie_str], icon_state = tmp_icon_state, dir = SOUTH)
 	inv_overlay.color = color
 	return inv_overlay
+
 
 /obj/item/clothing/accessory/get_mob_overlay(mob/user_mob, slot)
 	if(!istype(loc,/obj/item/clothing/))	//don't need special handling if it's worn as normal item.
@@ -66,73 +75,90 @@
 		else
 			return overlay_image(use_sprite_sheet, tmp_icon_state, color, RESET_COLOR)
 
+
 //when user attached an accessory to S
 /obj/item/clothing/accessory/proc/on_attached(var/obj/item/clothing/S, var/mob/user)
 	if(!istype(S))
 		return
-	has_suit = S
-	forceMove(has_suit)
-	has_suit.overlays += get_inv_overlay()
+	parent = S
+	forceMove(parent)
+	parent.overlays += get_inv_overlay()
 
 	if(user)
-		to_chat(user, "<span class='notice'>You attach \the [src] to \the [has_suit].</span>")
+		to_chat(user, "<span class='notice'>You attach \the [src] to \the [parent].</span>")
 		src.add_fingerprint(user)
 
+
 /obj/item/clothing/accessory/proc/on_removed(var/mob/user)
-	if(!has_suit)
+	if(!parent)
 		return
-	has_suit.overlays -= get_inv_overlay()
-	has_suit = null
+	parent.overlays -= get_inv_overlay()
+	parent = null
 	if(user)
 		usr.put_in_hands(src)
 		src.add_fingerprint(user)
 	else
 		dropInto(loc)
 
+
 //default attackby behaviour
 /obj/item/clothing/accessory/attackby(obj/item/I, mob/user)
 	..()
 
+
 //default attack_hand behaviour
 /obj/item/clothing/accessory/attack_hand(mob/user as mob)
-	if(has_suit)
+	if(parent)
 		return	//we aren't an object on the ground so don't call parent
 	..()
+
 
 /obj/item/clothing/accessory/get_pressure_weakness(pressure,zone)
 	if(body_parts_covered & zone)
 		return ..()
 	return 1
 
-//Necklaces
-/obj/item/clothing/accessory/necklace
-	name = "necklace"
-	desc = "A simple necklace."
-	icon_state = "necklace"
-	slot_flags = SLOT_MASK | SLOT_TIE
 
-//Misc
-/obj/item/clothing/accessory/kneepads
-	name = "kneepads"
-	desc = "A pair of synthetic kneepads. Doesn't provide protection from more than arthritis."
-	icon_state = "kneepads"
-	body_location = LEGS
+/obj/item/clothing/accessory/toggleable/var/icon_closed
 
-//Scarves
-/obj/item/clothing/accessory/scarf
-	name = "scarf"
-	desc = "A stylish scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks."
-	icon_state = "whitescarf"
 
-//Bracelets
-/obj/item/clothing/accessory/bracelet
-	name = "bracelet"
-	desc = "A simple bracelet with a clasp."
-	icon_state = "bracelet"
-	body_location = HANDS
+/obj/item/clothing/accessory/toggleable/New()
+	if (!icon_closed)
+		icon_closed = icon_state
+	..()
 
-//Neckerchiefs
-/obj/item/clothing/accessory/neckerchief
-	name = "neckerchief"
-	desc = "A piece of cloth tied around the neck. A favorite of Scouts, Sailors and Partisans everywhere."
-	icon_state = "neckerchief"
+
+/obj/item/clothing/accessory/toggleable/on_attached(obj/item/clothing/under/S, mob/user as mob)
+	..()
+	parent.verbs += /obj/item/clothing/accessory/toggleable/verb/toggle
+
+/obj/item/clothing/accessory/toggleable/on_removed(mob/user as mob)
+	if(parent)
+		parent.verbs -= /obj/item/clothing/accessory/toggleable/verb/toggle
+	..()
+
+
+/obj/item/clothing/accessory/toggleable/verb/toggle()
+	set name = "Toggle Buttons"
+	set category = "Object"
+	set src in usr
+	if(usr.incapacitated())
+		return 0
+	var/obj/item/clothing/accessory/toggleable/H = null
+	if (istype(src, /obj/item/clothing/accessory/toggleable))
+		H = src
+	else
+		H = locate() in src
+	if(H)
+		H.do_toggle(usr)
+	update_clothing_icon()
+
+
+/obj/item/clothing/accessory/toggleable/proc/do_toggle(user)
+	if(icon_state == icon_closed)
+		icon_state = "[icon_closed]_open"
+		to_chat(user, "You unbutton [src].")
+	else
+		icon_state = icon_closed
+		to_chat(user, "You button up [src].")
+	update_clothing_icon()

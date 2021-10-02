@@ -5,12 +5,12 @@
 
 /datum/gear/tactical/armor_deco
 	display_name = "armor customization"
-	path = /obj/item/clothing/accessory/armor/tag
+	path = /obj/item/clothing/accessory/armor_tag
 	flags = GEAR_HAS_SUBTYPE_SELECTION
 
 /datum/gear/tactical/helm_covers
 	display_name = "helmet covers"
-	path = /obj/item/clothing/accessory/armor/helmcover
+	path = /obj/item/clothing/accessory/helmet_cover
 	flags = GEAR_HAS_SUBTYPE_SELECTION
 
 /datum/gear/tactical/kneepads

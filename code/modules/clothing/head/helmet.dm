@@ -37,7 +37,7 @@
 	icon_state = "helmet_pcrc"
 
 /obj/item/clothing/head/helmet/nt/guard
-	accessories = list(/obj/item/clothing/accessory/armor/helmcover/nt)
+	accessories = list(/obj/item/clothing/accessory/helmet_cover/nt)
 
 /obj/item/clothing/head/helmet/tactical
 	name = "tactical helmet"

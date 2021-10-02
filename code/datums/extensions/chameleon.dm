@@ -66,13 +66,13 @@
 	var/obj/item/clothing/accessory/A = holder
 
 	A.slot = copy.slot
-	A.has_suit = copy.has_suit
+	A.parent = copy.parent
 	A.inv_overlay = copy.inv_overlay
 	A.mob_overlay = copy.mob_overlay
 	A.overlay_state = copy.overlay_state
 	A.accessory_icons = copy.accessory_icons
 	A.on_rolled = copy.on_rolled
-	A.high_visibility = copy.high_visibility
+	A.accessory_flags = copy.accessory_flags
 
 /datum/extension/chameleon/proc/add_chameleon_choice(list/target, path)
 	var/obj/item/I = path
