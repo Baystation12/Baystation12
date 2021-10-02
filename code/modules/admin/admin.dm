@@ -1592,3 +1592,32 @@ datum/admins/var/obj/item/paper/admin/faxreply // var to hold fax replies in
 		qdel(P)
 		faxreply = null
 	return
+
+/datum/admins/proc/setroundlength()
+	set category = "Server"
+	set desc = "Set the time the round-end vote will start in minutes."
+	set name = "Set Round Length"
+
+	if (GAME_STATE > RUNLEVEL_LOBBY)
+		to_chat(usr, SPAN_WARNING("You cannot change the round length after the game has started!"))
+		return
+
+	var/time = input("Set the time until the round-end vote occurs (IN MINUTES). Default is [config.vote_autotransfer_initial]", "Set Round Length", 0) as null | num
+
+	if (!time || !isnum(time) || time < 0)
+		return
+
+	transfer_controller.timerbuffer = time MINUTES
+	log_and_message_admins("set the initial round-end vote time to [time] minutes after round-start.")
+
+/datum/admins/proc/toggleroundendvote()
+	set category = "Server"
+	set desc = "Toggle the continue vote on/off. Toggling off will cause round-end to occur when the next continue vote time would be."
+	set name = "Toggle Continue Vote"
+
+	if (GAME_STATE > RUNLEVEL_GAME)
+		to_chat(usr, SPAN_WARNING("The game is already ending!"))
+		return
+
+	transfer_controller.do_continue_vote = !transfer_controller.do_continue_vote
+	log_and_message_admins("toggled the continue vote [transfer_controller.do_continue_vote ? "ON" : "OFF"]")
