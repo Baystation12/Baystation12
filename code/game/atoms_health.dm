@@ -19,20 +19,11 @@
 	var/health_min_damage = 0
 
 /**
- * Whether or not the atom has health. Checks for a value in `health_max`.
- * Can be overridden for additional checks.
- * Returns `TRUE` or `FALSE`.
- */
-/atom/proc/has_health()
-	SHOULD_CALL_PARENT(TRUE)
-	return !!health_max
-
-/**
  * Retrieves the atom's current health, or `null` if not using health
  */
 /atom/proc/get_current_health()
 	SHOULD_CALL_PARENT(TRUE)
-	if (!has_health())
+	if (!health_max)
 		return
 	return health_current
 
@@ -41,7 +32,7 @@
  */
 /atom/proc/get_max_health()
 	SHOULD_CALL_PARENT(TRUE)
-	if (!has_health())
+	if (!health_max)
 		return
 	return health_max
 
@@ -50,7 +41,7 @@
  * If `use_raw_values` is `TRUE`, uses the raw var values instead of the `get_*` proc results.
  */
 /atom/proc/get_damage_value(use_raw_values)
-	if (!has_health())
+	if (!health_max)
 		return
 	if (use_raw_values)
 		return health_max - health_current
@@ -62,7 +53,7 @@
  * If `use_raw_values` is `TRUE`, uses the raw var values instead of the `get_*` proc results.
  */
 /atom/proc/get_damage_percentage(use_raw_values)
-	if (!has_health())
+	if (!health_max)
 		return
 	var/max_health = use_raw_values ? health_max : get_max_health()
 	return round(get_damage_value(use_raw_values) / max_health, 0.01)
@@ -75,7 +66,7 @@
  */
 /atom/proc/can_restore_health(damage, damage_type = null)
 	SHOULD_CALL_PARENT(TRUE)
-	if (!has_health())
+	if (!health_max)
 		return
 	if (!damage)
 		return FALSE
@@ -90,7 +81,7 @@
  */
 /atom/proc/can_damage_health(damage, damage_type = null)
 	SHOULD_CALL_PARENT(TRUE)
-	if (!has_health())
+	if (!health_max)
 		return
 	if (!is_alive())
 		return FALSE
@@ -106,7 +97,7 @@
  */
 /atom/proc/is_alive()
 	SHOULD_CALL_PARENT(TRUE)
-	if (!has_health())
+	if (!health_max)
 		return
 	return !health_dead
 
@@ -117,7 +108,7 @@
  */
 /atom/proc/mod_health(health_mod, damage_type)
 	SHOULD_CALL_PARENT(TRUE)
-	if (!has_health())
+	if (!health_max)
 		return
 	health_current = Clamp(health_current + health_mod, 0, get_max_health())
 	post_health_change(health_mod, damage_type)
@@ -130,7 +121,7 @@
  */
 /atom/proc/set_health(new_health)
 	SHOULD_CALL_PARENT(TRUE)
-	if (!has_health())
+	if (!health_max)
 		return
 	var/health_mod = new_health - health_current
 	return mod_health(health_mod)
@@ -140,7 +131,7 @@
  */
 /atom/proc/restore_health(damage, damage_type = null)
 	SHOULD_CALL_PARENT(TRUE)
-	if (!has_health())
+	if (!health_max)
 		return
 	return mod_health(damage, damage_type = null)
 
@@ -150,7 +141,7 @@
  */
 /atom/proc/damage_health(damage, damage_type = null)
 	SHOULD_CALL_PARENT(TRUE)
-	if (!has_health())
+	if (!health_max)
 		return
 
 	// Apply resistance/weakness modifiers
@@ -170,7 +161,7 @@
  */
 /atom/proc/check_death_state()
 	SHOULD_CALL_PARENT(TRUE)
-	if (!has_health())
+	if (!health_max)
 		return
 	var/health_current = get_current_health()
 	if (health_current > 0 && health_dead)
@@ -188,7 +179,7 @@
  */
 /atom/proc/set_death_state(new_death_state)
 	SHOULD_CALL_PARENT(TRUE)
-	if (!has_health())
+	if (!health_max)
 		return
 	if (new_death_state == health_dead)
 		return FALSE
@@ -294,14 +285,14 @@
 
 /atom/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if (has_health())
+	if (health_max)
 		examine_damage_state(user)
 
 /**
  * Copies the state of health from one atom to another.
  */
 /proc/copy_health(atom/source_atom, atom/target_atom)
-	if (!source_atom || QDELETED(target_atom) || !source_atom.has_health() || !target_atom.has_health())
+	if (!source_atom || QDELETED(target_atom) || !source_atom.health_max || !target_atom.health_max)
 		return
 	target_atom.health_current = source_atom.health_current
 	target_atom.health_max = source_atom.health_max

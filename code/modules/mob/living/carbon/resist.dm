@@ -72,7 +72,7 @@
 			return
 		if(!handcuffed || buckled)
 			return
-	if (handcuffed.has_health()) // Improvised cuffs can break because their health is > 0
+	if (handcuffed.health_max) // Improvised cuffs can break because their health is > 0
 		if (handcuffed.damage_health(handcuffed.get_max_health() / 2))
 			visible_message(
 				SPAN_DANGER("\The [src] manages to remove \the [handcuffed], breaking them!"),
