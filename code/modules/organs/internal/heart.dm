@@ -15,7 +15,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 40
 	var/beat_sound = 'sound/effects/singlebeat.ogg'
 	var/tmp/next_blood_squirt = 0
 	relative_size = 15
-	max_damage = 45
+	max_damage = 90
 	var/open
 
 /obj/item/organ/internal/heart/die()
