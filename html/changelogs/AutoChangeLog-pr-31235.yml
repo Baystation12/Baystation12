@@ -1,4 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - admin: Add 'set round length' and 'toggle continue vote' buttons

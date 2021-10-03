@@ -1,5 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - admin: Changed the 'follow mob' control to 'middle mouse' so it doesn't overlap
-      with 'copy faction' in AI buildmode.
