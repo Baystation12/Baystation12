@@ -6126,7 +6126,7 @@
 /obj/structure/table/standard,
 /obj/item/device/robotanalyzer,
 /obj/item/storage/toolbox/mechanical,
-/obj/item/storage/firstaid/surgery,
+/obj/item/circular_saw,
 /turf/simulated/floor/tiled/white,
 /area/assembly/robotics/surgery)
 "ne" = (
@@ -16345,8 +16345,6 @@
 /obj/structure/closet/crate/freezer,
 /obj/item/device/mmi,
 /obj/item/device/mmi,
-/obj/item/reagent_containers/ivbag/nanoblood,
-/obj/item/reagent_containers/ivbag/nanoblood,
 /obj/machinery/alarm{
 	dir = 8;
 	icon_state = "alarm0";
@@ -18376,6 +18374,7 @@
 	},
 /obj/item/reagent_containers/spray/sterilizine,
 /obj/item/stack/nanopaste,
+/obj/item/hemostat,
 /turf/simulated/floor/tiled/white,
 /area/assembly/robotics/surgery)
 "WI" = (
