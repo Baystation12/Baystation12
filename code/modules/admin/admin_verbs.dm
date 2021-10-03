@@ -94,7 +94,9 @@ var/list/admin_verbs_admin = list(
 	/client/proc/remove_trader,
 	/datum/admins/proc/sendFax,
 	/client/proc/check_fax_history,
-	/client/proc/cmd_admin_notarget
+	/client/proc/cmd_admin_notarget,
+	/datum/admins/proc/setroundlength,
+	/datum/admins/proc/toggleroundendvote
 )
 var/list/admin_verbs_ban = list(
 	/client/proc/unban_panel,
