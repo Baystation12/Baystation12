@@ -371,7 +371,7 @@ var/list/gear_datums = list()
 
 /datum/gear/proc/spawn_on_mob(var/mob/living/carbon/human/H, var/metadata)
 	var/obj/item/item = spawn_item(H, H, metadata)
-	if(H.equip_to_slot_if_possible(item, slot, del_on_fail = 1, force = 1))
+	if(H.equip_to_slot_if_possible(item, slot, TRYEQUIP_REDRAW | TRYEQUIP_DESTROY | TRYEQUIP_FORCE))
 		. = item
 
 

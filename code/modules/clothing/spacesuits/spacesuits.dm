@@ -133,6 +133,27 @@
 	randpixel = 0
 	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_DIONA)
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
+	equip_delay = 5 SECONDS
+	equip_delay_flags = DO_DEFAULT | DO_USER_UNIQUE_ACT
+
+
+/obj/item/clothing/suit/space/equip_delay_before(mob/user, slot, equip_flags)
+	user.setClickCooldown(1 SECOND)
+	user.visible_message(
+		SPAN_ITALIC("\The [user] begins to struggle into \the [src]."),
+		SPAN_ITALIC("You begin to struggle into \the [src]."),
+		SPAN_ITALIC("You can hear metal clicking and fabric rustling."),
+		range = 5
+	)
+
+
+/obj/item/clothing/suit/space/equip_delay_after(mob/user, slot, equip_flags)
+	user.visible_message(
+		SPAN_ITALIC("\The [user] finishes putting on \the [src]."),
+		SPAN_NOTICE("You finish putting on \the [src]."),
+		range = 5
+	)
+
 
 /obj/item/clothing/suit/space/New()
 	..()

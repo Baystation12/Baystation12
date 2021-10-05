@@ -52,6 +52,8 @@
 		SPECIES_UNATHI = 'icons/mob/species/unathi/onmob_suit_unathi.dmi',
 		)
 	var/list/supporting_limbs = list() //If not-null, automatically splints breaks. Checked when removing the suit.
+	equip_delay = null
+
 
 /obj/item/clothing/suit/space/rig/equipped(mob/M)
 	check_limb_support(M)
