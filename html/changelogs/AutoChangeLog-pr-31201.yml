@@ -1,8 +1,0 @@
-author: Jux, Spookerton
-delete-after: true
-changes:
-  - tweak: Space suits take a flat 5 seconds to put on.
-  - bugfix: User-unique progress bars correctly indicate what you stopped interacting
-      with when interrupted.
-  - bugfix: Same-hand progress bars correctly check for same hand-ness when started
-      right-handed.
