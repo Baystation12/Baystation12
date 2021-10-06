@@ -1,4 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - admin: Fixed the default time in Set Round Length not being in minutes.
