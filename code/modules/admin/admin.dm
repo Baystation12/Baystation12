@@ -1602,7 +1602,7 @@ datum/admins/var/obj/item/paper/admin/faxreply // var to hold fax replies in
 		to_chat(usr, SPAN_WARNING("You cannot change the round length after the game has started!"))
 		return
 
-	var/time = input("Set the time until the round-end vote occurs (IN MINUTES). Default is [config.vote_autotransfer_initial]", "Set Round Length", 0) as null | num
+	var/time = input("Set the time until the round-end vote occurs (IN MINUTES). Default is [config.vote_autotransfer_initial / 600]", "Set Round Length", 0) as null | num
 
 	if (!time || !isnum(time) || time < 0)
 		return
