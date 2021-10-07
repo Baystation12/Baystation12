@@ -1,0 +1,5 @@
+author: Jux
+delete-after: true
+changes:
+  - bugfix: Progress bars now show up when donning armor.
+  - bugfix: Impatient people will no longer delete their armor in their furious equip-mashing.
