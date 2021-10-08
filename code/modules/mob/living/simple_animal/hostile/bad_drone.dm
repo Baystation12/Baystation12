@@ -39,7 +39,7 @@
 			. -= S
 		else if (ishuman(S))
 			var/mob/living/carbon/human/H = S
-			if (istype(H.wear_suit, /obj/item/clothing/suit/cardborg) && istype(H.head, /obj/item/clothing/head/cardborg))
+			if (H.species.name == SPECIES_ADHERENT || H.isFBP() || (istype(H.wear_suit, /obj/item/clothing/suit/cardborg) && istype(H.head, /obj/item/clothing/head/cardborg)))
 				. -= H
 
 /datum/say_list/rogue_drone
