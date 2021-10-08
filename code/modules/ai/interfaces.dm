@@ -87,6 +87,9 @@
 		if (safety && !newloc.is_safe_to_enter(src))
 			return MOVEMENT_FAILED
 
+	if (!Allow_Spacemove())
+		return MOVEMENT_FAILED
+
 	// Move()ing to another tile successfully returns 32 because BYOND. Would rather deal with TRUE/FALSE-esque terms.
 	// Note that moving to the same tile will be 'successful'.
 	var/turf/old_T = get_turf(src)
