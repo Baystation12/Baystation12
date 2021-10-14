@@ -171,7 +171,7 @@
 	data["superuv"] = issuperUV
 	data["safeties"] = safetieson
 	data["helmet"] = helmet
-	data["suit"] = suit 
+	data["suit"] = suit
 	data["boots"] = boots
 	data["tank"] = tank
 	data["mask"] = mask

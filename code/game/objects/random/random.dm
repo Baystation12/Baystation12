@@ -1035,7 +1035,9 @@ something, make sure it's not in one of the other lists.*/
 				/obj/item/clothing/head/helmet/space/void/atmos/alt,
 				/obj/item/clothing/head/helmet/space/void/merc,
 				/obj/item/clothing/head/helmet/space/void/medical,
-				/obj/item/clothing/head/helmet/space/void/medical/alt)
+				/obj/item/clothing/head/helmet/space/void/medical/alt,
+				/obj/item/clothing/head/helmet/space/void/retro
+			)
 
 /obj/random/voidsuit
 	name = "Random Voidsuit"
@@ -1056,7 +1058,9 @@ something, make sure it's not in one of the other lists.*/
 				/obj/item/clothing/suit/space/void/atmos/alt,
 				/obj/item/clothing/suit/space/void/merc,
 				/obj/item/clothing/suit/space/void/medical,
-				/obj/item/clothing/suit/space/void/medical/alt)
+				/obj/item/clothing/suit/space/void/medical/alt,
+				/obj/item/clothing/suit/space/void/retro
+			)
 
 /obj/random/hardsuit
 	name = "Random Hardsuit"
