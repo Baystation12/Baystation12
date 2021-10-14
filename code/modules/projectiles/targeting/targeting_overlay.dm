@@ -160,7 +160,7 @@ obj/aiming_overlay/proc/update_aiming_deferred()
 
 	if (istype(user))
 		if (user.zone_sel.selecting == BP_MOUTH)
-			admin_attacker_log(user, "is getting ready to suicide with \a [src]")
+			admin_attacker_log(user, "is getting ready to suicide with \a [thing]")
 			if (user.check_has_mouth() && !(user.check_mouth_coverage()))
 				gunpointedself = SPAN_DANGER("\The [owner] puts the barrel of \the [thing] in their mouth, ready to pull the trigger...")
 			else
