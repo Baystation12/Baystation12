@@ -536,7 +536,7 @@
 	..()
 
 /obj/structure/closet/emag_act(var/remaining_charges, var/mob/user, var/emag_source, var/visual_feedback = "", var/audible_feedback = "")
-	if(make_broken())
+	if(!opened && make_broken())
 		update_icon()
 		if(visual_feedback)
 			visible_message(visual_feedback, audible_feedback)
