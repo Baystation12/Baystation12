@@ -80,6 +80,7 @@
 			if (pa["alt"])
 				if (!isnull(L.get_AI_stance()))
 					AI.hostile = !AI.hostile
+					AI.lose_target()
 					to_chat(user, SPAN_NOTICE("\The [L] is now [AI.hostile ? "hostile" : "passive"]."))
 				else
 					to_chat(user, SPAN_WARNING("\The [L] is not AI controlled."))
