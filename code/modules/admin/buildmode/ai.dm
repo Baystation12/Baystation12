@@ -139,6 +139,7 @@
 			var/told = 0
 			for(var/mob/living/unit in selected_mobs)
 				var/datum/ai_holder/AI = unit.ai_holder
+				AI.lose_follow()
 				AI.home_turf = T
 				if (unit.get_AI_stance() == STANCE_SLEEP)
 					unit.forceMove(T)
