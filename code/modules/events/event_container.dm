@@ -192,6 +192,7 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 /datum/event_container/exo
 	severity = EVENT_LEVEL_EXO
 	available_events = list(
+		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Nothing",							/datum/event/nothing,				100),
 		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Exoplanet Awakening",				/datum/event/exo_awakening,         0,  list(ASSIGNMENT_ANY = 45))
 	)
 
