@@ -167,6 +167,7 @@
 	options["she/her badge"] = /obj/item/clothing/accessory/pronouns/sheher
 	options["he/they badge"] = /obj/item/clothing/accessory/pronouns/hethey
 	options["she/they badge"] = /obj/item/clothing/accessory/pronouns/shethey
+	options["he/she badge"] = /obj/item/clothing/accessory/pronouns/heshe
 	options["ze/hir badge"] = /obj/item/clothing/accessory/pronouns/zehir
 	options["ask me badge"] = /obj/item/clothing/accessory/pronouns/ask
 	gear_tweaks += new /datum/gear_tweak/path (options)
