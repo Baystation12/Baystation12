@@ -1,51 +1,77 @@
 /datum/computer_file/report/recipient/exp
 	logo = "\[eclogo\]"
 
+/datum/computer_file/report/recipient/exp/generate_fields()
+	..()
+	set_access(access_explorer)
+
 /datum/computer_file/report/recipient/exp/fauna
 	form_name = "SCG-EXP-19f"
-	title = "Alien Fauna Report"
+	title = "Отчет по фауне"
 	available_on_ntnet = TRUE
 
 /datum/computer_file/report/recipient/exp/fauna/generate_fields()
 	..()
-	add_field(/datum/report_field/text_label/header, "SEV Torch Expeditions")
-	add_field(/datum/report_field/text_label/instruction, "The following is to be filled out by members of a Expedition team after discovery and study of new alien life forms.")
+	add_field(/datum/report_field/text_label/header, "ГЭК \"Факел\" - Экспедиционный Корпус")
+	add_field(/datum/report_field/text_label/instruction, "Следующие колонки заполняются членом, входящего в состав экспедиционной команды, после открытия и изучения инопланетной жизни.")
+	add_field(/datum/report_field/number, "Номер рапорта")
+	add_field(/datum/report_field/simple_text, "Местоположение", required = 1)
+	add_field(/datum/report_field/date, "Дата")
+	add_field(/datum/report_field/people/list_from_manifest, "Участники экспедиции", required = 1)
+	add_field(/datum/report_field/pencode_text, "Анатомия/Внешний вид", required = 1)
+	add_field(/datum/report_field/pencode_text, "Локомоция", required = 1)
+	add_field(/datum/report_field/pencode_text, "Чем питается", required = 1)
+	add_field(/datum/report_field/pencode_text, "Среда обитания", required = 1)
+	add_field(/datum/report_field/pencode_text, "Поведение", required = 1)
+	add_field(/datum/report_field/pencode_text, "Специальная характеристика(и)", required = 1)
+	add_field(/datum/report_field/simple_text, "Классификация", required = 1)
+	add_field(/datum/report_field/text_label/instruction, "После заполнения данного документа, а также последующего его утверждения,\
+	Главный Научный Офицер должен отправить данный документ по факсу Корпоративному Связному и Командующему Офицеру, после чего хранить копию этого документа в своём офисе, как и другие отчёты о прогрессе миссии.")
 
-	add_field(/datum/report_field/date, "Date")
-	add_field(/datum/report_field/people/list_from_manifest, "Personnel Involved")
-	add_field(/datum/report_field/pencode_text, "Anatomy/Appearance")
-	add_field(/datum/report_field/pencode_text, "Locomotion")
-	add_field(/datum/report_field/pencode_text, "Diet")
-	add_field(/datum/report_field/pencode_text, "Habitat")
-	add_field(/datum/report_field/simple_text, "Homeworld")
-	add_field(/datum/report_field/pencode_text, "Behavior")
-	add_field(/datum/report_field/pencode_text, "Defense/Offense")
-	add_field(/datum/report_field/pencode_text, "Special Characteristic(s)")
-	add_field(/datum/report_field/pencode_text, "Classification")
-
-	add_field(/datum/report_field/text_label/instruction, "On completion of this form and form approval, the Chief Science Officer should fax the form to both the Corporate Liaison and the Commanding Officer, as well as keep a copy on file in their Office alongside other mission reports.")
 
 /datum/computer_file/report/recipient/exp/planet
 	form_name = "SCG-EXP-17"
-	title = "Exoplanet Report"
+	title = "Отчет по экзопланете"
 	available_on_ntnet = TRUE
 
 /datum/computer_file/report/recipient/exp/planet/generate_fields()
 	..()
-	add_field(/datum/report_field/text_label/header, "SEV Torch Expeditions")
-	add_field(/datum/report_field/text_label/instruction, "The following is to be filled out by members of a Expedition team after an Expedition to an uncharted Exoplanet.")
+	add_field(/datum/report_field/text_label/header, "ГЭК \"Факел\" - Экспедиционный Корпус")
+	add_field(/datum/report_field/text_label/instruction, "Следующие колонки заполняются членом, входящего в состав экспедиционной команды, после возвращения с планеты на борт судна.")
+	add_field(/datum/report_field/date, "Дата")
+	add_field(/datum/report_field/simple_text, "Название планеты", required = 1)
+	add_field(/datum/report_field/people/list_from_manifest, "Участники экспедиции", required = 1)
+	add_field(/datum/report_field/pencode_text, "Информация по местности", required = 1)
+	add_field(/datum/report_field/simple_text, "Обитаемость", required = 1)
+	add_field(/datum/report_field/pencode_text, "Описание фауны", required = 1)
+	add_field(/datum/report_field/pencode_text, "Описание флоры", required = 1)
+	add_field(/datum/report_field/pencode_text, "Точки интереса", required = 1)
+	add_field(/datum/report_field/pencode_text, "Наблюдения")
+	add_field(/datum/report_field/text_label/instruction, "После заполнения данного документа, а также последующего его утверждения,\
+	Главный Научный Офицер должен отправить данный документ по факсу Корпоративному Связному и Командующему Офицеру, после чего хранить копию этого документа в своём офисе, как и другие отчёты о прогрессе миссии.")
 
-	add_field(/datum/report_field/date, "Date")
-	add_field(/datum/report_field/simple_text, "Planet Name")
-	add_field(/datum/report_field/people/list_from_manifest, "Personnel Involved")
-	add_field(/datum/report_field/pencode_text, "Terrain Information")
-	add_field(/datum/report_field/simple_text, "Habitability")
-	add_field(/datum/report_field/pencode_text, "Summary on Fauna")
-	add_field(/datum/report_field/pencode_text, "Summary on Flora")
-	add_field(/datum/report_field/pencode_text, "Points of Interest")
-	add_field(/datum/report_field/pencode_text, "Observations")
+/datum/computer_file/report/recipient/exp/flora
+	form_name = "SCG-EXP-20g"
+	title = "Отчет по флоре"
+	available_on_ntnet = 1
 
-	add_field(/datum/report_field/text_label/instruction, "On completion of this form and form approval, the Chief Science Officer should fax the form to both the Corporate Liaison and the Commanding Officer, as well as keep a copy on file in their Office alongside other mission reports.")
+/datum/computer_file/report/recipient/exp/flora/generate_fields()
+	..()
+	add_field(/datum/report_field/text_label/header, "ГЭК \"Факел\" - Экспедиционный Корпус")
+	add_field(/datum/report_field/text_label/instruction, "Следующие колонки заполняются членом, входящего в состав экспедиционной команды, после открытия и изучения инопланетной жизни.")
+	add_field(/datum/report_field/number, "Номер рапорта")
+	add_field(/datum/report_field/simple_text, "Местоположение", required = 1)
+	add_field(/datum/report_field/date, "Дата")
+	add_field(/datum/report_field/people/list_from_manifest, "Участники экспедиции", required = 1)
+	add_field(/datum/report_field/pencode_text, "Строение/Внешний вид", required = 1)
+	add_field(/datum/report_field/pencode_text, "Условия произрастания", required = 1)
+	add_field(/datum/report_field/pencode_text, "Среда обитания", required = 1)
+	add_field(/datum/report_field/pencode_text, "Описание плодов", required = 1)
+	add_field(/datum/report_field/pencode_text, "Анализ плодов", required = 1)
+	add_field(/datum/report_field/pencode_text, "Специальная характеристика(и)", required = 1)
+	add_field(/datum/report_field/simple_text, "Классификация", required = 1)
+	add_field(/datum/report_field/text_label/instruction, "После заполнения данного документа, а также последующего его утверждения,\
+	Главный Научный Офицер должен отправить данный документ по факсу Корпоративному Связному и Командующему Офицеру, после чего хранить копию этого документа в своём офисе, как и другие отчёты о прогрессе миссии.")
 
 /datum/computer_file/report/recipient/shuttle/post_flight
 	logo = "\[eclogo\]"

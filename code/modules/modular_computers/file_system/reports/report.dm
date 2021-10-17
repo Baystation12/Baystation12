@@ -126,7 +126,7 @@
 	return temp
 
 /datum/computer_file/report/proc/display_name()
-	return "Form [form_name]: [title]"
+	return "Форма [form_name]: [title]"
 
 /// If access is given, will include access information by performing checks against it.
 /datum/computer_file/report/proc/generate_nano_data(list/given_access)
