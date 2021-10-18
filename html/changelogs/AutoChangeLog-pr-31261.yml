@@ -1,0 +1,5 @@
+author: Jux
+delete-after: true
+changes:
+  - rscadd: Replaces the unused CTI voidsuit with a new one, for nerds.
+  - rscadd: The new Retro Voidsuit can now spawn in the random spawners.
