@@ -65,6 +65,12 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	var/sync = 1		//If sync = 0, it doesn't show up on Server Control Console
 	var/can_analyze = TRUE //If the console is allowed to use destructive analyzers
 
+	var/list/saved_origins = list()
+	var/protolathe_show_tech = TRUE
+	var/protolathe_search = ""
+	var/imprinter_show_tech = TRUE
+	var/imprinter_search = ""
+
 	req_access = list(access_research)	//Data and setting manipulation requires scientist access.
 
 /obj/machinery/computer/rdconsole/proc/CallMaterialName(var/ID)
@@ -436,6 +442,39 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			spawn(10)
 				screen = ((text2num(href_list["print"]) == 2) ? 5.0 : 1.1)
 				interact(user)
+	else if (href_list["protolathe_search"])
+		var/protolathe_search = input("Search for a recipe:", "Search")
+
+		if (!protolathe_search)
+			return
+
+		src.protolathe_search = lowertext(protolathe_search)
+		interact(user)
+
+	else if (href_list["protolathe_reset_search"])
+		protolathe_search = ""
+		interact(user)
+
+	else if (href_list["protolathe_show_tech"])
+		protolathe_show_tech = !protolathe_show_tech
+		interact(user)
+
+	else if (href_list["imprinter_search"])
+		var/imprinter_search = input("Search for a recipe:", "Search")
+
+		if (!imprinter_search)
+			return
+
+		src.imprinter_search = lowertext(imprinter_search)
+		interact(user)
+
+	else if (href_list["imprinter_reset_search"])
+		imprinter_search = ""
+		interact(user)
+
+	else if (href_list["imprinter_show_tech"])
+		imprinter_show_tech = !imprinter_show_tech
+		interact(user)
 
 /obj/machinery/computer/rdconsole/proc/finish_deconstruct(weakref/W)
 	CHECK_DESTROY
@@ -664,7 +703,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			if(linked_destroy)
 				dat += "<LI>Destructive Analyzer <A href='?src=\ref[src];disconnect=destroy'>(Disconnect)</A>"
 			else
-				if (can_analyze == TRUE) 
+				if (can_analyze == TRUE)
 					dat += "<LI>(No Destructive Analyzer Linked)"
 			if(linked_lathe)
 				dat += "<LI>Protolathe <A href='?src=\ref[src];disconnect=lathe'>(Disconnect)</A>"
@@ -714,12 +753,22 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "<A href='?src=\ref[src];menu=3.2'>Material Storage</A> || "
 			dat += "<A href='?src=\ref[src];menu=3.3'>Chemical Storage</A><HR>"
 			dat += "Protolathe Menu:<BR><BR>"
+			dat += "<A href='?src=\ref[src];protolathe_show_tech=1'>Show Recipe Tech Levels: [protolathe_show_tech ? "YES" : "NO"]"
+			dat += "<A href='?src=\ref[src];protolathe_search=1'>Search</A>"
+			dat += "<A href='?src=\ref[src];protolathe_reset_search=1'>Reset Search</A><BR>"
+			dat += "[FONT_COLORED(COLOR_GREEN, "Green")] = Tech level higher than current<HR>"
 			dat += "<B>Material Amount:</B> [linked_lathe.TotalMaterials()] cm<sup>3</sup> (MAX: [linked_lathe.max_material_storage])<BR>"
 			dat += "<B>Chemical Volume:</B> [linked_lathe.reagents.total_volume] (MAX: [linked_lathe.reagents.maximum_volume])<HR>"
 			dat += "<UL>"
+
 			for(var/datum/design/D in files.known_designs)
 				if(!D.build_path || !(D.build_type & PROTOLATHE))
 					continue
+
+				if (protolathe_search != "")
+					if (!findtext(D.name, protolathe_search))
+						continue
+
 				var/temp_dat
 				for(var/M in D.materials)
 					temp_dat += ", [D.materials[M]] [CallMaterialName(M)]"
@@ -731,6 +780,27 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 					dat += "<LI><B><A href='?src=\ref[src];build=[D.id]'>[D.name]</A></B>[temp_dat]"
 				else
 					dat += "<LI><B>[D.name]</B>[temp_dat]"
+
+				if (protolathe_show_tech)
+					var/list/origin_tech
+
+					if (saved_origins[D.build_path])
+						origin_tech = saved_origins[D.build_path]
+
+					if (!origin_tech)
+						var/obj/item/I = new D.build_path
+						origin_tech = I.origin_tech
+						saved_origins[D.build_path] = origin_tech
+						qdel(I)
+
+					for (var/T in origin_tech)
+						for (var/datum/tech/F in files.known_tech)
+							if (F.name == CallTechName(T))
+								if (F.level <= D.req_tech[T])
+									dat += FONT_COLORED(COLOR_GREEN, " [F.name] = [origin_tech[T]] ")
+								else
+									dat += " [F.name] = [origin_tech[T]] "
+								break
 			dat += "</UL>"
 
 		if(3.2) //Protolathe Material Storage Sub-menu
@@ -794,6 +864,10 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "<A href='?src=\ref[src];menu=4.3'>Material Storage</A> || "
 			dat += "<A href='?src=\ref[src];menu=4.2'>Chemical Storage</A><HR>"
 			dat += "Circuit Imprinter Menu:<BR><BR>"
+			dat += "<A href='?src=\ref[src];imprinter_show_tech=1'>Show Recipe Tech Levels: [imprinter_show_tech ? "YES" : "NO"]"
+			dat += "<A href='?src=\ref[src];imprinter_search=1'>Search</A>"
+			dat += "<A href='?src=\ref[src];imprinter_reset_search=1'>Reset Search</A><BR>"
+			dat += "[FONT_COLORED(COLOR_GREEN, "Green")] = Tech level higher than current<HR>"
 			dat += "Material Amount: [linked_imprinter.TotalMaterials()] cm<sup>3</sup><BR>"
 			dat += "Chemical Volume: [linked_imprinter.reagents.total_volume]<HR>"
 			dat += "<UL>"
@@ -811,6 +885,27 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 					dat += "<LI><B><A href='?src=\ref[src];imprint=[D.id]'>[D.name]</A></B>[temp_dat]"
 				else
 					dat += "<LI><B>[D.name]</B>[temp_dat]"
+
+				if (imprinter_show_tech)
+					var/list/origin_tech
+
+					if (saved_origins[D.build_path])
+						origin_tech = saved_origins[D.build_path]
+
+					if (!origin_tech)
+						var/obj/item/I = new D.build_path
+						origin_tech = I.origin_tech
+						saved_origins[D.build_path] = origin_tech
+						qdel(I)
+
+					for (var/T in origin_tech)
+						for (var/datum/tech/F in files.known_tech)
+							if (F.name == CallTechName(T))
+								if (F.level <= D.req_tech[T] )
+									dat += FONT_COLORED(COLOR_GREEN, " [F.name] = [origin_tech[T]] ")
+								else
+									dat += " [F.name] = [origin_tech[T]] "
+								break
 			dat += "</UL>"
 
 		if(4.2)
@@ -879,7 +974,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 /obj/machinery/computer/rdconsole/core
 	name = "core fabricator console"
 	id = 1
-	
+
 
 #undef CHECK_LATHE
 #undef CHECK_IMPRINTER
