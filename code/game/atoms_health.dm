@@ -134,6 +134,8 @@
 	SHOULD_CALL_PARENT(TRUE)
 	if (!health_max)
 		return
+	if (!can_restore_health(damage, damage_type))
+		return FALSE
 	return mod_health(damage, damage_type = null)
 
 /**
@@ -144,6 +146,8 @@
 	SHOULD_CALL_PARENT(TRUE)
 	if (!health_max)
 		return
+	if (!can_damage_health(damage, damage_type))
+		return FALSE
 
 	// Apply resistance/weakness modifiers
 	damage *= get_damage_resistance(damage_type)
