@@ -240,7 +240,7 @@
 /obj/effect/rune/wall/cast(var/mob/living/user)
 	var/t
 	if(wall)
-		if(!wall.get_damage_value())
+		if(!wall.health_damaged())
 			to_chat(user, "<span class='notice'>The wall doesn't need mending.</span>")
 			return
 		t = wall.get_damage_value()

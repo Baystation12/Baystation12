@@ -33,6 +33,16 @@
 	return health_max
 
 /**
+ * Whether or not the atom's health is damaged.
+ */
+/atom/proc/health_damaged(use_raw_values)
+	if (!health_max)
+		return
+	if (use_raw_values)
+		return health_current < health_max
+	return get_current_health() < get_max_health()
+
+/**
  * Retrieves the atom's current damage, or `null` if not using health.
  * If `use_raw_values` is `TRUE`, uses the raw var values instead of the `get_*` proc results.
  */
