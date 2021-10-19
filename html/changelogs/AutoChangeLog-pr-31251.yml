@@ -1,6 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - rscadd: Adds a search menu and tech-level readouts to the protolathe and circuit
-      imprinter menus
-  - rscadd: Added the arc-welder to the protolathe
