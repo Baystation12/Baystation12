@@ -108,7 +108,7 @@
 	if (!health_max)
 		return
 	var/death_state = is_alive()
-	health_current = Clamp(health_current + health_mod, 0, get_max_health())
+	health_current = round(Clamp(health_current + health_mod, 0, get_max_health()))
 	post_health_change(health_mod, damage_type)
 	var/new_death_state = is_alive()
 	if (death_state == new_death_state)
@@ -189,7 +189,7 @@
  */
 /atom/proc/set_max_health(new_max_health, set_current_health = TRUE)
 	SHOULD_CALL_PARENT(TRUE)
-	health_max = new_max_health
+	health_max = round(new_max_health)
 	health_current = set_current_health ? get_max_health() : min(health_current, get_max_health())
 
 /**
