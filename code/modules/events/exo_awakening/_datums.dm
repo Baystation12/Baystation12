@@ -18,7 +18,7 @@
 			)
 	arrival_message = "A blood-curdling howl echoes through the air as the planet starts to shake violently. Something has woken up..."
 	arrival_sound   = 'sound/ambience/meat_monster_arrival.ogg'
-	limit = 55
+	limit = 30
 	spawn_near_chance = 30
 
 /datum/mob_list/major/spiders
@@ -40,7 +40,7 @@
 			)
 	arrival_message = "The ground beneath you shakes and rumbles, and is accompanied by an approaching skittering sound..."
 	arrival_sound   = 'sound/effects/wind/wind_3_1.ogg'
-	limit = 25
+	limit = 15
 	length = 45
 	spawn_near_chance = 10
 
@@ -53,7 +53,7 @@
 			)
 	arrival_message = "The ground beneath you rumbles as you hear the sounds of machinery from all around you..."
 	arrival_sound   = 'sound/effects/wind/wind_3_1.ogg'
-	limit = 45
+	limit = 25
 	length = 50
 	spawn_near_chance = 10
 
@@ -67,7 +67,7 @@
 			)
 	arrival_message = "You feel uneasy as you hear something skittering about..."
 	arrival_sound = 'sound/effects/wind/wind_3_1.ogg'
-	limit = 15
+	limit = 8
 	length = 40
 	spawn_near_chance = 5
 
@@ -78,6 +78,6 @@
 			)
 	arrival_message = "You hear the distant sound of creaking metal joints, what is that?"
 	arrival_sound = 'sound/effects/wind/wind_3_1.ogg'
-	limit = 25
+	limit = 10
 	length = 50
 	spawn_near_chance = 15

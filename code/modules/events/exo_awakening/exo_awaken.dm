@@ -131,7 +131,7 @@ GLOBAL_LIST_INIT(exo_event_mob_count,list())// a list of all mobs currently spaw
 /datum/event/exo_awakening/announce()
 	var/announcement = ""
 	if (severity > EVENT_LEVEL_MODERATE)
-		announcement = "Extreme biological activity spike detected on [location_name()]. Recommend away team evacuation."
+		announcement = "Extreme biological activity spike detected on [location_name()]."
 	else
 		announcement = "Anomalous biological activity detected on [location_name()]."
 
