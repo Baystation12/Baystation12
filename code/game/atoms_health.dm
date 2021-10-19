@@ -177,14 +177,14 @@
  */
 /atom/proc/kill_health()
 	SHOULD_CALL_PARENT(TRUE)
-	return mod_health(-health_max)
+	return set_health(0)
 
 /**
  * Returns health to full, resetting the death state as well.
  */
 /atom/proc/revive_health()
 	SHOULD_CALL_PARENT(TRUE)
-	return mod_health(health_max)
+	return set_health(health_max)
 
 /**
  * Proc called when death state changes.
