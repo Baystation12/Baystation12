@@ -10,10 +10,9 @@
 	anchored = FALSE
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CHECKS_BORDER | ATOM_FLAG_CLIMBABLE | ATOM_FLAG_CAN_BE_PAINTED
 	obj_flags = OBJ_FLAG_ROTATABLE
+	health_max = 70
 
 	var/broken =    FALSE
-	var/health =    70
-	var/maxhealth = 70
 	var/neighbor_status = 0
 
 /obj/structure/railing/mapped
@@ -51,8 +50,7 @@
 
 	name = "[material.display_name] [initial(name)]"
 	desc = "A simple [material.display_name] railing designed to protect against careless trespass."
-	maxhealth = round(material.integrity / 5)
-	health = maxhealth
+	set_max_health(material.integrity / 5)
 	color = material.icon_colour
 
 	if(material.products_need_process())
@@ -80,20 +78,8 @@
 		return !density
 	return TRUE
 
-/obj/structure/railing/examine(mob/user)
-	. = ..()
-	if(health < maxhealth)
-		switch(health / maxhealth)
-			if(0.0 to 0.5)
-				to_chat(user, "<span class='warning'>It looks severely damaged!</span>")
-			if(0.25 to 0.5)
-				to_chat(user, "<span class='warning'>It looks damaged!</span>")
-			if(0.5 to 1.0)
-				to_chat(user, "<span class='notice'>It has a few scrapes and dents.</span>")
-
-/obj/structure/railing/take_damage(amount)
-	health -= amount
-	if(health <= 0)
+/obj/structure/railing/handle_death_change(new_death_state)
+	if (new_death_state)
 		visible_message("<span class='danger'>\The [src] [material.destruction_desc]!</span>")
 		playsound(loc, 'sound/effects/grillehit.ogg', 50, 1)
 		material.place_shard(get_turf(usr))
@@ -255,15 +241,15 @@
 	if(isWelder(W))
 		var/obj/item/weldingtool/F = W
 		if(F.isOn())
-			if(health >= maxhealth)
+			if(!health_damaged())
 				to_chat(user, "<span class='warning'>\The [src] does not need repairs.</span>")
 				return
 			playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 			if(do_after(user, 20, src))
-				if(health >= maxhealth)
+				if(!health_damaged())
 					return
 				user.visible_message("<span class='notice'>\The [user] repairs some damage to \the [src].</span>", "<span class='notice'>You repair some damage to \the [src].</span>")
-				health = min(health+(maxhealth/5), maxhealth)
+				restore_health(get_max_health() / 5)
 			return
 
 	// Install
@@ -282,7 +268,7 @@
 	if(W.force && (W.damtype == "fire" || W.damtype == "brute"))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		visible_message("<span class='danger'>\The [src] has been [LAZYLEN(W.attack_verb) ? pick(W.attack_verb) : "attacked"] with \the [W] by \the [user]!</span>")
-		take_damage(W.force)
+		damage_health(W.force, W.damtype)
 		return
 	. = ..()
 
@@ -301,7 +287,7 @@
 	. = ..()
 	if(.)
 		if(!anchored || material.is_brittle())
-			take_damage(maxhealth) // Fatboy
+			kill_health() // Fatboy
 
 		user.jump_layer_shift()
 		addtimer(CALLBACK(user, /mob/living/proc/jump_layer_shift_end), 2)

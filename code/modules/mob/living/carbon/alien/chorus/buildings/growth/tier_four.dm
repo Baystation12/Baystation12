@@ -19,7 +19,7 @@
 	icon_state = "growth_tendril_thorned"
 	damage = 30
 	penetration = 30
-	health = 300
+	health_max = 300
 
 /obj/structure/chorus/processor/sentry/tendrdil/thorned/Initialize()
 	. = ..()

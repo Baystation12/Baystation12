@@ -10,15 +10,26 @@
 	layer = BELOW_OBJ_LAYER
 	explosion_resistance = 1
 	rad_resistance_modifier = 0.1
+	health_max = 10
+	health_resistances = list(
+		BRUTE = 0.1
+	)
 	var/init_material = MATERIAL_STEEL
-	var/health = 10
-	var/destroyed = 0
 
 	blend_objects = list(/obj/machinery/door, /turf/simulated/wall) // Objects which to blend with
 	noblend_objects = list(/obj/machinery/door/window)
 
+/obj/structure/grille/broken
+	name = "broken grille"
+	desc = "The remains of a flimsy lattice of metal rods, with screws to secure it to the floor."
+	icon_state = "broken"
+	health_max = 6
+
 /obj/structure/grille/get_material()
 	return material
+
+/obj/structure/grille/proc/is_broken()
+	return istype(src, /obj/structure/grille/broken)
 
 /obj/structure/grille/Initialize(mapload, var/new_material)
 	. = ..()
@@ -29,10 +40,11 @@
 		..()
 		return INITIALIZE_HINT_QDEL
 
-	name = "[material.display_name] grille"
-	desc = "A lattice of [material.display_name] rods, with screws to secure it to the floor."
+	var/broken = is_broken()
+	name = "[broken ? "broken " : null][material.display_name] grille"
+	desc = "[broken ? "The remains of a" : "A"] lattice of [material.display_name] rods, with screws to secure it to the floor."
 	color =  material.icon_colour
-	health = max(1, round(material.integrity/15))
+	set_max_health(max(1, round(material.integrity / 15)))
 	update_connections(1)
 	update_icon()
 
@@ -50,7 +62,7 @@
 	var/on_frame = is_on_frame()
 
 	overlays.Cut()
-	if(destroyed)
+	if (is_broken())
 		if(on_frame)
 			icon_state = "broke_onframe"
 		else
@@ -141,13 +153,13 @@
 		. = PROJECTILE_CONTINUE
 		damage = between(0, (damage - Proj.damage)*(Proj.damage_type == BRUTE? 0.4 : 1), 10) //if the bullet passes through then the grille avoids most of the damage
 
-	take_damage(damage*0.2)
+	damage_health(damage, Proj.damage_type)
 
 /obj/structure/grille/attackby(obj/item/W as obj, mob/user as mob)
 	if(isWirecutter(W))
 		if(!shock(user, 100))
 			playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
-			new /obj/item/stack/material/rods(get_turf(src), destroyed ? 1 : 2, material.name)
+			new /obj/item/stack/material/rods(get_turf(src), is_broken() ? 1 : 2, material.name)
 			qdel(src)
 	else if((isScrewdriver(W)) && (istype(loc, /turf/simulated) || anchored))
 		if(!shock(user, 90))
@@ -181,34 +193,27 @@
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		user.do_attack_animation(src)
 		playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
-		switch(W.damtype)
-			if("fire")
-				take_damage(W.force)
-			if("brute")
-				take_damage(W.force * 0.1)
+		damage_health(W.force, W.damtype)
 	..()
 
-/obj/structure/grille/proc/healthcheck()
-	if(health <= 0)
-		if(!destroyed)
-			set_density(0)
-			destroyed = 1
-			visible_message("<span class='notice'>\The [src] falls to pieces!</span>")
-			update_icon()
-			new /obj/item/stack/material/rods(get_turf(src), 1, material.name)
+/obj/structure/grille/handle_death_change(new_death_state)
+	if (new_death_state)
+		visible_message(SPAN_WARNING("\The [src] falls to pieces!"))
+		new /obj/item/stack/material/rods(get_turf(src), 1, material.name)
+		new /obj/structure/grille/broken(get_turf(src), material.name)
+		qdel(src)
 
-		else
-			if(health <= -6)
-				new /obj/item/stack/material/rods(get_turf(src), 1, material.name)
-				qdel(src)
-				return
-	return
+/obj/structure/grille/broken/handle_death_change(new_death_state)
+	if (new_death_state)
+		visible_message(SPAN_WARNING("The remains of \the [src] break apart!"))
+		new /obj/item/stack/material/rods(get_turf(src), 1, material.name)
+		qdel(src)
 
 // shock user with probability prb (if all connections & power are working)
 // returns 1 if shocked, 0 otherwise
 
 /obj/structure/grille/proc/shock(mob/user as mob, prb)
-	if(!anchored || destroyed)		// anchored/destroyed grilles are never connected
+	if(!anchored || is_broken())		// anchored/destroyed grilles are never connected
 		return 0
 	if(material && !material.conductive)
 		return 0
@@ -232,24 +237,9 @@
 	return 0
 
 /obj/structure/grille/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	if(!destroyed)
-		if(exposed_temperature > material.melting_point)
-			take_damage(1)
+	if (!is_broken() && exposed_temperature > material.melting_point)
+		damage_health(1, BURN)
 	..()
-
-/obj/structure/grille/take_damage(damage)
-	health -= damage
-	healthcheck()
-
-// Used in mapping to avoid
-/obj/structure/grille/broken
-	destroyed = 1
-	icon_state = "broken"
-	density = FALSE
-
-/obj/structure/grille/broken/Initialize()
-	. = ..()
-	take_damage(rand(1, 5)) //In the destroyed but not utterly threshold.
 
 /obj/structure/grille/cult
 	name = "cult grille"

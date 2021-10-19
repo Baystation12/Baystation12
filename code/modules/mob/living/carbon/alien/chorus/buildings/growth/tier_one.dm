@@ -33,7 +33,7 @@
 	icon_state = "growth_biter"
 	activation_cost_resource = /datum/chorus_resource/growth_nutrients
 	activation_cost_amount = 5
-	health = 1
+	health_max = 1
 	density = FALSE
 	death_message = "closes and folds into the ground."
 	var/damage = 45

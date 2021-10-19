@@ -10,7 +10,7 @@
 	name = "gastrointestional tract"
 	desc = "A gross lump of organ meat. The smell is indescribable."
 	icon_state = "growth_stomach"
-	health = 30
+	health_max = 30
 	click_cooldown = 5 SECONDS
 	activation_cost_resource = /datum/chorus_resource/growth_nutrients
 	activation_cost_amount = 2
@@ -33,7 +33,7 @@
 	name = "ossifier"
 	desc = "A brittle mix of bones and flesh."
 	icon_state = "growth_bone"
-	health = 30
+	health_max = 30
 	click_cooldown = 5 SECONDS
 	activation_cost_resource = /datum/chorus_resource/growth_nutrients
 	activation_cost_amount = 2
@@ -56,7 +56,7 @@
 	name = "sinoatrial node"
 	desc = "A large fan of what appears to be some sort of organic wire."
 	icon_state = "growth_node"
-	health = 50
+	health_max = 50
 	death_message = "severs at the base and splatters on the ground."
 
 /datum/chorus_building/muscular_coat
@@ -90,7 +90,7 @@
 	name = "maw"
 	desc = "A neck high wall made of teeth and meat."
 	click_cooldown = 3 SECONDS
-	health = 200
+	health_max = 200
 	icon_state = "growth_maw_closed"
 	death_message = "sinks into the ground."
 
@@ -117,7 +117,7 @@
 /obj/structure/chorus/zleveler/spinal_column
 	name = "spinal column"
 	desc = "A thick pillar of bone and marrow extending from floor to ceiling."
-	health = 125
+	health_max = 125
 	icon_state = "growth_spine"
 	activation_cost_resource = /datum/chorus_resource/growth_bones
 	activation_cost_amount = 50
@@ -142,7 +142,7 @@
 	name = "bone spitter"
 	desc = "A group of meat fashioned together into a form not unsimilar to a turret."
 	icon_state = "growth_bone_shooter"
-	health = 20
+	health_max = 20
 	range = 7
 	activation_cost_resource = /datum/chorus_resource/growth_bones
 	activation_cost_amount = 1

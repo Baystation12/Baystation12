@@ -88,18 +88,6 @@
 		return
 
 	// Objects in the turf
-	var/obj/structure/girder/G = locate() in T
-	if(G)
-		G.take_damage(damage)
-		return
-	var/obj/structure/window/W = locate() in T
-	if(W)
-		W.take_damage(damage)
-		return
-	var/obj/structure/grille/GR = locate() in T
-	if(GR)
-		GR.take_damage(damage)
-		return
 	for(var/obj/machinery/door/D in T) // There can be several - and some of them can be open, locate() is not suitable
 		if (D.density)
 			if (D.is_broken())
@@ -110,10 +98,6 @@
 	var/obj/structure/foamedmetal/F = locate() in T
 	if(F)
 		qdel(F)
-		return
-	var/obj/structure/inflatable/I = locate() in T
-	if(I)
-		I.take_damage(damage)
 		return
 
 	var/obj/vehicle/V = locate() in T

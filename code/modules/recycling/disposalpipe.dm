@@ -10,7 +10,7 @@
 	level = 1			// underfloor only
 	var/dpdir = 0		// bitmask of pipe directions
 	dir = 0				// dir will contain dominant direction for junction pipes
-	var/health = 10 	// health points 0-10
+	health_max = 10
 	alpha = 192 // Plane and alpha modified for mapping, reset to normal on spawn.
 	layer = ABOVE_TILE_LAYER
 	var/base_icon_state	// initial icon state on map
@@ -200,25 +200,18 @@ obj/structure/disposalpipe/Destroy()
 
 	switch(severity)
 		if(1.0)
-			broken(0)
+			kill_health()
 			return
 		if(2.0)
-			health -= rand(5,15)
-			healthcheck()
+			damage_health(rand(5, 15), BRUTE)
 			return
 		if(3.0)
-			health -= rand(0,15)
-			healthcheck()
+			damage_health(rand(0, 15), BRUTE)
 			return
 
-
-	// test health for brokenness
-/obj/structure/disposalpipe/proc/healthcheck()
-	if(health < -2)
-		broken(0)
-	else if(health<1)
-		broken(1)
-	return
+/obj/structure/disposalpipe/handle_death_change(new_death_state)
+	if (new_death_state)
+		broken(prob(0.5))
 
 //attack by item
 //weldingtool: unfasten and convert to obj/disposalconstruct

@@ -12,8 +12,8 @@
 	density = TRUE
 	throwpass = 1
 	layer = TABLE_LAYER
+	health_max = 100
 
-	var/health = 100
 	var/paint_color
 	var/stripe_color
 	rad_resistance_modifier = 0.5
@@ -32,7 +32,7 @@
 			materialtype = DEFAULT_WALL_MATERIAL
 
 	material = SSmaterials.get_material_by_name(materialtype)
-	health = material.integrity
+	set_max_health(material.integrity)
 
 	update_connections(1)
 	update_icon()
@@ -48,16 +48,6 @@
 /obj/structure/wall_frame/examine(mob/user)
 	. = ..()
 
-	if(health == material.integrity)
-		to_chat(user, "<span class='notice'>It seems to be in fine condition.</span>")
-	else
-		var/dam = health / material.integrity
-		if(dam <= 0.3)
-			to_chat(user, "<span class='notice'>It's got a few dents and scratches.</span>")
-		else if(dam <= 0.7)
-			to_chat(user, "<span class='warning'>A few pieces of panelling have fallen off.</span>")
-		else
-			to_chat(user, "<span class='danger'>It's nearly falling to pieces.</span>")
 	if(paint_color)
 		to_chat(user, "<span class='notice'>It has a smooth coat of paint applied.</span>")
 
@@ -155,7 +145,7 @@
 /obj/structure/wall_frame/bullet_act(var/obj/item/projectile/Proj)
 	var/proj_damage = Proj.get_structure_damage()
 	var/damage = min(proj_damage, 100)
-	take_damage(damage)
+	damage_health(damage, Proj.damage_type)
 	return
 
 /obj/structure/wall_frame/hitby(AM as mob|obj, var/datum/thrownthing/TT)
@@ -169,11 +159,10 @@
 		tforce = O.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
 	if (tforce < 15)
 		return
-	take_damage(tforce)
+	damage_health(tforce, BRUTE)
 
-/obj/structure/wall_frame/take_damage(damage)
-	health -= damage
-	if(health <= 0)
+/obj/structure/wall_frame/handle_death_change(new_death_state)
+	if (new_death_state)
 		dismantle()
 
 /obj/structure/wall_frame/proc/dismantle()
