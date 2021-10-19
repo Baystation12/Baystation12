@@ -44,15 +44,15 @@
 	off_state = "healthhudpresc_off"
 	item_state = "healthhudpresc"
 
-/obj/item/clothing/glasses/hud/health/visor
+/obj/item/clothing/glasses/hud/health/goggle
 	name = "medical HUD visor"
 	desc = "A medical HUD integrated with a wide visor."
-	icon_state = "medhud_visor"
-	off_state = "medhud_visor_off"
-	item_state = "medhud_visor"
+	icon_state = "material"
+	off_state = "degoggles"
+	item_state = "material"
 	body_parts_covered = EYES
 
-/obj/item/clothing/glasses/hud/health/visor/prescription
+/obj/item/clothing/glasses/hud/health/goggle/prescription
 	prescription = 5
 	desc = "A medical HUD integrated with a wide visor. This one has a corrective lense."
 
