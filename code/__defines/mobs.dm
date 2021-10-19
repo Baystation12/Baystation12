@@ -266,6 +266,9 @@
 /// The augment can be installed on the chest separately to AUGMENT_CHEST
 #define AUGMENT_ARMOR FLAG(7)
 
+/// The augment can be installed in the head separately to AUGMENT_HEAD
+#define AUGMENT_FLUFF FLAG(8)
+
 
 /**
 * Augment Flags

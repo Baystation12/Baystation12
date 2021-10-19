@@ -45,6 +45,10 @@
 		style = ORGAN_STYLE
 		if (ORGAN_STYLE_OK)
 			return organ
+	if ((augment_slots & AUGMENT_FLUFF) && !organs["[BP_HEAD]_aug_fluff"] && (organ = organs[BP_HEAD]))
+		style = ORGAN_STYLE
+		if (ORGAN_STYLE_OK)
+			return organ
 	if (augment_slots & AUGMENT_ARM)
 		if (!organs["[BP_L_ARM]_aug"] && (organ = organs[BP_L_ARM]))
 			style = ORGAN_STYLE
@@ -104,7 +108,7 @@
 		if (BP_GROIN)
 			found = augment_slots & AUGMENT_GROIN
 		if (BP_HEAD)
-			found = augment_slots & AUGMENT_HEAD
+			found = augment_slots & (AUGMENT_HEAD | AUGMENT_FLUFF)
 	if (!found)
 		to_chat(user, SPAN_WARNING("\The [src] can't be installed in \the [parent]."))
 		parent_organ = null
@@ -113,6 +117,8 @@
 	parent_organ = parent.organ_tag
 	if (found == AUGMENT_ARMOR)
 		organ_tag = "[parent_organ]_aug_armor"
+	if (found == AUGMENT_FLUFF)
+		organ_tag = "[parent_organ]_aug_fluff"
 	else
 		organ_tag = "[parent_organ]_aug"
 
@@ -169,7 +175,7 @@
 		attach_parts += "chests"
 	if (augment_slots & AUGMENT_GROIN)
 		attach_parts += "lower bodies"
-	if (augment_slots & AUGMENT_HEAD)
+	if (augment_slots & (AUGMENT_HEAD|AUGMENT_FLUFF))
 		attach_parts += "heads"
 	if (augment_slots & AUGMENT_ARM)
 		attach_parts += "arms"
