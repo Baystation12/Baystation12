@@ -284,11 +284,6 @@
 		else
 			to_chat(user, SPAN_DANGER("They look severely hurt."))
 
-/atom/examine(mob/user, distance, infix, suffix)
-	. = ..()
-	if (health_max)
-		examine_damage_state(user)
-
 /**
  * Copies the state of health from one atom to another.
  */
