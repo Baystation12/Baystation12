@@ -4,9 +4,6 @@
 /// Maximum health for simple health processing. Use `get_max_health()` or `set_max_health()` to reference/modify.
 /atom/var/health_max
 
-/// Whether or not the atom is considered 'dead'. Use `is_alive()` for general checks.
-/atom/var/health_dead = FALSE
-
 /**
  * LAZY List of damage type resistance or weakness multipliers, decimal form. Only applied to health reduction. Use `set_damage_resistance()`, `remove_damage_resistance()`, and `get_damage_resistance()` to reference/modify.
  *
@@ -29,12 +26,10 @@
 	return health_current
 
 /**
- * Retrieves the atom's maximum health, or `null` if not using health.
+ * Retrieves the atom's maximum health.
  */
 /atom/proc/get_max_health()
 	SHOULD_CALL_PARENT(TRUE)
-	if (!health_max)
-		return
 	return health_max
 
 /**
@@ -100,7 +95,7 @@
 	SHOULD_CALL_PARENT(TRUE)
 	if (!health_max)
 		return
-	return !health_dead
+	return health_current > 0
 
 /**
  * Health modification for the health system. Applies `health_mod` directly to `simple_health` via addition and calls `handle_death_change` as needed.
@@ -111,9 +106,14 @@
 	SHOULD_CALL_PARENT(TRUE)
 	if (!health_max)
 		return
+	var/death_state = is_alive()
 	health_current = Clamp(health_current + health_mod, 0, get_max_health())
 	post_health_change(health_mod, damage_type)
-	return check_death_state()
+	var/new_death_state = is_alive()
+	if (death_state == new_death_state)
+		return FALSE
+	handle_death_change(new_death_state)
+	return TRUE
 
 /**
  * Sets `health_current` to the new value, clamped between `0` and `health_max`.
@@ -161,39 +161,6 @@
 	return
 
 /**
- * Checks the current health value and updates the death state accordingly.
- * Returns `TRUE` if the death state changes, `null` if the atom is not using health, `FALSE` otherwise.
- */
-/atom/proc/check_death_state()
-	SHOULD_CALL_PARENT(TRUE)
-	if (!health_max)
-		return
-	var/health_current = get_current_health()
-	if (health_current > 0 && health_dead)
-		health_dead = FALSE
-		handle_death_change(FALSE)
-		return TRUE
-	if (health_current <= 0 && !health_dead)
-		health_dead = TRUE
-		handle_death_change(TRUE)
-		return TRUE
-	return FALSE
-
-/**
- * Force-sets the atom's death state, bypassing any and all checks.
- */
-/atom/proc/set_death_state(new_death_state)
-	SHOULD_CALL_PARENT(TRUE)
-	if (!health_max)
-		return
-	if (new_death_state == health_dead)
-		return FALSE
-	health_dead = new_death_state
-	health_current = health_dead ? 0 : get_max_health()
-	handle_death_change(new_death_state)
-	return TRUE
-
-/**
  * Immediately sets health to `0` then updates `death_state`, bypassing all other checks and processes.
  */
 /atom/proc/kill_health()
@@ -208,7 +175,7 @@
 	return mod_health(health_max)
 
 /**
- * Proc called when `health_dead` changes.
+ * Proc called when death state changes.
  * Provided for override use.
  */
 /atom/proc/handle_death_change(new_death_state)
@@ -296,6 +263,5 @@
 		return
 	target_atom.health_current = source_atom.health_current
 	target_atom.health_max = source_atom.health_max
-	target_atom.health_dead = source_atom.health_dead
 	target_atom.health_resistances = source_atom.health_resistances
 	target_atom.health_min_damage = source_atom.health_min_damage
