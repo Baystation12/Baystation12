@@ -6,8 +6,8 @@
 	if(!can_use_scanner(user, target, proximity))
 		return
 
-	var/damaged = target.get_damaged_components(1,1,1)
+	var/scan_type = roboscan(target, user)
 
-	if(damaged && driver && driver.using_scanner)
-		driver.data_buffer = html2pencode(damaged)
+	if(scan_type && driver?.using_scanner)
+		driver.data_buffer = html2pencode(scan_type)
 		SSnano.update_uis(driver.NM)
