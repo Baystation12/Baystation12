@@ -1,22 +1,23 @@
-/atom
-	/// Current health for health processing. Use `get_current_health()`, `damage_health()`, or `restore_health()` for general health references.
-	var/health_current
-	/// Maximum health for simple health processing. Use `get_max_health()` or `set_max_health()` to reference/modify.
-	var/health_max
-	/// Whether or not the atom is considered 'dead'. Use `is_alive()` for general checks.
-	var/health_dead = FALSE
+/// Current health for health processing. Use `get_current_health()`, `damage_health()`, or `restore_health()` for general health references.
+/atom/var/health_current
 
-	/**
-	 * LAZY List of damage type resistance or weakness multipliers, decimal form. Only applied to health reduction. Use `set_damage_resistance()`, `remove_damage_resistance()`, and `get_damage_resistance()` to reference/modify.
-	 *
-	 * Index should be one of the `DAMAGE_` flags.
-	 * Value should be a multiplier that is applied against damage. Values below 1 are a resistance, above 1 are a weakness.
-	 * Value of `0` is considered immunity.
-	 */
-	var/list/health_resistances
+/// Maximum health for simple health processing. Use `get_max_health()` or `set_max_health()` to reference/modify.
+/atom/var/health_max
 
-	/// Minimum damage required to actually affect health in `can_damage_health()`.
-	var/health_min_damage = 0
+/// Whether or not the atom is considered 'dead'. Use `is_alive()` for general checks.
+/atom/var/health_dead = FALSE
+
+/**
+ * LAZY List of damage type resistance or weakness multipliers, decimal form. Only applied to health reduction. Use `set_damage_resistance()`, `remove_damage_resistance()`, and `get_damage_resistance()` to reference/modify.
+ *
+ * Index should be one of the `DAMAGE_` flags.
+ * Value should be a multiplier that is applied against damage. Values below 1 are a resistance, above 1 are a weakness.
+ * Value of `0` is considered immunity.
+ */
+/atom/var/list/health_resistances
+
+/// Minimum damage required to actually affect health in `can_damage_health()`.
+/atom/var/health_min_damage = 0
 
 /**
  * Retrieves the atom's current health, or `null` if not using health
