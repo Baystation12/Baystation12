@@ -418,6 +418,9 @@
 	/// Logs all timers in buckets on automatic bucket reset
 	var/static/log_timers_on_bucket_reset = FALSE
 
+	/// The maximum amount of time a round can last before it is forcefully ended.
+	var/static/maximum_round_length
+
 
 /configuration/New()
 	build_mode_cache()
@@ -815,6 +818,8 @@
 				game_version = value
 			if ("log_timers_on_bucket_reset")
 				log_timers_on_bucket_reset = TRUE
+			if ("maximum_round_length")
+				maximum_round_length = text2num(value) MINUTES
 			else
 				log_misc("Unknown setting in config/config.txt: '[name]'")
 
