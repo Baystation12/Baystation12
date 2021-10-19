@@ -80,6 +80,7 @@
 			if (pa["alt"])
 				if (!isnull(L.get_AI_stance()))
 					AI.hostile = !AI.hostile
+					AI.lose_target()
 					to_chat(user, SPAN_NOTICE("\The [L] is now [AI.hostile ? "hostile" : "passive"]."))
 				else
 					to_chat(user, SPAN_WARNING("\The [L] is not AI controlled."))
@@ -139,6 +140,7 @@
 			var/told = 0
 			for(var/mob/living/unit in selected_mobs)
 				var/datum/ai_holder/AI = unit.ai_holder
+				AI.lose_follow()
 				AI.home_turf = T
 				if (unit.get_AI_stance() == STANCE_SLEEP)
 					unit.forceMove(T)
