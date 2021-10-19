@@ -100,9 +100,10 @@
 /**
  * Health modification for the health system. Applies `health_mod` directly to `simple_health` via addition and calls `handle_death_change` as needed.
  * Has no pre-modification checks, you should be using `damage_health()` or `restore_health()` instead of this.
+ * `skip_death_state_change` will skip calling `handle_death_change()` when applicable. Used for when the originally calling proc needs handle it in a unique way.
  * Returns `TRUE` if the death state changes, `null` if the atom is not using health, `FALSE` otherwise.
  */
-/atom/proc/mod_health(health_mod, damage_type)
+/atom/proc/mod_health(health_mod, damage_type, skip_death_state_change = FALSE)
 	SHOULD_CALL_PARENT(TRUE)
 	if (!health_max)
 		return
@@ -112,7 +113,8 @@
 	var/new_death_state = is_alive()
 	if (death_state == new_death_state)
 		return FALSE
-	handle_death_change(new_death_state)
+	if (!skip_death_state_change)
+		handle_death_change(new_death_state)
 	return TRUE
 
 /**
@@ -120,29 +122,29 @@
  * Has no pre-modification checks.
  * Returns `TRUE` if the death state changes, `null` if the atom is not using health, `FALSE` otherwise.
  */
-/atom/proc/set_health(new_health)
+/atom/proc/set_health(new_health, skip_death_state_change = FALSE)
 	SHOULD_CALL_PARENT(TRUE)
 	if (!health_max)
 		return
 	var/health_mod = new_health - health_current
-	return mod_health(health_mod)
+	return mod_health(health_mod, skip_death_state_change = skip_death_state_change)
 
 /**
  * Restore's the atom's health by the given value. Returns `TRUE` if the restoration resulted in a death state change.
  */
-/atom/proc/restore_health(damage, damage_type = null)
+/atom/proc/restore_health(damage, damage_type = null, skip_death_state_change = FALSE)
 	SHOULD_CALL_PARENT(TRUE)
 	if (!health_max)
 		return
 	if (!can_restore_health(damage, damage_type))
 		return FALSE
-	return mod_health(damage, damage_type = null)
+	return mod_health(damage, damage_type, skip_death_state_change)
 
 /**
  * Damage's the atom's health by the given value. Returns `TRUE` if the damage resulted in a death state change.
  * Resistance and weakness modifiers are applied here.
  */
-/atom/proc/damage_health(damage, damage_type = null)
+/atom/proc/damage_health(damage, damage_type = null, skip_death_state_change = FALSE)
 	SHOULD_CALL_PARENT(TRUE)
 	if (!health_max)
 		return
@@ -152,7 +154,7 @@
 	// Apply resistance/weakness modifiers
 	damage *= get_damage_resistance(damage_type)
 
-	return mod_health(-damage, damage_type = null)
+	return mod_health(-damage, damage_type, skip_death_state_change)
 
 /**
  * Proc called after any health changes made by the system
