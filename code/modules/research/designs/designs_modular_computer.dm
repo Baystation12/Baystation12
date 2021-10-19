@@ -219,6 +219,15 @@
 	build_path = /obj/item/stock_parts/computer/scanner/medical
 	sort_string = "VBADI"
 
+/datum/design/item/modularcomponent/accessory/robotic_scanner
+	name = "robotic scanner module"
+	id = "scan_robotic"
+	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2, TECH_MAGNET = 2, TECH_BIO = 1)
+	build_type = PROTOLATHE
+	materials = list(MATERIAL_STEEL = 600, MATERIAL_GLASS = 200)
+	build_path = /obj/item/stock_parts/computer/scanner/robotic
+	sort_string = "VBADJ"
+
 // Batteries
 /datum/design/item/modularcomponent/battery/AssembleDesignName()
 	..()
