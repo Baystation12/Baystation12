@@ -1,6 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - admin: Commanding a mob to move in AI buildmode now removes their follower target.
-  - admin: Changing the hostile status of a mob now resets its target, so it stops
-      attacking if made passive.
