@@ -796,7 +796,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 					for (var/T in origin_tech)
 						for (var/datum/tech/F in files.known_tech)
 							if (F.name == CallTechName(T))
-								if (F.level <= D.req_tech[T])
+								if (F.level <= origin_tech[T])
 									dat += FONT_COLORED(COLOR_GREEN, " [F.name] = [origin_tech[T]] ")
 								else
 									dat += " [F.name] = [origin_tech[T]] "
