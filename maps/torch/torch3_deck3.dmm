@@ -11376,7 +11376,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/teleporter/thirddeck)
 "Au" = (
-/obj/machinery/bluespace_beacon,
+/obj/machinery/tele_beacon,
 /obj/effect/floor_decal/techfloor{
 	dir = 1;
 	icon_state = "techfloor_edges"
