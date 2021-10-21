@@ -15,5 +15,6 @@
 /datum/exoplanet_theme/proc/get_planet_image_extra()
 
 /datum/exoplanet_theme/proc/get_sensor_data()
+	return "No significant terrain features detected."
 
 /datum/exoplanet_theme/proc/adapt_animal(obj/effect/overmap/visitable/sector/exoplanet/E, mob/A)
