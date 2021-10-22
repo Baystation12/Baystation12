@@ -1,0 +1,7 @@
+author: AzlanOnPc, Ryan180602
+delete-after: true
+changes:
+  - rscadd: Add new sprites for wristblade, popout shotgun.
+  - rscadd: Add new sprites for fluff head augments.
+  - rscadd: Add new sprites for UV and skeletal bracings.
+  - rscadd: Add new sprites for backup battery, leukobreeder/recycler.
