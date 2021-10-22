@@ -627,7 +627,6 @@
 #include "code\game\machinery\alarm.dm"
 #include "code\game\machinery\atmo_control.dm"
 #include "code\game\machinery\barrier.dm"
-#include "code\game\machinery\Beacon.dm"
 #include "code\game\machinery\biogenerator.dm"
 #include "code\game\machinery\bioprinter.dm"
 #include "code\game\machinery\bluespacerelay.dm"

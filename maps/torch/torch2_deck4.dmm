@@ -4478,7 +4478,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/teleporter/fourthdeck)
 "pN" = (
-/obj/machinery/bluespace_beacon,
+/obj/machinery/tele_beacon,
 /obj/machinery/button/blast_door{
 	id_tag = "teleport4";
 	name = "Fourth Deck Teleporter Access Shutter Control";

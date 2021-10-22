@@ -18399,7 +18399,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
 	},
-/obj/machinery/bluespace_beacon,
+/obj/machinery/tele_beacon,
 /turf/simulated/floor/tiled/dark,
 /area/teleporter/firstdeck)
 "gEb" = (
