@@ -502,7 +502,7 @@
 		update_icon()
 	else if(isCoil(I))
 		var/obj/item/stack/cable_coil/C = I
-		if(get_damage_value() && do_after(user, 10, src) && C.use(1))
+		if(health_damaged() && do_after(user, 10, src) && C.use(1))
 			user.visible_message(SPAN_NOTICE("\The [user] patches up \the [src]."))
 			restore_health(5)
 	else

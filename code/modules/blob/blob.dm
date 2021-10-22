@@ -133,7 +133,7 @@
 
 	for (var/atom/A in T)
 		// Catch any atoms that use health processing
-		if (A.has_health() && A.is_alive())
+		if (A.health_max && A.is_alive())
 			var/damage_type = pick(BRUTE, BURN)
 			visible_message(SPAN_DANGER("A tendril flies out from \the [src] and smashes into \the [A]!"))
 			playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)

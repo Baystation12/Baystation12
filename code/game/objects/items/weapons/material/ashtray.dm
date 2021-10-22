@@ -51,7 +51,7 @@
 		damage_health(W.force)
 
 /obj/item/material/ashtray/throw_impact(atom/hit_atom)
-	if (has_health())
+	if (health_max)
 		if (contents.len)
 			visible_message("<span class='danger'>\The [src] slams into [hit_atom], spilling its contents!</span>")
 			for (var/obj/O in contents)
