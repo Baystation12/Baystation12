@@ -71,6 +71,7 @@
 	var/obj/screen/exosuit/health/hud_health
 	var/obj/screen/exosuit/toggle/hatch_open/hud_open
 	var/obj/screen/exosuit/power/hud_power
+	var/obj/screen/exosuit/heat/hud_heat
 	var/obj/screen/exosuit/toggle/power_control/hud_power_control
 	var/obj/screen/exosuit/toggle/camera/hud_camera
 	//POWER
