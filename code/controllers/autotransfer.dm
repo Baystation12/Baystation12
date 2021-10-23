@@ -14,7 +14,10 @@ var/datum/controller/transfer_controller/transfer_controller
 
 /datum/controller/transfer_controller/Process()
 	if (time_till_transfer_vote() <= 0)
-		if (do_continue_vote)
+
+		if (config.maximum_round_length > 0 && round_duration_in_ticks >= config.maximum_round_length)
+			init_autotransfer()
+		else if (do_continue_vote)
 			SSvote.initiate_vote(/datum/vote/transfer, automatic = 1)
 		else
 			init_autotransfer()
