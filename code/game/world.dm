@@ -1,4 +1,4 @@
-#define RECOMMENDED_VERSION 512
+#define RECOMMENDED_VERSION 514
 #define FAILED_DB_CONNECTION_CUTOFF 5
 #define THROTTLE_MAX_BURST 15 SECONDS
 #define SET_THROTTLE(TIME, REASON) throttle[1] = base_throttle + (TIME); throttle[2] = (REASON);
@@ -84,6 +84,11 @@ GLOBAL_VAR(href_logfile)
 /proc/auxtools_expr_stub()
 	return
 
+
+#ifndef UNIT_TEST
+/hook/startup/proc/set_visibility()
+	world.update_hub_visibility(config.hub_visible)
+#endif
 
 /world/New()
 	var/debug_server = world.GetConfig("env", "AUXTOOLS_DEBUG_DLL")
