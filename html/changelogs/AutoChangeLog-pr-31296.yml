@@ -1,4 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - bugfix: Fixed some tech-level readouts in the protolathe console being wrong.

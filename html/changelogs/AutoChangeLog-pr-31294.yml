@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: The teleporter beacons found in the teleporters are no longer permanently
-      anchored to the giga beacons.

@@ -1,5 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - rscadd: Added descriptions for the mountain and featureless planet types to sensor
-      scan results.
