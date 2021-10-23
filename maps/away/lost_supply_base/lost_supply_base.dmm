@@ -1404,16 +1404,14 @@
 /area/lost_supply_base/common)
 "dX" = (
 /obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
+	dir = 1
 	},
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
 "dY" = (
 /obj/item/stack/tile/floor_dark,
 /obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
+	dir = 1
 	},
 /turf/simulated/floor/airless,
 /area/lost_supply_base)
@@ -2147,8 +2145,7 @@
 /area/space)
 "pr" = (
 /obj/structure/window/reinforced{
-	dir = 8;
-	health = 1e+006
+	dir = 8
 	},
 /obj/item/stock_parts/circuitboard/broken,
 /obj/machinery/constructable_frame/machine_frame,

@@ -4745,8 +4745,7 @@
 "lM" = (
 /obj/structure/closet/secure_closet/hydroponics,
 /obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
+	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
@@ -4757,8 +4756,7 @@
 "lO" = (
 /obj/machinery/vending/hydronutrients,
 /obj/structure/window/reinforced{
-	dir = 1;
-	health = 1e+006
+	dir = 1
 	},
 /obj/structure/window/reinforced{
 	dir = 4

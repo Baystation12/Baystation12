@@ -11717,8 +11717,7 @@
 	dir = 1
 	},
 /obj/structure/window/reinforced{
-	dir = 8;
-	health = 1e+006
+	dir = 8
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/dark/monotile,
@@ -17239,8 +17238,7 @@
 /obj/item/gun/energy/stunrevolver/rifle,
 /obj/item/gun/energy/stunrevolver/rifle,
 /obj/structure/window/reinforced{
-	dir = 8;
-	health = 1e+006
+	dir = 8
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
@@ -18093,8 +18091,7 @@
 "gcY" = (
 /obj/structure/table/standard,
 /obj/structure/window/reinforced{
-	dir = 2;
-	health = 1e+007
+	dir = 2
 	},
 /obj/machinery/reagent_temperature/cooler,
 /turf/simulated/floor/tiled/dark,
@@ -18938,8 +18935,7 @@
 	dir = 1
 	},
 /obj/structure/window/reinforced{
-	dir = 8;
-	health = 1e+006
+	dir = 8
 	},
 /obj/item/gun/energy/stunrevolver/rifle,
 /obj/item/gun/energy/taser/carbine,
@@ -19219,8 +19215,7 @@
 /obj/structure/table/rack,
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/structure/window/reinforced{
-	dir = 8;
-	health = 1e+006
+	dir = 8
 	},
 /obj/item/gun/energy/laser/secure,
 /obj/item/gun/energy/laser/secure,
@@ -19312,8 +19307,7 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/structure/window/reinforced,
 /obj/structure/window/reinforced{
-	dir = 8;
-	health = 1e+006
+	dir = 8
 	},
 /obj/item/gun/energy/ionrifle,
 /obj/item/gun/energy/ionrifle/small,
@@ -20086,8 +20080,7 @@
 	dir = 8
 	},
 /obj/structure/window/reinforced{
-	dir = 2;
-	health = 1e+007
+	dir = 2
 	},
 /obj/item/device/integrated_electronics/wirer,
 /obj/item/device/integrated_electronics/debugger{
@@ -20678,8 +20671,7 @@
 "jAb" = (
 /obj/structure/table/standard,
 /obj/structure/window/reinforced{
-	dir = 2;
-	health = 1e+007
+	dir = 2
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/rnd/misc_lab)
@@ -21219,8 +21211,7 @@
 "khb" = (
 /obj/structure/table/standard,
 /obj/structure/window/reinforced{
-	dir = 2;
-	health = 1e+007
+	dir = 2
 	},
 /obj/item/device/integrated_electronics/analyzer{
 	pixel_x = 6
@@ -21759,8 +21750,7 @@
 /obj/item/gun/energy/gun/secure,
 /obj/item/gun/energy/gun/secure,
 /obj/structure/window/reinforced{
-	dir = 8;
-	health = 1e+006
+	dir = 8
 	},
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/dark/monotile,
@@ -26734,8 +26724,7 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/structure/window/reinforced,
 /obj/structure/window/reinforced{
-	dir = 8;
-	health = 1e+006
+	dir = 8
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
@@ -28375,8 +28364,7 @@
 "sBg" = (
 /obj/structure/table/rack,
 /obj/structure/window/reinforced{
-	dir = 8;
-	health = 1e+006
+	dir = 8
 	},
 /obj/structure/window/reinforced,
 /obj/effect/floor_decal/industrial/outline/grey,
@@ -29597,8 +29585,7 @@
 /obj/machinery/light,
 /obj/structure/window/reinforced,
 /obj/structure/window/reinforced{
-	dir = 8;
-	health = 1e+006
+	dir = 8
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
@@ -30050,8 +30037,7 @@
 /obj/structure/table/rack,
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/structure/window/reinforced{
-	dir = 8;
-	health = 1e+006
+	dir = 8
 	},
 /obj/item/gun/energy/gun/secure,
 /obj/item/gun/energy/gun/secure,

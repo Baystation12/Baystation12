@@ -9468,8 +9468,7 @@
 "uC" = (
 /obj/machinery/computer/arcade,
 /obj/structure/window/reinforced{
-	dir = 8;
-	health = 1e+006
+	dir = 8
 	},
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 1;
@@ -18904,8 +18903,7 @@
 	icon_state = "console"
 	},
 /obj/structure/window/reinforced{
-	dir = 8;
-	health = 1e+006
+	dir = 8
 	},
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 1;
@@ -20592,8 +20590,7 @@
 	icon_state = "console"
 	},
 /obj/structure/window/reinforced{
-	dir = 8;
-	health = 1e+006
+	dir = 8
 	},
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 1;
