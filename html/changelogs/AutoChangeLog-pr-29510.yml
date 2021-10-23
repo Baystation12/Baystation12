@@ -1,0 +1,4 @@
+author: CrimsonShrike
+delete-after: true
+changes:
+  - rscadd: Added exosuit heat gauges. They report a variety of useful data.
