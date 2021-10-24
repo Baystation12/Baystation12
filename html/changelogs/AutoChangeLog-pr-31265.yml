@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - tweak: Emags will no longer break an already open locker when you try to put them
-      in the said locker.
