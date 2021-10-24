@@ -1,0 +1,6 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - tweak: 'Available languages for cyborgs have been updated with the following:
+      Borgs can now understand but not speak serpentid. Cyborgs can now speak and
+      understand skrellian, sinta, and yeosa.'
