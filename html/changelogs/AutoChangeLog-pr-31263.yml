@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Gun-to-mouth suicide logs now properly display the gun instead of just
+      saying `a <blank>`.
