@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - tweak: Inducers will no longer automatically restart inducing after charging an
+      item.
