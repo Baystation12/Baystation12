@@ -24,7 +24,6 @@
 	hatch_descriptor = "hatch"
 	pilot_coverage = 100
 	transparent_cabin = TRUE
-	hide_pilot = TRUE //Sprite too small, legs clip through, so for now hide pilot
 	exosuit_desc_string = "a spherical chassis"
 	icon_state = "pod_body"
 	max_damage = 70
@@ -35,16 +34,16 @@
 /obj/item/mech_component/chassis/pod/Initialize()
 	pilot_positions = list(
 		list(
-			"[NORTH]" = list("x" = 8,  "y" = 8),
-			"[SOUTH]" = list("x" = 8,  "y" = 8),
-			"[EAST]"  = list("x" = 8,  "y" = 8),
-			"[WEST]"  = list("x" = 8,  "y" = 8)
+			"[NORTH]" = list("x" = 8,  "y" = 4),
+			"[SOUTH]" = list("x" = 8,  "y" = 4),
+			"[EAST]"  = list("x" = 12,  "y" = 4),
+			"[WEST]"  = list("x" = 4,  "y" = 4)
 		),
 		list(
-			"[NORTH]" = list("x" = 8,  "y" = 16),
-			"[SOUTH]" = list("x" = 8,  "y" = 16),
-			"[EAST]"  = list("x" = 0,  "y" = 16),
-			"[WEST]"  = list("x" = 16, "y" = 16)
+			"[NORTH]" = list("x" = 8,  "y" = 8),
+			"[SOUTH]" = list("x" = 8,  "y" = 8),
+			"[EAST]"  = list("x" = 10,  "y" = 8),
+			"[WEST]"  = list("x" = 6, "y" = 8)
 		)
 	)
 	. = ..()
@@ -52,3 +51,14 @@
 /obj/item/mech_component/chassis/pod/prebuild()
 	. = ..()
 	m_armour = new /obj/item/robot_parts/robot_component/armour/exosuit/radproof(src)
+
+/obj/item/mech_component/chassis/pod/Initialize()
+	pilot_positions = list(
+		list(
+			"[NORTH]" = list("x" = 8,  "y" = 3),
+			"[SOUTH]" = list("x" = 8,  "y" = 2),
+			"[EAST]"  = list("x" = 4,  "y" = 3),
+			"[WEST]"  = list("x" = 12, "y" = 3)
+		)
+	)
+	. = ..()
