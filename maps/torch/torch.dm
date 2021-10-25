@@ -33,7 +33,6 @@
 	#include "datums/reports/corporate.dm"
 	#include "datums/reports/exploration.dm"
 	#include "datums/reports/medical.dm"
-	#include "datums/reports/robotics.dm"
 	#include "datums/reports/science.dm"
 	#include "datums/reports/security.dm"
 	#include "datums/reports/solgov.dm"

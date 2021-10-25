@@ -1,153 +1,225 @@
-
-
-/datum/computer_file/report/recipient/corp
-	logo = "\[logo\]"
-
 /datum/computer_file/report/recipient/corp/generate_fields()
 	..()
-	add_field(/datum/report_field/simple_text, "Vessel", GLOB.using_map.station_name)
-	add_field(/datum/report_field/date, "Date")
-	add_field(/datum/report_field/time, "Time")
-	add_field(/datum/report_field/simple_text, "Index")
+	set_access(list(list(access_heads, access_senadv, access_representative, access_cent_creed, access_liaison)))
 
-
-/datum/computer_file/report/recipient/corp/memo/generate_fields()
-	..()
-	add_field(/datum/report_field/simple_text, "Subject")
-	add_field(/datum/report_field/pencode_text, "Body")
-	add_field(/datum/report_field/signature, "Authorizing Signature")
-	add_field(/datum/report_field/options/yes_no, "Approved")
-
-/datum/computer_file/report/recipient/corp/memo/internal
-	form_name = "C-0003"
-	title = "Internal Memorandum"
+/datum/computer_file/report/recipient/corp/incident
+	form_name = "HR-NTCO-01"
+	title = "Рапорт об инциденте на корабле"
+	logo = "\[logo\]"
 	available_on_ntnet = TRUE
-
-/datum/computer_file/report/recipient/corp/memo/internal/New()
-	..()
-	set_access(access_nanotrasen, access_nanotrasen)
-
-/datum/computer_file/report/recipient/corp/memo/external
-	form_name = "C-0005"
-	title = "External Memorandum"
-	available_on_ntnet = TRUE
-
-/datum/computer_file/report/recipient/corp/memo/external/New()
-	..()
-	set_access(access_edit = access_nanotrasen)
-
-//No access restrictions for easier use.
-/datum/computer_file/report/recipient/corp/sales
-	form_name = "C-2192"
-	title = "Corporate Sales Contract and Receipt"
-	available_on_ntnet = TRUE
-
-/datum/computer_file/report/recipient/corp/sales/generate_fields()
-	..()
-	add_field(/datum/report_field/text_label/header, "Product Information")
-	add_field(/datum/report_field/simple_text, "Product Name")
-	add_field(/datum/report_field/simple_text, "Product Type")
-	add_field(/datum/report_field/number, "Product Unit Cost (T)")
-	add_field(/datum/report_field/number, "Product Units Requested")
-	add_field(/datum/report_field/number, "Total Cost (T)")
-	add_field(/datum/report_field/text_label/header, "Seller Information")
-	add_field(/datum/report_field/text_label/instruction, "The 'Purchaser' may not return any sold product units for re-compensation in [GLOB.using_map.local_currency_name], but may return the item for an identical item, or item of equal material (not [GLOB.using_map.local_currency_name_singular]) value. The 'Seller' agrees to make their best effort to repair, or replace any items that fail to accomplish their designed purpose, due to malfunction or manufacturing error - but not user-caused damage.")
-	add_field(/datum/report_field/people/from_manifest, "Name")
-	add_field(/datum/report_field/signature, "Signature")
-	add_field(/datum/report_field/options/yes_no, "Approved")
-
-/datum/computer_file/report/recipient/corp/payout
-	form_name = "C-3310"
-	title = "Next of Kin Payout Authorization"
-	available_on_ntnet = TRUE
-
-/datum/computer_file/report/recipient/corp/payout/generate_fields()
-	..()
-	add_field(/datum/report_field/people/from_manifest, "This document hereby authorizes the payout of the remaining salary of")
-	add_field(/datum/report_field/pencode_text, "As well as the net-worth of any remaining personal assets: (Asset, [GLOB.using_map.local_currency_name_singular] Amount)")
-	add_field(/datum/report_field/pencode_text, "Including personal effects")
-	add_field(/datum/report_field/text_label, "To be shipped and delivered directly to the employee's next of kin without delay.")
-	add_field(/datum/report_field/signature, "Signature")
-	add_field(/datum/report_field/options/yes_no, "Approved")
-	set_access(access_edit = access_nanotrasen)
-
-/datum/computer_file/report/recipient/corp/fire
-	form_name = "C-0102"
-	title = "Corporate Employment Termination Form"
-	available_on_ntnet = TRUE
-
-/datum/computer_file/report/recipient/corp/fire/New()
-	..()
-	set_access(access_heads, access_heads)
-	set_access(access_nanotrasen, override = 0)
-
-/datum/computer_file/report/recipient/corp/fire/generate_fields()
-	..()
-	add_field(/datum/report_field/text_label/header, "Notice of Termination of Employment")
-	add_field(/datum/report_field/people/from_manifest, "Name")
-	add_field(/datum/report_field/number, "Age")
-	add_field(/datum/report_field/simple_text, "Position")
-	add_field(/datum/report_field/pencode_text, "Reason for Termination")
-	add_field(/datum/report_field/signature, "Authorized by")
-	add_field(/datum/report_field/text_label/instruction, "Please attach employment records alongside notice of termination.")
-
-/datum/computer_file/report/recipient/corp/incident/New()
-	..()
-	set_access(access_edit = access_nanotrasen)
 
 /datum/computer_file/report/recipient/corp/incident/generate_fields()
 	..()
-	add_field(/datum/report_field/pencode_text, "Summary of Incident")
-	add_field(/datum/report_field/pencode_text, "Details of Incident")
+	add_field(/datum/report_field/simple_text, "Судно")
+	add_field(/datum/report_field/date, "Дата")
+	add_field(/datum/report_field/time, "Время")
+	add_field(/datum/report_field/simple_text, "Описание инцидента", required = 1)
+	add_field(/datum/report_field/pencode_text, "Детали инцидента", required = 1)
+	add_field(/datum/report_field/simple_text, "Вовлечённые отделы", required = 1)
+	add_field(/datum/report_field/signature, "Подпись", required = 1)
+	add_field(/datum/report_field/signature, "Подпись свидетеля")
 
-/datum/computer_file/report/recipient/corp/incident/proc/add_signatures()
-	add_field(/datum/report_field/signature, "Signature")
-	add_field(/datum/report_field/signature, "Witness Signature")
-	add_field(/datum/report_field/options/yes_no, "Approved")
-
-/datum/computer_file/report/recipient/corp/incident/ship
-	form_name = "C-3203"
-	title = "Corporate Ship Incident Report"
+/datum/computer_file/report/recipient/corp/incident_corpstaff
+	form_name = "HR-NTCO-01a"
+	title = "Рапорт об инциденте с корпоративными сотрудниками"
+	logo = "\[logo\]"
 	available_on_ntnet = TRUE
 
-/datum/computer_file/report/recipient/corp/incident/ship/generate_fields()
+/datum/computer_file/report/recipient/corp/incident_corpstaff/generate_fields()
 	..()
-	add_field(/datum/report_field/pencode_text, "Departments Involved")
-	add_signatures()
+	add_field(/datum/report_field/simple_text, "Судно")
+	add_field(/datum/report_field/date, "Дата")
+	add_field(/datum/report_field/time, "Время")
+	add_field(/datum/report_field/simple_text, "Описание инцидента", required = 1)
+	add_field(/datum/report_field/people/list_from_manifest, "Вовлечённый сотрудник(и) (Полное имя, должность)", required = 1)
+	add_field(/datum/report_field/pencode_text, "Детали инцидента", required = 1)
+	add_field(/datum/report_field/signature, "Подпись", required = 1)
+	add_field(/datum/report_field/signature, "Подпись свидетеля")
+	set_access(access_liaison, access_liaison)
+
+/datum/computer_file/report/recipient/corp/incident_corpassets
+	form_name = "HR-NTCO-01b"
+	title = "Рапорт об инциденте с корпоративным активами"
+	logo = "\[logo\]"
+	available_on_ntnet = TRUE
+
+/datum/computer_file/report/recipient/corp/incident_corpassets/generate_fields()
+	..()
+	add_field(/datum/report_field/simple_text, "Судно")
+	add_field(/datum/report_field/date, "Дата")
+	add_field(/datum/report_field/time, "Время")
+	add_field(/datum/report_field/simple_text, "Описание инцидента", required = 1)
+	add_field(/datum/report_field/pencode_text, "Детали инцидента", required = 1)
+	add_field(/datum/report_field/people/list_from_manifest, "Раненые корпоративные сотрудники")
+	add_field(/datum/report_field/pencode_text, "Описание ранений")
+	add_field(/datum/report_field/pencode_text, "Потерянные корпоративные активы (Актив, стоимость в таллерах)")
+	add_field(/datum/report_field/signature, "Подпись", required = 1)
+	add_field(/datum/report_field/signature, "Подпись свидетеля")
+	set_access(access_liaison, access_liaison)
+
+/datum/computer_file/report/recipient/corp/incident_xenostaff
+	form_name = "HR-NTCO-01b"
+	title = "Рапорт об инциденте с сотрудником-ксеносом, имеющим рабочую визу"
+	logo = "\[logo\]"
+	available_on_ntnet = TRUE
+
+/datum/computer_file/report/recipient/corp/incident_xenostaff/generate_fields()
+	..()
+	add_field(/datum/report_field/text_label/instruction, "Если сотрудник-ксенос не имеет рабочую визу, то используйте форму HR-NTCO-01c-A")
+	add_field(/datum/report_field/simple_text, "Судно")
+	add_field(/datum/report_field/date, "Дата")
+	add_field(/datum/report_field/time, "Время")
+	add_field(/datum/report_field/simple_text, "Описание инцидента", required = 1)
+	add_field(/datum/report_field/people/list_from_manifest, "Вовлечённый сотрудник(и)-ксенос(ы) (Полное имя, должность)", required = 1)
+	add_field(/datum/report_field/pencode_text, "Детали инцидента", required = 1)
+	add_field(/datum/report_field/signature, "Подпись", required = 1)
+	add_field(/datum/report_field/signature, "Подпись свидетеля")
+
+/datum/computer_file/report/recipient/corp/incident_xenostaffnovisa
+	form_name = "HR-NTCO-01c-A"
+	title = "Рапорт об инциденте с сотрудником-ксеносом, не имеющим рабочую визу"
+	logo = "\[logo\]"
+	available_on_ntnet = TRUE
+
+/datum/computer_file/report/recipient/corp/incident_xenostaffnovisa/generate_fields()
+	..()
+	add_field(/datum/report_field/simple_text, "Судно")
+	add_field(/datum/report_field/date, "Дата")
+	add_field(/datum/report_field/time, "Время")
+	add_field(/datum/report_field/simple_text, "Описание инцидента", required = 1)
+	add_field(/datum/report_field/people/list_from_manifest, "Вовлечённый сотрудник(и)-ксенос(ы) (Полное имя, должность)", required = 1)
+	add_field(/datum/report_field/pencode_text, "Детали инцидента", required = 1)
+	add_field(/datum/report_field/signature, "Подпись", required = 1)
+	add_field(/datum/report_field/signature, "Подпись свидетеля")
+
+/datum/computer_file/report/recipient/corp/incident_synthstaff
+	form_name = "HR-EXO-01d"
+	title = "Рапорт об инцидентах с сотрудниками-синтетиками"
+	logo = "\[logo\]"
+	available_on_ntnet = TRUE
+
+/datum/computer_file/report/recipient/corp/incident_synthstaff/generate_fields()
+	..()
+	add_field(/datum/report_field/simple_text, "Судно")
+	add_field(/datum/report_field/date, "Дата")
+	add_field(/datum/report_field/time, "Время")
+	add_field(/datum/report_field/simple_text, "Описание инцидента", required = 1)
+	add_field(/datum/report_field/people/list_from_manifest, "Сотрудники-синтетики замешанные в инциденте", required = 1)
+	add_field(/datum/report_field/pencode_text, "Детали инцидента", required = 1)
+	add_field(/datum/report_field/signature, "Подпись", required = 1)
+	add_field(/datum/report_field/signature, "Подпись свидетеля")
+
+/datum/computer_file/report/recipient/corp/incident_corpcrew
+	form_name = "HR-NTCO-01e"
+	title = "Рапорт об инциденте с корпоративным персоналом и экипажем корабля"
+	logo = "\[logo\]"
+	available_on_ntnet = TRUE
+
+/datum/computer_file/report/recipient/corp/incident_corpcrew/generate_fields()
+	..()
+	add_field(/datum/report_field/text_label/instruction, "Для инцидентов в которые вовлечены как корпоративный персонал, так и экипаж корабля")
+	add_field(/datum/report_field/simple_text, "Судно")
+	add_field(/datum/report_field/date, "Дата")
+	add_field(/datum/report_field/time, "Время")
+	add_field(/datum/report_field/simple_text, "Описание инцидента", required = 1)
+	add_field(/datum/report_field/people/list_from_manifest, "Вовлечённый член(ы) экипажа (Полное имя, звание, должность)", required = 1)
+	add_field(/datum/report_field/people/list_from_manifest, "Вовлечённый сотрудник(и) (Полное имя, должность)", required = 1)
+	add_field(/datum/report_field/pencode_text, "Детали инцидента", required = 1)
+	add_field(/datum/report_field/signature, "Подпись", required = 1)
+	add_field(/datum/report_field/signature, "Подпись свидетеля")
 
 /datum/computer_file/report/recipient/corp/volunteer
-	form_name = "C-1443"
-	title = "Corporate Test Subject Volunteer Form"
+	form_name = "HR-NTCO-02b"
+	title = "Запрос добровольца для исследований"
+	logo = "\[logo\]"
 	available_on_ntnet = TRUE
 
 /datum/computer_file/report/recipient/corp/volunteer/generate_fields()
 	..()
 	var/list/temp_fields = list()
-	add_field(/datum/report_field/people/from_manifest, "Name of Volunteer")
-	add_field(/datum/report_field/simple_text, "Intended Procedure(s)")
-	add_field(/datum/report_field/simple_text, "Compensation for Volunteer: (if any)")
-	add_field(/datum/report_field/people/list_from_manifest, "Handling Researcher(s)")
-	add_field(/datum/report_field/text_label/instruction, "By signing, the \"Volunteer\" agrees to absolve the Corporation, and its employees, of any liability or responsibility for injuries, damages, property loss or side-effects that may result from the intended procedure. If signed by an authorized representative, this form is deemed reviewed, but is only approved if so marked.")
-	add_field(/datum/report_field/signature, "Volunteer's Signature:")
-	temp_fields += add_field(/datum/report_field/signature, "Corporate Representative's Signature")
-	temp_fields += add_field(/datum/report_field/options/yes_no, "Approved")
+	add_field(/datum/report_field/people/from_manifest, "Полное имя добровольца", required = 1)
+	add_field(/datum/report_field/simple_text, "Предполагаемая процедура(ы)", required = 1)
+	add_field(/datum/report_field/simple_text, "Компенсация для добровольца(если есть)")
+	add_field(/datum/report_field/people/list_from_manifest, "Ответственный(ые) за исследования", required = 1)
+	add_field(/datum/report_field/text_label/instruction, "Подписывая, \"Доброволец\" соглашается освободить Организацию Экспедиционного корпуса, включая корпорации-партнеры, и её сотрудников от любой ответственности или ответственности за травмы, ущерб, потерю имущества или побочные эффекты, которые могут возникнуть в результате предполагаемой процедуры. Если документ подписан уполномоченным представителем ЭКСО, таким как Корпоративный Представитель - то этот документ считается просмотренным, но документ становится действительным только в том случае, если она заверен печатью.")
+	add_field(/datum/report_field/signature, "Подпись добровольца", required = 1)
+	temp_fields += add_field(/datum/report_field/signature, "Подпись Корпоративного Представителя", required = 1)
+	temp_fields += add_field(/datum/report_field/options/yes_no, "Одобрено")
+	set_access(access_liaison, access_liaison)
 	for(var/datum/report_field/temp_field in temp_fields)
-		temp_field.set_access(access_edit = access_nanotrasen)
+		temp_field.set_access(access_edit = access_liaison)
 
 /datum/computer_file/report/recipient/corp/deny
-	form_name = "C-1443D"
-	title = "Rejection of Test Subject Volunteer Notice"
+	form_name = "HR-NTCO-02b-A"
+	title = "Отказ от добровольца для исследований"
+	logo = "\[logo\]"
 	available_on_ntnet = TRUE
 
 /datum/computer_file/report/recipient/corp/deny/generate_fields()
 	..()
-	add_field(/datum/report_field/text_label, "Dear Sir/Madam, we regret to inform you that your volunteer application for service as a test subject with the Corporation has been rejected. We thank you for your interest in our company and the progression of research. Attached, you will find a copy of your original volunteer form for your records. Regards,")
-	add_field(/datum/report_field/signature, "Corporate Representative's Signature")
-	add_field(/datum/report_field/people/from_manifest, "Name of Volunteer")
-	add_field(/datum/report_field/text_label/header, "Reason for Rejection")
-	add_field(/datum/report_field/options/yes_no, "Physically Unfit")
-	add_field(/datum/report_field/options/yes_no, "Mentally Unfit")
-	add_field(/datum/report_field/options/yes_no, "Project Cancellation")
-	add_field(/datum/report_field/simple_text, "Other")
-	add_field(/datum/report_field/options/yes_no, "Report Approved")
-	set_access(access_edit = access_nanotrasen)
+	add_field(/datum/report_field/text_label, "Мы с сожалением сообщаем вам, что ваша добровольческая заявка на службу в качестве испытуемого в Организации Экспедиционного корпуса была отклонена. \
+	Мы благодарим вас за ваш интерес к развитию исследований. В приложении вы найдете копию вашей оригинальной формы для ваших записей. С уважением,")
+	add_field(/datum/report_field/signature, "Подпись Корпоративного Представителя", required = 1)
+	add_field(/datum/report_field/people/from_manifest, "Полное имя добровольца", required = 1)
+	add_field(/datum/report_field/text_label/header, "Причина для отказа")
+	add_field(/datum/report_field/options/yes_no, "Физически непригоден")
+	add_field(/datum/report_field/options/yes_no, "Психически непригоден")
+	add_field(/datum/report_field/options/yes_no, "Отмена проекта")
+	add_field(/datum/report_field/simple_text, "Другое")
+	add_field(/datum/report_field/options/yes_no, "Одобрено")
+	set_access(access_liaison, access_liaison)
+
+/datum/computer_file/report/recipient/corp/fire
+	form_name = "C-0102"
+	title = "Увольнение корпоративного сотрудника"
+	logo = "\[logo\]"
+	available_on_ntnet = TRUE
+
+/datum/computer_file/report/recipient/corp/fire/generate_fields()
+	..()
+	add_field(/datum/report_field/text_label/header, "Уведомление об увольнении сотрудника")
+	add_field(/datum/report_field/people/from_manifest, "Полное имя", required = 1)
+	add_field(/datum/report_field/number, "Возраст", required = 1)
+	add_field(/datum/report_field/simple_text, "Должность", required = 1)
+	add_field(/datum/report_field/pencode_text, "Причина увольнения", required = 1)
+	add_field(/datum/report_field/date, "Дата заполнения")
+	add_field(/datum/report_field/time, "Время заполнения")
+	add_field(/datum/report_field/signature, "Авторизовано", required = 1)
+	add_field(/datum/report_field/text_label/instruction, "Прикрепите личное дело к данному уведомлению.")
+	set_access(access_liaison, access_liaison)
+
+/datum/computer_file/report/recipient/corp/payout
+	form_name = "C-3310"
+	title = "Выплата оставшегося оклада погибшему сотруднику"
+	logo = "\[logo\]"
+	available_on_ntnet = TRUE
+
+/datum/computer_file/report/recipient/corp/payout/generate_fields()
+	..()
+	add_field(/datum/report_field/people/from_manifest, "Данный документ разрешает выплату оставшегося оклада")
+	add_field(/datum/report_field/pencode_text, "Помимо полной выплаты оставшихся личных активов: (Актив, [GLOB.using_map.local_currency_name_singular] Стоимость)")
+	add_field(/datum/report_field/pencode_text, "Включая личные вещи")
+	add_field(/datum/report_field/text_label, "Должно быть немедленно отправлено ближайшему родственнику сотрудника.")
+	add_field(/datum/report_field/signature, "Подпись", required = 1)
+	add_field(/datum/report_field/options/yes_no, "Одобрено")
+
+//No access restrictions for easier use.
+/datum/computer_file/report/recipient/sales
+	form_name = "C-2192"
+	title = "Корпоративный договор купли-продажи и Квитанция"
+
+	available_on_ntnet = TRUE
+
+/datum/computer_file/report/recipient/corp/sales/generate_fields()
+	..()
+	add_field(/datum/report_field/text_label/header, "Информация о продукте")
+	add_field(/datum/report_field/simple_text, "Наименование продукта", required = 1)
+	add_field(/datum/report_field/simple_text, "Тип продукта", required = 1)
+	add_field(/datum/report_field/number, "Стоимость единицы продукции (В таллерах)", required = 1)
+	add_field(/datum/report_field/number, "Кол-во запрошенных единиц продукции", required = 1)
+	add_field(/datum/report_field/number, "Итоговая цена(T)", required = 1)
+	add_field(/datum/report_field/text_label/header, "Информация о продавце")
+	add_field(/datum/report_field/text_label/instruction, "\"Покупатель\" может не возвращать какие-либо проданные единицы продукции для повторной компенсации в [GLOB.using_map.local_currency_name], но может вернуть товар за идентичный товар или товар из равного материала (не [GLOB.using_map.local_currency_name_singular]). \"Продавец\" соглашается приложить все усилия для ремонта или замены любых предметов, которые не соответствуют своему назначению из-за неисправности или производственной ошибки, но не из-за ущерба, причиненного пользователем.")
+	add_field(/datum/report_field/simple_text, "Полное имя продавца", required = 1)
+	add_field(/datum/report_field/signature, "Подпись", required = 1)
+	add_field(/datum/report_field/options/yes_no, "Одобрено")
