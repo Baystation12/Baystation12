@@ -29,17 +29,18 @@
 	title = "[GLOB.using_map.boss_name] Update"
 	announcement_type = "[GLOB.using_map.boss_name] Update"
 
-/datum/announcement/proc/Announce(var/message as text, var/new_title = "", var/new_sound = null, var/do_newscast = newscast, var/msg_sanitized = 0, var/zlevels = GLOB.using_map.contact_levels)
+/datum/announcement/proc/Announce(var/message as text, var/new_title = "", var/new_sound = null, var/do_newscast = newscast, var/msg_sanitized = 0, var/list/zlevels = GLOB.using_map.contact_levels, var/radio_mode = GLOB.using_map.use_radio_announcement)
 	if(!message)
 		return
 	var/message_title = new_title ? new_title : title
 	var/message_sound = new_sound ? new_sound : sound
+	var/zlevel = LAZYLEN(zlevels) ? pick(zlevels) : 1
 
 	if(!msg_sanitized)
 		message = sanitize(message, extra = 0)
-	message_title = sanitizeSafe(message_title)
+	message_title = sanitize(message_title)
 
-	var/msg = FormMessage(message, message_title)
+	var/msg = radio_mode ? FormRadioMessage(message, message_title, zlevel) : FormMessage(message, message_title)
 	for(var/mob/M in GLOB.player_list)
 		if((get_z(M) in (zlevels | GLOB.using_map.admin_levels)) && !istype(M,/mob/new_player) && !isdeaf(M))
 			to_chat(M, msg)
@@ -112,7 +113,7 @@ datum/announcement/proc/NewsCast(message as text, message_title as text, zlevels
 	if(character.mind.role_alt_title)
 		rank = character.mind.role_alt_title
 
-	AnnounceArrivalSimple(character.real_name, rank, join_message, get_announcement_frequency(job))
+	AnnounceArrivalSimple(character.real_name, rank, join_message, GET_ANNOUNCEMENT_FREQ(job))
 
 /proc/AnnounceArrivalSimple(var/name, var/rank = "visitor", var/join_message = "has arrived on the [station_name()]", var/frequency)
 	GLOB.global_announcer.autosay("[name], [rank], [join_message].", "Arrivals Announcement Computer", frequency)
@@ -142,3 +143,19 @@ datum/announcement/proc/NewsCast(message as text, message_title as text, zlevels
 	if(job.department_flag & EXP)
 		return "Exploration"
 	return "Common"
+
+/////// ANNOUNCEMENT PROCS VIA RADIO ///////
+/datum/announcement/proc/FormRadioMessage(message as text, message_title as text, zlevel)
+	GLOB.global_announcer.autosay("<b><font size=3><span class='warning'>[title]:</span> [message]</font></b>", announcer ? announcer : ANNOUNCE_NAME,, zlevel)
+
+/datum/announcement/minor/FormRadioMessage(message as text, message_title as text, zlevel)
+	GLOB.global_announcer.autosay(message, ANNOUNCE_NAME,, zlevel)
+
+/datum/announcement/priority/FormRadioMessage(message as text, message_title as text, zlevel)
+	GLOB.global_announcer.autosay("<b><font size=3><span class='warning'>[message_title]:</span> [message]</font></b>", announcer ? announcer : ANNOUNCE_NAME,, zlevel)
+
+/datum/announcement/priority/command/FormRadioMessage(message as text, message_title as text, zlevel)
+	GLOB.global_announcer.autosay("<b><font size=3><span class='warning'>[GLOB.using_map.boss_name] Update[message_title ? " — [message_title]" : ""]:</span> [message]</font></b>", ANNOUNCE_NAME,, zlevel)
+
+/datum/announcement/priority/security/FormRadioMessage(message as text, message_title as text, zlevel)
+	GLOB.global_announcer.autosay("<b><font size=3><span class='warning'>[message_title]:</span> [message]</font></b>", ANNOUNCE_NAME,, zlevel)

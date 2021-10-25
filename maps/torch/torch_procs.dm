@@ -73,3 +73,12 @@
 		desc += "There were <b>no survivors</b>, <b>[offship_players] off-ship players</b>, (<b>[ghosts] ghosts</b>)."
 
 	return desc
+
+/datum/map/proc/toggle_crew_sensors(var/new_mode = 0, var/force = FALSE)
+	if(ntnet_global && ntnet_global.check_function(NTNET_SYSTEMCONTROL))	// No network - no remote control
+		var/tracked = crew_repository.scan()
+		for(var/obj/item/clothing/under/suit in tracked)
+			var/turf/pos = get_turf(suit)
+			if(pos && (pos.z in GLOB.using_map.map_levels))
+				if(force || (suit.sensor_mode < new_mode))
+					suit.sensor_mode = new_mode
