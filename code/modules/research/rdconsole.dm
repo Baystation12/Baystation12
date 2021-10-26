@@ -490,6 +490,10 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		for(var/t in linked_destroy.loaded_item.matter)
 			if(t in linked_lathe.materials)
 				linked_lathe.materials[t] += min(linked_lathe.max_material_storage - linked_lathe.TotalMaterials(), linked_destroy.loaded_item.matter[t] * linked_destroy.decon_mod)
+		for (var/obj/I in linked_destroy.loaded_item.contents)
+			for (var/matter in I.matter)
+				if (matter in linked_lathe.materials)
+					linked_lathe.materials[matter] += min(linked_lathe.max_material_storage - linked_lathe.TotalMaterials(), I.matter[matter] * linked_destroy.decon_mod)
 
 	linked_destroy.loaded_item = null
 	for(var/obj/I in linked_destroy.contents)
