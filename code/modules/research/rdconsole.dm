@@ -874,6 +874,10 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			for(var/datum/design/D in files.known_designs)
 				if(!D.build_path || !(D.build_type & IMPRINTER))
 					continue
+
+				if (imprinter_search != "" && !findtext(D.name, imprinter_search))
+					continue
+
 				var/temp_dat
 				for(var/M in D.materials)
 					temp_dat += ", [D.materials[M]*linked_imprinter.mat_efficiency] [CallMaterialName(M)]"
@@ -901,7 +905,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 					for (var/T in origin_tech)
 						for (var/datum/tech/F in files.known_tech)
 							if (F.name == CallTechName(T))
-								if (F.level <= D.req_tech[T] )
+								if (F.level <= origin_tech[T] )
 									dat += FONT_COLORED(COLOR_GREEN, " [F.name] = [origin_tech[T]] ")
 								else
 									dat += " [F.name] = [origin_tech[T]] "
