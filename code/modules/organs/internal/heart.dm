@@ -181,6 +181,8 @@
 			owner.Stun(1)
 			owner.eye_blurry = 2
 
+			playsound(owner, 'sound/effects/gore/blood_splat.ogg', 100, 0, -2) // from infinity
+
 			//AB occurs every heartbeat, this only throttles the visible effect
 			next_blood_squirt = world.time + 80
 			var/turf/sprayloc = get_turf(owner)

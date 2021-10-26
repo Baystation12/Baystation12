@@ -7,7 +7,7 @@
 	if(!speaking)
 		speaking = parse_language(message)
 		if (speaking)
-			message = copytext_char(message,2+length_char(speaking.key))
+			message = copytext(message, 2+length(speaking.key))
 		else
 			speaking = get_any_good_language(set_default=TRUE)
 			if (!speaking)
@@ -46,7 +46,7 @@
 			var/temp = winget(client, "input", "text")
 			if(findtextEx(temp, "Say \"", 1, 7) && length(temp) > 5)	//case sensitive means
 				var/main_key = get_prefix_key(/decl/prefix/radio_main_channel)
-				temp = replacetext_char(temp, main_key, "")	//general radio
+				temp = replacetext(temp, main_key, "")	//general radio
 
 				var/channel_key = get_prefix_key(/decl/prefix/radio_channel_selection)
 				if(findtext(trim_left(temp), channel_key, 6, 7))	//dept radio
@@ -124,8 +124,7 @@
 			var/obj/item/voice_changer/changer = locate() in gear
 			if(changer && changer.active && changer.voice)
 				voice_sub = changer.voice
-	if(fake_name)
-		return fake_name
+
 	if(voice_sub)
 		return voice_sub
 	if(mind && mind.changeling && mind.changeling.mimicing)
@@ -133,17 +132,16 @@
 	return real_name
 
 /mob/living/carbon/human/say_quote(var/message, var/datum/language/speaking = null)
-	var/verb = "says"
-	var/ending = copytext(message, -1)
+	var/verb = "говорит" //INF, WAS var/verb = "says"
+	var/ending = copytext(message, length(message))
 
 	if(speaking)
 		verb = speaking.get_spoken_verb(ending)
 	else
 		if(ending == "!")
-			verb=pick("exclaims","shouts","yells")
+			verb = pick("восклицает","выкрикивает") //INF, WAS verb=pick("exclaims","shouts","yells")
 		else if(ending == "?")
-			verb="asks"
-
+			verb = "спрашивает" //INF, WAS verb="asks
 	return verb
 
 /mob/living/carbon/human/handle_speech_problems(var/list/message_data)
@@ -216,6 +214,8 @@
 					used_radios += r_ear
 
 /mob/living/carbon/human/handle_speech_sound()
+	if(species.name == SPECIES_HUMAN) // infinity. needed for gender check
+		species.speech_sounds = GLOB.human_clearing_throat[gender]
 	if(species.speech_sounds && prob(species.speech_chance))
 		var/list/returns[2]
 		returns[1] = sound(pick(species.speech_sounds))
@@ -232,12 +232,12 @@
 	. = ..()
 
 /mob/living/carbon/human/parse_language(var/message)
-	var/prefix = copytext_char(message,1,2)
+	var/prefix = copytext(message,1,2)
 	if(length(message) >= 1 && prefix == get_prefix_key(/decl/prefix/audible_emote))
 		return all_languages["Noise"]
 
 	if(length(message) >= 2 && is_language_prefix(prefix))
-		var/language_prefix = lowertext(copytext_char(message, 2 ,3))
+		var/language_prefix = lowertext(copytext(message, 2 ,3))
 		var/datum/language/L = language_keys[language_prefix]
 		if (can_speak(L))
 			return L

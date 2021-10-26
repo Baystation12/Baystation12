@@ -54,6 +54,13 @@ GLOBAL_LIST_INIT(button_sound,list('sound/machines/button1.ogg','sound/machines/
 GLOBAL_LIST_INIT(chop_sound,list('sound/weapons/chop1.ogg','sound/weapons/chop2.ogg','sound/weapons/chop3.ogg'))
 GLOBAL_LIST_INIT(glasscrack_sound,list('sound/effects/glass_crack1.ogg','sound/effects/glass_crack2.ogg','sound/effects/glass_crack3.ogg','sound/effects/glass_crack4.ogg'))
 GLOBAL_LIST_INIT(tray_hit_sound,list('sound/items/trayhit1.ogg', 'sound/items/trayhit2.ogg'))
+GLOBAL_LIST_INIT(smash_sound,list('sound/effects/gore/smash1.ogg','sound/effects/gore/smash2.ogg','sound/effects/gore/smash3.ogg','sound/effects/gore/trauma1.ogg')) //begin sounds from infinity
+GLOBAL_LIST_INIT(light_strike_sound,list('sound/effects/hit_kick.ogg','sound/effects/hit_punch.ogg'))
+GLOBAL_LIST_INIT(gun_sound, list('sound/weapons/gunshot.ogg','sound/weapons/gunshot2.ogg','sound/weapons/gunshot3.ogg','sound/weapons/gunshot4.ogg'))
+GLOBAL_LIST_INIT(human_clearing_throat, list(FEMALE = 'sound/voice/emotes/clearing-throat-f.ogg', MALE = 'sound/voice/emotes/clearing-throat-m.ogg'))
+GLOBAL_LIST_INIT(machinery_exposed_sound, list('sound/machines/Custom_screwdriveropen.ogg','sound/machines/Custom_screwdriverclose.ogg'))
+GLOBAL_LIST_INIT(trauma_sound, list('sound/effects/gore/trauma1.ogg','sound/effects/gore/trauma2.ogg','sound/effects/gore/trauma3.ogg')) // end sounds from infinity
+
 
 /proc/playsound(var/atom/source, soundin, vol as num, vary, extrarange as num, falloff, var/is_global, var/frequency, var/is_ambiance = 0)
 
@@ -94,7 +101,7 @@ var/const/FALLOFF_SOUNDS = 0.5
 
 	//sound volume falloff with pressure
 	var/pressure_factor = 1.0
-	
+
 	S.volume *= get_sound_volume_multiplier()
 
 	var/turf/T = get_turf(src)
@@ -190,9 +197,14 @@ var/const/FALLOFF_SOUNDS = 0.5
 			if ("button") soundin = pick(GLOB.button_sound)
 			if ("chop") soundin = pick(GLOB.chop_sound)
 			if ("glasscrack") soundin = pick(GLOB.glasscrack_sound)
+//[INF]
+			if ("smash") soundin = pick(GLOB.smash_sound)
+			if ("light_strike") soundin = pick(GLOB.light_strike_sound)
+			if ("gunshot") soundin = pick(GLOB.gun_sound)
+//[/INF]
 			if ("tray_hit") soundin = pick(GLOB.tray_hit_sound)
 	return soundin
-	
+
 /client/verb/stop_sounds()
 	set name = "Stop All Sounds"
 	set desc = "Stop all sounds that are currently playing on your client."

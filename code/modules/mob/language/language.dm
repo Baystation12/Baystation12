@@ -7,11 +7,12 @@
 /datum/language
 	var/name = "base language"  // Fluff name of language if any.
 	var/desc = "You should not have this language." // Short description for 'Check Languages'.
-	var/speech_verb = "says"          // 'says', 'hisses', 'farts'.
-	var/ask_verb = "asks"             // Used when sentence ends in a ?
-	var/exclaim_verb = "exclaims"     // Used when sentence ends in a !
+	var/speech_verb = "говорит"          // 'says', 'hisses', 'farts'.
+	var/ask_verb = "спрашивает"             // Used when sentence ends in a ?
+	var/exclaim_verb = "восклицает"     // Used when sentence ends in a !
+	var/screem_verb = "кричит"
 	var/whisper_verb                  // Optional. When not specified speech_verb + quietly/softly is used instead.
-	var/signlang_verb = list("signs", "gestures") // list of emotes that might be displayed if this language has NONVERBAL or SIGNLANG flags
+	var/signlang_verb = list("жестикулирует") // list of emotes that might be displayed if this language has NONVERBAL or SIGNLANG flags
 	var/colour = "body"               // CSS style to use for strings in this language.
 	var/key = ""                     // Character used to speak in language eg. :o for Unathi.
 	var/flags = 0                     // Various language flags.
@@ -65,7 +66,7 @@
 	var/new_sentence = 0
 	for(var/w in words)
 		var/nword = "[w] "
-		var/input_ending = copytext(w, -1)
+		var/input_ending = copytext(w, length(w))
 		var/ends_sentence = findtext(".?!",input_ending)
 		if(!prob(understand_chance))
 			nword = scramble_word(w)
@@ -131,7 +132,7 @@
 
 /datum/language/proc/get_talkinto_msg_range(message)
 	// if you yell, you'll be heard from two tiles over instead of one
-	return (copytext(message, -1) == "!") ? 2 : 1
+	return (copytext(message, length(message)) == "!") ? 2 : 1
 
 /datum/language/proc/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
 	log_say("[key_name(speaker)] : ([name]) [message]")
@@ -165,6 +166,8 @@
 			return exclaim_verb
 		if("?")
 			return ask_verb
+		if("!!")
+			return screem_verb
 	return speech_verb
 
 /datum/language/proc/can_speak_special(var/mob/speaker)
@@ -172,12 +175,10 @@
 
 // Language handling.
 /mob/proc/add_language(var/language)
-
 	var/datum/language/new_language = all_languages[language]
 
 	if(!istype(new_language) || (new_language in languages))
 		return 0
-
 	languages.Add(new_language)
 	return 1
 

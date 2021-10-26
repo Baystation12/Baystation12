@@ -26,6 +26,7 @@
 	var/pose //Yes, now AIs can pose too.
 	var/obj/item/device/camera/siliconcam/silicon_camera = null //photography
 	var/local_transmit //If set, can only speak to others of the same type within a short range.
+	var/speech_sounds //inf
 
 	var/sensor_mode = 0 //Determines the current HUD.
 

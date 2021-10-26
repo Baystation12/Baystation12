@@ -2,11 +2,11 @@
 	return (stat == CONSCIOUS)
 
 /mob/living/can_emote(var/emote_type)
-	return (..() && !(silent && emote_type == AUDIBLE_MESSAGE))
+	return (..() && !(silent && emote_type == AUDIBLE_MESSAGE) && emoteCooldownCheck())
 
 /mob/proc/emote(var/act, var/m_type, var/message)
 	// s-s-snowflake
-	if((src.stat == DEAD || status_flags & FAKEDEATH) && act != "deathgasp")
+	if(src.stat == DEAD && act != "deathgasp")
 		return
 	if(usr == src) //client-called emote
 		if (client && (client.prefs.muted & MUTE_IC))
@@ -72,6 +72,7 @@
 	if(!message || !emoter)
 		return
 
+	message = replacetext(message, "&#255;", "__:Я:_") // Никому же в голову не придет такое написать? (2) ~bear1ake@inf-dev
 	message = html_decode(message)
 
 	name_anchor = findtext(message, anchor_char)
@@ -113,7 +114,9 @@
 	subtext = html_encode(subtext)
 	// Store the player's name in a nice bold, naturalement
 	nametext = "<B>[emoter]</B>"
-	return pretext + nametext + subtext
+	var/overall = pretext + nametext + subtext
+	overall = replacetext(overall, "__:Я:_", "&#255;")
+	return overall
 
 /mob/proc/custom_emote(var/m_type = VISIBLE_MESSAGE, var/message = null)
 

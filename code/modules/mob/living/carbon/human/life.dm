@@ -68,7 +68,9 @@
 	if(stat != DEAD && !InStasis())
 		//Updates the number of stored chemicals for powers
 		handle_changeling()
-
+//[INF]
+		if(status_flags & FAKEDEATH) return //act like a dead mob - even if its broken by itself...
+//[/INF]
 		//Organs and blood
 		handle_organs()
 		stabilize_body_temperature() //Body temperature adjusts itself (self-regulation)
@@ -144,6 +146,7 @@
 	var/pressure_adjustment_coefficient = 0
 	var/list/zones = list(HEAD, UPPER_TORSO, LOWER_TORSO, LEGS, FEET, ARMS, HANDS)
 	for(var/zone in zones)
+		if(zone >= 8) break //INF. Accessories on under in sealed suit cause runtimes
 		var/list/covers = get_covering_equipped_items(zone)
 		var/zone_exposure = 1
 		for(var/obj/item/clothing/C in covers)
@@ -408,7 +411,9 @@
 			burn_dam = COLD_DAMAGE_LEVEL_2
 		else
 			burn_dam = COLD_DAMAGE_LEVEL_3
-		SetStasis(getCryogenicFactor(bodytemperature), STASIS_COLD)
+
+		if(!istype(loc, /obj/machinery/atmospherics/unary/cryo_cell)) //INF
+			SetStasis(getCryogenicFactor(bodytemperature), STASIS_COLD)
 		if(!chem_effects[CE_CRYO])
 			take_overall_damage(burn=burn_dam, used_weapon = "Low Body Temperature")
 			fire_alert = max(fire_alert, 1)
@@ -601,9 +606,7 @@
 			handle_hallucinations()
 
 		if(get_shock() >= species.total_health)
-			if(stat || status_flags & FAKEDEATH)
-				return
-			else
+			if(!stat)
 				to_chat(src, "<span class='warning'>[species.halloss_message_self]</span>")
 				src.visible_message("<B>[src]</B> [species.halloss_message]")
 			Paralyse(10)
@@ -885,17 +888,16 @@
 		to_chat(src,"<span class='notice'>You feel like you're [pick("moving","flying","floating","falling","hovering")].</span>")
 
 /mob/living/carbon/human/proc/handle_changeling()
+
 	if(mind && mind.changeling)
 		mind.changeling.regenerate()
+
 
 /mob/living/carbon/human/proc/handle_shock()
 	if(status_flags & GODMODE)	return 0	//godmode
 	if(!can_feel_pain())
 		shock_stage = 0
 		return
-	if(status_flags & FAKEDEATH)
-		return
-
 
 	if(is_asystole())
 		shock_stage = max(shock_stage + 1, 61)
@@ -925,8 +927,11 @@
 			eye_blurry = max(2, eye_blurry)
 			stuttering = max(stuttering, 5)
 
-	if(shock_stage == 40)
-		custom_pain("[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!", 40, nohalloss = TRUE)
+	if(shock_stage >= 40) //INF, WAS if(shock_stage == 40)
+		if(prob(5)) //INF
+			custom_pain("[pick("The pain is excruciating", "Please, just end the pain", "Your whole body is going numb")]!", 40, nohalloss = TRUE)
+			src.agony_moan() //INF, WAS emote("moan")
+
 	if (shock_stage >= 60)
 		if(shock_stage == 60) visible_message("<b>[src]</b>'s body becomes limp.")
 		if (prob(2))
@@ -960,7 +965,7 @@
 /mob/living/carbon/human/proc/handle_hud_list()
 	if (BITTEST(hud_updateflag, HEALTH_HUD) && hud_list[HEALTH_HUD])
 		var/image/holder = hud_list[HEALTH_HUD]
-		if(stat == DEAD || status_flags & FAKEDEATH)
+		if(stat == DEAD)
 			holder.icon_state = "0" 	// X_X
 		else if(is_asystole())
 			holder.icon_state = "flatline"
@@ -970,7 +975,7 @@
 
 	if (BITTEST(hud_updateflag, LIFE_HUD) && hud_list[LIFE_HUD])
 		var/image/holder = hud_list[LIFE_HUD]
-		if(stat == DEAD || status_flags & FAKEDEATH)
+		if(stat == DEAD)
 			holder.icon_state = "huddead"
 		else
 			holder.icon_state = "hudhealthy"
@@ -978,7 +983,7 @@
 
 	if (BITTEST(hud_updateflag, STATUS_HUD) && hud_list[STATUS_HUD] && hud_list[STATUS_HUD_OOC])
 		var/image/holder = hud_list[STATUS_HUD]
-		if(stat == DEAD || status_flags & FAKEDEATH)
+		if(stat == DEAD)
 			holder.icon_state = "huddead"
 
 		else if(has_brain_worms())
@@ -1007,9 +1012,14 @@
 		if(wear_id)
 			var/obj/item/card/id/I = wear_id.GetIdCard()
 			if(I)
-				var/datum/job/J = SSjobs.get_by_title(I.GetJobName())
-				if(J)
-					holder.icon_state = J.hud_icon
+				//[INF]		There is no job "Centcom"
+				if(I.GetJobName() == "Centcom")
+					holder.icon_state = "hudcentcom"
+				else
+				//[/INF]
+					var/datum/job/J = SSjobs.get_by_title(I.GetJobName())
+					if(J)
+						holder.icon_state = J.hud_icon
 
 		hud_list[ID_HUD] = holder
 
@@ -1135,7 +1145,7 @@
 			reset_view(null)
 	else
 		var/isRemoteObserve = 0
-		if(z_eye && client?.eye == z_eye && !is_physically_disabled())
+		if(z_eye && client.eye == z_eye && !is_physically_disabled())
 			isRemoteObserve = 1
 		else if((mRemote in mutations) && remoteview_target)
 			if(remoteview_target.stat == CONSCIOUS)

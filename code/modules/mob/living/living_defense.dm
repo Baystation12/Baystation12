@@ -198,7 +198,7 @@
 	embedded += O
 	verbs += /mob/proc/yank_out_object
 
-//This is called when the mob is thrown into a dense turf
+//This is called when the mob is thrown into a dense turf //from infinity
 /mob/living/proc/turf_collision(var/turf/T, var/speed)
 	visible_message(SPAN_DANGER("[src] slams into \the [T]"))
 	playsound(T, 'sound/effects/bangtaper.ogg', 50, 1, 1)//so it plays sounds on the turf instead, makes for awesome carps to hull collision and such

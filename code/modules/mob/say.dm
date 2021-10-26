@@ -53,22 +53,24 @@
 
 	//Language check.
 	for(var/datum/language/L in src.languages)
-		if(speaking.name == L.name)
+		if(speaking.name == L.name && !(L.flags & BAD_SPEAKER)) //INF
 			return 1
 
 	return 0
 
 /mob/proc/say_quote(var/message, var/datum/language/speaking = null)
-	var/ending = copytext(message, -1)
+	var/ending = copytext(message, length(message) - 1)
 	if(speaking)
 		return speaking.get_spoken_verb(ending)
 
 	var/verb = pick(speak_emote)
-	if(verb == "says") //a little bit of a hack, but we can't let speak_emote default to an empty list without breaking other things
-		if(ending == "!")
-			verb = pick("exclaims","shouts","yells")
-		else if(ending == "?")
-			verb ="asks"
+	if(verb == "говорит") //a little bit of a hack, but we can't let speak_emote default to an empty list without breaking other things
+		if(ending == "!!")
+			verb = "кричит"
+		else if(copytext(ending, length(ending)) == "!")
+			verb = pick("восклицает")
+		else if(copytext(ending, length(ending)) == "?")
+			verb = "спрашивает"
 	return verb
 
 /mob/proc/get_ear()
@@ -80,7 +82,7 @@
 	return get_turf(src)
 
 /mob/proc/say_test(var/text)
-	var/ending = copytext(text, -1)
+	var/ending = copytext(text, length(text))
 	if (ending == "?")
 		return "1"
 	else if (ending == "!")

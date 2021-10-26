@@ -7,7 +7,7 @@
 	min_broken_damage = 30
 	dir = SOUTH
 	organ_tag = "limb"
-	appearance_flags = DEFAULT_APPEARANCE_FLAGS | PIXEL_SCALE
+	appearance_flags = PIXEL_SCALE | LONG_GLIDE
 
 	var/slowdown = 0
 
@@ -61,7 +61,7 @@
 	var/amputation_point               // Descriptive string used in amputation.
 	var/dislocated = 0                 // If you target a joint, you can dislocate the limb, causing temporary damage to the organ.
 	var/encased                        // Needs to be opened with a saw to access the organs.
-	var/artery_name = "artery"         // Flavour text for carotid artery, aorta, etc.
+	var/artery_name = "artery"         // Flavour text for cartoid artery, aorta, etc.
 	var/arterial_bleed_severity = 1    // Multiplier for bleeding in a limb.
 	var/tendon_name = "tendon"         // Flavour text for Achilles tendon, etc.
 	var/cavity_name = "cavity"
@@ -162,10 +162,10 @@
 			burn_damage = 15
 		if (3)
 			burn_damage = 7.5
-
+/*[INF]
 	var/mult = 1 + !!(BP_IS_ASSISTED(src)) // This macro returns (large) bitflags.
 	burn_damage *= mult/species.get_burn_mod(owner) //ignore burn mod for EMP damage
-
+[/INF]*/
 	var/power = 4 - severity //stupid reverse severity
 	for(var/obj/item/I in implants)
 		if(I.obj_flags & OBJ_FLAG_CONDUCTIBLE)
@@ -895,11 +895,24 @@ Note that amputating the affected organ does in fact remove the infection from t
 				if(src && istype(loc,/turf))
 					throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),30)
 				dir = 2
+			// infinity code start
+			if(!clean)
+				playsound(victim, pick('sound/effects/gore/chop2.ogg', 'sound/effects/gore/chop3.ogg', 'sound/effects/gore/chop4.ogg'), 100, 0)
+			else
+				playsound(victim, 'sound/effects/gore/severed.ogg', 100, 0)
+
+			if(victim.can_feel_pain() && prob(50))
+				victim.agony_scream()
+			// infinity code end
 		if(DROPLIMB_BURN)
 			new /obj/effect/decal/cleanable/ash(get_turf(victim))
 			for(var/obj/item/I in src)
 				if(I.w_class > ITEM_SIZE_SMALL && !istype(I,/obj/item/organ))
 					I.dropInto(loc)
+
+			if(victim.can_feel_pain() && prob(50)) // inf-dev
+				victim.agony_scream()
+
 			qdel(src)
 		if(DROPLIMB_BLUNT)
 			var/obj/gore
@@ -914,7 +927,12 @@ Note that amputating the affected organ does in fact remove the infection from t
 					G.fleshcolor = use_flesh_colour
 					G.basecolor =  use_blood_colour
 					G.update_icon()
+				// infinity code start
+				playsound(victim, 'sound/effects/gore/chop6.ogg', 100 , 0)//Splat.
 
+				if(victim.can_feel_pain() && prob(50))
+					victim.agony_scream()
+				// infinity code end
 			gore.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),30)
 
 			for(var/obj/item/organ/I in internal_organs)
@@ -1038,9 +1056,11 @@ obj/item/organ/external/proc/remove_clamps()
 			"<span class='danger'>You hear a sickening crack.</span>")
 		jostle_bone()
 		if(can_feel_pain())
-			owner.emote("scream")
+		//INF	owner.emote("scream")
+			owner.agony_scream() //INF
 
-	playsound(src.loc, "fracture", 100, 1, -2)
+	playsound(src.loc, pick(GLOB.trauma_sound), 100, 1, -2) //INF
+//	playsound(src.loc, "fracture", 100, 1, -2)
 	status |= ORGAN_BROKEN
 	broken_description = pick("broken","fracture","hairline fracture")
 
@@ -1195,6 +1215,10 @@ obj/item/organ/external/proc/remove_clamps()
 			owner.drop_from_inventory(owner.gloves)
 		if(HEAD)
 			owner.drop_from_inventory(owner.glasses)
+			if(istype(owner.wear_suit,/obj/item/clothing/suit/space/void))
+				var/obj/item/clothing/suit/space/void/S = owner.wear_suit
+				S.helmet = null
+			owner.head?.canremove = 1
 			owner.drop_from_inventory(owner.head)
 			owner.drop_from_inventory(owner.l_ear)
 			owner.drop_from_inventory(owner.r_ear)

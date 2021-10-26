@@ -132,20 +132,20 @@ proc/get_radio_key_from_channel(var/channel)
 
 	if((MUTATION_HULK in mutations) && health >= 25 && length(message))
 		message = "[uppertext(message)]!!!"
-		verb = pick("yells","roars","hollers")
+		verb = pick("кричит","вопит") //INF, WAS verb = pick("yells","roars","hollers")
 		message_data[3] = 0
 		. = 1
 	else if(slurring)
 		message = slur(message)
-		verb = pick("slobbers","slurs")
+		verb = "заплетается" //INF, WAS verb = pick("slobbers","slurs")
 		. = 1
 	else if(stuttering)
 		message = NewStutter(message)
-		verb = pick("stammers","stutters")
+		verb = pick("бормочет","заикается") //INF, WAS verb = pick("stammers","stutters")
 		. = 1
 	else if(has_chem_effect(CE_SQUEAKY, 1))
 		message = "<font face = 'Comic Sans MS'>[message]</font>"
-		verb = "squeaks"
+		verb = "скрипит"  //INF, WAS verb = "squeaks"
 		. = 1
 
 	message_data[1] = message
@@ -166,9 +166,9 @@ proc/get_radio_key_from_channel(var/channel)
 
 /mob/living/proc/get_speech_ending(verb, var/ending)
 	if(ending=="!")
-		return pick("exclaims","shouts","yells")
+		return pick("восклицает","выкрикивает") //INF, WAS return pick("exclaims","shouts","yells")
 	if(ending=="?")
-		return "asks"
+		return "спрашивает" //INF, WAS return "asks"
 	return verb
 
 /mob/living/proc/format_say_message(var/message = null)
@@ -177,11 +177,12 @@ proc/get_radio_key_from_channel(var/channel)
 
 	message = html_decode(message)
 
-	var/end_char = copytext_char(message, -1)
+	var/end_char = copytext_char(message, length_char(message), length_char(message) + 1) // INF Localiztion
 	if(!(end_char in list(".", "?", "!", "-", "~", ":")))
 		message += "."
 
-	return html_encode(message)
+	message = html_encode(message)
+	return message
 
 /mob/living/say(var/message, var/datum/language/speaking = null, var/verb="says", var/alt_name="", whispering)
 	if(client)
@@ -212,9 +213,9 @@ proc/get_radio_key_from_channel(var/channel)
 	var/message_mode = parse_message_mode(message, "headset")
 	if (message_mode)
 		if (message_mode == "headset")
-			message = copytext_char(message, 2)	//it would be really nice if the parse procs could do this for us.
+			message = copytext_char(message,2)	//it would be really nice if the parse procs could do this for us.
 		else
-			message = copytext_char(message, 3)
+			message = copytext_char(message,3)
 
 	message = trim_left(message)
 
@@ -233,6 +234,8 @@ proc/get_radio_key_from_channel(var/channel)
 			verb = speaking.whisper_verb ? speaking.whisper_verb : speaking.speech_verb
 		else
 			verb = say_quote(message, speaking)
+			if(verb == "кричит")
+				message = copytext_char(message, 1, length(message))
 
 	message = trim_left(message)
 	message = handle_autohiss(message, speaking)
