@@ -1,5 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - tweak: IPCs are now mechanically restricted from bridge officer, deck chief, senior
-      engineer, senior researcher, and warden, matching current lore restrictions.

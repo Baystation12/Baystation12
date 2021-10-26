@@ -1,5 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - bugfix: Fixed antlions not being hostile, not using burrow ability.
-  - bugfix: Fixed the voxslug not being hostile and not using its 'attach' ability.
