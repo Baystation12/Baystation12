@@ -5,7 +5,7 @@
 
 /datum/computer_file/report/recipient/sol/generate_fields()
 	..()
-	set_access(access_representative)
+	set_access(list(list(access_heads, access_senadv, access_representative, access_cent_creed, access_liaison)))
 
 /datum/computer_file/report/recipient/sol/audit
 	form_name = "SCG-REP-12"
@@ -21,7 +21,6 @@
 	add_field(/datum/report_field/pencode_text, "Другие заметки")
 	add_field(/datum/report_field/signature, "Подпись", required = 1)
 	add_field(/datum/report_field/options/yes_no, "Одобрено")
-	set_access(list(list(access_heads, access_liaison)), list(list(access_heads, access_liaison)))
 	..()
 
 /datum/computer_file/report/recipient/sol/crewman_incident
@@ -37,7 +36,6 @@
 	add_field(/datum/report_field/pencode_text, "Детали инцидента", required = 1)
 	add_field(/datum/report_field/signature, "Подпись", required = 1)
 	add_field(/datum/report_field/options/yes_no, "Одобрено")
-	set_access(list(list(access_heads, access_representative, access_senadv, access_cent_creed)), list(list(access_heads, access_representative, access_senadv, access_cent_creed)), override = 0)
 	..()
 
 /datum/computer_file/report/recipient/sol/work_visa
@@ -55,4 +53,5 @@
 	add_field(/datum/report_field/signature, "Подпись получателя", required = 1)
 	add_field(/datum/report_field/options/yes_no, "Одобрено")
 	temp_field.set_access(access_edit = access_representative)
+	set_access(access_representative, access_representative)
 	..()

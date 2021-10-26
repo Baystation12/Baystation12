@@ -26,7 +26,6 @@
 	add_field(/datum/report_field/signature, "Подпись лечащего врача")
 
 /datum/computer_file/report/recipient/medical/insanity_resolution
-	logo = "\[sierralogo\]"
 	form_name = "SCG-MED-02"
 	title = "Постановление о невменяемости"
 	available_on_ntnet = 1

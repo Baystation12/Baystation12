@@ -5,7 +5,7 @@
 /datum/computer_file/report/recipient/corp/incident
 	form_name = "HR-NTCO-01"
 	title = "Рапорт об инциденте на корабле"
-	logo = "\[logo\]"
+	logo = "\[logo\] \[solcrest\]"
 	available_on_ntnet = TRUE
 
 /datum/computer_file/report/recipient/corp/incident/generate_fields()
@@ -60,7 +60,7 @@
 /datum/computer_file/report/recipient/corp/incident_xenostaff
 	form_name = "HR-NTCO-01b"
 	title = "Рапорт об инциденте с сотрудником-ксеносом, имеющим рабочую визу"
-	logo = "\[logo\]"
+	logo = "\[logo\] \[solcrest\]"
 	available_on_ntnet = TRUE
 
 /datum/computer_file/report/recipient/corp/incident_xenostaff/generate_fields()
@@ -78,7 +78,7 @@
 /datum/computer_file/report/recipient/corp/incident_xenostaffnovisa
 	form_name = "HR-NTCO-01c-A"
 	title = "Рапорт об инциденте с сотрудником-ксеносом, не имеющим рабочую визу"
-	logo = "\[logo\]"
+	logo = "\[logo\] \[solcrest\]"
 	available_on_ntnet = TRUE
 
 /datum/computer_file/report/recipient/corp/incident_xenostaffnovisa/generate_fields()
@@ -95,7 +95,7 @@
 /datum/computer_file/report/recipient/corp/incident_synthstaff
 	form_name = "HR-EXO-01d"
 	title = "Рапорт об инцидентах с сотрудниками-синтетиками"
-	logo = "\[logo\]"
+	logo = "\[logo\] \[solcrest\]"
 	available_on_ntnet = TRUE
 
 /datum/computer_file/report/recipient/corp/incident_synthstaff/generate_fields()
@@ -112,7 +112,7 @@
 /datum/computer_file/report/recipient/corp/incident_corpcrew
 	form_name = "HR-NTCO-01e"
 	title = "Рапорт об инциденте с корпоративным персоналом и экипажем корабля"
-	logo = "\[logo\]"
+	logo = "\[logo\] \[solcrest\]"
 	available_on_ntnet = TRUE
 
 /datum/computer_file/report/recipient/corp/incident_corpcrew/generate_fields()
