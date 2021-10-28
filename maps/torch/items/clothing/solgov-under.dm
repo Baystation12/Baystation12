@@ -264,6 +264,30 @@
 	item_state = "johnny"
 	worn_state = "tanutility"
 
+/obj/item/clothing/under/solgov/utility/army/tan/command
+	accessories = list(/obj/item/clothing/accessory/solgov/department/command/army)
+
+/obj/item/clothing/under/solgov/utility/army/tan/engineering
+	accessories = list(/obj/item/clothing/accessory/solgov/department/engineering/army)
+
+/obj/item/clothing/under/solgov/utility/army/tan/security
+	accessories = list(/obj/item/clothing/accessory/solgov/department/security/army)
+
+/obj/item/clothing/under/solgov/utility/army/tan/medical
+	accessories = list(/obj/item/clothing/accessory/solgov/department/medical/army)
+
+/obj/item/clothing/under/solgov/utility/army/tan/medical/banded
+	accessories = list(/obj/item/clothing/accessory/solgov/department/medical/army, /obj/item/clothing/accessory/armband/medblue)
+
+/obj/item/clothing/under/solgov/utility/army/tan/supply
+	accessories = list(/obj/item/clothing/accessory/solgov/department/supply/army)
+
+/obj/item/clothing/under/solgov/utility/army/tan/service
+	accessories = list(/obj/item/clothing/accessory/solgov/department/service/army)
+
+/obj/item/clothing/under/solgov/utility/army/tan/exploration
+	accessories = list(/obj/item/clothing/accessory/solgov/department/exploration/army)
+
 //Service
 
 /obj/item/clothing/under/solgov/service

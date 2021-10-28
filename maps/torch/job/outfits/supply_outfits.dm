@@ -19,6 +19,11 @@
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/supply
 	shoes = /obj/item/clothing/shoes/dutyboots
 
+/decl/hierarchy/outfit/job/torch/crew/supply/deckofficer/army
+	name = OUTFIT_JOB_NAME("Deck Chief - Army")
+	uniform = /obj/item/clothing/under/solgov/utility/army/supply
+	shoes = /obj/item/clothing/shoes/dutyboots
+
 /decl/hierarchy/outfit/job/torch/crew/supply/tech
 	name = OUTFIT_JOB_NAME("Deck Technician")
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/supply
@@ -29,6 +34,11 @@
 /decl/hierarchy/outfit/job/torch/crew/supply/tech/fleet
 	name = OUTFIT_JOB_NAME("Deck Technician - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/supply
+	shoes = /obj/item/clothing/shoes/dutyboots
+
+/decl/hierarchy/outfit/job/torch/crew/supply/tech/army
+	name = OUTFIT_JOB_NAME("Deck Technician - Army")
+	uniform = /obj/item/clothing/under/solgov/utility/army/supply
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/crew/supply/contractor

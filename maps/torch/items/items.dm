@@ -17,6 +17,7 @@ Random item spawning
 				/obj/item/clothing/under/solgov/utility = 5,
 				/obj/item/clothing/under/solgov/utility/fleet = 3,
 				/obj/item/clothing/under/solgov/pt/expeditionary = 4,
+				/obj/item/clothing/under/solgov/pt/army = 4,
 				/obj/item/clothing/under/solgov/pt/fleet = 4
 				)
 

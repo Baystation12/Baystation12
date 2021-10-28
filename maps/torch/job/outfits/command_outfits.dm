@@ -24,7 +24,7 @@
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_types = list(/obj/item/card/id/torch/silver)
 	pda_type = /obj/item/modular_computer/pda/heads/hop
-	
+
 /decl/hierarchy/outfit/job/torch/crew/command/XO/New()
 	..()
 	BACKPACK_OVERRIDE_COMMAND
@@ -52,6 +52,11 @@
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/medical
 	shoes = /obj/item/clothing/shoes/dutyboots
 
+/decl/hierarchy/outfit/job/torch/crew/command/cmo/army
+	name = OUTFIT_JOB_NAME("Chief Medical Officer - Army")
+	uniform = /obj/item/clothing/under/solgov/utility/army/medical
+	shoes = /obj/item/clothing/shoes/dutyboots
+
 /decl/hierarchy/outfit/job/torch/crew/command/chief_engineer
 	name = OUTFIT_JOB_NAME("Chief Engineer - Torch")
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/engineering
@@ -71,6 +76,11 @@
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/engineering
 	shoes = /obj/item/clothing/shoes/dutyboots
 
+/decl/hierarchy/outfit/job/torch/crew/command/chief_engineer/army
+	name = OUTFIT_JOB_NAME("Chief Engineer - Army")
+	uniform = /obj/item/clothing/under/solgov/utility/army/engineering
+	shoes = /obj/item/clothing/shoes/dutyboots
+
 /decl/hierarchy/outfit/job/torch/crew/command/cos
 	name = OUTFIT_JOB_NAME("Chief of Security")
 	l_ear = /obj/item/device/radio/headset/heads/cos
@@ -86,6 +96,11 @@
 /decl/hierarchy/outfit/job/torch/crew/command/cos/fleet
 	name = OUTFIT_JOB_NAME("Chief of Security - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/security
+	shoes = /obj/item/clothing/shoes/dutyboots
+
+/decl/hierarchy/outfit/job/torch/crew/command/cos/army
+	name = OUTFIT_JOB_NAME("Chief of Security - Army")
+	uniform = /obj/item/clothing/under/solgov/utility/army/security
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/passenger/workplace_liaison
@@ -125,4 +140,9 @@
 /decl/hierarchy/outfit/job/torch/crew/command/bridgeofficer/fleet
 	name = OUTFIT_JOB_NAME("Bridge Officer - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/command
+	shoes = /obj/item/clothing/shoes/dutyboots
+
+/decl/hierarchy/outfit/job/torch/crew/command/bridgeofficer/army
+	name = OUTFIT_JOB_NAME("Bridge Officer - Army")
+	uniform = /obj/item/clothing/under/solgov/utility/army/command
 	shoes = /obj/item/clothing/shoes/dutyboots

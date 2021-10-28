@@ -31,6 +31,7 @@
 \[xynlogo\] - Inserts the Xyngergy logo.<br>
 \[iccgseal\] - Inserts ICCG seal.<br>
 \[fleetlogo\] - Inserts the logo of the SCG Fleet.<br>
+\[armylogo\] - Inserts the logo of the SCG Army.<br>
 \[sfplogo\] - Inserts the logo of the Sol Federal Police.<br><br>
 <b>Digital exclusive commands (NanoWord, emails, reports, text files, etc):</b><br>
 \[pre\] - \[/pre\] : Adds preformatted text, forcing the text to be fixed width.<br>

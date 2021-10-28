@@ -11,7 +11,7 @@
 	accessible_z_levels = list("1"=1,"2"=3,"3"=1,"4"=1,"5"=1,"6"=1,"9"=30)
 	overmap_size = 35
 	overmap_event_areas = 34
-	usable_email_tlds = list("torch.ec.scg", "torch.fleet.mil", "freemail.net", "torch.scg")
+	usable_email_tlds = list("torch.ec.scg", "torch.fleet.mil", "army.mil", "freemail.net", "torch.scg")
 
 	allowed_spawns = list("Cryogenic Storage", "Cyborg Storage")
 	default_spawn = "Cryogenic Storage"
@@ -33,6 +33,7 @@
 		"SFP Special Investigations",
 		"SFP Fugitive Recovery",
 		"Sol Fleet Mars Commmand",
+		"Sol Army Commmand",
 		"Bureau of Diplomatic Affairs",
 		"Emergency Management Bureau",
 		"Secure Routing Service"

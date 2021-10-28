@@ -19,6 +19,11 @@
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/medical
 	shoes = /obj/item/clothing/shoes/dutyboots
 
+/decl/hierarchy/outfit/job/torch/crew/medical/senior/army
+	name = OUTFIT_JOB_NAME("Physician - Army")
+	uniform = /obj/item/clothing/under/solgov/utility/army/medical
+	shoes = /obj/item/clothing/shoes/dutyboots
+
 /decl/hierarchy/outfit/job/torch/crew/medical/contractor/senior
 	name = OUTFIT_JOB_NAME("Physician - Contractor")
 	id_types = list(/obj/item/card/id/torch/contractor/medical/senior)
@@ -32,6 +37,11 @@
 /decl/hierarchy/outfit/job/torch/crew/medical/junior/fleet
 	name = OUTFIT_JOB_NAME("Medical Resident - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/medical
+	shoes = /obj/item/clothing/shoes/dutyboots
+
+/decl/hierarchy/outfit/job/torch/crew/medical/junior/army
+	name = OUTFIT_JOB_NAME("Medical Resident - Army")
+	uniform = /obj/item/clothing/under/solgov/utility/army/medical
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/crew/medical/contractor/junior
@@ -48,6 +58,12 @@
 /decl/hierarchy/outfit/job/torch/crew/medical/doctor/fleet
 	name = OUTFIT_JOB_NAME("Medical Technician - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/medical
+	shoes = /obj/item/clothing/shoes/dutyboots
+	l_ear = /obj/item/device/radio/headset/headset_corpsman
+
+/decl/hierarchy/outfit/job/torch/crew/medical/doctor/army
+	name = OUTFIT_JOB_NAME("Medical Technician - Army")
+	uniform = /obj/item/clothing/under/solgov/utility/army/medical
 	shoes = /obj/item/clothing/shoes/dutyboots
 	l_ear = /obj/item/device/radio/headset/headset_corpsman
 

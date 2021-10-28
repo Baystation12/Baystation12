@@ -19,6 +19,11 @@
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/security
 	shoes = /obj/item/clothing/shoes/dutyboots
 
+/decl/hierarchy/outfit/job/torch/crew/security/brig_chief/army
+	name = OUTFIT_JOB_NAME("Brig Chief - Army")
+	uniform = /obj/item/clothing/under/solgov/utility/army/security
+	shoes = /obj/item/clothing/shoes/dutyboots
+
 /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech
 	name = OUTFIT_JOB_NAME("Forensic Technician - Torch")
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/security
@@ -53,4 +58,9 @@
 /decl/hierarchy/outfit/job/torch/crew/security/maa/fleet
 	name = OUTFIT_JOB_NAME("Master at Arms - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/security
+	shoes = /obj/item/clothing/shoes/dutyboots
+
+/decl/hierarchy/outfit/job/torch/crew/security/maa/army
+	name = OUTFIT_JOB_NAME("Master at Arms - Army")
+	uniform = /obj/item/clothing/under/solgov/utility/army/security
 	shoes = /obj/item/clothing/shoes/dutyboots

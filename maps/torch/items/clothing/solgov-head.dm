@@ -219,6 +219,43 @@
 	desc = "A green beret with a silver emblem, denoting service in the Bureau of Border Security. For border guards who are more inclined towards style than safety."
 	icon_state = "beret_greensilver"
 
+/obj/item/clothing/head/beret/solgov/army
+	name = "army beret"
+	desc = "A green beret belonging to the SCG Army. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_green"
+	icon = 'maps/torch/icons/obj/obj_head_solgov.dmi'
+	item_icons = list(slot_head_str = 'maps/torch/icons/mob/onmob_head_solgov.dmi')
+
+/obj/item/clothing/head/beret/solgov/army/airborne
+	name = "airborne army beret"
+	desc = "An SCG Army beret carrying insignia of the Airborne Division. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_army_airborne"
+
+/obj/item/clothing/head/beret/solgov/army/infantry
+	name = "infantry army beret"
+	desc = "An SCG Army beret carrying insignia of the Infanty Division. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_army_infantry"
+
+/obj/item/clothing/head/beret/solgov/army/logistical_supply
+	name = "logistical supply army beret"
+	desc = "An SCG Army beret carrying insignia of the Logistical Support Division. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_army_logistical supply"
+
+/obj/item/clothing/head/beret/solgov/army/engisapper
+	name = "engineering-sapper army beret"
+	desc = "An SCG Army beret carrying insignia of the Engineering-Sapper Division. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_army_engisapper"
+
+/obj/item/clothing/head/beret/solgov/army/command
+	name = "command army beret"
+	desc = "An SCG Army beret with a golden crest. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_army_command"
+
+/obj/item/clothing/head/beret/solgov/army/medical
+	name = "medical army beret"
+	desc = "An SCG Army beret with a red crest. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_army_medical"
+
 /obj/item/clothing/head/beret/solgov/expedition
 	name = "expeditionary beret"
 	desc = "A black beret belonging to the SCG Expeditionary Corps. For personnel that are more inclined towards style than safety."

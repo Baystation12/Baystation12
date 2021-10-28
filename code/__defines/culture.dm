@@ -18,6 +18,7 @@
 #define FACTION_HEPHAESTUS     "Hephaestus Industries"
 #define FACTION_XYNERGY        "Xynergy"
 #define FACTION_FLEET          "SCG Fleet"
+#define FACTION_ARMY           "SCG Army"
 #define FACTION_EXPEDITIONARY  "Expeditionary Corps"
 #define FACTION_PCRC           "Proxima Centauri Risk Control"
 #define FACTION_SAARE          "Strategic Assault and Asset Retention Enterprises"

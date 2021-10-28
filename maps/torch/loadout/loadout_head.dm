@@ -17,6 +17,24 @@
 	berets["border security beret"] = /obj/item/clothing/head/beret/solgov/borderguard
 	gear_tweaks += new/datum/gear_tweak/path(berets)
 
+/datum/gear/head/armyberet
+	display_name = "Army beret selection"
+	description = "A beret denoting service in one of the branches within the SCG Army."
+	path = /obj/item/clothing/head/beret/solgov/army
+	allowed_branches = list(/datum/mil_branch/army)
+
+/datum/gear/head/armyberet/New()
+	..()
+	var/berets = list()
+	berets["army beret"] = /obj/item/clothing/head/beret/solgov/army
+	berets["airborne army beret"] = /obj/item/clothing/head/beret/solgov/army/airborne
+	berets["infantry army beret"] = /obj/item/clothing/head/beret/solgov/army/infantry
+	berets["logistical supply army beret"] = /obj/item/clothing/head/beret/solgov/army/logistical_supply
+	berets["engineering-sapper army beret"] = /obj/item/clothing/head/beret/solgov/army/engisapper
+	berets["command army beret"] = /obj/item/clothing/head/beret/solgov/army/command
+	berets["medical army beret"] = /obj/item/clothing/head/beret/solgov/army/medical
+	gear_tweaks += new/datum/gear_tweak/path(berets)
+
 /datum/gear/head/veteranhat
 	display_name = "veteran hat"
 	path = /obj/item/clothing/head/soft/solgov/veteranhat

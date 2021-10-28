@@ -24,6 +24,13 @@
 	Bachelor degree and go through a lengthy training process before being assigned to a warship. \
 	Recently Sol-made IPCs were also permitted to enlist, provided they agree to install a law shackle."
 
+/decl/cultural_info/faction/scg/army
+	name = FACTION_ARMY
+	description = "The Sol Central Government Army is the SCG's main land force. The Army is responsible for handling any ground conflicts and many peacekeeping missions that the SCG may be engaged in. \
+	Smaller than the Fleet, with only a partial full time component, much of the Army is composed of reservists and, in times of large scale war, \
+	is authorized to draft and integrate the regular Planetary Defence Forces (PDFs) in order to be able to scale up their military as-required. \
+	While not as famous or as glamorous as the Fleet the Army is never the less a respected part of the military, though one which is often looked down on by the Fleet because of their reliance on reservists."
+
 /decl/cultural_info/faction/torchco
 	name = FACTION_CORPORATE
 	description = "The Expeditionary Corps Organisation is a government-owned, publically traded limited liability company assembled from the corporate \

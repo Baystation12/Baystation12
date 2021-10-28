@@ -20,6 +20,11 @@
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/engineering
 	shoes = /obj/item/clothing/shoes/dutyboots
 
+/decl/hierarchy/outfit/job/torch/crew/engineering/senior_engineer/army
+	name = OUTFIT_JOB_NAME("Senior Engineer - Army")
+	uniform = /obj/item/clothing/under/solgov/utility/army/engineering
+	shoes = /obj/item/clothing/shoes/dutyboots
+
 /decl/hierarchy/outfit/job/torch/crew/engineering/engineer
 	name = OUTFIT_JOB_NAME("Engineer - Torch")
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/engineering
@@ -30,6 +35,11 @@
 /decl/hierarchy/outfit/job/torch/crew/engineering/engineer/fleet
 	name = OUTFIT_JOB_NAME("Engineer - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/engineering
+	shoes = /obj/item/clothing/shoes/dutyboots
+
+/decl/hierarchy/outfit/job/torch/crew/engineering/engineer/army
+	name = OUTFIT_JOB_NAME("Engineer - Army")
+	uniform = /obj/item/clothing/under/solgov/utility/army/engineering
 	shoes = /obj/item/clothing/shoes/dutyboots
 
 /decl/hierarchy/outfit/job/torch/crew/engineering/contractor
@@ -56,6 +66,13 @@
 /decl/hierarchy/outfit/job/torch/crew/engineering/roboticistfleet
 	name = OUTFIT_JOB_NAME("Roboticist - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/engineering
+	id_types = list(/obj/item/card/id/torch/contractor/engineering/roboticist)
+	shoes = /obj/item/clothing/shoes/dutyboots
+	pda_type = /obj/item/modular_computer/pda/roboticist
+
+/decl/hierarchy/outfit/job/torch/crew/engineering/roboticistarmy
+	name = OUTFIT_JOB_NAME("Roboticist - Army")
+	uniform = /obj/item/clothing/under/solgov/utility/army/engineering
 	id_types = list(/obj/item/card/id/torch/contractor/engineering/roboticist)
 	shoes = /obj/item/clothing/shoes/dutyboots
 	pda_type = /obj/item/modular_computer/pda/roboticist
