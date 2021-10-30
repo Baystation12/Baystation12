@@ -12,6 +12,7 @@
 	collection_mode = 1
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = 100
+	origin_tech = list(TECH_ENGINEERING = 4, TECH_MATERIAL = 3)
 
 /obj/item/research
 	name = "research debugging device"
