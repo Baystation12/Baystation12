@@ -490,6 +490,10 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		for(var/t in linked_destroy.loaded_item.matter)
 			if(t in linked_lathe.materials)
 				linked_lathe.materials[t] += min(linked_lathe.max_material_storage - linked_lathe.TotalMaterials(), linked_destroy.loaded_item.matter[t] * linked_destroy.decon_mod)
+		for (var/obj/I in linked_destroy.loaded_item.contents)
+			for (var/matter in I.matter)
+				if (matter in linked_lathe.materials)
+					linked_lathe.materials[matter] += min(linked_lathe.max_material_storage - linked_lathe.TotalMaterials(), I.matter[matter] * linked_destroy.decon_mod)
 
 	linked_destroy.loaded_item = null
 	for(var/obj/I in linked_destroy.contents)
@@ -874,6 +878,10 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			for(var/datum/design/D in files.known_designs)
 				if(!D.build_path || !(D.build_type & IMPRINTER))
 					continue
+
+				if (imprinter_search != "" && !findtext(D.name, imprinter_search))
+					continue
+
 				var/temp_dat
 				for(var/M in D.materials)
 					temp_dat += ", [D.materials[M]*linked_imprinter.mat_efficiency] [CallMaterialName(M)]"
@@ -901,7 +909,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 					for (var/T in origin_tech)
 						for (var/datum/tech/F in files.known_tech)
 							if (F.name == CallTechName(T))
-								if (F.level <= D.req_tech[T] )
+								if (F.level <= origin_tech[T] )
 									dat += FONT_COLORED(COLOR_GREEN, " [F.name] = [origin_tech[T]] ")
 								else
 									dat += " [F.name] = [origin_tech[T]] "
