@@ -90,6 +90,7 @@
 	. += new/datum/stack_recipe/air_alarm(src)
 	. += new/datum/stack_recipe/fire_alarm(src)
 	. += new/datum/stack_recipe/intercom(src)
+	. += new/datum/stack_recipe/supermatter_alarm(src)
 	. += new/datum/stack_recipe_list("modular computer frames", create_recipe_list(/datum/stack_recipe/computer))
 	. += new/datum/stack_recipe/furniture/coffin(src)
 

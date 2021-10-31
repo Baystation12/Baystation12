@@ -100,3 +100,10 @@
 	name = "large light fixture frame"
 	build_machine_type = /obj/machinery/light_construct/spot
 	refund_amt = 3
+
+/obj/item/frame/supermatter_alarm
+	name = "supermatter alarm frame"
+	icon = 'icons/obj/lighting.dmi'
+	icon_state = "bulb-construct-item"
+	refund_amt = 1
+	build_machine_type = /obj/machinery/rotating_alarm/supermatter

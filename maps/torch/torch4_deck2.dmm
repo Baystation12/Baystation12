@@ -3932,6 +3932,9 @@
 /area/hallway/primary/seconddeck/fore)
 "hQ" = (
 /obj/effect/floor_decal/industrial/warning/corner,
+/obj/machinery/rotating_alarm/supermatter{
+	dir = 8
+	},
 /turf/simulated/floor/tiled,
 /area/engineering/engineering_bay)
 "hU" = (
@@ -5170,6 +5173,7 @@
 "kQ" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/device/geiger,
+/obj/machinery/rotating_alarm/supermatter,
 /turf/simulated/floor/tiled/steel_grid,
 /area/engineering/engine_monitoring)
 "kR" = (
@@ -6395,8 +6399,11 @@
 	id_tag = "engine_access_hatch";
 	name = "Engine Hatch Bolt Control";
 	pixel_x = 24;
-	pixel_y = 0;
+	pixel_y = 8;
 	req_access = list("ACCESS_ENGINEERING")
+	},
+/obj/machinery/rotating_alarm/supermatter{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/engine_room)
@@ -7675,6 +7682,9 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
+/obj/machinery/rotating_alarm/supermatter{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/engineering/engineering_monitoring)
 "qV" = (
@@ -8260,6 +8270,9 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4;
 	icon_state = "warning"
+	},
+/obj/machinery/rotating_alarm/supermatter{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/engine_room)
