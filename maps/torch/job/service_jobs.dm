@@ -54,7 +54,8 @@
 		/datum/mil_rank/fleet/e3,
 		/datum/mil_rank/fleet/e4,
 		/datum/mil_rank/army/e2,
-		/datum/mil_rank/army/e3
+		/datum/mil_rank/army/e3,
+		/datum/mil_rank/army/e4
 	)
 	min_skill = list(   SKILL_HAULING = SKILL_BASIC)
 
@@ -91,7 +92,9 @@
 		/datum/mil_rank/fleet/e2,
 		/datum/mil_rank/fleet/e3,
 		/datum/mil_rank/fleet/e4,
-		/datum/mil_rank/army/e3
+		/datum/mil_rank/army/e2,
+		/datum/mil_rank/army/e3,
+		/datum/mil_rank/army/e4
 	)
 	min_skill = list(   SKILL_COOKING   = SKILL_ADEPT,
 	                    SKILL_BOTANY    = SKILL_BASIC,

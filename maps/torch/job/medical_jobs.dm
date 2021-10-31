@@ -165,7 +165,8 @@
 	allowed_ranks = list(
 		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/fleet/e2,
-		/datum/mil_rank/army/e2
+		/datum/mil_rank/army/e2,
+		/datum/mil_rank/army/e3
 	)
 
 	skill_points = 4

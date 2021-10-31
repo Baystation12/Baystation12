@@ -129,6 +129,14 @@
 	id_types = list(/obj/item/card/id/torch/crew/sea)
 	pda_type = /obj/item/modular_computer/pda/heads
 
+/decl/hierarchy/outfit/job/torch/crew/command/sea/army
+	name = OUTFIT_JOB_NAME("Senior Enlisted Advisor - Army")
+	uniform = /obj/item/clothing/under/solgov/utility/army/command
+	shoes = /obj/item/clothing/shoes/dutyboots
+	l_ear = /obj/item/device/radio/headset/sea
+	id_types = list(/obj/item/card/id/torch/crew/sea)
+	pda_type = /obj/item/modular_computer/pda/heads
+
 /decl/hierarchy/outfit/job/torch/crew/command/bridgeofficer
 	name = OUTFIT_JOB_NAME("Bridge Officer")
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/command

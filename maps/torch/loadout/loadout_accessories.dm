@@ -210,7 +210,7 @@
 /datum/gear/tactical/ubac/blue
 	display_name = "navy blue UBAC shirt"
 	path = /obj/item/clothing/accessory/ubac/blue
-	allowed_branches = list(/datum/mil_branch/fleet)
+	allowed_branches = list(/datum/mil_branch/fleet, /datum/mil_branch/army)
 
 /datum/gear/tactical/ubac/misc
 	display_name = "miscellaneous UBAC shirt selection"
@@ -233,7 +233,7 @@
 /datum/gear/tactical/armor_pouches/navy
 	display_name = "navy armor pouches"
 	path = /obj/item/clothing/accessory/storage/pouches/navy
-	allowed_branches = list(/datum/mil_branch/fleet, /datum/mil_branch/civilian)
+	allowed_branches = list(/datum/mil_branch/fleet, /datum/mil_branch/fleet, /datum/mil_branch/civilian)
 
 /datum/gear/tactical/armor_pouches/misc
 	display_name = "miscellaneous armor pouches selection"

@@ -59,7 +59,7 @@
 	add_field(/datum/report_field/date, "Дата заполнения")
 	add_field(/datum/report_field/time, "Время заполнения")
 	add_field(/datum/report_field/simple_text, "Текущая должность", required = 1)
-	add_field(/datum/report_field/simple_text, "Запрашиваемая должность", required = 1)
+	add_field(/datum/report_field/simple_text, "Запрашиваемый доступ", required = 1)
 	add_field(/datum/report_field/pencode_text, "Причина расширения доступа", required = 1)
 	add_field(/datum/report_field/simple_text, "Срок расширения доступа")
 	add_field(/datum/report_field/text_label/instruction, "Документ является недействительным в случае отсутствия подписи или печати.")
