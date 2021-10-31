@@ -1,0 +1,5 @@
+author: Mucker
+delete-after: true
+changes:
+  - rscadd: Added the 'quick deconstruction' option to the R&D deconstructor, which
+      will deconstruct items as they are added to the deconstructor without a prompt.
