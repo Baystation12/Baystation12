@@ -1,7 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - bugfix: Fixed the circuit imprinter search function not working.
-  - bugfix: Fixed imprinter tech readouts.
-  - tweak: The deconstructor will now get materials from the contents of the loaded
-      item if it has any.
