@@ -1,0 +1,4 @@
+author: Ryan180602
+delete-after: true
+changes:
+  - bugfix: Fix arm-shotguns not having sprite when unloaded.
