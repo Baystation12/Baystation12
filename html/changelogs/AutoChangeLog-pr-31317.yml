@@ -1,0 +1,5 @@
+author: Mucker
+delete-after: true
+changes:
+  - tweak: The RPED will now replace all components in a machine at once when possible.
+  - tweak: Lowered the cost of the RPED in the protolathe.
