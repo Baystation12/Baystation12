@@ -67,3 +67,10 @@
 	req_access = list(access_mining_office)
 	available_modifications = list(/decl/item_modifier/space_suit/pilot)
 	species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI)
+
+/obj/machinery/suit_cycler/command
+	name = "Command suit cycler"
+	model_text = "Command"
+	req_access = list(access_bridge)
+	available_modifications = list(/decl/item_modifier/space_suit/command)
+	species = list(SPECIES_HUMAN,SPECIES_SKRELL)
