@@ -479,7 +479,8 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 
 /obj/machinery/computer/rdconsole/proc/deconstruct(weakref/W)
 	linked_destroy.busy = TRUE
-	screen = 0.1
+	if (!quick_deconstruct)
+		screen = 0.1
 	flick("d_analyzer_process", linked_destroy)
 	addtimer(CALLBACK(src, .proc/finish_deconstruct, W), 24)
 
@@ -520,7 +521,8 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 				linked_destroy.icon_state = "d_analyzer"
 
 	use_power_oneoff(linked_destroy.active_power_usage)
-	screen = 1.0
+	if (!quick_deconstruct)
+		screen = 1.0
 	if(CanInteract(user, DefaultTopicState()))
 		interact(user)
 
