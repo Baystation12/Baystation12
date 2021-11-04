@@ -12,7 +12,7 @@
 	area_usage_test_exempted_areas = list(
 		/area/ship/ascent_caulship
 	)
-	spawn_cost = 0.5
+	spawn_cost = 9999
 	player_cost = 4
 	shuttles_to_initialise = list(/datum/shuttle/autodock/overmap/ascent)
 
