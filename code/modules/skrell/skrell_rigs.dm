@@ -228,6 +228,8 @@
 /obj/item/cell/skrell
 	name = "skrellian microfusion cell"
 	desc = "An impossibly tiny fusion power engine of Skrell design."
+	icon = 'icons/obj/ascent.dmi'
+	icon_state = "plant"
 	maxcharge = 1500
 	w_class = ITEM_SIZE_NORMAL
 	var/recharge_amount = 12

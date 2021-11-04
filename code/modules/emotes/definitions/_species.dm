@@ -56,6 +56,15 @@
 		/decl/emote/audible/scream/monkey
 	)
 
+
+/datum/species/nabber/monarch_queen
+	default_emotes = list(
+		/decl/emote/audible/bug_hiss,
+		/decl/emote/audible/bug_buzz,
+		/decl/emote/audible/bug_chitter,
+		/decl/emote/audible/ascent_purr,
+	)
+
 /datum/species/adherent
 	default_emotes = list(
 		/decl/emote/audible/adherent_chime,
@@ -71,6 +80,19 @@
 	/decl/emote/audible/vox_shriek,
 	/decl/emote/audible/armalis_shriek
 )
+
+/datum/species/mantid
+	default_emotes = list(
+		/decl/emote/audible/ascent_purr,
+		/decl/emote/audible/ascent_hiss,
+		/decl/emote/audible/ascent_snarl,
+		/decl/emote/visible/ascent_flicker,
+		/decl/emote/visible/ascent_glint,
+		/decl/emote/visible/ascent_glimmer,
+		/decl/emote/visible/ascent_pulse,
+		/decl/emote/visible/ascent_shine,
+		/decl/emote/visible/ascent_dazzle
+	)
 
 /datum/species/diona
 	default_emotes = list(

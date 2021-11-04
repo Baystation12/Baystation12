@@ -34,6 +34,9 @@
 #define LANGUAGE_DRONE_GLOBAL      "Drone Talk"
 #define LANGUAGE_CHANGELING_GLOBAL "Changeling"
 #define LANGUAGE_BORER_GLOBAL      "Cortical Link"
+#define LANGUAGE_MANTID_NONVOCAL   "Ascent-Glow"
+#define LANGUAGE_MANTID_VOCAL      "Ascent-Voc"
+#define LANGUAGE_MANTID_BROADCAST  "Worldnet"
 
 // Language flags.
 #define WHITELISTED  1   // Language is available if the speaker is whitelisted.

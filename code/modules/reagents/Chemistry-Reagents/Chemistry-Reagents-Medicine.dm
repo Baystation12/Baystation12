@@ -129,7 +129,7 @@
 /datum/reagent/dexalin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_VOX)
 		M.adjustToxLoss(removed * 6)
-	else if(alien != IS_DIONA)
+	else if(alien != IS_DIONA && alien != IS_MANTID)
 		M.add_chemical_effect(CE_OXYGENATED, 1)
 	holder.remove_reagent(/datum/reagent/lexorin, 2 * removed)
 
@@ -147,7 +147,7 @@
 /datum/reagent/dexalinp/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_VOX)
 		M.adjustToxLoss(removed * 9)
-	else if(alien != IS_DIONA)
+	else if(alien != IS_DIONA && alien != IS_MANTID)
 		M.add_chemical_effect(CE_OXYGENATED, 2)
 	holder.remove_reagent(/datum/reagent/lexorin, 3 * removed)
 

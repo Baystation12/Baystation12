@@ -580,7 +580,7 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/machinery/power/skrell_reactor{
+/obj/machinery/power/ascent_reactor{
 	color = "null";
 	name = "skrellan advanced fusion drive"
 	},
