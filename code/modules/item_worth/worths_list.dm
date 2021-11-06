@@ -33,7 +33,6 @@ var/list/worths = list(
 					/obj/item/gun/energy/taser = 500,
 					/obj/item/gun/energy/crossbow/largecrossbow = 1600,
 					/obj/item/gun/energy/crossbow = 750,
-					/obj/item/gun/energy/temperature = 3000,
 					/obj/item/gun/energy = 2100,
 //LAUNCHERS,
 					/obj/item/gun/launcher/crossbow = 120,
