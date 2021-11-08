@@ -59,7 +59,7 @@
 				} \
 			} \
 		} \
-	} \
+	}
 
 /*
 	Simple heuristic for determining if removing the turf from it's zone will not partition the zone (A very bad thing).
@@ -68,28 +68,28 @@
 */
 
 /turf/simulated/proc/can_safely_remove_from_zone()
-    if(!zone)
-        return 1
+	if(!zone)
+		return 1
 
-    var/check_dirs
-    GET_ZONE_NEIGHBOURS(src, check_dirs)
-    . = check_dirs
-    for(var/dir in csrfz_check)
-        //for each pair of "adjacent" cardinals (e.g. NORTH and WEST, but not NORTH and SOUTH)
-        if((dir & check_dirs) == dir)
-            //check that they are connected by the corner turf
-            var/turf/simulated/T = get_step(src, dir)
-            if (!istype(T))
-                . &= ~dir
-                continue
+	var/check_dirs
+	GET_ZONE_NEIGHBOURS(src, check_dirs)
+	. = check_dirs
+	for(var/dir in csrfz_check)
+		//for each pair of "adjacent" cardinals (e.g. NORTH and WEST, but not NORTH and SOUTH)
+		if((dir & check_dirs) == dir)
+			//check that they are connected by the corner turf
+			var/turf/simulated/T = get_step(src, dir)
+			if (!istype(T))
+				. &= ~dir
+				continue
 
-            var/connected_dirs
-            GET_ZONE_NEIGHBOURS(T, connected_dirs)
-            if(connected_dirs && (dir & GLOB.reverse_dir[connected_dirs]) == dir)
-                . &= ~dir //they are, so unflag the cardinals in question
+			var/connected_dirs
+			GET_ZONE_NEIGHBOURS(T, connected_dirs)
+			if(connected_dirs && (dir & GLOB.reverse_dir[connected_dirs]) == dir)
+				. &= ~dir //they are, so unflag the cardinals in question
 
-    //it is safe to remove src from the zone if all cardinals are connected by corner turfs
-    . = !.
+	//it is safe to remove src from the zone if all cardinals are connected by corner turfs
+	. = !.
 
 /turf/simulated/update_air_properties()
 
