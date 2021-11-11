@@ -45,7 +45,6 @@
 							/obj/item/reagent_containers/food/snacks/slice/xenomeatbread/filled = TRADER_THIS_TYPE,
 							/obj/item/reagent_containers/food/snacks/soydope                    = TRADER_THIS_TYPE,
 							/obj/item/reagent_containers/food/snacks/stewedsoymeat              = TRADER_THIS_TYPE,
-							/obj/item/reagent_containers/food/snacks/wingfangchu                = TRADER_THIS_TYPE,
 							/obj/item/reagent_containers/food/drinks/dry_ramen                  = TRADER_THIS_TYPE
 							)
 

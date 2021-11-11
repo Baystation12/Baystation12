@@ -1,24 +1,6 @@
 
 // see code/datums/recipe.dm
 
-
-/* No telebacon. just no...
-/datum/recipe/telebacon
-	items = list(
-		/obj/item/reagent_containers/food/snacks/meat,
-		/obj/item/device/assembly/signaler
-	)
-	result = /obj/item/reagent_containers/food/snacks/telebacon
-
-I said no!
-/datum/recipe/syntitelebacon
-	items = list(
-		/obj/item/reagent_containers/food/snacks/meat/syntiflesh,
-		/obj/item/device/assembly/signaler
-	)
-	result = /obj/item/reagent_containers/food/snacks/telebacon
-*/
-
 /datum/recipe/friedegg
 	reagents = list(/datum/reagent/sodiumchloride = 1, /datum/reagent/blackpepper = 1)
 	items = list(
@@ -316,13 +298,6 @@ I said no!
 		/obj/item/reagent_containers/food/snacks/sliceable/flatdough,
 	)
 	result = /obj/item/reagent_containers/food/snacks/berryclafoutis
-
-/datum/recipe/wingfangchu
-	reagents = list(/datum/reagent/nutriment/soysauce = 5)
-	items = list(
-		/obj/item/reagent_containers/food/snacks/xenomeat,
-	)
-	result = /obj/item/reagent_containers/food/snacks/wingfangchu
 
 /datum/recipe/chaosdonut
 	reagents = list(/datum/reagent/frostoil = 5, /datum/reagent/capsaicin = 5, /datum/reagent/sugar = 5)
