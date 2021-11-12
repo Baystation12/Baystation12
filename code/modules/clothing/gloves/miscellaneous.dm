@@ -30,6 +30,27 @@
 	//average of 0.4, better than regular gloves' 0.75
 	siemens_coefficient = pick(0, 0.1, 0.2, 0.3, 0.4, 0.6, 1.3)
 
+/obj/item/clothing/gloves/insulated/black
+	name = "black insulated gloves"
+	desc = "These gloves will protect the wearer from electric shocks. A great choice for stylish hackers."
+	color = null
+	icon_state = "black"
+	item_state = "bgloves"
+
+/obj/item/clothing/gloves/insulated/white
+	name = "white insulated gloves"
+	desc = "These gloves will protect the wearer from electric shocks. A great choice for ladies and gentlemen."
+	color = null
+	icon_state = "latex"
+	item_state = "lgloves"
+
+/obj/item/clothing/gloves/insulated/combat
+	name = "combat insulated gloves"
+	color = "#80868e"
+	icon_state = "black"
+	item_state = "bgloves"
+	armor = list(melee = 20, bullet = 20, laser = 30,energy = 25, bomb = 20, bio = 0, rad = 0)
+
 /obj/item/clothing/gloves/forensic
 	desc = "Specially made gloves for forensic technicians. The luminescent threads woven into the material stand out under scrutiny."
 	name = "forensic gloves"
