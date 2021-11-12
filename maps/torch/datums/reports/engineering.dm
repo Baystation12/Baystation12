@@ -2,16 +2,16 @@
 	..()
 	set_access(access_engine_equip)
 
-/datum/computer_file/report/recipient/eng/construction_work
+/datum/computer_file/report/recipient/construction_work
 	form_name = "SCG-ENG-11"
 	title = "Запрос на проведение строительных работ"
 	logo = "\[solcrest\]"
 	available_on_ntnet = 1
 
-/datum/computer_file/report/recipient/eng/construction_work/generate_fields()
+/datum/computer_file/report/recipient/construction_work/generate_fields()
 	..()
 	var/list/work_fields = list()
-	add_field(/datum/report_field/text_label/header, "ГЭК /"Факел/" - Инженерный отдел")
+	add_field(/datum/report_field/text_label/header, "ГЭК \"Факел\" - Инженерный отдел")
 	add_field(/datum/report_field/number, "Номер запроса")
 	add_field(/datum/report_field/date, "Дата проведения работ")
 	work_fields += add_field(/datum/report_field/people/from_manifest, "Ответственный за процесс", required = 1)
@@ -36,7 +36,7 @@
 /datum/computer_file/report/recipient/eng/report_work/generate_fields()
 	..()
 	var/list/work_fields = list()
-	add_field(/datum/report_field/text_label/header, "ГЭК /"Факел/" - Инженерный отдел")
+	add_field(/datum/report_field/text_label/header, "ГЭК \"Факел\" - Инженерный отдел")
 	add_field(/datum/report_field/number, "Номер запроса для проведения данных работ")
 	add_field(/datum/report_field/date, "Дата проведения работ")
 	add_field(/datum/report_field/people/from_manifest, "Ответственный за процесс", required = 1)
@@ -51,16 +51,16 @@
 	for(var/datum/report_field/field in work_fields)
 		field.set_access(access_edit = access_engine_equip)
 
-/datum/computer_file/report/recipient/eng/request_eng
+/datum/computer_file/report/recipient/request_eng
 	form_name = "SCG-ENG-12"
 	title = "Запрос к инженерии"
 	logo = "\[solcrest\]"
 	available_on_ntnet = 1
 
-/datum/computer_file/report/recipient/eng/request_eng/generate_fields()
+/datum/computer_file/report/recipient/request_eng/generate_fields()
 	..()
 	var/list/work_fields = list()
-	add_field(/datum/report_field/text_label/header, "ГЭК /"Факел/" - Инженерный отдел")
+	add_field(/datum/report_field/text_label/header, "ГЭК \"Факел\" - Инженерный отдел")
 	add_field(/datum/report_field/date, "Дата запроса")
 	add_field(/datum/report_field/time, "Время запроса")
 	add_field(/datum/report_field/people/from_manifest, "Запрашивающий", required = 1)
@@ -84,7 +84,7 @@
 
 /datum/computer_file/report/recipient/eng/startup_systems/generate_fields()
 	..()
-	add_field(/datum/report_field/text_label/header, "ГЭК /"Факел/" - Инженерный отдел")
+	add_field(/datum/report_field/text_label/header, "ГЭК \"Факел\" - Инженерный отдел")
 	add_field(/datum/report_field/date, "Дата")
 	add_field(/datum/report_field/time, "Время")
 	add_field(/datum/report_field/people/from_manifest, "Ответственный за процесс", required = 1)
