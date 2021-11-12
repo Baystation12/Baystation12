@@ -165,6 +165,10 @@
 	species_allowed = list(SPECIES_HUMAN)
 	flags = HAIR_TIEABLE
 
+/datum/sprite_accessory/hair/baum
+	name = "Baum"
+	icon_state = "hair_baum"
+
 /datum/sprite_accessory/hair/bowl
 	name = "Bowl"
 	icon_state = "hair_bowlcut"
@@ -741,6 +745,10 @@
 /datum/sprite_accessory/hair/overeye3
 	name = "Overeye 2"
 	icon_state = "hair_overeye_veryshort_alt"
+
+/datum/sprite_accessory/hair/oxton
+	name = "Oxton"
+	icon_state = "hair_oxton"
 
 /datum/sprite_accessory/hair/ponytail7
 	name = "Ponytail 7"
