@@ -7,8 +7,10 @@
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 	layer = ABOVE_WINDOW_LAYER
 
-	var/health = 100
-	var/maxhealth = 100
+	health_resistances = list(
+		BRUTE = 0.75
+	)
+
 	var/spiky = FALSE
 
 /obj/structure/barricade/Initialize(var/mapload, var/material_name)
@@ -21,8 +23,7 @@
 	SetName("[material.display_name] barricade")
 	desc = "A heavy, solid barrier made of [material.display_name]."
 	color = material.icon_colour
-	maxhealth = material.integrity
-	health = maxhealth
+	set_max_health(material.integrity)
 
 /obj/structure/barricade/get_material()
 	return material
@@ -48,30 +49,26 @@
 		var/obj/item/stack/D = W
 		if(D.get_material_name() != material.name)
 			return //hitting things with the wrong type of stack usually doesn't produce messages, and probably doesn't need to.
-		if (health < maxhealth)
+		if (get_damage_value())
 			if (D.get_amount() < 1)
 				to_chat(user, "<span class='warning'>You need one sheet of [material.display_name] to repair \the [src].</span>")
 				return
 			visible_message("<span class='notice'>[user] begins to repair \the [src].</span>")
-			if(do_after(user,20,src) && health < maxhealth)
+			if(do_after(user, 2 SECONDS, src) && get_damage_value())
 				if (D.use(1))
-					health = maxhealth
+					restore_health(get_max_health())
 					visible_message("<span class='notice'>[user] repairs \the [src].</span>")
 				return
 		return
 
 	else
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		switch(W.damtype)
-			if(BURN)
-				take_damage(W.force * 1)
-			if(BRUTE)
-				take_damage(W.force * 0.75)
+		damage_health(W.force, W.damtype)
 		..()
 
-/obj/structure/barricade/take_damage(amount)
-	health -= amount
-	if(health <= 0)
+/obj/structure/barricade/handle_death_change(new_death_state)
+	..()
+	if (new_death_state)
 		dismantle()
 
 /obj/structure/barricade/proc/dismantle()
@@ -86,8 +83,7 @@
 			qdel(src)
 			return
 		if(2.0)
-			src.health -= 25
-			if (src.health <= 0)
+			if (damage_health(25, BRUTE, TRUE))
 				visible_message("<span class='danger'>\The [src] is blown apart!</span>")
 				dismantle()
 			return

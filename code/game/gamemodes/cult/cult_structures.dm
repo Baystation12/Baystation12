@@ -23,23 +23,23 @@
 	light_inner_range = 1
 	light_outer_range = 13
 	light_color = "#3e0000"
-	var/health = 20
-	var/maxhealth = 20
+	health_max = 20
+	health_min_damage = 4
 
 /obj/structure/cult/pylon/attackby(obj/item/W, mob/user)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	if (istype(W, /obj/item/natural_weapon/cult_builder))
-		if (health >= maxhealth)
+		if (!health_damaged())
 			to_chat(user, SPAN_WARNING("\The [src] is fully repaired."))
 		else
 			user.visible_message(
 				SPAN_NOTICE("\The [user] mends some of the cracks on \the [src]."),
 				SPAN_NOTICE("You repair some of \the [src]'s damage.")
 			)
-			health = min(maxhealth, health + 5)
+			restore_health(5)
 		return
 	user.do_attack_animation(src)
-	if (W.force < 4)
+	if (!can_damage_health(W.force, W.damtype))
 		user.visible_message(
 			SPAN_DANGER("\The [user] hits \the [src], but they bounce off!"),
 			SPAN_DANGER("You hit \the [src], but bounce off!"),
@@ -47,8 +47,7 @@
 		)
 		playsound(get_turf(src), 'sound/effects/Glasshit.ogg', 50, TRUE)
 		return
-	health = max(0, health - W.force)
-	if(!health)
+	if(damage_health(W.force, W.damtype, TRUE))
 		user.visible_message(
 			SPAN_DANGER("\The [user] smashes \the [src]!"),
 			SPAN_DANGER("You smash \the [src] into pieces!"),

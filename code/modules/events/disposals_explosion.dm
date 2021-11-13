@@ -52,7 +52,7 @@
 		return
 
 	// Damage the pipe
-	bursting_pipe.health = rand(2,4)
+	bursting_pipe.set_health(rand(2, 4))
 
 /datum/event/disposals_explosion/announce()
 	command_announcement.Announce("Pressure readings indicate an imminent explosion in \the [get_area(bursting_pipe)] disposal systems. Piping sections may be damaged.", "[location_name()] Atmospheric Monitoring System", zlevels = affecting_z)
@@ -63,7 +63,7 @@
 		return
 
 	// Make some noise as a clue
-	if(prob(40) && bursting_pipe.health < 5)
+	if(prob(40) && bursting_pipe.get_current_health() < 5)
 		playsound(bursting_pipe, 'sound/machines/hiss.ogg', 40, 0, 0)
 
 /datum/event/disposals_explosion/end()
@@ -72,7 +72,7 @@
 
 	GLOB.destroyed_event.unregister(bursting_pipe, src, .proc/pipe_destroyed)
 
-	if(bursting_pipe.health < 5)
+	if(bursting_pipe.get_current_health() < 5)
 		// Make a disposals holder for the trash
 		var/obj/structure/disposalholder/trash_holder = new()
 

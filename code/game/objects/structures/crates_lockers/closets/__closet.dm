@@ -5,11 +5,11 @@
 	icon_state = "base"
 	density = TRUE
 	w_class = ITEM_SIZE_NO_CONTAINER
+	health_max = 100
 
 	var/welded = 0
 	var/large = 1
 	var/wall_mounted = FALSE //equivalent to non-dense for air movement
-	var/health = 100
 	var/breakout = 0 //if someone is currently breaking out. mutex
 	var/storage_capacity = 2 * MOB_MEDIUM //This is so that someone can't pack hundreds of items in a locker/crate
 							  //then open it in a populated area to crash clients.
@@ -238,18 +238,11 @@
 					A.forceMove(src.loc)
 				qdel(src)
 
-/obj/structure/closet/proc/damage(var/damage)
-	health -= damage
-	if(health <= 0)
-		for(var/atom/movable/A in src)
-			A.forceMove(src.loc)
-		qdel(src)
-
 /obj/structure/closet/bullet_act(var/obj/item/projectile/Proj)
 	var/proj_damage = Proj.get_structure_damage()
 	if(proj_damage)
 		..()
-		damage(proj_damage)
+		damage_health(proj_damage, Proj.damage_type)
 
 	if(Proj.penetrating)
 		var/distance = get_dist(Proj.starting, get_turf(loc))
@@ -401,9 +394,8 @@
 				icon_state = "closed_unlocked[welded ? "_welded" : ""]"
 			overlays.Cut()
 
-/obj/structure/closet/take_damage(damage)
-	health -= damage
-	if(health <= 0)
+/obj/structure/closet/handle_death_change(new_death_state)
+	if (new_death_state)
 		dump_contents()
 		qdel(src)
 

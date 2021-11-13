@@ -11,7 +11,7 @@
 	name = "tendril"
 	desc = "A large, mucus-covered tentacle. It occasionally twitches."
 	icon_state = "growth_tendril"
-	health = 100
+	health_max = 100
 	activation_cost_resource = /datum/chorus_resource/growth_nutrients
 	activation_cost_amount = 2
 	click_cooldown = 3 SECONDS

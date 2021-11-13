@@ -7,8 +7,7 @@
 	anchored = TRUE
 	unacidable = TRUE
 	alpha = 150
-	var/health = 14
-	var/destroyed = 0
+	health_max = 14
 
 /obj/structure/displaycase/Initialize()
 	. = ..()
@@ -26,37 +25,34 @@
 /obj/structure/displaycase/ex_act(severity)
 	switch(severity)
 		if (1)
-			new /obj/item/material/shard(loc)
-			for(var/atom/movable/AM in src)
-				AM.dropInto(loc)
-			qdel(src)
+			kill_health()
 		if (2)
 			if (prob(50))
-				take_damage(15)
+				damage_health(15, BRUTE)
 		if (3)
 			if (prob(50))
-				take_damage(5)
+				damage_health(5, BRUTE)
 
 /obj/structure/displaycase/bullet_act(var/obj/item/projectile/Proj)
 	..()
-	take_damage(Proj.get_structure_damage())
+	damage_health(Proj.get_structure_damage(), Proj.damage_type)
 
-/obj/structure/displaycase/take_damage(damage)
-	health -= damage
-	if(health <= 0)
-		if (!destroyed)
-			set_density(0)
-			destroyed = 1
-			new /obj/item/material/shard(loc)
-			for(var/atom/movable/AM in src)
-				AM.dropInto(loc)
-			playsound(src, "shatter", 70, 1)
-			update_icon()
-	else
-		playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
+/obj/structure/displaycase/handle_death_change(new_death_state)
+	if (new_death_state)
+		set_density(FALSE)
+		new /obj/item/material/shard(loc)
+		for(var/atom/movable/AM in src)
+			AM.dropInto(loc)
+		playsound(src, "shatter", 70, 1)
+		update_icon()
+
+/obj/structure/displaycase/damage_health(damage, damage_type, skip_death_state_change)
+	. = ..()
+	if (!.)
+		playsound(src, 'sound/effects/Glasshit.ogg', 75, 1)
 
 /obj/structure/displaycase/on_update_icon()
-	if(destroyed)
+	if(!is_alive())
 		icon_state = "glassboxb"
 	else
 		icon_state = "glassbox"
@@ -66,12 +62,12 @@
 
 /obj/structure/displaycase/attackby(obj/item/W as obj, mob/user as mob)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	take_damage(W.force)
+	damage_health(W.force, W.damtype)
 	..()
 
 /obj/structure/displaycase/attack_hand(mob/user as mob)
 	add_fingerprint(user)
-	if(!destroyed)
+	if(is_alive())
 		to_chat(usr, text("<span class='warning'>You kick the display case.</span>"))
 		visible_message("<span class='warning'>[usr] kicks the display case.</span>")
-		take_damage(2)
+		damage_health(2, BRUTE)

@@ -4,8 +4,8 @@
 	density = TRUE
 	layer = BELOW_OBJ_LAYER
 	w_class = ITEM_SIZE_NO_CONTAINER
+	health_max = 100
 	var/state = 0
-	var/health = 100
 	var/cover = 50 //how much cover the girder provides against projectiles.
 	var/material/reinf_material
 	var/reinforcing = 0
@@ -17,7 +17,7 @@
 /obj/structure/girder/displaced
 	icon_state = "displaced"
 	anchored = FALSE
-	health = 50
+	health_max = 50
 	cover = 25
 
 /obj/structure/girder/attack_generic(var/mob/user, var/damage, var/attack_message = "smashes apart", var/wallbreaker)
@@ -26,9 +26,10 @@
 	attack_animation(user)
 	playsound(loc, 'sound/weapons/tablehit1.ogg', 40, 1)
 	visible_message(SPAN_DANGER("[user] [attack_message] [src]!"))
-	take_damage(damage)
 	if(wallbreaker)
-		spawn(1) dismantle()
+		kill_health()
+	else
+		damage_health(damage, BRUTE)
 	return 1
 
 /obj/structure/girder/bullet_act(var/obj/item/projectile/Proj)
@@ -44,12 +45,11 @@
 		damage *= 0.4 //non beams do reduced damage
 
 	..()
-	take_damage(damage)
+	damage_health(damage, Proj.damage_type)
 
-/obj/structure/girder/take_damage(damage)
-	health -= damage
+/obj/structure/girder/handle_death_change(new_death_state)
 	..()
-	if(health <= 0)
+	if (new_death_state)
 		dismantle()
 
 /obj/structure/girder/CanFluidPass(var/coming_from)
@@ -58,7 +58,7 @@
 /obj/structure/girder/proc/reset_girder()
 	anchored = TRUE
 	cover = initial(cover)
-	health = min(health,initial(health))
+	revive_health()
 	state = 0
 	icon_state = initial(icon_state)
 	reinforcing = 0
@@ -132,7 +132,7 @@
 			to_chat(user, "<span class='notice'>You dislodged the girder!</span>")
 			icon_state = "displaced"
 			anchored = FALSE
-			health = 50
+			health_max = 50
 			cover = 25
 
 	else if(istype(W, /obj/item/stack/material))
@@ -144,7 +144,7 @@
 				return ..()
 
 	else
-		take_damage(W.force)
+		damage_health(W.force, W.damtype)
 		return ..()
 
 /obj/structure/girder/proc/construct_wall(obj/item/stack/material/S, mob/user)
@@ -209,7 +209,7 @@
 
 /obj/structure/girder/proc/reinforce_girder()
 	cover = 75
-	health = 500
+	health_max = 500
 	state = 2
 	icon_state = "reinforced"
 	reinforcing = 0
@@ -245,7 +245,7 @@
 /obj/structure/girder/cult
 	icon= 'icons/obj/cult.dmi'
 	icon_state= "cultgirder"
-	health = 250
+	health_max = 250
 	cover = 70
 
 /obj/structure/girder/cult/dismantle()
