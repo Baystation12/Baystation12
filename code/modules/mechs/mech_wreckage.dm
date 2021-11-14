@@ -16,10 +16,16 @@
 				if(thing && prob(40))
 					thing.forceMove(src)
 			for(var/hardpoint in exosuit.hardpoints)
-				if(exosuit.hardpoints[hardpoint] && prob(40))
-					var/obj/item/thing = exosuit.hardpoints[hardpoint]
-					if(exosuit.remove_system(hardpoint))
-						thing.forceMove(src)
+				if(exosuit.hardpoints[hardpoint])
+					if(prob(40))
+						var/obj/item/thing = exosuit.hardpoints[hardpoint]
+						if(exosuit.remove_system(hardpoint))
+							thing.forceMove(src)
+					else
+						//This has been destroyed, some modules may need to perform bespoke logic
+						var/obj/item/mech_equipment/E = exosuit.hardpoints[hardpoint]
+						if(istype(E))
+							E.wreck()
 
 	..()
 
