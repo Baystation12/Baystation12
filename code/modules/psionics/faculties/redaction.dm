@@ -91,15 +91,16 @@
 				to_chat(user, SPAN_NOTICE("You interleave and repair the severed tendon in \the [E]."))
 				E.status &= ~ORGAN_TENDON_CUT
 				return TRUE
-			if(E.status & ORGAN_BROKEN)
-				to_chat(user, SPAN_NOTICE("You coax shattered bones to come together and fuse, mending the break."))
-				E.status &= ~ORGAN_BROKEN
-				E.stage = 0
-				return TRUE
+
+		if(E.status & ORGAN_BROKEN)
+			to_chat(user, SPAN_NOTICE("You coax shattered bones to come together and fuse, mending the break."))
+			E.status &= ~ORGAN_BROKEN
+			E.stage = 0
+			return TRUE
 
 		for(var/datum/wound/W in E.wounds)
 			if(W.bleeding())
-				if(redaction_rank >= PSI_RANK_MASTER || W.wound_damage() < 30)
+				if(redaction_rank >= PSI_RANK_OPERANT || W.wound_damage() < 30)
 					to_chat(user, SPAN_NOTICE("You knit together severed veins and broken flesh, stemming the bleeding."))
 					W.bleed_timer = 0
 					W.clamped = TRUE
