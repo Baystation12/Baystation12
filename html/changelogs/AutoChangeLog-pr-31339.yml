@@ -1,0 +1,5 @@
+author: Mucker
+delete-after: true
+changes:
+  - tweak: Deconstructing with the R&D deconstructor while 'quick' mode is active
+      will no longer change screens.
