@@ -1,13 +1,15 @@
-/turf
-	var/dynamic_lighting = TRUE    // Does the turf use dynamic lighting?
-	luminosity           = 1
+/// Does the turf use dynamic lighting?
+/turf/var/dynamic_lighting = TRUE
+/turf/luminosity           = 1
 
-	var/tmp/lighting_corners_initialised = FALSE
+/turf/var/tmp/lighting_corners_initialised = FALSE
 
-	var/tmp/list/datum/light_source/affecting_lights       // List of light sources affecting this turf.
-	var/tmp/atom/movable/lighting_overlay/lighting_overlay // Our lighting overlay.
-	var/tmp/list/datum/lighting_corner/corners
-	var/opaque_counter
+/// List of light sources affecting this turf.
+/turf/var/tmp/list/datum/light_source/affecting_lights
+/// Our lighting overlay.
+/turf/var/tmp/atom/movable/lighting_overlay/lighting_overlay
+/turf/var/tmp/list/datum/lighting_corner/corners
+/turf/var/opaque_counter
 
 /turf/set_opacity(new_opacity)
 	. = ..()

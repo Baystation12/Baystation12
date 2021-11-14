@@ -30,8 +30,7 @@
 		if(!flat)
 			range = min(round(sqrt(rad_power / config.radiation_lower_limit)), 31)  // R = rad_power / dist**2 - Solve for dist
 
-/turf
-	var/cached_rad_resistance = 0
+/turf/var/cached_rad_resistance = 0
 
 /turf/proc/calc_rad_resistance()
 	cached_rad_resistance = 0

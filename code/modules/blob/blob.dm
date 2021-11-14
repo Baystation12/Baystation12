@@ -82,10 +82,6 @@
 	// The turf itself
 	if(istype(T, /turf/unsimulated/) || istype(T, /turf/space) || (istype(T, /turf/simulated/mineral) && T.density))
 		return
-	if(istype(T, /turf/simulated/wall))
-		var/turf/simulated/wall/SW = T
-		SW.take_damage(damage)
-		return
 
 	// Objects in the turf
 	for(var/obj/machinery/door/D in T) // There can be several - and some of them can be open, locate() is not suitable
