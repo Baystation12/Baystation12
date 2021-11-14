@@ -24,14 +24,6 @@
 	build_path = /obj/item/gun/launcher/syringe/rapid
 	sort_string = "TAAAB"
 
-/datum/design/item/weapon/temp_gun
-	desc = "A gun that shoots high-powered glass-encased energy temperature bullets."
-	id = "temp_gun"
-	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 4, TECH_POWER = 3, TECH_MAGNET = 2)
-	materials = list(MATERIAL_STEEL = 5000, MATERIAL_GLASS = 500, MATERIAL_SILVER = 3000)
-	build_path = /obj/item/gun/energy/temperature
-	sort_string = "TAAAC"
-
 /datum/design/item/weapon/large_grenade
 	id = "large_Grenade"
 	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 2)
