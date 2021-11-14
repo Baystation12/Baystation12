@@ -169,15 +169,17 @@
 
 	if(!mirror)
 		return
-
+	var/additional_y_offset = 0
 	var/matrix/M = matrix()
 	if(dir == WEST || dir == EAST)
 		M.Scale(-1, 1)
 	else if(dir == SOUTH|| dir == NORTH)
 		M.Scale(1, -1)
+		//Center of mirror sprite is at 19, meaning we will be some pixels off when pointing down
+		additional_y_offset = -5
 
 	transform = M
 
-	filters += filter("type" = "alpha", "icon" = icon(alpha_icon, alpha_icon_state), "x" = 0, "y" = 0)
+	filters += filter("type" = "alpha", "icon" = icon(alpha_icon, alpha_icon_state), "x" = 0, "y" = additional_y_offset)
 
 	vis_contents += get_turf(mirror)
