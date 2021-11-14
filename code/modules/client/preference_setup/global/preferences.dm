@@ -152,6 +152,11 @@ var/list/_client_preferences_by_type
 	if(new_value == GLOB.PREF_HIDE)
 		preference_mob.remove_typing_indicator()
 
+/datum/client_preference/floating_messages
+	description = "Floating chat messages"
+	key = "FLOATING_CHAT"
+	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
+
 /datum/client_preference/show_ooc
 	description = "OOC chat"
 	key = "CHAT_OOC"
