@@ -1,6 +1,0 @@
-author: CrimsonShrike
-delete-after: true
-changes:
-  - rscadd: cargo clamps carrying more than one dense item will now create cargo piles
-      on destruction or uninstall instead of dumping a bunch of items all over the
-      place.
