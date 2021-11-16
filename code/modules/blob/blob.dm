@@ -79,8 +79,7 @@
 	// Process damaging things
 	var/damage = rand(damage_min, damage_max)
 
-	// The turf itself
-	if(istype(T, /turf/unsimulated/) || istype(T, /turf/space) || (istype(T, /turf/simulated/mineral) && T.density))
+	if (!istype(T) || T.turf_flags & TURF_DISALLOW_BLOB)
 		return
 
 	// Objects in the turf

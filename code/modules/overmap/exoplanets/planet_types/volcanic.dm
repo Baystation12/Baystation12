@@ -91,6 +91,7 @@
 	icon_state = "lava"
 	movement_delay = 4
 	dirt_color = COLOR_GRAY20
+	turf_flags = TURF_DISALLOW_BLOB
 	var/list/victims
 
 /turf/simulated/floor/exoplanet/lava/on_update_icon()
