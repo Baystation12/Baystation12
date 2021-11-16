@@ -75,58 +75,68 @@
 /obj/effect/blob/proc/regen()
 	restore_health(regen_rate)
 
-/obj/effect/blob/proc/expand(turf/T)
-	// Process damaging things
-	var/damage = rand(damage_min, damage_max)
 
+/obj/effect/blob/proc/expand(turf/T)
 	if (!istype(T) || T.turf_flags & TURF_DISALLOW_BLOB)
 		return
 
-	// Objects in the turf
-	for(var/obj/machinery/door/D in T) // There can be several - and some of them can be open, locate() is not suitable
+	var/damage = rand(damage_min, damage_max)
+	var/damage_type = pick(BRUTE, BURN)
+
+	if (T.density && T.is_alive())
+		playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
+		T.damage_health(damage)
+		return
+
+	for (var/obj/machinery/door/D in T)
 		if (D.density)
 			if (D.is_broken())
 				D.open(TRUE)
 				return
+			playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
 			D.take_damage(damage)
 			return
+
 	var/obj/structure/foamedmetal/F = locate() in T
-	if(F)
+	if (F)
 		qdel(F)
 		return
 
 	var/obj/vehicle/V = locate() in T
-	if(V)
+	if (V?.health > 0)
+		playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
 		V.adjust_health(-damage)
 		return
+
 	var/obj/machinery/camera/CA = locate() in T
-	if(CA && !CA.is_broken())
+	if (CA && !CA.is_broken())
+		playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
 		CA.take_damage(30)
 		return
 
-	// Above things, we destroy completely and thus can use locate. Mobs are different.
+	var/sound_played
+
 	for(var/mob/living/L in T)
-		if(L.stat == DEAD)
+		if (L.stat == DEAD)
 			continue
+		if (!sound_played)
+			playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
+			sound_played = TRUE
 		attack_living(L)
 
 	for (var/atom/A in T)
-		// Catch any atoms that use health processing
-		if (A.health_max && A.is_alive())
-			var/damage_type = pick(BRUTE, BURN)
+		if (A.density && A.can_damage_health(damage, damage_type))
 			visible_message(SPAN_DANGER("A tendril flies out from \the [src] and smashes into \the [A]!"))
-			playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
+			if (!sound_played)
+				playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
 			A.damage_health(damage, damage_type)
 			return
 
-		// Finally, block spreading into any tiles with a dense object
-		if (A.density)
-			return
-
-	if(!(locate(/obj/effect/blob/core) in range(T, 2)) && prob(secondary_core_growth_chance))
-		new/obj/effect/blob/core/secondary(T)
+	if (!(locate(/obj/effect/blob/core) in range(T, 2)) && prob(secondary_core_growth_chance))
+		new /obj/effect/blob/core/secondary (T)
 	else
 		new expandType(T, min(get_current_health(), 30))
+
 
 /obj/effect/blob/proc/pulse(var/forceLeft, var/list/dirs)
 	sleep(4)
