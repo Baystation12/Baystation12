@@ -532,6 +532,13 @@
 	req_tech = list(TECH_ESOTERIC = 4, TECH_COMBAT = 5, TECH_BIO = 3)
 	id = "augment_wristblade"
 
+/datum/design/item/mechfab/augment/powerfist
+	name = "Pneumatic Powerfist"
+	build_path = /obj/item/organ/internal/augment/active/item/powerfist
+	materials = list(DEFAULT_WALL_MATERIAL = 6000, MATERIAL_PHORON = 1000, MATERIAL_URANIUM = 500)
+	req_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 4, TECH_MATERIAL = 4, TECH_BIO = 3)
+	id = "augment_powerfist"
+
 /datum/design/item/mechfab/augment/armblade/popout_shotgun
 	name = "Pop-out shotgun"
 	build_path = /obj/item/organ/internal/augment/active/item/popout_shotgun
