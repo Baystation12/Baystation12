@@ -20,6 +20,7 @@ var/list/mining_floors = list()
 	blocks_air = 1
 	temperature = T0C
 	color = COLOR_ASTEROID_ROCK
+	turf_flags = TURF_DISALLOW_BLOB
 	var/mined_turf = /turf/simulated/floor/asteroid
 	var/material/mineral
 	var/mined_ore = 0
