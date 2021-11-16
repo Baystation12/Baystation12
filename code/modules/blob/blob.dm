@@ -30,10 +30,6 @@
 	var/product = /obj/item/blob_tendril
 	var/attack_freq = 5 //see proc/attempt_attack; lower is more often, min 1
 
-/obj/effect/blob/New(loc)
-	update_icon()
-	return ..(loc)
-
 /obj/effect/blob/Initialize()
 	. = ..()
 	START_PROCESSING(SSobj, src)
