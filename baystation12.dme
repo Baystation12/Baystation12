@@ -1400,6 +1400,7 @@
 #include "code\modules\augment\active\nerve_dampeners.dm"
 #include "code\modules\augment\active\polytool.dm"
 #include "code\modules\augment\active\popout_shotgun.dm"
+#include "code\modules\augment\active\powerfist.dm"
 #include "code\modules\augment\active\tool\engineering.dm"
 #include "code\modules\augment\active\tool\surgical.dm"
 #include "code\modules\augment\passive\armor.dm"
