@@ -1,4 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - bugfix: Windows now properly break when hit enough, instead of sometimes not breaking.
