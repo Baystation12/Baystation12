@@ -87,3 +87,8 @@
 	name = OUTFIT_JOB_NAME("Chaplain - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/service
 	shoes = /obj/item/clothing/shoes/dutyboots
+
+/decl/hierarchy/outfit/job/torch/crew/service/chaplain/army
+	name = OUTFIT_JOB_NAME("Chaplain - Army")
+	uniform = /obj/item/clothing/under/solgov/utility/army/service
+	shoes = /obj/item/clothing/shoes/dutyboots
