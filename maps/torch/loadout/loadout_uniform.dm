@@ -46,6 +46,21 @@
 /datum/gear/uniform/formal_pants
 	allowed_roles = SEMIANDFORMAL_ROLES
 
+//from infinity
+/datum/gear/uniform/formal_shirt_and_pants
+	display_name = "formal shirts with pants"
+	allowed_roles = SEMIANDFORMAL_ROLES
+	path = /obj/item/clothing/under/suit_jacket
+
+/datum/gear/uniform/formal_shirt_and_pants/New()
+	..()
+	var/list/shirts = list()
+	shirts += /obj/item/clothing/under/suit_jacket/charcoal/no_accessories
+	shirts += /obj/item/clothing/under/suit_jacket/navy/no_accessories
+	shirts += /obj/item/clothing/under/suit_jacket/burgundy/no_accessories
+	shirts += /obj/item/clothing/under/suit_jacket/checkered/no_accessories
+	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(shirts)
+
 /datum/gear/uniform/formal_pants/custom
 	allowed_roles = SEMIANDFORMAL_ROLES
 

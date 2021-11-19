@@ -688,6 +688,10 @@
 	name = "Emo Fringe"
 	icon_state = "hair_emofringe"
 
+/datum/sprite_accessory/hair/hipstery
+	name = "Hipstery"
+	icon_state = "hair_hipstery"
+
 /datum/sprite_accessory/hair/himecutalt
 	name = "Himecut Alt"
 	icon_state = "hair_himecut_alt"
