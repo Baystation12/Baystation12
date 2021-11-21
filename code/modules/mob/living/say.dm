@@ -346,9 +346,10 @@ proc/get_radio_key_from_channel(var/channel)
 		eavesdroping_obj -= listening_obj
 		for(var/mob/M in eavesdroping)
 			if(M)
+				image_to(M, speech_bubble)
 				M.hear_say(stars(message), verb, speaking, alt_name, italics, src, speech_sound, sound_vol)
 				if(M.client)
-					speech_bubble_recipients |= M.client
+					// speech_bubble_recipients |= M.client
 					eavesdroppers |= M.client
 
 		for(var/obj/O in eavesdroping)
@@ -356,6 +357,7 @@ proc/get_radio_key_from_channel(var/channel)
 				if(O) //It's possible that it could be deleted in the meantime.
 					O.hear_talk(src, stars(message), verb, speaking)
 
+	INVOKE_ASYNC(GLOBAL_PROC, .proc/animate_speech_bubble, speech_bubble, speech_bubble_recipients | eavesdroppers, 30)
 	INVOKE_ASYNC(src, /atom/movable/proc/animate_chat, message, speaking, italics, speech_bubble_recipients)
 	if(length(eavesdroppers))
 		INVOKE_ASYNC(src, /atom/movable/proc/animate_chat, stars(message), speaking, italics, eavesdroppers)

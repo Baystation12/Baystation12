@@ -10,9 +10,9 @@
 	I.alpha = 0
 	for(var/client/C in show_to)
 		C.images += I
-	animate(I, transform = 0, alpha = 255, time = 0.2 SECONDS, easing = EASE_IN)
-	addtimer(CALLBACK(GLOBAL_PROC, /.proc/fade_out, I, show_to), duration - 0.5 SECONDS)
+	animate(I, transform = 0, alpha = 255, time = 2, easing = EASE_IN)
+	addtimer(CALLBACK(GLOBAL_PROC, /.proc/fade_out, I, show_to), duration - 5)
 
 /proc/fade_out(image/I, list/show_to)
-	animate(I, alpha = 0, time = 0.5 SECONDS, easing = EASE_IN)
-	addtimer(CALLBACK(GLOBAL_PROC, /.proc/remove_images_from_clients, I, show_to), 0.5 SECONDS)
+	animate(I, alpha = 0, time = 5, easing = EASE_IN)
+	addtimer(CALLBACK(GLOBAL_PROC, /.proc/remove_images_from_clients, I, show_to), 5)
