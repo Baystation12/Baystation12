@@ -40,15 +40,6 @@
 /datum/ai_holder/simple_animal/melee/carp
 	speak_chance = 0
 
-/datum/ai_holder/simple_animal/melee/carp/engage_target()
-	. = ..()
-
-	var/mob/living/L = .
-	if(istype(L))
-		if(prob(15))
-			L.Weaken(3)
-			L.visible_message("<span class='danger'>\the [src] knocks down \the [L]!</span>")
-
 /datum/ai_holder/simple_animal/melee/carp/find_target(list/possible_targets, has_targets_list)
 	. = ..()
 
