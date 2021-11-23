@@ -2019,6 +2019,7 @@
 #include "code\modules\mob\language\human\selenian.dm"
 #include "code\modules\mob\language\human\spanish.dm"
 #include "code\modules\mob\language\human\misc\gutter.dm"
+#include "code\modules\mob\language\human\misc\legalese.dm"
 #include "code\modules\mob\language\human\misc\spacer.dm"
 #include "code\modules\mob\living\autohiss.dm"
 #include "code\modules\mob\living\damage_procs.dm"

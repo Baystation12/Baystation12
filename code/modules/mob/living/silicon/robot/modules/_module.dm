@@ -24,7 +24,8 @@
 		LANGUAGE_UNATHI_YEOSA   = TRUE,
 		LANGUAGE_SKRELLIAN      = TRUE,
 		LANGUAGE_NABBER         = FALSE,
-		LANGUAGE_SIGN           = FALSE
+		LANGUAGE_SIGN           = FALSE,
+		LANGUAGE_LEGALESE       = TRUE
 	)
 	var/sprites = list()
 	var/can_be_pushed = 1
