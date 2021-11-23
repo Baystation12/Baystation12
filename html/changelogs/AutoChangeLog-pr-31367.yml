@@ -1,0 +1,4 @@
+author: Mucker
+delete-after: true
+changes:
+  - tweak: Removed the extra 15% chance a carp would knock down its target while attacking.
