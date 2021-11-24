@@ -2726,7 +2726,6 @@
 #include "code\modules\psionics\interface\ui_toggles.dm"
 #include "code\modules\psionics\mob\mob.dm"
 #include "code\modules\psionics\mob\mob_assay.dm"
-#include "code\modules\psionics\mob\mob_interactions.dm"
 #include "code\modules\psionics\null\_null.dm"
 #include "code\modules\psionics\null\chemistry.dm"
 #include "code\modules\psionics\null\flooring.dm"
