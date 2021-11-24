@@ -205,14 +205,14 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 	for (var/path in common_dirs)
 		var/list/filenames = flist(path)
 		for(var/filename in filenames)
-			if(copytext(filename, -1) != "/") // Ignore directories.
+			if(copytext_char(filename, -1) != "/") // Ignore directories.
 				if(fexists(path + filename))
 					common[filename] = fcopy_rsc(path + filename)
 					register_asset(filename, common[filename])
 	for (var/path in uncommon_dirs)
 		var/list/filenames = flist(path)
 		for(var/filename in filenames)
-			if(copytext(filename, -1) != "/") // Ignore directories.
+			if(copytext_char(filename, -1) != "/") // Ignore directories.
 				if(fexists(path + filename))
 					register_asset(filename, fcopy_rsc(path + filename))
 
@@ -222,7 +222,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 
 	var/list/filenames = flist(MAP_IMAGE_PATH)
 	for(var/filename in filenames)
-		if(copytext(filename, -1) != "/") // Ignore directories.
+		if(copytext_char(filename, -1) != "/") // Ignore directories.
 			var/file_path = MAP_IMAGE_PATH + filename
 			if((filename in mapnames) && fexists(file_path))
 				common[filename] = fcopy_rsc(file_path)

@@ -23,11 +23,11 @@ SUBSYSTEM_DEF(chat)
 	if (target == world)
 		target = GLOB.clients
 	var/original_message = message //Some macros resist parsing elsewhere; strip them here
-	message = replacetext(message, "\improper", "")
-	message = replacetext(message, "\proper", "")
+	message = replacetext_char(message, "\improper", "")
+	message = replacetext_char(message, "\proper", "")
 	if (handle_whitespace)
-		message = replacetext(message, "\n", "<br>")
-		message = replacetext(message, "\t", "[FOURSPACES][FOURSPACES]")
+		message = replacetext_char(message, "\n", "<br>")
+		message = replacetext_char(message, "\t", "[FOURSPACES][FOURSPACES]")
 	if (trailing_newline)
 		message += "<br>"
 	var/twiceEncoded = url_encode(url_encode(message)) // Double encode so that JS can consume utf-8

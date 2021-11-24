@@ -743,7 +743,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	if(verbose || length(description) <= MAX_DESC_LEN)
 		dat += "[description]"
 	else
-		dat += "[copytext(description, 1, MAX_DESC_LEN)] \[...\]"
+		dat += "[copytext_char(description, 1, MAX_DESC_LEN)] \[...\]"
 	if(append)
 		dat += "<br>[append]"
 	dat += "</td>"

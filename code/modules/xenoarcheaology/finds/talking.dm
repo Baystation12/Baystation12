@@ -82,9 +82,9 @@
 	if(length(text)==1)
 		text=uppertext(text)
 	else
-		var/cap = copytext(text,1,2)
+		var/cap = copytext_char(text,1,2)
 		cap = uppertext(cap)
-		cap += copytext(text,2,length(text)+1)
+		cap += copytext_char(text,2,length(text)+1)
 		text=cap
 	var/q = 0
 	msg+=text

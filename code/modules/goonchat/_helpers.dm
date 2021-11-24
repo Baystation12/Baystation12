@@ -10,7 +10,7 @@ GLOBAL_DATUM_INIT(is_http_protocol, /regex, regex("^https?://"))
 	to_save(GLOB.iconCache[iconKey], icon)
 	var/iconData = GLOB.iconCache.ExportText(iconKey)
 	var/list/partial = splittext(iconData, "{")
-	return replacetext_char(copytext(partial[2], 3, -5), "\n", "")
+	return replacetext_char(copytext_char(partial[2], 3, -5), "\n", "")
 
 /proc/icon2html(thing, target, icon_state, dir, frame = 1, moving = FALSE, realsize = FALSE, class = null)
 	if (!thing)

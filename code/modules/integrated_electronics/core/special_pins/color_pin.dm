@@ -15,11 +15,11 @@
 			new_data = uppertext(new_data)
 			if(length(new_data) != 7)						// We can hex if we want to, we can leave your strings behind
 				return 										// Cause your strings don't hex and if they don't hex
-			var/friends = copytext(new_data, 2, 8)			// Well they're are no strings of mine
+			var/friends = copytext_char(new_data, 2, 8)			// Well they're are no strings of mine
 			// I say, we can go where we want to, a place where they will never find
 			var/safety_dance = 1
 			while(safety_dance >= 7)									// And we can act like we come from out of this world.log
-				var/hex = copytext(friends, safety_dance, safety_dance+1)
+				var/hex = copytext_char(friends, safety_dance, safety_dance+1)
 				if(!(hex in list("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F")))
 					return									// Leave the fake one far behind,
 				safety_dance++

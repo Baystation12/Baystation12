@@ -299,7 +299,7 @@ var/global/floorIsLava = 0
 
 
 /datum/admins/proc/player_has_info(var/key as text)
-	var/savefile/info = new("data/player_saves/[copytext(key, 1, 2)]/[key]/info.sav")
+	var/savefile/info = new("data/player_saves/[copytext_char(key, 1, 2)]/[key]/info.sav")
 	var/list/infos
 	from_save(info, infos)
 	if(!infos || !infos.len) return 0
@@ -325,7 +325,7 @@ var/global/floorIsLava = 0
 			break
 	dat += "<b>Player age: [p_age]</b><br><ul id='notes'>"
 
-	var/savefile/info = new("data/player_saves/[copytext(key, 1, 2)]/[key]/info.sav")
+	var/savefile/info = new("data/player_saves/[copytext_char(key, 1, 2)]/[key]/info.sav")
 	var/list/infos
 	from_save(info, infos)
 	if(!infos)
@@ -639,7 +639,7 @@ var/global/floorIsLava = 0
 	for(var/t in jobban_keylist)
 		var/r = t
 		if( findtext(r,"##") )
-			r = copytext( r, 1, findtext(r,"##") )//removes the description
+			r = copytext_char( r, 1, findtext(r,"##") )//removes the description
 		dat += text("<tr><td>[t] (<A href='?src=\ref[src];removejobban=[r]'>unban</A>)</td></tr>")
 	dat += "</table>"
 	show_browser(usr, dat, "window=ban;size=400x400")

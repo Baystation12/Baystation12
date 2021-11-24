@@ -22,7 +22,7 @@
 
 	var/datum/language/L = parse_language(message)
 	if(L && L.flags & HIVEMIND)
-		L.broadcast(src,trim(copytext(message,3)),src.truename)
+		L.broadcast(src,trim(copytext_char(message,3)),src.truename)
 		return
 
 	if(!host)

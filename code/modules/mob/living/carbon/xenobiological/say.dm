@@ -10,7 +10,7 @@
 	return ..(message, null, verb)
 
 /mob/living/carbon/slime/say_quote(var/text)
-	var/ending = copytext(text, -1)
+	var/ending = copytext_char(text, -1)
 
 	if (ending == "?")
 		return "asks";

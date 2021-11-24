@@ -209,8 +209,8 @@
 
 	var/split = min(index+1, length(text))
 
-	var/before_text = copytext(text, 1, split)
-	var/after_text = copytext(text, split, 0)
+	var/before_text = copytext_char(text, 1, split)
+	var/after_text = copytext_char(text, split, 0)
 
 	set_pin_data(IC_OUTPUT, 1, before_text)
 	set_pin_data(IC_OUTPUT, 2, after_text)

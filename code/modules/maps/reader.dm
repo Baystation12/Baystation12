@@ -167,7 +167,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 									world.maxx = xcrd
 
 							if(xcrd >= 1)
-								var/model_key = copytext(line, tpos, tpos + key_len)
+								var/model_key = copytext_char(line, tpos, tpos + key_len)
 								var/no_afterchange = no_changeturf || zexpansion
 								if(!no_afterchange || (model_key != space_key))
 									if(!grid_models[model_key])
@@ -264,9 +264,9 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 			//finding next member (e.g /turf/unsimulated/wall{icon_state = "rock"} or /area/mine/explored)
 			dpos = find_next_delimiter_position(model, old_position, ",", "{", "}") //find next delimiter (comma here) that's not within {...}
 
-			var/full_def = trim_text(copytext(model, old_position, dpos)) //full definition, e.g : /obj/foo/bar{variables=derp}
+			var/full_def = trim_text(copytext_char(model, old_position, dpos)) //full definition, e.g : /obj/foo/bar{variables=derp}
 			var/variables_start = findtext(full_def, "{")
-			var/atom_def = text2path(trim_text(copytext(full_def, 1, variables_start))) //path definition, e.g /obj/foo/bar
+			var/atom_def = text2path(trim_text(copytext_char(full_def, 1, variables_start))) //path definition, e.g /obj/foo/bar
 			old_position = dpos + 1
 
 			if(!atom_def) // Skip the item if the path does not exist.  Fix your crap, mappers!
@@ -284,7 +284,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 			var/list/fields
 
 			if(variables_start)//if there's any variable
-				full_def = copytext(full_def,variables_start+1,length(full_def))//removing the last '}'
+				full_def = copytext_char(full_def,variables_start+1,length(full_def))//removing the last '}'
 				fields = readlist(full_def, ";")
 				if(fields.len)
 					if(!trim(fields[fields.len]))
@@ -439,7 +439,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 /dmm_suite/proc/readlistitem(text as text)
 	//Check for string
 	if(findtext(text,"\"",1,2))
-		. = copytext(text,2,findtext(text,"\"",3,0))
+		. = copytext_char(text,2,findtext(text,"\"",3,0))
 
 	//Check for number
 	else if(isnum(text2num(text)) && text == "[text2num(text)]") //text2num will parse truthy false positives; this demands that the only numbers parsed as such are properly formatted ones.
@@ -450,12 +450,12 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 		. = null
 
 	//Check for list
-	else if(copytext(text,1,5) == "list")
-		. = readlist(copytext(text,6,length(text)))
+	else if(copytext_char(text,1,5) == "list")
+		. = readlist(copytext_char(text,6,length(text)))
 
 	//Check for file
-	else if(copytext(text,1,2) == "'")
-		. = file(copytext(text,2,length(text)))
+	else if(copytext_char(text,1,2) == "'")
+		. = file(copytext_char(text,2,length(text)))
 
 	//Check for path
 	else if(ispath(text2path(text)))
@@ -476,7 +476,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 		//check if this is a simple variable (as in list(var1, var2)) or an associative one (as in list(var1="foo",var2=7))
 		var/equal_position = findtext(text,"=",old_position, position)
 
-		var/trim_left = trim_text(copytext(text,old_position,(equal_position ? equal_position : position)), 0)
+		var/trim_left = trim_text(copytext_char(text,old_position,(equal_position ? equal_position : position)), 0)
 		old_position = position + 1
 
 		if(!length(trim_left))
@@ -497,7 +497,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 			if(isnum(left))
 				crash_with("Numerical key in associative list.")
 				break // This is invalid; apparently dm will runtime in this situation.
-			var/trim_right = trim_text(copytext(text,equal_position+1,position))//the content of the variable
+			var/trim_right = trim_text(copytext_char(text,equal_position+1,position))//the content of the variable
 			to_return[left] = readlistitem(trim_right)
 
 	while(position != 0)

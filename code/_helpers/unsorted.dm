@@ -20,9 +20,9 @@
 	else
 		if (length(HTMLstring) != 7)
 			CRASH("Given non-HTML argument!")
-	var/textr = copytext(HTMLstring, 2, 4)
-	var/textg = copytext(HTMLstring, 4, 6)
-	var/textb = copytext(HTMLstring, 6, 8)
+	var/textr = copytext_char(HTMLstring, 2, 4)
+	var/textg = copytext_char(HTMLstring, 4, 6)
+	var/textb = copytext_char(HTMLstring, 6, 8)
 	var/r = hex2num(textr)
 	var/g = hex2num(textg)
 	var/b = hex2num(textb)
@@ -262,7 +262,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 	var/i = 7, ch, len = length(key)
 
-	if(copytext(key, 7, 8) == "W") //webclient
+	if(copytext_char(key, 7, 8) == "W") //webclient
 		i++
 
 	for (, i <= len, ++i)

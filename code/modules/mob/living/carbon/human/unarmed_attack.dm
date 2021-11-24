@@ -263,7 +263,7 @@ var/global/list/sparring_attack_cache = list()
 
 	attack_damage = Clamp(attack_damage, 1, 5)
 
-	var/shoe_text = shoes ? copytext(shoes.name, 1, -1) : "foot"
+	var/shoe_text = shoes ? copytext_char(shoes.name, 1, -1) : "foot"
 	switch(attack_damage)
 		if(1 to 4)
 			user.visible_message(pick(

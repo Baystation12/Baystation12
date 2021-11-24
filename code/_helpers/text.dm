@@ -16,7 +16,7 @@
 // Run all strings to be used in an SQL query through this proc first to properly escape out injection attempts.
 /proc/sanitizeSQL(var/t as text)
 	var/sqltext = dbcon.Quote(t);
-	return copytext(sqltext, 2, length(sqltext));//Quote() adds quotes around input, we already do that
+	return copytext_char(sqltext, 2, length(sqltext));//Quote() adds quotes around input, we already do that
 
 /*
  * Text sanitization
@@ -50,7 +50,7 @@
 		input = replace_characters(input, list("<"=" ", ">"=" "))
 
 	if(trim)
-		//Maybe, we need trim text twice? Here and before copytext?
+		//Maybe, we need trim text twice? Here and before copytext_char?
 		input = trim(input)
 
 	return input
@@ -121,7 +121,7 @@
 	if(number_of_alphanumeric < 2)	return		//protects against tiny names like "A" and also names like "' ' ' ' ' ' ' '"
 
 	if(last_char_group == 1)
-		output = copytext(output,1,length(output))	//removes the last character (in this case a space)
+		output = copytext_char(output,1,length(output))	//removes the last character (in this case a space)
 
 	for(var/bad_name in list("space","floor","wall","r-wall","monkey","unknown","inactive ai","plating"))	//prevents these common metagamey names
 		if(cmptext(output,bad_name))	return	//(not case sensitive)
@@ -280,14 +280,14 @@
 		closetag = findtext(input, ">")
 		if(closetag && opentag)
 			if(closetag < opentag)
-				input = copytext(input, (closetag + 1))
+				input = copytext_char(input, (closetag + 1))
 			else
-				input = copytext(input, 1, opentag) + copytext(input, (closetag + 1))
+				input = copytext_char(input, 1, opentag) + copytext_char(input, (closetag + 1))
 		else if(closetag || opentag)
 			if(opentag)
-				input = copytext(input, 1, opentag)
+				input = copytext_char(input, 1, opentag)
 			else
-				input = copytext(input, (closetag + 1))
+				input = copytext_char(input, (closetag + 1))
 		else
 			break
 
@@ -301,15 +301,15 @@
 	if(length(text) != length(compare))
 		return 0
 	for(var/i = 1, i < length(text), i++)
-		var/a = copytext(text,i,i+1)
-		var/b = copytext(compare,i,i+1)
+		var/a = copytext_char(text,i,i+1)
+		var/b = copytext_char(compare,i,i+1)
 		//if it isn't both the same letter, or if they are both the replacement character
 		//(no way to know what it was supposed to be)
 		if(a != b)
 			if(a == replace) //if A is the replacement char
-				newtext = copytext(newtext,1,i) + b + copytext(newtext, i+1)
+				newtext = copytext_char(newtext,1,i) + b + copytext_char(newtext, i+1)
 			else if(b == replace) //if B is the replacement char
-				newtext = copytext(newtext,1,i) + a + copytext(newtext, i+1)
+				newtext = copytext_char(newtext,1,i) + a + copytext_char(newtext, i+1)
 			else //The lists disagree, Uh-oh!
 				return 0
 	return newtext
@@ -321,7 +321,7 @@
 		return 0
 	var/count = 0
 	for(var/i = 1, i <= length(text), i++)
-		var/a = copytext(text,i,i+1)
+		var/a = copytext_char(text,i,i+1)
 		if(a == character)
 			count++
 	return count
@@ -342,9 +342,9 @@ proc/TextPreview(var/string,var/len=40)
 	else
 		return "[copytext_preserve_html(string, 1, 37)]..."
 
-//alternative copytext() for encoded text, doesn't break html entities (&#34; and other)
+//alternative copytext_char() for encoded text, doesn't break html entities (&#34; and other)
 /proc/copytext_preserve_html(var/text, var/first, var/last)
-	return html_encode(copytext(html_decode(text), first, last))
+	return html_encode(copytext_char(html_decode(text), first, last))
 
 /proc/create_text_tag(var/tagname, var/tagdesc = tagname, var/client/C = null)
 	if(!(C && C.get_preference_value(/datum/client_preference/chat_tags) == GLOB.PREF_SHOW))
@@ -516,9 +516,9 @@ proc/TextPreview(var/string,var/len=40)
 	if(!next_space)	//trailing bs
 		return string
 
-	var/base = next_backslash == 1 ? "" : copytext(string, 1, next_backslash)
-	var/macro = lowertext(copytext(string, next_backslash + 1, next_space))
-	var/rest = next_backslash > leng ? "" : copytext(string, next_space + 1)
+	var/base = next_backslash == 1 ? "" : copytext_char(string, 1, next_backslash)
+	var/macro = lowertext(copytext_char(string, next_backslash + 1, next_space))
+	var/rest = next_backslash > leng ? "" : copytext_char(string, next_space + 1)
 
 	//See http://www.byond.com/docs/ref/info.html#/DM/text/macros
 	switch(macro)

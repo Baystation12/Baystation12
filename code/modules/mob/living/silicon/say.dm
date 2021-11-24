@@ -39,7 +39,7 @@
 		return silicon_radio.talk_into(src,message,message_mode,verb,speaking)
 
 /mob/living/silicon/say_quote(var/text)
-	var/ending = copytext(text, -1)
+	var/ending = copytext_char(text, -1)
 	if (ending == "?")
 		return speak_query
 	else if (ending == "!")

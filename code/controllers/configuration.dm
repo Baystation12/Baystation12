@@ -442,10 +442,10 @@
 		if (!line || line[1] == "#")
 			continue
 		var/index = findtext(line, " ")
-		var/name = index ? lowertext(copytext(line, 1, index)) : lowertext(line)
+		var/name = index ? lowertext(copytext_char(line, 1, index)) : lowertext(line)
 		if (!name)
 			continue
-		var/value = index ? copytext(line, index + 1) : TRUE
+		var/value = index ? copytext_char(line, index + 1) : TRUE
 		if (!result[name])
 			result[name] = value
 			continue
@@ -624,7 +624,7 @@
 			if ("probability")
 				var/regex/flatten = new (@"\s+", "g")
 				for (var/entry in value)
-					var/list/parts = splittext(replacetext(entry, flatten, " "), " ")
+					var/list/parts = splittext(replacetext_char(entry, flatten, " "), " ")
 					var/mode = lowertext(parts[1])
 					var/chance = text2num(parts[2])
 					var/reason

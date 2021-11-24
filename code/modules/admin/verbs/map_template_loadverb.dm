@@ -75,7 +75,7 @@
 	var/map = input(usr, "Choose a Map Template to upload to template storage","Upload Map Template") as null|file
 	if(!map)
 		return
-	if(copytext("[map]",-4) != ".dmm")
+	if(copytext_char("[map]",-4) != ".dmm")
 		to_chat(usr, "Bad map file: [map]")
 		return
 

@@ -33,7 +33,7 @@ var/jobban_keylist[0]		//to store the keys & ranks
 		if(findtext(s,"[check_key] - [rank]") == 1 )
 			var/startpos = findtext(s, "## ")+3
 			if(startpos && startpos<length(s))
-				var/text = copytext(s, startpos, 0)
+				var/text = copytext_char(s, startpos, 0)
 				if(text)
 					return text
 			return "Reason Unspecified"

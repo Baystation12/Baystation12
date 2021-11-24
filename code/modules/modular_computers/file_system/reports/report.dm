@@ -94,7 +94,7 @@
 
 /datum/computer_file/report/proc/rename_file(append)
 	append = append || time_stamp()
-	append = replacetext(append, ":", "_")
+	append = replacetext_char(append, ":", "_")
 	if(istype(holder, /obj/item/stock_parts/computer/hard_drive))
 		holder.rename_file(src, "[form_name]_[append]")
 	else

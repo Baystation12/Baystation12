@@ -171,8 +171,8 @@
 		if(blood_species != species.name)
 			return 1
 
-	var/donor_antigen = copytext(blood_type, 1, length(blood_type))
-	var/receiver_antigen = copytext(dna.b_type, 1, length(dna.b_type))
+	var/donor_antigen = copytext_char(blood_type, 1, length(blood_type))
+	var/receiver_antigen = copytext_char(dna.b_type, 1, length(dna.b_type))
 	var/donor_rh = (findtext(blood_type, "+") > 0)
 	var/receiver_rh = (findtext(dna.b_type, "+") > 0)
 

@@ -57,12 +57,12 @@
 	var/view = viewer.client ? viewer.client.view : world.view
 	//Find EAST/WEST implementations
 	if(findtext(X,"EAST-"))
-		var/num = text2num(copytext(X,6)) //Trim EAST-
+		var/num = text2num(copytext_char(X,6)) //Trim EAST-
 		if(!num)
 			num = 0
 		. = view*2 + 1 - num
 	else if(findtext(X,"WEST+"))
-		var/num = text2num(copytext(X,6)) //Trim WEST+
+		var/num = text2num(copytext_char(X,6)) //Trim WEST+
 		if(!num)
 			num = 0
 		. = num+1
@@ -81,12 +81,12 @@
 /obj/screen/movable/proc/decode_screen_Y(var/Y, var/mob/viewer)
 	var/view = viewer.client ? viewer.client.view : world.view
 	if(findtext(Y,"NORTH-"))
-		var/num = text2num(copytext(Y,7)) //Trim NORTH-
+		var/num = text2num(copytext_char(Y,7)) //Trim NORTH-
 		if(!num)
 			num = 0
 		. = view*2 + 1 - num
 	else if(findtext(Y,"SOUTH+"))
-		var/num = text2num(copytext(Y,7)) //Time SOUTH+
+		var/num = text2num(copytext_char(Y,7)) //Time SOUTH+
 		if(!num)
 			num = 0
 		. = num+1
