@@ -23,20 +23,44 @@
 		return
 
 	var/message = sanitize(input(user, "Shout a message?", "Megaphone", null)  as text)
+	var/datum/language/lang
+
 	if(!message)
 		return
+
+	lang = user.parse_language(message)
+	if(lang)
+		message = copytext_char(message, 2 + length_char(lang.key))
+	else
+		lang = user.get_default_language()
+
+	if(lang.flags & (NONVERBAL | SIGNLANG))
+		to_chat(user, SPAN_WARNING("You can't use sign language!"))
+		return
+
+	message = trim_left(message)
 	message = capitalize(message)
+	var/list/rec = list()
 	if ((src.loc == user && usr.stat == 0))
 		if(emagged)
 			if(insults)
+				var/picked = pick(insultmsg)
 				for(var/mob/O in (viewers(user)))
-					O.show_message("<B>[user]</B> broadcasts, <FONT size=3>\"[pick(insultmsg)]\"</FONT>",2) // 2 stands for hearable message
+					O.hear_say(picked, "broadcasts", lang, null, 0, user, null, null, 6)
+					if(O.client)
+						rec |= O.client
+
+				INVOKE_ASYNC(user, /atom/movable/proc/animate_chat, picked, lang, 0, rec, 5 SECONDS, 1)
 				insults--
 			else
 				to_chat(user, "<span class='warning'>*BZZZZzzzzzt*</span>")
 		else
 			for(var/mob/O in (viewers(user)))
-				O.show_message("<B>[user]</B> broadcasts, <FONT size=3>\"[message]\"</FONT>",2) // 2 stands for hearable message
+				O.hear_say(message, "broadcasts", lang, null, 0, user, null, null, 6)
+				if(O.client)
+					rec |= O.client
+
+			INVOKE_ASYNC(user, /atom/movable/proc/animate_chat, message, lang, 0, rec, 5 SECONDS, 1)
 
 		spamcheck = 1
 		spawn(20)
