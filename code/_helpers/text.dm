@@ -280,14 +280,14 @@
 		closetag = findtext(input, ">")
 		if(closetag && opentag)
 			if(closetag < opentag)
-				input = copytext_char(input, (closetag + 1))
+				input = copytext(input, (closetag + 1))
 			else
-				input = copytext_char(input, 1, opentag) + copytext_char(input, (closetag + 1))
+				input = copytext(input, 1, opentag) + copytext(input, (closetag + 1))
 		else if(closetag || opentag)
 			if(opentag)
-				input = copytext_char(input, 1, opentag)
+				input = copytext(input, 1, opentag)
 			else
-				input = copytext_char(input, (closetag + 1))
+				input = copytext(input, (closetag + 1))
 		else
 			break
 
