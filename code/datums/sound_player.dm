@@ -28,7 +28,6 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 	return new token_type(source, sound_id, new_sound, range, prefer_mute, preference)
 
 /decl/sound_player/proc/PlayLoopingSound(var/atom/source, var/sound_id, var/_sound, var/volume, var/range, var/falloff = 1, var/echo, var/frequency, var/prefer_mute, var/datum/client_preference/preference, streaming)
-	var/sound/S = istype(sound, /sound) ? sound : new(sound)
 	if(!_sound)
 		return
 	var/sound/S = istype(_sound, /sound) ? _sound : new(_sound)
@@ -101,7 +100,7 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 		CRASH("Invalid sound: [log_info_line(new_sound)]")
 	if(new_sound.repeat && !sound_id)
 		CRASH("No sound id given")
-	if(!PrivIsValidEnvironment(sound.environment))
+	if(!PrivIsValidEnvironment(new_sound.environment))
 		CRASH("Invalid sound environment: [log_info_line(new_sound.environment)]")
 
 	src.prefer_mute = prefer_mute
@@ -257,8 +256,8 @@ datum/sound_token/proc/PrivAddListener(var/atom/listener)
 	_sound.environment = PrivGetEnvironment(listener)
 	_sound.status = status|listener_status[listener]
 	if(update_sound)
-		sound.status |= SOUND_UPDATE
-	sound_to(listener, sound)
+		_sound.status |= SOUND_UPDATE
+	sound_to(listener, _sound)
 
 /datum/sound_token/proc/PrivGetEnvironment(var/listener)
 	var/area/A = get_area(listener)

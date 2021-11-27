@@ -13,7 +13,7 @@
 		CRASH("Invalid sound: [log_info_line(new_sound)]")
 	if(new_sound.repeat && !sound_id)
 		CRASH("No sound id given")
-	if(!PrivIsValidEnvironment(sound.environment))
+	if(!PrivIsValidEnvironment(new_sound.environment))
 		CRASH("Invalid sound environment: [log_info_line(new_sound.environment)]")
 
 	src.prefer_mute = prefer_mute
