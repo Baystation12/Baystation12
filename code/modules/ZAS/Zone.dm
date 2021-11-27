@@ -52,6 +52,7 @@ Class Procs:
 	var/list/graphic_add = list()
 	var/list/graphic_remove = list()
 	var/last_air_temperature = TCMB
+	var/firelevel = 0
 
 /zone/New()
 	SSair.add_zone(src)
@@ -146,7 +147,7 @@ Class Procs:
 /zone/proc/tick()
 
 	// Update fires.
-	if(air.temperature >= PHORON_FLASHPOINT && !(src in SSair.active_fire_zones) && air.check_combustability() && contents.len)
+	if(air.temperature >= PHORON_FLASHPOINT && !(src in SSair.active_fire_zones) && length(contents) && air.check_combustability())
 		var/turf/T = pick(contents)
 		if(istype(T))
 			T.create_fire(vsc.fire_firelevel_multiplier)
