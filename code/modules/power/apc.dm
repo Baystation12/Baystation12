@@ -807,7 +807,7 @@
 
 	var/obj/item/cell/cell = get_cell()
 	if(!cell || cell.charge <= 0)
-		if(needs_powerdown_sound == TRUE)
+		if(needs_powerdown_sound)
 			playsound(src, 'sound/machines/apc_nopower.ogg', 75, 0)
 			needs_powerdown_sound = FALSE
 		else

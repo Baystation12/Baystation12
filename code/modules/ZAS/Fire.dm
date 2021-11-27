@@ -244,7 +244,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 
 		//Liquid Fuel
 		var/fuel_area = 0
-		if(zone && length(zone.fuel_objs))
+		if(zone)
 			for(var/obj/effect/decal/cleanable/liquid_fuel/fuel in zone.fuel_objs)
 				liquid_fuel += fuel.amount*LIQUIDFUEL_AMOUNT_TO_MOL
 				fuel_area++
