@@ -4,6 +4,9 @@
 #define ENVIRON 3
 */
 
+/area
+	var/list/machinery_list
+
 /area/proc/powered(var/chan)		// return true if the area has power to given channel
 	if(!requires_power)
 		return 1
@@ -23,7 +26,7 @@
 
 // called when power status changes
 /area/proc/power_change()
-	for(var/obj/machinery/M in src)	// for each machine in the area
+	for(var/obj/machinery/M in machinery_list)	// for each machine in the area
 		M.power_change()			// reverify power status (to update icons etc.)
 	if (fire || eject || party)
 		update_icon()
