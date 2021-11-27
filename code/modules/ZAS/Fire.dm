@@ -43,7 +43,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 
 /zone/proc/calculate_fire_level()
 	var/datum/gas_mixture/burn_gas = air.remove_ratio(vsc.fire_consuption_rate, fire_tiles.len)
-	var/firelevel = burn_gas.react(src, fire_tiles, force_burn = 1, no_check = 1)
+	firelevel = burn_gas.react(src, fire_tiles, force_burn = 1, no_check = 1)
 	air.merge(burn_gas)
 
 /zone/proc/process_fire()
@@ -185,7 +185,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 	var/datum/gas_mixture/air_contents = loc.return_air()
 	color = fire_color(air_contents.temperature)
 
-	update_firelevel(f1)
+	update_firelevel(fl)
 	SSair.active_hotspots.Add(src)
 
 /obj/fire/proc/update_firelevel(var/new_firelevel)

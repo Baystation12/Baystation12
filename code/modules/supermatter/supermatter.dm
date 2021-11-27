@@ -571,7 +571,7 @@
 	gasefficency = 0.125
 
 	pull_time = 150
-	explosion_power = 3
+	explosion_power = 20
 
 /obj/machinery/power/supermatter/shard/announce_warning() //Shards don't get announcements
 	return
