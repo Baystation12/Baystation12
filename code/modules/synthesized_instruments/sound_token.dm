@@ -16,13 +16,13 @@
 	if(!PrivIsValidEnvironment(new_sound.environment))
 		CRASH("Invalid sound environment: [log_info_line(new_sound.environment)]")
 
-	src.prefer_mute = prefer_mute
-	src.range       = range
-	src.source      = source
-	src._sound      = new_sound
-	src.sound_id    = sound_id
-	src.use_env	    = use_env
-	src.player      = player
+	src.prefer_mute	= prefer_mute
+	src.range		= range
+	src.source		= source
+	src._sound		= new_sound
+	src.sound_id	= sound_id
+	src.use_env		= use_env
+	src.player		= player
 
 	var/channel = GLOB.sound_player.PrivGetChannel(src) //Attempt to find a channel
 	if(!isnum(channel))

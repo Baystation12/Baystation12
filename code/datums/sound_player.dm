@@ -103,11 +103,11 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 	if(!PrivIsValidEnvironment(new_sound.environment))
 		CRASH("Invalid sound environment: [log_info_line(new_sound.environment)]")
 
-	src.prefer_mute = prefer_mute
-	src.range       = range
-	src.source      = source
-	src._sound      = new_sound
-	src.sound_id    = sound_id
+	src.prefer_mute	= prefer_mute
+	src.range		= range
+	src.source		= source
+	src._sound		= new_sound
+	src.sound_id	= sound_id
 	src.preference	= preference
 
 	if(new_sound.repeat) // Non-looping sounds may not reserve a sound channel due to the risk of not hearing when someone forgets to stop the token

@@ -220,8 +220,6 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 	else
 		times_failed_to_calc_firelevel = 0
 
-
-
 	while (curr_defer.len)
 		var/turf/T = curr_defer[curr_defer.len]
 		curr_defer.len--

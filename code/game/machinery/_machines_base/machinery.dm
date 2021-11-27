@@ -181,7 +181,7 @@ Class Procs:
 /obj/machinery/proc/ProcessAll(wait)
 	if(processing_flags & MACHINERY_PROCESS_COMPONENTS)
 		for(var/obj/item/stock_parts/part as anything in processing_parts)
-			if(istype(part) && part.machine_process(src) == PROCESS_KILL)
+			if(part.machine_process(src) == PROCESS_KILL)
 				part.stop_processing()
 
 	if((processing_flags & MACHINERY_PROCESS_SELF) && Process(wait) == PROCESS_KILL)
