@@ -207,6 +207,3 @@
 
 /obj/item/organ/internal/augment/active/item/powerfist/prepared
 	item = /obj/item/powerfist/prepared
-
-/obj/item/device/augment_implanter/powerfist
-	augment = /obj/item/organ/internal/augment/active/item/powerfist/prepared
