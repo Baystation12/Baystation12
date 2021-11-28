@@ -355,6 +355,9 @@
 
 	 . += ..()
 
+/mob/living/simple_animal/get_inventory_slot(obj/item/I)
+	return -1
+
 /mob/living/simple_animal/proc/pry_door(var/mob/user, var/delay, var/obj/machinery/door/pesky_door)
 	visible_message(SPAN_WARNING("\The [user] begins [pry_desc] at \the [pesky_door]!"))
 	set_AI_busy(TRUE)
