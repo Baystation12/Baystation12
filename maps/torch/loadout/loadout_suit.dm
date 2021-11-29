@@ -104,7 +104,7 @@
 /datum/gear/tactical/pcarrier/navy
 	display_name = "navy blue plate carrier"
 	path = /obj/item/clothing/suit/armor/pcarrier/navy
-	allowed_branches = list(/datum/mil_branch/fleet, /datum/mil_branch/civilian)
+	allowed_branches = list(/datum/mil_branch/fleet, /datum/mil_branch/army, /datum/mil_branch/civilian)
 
 /datum/gear/tactical/pcarrier/misc
 	display_name = "miscellaneous plate carrier selection"
