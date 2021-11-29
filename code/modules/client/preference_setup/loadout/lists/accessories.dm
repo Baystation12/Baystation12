@@ -135,13 +135,41 @@
 
 /datum/gear/accessory/pronouns
 	display_name = "pronoun badge selection"
+	description = "A selection of badges used to indicate the preferred pronouns of the wearer."
 	path = /obj/item/clothing/accessory/pronouns
-	flags = GEAR_HAS_TYPE_SELECTION
 
-/datum/gear/accessory/pridepins
+
+/datum/gear/accessory/pronouns/New()
+	..()
+	var/list/options = list()
+	options["they/them badge"] = /obj/item/clothing/accessory/pronouns
+	options["he/him badge"] = /obj/item/clothing/accessory/pronouns/hehimbadge
+	options["she/her badge"] = /obj/item/clothing/accessory/pronouns/sheherbadge
+	options["he/they badge"] = /obj/item/clothing/accessory/pronouns/hetheybadge
+	options["she/they badge"] = /obj/item/clothing/accessory/pronouns/shetheybadge
+	options["he/she badge"] = /obj/item/clothing/accessory/pronouns/heshebadge
+	options["ask me badge"] = /obj/item/clothing/accessory/pronouns/pleaseaskbadge
+	gear_tweaks += new /datum/gear_tweak/path (options)
+
+
+/datum/gear/accessory/pride_pins
 	display_name = "pride pin selection"
+	description = "A selection of pins used to signal membership or support of an identity or sexuality."
 	path = /obj/item/clothing/accessory/pridepins
-	flags = GEAR_HAS_TYPE_SELECTION
+
+
+/datum/gear/accessory/pride_pins/New()
+	..()
+	var/list/options = list()
+	options["transgender pride pin"] = /obj/item/clothing/accessory/pridepins
+	options["lesbian pride pin"] = /obj/item/clothing/accessory/pridepins/lesbianpin
+	options["bisexual pride pin"] = /obj/item/clothing/accessory/pridepins/bisexualpin
+	options["gay pride pin"] = /obj/item/clothing/accessory/pridepins/gaypin
+	options["pansexual pride pin"] = /obj/item/clothing/accessory/pridepins/pansexualpin
+	options["nonbinary pride pin"] = /obj/item/clothing/accessory/pridepins/nonbinarypin
+	options["asexual pride pin"] = /obj/item/clothing/accessory/pridepins/asexualpin
+	options["intersex pride pin"] = /obj/item/clothing/accessory/pridepins/intersexpin
+	gear_tweaks += new /datum/gear_tweak/path (options)
 
 /datum/gear/accessory/neckerchief
 	display_name = "neckerchief, colour select"
