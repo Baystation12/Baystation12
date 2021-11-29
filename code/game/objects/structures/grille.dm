@@ -23,6 +23,7 @@
 	name = "broken grille"
 	desc = "The remains of a flimsy lattice of metal rods, with screws to secure it to the floor."
 	icon_state = "broken"
+	density = FALSE
 	health_max = 6
 
 /obj/structure/grille/get_material()
@@ -64,7 +65,7 @@
 	overlays.Cut()
 	if (is_broken())
 		if(on_frame)
-			icon_state = "broke_onframe"
+			icon_state = "broken_onframe"
 		else
 			icon_state = "broken"
 	else

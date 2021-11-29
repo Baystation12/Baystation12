@@ -789,6 +789,9 @@ obj/structure/disposalpipe/Destroy()
 			sleep(30)
 			if(!W.isOn()) return
 			if(user.loc == uloc && wloc == W.loc)
+				if(linked && istype(linked,/obj/machinery/disposal))
+					var/obj/machinery/disposal/D = linked
+					D.trunk = null
 				welded()
 			else
 				to_chat(user, "You must stay still while welding the pipe.")
