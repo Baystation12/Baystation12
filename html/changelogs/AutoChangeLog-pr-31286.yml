@@ -1,0 +1,4 @@
+author: Jux
+delete-after: true
+changes:
+  - tweak: Divides head augments into functional and fluff augments.
