@@ -75,6 +75,16 @@
 				/datum/mil_rank/fleet/e6,
 				/datum/mil_rank/fleet/e7,
 				/datum/mil_rank/fleet/o1
+			),
+			/datum/mil_branch/army = list(
+				/datum/mil_rank/army/e1,
+				/datum/mil_rank/army/e2,
+				/datum/mil_rank/army/e3,
+				/datum/mil_rank/army/e4,
+				/datum/mil_rank/army/e5,
+				/datum/mil_rank/army/e6,
+				/datum/mil_rank/army/e7,
+				/datum/mil_rank/army/o1
 			)
 		),
 		/datum/species/machine/shell = list(
@@ -93,6 +103,16 @@
 				/datum/mil_rank/fleet/e6,
 				/datum/mil_rank/fleet/e7,
 				/datum/mil_rank/fleet/o1
+			),
+			/datum/mil_branch/army = list(
+				/datum/mil_rank/army/e1,
+				/datum/mil_rank/army/e2,
+				/datum/mil_rank/army/e3,
+				/datum/mil_rank/army/e4,
+				/datum/mil_rank/army/e5,
+				/datum/mil_rank/army/e6,
+				/datum/mil_rank/army/e7,
+				/datum/mil_rank/army/o1
 			)
 		),
 		/datum/species/skrell = list(
