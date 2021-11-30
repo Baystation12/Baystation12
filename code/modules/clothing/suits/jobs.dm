@@ -175,6 +175,14 @@
 	body_parts_covered = UPPER_TORSO|ARMS
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
 
+/obj/item/clothing/suit/storage/toggle/suit_double
+	name = "double-breasted suit jacket"
+	desc = "A snappy, double-breasted dress jacket."
+	icon_state = "suitjacket_double"
+	blood_overlay_type = "coat"
+	body_parts_covered = UPPER_TORSO|ARMS
+	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
+
 /obj/item/clothing/suit/storage/toggle/suit/blue
 	name = "blue suit jacket"
 	color = "#00326e"
