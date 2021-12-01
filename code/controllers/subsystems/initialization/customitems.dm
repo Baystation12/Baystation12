@@ -91,16 +91,16 @@ SUBSYSTEM_DEF(customitems)
 	var/list/additional_data
 
 /datum/custom_item/New(var/list/data)
-	ckey                 = ckey(data["ckey"])
-	character_name       = lowertext(data["character_name"])
-	item_name            = data["item_name"]
-	item_desc            = data["item_desc"]
-	item_icon_state      = data["item_icon_state"]
-	item_path            = text2path(data["item_path"])
-	req_access           = data["req_access"]                      || list()
-	req_titles           = data["req_titles"]                      || list()
-	additional_data      = data["additional_data"]                 || list()
-	apply_to_target_type = text2path(data["apply_to_target_type"]) || data["apply_to_target_type"]
+	ckey					= ckey(data["ckey"])
+	character_name			= lowertext(data["character_name"])
+	item_name				= data["item_name"]
+	item_desc				= data["item_desc"]
+	item_icon_state			= data["item_icon_state"]
+	item_path				= text2path(data["item_path"])
+	req_access				= data["req_access"]						|| list()
+	req_titles				= data["req_titles"]						|| list()
+	additional_data			= data["additional_data"]					|| list()
+	apply_to_target_type	= text2path(data["apply_to_target_type"])	|| data["apply_to_target_type"]
 
 /datum/custom_item/proc/validate()
 	if(!ispath(item_path, /obj/item))
