@@ -1,0 +1,6 @@
+author: Mogelix
+delete-after: true
+changes:
+  - rscadd: Add double-breasted suit jackets.
+  - tweak: Change sprites for suit jackets, suit vests, suspenders, on-mob bowtie,
+      pants.
