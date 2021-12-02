@@ -47,11 +47,9 @@
 		qdel(I)
 		var/nw = revsides[mod]
 		user.put_in_hands(new nw)
-		if(can_unkit)
-			trans()
-		else
-			qdel(src)
-			return
+		if!can_unkit)
+			return qdel(src)
+		trans()
 		delay_time = TimeOfGame
 
 /obj/item/custkit/sprite //changes sprite, doesn't mades new obj
