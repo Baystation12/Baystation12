@@ -103,6 +103,7 @@
 	// P.accuracy += calculate_accuracy()
 	P.dispersion += calculate_dispersion()
 
+	P.firer = src
 	P.launch(target = A)
 	if(needs_reload)
 		reload_count++
