@@ -1,0 +1,5 @@
+author: Slywater
+delete-after: true
+changes:
+  - bugfix: Prevents unconnected disposal units from deleting atoms upon flushing
+  - bugfix: Fixes broken grille density icon states
