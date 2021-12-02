@@ -3,11 +3,6 @@
 	category = /datum/gear/tactical/
 	slot = slot_tie
 
-/datum/gear/tactical/armor_deco
-	display_name = "armor customization"
-	path = /obj/item/clothing/accessory/armor/tag
-	flags = GEAR_HAS_SUBTYPE_SELECTION
-
 /datum/gear/tactical/helm_covers
 	display_name = "helmet covers"
 	path = /obj/item/clothing/accessory/armor/helmcover
