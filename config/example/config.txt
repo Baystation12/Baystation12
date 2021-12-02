@@ -419,3 +419,6 @@ RADIATION_LOWER_LIMIT 0.15
 ## Add lines of 'DISALLOW_VOTABLE_MODE config_tag' to prevent a normally votable mode from being votable, eg:
 ## DISALLOW_VOTABLE_MODE changeling
 ## DISALLOW_VOTABLE_MODE malfunction
+
+## Allow to use emojis in all OOC chats(looc, ooc, aooc, dsay, ahelp)
+#TOGGLE_EMOJIS

@@ -418,6 +418,8 @@
 	/// Logs all timers in buckets on automatic bucket reset
 	var/static/log_timers_on_bucket_reset = FALSE
 
+	var/static/emojis = FALSE
+
 
 /configuration/New()
 	build_mode_cache()
@@ -815,6 +817,8 @@
 				game_version = value
 			if ("log_timers_on_bucket_reset")
 				log_timers_on_bucket_reset = TRUE
+			if ("toggle_emojis")
+				emojis = TRUE
 			else
 				log_misc("Unknown setting in config/config.txt: '[name]'")
 
