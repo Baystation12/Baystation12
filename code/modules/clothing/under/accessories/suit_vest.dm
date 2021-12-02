@@ -1,7 +1,7 @@
 /obj/item/clothing/accessory/toggleable/suit_vest
 	name = "vest"
 	desc = "A slick suit vest."
-	icon_state = "det_vest"
+	icon_state = "vest"
 
 
 /obj/item/clothing/accessory/toggleable/suit_vest/black
