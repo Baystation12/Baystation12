@@ -28,3 +28,10 @@
 	If the message displays something more severe, like being completely comatose or having a full system failure, the player has voluntarily ghosted while still alive - this means that the character won't return back to the round as a player, short of invervention from an admin. For clarity, these cases will also always mention that the player won't be recovering or waking up any time soon.<br><br>\
 	\
 	The server's rules likely have special clauses regarding SSD players. Check the rule list before you touch a player who's disconnected or take any actions on them."
+
+/datum/codex_entry/wrist_computer
+	associated_paths = list(/obj/item/modular_computer/pda/wrist)
+	lore_text = "Morally obsolete and replaced by a more compact and perfect personal computer, \
+	the wrist computer has been used to this day as a cheap replacement for more expensive equipment \
+	in some small corporations, \
+	and sometimes for the sake of aesthetic pleasure of it's owner."
