@@ -233,7 +233,7 @@
 /datum/gear/tactical/armor_pouches/navy
 	display_name = "navy armor pouches"
 	path = /obj/item/clothing/accessory/storage/pouches/navy
-	allowed_branches = list(/datum/mil_branch/fleet, /datum/mil_branch/fleet, /datum/mil_branch/civilian)
+	allowed_branches = list(/datum/mil_branch/fleet, /datum/mil_branch/army, /datum/mil_branch/civilian)
 
 /datum/gear/tactical/armor_pouches/misc
 	display_name = "miscellaneous armor pouches selection"
@@ -256,7 +256,7 @@
 /datum/gear/tactical/large_pouches/navy
 	display_name = "navy large armor pouches"
 	path = /obj/item/clothing/accessory/storage/pouches/large/navy
-	allowed_branches = list(/datum/mil_branch/fleet, /datum/mil_branch/civilian)
+	allowed_branches = list(/datum/mil_branch/fleet, /datum/mil_branch/army, /datum/mil_branch/civilian)
 
 /datum/gear/tactical/large_pouches/misc
 	display_name = "miscellaneous large armor pouches selection"
