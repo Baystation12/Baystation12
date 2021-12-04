@@ -214,7 +214,7 @@
 	if(emp_hardened)
 		return
 	failure_timer = max(failure_timer, round(duration))
-	if(needs_powerdown_sound == TRUE)
+	if(needs_powerdown_sound)
 		playsound(src, 'sound/machines/apc_nopower.ogg', 75, 0)
 
 	update()
