@@ -43,6 +43,8 @@
 
 	else
 		text += "<b>Vote Result: Inconclusive - No Votes!</b>"
+		if (status_quo)
+			firstChoice = status_quo
 	log_vote(text)
 	to_world("<font color='purple'>[text]</font>")
 

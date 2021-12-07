@@ -323,7 +323,7 @@
 
 /datum/vote/mapswitch
 	name = "mapswitch"
-	var/status_quo = "Do not switch"
+	status_quo = "Do not switch"
 	var/list/map_options = list()
 
 /datum/vote/mapswitch/Initialize()

@@ -10,6 +10,7 @@ GLOBAL_VAR_INIT(last_player_vote, 0)
 	var/additional_text_title
 	var/initiator = null
 	var/question = null
+	var/status_quo //If set, we will return this answer if noone votes.
 	var/started_time = null
 	var/time_remaining = 0
 	var/total_votes = 0
