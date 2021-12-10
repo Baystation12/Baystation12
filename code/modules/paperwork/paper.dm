@@ -250,9 +250,9 @@
 	while(locid < MAX_FIELDS)
 		var/istart = 0
 		if(links)
-			istart = findtext(info_links, "<span class=\"paper_field\">", laststart)
+			istart = findtext_char(info_links, "<span class=\"paper_field\">", laststart)
 		else
-			istart = findtext(info, "<span class=\"paper_field\">", laststart)
+			istart = findtext_char(info, "<span class=\"paper_field\">", laststart)
 
 		if(istart==0)
 			return // No field found with matching id
@@ -262,9 +262,9 @@
 		if(locid == id)
 			var/iend = 1
 			if(links)
-				iend = findtext(info_links, "</span>", istart)
+				iend = findtext_char(info_links, "</span>", istart)
 			else
-				iend = findtext(info, "</span>", istart)
+				iend = findtext_char(info, "</span>", istart)
 
 			textindex = iend
 			break

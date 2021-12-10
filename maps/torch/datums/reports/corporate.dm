@@ -210,7 +210,7 @@
 
 	available_on_ntnet = TRUE
 
-/datum/computer_file/report/recipient/corp/sales/generate_fields()
+/datum/computer_file/report/recipient/sales/generate_fields()
 	..()
 	add_field(/datum/report_field/text_label/header, "Информация о продукте")
 	add_field(/datum/report_field/simple_text, "Наименование продукта", required = 1)
@@ -219,7 +219,7 @@
 	add_field(/datum/report_field/number, "Кол-во запрошенных единиц продукции", required = 1)
 	add_field(/datum/report_field/number, "Итоговая цена(T)", required = 1)
 	add_field(/datum/report_field/text_label/header, "Информация о продавце")
-	add_field(/datum/report_field/text_label/instruction, "\"Покупатель\" может не возвращать какие-либо проданные единицы продукции для повторной компенсации в [GLOB.using_map.local_currency_name], но может вернуть товар за идентичный товар или товар из равного материала (не [GLOB.using_map.local_currency_name_singular]). \"Продавец\" соглашается приложить все усилия для ремонта или замены любых предметов, которые не соответствуют своему назначению из-за неисправности или производственной ошибки, но не из-за ущерба, причиненного пользователем.")
+	add_field(/datum/report_field/text_label/instruction, "\"Покупатель\" может не возвращать какие-либо проданные единицы продукции для повторной компенсации в таллерах, но может вернуть товар за идентичный товар или товар из равного материала (не таллеры). \"Продавец\" соглашается приложить все усилия для ремонта или замены любых предметов, которые не соответствуют своему назначению из-за неисправности или производственной ошибки, но не из-за ущерба, причиненного пользователем.")
 	add_field(/datum/report_field/simple_text, "Полное имя продавца", required = 1)
 	add_field(/datum/report_field/signature, "Подпись", required = 1)
 	add_field(/datum/report_field/options/yes_no, "Одобрено")
