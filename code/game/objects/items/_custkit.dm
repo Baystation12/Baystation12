@@ -47,7 +47,7 @@
 		qdel(I)
 		var/nw = revsides[mod]
 		user.put_in_hands(new nw)
-		if!can_unkit)
+		if(!can_unkit)
 			return qdel(src)
 		trans()
 		delay_time = TimeOfGame
