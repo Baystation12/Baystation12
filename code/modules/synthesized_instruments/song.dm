@@ -107,7 +107,7 @@
 			break
 
 
-#define CP(L, S) copytext(L, S, S+1)
+#define CP(L, S) copytext_char(L, S, S+1)
 #define IS_DIGIT(L) (L >= "0" && L <= "9" ? 1 : 0)
 
 #define STOP_PLAY_LINES \

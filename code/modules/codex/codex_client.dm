@@ -87,7 +87,7 @@
 		if(!antag_check && entry.antag_text && !entry.mechanics_text && !entry.lore_text)
 			continue
 
-		var/first_letter = uppertext(copytext(thing, 1, 2))
+		var/first_letter = uppertext(copytext_char(thing, 1, 2))
 		if(first_letter != last_first_letter)
 			last_first_letter = first_letter
 			codex_data += "<tr><td colspan = 2><hr></td></tr>"

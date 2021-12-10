@@ -51,9 +51,9 @@
 			while(length(t) > 2*src.maximum_lines*src.maximum_line_length)
 			if (length(t))
 				src.player.song.lines = splittext(t, "\n")
-				if(copytext(src.player.song.lines[1],1,6) == "BPM: ")
-					if(text2num(copytext(src.player.song.lines[1],6)) != 0)
-						src.player.song.tempo = src.player.song.sanitize_tempo(600 / text2num(copytext(src.player.song.lines[1],6)))
+				if(copytext_char(src.player.song.lines[1],1,6) == "BPM: ")
+					if(text2num(copytext_char(src.player.song.lines[1],6)) != 0)
+						src.player.song.tempo = src.player.song.sanitize_tempo(600 / text2num(copytext_char(src.player.song.lines[1],6)))
 						src.player.song.lines.Cut(1,2)
 					else
 						src.player.song.tempo = src.player.song.sanitize_tempo(5)

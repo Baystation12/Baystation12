@@ -15,8 +15,8 @@ var/list/robot_custom_icons
 		if(!split_idx || split_idx == length(line))
 			continue //bad entry
 
-		var/ckey = copytext(line, 1, split_idx)
-		var/real_name = copytext(line, split_idx+1)
+		var/ckey = copytext_char(line, 1, split_idx)
+		var/real_name = copytext_char(line, split_idx+1)
 
 		robot_custom_icons[ckey] = real_name
 	return 1

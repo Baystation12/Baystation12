@@ -715,12 +715,12 @@ ranks - marines
 	desc = "Insignia denoting the rank of Private First Class."
 
 /obj/item/clothing/accessory/solgov/rank/army/enlisted/e4
-	name = "ranks (E-4 specialist)"
-	desc = "Insignia denoting the rank of Specialist."
+	name = "ranks (E-4 corporal)"
+	desc = "Insignia denoting the rank of Сorporal."
 
 /obj/item/clothing/accessory/solgov/rank/army/enlisted/e4_alt
-	name = "ranks (E-4 corporal)"
-	desc = "Insignia denoting the rank of Corporal."
+	name = "ranks (E-4 specialist)"
+	desc = "Insignia denoting the rank of Specialist."
 
 /obj/item/clothing/accessory/solgov/rank/army/enlisted/e5
 	name = "ranks (E-5 sergeant)"
@@ -764,8 +764,8 @@ ranks - marines
 	desc = "Insignia denoting the rank of First Lieutenant."
 
 /obj/item/clothing/accessory/solgov/rank/army/officer/o3
-	name = "ranks (O-3 captain)"
-	desc = "Insignia denoting the rank of Captain."
+	name = "ranks (O-3 army captain)"
+	desc = "Insignia denoting the rank of Army Captain."
 
 /obj/item/clothing/accessory/solgov/rank/army/officer/o4
 	name = "ranks (O-4 major)"

@@ -23,11 +23,11 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 
 
 //This can be called if either we're doing whole sound setup ourselves or it will be as part of from-file sound setup
-/decl/sound_player/proc/PlaySoundDatum(var/atom/source, var/sound_id, var/sound/sound, var/range, var/prefer_mute)
+/decl/sound_player/proc/PlaySoundDatum(var/atom/source, var/sound_id, var/sound/sound, var/range, var/prefer_mute, var/datum/client_preference/preference)
 	var/token_type = isnum(sound.environment) ? /datum/sound_token : /datum/sound_token/static_environment
-	return new token_type(source, sound_id, sound, range, prefer_mute)
+	return new token_type(source, sound_id, sound, range, prefer_mute, preference)
 
-/decl/sound_player/proc/PlayLoopingSound(var/atom/source, var/sound_id, var/sound, var/volume, var/range, var/falloff = 1, var/echo, var/frequency, var/prefer_mute)
+/decl/sound_player/proc/PlayLoopingSound(var/atom/source, var/sound_id, var/sound, var/volume, var/range, var/falloff = 1, var/echo, var/frequency, var/datum/client_preference/preference, var/prefer_mute)
 	var/sound/S = istype(sound, /sound) ? sound : new(sound)
 	S.environment = 0 // Ensures a 3D effect even if x/y offset happens to be 0 the first time it's played
 	S.volume  = volume
@@ -36,7 +36,7 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 	S.frequency = frequency
 	S.repeat = TRUE
 
-	return PlaySoundDatum(source, sound_id, S, range, prefer_mute)
+	return PlaySoundDatum(source, sound_id, S, range, prefer_mute, preference)
 
 /decl/sound_player/proc/PrivStopSound(var/datum/sound_token/sound_token)
 	var/channel = sound_token.sound.channel
@@ -87,7 +87,9 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 	var/datum/proximity_trigger/square/proxy_listener
 	var/list/can_be_heard_from
 
-/datum/sound_token/New(var/atom/source, var/sound_id, var/sound/sound, var/range = 4, var/prefer_mute = FALSE)
+	var/datum/client_preference/preference
+
+/datum/sound_token/New(var/atom/source, var/sound_id, var/sound/sound, var/range = 4, var/prefer_mute = FALSE, var/datum/client_preference/preference)
 	..()
 	if(!istype(source))
 		CRASH("Invalid sound source: [log_info_line(source)]")
@@ -103,6 +105,7 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 	src.source      = source
 	src.sound       = sound
 	src.sound_id    = sound_id
+	src.preference	= preference
 
 	if(sound.repeat) // Non-looping sounds may not reserve a sound channel due to the risk of not hearing when someone forgets to stop the token
 		var/channel = GLOB.sound_player.PrivGetChannel(src) //Attempt to find a channel
@@ -190,6 +193,9 @@ datum/sound_token/proc/Mute()
 	PrivUpdateListeners()
 
 datum/sound_token/proc/PrivAddListener(var/atom/listener)
+	if(!check_preference(listener))
+		return
+
 	if(isvirtualmob(listener))
 		var/mob/observer/virtual/v = listener
 		if(!(v.abilities & VIRTUAL_ABILITY_HEAR))
@@ -239,6 +245,10 @@ datum/sound_token/proc/PrivAddListener(var/atom/listener)
 		PrivUpdateListener(listener)
 
 /datum/sound_token/proc/PrivUpdateListener(var/listener, var/update_sound = TRUE)
+	if(!check_preference(listener))
+		PrivRemoveListener(listener)
+		return
+
 	sound.environment = PrivGetEnvironment(listener)
 	sound.status = status|listener_status[listener]
 	if(update_sound)
@@ -248,6 +258,14 @@ datum/sound_token/proc/PrivAddListener(var/atom/listener)
 /datum/sound_token/proc/PrivGetEnvironment(var/listener)
 	var/area/A = get_area(listener)
 	return A && PrivIsValidEnvironment(A.sound_env) ? A.sound_env : sound.environment
+
+/datum/sound_token/proc/check_preference(atom/listener)
+	if(preference)
+		var/mob/M = listener
+		if(istype(M))
+			if((M.get_preference_value(preference) != GLOB.PREF_YES))
+				return FALSE
+	return TRUE
 
 /datum/sound_token/proc/PrivIsValidEnvironment(var/environment)
 	if(islist(environment) && length(environment) != 23)

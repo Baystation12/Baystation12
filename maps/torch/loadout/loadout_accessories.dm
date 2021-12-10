@@ -134,8 +134,43 @@
 /datum/gear/tactical/sheath
 	allowed_roles = list(/datum/job/pathfinder, /datum/job/explorer)
 
-/datum/gear/tactical/armor_deco
+
+/datum/gear/tactical/bloodpatch
+	display_name = "blood patch selection"
+	path = /obj/item/clothing/accessory/armor/tag
 	allowed_roles = ARMORED_ROLES
+
+/datum/gear/tactical/bloodpatch/New()
+	..()
+	var/blatch = list()
+	blatch["O+ blood patch"] = /obj/item/clothing/accessory/armor/tag/opos
+	blatch["O- blood patch"] = /obj/item/clothing/accessory/armor/tag/oneg
+	blatch["A+ blood patch"] = /obj/item/clothing/accessory/armor/tag/apos
+	blatch["A- blood patch"] = /obj/item/clothing/accessory/armor/tag/aneg
+	blatch["B+ blood patch"] = /obj/item/clothing/accessory/armor/tag/bpos
+	blatch["B- blood patch"] = /obj/item/clothing/accessory/armor/tag/bneg
+	blatch["AB+ blood patch"] = /obj/item/clothing/accessory/armor/tag/abpos
+	blatch["AB- blood patch"] = /obj/item/clothing/accessory/armor/tag/abneg
+	gear_tweaks += new/datum/gear_tweak/path(blatch)
+
+/datum/gear/tactical/armor_deco
+	display_name = "armor tags selection"
+	path = /obj/item/clothing/accessory/armor/tag
+	allowed_roles = ARMORED_ROLES
+
+/datum/gear/tactical/armor_deco/New()
+	..()
+	var/atags = list()
+	atags["NTSF tag"] = /obj/item/clothing/accessory/armor/tag/nt
+	atags["PCRC tag"] = /obj/item/clothing/accessory/armor/tag/pcrc
+	atags["SAARE tag"] = /obj/item/clothing/accessory/armor/tag/saare
+	atags["MEDIC tag"] = /obj/item/clothing/accessory/armor/tag/solgov/medic
+	atags["SFP AGENT tag"] = /obj/item/clothing/accessory/armor/tag/solgov/agent
+	atags["SCG tag"] = /obj/item/clothing/accessory/armor/tag/solgov/com
+	atags["POLICE tag"] = /obj/item/clothing/accessory/armor/tag/solgov/com/sec
+	atags["Expeditionary Corps crest"] = /obj/item/clothing/accessory/armor/tag/solgov/ec
+	atags["SCG Flag"] = /obj/item/clothing/accessory/armor/tag/solgov
+	gear_tweaks += new/datum/gear_tweak/path(atags)
 
 /datum/gear/tactical/press_tag
 	display_name = "Press tag"
@@ -210,12 +245,12 @@
 /datum/gear/tactical/ubac/blue
 	display_name = "navy blue UBAC shirt"
 	path = /obj/item/clothing/accessory/ubac/blue
-	allowed_branches = list(/datum/mil_branch/fleet, /datum/mil_branch/army)
+	allowed_branches = list(/datum/mil_branch/fleet)
 
 /datum/gear/tactical/ubac/misc
 	display_name = "miscellaneous UBAC shirt selection"
 	path = /obj/item/clothing/accessory/ubac
-	allowed_branches = CIVILIAN_BRANCHES
+	allowed_branches = list(/datum/mil_branch/army, /datum/mil_branch/civilian)
 
 /datum/gear/tactical/ubac/misc/New()
 	..()
@@ -233,12 +268,12 @@
 /datum/gear/tactical/armor_pouches/navy
 	display_name = "navy armor pouches"
 	path = /obj/item/clothing/accessory/storage/pouches/navy
-	allowed_branches = list(/datum/mil_branch/fleet, /datum/mil_branch/fleet, /datum/mil_branch/civilian)
+	allowed_branches = list(/datum/mil_branch/fleet, /datum/mil_branch/civilian)
 
 /datum/gear/tactical/armor_pouches/misc
 	display_name = "miscellaneous armor pouches selection"
 	path = /obj/item/clothing/accessory/storage/pouches
-	allowed_branches = CIVILIAN_BRANCHES
+	allowed_branches = list(/datum/mil_branch/army, /datum/mil_branch/civilian)
 
 /datum/gear/tactical/armor_pouches/misc/New()
 	..()
@@ -261,7 +296,7 @@
 /datum/gear/tactical/large_pouches/misc
 	display_name = "miscellaneous large armor pouches selection"
 	path = /obj/item/clothing/accessory/storage/pouches/large
-	allowed_branches = CIVILIAN_BRANCHES
+	allowed_branches = list(/datum/mil_branch/army, /datum/mil_branch/civilian)
 
 /datum/gear/tactical/large_pouches/misc/New()
 	..()

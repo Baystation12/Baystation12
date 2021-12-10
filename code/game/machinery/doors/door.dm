@@ -587,9 +587,10 @@
 		req_access = req_access_diff(fore, aft)
 
 /obj/machinery/door/do_simple_ranged_interaction(var/mob/user)
+	. = ..()
 	if(!requiresID() || allowed(null))
 		toggle()
-	return TRUE
+		return TRUE
 
 // Public access
 

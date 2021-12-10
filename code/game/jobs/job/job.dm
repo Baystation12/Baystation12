@@ -81,7 +81,7 @@
 		H.add_language(LANGUAGE_SPACER)
 		H.set_default_language(all_languages[LANGUAGE_SPACER])
 
-	if(psi_latency_chance && prob(psi_latency_chance))
+	if(psi_latency_chance && prob(psi_latency_chance) && H.species.type == /datum/species/human && !psi_faculties)
 		H.set_psi_rank(pick(PSI_COERCION, PSI_REDACTION, PSI_ENERGISTICS, PSI_PSYCHOKINESIS), 1, defer_update = TRUE)
 	if(islist(psi_faculties))
 		for(var/psi in psi_faculties)

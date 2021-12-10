@@ -39,7 +39,3 @@
 /decl/hierarchy/outfit/job/torch/crew/exploration/pilot/fleet
 	name = OUTFIT_JOB_NAME("Shuttle Pilot - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/exploration
-
-/decl/hierarchy/outfit/job/torch/crew/exploration/pilot/army
-	name = OUTFIT_JOB_NAME("Shuttle Pilot - Army")
-	uniform = /obj/item/clothing/under/solgov/utility/army/exploration

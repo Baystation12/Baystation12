@@ -10,11 +10,11 @@
 	skill_needed = SKILL_ADEPT
 
 /datum/terminal_command/hwinfo/proper_input_entered(text, mob/user, datum/terminal/terminal)
-	var/command = copytext(text, 1, length(name) + 2)
+	var/command = copytext_char(text, 1, length(name) + 2)
 	if(command != name && command != "[name] ")
 		return syntax_error()
 
-	var/argument = copytext(text, length(name) + 2, 0)
+	var/argument = copytext_char(text, length(name) + 2, 0)
 	if(!argument)
 		. = list("[name]: Hardware Detected:")
 		for(var/obj/item/stock_parts/computer/ch in  terminal.computer.get_all_components())

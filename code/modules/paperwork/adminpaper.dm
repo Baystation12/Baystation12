@@ -45,7 +45,7 @@
 
 /obj/item/paper/admin/proc/generateHeader()
 	var/originhash = md5("[origin]")
-	var/challengehash = copytext(md5("[game_id]"),1,10) // changed to a hash of the game ID so it's more consistant but changes every round.
+	var/challengehash = copytext_char(md5("[game_id]"),1,10) // changed to a hash of the game ID so it's more consistant but changes every round.
 	var/text = null
 	//TODO change logo based on who you're contacting.
 	text = "<center><img src = [logo]></br>"
@@ -92,7 +92,7 @@ obj/item/paper/admin/proc/updateDisplay()
 		unformatedText = t
 
 		//t = html_encode(t)
-		t = replacetext(t, "\n", "<BR>")
+		t = replacetext_char(t, "\n", "<BR>")
 		t = parsepencode(t, null, null, isCrayon, null, TRUE) // Encode everything from pencode to html
 
 

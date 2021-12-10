@@ -23,7 +23,7 @@ Null key is always #000000.
 	if (!result)
 		var/count = length(available)
 		if (!count)
-			result = "#[copytext(md5(key), 1, 7)]"
+			result = "#[copytext_char(md5(key), 1, 7)]"
 		else
 			result = available[count]
 			available.Cut(count)

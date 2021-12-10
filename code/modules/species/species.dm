@@ -406,14 +406,28 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 /datum/species/proc/hug(var/mob/living/carbon/human/H,var/mob/living/target)
 
 	var/t_him = "them"
+	var/obj/item/organ/external/affecting
+	if(ishuman(target))
+		var/mob/living/carbon/human/T = target
+		affecting = T.get_organ(H.zone_sel.selecting)
+
+
 	switch(target.gender)
 		if(MALE)
 			t_him = "him"
 		if(FEMALE)
 			t_him = "her"
 
-	H.visible_message("<span class='notice'>[H] hugs [target] to make [t_him] feel better!</span>", \
-					"<span class='notice'>You hug [target] to make [t_him] feel better!</span>")
+	if(H.zone_sel.selecting == "head" && (affecting && !affecting.is_stump())) //Headpats and Handshakes - From VOREStation, thanks <3
+		H.visible_message( \
+			"<span class='notice'>[H] pats [target] on the head.</span>", \
+			"<span class='notice'>You pat [target] on the head.</span>", )
+	else if((H.zone_sel.selecting == "r_hand" || H.zone_sel.selecting == "l_hand") && (affecting && !affecting.is_stump()))
+		H.visible_message( \
+			"<span class='notice'>[H] shakes [target]'s hand.</span>", \
+			"<span class='notice'>You shake [target]'s hand.</span>", )
+	else H.visible_message("<span class='notice'>[H] hugs [target] to make [t_him] feel better!</span>", \
+				"<span class='notice'>You hug [target] to make [t_him] feel better!</span>")
 
 	if(H != target)
 		H.update_personal_goal(/datum/goal/achievement/givehug, TRUE)
@@ -743,7 +757,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	if(verbose || length(description) <= MAX_DESC_LEN)
 		dat += "[description]"
 	else
-		dat += "[copytext(description, 1, MAX_DESC_LEN)] \[...\]"
+		dat += "[copytext_char(description, 1, MAX_DESC_LEN)] \[...\]"
 	if(append)
 		dat += "<br>[append]"
 	dat += "</td>"

@@ -16,6 +16,6 @@ GLOBAL_DATUM_INIT(provocateurs, /datum/antagonist/provocateur, new)
 
 /datum/antagonist/provocateur/get_antag_text(mob/recipient)
 	if (!antag_text_updated)
-		antag_text = replacetext(antag_text, "%WORLD_NAME%", station_name())
+		antag_text = replacetext_char(antag_text, "%WORLD_NAME%", station_name())
 		antag_text_updated = TRUE
 	return antag_text

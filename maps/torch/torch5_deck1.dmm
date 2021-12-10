@@ -4409,7 +4409,10 @@
 /area/command/conference)
 "ahL" = (
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/structure/closet/crate,
+/obj/machinery/fabricator/hacked{
+	desc = "A typical autolathe. This one is hacked.";
+	name = "autolathe"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/command/armoury)
 "ahM" = (
@@ -10928,6 +10931,10 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/machinery/fabricator/hacked{
+	desc = "A typical autolathe. This one is hacked.";
+	name = "autolathe"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/storage)
 "aLx" = (
@@ -10935,6 +10942,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/item/stack/material/glass/fifty,
+/obj/structure/table/rack{
+	dir = 4
+	},
+/obj/item/stack/material/aluminium/fifty,
+/obj/item/stack/material/steel/fifty,
+/obj/item/stack/material/plastic/ten,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/storage)
 "aLy" = (
@@ -19236,6 +19250,8 @@
 	dir = 8;
 	health = 1e+006
 	},
+/obj/item/gun/energy/laser/secure,
+/obj/item/gun/energy/laser/secure,
 /obj/item/gun/energy/laser/secure,
 /obj/item/gun/energy/laser/secure,
 /obj/item/gun/energy/laser/secure,

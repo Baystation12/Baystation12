@@ -75,9 +75,9 @@
 		from_objs += world
 	else
 		for(var/f in from)
-			if(copytext(f, 1, 2) == "'" || copytext(f, 1, 2) == "\"")
-				from_objs += locate(copytext(f, 2, length(f)))
-			else if(copytext(f, 1, 2) != "/")
+			if(copytext_char(f, 1, 2) == "'" || copytext_char(f, 1, 2) == "\"")
+				from_objs += locate(copytext_char(f, 2, length(f)))
+			else if(copytext_char(f, 1, 2) != "/")
 				from_objs += locate(f)
 			else
 				var/f2 = text2path(f)
@@ -144,9 +144,9 @@
 			objs += from_obj:contents
 		else
 			for(var/f in types)
-				if(copytext(f, 1, 2) == "'" || copytext(f, 1, 2) == "\"")
-					objs += locate(copytext(f, 2, length(f))) in from_obj
-				else if(copytext(f, 1, 2) != "/")
+				if(copytext_char(f, 1, 2) == "'" || copytext_char(f, 1, 2) == "\"")
+					objs += locate(copytext_char(f, 2, length(f))) in from_obj
+				else if(copytext_char(f, 1, 2) != "/")
 					objs += locate(f) in from_obj
 				else
 					var/f2 = text2path(f)
@@ -349,17 +349,17 @@
 		return text2num(text)
 	else if(text == "null")
 		return null
-	else if(copytext(text, 1, 2) == "'" || copytext(text, 1, 2) == "\"" )
-		return copytext(text, 2, length(text))
-	else if(copytext(text, 1, 2) == "/")
+	else if(copytext_char(text, 1, 2) == "'" || copytext_char(text, 1, 2) == "\"" )
+		return copytext_char(text, 2, length(text))
+	else if(copytext_char(text, 1, 2) == "/")
 		return text2path(text)
 	else
 		if(findtext(text, "."))
 			var/split = findtext(text, ".")
-			var/v = copytext(text, 1, split)
+			var/v = copytext_char(text, 1, split)
 
 			if((v in object.vars) && istype(object.vars[v], /datum))
-				return SDQL_text2value(object.vars[v], copytext(text, split + 1))
+				return SDQL_text2value(object.vars[v], copytext_char(text, split + 1))
 			else
 				return null
 
@@ -385,7 +385,7 @@
 	var/len = length(query_text)
 
 	for(var/i = 1, i <= len, i++)
-		var/char = copytext(query_text, i, i + 1)
+		var/char = copytext_char(query_text, i, i + 1)
 
 		if(char in whitespace)
 			if(word != "")
@@ -404,7 +404,7 @@
 				query_list += word
 				word = ""
 
-			var/char2 = copytext(query_text, i + 1, i + 2)
+			var/char2 = copytext_char(query_text, i + 1, i + 2)
 
 			if(char2 in multi[char])
 				query_list += "[char][char2]"
@@ -421,10 +421,10 @@
 			word = "'"
 
 			for(i++, i <= len, i++)
-				char = copytext(query_text, i, i + 1)
+				char = copytext_char(query_text, i, i + 1)
 
 				if(char == "'")
-					if(copytext(query_text, i + 1, i + 2) == "'")
+					if(copytext_char(query_text, i + 1, i + 2) == "'")
 						word += "'"
 						i++
 
@@ -449,10 +449,10 @@
 			word = "\""
 
 			for(i++, i <= len, i++)
-				char = copytext(query_text, i, i + 1)
+				char = copytext_char(query_text, i, i + 1)
 
 				if(char == "\"")
-					if(copytext(query_text, i + 1, i + 2) == "'")
+					if(copytext_char(query_text, i + 1, i + 2) == "'")
 						word += "\""
 						i++
 

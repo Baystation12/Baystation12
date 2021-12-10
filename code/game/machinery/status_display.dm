@@ -46,7 +46,7 @@
 	var/const/STATUS_DISPLAY_TIME = 4
 	var/const/STATUS_DISPLAY_IMAGE = 5
 	var/const/STATUS_DISPLAY_CUSTOM = 99
-	
+
 	var/status_display_show_alert_border = FALSE
 
 /obj/machinery/status_display/Destroy()
@@ -78,7 +78,7 @@
 /obj/machinery/status_display/proc/update()
 	remove_display()
 	if(friendc && !ignore_friendc)
-		set_picture("ai_friend")		
+		set_picture("ai_friend")
 		if(status_display_show_alert_border)
 			add_alert_border_to_display()
 		return 1
@@ -114,7 +114,7 @@
 			if(!index1)
 				line1 = message1
 			else
-				line1 = copytext(message1+"|"+message1, index1, index1+CHARS_PER_LINE)
+				line1 = copytext_char(message1+"|"+message1, index1, index1+CHARS_PER_LINE)
 				var/message1_len = length(message1)
 				index1 += SCROLL_SPEED
 				if(index1 > message1_len)
@@ -123,7 +123,7 @@
 			if(!index2)
 				line2 = message2
 			else
-				line2 = copytext(message2+"|"+message2, index2, index2+CHARS_PER_LINE)
+				line2 = copytext_char(message2+"|"+message2, index2, index2+CHARS_PER_LINE)
 				var/message2_len = length(message2)
 				index2 += SCROLL_SPEED
 				if(index2 > message2_len)
@@ -177,13 +177,13 @@
 
 /obj/machinery/status_display/proc/add_alert_border_to_display()
 	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
-	var/decl/security_level/sl = security_state.current_security_level	
+	var/decl/security_level/sl = security_state.current_security_level
 
 	var/border = image(sl.icon,sl.alert_border)
 
 	overlays |= border
 
-/obj/machinery/status_display/proc/display_alert()	
+/obj/machinery/status_display/proc/display_alert()
 	remove_display()
 
 	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)

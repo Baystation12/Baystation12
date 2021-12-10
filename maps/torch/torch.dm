@@ -33,6 +33,7 @@
 	#include "datums/reports/command.dm"
 	#include "datums/reports/corporate.dm"
 	#include "datums/reports/exploration.dm"
+	#include "datums/reports/engineering.dm"
 	#include "datums/reports/medical.dm"
 	#include "datums/reports/science.dm"
 	#include "datums/reports/security.dm"

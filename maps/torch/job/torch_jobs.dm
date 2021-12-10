@@ -84,6 +84,8 @@
 		/datum/mil_rank/civ/civ
 	)
 	required_language = LANGUAGE_HUMAN_EURO
+	psi_latency_chance = 5
+	give_psionic_implant_on_join = FALSE
 
 /datum/map/torch
 	default_assistant_title = "Passenger"

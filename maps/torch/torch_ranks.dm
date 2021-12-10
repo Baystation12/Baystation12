@@ -75,6 +75,16 @@
 				/datum/mil_rank/fleet/e6,
 				/datum/mil_rank/fleet/e7,
 				/datum/mil_rank/fleet/o1
+			),
+			/datum/mil_branch/army = list(
+				/datum/mil_rank/army/e1,
+				/datum/mil_rank/army/e2,
+				/datum/mil_rank/army/e3,
+				/datum/mil_rank/army/e4,
+				/datum/mil_rank/army/e5,
+				/datum/mil_rank/army/e6,
+				/datum/mil_rank/army/e7,
+				/datum/mil_rank/army/o1
 			)
 		),
 		/datum/species/machine/shell = list(
@@ -93,6 +103,16 @@
 				/datum/mil_rank/fleet/e6,
 				/datum/mil_rank/fleet/e7,
 				/datum/mil_rank/fleet/o1
+			),
+			/datum/mil_branch/army = list(
+				/datum/mil_rank/army/e1,
+				/datum/mil_rank/army/e2,
+				/datum/mil_rank/army/e3,
+				/datum/mil_rank/army/e4,
+				/datum/mil_rank/army/e5,
+				/datum/mil_rank/army/e6,
+				/datum/mil_rank/army/e7,
+				/datum/mil_rank/army/o1
 			)
 		),
 		/datum/species/skrell = list(
@@ -543,14 +563,14 @@
 	sort_order = 3
 
 /datum/mil_rank/army/e4
-	name = "Specialist"
-	name_short = "SPC"
+	name = "Corporal"
+	name_short = "CPL"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e4)
 	sort_order = 4
 
 /datum/mil_rank/army/e4_alt
-	name = "Corporal"
-	name_short = "CPL"
+	name = "Specialist"
+	name_short = "SPC"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e4_alt)
 	sort_order = 4
 
@@ -615,8 +635,8 @@
 	sort_order = 12
 
 /datum/mil_rank/army/o3
-	name = "Captain"
-	name_short = "CPT"
+	name = "Army Captain"
+	name_short = "ACPT"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/officer/o3)
 	sort_order = 13
 

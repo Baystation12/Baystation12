@@ -273,7 +273,7 @@
 	hud_type = /datum/hud_data/diona
 	siemens_coefficient = 0.3
 	show_ssd = "completely quiescent"
-	strength = STR_VHIGH
+	strength = STR_LOW
 	assisted_langs = list(LANGUAGE_NABBER)
 	spawns_with_stack = 0
 	health_hud_intensity = 2

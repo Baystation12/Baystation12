@@ -48,7 +48,7 @@
 		if(_n >= entries_decay_at)
 			var/decayed_message = ""
 			for(var/i = 1 to length(_message))
-				var/char = copytext(_message, i, i + 1)
+				var/char = copytext_char(_message, i, i + 1)
 				if(prob(round(_n * entry_decay_weight)))
 					if(prob(99))
 						decayed_message += pick(".",",","-","'","\\","/","\"",":",";")

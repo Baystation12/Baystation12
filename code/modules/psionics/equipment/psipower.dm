@@ -59,4 +59,4 @@
 			host.embedded -= src
 			host.drop_from_inventory(src)
 		else
-			qdel(src)
+			STOP_PROCESSING(SSprocessing, src)

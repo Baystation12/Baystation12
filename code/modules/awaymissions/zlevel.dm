@@ -11,14 +11,14 @@
 		t = trim(t)
 		if (length(t) == 0)
 			continue
-		else if (copytext(t, 1, 2) == "#")
+		else if (copytext_char(t, 1, 2) == "#")
 			continue
 
 		var/pos = findtext(t, " ")
 		var/name = null
 
 		if (pos)
-			name = lowertext(copytext(t, 1, pos))
+			name = lowertext(copytext_char(t, 1, pos))
 
 		else
 			name = lowertext(t)

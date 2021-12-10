@@ -9,7 +9,7 @@
 		t = "0[t]"
 	temp1 = t
 	if (length(t) > u)
-		temp1 = copytext(t,2,u+1)
+		temp1 = copytext_char(t,2,u+1)
 	return temp1
 
 // DNA Gene activation boundaries, see dna2.dm.

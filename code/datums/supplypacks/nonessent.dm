@@ -300,7 +300,6 @@
 		/obj/item/clothing/accessory/pronouns/sheherbadge = 2,
 		/obj/item/clothing/accessory/pronouns/hetheybadge = 2,
 		/obj/item/clothing/accessory/pronouns/shetheybadge = 2,
-		/obj/item/clothing/accessory/pronouns/zehirbadge = 2,
 		/obj/item/clothing/accessory/pronouns/pleaseaskbadge = 2
 	)
 	cost = 20

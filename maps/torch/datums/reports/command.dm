@@ -18,7 +18,7 @@
 	add_field(/datum/report_field/simple_text, "Тема", required = 1)
 	add_field(/datum/report_field/pencode_text, "Сообщение", required = 1)
 	add_field(/datum/report_field/signature, "Подпись", required = 1)
-	set_access(list(list(access_qm, access_senadv, access_cent_creed)), list(list(access_qm, access_senadv, access_cent_creed)), override = 0)
+	set_access(list(list(access_qm, access_senadv, access_cent_creed, access_representative)), list(list(access_qm, access_senadv, access_cent_creed, access_representative)), override = 0)
 
 /datum/computer_file/report/recipient/command/crew_transfer
 	form_name = "CTA-SGF-01"

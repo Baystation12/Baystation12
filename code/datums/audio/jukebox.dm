@@ -85,7 +85,7 @@
 		return
 	playing = TRUE
 	token = GLOB.sound_player.PlayLoopingSound(owner, sound_id, track.source,
-		volume, range, falloff, frequency = frequency, prefer_mute = TRUE)
+		volume, range, falloff, frequency = frequency, preference = /datum/client_preference/play_jukeboxes, prefer_mute = TRUE)
 	owner.queue_icon_update()
 
 

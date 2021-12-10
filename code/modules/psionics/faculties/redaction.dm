@@ -26,6 +26,7 @@
 	cooldown =        30
 	use_grab =        TRUE
 	min_rank =        PSI_RANK_OPERANT
+	suppress_parent_proc = TRUE
 	use_description = "Grab a patient, target the chest, then switch to help intent and use the grab on them to perform a check for wounds and damage."
 
 /decl/psionic_power/redaction/skinsight/invoke(var/mob/living/user, var/mob/living/target)
@@ -43,6 +44,7 @@
 	cooldown =        50
 	use_melee =       TRUE
 	min_rank =        PSI_RANK_OPERANT
+	suppress_parent_proc = TRUE
 	use_description = "Target a patient while on help intent at melee range to mend a variety of maladies, such as bleeding or broken bones. Higher ranks in this faculty allow you to mend a wider range of problems."
 
 /decl/psionic_power/redaction/mend/invoke(var/mob/living/user, var/mob/living/carbon/human/target)
@@ -52,13 +54,13 @@
 	if(.)
 		var/obj/item/organ/external/E = target.get_organ(user.zone_sel.selecting)
 
-		if(!E || E.is_stump())
+		if(!E)
 			to_chat(user, SPAN_WARNING("They are missing that limb."))
-			return TRUE
+			return FALSE
 
 		if(BP_IS_ROBOTIC(E))
 			to_chat(user, SPAN_WARNING("That limb is prosthetic."))
-			return TRUE
+			return FALSE
 
 		user.visible_message(SPAN_NOTICE("<i>\The [user] rests a hand on \the [target]'s [E.name]...</i>"))
 		to_chat(target, SPAN_NOTICE("A healing warmth suffuses you."))
@@ -91,15 +93,20 @@
 				to_chat(user, SPAN_NOTICE("You interleave and repair the severed tendon in \the [E]."))
 				E.status &= ~ORGAN_TENDON_CUT
 				return TRUE
-			if(E.status & ORGAN_BROKEN)
-				to_chat(user, SPAN_NOTICE("You coax shattered bones to come together and fuse, mending the break."))
-				E.status &= ~ORGAN_BROKEN
-				E.stage = 0
-				return TRUE
+
+		if(E.is_stump())
+			to_chat(user, SPAN_WARNING("There's nothing left to heal in this stump"))
+			return FALSE
+
+		if(E.status & ORGAN_BROKEN)
+			to_chat(user, SPAN_NOTICE("You coax shattered bones to come together and fuse, mending the break."))
+			E.status &= ~ORGAN_BROKEN
+			E.stage = 0
+			return TRUE
 
 		for(var/datum/wound/W in E.wounds)
 			if(W.bleeding())
-				if(redaction_rank >= PSI_RANK_MASTER || W.wound_damage() < 30)
+				if(redaction_rank >= PSI_RANK_OPERANT || W.wound_damage() < 30)
 					to_chat(user, SPAN_NOTICE("You knit together severed veins and broken flesh, stemming the bleeding."))
 					W.bleed_timer = 0
 					W.clamped = TRUE
@@ -125,6 +132,7 @@
 	cooldown =        60
 	use_melee =       TRUE
 	min_rank =        PSI_RANK_GRANDMASTER
+	suppress_parent_proc = TRUE
 	use_description = "Target a patient while on help intent at melee range to cleanse radiation and genetic damage from a patient."
 
 /decl/psionic_power/redaction/cleanse/invoke(var/mob/living/user, var/mob/living/carbon/human/target)
@@ -149,7 +157,7 @@
 				target.adjustCloneLoss(-(target.getCloneLoss()))
 			return TRUE
 		to_chat(user, SPAN_NOTICE("You can find no genetic damage or radiation to heal within \the [target]."))
-		return TRUE
+		return FALSE
 
 /decl/psionic_power/revive
 	name =            "Revive"

@@ -65,7 +65,7 @@
 			if(src.song.lines.len > GLOB.musical_config.max_lines)
 				return
 			if(length(newline) > GLOB.musical_config.max_line_length)
-				newline = copytext(newline, 1, GLOB.musical_config.max_line_length)
+				newline = copytext_char(newline, 1, GLOB.musical_config.max_line_length)
 			src.song.lines.Add(newline)
 
 		if("deleteline")
@@ -86,7 +86,7 @@
 			if(!content)
 				return
 			if(length(content) > GLOB.musical_config.max_line_length)
-				content = copytext(content, 1, GLOB.musical_config.max_line_length)
+				content = copytext_char(content, 1, GLOB.musical_config.max_line_length)
 			src.song.lines[num] = content
 
 		if ("help")

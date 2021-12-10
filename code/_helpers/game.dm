@@ -422,13 +422,13 @@ datum/projectile_data
 	return new /datum/projectile_data(src_x, src_y, time, distance, power_x, power_y, dest_x, dest_y)
 
 /proc/GetRedPart(const/hexa)
-	return hex2num(copytext(hexa,2,4))
+	return hex2num(copytext_char(hexa,2,4))
 
 /proc/GetGreenPart(const/hexa)
-	return hex2num(copytext(hexa,4,6))
+	return hex2num(copytext_char(hexa,4,6))
 
 /proc/GetBluePart(const/hexa)
-	return hex2num(copytext(hexa,6,8))
+	return hex2num(copytext_char(hexa,6,8))
 
 /proc/GetHexColors(const/hexa)
 	return list(

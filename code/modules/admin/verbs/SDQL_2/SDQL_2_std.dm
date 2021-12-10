@@ -33,7 +33,7 @@
 	return ckeyEx(Key)
 
 /proc/_copytext(T, Start = 1, End = 0)
-	return copytext(T, Start, End)
+	return copytext_char(T, Start, End)
 
 /proc/_cos(X)
 	return cos(X)

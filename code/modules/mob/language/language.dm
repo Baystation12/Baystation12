@@ -66,7 +66,7 @@
 	var/new_sentence = 0
 	for(var/w in words)
 		var/nword = "[w] "
-		var/input_ending = copytext(w, length(w))
+		var/input_ending = copytext_char(w, length(w))
 		var/ends_sentence = findtext(".?!",input_ending)
 		if(!prob(understand_chance))
 			nword = scramble_word(w)
@@ -121,8 +121,10 @@
 
 	return scrambled_text
 
-/datum/language/proc/format_message(message, verb)
-	return "[verb], <span class='message'><span class='[colour]'>\"[capitalize(message)]\"</span></span>"
+/datum/language/proc/format_message(message, verb, var/fontsize = null)
+	var/F1 = fontsize ? "<font size=[fontsize]>" : ""
+	var/F2 = fontsize ? "</font>" : ""
+	return "[verb], <span class='message'><span class='[colour]'>[F1]\"[capitalize(message)]\"[F2]</span></span>"
 
 /datum/language/proc/format_message_plain(message, verb)
 	return "[verb], \"[capitalize(message)]\""
@@ -132,7 +134,7 @@
 
 /datum/language/proc/get_talkinto_msg_range(message)
 	// if you yell, you'll be heard from two tiles over instead of one
-	return (copytext(message, length(message)) == "!") ? 2 : 1
+	return (copytext_char(message, length(message)) == "!") ? 2 : 1
 
 /datum/language/proc/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
 	log_say("[key_name(speaker)] : ([name]) [message]")

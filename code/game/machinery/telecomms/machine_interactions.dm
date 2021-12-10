@@ -53,7 +53,7 @@
 /obj/machinery/telecomms/dismantle()
 	for(var/obj/x in (contents - component_parts))
 		x.dropInto(loc)
-	. = ..()	
+	. = ..()
 
 // This should all be a multitool extension, but outside the scope of current rework.
 /obj/machinery/telecomms/CanUseTopic(mob/user)
@@ -135,7 +135,7 @@
 
 	dat += "</font>"
 	temp = ""
-	
+
 	var/datum/browser/popup = new(user, "tcommmachine", "Telecommunications Machine Configuration Panel", 520, 600)
 	popup.set_content(JOINTEXT(dat))
 	popup.open()
@@ -236,7 +236,7 @@
 			*/
 
 			if("id")
-				var/newid = copytext(reject_bad_text(input(usr, "Specify the new ID for this machine", src, id) as null|text),1,MAX_MESSAGE_LEN)
+				var/newid = copytext_char(reject_bad_text(input(usr, "Specify the new ID for this machine", src, id) as null|text),1,MAX_MESSAGE_LEN)
 				if(newid && canAccess(usr))
 					id = newid
 					temp = "<font color = #666633>-% New ID assigned: \"[id]\" %-</font>"

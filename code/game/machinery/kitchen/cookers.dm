@@ -200,7 +200,7 @@
 	var/result_name = source.name
 	if (flags & COOKER_STRIP_RAW)
 		if (text_starts_with(result_name, "raw"))
-			result_name = trim(copytext(result_name, 4))
+			result_name = trim(copytext_char(result_name, 4))
 	result.SetName("[prefix ? "[prefix] " : ""][result_name][suffix ? " [suffix]" : ""]")
 	result.desc = "[result_desc] It has been [cook_modes[cook_mode]["desc"] || cook_mode]."
 
@@ -255,7 +255,7 @@
 			"desc" = "made into jelly"
 		)
 	)
-	
+
 	machine_name = "modular cooker"
 	machine_desc = "Can prepare nearly any kind of food a certain way, such as making pies, cookies, or candy bars."
 

@@ -91,7 +91,7 @@ GLOBAL_VAR_INIT(actual_error_file_line, new/regex("^%% (.*?),(.*?) %% "))
 					usrinfo = null
 				continue // Our usr info is better, replace it
 
-			if(copytext(line, 1, 3) != "  ")
+			if(copytext_char(line, 1, 3) != "  ")
 				desclines += ("  " + line) // Pad any unpadded lines, so they look pretty
 			else
 				desclines += line

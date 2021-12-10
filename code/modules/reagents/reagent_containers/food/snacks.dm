@@ -2814,7 +2814,7 @@
 		if( boxes.len > 0 )
 			boxtotagto = boxes[boxes.len]
 
-		boxtotagto.boxtag = copytext("[boxtotagto.boxtag][t]", 1, 30)
+		boxtotagto.boxtag = copytext_char("[boxtotagto.boxtag][t]", 1, 30)
 
 		update_icon()
 		return

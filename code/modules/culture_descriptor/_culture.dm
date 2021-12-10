@@ -68,7 +68,7 @@
 	if(verbose || length(get_text_body()) <= COLLAPSED_CULTURE_BLURB_LEN)
 		dat += "[get_text_body()]"
 	else
-		dat += "[copytext(get_text_body(), 1, COLLAPSED_CULTURE_BLURB_LEN)] \[...\]"
+		dat += "[copytext_char(get_text_body(), 1, COLLAPSED_CULTURE_BLURB_LEN)] \[...\]"
 	dat += "</td>"
 	if(append)
 		dat += "<td width = '100px'>[append]</td>"

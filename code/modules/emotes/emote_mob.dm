@@ -39,8 +39,8 @@
 	var/splitpoint = findtext(act, " ")
 	if(splitpoint > 0)
 		var/tempstr = act
-		act = copytext(tempstr,1,splitpoint)
-		message = copytext(tempstr,splitpoint+1,0)
+		act = copytext_char(tempstr,1,splitpoint)
+		message = copytext_char(tempstr,splitpoint+1,0)
 
 	var/decl/emote/use_emote = usable_emotes[act]
 	if(!use_emote)
@@ -72,13 +72,13 @@
 	if(!message || !emoter)
 		return
 
-	message = replacetext(message, "&#255;", "__:Я:_") // Никому же в голову не придет такое написать? (2) ~bear1ake@inf-dev
+	message = replacetext_char(message, "&#255;", "__:Я:_") // Никому же в голову не придет такое написать? (2) ~bear1ake@inf-dev
 	message = html_decode(message)
 
 	name_anchor = findtext(message, anchor_char)
 	if(name_anchor > 0) // User supplied emote with visible_emote token (default ^)
-		pretext = copytext(message, 1, name_anchor)
-		subtext = copytext(message, name_anchor + 1, length(message) + 1)
+		pretext = copytext_char(message, 1, name_anchor)
+		subtext = copytext_char(message, name_anchor + 1, length(message) + 1)
 	else
 		// No token. Just the emote as usual.
 		subtext = message
@@ -91,12 +91,12 @@
 
 	if(pretext)
 		// Add a space at the end if we didn't already supply one.
-		end_char = copytext(pretext, length(pretext), length(pretext) + 1)
+		end_char = copytext_char(pretext, length(pretext), length(pretext) + 1)
 		if(end_char != " ")
 			pretext += " "
 
 	// Grab the last character of the emote message.
-	end_char = copytext(subtext, length(subtext), length(subtext) + 1)
+	end_char = copytext_char(subtext, length(subtext), length(subtext) + 1)
 	if(!(end_char in list(".", "?", "!", "\"", "-", "~"))) // gotta include ~ for all you fucking weebs
 		// No punctuation supplied. Tack a period on the end.
 		subtext += "."
@@ -105,7 +105,7 @@
 	if(subtext != ".")
 		// First, let's get rid of any existing space, to account for sloppy emoters ("X, ^ , Y")
 		subtext = trim_left(subtext)
-		start_char = copytext(subtext, 1, 2)
+		start_char = copytext_char(subtext, 1, 2)
 		if(start_char != "," && start_char != "'")
 			subtext = " " + subtext
 
@@ -115,7 +115,7 @@
 	// Store the player's name in a nice bold, naturalement
 	nametext = "<B>[emoter]</B>"
 	var/overall = pretext + nametext + subtext
-	overall = replacetext(overall, "__:Я:_", "&#255;")
+	overall = replacetext_char(overall, "__:Я:_", "&#255;")
 	return overall
 
 /mob/proc/custom_emote(var/m_type = VISIBLE_MESSAGE, var/message = null)

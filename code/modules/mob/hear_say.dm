@@ -1,6 +1,6 @@
 // At minimum every mob has a hear_say proc.
 
-/mob/proc/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/alt_name = "",var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
+/mob/proc/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/alt_name = "",var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol, var/fontsize = null)
 	if(!client)
 		return
 
@@ -83,9 +83,11 @@
 							nverb = "[verb] ([language.shorthand])"
 						if(GLOB.PREF_OFF)//Regular output
 							nverb = verb
-			on_hear_say("<span class='game say'>[track]<span class='name'>[speaker_name]</span>[alt_name] [language.format_message(message, nverb)]</span>")
+			on_hear_say("<span class='game say'>[track]<span class='name'>[speaker_name]</span>[alt_name] [language.format_message(message, nverb, fontsize)]</span>")
 		else
-			on_hear_say("<span class='game say'>[track]<span class='name'>[speaker_name]</span>[alt_name] [verb], <span class='message'><span class='body'>\"[message]\"</span></span></span>")
+			var/F1 = fontsize ? "<font size=[fontsize]>" : ""
+			var/F2 = fontsize ? "</font>" : ""
+			on_hear_say("<span class='game say'>[track]<span class='name'>[speaker_name]</span>[alt_name] [verb], <span class='message'><span class='body'>[F1]\"[message]\"[F2]</span></span></span>")
 		if (speech_sound && (get_dist(speaker, src) <= world.view && src.z == speaker.z))
 			var/turf/source = speaker? get_turf(speaker) : get_turf(src)
 			src.playsound_local(source, speech_sound, sound_vol, 1)
@@ -287,10 +289,10 @@
 		var/list/messages = splittext(message, " ")
 		var/R = rand(1, messages.len)
 		var/heardword = messages[R]
-		if(copytext(heardword,1, 1) in punctuation)
-			heardword = copytext(heardword,2)
-		if(copytext(heardword,-1) in punctuation)
-			heardword = copytext(heardword,1,length(heardword))
+		if(copytext_char(heardword,1, 1) in punctuation)
+			heardword = copytext_char(heardword,2)
+		if(copytext_char(heardword,-1) in punctuation)
+			heardword = copytext_char(heardword,1,length(heardword))
 		heard = "<span class = 'game_say'>...You hear something about...[heardword]</span>"
 
 	else

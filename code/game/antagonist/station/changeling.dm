@@ -14,7 +14,7 @@ GLOBAL_DATUM_INIT(changelings, /datum/antagonist/changeling, new)
 	faction = "changeling"
 
 /datum/antagonist/changeling/get_welcome_text(mob/recipient)
-	return replacetext(welcome_text, "%LANGUAGE_PREFIX%", recipient?.get_prefix_key(/decl/prefix/language) || ",")
+	return replacetext_char(welcome_text, "%LANGUAGE_PREFIX%", recipient?.get_prefix_key(/decl/prefix/language) || ",")
 
 /datum/antagonist/changeling/get_special_objective_text(var/datum/mind/player)
 	return "<br><b>Changeling ID:</b> [player.changeling.changelingID].<br><b>Genomes Absorbed:</b> [player.changeling.absorbedcount]"

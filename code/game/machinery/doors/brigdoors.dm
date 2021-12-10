@@ -197,7 +197,7 @@
 		for(var/obj/machinery/flasher/F in targets)
 			F.flash()
 		. =  TOPIC_REFRESH
-		
+
 	if (href_list["adjust"])
 		timetoset += text2num(href_list["adjust"])
 		timetoset = Clamp(timetoset, 0, 36000)
@@ -253,7 +253,7 @@
 	var/len = length(tn)
 
 	for(var/d = 1 to len)
-		var/char = copytext(tn, len-d+1, len-d+2)
+		var/char = copytext_char(tn, len-d+1, len-d+2)
 		if(char == " ")
 			continue
 		var/image/ID = image('icons/obj/status_display.dmi', icon_state=char)

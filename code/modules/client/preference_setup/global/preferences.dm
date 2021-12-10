@@ -109,6 +109,10 @@ var/list/_client_preferences_by_type
 		sound_to(preference_mob, sound(null, repeat = 0, wait = 0, volume = 0, channel = GLOB.lobby_sound_channel))
 		sound_to(preference_mob, sound(null, repeat = 0, wait = 0, volume = 0, channel = GLOB.ambience_sound_channel))
 
+/datum/client_preference/play_jukeboxes
+	description ="Play jukeboxes and boomboxes"
+	key = "SOUND_JUKEBOXES"
+
 /datum/client_preference/play_announcement_sfx
 	description = "Play announcement sound effects"
 	key = "SOUND_ANNOUNCEMENT"
@@ -151,6 +155,11 @@ var/list/_client_preferences_by_type
 /datum/client_preference/show_typing_indicator/changed(var/mob/preference_mob, var/new_value)
 	if(new_value == GLOB.PREF_HIDE)
 		preference_mob.remove_typing_indicator()
+
+/datum/client_preference/floating_messages
+	description = "Floating chat messages"
+	key = "FLOATING_CHAT"
+	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
 /datum/client_preference/show_ooc
 	description = "OOC chat"

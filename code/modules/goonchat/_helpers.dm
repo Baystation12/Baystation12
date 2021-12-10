@@ -10,9 +10,9 @@ GLOBAL_DATUM_INIT(is_http_protocol, /regex, regex("^https?://"))
 	to_save(GLOB.iconCache[iconKey], icon)
 	var/iconData = GLOB.iconCache.ExportText(iconKey)
 	var/list/partial = splittext(iconData, "{")
-	return replacetext_char(copytext(partial[2], 3, -5), "\n", "")
+	return replacetext_char(copytext_char(partial[2], 3, -5), "\n", "")
 
-/proc/icon2html(thing, target, icon_state, dir, frame = 1, moving = FALSE, realsize = FALSE, class = null)
+/proc/icon2html(thing, target, icon_state, dir, frame = 1, moving = FALSE, realsize = FALSE, class = null, incx = 0, incy = 0)
 	if (!thing)
 		return
 
@@ -62,7 +62,7 @@ GLOBAL_DATUM_INIT(is_http_protocol, /regex, regex("^https?://"))
 		send_asset(thing2, key, FALSE)
 
 	if(realsize)
-		return "<img class='icon icon-[icon_state] [class]' style='width:[I.Width()]px;height:[I.Height()]px;min-height:[I.Height()]px' src=\"[url_encode(key)]\">"
+		return "<img class='icon icon-[icon_state] [class]' style='width:[I.Width()+incx]px;min-width:[I.Width()+incx]px;height:[I.Height()+incy]px;min-height:[I.Height()+incy]px' src=\"[url_encode(key)]\">"
 
 
 	return "<img class='icon icon-[icon_state] [class]' src=\"[url_encode(key)]\">"

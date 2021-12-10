@@ -17,7 +17,7 @@
 
 /datum/language/noise/get_talkinto_msg_range(message)
 	// if you make a loud noise (screams etc), you'll be heard from 4 tiles over instead of two
-	return (copytext(message, -1) == "!") ? 4 : 2
+	return (copytext_char(message, -1) == "!") ? 4 : 2
 
 /datum/language/sign
 	name = LANGUAGE_SIGN

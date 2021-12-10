@@ -10,14 +10,14 @@ DM version compatibility macros & procs
 
 #define arctan(X) arcsin((X) / sqrt(1 + (X) * (X)))
 
-#define copytext_char(ARGS...) copytext(ARGS)
+#define copytext_char(ARGS...) copytext_char(ARGS)
 #define findlasttext_char(ARGS...) findlasttext(ARGS)
 #define findlasttextEx_char(ARGS...) findlasttextEx(ARGS)
 #define findtext_char(ARGS...) findtext(ARGS)
 #define findtextEx_char(ARGS...) findtextEx(ARGS)
 #define length_char(X) length(X)
 #define nonspantext_char(ARGS...) nonspantext(ARGS)
-#define replacetext_char(ARGS...) replacetext(ARGS)
+#define replacetext_char(ARGS...) replacetext_char(ARGS)
 #define replacetextEx_char(ARGS...) replacetextEx(ARGS)
 #define spantext_char(ARGS...) spantext(ARGS)
 #define splittext_char(ARGS...) splittext(ARGS)
