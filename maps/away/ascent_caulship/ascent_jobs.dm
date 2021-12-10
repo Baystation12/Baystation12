@@ -12,7 +12,9 @@
 	crew_jobs = list(
 		/datum/job/submap/ascent,
 		/datum/job/submap/ascent/alate,
-		/datum/job/submap/ascent/drone
+		/datum/job/submap/ascent/drone,
+		/datum/job/submap/ascent/worker,
+		/datum/job/submap/ascent/queen
 	)
 	call_webhook = WEBHOOK_SUBMAP_LOADED_ASCENT
 
@@ -195,6 +197,40 @@
 	set_species_on_join = /mob/living/silicon/robot/flying/ascent
 	requires_supervisor = "Ascent Gyne"
 	use_species_whitelist = null
+
+/datum/job/submap/ascent/queen
+	title = "Serpentid Monarch Queen"
+	total_positions = 1
+	supervisors = "the Gyne"
+	info = "You are the fucking loli GBS, just think about how disgusting you are."
+	set_species_on_join = SPECIES_MONARCH_QUEEN
+	outfit_type = /decl/hierarchy/outfit/job/ascent/tech
+	requires_supervisor = "Ascent Gyne"
+	min_skill = list(
+		SKILL_EVA = SKILL_ADEPT,
+		SKILL_HAULING = SKILL_ADEPT,
+		SKILL_COMBAT = SKILL_ADEPT,
+		SKILL_WEAPONS = SKILL_ADEPT,
+		SKILL_MEDICAL = SKILL_BASIC
+	)
+	use_species_whitelist = SPECIES_NABBER
+
+/datum/job/submap/ascent/worker
+	title = "Ascent Worker"
+	total_positions = 2
+	supervisors = "the Queen and Gyne"
+	info = "Well. Maybe you're not loly, but you are still disqusting. Work for the sake of commu-- ahem, Khaarmani, I guess."
+	set_species_on_join = SPECIES_NABBER
+	outfit_type = /decl/hierarchy/outfit/job/ascent/tech
+	requires_supervisor = "Serpentid Monarch Queen"
+	min_skill = list(
+		SKILL_EVA = SKILL_ADEPT,
+		SKILL_HAULING = SKILL_ADEPT,
+		SKILL_COMBAT = SKILL_ADEPT,
+		SKILL_WEAPONS = SKILL_ADEPT,
+		SKILL_MEDICAL = SKILL_BASIC
+	)
+	use_species_whitelist = SPECIES_NABBER
 
 // Spawn points.
 /obj/effect/submap_landmark/spawnpoint/ascent_caulship
