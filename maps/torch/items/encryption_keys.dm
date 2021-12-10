@@ -18,6 +18,11 @@
 	icon_state = "nt_cypherkey"
 	channels = list("Service" = 1)
 
+/obj/item/device/encryptionkey/headset_torchcorp_guard
+	name = "Corporate Security Officer's encryption key"
+	icon_state = "nt_cypherkey"
+	channels = list("Science" = 1)
+
 /obj/item/device/encryptionkey/headset_torchcl
 	name = "corporate liaison radio encryption key"
 	icon_state = "nt_cypherkey"

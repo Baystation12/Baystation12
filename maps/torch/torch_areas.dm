@@ -1057,9 +1057,9 @@
 	name = "\improper Bridge Deck Security Checkpoint"
 	icon_state = "checkpoint"
 
-/area/security/opscheck
-	name = "\improper First Deck Security Checkpoint"
-	icon_state = "checkpoint"
+//area/security/opscheck
+	//name = "\improper First Deck Security Checkpoint"
+	//icon_state = "checkpoint"  unused
 
 /area/security/habcheck
 	name = "\improper Third Deck Security Checkpoint"
@@ -1525,6 +1525,11 @@ area/assembly/robotics/office
 /area/rnd/misc_lab
 	name = "\improper Miscellaneous Research"
 	icon_state = "misclab"
+
+/area/rnd/rnd_sec
+	name = "\improper Research Checkpoint"
+	icon_state = "rnd_sec"
+	req_access = list(list(access_liaison, access_research_security))
 
 /area/rnd/research
 	name = "\improper Research Hallway"

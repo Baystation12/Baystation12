@@ -358,6 +358,38 @@
 		/obj/item/rig_module/grenade_launcher/light,
 		/obj/item/rig_module/cooling_unit)
 
+/obj/item/rig/hazard/corporate_guard
+	name = "EXO hardsuit control module"
+	suit_type = "hazard hardsuit"
+	desc = "A security hardsuit designed for prolonged EVA in dangerous environments."
+	icon_state = "hazard_rig"
+	armor = list(
+		melee = ARMOR_MELEE_MAJOR,
+		bullet = ARMOR_BALLISTIC_MINOR,
+		laser = ARMOR_LASER_MINOR,
+		energy = ARMOR_ENERGY_MINOR,
+		bomb = ARMOR_BOMB_RESISTANT,
+		bio = ARMOR_BIO_SHIELDED,
+		rad = ARMOR_RAD_MINOR
+		)
+	online_slowdown = 2
+	offline_slowdown = 3
+	offline_vision_restriction = TINT_BLIND
+
+	chest_type = /obj/item/clothing/suit/space/rig/hazard
+	helm_type = /obj/item/clothing/head/helmet/space/rig/hazard
+	boot_type = /obj/item/clothing/shoes/magboots/rig/hazard
+	glove_type = /obj/item/clothing/gloves/rig/hazard
+
+	allowed = list(/obj/item/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/handcuffs,/obj/item/device/flashlight,/obj/item/tank,/obj/item/device/suit_cooling_unit,/obj/item/melee/baton)
+
+	req_access = list(access_research_security)
+
+/obj/item/rig/hazard/corporate_guard/equipped
+	initial_modules = list(
+		/obj/item/rig_module/vision/sechud,
+		/obj/item/rig_module/mounted/taser,
+		/obj/item/rig_module/cooling_unit)
 /*
  Overrides for standard mapset rig items
  */

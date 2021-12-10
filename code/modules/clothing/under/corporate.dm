@@ -17,6 +17,9 @@
 		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_under_corporate_unathi.dmi',
 		)
 
+/obj/item/clothing/under/rank/guard/corporate_guard
+	accessories = list(/obj/item/clothing/accessory/corptie)
+
 /obj/item/clothing/under/rank/scientist
 	name = "\improper EXO polo and pants"
 	desc = "A fashionable polo and pair of trousers made from patented biohazard-resistant synthetic fabrics."

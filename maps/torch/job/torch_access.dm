@@ -129,6 +129,12 @@
 	desc = "Commissary"
 	region = ACCESS_REGION_GENERAL
 
+/var/const/access_research_security = "ACCESS_RESEARCH_SECURITY" //97
+/datum/access/rnd_guard
+	id = access_research_security
+	desc = "Research Checkpoint"
+	region = ACCESS_REGION_RESEARCH
+
 /datum/access/psychiatrist
 	desc = "Mental Health"
 

@@ -205,6 +205,9 @@
 	job_access_type = /datum/job/liaison
 	extra_details = list("onegoldstripe")
 
+/obj/item/card/id/torch/passenger/corporate/corporate_guard
+	job_access_type = /datum/job/corporate_guard
+
 //Merchant
 /obj/item/card/id/torch/merchant
 	desc = "An identification card issued to Merchants, indicating their right to sell and buy goods."

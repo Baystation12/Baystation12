@@ -327,7 +327,7 @@
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_MINOR
 		)
-	online_slowdown = 1
+	online_slowdown = 2
 	offline_slowdown = 3
 	offline_vision_restriction = TINT_BLIND
 
