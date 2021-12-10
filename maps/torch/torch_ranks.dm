@@ -540,6 +540,12 @@
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/ec/officer/o8)
 	sort_order = 18
 
+/datum/mil_rank/ec/o10
+	name = "Commandant of the Expeditionary Corps"
+	name_short = "COEC"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/ec/officer/o10)
+	sort_order = 20
+
 /*
  *  Army
  *  ====
