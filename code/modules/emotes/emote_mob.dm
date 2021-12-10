@@ -75,7 +75,7 @@
 	message = replacetext_char(message, "&#255;", "__:Я:_") // Никому же в голову не придет такое написать? (2) ~bear1ake@inf-dev
 	message = html_decode(message)
 
-	name_anchor = findtext(message, anchor_char)
+	name_anchor = findtext_char(message, anchor_char)
 	if(name_anchor > 0) // User supplied emote with visible_emote token (default ^)
 		pretext = copytext_char(message, 1, name_anchor)
 		subtext = copytext_char(message, name_anchor + 1, length(message) + 1)
@@ -84,7 +84,7 @@
 		subtext = message
 
 	// Oh shit, we got this far! Let's see... did the user attempt to use more than one token?
-	if(findtext(subtext, anchor_char))
+	if(findtext_char(subtext, anchor_char))
 		// abort abort!
 		to_chat(emoter, "<span class='warning'>You may use only one \"[anchor_char]\" symbol in your emote.</span>")
 		return
