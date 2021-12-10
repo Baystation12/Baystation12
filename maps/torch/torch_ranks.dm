@@ -636,7 +636,7 @@
 
 /datum/mil_rank/army/o3
 	name = "Army Captain"
-	name_short = "CPT"
+	name_short = "ACPT"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/officer/o3)
 	sort_order = 13
 

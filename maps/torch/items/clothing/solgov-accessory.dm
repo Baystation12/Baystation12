@@ -764,8 +764,8 @@ ranks - marines
 	desc = "Insignia denoting the rank of First Lieutenant."
 
 /obj/item/clothing/accessory/solgov/rank/army/officer/o3
-	name = "ranks (O-3 captain)"
-	desc = "Insignia denoting the rank of Captain."
+	name = "ranks (O-3 army captain)"
+	desc = "Insignia denoting the rank of Army Captain."
 
 /obj/item/clothing/accessory/solgov/rank/army/officer/o4
 	name = "ranks (O-4 major)"
