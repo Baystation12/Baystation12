@@ -208,6 +208,23 @@
 	band_color = COLOR_PURPLE
 	starts_with = list(/datum/reagent/tramadol = 5)
 
+//from infinity
+/obj/item/reagent_containers/hypospray/autoinjector/brute
+	name = "autoinjector (anti-injury)"
+	band_color = COLOR_RED
+	starts_with = list(/datum/reagent/bicaridine = 5)
+
+/obj/item/reagent_containers/hypospray/autoinjector/burn
+	name = "autoinjector (anti-burn)"
+	band_color = COLOR_DARK_ORANGE
+	starts_with = list(/datum/reagent/kelotane = 5)
+
+/obj/item/reagent_containers/hypospray/autoinjector/inaprovaline
+	name = "autoinjector (inaprovaline)"
+	band_color = COLOR_CYAN
+	starts_with = list(/datum/reagent/inaprovaline = 5)
+//end from infinity
+
 /obj/item/reagent_containers/hypospray/autoinjector/combatpain
 	name = "autoinjector (oxycodone)"
 	band_color = COLOR_DARK_GRAY

@@ -50,7 +50,7 @@
 		/obj/item/device/binoculars,
 		/obj/item/material/knife/folding/swiss/explorer,
 		/obj/item/clothing/accessory/buddytag,
-		/obj/item/storage/firstaid/light,
+		/obj/item/storage/firstaid/individual/military/exp, //by rubay
 		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack, /obj/item/storage/backpack/satchel/grey)),
 		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/dufflebag, /obj/item/storage/backpack/messenger)),
 		new /datum/atom_creator/weighted(list(/obj/item/device/flashlight, /obj/item/device/flashlight/flare, /obj/item/device/flashlight/flare/glowstick/random))
@@ -74,7 +74,7 @@
 		/obj/item/device/radio/headset/exploration/alt,
 		/obj/item/device/binoculars,
 		/obj/item/clothing/accessory/buddytag,
-		/obj/item/storage/firstaid/light,
+		/obj/item/storage/firstaid/individual/military/exp, //by rubay
 		/obj/item/material/knife/folding/swiss/explorer,
 		/obj/item/device/camera,
 		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/explorer, /obj/item/storage/backpack/satchel/explorer)),
@@ -103,7 +103,7 @@
 		/obj/item/clothing/head/helmet/solgov/pilot,
 		/obj/item/clothing/head/helmet/solgov/pilot/fleet,
 		/obj/item/clothing/head/helmet/nt/pilot,
-		/obj/item/storage/firstaid/light,
+		/obj/item/storage/firstaid/individual/military/exp, //by rubay
 		/obj/item/material/knife/folding/swiss/explorer,
 		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack, /obj/item/storage/backpack/satchel/grey)),
 		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/dufflebag, /obj/item/storage/backpack/messenger)),

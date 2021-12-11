@@ -55,7 +55,7 @@
 	)
 
 /obj/structure/closet/secure_closet/corporate_guard
-	name = "\improper Corporate Security Officer's locker"
+	name = "\improper corporate security officer's locker"
 	req_access = list(access_research_security)
 	closet_appearance = /decl/closet_appearance/secure_closet/torch/corporate/corporate_guard
 
@@ -69,6 +69,7 @@
 		/obj/item/melee/baton/loaded,
 		/obj/item/clothing/glasses/tacgoggles,
 		/obj/item/taperoll/police,
+		/obj/item/storage/firstaid/individual/military,
 		/obj/item/device/hailer,
 		/obj/item/clothing/accessory/storage/black_vest,
 		/obj/item/clothing/head/soft/sec/corp,
