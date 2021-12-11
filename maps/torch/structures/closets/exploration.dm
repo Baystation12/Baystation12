@@ -103,7 +103,7 @@
 		/obj/item/clothing/head/helmet/solgov/pilot,
 		/obj/item/clothing/head/helmet/solgov/pilot/fleet,
 		/obj/item/clothing/head/helmet/nt/pilot,
-		/obj/item/storage/firstaid/individual/military/exp, //by rubay
+		/obj/item/storage/firstaid/individual/military/exp //by rubay,
 		/obj/item/material/knife/folding/swiss/explorer,
 		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack, /obj/item/storage/backpack/satchel/grey)),
 		new /datum/atom_creator/weighted(list(/obj/item/storage/backpack/dufflebag, /obj/item/storage/backpack/messenger)),

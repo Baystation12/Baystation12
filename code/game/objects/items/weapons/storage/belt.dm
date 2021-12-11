@@ -258,7 +258,7 @@
 		/obj/item/device/megaphone,
 		/obj/item/melee,
 		/obj/item/taperoll,
-		/obj/item/storage/firstaid/individual/military, //from infinity
+		/obj/item/storage/firstaid/individual/military //from infinity,
 		/obj/item/device/holowarrant,
 		/obj/item/magnetic_ammo,
 		/obj/item/device/binoculars,

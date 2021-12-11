@@ -47,7 +47,7 @@
 		/obj/item/melee/baton/loaded,
 		/obj/item/clothing/glasses/sunglasses/sechud/goggles,
 		/obj/item/taperoll/police,
-		/obj/item/storage/firstaid/individual/military, //by rubay
+		/obj/item/storage/firstaid/individual/military //by rubay,
 		/obj/item/device/hailer,
 		/obj/item/clothing/accessory/storage/black_vest,
 		/obj/item/gun/energy/gun/small/secure,
@@ -75,7 +75,7 @@
 		/obj/item/device/radio/headset/heads/cos/alt,
 		/obj/item/clothing/glasses/sunglasses/sechud/goggles,
 		/obj/item/taperoll/police,
-		/obj/item/storage/firstaid/individual/military, //by rubay
+		/obj/item/storage/firstaid/individual/military //by rubay,
 		/obj/item/handcuffs,
 		/obj/item/storage/belt/holster/security,
 		/obj/item/storage/belt/security,
@@ -114,7 +114,7 @@
 		/obj/item/device/radio/headset/headset_sec/alt,
 		/obj/item/clothing/glasses/sunglasses/sechud/goggles,
 		/obj/item/taperoll/police,
-		/obj/item/storage/firstaid/individual/military, //by rubay
+		/obj/item/storage/firstaid/individual/military //by rubay,
 		/obj/item/storage/belt/holster/security,
 		/obj/item/storage/belt/security,
 		/obj/item/reagent_containers/spray/pepper,
@@ -150,7 +150,7 @@
 		/obj/item/device/flash,
 		/obj/item/reagent_containers/spray/pepper,
 		/obj/item/taperoll/police,
-		/obj/item/storage/firstaid/individual/military, //by rubay
+		/obj/item/storage/firstaid/individual/military //by rubay,
 		/obj/item/clothing/accessory/storage/black_vest,
 		/obj/item/device/tape/random = 3,
 		/obj/item/clothing/glasses/sunglasses/sechud/toggle,
