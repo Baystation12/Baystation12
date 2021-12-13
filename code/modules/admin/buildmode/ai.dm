@@ -7,6 +7,8 @@
 	var/icon/buildmode_hud = icon('icons/misc/buildmode.dmi')
 	var/help_text = {"\
 	<span class='notice'>***********************************************************<br>\
+		Left Mouse Button drag box + ctrl             = Select only mobs in box<br>\
+		Left Mouse Button drag box + ctrl + shift     = Select additional mobs in area<br>\
 		Left Mouse Button on non-mob                  = Deselect all mobs<br>\
 		Left Mouse Button on AI mob                   = Select/Deselect mob<br>\
 		Left Mouse Button + alt on AI mob             = Toggle hostility on mob<br>\
@@ -214,3 +216,40 @@
 	else
 		unit.ai_status_image = image('icons/misc/buildmode.dmi', unit, "ai_1")
 		user.add_client_image(unit.ai_status_image)
+
+/proc/build_drag(var/client/user, buildmode, var/atom/fromatom, var/atom/toatom, var/atom/fromloc, var/atom/toloc, var/fromcontrol, var/tocontrol, params)
+	if (!istype(buildmode, /datum/build_mode/ai))
+		return
+
+	var/datum/build_mode/ai/holder = buildmode
+	for(var/datum/build_mode/ai/H)
+		if(H.user == user)
+			holder = H
+			break
+	if(!holder) return
+	var/list/pa = params2list(params)
+	if (pa["ctrl"])
+		//Holding shift prevents the deselection of existing
+		if(!pa["shift"])
+			for(var/mob/living/unit in holder.selected_mobs)
+				holder.deselect_AI_mob(unit)
+
+		var/turf/c1 = get_turf(fromatom)
+		var/turf/c2 = get_turf(toatom)
+		if(!c1 || !c2)
+			return //Dragged outside window or something
+
+		var/low_x = min(c1.x,c2.x)
+		var/low_y = min(c1.y,c2.y)
+		var/hi_x = max(c1.x,c2.x)
+		var/hi_y = max(c1.y,c2.y)
+		var/z = c1.z
+
+		for(var/mob/living/L in GLOB.living_mob_list_)
+			if(L.z != z || L.client)
+				continue
+			if(L.x >= low_x && L.x <= hi_x && L.y >= low_y && L.y <= hi_y)
+				if (L.ai_holder)
+					holder.select_AI_mob(L)
+
+	return
