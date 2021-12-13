@@ -23,7 +23,7 @@ Huragok Engineers. Their flight makes them hard to hit during combat and their n
 	language = LANGUAGE_SANGHEILI
 	additional_langs = list(LANGUAGE_YANMEE_HIVE)
 	radiation_mod = 0.6 //Covie weapons emit beta radiation. Resistant to 1/3 types of radiation.
-	inherent_verbs = list(/mob/living/carbon/human/proc/yanmee_flight_ability)
+	//inherent_verbs = list(/mob/living/carbon/human/proc/yanmee_flight_ability)
 	spawn_flags = SPECIES_CAN_JOIN
 	flags = NO_MINOR_CUT
 	darksight = 4

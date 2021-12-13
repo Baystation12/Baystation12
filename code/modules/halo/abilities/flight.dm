@@ -1,5 +1,5 @@
 
-#define YANMEE_FLIGHT_TICKS 80
+//#define YANMEE_FLIGHT_TICKS 80
 
 /mob/living
 	var/flight_ticks_remain = 0 //Movement and life() ticks degrade this. Set by Yanme'e flight and jump-packs
@@ -36,6 +36,7 @@
 		if(istype(loc,/turf/simulated/open))
 			fall()
 
+/*
 /mob/living/carbon/human/proc/yanmee_flight_ability()
 	set category = "Abilities"
 	set name = "Toggle Flight"
@@ -44,3 +45,4 @@
 	take_flight(YANMEE_FLIGHT_TICKS,"<span class = 'warning'>[src.name] takes flight!</span>","<span class = 'warning'>[src.name] slows, then stops flapping their wings, bringing them to the ground.</span>")
 
 #undef YANMEE_FLIGHT_TICKS
+*/
