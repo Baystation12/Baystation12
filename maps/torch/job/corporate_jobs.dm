@@ -40,7 +40,7 @@
 	department_flag = SCI
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Chief Science Officer and Corporate Liason"
+	supervisors = "the Chief Science Officer"
 	selection_color = "#473d63"
 	economic_power = 18
 	minimal_player_age = 0
@@ -54,8 +54,8 @@
 	                    SKILL_WEAPONS     = SKILL_ADEPT
 						)
 
-	max_skill = list(   SKILL_COMBAT      = SKILL_EXPERT,
-	                    SKILL_WEAPONS     = SKILL_EXPERT)
+	max_skill = list(   SKILL_COMBAT      = SKILL_MAX,
+	                    SKILL_WEAPONS     = SKILL_MAX)
 	skill_points = 20
 
 	access = list(

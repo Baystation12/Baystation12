@@ -206,6 +206,7 @@
 	extra_details = list("onegoldstripe")
 
 /obj/item/card/id/torch/passenger/corporate/corporate_guard
+	desc = "A card issued to corporate personnel aboard the SEV Torch."
 	job_access_type = /datum/job/corporate_guard
 
 //Merchant

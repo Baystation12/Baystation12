@@ -101,7 +101,7 @@
 	allowed_roles = TECHNICAL_ROLES
 
 /datum/gear/tactical/balaclava
-	allowed_roles = SECURITY_ROLES
+	allowed_roles = list(/datum/job/hos, /datum/job/warden, /datum/job/detective, /datum/job/officer, /datum/job/corporate_guard)
 
 /datum/gear/head/fleetberet
 	display_name = "Fleet branch beret selection"
