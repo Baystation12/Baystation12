@@ -54,8 +54,8 @@
 	                    SKILL_WEAPONS     = SKILL_ADEPT
 						)
 
-	max_skill = list(   SKILL_COMBAT      = SKILL_MAX,
-	                    SKILL_WEAPONS     = SKILL_MAX)
+	max_skill = list(   SKILL_COMBAT      = SKILL_EXPERT,
+	                    SKILL_WEAPONS     = SKILL_EXPERT)
 	skill_points = 20
 
 	access = list(
