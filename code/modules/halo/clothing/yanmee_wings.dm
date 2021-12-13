@@ -34,18 +34,27 @@
 		to_chat(user, "<span class='warning'>There is already something attached here!</span>")
 		return
 
-	if(!istype(W, /obj/item/weapon/gun) || !istype(W, /obj/item/weapon/melee) || istype(W, /obj/item/weapon/gun/projectile/turret))
-		to_chat(user, "<span class='warning'>You can't attach this here!</span>")
-		return
+	if(istype(W, /obj/item/weapon/gun) || istype(W, /obj/item/weapon/melee) || istype(W, /obj/item/weapon/storage/backpack))
+		if(istype(W, /obj/item/weapon/gun))
+			if(W.w_class > ITEM_SIZE_NORMAL || istype(W, /obj/item/weapon/gun/projectile/turret))
+				to_chat(user, "<span class='warning'>[W] won't fit on [src]!</span>")
+				return
 
-	if(istype(user))
-		user.stop_aiming(no_message=1)
+			if(istype(user))
+				user.stop_aiming(no_message=1)
 
-	weapon_stored = W
-	user.drop_from_inventory(weapon_stored)
-	weapon_stored.loc = src
-	weapon_stored.add_fingerprint(user)
-	user.visible_message("<span class='notice'>[user] attaches \the [weapon_stored].</span>", "<span class='notice'>You attach \the [weapon_stored].</span>")
+		if(istype(W, /obj/item/weapon/melee))
+			if(W.w_class > ITEM_SIZE_SMALL)
+				to_chat(user, "<span class='warning'>[W] won't fit on [src]!</span>")
+				return
+
+		weapon_stored = W
+		user.drop_from_inventory(weapon_stored)
+		weapon_stored.loc = src
+		weapon_stored.add_fingerprint(user)
+		user.visible_message("<span class='notice'>[user] attaches \the [weapon_stored].</span>", "<span class='notice'>You attach \the [weapon_stored].</span>")
+	else
+		to_chat(user, "<span class='warning'>[W] won't fit on [src]!</span>")
 
 /obj/item/flight_item/yanmee/attack_hand(mob/living/carbon/human/user)
 	. = ..()
