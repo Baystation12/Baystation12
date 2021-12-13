@@ -1,14 +1,16 @@
 
 /* some yanme wings made as jetpacks because making them anything else is too much fucking work */
 
+#define YANMEE_FLIGHT_TICKS 80
+
 /obj/item/flight_item/yanmee
 	name = "\improper Yanme'e Wings (Minor)"
 	desc = "They go flap, you go up."
 
-	flight_ticks_max = 80
+	flight_ticks_max = YANMEE_FLIGHT_TICKS
 	canremove = FALSE
 	flight_sound = FALSE
-	var/obj/item/weapon/weapon_stored			//ion want them yanme to lose their back slot, fuck them yanmes who use backpacks
+	var/obj/item/weapon/weapon_stored			//ion want them yanme to lose their back slot
 	action_button_name = "Toggle Flight"
 
 	icon = 'code/modules/halo/clothing/yanmee_wings.dmi'
@@ -22,14 +24,9 @@
 	land_msg = "\'s wings stop flapping, bringing them to the ground."
 
 /obj/item/flight_item/yanmee/examine(mob/user, distance)
-
-	if(weapon_stored)
-		desc = "They go flap, you go up. It has a [weapon_stored] attached."
-	else
-		desc = "They go flap, you go up."
-
 	. = ..()
-
+	if(weapon_stored)
+		to_chat(user, "<span class='notice'>It has a [weapon_stored] attached!</span>")
 
 /obj/item/flight_item/yanmee/attackby(obj/item/weapon/W, mob/living/carbon/human/user)
 	. = ..()
@@ -37,7 +34,7 @@
 		to_chat(user, "<span class='warning'>There is already something attached here!</span>")
 		return
 
-	if(!istype(W, /obj/item/weapon))
+	if(!istype(W, /obj/item/weapon/gun) || !istype(W, /obj/item/weapon/melee) || istype(W, /obj/item/weapon/gun/projectile/turret))
 		to_chat(user, "<span class='warning'>You can't attach this here!</span>")
 		return
 
@@ -72,7 +69,6 @@
 		user.put_in_hands(weapon_stored)
 		weapon_stored.add_fingerprint(user)
 		weapon_stored = FALSE
-		name = initial(name)
 
 /obj/item/flight_item/yanmee/major
 	name = "\improper Yanme'e Wings (Major)"
@@ -88,3 +84,5 @@
 	name = "\improper Yanme'e Wings (Leader)"
 	icon_state = "ywings_leader_item"
 	item_state = "ywings_leader"
+
+#undef YANMEE_FLIGHT_TICKS
