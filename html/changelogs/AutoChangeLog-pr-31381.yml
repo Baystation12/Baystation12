@@ -1,0 +1,4 @@
+author: Mucker
+delete-after: true
+changes:
+  - admin: Re-added click-dragging to select units in AI buildmode.
