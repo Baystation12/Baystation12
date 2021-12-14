@@ -1567,6 +1567,7 @@
 #include "code\modules\clothing\under\accessories\ftu_pin.dm"
 #include "code\modules\clothing\under\accessories\hawaii.dm"
 #include "code\modules\clothing\under\accessories\helmcover.dm"
+#include "code\modules\clothing\under\accessories\helmet_decor.dm"
 #include "code\modules\clothing\under\accessories\holster.dm"
 #include "code\modules\clothing\under\accessories\kneepads.dm"
 #include "code\modules\clothing\under\accessories\leg_guards.dm"
