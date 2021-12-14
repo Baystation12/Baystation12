@@ -73,8 +73,14 @@
 /obj/item/clothing/under/solgov/utility/expeditionary_skirt/officer
 	name = "expeditionary officer skirt"
 	desc = "A black turtleneck and skirt, the elusive ladies' uniform of the Expeditionary Corps. This one has gold trim."
-	icon_state = "blackservicefem_com"
-	worn_state = "blackservicefem_com"
+	icon_state = "blackservicefem_off"
+	worn_state = "blackservicefem_off"
+
+/obj/item/clothing/under/solgov/utility/expeditionary_skirt/command
+	name = "expeditionary officer skirt"
+	desc = "A black turtleneck and skirt, the elusive ladies' uniform of the Expeditionary Corps. This one has gold trim."
+	icon_state = "blackservicefem_comm"
+	worn_state = "blackservicefem_comm"
 
 /obj/item/clothing/under/solgov/utility/expeditionary/command
 	accessories = list(/obj/item/clothing/accessory/solgov/department/command)
@@ -281,11 +287,47 @@
 	worn_state = "whiteservice"
 	accessories = list(/obj/item/clothing/accessory/navy)
 
+/obj/item/clothing/under/solgov/service/fleet/command
+	name = "fleet senior officer service uniform"
+	desc = "The senior officer's service uniform of the SCG Fleet, made from immaculate white fabric and a gold stripe."
+	icon_state = "whiteservice_comm"
+	worn_state = "whiteservice_comm"
+
+/obj/item/clothing/under/solgov/service/fleet/officer
+	name = "fleet junior officer's service uniform"
+	desc = "The junior officer's service uniform of the SCG Fleet, made from immaculate white fabric and a silver stripe."
+	icon_state = "whiteservice_off"
+	worn_state = "whiteservice_off"
+
+/obj/item/clothing/under/solgov/service/fleet/flag
+	name = "fleet flag officer's service uniform"
+	desc = "The flag officer's service uniform of the SCG Fleet, made from immaculate white fabric and a ruby stripe."
+	icon_state = "whiteservice_flag"
+	worn_state = "whiteservice_flag"
+
 /obj/item/clothing/under/solgov/service/fleet/skirt
 	name = "fleet service skirt"
 	desc = "The service uniform skirt of the SCG Fleet, made from immaculate white fabric."
 	icon_state = "whiteservicefem"
 	worn_state = "whiteservicefem"
+
+/obj/item/clothing/under/solgov/service/fleet/command/skirt
+	name = "fleet senior officer's service skirt"
+	desc = "The senior officer's service uniform skirt of the SCG Fleet, made from immaculate white fabric and a gold stripe."
+	icon_state = "whiteservicefem_comm"
+	worn_state = "whiteservicefem_comm"
+
+/obj/item/clothing/under/solgov/service/fleet/flag/skirt
+	name = "fleet flag officer's service skirt"
+	desc = "The flag officer's service uniform skirt of the SCG Fleet, made from immaculate white fabric and a ruby stripe."
+	icon_state = "whiteservicefem_flag"
+	worn_state = "whiteservicefem_flag"
+
+/obj/item/clothing/under/solgov/service/fleet/officer/skirt
+	name = "fleet junior officer's service skirt"
+	desc = "The junior officer's service uniform skirt of the SCG Fleet, made from immaculate white fabric and a silver stripe."
+	icon_state = "whiteservicefem_off"
+	worn_state = "whiteservicefem_off"
 
 /obj/item/clothing/under/solgov/service/army
 	name = "army service uniform"

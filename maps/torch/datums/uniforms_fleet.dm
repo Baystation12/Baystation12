@@ -12,9 +12,13 @@
 				/obj/item/clothing/gloves/thick
 			)
 
+	service_under = /obj/item/clothing/under/solgov/service/fleet
+	service_skirt = /obj/item/clothing/under/solgov/service/fleet/skirt
 	service_hat = /obj/item/clothing/head/solgov/dress/fleet/command
 	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet/officer
 
+	dress_under = /obj/item/clothing/under/solgov/service/fleet/officer
+	dress_skirt = /obj/item/clothing/under/solgov/service/fleet/officer/skirt
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/fleet/officer
 	dress_hat = /obj/item/clothing/head/solgov/dress/fleet/command
 	dress_extra = list(
@@ -26,14 +30,23 @@
 	name = "Fleet senior command"
 	min_rank = 15
 
+	service_under = /obj/item/clothing/under/solgov/service/fleet
+	service_skirt = /obj/item/clothing/under/solgov/service/fleet/skirt
 	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet/command
+
+	dress_under = /obj/item/clothing/under/solgov/service/fleet/command
+	dress_skirt = /obj/item/clothing/under/solgov/service/fleet/command/skirt
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/fleet/command
 
 /decl/hierarchy/mil_uniform/fleet/com/flagofficer
 	name = "Fleet flag command"
 	min_rank = 17
 
+	service_under = /obj/item/clothing/under/solgov/service/fleet
+	service_skirt = /obj/item/clothing/under/solgov/service/fleet/skirt
 	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet/flag
+	dress_under = /obj/item/clothing/under/solgov/service/fleet/flag
+	dress_skirt = /obj/item/clothing/under/solgov/service/fleet/flag/skirt
 	dress_over = /obj/item/clothing/suit/storage/solgov/dress/fleet/flag
 
 /decl/hierarchy/mil_uniform/fleet/eng
