@@ -197,11 +197,11 @@ GUEST_BAN
 ## Ban appeals URL - usually for a forum or wherever people should go to contact your admins.
 # BANAPPEALS http://example.com
 
-##Defines the ticklag for the world. 0.5 is smooth, 0.7 is less smooth.
-TICKLAG 0.5
+## Defines world tick rate relative to 10/sec at 1 and 20/sec at 0.5. Use this OR fps, not both. Defaults to 0.333333
+# TICKLAG 0.333333
 
-##Defines world FPS. Defaults to 20.
-# FPS 20
+## Defines world tick rate. Use this OR ticklag, not both. Defaults to 30.
+FPS 30
 
 ## Whether the server will talk to other processes through socket_talk
 SOCKET_TALK 0
