@@ -34,7 +34,7 @@
 		to_chat(user, "<span class='warning'>There is already something attached here!</span>")
 		return
 
-	if(istype(W, /obj/item/weapon/gun) || istype(W, /obj/item/weapon/melee) || istype(W, /obj/item/weapon/storage/backpack))
+	if(istype(W, /obj/item/weapon/gun) || istype(W, /obj/item/weapon/melee)) //for now just weapons, basically a bigger holster
 		if(istype(W, /obj/item/weapon/gun))
 			if(W.w_class > ITEM_SIZE_NORMAL || istype(W, /obj/item/weapon/gun/projectile/turret))
 				to_chat(user, "<span class='warning'>[W] won't fit on [src]!</span>")

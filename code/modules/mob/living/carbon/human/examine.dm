@@ -100,6 +100,10 @@
 			msg += "<span class='warning'>[T.He] [T.has] \icon[back] [back.gender==PLURAL?"some":"a"] [(back.blood_color != SYNTH_BLOOD_COLOUR) ? "blood" : "oil"]-stained [back] on [T.his] back.</span>\n"
 		else
 			msg += "[T.He] [T.has] \icon[back] \a [back] on [T.his] back.\n"
+		if(istype(back, /obj/item/flight_item/yanmee))
+			var/obj/item/flight_item/yanmee/I = back
+			if(I.weapon_stored)
+				msg += "[T.He] [T.has] \icon[I.weapon_stored] \a [I.weapon_stored] on [T.his] wings. \n"
 
 	//left hand
 	if(l_hand)
