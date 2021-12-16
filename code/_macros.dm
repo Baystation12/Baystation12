@@ -105,6 +105,8 @@ var/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 
 #define random_id(key,min_id,max_id) uniqueness_repository.Generate(/datum/uniqueness_generator/id_random, key, min_id, max_id)
 
+#define isexophage(A) istype(A, /mob/living/carbon/alien/exophage)
+
 /// General I/O helpers
 #define to_target(target, payload)            target << (payload)
 #define from_target(target, receiver)         target >> (receiver)
@@ -175,6 +177,8 @@ var/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 #define SPAN_DANGER(X) "<span class='danger'>[X]</span>"
 
 #define SPAN_OCCULT(X) "<span class='cult'>[X]</span>"
+
+#define SPAN_ALIEN(X) "<span class='alien'>[X]</span>"
 
 #define SPAN_MFAUNA(X) "<span class='mfauna'>[X]</span>"
 

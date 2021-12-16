@@ -34,6 +34,8 @@
 #define LANGUAGE_DRONE_GLOBAL      "Drone Talk"
 #define LANGUAGE_CHANGELING_GLOBAL "Changeling"
 #define LANGUAGE_BORER_GLOBAL      "Cortical Link"
+#define LANGUAGE_EXOPHAGE          "Exophagic"
+#define LANGUAGE_EXOPHAGE_LINK     "Exophagic Link"
 
 // Language flags.
 #define WHITELISTED  1   // Language is available if the speaker is whitelisted.

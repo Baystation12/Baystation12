@@ -132,3 +132,31 @@
 	for(var/i=0 to length)
 		new_name += pick(syllables)
 	return capitalize(new_name)
+
+/datum/language/exophage
+	name = LANGUAGE_EXOPHAGE
+	desc = "The strange language of exophages, anomalous aliens spread across the galaxy. Researchers have yet to actually understand it."
+	speech_verb = "emits"
+	ask_verb = "probes"
+	exclaim_verb = "floods"
+	signlang_verb = "quivers"
+	colour = "alien"
+	key = "l"
+	flags = RESTRICTED | NONVERBAL
+	syllables = list(
+	"!", "?", "#",
+	"SS", "ss",	"ZZ",
+	"zz", "&", "$"
+	)
+	space_chance = 0
+	machine_understands = FALSE
+	shorthand = "EX"
+
+/datum/language/exophage/link
+	name = LANGUAGE_EXOPHAGE_LINK
+	desc = "Certain exophages have evolved to organically emit neural waves readable by others of their kind."
+	colour = "alien"
+	key = "e"
+	flags = RESTRICTED | HIVEMIND
+	syllables = list()
+	shorthand = "N/A"
