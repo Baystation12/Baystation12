@@ -223,7 +223,6 @@
 	icon_state = "spline_fancy"
 	},
 /obj/machinery/hologram/holopad,
-/obj/effect/landmark/corpse/commander,
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/random/coin,
 /obj/random/cash,
@@ -231,6 +230,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
+/obj/effect/landmark/corpse/venera/captain,
 /turf/simulated/floor/wood/walnut,
 /area/venera/bridge/co_office)
 "aJ" = (
@@ -1651,6 +1651,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
+/obj/effect/landmark/corpse/venera/engineer,
 /turf/simulated/floor/tiled/techfloor,
 /area/venera/hallway/eva)
 "eM" = (
@@ -1898,7 +1899,7 @@
 	},
 /obj/machinery/atmospherics/valve/shutoff/supply,
 /obj/effect/floor_decal/industrial/shutoff{
-	layer = 2.04
+	layer = 2.03
 	},
 /obj/machinery/atmospherics/valve/shutoff/scrubbers,
 /turf/simulated/floor/tiled/dark,
@@ -2423,7 +2424,7 @@
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/valve/shutoff/supply,
 /obj/effect/floor_decal/industrial/shutoff{
-	layer = 2.04
+	layer = 2.03
 	},
 /obj/machinery/atmospherics/valve/shutoff/scrubbers,
 /turf/simulated/floor/tiled/dark,
@@ -2579,7 +2580,7 @@
 	},
 /obj/effect/floor_decal/industrial/shutoff{
 	dir = 4;
-	layer = 2.04
+	layer = 2.03
 	},
 /obj/machinery/atmospherics/valve/shutoff/scrubbers{
 	dir = 4
@@ -3335,7 +3336,7 @@
 /area/venera/hallway)
 "mv" = (
 /obj/effect/floor_decal/industrial/hatch/yellow{
-	layer = 2.04
+	layer = 2.03
 	},
 /obj/machinery/disposal,
 /obj/structure/disposalpipe/trunk{
@@ -3407,7 +3408,7 @@
 /obj/effect/floor_decal/corner/blue/mono,
 /obj/machinery/disposal,
 /obj/effect/floor_decal/industrial/hatch/yellow{
-	layer = 2.04
+	layer = 2.03
 	},
 /obj/machinery/light{
 	dir = 1;
@@ -3667,7 +3668,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden,
 /obj/machinery/hologram/holopad,
 /obj/effect/floor_decal/industrial/outline/yellow{
-	layer = 2.04
+	layer = 2.03
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/venera/hallway/eva)
@@ -3728,7 +3729,7 @@
 	icon_state = "bordercolorhalf"
 	},
 /obj/effect/floor_decal/industrial/outline/yellow{
-	layer = 2.04
+	layer = 2.03
 	},
 /obj/machinery/hologram/holopad,
 /turf/simulated/floor/tiled,
@@ -4656,7 +4657,7 @@
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/machinery/hologram/holopad,
 /obj/effect/floor_decal/industrial/outline/yellow{
-	layer = 2.04
+	layer = 2.03
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -5482,7 +5483,7 @@
 "vF" = (
 /obj/machinery/disposal,
 /obj/effect/floor_decal/industrial/hatch/yellow{
-	layer = 2.04
+	layer = 2.03
 	},
 /obj/structure/disposalpipe/trunk{
 	dir = 8
@@ -6015,7 +6016,7 @@
 	},
 /obj/effect/floor_decal/industrial/shutoff{
 	dir = 4;
-	layer = 2.04
+	layer = 2.03
 	},
 /obj/machinery/atmospherics/valve/shutoff/scrubbers{
 	dir = 4
@@ -6284,7 +6285,7 @@
 "zb" = (
 /obj/machinery/disposal,
 /obj/effect/floor_decal/industrial/hatch/yellow{
-	layer = 2.04
+	layer = 2.03
 	},
 /obj/effect/floor_decal/corner/red/mono,
 /obj/structure/disposalpipe/trunk,
@@ -6599,7 +6600,7 @@
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/valve/shutoff/supply,
 /obj/effect/floor_decal/industrial/shutoff{
-	layer = 2.04
+	layer = 2.03
 	},
 /obj/machinery/atmospherics/valve/shutoff/scrubbers,
 /turf/simulated/floor/tiled/dark,
@@ -7468,7 +7469,7 @@
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/valve/shutoff/supply,
 /obj/effect/floor_decal/industrial/shutoff{
-	layer = 2.04
+	layer = 2.03
 	},
 /obj/machinery/atmospherics/valve/shutoff/scrubbers,
 /turf/simulated/floor/tiled/dark,
@@ -8155,7 +8156,7 @@
 /obj/effect/decal/cleanable/blood/drip,
 /obj/machinery/atmospherics/valve/shutoff/supply,
 /obj/effect/floor_decal/industrial/shutoff{
-	layer = 2.04
+	layer = 2.03
 	},
 /obj/machinery/atmospherics/valve/shutoff/scrubbers,
 /turf/simulated/floor/tiled/dark,
@@ -8400,7 +8401,7 @@
 /obj/random/trash,
 /obj/machinery/disposal,
 /obj/effect/floor_decal/industrial/hatch/yellow{
-	layer = 2.04
+	layer = 2.03
 	},
 /obj/structure/disposalpipe/trunk,
 /obj/item/paper/memo/engineering/engineersbad,
@@ -9215,7 +9216,7 @@
 	},
 /obj/effect/floor_decal/industrial/shutoff{
 	dir = 4;
-	layer = 2.04
+	layer = 2.03
 	},
 /obj/machinery/atmospherics/valve/shutoff/scrubbers{
 	dir = 4
@@ -9274,7 +9275,7 @@
 	},
 /obj/effect/floor_decal/industrial/shutoff{
 	dir = 4;
-	layer = 2.04
+	layer = 2.03
 	},
 /obj/structure/cable/green{
 	d1 = 4;
@@ -9657,7 +9658,7 @@
 	},
 /obj/machinery/atmospherics/valve/shutoff/fuel,
 /obj/effect/floor_decal/industrial/shutoff{
-	layer = 2.04
+	layer = 2.03
 	},
 /obj/structure/cable/green{
 	d1 = 1;
@@ -10192,7 +10193,7 @@
 "Rx" = (
 /obj/effect/floor_decal/spline/fancy/wood,
 /obj/effect/floor_decal/industrial/hatch/yellow{
-	layer = 2.04
+	layer = 2.03
 	},
 /obj/machinery/disposal,
 /obj/structure/disposalpipe/trunk{
@@ -11348,7 +11349,7 @@
 "Wx" = (
 /obj/random/trash,
 /obj/effect/floor_decal/industrial/hatch/yellow{
-	layer = 2.04
+	layer = 2.03
 	},
 /obj/machinery/disposal,
 /obj/structure/disposalpipe/trunk{
@@ -11659,7 +11660,7 @@
 /obj/structure/closet/emcloset,
 /obj/effect/floor_decal/corner/yellow/mono,
 /obj/effect/floor_decal/industrial/outline/yellow{
-	layer = 2.04
+	layer = 2.03
 	},
 /obj/item/device/radio/map_preset/venera,
 /turf/simulated/floor/tiled,
@@ -11986,7 +11987,7 @@
 	},
 /obj/machinery/atmospherics/valve/shutoff/supply,
 /obj/effect/floor_decal/industrial/shutoff{
-	layer = 2.04
+	layer = 2.03
 	},
 /obj/machinery/atmospherics/valve/shutoff/scrubbers,
 /turf/simulated/floor/tiled/dark,

@@ -69,6 +69,10 @@
 /obj/effect/landmark/corpse/venera/iccgn
 	name = "Dead ICCGN Agent"
 	corpse_outfits = list(/decl/hierarchy/outfit/venera/iccgn)
+
+/decl/hierarchy/outfit/venera
+	name = OUTFIT_JOB_NAME ("Venera Crew")
+	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/service
 /decl/hierarchy/outfit/venera/iccgn
 	name = OUTFIT_JOB_NAME ("ICCGN Agent")
 	uniform = /obj/item/clothing/under/iccgn/utility
