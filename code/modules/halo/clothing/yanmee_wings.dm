@@ -10,8 +10,9 @@
 	flight_ticks_max = YANMEE_FLIGHT_TICKS
 	canremove = FALSE
 	flight_sound = FALSE
-	var/obj/item/weapon/weapon_stored			//ion want them yanme to lose their back slot
 	action_button_name = "Toggle Flight"
+	var/obj/item/weapon/weapon_stored			//ion want them yanme to lose their back slot
+	var/hidden = FALSE
 
 	icon = 'code/modules/halo/clothing/yanmee_wings.dmi'
 	icon_state = "ywings_minor_item"
@@ -27,6 +28,36 @@
 	. = ..()
 	if(weapon_stored)
 		to_chat(user, "<span class='notice'>It has a [weapon_stored] attached!</span>")
+
+/obj/item/flight_item/yanmee/verb/hide_wings()
+	set name = "Hide Wings"
+	set category = "Object"
+	set src in usr
+
+	if(usr.stat == 0)
+		if(hidden)
+			hidden = FALSE
+			to_chat(usr, "<span class='notice'>You open your wings.</span>")
+		else
+			hidden = TRUE
+			to_chat(usr, "<span class='notice'>You close your wings.</span>")
+		update_icon(usr)
+	else
+		to_chat(usr, "<span class='warning'>You can'd do that in this state.</span>")
+
+
+/obj/item/flight_item/yanmee/update_icon(var/mob/living/user)
+	if(active)
+		icon_state = "[initial(icon_state)]-active"
+		item_state = "[initial(item_state)]-active"
+	else
+		if(hidden)
+			icon_state = initial(icon_state)
+			item_state = "ywings_hidden"
+		else
+			icon_state = initial(icon_state)
+			item_state = initial(item_state)
+	user.update_inv_back(1)
 
 /obj/item/flight_item/yanmee/attackby(obj/item/weapon/W, mob/living/carbon/human/user)
 	. = ..()
