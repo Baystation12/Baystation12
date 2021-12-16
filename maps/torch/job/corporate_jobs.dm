@@ -42,7 +42,7 @@
 	spawn_positions = 1
 	supervisors = "the Chief Science Officer"
 	selection_color = "#473d63"
-	economic_power = 18
+	economic_power = 5
 	minimal_player_age = 0
 	minimum_character_age = list(SPECIES_HUMAN = 26)
 	outfit_type = /decl/hierarchy/outfit/job/torch/passenger/corporate_guard
