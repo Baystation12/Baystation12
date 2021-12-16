@@ -1898,10 +1898,8 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/valve/shutoff/supply,
-/obj/effect/floor_decal/industrial/shutoff{
-	layer = 2.03
-	},
 /obj/machinery/atmospherics/valve/shutoff/scrubbers,
+/obj/effect/floor_decal/industrial/shutoff,
 /turf/simulated/floor/tiled/dark,
 /area/venera/hallway)
 "fK" = (
@@ -2423,10 +2421,8 @@
 	},
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/valve/shutoff/supply,
-/obj/effect/floor_decal/industrial/shutoff{
-	layer = 2.03
-	},
 /obj/machinery/atmospherics/valve/shutoff/scrubbers,
+/obj/effect/floor_decal/industrial/shutoff,
 /turf/simulated/floor/tiled/dark,
 /area/venera/hallway)
 "iq" = (
@@ -2578,11 +2574,10 @@
 /obj/machinery/atmospherics/valve/shutoff/supply{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/shutoff{
-	dir = 4;
-	layer = 2.03
-	},
 /obj/machinery/atmospherics/valve/shutoff/scrubbers{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/shutoff{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
@@ -3335,9 +3330,6 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/venera/hallway)
 "mv" = (
-/obj/effect/floor_decal/industrial/hatch/yellow{
-	layer = 2.03
-	},
 /obj/machinery/disposal,
 /obj/structure/disposalpipe/trunk{
 	dir = 1
@@ -3346,6 +3338,7 @@
 	dir = 1;
 	pixel_y = -24
 	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/white/monotile,
 /area/venera/living/mess)
 "mx" = (
@@ -3407,14 +3400,12 @@
 "mH" = (
 /obj/effect/floor_decal/corner/blue/mono,
 /obj/machinery/disposal,
-/obj/effect/floor_decal/industrial/hatch/yellow{
-	layer = 2.03
-	},
 /obj/machinery/light{
 	dir = 1;
 	icon_state = "tube1"
 	},
 /obj/structure/disposalpipe/trunk,
+/obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/venera/bridge)
 "mI" = (
@@ -5482,12 +5473,10 @@
 /area/venera/engine/thrusterport)
 "vF" = (
 /obj/machinery/disposal,
-/obj/effect/floor_decal/industrial/hatch/yellow{
-	layer = 2.03
-	},
 /obj/structure/disposalpipe/trunk{
 	dir = 8
 	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/venera/disperser)
 "vI" = (
@@ -6014,11 +6003,10 @@
 /obj/machinery/atmospherics/valve/shutoff/supply{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/shutoff{
-	dir = 4;
-	layer = 2.03
-	},
 /obj/machinery/atmospherics/valve/shutoff/scrubbers{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/shutoff{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
@@ -6284,11 +6272,9 @@
 /area/venera/hallway)
 "zb" = (
 /obj/machinery/disposal,
-/obj/effect/floor_decal/industrial/hatch/yellow{
-	layer = 2.03
-	},
 /obj/effect/floor_decal/corner/red/mono,
 /obj/structure/disposalpipe/trunk,
+/obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/venera/security)
 "ze" = (
@@ -6599,10 +6585,8 @@
 	},
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/valve/shutoff/supply,
-/obj/effect/floor_decal/industrial/shutoff{
-	layer = 2.03
-	},
 /obj/machinery/atmospherics/valve/shutoff/scrubbers,
+/obj/effect/floor_decal/industrial/shutoff,
 /turf/simulated/floor/tiled/dark,
 /area/venera/hallway)
 "AI" = (
@@ -7468,10 +7452,8 @@
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/valve/shutoff/supply,
-/obj/effect/floor_decal/industrial/shutoff{
-	layer = 2.03
-	},
 /obj/machinery/atmospherics/valve/shutoff/scrubbers,
+/obj/effect/floor_decal/industrial/shutoff,
 /turf/simulated/floor/tiled/dark,
 /area/venera/hallway)
 "Fm" = (
@@ -8155,10 +8137,8 @@
 	},
 /obj/effect/decal/cleanable/blood/drip,
 /obj/machinery/atmospherics/valve/shutoff/supply,
-/obj/effect/floor_decal/industrial/shutoff{
-	layer = 2.03
-	},
 /obj/machinery/atmospherics/valve/shutoff/scrubbers,
+/obj/effect/floor_decal/industrial/shutoff,
 /turf/simulated/floor/tiled/dark,
 /area/venera/hallway)
 "IF" = (
@@ -8400,12 +8380,10 @@
 "JF" = (
 /obj/random/trash,
 /obj/machinery/disposal,
-/obj/effect/floor_decal/industrial/hatch/yellow{
-	layer = 2.03
-	},
 /obj/structure/disposalpipe/trunk,
 /obj/item/paper/memo/engineering/engineersbad,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel,
+/obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled,
 /area/venera/engine)
 "JN" = (
@@ -9214,11 +9192,10 @@
 /obj/machinery/atmospherics/valve/shutoff/supply{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/shutoff{
-	dir = 4;
-	layer = 2.03
-	},
 /obj/machinery/atmospherics/valve/shutoff/scrubbers{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/shutoff{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
@@ -9273,10 +9250,6 @@
 /obj/machinery/atmospherics/valve/shutoff/fuel{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/shutoff{
-	dir = 4;
-	layer = 2.03
-	},
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
@@ -9289,6 +9262,9 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/shutoff{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
@@ -9657,9 +9633,6 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/valve/shutoff/fuel,
-/obj/effect/floor_decal/industrial/shutoff{
-	layer = 2.03
-	},
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
@@ -9671,6 +9644,7 @@
 	},
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/effect/floor_decal/industrial/shutoff,
 /turf/simulated/floor/tiled/white,
 /area/venera/living)
 "Pc" = (
@@ -10192,13 +10166,11 @@
 /area/venera/hallway)
 "Rx" = (
 /obj/effect/floor_decal/spline/fancy/wood,
-/obj/effect/floor_decal/industrial/hatch/yellow{
-	layer = 2.03
-	},
 /obj/machinery/disposal,
 /obj/structure/disposalpipe/trunk{
 	dir = 4
 	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/dark,
 /area/venera/living/mess)
 "RA" = (
@@ -11348,9 +11320,6 @@
 /area/venera/engine)
 "Wx" = (
 /obj/random/trash,
-/obj/effect/floor_decal/industrial/hatch/yellow{
-	layer = 2.03
-	},
 /obj/machinery/disposal,
 /obj/structure/disposalpipe/trunk{
 	dir = 4
@@ -11359,6 +11328,7 @@
 	pixel_x = -23;
 	pixel_y = 25
 	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/white,
 /area/venera/living)
 "WA" = (
@@ -11986,10 +11956,8 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/valve/shutoff/supply,
-/obj/effect/floor_decal/industrial/shutoff{
-	layer = 2.03
-	},
 /obj/machinery/atmospherics/valve/shutoff/scrubbers,
+/obj/effect/floor_decal/industrial/shutoff,
 /turf/simulated/floor/tiled/dark,
 /area/venera/hallway)
 "Zl" = (
