@@ -9,7 +9,7 @@
 
 	flight_ticks_max = YANMEE_FLIGHT_TICKS
 	canremove = FALSE
-	flight_sound = FALSE
+	flight_sound = 'code/modules/halo/sounds/yanmee_flying.ogg'
 	action_button_name = "Toggle Flight"
 	var/obj/item/weapon/weapon_stored			//ion want them yanme to lose their back slot
 	var/hidden = FALSE
