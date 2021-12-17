@@ -910,7 +910,7 @@
 
 /configuration/proc/build_mode_cache()
 	gamemode_cache = list()
-	FOR_BLIND(datum/game_mode/M, subtypesof(/datum/game_mode))
+	for (var/datum/game_mode/M as anything in subtypesof(/datum/game_mode))
 		var/tag = initial(M.config_tag)
 		if (!tag)
 			continue

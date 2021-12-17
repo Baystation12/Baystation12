@@ -18,7 +18,7 @@
 /// Get the client associated with ckey text if it is currently connected
 /proc/ckey2client(text)
 	if (valid_ckey(text))
-		FOR_BLIND(client/C, GLOB.clients)
+		for (var/client/C as anything in GLOB.clients)
 			if (C.ckey == text)
 				return C
 
@@ -26,7 +26,7 @@
 /// Get the client associated with key text if it is currently connected
 /proc/key2client(text)
 	if (valid_key(text))
-		FOR_BLIND(client/C, GLOB.clients)
+		for (var/client/C as anything in GLOB.clients)
 			if (C.key == text)
 				return C
 
