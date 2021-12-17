@@ -1784,6 +1784,9 @@
 /obj/item/clothing/suit/pirate,
 /obj/effect/floor_decal/corner_steel_grid/diagonal,
 /obj/effect/submap_landmark/spawnpoint/voxship_crew/engineer,
+/obj/effect/landmark{
+	name = "Vox-Spawn"
+	},
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/fore)
 "dT" = (
@@ -1944,6 +1947,9 @@
 /obj/structure/curtain/open/bed,
 /obj/effect/floor_decal/corner_steel_grid/diagonal,
 /obj/effect/submap_landmark/spawnpoint/voxship_crew/quill,
+/obj/effect/landmark{
+	name = "Vox-Spawn"
+	},
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/fore)
 "em" = (
@@ -2374,6 +2380,9 @@
 /obj/effect/floor_decal/corner_steel_grid/diagonal,
 /obj/effect/submap_landmark/spawnpoint/voxship_crew,
 /obj/item/bikehorn/rubberducky,
+/obj/effect/landmark{
+	name = "Vox-Spawn"
+	},
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/fore)
 "fi" = (
@@ -2510,6 +2519,9 @@
 /obj/structure/curtain/open/bed,
 /obj/effect/floor_decal/corner_steel_grid/diagonal,
 /obj/effect/submap_landmark/spawnpoint/voxship_crew/doc,
+/obj/effect/landmark{
+	name = "Vox-Spawn"
+	},
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/fore)
 "fy" = (

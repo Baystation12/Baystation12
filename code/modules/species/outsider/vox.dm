@@ -197,7 +197,7 @@
 		return
 	if (allowed_role && user.mind?.special_role != allowed_role)
 		return
-	if (user.species.name == SPECIES_VOX || !is_alien_whitelisted(user, SPECIES_VOX))
+	if (user.species.name == SPECIES_VOX || !is_alien_whitelisted(user, all_species[SPECIES_VOX]))
 		return
 	var/data = input(user, "Become Vox?", "Become Vox") as null | anything in list("No", "Yes")
 	if (isnull(data) || data == "No")

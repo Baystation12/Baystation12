@@ -4,6 +4,7 @@
 #include "voxship_jobs.dm"
 #include "voxship_radio.dm"
 #include "voxship_machines.dm"
+#include "voxship_antagonism.dm"
 
 /datum/map_template/ruin/away_site/scavship
 	name = "Vox Scavenger Ship"
