@@ -171,7 +171,7 @@ var/list/escape_pods_by_name = list()
 	if(emagged && isMultitool(T) && user.skill_check(SKILL_ELECTRICAL, SKILL_ADEPT))
 		to_chat(user, "<span class='notice'>Ты начал сбрасывать настройки [src], чтобы починить его.</span>")
 		if(do_after(user, 100, src))
-			emagged = 0
+			emagged = FALSE
 			state("Сброс до заводских настроек завершен!")
 			sleep(5)
 			state("Поиск центрального контроллера...")
