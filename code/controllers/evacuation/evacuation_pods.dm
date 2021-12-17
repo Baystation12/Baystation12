@@ -5,6 +5,11 @@
 
 // Apparently, emergency_evacuation --> "abandon ship" and !emergency_evacuation --> "bluespace jump"
 // That stuff should be moved to the evacuation option datums but someone can do that later
+/datum/evacuation_controller
+	var/confirmed
+
+/datum/evacuation_controller/proc/make_prepared()
+
 /datum/evacuation_controller/starship
 	name = "escape pod controller"
 
@@ -52,6 +57,51 @@
 	..()
 	if(!emergency_evacuation) //bluespace jump
 		SetUniversalState(/datum/universal_state) //clear jump state
+
+/datum/evacuation_controller/starship/cancel_evacuation()
+	var/emerg = emergency_evacuation
+	. = ..()
+
+	if(emerg)
+		// Close the pods (space shields)
+		for(var/obj/machinery/door/blast/regular/escape_pod/ES in world)
+			INVOKE_ASYNC(ES, /obj/machinery/door/blast/proc/force_close)
+		for (var/datum/shuttle/autodock/ferry/escape_pod/pod in escape_pods) // Unarm the pods!
+			pod.set_self_unarm()
+
+/datum/evacuation_controller/starship/can_cancel()
+	// Are we evacuating?
+	if(isnull(evac_called_at))
+		return 0
+	// Have we already launched?
+	if(!((state == 1) || (state == EVAC_LAUNCHING)))
+		return 0
+	// Are we already committed?
+	if(world.time > evac_no_return)
+		return 0
+	return 1
+
+/datum/evacuation_controller/starship/make_prepared()
+	var/time_diff = evac_ready_time - world.time
+	evac_ready_time = world.time
+	evac_launch_time -= time_diff
+	evac_arrival_time -= time_diff
+	evac_no_return -= time_diff
+
+/datum/evacuation_controller/starship/call_evacuation(var/mob/user, var/_emergency_evac, var/forced, var/skip_announce, var/autotransfer)
+	if((user && isAI(user)) || forced)
+		if(state == 1)
+			make_prepared()
+			return 1
+		emergency_prep_additional_delay = 0 MINUTES
+		confirmed = "confirmed"
+		skip_announce = TRUE
+
+
+	. = ..(user, _emergency_evac, forced, skip_announce, autotransfer)
+	emergency_prep_additional_delay = initial(emergency_prep_additional_delay)	// Reseting time shortcut
+	if(.)
+		evac_no_return = evac_ready_time + round(evac_launch_delay/2)
 
 /datum/evacuation_controller/starship/available_evac_options()
 	if (is_on_cooldown())
