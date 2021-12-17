@@ -2,7 +2,7 @@
 	layer = OBJ_LAYER
 
 	appearance_flags = DEFAULT_APPEARANCE_FLAGS | TILE_BOUND
-	glide_size = 8
+	glide_size = 6
 
 	var/waterproof = TRUE
 	var/movable_flags
