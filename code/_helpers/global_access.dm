@@ -285,8 +285,6 @@
 			return global.assigned;
 		if("assigned_blocks")
 			return global.assigned_blocks;
-		if("atmosphere_alarm")
-			return global.atmosphere_alarm;
 		if("attack_log_repository")
 			return global.attack_log_repository;
 		if("base_miss_chance")
@@ -303,8 +301,6 @@
 			return global.cached_icons;
 		if("cached_space")
 			return global.cached_space;
-		if("camera_alarm")
-			return global.camera_alarm;
 		if("camera_range_display_status")
 			return global.camera_range_display_status;
 		if("camera_repository")
@@ -417,8 +413,6 @@
 			return global.file_uid;
 		if("finds_as_strings")
 			return global.finds_as_strings;
-		if("fire_alarm")
-			return global.fire_alarm;
 		if("flesh_hud_colours")
 			return global.flesh_hud_colours;
 		if("floorIsLava")
@@ -577,8 +571,6 @@
 			return global.mob_hat_cache;
 		if("mob_repository")
 			return global.mob_repository;
-		if("motion_alarm")
-			return global.motion_alarm;
 		if("moving_levels")
 			return global.moving_levels;
 		if("multi_point_spawns")
@@ -645,8 +637,6 @@
 			return global.playable_species;
 		if("possible_changeling_IDs")
 			return global.possible_changeling_IDs;
-		if("power_alarm")
-			return global.power_alarm;
 		if("powerinstances")
 			return global.powerinstances;
 		if("powers")
@@ -1162,8 +1152,6 @@
 			global.assigned=newval;
 		if("assigned_blocks")
 			global.assigned_blocks=newval;
-		if("atmosphere_alarm")
-			global.atmosphere_alarm=newval;
 		if("attack_log_repository")
 			global.attack_log_repository=newval;
 		if("base_miss_chance")
@@ -1180,8 +1168,6 @@
 			global.cached_icons=newval;
 		if("cached_space")
 			global.cached_space=newval;
-		if("camera_alarm")
-			global.camera_alarm=newval;
 		if("camera_range_display_status")
 			global.camera_range_display_status=newval;
 		if("camera_repository")
@@ -1294,8 +1280,6 @@
 			global.file_uid=newval;
 		if("finds_as_strings")
 			global.finds_as_strings=newval;
-		if("fire_alarm")
-			global.fire_alarm=newval;
 		if("flesh_hud_colours")
 			global.flesh_hud_colours=newval;
 		if("floorIsLava")
@@ -1454,8 +1438,6 @@
 			global.mob_hat_cache=newval;
 		if("mob_repository")
 			global.mob_repository=newval;
-		if("motion_alarm")
-			global.motion_alarm=newval;
 		if("moving_levels")
 			global.moving_levels=newval;
 		if("multi_point_spawns")
@@ -1522,8 +1504,6 @@
 			global.playable_species=newval;
 		if("possible_changeling_IDs")
 			global.possible_changeling_IDs=newval;
-		if("power_alarm")
-			global.power_alarm=newval;
 		if("powerinstances")
 			global.powerinstances=newval;
 		if("powers")
@@ -1896,7 +1876,6 @@
 	"asset_datums",
 	"assigned",
 	"assigned_blocks",
-	"atmosphere_alarm",
 	"attack_log_repository",
 	"base_miss_chance",
 	"basic_robolimb",
@@ -1905,7 +1884,6 @@
 	"cable_list",
 	"cached_icons",
 	"cached_space",
-	"camera_alarm",
 	"camera_range_display_status",
 	"camera_repository",
 	"cameranet",
@@ -1962,7 +1940,6 @@
 	"failed_unit_tests",
 	"file_uid",
 	"finds_as_strings",
-	"fire_alarm",
 	"flesh_hud_colours",
 	"floorIsLava",
 	"floor_decals",
@@ -2042,7 +2019,6 @@
 	"minor_announcement",
 	"mob_hat_cache",
 	"mob_repository",
-	"motion_alarm",
 	"moving_levels",
 	"multi_point_spawns",
 	"narsie_behaviour",
@@ -2076,7 +2052,6 @@
 	"plant_seed_sprites",
 	"playable_species",
 	"possible_changeling_IDs",
-	"power_alarm",
 	"powerinstances",
 	"powers",
 	"priority_air_alarms",
