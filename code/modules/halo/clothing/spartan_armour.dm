@@ -53,6 +53,8 @@
 	max_suitstore_w_class = ITEM_SIZE_HUGE
 	unacidable = 1
 
+	action_button_name = "Activate Self Destruct"
+
 	specials = list(/datum/armourspecials/shields/spartan,\
 		/datum/armourspecials/shieldmonitor,\
 		/datum/armourspecials/self_destruct)
@@ -61,6 +63,9 @@
 		/datum/armourspecials/gear/mjolnir_jumpsuit)*/
 	totalshields = 100
 	item_state_slots = list(slot_l_hand_str = "syndicate-black", slot_r_hand_str = "syndicate-black")
+
+/obj/item/clothing/suit/armor/special/spartan/ui_action_click()
+	self_destruct(usr)
 
 /obj/item/clothing/under/spartan_internal/get_mob_overlay(mob/user_mob, slot)
 	var/image/I = ..()

@@ -30,7 +30,7 @@
 	wielded_item_state = "fuelrod-wielded"
 	salvage_components = list(/obj/item/plasma_core)
 	matter = list("nanolaminate" = 2, "kemocite" = 1)
-
+	heavy_covenant = 1
 /obj/item/weapon/gun/projectile/fuel_rod/update_icon()
 	if(ammo_magazine)
 		icon_state = "fuel_rod_loaded"

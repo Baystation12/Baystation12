@@ -98,6 +98,7 @@
 	var/irradiate_non_cov = 0 //Set this to anything above 0, and it'll irradiate humans when fired. Spartans and Orions are ok.
 	var/is_heavy = 0 //Set this to anything above 0, and all species that aren't elites/brutes/spartans/orions have to two-hand it
 	var/advanced_covenant = 0
+	var/heavy_covenant = 0 //This and the above are to restrict what species can use the item in combination with can_operate_advanced/heavy_covenant
 
 	//"Channeled" weapons, aka longfire beam sustained types (sentinel beam)//
 
@@ -239,6 +240,9 @@
 	var/mob/living/carbon/human/h = user
 	if(istype(h) && h.species.can_operate_advanced_covenant == 0 && advanced_covenant == 1)
 		to_chat(h,"<span class= 'danger'>You don't know how to operate this weapon!</span>")
+		return 0
+	if(istype(h) && h.species.can_operate_heavy_covenant == 0 && heavy_covenant == 1)
+		to_chat(h,"<span class= 'danger'>This weapon is too heavy for you to use!</span>")
 		return 0
 	return 1
 

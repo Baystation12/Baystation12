@@ -2,7 +2,7 @@
 
 /obj/item/clothing/suit/armor/special/proc/toggle_eva_mode()
 	set name = "Toggle Shield EVA Mode"
-	set category = "EVA"
+	set category = "Abilities"
 
 	var/mob/living/toggler = usr
 	if(!istype(toggler))
@@ -13,7 +13,7 @@
 
 /obj/item/clothing/suit/armor/special/proc/verb_self_destruct()
 	set name = "Activate Self Destruct"
-	set category = "Object"
+	set category = "Abilities"
 
 	if(!istype(usr,/mob/living))
 		return
