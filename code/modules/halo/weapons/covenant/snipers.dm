@@ -20,7 +20,6 @@
 	scope_zoom_amount = 2
 	accuracy = 1
 	wielded_item_state = "carbine-wielded"
-	advanced_covenant = 1
 	speed_reload_time = -1 //already auto-ejects
 	matter = list("nanolaminate" = 1)
 	hud_bullet_row_num = 9
@@ -84,7 +83,6 @@
 	min_zoom_amount = 3
 	is_scope_variable = 1
 	scoped_accuracy = 7
-	advanced_covenant = 1
 	overheat_sfx = 'code/modules/halo/sounds/beam_rifle_overheat.ogg'
 	overheat_capacity = 4 //SRS mag equiv, but overheats on 4th click
 	overheat_fullclear_delay = 2 SECONDS

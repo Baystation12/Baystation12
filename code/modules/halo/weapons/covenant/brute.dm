@@ -283,7 +283,6 @@
 	sprite_sheets = list(\
 	"Jiralhanae" = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_gear.dmi'
 	)
-	advanced_covenant = 1
 	matter = list("nanolaminate" = 2, "kemocite" = 1, "duridium" = 1)
 
 	whitelisted_grenades = list(/obj/item/weapon/grenade/brute_shot)

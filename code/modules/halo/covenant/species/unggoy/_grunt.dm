@@ -23,7 +23,6 @@
 	item_icon_offsets = list(list(0,0),list(0,0),null,list(0,0),null,null,null,list(0,0),null)
 	default_faction = "Covenant"
 	unarmed_types = list(/datum/unarmed_attack/grunt_punch)
-	can_operate_advanced_covenant = 0
 
 	breath_type = "methane"
 	exhale_type = "carbon_dioxide"

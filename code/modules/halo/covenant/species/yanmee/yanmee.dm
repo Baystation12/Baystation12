@@ -33,8 +33,6 @@ Huragok Engineers. Their flight makes them hard to hit during combat and their n
 	pixel_offset_x = -1
 	default_faction = "Covenant"
 	unarmed_types = list(/datum/unarmed_attack/bug_punch)
-	can_operate_advanced_covenant = 0
-	can_operate_heavy_covenant = 0
 
 	warning_low_pressure = 25
 	hazard_low_pressure = -1
