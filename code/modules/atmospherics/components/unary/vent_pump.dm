@@ -406,7 +406,7 @@
 /decl/public_access/public_variable/pressure_bound/write_var(obj/machinery/atmospherics/unary/vent_pump/machine, new_value)
 	if(new_value == "default")
 		new_value = machine.internal_pressure_bound_default
-	new_value = Clamp(text2num(new_value), 0, MAX_PUMP_PRESSURE)
+	new_value = clamp(text2num(new_value), 0, MAX_PUMP_PRESSURE)
 	. = ..()
 	if(.)
 		machine.internal_pressure_bound = new_value
@@ -422,7 +422,7 @@
 /decl/public_access/public_variable/pressure_bound/external/write_var(obj/machinery/atmospherics/unary/vent_pump/machine, new_value)
 	if(new_value == "default")
 		new_value = machine.external_pressure_bound_default
-	new_value = Clamp(text2num(new_value), 0, MAX_PUMP_PRESSURE)
+	new_value = clamp(text2num(new_value), 0, MAX_PUMP_PRESSURE)
 	. = ..()
 	if(.)
 		machine.external_pressure_bound = new_value

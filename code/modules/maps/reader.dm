@@ -118,7 +118,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 				if(!no_changeturf)
 					WARNING("Z-level expansion occurred without no_changeturf set, this may cause problems when /turf/post_change is called.")
 
-			bounds[MAP_MINX] = min(bounds[MAP_MINX], Clamp(xcrdStart, x_lower, x_upper))
+			bounds[MAP_MINX] = min(bounds[MAP_MINX], clamp(xcrdStart, x_lower, x_upper))
 			bounds[MAP_MINZ] = min(bounds[MAP_MINZ], zcrd)
 			bounds[MAP_MAXZ] = max(bounds[MAP_MAXZ], zcrd)
 
@@ -135,15 +135,15 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 			if(gridLines.len && gridLines[gridLines.len] == "")
 				gridLines.Cut(gridLines.len) // Remove only one blank line at the end.
 
-			bounds[MAP_MINY] = min(bounds[MAP_MINY], Clamp(ycrd, y_lower, y_upper))
+			bounds[MAP_MINY] = min(bounds[MAP_MINY], clamp(ycrd, y_lower, y_upper))
 			ycrd += gridLines.len - 1 // Start at the top and work down
 
 			if(!cropMap && ycrd > world.maxy)
 				if(!measureOnly)
 					world.maxy = ycrd // Expand Y here.  X is expanded in the loop below
-				bounds[MAP_MAXY] = max(bounds[MAP_MAXY], Clamp(ycrd, y_lower, y_upper))
+				bounds[MAP_MAXY] = max(bounds[MAP_MAXY], clamp(ycrd, y_lower, y_upper))
 			else
-				bounds[MAP_MAXY] = max(bounds[MAP_MAXY], Clamp(min(ycrd, world.maxy), y_lower, y_upper))
+				bounds[MAP_MAXY] = max(bounds[MAP_MAXY], clamp(min(ycrd, world.maxy), y_lower, y_upper))
 
 			var/maxx = xcrdStart
 			if(measureOnly)
@@ -187,7 +187,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 				if (zexpansion)
 					create_lighting_overlays_zlevel(zcrd)
 
-			bounds[MAP_MAXX] = Clamp(max(bounds[MAP_MAXX], cropMap ? min(maxx, world.maxx) : maxx), x_lower, x_upper)
+			bounds[MAP_MAXX] = clamp(max(bounds[MAP_MAXX], cropMap ? min(maxx, world.maxx) : maxx), x_lower, x_upper)
 
 		CHECK_TICK
 

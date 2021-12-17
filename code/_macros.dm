@@ -7,7 +7,7 @@
 
 #define PUBLIC_GAME_MODE SSticker.master_mode
 
-#define CLAMP01(x) 		(Clamp(x, 0, 1))
+#define CLAMP01(x) clamp(x, 0, 1)
 
 var/const/POSITIVE_INFINITY = 1#INF // win: 1.#INF, lin: inf
 var/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
@@ -273,6 +273,3 @@ var/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 
 
 #define num2hex(num) num2text(num, 1, 16)
-
-
-#define Clamp(value, low, high) clamp(value, low, high)

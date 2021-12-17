@@ -194,7 +194,7 @@ Thus, the two variables affect pump operation are set in New():
 	return machine.target_pressure
 
 /decl/public_access/public_variable/pump_target_output/write_var(obj/machinery/atmospherics/binary/pump/machine, new_value)
-	new_value = Clamp(new_value, 0, machine.max_pressure_setting)
+	new_value = clamp(new_value, 0, machine.max_pressure_setting)
 	. = ..()
 	if(.)
 		machine.target_pressure = new_value

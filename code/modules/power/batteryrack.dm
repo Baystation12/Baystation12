@@ -31,7 +31,7 @@
 	var/ui_tick = 0
 
 /obj/machinery/power/smes/batteryrack/RefreshParts()
-	var/capacitor_efficiency = Clamp(total_component_rating_of_type(/obj/item/stock_parts/capacitor), 0, 10)
+	var/capacitor_efficiency = clamp(total_component_rating_of_type(/obj/item/stock_parts/capacitor), 0, 10)
 	var/maxcells = 3 * total_component_rating_of_type(/obj/item/stock_parts/matter_bin)
 
 	max_transfer_rate = 10000 * capacitor_efficiency // 30kw - 90kw depending on used capacitors.
@@ -274,7 +274,7 @@
 		return 1
 	else if( href_list["ejectcell"] )
 		var/slot_number = text2num(href_list["ejectcell"])
-		if(slot_number != Clamp(round(slot_number), 1, length(internal_cells)))
+		if(slot_number != clamp(round(slot_number), 1, length(internal_cells)))
 			return 1
 		var/obj/item/cell/C = internal_cells[slot_number]
 

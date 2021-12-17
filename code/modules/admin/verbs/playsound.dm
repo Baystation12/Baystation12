@@ -16,7 +16,7 @@ var/list/sounds_cache = list()
 		if (isnull(volume))
 			return
 
-		volume =  round(Clamp(volume, 0, 100))
+		volume =  round(clamp(volume, 0, 100))
 		to_chat(src, "Sound volume set to [volume]%")
 		uploaded_sound.volume =volume
 		var/choice = alert("Song: [S]", "Play Sound" , "Play", "Preview", "Cancel")

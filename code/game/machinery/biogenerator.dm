@@ -229,5 +229,5 @@
 
 /obj/machinery/biogenerator/RefreshParts()
 	..()
-	build_eff = Clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator), 1, 10)
-	eat_eff = Clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 1, 10)
+	build_eff = clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator), 1, 10)
+	eat_eff = clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 1, 10)

@@ -96,7 +96,7 @@
 /obj/item/spacecash/bundle/attack_hand(mob/user as mob)
 	if (user.get_inactive_hand() == src)
 		var/amount = input(usr, "How many [GLOB.using_map.local_currency_name] do you want to take? (0 to [src.worth])", "Take Money", 20) as num
-		amount = round(Clamp(amount, 0, src.worth))
+		amount = round(clamp(amount, 0, src.worth))
 		if (amount==0) return 0
 
 		src.worth -= amount

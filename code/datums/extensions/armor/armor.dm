@@ -69,7 +69,7 @@
 	return min(armor_values[key], 100)
 
 /datum/extension/armor/proc/set_value(key, newval)
-	armor_values[key] = Clamp(newval, 0, 100)
+	armor_values[key] = clamp(newval, 0, 100)
 
 // There is a disconnect between legacy damage and armor code. This here helps bridge the gap.
 /proc/get_armor_key(damage_type, damage_flags)
