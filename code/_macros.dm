@@ -255,3 +255,24 @@ var/const/NEGATIVE_INFINITY = -1#INF // win: -1.#INF, lin: -inf
 
 /// Flip bits of MASK in FIELD
 #define FLIP_FLAGS(FIELD, MASK) ((FIELD) ^= (MASK))
+
+
+#define regex_replace_char(RE, ARGS...) RE.Replace_char(ARGS)
+
+
+#define regex_replace(RE, ARGS...) RE.Replace(ARGS)
+
+
+#define regex_find_char(RE, ARGS...) RE.Find_char(ARGS)
+
+
+#define regex_find(RE, ARGS...) RE.Find(ARGS)
+
+
+#define hex2num(hex) (text2num(hex, 16) || 0)
+
+
+#define num2hex(num) num2text(num, 1, 16)
+
+
+#define Clamp(value, low, high) clamp(value, low, high)
