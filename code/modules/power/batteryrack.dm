@@ -51,7 +51,7 @@
 	icon_update = 0
 
 	var/cellcount = 0
-	var/charge_level = between(0, round(Percentage() / 12), 7)
+	var/charge_level = clamp(round(Percentage() / 12), 0, 7)
 
 
 	overlays += "charge[charge_level]"
@@ -71,7 +71,7 @@
 		newmaxcharge += C.maxcharge
 
 	capacity = newmaxcharge
-	charge = between(0, charge, newmaxcharge)
+	charge = clamp(charge, 0, newmaxcharge)
 
 
 // Sets input/output depending on our "mode" var.
@@ -186,7 +186,7 @@
 			celldiff = (least.maxcharge / 100) * percentdiff
 		else
 			celldiff = (most.maxcharge / 100) * percentdiff
-		celldiff = between(0, celldiff, max_transfer_rate * CELLRATE)
+		celldiff = clamp(celldiff, 0, max_transfer_rate * CELLRATE)
 		// Ensure we don't transfer more energy than the most charged cell has, and that the least charged cell can input.
 		celldiff = min(min(celldiff, most.charge), least.maxcharge - least.charge)
 		least.give(most.use(celldiff))
@@ -264,7 +264,7 @@
 		update_io(0)
 		return 1
 	else if( href_list["enable"] )
-		update_io(between(1, text2num(href_list["enable"]), 3))
+		update_io(clamp(text2num(href_list["enable"]), 1, 3))
 		return 1
 	else if( href_list["equaliseon"] )
 		equalise = 1

@@ -248,7 +248,7 @@
 
 	if (operating_temperature > cooling_temperature)
 		var/temp_loss = (operating_temperature - cooling_temperature)/TEMPERATURE_DIVISOR
-		temp_loss = between(2, round(temp_loss, 1), TEMPERATURE_CHANGE_MAX)
+		temp_loss = clamp(round(temp_loss, 1), 2, TEMPERATURE_CHANGE_MAX)
 		operating_temperature = max(operating_temperature - temp_loss, cooling_temperature)
 		src.updateDialog()
 

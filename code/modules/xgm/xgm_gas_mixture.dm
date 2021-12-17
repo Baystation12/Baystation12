@@ -242,7 +242,7 @@
 /datum/gas_mixture/proc/remove_ratio(ratio, out_group_multiplier = 1)
 	if(ratio <= 0)
 		return null
-	out_group_multiplier = between(1, out_group_multiplier, group_multiplier)
+	out_group_multiplier = clamp(out_group_multiplier, 1, group_multiplier)
 
 	ratio = min(ratio, 1)
 

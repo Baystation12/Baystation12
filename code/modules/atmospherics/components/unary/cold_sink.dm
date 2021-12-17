@@ -106,7 +106,7 @@
 		else
 			set_temperature = max(set_temperature + amount, 0)
 	if(href_list["setPower"]) //setting power to 0 is redundant anyways
-		var/new_setting = between(0, text2num(href_list["setPower"]), 100)
+		var/new_setting = clamp(text2num(href_list["setPower"]), 0, 100)
 		set_power_level(new_setting)
 
 	add_fingerprint(usr)

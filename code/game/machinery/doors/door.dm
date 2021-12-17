@@ -266,7 +266,7 @@
 					return //the materials in the door have been removed before welding was finished.
 
 				to_chat(user, "<span class='notice'>You finish repairing the damage to \the [src].</span>")
-				health = between(health, health + repairing.amount*DOOR_REPAIR_AMOUNT, maxhealth)
+				health = clamp(health + repairing.amount * DOOR_REPAIR_AMOUNT, health, maxhealth)
 				update_icon()
 				qdel(repairing)
 				repairing = null
