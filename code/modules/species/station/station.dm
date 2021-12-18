@@ -239,7 +239,7 @@
 /datum/species/skrell/proc/handle_protein(mob/living/carbon/human/M, datum/reagent/protein)
 	var/effective_dose = M.chem_doses[protein.type] * protein.protein_amount
 	if (effective_dose > 20)
-		M.adjustToxLoss(Clamp((effective_dose - 20) / 4, 2, 10))
+		M.adjustToxLoss(clamp((effective_dose - 20) / 4, 2, 10))
 		M.vomit(8, 3, rand(1 SECONDS, 5 SECONDS))
 	else if (effective_dose > 10)
 		M.vomit(4, 2, rand(3 SECONDS, 10 SECONDS))

@@ -156,11 +156,11 @@
 			if("adj_threshold")
 				if(!locked || issilicon(user))
 					var/adjust_num = text2num(href_list["amount"])
-					heal_threshold = Clamp(heal_threshold + adjust_num, 5, 75)
+					heal_threshold = clamp(heal_threshold + adjust_num, 5, 75)
 			if("adj_inject")
 				if(!locked || issilicon(user))
 					var/adjust_num = text2num(href_list["amount"])
-					injection_amount = Clamp(injection_amount + adjust_num, 5, 15)
+					injection_amount = clamp(injection_amount + adjust_num, 5, 15)
 			if("use_beaker")
 				if(!locked || issilicon(user))
 					use_beaker = !use_beaker

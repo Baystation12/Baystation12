@@ -44,11 +44,11 @@
 	// Micro lasers speed cooking up at higher tiers.
 	// Matter bins decrease the chance of breaking or getting dirty.
 	..()
-	var/laser_rating = Clamp(total_component_rating_of_type(/obj/item/stock_parts/micro_laser), 1, 5)
+	var/laser_rating = clamp(total_component_rating_of_type(/obj/item/stock_parts/micro_laser), 1, 5)
 
 	speed_multiplier = (laser_rating * 0.5)
 	power_efficiency = total_component_rating_of_type(/obj/item/stock_parts/manipulator)
-	break_multiplier = 1 / Clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 1, 3)
+	break_multiplier = 1 / clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 1, 3)
 
 /*******************
 *   Item Adding

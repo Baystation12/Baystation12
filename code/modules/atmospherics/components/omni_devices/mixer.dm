@@ -105,13 +105,13 @@
 	//Figure out the amount of moles to transfer
 	var/transfer_moles = 0
 	var/datum/gas_mixture/output_gas = output.air
-	var/delta = between(0, (output_gas ? (max_output_pressure - output_gas.return_pressure()) : 0), max_output_pressure)
+	var/delta = clamp((output_gas ? (max_output_pressure - output_gas.return_pressure()) : 0), 0, max_output_pressure)
 	var/transfer_moles_max = INFINITY
 
 	for (var/datum/omni_port/P in inputs)
 		transfer_moles += (set_flow_rate*P.concentration/P.air.volume)*P.air.total_moles
 		transfer_moles_max = min(transfer_moles_max, calculate_transfer_moles(P.air, output.air, delta, (output && output.network && output.network.volume) ? output.network.volume : 0))
-	transfer_moles = between(0, transfer_moles, transfer_moles_max)
+	transfer_moles = clamp(transfer_moles, 0, transfer_moles_max)
 
 	var/power_draw = -1
 	if (transfer_moles > MINIMUM_MOLES_TO_FILTER)
@@ -197,7 +197,7 @@
 		switch(href_list["command"])
 			if("set_flow_rate")
 				var/new_flow_rate = input(usr,"Enter new flow rate limit (0-[max_flow_rate]L/s)","Flow Rate Control",set_flow_rate) as num
-				set_flow_rate = between(0, new_flow_rate, max_flow_rate)
+				set_flow_rate = clamp(new_flow_rate, 0, max_flow_rate)
 			if("switch_mode")
 				switch_mode(dir_flag(href_list["dir"]), href_list["mode"])
 			if("switch_con")
@@ -274,7 +274,7 @@
 	var/new_con = (input(usr,"Enter a new concentration (0-[round(remain_con * 100, 0.5)])%","Concentration control", min(remain_con, old_con)*100) as num) / 100
 
 	//cap it between 0 and the max remaining concentration
-	new_con = between(0, new_con, remain_con)
+	new_con = clamp(new_con, 0, remain_con)
 
 	//new_con = min(remain_con, new_con)
 

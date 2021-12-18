@@ -128,9 +128,9 @@ obj/item/organ/internal/take_general_damage(var/amount, var/silent = FALSE)
 
 /obj/item/organ/internal/proc/take_internal_damage(amount, var/silent=0)
 	if(BP_IS_ROBOTIC(src))
-		damage = between(0, src.damage + (amount * 0.8), max_damage)
+		damage = clamp(damage + (amount * 0.8), 0, max_damage)
 	else
-		damage = between(0, src.damage + amount, max_damage)
+		damage = clamp(damage + amount, 0, max_damage)
 
 		//only show this if the organ is not robotic
 		if(owner && can_feel_pain() && parent_organ && (amount > 5 || prob(10)))

@@ -440,7 +440,7 @@
 
 /datum/category_item/player_setup_item/occupation/proc/SetJob(mob/user, role, level)
 
-	level = Clamp(level, JOB_LEVEL_HIGH, JOB_LEVEL_NEVER)
+	level = clamp(level, JOB_LEVEL_HIGH, JOB_LEVEL_NEVER)
 	var/datum/job/job = SSjobs.get_by_title(role, TRUE)
 	if(!job)
 		return 0

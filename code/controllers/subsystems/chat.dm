@@ -8,7 +8,7 @@ SUBSYSTEM_DEF(chat)
 
 
 /datum/controller/subsystem/chat/fire(resumed)
-	FOR_BLIND(client/C, payload)
+	for (var/client/C as anything in payload)
 		send_output(C, payload[C], "browseroutput:output")
 		payload -= C
 		if (MC_TICK_CHECK)
@@ -60,7 +60,7 @@ SUBSYSTEM_DEF(ping)
 
 
 /datum/controller/subsystem/ping/fire(resumed)
-	FOR_BLIND(chatOutput/O, chats)
+	for (var/chatOutput/O as anything in chats)
 		if (O.loaded && !O.broken)
 			O.updatePing()
 		if (MC_TICK_CHECK)

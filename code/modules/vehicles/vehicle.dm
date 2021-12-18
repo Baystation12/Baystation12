@@ -75,7 +75,7 @@
 
 /obj/vehicle/proc/adjust_health(adjust_health)
 	health += adjust_health
-	health = Clamp(health, 0, maxhealth)
+	health = clamp(health, 0, maxhealth)
 	healthcheck()
 
 /obj/vehicle/attackby(obj/item/W as obj, mob/user as mob)

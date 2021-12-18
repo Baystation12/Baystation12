@@ -42,7 +42,7 @@
 		to_chat(user, SPAN_WARNING("\The [target] does not have that bodypart!"))
 		return
 
-	attack_damage = Clamp(attack_damage, 1, 5)
+	attack_damage = clamp(attack_damage, 1, 5)
 
 	if(target == user)
 		user.visible_message("<span class='danger'>[user] [pick(attack_verb)] \himself in the [affecting.name]!</span>")
@@ -142,7 +142,7 @@
 	var/obj/item/organ/external/affecting = target.get_organ(zone)
 
 	var/organ = affecting.name
-	attack_damage = Clamp(attack_damage, 1, 6)
+	attack_damage = clamp(attack_damage, 1, 6)
 	attack_damage = 3 + attack_damage - rand(1, 5)
 	switch(attack_damage)
 
