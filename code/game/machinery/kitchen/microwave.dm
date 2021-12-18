@@ -127,9 +127,9 @@
 			to_chat(user, "<span class='warning'>You need to clean [src] before you use it!</span>")
 			return
 
-	else if(is_type_in_list(O, SScuisine.microwave_accepts_items))
+	else if(is_type_in_list(O, GLOB.microwave_accepts_items))
 
-		if (LAZYLEN(ingredients) >= SScuisine.microwave_maximum_item_storage)
+		if (LAZYLEN(ingredients) >= GLOB.microwave_maximum_item_storage)
 			to_chat(user, "<span class='warning'>This [src] is full of ingredients - you can't fit any more.</span>")
 
 		else if(istype(O, /obj/item/stack)) // This is bad, but I can't think of how to change it
@@ -160,19 +160,19 @@
 		if (!O.reagents)
 			return
 		for (var/datum/reagent/R in O.reagents.reagent_list)
-			if (!(R.type in SScuisine.microwave_accepts_reagents))
+			if (!(R.type in GLOB.microwave_accepts_reagents))
 				to_chat(user, SPAN_WARNING("Your [O] contains components unsuitable for cookery."))
 		return
 
 	else if(istype(O, /obj/item/storage))
-		if (LAZYLEN(ingredients) >= SScuisine.microwave_maximum_item_storage)
+		if (LAZYLEN(ingredients) >= GLOB.microwave_maximum_item_storage)
 			to_chat(user, SPAN_WARNING("[src] is completely full!"))
 			return
 
 		var/obj/item/storage/bag/P = O
 		var/objects_loaded = 0
 		for(var/obj/G in P.contents)
-			if(is_type_in_list(G, SScuisine.microwave_accepts_items) && LAZYLEN(ingredients) < SScuisine.microwave_maximum_item_storage && P.remove_from_storage(G, src, 1))
+			if(length(ingredients) < GLOB.microwave_maximum_item_storage && is_type_in_list(G, GLOB.microwave_accepts_items) && P.remove_from_storage(G, src, 1))
 				objects_loaded++
 				LAZYADD(ingredients, G)
 		P.finish_bulk_removal()
@@ -318,7 +318,7 @@
 		stop()
 		return
 
-	var/datum/recipe/recipe = select_recipe(SScuisine.microwave_recipes, src)
+	var/datum/recipe/recipe = select_recipe(GLOB.microwave_recipes, src)
 	var/obj/cooked
 	if (!recipe)
 		dirtiness += 1

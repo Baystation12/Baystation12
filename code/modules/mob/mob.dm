@@ -434,8 +434,8 @@
 		'html/changelog.html'
 		)
 	show_browser(src, 'html/changelog.html', "window=changes;size=675x650")
-	if (SSmisc.changelog_hash && prefs.lastchangelog != SSmisc.changelog_hash)
-		prefs.lastchangelog = SSmisc.changelog_hash
+	if (GLOB.changelog_hash && prefs.lastchangelog != GLOB.changelog_hash)
+		prefs.lastchangelog = GLOB.changelog_hash
 		SScharacter_setup.queue_preferences_save(prefs)
 		winset(src, "rpane.changelog", "background-color=none;font-style=;")
 

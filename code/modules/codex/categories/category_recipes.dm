@@ -3,7 +3,7 @@
 	desc = "Recipies for a variety of reagents."
 
 /datum/codex_category/recipes/Initialize()
-	for(var/datum/recipe/recipe in SScuisine.microwave_recipes)
+	for(var/datum/recipe/recipe in GLOB.microwave_recipes)
 		if(recipe.hidden_from_codex || !recipe.result)
 			continue
 

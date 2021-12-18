@@ -41,8 +41,6 @@
 			return global.SSairflow;
 		if("SSalarm")
 			return global.SSalarm;
-		if("SSantags")
-			return global.SSantags;
 		if("SSao")
 			return global.SSao;
 		if("SSatoms")
@@ -59,8 +57,6 @@
 			return global.SScircuit_components;
 		if("SScodex")
 			return global.SScodex;
-		if("SScuisine")
-			return global.SScuisine;
 		if("SSculture")
 			return global.SSculture;
 		if("SScustomitems")
@@ -93,8 +89,6 @@
 			return global.SSinactivity;
 		if("SSjobs")
 			return global.SSjobs;
-		if("SSkv")
-			return global.SSkv;
 		if("SSlighting")
 			return global.SSlighting;
 		if("SSmachines")
@@ -155,8 +149,6 @@
 			return global.SSvote;
 		if("SSwebhooks")
 			return global.SSwebhooks;
-		if("SSxenoarch")
-			return global.SSxenoarch;
 		if("SSzcopy")
 			return global.SSzcopy;
 		if("Tier1Runes")
@@ -908,8 +900,6 @@
 			global.SSairflow=newval;
 		if("SSalarm")
 			global.SSalarm=newval;
-		if("SSantags")
-			global.SSantags=newval;
 		if("SSao")
 			global.SSao=newval;
 		if("SSatoms")
@@ -926,8 +916,6 @@
 			global.SScircuit_components=newval;
 		if("SScodex")
 			global.SScodex=newval;
-		if("SScuisine")
-			global.SScuisine=newval;
 		if("SSculture")
 			global.SSculture=newval;
 		if("SScustomitems")
@@ -960,8 +948,6 @@
 			global.SSinactivity=newval;
 		if("SSjobs")
 			global.SSjobs=newval;
-		if("SSkv")
-			global.SSkv=newval;
 		if("SSlighting")
 			global.SSlighting=newval;
 		if("SSmachines")
@@ -1022,8 +1008,6 @@
 			global.SSvote=newval;
 		if("SSwebhooks")
 			global.SSwebhooks=newval;
-		if("SSxenoarch")
-			global.SSxenoarch=newval;
 		if("SSzcopy")
 			global.SSzcopy=newval;
 		if("Tier1Runes")
@@ -1754,7 +1738,6 @@
 	"SSair",
 	"SSairflow",
 	"SSalarm",
-	"SSantags",
 	"SSao",
 	"SSatoms",
 	"SScharacter_setup",
@@ -1763,7 +1746,6 @@
 	"SScircuit",
 	"SScircuit_components",
 	"SScodex",
-	"SScuisine",
 	"SSculture",
 	"SScustomitems",
 	"SSdisposals",
@@ -1780,7 +1762,6 @@
 	"SSicon_update",
 	"SSinactivity",
 	"SSjobs",
-	"SSkv",
 	"SSlighting",
 	"SSmachines",
 	"SSmapping",
@@ -1811,7 +1792,6 @@
 	"SSvines",
 	"SSvote",
 	"SSwebhooks",
-	"SSxenoarch",
 	"SSzcopy",
 	"Tier1Runes",
 	"Tier2Runes",
