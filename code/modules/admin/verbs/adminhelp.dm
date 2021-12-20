@@ -126,7 +126,7 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 				sound_to(X, 'sound/effects/adminhelp.ogg')
 			to_chat(X, msg)
 	//show it to the person adminhelping too
-	to_chat(src, "<font color='blue'>PM to-<b>Staff</b> (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>): [original_msg]</font>")
+	to_chat(src, "<span class=\"staff_pm\">PM to-<b>Staff</b> (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>): [original_msg]</span>")
 	var/admin_number_present = GLOB.admins.len - admin_number_afk
 	log_admin("HELP: [key_name(src)]: [original_msg] - heard by [admin_number_present] non-AFK admins.")
 	if(admin_number_present <= 0)
@@ -136,4 +136,3 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 
 	SSstatistics.add_field_details("admin_verb","AH") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return
-
