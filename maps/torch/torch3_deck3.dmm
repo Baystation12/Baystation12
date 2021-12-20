@@ -18675,13 +18675,13 @@
 /turf/simulated/floor/lino,
 /area/crew_quarters/bar)
 "Uh" = (
-/obj/structure/fountain/mundane,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/random/date_based/christmas/tree/fountain,
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/observation)
 "Ui" = (
