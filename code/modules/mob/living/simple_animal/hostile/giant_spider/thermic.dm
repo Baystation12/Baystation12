@@ -14,5 +14,5 @@
 	cold_resist = -0.50
 
 	poison_chance = 30
-	poison_per_bite = 1
+	poison_per_bite = 2
 	poison_type = /datum/reagent/toxin/pyrotoxin
