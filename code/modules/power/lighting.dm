@@ -230,21 +230,26 @@
 		construct.transfer_fingerprints_to(src)
 		set_dir(construct.dir)
 	else
-		var/light_color = null
-		var/area/A = get_area(src)
-		switch (A.lighting_tone)
-			if (AREA_LIGHTING_WHITE)
-				light_color = LIGHT_COLOUR_WHITE
-			if (AREA_LIGHTING_WARM)
-				light_color = LIGHT_COLOUR_WARM
-			if (AREA_LIGHTING_COOL)
-				light_color = LIGHT_COLOUR_COOL
+		var/light_color = get_color_from_area()
 		lightbulb = new light_type(src, light_color)
 		if(prob(lightbulb.broken_chance))
 			broken(TRUE)
 
 	on = powered()
 	update_icon(FALSE)
+
+/// Fetches the light's color based on area flags. Used for Init and for smartly installing new bulbs during runtime (See light replacers).
+/obj/machinery/light/proc/get_color_from_area()
+	var/light_color = null
+	var/area/A = get_area(src)
+	switch (A.lighting_tone)
+		if (AREA_LIGHTING_WHITE)
+			light_color = LIGHT_COLOUR_WHITE
+		if (AREA_LIGHTING_WARM)
+			light_color = LIGHT_COLOUR_WARM
+		if (AREA_LIGHTING_COOL)
+			light_color = LIGHT_COLOUR_COOL
+	return light_color
 
 /obj/machinery/light/Destroy()
 	QDEL_NULL(lightbulb)
