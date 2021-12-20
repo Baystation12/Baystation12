@@ -87,6 +87,12 @@
 			return global.SSicon_update;
 		if("SSinactivity")
 			return global.SSinactivity;
+		if("SSinit_misc")
+			return global.SSinit_misc;
+		if("SSinit_misc_early")
+			return global.SSinit_misc_early;
+		if("SSinit_misc_late")
+			return global.SSinit_misc_late;
 		if("SSjobs")
 			return global.SSjobs;
 		if("SSlighting")
@@ -97,10 +103,8 @@
 			return global.SSmapping;
 		if("SSmaterials")
 			return global.SSmaterials;
-		if("SSmisc")
-			return global.SSmisc;
-		if("SSmisc_late")
-			return global.SSmisc_late;
+		if("SSmisc_slow")
+			return global.SSmisc_slow;
 		if("SSmobs")
 			return global.SSmobs;
 		if("SSnano")
@@ -946,6 +950,12 @@
 			global.SSicon_update=newval;
 		if("SSinactivity")
 			global.SSinactivity=newval;
+		if("SSinit_misc")
+			global.SSinit_misc=newval;
+		if("SSinit_misc_early")
+			global.SSinit_misc_early=newval;
+		if("SSinit_misc_late")
+			global.SSinit_misc_late=newval;
 		if("SSjobs")
 			global.SSjobs=newval;
 		if("SSlighting")
@@ -956,10 +966,8 @@
 			global.SSmapping=newval;
 		if("SSmaterials")
 			global.SSmaterials=newval;
-		if("SSmisc")
-			global.SSmisc=newval;
-		if("SSmisc_late")
-			global.SSmisc_late=newval;
+		if("SSmisc_slow")
+			global.SSmisc_slow=newval;
 		if("SSmobs")
 			global.SSmobs=newval;
 		if("SSnano")
@@ -1761,13 +1769,15 @@
 	"SSgraphs_update",
 	"SSicon_update",
 	"SSinactivity",
+	"SSinit_misc",
+	"SSinit_misc_early",
+	"SSinit_misc_late",
 	"SSjobs",
 	"SSlighting",
 	"SSmachines",
 	"SSmapping",
 	"SSmaterials",
-	"SSmisc",
-	"SSmisc_late",
+	"SSmisc_slow",
 	"SSmobs",
 	"SSnano",
 	"SSobj",

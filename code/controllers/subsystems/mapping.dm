@@ -15,7 +15,6 @@ SUBSYSTEM_DEF(mapping)
 	preloadTemplates()
 	for(var/atype in subtypesof(/decl/submap_archetype))
 		submap_archetypes[atype] = new atype
-	GLOB.using_map.build_away_sites()
 	. = ..()
 
 /datum/controller/subsystem/mapping/Recover()

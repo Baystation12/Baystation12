@@ -1,10 +1,15 @@
-SUBSYSTEM_DEF(misc)
+SUBSYSTEM_DEF(init_misc)
 	name = "Misc Initialization"
 	init_order = SS_INIT_MISC
 	flags = SS_NO_FIRE
 
 
-/datum/controller/subsystem/misc/Initialize(start_timeofday)
+/datum/controller/subsystem/init_misc/stat_entry(msg)
+	if (!initialized)
+		return ..(msg)
+
+
+/datum/controller/subsystem/init_misc/Initialize(start_timeofday)
 	GLOB.changelog_hash = md5('html/changelog.html')
 	if(config.generate_map)
 		GLOB.using_map.perform_map_generation()
@@ -15,7 +20,7 @@ SUBSYSTEM_DEF(misc)
 	transfer_controller = new
 
 
-/datum/controller/subsystem/misc/proc/init_antags()
+/datum/controller/subsystem/init_misc/proc/init_antags()
 	for (var/antag_type in GLOB.all_antag_types_)
 		var/datum/antagonist/antag = GLOB.all_antag_types_[antag_type]
 		antag.Initialize()

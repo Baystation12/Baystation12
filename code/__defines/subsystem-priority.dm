@@ -37,6 +37,7 @@
 #define SS_PRIORITY_PROCESSING    95   // Generic datum processor. Replaces objects processor.
 #define SS_PRIORITY_PLANTS        90   // Plant processing, slow ticks.
 #define SS_PRIORITY_VINES         50   // Spreading vine effects.
+#define SS_PRIORITY_MISC_SLOW     50   // Mixed slow tick processing.
 #define SS_PRIORITY_PSYCHICS      45   // Psychic complexus processing.
 #define SS_PRIORITY_NANO          40   // Updates to nanoui uis.
 #define SS_PRIORITY_TURF          30   // Radioactive walls/blob.
@@ -45,7 +46,6 @@
 #define SS_PRIORITY_GRAPH         30   // Merging and splitting of graphs
 #define SS_PRIORITY_CHAR_SETUP    25   // Writes player preferences to savefiles.
 #define SS_PRIORITY_GARBAGE       20   // Garbage collection.
-#define SS_PRIORITY_KV            10   // \ref based arbitrary storage.
 
 // Subsystem fire priority, from lowest to highest priority
 // If the subsystem isn't listed here it's either DEFAULT or PROCESS (if it's a processing subsystem child)

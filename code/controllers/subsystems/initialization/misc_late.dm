@@ -1,10 +1,16 @@
-SUBSYSTEM_DEF(misc_late)
+SUBSYSTEM_DEF(init_misc_late)
 	name = "Misc Initialization (Late)"
 	init_order = SS_INIT_MISC_LATE
 	flags = SS_NO_FIRE
 
 
-/datum/controller/subsystem/misc_late/Initialize(start_timeofday)
+/datum/controller/subsystem/init_misc_late/stat_entry(msg)
+	if (!initialized)
+		return ..(msg)
+
+
+/datum/controller/subsystem/init_misc_late/Initialize(start_timeofday)
+	GLOB.using_map.build_away_sites()
 	GLOB.using_map.build_exoplanets()
 	var/decl/asset_cache/asset_cache = decls_repository.get_decl(/decl/asset_cache)
 	asset_cache.load()
@@ -17,7 +23,7 @@ GLOBAL_LIST_EMPTY(microwave_recipes)
 GLOBAL_LIST_EMPTY(microwave_accepts_reagents)
 GLOBAL_LIST_EMPTY(microwave_accepts_items)
 
-/datum/controller/subsystem/misc_late/proc/init_recipes()
+/datum/controller/subsystem/init_misc_late/proc/init_recipes()
 	var/list/reagents = list()
 	var/list/items = list(
 		/obj/item/holder = TRUE,
@@ -40,7 +46,7 @@ GLOBAL_LIST_EMPTY(microwave_accepts_items)
 GLOBAL_LIST(xeno_artifact_turfs)
 GLOBAL_LIST(xeno_digsite_turfs)
 
-/datum/controller/subsystem/misc_late/proc/init_xenoarch()
+/datum/controller/subsystem/init_misc_late/proc/init_xenoarch()
 	var/list/queue = list()
 	var/list/site_turfs = list()
 	var/list/artifact_turfs = list()
