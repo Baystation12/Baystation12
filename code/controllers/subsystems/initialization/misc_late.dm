@@ -15,20 +15,26 @@ SUBSYSTEM_DEF(misc_late)
 GLOBAL_VAR_INIT(microwave_maximum_item_storage, 0)
 GLOBAL_LIST_EMPTY(microwave_recipes)
 GLOBAL_LIST_EMPTY(microwave_accepts_reagents)
-GLOBAL_LIST_INIT(microwave_accepts_items, list(
-	/obj/item/holder,
-	/obj/item/reagent_containers/food/snacks/grown
-))
+GLOBAL_LIST_EMPTY(microwave_accepts_items)
 
 /datum/controller/subsystem/misc_late/proc/init_recipes()
+	var/list/reagents = list()
+	var/list/items = list(
+		/obj/item/holder = TRUE,
+		/obj/item/reagent_containers/food/snacks/grown = TRUE
+	)
 	for (var/datum/recipe/recipe as anything in subtypesof(/datum/recipe))
-		recipe = new
+		recipe = new recipe
 		GLOB.microwave_recipes += recipe
-		for(var/thing in recipe.reagents)
-			GLOB.microwave_accepts_reagents |= thing
-		for(var/thing in recipe.items)
-			GLOB.microwave_accepts_items |= thing
+		for (var/type in recipe.reagents)
+			reagents[type] = TRUE
+		for (var/type in recipe.items)
+			items[type] = TRUE
 		GLOB.microwave_maximum_item_storage = max(GLOB.microwave_maximum_item_storage, length(recipe.items))
+	for (var/type in reagents)
+		GLOB.microwave_accepts_reagents += type
+	for (var/type in items)
+		GLOB.microwave_accepts_items += type
 
 
 GLOBAL_LIST(xeno_artifact_turfs)
