@@ -1,5 +1,0 @@
-author: Fre3bie
-delete-after: true
-changes:
-  - bugfix: Fixes evidence bags deleting items and other issues when using them on
-      items within storage containers.
