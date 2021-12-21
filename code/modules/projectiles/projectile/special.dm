@@ -163,7 +163,7 @@
 /obj/item/projectile/webball
 	name = "ball of web"
 	icon_state = "bola"
-	damage = 2
+	damage = 1
 	embed = FALSE
 	damage_type = BRUTE
 	muzzle_type = null
@@ -177,7 +177,13 @@
 
 			if (isliving(target))
 				var/mob/living/M = target
-				M.Weaken(1)
+				var/has_webs = FALSE
+				for (var/obj/aura/A in M.auras)
+					if (istype(A, /obj/aura/web))
+						has_webs = TRUE
+						break
+				if (!has_webs)
+					M.add_aura(new /obj/aura/web(M))
 	..()
 
 /obj/item/projectile/venom

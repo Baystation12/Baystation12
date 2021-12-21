@@ -157,8 +157,8 @@
 /datum/reagent/toxin/cryotoxin/affect_blood(mob/living/carbon/M, alien, removed)
 	if (alien == IS_DIONA)
 		return
-	M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 215)
-	if (prob(20))
+	M.bodytemperature = max(M.bodytemperature - 15 * TEMPERATURE_DAMAGE_COEFFICIENT, 215)
+	if (prob(15))
 		to_chat(M, SPAN_DANGER("Your insides feel freezing cold!"))
 	if (prob(1))
 		M.emote("shiver")

@@ -239,6 +239,10 @@
 	if(handcuffed)
 		dat += "<BR><A href='?src=\ref[src];item=[slot_handcuffed]'>Handcuffed</A>"
 
+	for (var/obj/aura/web/W in auras)
+		dat += "<BR><A href='?src=\ref[src];webbed=1'>Webbed</A>"
+		break
+
 	for(var/entry in worn_underwear)
 		var/obj/item/underwear/UW = entry
 		dat += "<BR><a href='?src=\ref[src];item=\ref[UW]'>Remove \the [UW]</a>"
@@ -544,6 +548,12 @@
 			if(!read)
 				to_chat(user, "<span class='warning'>Unable to locate a data core entry for this person.</span>")
 			return TOPIC_HANDLED
+
+	if (href_list["webbed"])
+		for (var/obj/aura/web/W in auras)
+			W.remove_webbing(user)
+		return TOPIC_HANDLED
+
 
 	return ..()
 

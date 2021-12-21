@@ -342,8 +342,22 @@
 	. = ..()
 	icon_state = pick("cocoon1","cocoon2","cocoon3")
 
+
+	for(var/atom/movable/O in loc)
+		if(!O.anchored)
+			O.forceMove(src)
+
+			if (istype(O, /mob/living))
+				var/mob/living/L = O
+				if (!(L.status_flags & NOTARGET))
+					L.status_flags ^= NOTARGET
+
 /obj/effect/spider/cocoon/Destroy()
 	src.visible_message("<span class='warning'>\The [src] splits open.</span>")
 	for(var/atom/movable/A in contents)
 		A.dropInto(loc)
+		if (istype(A, /mob/living))
+			var/mob/living/L = A
+			if (L.status_flags & NOTARGET)
+				L.status_flags ^= NOTARGET
 	return ..()
