@@ -14,10 +14,10 @@
 	icon_state = "bottle-4"
 	reagent = /datum/reagent/inaprovaline
 
-	New()
-		..()
-		reagents.add_reagent(/datum/reagent/inaprovaline, 60)
-		update_icon()
+/obj/item/reagent_containers/glass/bottle/robot/inaprovaline/New()
+	..()
+	reagents.add_reagent(/datum/reagent/inaprovaline, 60)
+	update_icon()
 
 
 /obj/item/reagent_containers/glass/bottle/robot/antitoxin
@@ -27,8 +27,7 @@
 	icon_state = "bottle-4"
 	reagent = /datum/reagent/dylovene
 
-	New()
-		..()
-		reagents.add_reagent(/datum/reagent/dylovene, 60)
-		update_icon()
-
+/obj/item/reagent_containers/glass/bottle/robot/antitoxin/New()
+	..()
+	reagents.add_reagent(/datum/reagent/dylovene, 60)
+	update_icon()
