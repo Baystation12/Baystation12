@@ -97,38 +97,38 @@
 /obj/structure/bookcase/manuals/medical
 	name = "Medical Manuals bookcase"
 
-	New()
-		..()
-		new /obj/item/book/manual/medical_cloning(src)
-		new /obj/item/book/manual/medical_diagnostics_manual(src)
-		new /obj/item/book/manual/medical_diagnostics_manual(src)
-		new /obj/item/book/manual/medical_diagnostics_manual(src)
-		new /obj/item/book/manual/chemistry_recipes(src)
-		update_icon()
+/obj/structure/bookcase/manuals/medical/New()
+	..()
+	new /obj/item/book/manual/medical_cloning(src)
+	new /obj/item/book/manual/medical_diagnostics_manual(src)
+	new /obj/item/book/manual/medical_diagnostics_manual(src)
+	new /obj/item/book/manual/medical_diagnostics_manual(src)
+	new /obj/item/book/manual/chemistry_recipes(src)
+	update_icon()
 
 
 /obj/structure/bookcase/manuals/engineering
 	name = "Engineering Manuals bookcase"
 
-	New()
-		..()
-		new /obj/item/book/manual/engineering_construction(src)
-		new /obj/item/book/manual/engineering_particle_accelerator(src)
-		new /obj/item/book/manual/engineering_hacking(src)
-		new /obj/item/book/manual/engineering_guide(src)
-		new /obj/item/book/manual/atmospipes(src)
-		new /obj/item/book/manual/engineering_singularity_safety(src)
-		new /obj/item/book/manual/evaguide(src)
-		new /obj/item/book/manual/rust_engine(src)
-		update_icon()
+/obj/structure/bookcase/manuals/engineering/New()
+	..()
+	new /obj/item/book/manual/engineering_construction(src)
+	new /obj/item/book/manual/engineering_particle_accelerator(src)
+	new /obj/item/book/manual/engineering_hacking(src)
+	new /obj/item/book/manual/engineering_guide(src)
+	new /obj/item/book/manual/atmospipes(src)
+	new /obj/item/book/manual/engineering_singularity_safety(src)
+	new /obj/item/book/manual/evaguide(src)
+	new /obj/item/book/manual/rust_engine(src)
+	update_icon()
 
 /obj/structure/bookcase/manuals/research_and_development
 	name = "R&D Manuals bookcase"
 
-	New()
-		..()
-		new /obj/item/book/manual/research_and_development(src)
-		update_icon()
+/obj/structure/bookcase/manuals/research_and_development/New()
+	..()
+	new /obj/item/book/manual/research_and_development(src)
+	update_icon()
 
 
 /*

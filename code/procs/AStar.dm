@@ -36,69 +36,60 @@ length to avoid portals or something i guess?? Not that they're counted right no
 
 // Also added 'exclude' turf to avoid travelling over; defaults to null
 
-PathNode
+/PathNode
 	var/datum/position
 	var/PathNode/previous_node
-
 	var/best_estimated_cost
 	var/estimated_cost
 	var/known_cost
 	var/cost
 	var/nodes_traversed
 
-	New(_position, _previous_node, _known_cost, _cost, _nodes_traversed)
-		position = _position
-		previous_node = _previous_node
 
-		known_cost = _known_cost
-		cost = _cost
-		estimated_cost = cost + known_cost
+/PathNode/New(_position, _previous_node, _known_cost, _cost, _nodes_traversed)
+	position = _position
+	previous_node = _previous_node
+	known_cost = _known_cost
+	cost = _cost
+	estimated_cost = cost + known_cost
+	best_estimated_cost = estimated_cost
+	nodes_traversed = _nodes_traversed
 
-		best_estimated_cost = estimated_cost
-		nodes_traversed = _nodes_traversed
 
-proc/PathWeightCompare(PathNode/a, PathNode/b)
+/proc/PathWeightCompare(PathNode/a, PathNode/b)
 	return a.estimated_cost - b.estimated_cost
 
-proc/AStar(var/start, var/end, adjacent, dist, var/max_nodes, var/max_node_depth = 30, var/min_target_dist = 0, var/min_node_dist, var/id, var/datum/exclude)
-	var/PriorityQueue/open = new /PriorityQueue(/proc/PathWeightCompare)
+
+/proc/AStar(start, end, adjacent, dist, max_nodes, max_node_depth = 30, min_target_dist = 0, min_node_dist, id, datum/exclude)
+	var/PriorityQueue/open = new /PriorityQueue (/proc/PathWeightCompare)
 	var/list/closed = list()
 	var/list/path
 	var/list/path_node_by_position = list()
 	start = get_turf(start)
 	if(!start)
 		return 0
-
 	open.Enqueue(new /PathNode(start, null, 0, call(start, dist)(end), 0))
-
 	while(!open.IsEmpty() && !path)
 		var/PathNode/current = open.Dequeue()
 		closed.Add(current.position)
-
 		if(current.position == end || call(current.position, dist)(end) <= min_target_dist)
 			path = new /list(current.nodes_traversed + 1)
 			path[path.len] = current.position
 			var/index = path.len - 1
-
 			while(current.previous_node)
 				current = current.previous_node
 				path[index--] = current.position
 			break
-
 		if(min_node_dist && max_node_depth)
 			if(call(current.position, min_node_dist)(end) + current.nodes_traversed >= max_node_depth)
 				continue
-
 		if(max_node_depth)
 			if(current.nodes_traversed >= max_node_depth)
 				continue
-
 		for(var/datum/datum in call(current.position, adjacent)(id))
 			if(datum == exclude)
 				continue
-
 			var/best_estimated_cost = current.estimated_cost + call(current.position, dist)(datum)
-
 			//handle removal of sub-par positions
 			if(datum in path_node_by_position)
 				var/PathNode/target = path_node_by_position[datum]
@@ -107,12 +98,9 @@ proc/AStar(var/start, var/end, adjacent, dist, var/max_nodes, var/max_node_depth
 						open.Remove(target)
 					else
 						continue
-
 			var/PathNode/next_node = new (datum, current, best_estimated_cost, call(datum, dist)(end), current.nodes_traversed + 1)
 			path_node_by_position[datum] = next_node
 			open.Enqueue(next_node)
-
 			if(max_nodes && open.Length() > max_nodes)
 				open.Remove(open.Length())
-
 	return path
