@@ -1221,7 +1221,7 @@
 /area/map_template/oldlab2/office)
 "gC" = (
 /obj/structure/largecrate,
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced/airless,
 /area/map_template/oldlab2/Airlock)
 "gG" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -1550,7 +1550,7 @@
 	dir = 4
 	},
 /obj/structure/largecrate,
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced/airless,
 /area/map_template/oldlab2/Airlock)
 "iE" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -2403,7 +2403,7 @@
 /area/map_template/oldlab2/office)
 "nw" = (
 /obj/machinery/floodlight,
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced/airless,
 /area/map_template/oldlab2/Airlock)
 "nx" = (
 /turf/simulated/wall/titanium,
@@ -3023,7 +3023,7 @@
 "qJ" = (
 /obj/machinery/light/spot,
 /obj/vehicle/train/cargo/trolley,
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced/airless,
 /area/map_template/oldlab2/Airlock)
 "qL" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -3186,7 +3186,7 @@
 	pixel_x = 24;
 	pixel_y = -24
 	},
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced/airless,
 /area/map_template/oldlab2/Airlock)
 "rt" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -4471,7 +4471,7 @@
 /obj/machinery/light/spot{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced/airless,
 /area/map_template/oldlab2/Airlock)
 "xy" = (
 /obj/machinery/power/smes/buildable/outpost_substation,
@@ -5129,7 +5129,7 @@
 /area/map_template/oldlab2/test1)
 "Be" = (
 /obj/vehicle/train/cargo/engine,
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced/airless,
 /area/map_template/oldlab2/Airlock)
 "Bi" = (
 /turf/simulated/wall/titanium,
@@ -6308,7 +6308,7 @@
 /area/map_template/oldlab2/server)
 "GO" = (
 /obj/vehicle/train/cargo/trolley,
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced/airless,
 /area/map_template/oldlab2/Airlock)
 "GP" = (
 /obj/machinery/light{
@@ -6359,7 +6359,7 @@
 	id_tag = "oldlab_sensor_exterior";
 	pixel_y = -32
 	},
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced/airless,
 /area/map_template/oldlab2/Airlock)
 "GX" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -6489,7 +6489,7 @@
 "HC" = (
 /obj/structure/largecrate,
 /obj/machinery/light/spot,
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced/airless,
 /area/map_template/oldlab2/Airlock)
 "HF" = (
 /obj/structure/cable/yellow{
@@ -7607,7 +7607,7 @@
 /turf/simulated/floor/tiled/white,
 /area/map_template/oldlab2/mess)
 "Nz" = (
-/turf/simulated/floor/reinforced,
+/turf/simulated/floor/reinforced/airless,
 /area/map_template/oldlab2/Airlock)
 "NC" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
