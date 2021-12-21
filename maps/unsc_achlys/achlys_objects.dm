@@ -47,11 +47,11 @@
 
 /obj/structure/closet/crate/marine/marine_medic/WillContain()
 	return list(
-	/obj/item/weapon/storage/box/MRE/Chicken = 1,
+	/obj/item/weapon/storage/box/MRE/Chicken/achlys = 1,
 	/obj/item/weapon/material/knife/combat_knife = 1,
-	/obj/item/ammo_magazine/m127_saphp = 2,
+	/obj/item/ammo_magazine/m6d/m225 = 2,
 	/obj/item/weapon/gun/projectile/m6d_magnum = 1,
-	/obj/item/ammo_magazine/m5 = 2,
+	/obj/item/ammo_magazine/m7/m443 = 2,
 	/obj/item/weapon/gun/projectile/m7_smg = 1,
 	/obj/item/clothing/head/helmet/achlys_marine = 1,
 	/obj/item/clothing/mask/marine = 1,
@@ -72,10 +72,10 @@
 
 /obj/structure/closet/crate/marine/cqc/WillContain()
 	return list(
-	/obj/item/weapon/storage/box/MRE/Pizza = 1,
+	/obj/item/weapon/storage/box/MRE/Pizza/achlys = 1,
 	/obj/item/weapon/storage/box/flares = 1,
 	/obj/item/weapon/material/knife/combat_knife = 1,
-	/obj/item/ammo_magazine/m5 = 2,
+	/obj/item/ammo_magazine/m7/m443 = 2,
 	/obj/item/weapon/gun/projectile/m7_smg = 1,
 	/obj/item/weapon/grenade/frag/m9_hedp = 1,
 	/obj/item/ammo_box/shotgun/slug = 1,
@@ -105,12 +105,12 @@
 	/obj/item/clothing/gloves/thick/unsc = 1,
 	/obj/item/clothing/shoes/marine = 1,
 	/obj/item/weapon/storage/belt/utility/marine_engineer = 1,
-	/obj/item/weapon/storage/box/MRE/Chicken = 1,
+	/obj/item/weapon/storage/box/MRE/Chicken/achlys = 1,
 	/obj/item/weapon/material/knife/combat_knife = 1,
 	/obj/item/weapon/armor_patch = 2,
-	/obj/item/ammo_magazine/m127_saphe = 2,
+	/obj/item/ammo_magazine/m6d/m225 = 2,
 	/obj/item/weapon/gun/projectile/m6d_magnum = 1,
-	/obj/item/ammo_magazine/m762_ap/MA5B = 2,
+	/obj/item/ammo_magazine/ma5b/m118 = 2,
 	/obj/item/weapon/gun/projectile/ma5b_ar = 1,
 	/obj/item/weapon/storage/box/flares = 1)
 
@@ -123,12 +123,12 @@
 
 /obj/structure/closet/crate/marine/rifleman/WillContain()
 	return list(
-	/obj/item/weapon/storage/box/MRE/Spaghetti = 1,
+	/obj/item/weapon/storage/box/MRE/Spaghetti/achlys = 1,
 	/obj/item/weapon/storage/box/flares = 2,
 	/obj/item/weapon/material/knife/combat_knife = 1,
-	/obj/item/ammo_magazine/m127_saphe = 2,
+	/obj/item/ammo_magazine/m6d/m225 = 2,
 	/obj/item/weapon/gun/projectile/m6d_magnum = 1,
-	/obj/item/ammo_magazine/m762_ap/MA5B = 3,
+	/obj/item/ammo_magazine/ma5b/m118 = 3,
 	/obj/item/weapon/gun/projectile/ma5b_ar = 1,
 	/obj/item/weapon/grenade/frag/m9_hedp = 1,
 	/obj/item/clothing/head/helmet/achlys_marine = 1,
@@ -149,12 +149,12 @@
 
 /obj/structure/closet/crate/secure/marine_squad_leader/WillContain()
 	return list(
-	/obj/item/weapon/storage/box/MRE/Spaghetti = 1,
+	/obj/item/weapon/storage/box/MRE/Spaghetti/achlys = 1,
 	/obj/item/weapon/storage/box/flares = 1,
 	/obj/item/weapon/material/knife/combat_knife = 1,
-	/obj/item/ammo_magazine/m127_saphe = 2,
+	/obj/item/ammo_magazine/m6d/m225 = 2,
 	/obj/item/weapon/gun/projectile/m6d_magnum = 1,
-	/obj/item/ammo_magazine/m762_ap/MA5B = 2,
+	/obj/item/ammo_magazine/ma5b/m118 = 2,
 	/obj/item/weapon/gun/projectile/ma5b_ar = 1,
 	/obj/item/device/taperecorder = 1,
 	/obj/item/squad_manager = 1,
@@ -198,7 +198,8 @@
 	icon_state = "nav_computer"
 	var/health
 	var/maxhealth = 30
-	light_range = 1
+	light_power = 1
+	light_range = 2
 	light_color = "#ebf7fe"
 	density = 1
 	anchored = 1
@@ -247,7 +248,7 @@
 
 /obj/item/weapon/card/id/the_gold
 	name = "Gold Keycard"
-	desc = "This keycard appears to belong to a bridge crewman. How it got here and where it's owner is remains unknown."
+	desc = "This keycard appears to belong to a bridge crewman. It's covered in some kind of mucus that is stubborn to remove but the chip seems exposed enough to open a door."
 	access = list(777)
 	icon_state = "gold"
 	item_state = "gold_id"
@@ -264,7 +265,7 @@
 	desc = "This autolathe was dragged here and hacked together from other machine parts."
 	stored_material =  list(DEFAULT_WALL_MATERIAL = 3000, "glass" = 0)
 	storage_capacity = list(DEFAULT_WALL_MATERIAL = 0, "glass" = 0)
-	machine_recipes = newlist(/datum/autolathe/recipe/m118_ma5b,/datum/autolathe/recipe/m255_sap_hp,/datum/autolathe/recipe/m443_fmj)
+	machine_recipes = newlist(/datum/autolathe/recipe/ma5b_m118,/datum/autolathe/recipe/m6d_m224,/datum/autolathe/recipe/m443_fmj)
 
 /obj/item/weapon/paper/crumpled/orders
 	info = "Office of Naval Intelligence Section 3<BR><BR>Any person that steps foot on the Achlys cannot leave the ship alive. Exterminate with extreme prejudice.<BR><BR>Do not allow your identity to be compromised by any means. Failure to obey these orders will result in subject termination.<BR><BR>Operatives that expose themselves or their orders must be terminated. <BR><BR>You know what must be done."
@@ -366,3 +367,118 @@
 		to_chat(user,"<span class = 'notice'>You can't enter [src]!</span>")
 		return
 	. = ..()
+
+/obj/item/weapon/storage/box/MRE/Chicken/achlys
+	w_class = 1
+
+/obj/item/weapon/storage/box/MRE/Pizza/achlys
+	w_class = 1
+
+/obj/item/weapon/storage/box/MRE/Spaghetti/achlys
+	w_class = 1
+
+/obj/item/weapon/gun/projectile/shotgun/pump/m45_ts/achlys
+	name = "looted M45 TS tactical shotgun"
+	desc = "A shotgun dug up from somewhere on the ship. Good luck finding more shells."
+
+/obj/item/weapon/gun/projectile/shotgun/pump/m45_ts/police/achlys
+	name = "looted M45 TS tactical shotgun"
+	desc = "A shotgun dug up from somewhere on the ship. Good luck finding more shells."
+
+/obj/item/weapon/material/hatchet/achlys
+	name = "looted hatchet"
+	desc = "A hatchet looted from Hydroponics. Not the most preferable of weapons but better than bare hands."
+	force = 25
+
+/obj/item/weapon/material/twohanded/baseballbat/achlys
+	name = "cricket bat"
+	desc = "Found somewhere on the ship. Possibly near the rec rooms?"
+
+/obj/item/weapon/gun/projectile/ma37_ar/achlys
+	name = "\improper looted MA37 Assault Rifle"
+	desc = "Commonly found on infected flood wearing security outfits. Takes 7.62mm ammo."
+
+/obj/item/weapon/gun/projectile/m6d_magnum/civilian/achlys
+	desc = "A looted handgun found somewhere on the ship. The sidearm of the command staff on the ship."
+	name = "\improper looted M6B Magnum"
+
+/obj/item/weapon/gun/projectile/m6d_magnum/police/achlys
+	name = "\improper looted M6B Magnum"
+	desc = "A looted handgun found somewhere on the ship. The sidearm of the security guards posted to the ship."
+
+/obj/item/weapon/scalpel/achlys
+	force = 20
+	name = "reinforced scalpel"
+	desc = "A heavy duty scalpel that seems designed to cut through flesh thicker than what a human has."
+
+/obj/structure/splish_splash //effectively a noisemaker
+	density = 0				 //tons of copypasta from floodspawner structure. it works.
+	mouse_opacity = 0
+	opacity = 0
+	icon = 'code/modules/halo/flood/flood_combat_human.dmi'
+	icon_state = "splish_splash"
+	var/time_to_splash //this is a timer to play a sound byte
+	//var/list/splash_sound = list() //sounds to play when the timer runs out
+	var/uses = 0
+	invisibility = 101
+
+/obj/structure/splish_splash/Initialize()
+	. = ..()
+	uses+= pick(0,1) //decides to either delete itself or spawn with one use
+	if(uses)
+		time_to_splash = world.time + rand(3 SECONDS,7 SECONDS)
+	else return INITIALIZE_HINT_QDEL //deletes itself if there are no uses
+
+/obj/structure/splish_splash/process()
+	if(time_to_splash == 0 SECONDS)
+		timer_end()
+
+/obj/structure/splish_splash/proc/timer_end()
+	//playsound(src.loc, splash_sound, 80, 1, 0) //sound played at src.loc
+	src.loc.visible_message(pick("<span class='warning'>Something sloshes through the water in the darkness.</span>"),("<span class='warning'>A distant form splashes in the filthy water.</span>"),\
+			("<span class='warning'>Something distant falls into the water.</span>"))
+	for(var/i = 3 to 7)
+		time_to_splash += i SECONDS
+
+/obj/item/weapon/reagent_containers/food/snacks/liquidfood/floody
+	desc = "A prepackaged grey slurry for all of the essential nutrients a soldier requires to survive. It is coated in some kind of mucus that seems to have gotten inside."
+	trash = /obj/item/trash/liquidfood/floody
+	var/clean = 0 //mucus overlay, this is dropped by flood forms
+
+/obj/item/weapon/reagent_containers/food/snacks/liquidfood/floody/New()
+	reagents.add_reagent(/datum/reagent/floodinfectiontoxin, 10) //don't take candy from strange alien monsters
+	clean = pick(0,1)	//decide to be clean or have mucus
+	if(!clean)			//if not clean, apply overlay
+		update_icon()
+	..() //continue as normal, inheriting our bitesize and iron reagent from parent
+
+/obj/item/weapon/reagent_containers/food/snacks/liquidfood/floody/update_icon()
+	if(!clean)  //if we're not clean, add a mucus overlay
+		overlays.Cut()
+		var/image/I = image('icons/effects/blood.dmi', icon_state="mucus")
+		overlays += I
+		return
+	else return //else if we are clean, do nothing, especially runtime //this is redundant, BYOND is not predictable
+
+/obj/item/weapon/reagent_containers/food/snacks/liquidfood/floody/On_Consume(var/mob/M)
+	if(!clean)
+		var/obj/item/trash/liquidfood/floody/F = trash
+		(F.clean = 0) //if we're not clean, our trash shouldn't be either
+		..()  //carry on as normal
+	else ..() //don't runtime because we were clean
+
+/obj/item/trash/liquidfood/floody
+	var/clean = 0
+
+/obj/item/trash/liquidfood/floody/New()
+	if(!clean)
+		update_icon()
+	..()
+
+/obj/item/trash/liquidfood/floody/update_icon()
+	if(!clean)  //inherited from parent, copypasta
+		overlays.Cut()
+		var/image/I = image('icons/effects/blood.dmi', icon_state="mucus")
+		overlays += I
+		return
+	else return

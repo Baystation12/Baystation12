@@ -86,30 +86,25 @@
 
 /decl/hierarchy/outfit/job/unsc_achlys/prisoner/proc/equip_special(mob/living/carbon/human/H)
 	if(prob(25))
-		var/obj/item/weapon/L = new /obj/item/weapon/scalpel
+		var/obj/item/weapon/L = new /obj/item/weapon/scalpel/achlys
 		H.equip_to_slot_or_del(L,slot_r_hand)
-	else if(prob(25))
-		var/obj/item/weapon/melee/baton/I = new /obj/item/weapon/melee/baton/humbler
-		H.equip_to_slot_or_del(I,slot_belt)
 	else if(prob(25))
 		var/obj/item/weapon/crowbar/G = new /obj/item/weapon/crowbar/red
 		H.equip_to_slot_or_del(G,slot_r_hand)
-	else if(prob(10))
 		var/obj/item/device/flashlight/M = new /obj/item/device/flashlight/maglight
-		H.equip_to_slot_or_del(M,slot_r_hand)
+		H.equip_to_slot_or_del(M,slot_l_hand)
 	else if(prob(10))
-		var/obj/item/weapon/material/A = new /obj/item/weapon/material/knife
+		var/obj/item/weapon/material/A = new /obj/item/weapon/material/hatchet/achlys
 		H.equip_to_slot_or_del(A,slot_belt)
 	else if(prob(10))
-		var/obj/item/weapon/material/twohanded/N = new /obj/item/weapon/material/twohanded/baseballbat
-		H.equip_to_slot_or_del(N,slot_r_hand)
-	else if(prob(5))
-		var/obj/item/weapon/gun/projectile/shotgun/pump/m45_ts/U = new /obj/item/weapon/gun/projectile/shotgun/pump/m45_ts/police
+		var/obj/item/weapon/gun/projectile/shotgun/pump/m45_ts/U = new /obj/item/weapon/gun/projectile/shotgun/pump/m45_ts/achlys
 		H.equip_to_slot_or_del(U,slot_back)
-	else if(prob(5))
-		var/obj/item/weapon/material/twohanded/T = new /obj/item/weapon/material/twohanded/spear
+	else if(prob(10))
+		var/obj/item/weapon/gun/projectile/m6d_magnum/civilian/achlys/T = new /obj/item/weapon/gun/projectile/m6d_magnum/civilian/achlys
 		H.equip_to_slot_or_del(T,slot_r_hand)
-	else if(prob(5))
+		var/obj/item/device/flashlight/G = new /obj/item/device/flashlight/maglight
+		H.equip_to_slot_or_del(G,slot_l_hand)
+	else if(prob(25))
 		var/obj/item/weapon/material/twohanded/S = new /obj/item/weapon/material/twohanded/fireaxe
 		H.equip_to_slot_or_del(S,slot_r_hand)
 
@@ -134,3 +129,11 @@
 	flags = 0
 
 	hierarchy_type = /decl/hierarchy/outfit/job
+
+/decl/hierarchy/outfit/job/unsc_achlys/sangheili/proc/equip_special(mob/living/carbon/human/H)
+	if(prob(25))
+		var/obj/item/weapon/material/twohanded/S = new /obj/item/weapon/material/twohanded/fireaxe
+		H.equip_to_slot_or_del(S,slot_r_hand)
+	else if(prob(25))
+		var/obj/item/weapon/material/twohanded/U = new /obj/item/weapon/material/twohanded/baseballbat/achlys
+		H.equip_to_slot_or_del(U,slot_r_hand)

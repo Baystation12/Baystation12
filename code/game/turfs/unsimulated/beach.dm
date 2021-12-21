@@ -14,10 +14,23 @@
 /turf/unsimulated/beach/water
 	name = "Water"
 	icon_state = "water"
+	var/recent_splash = 0
+	//var/list/splish_sound = list() //footstep sounds
 
 /turf/unsimulated/beach/water/New()
 	..()
 	overlays += image("icon"='icons/misc/beach.dmi',"icon_state"="water2","layer"=MOB_LAYER+0.1)
+
+/turf/unsimulated/beach/water/Entered(atom/movable/M as mob|obj)
+	..()
+//	if(istype(M, /mob/living/carbon/human/H))
+//		if(recent_splash)
+//			return
+//		recent_splash = 1
+		//playsound(usr.loc, splish_sound, 50, 1)
+//		spawn(1)
+//			recent_splash = 0
+
 
 /turf/unsimulated/water
 	name = "water"

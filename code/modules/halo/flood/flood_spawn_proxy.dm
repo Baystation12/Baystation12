@@ -34,10 +34,10 @@
 	var/uses = 0	 //how many times flood will spawn from the location
 	var/time_to_spawn = 0 //self explanatory
 	var/timer = 0 //counting down or not
+	invisibility = 101
 
 /obj/structure/floodspawner/Initialize()
 	. = ..()
-	icon_state = "spawntrigger" //changes from a pink X for ease of mapping to completely invisible in game
 	time_to_spawn+= rand(0,20) //picks a random time to spawn mobs to keep people in suspense
 	uses+= pick(0,1) //decides to either delete itself or spawn with one use
 	if(uses == 0)

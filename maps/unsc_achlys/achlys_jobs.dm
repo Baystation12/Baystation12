@@ -80,7 +80,7 @@ GLOBAL_LIST_EMPTY(dante_enlisted_spawns)
 	access = list(142)
 	spawnpoint_override = "Dante Enlisted"
 	latejoin_at_spawnpoints = TRUE
-	intro_blurb = "You are an ONI Operative disguised as a marine. Do not allow anyone else to know your true identity. Your job is to kill anyone who sets foot on the UNSC Achlys after you sit through a briefing and collect your loadout. There must be no survivors and you are considered expendable. You must complete your mission of retrieving the documents to the blackbox in Prep and eliminating all witnesses to the events onboard the Achlys. Execute with extreme prejudice."
+	intro_blurb = "You are an ONI Operative disguised as a marine. Do not allow anyone else to know your true identity. Your job is to kill anyone who sets foot on the UNSC Achlys after you sit through a briefing and collect your loadout. There must be no survivors and you are considered expendable. You must complete your mission of eliminating all witnesses to the events onboard the Achlys, including any survivors onboard. Execute with extreme prejudice."
 
 /datum/job/achlys/SL
 	title = "Squad Leader"
@@ -153,7 +153,7 @@ GLOBAL_LIST_EMPTY(dante_officer_spawns)
 	access = list(142,143,144,145)
 	spawnpoint_override = "Dante Officer"
 	latejoin_at_spawnpoints = TRUE
-	intro_blurb = "You are the Commander of the marine detachment aboard the UNSC Dante. Your objective is to make sure your marines destroy two navigation consoles on the UNSC Achlys and return research documents to the blackbox in the prep room. Expect communication issues and unknown hostiles. Do not die."
+	intro_blurb = "You are the Commander of the marine detachment aboard the UNSC Dante. Your objective is to make sure your marines destroy two navigation consoles on the UNSC Achlys and return before it suffers a catastrophic slipspace malfunction within ten minutes of both consoles being destroyed. Expect communication issues and unknown hostiles. Do not die."
 
 /datum/map/unsc_achlys
 	allowed_jobs = list(/datum/job/achlys/CO,/datum/job/achlys/pilot,/datum/job/achlys/SL,/datum/job/achlys/marine,/datum/job/achlys/marine/operative,/datum/job/achlys/prisoner,/datum/job/achlys/sangheili)
