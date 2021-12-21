@@ -47,13 +47,17 @@
 		to_chat(src, "<span class='warning'>The forum URL is not set in the server configuration.</span>")
 	return
 
-#define RULES_FILE "config/rules.html"
 /client/verb/rules()
 	set name = "Rules"
 	set desc = "Show Server Rules."
 	set hidden = 1
-	show_browser(src, file(RULES_FILE), "window=rules;size=480x320")
-#undef RULES_FILE
+	if( config.rulesurl )
+		if(alert("This will open the rules in your browser. Are you sure?",,"Yes","No")=="No")
+			return
+		send_link(src, config.rulesurl)
+	else
+		to_chat(src, "<span class='warning'>The rules URL is not set in the server configuration.</span>")
+	return
 
 #define LORE_FILE "config/lore.html"
 /client/verb/lore_splash()

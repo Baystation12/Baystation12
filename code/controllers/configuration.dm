@@ -206,6 +206,8 @@
 
 	var/static/wikiurl
 
+	var/static/rulesurl
+
 	var/static/forumurl
 
 	var/static/githuburl
@@ -577,6 +579,8 @@
 				banappeals = value
 			if ("wikiurl")
 				wikiurl = value
+			if ("rulesurl")
+				rulesurl = value
 			if ("forumurl")
 				forumurl = value
 			if ("githuburl")
