@@ -519,8 +519,6 @@
 			return global.map_count;
 		if("map_sectors")
 			return global.map_sectors;
-		if("maploader")
-			return global.maploader;
 		if("mark")
 			return global.mark;
 		if("maze_cell_count")
@@ -1366,8 +1364,6 @@
 			global.map_count=newval;
 		if("map_sectors")
 			global.map_sectors=newval;
-		if("maploader")
-			global.maploader=newval;
 		if("mark")
 			global.mark=newval;
 		if("maze_cell_count")
@@ -1953,7 +1949,6 @@
 	"mannequins_",
 	"map_count",
 	"map_sectors",
-	"maploader",
 	"mark",
 	"maze_cell_count",
 	"mechas_list",

@@ -1887,7 +1887,6 @@
 #include "code\modules\maps\helper_landmarks.dm"
 #include "code\modules\maps\map_template.dm"
 #include "code\modules\maps\map_template_unit_testing.dm"
-#include "code\modules\maps\reader.dm"
 #include "code\modules\maps\ruins.dm"
 #include "code\modules\materials\_materials.dm"
 #include "code\modules\materials\material_recipes.dm"
