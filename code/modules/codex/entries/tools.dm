@@ -63,7 +63,8 @@
 
 /datum/codex_entry/light_replacer
 	associated_paths = list(/obj/item/device/lightreplacer)
-	mechanics_text = "Examine or use this item to see how many lights are remaining. You can feed it lightbulbs or sheets of glass to refill it."
+	mechanics_text = "<p>Examine or use this item to see how many lights are remaining and what color it's configured to print. You can feed it lightbulbs or sheets of glass to refill it.</p>\
+		<p>Use this item in hand to change it's light color.</p>"
 	lore_text = "Can you believe they used to have to screw lightbulbs in by hand?"
 	antag_text = "Using a cryptographic sequencer on this device will cause it to overload each light it replaces; when turned on, the new lights will explode!"
 
