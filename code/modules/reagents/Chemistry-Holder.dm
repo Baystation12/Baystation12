@@ -5,6 +5,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 	var/total_volume = 0
 	var/maximum_volume = 120
 	var/atom/my_atom = null
+	var/del_info
 
 /datum/reagents/New(var/maximum_volume = 120, var/atom/my_atom)
 	if(!istype(my_atom))
@@ -15,6 +16,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 
 /datum/reagents/Destroy()
 	. = ..()
+	del_info = "[my_atom]([reagent_list?.len||"_"]):[my_atom?.x||"_"],[my_atom?.y||"_"],[my_atom?.z||"_"]"
 	UNQUEUE_REACTIONS(src) // While marking for reactions should be avoided just before deleting if possible, the async nature means it might be impossible.
 	QDEL_NULL_LIST(reagent_list)
 	my_atom = null
@@ -114,7 +116,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 					playsound(my_atom, replace_sound, 80, 1)
 
 		else // Otherwise, collect all possible reactions.
-			eligible_reactions |= SSchemistry.chemical_reactions_by_id[R.type]
+			eligible_reactions |= SSchemistry.reactions_by_id[R.type]
 
 	var/list/active_reactions = list()
 
