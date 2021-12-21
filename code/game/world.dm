@@ -422,8 +422,8 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 		if(rank == "Unknown")
 			rank = "Staff"
 
-		var/message =	"<font color='red'>[rank] PM from <b><a href='?irc_msg=[input["sender"]]'>[input["sender"]]</a></b>: [input["msg"]]</font>"
-		var/amessage =  "<font color='blue'>[rank] PM from <a href='?irc_msg=[input["sender"]]'>[input["sender"]]</a> to <b>[key_name(C)]</b> : [input["msg"]]</font>"
+		var/message =	"<span class=\"pm\">[rank] PM from <b><a href='?irc_msg=[input["sender"]]'>[input["sender"]]</a></b>: [input["msg"]]</span>"
+		var/amessage =  "<span class=\"staff_pm\">[rank] PM from <a href='?irc_msg=[input["sender"]]'>[input["sender"]]</a> to <b>[key_name(C)]</b> : [input["msg"]]</span>"
 
 		C.received_irc_pm = world.time
 		C.irc_admin = input["sender"]

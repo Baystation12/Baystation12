@@ -153,10 +153,13 @@
 		. = INITIALIZE_HINT_QDEL
 		crash_with("base [type] instantiated erroneously")
 
+/obj/item/paper/memo/set_content(text, title, parse_pencode)
+	return
+
 /obj/item/paper/memo/examine(mob/user, distance)
 	. = ..()
 	if (distance < 2)
-		to_chat(user, info)
+		to_chat(user, SPAN_NOTICE(info))
 
 
 
