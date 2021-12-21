@@ -119,15 +119,15 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/oldlab2/fixedsecurity)
 "aU" = (
+/obj/machinery/atmospherics/pipe/simple/visible{
+	dir = 4
+	},
 /obj/machinery/door/airlock/external/glass{
 	dir = 4;
 	frequency = 1379;
 	id_tag = "oldlab_interior";
 	locked = 1;
 	name = "Lab Interior Airlock"
-	},
-/obj/machinery/atmospherics/pipe/simple/visible{
-	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/oldlab2/Airlock)
@@ -3180,7 +3180,7 @@
 /obj/machinery/access_button{
 	active_power_usage = "oldlab_airlock";
 	command = "cycle_exterior";
-	frequency = 1380;
+	frequency = 1379;
 	master_tag = "oldlab_airlock";
 	name = "interior access button";
 	pixel_x = 24;
@@ -6138,7 +6138,7 @@
 	active_power_usage = "oldlab_airlock";
 	active_timers = "interior access button";
 	command = "cycle_exterior";
-	frequency = 1380;
+	frequency = 1379;
 	master_tag = "oldlab_airlock";
 	name = "exterior access button";
 	pixel_x = 24;
@@ -7398,7 +7398,6 @@
 	active_power_usage = "oldlab_sensor";
 	anchor_fall = "labport_airlock";
 	dir = 8;
-	frequency = 1380;
 	id_tag = "oldlab_airlock";
 	pixel_x = 25;
 	pixel_y = 8;
