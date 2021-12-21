@@ -1,0 +1,7 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - rscadd: Autolathes can now print lights of specific tones instead of playing light
+      color lottery - Cool, warm, or white.
+  - rscadd: Light replacers can now print lights of specific tones, match the existing
+      light bulb, match the area's defined color, or use a custom color.
