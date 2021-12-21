@@ -1639,6 +1639,7 @@
 #include "code\modules\halo\covenant\turfs\floor.dm"
 #include "code\modules\halo\covenant\turfs\unsimulated.dm"
 #include "code\modules\halo\covenant\turfs\walls.dm"
+#include "code\modules\halo\covenant\turfs\water_overrides.dm"
 #include "code\modules\halo\covenant\vehicles\banshee.dm"
 #include "code\modules\halo\covenant\vehicles\shadow.dm"
 #include "code\modules\halo\covenant\vehicles\spirit.dm"
