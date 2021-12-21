@@ -19,13 +19,13 @@
 #define GLOBAL_REAL_VAR(X) var/global/##X
 #define GLOBAL_REAL(X, Typepath) var/global##Typepath/##X
 
-#define GLOBAL_RAW(X) /datum/controller/global_vars/var/static/global##X
+#define GLOBAL_RAW(X) /datum/controller/global_vars/var/static##X
 
-#define GLOBAL_VAR_INIT(X, InitValue) GLOBAL_RAW(/##X); GLOBAL_MANAGED(X, InitValue)
+#define GLOBAL_VAR_INIT(X, InitValue) GLOBAL_RAW(/tmp/##X); GLOBAL_MANAGED(X, InitValue)
 
 #define GLOBAL_VAR_CONST(X, InitValue) GLOBAL_RAW(/const/##X) = InitValue; GLOBAL_UNMANAGED(X, InitValue)
 
-#define GLOBAL_LIST_INIT(X, InitValue) GLOBAL_RAW(/list/##X); GLOBAL_MANAGED(X, InitValue)
+#define GLOBAL_LIST_INIT(X, InitValue) GLOBAL_RAW(/tmp/list/##X); GLOBAL_MANAGED(X, InitValue)
 
 #define GLOBAL_LIST_EMPTY(X) GLOBAL_LIST_INIT(X, list())
 

@@ -21,8 +21,11 @@
 	var/stripe_color = "none"
 	var/symbol_color = "none"
 
-	New()
-		update_state()
+
+/obj/structure/door_assembly/Initialize()
+	. = ..()
+	update_state()
+
 
 /obj/structure/door_assembly/door_assembly_hatch
 	icon = 'icons/obj/doors/hatch/door.dmi'

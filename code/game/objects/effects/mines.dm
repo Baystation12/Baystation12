@@ -9,8 +9,11 @@
 	var/triggerproc = "explode" //name of the proc thats called when the mine is triggered
 	var/triggered = 0
 
-/obj/effect/mine/New()
+
+/obj/effect/mine/Initialize()
+	. = ..()
 	icon_state = "uglyminearmed"
+
 
 /obj/effect/mine/Crossed(AM as mob|obj)
 	Bumped(AM)
