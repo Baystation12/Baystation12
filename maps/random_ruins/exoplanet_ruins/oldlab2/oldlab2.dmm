@@ -3178,7 +3178,6 @@
 /area/map_template/oldlab2/test1)
 "rs" = (
 /obj/machinery/access_button{
-	active_power_usage = "oldlab_airlock";
 	command = "cycle_exterior";
 	frequency = 1379;
 	master_tag = "oldlab_airlock";
@@ -6135,7 +6134,6 @@
 "FJ" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
 /obj/machinery/access_button{
-	active_power_usage = "oldlab_airlock";
 	active_timers = "interior access button";
 	command = "cycle_exterior";
 	frequency = 1379;
@@ -7395,7 +7393,6 @@
 	pixel_y = -6
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	active_power_usage = "oldlab_sensor";
 	anchor_fall = "labport_airlock";
 	dir = 8;
 	id_tag = "oldlab_airlock";

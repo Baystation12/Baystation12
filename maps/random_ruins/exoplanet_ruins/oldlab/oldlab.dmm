@@ -947,7 +947,6 @@
 /area/map_template/oldlab/station/hall)
 "ol" = (
 /obj/machinery/access_button{
-	active_power_usage = "labport_airlock";
 	command = "cycle_interior";
 	frequency = 1379;
 	master_tag = "labport_airlock";
@@ -1579,7 +1578,6 @@
 	pixel_y = -6
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	active_power_usage = "labport_sensor";
 	anchor_fall = "labport_airlock";
 	dir = 8;
 	id_tag = "labport_airlock";
@@ -1920,7 +1918,6 @@
 /area/map_template/oldlab/station/northairlockatmos)
 "Gd" = (
 /obj/machinery/access_button{
-	active_power_usage = "labport_airlock";
 	command = "cycle_exterior";
 	frequency = 1379;
 	master_tag = "labport_airlock";
