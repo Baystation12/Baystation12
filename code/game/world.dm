@@ -463,15 +463,6 @@ GLOBAL_VAR_INIT(world_topic_last, world.timeofday)
 		else
 			return "Database connection failed or not set up"
 
-	else if(copytext(T,1,19) == "prometheus_metrics")
-		var/input[] = params2list(T)
-		if(input["key"] != config.comms_password)
-			SET_THROTTLE(30 SECONDS, "Bad Comms Key")
-			return "Bad Key"
-		if(!GLOB || !GLOB.prometheus_metrics)
-			return "Metrics not ready"
-		return GLOB.prometheus_metrics.collect()
-
 
 /world/Reboot(var/reason)
 	/*spawn(0)

@@ -225,8 +225,7 @@
 
 /obj/structure/totem/examine(mob/user)
 	. = ..()
-	to_chat(user, "It's been engraved with the symbols '<font face='Shage'>RWH QaG [number]</font>'.") //i am not a linguist
-
+	to_chat(user, "It's been engraved with the symbols '𒊏𒁲𒌋 𒊑𒉿𒌉 [number]'.") //for the sake of the reader, "RADIU RIPITUR"
 
 /obj/item/stool/stone/New(var/newloc)
 	..(newloc,"sandstone")
