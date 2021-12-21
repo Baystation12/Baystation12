@@ -204,7 +204,7 @@
 			src.changes()
 
 	if(isnum(player_age) && player_age < 7)
-		src.lore_splash()
+		link_url(config.lore_url, "Lore", FALSE)
 		to_chat(src, "<span class = 'notice'>Greetings, and welcome to the server! A link to the beginner's lore page has been opened, please read through it! This window will stop automatically opening once your account here is greater than 7 days old.</span>")
 
 	if(!winexists(src, "asset_cache_browser")) // The client is using a custom skin, tell them.

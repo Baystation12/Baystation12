@@ -415,7 +415,7 @@
 				var/datum/mil_branch/B = mil_branches.get_branch_by_type(T)
 				dat += "<li>[B.name]: [job.get_ranks(B.name)]"
 		dat += "<hr style='clear:left;'>"
-		if(config.wikiurl)
+		if(config.wiki_url)
 			dat += "<a href='?src=\ref[src];job_wiki=[rank]'>Open wiki page in browser</a>"
 
 		var/description = job.get_description_blurb()
@@ -427,7 +427,7 @@
 
 	else if(href_list["job_wiki"])
 		var/rank = href_list["job_wiki"]
-		send_link(user,"[config.wikiurl][rank]")
+		send_link(user,"[config.wiki_url][rank]")
 
 	return ..()
 
