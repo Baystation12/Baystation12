@@ -17,7 +17,7 @@
 
 
 /obj/item/grenade/chem_grenade/Initialize()
-	..()
+	. = ..()
 	create_reagents(1000)
 
 
@@ -195,7 +195,7 @@
 
 
 /obj/item/grenade/chem_grenade/metalfoam/Initialize()
-	..()
+	. = ..()
 	var/obj/item/reagent_containers/glass/beaker/B1 = new(src)
 	var/obj/item/reagent_containers/glass/beaker/B2 = new(src)
 	B1.reagents.add_reagent(/datum/reagent/aluminium, 30)
@@ -215,7 +215,7 @@
 
 
 /obj/item/grenade/chem_grenade/incendiary/Initialize()
-	..()
+	. = ..()
 	var/obj/item/reagent_containers/glass/beaker/B1 = new(src)
 	var/obj/item/reagent_containers/glass/beaker/B2 = new(src)
 	B1.reagents.add_reagent(/datum/reagent/aluminium, 15)
@@ -237,7 +237,7 @@
 
 
 /obj/item/grenade/chem_grenade/antiweed/Initialize()
-	..()
+	. = ..()
 	var/obj/item/reagent_containers/glass/beaker/B1 = new(src)
 	var/obj/item/reagent_containers/glass/beaker/B2 = new(src)
 	B1.reagents.add_reagent(/datum/reagent/toxin/plantbgone, 25)
@@ -257,7 +257,7 @@
 	path = 1
 
 /obj/item/grenade/chem_grenade/cleaner/Initialize()
-	..()
+	. = ..()
 	var/obj/item/reagent_containers/glass/beaker/B1 = new(src)
 	var/obj/item/reagent_containers/glass/beaker/B2 = new(src)
 	B1.reagents.add_reagent(/datum/reagent/surfactant, 40)
@@ -277,7 +277,7 @@
 
 
 /obj/item/grenade/chem_grenade/teargas/Initialize()
-	..()
+	. = ..()
 	var/obj/item/reagent_containers/glass/beaker/large/B1 = new(src)
 	var/obj/item/reagent_containers/glass/beaker/large/B2 = new(src)
 	B1.reagents.add_reagent(/datum/reagent/phosphorus, 40)
