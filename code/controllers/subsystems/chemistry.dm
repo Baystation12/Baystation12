@@ -41,7 +41,7 @@ SUBSYSTEM_DEF(chemistry)
 	for (var/i = current.len to 1 step -1)
 		var/datum/reagents/R = current[i]
 		if (QDELETED(R))
-			log_debug("SSchemistry: deleted reagents datum in processing queue!")
+			log_debug("SSchemistry: deleted reagents datum in processing queue! Info: [R?.del_info || "(nulled)"]")
 			processing -= R
 			if (MC_TICK_CHECK)
 				current.Cut(i)
