@@ -1,7 +1,12 @@
 // Macro functions.
 #define RAND_F(LOW, HIGH) (rand()*(HIGH-LOW) + LOW)
+
+/// Return x or the next integer in a positive direction: ceil(-1.5) = -1 , ceil(1.5) = 2
 #define ceil(x) (-round(-(x)))
-#define CEILING(x, y) ( -round(-(x) / (y)) * (y) )
+
+/// Return x or the next multiple of y in a positive direction. mceil(-1.5, 0.3) = -1.5 , mceil(-1.5, 0.4) = -1.2
+#define mceil(x, y) ( -round(-(x) / (y)) * (y) )
+
 #define MULT_BY_RANDOM_COEF(VAR,LO,HI) VAR =  round((VAR * rand(LO * 100, HI * 100))/100, 0.1)
 #define PERCENT(val, max, places) round((val) / (max) * 100, !(places) || 10 ** -(places))
 
