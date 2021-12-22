@@ -1,6 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - rscadd: Add new abilities to the Frost and Webslinger spider variants.
-  - tweak: Buffed the Thermic spider's poison.
-  - bugfix: Fixed hostile mobs being able to target mobs in cocoons in some cases.

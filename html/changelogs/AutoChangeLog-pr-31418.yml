@@ -1,6 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - tweak: Tweaked the memo text colour to be readable in darkmode.
-  - admin: Tweaked darkmode colours for some text that come from the 'Who' verb and
-      staff-pm's.

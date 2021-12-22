@@ -1,5 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - maptweak: Fixed airlock cycling on Oldab 1 and 2, unbolted airlocks on deserted
-      lab since it has no power.
