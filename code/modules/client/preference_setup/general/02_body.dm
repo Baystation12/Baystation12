@@ -342,7 +342,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 		var/list/species_to_pick = list()
 		for(var/species in playable_species)
-			if(!check_rights(R_ADMIN, 0) && config.usealienwhitelist)
+			if(!GLOB.skip_allow_lists && !check_rights(R_ADMIN, 0) && config.usealienwhitelist)
 				var/datum/species/current_species = all_species[species]
 				if(!(current_species.spawn_flags & SPECIES_CAN_JOIN))
 					continue

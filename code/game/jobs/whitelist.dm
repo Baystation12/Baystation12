@@ -57,6 +57,8 @@ var/list/whitelist = list()
 /proc/is_alien_whitelisted(mob/M, var/species)
 	if(!M || !species)
 		return 0
+	if (GLOB.skip_allow_lists)
+		return TRUE
 	if(!config.usealienwhitelist)
 		return 1
 	if(check_rights(R_ADMIN, 0, M))
