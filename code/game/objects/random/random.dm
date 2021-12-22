@@ -883,6 +883,30 @@ obj/random/obstruction/spawn_choices()
 				/obj/item/clothing/accessory/kneepads = 3,
 				/obj/item/clothing/accessory/stethoscope = 2)
 
+GLOBAL_LIST_INIT(random_backpacks, list(
+	/obj/item/storage/backpack/cultpack,
+	/obj/item/storage/backpack/clown,
+	/obj/item/storage/backpack/medic,
+	/obj/item/storage/backpack/security,
+	/obj/item/storage/backpack/security/exo,
+	/obj/item/storage/backpack/command,
+	/obj/item/storage/backpack/industrial,
+	/obj/item/storage/backpack/toxins,
+	/obj/item/storage/backpack/hydroponics,
+	/obj/item/storage/backpack/genetics,
+	/obj/item/storage/backpack/virology,
+	/obj/item/storage/backpack/chemistry
+))
+
+/obj/random/backpack
+	name = "random backpack"
+	desc = "This is a random backpack."
+	icon = 'icons/obj/storage.dmi'
+	icon_state = "backpack"
+
+/obj/random/backpack/spawn_choices()
+	return GLOB.random_backpacks
+
 /obj/random/cash
 	name = "random currency"
 	desc = "LOADSAMONEY!"
