@@ -40,18 +40,6 @@
 	item_cost = 40
 	path = /obj/item/device/uplink_service/jamming
 
-/datum/uplink_item/item/services/fake_update_annoncement
-	item_cost = 40
-	path = /obj/item/device/uplink_service/fake_update_announcement
-
-/datum/uplink_item/item/services/fake_update_annoncement/New()
-	..()
-	item_cost = round(DEFAULT_TELECRYSTAL_AMOUNT / 2)
-
-	spawn(2)
-		name = "[GLOB.using_map.boss_name] Update Announcement"
-		desc = "Causes a falsified [GLOB.using_map.boss_name] Update."
-
 /***************
 * Service Item *
 ***************/
