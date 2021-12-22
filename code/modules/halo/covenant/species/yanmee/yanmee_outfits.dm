@@ -17,20 +17,33 @@
 	name = "Yanmee Minor"
 
 	suit = /obj/item/clothing/suit/armor/special/yanmee
-
+	//
+	id_type = /obj/item/weapon/card/id/yanmee_minor
+	id_slot = slot_wear_id
+	
 /decl/hierarchy/outfit/yanmee/major
 	name = "Yanmee Major"
 
 	suit = /obj/item/clothing/suit/armor/special/yanmee/major
-
+	//
+	id_type = /obj/item/weapon/card/id/yanmee_major
+	id_slot = slot_wear_id
+	
 /decl/hierarchy/outfit/yanmee/ultra
 	name = "Yanmee Ultra"
 
 	suit = /obj/item/clothing/suit/armor/special/yanmee/ultra
 	l_hand = /obj/item/language_learner/unggoy_to_common
-
+	//
+	id_type = /obj/item/weapon/card/id/yanmee_ultra
+	id_slot = slot_wear_id
+	
 /decl/hierarchy/outfit/yanmee/leader
 	name = "Yanmee Leader"
 
 	suit = /obj/item/clothing/suit/armor/special/yanmee/leader
 	l_hand = /obj/item/language_learner/unggoy_to_common
+	//
+	id_type = /obj/item/weapon/card/id/yanmee_leader
+	id_slot = slot_wear_id
+	
