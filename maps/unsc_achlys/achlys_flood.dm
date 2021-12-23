@@ -41,10 +41,22 @@
 	icon_dead = "guard_infected1_dead"
 
 /mob/living/simple_animal/hostile/flood/combat_form/prisoner/guard/New()
-	inventory = pick(list(/obj/item/ammo_magazine/ma37/m118),list(/obj/item/ammo_magazine/m6d/m224),list(/obj/item/ammo_box/shotgun),\
-				list(/obj/item/weapon/melee/baton/humbler),list(/obj/item/ammo_box/shotgun/beanbag),list(/obj/item/weapon/melee/telebaton))
-	spawn_with_gun = pick(list(/obj/item/weapon/gun/projectile/shotgun/pump/m45_ts/achlys),list(/obj/item/weapon/gun/projectile/m6d_magnum/police/achlys),
-						list(/obj/item/weapon/gun/projectile/ma37_ar/achlys),list(/obj/item/weapon/gun/projectile/shotgun/pump/m45_ts/police/achlys))
+	. = ..()
+	inventory = list(pick(list(\
+	/obj/item/ammo_magazine/ma37/m118,
+	/obj/item/ammo_magazine/m6d/m224,
+	/obj/item/ammo_box/shotgun,
+	/obj/item/weapon/melee/baton/humbler,
+	/obj/item/ammo_box/shotgun/beanbag,
+	/obj/item/weapon/melee/telebaton
+	))
+	)
+	spawn_with_gun = pick(list(\
+	/obj/item/weapon/gun/projectile/shotgun/pump/m45_ts/achlys,
+	/obj/item/weapon/gun/projectile/m6d_magnum/police/achlys,
+	/obj/item/weapon/gun/projectile/ma37_ar/achlys,
+	/obj/item/weapon/gun/projectile/shotgun/pump/m45_ts/police/achlys
+	))
 
 /mob/living/simple_animal/hostile/flood/combat_form/prisoner/mutated/guard
 	desc = "Some kind of monster with shredded remains of a gray jumpsuit stuck to it's mishappen body."
@@ -53,8 +65,16 @@
 	icon_dead = "guard_infected2_dead"
 
 /mob/living/simple_animal/hostile/flood/combat_form/prisoner/mutated/guard/New()
-	inventory = pick(list(/obj/item/ammo_magazine/ma37/m118),list(/obj/item/weapon/melee/baton/humbler),list(/obj/item/ammo_box/shotgun/beanbag),\
-					list(/obj/item/ammo_magazine/m6d/m224),list(/obj/item/ammo_box/shotgun),list(/obj/item/weapon/melee/telebaton))
+	. = ..()
+	inventory = list(pick(list(\
+	/obj/item/ammo_magazine/ma37/m118,
+	/obj/item/weapon/melee/baton/humbler,
+	/obj/item/ammo_box/shotgun/beanbag,
+	/obj/item/ammo_magazine/m6d/m224,
+	/obj/item/ammo_box/shotgun,
+	/obj/item/weapon/melee/telebaton
+	))
+	)
 
 /mob/living/simple_animal/hostile/flood/combat_form/prisoner/abomination
 	name = "abomination"
@@ -78,10 +98,19 @@
 	icon_dead = "nudist_dead"
 
 /mob/living/simple_animal/hostile/flood/combat_form/prisoner/crew/New()
-	inventory = pickweight(list(/obj/item/weapon/reagent_containers/food/snacks/liquidfood/floody = 2),list(/obj/item/weapon/research = 2),list(/obj/item/weapon/scalpel/achlys = 1),\
-							list(/obj/item/device/flashlight/flare/unsc = 1),list(/obj/item/device/flashlight/unsc = 1),list(/obj/item/device/healthanalyzer = 1),\
-							list(/obj/item/device/multitool = 1),list(/obj/item/device/radio = 1))
-
+	. = ..()
+	inventory = list(pick(list(\
+	/obj/item/weapon/reagent_containers/food/snacks/liquidfood/floody,
+	/obj/item/weapon/research,
+	/obj/item/weapon/research,
+	/obj/item/weapon/scalpel/achlys,
+	/obj/item/device/flashlight/flare/unsc,
+	/obj/item/device/flashlight/unsc,
+	/obj/item/device/healthanalyzer,
+	/obj/item/device/multitool,
+	/obj/item/device/radio
+	))
+	)
 //These two are static spawns and should only have one each across all 5Z, possibility of 2 XO
 //If detachment marines have no engineers to hack doors or C4, these will access the necessary doors
 /mob/living/simple_animal/hostile/flood/combat_form/prisoner/abomination/captain

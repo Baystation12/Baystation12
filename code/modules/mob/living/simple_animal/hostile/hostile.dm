@@ -277,7 +277,7 @@
 		view_from = v
 	var/list/L = list()
 
-	var/list/in_sight = view(dist,view_from)
+	var/list/in_sight = view(dist,view_from) | dview(see_in_dark,view_from)
 	for(var/mob/living/M in in_sight)
 		L += M
 	for(var/obj/vehicles/M in in_sight)

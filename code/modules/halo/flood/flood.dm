@@ -83,7 +83,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 							'sound/flood/pain.pain2.ogg','sound/flood/pain.pain3.ogg',\
 							'sound/flood/pain.pain5.ogg','sound/flood/pain.pain6.ogg')
 	assault_target_type = /obj/effect/landmark/assault_target/flood
-	see_in_dark = 6
+	see_in_dark = 4
 
 	faction = "Flood"
 
