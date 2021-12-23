@@ -83,12 +83,12 @@
 		update_progress = 0
 		var/obj/item/stock_parts/computer/hard_drive/hard_drive = get_component(PART_HDD)
 		if(hard_drive)
-			if(prob(10))
-				hard_drive.visible_message("<span class='warning'>[src] emits some ominous clicks.</span>")
-				hard_drive.take_damage(hard_drive.damage_malfunction)
-			else if(prob(5))
-				hard_drive.visible_message("<span class='warning'>[src] emits some ominous clicks.</span>")
-				hard_drive.take_damage(hard_drive.damage_failure)
+			if(prob(10) && !hard_drive.damage_malfunctioning())
+				hard_drive.visible_message(SPAN_WARNING("\The [src] emits some ominous clicks."))
+				hard_drive.set_damage_malfunctioning()
+			else if(prob(5) && !hard_drive.damage_failing())
+				hard_drive.visible_message(SPAN_WARNING("\The [src] emits some ominous clicks."))
+				hard_drive.set_damage_failing()
 	update_host_icon()
 
 /// Handles all setup when the system is booted up.

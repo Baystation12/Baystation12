@@ -56,25 +56,6 @@
 
 /obj/item/stock_parts/computer/scanner/attackby(obj/W, mob/living/user)
 	do_on_attackby(user, W)
-	// Nanopaste. Repair all damage if present for a single unit.
-	var/obj/item/stack/S = W
-	if (istype(S, /obj/item/stack/nanopaste))
-		if (!damage)
-			to_chat(user, "\The [src] doesn't seem to require repairs.")
-			return TRUE
-		if (S.use(1))
-			to_chat(user, "You apply a bit of \the [W] to \the [src]. It immediately repairs all damage.")
-			damage = 0
-		return TRUE
-	// Cable coil. Works as repair method, but will probably require multiple applications and more cable.
-	if (isCoil(S))
-		if (!damage)
-			to_chat(user, "\The [src] doesn't seem to require repairs.")
-			return TRUE
-		if (S.use(1))
-			to_chat(user, "You patch up \the [src] with a bit of \the [W].")
-			take_damage(-10)
-		return TRUE
 	return ..()
 
 /obj/item/stock_parts/computer/scanner/proc/do_on_attackby(mob/user, atom/target)

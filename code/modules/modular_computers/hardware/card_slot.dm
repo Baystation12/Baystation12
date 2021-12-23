@@ -18,7 +18,7 @@
 	. += "[name] status: [stored_card ? "Card Inserted" : "Card Not Present"]\n"
 	if(stored_card)
 		. += "Testing card read...\n"
-		if( damage >= damage_failure )
+		if (get_damage_value() >= damage_failure)
 			. += "...FAILURE!\n"
 		else
 			var/read_string_stability
