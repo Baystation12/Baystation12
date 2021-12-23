@@ -85,38 +85,38 @@
 	hierarchy_type = /decl/hierarchy/outfit/job
 
 /decl/hierarchy/outfit/job/unsc_achlys/prisoner/proc/equip_special(mob/living/carbon/human/H)
+	var/l_hand_item = /obj/item/weapon/crowbar/red
+	var/r_hand_item = null
+	var/belt_item = null
 	if(prob(25))
-		var/obj/item/weapon/L = new /obj/item/weapon/scalpel/achlys
-		H.equip_to_slot_or_del(L,slot_r_hand)
+		r_hand_item = /obj/item/weapon/scalpel/achlys
+	else if(prob(10))
+		r_hand_item = /obj/item/weapon/material/hatchet/achlys
+	else if(prob(10))
+		l_hand_item = /obj/item/weapon/gun/projectile/shotgun/pump/m45_ts/achlys
+		r_hand_item = /obj/item/ammo_box/shotgun
+		belt_item = /obj/item/weapon/crowbar/red
+	else if(prob(10))
+		belt_item = /obj/item/weapon/gun/projectile/m6d_magnum/civilian/achlys
+		r_hand_item = /obj/item/device/flashlight/maglight
 	else if(prob(25))
-		var/obj/item/weapon/crowbar/G = new /obj/item/weapon/crowbar/red
-		H.equip_to_slot_or_del(G,slot_r_hand)
-		var/obj/item/device/flashlight/M = new /obj/item/device/flashlight/maglight
-		H.equip_to_slot_or_del(M,slot_l_hand)
-	else if(prob(10))
-		var/obj/item/weapon/material/A = new /obj/item/weapon/material/hatchet/achlys
-		H.equip_to_slot_or_del(A,slot_belt)
-	else if(prob(10))
-		var/obj/item/weapon/gun/projectile/shotgun/pump/m45_ts/U = new /obj/item/weapon/gun/projectile/shotgun/pump/m45_ts/achlys
-		H.equip_to_slot_or_del(U,slot_back)
-	else if(prob(10))
-		var/obj/item/weapon/gun/projectile/m6d_magnum/civilian/achlys/T = new /obj/item/weapon/gun/projectile/m6d_magnum/civilian/achlys
-		H.equip_to_slot_or_del(T,slot_r_hand)
-		var/obj/item/device/flashlight/G = new /obj/item/device/flashlight/maglight
-		H.equip_to_slot_or_del(G,slot_l_hand)
-	else if(prob(25))
-		var/obj/item/weapon/material/twohanded/S = new /obj/item/weapon/material/twohanded/fireaxe
-		H.equip_to_slot_or_del(S,slot_r_hand)
+		r_hand_item = /obj/item/weapon/material/twohanded/fireaxe
+	if(l_hand_item)
+		H.equip_to_slot_or_del(new l_hand_item (H.loc),slot_l_hand)
+	if(r_hand_item)
+		H.equip_to_slot_or_del(new r_hand_item (H.loc),slot_r_hand)
+	if(belt_item)
+		H.equip_to_slot_or_del(new belt_item (H.loc),slot_belt)
 
 /decl/hierarchy/outfit/job/unsc_achlys/prisoner/equip_base(mob/living/carbon/human/H)
-	equip_special(H)
 	. = ..()
+	equip_special(H)
 
 /decl/hierarchy/outfit/job/unsc_achlys/sangheili
 	name = "Sangheili Prisoner"
 
-	l_ear = null
-	uniform = null
+	r_ear = /obj/item/device/flashlight/pen/bright
+	uniform = /obj/item/clothing/under/covenant/sangheili
 	suit = null
 	back = null
 	gloves = null
@@ -131,9 +131,22 @@
 	hierarchy_type = /decl/hierarchy/outfit/job
 
 /decl/hierarchy/outfit/job/unsc_achlys/sangheili/proc/equip_special(mob/living/carbon/human/H)
+	var/l_hand_item = null
+	var/r_hand_item = null
+	var/belt_item = null
 	if(prob(25))
-		var/obj/item/weapon/material/twohanded/S = new /obj/item/weapon/material/twohanded/fireaxe
-		H.equip_to_slot_or_del(S,slot_r_hand)
+		l_hand_item = /obj/item/weapon/material/twohanded/fireaxe
 	else if(prob(25))
-		var/obj/item/weapon/material/twohanded/U = new /obj/item/weapon/material/twohanded/baseballbat/achlys
-		H.equip_to_slot_or_del(U,slot_r_hand)
+		l_hand_item = /obj/item/weapon/material/twohanded/baseballbat/achlys
+	else if(prob(10))
+		l_hand_item = /obj/item/weapon/gun/projectile/shotgun/pump/m45_ts/achlys
+		r_hand_item = /obj/item/ammo_box/shotgun
+	else if(prob(10))
+		belt_item = /obj/item/weapon/gun/projectile/m6d_magnum/civilian/achlys
+		r_hand_item = /obj/item/device/flashlight/maglight
+	if(l_hand_item)
+		H.equip_to_slot_or_del(new l_hand_item (H.loc),slot_l_hand)
+	if(r_hand_item)
+		H.equip_to_slot_or_del(new r_hand_item (H.loc),slot_r_hand)
+	if(belt_item)
+		H.equip_to_slot_or_del(new belt_item (H.loc),slot_belt)
