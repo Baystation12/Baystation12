@@ -1496,20 +1496,10 @@
 	sound_env = SMALL_ENCLOSED
 	req_access = list(access_engine, access_engine_equip)
 
-/area/engineering/engineering_monitoring
-	name = "\improper Engineering Monitoring Room"
-	icon_state = "engine_monitoring"
-	req_access = list(access_engine)
-
 /area/engineering/foyer
 	name = "\improper Engineering Foyer"
 	icon_state = "engineering_foyer"
 	req_access = list()
-
-/area/engineering/locker_room
-	name = "\improper Engineering Locker Room"
-	icon_state = "engineering_locker"
-	req_access = list(access_engine)
 
 /area/engineering/engineering_bay
 	name = "\improper Engineering Bay"
