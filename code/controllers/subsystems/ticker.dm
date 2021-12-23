@@ -256,11 +256,12 @@ Helpers
 	mode_datum.pre_setup() // Makes lists of viable candidates; performs candidate draft for job-override roles; stores the draft result both internally and on the draftee.
 	SSjobs.divide_occupations(mode_datum) // Gives out jobs to everyone who was not selected to antag.
 
-	if(mode_datum.startRequirements())
+	var/result = mode_datum.startRequirements()
+	if(result)
 		mode_datum.fail_setup()
 		SSjobs.reset_occupations()
 		bad_modes += mode_datum.config_tag
-		log_debug("Could not start game mode [mode_to_try] ([mode_datum.name]) - Failed to meet requirements.")
+		log_debug("Could not start game mode [mode_to_try] ([mode_datum.name]) - Failed to meet requirements - [result]")
 		return
 
 	//Declare victory, make an announcement.
