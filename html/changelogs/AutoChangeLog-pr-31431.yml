@@ -1,0 +1,4 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Unlocked emitters no longer require access to turn on or off.
