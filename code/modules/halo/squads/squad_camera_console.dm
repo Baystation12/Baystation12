@@ -47,6 +47,7 @@
 /obj/machinery/squad_camera_console
 	name = "Squad Camera Console"
 	desc = "A console that allows a user to access tactical HUD cameras. Advanced signal propagation technology ensures near-infinite range communication."
+	layer = BELOW_OBJ_LAYER
 	density = 1
 	anchored = 1
 

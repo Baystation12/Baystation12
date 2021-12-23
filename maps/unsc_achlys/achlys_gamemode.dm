@@ -1,14 +1,18 @@
 
 #define DETACHMENT_ROLES list("Marine","Squad Leader") //pilots don't count
 #define ONI_ROLES list("ONI Operative")
+#define MISC_UNSC_ROLES list("Pelican Pilot","UNSC Dante CO",)
 #define COVENANT_ROLES list("Sangheili Prisoner") //no representation for human prisoner
-#define COMMS_CUTIN_EVENT_MIN 15 MINUTES
-#define COMMS_CUTIN_EVENT_MAX 30 MINUTES
-#define COMMS_CUTIN_EVENT_DURATION 1 MINUTES
-#define FLOOD_EVENT_MINOR_START 25 MINUTES
-#define FLOOD_EVENT_MAJOR_START 30 MINUTES
-#define FLOOD_EVENT_REPEAT_TIME 15 MINUTES
-#define time_to_retreat 10 MINUTES
+#define COMMS_CUTIN_EVENT_MIN 5 MINUTES
+#define COMMS_CUTIN_EVENT_MAX 15 MINUTES
+#define COMMS_CUTIN_EVENT_DURATION 2.5 MINUTES
+#define FLOOD_EVENT_Z_START 3
+#define FLOOD_EVENT_Z_END 5
+#define FLOOD_EVENT_MINOR_START 15 MINUTES
+#define FLOOD_EVENT_MAJOR_START 25 MINUTES
+#define FLOOD_EVENT_REPEAT_TIME 10 MINUTES
+#define MODE_CONFIG_DEADLINE_TIME 10 MINUTES
+#define EVAC_TIME 5 MINUTES
 
 /datum/game_mode/achlys
 	name = "ONI Investigation: Achlys"
@@ -18,6 +22,11 @@
 	votable = 0
 	probability = 0
 	allowed_ghost_roles = list(/datum/ghost_role/flood_prisoner)
+	var/item_destroy_tag = "destroythis" //Map-set tags for items that need to be destroyed.
+	var/list/items_to_destroy = list()
+	var/item_retrieve_tag = "retrievethis" //Map-set tags for items that need to be retrieved.
+	var/list/items_to_retrieve = list()
+	var/list/item_success_tag = "retrieveto"//the tag of an object that when the documents are in the contents of, counts as success
 	var/special_event_starttime = 0 //Used to determine if we should run the gamemode's "special event" (Currently just a comms cut-in). Is set to the time the event should start.
 	var/start_comms_event = 0
 	var/stop_comms_event = 0
@@ -25,8 +34,10 @@
 	var/flood_spawn_event_major
 	var/obj/machinery/overmap_comms/jammer/spawned_jammer
 	var/living_detachment = list()  //this is a collection of all marines and SL, if they die, mission over
-	var/items_to_destroy = list()   //adjusted items to destroy so instances don't need tagged
-	var/ruptured_slipspace = 0		//this gets flipped to end the round in destruction
+	var/mode_config_deadline = 0 //This is set at mode-start and acts like a barrier to round-end. Allows for latespawns and mission config.
+	var/has_configured = 0
+	var/evac_deadline = 0		//this gets flipped to end the round in destruction
+
 
 /datum/ghost_role/flood_prisoner
 
@@ -71,11 +82,33 @@
 
 	return ..()
 
+/datum/game_mode/achlys/proc/populate_items_destroy()
+	for(var/atom/destroy in world)
+		if(destroy.tag == item_destroy_tag)
+			items_to_destroy += destroy
+
+/datum/game_mode/achlys/proc/populate_items_retrieve()
+	for(var/atom/retrieve in world)
+		if(retrieve.tag == item_retrieve_tag)
+			items_to_retrieve += retrieve
+
+/datum/game_mode/achlys/proc/populate_detachment_roles()
+	//grab detachment roles, marines and SL
+	for(var/title in DETACHMENT_ROLES)
+		var/datum/job/achlys/job = job_master.occupations_by_title["Marine"]
+		living_detachment += job.assigned_players
+
+/datum/game_mode/achlys/proc/deactivate_unsc_jobs()
+	for(var/title in DETACHMENT_ROLES + ONI_ROLES + MISC_UNSC_ROLES)
+		var/datum/job/achlys/job = job_master.occupations_by_title[title]
+		job.total_positions = 0
+
 /datum/game_mode/achlys/pre_setup()
 	..()
 	GLOB.MOBILE_SPAWN_RESPAWN_TIME = -1 //Disable mobile respawns
 	flood_spawn_event_minor = world.time + FLOOD_EVENT_MINOR_START
 	flood_spawn_event_major = world.time + FLOOD_EVENT_MAJOR_START
+	mode_config_deadline = world.time + MODE_CONFIG_DEADLINE_TIME
 	start_comms_event = world.time + rand(COMMS_CUTIN_EVENT_MIN,COMMS_CUTIN_EVENT_MAX)
 	stop_comms_event = start_comms_event + COMMS_CUTIN_EVENT_DURATION
 
@@ -83,14 +116,11 @@
 	to_world("<span class='danger'>The entire derelict violently shudders and lists forward heavily. The UNSC Achlys is about to have a severe and violent slipspace malfunction that will lurch the ship into oblivion.</span>")
 	for(var/mob/M in GLOB.player_list)
 		sound_to(M, 'code/modules/halo/sound/crash.ogg')
-	ruptured_slipspace = (world.time + time_to_retreat)
-		ruptured_slipspace = 1
+	flood_spawn_event_major = 1 //Activate the event NOW.
+	evac_deadline = (world.time + EVAC_TIME)
 
 /datum/game_mode/achlys/post_setup()
 	..()
-	//remember which items need destroyed
-	for(var/obj/structure/navconsole/NC in world)
-		NC += items_to_destroy
 
 	//setup the comms jamming for the asteroid field
 	var/obj/effect/overmap/sector/achlys/A = locate() in world
@@ -100,17 +130,8 @@
 	//activate the jammer
 	spawned_jammer.toggle_active()
 
-	//grab detachment roles, marines and SL
-	var/datum/job/achlys/marine = job_master.occupations_by_title["Marine"]
-	living_detachment += marine.assigned_players
-	var/datum/job/achlys/sl = job_master.occupations_by_title["Squad Leader"]
-	living_detachment += sl.assigned_players
+	populate_detachment_roles()
 
-
-/*
-	start_comms_event = world.time + rand(COMMS_CUTIN_EVENT_MIN,COMMS_CUTIN_EVENT_MAX)
-	stop_comms_event = stop_comms_event + COMMS_CUTIN_EVENT_DURATION
-	*/
 
 /datum/game_mode/achlys/proc/handle_comms_jamming()
 	//a comms window opens in the asteroid field
@@ -148,13 +169,20 @@ All 3 of these cannot spawn on open space
 
 /datum/game_mode/achlys/process()
 	..()
+	if(!has_configured)
+		if(world.time >= mode_config_deadline)
+			populate_items_destroy()
+			populate_items_retrieve()
+			populate_detachment_roles()
+			deactivate_unsc_jobs()
+			has_configured = 1
 
 	handle_comms_jamming()
 
 	if(flood_spawn_event_major != 0 && world.time > flood_spawn_event_major)
-		flood_spawn_event_minor = world.time //Trigger minor-event ASAP.
+		flood_spawn_event_minor = 1 //Trigger minor-event ASAP.
 		flood_spawn_event_major = world.time + FLOOD_EVENT_REPEAT_TIME
-		for(var/i = 3 to 5)
+		for(var/i = FLOOD_EVENT_Z_START to FLOOD_EVENT_Z_END) //The numbers here are the z-levels containing the area we want to search.
 			var/list/valid_spawns = list()
 			for(var/turf/t in block(locate(1,1,i),locate(world.maxx,world.maxy,i)))
 				if(istype(t,/turf/simulated/open) || istype(t,/turf/space) || istype(t,/turf/simulated/wall) || istype(t,/turf/simulated/floor/reinforced/airless) || istype(t,/turf/simulated/floor/airless))
@@ -167,7 +195,7 @@ All 3 of these cannot spawn on open space
 
 	if(flood_spawn_event_minor != 0 && world.time > flood_spawn_event_minor)
 		flood_spawn_event_minor = 0
-		for(var/i = 3 to 5)
+		for(var/i = FLOOD_EVENT_Z_START to FLOOD_EVENT_Z_END) //The numbers here are the z-levels containing the area we want to search.
 			var/list/valid_spawns = list()
 			for(var/turf/t in block(locate(1,1,i),locate(world.maxx,world.maxy,i)))
 				if(istype(t,/turf/simulated/open) || istype(t,/turf/space) || istype(t,/turf/simulated/floor/reinforced/airless) || istype(t,/turf/simulated/floor/airless))
@@ -182,15 +210,37 @@ All 3 of these cannot spawn on open space
 				new typepath_to_spawn (pick(valid_spawns))
 
 /datum/game_mode/achlys/proc/check_item_destroy_status()
-	if(!items_to_destroy)
-		slipspace_critical()
+	if(items_to_destroy.len == 0)
+		. = 1
+		return
+	for(var/atom/item in items_to_destroy)
+		. = 0
+		if(isnull(item) || item.loc == null)
+			. = 1
+		if(istype(item,/obj/machinery))
+			var/obj/machinery/item_machine = item
+			if(item_machine.stat & BROKEN)
+				. = 1
+		if(. == 0)
+			return //One's alive, no reason to check further.
+
+/datum/game_mode/achlys/proc/check_item_retrieve_status()
+	. = 1
+	var/atom/retrieval_loc = locate(item_success_tag)
+	for(var/atom/movable/item in items_to_retrieve)
+		if(!(item.loc == retrieval_loc))
+			. = 0
 
 /datum/game_mode/achlys/check_finished()
-	var/list/living_players_detachment = check_players_live("Detachment")
-	if(living_players_detachment.len == 0 && !ruptured_slipspace)
-		return 1 //if they did their job, the round can continue for the remaining 10 minutes
-	else if(ruptured_slipspace)
-		return 1
+	. = 0
+	if(!has_configured)
+		return
+	var/list/detachment_alive = check_players_live("Detachment")
+	//We don't care about the documents for mission-end, they're optional
+	var/destroy_status = check_item_destroy_status()
+	if(destroy_status == 1 && evac_deadline == 0)//This means we need to set our evac deadline.
+		slipspace_critical()
+	. = ((destroy_status == 1 || detachment_alive.len == 0) && world.time > evac_deadline)
 
 /datum/game_mode/achlys/declare_completion()
 	..()
@@ -200,20 +250,60 @@ All 3 of these cannot spawn on open space
 	var/text = ""
 	var/list/living_players_detachment = check_players_live("Detachment")
 	var/list/living_players_oni = check_players_live("ONI")
-	if(ruptured_slipspace)
+	var/was_success = check_item_destroy_status()
+	var/success_counter = 0
+	if(was_success)
 		text += "<span class='info'>Cole Protocol has been enacted by the marine detachment and the UNSC Achlys has been destroyed. The galaxy has been spared the horrors onboard, but at what cost?</span><br>"
-	else text += "<span class='warning'>Cole Protocol has not been enacted and the mission was a failure.</span><br>"
+		success_counter += 2
+	else
+		text += "<span class='warning'>Cole Protocol has not been enacted and the mission was a failure.</span><br>"
 	text += "<br>"
 	if(living_players_oni.len == 0)
 		text += "<span class='notice'>All ONI Operatives implanted within the detachment were lost during the events onboard the UNSC Achlys.</span><br>"
-	else text += "<span class='warning'>There are still remaining ONI Operatives within the detachment and what they will do in the near future will be in the name of keeping humanity safe...</span><br>"
-	if(living_players_detachment.len == 0 && ruptured_slipspace)
-		text += "<span class='warning'>Though the marines in the detachment were lost with all hands, their sacrifices were not in vain. Their mission was accomplished.</span><br>"
-	else if(living_players_detachment.len == 0)
-		text += "<span class='notice'>Unfortunately all marines in the detachment were lost, their sacrifice will be remembered.</span><br>"
+		success_counter += 1
 	else
-		text += "<span class='warning'>A number of marines in the detachment survived their encounter aboard the UNSC Achlys and must live with what they've experienced.</span><br>"
+		text += "<span class='warning'>There are still remaining ONI Operatives within the detachment and what they will do in the near future will be in the name of keeping humanity safe...</span><br>"
+	text += "<br>"
+	if(living_players_detachment.len == 0)
+		if(was_success)
+			text += "<span class='notice'>Though the marines in the detachment were lost with all hands, their sacrifices were not in vain. Their mission was accomplished.</span><br>"
+		else
+			text += "<span class='warning'>Unfortunately all marines in the detachment were lost, their sacrifice will be remembered.</span><br>"
+	else
+		text += "<span class='notice'>A number of marines in the detachment survived their encounter aboard the UNSC Achlys and must live with what they've experienced.</span><br>"
+		success_counter += 1
+	text += "<br>"
+	if(check_item_retrieve_status())
+		text += "<span class = 'notice'>Valuable intel was obtained by the detachment, and returned to the Dante. Whilst much was redacted by ONI, some speculate that it greatly boosted the efforts in researching the Flood.</span>"
+		success_counter += 2
+	else
+		text += "<span class = 'warning'>The detachment was unable to retrieve the research documents aboard the UNSC Achlys. Many lives were lost in recreating this valuable intel.</span>"
+	text += "<br><br>"
+	var/success_text = "Failure"
+	if(success_counter > 1)
+		success_text = "Minor Success"
+	if(success_counter > 2)
+		success_text = "Success"
+	if(success_counter > 4)
+		success_text = "Major Success"
+	if(success_counter > 5)
+		success_text = "Supreme Success"
+	text += "<span class = 'danger'>Mission Status:\n[success_text]</span>"
 	to_world(text)
 	return 0
 
 #undef COMMS_CUTIN_EVENT_CHANCE
+#undef DETACHMENT_ROLES
+#undef ONI_ROLES
+#undef MISC_UNSC_ROLES
+#undef COVENANT_ROLES
+#undef COMMS_CUTIN_EVENT_MIN
+#undef COMMS_CUTIN_EVENT_MAX
+#undef COMMS_CUTIN_EVENT_DURATION
+#undef FLOOD_EVENT_Z_START
+#undef FLOOD_EVENT_Z_END
+#undef FLOOD_EVENT_MINOR_START
+#undef FLOOD_EVENT_MAJOR_START
+#undef FLOOD_EVENT_REPEAT_TIME
+#undef MODE_CONFIG_DEADLINE_TIME
+#undef EVAC_TIME

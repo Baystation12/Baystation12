@@ -39,6 +39,18 @@
 	path = /obj/item/ammo_magazine/a556
 	category = "Arms and Ammunition"
 
+//Shotty Boxes.
+
+/datum/autolathe/recipe/shotgun_box
+	name = "ammo box (Shotgun, Buckshot)"
+	path = /obj/item/ammo_box/shotgun
+	resources = list("steel" = 500)
+	category = "Arms and Ammunition"
+
+/datum/autolathe/recipe/shotgun_box/slugs
+	name = "ammo box (Shotgun, Slugs)"
+	path = /obj/item/ammo_box/shotgun/slug
+
 //Cov//
 /datum/autolathe/recipe/blamite_needles
 	name = "Type-33 Cartridge"

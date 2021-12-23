@@ -13,7 +13,7 @@
 	icon_state = "prisoner_infected2"
 	icon_dead = "prisoner_infected2_dead"
 	icon_living = "prisoner_infected2"
-	move_to_delay = 8
+	move_to_delay = 4
 	health = 50 //intentionally squishy to give melee combat a chance
 	maxHealth = 50
 	melee_damage_lower = 15
@@ -27,7 +27,7 @@
 	icon_state = "prisoner_infected1"
 	icon_living = "prisoner_infected1"
 	icon_dead = "prisoner_infected1_dead"
-	move_to_delay = 10  //slower than common counterpart to give sense of weight to it
+	move_to_delay = 5  //slower than common counterpart to give sense of weight to it
 	health = 85 		//beefier than it's common counterpart to give a better sense of danger and urgency to encounters
 	maxHealth = 85
 	melee_damage_lower = 20 //as above so below
@@ -62,7 +62,7 @@
 	icon_state = "abomination"
 	icon_living = "abomination"
 	icon_dead = "abomination_dead"
-	move_to_delay = 4 //fast enough to give a sense of danger and muscle
+	move_to_delay = 3 //fast enough to give a sense of danger and muscle
 	resistance = 5
 	health = 250
 	maxHealth = 250 //these will be specifically put in certain locations and not RNG based

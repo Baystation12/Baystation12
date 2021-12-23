@@ -1,6 +1,13 @@
 #define MARINE_OVERRIDE 'code/modules/halo/clothing/marine.dmi'
 #define ITEM_INHAND 'code/modules/halo/clothing/marine_items.dmi'
 
+/obj/item/weapon/storage/pocketstore/hardcase/flares
+	name = "Tactical Hardcase (Flares)"
+	icon_state = "hardcase_mags"
+	storage_slots = 4
+	can_hold = list(/obj/item/device/flashlight/flare)
+	startswith = list(/obj/item/device/flashlight/flare/unsc = 4)
+
 /obj/item/weapon/storage/box/flares
 	name = "box of flares"
 	icon_state = "flashbang"
@@ -10,6 +17,12 @@
 
 /obj/item/device/flashlight/flare/unsc
 	brightness_on = 4 //halved normal flare light
+
+/datum/autolathe/recipe/unsc_flare
+	name = "Flare"
+	path = /obj/item/device/flashlight/flare/unsc
+	category = "Arms and Ammunition"
+	resources = list("steel" = 200)
 
 /obj/item/clothing/head/helmet/achlys_marine //regular marine helmet lacking a flashlight and visor
 	name = "Olive Camo CH251 Helmet"
@@ -47,11 +60,12 @@
 
 /obj/structure/closet/crate/marine/marine_medic/WillContain()
 	return list(
+	/obj/item/weapon/storage/pocketstore/hardcase/flares = 1,
 	/obj/item/weapon/storage/box/MRE/Chicken/achlys = 1,
 	/obj/item/weapon/material/knife/combat_knife = 1,
 	/obj/item/ammo_magazine/m6d/m225 = 2,
 	/obj/item/weapon/gun/projectile/m6d_magnum = 1,
-	/obj/item/ammo_magazine/m7/m443 = 2,
+	/obj/item/ammo_magazine/m7/m443 = 3,
 	/obj/item/weapon/gun/projectile/m7_smg = 1,
 	/obj/item/clothing/head/helmet/achlys_marine = 1,
 	/obj/item/clothing/mask/marine = 1,
@@ -72,14 +86,14 @@
 
 /obj/structure/closet/crate/marine/cqc/WillContain()
 	return list(
+	/obj/item/weapon/storage/pocketstore/hardcase/flares = 1,
 	/obj/item/weapon/storage/box/MRE/Pizza/achlys = 1,
-	/obj/item/weapon/storage/box/flares = 1,
 	/obj/item/weapon/material/knife/combat_knife = 1,
-	/obj/item/ammo_magazine/m7/m443 = 2,
+	/obj/item/ammo_magazine/m7/m443 = 3,
 	/obj/item/weapon/gun/projectile/m7_smg = 1,
 	/obj/item/weapon/grenade/frag/m9_hedp = 1,
-	/obj/item/ammo_box/shotgun/slug = 1,
-	/obj/item/ammo_box/shotgun = 1,
+	/obj/item/ammo_box/shotgun/slug = 2,
+	/obj/item/ammo_box/shotgun = 2,
 	/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts = 1,
 	/obj/item/clothing/head/helmet/achlys_marine = 1,
 	/obj/item/clothing/mask/marine = 1,
@@ -98,6 +112,7 @@
 
 /obj/structure/closet/crate/marine/engineer/WillContain()
 	return list(
+	/obj/item/weapon/storage/pocketstore/hardcase/flares = 1,
 	/obj/item/clothing/head/helmet/achlys_marine = 1,
 	/obj/item/clothing/mask/marine = 1,
 	/obj/item/clothing/glasses/welding = 1,
@@ -110,9 +125,13 @@
 	/obj/item/weapon/armor_patch = 2,
 	/obj/item/ammo_magazine/m6d/m225 = 2,
 	/obj/item/weapon/gun/projectile/m6d_magnum = 1,
-	/obj/item/ammo_magazine/ma5b/m118 = 2,
-	/obj/item/weapon/gun/projectile/ma5b_ar = 1,
-	/obj/item/weapon/storage/box/flares = 1)
+	/obj/item/ammo_magazine/m7/m443 = 3,
+	/obj/item/weapon/gun/projectile/m7_smg = 1,
+	/obj/item/weapon/storage/pocketstore/hardcase/magazine = 1,
+	/obj/item/clothing/glasses/hud/tactical = 1,
+	/obj/item/weapon/plastique = 3,
+	/obj/item/weapon/storage/pocketstore/hardcase/grenade = 1,
+	)
 
 /obj/structure/closet/crate/marine/rifleman
 	name = "standard rifleman equipment"
@@ -123,12 +142,12 @@
 
 /obj/structure/closet/crate/marine/rifleman/WillContain()
 	return list(
+	/obj/item/weapon/storage/pocketstore/hardcase/flares = 1,
 	/obj/item/weapon/storage/box/MRE/Spaghetti/achlys = 1,
-	/obj/item/weapon/storage/box/flares = 2,
 	/obj/item/weapon/material/knife/combat_knife = 1,
-	/obj/item/ammo_magazine/m6d/m225 = 2,
+	/obj/item/ammo_magazine/m6d/m225 = 3,
 	/obj/item/weapon/gun/projectile/m6d_magnum = 1,
-	/obj/item/ammo_magazine/ma5b/m118 = 3,
+	/obj/item/ammo_magazine/ma5b/m118 = 4,
 	/obj/item/weapon/gun/projectile/ma5b_ar = 1,
 	/obj/item/weapon/grenade/frag/m9_hedp = 1,
 	/obj/item/clothing/head/helmet/achlys_marine = 1,
@@ -149,12 +168,12 @@
 
 /obj/structure/closet/crate/secure/marine_squad_leader/WillContain()
 	return list(
+	/obj/item/weapon/storage/pocketstore/hardcase/flares = 1,
 	/obj/item/weapon/storage/box/MRE/Spaghetti/achlys = 1,
-	/obj/item/weapon/storage/box/flares = 1,
 	/obj/item/weapon/material/knife/combat_knife = 1,
-	/obj/item/ammo_magazine/m6d/m225 = 2,
+	/obj/item/ammo_magazine/m6d/m225 = 3,
 	/obj/item/weapon/gun/projectile/m6d_magnum = 1,
-	/obj/item/ammo_magazine/ma5b/m118 = 2,
+	/obj/item/ammo_magazine/ma5b/m118 = 4,
 	/obj/item/weapon/gun/projectile/ma5b_ar = 1,
 	/obj/item/device/taperecorder = 1,
 	/obj/item/squad_manager = 1,
@@ -165,6 +184,26 @@
 	/obj/item/clothing/gloves/thick/unsc = 1,
 	/obj/item/clothing/shoes/marine = 1,
 	/obj/item/weapon/storage/belt/marine_ammo = 1)
+
+/obj/structure/closet/pilot_equipment
+	name = "pilot equipment"
+	desc = "For pelican pilots."
+	req_access = list()
+
+/obj/structure/closet/pilot_equipment/WillContain()
+	return list(
+	/obj/item/weapon/storage/pocketstore/hardcase/flares = 1,
+	/obj/item/weapon/material/knife/combat_knife = 1,
+	/obj/item/ammo_magazine/m6d/m225 = 4,
+	/obj/item/weapon/storage/pocketstore/hardcase/magazine = 1,
+	/obj/item/weapon/gun/projectile/m6d_magnum = 1,
+	/obj/item/clothing/glasses/hud/tactical = 1,
+	/obj/item/clothing/accessory/holster/thigh = 1,
+	/obj/item/clothing/under/unsc/pilot = 1,
+	/obj/item/clothing/shoes/dutyboots = 1,
+	/obj/item/clothing/suit/armor/bulletproof/vest = 1,
+	/obj/item/clothing/head/helmet/pilot = 1,
+	)
 
 /obj/machinery/vending/armory/achlys
 	name = "Gear Vendor"
@@ -192,41 +231,28 @@
 	req_access = list(143)
 
 /obj/structure/navconsole
-	name = "Navagation Console"
-	desc = "A robust system with it's own power supply that holds nav data on it's hard drive. This includes the location of the planet Earth."
+	name = "Navigation Console"
+	desc = "A robust system with it's own power supply that holds nav data on it's hard drive. This includes the location of the planet Earth. An exposed wire dangles precariously: Perhaps you could rip out a critical circuit to break this machine?"
 	icon = 'code/modules/halo/overmap/nav_computer.dmi'
 	icon_state = "nav_computer"
-	var/health
-	var/maxhealth = 30
 	light_power = 1
 	light_range = 2
 	light_color = "#ebf7fe"
 	density = 1
 	anchored = 1
 
-/obj/structure/navconsole/proc/take_damage(var/damage = 0)// I want to know who the fuck made structures take this much work to break.
-	health -= damage
-	health = max(0, health - damage)
-	if(health <= 0)
-		qdel(src)
-	return
-
-/obj/structure/navconsole/bullet_act(var/obj/item/projectile/Proj)
-
-	var/proj_damage = Proj.get_structure_damage()
-	if(!proj_damage) return
-
-	..()
-	take_damage(proj_damage)
-	return
-
-/obj/structure/navconsole/proc/hit(var/damage)
-	take_damage(damage)
-	return
-
-/obj/structure/navconsole/attack_generic(var/mob/user, var/damage)
-	if(damage)
+/obj/structure/navconsole/attack_hand(var/mob/living/carbon/human/attacker)
+	if(!istype(attacker))
 		return
+	visible_message("<span class = 'warning'>[attacker] starts to rummage through the wiring of \the [src]...</span>")
+	if(!do_after(attacker,15 SECONDS,src,1,1,,1))
+		return
+	visible_message("<span class = 'warning'>[attacker] rips out a critical circuit in \the [src]'s electronics! </span>")
+	qdel(src)
+
+/obj/structure/navconsole/Del()
+	new /obj/effect/decal/cleanable/blood/gibs/robot (loc)
+	. = ..()
 
 /obj/item/weapon/reference
 	name = "gold coin"
@@ -244,7 +270,11 @@
 
 /obj/item/weapon/research/sekrits //the mcguffin
 	name = "strange documents"
-	desc = "This folder is sealed shut and coated in way too many warnings. Definitely not safe to open."
+	desc = "This folder is sealed shut and coated in way too many warnings. Definitely not safe to open. Must be useful to higher-ups, better take it back."
+
+/obj/item/weapon/research/sekrits/New()
+	. = ..()
+	tag = "retrievethis"
 
 /obj/item/weapon/card/id/the_gold
 	name = "Gold Keycard"
@@ -262,13 +292,20 @@
 
 /obj/machinery/autolathe/ammo_fabricator/hacked
 	name = "hacked autolathe"
-	desc = "This autolathe was dragged here and hacked together from other machine parts."
-	stored_material =  list(DEFAULT_WALL_MATERIAL = 3000, "glass" = 0)
+	desc = "This autolathe was dragged here and hacked together from other machine parts. The material input is jammed shut."
+	stored_material =  list(DEFAULT_WALL_MATERIAL = 3500, "glass" = 0)
 	storage_capacity = list(DEFAULT_WALL_MATERIAL = 0, "glass" = 0)
-	machine_recipes = newlist(/datum/autolathe/recipe/ma5b_m118,/datum/autolathe/recipe/m6d_m224,/datum/autolathe/recipe/m443_fmj)
+	machine_recipes = newlist(\
+	/datum/autolathe/recipe/ma5b_m118,
+	/datum/autolathe/recipe/m6d_m224,
+	/datum/autolathe/recipe/m443_fmj,
+	/datum/autolathe/recipe/shotgun_box,
+	/datum/autolathe/recipe/shotgun_box/slugs,
+	/datum/autolathe/recipe/unsc_flare
+	)
 
 /obj/item/weapon/paper/crumpled/orders
-	info = "Office of Naval Intelligence Section 3<BR><BR>Any person that steps foot on the Achlys cannot leave the ship alive. Exterminate with extreme prejudice.<BR><BR>Do not allow your identity to be compromised by any means. Failure to obey these orders will result in subject termination.<BR><BR>Operatives that expose themselves or their orders must be terminated. <BR><BR>You know what must be done."
+	info = "Office of Naval Intelligence Section 3<BR><BR>Any person that steps foot on the Achlys cannot leave the ship alive, but the overall mission must be accomplished. Exterminate with extreme prejudice.<BR><BR>Do not allow your identity to be compromised by any means. Failure to obey these orders will result in subject termination.<BR><BR>Operatives that expose themselves or their orders must be terminated. <BR><BR>You know what must be done."
 
 /obj/random/achlock //Large objects to block things off in maintenance
 	name = "airlock randomization"
@@ -482,3 +519,10 @@
 		overlays += I
 		return
 	else return
+
+//Loot Markers//
+/obj/effect/loot_marker/potential_evidence
+	loot_type = "evidence"
+
+/obj/effect/loot_marker/potential_autolathe
+	loot_type = "autolathes"
