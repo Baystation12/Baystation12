@@ -13016,7 +13016,11 @@
 /area/shuttle/petrov/rd)
 "Hc" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/machinery/power/emitter,
+/obj/machinery/power/emitter{
+	desc = "A massive, heavy-duty industrial laser. This design is a fixed installation, capable of shooting in only one direction. It has a label on it reading 'SRV Petrov Analysis Lab.'";
+	name = "emitter (Petrov)";
+	req_lock_access = list("ACCESS_TORCH_PETROV_ANALYSIS")
+	},
 /obj/machinery/light{
 	dir = 8
 	},

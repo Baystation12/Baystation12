@@ -1024,7 +1024,9 @@
 "cf" = (
 /obj/structure/catwalk,
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/power/emitter/gyrotron,
+/obj/machinery/power/emitter/gyrotron{
+	req_lock_access = list()
+	},
 /turf/simulated/floor/exoplanet/concrete,
 /area/template_noop)
 "cg" = (
