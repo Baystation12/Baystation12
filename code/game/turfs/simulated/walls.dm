@@ -76,17 +76,17 @@
 	set_max_health(max_health)
 
 	// Minimum force required to damage the wall
-	health_min_damage = material.hardness * 2.5
+	health_min_damage = material.hardness * 1.5
 	if (reinf_material)
-		health_min_damage += round(reinf_material.hardness * 1.25)
+		health_min_damage += round(reinf_material.hardness * 1.5)
 	health_min_damage = round(health_min_damage / 10)
 
 	// Brute and burn armor
-	var/brute_armor = material.brute_armor * 0.5
-	var/burn_armor = material.burn_armor * 0.5
+	var/brute_armor = material.brute_armor * 0.2
+	var/burn_armor = material.burn_armor * 0.2
 	if (reinf_material)
-		brute_armor += reinf_material.brute_armor * 0.5
-		burn_armor += reinf_material.burn_armor * 0.5
+		brute_armor += reinf_material.brute_armor * 0.2
+		burn_armor += reinf_material.burn_armor * 0.2
 	// Materials enter armor as divisors, health system uses multipliers
 	if (brute_armor)
 		brute_armor = round(1 / brute_armor, 0.01)
