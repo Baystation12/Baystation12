@@ -57,7 +57,8 @@
 				/obj/item/weldingtool/largetank,
 				/obj/item/crowbar,
 				/obj/item/wrench,
-				/obj/item/device/flashlight)
+				/obj/item/device/flashlight,
+				/obj/item/device/flashlight/upgraded)
 
 /obj/random/technology_scanner
 	name = "random scanner"
@@ -628,7 +629,8 @@ obj/random/obstruction/spawn_choices()
 				/obj/item/device/flashlight/flare/glowstick/yellow,
 				/obj/item/device/flashlight/flare/glowstick/orange,
 				/obj/item/grenade/light,
-				/obj/item/device/oxycandle)
+				/obj/item/device/oxycandle,
+				/obj/item/device/flashlight/upgraded)
 
 /obj/random/smokes
 	name = "random smokeable"
