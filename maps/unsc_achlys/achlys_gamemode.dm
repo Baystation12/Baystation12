@@ -126,12 +126,11 @@
 	var/obj/effect/overmap/sector/achlys/A = locate() in world
 	var/obj/effect/landmark/map_data = A.map_z_data[1]
 	spawned_jammer = new /obj/machinery/overmap_comms/jammer (map_data.loc)
+	spawned_jammer.jam_power = 20
+	spawned_jammer.jam_range = 2
 
 	//activate the jammer
 	spawned_jammer.toggle_active()
-
-	populate_detachment_roles()
-
 
 /datum/game_mode/achlys/proc/handle_comms_jamming()
 	//a comms window opens in the asteroid field

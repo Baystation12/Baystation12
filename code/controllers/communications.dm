@@ -214,6 +214,7 @@ var/const/RADIO_MAGNETS = "radio_magnet"
 //in overmap tiles
 #define OVERMAP_RADIO_CLOSE 7
 #define OVERMAP_RADIO_FAR 20
+#define OVERMAP_TELECOMMS_BASE_RANGE 2
 
 var/global/datum/controller/radio/radio_controller
 
@@ -285,8 +286,8 @@ var/global/datum/controller/radio/radio_controller
 	var/list/broadcasting_sectors = list()
 
 	//let's check for nearby telecomms machinery which will interact with the signal
-	for(var/obj/effect/overmap/nearby_sector in range(7, source_sector))
-
+	for(var/obj/effect/overmap/nearby_sector in range(OVERMAP_TELECOMMS_BASE_RANGE, source_sector))
+/*
 		//check for jammers
 		for(var/obj/machinery/overmap_comms/jammer/tj in nearby_sector.telecomms_jammers)
 			if(!tj.active)
@@ -305,7 +306,7 @@ var/global/datum/controller/radio/radio_controller
 				show_image(M, speech_bubble)
 				to_chat(M, "\icon[source] <span class='danger'>[source] emits a loud screeching wail!</span>")
 			return
-
+*/
 		//check for receivers
 		var/sector_finished = 0
 		for(var/obj/machinery/overmap_comms/receiver/receiver in nearby_sector.telecomms_receivers)
@@ -410,7 +411,9 @@ var/global/datum/controller/radio/radio_controller
 		for(var/obj/machinery/overmap_comms/jammer/tj in GLOB.telecoms_jammers)
 			if(!tj.active)
 				continue
-			if(frequency in tj.ignore_freqs)
+			if(tj.jam_chance < 100 && !prob(tj.jam_chance))
+				continue
+			if(frequency in tj.ignore_freqs && (tj.jam_ignore_malfunction_chance == 0 || !prob(tj.jam_ignore_malfunction_chance)))
 				continue
 
 			//get nearby sectors to jam incoming signals (including the sector the jammer is located in)
@@ -418,12 +421,23 @@ var/global/datum/controller/radio/radio_controller
 			for(var/obj/effect/overmap/nearby_sector in range(tj.jam_range, jammed_sector))
 
 				//are there any radios in this sector that would hear the signal?
+				var/nearby_listening_sector = listening_sectors[nearby_sector]
 				if(listening_sectors.Find(nearby_sector))
 					//whoops this sector is getting jammed,  no radios will be getting incoming signals
-					radios -= listening_sectors[nearby_sector]
-					radios_out_of_range -= listening_sectors[nearby_sector]
-					radios_garbled -= listening_sectors[nearby_sector]
-					radios_encrypted -= listening_sectors[nearby_sector]
+					radios -= nearby_listening_sector
+					radios_garbled -= nearby_listening_sector
+					radios_out_of_range -= nearby_listening_sector
+					radios_encrypted -= nearby_listening_sector
+
+					if(tj.jam_power > 0)
+						if(prob(tj.jam_power))
+							radios_garbled += nearby_listening_sector
+						else
+							radios_out_of_range += nearby_listening_sector
+					else if(tj.jam_power == -1)
+						radios_out_of_range += nearby_listening_sector
+					else if(tj.jam_power == -2)
+						radios_garbled += nearby_listening_sector
 
 	//send the signal for the devices to do their own processing
 	//note that receive_signal() for radios above specifically does not output any chat messages to players
