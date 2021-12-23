@@ -1,5 +1,0 @@
-author: Imienny
-delete-after: true
-changes:
-  - rscadd: Added new whitelisted gamemode, Vox Raiders.
-  - bugfix: Peasantry is now allowed to use mouldy mirrors.
