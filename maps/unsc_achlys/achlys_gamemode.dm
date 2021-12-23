@@ -3,8 +3,8 @@
 #define ONI_ROLES list("ONI Operative")
 #define MISC_UNSC_ROLES list("Pelican Pilot","UNSC Dante CO",)
 #define COVENANT_ROLES list("Sangheili Prisoner") //no representation for human prisoner
-#define COMMS_CUTIN_EVENT_MIN 5 MINUTES
-#define COMMS_CUTIN_EVENT_MAX 15 MINUTES
+#define COMMS_CUTIN_EVENT_MIN 3 MINUTES
+#define COMMS_CUTIN_EVENT_MAX 6 MINUTES
 #define COMMS_CUTIN_EVENT_DURATION 2.5 MINUTES
 #define FLOOD_EVENT_Z_START 3
 #define FLOOD_EVENT_Z_END 5
@@ -116,7 +116,8 @@
 	to_world("<span class='danger'>The entire derelict violently shudders and lists forward heavily. The UNSC Achlys is about to have a severe and violent slipspace malfunction that will lurch the ship into oblivion.</span>")
 	for(var/mob/M in GLOB.player_list)
 		sound_to(M, 'code/modules/halo/sound/crash.ogg')
-	flood_spawn_event_major = 1 //Activate the event NOW.
+	do_flood_event_major()
+	do_flood_event_major()
 	evac_deadline = (world.time + EVAC_TIME)
 
 /datum/game_mode/achlys/post_setup()
@@ -166,6 +167,33 @@ All 3 of these cannot spawn on open space
 
 */
 
+/datum/game_mode/achlys/proc/do_flood_event_major()
+	for(var/i = FLOOD_EVENT_Z_START to FLOOD_EVENT_Z_END) //The numbers here are the z-levels containing the area we want to search.
+		var/list/valid_spawns = list()
+		for(var/turf/t in block(locate(1,1,i),locate(world.maxx,world.maxy,i)))
+			if(istype(t,/turf/simulated/open) || istype(t,/turf/space) || istype(t,/turf/simulated/wall) || istype(t,/turf/simulated/floor/reinforced/airless) || istype(t,/turf/simulated/floor/airless))
+				continue
+			valid_spawns += t
+		if(valid_spawns.len == 0)
+			continue
+		for(var/iter = 0 to 8)
+			new /obj/structure/biomass/tiny (pick(valid_spawns))
+
+/datum/game_mode/achlys/proc/do_flood_event_minor()
+	for(var/i = FLOOD_EVENT_Z_START to FLOOD_EVENT_Z_END) //The numbers here are the z-levels containing the area we want to search.
+		var/list/valid_spawns = list()
+		for(var/turf/t in block(locate(1,1,i),locate(world.maxx,world.maxy,i)))
+			if(istype(t,/turf/simulated/open) || istype(t,/turf/space) || istype(t,/turf/simulated/floor/reinforced/airless) || istype(t,/turf/simulated/floor/airless))
+				continue
+			valid_spawns += t
+		if(valid_spawns.len == 0)
+			continue
+		for(var/iter = 0 to 40)
+			var/typepath_to_spawn = /obj/item/flood_spore
+			if(iter > 30)
+				typepath_to_spawn = /obj/item/flood_spore_growing
+			new typepath_to_spawn (pick(valid_spawns))
+
 /datum/game_mode/achlys/process()
 	..()
 	if(!has_configured)
@@ -174,6 +202,7 @@ All 3 of these cannot spawn on open space
 			populate_items_retrieve()
 			populate_detachment_roles()
 			deactivate_unsc_jobs()
+			do_flood_event_major()
 			has_configured = 1
 
 	handle_comms_jamming()
@@ -181,39 +210,19 @@ All 3 of these cannot spawn on open space
 	if(flood_spawn_event_major != 0 && world.time > flood_spawn_event_major)
 		flood_spawn_event_minor = 1 //Trigger minor-event ASAP.
 		flood_spawn_event_major = world.time + FLOOD_EVENT_REPEAT_TIME
-		for(var/i = FLOOD_EVENT_Z_START to FLOOD_EVENT_Z_END) //The numbers here are the z-levels containing the area we want to search.
-			var/list/valid_spawns = list()
-			for(var/turf/t in block(locate(1,1,i),locate(world.maxx,world.maxy,i)))
-				if(istype(t,/turf/simulated/open) || istype(t,/turf/space) || istype(t,/turf/simulated/wall) || istype(t,/turf/simulated/floor/reinforced/airless) || istype(t,/turf/simulated/floor/airless))
-					continue
-				valid_spawns += t
-			if(valid_spawns.len == 0)
-				continue
-			for(var/iter = 0 to 8)
-				new /obj/structure/biomass/tiny (pick(valid_spawns))
+		do_flood_event_major()
 
 	if(flood_spawn_event_minor != 0 && world.time > flood_spawn_event_minor)
 		flood_spawn_event_minor = 0
-		for(var/i = FLOOD_EVENT_Z_START to FLOOD_EVENT_Z_END) //The numbers here are the z-levels containing the area we want to search.
-			var/list/valid_spawns = list()
-			for(var/turf/t in block(locate(1,1,i),locate(world.maxx,world.maxy,i)))
-				if(istype(t,/turf/simulated/open) || istype(t,/turf/space) || istype(t,/turf/simulated/floor/reinforced/airless) || istype(t,/turf/simulated/floor/airless))
-					continue
-				valid_spawns += t
-			if(valid_spawns.len == 0)
-				continue
-			for(var/iter = 0 to 40)
-				var/typepath_to_spawn = /obj/item/flood_spore
-				if(iter > 30)
-					typepath_to_spawn = /obj/item/flood_spore_growing
-				new typepath_to_spawn (pick(valid_spawns))
+		do_flood_event_minor()
 
 /datum/game_mode/achlys/proc/check_item_destroy_status()
 	if(items_to_destroy.len == 0)
 		. = 1
 		return
-	for(var/atom/item in items_to_destroy)
+	for(var/i in items_to_destroy)
 		. = 0
+		var/atom/item = i
 		if(isnull(item) || item.loc == null)
 			. = 1
 		if(istype(item,/obj/machinery))
@@ -229,6 +238,13 @@ All 3 of these cannot spawn on open space
 	for(var/atom/movable/item in items_to_retrieve)
 		if(!(item.loc == retrieval_loc))
 			. = 0
+/datum/game_mode/achlys/proc/kill_unevaced_players()
+	var/mob/living/simple_animal/hostile/flood/spawned_flood = new
+	for(var/client/client in GLOB.clients)
+		var/mob/living/carbon/human/h = client.mob
+		if(istype(h) && h.z >= FLOOD_EVENT_Z_START && h.z <= FLOOD_EVENT_Z_END)
+			spawned_flood.do_infect(h)
+	qdel(spawned_flood)
 
 /datum/game_mode/achlys/check_finished()
 	. = 0
@@ -247,6 +263,7 @@ All 3 of these cannot spawn on open space
 
 /datum/game_mode/achlys/proc/announce_win()
 	var/text = ""
+	kill_unevaced_players()
 	var/list/living_players_detachment = check_players_live("Detachment")
 	var/list/living_players_oni = check_players_live("ONI")
 	var/was_success = check_item_destroy_status()
