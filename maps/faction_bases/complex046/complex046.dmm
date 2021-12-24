@@ -302,7 +302,6 @@
 "mS" = (/obj/effect/landmark/dropship_land_point/unsc/no_artifact{name = "ONI Complex 046 (Geminus) Vehicle Bay"},/obj/effect/floor_decal/industrial/hatch/yellow,/turf/simulated/floor/road{tag = "icon-road_empty (NORTH)"; icon_state = "road_empty"; dir = 1},/area/faction_base/oni/garage)
 "nV" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Plasteel Crate"; tag = "icon-secgearcrate"},/obj/item/stack/material/plasteel/fifty,/obj/item/stack/material/plasteel/fifty,/obj/machinery/light/small{dir = 8},/obj/item/stack/material/plasteel/fifty,/obj/item/stack/material/plasteel/fifty,/obj/item/stack/material/plasteel/fifty,/obj/item/stack/material/plasteel/fifty,/turf/simulated/floor/tech/maint,/area/faction_base/oni/hangar)
 "nX" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
-"od" = (/obj/machinery/door/airlock/halo{name = "Nuclear Payload"; req_access = list(142)},/turf/unsimulated/mineral,/area/faction_base/oni/research)
 "os" = (/obj/structure/noticeboard,/turf/simulated/wall/iron/blue,/area/faction_base/oni/barracks)
 "oS" = (/obj/machinery/light,/obj/structure/closet/crate/freezer,/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
 "pe" = (/obj/structure/ore_box,/turf/unsimulated/floor/dirt{icon = 'code/modules/halo/misc/TWS- Assests/floors/floors.dmi'},/area/faction_base/oni/digsite)
@@ -328,6 +327,7 @@
 "wy" = (/obj/machinery/vending/armory/attachment,/obj/structure/window/reinforced/treated{dir = 1},/turf/simulated/floor/reinforced,/area/faction_base/oni/barracks)
 "wW" = (/obj/structure/urinal,/turf/unsimulated/floor/dirt{icon = 'code/modules/halo/misc/TWS- Assests/floors/floors.dmi'},/area/faction_base/oni/digsite)
 "xa" = (/obj/structure/ai_routing_node/unsc,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
+"xf" = (/obj/machinery/door/airlock/halo{name = "Nuclear Payload"; req_access = list(142)},/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
 "xx" = (/obj/structure/repair_bench,/turf/simulated/floor/tech/gray,/area/faction_base/oni/barracks)
 "xB" = (/obj/structure/window/reinforced/treated,/obj/machinery/pointbased_vending/armory/hybrid,/turf/simulated/floor/reinforced,/area/faction_base/oni/barracks)
 "xD" = (/obj/machinery/door/airlock/halo{name = "Storage"; req_access = list(142)},/turf/space,/area/faction_base/oni/hangar)
@@ -437,7 +437,7 @@ aabhbhbhbhbhbhbhbhbhbhaaeEeEeEaabxbxbxbxbxbxbxbxbxbxyVbxbxbxbxbFeHbJbJebebbJlmbF
 aabhbCbCbCbCbCbCbCbCbhaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaWdbFtmbJbJebebbJYmbFeOePePhkePePeOeOeOeOaa
 aabhbCbCbCbCbCbCbCbCbhaabQbQbQbQbQbQbQbQaabRbRbRbRbRbRbRbRaaWdbFSNbJbJbJVobJYabFeOePePMPMNwWeOeOeOeOaa
 aabhbCbCbCbCbCbCbCbCbhaabQbQbQbQbQbQbQbQaabRbRbRbRbRbRbRbRaaWdbFbFSxSxSxbFbJkPbFeOhkMNMNeOeOeOeOeOeOaa
-aabhbCbCbCbCbCbCbCbCbhaabQbQbQbQbQbQbQbQaabRbRbRbRbRbRbRbRaaWdUluUbJbJbJbFodbFbFeOeOeOeOeOeOeOeOeOeOaa
+aabhbCbCbCbCbCbCbCbCbhaabQbQbQbQbQbQbQbQaabRbRbRbRbRbRbRbRaaWdUluUbJbJbJbFxfbFbFeOeOeOeOeOeOeOeOeOeOaa
 aabhbCbCbCbCbCbCbCbCbhaabQbQbQbQbQbQbQbQaabRbRbRbRbRbRbRbRaaWdNebJbJbJbJbFaxfvbFeOeOeOeOeOeOeOeOeOeOaa
 aabhcMbCbCbCbCbCbCbCbhaabQbQbQbQbQbQbQbQaabRbRbRbRbRbRbRbRaaWdejehebkFglbFfegJbFeOeOeOeOeOeOeOeOeOeOaa
 aafAbhbhbhbhbhbhbhbhbhaadbbQbQbQbQbQbQbQaaesbRbRbRbRbRbRbRaaWdbFbFbFbFbFbFbFbFbFeOeOeOeOeOeOeOeOeOeOaa
