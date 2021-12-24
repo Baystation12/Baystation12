@@ -7510,6 +7510,10 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/machinery/tele_beacon{
+	autoset_name = 0;
+	beacon_name = "Engineering - Lobby"
+	},
 /turf/simulated/floor/plating,
 /area/engineering/foyer)
 "qK" = (

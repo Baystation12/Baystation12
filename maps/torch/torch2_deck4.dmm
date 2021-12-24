@@ -5153,7 +5153,6 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/tele_beacon,
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 9;
 	icon_state = "corner_white"
@@ -5293,6 +5292,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/machinery/tele_beacon,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/fore)
 "sB" = (
@@ -5411,7 +5411,6 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/obj/machinery/tele_beacon,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fourthdeck/center)
 "sI" = (
@@ -5946,7 +5945,6 @@
 	dir = 1;
 	icon_state = "pipe-c"
 	},
-/obj/machinery/tele_beacon,
 /turf/simulated/floor/tiled,
 /area/storage/primary)
 "ub" = (
