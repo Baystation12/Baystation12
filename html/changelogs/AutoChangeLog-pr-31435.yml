@@ -1,6 +1,0 @@
-author: SierraKomodo
-delete-after: true
-changes:
-  - balance: Wall damage resistance calculations have been tweaked, making them hopefully
-      slightly easier to break down. Changes more dramatically affect reinforced walls
-      than they do standard walls.
