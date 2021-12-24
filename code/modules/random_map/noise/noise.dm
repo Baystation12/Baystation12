@@ -21,9 +21,9 @@
 	// Make sure the grid is a square with limits that are
 	// (n^2)+1, otherwise diamond-square won't work.
 	if(!IsPowerOfTwo((limit_x-1)))
-		limit_x = RoundUpToPowerOfTwo(limit_x) + 1
+		limit_x = Ceilp(limit_x, 2) + 1
 	if(!IsPowerOfTwo((limit_y-1)))
-		limit_y = RoundUpToPowerOfTwo(limit_y) + 1
+		limit_y = Ceilp(limit_y, 2) + 1
 	// Sides must be identical lengths.
 	if(limit_x > limit_y)
 		limit_y = limit_x
