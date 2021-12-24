@@ -1205,7 +1205,6 @@
 "cs" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
-/obj/machinery/tele_beacon,
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -28;
@@ -5152,13 +5151,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/machinery/tele_beacon,
 /obj/structure/disposalpipe/sortjunction{
 	dir = 4;
 	icon_state = "pipe-j1s";
 	name = "Chief Medical Officer";
 	sort_type = "Chief Medical Officer"
 	},
+/obj/machinery/tele_beacon,
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
 "lD" = (
@@ -7084,7 +7083,6 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 1
 	},
-/obj/machinery/tele_beacon,
 /obj/structure/cable/green{
 	d1 = 2;
 	d2 = 8;

@@ -110,3 +110,12 @@
 
 /obj/random/date_based/christmas/tree/spawn_choices()
 	return list(/obj/structure/flora/tree/pine/xmas)
+
+/obj/random/date_based/christmas/tree/fountain
+	name = "Christmas Tree (Fountain Replacement)"
+
+/obj/random/date_based/christmas/tree/fountain/check_date()
+	if(date_check.IsValid())
+		return spawn_item()
+	else
+		return new /obj/structure/fountain/mundane(loc) //spawns fountain instead of tree

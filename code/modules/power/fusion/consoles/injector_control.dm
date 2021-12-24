@@ -37,7 +37,7 @@
 			if(!new_injection_rate)
 				to_chat(user, SPAN_WARNING("That's not a valid injection rate."))
 				return TOPIC_NOACTION
-			I.injection_rate = Clamp(new_injection_rate, 0, 100) / 100
+			I.injection_rate = clamp(new_injection_rate, 0, 100) / 100
 		return TOPIC_REFRESH
 
 /obj/machinery/computer/fusion/fuel_control/build_ui_data()

@@ -97,38 +97,38 @@
 /obj/structure/bookcase/manuals/medical
 	name = "Medical Manuals bookcase"
 
-	New()
-		..()
-		new /obj/item/book/manual/medical_cloning(src)
-		new /obj/item/book/manual/medical_diagnostics_manual(src)
-		new /obj/item/book/manual/medical_diagnostics_manual(src)
-		new /obj/item/book/manual/medical_diagnostics_manual(src)
-		new /obj/item/book/manual/chemistry_recipes(src)
-		update_icon()
+/obj/structure/bookcase/manuals/medical/New()
+	..()
+	new /obj/item/book/manual/medical_cloning(src)
+	new /obj/item/book/manual/medical_diagnostics_manual(src)
+	new /obj/item/book/manual/medical_diagnostics_manual(src)
+	new /obj/item/book/manual/medical_diagnostics_manual(src)
+	new /obj/item/book/manual/chemistry_recipes(src)
+	update_icon()
 
 
 /obj/structure/bookcase/manuals/engineering
 	name = "Engineering Manuals bookcase"
 
-	New()
-		..()
-		new /obj/item/book/manual/engineering_construction(src)
-		new /obj/item/book/manual/engineering_particle_accelerator(src)
-		new /obj/item/book/manual/engineering_hacking(src)
-		new /obj/item/book/manual/engineering_guide(src)
-		new /obj/item/book/manual/atmospipes(src)
-		new /obj/item/book/manual/engineering_singularity_safety(src)
-		new /obj/item/book/manual/evaguide(src)
-		new /obj/item/book/manual/rust_engine(src)
-		update_icon()
+/obj/structure/bookcase/manuals/engineering/New()
+	..()
+	new /obj/item/book/manual/engineering_construction(src)
+	new /obj/item/book/manual/engineering_particle_accelerator(src)
+	new /obj/item/book/manual/engineering_hacking(src)
+	new /obj/item/book/manual/engineering_guide(src)
+	new /obj/item/book/manual/atmospipes(src)
+	new /obj/item/book/manual/engineering_singularity_safety(src)
+	new /obj/item/book/manual/evaguide(src)
+	new /obj/item/book/manual/rust_engine(src)
+	update_icon()
 
 /obj/structure/bookcase/manuals/research_and_development
 	name = "R&D Manuals bookcase"
 
-	New()
-		..()
-		new /obj/item/book/manual/research_and_development(src)
-		update_icon()
+/obj/structure/bookcase/manuals/research_and_development/New()
+	..()
+	new /obj/item/book/manual/research_and_development(src)
+	update_icon()
 
 
 /*
@@ -240,15 +240,15 @@
 	..()
 	if(url)		// URL provided for this manual
 		// If we haven't wikiurl or it included in url - just use url
-		if(config.wikiurl && !findtextEx(url, config.wikiurl, 1, length(config.wikiurl)+1))
+		if(config.wiki_url && !findtextEx(url, config.wiki_url, 1, length(config.wiki_url)+1))
 			// If we have wikiurl, but it hasn't "index.php" then add it and making full link in url
-			if(config.wikiurl && !findtextEx(config.wikiurl, "/index.php", -10))
-				if(findtextEx(config.wikiurl, "/", -1))
-					url = config.wikiurl + "index.php?title=" + url
+			if(config.wiki_url && !findtextEx(config.wiki_url, "/index.php", -10))
+				if(findtextEx(config.wiki_url, "/", -1))
+					url = config.wiki_url + "index.php?title=" + url
 				else
-					url = config.wikiurl + "/index.php?title=" + url
+					url = config.wiki_url + "/index.php?title=" + url
 			else	//Or just making full link in url
-				url = config.wikiurl + "?title=" + url
+				url = config.wiki_url + "?title=" + url
 		dat = {"
 			<html>
 				<head>

@@ -536,7 +536,7 @@ var/list/global/slot_flags_enumeration = list(
 	if (user.a_intent == I_HELP)
 		. = 0
 	if (.)
-		. += Clamp((user.get_skill_value(SKILL_COMBAT) * 10) - 20, 0, 75)
+		. += clamp((user.get_skill_value(SKILL_COMBAT) * 10) - 20, 0, 75)
 
 /obj/item/proc/on_disarm_attempt(mob/target, mob/living/attacker)
 	if(force < 1)

@@ -76,7 +76,7 @@
 
 /obj/machinery/floodlight/RefreshParts()//if they're insane enough to modify a floodlight, let them
 	..()
-	var/light_mod = Clamp(total_component_rating_of_type(/obj/item/stock_parts/capacitor), 0, 10)
+	var/light_mod = clamp(total_component_rating_of_type(/obj/item/stock_parts/capacitor), 0, 10)
 	l_max_bright = light_mod? light_mod*0.01 + initial(l_max_bright) : initial(l_max_bright)/2 //gives us between 0.8-0.9 with capacitor, or 0.4 without one
 	l_inner_range = light_mod     + initial(l_inner_range)
 	l_outer_range = light_mod*1.5 + initial(l_outer_range)

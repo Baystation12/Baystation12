@@ -47,7 +47,7 @@
 /proc/color_rotation(angle)
 	if(angle == 0)
 		return color_identity()
-	angle = Clamp(angle, -180, 180)
+	angle = clamp(angle, -180, 180)
 	var/cos = cos(angle)
 	var/sin = sin(angle)
 
@@ -62,7 +62,7 @@
 
 //Makes everything brighter or darker without regard to existing color or brightness
 /proc/color_brightness(power)
-	power = Clamp(power, -255, 255)
+	power = clamp(power, -255, 255)
 	power = power/255
 
 	return list(1,0,0, 0,1,0, 0,0,1, power,power,power)
@@ -82,7 +82,7 @@
 
 //Exxagerates or removes brightness
 /proc/color_contrast(value)
-	value = Clamp(value, -100, 100)
+	value = clamp(value, -100, 100)
 	if(value == 0)
 		return color_identity()
 
@@ -105,7 +105,7 @@
 /proc/color_saturation(value as num)
 	if(value == 0)
 		return color_identity()
-	value = Clamp(value, -100, 100)
+	value = clamp(value, -100, 100)
 	if(value > 0)
 		value *= 3
 	var/x = 1 + value / 100

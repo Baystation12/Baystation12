@@ -1,6 +1,3 @@
-
-//Not to be confused with /obj/item/reagent_containers/food/drinks/bottle
-
 /obj/item/reagent_containers/glass/bottle
 	name = "bottle"
 	desc = "A small bottle."
@@ -16,48 +13,57 @@
 	obj_flags = 0
 	volume = 60
 
-	on_reagent_change()
-		update_icon()
 
-	pickup(mob/user)
-		..()
-		update_icon()
-
-	dropped(mob/user)
-		..()
-		update_icon()
-
-	attack_hand()
-		..()
-		update_icon()
-
-	New()
-		..()
-		if(!icon_state)
-			icon_state = "bottle-[rand(1,4)]"
-
+/obj/item/reagent_containers/glass/bottle/on_reagent_change()
 	update_icon()
-		overlays.Cut()
 
-		if(reagents.total_volume && (icon_state == "bottle-1" || icon_state == "bottle-2" || icon_state == "bottle-3" || icon_state == "bottle-4"))
-			var/image/filling = image('icons/obj/reagentfillings.dmi', src, "[icon_state]10")
 
-			var/percent = round((reagents.total_volume / volume) * 100)
-			switch(percent)
-				if(0 to 9)		filling.icon_state = "[icon_state]--10"
-				if(10 to 24) 	filling.icon_state = "[icon_state]-10"
-				if(25 to 49)	filling.icon_state = "[icon_state]-25"
-				if(50 to 74)	filling.icon_state = "[icon_state]-50"
-				if(75 to 79)	filling.icon_state = "[icon_state]-75"
-				if(80 to 90)	filling.icon_state = "[icon_state]-80"
-				if(91 to INFINITY)	filling.icon_state = "[icon_state]-100"
+/obj/item/reagent_containers/glass/bottle/pickup(mob/user)
+	..()
+	update_icon()
 
-			filling.color = reagents.get_color()
-			overlays += filling
 
-		if (!is_open_container())
-			var/image/lid = image(icon, src, "lid_bottle")
-			overlays += lid
+/obj/item/reagent_containers/glass/bottle/dropped(mob/user)
+	..()
+	update_icon()
+
+
+/obj/item/reagent_containers/glass/bottle/attack_hand()
+	..()
+	update_icon()
+
+
+/obj/item/reagent_containers/glass/bottle/New()
+	..()
+	if (!icon_state)
+		icon_state = "bottle-[rand(1,4)]"
+
+
+/obj/item/reagent_containers/glass/bottle/update_icon()
+	overlays.Cut()
+	if (reagents.total_volume && (icon_state == "bottle-1" || icon_state == "bottle-2" || icon_state == "bottle-3" || icon_state == "bottle-4"))
+		var/image/filling = image('icons/obj/reagentfillings.dmi', src, "[icon_state]10")
+		var/percent = round((reagents.total_volume / volume) * 100)
+		switch (percent)
+			if (0 to 9)
+				filling.icon_state = "[icon_state]--10"
+			if (10 to 24)
+				filling.icon_state = "[icon_state]-10"
+			if (25 to 49)
+				filling.icon_state = "[icon_state]-25"
+			if (50 to 74)
+				filling.icon_state = "[icon_state]-50"
+			if (75 to 79)
+				filling.icon_state = "[icon_state]-75"
+			if (80 to 90)
+				filling.icon_state = "[icon_state]-80"
+			if (91 to INFINITY)
+				filling.icon_state = "[icon_state]-100"
+		filling.color = reagents.get_color()
+		overlays += filling
+	if (!is_open_container())
+		var/image/lid = image(icon, src, "lid_bottle")
+		overlays += lid
 
 
 /obj/item/reagent_containers/glass/bottle/inaprovaline
@@ -66,10 +72,12 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
 
+
 /obj/item/reagent_containers/glass/bottle/inaprovaline/New()
 	..()
 	reagents.add_reagent(/datum/reagent/inaprovaline, 60)
 	update_icon()
+
 
 /obj/item/reagent_containers/glass/bottle/kelotane
 	name = "kelotane bottle"
@@ -77,10 +85,12 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
 
+
 /obj/item/reagent_containers/glass/bottle/kelotane/New()
 	..()
 	reagents.add_reagent(/datum/reagent/kelotane, 60)
 	update_icon()
+
 
 /obj/item/reagent_containers/glass/bottle/dexalin
 	name = "dexalin bottle"
@@ -88,16 +98,19 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
 
+
 /obj/item/reagent_containers/glass/bottle/dexalin/New()
 	..()
 	reagents.add_reagent(/datum/reagent/dexalin, 60)
 	update_icon()
+
 
 /obj/item/reagent_containers/glass/bottle/toxin
 	name = "toxin bottle"
 	desc = "A small bottle of toxins. Do not drink, it is poisonous."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-3"
+
 
 /obj/item/reagent_containers/glass/bottle/toxin/New()
 	..()
@@ -111,6 +124,7 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-3"
 
+
 /obj/item/reagent_containers/glass/bottle/cyanide/New()
 	..()
 	reagents.add_reagent(/datum/reagent/toxin/cyanide, 30) //volume changed to match chloral
@@ -122,6 +136,7 @@
 	desc = "A small bottle of soporific. Just the fumes make you sleepy."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-3"
+
 
 /obj/item/reagent_containers/glass/bottle/stoxin/New()
 	..()
@@ -135,6 +150,7 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-3"
 
+
 /obj/item/reagent_containers/glass/bottle/chloralhydrate/New()
 	..()
 	reagents.add_reagent(/datum/reagent/chloralhydrate, 30)		//Intentionally low since it is so strong. Still enough to knock someone out.
@@ -146,6 +162,7 @@
 	desc = "A small bottle of dylovene. Counters poisons, and repairs damage. A wonder drug."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
+
 
 /obj/item/reagent_containers/glass/bottle/antitoxin/New()
 	..()
@@ -159,6 +176,7 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-1"
 
+
 /obj/item/reagent_containers/glass/bottle/mutagen/New()
 	..()
 	reagents.add_reagent(/datum/reagent/mutagen, 60)
@@ -170,6 +188,7 @@
 	desc = "A small bottle."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-1"
+
 
 /obj/item/reagent_containers/glass/bottle/ammonia/New()
 	..()
@@ -183,6 +202,7 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
 
+
 /obj/item/reagent_containers/glass/bottle/eznutrient/New()
 	..()
 	reagents.add_reagent(/datum/reagent/toxin/fertilizer/eznutrient, 60)
@@ -194,6 +214,7 @@
 	desc = "A small bottle."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
+
 
 /obj/item/reagent_containers/glass/bottle/left4zed/New()
 	..()
@@ -207,6 +228,7 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
 
+
 /obj/item/reagent_containers/glass/bottle/robustharvest/New()
 	..()
 	reagents.add_reagent(/datum/reagent/toxin/fertilizer/robustharvest, 60)
@@ -219,6 +241,7 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
 
+
 /obj/item/reagent_containers/glass/bottle/diethylamine/New()
 	..()
 	reagents.add_reagent(/datum/reagent/diethylamine, 60)
@@ -230,6 +253,7 @@
 	desc = "A small bottle. Contains a small amount of Polytrinic Acid."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
+
 
 /obj/item/reagent_containers/glass/bottle/pacid/New()
 	..()
@@ -256,6 +280,7 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
 
+
 /obj/item/reagent_containers/glass/bottle/capsaicin/New()
 	..()
 	reagents.add_reagent(/datum/reagent/capsaicin, 60)
@@ -267,6 +292,7 @@
 	desc = "A small bottle. Contains cold sauce."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-4"
+
 
 /obj/item/reagent_containers/glass/bottle/frostoil/New()
 	..()
@@ -283,6 +309,7 @@
 	var/datum/reagent/starting_reagent = /datum/reagent/dye
 	var/starting_vol = 60
 
+
 /obj/item/reagent_containers/glass/bottle/dye/Initialize()
 	. = ..()
 	reagents.add_reagent(starting_reagent, starting_vol)
@@ -293,6 +320,7 @@
 	name = "polychromic dye bottle"
 	desc = "A little bottle used to hold dye or food coloring, with a narrow bottleneck for handling small amounts. \
 			Outfitted with a tiny mechanism that can change the color of its contained dye, opening up infinite possibilities."
+
 
 /obj/item/reagent_containers/glass/bottle/dye/polychromic/attack_self(mob/living/user)
 	var/datum/reagent/heldDye = reagents.get_reagent(starting_reagent)
@@ -305,6 +333,7 @@
 	to_chat(user, SPAN_NOTICE("The dye in \the [src] swirls and takes on a new color."))
 	heldDye.color = new_color
 	update_icon()
+
 
 /obj/item/reagent_containers/glass/bottle/dye/polychromic/strong
 	starting_reagent = /datum/reagent/dye/strong

@@ -112,7 +112,7 @@
 	/// Gamemodes which end instantly will instead keep on going until the round ends by escape shuttle or nuke.
 	var/static/continous_rounds = FALSE
 
-	var/static/fps = 20
+	var/static/fps = 30
 
 	/// SSinitialization throttling
 	var/static/tick_limit_mc_init = TICK_LIMIT_MC_INIT_DEFAULT
@@ -204,13 +204,17 @@
 
 	var/static/banappeals
 
-	var/static/wikiurl
+	var/static/wiki_url
 
-	var/static/forumurl
+	var/static/rules_url
 
-	var/static/githuburl
+	var/static/lore_url
 
-	var/static/issuereporturl
+	var/static/forum_url
+
+	var/static/source_url
+
+	var/static/issue_url
 
 	var/static/list/chat_markup
 
@@ -575,14 +579,18 @@
 				server = value
 			if ("banappeals")
 				banappeals = value
-			if ("wikiurl")
-				wikiurl = value
-			if ("forumurl")
-				forumurl = value
-			if ("githuburl")
-				githuburl = value
-			if ("issuereporturl")
-				issuereporturl = value
+			if ("wiki_url")
+				wiki_url = value
+			if ("rules_url")
+				rules_url = value
+			if ("lore_url")
+				lore_url = value
+			if ("forum_url")
+				forum_url = value
+			if ("source_url")
+				source_url = value
+			if ("issue_url")
+				issue_url = value
 			if ("ghosts_can_possess_animals")
 				ghosts_can_possess_animals = TRUE
 			if ("guest_jobban")
@@ -910,7 +918,7 @@
 
 /configuration/proc/build_mode_cache()
 	gamemode_cache = list()
-	FOR_BLIND(datum/game_mode/M, subtypesof(/datum/game_mode))
+	for (var/datum/game_mode/M as anything in subtypesof(/datum/game_mode))
 		var/tag = initial(M.config_tag)
 		if (!tag)
 			continue

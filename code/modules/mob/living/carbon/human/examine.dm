@@ -196,6 +196,10 @@
 	if(became_older)
 		msg += "[T.He] looks a lot older than you remember.\n"
 
+	for (var/obj/aura/web/W in auras)
+		msg += SPAN_WARNING("[T.He] is covered in webs!\n")
+		break
+
 	var/list/wound_flavor_text = list()
 	var/applying_pressure = ""
 	var/list/shown_objects = list()

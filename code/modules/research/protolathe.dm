@@ -61,9 +61,9 @@
 		else
 			reagents.maximum_volume = T
 
-	max_material_storage = 75000 * Clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 0, 10)
+	max_material_storage = 75000 * clamp(total_component_rating_of_type(/obj/item/stock_parts/matter_bin), 0, 10)
 
-	T = Clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator), 0, 6)
+	T = clamp(total_component_rating_of_type(/obj/item/stock_parts/manipulator), 0, 6)
 	mat_efficiency = 1 - (T - 2) / 8
 	speed = T / 2
 	..()

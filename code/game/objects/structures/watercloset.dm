@@ -83,7 +83,7 @@
 	if(fluid_here <= 0)
 		return
 
-	T.remove_fluid(ceil(fluid_here*drainage))
+	T.remove_fluid(Ceil(fluid_here*drainage))
 	T.show_bubbles()
 	if(world.time > last_gurgle + 80)
 		last_gurgle = world.time
@@ -320,7 +320,7 @@
 	if(!on || !istype(M)) return
 
 	var/water_temperature = temperature_settings[watertemp]
-	var/temp_adj = between(BODYTEMP_COOLING_MAX, water_temperature - M.bodytemperature, BODYTEMP_HEATING_MAX)
+	var/temp_adj = clamp(water_temperature - M.bodytemperature, BODYTEMP_COOLING_MAX, BODYTEMP_HEATING_MAX)
 	M.bodytemperature += temp_adj
 
 	if(ishuman(M))

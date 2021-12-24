@@ -299,7 +299,7 @@
 	if(W.item_flags & ITEM_FLAG_NO_BLUDGEON) return
 
 	var/area/A = get_area(src)
-	if (!A.can_modify_area())
+	if (!A?.can_modify_area())
 		to_chat(user, SPAN_NOTICE("There appears to be no way to dismantle \the [src]!"))
 		return
 

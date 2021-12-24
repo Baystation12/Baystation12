@@ -7,10 +7,11 @@
 	icon_state = "emitter"
 	anchored = FALSE
 	density = TRUE
-	req_access = list(access_engine_equip)
 	active_power_usage = 100 KILOWATTS
 	obj_flags = OBJ_FLAG_ROTATABLE
 
+	/// Access required to lock or unlock the emitter. Separate variable to prevent `req_access` from blocking use of the emitter while unlocked.
+	var/list/req_lock_access = list(access_engine_equip)
 	var/efficiency = 0.3	// Energy efficiency. 30% at this time, so 100kW load means 30kW laser pulses.
 	var/active = FALSE
 	var/powered = FALSE
@@ -270,7 +271,7 @@
 		if (emagged)
 			to_chat(user, SPAN_WARNING("The control lock seems to be broken."))
 			return
-		if (allowed(user))
+		if (has_access(req_lock_access, W.GetAccess()))
 			locked = !locked
 			user.visible_message(
 				SPAN_NOTICE("\The [user] [locked ? "locks" : "unlocks"] \the [src]'s controls."),
@@ -287,6 +288,7 @@
 		locked = FALSE
 		emagged = TRUE
 		req_access.Cut()
+		req_lock_access.Cut()
 		user.visible_message(SPAN_WARNING("\The [user] messes with \the [src]'s controls."), SPAN_WARNING("You short out the control lock."))
 		user.playsound_local(loc, "sparks", 50, TRUE)
 		return TRUE

@@ -364,6 +364,17 @@ h1.alert, h2.alert		{color: #000080;}
 .good                   {color: #4f7529; font-weight: bold;}
 .bad                    {color: #ee0000; font-weight: bold;}
 
+/* Admin: Misc */
+.who_dead		{color: #000000;}
+.who_observing		{color: #808080;}
+.who_new_account	{color: #ff0000;}
+.who_newish_account	{color: #ff8c00;}
+.who_antagonist		{color: #ff0000;}
+
+/* Admin: PM */
+.pm			{color: #ff0000;}
+.staff_pm		{color: #0000FF;}
+
 @keyframes hypnocolor {
 	0%		{color: #0d0d0d;}
 	25%		{color: #410194;}

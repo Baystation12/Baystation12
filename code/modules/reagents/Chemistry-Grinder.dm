@@ -87,7 +87,7 @@
 				for (var/chem in M.chem_products)
 					sheet_volume += M.chem_products[chem] * skill_multiplier
 				var/obj/item/stack/material/S = I
-				var/used_sheets = min(ceil((container.reagents.maximum_volume - container.reagents.total_volume) / sheet_volume), S.get_amount())
+				var/used_sheets = min(Ceil((container.reagents.maximum_volume - container.reagents.total_volume) / sheet_volume), S.get_amount())
 				var/used_all = used_sheets == S.get_amount()
 				S.use(used_sheets)
 				for (var/chem in M.chem_products)
@@ -204,7 +204,7 @@
 		if (!container)
 			window += " (not attached)"
 		else
-			window += " (\an [container], [PERCENT(container.reagents.total_volume, container.reagents.maximum_volume, 1)]% full)"
+			window += " (\an [container], [Percent(container.reagents.total_volume, container.reagents.maximum_volume, 1)]% full)"
 			window += "<br><a href='?src=\ref[src];action=detach'>(detach)</a><br>"
 			for (var/datum/reagent/R in container.reagents.reagent_list)
 				window += "<br>[R.volume] - [R.name]"

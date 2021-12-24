@@ -734,6 +734,19 @@ var/global/floorIsLava = 0
 		log_admin("Announce: [key_name(usr)] : [message]")
 	SSstatistics.add_field_details("admin_verb","A") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+
+GLOBAL_VAR_INIT(skip_allow_lists, FALSE)
+
+/datum/admins/proc/toggle_allowlists()
+	set category = "Server"
+	set name = "Toggle Allow Lists"
+	if(!check_rights(R_ADMIN))
+		return
+	GLOB.skip_allow_lists = !GLOB.skip_allow_lists
+	var/outcome = GLOB.skip_allow_lists ? "disabled" : "enabled"
+	log_and_message_admins("[key_name(usr)] [outcome] allow lists.")
+
+
 /datum/admins/proc/toggleooc()
 	set category = "Server"
 	set desc="Globally Toggles OOC"

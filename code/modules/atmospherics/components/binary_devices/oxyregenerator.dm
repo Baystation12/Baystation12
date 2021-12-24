@@ -31,17 +31,17 @@
 	carbon_efficiency = initial(carbon_efficiency)
 	carbon_efficiency += 0.25 * total_component_rating_of_type(/obj/item/stock_parts/matter_bin)
 	carbon_efficiency -= 0.25 * number_of_components(/obj/item/stock_parts/matter_bin)
-	carbon_efficiency = Clamp(carbon_efficiency, initial(carbon_efficiency), 5)
+	carbon_efficiency = clamp(carbon_efficiency, initial(carbon_efficiency), 5)
 
 	intake_power_efficiency = initial(intake_power_efficiency)
 	intake_power_efficiency -= 0.1 * total_component_rating_of_type(/obj/item/stock_parts/manipulator)
 	intake_power_efficiency += 0.1 * number_of_components(/obj/item/stock_parts/manipulator)
-	intake_power_efficiency = Clamp(intake_power_efficiency, 0.1, initial(intake_power_efficiency))
+	intake_power_efficiency = clamp(intake_power_efficiency, 0.1, initial(intake_power_efficiency))
 
 	power_rating = 1
 	power_rating -= 0.05 * total_component_rating_of_type(/obj/item/stock_parts/micro_laser)
 	power_rating += 0.05 * number_of_components(/obj/item/stock_parts/micro_laser)
-	power_rating = Clamp(power_rating, 0.1, 1)
+	power_rating = clamp(power_rating, 0.1, 1)
 	power_rating *= initial(power_rating)
 	..()
 
@@ -127,7 +127,7 @@
 
 	if (phase == "processing")//processing CO2 in tank
 		if (inner_tank.gas[GAS_CO2])
-			var/co2_intake = between(0, inner_tank.gas[GAS_CO2], power_setting*delay/10)
+			var/co2_intake = clamp(inner_tank.gas[GAS_CO2], 0, power_setting * delay * 0.1)
 			last_flow_rate = co2_intake
 			inner_tank.adjust_gas(GAS_CO2, -co2_intake, 1)
 			var/datum/gas_mixture/new_oxygen = new
@@ -203,5 +203,5 @@
 		update_icon()
 		return 1
 	if(href_list["setPower"]) //setting power to 0 is redundant anyways
-		power_setting = between(1, text2num(href_list["setPower"]), 5)
+		power_setting = clamp(text2num(href_list["setPower"]), 1, 5)
 		return 1

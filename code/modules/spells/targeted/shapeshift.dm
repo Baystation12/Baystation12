@@ -75,7 +75,7 @@
 	if(share_damage)
 		var/ratio = target.health/target.maxHealth
 		var/damage = transformer.maxHealth - round(transformer.maxHealth*(ratio))
-		for(var/i in 1 to ceil(damage/10))
+		for(var/i in 1 to Ceil(damage/10))
 			transformer.adjustBruteLoss(10)
 	if(target.mind)
 		target.mind.transfer_to(transformer)

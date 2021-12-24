@@ -34,13 +34,13 @@
 	base_color  = RANDOM_RGB
 
 	//Combat stats
-	MULT_BY_RANDOM_COEF(total_health, 0.8, 1.2)
-	MULT_BY_RANDOM_COEF(brute_mod, 0.5, 1.5)
-	MULT_BY_RANDOM_COEF(burn_mod, 0.8, 1.2)
-	MULT_BY_RANDOM_COEF(oxy_mod, 0.5, 1.5)
-	MULT_BY_RANDOM_COEF(toxins_mod, 0, 2)
-	MULT_BY_RANDOM_COEF(radiation_mod, 0, 2)
-	MULT_BY_RANDOM_COEF(flash_mod, 0.5, 1.5)
+	total_health = round(total_health * Frand(0.8, 1.2), 0.1)
+	brute_mod = round(brute_mod * Frand(0.5, 1.5), 0.1)
+	burn_mod = round(burn_mod * Frand(0.8, 1.2), 0.1)
+	oxy_mod = round(oxy_mod * Frand(0.5, 1.5), 0.1)
+	toxins_mod = round(toxins_mod * Frand(0, 2), 0.1)
+	radiation_mod = round(radiation_mod * Frand(0, 2), 0.1)
+	flash_mod = round(flash_mod * Frand(0.5, 1.5), 0.1)
 
 	if(brute_mod < 1 && prob(40))
 		species_flags |= SPECIES_FLAG_NO_MINOR_CUT

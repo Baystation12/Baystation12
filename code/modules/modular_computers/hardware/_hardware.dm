@@ -96,7 +96,7 @@
 /// Damages the component. Contains necessary checks. Negative damage "heals" the component.
 /obj/item/stock_parts/computer/proc/take_damage(var/amount)
 	damage += round(amount) 					// We want nice rounded numbers here.
-	damage = between(0, damage, max_damage)		// Clamp the value.
+	damage = clamp(damage, 0, max_damage)		// Clamp the value.
 
 /// Called when component is disabled/enabled by the OS
 /obj/item/stock_parts/computer/proc/on_disable()

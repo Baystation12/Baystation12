@@ -36,7 +36,7 @@
 	)
 
 /datum/game_mode/meteor/proc/set_meteor_severity(value)
-	meteor_severity = Clamp(value, 0, maximal_severity)
+	meteor_severity = clamp(value, 0, maximal_severity)
 
 /datum/game_mode/meteor/proc/set_meteor_wave_delay(value)
 	meteor_wave_delay = max(10 SECONDS, value)

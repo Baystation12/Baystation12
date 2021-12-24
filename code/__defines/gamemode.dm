@@ -56,6 +56,7 @@
 #define MODE_FOUNDATION    "foundation agent"
 #define MODE_MISC_AGITATOR "provocateur"
 #define MODE_HUNTER        "hunter"
+#define MODE_VOXRAIDER     "vox raider"
 #define MODE_EXOPHAGE      "exophage"
 
 #define DEFAULT_TELECRYSTAL_AMOUNT 130

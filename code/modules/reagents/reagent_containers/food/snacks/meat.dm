@@ -7,10 +7,13 @@
 	slices_num = 3
 	filling_color = "#ff1c1c"
 	center_of_mass = "x=16;y=14"
-	New()
-		..()
-		reagents.add_reagent(/datum/reagent/nutriment/protein, 9)
-		src.bitesize = 3
+	bitesize = 3
+
+
+/obj/item/reagent_containers/food/snacks/meat/New()
+	..()
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 9)
+
 
 /obj/item/reagent_containers/food/snacks/meat/syntiflesh
 	name = "synthetic meat"

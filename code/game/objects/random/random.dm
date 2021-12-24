@@ -57,7 +57,8 @@
 				/obj/item/weldingtool/largetank,
 				/obj/item/crowbar,
 				/obj/item/wrench,
-				/obj/item/device/flashlight)
+				/obj/item/device/flashlight,
+				/obj/item/device/flashlight/upgraded)
 
 /obj/random/technology_scanner
 	name = "random scanner"
@@ -628,7 +629,8 @@ obj/random/obstruction/spawn_choices()
 				/obj/item/device/flashlight/flare/glowstick/yellow,
 				/obj/item/device/flashlight/flare/glowstick/orange,
 				/obj/item/grenade/light,
-				/obj/item/device/oxycandle)
+				/obj/item/device/oxycandle,
+				/obj/item/device/flashlight/upgraded)
 
 /obj/random/smokes
 	name = "random smokeable"
@@ -882,6 +884,30 @@ obj/random/obstruction/spawn_choices()
 				/obj/item/clothing/accessory/storage/holster/armpit = 1,
 				/obj/item/clothing/accessory/kneepads = 3,
 				/obj/item/clothing/accessory/stethoscope = 2)
+
+GLOBAL_LIST_INIT(random_backpacks, list(
+	/obj/item/storage/backpack/cultpack,
+	/obj/item/storage/backpack/clown,
+	/obj/item/storage/backpack/medic,
+	/obj/item/storage/backpack/security,
+	/obj/item/storage/backpack/security/exo,
+	/obj/item/storage/backpack/command,
+	/obj/item/storage/backpack/industrial,
+	/obj/item/storage/backpack/toxins,
+	/obj/item/storage/backpack/hydroponics,
+	/obj/item/storage/backpack/genetics,
+	/obj/item/storage/backpack/virology,
+	/obj/item/storage/backpack/chemistry
+))
+
+/obj/random/backpack
+	name = "random backpack"
+	desc = "This is a random backpack."
+	icon = 'icons/obj/storage.dmi'
+	icon_state = "backpack"
+
+/obj/random/backpack/spawn_choices()
+	return GLOB.random_backpacks
 
 /obj/random/cash
 	name = "random currency"

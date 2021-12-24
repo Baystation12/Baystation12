@@ -13,7 +13,7 @@
 	if (~clothing_flags & CLOTHING_HAS_FIBERS)
 		return
 	var/list/others = list()
-	FOR_BLIND(obj/item/clothing/accessory/A, accessories)
+	for (var/obj/item/clothing/accessory/A as anything in accessories)
 		if ((A.clothing_flags & CLOTHING_HAS_FIBERS) && prob(50))
 			others += A.get_fibers()
 	return "material from \a [fiber_name || name][others.len ? " and [english_list(others)]" : ""]"
