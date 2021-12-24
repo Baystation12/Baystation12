@@ -4,6 +4,7 @@ on:
     branches:
       - dev
 
+# NB: We can discover workflow IDs for this job at https://api.github.com/repos/ORG/REPO/actions/workflows
 jobs:
   cancel:
     name: 'Cancel Redundant Builds'
@@ -12,5 +13,5 @@ jobs:
     steps:
       - uses: styfle/cancel-workflow-action@a40b8845c0683271d9f53dfcb887a7e181d3918b
         with:
-          workflow_id: 27212, 3545321
+          workflow_id: 3545321
           access_token: ${{ github.token }}
