@@ -74,6 +74,26 @@
 	if(G)
 		equipment_prescription += G.prescription
 
+		for (var/obj/item/clothing/accessory/glasses/A in G.accessories)
+			equipment_prescription += A.prescription
+			equipment_darkness_modifier += A.darkness_view
+			equipment_vision_flags |= A.vision_flags
+			equipment_light_protection += A.light_protection
+			if (A.overlay)
+				equipment_overlays |= A.overlay
+			if (A.see_invisible >= 0)
+				equipment_see_invis = max(equipment_see_invis, A.see_invisible)
+			add_clothing_protection(A)
+
+		if(G.active)
+			equipment_darkness_modifier += G.darkness_view
+			equipment_vision_flags |= G.vision_flags
+			equipment_light_protection += G.light_protection
+			if(G.overlay)
+				equipment_overlays |= G.overlay
+			if(G.see_invisible >= 0)
+				equipment_see_invis = max(equipment_see_invis, G.see_invisible)
+
 /mob/living/carbon/human/proc/process_glasses(var/obj/item/clothing/glasses/G)
 	if(G?.active)
 		equipment_darkness_modifier += G.darkness_view

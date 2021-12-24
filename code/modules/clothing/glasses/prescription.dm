@@ -5,6 +5,7 @@
 	item_state = "glasses"
 	body_parts_covered = EMPTY_BITFIELD
 	prescription = 7
+	valid_accessory_slots = list(ACCESSORY_SLOT_GLASSES)
 
 
 /obj/item/clothing/glasses/hipster
@@ -14,6 +15,7 @@
 	item_state = "hipster_glasses"
 	body_parts_covered = EMPTY_BITFIELD
 	prescription = 7
+	valid_accessory_slots = list(ACCESSORY_SLOT_GLASSES)
 
 
 /obj/item/clothing/glasses/green
@@ -23,6 +25,7 @@
 	item_state = "gglasses"
 	body_parts_covered = EMPTY_BITFIELD
 	prescription = 7
+	valid_accessory_slots = list(ACCESSORY_SLOT_GLASSES)
 
 
 /obj/item/clothing/glasses/scanners

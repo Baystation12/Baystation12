@@ -36,7 +36,7 @@
 /obj/item/clothing/accessory/proc/get_inv_overlay()
 	if(!inv_overlay)
 		var/tmp_icon_state = overlay_state
-		if (!tmp_icon_state)
+		if ((accessory_flags & ACCESSORY_INV_USE_ICON) || !tmp_icon_state)
 			tmp_icon_state = icon_state
 		if(icon_override && ("[tmp_icon_state]_tie" in icon_states(icon_override)))
 			inv_overlay = image(icon = icon_override, icon_state = "[tmp_icon_state]_tie", dir = SOUTH)
