@@ -119,6 +119,11 @@
 /datum/ai_holder/proc/set_busy(value = FALSE)
 	busy = value
 
+/// Set the AI as 'busy' for a specific length of time.
+/datum/ai_holder/proc/set_busy_delay(time)
+	set_busy(TRUE)
+	addtimer(CALLBACK(src, .proc/set_busy, FALSE), time)
+
 /**
  * Makes this ai holder not get processed.
  * Called automatically when the host mob is killed.
