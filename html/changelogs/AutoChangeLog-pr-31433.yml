@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - rscadd: Traitor uplinks can now purchase a fake command report service. Now you
+      don't have to ask admins to send them for you.
