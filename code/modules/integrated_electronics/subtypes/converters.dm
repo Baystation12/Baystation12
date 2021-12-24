@@ -335,7 +335,7 @@
 	pull_data()
 	var/incoming = get_pin_data(IC_INPUT, 1)
 	if(!isnull(incoming))
-		result = ToDegrees(incoming)
+		result = RAD_TO_DEG * incoming
 
 	set_pin_data(IC_OUTPUT, 1, result)
 	push_data()
@@ -353,7 +353,7 @@
 	pull_data()
 	var/incoming = get_pin_data(IC_INPUT, 1)
 	if(!isnull(incoming))
-		result = ToRadians(incoming)
+		result = DEG_TO_RAD * incoming
 
 	set_pin_data(IC_OUTPUT, 1, result)
 	push_data()

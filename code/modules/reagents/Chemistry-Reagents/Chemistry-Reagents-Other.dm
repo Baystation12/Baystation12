@@ -576,4 +576,4 @@
 	description = "This hair dye can be any color! Only one way to find out what kind!"
 
 /datum/reagent/colored_hair_dye/chaos/affect_touch(mob/living/carbon/human/H, alien, removed)
-	apply_dye_color(H, RAND_F(1, 254), RAND_F(1, 254), RAND_F(1, 254))
+	apply_dye_color(H, Frand(1, 254), Frand(1, 254), Frand(1, 254))

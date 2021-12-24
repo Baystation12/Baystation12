@@ -13,11 +13,11 @@
 
 
 /datum/nano_module/song_editor/proc/pages()
-	return Ceiling(src.song.lines.len / GLOB.musical_config.song_editor_lines_per_page)
+	return Ceil(src.song.lines.len / GLOB.musical_config.song_editor_lines_per_page)
 
 
 /datum/nano_module/song_editor/proc/current_page()
-	return src.song.current_line > 0 ? Ceiling(src.song.current_line / GLOB.musical_config.song_editor_lines_per_page) : min(src.page, pages())
+	return src.song.current_line > 0 ? Ceil(src.song.current_line / GLOB.musical_config.song_editor_lines_per_page) : min(src.page, pages())
 
 
 /datum/nano_module/song_editor/proc/page_bounds(page_num)

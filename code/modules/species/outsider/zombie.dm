@@ -355,7 +355,7 @@ GLOBAL_LIST_INIT(zombie_species, list(\
 		if (prob(3))
 			H.zombify()
 
-	M.reagents.add_reagent(/datum/reagent/zombie, RAND_F(0.5, 1.5))
+	M.reagents.add_reagent(/datum/reagent/zombie, Frand(0.5, 1.5))
 
 /datum/reagent/zombie/affect_touch(mob/living/carbon/M, alien, removed)
 	affect_blood(M, alien, removed * 0.5)

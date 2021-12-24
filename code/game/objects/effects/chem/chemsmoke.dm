@@ -199,7 +199,7 @@
 
 		var/offset = 0
 		var/points = round((radius * 2 * M_PI) / arcLength)
-		var/angle = round(ToDegrees(arcLength / radius), 1)
+		var/angle = round(RAD_TO_DEG * arcLength / radius, 1)
 
 		if(!IsInteger(radius))
 			offset = 45		//degrees

@@ -21,7 +21,7 @@
 
 	UNSETEMPTY(latencies)
 	var/rank_count = max(1, LAZYLEN(ranks))
-	if(force || last_rating != ceil(combined_rank/rank_count))
+	if(force || last_rating != Ceil(combined_rank/rank_count))
 		if(highest_rank <= 1)
 			if(highest_rank == 0)
 				qdel(src)
@@ -29,7 +29,7 @@
 		else
 			rebuild_power_cache = TRUE
 			sound_to(owner, 'sound/effects/psi/power_unlock.ogg')
-			rating = ceil(combined_rank/rank_count)
+			rating = Ceil(combined_rank/rank_count)
 			cost_modifier = 1
 			if(rating > 1)
 				cost_modifier -= min(1, max(0.1, (rating-1) / 10))
@@ -73,7 +73,7 @@
 /datum/psi_complexus/Process()
 	var/update_hud
 	if(armor_cost)
-		var/value = max(1, ceil(armor_cost * cost_modifier))
+		var/value = max(1, Ceil(armor_cost * cost_modifier))
 		if(value <= stamina)
 			stamina -= value
 		else

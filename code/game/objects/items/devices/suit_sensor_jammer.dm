@@ -132,7 +132,7 @@ obj/item/device/suit_sensor_jammer/ui_interact(mob/user, ui_key = "main", var/da
 		"methods" = methods,
 		"current_method" = "\ref[jammer_method]",
 		"current_cost" = jammer_method.energy_cost,
-		"total_cost" = "[ceil(JAMMER_POWER_CONSUMPTION(10))]"
+		"total_cost" = "[Ceil(JAMMER_POWER_CONSUMPTION(10))]"
 	)
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)

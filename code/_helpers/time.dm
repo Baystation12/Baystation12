@@ -169,7 +169,7 @@ GLOBAL_VAR_INIT(rollovercheck_last_timeofday, 0)
 	do
 		delta = delay * max(0.01 * max(world.tick_usage, world.cpu) * max(Master.sleep_delta, 1), 1) // Scale up delay under load; sleeps have entry overhead from proc duplication
 		sleep(world.tick_lag * delta)
-		total += ceil(delta)
+		total += Ceil(delta)
 		delay *= 2
 	while (world.tick_usage > min(TICK_LIMIT_TO_RUN, Master.current_ticklimit))
 	return total
