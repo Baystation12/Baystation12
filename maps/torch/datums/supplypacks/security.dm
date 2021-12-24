@@ -118,6 +118,17 @@
 	access = access_emergency_armory
 	security_level = SUPPLY_SECURITY_HIGH
 
+//rubay code
+/decl/hierarchy/supply_pack/security/gren_launch
+	name = "Weapons - Grenade Launcher Ammunition"
+	contains = list(/obj/item/grenade/frag/shell = 6)
+	cost = 65
+	containertype = /obj/structure/closet/crate/secure/weapon
+	containername = "grenade launcher ammunition crate"
+	access = access_emergency_armory
+	security_level = SUPPLY_SECURITY_HIGH
+//rubay code end
+
 /decl/hierarchy/supply_pack/security/pistolammo
 	name = "Ammunition - pistol magazines"
 	contains = list(/obj/item/ammo_magazine/pistol/double = 4)
