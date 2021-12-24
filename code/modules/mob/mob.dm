@@ -869,6 +869,15 @@
 	if(istype(implant,/obj/item/implant))
 		var/obj/item/implant/imp = implant
 		imp.removed()
+	if (istype(implant, /obj/item/holder/voxslug))
+		var/obj/item/holder/voxslug/holder = implant
+		var/mob/living/simple_animal/hostile/voxslug/V = holder.contents[1]
+
+		V.visible_message(SPAN_WARNING("\The [src] is momentarily stunned as it is ripped from its victim!"))
+		if (V.ai_holder)
+			var/datum/ai_holder/AI = V.ai_holder
+			AI.set_busy_delay(8 SECONDS)
+
 	. = TRUE
 
 /mob/living/silicon/robot/remove_implant(var/obj/item/implant, var/surgical_removal = FALSE)
