@@ -32,12 +32,20 @@
 	output += "<i>[GLOB.using_map.get_map_info()]</i>"
 	output +="<hr>"
 	output += "<a href='byond://?src=\ref[src];show_preferences=1'>Setup Character</A> "
-
+	output += "<a href='byond://?src=\ref[src];show_preferences=1'>Preferences</A> "
+	if (config.rules_url || config.lore_url)
+		output += "<hr>"
+		var/player_age = client?.player_age
+		if (isnum(player_age) && player_age < 7)
+			output += "<span style='font-weight: bold'>Welcome! Please check out these links:</span><br>"
+		if (config.rules_url)
+			output += "<a href='byond://?src=\ref[src];show_rules=1'>Show Rules</A>"
+		if (config.lore_url)
+			output += "<a href='byond://?src=\ref[src];show_lore=1'>Show Lore</A>"
+	output += "<hr>Current character: <a href='byond://?src=\ref[client.prefs];load=1;details=1'>[client.prefs.real_name]</a>[client.prefs.job_high ? ", [client.prefs.job_high]" : null]<br>"
 	if(GAME_STATE > RUNLEVEL_LOBBY)
 		output += "<a href='byond://?src=\ref[src];manifest=1'>View the Crew Manifest</A> "
-
 	output += "<a href='byond://?src=\ref[src];observe=1'>Observe</A> "
-	output += "<hr>Current character: <a href='byond://?src=\ref[client.prefs];load=1;details=1'>[client.prefs.real_name]</a>[client.prefs.job_high ? ", [client.prefs.job_high]" : null]<br>"
 	if(GAME_STATE <= RUNLEVEL_LOBBY)
 		if(ready)
 			output += "<a class='linkOn' href='byond://?src=\ref[src];ready=0'>Un-Ready</a>"
@@ -45,9 +53,7 @@
 			output += "<a href='byond://?src=\ref[src];ready=1'>Ready Up</a>"
 	else
 		output += "<a href='byond://?src=\ref[src];late_join=1'>Join Game!</A>"
-
 	output += "</div>"
-
 	panel = new(src, "Welcome","Welcome to [GLOB.using_map.full_name]", 560, 280, src)
 	panel.set_window_options("can_close=0")
 	panel.set_content(JOINTEXT(output))
@@ -90,8 +96,18 @@
 	if(!client)
 		return TOPIC_NOACTION
 
+
+
 	if(href_list["show_preferences"])
 		client.prefs.open_setup_window(src)
+		return 1
+
+	if (href_list["show_rules"])
+		client.link_url(config.rules_url, "Rules", TRUE)
+		return 1
+
+	if (href_list["show_lore"])
+		client.link_url(config.lore_url, "Lore", TRUE)
 		return 1
 
 	if(href_list["ready"])
