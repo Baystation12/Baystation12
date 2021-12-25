@@ -106,6 +106,7 @@
 	item_state = "card-id"
 	origin_tech = list(TECH_MAGNET = 2, TECH_ESOTERIC = 2)
 	var/uses = 10
+	var/list/emag_sounds = list('sound/effects/emag_act.wav')
 
 var/const/NO_EMAG_ACT = -50
 
@@ -118,6 +119,7 @@ var/const/NO_EMAG_ACT = -50
 	A.add_fingerprint(user)
 	if(used_uses)
 		log_and_message_admins("emagged \an [A].")
+		playsound(get_turf(A), pick(emag_sounds), 40, extrarange = -3)
 
 	if(uses<1)
 		user.visible_message("<span class='warning'>\The [src] fizzles and sparks - it seems it's been used once too often, and is now spent.</span>")
@@ -130,7 +132,7 @@ var/const/NO_EMAG_ACT = -50
 /obj/item/card/emag/Initialize()
 	. = ..()
 	set_extension(src,/datum/extension/chameleon/emag)
-	
+
 /obj/item/card/emag/get_antag_info()
 	. = ..()
 	. += "You can use this cryptographic sequencer in order to subvert electronics or forcefully open doors you don't have access to. These actions are irreversible and the card only has a limited number of charges!"
@@ -337,7 +339,7 @@ var/const/NO_EMAG_ACT = -50
 				id.military_branch = new_branch
 				id.military_rank = null
 			return
-	
+
 	to_chat(client, SPAN_WARNING("Input, must be an existing branch - [var_value] is invalid"))
 
 /decl/vv_set_handler/id_card_military_rank
@@ -366,7 +368,7 @@ var/const/NO_EMAG_ACT = -50
 		if(new_rank)
 			id.military_rank = new_rank
 			return
-	
+
 	to_chat(client, SPAN_WARNING("Input must be an existing rank belonging to military_branch - [var_value] is invalid"))
 
 /obj/item/card/id/silver
