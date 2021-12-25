@@ -25,14 +25,10 @@
 		raiders.attempt_spawn()
 		antag_templates = list(raiders)
 
-/datum/game_mode/pirates/startRequirements()
-	var/playerC = 0
-	for(var/mob/new_player/player in GLOB.player_list)
-		if(player.client && player.ready)
-			playerC++
-
-	if(playerC < required_players)
-		return "Not enough players, [required_players] players needed."
+/datum/game_mode/pirates/check_startable(list/lobby_players)
+	var/list/ready_players = SSticker.ready_players(lobby_players)
+	if (ready_players.len < required_players)
+		return "Not enough players. [ready_players.len] ready of the required [required_players]."
 	var/list/all_antag_types = GLOB.all_antag_types_
 	if(antag_tags?.len)
 		var/datum/antagonist/vox/antag_vox = all_antag_types[antag_tags[1]]

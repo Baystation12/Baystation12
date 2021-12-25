@@ -139,6 +139,9 @@
 	/// Whether or not secret modes show list of possible round types
 	var/static/secret_hide_possibilities = FALSE
 
+	/// Whether or not secret - a hidden random pick from available modes - can be voted for
+	var/static/secret_disabled = FALSE
+
 	/// enables random events mid-round when set to 1
 	var/static/allow_random_events = FALSE
 
@@ -669,6 +672,8 @@
 				antag_hud_restricted = TRUE
 			if ("secret_hide_possibilities")
 				secret_hide_possibilities = TRUE
+			if ("secret_disabled")
+				secret_disabled = TRUE
 			if ("usealienwhitelist")
 				usealienwhitelist = TRUE
 			if ("usealienwhitelist_sql")
@@ -930,7 +935,6 @@
 		probabilities[tag] = M.probability
 		if (M.votable)
 			votable_modes += tag
-	votable_modes += "secret"
 
 
 /configuration/proc/pick_mode(mode_name)
@@ -943,9 +947,10 @@
 
 
 /configuration/proc/get_runnable_modes()
+	var/list/lobby_players = SSticker.lobby_players()
 	var/list/result = list()
 	for (var/tag in gamemode_cache)
-		var/datum/game_mode/M = gamemode_cache[tag]
-		if (probabilities[tag] > 0 && !M.startRequirements())
+		var/datum/game_mode/mode = gamemode_cache[tag]
+		if (probabilities[tag] > 0 && !mode.check_startable(lobby_players))
 			result[tag] = probabilities[tag]
 	return result
