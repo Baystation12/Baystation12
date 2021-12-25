@@ -93,6 +93,7 @@ TORCH_ESCAPE_POD(17)
 		"nav_magshield_antag",
 		"nav_casino_antag",
 		"nav_yacht_antag",
+		"nav_venera_antag",
 		"nav_slavers_base_antag"
 		)
 
