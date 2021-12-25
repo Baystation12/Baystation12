@@ -46,8 +46,9 @@
 #define IsInteger(value) (round(value) == (value))
 
 
-/// True if value is an integer that does not have the 1 bit set.
-#define IsPowerOfTwo(value) ( IsInteger(value) && !((value) & 0x1) )
+//NB: Not actually truly all powers of 2 but this behavior is currently expected
+/// True if value is a non-negative integer that is 0 or has a single bit set. 0, 1, 2, 4, 8 ...
+#define IsPowerOfTwo(value) ( IsInteger(value) && !((value) & ((value) - 1)) )
 
 
 /// True if value is an integer that is not zero and does not have the 1 bit set
