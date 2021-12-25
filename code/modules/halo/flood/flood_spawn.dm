@@ -98,6 +98,4 @@
 		GLOB.processing_objects.Remove(src)
 	if(hasvar(owner, "flood_spawner"))
 		owner:flood_spawner = null
-	qdel(src)
-
 	. = ..()

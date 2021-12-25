@@ -6,8 +6,8 @@
 #define COMMS_CUTIN_EVENT_MIN 3 MINUTES
 #define COMMS_CUTIN_EVENT_MAX 6 MINUTES
 #define COMMS_CUTIN_EVENT_DURATION 2.5 MINUTES
-#define FLOOD_EVENT_Z_START 3
-#define FLOOD_EVENT_Z_END 5
+#define FLOOD_EVENT_Z_START 4
+#define FLOOD_EVENT_Z_END 6
 #define FLOOD_EVENT_MINOR_START 15 MINUTES
 #define FLOOD_EVENT_MAJOR_START 25 MINUTES
 #define FLOOD_EVENT_REPEAT_TIME 10 MINUTES
@@ -239,12 +239,10 @@ All 3 of these cannot spawn on open space
 		if(!(item.loc == retrieval_loc))
 			. = 0
 /datum/game_mode/achlys/proc/kill_unevaced_players()
-	var/mob/living/simple_animal/hostile/flood/spawned_flood = new
 	for(var/client/client in GLOB.clients)
 		var/mob/living/carbon/human/h = client.mob
 		if(istype(h) && h.z >= FLOOD_EVENT_Z_START && h.z <= FLOOD_EVENT_Z_END)
-			spawned_flood.do_infect(h)
-	qdel(spawned_flood)
+			qdel(h)
 
 /datum/game_mode/achlys/check_finished()
 	. = 0

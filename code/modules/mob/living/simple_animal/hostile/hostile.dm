@@ -72,6 +72,11 @@
 			qdel(using_vehicle_gun)
 		. = ..()
 
+/mob/living/simple_animal/hostile/can_move_mob(var/mob/living/swapped, swapping = 0, passive = 0)
+	. = ..()
+	if(. && faction != swapped.faction)
+		. = 0
+
 /mob/living/simple_animal/hostile/proc/hostilemob_walk_to(var/target,var/safedist,var/delay)
 	if(istype(loc,/obj/vehicles))
 		spawn(-1)

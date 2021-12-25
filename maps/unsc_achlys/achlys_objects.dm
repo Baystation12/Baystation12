@@ -483,6 +483,8 @@
 	var/clean = 0 //mucus overlay, this is dropped by flood forms
 
 /obj/item/weapon/reagent_containers/food/snacks/liquidfood/floody/New()
+	if(!reagents)
+		reagents = new
 	reagents.add_reagent(/datum/reagent/floodinfectiontoxin, 10) //don't take candy from strange alien monsters
 	clean = pick(0,1)	//decide to be clean or have mucus
 	if(!clean)			//if not clean, apply overlay

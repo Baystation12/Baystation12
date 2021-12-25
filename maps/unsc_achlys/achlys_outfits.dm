@@ -131,16 +131,17 @@
 	hierarchy_type = /decl/hierarchy/outfit/job
 
 /decl/hierarchy/outfit/job/unsc_achlys/sangheili/proc/equip_special(mob/living/carbon/human/H)
-	var/l_hand_item = null
+	var/l_hand_item = /obj/item/weapon/crowbar/red
 	var/r_hand_item = null
 	var/belt_item = null
 	if(prob(25))
-		l_hand_item = /obj/item/weapon/material/twohanded/fireaxe
+		r_hand_item = /obj/item/weapon/material/twohanded/fireaxe
 	else if(prob(25))
-		l_hand_item = /obj/item/weapon/material/twohanded/baseballbat/achlys
+		r_hand_item = /obj/item/weapon/material/twohanded/baseballbat/achlys
 	else if(prob(10))
 		l_hand_item = /obj/item/weapon/gun/projectile/shotgun/pump/m45_ts/achlys
 		r_hand_item = /obj/item/ammo_box/shotgun
+		belt_item = /obj/item/weapon/crowbar/red
 	else if(prob(10))
 		belt_item = /obj/item/weapon/gun/projectile/m6d_magnum/civilian/achlys
 		r_hand_item = /obj/item/device/flashlight/maglight
