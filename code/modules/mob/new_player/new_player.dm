@@ -34,17 +34,29 @@
 		output += "<hr>"
 		var/player_age = client?.player_age
 		if (isnum(player_age) && player_age < 7)
-			output += "<span style='font-weight: bold'>Welcome! Please check out these links:</span><br>"
+			output += "<b>Welcome! Please check out these links:</b><br>"
+
 		if (config.rules_url)
-			output += "<a href='byond://?src=\ref[src];show_rules=1'>Open Rules</a> "
+			output += "<span style='width: 50%; float: left; text-align: right; margin-bottom: 7px;'><a href='byond://?src=\ref[src];show_rules=1'>Open Rules</a></span>"
 		if (config.lore_url)
-			output += "<a href='byond://?src=\ref[src];show_lore=1'>Open Lore</a>"
-	output += "<hr><a href='byond://?src=\ref[src];show_preferences=1'>Options</a> "
+			output += "<span style='width: 50%; float: right; text-align: left; margin-bottom: 7px;'><a href='byond://?src=\ref[src];show_lore=1'>Open Lore</a></span>"
+
+	output += "<hr>"
 	if (GAME_STATE > RUNLEVEL_LOBBY)
-		output += "<a href='byond://?src=\ref[src];manifest=1'>Crew Manifest</a>"
+		output += "<span style='width: 50%; float: left; text-align: right; margin-bottom: 7px;'><a href='byond://?src=\ref[src];manifest=1'>Crew Manifest</a></span>"
+		output += "<span style='width: 50%; float: right; text-align: left; margin-bottom: 7px;'><a href='byond://?src=\ref[src];show_preferences=1'>Options</a></span>"
+	else
+		output += "<a href='byond://?src=\ref[src];show_preferences=1'>Options</a>"
+
 	var/name = client.prefs.real_name || "(Random)"
-	output += "<br>Playing As <a href='byond://?src=\ref[client.prefs];load=1;details=1'>[name]</a>[client.prefs.job_high ? ", [client.prefs.job_high]" : null]"
-	output += "<hr><a href='byond://?src=\ref[src];observe=1'>Join As Observer</a> "
+	output += "<hr>"
+	output += "<b>Playing As</b><br>"
+	output += "<a href='byond://?src=\ref[client.prefs];load=1;details=1'>[name]</a><br>"
+	output += client.prefs.job_high ? "[client.prefs.job_high]" : null
+
+	output += "<hr>"
+	output += "<span style='width: 50%; float: left; text-align: right;'><a href='byond://?src=\ref[src];observe=1'>Join As Observer</a></span>"
+	output += "<span style='width: 50%; float: right; text-align: left;'>"
 	if (GAME_STATE <= RUNLEVEL_LOBBY)
 		if (ready)
 			output += "<a class='linkOn' href='byond://?src=\ref[src];ready=0'>Cancel Join At Start</a>"
@@ -52,6 +64,7 @@
 			output += "<a href='byond://?src=\ref[src];ready=1'>Join At Start</a>"
 	else
 		output += "<a href='byond://?src=\ref[src];late_join=1'>Join As [name]</a>"
+	output += "</span>"
 	output += "</div>"
 	panel = new(src, "Welcome","Welcome to [GLOB.using_map.full_name]", 560, 280, src)
 	panel.set_window_options("can_close=0")
