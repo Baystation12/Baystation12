@@ -21773,7 +21773,9 @@
 	dir = 1
 	},
 /obj/machinery/pager/science{
-	pixel_x = -25
+	dir = 8;
+	pixel_x = -10;
+	pixel_y = -25
 	},
 /turf/simulated/floor/tiled,
 /area/rnd/entry)
@@ -23221,10 +23223,14 @@
 /area/thruster/d1starboard)
 "nAb" = (
 /obj/structure/table/standard,
-/obj/item/device/flashlight/lamp,
+/obj/item/device/flashlight/lamp{
+	pixel_x = -4;
+	pixel_y = -1
+	},
 /obj/effect/floor_decal/corner/red{
 	dir = 5
 	},
+/obj/machinery/recharger,
 /turf/simulated/floor/tiled/dark,
 /area/rnd/rnd_sec)
 "nAp" = (
@@ -23527,6 +23533,12 @@
 	},
 /obj/effect/floor_decal/corner/research{
 	dir = 10
+	},
+/obj/machinery/button/blast_door{
+	dir = 1;
+	id_tag = "d1ladderwindow";
+	name = "Ladderwell Shutter Control";
+	pixel_y = -25
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/aft)
@@ -23840,10 +23852,11 @@
 /turf/simulated/floor/tiled/dark,
 /area/command/armoury)
 "oox" = (
-/obj/effect/floor_decal/corner/research,
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 5
+	},
 /obj/machinery/firealarm{
-	dir = 1;
-	pixel_y = -24
+	pixel_y = 20
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/aft)
@@ -50909,7 +50922,7 @@ agU
 leb
 hcb
 hfb
-oox
+rvY
 ijb
 hAb
 aJv
@@ -51109,7 +51122,7 @@ agH
 agx
 oLK
 leb
-ivT
+oox
 hgb
 flB
 nPb
