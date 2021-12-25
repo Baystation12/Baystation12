@@ -42,13 +42,14 @@
 	else
 		to_chat(examiner,"<span class = 'notice'>It is currently in use and is draining power.[cached_user ? " [cached_user.flight_ticks_remain] power units remain" : "" ]</span>")
 
-/obj/item/flight_item/update_icon()
+/obj/item/flight_item/update_icon(var/mob/living/user)
 	if(active)
 		icon_state = "[initial(icon_state)]-active"
 		item_state = "[initial(item_state)]-active"
 	else
 		icon_state = initial(icon_state)
 		item_state = initial(item_state)
+	user.update_inv_back(1)
 	. = ..()
 
 /obj/item/flight_item/proc/activate(var/mob/living/user)
@@ -60,8 +61,7 @@
 	user.flight_item = src
 	user.take_flight(flight_ticks_curr,"<span class = 'warning'>[user.name][takeoff_msg]</span>","<span class = 'warning'>[user.name][land_msg]</span>")
 	GLOB.processing_objects -= src
-	update_icon()
-	user.update_inv_back(1)
+	update_icon(user)
 	if(!flight_bar)
 		flight_bar = new(user,flight_ticks_max,src)
 
@@ -75,8 +75,7 @@
 	if(user.elevation > 0)
 		user.take_flight(0,(output_msg ? "<span class = 'warning'>[user.name][takeoff_msg]</span>" : null),(output_msg ? "<span class = 'warning'>[user.name][land_msg]</span>" : null))
 	GLOB.processing_objects += src
-	update_icon()
-	user.update_inv_back(1)
+	update_icon(user)
 
 /obj/item/flight_item/ui_action_click()
 	if(usr != loc)

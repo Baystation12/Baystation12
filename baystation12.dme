@@ -1469,6 +1469,7 @@
 #include "code\modules\halo\clothing\urc_commando_variants.dm"
 #include "code\modules\halo\clothing\urf_commando.dm"
 #include "code\modules\halo\clothing\urf_commando_sets.dm"
+#include "code\modules\halo\clothing\yanmee_wings.dm"
 #include "code\modules\halo\clothing\armor_repair\armor_patch.dm"
 #include "code\modules\halo\clothing\armor_repair\clothing.dm"
 #include "code\modules\halo\clothing\armor_repair\repair_bench.dm"
