@@ -1628,8 +1628,6 @@
 		/obj/item/clothing/shoes/jackboots = 30,
 		/obj/item/clothing/shoes/workboots = 30,
 		/obj/item/clothing/shoes/dutyboots = 30,
-		/obj/item/clothing/shoes/jungleboots = 30,
-		/obj/item/clothing/shoes/desertboots = 30,
 		/obj/item/clothing/shoes/black = 30,
 		/obj/item/clothing/shoes/blue = 30,
 		/obj/item/clothing/shoes/brown = 30,
