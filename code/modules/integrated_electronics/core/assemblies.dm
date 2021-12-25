@@ -86,7 +86,7 @@
 
 /obj/item/device/electronic_assembly/post_health_change(health_mod, damage_type)
 	..()
-	if (get_damage_percentage() >= 0.75)
+	if (get_damage_percentage() >= 75)
 		if(battery && battery.charge > 0)
 			visible_message(SPAN_WARNING("\The [src] sputters and sparks!"))
 			spark_system.start()
@@ -135,7 +135,7 @@
 		P.make_energy()
 
 	var/power_failure = FALSE
-	if(get_damage_percentage() >= 0.75 && prob(1))
+	if(get_damage_percentage() >= 75 && prob(1))
 		if(battery && battery.charge > 0)
 			visible_message(SPAN_WARNING("\The [src] sparks violently!"))
 			spark_system.start()

@@ -123,13 +123,13 @@
 /obj/structure/window/examine_damage_state(mob/user)
 	var/damage_percentage = get_damage_percentage()
 	switch (damage_percentage)
-		if (0.00)
+		if (0)
 			to_chat(user, SPAN_NOTICE("It looks fully intact."))
-		if (0.01 to 0.24)
+		if (1 to 24)
 			to_chat(user, SPAN_WARNING("\The [material] pane has a few cracks."))
-		if (0.25 to 0.49)
+		if (25 to 49)
 			to_chat(user, SPAN_WARNING("\The [material] pane looks slightly damaged."))
-		if (0.50 to 0.74)
+		if (50 to 74)
 			to_chat(user, SPAN_WARNING("\The [material] pane looks moderately damaged."))
 		else
 			to_chat(user, SPAN_WARNING("\The [material] pane looks severely damaged."))
@@ -155,15 +155,15 @@
 	..()
 	update_icon()
 	if (health_mod < 0)
-		var/initial_damage_percentage = round((get_current_health() - health_mod) / get_max_health(), 0.01)
+		var/initial_damage_percentage = round(((get_current_health() - health_mod) / get_max_health()) * 100)
 		var/damage_percentage = get_damage_percentage()
-		if (damage_percentage >= 0.75 && initial_damage_percentage < 0.75)
+		if (damage_percentage >= 75 && initial_damage_percentage < 75)
 			visible_message(SPAN_DANGER("\The [src] looks like it's about to shatter!"))
 			playsound(loc, "glasscrack", 100, 1)
-		else if (damage_percentage >= 0.5 && initial_damage_percentage < 0.5)
+		else if (damage_percentage >= 50 && initial_damage_percentage < 50)
 			visible_message(SPAN_WARNING("\The [src] looks seriously damaged!"))
 			playsound(loc, "glasscrack", 100, 1)
-		else if (damage_percentage >= 0.25 && initial_damage_percentage < 0.25)
+		else if (damage_percentage >= 25 && initial_damage_percentage < 25)
 			visible_message(SPAN_WARNING("Cracks begin to appear in \the [src]!"))
 			playsound(loc, "glasscrack", 100, 1)
 
@@ -486,7 +486,7 @@
 		)
 
 /obj/structure/window/proc/deanchor(atom/impact_origin)
-	if (is_alive() && get_damage_percentage() >= 0.85)
+	if (is_alive() && get_damage_percentage() >= 85)
 		set_anchored(FALSE)
 		step(src, get_dir(impact_origin, src))
 
@@ -568,7 +568,7 @@
 
 	var/damage_alpha = 0 // Used for alpha blending of damage layer
 	if (health_damaged())
-		damage_alpha = 256 * round(get_damage_percentage(), 0.25) - 1
+		damage_alpha = 256 * round(get_damage_percentage() / 100, 0.25) - 1
 
 	var/img_dir
 	if(is_on_frame())

@@ -112,9 +112,9 @@
 		var/initial_damage_percentage = get_damage_percentage()
 		damage_health(1)
 		var/damage_percentage = get_damage_percentage()
-		if (damage_percentage >= 0.7 && initial_damage_percentage < 0.7)
+		if (damage_percentage >= 70 && initial_damage_percentage < 70)
 			visible_message(SPAN_WARNING("\The [src] is barely holding up!"))
-		else if (damage_percentage >= 0.3 && initial_damage_percentage < 0.3)
+		else if (damage_percentage >= 30 && initial_damage_percentage < 30)
 			visible_message(SPAN_WARNING("\The [src] is taking damage!"))
 
 /obj/structure/inflatable/examine(mob/user)
