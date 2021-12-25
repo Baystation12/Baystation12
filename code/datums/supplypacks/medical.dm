@@ -67,6 +67,17 @@
 	cost = 60
 	containername = "stability kit crate"
 
+//rubay code
+/decl/hierarchy/supply_pack/medical/firstaid_indiv
+	name = "Triage - Individual medical kits"
+	contains = list(/obj/item/storage/firstaid/individual/all = 3,
+					/obj/item/storage/firstaid/individual/military = 3,
+					/obj/item/storage/firstaid/individual/military/exp = 3
+					)
+	cost = 90
+	containername = "individual medical kits crate"
+//rubay code end
+
 /decl/hierarchy/supply_pack/medical/bloodpack
 	name = "Refills - Blood packs"
 	contains = list(/obj/item/storage/box/bloodpacks = 3)
