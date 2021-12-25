@@ -6,11 +6,15 @@
 	closet_appearance = null
 
 	var/screwdriver_time_needed = 7.5 SECONDS
+	var/obj/item/flag/draped
 
 /obj/structure/closet/coffin/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1 && !opened)
 		to_chat(user, "The lid is [locked ? "tightly secured with screws." : "unsecured and can be opened."]")
+	var/obj/item/flag/solgov/S = draped
+	if(S in contents)
+		to_chat(user, "A flag is draped over it.")
 
 /obj/structure/closet/coffin/can_open()
 	. =  ..()
@@ -24,6 +28,15 @@
 		if(do_after(user, screwdriver_time_needed, src))
 			locked = !locked
 			to_chat(user, SPAN_NOTICE("You [locked ? "screw down" : "unscrew"] [src]'s lid."))
+	if(!opened && istype(W, /obj/item/flag))
+		var/obj/item/flag/draped = W
+		if(draped in contents)
+			return
+		else
+			if(!user.unEquip(draped, src))
+				return
+			to_chat(user, SPAN_NOTICE("You drape [draped] over \the [src]."))
+			update_icon()
 	else
 		..()
 
@@ -38,8 +51,26 @@
 
 
 /obj/structure/closet/coffin/break_open()
+	var/obj/item/flag/solgov/S = draped
+	if(S in contents)
+		visible_message(SPAN_WARNING("\The [src] breaks open, shredding the flag to pieces in the process!"))
+		qdel(S)
 	locked = FALSE
 	..()
+
+/obj/structure/closet/coffin/open()
+	var/obj/item/flag/solgov/S = draped
+	if(S in contents)
+		visible_message(SPAN_WARNING("\The [src] breaks open, shredding the flag to pieces in the process!"))
+		qdel(S)
+	..()
+
+/obj/structure/closet/coffin/on_update_icon()
+	var/obj/item/flag/solgov/S = draped
+	if(S in contents)
+		icon_state = "flag"
+	else
+		..()
 
 /obj/structure/closet/coffin/wooden
 	name = "coffin"
