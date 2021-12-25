@@ -1,0 +1,5 @@
+author: Mucker
+delete-after: true
+changes:
+  - balance: Tweaked Vox Slugs so they have a brief cooldown on movement and attacking
+      after being removed from a victim.
