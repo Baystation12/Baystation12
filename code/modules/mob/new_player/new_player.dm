@@ -25,34 +25,33 @@
 	verbs += /mob/proc/toggle_antag_pool
 
 /mob/new_player/proc/new_player_panel(force = FALSE)
-	if(!SScharacter_setup.initialized && !force)
-		return // Not ready yet.
+	if (!SScharacter_setup.initialized && !force)
+		return
 	var/output = list()
 	output += "<div align='center'>"
 	output += "<i>[GLOB.using_map.get_map_info()]</i>"
-	output +="<hr>"
-	output += "<a href='byond://?src=\ref[src];show_preferences=1'>Setup Character</A> "
-	output += "<a href='byond://?src=\ref[src];show_preferences=1'>Preferences</A> "
 	if (config.rules_url || config.lore_url)
 		output += "<hr>"
 		var/player_age = client?.player_age
 		if (isnum(player_age) && player_age < 7)
 			output += "<span style='font-weight: bold'>Welcome! Please check out these links:</span><br>"
 		if (config.rules_url)
-			output += "<a href='byond://?src=\ref[src];show_rules=1'>Show Rules</A>"
+			output += "<a href='byond://?src=\ref[src];show_rules=1'>Open Rules</a> "
 		if (config.lore_url)
-			output += "<a href='byond://?src=\ref[src];show_lore=1'>Show Lore</A>"
-	output += "<hr>Current character: <a href='byond://?src=\ref[client.prefs];load=1;details=1'>[client.prefs.real_name]</a>[client.prefs.job_high ? ", [client.prefs.job_high]" : null]<br>"
-	if(GAME_STATE > RUNLEVEL_LOBBY)
-		output += "<a href='byond://?src=\ref[src];manifest=1'>View the Crew Manifest</A> "
-	output += "<a href='byond://?src=\ref[src];observe=1'>Observe</A> "
-	if(GAME_STATE <= RUNLEVEL_LOBBY)
-		if(ready)
-			output += "<a class='linkOn' href='byond://?src=\ref[src];ready=0'>Un-Ready</a>"
+			output += "<a href='byond://?src=\ref[src];show_lore=1'>Open Lore</a>"
+	output += "<hr><a href='byond://?src=\ref[src];show_preferences=1'>Options</a> "
+	if (GAME_STATE > RUNLEVEL_LOBBY)
+		output += "<a href='byond://?src=\ref[src];manifest=1'>Crew Manifest</a>"
+	var/name = client.prefs.real_name || "(Random)"
+	output += "<br>Playing As <a href='byond://?src=\ref[client.prefs];load=1;details=1'>[name]</a>[client.prefs.job_high ? ", [client.prefs.job_high]" : null]"
+	output += "<hr><a href='byond://?src=\ref[src];observe=1'>Join As Observer</a> "
+	if (GAME_STATE <= RUNLEVEL_LOBBY)
+		if (ready)
+			output += "<a class='linkOn' href='byond://?src=\ref[src];ready=0'>Cancel Join At Start</a>"
 		else
-			output += "<a href='byond://?src=\ref[src];ready=1'>Ready Up</a>"
+			output += "<a href='byond://?src=\ref[src];ready=1'>Join At Start</a>"
 	else
-		output += "<a href='byond://?src=\ref[src];late_join=1'>Join Game!</A>"
+		output += "<a href='byond://?src=\ref[src];late_join=1'>Join As [name]</a>"
 	output += "</div>"
 	panel = new(src, "Welcome","Welcome to [GLOB.using_map.full_name]", 560, 280, src)
 	panel.set_window_options("can_close=0")
