@@ -6,11 +6,6 @@
 	var/maximum_mob_count
 	var/target_temp = 500
 	var/activation_sound = 'sound/effects/ghost.ogg'
-	var/mob_spawn_sounds = list(
-		'sound/magic/mutate.ogg',
-		'sound/effects/squelch1.ogg',
-		'sound/effects/squelch2.ogg'
-	)
 	var/activation_messages = list(
 		"lets loose a thousand agonized screams as it forces reality around it to bleed and distort!",
 		"cracks and blisters, blood seeping out from within!",
@@ -19,16 +14,6 @@
 	)
 
 	var/damage = 0
-	var/list/monsters = list(
-		/mob/living/simple_animal/hostile/meat/abomination = 5,
-		/mob/living/simple_animal/hostile/meat/horror = 30,
-		/mob/living/simple_animal/hostile/meat/strippedhuman = 60,
-		/mob/living/simple_animal/hostile/meat/horrorminer = 60,
-		/mob/living/simple_animal/hostile/meat/horrorsmall = 80,
-		/mob/living/simple_animal/hostile/meat = 5,
-		/mob/living/simple_animal/hostile/scarybat = 70,
-		/mob/living/simple_animal/hostile/creature = 40
-	)
 	var/list/portals = list()
 	var/list/mobs = list()
 
@@ -97,7 +82,6 @@
 				return
 
 			var/obj/effect/gateway/artifact/small/gate = new(T)
-			gate.spawnable = monsters
 			gate.parent = src
 			portals += gate
 
@@ -128,7 +112,6 @@
 	GLOB.destroyed_event.register(M, src, .proc/unregister_mob)
 	GLOB.death_event.register(M, src, .proc/unregister_mob)
 
-	playsound(M, pick(mob_spawn_sounds), 100)
 
 /datum/artifact_effect/hellportal/destroyed_effect()
 	convert_count = rand(40, 60)
@@ -145,6 +128,4 @@
 				var/mob/living/carbon/human/H = M
 				H.apply_damage((damage / 4), BRUTE, damage_flags = DAM_DISPERSED)
 
-	var/obj/effect/gateway/artifact/big/G = new (get_turf(holder))
-	G.spawnable = monsters
-	GLOB.sound_player.PlayLoopingSound(G, "\ref[src]", 'sound/effects/Heart Beat.ogg', 70, 6)
+	new /obj/effect/gateway/artifact/big(get_turf(holder))
