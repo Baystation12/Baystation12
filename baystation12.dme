@@ -3200,6 +3200,7 @@
 #include "code\unit_tests\virtual_mob_tests.dm"
 #include "code\unit_tests\zas_tests.dm"
 #include "code\unit_tests\~helpers.dm"
+#include "customs\code\hacso.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
 #include "maps\_map_include.dm"
