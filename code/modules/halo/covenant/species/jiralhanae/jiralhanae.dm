@@ -61,7 +61,7 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/cove
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right)
 		)
 
-	equipment_slowdown_multiplier = 0.9
+	equipment_slowdown_multiplier = 0.85
 	dodge_roll_delay = DODGE_ROLL_BASE_COOLDOWN - 1 SECOND
 
 	pain_scream_sounds = list(\

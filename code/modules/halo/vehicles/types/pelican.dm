@@ -53,7 +53,7 @@
 	vital_components = newlist(/obj/item/vehicle_component/health_manager/pelican)
 
 /obj/vehicles/air/pelican/unsc
-	faction = "unsc"
+	faction = "UNSC"
 
 	spawn_datum = /datum/mobile_spawn/unsc
 
@@ -129,16 +129,16 @@
 	internal_air = new
 
 /obj/vehicles/air/overmap/pelican/unsc
-	faction = "unsc"
+	faction = "UNSC"
 
 	spawn_datum = /datum/mobile_spawn/unsc
 
 /obj/vehicles/air/overmap/pelican/urf
-	faction = "innie"
+	faction = "Insurrection"
 
 	icon_state = "inni-base"
 	desc = "A versatile aircraft used by the UNSC for medium-lift operations of personnel, vehicles and equipment. This one has a red fist painted onto the armor. A 40mm Chain-Gun is mounted on the nose."
-	faction = "innie"
+	faction = "Insurrection"
 
 	comp_prof = /datum/component_profile/pelican/urf
 
@@ -200,7 +200,7 @@
 
 /obj/vehicles/air/pelican/innie
 	desc = "A versatile aircraft used by the UNSC for medium-lift operations of personnel, vehicles and equipment. This one has a red fist painted onto the armor. A 40mm Chain-Gun is mounted on the nose."
-	faction = "innie"
+	faction = "Insurrection"
 	occupants = list(13,1)
 
 	comp_prof = /datum/component_profile/pelican/urf

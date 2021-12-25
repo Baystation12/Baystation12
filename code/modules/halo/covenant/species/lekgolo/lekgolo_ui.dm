@@ -61,8 +61,7 @@
 	set name = "Turn Clockwise"
 
 	visible_message("\icon[src] <span class='notice'>[src] shuffles to face the right.</span>")
-	if(do_after(src, MGALEKGOLO_TURN_DELAY))
-		facedir(GLOB.cw_dir[dir], 1)
+	facedir(GLOB.cw_dir[dir], 1)
 
 /obj/item/hunter_action/turn_ccw
 	action_button_name = "Turn counter-clockwise"
@@ -77,13 +76,17 @@
 	set name = "Turn Counterclockwise"
 
 	visible_message("\icon[src] <span class='notice'>[src] shuffles to face the left.</span>")
-	if(do_after(src, MGALEKGOLO_TURN_DELAY))
-		facedir(GLOB.cww_dir[dir], 1)
+	facedir(GLOB.cww_dir[dir], 1)
 
 //see code\modules\mob\mob.dm
-/mob/living/simple_animal/mgalekgolo/facedir(var/ndir, var/mgalekgolo_allowed = 0)
-	if(mgalekgolo_allowed)
-		return ..()
-	return 0
+/mob/living/simple_animal/mgalekgolo/set_dir(var/new_dir)
+	if(!turning)
+		turning = 1
+		if(!crouched || do_after(src, MGALEKGOLO_TURN_DELAY))
+			. = ..()
+		turning = 0
+	else
+		to_chat(src,"<span class = 'notice'>You're already turning!</span>")
+	return
 
 #undef MGALEKGOLO_TURN_DELAY

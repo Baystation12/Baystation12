@@ -30,8 +30,8 @@
 	var/allowed_magazines	    	//magazine types that may be loaded. Can be a list or single path
 	var/auto_eject = 0		    	//if the magazine should automatically eject itself when empty.
 	var/auto_eject_sound = null
-	var/speed_reload_time = 0.4		//How long it takes to speed reload this gun in seconds. Set to -1 to disable.
-	var/tactical_reload_time = 0.5	//How long it takes to tactically reload this gun in seconds. Set to -1 to disable.
+	var/speed_reload_time = 0.4 SECONDS		//How long it takes to speed reload this gun. Set to -1 to disable.
+	var/tactical_reload_time = 0.5 SECONDS	//How long it takes to tactically reload this gun. Set to -1 to disable.
 
 	var/is_jammed = 0           	//Whether this gun is jammed
 	var/jam_chance = 0          	//Chance it jams on fire
@@ -154,7 +154,7 @@
 							if(tactical_reload_time == -1)
 								to_chat(user, "<span class='warning'>You can't tactically reload this gun!</span>")
 								return
-							if(!do_after(user, tactical_reload_time SECONDS, src))
+							if(!do_after(user, tactical_reload_time, src,same_loc = 0))
 								return
 							user.remove_from_mob(AM)
 							AM.loc = src
@@ -165,7 +165,7 @@
 							if(!speed_reload_time == -1)
 								to_chat(user, "<span class='warning'>You can't speed reload with this gun!</span>")
 								return
-							if(!do_after(user, speed_reload_time SECONDS, src))
+							if(!do_after(user, speed_reload_time, src,same_loc = 0))
 								return
 							user.remove_from_mob(AM)
 							AM.loc = src.loc
@@ -264,14 +264,11 @@
 	load_ammo(A, user)
 
 /obj/item/weapon/gun/projectile/attack_self(mob/user as mob)
-	if(firemodes.len > 1)
-		..()
-	else
-		if(stored_targ)
-			to_chat(user,"<span class = 'notice'>You stop your sustained burst from [src]</span>")
-			stored_targ = null
-			return
-		unload_ammo(user)
+	if(stored_targ)
+		to_chat(user,"<span class = 'notice'>You stop your sustained burst from [src]</span>")
+		stored_targ = null
+		return
+	unload_ammo(user)
 
 /obj/item/weapon/gun/projectile/attack_hand(mob/user as mob)
 	if(user.get_inactive_hand() == src)

@@ -26,10 +26,10 @@
 		slot_s_store_str = 'code/modules/halo/weapons/icons/Armor_Weapons.dmi',
 		)
 	crosshair_file = 'code/modules/halo/weapons/icons/dragaim_missile.dmi'
-	slowdown_general = 1
 	wielded_item_state = "fuelrod-wielded"
 	salvage_components = list(/obj/item/plasma_core)
 	matter = list("nanolaminate" = 2, "kemocite" = 1)
+	slowdown_general = 1
 
 /obj/item/weapon/gun/projectile/fuel_rod/update_icon()
 	if(ammo_magazine)

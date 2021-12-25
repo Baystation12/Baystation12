@@ -16,7 +16,7 @@
 	var/inhand_icon_state = "Energy sword_inhand Human" // " l" or " r" is added after this to make the variants
 	force = 1
 	throwforce = 1
-	active_force = 40
+	active_force = 50
 	active_throwforce = 12
 	armor_penetration = 70
 	var/hits_burn_mobs = 1

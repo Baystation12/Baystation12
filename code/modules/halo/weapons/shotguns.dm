@@ -52,11 +52,12 @@
 	slot_flags = SLOT_BACK
 	magazine_type = /obj/item/ammo_magazine/kv32
 	one_hand_penalty = -1
-	burst = 2
-	fire_delay = 1
+	burst = 1
+	fire_delay = 5
+	burst_delay = 1
 	screen_shake = 1
 	accuracy = -1
-	dispersion = list(0.45,0.45)
+	dispersion = list(0.45)
 	hud_bullet_reffile = 'code/modules/halo/icons/hud_display/hud_bullet_7x8.dmi'
 	hud_bullet_iconstate = "shell"
 	hud_bullet_row_num = 2
@@ -82,9 +83,9 @@
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "kv_mag"
 	mag_type = MAGAZINE
-	ammo_type = /obj/item/ammo_casing/shotgun/pellet
+	ammo_type = /obj/item/ammo_casing/shotgun/pellet/low_power
 	matter = list(DEFAULT_WALL_MATERIAL = 1500)
-	caliber = "shotgun"
+	caliber = "shotgunlowpower"
 	max_ammo = 4
 	multiple_sprites = 1
 

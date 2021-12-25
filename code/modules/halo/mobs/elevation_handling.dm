@@ -14,7 +14,7 @@
 				dam_to_remove = round(dam_to_remove / FLIGHT_DODGE_DIVISOR)
 				decrement_flight_ticks(dam_to_remove)
 				if(prob(FLIGHT_DODGE_MESSAGE_CHANCE))
-					visible_message(src,"<span class = 'danger'>[src] dodges [p], making them hover lower!</span>")
+					visible_message(src.loc,"<span class = 'danger'>[src] dodges [p], making them hover lower!</span>")
 
 #undef FLIGHT_DODGE_DIVISOR
 #undef FLIGHT_DODGE_MESSAGE_CHANCE

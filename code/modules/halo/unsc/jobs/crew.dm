@@ -22,3 +22,4 @@
 	total_positions = 1
 	spawn_positions = 1
 	outfit_type = /decl/hierarchy/outfit/job/unsc/medic
+	access = list(access_unsc,access_unsc_armoury,access_unsc_cargo)

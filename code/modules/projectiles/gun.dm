@@ -96,7 +96,7 @@
 	var/charge_sound = 'code/modules/halo/sounds/Spartan_Laser_Charge_Sound_Effect.ogg'
 	var/is_charging = 0
 	var/irradiate_non_cov = 0 //Set this to anything above 0, and it'll irradiate humans when fired. Spartans and Orions are ok.
-	var/is_heavy = 0 //Set this to anything above 0, and all species that aren't elites/brutes/spartans/orions have to two-hand it/
+	var/is_heavy = 0 //Set this to anything above 0, and all species that aren't elites/brutes/spartans/orions have to two-hand it
 
 	//"Channeled" weapons, aka longfire beam sustained types (sentinel beam)//
 
@@ -272,21 +272,7 @@
 		to_chat(user, "<span class='warning'>You refrain from firing your [src] as your intent is set to help.</span>")
 		return
 
-	if(is_charging)
-		to_chat(user,"<span class = 'notice'>[src] is charging and cannot fire</span>")
-		return
-
-	if(is_charged_weapon==1)
-		if(charge_sound)
-			playsound(src.loc, charge_sound, 100, 1)
-		user.visible_message("<span class = 'notice'>[user] starts charging the [src]!</span>")
-
-		is_charging = 1
-		if (!do_after(user,arm_time,src))
-			is_charging = 0
-			return
 		Fire(A,user,params)
-		is_charging = 0
 	else
 		Fire(A,user,params) //Otherwise, fire normally.
 
@@ -359,6 +345,21 @@
 		if(!held_twohanded)
 			to_chat(user,"<span class = 'notice'>You can't fire this weapon with just one hand!</span>")
 			return
+
+	if(is_charging)
+		to_chat(user,"<span class = 'notice'>[src] is charging and cannot fire</span>")
+		return
+
+	if(is_charged_weapon==1)
+		if(charge_sound)
+			playsound(src.loc, charge_sound, 100, 1)
+		user.visible_message("<span class = 'notice'>[user] starts charging the [src]!</span>")
+
+		is_charging = 1
+		if (!do_after(user,arm_time,src))
+			is_charging = 0
+			return
+		is_charging = 0
 
 	var/shoot_time = (burst - 1)* burst_delay
 	//user.setClickCooldown(shoot_time) //no clicking on things while shooting
@@ -774,6 +775,15 @@
 	new_mode.apply_to(src)
 
 	return new_mode
+
+/obj/item/weapon/gun/verb/switch_firemode_verb()
+	set name = "Switch Firemode"
+	set category = "Weapon"
+	set desc = "Switch the weapon's fire mode."
+
+	var/datum/firemode/new_mode = switch_firemodes()
+	if(new_mode)
+		to_chat(usr, "<span class='notice'>\The [src] is now set to [new_mode.name].</span>")
 
 /obj/item/weapon/gun/attack_self(mob/user)
 	if(stored_targ)

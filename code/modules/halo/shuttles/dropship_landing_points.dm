@@ -21,17 +21,17 @@
 
 /obj/effect/landmark/dropship_land_point/unsc
 	name = "UNSC Land Point"
-	faction = "unsc"
+	faction = "UNSC"
 	icon_state = "dropship_unsc"
 
 /obj/effect/landmark/dropship_land_point/unsc/no_artifact
 
 /obj/effect/landmark/dropship_land_point/covenant
 	name = "Covenant Land Point"
-	faction = "covenant"
+	faction = "Covenant"
 	icon_state = "dropship_cov"
 
 /obj/effect/landmark/dropship_land_point/innie
 	name = "Innie Land Point"
-	faction = "innie"
+	faction = "Insurrection"
 	icon_state = "dropship_innie"

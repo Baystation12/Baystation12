@@ -117,7 +117,7 @@
 
 /obj/structure/destructible/Bumped(var/mob/living/bumper)
 	. = ..()
-	if(bump_climb && bumper.is_preference_enabled(/datum/client_preference/toggle_obstacle_autoclimb))
+	if(bump_climb && istype(bumper) && bumper.is_preference_enabled(/datum/client_preference/toggle_obstacle_autoclimb))
 		structure_climb(bumper)
 
 /obj/structure/destructible/CanPass(atom/movable/mover, turf/start, height=0, air_group=0)//So bullets will fly over and stuff.

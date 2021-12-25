@@ -5,9 +5,9 @@
 	icon = 'code/modules/halo/weapons/icons/forerunner_sprites.dmi'
 	icon_state = "exorcisor"
 	item_state = "armblade"
-	force = 50 //Lower damage, higher AP than esword
+	force = 50
 	throwforce = 12
-	armor_penetration = 45
+	armor_penetration = 70
 	edge = 1
 	sharp = 1
 	item_icons = list(

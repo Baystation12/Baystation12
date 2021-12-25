@@ -94,6 +94,7 @@
 			if(istype(glasses))
 				linked_controller.linked_devices += glasses
 				to_chat(h,"<span class = 'notice'>You have been added to [linked_controller.squad_name]</span>")
+				to_chat(user,"<span class = 'notice'>[h] has been added to [linked_controller.squad_name]</span>")
 		else if(istype(A,/obj/item/clothing/glasses/hud/tactical))
 			linked_controller.linked_devices += A
 			to_chat(user,"<span class = 'notice'>[A.name] added to linker.</span>")

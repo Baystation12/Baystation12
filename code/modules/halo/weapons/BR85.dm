@@ -19,7 +19,7 @@
 	burst_delay = 1.2
 	hud_bullet_row_num = 18
 	w_class = ITEM_SIZE_LARGE
-	dispersion=list(0.26, 0.26, 0.26) //About a third of a tile at 7 tile range.
+	dispersion=list(0.16, 0.16, 0.16)
 	scope_zoom_amount = 2
 	is_scope_variable = 1
 	item_icons = list(

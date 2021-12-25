@@ -58,7 +58,7 @@
 	caliber = "hardlightBinaryrifle"
 	mag_type = MAGAZINE
 	ammo_type = /obj/item/ammo_casing/binaryrifle
-	max_ammo = 2
+	max_ammo = 4
 
 /obj/item/ammo_casing/binaryrifle
 	name = "hardlight cell"

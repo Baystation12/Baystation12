@@ -206,7 +206,7 @@
 
 	//does this overmap object have predefined drop pod locations?
 	for(var/obj/effect/landmark/drop_pod_landing/D in world)
-		if(!(D.loc.z  in om_targ.map_z))
+		if(!(D.z  in om_targ.map_z))
 			continue
 		var/area/A = get_area(D)
 		var/entry_name = A.name

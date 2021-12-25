@@ -1,6 +1,6 @@
 /obj/item/weapon/gun/energy/plasmarifle
 	name = "Type-25 Directed Energy Rifle"
-	desc = "Also known as the \"Plasma Rifle\", this weapon fires 3-shot bursts of superheated plasma."
+	desc = "Also known as the \"Plasma Rifle\", this weapon fires bursts of superheated plasma."
 	icon = 'code/modules/halo/weapons/icons/Covenant Weapons.dmi'
 	icon_state = "Plasma Rifle"
 	item_state = "plasmarifle"
@@ -53,16 +53,17 @@
 			return 1
 
 /obj/item/weapon/gun/energy/plasmarifle/decorative
-	desc = "Also known as the \"Plasma Rifle\", this weapon fires 3-shot bursts of superheated plasma. This one seems to have fused the internal components together, making it unusable."
+	desc = "Also known as the \"Plasma Rifle\", this weapon fires bursts of superheated plasma. This one seems to have fused the internal components together, making it unusable."
 	max_shots = 0
 
 /obj/item/weapon/gun/energy/plasmarifle/brute
 	name = "Type-25 Directed Energy Rifle (overcharged)"
 	icon_state = "Brute Plasma Rifle"
-	desc = "Also known as the \"Plasma Rifle\", this weapon fires 4-shot bursts of superheated plasma at an accelerated rate. This one appears to be overcharged for fire speed."
+	desc = "Also known as the \"Plasma Rifle\", this weapon fires bursts of superheated plasma at an accelerated rate. This one appears to be overcharged for fire speed at the cost of damage and accuracy."
 	projectile_type = /obj/item/projectile/bullet/covenant/plasmarifle/brute
-	fire_delay = 6
-	burst_delay = 1.8
+	fire_delay = 5
+	burst_delay = 1.7
+	accuracy = -1
 	irradiate_non_cov = 3
 
 /obj/item/weapon/gun/projectile/concussion_rifle

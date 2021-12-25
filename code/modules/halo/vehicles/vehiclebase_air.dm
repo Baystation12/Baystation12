@@ -80,7 +80,11 @@
 		takeoff_vehicle()
 
 /obj/vehicles/air/proc/get_reachable_waypoints()
-	return dropship_landing_controller.get_potential_landing_points(1,1,faction)
+	var/driver_faction = get_driver_faction()
+	var/faction_use = driver_faction
+	if(isnull(driver_faction) || driver_faction == "neutral")
+		faction_use = faction
+	return dropship_landing_controller.get_potential_landing_points(1,1,faction_use)
 
 /obj/vehicles/air/proc/create_waypoint_list()
 	if(ticker && ticker.mode && world.time < ticker.mode.ship_lockdown_until)
@@ -139,7 +143,6 @@
 					if(istype(selected_landing_point_obj, loc_type))
 						to_chat(usr,"<span class = 'notice'>You cannot fly there with [M].</span>")
 						return
-		return
 
 	visible_message("<span class = 'notice'>[src] starts prepping for long-range flight.</span>")
 	if(!do_after(usr,WAYPOINT_FLIGHT_DELAY,src))

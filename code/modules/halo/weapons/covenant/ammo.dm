@@ -66,6 +66,7 @@
 
 /obj/item/projectile/bullet/covenant/plasmarifle/brute
 	damage = 25
+	shield_damage = 5
 	icon_state = "heavy_plas_cannon"
 	muzzle_type = /obj/effect/projectile/muzzle/cov_red
 
@@ -230,6 +231,7 @@
 	desc = "This projectile leaves a green trail in its wake."
 	damage = 25 //A lot less rounds in a mag than the counterpart BR.
 	shield_damage = 10
+	armor_penetration = 20
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "carbine_casing"
 	check_armour = "energy"

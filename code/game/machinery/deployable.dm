@@ -84,10 +84,10 @@ for reference:
 /obj/structure/barricade/get_material()
 	return material
 
-/obj/structure/barricade/proc/take_damage(var/amt)
+/obj/structure/barricade/proc/take_damage(var/amt,var/destroy_msg = "The barricade is smashed apart!")
 	health = min(health-amt,maxhealth)
 	if (src.health <= 0)
-		visible_message("<span class='danger'>The barricade is smashed apart!</span>")
+		visible_message("<span class='danger'>[destroy_msg]</span>")
 		dismantle()
 		qdel(src)
 		return
@@ -128,14 +128,10 @@ for reference:
 /obj/structure/barricade/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			visible_message("<span class='danger'>\The [src] is blown apart!</span>")
-			qdel(src)
+			take_damage(health,"\The [src] is blown apart!")
 			return
 		if(2.0)
-			src.health -= 25
-			if (src.health <= 0)
-				visible_message("<span class='danger'>\The [src] is blown apart!</span>")
-				dismantle()
+			take_damage(maxhealth/4,"\The [src] is blown apart!")
 			return
 
 /obj/structure/barricade/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)//So bullets will fly over and stuff.
@@ -143,16 +139,16 @@ for reference:
 		return 1
 	if(istype(mover) && (mover.checkpass(PASSTABLE) || mover.elevation != elevation))
 		var/obj/item/projectile/p = mover
-		if(istype(p) && p.original == src)
+		if(istype(p) && (p.original == src || p.original == loc))
 			return 0
 		return 1
 	else
 		return 0
 
 /obj/structure/barricade/bullet_act(var/obj/item/projectile/Proj)
-	. = ..()
 	take_damage(Proj.damage)
 	playsound(loc, 'sound/weapons/tablehit1.ogg', 50, 1)
+	. = ..()
 
 //Actual Deployable machinery stuff
 /obj/machinery/deployable

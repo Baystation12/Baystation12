@@ -19,7 +19,7 @@
 	burst_delay = 1.2
 	hud_bullet_row_num = 18
 	w_class = ITEM_SIZE_LARGE
-	dispersion=list(0.26, 0.26, 0.26)
+	dispersion=list(0.16, 0.16, 0.16)
 	wielded_item_state = "br55-wielded"
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',

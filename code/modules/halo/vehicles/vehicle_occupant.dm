@@ -87,19 +87,27 @@
 		return 1
 	return 0
 
-/obj/vehicles/proc/enter_as_position(var/mob/user,var/position = "passenger")
+/obj/vehicles/proc/get_driver_faction()
 	var/list/drivers = get_occupants_in_position("driver")
 	for(var/mob/living/driver in drivers)
-		if(user.faction != driver.faction)
-			to_chat(user,"<span class = 'notice'>[src] is currently occupied by the [driver.faction] faction, and disallows your entry!</span>")
-			return
+		return driver.faction
+	return null
+
+/obj/vehicles/proc/enter_as_position(var/mob/user,var/position = "passenger",var/forced_by_faction = null)
+	var/driver_faction = get_driver_faction()
+	var/faction_use = user.faction
+	if(forced_by_faction && forced_by_faction != "neutral")
+		faction_use = forced_by_faction
+	if(driver_faction && driver_faction != "neutral" && faction_use != driver_faction)
+		to_chat(user,"<span class = 'notice'>[src] is currently occupied by the [driver_faction] faction, and disallows your entry!</span>")
+		return 0
 	if(check_position_blocked(position))
 		to_chat(user,"<span class = 'notice'>No [position] spaces in [src]</span>")
 		return 0
 	var/mob/living/h_test = user
 	if(!istype(h_test) && position == "driver")
 		to_chat(user,"<span class = 'notice'>You don't know how to drive that.</span>") //Let's assume non-living mobs can't drive.
-		return
+		return 0
 	var/can_enter = check_enter_invalid()
 	if(can_enter)
 		to_chat(user,"<span class = 'notice'>[can_enter]</span>")

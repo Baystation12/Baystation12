@@ -24,3 +24,12 @@
 	pellets = 8
 	range_step = 1
 	spread_step = 5
+
+/obj/item/ammo_casing/shotgun/pellet/low_power
+	desc = "A 12g shotgun shell, low-powder load."
+	caliber = "shotgunlowpower"
+	projectile_type = /obj/item/projectile/bullet/m120
+
+/obj/item/projectile/bullet/pellet/low_power
+	damage = 18
+	pellets = 6

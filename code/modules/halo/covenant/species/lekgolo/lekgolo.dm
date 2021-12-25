@@ -14,6 +14,7 @@
 	health = 550
 	unsuitable_atmos_damage = 0
 	var/crouched = 0
+	var/turning = 0
 
 	stop_automated_movement = 1
 	wander = 0
