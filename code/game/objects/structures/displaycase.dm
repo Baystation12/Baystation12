@@ -46,7 +46,7 @@
 		playsound(src, "shatter", 70, 1)
 		update_icon()
 
-/obj/structure/displaycase/damage_health(damage, damage_type, skip_death_state_change)
+/obj/structure/displaycase/damage_health(damage, damage_type, skip_death_state_change, severity)
 	. = ..()
 	if (!.)
 		playsound(src, 'sound/effects/Glasshit.ogg', 75, 1)
