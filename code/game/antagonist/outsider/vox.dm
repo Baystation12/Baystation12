@@ -2,18 +2,18 @@ GLOBAL_DATUM_INIT(vox_raiders, /datum/antagonist/vox, new)
 
 /datum/antagonist/vox
 	id = MODE_VOXRAIDER
-	role_text = "Vox Raider" 
+	role_text = "Vox Raider"
 	role_text_plural = "Vox Raiders"
 	landmark_id = "Vox-Spawn"
 	welcome_text = "Scrap has been hard to find lately, and the Shroud requires replacement parts. Do not disappoint your kin."
 	flags = ANTAG_VOTABLE | ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_SET_APPEARANCE
 	antaghud_indicator = "hudraider"
 
-	hard_cap = 6
+	hard_cap = 5
 	hard_cap_round = 10
 	initial_spawn_req = 3
-	initial_spawn_target = 5
-	
+	initial_spawn_target = 4
+
 	id_type = /obj/item/card/id/syndicate
 
 /datum/antagonist/vox/proc/find_vox_ship()
@@ -32,7 +32,7 @@ GLOBAL_DATUM_INIT(vox_raiders, /datum/antagonist/vox, new)
 
 /datum/antagonist/vox/build_candidate_list(datum/game_mode/mode, ghosts_only)
 	candidates = list()
-	for(var/datum/mind/player in mode.get_players_for_role(id))		
+	for(var/datum/mind/player in mode.get_players_for_role(id))
 		if (ghosts_only && !(isghostmind(player) || isnewplayer(player.current)))
 			log_debug("[key_name(player)] is not eligible to become a [role_text]: Only ghosts may join as this role!")
 			continue
