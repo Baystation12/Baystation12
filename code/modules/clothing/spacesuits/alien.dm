@@ -21,7 +21,7 @@
 
 /obj/item/clothing/suit/space/vox/New()
 	..()
-	slowdown_per_slot[slot_wear_suit] = 1
+	slowdown_per_slot[slot_wear_suit] = 0.75
 
 /obj/item/clothing/head/helmet/space/vox
 	icon = 'icons/obj/clothing/species/vox/obj_head_vox.dmi'
