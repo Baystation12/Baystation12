@@ -1,0 +1,5 @@
+author: Spookerton
+delete-after: true
+changes:
+  - tweak: Modes that would be impossible to start based on the number of players
+      in the lobby at vote time cannot be voted for.
