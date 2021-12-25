@@ -101,6 +101,9 @@
 
 // Does actual poison injection, after all checks passed.
 /mob/living/simple_animal/hostile/giant_spider/proc/inject_poison(mob/living/L, target_zone)
+	if (isSynthetic())
+		return
+
 	if(prob(poison_chance))
 		to_chat(L, SPAN_WARNING("You feel a tiny prick."))
 		L.reagents.add_reagent(poison_type, poison_per_bite)
