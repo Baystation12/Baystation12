@@ -145,6 +145,15 @@
 		/obj/item/paper_bundle
 	)
 
+/obj/item/gripper/fuel //Used to handle hydrogen tanks.
+	name = "hydrogen tank gripper"
+	icon_state = "gripper"
+	desc = "A simple grasping tool for holding hydrogen tanks."
+
+	can_hold = list(
+		/obj/item/tank/hydrogen
+	)
+
 /obj/item/gripper/no_use //Used when you want to hold and put items in other things, but not able to 'use' the item
 
 /obj/item/gripper/no_use/attack_self(mob/user as mob)

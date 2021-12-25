@@ -42,7 +42,8 @@
 		/obj/item/device/multitool,
 		/obj/item/bioreactor,
 		/obj/item/inflatable_dispenser/robot,
-		/obj/item/robot_harvester
+		/obj/item/robot_harvester,
+		/obj/item/gripper/fuel
 	)
 
 	emag = /obj/item/melee/energy/machete

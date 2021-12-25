@@ -153,6 +153,15 @@
 			to_chat(user, "<spawn class='notice'>You open up \the [src] door.")
 			playsound(src.loc, 'sound/effects/locker_open.ogg', 15, 1, -3)
 			opened = 1
+	if(isWrench(W))
+		if(!opened)
+			to_chat(user, SPAN_WARNING("The door is secured tightly. You'll need a crowbar to open it."))
+			return
+		else if(contents.len > 0)
+			var/obj/item/tank/T = contents[1]
+			if(istype(T))
+				T.dropInto(user.loc)
+				update_icon()
 	else if(istype(W,/obj/item/tank))
 		if(!opened)
 			to_chat(user, "<spawn class='warning'>\The [src] door is still closed!")
