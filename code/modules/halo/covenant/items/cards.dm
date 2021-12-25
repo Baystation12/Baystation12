@@ -152,3 +152,27 @@
 	name = "Prophet identification card"
 	icon = 'code/modules/halo/covenant/items/Cards.dmi'
 	icon_state = "prophet_blue"
+
+
+
+/***** YANME'E *****/
+
+/obj/item/weapon/card/id/yanmee_minor
+	name = "Yanme'e Minor identification card"
+	icon = 'code/modules/halo/covenant/items/Cards.dmi'
+	icon_state = "droneminor_id"
+
+/obj/item/weapon/card/id/yanmee_major
+	name = "Yanme'e Major identification card"
+	icon = 'code/modules/halo/covenant/items/Cards.dmi'
+	icon_state = "dronemayor_id"
+
+/obj/item/weapon/card/id/yanmee_ultra
+	name = "Yanme'e Ultra identification card"
+	icon = 'code/modules/halo/covenant/items/Cards.dmi'
+	icon_state = "droneultra_id"
+
+/obj/item/weapon/card/id/yanmee_leader
+	name = "Yanme'e Leader identification card"
+	icon = 'code/modules/halo/covenant/items/Cards.dmi'
+	icon_state = "droneleader_id"
