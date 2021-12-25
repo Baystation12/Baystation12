@@ -1,0 +1,12 @@
+{
+	"ckey": "Hacso",
+	"character_name": "noone",
+	"item_path": "/obj/item/custkit/sprite",
+	"item_name": "Something",
+	"item_desc": "Some things",
+	"item_icon_state": "some_iconstate",
+	"additional_data": {
+		"itemtype": "/obj/item/wrench",
+		"can_unkit": true
+	}
+}

@@ -1,0 +1,8 @@
+{
+	"ckey": "Hacso",
+	"character_name": "noone",
+	"item_path": "/obj/item/wrench",
+	"item_name": "Something",
+	"item_desc": "Some things",
+	"item_icon_state": "crystal_wrench"
+}
