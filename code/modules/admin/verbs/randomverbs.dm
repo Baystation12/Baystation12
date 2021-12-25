@@ -77,18 +77,46 @@
 /client/proc/cmd_admin_world_narrate() // Allows administrators to fluff events a little easier -- TLE
 	set category = "Special Verbs"
 	set name = "Global Narrate"
-	set desc = "Narrate to everyone."
+	set desc = "Narrate to everyone, or players on specific z-levels."
 
 	if(!check_rights(R_ADMIN))
 		return
 
-	var/result = cmd_admin_narrate_helper(src)
-	if (!result)
+	var/region = input("Narrate Globally, single Z level, or connected Z levels?", "Region") as null | anything in list(
+		"Global",
+		"Single Z",
+		"Connected Zs"
+	)
+
+	if (!region)
 		return
 
-	to_world(result[1])
+	if (region != "Global")
+		var/chosen_z = input("Choose Z level: [region]", "Choose Z", "[get_z(usr) ? get_z(usr) : 0]") as null | num
+		if (!chosen_z)
+			return
 
-	log_and_message_staff(" - GlobalNarrate [result[2]]/[result[3]]: [result[4]]")
+		var/list/z_levels = list(chosen_z)
+		if (region == "Connected Zs")
+			z_levels = GetConnectedZlevels(chosen_z)
+
+		var/result = cmd_admin_narrate_helper(src)
+		if (!result)
+			return
+
+		for (var/mob/L in GLOB.player_list)
+			if (get_z(L) in z_levels)
+				to_chat(L, result[1])
+
+		log_and_message_staff(" - GlobalNarrate to z-level(s): ([english_list(z_levels)]), [result[2]]/[result[3]]: [result[4]]")
+	else
+		var/result = cmd_admin_narrate_helper(src)
+		if (!result)
+			return
+
+		to_world(result[1])
+		log_and_message_staff(" - GlobalNarrate [region] [result[2]]/[result[3]]: [result[4]]")
+
 	SSstatistics.add_field_details("admin_verb","GLN") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
