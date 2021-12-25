@@ -14,12 +14,12 @@
 /decl/emote/audible/species_sound/aim
 	key = "aim"
 	emote_message_3p = "USER taunts their opponent's skill!"
-	species_sounds = list(/datum/species/sangheili = 'code/modules/halo/sounds/cannot_aim.ogg')
+	species_sounds = list(/datum/species/sangheili = 'code/modules/halo/sounds/licensed/cannot_aim.ogg')
 
 /decl/emote/audible/species_sound/nipple
 	key = "nipple"
 	emote_message_3p = "USER exclaims their thirst!"
-	species_sounds = list(/datum/species/unggoy = 'code/modules/halo/sounds/nipple.ogg')
+	species_sounds = list(/datum/species/unggoy = 'code/modules/halo/sounds/licensed/nipple.ogg')
 
 /decl/emote/audible/species_sound/need_weapon
 	key = "weapon"
@@ -29,7 +29,7 @@
 /decl/emote/audible/species_sound/boo
 	key = "boo"
 	emote_message_3p = "USER attempts to terrify the enemy!"
-	species_sounds = list(/datum/species/spartan = 'code/modules/halo/sounds/boo.ogg')
+	species_sounds = list(/datum/species/spartan = 'code/modules/halo/sounds/licensed/boo.ogg')
 
 /decl/emote/audible/painscream
 	key = "painscream"
