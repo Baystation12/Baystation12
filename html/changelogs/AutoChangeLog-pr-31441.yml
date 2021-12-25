@@ -1,0 +1,4 @@
+author: Mucker
+delete-after: true
+changes:
+  - admin: Added z-level options to the Global Narrate verb.
