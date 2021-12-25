@@ -200,6 +200,7 @@
 
 	// Effect 1: Radiation, weakening to all mobs on Z level
 	for(var/z in affected_z)
+		CHECK_TICK
 		SSradiation.z_radiate(locate(1, 1, z), DETONATION_RADS, 1)
 
 	for(var/mob/living/mob in GLOB.living_mob_list_)
@@ -217,6 +218,7 @@
 		if(!(A.z in affected_z))
 			continue
 
+		CHECK_TICK
 		// Overloads lights
 		if(prob(DETONATION_APC_OVERLOAD_PROB))
 			A.overload_lighting()
@@ -235,14 +237,17 @@
 		S.energy_fail(round(DETONATION_SHUTDOWN_SMES * random_change))
 
 	// Effect 3: Break solar arrays
+	CHECK_TICK
 
 	for(var/obj/machinery/power/solar/S in SSmachines.machinery)
 		if(!(S.z in affected_z))
 			continue
+
+		CHECK_TICK
 		if(prob(DETONATION_SOLAR_BREAK_CHANCE))
 			S.set_broken(TRUE)
 
-
+	CHECK_TICK
 
 	// Effect 4: Medium scale explosion
 	spawn(0)
@@ -566,7 +571,7 @@
 	gasefficency = 0.125
 
 	pull_time = 150
-	explosion_power = 3
+	explosion_power = 20
 
 /obj/machinery/power/supermatter/shard/announce_warning() //Shards don't get announcements
 	return

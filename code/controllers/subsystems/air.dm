@@ -87,6 +87,9 @@ SUBSYSTEM_DEF(air)
 	var/active_zones = 0
 	var/next_id = 1
 
+	var/active_edges_firelimit = 20
+	var/times_failed_to_calc_firelevel = 0
+
 /datum/controller/subsystem/air/proc/reboot()
 	// Stop processing while we rebuild.
 	can_fire = FALSE
@@ -207,6 +210,16 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 		else if (MC_TICK_CHECK)
 			return
 
+	var/halt_firelevel_calculations = 0
+	if(tick_usage * world.tick_lag > Master.current_ticklimit || length(processing_edges) > active_edges_firelimit)
+		halt_firelevel_calculations = 1
+		times_failed_to_calc_firelevel++
+		if(times_failed_to_calc_firelevel > 60)
+			active_edges_firelimit += 5
+			times_failed_to_calc_firelevel = 0
+	else
+		times_failed_to_calc_firelevel = 0
+
 	while (curr_defer.len)
 		var/turf/T = curr_defer[curr_defer.len]
 		curr_defer.len--
@@ -245,6 +258,12 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 	while (curr_fire.len)
 		var/zone/Z = curr_fire[curr_fire.len]
 		curr_fire.len--
+		if(halt_firelevel_calculations)
+			if(length(Z.fire_tiles) && !Z.firelevel)
+				Z.firelevel = vsc.fire_firelevel_multiplier
+		else
+			Z.calculate_fire_level()
+
 
 		Z.process_fire()
 

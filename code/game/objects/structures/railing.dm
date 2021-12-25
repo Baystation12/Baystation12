@@ -65,7 +65,6 @@
 
 /obj/structure/railing/Destroy()
 	anchored = FALSE
-	atom_flags = 0
 	broken = TRUE
 	for(var/thing in trange(1, src))
 		var/turf/T = thing

@@ -41,17 +41,16 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 		create_fire(exposed_temperature)
 	return igniting
 
-/zone/proc/process_fire()
+/zone/proc/calculate_fire_level()
 	var/datum/gas_mixture/burn_gas = air.remove_ratio(vsc.fire_consuption_rate, fire_tiles.len)
-
-	var/firelevel = burn_gas.react(src, fire_tiles, force_burn = 1, no_check = 1)
-
+	firelevel = burn_gas.react(src, fire_tiles, force_burn = 1, no_check = 1)
 	air.merge(burn_gas)
 
+/zone/proc/process_fire()
 	if(firelevel)
 		for(var/turf/T in fire_tiles)
 			if(T.fire)
-				T.fire.firelevel = firelevel
+				T.fire.update_firelevel(firelevel)
 			else
 				var/obj/effect/decal/cleanable/liquid_fuel/fuel = locate() in T
 				fire_tiles -= T
@@ -98,7 +97,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 		return 1
 
 	if(fire)
-		fire.firelevel = max(fl, fire.firelevel)
+		fire.update_firelevel(max(fl, fire.firelevel))
 		return 1
 
 	if(!zone)
@@ -140,21 +139,10 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 
 	var/datum/gas_mixture/air_contents = my_tile.return_air()
 
-	if(firelevel > 6)
-		icon_state = "3"
-		set_light(1, 2, 7)
-	else if(firelevel > 2.5)
-		icon_state = "2"
-		set_light(0.7, 2, 5)
-	else
-		icon_state = "1"
-		set_light(0.5, 1, 3)
-
 	for(var/mob/living/L in loc)
 		L.FireBurn(firelevel, air_contents.temperature, air_contents.return_pressure())  //Burn the mobs!
 
-	loc.fire_act(air_contents, air_contents.temperature, air_contents.volume)
-	for(var/atom/A in loc)
+	for(var/atom/A in (loc.contents + loc))
 		A.fire_act(air_contents, air_contents.temperature, air_contents.volume)
 
 	//spread
@@ -166,16 +154,14 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 				if(!enemy_tile.zone || enemy_tile.fire)
 					continue
 
+				if(enemy_tile.fire_protection > world.time-30)
+					update_firelevel(firelevel - 1.5)
+					continue
+
 				//if(!enemy_tile.zone.fire_tiles.len) TODO - optimize
 				var/datum/gas_mixture/acs = enemy_tile.return_air()
 				var/obj/effect/decal/cleanable/liquid_fuel/liquid = locate() in enemy_tile
 				if(!acs || !acs.check_combustability(liquid))
-					continue
-
-				//If extinguisher mist passed over the turf it's trying to spread to, don't spread and
-				//reduce firelevel.
-				if(enemy_tile.fire_protection > world.time-30)
-					firelevel -= 1.5
 					continue
 
 				//Spread the fire.
@@ -186,7 +172,6 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 				enemy_tile.adjacent_fire_act(loc, air_contents, air_contents.temperature, air_contents.volume)
 
 	animate(src, color = fire_color(air_contents.temperature), 5)
-	set_light(l_color = color)
 
 /obj/fire/New(newLoc,fl)
 	..()
@@ -199,10 +184,22 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 
 	var/datum/gas_mixture/air_contents = loc.return_air()
 	color = fire_color(air_contents.temperature)
-	set_light(0.5, 1, 3, l_color = color)
 
-	firelevel = fl
+	update_firelevel(fl)
 	SSair.active_hotspots.Add(src)
+
+/obj/fire/proc/update_firelevel(var/new_firelevel)
+	var/old_firelevel = firelevel
+	if(new_firelevel <= 2.5 && old_firelevel > 2.5)
+		icon_state = "1"
+		set_light(0.5, 1, 3, l_color = color)
+	else if(new_firelevel <= 6 && old_firelevel > 6)
+		icon_state = "2"
+		set_light(0.7, 2, 5, l_color = color)
+	else if(new_firelevel > 6 && old_firelevel <= 6)
+		icon_state = "3"
+		set_light(1, 2, 7, l_color = color)
+	firelevel = new_firelevel
 
 /obj/fire/proc/fire_color(var/env_temperature)
 	var/temperature = max(4000*sqrt(firelevel/vsc.fire_firelevel_multiplier), env_temperature)
@@ -292,7 +289,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 
 		//if the reaction is progressing too slow then it isn't self-sustaining anymore and burns out
 		if(zone) //be less restrictive with canister and tank reactions
-			if((!liquid_fuel || used_fuel <= FIRE_LIQUD_MIN_BURNRATE) && (!gas_fuel || used_fuel <= FIRE_GAS_MIN_BURNRATE*zone.contents.len))
+			if((!liquid_fuel || used_fuel <= FIRE_LIQUD_MIN_BURNRATE) && (!gas_fuel || used_fuel <= FIRE_GAS_MIN_BURNRATE*length(zone.contents)))
 				return 0
 
 
@@ -308,8 +305,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 		for(var/g in burned_fuel.gas)
 			adjust_gas(gas_data.burn_product[g], burned_fuel.gas[g])
 
-		if(zone)
-			zone.remove_liquidfuel(used_liquid_fuel, !check_combustability())
+		zone?.remove_liquidfuel(used_liquid_fuel, !check_combustability())
 
 		//calculate the energy produced by the reaction and then set the new temperature of the mix
 		temperature = (starting_energy + vsc.fire_fuel_energy_release * (used_gas_fuel + used_liquid_fuel)) / heat_capacity()
