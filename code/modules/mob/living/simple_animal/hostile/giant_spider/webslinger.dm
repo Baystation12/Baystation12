@@ -124,17 +124,18 @@
 	remove_webbing()
 
 /obj/aura/web/proc/remove_webbing(mob/living/M)
-	var/mob/living/carbon/human/H = M
+	var/mob/living/H = M
+	var/body_type = "[H.isSynthetic() ? "chassis" : "body"]"
 	if (istype(H) && H.a_intent == I_HELP)
 		if (H == user)
 			user.visible_message(
-			SPAN_WARNING("\The [H] starts tearing at the webbing on their body!"),
-			SPAN_WARNING("You start tearing at the webbing on your body!"),
+			SPAN_WARNING("\The [H] starts tearing at the webbing on their [body_type]!"),
+			SPAN_WARNING("You start tearing at the webbing on your [body_type]!"),
 			SPAN_WARNING("You hear the sound of something being torn up.")
 			)
 		else
 			user.visible_message(
-			SPAN_WARNING("\The [H] starts tearing at the webbing on \the [user]'s body!"),
+			SPAN_WARNING("\The [H] starts tearing at the webbing on \the [user]'s [body_type]!"),
 			SPAN_WARNING("\The [H] starts tearing off the webbing on you!"),
 			SPAN_WARNING("You hear the sound of something being torn up.")
 			)
