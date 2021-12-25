@@ -4,6 +4,10 @@
 	name = "Modular Computer"
 	desc = "A modular computer. You shouldn't see this."
 
+	health_max = 100
+	/// Damage level at which the computer ceases to operate as a percentage of `health_max`.
+	var/damage_broken = 50
+
 	var/enabled = 0											// Whether the computer is turned on.
 	var/screen_on = 1										// Whether the computer is active/opened/it's screen is on.
 	var/hardware_flag = 0									// A flag that describes this device type
@@ -28,10 +32,6 @@
 	var/steel_sheet_cost = 5								// Amount of steel sheets refunded when disassembling an empty frame of this computer.
 	var/light_strength = 0									// Intensity of light this computer emits. Comparable to numbers light fixtures use.
 
-	// Damage of the chassis. If the chassis takes too much damage it will break apart.
-	var/damage = 0				// Current damage level
-	var/broken_damage = 50		// Damage level at which the computer ceases to operate
-	var/max_damage = 100		// Damage level at which the computer breaks apart.
 	var/list/terminals          // List of open terminal datums.
 
 	// Important hardware (must be installed for computer to work)

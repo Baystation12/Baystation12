@@ -5,7 +5,7 @@
 
 	handle_power() // Handles all power interaction
 
-	if(damage > broken_damage)
+	if (damage_broken())
 		shutdown_computer()
 		return
 
@@ -96,7 +96,7 @@
 	if(tesla_link)
 		tesla_link.enabled = TRUE
 	var/issynth = issilicon(user) // Robots and AIs get different activation messages.
-	if(damage > broken_damage)
+	if (damage_broken())
 		if(issynth)
 			to_chat(user, "You send an activation signal to \the [src], but it responds with an error code. It must be damaged.")
 		else

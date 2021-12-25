@@ -123,7 +123,7 @@
 		if(card_slot.insert_id(I, user))
 			update_verbs()
 		return
-		
+
 	if(istype(W, /obj/item/pen) && stores_pen)
 		if(istype(stored_pen))
 			to_chat(user, "<span class='notice'>There is already a pen in [src].</span>")
@@ -168,17 +168,23 @@
 	if(isWelder(W))
 		var/obj/item/weldingtool/WT = W
 		if(!WT.isOn())
-			to_chat(user, "\The [W] is off.")
+			to_chat(user, SPAN_WARNING("\The [W] is off."))
 			return
 
-		if(!damage)
-			to_chat(user, "\The [src] does not require repairs.")
+		if (!health_damaged())
+			to_chat(user, SPAN_WARNING("\The [src] does not require repairs."))
 			return
 
-		to_chat(user, "You begin repairing damage to \the [src]...")
-		if(WT.remove_fuel(round(damage/75)) && do_after(usr, damage/10))
-			damage = 0
-			to_chat(user, "You repair \the [src].")
+		user.visible_message(
+			SPAN_NOTICE("\The [user] beings repairing damage to \the [src]..."),
+			SPAN_NOTICE("You begin repairing damage to \the [src]...")
+		)
+		if (WT.remove_fuel(round(get_damage_value() / 75)) && do_after(usr, round(get_damage_value() / 10)))
+			revive_health()
+			user.visible_message(
+				SPAN_NOTICE("\The [user] repairs \the [src]."),
+				SPAN_NOTICE("You repair \the [src].")
+			)
 		return
 
 	if(isScrewdriver(W))
