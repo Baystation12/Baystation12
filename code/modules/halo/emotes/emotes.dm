@@ -11,10 +11,25 @@
 	. = ..()
 	species_sounds[/datum/species/sangheili] = oldref
 
+/decl/emote/audible/species_sound/aim
+	key = "aim"
+	emote_message_3p = "USER taunts their opponent's skill!"
+	species_sounds = list(/datum/species/sangheili = 'code/modules/halo/sounds/cannot_aim.ogg')
+
+/decl/emote/audible/species_sound/nipple
+	key = "nipple"
+	emote_message_3p = "USER exclaims their thirst!"
+	species_sounds = list(/datum/species/unggoy = 'code/modules/halo/sounds/nipple.ogg')
+
 /decl/emote/audible/species_sound/need_weapon
 	key = "weapon"
 	emote_message_3p = "USER exclaims their need for a weapon!"
 	species_sounds = list(/datum/species/spartan = 'code/modules/halo/sounds/need_weapon.ogg')
+
+/decl/emote/audible/species_sound/boo
+	key = "boo"
+	emote_message_3p = "USER attempts to terrify the enemy!"
+	species_sounds = list(/datum/species/spartan = 'code/modules/halo/sounds/boo.ogg')
 
 /decl/emote/audible/painscream
 	key = "painscream"
