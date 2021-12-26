@@ -335,17 +335,16 @@
 	var/seconds = inactivity/10
 	return "[round(seconds / 60)] minute\s, [seconds % 60] second\s"
 
-// Byond seemingly calls stat, each tick.
-// Calling things each tick can get expensive real quick.
-// So we slow this down a little.
-// See: http://www.byond.com/docs/ref/info.html#/client/proc/Stat
+
 /client/Stat()
-	if(!usr)
+	if (!usr)
 		return
 	// Add always-visible stat panel calls here, to define a consistent display order.
 	statpanel("Status")
+	..()
+	if (config.stat_delay > 0)
+		sleep(config.stat_delay)
 
-	. = ..()
 
 //Sends resource files to client cache
 /client/proc/getFiles()

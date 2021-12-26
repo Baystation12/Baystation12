@@ -428,6 +428,9 @@
 	/// The maximum amount of time a round can last before it is forcefully ended.
 	var/static/maximum_round_length
 
+	/// The delay in deciseconds between stat() updates.
+	var/static/stat_delay = 5
+
 
 /configuration/New()
 	build_mode_cache()
@@ -833,6 +836,8 @@
 				log_timers_on_bucket_reset = TRUE
 			if ("maximum_round_length")
 				maximum_round_length = text2num(value) MINUTES
+			if ("stat_delay")
+				stat_delay = Floor(text2num(value))
 			else
 				log_misc("Unknown setting in config/config.txt: '[name]'")
 
