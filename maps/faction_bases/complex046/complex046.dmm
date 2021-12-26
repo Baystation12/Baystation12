@@ -264,7 +264,6 @@
 "gg" = (/obj/machinery/atmospherics/portables_connector{dir = 1},/obj/machinery/portable_atmospherics/canister/oxygen{dir = 1},/obj/machinery/light{dir = 8},/turf/simulated/floor/tech/white,/area/faction_base/oni/medbay)
 "gi" = (/obj/structure/sign/halo_floorsign/armory,/turf/simulated/floor/tech/gray,/area/faction_base/oni/barracks)
 "gj" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 4; name = "ONI Research"; req_access = list(315)},/turf/simulated/floor/tiled/white,/area/faction_base/oni/research)
-"gl" = (/obj/structure/table/standard,/obj/machinery/cell_charger,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
 "gm" = (/obj/structure/shuttle/window{tag = "icon-9"; icon_state = "9"; color = "grey"},/turf/simulated/floor/shuttle/yellow,/area/shuttle/oni_shuttle_supply)
 "gn" = (/turf/simulated/shuttle/wall{dir = 8; icon_state = "swall"},/area/shuttle/oni_shuttle_supply)
 "go" = (/turf/simulated/shuttle/wall{dir = 4; icon_state = "swall"},/area/shuttle/oni_shuttle_supply)
@@ -294,14 +293,15 @@
 "jQ" = (/obj/item/modular_computer/console/unsc/oni_supply,/turf/simulated/floor/tech/maint,/area/faction_base/oni/hangar)
 "kk" = (/obj/item/device/radio/intercom{dir = 4; icon_state = "intercom"; name = "intercom"; pixel_x = -32; pixel_y = 0; tag = "icon-intercom (EAST)"},/turf/simulated/floor/tech/gray,/area/faction_base/oni/barracks)
 "kC" = (/obj/structure/table/standard,/obj/item/weapon/storage/firstaid/surgery,/obj/item/stack/nanopaste,/obj/item/weapon/reagent_containers/spray/cleaner{desc = "Someone has crossed out the Space from Space Cleaner and written in Surgery. 'Do not remove under punishment of death!!!' is scrawled on the back."; name = "Surgery Cleaner"},/turf/simulated/floor/tech/white,/area/faction_base/oni/medbay)
-"kF" = (/obj/machinery/light/colored/blue,/obj/structure/table/standard,/obj/machinery/recharger,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
-"kP" = (/obj/structure/table/rack,/obj/item/stack/material/iron,/obj/item/stack/material/iron,/obj/item/stack/material/iron,/obj/item/stack/material/iron,/obj/item/stack/material/iron,/obj/item/stack/material/iron,/obj/item/stack/material/iron,/obj/item/stack/material/iron,/obj/item/stack/material/iron,/obj/item/stack/material/iron,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
+"kE" = (/obj/machinery/light{dir = 8},/obj/structure/table/standard,/obj/machinery/cell_charger,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
 "lm" = (/obj/structure/table/rack,/obj/item/stack/material/silver/ten,/obj/item/stack/material/silver/ten,/obj/item/stack/material/silver/ten,/obj/item/stack/material/silver/ten,/obj/item/stack/material/silver/ten,/obj/item/stack/material/silver/ten,/obj/item/stack/material/silver/ten,/obj/item/stack/material/silver/ten,/obj/item/stack/material/silver/ten,/obj/item/stack/material/silver/ten,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
 "lB" = (/obj/machinery/pointbased_vending/armory/odstvend/armour,/turf/simulated/floor/tech/gray,/area/faction_base/oni/barracks)
 "lC" = (/obj/structure/table/standard,/obj/structure/bedsheetbin,/turf/simulated/floor/tech/gray,/area/faction_base/oni/barracks)
+"lN" = (/obj/structure/table/rack,/obj/item/stack/material/iron,/obj/item/stack/material/iron,/obj/item/stack/material/iron,/obj/item/stack/material/iron,/obj/item/stack/material/iron,/obj/item/stack/material/iron,/obj/item/stack/material/iron,/obj/item/stack/material/iron,/obj/item/stack/material/iron,/obj/item/stack/material/iron,/obj/item/stack/material/iron,/obj/item/stack/material/iron,/obj/item/stack/material/iron,/obj/item/stack/material/iron,/obj/item/stack/material/iron,/obj/item/stack/material/iron,/obj/item/stack/material/iron,/obj/item/stack/material/iron,/obj/item/stack/material/iron,/obj/item/stack/material/iron,/obj/item/stack/material/iron,/obj/item/stack/material/iron,/obj/item/stack/material/iron,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
 "mS" = (/obj/effect/landmark/dropship_land_point/unsc/no_artifact{name = "ONI Complex 046 (Geminus) Vehicle Bay"},/obj/effect/floor_decal/industrial/hatch/yellow,/turf/simulated/floor/road{tag = "icon-road_empty (NORTH)"; icon_state = "road_empty"; dir = 1},/area/faction_base/oni/garage)
 "nV" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Plasteel Crate"; tag = "icon-secgearcrate"},/obj/item/stack/material/plasteel/fifty,/obj/item/stack/material/plasteel/fifty,/obj/machinery/light/small{dir = 8},/obj/item/stack/material/plasteel/fifty,/obj/item/stack/material/plasteel/fifty,/obj/item/stack/material/plasteel/fifty,/obj/item/stack/material/plasteel/fifty,/turf/simulated/floor/tech/maint,/area/faction_base/oni/hangar)
 "nX" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
+"og" = (/obj/structure/window/reinforced/treated{dir = 1},/obj/structure/grille,/obj/structure/window/reinforced/treated{dir = 4},/obj/structure/window/reinforced/treated,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
 "os" = (/obj/structure/noticeboard,/turf/simulated/wall/iron/blue,/area/faction_base/oni/barracks)
 "oS" = (/obj/machinery/light,/obj/structure/closet/crate/freezer,/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
 "pe" = (/obj/structure/ore_box,/turf/unsimulated/floor/dirt{icon = 'code/modules/halo/misc/TWS- Assests/floors/floors.dmi'},/area/faction_base/oni/digsite)
@@ -309,14 +309,15 @@
 "qK" = (/obj/structure/window/reinforced/projresist{icon_state = "rwindow"; dir = 8},/obj/structure/closet/crate/bin,/turf/simulated/floor/carpet/blue,/area/faction_base/oni/barracks)
 "rT" = (/obj/machinery/light{dir = 1},/obj/item/device/radio/intercom{name = "intercom"; pixel_y = 32},/obj/structure/bed/padded,/obj/item/weapon/bedsheet/brown,/obj/effect/landmark/start/unsc_base_fallback,/turf/simulated/floor/tech/gray,/area/faction_base/oni/barracks)
 "sd" = (/obj/structure/table/rack,/obj/item/stack/material/gold/ten,/obj/item/stack/material/gold/ten,/obj/item/stack/material/gold/ten,/obj/item/stack/material/gold/ten,/obj/item/stack/material/gold/ten,/obj/item/stack/material/gold/ten,/obj/item/stack/material/gold/ten,/obj/item/stack/material/gold/ten,/obj/item/stack/material/gold/ten,/obj/item/stack/material/gold/ten,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
+"so" = (/obj/machinery/iv_drip,/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
 "sD" = (/obj/structure/showcase,/obj/structure/window/reinforced/treated{tag = "icon-rwindow (WEST)"; icon_state = "rwindow"; dir = 8},/obj/structure/window/reinforced/treated,/obj/structure/window/reinforced/treated{dir = 4},/turf/simulated/floor/carpet/blue,/area/faction_base/oni/barracks)
 "sN" = (/obj/structure/closet/secure_closet/miner,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/hangar)
 "sO" = (/obj/machinery/pointbased_vending/armory/heavy,/obj/structure/window/reinforced/treated{dir = 1},/turf/simulated/floor/reinforced,/area/faction_base/oni/barracks)
 "sS" = (/obj/machinery/light{dir = 1; icon_state = "tube1"},/obj/machinery/autolathe/ammo_fabricator/oni_fab,/turf/simulated/floor/tech/maint,/area/faction_base/oni/hangar)
 "sX" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 1},/obj/structure/window/reinforced/treated{dir = 1},/turf/simulated/floor/tiled/dark,/area/faction_base/oni/hangar)
 "ti" = (/obj/structure/fitness/punchingbag,/turf/simulated/floor/carpet/blue,/area/faction_base/oni/barracks)
-"tm" = (/obj/machinery/light{dir = 8},/obj/machinery/autolathe,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
 "tI" = (/obj/structure/plushie/drone,/turf/unsimulated/floor/dirt{icon = 'code/modules/halo/misc/TWS- Assests/floors/floors.dmi'},/area/faction_base/oni/digsite)
+"tK" = (/obj/machinery/research/protolathe,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
 "tO" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 4; name = "ONI Mech Storage"; req_access = list(315)},/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
 "uD" = (/obj/item/device/radio/intercom{name = "intercom"; pixel_y = 32},/turf/simulated/floor/reinforced,/area/faction_base/oni/barracks)
 "uP" = (/obj/structure/fitness/weightlifter,/obj/structure/window/reinforced/treated{dir = 4},/turf/simulated/floor/carpet/blue,/area/faction_base/oni/barracks)
@@ -324,13 +325,13 @@
 "uW" = (/obj/structure/sofa/left,/obj/structure/window/reinforced/treated{dir = 4},/turf/simulated/floor/carpet/blue,/area/faction_base/oni/barracks)
 "vT" = (/obj/structure/window/reinforced/treated{tag = "icon-rwindow (WEST)"; icon_state = "rwindow"; dir = 8},/obj/machinery/sleeper,/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
 "wl" = (/obj/structure/sofa/left,/turf/simulated/floor/carpet/blue,/area/faction_base/oni/barracks)
+"ws" = (/obj/machinery/light/colored/blue,/obj/structure/table/standard,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
 "wy" = (/obj/machinery/vending/armory/attachment,/obj/structure/window/reinforced/treated{dir = 1},/turf/simulated/floor/reinforced,/area/faction_base/oni/barracks)
 "wW" = (/obj/structure/urinal,/turf/unsimulated/floor/dirt{icon = 'code/modules/halo/misc/TWS- Assests/floors/floors.dmi'},/area/faction_base/oni/digsite)
 "xa" = (/obj/structure/ai_routing_node/unsc,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
 "xf" = (/obj/machinery/door/airlock/halo{name = "Nuclear Payload"; req_access = list(142)},/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
 "xx" = (/obj/structure/repair_bench,/turf/simulated/floor/tech/gray,/area/faction_base/oni/barracks)
 "xB" = (/obj/structure/window/reinforced/treated,/obj/machinery/pointbased_vending/armory/hybrid,/turf/simulated/floor/reinforced,/area/faction_base/oni/barracks)
-"xD" = (/obj/machinery/door/airlock/halo{name = "Storage"; req_access = list(142)},/turf/space,/area/faction_base/oni/hangar)
 "xK" = (/obj/structure/sink{icon_state = "sink"; dir = 8; pixel_x = -12; pixel_y = 2},/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
 "yn" = (/obj/machinery/light{dir = 1},/obj/machinery/pointbased_vending/armory/hybrid,/turf/simulated/floor/reinforced,/area/faction_base/oni/barracks)
 "yG" = (/obj/machinery/light,/obj/machinery/vending/armory/attachment,/turf/simulated/floor/reinforced,/area/faction_base/oni/barracks)
@@ -338,7 +339,9 @@
 "AW" = (/obj/structure/window/reinforced/projresist{icon_state = "rwindow"; dir = 8},/obj/structure/sofa/right,/turf/simulated/floor/carpet/blue,/area/faction_base/oni/barracks)
 "BL" = (/obj/structure/inflatable/wall,/turf/unsimulated/floor/dirt{icon = 'code/modules/halo/misc/TWS- Assests/floors/floors.dmi'},/area/faction_base/oni/digsite)
 "BM" = (/obj/machinery/pointbased_vending/armory/heavy,/obj/structure/window/reinforced/treated,/turf/simulated/floor/reinforced,/area/faction_base/oni/barracks)
+"Dr" = (/obj/machinery/door/airlock/halo{name = "Storage"; req_access = list(142)},/turf/simulated/floor/tiled/dark,/area/faction_base/oni/hangar)
 "Em" = (/obj/machinery/light{dir = 4},/turf/simulated/floor/reinforced,/area/faction_base/oni/barracks)
+"Ev" = (/obj/machinery/autolathe,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
 "Ew" = (/obj/structure/table/rack,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
 "EI" = (/obj/machinery/pointbased_vending/armory/odstvend,/turf/simulated/floor/tech/gray,/area/faction_base/oni/barracks)
 "EJ" = (/obj/machinery/mech_recharger,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
@@ -362,6 +365,7 @@
 "MP" = (/obj/structure/plushie/ian,/turf/unsimulated/floor/dirt{icon = 'code/modules/halo/misc/TWS- Assests/floors/floors.dmi'},/area/faction_base/oni/digsite)
 "Ne" = (/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
 "Nf" = (/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/tech/maint,/area/faction_base/oni/hangar)
+"Nh" = (/obj/machinery/light/colored/blue,/obj/machinery/mecha_part_fabricator,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
 "PG" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Metal Crate"; tag = "icon-secgearcrate"},/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/turf/simulated/floor/tech/maint,/area/faction_base/oni/hangar)
 "PK" = (/obj/structure/reagent_dispensers/fueltank,/obj/structure/window/reinforced/treated{dir = 1},/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
 "Qj" = (/obj/machinery/light{dir = 1; icon_state = "tube1"},/obj/structure/largecrate,/turf/simulated/floor/tech/maint,/area/faction_base/oni/hangar)
@@ -372,7 +376,6 @@
 "Rw" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/vehicles/scorpion_tank,/turf/simulated/floor/road{tag = "icon-road_empty (NORTH)"; icon_state = "road_empty"; dir = 1},/area/faction_base/oni/garage)
 "Sn" = (/obj/machinery/light,/turf/simulated/floor/tech/orange{tag = "icon-techfloor_orangefulltwogrid (SOUTHEAST)"; icon_state = "techfloor_orangefulltwogrid"; dir = 6},/area/faction_base/oni/cryodorms)
 "Sx" = (/turf/simulated/floor/stairs/north,/area/faction_base/oni/research)
-"SN" = (/obj/machinery/research/protolathe,/obj/machinery/light/colored/blue,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
 "TM" = (/obj/structure/largecrate,/turf/simulated/floor/tech/maint,/area/faction_base/oni/hangar)
 "TS" = (/obj/machinery/light,/turf/simulated/floor/reinforced,/area/faction_base/oni/barracks)
 "Ul" = (/obj/machinery/vending/tool,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
@@ -385,6 +388,7 @@
 "Xe" = (/obj/structure/plushie/carp,/turf/unsimulated/floor/dirt{icon = 'code/modules/halo/misc/TWS- Assests/floors/floors.dmi'},/area/faction_base/oni/digsite)
 "Xx" = (/turf/simulated/floor/stairs/west,/area/faction_base/oni/barracks)
 "XY" = (/obj/structure/window/reinforced{dir = 1},/obj/structure/ai_routing_node/unsc,/turf/simulated/floor/tech/white,/area/faction_base/oni/medbay)
+"XZ" = (/obj/structure/table/standard,/obj/machinery/recharger,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
 "Ya" = (/obj/structure/table/rack,/obj/item/stack/material/diamond/ten,/obj/item/stack/material/diamond/ten,/obj/item/stack/material/diamond/ten,/obj/item/stack/material/diamond/ten,/obj/item/stack/material/diamond/ten,/obj/item/stack/material/diamond/ten,/obj/item/stack/material/diamond/ten,/obj/item/stack/material/diamond/ten,/obj/item/stack/material/diamond/ten,/obj/item/stack/material/diamond/ten,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
 "Ym" = (/obj/machinery/light/colored/green{tag = "icon-green1 (WEST)"; icon_state = "green1"; dir = 8},/obj/structure/table/rack,/obj/item/stack/material/uranium/ten,/obj/item/stack/material/uranium/ten,/obj/item/stack/material/uranium/ten,/obj/item/stack/material/uranium/ten,/obj/item/stack/material/uranium/ten,/obj/item/stack/material/uranium/ten,/obj/item/stack/material/uranium/ten,/obj/item/stack/material/uranium/ten,/obj/item/stack/material/uranium/ten,/obj/item/stack/material/uranium/ten,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
 "YO" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/machinery/sleeper,/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
@@ -409,7 +413,7 @@ aaasbgbqbPaWaWaWaWcicjcjKfcjfIaDsNLYsNaeaeamaoazavazazavazazazaAaDaPaPaPaPaPaOaP
 aaasckbqaWaWaWaWaWcjapcjcjdDcjaDsNeBsNaeaBaCaFaCaFaCaFaCaFaCaFaGaDHmaPaPaPaSaDbLaPgIaPaPaPaPaPaPNfaDaa
 aaasbqbqaWaWaWaWaWaWaWaWaWaWaWaDsNeBsNaeaHaJfmezfmezfmezfmezfmaGaDnVaPaPaPJPaDaPaPaPaPaPdQdTdZfbfbaDaa
 aaasbqcmcjcjcjmSaWaWaWaWaWaWaWaDsNeBsNaeaRaZaZaZaYaZaZaZbabbaZSnaDPGaPaPgvdeaDdlaPaDaDaDfXgqguguguaDaa
-aaasbqbqcjRwcjcjaWaWaWeAeAeAeDaDaDxDaDaeaeaeaeaeaeaecIddaeaeaeaeaDaDaDdKaDaDaDaPgxdFgtgndJeygogmgnaDaa
+aaasbqbqcjRwcjcjaWaWaWeAeAeAeDaDaDDraDaeaeaeaeaeaeaecIddaeaeaeaeaDaDaDdKaDaDaDaPgxdFgtgndJeygogmgnaDaa
 aaasbqbqcjcjcjcjaWaWaWcjcjcjcjbqeBeBdRdHdIdIdIdIdIdSeBeBbBaTaPsSaMeKgMaPaPaLdVaPgxgpemememgyememeqaDaa
 aaasckbqbqbqbqbqbqbqbqbqbqbqbqbqeBeBdMdNdNdNdNdNdNdOeBeBetaPaPaPaPaPaPaPaPaPaPaPgxgremememgyememeqaDaa
 aaasbqbqbqbqcnbqakbqbqbqbqcnbqaueBeBdMdNdPdPdPdPdNdOfseBaPaPaPaPaPaPaPaPaPaPaPaPgxgsemememgyememeqaDaa
@@ -422,8 +426,8 @@ aabfKkbVbVbVbVbVbvbVbVbVbVbVbwbfbxbxbybzbAbIeVbxbxbxbxbDbEbKbxbFbGbHgCbMccbGbHbH
 aabfKkbVgigdgibSbTbUgdbVbVlCbnbfbxbWeVeVfyeVeVvTeVYObxbYbZegbxbFcbcdcccccccccccdfkbFbJbJbNcecgchclbNaa
 aabfbfbffJosfJbfbfbfbfbfgebfbfbfbxcocpeVcqeVeVcreVeVeleVeVbXbxcNcQcccccucccvcccccwbFbJWwbNczcgcgcAbNaa
 aaeEbfynZNbVbVRnuDEmbfrTbVbVrTbfbxcFcGcHbxeVeVbxevevbxeVeVcJbxcNcQcccKcLcOcPcQccccbFbJbJbNcRcgcgclbNaa
-aaeEbfIVZNbVbVXxZNVSbfcVbVbVcVbfbxXYcWcWeVeVeVevdhfSbxeVeVcYbxbFctcccccZcccZccfFfGbFbJxabNbNbNbNbNbNaa
-aaeEbfIVZNbVbVXxZNZNbfcVbVbVcVbfbxdmeVeVeVeVeVevgFdhbxeVeVdibxfwcQdjccccccccccfMfNbFbJbJbFiXEJiXbFbFaa
+aaeEbfIVZNbVbVXxZNVSbfcVbVbVcVbfbxXYcWcWeVeVeVevdhfSbxsoeVcYbxbFctcccccZcccZccfFfGbFbJxabNbNbNbNbNbNaa
+aaeEbfIVZNbVbVXxZNZNbfcVbVbVcVbfbxdmeVeVeVeVeVevgFdhbxsoeVdibxfwcQdjccccccccccfMfNbFbJbJbFiXEJiXbFbFaa
 aaeEbfxBZNbVbVXxZNVSbfcVbVbVcVbfbxdneVeVdtdtcXbxevevbxHDeVdobxbFbFbFbFdpccbFbFbFbFbFdkbJbFbJbJbJMObFaa
 aaeEbfkkbVbVbVXxZNEmbfcVgdbVcVbfbxdveVeVdBdCeVevdhfSbxHDeVdwbxbFdxdydzbJbJbJbJbJbJdzbJbJbJbJbJbJEJbFaa
 aaeEbfsOZNbVbVxxbfbfbfbfbfbfbfbfbxdEeVeVeeefeVevgFdhbxoSeVdYbxbFeibJbJbJbJbJbJedbJbJbJbJtObJbJbJMObFaa
@@ -432,14 +436,14 @@ aaeEbfkkbVbVbVXxdqbVbVbVbVZNlBbfbxgfeVeVeVeVeVeVeVeVeVeVeVeVeVeJbJbJbJebebbJETbF
 aaeEbfwyZNbVbVXxdqbVbVbVbVZNEIbfbxggeVeVeVeVeVdGeVeVeVeVdGeVeVgjbJbJbJebebbJGabFVtZMBLhkePpeeOeOeOeOaa
 aaeEbfyGZNbVbVgdqKeSLZtiuPTSEIbfbxbxgcbxbxbxgcbxbxbxgcbxbxbxbxbFPKbJbJbJbJbJjsbFZMqhBLePePePeOeOeOeOaa
 aaeEbfbfbfbfbfbfbfbfbfbfbfbfbfbfbxxKeVnXbxxKeVnXbxeUeVeVeVeXbxbFJlbJxaebebbJEwbFBLBLePePXeePeOeOeOeOaa
-aaaaaaaaaaaaaaaaaaaaaaaaeEeEeEaabxkCQlQZbxkCQlQZbxeWeVeWdGfcbxbFJlbJbJebebbJsdbFeRePtIePePePeOeOeOeOaa
-aabhbhbhbhbhbhbhbhbhbhaaeEeEeEaabxbxbxbxbxbxbxbxbxbxyVbxbxbxbxbFeHbJbJebebbJlmbFeOePQSePePePeOeOeOeOaa
-aabhbCbCbCbCbCbCbCbCbhaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaWdbFtmbJbJebebbJYmbFeOePePhkePePeOeOeOeOaa
-aabhbCbCbCbCbCbCbCbCbhaabQbQbQbQbQbQbQbQaabRbRbRbRbRbRbRbRaaWdbFSNbJbJbJVobJYabFeOePePMPMNwWeOeOeOeOaa
-aabhbCbCbCbCbCbCbCbCbhaabQbQbQbQbQbQbQbQaabRbRbRbRbRbRbRbRaaWdbFbFSxSxSxbFbJkPbFeOhkMNMNeOeOeOeOeOeOaa
+aaaaaaaaaaaaaaaaaaaaaaaaeEeEeEaabxkCQlQZbxkCQlQZbxeWeVeWdGfcbxbFEvbJbJebebbJsdbFeRePtIePePePeOeOeOeOaa
+aabhbhbhbhbhbhbhbhbhbhaaeEeEeEaabxbxbxbxbxbxbxbxbxbxyVbxbxbxbxbFXZbJbJebebbJlmbFeOePQSePePePeOeOeOeOaa
+aabhbCbCbCbCbCbCbCbCbhaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaWdbFkEbJbJebebbJYmbFeOePePhkePePeOeOeOeOaa
+aabhbCbCbCbCbCbCbCbCbhaabQbQbQbQbQbQbQbQaabRbRbRbRbRbRbRbRaaWdbFwsbJbJbJVobJYabFeOePePMPMNwWeOeOeOeOaa
+aabhbCbCbCbCbCbCbCbCbhaabQbQbQbQbQbQbQbQaabRbRbRbRbRbRbRbRaaWdbFogSxSxSxbFbJlNbFeOhkMNMNeOeOeOeOeOeOaa
 aabhbCbCbCbCbCbCbCbCbhaabQbQbQbQbQbQbQbQaabRbRbRbRbRbRbRbRaaWdUluUbJbJbJbFxfbFbFeOeOeOeOeOeOeOeOeOeOaa
 aabhbCbCbCbCbCbCbCbCbhaabQbQbQbQbQbQbQbQaabRbRbRbRbRbRbRbRaaWdNebJbJbJbJbFaxfvbFeOeOeOeOeOeOeOeOeOeOaa
-aabhcMbCbCbCbCbCbCbCbhaabQbQbQbQbQbQbQbQaabRbRbRbRbRbRbRbRaaWdejehebkFglbFfegJbFeOeOeOeOeOeOeOeOeOeOaa
+aabhcMbCbCbCbCbCbCbCbhaabQbQbQbQbQbQbQbQaabRbRbRbRbRbRbRbRaaWdejehtKNheHbFfegJbFeOeOeOeOeOeOeOeOeOeOaa
 aafAbhbhbhbhbhbhbhbhbhaadbbQbQbQbQbQbQbQaaesbRbRbRbRbRbRbRaaWdbFbFbFbFbFbFbFbFbFeOeOeOeOeOeOeOeOeOeOaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
