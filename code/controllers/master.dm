@@ -121,7 +121,7 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 	var/msg = "## DEBUG: [time2text(world.timeofday)] MC restarted. Reports:\n"
 	for (var/varname in Master.vars)
 		switch (varname)
-			if("name", "tag", "bestF", "type", "parent_type", "vars", "statclick") // Built-in junk.
+			if("name", "tag", "bestF", "type", "parent_type", "vars", "stat_line") // Built-in junk.
 				continue
 			else
 				var/varval = Master.vars[varname]
@@ -586,10 +586,11 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 
 
 /datum/controller/master/stat_entry()
-	if(!statclick)
-		statclick = new/obj/effect/statclick/debug(null, "Initializing...", src)
+	if(!stat_line)
+		stat_line = new (null, src)
 	stat("Byond:", "(FPS:[world.fps]) (TickCount:[world.time/world.tick_lag]) (TickDrift:[round(Master.tickdrift,1)]([round((Master.tickdrift/(world.time/world.tick_lag))*100,0.1)]%))  Hub: [config.hub_visible?"Y":"N"]")
-	stat("Master Controller:", statclick.update("(TickRate:[Master.processing]) (Iteration:[Master.iteration])"))
+	stat_line.name = "(TickRate:[Master.processing]) (Iteration:[Master.iteration])"
+	stat(name, stat_line)
 
 /datum/controller/master/StartLoadingMap()
 	//disallow more than one map to load at once, multithreading it will just cause race conditions

@@ -37,23 +37,23 @@ GLOBAL_REAL(GLOB, /datum/controller/global_vars)
 	crash_with("There was an attempt to qdel the global vars holder!")
 	if(!force)
 		return QDEL_HINT_LETMELIVE
-
-	QDEL_NULL(statclick)
+	QDEL_NULL(stat_line)
 	gvars_datum_protected_varlist.Cut()
 	gvars_datum_in_built_vars.Cut()
-
 	GLOB = null
-
 	return ..()
 
-/datum/controller/global_vars/stat_entry()
-	if(!statclick)
-		statclick = new/obj/effect/statclick/debug(null, "Initializing...", src)
 
-	stat("Globals:", statclick.update("Edit"))
+/datum/controller/global_vars/stat_entry()
+	if (!stat_line)
+		stat_line = new (null, src)
+		stat_line.name = "Edit"
+	stat(name, stat_line)
+
 
 /datum/controller/global_vars/VV_hidden()
 	return ..() + gvars_datum_protected_varlist
+
 
 /datum/controller/global_vars/Initialize()
 	gvars_datum_init_order = list()
