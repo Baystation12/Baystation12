@@ -1,5 +1,0 @@
-author: Mucker
-delete-after: true
-changes:
-  - bugfix: Fixed some mobs (mainly robots) being unable to remove webs from themselves.
-  - bugfix: Fixed synthetics being affected by spider poison.
