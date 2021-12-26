@@ -5,6 +5,9 @@
 	icon_state = "material"
 	var/material/material
 
+/obj/item/clothing/ring/material/disrupts_psionics()
+	return (material && material.is_psi_null()) ? src : FALSE
+
 /obj/item/clothing/ring/material/New(var/newloc, var/new_material)
 	..(newloc)
 	if(!new_material)
@@ -69,3 +72,6 @@
 
 /obj/item/clothing/ring/material/glass/New(var/newloc)
 	..(newloc, MATERIAL_GLASS)
+
+/obj/item/clothing/ring/material/nullglass/New(var/newloc)
+	..(newloc, MATERIAL_NULLGLASS)
