@@ -7140,6 +7140,10 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/aft)
+"xO" = (
+/obj/effect/shuttle_landmark/vox_raider/dock,
+/turf/space,
+/area/space)
 "xP" = (
 /obj/machinery/door/airlock/glass/command{
 	name = "E.V.A. Suit Storage"
@@ -40477,7 +40481,7 @@ aa
 aa
 aa
 aa
-aa
+xO
 aa
 aa
 aa
