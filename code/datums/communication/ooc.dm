@@ -22,8 +22,10 @@
 	var/is_stealthed = C.is_stealthed()
 
 	var/ooc_style = "everyone"
+	var/holder_rank = ""
 	if(holder && !is_stealthed)
 		ooc_style = "elevated"
+		holder_rank = "\[[holder.rank]\] "
 		if(holder.rights & R_MOD)
 			ooc_style = "moderator"
 		if(holder.rights & R_DEBUG)
@@ -31,16 +33,15 @@
 		if(holder.rights & R_ADMIN)
 			ooc_style = "admin"
 
-	var/can_badmin = !is_stealthed && can_select_ooc_color(C) && (C.prefs.ooccolor != initial(C.prefs.ooccolor))
 	var/ooc_color = C.prefs.ooccolor
 
 	for(var/client/target in GLOB.clients)
 		if(target.is_key_ignored(C.key)) // If we're ignored by this person, then do nothing.
 			continue
-		var/sent_message = "[create_text_tag("ooc", "OOC:", target)] <EM>[C.key]:</EM> <span class='message linkify'>[message]</span>"
+		var/sent_message = "[create_text_tag("ooc", "OOC:", target)] <EM>" + "[holder_rank]" + "[C.key]:</EM> <span class='message linkify'>[message]</span>"
 		sent_message = emoji_parse(sent_message, target)
 
-		if(can_badmin)
+		if(!is_stealthed && can_select_ooc_color(C) && (C.prefs.ooccolor != initial(C.prefs.ooccolor)))
 			receive_communication(C, target, "<font color='[ooc_color]'><span class='ooc'>[sent_message]</font></span>")
 		else
 			receive_communication(C, target, "<span class='ooc'><span class='[ooc_style]'>[sent_message]</span></span>")
