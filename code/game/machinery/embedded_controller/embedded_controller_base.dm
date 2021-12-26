@@ -73,7 +73,6 @@ obj/machinery/embedded_controller/radio/Destroy()
 		overlays += image(icon, "indicator_forced")
 		overlays += image(icon, "indicator_done")
 		return
-
 	if(!program.memory["processing"])
 		overlays += image(icon, "screen_standby")
 		overlays += image(icon, "indicator_done")
