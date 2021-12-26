@@ -55,14 +55,14 @@
 		return get_max_health() - get_current_health()
 
 /**
- * Retrieves the atom's current damage as a percentage where `100%` is `1.00`.
+ * Retrieves the atom's current damage as a percentage where `100%` is `100`.
  * If `use_raw_values` is `TRUE`, uses the raw var values instead of the `get_*` proc results.
  */
 /atom/proc/get_damage_percentage(use_raw_values)
 	if (!health_max)
 		return
 	var/max_health = use_raw_values ? health_max : get_max_health()
-	return round(get_damage_value(use_raw_values) / max_health, 0.01)
+	return Percent(get_damage_value(use_raw_values), max_health, 0)
 
 /**
  * Checks if the atom's health can be restored.
@@ -242,11 +242,11 @@
 
 	var/damage_percentage = get_damage_percentage()
 	switch (damage_percentage)
-		if (0.00)
+		if (0)
 			to_chat(user, SPAN_NOTICE("It looks fully intact."))
-		if (0.01 to 0.32)
+		if (1 to 32)
 			to_chat(user, SPAN_WARNING("It looks slightly damaged."))
-		if (0.33 to 0.65)
+		if (33 to 65)
 			to_chat(user, SPAN_WARNING("It looks moderately damaged."))
 		else
 			to_chat(user, SPAN_DANGER("It looks severely damaged."))
@@ -258,11 +258,11 @@
 
 	var/damage_percentage = get_damage_percentage()
 	switch (damage_percentage)
-		if (0.00)
+		if (0)
 			to_chat(user, SPAN_NOTICE("They appear unhurt."))
-		if (0.01 to 0.32)
+		if (1 to 32)
 			to_chat(user, SPAN_WARNING("They look slightly hurt."))
-		if (0.33 to 0.65)
+		if (33 to 65)
 			to_chat(user, SPAN_WARNING("They look moderately hurt."))
 		else
 			to_chat(user, SPAN_DANGER("They look severely hurt."))

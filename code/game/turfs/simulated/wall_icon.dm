@@ -93,7 +93,7 @@
 			overlays += I
 
 	if(get_damage_value() != 0)
-		var/overlay = round(get_damage_percentage() * damage_overlays.len) + 1
+		var/overlay = round((get_damage_percentage() / 100) * damage_overlays.len) + 1
 		if(overlay > damage_overlays.len)
 			overlay = damage_overlays.len
 

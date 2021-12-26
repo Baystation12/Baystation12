@@ -48,7 +48,7 @@
 
 /obj/effect/blob/on_update_icon()
 	switch (get_damage_percentage())
-		if (0.00 to 0.49)
+		if (0 to 49)
 			icon_state = "blob"
 		else
 			icon_state = "blob_damaged"
@@ -223,7 +223,7 @@ regen() will cover update_icon() for this proc
 */
 /obj/effect/blob/core/proc/process_core_health()
 	switch (get_damage_percentage())
-		if (0.00 to 0.24)
+		if (0 to 24)
 			if (core_health_state == 4)
 				return
 			core_health_state = 4
@@ -236,7 +236,7 @@ regen() will cover update_icon() for this proc
 			times_to_pulse = 4
 			if(reported_low_damage)
 				report_shield_status("high")
-		if (0.25 to 0.49)
+		if (25 to 49)
 			if (core_health_state == 3)
 				return
 			core_health_state = 3
@@ -247,7 +247,7 @@ regen() will cover update_icon() for this proc
 			attack_freq = 4
 			regen_rate = 3
 			times_to_pulse = 3
-		if (0.35 to 0.74)
+		if (35 to 74)
 			if (core_health_state == 2)
 				return
 			core_health_state = 2
@@ -282,9 +282,9 @@ regen() will cover update_icon() for this proc
 // Rough icon state changes that reflect the core's health
 /obj/effect/blob/core/on_update_icon()
 	switch (get_damage_percentage())
-		if(0.00 to 0.32)
+		if(0 to 32)
 			icon_state = "blob_core"
-		if(0.33 to 0.65)
+		if(33 to 65)
 			icon_state = "blob_node"
 		else
 			icon_state = "blob_factory"
@@ -322,7 +322,7 @@ regen() will cover update_icon() for this proc
 
 /obj/effect/blob/core/secondary/on_update_icon()
 	switch (get_damage_percentage())
-		if (0.00 to 0.49)
+		if (0 to 49)
 			icon_state = "blob_node"
 		else
 			icon_state = "blob_factory"
@@ -350,9 +350,9 @@ regen() will cover update_icon() for this proc
 
 /obj/effect/blob/shield/on_update_icon()
 	switch (get_damage_percentage())
-		if (0.00 to 0.32)
+		if (0 to 32)
 			icon_state = "blob_idle"
-		if (0.33 to 0.65)
+		if (33 to 65)
 			icon_state = "blob"
 		else
 			icon_state = "blob_damaged"
