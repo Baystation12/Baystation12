@@ -11,8 +11,7 @@
 		. = max(0, -(cap-stress_total))
 
 /turf/simulated/wall/nullglass
-	color = "#ff6088"
+	color = COLOR_NULLGLASS
 
 /turf/simulated/wall/nullglass/Initialize(ml)
-	color = null
 	..(ml, MATERIAL_NULLGLASS)
