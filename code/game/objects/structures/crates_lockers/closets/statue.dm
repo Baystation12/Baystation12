@@ -85,24 +85,9 @@
 		for (var/mob/M in src)
 			shatter(M)
 
-/obj/structure/closet/statue/bullet_act(var/obj/item/projectile/Proj)
-	damage_health(Proj.get_structure_damage(), Proj.damage_type)
-
-	return
-
 /obj/structure/closet/statue/attack_generic(var/mob/user, damage, attacktext, environment_smash)
 	if(damage && environment_smash)
 		kill_health()
-
-/obj/structure/closet/statue/ex_act(severity)
-	for(var/mob/M in src)
-		M.ex_act(severity)
-		damage_health(60 / severity, BRUTE)
-
-/obj/structure/closet/statue/attackby(obj/item/I as obj, mob/user as mob)
-	damage_health(I.force, I.damtype)
-	user.do_attack_animation(src)
-	visible_message("<span class='danger'>[user] strikes [src] with [I].</span>")
 
 /obj/structure/closet/statue/MouseDrop_T()
 	return

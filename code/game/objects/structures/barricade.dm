@@ -76,18 +76,6 @@
 	material.place_dismantled_product(get_turf(src))
 	qdel(src)
 
-/obj/structure/barricade/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			visible_message("<span class='danger'>\The [src] is blown apart!</span>")
-			qdel(src)
-			return
-		if(2.0)
-			if (damage_health(25, BRUTE, TRUE))
-				visible_message("<span class='danger'>\The [src] is blown apart!</span>")
-				dismantle()
-			return
-
 /obj/structure/barricade/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)//So bullets will fly over and stuff.
 	if(air_group || (height==0))
 		return 1

@@ -213,7 +213,7 @@
 					visible_message("<span class='danger'>[G.assailant] throws \the [G.affecting] over \the [src].</span>")
 			else
 				to_chat(user, "<span class='danger'>You need a better grip to do that!</span>")
-			return
+		return
 
 	// Dismantle
 	if(isWrench(W))
@@ -225,7 +225,6 @@
 				user.visible_message("<span class='notice'>\The [user] dismantles \the [src].</span>", "<span class='notice'>You dismantle \the [src].</span>")
 				material.place_sheet(loc, 2)
 				qdel(src)
-			return
 	// Wrench Open
 		else
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
@@ -236,7 +235,8 @@
 				user.visible_message("<span class='notice'>\The [user] wrenches \the [src] closed.</span>", "<span class='notice'>You wrench \the [src] closed.</span>")
 				set_density(TRUE)
 			update_icon()
-			return
+		return
+
 	// Repair
 	if(isWelder(W))
 		var/obj/item/weldingtool/F = W
@@ -250,7 +250,7 @@
 					return
 				user.visible_message("<span class='notice'>\The [user] repairs some damage to \the [src].</span>", "<span class='notice'>You repair some damage to \the [src].</span>")
 				restore_health(get_max_health() / 5)
-			return
+		return
 
 	// Install
 	if(isScrewdriver(W))
@@ -265,15 +265,7 @@
 			update_icon()
 		return
 
-	if(W.force && (W.damtype == "fire" || W.damtype == "brute"))
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		visible_message("<span class='danger'>\The [src] has been [LAZYLEN(W.attack_verb) ? pick(W.attack_verb) : "attacked"] with \the [W] by \the [user]!</span>")
-		damage_health(W.force, W.damtype)
-		return
-	. = ..()
-
-/obj/structure/railing/ex_act(severity)
-	qdel(src)
+	..()
 
 /obj/structure/railing/can_climb(var/mob/living/user, post_climb_check=FALSE, check_silicon=TRUE)
 	. = ..()

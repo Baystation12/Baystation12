@@ -14,6 +14,7 @@
 	health_resistances = list(
 		BRUTE = 0.1
 	)
+	damage_hitsound = 'sound/effects/grillehit.ogg'
 	var/init_material = MATERIAL_STEEL
 
 	blend_objects = list(/obj/machinery/door, /turf/simulated/wall) // Objects which to blend with
@@ -55,9 +56,6 @@
 	for(var/obj/structure/grille/G in orange(1, location))
 		G.update_connections()
 		G.queue_icon_update()
-
-/obj/structure/grille/ex_act(severity)
-	qdel(src)
 
 /obj/structure/grille/on_update_icon()
 	var/on_frame = is_on_frame()
@@ -162,7 +160,9 @@
 			playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
 			new /obj/item/stack/material/rods(get_turf(src), is_broken() ? 1 : 2, material.name)
 			qdel(src)
-	else if((isScrewdriver(W)) && (istype(loc, /turf/simulated) || anchored))
+		return
+
+	if((isScrewdriver(W)) && (istype(loc, /turf/simulated) || anchored))
 		if(!shock(user, 90))
 			playsound(loc, 'sound/items/Screwdriver.ogg', 100, 1)
 			anchored = !anchored
@@ -170,10 +170,10 @@
 								 "<span class='notice'>You have [anchored ? "fastened the grille to" : "unfastened the grill from"] the floor.</span>")
 			update_connections(1)
 			update_icon()
-			return
+		return
 
 //window placing
-	else if(istype(W,/obj/item/stack/material))
+	if(istype(W,/obj/item/stack/material))
 		var/obj/item/stack/material/ST = W
 		if(ST.material.opacity > 0.7)
 			return 0
@@ -190,12 +190,8 @@
 		place_window(user, loc, dir_to_set, ST)
 		return
 
-	else if(!(W.obj_flags & OBJ_FLAG_CONDUCTIBLE) || !shock(user, 70))
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		user.do_attack_animation(src)
-		playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
-		damage_health(W.force, W.damtype)
-	..()
+	if (!(W.obj_flags & OBJ_FLAG_CONDUCTIBLE) || !shock(user, 70))
+		..()
 
 /obj/structure/grille/handle_death_change(new_death_state)
 	if (new_death_state)

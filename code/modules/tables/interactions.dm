@@ -43,15 +43,9 @@
 	return 1
 
 /obj/structure/table/bullet_act(obj/item/projectile/P)
-	if(!(P.damage_type == BRUTE || P.damage_type == BURN))
-		return 0
-
-	if(damage_health(P.damage / 2, P.damage_type))
-		//prevent tables with 1 health left from stopping bullets outright
-		return PROJECTILE_CONTINUE //the projectile destroyed the table, so it gets to keep going
-
-	visible_message("<span class='warning'>\The [P] hits [src]!</span>")
-	return 0
+	. = ..()
+	if (!is_alive())
+		return PROJECTILE_CONTINUE
 
 /obj/structure/table/CheckExit(atom/movable/O as mob|obj, target as turf)
 	if(istype(O) && O.checkpass(PASS_FLAG_TABLE))

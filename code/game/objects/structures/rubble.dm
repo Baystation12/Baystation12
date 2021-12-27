@@ -74,11 +74,9 @@
 				var/obj/item/booty = pickweight(loot)
 				booty = new booty(loc)
 			qdel(src)
-	else
-		..()
-		if (damage_health(I.force, I.damtype, TRUE))
-			visible_message("[user] clears away \the [src].")
-			qdel(src)
+		return
+
+	..()
 
 /obj/structure/rubble/house
 	loot = list(/obj/item/archaeological_find/bowl,
