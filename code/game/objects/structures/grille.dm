@@ -155,6 +155,11 @@
 	damage_health(damage, Proj.damage_type)
 
 /obj/structure/grille/attackby(obj/item/W as obj, mob/user as mob)
+	if (user.a_intent == I_HURT)
+		if (!(W.obj_flags & OBJ_FLAG_CONDUCTIBLE) || !shock(user, 70))
+			..()
+		return
+
 	if(isWirecutter(W))
 		if(!shock(user, 100))
 			playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)

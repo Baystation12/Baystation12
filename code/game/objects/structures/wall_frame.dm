@@ -54,6 +54,10 @@
 /obj/structure/wall_frame/attackby(var/obj/item/W, var/mob/user)
 	src.add_fingerprint(user)
 
+	if (user.a_intent == I_HURT)
+		..()
+		return
+
 	//grille placing
 	if(istype(W, /obj/item/stack/material/rods))
 		for(var/obj/structure/window/WINDOW in loc)

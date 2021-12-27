@@ -187,6 +187,10 @@
 	return 1
 
 /obj/structure/railing/attackby(var/obj/item/W, var/mob/user)
+	if (user.a_intent == I_HURT)
+		..()
+		return
+
 	// Handle harm intent grabbing/tabling.
 	if(istype(W, /obj/item/grab) && get_dist(src,user)<2)
 		var/obj/item/grab/G = W

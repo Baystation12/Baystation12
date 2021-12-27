@@ -57,6 +57,10 @@
 		reinforce_girder()
 
 /obj/structure/girder/attackby(obj/item/W, mob/user)
+	if (user.a_intent == I_HURT)
+		..()
+		return
+
 	if(isWrench(W) && state == 0)
 		if(anchored && !reinf_material)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)

@@ -247,6 +247,10 @@
 	. = ..()
 
 /obj/structure/closet/attackby(obj/item/W as obj, mob/user as mob)
+	if (user.a_intent == I_HURT)
+		..()
+		return
+
 	if (src.opened)
 		if(istype(W, /obj/item/grab))
 			var/obj/item/grab/G = W
@@ -311,11 +315,7 @@
 		src.togglelock(user, W)
 		return
 
-	if (user.a_intent != I_HURT)
-		src.attack_hand(user)
-		return
-
-	..()
+	attack_hand(user)
 
 /obj/structure/closet/proc/slice_into_parts(obj/W, mob/user)
 	new /obj/item/stack/material/steel(src.loc, 2)

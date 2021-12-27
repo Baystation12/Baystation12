@@ -86,6 +86,10 @@
 	. = ..()
 
 /obj/structure/table/attackby(obj/item/W, mob/user)
+	if (user.a_intent == I_HURT)
+		..()
+		return
+
 	if(reinforced && isScrewdriver(W))
 		remove_reinforced(W, user)
 		if(!reinforced)

@@ -294,6 +294,10 @@
 		to_chat(user, SPAN_NOTICE("There appears to be no way to dismantle \the [src]!"))
 		return
 
+	if (user.a_intent == I_HURT)
+		..()
+		return
+
 	if (isScrewdriver(W))
 		if(reinf_material && construction_state >= 1)
 			construction_state = 3 - construction_state
