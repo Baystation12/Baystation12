@@ -129,7 +129,7 @@
 	/obj/item/weapon/gun/projectile/m7_smg = 1,
 	/obj/item/weapon/storage/pocketstore/hardcase/magazine = 1,
 	/obj/item/clothing/glasses/hud/tactical = 1,
-	/obj/item/weapon/plastique = 1,
+	/obj/item/weapon/plastique = 2,
 	)
 
 /obj/structure/closet/crate/marine/rifleman
@@ -547,7 +547,7 @@
 /obj/item/device/landmine/emp/active/low_range
 	det_range = 3
 
-/obj/item/device/landmine/gas/active/low_range
+/obj/item/device/landmine/flame/active/low_range
 	det_range = 3
 
 /obj/item/device/landmine/flash/active/low_range

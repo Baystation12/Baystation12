@@ -9,7 +9,7 @@ A random number of times between the max and min defined number.
 #define ACHLYS_LOOT_RANDMAX 4
 #define WANDERFLOOD_LOOT_BASE list(/mob/living/simple_animal/hostile/flood/combat_form/prisoner,/mob/living/simple_animal/hostile/flood/combat_form/prisoner/mutated,/mob/living/simple_animal/hostile/flood/combat_form/prisoner/mutated/guard,/mob/living/simple_animal/hostile/flood/combat_form/prisoner/crew,/mob/living/simple_animal/hostile/flood/combat_form/prisoner/guard)
 #define TOOL_LOOT_BASE list(/obj/item/weapon/crowbar/red,/obj/item/weapon/weldingtool/mini,/obj/item/weapon/screwdriver,/obj/item/device/multitool)
-#define TRAP_LOOT_BASE list(/obj/item/device/landmine/emp/active/low_range,/obj/item/device/landmine/gas/active/low_range,/obj/item/device/landmine/flash/active/low_range,/obj/item/weapon/beartrap/deployed)
+#define TRAP_LOOT_BASE list(/obj/item/device/landmine/emp/active/low_range,/obj/item/device/landmine/flame/active/low_range,/obj/item/device/landmine/flame/active/low_range,/obj/item/device/landmine/flash/active/low_range,/obj/item/weapon/beartrap/deployed)
 #define MELEE_LOOT_BASE list(/obj/item/weapon/material/knife/combat_knife,/obj/item/weapon/material/hatchet/achlys,/obj/item/weapon/scalpel/achlys,/obj/item/device/flashlight/maglight,/obj/item/weapon/material/butterfly)
 #define MED_LOOT_BASE list(/obj/item/stack/medical/bruise_pack,/obj/item/stack/medical/ointment,/obj/item/stack/medical/splint/ghetto,/obj/item/weapon/storage/pill_bottle/dylovene)
 
@@ -46,7 +46,7 @@ A random number of times between the max and min defined number.
 	var/CurrLootList = list()
 	for(var/type in WANDERFLOOD_LOOT_BASE)
 		var/num = rand(ACHLYS_LOOT_RANDMIN,ACHLYS_LOOT_RANDMAX)
-		for(var/n = 1 to num)
+		for(var/n = 0 to num)
 			CurrLootList += type
 	loot_distributor.loot_list["achlysWanderFlood"] = CurrLootList
 	CurrLootList = list()
