@@ -17,7 +17,7 @@
 
 	for(var/obj/effect/blob/B in objs)       		//Blob damage here
 		var/damage = round(30/(get_dist(B,T)+1))
-		B.damage_health(damage)
+		B.damage_health(damage, DAMAGE_SHOCK)
 
 	new/obj/effect/sparks(src.loc)
 	new/obj/effect/effect/smoke/illumination(src.loc, 5, range=30, power=1, color="#ffffff")

@@ -5,6 +5,8 @@
 	density = TRUE
 	w_class = ITEM_SIZE_NORMAL
 
+	damage_hitsound = 'sound/effects/Glasshit.ogg'
+
 	layer = SIDE_WINDOW_LAYER
 	anchored = TRUE
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CAN_BE_PAINTED | ATOM_FLAG_CHECKS_BORDER
@@ -191,22 +193,11 @@
 			new /obj/item/stack/material/rods(loc, debris_count, reinf_material.name)
 	qdel(src)
 
-/obj/structure/window/bullet_act(var/obj/item/projectile/Proj)
-	var/proj_damage = Proj.get_structure_damage()
-	if(!proj_damage) return
-	..()
-	playsound(loc, 'sound/effects/Glasshit.ogg', 100, 1)
-	damage_health(proj_damage, Proj.damage_type)
-
 /obj/structure/window/ex_act(severity)
-	switch(severity)
-		if(1)
-			qdel(src)
-		if(2)
-			shatter(0)
-		if(3)
-			if(prob(50))
-				shatter(0)
+	if (severity == 1)
+		qdel(src)
+		return
+	..()
 
 /obj/structure/window/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
@@ -303,7 +294,7 @@
 		to_chat(user, SPAN_NOTICE("There appears to be no way to dismantle \the [src]!"))
 		return
 
-	if(isScrewdriver(W))
+	if (isScrewdriver(W))
 		if(reinf_material && construction_state >= 1)
 			construction_state = 3 - construction_state
 			update_nearby_icons()
@@ -321,11 +312,15 @@
 			set_anchored(!anchored)
 			playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
 			to_chat(user, (anchored ? "<span class='notice'>You have fastened the window to the floor.</span>" : "<span class='notice'>You have unfastened the window.</span>"))
-	else if(isCrowbar(W) && reinf_material && construction_state <= 1 && anchored)
+		return
+
+	if (isCrowbar(W) && reinf_material && construction_state <= 1 && anchored)
 		construction_state = 1 - construction_state
 		playsound(loc, 'sound/items/Crowbar.ogg', 75, 1)
 		to_chat(user, (construction_state ? "<span class='notice'>You have pried the window into the frame.</span>" : "<span class='notice'>You have pried the window out of the frame.</span>"))
-	else if(isWrench(W) && !anchored && (!construction_state || !reinf_material))
+		return
+
+	if (isWrench(W) && !anchored && (!construction_state || !reinf_material))
 		if(!material.stack_type)
 			to_chat(user, "<span class='notice'>You're not sure how to dismantle \the [src] properly.</span>")
 		else
@@ -337,7 +332,9 @@
 				S.update_strings()
 				S.update_icon()
 			qdel(src)
-	else if(isCoil(W) && is_fulltile())
+		return
+
+	if (isCoil(W) && is_fulltile())
 		if (polarized)
 			to_chat(user, SPAN_WARNING("\The [src] is already polarized."))
 			return
@@ -346,7 +343,9 @@
 			playsound(src.loc, 'sound/effects/sparks1.ogg', 75, 1)
 			polarized = TRUE
 			to_chat(user, SPAN_NOTICE("You wire and polarize \the [src]."))
-	else if (isWirecutter(W))
+		return
+
+	if (isWirecutter(W))
 		if (!polarized)
 			to_chat(user, SPAN_WARNING("\The [src] is not polarized."))
 			return
@@ -357,7 +356,9 @@
 		id = null
 		playsound(loc, 'sound/items/Wirecutter.ogg', 75, 1)
 		to_chat(user, SPAN_NOTICE("You cut the wiring and remove the polarization from \the [src]."))
-	else if(isMultitool(W))
+		return
+
+	if (isMultitool(W))
 		if (!polarized)
 			to_chat(user, SPAN_WARNING("\The [src] is not polarized."))
 			return
@@ -372,7 +373,8 @@
 			id = sanitizeSafe(response, MAX_NAME_LEN)
 			to_chat(user, SPAN_NOTICE("The new ID of \the [src] is [id]."))
 		return
-	else if(istype(W, /obj/item/gun/energy/plasmacutter) && anchored)
+
+	if (istype(W, /obj/item/gun/energy/plasmacutter) && anchored)
 		var/obj/item/gun/energy/plasmacutter/cutter = W
 		if(!cutter.slice(user))
 			return
@@ -383,8 +385,9 @@
 			playsound(src, 'sound/items/Welder.ogg', 80, 1)
 			construction_state = 0
 			set_anchored(0)
+		return
 
-	else if (istype(W, /obj/item/stack/material))
+	if (istype(W, /obj/item/stack/material))
 		if (!health_damaged())
 			to_chat(user, SPAN_NOTICE("\The [src] does not need repair."))
 			return
@@ -411,7 +414,7 @@
 			to_chat(user, SPAN_WARNING("It looks like it could use more sheets."))
 		return
 
-	else if (istype(W, /obj/item/weldingtool))
+	if (istype(W, /obj/item/weldingtool))
 		if (!health_damaged())
 			to_chat(user, SPAN_NOTICE("\The [src] does not need repair."))
 			return
@@ -436,14 +439,10 @@
 		)
 		return
 
-	else if (user.a_intent != I_HELP && !istype(W, /obj/item/rcd) && !istype(W, /obj/item/device/paint_sprayer))
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		if(!istype(W, /obj/item/natural_weapon) && (W.damtype == BRUTE || W.damtype == BURN))
-			user.do_attack_animation(src)
-			hit(W.force, user, W)
-			return
-		..()
-	return
+	if (istype(W, /obj/item/rcd) || istype(W, /obj/item/device/paint_sprayer))
+		return
+
+	..()
 
 /obj/structure/window/grab_attack(var/obj/item/grab/G)
 	if (G.assailant.a_intent != I_HURT)
@@ -607,9 +606,8 @@
 	var/melting_point = material.melting_point
 	if(reinf_material)
 		melting_point += 0.25*reinf_material.melting_point
-	if(exposed_temperature > melting_point)
-		damage_health(damage_per_fire_tick, BURN)
-	..()
+	if (exposed_temperature > melting_point)
+		damage_health(damage_per_fire_tick, DAMAGE_FIRE)
 
 /obj/structure/window/basic
 	icon_state = "window"

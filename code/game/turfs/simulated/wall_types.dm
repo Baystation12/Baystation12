@@ -160,11 +160,6 @@
 /turf/simulated/wall/alium/New(var/newloc)
 	..(newloc,MATERIAL_ALIENALLOY)
 
-/turf/simulated/wall/alium/ex_act(severity)
-	if(prob(explosion_resistance))
-		return
-	..()
-
 //Cult wall
 /turf/simulated/wall/cult
 	icon_state = "cult"

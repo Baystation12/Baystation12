@@ -52,23 +52,9 @@
 /obj/structure/chorus/proc/activate(mob/living/carbon/alien/chorus/C)
 	return
 
-/obj/structure/chorus/attackby(obj/item/W as obj, mob/user as mob)
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	user.do_attack_animation(src)
-	playsound(get_turf(src), "swing_hit", 50, 1)
-	user.visible_message(
-		SPAN_DANGER("[user] hits \the [src] with \the [W]!"),
-		SPAN_DANGER("You hit \the [src] with \the [W]!"),
-		SPAN_DANGER("You hear something breaking!")
-		)
-	damage_health(W.force, W.damtype)
-
 /obj/structure/chorus/handle_death_change(new_death_state)
 	..()
 	if (new_death_state)
 		visible_message(SPAN_WARNING("\The [src] [death_message]"))
 		playsound(loc, death_sound, 50, TRUE)
 		qdel(src)
-
-/obj/structure/chorus/bullet_act(var/obj/item/projectile/P)
-	damage_health(P.damage, P.damage_type)

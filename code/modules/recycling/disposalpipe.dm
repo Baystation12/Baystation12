@@ -194,21 +194,6 @@ obj/structure/disposalpipe/Destroy()
 	spawn(2)	// delete pipe after 2 ticks to ensure expel proc finished
 		qdel(src)
 
-
-// pipe affected by explosion
-/obj/structure/disposalpipe/ex_act(severity)
-
-	switch(severity)
-		if(1.0)
-			kill_health()
-			return
-		if(2.0)
-			damage_health(rand(5, 15), BRUTE)
-			return
-		if(3.0)
-			damage_health(rand(0, 15), BRUTE)
-			return
-
 /obj/structure/disposalpipe/handle_death_change(new_death_state)
 	if (new_death_state)
 		broken(prob(0.5))
@@ -216,8 +201,7 @@ obj/structure/disposalpipe/Destroy()
 //attack by item
 //weldingtool: unfasten and convert to obj/disposalconstruct
 
-/obj/structure/disposalpipe/attackby(var/obj/item/I, var/mob/user)
-
+/obj/structure/disposalpipe/attackby(obj/item/I, mob/user)
 	var/turf/T = src.loc
 	if(!T.is_plating())
 		return		// prevent interaction with T-scanner revealed pipes
@@ -238,7 +222,9 @@ obj/structure/disposalpipe/Destroy()
 				to_chat(user, "You must stay still while welding the pipe.")
 		else
 			to_chat(user, "You need more welding fuel to cut the pipe.")
-			return
+		return
+
+	..()
 
 	// called when pipe is cut with welder
 /obj/structure/disposalpipe/proc/welded()

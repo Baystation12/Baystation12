@@ -118,6 +118,7 @@
 
 /obj/item/device
 	icon = 'icons/obj/device.dmi'
+	health_resistances = DAMAGE_RESIST_ELECTRICAL
 
 //Checks if the item is being held by a mob, and if so, updates the held icons
 /obj/item/proc/update_twohanding()
@@ -154,6 +155,7 @@
 	return FALSE
 
 /obj/item/ex_act(severity)
+	..()
 	switch(severity)
 		if(1)
 			qdel(src)
