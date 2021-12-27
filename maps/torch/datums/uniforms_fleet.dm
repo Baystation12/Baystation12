@@ -8,6 +8,7 @@
 				/obj/item/clothing/head/beret/solgov/fleet/command,
 				/obj/item/clothing/head/ushanka/solgov/fleet,
 				/obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,
+				/obj/item/clothing/suit/storage/jacket/solgov/fleet/command,
 				/obj/item/clothing/head/soft/solgov/fleet,
 				/obj/item/clothing/gloves/thick
 			)
@@ -46,6 +47,7 @@
 				/obj/item/clothing/head/beret/solgov/fleet/engineering,
 				/obj/item/clothing/head/ushanka/solgov/fleet,
 				/obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,
+				/obj/item/clothing/suit/storage/jacket/solgov/fleet,
 				/obj/item/clothing/head/soft/solgov/fleet,
 				/obj/item/clothing/gloves/thick
 			)
@@ -125,6 +127,7 @@
 				/obj/item/clothing/head/beret/solgov/fleet/security,
 				/obj/item/clothing/head/ushanka/solgov/fleet,
 				/obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,
+				/obj/item/clothing/suit/storage/jacket/solgov/fleet/security,
 				/obj/item/clothing/head/soft/solgov/fleet,
 				/obj/item/clothing/gloves/thick
 			)
@@ -206,6 +209,7 @@
 				/obj/item/clothing/head/beret/solgov/fleet/medical,
 				/obj/item/clothing/head/ushanka/solgov/fleet,
 				/obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,
+				/obj/item/clothing/suit/storage/jacket/solgov/fleet/medical,
 				/obj/item/clothing/head/soft/solgov/fleet,
 				/obj/item/clothing/gloves/thick
 			)
@@ -280,6 +284,7 @@
 				/obj/item/clothing/head/beret/solgov/fleet/supply,
 				/obj/item/clothing/head/ushanka/solgov/fleet,
 				/obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,
+				/obj/item/clothing/suit/storage/jacket/solgov/fleet/supply,
 				/obj/item/clothing/head/soft/solgov/fleet,
 				/obj/item/clothing/gloves/thick
 			)
@@ -358,6 +363,7 @@
 				/obj/item/clothing/head/beret/solgov/fleet/service,
 				/obj/item/clothing/head/ushanka/solgov/fleet,
 				/obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,
+				/obj/item/clothing/suit/storage/jacket/solgov/fleet/service,
 				/obj/item/clothing/head/soft/solgov/fleet,
 				/obj/item/clothing/gloves/thick
 			)
