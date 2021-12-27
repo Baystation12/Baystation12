@@ -23,7 +23,7 @@
 	reagent_state = LIQUID
 	color = "#00BFFF"
 	metabolism = 0
-	overdose = 27 //Time (60 seconds gas exposure) / 2 (2 seconds between life ticks) * 0.9 (Chemicals lost due to metabolism).
+	overdose = 30
 	scannable = 0
 	flags = AFFECTS_DEAD
 

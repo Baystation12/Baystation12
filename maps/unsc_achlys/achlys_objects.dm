@@ -129,8 +129,7 @@
 	/obj/item/weapon/gun/projectile/m7_smg = 1,
 	/obj/item/weapon/storage/pocketstore/hardcase/magazine = 1,
 	/obj/item/clothing/glasses/hud/tactical = 1,
-	/obj/item/weapon/plastique = 3,
-	/obj/item/weapon/storage/pocketstore/hardcase/grenade = 1,
+	/obj/item/weapon/plastique = 1,
 	)
 
 /obj/structure/closet/crate/marine/rifleman
@@ -522,9 +521,39 @@
 		return
 	else return
 
-//Loot Markers//
-/obj/effect/loot_marker/potential_evidence
-	loot_type = "evidence"
+//Cov Armour
 
-/obj/effect/loot_marker/potential_autolathe
-	loot_type = "autolathes"
+/obj/item/clothing/head/helmet/sangheili/minor/achlys
+	name = "Sangheili Helmet (Minor, Stripped-Down)"
+	desc = "Head armour, to be used with the Sangheili Combat Harness. It's had a number of components removed, under the armour itself."
+
+/obj/item/clothing/suit/armor/special/combatharness/minor/achlys
+	name = "Sangheili Combat Harness (Minor, Stripped-Down)"
+	desc = "A Sangheili Combat Harness. It's had the shielding stripped out; Likely for research."
+	specials = list()
+	totalshields = 0
+
+/obj/item/clothing/shoes/sangheili/minor/achlys
+	name = "Sanghelli Leg Armour (Minor, Stripped-Down)"
+	desc = "Leg armour, to be used with the Sangheili Combat Harness. It's had a number of components removed, under the armour itself."
+
+/obj/item/clothing/gloves/thick/sangheili/minor/achlys
+	name = "Sanghelli Combat Gauntlets (Minor, Stripped-Down)"
+	desc = "Hand armour, to be used with the Sangheili Combat Harness. It's had a number of components removed, under the armour itself."
+
+
+//Traps.
+
+/obj/item/device/landmine/emp/active/low_range
+	det_range = 3
+
+/obj/item/device/landmine/gas/active/low_range
+	det_range = 3
+
+/obj/item/device/landmine/flash/active/low_range
+	det_range = 3
+
+/obj/item/weapon/beartrap/deployed
+	icon_state = "beartrap1"
+	deployed = 1
+	anchored = 1

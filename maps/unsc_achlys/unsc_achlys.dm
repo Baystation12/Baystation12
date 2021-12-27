@@ -9,6 +9,7 @@
 	#include "achlys_gamemode.dm"
 	#include "achlys_areas.dm"
 	#include "achlys_overmap.dm"
+	#include "loot_lists.dm"
 	#include "unsc_dante_Z1.dmm"
 	#include "unsc_dante_Z2.dmm"
 	#include "unsc_achlys_Z1.dmm"
