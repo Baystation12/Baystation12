@@ -10,15 +10,13 @@
 	var/being_used = 0
 	waterproof = FALSE
 
-	//Stuff for damaging and breaking artifacts.
-	var/max_health = 500
-	var/health = 500
+	health_max = 500
+	health_min_damage = 5
+
 	///TRUE if artifact can be damaged, FALSE otherwise.
 	var/can_damage = FALSE
 	///The damage type that can harm the artifact.
 	var/damage_type = DAM_SHARP
-	///Minimum force needed to cause damage. Only applicable when being melee'd.
-	var/min_force = 5
 	///Extra descriptor added to artifact analyzer results.
 	var/damage_desc = "The physical structure appears indestructable."
 	var/destroyed = FALSE
@@ -102,9 +100,30 @@
 	visible_message("[user] touches \the [src].")
 	check_triggers(/datum/artifact_trigger/proc/on_touch, user)
 
+
 /obj/machinery/artifact/attackby(obj/item/W, mob/living/user)
 	. = ..()
 	check_triggers(/datum/artifact_trigger/proc/on_hit, W, user)
+
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	var/damage_flags = EMPTY_BITFIELD
+	if (W.sharp)
+		damage_flags |= DAM_SHARP
+	if (W.edge)
+		damage_flags |= DAM_EDGE
+	if (can_damage_health(W.force, W.damtype, damage_flags))
+		user.do_attack_animation(src)
+		damage_health(W.force, W.damtype)
+		user.visible_message(
+			SPAN_DANGER("\The [user] hits \the [src] with \a [W]!"),
+			SPAN_DANGER("You hit \the [src] with \the [W]!")
+		)
+	else
+		user.visible_message(
+			SPAN_WARNING("\The [user] hits \the [src] with \a [W], but it bounces off!"),
+			SPAN_WARNING("You hit \the [src] with \the [W], but it bounces off!")
+		)
+
 
 /obj/machinery/artifact/Bumped(M)
 	..()
@@ -112,16 +131,17 @@
 
 /obj/machinery/artifact/bullet_act(var/obj/item/projectile/P)
 	check_triggers(/datum/artifact_trigger/proc/on_hit, P)
+	var/damage = P.get_structure_damage()
+	if (can_damage_health(damage, P.damage_type, P.damage_flags))
+		damage_health(damage, P.damage_type)
+
 
 /obj/machinery/artifact/ex_act(severity)
 	if(check_triggers(/datum/artifact_trigger/proc/on_explosion, severity))
 		return
-	switch(severity)
-		if(1)
-			qdel(src)
-		if(2)
-			if (prob(50))
-				qdel(src)
+
+	damage_health(rand(100, 200) / severity, DAMAGE_EXPLODE, severity = severity)
+
 
 /obj/machinery/artifact/Move()
 	..()
@@ -136,20 +156,6 @@
 
 //Damage/Destruction procs
 
-/obj/machinery/artifact/examine(mob/user)
-	. = ..()
-
-	if (health <= 0)
-		to_chat(user, SPAN_NOTICE("It is inert, dead and quiet."))
-	else if (health < (max_health * 0.25))
-		to_chat(user, SPAN_DANGER("It looks like its almost shattered!"))
-	else if (health < (max_health * 0.5))
-		to_chat(user, SPAN_WARNING("It is badly damaged, and is getting close to breaking apart."))
-	else if (health < (max_health * 0.75))
-		to_chat(user, SPAN_NOTICE("It is moderately damaged, cracks visible on its surface."))
-	else if (health < max_health)
-		to_chat(user, SPAN_NOTICE("It has minor damage."))
-
 /**
  * Sets up the artifacts destructibility by doing the following:
  * Gives a randomized health/maxhealth value.
@@ -160,8 +166,8 @@
  */
 /obj/machinery/artifact/proc/setup_destructibility()
 	can_damage = TRUE
-	health = rand(100, 200)
-	max_health = health
+	set_max_health(rand(100, 200))
+	set_health(get_max_health())
 
 	var/damage_types = list(DAM_SHARP, DAM_BULLET, DAM_EDGE, DAM_LASER)
 	for (var/datum/artifact_effect/A in list(my_effect, secondary_effect))
@@ -200,39 +206,6 @@
 			damage_desc += "concentrated high-energy bursts."
 
 /**
- * Handles damage the artifact receives.
- * Sends a visual message when the aritfacts health value falls below certain points.
- * Once the artifact has 0 or less health:
- *   Calls the effect(s) 'destroyed_effect()' proc.
- *   Sets the artifacts icon state to its 'destroyed' state.
- * If the artifact has > 0 health, calls the effect(s) 'holder_damaged()' proc. This may or may not be removed.
- *
- * @param damage int The damage dealt.
- */
-/obj/machinery/artifact/proc/handle_damage(damage)
-	if (destroyed)
-		return
-
-	var/initialhealth = health
-	health = max(0, health - damage)
-	if (health < max_health / 4 && initialhealth >= max_health / 4)
-		visible_message("\The [src] looks like it's about to break!" )
-	else if (health < max_health / 2 && initialhealth >= max_health / 2)
-		visible_message("\The [src] looks seriously damaged!" )
-	else if (health < max_health * 3/4 && initialhealth >= max_health * 3/4)
-		visible_message("\The [src] shows signs of damage!" )
-	update_icon()
-
-
-
-	playsound(get_turf(src), 'sound/effects/Glasshit.ogg', 75, TRUE)
-
-	for (var/datum/artifact_effect/A in list(my_effect, secondary_effect))
-		A.holder_damaged(health, damage)
-
-	if (!health)
-		handle_destruction()
-/**
  * Handles the 'destruction' of the artifact.
  * Icon state is updated to the corresponding 'destroyed' state.
  * Client mobs are 'flashed' for added effect.
@@ -255,23 +228,43 @@
 
 	destroyed = TRUE
 
-/obj/machinery/artifact/attackby(obj/item/W, mob/living/user)
+
+// Health handlers
+// `damage_flags`: Any special damage flags that could be applied to the artifact's `damage_type` var.
+/obj/machinery/artifact/can_damage_health(damage, damage_type, damage_flags = EMPTY_BITFIELD)
+	if (destroyed || !can_damage)
+		return FALSE
+	if (!(src.damage_type & damage_flags))
+		return FALSE
 	. = ..()
 
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	if (W.sharp && damage_type == DAM_SHARP || W.edge && damage_type == DAM_EDGE)
-		user.do_attack_animation(src)
 
-		if (W.force < min_force)
-			visible_message(SPAN_DANGER("\The [user] hits \the [src] with \the [W], but it doesn't even scratch it!"))
-			return
+/obj/machinery/artifact/damage_health(damage, damage_type = null, skip_death_state_change = FALSE, severity)
+	var/initial_damage_percentage = get_damage_percentage()
 
-		handle_damage(W.force)
-	else
-		visible_message(SPAN_DANGER("\The [user] hits \the [src] with \the [W], but it bounces off!"))
-
-/obj/machinery/artifact/bullet_act(obj/item/projectile/P)
 	. = ..()
+	if (.)
+		return
 
-	if (P.damage_flags & damage_type)
-		handle_damage(P.damage)
+	var/current_damage_percentage = get_damage_percentage()
+	if (current_damage_percentage >= 75 && initial_damage_percentage < 75)
+		visible_message(SPAN_DANGER("\The [src] looks like it's about to break!"))
+	else if (current_damage_percentage >= 50 && initial_damage_percentage < 50)
+		visible_message(SPAN_WARNING("\The [src] looks seriously damaged!"))
+	else if (current_damage_percentage >= 25 && initial_damage_percentage < 25)
+		visible_message(SPAN_NOTICE("\The [src] shows signs of damage!"))
+
+
+/obj/machinery/artifact/post_health_change(health_mod, damage_type)
+	. = ..()
+	if (health_mod < 0)
+		playsound(get_turf(src), 'sound/effects/Glasshit.ogg', 75, TRUE)
+		for (var/datum/artifact_effect/A in list(my_effect, secondary_effect))
+			A.holder_damaged(get_current_health(), health_mod)
+	update_icon()
+
+
+/obj/machinery/artifact/handle_death_change(new_death_state)
+	. = ..()
+	if (new_death_state)
+		handle_destruction()
