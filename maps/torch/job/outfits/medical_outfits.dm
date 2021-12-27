@@ -95,6 +95,13 @@
 	..()
 	BACKPACK_OVERRIDE_CHEMISTRY
 
+/decl/hierarchy/outfit/job/torch/crew/medical/contractor/chemist/ec
+	name = OUTFIT_JOB_NAME("Chemist - Expeditionary Corps")
+	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/medical
+	shoes = /obj/item/clothing/shoes/dutyboots
+	pda_type = /obj/item/modular_computer/pda/chemistry
+	id_types = list(/obj/item/card/id/torch/contractor/chemist)
+
 /decl/hierarchy/outfit/job/torch/crew/medical/counselor
 	name = OUTFIT_JOB_NAME("Counselor")
 	uniform = /obj/item/clothing/under/rank/psych/turtleneck
