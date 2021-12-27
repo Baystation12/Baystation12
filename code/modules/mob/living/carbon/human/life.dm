@@ -616,9 +616,9 @@
 			if(sleeping)
 				if (!dream_timer && client)
 					dream_timer = addtimer(CALLBACK(src, .proc/dream), 10 SECONDS, TIMER_STOPPABLE)
-				if (mind)
+				if (mind || ai_holder)
 					//Are they SSD? If so we'll keep them asleep but work off some of that sleep var in case of stoxin or similar.
-					if(client || sleeping > 3)
+					if (client || ai_holder || sleeping > 3)
 						AdjustSleeping(-1)
 				species.handle_sleeping(src)
 			if(prob(2) && is_asystole() && isSynthetic())
@@ -1151,3 +1151,11 @@
 	..()
 	if((CE_THIRDEYE in chem_effects) || (MUTATION_XRAY in mutations))
 		set_sight(sight|SEE_TURFS|SEE_MOBS|SEE_OBJS)
+
+/mob/living/ssd_check()
+	. = ..()
+
+	if (!.)
+		return
+
+	return !ai_holder
