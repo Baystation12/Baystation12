@@ -206,6 +206,11 @@ obj/structure/disposalpipe/Destroy()
 	if(!T.is_plating())
 		return		// prevent interaction with T-scanner revealed pipes
 	src.add_fingerprint(user, 0, I)
+
+	if (user.a_intent == I_HURT)
+		..()
+		return
+
 	if(istype(I, /obj/item/weldingtool))
 		var/obj/item/weldingtool/W = I
 		if(W.remove_fuel(0,user))

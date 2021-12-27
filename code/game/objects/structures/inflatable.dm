@@ -144,6 +144,11 @@
 /obj/structure/inflatable/attackby(obj/item/W, mob/user)
 	if(!istype(W) || istype(W, /obj/item/inflatable_dispenser)) return
 
+	if (user.a_intent == I_HURT)
+		if (W.can_puncture() || W.force > 10)
+			..()
+		return
+
 	if(istype(W, /obj/item/tape_roll) && get_damage_value() >= 3)
 		if(taped)
 			to_chat(user, SPAN_NOTICE("\The [src] can't be patched any more with \the [W]!"))

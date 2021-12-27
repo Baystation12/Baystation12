@@ -180,6 +180,12 @@
 	return 0
 
 /obj/effect/blob/attackby(obj/item/W, mob/user)
+	if (user.a_intent == I_HURT)
+		if(isWelder(W))
+			playsound(loc, 'sound/items/Welder.ogg', 100, 1)
+		..()
+		return
+
 	if (isWirecutter(W))
 		if(prob(user.skill_fail_chance(SKILL_SCIENCE, 90, SKILL_EXPERT)))
 			to_chat(user, SPAN_WARNING("You fail to collect a sample from \the [src]."))
