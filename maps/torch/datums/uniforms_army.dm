@@ -36,6 +36,12 @@
 
 	service_over = /obj/item/clothing/suit/storage/solgov/service/army/engineering
 
+/decl/hierarchy/mil_uniform/army/eng/sword
+	name = "Army NCO sword engineering"
+	min_rank = 4
+
+	dress_extra = list(/obj/item/material/sword/replica/officersword/army)
+
 /decl/hierarchy/mil_uniform/army/eng/officer
 	name = "Army engineering CO"
 	min_rank = 11
@@ -75,6 +81,12 @@
 						/obj/item/clothing/gloves/thick)
 
 	service_over = /obj/item/clothing/suit/storage/solgov/service/army/security
+
+/decl/hierarchy/mil_uniform/army/sec/sword
+	name = "Army NCO sword security"
+	min_rank = 4
+
+	dress_extra = list(/obj/item/material/sword/replica/officersword/army)
 
 /decl/hierarchy/mil_uniform/army/sec/officer
 	name = "Army security CO"
@@ -117,6 +129,12 @@
 
 	service_over = /obj/item/clothing/suit/storage/solgov/service/army/medical
 
+/decl/hierarchy/mil_uniform/army/med/sword
+	name = "Army NCO sword medical"
+	min_rank = 4
+
+	dress_extra = list(/obj/item/material/sword/replica/officersword/army)
+
 /decl/hierarchy/mil_uniform/army/med/officer
 	name = "Army medical CO"
 	min_rank = 11
@@ -158,6 +176,12 @@
 
 	service_over = /obj/item/clothing/suit/storage/solgov/service/army/supply
 
+/decl/hierarchy/mil_uniform/army/sup/sword
+	name = "Army NCO sword supply"
+	min_rank = 4
+
+	dress_extra = list(/obj/item/material/sword/replica/officersword/army)
+
 /decl/hierarchy/mil_uniform/army/sup/officer
 	name = "Army supply CO"
 	min_rank = 11
@@ -193,6 +217,12 @@
 						/obj/item/clothing/gloves/thick)
 
 	service_over = /obj/item/clothing/suit/storage/solgov/service/army/service
+
+/decl/hierarchy/mil_uniform/army/srv/sword
+	name = "Army NCO sword service"
+	min_rank = 4
+
+	dress_extra = list(/obj/item/material/sword/replica/officersword/army)
 
 /decl/hierarchy/mil_uniform/army/srv/officer
 	name = "Army service CO"
@@ -230,6 +260,12 @@
 						/obj/item/clothing/gloves/thick)
 
 	service_over = /obj/item/clothing/suit/storage/solgov/service/army/exploration
+
+/decl/hierarchy/mil_uniform/army/exp/sword
+	name = "Army NCO sword exploration"
+	min_rank = 4
+
+	dress_extra = list(/obj/item/material/sword/replica/officersword/army)
 
 /decl/hierarchy/mil_uniform/army/exp/officer
 	name = "Army exploration CO"
