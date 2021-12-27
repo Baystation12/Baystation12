@@ -323,7 +323,7 @@ body { \
 
 	dat += "</div></body></html>"
 
-	show_browser(owner, dat, "window=emojis;size=670x500")
+	show_browser(owner, dat, "window=emojis;size=700x500")
 
 #undef MAX_COOKIE_LENGTH
 #undef SPAM_TRIGGER_AUTOMUTE
