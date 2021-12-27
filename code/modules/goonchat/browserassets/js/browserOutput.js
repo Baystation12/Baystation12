@@ -906,6 +906,10 @@ $(function() {
 		handleToggleClick($subFont, $(this));
 	});
 
+	$('#toggleEmojis').click(function(e) {
+		runByond('?_src_=chat&proc=showEmojiList&param[theme]='+savedConfig.stheme);
+	});
+
 	$('.sub, .toggle').mouseenter(function() {
 		opts.suppressSubClose = true;
 	});

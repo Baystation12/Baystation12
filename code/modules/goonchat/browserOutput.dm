@@ -99,6 +99,8 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/tmp/iconCache.sav"))
 			swaptodarkmode()
 		if ("swaptolightmode")
 			swaptolightmode()
+		if ("showEmojiList")
+			showemojilist(arglist(params))
 	if(data)
 		ehjax_send(data = data)
 
@@ -277,6 +279,51 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/tmp/iconCache.sav"))
 /chatOutput/proc/swaptodarkmode()
 	owner.force_dark_theme()
 
+/chatOutput/proc/showemojilist(var/theme="dark")
+	var/color1
+	var/color2
+	if(theme == "dark")
+		color1 = "#a4bad6"
+		color2 = "#171717"
+	else
+		color1 = "#000000"
+		color2 = "#fff"
+
+	var/css = " \
+body { \
+	background: [color2]; \
+	color: [color1]; \
+} \
+.input-container input{ \
+  border:0; \
+  border-bottom:1px solid #555; \
+  background:transparent; \
+  font-size:16px; \
+  color:[color1]; \
+}"
+
+	var/dat = "<!DOCTYPE html> \
+<html> \
+<head> \
+<meta charset=\"utf-8\"> \
+<style>[css]</style> \
+<title>Emoji list</title> \
+</head> \
+<body> \
+<h2>Эмодзи пишется через :emoji:</h2> \
+<div class=\"input-container\"><table>"
+	var/static/list/states = icon_states(GLOB.emojis)
+
+	// for(var/emoji in states)
+	var/len = LAZYLEN(states)
+	for(var/i = 1, i <= len, i++)
+		if(i%3 == 1) dat += "<tr>"
+		dat +="<td>" + icon2html(icon(GLOB.emojis, states[i]), owner, realsize= TRUE) + "</td><td><input type=\"text\" value=\":[states[i]]:\" readonly></td>"
+		if(!(i%3)) dat += "</tr>"
+
+	dat += "</div></body></html>"
+
+	show_browser(owner, dat, "window=emojis;size=670x500")
 
 #undef MAX_COOKIE_LENGTH
 #undef SPAM_TRIGGER_AUTOMUTE
