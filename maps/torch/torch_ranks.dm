@@ -569,14 +569,14 @@
 	sort_order = 3
 
 /datum/mil_rank/army/e4
-	name = "Corporal"
-	name_short = "CPL"
+	name = "Specialist"
+	name_short = "SPC"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e4)
 	sort_order = 4
 
 /datum/mil_rank/army/e4_alt
-	name = "Specialist"
-	name_short = "SPC"
+	name = "Сorporal"
+	name_short = "CPL"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/army/enlisted/e4_alt)
 	sort_order = 4
 

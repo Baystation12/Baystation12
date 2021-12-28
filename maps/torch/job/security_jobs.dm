@@ -118,6 +118,7 @@
 		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/army/e3,
 		/datum/mil_rank/army/e4,
+		/datum/mil_rank/army/e4_alt,
 		/datum/mil_rank/fleet/e3,
 		/datum/mil_rank/fleet/e4,
 	)
