@@ -47,6 +47,8 @@
 			R = new/obj/item/device/radio/headset/syndicate(player)
 		if(RAID_FREQ)
 			R = new/obj/item/device/radio/headset/raider(player)
+		if(V_RAID_FREQ)
+			R = new/obj/item/device/radio/headset/vox_raider(player)
 		else
 			R = new/obj/item/device/radio/headset(player)
 			R.set_frequency(freq)

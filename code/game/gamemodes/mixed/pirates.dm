@@ -19,7 +19,6 @@
 	if (vox.candidates.len >= required_enemies)
 		vox.get_starting_locations()
 		vox.attempt_spawn()
-		vox.disable_vox_ship_spawning()
 		antag_templates = list(vox)
 	else
 		raiders.attempt_spawn()
@@ -33,7 +32,7 @@
 	if(antag_tags?.len)
 		var/datum/antagonist/vox/antag_vox = all_antag_types[antag_tags[1]]
 		var/list/enemies_vox = antag_vox.pending_antagonists
-		if((enemies_vox.len >= required_enemies) && antag_vox.find_vox_ship())
+		if((enemies_vox.len >= required_enemies))
 			return FALSE
 		var/datum/antagonist/antag_raiders = all_antag_types[antag_tags[2]]
 		var/list/enemies_raiders = antag_raiders.pending_antagonists

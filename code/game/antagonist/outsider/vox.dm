@@ -16,19 +16,8 @@ GLOBAL_DATUM_INIT(vox_raiders, /datum/antagonist/vox, new)
 
 	id_type = /obj/item/card/id/syndicate
 
-/datum/antagonist/vox/proc/find_vox_ship()
-	for(var/datum/submap/submap in SSmapping.submaps)
-		if(submap.archetype.map == "Vox Scavenger Ship")
-			return TRUE
-	return FALSE
+	base_to_load = /datum/map_template/ruin/antag_spawn/vox_raider
 
-/datum/antagonist/vox/proc/disable_vox_ship_spawning()
-	for(var/datum/submap/submap in SSmapping.submaps)
-		if(submap.archetype.map == "Vox Scavenger Ship")
-			for(var/A in submap.jobs)
-				var/datum/job/submap/job = submap.jobs[A]
-				job.total_positions = 0
-			return
 
 /datum/antagonist/vox/build_candidate_list(datum/game_mode/mode, ghosts_only)
 	candidates = list()
@@ -48,9 +37,6 @@ GLOBAL_DATUM_INIT(vox_raiders, /datum/antagonist/vox, new)
 		if(!is_alien_whitelisted(player.current, all_species[SPECIES_VOX]))
 			log_debug("[player.current.ckey] is not whitelisted")
 			continue
-		if(!find_vox_ship())
-			log_debug("[role_text_plural] can't be selected, unable to find Vox Scavenger Ship")
-			break
 		var/result = can_become_antag_detailed(player)
 		if (result)
 			log_debug("[key_name(player)] is not eligible to become a [role_text]: [result]")
@@ -70,7 +56,6 @@ GLOBAL_DATUM_INIT(vox_raiders, /datum/antagonist/vox, new)
 		else if(!can_become_antag(player))
 		else if(player_is_antag(player))
 		else if(!is_alien_whitelisted(player.current, all_species[SPECIES_VOX]))
-		else if(!find_vox_ship())
 		else
 			candidates |= player
 
@@ -81,19 +66,16 @@ GLOBAL_DATUM_INIT(vox_raiders, /datum/antagonist/vox, new)
 		return "Player doesn't have vox whitelist"
 	..()
 
-/datum/antagonist/vox/equip(mob/living/carbon/human/player)
-	equip_vox(player)
 
-	var/obj/item/storage/backpack/backpack = pick(GLOB.random_backpacks)
-	player.equip_to_slot_or_del(new backpack (player), slot_back)
 
-	create_id("Scavenger", player, equip = 1)
-	create_radio(RAID_FREQ, player)
 
-/datum/antagonist/vox/equip_vox(mob/living/carbon/human/vox, mob/living/carbon/human/old)
-	vox.set_species(SPECIES_VOX)
-	var/uniform = pick(list(/obj/item/clothing/under/vox/vox_robes,/obj/item/clothing/under/vox/vox_casual))
-	vox.equip_to_slot_or_del(new uniform(vox), slot_w_uniform)
-	vox.equip_to_slot_or_del(new /obj/item/clothing/shoes/magboots/vox(vox), slot_shoes)
-	vox.equip_to_slot_or_del(new /obj/item/clothing/gloves/vox(vox), slot_gloves)
-	vox.equip_to_slot_or_del(new /obj/item/storage/belt/utility/full(vox), slot_belt)
+/datum/antagonist/vox/equip(mob/living/carbon/human/vox/player)
+	if(!..())
+		return FALSE
+
+	player.set_species(SPECIES_VOX)
+	var/decl/hierarchy/outfit/vox_raider = outfit_by_type(/decl/hierarchy/outfit/vox_raider)
+	vox_raider.equip(player)
+
+
+	return TRUE
