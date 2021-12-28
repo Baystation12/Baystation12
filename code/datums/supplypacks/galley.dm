@@ -40,10 +40,8 @@
 /decl/hierarchy/supply_pack/galley/seafood
 	name = "Perishables - Seafood"
 	contains = list(
-		/obj/item/reagent_containers/food/snacks/fish = 2,
-		/obj/item/reagent_containers/food/snacks/fish/shark = 2,
-		/obj/item/reagent_containers/food/snacks/fish/octopus = 2
-		)
+		/obj/random/fish = 8
+	)
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "seafood crate"
 	cost = 20

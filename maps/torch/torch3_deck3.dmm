@@ -8085,6 +8085,7 @@
 	dir = 4
 	},
 /obj/item/book/manual/chef_recipes,
+/obj/item/material/chopping_board,
 /obj/item/sticky_pad/random,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/galley)
