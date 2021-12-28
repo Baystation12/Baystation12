@@ -294,36 +294,50 @@ body { \
 	background: [color2]; \
 	color: [color1]; \
 } \
-.input-container input{ \
+input { \
   border:0; \
-  border-bottom:1px solid #555; \
   background:transparent; \
   font-size:16px; \
-  color:[color1]; \
+  color:[color2]; \
 }"
-
+	var/js = "function copyToClipboard(text) { \
+  var $temp = $('<input>'); \
+  $('body').append($temp); \
+  $temp.val(text).select(); \
+  document.execCommand('copy'); \
+  $temp.remove(); \
+}; \
+$(function() { \
+  $('body').on('click', 'a', function(e) { \
+    e.preventDefault(); \
+  }); \
+  $('.emojiPicker a').click(function () { \
+    copyToClipboard(':' + $(this).data('emoji') + ':'); \
+  }); \
+});"
 	var/dat = "<!DOCTYPE html> \
 <html> \
 <head> \
 <meta charset=\"utf-8\"> \
 <style>[css]</style> \
+<script src=\"jquery.min.js\"></script> \
 <title>Emoji list</title> \
 </head> \
 <body> \
 <h2>Эмодзи пишется через :emoji:</h2> \
-<div class=\"input-container\"><table>"
+<div class=\"emojiPicker\"><table>"
 	var/static/list/states = icon_states(GLOB.emojis)
 
 	// for(var/emoji in states)
 	var/len = LAZYLEN(states)
 	for(var/i = 1, i <= len, i++)
 		if(i%3 == 1) dat += "<tr>"
-		dat +="<td>" + icon2html(icon(GLOB.emojis, states[i]), owner, realsize= TRUE) + "</td><td><input type=\"text\" value=\":[states[i]]:\" readonly></td>"
+		dat +="<td><a href=\"#\" data-emoji=\"[states[i]]\" title=\"Copy emoji\">" + icon2html(icon(GLOB.emojis, states[i]), owner, realsize= TRUE) + "</a></td><td>[states[i]]</td>"
 		if(!(i%3)) dat += "</tr>"
 
-	dat += "</div></body></html>"
+	dat += "</div><script type=\"text/javascript\">[js]</script></body></html>"
 
-	show_browser(owner, dat, "window=emojis;size=700x500")
+	show_browser(owner, dat, "window=emojis;size=420x500")
 
 #undef MAX_COOKIE_LENGTH
 #undef SPAM_TRIGGER_AUTOMUTE
