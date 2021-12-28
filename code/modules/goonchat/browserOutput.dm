@@ -289,31 +289,30 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/tmp/iconCache.sav"))
 		color1 = "#000000"
 		color2 = "#fff"
 
-	var/css = " \
-body { \
+	var/css = "body { \
 	background: [color2]; \
 	color: [color1]; \
 } \
 input { \
-  border:0; \
-  background:transparent; \
-  font-size:16px; \
-  color:[color2]; \
+	border:0; \
+	background:transparent; \
+	font-size:16px; \
+	color:[color2]; \
 }"
 	var/js = "function copyToClipboard(text) { \
-  var $temp = $('<input>'); \
-  $('body').append($temp); \
-  $temp.val(text).select(); \
-  document.execCommand('copy'); \
-  $temp.remove(); \
+	var $temp = $('<input>'); \
+	$('body').append($temp); \
+	$temp.val(text).select(); \
+	document.execCommand('copy'); \
+	$temp.remove(); \
 }; \
 $(function() { \
-  $('body').on('click', 'a', function(e) { \
-    e.preventDefault(); \
-  }); \
-  $('.emojiPicker a').click(function () { \
-    copyToClipboard(':' + $(this).data('emoji') + ':'); \
-  }); \
+	$('body').on('click', 'a', function(e) { \
+		e.preventDefault(); \
+		}); \
+	$('.emojiPicker a').click(function () { \
+		copyToClipboard(':' + $(this).data('emoji') + ':'); \
+	}); \
 });"
 	var/dat = "<!DOCTYPE html> \
 <html> \
