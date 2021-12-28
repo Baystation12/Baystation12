@@ -7,7 +7,7 @@
 	density = 0
 	opacity = 1
 	anchored = 1
-	var/health = 500
+	var/health = 400
 	var/datum/flood_spawner/flood_spawner
 	var/list/spawn_pool = list()
 	var/max_flood = 10
@@ -60,15 +60,15 @@
 /obj/structure/biomass/ex_act(var/severity)
 
 	if(severity == 1)
-		take_damage(250, BURN)
+		take_damage(200, BURN)
 	else if(severity == 2)
-		take_damage(100, BURN)
+		take_damage(125, BURN)
 	else
-		take_damage(50, BURN)
+		take_damage(75, BURN)
 
 /obj/structure/biomass/medium
 	icon = 'flood_bio_med.dmi'
-	health = 1000
+	health = 600
 	max_flood = 20
 	respawn_delay = 500
 	bound_width = 64
@@ -80,11 +80,12 @@
 
 /obj/structure/biomass/large
 	icon = 'flood_bio_large.dmi'
-	health = 2000
+	health = 1500
 	max_flood = 30
 	respawn_delay = 400
 	bound_width = 128
 	bound_height = 128
+
 /obj/structure/biomass/large/New()
 	. = ..()
 	icon_state = pick(icon_states(icon))
@@ -112,6 +113,7 @@
 /obj/structure/biomass/tiny
 	icon = 'flood_bio.dmi'
 	icon_state = "pulsating"
+	health = 250
 	max_flood = 3
 	spawn_pool = list(\
 	/mob/living/simple_animal/hostile/flood/combat_form/prisoner, \
