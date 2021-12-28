@@ -70,7 +70,10 @@ proc/create_test_mob_with_mind(var/turf/mobloc = null, var/mobtype = /mob/living
 	if(isnull(mobloc))
 		if(!default_mobloc)
 			for(var/turf/simulated/floor/tiled/T in world)
-				var/pressure = T.zone.air.return_pressure()
+				var/pressure = T.zone?.air.return_pressure()
+				if (isnull(pressure))
+					continue
+
 				if(90 < pressure && pressure < 120) // Find a turf between 90 and 120
 					default_mobloc = T
 					break
@@ -618,7 +621,7 @@ datum/unit_test/mob_damage/halloss
 
 	for(var/mobtype in subtypesof(/mob/living))
 
-		// Humans use species for their products and are 
+		// Humans use species for their products and are
 		// difficult to properly unit test because of this.
 		if(ispath(mobtype, /mob/living/carbon/human))
 			continue
