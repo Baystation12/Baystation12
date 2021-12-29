@@ -14,7 +14,7 @@
 	poison_per_bite = 3
 	poison_type = /datum/reagent/chloralhydrate
 
-	movement_cooldown = 5
+	movement_cooldown = 8
 
 	var/spiderling_count = 0
 	var/spiderling_type = /obj/effect/spider/spiderling

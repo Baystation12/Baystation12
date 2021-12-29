@@ -172,17 +172,6 @@
 
 	. = ..()
 
-/mob/living/simple_animal/movement_delay()
-	var/tally = ..() //Incase I need to add stuff other than "speed" later
-
-	tally += speed
-	if(purge)//Purged creatures will move more slowly. The more time before their purge stops, the slower they'll move.
-		if(tally <= 0)
-			tally = 1
-		tally *= purge
-
-	return tally
-
 /mob/living/simple_animal/Stat()
 	. = ..()
 

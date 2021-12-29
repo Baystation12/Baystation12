@@ -79,9 +79,6 @@
 
 	var/dir = get_dir(src, newloc)
 
-	if (!checkMoveCooldown())
-		return MOVEMENT_ON_COOLDOWN
-
 	// Check to make sure moving to newloc won't actually kill us. e.g. we're a slime and trying to walk onto water.
 	if (istype(newloc))
 		if (safety && !newloc.is_safe_to_enter(src))
@@ -99,10 +96,7 @@
 	if (!old_T.Adjacent(newloc))
 		return MOVEMENT_FAILED
 
-	. = Move(newloc, dir) ? MOVEMENT_SUCCESSFUL : MOVEMENT_FAILED
+	. = SelfMove(dir) ? MOVEMENT_SUCCESSFUL : MOVEMENT_FAILED
 	if (. == MOVEMENT_SUCCESSFUL)
 		set_dir(get_dir(old_T, newloc))
-		// Apply movement delay.
-		// Player movement has more factors but its all in the client and fixing that would be its own project.
-		SetMoveCooldown(movement_delay())
 	return

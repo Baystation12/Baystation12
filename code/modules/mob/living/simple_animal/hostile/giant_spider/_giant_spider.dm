@@ -21,7 +21,6 @@
 	health = 125
 	natural_weapon = /obj/item/natural_weapon/bite/spider
 	pass_flags = PASS_FLAG_TABLE
-	movement_cooldown = 10
 	poison_resist = 0.5
 
 	see_in_dark = 10
