@@ -126,7 +126,6 @@
 	if(R.vtec)
 		return FALSE
 
-	R.speed--
 	R.vtec = TRUE
 	return TRUE
 
