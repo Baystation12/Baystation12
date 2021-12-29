@@ -4,6 +4,7 @@
 	var/list/selected_mobs = list()
 	var/list/overlayed_mobs = list()
 	var/copied_faction = null
+	var/datum/ai_holder/ai_type
 	var/icon/buildmode_hud = icon('icons/misc/buildmode.dmi')
 	var/help_text = {"\
 	<span class='notice'>***********************************************************<br>\
@@ -14,10 +15,12 @@
 		Left Mouse Button + alt on AI mob             = Toggle hostility on mob<br>\
 		Left Mouse Button + shift on AI mob           = Toggle AI (also resets)<br>\
 		Left Mouse Button + ctrl on AI mob 	          = Select units without deselecting existing ones<br>\
+		Right Mouse Button on build icon              = Set AI type to give to mobs with alt + shift<br>\
 		Right Mouse Button + shift on any mob         = Copy mob faction<br>\
 		Right Mouse Button + ctrl on any mob          = Paste mob faction copied with Left Mouse Button + shift<br>\
 		Right Mouse Button on enemy mob               = Command selected mobs to attack mob<br>\
 		Right Mouse Button on allied mob              = Command selected mobs to follow mob<br>\
+		Right Mouse Buttons + alt + shift on any mob          = Set a new AI type<br>\
 		Note: The following also reset the mob's home position:<br>\
 		Right Mouse Button on tile                    = Command selected mobs to move to tile (will cancel if enemies are seen)<br>\
 		Right Mouse Button + shift on tile            = Command selected mobs to reposition to tile (will not be inturrupted by enemies)<br>\
@@ -28,6 +31,11 @@
 
 /datum/build_mode/ai/Help()
 	to_chat(user, SPAN_NOTICE(help_text))
+
+/datum/build_mode/ai/Configurate()
+	. = ..()
+	ai_type = select_subpath(ai_type || /datum/ai_holder/, /datum/ai_holder)
+	to_chat(user, SPAN_NOTICE("AI Type selected: [ai_type]" ))
 
 /datum/build_mode/ai/Unselected()
 	. = ..()
@@ -106,6 +114,22 @@
 
 		if (isliving(A))
 			var/mob/living/L = A
+
+			// Change/Set AI Holder
+			if (pa["alt"] && pa["shift"])
+				if (!ai_type)
+					to_chat(user, SPAN_WARNING("No AI type selected."))
+					return
+
+				L.ai_holder_type = ai_type
+				if (!isnull(L.ai_holder))
+					GLOB.stat_set_event.unregister(L, L.ai_holder, /datum/ai_holder/proc/holder_stat_change)
+					qdel(L.ai_holder)
+
+				L.ai_holder = new ai_type(L)
+				to_chat(user, SPAN_NOTICE("\The [L]'s AI type has been changed to [ai_type]"))
+				return
+
 			// Copy faction
 			if (pa["shift"])
 				copied_faction = L.faction
@@ -121,6 +145,7 @@
 					L.faction = copied_faction
 					to_chat(user, SPAN_NOTICE("Pasted faction '[copied_faction]'."))
 					return
+
 
 		if (istype(A, /atom)) // Force attack.
 			if (pa["alt"])
@@ -191,6 +216,10 @@
 
 /datum/build_mode/ai/proc/deselect_AI_mob(mob/living/unit)
 	selected_mobs -= unit
+
+	if (!user)
+		return
+
 	user.client.images -= unit.selected_image
 	GLOB.destroyed_event.unregister(unit, src)
 
