@@ -85,7 +85,7 @@
 				if(!istype(v))
 					break
 				v.relaymove(src,get_dir(src.loc,target))
-				sleep(1)
+				sleep(delay)
 	else
 		walk_to(src, target, safedist, delay)
 
@@ -175,6 +175,8 @@
 
 /mob/living/simple_animal/hostile/proc/AttackTarget()
 	stop_automated_movement = 1
+	if(stat != CONSCIOUS)
+		return 0
 	if(!target_mob || SA_attackable(target_mob))
 		LostTarget()
 		return 0
