@@ -1,0 +1,5 @@
+author: Mucker
+delete-after: true
+changes:
+  - admin: Added new functionality to AI buildmode to allow assigning mobs new AI
+      types on the fly.
