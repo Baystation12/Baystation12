@@ -1,5 +1,6 @@
 #if !defined(using_map_DATUM)
 
+	#include "_defs.dm"
 	#include "mapdef.dm"
 	#include "achlys_objects.dm"
 	#include "achlys_outfits.dm"
@@ -16,6 +17,7 @@
 	#include "unsc_achlys_Z2.dmm"
 	#include "unsc_achlys_Z3.dmm"
 	#include "unsc_achlys_Z4.dmm"
+	#include "undefs.dm"
 
 	#include "../../code/modules/halo/lobby_music/flood.dm"
 

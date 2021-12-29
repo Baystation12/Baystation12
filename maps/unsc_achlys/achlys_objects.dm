@@ -402,6 +402,9 @@
 	if(!istype(user))
 		to_chat(user,"<span class = 'notice'>You can't enter [src]!</span>")
 		return
+	if(!(user.job in DETACHMENT_ROLES + ONI_ROLES + MISC_UNSC_ROLES))
+		to_chat(user,"<span class = 'notice'>You have no idea how to use [src]</span>")
+		return
 	. = ..()
 
 /obj/item/weapon/storage/box/MRE/Chicken/achlys
