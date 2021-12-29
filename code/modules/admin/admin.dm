@@ -306,81 +306,84 @@ var/global/floorIsLava = 0
 	else return 1
 
 
-/datum/admins/proc/show_player_info(var/key as text)
+/// Page matter from #30904, to be replaced by that behavior later
+/proc/html_page(title, list/body, head = "")
+	if (islist(body))
+		body = body.Join()
+	return {"\
+		<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" \
+			"http://www.w3.org/TR/html4/strict.dtd">\n\
+		<html lang="en">\
+		<head>\
+			<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">\
+			<meta http-equiv="X-UA-Compatible" content="IE=IE8">\
+			<meta name="viewport" content="width=device-width,initial-scale=1">\
+			<link rel="stylesheet" type="text/css" href="common.css">\
+			<style type="text/css">\
+				html, body {\
+					padding: 8px;\
+					font-family: Verdana, Geneva, sans-serif;\
+				}\
+			</style>\
+			<title>[title]</title>\
+			[head]\
+		<head>\
+		<body scroll="auto">\
+			[body]\
+		</body>\
+		</html>\
+	"}
 
+
+/datum/admins/proc/show_player_info(target as text)
 	set category = "Admin"
 	set name = "Show Player Info"
-	if (!istype(src,/datum/admins))
-		src = usr.client.holder
-	if (!istype(src,/datum/admins))
-		to_chat(usr, "Error: you are not an admin!")
+	if (!target)
 		return
-
-	var/list/dat = list()
-
-	var/p_age = "unknown"
-	for(var/client/C in GLOB.clients)
-		if(C.ckey == key)
-			p_age = C.player_age
+	if (!istext(target))
+		return
+	target = ckey(target)
+	var/client/user = resolve_client(usr)
+	if (!check_rights(R_INVESTIGATE, TRUE, user))
+		return
+	var/client/subject
+	for (var/client/client as anything in GLOB.clients)
+		if (client.ckey == target)
+			subject = client
 			break
-	dat += "<b>Player age: [p_age]</b><br><ul id='notes'>"
-
-	var/savefile/info = new("data/player_saves/[copytext(key, 1, 2)]/[key]/info.sav")
+	var/list/body = list()
+	body += {"\
+		<div style="text-align: center;">\
+			<b>Player Age</b>: [subject ? subject.player_age : "Not Connected"]\
+			<hr>\
+			<a href="?src=\ref[src];add_player_info=[target]">Add Comment</a>\
+		</div>\
+		<hr>\
+	"}
 	var/list/infos
-	from_save(info, infos)
-	if(!infos)
-		dat += "No information found on the given key.<br>"
-	else
-		var/update_file = 0
-		var/i = 0
-		for(var/datum/player_info/I in infos)
-			i += 1
-			if(!I.timestamp)
-				I.timestamp = "Pre-4/3/2012"
-				update_file = 1
-			if(!I.rank)
-				I.rank = "N/A"
-				update_file = 1
-			dat += "<li><font color=#7d9177>[I.content]</font> <i>by [I.author] ([I.rank])</i> on <i><font color='#8a94a3'>[I.timestamp]</i></font> "
-			if(I.author == usr.key || I.author == "Adminbot" || ishost(usr))
-				dat += "<A href='?src=\ref[src];remove_player_info=[key];remove_index=[i]'>Remove</A>"
-			dat += "<hr></li>"
-		if(update_file) to_save(info, infos)
-
-	dat += "</ul><br><A href='?src=\ref[src];add_player_info=[key]'>Add Comment</A><br>"
-
-	var/html = {"
-		<html>
-		<head>
-			<title>Info on [key]</title>
-			<script src='player_info.js'></script>
-		</head>
-		<body onload='selectTextField(); updateSearch()'; onkeyup='updateSearch()'>
-			<div align='center'>
-			<table width='100%'><tr>
-				<td width='20%'>
-					<div align='center'>
-						<b>Search:</b>
-					</div>
-				</td>
-				<td width='80%'>
-					<input type='text'
-					       id='filter'
-					       name='filter_text'
-					       value=''
-					       style='width:100%;' />
-				</td>
-			</tr></table>
-			<hr/>
-			[jointext(dat, null)]
-		</body>
-		</html>
+	var/savefile = new /savefile ("data/player_saves/[copytext_char(target, 1, 2)]/[target]/info.sav")
+	from_save(savefile, infos)
+	if (!infos)
+		body += {"<div style="text-align: center; font-style: italic;">No comments saved.</div>"}
+	for (var/i = length(infos) to 1 step -1)
+		var/datum/player_info/comment = infos[i]
+		var/remove_button = ""
+		if (comment.author == user.key || check_rights(R_HOST, FALSE, user))
+			remove_button = {"<a href="?src=\ref[src];remove_player_info=[target];remove_index=[i]">Remove</a>"}
+		body += {"\
+			<div style="text-align: right; margin-bottom: 8px;">\
+				<div style="text-align: left; border: 1px dashed #808080; padding: 2px;">[comment.content]</div>\
+				<div style="text-align: right;">\
+					<b>[comment.author || "(not recorded)"]</b>, \
+					<b>[comment.rank || "(not recorded)"]</b>, \
+					on <b>[comment.timestamp || "(not recorded)"]</b>\
+				</div>\
+				[remove_button]\
+			</div>\
 		"}
+	send_rsc(user, 'html/browser/common.css', "common.css")
+	show_browser(user, html_page("Player Info: [target]", body), "window=showplayernotes;size=480x480;")
 
-	send_rsc(usr,'code/js/player_info.js', "player_info.js")
-	var/datum/browser/popup = new(usr, "adminplayerinfo", "Player Info", 480, 480)
-	popup.set_content(html)
-	popup.open()
 
 /datum/admins/proc/access_news_network() //MARKER
 	set category = "Fun"
