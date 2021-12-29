@@ -1,0 +1,4 @@
+author: Spookerton
+delete-after: true
+changes:
+  - admin: Player notes display latest-first.
