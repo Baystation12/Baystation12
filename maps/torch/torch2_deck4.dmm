@@ -4420,6 +4420,12 @@
 /obj/item/book/manual/nt_regs,
 /turf/simulated/floor/wood,
 /area/command/captainmess)
+"pz" = (
+/obj/machinery/door/firedoor,
+/obj/effect/wallframe_spawn/reinforced/hull,
+/obj/effect/shuttle_landmark/ascent_seedship/torch/trichoptera,
+/turf/simulated/floor/plating,
+/area/hallway/primary/fourthdeck/aft)
 "pD" = (
 /obj/structure/railing/mapped{
 	dir = 8;
@@ -10986,10 +10992,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/forestarboard)
-"Lv" = (
-/obj/effect/shuttle_landmark/ascent_caulship/torch,
-/turf/space,
-/area/space)
 "Lw" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -40739,7 +40741,7 @@ JP
 aJ
 Px
 Ms
-Yj
+pz
 aa
 aa
 aa
@@ -40881,7 +40883,7 @@ aa
 aa
 aa
 aa
-Lv
+aa
 aa
 aa
 aa

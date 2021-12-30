@@ -10,7 +10,7 @@
 		"Charon" = list("nav_hangar_calypso"), 	//can't have random shuttles popping inside the ship
 		"Guppy" = list("nav_hangar_guppy"),
 		"Aquila" = list("nav_hangar_aquila"),
-		"Ascent Caulship" = list("nav_ascent_caulship_torch"), //restricts caulship specific docking waypoint on deck 4 starboard side
+		"Trichoptera" = list("nav_trichoptera_altdock"), //restricts Trichoptera specific docking waypoint on deck 4 portside
 		"Skrellian Scout" = list("nav_skrellscout_dock"), //restricts Skrell Scoutship specific docking waypoint on deck 4 portside
 		"Skrellian Shuttle" = list("nav_skrellscoutsh_altdock"),
 		"Rescue" = list("nav_ert_dock"), //restricts ERT Shuttle specific docking waypoint on deck 4 portside
@@ -72,6 +72,12 @@
 		"nav_ninja_hanger",
 		"nav_skipjack_hanger",
 		"nav_ert_hanger",
+
+		"nav_skrellscoutsh_altdock",
+		"nav_trichoptera_altdock",
+		"nav_skrellscout_dock",
+		"nav_ert_dock",
+		"nav_verne_5",
 	)
 
 /obj/effect/overmap/visitable/ship/landable/exploration_shuttle

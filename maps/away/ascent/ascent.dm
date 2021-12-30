@@ -3,7 +3,6 @@
 #include "ascent_areas.dm"
 #include "ascent_jobs.dm"
 #include "ascent_shuttles.dm"
-#include "ascent_props.dm"
 
 // Map template data.
 /datum/map_template/ruin/away_site/ascent_seedship
@@ -11,11 +10,12 @@
 	id = "awaysite_ascent_seedship"
 	description = "A small Ascent colony ship."
 	suffixes = list("ascent/ascent-1.dmm")
-	spawn_cost = 9999
+	cost = 0.5
 	shuttles_to_initialise = list(
 		/datum/shuttle/autodock/overmap/ascent, 
 		/datum/shuttle/autodock/overmap/ascent/two
 	)
+	spawn_weight = 0.67
 
 // Overmap objects.
 /obj/effect/overmap/visitable/ship/ascent_seedship
@@ -29,7 +29,6 @@
 		"Trichoptera" = list("nav_hangar_ascent_one"),
 		"Lepidoptera" = list("nav_hangar_ascent_two")
 	)
->>>>>>> parent of e4aef903d6... Reworked the seedship into a much smaller civilian vessel.:maps/away/ascent/ascent.dm
 
 /obj/effect/submap_landmark/joinable_submap/ascent_seedship
 	name = ASCENT_COLONY_SHIP_NAME

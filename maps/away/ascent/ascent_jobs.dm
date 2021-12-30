@@ -13,8 +13,9 @@
 		/datum/job/submap/ascent,
 		/datum/job/submap/ascent/alate,
 		/datum/job/submap/ascent/drone,
-		/datum/job/submap/ascent/worker,
-		/datum/job/submap/ascent/queen
+		//datum/job/submap/ascent/control_mind,
+		/datum/job/submap/ascent/msq,
+		/datum/job/submap/ascent/msw,
 	)
 	call_webhook = WEBHOOK_SUBMAP_LOADED_ASCENT
 
@@ -107,22 +108,12 @@
 	title = "Ascent Gyne"
 	total_positions = 1
 	supervisors = "nobody but yourself"
-	info = "You are a Gyne of an independent Ascent vessel. Your hunting has brought you to this remote sector full of crawling primitives. Impose your will, found a new nest, and bring prosperity to your lineage."
+	info = "You are the Gyne of an independent Ascent vessel. Your hunting has brought you to this remote sector full of crawling primitives. Impose your will, found a new nest, and bring prosperity to your lineage."
 	outfit_type = /decl/hierarchy/outfit/job/ascent
 	blacklisted_species = null
 	whitelisted_species = null
 	loadout_allowed = FALSE
 	is_semi_antagonist = TRUE
-	min_skill = list(
-		SKILL_EVA = SKILL_ADEPT,
-		SKILL_PILOT = SKILL_ADEPT,
-		SKILL_HAULING = SKILL_ADEPT,
-		SKILL_COMBAT = SKILL_ADEPT,
-		SKILL_WEAPONS = SKILL_ADEPT,
-		SKILL_SCIENCE = SKILL_ADEPT,
-		SKILL_MEDICAL = SKILL_BASIC
-	)
-	use_species_whitelist = SPECIES_MANTID_GYNE
 	var/requires_supervisor = FALSE
 	var/set_species_on_join = SPECIES_MANTID_GYNE
 	min_skill = list(SKILL_EVA = SKILL_ADEPT,
@@ -143,6 +134,15 @@
 			if(istype(ascent_job) && ascent_job.owner == owner)
 				return TRUE
 		return FALSE
+
+/datum/job/submap/ascent/is_available(client/caller)
+	. = ..()
+	if(.)
+		switch(set_species_on_join)
+			if(SPECIES_MANTID_GYNE)
+				. = is_species_whitelisted(caller.mob, SPECIES_MANTID_GYNE)
+			if(SPECIES_MONARCH_QUEEN)
+				. = is_species_whitelisted(caller.mob, SPECIES_NABBER)
 
 /datum/job/submap/ascent/handle_variant_join(var/mob/living/carbon/human/H, var/alt_title)
 
@@ -187,14 +187,11 @@
 	set_species_on_join = SPECIES_MANTID_ALATE
 	outfit_type = /decl/hierarchy/outfit/job/ascent/tech
 	requires_supervisor = "Ascent Gyne"
-	min_skill = list(
-		SKILL_EVA = SKILL_ADEPT,
-		SKILL_HAULING = SKILL_ADEPT,
-		SKILL_COMBAT = SKILL_ADEPT,
-		SKILL_WEAPONS = SKILL_ADEPT,
-		SKILL_MEDICAL = SKILL_BASIC
-	)
-	use_species_whitelist = null
+	min_skill = list(SKILL_EVA = SKILL_ADEPT,
+					SKILL_HAULING = SKILL_ADEPT,
+					SKILL_COMBAT = SKILL_ADEPT,
+					SKILL_WEAPONS = SKILL_ADEPT,
+					SKILL_MEDICAL = SKILL_BASIC,)
 
 /datum/job/submap/ascent/drone
 	title = "Ascent Drone"

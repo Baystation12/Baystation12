@@ -371,7 +371,7 @@
 		SPECIES_MONARCH_QUEEN =          'icons/mob/species/nabber/msq/onmob_hands_msq.dmi'
 		)
 
-//Add Caulship Specific Exosuits
+//Add SeedShip Specific Exosuits
 
 // Rigs and gear themselves.
 /obj/item/rig/mantid/seed
