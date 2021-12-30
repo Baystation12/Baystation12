@@ -67,6 +67,7 @@
 	icon_state = "wall"
 	atmos_canpass = CANPASS_DENSITY
 	health_max = 10
+	damage_hitsound = 'sound/effects/Glasshit.ogg'
 
 	var/undeploy_path = null
 	var/taped
@@ -125,22 +126,16 @@
 /obj/structure/inflatable/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	return 0
 
-/obj/structure/inflatable/bullet_act(var/obj/item/projectile/Proj)
-	if (damage_health(Proj.get_structure_damage(), Proj.damage_type))
+/obj/structure/inflatable/bullet_act(obj/item/projectile/Proj)
+	. = ..()
+	if (!is_alive())
 		return PROJECTILE_CONTINUE
 
 /obj/structure/inflatable/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			qdel(src)
-			return
-		if(2.0)
-			deflate(1)
-			return
-		if(3.0)
-			if(prob(50))
-				deflate(1)
-				return
+	if (severity == 1)
+		qdel(src)
+		return
+	..()
 
 /obj/structure/inflatable/attack_hand(mob/user as mob)
 	add_fingerprint(user)
@@ -148,6 +143,11 @@
 
 /obj/structure/inflatable/attackby(obj/item/W, mob/user)
 	if(!istype(W) || istype(W, /obj/item/inflatable_dispenser)) return
+
+	if (user.a_intent == I_HURT)
+		if (W.can_puncture() || W.force > 10)
+			..()
+		return
 
 	if(istype(W, /obj/item/tape_roll) && get_damage_value() >= 3)
 		if(taped)
@@ -158,16 +158,8 @@
 			to_chat(user, SPAN_NOTICE("You patch some damage in \the [src] with \the [W]!"))
 			restore_health(3)
 			return TRUE
-	else if((W.damtype == BRUTE || W.damtype == BURN) && (W.can_puncture() || W.force > 10))
-		..()
-		if(hit(W.force))
-			visible_message("<span class='danger'>[user] pierces [src] with [W]!</span>")
-	return
 
-/obj/structure/inflatable/proc/hit(var/damage, var/sound_effect = 1)
-	if(sound_effect)
-		playsound(loc, 'sound/effects/Glasshit.ogg', 75, 1)
-	return damage_health(damage)
+	..()
 
 /obj/structure/inflatable/handle_death_change(new_death_state)
 	. = ..()

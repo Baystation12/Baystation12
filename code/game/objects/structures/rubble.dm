@@ -65,6 +65,10 @@
 		to_chat(user, "<span class='warning'>Someone is already rummaging here!</span>")
 
 /obj/structure/rubble/attackby(var/obj/item/I, var/mob/user)
+	if (user.a_intent == I_HURT)
+		..()
+		return
+
 	if (istype(I, /obj/item/pickaxe))
 		var/obj/item/pickaxe/P = I
 		visible_message("[user] starts clearing away \the [src].")
@@ -74,11 +78,9 @@
 				var/obj/item/booty = pickweight(loot)
 				booty = new booty(loc)
 			qdel(src)
-	else
-		..()
-		if (damage_health(I.force, I.damtype, TRUE))
-			visible_message("[user] clears away \the [src].")
-			qdel(src)
+		return
+
+	..()
 
 /obj/structure/rubble/house
 	loot = list(/obj/item/archaeological_find/bowl,

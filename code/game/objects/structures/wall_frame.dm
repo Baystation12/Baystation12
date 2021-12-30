@@ -54,6 +54,10 @@
 /obj/structure/wall_frame/attackby(var/obj/item/W, var/mob/user)
 	src.add_fingerprint(user)
 
+	if (user.a_intent == I_HURT)
+		..()
+		return
+
 	//grille placing
 	if(istype(W, /obj/item/stack/material/rods))
 		for(var/obj/structure/window/WINDOW in loc)
@@ -64,11 +68,12 @@
 		return
 
 	//window placing
-	else if(istype(W,/obj/item/stack/material))
+	if(istype(W,/obj/item/stack/material))
 		var/obj/item/stack/material/ST = W
 		if(ST.material.opacity > 0.7)
 			return 0
 		place_window(user, loc, SOUTHWEST, ST)
+		return
 
 	if(isWrench(W))
 		for(var/obj/structure/S in loc)
@@ -83,8 +88,9 @@
 		if(do_after(user, 40,src))
 			to_chat(user, "<span class='notice'>You dissasembled the low wall!</span>")
 			dismantle()
+		return
 
-	else if(istype(W, /obj/item/gun/energy/plasmacutter))
+	if(istype(W, /obj/item/gun/energy/plasmacutter))
 		var/obj/item/gun/energy/plasmacutter/cutter = W
 		if(!cutter.slice(user))
 			return
@@ -93,7 +99,9 @@
 		if(do_after(user, 20,src))
 			to_chat(user, "<span class='warning'>You have sliced through the low wall!</span>")
 			dismantle()
-	return ..()
+		return
+
+	..()
 
 /obj/structure/wall_frame/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1
@@ -141,12 +149,6 @@
 			var/bleach_factor = rand(10,50)
 			paint_color = adjust_brightness(paint_color, bleach_factor)
 		update_icon()
-
-/obj/structure/wall_frame/bullet_act(var/obj/item/projectile/Proj)
-	var/proj_damage = Proj.get_structure_damage()
-	var/damage = min(proj_damage, 100)
-	damage_health(damage, Proj.damage_type)
-	return
 
 /obj/structure/wall_frame/hitby(AM as mob|obj, var/datum/thrownthing/TT)
 	..()

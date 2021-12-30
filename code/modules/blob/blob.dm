@@ -14,11 +14,21 @@
 
 	health_max = 30
 	health_resistances = list(
-		DAMAGE_BRUTE   = 0.23,
-		DAMAGE_BURN    = 1.24,
-		DAMAGE_FIRE    = 1.24,
-		DAMAGE_EXPLODE = 0.23
+		DAMAGE_BRUTE     = 0.23,
+		DAMAGE_BURN      = 1.24,
+		DAMAGE_FIRE      = 1.24,
+		DAMAGE_EXPLODE   = 0.23,
+		DAMAGE_STUN      = 0,
+		DAMAGE_EMP       = 0,
+		DAMAGE_RADIATION = 0,
+		DAMAGE_BIO       = 0,
+		DAMAGE_PAIN      = 0,
+		DAMAGE_TOXIN     = 0,
+		DAMAGE_GENETIC   = 0,
+		DAMAGE_OXY       = 0,
+		DAMAGE_BRAIN     = 0
 	)
+	damage_hitsound = 'sound/effects/attackblob.ogg'
 
 	var/regen_rate = 5
 	var/laser_resist = 2	// Special resist for laser based weapons - Emitters or handheld energy weaponry. Damage is divided by this and THEN by fire_resist.
@@ -42,9 +52,6 @@
 	if(air_group || height == 0)
 		return 1
 	return 0
-
-/obj/effect/blob/ex_act(var/severity)
-	damage_health(rand(140 - (severity * 40), 140 - (severity * 20)), DAMAGE_EXPLODE)
 
 /obj/effect/blob/on_update_icon()
 	switch (get_damage_percentage())
@@ -162,38 +169,36 @@
 			continue
 		attack_living(victim)
 
-/obj/effect/blob/bullet_act(var/obj/item/projectile/Proj)
+/obj/effect/blob/bullet_act(obj/item/projectile/Proj)
 	if(!Proj)
 		return
 	var/damage = Proj.damage
 	if (Proj.damage_type == BURN)
 		damage = round(damage / laser_resist)
+	playsound(damage_hitsound, src, 75)
 	damage_health(damage, Proj.damage_type)
 	return 0
 
-/obj/effect/blob/attackby(var/obj/item/W, var/mob/user)
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	user.do_attack_animation(src)
-	playsound(loc, 'sound/effects/attackblob.ogg', 50, 1)
-	if(isWirecutter(W))
+/obj/effect/blob/attackby(obj/item/W, mob/user)
+	if (user.a_intent == I_HURT)
+		if(isWelder(W))
+			playsound(loc, 'sound/items/Welder.ogg', 100, 1)
+		..()
+		return
+
+	if (isWirecutter(W))
 		if(prob(user.skill_fail_chance(SKILL_SCIENCE, 90, SKILL_EXPERT)))
 			to_chat(user, SPAN_WARNING("You fail to collect a sample from \the [src]."))
-			return
 		else
 			if(!pruned)
 				to_chat(user, SPAN_NOTICE("You collect a sample from \the [src]."))
 				new product(user.loc)
 				pruned = TRUE
-				return
 			else
 				to_chat(user, SPAN_WARNING("\The [src] has already been pruned."))
-				return
+		return
 
-	if(isWelder(W))
-		playsound(loc, 'sound/items/Welder.ogg', 100, 1)
-
-	damage_health(W.force, W.damtype)
-	return
+	..()
 
 /obj/effect/blob/core
 	name = "master nucleus"

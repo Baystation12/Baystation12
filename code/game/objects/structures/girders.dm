@@ -36,16 +36,7 @@
 	//Girders only provide partial cover. There's a chance that the projectiles will just pass through. (unless you are trying to shoot the girder)
 	if(Proj.original != src && !prob(cover))
 		return PROJECTILE_CONTINUE //pass through
-
-	var/damage = Proj.get_structure_damage()
-	if(!damage)
-		return
-
-	if(!istype(Proj, /obj/item/projectile/beam))
-		damage *= 0.4 //non beams do reduced damage
-
-	..()
-	damage_health(damage, Proj.damage_type)
+	. = ..()
 
 /obj/structure/girder/handle_death_change(new_death_state)
 	..()
@@ -65,7 +56,11 @@
 	if(reinf_material)
 		reinforce_girder()
 
-/obj/structure/girder/attackby(var/obj/item/W, var/mob/user)
+/obj/structure/girder/attackby(obj/item/W, mob/user)
+	if (user.a_intent == I_HURT)
+		..()
+		return
+
 	if(isWrench(W) && state == 0)
 		if(anchored && !reinf_material)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
@@ -79,8 +74,9 @@
 			if(do_after(user, 40,src))
 				to_chat(user, "<span class='notice'>You secured the girder!</span>")
 				reset_girder()
+		return
 
-	else if(istype(W, /obj/item/gun/energy/plasmacutter) || istype(W, /obj/item/psychic_power/psiblade/master/grand/paramount))
+	if(istype(W, /obj/item/gun/energy/plasmacutter) || istype(W, /obj/item/psychic_power/psiblade/master/grand/paramount))
 		if(istype(W, /obj/item/gun/energy/plasmacutter))
 			var/obj/item/gun/energy/plasmacutter/cutter = W
 			if(!cutter.slice(user))
@@ -92,16 +88,18 @@
 			if(reinf_material)
 				reinf_material.place_dismantled_product(get_turf(src))
 			dismantle()
+		return
 
-	else if(istype(W, /obj/item/pickaxe/diamonddrill))
+	if(istype(W, /obj/item/pickaxe/diamonddrill))
 		playsound(src.loc, 'sound/weapons/Genhit.ogg', 100, 1)
 		if(do_after(user,reinf_material ? 60 : 40,src))
 			to_chat(user, "<span class='notice'>You drill through the girder!</span>")
 			if(reinf_material)
 				reinf_material.place_dismantled_product(get_turf(src))
 			dismantle()
+		return
 
-	else if(isScrewdriver(W))
+	if(isScrewdriver(W))
 		if(state == 2)
 			playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 			to_chat(user, "<span class='notice'>Now unsecuring support struts...</span>")
@@ -112,8 +110,9 @@
 			playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 			reinforcing = !reinforcing
 			to_chat(user, "<span class='notice'>\The [src] can now be [reinforcing? "reinforced" : "constructed"]!</span>")
+		return
 
-	else if(isWirecutter(W) && state == 1)
+	if(isWirecutter(W) && state == 1)
 		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
 		to_chat(user, "<span class='notice'>Now removing support struts...</span>")
 		if(do_after(user, 40,src))
@@ -124,8 +123,9 @@
 				reinf_material = null
 
 			reset_girder()
+		return
 
-	else if(isCrowbar(W) && state == 0 && anchored)
+	if(isCrowbar(W) && state == 0 && anchored)
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 		to_chat(user, "<span class='notice'>Now dislodging the girder...</span>")
 		if(do_after(user, 40,src))
@@ -134,18 +134,18 @@
 			anchored = FALSE
 			health_max = 50
 			cover = 25
+		return
 
-	else if(istype(W, /obj/item/stack/material))
+	if(istype(W, /obj/item/stack/material))
 		if(reinforcing && !reinf_material)
 			if(!reinforce_with_material(W, user))
 				return ..()
 		else
 			if(!construct_wall(W, user))
 				return ..()
+		return
 
-	else
-		damage_health(W.force, W.damtype)
-		return ..()
+	..()
 
 /obj/structure/girder/proc/construct_wall(obj/item/stack/material/S, mob/user)
 	if(S.get_amount() < 2)
@@ -224,23 +224,6 @@
 		dismantle()
 		return
 	return ..()
-
-
-/obj/structure/girder/ex_act(severity)
-	switch(severity)
-		if(1.0)
-			qdel(src)
-			return
-		if(2.0)
-			if (prob(30))
-				dismantle()
-			return
-		if(3.0)
-			if (prob(5))
-				dismantle()
-			return
-		else
-	return
 
 /obj/structure/girder/cult
 	icon= 'icons/obj/cult.dmi'

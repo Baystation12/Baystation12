@@ -11,10 +11,13 @@
  * Value should be a multiplier that is applied against damage. Values below 1 are a resistance, above 1 are a weakness.
  * Value of `0` is considered immunity.
  */
-/atom/var/list/health_resistances
+/atom/var/list/health_resistances = DAMAGE_RESIST_PHYSICAL
 
 /// Minimum damage required to actually affect health in `can_damage_health()`.
 /atom/var/health_min_damage = 0
+
+/// Sound effect played when hit
+/atom/var/damage_hitsound = 'sound/weapons/genhit.ogg'
 
 /**
  * Retrieves the atom's current health, or `null` if not using health
@@ -153,8 +156,10 @@
 /**
  * Damage's the atom's health by the given value. Returns `TRUE` if the damage resulted in a death state change.
  * Resistance and weakness modifiers are applied here.
+ * - `skip_death_state_change` will skip calling `handle_death_change()` when applicable. Used for when the originally calling proc needs handle it in a unique way.
+ * - `severity` should be a passthrough of `severity` from `ex_act()` and `emp_act()` for `DAMAGE_EXPLODE` and `DAMAGE_EMP` types respectively.
  */
-/atom/proc/damage_health(damage, damage_type = null, skip_death_state_change = FALSE)
+/atom/proc/damage_health(damage, damage_type = null, skip_death_state_change = FALSE, severity)
 	SHOULD_CALL_PARENT(TRUE)
 	if (!health_max)
 		return
@@ -277,3 +282,58 @@
 	target_atom.health_max = source_atom.health_max
 	target_atom.health_resistances = source_atom.health_resistances
 	target_atom.health_min_damage = source_atom.health_min_damage
+
+
+// Generalized *_act() handlers
+/atom/emp_act(severity)
+	..()
+	// No hitsound here - Doesn't make sense for EMPs.
+	// Generalized - 75-125 damage at max, 38-63 at medium, 25-42 at minimum severities.
+	damage_health(rand(75, 125) / severity, DAMAGE_EMP, severity = severity)
+
+
+/atom/ex_act(severity)
+	..()
+	// No hitsound here to avoid noise spam.
+	// Generalized - 75-125 damage at max, 38-63 at medium, 25-42 at minimum severities.
+	damage_health(rand(75, 125) / severity, DAMAGE_EXPLODE, severity = severity)
+
+
+/atom/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+	..()
+	// No hitsound here to avoid noise spam.
+	// 1 point of damage for every 100 kelvin above 300 (~27 C).
+	damage_health(round(max(exposed_temperature - 300, 0) / 100), DAMAGE_FIRE)
+
+
+/atom/bullet_act(obj/item/projectile/P, def_zone)
+	. = ..()
+	if (get_max_health())
+		var/damage = P.damage
+		if (istype(src, /obj/structure) || istype(src, /turf/simulated/wall)) // TODO Better conditions for non-structures that want to use structure damage
+			damage = P.get_structure_damage()
+		if (!can_damage_health(damage, P.damage_type))
+			return
+		playsound(damage_hitsound, src, 75)
+		damage_health(damage, P.damage_type)
+		return 0
+
+
+/atom/attackby(obj/item/W, mob/user, click_params)
+	. = ..()
+	if (user.a_intent == I_HURT && get_max_health())
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		user.do_attack_animation(src)
+		if (!can_damage_health(W.force, W.damtype))
+			playsound(damage_hitsound, src, 50)
+			user.visible_message(
+				SPAN_WARNING("\The [user] hits \the [src] with \a [W], but it bounces off!"),
+				SPAN_WARNING("You hit \the [src] with \the [W], but it bounces off!")
+			)
+			return
+		playsound(damage_hitsound, src, 75)
+		user.visible_message(
+			SPAN_DANGER("\The [user] hits \the [src] with \a [W]!"),
+			SPAN_DANGER("You hit \the [src] with \the [W]!")
+		)
+		damage_health(W.force, W.damtype)

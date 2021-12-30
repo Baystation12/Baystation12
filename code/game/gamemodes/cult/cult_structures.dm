@@ -25,9 +25,9 @@
 	light_color = "#3e0000"
 	health_max = 20
 	health_min_damage = 4
+	damage_hitsound = 'sound/effects/Glasshit.ogg'
 
 /obj/structure/cult/pylon/attackby(obj/item/W, mob/user)
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	if (istype(W, /obj/item/natural_weapon/cult_builder))
 		if (!health_damaged())
 			to_chat(user, SPAN_WARNING("\The [src] is fully repaired."))
@@ -38,30 +38,8 @@
 			)
 			restore_health(5)
 		return
-	user.do_attack_animation(src)
-	if (!can_damage_health(W.force, W.damtype))
-		user.visible_message(
-			SPAN_DANGER("\The [user] hits \the [src], but they bounce off!"),
-			SPAN_DANGER("You hit \the [src], but bounce off!"),
-			SPAN_WARNING("You hear thick glass being struck with something.")
-		)
-		playsound(get_turf(src), 'sound/effects/Glasshit.ogg', 50, TRUE)
-		return
-	if(damage_health(W.force, W.damtype, TRUE))
-		user.visible_message(
-			SPAN_DANGER("\The [user] smashes \the [src]!"),
-			SPAN_DANGER("You smash \the [src] into pieces!"),
-			SPAN_WARNING("You hear glass shattering, and a tinkle of shards.")
-		)
-		playsound(get_turf(src), 'sound/effects/Glassbr3.ogg', 75, TRUE)
-		qdel(src)
-	else
-		user.visible_message(
-			SPAN_DANGER("\The [user] hits \the [src]!"),
-			SPAN_DANGER("You hit \the [src]!"),
-			SPAN_WARNING("You hear thick glass being struck with something.")
-		)
-		playsound(get_turf(src), 'sound/effects/Glasshit.ogg', 75, TRUE)
+
+	..()
 
 /obj/structure/cult/tome
 	name = "Desk"

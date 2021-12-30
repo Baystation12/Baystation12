@@ -42,7 +42,7 @@
 			new_health += reinforced.integrity / 2
 	set_max_health(new_health)
 
-/obj/structure/table/damage_health(damage, damage_type, skip_death_state_change)
+/obj/structure/table/damage_health(damage, damage_type, skip_death_state_change, severity)
 	// If the table is made of a brittle material, and is *not* reinforced with a non-brittle material, damage is multiplied by TABLE_BRITTLE_MATERIAL_MULTIPLIER
 	if (material?.is_brittle())
 		if (reinforced)
@@ -86,6 +86,10 @@
 	. = ..()
 
 /obj/structure/table/attackby(obj/item/W, mob/user)
+	if (user.a_intent == I_HURT)
+		..()
+		return
+
 	if(reinforced && isScrewdriver(W))
 		remove_reinforced(W, user)
 		if(!reinforced)
@@ -112,6 +116,8 @@
 			return 1
 		else
 			to_chat(user, "<span class='warning'>You don't have enough carpet!</span>")
+		return
+
 	if(!reinforced && !carpeted && material && isWrench(W) && user.a_intent == I_HURT) //robots dont have disarm so it's harm
 		remove_material(W, user)
 		if(!material)
@@ -138,6 +144,7 @@
 			                              "<span class='notice'>You repair some damage to \the [src].</span>")
 			restore_health(get_max_health() / 5) // 20% repair per application
 			return 1
+		return
 
 	if(!material && can_plate && istype(W, /obj/item/stack/material))
 		material = common_material_add(W, user, "plat")
@@ -147,10 +154,13 @@
 			update_desc()
 			update_material()
 		return 1
+
 	if(istype(W, /obj/item/hand)) //playing cards
 		var/obj/item/hand/H = W
 		if(H.cards && H.cards.len == 1)
 			usr.visible_message("\The [user] plays \the [H.cards[1].name].")
+		return
+
 	return ..()
 
 /obj/structure/table/MouseDrop_T(obj/item/stack/material/what)

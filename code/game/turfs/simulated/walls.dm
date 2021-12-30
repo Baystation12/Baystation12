@@ -101,16 +101,10 @@
 	else if(istype(Proj,/obj/item/projectile/ion))
 		burn(500)
 
-	var/proj_damage = Proj.get_structure_damage()
-
 	if(Proj.ricochet_sounds && prob(15))
 		playsound(src, pick(Proj.ricochet_sounds), 100, 1)
 
-	//cap the amount of damage, so that things like emitters can't destroy walls in one hit.
-	var/damage = min(proj_damage, 100)
-
-	damage_health(damage, Proj.damage_type)
-	return
+	..()
 
 /turf/simulated/wall/hitby(AM as mob|obj, var/datum/thrownthing/TT)
 	if(!ismob(AM))
@@ -222,19 +216,12 @@
 	ChangeTurf(floor_type)
 
 /turf/simulated/wall/ex_act(severity)
-	switch(severity)
-		if(1)
-			ChangeTurf(get_base_turf(src.z))
-			return
-		if(2)
-			if(prob(75))
-				damage_health(rand(150, 250))
-			else
-				kill_health()
-		if(3)
-			damage_health(rand(0, 250))
-		else
-	return
+	if (prob(explosion_resistance))
+		return
+	if (severity == 1)
+		ChangeTurf(get_base_turf(src.z))
+		return
+	..()
 
 // Wall-rot effect, a nasty fungus that destroys walls.
 /turf/simulated/wall/proc/rot()
