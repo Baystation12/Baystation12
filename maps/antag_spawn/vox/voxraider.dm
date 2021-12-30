@@ -55,10 +55,6 @@
 	landmark_tag = "nav_vox_raider_start"
 	name = "Echo Source"
 
-/obj/effect/shuttle_landmark/vox_raider/dock
-	name = "4th Deck, Aft Starboard Airlock"
-	landmark_tag = "nav_vox_raider_dock"
-
 /obj/machinery/alarm/vox_raider
 	req_access = list()
 
