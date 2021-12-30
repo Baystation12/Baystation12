@@ -7,7 +7,7 @@
 	icon_dead = "pine_1"
 	icon_gib = "pine_1"
 	turns_per_move = 5
-	meat_type = /obj/item/reagent_containers/food/snacks/fish
+	meat_type = /obj/item/reagent_containers/food/snacks/fish/unknown
 	response_help = "brushes"
 	response_disarm = "pushes"
 	response_harm = "hits"
