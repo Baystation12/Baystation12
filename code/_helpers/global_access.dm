@@ -117,6 +117,8 @@
 			return global.SSping;
 		if("SSplants")
 			return global.SSplants;
+		if("SSpresence")
+			return global.SSpresence;
 		if("SSprocessing")
 			return global.SSprocessing;
 		if("SSpsi")
@@ -962,6 +964,8 @@
 			global.SSping=newval;
 		if("SSplants")
 			global.SSplants=newval;
+		if("SSpresence")
+			global.SSpresence=newval;
 		if("SSprocessing")
 			global.SSprocessing=newval;
 		if("SSpsi")
@@ -1748,6 +1752,7 @@
 	"SSpersistence",
 	"SSping",
 	"SSplants",
+	"SSpresence",
 	"SSprocessing",
 	"SSpsi",
 	"SSradiation",

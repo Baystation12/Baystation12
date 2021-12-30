@@ -201,6 +201,7 @@
 #include "code\controllers\subsystems\mapping.dm"
 #include "code\controllers\subsystems\misc_slow.dm"
 #include "code\controllers\subsystems\plants.dm"
+#include "code\controllers\subsystems\presence.dm"
 #include "code\controllers\subsystems\radiation.dm"
 #include "code\controllers\subsystems\shuttle.dm"
 #include "code\controllers\subsystems\skybox.dm"
