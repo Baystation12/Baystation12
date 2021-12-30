@@ -10986,6 +10986,10 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fourthdeck/forestarboard)
+"Lv" = (
+/obj/effect/shuttle_landmark/ascent_caulship/torch,
+/turf/space,
+/area/space)
 "Lw" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -40877,7 +40881,7 @@ aa
 aa
 aa
 aa
-aa
+Lv
 aa
 aa
 aa

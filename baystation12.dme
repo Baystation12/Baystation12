@@ -3238,6 +3238,7 @@
 #include "maps\antag_spawn\ninja\ninja.dm"
 #include "maps\antag_spawn\wizard\wizard.dm"
 #include "maps\away\away_sites.dm"
+#include "maps\away\ascent_caulship\_ascent_caulship.dm"
 #include "maps\away_sites_testing\away_sites_testing_define.dm"
 #include "maps\example\example_define.dm"
 #include "maps\random_ruins\exoplanet_ruins\exoplanet_ruins.dm"
