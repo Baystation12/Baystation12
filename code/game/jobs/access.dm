@@ -233,6 +233,9 @@
 		var/obj/item/card/id = I ? I.GetIdCard() : null
 		if(id)
 			return id
+	var/obj/item/organ/internal/controller/controller = locate() in internal_organs
+	if(istype(controller))
+		return controller.GetIdCard()
 
 /mob/living/carbon/human/GetAccess()
 	. = list()
@@ -240,6 +243,9 @@
 		var/obj/item/I = item_slot
 		if(I)
 			. |= I.GetAccess()
+	var/obj/item/organ/internal/controller/controller = locate() in internal_organs
+	if(istype(controller))
+		. |= controller.GetAccess()
 #undef HUMAN_ID_CARDS
 
 /mob/living/silicon/GetIdCard()

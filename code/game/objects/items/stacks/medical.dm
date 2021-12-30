@@ -314,7 +314,7 @@
 	amount = 1
 	splintable_organs = list(BP_L_ARM, BP_R_ARM, BP_L_LEG, BP_R_LEG)
 
-// For adherent.
+// For Kharmaani/adherent.
 /obj/item/stack/medical/resin
 	name = "resin patches"
 	singular_name = "resin patch"

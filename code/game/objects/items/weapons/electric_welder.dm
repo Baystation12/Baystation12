@@ -72,7 +72,7 @@
 /obj/item/weldingtool/electric/burn_fuel(var/amount)
 	spend_charge(amount * fuel_cost_multiplier)
 	var/turf/T = get_turf(src)
-	if(T)
+	if(T) 
 		T.hotspot_expose(700, 5)
 
 /obj/item/weldingtool/electric/on_update_icon()
@@ -85,3 +85,8 @@
 	var/obj/item/cell/cell = get_cell()
 	if(cell)
 		cell.use(amount * CELLRATE)
+
+/obj/item/weldingtool/electric/mantid
+	name = "mantid welding tool"
+	desc = "An oddly shaped alien welding tool."
+	icon = 'icons/obj/ascent.dmi'
