@@ -180,13 +180,8 @@
 	return FALSE
 
 /datum/species/nabber/handle_environment_special(mob/living/carbon/human/H)
-	if(!H.on_fire && H.fire_stacks < 2 && H.species.get_bodytype() != SPECIES_MONARCH_QUEEN)
-		H.fire_stacks += 0.2
-	return
-
-/datum/species/nabber/monarch_worker/handle_environment_special(mob/living/carbon/human/H) //Workers have their bodytype overwritten to SPECIES_NABBER on line 452, so checking for it in conditions won't work.
 	if(!H.on_fire && H.fire_stacks < 2)
-		H.fire_stacks += 0
+		H.fire_stacks += 0.2
 	return
 
 // Nabbers will only fall when there isn't enough air pressure for them to keep themselves aloft.
@@ -316,8 +311,6 @@
 		target.set_dir(GLOB.reverse_dir[target.dir])
 
 /datum/species/nabber/get_additional_examine_text(var/mob/living/carbon/human/H)
-	if(H.species.get_bodytype() == SPECIES_MONARCH_QUEEN)
-		return ..()
 	var/datum/gender/T = gender_datums[H.get_gender()]
 	if(H.pulling_punches)
 		return "\n[T.His] manipulation arms are out and [T.he] looks ready to use complex items."
@@ -329,14 +322,9 @@
 	return H.pulling_punches = TRUE
 
 /datum/species/nabber/has_fine_manipulation(var/mob/living/carbon/human/H)
-	if(H.species.get_bodytype() == SPECIES_MONARCH_QUEEN)
-		return ..()
-	else
-		return (..() && (H && H.pulling_punches))
+	return (..() && (H && H.pulling_punches))
 
 /datum/species/nabber/attempt_grab(var/mob/living/carbon/human/grabber, var/mob/living/target)
-	if(grabber.species.get_bodytype() == SPECIES_MONARCH_QUEEN)
-		return ..()
 	if(grabber.pulling_punches)
 		return ..()
 	if(grabber == target)
@@ -368,8 +356,6 @@
 		grabber.visible_message("<span class='danger'>\The [grabber] suddenly lunges out, almost grabbing \the [target]!</span>")
 
 /datum/species/nabber/toggle_stance(var/mob/living/carbon/human/H)
-	if(H.species.get_bodytype() == SPECIES_MONARCH_QUEEN)
-		return ..()
 	if(H.incapacitated())
 		return FALSE
 	var/datum/gender/T = gender_datums[H.get_gender()]
@@ -419,117 +405,3 @@
 		if(19 to 27) 	. = 2
 		if(28 to 40)	. = -2
 		else			. = -4
-
-/datum/species/nabber/monarch_worker
-	name = SPECIES_MONARCH_WORKER
-	name_plural = "Monarch Serpentid Workers"
-	description = "close cousins to the Giant Armoured Serpentids, saved from their crippled homeworld hundreds of \
-	years ago and now allies and peers within the Ascent."
-	icobase = 'icons/mob/human_races/species/nabber/body_msw.dmi'
-	deform = 'icons/mob/human_races/species/nabber/body_msw.dmi'
-	spawn_flags = SPECIES_IS_RESTRICTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN
-	appearance_flags = 0
-	base_skin_colours = null
-	has_organ = list(
-		BP_BRAIN =             /obj/item/organ/internal/brain/insectoid/nabber,
-		BP_EYES =              /obj/item/organ/internal/eyes/insectoid/nabber,
-		BP_TRACH =             /obj/item/organ/internal/lungs/insectoid/nabber,
-		BP_HEART =             /obj/item/organ/internal/heart/open,
-		BP_LIVER =             /obj/item/organ/internal/liver/insectoid/nabber,
-		BP_STOMACH =           /obj/item/organ/internal/stomach/insectoid,
-		BP_SYSTEM_CONTROLLER = /obj/item/organ/internal/controller
-	)
-
-	force_cultural_info = list(
-		TAG_CULTURE =   CULTURE_ASCENT,
-		TAG_HOMEWORLD = HOME_SYSTEM_KHARMAANI,
-		TAG_FACTION =   FACTION_ASCENT_SERPENTID,
-		TAG_RELIGION =  RELIGION_KHARMAANI
-	)
-
-/datum/species/nabber/monarch_worker/get_bodytype(mob/living/carbon/human/H)
-	return SPECIES_NABBER
-
-/datum/species/nabber/monarch_worker/equip_survival_gear(mob/living/carbon/human/H)
-	return
-
-
-/datum/species/nabber/monarch_queen
-	name = SPECIES_MONARCH_QUEEN
-	name_plural = "Monarch Serpentid Queens"
-	description = "close cousins to the Giant Armoured Serpentids, saved from their crippled homeworld hundreds of \
-	years ago and now allies and peers within the Ascent. Queens, who were saved from a dying world by the Kharmaani \
-	and eventually promoted from 'entertaining pets' to the middle men that keep Ascent society functioning smoothly. \
-	Gynes have tremendous difficulties in communicating with each other politely, so the queens act as intermediaries, \
-	smoothing over the fractious and unproductive squabbling."
-
-	silent_steps = TRUE
-
-	icobase = 'icons/mob/human_races/species/nabber/msq/body.dmi'
-	deform = 'icons/mob/human_races/species/nabber/msq/body.dmi'
-	blood_mask = 'icons/mob/human_races/species/nabber/msq/blood_mask.dmi'
-	damage_mask = 'icons/mob/human_races/species/nabber/msq/damage_mask.dmi'
-
-	genders = list(FEMALE)
-
-	total_health = 150
-
-	mob_size = MOB_MEDIUM
-	breath_pressure = 21
-	blood_volume = 600
-
-	appearance_flags = 0
-	base_skin_colours = null
-	spawn_flags = SPECIES_IS_RESTRICTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN
-
-	has_organ = list(
-		BP_BRAIN =             /obj/item/organ/internal/brain/insectoid/nabber,
-		BP_EYES =              /obj/item/organ/internal/eyes/insectoid/msq,
-		BP_TRACH =             /obj/item/organ/internal/lungs/insectoid/nabber,
-		BP_LIVER =             /obj/item/organ/internal/liver/insectoid/nabber,
-		BP_HEART =             /obj/item/organ/internal/heart/open,
-		BP_STOMACH =           /obj/item/organ/internal/stomach,
-		BP_SYSTEM_CONTROLLER = /obj/item/organ/internal/controller,
-		BP_VOICE =    /obj/item/organ/internal/voicebox/nabber/ascent
-		)
-
-	has_limbs = list(
-		BP_CHEST =  list("path" = /obj/item/organ/external/chest/insectoid),
-		BP_GROIN =  list("path" = /obj/item/organ/external/groin/insectoid/nabber),
-		BP_HEAD =   list("path" = /obj/item/organ/external/head/insectoid),
-		BP_L_ARM =  list("path" = /obj/item/organ/external/arm/insectoid),
-		BP_L_HAND = list("path" = /obj/item/organ/external/hand/insectoid),
-		BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right/insectoid),
-		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right/insectoid),
-		BP_R_LEG =  list("path" = /obj/item/organ/external/leg/right/insectoid),
-		BP_L_LEG =  list("path" = /obj/item/organ/external/leg/insectoid),
-		BP_L_FOOT = list("path" = /obj/item/organ/external/foot/insectoid),
-		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/insectoid)
-		)
-
-	descriptors = list(
-		/datum/mob_descriptor/height = -1,
-		/datum/mob_descriptor/body_length = -1
-		)
-
-
-	force_cultural_info = list(
-		TAG_CULTURE =   CULTURE_ASCENT,
-		TAG_HOMEWORLD = HOME_SYSTEM_KHARMAANI,
-		TAG_FACTION =   FACTION_ASCENT_SERPENTID,
-		TAG_RELIGION =  RELIGION_KHARMAANI
-		)
-
-/datum/species/nabber/monarch_queen/New()
-	equip_adjust = list(
-		slot_belt_str = list(
-			"[NORTH]" = list("x" = 0, "y" = 0),
-			"[EAST]" = list("x" = 8, "y" = 0),
-			"[SOUTH]" = list("x" = 0, "y" = 0),
-			"[WEST]" = list("x" = -8, "y" = 0)
-		)
-	)
-	..()
-
-/datum/species/nabber/monarch_queen/equip_survival_gear(mob/living/carbon/human/H)
-	return

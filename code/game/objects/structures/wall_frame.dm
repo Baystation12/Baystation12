@@ -200,8 +200,5 @@
 /obj/structure/wall_frame/hull/vox
 	paint_color = COLOR_GREEN_GRAY
 
-/obj/structure/wall_frame/hull/ascent
-	paint_color = COLOR_PURPLE
-
 /obj/structure/wall_frame/hull/verne
 	paint_color = COLOR_GUNMETAL

@@ -1078,20 +1078,6 @@
 	heating_products = null
 	heating_point = null
 
-/datum/reagent/toxin/bromide/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien != IS_MANTID)
-		. = ..()
-
-/datum/reagent/toxin/bromide/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_MANTID)
-		M.add_chemical_effect(CE_OXYGENATED, 1)
-	else
-		..()
-
-/datum/reagent/toxin/bromide/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien != IS_MANTID)
-		. = ..()
-
 /datum/reagent/toxin/methyl_bromide
 	name = "Methyl Bromide"
 	description = "A fumigant derived from bromide."
@@ -1103,10 +1089,10 @@
 	heating_point = null
 
 /datum/reagent/toxin/methyl_bromide/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
-	. = (alien != IS_MANTID && alien != IS_NABBER && ..())
+	. = (alien != IS_NABBER && ..())
 
 /datum/reagent/toxin/methyl_bromide/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	. = (alien != IS_MANTID && alien != IS_NABBER && ..())
+	. = (alien != IS_NABBER && ..())
 
 /datum/reagent/toxin/methyl_bromide/touch_turf(var/turf/simulated/T)
 	if(istype(T))
@@ -1114,7 +1100,7 @@
 		remove_self(volume)
 
 /datum/reagent/toxin/methyl_bromide/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	. = (alien != IS_MANTID && alien != IS_NABBER && ..())
+	. = (alien != IS_NABBER && ..())
 	if(istype(M))
 		for(var/obj/item/organ/external/E in M.organs)
 			if(LAZYLEN(E.implants))

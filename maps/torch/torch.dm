@@ -169,7 +169,6 @@
 	#include "../away/mininghome/mininghome.dm"
 	#include "../away/scavver/scavver_gantry.dm"
 
-	#include "../away/ascent_caulship/_ascent_caulship.dm"
 
 	#define using_map_DATUM /datum/map/torch
 
