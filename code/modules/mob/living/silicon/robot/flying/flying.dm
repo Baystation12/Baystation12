@@ -4,7 +4,6 @@
 	icon_state = "drone-standard"
 	module_category = ROBOT_MODULE_TYPE_FLYING
 	dismantle_type = /obj/item/robot_parts/robot_suit/flyer
-	speed = -1 // nyoom
 	power_efficiency = 0.75
 
 	// They are not very heavy or strong.
