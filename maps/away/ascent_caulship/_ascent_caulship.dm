@@ -1,42 +1,34 @@
-#define ASCENT_COLONY_SHIP_NAME "\improper Ascent seedship"
-
 #include "ascent_areas.dm"
 #include "ascent_jobs.dm"
-#include "ascent_shuttles.dm"
 #include "ascent_props.dm"
+#include "ascent_shuttles.dm"
 
 // Map template data.
-/datum/map_template/ruin/away_site/ascent_seedship
-	name = ASCENT_COLONY_SHIP_NAME
-	id = "awaysite_ascent_seedship"
-	description = "A small Ascent colony ship."
-	suffixes = list("ascent/ascent-1.dmm")
+/datum/map_template/ruin/away_site/ascent_caulship_docking_ring
+	name = "Ascent Caulship"
+	id = "awaysite_ascent_caulship"
+	description = "A small Ascent caulship with a tiny crew."
+	suffixes = list("ascent_caulship/ascent-1.dmm")
+	area_usage_test_exempted_areas = list(
+		/area/ship/ascent_caulship
+	)
 	spawn_cost = 9999
-	shuttles_to_initialise = list(
-		/datum/shuttle/autodock/overmap/ascent, 
-		/datum/shuttle/autodock/overmap/ascent/two
-	)
+	player_cost = 4
+	shuttles_to_initialise = list(/datum/shuttle/autodock/overmap/ascent)
 
-// Overmap objects.
-/obj/effect/overmap/visitable/ship/ascent_seedship
-	name = ASCENT_COLONY_SHIP_NAME
-	desc = "Wake signature indicates a small to medium sized vessel of unknown design."
-	vessel_mass = 6500
-	fore_dir = WEST
-	max_speed = 1/(1 SECOND)
+/obj/effect/overmap/visitable/sector/ascent_caulship_ring
+	name = "Ruined Bluespace Jump Ring"
+	desc = "A ruined jumpdrive ring of Ascent design, used to transport individual ships at FTL speeds."
+	in_space = 1
+	icon_state = "event"
 	hide_from_reports = TRUE
-	initial_restricted_waypoints = list(
-		"Trichoptera" = list("nav_hangar_ascent_one"),
-		"Lepidoptera" = list("nav_hangar_ascent_two")
-	)
->>>>>>> parent of e4aef903d6... Reworked the seedship into a much smaller civilian vessel.:maps/away/ascent/ascent.dm
 
-/obj/effect/submap_landmark/joinable_submap/ascent_seedship
-	name = ASCENT_COLONY_SHIP_NAME
-	archetype = /decl/submap_archetype/ascent_seedship
+/obj/effect/submap_landmark/joinable_submap/ascent_caulship
+	name = "Ascent Caulship"
+	archetype = /decl/submap_archetype/ascent_caulship
 	submap_datum_type = /datum/submap/ascent
 
-/obj/effect/submap_landmark/joinable_submap/ascent_seedship/Initialize(mapload)
+/obj/effect/submap_landmark/joinable_submap/ascent_caulship/Initialize(mapload)
 	var/list/all_elements = list(
 		"Hydrogen",      "Helium",     "Lithium",     "Beryllium",    "Carbon",       "Nitrogen",      "Oxygen",
 		"Fluorine",      "Neon",       "Sodium",      "Magnesium",    "Silicon",      "Phosphorus",    "Sulfur",
