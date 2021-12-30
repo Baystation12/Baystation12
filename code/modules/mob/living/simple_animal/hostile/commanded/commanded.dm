@@ -9,7 +9,7 @@
 	var/list/allowed_targets = list() //WHO CAN I KILL D:
 	var/retribution = 1 //whether or not they will attack us if we attack them like some kinda dick.
 
-	ai_holder_type = /datum/ai_holder/simple_animal/melee/commanded
+	ai_holder = /datum/ai_holder/simple_animal/melee/commanded
 
 /datum/ai_holder/simple_animal/melee/commanded/find_target(list/possible_targets, has_targets_list)
 	. = ..()

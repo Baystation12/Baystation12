@@ -33,7 +33,7 @@
 								/decl/parrot_subspecies/black)
 	var/get_subspecies_name = TRUE
 
-	ai_holder_type = /datum/ai_holder/simple_animal/retaliate
+	ai_holder = /datum/ai_holder/simple_animal/retaliate
 	say_list = /datum/say_list/parrot/space
 
 /mob/living/simple_animal/hostile/retaliate/parrot/space/Initialize()

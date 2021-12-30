@@ -47,7 +47,7 @@
 
 	harm_intent_damage = 8
 	natural_weapon = /obj/item/natural_weapon/defender_blades
-	ai_holder_type = /datum/ai_holder/simple_animal/melee/defender
+	ai_holder = /datum/ai_holder/simple_animal/melee/defender
 	var/attack_mode = FALSE
 
 	var/transformation_delay_min = 4

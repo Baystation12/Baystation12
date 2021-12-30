@@ -177,7 +177,6 @@
 #include "code\controllers\evacuation\evacuation_shuttle.dm"
 #include "code\controllers\evacuation\~evac.dm"
 #include "code\controllers\subsystems\ai.dm"
-#include "code\controllers\subsystems\aifast.dm"
 #include "code\controllers\subsystems\air.dm"
 #include "code\controllers\subsystems\airflow.dm"
 #include "code\controllers\subsystems\alarm.dm"

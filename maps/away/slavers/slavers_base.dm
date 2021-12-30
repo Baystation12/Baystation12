@@ -156,7 +156,7 @@
 	projectiletype = /obj/item/projectile/beam
 	faction = "extremist abolitionists"
 
-	ai_holder_type = /datum/ai_holder/simple_animal/ranged
+	ai_holder = /datum/ai_holder/simple_animal/ranged
 
 /mob/living/simple_animal/hostile/abolition_extremist/death(gibbed, deathmessage, show_dead_message)
 	. = ..(gibbed, deathmessage, show_dead_message)

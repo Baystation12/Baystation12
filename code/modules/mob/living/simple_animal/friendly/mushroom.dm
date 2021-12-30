@@ -26,7 +26,7 @@
 	var/min_explode_time = 1200
 	var/global/total_mushrooms = 0
 
-	ai_holder_type = /datum/ai_holder/simple_animal/passive/mushroom
+	ai_holder = /datum/ai_holder/simple_animal/passive/mushroom
 
 /mob/living/simple_animal/passive/mushroom/New()
 	..()

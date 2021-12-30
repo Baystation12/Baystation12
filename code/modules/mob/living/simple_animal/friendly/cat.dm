@@ -25,7 +25,7 @@
 	var/turns_since_scan = 0
 	var/mob/living/simple_animal/passive/mouse/movement_target
 
-	ai_holder_type = /datum/ai_holder/simple_animal/passive/cat
+	ai_holder = /datum/ai_holder/simple_animal/passive/cat
 	say_list_type = /datum/say_list/cat
 
 /mob/living/simple_animal/passive/cat/Life()

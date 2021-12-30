@@ -95,7 +95,7 @@
 	var/impatience = 5 //we lose this much from relax_chance each time we calm down
 	var/icon_set = "parrot"
 
-	ai_holder_type = /datum/ai_holder/simple_animal/retaliate/parrot
+	ai_holder = /datum/ai_holder/simple_animal/retaliate/parrot
 
 
 /mob/living/simple_animal/hostile/retaliate/parrot/New()

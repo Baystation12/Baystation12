@@ -18,7 +18,7 @@
 	special_attack_cooldown = 15 SECONDS
 
 	natural_weapon = /obj/item/natural_weapon/bite/spider/frost
-	ai_holder_type = /datum/ai_holder/simple_animal/spider/frost
+	ai_holder = /datum/ai_holder/simple_animal/spider/frost
 
 	minbodytemp = 0
 

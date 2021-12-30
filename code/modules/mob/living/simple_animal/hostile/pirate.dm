@@ -22,7 +22,7 @@
 
 	faction = "pirate"
 
-	ai_holder_type = /datum/ai_holder/simple_animal/melee/pirate
+	ai_holder = /datum/ai_holder/simple_animal/melee/pirate
 
 /mob/living/simple_animal/hostile/pirate/ranged
 	name = "Pirate Gunner"
@@ -36,7 +36,7 @@
 	corpse = /obj/effect/landmark/corpse/pirate/ranged
 	weapon1 = /obj/item/gun/energy/laser
 
-	ai_holder_type = /datum/ai_holder/simple_animal/pirate/ranged
+	ai_holder = /datum/ai_holder/simple_animal/pirate/ranged
 
 /mob/living/simple_animal/hostile/pirate/death(gibbed, deathmessage, show_dead_message)
 	..(gibbed, deathmessage, show_dead_message)

@@ -32,7 +32,7 @@
 	var/healing = FALSE
 	var/heal_amount = 6
 
-	ai_holder_type = /datum/ai_holder/simple_animal/retaliate
+	ai_holder = /datum/ai_holder/simple_animal/retaliate
 	say_list = /datum/say_list/antlion
 
 /mob/living/simple_animal/hostile/retaliate/beast/antlion/Life()

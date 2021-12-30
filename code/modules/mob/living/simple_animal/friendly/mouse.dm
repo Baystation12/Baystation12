@@ -34,7 +34,7 @@
 
 	var/body_color //brown, gray and white, leave blank for random
 
-	ai_holder_type = /datum/ai_holder/simple_animal/passive/mouse
+	ai_holder = /datum/ai_holder/simple_animal/passive/mouse
 	say_list_type = /datum/say_list/mouse
 
 /mob/living/simple_animal/passive/mouse/Life()
