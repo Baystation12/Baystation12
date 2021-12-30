@@ -738,22 +738,12 @@
 		handle_additional_vomit_reagents(splat)
 		splat.update_icon()
 
-/mob/living/carbon/human/proc/vomit(timevomit = 1, level = 3, delay = 0, deliberate = FALSE)
+/mob/living/carbon/human/proc/vomit(timevomit = 1, level = 3, delay = 0)
 
 	set waitfor = 0
 
 	if(!check_has_mouth() || isSynthetic() || !timevomit || !level || stat == DEAD || lastpuke)
 		return
-
-	if(deliberate)
-		if(incapacitated())
-			to_chat(src, SPAN_WARNING("You cannot do that right now."))
-			return
-		var/datum/gender/G = gender_datums[gender]
-		visible_message(SPAN_DANGER("\The [src] starts sticking a finger down [G.his] own throat. It looks like [G.he] [G.is] trying to throw up!"))
-		if(!do_after(src, 30))
-			return
-		timevomit = max(timevomit, 5)
 
 	timevomit = clamp(timevomit, 1, 10)
 	level = clamp(level, 1, 3)
