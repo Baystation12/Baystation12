@@ -8,8 +8,9 @@
 	autolathe_categories = list()
 	for(var/R in typesof(/datum/autolathe/recipe)-/datum/autolathe/recipe)
 		var/datum/autolathe/recipe/recipe = new R
-		autolathe_recipes += recipe
-		autolathe_categories |= recipe.category
+		if(recipe.in_auto_populate_list)
+			autolathe_recipes += recipe
+			autolathe_categories |= recipe.category
 
 /datum/autolathe/recipe
 	var/name = "object"
@@ -19,6 +20,7 @@
 	var/category
 	var/power_use = 0
 	var/is_stack
+	var/in_auto_populate_list = 1
 
 /datum/autolathe/recipe/bucket
 	name = "bucket"
