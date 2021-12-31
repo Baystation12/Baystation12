@@ -23,10 +23,10 @@
 	var/damage
 	switch (severity)
 		if (1.0)
-			damage = 80
+			damage = 120
 
 		if (2.0)
-			damage = 55
+			damage = 60
 
 		if(3.0)
 			damage = 30
