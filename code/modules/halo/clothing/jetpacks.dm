@@ -17,6 +17,12 @@
 	slowdown_general = 0.1
 	action_button_name = "Activate Jump-Jet"
 
+/obj/item/flight_item/verb/toggle_flight()
+	set name = "Toggle Flight"
+	set category = "Object"
+
+	ui_action_click()
+
 /obj/item/flight_item/New()
 	. = ..()
 	flight_ticks_curr = flight_ticks_max
