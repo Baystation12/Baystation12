@@ -54,6 +54,7 @@
 	path = /obj/item/ammo_box/shotgun
 	resources = list("steel" = 500)
 	category = "Arms and Ammunition"
+	in_auto_populate_list = 0
 
 /datum/autolathe/recipe/shotgun_box/slugs
 	name = "ammo box (Shotgun, Slugs)"

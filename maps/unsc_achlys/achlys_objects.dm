@@ -249,7 +249,7 @@
 	visible_message("<span class = 'warning'>[attacker] rips out a critical circuit in \the [src]'s electronics! </span>")
 	qdel(src)
 
-/obj/structure/navconsole/Del()
+/obj/structure/navconsole/Destroy()
 	new /obj/effect/decal/cleanable/blood/gibs/robot (loc)
 	. = ..()
 
