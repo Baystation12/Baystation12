@@ -18,7 +18,7 @@
 		if(integrity > 75 || reinforce_material)
 			. += new/datum/stack_recipe/furniture/windoor(src, reinforce_material)
 
-	if(reinforce_material)	//recipies below don't support composite materials
+	if(reinforce_material)	//recipes below don't support composite materials
 		return
 
 	// If is_brittle() returns true, these are only good for a single strike.
@@ -58,7 +58,7 @@
 
 /material/steel/generate_recipes(var/reinforce_material)
 	. = ..()
-	if(reinforce_material)	//recipies below don't support composite materials
+	if(reinforce_material)	//recipes below don't support composite materials
 		return
 	. += new/datum/stack_recipe_list("office chairs",list(
 		new/datum/stack_recipe/furniture/chair/office/dark(src),
@@ -96,7 +96,7 @@
 
 /material/plasteel/generate_recipes(var/reinforce_material)
 	. = ..()
-	if(reinforce_material)	//recipies below don't support composite materials
+	if(reinforce_material)	//recipes below don't support composite materials
 		return
 	. += new/datum/stack_recipe/ai_core(src)
 	. += new/datum/stack_recipe/furniture/crate(src)
@@ -104,13 +104,13 @@
 
 /material/stone/generate_recipes(var/reinforce_material)
 	. = ..()
-	if(reinforce_material)	//recipies below don't support composite materials
+	if(reinforce_material)	//recipes below don't support composite materials
 		return
 	. += new/datum/stack_recipe/furniture/planting_bed(src)
 
 /material/plastic/generate_recipes(var/reinforce_material)
 	. = ..()
-	if(reinforce_material)	//recipies below don't support composite materials
+	if(reinforce_material)	//recipes below don't support composite materials
 		return
 	. += new/datum/stack_recipe/furniture/crate/plastic(src)
 	. += new/datum/stack_recipe/bag(src)
@@ -122,7 +122,7 @@
 
 /material/wood/generate_recipes(var/reinforce_material)
 	. = ..()
-	if(reinforce_material)	//recipies below don't support composite materials
+	if(reinforce_material)	//recipes below don't support composite materials
 		return
 	. += new/datum/stack_recipe/sandals(src)
 	. += new/datum/stack_recipe/tile/wood(src)
@@ -165,7 +165,7 @@
 
 /material/cardboard/generate_recipes(var/reinforce_material)
 	. = ..()
-	if(reinforce_material)	//recipies below don't support composite materials
+	if(reinforce_material)	//recipes below don't support composite materials
 		return
 	. += create_recipe_list(/datum/stack_recipe/box)
 	. += new/datum/stack_recipe/cardborg_suit(src)
@@ -174,6 +174,6 @@
 
 /material/aluminium/generate_recipes(var/reinforce_material)
 	. = ..()
-	if(reinforce_material)	//recipies below don't support composite materials
+	if(reinforce_material)	//recipes below don't support composite materials
 		return
 	. += new/datum/stack_recipe/grenade(src)

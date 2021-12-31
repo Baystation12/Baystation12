@@ -120,7 +120,7 @@ var/list/holder_mob_icon_cache = list()
 /obj/item/holder/borer
 	origin_tech = list(TECH_BIO = 6)
 
-//need own subtype to work with recipies
+//need own subtype to work with recipes
 /obj/item/holder/corgi
 	origin_tech = list(TECH_BIO = 4)
 
@@ -182,4 +182,3 @@ var/list/holder_mob_icon_cache = list()
 
 /mob/living/carbon/human/scoop_check(var/mob/living/scooper)
 	return (scooper.mob_size > src.mob_size && a_intent == I_HELP)
-
