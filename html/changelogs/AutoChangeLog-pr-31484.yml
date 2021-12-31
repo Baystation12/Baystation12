@@ -1,6 +1,0 @@
-author: Jux
-delete-after: true
-changes:
-  - maptweak: The Vox Raider ship now has more spare nitrogen.
-  - maptweak: The NavPoint for the Vox Raider ship to attach to an airlock has been
-      fixed.
