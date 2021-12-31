@@ -518,7 +518,7 @@
 	density = 0;
 	dir = 1;
 	icon_state = "pdoor0";
-	id_tag = "calypso_shutters";
+	id_tag = "charon_shutters";
 	name = "Protective Shutters";
 	opacity = 0
 	},
@@ -542,7 +542,7 @@
 	density = 0;
 	dir = 1;
 	icon_state = "pdoor0";
-	id_tag = "calypso_shutters";
+	id_tag = "charon_shutters";
 	name = "Protective Shutters";
 	opacity = 0
 	},
@@ -691,7 +691,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id_tag = "calypso_shutters";
+	id_tag = "charon_shutters";
 	name = "Protective Shutters";
 	opacity = 0
 	},
@@ -915,7 +915,7 @@
 /area/exploration_shuttle/cockpit)
 "bT" = (
 /obj/machinery/button/blast_door{
-	id_tag = "calypso_shutters";
+	id_tag = "charon_shutters";
 	name = "Protective Shutters Control";
 	pixel_x = -32
 	},
@@ -1031,7 +1031,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id_tag = "calypso_shutters";
+	id_tag = "charon_shutters";
 	name = "Protective Shutters";
 	opacity = 0
 	},
@@ -1145,7 +1145,7 @@
 /obj/machinery/computer/air_control{
 	dir = 8;
 	name = "Atmospheric Sensors";
-	sensor_tag = "calypso_out"
+	sensor_tag = "charon_out"
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/cockpit)
@@ -1361,7 +1361,7 @@
 "cI" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 2;
-	id_tag = "calypso_shuttle_pump_out_external"
+	id_tag = "charon_shuttle_pump_out_external"
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8;
@@ -1374,7 +1374,7 @@
 	},
 /obj/machinery/access_button/airlock_exterior{
 	frequency = 1331;
-	master_tag = "calypso_shuttle";
+	master_tag = "charon_shuttle";
 	pixel_x = 20;
 	pixel_y = 20
 	},
@@ -1388,7 +1388,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id_tag = "calypso_shutters";
+	id_tag = "charon_shutters";
 	name = "Protective Shutters";
 	opacity = 0
 	},
@@ -1399,7 +1399,7 @@
 "cK" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 2;
-	id_tag = "calypso_shuttle_pump_out_internal"
+	id_tag = "charon_shuttle_pump_out_internal"
 	},
 /obj/structure/handrail,
 /obj/machinery/oxygen_pump{
@@ -1415,10 +1415,10 @@
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
 	cycle_to_external_air = 1;
 	frequency = 1331;
-	id_tag = "calypso_shuttle";
+	id_tag = "charon_shuttle";
 	pixel_y = 24;
 	req_access = list("ACCESS_TORCH_CREW");
-	tag_exterior_sensor = "calypso_shuttle_sensor_external"
+	tag_exterior_sensor = "charon_shuttle_sensor_external"
 	},
 /obj/machinery/light/small{
 	dir = 1
@@ -1426,7 +1426,7 @@
 /obj/structure/handrail,
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 2;
-	id_tag = "calypso_shuttle_pump"
+	id_tag = "charon_shuttle_pump"
 	},
 /obj/effect/floor_decal/techfloor{
 	dir = 1;
@@ -1437,11 +1437,11 @@
 "cM" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 2;
-	id_tag = "calypso_shuttle_pump"
+	id_tag = "charon_shuttle_pump"
 	},
 /obj/machinery/airlock_sensor{
 	frequency = 1331;
-	id_tag = "calypso_shuttle_sensor";
+	id_tag = "charon_shuttle_sensor";
 	pixel_x = 0;
 	pixel_y = 24
 	},
@@ -1466,7 +1466,7 @@
 /obj/machinery/camera/network/exploration_shuttle,
 /obj/machinery/access_button/airlock_interior{
 	frequency = 1331;
-	master_tag = "calypso_shuttle";
+	master_tag = "charon_shuttle";
 	pixel_x = -20;
 	pixel_y = 20
 	},
@@ -1622,7 +1622,7 @@
 	dir = 8
 	},
 /obj/machinery/air_sensor{
-	id_tag = "calypso_out"
+	id_tag = "charon_out"
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8;
@@ -1640,7 +1640,7 @@
 	autoset_access = 0;
 	density = 1;
 	frequency = 1331;
-	id_tag = "calypso_shuttle_outer";
+	id_tag = "charon_shuttle_outer";
 	name = "Charon External Access"
 	},
 /obj/machinery/shield_diffuser,
@@ -1689,7 +1689,7 @@
 /obj/machinery/door/airlock/external{
 	autoset_access = 0;
 	frequency = 1331;
-	id_tag = "calypso_shuttle_inner";
+	id_tag = "charon_shuttle_inner";
 	name = "Charon External Access"
 	},
 /obj/structure/cable/cyan{
@@ -1800,11 +1800,11 @@
 "dv" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 1;
-	id_tag = "calypso_shuttle_pump_out_external"
+	id_tag = "charon_shuttle_pump_out_external"
 	},
 /obj/machinery/airlock_sensor{
 	frequency = 1331;
-	id_tag = "calypso_shuttle_sensor_external";
+	id_tag = "charon_shuttle_sensor_external";
 	pixel_x = 25;
 	pixel_y = -25
 	},
@@ -1821,7 +1821,7 @@
 "dw" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 1;
-	id_tag = "calypso_shuttle_pump_out_internal"
+	id_tag = "charon_shuttle_pump_out_internal"
 	},
 /obj/structure/handrail{
 	dir = 1;
@@ -1841,7 +1841,7 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 1;
-	id_tag = "calypso_shuttle_pump"
+	id_tag = "charon_shuttle_pump"
 	},
 /obj/effect/floor_decal/techfloor,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -1849,7 +1849,7 @@
 "dy" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 1;
-	id_tag = "calypso_shuttle_pump"
+	id_tag = "charon_shuttle_pump"
 	},
 /obj/structure/handrail{
 	dir = 1;
@@ -2742,7 +2742,7 @@
 	density = 0;
 	dir = 4;
 	icon_state = "pdoor0";
-	id_tag = "calypso_shutters";
+	id_tag = "charon_shutters";
 	name = "Protective Shutters";
 	opacity = 0
 	},
@@ -2850,7 +2850,7 @@
 /obj/machinery/door/airlock/external{
 	autoset_access = 0;
 	frequency = 1331;
-	id_tag = "calypso_cargo_inner";
+	id_tag = "charon_cargo_inner";
 	name = "Charon Cargo Bay"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -2943,22 +2943,22 @@
 "fZ" = (
 /obj/machinery/airlock_sensor{
 	frequency = 1331;
-	id_tag = "calypso_cargo_sensor";
+	id_tag = "charon_cargo_sensor";
 	pixel_x = 24;
 	pixel_y = -24
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 1;
-	id_tag = "calypso_cargo_pump"
+	id_tag = "charon_cargo_pump"
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	cycle_to_external_air = 1;
 	dir = 8;
 	frequency = 1331;
-	id_tag = "calypso_cargo";
+	id_tag = "charon_cargo";
 	pixel_x = 19;
 	req_access = list("ACCESS_TORCH_CREW");
-	tag_exterior_sensor = "calypso_cargo_exterior"
+	tag_exterior_sensor = "charon_cargo_exterior"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/cargo)
@@ -2985,7 +2985,7 @@
 /obj/machinery/door/airlock/external{
 	autoset_access = 0;
 	frequency = 1331;
-	id_tag = "calypso_cargo_inner";
+	id_tag = "charon_cargo_inner";
 	name = "Charon Cargo Bay"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible,
@@ -3020,7 +3020,7 @@
 	autoset_access = 0;
 	density = 1;
 	frequency = 1331;
-	id_tag = "calypso_cargo_outer";
+	id_tag = "charon_cargo_outer";
 	name = "Charon External Access"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -3033,7 +3033,7 @@
 	autoset_access = 0;
 	density = 1;
 	frequency = 1331;
-	id_tag = "calypso_cargo_outer";
+	id_tag = "charon_cargo_outer";
 	name = "Charon External Access"
 	},
 /obj/machinery/light_switch{
@@ -3304,14 +3304,14 @@
 	},
 /obj/machinery/access_button/airlock_exterior{
 	frequency = 1331;
-	master_tag = "calypso_cargo";
+	master_tag = "charon_cargo";
 	pixel_x = 20;
 	pixel_y = 20
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	controlled = 0;
 	dir = 1;
-	id_tag = "calypso_cargo_pump_out_external"
+	id_tag = "charon_cargo_pump_out_external"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/cargo)
@@ -10788,7 +10788,7 @@
 	dir = 8
 	},
 /obj/machinery/alarm{
-	alarm_id = "calypso_cargo_alarm";
+	alarm_id = "charon_cargo_alarm";
 	pixel_y = 24;
 	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_EXPLO_HELM"))
 	},
@@ -14012,7 +14012,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/machinery/access_button/airlock_interior{
 	frequency = 1331;
-	master_tag = "calypso_cargo";
+	master_tag = "charon_cargo";
 	pixel_x = 20;
 	pixel_y = -22
 	},
@@ -15113,14 +15113,14 @@
 	},
 /obj/machinery/airlock_sensor{
 	frequency = 1331;
-	id_tag = "calypso_cargo_exterior_sensor";
+	id_tag = "charon_cargo_exterior_sensor";
 	pixel_x = -25;
 	pixel_y = 25
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	controlled = 0;
 	dir = 1;
-	id_tag = "calypso_cargo_pump_out_external"
+	id_tag = "charon_cargo_pump_out_external"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/cargo)
@@ -15975,11 +15975,11 @@
 /area/vacant/infirmary)
 "RU" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
-	id_tag = "calypso_cargo_pump_out_internal"
+	id_tag = "charon_cargo_pump_out_internal"
 	},
 /obj/machinery/airlock_sensor{
 	frequency = 1331;
-	id_tag = "calypso_cargo_sensor";
+	id_tag = "charon_cargo_sensor";
 	pixel_x = -23
 	},
 /obj/machinery/light/small{

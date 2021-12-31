@@ -1,6 +1,6 @@
 var/const/NETWORK_AQUILA      = "Aquila"
 var/const/NETWORK_BRIDGE      = "Bridge"
-var/const/NETWORK_CALYPSO     = "Charon"
+var/const/NETWORK_CHARON     = "Charon"
 var/const/NETWORK_EXPEDITION  = "Expedition"
 var/const/NETWORK_FIRST_DECK  = "First Deck"
 var/const/NETWORK_FOURTH_DECK = "Fourth Deck"
@@ -19,7 +19,7 @@ var/const/NETWORK_PETROV  = "Petrov"
 			return access_aquila
 		if(NETWORK_BRIDGE)
 			return access_heads
-		if(NETWORK_CALYPSO)
+		if(NETWORK_CHARON)
 			return access_expedition_shuttle
 		if(NETWORK_POD)
 			return access_guppy
@@ -54,7 +54,7 @@ var/const/NETWORK_PETROV  = "Petrov"
 		NETWORK_EXPLO,
 		NETWORK_HANGAR,
 		NETWORK_AQUILA,
-		NETWORK_CALYPSO,
+		NETWORK_CHARON,
 		NETWORK_POD,
 		NETWORK_PETROV,
 		NETWORK_ALARM_ATMOS,
@@ -77,7 +77,7 @@ var/const/NETWORK_PETROV  = "Petrov"
 	network = list(NETWORK_BRIDGE)
 
 /obj/machinery/camera/network/exploration_shuttle
-	network = list(NETWORK_CALYPSO)
+	network = list(NETWORK_CHARON)
 
 /obj/machinery/camera/network/expedition
 	network = list(NETWORK_EXPEDITION)
