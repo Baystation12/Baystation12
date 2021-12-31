@@ -121,6 +121,7 @@
 	else
 		prox = new(src, /obj/item/device/landmine/proc/trigger, /obj/item/device/landmine/proc/turfs_changed, trigger_range)
 		prox.register_turfs()
+	update_icon()
 
 /obj/item/device/landmine/proc/detonate()
 	if(beakers.len > 1)
@@ -136,3 +137,9 @@
 	beakers = list()
 
 	//explosion(get_turf(src), -1, det_range / 2, det_range, det_range * 2, z_transfer = 0)
+
+/obj/item/device/landmine/update_icon()
+	. = ..()
+	if(state == STATE_ACTIVE)
+		alpha = 70
+		blend_mode = BLEND_MULTIPLY

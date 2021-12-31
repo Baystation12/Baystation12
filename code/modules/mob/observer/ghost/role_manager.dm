@@ -30,6 +30,7 @@ var/global/datum/ghost_role_manager/ghost_role_manager = new /datum/ghost_role_m
 	var/mob/mob_to_spawn
 	var/list/objects_spawn_on = list()
 	var/always_spawnable = 1 //Defines if the role should always have a valid spawn point
+	var/respawn_time = 1 SECOND  //set the seconds it should take for this role to be allowed to spawn
 
 /datum/ghost_role/proc/unique_role_checks(var/mob/observer/ghost/ghost,var/list/possible_spawns)//Used to check some special circumstances, like welded vents for mice.
 	return 1
@@ -42,9 +43,12 @@ var/global/datum/ghost_role_manager/ghost_role_manager = new /datum/ghost_role_m
 	if(possible_spawns.len == 0)
 		if(always_spawnable)
 			log_admin("ERROR: ([ghost.ckey]/[ghost.name]) attempted to spawn as a [src], but had no valid spawnobjects.")
-		to_chat(ghost,"<span class = 'notice'>No locations to spawn your mob!.</span>")
+		to_chat(ghost,"<span class = 'notice'>No locations to spawn your mob!</span>")
 		return
 	if(!unique_role_checks(ghost,possible_spawns))
+		return
+	if(world.time < ghost.timeofdeath + respawn_time)
+		to_chat(ghost,"<span class = 'notice'>Please wait [((ghost.timeofdeath + respawn_time) - world.time)/10] more seconds before you may choose this role.</span>")
 		return
 	var/obj/chosen_spawn = pick(possible_spawns)
 	do_spawn(ghost,chosen_spawn)

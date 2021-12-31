@@ -13,8 +13,8 @@
 	w_class = ITEM_SIZE_NORMAL
 	active = 0
 	var/list/ignore_freqs = list()
-	var/jam_power = -1 // -1 = force gibberish, -2 = force garbled, any value 0+ = force gibberish, chance for garbled.
-	var/jam_chance = 50
+	var/jam_power = -1 // -1 = force garbled, -2 = force gibberish, any value 0+ = force gibberish, chance for garbled.
+	var/jam_chance = 100
 	var/jam_range = 1 //The jamming range, in tiles.
 	var/jam_ignore_malfunction_chance = 0 //Chance for the jammer to jam frequencies in the ignore_freqs list.
 	var/obj/effect/overmap/jamming_sector

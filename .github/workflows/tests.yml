@@ -58,6 +58,7 @@ jobs:
           - ks7_elmsville_spaceodp
           - base_assault
           - base_assault_unsc_defend_vs_urf
+          - unsc_achlys
           - base_assault_neutral_base
           - geminus_city         
           #- example

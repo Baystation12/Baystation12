@@ -72,6 +72,11 @@
 			qdel(using_vehicle_gun)
 		. = ..()
 
+/mob/living/simple_animal/hostile/can_move_mob(var/mob/living/swapped, swapping = 0, passive = 0)
+	. = ..()
+	if(. && faction != swapped.faction)
+		. = 0
+
 /mob/living/simple_animal/hostile/proc/hostilemob_walk_to(var/target,var/safedist,var/delay)
 	if(istype(loc,/obj/vehicles))
 		spawn(-1)
@@ -80,7 +85,7 @@
 				if(!istype(v))
 					break
 				v.relaymove(src,get_dir(src.loc,target))
-				sleep(1)
+				sleep(delay)
 	else
 		walk_to(src, target, safedist, delay)
 
@@ -170,6 +175,8 @@
 
 /mob/living/simple_animal/hostile/proc/AttackTarget()
 	stop_automated_movement = 1
+	if(stat != CONSCIOUS)
+		return 0
 	if(!target_mob || SA_attackable(target_mob))
 		LostTarget()
 		return 0
@@ -277,7 +284,7 @@
 		view_from = v
 	var/list/L = list()
 
-	var/list/in_sight = view(dist,view_from)
+	var/list/in_sight = view(dist,view_from) | dview(see_in_dark,view_from)
 	for(var/mob/living/M in in_sight)
 		L += M
 	for(var/obj/vehicles/M in in_sight)

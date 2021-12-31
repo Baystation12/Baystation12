@@ -33,30 +33,28 @@
 	var/spawn_spot_y //location y //<if these aren't set it defaults to null and won't do anything
 	var/uses = 0	 //how many times flood will spawn from the location
 	var/time_to_spawn = 0 //self explanatory
-	var/timer = 0 //counting down or not
+	var/timer = 0 //set to when the mobs will spawn
+	invisibility = 101
 
 /obj/structure/floodspawner/Initialize()
 	. = ..()
-	icon_state = "spawntrigger" //changes from a pink X for ease of mapping to completely invisible in game
-	time_to_spawn+= rand(0,20) //picks a random time to spawn mobs to keep people in suspense
+	time_to_spawn+= rand(0, 2 SECONDS) //picks a random time to spawn mobs to keep people in suspense
 	uses+= pick(0,1) //decides to either delete itself or spawn with one use
 	if(uses == 0)
 		return INITIALIZE_HINT_QDEL //deletes itself if there are no uses
 
 /obj/structure/floodspawner/Crossed(atom/movable/AM as mob|obj)
+	if(uses <= 0)
+		return
 	if(istype(AM, /mob/observer/ghost/ || /mob/living/simple_animal/hostile/flood)) //check for ghost
 		return 0
 	else if(istype(AM, /mob/living/carbon/human))
-		timer = 1 //starts the countdown
+		timer = world.time + time_to_spawn //starts the countdown
 		uses--
-		if(uses < 0) //return value set so you can't walk over the spawner multiple times
-			return
-		GLOB.processing_objects.Add(src)
+		GLOB.processing_objects |= src
 
 /obj/structure/floodspawner/process()
-	if(timer && (time_to_spawn > 0))
-		time_to_spawn--
-	if(timer && time_to_spawn <= 1)
+	if(timer != 0 && world.time > timer)
 		timer_end()
 	return
 
@@ -67,6 +65,5 @@
 	for(var/i = 0 to 8)
 		new /mob/living/simple_animal/hostile/flood/infestor(dest)
 	GLOB.processing_objects.Remove(src)							//removes from global list
-	uses--
 	if(uses <= 0)												//redundant < in case of a use failure or bug
 		qdel(src) 												//deletes after it runs out of uses

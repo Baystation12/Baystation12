@@ -11,6 +11,8 @@
 	/datum/autolathe/recipe/ma3_m118,
 	/datum/autolathe/recipe/m443_fmj,
 	/datum/autolathe/recipe/mc9mm,
+	/datum/autolathe/recipe/shotgun_box,
+	/datum/autolathe/recipe/shotgun_box/slugs,
 	/datum/autolathe/recipe/a556
 	)
 
@@ -20,7 +22,8 @@
 	/datum/autolathe/recipe/m6d_m224,
 	/datum/autolathe/recipe/m6s_m224,
 	/datum/autolathe/recipe/ma5b_m118,
-	/datum/autolathe/recipe/m443_fmj,	)
+	/datum/autolathe/recipe/m443_fmj,
+	)
 	req_access = list(access_unsc_oni)
 
 /obj/machinery/autolathe/ammo_fabricator/kig_yar

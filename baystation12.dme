@@ -2104,6 +2104,7 @@
 #include "code\modules\halo\turfs\signs.dm"
 #include "code\modules\halo\turfs\streetobjs.dm"
 #include "code\modules\halo\turfs\tech_floors.dm"
+#include "code\modules\halo\turfs\water_overrides.dm"
 #include "code\modules\halo\turfs\forerunner\floor.dm"
 #include "code\modules\halo\turfs\forerunner\materials.dm"
 #include "code\modules\halo\turfs\forerunner\walls.dm"
