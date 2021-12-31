@@ -15,7 +15,7 @@
 	mob_size = MOB_TINY
 	var/corpse = /obj/effect/decal/cleanable/blood/gibs/robot
 
-	ai_holder_type = /datum/ai_holder/simple_animal/rogue_drone
+	ai_holder = /datum/ai_holder/simple_animal/rogue_drone
 	say_list_type = /datum/say_list/rogue_drone
 
 /mob/living/simple_animal/hostile/rogue_drone/Initialize()

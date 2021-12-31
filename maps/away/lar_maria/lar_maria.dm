@@ -39,7 +39,7 @@
 	var/obj/effect/landmark/corpse/lar_maria/corpse = null
 	var/weapon = null
 
-	ai_holder_type = /datum/ai_holder/simple_animal/lar_maria
+	ai_holder = /datum/ai_holder/simple_animal/lar_maria
 	say_list_type = /datum/say_list/lar_maria
 
 /mob/living/simple_animal/hostile/lar_maria/death(gibbed, deathmessage, show_dead_message)

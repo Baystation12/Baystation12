@@ -25,6 +25,7 @@
 #define SS_PRIORITY_OPEN_SPACE     20  // Open turf updates.
 #define SS_PRIORITY_AIRFLOW        15  // Object movement from ZAS airflow.
 #define SS_PRIORITY_AI             15  // Mob AI
+#define SS_PRIORITY_PRESENCE       10  // z-level player presence testing
 #define SS_PRIORITY_VOTE           10  // Vote management.
 #define SS_PRIORITY_SUPPLY         10  // Supply point accumulation.
 #define SS_PRIORITY_TRADE          10  // Adds/removes traders.

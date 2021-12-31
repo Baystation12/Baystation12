@@ -16,7 +16,7 @@
 	faction = "cute ghost dogs"
 	supernatural = 1
 
-	ai_holder_type = /datum/ai_holder/simple_animal/faithful_hound
+	ai_holder = /datum/ai_holder/simple_animal/faithful_hound
 
 /mob/living/simple_animal/faithful_hound/death()
 	new /obj/item/ectoplasm (get_turf(src))

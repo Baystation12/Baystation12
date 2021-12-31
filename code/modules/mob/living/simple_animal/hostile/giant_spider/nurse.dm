@@ -19,7 +19,7 @@
 
 	natural_weapon = /obj/item/natural_weapon/bite/spider/nurse
 
-	ai_holder_type = /datum/ai_holder/simple_animal/melee/nurse_spider
+	ai_holder = /datum/ai_holder/simple_animal/melee/nurse_spider
 
 	var/fed = 0 // Counter for how many egg laying 'charges' the spider has.
 	var/laying_eggs = FALSE	// Only allow one set of eggs to be laid at once.

@@ -15,7 +15,7 @@
 	natural_weapon = /obj/item/natural_weapon/bite/strong
 	break_stuff_probability = 35
 	faction = "shark"
-	ai_holder_type = /datum/ai_holder/simple_animal/melee/carp/shark
+	ai_holder = /datum/ai_holder/simple_animal/melee/carp/shark
 
 
 /datum/ai_holder/simple_animal/melee/carp/shark/engage_target()

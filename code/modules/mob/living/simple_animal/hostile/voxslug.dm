@@ -24,7 +24,7 @@ Small, little HP, poisonous.
 	pass_flags = PASS_FLAG_TABLE
 	natural_weapon = /obj/item/natural_weapon/bite
 
-	ai_holder_type = /datum/ai_holder/hostile/melee/voxslug
+	ai_holder = /datum/ai_holder/hostile/melee/voxslug
 
 /datum/ai_holder/hostile/melee/voxslug/list_targets()
 	. = ..()

@@ -29,7 +29,7 @@
 	can_pull_mobs = MOB_PULL_SMALLER
 	var/is_angry = FALSE
 
-	ai_holder_type = /datum/ai_holder/simple_animal/passive/opossum
+	ai_holder = /datum/ai_holder/simple_animal/passive/opossum
 	say_list_type = /datum/say_list/opossum
 
 /mob/living/simple_animal/passive/opossum/Life()

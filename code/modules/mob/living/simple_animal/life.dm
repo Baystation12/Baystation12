@@ -2,8 +2,6 @@
 	. = ..()
 	if(!.)
 		return FALSE
-	if(!living_observers_present(GetConnectedZlevels(z)))
-		return
 	//Health
 	if(stat == DEAD)
 		if(health > 0)

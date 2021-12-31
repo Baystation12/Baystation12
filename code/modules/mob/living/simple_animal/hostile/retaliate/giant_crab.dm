@@ -33,7 +33,7 @@
 	var/list/grab_desc = list("thrashes", "squeezes", "crushes")
 	var/continue_grab_prob = 35 //probability that a successful grab will be extended by one life tick
 
-	ai_holder_type = /datum/ai_holder/simple_animal/retaliate/crab
+	ai_holder = /datum/ai_holder/simple_animal/retaliate/crab
 	say_list_type = /datum/say_list/crab
 
 /obj/item/natural_weapon/pincers/giant

@@ -19,7 +19,7 @@
 
 	poison_per_bite = 2
 	poison_type = /datum/reagent/psilocybin
-	ai_holder_type = /datum/ai_holder/simple_animal/ranged
+	ai_holder = /datum/ai_holder/simple_animal/ranged
 
 // Check if we should bola, or just shoot the pain ball
 /mob/living/simple_animal/hostile/giant_spider/webslinger/should_special_attack(atom/A)

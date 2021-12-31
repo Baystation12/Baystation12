@@ -22,7 +22,7 @@
 	faction = "russian"
 	status_flags = CANPUSH
 
-	ai_holder_type = /datum/ai_holder/simple_animal/humanoid
+	ai_holder = /datum/ai_holder/simple_animal/humanoid
 
 /mob/living/simple_animal/hostile/russian/ranged
 	icon_state = "russianranged"

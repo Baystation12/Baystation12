@@ -21,7 +21,7 @@
 
 	shock_resist = 0.75
 
-	ai_holder_type = /datum/ai_holder/simple_animal/ranged/electric_spider
+	ai_holder = /datum/ai_holder/simple_animal/ranged/electric_spider
 
 /obj/item/projectile/beam/stun/electric_spider
 	name = "stun beam"

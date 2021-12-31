@@ -31,7 +31,7 @@
 		melee = ARMOR_MELEE_KNIVES
 		)
 
-	ai_holder_type = /datum/ai_holder/simple_animal/melee/meat
+	ai_holder = /datum/ai_holder/simple_animal/melee/meat
 	say_list = /datum/say_list/meat
 
 /obj/item/natural_weapon/meatbits

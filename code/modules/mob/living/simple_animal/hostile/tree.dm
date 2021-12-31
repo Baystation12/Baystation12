@@ -19,7 +19,7 @@
 
 	natural_weapon = /obj/item/natural_weapon/bite
 
-	ai_holder_type = /datum/ai_holder/simple_animal/melee/tree
+	ai_holder = /datum/ai_holder/simple_animal/melee/tree
 
 	//Space carp aren't affected by atmos.
 	min_gas = null

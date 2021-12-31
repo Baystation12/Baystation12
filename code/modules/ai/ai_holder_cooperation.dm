@@ -15,10 +15,6 @@
 	/// List of all mobs inside the faction with ai_holders that have cooperate on, to call for help without using range(). Note that this is only used for sending calls out. Receiving calls doesn't care about this list, only if the mob is in the faction.
 	var/list/faction_friends = list()
 
-/datum/ai_holder/New(new_holder)
-	..()
-	if (cooperative)
-		build_faction_friends()
 
 /datum/ai_holder/Destroy()
 	if (faction_friends.len) //This list is shared amongst the faction
@@ -57,7 +53,8 @@
 
 	ai_log("request_help() : Asking for help.", AI_LOG_INFO)
 	next_sent_help_request  = world.time + 10 SECONDS
-
+	if (!faction_friends)
+		build_faction_friends()
 	for (var/mob/living/L in faction_friends)
 		if (L == holder) // Lets not call ourselves.
 			continue

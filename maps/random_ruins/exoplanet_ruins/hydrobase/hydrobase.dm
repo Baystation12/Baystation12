@@ -105,7 +105,7 @@
 	maxHealth = 225
 	malfunctioning = 0
 
-	ai_holder_type = /datum/ai_holder/simple_animal/passive
+	ai_holder = /datum/ai_holder/simple_animal/passive
 
 	say_list_type = /datum/say_list/malf_drone/hydro
 

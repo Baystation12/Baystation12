@@ -11,7 +11,7 @@
 	min_gas = list()
 	minbodytemp = 0
 
-	ai_holder_type = /datum/ai_holder/simple_animal/retaliate/aquatic
+	ai_holder = /datum/ai_holder/simple_animal/retaliate/aquatic
 
 
 /mob/living/simple_animal/hostile/retaliate/aquatic/Life()
