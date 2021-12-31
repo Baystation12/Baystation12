@@ -450,35 +450,6 @@
 	name = "reinforced scalpel"
 	desc = "A heavy duty scalpel that seems designed to cut through flesh thicker than what a human has."
 
-/obj/structure/splish_splash //effectively a noisemaker
-	density = 0				 //tons of copypasta from floodspawner structure. it works.
-	mouse_opacity = 0
-	opacity = 0
-	icon = 'code/modules/halo/flood/flood_combat_human.dmi'
-	icon_state = "splish_splash"
-	var/time_to_splash //this is a timer to play a sound byte
-	//var/list/splash_sound = list() //sounds to play when the timer runs out
-	var/uses = 0
-	invisibility = 101
-
-/obj/structure/splish_splash/Initialize()
-	. = ..()
-	uses+= pick(0,1) //decides to either delete itself or spawn with one use
-	if(uses)
-		time_to_splash = world.time + rand(3 SECONDS,7 SECONDS)
-	else return INITIALIZE_HINT_QDEL //deletes itself if there are no uses
-
-/obj/structure/splish_splash/process()
-	if(time_to_splash == 0 SECONDS)
-		timer_end()
-
-/obj/structure/splish_splash/proc/timer_end()
-	//playsound(src.loc, splash_sound, 80, 1, 0) //sound played at src.loc
-	src.loc.visible_message(pick("<span class='warning'>Something sloshes through the water in the darkness.</span>"),("<span class='warning'>A distant form splashes in the filthy water.</span>"),\
-			("<span class='warning'>Something distant falls into the water.</span>"))
-	for(var/i = 3 to 7)
-		time_to_splash += i SECONDS
-
 /obj/item/weapon/reagent_containers/food/snacks/liquidfood/floody
 	desc = "A prepackaged grey slurry for all of the essential nutrients a soldier requires to survive. It is coated in some kind of mucus that seems to have gotten inside."
 	trash = /obj/item/trash/liquidfood/floody

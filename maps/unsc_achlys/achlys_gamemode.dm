@@ -110,6 +110,7 @@
 
 	//setup the comms jamming for the asteroid field
 	var/obj/effect/overmap/sector/achlys/A = locate() in world
+	ASSERT(istype(A))
 	var/obj/effect/landmark/map_data = A.map_z_data[1]
 	spawned_jammer = new /obj/machinery/overmap_comms/jammer (map_data.loc)
 	spawned_jammer.jam_power = 20

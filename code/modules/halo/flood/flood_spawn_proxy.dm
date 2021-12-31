@@ -51,7 +51,7 @@
 	else if(istype(AM, /mob/living/carbon/human))
 		timer = world.time + time_to_spawn //starts the countdown
 		uses--
-		GLOB.processing_objects.Add(src)
+		GLOB.processing_objects |= src
 
 /obj/structure/floodspawner/process()
 	if(timer != 0 && world.time > timer)

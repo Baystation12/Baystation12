@@ -17,7 +17,7 @@
 	#include "unsc_achlys_Z2.dmm"
 	#include "unsc_achlys_Z3.dmm"
 	#include "unsc_achlys_Z4.dmm"
-	#include "undefs.dm"
+	#include "~undefs.dm"
 
 	#include "../../code/modules/halo/lobby_music/flood.dm"
 
