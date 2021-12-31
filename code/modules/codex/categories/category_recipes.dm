@@ -1,6 +1,6 @@
 /datum/codex_category/recipes/
-	name = "Recipies"
-	desc = "Recipies for a variety of reagents."
+	name = "Recipes"
+	desc = "Recipes for a variety of reagents."
 
 /datum/codex_category/recipes/Initialize()
 	for(var/datum/recipe/recipe in GLOB.microwave_recipes)
