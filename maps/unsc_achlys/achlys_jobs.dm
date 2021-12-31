@@ -69,6 +69,8 @@ GLOBAL_LIST_EMPTY(dante_enlisted_spawns)
 	latejoin_at_spawnpoints = TRUE
 	intro_blurb = "You are a Marine. The lowest rank in the branch, your objective is to follow the orders of your Commander and Squad Leader. Cole Protocol must be enacted on the UNSC Achlys resulting in the destruction of two nav consoles, and the envelope of research secrets must be recovered.. Survival is not guaranteed."
 
+	spawn_faction = "UNSC"
+
 /datum/job/achlys/marine/operative
 	title = "ONI Operative"
 	total_positions = 6
@@ -94,6 +96,8 @@ GLOBAL_LIST_EMPTY(dante_enlisted_spawns)
 	spawnpoint_override = "Dante Enlisted"
 	latejoin_at_spawnpoints = TRUE
 	intro_blurb = "You are the Squad Leader. Your job is to delegate tasks to marines and ensure they are doing their jobs when on the UNSC Achlys. Ensure they ride a pelican over after a possible briefing from the Commander and preparing with a loadout below the briefing room towards the aft of the ship. Cole Protocol must be enacted on the UNSC Achlys resulting in the destruction of two nav consoles, and the envelope of research secrets must be recovered."
+
+	spawn_faction = "UNSC"
 
 GLOBAL_LIST_EMPTY(dante_pilot_spawns)
 
@@ -125,6 +129,8 @@ GLOBAL_LIST_EMPTY(dante_pilot_spawns)
 	latejoin_at_spawnpoints = TRUE
 	intro_blurb = "You are a pilot. Your job is to fly one of the two dropships and transport the marines between the two ships. You may become makeshift messengers in the event of a comms malfunction. Do not die."
 
+	spawn_faction = "UNSC"
+
 GLOBAL_LIST_EMPTY(dante_officer_spawns)
 
 /datum/spawnpoint/dante_officer
@@ -154,6 +160,8 @@ GLOBAL_LIST_EMPTY(dante_officer_spawns)
 	spawnpoint_override = "Dante Officer"
 	latejoin_at_spawnpoints = TRUE
 	intro_blurb = "You are the Commander of the marine detachment aboard the UNSC Dante. Your objective is to make sure your marines destroy two navigation consoles on the UNSC Achlys and return before it suffers a catastrophic slipspace malfunction within a few minutes of both consoles being destroyed. Any survivors should be collected for interrogation. Expect communication issues and unknown hostiles. Do not die."
+
+	spawn_faction = "UNSC"
 
 /datum/map/unsc_achlys
 	allowed_jobs = list(/datum/job/achlys/CO,/datum/job/achlys/pilot,/datum/job/achlys/SL,/datum/job/achlys/marine,/datum/job/achlys/marine/operative,/datum/job/achlys/prisoner,/datum/job/achlys/sangheili)

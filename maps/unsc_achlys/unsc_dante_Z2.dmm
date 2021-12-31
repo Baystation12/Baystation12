@@ -29,11 +29,12 @@
 "aC" = (/obj/structure/table/standard,/turf/simulated/floor/tiled,/area/dante)
 "aD" = (/obj/machinery/door/airlock/multi_tile/halo{dir = 4; name = "Pelican Bay Alpha"; req_access = list(142)},/turf/simulated/floor/plating,/area/dante)
 "aE" = (/obj/machinery/door/airlock/multi_tile/halo{dir = 4; name = "Pelican Bay Bravo"; req_access = list(142)},/turf/simulated/floor/plating,/area/dante)
-"aF" = (/obj/vehicles/air/pelican/unsc{desc = "An average Pelican with a nosegun on the front. This one has the infamous ferryman painted on the side."; name = "Charon"},/obj/effect/landmark/dropship_land_point/dante_north{faction = "unsc"},/turf/simulated/floor/plating,/area/dante)
+"aF" = (/obj/vehicles/air/pelican/unsc{desc = "An average Pelican with a nosegun on the front. This one has the infamous ferryman painted on the side."; name = "Charon"},/obj/effect/landmark/dropship_land_point/dante_north,/turf/simulated/floor/plating,/area/dante)
 "aG" = (/obj/structure/stairs/north,/turf/simulated/floor/tiled,/area/dante)
 "aH" = (/obj/machinery/door/airlock/multi_tile/halo{dir = 4; name = "Pelican Bay Bravo"; req_access = list(144)},/turf/simulated/floor/plating,/area/dante)
 "aI" = (/obj/machinery/door/airlock/multi_tile/halo{dir = 4; name = "Mess Hall"; req_access = list(142)},/turf/simulated/floor/tiled,/area/dante)
 "aJ" = (/obj/machinery/overmap_comms/receiver,/turf/simulated/floor/plating,/area/dante)
+"aK" = (/obj/effect/landmark/dropship_land_point/dante_south,/turf/simulated/floor/plating,/area/dante)
 "aN" = (/obj/machinery/light/spot,/turf/simulated/floor/plating,/area/dante)
 "aO" = (/obj/structure/bed/chair{dir = 1},/turf/simulated/floor/tiled,/area/dante)
 "aP" = (/obj/effect/floor_decal/sign/a,/turf/simulated/floor/tiled,/area/dante)
@@ -77,7 +78,6 @@
 "bL" = (/obj/machinery/cryopod/unsc,/turf/simulated/floor/tiled/white,/area/dante)
 "bM" = (/obj/machinery/light/small,/turf/simulated/floor/plating,/area/dante)
 "bN" = (/obj/effect/landmark/map_data{name = "Dante"},/turf/space,/area/space)
-"bO" = (/obj/effect/landmark/dropship_land_point/dante_south{faction = "unsc"},/turf/simulated/floor/plating,/area/dante)
 "bP" = (/turf/unsimulated/wall,/area/space)
 "bQ" = (/obj/effect/landmark/test/safe_turf,/turf/simulated/floor/tiled,/area/space)
 "bR" = (/obj/effect/landmark/test/space_turf,/turf/space,/area/space)
@@ -146,7 +146,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababababababaZ
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabakakakakakbdakakakakabaxaxaxaxaxaxaxbeacacbfabbgbhbgabbibjbkababaSacacacabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabakakakakakakakakakakabauacacacacacacacacacacabbmbmbmabbnbobkababauacacacabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabakakakakakakakakakakakacacacacacacacacacacacbqbobobrabbobobkababacacacacabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabakakakbOakakakakakakaEacacacacayacacayacacacabbtbobobuboboboababacacbvbvabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabakakakaKakakakakakakaEacacacacayacacayacacacabbtbobobuboboboababacacbvbvabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabakakakakakakakakakakabacacacaAabaBacabababababbmbmbmabbobobkababacacabababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabavakakakakakakakakawabaOaOaOaOabacacaoacacapabbgbhbhabbxbobkababacacacacaoacacacaoacacacacacabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabakakakbyakakakakakakababababababacacacacacapabababababbzbAbkababauacacacacacacacacacacacacacabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
