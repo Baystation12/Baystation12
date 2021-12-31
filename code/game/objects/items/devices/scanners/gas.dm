@@ -5,6 +5,7 @@
 /obj/item/device/scanner/gas
 	name = "gas analyzer"
 	desc = "A hand-held environmental scanner which reports current gas levels. Has a button to cycle modes."
+	icon = 'icons/obj/atmos_analyzer.dmi'
 	icon_state = "atmos"
 	item_state = "analyzer"
 

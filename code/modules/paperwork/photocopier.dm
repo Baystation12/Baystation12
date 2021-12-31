@@ -150,7 +150,7 @@
 	var/copy_type = copy.type
 	if (istype(copy, /obj/item/paper/admin) && !copy_admin) // Edge case for admin faxes so that they don't show the editing form
 		copy_type = /obj/item/paper
-	
+
 	var/obj/item/paper/c = new copy_type(loc, copy.text, copy.name, copy.metadata )
 
 	c.color = COLOR_WHITE
@@ -233,5 +233,6 @@
 
 /obj/item/device/toner
 	name = "toner cartridge"
+	icon = 'icons/obj/toner_cartridge.dmi'
 	icon_state = "tonercartridge"
 	var/toner_amount = 30

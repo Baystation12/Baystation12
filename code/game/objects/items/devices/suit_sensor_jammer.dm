@@ -4,6 +4,7 @@
 /obj/item/device/suit_sensor_jammer
 	name = "small device"
 	desc = "This object menaces with tiny, dull spikes of plastic."
+	icon = 'icons/obj/suit_jammer.dmi'
 	icon_state = "jammer"
 	w_class = ITEM_SIZE_SMALL
 	var/active = FALSE

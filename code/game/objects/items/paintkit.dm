@@ -1,6 +1,6 @@
 /obj/item/device/kit
 	icon_state = "modkit"
-	icon = 'icons/obj/device.dmi'
+	icon = 'icons/obj/modkit.dmi'
 	var/new_name = "exosuit"    //What is the variant called?
 	var/new_desc = "An exosuit." //How is the new exosuit described?
 	var/new_icon = "ripley"  //What base icon will the new exosuit use?
@@ -92,7 +92,7 @@
 // exosuit kits.
 /obj/item/device/kit/paint/use(amt, mob/user)
 	playsound(get_turf(user), 'sound/items/Screwdriver.ogg', 50, 1)
-	
+
 /obj/item/device/kit/paint/flames_red
 	name = "\"Firestarter\" exosuit customisation kit"
 	new_icon = "flames_red"
