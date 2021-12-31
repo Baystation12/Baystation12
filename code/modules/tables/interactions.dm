@@ -67,38 +67,6 @@
 		step(target, get_dir(target, loc))
 	..()
 
-/obj/structure/table/attackby(obj/item/W, mob/user, var/click_params)
-	if (!W) return
-
-	// Handle dismantling or placing things on the table from here on.
-	if(isrobot(user))
-		return
-
-	if(W.loc != user) // This should stop mounted modules ending up outside the module.
-		return
-
-	if(istype(W, /obj/item/melee/energy/blade) || istype(W,/obj/item/psychic_power/psiblade/master/grand/paramount))
-		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
-		spark_system.set_up(5, 0, src.loc)
-		spark_system.start()
-		playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
-		playsound(src.loc, "sparks", 50, 1)
-		user.visible_message("<span class='danger'>\The [src] was sliced apart by [user]!</span>")
-		break_to_parts()
-		return
-
-	if (istype(W, /obj/item/natural_weapon))
-		return ..()
-
-	if(can_plate && !material)
-		to_chat(user, "<span class='warning'>There's nothing to put \the [W] on! Try adding plating to \the [src] first.</span>")
-		return
-
-	// Placing stuff on tables
-	if(user.unEquip(W, src.loc))
-		auto_align(W, click_params)
-		return 1
-
 /*
 Automatic alignment of items to an invisible grid, defined by CELLS and CELLSIZE, defined in code/__defines/misc.dm.
 Since the grid will be shifted to own a cell that is perfectly centered on the turf, we end up with two 'cell halves'

@@ -85,7 +85,22 @@
 		T.update_icon()
 	. = ..()
 
-/obj/structure/table/attackby(obj/item/W, mob/user)
+/obj/structure/table/attackby(obj/item/W, mob/user, click_params)
+	if(!reinforced && !carpeted && material && isWrench(W) && user.a_intent == I_HURT) //robots dont have disarm so it's harm
+		remove_material(W, user)
+		if(!material)
+			update_connections(1)
+			update_icon()
+			for(var/obj/structure/table/T in oview(src, 1))
+				T.update_icon()
+			update_desc()
+			update_material()
+		return 1
+
+	if(!carpeted && !reinforced && !material && isWrench(W) && user.a_intent == I_HURT)
+		dismantle(W, user)
+		return 1
+
 	if (user.a_intent == I_HURT)
 		..()
 		return
@@ -118,21 +133,6 @@
 			to_chat(user, "<span class='warning'>You don't have enough carpet!</span>")
 		return
 
-	if(!reinforced && !carpeted && material && isWrench(W) && user.a_intent == I_HURT) //robots dont have disarm so it's harm
-		remove_material(W, user)
-		if(!material)
-			update_connections(1)
-			update_icon()
-			for(var/obj/structure/table/T in oview(src, 1))
-				T.update_icon()
-			update_desc()
-			update_material()
-		return 1
-
-	if(!carpeted && !reinforced && !material && isWrench(W) && user.a_intent == I_HURT)
-		dismantle(W, user)
-		return 1
-
 	if(health_damaged() && isWelder(W))
 		var/obj/item/weldingtool/F = W
 		if(F.welding)
@@ -160,6 +160,35 @@
 		if(H.cards && H.cards.len == 1)
 			usr.visible_message("\The [user] plays \the [H.cards[1].name].")
 		return
+
+	// Handle dismantling or placing things on the table from here on.
+	if(isrobot(user))
+		return
+
+	if(W.loc != user) // This should stop mounted modules ending up outside the module.
+		return
+
+	if(istype(W, /obj/item/melee/energy/blade) || istype(W,/obj/item/psychic_power/psiblade/master/grand/paramount))
+		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
+		spark_system.set_up(5, 0, src.loc)
+		spark_system.start()
+		playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
+		playsound(src.loc, "sparks", 50, 1)
+		user.visible_message("<span class='danger'>\The [src] was sliced apart by [user]!</span>")
+		break_to_parts()
+		return
+
+	if (istype(W, /obj/item/natural_weapon))
+		return ..()
+
+	if(can_plate && !material)
+		to_chat(user, "<span class='warning'>There's nothing to put \the [W] on! Try adding plating to \the [src] first.</span>")
+		return
+
+	// Placing stuff on tables
+	if(user.unEquip(W, src.loc))
+		auto_align(W, click_params)
+		return 1
 
 	return ..()
 
