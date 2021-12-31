@@ -89,3 +89,12 @@
 
 /mob/living/silicon/robot/airlock_crush(var/crush_damage)
 	return ..(round(crush_damage / CYBORG_AIRLOCKCRUSH_RESISTANCE)) //TODO implement robot melee armour and remove this.
+
+/obj/structure/disposalpipe/airlock_crush(crush_damage)
+	return
+
+/obj/machinery/atmospherics/pipe/airlock_crush(crush_damage)
+	return
+
+/obj/structure/cable/airlock_crush(crush_damage)
+	return
