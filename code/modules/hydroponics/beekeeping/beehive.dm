@@ -173,7 +173,7 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
-	
+
 	machine_name = "honey extractor"
 	machine_desc = "Extracts liquid honey and solid blocks of wax from filled beehive frames. Requires an attached reagent container to operate."
 
@@ -186,7 +186,7 @@
 /obj/machinery/honey_extractor/cannot_transition_to(state_path, mob/user)
 	if(processing)
 		return SPAN_NOTICE("You must wait for \the [src] to finish first!")
-	return ..()	
+	return ..()
 
 /obj/machinery/honey_extractor/attackby(var/obj/item/I, var/mob/user)
 	if(processing)
@@ -223,7 +223,7 @@
 /obj/item/bee_smoker
 	name = "bee smoker"
 	desc = "A device used to calm down bees before harvesting honey."
-	icon = 'icons/obj/device.dmi'
+	icon = 'icons/obj/batterer.dmi'
 	icon_state = "batterer"
 	w_class = ITEM_SIZE_SMALL
 

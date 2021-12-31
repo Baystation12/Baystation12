@@ -1,7 +1,7 @@
 /obj/item/device/oxycandle
 	name = "oxygen candle"
 	desc = "A steel tube with the words 'OXYGEN - PULL CORD TO IGNITE' stamped on the side.\nA small label reads <span class='warning'>'WARNING: NOT FOR LIGHTING USE. WILL IGNITE FLAMMABLE GASSES'</span>"
-	icon = 'icons/obj/device.dmi'
+	icon = 'icons/obj/oxygen_candle.dmi'
 	icon_state = "oxycandle"
 	item_state = "oxycandle"
 	w_class = ITEM_SIZE_SMALL // Should fit into internal's box or maybe pocket

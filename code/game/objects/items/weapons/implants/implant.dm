@@ -4,7 +4,7 @@
 
 /obj/item/implant
 	name = "implant"
-	icon = 'icons/obj/device.dmi'
+	icon = 'icons/obj/implant.dmi'
 	icon_state = "implant"
 	w_class = ITEM_SIZE_TINY
 	var/implanted = null

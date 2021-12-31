@@ -336,6 +336,7 @@
 /obj/item/device/destTagger
 	name = "destination tagger"
 	desc = "Used to set the destination of properly wrapped packages."
+	icon = 'icons/obj/destination_tagger.dmi'
 	icon_state = "dest_tagger"
 	var/currTag = 0
 	w_class = ITEM_SIZE_SMALL
@@ -418,7 +419,7 @@
 			if(AM.loc.y != src.loc.y-1) return
 		if(WEST)
 			if(AM.loc.x != src.loc.x-1) return
-			
+
 	var/mob/living/L = AM
 	if (istype(L) && L.ckey)
 		log_and_message_admins("has flushed themselves down \the [src].", L)

@@ -6,6 +6,7 @@
 /obj/item/device/multitool
 	name = "multitool"
 	desc = "This small, handheld device is made of durable, insulated plastic, and tipped with electrodes, perfect for interfacing with numerous machines."
+	icon = 'icons/obj/multitool.dmi'
 	icon_state = "multitool"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	force = 5.0

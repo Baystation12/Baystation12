@@ -7,6 +7,7 @@
 /obj/item/device/geiger
 	name = "geiger counter"
 	desc = "A handheld device used for detecting and measuring radiation in an area."
+	icon = 'icons/obj/geiger_counter.dmi'
 	icon_state = "geiger_off"
 	item_state = "multitool"
 	w_class = ITEM_SIZE_SMALL
@@ -85,5 +86,3 @@
 			icon_state = "geiger_on_5"
 			geiger_volume = 60
 			sound_token.SetVolume(geiger_volume)
-
-
