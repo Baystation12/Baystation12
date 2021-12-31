@@ -48,7 +48,7 @@
 	icon_state = "KV-32_unloaded"
 	item_state = "KV-32"
 	load_method = MAGAZINE
-	caliber = "shotgun"
+	caliber = "shotgunlowpower"
 	slot_flags = SLOT_BACK
 	magazine_type = /obj/item/ammo_magazine/kv32
 	one_hand_penalty = -1
