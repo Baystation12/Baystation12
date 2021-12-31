@@ -208,7 +208,7 @@
 		var/found_disloc
 		for(var/obj/item/organ/external/e in H.organs)
 			if(e)
-				if(!found_disloc && e.dislocated == 2)
+				if(!found_disloc && e.dislocated >= 1)
 					dat += "<span class='scan_warning'>Dislocation detected. Advanced scanner required for location.</span>"
 					found_disloc = TRUE
 				if(!found_bleed && (e.status & ORGAN_ARTERY_CUT))
