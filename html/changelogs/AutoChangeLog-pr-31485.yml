@@ -1,0 +1,5 @@
+author: SierraKomodo
+delete-after: true
+changes:
+  - bugfix: Disposal pipes, air pipes, and wires no longer take damage when airlocks
+      close on them.
