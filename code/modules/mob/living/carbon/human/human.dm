@@ -1688,7 +1688,7 @@
 				status += "MISSING"
 			if(org.status & ORGAN_MUTATED)
 				status += "misshapen"
-			if(org.dislocated == 2)
+			if(org.dislocated >= 1)
 				status += "dislocated"
 			if(org.status & ORGAN_BROKEN)
 				status += "hurts when touched"
