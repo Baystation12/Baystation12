@@ -7,6 +7,8 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 #define COMBAT_FORM_INFESTOR_SPAWN_DELAY 30SECONDS
 
+#define FLOOD_INFECTED_PLAYER_ROLE_NAME "Flood-Infected"
+
 #define TO_PLAYER_INFECTED_SOUND 'code/modules/halo/sounds/flood_infect_gravemind.ogg'
 
 #define PLAYER_TRANSFORM_SFX 'code/modules/halo/sounds/flood_join_chorus.ogg'
@@ -134,6 +136,9 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		var/obj/item_find = locate(item) in h.contents
 		if(!isnull(item_find))
 			mob_type_spawn = item_check[item]
+
+	if(h.mind)
+		h.mind.assigned_role = FLOOD_INFECTED_PLAYER_ROLE_NAME
 
 	var/mob/living/simple_animal/hostile/flood/combat_form/new_combat_form = new mob_type_spawn
 	new_combat_form.maxHealth *= PLAYER_FLOOD_HEALTH_MOD //Buff their health a bit.

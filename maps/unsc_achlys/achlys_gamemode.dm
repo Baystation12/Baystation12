@@ -1,8 +1,8 @@
 
 /datum/game_mode/achlys
 	name = "ONI Investigation: Achlys"
-	round_description = ""
-	extended_round_description = ""
+	round_description = "Destroy nav consoles and retrieve secret documents aboard the UNSC Achlys. Don't die."
+	extended_round_description = "The UNSC Dante responds to a strange distress call aboard the UNSC Achlys. Their mission is to destroy the navigation computers and retrieve secret ONI research."
 	config_tag = "achlys"
 	votable = 0
 	probability = 0
@@ -225,9 +225,8 @@ All 3 of these cannot spawn on open space
 		if(!(item.loc == retrieval_loc))
 			. = 0
 /datum/game_mode/achlys/proc/kill_unevaced_players()
-	for(var/client/client in GLOB.clients)
-		var/mob/living/carbon/human/h = client.mob
-		if(istype(h) && h.z >= FLOOD_EVENT_Z_START && h.z <= FLOOD_EVENT_Z_END)
+	for(var/mob/living/carbon/human/h in GLOB.player_list)
+		if(h.z >= FLOOD_EVENT_Z_START && h.z <= FLOOD_EVENT_Z_END)
 			qdel(h)
 
 /datum/game_mode/achlys/check_finished()
