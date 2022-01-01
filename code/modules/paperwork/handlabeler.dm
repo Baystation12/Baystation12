@@ -50,7 +50,7 @@
 	var/datum/extension/labels/L = get_or_create_extension(src, /datum/extension/labels)
 	L.AttachLabel(user, label_text)
 
-/obj/item/hand_labeler/attack_self(mob/user as mob)
+/obj/item/hand_labeler/use_on_self(mob/user as mob)
 	mode = !mode
 	icon_state = "labeler[mode]"
 	if(mode)

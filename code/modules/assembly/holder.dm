@@ -129,7 +129,7 @@
 	..()
 
 
-/obj/item/device/assembly_holder/attack_self(mob/user as mob)
+/obj/item/device/assembly_holder/use_on_self(mob/user as mob)
 	add_fingerprint(user)
 	if(secured)
 		if(!a_left || !a_right)
@@ -137,14 +137,14 @@
 			return
 		if(istype(a_left,a_right.type))//If they are the same type it causes issues due to window code
 			switch(alert("Which side would you like to use?",,"Left","Right"))
-				if("Left")	a_left.attack_self(user)
-				if("Right")	a_right.attack_self(user)
+				if("Left")	a_left.use_on_self(user)
+				if("Right")	a_right.use_on_self(user)
 			return
 		else
 			if(!istype(a_left,/obj/item/device/assembly/igniter))
-				a_left.attack_self(user)
+				a_left.use_on_self(user)
 			if(!istype(a_right,/obj/item/device/assembly/igniter))
-				a_right.attack_self(user)
+				a_right.use_on_self(user)
 	else
 		var/turf/T = get_turf(src)
 		if(!T)	return 0

@@ -47,7 +47,7 @@
 	startswith = list(/obj/item/card/union = 14)
 
 // BubbleWrap - A box can be folded up to make card
-/obj/item/storage/box/attack_self(mob/user as mob)
+/obj/item/storage/box/use_on_self(mob/user as mob)
 	if(..()) return
 
 	//try to fold it.

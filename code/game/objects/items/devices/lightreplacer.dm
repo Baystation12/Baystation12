@@ -121,7 +121,7 @@
 			to_chat(user, "You need a working light.")
 			return
 
-/obj/item/device/lightreplacer/attack_self(mob/user)
+/obj/item/device/lightreplacer/use_on_self(mob/user)
 	/* // This would probably be a bit OP. If you want it though, uncomment the code.
 	if(isrobot(user))
 		var/mob/living/silicon/robot/R = user
@@ -136,7 +136,7 @@
 	icon_state = "lightreplacer[emagged]"
 
 
-/obj/item/device/lightreplacer/attack_self(mob/user)
+/obj/item/device/lightreplacer/use_on_self(mob/user)
 	var/selection = input(user, "Select a color, tone, or matching option:", "Light Replace Color", LIGHT_REPLACE_OPTIONS[1]) in LIGHT_REPLACE_OPTIONS
 	if (!selection)
 		return

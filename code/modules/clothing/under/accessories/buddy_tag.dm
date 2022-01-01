@@ -13,7 +13,7 @@
 	icon_state = "buddytag[on]"
 
 
-/obj/item/clothing/accessory/buddy_tag/attack_self(mob/user)
+/obj/item/clothing/accessory/buddy_tag/use_on_self(mob/user)
 	if (!CanPhysicallyInteract(user))
 		return
 	var/dat = "<A href='?src=\ref[src];toggle=1;'>[on ? "Disable" : "Enable"]</a><br>"

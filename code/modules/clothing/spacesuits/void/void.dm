@@ -312,7 +312,7 @@ else if(##equipment_var) {\
 		return
 	return ..()
 
-/obj/item/clothing/suit/space/void/attack_self() //sole purpose of existence is to toggle the helmet
+/obj/item/clothing/suit/space/void/use_on_self() //sole purpose of existence is to toggle the helmet
 	toggle_helmet()
 
 /obj/item/clothing/suit/space/void/get_mob_overlay(mob/user_mob, slot)

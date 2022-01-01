@@ -45,7 +45,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 	name = spellbook.name
 	desc = spellbook.desc
 
-/obj/item/spellbook/attack_self(mob/user as mob)
+/obj/item/spellbook/use_on_self(mob/user as mob)
 	if(!user.mind)
 		return
 	if (user.mind.special_role != ANTAG_WIZARD)

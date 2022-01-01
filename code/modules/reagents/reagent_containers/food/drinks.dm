@@ -20,7 +20,7 @@
 /obj/item/reagent_containers/food/drinks/on_color_transfer_reagent_change()
 	return
 
-/obj/item/reagent_containers/food/drinks/attack_self(mob/user as mob)
+/obj/item/reagent_containers/food/drinks/use_on_self(mob/user as mob)
 	if(!is_open_container())
 		open(user)
 

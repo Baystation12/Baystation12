@@ -60,7 +60,7 @@
 		return 0
 
 	if(!target)
-		if(device.attack_self(holder.wearer))
+		if(device.use_on_self(holder.wearer))
 			holder.cell.use(use_power_cost * CELLRATE)
 		return 1
 
@@ -221,7 +221,7 @@
 		return 0
 
 	if(!target)
-		gun.attack_self(holder.wearer)
+		gun.use_on_self(holder.wearer)
 		return
 
 	gun.Fire(target,holder.wearer)

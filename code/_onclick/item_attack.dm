@@ -19,9 +19,15 @@ item/apply_hit_effect() can be overriden to do whatever you want. However "stand
 avoid code duplication. This includes items that may sometimes act as a standard weapon in addition to having other effects (e.g. stunbatons on harm intent).
 */
 
-// Called when the item is in the active hand, and clicked; alternately, there is an 'activate held object' verb or you can hit pagedown.
-/obj/item/proc/attack_self(mob/user)
+
+/**
+ * Called when an item is clicked on with itself as the active item, or using the item in the active hand (`z` key in hotkey mode).
+ *
+ * - `user` is the mob that clicked on the item.
+ */
+/obj/item/proc/use_on_self(mob/user)
 	return
+
 
 //I would prefer to rename this to attack(), but that would involve touching hundreds of files.
 /obj/item/proc/resolve_attackby(atom/A, mob/user, var/click_params)

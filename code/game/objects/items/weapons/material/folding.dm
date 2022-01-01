@@ -34,7 +34,7 @@
 	update_icon()
 	. = ..()
 
-/obj/item/material/knife/folding/attack_self(mob/user)
+/obj/item/material/knife/folding/use_on_self(mob/user)
 	open = !open
 	update_force()
 	update_icon()

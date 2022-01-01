@@ -159,7 +159,7 @@
 		eye = null
 	..()
 
-/obj/item/clothing/mask/ai/attack_self(var/mob/user)
+/obj/item/clothing/mask/ai/use_on_self(var/mob/user)
 	if(user.incapacitated())
 		return
 	active = !active

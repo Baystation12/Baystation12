@@ -160,7 +160,7 @@ GLOBAL_LIST_INIT(rpd_pipe_selection_skilled, list(
 		else
 			to_chat(user, SPAN_WARNING("The readout is flashing some atmospheric jargon, you can't understand."))
 
-/obj/item/rpd/attack_self(mob/user)
+/obj/item/rpd/use_on_self(mob/user)
 	interact(user)
 	add_fingerprint(user)
 

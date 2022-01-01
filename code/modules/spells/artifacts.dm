@@ -12,7 +12,7 @@
 	force = 10
 	hitsound = 'sound/magic/forcewall.ogg'
 
-/obj/item/scrying/attack_self(mob/user as mob)
+/obj/item/scrying/use_on_self(mob/user as mob)
 	if((user.mind && !GLOB.wizards.is_antagonist(user.mind)))
 		to_chat(user, "<span class='warning'>You stare into the orb and see nothing but your own reflection.</span>")
 		return
@@ -30,7 +30,7 @@
 /obj/item/dice/d20/cursed
 	desc = "A dice with twenty sides said to have an ill effect on those that are unlucky..."
 
-/obj/item/dice/d20/cursed/attack_self(mob/living/user)
+/obj/item/dice/d20/cursed/use_on_self(mob/living/user)
 	..()
 	if(icon_state == "[name][sides]")
 		user.adjustBruteLoss(-30)

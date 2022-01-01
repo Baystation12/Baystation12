@@ -43,7 +43,7 @@
 	var/on = 0
 
 
-/obj/item/melee/telebaton/attack_self(mob/user as mob)
+/obj/item/melee/telebaton/use_on_self(mob/user as mob)
 	on = !on
 	if(on)
 		user.visible_message("<span class='warning'>With a flick of their wrist, [user] extends their telescopic baton.</span>",\

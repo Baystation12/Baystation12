@@ -15,7 +15,7 @@ Buildable meters
 	item_state = "buildpipe"
 	w_class = ITEM_SIZE_NORMAL
 	level = 2
-	obj_flags = OBJ_FLAG_ROTATABLE 
+	obj_flags = OBJ_FLAG_ROTATABLE
 	dir = SOUTH
 	var/constructed_path = /obj/machinery/atmospherics/pipe/simple/hidden
 	var/pipe_class = PIPE_CLASS_BINARY
@@ -67,7 +67,7 @@ Buildable meters
 		if(PIPE_ROTATE_ONEDIR)
 			set_dir(2)
 
-/obj/item/pipe/attack_self(mob/user as mob)
+/obj/item/pipe/use_on_self(mob/user as mob)
 	return rotate(user)
 
 /obj/item/pipe/proc/build_unary(var/obj/machinery/atmospherics/unary/P, var/pipefailtext)
@@ -76,7 +76,7 @@ Buildable meters
 		to_chat(usr, pipefailtext)
 		return 1
 	P.build_network()
-	if(P.node)		
+	if(P.node)
 		P.node.atmos_init()
 		P.node.build_network()
 	return 0
@@ -99,8 +99,8 @@ Buildable meters
 	P.atmos_init()
 	if (QDELETED(P))
 		to_chat(usr, pipefailtext)
-		return 1	
-	P.build_network()	
+		return 1
+	P.build_network()
 	if(P.node1)
 		P.node1.atmos_init()
 		P.node1.build_network()

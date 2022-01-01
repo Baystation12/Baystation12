@@ -32,7 +32,7 @@
 		return chambered.BB
 	return null
 
-/obj/item/gun/projectile/shotgun/pump/attack_self(mob/living/user as mob)
+/obj/item/gun/projectile/shotgun/pump/use_on_self(mob/living/user as mob)
 	if(world.time >= recentpump + 10)
 		pump(user)
 		recentpump = world.time

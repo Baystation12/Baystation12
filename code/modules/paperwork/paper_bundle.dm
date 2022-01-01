@@ -54,7 +54,7 @@
 		P.attackby(W, user)
 
 	update_icon()
-	attack_self(user) //Update the browsed page.
+	use_on_self(user) //Update the browsed page.
 	add_fingerprint(user)
 	return
 
@@ -65,7 +65,7 @@
 	var/sheet_name = istype(sheet, /obj/item/photo) ? "photo" : "sheet of paper"
 	bundle_name = (bundle_name == name) ? "the [bundle_name]" : name
 	sheet_name = (sheet_name == sheet.name) ? "the [sheet_name]" : sheet.name
-	
+
 	to_chat(user, "<span class='notice'>You add [sheet_name] to [bundle_name].</span>")
 	pages.Insert(index, sheet)
 	if(index <= page)
@@ -133,7 +133,7 @@
 		send_rsc(user, P.img, "tmp_photo.png")
 		show_browser(user, JOINTEXT(dat), "window=[name]")
 
-/obj/item/paper_bundle/attack_self(mob/user as mob)
+/obj/item/paper_bundle/use_on_self(mob/user as mob)
 	src.show_content(user)
 	add_fingerprint(user)
 	update_icon()
@@ -177,7 +177,7 @@
 
 			update_icon()
 
-		src.attack_self(usr)
+		src.use_on_self(usr)
 		updateUsrDialog()
 	else
 		to_chat(usr, "<span class='notice'>You need to hold it in hands!</span>")

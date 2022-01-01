@@ -54,7 +54,7 @@
 		imp = I
 	update_icon()
 
-/obj/item/implantpad/attack_self(mob/user)
+/obj/item/implantpad/use_on_self(mob/user)
 	if (imp)
 		imp.interact(user)
 	else

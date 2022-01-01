@@ -18,7 +18,7 @@
 		user.visible_message("\The [user] scoops \the [A] into \the [src], securing the lid.", "You scoop \the [A] into \the [src], securing the lid.")
 		A.forceMove(src)
 
-/obj/item/material/urn/attack_self(mob/user)
+/obj/item/material/urn/use_on_self(mob/user)
 	if(!contents.len)
 		to_chat(user, "<span class='warning'>\The [src] is empty!</span>")
 		return

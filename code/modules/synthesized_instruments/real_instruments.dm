@@ -281,7 +281,7 @@
 	. = ..()
 
 
-/obj/item/device/synthesized_instrument/attack_self(mob/user as mob)
+/obj/item/device/synthesized_instrument/use_on_self(mob/user as mob)
 	src.interact(user)
 
 

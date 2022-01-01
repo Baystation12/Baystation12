@@ -96,15 +96,15 @@
 			turn_on(user)
 
 /obj/item/modular_computer/attack_ai(var/mob/user)
-	return attack_self(user)
+	return use_on_self(user)
 
 /obj/item/modular_computer/attack_hand(var/mob/user)
 	if(anchored)
-		return attack_self(user)
+		return use_on_self(user)
 	return ..()
 
 // On-click handling. Turns on the computer if it's off and opens the GUI.
-/obj/item/modular_computer/attack_self(var/mob/user)
+/obj/item/modular_computer/use_on_self(var/mob/user)
 	if(MUTATION_CLUMSY in user.mutations)
 		to_chat(user, SPAN_WARNING("You can't quite work out how to use [src]."))
 		return
@@ -123,7 +123,7 @@
 		if(card_slot.insert_id(I, user))
 			update_verbs()
 		return
-		
+
 	if(istype(W, /obj/item/pen) && stores_pen)
 		if(istype(stored_pen))
 			to_chat(user, "<span class='notice'>There is already a pen in [src].</span>")
@@ -221,7 +221,7 @@
 /obj/item/modular_computer/MouseDrop(var/atom/over_object)
 	var/mob/M = usr
 	if(!istype(over_object, /obj/screen) && CanMouseDrop(M))
-		return attack_self(M)
+		return use_on_self(M)
 
 /obj/item/modular_computer/afterattack(atom/target, mob/user, proximity)
 	. = ..()

@@ -118,7 +118,7 @@
 		return 0
 
 	if(!target)
-		device.attack_self(holder.wearer)
+		device.use_on_self(holder.wearer)
 		return 1
 
 	if(!target.Adjacent(holder.wearer))

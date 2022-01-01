@@ -82,7 +82,7 @@
 	D.wrapped = R
 	D.SetName("small parcel - 'EFTPOS access code'")
 
-/obj/item/device/eftpos/attack_self(mob/user as mob)
+/obj/item/device/eftpos/use_on_self(mob/user as mob)
 	if(get_dist(src,user) <= 1)
 		var/dat = "<b>[eftpos_name]</b><br>"
 		dat += "<i>This terminal is</i> [machine_id]. <i>Report this code when contacting IT Support</i><br>"
@@ -217,7 +217,7 @@
 					access_code = 0
 					to_chat(usr, "[icon2html(src, usr)]<span class='info'>Access code reset to 0.</span>")
 
-	src.attack_self(usr)
+	src.use_on_self(usr)
 
 /obj/item/device/eftpos/proc/scan_card(var/obj/item/card/I, var/obj/item/ID_container)
 	if (istype(I, /obj/item/card/id))

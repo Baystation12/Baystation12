@@ -38,7 +38,7 @@
 	detail_overlay.color = detail_color
 	overlays += detail_overlay
 
-/obj/item/device/integrated_electronics/detailer/attack_self(mob/user)
+/obj/item/device/integrated_electronics/detailer/use_on_self(mob/user)
 	var/color_choice = input(user, "Select color.", "Assembly Detailer") as null|anything in color_list
 	if(!color_list[color_choice])
 		return

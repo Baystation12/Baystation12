@@ -41,7 +41,7 @@
 	.  = ..()
 	update_icon()
 
-/obj/item/clothing/glasses/eyepatch/hud/attack_self()
+/obj/item/clothing/glasses/eyepatch/hud/use_on_self()
 	..()
 	update_icon()
 

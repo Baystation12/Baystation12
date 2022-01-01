@@ -285,7 +285,7 @@
 		return FALSE
 	return choice
 
-/obj/item/device/paint_sprayer/attack_self(mob/user)
+/obj/item/device/paint_sprayer/use_on_self(mob/user)
 	choose_decal()
 
 /obj/item/device/paint_sprayer/proc/change_color(new_color, mob/user)

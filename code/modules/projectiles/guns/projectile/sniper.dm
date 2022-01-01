@@ -46,7 +46,7 @@
 		loaded -= chambered
 		chambered = null
 
-/obj/item/gun/projectile/heavysniper/attack_self(mob/user as mob)
+/obj/item/gun/projectile/heavysniper/use_on_self(mob/user as mob)
 	bolt_open = !bolt_open
 	if(bolt_open)
 		if(chambered)
@@ -154,4 +154,3 @@
 	firemodes = list(
 		list(mode_name="semi auto",       burst=1, fire_delay=2,    move_delay=null, one_hand_penalty=8, burst_accuracy=null, dispersion=null)
 		)
-

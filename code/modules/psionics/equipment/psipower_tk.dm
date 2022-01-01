@@ -31,7 +31,7 @@
 
 	if(_focus.anchored || (check_paramount && owner.psi.get_rank(PSI_PSYCHOKINESIS) < PSI_RANK_PARAMOUNT))
 		focus = _focus
-		. = attack_self(owner)
+		. = use_on_self(owner)
 		if(!.)
 			to_chat(owner, SPAN_WARNING("\The [_focus] is too hefty for you to get a mind-grip on."))
 		qdel(src)
@@ -45,7 +45,7 @@
 	overlays += I
 	return TRUE
 
-/obj/item/psychic_power/telekinesis/attack_self(var/mob/user)
+/obj/item/psychic_power/telekinesis/use_on_self(var/mob/user)
 	user.visible_message(SPAN_NOTICE("\The [user] makes a strange gesture."))
 	sparkle()
 	return focus.do_simple_ranged_interaction(user)
@@ -73,7 +73,7 @@
 		return FALSE
 
 	if(target == focus)
-		attack_self(user)
+		use_on_self(user)
 	else
 		user.visible_message(SPAN_DANGER("\The [user] gestures sharply!"))
 		sparkle()

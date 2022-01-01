@@ -163,7 +163,7 @@
 	if(!istype(machine))
 		return ..()
 
-/obj/item/stock_parts/power/battery/attack_self(mob/user)
+/obj/item/stock_parts/power/battery/use_on_self(mob/user)
 	if(cell)
 		user.put_in_hands(cell)
 		extract_cell(user)

@@ -18,7 +18,7 @@
 	. = ..()
 	to_chat(user, "<span class='notice'>It is currently set to [mode] docile mode.</span>")
 
-/obj/item/device/dociler/attack_self(var/mob/user)
+/obj/item/device/dociler/use_on_self(var/mob/user)
 	if(mode == "somewhat")
 		mode = "completely"
 	else

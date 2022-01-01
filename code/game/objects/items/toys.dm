@@ -268,7 +268,7 @@
 	w_class = ITEM_SIZE_SMALL
 	attack_verb = list("attacked", "struck", "hit")
 
-	attack_self(mob/user as mob)
+	use_on_self(mob/user as mob)
 		src.active = !( src.active )
 		if (src.active)
 			to_chat(user, "<span class='notice'>You extend the plastic blade with a quick flick of your wrist.</span>")
@@ -348,7 +348,7 @@
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
 
-/obj/item/toy/bosunwhistle/attack_self(mob/user as mob)
+/obj/item/toy/bosunwhistle/use_on_self(mob/user as mob)
 	if(cooldown < world.time - 35)
 		to_chat(user, "<span class='notice'>You blow on [src], creating an ear-splitting noise!</span>")
 		playsound(user, 'sound/misc/boatswain.ogg', 20, 1)
@@ -364,7 +364,7 @@
 	w_class = ITEM_SIZE_TINY
 
 //all credit to skasi for toy mech fun ideas
-/obj/item/toy/prize/attack_self(mob/user as mob)
+/obj/item/toy/prize/use_on_self(mob/user as mob)
 	if(cooldown < world.time - 8)
 		to_chat(user, "<span class='notice'>You play with [src].</span>")
 		playsound(user, 'sound/mecha/mechstep.ogg', 20, 1)
@@ -757,7 +757,7 @@
 	INIT_DISALLOW_TYPE(/obj/item/toy/plushie)
 
 
-/obj/item/toy/plushie/attack_self(mob/living/user)
+/obj/item/toy/plushie/use_on_self(mob/living/user)
 	var/action_word = "action"
 	if (user.a_intent == I_HELP)
 		action_word = "hug"
@@ -846,7 +846,7 @@
 	set_light(0.6, 0.5, 2, 2, "#ff0000")
 	return ..()
 
-/obj/item/marshalling_wand/attack_self(mob/living/user as mob)
+/obj/item/marshalling_wand/use_on_self(mob/living/user as mob)
 	playsound(src.loc, 'sound/effects/rustle1.ogg', 100, 1)
 	if (user.a_intent == I_HELP)
 		user.visible_message("<span class='notice'>[user] beckons with \the [src], signalling forward motion.</span>",
@@ -904,7 +904,7 @@
 	else
 		icon_state = "[initial(icon_state)]"
 
-/obj/item/toy/desk/attack_self(mob/user)
+/obj/item/toy/desk/use_on_self(mob/user)
 	on = !on
 	if(on && activation_sound)
 		playsound(src.loc, activation_sound, 75, 1)
@@ -961,7 +961,7 @@
 		"Outlook not so good",
 		"Very doubtful")
 
-/obj/item/toy/eightball/attack_self(mob/user)
+/obj/item/toy/eightball/use_on_self(mob/user)
 	user.visible_message("<span class='notice'>\The [user] shakes \the [src] for a moment, and it says, \"[pick(possible_answers) ].\"</span>")
 
 /obj/item/toy/eightball/afterattack(obj/O, mob/user, var/proximity)

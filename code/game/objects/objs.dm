@@ -90,7 +90,7 @@
 /obj/item/proc/updateSelfDialog()
 	var/mob/M = src.loc
 	if(istype(M) && M.client && M.machine == src)
-		src.attack_self(M)
+		src.use_on_self(M)
 
 /obj/proc/hide(var/hide)
 	set_invisibility(hide ? INVISIBILITY_MAXIMUM : initial(invisibility))

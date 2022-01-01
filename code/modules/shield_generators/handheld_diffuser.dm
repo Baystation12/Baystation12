@@ -37,7 +37,7 @@
 			if(istype(S) && !S.diffused_for && !S.disabled_for && cell.checked_use(10 KILOWATTS * CELLRATE))
 				S.diffuse(20)
 
-/obj/item/shield_diffuser/attack_self()
+/obj/item/shield_diffuser/use_on_self()
 	enabled = !enabled
 	update_icon()
 	if(enabled)

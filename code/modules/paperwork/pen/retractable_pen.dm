@@ -37,7 +37,7 @@
 		toggle()
 	..()
 
-/obj/item/pen/retractable/attack_self(mob/user)
+/obj/item/pen/retractable/use_on_self(mob/user)
 	toggle()
 
 /obj/item/pen/retractable/toggle()

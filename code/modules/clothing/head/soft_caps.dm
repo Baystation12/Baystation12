@@ -29,7 +29,7 @@
 	update_icon()
 	..()
 
-/obj/item/clothing/head/soft/attack_self(mob/user)
+/obj/item/clothing/head/soft/use_on_self(mob/user)
 	src.flipped = !src.flipped
 	if(src.flipped)
 		to_chat(user, "You flip the hat backwards.")

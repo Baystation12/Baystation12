@@ -151,7 +151,7 @@
 		update_icon()
 	else ..()
 
-/obj/item/ammo_magazine/attack_self(mob/user)
+/obj/item/ammo_magazine/use_on_self(mob/user)
 	if(!stored_ammo.len)
 		to_chat(user, "<span class='notice'>[src] is already empty!</span>")
 		return
@@ -216,4 +216,3 @@
 
 	magazine_icondata_keys["[M.type]"] = icon_keys
 	magazine_icondata_states["[M.type]"] = ammo_states
-

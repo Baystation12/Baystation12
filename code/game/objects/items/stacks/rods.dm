@@ -73,7 +73,7 @@
 
 	..()
 
-/obj/item/stack/material/rods/attack_self(mob/user as mob)
+/obj/item/stack/material/rods/use_on_self(mob/user as mob)
 	src.add_fingerprint(user)
 
 	if(!istype(user.loc,/turf)) return 0

@@ -25,7 +25,7 @@
 	disrupt()
 	..()
 
-/obj/item/device/chameleon/attack_self()
+/obj/item/device/chameleon/use_on_self()
 	toggle()
 
 /obj/item/device/chameleon/afterattack(atom/target, mob/user , proximity)

@@ -112,7 +112,7 @@
 	name = W.name + " (taped)"
 	overlays = W.overlays
 
-/obj/item/ducttape/attack_self(mob/user)
+/obj/item/ducttape/use_on_self(mob/user)
 	if(!stuck)
 		return
 
@@ -141,7 +141,7 @@
 	playsound(src, 'sound/effects/tape.ogg',25)
 
 	layer = ABOVE_WINDOW_LAYER
-	
+
 	if(params)
 		var/list/mouse_control = params2list(params)
 		if(mouse_control["icon-x"])

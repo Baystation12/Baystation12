@@ -71,7 +71,7 @@
 			materials[M.material.name] = min(metal_max, materials[M.material.name] + amt * SHEET_MATERIAL_AMOUNT)
 			to_chat(user, "<span class='warning'>You insert [M.material.display_name] into \the [src].</span>")
 			if(user)
-				attack_self(user) // We're really bad at refreshing the UI, so this is the best we've got.
+				use_on_self(user) // We're really bad at refreshing the UI, so this is the best we've got.
 	if(istype(O, /obj/item/disk/integrated_circuit/upgrade/advanced))
 		if(upgraded)
 			to_chat(user, "<span class='warning'>[src] already has this upgrade. </span>")
@@ -79,7 +79,7 @@
 		to_chat(user, "<span class='notice'>You install [O] into [src]. </span>")
 		upgraded = TRUE
 		if(user)
-			attack_self(user)
+			use_on_self(user)
 		return TRUE
 
 	if(istype(O, /obj/item/disk/integrated_circuit/upgrade/clone))
@@ -89,7 +89,7 @@
 		to_chat(user, "<span class='notice'>You install [O] into [src]. Circuit cloning will now be instant. </span>")
 		fast_clone = TRUE
 		if(user)
-			attack_self(user)
+			use_on_self(user)
 		return TRUE
 
 	if(istype(O, /obj/item/device/electronic_assembly))
@@ -127,7 +127,7 @@
 
 	return ..()
 
-/obj/item/device/integrated_circuit_printer/attack_self(mob/user)
+/obj/item/device/integrated_circuit_printer/use_on_self(mob/user)
 	interact(user)
 
 /obj/item/device/integrated_circuit_printer/interact(mob/user)

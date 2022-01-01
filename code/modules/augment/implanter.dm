@@ -53,7 +53,7 @@
 	..()
 
 
-/obj/item/device/augment_implanter/attack_self(mob/living/carbon/human/user)
+/obj/item/device/augment_implanter/use_on_self(mob/living/carbon/human/user)
 	if (working)
 		return
 	if (!istype(user))

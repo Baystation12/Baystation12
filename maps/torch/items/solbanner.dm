@@ -31,7 +31,7 @@
 	w_class = ITEM_SIZE_HUGE
 	req_access = list(access_pathfinder)
 
-/obj/item/solbanner/attack_self(mob/living/carbon/human/user)
+/obj/item/solbanner/use_on_self(mob/living/carbon/human/user)
 	..()
 	if(!istype(user))
 		return

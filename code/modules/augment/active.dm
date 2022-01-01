@@ -25,7 +25,7 @@
 	return TRUE
 
 
-/obj/item/organ/internal/augment/active/attack_self()
+/obj/item/organ/internal/augment/active/use_on_self()
 	. = ..()
 	if (.)
 		activate()

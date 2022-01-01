@@ -25,7 +25,7 @@
 		O.HandleObjectHeating(src, user, 500)
 	..()
 
-/obj/item/device/oxycandle/attack_self(mob/user)
+/obj/item/device/oxycandle/use_on_self(mob/user)
 	if(!on)
 		to_chat(user, "<span class='notice'>You pull the cord and [src] ignites.</span>")
 		on = 1

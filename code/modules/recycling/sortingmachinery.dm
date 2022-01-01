@@ -146,7 +146,7 @@
 /obj/item/smallDelivery/attack_robot(mob/user as mob)
 	unwrap(user)
 
-/obj/item/smallDelivery/attack_self(mob/user as mob)
+/obj/item/smallDelivery/use_on_self(mob/user as mob)
 	unwrap(user)
 
 /obj/item/smallDelivery/attackby(obj/item/W as obj, mob/user as mob)
@@ -360,7 +360,7 @@
 	show_browser(user, dat, "window=destTagScreen;size=450x375")
 	onclose(user, "destTagScreen")
 
-/obj/item/device/destTagger/attack_self(mob/user as mob)
+/obj/item/device/destTagger/use_on_self(mob/user as mob)
 	openwindow(user)
 
 /obj/item/device/destTagger/OnTopic(user, href_list, state)

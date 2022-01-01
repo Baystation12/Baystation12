@@ -36,7 +36,7 @@
 		return
 	return ..()
 
-/obj/item/storage/laundry_basket/attack_self(mob/user as mob)
+/obj/item/storage/laundry_basket/use_on_self(mob/user as mob)
 	var/turf/T = get_turf(user)
 	to_chat(user, "<span class='notice'>You dump the [src]'s contents onto \the [T].</span>")
 	return ..()
@@ -85,4 +85,3 @@
 	..()
 	user.drop_from_inventory(linked)
 	return
-

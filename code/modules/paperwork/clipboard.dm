@@ -66,7 +66,7 @@
 
 	return
 
-/obj/item/material/clipboard/attack_self(mob/user as mob)
+/obj/item/material/clipboard/use_on_self(mob/user as mob)
 	var/dat = "<title>Clipboard</title>"
 	if(haspen)
 		dat += "<A href='?src=\ref[src];pen=1'>Remove Pen</A><BR><HR>"
@@ -171,7 +171,7 @@
 				to_chat(usr, "<span class='notice'>You move [P.name] to the top.</span>")
 
 		//Update everything
-		attack_self(usr)
+		use_on_self(usr)
 		update_icon()
 	return
 

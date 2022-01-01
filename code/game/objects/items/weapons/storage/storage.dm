@@ -436,7 +436,7 @@
 			O.emp_act(severity)
 	..()
 
-/obj/item/storage/attack_self(mob/user as mob)
+/obj/item/storage/use_on_self(mob/user as mob)
 	//Clicking on itself will empty it, if it has the verb to do that.
 	if(user.get_active_hand() == src)
 		if(list_find(src.verbs, /obj/item/storage/verb/quick_empty))

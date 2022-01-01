@@ -113,7 +113,7 @@
 
 	return bling
 
-/obj/item/gun/launcher/money/attack_self(mob/user as mob)
+/obj/item/gun/launcher/money/use_on_self(mob/user as mob)
 	var/disp_amount = min(input(user, "How many [GLOB.using_map.local_currency_name_singular] do you want to dispense at a time? (0 to [src.receptacle_value])", "Money Cannon Settings", 20) as num, receptacle_value)
 
 	if (disp_amount < 1)

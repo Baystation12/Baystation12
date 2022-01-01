@@ -84,7 +84,7 @@
 			to_chat(user, "<span class='notice'>[t] units injected. [reagent_volumes[reagent_ids[mode]]] units remaining.</span>")
 	return
 
-/obj/item/reagent_containers/borghypo/attack_self(mob/user as mob)
+/obj/item/reagent_containers/borghypo/use_on_self(mob/user as mob)
 	var/selection = input(user, "What reagent would you like to synthesize?", name, reagent_names[mode]) as null | anything in reagent_names
 	if (!selection || selection == reagent_names[mode])
 		return

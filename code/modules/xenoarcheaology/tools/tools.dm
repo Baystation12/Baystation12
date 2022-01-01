@@ -8,7 +8,7 @@
 	matter = list(MATERIAL_ALUMINIUM = 250, MATERIAL_STEEL = 250, MATERIAL_GLASS = 50)
 	w_class = ITEM_SIZE_SMALL
 
-/obj/item/device/gps/attack_self(var/mob/user as mob)
+/obj/item/device/gps/use_on_self(var/mob/user as mob)
 	to_chat(user, "<span class='notice'>[icon2html(src, user)] \The [src] flashes <i>[get_coordinates()]</i>.</span>")
 
 /obj/item/device/gps/examine(mob/user)
@@ -79,7 +79,7 @@
 	var/last_scan_time = 0
 	var/scan_delay = 25
 
-/obj/item/device/ano_scanner/attack_self(var/mob/living/user)
+/obj/item/device/ano_scanner/use_on_self(var/mob/living/user)
 	interact(user)
 
 /obj/item/device/ano_scanner/interact(var/mob/living/user)
@@ -187,7 +187,7 @@
 
 	updateSelfDialog()
 
-/obj/item/device/depth_scanner/attack_self(var/mob/living/user)
+/obj/item/device/depth_scanner/use_on_self(var/mob/living/user)
 	interact(user)
 
 /obj/item/device/depth_scanner/interact(var/mob/user as mob)
@@ -272,7 +272,7 @@
 				cur_dist = check_dist
 				. = weakref(R)
 
-/obj/item/pinpointer/radio/attack_self(var/mob/user as mob)
+/obj/item/pinpointer/radio/use_on_self(var/mob/user as mob)
 	interact(user)
 
 /obj/item/pinpointer/radio/interact(var/mob/user)

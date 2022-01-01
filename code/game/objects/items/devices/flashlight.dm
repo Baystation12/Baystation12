@@ -36,7 +36,7 @@
 	else
 		icon_state = "[initial(icon_state)]"
 
-/obj/item/device/flashlight/attack_self(mob/user)
+/obj/item/device/flashlight/use_on_self(mob/user)
 	if (flashlight_flags & FLASHLIGHT_ALWAYS_ON)
 		to_chat(user, "You cannot toggle the [name].")
 		return 0
@@ -236,7 +236,7 @@
 	set src in oview(1)
 
 	if(!usr.stat)
-		attack_self(usr)
+		use_on_self(usr)
 
 // FLARES
 
@@ -281,7 +281,7 @@
 		update_icon()
 		STOP_PROCESSING(SSobj, src)
 
-/obj/item/device/flashlight/flare/attack_self(var/mob/user)
+/obj/item/device/flashlight/flare/use_on_self(var/mob/user)
 	if(fuel <= 0)
 		to_chat(user,"<span class='notice'>\The [src] is spent.</span>")
 		return 0

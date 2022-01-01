@@ -16,7 +16,7 @@
 /obj/item/psychic_power/tinker/iswirecutter()
 	return emulating == "Wirecutters"
 
-/obj/item/psychic_power/tinker/attack_self()
+/obj/item/psychic_power/tinker/use_on_self()
 
 	if(!owner || loc != owner)
 		return

@@ -158,7 +158,7 @@
 			location.hotspot_expose(700, 50, 1)
 	return
 
-/obj/item/weldingtool/attack_self(mob/user as mob)
+/obj/item/weldingtool/use_on_self(mob/user as mob)
 	setWelding(!welding, usr)
 	return
 

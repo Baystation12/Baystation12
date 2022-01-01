@@ -446,7 +446,7 @@
 	sign_state = "goldenplaque"
 	var/claimant
 
-/obj/item/sign/medipolma/attack_self(mob/user)
+/obj/item/sign/medipolma/use_on_self(mob/user)
 	if(!claimant)
 		to_chat(user, "<span class='notice'>You fill in your name in the blanks with a permanent marker.</span>")
 		claimant = user.real_name

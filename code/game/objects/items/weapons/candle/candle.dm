@@ -69,7 +69,7 @@
 		var/turf/T = loc
 		T.hotspot_expose(700, 5)
 
-/obj/item/flame/candle/attack_self(mob/user as mob)
+/obj/item/flame/candle/use_on_self(mob/user as mob)
 	if(lit)
 		lit = 0
 		update_icon()

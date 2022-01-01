@@ -38,7 +38,7 @@
 		qdel(src)
 	return
 
-/obj/item/reagent_containers/food/snacks/attack_self(mob/user as mob)
+/obj/item/reagent_containers/food/snacks/use_on_self(mob/user as mob)
 	return
 
 /obj/item/reagent_containers/food/snacks/attack(mob/M as mob, mob/user as mob, def_zone)
@@ -532,7 +532,7 @@
 	heated_reagents = list(/datum/reagent/drink/doctor_delight = 5, /datum/reagent/hyperzine = 0.75, /datum/reagent/synaptizine = 0.25)
 	var/has_been_heated = 0 // Unlike the warm var, this checks if the one-time self-heating operation has been used.
 
-/obj/item/reagent_containers/food/snacks/donkpocket/sinpocket/attack_self(mob/user)
+/obj/item/reagent_containers/food/snacks/donkpocket/sinpocket/use_on_self(mob/user)
 	if(has_been_heated)
 		to_chat(user, "<span class='notice'>The heating chemicals have already been spent.</span>")
 		return
@@ -1386,7 +1386,7 @@
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 10)
 
-/obj/item/reagent_containers/food/snacks/monkeycube/attack_self(var/mob/user)
+/obj/item/reagent_containers/food/snacks/monkeycube/use_on_self(var/mob/user)
 	if(wrapped)
 		Unwrap(user)
 
@@ -2753,7 +2753,7 @@
 		return
 	..()
 
-/obj/item/pizzabox/attack_self( mob/user as mob )
+/obj/item/pizzabox/use_on_self( mob/user as mob )
 
 	if( boxes.len > 0 )
 		return
@@ -3140,7 +3140,7 @@
 	sealed = FALSE
 	update_icon()
 
-/obj/item/reagent_containers/food/snacks/canned/attack_self(var/mob/user)
+/obj/item/reagent_containers/food/snacks/canned/use_on_self(var/mob/user)
 	if(sealed)
 		playsound(loc,'sound/effects/canopen.ogg', rand(10,50), 1)
 		to_chat(user, "<span class='notice'>You unseal \the [src] with a crack of metal.</span>")

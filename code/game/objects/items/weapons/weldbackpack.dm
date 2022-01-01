@@ -231,7 +231,7 @@
 
 	. = ..()
 
-/obj/item/scrubpack/attack_self(mob/user)
+/obj/item/scrubpack/use_on_self(mob/user)
 	toggle(user)
 
 /obj/item/scrubpack/ui_action_click()

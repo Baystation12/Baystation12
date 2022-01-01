@@ -162,7 +162,7 @@
 	update_icon()
 	owner.update_icon()
 
-/obj/item/mech_equipment/atmos_shields/attack_self(mob/user)
+/obj/item/mech_equipment/atmos_shields/use_on_self(mob/user)
 	. = ..()
 	if(.)
 		if(active)

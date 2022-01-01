@@ -4,7 +4,7 @@
 	info = "<center><img src='talisman.png'></center><br/><br/>"
 	language = LANGUAGE_CULT
 
-/obj/item/paper/talisman/attack_self(var/mob/living/user)
+/obj/item/paper/talisman/use_on_self(var/mob/living/user)
 	if(iscultist(user))
 		to_chat(user, "Attack your target to use this talisman.")
 	else
@@ -13,7 +13,7 @@
 /obj/item/paper/talisman/attack(var/mob/living/M, var/mob/living/user)
 	return
 
-/obj/item/paper/talisman/stun/attack_self(var/mob/living/user)
+/obj/item/paper/talisman/stun/use_on_self(var/mob/living/user)
 	if(iscultist(user))
 		to_chat(user, "This is a stun talisman.")
 	..()
@@ -41,7 +41,7 @@
 	user.unEquip(src)
 	qdel(src)
 
-/obj/item/paper/talisman/emp/attack_self(var/mob/living/user)
+/obj/item/paper/talisman/emp/use_on_self(var/mob/living/user)
 	if(iscultist(user))
 		to_chat(user, "This is an emp talisman.")
 	..()

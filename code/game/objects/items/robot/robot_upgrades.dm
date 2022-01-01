@@ -63,7 +63,7 @@
 	icon_state = "cyborg_upgrade1"
 	var/heldname = "default name"
 
-/obj/item/borg/upgrade/rename/attack_self(mob/user as mob)
+/obj/item/borg/upgrade/rename/use_on_self(mob/user as mob)
 	heldname = sanitizeSafe(input(user, "Enter new robot name", "Robot Reclassification", heldname), MAX_NAME_LEN)
 
 /obj/item/borg/upgrade/rename/action(var/mob/living/silicon/robot/R)

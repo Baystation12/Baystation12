@@ -56,7 +56,7 @@
 	..()
 
 
-/obj/item/storage/secure/attack_self(mob/user)
+/obj/item/storage/secure/use_on_self(mob/user)
 	user.set_machine(src)
 	var/dat = text("<TT><B>[]</B><BR>\n\nLock Status: []",src, (locked ? "LOCKED" : "UNLOCKED"))
 	var/message = "Code"
@@ -101,7 +101,7 @@
 					src.code = "ERROR"
 		for (var/mob/M in viewers(1, loc))
 			if ((M.client && M.machine == src))
-				attack_self(M)
+				use_on_self(M)
 			return
 
 
@@ -174,7 +174,7 @@
 
 
 /obj/item/storage/secure/safe/attack_hand(mob/user)
-	return attack_self(user)
+	return use_on_self(user)
 
 
 /obj/item/storage/secure/AltClick(/mob/user)

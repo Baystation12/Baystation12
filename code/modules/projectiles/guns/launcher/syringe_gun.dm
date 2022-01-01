@@ -26,7 +26,7 @@
 		name = "syringe dart"
 		update_icon()
 
-/obj/item/syringe_cartridge/attack_self(mob/user)
+/obj/item/syringe_cartridge/use_on_self(mob/user)
 	if(syringe)
 		to_chat(user, "<span class='notice'>You remove [syringe] from [src].</span>")
 		user.put_in_hands(syringe)
@@ -93,7 +93,7 @@
 	darts -= next
 	next = null
 
-/obj/item/gun/launcher/syringe/attack_self(mob/living/user as mob)
+/obj/item/gun/launcher/syringe/use_on_self(mob/living/user as mob)
 	if(next)
 		user.visible_message("[user] unlatches and carefully relaxes the bolt on [src].", "<span class='warning'>You unlatch and carefully relax the bolt on [src], unloading the spring.</span>")
 		next = null

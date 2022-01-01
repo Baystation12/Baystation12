@@ -29,7 +29,7 @@
 	colour = pick("red","purple","jade","black")
 	name = "[colour] lipstick"
 
-/obj/item/lipstick/attack_self(mob/user as mob)
+/obj/item/lipstick/use_on_self(mob/user as mob)
 	to_chat(user, "<span class='notice'>You twist \the [src] [open ? "closed" : "open"].</span>")
 	open = !open
 	if(open)
@@ -86,7 +86,7 @@
 	. = ..()
 	color = get_random_colour(lower = 150)
 
-/obj/item/haircomb/attack_self(var/mob/living/carbon/human/user)
+/obj/item/haircomb/use_on_self(var/mob/living/carbon/human/user)
 	if(!user.incapacitated())
 		user.visible_message("<span class='notice'>\The [user] uses \the [src] to comb their hair with incredible style and sophistication. What a [user.gender == FEMALE ? "lady" : "guy"].</span>")
 
@@ -98,7 +98,7 @@
 	icon_state = "brush"
 	item_state = "brush"
 
-/obj/item/haircomb/brush/attack_self(mob/living/carbon/human/user)
+/obj/item/haircomb/brush/use_on_self(mob/living/carbon/human/user)
 	if(!user.incapacitated())
 		var/datum/sprite_accessory/hair/hair_style = GLOB.hair_styles_list[user.h_style]
 		if(hair_style.flags & VERY_SHORT)

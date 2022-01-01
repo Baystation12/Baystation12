@@ -60,18 +60,18 @@
 					icon_state = "electropack[on]"
 		if(!( master ))
 			if(istype(loc, /mob))
-				attack_self(loc)
+				use_on_self(loc)
 			else
 				for(var/mob/M in viewers(1, src))
 					if(M.client)
-						attack_self(M)
+						use_on_self(M)
 		else
 			if(istype(master.loc, /mob))
-				attack_self(master.loc)
+				use_on_self(master.loc)
 			else
 				for(var/mob/M in viewers(1, master))
 					if(M.client)
-						attack_self(M)
+						use_on_self(M)
 	else
 		close_browser(usr, "window=radio")
 		return
@@ -102,7 +102,7 @@
 		master.receive_signal()
 	return
 
-/obj/item/device/radio/electropack/attack_self(mob/user as mob, flag1)
+/obj/item/device/radio/electropack/use_on_self(mob/user as mob, flag1)
 
 	if(!istype(user, /mob/living/carbon/human))
 		return

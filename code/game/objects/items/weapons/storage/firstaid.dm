@@ -219,7 +219,7 @@
 	return
 
 
-/obj/item/storage/pill_bottle/attack_self(mob/living/user)
+/obj/item/storage/pill_bottle/use_on_self(mob/living/user)
 	if(user.get_inactive_hand())
 		to_chat(user, "<span class='notice'>You need an empty hand to take something out.</span>")
 		return

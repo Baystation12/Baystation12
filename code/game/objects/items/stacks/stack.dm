@@ -54,7 +54,7 @@
 		else
 			to_chat(user, "There is enough charge for [get_amount()].")
 
-/obj/item/stack/attack_self(mob/user as mob)
+/obj/item/stack/use_on_self(mob/user as mob)
 	list_recipes(user)
 
 /obj/item/stack/proc/list_recipes(mob/user as mob, recipes_sublist)

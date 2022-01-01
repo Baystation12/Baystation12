@@ -238,7 +238,7 @@
 	throw_range = 10
 	w_class = ITEM_SIZE_TINY
 
-/obj/item/summoning_stone/attack_self(var/mob/user)
+/obj/item/summoning_stone/use_on_self(var/mob/user)
 	if(user.z in GLOB.using_map.admin_levels)
 		to_chat(user, "<span class='warning'>You cannot use \the [src] here.</span>")
 		return

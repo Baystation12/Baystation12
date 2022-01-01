@@ -14,7 +14,7 @@
 	throw_speed = 3
 
 
-/obj/item/device/binoculars/attack_self(mob/user)
+/obj/item/device/binoculars/use_on_self(mob/user)
 	if(zoom)
 		unzoom(user)
 	else

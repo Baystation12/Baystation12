@@ -220,7 +220,7 @@
 	hidden_uplink = new(src, owner, amount)
 	icon_state = "radio"
 
-/obj/item/device/radio/uplink/attack_self(mob/user as mob)
+/obj/item/device/radio/uplink/use_on_self(mob/user as mob)
 	if(hidden_uplink)
 		hidden_uplink.trigger(user)
 
@@ -228,7 +228,7 @@
 	..()
 	hidden_uplink = new(src, owner)
 
-/obj/item/device/multitool/uplink/attack_self(mob/user as mob)
+/obj/item/device/multitool/uplink/use_on_self(mob/user as mob)
 	if(hidden_uplink)
 		hidden_uplink.trigger(user)
 

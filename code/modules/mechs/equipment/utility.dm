@@ -185,7 +185,7 @@
 				to_chat(user, "You push [target] out of the way.")
 				owner.visible_message("[owner] pushes [target] out of the way.")
 
-/obj/item/mech_equipment/clamp/attack_self(var/mob/user)
+/obj/item/mech_equipment/clamp/use_on_self(var/mob/user)
 	. = ..()
 	if(.)
 		drop_carrying(user, TRUE)
@@ -285,7 +285,7 @@
 	. = ..()
 	update_icon()
 
-/obj/item/mech_equipment/light/attack_self(var/mob/user)
+/obj/item/mech_equipment/light/use_on_self(var/mob/user)
 	. = ..()
 	if(.)
 		toggle()
@@ -341,7 +341,7 @@
 	return string
 
 
-/obj/item/mech_equipment/catapult/attack_self(var/mob/user)
+/obj/item/mech_equipment/catapult/use_on_self(var/mob/user)
 	. = ..()
 	if(.)
 		mode = mode == CATAPULT_SINGLE ? CATAPULT_AREA : CATAPULT_SINGLE
@@ -458,7 +458,7 @@
 	if (ispath(drill_head))
 		drill_head = new drill_head(src)
 
-/obj/item/mech_equipment/drill/attack_self(var/mob/user)
+/obj/item/mech_equipment/drill/use_on_self(var/mob/user)
 	. = ..()
 	if(.)
 		if(drill_head)
@@ -686,7 +686,7 @@
 
 	return FALSE
 
-/obj/item/mech_equipment/ionjets/attack_self(mob/user)
+/obj/item/mech_equipment/ionjets/use_on_self(mob/user)
 	. = ..()
 	if (!.)
 		return
@@ -832,7 +832,7 @@
 			camera.update_coverage(TRUE)
 			to_chat(user, SPAN_NOTICE("You configure the camera for \the [network] network."))
 
-/obj/item/mech_equipment/camera/attack_self(mob/user)
+/obj/item/mech_equipment/camera/use_on_self(mob/user)
 	. = ..()
 	if(.)
 		if(active)

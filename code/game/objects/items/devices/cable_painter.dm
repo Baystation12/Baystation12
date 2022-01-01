@@ -17,7 +17,7 @@ obj/item/device/cable_painter/examine(mob/user, distance)
 	if(distance <= 1)
 		to_chat(user, "The color is currently set to [lowertext(color_selection)].")
 
-obj/item/device/cable_painter/attack_self(mob/user)
+obj/item/device/cable_painter/use_on_self(mob/user)
 	var/new_color_selection = input("What color would you like to use?", "Choose a Color", color_selection) as null|anything in GLOB.possible_cable_colours
 	if(new_color_selection && !user.incapacitated() && (src in user))
 		color_selection = new_color_selection

@@ -17,7 +17,7 @@
 		SPECIES_SKRELL = /obj/item/contract/apprentice/skrell,
 		SPECIES_IPC = /spell/camera_connection)
 
-/obj/item/magic_rock/attack_self(mob/user)
+/obj/item/magic_rock/use_on_self(mob/user)
 	if(!istype(user,/mob/living/carbon/human))
 		to_chat(user, "\The [src] can do nothing for such a simple being.")
 		return
@@ -167,7 +167,7 @@
 	if(istype(owner,/mob))
 		contract_master = owner
 
-/obj/item/contract/apprentice/skrell/attack_self(mob/user as mob)
+/obj/item/contract/apprentice/skrell/use_on_self(mob/user as mob)
 	if(!linked)
 		to_chat(user, "<span class='warning'>This contract requires a link to a spellbook.</span>")
 		return

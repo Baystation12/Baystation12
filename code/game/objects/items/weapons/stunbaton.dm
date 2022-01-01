@@ -98,7 +98,7 @@
 	else
 		..()
 
-/obj/item/melee/baton/attack_self(mob/user)
+/obj/item/melee/baton/use_on_self(mob/user)
 	set_status(!status, user)
 	add_fingerprint(user)
 
@@ -202,7 +202,7 @@
 // Refactored to fix #14470 - old proc defination increased the hitcost beyond
 // usability without proper checks.
 // Also hard-coded to be unuseable outside their righteous synthetic owners.
-/obj/item/melee/baton/robot/attack_self(mob/user)
+/obj/item/melee/baton/robot/use_on_self(mob/user)
 	var/mob/living/silicon/robot/R = isrobot(user) ? user : null // null if the user is NOT a robot
 	update_cell(R) // takes both robots and null
 	if (R)

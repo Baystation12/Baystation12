@@ -55,7 +55,7 @@
 	QDEL_NULL(brainmob)
 	return ..()
 
-/obj/item/organ/internal/posibrain/attack_self(mob/user)
+/obj/item/organ/internal/posibrain/use_on_self(mob/user)
 	if (!user.IsAdvancedToolUser())
 		return
 	if (user.skill_check(SKILL_DEVICES, SKILL_ADEPT))
@@ -112,7 +112,7 @@
 			if (sneaky)
 				brainmob.real_name = sneaky
 				brainmob.SetName(brainmob.real_name)
-				UpdateNames() 
+				UpdateNames()
 		else
 			to_chat(brainmob, SPAN_NOTICE("You're safe! Your brain didn't manage to replace you. This time."))
 	else
@@ -330,4 +330,3 @@
 
 
 	brainmob.open_subsystem(/datum/nano_module/law_manager, usr)
-	

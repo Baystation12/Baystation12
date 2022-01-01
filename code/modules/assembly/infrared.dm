@@ -89,7 +89,7 @@
 		return
 
 	if(usr)
-		attack_self(usr)
+		use_on_self(usr)
 
 /obj/item/device/assembly/infra/proc/on_beam_entered(var/atom/enterer)
 	if(enterer == src)

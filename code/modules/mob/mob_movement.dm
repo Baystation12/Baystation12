@@ -49,7 +49,7 @@
 			swap_hand()
 			return
 		if(SOUTHEAST)
-			attack_self()
+			use_on_self()
 			return
 		if(SOUTHWEST)
 			if(iscarbon(usr))
@@ -91,7 +91,7 @@
 
 
 
-/client/verb/attack_self()
+/client/verb/use_on_self()
 	set hidden = 1
 	if(mob)
 		mob.mode()

@@ -87,7 +87,7 @@ AI MODULES
 	desc = "A 'safeguard' AI module: 'Safeguard <name>. Anyone threatening or attempting to harm <name> is no longer to be considered a crew member, and is a threat which must be neutralized.'."
 	origin_tech = list(TECH_DATA = 3, TECH_MATERIAL = 4)
 
-/obj/item/aiModule/safeguard/attack_self(mob/user)
+/obj/item/aiModule/safeguard/use_on_self(mob/user)
 	..()
 	var/targName = sanitize(input("Please enter the name of the person to safeguard.", "Safeguard who?", user.name))
 	targetName = targName
@@ -113,7 +113,7 @@ AI MODULES
 	desc = "A 'one crew member' AI module: 'Only <name> is a crew member.'."
 	origin_tech = list(TECH_DATA = 3, TECH_MATERIAL = 6) //made with diamonds!
 
-/obj/item/aiModule/oneHuman/attack_self(var/mob/user as mob)
+/obj/item/aiModule/oneHuman/use_on_self(var/mob/user as mob)
 	..()
 	var/targName = sanitize(input("Please enter the name of the person who is the only crew member.", "Who?", user.real_name))
 	targetName = targName
@@ -198,7 +198,7 @@ AI MODULES
 	desc = "A 'freeform' AI module: '<freeform>'."
 	origin_tech = list(TECH_DATA = 4, TECH_MATERIAL = 4)
 
-/obj/item/aiModule/freeform/attack_self(mob/user)
+/obj/item/aiModule/freeform/use_on_self(mob/user)
 	..()
 	var/new_lawpos = input("Please enter the priority for your new law. Can only write to law sectors 15 and above.", "Law Priority (15+)", lawpos) as num
 	if(new_lawpos < MIN_SUPPLIED_LAW_NUMBER)	return
@@ -330,7 +330,7 @@ obj/item/aiModule/solgov_aggressive
 	desc = "A 'freeform' Core AI module: '<freeform>'."
 	origin_tech = list(TECH_DATA = 3, TECH_MATERIAL = 6)
 
-/obj/item/aiModule/freeformcore/attack_self(var/mob/user as mob)
+/obj/item/aiModule/freeformcore/use_on_self(var/mob/user as mob)
 	..()
 	var/newlaw = ""
 	var/targName = sanitize(input("Please enter a new core law for the AI.", "Freeform Law Entry", newlaw))
@@ -354,7 +354,7 @@ obj/item/aiModule/solgov_aggressive
 	desc = "A hacked AI law module: '<freeform>'."
 	origin_tech = list(TECH_DATA = 3, TECH_MATERIAL = 6, TECH_ESOTERIC = 7)
 
-/obj/item/aiModule/syndicate/attack_self(var/mob/user as mob)
+/obj/item/aiModule/syndicate/use_on_self(var/mob/user as mob)
 	..()
 	var/newlaw = ""
 	var/targName = sanitize(input("Please enter a new law for the AI.", "Freeform Law Entry", newlaw))

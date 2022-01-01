@@ -44,7 +44,7 @@
 		to_chat(user,"It reads: [stored_name], [badge_string].")
 
 
-/obj/item/clothing/accessory/badge/attack_self(mob/user)
+/obj/item/clothing/accessory/badge/use_on_self(mob/user)
 	if (!stored_name)
 		to_chat(user, "You inspect your [src.name]. Everything seems to be in order and you give it a quick cleaning with your hand.")
 		set_name(user.real_name)
@@ -112,7 +112,7 @@
 		to_chat(user,"The badge number is [badge_number].")
 
 
-/obj/item/clothing/accessory/badge/holo/attack_self(mob/user)
+/obj/item/clothing/accessory/badge/holo/use_on_self(mob/user)
 	if (!stored_name)
 		to_chat(user, "Waving around a holobadge before swiping an ID would be pretty pointless.")
 		return

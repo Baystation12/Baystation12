@@ -29,7 +29,7 @@
 			unbuckle_mob()
 			anchored = FALSE
 
-/obj/item/beartrap/attack_self(mob/user as mob)
+/obj/item/beartrap/use_on_self(mob/user as mob)
 	..()
 	if(!deployed && can_use(user))
 		user.visible_message(

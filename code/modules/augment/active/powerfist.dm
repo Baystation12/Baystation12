@@ -91,7 +91,7 @@
 	update_force()
 
 
-/obj/item/powerfist/attack_self(mob/living/carbon/human/user)
+/obj/item/powerfist/use_on_self(mob/living/carbon/human/user)
 	set_pressure()
 
 

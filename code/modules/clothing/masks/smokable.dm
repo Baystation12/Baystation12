@@ -343,7 +343,7 @@
 			else
 				to_chat(user, "<span class='notice'>[src] is full.</span>")
 
-/obj/item/clothing/mask/smokable/cigarette/attack_self(var/mob/user)
+/obj/item/clothing/mask/smokable/cigarette/use_on_self(var/mob/user)
 	if(lit == 1)
 		user.visible_message("<span class='notice'>[user] puts out the lit [src].</span>")
 		extinguish(no_message = 1)
@@ -494,7 +494,7 @@
 			to_chat(M, "<span class='notice'>Your [name] goes out, and you empty the ash.</span>")
 	remove_extension(src, /datum/extension/scent)
 
-/obj/item/clothing/mask/smokable/pipe/attack_self(var/mob/user)
+/obj/item/clothing/mask/smokable/pipe/use_on_self(var/mob/user)
 	if(lit == 1)
 		user.visible_message("<span class='notice'>[user] puts out [src].</span>", "<span class='notice'>You put out [src].</span>")
 		lit = 0

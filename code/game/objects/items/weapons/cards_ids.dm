@@ -290,7 +290,7 @@ var/const/NO_EMAG_ACT = -50
 	dat += "</tr></table>"
 	return jointext(dat,null)
 
-/obj/item/card/id/attack_self(mob/user as mob)
+/obj/item/card/id/use_on_self(mob/user as mob)
 	user.visible_message("\The [user] shows you: [icon2html(src, viewers(get_turf(src)))] [src.name]. The assignment on the card: [src.assignment]",\
 		"You flash your ID card: [icon2html(src, viewers(get_turf(src)))] [src.name]. The assignment on the card: [src.assignment]")
 
@@ -462,7 +462,7 @@ var/const/NO_EMAG_ACT = -50
 		else
 			to_chat(user, SPAN_NOTICE("This is the real deal, stamped by [GLOB.using_map.boss_name]. It gives the holder the full authority to pursue their goals. You believe it implicitly."))
 
-/obj/item/card/id/foundation/attack_self(var/mob/living/user)
+/obj/item/card/id/foundation/use_on_self(var/mob/living/user)
 	. = ..()
 	if(istype(user))
 		for(var/mob/M in viewers(world.view, get_turf(user))-user)

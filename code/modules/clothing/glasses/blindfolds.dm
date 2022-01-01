@@ -17,7 +17,7 @@
 	toggle_off_message = "You flip \the [src] up."
 	toggle_on_message = "You slide \the [src] down, blinding yourself."
 
-/obj/item/clothing/glasses/blindfold/attack_self()
+/obj/item/clothing/glasses/blindfold/use_on_self()
 	. =..()
 	if(!.)
 		return

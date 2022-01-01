@@ -36,7 +36,7 @@
 	if(!possible_transfer_amounts)
 		src.verbs -= /obj/item/reagent_containers/verb/set_amount_per_transfer_from_this
 
-/obj/item/reagent_containers/attack_self(mob/user as mob)
+/obj/item/reagent_containers/use_on_self(mob/user as mob)
 	return
 
 /obj/item/reagent_containers/afterattack(obj/target, mob/user, flag)

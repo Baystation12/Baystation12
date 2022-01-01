@@ -48,7 +48,7 @@
 	icon_state = "stamp-cargo"
 
 // Syndicate stamp to forge documents.
-/obj/item/stamp/chameleon/attack_self(mob/user as mob)
+/obj/item/stamp/chameleon/use_on_self(mob/user as mob)
 
 	var/list/stamp_types = typesof(/obj/item/stamp) - src.type // Get all stamp types except our own
 	var/list/stamps = list()

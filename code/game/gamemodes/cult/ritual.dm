@@ -8,7 +8,7 @@
 	unique = 1
 	carved = 2 // Don't carve it
 
-/obj/item/book/tome/attack_self(mob/living/user)
+/obj/item/book/tome/use_on_self(mob/living/user)
 	if(!iscultist(user))
 		to_chat(user, SPAN_NOTICE("\The [src] seems full of illegible scribbles. Is this a joke?"))
 	else

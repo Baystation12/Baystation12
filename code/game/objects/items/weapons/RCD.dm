@@ -91,7 +91,7 @@
 
 	..()
 
-/obj/item/rcd/attack_self(mob/user)
+/obj/item/rcd/use_on_self(mob/user)
 	//Change the mode
 	work_id++
 	work_mode = next_in_list(work_mode, work_modes)

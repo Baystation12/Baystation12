@@ -16,7 +16,7 @@
 	..()
 	files = new /datum/research/techonly(src) //Setup the research data holder.
 
-/obj/item/portable_destructive_analyzer/attack_self(user as mob)
+/obj/item/portable_destructive_analyzer/use_on_self(user as mob)
 	var/response = alert(user, 	"Analyzing the item inside will *DESTROY* the item for good.\n\
 							Syncing to the research server will send the data that is stored inside to research.\n\
 							Ejecting will place the loaded item onto the floor.",
@@ -105,7 +105,7 @@
 	var/activated = 0
 	var/strobe_effect = null
 
-/obj/item/party_light/attack_self()
+/obj/item/party_light/use_on_self()
 	if (activated)
 		deactivate_strobe()
 	else
@@ -209,7 +209,7 @@
 	name = "Printing Pen"
 	var/mode = 1
 
-/obj/item/pen/robopen/attack_self(mob/user as mob)
+/obj/item/pen/robopen/use_on_self(mob/user as mob)
 
 	var/choice = input("Would you like to change colour or mode?") as null|anything in list("Colour","Mode")
 	if(!choice) return
@@ -267,7 +267,7 @@
 	if(istype(target,/obj/structure/table))
 		deploy_paper(get_turf(target))
 
-/obj/item/form_printer/attack_self(mob/user as mob)
+/obj/item/form_printer/use_on_self(mob/user as mob)
 	deploy_paper(get_turf(src))
 
 /obj/item/form_printer/proc/deploy_paper(var/turf/T)
@@ -323,7 +323,7 @@
 	to_chat(user, "It has [stored_walls] wall segment\s and [stored_doors] door segment\s stored.")
 	to_chat(user, "It is set to deploy [mode ? "doors" : "walls"]")
 
-/obj/item/inflatable_dispenser/attack_self()
+/obj/item/inflatable_dispenser/use_on_self()
 	mode = !mode
 	to_chat(usr, "You set \the [src] to deploy [mode ? "doors" : "walls"].")
 
@@ -433,14 +433,14 @@
 	for(var/i = 1, i <= min(starting_objects, capacity), i++)
 		held += new object_type(src)
 
-/obj/item/robot_rack/attack_self(mob/user)
+/obj/item/robot_rack/use_on_self(mob/user)
 	if(!length(held))
 		to_chat(user, "<span class='notice'>The rack is empty.</span>")
 		return
 	var/obj/item/R = held[length(held)]
 	R.dropInto(loc)
 	held -= R
-	R.attack_self(user) // deploy it
+	R.use_on_self(user) // deploy it
 	to_chat(user, "<span class='notice'>You deploy [R].</span>")
 	R.add_fingerprint(user)
 
@@ -471,7 +471,7 @@
 		/obj/item/reagent_containers/food/snacks/fish = 1.5
 	)
 
-/obj/item/bioreactor/attack_self(var/mob/user)
+/obj/item/bioreactor/use_on_self(var/mob/user)
 	if(contents.len >= 1)
 		var/obj/item/removing = contents[1]
 		user.put_in_hands(removing)

@@ -523,7 +523,7 @@
 		S.attackby_react(I,user,user.a_intent)
 	..()
 
-/obj/item/device/electronic_assembly/attack_self(mob/user)
+/obj/item/device/electronic_assembly/use_on_self(mob/user)
 	interact(user)
 
 /obj/item/device/electronic_assembly/bullet_act(obj/item/projectile/P)
@@ -564,7 +564,7 @@
 
 /obj/item/device/electronic_assembly/attack_hand(mob/user)
 	if(anchored)
-		attack_self(user)
+		use_on_self(user)
 		return
 	..()
 

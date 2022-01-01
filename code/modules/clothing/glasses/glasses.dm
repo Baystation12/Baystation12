@@ -93,7 +93,7 @@
 			if(toggleable)
 				deactivate(M, FALSE)
 
-/obj/item/clothing/glasses/attack_self(mob/user)
+/obj/item/clothing/glasses/use_on_self(mob/user)
 	if(toggleable && !user.incapacitated())
 		if(active)
 			deactivate(user)
@@ -217,7 +217,7 @@
 	flash_protection = FLASH_PROTECTION_MAJOR
 	tint = TINT_HEAVY
 
-/obj/item/clothing/glasses/welding/attack_self()
+/obj/item/clothing/glasses/welding/use_on_self()
 	toggle()
 
 
@@ -274,7 +274,7 @@
 	electric = TRUE
 	unacidable = TRUE
 
-/obj/item/clothing/glasses/augment_binoculars/attack_self(mob/user)
+/obj/item/clothing/glasses/augment_binoculars/use_on_self(mob/user)
 	if(zoom)
 		unzoom(user)
 	else

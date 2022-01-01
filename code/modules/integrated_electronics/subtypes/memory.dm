@@ -100,7 +100,7 @@
 	if(istext(special_data) || isnum(special_data))
 		O.data = special_data
 
-/obj/item/integrated_circuit/memory/constant/attack_self(mob/user)
+/obj/item/integrated_circuit/memory/constant/use_on_self(mob/user)
 	var/datum/integrated_io/O = outputs[1]
 	if(!user.IsAdvancedToolUser())
 		return

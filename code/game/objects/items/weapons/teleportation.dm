@@ -24,7 +24,7 @@
 	origin_tech = list(TECH_MAGNET = 1)
 	matter = list(MATERIAL_ALUMINIUM = 400)
 
-/obj/item/locator/attack_self(mob/user as mob)
+/obj/item/locator/use_on_self(mob/user as mob)
 	user.set_machine(src)
 	var/dat
 	if (src.temp)
@@ -112,9 +112,9 @@ Frequency:
 				if (href_list["temp"])
 					src.temp = null
 		if (istype(src.loc, /mob))
-			attack_self(src.loc)
+			use_on_self(src.loc)
 		else
 			for(var/mob/M in viewers(1, src))
 				if (M.client)
-					src.attack_self(M)
+					src.use_on_self(M)
 	return

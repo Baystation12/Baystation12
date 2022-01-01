@@ -36,7 +36,7 @@ RSF
 		to_chat(user, "The RSF now holds [stored_matter]/30 fabrication-units.")
 		return
 
-/obj/item/rsf/attack_self(mob/user as mob)
+/obj/item/rsf/use_on_self(mob/user as mob)
 	playsound(src.loc, 'sound/effects/pop.ogg', 50, 0)
 	if (mode == 1)
 		mode = 2

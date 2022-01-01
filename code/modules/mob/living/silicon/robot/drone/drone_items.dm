@@ -147,7 +147,7 @@
 
 /obj/item/gripper/no_use //Used when you want to hold and put items in other things, but not able to 'use' the item
 
-/obj/item/gripper/no_use/attack_self(mob/user as mob)
+/obj/item/gripper/no_use/use_on_self(mob/user as mob)
 	return
 
 /obj/item/gripper/no_use/loader //This is used to disallow building with metal.
@@ -164,9 +164,9 @@
 	if(wrapped)
 		to_chat(user, "It is holding \a [wrapped].")
 
-/obj/item/gripper/attack_self(mob/user as mob)
+/obj/item/gripper/use_on_self(mob/user as mob)
 	if(wrapped)
-		return wrapped.attack_self(user)
+		return wrapped.use_on_self(user)
 	return ..()
 
 /obj/item/gripper/verb/drop_gripped_item()

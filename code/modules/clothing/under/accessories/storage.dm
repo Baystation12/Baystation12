@@ -48,7 +48,7 @@
 	..()
 
 
-/obj/item/clothing/accessory/storage/attack_self(mob/user)
+/obj/item/clothing/accessory/storage/use_on_self(mob/user)
 	add_fingerprint(user)
 	if (!container)
 		return

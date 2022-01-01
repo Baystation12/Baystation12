@@ -357,7 +357,7 @@
 	canprint = 1
 
 
-/obj/item/device/taperecorder/attack_self(mob/user)
+/obj/item/device/taperecorder/use_on_self(mob/user)
 	if(maintenance)
 		wires.Interact(user)
 		return
@@ -407,7 +407,7 @@
 /obj/item/device/tape/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	ruin()
 
-/obj/item/device/tape/attack_self(mob/user)
+/obj/item/device/tape/use_on_self(mob/user)
 	if(!ruined)
 		to_chat(user, "<span class='notice'>You pull out all the tape!</span>")
 		get_loose_tape(user, storedinfo.len)

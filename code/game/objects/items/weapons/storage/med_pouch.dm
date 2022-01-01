@@ -56,7 +56,7 @@ Single Use Emergency Pouches
 		to_chat(user, instructions)
 		return TOPIC_HANDLED
 
-/obj/item/storage/med_pouch/attack_self(mob/user)
+/obj/item/storage/med_pouch/use_on_self(mob/user)
 	open(user)
 
 /obj/item/storage/med_pouch/open(mob/user)

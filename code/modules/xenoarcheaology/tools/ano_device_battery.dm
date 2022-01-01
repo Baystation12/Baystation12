@@ -44,7 +44,7 @@
 	else
 		return ..()
 
-/obj/item/anodevice/attack_self(var/mob/user as mob)
+/obj/item/anodevice/use_on_self(var/mob/user as mob)
 	return src.interact(user)
 
 /obj/item/anodevice/interact(var/mob/user)

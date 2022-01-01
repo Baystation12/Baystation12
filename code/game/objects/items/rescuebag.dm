@@ -21,7 +21,7 @@
 	QDEL_NULL(airtank)
 	return ..()
 
-/obj/item/bodybag/rescue/attack_self(mob/user)
+/obj/item/bodybag/rescue/use_on_self(mob/user)
 	var/obj/structure/closet/body_bag/rescue/R = new /obj/structure/closet/body_bag/rescue(user.loc)
 	R.add_fingerprint(user)
 	if(airtank)

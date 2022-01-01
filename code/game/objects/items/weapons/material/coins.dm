@@ -42,7 +42,7 @@
 		update_icon()
 	else ..()
 
-/obj/item/material/coin/attack_self(var/mob/user)
+/obj/item/material/coin/use_on_self(var/mob/user)
 	playsound(user.loc, 'sound/effects/coin_flip.ogg', 75, 1)
 	user.visible_message(SPAN_NOTICE("\The [user] flips \the [src] into the air and catches it, revealing that it landed on [pick("tails", "heads")]!"))
 

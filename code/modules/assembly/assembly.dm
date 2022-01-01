@@ -125,7 +125,7 @@
 			to_chat(user, "\The [src] can be attached!")
 
 
-/obj/item/device/assembly/attack_self(mob/user as mob)
+/obj/item/device/assembly/use_on_self(mob/user as mob)
 	if(!user)	return 0
 	user.set_machine(src)
 	interact(user)

@@ -11,5 +11,5 @@
 	icon = 'icons/obj/items.dmi'
 	icon_state = "guitar"
 
-/obj/item/instrument/guitar/attack_self(mob/user as mob)
+/obj/item/instrument/guitar/use_on_self(mob/user as mob)
 	user.visible_message("<span class='notice'><b>\The [user]</b> strums [src]!</span>","<span class='notice'>You strum [src]!</span>")

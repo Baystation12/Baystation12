@@ -39,7 +39,7 @@ var/global/photo_count = 0
 /obj/item/photo/New()
 	id = photo_count++
 
-/obj/item/photo/attack_self(mob/user as mob)
+/obj/item/photo/use_on_self(mob/user as mob)
 	user.examinate(src)
 
 /obj/item/photo/on_update_icon()
@@ -176,7 +176,7 @@ var/global/photo_count = 0
 /obj/item/device/camera/attack(mob/living/carbon/human/M as mob, mob/user as mob)
 	return
 
-/obj/item/device/camera/attack_self(mob/user as mob)
+/obj/item/device/camera/use_on_self(mob/user as mob)
 	on = !on
 	update_icon()
 	to_chat(user, "You switch the camera [on ? "on" : "off"].")

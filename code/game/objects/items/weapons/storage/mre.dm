@@ -36,7 +36,7 @@ MRE Stuff
 		icon_state = "[initial(icon_state)][opened]"
 	. = ..()
 
-/obj/item/storage/mre/attack_self(mob/user)
+/obj/item/storage/mre/use_on_self(mob/user)
 	open(user)
 
 /obj/item/storage/mre/open(mob/user)
@@ -200,7 +200,7 @@ MRE Stuff
 		icon_state = "[initial(icon_state)][opened]"
 	. = ..()
 
-/obj/item/storage/mrebag/attack_self(mob/user)
+/obj/item/storage/mrebag/use_on_self(mob/user)
 	open(user)
 
 /obj/item/storage/mrebag/open(mob/user)

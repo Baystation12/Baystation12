@@ -793,7 +793,7 @@
 		if (href_list["mod"])
 			var/obj/item/O = locate(href_list["mod"])
 			if (istype(O) && (O.loc == src))
-				O.attack_self(src)
+				O.use_on_self(src)
 			return TOPIC_HANDLED
 
 		if (href_list["act"])
@@ -939,7 +939,7 @@
 
 	var/obj/item/W = get_active_hand()
 	if (W)
-		W.attack_self(src)
+		W.use_on_self(src)
 
 	return
 

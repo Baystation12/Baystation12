@@ -505,10 +505,10 @@ var/list/global/slot_flags_enumeration = list(
 
 
 //This proc is executed when someone clicks the on-screen UI button. To make the UI button show, set the 'icon_action_button' to the icon_state of the image of the button in screen1_action.dmi
-//The default action is attack_self().
+//The default action is use_on_self().
 //Checks before we get to here are: mob is alive, mob is not restrained, paralyzed, asleep, resting, laying, item is on the mob.
 /obj/item/proc/ui_action_click()
-	attack_self(usr)
+	use_on_self(usr)
 
 //RETURN VALUES
 //handle_shield should return a positive value to indicate that the attack is blocked and should be prevented.
@@ -875,7 +875,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/do_simple_ranged_interaction(var/mob/user)
 	if(user)
-		attack_self(user)
+		use_on_self(user)
 	return TRUE
 
 /obj/item/proc/inherit_custom_item_data(var/datum/custom_item/citem)

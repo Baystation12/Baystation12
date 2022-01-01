@@ -33,7 +33,7 @@
 			T.visible_message("[icon2html(src, viewers(get_turf(src)))] beeps, \"[listening ? "Now" : "No longer"] recording input.\"")
 
 
-/obj/item/device/assembly/voice/attack_self(mob/user)
+/obj/item/device/assembly/voice/use_on_self(mob/user)
 	if(!user)	return 0
 	activate()
 	return 1

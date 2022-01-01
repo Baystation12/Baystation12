@@ -290,7 +290,7 @@
 	to_chat(user, "<span class='notice'>You [cover_open ? "open" : "close"] [src]'s cover.</span>")
 	update_icon()
 
-/obj/item/gun/projectile/automatic/l6_saw/attack_self(mob/user as mob)
+/obj/item/gun/projectile/automatic/l6_saw/use_on_self(mob/user as mob)
 	if(cover_open)
 		toggle_cover(user) //close the cover
 	else
@@ -362,5 +362,3 @@
 	else
 		icon_state = "battlerifle-empty"
 		wielded_item_state = "battlerifle-wielded-empty"
-
-

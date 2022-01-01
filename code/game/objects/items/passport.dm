@@ -21,7 +21,7 @@
 		fingerprint = "N/A"
 	info = "\icon[src] [src]:\nName: [H.real_name]\nSpecies: [H.get_species()]\nGender: [gender2text(H.gender)]\nAge: [H.age]\nPlace of Birth: [pob]\nFingerprint: [fingerprint]"
 
-/obj/item/passport/attack_self(mob/user as mob)
+/obj/item/passport/use_on_self(mob/user as mob)
 	user.visible_message(
 		SPAN_ITALIC("[user] opens and checks [src]."),
 		SPAN_ITALIC("You open [src] and check for some main information."),

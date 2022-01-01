@@ -31,7 +31,7 @@
 		return 1
 
 
-	attack_self(mob/user as mob)
+	use_on_self(mob/user as mob)
 		activate()
 		add_fingerprint(user)
 		return

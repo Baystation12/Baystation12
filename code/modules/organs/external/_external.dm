@@ -181,7 +181,7 @@
 	if(owner && limb_flags & ORGAN_FLAG_CAN_STAND)
 		owner.stance_damage_prone(src)
 
-/obj/item/organ/external/attack_self(var/mob/user)
+/obj/item/organ/external/use_on_self(var/mob/user)
 	if((owner && loc == owner) || !contents.len)
 		return ..()
 	var/list/removable_objects = list()

@@ -20,7 +20,7 @@
 	var/obj/item/material/knife/folding/combat/switchblade/temp_blade = new(src)
 	concealed_blade = temp_blade
 
-/obj/item/cane/concealed/attack_self(var/mob/user)
+/obj/item/cane/concealed/use_on_self(var/mob/user)
 	if(concealed_blade)
 		user.visible_message("<span class='warning'>[user] has unsheathed \a [concealed_blade] from [src]!</span>", "You unsheathe \the [concealed_blade] from [src].")
 		// Calling drop/put in hands to properly call item drop/pickup procs

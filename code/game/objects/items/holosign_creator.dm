@@ -55,7 +55,7 @@
 /obj/item/holosign_creator/attack(mob/living/carbon/human/M, mob/user)
 	return
 
-/obj/item/holosign_creator/attack_self(mob/user)
+/obj/item/holosign_creator/use_on_self(mob/user)
 	if(signs.len)
 		for(var/H in signs)
 			qdel(H)

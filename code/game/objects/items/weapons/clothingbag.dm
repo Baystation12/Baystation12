@@ -7,7 +7,7 @@
 	var/icon_used = "trashbag0"
 	var/opened = 0
 
-/obj/item/clothingbag/attack_self(mob/user as mob)
+/obj/item/clothingbag/use_on_self(mob/user as mob)
 	if(!opened)
 		user.visible_message("<span class='notice'>\The [user] tears open \the [src.name]!</span>", "<span class='notice'>You tear open \the [src.name]!</span>")
 		opened = 1

@@ -75,7 +75,7 @@
 	return
 
 
-/obj/item/device/transfer_valve/attack_self(mob/user as mob)
+/obj/item/device/transfer_valve/use_on_self(mob/user as mob)
 	ui_interact(user)
 
 /obj/item/device/transfer_valve/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
@@ -119,7 +119,7 @@
 			attached_device = null
 			update_icon()
 		if(href_list["device"])
-			attached_device.attack_self(usr)
+			attached_device.use_on_self(usr)
 	return 1 // Returning 1 sends an update to attached UIs
 
 /obj/item/device/transfer_valve/process_activation(var/obj/item/device/D)

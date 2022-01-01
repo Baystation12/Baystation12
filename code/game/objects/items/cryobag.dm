@@ -8,7 +8,7 @@
 	origin_tech = list(TECH_BIO = 4)
 	var/stasis_power
 
-/obj/item/bodybag/cryobag/attack_self(mob/user)
+/obj/item/bodybag/cryobag/use_on_self(mob/user)
 	var/obj/structure/closet/body_bag/cryobag/R = new /obj/structure/closet/body_bag/cryobag(user.loc)
 	if(stasis_power)
 		R.stasis_power = stasis_power

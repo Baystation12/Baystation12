@@ -80,7 +80,7 @@
 	..()
 
 
-/obj/item/reagent_containers/food/drinks/bottle/attack_self(mob/user)
+/obj/item/reagent_containers/food/drinks/bottle/use_on_self(mob/user)
 	if (rag)
 		remove_rag(user)
 	else

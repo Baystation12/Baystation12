@@ -47,7 +47,7 @@
 	else
 		to_chat(user, "<span class='notice'>[msg]</span>")
 
-/obj/item/device/geiger/attack_self(var/mob/user)
+/obj/item/device/geiger/use_on_self(var/mob/user)
 	scanning = !scanning
 	if(scanning)
 		START_PROCESSING(SSobj, src)

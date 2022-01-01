@@ -16,7 +16,7 @@
 	target = null
 	. = ..()
 
-/obj/item/pinpointer/attack_self(mob/user)
+/obj/item/pinpointer/use_on_self(mob/user)
 	toggle(user)
 
 /obj/item/pinpointer/proc/toggle(mob/user)

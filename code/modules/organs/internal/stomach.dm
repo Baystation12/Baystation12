@@ -81,7 +81,7 @@
 		action.button_icon_state = "puke"
 		if(action.button) action.button.UpdateIcon()
 
-/obj/item/organ/internal/stomach/attack_self(mob/user)
+/obj/item/organ/internal/stomach/use_on_self(mob/user)
 	. = ..()
 	if(. && action_button_name == PUKE_ACTION_NAME && owner && !owner.incapacitated())
 		owner.empty_stomach()

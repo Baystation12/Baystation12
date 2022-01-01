@@ -62,7 +62,7 @@
 	uses = 0
 	crayon_reagent = /datum/reagent/crayon_dust/grey
 
-/obj/item/pen/crayon/mime/attack_self(mob/living/user as mob) //inversion
+/obj/item/pen/crayon/mime/use_on_self(mob/living/user as mob) //inversion
 	if(colour != "#ffffff" && shadeColour != "#000000")
 		colour = "#ffffff"
 		shadeColour = "#000000"
@@ -82,7 +82,7 @@
 	uses = 0
 	crayon_reagent = /datum/reagent/crayon_dust/brown
 
-/obj/item/pen/crayon/rainbow/attack_self(mob/living/user as mob)
+/obj/item/pen/crayon/rainbow/use_on_self(mob/living/user as mob)
 	colour = input(user, "Please select the main colour.", "Crayon colour") as color
 	shadeColour = input(user, "Please select the shade colour.", "Crayon colour") as color
 	return

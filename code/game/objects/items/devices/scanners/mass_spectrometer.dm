@@ -39,7 +39,7 @@
 	reagents.clear_reagents()
 	user.show_message(scan_data)
 
-/obj/item/device/scanner/spectrometer/attack_self(mob/user)
+/obj/item/device/scanner/spectrometer/use_on_self(mob/user)
 	if(!can_use(user))
 		return
 	if(reagents.total_volume)

@@ -793,7 +793,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 	var/scribble=""
 	var/scribble_page = null
 
-obj/item/newspaper/attack_self(mob/user)
+obj/item/newspaper/use_on_self(mob/user)
 	user.update_personal_goal(/datum/goal/achievement/newshound, TRUE)
 	if(ishuman(user))
 		var/mob/living/carbon/human/human_user = user
@@ -904,7 +904,7 @@ obj/item/newspaper/Topic(href, href_list)
 			playsound(src.loc, "pageturn", 50, 1)
 
 		if (istype(src.loc, /mob))
-			src.attack_self(src.loc)
+			src.use_on_self(src.loc)
 
 
 obj/item/newspaper/attackby(obj/item/W as obj, mob/user as mob)
@@ -920,7 +920,7 @@ obj/item/newspaper/attackby(obj/item/W as obj, mob/user as mob)
 				return
 			src.scribble_page = src.curr_page
 			src.scribble = s
-			src.attack_self(user)
+			src.use_on_self(user)
 		return
 
 

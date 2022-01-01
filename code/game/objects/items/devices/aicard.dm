@@ -10,7 +10,7 @@
 
 	var/mob/living/silicon/ai/carded_ai
 
-/obj/item/aicard/attack_self(mob/user)
+/obj/item/aicard/use_on_self(mob/user)
 
 	ui_interact(user)
 

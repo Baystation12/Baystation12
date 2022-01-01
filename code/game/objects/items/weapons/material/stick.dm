@@ -12,7 +12,7 @@
 	attack_verb = list("poked", "jabbed")
 
 
-/obj/item/material/stick/attack_self(mob/user as mob)
+/obj/item/material/stick/use_on_self(mob/user as mob)
 	user.visible_message("<span class='warning'>\The [user] snaps [src].</span>", "<span class='warning'>You snap [src].</span>")
 	shatter(0)
 

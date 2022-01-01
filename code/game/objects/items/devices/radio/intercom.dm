@@ -155,12 +155,12 @@
 /obj/item/device/radio/intercom/attack_ai(mob/user)
 	add_fingerprint(user)
 	if (buildstage == 2)
-		attack_self(user)
+		use_on_self(user)
 
 /obj/item/device/radio/intercom/attack_hand(mob/user)
 	add_fingerprint(user)
 	if (buildstage == 2)
-		attack_self(user)
+		use_on_self(user)
 
 /obj/item/device/radio/intercom/receive_range(freq, level)
 	if (!on)

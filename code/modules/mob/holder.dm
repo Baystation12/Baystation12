@@ -78,7 +78,7 @@ var/list/holder_mob_icon_cache = list()
 	var/obj/item/I = GetIdCard()
 	return I ? I.GetAccess() : ..()
 
-/obj/item/holder/attack_self()
+/obj/item/holder/use_on_self()
 	for(var/mob/M in contents)
 		M.show_inv(usr)
 

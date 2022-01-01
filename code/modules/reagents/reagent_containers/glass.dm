@@ -57,7 +57,7 @@
 	if(!is_open_container())
 		to_chat(user, "<span class='notice'>The airtight lid seals it completely.</span>")
 
-/obj/item/reagent_containers/glass/attack_self()
+/obj/item/reagent_containers/glass/use_on_self()
 	..()
 	if(is_open_container())
 		to_chat(usr, "<span class = 'notice'>You put the lid on \the [src].</span>")

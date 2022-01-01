@@ -21,7 +21,7 @@
 	. = ..()
 
 
-/obj/item/clothing/ears/headphones/attack_self(mob/user)
+/obj/item/clothing/ears/headphones/use_on_self(mob/user)
 	jukebox.ui_interact(user)
 
 
@@ -37,4 +37,3 @@
 		icon_state = "headphones_off"
 		item_state = "headphones_off"
 	update_clothing_icon()
-	

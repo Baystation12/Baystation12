@@ -140,7 +140,7 @@
 	return
 
 
-/obj/item/inducer/attack_self(mob/user)
+/obj/item/inducer/use_on_self(mob/user)
 	if(opened && cell)
 		user.visible_message("\The [user] removes \the [cell] from \the [src]!","<span class='notice'>You remove \the [cell].</span>")
 		cell.update_icon()

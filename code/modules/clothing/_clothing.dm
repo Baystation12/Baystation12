@@ -423,7 +423,7 @@ BLIND     // can't see anything
 		ret.overlays |= light_overlay_image
 	return ret
 
-/obj/item/clothing/head/attack_self(mob/user)
+/obj/item/clothing/head/use_on_self(mob/user)
 	if(brightness_on)
 		if(!isturf(user.loc))
 			to_chat(user, "You cannot turn the light on while in this [user.loc]")
@@ -571,7 +571,7 @@ BLIND     // can't see anything
 			update_clothing_icon()
 			user.update_action_buttons()
 
-/obj/item/clothing/mask/attack_self(mob/user)
+/obj/item/clothing/mask/use_on_self(mob/user)
 	if(pull_mask)
 		adjust_mask(user)
 
@@ -624,7 +624,7 @@ BLIND     // can't see anything
 		return
 	..()
 
-/obj/item/clothing/shoes/attack_self(var/mob/user)
+/obj/item/clothing/shoes/use_on_self(var/mob/user)
 	remove_cuffs(user)
 	..()
 

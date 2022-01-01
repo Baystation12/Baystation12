@@ -38,7 +38,7 @@
 	suit_sensor_jammer_methods_by_type = null
 	disable()
 
-/obj/item/device/suit_sensor_jammer/attack_self(var/mob/user)
+/obj/item/device/suit_sensor_jammer/use_on_self(var/mob/user)
 	ui_interact(user)
 
 /obj/item/device/suit_sensor_jammer/get_cell()

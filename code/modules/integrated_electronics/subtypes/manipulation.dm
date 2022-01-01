@@ -59,7 +59,7 @@
 	else
 		..()
 
-/obj/item/integrated_circuit/manipulation/weapon_firing/attack_self(var/mob/user)
+/obj/item/integrated_circuit/manipulation/weapon_firing/use_on_self(var/mob/user)
 	if(installed_gun)
 		installed_gun.dropInto(loc)
 		to_chat(user, "<span class='notice'>You slide \the [installed_gun] out of the firing mechanism.</span>")
@@ -191,7 +191,7 @@
 	else
 		return ..()
 
-/obj/item/integrated_circuit/manipulation/grenade/attack_self(var/mob/user)
+/obj/item/integrated_circuit/manipulation/grenade/use_on_self(var/mob/user)
 	if(attached_grenade)
 		user.visible_message("<span class='warning'>\The [user] removes \an [attached_grenade] from \the [src]!</span>", "<span class='notice'>You remove \the [attached_grenade] from \the [src].</span>")
 		user.put_in_hands(attached_grenade)
@@ -380,7 +380,7 @@
 	set_pin_data(IC_OUTPUT, 4, contents)
 	push_data()
 
-/obj/item/integrated_circuit/manipulation/grabber/attack_self(var/mob/user)
+/obj/item/integrated_circuit/manipulation/grabber/use_on_self(var/mob/user)
 	if(contents.len)
 		var/turf/T = get_turf(src)
 		var/obj/item/U
@@ -650,7 +650,7 @@
 		load_ai(user, I)
 	else return ..()
 
-/obj/item/integrated_circuit/manipulation/ai/attack_self(user)
+/obj/item/integrated_circuit/manipulation/ai/use_on_self(user)
 	unload_ai()
 
 /obj/item/integrated_circuit/manipulation/ai/contents_nano_distance(src_object, mob/living/user)

@@ -236,7 +236,7 @@ var/list/global/tank_gauge_cache = list()
 		master = F
 		F.tank = src
 
-/obj/item/tank/attack_self(mob/user as mob)
+/obj/item/tank/use_on_self(mob/user as mob)
 	add_fingerprint(user)
 	if (!air_contents)
 		return
@@ -244,7 +244,7 @@ var/list/global/tank_gauge_cache = list()
 
 // There's GOT to be a better way to do this
 	if (proxyassembly.assembly)
-		proxyassembly.assembly.attack_self(user)
+		proxyassembly.assembly.use_on_self(user)
 
 /obj/item/tank/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/mob/living/carbon/location = null

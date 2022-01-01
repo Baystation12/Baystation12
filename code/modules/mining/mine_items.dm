@@ -203,7 +203,7 @@
 		return
 	return ..()
 
-/obj/item/stack/flag/attack_self(var/mob/user)
+/obj/item/stack/flag/use_on_self(var/mob/user)
 	var/turf/T = get_turf(src)
 
 	if(istype(T, /turf/space) || istype(T, /turf/simulated/open))
@@ -239,7 +239,7 @@
 		addon.layer = ABOVE_LIGHTING_LAYER
 		addon.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 		overlays += addon
-		set_light(0.5, 0.5, 3) 
+		set_light(0.5, 0.5, 3)
 	else
 		pixel_x = rand(-randpixel, randpixel)
 		pixel_y = rand(-randpixel, randpixel)

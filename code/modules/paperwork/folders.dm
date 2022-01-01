@@ -43,7 +43,7 @@
 			SetName("folder[(n_name ? text("- '[n_name]'") : null)]")
 	return
 
-/obj/item/folder/attack_self(mob/user as mob)
+/obj/item/folder/use_on_self(mob/user as mob)
 	var/dat = "<title>[name]</title>"
 	for(var/obj/item/paper/P in src)
 		dat += "<A href='?src=\ref[src];remove=\ref[P]'>Remove</A> <A href='?src=\ref[src];rename=\ref[P]'>Rename</A> - <A href='?src=\ref[src];read=\ref[P]'>[P.name]</A><BR>"
@@ -68,7 +68,7 @@
 			if(P && (P.loc == src) && istype(P))
 				usr.put_in_hands(P)
 
-		else if(href_list["read"])			
+		else if(href_list["read"])
 			var/obj/item/paper/P = locate(href_list["read"])
 			if(P && (P.loc == src) && istype(P))
 				if(!(istype(usr, /mob/living/carbon/human) || isghost(usr) || istype(usr, /mob/living/silicon)))
@@ -84,7 +84,7 @@
 		else if(href_list["browse"])
 			var/obj/item/paper_bundle/P = locate(href_list["browse"])
 			if(P && (P.loc == src) && istype(P))
-				P.attack_self(usr)
+				P.use_on_self(usr)
 				onclose(usr, "[P.name]")
 		else if(href_list["rename"])
 			var/obj/item/O = locate(href_list["rename"])
@@ -103,7 +103,7 @@
 					to_rename.rename()
 
 		//Update everything
-		attack_self(usr)
+		use_on_self(usr)
 		update_icon()
 	return
 
@@ -131,7 +131,7 @@
 		update_icon()
 		return 1
 
-/obj/item/folder/envelope/attack_self(mob/user as mob)
+/obj/item/folder/envelope/use_on_self(mob/user as mob)
 	if(sealed)
 		sealcheck(user)
 		return

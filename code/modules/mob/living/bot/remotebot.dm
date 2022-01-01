@@ -102,7 +102,7 @@
 	item_state = "electronic"
 	var/mob/living/bot/remotebot/bot
 
-/obj/item/device/bot_controller/attack_self(var/mob/user)
+/obj/item/device/bot_controller/use_on_self(var/mob/user)
 	src.interact(user)
 
 /obj/item/device/bot_controller/interact(var/mob/user)
@@ -162,7 +162,7 @@
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "remotebot"
 
-/obj/item/device/bot_kit/attack_self(var/mob/living/user)
+/obj/item/device/bot_kit/use_on_self(var/mob/living/user)
 	to_chat(user, "You quickly dismantle the box and retrieve the controller and the remote bot itself.")
 	var/turf/T = get_turf(src.loc)
 	new /mob/living/bot/remotebot(T)

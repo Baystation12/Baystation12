@@ -74,7 +74,7 @@
 			if(HAS_BEEN_ACTIVATED)
 				to_chat(user, "It is labeled '[service_label]' and appears to be permanently disabled.")
 
-/obj/item/device/uplink_service/attack_self(var/mob/user)
+/obj/item/device/uplink_service/use_on_self(var/mob/user)
 	if(state != AWAITING_ACTIVATION)
 		to_chat(user, "<span class='warning'>\The [src] won't activate again.</span>")
 		return
@@ -181,7 +181,7 @@
 		to_chat(user, "The message contents are set to:<br />[SPAN_NOTICE(message)]")
 
 
-/obj/item/device/uplink_service/fake_command_report/attack_self(mob/user)
+/obj/item/device/uplink_service/fake_command_report/use_on_self(mob/user)
 	if (state != AWAITING_ACTIVATION)
 		to_chat(user, SPAN_WARNING("\The [src] won't activate again."))
 		return

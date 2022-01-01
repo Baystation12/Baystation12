@@ -48,7 +48,7 @@
 	pulse(0)
 
 
-/obj/item/device/assembly/mousetrap/attack_self(mob/living/user)
+/obj/item/device/assembly/mousetrap/use_on_self(mob/living/user)
 	if(!armed)
 		to_chat(user, "<span class='notice'>You arm [src].</span>")
 	else

@@ -15,7 +15,7 @@
 /obj/item/reagent_containers/food/snacks/dehydrated_carp/attack(mob/M, mob/user, def_zone)
 	return
 
-/obj/item/reagent_containers/food/snacks/dehydrated_carp/attack_self(mob/user)
+/obj/item/reagent_containers/food/snacks/dehydrated_carp/use_on_self(mob/user)
 	if (user.a_intent == I_HELP)
 		user.visible_message(SPAN_NOTICE("\The [user] hugs [src]!"), SPAN_NOTICE("You hug [src]!"))
 	else if (user.a_intent == I_HURT)
@@ -54,7 +54,7 @@
 	GLOB.listening_objects -= src
 	return ..()
 
-/obj/item/plushbomb/attack_self(mob/user)
+/obj/item/plushbomb/use_on_self(mob/user)
 	if (user.a_intent == I_HELP)
 		user.visible_message(SPAN_NOTICE("\The [user] hugs [src]!"), SPAN_NOTICE("You hug [src]!"))
 	else if (user.a_intent == I_GRAB)

@@ -183,5 +183,5 @@
 	set_target(target, user)
 	add_data(target)
 
-/obj/item/autopsy_scanner/attack_self(mob/user)
+/obj/item/autopsy_scanner/use_on_self(mob/user)
 	print_data(user)

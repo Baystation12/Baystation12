@@ -78,7 +78,7 @@
 	siemens_coefficient = 0.7
 	action_button_name = "Toggle Visor"
 
-/obj/item/clothing/head/helmet/riot/attack_self(mob/user)
+/obj/item/clothing/head/helmet/riot/use_on_self(mob/user)
 	body_parts_covered ^= EYES|FACE
 	icon_state = initial(icon_state)
 	var/action = "lowers"

@@ -100,7 +100,7 @@
 	var/obj/item/W = get_active_hand()
 
 	if(W == A) // Handle attack_self
-		W.attack_self(src)
+		W.use_on_self(src)
 		trigger_aiming(TARGET_CAN_CLICK)
 		if(hand)
 			update_inv_l_hand(0)

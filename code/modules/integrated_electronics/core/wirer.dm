@@ -99,7 +99,7 @@
 		if(WIRING)
 			mode = WIRE
 
-/obj/item/device/integrated_electronics/wirer/attack_self(mob/user)
+/obj/item/device/integrated_electronics/wirer/use_on_self(mob/user)
 	switch(mode)
 		if(WIRE)
 			mode = UNWIRE

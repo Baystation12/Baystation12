@@ -580,7 +580,7 @@
 	if(. > firemodes.len)
 		. = 1
 
-/obj/item/gun/attack_self(mob/user)
+/obj/item/gun/use_on_self(mob/user)
 	var/datum/firemode/new_mode = switch_firemodes(user)
 	if(prob(20) && !user.skill_check(SKILL_WEAPONS, SKILL_BASIC))
 		new_mode = switch_firemodes(user)

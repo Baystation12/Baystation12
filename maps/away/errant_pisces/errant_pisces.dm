@@ -142,7 +142,7 @@ obj/structure/net/Initialize(var/mapload)
 			return 1
 	return 0
 
-/obj/item/stack/net/attack_self(mob/user)//press while holding to lay one. If there's net already, place wall
+/obj/item/stack/net/use_on_self(mob/user)//press while holding to lay one. If there's net already, place wall
 	var/turf/T = get_turf(user)
 	if (locate(/obj/structure/net/net_wall) in T)
 		to_chat(user, "<span class='warning'>Net wall is already placed here!</span>")

@@ -92,7 +92,7 @@
 		STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/obj/item/device/radio/attack_self(mob/user as mob)
+/obj/item/device/radio/use_on_self(mob/user as mob)
 	user.set_machine(src)
 	interact(user)
 
@@ -914,7 +914,7 @@
 		return E
 	return null
 
-/obj/item/device/radio/exosuit/attack_self(var/mob/user)
+/obj/item/device/radio/exosuit/use_on_self(var/mob/user)
 	var/mob/living/exosuit/exosuit = loc
 	if(istype(exosuit) && exosuit.head && exosuit.head.radio && exosuit.head.radio.is_functional())
 		user.set_machine(src)

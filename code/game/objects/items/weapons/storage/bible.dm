@@ -91,7 +91,7 @@
 		playsound(src.loc, src.use_sound, 50, 1, -5)
 	return ..()
 
-/obj/item/storage/bible/attack_self(mob/living/carbon/human/user)
+/obj/item/storage/bible/use_on_self(mob/living/carbon/human/user)
 	if(!ishuman(user))
 		return
 	if(user.mind && istype(user.mind.assigned_job, /datum/job/chaplain))

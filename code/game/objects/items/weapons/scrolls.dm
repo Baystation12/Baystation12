@@ -10,7 +10,7 @@
 	throw_range = 20
 	origin_tech = list(TECH_BLUESPACE = 4)
 
-/obj/item/teleportation_scroll/attack_self(mob/user as mob)
+/obj/item/teleportation_scroll/use_on_self(mob/user as mob)
 	if((user.mind && !GLOB.wizards.is_antagonist(user.mind)))
 		to_chat(usr, "<span class='warning'>You stare at the scroll but cannot make sense of the markings!</span>")
 		return
@@ -37,7 +37,7 @@
 		if (href_list["spell_teleport"])
 			if (src.uses >= 1)
 				teleportscroll(H)
-	attack_self(H)
+	use_on_self(H)
 	return
 
 /obj/item/teleportation_scroll/proc/teleportscroll(var/mob/user)

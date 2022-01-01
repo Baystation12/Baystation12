@@ -28,7 +28,7 @@
 	QDEL_NULL(radio)
 	return ..()
 
-/obj/item/device/paicard/attack_self(mob/user)
+/obj/item/device/paicard/use_on_self(mob/user)
 	if (!in_range(src, user))
 		return
 	user.set_machine(src)
@@ -272,7 +272,7 @@
 			to_chat(pai, "Your supplemental directives have been updated. Your new directives are:")
 			to_chat(pai, "Prime Directive: <br>[pai.pai_law0]")
 			to_chat(pai, "Supplemental Directives: <br>[pai.pai_laws]")
-	attack_self(usr)
+	use_on_self(usr)
 
 // 		WIRE_SIGNAL = 1
 //		WIRE_RECEIVE = 2

@@ -33,7 +33,7 @@
 			return
 		to_chat(user, "\The [src] is set for instant detonation.")
 
-/obj/item/grenade/attack_self(mob/user as mob)
+/obj/item/grenade/use_on_self(mob/user as mob)
 	if(!active)
 		if(clown_check(user))
 			to_chat(user, "<span class='warning'>You prime \the [name]! [det_time/10] seconds!</span>")

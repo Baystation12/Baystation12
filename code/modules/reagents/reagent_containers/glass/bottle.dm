@@ -322,7 +322,7 @@
 			Outfitted with a tiny mechanism that can change the color of its contained dye, opening up infinite possibilities."
 
 
-/obj/item/reagent_containers/glass/bottle/dye/polychromic/attack_self(mob/living/user)
+/obj/item/reagent_containers/glass/bottle/dye/polychromic/use_on_self(mob/living/user)
 	var/datum/reagent/heldDye = reagents.get_reagent(starting_reagent)
 	if (!heldDye)
 		to_chat(user, "<span class='warning'>\The [src] isn't holding any dye!</span>")

@@ -38,7 +38,7 @@
 		L.AttachLabel(user, tmp_label)
 		return
 
-/obj/item/reagent_containers/food/condiment/attack_self(var/mob/user as mob)
+/obj/item/reagent_containers/food/condiment/use_on_self(var/mob/user as mob)
 	return
 
 /obj/item/reagent_containers/food/condiment/attack(var/mob/M as mob, var/mob/user as mob, var/def_zone)

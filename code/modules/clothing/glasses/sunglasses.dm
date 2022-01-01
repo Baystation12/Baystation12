@@ -154,7 +154,7 @@
 	. = ..()
 
 
-/obj/item/clothing/glasses/sunglasses/sechud/toggle/attack_self(mob/user)
+/obj/item/clothing/glasses/sunglasses/sechud/toggle/use_on_self(mob/user)
 	if (toggleable && !user.incapacitated())
 		on = !on
 		if (on)

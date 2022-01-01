@@ -55,7 +55,7 @@
 /obj/item/grab/Process()
 	current_grab.process(src)
 
-/obj/item/grab/attack_self(mob/user)
+/obj/item/grab/use_on_self(mob/user)
 	if (!assailant)
 		return
 

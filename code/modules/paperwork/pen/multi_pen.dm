@@ -5,7 +5,7 @@
 	var/colors = list("black","blue","red","green")
 	var/color_descriptions = list("black ink", "blue ink", "red ink", "green ink")
 
-/obj/item/pen/multi/attack_self(mob/user)
+/obj/item/pen/multi/use_on_self(mob/user)
 	if(++selectedColor > length(colors))
 		selectedColor = 1
 

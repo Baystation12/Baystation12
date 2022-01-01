@@ -79,7 +79,7 @@
 		icon_state = "evidenceobj"
 		desc = "An empty evidence bag."
 
-/obj/item/evidencebag/attack_self(mob/user)
+/obj/item/evidencebag/use_on_self(mob/user)
 	if(stored_item)
 		user.visible_message("[user] takes [stored_item] out of [src]", "You take [stored_item] out of [src].",\
 		"You hear someone rustle around in a plastic bag, and remove something.")

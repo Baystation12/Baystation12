@@ -112,7 +112,7 @@
 	return TRUE
 
 
-/obj/item/storage/sheetsnatcher/attack_self(mob/user)
+/obj/item/storage/sheetsnatcher/use_on_self(mob/user)
 	if (user.stat || !Adjacent(user) || user.restrained())
 		to_chat(user, SPAN_WARNING("You're in no condition to do that with \the [src]."))
 		return FALSE

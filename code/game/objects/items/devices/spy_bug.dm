@@ -37,8 +37,8 @@
 		to_chat(user, "It's a tiny camera, microphone, and transmission device in a happy union.")
 		to_chat(user, "Needs to be both configured and brought in contact with monitor device to be fully functional.")
 
-/obj/item/device/spy_bug/attack_self(mob/user)
-	radio.attack_self(user)
+/obj/item/device/spy_bug/use_on_self(mob/user)
+	radio.use_on_self(user)
 
 /obj/item/device/spy_bug/attackby(obj/W as obj, mob/living/user as mob)
 	if(istype(W, /obj/item/device/spy_monitor))
@@ -80,11 +80,11 @@
 	if(distance <= 1)
 		to_chat(user, "The time '12:00' is blinking in the corner of the screen and \the [src] looks very cheaply made.")
 
-/obj/item/device/spy_monitor/attack_self(mob/user)
+/obj/item/device/spy_monitor/use_on_self(mob/user)
 	if(operating)
 		return
 
-	radio.attack_self(user)
+	radio.use_on_self(user)
 	view_cameras(user)
 
 /obj/item/device/spy_monitor/attackby(obj/W as obj, mob/living/user as mob)

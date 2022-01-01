@@ -9,7 +9,7 @@
 		action.button_icon_state = "nabber-threat"
 		if(action.button) action.button.UpdateIcon()
 
-/obj/item/organ/external/chest/insectoid/nabber/attack_self(var/mob/user)
+/obj/item/organ/external/chest/insectoid/nabber/use_on_self(var/mob/user)
 	. = ..()
 	if(.)
 		if(owner.incapacitated())

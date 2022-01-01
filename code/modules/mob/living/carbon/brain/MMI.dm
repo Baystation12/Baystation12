@@ -17,7 +17,7 @@
 /obj/item/device/mmi/digital/attackby()
 	return
 
-/obj/item/device/mmi/digital/attack_self()
+/obj/item/device/mmi/digital/use_on_self()
 	return
 
 /obj/item/device/mmi/digital/transfer_identity(var/mob/living/carbon/H)
@@ -87,7 +87,7 @@
 	..()
 
 	//TODO: ORGAN REMOVAL UPDATE. Make the brain remain in the MMI so it doesn't lose organ data.
-/obj/item/device/mmi/attack_self(mob/user as mob)
+/obj/item/device/mmi/use_on_self(mob/user as mob)
 	if(!brainmob)
 		to_chat(user, "<span class='warning'>You upend the MMI, but there's nothing in it.</span>")
 	else if(locked)

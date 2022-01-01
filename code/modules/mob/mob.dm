@@ -379,14 +379,14 @@
 	if(hand)
 		var/obj/item/W = l_hand
 		if (W)
-			W.attack_self(src)
+			W.use_on_self(src)
 			update_inv_l_hand()
 		else
 			attack_empty_hand(BP_L_HAND)
 	else
 		var/obj/item/W = r_hand
 		if (W)
-			W.attack_self(src)
+			W.use_on_self(src)
 			update_inv_r_hand()
 		else
 			attack_empty_hand(BP_R_HAND)

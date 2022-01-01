@@ -41,7 +41,7 @@
 		action.button_icon_state = "nabber-shield-[eyes_shielded ? 1 : 0]"
 		if(action.button) action.button.UpdateIcon()
 
-/obj/item/organ/internal/eyes/insectoid/nabber/attack_self(var/mob/user)
+/obj/item/organ/internal/eyes/insectoid/nabber/use_on_self(var/mob/user)
 	. = ..()
 	if(.)
 		eyes_shielded = !eyes_shielded

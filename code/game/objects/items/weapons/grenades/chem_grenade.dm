@@ -21,7 +21,7 @@
 	create_reagents(1000)
 
 
-/obj/item/grenade/chem_grenade/attack_self(mob/user)
+/obj/item/grenade/chem_grenade/use_on_self(mob/user)
 	if(!stage || stage==1)
 		if(detonator)
 			detonator.detached()

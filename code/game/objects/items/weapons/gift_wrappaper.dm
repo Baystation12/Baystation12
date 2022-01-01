@@ -49,7 +49,7 @@
 
 	qdel(src)
 
-/obj/item/a_gift/attack_self(mob/M as mob)
+/obj/item/a_gift/use_on_self(mob/M as mob)
 	var/gift_type = pick(
 		/obj/item/storage/wallet,
 		/obj/item/storage/photo_album,
@@ -133,7 +133,7 @@
 			if(4) icon_state = "gift2"
 			if(5) icon_state = "gift3"
 
-/obj/item/gift/attack_self(mob/user as mob)
+/obj/item/gift/use_on_self(mob/user as mob)
 	user.drop_item()
 	if(src.gift)
 		user.put_in_active_hand(gift)

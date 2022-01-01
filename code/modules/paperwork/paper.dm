@@ -206,7 +206,7 @@
 	SetName(n_name)
 	add_fingerprint(usr)
 
-/obj/item/paper/attack_self(mob/living/user as mob)
+/obj/item/paper/use_on_self(mob/living/user as mob)
 	if(user.a_intent == I_HURT)
 		if(icon_state == "scrap")
 			user.show_message("<span class='warning'>\The [src] is already crumpled.</span>")

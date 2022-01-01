@@ -33,7 +33,7 @@
 	. = ..()
 	verbs += /obj/item/clothing/head/helmet/space/psi_amp/proc/integrate
 
-/obj/item/clothing/head/helmet/space/psi_amp/attack_self(var/mob/user)
+/obj/item/clothing/head/helmet/space/psi_amp/use_on_self(var/mob/user)
 
 	if(operating)
 		return
@@ -91,7 +91,7 @@
 
 	sleep(80)
 
-	if(H.psi) 
+	if(H.psi)
 		H.psi.reset()
 
 	to_chat(H, SPAN_NOTICE("\The [src] chimes quietly as it finishes removing the slave-minds from your brain."))

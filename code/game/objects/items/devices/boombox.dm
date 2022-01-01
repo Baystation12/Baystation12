@@ -29,7 +29,7 @@
 	icon_state = jukebox?.playing ? "on" : "off"
 
 
-/obj/item/boombox/attack_self(mob/user)
+/obj/item/boombox/use_on_self(mob/user)
 	playsound(src, "switch", 30)
 	if (GET_FLAGS(boombox_flags, BOOMBOX_BROKEN))
 		return

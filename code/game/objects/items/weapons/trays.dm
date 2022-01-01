@@ -20,7 +20,7 @@
 
 
 // Use the tray in-hand to dump out all its items.
-/obj/item/tray/attack_self(mob/living/user)
+/obj/item/tray/use_on_self(mob/living/user)
 	if (LAZYLEN(carrying))
 		var/turf/T = get_turf(user)
 		overlays.Cut()
@@ -99,7 +99,7 @@
 	var/grab_intent = ishuman(user) ? I_GRAB : I_HELP
 	if (user.a_intent != grab_intent || istype(A, /obj/item/storage) || istype(A, /obj/screen/storage))
 		return ..()
-	
+
 	var/turf/T = get_turf(A)
 
 	if (LAZYLEN(carrying))
@@ -139,12 +139,12 @@
 			if (can_add_item(I))
 				pickup_item(item)
 				added_items++
-	
+
 		if (!added_items)
 			to_chat(user, SPAN_WARNING("You fail to pick anything up with \the [src]."))
 		else
 			user.visible_message(SPAN_NOTICE("[user] scoops up some things with \the [src]."), SPAN_NOTICE("You put everything you could onto \the [src]."))
-		
+
 		return FALSE
 
 

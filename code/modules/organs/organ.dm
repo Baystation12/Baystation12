@@ -40,7 +40,7 @@ var/list/organ_cache = list()
 /obj/item/organ/proc/refresh_action_button()
 	return action
 
-/obj/item/organ/attack_self(var/mob/user)
+/obj/item/organ/use_on_self(var/mob/user)
 	return (owner && loc == owner && owner == user)
 
 /obj/item/organ/proc/update_health()

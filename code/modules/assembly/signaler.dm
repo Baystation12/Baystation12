@@ -89,7 +89,7 @@
 			signal()
 
 	if(usr)
-		attack_self(usr)
+		use_on_self(usr)
 
 	return
 

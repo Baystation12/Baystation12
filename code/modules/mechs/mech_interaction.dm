@@ -123,7 +123,7 @@
 	if(!failed)
 		if(selected_system)
 			if(selected_system == A)
-				selected_system.attack_self(user)
+				selected_system.use_on_self(user)
 				setClickCooldown(5)
 				return
 
@@ -183,7 +183,7 @@
 
 	if(A == src)
 		setClickCooldown(5)
-		return attack_self(user)
+		return use_on_self(user)
 	else if(adj)
 		setClickCooldown(arms ? arms.action_delay : 15)
 		return A.attack_generic(src, arms.melee_damage, "attacked")
@@ -467,7 +467,7 @@
 		playsound(loc, 'sound/effects/metal_close.ogg', 40, 1)
 		playsound(loc, 'sound/weapons/tablehit1.ogg', 40, 1)
 
-/mob/living/exosuit/proc/attack_self(var/mob/user)
+/mob/living/exosuit/proc/use_on_self(var/mob/user)
 	return visible_message("\The [src] pokes itself.")
 
 /mob/living/exosuit/proc/rename(var/mob/user)

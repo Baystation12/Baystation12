@@ -95,7 +95,7 @@
 	M.dust()
 	set_full(SOULSTONE_ESSENCE)
 
-/obj/item/device/soulstone/attack_self(var/mob/user)
+/obj/item/device/soulstone/use_on_self(var/mob/user)
 	if(full != SOULSTONE_ESSENCE) // No essence - no shade
 		to_chat(user, "<span class='notice'>This [src] has no life essence.</span>")
 		return

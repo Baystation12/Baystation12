@@ -20,7 +20,7 @@
 	if (magpulse)
 		slowdown_per_slot[slot_shoes] += online_slowdown
 
-/obj/item/clothing/shoes/magboots/attack_self(mob/user)
+/obj/item/clothing/shoes/magboots/use_on_self(mob/user)
 	if(magpulse)
 		item_flags &= ~ITEM_FLAG_NOSLIP
 		magpulse = 0

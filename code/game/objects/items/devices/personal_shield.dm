@@ -63,7 +63,7 @@
 		open = !open
 		update_icon()
 
-/obj/item/device/personal_shield/attack_self(var/mob/living/user)
+/obj/item/device/personal_shield/use_on_self(var/mob/living/user)
 	if (open && power_cell)
 		user.visible_message("\The [user] shakes \the [power_cell] out of \the [src].", SPAN_NOTICE("You shake \the [power_cell] out of \the [src]."))
 		turn_off()

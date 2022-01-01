@@ -24,7 +24,7 @@
 /obj/item/psychic_power/get_storage_cost()
 	return ITEM_SIZE_NO_CONTAINER
 
-/obj/item/psychic_power/attack_self(var/mob/user)
+/obj/item/psychic_power/use_on_self(var/mob/user)
 	sound_to(owner, 'sound/effects/psi/power_fail.ogg')
 	user.drop_from_inventory(src)
 

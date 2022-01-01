@@ -35,7 +35,7 @@
 	to_chat(user, "Audio feed is currently: [radio.broadcasting ? "Online" : "Offline"]")
 	to_chat(user, "Photography setting is currently: [on ? "On" : "Off"]")
 
-/obj/item/device/camera/tvcamera/attack_self(mob/user)
+/obj/item/device/camera/tvcamera/use_on_self(mob/user)
 	add_fingerprint(user)
 	user.set_machine(src)
 	var/dat = list()
@@ -76,7 +76,7 @@
 		else
 			to_chat(usr,"<span class='notice'>Audio streaming: Deactivated.</span>")
 	if(!href_list["close"])
-		attack_self(usr)
+		use_on_self(usr)
 
 /obj/item/device/camera/tvcamera/on_update_icon()
 	..()

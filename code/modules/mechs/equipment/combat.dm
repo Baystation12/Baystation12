@@ -77,7 +77,7 @@
 	QDEL_NULL(aura)
 	. = ..()
 
-/obj/item/mech_equipment/shields/attack_self(var/mob/user)
+/obj/item/mech_equipment/shields/use_on_self(var/mob/user)
 	. = ..()
 	if(.)
 		toggle()
@@ -262,7 +262,7 @@
 		playsound(user, 'sound/mecha/mechmove03.ogg', 35, 1)
 		return ..()
 
-/obj/item/material/hatchet/machete/mech/attack_self(mob/living/user)
+/obj/item/material/hatchet/machete/mech/use_on_self(mob/living/user)
 	. = ..()
 	if (user.a_intent != I_HURT)
 		return
@@ -331,7 +331,7 @@
 							M.throw_at(get_edge_target_turf(owner ,owner.dir),5, 2)
 						do_attack_effect(T, "smash")
 
-/obj/item/mech_equipment/ballistic_shield/attack_self(mob/user)
+/obj/item/mech_equipment/ballistic_shield/use_on_self(mob/user)
 	. = ..()
 	if (.) //FORM A SHIELD WALL!
 		if (last_max_block + 2 SECONDS < world.time)
@@ -489,7 +489,7 @@
 				O.eye_blurry += flash_time
 				O.confused += (flash_time + 2)
 
-/obj/item/mech_equipment/flash/attack_self(mob/user)
+/obj/item/mech_equipment/flash/use_on_self(mob/user)
 	. = ..()
 	if(.)
 		if(world.time < next_use)

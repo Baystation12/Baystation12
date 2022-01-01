@@ -171,7 +171,7 @@ var/list/tape_roll_applications = list()
 	update_icon()
 	return ..()
 
-/obj/item/taperoll/attack_self(mob/user as mob)
+/obj/item/taperoll/use_on_self(mob/user as mob)
 	if(!start)
 		start = get_turf(src)
 		to_chat(usr, "<span class='notice'>You place the first end of \the [src].</span>")

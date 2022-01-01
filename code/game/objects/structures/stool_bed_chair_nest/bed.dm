@@ -309,7 +309,7 @@
 	w_class = ITEM_SIZE_LARGE
 	var/structure_form_type = /obj/structure/bed/roller	//The deployed form path.
 
-/obj/item/roller/attack_self(mob/user)
+/obj/item/roller/use_on_self(mob/user)
 	var/obj/structure/bed/roller/R = new structure_form_type(user.loc)
 	R.add_fingerprint(user)
 	qdel(src)

@@ -11,7 +11,7 @@
 	var/obj/item/held
 
 
-/obj/item/clothing/accessory/locket/attack_self(mob/user)
+/obj/item/clothing/accessory/locket/use_on_self(mob/user)
 	if (!base_icon)
 		base_icon = icon_state
 	if (!("[base_icon]_open" in icon_states(icon)))

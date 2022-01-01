@@ -149,7 +149,7 @@
 
 	action_button_name = "Toggle the magclaws"
 
-/obj/item/clothing/shoes/magboots/vox/attack_self(mob/user)
+/obj/item/clothing/shoes/magboots/vox/use_on_self(mob/user)
 	if(src.magpulse)
 		item_flags &= ~ITEM_FLAG_NOSLIP
 		magpulse = 0

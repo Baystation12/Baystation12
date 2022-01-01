@@ -486,7 +486,7 @@
 		to_chat(user, "<span class='notice'>There's a little switch on the bottom. It's flipped down.</span>")
 	else
 		to_chat(user, "<span class='notice'>There's a little switch on the bottom. It's flipped up.</span>")
-/obj/item/orion_ship/attack_self(mob/user)
+/obj/item/orion_ship/use_on_self(mob/user)
 	if(active)
 		return
 	log_and_message_admins("primed an explosive Orion ship for detonation.", user)

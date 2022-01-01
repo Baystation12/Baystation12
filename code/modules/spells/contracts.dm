@@ -7,7 +7,7 @@
 	var/contract_master = null
 	var/list/contract_spells = list(/spell/contract/reward,/spell/contract/punish,/spell/contract/return_master)
 
-/obj/item/contract/attack_self(mob/user as mob)
+/obj/item/contract/use_on_self(mob/user as mob)
 	if(contract_master == null)
 		to_chat(user, "<span class='notice'>You bind the contract to your soul, making you the recipient of whatever poor fool's soul that decides to contract with you.</span>")
 		contract_master = user
@@ -152,4 +152,3 @@
 /obj/item/contract/boon/wizard/charge
 	path = /spell/aoe_turf/charge
 	desc = "This contract is made of 100% post-consumer wizard."
-

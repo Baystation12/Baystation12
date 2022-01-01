@@ -86,7 +86,7 @@ Unique items
 	icon_state = "pen_co"
 	desc = "A slightly bulky pen with a golden case. Twisting the top allows you to switch the nib for different colors."
 
-/obj/item/pen/multi/cmd/attack_self(mob/user)
+/obj/item/pen/multi/cmd/use_on_self(mob/user)
 	if(++selectedColor > 3)
 		selectedColor = 1
 	colour = colors[selectedColor]

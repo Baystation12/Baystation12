@@ -119,7 +119,7 @@
 	return
 
 
-/obj/item/flamethrower/attack_self(mob/user as mob)
+/obj/item/flamethrower/use_on_self(mob/user as mob)
 	if(user.stat || user.restrained() || user.lying)	return
 	user.set_machine(src)
 	if(!tank)
@@ -160,7 +160,7 @@
 		close_browser(usr, "window=flamethrower")
 	for(var/mob/M in viewers(1, loc))
 		if((M.client && M.machine == src))
-			attack_self(M)
+			use_on_self(M)
 	update_icon()
 	return
 
@@ -183,7 +183,7 @@
 	operating = 0
 	for(var/mob/M in viewers(1, loc))
 		if((M.client && M.machine == src))
-			attack_self(M)
+			use_on_self(M)
 
 /obj/item/flamethrower/proc/ignite_turf(turf/target)
 	//TODO: DEFERRED Consider checking to make sure tank pressure is high enough before doing this...

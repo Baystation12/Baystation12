@@ -5,7 +5,7 @@
 	desc = "An engagement ring. It certainly looks expensive."
 	icon_state = "diamond"
 
-/obj/item/clothing/ring/engagement/attack_self(mob/user)
+/obj/item/clothing/ring/engagement/use_on_self(mob/user)
 	user.visible_message("<span class='warning'>\The [user] gets down on one knee, presenting \the [src].</span>","<span class='warning'>You get down on one knee, presenting \the [src].</span>")
 
 /obj/item/clothing/ring/cti
@@ -106,7 +106,7 @@
 	icon_state = "seal-signet"
 	var/nameset = 0
 
-/obj/item/clothing/ring/seal/signet/attack_self(mob/user)
+/obj/item/clothing/ring/seal/signet/use_on_self(mob/user)
 	if(nameset)
 		to_chat(user, "<span class='notice'>The [src] has already been claimed!</span>")
 		return

@@ -176,7 +176,7 @@ obj/item/clothing/mask/smokable/ecig/util/examine(mob/user)
 			to_chat(user, "<span class='notice'>\The [src] already has a battery installed.</span>")
 
 
-/obj/item/clothing/mask/smokable/ecig/attack_self(mob/user as mob)
+/obj/item/clothing/mask/smokable/ecig/use_on_self(mob/user as mob)
 	if (active)
 		Deactivate()
 		to_chat(user, "<span class='notice'>You turn off \the [src].</span> ")

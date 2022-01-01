@@ -30,9 +30,9 @@
 	add_fingerprint(user)
 	return
 
-/obj/item/assembly/shock_kit/attack_self(mob/user as mob)
-	part1.attack_self(user, status)
-	part2.attack_self(user, status)
+/obj/item/assembly/shock_kit/use_on_self(mob/user as mob)
+	part1.use_on_self(user, status)
+	part2.use_on_self(user, status)
 	add_fingerprint(user)
 	return
 

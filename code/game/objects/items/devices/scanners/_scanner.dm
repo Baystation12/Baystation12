@@ -18,7 +18,7 @@
 	var/scan_sound
 	var/printout_color
 
-/obj/item/device/scanner/attack_self(mob/user)
+/obj/item/device/scanner/use_on_self(mob/user)
 	show_menu(user)
 
 /obj/item/device/scanner/proc/show_menu(mob/user)
