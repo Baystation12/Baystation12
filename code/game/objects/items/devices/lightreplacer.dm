@@ -65,7 +65,7 @@
 			else
 				to_chat(user, "It is configured to print bulbs in this color: <span style='color: [lighting_tone];'>■</span>")
 
-/obj/item/device/lightreplacer/resolve_attackby(var/atom/A, mob/user)
+/obj/item/device/lightreplacer/use_on_atom(var/atom/A, mob/user)
 
 	//Check for lights in a container, refilling our charges.
 	if(istype(A, /obj/item/storage/))

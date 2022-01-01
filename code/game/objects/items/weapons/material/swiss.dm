@@ -102,7 +102,7 @@
 /obj/item/material/knife/folding/swiss/ishatchet()
 	return active_tool == SWISSKNF_WBLADE
 
-/obj/item/material/knife/folding/swiss/resolve_attackby(obj/target, mob/user)
+/obj/item/material/knife/folding/swiss/use_on_atom(obj/target, mob/user)
 	if((istype(target, /obj/structure/window) || istype(target, /obj/structure/grille)) && active_tool == SWISSKNF_GBLADE)
 		force = force * 8
 		. = ..()

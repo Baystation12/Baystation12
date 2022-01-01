@@ -109,7 +109,7 @@
 
 var/const/NO_EMAG_ACT = -50
 
-/obj/item/card/emag/resolve_attackby(atom/A, mob/user)
+/obj/item/card/emag/use_on_atom(atom/A, mob/user)
 	var/used_uses = A.emag_act(uses, user, src)
 	if(used_uses == NO_EMAG_ACT)
 		return ..(A, user)

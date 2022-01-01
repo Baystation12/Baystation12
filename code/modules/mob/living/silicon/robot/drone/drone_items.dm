@@ -193,7 +193,7 @@
 	// Don't fall through and smack people with gripper, instead just no-op
 	return 0
 
-/obj/item/gripper/resolve_attackby(var/atom/target, var/mob/living/user, params)
+/obj/item/gripper/use_on_atom(var/atom/target, var/mob/living/user, params)
 
 	// Ensure fumbled items are accessible.
 	if(!wrapped)
@@ -210,7 +210,7 @@
 		wrapped.force = 0.0
 
 		//Pass the attack on to the target. This might delete/relocate wrapped.
-		var/resolved = wrapped.resolve_attackby(target,user,params)
+		var/resolved = wrapped.use_on_atom(target,user,params)
 
 		//If resolve_attackby forces waiting before taking wrapped, we need to let it finish before doing the rest.
 		addtimer(CALLBACK(src, .proc/finish_using, target, user, params, force_holder, resolved), 0)

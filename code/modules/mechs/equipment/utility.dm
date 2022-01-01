@@ -61,7 +61,7 @@
 	var/carrying_capacity = 5
 	var/list/obj/carrying = list()
 
-/obj/item/mech_equipment/clamp/resolve_attackby(atom/A, mob/user, click_params)
+/obj/item/mech_equipment/clamp/use_on_atom(atom/A, mob/user, click_params)
 	if(owner)
 		return 0
 	return ..()

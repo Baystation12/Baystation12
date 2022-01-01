@@ -76,7 +76,7 @@
 
 	current_grab.hit_with_grab(src)
 
-/obj/item/grab/resolve_attackby(atom/A, mob/user, var/click_params)
+/obj/item/grab/use_on_atom(atom/A, mob/user, var/click_params)
 	if (QDELETED(src) || !assailant)
 		return TRUE
 	assailant.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)

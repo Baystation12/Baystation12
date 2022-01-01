@@ -444,7 +444,7 @@
 	to_chat(user, "<span class='notice'>You deploy [R].</span>")
 	R.add_fingerprint(user)
 
-/obj/item/robot_rack/resolve_attackby(obj/O, mob/user, click_params)
+/obj/item/robot_rack/use_on_atom(obj/O, mob/user, click_params)
 	if(istype(O, object_type))
 		if(length(held) < capacity)
 			to_chat(user, "<span class='notice'>You collect [O].</span>")

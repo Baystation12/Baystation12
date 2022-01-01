@@ -75,7 +75,7 @@
 	if(A == loc || (A in loc) || (A in contents))
 		// No adjacency checks
 
-		var/resolved = W.resolve_attackby(A, src, params)
+		var/resolved = W.use_on_atom(A, src, params)
 		if(!resolved && A && W)
 			W.afterattack(A, src, 1, params) // 1 indicates adjacency
 		return
@@ -87,7 +87,7 @@
 	if(isturf(A) || isturf(A.loc) || (sdepth != -1 && sdepth <= 1))
 		if(A.Adjacent(src)) // see adjacent.dm
 
-			var/resolved = W.resolve_attackby(A, src, params)
+			var/resolved = W.use_on_atom(A, src, params)
 			if(!resolved && A && W)
 				W.afterattack(A, src, 1, params) // 1 indicates adjacency
 			return

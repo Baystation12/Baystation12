@@ -56,7 +56,7 @@
 		GLOB.destroyed_event.unregister(buffer_object, src)
 		buffer_object = null
 
-/obj/item/device/multitool/resolve_attackby(atom/A, mob/user, params)
+/obj/item/device/multitool/use_on_atom(atom/A, mob/user, params)
 	if(!isobj(A))
 		return ..()
 

@@ -4,8 +4,8 @@ These are the default click code call sequences used when clicking on stuff with
 
 Atoms:
 
-mob/ClickOn() calls the item's resolve_attackby() proc.
-item/resolve_attackby() calls the target atom's attackby() proc.
+mob/ClickOn() calls the item's use_on_atom() proc.
+item/use_on_atom() calls the target atom's attackby() proc.
 
 Mobs:
 
@@ -29,11 +29,18 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	return
 
 
-//I would prefer to rename this to attack(), but that would involve touching hundreds of files.
-/obj/item/proc/resolve_attackby(atom/A, mob/user, var/click_params)
+/**
+ * Called when an atom is clicked on with `src` as the active item in item.
+ *
+ * - `A` is the atom clicked on.
+ * - `user` is the mob using `src`.
+ * - `click_params` is the click parameters, i.e. pixel coordinates of the cursor.
+ */
+/obj/item/proc/use_on_atom(atom/A, mob/user, click_params)
 	if(!(item_flags & ITEM_FLAG_NO_PRINT))
 		add_fingerprint(user)
 	return A.attackby(src, user, click_params)
+
 
 // No comment
 /atom/proc/attackby(obj/item/W, mob/user, var/click_params)

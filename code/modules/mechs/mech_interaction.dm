@@ -163,7 +163,7 @@
 
 			var/resolved
 
-			if(adj) resolved = temp_system.resolve_attackby(A, src, params)
+			if(adj) resolved = temp_system.use_on_atom(A, src, params)
 			if(!resolved && A && temp_system)
 				var/mob/ruser = src
 				if(!system_moved) //It's more useful to pass along clicker pilot when logic is fully mechside

@@ -95,7 +95,7 @@
 
 
 // Intercepts hits against atoms in order to pick up items or dump stuff out as required.
-/obj/item/tray/resolve_attackby(atom/A, mob/user)
+/obj/item/tray/use_on_atom(atom/A, mob/user)
 	var/grab_intent = ishuman(user) ? I_GRAB : I_HELP
 	if (user.a_intent != grab_intent || istype(A, /obj/item/storage) || istype(A, /obj/screen/storage))
 		return ..()

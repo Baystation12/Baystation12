@@ -58,7 +58,7 @@
 	matter = list(MATERIAL_STEEL = 150)
 	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked", "attacked", "slashed", "torn", "ripped", "cut")
 
-/obj/item/crowbar/emergency_forcing_tool/resolve_attackby(atom/A)//extra dmg against glass, it's an emergency forcing tool, it's gotta be good at something
+/obj/item/crowbar/emergency_forcing_tool/use_on_atom(atom/A)//extra dmg against glass, it's an emergency forcing tool, it's gotta be good at something
 	if(istype(A, /obj/structure/window))
 		force = initial(force) * 2
 	else

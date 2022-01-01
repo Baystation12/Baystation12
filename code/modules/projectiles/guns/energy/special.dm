@@ -67,7 +67,7 @@
 		list(mode_name="induce specific mutations", projectile_type=/obj/item/projectile/energy/floramut/gene, modifystate="floramut"),
 		)
 
-/obj/item/gun/energy/floragun/resolve_attackby(atom/A)
+/obj/item/gun/energy/floragun/use_on_atom(atom/A)
 	if(istype(A,/obj/machinery/portable_atmospherics/hydroponics))
 		return FALSE // do afterattack, i.e. fire, at pointblank at trays.
 	return ..()

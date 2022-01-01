@@ -11,7 +11,7 @@
 /obj/item/swabber/afterattack(var/atom/A, var/mob/user, var/proximity, var/params)
 	if(proximity)
 		var/obj/item/forensics/swab/swab = new(user)
-		var/resolved = swab.resolve_attackby(A, user, params)
+		var/resolved = swab.use_on_atom(A, user, params)
 		if(!resolved && A && !QDELETED(A))
 			swab.afterattack(A, user, TRUE, params)
 		if(swab.is_used())

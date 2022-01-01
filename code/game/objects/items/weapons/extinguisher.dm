@@ -97,7 +97,7 @@
 		O.Move(get_step(user,movementdirection), movementdirection)
 		sleep(3)
 
-/obj/item/extinguisher/resolve_attackby(var/atom/target, var/mob/user, var/flag)
+/obj/item/extinguisher/use_on_atom(var/atom/target, var/mob/user, var/flag)
 	if (istype(target, /obj/structure/hygiene/sink) && reagents.get_free_space() > 0) // fill first, wash if full
 		return FALSE
 	return ..()

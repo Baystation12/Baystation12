@@ -50,7 +50,7 @@
 	to_chat(user, "<span class='notice'>You overlay \the [src] and \the [supplied], combining the print records.</span>")
 	return 1
 
-/obj/item/sample/resolve_attackby(atom/A, mob/user, var/click_params)
+/obj/item/sample/use_on_atom(atom/A, mob/user, var/click_params)
 	// Fingerprints will be handled in after_attack() to not mess up the samples taken
 	return A.attackby(src, user, click_params)
 
@@ -152,7 +152,7 @@
 	var/obj/item/sample/S = new evidence_path(get_turf(user), supplied)
 	to_chat(user, "<span class='notice'>You transfer [S.evidence.len] [S.evidence.len > 1 ? "[evidence_type]s" : "[evidence_type]"] to \the [S].</span>")
 
-/obj/item/forensics/sample_kit/resolve_attackby(atom/A, mob/user, click_params)
+/obj/item/forensics/sample_kit/use_on_atom(atom/A, mob/user, click_params)
 	if (user.a_intent != I_HELP) // Prevents putting sample kits in bags, on racks/tables, etc when trying to take samples
 		return FALSE
 

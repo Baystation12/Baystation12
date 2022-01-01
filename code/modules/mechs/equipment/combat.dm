@@ -252,7 +252,7 @@
 		if (target.mob_size < user.mob_size) //Damaging attacks overwhelm smaller mobs
 			target.throw_at(get_edge_target_turf(target,get_dir(user, target)),1, 1)
 
-/obj/item/material/hatchet/machete/mech/resolve_attackby(atom/A, mob/user, click_params)
+/obj/item/material/hatchet/machete/mech/use_on_atom(atom/A, mob/user, click_params)
 	//Case 1: Default, you are hitting something that isn't a mob. Just do whatever, this isn't dangerous or op.
 	if (!istype(A, /mob/living))
 		return ..()

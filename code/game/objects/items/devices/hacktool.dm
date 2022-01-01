@@ -30,7 +30,7 @@
 	else
 		..()
 
-/obj/item/device/multitool/hacktool/resolve_attackby(atom/A, mob/user)
+/obj/item/device/multitool/hacktool/use_on_atom(atom/A, mob/user)
 	sanity_check()
 
 	if(!in_hack_mode || !attempt_hack(user, A)) //will still show the unable to hack message, oh well
