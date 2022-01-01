@@ -124,12 +124,12 @@
 		if(damtype == BURN)
 			. |= DAM_LASER
 
-/obj/attackby(obj/item/O, mob/user)
+/obj/use_tool(obj/item/O, mob/user)
 	if(obj_flags & OBJ_FLAG_ANCHORABLE)
 		if(isWrench(O))
 			wrench_floor_bolts(user)
 			update_icon()
-			return
+			return TRUE
 	return ..()
 
 /obj/proc/wrench_floor_bolts(mob/user, delay=20)

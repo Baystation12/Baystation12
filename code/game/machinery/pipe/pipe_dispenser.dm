@@ -70,14 +70,15 @@
 	popup.set_content(get_console_data(GLOB.all_pipe_datums_by_category, TRUE))
 	popup.open()
 
-/obj/machinery/pipedispenser/attackby(var/obj/item/W as obj, var/mob/user as mob)
+/obj/machinery/pipedispenser/use_tool(obj/item/W, mob/user)
 	if (istype(W, /obj/item/pipe) || istype(W, /obj/item/machine_chassis))
 		if(!user.unEquip(W))
-			return
+			return TRUE
 		to_chat(user, "<span class='notice'>You put \the [W] back into \the [src].</span>")
 		add_fingerprint(user)
 		qdel(W)
-		return
+		return TRUE
+
 	if(!panel_open)
 		if(isWrench(W))
 			add_fingerprint(user)
@@ -105,7 +106,8 @@
 					anchored = TRUE
 					stat &= ~MAINT
 					update_use_power(POWER_USE_IDLE)
-			return
+			return TRUE
+
 	return ..()
 
 /obj/machinery/pipedispenser/disposal

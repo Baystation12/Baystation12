@@ -17,13 +17,12 @@
 	venus.adjust_multi(GAS_CHLORINE, MOLES_N2STANDARD, GAS_PHORON, MOLES_O2STANDARD)
 	return venus
 
-/obj/structure/adherent_bath/attackby(var/obj/item/thing, var/mob/user)
-	if(istype(thing, /obj/item/grab))
-		var/obj/item/grab/G = thing
-		if(enter_bath(G.affecting))
-			qdel(G)
-		return
-	. = ..()
+
+/obj/structure/adherent_bath/grab_attack(obj/item/grab/G)
+	if(enter_bath(G.affecting))
+		qdel(G)
+	return TRUE
+
 
 /obj/structure/adherent_bath/proc/enter_bath(var/mob/living/patient, var/mob/user)
 

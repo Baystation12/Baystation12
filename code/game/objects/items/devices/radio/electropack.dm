@@ -18,26 +18,25 @@
 		return
 	..()
 
-/obj/item/device/radio/electropack/attackby(obj/item/W as obj, mob/user as mob)
-	..()
+/obj/item/device/radio/electropack/use_tool(obj/item/W, mob/user)
 	if(istype(W, /obj/item/clothing/head/helmet))
 		if(!b_stat)
 			to_chat(user, "<span class='notice'>[src] is not ready to be attached!</span>")
-			return
+			return FALSE
 		if(!user.unEquip(W) || !user.unEquip(src))
-			return
+			return FALSE
 		var/obj/item/assembly/shock_kit/A = new /obj/item/assembly/shock_kit( user )
 		A.icon = 'icons/obj/assemblies.dmi'
-
 		W.forceMove(A)
 		W.master = A
 		A.part1 = W
-
 		forceMove(A)
 		master = A
 		A.part2 = src
-
 		user.put_in_hands(A)
+		return TRUE
+
+	return ..()
 
 /obj/item/device/radio/electropack/Topic(href, href_list)
 	//..()

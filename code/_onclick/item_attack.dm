@@ -5,11 +5,11 @@ These are the default click code call sequences used when clicking on stuff with
 Atoms:
 
 mob/ClickOn() calls the item's use_on_atom() proc.
-item/use_on_atom() calls the target atom's attackby() proc.
+item/use_on_atom() calls the target atom's use_item() proc.
 
 Mobs:
 
-mob/living/attackby() after checking for surgery, calls the item's attack() proc.
+mob/living/use_item() after checking for surgery, calls the item's attack() proc.
 item/attack() generates attack logs, sets click cooldown and calls the mob's attacked_with_item() proc. If you override this, consider whether you need to set a click cooldown, play attack animations, and generate logs yourself.
 mob/attacked_with_item() should then do mob-type specific stuff (like determining hit/miss, handling shields, etc) and then possibly call the item's apply_hit_effect() proc to actually apply the effects of being hit.
 
@@ -39,29 +39,71 @@ avoid code duplication. This includes items that may sometimes act as a standard
 /obj/item/proc/use_on_atom(atom/A, mob/user, click_params)
 	if(!(item_flags & ITEM_FLAG_NO_PRINT))
 		add_fingerprint(user)
-	return A.attackby(src, user, click_params)
+	return A.use_item(src, user, click_params)
 
 
-// No comment
-/atom/proc/attackby(obj/item/W, mob/user, var/click_params)
-	return
+/**
+ * Called when an item is used on `src` with the user on harm intent.
+ * Should return `TRUE` is the item interaction was successful, `FALSE` if it failed.
+ * Failure should include attacks that have no affect.
+ *
+ * - `W` is the item being used on `src`.
+ * - `user` is the mob using the item.
+ * - `click_params` is the click parameters, i.e. pixel coordinates of the cursor.
+ */
+/atom/proc/use_weapon(obj/item/W, mob/user, click_params)
+	return W.attack(src, user, user.zone_sel ? user.zone_sel.selecting : ran_zone())
 
-/mob/living/attackby(obj/item/I, mob/user)
-	if(!ismob(user))
-		return 0
-	if(can_operate(src,user) && I.do_surgery(src,user)) //Surgery
-		return 1
-	return I.attack(src, user, user.zone_sel ? user.zone_sel.selecting : ran_zone())
 
-/mob/living/carbon/human/attackby(obj/item/I, mob/user)
-	if(user == src && zone_sel.selecting == BP_MOUTH && can_devour(I, silent = TRUE))
-		var/obj/item/blocked = src.check_mouth_coverage()
-		if(blocked)
+/**
+ * Called when an item is used on `src` with the user on an intent other than harm.
+ * Should return `TRUE` is the item interaction was successful, `FALSE` if it failed.
+ * Failure should include tool usage attempts that could not complete for various reasons - Missing resources, do_after fails, etc.
+ *
+ * - `W` is the item being used on `src`.
+ * - `user` is the mob using the item.
+ * - `click_params` is the click parameters, i.e. pixel coordinates of the cursor.
+ */
+/atom/proc/use_tool(obj/item/W, mob/user, click_params)
+	return FALSE
+
+
+/**
+ * General handler for using items on other atoms. Generally you should call this, and override `use_tool()` or `use_weapon()`.
+ * Should return `TRUE` is the item interaction was successful, `FALSE` if it failed.
+ *
+ * - `W` is the item being used on `src`.
+ * - `user` is the mob using the item.
+ * - `click_params` is the click parameters, i.e. pixel coordinates of the cursor.
+ */
+/atom/proc/use_item(obj/item/W, mob/user, click_params)
+	add_fingerprint(user, FALSE, W)
+	if (user.a_intent == I_HURT)
+		return W.use_weapon(src, user, click_params)
+	else
+		return W.use_tool(src, user, click_params)
+
+
+/mob/living/use_tool(obj/item/W, mob/user, click_params)
+	if (can_operate(src, user) && W.do_surgery(src, user))
+		return TRUE
+	return ..()
+
+
+/mob/living/use_weapon(obj/item/W, mob/user, click_params)
+	return W.attack(src, user, user.zone_sel ? user.zone_sel.selecting : ran_zone())
+
+
+/mob/living/carbon/human/use_tool(obj/item/I, mob/user, click_params)
+	if (user == src && zone_sel.selecting == BP_MOUTH && can_devour(I, silent = TRUE))
+		var/obj/item/blocked = check_mouth_coverage()
+		if (blocked)
 			to_chat(user, SPAN_WARNING("\The [blocked] is in the way!"))
 			return TRUE
-		if(devour(I))
+		if (devour(I))
 			return TRUE
 	return ..()
+
 
 // Proximity_flag is 1 if this afterattack was called on something adjacent, in your square, or on your person.
 // Click parameters is the params string from byond Click() code, see that documentation.

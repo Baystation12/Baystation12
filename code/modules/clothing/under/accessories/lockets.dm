@@ -30,7 +30,7 @@
 		icon_state = "[base_icon]"
 
 
-/obj/item/clothing/accessory/locket/attackby(obj/item/I, mob/user)
+/obj/item/clothing/accessory/locket/use_item(obj/item/I, mob/user)
 	if (!open)
 		to_chat(user, "You have to open it first.")
 		return

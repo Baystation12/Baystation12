@@ -109,7 +109,7 @@
 		turn_on()
 	to_chat(user, "<span class='notice'>You switch \the [src] [on ? "on" : "off"].</span>")
 
-/obj/item/device/suit_cooling_unit/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/device/suit_cooling_unit/use_tool(obj/item/W, mob/user)
 	if(isScrewdriver(W))
 		if(cover_open)
 			cover_open = 0
@@ -118,19 +118,20 @@
 			cover_open = 1
 			to_chat(user, "You unscrew the panel.")
 		update_icon()
-		return
+		return TRUE
 
 	if (istype(W, /obj/item/cell))
 		if(cover_open)
 			if(cell)
 				to_chat(user, "There is a [cell] already installed here.")
+				return FALSE
 			else
 				if(!user.unEquip(W, src))
-					return
+					return FALSE
 				cell = W
 				to_chat(user, "You insert the [cell].")
 		update_icon()
-		return
+		return TRUE
 
 	return ..()
 

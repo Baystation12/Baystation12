@@ -197,9 +197,10 @@
 	master = null
 	. = ..()
 
-/atom/movable/overlay/attackby(obj/item/I, mob/user)
+/atom/movable/overlay/use_item(obj/item/I, mob/user, click_params)
 	if (master)
-		return master.attackby(I, user)
+		return master.use_item(I, user, click_params)
+	return FALSE
 
 /atom/movable/overlay/attack_hand(mob/user)
 	if (master)

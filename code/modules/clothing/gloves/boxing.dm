@@ -4,7 +4,7 @@
 	icon_state = "boxing"
 	item_state = "boxing"
 
-/obj/item/clothing/gloves/boxing/attackby(obj/item/W, mob/user)
+/obj/item/clothing/gloves/boxing/use_item(obj/item/W, mob/user)
 	if(isWirecutter(W) || istype(W, /obj/item/scalpel))
 		to_chat(user, "<span class='notice'>That won't work.</span>")//Nope
 	else

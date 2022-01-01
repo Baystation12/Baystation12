@@ -136,7 +136,7 @@
 	var/range = 1
 	idle_power_usage = 5000
 
-/obj/machinery/shipsensors/attackby(obj/item/W, mob/user)
+/obj/machinery/shipsensors/use_item(obj/item/W, mob/user)
 	var/damage = max_health - health
 	if(damage && isWelder(W))
 

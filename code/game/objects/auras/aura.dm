@@ -27,7 +27,7 @@ They should also be used for when you want to effect the ENTIRE mob, like having
 /obj/aura/proc/life_tick()
 	return 0
 
-/obj/aura/attackby(var/obj/item/I, var/mob/user)
+/obj/aura/use_item(var/obj/item/I, var/mob/user)
 	return 0
 
 /obj/aura/bullet_act(var/obj/item/projectile/P, var/def_zone)
@@ -39,7 +39,7 @@ They should also be used for when you want to effect the ENTIRE mob, like having
 /obj/aura/debug
 	var/returning = 0
 
-/obj/aura/debug/attackby(var/obj/item/I, var/mob/user)
+/obj/aura/debug/use_item(var/obj/item/I, var/mob/user)
 	log_debug("Attackby for \ref[src]: [I], [user]")
 	return returning
 

@@ -220,7 +220,7 @@
 	for(var/obj/item/organ/external/child in children)
 		child.show_decay_status(user)
 
-/obj/item/organ/external/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/organ/external/use_item(obj/item/W as obj, mob/user as mob)
 	switch(stage)
 		if(0)
 			if(W.sharp)

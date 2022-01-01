@@ -45,9 +45,10 @@
 	var/obj/item/cell/cell = get_cell()
 	return cell ? cell.charge : 0
 
-/obj/item/weldingtool/electric/attackby(var/obj/item/W, var/mob/user)
+/obj/item/weldingtool/electric/use_tool(obj/item/W, mob/user)
 	if(istype(W,/obj/item/stack/material/rods) || istype(W, /obj/item/welder_tank))
-		return
+		return FALSE
+
 	if(isScrewdriver(W))
 		if(cell)
 			cell.dropInto(get_turf(src))
@@ -56,19 +57,23 @@
 			welding = FALSE
 			cell = null
 			update_icon()
+			return TRUE
 		else
 			to_chat(user, SPAN_WARNING("\The [src] has no cell installed."))
-		return
+		return FALSE
+
 	else if(istype(W, /obj/item/cell))
 		if(cell)
 			to_chat(user, SPAN_WARNING("\The [src] already has a cell installed."))
+			return FALSE
 		else if(user.unEquip(W))
 			cell = W
 			cell.forceMove(src)
 			to_chat(user, SPAN_NOTICE("You slot \the [cell] into \the [src]."))
 			update_icon()
-		return
-	. = ..()
+			return TRUE
+
+	return ..()
 
 /obj/item/weldingtool/electric/burn_fuel(var/amount)
 	spend_charge(amount * fuel_cost_multiplier)

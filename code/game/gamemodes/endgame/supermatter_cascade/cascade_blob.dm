@@ -22,7 +22,7 @@
 		Consume(A)
 
 /turf/unsimulated/wall/supermatter/Destroy()
-	STOP_PROCESSING(SSturf, src)	
+	STOP_PROCESSING(SSturf, src)
 	. = ..()
 
 /turf/unsimulated/wall/supermatter/Process(wait, times_fired)
@@ -71,15 +71,18 @@
 
 	Consume(user)
 
-/turf/unsimulated/wall/supermatter/attackby(obj/item/W as obj, mob/living/user as mob)
-	user.visible_message("<span class=\"warning\">\The [user] touches \a [W] to \the [src] as a silence fills the room...</span>",\
-		"<span class=\"danger\">You touch \the [W] to \the [src] when everything suddenly goes silent.\"</span>\n<span class=\"notice\">\The [W] flashes into dust as you flinch away from \the [src].</span>",\
-		"<span class=\"warning\">Everything suddenly goes silent.</span>")
 
+/turf/unsimulated/wall/supermatter/use_item(obj/item/W, mob/living/user)
+	user.visible_message(
+		SPAN_WARNING("\The [user] touches \a [W] to \the [src] as a silence fills the room..."),
+		"[SPAN_DANGER("You touch \the [W] to \the [src] when everything suddenly goes silent.")]\n[SPAN_NOTICE("\The [W] flashes into dust as you flinch away from \the [src].")]",
+		SPAN_WARNING("Everything suddenly goes silent.")
+	)
 	playsound(src, 'sound/effects/supermatter.ogg', 50, 1)
-
 	user.drop_from_inventory(W)
 	Consume(W)
+	return TRUE
+
 
 #define MayConsume(A) (istype(A) && A.simulated && !isobserver(A))
 

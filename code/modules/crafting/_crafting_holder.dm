@@ -18,7 +18,7 @@
 		qdel(thing)
 	. = ..()
 
-/obj/item/crafting_holder/attackby(var/obj/item/W, var/mob/user)
+/obj/item/crafting_holder/use_item(var/obj/item/W, var/mob/user)
 
 	if(istype(W, /obj/item/pen))
 		var/new_label = sanitizeSafe(input(user, "What do you wish to label this assembly?", "Assembly Labelling", label_name), MAX_NAME_LEN)

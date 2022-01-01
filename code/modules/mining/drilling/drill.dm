@@ -255,7 +255,7 @@
 	icon_state = "mining_brace"
 	obj_flags = OBJ_FLAG_ROTATABLE
 	interact_offline = 1
-	
+
 	machine_name = "mining drill brace"
 	machine_desc = "A mobile support strut that provides support for the head of a mining drill when anchored. Placed on either side of the drill head."
 
@@ -266,11 +266,11 @@
 		return SPAN_NOTICE("You can't work with the brace of a running drill!")
 	return ..()
 
-/obj/machinery/mining/brace/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/mining/brace/use_item(obj/item/W as obj, mob/user as mob)
 	if(connected && connected.active)
 		to_chat(user, "<span class='notice'>You can't work with the brace of a running drill!</span>")
 		return TRUE
-	if(component_attackby(W, user))
+	if(component_use_item(W, user))
 		return TRUE
 	if(isWrench(W))
 

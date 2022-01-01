@@ -74,7 +74,7 @@
 			reagents.trans_to(target, reagents.total_volume / 8)
 		target.clean_blood() //Clean bloodied atoms. Blood decals themselves need to be handled above.
 		cleaned = TRUE
-	else 
+	else
 		to_chat(user, "<span class='notice'>You clean \the [target.name].</span>")
 		target.clean_blood() //Clean bloodied atoms. Blood decals themselves need to be handled above.
 		cleaned = TRUE
@@ -92,15 +92,16 @@
 		return
 	..()
 
-/obj/item/soap/attackby(var/obj/item/I, var/mob/user)
+/obj/item/soap/use_tool(obj/item/I, mob/user)
 	if(istype(I, /obj/item/key))
 		if(!key_data)
 			to_chat(user, "<span class='notice'>You imprint \the [I] into \the [src].</span>")
 			var/obj/item/key/K = I
 			key_data = K.key_data
 			update_icon()
-		return
-	..()
+			return TRUE
+		return FALSE
+	return ..()
 
 /obj/item/soap/on_update_icon()
 	overlays.Cut()

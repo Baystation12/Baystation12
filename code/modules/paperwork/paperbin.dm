@@ -69,7 +69,7 @@
 	return
 
 
-/obj/item/paper_bin/attackby(obj/item/i as obj, mob/user as mob)
+/obj/item/paper_bin/use_item(obj/item/i as obj, mob/user as mob)
 	if(istype(i, /obj/item/paper))
 		if(!user.unEquip(i, src))
 			return

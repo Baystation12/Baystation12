@@ -596,8 +596,7 @@
 		if (power_usage && cell)
 			to_chat(user, "<span class='notice'>\The [src] charge meter reads [round(cell.percent(), 0.1)]%.</span>")
 
-/obj/item/device/radio/attackby(obj/item/W as obj, mob/user as mob)
-	..()
+/obj/item/device/radio/use_tool(obj/item/W, mob/user)
 	user.set_machine(src)
 	if(isScrewdriver(W))
 		b_stat = !b_stat
@@ -606,11 +605,14 @@
 		else
 			user.show_message("<span class='notice'>\The [src] can no longer be modified or attached!</span>")
 		updateDialog()
-		return
+		return TRUE
+
 	if(!cell && power_usage && istype(W, /obj/item/cell/device) && user.unEquip(W, target = src))
 		to_chat(user, "<span class='notice'>You put [W] in \the [src].</span>")
 		cell = W
-		return
+		return TRUE
+
+	return ..()
 
 /obj/item/device/radio/emp_act(severity)
 	broadcasting = 0
@@ -677,11 +679,10 @@
 		var/datum/robot_component/C = R.components["radio"]
 		R.cell_use_power(C.active_usage)
 
-/obj/item/device/radio/borg/attackby(obj/item/W as obj, mob/user as mob)
-//	..()
+/obj/item/device/radio/borg/use_tool(obj/item/W, mob/user)
 	user.set_machine(src)
 	if (!( isScrewdriver(W) || (istype(W, /obj/item/device/encryptionkey/ ))))
-		return
+		return ..()
 
 	if(isScrewdriver(W))
 		if(keyslot)
@@ -694,21 +695,24 @@
 
 			recalculateChannels()
 			to_chat(user, "You pop out the encryption key in the radio!")
+			return TRUE
 
 		else
 			to_chat(user, "This radio doesn't have any encryption keys!")
+			return FALSE
 
 	if(istype(W, /obj/item/device/encryptionkey/))
 		if(keyslot)
 			to_chat(user, "The radio can't hold another key!")
-			return
+			return FALSE
 
 		if(!keyslot)
 			if(!user.unEquip(W, src))
-				return
+				return FALSE
 			keyslot = W
 
 		recalculateChannels()
+		return TRUE
 
 /obj/item/device/radio/borg/recalculateChannels()
 	src.channels = list()

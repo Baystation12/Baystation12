@@ -8,7 +8,7 @@
 	density = TRUE
 	var/static/list/amount_of_underwear_by_id_card
 
-/obj/structure/undies_wardrobe/attackby(var/obj/item/underwear/underwear, var/mob/user)
+/obj/structure/undies_wardrobe/use_item(var/obj/item/underwear/underwear, var/mob/user)
 	if(istype(underwear))
 		if(!user.unEquip(underwear))
 			return

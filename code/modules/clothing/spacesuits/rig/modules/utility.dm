@@ -124,7 +124,7 @@
 	if(!target.Adjacent(holder.wearer))
 		return 0
 
-	var/resolved = target.attackby(device,holder.wearer)
+	var/resolved = target.use_item(device,holder.wearer)
 	if(!resolved && device && target)
 		device.afterattack(target,holder.wearer,1)
 	return 1

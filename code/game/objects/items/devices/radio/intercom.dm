@@ -177,10 +177,9 @@
 
 	return canhear_range
 
-/obj/item/device/radio/intercom/attackby(obj/item/W, mob/user)
+/obj/item/device/radio/intercom/use_tool(obj/item/W, mob/user)
 	switch (buildstage)
 		if (2)
-			..()
 			if (isScrewdriver(W))
 				wiresexposed = !wiresexposed
 				user.visible_message(
@@ -191,7 +190,8 @@
 				)
 				playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
 				update_icon()
-				return
+				return TRUE
+
 			else if (wiresexposed && isWirecutter(W))
 				user.visible_message(
 
@@ -204,7 +204,7 @@
 				b_stat = 0
 				buildstage = 1
 				update_icon()
-				return
+				return TRUE
 
 		if (1)
 			if (isCoil(W))
@@ -219,11 +219,11 @@
 					buildstage = 2
 					b_stat = 1
 					update_icon()
-					return
+					return TRUE
 
 				else
 					to_chat(user, SPAN_WARNING("You need 5 pieces of cable to wire \the [src]."))
-					return
+					return FALSE
 
 			else if (isCrowbar(W))
 				to_chat(user, SPAN_NOTICE("You start prying out the circuits from \the [src]."))
@@ -239,7 +239,9 @@
 					new /obj/item/intercom_electronics(get_turf(user))
 					buildstage = 0
 					update_icon()
-				return
+					return TRUE
+				return FALSE
+
 		if (0)
 			if (istype(W, /obj/item/intercom_electronics))
 				user.visible_message(
@@ -251,7 +253,8 @@
 				qdel(W)
 				buildstage = 1
 				update_icon()
-				return
+				return TRUE
+
 			else if (isWrench(W))
 				user.visible_message(
 
@@ -261,7 +264,9 @@
 				new /obj/item/frame/intercom(get_turf(user))
 				playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
 				qdel(src)
-	return
+				return TRUE
+
+	return ..()
 
 /obj/item/device/radio/intercom/get_mechanics_info()
 	. = ..()

@@ -19,7 +19,7 @@
 	var/max_darts = 1
 	var/list/darts = new/list()
 
-/obj/item/gun/launcher/foam/attackby(obj/item/I, mob/user)
+/obj/item/gun/launcher/foam/use_item(obj/item/I, mob/user)
 	if(istype(I, /obj/item/foam_dart))
 		if(darts.len < max_darts)
 			if(!user.unEquip(I, src))
@@ -90,7 +90,7 @@
 /obj/item/foam_dart/Initialize()
 	mix_up()
 	. = ..()
-	
+
 /obj/item/foam_dart/proc/mix_up()
 	pixel_x = rand(-randpixel, randpixel)
 	pixel_y = rand(-randpixel, randpixel)

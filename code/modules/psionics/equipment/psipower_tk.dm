@@ -79,7 +79,7 @@
 		sparkle()
 		if(!istype(target, /turf) && istype(focus,/obj/item) && target.Adjacent(focus))
 			var/obj/item/I = focus
-			var/resolved = target.attackby(I, user, user:get_organ_target())
+			var/resolved = target.use_item(I, user, user:get_organ_target())
 			if(!resolved && target && I)
 				I.afterattack(target,user,1) // for splashing with beakers
 		else

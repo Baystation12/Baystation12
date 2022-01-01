@@ -189,14 +189,10 @@
 /obj/machinery/door/window/CanFluidPass(var/coming_from)
 	return !density || ((dir in GLOB.cardinal) && coming_from != dir)
 
-/obj/machinery/door/window/attackby(obj/item/I as obj, mob/user as mob)
 
-	//If it's in the process of opening/closing, ignore the click
-	if (src.operating == 1)
-		return
-
+/obj/machinery/door/window/use_weapon(obj/item/W, mob/user, click_params)
 	//Emags and ninja swords? You may pass.
-	if (istype(I, /obj/item/melee/energy/blade))
+	if (istype(W, /obj/item/melee/energy/blade))
 		if(emag_act(10, user))
 			var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
 			spark_system.set_up(5, 0, src.loc)
@@ -204,7 +200,16 @@
 			playsound(src.loc, "sparks", 50, 1)
 			playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
 			visible_message("<span class='warning'>The glass door was sliced open by [user]!</span>")
-		return 1
+		return TRUE
+
+	return ..()
+
+
+
+/obj/machinery/door/window/use_tool(obj/item/I, mob/user)
+	//If it's in the process of opening/closing, ignore the click
+	if (src.operating == 1)
+		return TRUE
 
 	//If it's emagged, crowbar can pry electronics out.
 	if (src.operating == -1 && isCrowbar(I))
@@ -227,12 +232,7 @@
 
 			shatter(src)
 			operating = 0
-			return
-
-	if (check_force(I, user))
-		return
-
-	src.add_fingerprint(user, 0, I)
+		return TRUE
 
 	if (src.allowed(user))
 		if (src.density)
@@ -242,9 +242,13 @@
 				to_chat(user, SPAN_WARNING("\The [src] seems to be stuck and refuses to close!"))
 				return
 			close()
+		return TRUE
 
-	else if (src.density)
+	if (src.density)
 		flick(text("[]deny", src.base_state), src)
+		return TRUE
+
+	return ..()
 
 /obj/machinery/door/window/create_electronics(var/electronics_type = /obj/item/airlock_electronics)
 	electronics = ..()

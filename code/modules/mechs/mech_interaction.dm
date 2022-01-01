@@ -291,7 +291,7 @@
 		update_pilots()
 	return 1
 
-/mob/living/exosuit/attackby(var/obj/item/thing, var/mob/user)
+/mob/living/exosuit/use_item(var/obj/item/thing, var/mob/user)
 
 	if(user.a_intent != I_HURT && istype(thing, /obj/item/mech_equipment))
 		if(hardpoints_locked)

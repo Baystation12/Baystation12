@@ -93,7 +93,7 @@
 	else
 		icon_state = "medibot[on]"
 
-/mob/living/bot/medbot/attackby(var/obj/item/O, var/mob/user)
+/mob/living/bot/medbot/use_item(var/obj/item/O, var/mob/user)
 	if(istype(O, /obj/item/reagent_containers/glass))
 		if(locked)
 			to_chat(user, "<span class='notice'>You cannot insert a beaker because the panel is locked.</span>")

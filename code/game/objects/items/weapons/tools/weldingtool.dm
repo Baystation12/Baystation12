@@ -63,10 +63,10 @@
 
 	..()
 
-/obj/item/weldingtool/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/weldingtool/use_tool(obj/item/W, mob/user)
 	if(welding)
 		to_chat(user, SPAN_DANGER("Stop welding first!"))
-		return
+		return FALSE
 
 	if(isScrewdriver(W))
 		status = !status
@@ -74,8 +74,7 @@
 			to_chat(user, SPAN_NOTICE("You secure the welder."))
 		else
 			to_chat(user, SPAN_NOTICE("The welder can now be attached and modified."))
-		src.add_fingerprint(user)
-		return
+		return TRUE
 
 	if((!status) && (istype(W,/obj/item/stack/material/rods)))
 		var/obj/item/stack/material/rods/R = W
@@ -84,26 +83,25 @@
 		user.drop_from_inventory(src, F)
 		F.weldtool = src
 		master = F
-		add_fingerprint(user)
-		return
+		return TRUE
 
 	if (istype(W, /obj/item/welder_tank))
 		if (tank)
 			to_chat(user, SPAN_WARNING("\The [src] already has a tank attached - remove it first."))
-			return
+			return FALSE
 		if (user.get_active_hand() != src && user.get_inactive_hand() != src)
 			to_chat(user, SPAN_WARNING("You must hold the welder in your hands to attach a tank."))
-			return
+			return FALSE
 		if (!user.unEquip(W, src))
-			return
+			return FALSE
 		tank = W
 		user.visible_message("[user] slots \a [W] into \the [src].", "You slot \a [W] into \the [src].")
 		w_class = tank.size_in_use
 		force = tank.unlit_force
 		update_icon()
-		return
+		return TRUE
 
-	..()
+	return ..()
 
 
 /obj/item/weldingtool/attack_hand(mob/user as mob)

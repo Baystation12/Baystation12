@@ -85,7 +85,7 @@
 		T.update_icon()
 	. = ..()
 
-/obj/structure/table/attackby(obj/item/W, mob/user, click_params)
+/obj/structure/table/use_item(obj/item/W, mob/user, click_params)
 	if(!reinforced && !carpeted && material && isWrench(W) && user.a_intent == I_HURT) //robots dont have disarm so it's harm
 		remove_material(W, user)
 		if(!material)

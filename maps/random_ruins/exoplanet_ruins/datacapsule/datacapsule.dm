@@ -51,7 +51,7 @@
 	desc = "Impact resistant server rack. You might be able to pry a disk out."
 	var/obj/item/stock_parts/computer/hard_drive/cluster/drive = new /obj/item/stock_parts/computer/hard_drive/cluster
 
-/obj/structure/backup_server/attackby(obj/item/W, mob/user, var/click_params)
+/obj/structure/backup_server/use_item(obj/item/W, mob/user, var/click_params)
 	if(isCrowbar(W))
 		if (!drive)
 			to_chat(user, SPAN_WARNING("There is nothing else to take from \the [src]."))

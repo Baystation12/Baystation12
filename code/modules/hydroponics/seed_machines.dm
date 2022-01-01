@@ -65,7 +65,7 @@
 			visible_message("[icon2html(src, viewers(get_turf(src)))] [src] beeps and spits out [loaded_disk].")
 			loaded_disk = null
 
-/obj/machinery/botany/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/botany/use_item(obj/item/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/seeds))
 		if(seed)
 			to_chat(user, "There is already a seed loaded.")

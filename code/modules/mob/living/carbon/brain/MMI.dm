@@ -14,7 +14,7 @@
 /obj/item/device/mmi/digital/proc/PickName()
 	return
 
-/obj/item/device/mmi/digital/attackby()
+/obj/item/device/mmi/digital/use_item()
 	return
 
 /obj/item/device/mmi/digital/use_on_self()
@@ -44,7 +44,7 @@
 	var/mob/living/carbon/brain/brainmob = null//The current occupant.
 	var/obj/item/organ/internal/brain/brainobj = null	//The current brain organ.
 
-/obj/item/device/mmi/attackby(var/obj/item/O as obj, var/mob/user as mob)
+/obj/item/device/mmi/use_item(var/obj/item/O as obj, var/mob/user as mob)
 	if(istype(O,/obj/item/organ/internal/brain) && !brainmob) //Time to stick a brain in it --NEO
 
 		var/obj/item/organ/internal/brain/B = O

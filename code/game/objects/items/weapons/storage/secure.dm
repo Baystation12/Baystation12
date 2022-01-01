@@ -16,21 +16,29 @@
 	max_storage_space = DEFAULT_BOX_STORAGE
 
 
-/obj/item/storage/secure/attackby(obj/item/W, mob/user)
-	if (!locked)
-		return ..()
+/obj/item/storage/secure/use_weapon(obj/item/W, mob/user, click_params)
 	if (istype(W, /obj/item/melee/energy/blade) && emag_act(INFINITY, user, "You slice through the lock of \the [src]"))
 		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
 		spark_system.set_up(5, 0, loc)
 		spark_system.start()
 		playsound(loc, 'sound/weapons/blade1.ogg', 50, 1)
 		playsound(loc, "sparks", 50, 1)
-		return
+		return TRUE
+
+	return ..()
+
+
+/obj/item/storage/secure/use_tool(obj/item/W, mob/user)
+	if (!locked)
+		return ..()
+
 	if (isScrewdriver(W))
 		if (do_after(user, 20, src))
 			open = ! open
 			user.show_message(text("<span class='notice'>You [] the service panel.</span>", (src.open ? "open" : "close")))
-		return
+			return TRUE
+		return FALSE
+
 	if (isMultitool(W) && (open == 1)&& (!l_hacking))
 		user.show_message("<span class='notice'>Now attempting to reset internal memory, please hold.</span>", 1)
 		l_hacking = 1
@@ -42,11 +50,16 @@
 				sleep(80)
 				l_setshort = 0
 				l_hacking = 0
+				return TRUE
 			else
 				user.show_message("<span class='warning'>Unable to reset internal memory.</span>", 1)
 				l_hacking = 0
+				return FALSE
 		else
 			l_hacking = 0
+			return FALSE
+
+	return ..()
 
 
 /obj/item/storage/secure/MouseDrop(over_object, src_location, over_location)

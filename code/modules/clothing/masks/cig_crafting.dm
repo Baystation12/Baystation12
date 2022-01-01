@@ -56,7 +56,7 @@
 /obj/item/reagent_containers/food/snacks/grown/dried_tobacco/fine
 	plantname = "finetobacco"
 
-/obj/item/clothing/mask/smokable/cigarette/rolled/attackby(obj/item/I, mob/user)
+/obj/item/clothing/mask/smokable/cigarette/rolled/use_item(obj/item/I, mob/user)
 	if(istype(I, /obj/item/paper/cig/filter))
 		if(filter)
 			to_chat(user, "<span class='warning'>[src] already has a filter!</span>")
@@ -74,7 +74,7 @@
 			return
 	..()
 
-/obj/item/reagent_containers/food/snacks/grown/attackby(obj/item/I, mob/user)
+/obj/item/reagent_containers/food/snacks/grown/use_item(obj/item/I, mob/user)
 	if(is_type_in_list(I, list(/obj/item/paper/cig/, /obj/item/paper/, /obj/item/teleportation_scroll)))
 		if(!dry)
 			to_chat(user, "<span class='warning'>You need to dry [src] first!</span>")

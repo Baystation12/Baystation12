@@ -21,7 +21,7 @@
 	qdel(artifact_find)
 	..()
 
-/obj/structure/boulder/attackby(var/obj/item/I, var/mob/user)
+/obj/structure/boulder/use_item(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/device/core_sampler))
 		src.geological_data.artifact_distance = rand(-100,100) / 100
 		src.geological_data.artifact_id = artifact_find.artifact_id
@@ -83,9 +83,9 @@
 		var/mob/living/carbon/human/H = AM
 		var/obj/item/pickaxe/P = H.get_inactive_hand()
 		if(istype(P))
-			src.attackby(P, H)
+			src.use_item(P, H)
 
 	else if(istype(AM,/mob/living/silicon/robot))
 		var/mob/living/silicon/robot/R = AM
 		if(istype(R.module_active,/obj/item/pickaxe))
-			attackby(R.module_active,R)
+			use_item(R.module_active,R)

@@ -13,7 +13,7 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
-	
+
 	machine_name = "microwave"
 	machine_desc = "Required for preparing any dish more complicated than a slice of bread. In the future, <i>everything</i> is microwaved."
 
@@ -53,8 +53,11 @@
 /*******************
 *   Item Adding
 ********************/
+/obj/machinery/microwave/grab_attack(obj/item/grab/G)
+	to_chat(G.assailant, "<span class='warning'>This is ridiculous. You can't fit \the [G.affecting] in \the [src].</span>")
+	return TRUE
 
-/obj/machinery/microwave/attackby(var/obj/item/O as obj, var/mob/user as mob)
+/obj/machinery/microwave/use_tool(obj/item/O, mob/user)
 	if(broken > 0)
 		// Start repairs by using a screwdriver
 		if(broken == 2 && isScrewdriver(O))
@@ -68,6 +71,9 @@
 					"<span class='notice'>You have fixed part of the microwave.</span>" \
 				)
 				broken = 1 // Fix it a bit
+				return TRUE
+			else
+				return FALSE
 
 		// Finish repairs using a wrench
 		else if(broken == 1 && isWrench(O))
@@ -84,13 +90,16 @@
 				dirtiness = 0 // just to be sure
 				update_icon()
 				atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER
+				return TRUE
+			else
+				return FALSE
 
 		// Otherwise, we can't add anything to the micrwoave
 		else
 			to_chat(user, "<span class='warning'>It's broken, and this isn't the right way to fix it!</span>")
-		return
+			return FALSE
 
-	else if((. = component_attackby(O, user)))
+	else if((. = component_use_item(O, user)))
 		dispose()
 		return
 
@@ -120,17 +129,20 @@
 				broken = 0 // just to be sure
 				update_icon()
 				atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_OPEN_CONTAINER
-			return TRUE
+				return TRUE
+			else
+				return FALSE
 
 		// Otherwise, bad luck!
 		else
 			to_chat(user, "<span class='warning'>You need to clean [src] before you use it!</span>")
-			return
+			return FALSE
 
 	else if(is_type_in_list(O, GLOB.microwave_accepts_items))
 
 		if (LAZYLEN(ingredients) >= GLOB.microwave_maximum_item_storage)
 			to_chat(user, "<span class='warning'>This [src] is full of ingredients - you can't fit any more.</span>")
+			return FALSE
 
 		else if(istype(O, /obj/item/stack)) // This is bad, but I can't think of how to change it
 			var/obj/item/stack/S = O
@@ -140,34 +152,33 @@
 				user.visible_message( \
 					"<span class='notice'>\The [user] has added one of [O] to \the [src].</span>", \
 					"<span class='notice'>You add one of [O] to \the [src].</span>")
-			return TRUE
-
+				return TRUE
+			else
+				return FALSE
 		else
 			if (!user.unEquip(O, src))
-				return
+				return FALSE
 			LAZYADD(ingredients, O)
 			user.visible_message( \
 				"<span class='notice'>\The [user] has added \the [O] to \the [src].</span>", \
 				"<span class='notice'>You add \the [O] to \the [src].</span>")
 			return TRUE
 
-		return
-
 	else if(istype(O,/obj/item/reagent_containers/glass) || \
 	        istype(O,/obj/item/reagent_containers/food/drinks) || \
 	        istype(O,/obj/item/reagent_containers/food/condiment) \
 		)
 		if (!O.reagents)
-			return
+			return FALSE
 		for (var/datum/reagent/R in O.reagents.reagent_list)
 			if (!(R.type in GLOB.microwave_accepts_reagents))
 				to_chat(user, SPAN_WARNING("Your [O] contains components unsuitable for cookery."))
-		return
+		return TRUE
 
 	else if(istype(O, /obj/item/storage))
 		if (LAZYLEN(ingredients) >= GLOB.microwave_maximum_item_storage)
 			to_chat(user, SPAN_WARNING("[src] is completely full!"))
-			return
+			return FALSE
 
 		var/obj/item/storage/bag/P = O
 		var/objects_loaded = 0
@@ -188,13 +199,7 @@
 
 		else
 			to_chat(user, SPAN_WARNING("\The [P] doesn't contain any compatible items to put into \the [src]!"))
-
-		return
-
-	else if(istype(O, /obj/item/grab))
-		var/obj/item/grab/G = O
-		to_chat(user, "<span class='warning'>This is ridiculous. You can't fit \the [G.affecting] in \the [src].</span>")
-		return
+			return FALSE
 
 	else if(isWrench(O))
 		user.visible_message( \
@@ -207,11 +212,14 @@
 			"<span class='notice'>\The [user] [anchored ? "secures" : "unsecures"] the microwave.</span>", \
 			"<span class='notice'>You [anchored ? "secure" : "unsecure"] the microwave.</span>"
 			)
+		else
+			return FALSE
+		return TRUE
 
 	else
 		to_chat(user, "<span class='warning'>You have no idea what you can cook with this [O].</span>")
-
-	updateUsrDialog()
+		updateUsrDialog()
+		return FALSE
 
 /obj/machinery/microwave/components_are_accessible(path)
 	return (broken == 0) && ..()

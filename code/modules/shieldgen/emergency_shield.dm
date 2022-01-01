@@ -42,7 +42,7 @@
 	if(!height || air_group) return 0
 	else return ..()
 
-/obj/machinery/shield/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/shield/use_item(obj/item/W as obj, mob/user as mob)
 	if(!istype(W)) return
 
 	//Calculate damage
@@ -281,7 +281,7 @@
 		update_icon()
 		return 1
 
-/obj/machinery/shieldgen/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/shieldgen/use_item(obj/item/W as obj, mob/user as mob)
 	if(isScrewdriver(W))
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 		if(is_open)

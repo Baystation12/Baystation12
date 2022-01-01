@@ -9,36 +9,36 @@
 	var/list/authorized = list(  )
 
 
-	attackby(var/obj/item/card/W as obj, var/mob/user as mob)
-		if(stat & (BROKEN|NOPOWER))	return
+	use_tool(obj/item/card/W, mob/user)
+		if(stat & (BROKEN|NOPOWER))	return TRUE
 
 		var/datum/evacuation_controller/shuttle/evac_control = evacuation_controller
 		if(!istype(evac_control))
 			to_chat(user, "<span class='danger'>This console should not in use on this map. Please report this to a developer.</span>")
-			return
+			return FALSE
 
 		if ((!( istype(W, /obj/item/card) ) || evacuation_controller.has_evacuated() || !( user )))
-			return
+			return FALSE
 
 		if (istype(W, /obj/item/card/id)||istype(W, /obj/item/modular_computer))
 			if (istype(W, /obj/item/modular_computer))
 				W = W.GetIdCard()
 			if (!W:access) //no access
 				to_chat(user, "The access level of [W:registered_name]\'s card is not high enough. ")
-				return
+				return FALSE
 
 			var/list/cardaccess = W:access
 			if(!istype(cardaccess, /list) || !cardaccess.len) //no access
 				to_chat(user, "The access level of [W:registered_name]\'s card is not high enough. ")
-				return
+				return FALSE
 
 			if(!(access_bridge in W:access)) //doesn't have this access
 				to_chat(user, "The access level of [W:registered_name]\'s card is not high enough. ")
-				return 0
+				return FALSE
 
 			var/choice = alert(user, text("Would you like to (un)authorize a shortened launch time? [] authorization\s are still needed. Use abort to cancel all authorizations.", src.auth_need - src.authorized.len), "Shuttle Launch", "Authorize", "Repeal", "Abort")
 			if(evacuation_controller.is_prepared() && user.get_active_hand() != W)
-				return 0
+				return FALSE
 			switch(choice)
 				if("Authorize")
 					src.authorized -= W:registered_name
@@ -64,6 +64,7 @@
 					to_world("<span class='notice'><b>All authorizations to shortening time for shuttle launch have been revoked!</b></span>")
 					src.authorized.len = 0
 					src.authorized = list(  )
+			return TRUE
 
 		else if (istype(W, /obj/item/card/emag) && !emagged)
 			var/choice = alert(user, "Would you like to launch the shuttle?","Shuttle control", "Launch", "Cancel")
@@ -75,5 +76,7 @@
 						evacuation_controller.set_launch_time(world.time+100)
 						emagged = TRUE
 					if("Cancel")
-						return
-		return
+						return FALSE
+			return TRUE
+
+		return ..()

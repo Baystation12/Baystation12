@@ -442,7 +442,7 @@
 			playsound(user.loc, 'sound/weapons/Genhit.ogg', 50, 1)
 			return AURA_FALSE|AURA_CANCEL
 
-/obj/aura/mech_ballistic/attackby(obj/item/I, mob/user)
+/obj/aura/mech_ballistic/use_item(obj/item/I, mob/user)
 	. = ..()
 	if (shield)
 		if (prob(shield.block_chance(I.force, I.armor_penetration, source = I, attacker = user)))

@@ -19,34 +19,45 @@
 
 	. = ..()
 
-/obj/item/weldpack/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/weldpack/use_weapon(obj/item/W, mob/user, click_params)
 	if(isWelder(W))
 		var/obj/item/weldingtool/T = W
-		if(T.welding & prob(50))
+		if (T.welding)
 			log_and_message_admins("triggered a fueltank explosion.", user)
-			to_chat(user, "<span class='danger'>That was stupid of you.</span>")
+			user.visible_message(
+				SPAN_DANGER("\The [user] puts \a [T] to \the [src], igniting an explosion!"),
+				SPAN_DANGER("You put \the [T] to \the [src], igniting an explosion!")
+			)
 			explosion(get_turf(src),-1,0,2)
 			if(src)
 				qdel(src)
-			return
+			return TRUE
+
+	return ..()
+
+/obj/item/weldpack/use_tool(obj/item/W, mob/user)
+	if(isWelder(W))
+		var/obj/item/weldingtool/T = W
+		if(T.welding)
+			to_chat(user, SPAN_WARNING("\The [src] is turned on, that would be dangerous!"))
+			return FALSE
 		else
-			if(T.welding)
-				to_chat(user, "<span class='danger'>That was close!</span>")
 			if(!T.tank)
 				to_chat(user, "\The [T] has no tank attached!")
+				return FALSE
 			src.reagents.trans_to_obj(T.tank, T.tank.max_fuel)
 			to_chat(user, "<span class='notice'>You refuel \the [W].</span>")
 			playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
-			return
-	else if(istype(W, /obj/item/welder_tank))
+			return TRUE
+
+	if(istype(W, /obj/item/welder_tank))
 		var/obj/item/welder_tank/tank = W
 		src.reagents.trans_to_obj(tank, tank.max_fuel)
 		to_chat(user, "<span class='notice'>You refuel \the [W].</span>")
 		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
-		return
+		return TRUE
 
-	to_chat(user, "<span class='warning'>The tank will accept only a welding tool or cartridge.</span>")
-	return
+	return ..()
 
 /obj/item/weldpack/afterattack(obj/O as obj, mob/user as mob, proximity)
 	if(!proximity) // this replaces and improves the get_dist(src,O) <= 1 checks used previously
@@ -156,16 +167,16 @@
 				display = "[display]%"
 			to_chat(user, "\The [cell] charge is [display]")
 
-/obj/item/scrubpack/attackby(obj/item/W, mob/user)
+/obj/item/scrubpack/use_tool(obj/item/W, mob/user)
 	if (istype(W, /obj/item/cell))
 		if (cell)
 			to_chat(user, SPAN_WARNING("\The [src] already has \an [cell]."))
-			return TRUE
+			return FALSE
 		if (istype(W, /obj/item/cell/device))
 			to_chat(user, SPAN_WARNING("\The [W] is too small for \the [src]."))
-			return TRUE
+			return FALSE
 		if (!user.unEquip(W, src))
-			return
+			return FALSE
 		user.visible_message(
 			SPAN_ITALIC("\The [user] fits \the [W] to \the [src]."),
 			SPAN_ITALIC("You fit \the [W] to \the [src]."),
@@ -178,12 +189,12 @@
 	if (istype(W, /obj/item/tank))
 		if (tank)
 			to_chat(user, SPAN_WARNING("\The [src] already has \an [tank]."))
-			return TRUE
+			return FALSE
 		if (!istype(W, tank_permit))
 			to_chat(user, SPAN_WARNING("\The [src] can't fit \a [W]."))
-			return TRUE
+			return FALSE
 		if (!user.unEquip(W, src))
-			return
+			return FALSE
 		user.visible_message(
 			SPAN_ITALIC("\The [user] fits \the [W] to \the [src]."),
 			SPAN_ITALIC("You fit \the [W] to \the [src]."),
@@ -196,10 +207,10 @@
 	if (isScrewdriver(W))
 		if (enabled)
 			to_chat(user, SPAN_WARNING("Turn \the [src] off first!"))
-			return TRUE
+			return FALSE
 		if (!cell && !tank)
 			to_chat(user, SPAN_WARNING("\The [src] doesn't have anything you can remove."))
-			return TRUE
+			return FALSE
 		var/list/options = list()
 		if (cell)
 			options += "cell"
@@ -207,10 +218,10 @@
 			options += "tank"
 		var/selection = input("Which would you like to remove?") as null|anything in options
 		if (!selection)
-			return TRUE
+			return FALSE
 		var/time_cost = 5 - round(user.get_skill_value(SKILL_ATMOS) * 0.5) //0,1,1,2,2
 		if (!do_after(user, time_cost SECONDS, src, do_flags = DO_DEFAULT | DO_BOTH_UNIQUE_ACT))
-			return TRUE
+			return FALSE
 		var/removed
 		if (selection == "cell")
 			user.put_in_hands(cell)
@@ -229,7 +240,7 @@
 		playsound(src, 'sound/items/Screwdriver.ogg', 50, 1)
 		return TRUE
 
-	. = ..()
+	return ..()
 
 /obj/item/scrubpack/use_on_self(mob/user)
 	toggle(user)

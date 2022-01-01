@@ -143,10 +143,10 @@
 		return SPAN_NOTICE("\The [src] is busy. Please wait for completion of previous operation.")
 	return ..()
 
-/obj/machinery/robotics_fabricator/attackby(var/obj/item/I, var/mob/user)
+/obj/machinery/robotics_fabricator/use_tool(obj/item/I, mob/user)
 	if(busy)
 		to_chat(user, "<span class='notice'>\The [src] is busy. Please wait for completion of previous operation.</span>")
-		return 1
+		return FALSE
 	if(!istype(I, /obj/item/stack/material))
 		return ..()
 
@@ -157,11 +157,11 @@
 	var/amnt = stack.perunit
 
 	if(stack.uses_charge)
-		return
+		return FALSE
 
 	if(!(material in materials))
 		to_chat(user, "<span class=warning>\The [src] does not accept [stack_plural]!</span>")
-		return
+		return FALSE
 
 	if(materials[material] + amnt <= res_max_amount)
 		if(stack && stack.can_use(1))
@@ -176,8 +176,12 @@
 			to_chat(user, "You insert [count] [count==1 ? stack_singular : stack_plural] into the fabricator.")// 0 steel sheets, 1 steel sheet, 2 steel sheets, etc
 
 			update_busy()
+			return TRUE
+		else
+			return FALSE
 	else
 		to_chat(user, "The fabricator cannot hold more [stack_plural].")// use the plural form even if the given sheet is singular
+		return FALSE
 
 
 /obj/machinery/robotics_fabricator/emag_act(var/remaining_charges, var/mob/user)

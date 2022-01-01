@@ -77,7 +77,7 @@
 /obj/structure/heavy_vehicle_frame/set_dir()
 	..(SOUTH)
 
-/obj/structure/heavy_vehicle_frame/attackby(var/obj/item/thing, var/mob/user)
+/obj/structure/heavy_vehicle_frame/use_item(var/obj/item/thing, var/mob/user)
 
 	// Removing components.
 	if(isCrowbar(thing))

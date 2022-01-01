@@ -217,7 +217,7 @@
 		return TRUE
 	splashtarget(target, user)
 
-/obj/item/reagent_containers/food/drinks/glass2/attackby(obj/item/W, mob/user)
+/obj/item/reagent_containers/food/drinks/glass2/use_item(obj/item/W, mob/user)
 	if(istype(W, /obj/item/material/kitchen/utensil/spoon))
 		if(user.a_intent == I_HURT)
 			user.visible_message("<span class='warning'>[user] bashes \the [src] with a spoon, shattering it to pieces! What a rube.</span>")

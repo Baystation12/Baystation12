@@ -42,7 +42,7 @@
 			var/mob/living/M = m
 			var/dist = get_dist(M, src)
 			if(dist < 2) //Attack! Attack!
-				M.attackby(get_natural_weapon(), src)
+				M.use_item(get_natural_weapon(), src)
 				return .
 			else if(dist == 2)
 				new_aggress = 3

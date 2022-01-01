@@ -10,7 +10,7 @@
 /turf/simulated/floor/holofloor/get_lumcount(var/minlum = 0, var/maxlum = 1)
 	return 0.8
 
-/turf/simulated/floor/holofloor/attackby(obj/item/W as obj, mob/user as mob)
+/turf/simulated/floor/holofloor/use_item(obj/item/W as obj, mob/user as mob)
 	return
 	// HOLOFLOOR DOES NOT GIVE A FUCK
 
@@ -154,7 +154,7 @@
 /obj/structure/window/reinforced/holowindow/Destroy()
 	..()
 
-/obj/structure/window/reinforced/holowindow/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/window/reinforced/holowindow/use_item(obj/item/W as obj, mob/user as mob)
 
 	if(!istype(W) || W.item_flags & ITEM_FLAG_NO_BLUDGEON) return
 
@@ -181,7 +181,7 @@
 /obj/machinery/door/window/holowindoor/Destroy()
 	..()
 
-/obj/machinery/door/window/holowindoor/attackby(obj/item/I as obj, mob/user as mob)
+/obj/machinery/door/window/holowindoor/use_item(obj/item/I as obj, mob/user as mob)
 
 	if (src.operating == 1)
 		return
@@ -214,7 +214,7 @@
 /obj/structure/bed/chair/holochair/Destroy()
 	..()
 
-/obj/structure/bed/chair/holochair/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/bed/chair/holochair/use_item(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/wrench))
 		to_chat(user, ("<span class='notice'>It's a holochair, you can't dismantle it!</span>"))
 	return
@@ -371,7 +371,7 @@
 	..()
 
 
-/obj/machinery/readybutton/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/readybutton/use_item(obj/item/W as obj, mob/user as mob)
 	to_chat(user, "The device is a solid button, there's nothing you can do with it!")
 
 /obj/machinery/readybutton/physical_attack_hand(mob/user)

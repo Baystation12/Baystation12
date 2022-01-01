@@ -5,7 +5,7 @@
 	var/up_state
 	var/down_state
 
-/decl/machine_construction/default/no_deconstruct/attackby(obj/item/I, mob/user, obj/machinery/machine)
+/decl/machine_construction/default/no_deconstruct/use_item(obj/item/I, mob/user, obj/machinery/machine)
 	. = FALSE
 
 /decl/machine_construction/default/panel_closed
@@ -19,7 +19,7 @@
 	if(!.)
 		try_change_state(machine, down_state)
 
-/decl/machine_construction/default/panel_closed/attackby(obj/item/I, mob/user, obj/machinery/machine)
+/decl/machine_construction/default/panel_closed/use_item(obj/item/I, mob/user, obj/machinery/machine)
 	if((. = ..()))
 		return
 	if(isScrewdriver(I))
@@ -28,7 +28,7 @@
 		machine.panel_open = TRUE
 		to_chat(user, SPAN_NOTICE("You open the maintenance hatch of \the [machine]."))
 		machine.update_icon()
-		return
+		return TRUE
 	if(istype(I, /obj/item/storage/part_replacer))
 		machine.display_parts(user)
 		return TRUE
@@ -55,7 +55,7 @@
 	if(!.)
 		try_change_state(machine, up_state)
 
-/decl/machine_construction/default/panel_open/attackby(obj/item/I, mob/user, obj/machinery/machine)
+/decl/machine_construction/default/panel_open/use_item(obj/item/I, mob/user, obj/machinery/machine)
 	if((. = ..()))
 		return
 	if(isCrowbar(I))

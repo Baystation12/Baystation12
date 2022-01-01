@@ -235,19 +235,19 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 /// Called whenever an attached component updates it's status. Override to handle updates to the machine.
 /obj/machinery/proc/component_stat_change(obj/item/stock_parts/part, old_stat, flag)
 
-/obj/machinery/attackby(obj/item/I, mob/user)
-	if(component_attackby(I, user))
+/obj/machinery/use_item(obj/item/I, mob/user)
+	if(component_use_item(I, user))
 		return TRUE
 	return ..()
 
-/// Passes `attackby()` calls through to components within the machine, if they are accessible.
-/obj/machinery/proc/component_attackby(obj/item/I, mob/user)
+/// Passes `use_item()` calls through to components within the machine, if they are accessible.
+/obj/machinery/proc/component_use_item(obj/item/I, mob/user)
 	for(var/obj/item/stock_parts/part in component_parts)
 		if(!components_are_accessible(part.type))
 			continue
-		if((. = part.attackby(I, user)))
+		if((. = part.use_item(I, user)))
 			return
-	return construct_state && construct_state.attackby(I, user, src)
+	return construct_state && construct_state.use_item(I, user, src)
 
 /// Passes `attack_hand()` calls through to components within the machine, if they are accessible.
 /obj/machinery/proc/component_attack_hand(mob/user)

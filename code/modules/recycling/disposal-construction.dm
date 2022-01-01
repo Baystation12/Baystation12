@@ -121,7 +121,7 @@
 // attackby item
 // wrench: (un)anchor
 // weldingtool: convert to real pipe
-/obj/structure/disposalconstruct/attackby(var/obj/item/I, var/mob/user)
+/obj/structure/disposalconstruct/use_item(var/obj/item/I, var/mob/user)
 	var/turf/T = loc
 	if(!istype(T))
 		return

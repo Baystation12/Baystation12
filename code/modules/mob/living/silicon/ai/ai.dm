@@ -610,7 +610,7 @@ var/list/ai_verbs_default = list(
 		camera_light_on = world.timeofday + 1 * 20 // Update the light every 2 seconds.
 
 
-/mob/living/silicon/ai/attackby(obj/item/W as obj, mob/user as mob)
+/mob/living/silicon/ai/use_item(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/aicard))
 
 		var/obj/item/aicard/card = W

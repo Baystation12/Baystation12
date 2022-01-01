@@ -22,7 +22,7 @@
 	if(written_text)
 		icon_state = "[icon_state]_writing"
 
-/obj/item/sticky_pad/attackby(var/obj/item/thing, var/mob/user)
+/obj/item/sticky_pad/use_item(var/obj/item/thing, var/mob/user)
 	if(istype(thing, /obj/item/pen))
 
 		if(jobban_isbanned(user, "Graffiti"))

@@ -10,7 +10,7 @@
 /obj/item/ore/get_material()
 	return material
 
-/obj/item/ore/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/ore/use_item(obj/item/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/device/core_sampler))
 		var/obj/item/device/core_sampler/C = W
 		C.sample_item(src, user)

@@ -37,19 +37,16 @@
 		to_chat(usr, directives)
 		return TOPIC_HANDLED
 
-/obj/structure/sign/ecplaque/attackby(var/obj/I, var/mob/user)
-	if(istype(I, /obj/item/grab))
-		var/obj/item/grab/G = I
-		if(!ishuman(G.affecting))
-			return
-		G.affecting.apply_damage(5, BRUTE, BP_HEAD, used_weapon="Metal Plaque")
-		visible_message("<span class='warning'>[G.assailant] smashes [G.assailant] into \the [src] face-first!</span>")
-		playsound(get_turf(src), 'sound/weapons/tablehit1.ogg', 50)
-		to_chat(G.affecting, "<span class='danger'>[directives]</span>")
-		admin_attack_log(user, G.affecting, "educated victim on \the [src].", "Was educated on \the [src].", "used \a [src] to educate")
-		G.force_drop()
-	else
-		..()
+
+/obj/structure/sign/ecplaque/grab_attack(obj/item/grab/G)
+	G.affecting.apply_damage(5, BRUTE, BP_HEAD, used_weapon="Metal Plaque")
+	visible_message("<span class='warning'>[G.assailant] smashes [G.assailant] into \the [src] face-first!</span>")
+	playsound(get_turf(src), 'sound/weapons/tablehit1.ogg', 50)
+	to_chat(G.affecting, "<span class='danger'>[directives]</span>")
+	admin_attack_log(G.assailant, G.affecting, "educated victim on \the [src].", "Was educated on \the [src].", "used \a [src] to educate")
+	G.force_drop()
+	return TRUE
+
 
 /obj/effect/floor_decal/scglogo
 	alpha = 230
@@ -85,7 +82,7 @@
 	unacidable = TRUE
 	var/list/fallen = list()
 
-/obj/structure/sign/memorial/attackby(var/obj/D, var/mob/user)
+/obj/structure/sign/memorial/use_item(var/obj/D, var/mob/user)
 	if(istype(D, /obj/item/clothing/accessory/badge/solgov/tags))
 		var/obj/item/clothing/accessory/badge/solgov/tags/T = D
 		if(T.owner_branch in list("Expeditionary Corps", "Fleet"))

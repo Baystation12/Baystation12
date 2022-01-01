@@ -147,7 +147,7 @@
 		to_chat(user, "You short out the product lock on \the [src]")
 		return 1
 
-/obj/machinery/vending/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/vending/use_tool(obj/item/W, mob/user)
 
 	var/obj/item/card/id/I = W.GetIdCard()
 
@@ -175,12 +175,12 @@
 			return TRUE // don't smack that machine with your 2 thalers
 
 	if (I || istype(W, /obj/item/spacecash))
-		attack_hand(user)
-		return TRUE
+		return attack_hand(user)
+
 	if(isMultitool(W) || isWirecutter(W))
 		if(src.panel_open)
-			attack_hand(user)
-			return TRUE
+			return attack_hand(user)
+
 	if(istype(W, /obj/item/material/coin) && premium.len > 0)
 		if(!user.unEquip(W, src))
 			return FALSE
@@ -189,14 +189,19 @@
 		to_chat(user, "<span class='notice'>You insert \the [W] into \the [src].</span>")
 		SSnano.update_uis(src)
 		return TRUE
-	if((user.a_intent == I_HELP) && attempt_to_stock(W, user))
+
+	if(attempt_to_stock(W, user))
 		return TRUE
-	if((. = component_attackby(W, user)))
+
+	if((. = component_use_item(W, user)))
 		return
+
 	if((obj_flags & OBJ_FLAG_ANCHORABLE) && isWrench(W))
 		wrench_floor_bolts(user)
 		power_change()
-		return
+		return TRUE
+
+	return ..()
 
 /obj/machinery/vending/state_transition(decl/machine_construction/new_state)
 	. = ..()

@@ -54,11 +54,11 @@
 	new /obj/item/stack/material/rods(loc, 1, material.name)
 	qdel(src)
 
-/obj/structure/lattice/attackby(obj/item/C as obj, mob/user as mob)
+/obj/structure/lattice/use_item(obj/item/C as obj, mob/user as mob)
 
 	if (istype(C, /obj/item/stack/tile/floor))
 		var/turf/T = get_turf(src)
-		T.attackby(C, user) //BubbleWrap - hand this off to the underlying turf instead
+		T.use_item(C, user) //BubbleWrap - hand this off to the underlying turf instead
 		return
 	if(isWelder(C))
 		var/obj/item/weldingtool/WT = C

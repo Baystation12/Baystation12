@@ -78,7 +78,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 	investing_time = max(investing_time - 6000,1) //subtract 10 minutes. Make sure it doesn't act funky at the beginning of the game.
 
 
-/obj/item/spellbook/attackby(obj/item/I as obj, mob/user as mob)
+/obj/item/spellbook/use_item(obj/item/I as obj, mob/user as mob)
 	if(investing_time)
 		var/list/objects = spellbook.sacrifice_objects
 		if(objects && objects.len)

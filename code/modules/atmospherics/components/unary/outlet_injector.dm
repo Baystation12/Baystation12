@@ -203,7 +203,7 @@
 /obj/machinery/atmospherics/unary/outlet_injector/hide(var/i)
 	update_underlays()
 
-/obj/machinery/atmospherics/unary/outlet_injector/attackby(var/obj/item/O as obj, var/mob/user as mob)
+/obj/machinery/atmospherics/unary/outlet_injector/use_item(var/obj/item/O as obj, var/mob/user as mob)
 	if(isMultitool(O))
 		var/datum/browser/popup = new (user, "Vent Configuration Utility", "[src] Configuration Panel", 600, 200)
 		popup.set_content(jointext(get_console_data(),"<br>"))

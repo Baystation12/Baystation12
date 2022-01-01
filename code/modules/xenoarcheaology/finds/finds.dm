@@ -28,7 +28,7 @@
 		var/T = get_archeological_find_by_findtype(inside_item_type)
 		new T(src)
 
-/obj/item/ore/strangerock/attackby(var/obj/item/I, var/mob/user)
+/obj/item/ore/strangerock/use_item(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/pickaxe/xeno/brush))
 		var/obj/item/inside = locate() in src
 		if(inside)

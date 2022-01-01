@@ -46,7 +46,7 @@
 				swagnames += C.get_examine_line()
 		to_chat(user,"[gender == MALE ? "He" : "She"] is wearing [english_list(swagnames)].")
 
-/obj/structure/skele_stand/attackby(obj/item/W, mob/user)
+/obj/structure/skele_stand/use_item(obj/item/W, mob/user)
 	if(istype(W,/obj/item/pen))
 		var/nuname = sanitize(input(user,"What do you want to name this skeleton as?","Skeleton Christening",name) as text|null)
 		if(nuname && CanPhysicallyInteract(user))

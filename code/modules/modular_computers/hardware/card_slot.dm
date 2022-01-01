@@ -101,7 +101,7 @@
 		loc.verbs |= /obj/item/stock_parts/computer/card_slot/proc/verb_eject_id
 	return TRUE
 
-/obj/item/stock_parts/computer/card_slot/attackby(obj/item/card/id/I, mob/living/user)
+/obj/item/stock_parts/computer/card_slot/use_item(obj/item/card/id/I, mob/living/user)
 	if(!istype(I))
 		return ..()
 	insert_id(I, user)

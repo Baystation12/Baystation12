@@ -114,7 +114,7 @@
 		return
 	return ..()
 
-/obj/item/reagent_containers/hypospray/vial/attackby(obj/item/W, mob/user)
+/obj/item/reagent_containers/hypospray/vial/use_item(obj/item/W, mob/user)
 	var/usermessage = ""
 	if(istype(W, /obj/item/reagent_containers/glass/beaker/vial))
 		if(!do_after(user,10) || !(W in user))

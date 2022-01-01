@@ -31,7 +31,7 @@
 		overlays += "folder_paper"
 	return
 
-/obj/item/folder/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/folder/use_item(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/paper) || istype(W, /obj/item/photo) || istype(W, /obj/item/paper_bundle))
 		if(!user.unEquip(W, src))
 			return
@@ -138,7 +138,7 @@
 	else
 		..()
 
-/obj/item/folder/envelope/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/folder/envelope/use_item(obj/item/W as obj, mob/user as mob)
 	if(sealed)
 		sealcheck(user)
 		return

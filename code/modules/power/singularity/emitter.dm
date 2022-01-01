@@ -186,7 +186,7 @@
 		A.damage = round (power_per_shot / EMITTER_DAMAGE_POWER_TRANSFER)
 		A.launch( get_step(loc, dir) )
 
-/obj/machinery/power/emitter/attackby(obj/item/W, mob/user)
+/obj/machinery/power/emitter/use_item(obj/item/W, mob/user)
 
 	if (isWrench(W))
 		if (active)

@@ -189,28 +189,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 		return TOPIC_REFRESH
 
 					//err... hacking code, which has no reason for existing... but anyway... it was once supposed to unlock priority 3 messanging on that console (EXTREME priority...), but the code for that was removed.
-/obj/machinery/requests_console/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	/*
-	if (istype(O, /obj/item/crowbar))
-		if(open)
-			open = 0
-			icon_state="req_comp0"
-		else
-			open = 1
-			if(hackState == 0)
-				icon_state="req_comp_open"
-			else if(hackState == 1)
-				icon_state="req_comp_rewired"
-	if (istype(O, /obj/item/screwdriver))
-		if(open)
-			if(hackState == 0)
-				hackState = 1
-				icon_state="req_comp_rewired"
-			else if(hackState == 1)
-				hackState = 0
-				icon_state="req_comp_open"
-		else
-			to_chat(user, "You can't do much with that.") */
+/obj/machinery/requests_console/use_tool(obj/item/O, mob/user)
 	if (istype(O, /obj/item/card/id))
 		if(inoperable(MAINT)) return
 		if(screen == RCS_MESSAUTH)
@@ -225,14 +204,19 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 			else
 				reset_message()
 				to_chat(user, "<span class='warning'>You are not authorized to send announcements.</span>")
+				return FALSE
 			SSnano.update_uis(src)
+		return TRUE
+
 	if (istype(O, /obj/item/stamp))
 		if(inoperable(MAINT)) return
 		if(screen == RCS_MESSAUTH)
 			var/obj/item/stamp/T = O
 			msgStamped = text("<font color='blue'><b>Stamped with the [T.name]</b></font>")
 			SSnano.update_uis(src)
-	return
+		return TRUE
+
+	return ..()
 
 /obj/machinery/requests_console/proc/reset_message(var/mainmenu = 0)
 	message = ""

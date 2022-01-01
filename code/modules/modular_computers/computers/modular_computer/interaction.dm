@@ -113,7 +113,7 @@
 	else if(!enabled && screen_on)
 		turn_on(user)
 
-/obj/item/modular_computer/attackby(var/obj/item/W as obj, var/mob/user as mob)
+/obj/item/modular_computer/use_item(var/obj/item/W as obj, var/mob/user as mob)
 	if(istype(W, /obj/item/card/id)) // ID Card, try to insert it.
 		var/obj/item/card/id/I = W
 		if(!card_slot)
@@ -137,15 +137,15 @@
 	if(istype(W, /obj/item/paper))
 		var/obj/item/paper/paper = W
 		if(scanner && paper.info)
-			scanner.do_on_attackby(user, W)
+			scanner.do_on_use_item(user, W)
 			return
 	if(istype(W, /obj/item/paper) || istype(W, /obj/item/paper_bundle))
 		if(nano_printer)
-			nano_printer.attackby(W, user)
+			nano_printer.use_item(W, user)
 	if(istype(W, /obj/item/aicard))
 		if(!ai_slot)
 			return
-		ai_slot.attackby(W, user)
+		ai_slot.use_item(W, user)
 
 	if(!modifiable)
 		return ..()

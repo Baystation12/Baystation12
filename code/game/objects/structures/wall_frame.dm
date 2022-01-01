@@ -51,7 +51,7 @@
 	if(paint_color)
 		to_chat(user, "<span class='notice'>It has a smooth coat of paint applied.</span>")
 
-/obj/structure/wall_frame/attackby(var/obj/item/W, var/mob/user)
+/obj/structure/wall_frame/use_item(var/obj/item/W, var/mob/user)
 	src.add_fingerprint(user)
 
 	if (user.a_intent == I_HURT)

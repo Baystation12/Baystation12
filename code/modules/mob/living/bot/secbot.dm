@@ -107,7 +107,7 @@
 				if(emagged < 2)
 					emagged = !emagged
 
-/mob/living/bot/secbot/attackby(var/obj/item/O, var/mob/user)
+/mob/living/bot/secbot/use_item(var/obj/item/O, var/mob/user)
 	var/curhealth = health
 	. = ..()
 	if(health < curhealth)

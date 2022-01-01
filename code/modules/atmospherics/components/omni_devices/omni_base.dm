@@ -76,7 +76,7 @@
 		return 0
 	return 1
 
-/obj/machinery/atmospherics/omni/attackby(var/obj/item/W as obj, var/mob/user as mob)
+/obj/machinery/atmospherics/omni/use_item(var/obj/item/W as obj, var/mob/user as mob)
 	if(!isWrench(W))
 		return ..()
 

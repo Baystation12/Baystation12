@@ -18,7 +18,7 @@
 	stat_immune = 0
 	stat = BROKEN         // Should be removed if the terminals initialize fully.
 	reason_broken = MACHINE_BROKEN_GENERIC
-	
+
 	machine_name = "superconductive magnetic energy storage"
 	machine_desc = "The SMES is effectively a giant battery. It stores vast quantities of power for later use, and can be remotely controlled using the RCON system."
 
@@ -175,9 +175,9 @@
 		var/is_input_available = FALSE
 		for(var/obj/item/stock_parts/power/terminal/term in power_components)
 			if(!term.terminal || !term.terminal.powernet)
-				continue			
+				continue
 			is_input_available = TRUE
-			term.terminal.powernet.smes_demand += target_load		
+			term.terminal.powernet.smes_demand += target_load
 			term.terminal.powernet.inputting.Add(src)
 		if(!is_input_available)
 			target_load = 0 // We won't input any power without powernet connection.
@@ -229,8 +229,8 @@
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/power/smes/attackby(var/obj/item/W as obj, var/mob/user as mob)
-	if(component_attackby(W, user))
+/obj/machinery/power/smes/use_item(var/obj/item/W as obj, var/mob/user as mob)
+	if(component_use_item(W, user))
 		return TRUE
 
 	if (!panel_open)

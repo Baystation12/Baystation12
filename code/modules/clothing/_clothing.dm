@@ -309,7 +309,7 @@ BLIND     // can't see anything
 /obj/item/clothing/gloves/proc/Touch(var/atom/A, var/proximity)
 	return 0 // return 1 to cancel attack_hand()
 
-/obj/item/clothing/gloves/attackby(obj/item/W, mob/user)
+/obj/item/clothing/gloves/use_item(obj/item/W, mob/user)
 	if(istype(W, /obj/item/wirecutters) || istype(W, /obj/item/scalpel))
 		if (clipped)
 			to_chat(user, "<span class='notice'>\The [src] have already been modified!</span>")
@@ -628,7 +628,7 @@ BLIND     // can't see anything
 	remove_cuffs(user)
 	..()
 
-/obj/item/clothing/shoes/attackby(var/obj/item/I, var/mob/user)
+/obj/item/clothing/shoes/use_item(var/obj/item/I, var/mob/user)
 	if (istype(I, /obj/item/handcuffs))
 		add_cuffs(I, user)
 		return

@@ -128,7 +128,7 @@
 	return 1
 
 
-/obj/item/clothing/accessory/badge/holo/attackby(obj/item/O, mob/user)
+/obj/item/clothing/accessory/badge/holo/use_item(obj/item/O, mob/user)
 	if (istype(O, /obj/item/card/id) || istype(O, /obj/item/modular_computer))
 		var/obj/item/card/id/id_card = O.GetIdCard()
 		if (!id_card)

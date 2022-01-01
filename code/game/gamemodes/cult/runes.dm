@@ -44,15 +44,16 @@
 	if(iscultist(user))
 		to_chat(user, "This is \a [cultname] rune.")
 
-/obj/effect/rune/attackby(var/obj/item/I, var/mob/living/user)
+/obj/effect/rune/use_item(obj/item/I, mob/living/user)
 	if(istype(I, /obj/item/book/tome) && iscultist(user))
 		user.visible_message("<span class='notice'>[user] rubs \the [src] with \the [I], and \the [src] is absorbed by it.</span>", "You retrace your steps, carefully undoing the lines of \the [src].")
 		qdel(src)
-		return
+		return TRUE
 	else if(istype(I, /obj/item/nullrod))
 		user.visible_message("<span class='notice'>[user] hits \the [src] with \the [I], and it disappears, fizzling.</span>", "<span class='notice'>You disrupt the vile magic with the deadening field of \the [I].</span>", "You hear a fizzle.")
 		qdel(src)
-		return
+		return TRUE
+	return ..()
 
 /obj/effect/rune/attack_hand(var/mob/living/user)
 	if(!iscultist(user))
@@ -288,13 +289,13 @@
 	else
 		to_chat(user, "<span class='notice'>You touch \the [src]. It feels wet and becomes harder the further you push your arm.</span>")
 
-/obj/effect/cultwall/attackby(var/obj/item/I, var/mob/living/user)
+/obj/effect/cultwall/use_item(obj/item/I, mob/living/user)
 	if (istype(I, /obj/item/nullrod))
 		user.visible_message("<span class='notice'>\The [user] touches \the [src] with \the [I], and it disappears.</span>", "<span class='notice'>You disrupt the vile magic with the deadening field of \the [I].</span>")
 		qdel(src)
-		return
+		return TRUE
 
-	..()
+	return ..()
 
 /obj/effect/cultwall/handle_death_change(new_death_state)
 	. = ..()
@@ -817,10 +818,13 @@
 		if (GLOB.universe.type == /datum/universal_state/hell)
 			SetUniversalState(/datum/universal_state)
 
-/obj/effect/rune/tearreality/attackby()
-	if(the_end_comes)
-		return
-	..()
+
+/obj/effect/rune/tearreality/use_item()
+	if (the_end_comes)
+		return FALSE
+
+	return ..()
+
 
 /* Imbue runes */
 

@@ -10,7 +10,7 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
-	
+
 	machine_name = "meat grinder"
 	machine_desc = "Messily turns animals - living or dead - into edible meat. Installed safety mechanisms prevent use on humans."
 
@@ -67,30 +67,39 @@
 	return 1
 
 /obj/machinery/gibber/components_are_accessible(path)
-	return !operating && ..()	
+	return !operating && ..()
 
 /obj/machinery/gibber/cannot_transition_to(state_path, mob/user)
 	if(operating)
 		return SPAN_NOTICE("You must wait for \the [src] to finish operating first!")
-	return ..()	
+	return ..()
 
-/obj/machinery/gibber/attackby(var/obj/item/W, var/mob/user)
-	if(!operating)
+
+/obj/machinery/gibber/grab_attack(obj/item/grab/G)
+	. = TRUE
+	if (!operating)
+		to_chat(G.assailant, SPAN_WARNING("\The [src] is not operating!"))
 		return
-	if(istype(W, /obj/item/grab))
-		var/obj/item/grab/G = W
-		if(!G.force_danger())
-			to_chat(user, "<span class='danger'>You need a better grip to do that!</span>")
-			return
-		qdel(G)
-		move_into_gibber(user,G.affecting)
-	else if(istype(W, /obj/item/organ))
+	if(!G.force_danger())
+		to_chat(G.assailant, "<span class='danger'>You need a better grip to do that!</span>")
+		return
+	move_into_gibber(G.assailant, G.affecting)
+	qdel(G)
+	return
+
+
+/obj/machinery/gibber/use_tool(obj/item/W, mob/user)
+	if(istype(W, /obj/item/organ))
+		if(!operating)
+			to_chat(user, SPAN_WARNING("\The [src] is not operating!"))
+			return FALSE
 		if(!user.unEquip(W))
-			return
+			return FALSE
 		qdel(W)
 		user.visible_message("<span class='danger'>\The [user] feeds \the [W] into \the [src], obliterating it.</span>")
-	else
-		return ..()
+		return TRUE
+
+	return ..()
 
 /obj/machinery/gibber/MouseDrop_T(mob/target, mob/user)
 	if(user.stat || user.restrained())

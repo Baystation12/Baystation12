@@ -473,21 +473,17 @@
 	user.visible_message("<span class='notice'>\The [user] begins placing \the [target] into \the [src].</span>", "<span class='notice'>You start placing \the [target] into \the [src].</span>")
 	attempt_enter(target, user)
 
-/obj/machinery/cryopod/attackby(var/obj/item/G as obj, var/mob/user as mob)
 
-	if(istype(G, /obj/item/grab))
-		var/obj/item/grab/grab = G
-		if(occupant)
-			to_chat(user, "<span class='notice'>\The [src] is in use.</span>")
-			return
+/obj/machinery/cryopod/grab_attack(obj/item/grab/G)
+	. = TRUE
+	if(occupant)
+		to_chat(G.assailant, SPAN_NOTICE("\The [src] is in use."))
+		return
+	if(!check_occupant_allowed(G.affecting))
+		return
+	attempt_enter(G.affecting, G.assailant)
+	return
 
-		if(!ismob(grab.affecting))
-			return
-
-		if(!check_occupant_allowed(grab.affecting))
-			return
-
-		attempt_enter(grab.affecting, user)
 
 /obj/machinery/cryopod/verb/eject()
 	set name = "Eject Pod"
@@ -604,22 +600,27 @@
 	else
 		to_chat(user, "<span class='notice'>The glass is already open.</span>")
 
-/obj/structure/broken_cryo/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/broken_cryo/use_tool(obj/item/W, mob/user)
 	if (busy)
 		to_chat(user, "<span class='notice'>Someone else is attempting to open this.</span>")
-		return
-	if (closed)
-		if (isCrowbar(W))
+		return FALSE
+
+	if (isCrowbar(W))
+		if (closed)
 			busy = 1
 			visible_message("[user] starts to pry the glass cover off of \the [src].")
 			if (!do_after(user, 50, src))
 				visible_message("[user] stops trying to pry the glass off of \the [src].")
 				busy = 0
-				return
+				return FALSE
 			closed = 0
 			busy = 0
 			icon_state = "broken_cryo_open"
 			var/obj/dead = new remains_type(loc)
 			dead.dir = src.dir//skeleton is oriented as cryo
-	else
-		to_chat(user, "<span class='notice'>The glass cover is already open.</span>")
+			return TRUE
+		else
+			to_chat(user, "<span class='notice'>The glass cover is already open.</span>")
+			return FALSE
+
+	return ..()

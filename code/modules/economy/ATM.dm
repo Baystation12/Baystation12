@@ -67,7 +67,7 @@
 		to_chat(user, "[icon2html(src, user)] <span class='warning'>[src] beeps: \"[response]\"</span>")
 		return 1
 
-/obj/machinery/atm/attackby(obj/item/I as obj, mob/user as mob)
+/obj/machinery/atm/use_item(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/card/id))
 		if(emagged > 0)
 			//prevent inserting id into an emagged ATM

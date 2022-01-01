@@ -136,7 +136,7 @@
 		return
 
 
-/obj/item/gun/launcher/crossbow/attackby(obj/item/W, mob/user)
+/obj/item/gun/launcher/crossbow/use_item(obj/item/W, mob/user)
 
 	if(istype(W, /obj/item/rcd))
 		var/obj/item/rcd/rcd = W
@@ -244,7 +244,7 @@
 		generate_bolt(user)
 		draw(user)
 
-/obj/item/gun/launcher/crossbow/rapidcrossbowdevice/attackby(obj/item/W, mob/user)
+/obj/item/gun/launcher/crossbow/rapidcrossbowdevice/use_item(obj/item/W, mob/user)
 	if(istype(W, /obj/item/rcd_ammo))
 		var/obj/item/rcd_ammo/cartridge = W
 		if(stored_matter >= max_stored_matter)

@@ -1,4 +1,4 @@
-/obj/item/rig/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/rig/use_item(obj/item/W as obj, mob/user as mob)
 
 	if(!istype(user,/mob/living)) return 0
 
@@ -8,7 +8,7 @@
 
 	// Pass repair items on to the chestpiece.
 	if(chest && (istype(W,/obj/item/stack/material) || isWelder(W)))
-		return chest.attackby(W,user)
+		return chest.use_item(W,user)
 
 	// Lock or unlock the access panel.
 	if(W.GetIdCard())

@@ -33,7 +33,7 @@
 //		src.sd_SetLuminosity(0)
 
 //Don't want to render prison breaks impossible
-/obj/machinery/flasher/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/flasher/use_tool(obj/item/W, mob/user)
 	if(isWirecutter(W))
 		add_fingerprint(user, 0, W)
 		src.disable = !src.disable
@@ -41,8 +41,9 @@
 			user.visible_message("<span class='warning'>[user] has disconnected the [src]'s flashbulb!</span>", "<span class='warning'>You disconnect the [src]'s flashbulb!</span>")
 		if (!src.disable)
 			user.visible_message("<span class='warning'>[user] has connected the [src]'s flashbulb!</span>", "<span class='warning'>You connect the [src]'s flashbulb!</span>")
-	else
-		..()
+		return TRUE
+
+	return ..()
 
 //Let the AI trigger them directly.
 /obj/machinery/flasher/attack_ai()
@@ -118,13 +119,12 @@
 		var/mob/living/carbon/M = AM
 		if(!MOVING_DELIBERATELY(M))
 			flash()
-	
+
 	if(isanimal(AM))
 		flash()
 
-/obj/machinery/flasher/portable/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/flasher/portable/use_tool(obj/item/W, mob/user)
 	if(isWrench(W))
-		add_fingerprint(user)
 		src.anchored = !src.anchored
 
 		if (!src.anchored)
@@ -134,6 +134,9 @@
 		else if (src.anchored)
 			user.show_message(text("<span class='warning'>[src] is now secured.</span>"))
 			src.overlays += "[base_state]-s"
+		return TRUE
+
+	return ..()
 
 /obj/machinery/button/flasher
 	name = "flasher button"

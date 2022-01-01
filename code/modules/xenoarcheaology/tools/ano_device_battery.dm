@@ -33,7 +33,7 @@
 	. = ..()
 	START_PROCESSING(SSobj, src)
 
-/obj/item/anodevice/attackby(var/obj/I as obj, var/mob/user as mob)
+/obj/item/anodevice/use_item(var/obj/I as obj, var/mob/user as mob)
 	if(istype(I, /obj/item/anobattery))
 		if(!inserted_battery)
 			if(!user.unEquip(I, src))

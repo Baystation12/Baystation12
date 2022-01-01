@@ -330,11 +330,10 @@
 	item_state = "headset"
 	ks1type = /obj/item/device/encryptionkey/specops
 
-/obj/item/device/radio/headset/attackby(obj/item/W as obj, mob/user as mob)
-//	..()
+/obj/item/device/radio/headset/use_tool(obj/item/W, mob/user)
 	user.set_machine(src)
 	if (!( isScrewdriver(W) || (istype(W, /obj/item/device/encryptionkey/ ))))
-		return
+		return ..()
 
 	if(isScrewdriver(W))
 		if(encryption_keys.len)
@@ -347,18 +346,21 @@
 
 			recalculateChannels(1)
 			to_chat(user, "You pop out the encryption keys in the headset!")
+			return TRUE
 
 		else
 			to_chat(user, "This headset doesn't have any encryption keys!  How useless...")
+			return FALSE
 
 	if(istype(W, /obj/item/device/encryptionkey/))
 		if(encryption_keys.len >= max_keys)
 			to_chat(user, "The headset can't hold another key!")
-			return
+			return FALSE
 		if(user.unEquip(W, target = src))
 			to_chat(user, "<span class='notice'>You put \the [W] into \the [src].</span>")
 			encryption_keys += W
 			recalculateChannels(1)
+			return TRUE
 
 /obj/item/device/radio/headset/MouseDrop(var/obj/over_object)
 	var/mob/M = usr

@@ -54,8 +54,8 @@
 
 /obj/item/stock_parts/computer/scanner/proc/do_on_afterattack(mob/user, atom/target, proximity)
 
-/obj/item/stock_parts/computer/scanner/attackby(obj/W, mob/living/user)
-	do_on_attackby(user, W)
+/obj/item/stock_parts/computer/scanner/use_item(obj/W, mob/living/user)
+	do_on_use_item(user, W)
 	// Nanopaste. Repair all damage if present for a single unit.
 	var/obj/item/stack/S = W
 	if (istype(S, /obj/item/stack/nanopaste))
@@ -77,7 +77,7 @@
 		return TRUE
 	return ..()
 
-/obj/item/stock_parts/computer/scanner/proc/do_on_attackby(mob/user, atom/target)
+/obj/item/stock_parts/computer/scanner/proc/do_on_use_item(mob/user, atom/target)
 
 /obj/item/stock_parts/computer/scanner/proc/can_use_scanner(mob/user, atom/target, proximity = TRUE)
 	if(!check_functionality())

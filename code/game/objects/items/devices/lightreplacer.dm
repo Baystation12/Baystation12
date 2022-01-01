@@ -94,32 +94,35 @@
 			return
 	. = ..()
 
-/obj/item/device/lightreplacer/attackby(obj/item/W, mob/user)
+/obj/item/device/lightreplacer/use_tool(obj/item/W, mob/user)
 	if(istype(W, /obj/item/stack/material) && W.get_material_name() == MATERIAL_GLASS)
 		var/obj/item/stack/G = W
 		if(uses >= max_uses)
 			to_chat(user, "<span class='warning'>[src.name] is full.</span>")
-			return
+			return FALSE
 		else if(G.use(1))
 			AddUses(16) //Autolathe converts 1 sheet into 16 lights.
 			to_chat(user, "<span class='notice'>You insert a piece of glass into \the [src.name]. You have [uses] light\s remaining.</span>")
-			return
+			return TRUE
 		else
 			to_chat(user, "<span class='warning'>You need one sheet of glass to replace lights.</span>")
+			return FALSE
 
 	if(istype(W, /obj/item/light))
 		var/obj/item/light/L = W
 		if(L.status == LIGHT_OK)
 			if(uses < max_uses)
 				if(!user.unEquip(L))
-					return
+					return FALSE
 				AddUses(1)
 				to_chat(user, "You insert \the [L.name] into \the [src.name]. You have [uses] light\s remaining.")
 				qdel(L)
-				return
+				return TRUE
 		else
 			to_chat(user, "You need a working light.")
-			return
+			return FALSE
+
+	return ..()
 
 /obj/item/device/lightreplacer/use_on_self(mob/user)
 	/* // This would probably be a bit OP. If you want it though, uncomment the code.

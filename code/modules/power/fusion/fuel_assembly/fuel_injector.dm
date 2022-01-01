@@ -41,7 +41,7 @@
 		else
 			Inject()
 
-/obj/machinery/fusion_fuel_injector/attackby(obj/item/W, mob/user)
+/obj/machinery/fusion_fuel_injector/use_item(obj/item/W, mob/user)
 
 	if(isMultitool(W))
 		var/datum/extension/local_network_member/lanm = get_extension(src, /datum/extension/local_network_member)

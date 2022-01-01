@@ -461,9 +461,11 @@ its easier to just keep the beam vertical.
 					"<span class='notice'>You shake \the [src].</span>")
 		object_shaken()
 
-// Called when hitting the atom with a grab.
-// Will skip attackby() and afterattack() if returning TRUE.
-/atom/proc/grab_attack(var/obj/item/grab/G)
+/*
+ * Called when hitting the atom with a grab.
+ * Will skip `use_item()` and `afterattack()` if returning `TRUE`.
+ */
+/atom/proc/grab_attack(obj/item/grab/G)
 	return FALSE
 
 /atom/proc/climb_on()

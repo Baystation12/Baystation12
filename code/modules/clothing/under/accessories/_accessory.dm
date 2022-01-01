@@ -102,7 +102,7 @@
 
 
 //default attackby behaviour
-/obj/item/clothing/accessory/attackby(obj/item/I, mob/user)
+/obj/item/clothing/accessory/use_item(obj/item/I, mob/user)
 	..()
 
 

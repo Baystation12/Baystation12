@@ -14,31 +14,42 @@
 	var/icon_broken = "lockbox+b"
 
 
-/obj/item/storage/lockbox/attackby(obj/item/I, mob/user)
-	if (istype(I, /obj/item/card/id))
-		if (broken)
-			to_chat(user, SPAN_WARNING("It seems to be broken!"))
-		else if (!allowed(user))
-			to_chat(user, SPAN_WARNING("Access denied!"))
-		else if ((locked = !locked))
-			to_chat(user, SPAN_NOTICE("You lock \the [src]!"))
-			close_all()
-		else
-			icon_state = icon_closed
-			to_chat(user, SPAN_NOTICE("You lock \the [src]!"))
-		return
-	else if (!broken && istype(I, /obj/item/melee/energy/blade))
-		var/success = emag_act(INFINITY, user, I, null, "You hear metal being sliced and sparks flying.")
+/obj/item/storage/lockbox/use_weapon(obj/item/W, mob/user, click_params)
+	if (!broken && istype(W, /obj/item/melee/energy/blade))
+		var/success = emag_act(INFINITY, user, W, null, "You hear metal being sliced and sparks flying.")
 		if (success)
 			var/datum/effect/effect/system/spark_spread/spark_system = new
 			spark_system.set_up(5, 0, loc)
 			spark_system.start()
 			playsound(loc, 'sound/weapons/blade1.ogg', 50, 1)
 			playsound(loc, "sparks", 50, 1)
+			return TRUE
+		return FALSE
+
+	return ..()
+
+
+/obj/item/storage/lockbox/use_tool(obj/item/I, mob/user)
+	if (istype(I, /obj/item/card/id))
+		if (broken)
+			to_chat(user, SPAN_WARNING("It seems to be broken!"))
+			return FALSE
+		else if (!allowed(user))
+			to_chat(user, SPAN_WARNING("Access denied!"))
+			return FALSE
+		else if ((locked = !locked))
+			to_chat(user, SPAN_NOTICE("You lock \the [src]!"))
+			close_all()
+		else
+			icon_state = icon_closed
+			to_chat(user, SPAN_NOTICE("You lock \the [src]!"))
+		return TRUE
+
 	if (locked)
 		to_chat(user, SPAN_WARNING("It's locked!"))
-		return
-	..()
+		return FALSE
+
+	return ..()
 
 
 /obj/item/storage/lockbox/show_to(mob/user)

@@ -92,7 +92,7 @@
 		qdel(RC)
 		update_components()
 
-/obj/item/mech_component/attackby(var/obj/item/thing, var/mob/user)
+/obj/item/mech_component/use_item(var/obj/item/thing, var/mob/user)
 	if(isScrewdriver(thing))
 		if(contents.len)
 			//Filter non movables

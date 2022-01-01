@@ -90,8 +90,8 @@
 		return SPAN_NOTICE("Turn \the [src] off first.")
 	return ..()
 
-/obj/machinery/suspension_gen/attackby(obj/item/W, mob/user)
-	if(component_attackby(W, user))
+/obj/machinery/suspension_gen/use_item(obj/item/W, mob/user)
+	if(component_use_item(W, user))
 		return TRUE
 	else if(isWrench(W))
 		if(!suspension_field)

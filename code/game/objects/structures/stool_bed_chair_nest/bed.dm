@@ -87,19 +87,29 @@
 				qdel(src)
 				return
 
-/obj/structure/bed/attackby(obj/item/W as obj, mob/user as mob)
+
+/obj/structure/bed/grab_attack(obj/item/grab/G)
+	G.assailant.visible_message("<span class='notice'>[G.assailant] attempts to buckle [G.affecting] into \the [src]!</span>")
+	if(do_after(G.assailant, 20, src) && user_buckle_mob(G.affecting, G.assailant))
+		qdel(G)
+	return TRUE
+
+
+/obj/structure/bed/use_tool(obj/item/W, mob/user)
 	if(isWrench(W))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		dismantle()
 		qdel(src)
+		return TRUE
+
 	else if(istype(W,/obj/item/stack))
 		if(padding_material)
 			to_chat(user, "\The [src] is already padded.")
-			return
+			return FALSE
 		var/obj/item/stack/C = W
 		if(C.get_amount() < 1) // How??
 			qdel(C)
-			return
+			return FALSE
 		var/padding_type //This is awful but it needs to be like this until tiles are given a material var.
 		if(istype(W,/obj/item/stack/tile/carpet))
 			padding_type = MATERIAL_CARPET
@@ -109,31 +119,25 @@
 				padding_type = "[M.material.name]"
 		if(!padding_type)
 			to_chat(user, "You cannot pad \the [src] with that.")
-			return
+			return FALSE
 		C.use(1)
 		if(!istype(src.loc, /turf))
 			src.forceMove(get_turf(src))
 		to_chat(user, "You add padding to \the [src].")
 		add_padding(padding_type)
-		return
+		return TRUE
 
 	else if(isWirecutter(W))
 		if(!padding_material)
 			to_chat(user, "\The [src] has no padding to remove.")
-			return
+			return FALSE
 		to_chat(user, "You remove the padding from \the [src].")
 		playsound(src, 'sound/items/Wirecutter.ogg', 100, 1)
 		remove_padding()
+		return TRUE
 
-	else if(istype(W, /obj/item/grab))
-		var/obj/item/grab/G = W
-		var/mob/living/affecting = G.affecting
-		user.visible_message("<span class='notice'>[user] attempts to buckle [affecting] into \the [src]!</span>")
-		if(do_after(user, 20, src))
-			if(user_buckle_mob(affecting, user))
-				qdel(W)
-	else
-		..()
+	return ..()
+
 
 /obj/structure/bed/buckle_mob(mob/living/M)
 	. = ..()
@@ -212,7 +216,7 @@
 			iv.pixel_y = 6
 		overlays += iv
 
-/obj/structure/bed/roller/attackby(obj/item/I, mob/user)
+/obj/structure/bed/roller/use_item(obj/item/I, mob/user)
 	if(isWrench(I) || istype(I, /obj/item/stack) || isWirecutter(I))
 		return 1
 	if(iv_stand && !beaker && istype(I, /obj/item/reagent_containers/ivbag))

@@ -29,11 +29,6 @@
 		set_extension(src, /datum/extension/appearance/cardborg)
 	..()
 
-/obj/item/storage/backpack/attackby(obj/item/W as obj, mob/user as mob)
-	if (src.use_sound)
-		playsound(src.loc, src.use_sound, 50, 1, -5)
-	return ..()
-
 /obj/item/storage/backpack/equipped(var/mob/user, var/slot)
 	if (slot == slot_back && src.use_sound)
 		playsound(src.loc, src.use_sound, 50, 1, -5)
@@ -55,11 +50,11 @@
 	..()
 	return
 
-/obj/item/storage/backpack/holding/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/storage/backpack/holding/use_item(obj/item/W, mob/user)
 	if(istype(W, /obj/item/storage/backpack/holding) || istype(W, /obj/item/storage/bag/trash/bluespace))
 		to_chat(user, "<span class='warning'>The Bluespace interfaces of the two devices conflict and malfunction.</span>")
 		qdel(W)
-		return 1
+		return TRUE
 	return ..()
 
 	//Please don't clutter the parent storage item with stupid hacks.
@@ -405,11 +400,11 @@
 	anchored = i ? TRUE : FALSE
 	alpha = i ? 128 : initial(alpha)
 
-/obj/item/storage/backpack/satchel/flat/attackby(obj/item/W, mob/user)
+/obj/item/storage/backpack/satchel/flat/use_item(obj/item/W, mob/user)
 	var/turf/T = get_turf(src)
 	if(hides_under_flooring() && isturf(T) && !T.is_plating())
 		to_chat(user, "<span class='warning'>You must remove the plating first.</span>")
-		return 1
+		return FALSE
 	return ..()
 
 //ERT backpacks.

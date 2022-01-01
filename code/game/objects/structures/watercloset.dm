@@ -25,7 +25,7 @@
 /obj/structure/hygiene/proc/unclog()
 	clogged = 0
 
-/obj/structure/hygiene/attackby(var/obj/item/thing, var/mob/user)
+/obj/structure/hygiene/use_item(var/obj/item/thing, var/mob/user)
 	if(clogged > 0 && isPlunger(thing))
 		user.visible_message("<span class='notice'>\The [user] strives valiantly to unclog \the [src] with \the [thing]!</span>")
 		spawn
@@ -132,7 +132,26 @@
 /obj/structure/hygiene/toilet/on_update_icon()
 	icon_state = "toilet[open][cistern]"
 
-/obj/structure/hygiene/toilet/attackby(obj/item/I as obj, var/mob/living/user)
+
+/obj/structure/hygiene/toilet/grab_attack(obj/item/grab/G)
+	. = TRUE
+	var/mob/living/GM = G.affecting
+	if(!GM.loc == get_turf(src))
+		to_chat(G.assailant, "<span class='warning'>\The [GM] needs to be on the toilet.</span>")
+		return
+	if(open && !swirlie)
+		G.assailant.visible_message("<span class='danger'>\The [G.assailant] starts jamming \the [GM]'s face into \the [src]!</span>")
+		swirlie = GM
+		if(do_after(G.assailant, 30, src))
+			G.assailant.visible_message("<span class='danger'>\The [G.assailant] gives [GM.name] a swirlie!</span>")
+			GM.adjustOxyLoss(5)
+		swirlie = null
+	else
+		G.assailant.visible_message("<span class='danger'>\The [G.assailant] slams [GM.name] into the [src]!</span>", "<span class='notice'>You slam [GM.name] into the [src]!</span>")
+		GM.adjustBruteLoss(8)
+
+
+/obj/structure/hygiene/toilet/use_tool(obj/item/I, mob/living/user)
 	if(isCrowbar(I))
 		to_chat(user, "<span class='notice'>You start to [cistern ? "replace the lid on the cistern" : "lift the lid off the cistern"].</span>")
 		playsound(loc, 'sound/effects/stonedoor_openclose.ogg', 50, 1)
@@ -140,41 +159,24 @@
 			user.visible_message("<span class='notice'>[user] [cistern ? "replaces the lid on the cistern" : "lifts the lid off the cistern"]!</span>", "<span class='notice'>You [cistern ? "replace the lid on the cistern" : "lift the lid off the cistern"]!</span>", "You hear grinding porcelain.")
 			cistern = !cistern
 			update_icon()
-			return
-
-	if(istype(I, /obj/item/grab))
-		var/obj/item/grab/G = I
-
-		if(isliving(G.affecting))
-			var/mob/living/GM = G.affecting
-			if(!GM.loc == get_turf(src))
-				to_chat(user, "<span class='warning'>\The [GM] needs to be on the toilet.</span>")
-				return
-			if(open && !swirlie)
-				user.visible_message("<span class='danger'>\The [user] starts jamming \the [GM]'s face into \the [src]!</span>")
-				swirlie = GM
-				if(do_after(user, 30, src))
-					user.visible_message("<span class='danger'>\The [user] gives [GM.name] a swirlie!</span>")
-					GM.adjustOxyLoss(5)
-				swirlie = null
-			else
-				user.visible_message("<span class='danger'>\The [user] slams [GM.name] into the [src]!</span>", "<span class='notice'>You slam [GM.name] into the [src]!</span>")
-				GM.adjustBruteLoss(8)
+			return TRUE
+		return FALSE
 
 	if(cistern && !istype(user,/mob/living/silicon/robot)) //STOP PUTTING YOUR MODULES IN THE TOILET.
 		if(I.w_class > ITEM_SIZE_NORMAL)
 			to_chat(user, "<span class='warning'>\The [I] does not fit.</span>")
-			return
+			return FALSE
 		if(w_items + I.w_class > 5)
 			to_chat(user, "<span class='warning'>The cistern is full.</span>")
-			return
+			return FALSE
 		if(!user.unEquip(I, src))
-			return
+			return FALSE
 		w_items += I.w_class
 		to_chat(user, "<span class='notice'>You carefully place \the [I] into the cistern.</span>")
-		return
+		return TRUE
 
-	. = ..()
+	return ..()
+
 
 /obj/structure/hygiene/urinal
 	name = "urinal"
@@ -184,17 +186,15 @@
 	density = FALSE
 	anchored = TRUE
 
-/obj/structure/hygiene/urinal/attackby(var/obj/item/I, var/mob/user)
-	if(istype(I, /obj/item/grab))
-		var/obj/item/grab/G = I
-		if(isliving(G.affecting))
-			var/mob/living/GM = G.affecting
-			if(!GM.loc == get_turf(src))
-				to_chat(user, "<span class='warning'>[GM.name] needs to be on the urinal.</span>")
-				return
-			user.visible_message("<span class='danger'>[user] slams [GM.name] into the [src]!</span>")
-			GM.adjustBruteLoss(8)
-	. = ..()
+
+/obj/structure/hygiene/urinal/grab_attack(obj/item/grab/G)
+	var/mob/living/GM = G.affecting
+	if(!GM.loc == get_turf(src))
+		to_chat(G.assailant, "<span class='warning'>[GM.name] needs to be on the urinal.</span>")
+		return
+	G.assailant.visible_message("<span class='danger'>[G.assailant] slams [GM.name] into the [src]!</span>")
+	GM.adjustBruteLoss(8)
+	return TRUE
 
 /obj/structure/hygiene/shower
 	name = "shower"
@@ -238,7 +238,7 @@
 		for (var/atom/movable/G in src.loc)
 			G.clean_blood()
 
-/obj/structure/hygiene/shower/attackby(obj/item/I as obj, var/mob/user)
+/obj/structure/hygiene/shower/use_item(obj/item/I as obj, var/mob/user)
 	if(istype(I, /obj/item/device/scanner/gas))
 		to_chat(user, "<span class='notice'>The water temperature seems to be [watertemp].</span>")
 		return
@@ -394,7 +394,7 @@
 		"<span class='notice'>You wash your hands using \the [src].</span>")
 
 
-/obj/structure/hygiene/sink/attackby(obj/item/O as obj, var/mob/living/user)
+/obj/structure/hygiene/sink/use_item(obj/item/O as obj, var/mob/living/user)
 
 	if(isPlunger(O) && clogged > 0)
 		return ..()
@@ -470,14 +470,14 @@
 	..()
 	icon_state = "puddle"
 
-/obj/structure/hygiene/sink/puddle/attackby(obj/item/O as obj, var/mob/user)
+/obj/structure/hygiene/sink/puddle/use_item(obj/item/O as obj, var/mob/user)
 	icon_state = "puddle-splash"
 	..()
 	icon_state = "puddle"
 
 //toilet paper interaction for clogging toilets and other facilities
 
-/obj/structure/hygiene/attackby(obj/item/I, mob/user)
+/obj/structure/hygiene/use_item(obj/item/I, mob/user)
 	if (!istype(I, /obj/item/taperoll/bog))
 		..()
 		return
@@ -545,7 +545,7 @@
 	var/fill_level = 500
 	var/open = FALSE
 
-/obj/structure/hygiene/faucet/attackby(obj/item/thing, mob/user)
+/obj/structure/hygiene/faucet/use_tool(obj/item/thing, mob/user)
 	if (isWrench(thing))
 		new /obj/item/faucet (loc)
 		playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
@@ -580,7 +580,7 @@
 	obj_flags = OBJ_FLAG_ROTATABLE
 	var/constructed_type = /obj/structure/hygiene/faucet
 
-/obj/item/faucet/attackby(obj/item/thing, mob/user)
+/obj/item/faucet/use_tool(obj/item/thing, mob/user)
 	if(isWrench(thing))
 		var/turf/simulated/floor/F = loc
 		if (istype(F) && istype(F.flooring, /decl/flooring/pool))
@@ -592,9 +592,9 @@
 				SPAN_WARNING("You wrench \the [src] down.")
 			)
 			qdel(src)
-			return
 		else
 			to_chat(user, SPAN_WARNING("\The [src] can only be secured to pool tiles!"))
+		return TRUE
 	return ..()
 
 /obj/structure/hygiene/faucet/proc/water_flow()

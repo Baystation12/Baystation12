@@ -61,12 +61,12 @@
 	else
 		set_light(0)
 
-/turf/space/attackby(obj/item/C as obj, mob/user as mob)
+/turf/space/use_item(obj/item/C as obj, mob/user as mob)
 
 	if (istype(C, /obj/item/stack/material/rods))
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
 		if(L)
-			return L.attackby(C, user)
+			return L.use_item(C, user)
 		var/obj/item/stack/material/rods/R = C
 		if (R.use(1))
 			to_chat(user, "<span class='notice'>Constructing support lattice ...</span>")

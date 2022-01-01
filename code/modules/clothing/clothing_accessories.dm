@@ -34,7 +34,7 @@
 	return TRUE
 
 
-/obj/item/clothing/attackby(obj/item/I, mob/user)
+/obj/item/clothing/use_item(obj/item/I, mob/user)
 	if (attempt_attach_accessory(I, user))
 		return
 	if (attempt_store_item(I, user))

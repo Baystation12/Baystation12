@@ -66,7 +66,7 @@
 		if(2)
 			to_chat(user, "It is almost completely destroyed.")
 
-/obj/item/rig_module/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/rig_module/use_item(obj/item/W as obj, mob/user as mob)
 
 	if(istype(W,/obj/item/stack/nanopaste))
 
@@ -254,7 +254,7 @@
 	else
 		return passive_power_cost
 
-// Called by holder rigsuit attackby()
+// Called by holder rigsuit use_item()
 // Checks if an item is usable with this module and handles it if it is
 /obj/item/rig_module/proc/accepts_item(var/obj/item/input_device)
 	return 0

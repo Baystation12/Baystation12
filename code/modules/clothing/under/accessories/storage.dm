@@ -37,9 +37,9 @@
 		..(over_object)
 
 
-/obj/item/clothing/accessory/storage/attackby(obj/item/I, mob/user)
+/obj/item/clothing/accessory/storage/use_item(obj/item/I, mob/user)
 	if (container)
-		return container.attackby(I, user)
+		return container.use_item(I, user)
 
 
 /obj/item/clothing/accessory/storage/emp_act(severity)

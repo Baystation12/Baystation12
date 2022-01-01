@@ -10,7 +10,7 @@
 	var/last_update = 0
 	var/list/stored_ore = list()
 
-/obj/structure/ore_box/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/ore_box/use_item(obj/item/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/ore))
 		user.unEquip(W, src)
 	else if (istype(W, /obj/item/storage))

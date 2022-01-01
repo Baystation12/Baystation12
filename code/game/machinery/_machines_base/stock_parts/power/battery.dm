@@ -136,23 +136,23 @@
 	icon_state = "battery[!!cell]"
 
 // Cell interaction
-/obj/item/stock_parts/power/battery/attackby(obj/item/I, mob/user)
+/obj/item/stock_parts/power/battery/use_tool(obj/item/I, mob/user)
 	var/obj/machinery/machine = loc
 
 	// Interactions with/without machine
 	if(istype(I, /obj/item/cell))
 		if(cell)
 			to_chat(user, "There is a power cell already installed.")
-			return TRUE
+			return FALSE
 		if(istype(machine) && (machine.stat & MAINT))
 			to_chat(user, "<span class='warning'>There is no connector for your power cell.</span>")
-			return TRUE
+			return FALSE
 		if(I.w_class != ITEM_SIZE_NORMAL)
 			to_chat(user, "\The [I] is too [I.w_class < ITEM_SIZE_NORMAL? "small" : "large"] to fit here.")
-			return TRUE
+			return FALSE
 
 		if(!user.unEquip(I, src))
-			return
+			return FALSE
 		add_cell(machine, I)
 		user.visible_message(\
 			SPAN_WARNING("\The [user] has inserted the power cell to \the [src]!"),\

@@ -78,19 +78,29 @@
 		shatter()
 	..()
 
-/obj/item/storage/mirror/attackby(obj/item/I, mob/user)
-	if (prob(I.force) && user.a_intent == I_HURT)
+
+/obj/item/storage/mirror/use_weapon(obj/item/I, mob/user)
+	if (!(I.item_flags & ITEM_FLAG_NO_BLUDGEON))
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		user.do_attack_animation(src)
 		user.visible_message(
 			SPAN_WARNING("\The [user] smashes \the [src] with \the [I]!"),
 			SPAN_WARNING("You smash \the [src] with \the [I]!")
 		)
-		shatter()
+		if (prob(I.force))
+			shatter()
 		return TRUE
+
+	return ..()
+
+
+/obj/item/storage/mirror/use_tool(obj/item/W, mob/user)
 	. = ..()
-	if (!.)
+	if (.)
 		return
 	flick("mirror_open", src)
 	on_flick()
+
 
 /obj/item/mirror
 	name = "mirror"

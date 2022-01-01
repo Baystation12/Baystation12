@@ -26,7 +26,7 @@
 	update_icon()
 	. = ..()
 
-/obj/structure/bookcase/attackby(obj/O as obj, mob/user as mob)
+/obj/structure/bookcase/use_item(obj/O as obj, mob/user as mob)
 	if(istype(O, /obj/item/book))
 		if(!user.unEquip(O, src))
 			return
@@ -166,7 +166,7 @@
 	else
 		to_chat(user, "This book is completely blank!")
 
-/obj/item/book/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/book/use_item(obj/item/W as obj, mob/user as mob)
 	if(carved == 1)
 		if(!store)
 			if(W.w_class < ITEM_SIZE_NORMAL)

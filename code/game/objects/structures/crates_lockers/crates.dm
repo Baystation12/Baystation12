@@ -30,7 +30,7 @@
 			devices += A
 		to_chat(user,"There are some wires attached to the lid, connected to [english_list(devices)].")
 
-/obj/structure/closet/crate/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/closet/crate/use_item(obj/item/W as obj, mob/user as mob)
 	if(opened)
 		return ..()
 	else if(istype(W, /obj/item/stack/package_wrap))

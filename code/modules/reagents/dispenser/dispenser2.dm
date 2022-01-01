@@ -71,7 +71,7 @@
 	cartridges -= label
 	SSnano.update_uis(src)
 
-/obj/machinery/chemical_dispenser/attackby(obj/item/W, mob/user)
+/obj/machinery/chemical_dispenser/use_item(obj/item/W, mob/user)
 	if(istype(W, /obj/item/reagent_containers/chem_disp_cartridge))
 		add_cartridge(W, user)
 

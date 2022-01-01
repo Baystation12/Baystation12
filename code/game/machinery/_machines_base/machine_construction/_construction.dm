@@ -78,11 +78,10 @@
 		machine.attack_hand(user)
 		return TRUE
 
-/decl/machine_construction/proc/attackby(obj/item/I, mob/user, obj/machinery/machine)
+/decl/machine_construction/proc/use_item(obj/item/I, mob/user, obj/machinery/machine)
 	if(!validate_state(machine))
 		crash_with("Machine [log_info_line(machine)] violated the state assumptions of the construction state [type]!")
-		machine.attackby(I, user)
-		return TRUE
+		return machine.use_item(I, user)
 
 /decl/machine_construction/proc/mechanics_info()
 

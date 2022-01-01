@@ -258,7 +258,7 @@
 	. = ..()
 	toggle_input_toggle()
 
-/obj/machinery/atmospherics/unary/vent_pump/attackby(obj/item/W, mob/user)
+/obj/machinery/atmospherics/unary/vent_pump/use_item(obj/item/W, mob/user)
 	if(isWelder(W))
 
 		var/obj/item/weldingtool/WT = W
@@ -305,7 +305,7 @@
 	if(welded)
 		to_chat(user, "It seems welded shut.")
 
-/obj/machinery/atmospherics/unary/vent_pump/attackby(var/obj/item/W as obj, var/mob/user as mob)
+/obj/machinery/atmospherics/unary/vent_pump/use_item(var/obj/item/W as obj, var/mob/user as mob)
 	if(isWrench(W))
 		if (!(stat & NOPOWER) && use_power)
 			to_chat(user, "<span class='warning'>You cannot unwrench \the [src], turn it off first.</span>")

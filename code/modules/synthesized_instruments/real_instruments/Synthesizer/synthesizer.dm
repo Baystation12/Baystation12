@@ -12,7 +12,7 @@
 	path = /datum/instrument
 	sound_player = /datum/sound_player/synthesizer
 
-/obj/structure/synthesized_instrument/synthesizer/attackby(obj/item/O, mob/user, params)
+/obj/structure/synthesized_instrument/synthesizer/use_item(obj/item/O, mob/user, params)
 	if (istype(O, /obj/item/wrench))
 		if (!anchored && !isinspace())
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)

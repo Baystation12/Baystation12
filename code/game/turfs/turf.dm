@@ -138,7 +138,7 @@
 	if(Adjacent(user))
 		attack_hand(user)
 
-turf/attackby(obj/item/W as obj, mob/user as mob)
+turf/use_item(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/storage))
 		var/obj/item/storage/S = W
 		if(S.use_to_pickup && S.collection_mode)

@@ -328,7 +328,7 @@
 		..()
 	return
 
-/obj/item/stack/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/stack/use_tool(obj/item/W, mob/user)
 	if (istype(W, /obj/item/stack))
 		var/obj/item/stack/S = W
 		src.transfer_to(S)
@@ -338,8 +338,9 @@
 				S.interact(usr)
 			if (src && usr.machine==src)
 				src.interact(usr)
-	else
-		return ..()
+		return TRUE
+
+	return ..()
 
 /*
  * Recipe datum

@@ -56,22 +56,24 @@
 		cell.emp_act(severity)
 	..(severity)
 
-/obj/machinery/space_heater/attackby(obj/item/I, mob/user)
+/obj/machinery/space_heater/use_tool(obj/item/I, mob/user)
 	if(istype(I, /obj/item/cell))
 		if(panel_open)
 			if(cell)
 				to_chat(user, "There is already a power cell inside.")
-				return
+				return FALSE
 			else
 				// insert cell
 				if(!user.unEquip(I, src))
-					return
+					return FALSE
 				cell = I
 				user.visible_message("<span class='notice'>[user] inserts a power cell into [src].</span>", "<span class='notice'>You insert the power cell into [src].</span>")
 				power_change()
+				return TRUE
 		else
 			to_chat(user, "The hatch must be open to insert a power cell.")
-			return
+			return FALSE
+
 	else if(isScrewdriver(I))
 		panel_open = !panel_open
 		user.visible_message("<span class='notice'>[user] [panel_open ? "opens" : "closes"] the hatch on the [src].</span>", "<span class='notice'>You [panel_open ? "open" : "close"] the hatch on the [src].</span>")
@@ -79,9 +81,9 @@
 		if(!panel_open && user.machine == src)
 			show_browser(user, null, "window=spaceheater")
 			user.unset_machine()
-	else
-		..()
-	return
+		return TRUE
+
+	return ..()
 
 /obj/machinery/space_heater/interface_interact(mob/user)
 	if(panel_open)

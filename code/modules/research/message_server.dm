@@ -117,7 +117,7 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 	update_icon()
 	return TRUE
 
-/obj/machinery/message_server/attackby(obj/item/O as obj, mob/living/user as mob)
+/obj/machinery/message_server/use_item(obj/item/O as obj, mob/living/user as mob)
 	if (active && !(stat & (BROKEN|NOPOWER)) && (spamfilter_limit < MESSAGE_SERVER_DEFAULT_SPAM_LIMIT*2) && \
 		istype(O,/obj/item/stock_parts/circuitboard/message_monitor))
 		spamfilter_limit += round(MESSAGE_SERVER_DEFAULT_SPAM_LIMIT / 2)

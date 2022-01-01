@@ -39,7 +39,7 @@
 		new_light_overlay = citem.additional_data["light_overlay"]
 	new_mob_icon_file = CUSTOM_ITEM_MOB
 
-/obj/item/clothing/head/helmet/space/void/attackby(var/obj/item/O, var/mob/user)
+/obj/item/clothing/head/helmet/space/void/use_tool(obj/item/O, mob/user)
 	if(istype(O,/obj/item/device/kit/suit))
 		var/obj/item/device/kit/suit/kit = O
 		SetName("[kit.new_name] suit helmet")
@@ -57,10 +57,11 @@
 		if(istype(H))
 			species_restricted = list(H.species.get_bodytype(H))
 		kit.use(1,user)
-		return 1
+		return TRUE
+
 	return ..()
 
-/obj/item/clothing/suit/space/void/attackby(var/obj/item/O, var/mob/user)
+/obj/item/clothing/suit/space/void/use_tool(obj/item/O, mob/user)
 	if(istype(O,/obj/item/device/kit/suit))
 		var/obj/item/device/kit/suit/kit = O
 		SetName("[kit.new_name] voidsuit")
@@ -76,7 +77,8 @@
 		if(istype(H))
 			species_restricted = list(H.species.get_bodytype(H))
 		kit.use(1,user)
-		return 1
+		return TRUE
+
 	return ..()
 
 // Mechs are handled in their attackby (mech_interaction.dm).

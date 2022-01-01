@@ -42,7 +42,7 @@
 			return
 	return ..()
 
-/obj/structure/mech_wreckage/attackby(var/obj/item/W, var/mob/user)
+/obj/structure/mech_wreckage/use_item(var/obj/item/W, var/mob/user)
 
 	var/cutting
 	if(isWelder(W))

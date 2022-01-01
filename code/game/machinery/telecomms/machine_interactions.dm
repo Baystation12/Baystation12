@@ -17,8 +17,8 @@
 	stat_immune = 0
 	maximum_component_parts = list(/obj/item/stock_parts = 15)
 
-/obj/machinery/telecomms/attackby(obj/item/P as obj, mob/user as mob)
 
+/obj/machinery/telecomms/use_tool(obj/item/P, mob/user)
 	// Using a multitool lets you access the receiver's interface
 	if(isMultitool(P))
 		interface_interact(user)
@@ -31,11 +31,15 @@
 			if (T.use(1))
 				integrity = clamp(integrity + rand(10, 20), 0, 100)
 				to_chat(usr, "You apply the Nanopaste to [src], repairing some of the damage.")
+				return TRUE
+			else
+				return FALSE
 		else
 			to_chat(usr, "This machine is already in perfect condition.")
-		return
+			return FALSE
 
-	return component_attackby(P, user)
+	return component_use_item(P, user)
+
 
 /obj/machinery/telecomms/cannot_transition_to(state_path, mob/user)
 	. = ..()
@@ -53,7 +57,7 @@
 /obj/machinery/telecomms/dismantle()
 	for(var/obj/x in (contents - component_parts))
 		x.dropInto(loc)
-	. = ..()	
+	. = ..()
 
 // This should all be a multitool extension, but outside the scope of current rework.
 /obj/machinery/telecomms/CanUseTopic(mob/user)
@@ -135,7 +139,7 @@
 
 	dat += "</font>"
 	temp = ""
-	
+
 	var/datum/browser/popup = new(user, "tcommmachine", "Telecommunications Machine Configuration Panel", 520, 600)
 	popup.set_content(JOINTEXT(dat))
 	popup.open()

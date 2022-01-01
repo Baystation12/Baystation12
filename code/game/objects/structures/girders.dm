@@ -56,7 +56,7 @@
 	if(reinf_material)
 		reinforce_girder()
 
-/obj/structure/girder/attackby(obj/item/W, mob/user)
+/obj/structure/girder/use_item(obj/item/W, mob/user)
 	if (user.a_intent == I_HURT)
 		..()
 		return
@@ -166,7 +166,7 @@
 	to_chat(user, "<span class='notice'>You begin adding the plating...</span>")
 
 	if(!do_after(user,40,src) || !S.use(2))
-		return 1 //once we've gotten this far don't call parent attackby()
+		return 1 //once we've gotten this far don't call parent use_item()
 
 	if(anchored)
 		to_chat(user, "<span class='notice'>You added the plating!</span>")
@@ -200,7 +200,7 @@
 
 	to_chat(user, "<span class='notice'>Now reinforcing...</span>")
 	if (!do_after(user, 40,src) || !S.use(2))
-		return 1 //don't call parent attackby() past this point
+		return 1 //don't call parent use_item() past this point
 	to_chat(user, "<span class='notice'>You added reinforcement!</span>")
 
 	reinf_material = M
@@ -234,7 +234,7 @@
 /obj/structure/girder/cult/dismantle()
 	qdel(src)
 
-/obj/structure/girder/cult/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/girder/cult/use_item(obj/item/W as obj, mob/user as mob)
 	if(isWrench(W))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 		to_chat(user, "<span class='notice'>Now disassembling the girder...</span>")

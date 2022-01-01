@@ -86,7 +86,7 @@
 	prep_burrow(FALSE)
 	// cooldown_ability(ability_cooldown)
 	for(var/mob/living/carbon/human/H in get_turf(src))
-		H.attackby(natural_weapon, src)
+		H.use_item(natural_weapon, src)
 		visible_message(SPAN_DANGER("\The [src] tears into \the [H] from below!"))
 		H.Weaken(1)
 

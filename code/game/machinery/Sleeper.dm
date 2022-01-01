@@ -170,16 +170,16 @@
 		updateUsrDialog()
 		go_out()
 
-/obj/machinery/sleeper/attackby(var/obj/item/I, var/mob/user)
+/obj/machinery/sleeper/use_tool(obj/item/I, mob/user)
 	if(istype(I, /obj/item/reagent_containers/glass))
-		add_fingerprint(user)
 		if(!beaker)
 			if(!user.unEquip(I, src))
-				return
+				return TRUE
 			beaker = I
 			user.visible_message("<span class='notice'>\The [user] adds \a [I] to \the [src].</span>", "<span class='notice'>You add \a [I] to \the [src].</span>")
 		else
 			to_chat(user, "<span class='warning'>\The [src] has a beaker already.</span>")
+			return FALSE
 		return TRUE
 	return ..()
 

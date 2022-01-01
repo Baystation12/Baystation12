@@ -74,7 +74,7 @@
 		new plated_tile.build_type(src.loc)
 	qdel(src)
 
-/obj/structure/catwalk/attackby(obj/item/C as obj, mob/user as mob)
+/obj/structure/catwalk/use_item(obj/item/C as obj, mob/user as mob)
 	if(isWelder(C))
 		var/obj/item/weldingtool/WT = C
 		if(WT.remove_fuel(0, user))

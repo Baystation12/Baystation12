@@ -34,7 +34,7 @@
 	QDEL_NULL(installed_gun)
 	return ..()
 
-/obj/item/integrated_circuit/manipulation/weapon_firing/attackby(var/obj/O, var/mob/user)
+/obj/item/integrated_circuit/manipulation/weapon_firing/use_item(var/obj/O, var/mob/user)
 	if(istype(O, /obj/item/gun/energy))
 		var/obj/item/gun/energy/gun = O
 		if(installed_gun)
@@ -180,7 +180,7 @@
 	detach_grenade()
 	return ..()
 
-/obj/item/integrated_circuit/manipulation/grenade/attackby(var/obj/item/grenade/G, var/mob/user)
+/obj/item/integrated_circuit/manipulation/grenade/use_item(var/obj/item/grenade/G, var/mob/user)
 	if(istype(G))
 		if(attached_grenade)
 			to_chat(user, "<span class='warning'>There is already a grenade attached!</span>")
@@ -645,7 +645,7 @@
 	controlling = null
 
 
-/obj/item/integrated_circuit/manipulation/ai/attackby(obj/item/I, mob/user)
+/obj/item/integrated_circuit/manipulation/ai/use_item(obj/item/I, mob/user)
 	if(is_type_in_list(I, list(/obj/item/aicard, /obj/item/device/paicard, /obj/item/device/mmi)))
 		load_ai(user, I)
 	else return ..()

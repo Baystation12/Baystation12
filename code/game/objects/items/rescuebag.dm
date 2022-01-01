@@ -29,22 +29,24 @@
 		airtank = null
 	qdel(src)
 
-/obj/item/bodybag/rescue/attackby(obj/item/W, mob/user, var/click_params)
+/obj/item/bodybag/rescue/use_tool(obj/item/W, mob/user, click_params)
 	if(istype(W,/obj/item/tank))
 		if(airtank)
 			to_chat(user, "\The [src] already has an air tank installed.")
-			return 1
+			return FALSE
 		else if(user.unEquip(W))
 			W.forceMove(src)
 			airtank = W
 			to_chat(user, "You install \the [W] in \the [src].")
-			return 1
+			return TRUE
+
 	else if(airtank && isScrewdriver(W))
 		to_chat(user, "You remove \the [airtank] from \the [src].")
 		airtank.dropInto(loc)
 		airtank = null
-	else
-		..()
+		return TRUE
+
+	return ..()
 
 /obj/item/bodybag/rescue/examine(mob/user)
 	. = ..()
@@ -86,22 +88,25 @@
 	if(airtank)
 		overlays += image(icon, "tank")
 
-/obj/structure/closet/body_bag/rescue/attackby(obj/item/W, mob/user, var/click_params)
+/obj/structure/closet/body_bag/rescue/use_tool(obj/item/W, mob/user, click_params)
 	if(istype(W,/obj/item/tank/))
 		if(airtank)
 			to_chat(user, "\The [src] already has an air tank installed.")
-			return 1
+			return FALSE
 		else if(user.unEquip(W, src))
 			set_tank(W)
 			to_chat(user, "You install \the [W] in \the [src].")
-			return 1
+			return TRUE
+		return FALSE
+
 	else if(airtank && isScrewdriver(W))
 		to_chat(user, "You remove \the [airtank] from \the [src].")
 		airtank.dropInto(loc)
 		airtank = null
 		update_icon()
-	else
-		..()
+		return TRUE
+
+	return ..()
 
 /obj/structure/closet/body_bag/rescue/fold(var/user)
 	var/obj/item/tank/my_tank = airtank

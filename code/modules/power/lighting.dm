@@ -63,7 +63,7 @@
 		if(LIGHT_STAGE_WIRED) to_chat(user, "It's wired.")
 		if(LIGHT_STAGE_COMPLETE) to_chat(user, "The casing is closed.")
 
-/obj/machinery/light_construct/attackby(obj/item/W, mob/living/user)
+/obj/machinery/light_construct/use_item(obj/item/W, mob/living/user)
 	add_fingerprint(user)
 	if(isWrench(W))
 
@@ -393,7 +393,7 @@
 	var/obj/item/light/L = light_type
 	return initial(L.name)
 
-/// Attempts to insert a given light bulb. Called by `attackby()`.
+/// Attempts to insert a given light bulb. Called by `use_item()`.
 /obj/machinery/light/proc/insert_bulb(obj/item/light/L)
 	L.forceMove(src)
 	lightbulb = L
@@ -410,7 +410,7 @@
 	seton(FALSE)
 	update_icon()
 
-/obj/machinery/light/attackby(obj/item/W, mob/user)
+/obj/machinery/light/use_item(obj/item/W, mob/user)
 
 	// attempt to insert light
 	if(istype(W, /obj/item/light))
@@ -847,7 +847,7 @@
 	update_icon()
 
 // if a syringe, can inject phoron to make it explode
-/obj/item/light/attackby(obj/item/I, mob/user)
+/obj/item/light/use_item(obj/item/I, mob/user)
 	if(istype(I, /obj/item/reagent_containers/syringe) && status == LIGHT_OK)
 		var/obj/item/reagent_containers/syringe/S = I
 

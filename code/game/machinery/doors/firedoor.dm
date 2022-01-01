@@ -199,10 +199,9 @@
 	if(needs_to_close)
 		addtimer(CALLBACK(src, .proc/attempt_autoclose), 10 SECONDS) //Just in case a fire alarm is turned off while the firedoor is going through an autoclose cycle
 
-/obj/machinery/door/firedoor/attackby(obj/item/C, mob/user)
-	add_fingerprint(user, 0, C)
+/obj/machinery/door/firedoor/use_tool(obj/item/C, mob/user)
 	if(operating)
-		return //Already doing something.
+		return FALSE //Already doing something.
 
 	if(isWelder(C) && !repairing)
 		var/obj/item/weldingtool/W = C
@@ -213,9 +212,7 @@
 				SPAN_ITALIC("You hear welding.")
 			)
 			playsound(loc, 'sound/items/Welder.ogg', 50, TRUE)
-			if(do_after(user, 2 SECONDS, src))
-				if(!W.isOn())
-					return
+			if(do_after(user, 2 SECONDS, src) && W.isOn())
 				blocked = !blocked
 				user.visible_message(
 					SPAN_DANGER("\The [user] [blocked ? "welds \the [src] shut" : "cuts open \the [src]"]."),
@@ -224,7 +221,9 @@
 				)
 				playsound(loc, 'sound/items/Welder2.ogg', 50, TRUE)
 				update_icon()
-				return
+			else
+				return FALSE
+		return TRUE
 
 	if(density && isScrewdriver(C))
 		hatch_open = !hatch_open
@@ -235,49 +234,46 @@
 		)
 		playsound(loc, 'sound/items/Screwdriver.ogg', 25, TRUE)
 		update_icon()
-		return
+		return TRUE
 
 	if(blocked && isCrowbar(C) && !repairing)
 		if(!hatch_open)
 			to_chat(user, SPAN_DANGER("You must open the maintenance hatch first!"))
-		else
+			return FALSE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] starts removing \the [src]'s electronics."),
+			SPAN_NOTICE("You start levering out \the [src]'s electronics."),
+			SPAN_ITALIC("You hear metal bumping against metal.")
+		)
+		playsound(loc, 'sound/items/Crowbar.ogg', 100, TRUE)
+		if(do_after(user, 30, src) && blocked && density && hatch_open)
+			playsound(loc, 'sound/items/Deconstruct.ogg', 100, TRUE)
 			user.visible_message(
-				SPAN_NOTICE("\The [user] starts removing \the [src]'s electronics."),
-				SPAN_NOTICE("You start levering out \the [src]'s electronics."),
-				SPAN_ITALIC("You hear metal bumping against metal.")
+				SPAN_NOTICE("\The [user] removes the electronics from \the [src]!"),
+				SPAN_NOTICE("You pry out \the [src]'s circuit board."),
+				SPAN_ITALIC("You hear metal coming loose and clattering.")
 			)
-			playsound(loc, 'sound/items/Crowbar.ogg', 100, TRUE)
-			if(do_after(user, 30, src))
-				if(blocked && density && hatch_open)
-					playsound(loc, 'sound/items/Deconstruct.ogg', 100, TRUE)
-					user.visible_message(
-						SPAN_NOTICE("\The [user] removes the electronics from \the [src]!"),
-						SPAN_NOTICE("You pry out \the [src]'s circuit board."),
-						SPAN_ITALIC("You hear metal coming loose and clattering.")
-					)
-					deconstruct(user)
-		return
-
-	if(blocked)
-		to_chat(user, SPAN_DANGER("\The [src] is welded shut!"))
-		return
+			deconstruct(user)
+		else
+			return FALSE
+		return TRUE
 
 	if(isCrowbar(C) || istype(C,/obj/item/material/twohanded/fireaxe))
 		if(operating)
-			return
+			return FALSE
 
-		if(blocked && isCrowbar(C))
+		if(blocked)
 			user.visible_message(
 				SPAN_WARNING("\The [user] pries at \the [src], but it's stuck in place!"),
 				SPAN_WARNING("You try to pry \the [src] [density ? "open" : "closed"], but it's been welded in place!"),
 				SPAN_WARNING("You hear the unhappy sound of metal straining and groaning.")
 			)
-			return
+			return FALSE
 
 		if(istype(C,/obj/item/material/twohanded/fireaxe))
 			var/obj/item/material/twohanded/fireaxe/F = C
 			if(!F.wielded)
-				return
+				return FALSE
 
 		user.visible_message(
 			SPAN_WARNING("\The [user] wedges \the [C] into \the [src] and starts forcing it [density ? "open" : "closed"]!"),
@@ -308,7 +304,10 @@
 				spawn(0)
 					locked = FALSE
 					close()
-			return
+		else
+			return FALSE
+		return TRUE
+
 	return ..()
 
 /obj/machinery/door/firedoor/deconstruct(mob/user, var/moved = FALSE)

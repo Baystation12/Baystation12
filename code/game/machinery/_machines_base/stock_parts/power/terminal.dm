@@ -26,7 +26,7 @@
 			machine.update_power_channel(cached_channel)
 			machine.power_change()
 		return
-	
+
 
 
 	var/surplus = terminal.surplus()
@@ -40,7 +40,7 @@
 		terminal.draw_power(usage)
 		if(surplus >= usage)
 			return // had enough power and good to go.
-		else 
+		else
 			// Try and use other (local) sources of power to make up for the deficit.
 			var/deficit = machine.use_power_oneoff(usage - surplus)
 			if(deficit > 0)
@@ -114,7 +114,7 @@
 			to_chat(user, "<span class='notice'>There is already a terminal here.</span>")
 			return TRUE
 
-/obj/item/stock_parts/power/terminal/attackby(obj/item/I, mob/user)
+/obj/item/stock_parts/power/terminal/use_tool(obj/item/I, mob/user)
 	var/obj/machinery/machine = loc
 	if(!istype(machine))
 		return ..()
@@ -129,11 +129,11 @@
 
 		if(istype(T) && !T.is_plating())
 			to_chat(user, "<span class='warning'>You must remove the floor plating in front of \the [machine] first.</span>")
-			return TRUE
+			return FALSE
 		var/obj/item/stack/cable_coil/C = I
 		if(!C.can_use(10))
 			to_chat(user, "<span class='warning'>You need ten lengths of cable for \the [machine].</span>")
-			return TRUE
+			return FALSE
 		user.visible_message("<span class='warning'>\The [user] adds cables to the \the [machine].</span>", \
 							"You start adding cables to \the [machine] frame...")
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
@@ -151,6 +151,10 @@
 					"<span class='warning'>\The [user] has added cables to the \the [machine]!</span>",\
 					"You add cables to the \the [machine].")
 				make_terminal(machine)
+			else
+				return FALSE
+		else
+			return FALSE
 		return TRUE
 
 	if(isWirecutter(I) && terminal)
@@ -159,7 +163,7 @@
 			return FALSE // Wrong terminal handler.
 		if(istype(T) && !T.is_plating())
 			to_chat(user, "<span class='warning'>You must remove the floor plating in front of \the [machine] first.</span>")
-			return TRUE
+			return FALSE
 		user.visible_message("<span class='warning'>\The [user] dismantles the power terminal from \the [machine].</span>", \
 							"You begin to cut the cables...")
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
@@ -174,7 +178,13 @@
 				new /obj/item/stack/cable_coil(T, 10)
 				to_chat(user, "<span class='notice'>You cut the cables and dismantle the power terminal.</span>")
 				qdel(terminal)
+			else
+				return FALSE
+		else
+			return FALSE
 		return TRUE
+
+	return ..()
 
 /obj/item/stock_parts/power/terminal/buildable
 	part_flags = PART_FLAG_HAND_REMOVE

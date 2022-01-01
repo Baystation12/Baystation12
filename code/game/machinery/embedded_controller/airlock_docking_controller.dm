@@ -11,7 +11,7 @@
 		var/datum/computer/file/embedded_program/docking/airlock/docking_program = program
 		docking_program.display_name = display_name
 
-/obj/machinery/embedded_controller/radio/airlock/docking_port/attackby(obj/item/W, mob/user)
+/obj/machinery/embedded_controller/radio/airlock/docking_port/use_tool(obj/item/W, mob/user)
 	if(istype(W,/obj/item/device/multitool)) //give them part of code, would take few tries to get full
 		var/datum/computer/file/embedded_program/docking/airlock/docking_program = program
 		var/code = docking_program.docking_codes
@@ -20,8 +20,9 @@
 		else
 			code = stars(code)
 		to_chat(user,"[W]'s screen displays '[code]'")
-	else
-		..()
+		return TRUE
+
+	return ..()
 
 /obj/machinery/embedded_controller/radio/airlock/docking_port/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/nanoui/master_ui = null, var/datum/topic_state/state = GLOB.default_state)
 	var/data[0]

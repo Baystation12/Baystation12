@@ -64,7 +64,7 @@
 	else
 		to_chat(user, "<span class='warning'>Someone is already rummaging here!</span>")
 
-/obj/structure/rubble/attackby(var/obj/item/I, var/mob/user)
+/obj/structure/rubble/use_item(var/obj/item/I, var/mob/user)
 	if (user.a_intent == I_HURT)
 		..()
 		return

@@ -40,12 +40,13 @@
 /obj/item/device/spy_bug/use_on_self(mob/user)
 	radio.use_on_self(user)
 
-/obj/item/device/spy_bug/attackby(obj/W as obj, mob/living/user as mob)
+/obj/item/device/spy_bug/use_tool(obj/W, mob/living/user)
 	if(istype(W, /obj/item/device/spy_monitor))
 		var/obj/item/device/spy_monitor/SM = W
 		SM.pair(src, user)
-	else
-		..()
+		return TRUE
+
+	return ..()
 
 /obj/item/device/spy_bug/hear_talk(mob/M, var/msg, verb, datum/language/speaking)
 	radio.hear_talk(M, msg, speaking)
@@ -87,11 +88,12 @@
 	radio.use_on_self(user)
 	view_cameras(user)
 
-/obj/item/device/spy_monitor/attackby(obj/W as obj, mob/living/user as mob)
+/obj/item/device/spy_monitor/use_tool(obj/W, mob/living/user)
 	if(istype(W, /obj/item/device/spy_bug))
 		pair(W, user)
-	else
-		return ..()
+		return TRUE
+
+	return ..()
 
 /obj/item/device/spy_monitor/proc/pair(var/obj/item/device/spy_bug/SB, var/mob/living/user)
 	if(SB.camera in cameras)

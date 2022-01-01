@@ -19,7 +19,7 @@
 		power_usage = power_usage_occupied
 	..()
 
-/obj/item/stock_parts/computer/ai_slot/attackby(obj/item/W, mob/user)
+/obj/item/stock_parts/computer/ai_slot/use_item(obj/item/W, mob/user)
 	if(..())
 		return TRUE
 	if(istype(W, /obj/item/aicard))

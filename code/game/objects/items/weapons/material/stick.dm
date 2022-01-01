@@ -17,12 +17,14 @@
 	shatter(0)
 
 
-/obj/item/material/stick/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/material/stick/use_tool(obj/item/W, mob/user)
 	if(W.sharp && W.edge && !sharp)
 		user.visible_message("<span class='warning'>[user] sharpens [src] with [W].</span>", "<span class='warning'>You sharpen [src] using [W].</span>")
 		sharp = TRUE
 		SetName("sharpened " + name)
 		update_force()
+		return TRUE
+
 	return ..()
 
 

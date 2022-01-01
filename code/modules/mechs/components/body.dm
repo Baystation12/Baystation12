@@ -143,7 +143,7 @@
 	cell = new /obj/item/cell/high(src)
 	cell.charge = cell.maxcharge
 
-/obj/item/mech_component/chassis/attackby(var/obj/item/thing, var/mob/user)
+/obj/item/mech_component/chassis/use_item(var/obj/item/thing, var/mob/user)
 	if(istype(thing,/obj/item/robot_parts/robot_component/diagnosis_unit))
 		if(diagnostics)
 			to_chat(user, SPAN_WARNING("\The [src] already has a diagnostic system installed."))

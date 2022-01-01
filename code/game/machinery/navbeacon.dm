@@ -37,10 +37,10 @@ var/global/list/navbeacons = list()
 	else
 		icon_state = "[state]"
 
-/obj/machinery/navbeacon/attackby(var/obj/item/I, var/mob/user)
+/obj/machinery/navbeacon/use_tool(obj/item/I, mob/user)
 	var/turf/T = loc
 	if(!T.is_plating())
-		return		// prevent intraction when T-scanner revealed
+		return FALSE		// prevent intraction when T-scanner revealed
 
 	if(isScrewdriver(I))
 		open = !open
@@ -48,6 +48,7 @@ var/global/list/navbeacons = list()
 		user.visible_message("\The [user] [open ? "opens" : "closes"] cover of \the [src].", "You [open ? "open" : "close"] cover of \the [src].")
 
 		update_icon()
+		return TRUE
 
 	else if(I.GetIdCard())
 		if(open)
@@ -56,10 +57,14 @@ var/global/list/navbeacons = list()
 				to_chat(user, "Controls are now [src.locked ? "locked." : "unlocked."]")
 			else
 				to_chat(user, "<span class='warning'>Access denied.</span>")
+				return FALSE
 			updateDialog()
 		else
 			to_chat(user, "You must open the cover first!")
-	return
+			return FALSE
+		return TRUE
+
+	return ..()
 
 /obj/machinery/navbeacon/interface_interact(var/mob/user)
 	interact(user)

@@ -27,7 +27,7 @@
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/kinetic_harvester/attackby(var/obj/item/thing, var/mob/user)
+/obj/machinery/kinetic_harvester/use_item(var/obj/item/thing, var/mob/user)
 	if(isMultitool(thing))
 		var/datum/extension/local_network_member/lanm = get_extension(src, /datum/extension/local_network_member)
 		if(lanm.get_new_tag(user))
@@ -40,7 +40,7 @@
 	var/datum/extension/local_network_member/lanm = get_extension(src, /datum/extension/local_network_member)
 	var/datum/local_network/lan = lanm.get_local_network()
 
-	if(lan)	
+	if(lan)
 		var/list/fusion_cores = lan.get_devices(/obj/machinery/power/fusion_core)
 		if(fusion_cores && fusion_cores.len)
 			harvest_from = fusion_cores[1]

@@ -43,6 +43,11 @@
 		burst()
 	return
 
-/obj/item/latexballon/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/latexballon/use_weapon(obj/item/W, mob/user)
 	if (W.can_puncture())
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		user.do_attack_animation(src)
 		burst()
+		return TRUE
+
+	return ..()

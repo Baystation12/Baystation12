@@ -131,9 +131,9 @@ var/list/holder_mob_icon_cache = list()
 	origin_tech = list(TECH_BIO = 3, TECH_ENGINEERING = 4)
 	item_state = "poppy"
 
-/obj/item/holder/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/holder/use_item(obj/item/W as obj, mob/user as mob)
 	for(var/mob/M in src.contents)
-		M.attackby(W,user)
+		M.use_item(W,user)
 
 //Mob procs and vars for scooping up
 /mob/living/var/holder_type

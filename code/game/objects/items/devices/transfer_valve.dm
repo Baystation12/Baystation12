@@ -16,7 +16,7 @@
 /obj/item/device/transfer_valve/IsAssemblyHolder()
 	return 1
 
-/obj/item/device/transfer_valve/attackby(obj/item/item, mob/user)
+/obj/item/device/transfer_valve/use_tool(obj/item/item, mob/user)
 	var/turf/location = get_turf(src) // For admin logs
 	if(istype(item, /obj/item/tank))
 
@@ -24,10 +24,10 @@
 		var/T2_weight = 0
 		if(tank_one && tank_two)
 			to_chat(user, "<span class='warning'>There are already two tanks attached, remove one first.</span>")
-			return
+			return FALSE
 
 		if(!user.unEquip(item, src))
-			return
+			return FALSE
 		if(!tank_one)
 			tank_one = item
 		else
@@ -45,17 +45,19 @@
 		update_icon()
 
 		SSnano.update_uis(src) // update all UIs attached to src
+		return TRUE
+
 //TODO: Have this take an assemblyholder
 	else if(isassembly(item))
 		var/obj/item/device/assembly/A = item
 		if(A.secured)
 			to_chat(user, "<span class='notice'>The device is secured.</span>")
-			return
+			return FALSE
 		if(attached_device)
 			to_chat(user, "<span class='warning'>There is already an device attached to the valve, remove it first.</span>")
-			return
+			return FALSE
 		if(!user.unEquip(item, src))
-			return
+			return FALSE
 		attached_device = A
 		to_chat(user, "<span class='notice'>You attach the [item] to the valve controls and secure it.</span>")
 		A.holder = src
@@ -66,7 +68,9 @@
 		log_game("[key_name_admin(user)] attached a [item] to a transfer valve.")
 		attacher = user
 		SSnano.update_uis(src) // update all UIs attached to src
-	return
+		return TRUE
+
+	return ..()
 
 
 /obj/item/device/transfer_valve/HasProximity(atom/movable/AM as mob|obj)

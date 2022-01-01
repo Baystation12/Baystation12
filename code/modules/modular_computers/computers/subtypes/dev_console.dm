@@ -75,7 +75,7 @@
 	var/obj/item/stock_parts/computer/P = path
 	return initial(P.external_slot)
 
-/obj/machinery/computer/modular/attackby(obj/item/I, mob/user)
+/obj/machinery/computer/modular/use_item(obj/item/I, mob/user)
 	if(istype(I, /obj/item/stock_parts/computer/hard_drive/portable))
 		if(portable_drive)
 			to_chat(user, SPAN_WARNING("There's already \a [portable_drive] plugged in."))

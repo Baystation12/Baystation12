@@ -40,13 +40,13 @@
 	throwforce = round(0.25*material.get_edge_damage())
 	force = round(0.5*material.get_blunt_damage())
 
-/obj/item/stack/material/rods/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/stack/material/rods/use_tool(obj/item/W, mob/user)
 	if(isWelder(W))
 		var/obj/item/weldingtool/WT = W
 
 		if(!can_use(2))
 			to_chat(user, "<span class='warning'>You need at least two rods to do this.</span>")
-			return
+			return FALSE
 
 		if(WT.remove_fuel(0,user))
 			var/obj/item/stack/material/steel/new_item = new(usr.loc)
@@ -59,7 +59,8 @@
 			R.use(2)
 			if (!R && replace)
 				user.put_in_hands(new_item)
-		return
+			return TRUE
+		return FALSE
 
 	if (istype(W, /obj/item/tape_roll))
 		var/obj/item/stack/medical/splint/ghetto/new_splint = new(user.loc)
@@ -69,9 +70,9 @@
 		user.visible_message("<span class='notice'>\The [user] constructs \a [new_splint] out of a [singular_name].</span>", \
 				"<span class='notice'>You use make \a [new_splint] out of a [singular_name].</span>")
 		src.use(1)
-		return
+		return TRUE
 
-	..()
+	return ..()
 
 /obj/item/stack/material/rods/use_on_self(mob/user as mob)
 	src.add_fingerprint(user)

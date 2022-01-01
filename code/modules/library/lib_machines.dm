@@ -16,7 +16,7 @@
 	density = TRUE
 	var/obj/item/book/cache		// Last scanned book
 
-/obj/machinery/libraryscanner/attackby(var/obj/O as obj, var/mob/user as mob)
+/obj/machinery/libraryscanner/use_item(var/obj/O as obj, var/mob/user as mob)
 	if(istype(O, /obj/item/book))
 		if(!user.unEquip(O, src))
 			return
@@ -68,7 +68,7 @@
 	anchored = TRUE
 	density = TRUE
 
-/obj/machinery/bookbinder/attackby(var/obj/O as obj, var/mob/user as mob)
+/obj/machinery/bookbinder/use_item(var/obj/O as obj, var/mob/user as mob)
 	if(istype(O, /obj/item/paper))
 		if(!user.unEquip(O, src))
 			return

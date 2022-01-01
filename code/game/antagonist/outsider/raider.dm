@@ -210,7 +210,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	if(holster)
 		var/obj/item/clothing/under/uniform = player.w_uniform
 		if(istype(uniform) && uniform.can_attach_accessory(holster))
-			uniform.attackby(holster, player)
+			uniform.use_item(holster, player)
 		else
 			player.put_in_any_hand_if_possible(holster)
 
@@ -244,7 +244,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	if(holster)
 		var/obj/item/clothing/under/uniform = vox.w_uniform
 		if(istype(uniform) && uniform.can_attach_accessory(holster))
-			uniform.attackby(holster, vox)
+			uniform.use_item(holster, vox)
 		else
 			vox.put_in_any_hand_if_possible(holster)
 

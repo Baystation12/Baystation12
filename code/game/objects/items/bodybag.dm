@@ -32,13 +32,13 @@
 	var/contains_body = 0
 	var/has_label = FALSE
 
-/obj/structure/closet/body_bag/attackby(var/obj/item/W, mob/user as mob)
+/obj/structure/closet/body_bag/use_tool(obj/item/W, mob/user)
 	if (istype(W, /obj/item/pen))
 		var/t = input(user, "What would you like the label to be?", text("[]", src.name), null)  as text
 		if (user.get_active_hand() != W)
-			return
+			return FALSE
 		if (!in_range(src, user) && src.loc != user)
-			return
+			return FALSE
 		t = sanitizeSafe(t, MAX_NAME_LEN)
 		if (t)
 			src.SetName("body bag - ")
@@ -47,13 +47,16 @@
 		else
 			src.SetName("body bag")
 		src.update_icon()
-		return
+		return TRUE
+
 	else if(isWirecutter(W))
 		src.SetName("body bag")
 		has_label = FALSE
 		to_chat(user, "You cut the tag off \the [src].")
 		src.update_icon()
-		return
+		return TRUE
+
+	return ..()
 
 /obj/structure/closet/body_bag/on_update_icon()
 	if(opened)

@@ -490,7 +490,7 @@
 	drill_head = DH
 
 
-/obj/item/mech_equipment/drill/attackby(obj/item/I, mob/user)
+/obj/item/mech_equipment/drill/use_item(obj/item/I, mob/user)
 	if (istype(I, /obj/item/material/drill_head))
 		attach_head(I, user)
 		return TRUE
@@ -812,7 +812,7 @@
 	passive_power_use = 0
 	. = ..()
 
-/obj/item/mech_equipment/camera/attackby(obj/item/W, mob/user)
+/obj/item/mech_equipment/camera/use_item(obj/item/W, mob/user)
 	. = ..()
 
 	if(isScrewdriver(W))

@@ -113,7 +113,7 @@
 /obj/machinery/power/port_gen/pacman
 	name = "\improper P.A.C.M.A.N.-type Portable Generator"
 	desc = "A power generator that runs on solid phoron sheets. Rated for 80 kW max safe output."
-	
+
 	machine_name = "\improper PACMAN-type generator"
 	machine_desc = "A portable generator often used for backup power or running small spacecraft. Runs on solid phoron sheets; rated for 80 kW max safe output."
 
@@ -289,7 +289,7 @@
 		return SPAN_WARNING("You cannot do this while \the [src] is running!")
 	return ..()
 
-/obj/machinery/power/port_gen/pacman/attackby(var/obj/item/O as obj, var/mob/user as mob)
+/obj/machinery/power/port_gen/pacman/use_item(var/obj/item/O as obj, var/mob/user as mob)
 	if(istype(O, sheet_path))
 		var/obj/item/stack/addstack = O
 		var/amount = min((max_sheets - sheets), addstack.amount)
@@ -311,7 +311,7 @@
 
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		anchored = !anchored
-	return component_attackby(O, user)
+	return component_use_item(O, user)
 
 /obj/machinery/power/port_gen/pacman/dismantle()
 	while (sheets > 0)
@@ -504,7 +504,7 @@
 	if(power_output > max_safe_output)
 		icon_state = "potatodanger"
 
-/obj/machinery/power/port_gen/pacman/super/potato/attackby(var/obj/item/O, var/mob/user)
+/obj/machinery/power/port_gen/pacman/super/potato/use_item(var/obj/item/O, var/mob/user)
 	if(istype(O, /obj/item/reagent_containers/))
 		var/obj/item/reagent_containers/R = O
 		if(R.standard_pour_into(src,user))

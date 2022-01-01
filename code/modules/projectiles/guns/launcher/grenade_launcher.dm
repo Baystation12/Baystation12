@@ -76,7 +76,7 @@
 /obj/item/gun/launcher/grenade/use_on_self(mob/user)
 	pump(user)
 
-/obj/item/gun/launcher/grenade/attackby(obj/item/I, mob/user)
+/obj/item/gun/launcher/grenade/use_item(obj/item/I, mob/user)
 	if((istype(I, /obj/item/grenade)))
 		load(I, user)
 	else

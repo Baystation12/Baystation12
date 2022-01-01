@@ -62,13 +62,12 @@
 	spark_system = null
 	return ..()
 
-/obj/item/rcd/attackby(obj/item/W, mob/user)
-
+/obj/item/rcd/use_tool(obj/item/W, mob/user)
 	if(istype(W, /obj/item/rcd_ammo))
 		var/obj/item/rcd_ammo/cartridge = W
 		if(stored_matter >= max_stored_matter)
 			to_chat(user, "<span class='notice'>The RCD is at maximum capacity.</span>")
-			return
+			return FALSE
 		var/matter_exchange = min(cartridge.remaining,max_stored_matter - stored_matter)
 		stored_matter += matter_exchange
 		cartridge.remaining -= matter_exchange
@@ -78,7 +77,7 @@
 		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
 		to_chat(user, "<span class='notice'>The RCD now holds [stored_matter]/[max_stored_matter] matter-units.</span>")
 		update_icon()
-		return
+		return TRUE
 
 	if(isScrewdriver(W))
 		crafting = !crafting
@@ -87,9 +86,9 @@
 		else
 			to_chat(user, "<span class='notice'>The RCD can now be modified.</span>")
 		src.add_fingerprint(user)
-		return
+		return TRUE
 
-	..()
+	return ..()
 
 /obj/item/rcd/use_on_self(mob/user)
 	//Change the mode
@@ -163,8 +162,8 @@
 				return 1
 	return 0
 
-/obj/item/rcd/borg/attackby()
-	return
+/obj/item/rcd/borg/use_item()
+	return FALSE
 
 /obj/item/rcd/borg/can_use(var/mob/user,var/turf/T)
 	return (user.Adjacent(T) && !user.incapacitated())
@@ -183,8 +182,8 @@
 		return 1
 	return 0
 
-/obj/item/rcd/mounted/attackby()
-	return
+/obj/item/rcd/mounted/use_item()
+	return FALSE
 
 /obj/item/rcd/mounted/can_use(var/mob/user,var/turf/T)
 	return (user.Adjacent(T) && !user.incapacitated())

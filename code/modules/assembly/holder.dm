@@ -112,7 +112,7 @@
 	return
 
 
-/obj/item/device/assembly_holder/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/device/assembly_holder/use_item(obj/item/W as obj, mob/user as mob)
 	if(isScrewdriver(W))
 		if(!a_left || !a_right)
 			to_chat(user, "<span class='warning'>BUG:Assembly part missing, please report this!</span>")

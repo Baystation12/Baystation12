@@ -15,7 +15,7 @@
 		new /obj/singularity/(T, 50)
 		if(src) qdel(src)
 
-/obj/machinery/the_singularitygen/attackby(obj/item/W, mob/user)
+/obj/machinery/the_singularitygen/use_item(obj/item/W, mob/user)
 	if(istype(W, /obj/item/wrench))
 		anchored = !anchored
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)

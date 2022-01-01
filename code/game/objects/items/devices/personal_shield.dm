@@ -46,22 +46,31 @@
 			to_chat(user, "There is no cell in \the [src].")
 	to_chat(user, "The internal capacitor currently has [round(currently_stored_power/max_stored_power * 100)]% charge.")
 
-/obj/item/device/personal_shield/attackby(var/obj/item/W, var/mob/user)
+/obj/item/device/personal_shield/use_tool(obj/item/W, mob/user)
 	if(istype(W, /obj/item/cell))
 		if(!open)
 			to_chat(user, SPAN_WARNING("\The [src] needs to be open first."))
+			return FALSE
 		else if(power_cell)
 			to_chat(user, SPAN_WARNING("\The [src] already has a battery."))
-		else if(user.unEquip(W, src))
+			return FALSE
+		else if(!user.unEquip(W, src))
+			return FALSE
+		else
 			user.visible_message("\The [user] installs \the [W] into \the [src].", SPAN_NOTICE("You install \the [W] into \the [src]."))
 			power_cell = W
 			START_PROCESSING(SSobj, src)
 			update_icon()
+			return TRUE
+
 	if(isScrewdriver(W))
 		playsound(src, 'sound/items/Screwdriver.ogg', 15, 1)
 		user.visible_message("\The [user] [open ? "screws" : "unscrews"] the top of \the [src].", SPAN_NOTICE("You [open ? "screw" : "unscrew"] the top of \the [src]."))
 		open = !open
 		update_icon()
+		return TRUE
+
+	return ..()
 
 /obj/item/device/personal_shield/use_on_self(var/mob/living/user)
 	if (open && power_cell)

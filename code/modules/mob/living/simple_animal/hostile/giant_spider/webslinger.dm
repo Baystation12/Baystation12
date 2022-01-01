@@ -180,7 +180,7 @@
 		var/tally = W.stacks * 2
 		return . + tally
 
-/mob/living/attackby(obj/item/I, mob/user)
+/mob/living/use_item(obj/item/I, mob/user)
 	for (var/obj/aura/web/W in auras)
 		W.remove_webbing(user)
 		return

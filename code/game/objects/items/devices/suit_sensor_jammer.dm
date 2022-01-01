@@ -44,24 +44,32 @@
 /obj/item/device/suit_sensor_jammer/get_cell()
 	return bcell
 
-/obj/item/device/suit_sensor_jammer/attackby(obj/item/I as obj, mob/user as mob)
+/obj/item/device/suit_sensor_jammer/use_tool(obj/item/I, mob/user)
 	if(isCrowbar(I))
 		if(bcell)
 			to_chat(user, "<span class='notice'>You remove \the [bcell].</span>")
 			disable()
 			bcell.dropInto(loc)
 			bcell = null
+			return TRUE
 		else
 			to_chat(user, "<span class='warning'>There is no cell to remove.</span>")
+			return FALSE
+
 	else if(istype(I, /obj/item/cell))
 		if(bcell)
 			to_chat(user, "<span class='warning'>There's already a cell in \the [src].</span>")
+			return FALSE
 		else if(user.unEquip(I))
 			I.forceMove(src)
 			bcell = I
 			to_chat(user, "<span class='notice'>You insert \the [bcell] into \the [src]..</span>")
+			return TRUE
 		else
 			to_chat(user, "<span class='warning'>You're unable to insert the battery.</span>")
+			return FALSE
+
+	return ..()
 
 /obj/item/device/suit_sensor_jammer/on_update_icon()
 	overlays.Cut()

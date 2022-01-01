@@ -17,7 +17,7 @@
 	if(locked)
 		return FALSE
 
-/obj/structure/closet/coffin/attackby(obj/item/W, mob/user)
+/obj/structure/closet/coffin/use_item(obj/item/W, mob/user)
 	if(!opened && isScrewdriver(W))
 		to_chat(user, SPAN_NOTICE("You begin screwing [src]'s lid [locked ? "open" : "shut"]."))
 		playsound(src, 'sound/items/Screwdriver.ogg', 100, 1)

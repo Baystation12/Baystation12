@@ -41,16 +41,18 @@
 	Your sequencer can't break the code.</span>")
 	return 0
 
-/obj/item/disk/secret_project/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/disk/secret_project/use_tool(obj/item/W, mob/user)
 	if(istype(W,/obj/item/card/id))
 		var/obj/item/card/id/ID = W
 		if(check_access(ID))
 			locked = !locked
 			to_chat(user, "<span class='notice'>You swipe your card and [locked ? "lock":"unlock"] the disk.</span>")
+			return TRUE
 		else
 			to_chat(user, "<span class='warning'>The disk's screen flashes 'Access Denied'.</span>")
-		return
-	. = ..()
+			return FALSE
+
+	return ..()
 
 /obj/item/disk/secret_project/verb/change_codename()
 	set name = "Change project codename"

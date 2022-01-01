@@ -330,7 +330,7 @@
 			break
 	updateUsrDialog()
 
-/obj/machinery/seed_storage/attackby(var/obj/item/O as obj, var/mob/user as mob)
+/obj/machinery/seed_storage/use_item(var/obj/item/O as obj, var/mob/user as mob)
 	if (istype(O, /obj/item/seeds))
 		add(O)
 		user.visible_message("[user] puts \the [O.name] into \the [src].", "You put \the [O] into \the [src].")

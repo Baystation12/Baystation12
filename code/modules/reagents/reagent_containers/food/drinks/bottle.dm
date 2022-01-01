@@ -70,12 +70,12 @@
 	return B
 
 
-/obj/item/reagent_containers/food/drinks/bottle/attackby(obj/item/W, mob/user)
+/obj/item/reagent_containers/food/drinks/bottle/use_item(obj/item/W, mob/user)
 	if (!rag && istype(W, /obj/item/reagent_containers/glass/rag))
 		insert_rag(W, user)
 		return
 	if (rag && isflamesource(W))
-		rag.attackby(W, user)
+		rag.use_item(W, user)
 		return
 	..()
 

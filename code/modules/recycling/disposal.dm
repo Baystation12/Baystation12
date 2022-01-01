@@ -56,31 +56,46 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		trunk.linked = null
 	return ..()
 
+
+/obj/machinery/disposal/grab_attack(obj/item/grab/G)
+	G.assailant.visible_message(SPAN_DANGER("\The [G.assailant] starts putting \the [G.affecting] into the disposal."))
+	if(do_after(G.assailant, 2 SECONDS, src))
+		if (G.affecting.client)
+			G.affecting.client.perspective = EYE_PERSPECTIVE
+			G.affecting.client.eye = src
+		G.affecting.forceMove(src)
+		G.assailant.visible_message(SPAN_DANGER("\The [G.affecting] has been placed in the [src] by \the [G.assailant]."))
+		admin_attack_log(G.assailant, G.affecting, "Placed the victim into \the [src].", "Was placed into \the [src] by the attacker.", "stuffed \the [src] with")
+		qdel(G)
+	return TRUE
+
+
 // attack by item places it in to disposal
-/obj/machinery/disposal/attackby(var/obj/item/I, var/mob/user)
+/obj/machinery/disposal/use_item(obj/item/I, mob/user)
 	if(stat & BROKEN || !I || !user)
-		return
+		return FALSE
 
 	add_fingerprint(user, 0, I)
 	if(mode<=0) // It's off
 		if(isScrewdriver(I))
 			if(contents.len > LAZYLEN(component_parts))
 				to_chat(user, "Eject the items first!")
-				return
+				return FALSE
 			if(mode==0) // It's off but still not unscrewed
 				mode=-1 // Set it to doubleoff l0l
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 				to_chat(user, "You remove the screws around the power connection.")
-				return
+				return TRUE
 			else if(mode==-1)
 				mode=0
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 				to_chat(user, "You attach the screws around the power connection.")
-				return
+				return TRUE
+
 		else if(isWelder(I) && mode==-1)
 			if(contents.len > LAZYLEN(component_parts))
 				to_chat(user, "Eject the items first!")
-				return
+				return FALSE
 			var/obj/item/weldingtool/W = I
 			if(W.remove_fuel(0,user))
 				playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
@@ -93,14 +108,15 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 					src.transfer_fingerprints_to(C)
 					C.update()
 					qdel(src)
-				return
+					return TRUE
+				return FALSE
 			else
 				to_chat(user, "You need more welding fuel to complete this task.")
-				return
+				return FALSE
 
 	if(istype(I, /obj/item/melee/energy/blade))
 		to_chat(user, "You can't place that item inside the disposal unit.")
-		return
+		return FALSE
 
 	if(istype(I, /obj/item/storage/bag/trash))
 		var/obj/item/storage/bag/trash/T = I
@@ -109,34 +125,21 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 			T.remove_from_storage(O,src, 1)
 		T.finish_bulk_removal()
 		update_icon()
-		return
-
-	var/obj/item/grab/G = I
-	if(istype(G))	// handle grabbed mob
-		if(ismob(G.affecting))
-			var/mob/GM = G.affecting
-			usr.visible_message(SPAN_DANGER("\The [usr] starts putting [GM.name] into the disposal."))
-			if(do_after(usr, 20, src))
-				if (GM.client)
-					GM.client.perspective = EYE_PERSPECTIVE
-					GM.client.eye = src
-				GM.forceMove(src)
-				usr.visible_message(SPAN_DANGER("\The [GM] has been placed in the [src] by \the [user]."))
-				qdel(G)
-				admin_attack_log(usr, GM, "Placed the victim into \the [src].", "Was placed into \the [src] by the attacker.", "stuffed \the [src] with")
-		return
+		return TRUE
 
 	if(isrobot(user))
-		return
+		return FALSE
 	if(!I)
-		return
+		return FALSE
 
 	if(!user.unEquip(I, src))
-		return
+		return FALSE
 
 	user.visible_message("\The [user] places \the [I] into \the [src].", "You place \the [I] into \the [src].")
 
 	update_icon()
+	return TRUE
+
 
 /obj/machinery/disposal/MouseDrop_T(atom/movable/AM, mob/user)
 	if(!istype(AM)) // Could be dragging in a turf.
@@ -160,7 +163,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		if(M.buckled)
 			return
 	else if(istype(AM, /obj/item))
-		attackby(AM, user)
+		use_item(AM, user)
 		return
 	else if(!is_type_in_list(AM, allowed_objects))
 		return
@@ -507,7 +510,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	junctions.Cut()
 	return ..()
 
-/obj/machinery/disposal_switch/attackby(obj/item/I, mob/user, params)
+/obj/machinery/disposal_switch/use_item(obj/item/I, mob/user, params)
 	if(isCrowbar(I))
 		var/obj/item/disposal_switch_construct/C = new/obj/item/disposal_switch_construct(src.loc, id_tag)
 		transfer_fingerprints_to(C)
@@ -611,7 +614,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	sleep(20)	//wait until correct animation frame
 	playsound(src, 'sound/machines/hiss.ogg', 50, 0, 0)
 
-/obj/structure/disposaloutlet/attackby(var/obj/item/I, var/mob/user)
+/obj/structure/disposaloutlet/use_item(var/obj/item/I, var/mob/user)
 	if(!I || !user)
 		return
 	src.add_fingerprint(user, 0, I)

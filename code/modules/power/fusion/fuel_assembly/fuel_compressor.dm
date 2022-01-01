@@ -17,7 +17,7 @@
 		return
 	return do_fuel_compression(target, user)
 
-/obj/machinery/fusion_fuel_compressor/attackby(var/obj/item/thing, var/mob/user)
+/obj/machinery/fusion_fuel_compressor/use_item(var/obj/item/thing, var/mob/user)
 	return do_fuel_compression(thing, user) || ..()
 
 /obj/machinery/fusion_fuel_compressor/proc/do_fuel_compression(var/obj/item/thing, var/mob/user)

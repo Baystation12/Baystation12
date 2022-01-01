@@ -173,7 +173,7 @@
 	damage_health(damage, Proj.damage_type)
 	return 0
 
-/obj/effect/blob/attackby(obj/item/W, mob/user)
+/obj/effect/blob/use_item(obj/item/W, mob/user)
 	if (user.a_intent == I_HURT)
 		if(isWelder(W))
 			playsound(loc, 'sound/items/Welder.ogg', 100, 1)

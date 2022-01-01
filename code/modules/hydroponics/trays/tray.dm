@@ -10,7 +10,7 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
-	
+
 	machine_name = "hydroponics tray"
 	machine_desc = "These are waist-high trays that can grow a vast variety of plants in a nutrient bath. Also comes with a sealable lid for plants that don't grow in a surrounding atmosphere. A cornerstone of self-sufficient spaceships across the galaxy."
 
@@ -412,7 +412,7 @@
 
 	return
 
-/obj/machinery/portable_atmospherics/hydroponics/attackby(var/obj/item/O, var/mob/user)
+/obj/machinery/portable_atmospherics/hydroponics/use_item(var/obj/item/O, var/mob/user)
 
 	if (O.is_open_container())
 		return 0
@@ -523,7 +523,7 @@
 			health -= O.force
 			check_health()
 	else if(mechanical)
-		return component_attackby(O, user)
+		return component_use_item(O, user)
 
 /obj/machinery/portable_atmospherics/hydroponics/proc/plant_seed(var/mob/user, var/obj/item/seeds/S)
 
@@ -643,4 +643,3 @@
 	else if(harvest)
 		harvest()
 	return TRUE
-

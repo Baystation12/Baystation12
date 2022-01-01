@@ -471,7 +471,7 @@
 	if(prob(75) && Proj.damage > 0) spark_system.start()
 	return 2
 
-/mob/living/silicon/robot/attackby(obj/item/W as obj, mob/user as mob)
+/mob/living/silicon/robot/use_item(obj/item/W as obj, mob/user as mob)
 
 	if(istype(W, /obj/item/inducer)) return // inducer.dm afterattack handles this
 	if (istype(W, /obj/item/handcuffs)) // fuck i don't even know why isrobot() in handcuff code isn't working so this will have to do
@@ -627,14 +627,14 @@
 
 	else if(istype(W, /obj/item/screwdriver) && opened && cell)	// radio
 		if(silicon_radio)
-			silicon_radio.attackby(W,user)//Push it to the radio to let it handle everything
+			silicon_radio.use_item(W,user)//Push it to the radio to let it handle everything
 		else
 			to_chat(user, "Unable to locate a radio.")
 		update_icon()
 
 	else if(istype(W, /obj/item/device/encryptionkey/) && opened)
 		if(silicon_radio)//sanityyyyyy
-			silicon_radio.attackby(W,user)//GTFO, you have your own procs
+			silicon_radio.use_item(W,user)//GTFO, you have your own procs
 		else
 			to_chat(user, "Unable to locate a radio.")
 	else if (istype(W, /obj/item/card/id)||istype(W, /obj/item/modular_computer)||istype(W, /obj/item/card/robot))			// trying to unlock the interface with an ID card

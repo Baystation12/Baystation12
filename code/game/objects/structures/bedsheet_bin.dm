@@ -19,7 +19,7 @@ LINEN BINS
 	throw_range = 2
 	w_class = ITEM_SIZE_SMALL
 
-/obj/item/bedsheet/attackby(obj/item/I, mob/user)
+/obj/item/bedsheet/use_tool(obj/item/I, mob/user)
 	if(is_sharp(I))
 		user.visible_message("<span class='notice'>\The [user] begins cutting up \the [src] with \a [I].</span>", "<span class='notice'>You begin cutting up \the [src] with \the [I].</span>")
 		if(do_after(user, 50, src))
@@ -27,8 +27,9 @@ LINEN BINS
 			for(var/i in 1 to rand(2,5))
 				new /obj/item/reagent_containers/glass/rag(get_turf(src))
 			qdel(src)
-		return
-	..()
+			return TRUE
+		return FALSE
+	return ..()
 
 /obj/item/bedsheet/blue
 	icon_state = "sheetblue"
@@ -125,7 +126,7 @@ LINEN BINS
 		else				icon_state = "linenbin-full"
 
 
-/obj/structure/bedsheetbin/attackby(obj/item/I as obj, mob/user as mob)
+/obj/structure/bedsheetbin/use_item(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/bedsheet))
 		if(!user.unEquip(I, src))
 			return

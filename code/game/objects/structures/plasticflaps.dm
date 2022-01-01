@@ -37,7 +37,7 @@
 
 	return ..()
 
-/obj/structure/plasticflaps/attackby(obj/item/W, mob/user)
+/obj/structure/plasticflaps/use_item(obj/item/W, mob/user)
 	if(isCrowbar(W) && !anchored)
 		user.visible_message("<span class='notice'>\The [user] begins deconstructing \the [src].</span>", "<span class='notice'>You start deconstructing \the [src].</span>")
 		if(user.do_skilled(3 SECONDS, SKILL_CONSTRUCTION, src))

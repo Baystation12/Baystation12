@@ -215,21 +215,20 @@
 // This is legacy code that should be revisited, probably by moving the bulk of the logic into here.
 /obj/machinery/door/interface_interact(user)
 	if(CanInteract(user, DefaultTopicState()))
-		return attackby(user = user)
+		return use_item(user = user)
 
-/obj/machinery/door/attackby(obj/item/I as obj, mob/user as mob)
-	src.add_fingerprint(user, 0, I)
 
+/obj/machinery/door/use_tool(obj/item/I, mob/user)
 	if(istype(I, /obj/item/stack/material) && I.get_material_name() == src.get_material_name())
 		if(stat & BROKEN)
 			to_chat(user, "<span class='notice'>It looks like \the [src] is pretty busted. It's going to need more than just patching up now.</span>")
-			return
+			return TRUE
 		if(health >= maxhealth)
 			to_chat(user, "<span class='notice'>Nothing to fix!</span>")
-			return
+			return TRUE
 		if(!density)
 			to_chat(user, "<span class='warning'>\The [src] must be closed before you can repair it.</span>")
-			return
+			return TRUE
 
 		//figure out how much metal we need
 		var/amount_needed = (maxhealth - health) / DOOR_REPAIR_AMOUNT
@@ -250,12 +249,12 @@
 		if (transfer)
 			to_chat(user, "<span class='notice'>You fit [transfer] [stack.singular_name]\s to damaged and broken parts on \the [src].</span>")
 
-		return
+		return TRUE
 
 	if(repairing && isWelder(I))
 		if(!density)
 			to_chat(user, "<span class='warning'>\The [src] must be closed before you can repair it.</span>")
-			return
+			return TRUE
 
 		var/obj/item/weldingtool/welder = I
 		if(welder.remove_fuel(0,user))
@@ -270,33 +269,35 @@
 				update_icon()
 				qdel(repairing)
 				repairing = null
-		return
+		return TRUE
 
 	if(repairing && isCrowbar(I))
 		to_chat(user, "<span class='notice'>You remove \the [repairing].</span>")
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 		repairing.dropInto(user.loc)
 		repairing = null
-		return
+		return TRUE
 
-	if (check_force(I, user))
-		return
-
-	if(src.operating > 0 || isrobot(user))	return //borgs can't attack doors open because it conflicts with their AI-like interaction with them.
-
-	if(src.operating) return
+	if(src.operating) return TRUE
 
 	if(src.allowed(user) && operable())
 		if(src.density)
 			open()
 		else
 			close()
-		return
+		return TRUE
 
 	if(src.density)
 		do_animate("deny")
 	update_icon()
-	return
+	return ..()
+
+
+/obj/machinery/door/use_weapon(obj/item/W, mob/user, click_params)
+	if (!(W.item_flags & ITEM_FLAG_NO_BLUDGEON) && check_force(W, user))
+		return TRUE
+	return ..()
+
 
 /obj/machinery/door/emag_act(var/remaining_charges)
 	if(density && operable())

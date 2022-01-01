@@ -101,7 +101,35 @@
 				dump_everything()
 				qdel(src)
 
-/obj/machinery/suit_storage_unit/attackby(var/obj/item/I, var/mob/user)
+
+/obj/machinery/suit_storage_unit/grab_attack(obj/item/grab/G)
+	. = TRUE
+	if(!isopen)
+		to_chat(G.assailant, SPAN_NOTICE("The unit's doors are shut."))
+		return
+	if(inoperable())
+		to_chat(G.assailant, SPAN_NOTICE("The unit is not operational."))
+		return
+	if(occupant || helmet || suit || boots || tank || mask)
+		to_chat(G.assailant, SPAN_NOTICE("The unit's storage area is too cluttered."))
+		return
+	visible_message(SPAN_WARNING("[G.assailant] starts putting [G.affecting.name] into the Suit Storage Unit."))
+	if(do_after(G.assailant, 20, src) && G && G.affecting)
+		var/mob/M = G.affecting
+		if(M.client)
+			M.client.perspective = EYE_PERSPECTIVE
+			M.client.eye = src
+		M.forceMove(src)
+		occupant = M
+		isopen = FALSE
+		add_fingerprint(G.assailant)
+		qdel(G)
+		SSnano.update_uis(src)
+		update_icon()
+	return
+
+
+/obj/machinery/suit_storage_unit/use_tool(obj/item/I, mob/user)
 	if(isScrewdriver(I))
 		if(do_after(user, 50, src))
 			panelopen = !panelopen
@@ -109,7 +137,10 @@
 			to_chat(user, SPAN_NOTICE("You [panelopen ? "open" : "close"] the unit's maintenance panel."))
 			SSnano.update_uis(src)
 			update_icon()
-		 return
+		else
+			return FALSE
+		return TRUE
+
 	if(isCrowbar(I))
 		if(inoperable() && !islocked && !isopen)
 			to_chat(user, SPAN_NOTICE("You begin prying the unit open."))
@@ -118,36 +149,12 @@
 				to_chat(user, SPAN_NOTICE("You pry the unit open."))
 				SSnano.update_uis(src)
 				update_icon()
+			else
+				return FALSE
 		else if(islocked)
 			to_chat(user, SPAN_WARNING("You can't pry the unit open, it's locked!"))
-		return
-	if(istype(I, /obj/item/grab) )
-		var/obj/item/grab/G = I
-		if(!(ismob(G.affecting)) )
-			return
-		if(!isopen)
-			to_chat(user, SPAN_NOTICE("The unit's doors are shut."))
-			return
-		if(inoperable())
-			to_chat(user, SPAN_NOTICE("The unit is not operational."))
-			return
-		if(occupant || helmet || suit || boots || tank || mask)
-			to_chat(user, SPAN_NOTICE("The unit's storage area is too cluttered."))
-			return
-		visible_message(SPAN_WARNING("[user] starts putting [G.affecting.name] into the Suit Storage Unit."))
-		if(do_after(user, 20, src) && G && G.affecting)
-			var/mob/M = G.affecting
-			if(M.client)
-				M.client.perspective = EYE_PERSPECTIVE
-				M.client.eye = src
-			M.forceMove(src)
-			occupant = M
-			isopen = FALSE
-			add_fingerprint(user)
-			qdel(G)
-			SSnano.update_uis(src)
-			update_icon()
-		return
+			return FALSE
+		return TRUE
 
 	TRY_INSERT_SUIT_PIECE(suit, clothing/suit/space)
 	TRY_INSERT_SUIT_PIECE(helmet, clothing/head/helmet/space)
@@ -156,6 +163,8 @@
 	TRY_INSERT_SUIT_PIECE(mask, clothing/mask)
 	update_icon()
 	SSnano.update_uis(src)
+
+	return ..()
 
 /obj/machinery/suit_storage_unit/interface_interact(var/mob/user)
 	ui_interact(user)

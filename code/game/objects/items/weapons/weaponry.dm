@@ -208,10 +208,15 @@
 	healthcheck()
 	return
 
-/obj/effect/energy_net/attackby(obj/item/W as obj, mob/user as mob)
-	health -= W.force
-	healthcheck()
-	..()
+/obj/effect/energy_net/use_weapon(obj/item/W, mob/user)
+	if (!(W.item_flags & ITEM_FLAG_NO_BLUDGEON))
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		user.do_attack_animation(src)
+		health -= W.force
+		healthcheck()
+		return TRUE
+
+	return ..()
 
 obj/effect/energy_net/user_unbuckle_mob(mob/user)
 	return escape_net(user)

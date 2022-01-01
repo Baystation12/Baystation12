@@ -25,7 +25,7 @@
 				ChangeArea(src, E.planetary_area)
 	..()
 
-/turf/unsimulated/floor/exoplanet/attackby(obj/item/C, mob/user)
+/turf/unsimulated/floor/exoplanet/use_item(obj/item/C, mob/user)
 	if(diggable && istype(C,/obj/item/shovel))
 		visible_message("<span class='notice'>\The [user] starts digging \the [src]</span>")
 		if(do_after(user, 50))
@@ -93,7 +93,7 @@
 	footstep_type = /decl/footsteps/water
 	var/reagent_type = /datum/reagent/water
 
-/turf/unsimulated/floor/exoplanet/water/shallow/attackby(obj/item/O, var/mob/living/user)
+/turf/unsimulated/floor/exoplanet/water/shallow/use_item(obj/item/O, var/mob/living/user)
 	var/obj/item/reagent_containers/RG = O
 	if (reagent_type && istype(RG) && RG.is_open_container() && RG.reagents)
 		RG.reagents.add_reagent(reagent_type, min(RG.volume - RG.reagents.total_volume, RG.amount_per_transfer_from_this))

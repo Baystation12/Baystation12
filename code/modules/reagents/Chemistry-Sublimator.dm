@@ -100,7 +100,7 @@
 	update_icon()
 	return TRUE
 
-/obj/machinery/portable_atmospherics/reagent_sublimator/attackby(var/obj/item/thing, var/mob/user)
+/obj/machinery/portable_atmospherics/reagent_sublimator/use_item(var/obj/item/thing, var/mob/user)
 	if(istype(thing, /obj/item/tank))
 		to_chat(user, "<span class='warning'>\The [src] has no socket for a gas tank.</span>")
 	else if(istype(thing, /obj/item/reagent_containers))

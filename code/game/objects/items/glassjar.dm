@@ -68,17 +68,20 @@
 			update_icon()
 			return
 
-/obj/item/glass_jar/attackby(var/obj/item/W, var/mob/user)
+/obj/item/glass_jar/use_tool(obj/item/W, mob/user)
 	if(istype(W, /obj/item/spacecash))
 		if(contains == 0)
 			contains = 1
 		if(contains != 1)
-			return
+			return FALSE
 		if(!user.unEquip(W, src))
-			return
+			return FALSE
 		var/obj/item/spacecash/S = W
 		user.visible_message("<span class='notice'>[user] puts [S.worth] [S.worth > 1 ? GLOB.using_map.local_currency_name : GLOB.using_map.local_currency_name_singular] into \the [src].</span>")
 		update_icon()
+		return TRUE
+
+	return ..()
 
 /obj/item/glass_jar/on_update_icon() // Also updates name and desc
 	underlays.Cut()

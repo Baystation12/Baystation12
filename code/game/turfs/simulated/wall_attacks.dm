@@ -148,7 +148,7 @@
 		return success_smash(user)
 	return fail_smash(user)
 
-/turf/simulated/wall/attackby(var/obj/item/W, var/mob/user)
+/turf/simulated/wall/use_item(var/obj/item/W, var/mob/user)
 
 	var/area/A = get_area(src)
 	if (!A.can_modify_area())

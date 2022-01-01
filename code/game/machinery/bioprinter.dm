@@ -146,9 +146,10 @@
 	playsound(src.loc, 'sound/machines/ding.ogg', 50, 1)
 	return O
 
-/obj/machinery/organ_printer/robot/attackby(var/obj/item/W, var/mob/user)
+/obj/machinery/organ_printer/robot/use_tool(obj/item/W, mob/user)
 	var/add_matter = 0
 	var/object_name = "[W]"
+	var/handled = FALSE
 
 	if(istype(W, /obj/item/stack/material) && W.get_material_name() == matter_type)
 		if((max_stored_matter-stored_matter) >= matter_amount_per_sheet)
@@ -158,27 +159,31 @@
 			if(sheets_to_take > 0)
 				add_matter = min(max_stored_matter - stored_matter, sheets_to_take*matter_amount_per_sheet)
 				S.use(sheets_to_take)
+		handled = TRUE
 
 	else if(istype(W,/obj/item/organ))
 		var/obj/item/organ/O = W
 		if((O.organ_tag in products) && istype(O, products[O.organ_tag][1]))
 			if(!BP_IS_ROBOTIC(O))
 				to_chat(user, SPAN_WARNING("\The [src] only accepts robotic organs."))
-				return
+				return FALSE
 			var/recycle_worth = Floor(products[O.organ_tag][2] * 0.5)
 			if((max_stored_matter-stored_matter) >= recycle_worth)
 				add_matter = recycle_worth
 				qdel(O)
 		else
 			to_chat(user, SPAN_WARNING("\The [src] does not know how to recycle \the [O]."))
-			return
+			return FALSE
+		handled = TRUE
 
-	stored_matter += add_matter
-
-	if(add_matter)
-		to_chat(user, SPAN_INFO("\The [src] processes \the [object_name]. Levels of stored matter now: [stored_matter]"))
-	else
-		to_chat(user, SPAN_WARNING("\The [src] is too full."))
+	if (handled)
+		stored_matter += add_matter
+		if(add_matter)
+			to_chat(user, SPAN_INFO("\The [src] processes \the [object_name]. Levels of stored matter now: [stored_matter]"))
+			return TRUE
+		else
+			to_chat(user, SPAN_WARNING("\The [src] is too full."))
+			return FALSE
 
 	return ..()
 // END ROBOT ORGAN PRINTER
@@ -240,19 +245,20 @@
 
 	..(user, choice)
 
-/obj/machinery/organ_printer/flesh/attackby(obj/item/W, mob/user)
+/obj/machinery/organ_printer/flesh/use_tool(obj/item/W, mob/user)
 	// Load with matter for printing.
 	for(var/path in amount_list)
 		if(istype(W, path))
 			if(max_stored_matter == stored_matter)
 				to_chat(user, SPAN_WARNING("\The [src] is too full."))
-				return
+				return TRUE
 			if(!user.unEquip(W))
-				return
+				return TRUE
 			var/add_matter = amount_list[path] ? amount_list[path] : 0.5*get_organ_cost(W)
 			stored_matter += min(add_matter, max_stored_matter - stored_matter)
 			to_chat(user, SPAN_INFO("\The [src] processes \the [W]. Levels of stored biomass now: [stored_matter]"))
 			qdel(W)
+			return TRUE
 
 	// DNA sample from syringe.
 	if(istype(W,/obj/item/reagent_containers/syringe))
@@ -269,6 +275,8 @@
 				to_chat(user, SPAN_INFO("You inject the blood sample into the bioprinter."))
 				return TRUE
 		to_chat(user, SPAN_NOTICE("\The [src] displays an error: no viable blood sample could be obtained from \the [W]."))
+		return TRUE
+
 	return ..()
 
 /obj/machinery/organ_printer/flesh/proc/get_possible_products()

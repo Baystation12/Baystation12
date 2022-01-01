@@ -27,20 +27,24 @@
 	else
 		overlays.Cut()
 
-/obj/item/material/coin/attackby(var/obj/item/W, var/mob/user)
+/obj/item/material/coin/use_tool(obj/item/W, mob/user)
 	if(isCoil(W) && isnull(string_colour))
 		var/obj/item/stack/cable_coil/CC = W
 		if(CC.use(1))
 			string_colour = CC.color
 			to_chat(user, SPAN_NOTICE("You attach a string to the coin."))
 			update_icon()
-			return
+			return TRUE
+		return FALSE
+
 	else if(isWirecutter(W) && !isnull(string_colour))
 		new /obj/item/stack/cable_coil/single(get_turf(user))
 		string_colour = null
 		to_chat(user, SPAN_NOTICE("You detach the string from the coin."))
 		update_icon()
-	else ..()
+		return TRUE
+
+	return ..()
 
 /obj/item/material/coin/use_on_self(var/mob/user)
 	playsound(user.loc, 'sound/effects/coin_flip.ogg', 75, 1)

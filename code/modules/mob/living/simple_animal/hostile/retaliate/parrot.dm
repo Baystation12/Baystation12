@@ -253,7 +253,7 @@
 	return
 
 //Mobs with objects
-/mob/living/simple_animal/hostile/retaliate/parrot/attackby(var/obj/item/O as obj, var/mob/user as mob)
+/mob/living/simple_animal/hostile/retaliate/parrot/use_item(var/obj/item/O as obj, var/mob/user as mob)
 	..()
 	if(!stat && !client && !istype(O, /obj/item/stack/medical))
 		if(O.force)
@@ -499,7 +499,7 @@
 				return
 
 			//Time for the hurt to begin!
-			L.attackby(get_natural_weapon(), src)
+			L.use_item(get_natural_weapon(), src)
 			return
 
 		//Otherwise, fly towards the mob!

@@ -38,7 +38,7 @@
 	. = ..(user)
 	to_chat(user,  "It reads \"[message]\".")
 
-/obj/effect/decal/writing/attackby(var/obj/item/thing, var/mob/user)
+/obj/effect/decal/writing/use_item(var/obj/item/thing, var/mob/user)
 	if(isWelder(thing))
 		var/obj/item/weldingtool/welder = thing
 		if(welder.isOn() && welder.remove_fuel(0,user) && do_after(user, 5, src) && !QDELETED(src))

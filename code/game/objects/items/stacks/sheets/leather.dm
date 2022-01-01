@@ -69,9 +69,8 @@
 	var/drying_threshold_temperature = 500 //Kelvin to start drying
 
 //Step one - dehairing.
-/obj/item/stack/animalhide/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/stack/animalhide/use_tool(obj/item/W, mob/user)
 	if(istype(W, /obj/item/material/knife) || isHatchet(W))
-
 		//visible message on mobs is defined as visible_message(var/message, var/self_message, var/blind_message)
 		usr.visible_message("<span class='notice'>\The [usr] starts cutting hair off \the [src]</span>", "<span class='notice'>You start cutting the hair off \the [src]</span>", "You hear the sound of a knife rubbing against flesh")
 		if(do_after(user,50))
@@ -86,8 +85,10 @@
 			var/obj/item/stack/hairlesshide/HS = new(usr.loc)
 			HS.amount = 1
 			src.use(1)
-	else
-		..()
+			return TRUE
+		return FALSE
+
+	return ..()
 
 
 //Step two - washing..... it's actually in washing machine code.

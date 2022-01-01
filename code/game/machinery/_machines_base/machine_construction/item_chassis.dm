@@ -4,13 +4,13 @@
 	needs_board = null
 	down_state = /decl/machine_construction/default/deconstructed
 
-/decl/machine_construction/default/item_chassis/attackby(obj/item/I, mob/user, obj/machinery/machine)
+/decl/machine_construction/default/item_chassis/use_item(obj/item/I, mob/user, obj/machinery/machine)
 	if((. = ..()))
 		return
 	if(isWrench(I))
 		TRANSFER_STATE(down_state)
 		machine.dismantle()
-		return
+		return TRUE
 
 /decl/machine_construction/default/item_chassis/state_is_valid(obj/machinery/machine)
 	return TRUE

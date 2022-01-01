@@ -41,7 +41,7 @@
 		return FALSE
 	return TRUE
 
-/obj/item/stock_parts/computer/nano_printer/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/stock_parts/computer/nano_printer/use_item(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/paper))
 		if(stored_paper >= max_paper)
 			to_chat(user, "You try to add \the [W] into \the [src], but its paper bin is full.")

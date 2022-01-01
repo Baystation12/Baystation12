@@ -185,7 +185,7 @@ var/list/mob_hat_cache = list()
 	update_icon()
 
 //Drones cannot be upgraded with borg modules so we need to catch some items before they get used in ..().
-/mob/living/silicon/robot/drone/attackby(var/obj/item/W, var/mob/user)
+/mob/living/silicon/robot/drone/use_item(var/obj/item/W, var/mob/user)
 
 	if(user.a_intent == I_HELP && istype(W, /obj/item/clothing/head))
 		if(hat)

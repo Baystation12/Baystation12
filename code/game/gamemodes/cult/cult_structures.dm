@@ -27,19 +27,21 @@
 	health_min_damage = 4
 	damage_hitsound = 'sound/effects/Glasshit.ogg'
 
-/obj/structure/cult/pylon/attackby(obj/item/W, mob/user)
+
+/obj/structure/cult/pylon/use_tool(obj/item/W, mob/user)
 	if (istype(W, /obj/item/natural_weapon/cult_builder))
 		if (!health_damaged())
 			to_chat(user, SPAN_WARNING("\The [src] is fully repaired."))
-		else
-			user.visible_message(
-				SPAN_NOTICE("\The [user] mends some of the cracks on \the [src]."),
-				SPAN_NOTICE("You repair some of \the [src]'s damage.")
-			)
-			restore_health(5)
-		return
+			return FALSE
+		user.visible_message(
+			SPAN_NOTICE("\The [user] mends some of the cracks on \the [src]."),
+			SPAN_NOTICE("You repair some of \the [src]'s damage.")
+		)
+		restore_health(5)
+		return TRUE
 
-	..()
+	return ..()
+
 
 /obj/structure/cult/tome
 	name = "Desk"

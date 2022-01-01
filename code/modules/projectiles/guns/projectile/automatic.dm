@@ -205,7 +205,7 @@
 	. = ..()
 	launcher = new(src)
 
-/obj/item/gun/projectile/automatic/bullpup_rifle/attackby(obj/item/I, mob/user)
+/obj/item/gun/projectile/automatic/bullpup_rifle/use_item(obj/item/I, mob/user)
 	if((istype(I, /obj/item/grenade)))
 		launcher.load(I, user)
 	else

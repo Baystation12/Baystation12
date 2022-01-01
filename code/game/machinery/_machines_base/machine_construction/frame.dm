@@ -2,7 +2,7 @@
 
 /decl/machine_construction/frame/unwrenched/state_is_valid(obj/machinery/machine)
 	return !machine.anchored
-	
+
 /decl/machine_construction/frame/unwrenched/validate_state(obj/machinery/constructable_frame/machine)
 	. = ..()
 	if(!.)
@@ -11,25 +11,31 @@
 		else
 			try_change_state(machine, /decl/machine_construction/frame/wrenched)
 
-/decl/machine_construction/frame/unwrenched/attackby(obj/item/I, mob/user, obj/machinery/machine)
+/decl/machine_construction/frame/unwrenched/use_item(obj/item/I, mob/user, obj/machinery/machine)
 	if(isWrench(I))
 		playsound(machine.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		if(do_after(user, 20, machine))
 			TRANSFER_STATE(/decl/machine_construction/frame/wrenched)
 			to_chat(user, "<span class='notice'>You wrench \the [machine] into place.</span>")
 			machine.anchored = TRUE
+		else
+			return FALSE
+		return TRUE
 	if(isWelder(I))
 		var/obj/item/weldingtool/WT = I
 		if(!WT.remove_fuel(0, user))
 			to_chat(user, "The welding tool must be on to complete this task.")
-			return TRUE
+			return FALSE
 		playsound(machine.loc, 'sound/items/Welder.ogg', 50, 1)
 		if(do_after(user, 20, machine))
 			if(!WT.isOn())
-				return TRUE
+				return FALSE
 			TRANSFER_STATE(/decl/machine_construction/default/deconstructed)
 			to_chat(user, "<span class='notice'>You deconstruct \the [machine].</span>")
 			machine.dismantle()
+		else
+			return FALSE
+		return TRUE
 
 
 /decl/machine_construction/frame/unwrenched/mechanics_info()
@@ -48,7 +54,7 @@
 		else
 			try_change_state(machine, /decl/machine_construction/frame/unwrenched)
 
-/decl/machine_construction/frame/wrenched/attackby(obj/item/I, mob/user, obj/machinery/machine)
+/decl/machine_construction/frame/wrenched/use_item(obj/item/I, mob/user, obj/machinery/machine)
 	if(isWrench(I))
 		playsound(machine.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		if(do_after(user, 20, machine))
@@ -85,7 +91,7 @@
 		else
 			try_change_state(machine, /decl/machine_construction/frame/unwrenched)
 
-/decl/machine_construction/frame/awaiting_circuit/attackby(obj/item/I, mob/user, obj/machinery/constructable_frame/machine)
+/decl/machine_construction/frame/awaiting_circuit/use_item(obj/item/I, mob/user, obj/machinery/constructable_frame/machine)
 	if(istype(I, /obj/item/stock_parts/circuitboard))
 		var/obj/item/stock_parts/circuitboard/circuit = I
 		if(circuit.board_type == machine.expected_machine_type)
@@ -122,7 +128,7 @@
 		else
 			try_change_state(machine, /decl/machine_construction/frame/unwrenched)
 
-/decl/machine_construction/frame/awaiting_parts/attackby(obj/item/I, mob/user, obj/machinery/constructable_frame/machine)
+/decl/machine_construction/frame/awaiting_parts/use_item(obj/item/I, mob/user, obj/machinery/constructable_frame/machine)
 	if(isCrowbar(I))
 		TRANSFER_STATE(/decl/machine_construction/frame/awaiting_circuit)
 		playsound(machine.loc, 'sound/items/Crowbar.ogg', 50, 1)

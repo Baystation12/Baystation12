@@ -119,8 +119,8 @@
 		icon_state = "[initial(icon_state)]"
 
 
-/obj/machinery/reagentgrinder/attackby(obj/item/I, mob/user)
-	if((. = component_attackby(I, user)))
+/obj/machinery/reagentgrinder/use_item(obj/item/I, mob/user)
+	if((. = component_use_item(I, user)))
 		detach()
 		eject()
 

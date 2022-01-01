@@ -69,8 +69,8 @@
 			var/turflist = getline(user, target_turf)
 			flame_turf(turflist)
 
-/obj/item/flamethrower/attackby(obj/item/W as obj, mob/user as mob)
-	if(user.stat || user.restrained() || user.lying)	return
+/obj/item/flamethrower/use_tool(obj/item/W, mob/user)
+	if(user.stat || user.restrained() || user.lying)	return FALSE
 	if(isWrench(W) && !status)//Taking this apart
 		if(weldtool)
 			weldtool.dropInto(loc)
@@ -83,40 +83,40 @@
 			tank = null
 		new /obj/item/stack/material/rods(get_turf(src))
 		qdel(src)
-		return
+		return TRUE
 
 	if(isScrewdriver(W) && igniter && !lit)
 		status = !status
 		to_chat(user, "<span class='notice'>[igniter] is now [status ? "secured" : "unsecured"]!</span>")
 		update_icon()
-		return
+		return TRUE
 
 	if(isigniter(W))
 		var/obj/item/device/assembly/igniter/I = W
-		if(I.secured)	return
-		if(igniter)		return
+		if(I.secured)	return FALSE
+		if(igniter)		return FALSE
 		if(!user.unEquip(I, src))
-			return
+			return FALSE
 		igniter = I
 		update_icon()
-		return
+		return TRUE
 
 	if(istype(W,/obj/item/tank))
 		if(tank)
 			to_chat(user, "<span class='notice'>There appears to already be a fuel tank loaded in [src]!</span>")
-			return
+			return FALSE
 		if(!user.unEquip(W, src))
-			return
+			return FALSE
 		tank = W
 		update_icon()
-		return
+		return TRUE
 
 	if(istype(W, /obj/item/device/scanner/gas))
 		var/obj/item/device/scanner/gas/A = W
 		A.analyze_gases(src, user)
-		return
-	..()
-	return
+		return TRUE
+
+	return ..()
 
 
 /obj/item/flamethrower/use_on_self(mob/user as mob)

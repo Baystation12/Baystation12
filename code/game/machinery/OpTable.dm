@@ -11,7 +11,7 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
-	
+
 	machine_name = "operating table"
 	machine_desc = "A sterile and well-lit surface to conduct surgery. Operating tables are the only completely safe surfaces to perform operations. Comes with built-in neural suppressors to anesthetize a patient laying on top of it."
 
@@ -35,7 +35,7 @@
 		connected_monitor.update_victim()
 		connected_monitor.update_optable()
 	. = ..()
-	
+
 /obj/machinery/optable/examine(mob/user)
 	. = ..()
 	to_chat(user, "<span class='notice'>The neural suppressors are switched [suppressing ? "on" : "off"].</span>")
@@ -56,14 +56,13 @@
 			if (prob(25))
 				src.set_density(0)
 
-/obj/machinery/optable/attackby(var/obj/item/O, var/mob/user)
-	if (istype(O, /obj/item/grab))
-		var/obj/item/grab/G = O
-		if(iscarbon(G.affecting) && check_table(G.affecting))
-			take_victim(G.affecting,usr)
-			qdel(O)
-			return
-	return ..()
+
+/obj/machinery/optable/grab_attack(obj/item/grab/G)
+	if (check_table(G.affecting))
+		take_victim(G.affecting, usr)
+		qdel(G)
+	return TRUE
+
 
 /obj/machinery/optable/state_transition(var/decl/machine_construction/default/new_state)
 	. = ..()

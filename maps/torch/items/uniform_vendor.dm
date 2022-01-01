@@ -98,7 +98,7 @@
 	if(.)
 		attack_hand(user)
 
-/obj/machinery/uniform_vendor/attackby(var/obj/item/W, var/mob/user)
+/obj/machinery/uniform_vendor/use_item(var/obj/item/W, var/mob/user)
 	if(istype(W, /obj/item/clothingbag))
 		if(W.contents.len)
 			to_chat(user, "<span class='notice'>You must empty \the [W] before you can put it in \the [src].</span>")

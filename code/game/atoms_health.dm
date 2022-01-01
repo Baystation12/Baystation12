@@ -324,21 +324,25 @@
 		return 0
 
 
-/atom/attackby(obj/item/W, mob/user, click_params)
-	. = ..()
-	if (user.a_intent == I_HURT && get_max_health() && !(W.item_flags & ITEM_FLAG_NO_BLUDGEON))
+/atom/use_weapon(obj/item/W, mob/user, click_params)
+	if (!(W.item_flags & ITEM_FLAG_NO_BLUDGEON) && health_max)
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		user.do_attack_animation(src)
 		if (!can_damage_health(W.force, W.damtype))
 			playsound(damage_hitsound, src, 50)
 			user.visible_message(
 				SPAN_WARNING("\The [user] hits \the [src] with \a [W], but it bounces off!"),
-				SPAN_WARNING("You hit \the [src] with \the [W], but it bounces off!")
+				SPAN_WARNING("You hit \the [src] with \the [W], but it bounces off!"),
+				SPAN_WARNING("You hear the sound of something being hit.")
 			)
-			return
+			return FALSE
 		playsound(damage_hitsound, src, 75)
 		user.visible_message(
 			SPAN_DANGER("\The [user] hits \the [src] with \a [W]!"),
-			SPAN_DANGER("You hit \the [src] with \the [W]!")
+			SPAN_DANGER("You hit \the [src] with \the [W]!"),
+			SPAN_WARNING("You hear the sound of something being hit.")
 		)
 		damage_health(W.force, W.damtype)
+		return TRUE
+
+	. = ..()

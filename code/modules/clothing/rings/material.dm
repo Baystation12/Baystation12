@@ -17,7 +17,7 @@
 	desc = "A ring made from [material.display_name]."
 	color = material.icon_colour
 
-/obj/item/clothing/ring/material/attackby(var/obj/item/S, var/mob/user)
+/obj/item/clothing/ring/material/use_item(var/obj/item/S, var/mob/user)
 	if(S.sharp)
 		var/inscription = sanitize(input("Enter an inscription to engrave.", "Inscription") as null|text)
 

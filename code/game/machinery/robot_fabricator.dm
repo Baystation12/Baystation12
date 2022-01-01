@@ -10,7 +10,7 @@
 	idle_power_usage = 40
 	active_power_usage = 10000
 
-/obj/machinery/robotic_fabricator/attackby(var/obj/item/O as obj, var/mob/user as mob)
+/obj/machinery/robotic_fabricator/use_tool(obj/item/O, mob/user)
 	if (istype(O, /obj/item/stack/material) && O.get_material_name() == MATERIAL_STEEL)
 		var/obj/item/stack/M = O
 		if (src.metal_amount < 150000.0)
@@ -27,8 +27,12 @@
 					to_chat(user, "You insert [count] metal sheet\s into the fabricator.")
 					src.overlays -= "fab-load-metal"
 					updateDialog()
+			return TRUE
 		else
 			to_chat(user, "The robot part maker is full. Please remove metal from the robot part maker in order to insert more.")
+			return FALSE
+
+	return ..()
 
 /obj/machinery/robotic_fabricator/interface_interact(mob/user)
 	interact(user)

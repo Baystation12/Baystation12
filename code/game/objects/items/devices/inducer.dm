@@ -53,28 +53,35 @@
 	return FALSE
 
 
-/obj/item/inducer/attackby(obj/item/W, mob/user)
+/obj/item/inducer/use_tool(obj/item/W, mob/user)
 	if(isScrewdriver(W))
 		opened = !opened
 		to_chat(user, "<span class='notice'>You [opened ? "open" : "close"] the battery compartment.</span>")
 		update_icon()
+		return TRUE
+
 	if(istype(W, /obj/item/cell))
 		if (istype(W, /obj/item/cell/device))
 			to_chat(user, "<span class='warning'>\The [src] only takes full-size power cells.</span>")
-			return
+			return FALSE
 		if(opened)
 			if(!cell)
 				if(!user.unEquip(W, src))
-					return
+					return FALSE
 				to_chat(user, "<span class='notice'>You insert \the [W] into \the [src].</span>")
 				cell = W
 				update_icon()
-				return
+				return TRUE
 			else
 				to_chat(user, "<span class='notice'>\The [src] already has \a [cell] installed!</span>")
-				return
-	if(CannotUse(user) || recharge(W, user))
-		return
+				return FALSE
+
+	if (CannotUse(user))
+		return FALSE
+
+	if (recharge(W, user))
+		return TRUE
+
 	return ..()
 
 /obj/item/inducer/proc/recharge(atom/A, mob/user)
@@ -180,10 +187,11 @@
 	failsafe = 0.2
 	cell = null
 
-/obj/item/inducer/borg/attackby(obj/item/W, mob/user)
+/obj/item/inducer/borg/use_tool(obj/item/W, mob/user)
 	if(isScrewdriver(W))
-		return
-	. = ..()
+		return FALSE
+
+	return ..()
 
 /obj/item/inducer/borg/on_update_icon()
 	. = ..()

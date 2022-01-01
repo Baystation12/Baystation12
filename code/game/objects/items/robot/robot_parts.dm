@@ -102,26 +102,30 @@
 		success = FALSE
 	return success && ..()
 
-/obj/item/robot_parts/chest/attackby(obj/item/W as obj, mob/user as mob)
-	..()
+/obj/item/robot_parts/chest/use_tool(obj/item/W, mob/user)
 	if(istype(W, /obj/item/cell))
 		if(src.cell)
 			to_chat(user, "<span class='warning'>You have already inserted a cell!</span>")
-			return
+			return FALSE
 		else
 			if(!user.unEquip(W, src))
-				return
+				return FALSE
 			src.cell = W
 			to_chat(user, "<span class='notice'>You insert the cell!</span>")
+			return TRUE
+
 	if(isCoil(W))
 		if(src.wires)
 			to_chat(user, "<span class='warning'>You have already inserted wire!</span>")
-			return
+			return FALSE
 		else
 			var/obj/item/stack/cable_coil/coil = W
 			if(coil.use(1))
 				src.wires = 1.0
 				to_chat(user, "<span class='notice'>You insert the wire!</span>")
+				return TRUE
+			return FALSE
+
 	if(istype(W, /obj/item/robot_parts/head))
 		var/obj/item/robot_parts/head/head_part = W
 		// Attempt to create full-body prosthesis.
@@ -133,7 +137,7 @@
 			// Species selection.
 			var/species = input(user, "Select a species for the prosthetic.") as null|anything in GetCyborgSpecies()
 			if(!species)
-				return
+				return FALSE
 			var/name = sanitizeSafe(input(user,"Set a name for the new prosthetic."), MAX_NAME_LEN)
 			if(!name)
 				SetName("prosthetic ([random_id("prosthetic_id", 1, 999)])")
@@ -173,6 +177,10 @@
 			// Cleanup
 			qdel(W)
 			qdel(src)
+			return TRUE
+		return FALSE
+
+	return ..()
 
 /obj/item/robot_parts/chest/proc/GetCyborgSpecies()
 	. = list()
@@ -182,18 +190,19 @@
 			continue
 		. += N
 
-/obj/item/robot_parts/head/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/robot_parts/head/use_tool(obj/item/W, mob/user)
 	..()
 	if(istype(W, /obj/item/device/flash))
 		if(istype(user,/mob/living/silicon/robot))
 			var/current_module = user.get_active_hand()
 			if(current_module == W)
 				to_chat(user, "<span class='warning'>How do you propose to do that?</span>")
-				return
+				return FALSE
 			else
 				add_flashes(W,user)
 		else
 			add_flashes(W,user)
+		return TRUE
 
 /obj/item/robot_parts/head/proc/add_flashes(obj/item/W as obj, mob/user as mob) //Made into a seperate proc to avoid copypasta
 	if(src.flash1 && src.flash2)

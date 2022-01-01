@@ -317,7 +317,7 @@ var/list/organ_cache = list()
 	transfer_fingerprints_to(O)
 	user.put_in_active_hand(O)
 	qdel(src)
-	target.attackby(O, user)
+	target.use_item(O, user)
 
 /obj/item/organ/proc/can_feel_pain()
 	return (!BP_IS_ROBOTIC(src) && (!species || !(species.species_flags & SPECIES_FLAG_NO_PAIN)))

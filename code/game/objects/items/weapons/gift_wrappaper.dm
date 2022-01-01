@@ -32,22 +32,18 @@
 		return
 	to_chat(user, "<span class='warning'>You can't move.</span>")
 
-/obj/effect/spresent/attackby(obj/item/W as obj, mob/user as mob)
-	..()
-
+/obj/effect/spresent/use_tool(obj/item/W, mob/user)
 	if(!isWirecutter(W))
 		to_chat(user, "<span class='warning'>I need wirecutters for that.</span>")
-		return
-
+		return FALSE
 	to_chat(user, "<span class='notice'>You cut open the present.</span>")
-
 	for(var/mob/M in src) //Should only be one but whatever.
 		M.dropInto(loc)
 		if (M.client)
 			M.client.eye = M.client.mob
 			M.client.perspective = MOB_PERSPECTIVE
-
 	qdel(src)
+	return TRUE
 
 /obj/item/a_gift/use_on_self(mob/M as mob)
 	var/gift_type = pick(
@@ -150,39 +146,42 @@
 	icon_state = "wrap_paper"
 	var/amount = 2.5*BASE_STORAGE_COST(ITEM_SIZE_HUGE)
 
-/obj/item/wrapping_paper/attackby(obj/item/W as obj, mob/user as mob)
-	..()
+/obj/item/wrapping_paper/use_tool(obj/item/W, mob/user)
 	if (!( locate(/obj/structure/table, src.loc) ))
 		to_chat(user, "<span class='warning'>You MUST put the paper on a table!</span>")
+		return FALSE
+
 	if (W.w_class < ITEM_SIZE_HUGE)
 		if(isWirecutter(user.l_hand) || isWirecutter(user.r_hand))
 			var/a_used = W.get_storage_cost()
 			if (a_used == ITEM_SIZE_NO_CONTAINER)
 				to_chat(user, "<span class='warning'>You can't wrap that!</span>")//no gift-wrapping lit welders
-
-				return
+				return FALSE
 			if (src.amount < a_used)
 				to_chat(user, "<span class='warning'>You need more paper!</span>")
-				return
+				return FALSE
 			else
 				if(istype(W, /obj/item/smallDelivery) || istype(W, /obj/item/gift)) //No gift wrapping gifts!
-					return
+					return FALSE
 
 				if(user.unEquip(W))
 					var/obj/item/gift/G = new /obj/item/gift( src.loc, W )
 					G.add_fingerprint(user)
 					W.add_fingerprint(user)
 					src.amount -= a_used
+				else
+					return FALSE
 
 			if (src.amount <= 0)
 				new /obj/item/c_tube( src.loc )
 				qdel(src)
-				return
+			return TRUE
 		else
 			to_chat(user, "<span class='warning'>You need scissors!</span>")
+			return FALSE
 	else
 		to_chat(user, "<span class='warning'>The object is FAR too large!</span>")
-	return
+		return FALSE
 
 
 /obj/item/wrapping_paper/examine(mob/user, distance)

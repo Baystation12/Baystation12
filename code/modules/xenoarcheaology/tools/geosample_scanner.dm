@@ -63,7 +63,7 @@
 	ui_interact(user)
 	return TRUE
 
-/obj/machinery/radiocarbon_spectrometer/attackby(var/obj/I as obj, var/mob/user as mob)
+/obj/machinery/radiocarbon_spectrometer/use_item(var/obj/I as obj, var/mob/user as mob)
 	if(scanning)
 		to_chat(user, "<span class='warning'>You can't do that while [src] is scanning!</span>")
 	else

@@ -127,16 +127,16 @@
 /obj/machinery/washing_machine/components_are_accessible(path)
 	return !(state & WASHER_STATE_RUNNING) && ..()
 
-/obj/machinery/washing_machine/attackby(obj/item/W, mob/user)
+/obj/machinery/washing_machine/use_tool(obj/item/W, mob/user)
 	if(!(state & WASHER_STATE_CLOSED))
 		if(!crayon && istype(W,/obj/item/pen/crayon))
 			if(!user.unEquip(W, src))
-				return
+				return FALSE
 			crayon = W
 			return TRUE
 		if(!detergent && istype(W,/obj/item/reagent_containers/pill/detergent))
 			if(!user.unEquip(W, src))
-				return
+				return FALSE
 			detergent = W
 			return TRUE
 	if(istype(W, /obj/item/holder)) // Mob holder
@@ -149,26 +149,29 @@
 
 	if (state & WASHER_STATE_RUNNING)
 		to_chat(user, SPAN_WARNING("\The [src] is currently running."))
-		return TRUE
+		return FALSE
 
 	else if (!(W.item_flags & ITEM_FLAG_WASHER_ALLOWED))
 		if (isScrewdriver(W) || isCrowbar(W) || isWrench(W))
 			return ..()
 
 		to_chat(user, SPAN_WARNING("\The [W] can't be washed in \the [src]!"))
-		return
+		return FALSE
 
 	else
 		if (contents.len < 5)
 			if (!(state & WASHER_STATE_CLOSED))
 				if (!user.unEquip(W, src))
-					return
+					return FALSE
 				state |= WASHER_STATE_FULL
 				update_icon()
+				return TRUE
 			else
 				to_chat(user, SPAN_NOTICE("You can't put the item in right now."))
+				return FALSE
 		else
 			to_chat(user, SPAN_NOTICE("\The [src] is full."))
+			return FALSE
 
 
 /obj/machinery/washing_machine/physical_attack_hand(mob/user)

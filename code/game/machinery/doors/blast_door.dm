@@ -135,29 +135,30 @@
 /obj/machinery/door/blast/get_material()
 	return implicit_material
 
-// Proc: attackby()
-// Parameters: 2 (C - Item this object was clicked with, user - Mob which clicked this object)
-// Description: If we are clicked with crowbar or wielded fire axe, try to manually open the door.
-// This only works on broken doors or doors without power. Also allows repair with Plasteel.
-/obj/machinery/door/blast/attackby(obj/item/C as obj, mob/user as mob)
+/obj/machinery/door/blast/use_tool(obj/item/C, mob/user)
 	add_fingerprint(user, 0, C)
-	if(isCrowbar(C) || (istype(C, /obj/item/material/twohanded/fireaxe) && C:wielded == 1))
+	var/obj/item/material/twohanded/fireaxe/F = C
+	if(isCrowbar(C) || (istype(F) && F.wielded))
 		if(((stat & NOPOWER) || (stat & BROKEN)) && !( operating ))
 			to_chat(user, "<span class='notice'>You begin prying at \the [src]...</span>")
 			if(do_after(user, 2 SECONDS, src))
 				force_toggle()
+			else
+				return FALSE
 		else
 			to_chat(user, "<span class='notice'>[src]'s motors resist your effort.</span>")
-		return
+			return FALSE
+		return TRUE
+
 	if(istype(C, /obj/item/stack/material) && C.get_material_name() == MATERIAL_PLASTEEL)
 		var/amt = Ceil((maxhealth - health)/150)
 		if(!amt)
 			to_chat(user, "<span class='notice'>\The [src] is already fully functional.</span>")
-			return
+			return FALSE
 		var/obj/item/stack/P = C
 		if(!P.can_use(amt))
 			to_chat(user, "<span class='warning'>You don't have enough sheets to repair this! You need at least [amt] sheets.</span>")
-			return
+			return FALSE
 		to_chat(user, "<span class='notice'>You begin repairing \the [src]...</span>")
 		if(do_after(user, 5 SECONDS, src))
 			if(P.use(amt))
@@ -165,9 +166,12 @@
 				repair()
 			else
 				to_chat(user, "<span class='warning'>You don't have enough sheets to repair this! You need at least [amt] sheets.</span>")
+				return FALSE
 		else
-			to_chat(user, "<span class='warning'>You must remain still while working on \the [src].</span>")
-	check_force(C, user)
+			return FALSE
+		return TRUE
+
+	return ..()
 
 
 

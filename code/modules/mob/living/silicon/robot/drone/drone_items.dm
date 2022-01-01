@@ -202,7 +202,7 @@
 			break
 
 	if(wrapped) //Already have an item.
-		//Temporary put wrapped into user so target's attackby() checks pass.
+		//Temporary put wrapped into user so target's use_item() checks pass.
 		wrapped.forceMove(user)
 
 		//The force of the wrapped obj gets set to zero during the attack() and afterattack().

@@ -132,11 +132,11 @@ Buildable meters
 		P.node4.build_network()
 	return 0
 
-/obj/item/pipe/attackby(var/obj/item/W as obj, var/mob/user as mob)
+/obj/item/pipe/use_tool(obj/item/W, mob/user)
 	if(!isWrench(W))
 		return ..()
 	if (!isturf(loc))
-		return 1
+		return TRUE
 
 	sanitize_dir()
 	var/obj/machinery/atmospherics/fake_machine = constructed_path
@@ -161,19 +161,19 @@ Buildable meters
 
 	if(P.pipe_class == PIPE_CLASS_UNARY)
 		if(build_unary(P, pipefailtext))
-			return 1
+			return TRUE
 
 	if(P.pipe_class == PIPE_CLASS_BINARY)
 		if(build_binary(P, pipefailtext))
-			return 1
+			return TRUE
 
 	if(P.pipe_class == PIPE_CLASS_TRINARY)
 		if(build_trinary(P, pipefailtext))
-			return 1
+			return TRUE
 
 	if(P.pipe_class == PIPE_CLASS_QUATERNARY)
 		if(build_quaternary(P, pipefailtext))
-			return 1
+			return TRUE
 
 	if(P.pipe_class == PIPE_CLASS_OMNI)
 		P.atmos_init()
@@ -185,6 +185,7 @@ Buildable meters
 		"<span class='notice'>You have fastened the [src].</span>", \
 		"You hear ratchet.")
 	qdel(src)	// remove the pipe item
+	return TRUE
 
 /obj/item/pipe/injector
 	name = "Injector"
@@ -213,7 +214,7 @@ Buildable meters
 /obj/item/machine_chassis
 	var/build_type
 
-/obj/item/machine_chassis/attackby(var/obj/item/W, var/mob/user)
+/obj/item/machine_chassis/use_tool(obj/item/W, mob/user)
 	if(!isWrench(W))
 		return ..()
 	var/obj/machinery/machine = new build_type(get_turf(src), dir, FALSE)
@@ -224,6 +225,7 @@ Buildable meters
 	playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
 	to_chat(user, "<span class='notice'>You have fastened the [src].</span>")
 	qdel(src)
+	return TRUE
 
 /obj/item/machine_chassis/air_sensor
 	name = "gas sensor"

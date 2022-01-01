@@ -41,7 +41,7 @@
 	s.start()
 	qdel(src)
 
-/mob/living/bot/remotebot/attackby(var/obj/item/I, var/mob/living/user)
+/mob/living/bot/remotebot/use_item(var/obj/item/I, var/mob/living/user)
 	if(istype(I, /obj/item/device/bot_controller) && !controller)
 		user.visible_message("\The [user] waves \the [I] over \the [src].")
 		to_chat(user, "<span class='notice'>You link \the [src] to \the [I].</span>")

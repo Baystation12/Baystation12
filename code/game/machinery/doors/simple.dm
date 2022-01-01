@@ -42,7 +42,7 @@
 		glass = 1
 		alpha = 180
 		set_opacity(0)
-	
+
 	if(!density)
 		set_opacity(0)
 	update_icon()
@@ -87,14 +87,14 @@
 /obj/machinery/door/unpowered/simple/close(var/forced = 0)
 	if(!can_close(forced))
 		return
-	
+
 	// If the door is blocked, don't close
 	for(var/turf/A in locs)
 		var/turf/T = A
 		var/obstruction = T.get_obstruction()
 		if (obstruction)
 			return
-	
+
 	playsound(src.loc, material.dooropen_noise, 100, 1)
 	..()
 
@@ -134,34 +134,36 @@
 				take_damage(150)
 
 
-/obj/machinery/door/unpowered/simple/attackby(obj/item/I as obj, mob/user as mob)
-	src.add_fingerprint(user, 0, I)
+/obj/machinery/door/unpowered/simple/use_tool(obj/item/I, mob/user)
 	if(istype(I, /obj/item/key) && lock)
 		var/obj/item/key/K = I
 		if(!lock.toggle(I))
 			to_chat(user, "<span class='warning'>\The [K] does not fit in the lock!</span>")
-		return
+			return FALSE
+		return TRUE
+
 	if(lock && lock.pick_lock(I,user))
-		return
+		return TRUE
 
 	if(istype(I,/obj/item/material/lock_construct))
 		if(lock)
 			to_chat(user, "<span class='warning'>\The [src] already has a lock.</span>")
+			return FALSE
 		else
 			var/obj/item/material/lock_construct/L = I
 			lock = L.create_lock(src,user)
-		return
+		return TRUE
 
 	if(istype(I, /obj/item/stack/material) && I.get_material_name() == src.get_material_name())
 		if(stat & BROKEN)
 			to_chat(user, "<span class='notice'>It looks like \the [src] is pretty busted. It's going to need more than just patching up now.</span>")
-			return
+			return FALSE
 		if(health >= maxhealth)
 			to_chat(user, "<span class='notice'>Nothing to fix!</span>")
-			return
+			return FALSE
 		if(!density)
 			to_chat(user, "<span class='warning'>\The [src] must be closed before you can repair it.</span>")
-			return
+			return FALSE
 
 		//figure out how much metal we need
 		var/obj/item/stack/stack = I
@@ -171,24 +173,22 @@
 			to_chat(user, "<span class='notice'>You fit [used] [stack.singular_name]\s to damaged and broken parts on \the [src].</span>")
 			stack.use(used)
 			health = clamp(health + used * DOOR_REPAIR_AMOUNT, health, maxhealth)
-		return
+		return TRUE
 
-	if (check_force(I, user))
-		return
-
-	if(src.operating) return
+	if(src.operating) return FALSE
 
 	if(lock && lock.isLocked())
 		to_chat(user, "\The [src] is locked!")
+		return FALSE
 
 	if(operable())
 		if(src.density)
 			open()
 		else
 			close()
-		return
+		return TRUE
 
-	return
+	return ..()
 
 /obj/machinery/door/unpowered/simple/examine(mob/user, distance)
 	. = ..()

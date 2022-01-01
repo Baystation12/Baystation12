@@ -129,7 +129,7 @@
 	else
 		return ..()
 
-/obj/item/gun/launcher/money/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/gun/launcher/money/use_item(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/spacecash/))
 		var/obj/item/spacecash/bling = W
 		if(bling.worth < 1)

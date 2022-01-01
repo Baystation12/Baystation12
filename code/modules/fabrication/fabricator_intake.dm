@@ -71,8 +71,8 @@
 	else
 		to_chat(user, SPAN_WARNING("\The [src] cannot process \the [thing]."))
 
-/obj/machinery/fabricator/attackby(var/obj/item/O, var/mob/user)
-	if(component_attackby(O, user) || stat)
+/obj/machinery/fabricator/use_item(var/obj/item/O, var/mob/user)
+	if(component_use_item(O, user) || stat)
 		return TRUE
 	if(panel_open && (isMultitool(O) || isWirecutter(O)))
 		attack_hand(user)

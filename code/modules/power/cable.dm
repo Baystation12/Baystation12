@@ -138,7 +138,7 @@ By design, d1 is the smallest direction and d2 is the highest
 //   - Multitool : get the power currently passing through the cable
 //
 
-/obj/structure/cable/attackby(obj/item/W, mob/user)
+/obj/structure/cable/use_item(obj/item/W, mob/user)
 	if(isWirecutter(W))
 		cut_wire(W, user)
 

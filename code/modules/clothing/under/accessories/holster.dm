@@ -17,7 +17,7 @@
 	set_extension(src, /datum/extension/holster, container, sound_in, sound_out, can_holster)
 
 
-/obj/item/clothing/accessory/storage/holster/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/clothing/accessory/storage/holster/use_item(obj/item/W as obj, mob/user as mob)
 	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)
 	if (H.holster(W, user))
 		return

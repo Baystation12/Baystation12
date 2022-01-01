@@ -75,7 +75,7 @@
 		fireaxe = null
 	return ..()
 
-/obj/structure/fireaxecabinet/attackby(var/obj/item/O, var/mob/user)
+/obj/structure/fireaxecabinet/use_item(var/obj/item/O, var/mob/user)
 
 	if(isMultitool(O))
 		toggle_lock(user)

@@ -205,11 +205,14 @@
 /obj/effect/meteor/ex_act()
 	return
 
-/obj/effect/meteor/attackby(obj/item/W as obj, mob/user as mob, params)
-	if(istype(W, /obj/item/pickaxe))
+
+/obj/effect/meteor/use_weapon(obj/item/W, mob/user, params)
+	if (istype(W, /obj/item/pickaxe))
 		qdel(src)
-		return
-	..()
+		return TRUE
+
+	return ..()
+
 
 /obj/effect/meteor/proc/make_debris()
 	for(var/throws = dropamt, throws > 0, throws--)

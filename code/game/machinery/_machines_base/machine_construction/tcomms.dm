@@ -11,7 +11,7 @@
 	if(!.)
 		try_change_state(machine, /decl/machine_construction/tcomms/panel_open)
 
-/decl/machine_construction/tcomms/panel_closed/attackby(obj/item/I, mob/user, obj/machinery/machine)
+/decl/machine_construction/tcomms/panel_closed/use_item(obj/item/I, mob/user, obj/machinery/machine)
 	if((. = ..()))
 		return
 	if(isScrewdriver(I))
@@ -19,6 +19,7 @@
 		machine.panel_open = TRUE
 		to_chat(user, "You unfasten the bolts.")
 		playsound(machine.loc, 'sound/items/Screwdriver.ogg', 50, 1)
+		return TRUE
 
 /decl/machine_construction/tcomms/panel_closed/post_construct(obj/machinery/machine)
 	try_change_state(machine, /decl/machine_construction/tcomms/panel_open/no_cable)
@@ -40,7 +41,7 @@
 	if(!.)
 		try_change_state(machine, /decl/machine_construction/tcomms/panel_closed)
 
-/decl/machine_construction/tcomms/panel_open/attackby(obj/item/I, mob/user, obj/machinery/machine)
+/decl/machine_construction/tcomms/panel_open/use_item(obj/item/I, mob/user, obj/machinery/machine)
 	if((. = ..()))
 		return
 	return state_interactions(I, user, machine)

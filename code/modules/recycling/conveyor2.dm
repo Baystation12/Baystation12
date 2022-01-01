@@ -95,7 +95,7 @@
 			step(A,movedir)
 
 // attack with item, place item on conveyor
-/obj/machinery/conveyor/attackby(var/obj/item/I, mob/user)
+/obj/machinery/conveyor/use_item(var/obj/item/I, mob/user)
 	if(isCrowbar(I))
 		if(!(stat & BROKEN))
 			var/obj/item/conveyor_construct/C = new/obj/item/conveyor_construct(src.loc)
@@ -232,7 +232,7 @@
 		last_pos = position
 		position = 0
 
-/obj/machinery/conveyor_switch/attackby(obj/item/I, mob/user, params)
+/obj/machinery/conveyor_switch/use_item(obj/item/I, mob/user, params)
 	if(isCrowbar(I))
 		var/obj/item/conveyor_switch_construct/C = new/obj/item/conveyor_switch_construct(src.loc)
 		C.id = id
@@ -263,7 +263,7 @@
 	var/id = "" //inherited by the belt
 	matter = list(MATERIAL_STEEL = 400, MATERIAL_PLASTIC = 200)
 
-/obj/item/conveyor_construct/attackby(obj/item/I, mob/user, params)
+/obj/item/conveyor_construct/use_item(obj/item/I, mob/user, params)
 	..()
 	if(istype(I, /obj/item/conveyor_switch_construct))
 		to_chat(user, "<span class='notice'>You link the switch to the conveyor belt assembly.</span>")

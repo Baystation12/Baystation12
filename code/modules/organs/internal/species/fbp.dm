@@ -63,7 +63,7 @@
 	if(cell)
 		cell.emp_act(severity)
 
-/obj/item/organ/internal/cell/attackby(obj/item/W, mob/user)
+/obj/item/organ/internal/cell/use_item(obj/item/W, mob/user)
 	if(isScrewdriver(W))
 		if(open)
 			open = 0

@@ -26,18 +26,14 @@
 	else if (contents.len >= max_butts/2)
 		overlays |= image('icons/obj/objects.dmi',"ashtray_half")
 
-/obj/item/material/ashtray/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/material/ashtray/use_tool(obj/item/W, mob/user)
 	if (!is_alive())
-		return
-
-	if (user.a_intent == I_HURT)
-		..()
-		return
+		return FALSE
 
 	if (istype(W,/obj/item/trash/cigbutt) || istype(W,/obj/item/clothing/mask/smokable/cigarette) || istype(W, /obj/item/flame/match))
 		if (contents.len >= max_butts)
 			to_chat(user, "\The [src] is full.")
-			return
+			return FALSE
 
 		if (istype(W,/obj/item/clothing/mask/smokable/cigarette))
 			var/obj/item/clothing/mask/smokable/cigarette/cig = W
@@ -46,14 +42,16 @@
 				W = cig.extinguish(no_message = 1)
 			else if (cig.lit == 0)
 				to_chat(user, "You place [cig] in [src] without even smoking it. Why would you do that?")
+			return TRUE
 
 		if(user.unEquip(W, src))
 			visible_message("[user] places [W] in [src].")
 			set_extension(src, /datum/extension/scent/ashtray)
 			update_icon()
-		return
+			return TRUE
+		return FALSE
 
-	..()
+	return ..()
 
 /obj/item/material/ashtray/throw_impact(atom/hit_atom)
 	if (health_max)

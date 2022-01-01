@@ -24,7 +24,7 @@
 	var/carve_time = 5 SECONDS
 	var/result_type = null
 
-/obj/item/carvable/attackby(obj/item/W, mob/user)
+/obj/item/carvable/use_item(obj/item/W, mob/user)
 	..()
 	if (result_type && is_type_in_list(W, allow_tool_types))
 		user.visible_message(

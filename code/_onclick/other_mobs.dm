@@ -151,7 +151,7 @@
 	if(a_intent == I_HELP)
 		A.attack_animal(src)
 	else if (get_natural_weapon())
-		A.attackby(get_natural_weapon(), src)
+		A.use_item(get_natural_weapon(), src)
 
 // Attack hand but for simple animals
 /atom/proc/attack_animal(mob/user)

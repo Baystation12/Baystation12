@@ -21,7 +21,7 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 
 	idle_power_usage = 30
 	active_power_usage = 2500
-	
+
 	machine_name = "circuit imprinter"
 	machine_desc = "Creates circuit boards by etching raw sheets of material with sulphuric acid. Part of an R&D network."
 
@@ -96,11 +96,11 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 		return SPAN_NOTICE("\The [src] is busy. Please wait for completion of previous operation.")
 	return ..()
 
-/obj/machinery/r_n_d/circuit_imprinter/attackby(var/obj/item/O as obj, var/mob/user as mob)
+/obj/machinery/r_n_d/circuit_imprinter/use_item(var/obj/item/O as obj, var/mob/user as mob)
 	if(busy)
 		to_chat(user, "<span class='notice'>\The [src] is busy. Please wait for completion of previous operation.</span>")
 		return 1
-	if(component_attackby(O, user))
+	if(component_use_item(O, user))
 		return TRUE
 	if(panel_open)
 		to_chat(user, "<span class='notice'>You can't load \the [src] while it's opened.</span>")

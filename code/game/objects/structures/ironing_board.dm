@@ -59,7 +59,7 @@
 	if(cloth)
 		overlays += new /icon(cloth.icon, cloth.icon_state)
 
-/obj/structure/bed/roller/ironingboard/attackby(var/obj/item/I, var/mob/user)
+/obj/structure/bed/roller/ironingboard/use_item(var/obj/item/I, var/mob/user)
 	if(!density)
 		if(istype(I,/obj/item/clothing) || istype(I,/obj/item/ironingiron))
 			to_chat(user, "<span class='notice'>[src] isn't deployed!</span>")
@@ -103,7 +103,7 @@
 				holding = R
 				GLOB.destroyed_event.register(I, src, /obj/structure/bed/roller/ironingboard/proc/remove_item)
 				update_icon()
-				return	
+				return
 			to_chat(user, "<span class='notice'>There isn't anything on the ironing board.</span>")
 			return
 

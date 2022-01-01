@@ -63,11 +63,11 @@
 /turf/simulated/open/is_open()
 	return TRUE
 
-/turf/simulated/open/attackby(obj/item/C, mob/user)
+/turf/simulated/open/use_item(obj/item/C, mob/user)
 	if (istype(C, /obj/item/stack/material/rods))
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
 		if(L)
-			return L.attackby(C, user)
+			return L.use_item(C, user)
 		var/obj/item/stack/material/rods/R = C
 		if (R.use(1))
 			to_chat(user, "<span class='notice'>You lay down the support lattice.</span>")
@@ -96,7 +96,7 @@
 
 	for(var/atom/movable/M in below)
 		if(M.movable_flags & MOVABLE_FLAG_Z_INTERACT)
-			return M.attackby(C, user)
+			return M.use_item(C, user)
 
 /turf/simulated/open/attack_hand(mob/user)
 	for(var/atom/movable/M in below)

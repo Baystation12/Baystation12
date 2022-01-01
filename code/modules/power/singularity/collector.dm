@@ -88,7 +88,7 @@ var/global/list/rad_collectors = list()
 	else
 		to_chat(user, "<span class='warning'>The controls are locked!</span>")
 
-/obj/machinery/power/rad_collector/attackby(obj/item/W, mob/user)
+/obj/machinery/power/rad_collector/use_item(obj/item/W, mob/user)
 	if(istype(W, /obj/item/tank/phoron))
 		if(!src.anchored)
 			to_chat(user, "<span class='warning'>The [src] needs to be secured to the floor first.</span>")

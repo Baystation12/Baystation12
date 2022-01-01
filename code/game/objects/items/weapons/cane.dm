@@ -35,15 +35,21 @@
 	else
 		..()
 
-/obj/item/cane/concealed/attackby(var/obj/item/material/knife/folding/W, var/mob/user)
-	if(!src.concealed_blade && istype(W) && user.unEquip(W, src))
+/obj/item/cane/concealed/use_tool(obj/item/W, mob/user)
+	if (istype(W, /obj/item/material/knife/folding))
+		if (concealed_blade)
+			to_chat(user, SPAN_WARNING("\The [src] already has a blade in it."))
+			return FALSE
+		if (!user.unEquip(W, src))
+			return FALSE
 		user.visible_message("<span class='warning'>[user] has sheathed \a [W] into [src]!</span>", "You sheathe \the [W] into [src].")
 		src.concealed_blade = W
 		update_icon()
 		user.update_inv_l_hand()
 		user.update_inv_r_hand()
-	else
-		..()
+		return TRUE
+
+	return ..()
 
 /obj/item/cane/concealed/on_update_icon()
 	if(concealed_blade)

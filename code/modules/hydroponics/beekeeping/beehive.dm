@@ -45,7 +45,7 @@
 	if(!closed)
 		to_chat(user, "The lid is open.")
 
-/obj/machinery/beehive/attackby(var/obj/item/I, var/mob/user)
+/obj/machinery/beehive/use_item(var/obj/item/I, var/mob/user)
 	if(isCrowbar(I))
 		closed = !closed
 		user.visible_message("<span class='notice'>\The [user] [closed ? "closes" : "opens"] \the [src].</span>", "<span class='notice'>You [closed ? "close" : "open"] \the [src].</span>")
@@ -188,11 +188,11 @@
 		return SPAN_NOTICE("You must wait for \the [src] to finish first!")
 	return ..()
 
-/obj/machinery/honey_extractor/attackby(var/obj/item/I, var/mob/user)
+/obj/machinery/honey_extractor/use_item(var/obj/item/I, var/mob/user)
 	if(processing)
 		to_chat(user, "<span class='notice'>\The [src] is currently spinning, wait until it's finished.</span>")
 		return
-	if((. = component_attackby(I, user)))
+	if((. = component_use_item(I, user)))
 		return
 	if(istype(I, /obj/item/honey_frame))
 		var/obj/item/honey_frame/H = I

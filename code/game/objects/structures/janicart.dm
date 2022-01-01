@@ -26,7 +26,7 @@
 		to_chat(user, "[src] [icon2html(src, viewers(get_turf(src)))] contains [reagents.total_volume] unit\s of liquid!")
 
 
-/obj/structure/janitorialcart/attackby(obj/item/I, mob/user)
+/obj/structure/janitorialcart/use_item(obj/item/I, mob/user)
 	if(istype(I, /obj/item/storage/bag/trash) && !mybag)
 		if(!user.unEquip(I, src))
 			return
@@ -83,7 +83,7 @@
 		return // So we do not put them in the trash bag as we mean to fill the mop bucket
 
 	else if(mybag)
-		mybag.attackby(I, user)
+		mybag.use_item(I, user)
 
 
 /obj/structure/janitorialcart/attack_hand(mob/user)
@@ -192,7 +192,7 @@
 		to_chat(user, "\A [mybag] is hanging on the [callme].")
 
 
-/obj/structure/bed/chair/janicart/attackby(obj/item/I, mob/user)
+/obj/structure/bed/chair/janicart/use_item(obj/item/I, mob/user)
 	if(istype(I, /obj/item/mop))
 		if(reagents.total_volume > 1)
 			reagents.trans_to_obj(I, 2)

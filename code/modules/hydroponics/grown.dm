@@ -162,7 +162,7 @@
 	if(seed) seed.thrown_at(src,hit_atom)
 	..()
 
-/obj/item/reagent_containers/food/snacks/grown/attackby(var/obj/item/W, var/mob/user)
+/obj/item/reagent_containers/food/snacks/grown/use_item(var/obj/item/W, var/mob/user)
 
 	if(seed)
 		if(seed.get_trait(TRAIT_PRODUCES_POWER) && isCoil(W))
@@ -267,7 +267,7 @@
 					continue
 				if(NG.amount>=NG.max_amount)
 					continue
-				NG.attackby(G, user)
+				NG.use_item(G, user)
 			to_chat(user, "You add the newly-formed grass to the stack. It now contains [G.amount] tiles.")
 		qdel(src)
 		return

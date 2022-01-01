@@ -295,7 +295,7 @@
 
 	if(!istype(location))
 		return FALSE
-	
+
 	if(breach_cooldown)
 		return FALSE
 
@@ -610,7 +610,7 @@
 		if(AALARM_SCREEN_SENSORS)
 			var/list/selected
 			var/thresholds[0]
-			
+
 			var/breach_data = list("selected" = breach_pressure)
 			data["breach_data"] = breach_data
 
@@ -805,7 +805,7 @@
 			apply_mode()
 			return TOPIC_REFRESH
 
-/obj/machinery/alarm/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/alarm/use_tool(obj/item/W, mob/user)
 	switch(buildstage)
 		if(2)
 			if(isScrewdriver(W))  // Opening that Air Alarm up.
@@ -813,7 +813,7 @@
 				wiresexposed = !wiresexposed
 				to_chat(user, "The wires have been [wiresexposed ? "exposed" : "unexposed"]")
 				update_icon()
-				return
+				return TRUE
 
 			if (wiresexposed && isWirecutter(W))
 				user.visible_message("<span class='warning'>[user] has cut the wires inside \the [src]!</span>", "You have cut the wires inside \the [src].")
@@ -821,19 +821,19 @@
 				new/obj/item/stack/cable_coil(get_turf(src), 5)
 				buildstage = 1
 				update_icon()
-				return
+				return TRUE
 
 			if (istype(W, /obj/item/card/id) || istype(W, /obj/item/modular_computer))// trying to unlock the interface with an ID card
 				if(stat & (NOPOWER|BROKEN))
 					to_chat(user, "It does nothing")
-					return
+					return TRUE
 				else
 					if(allowed(usr) && !wires.IsIndexCut(AALARM_WIRE_IDSCAN))
 						locked = !locked
 						to_chat(user, "<span class='notice'>You [ locked ? "lock" : "unlock"] the Air Alarm interface.</span>")
 					else
 						to_chat(user, "<span class='warning'>Access denied.</span>")
-			return
+			return TRUE
 
 		if(1)
 			if(isCoil(W))
@@ -842,10 +842,10 @@
 					to_chat(user, "<span class='notice'>You wire \the [src].</span>")
 					buildstage = 2
 					update_icon()
-					return
+					return TRUE
 				else
 					to_chat(user, "<span class='warning'>You need 5 pieces of cable to do wire \the [src].</span>")
-					return
+					return TRUE
 
 			else if(isCrowbar(W))
 				to_chat(user, "You start prying out the circuit.")
@@ -856,20 +856,21 @@
 					circuit.dropInto(user.loc)
 					buildstage = 0
 					update_icon()
-				return
+				return TRUE
 		if(0)
 			if(istype(W, /obj/item/airalarm_electronics))
 				to_chat(user, "You insert the circuit!")
 				qdel(W)
 				buildstage = 1
 				update_icon()
-				return
+				return TRUE
 
 			else if(isWrench(W))
 				to_chat(user, "You remove the fire alarm assembly from the wall!")
 				new /obj/item/frame/air_alarm(get_turf(user))
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 				qdel(src)
+				return TRUE
 
 	return ..()
 
@@ -985,11 +986,11 @@ FIRE ALARM
 		alarm(rand(30/severity, 60/severity))
 	..()
 
-/obj/machinery/firealarm/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/firealarm/use_tool(obj/item/W, mob/user)
 	if(isScrewdriver(W) && buildstage == 2)
 		wiresexposed = !wiresexposed
 		update_icon()
-		return
+		return TRUE
 
 	if(wiresexposed)
 		switch(buildstage)
@@ -1006,6 +1007,8 @@ FIRE ALARM
 					playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
 					buildstage = 1
 					update_icon()
+				return TRUE
+
 			if(1)
 				if(istype(W, /obj/item/stack/cable_coil))
 					var/obj/item/stack/cable_coil/C = W
@@ -1013,10 +1016,11 @@ FIRE ALARM
 						to_chat(user, "<span class='notice'>You wire \the [src].</span>")
 						buildstage = 2
 						update_icon()
-						return
+						return TRUE
 					else
 						to_chat(user, "<span class='warning'>You need 5 pieces of cable to wire \the [src].</span>")
-						return
+						return TRUE
+
 				else if(isCrowbar(W))
 					to_chat(user, "You start prying out the circuit.")
 					playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
@@ -1026,22 +1030,28 @@ FIRE ALARM
 						circuit.dropInto(user.loc)
 						buildstage = 0
 						update_icon()
+					return TRUE
+
 			if(0)
 				if(istype(W, /obj/item/firealarm_electronics))
 					to_chat(user, "You insert the circuit!")
 					qdel(W)
 					buildstage = 1
 					update_icon()
+					return TRUE
 
 				else if(isWrench(W))
 					to_chat(user, "You remove the fire alarm assembly from the wall!")
 					new /obj/item/frame/fire_alarm(get_turf(user))
 					playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 					qdel(src)
-		return
+					return TRUE
 
-	src.alarm()
-	return
+	return ..()
+
+/obj/machinery/firealarm/use_weapon(obj/item/W, mob/user, click_params)
+	alarm()
+	return ..()
 
 /obj/machinery/firealarm/Process()//Note: this processing was mostly phased out due to other code, and only runs when needed
 	if(stat & (NOPOWER|BROKEN))

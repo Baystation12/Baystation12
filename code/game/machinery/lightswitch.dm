@@ -66,10 +66,13 @@
 		set_state(!on)
 		return TRUE
 
-/obj/machinery/light_switch/attackby(obj/item/tool as obj, mob/user as mob)
+/obj/machinery/light_switch/use_tool(obj/item/tool, mob/user)
 	if(istype(tool, /obj/item/screwdriver))
 		new /obj/item/frame/light_switch(user.loc, 1)
 		qdel(src)
+		return TRUE
+
+	return ..()
 
 
 /obj/machinery/light_switch/powered()

@@ -24,7 +24,7 @@
 	src.attack_hand(user)
 	return
 
-/obj/structure/closet/walllocker/emerglocker/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/closet/walllocker/emerglocker/use_item(obj/item/W as obj, mob/user as mob)
 	return
 
 /obj/structure/closet/walllocker/emerglocker/attack_hand(mob/user as mob)

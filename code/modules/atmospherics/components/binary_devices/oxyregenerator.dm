@@ -12,7 +12,7 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
-	
+
 	machine_name = "oxygen regenerator"
 	machine_desc = "Catalyzes gaseous CO2 to convert it into gaseous oxygen. The excess carbon is condensed and ejected as graphite sheets."
 
@@ -49,8 +49,8 @@
 	. = ..()
 	to_chat(user,"Its outlet port is to the [dir2text(dir)]")
 
-/obj/machinery/atmospherics/binary/oxyregenerator/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if(component_attackby(O, user))
+/obj/machinery/atmospherics/binary/oxyregenerator/use_item(var/obj/item/O as obj, var/mob/user as mob)
+	if(component_use_item(O, user))
 		return TRUE
 	if(isWrench(O))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)

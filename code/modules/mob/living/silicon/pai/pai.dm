@@ -257,7 +257,7 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 		to_chat(src, SPAN_NOTICE("You are now [resting ? "resting" : "getting up"]"))
 
 //Overriding this will stop a number of headaches down the track.
-/mob/living/silicon/pai/attackby(obj/item/W, mob/user)
+/mob/living/silicon/pai/use_item(obj/item/W, mob/user)
 	var/obj/item/card/id/card = W.GetIdCard()
 	if(card && user.a_intent == I_HELP)
 		var/list/new_access = card.GetAccess()

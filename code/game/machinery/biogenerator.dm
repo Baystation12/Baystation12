@@ -76,15 +76,19 @@
 		return SPAN_NOTICE("You must turn \the [src] off first.")
 	return ..()
 
-/obj/machinery/biogenerator/attackby(var/obj/item/O, var/mob/user)
-	if((. = component_attackby(O, user)))
+/obj/machinery/biogenerator/use_item(obj/item/O, mob/user)
+	if((. = component_use_item(O, user)))
 		return
 	if(processing)
 		to_chat(user, "<span class='notice'>\The [src] is currently processing.</span>")
+		return FALSE
+	return ..()
+
+/obj/machinery/biogenerator/use_tool(obj/item/O, mob/user, click_params)
 	if(istype(O, /obj/item/reagent_containers/glass))
 		if(beaker)
 			to_chat(user, "<span class='notice'>]The [src] is already loaded.</span>")
-			return TRUE
+			return FALSE
 		else if(user.unEquip(O, src))
 			beaker = O
 			state = BG_READY
@@ -93,6 +97,7 @@
 
 	if(ingredients >= capacity)
 		to_chat(user, "<span class='notice'>\The [src] is already full! Activate it.</span>")
+		return FALSE
 	else if(istype(O, /obj/item/storage/plants))
 		var/obj/item/storage/plants/P = O
 		var/hadPlants = 0
@@ -108,14 +113,20 @@
 			to_chat(user, "<span class='notice'>\The [P] has no produce inside.</span>")
 		else if(ingredients < capacity)
 			to_chat(user, "<span class='notice'>You empty \the [P] into \the [src].</span>")
+		update_icon()
+		return TRUE
 
 
 	else if(!istype(O, /obj/item/reagent_containers/food/snacks/grown))
 		to_chat(user, "<span class='notice'>You cannot put this in \the [src].</span>")
+		return FALSE
 	else if(user.unEquip(O, src))
 		ingredients++
+		update_icon()
 		to_chat(user, "<span class='notice'>You put \the [O] in \the [src]</span>")
-	update_icon()
+		return TRUE
+
+	return ..()
 
 /**
  *  Display the NanoUI window for the vending machine.

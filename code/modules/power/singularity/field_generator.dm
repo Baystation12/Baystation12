@@ -96,7 +96,7 @@ field_generator power level display
 		to_chat(user, "The [src] needs to be firmly secured to the floor first.")
 		return TRUE
 
-/obj/machinery/field_generator/attackby(obj/item/W, mob/user)
+/obj/machinery/field_generator/use_item(obj/item/W, mob/user)
 	if(active)
 		to_chat(user, "The [src] needs to be off.")
 		return

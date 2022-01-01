@@ -64,7 +64,7 @@
 		icon_state = "soulstone"//TODO: cracked sprite
 		SetName("cracked soulstone")
 
-/obj/item/device/soulstone/attackby(var/obj/item/I, var/mob/user)
+/obj/item/device/soulstone/use_item(var/obj/item/I, var/mob/user)
 	..()
 	if (owner_flag != SOULSTONE_OWNER_PURE && istype(I, /obj/item/nullrod))
 		to_chat(user, "<span class='notice'>You cleanse \the [src] of taint, purging its shackles to its creator..</span>")
@@ -130,7 +130,7 @@
 	icon_state = "construct-cult"
 	desc = "This eerie contraption looks like it would come alive if supplied with a missing ingredient."
 
-/obj/structure/constructshell/attackby(var/obj/item/I, var/mob/user)
+/obj/structure/constructshell/use_item(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/device/soulstone))
 		var/obj/item/device/soulstone/S = I
 		if(!S.shade.client)

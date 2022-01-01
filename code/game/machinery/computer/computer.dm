@@ -60,17 +60,14 @@
 	take_damage(Proj.get_structure_damage())
 	..()
 
-/obj/machinery/computer/attackby(obj/item/I, mob/user)
-	if (isScrewdriver(I) || isWrench(I) || isCrowbar(I))
-		return ..() // handled by construction
-	if (user.a_intent != I_HURT)
-		return ..()
-
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	user.do_attack_animation(src)
-	playsound(src, 'sound/weapons/smash.ogg', 25, 1)
-	take_damage(I.force)
-	..()
+/obj/machinery/computer/use_weapon(obj/item/I, mob/user)
+	if (!(I.item_flags & ITEM_FLAG_NO_BLUDGEON))
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		user.do_attack_animation(src)
+		playsound(src, 'sound/weapons/smash.ogg', 25, 1)
+		take_damage(I.force)
+		return TRUE
+	return ..()
 
 /obj/machinery/computer/proc/take_damage(var/damage)
 	if (health <= 0)

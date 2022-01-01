@@ -78,15 +78,18 @@
 	if(!bcell)
 		to_chat(user, "<span class='warning'>The baton does not have a power source installed.</span>")
 
-/obj/item/melee/baton/attackby(obj/item/W, mob/user)
+/obj/item/melee/baton/use_tool(obj/item/W, mob/user)
 	if(istype(W, /obj/item/cell/device))
 		if(!bcell && user.unEquip(W))
 			W.forceMove(src)
 			bcell = W
 			to_chat(user, "<span class='notice'>You install a cell into the [src].</span>")
 			update_icon()
+			return TRUE
 		else
 			to_chat(user, "<span class='notice'>[src] already has a cell.</span>")
+			return FALSE
+
 	else if(isScrewdriver(W))
 		if(bcell)
 			bcell.update_icon()
@@ -95,8 +98,10 @@
 			to_chat(user, "<span class='notice'>You remove the cell from the [src].</span>")
 			status = 0
 			update_icon()
-	else
-		..()
+			return TRUE
+		return FALSE
+
+	return ..()
 
 /obj/item/melee/baton/use_on_self(mob/user)
 	set_status(!status, user)
@@ -212,8 +217,8 @@
 		add_fingerprint(user)
 	return 0
 
-/obj/item/melee/baton/robot/attackby(obj/item/W, mob/user)
-	return
+/obj/item/melee/baton/robot/use_item(obj/item/W, mob/user)
+	return FALSE
 
 /obj/item/melee/baton/robot/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
 	update_cell(isrobot(user) ? user : null) // update the status before we apply the effects

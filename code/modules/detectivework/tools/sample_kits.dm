@@ -52,9 +52,9 @@
 
 /obj/item/sample/use_on_atom(atom/A, mob/user, var/click_params)
 	// Fingerprints will be handled in after_attack() to not mess up the samples taken
-	return A.attackby(src, user, click_params)
+	return A.use_item(src, user, click_params)
 
-/obj/item/sample/attackby(var/obj/O, var/mob/user)
+/obj/item/sample/use_item(var/obj/O, var/mob/user)
 	if(O.type == src.type)
 		if(user.unEquip(O) && merge_evidence(O, user))
 			qdel(O)

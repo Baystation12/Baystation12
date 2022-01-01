@@ -38,7 +38,7 @@
 		return TRUE
 	return ..()
 
-/obj/item/gun/projectile/shotgun/pump/exploration/attackby(obj/item/I, mob/user)
+/obj/item/gun/projectile/shotgun/pump/exploration/use_item(obj/item/I, mob/user)
 	if(!reinforced && istype(I, /obj/item/pipe) && user.unEquip(I, src))
 		reinforced = I
 		to_chat(user, SPAN_WARNING("You reinforce \the [src] with \the [reinforced]."))

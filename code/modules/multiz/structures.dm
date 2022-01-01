@@ -45,7 +45,7 @@
 		target_up = null
 	return ..()
 
-/obj/structure/ladder/attackby(obj/item/I, mob/user)
+/obj/structure/ladder/use_item(obj/item/I, mob/user)
 	climb(user, I)
 
 /turf/hitby(atom/movable/AM)
@@ -182,7 +182,7 @@
 				if(isnull(I))
 					M.attack_hand(user)
 				else
-					M.attackby(I, user)
+					M.use_item(I, user)
 
 			return FALSE
 

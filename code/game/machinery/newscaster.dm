@@ -728,11 +728,13 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 
 
 
-/obj/machinery/newscaster/attackby(obj/item/I, mob/user)
-	if (user.a_intent == I_HURT)
+/obj/machinery/newscaster/use_weapon(obj/item/I, mob/user)
+	if (!(I.item_flags & ITEM_FLAG_NO_BLUDGEON))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		user.do_attack_animation(src)
 		if (I.force < 15)
 			visible_message(SPAN_WARNING("\The [user] uselessly bops \the [src] with \an [I]."))
+			return FALSE
 		else if (stat & BROKEN)
 			visible_message(SPAN_WARNING("\The [user] further abuses the shattered [name]."))
 			playsound(src, 'sound/effects/hit_on_shattered_glass.ogg', 100, 1)
@@ -745,8 +747,8 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 			set_broken(TRUE)
 			update_icon()
 		return TRUE
-	else
-		. = ..()
+
+	return ..()
 
 /datum/news_photo
 	var/is_synth = 0
@@ -907,21 +909,23 @@ obj/item/newspaper/Topic(href, href_list)
 			src.use_on_self(src.loc)
 
 
-obj/item/newspaper/attackby(obj/item/W as obj, mob/user as mob)
+obj/item/newspaper/use_tool(obj/item/W, mob/user)
 	if(istype(W, /obj/item/pen))
 		if(src.scribble_page == src.curr_page)
 			to_chat(user, "<FONT COLOR='blue'>There's already a scribble in this page... You wouldn't want to make things too cluttered, would you?</FONT>")
-		else
-			var/s = sanitize(input(user, "Write something", "Newspaper", ""))
-			s = sanitize(s)
-			if (!s)
-				return
-			if (!in_range(src, usr) && src.loc != usr)
-				return
-			src.scribble_page = src.curr_page
-			src.scribble = s
-			src.use_on_self(user)
-		return
+			return FALSE
+		var/s = sanitize(input(user, "Write something", "Newspaper", ""))
+		s = sanitize(s)
+		if (!s)
+			return
+		if (!in_range(src, usr) && src.loc != usr)
+			return
+		src.scribble_page = src.curr_page
+		src.scribble = s
+		src.use_on_self(user)
+		return TRUE
+
+	return ..()
 
 
 ////////////////////////////////////helper procs

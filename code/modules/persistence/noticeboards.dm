@@ -85,7 +85,7 @@
 /obj/structure/noticeboard/on_update_icon()
 	icon_state = "[base_icon_state][LAZYLEN(notices)]"
 
-/obj/structure/noticeboard/attackby(var/obj/item/thing, var/mob/user)
+/obj/structure/noticeboard/use_item(var/obj/item/thing, var/mob/user)
 	if(isScrewdriver(thing))
 		var/choice = input("Which direction do you wish to place the noticeboard?", "Noticeboard Offset") as null|anything in list("North", "South", "East", "West")
 		if(choice && Adjacent(user) && thing.loc == user && !user.incapacitated())
@@ -173,7 +173,7 @@
 			pen = user.l_hand
 		if(istype(pen))
 			add_fingerprint(user)
-			P.attackby(pen, user)
+			P.use_item(pen, user)
 		else
 			to_chat(user, SPAN_WARNING("You need a pen to write on \the [P]."))
 		. = TOPIC_REFRESH

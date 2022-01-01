@@ -62,7 +62,7 @@ var/solar_gen_rate = 1500
 
 
 
-/obj/machinery/power/solar/attackby(obj/item/W, mob/user)
+/obj/machinery/power/solar/use_item(obj/item/W, mob/user)
 
 	if(isCrowbar(W))
 		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
@@ -227,7 +227,7 @@ var/solar_gen_rate = 1500
 		glass_type = null
 
 
-/obj/item/solar_assembly/attackby(var/obj/item/W, var/mob/user)
+/obj/item/solar_assembly/use_item(var/obj/item/W, var/mob/user)
 
 	if(!anchored && isturf(loc))
 		if(isWrench(W))

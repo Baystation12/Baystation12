@@ -9,7 +9,7 @@
 	var/armed = 0
 	var/damaged = 0
 
-/obj/machinery/self_destruct/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/self_destruct/use_tool(obj/item/W, mob/user)
 	if(isWelder(W))
 		if(damaged)
 			user.visible_message("[user] begins to repair [src].", "You begin repairing [src].")
@@ -20,22 +20,27 @@
 					user.visible_message("[user] repairs [src].", "You repair [src].")
 				else
 					to_chat(user, "<span class='warning'>There is not enough fuel to repair [src].</span>")
-				return
+					return FALSE
+			return TRUE
+
 	if(istype(W, /obj/item/nuclear_cylinder))
 		if(damaged)
 			to_chat(user, "<span class='warning'>[src] is damaged, you cannot place the cylinder.</span>")
-			return
+			return FALSE
 		if(cylinder)
 			to_chat(user, "There is already a cylinder here.")
-			return
+			return FALSE
 		user.visible_message("[user] begins to carefully place [W] onto the Inserter.", "You begin to carefully place [W] onto the Inserter.")
 		if(do_after(user, 80, src) && user.unEquip(W, src))
 			cylinder = W
 			set_density(TRUE)
 			user.visible_message("[user] places [W] onto the Inserter.", "You place [W] onto the Inserter.")
 			update_icon()
-			return
-	..()
+		else
+			return FALSE
+		return TRUE
+
+	return ..()
 
 /obj/machinery/self_destruct/physical_attack_hand(mob/user)
 	if(cylinder)

@@ -50,7 +50,7 @@
 	overlays += overlay_image(icon, "clipboard_over", flags=RESET_COLOR)
 	return
 
-/obj/item/material/clipboard/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/material/clipboard/use_item(obj/item/W as obj, mob/user as mob)
 
 	if(istype(W, /obj/item/paper) || istype(W, /obj/item/photo))
 		if(!user.unEquip(W, src))
@@ -61,7 +61,7 @@
 		update_icon()
 
 	else if(istype(toppaper) && istype(W, /obj/item/pen))
-		toppaper.attackby(W, usr)
+		toppaper.use_item(W, usr)
 		update_icon()
 
 	return
@@ -120,7 +120,7 @@
 
 				if(istype(I, /obj/item/pen))
 
-					P.attackby(I, usr)
+					P.use_item(I, usr)
 
 		else if(href_list["remove"])
 			var/obj/item/P = locate(href_list["remove"])

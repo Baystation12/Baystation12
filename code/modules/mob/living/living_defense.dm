@@ -63,7 +63,7 @@
 		var/result = 0
 		switch(type)
 			if(AURA_TYPE_WEAPON)
-				result = aura.attackby(arglist(newargs))
+				result = aura.use_item(arglist(newargs))
 			if(AURA_TYPE_BULLET)
 				result = aura.bullet_act(arglist(newargs))
 			if(AURA_TYPE_THROWN)

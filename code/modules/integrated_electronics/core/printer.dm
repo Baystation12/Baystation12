@@ -61,7 +61,7 @@
 	qdel(O)
 	return TRUE
 
-/obj/item/device/integrated_circuit_printer/attackby(obj/item/O, mob/user)
+/obj/item/device/integrated_circuit_printer/use_item(obj/item/O, mob/user)
 	if(istype(O, /obj/item/stack/material))
 		var/obj/item/stack/material/M = O
 		var/amt = M.amount

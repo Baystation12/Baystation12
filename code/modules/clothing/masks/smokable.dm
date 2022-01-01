@@ -128,7 +128,7 @@
 	set_light(0)
 	update_icon()
 
-/obj/item/clothing/mask/smokable/attackby(var/obj/item/W, var/mob/user)
+/obj/item/clothing/mask/smokable/use_item(var/obj/item/W, var/mob/user)
 	..()
 	if(isflamesource(W) || is_hot(W))
 		var/text = matchmes
@@ -304,7 +304,7 @@
 	icon_state = "woodbutt"
 	matter = list(MATERIAL_WOOD = 1)
 
-/obj/item/clothing/mask/smokable/cigarette/attackby(var/obj/item/W, var/mob/user)
+/obj/item/clothing/mask/smokable/cigarette/use_item(var/obj/item/W, var/mob/user)
 	..()
 
 	if(istype(W, /obj/item/melee/energy/sword))
@@ -418,7 +418,7 @@
 	desc = "A manky old cigar butt."
 	icon_state = "cigarbutt"
 
-/obj/item/clothing/mask/smokable/cigarette/cigar/attackby(var/obj/item/W, var/mob/user)
+/obj/item/clothing/mask/smokable/cigarette/cigar/use_item(var/obj/item/W, var/mob/user)
 	..()
 
 	user.update_inv_wear_mask(0)
@@ -509,7 +509,7 @@
 		reagents.clear_reagents()
 		SetName("empty [initial(name)]")
 
-/obj/item/clothing/mask/smokable/pipe/attackby(var/obj/item/W, var/mob/user)
+/obj/item/clothing/mask/smokable/pipe/use_item(var/obj/item/W, var/mob/user)
 	if(istype(W, /obj/item/melee/energy/sword))
 		return
 

@@ -9,7 +9,7 @@
 	visible_message("<span class='danger'>\The [user] has [attack_message] \the [src]!</span>")
 	shed_atom(forcefully = TRUE)
 
-/obj/structure/diona_gestalt/attackby(var/obj/item/thing, var/mob/user)
+/obj/structure/diona_gestalt/use_item(var/obj/item/thing, var/mob/user)
 	. = ..()
 	if(thing.force) shed_atom(forcefully = TRUE)
 

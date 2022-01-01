@@ -31,7 +31,7 @@
 		/datum/reagent/oliveoil = /obj/item/reagent_containers/food/condiment/small/oliveoil
 		)
 
-/obj/item/reagent_containers/food/condiment/attackby(var/obj/item/W as obj, var/mob/user as mob)
+/obj/item/reagent_containers/food/condiment/use_item(var/obj/item/W as obj, var/mob/user as mob)
 	if(istype(W, /obj/item/pen) || istype(W, /obj/item/device/flashlight/pen))
 		var/tmp_label = sanitizeSafe(input(user, "Enter a label for [name]", "Label", label_text), MAX_NAME_LEN)
 		var/datum/extension/labels/L = get_or_create_extension(src, /datum/extension/labels)

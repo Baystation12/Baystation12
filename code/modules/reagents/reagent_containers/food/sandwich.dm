@@ -1,8 +1,8 @@
-/obj/item/reagent_containers/food/snacks/slice/bread/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/reagent_containers/food/snacks/slice/bread/use_item(obj/item/W as obj, mob/user as mob)
 
 	if(istype(W,/obj/item/material/shard) || istype(W,/obj/item/reagent_containers/food/snacks))
 		var/obj/item/reagent_containers/food/snacks/csandwich/S = new(get_turf(src))
-		S.attackby(W,user)
+		S.use_item(W,user)
 		qdel(src)
 	..()
 
@@ -15,7 +15,7 @@
 
 	var/list/ingredients = list()
 
-/obj/item/reagent_containers/food/snacks/csandwich/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/reagent_containers/food/snacks/csandwich/use_item(obj/item/W as obj, mob/user as mob)
 
 	var/sandwich_limit = 4
 	for(var/obj/item/O in ingredients)

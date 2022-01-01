@@ -86,11 +86,6 @@
 			A.reagents.del_reagent(/datum/reagent/water)
 			A.reagents.add_reagent(/datum/reagent/water/holywater,water2holy)
 
-/obj/item/storage/bible/attackby(obj/item/W as obj, mob/user as mob)
-	if (src.use_sound)
-		playsound(src.loc, src.use_sound, 50, 1, -5)
-	return ..()
-
 /obj/item/storage/bible/use_on_self(mob/living/carbon/human/user)
 	if(!ishuman(user))
 		return

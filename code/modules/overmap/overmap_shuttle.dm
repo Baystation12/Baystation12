@@ -143,7 +143,7 @@
 	else
 		icon_state = icon_closed
 
-/obj/structure/fuel_port/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/fuel_port/use_item(obj/item/W as obj, mob/user as mob)
 	if(isCrowbar(W))
 		if(opened)
 			to_chat(user, "<spawn class='notice'>You tightly shut \the [src] door.")

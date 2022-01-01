@@ -28,7 +28,7 @@
 			message += SPAN_WARNING(" The locking clamps have other ideas.")
 		to_chat(user, message)
 
-/obj/machinery/barrier/attackby(obj/item/I, mob/user)
+/obj/machinery/barrier/use_tool(obj/item/I, mob/user)
 	if (isid(I))
 		var/success = allowed(user)
 		var/message = " to no effect"
@@ -48,27 +48,7 @@
 			anchored = emagged ? FALSE : locked
 			update_icon()
 		return TRUE
-	if (user.a_intent == I_HURT)
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		if (I.force < 7 || (I.damtype != BRUTE && I.damtype != BURN))
-			user.visible_message(
-				SPAN_WARNING("\The [user] bonks \an [I] against \the [src]."),
-				SPAN_WARNING("You whack \the [I] against \the [src]. Nothing happens."),
-				SPAN_WARNING("You hear a soft impact!")
-			)
-			playsound(src, 'sound/weapons/tablehit1.ogg', 50, TRUE)
-			return
-		user.visible_message(
-			SPAN_DANGER("\The [user] slams \an [I] against \the [src]!"),
-			SPAN_DANGER("You slam \the [I] against \the [src]!"),
-			SPAN_WARNING("You hear a violent impact!")
-		)
-		playsound(src, 'sound/weapons/smash.ogg', 50, TRUE)
-		if (I.damtype == BRUTE)
-			modify_health(-I.force * 0.75)
-		else if (I.damtype == BURN)
-			modify_health(-I.force * 0.5)
-		return TRUE
+
 	if (isWrench(I))
 		if (health >= initial(health))
 			to_chat(user, SPAN_WARNING("The [src]'s plating is not damaged."))
@@ -82,6 +62,7 @@
 			to_chat(user, SPAN_NOTICE("There - Good as new."))
 			modify_health(initial(health) - health)
 		return TRUE
+
 	if (isWelder(I))
 		var/obj/item/weldingtool/W = I
 		if (!W.welding)
@@ -107,8 +88,32 @@
 				anchored = TRUE
 			update_icon()
 		return TRUE
-	to_chat(user, SPAN_WARNING("You can't think of a way to use \the [I] on \the [src]."))
-	return TRUE
+
+	return ..()
+
+/obj/machinery/barrier/use_weapon(obj/item/I, mob/user, click_params)
+	if (!(I.item_flags & ITEM_FLAG_NO_BLUDGEON))
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		if (I.force < 7 || (I.damtype != BRUTE && I.damtype != BURN))
+			user.visible_message(
+				SPAN_WARNING("\The [user] bonks \an [I] against \the [src]."),
+				SPAN_WARNING("You whack \the [I] against \the [src]. Nothing happens."),
+				SPAN_WARNING("You hear a soft impact!")
+			)
+			playsound(src, 'sound/weapons/tablehit1.ogg', 50, TRUE)
+			return FALSE
+		user.visible_message(
+			SPAN_DANGER("\The [user] slams \an [I] against \the [src]!"),
+			SPAN_DANGER("You slam \the [I] against \the [src]!"),
+			SPAN_WARNING("You hear a violent impact!")
+		)
+		playsound(src, 'sound/weapons/smash.ogg', 50, TRUE)
+		if (I.damtype == BRUTE)
+			modify_health(-I.force * 0.75)
+		else if (I.damtype == BURN)
+			modify_health(-I.force * 0.5)
+		return TRUE
+	return ..()
 
 /obj/machinery/barrier/emag_act(remaining_charges, mob/user, emag_source)
 	if (user)

@@ -67,7 +67,7 @@
 	if(!target.Adjacent(holder.wearer) || !ismob(target))
 		return 0
 
-	var/resolved = target.attackby(device,holder.wearer)
+	var/resolved = target.use_item(device,holder.wearer)
 	if(resolved)
 		holder.cell.use(use_power_cost * CELLRATE)
 	return resolved
@@ -291,7 +291,7 @@
 		gun.Fire(target,holder.wearer)
 		return 1
 	else
-		var/resolved = target.attackby(gun,holder.wearer)
+		var/resolved = target.use_item(gun,holder.wearer)
 		if(!resolved && gun && target)
 			gun.afterattack(target,holder.wearer,1)
 			return 1

@@ -125,7 +125,7 @@
 	desc = "[initial(desc)] [design.desc]"
 	icon_state = design.icon_state
 
-/obj/structure/sign/poster/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/sign/poster/use_tool(obj/item/W, mob/user)
 	if(isWirecutter(W))
 		playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
 		if(ruined)
@@ -134,7 +134,9 @@
 		else
 			to_chat(user, "<span class='notice'>You carefully remove the poster from the wall.</span>")
 			roll_and_drop(user.loc)
-		return
+		return TRUE
+
+	return ..()
 
 
 /obj/structure/sign/poster/attack_hand(mob/user as mob)

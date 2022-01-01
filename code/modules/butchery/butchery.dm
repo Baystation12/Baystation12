@@ -197,7 +197,7 @@
 		return TRUE
 	return FALSE
 
-/obj/structure/kitchenspike/attackby(var/obj/item/thing, var/mob/user)
+/obj/structure/kitchenspike/use_item(var/obj/item/thing, var/mob/user)
 	if(!thing.sharp)
 		return ..()
 	if(!occupant)

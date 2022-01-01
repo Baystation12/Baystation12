@@ -141,7 +141,7 @@
 	add_fingerprint(user)
 	return
 
-/obj/structure/inflatable/attackby(obj/item/W, mob/user)
+/obj/structure/inflatable/use_item(obj/item/W, mob/user)
 	if(!istype(W) || istype(W, /obj/item/inflatable_dispenser)) return
 
 	if (user.a_intent == I_HURT)

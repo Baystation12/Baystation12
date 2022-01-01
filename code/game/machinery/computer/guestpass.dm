@@ -67,16 +67,18 @@
 	..()
 	uid = "[random_id("guestpass_serial_number",100,999)]-G[rand(10,99)]"
 
-/obj/machinery/computer/guestpass/attackby(obj/O, mob/user)
+/obj/machinery/computer/guestpass/use_tool(obj/O, mob/user)
 	if(istype(O, /obj/item/card/id))
 		if(!giver && user.unEquip(O))
 			O.forceMove(src)
 			giver = O
 			updateUsrDialog()
-		else if(giver)
-			to_chat(user, SPAN_WARNING("There is already ID card inside."))
-		return
-	..()
+		else
+			if(giver)
+				to_chat(user, SPAN_WARNING("There is already ID card inside."))
+			return FALSE
+		return TRUE
+	return ..()
 
 /obj/machinery/computer/guestpass/interface_interact(var/mob/user)
 	ui_interact(user)
@@ -103,7 +105,7 @@
 				"selected" = (A in accesses))))
 
 		data["giver_access"] = giver_access
-		
+
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "guestpass.tmpl", "Guest Pass Terminal", 600, 800)

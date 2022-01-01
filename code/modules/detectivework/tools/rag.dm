@@ -45,7 +45,7 @@
 	else
 		remove_contents(user)
 
-/obj/item/reagent_containers/glass/rag/attackby(obj/item/W, mob/user)
+/obj/item/reagent_containers/glass/rag/use_item(obj/item/W, mob/user)
 	if(!on_fire && isflamesource(W))
 		ignite()
 		if(on_fire)

@@ -133,7 +133,7 @@
 		return
 	return 1
 
-/obj/machinery/oxygen_pump/attackby(obj/item/W as obj, mob/user as mob)
+/obj/machinery/oxygen_pump/use_tool(obj/item/W, mob/user)
 	if(isScrewdriver(W))
 		stat ^= MAINT
 		user.visible_message("<span class='notice'>\The [user] [stat & MAINT ? "opens" : "closes"] \the [src].</span>", "<span class='notice'>You [stat & MAINT ? "open" : "close"] \the [src].</span>")
@@ -142,17 +142,24 @@
 		if(!stat)
 			icon_state = icon_state_closed
 		//TO-DO: Open icon
+		return TRUE
+
 	if(istype(W, /obj/item/tank) && (stat & MAINT))
 		if(tank)
 			to_chat(user, "<span class='warning'>\The [src] already has a tank installed!</span>")
-		else
-			if(!user.unEquip(W, src))
-				return
-			tank = W
-			user.visible_message("<span class='notice'>\The [user] installs \the [tank] into \the [src].</span>", "<span class='notice'>You install \the [tank] into \the [src].</span>")
-			src.add_fingerprint(user)
+			return FALSE
+		if(!user.unEquip(W, src))
+			return FALSE
+		tank = W
+		user.visible_message("<span class='notice'>\The [user] installs \the [tank] into \the [src].</span>", "<span class='notice'>You install \the [tank] into \the [src].</span>")
+		src.add_fingerprint(user)
+		return TRUE
+
 	if(istype(W, /obj/item/tank) && !stat)
 		to_chat(user, "<span class='warning'>Please open the maintenance hatch first.</span>")
+		return FALSE
+
+	return ..()
 
 /obj/machinery/oxygen_pump/examine(mob/user)
 	. = ..()

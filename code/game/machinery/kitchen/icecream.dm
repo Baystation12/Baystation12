@@ -99,7 +99,7 @@
 	popup.set_content(dat)
 	popup.open()
 
-/obj/machinery/icecream_vat/attackby(var/obj/item/O as obj, var/mob/user as mob)
+/obj/machinery/icecream_vat/use_tool(obj/item/O, mob/user)
 	if(istype(O, /obj/item/reagent_containers/food/snacks/icecream))
 		var/obj/item/reagent_containers/food/snacks/icecream/I = O
 		if(!I.ice_creamed)
@@ -113,13 +113,16 @@
 					I.reagents.add_reagent(/datum/reagent/sugar, 10 - I.reagents.total_volume)
 			else
 				to_chat(user, "<span class='warning'>There is not enough icecream left!</span>")
+				return FALSE
 		else
 			to_chat(user, "<span class='notice'>[O] already has icecream in it.</span>")
-		return 1
+			return FALSE
+		return TRUE
+
 	else if(O.is_open_container())
-		return
-	else
-		..()
+		return FALSE
+
+	return ..()
 
 /obj/machinery/icecream_vat/proc/make(var/mob/user, var/make_type, var/amount)
 	for(var/R in get_ingredient_list(make_type))

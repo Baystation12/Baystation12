@@ -92,15 +92,16 @@
 		H.update_inv_l_hand()
 
 /* Assembly by a roboticist */
-/obj/item/robot_parts/head/attackby(var/obj/item/device/assembly/S, mob/user as mob)
+/obj/item/robot_parts/head/use_tool(obj/item/device/assembly/S, mob/user)
 	if ((!istype(S, /obj/item/device/assembly/infra)))
-		..()
-		return
+		return ..()
+
 	var/obj/item/TVAssembly/A = new(user)
 	qdel(S)
 	user.put_in_hands(A)
 	to_chat(user, "<span class='notice'>You add the infrared sensor to the robot head.</span>")
 	qdel(src)
+	return TRUE
 
 /* Using camcorder icon as I can't sprite.
 Using robohead because of restricting to roboticist */
@@ -113,7 +114,7 @@ Using robohead because of restricting to roboticist */
 	var/buildstep = 0
 	w_class = ITEM_SIZE_LARGE
 
-/obj/item/TVAssembly/attackby(var/obj/item/W, var/mob/user)
+/obj/item/TVAssembly/use_tool(obj/item/W, mob/user)
 	switch(buildstep)
 		if(0)
 			if(istype(W, /obj/item/robot_parts/robot_component/camera))
@@ -121,30 +122,34 @@ Using robohead because of restricting to roboticist */
 				qdel(W)
 				desc = "This TV camera assembly has a camera module."
 				buildstep++
+				return TRUE
+
 		if(1)
 			if(istype(W, /obj/item/device/taperecorder))
 				qdel(W)
 				buildstep++
 				to_chat(user, "<span class='notice'>You add the tape recorder to [src]</span>")
 				desc = "This TV camera assembly has a camera and audio module."
-				return
+				return TRUE
+
 		if(2)
 			if(isCoil(W))
 				var/obj/item/stack/cable_coil/C = W
 				if(!C.use(3))
 					to_chat(user, "<span class='notice'>You need three cable coils to wire the devices.</span>")
-					..()
-					return
+					return FALSE
 				buildstep++
 				to_chat(user, "<span class='notice'>You wire the assembly</span>")
 				desc = "This TV camera assembly has wires sticking out."
-				return
+				return TRUE
+
 		if(3)
 			if(isWirecutter(W))
 				to_chat(user, "<span class='notice'> You trim the wires.</span>")
 				buildstep++
 				desc = "This TV camera assembly needs casing."
-				return
+				return TRUE
+
 		if(4)
 			if(istype(W, /obj/item/stack/material/steel))
 				var/obj/item/stack/material/steel/S = W
@@ -154,5 +159,7 @@ Using robohead because of restricting to roboticist */
 					var/turf/T = get_turf(src)
 					new /obj/item/device/camera/tvcamera(T)
 					qdel(src)
-					return
-	..()
+					return TRUE
+				return FALSE
+
+	return ..()

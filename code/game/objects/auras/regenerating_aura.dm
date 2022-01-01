@@ -130,7 +130,7 @@
 	return ..()
 
 // Default return; we're just logging.
-/obj/aura/regenerating/human/unathi/attackby()
+/obj/aura/regenerating/human/unathi/use_item()
 	toggle_blocked_until = max(world.time + 1 MINUTE, toggle_blocked_until)
 
 /obj/aura/regenerating/human/unathi/hitby()

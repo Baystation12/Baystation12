@@ -26,7 +26,7 @@
 	/// Whether attackby will be passed on it even with a closed panel
 	var/external_slot
 
-/obj/item/stock_parts/computer/attackby(obj/item/W as obj, mob/living/user as mob)
+/obj/item/stock_parts/computer/use_item(obj/item/W as obj, mob/living/user as mob)
 	// Multitool. Runs diagnostics
 	if(isMultitool(W))
 		to_chat(user, "***** DIAGNOSTICS REPORT *****")

@@ -88,7 +88,7 @@
 		Shutdown()
 	return TRUE
 
-/obj/machinery/power/fusion_core/attackby(var/obj/item/W, var/mob/user)
+/obj/machinery/power/fusion_core/use_item(var/obj/item/W, var/mob/user)
 
 	if(owned_field)
 		to_chat(user,"<span class='warning'>Shut \the [src] off first!</span>")
@@ -98,7 +98,7 @@
 		var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)
 		fusion.get_new_tag(user)
 		return
-	
+
 	else if(isWrench(W))
 		anchored = !anchored
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)

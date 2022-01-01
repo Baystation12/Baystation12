@@ -379,16 +379,20 @@
 	can_hold = list(/obj/item/flame/match)
 	startswith = list(/obj/item/flame/match = 10)
 
-/obj/item/storage/box/matches/attackby(obj/item/flame/match/W as obj, mob/user as mob)
-	if(istype(W) && !W.lit && !W.burnt)
-		W.lit = 1
-		W.damtype = "burn"
-		W.icon_state = "match_lit"
-		START_PROCESSING(SSobj, W)
+/obj/item/storage/box/matches/use_item(obj/item/W, mob/user)
+	if(istype(W, /obj/item/flame/match))
+		var/obj/item/flame/match/match = W
+		if (match.lit || match.burnt)
+			return FALSE
+		match.lit = TRUE
+		match.damtype = "burn"
+		match.icon_state = "match_lit"
+		START_PROCESSING(SSobj, match)
 		playsound(src.loc, 'sound/items/match.ogg', 60, 1, -4)
 		user.visible_message("<span class='notice'>[user] strikes the match on the matchbox.</span>")
-	W.update_icon()
-	return
+		match.update_icon()
+		return TRUE
+	return ..()
 
 /obj/item/storage/box/autoinjectors
 	name = "box of injectors"

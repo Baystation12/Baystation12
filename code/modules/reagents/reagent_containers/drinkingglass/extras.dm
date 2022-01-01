@@ -1,4 +1,4 @@
-/obj/item/reagent_containers/food/drinks/glass2/attackby(obj/item/I as obj, mob/user as mob)
+/obj/item/reagent_containers/food/drinks/glass2/use_item(obj/item/I as obj, mob/user as mob)
 	if(extras.len >= 2) return ..() // max 2 extras, one on each side of the drink
 
 	if(istype(I, /obj/item/glass_extra))
@@ -61,7 +61,7 @@
 	glass_desc = "There is a stick in the glass."
 	icon_state = "stick"
 	color = COLOR_BLACK
-	
+
 /obj/item/glass_extra/stick/Initialize()
 	. = ..()
 	if(prob(50))

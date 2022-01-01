@@ -252,12 +252,17 @@ update_flag
 		healthcheck()
 	..()
 
-/obj/machinery/portable_atmospherics/canister/attackby(var/obj/item/W as obj, var/mob/user as mob)
-	if(!isWrench(W) && !istype(W, /obj/item/tank) && !istype(W, /obj/item/device/scanner/gas) && !istype(W, /obj/item/modular_computer/pda))
+/obj/machinery/portable_atmospherics/canister/use_weapon(obj/item/W, mob/user, click_params)
+	if (!(W.item_flags & ITEM_FLAG_NO_BLUDGEON))
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		user.do_attack_animation(src)
 		visible_message("<span class='warning'>\The [user] hits \the [src] with \a [W]!</span>")
 		src.health -= W.force
 		healthcheck()
+		return TRUE
+	return ..()
 
+/obj/machinery/portable_atmospherics/canister/use_tool(obj/item/W, mob/user)
 	if(istype(user, /mob/living/silicon/robot) && istype(W, /obj/item/tank/jetpack))
 		var/datum/gas_mixture/thejetpack = W:air_contents
 		var/env_pressure = thejetpack.return_pressure()
@@ -269,9 +274,9 @@ update_flag
 			var/datum/gas_mixture/removed = air_contents.remove(transfer_moles)
 			thejetpack.merge(removed)
 			to_chat(user, "You pulse-pressurize your jetpack from the tank.")
-		return
+		return TRUE
 
-	..()
+	. = ..()
 
 	SSnano.update_uis(src) // Update all NanoUIs attached to src
 

@@ -246,27 +246,41 @@
 				break
 	. = ..()
 
-/obj/structure/closet/attackby(obj/item/W as obj, mob/user as mob)
-	if (user.a_intent == I_HURT)
-		..()
-		return
 
+/obj/structure/closet/grab_attack(obj/item/grab/G)
+	if (opened)
+		MouseDrop_T(G.affecting, G.assailant) //act like they were dragged onto the closet
+	return TRUE
+
+
+/obj/structure/closet/use_weapon(obj/item/W, mob/user, click_params)
+	if (istype(W, /obj/item/melee/energy/blade))
+		if(emag_act(INFINITY, user, "<span class='danger'>The locker has been sliced open by [user] with \an [W]</span>!", "<span class='danger'>You hear metal being sliced and sparks flying.</span>"))
+			var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
+			spark_system.set_up(5, 0, src.loc)
+			spark_system.start()
+			playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
+			playsound(src.loc, "sparks", 50, 1)
+			open()
+		return TRUE
+
+
+/obj/structure/closet/use_tool(obj/item/W, mob/user)
 	if (src.opened)
-		if(istype(W, /obj/item/grab))
-			var/obj/item/grab/G = W
-			src.MouseDrop_T(G.affecting, user)      //act like they were dragged onto the closet
-			return 0
 		if(isWelder(W))
 			var/obj/item/weldingtool/WT = W
 			if(WT.remove_fuel(0,user))
 				slice_into_parts(WT, user)
-				return
+				return TRUE
+			return FALSE
+
 		if(istype(W, /obj/item/gun/energy/plasmacutter))
 			var/obj/item/gun/energy/plasmacutter/cutter = W
 			if(!cutter.slice(user))
-				return
+				return FALSE
 			slice_into_parts(W, user)
-			return
+			return TRUE
+
 		if(istype(W, /obj/item/storage/laundry_basket) && W.contents.len)
 			var/obj/item/storage/laundry_basket/LB = W
 			var/turf/T = get_turf(src)
@@ -276,46 +290,36 @@
 			user.visible_message("<span class='notice'>[user] empties \the [LB] into \the [src].</span>", \
 								 "<span class='notice'>You empty \the [LB] into \the [src].</span>", \
 								 "<span class='notice'>You hear rustling of clothes.</span>")
-			return
+			return TRUE
 
 		if(user.unEquip(W, loc))
 			W.pixel_x = 0
 			W.pixel_y = 0
 			W.pixel_z = 0
 			W.pixel_w = 0
-		return
-
-	if (istype(W, /obj/item/melee/energy/blade))
-		if(emag_act(INFINITY, user, "<span class='danger'>The locker has been sliced open by [user] with \an [W]</span>!", "<span class='danger'>You hear metal being sliced and sparks flying.</span>"))
-			var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
-			spark_system.set_up(5, 0, src.loc)
-			spark_system.start()
-			playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
-			playsound(src.loc, "sparks", 50, 1)
-			open()
-		return
+			return TRUE
 
 	if (istype(W, /obj/item/stack/package_wrap))
-		return
+		return FALSE
 
 	if (isWelder(W) && (setup & CLOSET_CAN_BE_WELDED))
 		var/obj/item/weldingtool/WT = W
 		if(!WT.remove_fuel(0,user))
 			if(!WT.isOn())
-				return
+				return FALSE
 			else
 				to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
-				return
+				return FALSE
 		src.welded = !src.welded
 		src.update_icon()
 		user.visible_message("<span class='warning'>\The [src] has been [welded?"welded shut":"unwelded"] by \the [user].</span>", blind_message = "You hear welding.", range = 3)
-		return
+		return TRUE
 
 	if (setup & CLOSET_HAS_LOCK)
-		src.togglelock(user, W)
-		return
+		return togglelock(user, W)
 
-	attack_hand(user)
+	return attack_hand(user)
+
 
 /obj/structure/closet/proc/slice_into_parts(obj/W, mob/user)
 	new /obj/item/stack/material/steel(src.loc, 2)

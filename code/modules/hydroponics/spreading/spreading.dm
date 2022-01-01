@@ -31,7 +31,7 @@
 /obj/effect/dead_plant/attack_hand()
 	qdel(src)
 
-/obj/effect/dead_plant/attackby()
+/obj/effect/dead_plant/use_item()
 	..()
 	qdel(src)
 
@@ -198,7 +198,7 @@
 	floor = 1
 	return 1
 
-/obj/effect/vine/attackby(var/obj/item/W, var/mob/user)
+/obj/effect/vine/use_item(var/obj/item/W, var/mob/user)
 	START_PROCESSING(SSvines, src)
 
 	if(W.edge && W.w_class < ITEM_SIZE_NORMAL && user.a_intent != I_HURT)
@@ -221,7 +221,7 @@
 			damage *= 2
 		adjust_health(-damage)
 		playsound(get_turf(src), W.hitsound, 100, 1)
-		
+
 /obj/effect/vine/AltClick(var/mob/user)
 	if(!CanPhysicallyInteract(user) || user.incapacitated())
 		return ..()

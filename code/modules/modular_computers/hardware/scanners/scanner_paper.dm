@@ -25,12 +25,12 @@
 	driver.scan_file_type = target.scan_file_type
 
 	if(target.type == /obj/item/paper/bodyscan)
-		driver.data_buffer = display_medical_data(target.metadata.Copy(),user.get_skill_value(SKILL_MEDICAL), TRUE)	
+		driver.data_buffer = display_medical_data(target.metadata.Copy(),user.get_skill_value(SKILL_MEDICAL), TRUE)
 	else
 		driver.data_buffer = data
 
 	to_chat(user, "You scan \the [target] with [src].")
 	SSnano.update_uis(driver.NM)
 
-/obj/item/stock_parts/computer/scanner/paper/do_on_attackby(mob/user, atom/target)
+/obj/item/stock_parts/computer/scanner/paper/do_on_use_item(mob/user, atom/target)
 	do_on_afterattack(user, target, TRUE)

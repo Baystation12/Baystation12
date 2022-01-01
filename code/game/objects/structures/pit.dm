@@ -8,7 +8,7 @@
 	anchored = TRUE
 	var/open = 1
 
-/obj/structure/pit/attackby(obj/item/W, mob/user)
+/obj/structure/pit/use_item(obj/item/W, mob/user)
 	if( istype(W,/obj/item/shovel) )
 		visible_message("<span class='notice'>\The [user] starts [open ? "filling" : "digging open"] \the [src]</span>")
 		if( do_after(user, 50) )
@@ -157,7 +157,7 @@
 
 	message = "Here lies [nam], [born] - [died]."
 
-/obj/structure/gravemarker/attackby(obj/item/W, mob/user)
+/obj/structure/gravemarker/use_item(obj/item/W, mob/user)
 	if(istype(W,/obj/item/material/hatchet))
 		visible_message("<span class = 'warning'>\The [user] starts hacking away at \the [src] with \the [W].</span>")
 		if(!do_after(user, 30))

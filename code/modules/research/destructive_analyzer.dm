@@ -51,11 +51,11 @@ Note: Must be placed within 3 tiles of the R&D Console
 		return SPAN_NOTICE("There is something already loaded into \the [src]. You must remove it first.")
 	return ..()
 
-/obj/machinery/r_n_d/destructive_analyzer/attackby(var/obj/item/O as obj, var/mob/user as mob)
+/obj/machinery/r_n_d/destructive_analyzer/use_item(var/obj/item/O as obj, var/mob/user as mob)
 	if(busy)
 		to_chat(user, "<span class='notice'>\The [src] is busy right now.</span>")
 		return
-	if(component_attackby(O, user))
+	if(component_use_item(O, user))
 		return TRUE
 	if(loaded_item)
 		to_chat(user, "<span class='notice'>There is something already loaded into \the [src].</span>")

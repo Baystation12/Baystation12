@@ -56,7 +56,7 @@
 /obj/item/mech_component/sensors/ready_to_install()
 	return (radio && camera)
 
-/obj/item/mech_component/sensors/attackby(var/obj/item/thing, var/mob/user)
+/obj/item/mech_component/sensors/use_item(var/obj/item/thing, var/mob/user)
 	if(istype(thing, /obj/item/mech_component/control_module))
 		if(software)
 			to_chat(user, SPAN_WARNING("\The [src] already has a control modules installed."))
@@ -107,7 +107,7 @@
 	. = ..()
 	to_chat(user, SPAN_NOTICE("It has [max_installed_software - LAZYLEN(installed_software)] empty slot\s remaining out of [max_installed_software]."))
 
-/obj/item/mech_component/control_module/attackby(var/obj/item/thing, var/mob/user)
+/obj/item/mech_component/control_module/use_item(var/obj/item/thing, var/mob/user)
 
 	if(istype(thing, /obj/item/circuitboard/exosystem))
 		install_software(thing, user)

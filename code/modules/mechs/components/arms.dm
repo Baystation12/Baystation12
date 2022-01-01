@@ -24,7 +24,7 @@
 /obj/item/mech_component/manipulators/prebuild()
 	motivator = new(src)
 
-/obj/item/mech_component/manipulators/attackby(var/obj/item/thing, var/mob/user)
+/obj/item/mech_component/manipulators/use_item(var/obj/item/thing, var/mob/user)
 	if(istype(thing,/obj/item/robot_parts/robot_component/actuator))
 		if(motivator)
 			to_chat(user, SPAN_WARNING("\The [src] already has an actuator installed."))

@@ -37,7 +37,7 @@
 /obj/item/fossil/skull/horned
 	icon_state = "hskull"
 
-/obj/item/fossil/skull/attackby(obj/item/W, mob/user)
+/obj/item/fossil/skull/use_item(obj/item/W, mob/user)
 	if(istype(W,/obj/item/fossil/bone))
 		if(!user.canUnEquip(W))
 			return
@@ -62,7 +62,7 @@
 	src.breq = rand(6)+3
 	src.desc = "An incomplete skeleton, looks like it could use [src.breq-src.bnum] more bones."
 
-/obj/skeleton/attackby(obj/item/W, mob/user)
+/obj/skeleton/use_item(obj/item/W, mob/user)
 	if(istype(W,/obj/item/fossil/bone))
 		if(!bstate && user.unEquip(W, src))
 			bnum++

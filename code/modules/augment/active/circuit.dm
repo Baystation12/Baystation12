@@ -7,7 +7,7 @@
 	desc = "A DIY modular assembly, courtesy of Xion Industrial. Circuitry not included."
 
 
-/obj/item/organ/internal/augment/active/item/circuit/attackby(obj/item/I, mob/user)
+/obj/item/organ/internal/augment/active/item/circuit/use_item(obj/item/I, mob/user)
 	if (isCrowbar(I))
 		if (item)
 			item.canremove = TRUE

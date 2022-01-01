@@ -62,7 +62,7 @@ Pipelines + Other Objects -> Pipe network
 	else
 		reset_plane_and_layer()
 
-/obj/machinery/atmospherics/attackby(atom/A, mob/user as mob)
+/obj/machinery/atmospherics/use_item(atom/A, mob/user as mob)
 	if(istype(A, /obj/item/device/scanner/gas))
 		return
 	..()

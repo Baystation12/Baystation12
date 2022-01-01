@@ -1,4 +1,4 @@
-/turf/simulated/floor/attackby(var/obj/item/C, var/mob/user)
+/turf/simulated/floor/use_item(var/obj/item/C, var/mob/user)
 
 	var/area/A = get_area(src)
 	if (!A.can_modify_area())

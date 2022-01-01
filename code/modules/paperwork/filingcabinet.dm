@@ -46,7 +46,7 @@
 			I.forceMove(src)
 	. = ..()
 
-/obj/structure/filingcabinet/attackby(obj/item/P as obj, mob/user as mob)
+/obj/structure/filingcabinet/use_item(obj/item/P as obj, mob/user as mob)
 	if(is_type_in_list(P, can_hold))
 		if(!user.unEquip(P, src))
 			return

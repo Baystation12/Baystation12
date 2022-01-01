@@ -201,7 +201,7 @@ obj/structure/disposalpipe/Destroy()
 //attack by item
 //weldingtool: unfasten and convert to obj/disposalconstruct
 
-/obj/structure/disposalpipe/attackby(obj/item/I, mob/user)
+/obj/structure/disposalpipe/use_item(obj/item/I, mob/user)
 	var/turf/T = src.loc
 	if(!T.is_plating())
 		return		// prevent interaction with T-scanner revealed pipes
@@ -475,7 +475,7 @@ obj/structure/disposalpipe/Destroy()
 	updatedesc()
 	update()
 
-/obj/structure/disposalpipe/tagger/attackby(var/obj/item/I, var/mob/user)
+/obj/structure/disposalpipe/tagger/use_item(var/obj/item/I, var/mob/user)
 	if(..())
 		return
 
@@ -550,7 +550,7 @@ obj/structure/disposalpipe/Destroy()
 	linked = null
 	return ..()
 
-/obj/structure/disposalpipe/diversion_junction/attackby(var/obj/item/I, var/mob/user)
+/obj/structure/disposalpipe/diversion_junction/use_item(var/obj/item/I, var/mob/user)
 	if(..())
 		return 1
 
@@ -643,7 +643,7 @@ obj/structure/disposalpipe/Destroy()
 	updatedesc()
 	updatename()
 
-/obj/structure/disposalpipe/sortjunction/attackby(var/obj/item/I, var/mob/user)
+/obj/structure/disposalpipe/sortjunction/use_item(var/obj/item/I, var/mob/user)
 	if(..())
 		return
 
@@ -757,7 +757,7 @@ obj/structure/disposalpipe/Destroy()
 	return
 
 	// Override attackby so we disallow trunkremoval when somethings ontop
-/obj/structure/disposalpipe/trunk/attackby(var/obj/item/I, var/mob/user)
+/obj/structure/disposalpipe/trunk/use_item(var/obj/item/I, var/mob/user)
 
 	//Disposal constructors
 	var/obj/structure/disposalconstruct/C = locate() in src.loc

@@ -18,7 +18,7 @@
 	active_power_usage = 200
 	clicksound = 'sound/machines/buttonbeep.ogg'
 	clickvol = 30
-	
+
 	machine_name = "cryo cell"
 	machine_desc = "Uses a supercooled chemical bath to hold living beings in something close to suspended animation. Often paired with specialized medicines to rapidly heal wounds of a patient inside."
 
@@ -197,28 +197,33 @@
 	if(istype(new_state))
 		updateUsrDialog()
 
-/obj/machinery/atmospherics/unary/cryo_cell/attackby(var/obj/G, var/mob/user as mob)
-	if(component_attackby(G, user))
+
+/obj/machinery/atmospherics/unary/cryo_cell/grab_attack(obj/item/grab/G)
+	for(var/mob/living/carbon/slime/M in range(1, G.affecting))
+		if(M.Victim == G.affecting)
+			to_chat(G.assailant, SPAN_WARNING("\The [G.affecting.name] will not fit into the cryo because they have a slime latched onto their head."))
+			return TRUE
+	if (put_mob(G.affecting))
+		qdel(G)
+	return TRUE
+
+
+/obj/machinery/atmospherics/unary/cryo_cell/use_tool(obj/item/G, mob/user)
+	if(component_use_item(G, user))
 		return TRUE
+
 	if(istype(G, /obj/item/reagent_containers/glass))
 		if(beaker)
 			to_chat(user, "<span class='warning'>A beaker is already loaded into the machine.</span>")
-			return
+			return FALSE
 		if(!user.unEquip(G, src))
-			return // Temperature will be adjusted on Entered()
+			return FALSE // Temperature will be adjusted on Entered()
 		beaker =  G
 		user.visible_message("[user] adds \a [G] to \the [src]!", "You add \a [G] to \the [src]!")
-	else if(istype(G, /obj/item/grab))
-		var/obj/item/grab/grab = G
-		if(!ismob(grab.affecting))
-			return
-		for(var/mob/living/carbon/slime/M in range(1,grab.affecting))
-			if(M.Victim == grab.affecting)
-				to_chat(user, "[grab.affecting.name] will not fit into the cryo because they have a slime latched onto their head.")
-				return
-		if(put_mob(grab.affecting))
-			qdel(G)
-	return
+		return TRUE
+
+	return ..()
+
 
 /obj/machinery/atmospherics/unary/cryo_cell/on_update_icon()
 	overlays.Cut()
@@ -399,4 +404,3 @@
 
 /datum/data/function/proc/display()
 	return
-

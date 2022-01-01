@@ -64,12 +64,11 @@
 	. = ..()
 	set_extension(src, /datum/extension/holster, src, sound_in, sound_out, can_holster)
 
-/obj/item/storage/belt/holster/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/storage/belt/holster/use_item(obj/item/W, mob/user)
 	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)
 	if(H.holster(W, user))
-		return
-	else
-		. = ..(W, user)
+		return TRUE
+	return ..(W, user)
 
 /obj/item/storage/belt/holster/attack_hand(mob/user as mob)
 	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)

@@ -11,27 +11,31 @@ obj/structure/firedoor_assembly
 //construction: wrenched > cables > electronics > screwdriver & open
 //deconstruction: closed & welded > screwdriver > crowbar > wire cutters > wrench > welder
 
-obj/structure/firedoor_assembly/attackby(var/obj/item/C, var/mob/user)
+obj/structure/firedoor_assembly/use_tool(obj/item/C, mob/user)
 	if(isCoil(C) && !wired && anchored)
 		var/obj/item/stack/cable_coil/cable = C
 		if (cable.get_amount() < 1)
 			to_chat(user, "<span class='warning'>You need one length of coil to wire \the [src].</span>")
-			return
+			return FALSE
 		user.visible_message("[user] wires \the [src].", "You start to wire \the [src].")
-		if(do_after(user, 40, src) && !wired && anchored)
-			if (cable.use(1))
-				wired = 1
-				to_chat(user, "<span class='notice'>You wire \the [src].</span>")
+		if(do_after(user, 40, src) && !wired && anchored && cable.use(1))
+			wired = 1
+			to_chat(user, "<span class='notice'>You wire \the [src].</span>")
+		else
+			return FALSE
+		return TRUE
 
 	else if(isWirecutter(C) && wired )
 		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
 		user.visible_message("[user] cuts the wires from \the [src].", "You start to cut the wires from \the [src].")
 
 		if(do_after(user, 40, src))
-			if(!src) return
 			to_chat(user, "<span class='notice'>You cut the wires!</span>")
 			new/obj/item/stack/cable_coil(src.loc, 1)
 			wired = 0
+		else
+			return FALSE
+		return TRUE
 
 	else if(istype(C, /obj/item/airalarm_electronics) && wired)
 		if(anchored)
@@ -45,24 +49,32 @@ obj/structure/firedoor_assembly/attackby(var/obj/item/C, var/mob/user)
 			qdel(src)
 		else
 			to_chat(user, "<span class='warning'>You must secure \the [src] first!</span>")
+			return FALSE
+		return TRUE
+
 	else if(isWrench(C) && !wired)
 		anchored = !anchored
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		user.visible_message("<span class='warning'>[user] has [anchored ? "" : "un" ]secured \the [src]!</span>",
 							  "You have [anchored ? "" : "un" ]secured \the [src]!")
 		update_icon()
+		return TRUE
+
 	else if(!anchored && isWelder(C))
 		var/obj/item/weldingtool/WT = C
 		if(WT.remove_fuel(0, user))
 			user.visible_message("<span class='warning'>[user] dissassembles \the [src].</span>",
 			"You start to dissassemble \the [src].")
-			if(do_after(user, 40, src))
-				if(!src || !WT.isOn()) return
+			if(do_after(user, 40, src) && WT.isOn())
 				user.visible_message("<span class='warning'>[user] has dissassembled \the [src].</span>",
 									"You have dissassembled \the [src].")
 				new /obj/item/stack/material/steel(src.loc, 4)
 				qdel(src)
+			else
+				return FALSE
 		else
 			to_chat(user, "<span class='notice'>You need more welding fuel.</span>")
-	else
-		..(C, user)
+			return FALSE
+		return TRUE
+
+	return ..()

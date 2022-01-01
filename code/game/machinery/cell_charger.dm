@@ -28,36 +28,40 @@
 		if(charging)
 			to_chat(user, "Current charge: [charging.charge]")
 
-/obj/machinery/cell_charger/attackby(obj/item/W, mob/user)
+/obj/machinery/cell_charger/use_tool(obj/item/W, mob/user)
 	if(stat & BROKEN)
-		return
+		to_chat(user, SPAN_WARNING("\The [src] is broken beyond use."))
+		return FALSE
 
 	if(istype(W, /obj/item/cell) && anchored)
 		if(charging)
 			to_chat(user, "<span class='warning'>There is already a cell in the charger.</span>")
-			return
-		else
-			var/area/a = get_area(loc)
-			if(a.power_equip == 0) // There's no APC in this area, don't try to cheat power!
-				to_chat(user, "<span class='warning'>The [name] blinks red as you try to insert the cell!</span>")
-				return
-			if(!user.unEquip(W, src))
-				return
-			charging = W
-			set_power()
-			START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
-			user.visible_message("[user] inserts a cell into the charger.", "You insert a cell into the charger.")
-			chargelevel = -1
+			return FALSE
+		var/area/a = get_area(loc)
+		if(a.power_equip == 0) // There's no APC in this area, don't try to cheat power!
+			to_chat(user, "<span class='warning'>The [name] blinks red as you try to insert the cell!</span>")
+			return FALSE
+		if(!user.unEquip(W, src))
+			return FALSE
+		charging = W
+		set_power()
+		START_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
+		user.visible_message("[user] inserts a cell into the charger.", "You insert a cell into the charger.")
+		chargelevel = -1
 		queue_icon_update()
+		return TRUE
+
 	else if(isWrench(W))
 		if(charging)
 			to_chat(user, "<span class='warning'>Remove the cell first!</span>")
-			return
-
+			return FALSE
 		anchored = !anchored
 		set_power()
 		to_chat(user, "You [anchored ? "attach" : "detach"] the cell charger [anchored ? "to" : "from"] the ground")
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
+		return TRUE
+
+	return ..()
 
 /obj/machinery/cell_charger/physical_attack_hand(mob/user)
 	if(charging)

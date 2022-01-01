@@ -117,7 +117,7 @@
 
 /obj/item/paperwork/on_update_icon()
 	icon_state = "[icon_state][length(has_signed) || ""]"
-	
+
 /obj/item/paperwork/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1)
@@ -126,7 +126,7 @@
 		if(length(has_signed))
 			to_chat(user, SPAN_NOTICE("It has been signed by: [english_list(has_signed)]."))
 
-/obj/item/paperwork/attackby(obj/item/W, mob/user)
+/obj/item/paperwork/use_item(obj/item/W, mob/user)
 	if(istype(W, /obj/item/pen))
 		if(user.real_name in has_signed)
 			to_chat(user, SPAN_WARNING("You have already signed \the [src]."))

@@ -63,8 +63,7 @@
 	to_chat(user, SPAN_ITALIC(message))
 
 
-/obj/item/boombox/attackby(obj/item/item, mob/user)
-	set waitfor = FALSE
+/obj/item/boombox/use_tool(obj/item/item, mob/user)
 	if(isScrewdriver(item))
 		var/item_loc = item.loc
 		if (GET_FLAGS(boombox_flags, BOOMBOX_PANEL))
@@ -77,7 +76,7 @@
 		else if (!GET_FLAGS(boombox_flags, BOOMBOX_BROKEN))
 			if (jukebox.playing)
 				to_chat(user, SPAN_WARNING("You can't adjust the player head while it's in use."))
-				return TRUE
+				return FALSE
 			var/data = input(user, "Adjust player head screw?", "Adjust Head") as null | anything in list("tighten", "loosen")
 			if (item_loc == item.loc)
 				var/old_frequency = jukebox.frequency
@@ -86,7 +85,7 @@
 					if ("loosen") jukebox.frequency = min(jukebox.frequency + 0.1, 1.5)
 				if (jukebox.frequency == old_frequency)
 					to_chat(user, SPAN_WARNING("Try as you might, the screw won't turn further."))
-					return TRUE
+					return FALSE
 				user.visible_message(
 					SPAN_ITALIC("\The [user] uses \the [item] to fiddle with \the [src]."),
 					SPAN_NOTICE("You [data] the player head screw inside \the [src]."),
@@ -101,17 +100,18 @@
 			SET_FLAGS(boombox_flags, BOOMBOX_PANEL)
 		playsound(src, 'sound/items/Screwdriver.ogg', 50, 1)
 		return TRUE
+
 	if (istype(item, /obj/item/stack/nanopaste))
 		if (!GET_FLAGS(boombox_flags, BOOMBOX_PANEL))
 			to_chat(user, SPAN_WARNING("The panel on \the [src] is not open."))
-			return TRUE
+			return FALSE
 		if (!GET_FLAGS(boombox_flags, BOOMBOX_BROKEN))
 			to_chat(user, SPAN_WARNING("\The [src] is not broken."))
-			return TRUE
+			return FALSE
 		var/obj/item/stack/paste = item
 		if (!paste.use(1))
 			to_chat(user, SPAN_WARNING("\The [paste] is empty."))
-			return TRUE
+			return FALSE
 		user.visible_message(
 			SPAN_ITALIC("\The [user] uses \the [item] to repair \the [src]."),
 			SPAN_NOTICE("You repair \the [src] with \the [item]."),
@@ -119,7 +119,8 @@
 		)
 		CLEAR_FLAGS(boombox_flags, BOOMBOX_BROKEN)
 		return TRUE
-	. = ..()
+
+	return ..()
 
 
 

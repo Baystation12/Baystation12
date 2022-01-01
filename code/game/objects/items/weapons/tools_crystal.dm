@@ -8,7 +8,7 @@
 	cell = null
 	fuel_cost_multiplier = 1
 
-/obj/item/weldingtool/electric/crystal/attackby(var/obj/item/W, var/mob/user)
+/obj/item/weldingtool/electric/crystal/use_item(obj/item/W, mob/user)
 	return
 
 /obj/item/weldingtool/electric/crystal/on_update_icon()

@@ -88,7 +88,7 @@
 /mob/living/bot/death()
 	explode()
 
-/mob/living/bot/attackby(var/obj/item/O, var/mob/user)
+/mob/living/bot/use_item(var/obj/item/O, var/mob/user)
 	if(O.GetIdCard())
 		if(access_scanner.allowed(user) && !open)
 			locked = !locked

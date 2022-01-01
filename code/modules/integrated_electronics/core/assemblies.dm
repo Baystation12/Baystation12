@@ -434,7 +434,7 @@
 				visible_message(SPAN_NOTICE("\The [user] points \the [src] towards \the [target]."))
 
 
-/obj/item/device/electronic_assembly/attackby(obj/item/I, mob/living/user)
+/obj/item/device/electronic_assembly/use_item(obj/item/I, mob/living/user)
 	if (user.a_intent == I_HURT)
 		..()
 		return

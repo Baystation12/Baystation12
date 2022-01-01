@@ -170,7 +170,20 @@
 		destroy()
 		return TRUE
 
-/obj/machinery/camera/attackby(obj/item/W as obj, mob/living/user as mob)
+/obj/machinery/camera/use_weapon(obj/item/W, mob/user, click_params)
+	if (!(W.item_flags & ITEM_FLAG_NO_BLUDGEON) && (W.damtype == BRUTE || W.damtype == BURN)) //bashing cameras
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		user.do_attack_animation(src)
+		visible_message("<span class='warning'><b>[src] has been [pick(W.attack_verb)] with [W] by [user]!</b></span>")
+		playsound(loc, W.hitsound, 50, 1, -1)
+		if (W.force >= src.toughness)
+			take_damage(W.force)
+			return TRUE
+		return FALSE
+
+	return ..()
+
+/obj/machinery/camera/use_tool(obj/item/W, mob/living/user)
 	update_coverage()
 	var/datum/wires/camera/camera_wires = wires
 	// DECONSTRUCTION
@@ -181,6 +194,7 @@
 		user.visible_message("<span class='warning'>[user] screws the camera's panel [panel_open ? "open" : "closed"]!</span>",
 		"<span class='notice'>You screw the camera's panel [panel_open ? "open" : "closed"].</span>")
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
+		return TRUE
 
 	else if((isWirecutter(W) || isMultitool(W)) && panel_open)
 		return wires.Interact(user)
@@ -204,7 +218,8 @@
 					new /obj/item/stack/cable_coil(src.loc, length=2)
 				assembly = null //so qdel doesn't eat it.
 			qdel(src)
-			return
+			return TRUE
+		return FALSE
 
 	// OTHER
 	else if (can_use() && istype(W, /obj/item/paper) && isliving(user))
@@ -218,20 +233,9 @@
 			if(U.name == "Unknown") to_chat(O, "<b>[U]</b> holds \a [itemname] up to one of your cameras ...")
 			else to_chat(O, "<b><a href='byond://?src=\ref[O];track2=\ref[O];track=\ref[U];trackname=[U.name]'>[U]</a></b> holds \a [itemname] up to one of your cameras ...")
 			show_browser(O, text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", itemname, info), text("window=[]", itemname))
+		return TRUE
 
-	else if(W.damtype == BRUTE || W.damtype == BURN) //bashing cameras
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		if (W.force >= src.toughness)
-			user.do_attack_animation(src)
-			visible_message("<span class='warning'><b>[src] has been [pick(W.attack_verb)] with [W] by [user]!</b></span>")
-			if (istype(W, /obj/item)) //is it even possible to get into attackby() with non-items?
-				var/obj/item/I = W
-				if (I.hitsound)
-					playsound(loc, I.hitsound, 50, 1, -1)
-		take_damage(W.force)
-
-	else
-		..()
+	return ..()
 
 /obj/machinery/camera/proc/deactivate(user as mob, var/choice = 1)
 	// The only way for AI to reactivate cameras are malf abilities, this gives them different messages.

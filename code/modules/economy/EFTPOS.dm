@@ -110,7 +110,7 @@
 	else
 		show_browser(user, null,"window=eftpos")
 
-/obj/item/device/eftpos/attackby(obj/item/O as obj, user as mob)
+/obj/item/device/eftpos/use_item(obj/item/O as obj, user as mob)
 
 	var/obj/item/card/id/I = O.GetIdCard()
 

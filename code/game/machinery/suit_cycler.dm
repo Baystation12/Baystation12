@@ -73,99 +73,93 @@
 	DROP_NULL(helmet)
 	return ..()
 
-/obj/machinery/suit_cycler/attackby(obj/item/I as obj, mob/user as mob)
 
+/obj/machinery/suit_cycler/grab_attack(obj/item/grab/G)
+	. = TRUE
+	if(locked)
+		to_chat(G.assailant, SPAN_WARNING("\The [src] is locked."))
+		return
+	if(contents.len > 0)
+		to_chat(G.assailant, SPAN_WARNING("There is no room inside \the [src] for \the [G.affecting]."))
+		return
+	G.assailant.visible_message(
+		SPAN_WARNING("\The [G.assailant] starts putting \the [G.affecting] into \the [src]!"),
+		SPAN_WARNING("You start putting \the [G.affecting] into \the [src]!"),
+		range = 3)
+	if (!do_after(G.assailant, 2 SECONDS, src) || !G?.affecting)
+		return
+	if (G.affecting.client)
+		G.affecting.client.perspective = EYE_PERSPECTIVE
+		G.affecting.client.eye = src
+	G.affecting.forceMove(src)
+	occupant = G.affecting
+	add_fingerprint(G.assailant)
+	qdel(G)
+	updateUsrDialog()
+	return
+
+
+/obj/machinery/suit_cycler/use_tool(obj/item/I, mob/user)
 	if(electrified != 0)
 		if(shock(user, 100))
-			return
+			return FALSE
 
 	//Hacking init.
 	if(isMultitool(I) || isWirecutter(I))
 		if(panel_open)
-			attack_hand(user)
-		return
+			return attack_hand(user)
+		return FALSE
+
 	//Other interface stuff.
-	if(istype(I, /obj/item/grab))
-		var/obj/item/grab/G = I
-
-		if(!(ismob(G.affecting)))
-			return
-
-		if(locked)
-			to_chat(user, "<span class='danger'>The suit cycler is locked.</span>")
-			return
-
-		if(contents.len > 0)
-			to_chat(user, "<span class='danger'>There is no room inside the cycler for [G.affecting.name].</span>")
-			return
-
-		visible_message("<span class='notice'>[user] starts putting [G.affecting.name] into the suit cycler.</span>", range = 3)
-
-		if(do_after(user, 20, src))
-			if(!G || !G.affecting) return
-			var/mob/M = G.affecting
-			if (M.client)
-				M.client.perspective = EYE_PERSPECTIVE
-				M.client.eye = src
-			M.forceMove(src)
-			occupant = M
-
-			add_fingerprint(user)
-			qdel(G)
-
-			updateUsrDialog()
-
-			return
 	else if(isScrewdriver(I))
-
 		panel_open = !panel_open
 		to_chat(user, "You [panel_open ?  "open" : "close"] the maintenance panel.")
 		updateUsrDialog()
-		return
+		return TRUE
 
 	else if(istype(I,/obj/item/clothing/head/helmet/space) && !istype(I, /obj/item/clothing/head/helmet/space/rig))
 
 		if(locked)
 			to_chat(user, "<span class='danger'>The suit cycler is locked.</span>")
-			return
+			return FALSE
 
 		if(helmet)
 			to_chat(user, "<span class='danger'>The cycler already contains a helmet.</span>")
-			return
+			return FALSE
 
 		if(I.icon_override == CUSTOM_ITEM_MOB)
 			to_chat(user, "You cannot refit a customised voidsuit.")
-			return
+			return FALSE
 		if(!user.unEquip(I, src))
-			return
+			return FALSE
 		to_chat(user, "You fit \the [I] into the suit cycler.")
 		helmet = I
 
 		updateUsrDialog()
-		return
+		return TRUE
 
 	else if(istype(I,/obj/item/clothing/suit/space/void))
 
 		if(locked)
 			to_chat(user, "<span class='danger'>The suit cycler is locked.</span>")
-			return
+			return FALSE
 
 		if(suit)
 			to_chat(user, "<span class='danger'>The cycler already contains a voidsuit.</span>")
-			return
+			return FALSE
 
 		if(I.icon_override == CUSTOM_ITEM_MOB)
 			to_chat(user, "You cannot refit a customised voidsuit.")
-			return
+			return FALSE
 		if(!user.unEquip(I, src))
-			return
+			return FALSE
 		to_chat(user, "You fit \the [I] into the suit cycler.")
 		suit = I
 
 		updateUsrDialog()
-		return
+		return TRUE
 
-	..()
+	return ..()
 
 /obj/machinery/suit_cycler/emag_act(var/remaining_charges, var/mob/user)
 	if(emagged)

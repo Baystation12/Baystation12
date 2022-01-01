@@ -1,6 +1,6 @@
 // To clarify:
 // For use_to_pickup and allow_quick_gather functionality,
-// see item/attackby() (/game/objects/items.dm)
+// see item/use_item() (/game/objects/items.dm)
 // Do not remove this functionality without good reason, cough reagent_containers cough.
 // -Sayu
 
@@ -276,19 +276,20 @@
 	update_icon()
 
 //This proc is called when you want to place an item into the storage item.
-/obj/item/storage/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/storage/use_item(obj/item/W, mob/user)
 	. = ..()
 	if (.) //if the item was used as a crafting component, just return
 		return
 
 	if(isrobot(user) && (W == user.get_active_hand()))
-		return //Robots can't store their modules.
+		return FALSE //Robots can't store their modules.
 
 	if(!can_be_inserted(W, user))
-		return
+		return FALSE
 
-	W.add_fingerprint(user)
-	return handle_item_insertion(W)
+	. = handle_item_insertion(W)
+	if (. && use_sound)
+		playsound(loc, use_sound, 50, 1, -5)
 
 /obj/item/storage/attack_hand(mob/user as mob)
 	if(ishuman(user))

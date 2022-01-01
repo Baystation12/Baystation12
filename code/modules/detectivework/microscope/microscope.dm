@@ -15,7 +15,7 @@
 		sample.dropInto(loc)
 	..()
 
-/obj/machinery/microscope/attackby(obj/item/W, mob/user)
+/obj/machinery/microscope/use_item(obj/item/W, mob/user)
 
 	if(sample)
 		to_chat(user, "<span class='warning'>There is already a slide in the microscope.</span>")

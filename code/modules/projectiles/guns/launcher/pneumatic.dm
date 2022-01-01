@@ -65,7 +65,7 @@
 	else
 		return ..()
 
-/obj/item/gun/launcher/pneumatic/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/gun/launcher/pneumatic/use_item(obj/item/W as obj, mob/user as mob)
 	if(!tank && istype(W,/obj/item/tank) && user.unEquip(W, src))
 		tank = W
 		user.visible_message("[user] jams [W] into [src]'s valve and twists it closed.","You jam [W] into [src]'s valve and twist it closed.")

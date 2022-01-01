@@ -92,7 +92,7 @@
 		return attack_hand(user)
 	else return ..()
 
-/obj/structure/morgue/attackby(P as obj, mob/user as mob)
+/obj/structure/morgue/use_item(P as obj, mob/user as mob)
 	if (istype(P, /obj/item/pen))
 		var/t = input(user, "What would you like the label to be?", text("[]", src.name), null)  as text
 		if (user.get_active_hand() != P)
@@ -258,7 +258,7 @@
 	src.add_fingerprint(user)
 	update()
 
-/obj/structure/crematorium/attackby(P as obj, mob/user as mob)
+/obj/structure/crematorium/use_item(P as obj, mob/user as mob)
 	if(istype(P, /obj/item/pen))
 		var/t = input(user, "What would you like the label to be?", text("[]", src.name), null)  as text
 		if(user.get_active_hand() != P)

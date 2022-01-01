@@ -85,7 +85,7 @@
 		P.card_icon = "joker"
 		cards += P
 
-/obj/item/deck/attackby(obj/O, mob/user)
+/obj/item/deck/use_item(obj/O, mob/user)
 	if(istype(O,/obj/item/hand))
 		var/obj/item/hand/H = O
 		for(var/datum/playingcard/P in H.cards)
@@ -168,7 +168,7 @@
 		user.visible_message("\The [user] deals a card to \the [target].")
 	H.throw_at(get_step(target,target.dir),10,1,user)
 
-/obj/item/hand/attackby(obj/O, mob/user)
+/obj/item/hand/use_item(obj/O, mob/user)
 	if(istype(O,/obj/item/hand))
 		var/obj/item/hand/H = O
 		for(var/datum/playingcard/P in cards)

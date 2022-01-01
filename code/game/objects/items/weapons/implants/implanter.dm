@@ -34,13 +34,14 @@
 		return 1
 	return 0
 
-/obj/item/implanter/attackby(obj/item/I, mob/user)
+/obj/item/implanter/use_tool(obj/item/I, mob/user)
 	if(!imp && istype(I, /obj/item/implant) && user.unEquip(I,src))
 		to_chat(usr, "<span class='notice'>You slide \the [I] into \the [src].</span>")
 		imp = I
 		update_icon()
-	else
-		..()
+		return TRUE
+
+	return ..()
 
 /obj/item/implanter/attack(mob/M as mob, mob/user as mob)
 	if (!istype(M, /mob/living/carbon))

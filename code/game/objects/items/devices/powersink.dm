@@ -64,7 +64,7 @@
 		STOP_PROCESSING_POWER_OBJECT(src)
 	. = ..()
 
-/obj/item/device/powersink/attackby(var/obj/item/I, var/mob/user)
+/obj/item/device/powersink/use_tool(obj/item/I, mob/user)
 	if(isScrewdriver(I))
 		if(mode == DISCONNECTED)
 			var/turf/T = loc
@@ -72,22 +72,26 @@
 				attached = locate() in T
 				if(!attached)
 					to_chat(user, "<span class='warning'>This device must be placed over an exposed, powered cable node!</span>")
+					return FALSE
 				else
 					set_mode(CLAMPED_OFF)
 					user.visible_message( \
 						"[user] attaches \the [src] to the cable.", \
 						"<span class='notice'>You attach \the [src] to the cable.</span>",
 						"<span class='italics'>You hear some wires being connected to something.</span>")
+					return TRUE
 			else
 				to_chat(user, "<span class='warning'>This device must be placed over an exposed, powered cable node!</span>")
+				return FALSE
 		else
 			set_mode(DISCONNECTED)
 			user.visible_message( \
 				"[user] detaches \the [src] from the cable.", \
 				"<span class='notice'>You detach \the [src] from the cable.</span>",
 				"<span class='italics'>You hear some wires being disconnected from something.</span>")
-	else
-		return ..()
+			return TRUE
+
+	return ..()
 
 /obj/item/device/powersink/attack_ai()
 	return

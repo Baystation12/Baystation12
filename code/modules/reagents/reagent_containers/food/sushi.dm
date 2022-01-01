@@ -79,7 +79,7 @@
 		adding += I
 	overlays = adding
 
-/obj/item/reagent_containers/food/snacks/sashimi/attackby(var/obj/item/I, var/mob/user)
+/obj/item/reagent_containers/food/snacks/sashimi/use_item(var/obj/item/I, var/mob/user)
 	if(!(locate(/obj/structure/table) in loc))
 		return ..()
 
@@ -111,7 +111,7 @@
 	. = ..()
 
  // Used for turning rice into sushi.
-/obj/item/reagent_containers/food/snacks/boiledrice/attackby(var/obj/item/I, var/mob/user)
+/obj/item/reagent_containers/food/snacks/boiledrice/use_item(var/obj/item/I, var/mob/user)
 	if((locate(/obj/structure/table) in loc))
 		if(istype(I, /obj/item/reagent_containers/food/snacks/sashimi))
 			var/obj/item/reagent_containers/food/snacks/sashimi/sashimi = I
@@ -130,22 +130,22 @@
 			return
 	. = ..()
 // Used for turning other food into sushi.
-/obj/item/reagent_containers/food/snacks/friedegg/attackby(var/obj/item/I, var/mob/user)
+/obj/item/reagent_containers/food/snacks/friedegg/use_item(var/obj/item/I, var/mob/user)
 	if((locate(/obj/structure/table) in loc) && istype(I, /obj/item/reagent_containers/food/snacks/boiledrice))
 		new /obj/item/reagent_containers/food/snacks/sushi(get_turf(src), I, src)
 		return
 	. = ..()
-/obj/item/reagent_containers/food/snacks/tofu/attackby(var/obj/item/I, var/mob/user)
+/obj/item/reagent_containers/food/snacks/tofu/use_item(var/obj/item/I, var/mob/user)
 	if((locate(/obj/structure/table) in loc) && istype(I, /obj/item/reagent_containers/food/snacks/boiledrice))
 		new /obj/item/reagent_containers/food/snacks/sushi(get_turf(src), I, src)
 		return
 	. = ..()
-/obj/item/reagent_containers/food/snacks/rawcutlet/attackby(var/obj/item/I, var/mob/user)
+/obj/item/reagent_containers/food/snacks/rawcutlet/use_item(var/obj/item/I, var/mob/user)
 	if((locate(/obj/structure/table) in loc) && istype(I, /obj/item/reagent_containers/food/snacks/boiledrice))
 		new /obj/item/reagent_containers/food/snacks/sushi(get_turf(src), I, src)
 		return
 	. = ..()
-/obj/item/reagent_containers/food/snacks/cutlet/attackby(var/obj/item/I, var/mob/user)
+/obj/item/reagent_containers/food/snacks/cutlet/use_item(var/obj/item/I, var/mob/user)
 	if((locate(/obj/structure/table) in loc) && istype(I, /obj/item/reagent_containers/food/snacks/boiledrice))
 		new /obj/item/reagent_containers/food/snacks/sushi(get_turf(src), I, src)
 		return

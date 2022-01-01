@@ -142,7 +142,7 @@
 /turf/simulated/wall/voxshuttle/New(var/newloc)
 	..(newloc, MATERIAL_VOX)
 
-/turf/simulated/wall/voxshuttle/attackby()
+/turf/simulated/wall/voxshuttle/use_item()
 	return
 
 /turf/simulated/wall/growth/New(var/newloc)

@@ -12,7 +12,7 @@
 	throwforce = 0
 	lock_data = generateRandomString(round(material.integrity/50))
 
-/obj/item/material/lock_construct/attackby(var/obj/item/I, var/mob/user)
+/obj/item/material/lock_construct/use_item(var/obj/item/I, var/mob/user)
 	if(istype(I,/obj/item/key))
 		var/obj/item/key/K = I
 		if(!K.key_data)

@@ -25,7 +25,7 @@
 	visible_message(SPAN_NOTICE("\The [user] waves through \the [src], causing it to dissipate."))
 	deactivate(user)
 
-/obj/structure/holosign/attackby(obj/W, mob/living/user)
+/obj/structure/holosign/use_item(obj/W, mob/living/user)
 	visible_message(SPAN_NOTICE("\The [user] waves \a [W] through \the [src], causing it to dissipate."))
 	deactivate(user)
 

@@ -36,35 +36,39 @@ var/list/floor_light_cache = list()
 	use_power = POWER_USE_ACTIVE
 
 
-/obj/machinery/floor_light/attackby(var/obj/item/W, var/mob/user)
+/obj/machinery/floor_light/use_tool(obj/item/W, mob/user)
 	if(isScrewdriver(W))
 		anchored = !anchored
 		if(use_power)
 			update_use_power(POWER_USE_OFF)
 			queue_icon_update()
 		visible_message("<span class='notice'>\The [user] has [anchored ? "attached" : "detached"] \the [src].</span>")
+		return TRUE
+
 	else if(isWelder(W) && (damaged || (stat & BROKEN)))
 		var/obj/item/weldingtool/WT = W
 		if(!WT.remove_fuel(0, user))
 			to_chat(user, "<span class='warning'>\The [src] must be on to complete this task.</span>")
-			return
+			return FALSE
 		playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 		if(!do_after(user, 20, src))
-			return
+			return FALSE
 		if(!src || !WT.isOn())
-			return
+			return FALSE
 		visible_message("<span class='notice'>\The [user] has repaired \the [src].</span>")
 		set_broken(FALSE)
 		damaged = null
+		return TRUE
+
 	else if(isWrench(W))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 		to_chat(user, "<span class='notice'>You dismantle the floor light.</span>")
 		new /obj/item/stack/material/steel(src.loc, 1)
 		new /obj/item/stack/material/glass(src.loc, 1)
 		qdel(src)
-	else if(W.force && user.a_intent == "hurt")
-		attack_hand(user)
-	return
+		return TRUE
+
+	return .. ()
 
 /obj/machinery/floor_light/physical_attack_hand(var/mob/user)
 	if(user.a_intent == I_HURT && !issmall(user))

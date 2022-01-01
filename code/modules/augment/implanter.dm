@@ -31,7 +31,7 @@
 	augment.examine(user)
 
 
-/obj/item/device/augment_implanter/attackby(obj/item/I, mob/living/user)
+/obj/item/device/augment_implanter/use_item(obj/item/I, mob/living/user)
 	if (isCrowbar(I) && augment)
 		user.visible_message(
 			SPAN_ITALIC("\The [user] starts to remove \the [augment] from \the [src]."),

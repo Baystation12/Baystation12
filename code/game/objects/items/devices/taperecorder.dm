@@ -43,23 +43,25 @@
 	return ..()
 
 
-/obj/item/device/taperecorder/attackby(obj/item/I, mob/user, params)
+/obj/item/device/taperecorder/use_tool(obj/item/I, mob/user, params)
 	if(isScrewdriver(I))
 		maintenance = !maintenance
 		to_chat(user, "<span class='notice'>You [maintenance ? "open" : "secure"] the lid.</span>")
-		return
+		return TRUE
+
 	if(istype(I, /obj/item/device/tape))
 		if(mytape)
 			to_chat(user, "<span class='notice'>There's already a tape inside.</span>")
-			return
+			return FALSE
 		if(!user.unEquip(I))
-			return
+			return FALSE
 		I.forceMove(src)
 		mytape = I
 		to_chat(user, "<span class='notice'>You insert [I] into [src].</span>")
 		update_icon()
-		return
-	..()
+		return TRUE
+
+	return ..()
 
 
 /obj/item/device/taperecorder/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
@@ -435,22 +437,24 @@
 	storedinfo += "*\[[time2text(used_capacity*10,"mm:ss")]\] [text]"
 
 
-/obj/item/device/tape/attackby(obj/item/I, mob/user, params)
+/obj/item/device/tape/use_tool(obj/item/I, mob/user, params)
 	if(user.incapacitated())
-		return
+		return FALSE
 	if(ruined && isScrewdriver(I))
 		if(!max_capacity)
 			to_chat(user, "<span class='notice'>There is no tape left inside.</span>")
-			return
+			return FALSE
 		to_chat(user, "<span class='notice'>You start winding the tape back in...</span>")
 		if(do_after(user, 120, src))
 			to_chat(user, "<span class='notice'>You wound the tape back in.</span>")
 			fix()
-		return
+			return TRUE
+		return FALSE
+
 	else if(istype(I, /obj/item/pen))
 		if(loc == user)
 			var/new_name = input(user, "What would you like to label the tape?", "Tape labeling") as null|text
-			if(isnull(new_name)) return
+			if(isnull(new_name)) return FALSE
 			new_name = sanitizeSafe(new_name)
 			if(new_name)
 				SetName("tape - '[new_name]'")
@@ -458,12 +462,17 @@
 			else
 				SetName("tape")
 				to_chat(user, "<span class='notice'>You scratch off the label.</span>")
-		return
+		return TRUE
+
 	else if(isWirecutter(I))
 		cut(user)
+		return TRUE
+
 	else if(istype(I, /obj/item/device/tape/loose))
 		join(user, I)
-	..()
+		return TRUE
+
+	return ..()
 
 /obj/item/device/tape/proc/cut(mob/user)
 	if(!LAZYLEN(timestamp))

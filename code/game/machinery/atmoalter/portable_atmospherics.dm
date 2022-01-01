@@ -103,38 +103,35 @@
 	if (network)
 		network.update = 1
 
-/obj/machinery/portable_atmospherics/attackby(var/obj/item/W as obj, var/mob/user as mob)
+/obj/machinery/portable_atmospherics/use_tool(obj/item/W, mob/user)
 	if ((istype(W, /obj/item/tank) && !( src.destroyed )))
 		if (src.holding)
-			return
+			return FALSE
 		if(!user.unEquip(W, src))
-			return
+			return FALSE
 		src.holding = W
 		update_icon()
-		return
+		return TRUE
 
 	else if(isWrench(W))
 		if(connected_port)
 			disconnect()
 			to_chat(user, "<span class='notice'>You disconnect \the [src] from the port.</span>")
 			update_icon()
-			return
+			return TRUE
 		else
 			var/obj/machinery/atmospherics/portables_connector/possible_port = locate(/obj/machinery/atmospherics/portables_connector/) in loc
 			if(possible_port)
 				if(connect(possible_port))
 					to_chat(user, "<span class='notice'>You connect \the [src] to the port.</span>")
 					update_icon()
-					return
+					return TRUE
 				else
 					to_chat(user, "<span class='notice'>\The [src] failed to connect to the port.</span>")
-					return
+					return FALSE
 			else
 				to_chat(user, "<span class='notice'>Nothing happens.</span>")
-				return ..()
-
-	else if (istype(W, /obj/item/device/scanner/gas))
-		return
+				return FALSE
 
 	return ..()
 

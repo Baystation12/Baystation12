@@ -15,7 +15,7 @@
 	var/list/pages = list()  // Ordered list of pages as they are to be displayed. Can be different order than src.contents.
 
 
-/obj/item/paper_bundle/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/paper_bundle/use_item(obj/item/W as obj, mob/user as mob)
 	..()
 	if(!istype(W))
 		return
@@ -51,7 +51,7 @@
 		if(istype(W, /obj/item/pen))
 			show_browser(user, "", "window=[name]") //Closes the dialog
 		var/obj/P = pages[page]
-		P.attackby(W, user)
+		P.use_item(W, user)
 
 	update_icon()
 	use_on_self(user) //Update the browsed page.

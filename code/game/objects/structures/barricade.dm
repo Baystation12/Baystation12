@@ -24,12 +24,13 @@
 /obj/structure/barricade/get_material()
 	return material
 
-/obj/structure/barricade/attackby(obj/item/W as obj, mob/user as mob)
+
+/obj/structure/barricade/use_tool(obj/item/W, mob/user)
 	if(istype(W, /obj/item/stack/material/rods) && !spiky)
 		var/obj/item/stack/material/rods/R = W
 		if(R.get_amount() < 5)
 			to_chat(user, "<span class='warning'>You need more rods to build a cheval de frise.</span>")
-			return
+			return FALSE
 		visible_message("<span class='notice'>\The [user] begins to work on \the [src].</span>")
 		if(do_after(user, 4 SECONDS, src))
 			if(R.use(5))
@@ -37,30 +38,27 @@
 				var/obj/structure/barricade/spike/CDF = new(loc, material.name, R.material.name)
 				CDF.dir = user.dir
 				qdel(src)
-				return
-		else
-			return
+				return TRUE
+		return FALSE
 
 	if(istype(W, /obj/item/stack))
 		var/obj/item/stack/D = W
 		if(D.get_material_name() != material.name)
-			return //hitting things with the wrong type of stack usually doesn't produce messages, and probably doesn't need to.
+			return FALSE //hitting things with the wrong type of stack usually doesn't produce messages, and probably doesn't need to.
 		if (get_damage_value())
 			if (D.get_amount() < 1)
 				to_chat(user, "<span class='warning'>You need one sheet of [material.display_name] to repair \the [src].</span>")
-				return
+				return FALSE
 			visible_message("<span class='notice'>[user] begins to repair \the [src].</span>")
 			if(do_after(user, 2 SECONDS, src) && get_damage_value())
 				if (D.use(1))
 					restore_health(get_max_health())
 					visible_message("<span class='notice'>[user] repairs \the [src].</span>")
-				return
-		return
+					return TRUE
+		return FALSE
 
-	else
-		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		damage_health(W.force, W.damtype)
-		..()
+	return ..()
+
 
 /obj/structure/barricade/handle_death_change(new_death_state)
 	..()

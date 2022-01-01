@@ -20,28 +20,27 @@
 				qdel(src)
 	return
 
-/obj/effect/spider/attackby(var/obj/item/W, var/mob/user)
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+/obj/effect/spider/use_weapon(obj/item/W, mob/user)
+	if (!(W.item_flags & ITEM_FLAG_NO_BLUDGEON))
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		user.do_attack_animation(src)
+		if(W.attack_verb.len)
+			visible_message("<span class='warning'>\The [src] have been [pick(W.attack_verb)] with \the [W][(user ? " by [user]." : ".")]</span>")
+		else
+			visible_message("<span class='warning'>\The [src] have been attacked with \the [W][(user ? " by [user]." : ".")]</span>")
+		var/damage = W.force / 4.0
+		if(W.edge)
+			damage += 5
+		if(isWelder(W))
+			var/obj/item/weldingtool/WT = W
+			if(WT.remove_fuel(0, user))
+				damage = 15
+				playsound(loc, 'sound/items/Welder.ogg', 100, 1)
+		health -= damage
+		healthcheck()
+		return TRUE
 
-	if(W.attack_verb.len)
-		visible_message("<span class='warning'>\The [src] have been [pick(W.attack_verb)] with \the [W][(user ? " by [user]." : ".")]</span>")
-	else
-		visible_message("<span class='warning'>\The [src] have been attacked with \the [W][(user ? " by [user]." : ".")]</span>")
-
-	var/damage = W.force / 4.0
-
-	if(W.edge)
-		damage += 5
-
-	if(isWelder(W))
-		var/obj/item/weldingtool/WT = W
-
-		if(WT.remove_fuel(0, user))
-			damage = 15
-			playsound(loc, 'sound/items/Welder.ogg', 100, 1)
-
-	health -= damage
-	healthcheck()
+	return ..()
 
 /obj/effect/spider/bullet_act(var/obj/item/projectile/Proj)
 	..()
@@ -190,8 +189,8 @@
 	walk(src, 0) // Because we might have called walk_to, we must stop the walk loop or BYOND keeps an internal reference to us forever.
 	. = ..()
 
-/obj/effect/spider/spiderling/attackby(var/obj/item/W, var/mob/user)
-	..()
+/obj/effect/spider/spiderling/use_weapon(obj/item/W, mob/user)
+	. = ..()
 	if(health > 0)
 		disturbed()
 

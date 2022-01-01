@@ -41,7 +41,7 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 		else if (length(GLOB.alldepartments))
 			destination = pick(GLOB.alldepartments)
 
-/obj/machinery/photocopier/faxmachine/attackby(obj/item/O as obj, mob/user as mob)
+/obj/machinery/photocopier/faxmachine/use_item(obj/item/O as obj, mob/user as mob)
 	if(istype(O, /obj/item/paper))
 		var/obj/item/paper/P = O
 		if(!P.readable)

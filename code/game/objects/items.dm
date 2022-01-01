@@ -16,7 +16,7 @@
 //	causeerrorheresoifixthis
 	var/obj/item/master = null
 	var/list/origin_tech = null	//Used by R&D to determine what research bonuses it grants.
-	var/list/attack_verb = list("hit") //Used in attackby() to say how something was attacked "[x] has been [z.attack_verb] by [y] with [z]"
+	var/list/attack_verb = list("hit") //Used in use_item() to say how something was attacked "[x] has been [z.attack_verb] by [y] with [z]"
 	var/lock_picking_level = 0 //used to determine whether something can pick a lock, and how well.
 	var/force = 0
 	var/attack_cooldown = DEFAULT_WEAPON_COOLDOWN
@@ -260,7 +260,7 @@
 		R.activate_module(src)
 		R.hud_used.update_robot_modules_display()
 
-/obj/item/attackby(obj/item/W, mob/user)
+/obj/item/use_tool(obj/item/W, mob/user)
 	if((. = SSfabrication.try_craft_with(src, W, user)))
 		return
 
@@ -272,6 +272,9 @@
 					S.gather_all(src.loc, user)
 			else if(S.can_be_inserted(src, user))
 				S.handle_item_insertion(src)
+			return TRUE
+
+	return ..()
 
 /obj/item/can_embed()
 	if (!canremove)

@@ -13,7 +13,7 @@
 	var/enhanced = 0 //has it been enhanced before?
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 
-	attackby(obj/item/O as obj, mob/user as mob)
+	use_item(obj/item/O as obj, mob/user as mob)
 		if(istype(O, /obj/item/slimesteroid2))
 			if(enhanced == 1)
 				to_chat(user, "<span class='warning'> This extract has already been enhanced!</span>")

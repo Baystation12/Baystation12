@@ -360,6 +360,6 @@
 		overlays += image(icon, src, "ledb")
 	return
 
-/obj/item/storage/lockbox/vials/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/storage/lockbox/vials/use_item(obj/item/W, mob/user)
 	. = ..()
 	update_icon()

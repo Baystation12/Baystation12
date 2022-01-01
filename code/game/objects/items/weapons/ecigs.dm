@@ -148,14 +148,18 @@ obj/item/clothing/mask/smokable/ecig/util/examine(mob/user)
 		M.update_inv_r_hand(1)
 
 
-/obj/item/clothing/mask/smokable/ecig/attackby(var/obj/item/I, var/mob/user as mob)
+/obj/item/clothing/mask/smokable/ecig/use_tool(obj/item/I, mob/user)
 	if(istype(I, /obj/item/reagent_containers/ecig_cartridge))
 		if (ec_cartridge)//can't add second one
 			to_chat(user, "<span class='notice'>A cartridge has already been installed.</span> ")
+			return FALSE
+
 		else if(user.unEquip(I, src))//fits in new one
 			ec_cartridge = I
 			update_icon()
 			to_chat(user, "<span class='notice'>You insert \the [I] into \the [src].</span> ")
+			return TRUE
+		return FALSE
 
 	if(istype(I, /obj/item/screwdriver))
 		if(cigcell) //if contains powercell
@@ -163,8 +167,10 @@ obj/item/clothing/mask/smokable/ecig/util/examine(mob/user)
 			cigcell.dropInto(loc)
 			cigcell = null
 			to_chat(user, "<span class='notice'>You remove \the [cigcell] from \the [src].</span>")
+			return TRUE
 		else //does not contains cell
 			to_chat(user, "<span class='notice'>There's no battery in \the [src].</span>")
+			return FALSE
 
 	if(istype(I, /obj/item/cell/device))
 		if(!cigcell && user.unEquip(I))
@@ -172,8 +178,12 @@ obj/item/clothing/mask/smokable/ecig/util/examine(mob/user)
 			cigcell = I
 			to_chat(user, "<span class='notice'>You install \the [cigcell] into \the [src].</span>")
 			update_icon()
+			return TRUE
 		else
 			to_chat(user, "<span class='notice'>\The [src] already has a battery installed.</span>")
+			return FALSE
+
+	return ..()
 
 
 /obj/item/clothing/mask/smokable/ecig/use_on_self(mob/user as mob)

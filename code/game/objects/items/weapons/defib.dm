@@ -84,19 +84,23 @@
 		M.put_in_any_hand_if_possible(src)
 
 
-/obj/item/defibrillator/attackby(obj/item/W, mob/user, params)
+/obj/item/defibrillator/use_tool(obj/item/W, mob/user, params)
 	if(W == paddles)
 		reattach_paddles(user)
+		return TRUE
+
 	else if(istype(W, /obj/item/cell))
 		if(bcell)
 			to_chat(user, "<span class='notice'>\the [src] already has a cell.</span>")
+			return FALSE
 		else
 			if(!user.unEquip(W))
-				return
+				return FALSE
 			W.forceMove(src)
 			bcell = W
 			to_chat(user, "<span class='notice'>You install a cell in \the [src].</span>")
 			update_icon()
+			return TRUE
 
 	else if(isScrewdriver(W))
 		if(bcell)
@@ -105,8 +109,10 @@
 			bcell = null
 			to_chat(user, "<span class='notice'>You remove the cell from \the [src].</span>")
 			update_icon()
-	else
-		return ..()
+			return TRUE
+		return FALSE
+
+	return ..()
 
 /obj/item/defibrillator/emag_act(var/uses, var/mob/user)
 	if(paddles)

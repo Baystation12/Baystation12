@@ -197,7 +197,7 @@
 		CF.set_dir(field_dir)
 
 
-/obj/machinery/shieldwallgen/attackby(obj/item/W, mob/user)
+/obj/machinery/shieldwallgen/use_item(obj/item/W, mob/user)
 	if(isWrench(W))
 		if(active)
 			to_chat(user, "Turn off the field generator first.")
@@ -292,7 +292,7 @@
 	update_nearby_tiles()
 	..()
 
-/obj/machinery/shieldwall/attackby(var/obj/item/I, var/mob/user)
+/obj/machinery/shieldwall/use_item(var/obj/item/I, var/mob/user)
 	var/obj/machinery/shieldwallgen/G = prob(50) ? gen_primary : gen_secondary
 	G.storedpower -= I.force*2500
 	user.visible_message("<span class='danger'>\The [user] hits \the [src] with \the [I]!</span>")

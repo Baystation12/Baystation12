@@ -24,14 +24,17 @@
 	wires = null
 	return ..()
 
-/obj/item/plastique/attackby(var/obj/item/I, var/mob/user)
+/obj/item/plastique/use_tool(obj/item/I, mob/user)
 	if(isScrewdriver(I))
 		open_panel = !open_panel
 		to_chat(user, "<span class='notice'>You [open_panel ? "open" : "close"] the wire panel.</span>")
+		return TRUE
+
 	else if(isWirecutter(I) || isMultitool(I) || istype(I, /obj/item/device/assembly/signaler ))
 		wires.Interact(user)
-	else
-		..()
+		return TRUE
+
+	return ..()
 
 /obj/item/plastique/use_on_self(mob/user as mob)
 	var/newtime = input(usr, "Please set the timer.", "Timer", 10) as num

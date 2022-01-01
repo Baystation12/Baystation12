@@ -332,8 +332,9 @@ var/list/tape_roll_applications = list()
 			crumple()
 	return ..(mover)
 
-/obj/item/tape/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/tape/use_weapon(obj/item/W, mob/user)
 	breaktape(user)
+	return TRUE
 
 /obj/item/tape/attack_hand(mob/user as mob)
 	if (user.a_intent == I_HELP && src.allowed(user))

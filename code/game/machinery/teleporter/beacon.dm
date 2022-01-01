@@ -44,7 +44,7 @@ var/const/TELEBEACON_WIRE_SIGNALLER = 4
 	. = ..()
 
 
-/obj/machinery/tele_beacon/attackby(obj/item/I, mob/user)
+/obj/machinery/tele_beacon/use_tool(obj/item/I, mob/user)
 	if (!panel_open)
 		if (isWrench(I))
 			var/turf/T = get_turf(src)
@@ -61,7 +61,7 @@ var/const/TELEBEACON_WIRE_SIGNALLER = 4
 			)
 
 			if (!do_after(user, 3 SECONDS, src, DO_DEFAULT | DO_BOTH_UNIQUE_ACT | DO_PUBLIC_PROGRESS))
-				return TRUE
+				return FALSE
 
 			anchored = !anchored
 			level = anchored ? 1 : 2
@@ -82,7 +82,7 @@ var/const/TELEBEACON_WIRE_SIGNALLER = 4
 		if (isMultitool(I))
 			var/new_name = input(user, "What label would you like to set this beacon to? Leave empty to enable automatic naming based on area.", "Set Beacon Label", beacon_name) as text|null
 			if (QDELETED(src))
-				return TRUE
+				return FALSE
 			if (new_name == null)
 				autoset_name = TRUE
 				generate_name()

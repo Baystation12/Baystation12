@@ -100,7 +100,7 @@
 		return TRUE // Don't kill this processing loop unless we're not powered.
 	. = ..()
 
-/obj/machinery/reagent_temperature/attackby(var/obj/item/thing, var/mob/user)
+/obj/machinery/reagent_temperature/use_item(var/obj/item/thing, var/mob/user)
 	if(isWrench(thing))
 		if(use_power == POWER_USE_ACTIVE)
 			to_chat(user, SPAN_WARNING("Turn \the [src] off first!"))

@@ -26,15 +26,15 @@
 	user.visible_message("\The [user] [!on?"dea":"a"]ctivates \the [src].", "You switch [src] [on? "on" : "off"]")
 	return TRUE
 
-/obj/machinery/cablelayer/attackby(var/obj/item/O as obj, var/mob/user as mob)
+/obj/machinery/cablelayer/use_tool(obj/item/O, mob/user)
 	if(istype(O, /obj/item/stack/cable_coil))
 
 		var/result = load_cable(O)
 		if(!result)
 			to_chat(user, "<span class='warning'>\The [src]'s cable reel is full.</span>")
-		else
-			to_chat(user, "You load [result] lengths of cable into [src].")
-		return
+			return FALSE
+		to_chat(user, "You load [result] lengths of cable into [src].")
+		return TRUE
 
 	if(isWirecutter(O))
 		if(cable && cable.amount)
@@ -48,6 +48,9 @@
 				CC.amount = m
 		else
 			to_chat(usr, "<span class='warning'>There's no more cable on the reel.</span>")
+			return FALSE
+		return TRUE
+	return ..()
 
 /obj/machinery/cablelayer/examine(mob/user)
 	. = ..()

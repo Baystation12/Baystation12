@@ -18,7 +18,7 @@
 	if(distance <= 1)
 		to_chat(user, "[src] [icon2html(src, user)] contains [reagents.total_volume] unit\s of water!")
 
-/obj/structure/mopbucket/attackby(obj/item/I, mob/user)
+/obj/structure/mopbucket/use_item(obj/item/I, mob/user)
 	if(istype(I, /obj/item/mop))
 		if(reagents.total_volume < 1)
 			to_chat(user, "<span class='warning'>\The [src] is out of water!</span>")

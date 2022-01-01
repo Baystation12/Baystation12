@@ -12,7 +12,7 @@
 	var/amount_per_transfer_from_this = 10
 	var/possible_transfer_amounts = "10;25;50;100;500"
 
-	attackby(obj/item/W as obj, mob/user as mob)
+	use_item(obj/item/W as obj, mob/user as mob)
 		return
 
 /obj/structure/reagent_dispensers/New()
@@ -119,7 +119,7 @@
 	if(modded)
 		to_chat(user, "<span class='warning'>Someone has wrenched open its tap - it's spilling everywhere!</span>")
 
-/obj/structure/reagent_dispensers/watertank/attackby(obj/item/W, mob/user)
+/obj/structure/reagent_dispensers/watertank/use_item(obj/item/W, mob/user)
 
 	src.add_fingerprint(user)
 
@@ -180,7 +180,7 @@
 			rig = null
 			overlays.Cut()
 
-/obj/structure/reagent_dispensers/fueltank/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/reagent_dispensers/fueltank/use_item(obj/item/W as obj, mob/user as mob)
 	src.add_fingerprint(user)
 	if (istype(W,/obj/item/wrench))
 		user.visible_message("\The [user] wrenches \the [src]'s faucet [modded ? "closed" : "open"].", \
@@ -301,7 +301,7 @@
 /obj/structure/reagent_dispensers/water_cooler/proc/RejectionMessage(var/mob/user)
 	return "The [src]'s cup dispenser is empty."
 
-/obj/structure/reagent_dispensers/water_cooler/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/reagent_dispensers/water_cooler/use_item(obj/item/W as obj, mob/user as mob)
 	if (istype(W,/obj/item/wrench))
 		src.add_fingerprint(user)
 		if(anchored)

@@ -12,7 +12,7 @@
 		return AURA_FALSE
 	return 0
 
-/obj/aura/starborn/attackby(var/obj/item/I, var/mob/i_user)
+/obj/aura/starborn/use_item(var/obj/item/I, var/mob/i_user)
 	if(I.damtype == "fire")
 		to_chat(i_user, "<span class='warning'>\The [I] seems to only feed into \the [user]'s flames.</span>")
 		user.adjustBruteLoss(-I.force)

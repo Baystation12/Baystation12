@@ -284,7 +284,7 @@
 	playsound(loc, 'sound/effects/Glasshit.ogg', 50, 1)
 	return TRUE
 
-/obj/structure/window/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/window/use_item(obj/item/W as obj, mob/user as mob)
 	if(!istype(W)) return//I really wish I did not need this
 
 	if(W.item_flags & ITEM_FLAG_NO_BLUDGEON) return
@@ -717,7 +717,7 @@
 		/obj/item/stock_parts/power/apc
 	)
 
-/obj/machinery/button/windowtint/attackby(obj/item/device/W as obj, mob/user as mob)
+/obj/machinery/button/windowtint/use_item(obj/item/device/W as obj, mob/user as mob)
 	if(isMultitool(W))
 		var/t = sanitizeSafe(input(user, "Enter the ID for the button.", src.name, id), MAX_NAME_LEN)
 		if(user.incapacitated() && !user.Adjacent(src))
@@ -755,7 +755,7 @@
 /obj/structure/window/reinforced/crescent/attack_hand()
 	return
 
-/obj/structure/window/reinforced/crescent/attackby()
+/obj/structure/window/reinforced/crescent/use_item()
 	return
 
 /obj/structure/window/reinforced/crescent/ex_act()

@@ -45,7 +45,7 @@
 		visible_message("<span class='danger'>\The [user] has been shocked by \the [src]!</span>")
 	user.throw_at(get_step(user,get_dir(src,user)), 5, 10)
 
-/obj/structure/adherent_pylon/attackby(obj/item/grab/normal/G, mob/user)
+/obj/structure/adherent_pylon/use_item(obj/item/grab/normal/G, mob/user)
 	if(!istype(G))
 		return
 	var/mob/M = G.affecting

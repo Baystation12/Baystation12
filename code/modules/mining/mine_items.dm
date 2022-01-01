@@ -190,7 +190,7 @@
 	. = ..()
 	update_icon()
 
-/obj/item/stack/flag/attackby(var/obj/item/W, var/mob/user)
+/obj/item/stack/flag/use_item(var/obj/item/W, var/mob/user)
 	if(upright)
 		attack_hand(user)
 		return

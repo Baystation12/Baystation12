@@ -4,7 +4,7 @@
 	down_state = /decl/machine_construction/default/panel_open/computer
 	needs_board = "computer"
 
-/decl/machine_construction/default/panel_closed/computer/no_deconstruct/attackby(obj/item/I, mob/user, obj/machinery/machine)
+/decl/machine_construction/default/panel_closed/computer/no_deconstruct/use_item(obj/item/I, mob/user, obj/machinery/machine)
 	return FALSE
 
 /decl/machine_construction/default/panel_open/computer

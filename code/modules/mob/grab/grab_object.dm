@@ -295,7 +295,7 @@
 /obj/item/grab/proc/force_stand()
 	return current_grab.force_stand
 
-/obj/item/grab/attackby(obj/W, mob/user)
+/obj/item/grab/use_item(obj/W, mob/user)
 	if(user == assailant)
 		current_grab.item_attack(src, W)
 
