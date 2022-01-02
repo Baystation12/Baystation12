@@ -40,13 +40,6 @@
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/service
 	shoes = /obj/item/clothing/shoes/dutyboots
 
-/decl/hierarchy/outfit/job/torch/crew/service/bartender
-	name = OUTFIT_JOB_NAME("Bartender - Torch")
-	uniform = /obj/item/clothing/under/rank/bartender
-	shoes = /obj/item/clothing/shoes/laceup
-	id_types = list(/obj/item/card/id/torch/contractor/service/bartender)
-	pda_type = /obj/item/modular_computer/pda
-
 /decl/hierarchy/outfit/job/torch/crew/service/crewman
 	name = OUTFIT_JOB_NAME("Crewman")
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary

@@ -929,7 +929,7 @@
 	name = "\improper Bar"
 	icon_state = "bar"
 	sound_env = LARGE_SOFTFLOOR
-	req_access = list(access_bar)
+	req_access = list(access_kitchen)
 	lighting_tone = AREA_LIGHTING_WARM
 
 /area/crew_quarters/cryolocker
