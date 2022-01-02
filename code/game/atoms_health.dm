@@ -321,7 +321,7 @@
 
 /atom/attackby(obj/item/W, mob/user, click_params)
 	. = ..()
-	if (user.a_intent == I_HURT && get_max_health())
+	if (user.a_intent == I_HURT && get_max_health() && !(W.item_flags & ITEM_FLAG_NO_BLUDGEON))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		user.do_attack_animation(src)
 		if (!can_damage_health(W.force, W.damtype))
